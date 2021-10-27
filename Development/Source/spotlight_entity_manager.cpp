@@ -12,7 +12,7 @@ shared_ptr<SpotlightEntity> SpotlightEntityManager::getEntity(const string& ID)
 {
 	auto result = _getSpotlightEntity(ID);
 
-	if (result == nullptr)
+	if(result == nullptr)
 	{
 		Logger::throwError("SpotlightEntityManager::getEntity");
 	}
@@ -27,7 +27,7 @@ const unordered_map<string, shared_ptr<SpotlightEntity>>& SpotlightEntityManager
 
 void SpotlightEntityManager::createEntity(const string& ID)
 {
-	if (getEntities().size() == MAX_LIGHT_COUNT)
+	if(getEntities().size() == MAX_LIGHT_COUNT)
 	{
 		Logger::throwError("SpotlightEntityManager::createEntity");
 	}
@@ -37,13 +37,13 @@ void SpotlightEntityManager::createEntity(const string& ID)
 
 void SpotlightEntityManager::update()
 {
-	for (const auto& [keyID, entity] : _getSpotlightEntities())
+	for(const auto& [keyID, entity] : _getSpotlightEntities())
 	{
 		// Update transformation
 		entity->updateTransformation();
 
 		// Update front vector
-		if (entity->isVisible())
+		if(entity->isVisible())
 		{
 			entity->updateFrontVector();
 		}

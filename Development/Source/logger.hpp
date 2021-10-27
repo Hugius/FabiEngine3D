@@ -29,21 +29,21 @@ class Logger final
 public:
 	Logger() = delete;
 
-	template<typename T, typename...Rest> 
+	template<typename T, typename...Rest>
 	inline static void throwInfo(T first, Rest...rest)
 	{
 		_printPrefix(MessageType::INFO);
 		_printMessage(first, rest...);
 	}
 
-	template<typename T, typename...Rest> 
+	template<typename T, typename...Rest>
 	inline static void throwDebug(T first, Rest...rest)
 	{
 		_printPrefix(MessageType::DEBUG);
 		_printMessage(first, rest...);
 	}
 
-	template<typename T, typename...Rest> 
+	template<typename T, typename...Rest>
 	inline static void throwWarning(T first, Rest...rest)
 	{
 		_printPrefix(MessageType::WARNING);
@@ -121,7 +121,7 @@ private:
 		SetConsoleTextAttribute(console, 7); // Yellow
 
 		// Proper indentation
-		if (type == MessageType::DEBUG || type == MessageType::ERR) // 5 chars
+		if(type == MessageType::DEBUG || type == MessageType::ERR) // 5 chars
 		{
 			cout << "> ";
 		}
@@ -149,7 +149,7 @@ private:
 		// Write into stream
 		oss << first;
 		(oss << ... << rest);
-		
+
 		// Add to message queue
 		_messageQueue.back() += oss.str();
 		_messageCount++;

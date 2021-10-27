@@ -4,9 +4,9 @@
 void SceneEditor::_updatePointlightPlacing()
 {
 	// Only if user is in placement mode
-	if (_isPlacingPointlight)
+	if(_isPlacingPointlight)
 	{
-		if (_fe3d.terrainEntity_getSelectedID().empty()) // Placing without terrain
+		if(_fe3d.terrainEntity_getSelectedID().empty()) // Placing without terrain
 		{
 			// Retrieve current position
 			auto newPosition = _fe3d.pointlightEntity_getPosition(PREVIEW_LAMP_ID);
@@ -20,14 +20,14 @@ void SceneEditor::_updatePointlightPlacing()
 			_fe3d.pointlightEntity_setPosition(PREVIEW_LAMP_ID, newPosition);
 
 			// Check if pointlight must be placed
-			if (_gui.getGlobalScreen()->isValueFormConfirmed())
+			if(_gui.getGlobalScreen()->isValueFormConfirmed())
 			{
 				// Adding a number to make it unique
 			BEGIN1:
 				const string newID = ("pointlight_" + to_string(Math::getRandomInteger(0, INT_MAX)));
 
 				// Check if pointlight already exists
-				if (_fe3d.pointlightEntity_isExisting(newID))
+				if(_fe3d.pointlightEntity_isExisting(newID))
 				{
 					goto BEGIN1;
 				}
@@ -36,7 +36,7 @@ void SceneEditor::_updatePointlightPlacing()
 				_fe3d.pointlightEntity_create(newID);
 
 				// Check if pointlight creation went well
-				if (_fe3d.pointlightEntity_isExisting(newID))
+				if(_fe3d.pointlightEntity_isExisting(newID))
 				{
 					// Create model
 					const string newModelID = ("@@lamp_" + newID);
@@ -63,7 +63,7 @@ void SceneEditor::_updatePointlightPlacing()
 			}
 
 			// Check if placement mode must be disabled
-			if (_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
+			if(_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
 			{
 				_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, false);
 				_fe3d.pointlightEntity_setVisible(PREVIEW_LAMP_ID, false);
@@ -73,13 +73,13 @@ void SceneEditor::_updatePointlightPlacing()
 		else
 		{
 			// Check if allowed by GUI
-			if (_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// Check if allowed by mouse
-				if (!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Check if a terrain is loaded
-					if (_fe3d.raycast_isPointOnTerrainValid())
+					if(_fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Show preview pointlight
 						_fe3d.pointlightEntity_setVisible(PREVIEW_LAMP_ID, true);
@@ -96,7 +96,7 @@ void SceneEditor::_updatePointlightPlacing()
 					}
 
 					// Check if pointlight must be placed
-					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.raycast_isPointOnTerrainValid())
+					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Temporary values
 						auto newPosition = _fe3d.pointlightEntity_getPosition(PREVIEW_LAMP_ID);
@@ -106,7 +106,7 @@ void SceneEditor::_updatePointlightPlacing()
 						const string newID = ("pointlight_" + to_string(Math::getRandomInteger(0, INT_MAX)));
 
 						// Check if pointlight already exists
-						if (_fe3d.pointlightEntity_isExisting(newID))
+						if(_fe3d.pointlightEntity_isExisting(newID))
 						{
 							goto BEGIN2;
 						}
@@ -115,7 +115,7 @@ void SceneEditor::_updatePointlightPlacing()
 						_fe3d.pointlightEntity_create(newID);
 
 						// Check if pointlight creation went well
-						if (_fe3d.pointlightEntity_isExisting(newID))
+						if(_fe3d.pointlightEntity_isExisting(newID))
 						{
 							// Create model
 							const string newModelID = ("@@lamp_" + newID);
@@ -140,7 +140,7 @@ void SceneEditor::_updatePointlightPlacing()
 							_loadedPointlightIDs.push_back(newID);
 						}
 					}
-					else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
+					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
 					{
 						_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, false);
 						_fe3d.pointlightEntity_setVisible(PREVIEW_LAMP_ID, false);
@@ -161,7 +161,7 @@ void SceneEditor::_updatePointlightPlacing()
 		}
 
 		// Update preview lamp position
-		if (_isPlacingPointlight)
+		if(_isPlacingPointlight)
 		{
 			auto pointlightPosition = _fe3d.pointlightEntity_getPosition(PREVIEW_LAMP_ID);
 			pointlightPosition -= LAMP_OFFSET;
@@ -170,9 +170,9 @@ void SceneEditor::_updatePointlightPlacing()
 	}
 
 	// Update lamp positions
-	for (const auto& entityID : _fe3d.modelEntity_getAllIDs())
+	for(const auto& entityID : _fe3d.modelEntity_getAllIDs())
 	{
-		if (entityID.substr(0, string("@@lamp").size()) == "@@lamp")
+		if(entityID.substr(0, string("@@lamp").size()) == "@@lamp")
 		{
 			auto pointlightPosition = _fe3d.pointlightEntity_getPosition(entityID.substr(string("@@lamp_").size()));
 			pointlightPosition -= LAMP_OFFSET;

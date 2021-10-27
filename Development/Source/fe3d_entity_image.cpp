@@ -23,7 +23,7 @@ void FabiEngine3D::imageEntity_setVisible(const string& ID, bool isVisible)
 
 void FabiEngine3D::imageEntity_setDiffuseMap(const string& ID, const string& texturePath)
 {
-	if (texturePath.empty())
+	if(texturePath.empty())
 	{
 		_core->_imageEntityManager.getEntity(ID)->setDiffuseMap(0);
 		_core->_imageEntityManager.getEntity(ID)->setDiffuseMapPath("");
@@ -132,7 +132,7 @@ const vector<string> FabiEngine3D::imageEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (const auto& [keyID, entity] : _core->_imageEntityManager.getEntities())
+	for(const auto& [keyID, entity] : _core->_imageEntityManager.getEntities())
 	{
 		IDs.push_back(entity->getID());
 	}
@@ -174,12 +174,12 @@ void FabiEngine3D::imageEntity_startSpriteAnimation(const string& ID, int loops)
 {
 	auto entity = _core->_imageEntityManager.getEntity(ID);
 
-	if (entity->isSpriteAnimationStarted())
+	if(entity->isSpriteAnimationStarted())
 	{
 		Logger::throwWarning("Tried to start sprite animation on image with ID \"" + ID + "\": animation already started!");
 		return;
 	}
-	if (loops < -1)
+	if(loops < -1)
 	{
 		Logger::throwWarning("Tried to start sprite animation on image with ID \"" + ID + "\": invalid loops amount!");
 		return;
@@ -192,12 +192,12 @@ void FabiEngine3D::imageEntity_pauseSpriteAnimation(const string& ID)
 {
 	auto entity = _core->_imageEntityManager.getEntity(ID);
 
-	if (!entity->isSpriteAnimationStarted())
+	if(!entity->isSpriteAnimationStarted())
 	{
 		Logger::throwWarning("Tried to pause sprite animation on image with ID \"" + ID + "\" animation not started!");
 		return;
 	}
-	else if (entity->isSpriteAnimationPaused())
+	else if(entity->isSpriteAnimationPaused())
 	{
 		Logger::throwWarning("Tried to pause sprite animation on image with ID \"" + ID + "\" animation already paused!");
 		return;
@@ -210,7 +210,7 @@ void FabiEngine3D::imageEntity_resumeSpriteAnimation(const string& ID)
 {
 	auto entity = _core->_imageEntityManager.getEntity(ID);
 
-	if (!entity->isSpriteAnimationPaused())
+	if(!entity->isSpriteAnimationPaused())
 	{
 		Logger::throwWarning("Tried to resume sprite animation on image with ID \"" + ID + "\" animation not paused!");
 		return;
@@ -223,7 +223,7 @@ void FabiEngine3D::imageEntity_stopSpriteAnimation(const string& ID)
 {
 	auto entity = _core->_imageEntityManager.getEntity(ID);
 
-	if (!entity->isSpriteAnimationStarted())
+	if(!entity->isSpriteAnimationStarted())
 	{
 		Logger::throwWarning("Tried to stop sprite animation on image with ID \"" + ID + "\" animation not started!");
 		return;

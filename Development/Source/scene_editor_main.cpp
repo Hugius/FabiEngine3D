@@ -51,10 +51,10 @@ void SceneEditor::load()
 
 	// Load preview models
 	_modelEditor.loadModelEntitiesFromFile();
-	for (const auto& modelID : _modelEditor.getLoadedModelIDs())
+	for(const auto& modelID : _modelEditor.getLoadedModelIDs())
 	{
 		// Check if there is a model entity present
-		if (_fe3d.modelEntity_isExisting(modelID))
+		if(_fe3d.modelEntity_isExisting(modelID))
 		{
 			_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelPlace")->getScrollingList("modelList")->
 				createButton(modelID, modelID.substr(1));
@@ -66,10 +66,10 @@ void SceneEditor::load()
 
 	// Load preview billboards
 	_billboardEditor.loadBillboardEntitiesFromFile();
-	for (const auto& billboardID : _billboardEditor.getLoadedBillboardIDs())
+	for(const auto& billboardID : _billboardEditor.getLoadedBillboardIDs())
 	{
 		// Check if there is a billboard entity present
-		if (_fe3d.billboardEntity_isExisting(billboardID))
+		if(_fe3d.billboardEntity_isExisting(billboardID))
 		{
 			_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardPlace")->getScrollingList("billboardList")->
 				createButton(billboardID, billboardID.substr(1));
@@ -84,7 +84,7 @@ void SceneEditor::load()
 	_fe3d.modelEntity_setReflected(PREVIEW_SPEAKER_ID, false);
 	_fe3d.modelEntity_setBright(PREVIEW_SPEAKER_ID, true);
 	_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
-	for (const auto& audioID : _audioEditor.getLoadedAudioIDs())
+	for(const auto& audioID : _audioEditor.getLoadedAudioIDs())
 	{
 		_fe3d.sound_make3D(audioID, Vec3(0.0f), DEFAULT_SOUND_MAX_VOLUME, DEFAULT_SOUND_MAX_DISTANCE);
 		_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSoundPlace")->getScrollingList("sounds")->
@@ -140,7 +140,7 @@ void SceneEditor::load()
 }
 
 void SceneEditor::unload()
-{	
+{
 	// GUI
 	_unloadGUI();
 
@@ -241,19 +241,19 @@ void SceneEditor::unload()
 
 	// Miscellaneous
 	_fe3d.collision_disableCameraResponse();
-	if (_fe3d.misc_isAabbFrameRenderingEnabled())
+	if(_fe3d.misc_isAabbFrameRenderingEnabled())
 	{
 		_fe3d.misc_disableAabbFrameRendering();
 	}
-	if (_fe3d.misc_isWireFrameRenderingEnabled())
+	if(_fe3d.misc_isWireFrameRenderingEnabled())
 	{
 		_fe3d.misc_disableWireFrameRendering();
 	}
-	if (_fe3d.misc_isDebugRenderingEnabled())
+	if(_fe3d.misc_isDebugRenderingEnabled())
 	{
 		_fe3d.misc_disableDebugRendering();
 	}
-	if (_fe3d.raycast_isTerrainPointingEnabled())
+	if(_fe3d.raycast_isTerrainPointingEnabled())
 	{
 		_fe3d.raycast_disableTerrainPointing();
 	}

@@ -4,27 +4,27 @@
 
 void AudioEditor::update()
 {
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateMainMenu();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateChoiceMenu();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateAudioCreating();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateAudioChoosing();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateAudioDeleting();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateMiscellaneous();
 	}
@@ -36,43 +36,49 @@ void AudioEditor::_updateMainMenu()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "audioEditorMenuMain")
+	if(screen->getID() == "audioEditorMenuMain")
 	{
 		// Button management
-		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 		{
 			_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("audioCreate", "Create Audio", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			_isCreatingAudio = true;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto IDs = getLoadedAudioIDs();
-			for (auto& ID : IDs) { ID = ID.substr(1); }
+			for(auto& ID : IDs)
+			{
+				ID = ID.substr(1);
+			}
 			_gui.getGlobalScreen()->createChoiceForm("audioList", "Edit Audio", Vec2(0.0f, 0.1f), IDs);
 			_isChoosingAudio = true;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto IDs = getLoadedAudioIDs();
-			for (auto& ID : IDs) { ID = ID.substr(1); }
+			for(auto& ID : IDs)
+			{
+				ID = ID.substr(1);
+			}
 			_gui.getGlobalScreen()->createChoiceForm("audioList", "Delete Audio", Vec2(0.0f, 0.1f), IDs);
 			_isChoosingAudio = true;
 			_isDeletingAudio = true;
 		}
 
 		// Update answer forms
-		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
+		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			saveAudioEntitiesToFile();
 			unload();
 			return;
 		}
-		if (_gui.getGlobalScreen()->isAnswerFormDenied("back"))
+		if(_gui.getGlobalScreen()->isAnswerFormDenied("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			unload();
@@ -83,31 +89,31 @@ void AudioEditor::_updateMainMenu()
 
 void AudioEditor::_updateAudioCreating()
 {
-	if (_isCreatingAudio)
+	if(_isCreatingAudio)
 	{
 		string newAudioID = "";
 
 		// Check if user filled in a new ID
-		if (_gui.getGlobalScreen()->checkValueForm("audioCreate", newAudioID, { _currentAudioID }))
+		if(_gui.getGlobalScreen()->checkValueForm("audioCreate", newAudioID, { _currentAudioID }))
 		{
 			// Check if ID starts with @ sign
-			if (newAudioID[0] != '@')
+			if(newAudioID[0] != '@')
 			{
 				// Check if ID contains spaces
-				if (newAudioID.find(' ') == string::npos)
+				if(newAudioID.find(' ') == string::npos)
 				{
 					// Add @ sign to new ID
 					newAudioID = ("@" + newAudioID);
 
 					// Check if audio not already exists
-					if (find(_loadedAudioIDs.begin(), _loadedAudioIDs.end(), newAudioID) == _loadedAudioIDs.end())
+					if(find(_loadedAudioIDs.begin(), _loadedAudioIDs.end(), newAudioID) == _loadedAudioIDs.end())
 					{
 						// Get the chosen filename
 						const auto rootDirectory = Tools::getRootDirectory();
 						const string targetDirectory = string("game_assets\\audio\\");
 
 						// Validate target directory
-						if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
+						if(!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 						{
 							Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 							_isCreatingAudio = false;
@@ -116,15 +122,15 @@ void AudioEditor::_updateAudioCreating()
 
 						// Validate chosen file
 						const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "WAV");
-						if (filePath.empty())
+						if(filePath.empty())
 						{
 							_isCreatingAudio = false;
 							return;
 						}
 
 						// Validate directory of file
-						if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-							filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+						if(filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						   filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
 						{
 							Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
 							_isCreatingAudio = false;
@@ -137,7 +143,7 @@ void AudioEditor::_updateAudioCreating()
 						_fe3d.sound_create(newAudioID, finalFilePath);
 
 						// Check if audio creation went well
-						if (_fe3d.sound_isExisting(newAudioID))
+						if(_fe3d.sound_isExisting(newAudioID))
 						{
 							// Go to next screen
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuChoice");
@@ -172,22 +178,22 @@ void AudioEditor::_updateAudioCreating()
 
 void AudioEditor::_updateAudioChoosing()
 {
-	if (_isChoosingAudio)
+	if(_isChoosingAudio)
 	{
 		// Get selected button ID
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("audioList");
 
 		// Check if a audio ID is hovered
-		if (!selectedButtonID.empty())
+		if(!selectedButtonID.empty())
 		{
 			// Check if LMB is pressed
-			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Select audio
 				_currentAudioID = ("@" + selectedButtonID);
 
 				// Go to next screen
-				if (!_isDeletingAudio)
+				if(!_isDeletingAudio)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuChoice");
 					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("audioID")->getEntityID(), "Audio: " + selectedButtonID.substr(1), 0.025f);
@@ -199,7 +205,7 @@ void AudioEditor::_updateAudioChoosing()
 				_isChoosingAudio = false;
 			}
 		}
-		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("audioList")) // Cancelled choosing
+		else if(_gui.getGlobalScreen()->isChoiceFormCancelled("audioList")) // Cancelled choosing
 		{
 			_isChoosingAudio = false;
 			_isDeletingAudio = false;
@@ -211,22 +217,22 @@ void AudioEditor::_updateAudioChoosing()
 
 void AudioEditor::_updateAudioDeleting()
 {
-	if (_isDeletingAudio && _currentAudioID != "")
+	if(_isDeletingAudio && _currentAudioID != "")
 	{
 		// Add answer form
-		if (!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
+		if(!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
 		{
 			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
 		}
 
 		// Update answer form
-		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
+		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 		{
 			// Go to main screen
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuMain");
 
 			// Delete audio
-			if (_fe3d.sound_isExisting(_currentAudioID))
+			if(_fe3d.sound_isExisting(_currentAudioID))
 			{
 				_fe3d.sound_delete(_currentAudioID);
 			}
@@ -236,7 +242,7 @@ void AudioEditor::_updateAudioDeleting()
 			_currentAudioID = "";
 			_isDeletingAudio = false;
 		}
-		if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
+		if(_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 		{
 			_isChoosingAudio = true;
 			_currentAudioID = "";

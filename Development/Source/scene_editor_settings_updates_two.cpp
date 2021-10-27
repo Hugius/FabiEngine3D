@@ -8,7 +8,7 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "sceneEditorMenuSettingsGraphicsFog")
+	if(screen->getID() == "sceneEditorMenuSettingsGraphicsFog")
 	{
 		// Temporary values
 		auto isEnabled = _fe3d.gfx_isFogEnabled();
@@ -18,15 +18,15 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 		auto color = _fe3d.gfx_getFogColor();
 
 		// Button management
-		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
-			if (isEnabled)
+			if(isEnabled)
 			{
 				_fe3d.gfx_enableFog();
 			}
@@ -35,19 +35,19 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 				_fe3d.gfx_disableFog();
 			}
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("minDistance")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("minDistance")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("minDistance", "Min Distance", minDistance, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("maxDistance")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("maxDistance")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("maxDistance", "Max Distance", maxDistance, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("thickness")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("thickness")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("thickness", "Thickness", (thickness * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("colorR", "R", color.r * 255.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			_gui.getGlobalScreen()->createValueForm("colorG", "G", color.g * 255.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
@@ -55,30 +55,30 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("minDistance", minDistance))
+		if(_gui.getGlobalScreen()->checkValueForm("minDistance", minDistance))
 		{
 			_fe3d.gfx_setFogMinDistance(minDistance);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance))
+		if(_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance))
 		{
 			_fe3d.gfx_setFogMaxDistance(maxDistance);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("thickness", thickness))
+		if(_gui.getGlobalScreen()->checkValueForm("thickness", thickness))
 		{
 			thickness /= 100.0f;
 			_fe3d.gfx_setFogThickness(thickness);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("colorR", color.r, {}))
+		if(_gui.getGlobalScreen()->checkValueForm("colorR", color.r, {}))
 		{
 			color.r /= 255.0f;
 			_fe3d.gfx_setFogColor(color);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("colorG", color.g, {}))
+		if(_gui.getGlobalScreen()->checkValueForm("colorG", color.g, {}))
 		{
 			color.g /= 255.0f;
 			_fe3d.gfx_setFogColor(color);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("colorB", color.b, {}))
+		if(_gui.getGlobalScreen()->checkValueForm("colorB", color.b, {}))
 		{
 			color.b /= 255.0f;
 			_fe3d.gfx_setFogColor(color);
@@ -101,7 +101,7 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "sceneEditorMenuSettingsGraphicsLensFlare")
+	if(screen->getID() == "sceneEditorMenuSettingsGraphicsLensFlare")
 	{
 		// Temporary values
 		const auto rootDirectory = Tools::getRootDirectory();
@@ -112,15 +112,15 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 		auto sensitivity = _fe3d.gfx_getLensFlareSensitivity();
 
 		// Button management
-		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
-			if (isEnabled)
+			if(isEnabled)
 			{
 				_fe3d.gfx_enableLensFlare();
 			}
@@ -129,10 +129,10 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 				_fe3d.gfx_disableLensFlare();
 			}
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("flareMap")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("flareMap")->isHovered())
 		{
 			// Validate target directory
-			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
+			if(!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
@@ -140,14 +140,14 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 
 			// Validate chosen file
 			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
-			if (filePath.empty())
+			if(filePath.empty())
 			{
 				return;
 			}
 
 			// Validate directory of file
-			if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-				filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+			if(filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+			   filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
 			{
 				Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
 				return;
@@ -158,22 +158,22 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			_fe3d.misc_clearTextureCache2D(flareMapPath);
 			_fe3d.gfx_setLensFlareMap(flareMapPath);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("intensity", "Flare Intensity", (intensity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("sensitivity")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("sensitivity")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("sensitivity", "Flare Sensitivity", (sensitivity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
+		if(_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
 		{
 			intensity /= 100.0f;
 			_fe3d.gfx_setLensFlareIntensity(intensity);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("sensitivity", sensitivity))
+		if(_gui.getGlobalScreen()->checkValueForm("sensitivity", sensitivity))
 		{
 			sensitivity /= 100.0f;
 			_fe3d.gfx_setLensFlareSensitivity(sensitivity);
@@ -194,7 +194,7 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "sceneEditorMenuSettingsGraphicsSkyExposure")
+	if(screen->getID() == "sceneEditorMenuSettingsGraphicsSkyExposure")
 	{
 		// Temporary values
 		auto isEnabled = _fe3d.gfx_isSkyExposureEnabled();
@@ -202,15 +202,15 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 		auto speed = _fe3d.gfx_getSkyExposureSpeed();
 
 		// Button management
-		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
-			if (isEnabled)
+			if(isEnabled)
 			{
 				_fe3d.gfx_enableSkyExposure();
 			}
@@ -219,22 +219,22 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 				_fe3d.gfx_disableSkyExposure();
 			}
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("intensity", "Exposure Intensity", (intensity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speed")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speed")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("speed", "Exposure Speed", (speed * 10000.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
+		if(_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
 		{
 			intensity /= 100.0f;
 			_fe3d.gfx_setSkyExposureIntensity(intensity);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("speed", speed))
+		if(_gui.getGlobalScreen()->checkValueForm("speed", speed))
 		{
 			speed /= 10000.0f;
 			_fe3d.gfx_setSkyExposureSpeed(speed);
@@ -255,7 +255,7 @@ void SceneEditor::_updateBloomGraphicsSettingsMenu()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "sceneEditorMenuSettingsGraphicsBloom")
+	if(screen->getID() == "sceneEditorMenuSettingsGraphicsBloom")
 	{
 		// Temporary values
 		auto isEnabled = _fe3d.gfx_isBloomEnabled();
@@ -264,15 +264,15 @@ void SceneEditor::_updateBloomGraphicsSettingsMenu()
 		auto blurCount = _fe3d.gfx_getBloomBlurCount();
 
 		// Button management
-		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
-			if (isEnabled)
+			if(isEnabled)
 			{
 				_fe3d.gfx_enableBloom();
 			}
@@ -281,9 +281,9 @@ void SceneEditor::_updateBloomGraphicsSettingsMenu()
 				_fe3d.gfx_disableBloom();
 			}
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("type")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("type")->isHovered())
 		{
-			if (type == BloomType::EVERYTHING)
+			if(type == BloomType::EVERYTHING)
 			{
 				type = BloomType::PARTS;
 			}
@@ -293,22 +293,22 @@ void SceneEditor::_updateBloomGraphicsSettingsMenu()
 			}
 			_fe3d.gfx_setBloomType(type);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("intensity", "Bloom Intensity", (intensity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blurs")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blurs")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("blurCount", "Amount Of Blurs", blurCount, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
+		if(_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
 		{
 			intensity /= 100.0f;
 			_fe3d.gfx_setBloomIntensity(intensity);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("blurCount", blurCount))
+		if(_gui.getGlobalScreen()->checkValueForm("blurCount", blurCount))
 		{
 			_fe3d.gfx_setBloomBlurCount(blurCount);
 		}

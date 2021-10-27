@@ -21,7 +21,7 @@ EngineGuiViewport::~EngineGuiViewport()
 
 void EngineGuiViewport::update(bool hoverable)
 {
-	for (const auto& window : _windows)
+	for(const auto& window : _windows)
 	{
 		window->update(hoverable);
 	}
@@ -30,7 +30,7 @@ void EngineGuiViewport::update(bool hoverable)
 bool EngineGuiViewport::isHovered()
 {
 	// Check if entity is visible anyway
-	if (_fe3d.imageEntity_isVisible(_entityID))
+	if(_fe3d.imageEntity_isVisible(_entityID))
 	{
 		// Convert dimensions to same space
 		Vec2 cursorPosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
@@ -38,9 +38,9 @@ bool EngineGuiViewport::isHovered()
 		Vec2 buttonSize = _fe3d.imageEntity_getSize(_entityID);
 
 		// Check if cursor inside entity
-		if (cursorPosition.x > buttonPosition.x - (buttonSize.x / 2.0f) && cursorPosition.x < buttonPosition.x + (buttonSize.x / 2.0f)) // X axis
+		if(cursorPosition.x > buttonPosition.x - (buttonSize.x / 2.0f) && cursorPosition.x < buttonPosition.x + (buttonSize.x / 2.0f)) // X axis
 		{
-			if (cursorPosition.y > buttonPosition.y - (buttonSize.y / 2.0f) && cursorPosition.y < buttonPosition.y + (buttonSize.y / 2.0f)) // Y axis
+			if(cursorPosition.y > buttonPosition.y - (buttonSize.y / 2.0f) && cursorPosition.y < buttonPosition.y + (buttonSize.y / 2.0f)) // Y axis
 			{
 				return true;
 			}
@@ -73,9 +73,9 @@ void EngineGuiViewport::createWindow(const string& ID, Vec2 position, Vec2 size,
 void EngineGuiViewport::deleteWindow(const string& ID)
 {
 	// Delete window
-	for (size_t i = 0; i < _windows.size(); i++)
+	for(size_t i = 0; i < _windows.size(); i++)
 	{
-		if (_windows[i]->getID() == ID)
+		if(_windows[i]->getID() == ID)
 		{
 			_windows.erase(_windows.begin() + i);
 			return;
@@ -94,9 +94,9 @@ vector<shared_ptr<EngineGuiWindow>>& EngineGuiViewport::getWindows()
 shared_ptr<EngineGuiWindow> EngineGuiViewport::getWindow(const string& ID)
 {
 	// Retrieve window
-	for (const auto& window : _windows)
+	for(const auto& window : _windows)
 	{
-		if (ID == window->getID())
+		if(ID == window->getID())
 		{
 			return window;
 		}

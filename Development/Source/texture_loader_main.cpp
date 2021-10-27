@@ -16,7 +16,7 @@ vector<float> TextureLoader::_loadBitmap(const string& filePath)
 	// Open file
 	FILE* streamIn;
 	fopen_s(&streamIn, (rootDir + filePath).c_str(), "rb");
-	if (streamIn == (FILE*)0)
+	if(streamIn == (FILE*)0)
 	{
 		return {};
 	}
@@ -24,7 +24,7 @@ vector<float> TextureLoader::_loadBitmap(const string& filePath)
 	// File header
 	uint8_t header[54];
 	uint32_t width, height = 5;
-	for (int i = 0; i < 54; i++)
+	for(int i = 0; i < 54; i++)
 	{
 		header[i] = getc(streamIn);
 	}
@@ -35,7 +35,7 @@ vector<float> TextureLoader::_loadBitmap(const string& filePath)
 
 	// Read pixels
 	auto size = static_cast<size_t>(width) * static_cast<size_t>(height);
-	for (size_t i = 0; i < size; i++)
+	for(size_t i = 0; i < size; i++)
 	{
 		auto r = getc(streamIn);
 		auto g = getc(streamIn);
@@ -86,11 +86,11 @@ TextureID TextureLoader::_convertIntoTexture(SDL_Surface* surface, const string&
 	glBindTexture(GL_TEXTURE_2D, texture);
 
 	// Determing the pixel format
-	if (surface->format->BytesPerPixel == 4)
+	if(surface->format->BytesPerPixel == 4)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surface->w, surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, surface->pixels);
 	}
-	else if (surface->format->BytesPerPixel == 3)
+	else if(surface->format->BytesPerPixel == 3)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, surface->w, surface->h, 0, GL_RGB, GL_UNSIGNED_BYTE, surface->pixels);
 	}
@@ -100,7 +100,7 @@ TextureID TextureLoader::_convertIntoTexture(SDL_Surface* surface, const string&
 		return 0;
 	}
 
-	if (isMipmapped) // Mipmapping
+	if(isMipmapped) // Mipmapping
 	{
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -113,7 +113,7 @@ TextureID TextureLoader::_convertIntoTexture(SDL_Surface* surface, const string&
 	}
 
 	// Anisotropic filtering
-	if (isAnisotropic)
+	if(isAnisotropic)
 	{
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(_anisotropicFilteringQuality));
 	}
@@ -137,26 +137,26 @@ TextureID TextureLoader::_convertIntoTexture(const array<SDL_Surface*, 6>& surfa
 
 	// Validate surface sizes
 	int surfaceSize = -1;
-	for (size_t i = 0; i < surfaces.size(); i++)
+	for(size_t i = 0; i < surfaces.size(); i++)
 	{
 		// Check surface status
-		if (surfaces[i] != nullptr)
+		if(surfaces[i] != nullptr)
 		{
 			// Check if resolution dimensions are the same
-			if (surfaces[i]->w != surfaces[i]->h)
+			if(surfaces[i]->w != surfaces[i]->h)
 			{
 				Logger::throwWarning("3D texture width must be same as height: \"" + filePaths[i] + "\"");
 				return 0;
 			}
 
 			// Check if resolution dimensions are the same as all others
-			if (surfaceSize == -1)
+			if(surfaceSize == -1)
 			{
 				surfaceSize = surfaces[i]->w;
 			}
 			else
 			{
-				if (surfaceSize != surfaces[i]->w)
+				if(surfaceSize != surfaces[i]->w)
 				{
 					Logger::throwWarning("All 3D textures must have the same resolution: \"" + filePaths[i] + "\"");
 					return 0;
@@ -164,12 +164,12 @@ TextureID TextureLoader::_convertIntoTexture(const array<SDL_Surface*, 6>& surfa
 			}
 		}
 	}
-	
+
 	// Add the face surfaces to the texture buffer
-	for (size_t i = 0; i < surfaces.size(); i++)
+	for(size_t i = 0; i < surfaces.size(); i++)
 	{
 		// Check surface status
-		if (surfaces[i] == nullptr)
+		if(surfaces[i] == nullptr)
 		{
 			// Black surface
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, surfaceSize, surfaceSize, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
@@ -215,11 +215,11 @@ TextureID TextureLoader::_convertIntoTexture(TTF_Font* font, const string& textC
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	// Determine pixel format
-	if (surface->format->BytesPerPixel == 4)
+	if(surface->format->BytesPerPixel == 4)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surface->w, surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, surface->pixels);
 	}
-	else if (surface->format->BytesPerPixel == 3)
+	else if(surface->format->BytesPerPixel == 3)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, surface->w, surface->h, 0, GL_RGB, GL_UNSIGNED_BYTE, surface->pixels);
 	}

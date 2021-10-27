@@ -25,7 +25,7 @@ void AabbEntityColorRenderer::unbind()
 
 void AabbEntityColorRenderer::render(const shared_ptr<AabbEntity> entity)
 {
-	if (entity->isVisible())
+	if(entity->isVisible())
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());

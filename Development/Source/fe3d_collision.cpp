@@ -8,7 +8,7 @@ void FabiEngine3D::collision_setCameraBox(float left, float right, float bottom,
 
 void FabiEngine3D::collision_enableCameraResponse(bool x, bool y, bool z)
 {
-	if (_core->_collisionResolver.isCameraAabbResponseEnabled())
+	if(_core->_collisionResolver.isCameraAabbResponseEnabled())
 	{
 		Logger::throwWarning("Tried to enable camera AABB response: already enabled!");
 		return;
@@ -19,7 +19,7 @@ void FabiEngine3D::collision_enableCameraResponse(bool x, bool y, bool z)
 
 void FabiEngine3D::collision_disableCameraResponse()
 {
-	if (!_core->_collisionResolver.isCameraAabbResponseEnabled())
+	if(!_core->_collisionResolver.isCameraAabbResponseEnabled())
 	{
 		Logger::throwWarning("Tried to enable camera AABB response: not enabled!");
 		return;
@@ -30,7 +30,7 @@ void FabiEngine3D::collision_disableCameraResponse()
 
 void FabiEngine3D::collision_enableTerrainResponse(float cameraHeight, float cameraSpeed)
 {
-	if (_core->_collisionResolver.isCameraTerrainResponseEnabled())
+	if(_core->_collisionResolver.isCameraTerrainResponseEnabled())
 	{
 		Logger::throwWarning("Tried to enable camera terrain response: already enabled!");
 		return;
@@ -41,7 +41,7 @@ void FabiEngine3D::collision_enableTerrainResponse(float cameraHeight, float cam
 
 void FabiEngine3D::collision_disableTerrainResponse()
 {
-	if (!_core->_collisionResolver.isCameraTerrainResponseEnabled())
+	if(!_core->_collisionResolver.isCameraTerrainResponseEnabled())
 	{
 		Logger::throwWarning("Tried to enable camera terrain response: not enabled!");
 		return;
@@ -52,10 +52,10 @@ void FabiEngine3D::collision_disableTerrainResponse()
 
 const string FabiEngine3D::collision_checkCameraWithAny()
 {
-	for (const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities()) // Iterate through AABB entities
+	for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities()) // Iterate through AABB entities
 	{
 		// Check if collided
-		if (entity->hasCollided())
+		if(entity->hasCollided())
 		{
 			return entity->getID();
 		}
@@ -77,7 +77,7 @@ const bool FabiEngine3D::collision_checkCameraWithEntity(const string& ID)
 const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfID, const string& otherID)
 {
 	// Check if self entity does not exist
-	if (!_core->_aabbEntityManager.isExisting(selfID))
+	if(!_core->_aabbEntityManager.isExisting(selfID))
 	{
 		return "";
 	}
@@ -88,30 +88,30 @@ const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfI
 	Vec3 selfSize = self->getSize() / 2.0f;
 
 	// Check if self entity is responsive and visible
-	if (!self->isCollisionResponsive() || !self->isVisible())
+	if(!self->isCollisionResponsive() || !self->isVisible())
 	{
 		return "";
 	}
 
 	// Iterate through AABB entities
-	for (const auto& [keyID, other] : _core->_aabbEntityManager.getEntities())
+	for(const auto& [keyID, other] : _core->_aabbEntityManager.getEntities())
 	{
-		if (other->getID().size() >= otherID.size()) // Check if entity ID is at least the size of group ID
+		if(other->getID().size() >= otherID.size()) // Check if entity ID is at least the size of group ID
 		{
 			// Check if entity does not match ID
-			if (other->getID().substr(0, otherID.size()) != otherID)
+			if(other->getID().substr(0, otherID.size()) != otherID)
 			{
 				continue;
 			}
 
 			// Don't check own entity AABB('s)
-			if (other->getParentID() == self->getParentID())
+			if(other->getParentID() == self->getParentID())
 			{
 				continue;
 			}
 
 			// Other entity must be responsive and visible
-			if (!other->isCollisionResponsive() || !other->isVisible())
+			if(!other->isCollisionResponsive() || !other->isVisible())
 			{
 				continue;
 			}
@@ -121,7 +121,7 @@ const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfI
 			Vec3 otherSize = other->getSize() / 2.0f;
 			// Check XYZ collision between 2 entities
 			if
-			(
+				(
 				// Middle coordinate within
 				((selfPosition.x > otherPosition.x - otherSize.x && selfPosition.x < otherPosition.x + otherSize.x) ||
 				// Lower corner within
@@ -129,7 +129,7 @@ const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfI
 				// Upper corner within 
 				(selfPosition.x + selfSize.x > otherPosition.x - otherSize.x && selfPosition.x + selfSize.x < otherPosition.x + otherSize.x) ||
 				// AABB too big but overlapping
-				(selfPosition.x - selfSize.x <= otherPosition.x - otherSize.x && selfPosition.x + selfSize.x >= otherPosition.x + otherSize.x)) 
+				(selfPosition.x - selfSize.x <= otherPosition.x - otherSize.x && selfPosition.x + selfSize.x >= otherPosition.x + otherSize.x))
 
 				&&
 
@@ -149,10 +149,10 @@ const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfI
 				// Lower corner within
 				(selfPosition.z - selfSize.z > otherPosition.z - otherSize.z && selfPosition.z - selfSize.z < otherPosition.z + otherSize.z) ||
 				// Upper corner within 
-				(selfPosition.z + selfSize.z > otherPosition.z - otherSize.z && selfPosition.z + selfSize.z < otherPosition.z + otherSize.z) || 
+				(selfPosition.z + selfSize.z > otherPosition.z - otherSize.z && selfPosition.z + selfSize.z < otherPosition.z + otherSize.z) ||
 				// AABB too big but overlapping 
-				(selfPosition.z - selfSize.z <= otherPosition.z - otherSize.z && selfPosition.z + selfSize.z >= otherPosition.z + otherSize.z))   
-			)
+				(selfPosition.z - selfSize.z <= otherPosition.z - otherSize.z && selfPosition.z + selfSize.z >= otherPosition.z + otherSize.z))
+				)
 			{
 				return other->getID();
 			}
@@ -165,16 +165,16 @@ const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfI
 const string FabiEngine3D::collision_checkCameraWithEntities(const string& ID)
 {
 	// Iterate through AABB entities
-	for (const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
+	for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
 		// Check if collided
-		if (entity->hasCollided())
+		if(entity->hasCollided())
 		{
 			// Check if entity ID is at least the size of group ID
-			if (entity->getID().size() >= ID.size())
+			if(entity->getID().size() >= ID.size())
 			{
 				// Check if entity matches ID
-				if (entity->getID().substr(0, ID.size()) == ID)
+				if(entity->getID().substr(0, ID.size()) == ID)
 				{
 					return entity->getID();
 				}
@@ -189,10 +189,10 @@ const string FabiEngine3D::collision_checkCameraWithEntities(const string& ID)
 const bool FabiEngine3D::collision_checkCameraWithEntityDirection(const string& ID, Direction direction)
 {
 	// Check if collided
-	if (_core->_aabbEntityManager.getEntity(ID)->hasCollided())
+	if(_core->_aabbEntityManager.getEntity(ID)->hasCollided())
 	{
 		// Check if direction is the same
-		if (direction == _core->_aabbEntityManager.getEntity(ID)->getCollisionDirection())
+		if(direction == _core->_aabbEntityManager.getEntity(ID)->getCollisionDirection())
 		{
 			return true;
 		}
@@ -204,13 +204,13 @@ const bool FabiEngine3D::collision_checkCameraWithEntityDirection(const string& 
 const bool FabiEngine3D::collision_checkCameraWithAnyDirection(Direction direction)
 {
 	// Iterate through AABB entities
-	for (const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
+	for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
 		// Check if collided
-		if (entity->hasCollided())
+		if(entity->hasCollided())
 		{
 			// Check if direction is the same
-			if (direction == entity->getCollisionDirection())
+			if(direction == entity->getCollisionDirection())
 			{
 				return true;
 			}
@@ -223,19 +223,19 @@ const bool FabiEngine3D::collision_checkCameraWithAnyDirection(Direction directi
 const bool FabiEngine3D::collision_checkCameraWithEntitiesDirection(const string& ID, Direction direction)
 {
 	// Iterate through AABB entities
-	for (const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
+	for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
 		// Check if collided
-		if (entity->hasCollided())
+		if(entity->hasCollided())
 		{
 			// Check if direction is the same
-			if (direction == entity->getCollisionDirection())
+			if(direction == entity->getCollisionDirection())
 			{
 				// Check if entity ID is at least the size of group ID
-				if (entity->getID().size() >= ID.size())
+				if(entity->getID().size() >= ID.size())
 				{
 					// If entity matches ID
-					if (entity->getID().substr(0, ID.size()) == ID)
+					if(entity->getID().substr(0, ID.size()) == ID)
 					{
 						return true;
 					}

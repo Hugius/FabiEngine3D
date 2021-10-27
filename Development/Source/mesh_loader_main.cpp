@@ -24,34 +24,34 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 	// Load .obj file
 	string path = rootDir + filePath;
 	FILE* file = fopen(path.c_str(), "r");
-	if (!exists(path) || filePath.empty())
+	if(!exists(path) || filePath.empty())
 	{
 		string warningMessage = string("Cannot load mesh file: \"" + filePath + "\"!");
 		return make_pair(warningMessage, meshParts);
 	}
 
 	// Fill the vector with the data from the file
-	while (true)
+	while(true)
 	{
 		// Scan line to string
 		char* lineHeader = new char[128];
 		int res = fscanf(file, "%s", lineHeader);
 
 		// Check for end of file
-		if (res == EOF)
+		if(res == EOF)
 		{
 			break;
 		}
-		
+
 		// File content
-		if (strcmp(lineHeader, "FE3D_PART") == 0) // New part
+		if(strcmp(lineHeader, "FE3D_PART") == 0) // New part
 		{
 			char* ID = new char[128];
 			auto temp = fscanf(file, "%s\n", ID);
 			selectedPartID = string(ID);
 
 			// Cannot be a questionmark
-			if (selectedPartID == "?")
+			if(selectedPartID == "?")
 			{
 				string warningMessage = string("Mesh part ID cannot be '?' in mesh file: \"" + filePath + "\"!");
 				return make_pair(warningMessage, meshParts);
@@ -59,7 +59,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 
 			continue;
 		}
-		else if (strcmp(lineHeader, "v") == 0) // Vertices
+		else if(strcmp(lineHeader, "v") == 0) // Vertices
 		{
 			Vec3 vertex;
 			auto temp = fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
@@ -67,7 +67,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 
 			continue;
 		}
-		else if (strcmp(lineHeader, "vt") == 0) // UV coordinates
+		else if(strcmp(lineHeader, "vt") == 0) // UV coordinates
 		{
 			Vec2 uv;
 			auto temp = fscanf(file, "%f %f\n", &uv.x, &uv.y);
@@ -75,7 +75,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 
 			continue;
 		}
-		else if (strcmp(lineHeader, "vn") == 0) // Normals
+		else if(strcmp(lineHeader, "vn") == 0) // Normals
 		{
 			Vec3 normal;
 			auto temp = fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
@@ -83,7 +83,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 
 			continue;
 		}
-		else if (strcmp(lineHeader, "f") == 0) // Faces (triangle data)
+		else if(strcmp(lineHeader, "f") == 0) // Faces (triangle data)
 		{
 			// Temporary values
 			unsigned int posIndex[3];
@@ -92,12 +92,12 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 
 			// Read face indices
 			int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n",
-				&posIndex[0], &uvIndex[0], &normalIndex[0], 
-				&posIndex[1], &uvIndex[1], &normalIndex[1], 
-				&posIndex[2], &uvIndex[2], &normalIndex[2]);
+								 &posIndex[0], &uvIndex[0], &normalIndex[0],
+								 &posIndex[1], &uvIndex[1], &normalIndex[1],
+								 &posIndex[2], &uvIndex[2], &normalIndex[2]);
 
 			// Check if face amount is correct (3x3)
-			if (matches != 9)
+			if(matches != 9)
 			{
 				string warningMessage = string("Too many or not enough faces in mesh file: \"" + filePath + "\"");
 				return make_pair(warningMessage, meshParts);
@@ -105,16 +105,16 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 
 			// Check if able to add to existing mesh part
 			bool isAlreadyExisting = false;
-			for (auto& meshPart : meshParts)
+			for(auto& meshPart : meshParts)
 			{
 				// Find mesh part
-				if (meshPart->getID() == selectedPartID)
+				if(meshPart->getID() == selectedPartID)
 				{
 					// Prevent mesh part creation
 					isAlreadyExisting = true;
 
 					// Add data
-					for (int i = 0; i < 3; i++)
+					for(int i = 0; i < 3; i++)
 					{
 						meshPart->addVertex(temp_positions[posIndex[i] - 1]);
 						meshPart->addUV(temp_uvs[uvIndex[i] - 1]);
@@ -127,13 +127,13 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 			}
 
 			// Create new mesh part
-			if (!isAlreadyExisting)
+			if(!isAlreadyExisting)
 			{
 				// Create mesh part
 				MeshPart newPart(selectedPartID);
-				
+
 				// Add first data
-				for (int i = 0; i < 3; i++)
+				for(int i = 0; i < 3; i++)
 				{
 					newPart.addVertex(temp_positions[posIndex[i] - 1]);
 					newPart.addUV(temp_uvs[uvIndex[i] - 1]);
@@ -147,9 +147,9 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 	}
 
 	// Calculate tangents for normal mapping
-	for (auto& meshPart : meshParts)
+	for(auto& meshPart : meshParts)
 	{
-		for (size_t i = 0; i < meshPart->getVertices().size(); i += 3)
+		for(size_t i = 0; i < meshPart->getVertices().size(); i += 3)
 		{
 			// Vertices of 1 triangle
 			Vec3 v0 = meshPart->getVertices()[i + 0];
@@ -181,7 +181,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 	}
 
 	// Validate mesh parts
-	if (meshParts.empty())
+	if(meshParts.empty())
 	{
 		string warningMessage = string("Incorrect or too little content in mesh file: \"" + filePath + "\"");
 		return make_pair(warningMessage, meshParts);

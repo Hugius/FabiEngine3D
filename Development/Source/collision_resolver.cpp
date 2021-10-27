@@ -2,33 +2,33 @@
 #include "logger.hpp"
 
 void CollisionResolver::update(
-	const unordered_map<string, shared_ptr<AabbEntity>>& aabbs, 
-	TerrainEntityManager& terrainManager, 
+	const unordered_map<string, shared_ptr<AabbEntity>>& aabbs,
+	TerrainEntityManager& terrainManager,
 	Camera& camera, Raycaster& raycaster, CollisionDetector& collisionDetector)
 {
 	// Check if AABB collision is needed in the first place
-	if (_isCameraAabbResponseEnabled)
+	if(_isCameraAabbResponseEnabled)
 	{
 		// Reset collision
-		for (const auto& [keyID, aabb] : aabbs)
+		for(const auto& [keyID, aabb] : aabbs)
 		{
 			aabb->setCollided(false);
 		}
 
 		// Handle X collision
-		for (const auto& [keyID, aabb] : aabbs)
+		for(const auto& [keyID, aabb] : aabbs)
 		{
 			_handleCollision(Direction::X, aabb, camera, collisionDetector);
 		}
 
 		// Handle Y collision
-		for (const auto& [keyID, aabb] : aabbs)
+		for(const auto& [keyID, aabb] : aabbs)
 		{
 			_handleCollision(Direction::Y, aabb, camera, collisionDetector);
 		}
 
 		// Handle Z collision
-		for (const auto& [keyID, aabb] : aabbs)
+		for(const auto& [keyID, aabb] : aabbs)
 		{
 			_handleCollision(Direction::Z, aabb, camera, collisionDetector);
 		}
@@ -36,13 +36,13 @@ void CollisionResolver::update(
 		// Store last camera position
 		_lastCameraPosition = camera.getPosition();
 	}
-	
+
 	// Check if terrain collision is needed in the first place
 	_isCameraUnderTerrain = false;
-	if (_isCameraTerrainResponseEnabled)
+	if(_isCameraTerrainResponseEnabled)
 	{
 		// Check if a terrain is selected
-		if (terrainManager.getSelectedTerrain() != nullptr)
+		if(terrainManager.getSelectedTerrain() != nullptr)
 		{
 			// Retrieve height of terrain point at camera position
 			Vec3 cameraPosition = camera.getPosition();
@@ -51,7 +51,7 @@ void CollisionResolver::update(
 			const float targetY = terrainManager.getPixelHeight(terrainManager.getSelectedTerrain()->getID(), terrainX, terrainZ) + _cameraTerrainHeight;
 
 			// If camera goes underground
-			if (cameraPosition.y < targetY)
+			if(cameraPosition.y < targetY)
 			{
 				_isCameraUnderTerrain = true;
 
@@ -60,7 +60,7 @@ void CollisionResolver::update(
 				cameraPosition.y = camera.getPosition().y;
 
 				// Correct moved distance
-				if (cameraPosition.y > targetY)
+				if(cameraPosition.y > targetY)
 				{
 					camera.setPosition(Vec3(cameraPosition.x, targetY, cameraPosition.z));
 				}
@@ -76,7 +76,7 @@ void CollisionResolver::setCameraBox(const Box& box)
 
 void CollisionResolver::enableCameraAabbResponse(bool x, bool y, bool z)
 {
-	if (_isCameraAabbResponseEnabled)
+	if(_isCameraAabbResponseEnabled)
 	{
 		Logger::throwError("CollisionResolver::enableCameraAabbResponse");
 	}
@@ -89,7 +89,7 @@ void CollisionResolver::enableCameraAabbResponse(bool x, bool y, bool z)
 
 void CollisionResolver::disableCameraAabbResponse()
 {
-	if (!_isCameraAabbResponseEnabled)
+	if(!_isCameraAabbResponseEnabled)
 	{
 		Logger::throwError("CollisionResolver::disableCameraAabbResponse");
 	}
@@ -102,7 +102,7 @@ void CollisionResolver::disableCameraAabbResponse()
 
 void CollisionResolver::enableCameraTerrainResponse(float cameraHeight, float cameraSpeed)
 {
-	if (_isCameraTerrainResponseEnabled)
+	if(_isCameraTerrainResponseEnabled)
 	{
 		Logger::throwError("CollisionResolver::enableCameraTerrainResponse");
 	}
@@ -114,7 +114,7 @@ void CollisionResolver::enableCameraTerrainResponse(float cameraHeight, float ca
 
 void CollisionResolver::disableCameraTerrainResponse()
 {
-	if (!_isCameraTerrainResponseEnabled)
+	if(!_isCameraTerrainResponseEnabled)
 	{
 		Logger::throwError("CollisionResolver::disableCameraTerrainResponse");
 	}

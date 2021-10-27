@@ -3,7 +3,7 @@
 
 void FabiEngine3D::spotlightEntity_create(const string& ID)
 {
-	if (_core->_spotlightEntityManager.getEntities().size() == SpotlightEntityManager::MAX_LIGHT_COUNT)
+	if(_core->_spotlightEntityManager.getEntities().size() == SpotlightEntityManager::MAX_LIGHT_COUNT)
 	{
 		Logger::throwWarning("Tried to create spotlight entity: maximum reached!");
 		return;
@@ -76,7 +76,7 @@ const vector<string> FabiEngine3D::spotlightEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (const auto& [keyID, entity] : _core->_spotlightEntityManager.getEntities())
+	for(const auto& [keyID, entity] : _core->_spotlightEntityManager.getEntities())
 	{
 		IDs.push_back(entity->getID());
 	}

@@ -6,7 +6,7 @@ class TerrainEntityManager final : public BaseEntityManager
 {
 public:
 	TerrainEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
-	
+
 	// Voids
 	void createEntity(const string& ID, const string& heightMapPath);
 	void loadMesh(const string& ID);

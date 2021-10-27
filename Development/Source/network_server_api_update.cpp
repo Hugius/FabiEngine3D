@@ -16,7 +16,7 @@ using std::chrono::system_clock;
 void NetworkServerAPI::update()
 {
 	// Must be running
-	if (!_isRunning)
+	if(!_isRunning)
 	{
 		return;
 	}
@@ -27,15 +27,15 @@ void NetworkServerAPI::update()
 	_newClientUsername = "";
 
 	// Clear old client data from last tick
-	if (!_oldClientIPs.empty())
+	if(!_oldClientIPs.empty())
 	{
 		_oldClientIPs.erase(_oldClientIPs.begin());
 	}
-	if (!_oldClientPorts.empty())
+	if(!_oldClientPorts.empty())
 	{
 		_oldClientPorts.erase(_oldClientPorts.begin());
 	}
-	if (!_oldClientUsernames.empty())
+	if(!_oldClientUsernames.empty())
 	{
 		_oldClientUsernames.erase(_oldClientUsernames.begin());
 	}
@@ -44,11 +44,11 @@ void NetworkServerAPI::update()
 	_pendingMessages.clear();
 
 	// Handle new client connections
-	if (_connectionThread.wait_until(system_clock::time_point::min()) == future_status::ready)
+	if(_connectionThread.wait_until(system_clock::time_point::min()) == future_status::ready)
 	{
 		// Retrieve new client socket ID
 		auto clientSocketID = _connectionThread.get();
-		if (clientSocketID == INVALID_SOCKET)
+		if(clientSocketID == INVALID_SOCKET)
 		{
 			Logger::throwError("NetworkServerAPI::update::1 ---> ", WSAGetLastError());
 		}
@@ -62,7 +62,7 @@ void NetworkServerAPI::update()
 
 	// Receive incoming TCP messages
 BEGIN:
-	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
+	for(size_t i = 0; i < _clientSocketIDs.size(); i++)
 	{
 		// Client data
 		const auto& clientSocketID = _clientSocketIDs[i];
@@ -73,7 +73,7 @@ BEGIN:
 		auto& messageThread = _tcpMessageThreads[i];
 
 		// Check if the client sent any message
-		if (messageThread.wait_until(system_clock::time_point::min()) == future_status::ready)
+		if(messageThread.wait_until(system_clock::time_point::min()) == future_status::ready)
 		{
 			// Message data
 			const auto& messageResult = messageThread.get();
@@ -82,22 +82,22 @@ BEGIN:
 			const auto& messageTimestamp = get<2>(messageResult);
 			const auto& messageContent = get<3>(messageResult);
 
-			if (messageStatusCode > 0) // Message is received correctly
+			if(messageStatusCode > 0) // Message is received correctly
 			{
-				for (const auto& character : messageContent) // Loop through received messages
+				for(const auto& character : messageContent) // Loop through received messages
 				{
-					if (character == ';') // End of current message
+					if(character == ';') // End of current message
 					{
-						if (clientMessageBuild.substr(0, 8) == "USERNAME") // Handle USERNAME message
+						if(clientMessageBuild.substr(0, 8) == "USERNAME") // Handle USERNAME message
 						{
 							// Extract username
 							auto username = clientMessageBuild.substr(string("USERNAME").size());
 
 							// Check if server is full or username is already connected
-							if (_clientIPs.size() > _maxClientCount)
+							if(_clientIPs.size() > _maxClientCount)
 							{
 								// Reject client
-								if (!_sendTcpMessage(clientSocketID, "SERVER_FULL", true))
+								if(!_sendTcpMessage(clientSocketID, "SERVER_FULL", true))
 								{
 									return;
 								}
@@ -106,10 +106,10 @@ BEGIN:
 								// Prevent processing more messages
 								break;
 							}
-							else if (find(_clientUsernames.begin(), _clientUsernames.end(), username) != _clientUsernames.end())
+							else if(find(_clientUsernames.begin(), _clientUsernames.end(), username) != _clientUsernames.end())
 							{
 								// Reject client
-								if (!_sendTcpMessage(clientSocketID, "USER_ALREADY_CONNECTED", true))
+								if(!_sendTcpMessage(clientSocketID, "USER_ALREADY_CONNECTED", true))
 								{
 									return;
 								}
@@ -121,7 +121,7 @@ BEGIN:
 							else
 							{
 								// Accept client
-								if (!_sendTcpMessage(clientSocketID, "ACCEPTED", true))
+								if(!_sendTcpMessage(clientSocketID, "ACCEPTED", true))
 								{
 									return;
 								}
@@ -136,9 +136,9 @@ BEGIN:
 								// Logging
 								Logger::throwInfo("Networking client \"" + clientUsername + "\" connected to the server!");
 							}
-	
+
 						}
-						else if (clientMessageBuild == "PING") // Handle PING message
+						else if(clientMessageBuild == "PING") // Handle PING message
 						{
 							// Calculate delay between receiving the message and processing the receive
 							auto receiveDelay = (Tools::getTimeSinceEpochMS() - messageTimestamp);
@@ -147,7 +147,7 @@ BEGIN:
 							auto pingMessage = ("PING" + to_string(receiveDelay));
 
 							// Send ping message back to client
-							if (!_sendTcpMessage(clientSocketID, pingMessage, true))
+							if(!_sendTcpMessage(clientSocketID, pingMessage, true))
 							{
 								return;
 							}
@@ -158,7 +158,7 @@ BEGIN:
 							_pendingMessages.push_back(
 								NetworkClientMessage(clientIP, clientPort, clientUsername, clientMessageBuild, NetworkProtocol::TCP));
 							clientMessageBuild = "";
-						}					
+						}
 					}
 					else // Add to current message build
 					{
@@ -166,7 +166,7 @@ BEGIN:
 					}
 				}
 			}
-			else if (messageStatusCode == 0) // Client closed socket connection
+			else if(messageStatusCode == 0) // Client closed socket connection
 			{
 				_disconnectClient(clientSocketID);
 				goto BEGIN;
@@ -174,7 +174,7 @@ BEGIN:
 			else // Receive failed
 			{
 				auto code = messageErrorCode;
-				if ((code == WSAECONNRESET) || (code == WSAECONNABORTED) || (code == WSAETIMEDOUT)) // Client lost socket connection
+				if((code == WSAECONNRESET) || (code == WSAECONNABORTED) || (code == WSAETIMEDOUT)) // Client lost socket connection
 				{
 					_disconnectClient(clientSocketID);
 					goto BEGIN;
@@ -189,9 +189,9 @@ BEGIN:
 			messageThread = async(launch::async, &NetworkServerAPI::_waitForTcpMessage, this, clientSocketID);
 		}
 	}
-	
+
 	// Receive incoming UDP messages
-	while (NetworkUtils::isUdpMessageReady(_udpMessageSocketID))
+	while(NetworkUtils::isUdpMessageReady(_udpMessageSocketID))
 	{
 		// Message data
 		const auto& messageResult = _receiveUdpMessage(_udpMessageSocketID);
@@ -202,20 +202,20 @@ BEGIN:
 		const auto& messagePort = get<4>(messageResult);
 
 		// Message is received correctly
-		if (messageStatusCode > 0)
+		if(messageStatusCode > 0)
 		{
 			// Message must come from a client
-			if (_isClientConnected(messageIP, messagePort))
+			if(_isClientConnected(messageIP, messagePort))
 			{
 				// Extract username & content
 				auto username = messageContent.substr(0, messageContent.find(';'));
 				auto content = messageContent.substr(messageContent.find(';') + 1);
 
 				// Try to find client
-				for (size_t i = 0; i < _clientUsernames.size(); i++)
+				for(size_t i = 0; i < _clientUsernames.size(); i++)
 				{
 					// Check if username matches
-					if (username == _clientUsernames[i])
+					if(username == _clientUsernames[i])
 					{
 						_pendingMessages.push_back(
 							NetworkClientMessage(_clientIPs[i], _clientPorts[i], username, content, NetworkProtocol::UDP));
@@ -226,10 +226,10 @@ BEGIN:
 		}
 		else if
 			(
-				(messageStatusCode == 0)			  ||
-				(messageErrorCode == WSAECONNRESET)   ||
-				(messageErrorCode == WSAECONNABORTED) ||
-				(messageErrorCode == WSAEMSGSIZE)
+			(messageStatusCode == 0) ||
+			(messageErrorCode == WSAECONNRESET) ||
+			(messageErrorCode == WSAECONNABORTED) ||
+			(messageErrorCode == WSAEMSGSIZE)
 			)
 		{
 			// Wrong packet, do nothing

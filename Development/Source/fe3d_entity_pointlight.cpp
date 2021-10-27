@@ -3,7 +3,7 @@
 
 void FabiEngine3D::pointlightEntity_create(const string& ID)
 {
-	if (_core->_pointlightEntityManager.getEntities().size() == PointlightEntityManager::MAX_LIGHT_COUNT)
+	if(_core->_pointlightEntityManager.getEntities().size() == PointlightEntityManager::MAX_LIGHT_COUNT)
 	{
 		Logger::throwWarning("Tried to create pointlight entity: maximum reached!");
 		return;
@@ -101,7 +101,7 @@ const vector<string> FabiEngine3D::pointlightEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (const auto& [keyID, entity] : _core->_pointlightEntityManager.getEntities())
+	for(const auto& [keyID, entity] : _core->_pointlightEntityManager.getEntities())
 	{
 		IDs.push_back(entity->getID());
 	}

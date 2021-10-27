@@ -17,14 +17,14 @@ bool SceneEditor::isLoaded()
 bool SceneEditor::isSceneExisting(const string& filename)
 {
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("SceneEditor::isSceneExisting");
 	}
 
 	// Compose full file path
-	string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" : 
-		("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + filename + ".fe3d";
+	string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
+												   ("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + filename + ".fe3d";
 
 	// Check if scene file exists
 	return (Tools::isFileExisting(filePath));
@@ -49,7 +49,7 @@ void SceneEditor::_selectModel(const string& ID)
 	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
-	if (_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
+	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		// Removing the unique number from the modelID and updating the text content
 		string tempID = ID;
@@ -98,7 +98,7 @@ void SceneEditor::_selectBillboard(const string& ID)
 	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
-	if (_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
+	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		// Removing the unique number from the billboardID and updating the text content
 		string tempID = ID;
@@ -147,7 +147,7 @@ void SceneEditor::_selectSound(const string& ID)
 	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
-	if (_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
+	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		// Removing the unique number from the soundID and updating the text content
 		string tempID = ID;
@@ -304,14 +304,14 @@ vector<string> SceneEditor::_loadSceneIDs()
 {
 	// Temporary values
 	vector<string> sceneIDs;
-	string directoryPath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" : 
-		("projects\\" + _currentProjectID)) + "\\scenes\\editor\\");
+	string directoryPath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
+							("projects\\" + _currentProjectID)) + "\\scenes\\editor\\");
 
 	// Check if scenes directory exists
-	if (Tools::isDirectoryExisting(directoryPath))
+	if(Tools::isDirectoryExisting(directoryPath))
 	{
 		// Get all project IDs
-		for (const auto& entry : directory_iterator(directoryPath))
+		for(const auto& entry : directory_iterator(directoryPath))
 		{
 			string sceneID = string(entry.path().string());
 			sceneID.erase(0, directoryPath.size());
@@ -329,11 +329,11 @@ vector<string> SceneEditor::_loadSceneIDs()
 void SceneEditor::_deleteSceneFile(const string& ID)
 {
 	// Compose full file path
-	string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" : 
-		("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + ID + ".fe3d";
+	string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
+												   ("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + ID + ".fe3d";
 
 	// Check if scene file is still existing
-	if (Tools::isFileExisting(filePath))
+	if(Tools::isFileExisting(filePath))
 	{
 		remove_all(filePath);
 	}
@@ -343,36 +343,36 @@ void SceneEditor::_deleteSceneFile(const string& ID)
 	}
 }
 
-void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, string writeFieldID, float& value, float adder, 
-	float multiplier, float minimum, float maximum)
+void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, string writeFieldID, float& value, float adder,
+									   float multiplier, float minimum, float maximum)
 {
 	// Temporary values
 	auto writeField = _gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWriteField(writeFieldID);
 
 	// Plus & minus button handling
-	if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
+	if(_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
 	{
-		if (_gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getButton(buttonID)->isHovered())
+		if(_gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getButton(buttonID)->isHovered())
 		{
 			value += adder;
 		}
 	}
 
 	// WriteField pre-update
-	if (!writeField->isActive())
+	if(!writeField->isActive())
 	{
 		writeField->changeTextContent(to_string(static_cast<int>(value * multiplier)));
 	}
 
 	// WriteField handling
-	if (writeField->getTextContent().empty())
+	if(writeField->getTextContent().empty())
 	{
 		value = 0.0f; // Reset value to default
 	}
 	else
 	{
 		// Check if something is filled in
-		if (writeField->isActive())
+		if(writeField->isActive())
 		{
 			value = (static_cast<float>(stoi(writeField->getTextContent())) / multiplier); // Update value in realtime
 		}
@@ -382,7 +382,7 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 	value = clamp(value, minimum, maximum);
 
 	// WriteField post-update
-	if (!writeField->isActive())
+	if(!writeField->isActive())
 	{
 		writeField->changeTextContent(to_string(static_cast<int>(value * multiplier)));
 	}
@@ -391,26 +391,26 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 void SceneEditor::_updateModelBlinking(const string& ID, int& direction)
 {
 	// Reset multiplier if nothing active/selected
-	if (ID.empty())
+	if(ID.empty())
 	{
 		direction = 1;
 	}
 
 	// Update model inversion
-	if (!ID.empty())
+	if(!ID.empty())
 	{
 		// Update all parts
 		auto partIDs = _fe3d.modelEntity_getPartIDs(ID);
-		for (size_t i = 0; i < partIDs.size(); i++)
+		for(size_t i = 0; i < partIDs.size(); i++)
 		{
 			// Check if inversion reached minimum
-			if ((_fe3d.modelEntity_getColorInversion(ID, partIDs[i]) == 0.0f) && (i == 0))
+			if((_fe3d.modelEntity_getColorInversion(ID, partIDs[i]) == 0.0f) && (i == 0))
 			{
 				direction *= -1;
 			}
 
 			// Check if inversion reached maximum
-			if ((_fe3d.modelEntity_getColorInversion(ID, partIDs[i]) == 1.0f) && (i == 0))
+			if((_fe3d.modelEntity_getColorInversion(ID, partIDs[i]) == 1.0f) && (i == 0))
 			{
 				direction *= -1;
 			}
@@ -425,22 +425,22 @@ void SceneEditor::_updateModelBlinking(const string& ID, int& direction)
 void SceneEditor::_updateBillboardBlinking(const string& ID, int& direction)
 {
 	// Reset direction if nothing active/selected
-	if (ID.empty())
+	if(ID.empty())
 	{
 		direction = 1;
 	}
 
 	// Update billboard inversion
-	if (ID != "")
+	if(ID != "")
 	{
 		// Check if inversion reached minimum
-		if (_fe3d.billboardEntity_getColorInversion(ID) == 0.0f)
+		if(_fe3d.billboardEntity_getColorInversion(ID) == 0.0f)
 		{
 			direction *= -1;
 		}
 
 		// Check if inversion reached maximum
-		if (_fe3d.billboardEntity_getColorInversion(ID) == 1.0f)
+		if(_fe3d.billboardEntity_getColorInversion(ID) == 1.0f)
 		{
 			direction *= -1;
 		}
@@ -454,23 +454,23 @@ void SceneEditor::_updateBillboardBlinking(const string& ID, int& direction)
 void SceneEditor::_updateSpeakerAnimation(const string& ID, int& direction)
 {
 	// Reset direction if nothing active/selected
-	if (ID.empty())
+	if(ID.empty())
 	{
 		direction = 1;
 	}
 
 	// Update speaker animation
-	if (ID != "")
+	if(ID != "")
 	{
 		// Check if inversion reached minimum
-		if (_fe3d.modelEntity_getBaseSize(ID).y < DEFAULT_SPEAKER_SIZE.y)
+		if(_fe3d.modelEntity_getBaseSize(ID).y < DEFAULT_SPEAKER_SIZE.y)
 		{
 			_fe3d.modelEntity_setBaseSize(ID, DEFAULT_SPEAKER_SIZE);
 			direction *= -1;
 		}
 
 		// Check if inversion reached maximum
-		if (_fe3d.modelEntity_getBaseSize(ID).y > (DEFAULT_SPEAKER_SIZE.y * SPEAKER_SIZE_INCREASE))
+		if(_fe3d.modelEntity_getBaseSize(ID).y > (DEFAULT_SPEAKER_SIZE.y * SPEAKER_SIZE_INCREASE))
 		{
 			_fe3d.modelEntity_setBaseSize(ID, (DEFAULT_SPEAKER_SIZE * SPEAKER_SIZE_INCREASE));
 			direction *= -1;
@@ -486,23 +486,23 @@ void SceneEditor::_updateSpeakerAnimation(const string& ID, int& direction)
 void SceneEditor::_updateLampAnimation(const string& ID, int& direction)
 {
 	// Reset direction if nothing active/selected
-	if (ID.empty())
+	if(ID.empty())
 	{
 		direction = 1;
 	}
 
 	// Update lamp animation
-	if (ID != "")
+	if(ID != "")
 	{
 		// Check if inversion reached minimum
-		if (_fe3d.modelEntity_getBaseSize(ID).y < DEFAULT_LAMP_SIZE.y)
+		if(_fe3d.modelEntity_getBaseSize(ID).y < DEFAULT_LAMP_SIZE.y)
 		{
 			_fe3d.modelEntity_setBaseSize(ID, DEFAULT_LAMP_SIZE);
 			direction *= -1;
 		}
 
 		// Check if inversion reached maximum
-		if (_fe3d.modelEntity_getBaseSize(ID).y >(DEFAULT_LAMP_SIZE.y * LAMP_SIZE_INCREASE))
+		if(_fe3d.modelEntity_getBaseSize(ID).y > (DEFAULT_LAMP_SIZE.y * LAMP_SIZE_INCREASE))
 		{
 			_fe3d.modelEntity_setBaseSize(ID, (DEFAULT_LAMP_SIZE * LAMP_SIZE_INCREASE));
 			direction *= -1;
@@ -518,23 +518,23 @@ void SceneEditor::_updateLampAnimation(const string& ID, int& direction)
 void SceneEditor::_updateTorchAnimation(const string& ID, int& direction)
 {
 	// Reset direction if nothing active/selected
-	if (ID.empty())
+	if(ID.empty())
 	{
 		direction = 1;
 	}
 
 	// Update torch animation
-	if (ID != "")
+	if(ID != "")
 	{
 		// Check if inversion reached minimum
-		if (_fe3d.modelEntity_getBaseSize(ID).y < DEFAULT_TORCH_SIZE.y)
+		if(_fe3d.modelEntity_getBaseSize(ID).y < DEFAULT_TORCH_SIZE.y)
 		{
 			_fe3d.modelEntity_setBaseSize(ID, DEFAULT_TORCH_SIZE);
 			direction *= -1;
 		}
 
 		// Check if inversion reached maximum
-		if (_fe3d.modelEntity_getBaseSize(ID).y > (DEFAULT_TORCH_SIZE.y * TORCH_SIZE_INCREASE))
+		if(_fe3d.modelEntity_getBaseSize(ID).y > (DEFAULT_TORCH_SIZE.y * TORCH_SIZE_INCREASE))
 		{
 			_fe3d.modelEntity_setBaseSize(ID, (DEFAULT_TORCH_SIZE * TORCH_SIZE_INCREASE));
 			direction *= -1;
@@ -550,23 +550,23 @@ void SceneEditor::_updateTorchAnimation(const string& ID, int& direction)
 void SceneEditor::_updateCameraAnimation(const string& ID, int& direction)
 {
 	// Reset direction if nothing active/selected
-	if (ID.empty())
+	if(ID.empty())
 	{
 		direction = 1;
 	}
 
 	// Update reflection animation
-	if (ID != "")
+	if(ID != "")
 	{
 		// Check if inversion reached minimum
-		if (_fe3d.modelEntity_getBaseSize(ID).y < DEFAULT_CAMERA_SIZE.y)
+		if(_fe3d.modelEntity_getBaseSize(ID).y < DEFAULT_CAMERA_SIZE.y)
 		{
 			_fe3d.modelEntity_setBaseSize(ID, DEFAULT_CAMERA_SIZE);
 			direction *= -1;
 		}
 
 		// Check if inversion reached maximum
-		if (_fe3d.modelEntity_getBaseSize(ID).y >(DEFAULT_CAMERA_SIZE.y * CAMERA_SIZE_INCREASE))
+		if(_fe3d.modelEntity_getBaseSize(ID).y > (DEFAULT_CAMERA_SIZE.y * CAMERA_SIZE_INCREASE))
 		{
 			_fe3d.modelEntity_setBaseSize(ID, (DEFAULT_CAMERA_SIZE * CAMERA_SIZE_INCREASE));
 			direction *= -1;

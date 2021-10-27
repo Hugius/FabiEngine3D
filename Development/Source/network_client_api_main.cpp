@@ -16,7 +16,7 @@ NetworkClientAPI::NetworkClientAPI()
 
 NetworkClientAPI::~NetworkClientAPI()
 {
-	if (_isRunning)
+	if(_isRunning)
 	{
 		stop();
 	}
@@ -25,25 +25,25 @@ NetworkClientAPI::~NetworkClientAPI()
 void NetworkClientAPI::start(const string& username)
 {
 	// Must not be running
-	if (_isRunning)
+	if(_isRunning)
 	{
 		Logger::throwError("NetworkClientAPI::start::1");
 	}
 
 	// Validate username
-	if (username.empty())
+	if(username.empty())
 	{
 		Logger::throwError("NetworkClientAPI::start::2");
 	}
-	if (username.size() > NetworkUtils::MAX_USERNAME_CHARACTERS)
+	if(username.size() > NetworkUtils::MAX_USERNAME_CHARACTERS)
 	{
 		Logger::throwError("NetworkClientAPI::start::3");
 	}
-	if (NetworkUtils::isMessageReserved(username))
+	if(NetworkUtils::isMessageReserved(username))
 	{
 		Logger::throwError("NetworkClientAPI::start::4");
 	}
-	if (find(username.begin(), username.end(), ';') != username.end())
+	if(find(username.begin(), username.end(), ';') != username.end())
 	{
 		Logger::throwError("NetworkClientAPI::start::5");
 	}
@@ -56,25 +56,25 @@ void NetworkClientAPI::start(const string& username)
 void NetworkClientAPI::connectToServer(const string& serverIP, const string& serverPort)
 {
 	// Must be running
-	if (!_isRunning)
+	if(!_isRunning)
 	{
 		Logger::throwError("NetworkClientAPI::connectToServer::1");
 	}
 
 	// Must not already be connected
-	if (_isConnectedToServer)
+	if(_isConnectedToServer)
 	{
 		Logger::throwError("NetworkClientAPI::connectToServer::2");
 	}
 
 	// Must not already be connecting
-	if (_isConnectingToServer)
+	if(_isConnectingToServer)
 	{
 		Logger::throwError("NetworkClientAPI::connectToServer::3");
 	}
 
 	// Must be a valid IP
-	if (!isValidServerIP(serverIP))
+	if(!isValidServerIP(serverIP))
 	{
 		Logger::throwError("NetworkClientAPI::connectToServer::4");
 	}
@@ -96,25 +96,25 @@ void NetworkClientAPI::connectToServer(const string& serverIP, const string& ser
 void NetworkClientAPI::disconnectFromServer(bool mustBeAccepted)
 {
 	// Must be running
-	if (!_isRunning)
+	if(!_isRunning)
 	{
 		Logger::throwError("NetworkClientAPI::disconnectFromServer");
 	}
 
 	// Must be connected & optionally accepted
-	if (!_isConnectedToServer || (!_isAcceptedByServer && mustBeAccepted))
+	if(!_isConnectedToServer || (!_isAcceptedByServer && mustBeAccepted))
 	{
 		Logger::throwError("NetworkClientAPI::disconnectFromServer");
 	}
 
 	// Close connection socket
-	if (_connectionSocketID != INVALID_SOCKET)
+	if(_connectionSocketID != INVALID_SOCKET)
 	{
 		closesocket(_connectionSocketID);
 	}
 
 	// Close UDP message socket
-	if (_udpMessageSocketID != INVALID_SOCKET)
+	if(_udpMessageSocketID != INVALID_SOCKET)
 	{
 		closesocket(_udpMessageSocketID);
 	}
@@ -137,19 +137,19 @@ void NetworkClientAPI::disconnectFromServer(bool mustBeAccepted)
 void NetworkClientAPI::stop()
 {
 	// Must be running
-	if (!_isRunning)
+	if(!_isRunning)
 	{
 		Logger::throwError("NetworkClientAPI::stop");
 	}
 
 	// Close TCP socket
-	if (_connectionSocketID != INVALID_SOCKET)
+	if(_connectionSocketID != INVALID_SOCKET)
 	{
 		closesocket(_connectionSocketID);
 	}
 
 	// Close UDP socket
-	if (_udpMessageSocketID != INVALID_SOCKET)
+	if(_udpMessageSocketID != INVALID_SOCKET)
 	{
 		closesocket(_udpMessageSocketID);
 	}

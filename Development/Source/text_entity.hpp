@@ -11,7 +11,7 @@ class TextEntity final : public ImageEntity
 {
 public:
 	using ImageEntity::ImageEntity;
-	
+
 	// Voids
 	void setCentered(bool value);
 	void setDynamic(bool value);

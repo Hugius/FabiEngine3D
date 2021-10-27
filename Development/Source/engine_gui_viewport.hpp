@@ -18,7 +18,7 @@ public:
 
 	void createWindow(const string& ID, Vec2 position, Vec2 size, Vec3 color);
 	void deleteWindow(const string& ID);
-	
+
 	vector<shared_ptr<EngineGuiWindow>>& getWindows();
 
 	shared_ptr<EngineGuiWindow> getWindow(const string& ID);

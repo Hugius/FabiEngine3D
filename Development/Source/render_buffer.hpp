@@ -14,14 +14,14 @@ public:
 	RenderBuffer(RenderBufferType type, const float data[], unsigned int dataCount); // 3D
 	RenderBuffer(float x, float y, float w, float h, bool isCentered); // 2D
 	~RenderBuffer();
-	
+
 	void enableInstancing(const vector<Vec3>& offsets);
 	void disableInstancing();
 
 	const BufferID getVAO();
 
 	const unsigned int getVertexCount();
-	
+
 	const bool isInstanced();
 
 	const RenderBufferType getBufferType();

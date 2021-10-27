@@ -23,7 +23,7 @@ NetworkServerAPI::NetworkServerAPI()
 
 NetworkServerAPI::~NetworkServerAPI()
 {
-	if (_isRunning)
+	if(_isRunning)
 	{
 		stop();
 	}
@@ -32,13 +32,13 @@ NetworkServerAPI::~NetworkServerAPI()
 void NetworkServerAPI::start(unsigned int maxClientCount)
 {
 	// Must not be running
-	if (_isRunning)
+	if(_isRunning)
 	{
 		Logger::throwError("NetworkServerAPI::start::1");
 	}
 
 	// Validate custom client count
-	if (maxClientCount <= 0)
+	if(maxClientCount <= 0)
 	{
 		Logger::throwError("NetworkServerAPI::start::2");
 	}
@@ -60,7 +60,7 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 	// Create TCP address info
 	addrinfo* tcpAddressInfo = nullptr;
 	auto tcpInfoStatusCode = getaddrinfo("0.0.0.0", NetworkUtils::SERVER_PORT.c_str(), &tcpHints, &tcpAddressInfo);
-	if (tcpInfoStatusCode != 0)
+	if(tcpInfoStatusCode != 0)
 	{
 		Logger::throwError("NetworkServerAPI::start::3 ---> ", tcpInfoStatusCode);
 	}
@@ -68,21 +68,21 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 	// Create UDP address info
 	addrinfo* udpAddressInfo = nullptr;
 	auto udpInfoStatusCode = getaddrinfo("0.0.0.0", NetworkUtils::SERVER_PORT.c_str(), &udpHints, &udpAddressInfo);
-	if (udpInfoStatusCode != 0)
+	if(udpInfoStatusCode != 0)
 	{
 		Logger::throwError("NetworkServerAPI::start::4 ---> ", udpInfoStatusCode);
 	}
 
 	// Create socket for listening to client connection requests
 	_connectionSocketID = socket(tcpAddressInfo->ai_family, tcpAddressInfo->ai_socktype, tcpAddressInfo->ai_protocol);
-	if (_connectionSocketID == INVALID_SOCKET)
+	if(_connectionSocketID == INVALID_SOCKET)
 	{
 		Logger::throwError("NetworkServerAPI::start::5 ---> ", WSAGetLastError());
 	}
 
 	// Create socket for handling UDP messages
 	_udpMessageSocketID = socket(udpAddressInfo->ai_family, udpAddressInfo->ai_socktype, udpAddressInfo->ai_protocol);
-	if (_udpMessageSocketID == INVALID_SOCKET)
+	if(_udpMessageSocketID == INVALID_SOCKET)
 	{
 		Logger::throwError("NetworkServerAPI::start::6 ---> ", WSAGetLastError());
 	}
@@ -98,9 +98,9 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 
 	// Bind connection socket
 	auto tcpBindStatusCode = bind(_connectionSocketID, tcpAddressInfo->ai_addr, static_cast<int>(tcpAddressInfo->ai_addrlen));
-	if (tcpBindStatusCode == SOCKET_ERROR)
+	if(tcpBindStatusCode == SOCKET_ERROR)
 	{
-		if (WSAGetLastError() == WSAEADDRINUSE) // Server already running on current machine
+		if(WSAGetLastError() == WSAEADDRINUSE) // Server already running on current machine
 		{
 			Logger::throwWarning("Networking server tried to start: current machine already hosting a server!");
 			freeaddrinfo(tcpAddressInfo);
@@ -115,9 +115,9 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 
 	// Bind UDP message socket
 	auto udpBindStatusCode = bind(_udpMessageSocketID, udpAddressInfo->ai_addr, static_cast<int>(udpAddressInfo->ai_addrlen));
-	if (udpBindStatusCode == SOCKET_ERROR)
+	if(udpBindStatusCode == SOCKET_ERROR)
 	{
-		if (WSAGetLastError() == WSAEADDRINUSE) // Server already running on current machine
+		if(WSAGetLastError() == WSAEADDRINUSE) // Server already running on current machine
 		{
 			Logger::throwWarning("Networking server tried to start: current machine already hosting a server!");
 			freeaddrinfo(tcpAddressInfo);
@@ -132,7 +132,7 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 
 	// Enable listening for any incoming connection requests
 	auto listenStatusCode = listen(_connectionSocketID, SOMAXCONN);
-	if (listenStatusCode == SOCKET_ERROR)
+	if(listenStatusCode == SOCKET_ERROR)
 	{
 		Logger::throwError("NetworkServerAPI::start::9 ---> ", WSAGetLastError());
 	}
@@ -155,7 +155,7 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 void NetworkServerAPI::stop()
 {
 	// Must be running
-	if (!_isRunning)
+	if(!_isRunning)
 	{
 		Logger::throwError("NetworkServerAPI::stop");
 	}
@@ -168,7 +168,7 @@ void NetworkServerAPI::stop()
 
 	// Delete all connected clients
 BEGIN:
-	for (const auto& socketID : _clientSocketIDs)
+	for(const auto& socketID : _clientSocketIDs)
 	{
 		_disconnectClient(socketID);
 		goto BEGIN;

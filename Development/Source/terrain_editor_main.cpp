@@ -26,7 +26,7 @@ void TerrainEditor::load()
 	_fe3d.camera_enableThirdPersonView(INITIAL_CAMERA_YAW, INITIAL_CAMERA_PITCH);
 	_fe3d.camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 	_fe3d.camera_setThirdPersonLookat(Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
-	
+
 	// Default graphics
 	_fe3d.gfx_enableAmbientLighting();
 	_fe3d.gfx_setAmbientLightingColor(Vec3(1.0f));
@@ -83,11 +83,11 @@ void TerrainEditor::unload()
 	// Miscellaneous
 	_gui.getGlobalScreen()->deleteTextField("terrainID");
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
-	if (_fe3d.camera_isThirdPersonViewEnabled())
+	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
 		_fe3d.camera_disableThirdPersonView();
 	}
-	if (_fe3d.misc_isDebugRenderingEnabled())
+	if(_fe3d.misc_isDebugRenderingEnabled())
 	{
 		_fe3d.misc_disableDebugRendering();
 	}

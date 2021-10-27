@@ -33,7 +33,7 @@ void BillboardEntityShadowRenderer::unbind()
 
 void BillboardEntityShadowRenderer::render(const shared_ptr<BillboardEntity> entity)
 {
-	if (entity->isVisible() && entity->isShadowed())
+	if(entity->isVisible() && entity->isShadowed())
 	{
 		// Temporary values
 		const auto buffer = entity->getRenderBuffer();
@@ -41,7 +41,7 @@ void BillboardEntityShadowRenderer::render(const shared_ptr<BillboardEntity> ent
 		// Sprite animation
 		Vec2 uvMultiplier = Vec2(1.0f);
 		Vec2 uvAdder = Vec2(0.0f);
-		if (entity->isSpriteAnimationStarted())
+		if(entity->isSpriteAnimationStarted())
 		{
 			// Retrieve values
 			const auto totalColumns = entity->getTotalSpriteAnimationColumns();
@@ -65,7 +65,7 @@ void BillboardEntityShadowRenderer::render(const shared_ptr<BillboardEntity> ent
 		_shader.uploadUniform("u_minTextureAlpha", MIN_TEXTURE_ALPHA);
 
 		// Bind textures
-		if (entity->hasDiffuseMap())
+		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
@@ -81,7 +81,7 @@ void BillboardEntityShadowRenderer::render(const shared_ptr<BillboardEntity> ent
 		glBindVertexArray(0);
 
 		// Unbind textures
-		if (entity->hasDiffuseMap())
+		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, 0);

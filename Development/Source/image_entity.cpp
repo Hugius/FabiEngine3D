@@ -9,25 +9,25 @@ using std::clamp;
 void ImageEntity::updateTransformation()
 {
 	// Position target
-	if (_position != _positionTarget)
+	if(_position != _positionTarget)
 	{
 		// Update position
 		auto speedMultiplier = Math::normalizeVector(_positionTarget - _position);
 		_position += (speedMultiplier * _positionTargetSpeed);
 
 		// Correct position
-		if (fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)
+		if(fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)
 		{
 			_position.x = _positionTarget.x;
 		}
-		if (fabsf(_positionTarget.y - _position.y) <= _positionTargetSpeed)
+		if(fabsf(_positionTarget.y - _position.y) <= _positionTargetSpeed)
 		{
 			_position.y = _positionTarget.y;
 		}
 	}
 
 	// Rotation target
-	if (_rotation != _rotationTarget)
+	if(_rotation != _rotationTarget)
 	{
 		// Update rotation
 		auto difference = fabsf(_rotation - _rotationTarget);
@@ -37,14 +37,14 @@ void ImageEntity::updateTransformation()
 
 		// Correct rotation
 		_rotation = Math::limitAngle(_rotation);
-		if (Math::calculateAngleDifference(_rotation, _rotationTarget) <= _rotationTargetSpeed)
+		if(Math::calculateAngleDifference(_rotation, _rotationTarget) <= _rotationTargetSpeed)
 		{
 			_rotation = _rotationTarget;
 		}
 	}
 
 	// Size target
-	if (_size != _sizeTarget)
+	if(_size != _sizeTarget)
 	{
 		// Update size
 		auto speedMultiplier = Math::normalizeVector(_sizeTarget - _size);
@@ -52,11 +52,11 @@ void ImageEntity::updateTransformation()
 
 		// Correct size
 		_size = Vec2(max(0.0f, _size.x), max(0.0f, _size.y));
-		if (fabsf(_sizeTarget.x - _size.x) <= _sizeTargetSpeed)
+		if(fabsf(_sizeTarget.x - _size.x) <= _sizeTargetSpeed)
 		{
 			_size.x = _positionTarget.x;
 		}
-		if (fabsf(_sizeTarget.y - _size.y) <= _sizeTargetSpeed)
+		if(fabsf(_sizeTarget.y - _size.y) <= _sizeTargetSpeed)
 		{
 			_size.y = _positionTarget.y;
 		}
@@ -182,11 +182,11 @@ void ImageEntity::setDepth(unsigned int value)
 
 void ImageEntity::startSpriteAnimation(int loops)
 {
-	if (_isSpriteAnimationStarted)
+	if(_isSpriteAnimationStarted)
 	{
 		Logger::throwError("ImageEntity::startSpriteAnimation::1");
 	}
-	if (loops < -1)
+	if(loops < -1)
 	{
 		Logger::throwError("ImageEntity::startSpriteAnimation::2");
 	}
@@ -199,11 +199,11 @@ void ImageEntity::startSpriteAnimation(int loops)
 
 void ImageEntity::pauseSpriteAnimation()
 {
-	if (!_isSpriteAnimationStarted)
+	if(!_isSpriteAnimationStarted)
 	{
 		Logger::throwError("ImageEntity::pauseSpriteAnimation::1");
 	}
-	else if (_isSpriteAnimationPaused)
+	else if(_isSpriteAnimationPaused)
 	{
 		Logger::throwError("ImageEntity::pauseSpriteAnimation::2");
 	}
@@ -213,7 +213,7 @@ void ImageEntity::pauseSpriteAnimation()
 
 void ImageEntity::resumeSpriteAnimation()
 {
-	if (!_isSpriteAnimationPaused)
+	if(!_isSpriteAnimationPaused)
 	{
 		Logger::throwError("ImageEntity::resumeSpriteAnimation");
 	}
@@ -223,7 +223,7 @@ void ImageEntity::resumeSpriteAnimation()
 
 void ImageEntity::stopSpriteAnimationAnimation()
 {
-	if (!_isSpriteAnimationStarted)
+	if(!_isSpriteAnimationStarted)
 	{
 		Logger::throwError("ImageEntity::stopSpriteAnimation");
 	}

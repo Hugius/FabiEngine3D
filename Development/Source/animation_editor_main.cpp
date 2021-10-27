@@ -76,7 +76,7 @@ void AnimationEditor::unload()
 	_unloadGUI();
 
 	// Camera
-	if (_fe3d.camera_isThirdPersonViewEnabled())
+	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
 		_fe3d.camera_disableThirdPersonView();
 	}
@@ -116,7 +116,7 @@ void AnimationEditor::unload()
 	// Miscellaneous
 	_fe3d.reflectionEntity_delete("@@reflection");
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
-	if (_fe3d.misc_isDebugRenderingEnabled())
+	if(_fe3d.misc_isDebugRenderingEnabled())
 	{
 		_fe3d.misc_disableDebugRendering();
 	}

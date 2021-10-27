@@ -62,7 +62,7 @@ shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string& ID)
 {
 	auto result = _getSkyEntity(ID);
 
-	if (result == nullptr)
+	if(result == nullptr)
 	{
 		Logger::throwError("SkyEntityManager::getEntity");
 	}
@@ -72,7 +72,7 @@ shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string& ID)
 
 shared_ptr<SkyEntity> SkyEntityManager::getSelectedMainSky()
 {
-	if (_getSkyEntities().empty() || _selectedMainID.empty())
+	if(_getSkyEntities().empty() || _selectedMainID.empty())
 	{
 		return nullptr;
 	}
@@ -84,7 +84,7 @@ shared_ptr<SkyEntity> SkyEntityManager::getSelectedMainSky()
 
 shared_ptr<SkyEntity> SkyEntityManager::getSelectedMixSky()
 {
-	if (_getSkyEntities().empty() || _selectedMixID.empty())
+	if(_getSkyEntities().empty() || _selectedMixID.empty())
 	{
 		return nullptr;
 	}
@@ -101,7 +101,7 @@ const unordered_map<string, shared_ptr<SkyEntity>>& SkyEntityManager::getEntitie
 
 void SkyEntityManager::selectMainSky(const string& ID)
 {
-	if (isExisting(ID) || ID.empty())
+	if(isExisting(ID) || ID.empty())
 	{
 		_selectedMainID = ID;
 	}
@@ -113,7 +113,7 @@ void SkyEntityManager::selectMainSky(const string& ID)
 
 void SkyEntityManager::selectMixSky(const string& ID)
 {
-	if (isExisting(ID) || ID.empty())
+	if(isExisting(ID) || ID.empty())
 	{
 		_selectedMixID = ID;
 	}
@@ -136,10 +136,10 @@ void SkyEntityManager::update()
 	auto mixSky = getSelectedMixSky();
 
 	// Check if main sky exists
-	if (mainSky != nullptr)
+	if(mainSky != nullptr)
 	{
 		// Update sky exposure
-		if (_isExposureEnabled)
+		if(_isExposureEnabled)
 		{
 			// Values
 			float lightness = mainSky->getLightness(); // Current lightness
@@ -147,11 +147,11 @@ void SkyEntityManager::update()
 			float targetLightness = mainSky->getOriginalLightness() + (((90.0f - pitch) / 90.0f) * _exposureIntensity);
 
 			// Based on verticle angle
-			if (lightness > targetLightness) // Decrease lightness
+			if(lightness > targetLightness) // Decrease lightness
 			{
 				mainSky->setLightness(lightness - (_exposureSpeed * 3.5f));
 			}
-			else if (mainSky->getLightness() < targetLightness) // Increase lightness
+			else if(mainSky->getLightness() < targetLightness) // Increase lightness
 			{
 				mainSky->setLightness(lightness + _exposureSpeed);
 			}
@@ -165,7 +165,7 @@ void SkyEntityManager::update()
 		mainSky->setRotation(mainSky->getRotation() + mainSky->getRotationSpeed());
 
 		// Update rotation matrix
-		if (mainSky->isVisible())
+		if(mainSky->isVisible())
 		{
 			mainSky->updateRotationMatrix();
 		}

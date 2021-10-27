@@ -23,7 +23,7 @@ public:
 	// Booleans
 	bool loadTerrainEntitiesFromFile();
 	bool saveTerrainEntitiesToFile();
-	bool isLoaded();	
+	bool isLoaded();
 
 private:
 	// Voids

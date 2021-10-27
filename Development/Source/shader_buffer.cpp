@@ -27,13 +27,13 @@ ShaderBuffer::ShaderBuffer(const string& vertexFilename, const string& fragmentF
 	const auto fragmentPath = ("shaders\\" + _fragmentFilename);
 
 	// Check if vertex shader file exists
-	if (!exists(rootDir + vertexPath))
+	if(!exists(rootDir + vertexPath))
 	{
 		Logger::throwFatalWarning("Directory `shaders\\` is missing or corrupted!");
 	}
 
 	// Check if fragment shader file exists
-	if (!exists(rootDir + fragmentPath))
+	if(!exists(rootDir + fragmentPath))
 	{
 		Logger::throwFatalWarning("Directory `shaders\\` is missing or corrupted!");
 	}
@@ -71,7 +71,7 @@ void ShaderBuffer::_createProgram(const char* vertexShaderCode, const char* frag
 
 	// Errors vertex shader
 	glGetShaderiv(vertex, GL_COMPILE_STATUS, &success);
-	if (!success) 
+	if(!success)
 	{
 		glGetShaderInfoLog(vertex, 512, nullptr, infoLog);
 		Logger::throwError("ShaderBuffer::_createProgram::1 ---> ", _name, " ", infoLog);
@@ -84,7 +84,7 @@ void ShaderBuffer::_createProgram(const char* vertexShaderCode, const char* frag
 
 	// Errors fragment shader
 	glGetShaderiv(fragment, GL_COMPILE_STATUS, &success);
-	if (!success) 
+	if(!success)
 	{
 		glGetShaderInfoLog(fragment, 512, nullptr, infoLog);
 		Logger::throwError("ShaderBuffer::_createProgram::2 ---> ", _name, " ", infoLog);
@@ -98,7 +98,7 @@ void ShaderBuffer::_createProgram(const char* vertexShaderCode, const char* frag
 
 	// Linking errors 
 	glGetProgramiv(_program, GL_LINK_STATUS, &success);
-	if (!success)
+	if(!success)
 	{
 		glGetProgramInfoLog(_program, 512, nullptr, infoLog);
 		Logger::throwError("ShaderBuffer::_createProgram::3 ---> ", _name, " ", infoLog);
@@ -116,11 +116,11 @@ void ShaderBuffer::_createProgram(const char* vertexShaderCode, const char* frag
 UniformID ShaderBuffer::_getUniformID(const string& uniformID)
 {
 	auto it = _uniformCache.find(uniformID);
-	if (it == _uniformCache.end())
+	if(it == _uniformCache.end())
 	{
 		// Retrieve uniform location
 		auto uniform = glGetUniformLocation(_program, uniformID.c_str());
-		if (uniform == -1)
+		if(uniform == -1)
 		{
 			Logger::throwError("ShaderBuffer::_getUniformID ---> ", uniformID);
 		}
@@ -131,7 +131,8 @@ UniformID ShaderBuffer::_getUniformID(const string& uniformID)
 		// Return new uniform
 		return uniform;
 	}
-	else {
+	else
+	{
 		return it->second; // Return existing uniform
 	}
 }

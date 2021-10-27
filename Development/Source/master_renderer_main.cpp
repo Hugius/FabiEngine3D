@@ -81,7 +81,7 @@ void MasterRenderer::renderEngineLogo(shared_ptr<ImageEntity> logo, shared_ptr<T
 	_imageEntityColorRenderer.render(logo);
 
 	// Render text
-	if (text != nullptr)
+	if(text != nullptr)
 	{
 		_imageEntityColorRenderer.render(text);
 	}
@@ -90,12 +90,12 @@ void MasterRenderer::renderEngineLogo(shared_ptr<ImageEntity> logo, shared_ptr<T
 	_imageEntityColorRenderer.unbind();
 }
 
-void MasterRenderer::renderScene(EntityBus * entityBus)
+void MasterRenderer::renderScene(EntityBus* entityBus)
 {
 	// General stuff
 	_entityBus = entityBus;
 
-	if (_renderBus.isWireFrameRenderingEnabled()) // Wire frame rendering
+	if(_renderBus.isWireFrameRenderingEnabled()) // Wire frame rendering
 	{
 		glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -172,7 +172,7 @@ void MasterRenderer::renderScene(EntityBus * entityBus)
 		// 2D rendering
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		if (_renderBus.isDebugRenderingEnabled()) // Render debug screens
+		if(_renderBus.isDebugRenderingEnabled()) // Render debug screens
 		{
 			glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y + 1);
 			_renderDebugScreens();
@@ -180,10 +180,10 @@ void MasterRenderer::renderScene(EntityBus * entityBus)
 		}
 		else // Render final scene texture
 		{
-			glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y +0);
+			glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y + 0);
 			_renderFinalSceneImage();
 			glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
-			
+
 		}
 
 		// Render image entities & text entities
@@ -215,7 +215,7 @@ void MasterRenderer::reloadDofBlurCaptureBuffer()
 void MasterRenderer::reloadMotionBlurBlurCaptureBuffer()
 {
 	_motionBlurBlurRenderer.resetCaptureBuffer();
-	_motionBlurBlurRenderer.loadCaptureBuffer(Config::getInst().getViewportSize() / _renderBus.getMotionBlurSize	());
+	_motionBlurBlurRenderer.loadCaptureBuffer(Config::getInst().getViewportSize() / _renderBus.getMotionBlurSize());
 }
 
 void MasterRenderer::reloadCubeReflectionCaptureBuffer()
@@ -250,7 +250,7 @@ void MasterRenderer::reloadShadowCaptureBuffer()
 
 void MasterRenderer::_updateMotionBlur()
 {
-	if (_renderBus.isMotionBlurEnabled())
+	if(_renderBus.isMotionBlurEnabled())
 	{
 		static float lastYaw = _camera.getYaw();
 		static float lastPitch = _camera.getPitch();
@@ -265,7 +265,7 @@ void MasterRenderer::_updateMotionBlur()
 
 void MasterRenderer::_updateLensFlare()
 {
-	if (_renderBus.isLensFlareEnabled())
+	if(_renderBus.isLensFlareEnabled())
 	{
 		// Temporary values
 		auto flareSourcePosition = _renderBus.getDirectionalLightingPosition();
@@ -279,7 +279,7 @@ void MasterRenderer::_updateLensFlare()
 		Vec2 flareSourceUV = Vec2(((flareSourceNDC.x + 1.0f) / 2.0f), ((flareSourceNDC.y + 1.0f) / 2.0f));
 
 		// Check if flare source is visible
-		if ((flareSourceNDC.x > -1.0f) && (flareSourceNDC.x < 1.0f) && (flareSourceNDC.y > -1.0f) && (flareSourceNDC.y < 1.0f))
+		if((flareSourceNDC.x > -1.0f) && (flareSourceNDC.x < 1.0f) && (flareSourceNDC.y > -1.0f) && (flareSourceNDC.y < 1.0f))
 		{
 
 			alpha = (1.0f - (max(fabsf(flareSourceNDC.x), fabsf(flareSourceNDC.y)) / _renderBus.getLensFlareSensitivity()));

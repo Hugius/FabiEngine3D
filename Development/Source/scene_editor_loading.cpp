@@ -13,17 +13,17 @@ using std::istringstream;
 bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 {
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("SceneEditor::loadEditorSceneFromFile::1");
 	}
 
 	// Compose file path
 	const string filePath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + filename + ".fe3d");
+							 ("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + filename + ".fe3d");
 
 	// Warning checking
-	if (!Tools::isFileExisting(filePath))
+	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Cannot load scene with ID \"" + filename + "\"!");
 		return false;
@@ -34,7 +34,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 
 	// Read scene data
 	string line;
-	while (getline(file, line))
+	while(getline(file, line))
 	{
 		// For file extraction
 		istringstream iss(line);
@@ -44,7 +44,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 		iss >> lineType;
 
 		// Determine line type
-		if (lineType == "CAMERA_POSITION")
+		if(lineType == "CAMERA_POSITION")
 		{
 			// Data placeholders
 			Vec3 position;
@@ -53,12 +53,12 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			iss >> position.x >> position.y >> position.z;
 
 			// Set position
-			if (_isEditorLoaded)
+			if(_isEditorLoaded)
 			{
 				_fe3d.camera_setPosition(position);
 			}
 		}
-		else if (lineType == "CAMERA_YAW")
+		else if(lineType == "CAMERA_YAW")
 		{
 			// Data placeholders
 			float yaw;
@@ -67,12 +67,12 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			iss >> yaw;
 
 			// Set yaw
-			if (_isEditorLoaded)
+			if(_isEditorLoaded)
 			{
 				_fe3d.camera_setYaw(yaw);
 			}
 		}
-		else if (lineType == "CAMERA_PITCH")
+		else if(lineType == "CAMERA_PITCH")
 		{
 			// Data placeholders
 			float pitch;
@@ -81,12 +81,12 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			iss >> pitch;
 
 			// Set pitch
-			if (_isEditorLoaded)
+			if(_isEditorLoaded)
 			{
 				_fe3d.camera_setPitch(pitch);
 			}
 		}
-		else if (lineType == "SKY")
+		else if(lineType == "SKY")
 		{
 			// Data placeholders
 			string skyID, previewID;
@@ -95,16 +95,16 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			iss >> skyID >> previewID;
 
 			// Create sky
-			if (_copyPreviewSky(skyID, previewID))
+			if(_copyPreviewSky(skyID, previewID))
 			{
 				// Set ID
-				if (_isEditorLoaded)
+				if(_isEditorLoaded)
 				{
 					_currentSkyID = skyID;
 				}
 			}
 		}
-		else if (lineType == "TERRAIN")
+		else if(lineType == "TERRAIN")
 		{
 			// Data placeholders
 			string terrainID, previewID;
@@ -113,16 +113,16 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			iss >> terrainID >> previewID;
 
 			// Create terrain
-			if (_copyPreviewTerrain(terrainID, previewID))
+			if(_copyPreviewTerrain(terrainID, previewID))
 			{
 				// Set ID
-				if (_isEditorLoaded)
+				if(_isEditorLoaded)
 				{
 					_currentTerrainID = terrainID;
 				}
 			}
 		}
-		else if (lineType == "WATER")
+		else if(lineType == "WATER")
 		{
 			// Data placeholders
 			string waterID, previewID;
@@ -132,10 +132,10 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			iss >> waterID >> previewID >> height;
 
 			// Create water
-			if (_copyPreviewWater(waterID, previewID))
+			if(_copyPreviewWater(waterID, previewID))
 			{
 				// Set ID
-				if (_isEditorLoaded)
+				if(_isEditorLoaded)
 				{
 					_currentWaterID = waterID;
 				}
@@ -144,7 +144,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				_fe3d.waterEntity_setHeight(waterID, height);
 			}
 		}
-		else if (lineType == "MODEL")
+		else if(lineType == "MODEL")
 		{
 			// Data placeholders
 			string modelID, previewID, animationID;
@@ -156,10 +156,10 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 
 			// If LOD entity, only load if executing game
 			bool makeInvisible = false;
-			if (modelID[0] == '@')
+			if(modelID[0] == '@')
 			{
 				// Check if loading for scene editor
-				if (_isEditorLoaded)
+				if(_isEditorLoaded)
 				{
 					continue;
 				}
@@ -189,10 +189,10 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			replace(animationID.begin(), animationID.end(), '?', ' ');
 
 			// Check if preview model instancing changed
-			if (_fe3d.modelEntity_isExisting(previewID))
+			if(_fe3d.modelEntity_isExisting(previewID))
 			{
-				if (_fe3d.modelEntity_isInstanced(previewID) && (modelID != previewID.substr(1)) ||
-					!_fe3d.modelEntity_isInstanced(previewID) && (modelID == previewID.substr(1)))
+				if(_fe3d.modelEntity_isInstanced(previewID) && (modelID != previewID.substr(1)) ||
+				   !_fe3d.modelEntity_isInstanced(previewID) && (modelID == previewID.substr(1)))
 				{
 					Logger::throwWarning("Model instancing with ID \"" + modelID + "\" differs from base model!");
 					continue;
@@ -200,22 +200,22 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			}
 
 			// Create model
-			if (_copyPreviewModel(modelID, previewID, position))
+			if(_copyPreviewModel(modelID, previewID, position))
 			{
 				// Set properties
 				_fe3d.modelEntity_setBaseRotation(modelID, rotation);
 				_fe3d.modelEntity_setBaseSize(modelID, size);
 				_fe3d.modelEntity_setStaticToCamera(modelID, isFrozen);
-				
+
 				// Set AABBs responsiveness
-				for (const auto& aabbID : _fe3d.aabbEntity_getChildIDs(modelID, AabbParentType::MODEL_ENTITY))
+				for(const auto& aabbID : _fe3d.aabbEntity_getChildIDs(modelID, AabbParentType::MODEL_ENTITY))
 				{
 					_fe3d.aabbEntity_setRaycastResponsive(aabbID, !isFrozen);
 					_fe3d.aabbEntity_setCollisionResponsive(aabbID, !isFrozen);
 				}
 
 				// Save original transformation
-				if (_isEditorLoaded)
+				if(_isEditorLoaded)
 				{
 					_initialModelPosition[modelID] = position;
 					_initialModelRotation[modelID] = rotation;
@@ -223,24 +223,24 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				}
 
 				// Start animation
-				if (!animationID.empty())
+				if(!animationID.empty())
 				{
 					_animationEditor.startAnimation(animationID, modelID, -1);
 				}
 
 				// Check if instanced
-				if (_fe3d.modelEntity_isInstanced(modelID))
+				if(_fe3d.modelEntity_isInstanced(modelID))
 				{
 					// Read offset data from file
 					vector<Vec3> instancedOffsets;
-					while (true)
+					while(true)
 					{
 						// Check if file has offset data left
 						string nextElement;
 						iss >> nextElement;
 
 						// Check for end of line
-						if (nextElement.empty())
+						if(nextElement.empty())
 						{
 							break;
 						}
@@ -259,13 +259,13 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				}
 
 				// Hide model if LOD (and executing game)
-				if (makeInvisible)
+				if(makeInvisible)
 				{
 					_fe3d.modelEntity_setVisible(modelID, false);
 				}
 			}
 		}
-		else if (lineType == "BILLBOARD")
+		else if(lineType == "BILLBOARD")
 		{
 			// Data placeholders
 			string billboardID, previewID;
@@ -286,13 +286,13 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				size.y;
 
 			// Create billboard
-			if (_copyPreviewBillboard(billboardID, previewID, position))
+			if(_copyPreviewBillboard(billboardID, previewID, position))
 			{
 				_fe3d.billboardEntity_setRotation(billboardID, rotation);
 				_fe3d.billboardEntity_setSize(billboardID, size);
 			}
 		}
-		else if (lineType == "SOUND")
+		else if(lineType == "SOUND")
 		{
 			// Data placeholders
 			string soundID, previewID;
@@ -310,7 +310,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				maxDistance;
 
 			// Create speaker if in editor
-			if (_isEditorLoaded)
+			if(_isEditorLoaded)
 			{
 				// Create model
 				const string newModelID = ("@@speaker_" + soundID);
@@ -329,14 +329,14 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			}
 
 			// Create sound
-			if (_copyPreviewSound(soundID, previewID, position))
+			if(_copyPreviewSound(soundID, previewID, position))
 			{
 				_fe3d.sound_setMaxVolume(soundID, maxVolume);
 				_fe3d.sound_setMaxDistance(soundID, maxDistance);
 				_fe3d.sound_play(soundID, -1, 0);
 			}
 		}
-		else if (lineType == "POINTLIGHT")
+		else if(lineType == "POINTLIGHT")
 		{
 			// Data placeholders
 			string pointlightID;
@@ -360,7 +360,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				shape;
 
 			// Create lamp
-			if (_isEditorLoaded)
+			if(_isEditorLoaded)
 			{
 				// Create model
 				const string newModelID = ("@@lamp_" + pointlightID);
@@ -388,7 +388,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			_fe3d.pointlightEntity_setShape(pointlightID, PointlightShape(shape));
 			_loadedPointlightIDs.push_back(pointlightID);
 		}
-		else if (lineType == "SPOTLIGHT")
+		else if(lineType == "SPOTLIGHT")
 		{
 			// Data placeholders
 			string spotlightID;
@@ -411,7 +411,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				distance;
 
 			// Create torch
-			if (_isEditorLoaded)
+			if(_isEditorLoaded)
 			{
 				// Create model
 				const string newModelID = ("@@torch_" + spotlightID);
@@ -442,7 +442,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			_fe3d.spotlightEntity_setDistance(spotlightID, distance);
 			_loadedSpotlightIDs.push_back(spotlightID);
 		}
-		else if (lineType == "REFLECTION")
+		else if(lineType == "REFLECTION")
 		{
 			// Data placeholders
 			string reflectionID;
@@ -456,7 +456,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				position.z;
 
 			// Create camera
-			if (_isEditorLoaded)
+			if(_isEditorLoaded)
 			{
 				// Create model
 				const string newModelID = ("@@camera_" + reflectionID);
@@ -480,14 +480,14 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			_fe3d.reflectionEntity_capture(reflectionID);
 			_loadedReflectionIDs.push_back(reflectionID);
 		}
-		else if (lineType == "EDITOR_SPEED")
+		else if(lineType == "EDITOR_SPEED")
 		{
-			if (_isEditorLoaded)
+			if(_isEditorLoaded)
 			{
 				iss >> _editorSpeed;
 			}
 		}
-		else if (lineType == "LOD_DISTANCE")
+		else if(lineType == "LOD_DISTANCE")
 		{
 			// Data placeholders
 			float distance;
@@ -498,7 +498,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			// Set distance
 			_fe3d.misc_setLevelOfDetailDistance(distance);
 		}
-		else if (lineType == "PLANAR_REFLECTION_HEIGHT")
+		else if(lineType == "PLANAR_REFLECTION_HEIGHT")
 		{
 			// Data placeholders
 			float height;
@@ -510,7 +510,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			// Set height
 			_fe3d.gfx_setPlanarReflectionHeight(height);
 		}
-		else if (lineType == "LIGHTING_AMBIENT")
+		else if(lineType == "LIGHTING_AMBIENT")
 		{
 			// Data placeholders
 			Vec3 color;
@@ -528,7 +528,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			_fe3d.gfx_setAmbientLightingColor(color);
 			_fe3d.gfx_setAmbientLightingIntensity(intensity);
 		}
-		else if (lineType == "LIGHTING_DIRECTIONAL")
+		else if(lineType == "LIGHTING_DIRECTIONAL")
 		{
 			// Data placeholders
 			Vec3 position, color;
@@ -557,7 +557,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			_fe3d.billboardEntity_setColor("@@lightSource", color);
 			_fe3d.billboardEntity_setVisible("@@lightSource", true);
 		}
-		else if (lineType == "GRAPHICS_SHADOWS")
+		else if(lineType == "GRAPHICS_SHADOWS")
 		{
 			// Data placeholders
 			float size, lightness;
@@ -588,7 +588,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			_fe3d.gfx_setShadowFollowingCamera(isFollowingCamera);
 			_fe3d.gfx_setShadowInterval(interval);
 		}
-		else if (lineType == "GRAPHICS_MOTION_BLUR")
+		else if(lineType == "GRAPHICS_MOTION_BLUR")
 		{
 			// Data placeholders
 			float strength;
@@ -600,7 +600,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			_fe3d.gfx_enableMotionBlur();
 			_fe3d.gfx_setMotionBlurStrength(strength);
 		}
-		else if (lineType == "GRAPHICS_DOF")
+		else if(lineType == "GRAPHICS_DOF")
 		{
 			// Data placeholders
 			bool isDynamic;
@@ -615,7 +615,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			_fe3d.gfx_setDofMaxDistance(maxDistance);
 			_fe3d.gfx_setDofBlurDistance(blurDistance);
 		}
-		else if (lineType == "GRAPHICS_FOG")
+		else if(lineType == "GRAPHICS_FOG")
 		{
 			// Data placeholders
 			float minDistance, maxDistance, thickness;
@@ -631,7 +631,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			_fe3d.gfx_setFogThickness(thickness);
 			_fe3d.gfx_setFogColor(color);
 		}
-		else if (lineType == "GRAPHICS_LENS_FLARE")
+		else if(lineType == "GRAPHICS_LENS_FLARE")
 		{
 			// Data placeholders
 			string flareMapPath;
@@ -650,7 +650,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			_fe3d.gfx_setLensFlareIntensity(intensity);
 			_fe3d.gfx_setLensFlareSensitivity(sensitivity);
 		}
-		else if (lineType == "GRAPHICS_SKY_EXPOSURE")
+		else if(lineType == "GRAPHICS_SKY_EXPOSURE")
 		{
 			// Data placeholders
 			float intensity, speed;
@@ -663,7 +663,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			_fe3d.gfx_setSkyExposureIntensity(intensity);
 			_fe3d.gfx_setSkyExposureSpeed(speed);
 		}
-		else if (lineType == "GRAPHICS_BLOOM")
+		else if(lineType == "GRAPHICS_BLOOM")
 		{
 			// Data placeholders
 			unsigned int type, blurCount;

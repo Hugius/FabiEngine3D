@@ -13,7 +13,7 @@ class TerrainEntityColorRenderer final : public BaseRenderer
 {
 public:
 	using BaseRenderer::BaseRenderer;
-	
+
 	void bind()    override;
 	void unbind()  override;
 	void processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>>& entities);

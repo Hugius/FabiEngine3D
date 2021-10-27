@@ -11,19 +11,19 @@ EngineGuiGlobalScreen::EngineGuiGlobalScreen(FabiEngine3D& fe3d)
 void EngineGuiGlobalScreen::update()
 {
 	// Update scrolling lists
-	for (const auto& scrollingList : _scrollingLists)
+	for(const auto& scrollingList : _scrollingLists)
 	{
 		scrollingList->update(true);
 	}
 
 	// Update writeFields
-	for (const auto& writeField : _writeFields)
+	for(const auto& writeField : _writeFields)
 	{
 		writeField->update(true);
 	}
 
 	// Update buttons
-	for (const auto& button : _buttons)
+	for(const auto& button : _buttons)
 	{
 		button->update(true);
 	}
@@ -33,13 +33,13 @@ void EngineGuiGlobalScreen::update()
 }
 
 void EngineGuiGlobalScreen::createScrollingList(const string& ID, Vec2 position, Vec2 size, Vec3 color,
-	Vec3 buttonColor, Vec3 buttonHoverColor, Vec3 textColor, Vec3 textHoverColor, Vec2 charSize)
+												Vec3 buttonColor, Vec3 buttonHoverColor, Vec3 textColor, Vec3 textHoverColor, Vec2 charSize)
 {
 	_scrollingLists.push_back(make_shared<EngineGuiScrollingList>(_fe3d, "globalscreen", ID, position, size, color, buttonColor, buttonHoverColor, textColor, textHoverColor, charSize));
 }
 
-void EngineGuiGlobalScreen::createWriteField(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, Vec3 textColor, Vec3 textHoverColor, 
-	bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed)
+void EngineGuiGlobalScreen::createWriteField(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, Vec3 textColor, Vec3 textHoverColor,
+											 bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed)
 {
 	_writeFields.push_back(make_shared<EngineGuiWriteField>(_fe3d, "globalscreen", ID, position, size, color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed));
 }
@@ -71,9 +71,9 @@ void EngineGuiGlobalScreen::createTextField(const string& ID, Vec2 position, Vec
 
 bool EngineGuiGlobalScreen::isScrollingListExisting(const string& ID)
 {
-	for (const auto& scrollingList : _scrollingLists)
+	for(const auto& scrollingList : _scrollingLists)
 	{
-		if (ID == scrollingList->getID())
+		if(ID == scrollingList->getID())
 		{
 			return true;
 		}
@@ -84,9 +84,9 @@ bool EngineGuiGlobalScreen::isScrollingListExisting(const string& ID)
 
 bool EngineGuiGlobalScreen::isWriteFieldExisting(const string& ID)
 {
-	for (const auto& writeField : _writeFields)
+	for(const auto& writeField : _writeFields)
 	{
-		if (ID == writeField->getID())
+		if(ID == writeField->getID())
 		{
 			return true;
 		}
@@ -97,9 +97,9 @@ bool EngineGuiGlobalScreen::isWriteFieldExisting(const string& ID)
 
 bool EngineGuiGlobalScreen::isButtonExisting(const string& ID)
 {
-	for (const auto& button : _buttons)
+	for(const auto& button : _buttons)
 	{
-		if (ID == button->getID())
+		if(ID == button->getID())
 		{
 			return true;
 		}
@@ -110,9 +110,9 @@ bool EngineGuiGlobalScreen::isButtonExisting(const string& ID)
 
 bool EngineGuiGlobalScreen::isRectangleExisting(const string& ID)
 {
-	for (const auto& rectangle : _rectangles)
+	for(const auto& rectangle : _rectangles)
 	{
-		if (ID == rectangle->getID())
+		if(ID == rectangle->getID())
 		{
 			return true;
 		}
@@ -123,9 +123,9 @@ bool EngineGuiGlobalScreen::isRectangleExisting(const string& ID)
 
 bool EngineGuiGlobalScreen::isTextFieldExisting(const string& ID)
 {
-	for (const auto& textField : _textFields)
+	for(const auto& textField : _textFields)
 	{
-		if (ID == textField->getID())
+		if(ID == textField->getID())
 		{
 			return true;
 		}
@@ -137,9 +137,9 @@ bool EngineGuiGlobalScreen::isTextFieldExisting(const string& ID)
 shared_ptr<EngineGuiScrollingList> EngineGuiGlobalScreen::getScrollingList(const string& ID)
 {
 	// Retrieve scrolling list
-	for (const auto& scrollingList : _scrollingLists)
+	for(const auto& scrollingList : _scrollingLists)
 	{
-		if (ID == scrollingList->getID())
+		if(ID == scrollingList->getID())
 		{
 			return scrollingList;
 		}
@@ -152,9 +152,9 @@ shared_ptr<EngineGuiScrollingList> EngineGuiGlobalScreen::getScrollingList(const
 shared_ptr<EngineGuiWriteField> EngineGuiGlobalScreen::getWriteField(const string& ID)
 {
 	// Retrieve write field
-	for (const auto& writeField : _writeFields)
+	for(const auto& writeField : _writeFields)
 	{
-		if (ID == writeField->getID())
+		if(ID == writeField->getID())
 		{
 			return writeField;
 		}
@@ -167,9 +167,9 @@ shared_ptr<EngineGuiWriteField> EngineGuiGlobalScreen::getWriteField(const strin
 shared_ptr<EngineGuiButton> EngineGuiGlobalScreen::getButton(const string& ID)
 {
 	// Retrieve button
-	for (const auto& button : _buttons)
+	for(const auto& button : _buttons)
 	{
-		if (ID == button->getID())
+		if(ID == button->getID())
 		{
 			return button;
 		}
@@ -182,9 +182,9 @@ shared_ptr<EngineGuiButton> EngineGuiGlobalScreen::getButton(const string& ID)
 shared_ptr<EngineGuiRectangle> EngineGuiGlobalScreen::getRectangle(const string& ID)
 {
 	// Retrieve rectangle
-	for (const auto& rectangle : _rectangles)
+	for(const auto& rectangle : _rectangles)
 	{
-		if (ID == rectangle->getID())
+		if(ID == rectangle->getID())
 		{
 			return rectangle;
 		}
@@ -197,9 +197,9 @@ shared_ptr<EngineGuiRectangle> EngineGuiGlobalScreen::getRectangle(const string&
 shared_ptr<EngineGuiTextField> EngineGuiGlobalScreen::getTextField(const string& ID)
 {
 	// Retrieve text field
-	for (const auto& textField : _textFields)
+	for(const auto& textField : _textFields)
 	{
-		if (ID == textField->getID())
+		if(ID == textField->getID())
 		{
 			return textField;
 		}
@@ -237,9 +237,9 @@ const vector<shared_ptr<EngineGuiTextField>>& EngineGuiGlobalScreen::getTextFiel
 void EngineGuiGlobalScreen::deleteScrollingList(const string& ID)
 {
 	// Delete scrolling list
-	for (size_t i = 0; i < _scrollingLists.size(); i++)
+	for(size_t i = 0; i < _scrollingLists.size(); i++)
 	{
-		if (ID == _scrollingLists[i]->getID())
+		if(ID == _scrollingLists[i]->getID())
 		{
 			_scrollingLists.erase(_scrollingLists.begin() + i);
 			return;
@@ -253,9 +253,9 @@ void EngineGuiGlobalScreen::deleteScrollingList(const string& ID)
 void EngineGuiGlobalScreen::deleteWriteField(const string& ID)
 {
 	// Delete write field
-	for (size_t i = 0; i < _writeFields.size(); i++)
+	for(size_t i = 0; i < _writeFields.size(); i++)
 	{
-		if (ID == _writeFields[i]->getID())
+		if(ID == _writeFields[i]->getID())
 		{
 			_writeFields.erase(_writeFields.begin() + i);
 			return;
@@ -269,9 +269,9 @@ void EngineGuiGlobalScreen::deleteWriteField(const string& ID)
 void EngineGuiGlobalScreen::deleteButton(const string& ID)
 {
 	// Delete button
-	for (size_t i = 0; i < _buttons.size(); i++)
+	for(size_t i = 0; i < _buttons.size(); i++)
 	{
-		if (ID == _buttons[i]->getID())
+		if(ID == _buttons[i]->getID())
 		{
 			_buttons.erase(_buttons.begin() + i);
 			return;
@@ -285,9 +285,9 @@ void EngineGuiGlobalScreen::deleteButton(const string& ID)
 void EngineGuiGlobalScreen::deleteRectangle(const string& ID)
 {
 	// Delete rectangle
-	for (size_t i = 0; i < _rectangles.size(); i++)
+	for(size_t i = 0; i < _rectangles.size(); i++)
 	{
-		if (ID == _rectangles[i]->getID())
+		if(ID == _rectangles[i]->getID())
 		{
 			_rectangles.erase(_rectangles.begin() + i);
 			return;
@@ -301,9 +301,9 @@ void EngineGuiGlobalScreen::deleteRectangle(const string& ID)
 void EngineGuiGlobalScreen::deleteTextField(const string& ID)
 {
 	// Delete text field
-	for (size_t i = 0; i < _textFields.size(); i++)
+	for(size_t i = 0; i < _textFields.size(); i++)
 	{
-		if (ID == _textFields[i]->getID())
+		if(ID == _textFields[i]->getID())
 		{
 			_textFields.erase(_textFields.begin() + i);
 			return;

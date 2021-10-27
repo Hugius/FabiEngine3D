@@ -14,7 +14,7 @@ void FabiEngine3D::textEntity_create(const string& ID, bool isCentered, bool isD
 void FabiEngine3D::textEntity_delete(const string& ID)
 {
 	// Check if text if dynamic
-	if (_core->_textEntityManager.isExisting(ID) && _core->_textEntityManager.getEntity(ID)->isDynamic())
+	if(_core->_textEntityManager.isExisting(ID) && _core->_textEntityManager.getEntity(ID)->isDynamic())
 	{
 		_core->_textEntityManager.deleteDynamicTextEntity(ID);
 	}
@@ -49,9 +49,9 @@ void FabiEngine3D::textEntity_setFont(const string& ID, const string& fontPath)
 
 	// Load text
 	auto textContent = entity->getTextContent();
-	if (!textContent.empty())
+	if(!textContent.empty())
 	{
-		if (entity->isDynamic())
+		if(entity->isDynamic())
 		{
 			_core->_textEntityManager.loadCharacters(ID);
 		}
@@ -69,7 +69,7 @@ void FabiEngine3D::textEntity_setTextContent(const string& ID, const string& tex
 
 	// Font must be loaded
 	auto fontPath = entity->getFontPath();
-	if (fontPath.empty())
+	if(fontPath.empty())
 	{
 		Logger::throwWarning("Tried to set text content of text with ID \"" + ID + "\": no font loaded!");
 		return;
@@ -80,18 +80,18 @@ void FabiEngine3D::textEntity_setTextContent(const string& ID, const string& tex
 
 	// Calculate new size
 	Vec2 newSize = entity->getSize();
-	if (charWidth >= 0.0f)
+	if(charWidth >= 0.0f)
 	{
 		newSize.x = (charWidth * static_cast<float>(textContent.size()));
 	}
-	if (charHeight >= 0.0f)
+	if(charHeight >= 0.0f)
 	{
 		newSize.y = charHeight;
 	}
 	entity->setSize(newSize);
 
 	// Reload text
-	if (entity->isDynamic())
+	if(entity->isDynamic())
 	{
 		_core->_textEntityManager.loadCharacters(ID);
 	}
@@ -210,7 +210,7 @@ const vector<string> FabiEngine3D::textEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (const auto& [keyID, entity] : _core->_textEntityManager.getEntities())
+	for(const auto& [keyID, entity] : _core->_textEntityManager.getEntities())
 	{
 		IDs.push_back(entity->getID());
 	}

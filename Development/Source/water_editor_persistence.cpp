@@ -13,17 +13,17 @@ using std::istringstream;
 const vector<string> WaterEditor::getAllWaterTexturePathsFromFile()
 {
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("WaterEditor::getAllWaterTexturePathsFromFile");
 	}
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\data\\water.fe3d";
+														 ("projects\\" + _currentProjectID)) + "\\data\\water.fe3d";
 
 	// Warning checking
-	if (!Tools::isFileExisting(filePath))
+	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `water.fe3d` missing!");
 		return {};
@@ -35,7 +35,7 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile()
 	// Read water data
 	vector<string> texturePaths;
 	string line;
-	while (getline(file, line))
+	while(getline(file, line))
 	{
 		// Values
 		string waterID, dudvMapPath, normalMapPath, displacementMapPath;
@@ -59,15 +59,15 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile()
 		replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
 
 		// Save file path
-		if (!dudvMapPath.empty())
+		if(!dudvMapPath.empty())
 		{
 			texturePaths.push_back(dudvMapPath);
 		}
-		if (!normalMapPath.empty())
+		if(!normalMapPath.empty())
 		{
 			texturePaths.push_back(normalMapPath);
 		}
-		if (!displacementMapPath.empty())
+		if(!displacementMapPath.empty())
 		{
 			texturePaths.push_back(displacementMapPath);
 		}
@@ -83,7 +83,7 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile()
 bool WaterEditor::loadWaterEntitiesFromFile()
 {
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("WaterEditor::loadWaterEntitiesFromFile");
 	}
@@ -93,10 +93,10 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\data\\water.fe3d";
+														 ("projects\\" + _currentProjectID)) + "\\data\\water.fe3d";
 
 	// Warning checking
-	if (!Tools::isFileExisting(filePath))
+	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `water.fe3d` missing!");
 		return false;
@@ -107,7 +107,7 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 
 	// Read water data
 	string line;
-	while (getline(file, line))
+	while(getline(file, line))
 	{
 		// Values
 		string waterID, dudvMapPath, normalMapPath, displacementMapPath;
@@ -155,25 +155,25 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 		_fe3d.waterEntity_create(waterID);
 
 		// Check if water creation went well
-		if (_fe3d.waterEntity_isExisting(waterID))
+		if(_fe3d.waterEntity_isExisting(waterID))
 		{
 			// Add water ID
 			_loadedWaterIDs.push_back(waterID);
 
 			// DUDV map
-			if (dudvMapPath != "")
+			if(dudvMapPath != "")
 			{
 				_fe3d.waterEntity_setDudvMap(waterID, dudvMapPath);
 			}
 
 			// Normal map
-			if (normalMapPath != "")
+			if(normalMapPath != "")
 			{
 				_fe3d.waterEntity_setNormalMap(waterID, normalMapPath);
 			}
 
 			// Displacement map
-			if (displacementMapPath != "")
+			if(displacementMapPath != "")
 			{
 				_fe3d.waterEntity_setDisplacementMap(waterID, displacementMapPath);
 			}
@@ -208,26 +208,26 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 bool WaterEditor::saveWaterEntitiesToFile()
 {
 	// Editor must be loaded
-	if (!_isEditorLoaded)
+	if(!_isEditorLoaded)
 	{
 		return false;
 	}
 
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("WaterEditor::saveWaterEntitiesToFile");
 	}
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\data\\water.fe3d";
+														 ("projects\\" + _currentProjectID)) + "\\data\\water.fe3d";
 
 	// Load water file
 	ofstream file(filePath);
 
 	// Write water data
-	for (const auto& waterID : _loadedWaterIDs)
+	for(const auto& waterID : _loadedWaterIDs)
 	{
 		// Values
 		auto dudvMapPath = _fe3d.waterEntity_getDudvMapPath(waterID);

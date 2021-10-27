@@ -15,9 +15,9 @@ bool AnimationEditor::isLoaded()
 
 void AnimationEditor::_deleteAnimation(const string& ID)
 {
-	for (size_t i = 0; i < _animations.size(); i++)
+	for(size_t i = 0; i < _animations.size(); i++)
 	{
-		if (_animations[i]->getID() == ID)
+		if(_animations[i]->getID() == ID)
 		{
 			_animations.erase(_animations.begin() + i);
 			return;
@@ -35,15 +35,15 @@ bool AnimationEditor::_hasReachedFloat(float first, float second, float speed)
 bool AnimationEditor::_comparePartIDs(vector<string> first, vector<string> second)
 {
 	// Check size
-	if (first.size() != second.size())
+	if(first.size() != second.size())
 	{
 		return false;
 	}
 
 	// Check content
-	for (size_t i = 0; i < first.size(); i++)
+	for(size_t i = 0; i < first.size(); i++)
 	{
-		if (first[i] != second[i])
+		if(first[i] != second[i])
 		{
 			return false;
 		}
@@ -55,9 +55,9 @@ bool AnimationEditor::_comparePartIDs(vector<string> first, vector<string> secon
 
 shared_ptr<Animation> AnimationEditor::_getAnimation(const string& ID)
 {
-	for (const auto& animation : _animations)
+	for(const auto& animation : _animations)
 	{
-		if (animation->getID() == ID)
+		if(animation->getID() == ID)
 		{
 			return animation;
 		}
@@ -71,7 +71,7 @@ const vector<string> AnimationEditor::getAllAnimationIDs()
 	vector<string> IDs;
 
 	// Find all IDs
-	for (const auto& animation : _animations)
+	for(const auto& animation : _animations)
 	{
 		IDs.push_back(animation->getID());
 	}
@@ -86,7 +86,7 @@ const vector<string> AnimationEditor::getStartedAnimationIDs()
 {
 	set<string> names;
 
-	for (const auto& [idPair, animation] : _startedAnimations)
+	for(const auto& [idPair, animation] : _startedAnimations)
 	{
 		names.insert(idPair.first);
 	}
@@ -98,9 +98,9 @@ const vector<string> AnimationEditor::getStartedAnimationIDs(const string& model
 {
 	set<string> names;
 
-	for (const auto& [idPair, animation] : _startedAnimations)
+	for(const auto& [idPair, animation] : _startedAnimations)
 	{
-		if (modelID == idPair.second)
+		if(modelID == idPair.second)
 		{
 			names.insert(idPair.first);
 		}

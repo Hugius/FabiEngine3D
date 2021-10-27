@@ -35,7 +35,7 @@ public:
 private:
 	string _ID = "";
 	string _filePath = "";
-	
+
 	Mix_Chunk* _dataPointer = nullptr;
 
 	Vec3 _position = Vec3(0.0f);

@@ -11,10 +11,10 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 	auto closingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), ')');
 
 	// Check if function call has opening & closing parentheses
-	if (openingParanthesisFound != scriptLine.end() && closingParanthesisFound != scriptLine.end())
+	if(openingParanthesisFound != scriptLine.end() && closingParanthesisFound != scriptLine.end())
 	{
 		// Check if function call ends with a paranthesis
-		if (scriptLine.back() != ')')
+		if(scriptLine.back() != ')')
 		{
 			_throwScriptError("function call must end with a paranthesis!");
 		}
@@ -27,32 +27,32 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 			auto arguments = _extractValuesFromListString(argumentString);
 
 			// Check if argument extraction went well
-			if (!_hasThrownError)
+			if(!_hasThrownError)
 			{
 				// Temporary values
 				auto functionName = scriptLine.substr(0, parenthesisIndex);
 
 				// Determine type of function
-				if (functionName == "misc:list_concat")
+				if(functionName == "misc:list_concat")
 				{
 					auto types = { SVT::STRING, SVT::STRING };
 
 					// Validate arguments
-					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						// Temporary values
 						auto firstName = arguments[0].getString();
 						auto secondName = arguments[1].getString();
 
 						// Check if first variable not existing
-						if (!_isLocalVariableExisting(firstName) && !_isGlobalVariableExisting(firstName))
+						if(!_isLocalVariableExisting(firstName) && !_isGlobalVariableExisting(firstName))
 						{
 							_throwScriptError("list variable \"" + firstName + "\" not found!");
 							return returnValues;
 						}
 
 						// Check if second variable not existing
-						if (!_isLocalVariableExisting(secondName) && !_isGlobalVariableExisting(secondName))
+						if(!_isLocalVariableExisting(secondName) && !_isGlobalVariableExisting(secondName))
 						{
 							_throwScriptError("list variable \"" + secondName + "\" not found!");
 							return returnValues;
@@ -60,7 +60,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 
 						// Check if first variable is a list
 						auto firstListVariable = (_isLocalVariableExisting(firstName) ? _getLocalVariable(firstName) : _getGlobalVariable(firstName));
-						if (firstListVariable.getType() == ScriptVariableType::SINGLE)
+						if(firstListVariable.getType() == ScriptVariableType::SINGLE)
 						{
 							_throwScriptError("variable \"" + firstName + "\" is not a list!");
 							return returnValues;
@@ -68,7 +68,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 
 						// Check if second variable is a list
 						auto secondListVariable = (_isLocalVariableExisting(secondName) ? _getLocalVariable(secondName) : _getGlobalVariable(secondName));
-						if (secondListVariable.getType() == ScriptVariableType::SINGLE)
+						if(secondListVariable.getType() == ScriptVariableType::SINGLE)
 						{
 							_throwScriptError("variable \"" + secondName + "\" is not a list!");
 							return returnValues;
@@ -78,24 +78,24 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						auto firstListValues = firstListVariable.getValues();
 						auto secondListValues = secondListVariable.getValues();
 						firstListValues.insert(firstListValues.end(), secondListValues.begin(), secondListValues.end());
-						for (const auto& value : firstListValues)
+						for(const auto& value : firstListValues)
 						{
 							returnValues.push_back(*value);
 						}
 					}
 				}
-				else if (functionName == "misc:list_get_size")
+				else if(functionName == "misc:list_get_size")
 				{
 					auto types = { SVT::STRING };
 
 					// Validate arguments
-					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						// Temporary values
 						auto listName = arguments[0].getString();
 
 						// Check if variable not existing
-						if (!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
+						if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 						{
 							_throwScriptError("list variable \"" + listName + "\" not found!");
 							return returnValues;
@@ -103,7 +103,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 
 						// Check if variable is not a list
 						auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
-						if (listVariable.getType() == ScriptVariableType::SINGLE)
+						if(listVariable.getType() == ScriptVariableType::SINGLE)
 						{
 							_throwScriptError("variable \"" + listName + "\" is not a list!");
 							return returnValues;
@@ -114,15 +114,15 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 					}
 				}
-				else if (functionName == "misc:list_contains")
+				else if(functionName == "misc:list_contains")
 				{
 					auto types = { SVT::STRING };
 
 					// Validate arguments
-					if (_validateListValueCount(arguments, 2))
+					if(_validateListValueCount(arguments, 2))
 					{
 						// List name must be string
-						if (arguments[0].getType() != SVT::STRING)
+						if(arguments[0].getType() != SVT::STRING)
 						{
 							_throwScriptError("wrong value type(s)!");
 							return returnValues;
@@ -130,7 +130,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 
 						// Check if variable does not exist
 						auto listName = arguments[0].getString();
-						if (!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
+						if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 						{
 							_throwScriptError("list variable \"" + listName + "\" not found!");
 							return returnValues;
@@ -138,7 +138,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 
 						// Check if variable is not a list
 						auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
-						if (listVariable.getType() == ScriptVariableType::SINGLE)
+						if(listVariable.getType() == ScriptVariableType::SINGLE)
 						{
 							_throwScriptError("variable \"" + listName + "\" is not a list!");
 							return returnValues;
@@ -146,37 +146,37 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 
 						// Try to find value
 						bool foundValue = false;
-						for (const auto& value : listVariable.getValues())
+						for(const auto& value : listVariable.getValues())
 						{
 							if
 								(
-									(value->getType() == SVT::VEC3 &&
-									arguments[1].getType() == SVT::VEC3 &&
-									value->getVec3() == arguments[1].getVec3())
+								(value->getType() == SVT::VEC3 &&
+								arguments[1].getType() == SVT::VEC3 &&
+								value->getVec3() == arguments[1].getVec3())
 
-									||
+								||
 
-									(value->getType() == SVT::STRING &&
-									arguments[1].getType() == SVT::STRING &&
-									value->getString() == arguments[1].getString())
+								(value->getType() == SVT::STRING &&
+								arguments[1].getType() == SVT::STRING &&
+								value->getString() == arguments[1].getString())
 
-									||
+								||
 
-									(value->getType() == SVT::DECIMAL &&
-									arguments[1].getType() == SVT::DECIMAL &&
-									value->getDecimal() == arguments[1].getDecimal())
+								(value->getType() == SVT::DECIMAL &&
+								arguments[1].getType() == SVT::DECIMAL &&
+								value->getDecimal() == arguments[1].getDecimal())
 
-									||
+								||
 
-									(value->getType() == SVT::INTEGER &&
-									arguments[1].getType() == SVT::INTEGER &&
-									value->getInteger() == arguments[1].getInteger())
+								(value->getType() == SVT::INTEGER &&
+								arguments[1].getType() == SVT::INTEGER &&
+								value->getInteger() == arguments[1].getInteger())
 
-									||
+								||
 
-									(value->getType() == SVT::BOOLEAN &&
-									arguments[1].getType() == SVT::BOOLEAN &&
-									value->getBoolean() == arguments[1].getBoolean())
+								(value->getType() == SVT::BOOLEAN &&
+								arguments[1].getType() == SVT::BOOLEAN &&
+								value->getBoolean() == arguments[1].getBoolean())
 								)
 							{
 								foundValue = true;
@@ -188,18 +188,18 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, foundValue));
 					}
 				}
-				else if (functionName == "misc:list_reverse")
+				else if(functionName == "misc:list_reverse")
 				{
 					auto types = { SVT::STRING };
 
 					// Validate arguments
-					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						// Temporary values
 						auto listName = arguments[0].getString();
 
 						// Check if variable not existing
-						if (!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
+						if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 						{
 							_throwScriptError("list variable \"" + listName + "\" not found!");
 							return returnValues;
@@ -207,7 +207,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 
 						// Check if variable is not a list
 						auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
-						if (listVariable.getType() == ScriptVariableType::SINGLE)
+						if(listVariable.getType() == ScriptVariableType::SINGLE)
 						{
 							_throwScriptError("variable \"" + listName + "\" is not a list!");
 							return returnValues;
@@ -216,55 +216,55 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						// Return list elements in reverse order
 						auto values = listVariable.getValues();
 						reverse(values.begin(), values.end());
-						for (const auto& value : values)
+						for(const auto& value : values)
 						{
 							returnValues.push_back(*value);
 						}
 					}
 				}
-				else if (functionName == "misc:string_concat")
+				else if(functionName == "misc:string_concat")
 				{
 					auto types = { SVT::STRING, SVT::STRING };
 
 					// Validate arguments
-					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, arguments[0].getString() + arguments[1].getString()));
 					}
 				}
-				else if (functionName == "misc:string_get_size")
+				else if(functionName == "misc:string_get_size")
 				{
 					auto types = { SVT::STRING };
 
 					// Validate arguments
-					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto result = arguments[0].getString().size();
 						returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 					}
 				}
-				else if (functionName == "misc:string_contains")
+				else if(functionName == "misc:string_contains")
 				{
 					auto types = { SVT::STRING, SVT::STRING };
 
 					// Validate arguments
-					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto result = (arguments[0].getString().find(arguments[1].getString()) != string::npos);
 						returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 					}
 				}
-				else if (functionName == "misc:string_get_part")
+				else if(functionName == "misc:string_get_part")
 				{
 					auto types = { SVT::STRING, SVT::INTEGER, SVT::INTEGER };
 
 					// Validate arguments
-					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						// Validate index
-						if ((arguments[1].getInteger() < 0) ||
-							(arguments[1].getInteger() > static_cast<int>(arguments[0].getString().size())) ||
-							(arguments[2].getInteger() < 0))
+						if((arguments[1].getInteger() < 0) ||
+						   (arguments[1].getInteger() > static_cast<int>(arguments[0].getString().size())) ||
+						   (arguments[2].getInteger() < 0))
 						{
 							_throwScriptError("incorrect string part index/indices!");
 							return returnValues;
@@ -274,16 +274,16 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 					}
 				}
-				else if (functionName == "misc:string_split")
+				else if(functionName == "misc:string_split")
 				{
 					auto types = { SVT::STRING, SVT::STRING };
 
 					// Validate arguments
-					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						// Validate splitter
-						if ((arguments[1].getString().size() > 1) ||
-							(arguments[0].getString().find(arguments[1].getString()) == string::npos))
+						if((arguments[1].getString().size() > 1) ||
+						   (arguments[0].getString().find(arguments[1].getString()) == string::npos))
 						{
 							_throwScriptError("string splitter not found!");
 							return returnValues;
@@ -293,14 +293,14 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						string fullString = arguments[0].getString();
 						string splitter = arguments[1].getString();
 						string stringPart = "";
-						for (size_t i = 0; i < fullString.size(); i++)
+						for(size_t i = 0; i < fullString.size(); i++)
 						{
-							if (fullString[i] == splitter.back()) // Found splitter
+							if(fullString[i] == splitter.back()) // Found splitter
 							{
 								returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, stringPart));
 								stringPart = "";
 							}
-							else if (i == (fullString.size() - 1)) // End of string
+							else if(i == (fullString.size() - 1)) // End of string
 							{
 								stringPart += fullString[i];
 								returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, stringPart));
@@ -309,21 +309,21 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 							{
 								stringPart += fullString[i];
 							}
-						}						
+						}
 					}
 				}
-				else if (functionName == "misc:string_reverse")
+				else if(functionName == "misc:string_reverse")
 				{
 					auto types = { SVT::STRING };
 
 					// Validate arguments
-					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						// Compose string in reverse
 						string result = "";
 						string content = arguments[0].getString();
 						reverse(content.begin(), content.end());
-						for (const auto& character : content)
+						for(const auto& character : content)
 						{
 							result += character;
 						}
@@ -332,23 +332,23 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 					}
 				}
-				else if (functionName == "misc:get_random_integer")
+				else if(functionName == "misc:get_random_integer")
 				{
 					auto types = { SVT::INTEGER, SVT::INTEGER };
 
 					// Validate arguments
-					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto result = Math::getRandomInteger(arguments[0].getInteger(), arguments[1].getInteger());
 						returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
 					}
 				}
-				else if (functionName == "misc:get_random_decimal")
+				else if(functionName == "misc:get_random_decimal")
 				{
 					auto types = { SVT::DECIMAL, SVT::DECIMAL };
 
 					// Validate arguments
-					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto result = Math::getRandomFloat(arguments[0].getDecimal(), arguments[1].getDecimal());
 						returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));

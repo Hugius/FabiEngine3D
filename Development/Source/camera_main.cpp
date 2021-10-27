@@ -66,7 +66,7 @@ void Camera::update(Ivec2 lastCursorPosition)
 	const int yMiddle = bottom + (Config::getInst().getViewportSize().y / 2);
 
 	// Update cursor centering
-	if (_mustCenterCursor)
+	if(_mustCenterCursor)
 	{
 		_window.setCursorPosition({ xMiddle, yMiddle });
 		_mustCenterCursor = false;
@@ -74,16 +74,16 @@ void Camera::update(Ivec2 lastCursorPosition)
 	}
 
 	// Check if cursor reached center or cursor moved
-	if (_cursorIsBeingCentered)
+	if(_cursorIsBeingCentered)
 	{
-		if (currenCursorPosition == Ivec2(xMiddle, yMiddle) || currenCursorPosition != lastCursorPosition)
+		if(currenCursorPosition == Ivec2(xMiddle, yMiddle) || currenCursorPosition != lastCursorPosition)
 		{
 			_cursorIsBeingCentered = false;
 		}
 	}
 
 	// Update first person camera
-	if (_isFirstPersonViewEnabled && !_cursorIsBeingCentered)
+	if(_isFirstPersonViewEnabled && !_cursorIsBeingCentered)
 	{
 		// Offset between current cursor position & middle of the screen
 		float xOffset = static_cast<float>(currenCursorPosition.x - xMiddle);
@@ -124,7 +124,7 @@ void Camera::update(Ivec2 lastCursorPosition)
 	}
 
 	// Update third person camera
-	if (_isThirdPersonViewEnabled && !_cursorIsBeingCentered)
+	if(_isThirdPersonViewEnabled && !_cursorIsBeingCentered)
 	{
 		// Offset between current cursor position & middle of the screen
 		float xOffset = static_cast<float>(currenCursorPosition.x - xMiddle);
@@ -140,7 +140,7 @@ void Camera::update(Ivec2 lastCursorPosition)
 		_thirdPersonYaw -= _thirdPersonYawAcceleration;
 		_thirdPersonYaw = Math::limitAngle(_thirdPersonYaw);
 		_thirdPersonYawAcceleration *= 0.75f;
-		
+
 		// Update pitch
 		_thirdPersonPitchAcceleration += yOffset;
 		_thirdPersonPitchAcceleration = clamp(_thirdPersonPitchAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
@@ -159,7 +159,7 @@ void Camera::update(Ivec2 lastCursorPosition)
 
 		// Limit view distance
 		_thirdPersonDistance = max(0.0f, _thirdPersonDistance);
-		
+
 		// Calculate camera position
 		_position.x = _thirdPersonLookat.x + (_thirdPersonDistance * xMultiplier);
 		_position.y = _thirdPersonLookat.y + (_thirdPersonDistance * yMultiplier);

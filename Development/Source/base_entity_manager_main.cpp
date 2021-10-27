@@ -10,17 +10,17 @@ BaseEntityManager::BaseEntityManager(EntityType type, MeshLoader& meshLoader, Te
 	_textureLoader(textureLoader),
 	_renderBus(renderBus)
 {
-	
+
 }
 
 void BaseEntityManager::_createEntity(const string& ID)
 {
 	// Check for uniqueness of ID & create new entity
-	switch (_type)
+	switch(_type)
 	{
 		case(EntityType::SKY):
 		{
-			if (_getSkyEntity(ID) != nullptr)
+			if(_getSkyEntity(ID) != nullptr)
 			{
 				Logger::throwError("BaseEntityManager::_createEntity::1");
 			}
@@ -34,7 +34,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 
 		case(EntityType::TERRAIN):
 		{
-			if (_getTerrainEntity(ID) != nullptr)
+			if(_getTerrainEntity(ID) != nullptr)
 			{
 				Logger::throwError("BaseEntityManager::_createEntity::2");
 			}
@@ -48,7 +48,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 
 		case(EntityType::WATER):
 		{
-			if (_getWaterEntity(ID) != nullptr)
+			if(_getWaterEntity(ID) != nullptr)
 			{
 				Logger::throwError("BaseEntityManager::_createEntity::3");
 			}
@@ -62,7 +62,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 
 		case(EntityType::MODEL):
 		{
-			if (_getModelEntity(ID) != nullptr)
+			if(_getModelEntity(ID) != nullptr)
 			{
 				Logger::throwError("BaseEntityManager::_createEntity::4");
 			}
@@ -76,7 +76,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 
 		case(EntityType::BILLBOARD):
 		{
-			if (_getBillboardEntity(ID) != nullptr)
+			if(_getBillboardEntity(ID) != nullptr)
 			{
 				Logger::throwError("BaseEntityManager::_createEntity::5");
 			}
@@ -90,7 +90,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 
 		case(EntityType::AABB):
 		{
-			if (_getAabbEntity(ID) != nullptr)
+			if(_getAabbEntity(ID) != nullptr)
 			{
 				Logger::throwError("BaseEntityManager::_createEntity::6");
 			}
@@ -104,7 +104,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 
 		case(EntityType::POINTLIGHT):
 		{
-			if (_getPointlightEntity(ID) != nullptr)
+			if(_getPointlightEntity(ID) != nullptr)
 			{
 				Logger::throwError("BaseEntityManager::_createEntity::7");
 			}
@@ -118,7 +118,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 
 		case(EntityType::SPOTLIGHT):
 		{
-			if (_getSpotlightEntity(ID) != nullptr)
+			if(_getSpotlightEntity(ID) != nullptr)
 			{
 				Logger::throwError("BaseEntityManager::_createEntity::8");
 			}
@@ -132,7 +132,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 
 		case(EntityType::REFLECTION):
 		{
-			if (_getReflectionEntity(ID) != nullptr)
+			if(_getReflectionEntity(ID) != nullptr)
 			{
 				Logger::throwError("BaseEntityManager::_createEntity::9");
 			}
@@ -146,7 +146,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 
 		case(EntityType::IMAGE):
 		{
-			if (_getImageEntity(ID) != nullptr)
+			if(_getImageEntity(ID) != nullptr)
 			{
 				Logger::throwError("BaseEntityManager::_createEntity::10");
 			}
@@ -162,7 +162,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 
 		case(EntityType::TEXT):
 		{
-			if (_getTextEntity(ID) != nullptr)
+			if(_getTextEntity(ID) != nullptr)
 			{
 				Logger::throwError("BaseEntityManager::_createEntity::11");
 			}
@@ -180,11 +180,11 @@ void BaseEntityManager::_createEntity(const string& ID)
 
 void BaseEntityManager::deleteEntity(const string& ID)
 {
-	switch (_type)
+	switch(_type)
 	{
 		case(EntityType::SKY):
 		{
-			if (_skyEntities.erase(ID))
+			if(_skyEntities.erase(ID))
 			{
 				return;
 			}
@@ -194,7 +194,7 @@ void BaseEntityManager::deleteEntity(const string& ID)
 
 		case(EntityType::TERRAIN):
 		{
-			if (_terrainEntities.erase(ID))
+			if(_terrainEntities.erase(ID))
 			{
 				return;
 			}
@@ -204,7 +204,7 @@ void BaseEntityManager::deleteEntity(const string& ID)
 
 		case(EntityType::WATER):
 		{
-			if (_waterEntities.erase(ID))
+			if(_waterEntities.erase(ID))
 			{
 				return;
 			}
@@ -214,7 +214,7 @@ void BaseEntityManager::deleteEntity(const string& ID)
 
 		case(EntityType::MODEL):
 		{
-			if (_modelEntities.erase(ID))
+			if(_modelEntities.erase(ID))
 			{
 				return;
 			}
@@ -224,7 +224,7 @@ void BaseEntityManager::deleteEntity(const string& ID)
 
 		case(EntityType::BILLBOARD):
 		{
-			if (_billboardEntities.erase(ID))
+			if(_billboardEntities.erase(ID))
 			{
 				return;
 			}
@@ -234,7 +234,7 @@ void BaseEntityManager::deleteEntity(const string& ID)
 
 		case(EntityType::AABB):
 		{
-			if (_aabbEntities.erase(ID))
+			if(_aabbEntities.erase(ID))
 			{
 				return;
 			}
@@ -244,7 +244,7 @@ void BaseEntityManager::deleteEntity(const string& ID)
 
 		case(EntityType::POINTLIGHT):
 		{
-			if (_pointlightEntities.erase(ID))
+			if(_pointlightEntities.erase(ID))
 			{
 				return;
 			}
@@ -254,7 +254,7 @@ void BaseEntityManager::deleteEntity(const string& ID)
 
 		case(EntityType::SPOTLIGHT):
 		{
-			if (_spotlightEntities.erase(ID))
+			if(_spotlightEntities.erase(ID))
 			{
 				return;
 			}
@@ -264,7 +264,7 @@ void BaseEntityManager::deleteEntity(const string& ID)
 
 		case(EntityType::REFLECTION):
 		{
-			if (_reflectionEntities.erase(ID))
+			if(_reflectionEntities.erase(ID))
 			{
 				return;
 			}
@@ -274,7 +274,7 @@ void BaseEntityManager::deleteEntity(const string& ID)
 
 		case(EntityType::IMAGE):
 		{
-			if (_imageEntities.erase(ID))
+			if(_imageEntities.erase(ID))
 			{
 				return;
 			}
@@ -284,7 +284,7 @@ void BaseEntityManager::deleteEntity(const string& ID)
 
 		case(EntityType::TEXT):
 		{
-			if (_textEntities.erase(ID))
+			if(_textEntities.erase(ID))
 			{
 				return;
 			}

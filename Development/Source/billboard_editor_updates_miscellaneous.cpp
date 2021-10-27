@@ -7,24 +7,24 @@ void BillboardEditor::_updateMiscellaneousMenu()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "billboardEditorMenuMiscellaneous")
+	if(screen->getID() == "billboardEditorMenuMiscellaneous")
 	{
 		// Temporary values
 		auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(_currentBillboardID);
 		auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(_currentBillboardID);
 
 		// Button management
-		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingX")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingX")->isHovered())
 		{
 			isFacingX = !isFacingX;
 			_fe3d.billboardEntity_setCameraFacingX(_currentBillboardID, isFacingX);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingY")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingY")->isHovered())
 		{
 			isFacingY = !isFacingY;
 			_fe3d.billboardEntity_setCameraFacingY(_currentBillboardID, isFacingY);
@@ -32,12 +32,12 @@ void BillboardEditor::_updateMiscellaneousMenu()
 
 		// Reset rotations if not facing camera
 		Vec3 rotation = _fe3d.billboardEntity_getRotation(_currentBillboardID);
-		if (!isFacingX)
+		if(!isFacingX)
 		{
 			rotation.x = 0.0f;
 			rotation.z = 0.0f;
 		}
-		if (!isFacingY)
+		if(!isFacingY)
 		{
 			rotation.y = 0.0f;
 		}

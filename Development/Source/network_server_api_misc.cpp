@@ -12,21 +12,21 @@ using std::launch;
 bool NetworkServerAPI::_sendTcpMessage(SOCKET clientSocketID, const string& content, bool isReserved)
 {
 	// Must be running
-	if (!_isRunning)
+	if(!_isRunning)
 	{
 		Logger::throwError("NetworkServerAPI::_sendTcpMessage::1");
 	}
 
 	// Validate message content
-	if (find(content.begin(), content.end(), ';') != content.end())
+	if(find(content.begin(), content.end(), ';') != content.end())
 	{
 		Logger::throwError("NetworkServerAPI::_sendTcpMessage::2");
 	}
-	else if (NetworkUtils::isMessageReserved(content) && !isReserved)
+	else if(NetworkUtils::isMessageReserved(content) && !isReserved)
 	{
 		Logger::throwError("NetworkServerAPI::_sendTcpMessage::3");
 	}
-	else if (content.size() > NetworkUtils::MAX_MESSAGE_CHARACTERS)
+	else if(content.size() > NetworkUtils::MAX_MESSAGE_CHARACTERS)
 	{
 		Logger::throwError("NetworkServerAPI::_sendTcpMessage::4");
 	}
@@ -38,14 +38,14 @@ bool NetworkServerAPI::_sendTcpMessage(SOCKET clientSocketID, const string& cont
 	auto sendStatusCode = send(clientSocketID, message.c_str(), static_cast<int>(message.size()), 0);
 
 	// Check if sending went wrong
-	if (sendStatusCode == SOCKET_ERROR)
+	if(sendStatusCode == SOCKET_ERROR)
 	{
-		if (WSAGetLastError() == WSAECONNRESET || WSAGetLastError() == WSAECONNABORTED) // Client lost socket connection
+		if(WSAGetLastError() == WSAECONNRESET || WSAGetLastError() == WSAECONNABORTED) // Client lost socket connection
 		{
 			_disconnectClient(clientSocketID);
 			return false;
 		}
-		else if (WSAGetLastError() == WSAENOBUFS) // Buffer full
+		else if(WSAGetLastError() == WSAENOBUFS) // Buffer full
 		{
 			Logger::throwWarning("Networking server is sending too many TCP messages!");
 		}
@@ -61,21 +61,21 @@ bool NetworkServerAPI::_sendTcpMessage(SOCKET clientSocketID, const string& cont
 bool NetworkServerAPI::_sendUdpMessage(const string& clientIP, const string& clientPort, const string& content, bool isReserved)
 {
 	// Must be running
-	if (!_isRunning)
+	if(!_isRunning)
 	{
 		Logger::throwError("NetworkServerAPI::_sendUdpMessage::1");
 	}
 
 	// Validate message content
-	if (find(content.begin(), content.end(), ';') != content.end())
+	if(find(content.begin(), content.end(), ';') != content.end())
 	{
 		Logger::throwError("NetworkServerAPI::_sendUdpMessage::2");
 	}
-	else if (NetworkUtils::isMessageReserved(content) && !isReserved)
+	else if(NetworkUtils::isMessageReserved(content) && !isReserved)
 	{
 		Logger::throwError("NetworkServerAPI::_sendUdpMessage::3");
 	}
-	else if (content.size() > NetworkUtils::MAX_MESSAGE_CHARACTERS)
+	else if(content.size() > NetworkUtils::MAX_MESSAGE_CHARACTERS)
 	{
 		Logger::throwError("NetworkServerAPI::_sendUdpMessage::4");
 	}
@@ -93,9 +93,9 @@ bool NetworkServerAPI::_sendUdpMessage(const string& clientIP, const string& cli
 		sizeof(socketAddress)); // Client address length
 
 	// Check if sending went wrong
-	if (sendStatusCode == SOCKET_ERROR)
+	if(sendStatusCode == SOCKET_ERROR)
 	{
-		if (WSAGetLastError() == WSAENOBUFS) // Buffer full
+		if(WSAGetLastError() == WSAENOBUFS) // Buffer full
 		{
 			Logger::throwWarning("Networking server is sending too many UDP messages!");
 		}
@@ -134,10 +134,10 @@ void NetworkServerAPI::_acceptClient(SOCKET clientSocketID)
 
 void NetworkServerAPI::_disconnectClient(SOCKET clientSocketID)
 {
-	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
+	for(size_t i = 0; i < _clientSocketIDs.size(); i++)
 	{
 		// Find list index
-		if (clientSocketID == _clientSocketIDs[i])
+		if(clientSocketID == _clientSocketIDs[i])
 		{
 			// Temporarily save username
 			auto clientUsername = _clientUsernames[i];
@@ -159,7 +159,7 @@ void NetworkServerAPI::_disconnectClient(SOCKET clientSocketID)
 			_tcpMessageThreads.erase(_tcpMessageThreads.begin() + i);
 
 			// Logging (if client was fully accepted)
-			if (!clientUsername.empty())
+			if(!clientUsername.empty())
 			{
 				Logger::throwInfo("Networking client \"" + clientUsername + "\" lost connection with the server!");
 			}
@@ -181,11 +181,11 @@ tuple<int, int, long long, string> NetworkServerAPI::_waitForTcpMessage(SOCKET c
 	int bufferLength = static_cast<int>(NetworkUtils::TCP_BUFFER_BYTES);
 	auto receiveStatusCode = recv(clientSocketID, buffer, bufferLength, 0);
 
-	if (receiveStatusCode > 0) // Message received correctly
+	if(receiveStatusCode > 0) // Message received correctly
 	{
 		return make_tuple(receiveStatusCode, 0, Tools::getTimeSinceEpochMS(), string(buffer, receiveStatusCode));
 	}
-	else if (receiveStatusCode == 0) // Client closed connection
+	else if(receiveStatusCode == 0) // Client closed connection
 	{
 		return make_tuple(receiveStatusCode, 0, Tools::getTimeSinceEpochMS(), "");
 	}
@@ -210,7 +210,7 @@ tuple<int, int, string, string, string> NetworkServerAPI::_receiveUdpMessage(SOC
 	auto IP = NetworkUtils::extractAddressIP(&sourceAddress);
 	auto port = NetworkUtils::extractAddressPort(&sourceAddress);
 
-	if (receiveResult > 0) // Message received correctly
+	if(receiveResult > 0) // Message received correctly
 	{
 		return make_tuple(receiveResult, WSAGetLastError(), string(buffer, receiveResult), IP, port);
 	}

@@ -19,7 +19,7 @@ ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SkyEdit
 	_audioEditor(audioEditor),
 	_sceneEditor(sceneEditor)
 {
-	
+
 }
 
 void ScriptInterpreter::load()
@@ -28,23 +28,23 @@ void ScriptInterpreter::load()
 	auto lastLoggerMessageCount = Logger::getMessageCount();
 
 	// For every scriptfile
-	for (const auto& scriptID : _script.getAllScriptFileIDs())
+	for(const auto& scriptID : _script.getAllScriptFileIDs())
 	{
 		auto scriptFile = _script.getScriptFile(scriptID);
 
 		// Determine script type
 		string scriptType = "";
-		if (scriptFile->getLineText(0) == (META_KEYWORD + " script_type_init"))
+		if(scriptFile->getLineText(0) == (META_KEYWORD + " script_type_init"))
 		{
 			_initScriptIDs.push_back(scriptID);
 			scriptType = "script_type_init";
 		}
-		else if (scriptFile->getLineText(0) == (META_KEYWORD + " script_type_update"))
+		else if(scriptFile->getLineText(0) == (META_KEYWORD + " script_type_update"))
 		{
 			_updateScriptIDs.push_back(scriptID);
 			scriptType = "script_type_update";
 		}
-		else if (scriptFile->getLineText(0) == (META_KEYWORD + " script_type_destroy"))
+		else if(scriptFile->getLineText(0) == (META_KEYWORD + " script_type_destroy"))
 		{
 			_destroyScriptIDs.push_back(scriptID);
 			scriptType = "script_type_destroy";
@@ -57,18 +57,18 @@ void ScriptInterpreter::load()
 		}
 
 		// Determine execution type
-		if (scriptFile->getLineText(1) == (META_KEYWORD + " script_execution_entry"))
+		if(scriptFile->getLineText(1) == (META_KEYWORD + " script_execution_entry"))
 		{
 			// Set entry point
-			if (scriptType == "script_type_init" && _initEntryID.empty())
+			if(scriptType == "script_type_init" && _initEntryID.empty())
 			{
 				_initEntryID = _initScriptIDs.back();
 			}
-			else if (scriptType == "script_type_update" && _updateEntryID.empty())
+			else if(scriptType == "script_type_update" && _updateEntryID.empty())
 			{
 				_updateEntryID = _updateScriptIDs.back();
 			}
-			else if (scriptType == "script_type_destroy" && _destroyEntryID.empty())
+			else if(scriptType == "script_type_destroy" && _destroyEntryID.empty())
 			{
 				_destroyEntryID = _destroyScriptIDs.back();
 			}
@@ -79,7 +79,7 @@ void ScriptInterpreter::load()
 				return;
 			}
 		}
-		else if (scriptFile->getLineText(1) == (META_KEYWORD + " script_execution_waiting"))
+		else if(scriptFile->getLineText(1) == (META_KEYWORD + " script_execution_waiting"))
 		{
 			// <--- Purposely left blank
 		}
@@ -92,19 +92,19 @@ void ScriptInterpreter::load()
 	}
 
 	// No entry point errors
-	if (_initEntryID.empty() && !_initScriptIDs.empty())
+	if(_initEntryID.empty() && !_initScriptIDs.empty())
 	{
 		Logger::throwWarning("No script_execution_entry META defined for INIT script(s)!");
 		_hasThrownError = true;
 		return;
 	}
-	if (_updateEntryID.empty() && !_updateScriptIDs.empty())
+	if(_updateEntryID.empty() && !_updateScriptIDs.empty())
 	{
 		Logger::throwWarning("No script_execution_entry META defined for UPDATE script(s)!");
 		_hasThrownError = true;
 		return;
 	}
-	if (_destroyEntryID.empty() && !_destroyScriptIDs.empty())
+	if(_destroyEntryID.empty() && !_destroyScriptIDs.empty())
 	{
 		Logger::throwWarning("No script_execution_entry META defined for DESTROY script(s)!");
 		_hasThrownError = true;
@@ -112,12 +112,12 @@ void ScriptInterpreter::load()
 	}
 
 	// Comment optimization for runtime execution
-	for (const auto& scriptID : _script.getAllScriptFileIDs())
+	for(const auto& scriptID : _script.getAllScriptFileIDs())
 	{
 		auto scriptFile = _script.getScriptFile(scriptID);
 
 		// Loop through every line
-		for (unsigned int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
+		for(unsigned int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
 		{
 			// Remove trailing whitespace of comments
 			auto scriptLineText = scriptFile->getLineText(lineIndex);
@@ -126,13 +126,13 @@ void ScriptInterpreter::load()
 			scriptLineTextStream >> noWhiteSpace;
 
 			// Check if line is comment
-			if (noWhiteSpace.substr(0, 3) == "///")
+			if(noWhiteSpace.substr(0, 3) == "///")
 			{
 				unsigned int charIndex;
-				for (charIndex = 0; charIndex < scriptLineText.size(); charIndex++)
+				for(charIndex = 0; charIndex < scriptLineText.size(); charIndex++)
 				{
 					// Check if character found
-					if (scriptLineText[charIndex] != ' ')
+					if(scriptLineText[charIndex] != ' ')
 					{
 						break;
 					}
@@ -145,7 +145,7 @@ void ScriptInterpreter::load()
 	}
 
 	// Load all editor assets of this project if in application preview
-	if (_fe3d.application_isExported())
+	if(_fe3d.application_isExported())
 	{
 		// Gather all file paths
 		auto skyTexturePaths = _skyEditor.getAllTexturePathsFromFile();
@@ -225,7 +225,7 @@ void ScriptInterpreter::load()
 	_fe3d.billboardEntity_setCameraFacingY("@@lightSource", true);
 
 	// Miscellaneous
-	if (_fe3d.misc_isVsyncEnabled())
+	if(_fe3d.misc_isVsyncEnabled())
 	{
 		_fe3d.misc_disableVsync();
 	}
@@ -237,7 +237,7 @@ void ScriptInterpreter::load()
 
 void ScriptInterpreter::executeInitialization()
 {
-	if (_initEntryID != "")
+	if(_initEntryID != "")
 	{
 		_isExecutingInitialization = true;
 
@@ -249,7 +249,7 @@ void ScriptInterpreter::executeInitialization()
 
 void ScriptInterpreter::executeUpdate(bool debug)
 {
-	if (_updateEntryID != "")
+	if(_updateEntryID != "")
 	{
 		_isExecutingUpdate = true;
 
@@ -261,18 +261,18 @@ void ScriptInterpreter::executeUpdate(bool debug)
 		_executeScript(_updateEntryID, ScriptType::UPDATE);
 
 		// Log debugging results
-		if (_isDebugging)
+		if(_isDebugging)
 		{
 			// Calculate total debugging time
 			float totalTime = 0.0f;
-			for (const auto& [scriptID, time] : _debuggingTimes)
+			for(const auto& [scriptID, time] : _debuggingTimes)
 			{
 				totalTime += time;
 			}
 
 			// Print times
 			Logger::throwDebug("Debugging results:");
-			for (const auto& [scriptID, time] : _debuggingTimes)
+			for(const auto& [scriptID, time] : _debuggingTimes)
 			{
 				float percentage = (time / totalTime) * 100.0f;
 				Logger::throwDebug("Script \"" + scriptID + "\" ---> " + to_string(percentage) + "%");
@@ -286,7 +286,7 @@ void ScriptInterpreter::executeUpdate(bool debug)
 
 void ScriptInterpreter::executeDestruction()
 {
-	if (_destroyEntryID != "")
+	if(_destroyEntryID != "")
 	{
 		_isExecutingDestruction = true;
 
@@ -299,9 +299,9 @@ void ScriptInterpreter::executeDestruction()
 void ScriptInterpreter::unload()
 {
 	// Delete all sky entities except the engine background
-	for (const auto& ID : _fe3d.skyEntity_getAllIDs())
+	for(const auto& ID : _fe3d.skyEntity_getAllIDs())
 	{
-		if (ID != "@@engineBackground")
+		if(ID != "@@engineBackground")
 		{
 			_fe3d.skyEntity_delete(ID);
 		}
@@ -310,17 +310,17 @@ void ScriptInterpreter::unload()
 	_fe3d.skyEntity_setMixValue(0.0f);
 
 	// Select engine background again
-	if (!_fe3d.application_isExported())
+	if(!_fe3d.application_isExported())
 	{
 		_fe3d.skyEntity_selectMainSky("@@engineBackground");
 	}
 
 	// Reset audio
-	if (!_fe3d.misc_isSoundsEnabled())
+	if(!_fe3d.misc_isSoundsEnabled())
 	{
 		_fe3d.misc_enableSounds();
 	}
-	if (!_fe3d.misc_isMusicEnabled())
+	if(!_fe3d.misc_isMusicEnabled())
 	{
 		_fe3d.misc_enableMusic();
 	}
@@ -341,20 +341,20 @@ void ScriptInterpreter::unload()
 	_fe3d.reflectionEntity_deleteAll();
 
 	// Delete game image entities
-	for (const auto& ID : _fe3d.imageEntity_getAllIDs())
+	for(const auto& ID : _fe3d.imageEntity_getAllIDs())
 	{
 		// Cannot delete engine image entities
-		if (ID.front() != '@')
+		if(ID.front() != '@')
 		{
 			_fe3d.imageEntity_delete(ID);
 		}
 	}
 
 	// Delete game text entities
-	for (const auto& ID : _fe3d.textEntity_getAllIDs())
+	for(const auto& ID : _fe3d.textEntity_getAllIDs())
 	{
 		// Cannot delete engine text entities
-		if (ID.front() != '@')
+		if(ID.front() != '@')
 		{
 			_fe3d.textEntity_delete(ID);
 		}
@@ -365,85 +365,85 @@ void ScriptInterpreter::unload()
 
 	// Reset collision
 	_fe3d.collision_setCameraBox(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-	if (_fe3d.collision_isCameraResponseEnabled())
+	if(_fe3d.collision_isCameraResponseEnabled())
 	{
 		_fe3d.collision_disableCameraResponse();
 	}
-	if (_fe3d.collision_isTerrainResponseEnabled())
+	if(_fe3d.collision_isTerrainResponseEnabled())
 	{
 		_fe3d.collision_disableTerrainResponse();
 	}
 
 	// Reset raycasting
-	if (_fe3d.raycast_isTerrainPointingEnabled())
+	if(_fe3d.raycast_isTerrainPointingEnabled())
 	{
 		_fe3d.raycast_disableTerrainPointing();
 	}
 
 	// Reset graphics
-	if (_fe3d.gfx_isAmbientLightingEnabled())
+	if(_fe3d.gfx_isAmbientLightingEnabled())
 	{
 		_fe3d.gfx_disableAmbientLighting(true);
 	}
-	if (_fe3d.gfx_isDirectionalLightingEnabled())
+	if(_fe3d.gfx_isDirectionalLightingEnabled())
 	{
 		_fe3d.gfx_disableDirectionalLighting(true);
 	}
-	if (_fe3d.gfx_isFogEnabled())
+	if(_fe3d.gfx_isFogEnabled())
 	{
 		_fe3d.gfx_disableFog(true);
 	}
-	if (_fe3d.gfx_isShadowsEnabled())
+	if(_fe3d.gfx_isShadowsEnabled())
 	{
 		_fe3d.gfx_disableShadows(true);
 	}
-	if (_fe3d.gfx_isSkyExposureEnabled())
+	if(_fe3d.gfx_isSkyExposureEnabled())
 	{
 		_fe3d.gfx_disableSkyExposure(true);
 	}
-	if (_fe3d.gfx_isDofEnabled())
+	if(_fe3d.gfx_isDofEnabled())
 	{
 		_fe3d.gfx_disableDOF(true);
 	}
-	if (_fe3d.gfx_isMotionBlurEnabled())
+	if(_fe3d.gfx_isMotionBlurEnabled())
 	{
 		_fe3d.gfx_disableMotionBlur(true);
 	}
-	if (_fe3d.gfx_isLensFlareEnabled())
+	if(_fe3d.gfx_isLensFlareEnabled())
 	{
 		_fe3d.gfx_disableLensFlare(true);
 	}
-	if (_fe3d.gfx_isBloomEnabled())
+	if(_fe3d.gfx_isBloomEnabled())
 	{
 		_fe3d.gfx_disableBloom(true);
 	}
 
 	// Reset networking server
-	if (_fe3d.networkServer_isRunning())
+	if(_fe3d.networkServer_isRunning())
 	{
 		_fe3d.networkServer_stop();
 	}
 
 	// Reset networking client
-	if (_fe3d.networkClient_isRunning())
+	if(_fe3d.networkClient_isRunning())
 	{
 		_fe3d.networkClient_stop();
 	}
 
 	// Miscellaneous
-	if (_fe3d.misc_isAabbFrameRenderingEnabled())
+	if(_fe3d.misc_isAabbFrameRenderingEnabled())
 	{
 		_fe3d.misc_disableAabbFrameRendering();
 	}
-	if (_fe3d.misc_isWireFrameRenderingEnabled())
+	if(_fe3d.misc_isWireFrameRenderingEnabled())
 	{
 		_fe3d.misc_disableWireFrameRendering();
 	}
-	if (!_fe3d.misc_isVsyncEnabled())
+	if(!_fe3d.misc_isVsyncEnabled())
 	{
 		_fe3d.misc_enableVsync();
 	}
-	if (_fe3d.misc_isMillisecondTimerStarted())
+	if(_fe3d.misc_isMillisecondTimerStarted())
 	{
 		_fe3d.misc_stopMillisecondTimer();
 	}

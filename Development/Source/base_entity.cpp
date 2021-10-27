@@ -5,7 +5,7 @@ BaseEntity::BaseEntity(const string& ID)
 	:
 	_ID(ID)
 {
-	if (ID.empty())
+	if(ID.empty())
 	{
 		Logger::throwError("BaseEntity::BaseEntity");
 	}

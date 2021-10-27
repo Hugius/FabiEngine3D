@@ -12,26 +12,26 @@ using std::ofstream;
 bool ModelEditor::saveModelEntitiesToFile()
 {
 	// Editor must be loaded
-	if (!_isEditorLoaded)
+	if(!_isEditorLoaded)
 	{
 		return false;
 	}
 
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("ModelEditor::saveModelEntitiesToFile");
 	}
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
+														 ("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
 
 	// Create or overwrite model file
 	ofstream file(filePath);
 
 	// Write model data
-	for (const auto& modelID : _loadedModelIDs)
+	for(const auto& modelID : _loadedModelIDs)
 	{
 		// Retrieve all values
 		auto isMultiParted = _fe3d.modelEntity_isMultiParted(modelID);
@@ -65,7 +65,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 
 		// Write part data
 		auto partIDs = _fe3d.modelEntity_getPartIDs(modelID);
-		for (size_t i = 0; i < partIDs.size(); i++)
+		for(size_t i = 0; i < partIDs.size(); i++)
 		{
 			// Retrieve all values
 			auto partID = partIDs[i];
@@ -118,7 +118,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 				textureRepeat;
 
 			// Write space to file
-			if (i < (partIDs.size() - 1))
+			if(i < (partIDs.size() - 1))
 			{
 				file << " ";
 			}
@@ -128,10 +128,10 @@ bool ModelEditor::saveModelEntitiesToFile()
 		file << endl;
 
 		// Check if model not instanced
-		if (!isInstanced)
+		if(!isInstanced)
 		{
 			// Write AABB data
-			for (const auto& aabbID : _fe3d.aabbEntity_getChildIDs(modelID, AabbParentType::MODEL_ENTITY))
+			for(const auto& aabbID : _fe3d.aabbEntity_getChildIDs(modelID, AabbParentType::MODEL_ENTITY))
 			{
 				// Retrieve all values
 				auto position = _fe3d.aabbEntity_getPosition(aabbID);

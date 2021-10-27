@@ -44,7 +44,7 @@ void BillboardEditor::load()
 	_fe3d.gfx_setMotionBlurStrength(0.1f);
 	_fe3d.gfx_enableShadows();
 	_fe3d.gfx_setShadowLightness(0.25f);
-	
+
 	// Editor models
 	_fe3d.modelEntity_create("@@cube", "engine_assets\\meshes\\cube.obj");
 	_fe3d.modelEntity_setBasePosition("@@cube", Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
@@ -69,7 +69,7 @@ void BillboardEditor::unload()
 	_unloadGUI();
 
 	// Camera
-	if (_fe3d.camera_isThirdPersonViewEnabled())
+	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
 		_fe3d.camera_disableThirdPersonView();
 	}
@@ -101,7 +101,7 @@ void BillboardEditor::unload()
 
 	// Miscellaneous
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
-	if (_fe3d.misc_isDebugRenderingEnabled())
+	if(_fe3d.misc_isDebugRenderingEnabled())
 	{
 		_fe3d.misc_disableDebugRendering();
 	}

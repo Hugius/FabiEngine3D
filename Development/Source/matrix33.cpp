@@ -10,7 +10,7 @@ Matrix33::Matrix33(const float m00, const float m01, const float m02, const floa
 
 Matrix33::Matrix33()
 {
-	for (int i = 0; i < 9; i++)
+	for(int i = 0; i < 9; i++)
 	{
 		f[i] = 0.0f;
 	}
@@ -29,7 +29,7 @@ Matrix33::Matrix33(const Matrix44& other)
 
 Matrix33::Matrix33(const float value)
 {
-	for (int i = 0; i < 9; i++)
+	for(int i = 0; i < 9; i++)
 	{
 		f[i] = 0.0f;
 	}
@@ -43,7 +43,7 @@ const Matrix33 Matrix33::operator+(const Matrix33& other) const
 {
 	Matrix33 newMatrix;
 
-	for (int i = 0; i < 9; i++)
+	for(int i = 0; i < 9; i++)
 	{
 		newMatrix.f[i] = (this->f[i] + other.f[i]);
 	}
@@ -55,7 +55,7 @@ const Matrix33 Matrix33::operator-(const Matrix33& other) const
 {
 	Matrix33 newMatrix;
 
-	for (int i = 0; i < 9; i++)
+	for(int i = 0; i < 9; i++)
 	{
 		newMatrix.f[i] = (this->f[i] - other.f[i]);
 	}
@@ -67,11 +67,11 @@ const Matrix33 Matrix33::operator*(const Matrix33& other) const
 {
 	Matrix33 newMatrix(0.0f);
 
-	for (int column = 0; column < 3; column++)
+	for(int column = 0; column < 3; column++)
 	{
-		for (int row = 0; row < 3; row++)
+		for(int row = 0; row < 3; row++)
 		{
-			for (int inner = 0; inner < 3; inner++)
+			for(int inner = 0; inner < 3; inner++)
 			{
 				newMatrix.m[row][column] += (this->m[inner][column] * other.m[row][inner]);
 			}

@@ -44,7 +44,7 @@ struct Ivec2 final
 	const Ivec2 operator-(const int& other) const;
 	const Ivec2 operator*(const int& other) const;
 	const Ivec2 operator/(const int& other) const;
-	
+
 	// Booleans
 	const bool operator==(const Ivec2& other) const;
 	const bool operator!=(const Ivec2& other) const;

@@ -3,7 +3,7 @@
 
 bool BaseEntityManager::isExisting(const string& ID)
 {
-	switch (_type)
+	switch(_type)
 	{
 		case(EntityType::SKY):
 		{
@@ -113,7 +113,7 @@ shared_ptr<SkyEntity> BaseEntityManager::_getSkyEntity(const string& ID)
 {
 	auto it = _skyEntities.find(ID);
 
-	if (it == _skyEntities.end())
+	if(it == _skyEntities.end())
 	{
 		return nullptr;
 	}
@@ -127,7 +127,7 @@ shared_ptr<TerrainEntity> BaseEntityManager::_getTerrainEntity(const string& ID)
 {
 	auto it = _terrainEntities.find(ID);
 
-	if (it == _terrainEntities.end())
+	if(it == _terrainEntities.end())
 	{
 		return nullptr;
 	}
@@ -141,7 +141,7 @@ shared_ptr<WaterEntity> BaseEntityManager::_getWaterEntity(const string& ID)
 {
 	auto it = _waterEntities.find(ID);
 
-	if (it == _waterEntities.end())
+	if(it == _waterEntities.end())
 	{
 		return nullptr;
 	}
@@ -155,7 +155,7 @@ shared_ptr<ModelEntity> BaseEntityManager::_getModelEntity(const string& ID)
 {
 	auto it = _modelEntities.find(ID);
 
-	if (it == _modelEntities.end())
+	if(it == _modelEntities.end())
 	{
 		return nullptr;
 	}
@@ -169,7 +169,7 @@ shared_ptr<BillboardEntity> BaseEntityManager::_getBillboardEntity(const string&
 {
 	auto it = _billboardEntities.find(ID);
 
-	if (it == _billboardEntities.end())
+	if(it == _billboardEntities.end())
 	{
 		return nullptr;
 	}
@@ -183,7 +183,7 @@ shared_ptr<AabbEntity> BaseEntityManager::_getAabbEntity(const string& ID)
 {
 	auto it = _aabbEntities.find(ID);
 
-	if (it == _aabbEntities.end())
+	if(it == _aabbEntities.end())
 	{
 		return nullptr;
 	}
@@ -197,7 +197,7 @@ shared_ptr<PointlightEntity> BaseEntityManager::_getPointlightEntity(const strin
 {
 	auto it = _pointlightEntities.find(ID);
 
-	if (it == _pointlightEntities.end())
+	if(it == _pointlightEntities.end())
 	{
 		return nullptr;
 	}
@@ -211,7 +211,7 @@ shared_ptr<SpotlightEntity> BaseEntityManager::_getSpotlightEntity(const string&
 {
 	auto it = _spotlightEntities.find(ID);
 
-	if (it == _spotlightEntities.end())
+	if(it == _spotlightEntities.end())
 	{
 		return nullptr;
 	}
@@ -225,7 +225,7 @@ shared_ptr<ReflectionEntity> BaseEntityManager::_getReflectionEntity(const strin
 {
 	auto it = _reflectionEntities.find(ID);
 
-	if (it == _reflectionEntities.end())
+	if(it == _reflectionEntities.end())
 	{
 		return nullptr;
 	}
@@ -239,7 +239,7 @@ shared_ptr<ImageEntity> BaseEntityManager::_getImageEntity(const string& ID)
 {
 	auto it = _imageEntities.find(ID);
 
-	if (it == _imageEntities.end())
+	if(it == _imageEntities.end())
 	{
 		return nullptr;
 	}
@@ -253,7 +253,7 @@ shared_ptr<TextEntity> BaseEntityManager::_getTextEntity(const string& ID)
 {
 	auto it = _textEntities.find(ID);
 
-	if (it == _textEntities.end())
+	if(it == _textEntities.end())
 	{
 		return nullptr;
 	}

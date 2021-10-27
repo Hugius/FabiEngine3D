@@ -7,7 +7,7 @@ void SceneEditor::_updateReflectionEditing()
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
 	// Reset selected camera from last frame
-	if (!_dontResetSelectedCamera)
+	if(!_dontResetSelectedCamera)
 	{
 		_selectedCameraID = "";
 	}
@@ -17,29 +17,29 @@ void SceneEditor::_updateReflectionEditing()
 	}
 
 	// User must not be in placement mode
-	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
+	if(_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
 		// Check which entity is selected
 		auto hoveredAabbID = _fe3d.raycast_checkCursorInAny().first;
 
 		// Check if user selected a camera model
-		for (const auto& entityID : _fe3d.modelEntity_getAllIDs())
+		for(const auto& entityID : _fe3d.modelEntity_getAllIDs())
 		{
 			// Must be reflection preview entity
-			if (entityID.substr(0, string("@@camera").size()) == "@@camera")
+			if(entityID.substr(0, string("@@camera").size()) == "@@camera")
 			{
 				// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
-				if (hoveredAabbID == entityID && _fe3d.misc_isCursorInsideViewport() &&
-					!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(hoveredAabbID == entityID && _fe3d.misc_isCursorInsideViewport() &&
+				   !_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Select hovered camera
 					_selectReflection(entityID.substr(string("@@camera_").size()));
 
 					// Check if user clicked camera
-					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
 						// Check if same camera is not clicked again
-						if (_selectedCameraID != _activeCameraID)
+						if(_selectedCameraID != _activeCameraID)
 						{
 							_activateReflection(_selectedCameraID.substr(string("@@camera_").size()));
 						}
@@ -48,7 +48,7 @@ void SceneEditor::_updateReflectionEditing()
 				else
 				{
 					// Don't reset if camera is active or selected
-					if ((entityID != _activeCameraID) && (entityID != _selectedCameraID))
+					if((entityID != _activeCameraID) && (entityID != _selectedCameraID))
 					{
 						_fe3d.modelEntity_setBaseSize(entityID, DEFAULT_CAMERA_SIZE);
 						_fe3d.aabbEntity_setLocalSize(entityID, DEFAULT_CAMERA_AABB_SIZE);
@@ -58,16 +58,16 @@ void SceneEditor::_updateReflectionEditing()
 		}
 
 		// Check if RMB not down
-		if (!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+		if(!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 		{
 			// Check if allowed by GUI
-			if (_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// Check if camera is active
-				if (_activeCameraID != "")
+				if(_activeCameraID != "")
 				{
 					// Check if active camera cancelled
-					if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedCameraID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+					if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedCameraID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 					{
 						_activeCameraID = "";
 						rightWindow->setActiveScreen("sceneEditorControls");
@@ -77,14 +77,14 @@ void SceneEditor::_updateReflectionEditing()
 		}
 
 		// Update camera animations
-		if (_selectedCameraID != _activeCameraID)
+		if(_selectedCameraID != _activeCameraID)
 		{
 			_updateCameraAnimation(_selectedCameraID, _selectedCameraSizeDirection);
 		}
 		_updateCameraAnimation(_activeCameraID, _activeCameraSizeDirection);
 
 		// Update properties screen
-		if (!_activeCameraID.empty())
+		if(!_activeCameraID.empty())
 		{
 			// Temporary values
 			const string activeReflectionID = _activeCameraID.substr(string("@@camera_").size());
@@ -94,13 +94,13 @@ void SceneEditor::_updateReflectionEditing()
 			rightWindow->setActiveScreen("reflectionPropertiesMenu");
 
 			// Button management
-			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("capture")->isHovered())
+				if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("capture")->isHovered())
 				{
 					_fe3d.reflectionEntity_capture(activeReflectionID);
 				}
-				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
 					_fe3d.modelEntity_delete(_activeCameraID);
 					_fe3d.reflectionEntity_delete(activeReflectionID);
@@ -111,7 +111,7 @@ void SceneEditor::_updateReflectionEditing()
 			}
 
 			// Alternative way of deleting
-			if (_fe3d.input_isKeyPressed(InputType::KEY_DELETE))
+			if(_fe3d.input_isKeyPressed(InputType::KEY_DELETE))
 			{
 				_fe3d.modelEntity_delete(_activeCameraID);
 				_fe3d.reflectionEntity_delete(activeReflectionID);

@@ -15,13 +15,13 @@ using std::get;
 void NetworkClientAPI::update()
 {
 	// Must be running
-	if (!_isRunning)
+	if(!_isRunning)
 	{
 		return;
 	}
 
 	// Check if client must disconnect
-	if (_mustDisconnectFromServer)
+	if(_mustDisconnectFromServer)
 	{
 		disconnectFromServer(false);
 		return;
@@ -31,22 +31,22 @@ void NetworkClientAPI::update()
 	_pendingMessages.clear();
 
 	// Handle server connection
-	if (_isConnectingToServer)
+	if(_isConnectingToServer)
 	{
 		// Check if connection thread is finished
-		if (_connectionThread.wait_until(system_clock::time_point::min()) == future_status::ready)
+		if(_connectionThread.wait_until(system_clock::time_point::min()) == future_status::ready)
 		{
 			// Retrieve error code
 			auto connectionErrorCode = _connectionThread.get();
 
-			if (connectionErrorCode == 0) // Successfully connected with server
+			if(connectionErrorCode == 0) // Successfully connected with server
 			{
 				// Not connecting anymore
 				_isConnectingToServer = false;
 				_isConnectedToServer = true;
 
 				// Send username to server
-				if (!_sendTcpMessage(("USERNAME" + _username), true, false))
+				if(!_sendTcpMessage(("USERNAME" + _username), true, false))
 				{
 					return;
 				}
@@ -54,7 +54,7 @@ void NetworkClientAPI::update()
 				// Start a thread to wait for TCP messages
 				_tcpMessageThread = async(launch::async, &NetworkClientAPI::_waitForTcpMessage, this, _connectionSocketID);
 			}
-			else if ((connectionErrorCode == WSAECONNREFUSED) || (connectionErrorCode == WSAETIMEDOUT)) // Cannot connect with server
+			else if((connectionErrorCode == WSAECONNREFUSED) || (connectionErrorCode == WSAETIMEDOUT)) // Cannot connect with server
 			{
 				_isConnectingToServer = false;
 			}
@@ -70,16 +70,16 @@ void NetworkClientAPI::update()
 	}
 
 	// Must be connected
-	if (!_isConnectedToServer)
+	if(!_isConnectedToServer)
 	{
 		return;
 	}
 
 	// Update server pinging
-	if (_isAcceptedByServer && !_isWaitingForPing)
+	if(_isAcceptedByServer && !_isWaitingForPing)
 	{
 		// Send ping
-		if (!_sendTcpMessage("PING", true, true))
+		if(!_sendTcpMessage("PING", true, true))
 		{
 			return;
 		}
@@ -90,7 +90,7 @@ void NetworkClientAPI::update()
 	}
 
 	// Receive incoming TCP messages
-	if (_tcpMessageThread.wait_until(system_clock::time_point::min()) == future_status::ready)
+	if(_tcpMessageThread.wait_until(system_clock::time_point::min()) == future_status::ready)
 	{
 		// Temporary values
 		const auto& messageResult = _tcpMessageThread.get();
@@ -99,19 +99,19 @@ void NetworkClientAPI::update()
 		const auto& messageTimestamp = get<2>(messageResult);
 		const auto& messageContent = get<3>(messageResult);
 
-		if (messageStatusCode > 0) // Message is received correctly
+		if(messageStatusCode > 0) // Message is received correctly
 		{
 			// Loop through received message(s)
-			for (const auto& character : messageContent)
+			for(const auto& character : messageContent)
 			{
-				if (character == ';') // End of current message
+				if(character == ';') // End of current message
 				{
-					if (_tcpMessageBuild == "ACCEPTED") // Handle ACCEPTED message
+					if(_tcpMessageBuild == "ACCEPTED") // Handle ACCEPTED message
 					{
 						_isAcceptedByServer = true;
 						_tcpMessageBuild = "";
 					}
-					else if (_tcpMessageBuild == "SERVER_FULL") // Handle SERVER_FULL message
+					else if(_tcpMessageBuild == "SERVER_FULL") // Handle SERVER_FULL message
 					{
 						// Disconnect next tick
 						_pendingMessages.push_back(NetworkServerMessage(_tcpMessageBuild, NetworkProtocol::TCP));
@@ -121,7 +121,7 @@ void NetworkClientAPI::update()
 						// Prevent processing more messages
 						break;
 					}
-					else if (_tcpMessageBuild == "USER_ALREADY_CONNECTED") // Handle USER_ALREADY_CONNECTED message
+					else if(_tcpMessageBuild == "USER_ALREADY_CONNECTED") // Handle USER_ALREADY_CONNECTED message
 					{
 						// Disconnect next tick
 						_pendingMessages.push_back(NetworkServerMessage(_tcpMessageBuild, NetworkProtocol::TCP));
@@ -131,7 +131,7 @@ void NetworkClientAPI::update()
 						// Prevent processing more messages
 						break;
 					}
-					else if (_tcpMessageBuild == "DISCONNECTED_BY_SERVER") // Handle DISCONNECTED_BY_SERVER message
+					else if(_tcpMessageBuild == "DISCONNECTED_BY_SERVER") // Handle DISCONNECTED_BY_SERVER message
 					{
 						// Disconnect next tick
 						_pendingMessages.push_back(NetworkServerMessage(_tcpMessageBuild, NetworkProtocol::TCP));
@@ -141,7 +141,7 @@ void NetworkClientAPI::update()
 						// Prevent processing more messages
 						break;
 					}
-					else if (_tcpMessageBuild.substr(0, 4) == "PING") // Handle PING message
+					else if(_tcpMessageBuild.substr(0, 4) == "PING") // Handle PING message
 					{
 						// Calculate ping latency
 						auto latency = (Tools::getTimeSinceEpochMS() - _lastMilliseconds);
@@ -153,7 +153,7 @@ void NetworkClientAPI::update()
 						latency -= clientReceiveDelay;
 
 						// Register server latency
-						if (_pingLatencies.size() == NetworkUtils::MAX_PING_COUNT)
+						if(_pingLatencies.size() == NetworkUtils::MAX_PING_COUNT)
 						{
 							_pingLatencies.erase(_pingLatencies.begin());
 						}
@@ -173,7 +173,7 @@ void NetworkClientAPI::update()
 				}
 			}
 		}
-		else if (messageStatusCode == 0) // Server closed socket connection
+		else if(messageStatusCode == 0) // Server closed socket connection
 		{
 			disconnectFromServer(false);
 			return;
@@ -181,7 +181,7 @@ void NetworkClientAPI::update()
 		else // Receive failed
 		{
 			auto code = messageErrorCode;
-			if ((code == WSAECONNRESET) || (code == WSAECONNABORTED) || (code == WSAETIMEDOUT)) // Server lost socket connection
+			if((code == WSAECONNRESET) || (code == WSAECONNABORTED) || (code == WSAETIMEDOUT)) // Server lost socket connection
 			{
 				disconnectFromServer(false);
 				return;
@@ -197,7 +197,7 @@ void NetworkClientAPI::update()
 	}
 
 	// Receive incoming UDP messages
-	while (NetworkUtils::isUdpMessageReady(_udpMessageSocketID))
+	while(NetworkUtils::isUdpMessageReady(_udpMessageSocketID))
 	{
 		// Message data
 		const auto& messageResult = _receiveUdpMessage(_udpMessageSocketID);
@@ -207,19 +207,19 @@ void NetworkClientAPI::update()
 		const auto& messageIP = get<3>(messageResult);
 		const auto& messagePort = get<4>(messageResult);
 
-		if (messageStatusCode > 0) // Message is received correctly
+		if(messageStatusCode > 0) // Message is received correctly
 		{
-			if ((messageIP == _serverIP) && (messagePort == _serverPort)) // Message must come from server
+			if((messageIP == _serverIP) && (messagePort == _serverPort)) // Message must come from server
 			{
 				_pendingMessages.push_back(NetworkServerMessage(messageContent, NetworkProtocol::UDP));
 			}
 		}
 		else if
 			(
-				(messageStatusCode == 0)			  ||
-				(messageErrorCode == WSAECONNRESET)   ||
-				(messageErrorCode == WSAECONNABORTED) ||
-				(messageErrorCode == WSAEMSGSIZE)
+			(messageStatusCode == 0) ||
+			(messageErrorCode == WSAECONNRESET) ||
+			(messageErrorCode == WSAECONNABORTED) ||
+			(messageErrorCode == WSAEMSGSIZE)
 			)
 		{
 			// Wrong packet, do nothing

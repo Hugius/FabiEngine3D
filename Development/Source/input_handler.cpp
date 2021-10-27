@@ -8,15 +8,15 @@ void InputHandler::update()
 	_mousePressed.clear();
 	_mouseWheelX = 0;
 	_mouseWheelY = 0;
-	
+
 	SDL_Event event;
 
-	if (!_isLocked) 
+	if(!_isLocked)
 	{
-		while (SDL_PollEvent(&event)) // Check for any input
+		while(SDL_PollEvent(&event)) // Check for any input
 		{
-			switch (event.type) 
-			{	
+			switch(event.type)
+			{
 				case SDL_QUIT: // X symbol in SDL window
 				{
 					_keysDown.push_back(static_cast<InputType>(SDL_QUIT));
@@ -35,13 +35,13 @@ void InputHandler::update()
 					auto button = static_cast<InputType>(event.button.button);
 
 					// Continuing mouse press
-					if (!_isInVector(_mouseDown, button)) // If not in vector yet, add it
+					if(!_isInVector(_mouseDown, button)) // If not in vector yet, add it
 					{
 						_mouseDown.push_back(button);
 					}
 
 					// Single short mouse press
-					if (!_isInVector(_mousePressed_mayNotPress, button)) // Mouse may be pressed
+					if(!_isInVector(_mousePressed_mayNotPress, button)) // Mouse may be pressed
 					{
 						_mousePressed.push_back(button);
 						_mousePressed_mayNotPress.push_back(button);
@@ -49,13 +49,13 @@ void InputHandler::update()
 
 					break;
 				}
-			
+
 				case SDL_MOUSEBUTTONUP:
 				{
 					auto button = static_cast<InputType>(event.button.button);
 
 					// Continuing mouse press
-					if (!_mouseDown.empty())
+					if(!_mouseDown.empty())
 					{
 						_mouseDown.erase(_mouseDown.begin() + _getVectorIndex(_mouseDown, button));
 					}
@@ -71,18 +71,18 @@ void InputHandler::update()
 					auto key = static_cast<InputType>(event.key.keysym.sym);
 
 					// Continuing key press
-					if (!_isInVector(_keysDown, key))
+					if(!_isInVector(_keysDown, key))
 					{
 						_keysDown.push_back(key);
 					}
 
 					// Single short key press
-					if (!_isInVector(_keysPressed_mayNotPress, key)) // Key may be pressed
+					if(!_isInVector(_keysPressed_mayNotPress, key)) // Key may be pressed
 					{
 						_keysPressed.push_back(key);
 						_keysPressed_mayNotPress.push_back(key);
 					}
-				
+
 					break;
 				}
 
@@ -91,7 +91,7 @@ void InputHandler::update()
 					auto key = static_cast<InputType>(event.key.keysym.sym);
 
 					// Continuing key press
-					if (!_keysDown.empty())
+					if(!_keysDown.empty())
 					{
 						_keysDown.erase(_keysDown.begin() + _getVectorIndex(_keysDown, key));
 					}

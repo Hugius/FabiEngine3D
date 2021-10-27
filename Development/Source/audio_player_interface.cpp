@@ -6,18 +6,18 @@ using std::clamp;
 
 void AudioPlayer::playSound(Sound& sound, int loops, int fadeMS, bool forcePlay)
 {
-	if (_isSoundsEnabled)
+	if(_isSoundsEnabled)
 	{
-		if (!isSoundStarted(sound) || forcePlay)
+		if(!isSoundStarted(sound) || forcePlay)
 		{
 			// Try to find free channel
 			auto channel = _getFreeChannel();
-			if (channel != -1)
+			if(channel != -1)
 			{
 				_channels[channel] = sound.getID();
 
 				// Play or fade
-				if (fadeMS == 0)
+				if(fadeMS == 0)
 				{
 					Mix_PlayChannel(channel, sound.getDataPointer(), loops);
 				}
@@ -43,17 +43,17 @@ void AudioPlayer::playSound(Sound& sound, int loops, int fadeMS, bool forcePlay)
 
 void AudioPlayer::playMusic(vector<Music>& musicList, bool forcePlay)
 {
-	if (_isMusicEnabled)
+	if(_isMusicEnabled)
 	{
 		// Check if any music is existing
-		if (!musicList.empty())
+		if(!musicList.empty())
 		{
 			// Check if music is allowed to play
-			if (!isMusicStarted() || forcePlay)
+			if(!isMusicStarted() || forcePlay)
 			{
 				// Select next song
 				unsigned int musicIndex;
-				if (musicList.size() == 1)
+				if(musicList.size() == 1)
 				{
 					musicIndex = 0;
 				}
@@ -74,7 +74,7 @@ void AudioPlayer::playMusic(vector<Music>& musicList, bool forcePlay)
 
 void AudioPlayer::pauseAllSounds()
 {
-	if (_isSoundsEnabled)
+	if(_isSoundsEnabled)
 	{
 		Mix_Pause(-1);
 	}
@@ -82,13 +82,13 @@ void AudioPlayer::pauseAllSounds()
 
 void AudioPlayer::pauseSound(Sound& sound)
 {
-	if (_isSoundsEnabled)
+	if(_isSoundsEnabled)
 	{
-		if (isSoundPlaying(sound))
+		if(isSoundPlaying(sound))
 		{
-			if (!isSoundPaused(sound))
+			if(!isSoundPaused(sound))
 			{
-				for (const auto& channel : _findSoundChannels(sound))
+				for(const auto& channel : _findSoundChannels(sound))
 				{
 					Mix_Pause(channel);
 				}
@@ -107,11 +107,11 @@ void AudioPlayer::pauseSound(Sound& sound)
 
 void AudioPlayer::pauseMusic()
 {
-	if (_isMusicEnabled)
+	if(_isMusicEnabled)
 	{
-		if (isMusicPlaying())
+		if(isMusicPlaying())
 		{
-			if (!isMusicPaused())
+			if(!isMusicPaused())
 			{
 				Mix_PauseMusic();
 			}
@@ -129,7 +129,7 @@ void AudioPlayer::pauseMusic()
 
 void AudioPlayer::resumeAllSounds()
 {
-	if (_isSoundsEnabled)
+	if(_isSoundsEnabled)
 	{
 		Mix_Resume(-1);
 	}
@@ -137,11 +137,11 @@ void AudioPlayer::resumeAllSounds()
 
 void AudioPlayer::resumeSound(Sound& sound)
 {
-	if (_isSoundsEnabled)
+	if(_isSoundsEnabled)
 	{
-		if (isSoundPaused(sound))
+		if(isSoundPaused(sound))
 		{
-			for (const auto& channel : _findSoundChannels(sound))
+			for(const auto& channel : _findSoundChannels(sound))
 			{
 				Mix_Resume(channel);
 			}
@@ -155,9 +155,9 @@ void AudioPlayer::resumeSound(Sound& sound)
 
 void AudioPlayer::resumeMusic()
 {
-	if (_isMusicEnabled)
+	if(_isMusicEnabled)
 	{
-		if (isMusicStarted() && isMusicPaused())
+		if(isMusicStarted() && isMusicPaused())
 		{
 			Mix_ResumeMusic();
 		}
@@ -170,7 +170,7 @@ void AudioPlayer::resumeMusic()
 
 void AudioPlayer::stopAllSounds()
 {
-	if (_isSoundsEnabled)
+	if(_isSoundsEnabled)
 	{
 		// Resume before stopping
 		resumeAllSounds();
@@ -182,21 +182,21 @@ void AudioPlayer::stopAllSounds()
 
 void AudioPlayer::stopSound(Sound& sound, int fadeMS)
 {
-	if (_isSoundsEnabled)
+	if(_isSoundsEnabled)
 	{
-		if (isSoundStarted(sound))
+		if(isSoundStarted(sound))
 		{
 			// Resume before stopping
-			if (isSoundPaused(sound))
+			if(isSoundPaused(sound))
 			{
 				resumeSound(sound);
 			}
 
 			// Stop or fade
-			if (fadeMS == 0)
+			if(fadeMS == 0)
 			{
 				// For every sound playback
-				for (const auto& channel : _findSoundChannels(sound))
+				for(const auto& channel : _findSoundChannels(sound))
 				{
 					Mix_HaltChannel(channel);
 				}
@@ -204,14 +204,14 @@ void AudioPlayer::stopSound(Sound& sound, int fadeMS)
 			else
 			{
 				// For every sound playback
-				for (const auto& channel : _findSoundChannels(sound))
+				for(const auto& channel : _findSoundChannels(sound))
 				{
 					Mix_FadeOutChannel(channel, fadeMS);
 				}
 			}
 
 			// De-allocate channels
-			for (const auto& channel : _findSoundChannels(sound))
+			for(const auto& channel : _findSoundChannels(sound))
 			{
 				_channels[channel] = "";
 			}
@@ -225,16 +225,16 @@ void AudioPlayer::stopSound(Sound& sound, int fadeMS)
 
 void AudioPlayer::stopMusic()
 {
-	if (_isMusicEnabled)
+	if(_isMusicEnabled)
 	{
 		// Resume before stopping
-		if (isMusicPaused())
+		if(isMusicPaused())
 		{
 			resumeMusic();
 		}
 
 		// Check if music is started
-		if (isMusicStarted())
+		if(isMusicStarted())
 		{
 			Mix_HaltMusic();
 		}
@@ -247,7 +247,7 @@ void AudioPlayer::stopMusic()
 
 void AudioPlayer::setMusicVolume(float volume)
 {
-	if (_isMusicEnabled)
+	if(_isMusicEnabled)
 	{
 		_musicVolume = clamp(volume, 0.0f, 1.0f);
 	}
@@ -255,7 +255,7 @@ void AudioPlayer::setMusicVolume(float volume)
 
 float AudioPlayer::getMusicVolume()
 {
-	if (_isMusicEnabled)
+	if(_isMusicEnabled)
 	{
 		return static_cast<float>(Mix_VolumeMusic(-1)) / 128.0f;
 	}
@@ -265,9 +265,9 @@ float AudioPlayer::getMusicVolume()
 
 bool AudioPlayer::isChannelAvailable()
 {
-	for (size_t i = 0; i < _channels.size(); i++)
+	for(size_t i = 0; i < _channels.size(); i++)
 	{
-		if (_channels[i].empty())
+		if(_channels[i].empty())
 		{
 			return true;
 		}
@@ -283,11 +283,11 @@ bool AudioPlayer::isSoundsEnabled()
 
 bool AudioPlayer::isSoundStarted(Sound& sound)
 {
-	if (_isSoundsEnabled)
+	if(_isSoundsEnabled)
 	{
-		for (const auto& soundID : _channels)
+		for(const auto& soundID : _channels)
 		{
-			if (soundID == sound.getID())
+			if(soundID == sound.getID())
 			{
 				return true;
 			}
@@ -299,7 +299,7 @@ bool AudioPlayer::isSoundStarted(Sound& sound)
 
 bool AudioPlayer::isSoundPlaying(Sound& sound)
 {
-	if (_isSoundsEnabled)
+	if(_isSoundsEnabled)
 	{
 		return (isSoundStarted(sound) && !isSoundPaused(sound));
 	}
@@ -309,7 +309,7 @@ bool AudioPlayer::isSoundPlaying(Sound& sound)
 
 bool AudioPlayer::isSoundPaused(Sound& sound)
 {
-	if (_isSoundsEnabled)
+	if(_isSoundsEnabled)
 	{
 		return (isSoundStarted(sound) && Mix_Paused(_findSoundChannels(sound).front()));
 	}
@@ -324,7 +324,7 @@ bool AudioPlayer::isMusicEnabled()
 
 bool AudioPlayer::isMusicStarted()
 {
-	if (_isMusicEnabled)
+	if(_isMusicEnabled)
 	{
 		return Mix_PlayingMusic();
 	}
@@ -334,7 +334,7 @@ bool AudioPlayer::isMusicStarted()
 
 bool AudioPlayer::isMusicPlaying()
 {
-	if (_isMusicEnabled)
+	if(_isMusicEnabled)
 	{
 		return (isMusicStarted() && !isMusicPaused());
 	}
@@ -344,7 +344,7 @@ bool AudioPlayer::isMusicPlaying()
 
 bool AudioPlayer::isMusicPaused()
 {
-	if (_isMusicEnabled)
+	if(_isMusicEnabled)
 	{
 		return Mix_PausedMusic();
 	}

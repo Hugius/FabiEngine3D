@@ -14,7 +14,7 @@ using std::filesystem::directory_iterator;
 bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 {
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("ScriptEditor::loadScriptsFromFile");
 	}
@@ -24,12 +24,12 @@ bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 
 	// Compose directory path
 	const string directoryPath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\scripts\\");
+								  ("projects\\" + _currentProjectID)) + "\\scripts\\");
 
 	// Warning checking
-	if (!Tools::isDirectoryExisting(directoryPath))
+	if(!Tools::isDirectoryExisting(directoryPath))
 	{
-		if (isLoggingEnabled)
+		if(isLoggingEnabled)
 		{
 			Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: directory `scripts\\` missing!");
 		}
@@ -37,14 +37,14 @@ bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	}
 
 	// Retrieve all filenames in the scripts directory
-	for (const auto& entry : directory_iterator(directoryPath))
+	for(const auto& entry : directory_iterator(directoryPath))
 	{
 		// Extract filename
 		string filename = string(entry.path().string());
 		filename.erase(0, directoryPath.size());
 
 		// Check if script file exists & check if the file extension is correct
-		if (Tools::isFileExisting(directoryPath + filename) && (filename.substr(filename.size() - 5, 5) == ".fe3d"))
+		if(Tools::isFileExisting(directoryPath + filename) && (filename.substr(filename.size() - 5, 5) == ".fe3d"))
 		{
 			// Load script file
 			ifstream file(directoryPath + filename);
@@ -64,7 +64,7 @@ bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 
 			// Extract script lines
 			unsigned int lineIndex = 0;
-			while (getline(file, line))
+			while(getline(file, line))
 			{
 				// Add new scriptline
 				_script.getScriptFile(scriptFileID)->insertNewLine(lineIndex, line);
@@ -77,7 +77,7 @@ bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	}
 
 	// Logging
-	if (isLoggingEnabled)
+	if(isLoggingEnabled)
 	{
 		Logger::throwInfo("Script data from project \"" + _currentProjectID + "\" loaded!");
 	}
@@ -92,28 +92,28 @@ bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 bool ScriptEditor::saveScriptFiles()
 {
 	// Editor must be loaded
-	if (!_isEditorLoaded)
+	if(!_isEditorLoaded)
 	{
 		return false;
 	}
 
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("ScriptEditor::saveScriptsToFile");
 	}
 
 	// Compose directory path
 	const string directoryPath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\scripts\\");
+								  ("projects\\" + _currentProjectID)) + "\\scripts\\");
 
 	// Delete all text files containing deleted scripts
-	for (const auto& filename : _scriptFilenamesToDelete)
+	for(const auto& filename : _scriptFilenamesToDelete)
 	{
 		const string finalPath = directoryPath + filename + ".fe3d";
 
 		// Check if file exists
-		if (Tools::isFileExisting(finalPath))
+		if(Tools::isFileExisting(finalPath))
 		{
 			DeleteFile(LPCSTR(finalPath.c_str()));
 		}
@@ -121,7 +121,7 @@ bool ScriptEditor::saveScriptFiles()
 	_scriptFilenamesToDelete.clear();
 
 	// Write every script to a text file
-	for (const auto& scriptID : _script.getAllScriptFileIDs())
+	for(const auto& scriptID : _script.getAllScriptFileIDs())
 	{
 		// Create or overwrite script file
 		ofstream file;
@@ -131,7 +131,7 @@ bool ScriptEditor::saveScriptFiles()
 		file << _script.getScriptFile(scriptID)->getCursorLineIndex() << " " << _script.getScriptFile(scriptID)->getCursorCharIndex() << endl;
 
 		// Write every scriptline to file
-		for (unsigned int lineIndex = 0; lineIndex < _script.getScriptFile(scriptID)->getLineCount(); lineIndex++)
+		for(unsigned int lineIndex = 0; lineIndex < _script.getScriptFile(scriptID)->getLineCount(); lineIndex++)
 		{
 			file << _script.getScriptFile(scriptID)->getLineText(lineIndex) << endl;
 		}

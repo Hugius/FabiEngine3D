@@ -24,10 +24,10 @@ void ScriptExecutor::load()
 
 void ScriptExecutor::update(bool debug)
 {
-	if (_isStarted && _isRunning)
+	if(_isStarted && _isRunning)
 	{
 		// Skip first frame, then update fulltime
-		if (!_mustSkipUpdate || debug)
+		if(!_mustSkipUpdate || debug)
 		{
 			_scriptInterpreter.executeUpdate(debug);
 		}
@@ -37,10 +37,10 @@ void ScriptExecutor::update(bool debug)
 		}
 
 		// Custom cursor is only enabled in engine preview
-		if (!_fe3d.application_isExported())
+		if(!_fe3d.application_isExported())
 		{
 			// Custom cursor must be inside of viewport or PC cursor must be visible
-			if (_fe3d.misc_isCursorInsideViewport() || _fe3d.misc_isCursorVisible())
+			if(_fe3d.misc_isCursorInsideViewport() || _fe3d.misc_isCursorVisible())
 			{
 				_fe3d.imageEntity_setVisible("@@cursor", false);
 			}
@@ -53,7 +53,7 @@ void ScriptExecutor::update(bool debug)
 
 void ScriptExecutor::pause()
 {
-	if (_isStarted && _isRunning)
+	if(_isStarted && _isRunning)
 	{
 		// Save cursor state
 		_wasCursorVisible = _fe3d.misc_isCursorVisible();
@@ -61,22 +61,22 @@ void ScriptExecutor::pause()
 
 		// Save timer state
 		_wasTimerStarted = _fe3d.misc_isMillisecondTimerStarted();
-		if (_wasTimerStarted)
+		if(_wasTimerStarted)
 		{
 			_fe3d.misc_stopMillisecondTimer();
 		}
 
 		// Save Vsync state
 		_wasVsyncEnabled = _fe3d.misc_isVsyncEnabled();
-		if (_wasVsyncEnabled)
+		if(_wasVsyncEnabled)
 		{
 			_fe3d.misc_disableVsync();
 		}
 
 		// Save sound states
-		for (const auto& soundID : _fe3d.sound_getAllIDs())
+		for(const auto& soundID : _fe3d.sound_getAllIDs())
 		{
-			if (_fe3d.sound_isPaused(soundID))
+			if(_fe3d.sound_isPaused(soundID))
 			{
 				_pausedSoundIDs.push_back(soundID);
 			}
@@ -89,7 +89,7 @@ void ScriptExecutor::pause()
 		_wasMusicPaused = _fe3d.music_isPaused();
 
 		// Pause music
-		if (_fe3d.music_isPlaying())
+		if(_fe3d.music_isPlaying())
 		{
 			_fe3d.music_pause();
 		}
@@ -102,33 +102,33 @@ void ScriptExecutor::pause()
 
 void ScriptExecutor::resume()
 {
-	if (_isStarted && !_isRunning)
+	if(_isStarted && !_isRunning)
 	{
 		// Reset cursor
 		_fe3d.misc_centerCursor();
 		_fe3d.misc_setCursorVisible(_wasCursorVisible);
 
 		// Reset Vsync
-		if (_wasVsyncEnabled)
+		if(_wasVsyncEnabled)
 		{
 			_fe3d.misc_enableVsync();
 		}
-		
+
 		// Reset timer
-		if (_wasTimerStarted)
+		if(_wasTimerStarted)
 		{
 			_fe3d.misc_startMillisecondTimer();
 		}
 
 		// Reset sounds
 		_fe3d.sound_resumeAll();
-		for (const auto& soundID : _pausedSoundIDs)
+		for(const auto& soundID : _pausedSoundIDs)
 		{
 			_fe3d.sound_pause(soundID);
 		}
 
 		// Reset music
-		if (_fe3d.music_isPaused() && !_wasMusicPaused)
+		if(_fe3d.music_isPaused() && !_wasMusicPaused)
 		{
 			_fe3d.music_resume();
 		}
@@ -142,7 +142,7 @@ void ScriptExecutor::resume()
 
 void ScriptExecutor::unload()
 {
-	if (_isStarted)
+	if(_isStarted)
 	{
 		// Execute destruction scripts
 		_scriptInterpreter.executeDestruction();
@@ -151,7 +151,7 @@ void ScriptExecutor::unload()
 		_scriptInterpreter.unload();
 
 		// Resume engine updates
-		if (_fe3d.application_isPaused())
+		if(_fe3d.application_isPaused())
 		{
 			_fe3d.application_resume();
 		}
@@ -190,7 +190,7 @@ bool ScriptExecutor::isRunning()
 
 void ScriptExecutor::_validateExecution()
 {
-	if (_scriptInterpreter.hasThrownError()) // Script threw an error
+	if(_scriptInterpreter.hasThrownError()) // Script threw an error
 	{
 		_scriptInterpreter.unload();
 		_isStarted = false;
@@ -202,7 +202,7 @@ void ScriptExecutor::_validateExecution()
 		_mustSkipUpdate = false;
 		_pausedSoundIDs.clear();
 	}
-	else if (_scriptInterpreter.gameMustStop()) // Script must stop
+	else if(_scriptInterpreter.gameMustStop()) // Script must stop
 	{
 		this->unload();
 	}

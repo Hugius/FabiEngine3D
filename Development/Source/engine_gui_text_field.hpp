@@ -5,8 +5,8 @@
 class EngineGuiTextField final
 {
 public:
-	EngineGuiTextField(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, 
-		string textContent, Vec3 color, bool isCentered = true, bool isDynamic = false);
+	EngineGuiTextField(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size,
+					   string textContent, Vec3 color, bool isCentered = true, bool isDynamic = false);
 	~EngineGuiTextField();
 
 	void setVisible(bool isVisible);

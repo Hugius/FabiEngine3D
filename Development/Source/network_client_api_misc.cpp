@@ -12,27 +12,27 @@ using std::launch;
 bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved, bool mustBeAccepted)
 {
 	// Must be running
-	if (!_isRunning)
+	if(!_isRunning)
 	{
 		Logger::throwError("NetworkClientAPI::_sendTcpMessage::1");
 	}
 
 	// Must be connected & optionally accepted
-	if (!_isConnectedToServer || (!_isAcceptedByServer && mustBeAccepted))
+	if(!_isConnectedToServer || (!_isAcceptedByServer && mustBeAccepted))
 	{
 		Logger::throwError("NetworkClientAPI::_sendTcpMessage::2");
 	}
 
 	// Validate message content
-	if (find(content.begin(), content.end(), ';') != content.end())
+	if(find(content.begin(), content.end(), ';') != content.end())
 	{
 		Logger::throwError("NetworkClientAPI::_sendTcpMessage::3");
 	}
-	if (NetworkUtils::isMessageReserved(content) && !isReserved)
+	if(NetworkUtils::isMessageReserved(content) && !isReserved)
 	{
 		Logger::throwError("NetworkClientAPI::_sendTcpMessage::4");
 	}
-	if (content.size() > NetworkUtils::MAX_MESSAGE_CHARACTERS)
+	if(content.size() > NetworkUtils::MAX_MESSAGE_CHARACTERS)
 	{
 		Logger::throwError("NetworkClientAPI::_sendTcpMessage::5");
 	}
@@ -44,14 +44,14 @@ bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved, b
 	auto sendStatusCode = send(_connectionSocketID, message.c_str(), static_cast<int>(message.size()), 0);
 
 	// Check if sending went well
-	if (sendStatusCode == SOCKET_ERROR)
+	if(sendStatusCode == SOCKET_ERROR)
 	{
-		if ((WSAGetLastError() == WSAECONNRESET) || (WSAGetLastError() == WSAECONNABORTED)) // Lost connection with host
+		if((WSAGetLastError() == WSAECONNRESET) || (WSAGetLastError() == WSAECONNABORTED)) // Lost connection with host
 		{
 			disconnectFromServer(mustBeAccepted);
 			return false;
 		}
-		else if (WSAGetLastError() == WSAENOBUFS) // Buffer full
+		else if(WSAGetLastError() == WSAENOBUFS) // Buffer full
 		{
 			Logger::throwWarning("Networking client is sending too many TCP messages!");
 		}
@@ -67,27 +67,27 @@ bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved, b
 bool NetworkClientAPI::_sendUdpMessage(const string& content, bool isReserved, bool mustBeAccepted)
 {
 	// Must be running
-	if (!_isRunning)
+	if(!_isRunning)
 	{
 		Logger::throwError("NetworkClientAPI::_sendUdpMessage::1");
 	}
 
 	// Must be connected & optionally accepted
-	if (!_isConnectedToServer || (!_isAcceptedByServer && mustBeAccepted))
+	if(!_isConnectedToServer || (!_isAcceptedByServer && mustBeAccepted))
 	{
 		Logger::throwError("NetworkClientAPI::_sendUdpMessage::2");
 	}
 
 	// Validate message semantics
-	if (find(content.begin(), content.end(), ';') != content.end())
+	if(find(content.begin(), content.end(), ';') != content.end())
 	{
 		Logger::throwError("NetworkClientAPI::_sendUdpMessage::3");
 	}
-	else if (NetworkUtils::isMessageReserved(content) && !isReserved)
+	else if(NetworkUtils::isMessageReserved(content) && !isReserved)
 	{
 		Logger::throwError("NetworkClientAPI::_sendUdpMessage::4");
 	}
-	else if (content.size() > NetworkUtils::MAX_MESSAGE_CHARACTERS)
+	else if(content.size() > NetworkUtils::MAX_MESSAGE_CHARACTERS)
 	{
 		Logger::throwError("NetworkClientAPI::_sendUdpMessage::5");
 	}
@@ -108,9 +108,9 @@ bool NetworkClientAPI::_sendUdpMessage(const string& content, bool isReserved, b
 		sizeof(socketAddress)); // Server address length
 
 	// Check if sending went well
-	if (sendStatusCode == SOCKET_ERROR)
+	if(sendStatusCode == SOCKET_ERROR)
 	{
-		if (WSAGetLastError() == WSAENOBUFS) // Buffer full
+		if(WSAGetLastError() == WSAENOBUFS) // Buffer full
 		{
 			Logger::throwWarning("Networking client is sending too many UDP messages!");
 		}
@@ -133,9 +133,9 @@ int NetworkClientAPI::_waitForServerConnection(SOCKET serverSocketID, const stri
 		serverSocketID,
 		reinterpret_cast<sockaddr*>(&socketAddress),
 		sizeof(socketAddress));
-	
+
 	// Check if connection failed
-	if (connectStatusCode == SOCKET_ERROR)
+	if(connectStatusCode == SOCKET_ERROR)
 	{
 		return WSAGetLastError();
 	}
@@ -157,7 +157,7 @@ void NetworkClientAPI::_setupTCP()
 	// Create address info
 	addrinfo* addressInfo = nullptr;
 	auto tcpInfoStatusCode = getaddrinfo("0.0.0.0", "0", &hints, &addressInfo);
-	if (tcpInfoStatusCode != 0)
+	if(tcpInfoStatusCode != 0)
 	{
 		Logger::throwError("NetworkClientAPI::_setupTCP::1 ---> ", tcpInfoStatusCode);
 		return;
@@ -165,7 +165,7 @@ void NetworkClientAPI::_setupTCP()
 
 	// Create socket
 	_connectionSocketID = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
-	if (_connectionSocketID == INVALID_SOCKET)
+	if(_connectionSocketID == INVALID_SOCKET)
 	{
 		Logger::throwError("NetworkClientAPI::_setupTCP::2 ---> ", WSAGetLastError());
 	}
@@ -178,7 +178,7 @@ void NetworkClientAPI::_setupTCP()
 
 	// Bind socket
 	auto tcpBindStatusCode = bind(_connectionSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
-	if (tcpBindStatusCode == SOCKET_ERROR)
+	if(tcpBindStatusCode == SOCKET_ERROR)
 	{
 		Logger::throwError("NetworkClientAPI::_setupTCP::3 ---> ", WSAGetLastError());
 	}
@@ -202,7 +202,7 @@ void NetworkClientAPI::_setupUDP()
 	// Create address info
 	addrinfo* addressInfo = nullptr;
 	auto udpInfoStatusCode = getaddrinfo("0.0.0.0", tcpPort.c_str(), &hints, &addressInfo);
-	if (udpInfoStatusCode != 0)
+	if(udpInfoStatusCode != 0)
 	{
 		Logger::throwError("NetworkClientAPI::_setupUDP::1 ---> ", udpInfoStatusCode);
 		return;
@@ -210,11 +210,11 @@ void NetworkClientAPI::_setupUDP()
 
 	// Create socket
 	_udpMessageSocketID = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
-	if (_udpMessageSocketID == INVALID_SOCKET)
+	if(_udpMessageSocketID == INVALID_SOCKET)
 	{
 		Logger::throwError("NetworkClientAPI::_setupUDP::2 ----> ", WSAGetLastError());
 	}
-	
+
 	// Set socket options
 	DWORD trueValue = 1;
 	DWORD falseValue = 0;
@@ -223,7 +223,7 @@ void NetworkClientAPI::_setupUDP()
 
 	// Bind socket
 	auto udpBindStatusCode = bind(_udpMessageSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
-	if (udpBindStatusCode == SOCKET_ERROR)
+	if(udpBindStatusCode == SOCKET_ERROR)
 	{
 		Logger::throwError("NetworkClientAPI::_setupUDP::3 ---> ", WSAGetLastError());
 	}
@@ -239,7 +239,7 @@ tuple<int, int, long long, string> NetworkClientAPI::_waitForTcpMessage(SOCKET t
 	int bufferLength = static_cast<int>(NetworkUtils::TCP_BUFFER_BYTES);
 	auto receiveResult = recv(tcpSocketID, buffer, bufferLength, 0);
 
-	if (receiveResult > 0) // Message received correctly
+	if(receiveResult > 0) // Message received correctly
 	{
 		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), string(buffer, receiveResult));
 	}
@@ -259,12 +259,12 @@ tuple<int, int, string, string, string> NetworkClientAPI::_receiveUdpMessage(SOC
 
 	// Retrieve data
 	auto receiveResult = recvfrom(udpSocketID, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
-	
+
 	// Extract address
 	auto IP = NetworkUtils::extractAddressIP(&sourceAddress);
 	auto port = NetworkUtils::extractAddressPort(&sourceAddress);
 
-	if (receiveResult > 0) // Message received correctly
+	if(receiveResult > 0) // Message received correctly
 	{
 		return make_tuple(receiveResult, WSAGetLastError(), string(buffer, receiveResult), IP, port);
 	}

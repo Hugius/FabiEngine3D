@@ -45,7 +45,7 @@ const vector<string> FabiEngine3D::reflectionEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (const auto& [keyID, entity] : _core->_reflectionEntityManager.getEntities())
+	for(const auto& [keyID, entity] : _core->_reflectionEntityManager.getEntities())
 	{
 		IDs.push_back(entity->getID());
 	}

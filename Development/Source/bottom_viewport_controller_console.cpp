@@ -7,7 +7,7 @@ void BottomViewportController::_updateConsoleScrolling()
 	float scrollingSpeed = static_cast<float>(_fe3d.input_getMouseWheelY()) * static_cast<float>(window->isHovered()) * 0.1f;
 
 	// No scrolling for empty console
-	if (!_consoleMessageQueue.empty() && scrollingSpeed != 0.0f)
+	if(!_consoleMessageQueue.empty() && scrollingSpeed != 0.0f)
 	{
 		// Temporary values
 		const auto screen = window->getScreen("main");
@@ -22,36 +22,36 @@ void BottomViewportController::_updateConsoleScrolling()
 
 		// Count all message text lines
 		unsigned int messageLineCount = static_cast<unsigned int>(_consoleMessageQueue.size());
-		for (const auto& [ID, message] : _consoleMessageQueue)
+		for(const auto& [ID, message] : _consoleMessageQueue)
 		{
 			// If a message is too long for 1 line, count all the text lines
 			int count = 0;
-			while (screen->isTextFieldExisting(ID + "_msg_" + to_string(count)))
+			while(screen->isTextFieldExisting(ID + "_msg_" + to_string(count)))
 			{
 				count++;
 			}
-			if (count > 1)
+			if(count > 1)
 			{
 				messageLineCount += static_cast<unsigned int>(count - 1);
 			}
 		}
 
 		// Check if there are enough messages to scroll through
-		if ((static_cast<float>(messageLineCount) * CHAR_SIZE.y) > window->getOriginalSize().y)
+		if((static_cast<float>(messageLineCount) * CHAR_SIZE.y) > window->getOriginalSize().y)
 		{
 			// Only allow scrolling when not trying to scroll too far
-			if 
-			(
+			if
+				(
 				(latestMessageY >= minY && scrollingSpeed < 0.0f)
-				|| 
+				||
 				(oldestMessage <= maxY && scrollingSpeed > 0.0f)
-			)
+				)
 			{
 				scrollingSpeed = 0.0f;
 			}
 
 			// Move all messages
-			for (const auto& [ID, message] : _consoleMessageQueue)
+			for(const auto& [ID, message] : _consoleMessageQueue)
 			{
 				// Move time part
 				_fe3d.textEntity_move(screen->getTextField(ID + "_time")->getEntityID(), Vec2(0.0f, -scrollingSpeed));
@@ -61,7 +61,7 @@ void BottomViewportController::_updateConsoleScrolling()
 
 				// Move all message parts
 				unsigned int index = 0;
-				while (screen->isTextFieldExisting(ID + "_msg_" + to_string(index)))
+				while(screen->isTextFieldExisting(ID + "_msg_" + to_string(index)))
 				{
 					_fe3d.textEntity_move(screen->getTextField(ID + "_msg_" + to_string(index))->getEntityID(), Vec2(0.0f, -scrollingSpeed));
 					index++;
@@ -88,7 +88,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 	// Reposition previous messages & add new message
 	reverse(_consoleMessageQueue.begin(), _consoleMessageQueue.end()); // Console prints reversed
 	unsigned int index = 0;
-	for (const auto& [ID, message] : _consoleMessageQueue)
+	for(const auto& [ID, message] : _consoleMessageQueue)
 	{
 		// Temporary values
 		bool alreadyExisting = screen->isTextFieldExisting(ID + "_time");
@@ -100,13 +100,13 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 		// Extract message type
 		unsigned int typePartLength = 0;
 		string typeString = "";
-		for (size_t i = 0; i < message.size(); i++)
+		for(size_t i = 0; i < message.size(); i++)
 		{
 			// Add current character
 			typeString.push_back(message[i]);
 
 			// Check if type text ended
-			if (message[i] == ']')
+			if(message[i] == ']')
 			{
 				typePartLength = static_cast<unsigned int>(i + 1);
 				break;
@@ -114,7 +114,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 		}
 
 		// Check if message is a warning, aka an "error" for the engine user
-		if (typeString == "[Warn]")
+		if(typeString == "[Warn]")
 		{
 			messagePartColor = Vec3(1.0f, 0.0f, 0.0f);
 		}
@@ -127,11 +127,11 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 		// Check if message part takes multiple lines
 		vector<string> messageParts;
 	BEGIN:
-		for (size_t i = 0; i < messagePartText.size(); i++)
+		for(size_t i = 0; i < messagePartText.size(); i++)
 		{
 			// Check if message length is bigger than window size
 			float offset = CHAR_SIZE.x * static_cast<float>(TIME_PART_LENGTH + 3);
-			if (offset + (static_cast<float>(i) * CHAR_SIZE.x) > window->getOriginalSize().x)
+			if(offset + (static_cast<float>(i) * CHAR_SIZE.x) > window->getOriginalSize().x)
 			{
 				// Cut a part of the full message
 				messageParts.push_back(messagePartText.substr(0, i));
@@ -146,14 +146,14 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 		messageParts.push_back(messagePartText);
 
 		// If printing full message, time & seperator should be printed first
-		if (messageParts.size() == 1)
+		if(messageParts.size() == 1)
 		{
-			if (alreadyExisting) // Previous message
+			if(alreadyExisting) // Previous message
 			{
-				_fe3d.textEntity_setPosition(screen->getTextField(ID + "_time")->getEntityID(), 
-					screen->convertPosition(Vec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
-				_fe3d.textEntity_setPosition(screen->getTextField(ID + "_separator")->getEntityID(), 
-					screen->convertPosition(Vec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
+				_fe3d.textEntity_setPosition(screen->getTextField(ID + "_time")->getEntityID(),
+											 screen->convertPosition(Vec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
+				_fe3d.textEntity_setPosition(screen->getTextField(ID + "_separator")->getEntityID(),
+											 screen->convertPosition(Vec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
 			}
 			else // New message
 			{
@@ -178,7 +178,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 		}
 
 		// Add TextField for every message part
-		for (size_t i = 0; i < messageParts.size(); i++)
+		for(size_t i = 0; i < messageParts.size(); i++)
 		{
 			// Update floatcasted index
 			floatIndex = static_cast<float>(index);
@@ -186,16 +186,16 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 			// ID for this message part
 			string TextFieldID = ID + "_msg_" + to_string(i);
 
-			if (alreadyExisting) // Previous message
+			if(alreadyExisting) // Previous message
 			{
 				_fe3d.textEntity_setPosition(screen->getTextField(TextFieldID)->getEntityID(),
-					screen->convertPosition(Vec2(-1.0f + timePartOffset + separatorPartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
+											 screen->convertPosition(Vec2(-1.0f + timePartOffset + separatorPartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
 			}
 			else // New message
 			{
 				// Add message part
 				screen->createTextField(TextFieldID, Vec2(-1.0f + timePartOffset + separatorPartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)),
-					Vec2(0.0f), "", messagePartColor, false);
+										Vec2(0.0f), "", messagePartColor, false);
 				_fe3d.textEntity_setTextContent(screen->getTextField(TextFieldID)->getEntityID(), messageParts[i], CHAR_SIZE.x, CHAR_SIZE.y);
 
 				// Add boundaries
@@ -204,14 +204,14 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 			}
 
 			// If printing the message in multiple parts, time & seperator should be printed last
-			if ((messageParts.size() > 1) && i == (messageParts.size() - 1))
+			if((messageParts.size() > 1) && i == (messageParts.size() - 1))
 			{
-				if (alreadyExisting) // Previous message
+				if(alreadyExisting) // Previous message
 				{
-					_fe3d.textEntity_setPosition(screen->getTextField(ID + "_time")->getEntityID(), 
-						screen->convertPosition(Vec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
-					_fe3d.textEntity_setPosition(screen->getTextField(ID + "_separator")->getEntityID(), 
-						screen->convertPosition(Vec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
+					_fe3d.textEntity_setPosition(screen->getTextField(ID + "_time")->getEntityID(),
+												 screen->convertPosition(Vec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
+					_fe3d.textEntity_setPosition(screen->getTextField(ID + "_separator")->getEntityID(),
+												 screen->convertPosition(Vec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
 				}
 				else // New message
 				{
@@ -251,7 +251,7 @@ void BottomViewportController::_deleteConsoleMessage(const string& ID)
 
 	// Delete all message parts
 	unsigned int index = 0;
-	while (screen->isTextFieldExisting(ID + "_msg_" + to_string(index)))
+	while(screen->isTextFieldExisting(ID + "_msg_" + to_string(index)))
 	{
 		screen->deleteTextField(ID + "_msg_" + to_string(index));
 		index++;

@@ -8,7 +8,7 @@ void CoreEngine::_updateApplication()
 	static Ivec2 lastCursorPosition = _window.getCursorPosition();
 
 	// Exit application
-	if (_inputHandler.isKeyDown(InputType::WINDOW_X_BUTTON))
+	if(_inputHandler.isKeyDown(InputType::WINDOW_X_BUTTON))
 	{
 		_stop();
 		return;
@@ -22,10 +22,10 @@ void CoreEngine::_updateApplication()
 	_timer.stopDeltaPart();
 
 	// An exported server application does not have engine updates
-	if (!(_fe3d.application_isExported() && _fe3d.networkServer_isRunning()))
+	if(!(_fe3d.application_isExported() && _fe3d.networkServer_isRunning()))
 	{
 		// Only update 3D if engine not paused
-		if (!_isPaused)
+		if(!_isPaused)
 		{
 			// Physics updates
 			_timer.startDeltaPart("physicsUpdate");
@@ -96,16 +96,16 @@ void CoreEngine::_updateApplication()
 void CoreEngine::_updateWindowFading()
 {
 	// Only if in engine preview
-	if (!Config::getInst().isApplicationExported())
+	if(!Config::getInst().isApplicationExported())
 	{
 		static float opacity = 0.0f;
 
-		if (opacity < 1.0f) // Stop if window is 100% visible
+		if(opacity < 1.0f) // Stop if window is 100% visible
 		{
 			_window.setOpacity(opacity);
 			opacity += 0.01f;
 		}
-		if (opacity >= 1.0f) // Opacity must be exactly 100% after fading
+		if(opacity >= 1.0f) // Opacity must be exactly 100% after fading
 		{
 			opacity = 1.0f;
 			_window.setOpacity(opacity);

@@ -24,7 +24,7 @@ EngineGuiWindow::~EngineGuiWindow()
 
 void EngineGuiWindow::update(bool hoverable)
 {
-	for (const auto& screen : _screens)
+	for(const auto& screen : _screens)
 	{
 		screen->update(hoverable);
 	}
@@ -33,7 +33,7 @@ void EngineGuiWindow::update(bool hoverable)
 bool EngineGuiWindow::isHovered()
 {
 	// Check if entity is visible anyway
-	if (_fe3d.imageEntity_isVisible(_entityID))
+	if(_fe3d.imageEntity_isVisible(_entityID))
 	{
 		// Convert dimensions to same space
 		Vec2 cursorPosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
@@ -41,9 +41,9 @@ bool EngineGuiWindow::isHovered()
 		Vec2 buttonSize = _fe3d.imageEntity_getSize(_entityID);
 
 		// Check if cursor inside entity
-		if (cursorPosition.x > buttonPosition.x - (buttonSize.x / 2.0f) && cursorPosition.x < buttonPosition.x + (buttonSize.x / 2.0f)) // X axis
+		if(cursorPosition.x > buttonPosition.x - (buttonSize.x / 2.0f) && cursorPosition.x < buttonPosition.x + (buttonSize.x / 2.0f)) // X axis
 		{
-			if (cursorPosition.y > buttonPosition.y - (buttonSize.y / 2.0f) && cursorPosition.y < buttonPosition.y + (buttonSize.y / 2.0f)) // Y axis
+			if(cursorPosition.y > buttonPosition.y - (buttonSize.y / 2.0f) && cursorPosition.y < buttonPosition.y + (buttonSize.y / 2.0f)) // Y axis
 			{
 				return true;
 			}
@@ -81,9 +81,9 @@ const Vec2 EngineGuiWindow::getOriginalSize()
 void EngineGuiWindow::createScreen(const string& ID)
 {
 	// Check if already exists
-	for (const auto& screen : _screens)
+	for(const auto& screen : _screens)
 	{
-		if (screen->getID() == ID)
+		if(screen->getID() == ID)
 		{
 			Logger::throwError("EngineGuiWindow::createScreen");
 		}
@@ -100,9 +100,9 @@ void EngineGuiWindow::deleteScreen(const string& ID)
 {
 	// Find screen
 	bool isFound = false;
-	for (size_t i = 0; i < _screens.size(); i++)
+	for(size_t i = 0; i < _screens.size(); i++)
 	{
-		if (_screens[i]->getID() == ID)
+		if(_screens[i]->getID() == ID)
 		{
 			_screens.erase(_screens.begin() + i);
 			isFound = true;
@@ -110,13 +110,13 @@ void EngineGuiWindow::deleteScreen(const string& ID)
 	}
 
 	// No active screen
-	if (ID == _activeScreenID)
+	if(ID == _activeScreenID)
 	{
 		_activeScreenID = "";
 	}
 
 	// Error
-	if (!isFound)
+	if(!isFound)
 	{
 		Logger::throwError("EngineGuiWindow::deleteScreen");
 	}
@@ -125,7 +125,7 @@ void EngineGuiWindow::deleteScreen(const string& ID)
 void EngineGuiWindow::setActiveScreen(const string& ID)
 {
 	// Hide old active screen if possible
-	if (_activeScreenID != "")
+	if(_activeScreenID != "")
 	{
 		getActiveScreen()->hide();
 	}
@@ -148,9 +148,9 @@ shared_ptr<EngineGuiScreen> EngineGuiWindow::getActiveScreen()
 shared_ptr<EngineGuiScreen> EngineGuiWindow::getScreen(const string& ID)
 {
 	// Retrieve screen
-	for (const auto& screen : _screens)
+	for(const auto& screen : _screens)
 	{
-		if (ID == screen->getID())
+		if(ID == screen->getID())
 		{
 			return screen;
 		}

@@ -11,9 +11,9 @@ Script::Script(FabiEngine3D& fe3d)
 void Script::createScriptFile(const string& ID)
 {
 	// Check if non-existent
-	for (const auto& file : _scriptFiles)
+	for(const auto& file : _scriptFiles)
 	{
-		if (file->getID() == ID)
+		if(file->getID() == ID)
 		{
 			Logger::throwError("Script::createScriptFile");
 		}
@@ -25,9 +25,9 @@ void Script::createScriptFile(const string& ID)
 
 void Script::renameScriptFile(const string& ID, const string& newID)
 {
-	for (const auto& file : _scriptFiles)
+	for(const auto& file : _scriptFiles)
 	{
-		if (file->getID() == ID)
+		if(file->getID() == ID)
 		{
 			file->changeID(newID);
 			return;
@@ -39,9 +39,9 @@ void Script::renameScriptFile(const string& ID, const string& newID)
 
 void Script::removeScriptFile(const string& ID)
 {
-	for (size_t i = 0; i < _scriptFiles.size(); i++)
+	for(size_t i = 0; i < _scriptFiles.size(); i++)
 	{
-		if (_scriptFiles[i]->getID() == ID)
+		if(_scriptFiles[i]->getID() == ID)
 		{
 			_scriptFiles.erase(_scriptFiles.begin() + i);
 			return;
@@ -65,7 +65,7 @@ unsigned int Script::getTotalLineCount()
 {
 	unsigned int total = 0;
 
-	for (const auto& scriptFile : _scriptFiles)
+	for(const auto& scriptFile : _scriptFiles)
 	{
 		total += scriptFile->getLineCount();
 	}
@@ -75,9 +75,9 @@ unsigned int Script::getTotalLineCount()
 
 bool Script::isScriptFileExisting(const string& ID)
 {
-	for (const auto& file : _scriptFiles)
+	for(const auto& file : _scriptFiles)
 	{
-		if (file->getID() == ID)
+		if(file->getID() == ID)
 		{
 			return true;
 		}
@@ -88,9 +88,9 @@ bool Script::isScriptFileExisting(const string& ID)
 
 shared_ptr<ScriptFile> Script::getScriptFile(const string& ID)
 {
-	for (const auto& file : _scriptFiles)
+	for(const auto& file : _scriptFiles)
 	{
-		if (file->getID() == ID)
+		if(file->getID() == ID)
 		{
 			return file;
 		}
@@ -103,7 +103,7 @@ const vector<string> Script::getAllScriptFileIDs()
 {
 	vector<string> result;
 
-	for (const auto& file : _scriptFiles)
+	for(const auto& file : _scriptFiles)
 	{
 		result.push_back(file->getID());
 	}
@@ -117,19 +117,19 @@ const vector<pair<string, unsigned int>> Script::findKeyword(const string& keywo
 	vector<pair<string, unsigned int>> result;
 
 	// For every scriptfile
-	for (const auto& file : _scriptFiles)
+	for(const auto& file : _scriptFiles)
 	{
 		// For every line
-		for (unsigned int lineNumber = 0; lineNumber < file->getLines().size(); lineNumber++)
+		for(unsigned int lineNumber = 0; lineNumber < file->getLines().size(); lineNumber++)
 		{
 			// Temporary values
 			string line = file->getLines()[lineNumber];
 
 			// For every line
-			for (size_t i = 0; i < line.size(); i++)
+			for(size_t i = 0; i < line.size(); i++)
 			{
 				// Check if keyword occurs
-				if (line.substr(i, keyword.size()) == keyword)
+				if(line.substr(i, keyword.size()) == keyword)
 				{
 					result.push_back(make_pair(file->getID(), lineNumber + 1));
 					break;

@@ -6,7 +6,7 @@ void SceneEditor::_updateModelEditing()
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
 	// Reset selected model from last frame
-	if (!_dontResetSelectedModel)
+	if(!_dontResetSelectedModel)
 	{
 		_selectedModelID = "";
 	}
@@ -16,31 +16,31 @@ void SceneEditor::_updateModelEditing()
 	}
 
 	// User must not be in placement mode
-	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
+	if(_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
 		// Check which entity is selected
 		auto hoveredID = _fe3d.raycast_checkCursorInAny().first;
 
 		// Check if user selected a model
-		for (const auto& entityID : _fe3d.modelEntity_getAllIDs())
+		for(const auto& entityID : _fe3d.modelEntity_getAllIDs())
 		{
 			// Must not be preview entity
-			if (entityID[0] != '@')
+			if(entityID[0] != '@')
 			{
 				bool hovered = (hoveredID.size() >= entityID.size()) && (hoveredID.substr(0, entityID.size()) == entityID);
 
 				// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
-				if (hovered && _fe3d.misc_isCursorInsideViewport() &&
-					!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(hovered && _fe3d.misc_isCursorInsideViewport() &&
+				   !_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Select hovered model
 					_selectModel(entityID);
 
 					// Check if user clicked model
-					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
 						// Check if same model is not clicked again
-						if (_selectedModelID != _activeModelID)
+						if(_selectedModelID != _activeModelID)
 						{
 							_activateModel(_selectedModelID);
 						}
@@ -49,10 +49,10 @@ void SceneEditor::_updateModelEditing()
 				else
 				{
 					// Don't reset if model is active or selected
-					if ((entityID != _activeModelID) && (entityID != _selectedModelID))
+					if((entityID != _activeModelID) && (entityID != _selectedModelID))
 					{
 						// Reset all parts
-						for (const auto& partID : _fe3d.modelEntity_getPartIDs(entityID))
+						for(const auto& partID : _fe3d.modelEntity_getPartIDs(entityID))
 						{
 							_fe3d.modelEntity_setColorInversion(entityID, partID, 0.0f);
 						}
@@ -62,16 +62,16 @@ void SceneEditor::_updateModelEditing()
 		}
 
 		// Check if RMB not down
-		if (!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+		if(!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 		{
 			// Check if allowed by GUI
-			if (_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// Check if model is active
-				if (_activeModelID != "")
+				if(_activeModelID != "")
 				{
 					// Check if active model cancelled
-					if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedModelID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+					if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedModelID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 					{
 						_activeModelID = "";
 						rightWindow->setActiveScreen("sceneEditorControls");
@@ -81,14 +81,14 @@ void SceneEditor::_updateModelEditing()
 		}
 
 		// Update model blinking
-		if (_selectedModelID != _activeModelID)
+		if(_selectedModelID != _activeModelID)
 		{
 			_updateModelBlinking(_selectedModelID, _selectedModelInversionDirection);
 		}
 		_updateModelBlinking(_activeModelID, _activeModelInversionDirection);
 
 		// Update properties screen
-		if (_activeModelID != "")
+		if(_activeModelID != "")
 		{
 			// Temporary values
 			auto screen = rightWindow->getScreen("modelPropertiesMenu");
@@ -97,47 +97,47 @@ void SceneEditor::_updateModelEditing()
 			rightWindow->setActiveScreen("modelPropertiesMenu");
 
 			// Button management
-			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
+				if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
 				{
 					// Update buttons hoverability
 					screen->getButton("position")->setHoverable(false);
 					screen->getButton("rotation")->setHoverable(true);
 					screen->getButton("size")->setHoverable(true);
 				}
-				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotation")->isHovered())
+				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotation")->isHovered())
 				{
 					// Update buttons hoverability
 					screen->getButton("position")->setHoverable(true);
 					screen->getButton("rotation")->setHoverable(false);
 					screen->getButton("size")->setHoverable(true);
 				}
-				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
+				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
 				{
 					// Update buttons hoverability
 					screen->getButton("position")->setHoverable(true);
 					screen->getButton("rotation")->setHoverable(true);
 					screen->getButton("size")->setHoverable(false);
 				}
-				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
+				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
 				{
 					// Freeze model
 					_fe3d.modelEntity_setStaticToCamera(_activeModelID, !_fe3d.modelEntity_isStaticToCamera(_activeModelID));
 
 					// Set AABBs responsiveness
-					for (const auto& aabbID : _fe3d.aabbEntity_getChildIDs(_activeModelID, AabbParentType::MODEL_ENTITY))
+					for(const auto& aabbID : _fe3d.aabbEntity_getChildIDs(_activeModelID, AabbParentType::MODEL_ENTITY))
 					{
 						_fe3d.aabbEntity_setRaycastResponsive(aabbID, !_fe3d.modelEntity_isStaticToCamera(_activeModelID));
 						_fe3d.aabbEntity_setCollisionResponsive(aabbID, !_fe3d.modelEntity_isStaticToCamera(_activeModelID));
 					}
 				}
-				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
+				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
 				{
 					_gui.getGlobalScreen()->createChoiceForm("animationList", "Select Animation", Vec2(0.0f, 0.1f),
-						_animationEditor.getAllAnimationIDs());
+															 _animationEditor.getAllAnimationIDs());
 				}
-				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
 					_fe3d.modelEntity_delete(_activeModelID);
 					rightWindow->setActiveScreen("sceneEditorControls");
@@ -149,10 +149,10 @@ void SceneEditor::_updateModelEditing()
 			// Check if an animation ID is clicked
 			auto lastAnimationID = _animationEditor.getStartedAnimationIDs(_activeModelID);
 			string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("animationList");
-			if (selectedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(selectedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Stop last playing animation
-				if (!lastAnimationID.empty())
+				if(!lastAnimationID.empty())
 				{
 					// Stop animation
 					_animationEditor.stopAnimation(lastAnimationID.back(), _activeModelID);
@@ -164,10 +164,10 @@ void SceneEditor::_updateModelEditing()
 					_fe3d.modelEntity_setBaseSize(_activeModelID, _initialModelSize[_activeModelID]);
 
 					// Reset part transformations
-					for (const auto& partID : _fe3d.modelEntity_getPartIDs(_activeModelID))
+					for(const auto& partID : _fe3d.modelEntity_getPartIDs(_activeModelID))
 					{
 						// Only named parts
-						if (!partID.empty())
+						if(!partID.empty())
 						{
 							_fe3d.modelEntity_setPartPosition(_activeModelID, partID, Vec3(0.0f));
 							_fe3d.modelEntity_setPartRotationOrigin(_activeModelID, partID, Vec3(0.0f));
@@ -183,13 +183,13 @@ void SceneEditor::_updateModelEditing()
 				// Miscellaneous
 				_gui.getGlobalScreen()->deleteChoiceForm("animationList");
 			}
-			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("animationList")) // Cancelled choosing
+			else if(_gui.getGlobalScreen()->isChoiceFormCancelled("animationList")) // Cancelled choosing
 			{
 				_gui.getGlobalScreen()->deleteChoiceForm("animationList");
 			}
 
 			// Alternative way of deleting
-			if (_fe3d.input_isKeyPressed(InputType::KEY_DELETE))
+			if(_fe3d.input_isKeyPressed(InputType::KEY_DELETE))
 			{
 				_fe3d.modelEntity_delete(_activeModelID);
 				rightWindow->setActiveScreen("sceneEditorControls");
@@ -206,7 +206,7 @@ void SceneEditor::_updateModelEditing()
 			auto oldSize = size;
 
 			// Handle position, rotation, size
-			if (!screen->getButton("position")->isHoverable())
+			if(!screen->getButton("position")->isHoverable())
 			{
 				_handleValueChanging("modelPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / 100.0f));
 				_handleValueChanging("modelPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / 100.0f));
@@ -215,7 +215,7 @@ void SceneEditor::_updateModelEditing()
 				_handleValueChanging("modelPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / 100.0f));
 				_handleValueChanging("modelPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / 100.0f));
 			}
-			else if (!screen->getButton("rotation")->isHoverable())
+			else if(!screen->getButton("rotation")->isHoverable())
 			{
 				_handleValueChanging("modelPropertiesMenu", "xPlus", "x", rotation.x, (_editorSpeed / 25.0f));
 				_handleValueChanging("modelPropertiesMenu", "xMinus", "x", rotation.x, -(_editorSpeed / 25.0f));
@@ -224,7 +224,7 @@ void SceneEditor::_updateModelEditing()
 				_handleValueChanging("modelPropertiesMenu", "zPlus", "z", rotation.z, (_editorSpeed / 25.0f));
 				_handleValueChanging("modelPropertiesMenu", "zMinus", "z", rotation.z, -(_editorSpeed / 25.0f));
 			}
-			else if (!screen->getButton("size")->isHoverable())
+			else if(!screen->getButton("size")->isHoverable())
 			{
 				_handleValueChanging("modelPropertiesMenu", "xPlus", "x", size.x, (_editorSpeed / 100.0f), MODEL_SIZE_MULTIPLIER, 0.0f);
 				_handleValueChanging("modelPropertiesMenu", "xMinus", "x", size.x, -(_editorSpeed / 100.0f), MODEL_SIZE_MULTIPLIER, 0.0f);
@@ -235,29 +235,29 @@ void SceneEditor::_updateModelEditing()
 			}
 
 			// Update transformations if changed
-			if (position != oldPosition || rotation != oldRotation || size != oldSize)
+			if(position != oldPosition || rotation != oldRotation || size != oldSize)
 			{
 				// Check if animation is playing
 				auto animationNames = _animationEditor.getStartedAnimationIDs(_activeModelID);
-				if (!animationNames.empty())
+				if(!animationNames.empty())
 				{
 					// Stop animation
 					_animationEditor.stopAnimation(animationNames.front(), _activeModelID);
 
 					// Save new initial position
-					if (position != oldPosition)
+					if(position != oldPosition)
 					{
 						_initialModelPosition[_activeModelID] = position;
 					}
 
 					// Save new initial rotation
-					if (rotation != oldRotation)
+					if(rotation != oldRotation)
 					{
 						_initialModelRotation[_activeModelID] = rotation;
 					}
 
 					// Save new initial size
-					if (size != oldSize)
+					if(size != oldSize)
 					{
 						_initialModelSize[_activeModelID] = size;
 					}
@@ -269,10 +269,10 @@ void SceneEditor::_updateModelEditing()
 					_fe3d.modelEntity_setBaseSize(_activeModelID, _initialModelSize[_activeModelID]);
 
 					// Reset part transformations
-					for (const auto& partID : _fe3d.modelEntity_getPartIDs(_activeModelID))
+					for(const auto& partID : _fe3d.modelEntity_getPartIDs(_activeModelID))
 					{
 						// Only named parts
-						if (!partID.empty())
+						if(!partID.empty())
 						{
 							_fe3d.modelEntity_setPartPosition(_activeModelID, partID, Vec3(0.0f));
 							_fe3d.modelEntity_setPartRotationOrigin(_activeModelID, partID, Vec3(0.0f));
@@ -305,20 +305,20 @@ void SceneEditor::_updateModelEditing()
 		}
 
 		// Check if model is still selected or active
-		if (_selectedModelID.empty() && _activeModelID.empty())
+		if(_selectedModelID.empty() && _activeModelID.empty())
 		{
 			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
 		}
 	}
 	else
 	{
-		if (rightWindow->getActiveScreen()->getID() != "main")
+		if(rightWindow->getActiveScreen()->getID() != "main")
 		{
 			// Reset when user wants to place models again
-			for (const auto& entityID : _fe3d.modelEntity_getAllIDs())
+			for(const auto& entityID : _fe3d.modelEntity_getAllIDs())
 			{
 				// Check if not preview entity
-				if (entityID[0] != '@')
+				if(entityID[0] != '@')
 				{
 					rightWindow->setActiveScreen("sceneEditorControls");
 					_selectedModelInversionDirection = 1;

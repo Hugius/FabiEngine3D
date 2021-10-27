@@ -11,7 +11,7 @@ CaptureBuffer::~CaptureBuffer()
 void CaptureBuffer::createColorTexture(Ivec2 position, Ivec2 size, unsigned int count, bool isTextureClamped)
 {
 	// Check if already loaded
-	if (!_isInitialized)
+	if(!_isInitialized)
 	{
 		// Dimensions
 		_position = position;
@@ -25,7 +25,7 @@ void CaptureBuffer::createColorTexture(Ivec2 position, Ivec2 size, unsigned int 
 		bind();
 
 		// Texture generation
-		for (unsigned int i = 0; i < count; i++)
+		for(unsigned int i = 0; i < count; i++)
 		{
 			// Add empty texture ID
 			_textures.push_back(0);
@@ -35,12 +35,12 @@ void CaptureBuffer::createColorTexture(Ivec2 position, Ivec2 size, unsigned int 
 
 			// Bind texture
 			glBindTexture(GL_TEXTURE_2D, _textures[i]);
-			
+
 			// Fill texture
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _size.x, _size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
 
 			// Texture clamping
-			if (isTextureClamped)
+			if(isTextureClamped)
 			{
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -49,7 +49,7 @@ void CaptureBuffer::createColorTexture(Ivec2 position, Ivec2 size, unsigned int 
 			// Texture filtering
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			
+
 			// Unbind texture
 			glBindTexture(GL_TEXTURE_2D, 0);
 
@@ -66,7 +66,7 @@ void CaptureBuffer::createColorTexture(Ivec2 position, Ivec2 size, unsigned int 
 
 		// Multiple textures
 		vector<TextureID> attachments;
-		for (unsigned int i = 0; i < count; i++)
+		for(unsigned int i = 0; i < count; i++)
 		{
 			attachments.push_back(GL_COLOR_ATTACHMENT0 + i);
 		}
@@ -76,7 +76,7 @@ void CaptureBuffer::createColorTexture(Ivec2 position, Ivec2 size, unsigned int 
 		unbind();
 
 		// Error checking
-		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+		if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		{
 			Logger::throwError("CaptureBuffer::createColorTexture::1");
 		}
@@ -90,7 +90,7 @@ void CaptureBuffer::createColorTexture(Ivec2 position, Ivec2 size, unsigned int 
 void CaptureBuffer::createDepthTexture(Ivec2 position, Ivec2 size)
 {
 	// Check if already loaded
-	if (!_isInitialized)
+	if(!_isInitialized)
 	{
 		// Dimensions
 		_position = position;
@@ -137,7 +137,7 @@ void CaptureBuffer::createDepthTexture(Ivec2 position, Ivec2 size)
 		unbind();
 
 		// Error checking
-		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+		if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		{
 			Logger::throwError("CaptureBuffer::createDepthTexture::1");
 		}
@@ -150,14 +150,14 @@ void CaptureBuffer::createDepthTexture(Ivec2 position, Ivec2 size)
 
 void CaptureBuffer::reset()
 {
-	if (_isInitialized)
+	if(_isInitialized)
 	{
 		// Remove FBO & RBO
 		glDeleteFramebuffers(1, &_fbo);
 		glDeleteBuffers(1, &_rbo);
 
 		// Remove textures
-		for (size_t i = 0; i < _textures.size(); i++)
+		for(size_t i = 0; i < _textures.size(); i++)
 		{
 			glDeleteTextures(1, &_textures[i]);
 		}

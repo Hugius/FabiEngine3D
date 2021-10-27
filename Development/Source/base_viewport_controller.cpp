@@ -1,7 +1,7 @@
 #include "base_viewport_controller.hpp"
 
 BaseViewportController::BaseViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui)
-	: 
+	:
 	_fe3d(fe3d),
 	_gui(gui)
 {
@@ -22,7 +22,7 @@ const vector<float> BaseViewportController::calculateButtonPositions(unsigned in
 	height -= (gapSpace + (buttonHeight / 2.0f));
 
 	// The rest of the positions
-	for (unsigned int i = 0; i < buttonCount; i++)
+	for(unsigned int i = 0; i < buttonCount; i++)
 	{
 		result.push_back(height);
 		height -= (gapSpace + buttonHeight);

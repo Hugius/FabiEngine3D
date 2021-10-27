@@ -38,7 +38,7 @@ CoreEngine::CoreEngine(FabiEngine3D& fe3d)
 void CoreEngine::_start()
 {
 	// Error
-	if (_isRunning)
+	if(_isRunning)
 	{
 		Logger::throwError("Tried to start engine: already running!");
 	}
@@ -54,15 +54,15 @@ void CoreEngine::_start()
 	float lag = 0.0f;
 
 	// Main game-loop
-	while (_isRunning)
+	while(_isRunning)
 	{
 		// Start measuring time
 		auto current = high_resolution_clock::now();
 
-		if (_fe3d.networkServer_isRunning()) // Process application at full speed
+		if(_fe3d.networkServer_isRunning()) // Process application at full speed
 		{
 			// Retrieve user input if not exported
-			if (!Config::getInst().isApplicationExported())
+			if(!Config::getInst().isApplicationExported())
 			{
 				_inputHandler.update();
 			}
@@ -72,7 +72,7 @@ void CoreEngine::_start()
 			_timer.increasePassedFrameCount();
 
 			// Render application if not exported
-			if (!Config::getInst().isApplicationExported())
+			if(!Config::getInst().isApplicationExported())
 			{
 				_renderApplication();
 			}
@@ -83,13 +83,13 @@ void CoreEngine::_start()
 			lag += _deltaTimeMS;
 
 			// Check if time delay is getting too much
-			if (lag > (Config::MS_PER_UPDATE * 10.0f))
+			if(lag > (Config::MS_PER_UPDATE * 10.0f))
 			{
 				lag = Config::MS_PER_UPDATE;
 			}
 
 			// Update (roughly) 144 times per second
-			while (lag >= Config::MS_PER_UPDATE)
+			while(lag >= Config::MS_PER_UPDATE)
 			{
 				_inputHandler.update();
 				_updateApplication();
@@ -113,7 +113,7 @@ void CoreEngine::_start()
 
 void CoreEngine::_pause()
 {
-	if (_isPaused)
+	if(_isPaused)
 	{
 		Logger::throwError("Tried to resume engine: already paused!");
 	}
@@ -123,7 +123,7 @@ void CoreEngine::_pause()
 
 void CoreEngine::_resume()
 {
-	if (!_isPaused)
+	if(!_isPaused)
 	{
 		Logger::throwError("Tried to resume engine: not paused!");
 	}
@@ -133,7 +133,7 @@ void CoreEngine::_resume()
 
 void CoreEngine::_stop()
 {
-	if (!_isRunning)
+	if(!_isRunning)
 	{
 		Logger::throwError("Tried to stop engine: not running!");
 	}
@@ -151,66 +151,66 @@ void CoreEngine::_prepareApplication()
 	// Validate engine assets directory
 	if
 		(
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + meshDirectoryPath + "camera.obj")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + meshDirectoryPath + "cube.obj")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + meshDirectoryPath + "lamp.obj")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + meshDirectoryPath + "plane.obj")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + meshDirectoryPath + "speaker.obj")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + meshDirectoryPath + "torch.obj")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "a.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "b.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "backspace.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "c.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "color.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "ctrl.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "cube.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "cursor_default.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "cursor_pointing.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "cursor_text.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "d.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "debug.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "down.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "enter.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "esc.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "f.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "grid.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "h.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "left.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "light_source.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "logo.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "minus.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "mouse.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "mouse_left.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "mouse_middle.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "mouse_right.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "p.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "pause.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "play.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "plus.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "position.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "r.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "radius.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "restart.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "right.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "rotation.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "s.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "settings.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "shape_circle.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "shape_square.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "shift.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "size.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "space.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "stop.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "up.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "v.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "background_right.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "background_left.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "background_top.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "background_bottom.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "background_back.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "background_front.png")) ||
-			!Tools::isFileExisting(string(Tools::getRootDirectory() + fontDirectoryPath + "font.ttf"))
-			)
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + meshDirectoryPath + "camera.obj")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + meshDirectoryPath + "cube.obj")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + meshDirectoryPath + "lamp.obj")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + meshDirectoryPath + "plane.obj")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + meshDirectoryPath + "speaker.obj")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + meshDirectoryPath + "torch.obj")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "a.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "b.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "backspace.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "c.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "color.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "ctrl.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "cube.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "cursor_default.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "cursor_pointing.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "cursor_text.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "d.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "debug.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "down.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "enter.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "esc.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "f.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "grid.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "h.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "left.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "light_source.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "logo.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "minus.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "mouse.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "mouse_left.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "mouse_middle.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "mouse_right.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "p.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "pause.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "play.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "plus.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "position.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "r.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "radius.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "restart.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "right.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "rotation.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "s.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "settings.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "shape_circle.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "shape_square.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "shift.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "size.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "space.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "stop.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "up.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "v.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "background_right.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "background_left.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "background_top.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "background_bottom.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "background_back.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "background_front.png")) ||
+		!Tools::isFileExisting(string(Tools::getRootDirectory() + fontDirectoryPath + "font.ttf"))
+		)
 	{
 		Logger::throwFatalWarning("Directory `engine_assets\\` is missing or corrupted!");
 	}
@@ -229,7 +229,7 @@ void CoreEngine::_prepareApplication()
 
 	// Render logo
 	Vec3 keyingColor = Vec3(0.2f);
-	if (Config::getInst().isApplicationExported())
+	if(Config::getInst().isApplicationExported())
 	{
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	}
@@ -247,16 +247,16 @@ void CoreEngine::_prepareApplication()
 	_fe3d.FE3D_CONTROLLER_INIT();
 
 	// Check if engine is still running
-	if (_isRunning)
+	if(_isRunning)
 	{
 		// Hide logo
-		if (!Config::getInst().isApplicationExported())
+		if(!Config::getInst().isApplicationExported())
 		{
 			_window.disableColorKeying(keyingColor);
 		}
 
 		// Create window if necessary
-		if (!Config::getInst().isApplicationExported() || (Config::getInst().isApplicationExported() && !_fe3d.networkServer_isRunning()))
+		if(!Config::getInst().isApplicationExported() || (Config::getInst().isApplicationExported() && !_fe3d.networkServer_isRunning()))
 		{
 			// Set window properties
 			_window.setSize(Config::getInst().getWindowSize());
@@ -266,7 +266,7 @@ void CoreEngine::_prepareApplication()
 			_window.showWindow();
 
 			// Only if in engine preview
-			if (Config::getInst().isApplicationExported())
+			if(Config::getInst().isApplicationExported())
 			{
 				// No fade in
 				_window.setOpacity(1.0f);

@@ -5,37 +5,37 @@ using SVT = ScriptValueType;
 bool ScriptInterpreter::_executeFe3dMusicGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:music_get_volume")
+	if(functionName == "fe3d:music_get_volume")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.music_getVolume();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
-	else if (functionName == "fe3d:music_is_started")
+	else if(functionName == "fe3d:music_is_started")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.music_isStarted();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:music_is_playing")
+	else if(functionName == "fe3d:music_is_playing")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.music_isPlaying();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:music_is_paused")
+	else if(functionName == "fe3d:music_is_paused")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.music_isPaused();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -47,7 +47,7 @@ bool ScriptInterpreter::_executeFe3dMusicGetterFunction(const string& functionNa
 	}
 
 	// Cannot execute music functionality when server is running
-	if (_fe3d.networkServer_isRunning())
+	if(_fe3d.networkServer_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:music` functionality as a networking server!");
 	}

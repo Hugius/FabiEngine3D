@@ -22,9 +22,9 @@ void Raycaster::update(Ivec2 cursorPosition)
 	_cursorRay = _calculateCursorRay(cursorPosition);
 
 	// Update cursor pointing on terrain
-	if (_isTerrainPointingEnabled)
+	if(_isTerrainPointingEnabled)
 	{
-		if (_terrainManager.getSelectedTerrain() != nullptr)
+		if(_terrainManager.getSelectedTerrain() != nullptr)
 		{
 			_terrainPoint = _calculateTerrainPoint();
 		}
@@ -112,13 +112,13 @@ float Raycaster::calculateRayBoxIntersectionDistance(Ray ray, Box box)
 	float maxIntersectionDistance = min(min(max(minDistanceX, maxDistanceX), max(minDistanceY, maxDistanceY)), max(minDistanceZ, maxDistanceZ));
 
 	// AABB is behind camera
-	if (maxIntersectionDistance < 0.0f)
+	if(maxIntersectionDistance < 0.0f)
 	{
 		return -1.0f;
 	}
 
 	// No intersection
-	if (minIntersectionDistance > maxIntersectionDistance)
+	if(minIntersectionDistance > maxIntersectionDistance)
 	{
 		return -1.0f;
 	}
@@ -168,7 +168,7 @@ bool Raycaster::_isUnderTerrain(float distance)
 	auto selectedTerrain = _terrainManager.getSelectedTerrain();
 	float terrainHeight = _terrainManager.getPixelHeight(
 		selectedTerrain->getID(),
-		scaledRay.x + (selectedTerrain->getSize() / 2.0f), 
+		scaledRay.x + (selectedTerrain->getSize() / 2.0f),
 		scaledRay.z + (selectedTerrain->getSize() / 2.0f));
 
 	// Return
@@ -181,10 +181,10 @@ Vec3 Raycaster::_calculateTerrainPoint()
 	float distance = 0.0f;
 
 	// Try to find point on terrain
-	while (distance < _terrainPointingDistance)
+	while(distance < _terrainPointingDistance)
 	{
 		// Intersected with terrain
-		if (_isUnderTerrain(distance))
+		if(_isUnderTerrain(distance))
 		{
 			// Calculate point on terrain
 			distance -= (_terrainPointingPrecision / 2.0f);
@@ -192,7 +192,7 @@ Vec3 Raycaster::_calculateTerrainPoint()
 
 			// Check if selected point is inside the terrain size
 			auto selectedTerrain = _terrainManager.getSelectedTerrain();
-			if (_terrainManager.isInside(
+			if(_terrainManager.isInside(
 				selectedTerrain->getID(),
 				endPoint.x + (selectedTerrain->getSize() / 2.0f),
 				endPoint.z + (selectedTerrain->getSize() / 2.0f)))

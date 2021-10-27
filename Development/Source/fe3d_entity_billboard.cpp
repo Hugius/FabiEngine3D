@@ -8,7 +8,7 @@ void FabiEngine3D::billboardEntity_create(const string& ID)
 
 void FabiEngine3D::billboardEntity_deleteAll()
 {
-	for (const auto& [keyID, entity] : _core->_billboardEntityManager.getEntities())
+	for(const auto& [keyID, entity] : _core->_billboardEntityManager.getEntities())
 	{
 		billboardEntity_delete(entity->getID());
 	}
@@ -17,7 +17,7 @@ void FabiEngine3D::billboardEntity_deleteAll()
 void FabiEngine3D::billboardEntity_delete(const string& ID)
 {
 	// Delete all bound AABB entities if existing
-	for (const auto& aabbID : aabbEntity_getChildIDs(ID, AabbParentType::BILLBOARD_ENTITY))
+	for(const auto& aabbID : aabbEntity_getChildIDs(ID, AabbParentType::BILLBOARD_ENTITY))
 	{
 		_core->_aabbEntityManager.deleteEntity(aabbID);
 	}
@@ -28,14 +28,14 @@ void FabiEngine3D::billboardEntity_delete(const string& ID)
 
 void FabiEngine3D::billboardEntity_deleteGroup(const string& ID)
 {
-	for (const auto& [keyID, entity] : _core->_billboardEntityManager.getEntities()) // Iterate through billboard entities
+	for(const auto& [keyID, entity] : _core->_billboardEntityManager.getEntities()) // Iterate through billboard entities
 	{
-		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
+		if(entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 		{
 			auto subString = entity->getID().substr(0, ID.size());
 
 			// If entity matches ID
-			if (subString == ID)
+			if(subString == ID)
 			{
 				billboardEntity_delete(entity->getID());
 			}
@@ -145,7 +145,7 @@ void FabiEngine3D::billboardEntity_setColor(const string& ID, Vec3 color)
 
 void FabiEngine3D::billboardEntity_setDiffuseMap(const string& ID, const string& texturePath)
 {
-	if (texturePath.empty())
+	if(texturePath.empty())
 	{
 		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(0, false);
 		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMapPath("");
@@ -159,7 +159,7 @@ void FabiEngine3D::billboardEntity_setDiffuseMap(const string& ID, const string&
 
 void FabiEngine3D::billboardEntity_setEmissionMap(const string& ID, const string& texturePath)
 {
-	if (texturePath.empty())
+	if(texturePath.empty())
 	{
 		_core->_billboardEntityManager.getEntity(ID)->setEmissionMap(0);
 		_core->_billboardEntityManager.getEntity(ID)->setEmissionMapPath("");
@@ -200,7 +200,7 @@ const vector<string> FabiEngine3D::billboardEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (const auto& [keyID, entity] : _core->_billboardEntityManager.getEntities())
+	for(const auto& [keyID, entity] : _core->_billboardEntityManager.getEntities())
 	{
 		IDs.push_back(entity->getID());
 	}
@@ -313,7 +313,7 @@ void FabiEngine3D::billboardEntity_setFont(const string& ID, const string& fontP
 
 	// Load text
 	auto textContent = entity->getTextContent();
-	if (!textContent.empty())
+	if(!textContent.empty())
 	{
 		entity->setDiffuseMap(_core->_textureLoader.getText(textContent, fontPath), true);
 	}
@@ -326,14 +326,14 @@ void FabiEngine3D::billboardEntity_setTextContent(const string& ID, const string
 
 	// Font must be loaded
 	auto fontPath = entity->getFontPath();
-	if (fontPath.empty())
+	if(fontPath.empty())
 	{
 		Logger::throwWarning("Tried to set text content of billboard with ID \"" + ID + "\": no font loaded!");
 		return;
 	}
 
 	// Check if new text content is not the same as the current one
-	if (entity->getTextContent() != textContent)
+	if(entity->getTextContent() != textContent)
 	{
 		// Set text content
 		entity->setTextContent(textContent);
@@ -357,12 +357,12 @@ void FabiEngine3D::billboardEntity_startSpriteAnimation(const string& ID, int lo
 {
 	auto entity = _core->_billboardEntityManager.getEntity(ID);
 
-	if (entity->isSpriteAnimationStarted())
+	if(entity->isSpriteAnimationStarted())
 	{
 		Logger::throwWarning("Tried to start sprite animation on billboard with ID \"" + ID + "\": animation already started!");
 		return;
 	}
-	if (loops < -1)
+	if(loops < -1)
 	{
 		Logger::throwWarning("Tried to start sprite animation on billboard with ID \"" + ID + "\": invalid loops amount!");
 		return;
@@ -375,12 +375,12 @@ void FabiEngine3D::billboardEntity_pauseSpriteAnimation(const string& ID)
 {
 	auto entity = _core->_billboardEntityManager.getEntity(ID);
 
-	if (!entity->isSpriteAnimationStarted())
+	if(!entity->isSpriteAnimationStarted())
 	{
 		Logger::throwWarning("Tried to pause sprite animation on billboard with ID \"" + ID + "\" animation not started!");
 		return;
 	}
-	else if (entity->isSpriteAnimationPaused())
+	else if(entity->isSpriteAnimationPaused())
 	{
 		Logger::throwWarning("Tried to pause sprite animation on billboard with ID \"" + ID + "\" animation already paused!");
 		return;
@@ -393,7 +393,7 @@ void FabiEngine3D::billboardEntity_resumeSpriteAnimation(const string& ID)
 {
 	auto entity = _core->_billboardEntityManager.getEntity(ID);
 
-	if (!entity->isSpriteAnimationPaused())
+	if(!entity->isSpriteAnimationPaused())
 	{
 		Logger::throwWarning("Tried to resume sprite animation on billboard with ID \"" + ID + "\" animation not paused!");
 		return;
@@ -406,7 +406,7 @@ void FabiEngine3D::billboardEntity_stopSpriteAnimation(const string& ID)
 {
 	auto entity = _core->_billboardEntityManager.getEntity(ID);
 
-	if (!entity->isSpriteAnimationStarted())
+	if(!entity->isSpriteAnimationStarted())
 	{
 		Logger::throwWarning("Tried to stop sprite animation on billboard with ID \"" + ID + "\" animation not started!");
 		return;
@@ -491,7 +491,7 @@ const int FabiEngine3D::billboardEntity_getRemainingSpriteAnimationLoops(const s
 	auto maxLoops = _core->_billboardEntityManager.getEntity(ID)->getMaxSpriteAnimationLoops();
 	auto currentLoops = _core->_billboardEntityManager.getEntity(ID)->getSpriteAnimationLoops();
 
-	if (maxLoops == -1) // Infinite
+	if(maxLoops == -1) // Infinite
 	{
 		return -1;
 	}

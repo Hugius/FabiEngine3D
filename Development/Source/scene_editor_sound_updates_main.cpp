@@ -8,19 +8,19 @@ void SceneEditor::_updateSoundMenu()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "sceneEditorMenuSound")
+	if(screen->getID() == "sceneEditorMenuSound")
 	{
 		// Button management
-		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("place")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("place")->isHovered())
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSoundPlace");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choice")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSoundChoice");
 
@@ -30,10 +30,10 @@ void SceneEditor::_updateSoundMenu()
 			// Add the ID of every placed sound
 			auto IDs = _fe3d.sound_getAllIDs();
 			sort(IDs.begin(), IDs.end());
-			for (auto& soundID : IDs)
+			for(auto& soundID : IDs)
 			{
 				// Check if sound is not a preview
-				if (soundID[0] != '@')
+				if(soundID[0] != '@')
 				{
 					// Removing the unique number from the ID
 					reverse(soundID.begin(), soundID.end());
@@ -55,19 +55,19 @@ void SceneEditor::_updateSoundPlacingMenu()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "sceneEditorMenuSoundPlace")
+	if(screen->getID() == "sceneEditorMenuSoundPlace")
 	{
 		// Button management
-		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			// Reset placing
-			if (!_currentPreviewSoundID.empty())
+			if(!_currentPreviewSoundID.empty())
 			{
 				// Hide preview speaker
 				_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 
 				// Stop preview sound playback
-				if (_fe3d.sound_isStarted(_currentPreviewSoundID))
+				if(_fe3d.sound_isStarted(_currentPreviewSoundID))
 				{
 					_fe3d.sound_stop(_currentPreviewSoundID, 0);
 				}
@@ -81,13 +81,13 @@ void SceneEditor::_updateSoundPlacingMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSound");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			// Iterate through every created sound
-			for (const auto& audioID : _audioEditor.getLoadedAudioIDs())
+			for(const auto& audioID : _audioEditor.getLoadedAudioIDs())
 			{
 				// Check if button is hovered
-				if (screen->getScrollingList("sounds")->getButton(audioID)->isHovered())
+				if(screen->getScrollingList("sounds")->getButton(audioID)->isHovered())
 				{
 					// Deactivate everything
 					_deactivateModel();
@@ -107,7 +107,7 @@ void SceneEditor::_updateSoundPlacingMenu()
 					_fe3d.misc_centerCursor();
 
 					// Add position value forms for placing without terrain
-					if (_fe3d.terrainEntity_getSelectedID().empty())
+					if(_fe3d.terrainEntity_getSelectedID().empty())
 					{
 						_gui.getGlobalScreen()->createValueForm("positionX", "X", 0.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 						_gui.getGlobalScreen()->createValueForm("positionY", "Y", 0.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
@@ -128,13 +128,13 @@ void SceneEditor::_updateSoundChoosingMenu()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "sceneEditorMenuSoundChoice")
+	if(screen->getID() == "sceneEditorMenuSoundChoice")
 	{
 		// Remove deleted sounds from the scrollingList buttons
-		for (const auto& button : screen->getScrollingList("sounds")->getButtons())
+		for(const auto& button : screen->getScrollingList("sounds")->getButtons())
 		{
 			// Check if sound is still existing
-			if (!_fe3d.sound_isExisting(button->getID()))
+			if(!_fe3d.sound_isExisting(button->getID()))
 			{
 				// Delete button
 				screen->getScrollingList("sounds")->deleteButton(button->getID());
@@ -143,16 +143,16 @@ void SceneEditor::_updateSoundChoosingMenu()
 		}
 
 		// Iterate through every placed sound
-		for (const auto& soundID : _fe3d.sound_getAllIDs())
+		for(const auto& soundID : _fe3d.sound_getAllIDs())
 		{
 			// Check if sound is not a preview
-			if (soundID[0] != '@')
+			if(soundID[0] != '@')
 			{
 				// Check if button is hovered
-				if (screen->getScrollingList("sounds")->getButton(soundID)->isHovered())
+				if(screen->getScrollingList("sounds")->getButton(soundID)->isHovered())
 				{
 					// Check if LMB pressed (activation)
-					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
 						_activateSound(soundID);
 					}
@@ -168,9 +168,9 @@ void SceneEditor::_updateSoundChoosingMenu()
 		}
 
 		// Back button
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSound");
 				return;

@@ -9,14 +9,14 @@ ImageEntityManager::ImageEntityManager(MeshLoader& meshLoader, TextureLoader& te
 	_centeredRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true)),
 	_nonCenteredRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
 {
-	
+
 }
 
 shared_ptr<ImageEntity> ImageEntityManager::getEntity(const string& ID)
 {
 	auto result = _getImageEntity(ID);
 
-	if (result == nullptr)
+	if(result == nullptr)
 	{
 		Logger::throwError("ImageEntityManager::getEntity");
 	}
@@ -42,34 +42,34 @@ void ImageEntityManager::update()
 
 void ImageEntityManager::update(bool isEnginePaused)
 {
-	for (const auto& [keyID, entity] : _getImageEntities())
+	for(const auto& [keyID, entity] : _getImageEntities())
 	{
 		// Update transformation
 		entity->updateTransformation();
 
 		// Update sprite animation
-		if (!isEnginePaused)
+		if(!isEnginePaused)
 		{
 			// Animation is playing
-			if (entity->isSpriteAnimationStarted() && !entity->isSpriteAnimationPaused())
+			if(entity->isSpriteAnimationStarted() && !entity->isSpriteAnimationPaused())
 			{
 				// Amount of loops not reached yet
-				if (entity->getSpriteAnimationLoops() != entity->getMaxSpriteAnimationLoops())
+				if(entity->getSpriteAnimationLoops() != entity->getMaxSpriteAnimationLoops())
 				{
 					// Animation not finished yet
-					if (entity->getPassedSpriteAnimationFrames() >= entity->getMaxSpriteAnimationFramestep())
+					if(entity->getPassedSpriteAnimationFrames() >= entity->getMaxSpriteAnimationFramestep())
 					{
 						// Reset frame counter
 						entity->resetPassedSpriteAnimationFrames();
 
 						// Reached total columns
-						if (entity->getSpriteAnimationColumnIndex() >= (entity->getTotalSpriteAnimationColumns() - 1))
+						if(entity->getSpriteAnimationColumnIndex() >= (entity->getTotalSpriteAnimationColumns() - 1))
 						{
 							// Reset column index
 							entity->setSpriteAnimationColumnIndex(0);
 
 							// Reached total rows
-							if (entity->getSpriteAnimationRowIndex() >= (entity->getTotalSpriteAnimationRows() - 1))
+							if(entity->getSpriteAnimationRowIndex() >= (entity->getTotalSpriteAnimationRows() - 1))
 							{
 								// Reset row index (animation finished)
 								entity->setSpriteAnimationRowIndex(0);
@@ -94,7 +94,7 @@ void ImageEntityManager::update(bool isEnginePaused)
 		}
 
 		// Update transformation matrix
-		if (entity->isVisible())
+		if(entity->isVisible())
 		{
 			entity->updateTransformationMatrix();
 		}

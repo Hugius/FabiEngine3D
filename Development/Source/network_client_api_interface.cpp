@@ -14,7 +14,7 @@ const bool NetworkClientAPI::isRunning()
 const bool NetworkClientAPI::isConnectingToServer()
 {
 	// Must be running
-	if (!_isRunning)
+	if(!_isRunning)
 	{
 		Logger::throwError("NetworkClientAPI::isConnectingToServer");
 	}
@@ -25,7 +25,7 @@ const bool NetworkClientAPI::isConnectingToServer()
 const bool NetworkClientAPI::isConnectedToServer()
 {
 	// Must be running
-	if (!_isRunning)
+	if(!_isRunning)
 	{
 		Logger::throwError("NetworkClientAPI::isConnectedToServer");
 	}
@@ -36,7 +36,7 @@ const bool NetworkClientAPI::isConnectedToServer()
 const bool NetworkClientAPI::isAcceptedByServer()
 {
 	// Must be running
-	if (!_isRunning)
+	if(!_isRunning)
 	{
 		Logger::throwError("NetworkClientAPI::isAcceptedByServer");
 	}
@@ -47,26 +47,26 @@ const bool NetworkClientAPI::isAcceptedByServer()
 const unsigned int NetworkClientAPI::getPingLatency()
 {
 	// Must be running
-	if (!_isRunning)
+	if(!_isRunning)
 	{
 		Logger::throwError("NetworkClientAPI::getPingLatency::1");
 	}
 
 	// Must be connected & accepted
-	if (!_isConnectedToServer || !_isAcceptedByServer)
+	if(!_isConnectedToServer || !_isAcceptedByServer)
 	{
 		Logger::throwError("NetworkClientAPI::getPingLatency::2");
 	}
 
 	// Check if no ping latency is measured yet
-	if (_pingLatencies.empty())
+	if(_pingLatencies.empty())
 	{
 		return 0;
 	}
 
 	// Calculate average ping
 	unsigned int totalPing = 0;
-	for (const auto& ping : _pingLatencies)
+	for(const auto& ping : _pingLatencies)
 	{
 		totalPing += ping;
 	}
@@ -84,13 +84,13 @@ const string& NetworkClientAPI::getUsername()
 const string& NetworkClientAPI::getServerIP()
 {
 	// Must be running
-	if (!_isRunning)
+	if(!_isRunning)
 	{
 		Logger::throwError("NetworkClientAPI::getServerIP::1");
 	}
 
 	// Must be connected & accepted
-	if (!_isConnectedToServer || !_isAcceptedByServer)
+	if(!_isConnectedToServer || !_isAcceptedByServer)
 	{
 		Logger::throwError("NetworkClientAPI::getServerIP::2");
 	}
@@ -101,7 +101,7 @@ const string& NetworkClientAPI::getServerIP()
 const vector<NetworkServerMessage>& NetworkClientAPI::getPendingMessages()
 {
 	// Must be running
-	if (!_isRunning)
+	if(!_isRunning)
 	{
 		Logger::throwError("NetworkClientAPI::getPendingMessages");
 	}

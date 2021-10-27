@@ -16,10 +16,10 @@ void FabiEngine3D::sound_make3D(const string& ID, Vec3 position, float maxVolume
 void FabiEngine3D::sound_delete(const string& ID)
 {
 	// Check if chunk exists
-	if (_core->_audioManager.isSoundExisting(ID))
+	if(_core->_audioManager.isSoundExisting(ID))
 	{
 		// Stop before deleting
-		if (_core->_audioPlayer.isSoundStarted(_core->_audioManager.getSound(ID)))
+		if(_core->_audioPlayer.isSoundStarted(_core->_audioManager.getSound(ID)))
 		{
 			_core->_audioPlayer.stopSound(_core->_audioManager.getSound(ID), 0);
 		}
@@ -42,17 +42,17 @@ void FabiEngine3D::sound_play(const string& ID, int loops, int fadeMS, bool forc
 {
 	auto sound = _core->_audioManager.getSound(ID);
 
-	if (!_core->_audioPlayer.isChannelAvailable())
+	if(!_core->_audioPlayer.isChannelAvailable())
 	{
 		Logger::throwWarning("Tried to play sound with ID \"", ID, "\": no audio channels available!");
 		return;
 	}
-	if (_core->_audioPlayer.isSoundStarted(sound) && !forcePlay)
+	if(_core->_audioPlayer.isSoundStarted(sound) && !forcePlay)
 	{
 		Logger::throwWarning("Tried to play sound with ID \"", ID, "\": sound is already started!");
 		return;
 	}
-	
+
 	_core->_audioPlayer.playSound(sound, loops, fadeMS, forcePlay);
 }
 
@@ -60,12 +60,12 @@ void FabiEngine3D::sound_pause(const string& ID)
 {
 	auto sound = _core->_audioManager.getSound(ID);
 
-	if (!_core->_audioPlayer.isSoundPlaying(sound))
+	if(!_core->_audioPlayer.isSoundPlaying(sound))
 	{
 		Logger::throwWarning("Tried to pause sound with ID \"", ID, "\": sound is not playing!");
 		return;
 	}
-	if (_core->_audioPlayer.isSoundPaused(sound))
+	if(_core->_audioPlayer.isSoundPaused(sound))
 	{
 		Logger::throwWarning("Tried to pause sound with ID \"", ID, "\": sound is already paused!");
 		return;
@@ -83,7 +83,7 @@ void FabiEngine3D::sound_resume(const string& ID)
 {
 	auto sound = _core->_audioManager.getSound(ID);
 
-	if (!_core->_audioPlayer.isSoundPaused(sound))
+	if(!_core->_audioPlayer.isSoundPaused(sound))
 	{
 		Logger::throwWarning("Tried to resume sound with ID \"", sound.getID(), "\": sound is not paused!");
 		return;
@@ -101,7 +101,7 @@ void FabiEngine3D::sound_stop(const string& ID, int fadeMS)
 {
 	auto sound = _core->_audioManager.getSound(ID);
 
-	if (!_core->_audioPlayer.isSoundStarted(sound))
+	if(!_core->_audioPlayer.isSoundStarted(sound))
 	{
 		Logger::throwWarning("Tried to stop sound with ID \"", ID, "\": sound is not started!");
 		return;
@@ -144,7 +144,7 @@ const vector<string> FabiEngine3D::sound_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (auto chunk : _core->_audioManager.getSounds())
+	for(auto chunk : _core->_audioManager.getSounds())
 	{
 		IDs.push_back(chunk.getID());
 	}
@@ -221,7 +221,7 @@ void FabiEngine3D::music_addToPlaylist(const string& filename)
 void FabiEngine3D::music_clearPlaylist()
 {
 	// Stop before deleting
-	if (_core->_audioPlayer.isMusicStarted())
+	if(_core->_audioPlayer.isMusicStarted())
 	{
 		_core->_audioPlayer.stopMusic();
 	}
@@ -232,12 +232,12 @@ void FabiEngine3D::music_clearPlaylist()
 
 void FabiEngine3D::music_pause()
 {
-	if (!_core->_audioPlayer.isMusicPlaying())
+	if(!_core->_audioPlayer.isMusicPlaying())
 	{
 		Logger::throwWarning("Tried to pause music playlist: music is not playing!");
 		return;
 	}
-	if (_core->_audioPlayer.isMusicPaused())
+	if(_core->_audioPlayer.isMusicPaused())
 	{
 		Logger::throwWarning("Tried to pause music playlist: music is already paused!");
 		return;
@@ -248,7 +248,7 @@ void FabiEngine3D::music_pause()
 
 void FabiEngine3D::music_resume()
 {
-	if (!_core->_audioPlayer.isMusicPaused())
+	if(!_core->_audioPlayer.isMusicPaused())
 	{
 		Logger::throwWarning("Tried to resume music playlist: music is not paused!");
 		return;

@@ -9,7 +9,7 @@ void FabiEngine3D::modelEntity_create(const string& ID, const string& meshPath)
 void FabiEngine3D::modelEntity_deleteAll()
 {
 	// For every model entity
-	for (const auto& [keyID, entity] : _core->_modelEntityManager.getEntities())
+	for(const auto& [keyID, entity] : _core->_modelEntityManager.getEntities())
 	{
 		modelEntity_delete(entity->getID());
 	}
@@ -18,7 +18,7 @@ void FabiEngine3D::modelEntity_deleteAll()
 void FabiEngine3D::modelEntity_delete(const string& ID)
 {
 	// Delete all bound AABB entities if existing
-	for (const auto& aabbID : aabbEntity_getChildIDs(ID, AabbParentType::MODEL_ENTITY))
+	for(const auto& aabbID : aabbEntity_getChildIDs(ID, AabbParentType::MODEL_ENTITY))
 	{
 		_core->_aabbEntityManager.deleteEntity(aabbID);
 	}
@@ -29,14 +29,14 @@ void FabiEngine3D::modelEntity_delete(const string& ID)
 
 void FabiEngine3D::modelEntity_deleteGroup(const string& ID)
 {
-	for (const auto& [keyID, entity] : _core->_modelEntityManager.getEntities()) // Iterate through model entities
+	for(const auto& [keyID, entity] : _core->_modelEntityManager.getEntities()) // Iterate through model entities
 	{
-		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
+		if(entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 		{
 			auto subString = entity->getID().substr(0, ID.size());
 
 			// If entity matches ID
-			if (subString == ID) 
+			if(subString == ID)
 			{
 				modelEntity_delete(entity->getID());
 			}
@@ -51,7 +51,7 @@ void FabiEngine3D::modelEntity_setVisible(const string& ID, bool isVisible)
 
 void FabiEngine3D::modelEntity_setDiffuseMap(const string& ID, const string& partID, const string& texturePath)
 {
-	if (texturePath.empty())
+	if(texturePath.empty())
 	{
 		_core->_modelEntityManager.getEntity(ID)->setDiffuseMap(partID, 0);
 		_core->_modelEntityManager.getEntity(ID)->setDiffuseMapPath(partID, "");
@@ -65,7 +65,7 @@ void FabiEngine3D::modelEntity_setDiffuseMap(const string& ID, const string& par
 
 void FabiEngine3D::modelEntity_setEmissionMap(const string& ID, const string& partID, const string& texturePath)
 {
-	if (texturePath.empty())
+	if(texturePath.empty())
 	{
 		_core->_modelEntityManager.getEntity(ID)->setEmissionMap(partID, 0);
 		_core->_modelEntityManager.getEntity(ID)->setEmissionMapPath(partID, "");
@@ -79,7 +79,7 @@ void FabiEngine3D::modelEntity_setEmissionMap(const string& ID, const string& pa
 
 void FabiEngine3D::modelEntity_setSpecularMap(const string& ID, const string& partID, const string& texturePath)
 {
-	if (texturePath.empty())
+	if(texturePath.empty())
 	{
 		_core->_modelEntityManager.getEntity(ID)->setSpecularMap(partID, 0);
 		_core->_modelEntityManager.getEntity(ID)->setSpecularMapPath(partID, "");
@@ -93,7 +93,7 @@ void FabiEngine3D::modelEntity_setSpecularMap(const string& ID, const string& pa
 
 void FabiEngine3D::modelEntity_setNormalMap(const string& ID, const string& partID, const string& texturePath)
 {
-	if (texturePath.empty())
+	if(texturePath.empty())
 	{
 		_core->_modelEntityManager.getEntity(ID)->setNormalMap(partID, 0);
 		_core->_modelEntityManager.getEntity(ID)->setNormalMapPath(partID, "");
@@ -107,7 +107,7 @@ void FabiEngine3D::modelEntity_setNormalMap(const string& ID, const string& part
 
 void FabiEngine3D::modelEntity_setReflectionMap(const string& ID, const string& partID, const string& texturePath)
 {
-	if (texturePath.empty())
+	if(texturePath.empty())
 	{
 		_core->_modelEntityManager.getEntity(ID)->setReflectionMap(partID, 0);
 		_core->_modelEntityManager.getEntity(ID)->setReflectionMapPath(partID, "");
@@ -202,9 +202,9 @@ const bool FabiEngine3D::modelEntity_isDepthMapIncluded(const string& ID)
 
 const bool FabiEngine3D::modelEntity_hasPart(const string& ID, const string& partID)
 {
-	for (const auto& existingPartID : modelEntity_getPartIDs(ID))
+	for(const auto& existingPartID : modelEntity_getPartIDs(ID))
 	{
-		if (partID == existingPartID)
+		if(partID == existingPartID)
 		{
 			return true;
 		}
@@ -405,7 +405,7 @@ void FabiEngine3D::modelEntity_setSpecularIntensity(const string& ID, const stri
 
 void FabiEngine3D::modelEntity_setReflectivity(const string& ID, const string& partID, float reflectivity)
 {
-	_core->_modelEntityManager.getEntity(ID)->setReflectivity(partID,reflectivity);
+	_core->_modelEntityManager.getEntity(ID)->setReflectivity(partID, reflectivity);
 }
 
 void FabiEngine3D::modelEntity_setLightness(const string& ID, const string& partID, float lightness)
@@ -462,7 +462,7 @@ void FabiEngine3D::modelEntity_enableInstancing(const string& ID, vector<Vec3> o
 {
 	auto entity = _core->_modelEntityManager.getEntity(ID);
 
-	for (const auto& partID : entity->getPartIDs())
+	for(const auto& partID : entity->getPartIDs())
 	{
 		entity->getRenderBuffer(partID)->enableInstancing(offsets);
 	}
@@ -472,7 +472,7 @@ void FabiEngine3D::modelEntity_disableInstancing(const string& ID)
 {
 	auto entity = _core->_modelEntityManager.getEntity(ID);
 
-	for (const auto& partID : entity->getPartIDs())
+	for(const auto& partID : entity->getPartIDs())
 	{
 		entity->getRenderBuffer(partID)->disableInstancing();
 	}
@@ -589,7 +589,7 @@ const vector<Vec3> FabiEngine3D::modelEntity_getInstancedOffsets(const string& I
 	auto entity = _core->_modelEntityManager.getEntity(ID);
 
 	// Check if model is instanced
-	if (modelEntity_isInstanced(ID))
+	if(modelEntity_isInstanced(ID))
 	{
 		return entity->getRenderBuffer(entity->getPartIDs()[0])->getInstancedOffsets();
 	}
@@ -633,7 +633,7 @@ const vector<string> FabiEngine3D::modelEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (const auto& [keyID, entity] : _core->_modelEntityManager.getEntities()) // Iterate through model entities
+	for(const auto& [keyID, entity] : _core->_modelEntityManager.getEntities()) // Iterate through model entities
 	{
 		IDs.push_back(entity->getID());
 	}
@@ -645,11 +645,11 @@ const vector<string> FabiEngine3D::modelEntity_getGroupIDs(const string& ID)
 {
 	vector<string> IDs;
 
-	for (const auto& [keyID, entity] : _core->_modelEntityManager.getEntities()) // Iterate through model entities
+	for(const auto& [keyID, entity] : _core->_modelEntityManager.getEntities()) // Iterate through model entities
 	{
-		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
+		if(entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 		{
-			if (entity->getID().substr(0, ID.size()) == ID) // If entity matches ID
+			if(entity->getID().substr(0, ID.size()) == ID) // If entity matches ID
 			{
 				IDs.push_back(entity->getID());
 			}

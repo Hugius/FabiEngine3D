@@ -10,7 +10,7 @@ using std::function;
 void MasterRenderer::_renderSkyEntity()
 {
 	// Validate existence
-	if (_entityBus->getMainSkyEntity() != nullptr)
+	if(_entityBus->getMainSkyEntity() != nullptr)
 	{
 		// Bind
 		_skyEntityColorRenderer.bind();
@@ -26,7 +26,7 @@ void MasterRenderer::_renderSkyEntity()
 void MasterRenderer::_renderTerrainEntity()
 {
 	// Validate existence
-	if (_entityBus->getTerrainEntity() != nullptr)
+	if(_entityBus->getTerrainEntity() != nullptr)
 	{
 		// Bind
 		_terrainEntityColorRenderer.bind();
@@ -48,7 +48,7 @@ void MasterRenderer::_renderTerrainEntity()
 void MasterRenderer::_renderWaterEntity()
 {
 	// Validate existence
-	if (_entityBus->getWaterEntity() != nullptr)
+	if(_entityBus->getWaterEntity() != nullptr)
 	{
 		// Bind
 		_waterEntityColorRenderer.bind();
@@ -73,7 +73,7 @@ void MasterRenderer::_renderModelEntities()
 	auto modelEntities = _entityBus->getModelEntities();
 
 	// Validate existence
-	if (!modelEntities.empty())
+	if(!modelEntities.empty())
 	{
 		// Bind
 		_modelEntityColorRenderer.bind();
@@ -85,10 +85,10 @@ void MasterRenderer::_renderModelEntities()
 		_modelEntityColorRenderer.processSpotlightEntities(_entityBus->getSpotlightEntities());
 
 		// Render model entities
-		for (const auto& [keyID, modelEntity] : modelEntities)
+		for(const auto& [keyID, modelEntity] : modelEntities)
 		{
 			// Check if LOD entity needs to be rendered
-			if (modelEntity->isLevelOfDetailed())
+			if(modelEntity->isLevelOfDetailed())
 			{
 				// Try to find LOD entity
 				auto lodEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityID())->second;
@@ -133,13 +133,13 @@ void MasterRenderer::_renderBillboardEntities()
 	auto billboardEntities = _entityBus->getBillboardEntities();
 
 	// Validate existence
-	if (!billboardEntities.empty())
+	if(!billboardEntities.empty())
 	{
 		// Bind
 		_billboardEntityColorRenderer.bind();
 
 		// Render billboard entities
-		for (const auto& [keyID, entity] : billboardEntities)
+		for(const auto& [keyID, entity] : billboardEntities)
 		{
 			_billboardEntityColorRenderer.render(entity);
 		}
@@ -151,19 +151,19 @@ void MasterRenderer::_renderBillboardEntities()
 
 void MasterRenderer::_renderAabbEntities()
 {
-	if (_renderBus.isAabbFrameRenderingEnabled())
+	if(_renderBus.isAabbFrameRenderingEnabled())
 	{
 		// Temporary values
 		auto aabbEntities = _entityBus->getAabbEntities();
 
 		// Validate existence
-		if (!aabbEntities.empty())
+		if(!aabbEntities.empty())
 		{
 			// Bind
 			_aabbEntityColorRenderer.bind();
 
 			// Render AABB entities
-			for (const auto& [keyID, entity] : aabbEntities)
+			for(const auto& [keyID, entity] : aabbEntities)
 			{
 				_aabbEntityColorRenderer.render(entity);
 			}
@@ -193,42 +193,42 @@ void MasterRenderer::_renderFinalSceneImage()
 
 void MasterRenderer::_renderGUI()
 {
-	if (!_entityBus->getImageEntities().empty() || !_entityBus->getTextEntities().empty())
+	if(!_entityBus->getImageEntities().empty() || !_entityBus->getTextEntities().empty())
 	{
 		// Bind
 		_imageEntityColorRenderer.bind();
 
 		// Sort rendering order
 		map<unsigned int, shared_ptr<ImageEntity>> orderedEntityMap;
-		for (const auto& [keyID, entity] : _entityBus->getImageEntities())
+		for(const auto& [keyID, entity] : _entityBus->getImageEntities())
 		{
 			// Custom cursor entity must be rendered last
-			if (entity->getID() != _renderBus.getCursorEntityID())
+			if(entity->getID() != _renderBus.getCursorEntityID())
 			{
 				orderedEntityMap.insert(make_pair(entity->getDepth(), entity));
 			}
 		}
-		for (const auto& [keyID, entity] : _entityBus->getTextEntities())
+		for(const auto& [keyID, entity] : _entityBus->getTextEntities())
 		{
 			orderedEntityMap.insert(make_pair(entity->getDepth(), entity));
 		}
 
 		// Render entities
-		for (const auto& [keyID, entity] : orderedEntityMap)
+		for(const auto& [keyID, entity] : orderedEntityMap)
 		{
 			// Check if entity is a text entity
 			auto castedTextEntity = dynamic_pointer_cast<TextEntity>(entity);
 
-			if (castedTextEntity == nullptr) // Image entity
+			if(castedTextEntity == nullptr) // Image entity
 			{
 				_imageEntityColorRenderer.render(entity);
 			}
 			else // Text entity
 			{
-				if (castedTextEntity->isDynamic()) // Dynamic text rendering
+				if(castedTextEntity->isDynamic()) // Dynamic text rendering
 				{
 					// Render every character individually
-					for (const auto& characterEntity : castedTextEntity->getCharacterEntities())
+					for(const auto& characterEntity : castedTextEntity->getCharacterEntities())
 					{
 						_imageEntityColorRenderer.render(characterEntity);
 					}
@@ -247,9 +247,9 @@ void MasterRenderer::_renderGUI()
 
 void MasterRenderer::_renderCustomCursor()
 {
-	for (const auto& [keyID, entity] : _entityBus->getImageEntities())
+	for(const auto& [keyID, entity] : _entityBus->getImageEntities())
 	{
-		if (entity->getID() == _renderBus.getCursorEntityID())
+		if(entity->getID() == _renderBus.getCursorEntityID())
 		{
 			_imageEntityColorRenderer.bind();
 			_imageEntityColorRenderer.render(entity);
@@ -265,7 +265,10 @@ void MasterRenderer::_renderDebugScreens()
 	const Vec3 textColor = Vec3(0.75f);
 	const float charWidth = 0.025f;
 	const float charHeight = 0.1f;
-	function<float(string)> calcTextWidth = [&](string text) { return (static_cast<float>(text.size()) * charWidth); };
+	function<float(string)> calcTextWidth = [&](string text)
+	{
+		return (static_cast<float>(text.size()) * charWidth);
+	};
 
 	// Scene - surface
 	shared_ptr<ImageEntity> sceneSurface = make_shared<ImageEntity>("sceneSurface");
@@ -347,7 +350,7 @@ void MasterRenderer::_renderDebugScreens()
 	bloomText->setDiffuseMap(_textureLoader.getText("Bloom Render", fontPath));
 	bloomText->setRenderBuffer(make_shared<RenderBuffer>(0.666f, 0.4f, calcTextWidth("Bloom Render"), charHeight, true));
 	bloomText->setColor(textColor);
-	
+
 	// Planar reflection - text
 	shared_ptr<TextEntity> planarReflectionText = make_shared<TextEntity>("planarReflectionText");
 	planarReflectionText->setDiffuseMap(_textureLoader.getText("Planar Reflection Render", fontPath));
@@ -383,7 +386,7 @@ void MasterRenderer::_renderDebugScreens()
 	motionText->setDiffuseMap(_textureLoader.getText("Motion Blur Render", fontPath));
 	motionText->setRenderBuffer(make_shared<RenderBuffer>(0.666f, -0.92f, calcTextWidth("Motion Blur Render"), charHeight, true));
 	motionText->setColor(textColor);
-	
+
 	// Bind
 	_imageEntityColorRenderer.bind();
 

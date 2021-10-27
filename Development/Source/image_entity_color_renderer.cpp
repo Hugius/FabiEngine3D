@@ -28,9 +28,9 @@ void ImageEntityColorRenderer::unbind()
 
 void ImageEntityColorRenderer::render(const shared_ptr<ImageEntity> entity)
 {
-	if (entity->isVisible() &&
-		((entity->getPosition().y - entity->getSize().y) < entity->getMaxPosition().y) &&
-		((entity->getPosition().y + entity->getSize().y) > entity->getMinPosition().y))
+	if(entity->isVisible() &&
+	   ((entity->getPosition().y - entity->getSize().y) < entity->getMaxPosition().y) &&
+	   ((entity->getPosition().y + entity->getSize().y) > entity->getMinPosition().y))
 	{
 		// Temporary values
 		const auto buffer = entity->getRenderBuffer();
@@ -38,7 +38,7 @@ void ImageEntityColorRenderer::render(const shared_ptr<ImageEntity> entity)
 		// Sprite animation
 		Vec2 uvMultiplier = Vec2(1.0f);
 		Vec2 uvAdder = Vec2(0.0f);
-		if (entity->isSpriteAnimationStarted())
+		if(entity->isSpriteAnimationStarted())
 		{
 			// Retrieve values
 			const auto totalColumns = entity->getTotalSpriteAnimationColumns();
@@ -66,7 +66,7 @@ void ImageEntityColorRenderer::render(const shared_ptr<ImageEntity> entity)
 		_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap());
 
 		// Bind textures
-		if (entity->hasDiffuseMap())
+		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
@@ -83,7 +83,7 @@ void ImageEntityColorRenderer::render(const shared_ptr<ImageEntity> entity)
 		glBindVertexArray(0);
 
 		// Unbind textures
-		if (entity->hasDiffuseMap())
+		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, 0);

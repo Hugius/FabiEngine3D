@@ -3,7 +3,7 @@
 
 void FabiEngine3D::gfx_enableAmbientLighting()
 {
-	if (_core->_renderBus.isAmbientLightingEnabled())
+	if(_core->_renderBus.isAmbientLightingEnabled())
 	{
 		Logger::throwWarning("Tried to enable ambient lighting: already enabled");
 		return;
@@ -14,7 +14,7 @@ void FabiEngine3D::gfx_enableAmbientLighting()
 
 void FabiEngine3D::gfx_enableDirectionalLighting()
 {
-	if (_core->_renderBus.isDirectionalLightingEnabled())
+	if(_core->_renderBus.isDirectionalLightingEnabled())
 	{
 		Logger::throwWarning("Tried to enable directional lighting: already enabled");
 		return;
@@ -25,7 +25,7 @@ void FabiEngine3D::gfx_enableDirectionalLighting()
 
 void FabiEngine3D::gfx_enableFog()
 {
-	if (_core->_renderBus.isFogEnabled())
+	if(_core->_renderBus.isFogEnabled())
 	{
 		Logger::throwWarning("Tried to enable fog: already enabled");
 		return;
@@ -36,7 +36,7 @@ void FabiEngine3D::gfx_enableFog()
 
 void FabiEngine3D::gfx_enableAntiAliasing()
 {
-	if (_core->_renderBus.isAntiAliasingEnabled())
+	if(_core->_renderBus.isAntiAliasingEnabled())
 	{
 		Logger::throwWarning("Tried to enable anti aliasing: already enabled");
 		return;
@@ -47,7 +47,7 @@ void FabiEngine3D::gfx_enableAntiAliasing()
 
 void FabiEngine3D::gfx_enableShadows()
 {
-	if (_core->_renderBus.isShadowsEnabled())
+	if(_core->_renderBus.isShadowsEnabled())
 	{
 		Logger::throwWarning("Tried to enable shadows: already enabled");
 		return;
@@ -58,7 +58,7 @@ void FabiEngine3D::gfx_enableShadows()
 
 void FabiEngine3D::gfx_enableBloom()
 {
-	if (_core->_renderBus.isBloomEnabled())
+	if(_core->_renderBus.isBloomEnabled())
 	{
 		Logger::throwWarning("Tried to enable bloom: already enabled");
 		return;
@@ -69,7 +69,7 @@ void FabiEngine3D::gfx_enableBloom()
 
 void FabiEngine3D::gfx_enableSkyExposure()
 {
-	if (_core->_skyEntityManager.isExposureEnabled())
+	if(_core->_skyEntityManager.isExposureEnabled())
 	{
 		Logger::throwWarning("Tried to enable sky exposure: already enabled");
 		return;
@@ -80,7 +80,7 @@ void FabiEngine3D::gfx_enableSkyExposure()
 
 void FabiEngine3D::gfx_enableDOF()
 {
-	if (_core->_renderBus.isDofEnabled())
+	if(_core->_renderBus.isDofEnabled())
 	{
 		Logger::throwWarning("Tried to enable DOF: already enabled");
 		return;
@@ -91,18 +91,18 @@ void FabiEngine3D::gfx_enableDOF()
 
 void FabiEngine3D::gfx_enableMotionBlur()
 {
-	if (_core->_renderBus.isMotionBlurEnabled())
+	if(_core->_renderBus.isMotionBlurEnabled())
 	{
 		Logger::throwWarning("Tried to enable motion blur: already enabled");
 		return;
 	}
-	
+
 	_core->_renderBus.setMotionBlurEnabled(true);
 }
 
 void FabiEngine3D::gfx_enableLensFlare()
 {
-	if (_core->_renderBus.isLensFlareEnabled())
+	if(_core->_renderBus.isLensFlareEnabled())
 	{
 		Logger::throwWarning("Tried to enable lens flare: already enabled");
 		return;
@@ -113,7 +113,7 @@ void FabiEngine3D::gfx_enableLensFlare()
 
 void FabiEngine3D::gfx_disableAmbientLighting(bool resetProperties)
 {
-	if (!_core->_renderBus.isAmbientLightingEnabled())
+	if(!_core->_renderBus.isAmbientLightingEnabled())
 	{
 		Logger::throwWarning("Tried to disable ambient lighting: not enabled");
 		return;
@@ -121,7 +121,7 @@ void FabiEngine3D::gfx_disableAmbientLighting(bool resetProperties)
 
 	_core->_renderBus.setAmbientLightingEnabled(false);
 
-	if (resetProperties)
+	if(resetProperties)
 	{
 		_core->_renderBus.setAmbientLightingColor(1.0f);
 		_core->_renderBus.setAmbientLightingIntensity(1.0f);
@@ -130,7 +130,7 @@ void FabiEngine3D::gfx_disableAmbientLighting(bool resetProperties)
 
 void FabiEngine3D::gfx_disableDirectionalLighting(bool resetProperties)
 {
-	if (!_core->_renderBus.isDirectionalLightingEnabled())
+	if(!_core->_renderBus.isDirectionalLightingEnabled())
 	{
 		Logger::throwWarning("Tried to disable directional lighting: not enabled");
 		return;
@@ -138,7 +138,7 @@ void FabiEngine3D::gfx_disableDirectionalLighting(bool resetProperties)
 
 	_core->_renderBus.setDirectionalLightingEnabled(false);
 
-	if (resetProperties)
+	if(resetProperties)
 	{
 		_core->_renderBus.setDirectionalLightingPosition(Vec3(0.0f));
 		_core->_renderBus.setDirectionalLightingColor(1.0f);
@@ -148,7 +148,7 @@ void FabiEngine3D::gfx_disableDirectionalLighting(bool resetProperties)
 
 void FabiEngine3D::gfx_disableFog(bool resetProperties)
 {
-	if (!_core->_renderBus.isFogEnabled())
+	if(!_core->_renderBus.isFogEnabled())
 	{
 		Logger::throwWarning("Tried to disable fog: not enabled");
 		return;
@@ -156,7 +156,7 @@ void FabiEngine3D::gfx_disableFog(bool resetProperties)
 
 	_core->_renderBus.setFogEnabled(false);
 
-	if (resetProperties)
+	if(resetProperties)
 	{
 		_core->_renderBus.setFogMinDistance(0.0f);
 		_core->_renderBus.setFogMaxDistance(0.0f);
@@ -167,7 +167,7 @@ void FabiEngine3D::gfx_disableFog(bool resetProperties)
 
 void FabiEngine3D::gfx_disableAntiAliasing(bool resetProperties)
 {
-	if (!_core->_renderBus.isAntiAliasingEnabled())
+	if(!_core->_renderBus.isAntiAliasingEnabled())
 	{
 		Logger::throwWarning("Tried to disable anti aliasing: not enabled");
 		return;
@@ -178,7 +178,7 @@ void FabiEngine3D::gfx_disableAntiAliasing(bool resetProperties)
 
 void FabiEngine3D::gfx_disableShadows(bool resetProperties)
 {
-	if (!_core->_renderBus.isShadowsEnabled())
+	if(!_core->_renderBus.isShadowsEnabled())
 	{
 		Logger::throwWarning("Tried to disable shadows: not enabled");
 		return;
@@ -186,7 +186,7 @@ void FabiEngine3D::gfx_disableShadows(bool resetProperties)
 
 	_core->_renderBus.setShadowsEnabled(false);
 
-	if (resetProperties)
+	if(resetProperties)
 	{
 		_core->_renderBus.setShadowEyePosition(Vec3(0.0f));
 		_core->_renderBus.setShadowCenterPosition(Vec3(0.0f));
@@ -200,7 +200,7 @@ void FabiEngine3D::gfx_disableShadows(bool resetProperties)
 
 void FabiEngine3D::gfx_disableBloom(bool resetProperties)
 {
-	if (!_core->_renderBus.isBloomEnabled())
+	if(!_core->_renderBus.isBloomEnabled())
 	{
 		Logger::throwWarning("Tried to disable bloom: not enabled");
 		return;
@@ -208,7 +208,7 @@ void FabiEngine3D::gfx_disableBloom(bool resetProperties)
 
 	_core->_renderBus.setBloomEnabled(false);
 
-	if (resetProperties)
+	if(resetProperties)
 	{
 		_core->_renderBus.setBloomType(BloomType());
 		_core->_renderBus.setBloomIntensity(0.0f);
@@ -218,7 +218,7 @@ void FabiEngine3D::gfx_disableBloom(bool resetProperties)
 
 void FabiEngine3D::gfx_disableSkyExposure(bool resetProperties)
 {
-	if (!_core->_skyEntityManager.isExposureEnabled())
+	if(!_core->_skyEntityManager.isExposureEnabled())
 	{
 		Logger::throwWarning("Tried to disable sky exposure: not enabled");
 		return;
@@ -226,7 +226,7 @@ void FabiEngine3D::gfx_disableSkyExposure(bool resetProperties)
 
 	_core->_skyEntityManager.setExposureEnabled(false);
 
-	if (resetProperties)
+	if(resetProperties)
 	{
 		_core->_skyEntityManager.setExposureIntensity(0.0f);
 		_core->_skyEntityManager.setExposureSpeed(0.0f);
@@ -235,7 +235,7 @@ void FabiEngine3D::gfx_disableSkyExposure(bool resetProperties)
 
 void FabiEngine3D::gfx_disableDOF(bool resetProperties)
 {
-	if (!_core->_renderBus.isDofEnabled())
+	if(!_core->_renderBus.isDofEnabled())
 	{
 		Logger::throwWarning("Tried to disable DOF: not enabled");
 		return;
@@ -243,7 +243,7 @@ void FabiEngine3D::gfx_disableDOF(bool resetProperties)
 
 	_core->_renderBus.setDofEnabled(false);
 
-	if (resetProperties)
+	if(resetProperties)
 	{
 		_core->_renderBus.setDofDynamic(false);
 		_core->_renderBus.setDofMaxDistance(0.0f);
@@ -253,7 +253,7 @@ void FabiEngine3D::gfx_disableDOF(bool resetProperties)
 
 void FabiEngine3D::gfx_disableMotionBlur(bool resetProperties)
 {
-	if (!_core->_renderBus.isMotionBlurEnabled())
+	if(!_core->_renderBus.isMotionBlurEnabled())
 	{
 		Logger::throwWarning("Tried to disable motion blur: not enabled");
 		return;
@@ -261,7 +261,7 @@ void FabiEngine3D::gfx_disableMotionBlur(bool resetProperties)
 
 	_core->_renderBus.setMotionBlurEnabled(false);
 
-	if (resetProperties)
+	if(resetProperties)
 	{
 		_core->_renderBus.setMotionBlurStrength(0.0f);
 	}
@@ -269,7 +269,7 @@ void FabiEngine3D::gfx_disableMotionBlur(bool resetProperties)
 
 void FabiEngine3D::gfx_disableLensFlare(bool resetProperties)
 {
-	if (!_core->_renderBus.isLensFlareEnabled())
+	if(!_core->_renderBus.isLensFlareEnabled())
 	{
 		Logger::throwWarning("Tried to disable lens flare: not enabled");
 		return;
@@ -277,7 +277,7 @@ void FabiEngine3D::gfx_disableLensFlare(bool resetProperties)
 
 	_core->_renderBus.setLensFlareEnabled(false);
 
-	if (resetProperties)
+	if(resetProperties)
 	{
 		_core->_renderBus.setLensFlareMap(0);
 		_core->_renderBus.setLensFlareMapPath("");

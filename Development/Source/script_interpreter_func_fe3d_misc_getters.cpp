@@ -12,13 +12,13 @@ using SVT = ScriptValueType;
 bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:cursor_is_visible")
+	if(functionName == "fe3d:cursor_is_visible")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute cursor functionality when server is running
-			if (_fe3d.networkServer_isRunning())
+			if(_fe3d.networkServer_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:cursor` functionality as a networking server!");
 				return true;
@@ -29,13 +29,13 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:cursor_get_position_x")
+	else if(functionName == "fe3d:cursor_get_position_x")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute cursor functionality when server is running
-			if (_fe3d.networkServer_isRunning())
+			if(_fe3d.networkServer_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:cursor` functionality as a networking server!");
 				return true;
@@ -46,13 +46,13 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, clamp(result, -1.0f, 1.0f)));
 		}
 	}
-	else if (functionName == "fe3d:cursor_get_position_y")
+	else if(functionName == "fe3d:cursor_get_position_y")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute cursor functionality when server is running
-			if (_fe3d.networkServer_isRunning())
+			if(_fe3d.networkServer_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:cursor` functionality as a networking server!");
 				return true;
@@ -63,13 +63,13 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, clamp(result, -1.0f, 1.0f)));
 		}
 	}
-	else if (functionName == "fe3d:window_get_width")
+	else if(functionName == "fe3d:window_get_width")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute window functionality when server is running
-			if (_fe3d.networkServer_isRunning())
+			if(_fe3d.networkServer_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:window` functionality as a networking server!");
 				return true;
@@ -80,13 +80,13 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 			returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
 		}
 	}
-	else if (functionName == "fe3d:window_get_height")
+	else if(functionName == "fe3d:window_get_height")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute window functionality when server is running
-			if (_fe3d.networkServer_isRunning())
+			if(_fe3d.networkServer_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:window` functionality as a networking server!");
 				return true;
@@ -97,22 +97,22 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 			returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
 		}
 	}
-	else if (functionName == "fe3d:timer_is_started")
+	else if(functionName == "fe3d:timer_is_started")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.misc_isMillisecondTimerStarted();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:vynsc_is_enabled")
+	else if(functionName == "fe3d:vynsc_is_enabled")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute Vsync functionality when server is running
-			if (_fe3d.networkServer_isRunning())
+			if(_fe3d.networkServer_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:vsync` functionality as a networking server!");
 				return true;

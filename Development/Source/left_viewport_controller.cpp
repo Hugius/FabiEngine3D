@@ -50,83 +50,83 @@ void LeftViewportController::update()
 	// Temporary values
 	auto window = _gui.getViewport("left")->getWindow("main");
 	auto screen = window->getActiveScreen();
-	
+
 	// Screen management
-	if (screen->getID() == "main")
+	if(screen->getID() == "main")
 	{
 		// Button management
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("skyEditor")->isHovered())
+		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("skyEditor")->isHovered())
 		{
-			if (_skyEditor.loadSkyEntitiesFromFile())
+			if(_skyEditor.loadSkyEntitiesFromFile())
 			{
 				_skyEditor.load();
 				window->setActiveScreen("skyEditorMenuMain");
 			}
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("terrainEditor")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("terrainEditor")->isHovered())
 		{
-			if (_terrainEditor.loadTerrainEntitiesFromFile())
+			if(_terrainEditor.loadTerrainEntitiesFromFile())
 			{
 				_terrainEditor.load();
 				window->setActiveScreen("terrainEditorMenuMain");
 			}
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("waterEditor")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("waterEditor")->isHovered())
 		{
-			if (_waterEditor.loadWaterEntitiesFromFile())
+			if(_waterEditor.loadWaterEntitiesFromFile())
 			{
 				_waterEditor.load();
 				window->setActiveScreen("waterEditorMenuMain");
 			}
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("modelEditor")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("modelEditor")->isHovered())
 		{
-			if (_modelEditor.loadModelEntitiesFromFile())
+			if(_modelEditor.loadModelEntitiesFromFile())
 			{
 				_modelEditor.load();
 				window->setActiveScreen("modelEditorMenuMain");
 			}
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animationEditor")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animationEditor")->isHovered())
 		{
-			if (_modelEditor.loadModelEntitiesFromFile() && _animationEditor.loadAnimationsFromFile())
+			if(_modelEditor.loadModelEntitiesFromFile() && _animationEditor.loadAnimationsFromFile())
 			{
 				_animationEditor.load();
 				window->setActiveScreen("animationEditorMenuMain");
 			}
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("billboardEditor")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("billboardEditor")->isHovered())
 		{
-			if (_billboardEditor.loadBillboardEntitiesFromFile())
+			if(_billboardEditor.loadBillboardEntitiesFromFile())
 			{
 				_billboardEditor.load();
 				window->setActiveScreen("billboardEditorMenuMain");
 			}
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("audioEditor")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("audioEditor")->isHovered())
 		{
-			if (_audioEditor.loadAudioEntitiesFromFile())
+			if(_audioEditor.loadAudioEntitiesFromFile())
 			{
 				_audioEditor.load();
 				window->setActiveScreen("audioEditorMenuMain");
 			}
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("sceneEditor")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("sceneEditor")->isHovered())
 		{
 			_sceneEditor.load();
 			window->setActiveScreen("sceneEditorMenuMain");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("scriptEditor")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("scriptEditor")->isHovered())
 		{
-			if (_scriptEditor.loadScriptFiles())
+			if(_scriptEditor.loadScriptFiles())
 			{
 				_scriptEditor.load();
 				window->setActiveScreen("scriptEditorMenuMain");
 			}
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("settingsEditor")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("settingsEditor")->isHovered())
 		{
-			if (_settingsEditor.loadSettingsFromFile())
+			if(_settingsEditor.loadSettingsFromFile())
 			{
 				_settingsEditor.load();
 				window->setActiveScreen("settingsEditorMenuMain");

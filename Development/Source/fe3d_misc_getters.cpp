@@ -14,7 +14,7 @@ const float FabiEngine3D::misc_getFPS()
 
 const float FabiEngine3D::misc_stopMillisecondTimer()
 {
-	if (!_core->_timer.isStarted())
+	if(!_core->_timer.isStarted())
 	{
 		Logger::throwWarning("Tried to stop milliseconds timer: not started!");
 		return 0.0f;
@@ -52,7 +52,7 @@ const Ivec2 FabiEngine3D::misc_getCursorPosition()
 
 const Ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport()
 {
-	if (application_isExported())
+	if(application_isExported())
 	{
 		return misc_getCursorPosition();
 	}
@@ -96,9 +96,9 @@ const bool FabiEngine3D::misc_isCursorInsideViewport()
 	auto viewportSize = Config::getInst().getViewportSize();
 
 	// Checking if cursor is inside viewport
-	if ((cursorPosition.x > viewportPosition.x) && (cursorPosition.x < (viewportPosition.x + viewportSize.x)))
+	if((cursorPosition.x > viewportPosition.x) && (cursorPosition.x < (viewportPosition.x + viewportSize.x)))
 	{
-		if ((cursorPosition.y > viewportPosition.y) && (cursorPosition.y < (viewportPosition.y + viewportSize.y)))
+		if((cursorPosition.y > viewportPosition.y) && (cursorPosition.y < (viewportPosition.y + viewportSize.y)))
 		{
 			return true;
 		}
@@ -112,11 +112,11 @@ const bool FabiEngine3D::misc_isCursorInsideWindow()
 	// Temporary values
 	auto cursorPosition = misc_getCursorPosition();
 	auto windowSize = Config::getInst().getWindowSize();
-	
+
 	// Checking if cursor is inside viewport
-	if ((cursorPosition.x > 1) && (cursorPosition.x < (windowSize.x - 1)))
+	if((cursorPosition.x > 1) && (cursorPosition.x < (windowSize.x - 1)))
 	{
-		if ((cursorPosition.y > 1) && (cursorPosition.y < (windowSize.y - 1)))
+		if((cursorPosition.y > 1) && (cursorPosition.y < (windowSize.y - 1)))
 		{
 			return true;
 		}
@@ -151,7 +151,7 @@ const vector<pair<string, int>> FabiEngine3D::misc_getUpdateProfilingStatistics(
 	};
 
 	// Calculate percentages
-	for (auto& [ID, percentage] : result)
+	for(auto& [ID, percentage] : result)
 	{
 		int newPercentage = static_cast<int>((_core->_timer.getDeltaPart(ID) / _core->_timer.getDeltaPartSum()) * 100.0f);
 		percentage = newPercentage;
@@ -179,9 +179,9 @@ const vector<pair<string, int>> FabiEngine3D::misc_getRenderProfilingStatistics(
 		pair<string, int>("postProcessing", 0),
 		pair<string, int>("bufferSwap", 0)
 	};
-	
+
 	// Calculate percentages
-	for (auto& [ID, percentage] : result)
+	for(auto& [ID, percentage] : result)
 	{
 		int newPercentage = static_cast<int>((_core->_timer.getDeltaPart(ID) / _core->_timer.getDeltaPartSum()) * 100.0f);
 		percentage = newPercentage;

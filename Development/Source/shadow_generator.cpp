@@ -13,9 +13,9 @@ ShadowGenerator::ShadowGenerator(RenderBus& renderBus)
 
 void ShadowGenerator::update()
 {
-	if (_renderBus.isShadowsEnabled())
+	if(_renderBus.isShadowsEnabled())
 	{
-		if (_passedFrames >= _interval)
+		if(_passedFrames >= _interval)
 		{
 			_passedFrames = 0;
 
@@ -30,7 +30,7 @@ void ShadowGenerator::update()
 
 void ShadowGenerator::updateMatrix()
 {
-	if (_isFollowingCamera)
+	if(_isFollowingCamera)
 	{
 		// Temporary values
 		auto cameraPosition = _renderBus.getCameraPosition();

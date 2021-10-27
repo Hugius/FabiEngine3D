@@ -4,9 +4,9 @@
 void SceneEditor::_updateReflectionPlacing()
 {
 	// Only if user is in placement mode
-	if (_isPlacingReflection)
+	if(_isPlacingReflection)
 	{
-		if (_fe3d.terrainEntity_getSelectedID().empty()) // Placing without terrain
+		if(_fe3d.terrainEntity_getSelectedID().empty()) // Placing without terrain
 		{
 			// Retrieve current position
 			auto newPosition = _fe3d.reflectionEntity_getPosition(PREVIEW_CAMERA_ID);
@@ -20,14 +20,14 @@ void SceneEditor::_updateReflectionPlacing()
 			_fe3d.reflectionEntity_setPosition(PREVIEW_CAMERA_ID, newPosition);
 
 			// Check if reflection must be placed
-			if (_gui.getGlobalScreen()->isValueFormConfirmed())
+			if(_gui.getGlobalScreen()->isValueFormConfirmed())
 			{
 				// Adding a number to make it unique
 			BEGIN1:
 				const string newID = ("reflection_" + to_string(Math::getRandomInteger(0, INT_MAX)));
 
 				// Check if reflection already exists
-				if (_fe3d.reflectionEntity_isExisting(newID))
+				if(_fe3d.reflectionEntity_isExisting(newID))
 				{
 					goto BEGIN1;
 				}
@@ -53,7 +53,7 @@ void SceneEditor::_updateReflectionPlacing()
 			}
 
 			// Check if placement mode must be disabled
-			if (_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
+			if(_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
 			{
 				_fe3d.modelEntity_setVisible(PREVIEW_CAMERA_ID, false);
 				_isPlacingReflection = false;
@@ -62,13 +62,13 @@ void SceneEditor::_updateReflectionPlacing()
 		else
 		{
 			// Check if allowed by GUI
-			if (_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// Check if allowed by mouse
-				if (!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Check if a terrain is loaded
-					if (_fe3d.raycast_isPointOnTerrainValid())
+					if(_fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Show preview reflection
 						_fe3d.modelEntity_setVisible(PREVIEW_CAMERA_ID, true);
@@ -83,7 +83,7 @@ void SceneEditor::_updateReflectionPlacing()
 					}
 
 					// Check if reflection must be placed
-					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.raycast_isPointOnTerrainValid())
+					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Temporary values
 						auto newPosition = _fe3d.reflectionEntity_getPosition(PREVIEW_CAMERA_ID);
@@ -93,7 +93,7 @@ void SceneEditor::_updateReflectionPlacing()
 						const string newID = ("reflection_" + to_string(Math::getRandomInteger(0, INT_MAX)));
 
 						// Check if reflection already exists
-						if (_fe3d.reflectionEntity_isExisting(newID))
+						if(_fe3d.reflectionEntity_isExisting(newID))
 						{
 							goto BEGIN2;
 						}
@@ -102,7 +102,7 @@ void SceneEditor::_updateReflectionPlacing()
 						_fe3d.reflectionEntity_create(newID);
 
 						// Check if reflection creation went well
-						if (_fe3d.reflectionEntity_isExisting(newID))
+						if(_fe3d.reflectionEntity_isExisting(newID))
 						{
 							// Create model
 							const string newModelID = ("@@camera_" + newID);
@@ -125,7 +125,7 @@ void SceneEditor::_updateReflectionPlacing()
 							_loadedReflectionIDs.push_back(newID);
 						}
 					}
-					else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
+					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
 					{
 						_fe3d.modelEntity_setVisible(PREVIEW_CAMERA_ID, false);
 						_isPlacingReflection = false;
@@ -143,7 +143,7 @@ void SceneEditor::_updateReflectionPlacing()
 		}
 
 		// Update preview camera position
-		if (_isPlacingReflection)
+		if(_isPlacingReflection)
 		{
 			auto reflectionPosition = _fe3d.reflectionEntity_getPosition(PREVIEW_CAMERA_ID);
 			reflectionPosition -= CAMERA_OFFSET;
@@ -152,9 +152,9 @@ void SceneEditor::_updateReflectionPlacing()
 	}
 
 	// Update camera positions
-	for (const auto& entityID : _fe3d.modelEntity_getAllIDs())
+	for(const auto& entityID : _fe3d.modelEntity_getAllIDs())
 	{
-		if (entityID.substr(0, string("@@camera").size()) == "@@camera")
+		if(entityID.substr(0, string("@@camera").size()) == "@@camera")
 		{
 			auto reflectionPosition = _fe3d.reflectionEntity_getPosition(entityID.substr(string("@@camera_").size()));
 			reflectionPosition -= CAMERA_OFFSET;

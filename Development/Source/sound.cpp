@@ -39,7 +39,7 @@ void Sound::make3D(Vec3 position, float maxVolume, float maxDistance)
 
 void Sound::setPosition(Vec3 value)
 {
-	if (_is3D)
+	if(_is3D)
 	{
 		_position = value;
 	}
@@ -47,7 +47,7 @@ void Sound::setPosition(Vec3 value)
 
 void Sound::move(Vec3 value)
 {
-	if (_is3D)
+	if(_is3D)
 	{
 		_position += value;
 	}
@@ -60,7 +60,7 @@ void Sound::setVolume(float value)
 
 void Sound::setMaxVolume(float value)
 {
-	if (_is3D)
+	if(_is3D)
 	{
 		_maxVolume = clamp(value, 0.0f, 1.0f);
 	}
@@ -68,7 +68,7 @@ void Sound::setMaxVolume(float value)
 
 void Sound::setMaxDistance(float value)
 {
-	if (_is3D)
+	if(_is3D)
 	{
 		_maxDistance = value;
 	}

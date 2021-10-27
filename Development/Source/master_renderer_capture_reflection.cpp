@@ -4,7 +4,7 @@
 void MasterRenderer::_captureCubeReflections()
 {
 	// Check if no cube reflections needed
-	if (_entityBus->getReflectionEntities().empty())
+	if(_entityBus->getReflectionEntities().empty())
 	{
 		return;
 	}
@@ -26,13 +26,13 @@ void MasterRenderer::_captureCubeReflections()
 	const auto originalShadowAreaSize = _renderBus.getShadowAreaSize();
 	const auto originalShadowAreaReach = _renderBus.getShadowAreaReach();
 	const auto originalShadowMatrix = _renderBus.getShadowMatrix();
-	
+
 	// Iterate through all model entities
 	vector<string> savedModelEntityIDs;
-	for (const auto& [keyID, entity] : _entityBus->getModelEntities())
+	for(const auto& [keyID, entity] : _entityBus->getModelEntities())
 	{
 		// Hide non-reflected model entity
-		if (!entity->isReflected() && entity->isVisible())
+		if(!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
 			savedModelEntityIDs.push_back(entity->getID());
@@ -41,10 +41,10 @@ void MasterRenderer::_captureCubeReflections()
 
 	// Iterate through all billboard entities
 	vector<string> savedBillboardEntityIDs;
-	for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+	for(const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 	{
 		// Hide non-reflected billboard entity
-		if (!entity->isReflected() && entity->isVisible())
+		if(!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
 			savedBillboardEntityIDs.push_back(entity->getID());
@@ -57,7 +57,7 @@ void MasterRenderer::_captureCubeReflections()
 	// Sky exposure must not appear in reflections
 	float oldLightness = 0.0f;
 	auto skyEntity = _entityBus->getMainSkyEntity();
-	if (skyEntity != nullptr)
+	if(skyEntity != nullptr)
 	{
 		oldLightness = skyEntity->getLightness();
 		skyEntity->setLightness(skyEntity->getOriginalLightness());
@@ -69,56 +69,56 @@ void MasterRenderer::_captureCubeReflections()
 	_camera.setUpVector(Vec3(0.0f, -1.0f, 0.0f));
 
 	// Iterate through all reflection entities
-	for (const auto& [keyID, entity] : _entityBus->getReflectionEntities())
+	for(const auto& [keyID, entity] : _entityBus->getReflectionEntities())
 	{
 		// Check if reflection must capture
-		if (entity->mustCapture())
+		if(entity->mustCapture())
 		{
 			// Capture environment around entity
-			for (unsigned int i = 0; i < 6; i++)
+			for(unsigned int i = 0; i < 6; i++)
 			{
 				// Set camera position
 				_camera.setPosition(entity->getPosition());
 
 				// Set camera view
-				switch (i)
+				switch(i)
 				{
-				case 0:
-				{
-					_camera.setYaw(0.0f);
-					_camera.setPitch(0.0f);
-					break;
-				}
-				case 1:
-				{
-					_camera.setYaw(180.0f);
-					_camera.setPitch(0.0f);
-					break;
-				}
-				case 2:
-				{
-					_camera.setYaw(90.0f);
-					_camera.setPitch(90.0f);
-					break;
-				}
-				case 3:
-				{
-					_camera.setYaw(90.0f);
-					_camera.setPitch(270.0f);
-					break;
-				}
-				case 4:
-				{
-					_camera.setYaw(90.0f);
-					_camera.setPitch(0.0f);
-					break;
-				}
-				case 5:
-				{
-					_camera.setYaw(270.0f);
-					_camera.setPitch(0.0f);
-					break;
-				}
+					case 0:
+					{
+						_camera.setYaw(0.0f);
+						_camera.setPitch(0.0f);
+						break;
+					}
+					case 1:
+					{
+						_camera.setYaw(180.0f);
+						_camera.setPitch(0.0f);
+						break;
+					}
+					case 2:
+					{
+						_camera.setYaw(90.0f);
+						_camera.setPitch(90.0f);
+						break;
+					}
+					case 3:
+					{
+						_camera.setYaw(90.0f);
+						_camera.setPitch(270.0f);
+						break;
+					}
+					case 4:
+					{
+						_camera.setYaw(90.0f);
+						_camera.setPitch(0.0f);
+						break;
+					}
+					case 5:
+					{
+						_camera.setYaw(270.0f);
+						_camera.setPitch(0.0f);
+						break;
+					}
 				}
 
 				// Update camera
@@ -159,13 +159,13 @@ void MasterRenderer::_captureCubeReflections()
 	}
 
 	// Iterate through all model entities
-	for (const auto& [keyID, entity] : _entityBus->getModelEntities())
+	for(const auto& [keyID, entity] : _entityBus->getModelEntities())
 	{
 		// Iterate through all saved model entities
-		for (const auto& savedID : savedModelEntityIDs)
+		for(const auto& savedID : savedModelEntityIDs)
 		{
 			// Check if IDs match
-			if (entity->getID() == savedID)
+			if(entity->getID() == savedID)
 			{
 				// Show model entity again
 				entity->setVisible(true);
@@ -174,13 +174,13 @@ void MasterRenderer::_captureCubeReflections()
 	}
 
 	// Iterate through all saved billboard entities
-	for (const auto& savedID : savedBillboardEntityIDs)
+	for(const auto& savedID : savedBillboardEntityIDs)
 	{
 		// Iterate through all billboard entities
-		for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+		for(const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 		{
 			// Check if IDs match
-			if (entity->getID() == savedID)
+			if(entity->getID() == savedID)
 			{
 				// Show billboard entity again
 				entity->setVisible(true);
@@ -192,7 +192,7 @@ void MasterRenderer::_captureCubeReflections()
 	_renderBus.setReflectionsEnabled(true);
 
 	// Revert sky lightness
-	if (skyEntity != nullptr)
+	if(skyEntity != nullptr)
 	{
 		skyEntity->setLightness(oldLightness);
 	}
@@ -218,11 +218,11 @@ void MasterRenderer::_capturePlanarReflections()
 {
 	// Search for any reflective model entity
 	bool anyReflectiveModelFound = false;
-	for (const auto& [keyID, entity] : _entityBus->getModelEntities())
+	for(const auto& [keyID, entity] : _entityBus->getModelEntities())
 	{
-		for (const auto& partID : entity->getPartIDs())
+		for(const auto& partID : entity->getPartIDs())
 		{
-			if (entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR) && entity->isVisible())
+			if(entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR) && entity->isVisible())
 			{
 				anyReflectiveModelFound = true;
 				break;
@@ -231,7 +231,7 @@ void MasterRenderer::_capturePlanarReflections()
 	}
 
 	// Check if no planar reflections needed
-	if (!anyReflectiveModelFound)
+	if(!anyReflectiveModelFound)
 	{
 		_renderBus.setPlanarReflectionMap(0);
 		return;
@@ -246,10 +246,10 @@ void MasterRenderer::_capturePlanarReflections()
 
 	// Iterate through all model entities
 	vector<string> savedModelEntityIDs;
-	for (const auto& [keyID, entity] : _entityBus->getModelEntities())
+	for(const auto& [keyID, entity] : _entityBus->getModelEntities())
 	{
 		// Hide non-reflected model entity
-		if (!entity->isReflected() && entity->isVisible())
+		if(!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
 			savedModelEntityIDs.push_back(entity->getID());
@@ -257,9 +257,9 @@ void MasterRenderer::_capturePlanarReflections()
 		}
 
 		// Hide reflective model entity
-		for (const auto& partID : entity->getPartIDs())
+		for(const auto& partID : entity->getPartIDs())
 		{
-			if (entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR) && entity->isVisible())
+			if(entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR) && entity->isVisible())
 			{
 				entity->setVisible(false);
 				savedModelEntityIDs.push_back(entity->getID());
@@ -270,10 +270,10 @@ void MasterRenderer::_capturePlanarReflections()
 
 	// Iterate through all billboard entities
 	vector<string> savedBillboardEntityIDs;
-	for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+	for(const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 	{
 		// Hide non-reflected billboard entity
-		if (!entity->isReflected() && entity->isVisible())
+		if(!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
 			savedBillboardEntityIDs.push_back(entity->getID());
@@ -301,7 +301,7 @@ void MasterRenderer::_capturePlanarReflections()
 	// Sky exposure must not appear in reflections
 	float oldSkyLightness = 0.0f;
 	auto skyEntity = _entityBus->getMainSkyEntity();
-	if (skyEntity != nullptr)
+	if(skyEntity != nullptr)
 	{
 		oldSkyLightness = skyEntity->getLightness();
 		skyEntity->setLightness(skyEntity->getOriginalLightness());
@@ -333,13 +333,13 @@ void MasterRenderer::_capturePlanarReflections()
 	_renderBus.setPlanarReflectionMap(_planarReflectionCaptureBuffer.getTexture(0));
 
 	// Iterate through all model entities
-	for (const auto& [keyID, entity] : _entityBus->getModelEntities())
+	for(const auto& [keyID, entity] : _entityBus->getModelEntities())
 	{
 		// Iterate through all saved model entities
-		for (const auto& savedID : savedModelEntityIDs)
+		for(const auto& savedID : savedModelEntityIDs)
 		{
 			// Check if IDs match
-			if (entity->getID() == savedID)
+			if(entity->getID() == savedID)
 			{
 				// Show model entity again
 				entity->setVisible(true);
@@ -348,13 +348,13 @@ void MasterRenderer::_capturePlanarReflections()
 	}
 
 	// Iterate through all billboard entities
-	for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+	for(const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 	{
 		// Iterate through all saved billboard entities
-		for (const auto& savedID : savedBillboardEntityIDs)
+		for(const auto& savedID : savedBillboardEntityIDs)
 		{
 			// Check if IDs match
-			if (entity->getID() == savedID)
+			if(entity->getID() == savedID)
 			{
 				// Show billboard entity again
 				entity->setVisible(true);
@@ -375,7 +375,7 @@ void MasterRenderer::_capturePlanarReflections()
 	_renderBus.setReflectionsEnabled(true);
 
 	// Revert sky lightness
-	if (skyEntity != nullptr)
+	if(skyEntity != nullptr)
 	{
 		skyEntity->setLightness(oldSkyLightness);
 	}
@@ -387,7 +387,7 @@ void MasterRenderer::_captureWaterReflections()
 	const auto waterEntity = _entityBus->getWaterEntity();
 
 	// Check if water reflections needed
-	if ((waterEntity != nullptr) && waterEntity->isReflective())
+	if((waterEntity != nullptr) && waterEntity->isReflective())
 	{
 		// Calculate distance between camera and reflection surface
 		float cameraDistance = (_camera.getPosition().y - waterEntity->getHeight());
@@ -398,14 +398,14 @@ void MasterRenderer::_captureWaterReflections()
 
 		// Save model entities that must not be captured
 		vector<string> savedModelEntityIDs;
-		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS ||
-			waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS ||
+		   waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
 		{
 			// Iterate through all model entities
-			for (const auto& [keyID, entity] : _entityBus->getModelEntities())
+			for(const auto& [keyID, entity] : _entityBus->getModelEntities())
 			{
 				// Hide non-reflected model entity
-				if (!entity->isReflected() && entity->isVisible())
+				if(!entity->isReflected() && entity->isVisible())
 				{
 					entity->setVisible(false);
 					savedModelEntityIDs.push_back(entity->getID());
@@ -413,9 +413,9 @@ void MasterRenderer::_captureWaterReflections()
 				}
 
 				// Hide reflective model entity
-				for (const auto& partID : entity->getPartIDs())
+				for(const auto& partID : entity->getPartIDs())
 				{
-					if (entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR) && entity->isVisible())
+					if(entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR) && entity->isVisible())
 					{
 						entity->setVisible(false);
 						savedModelEntityIDs.push_back(entity->getID());
@@ -427,13 +427,13 @@ void MasterRenderer::_captureWaterReflections()
 
 		// Save billboard entities that must not be captured
 		vector<string> savedBillboardEntityIDs;
-		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
 		{
 			// Iterate through all billboard entities
-			for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+			for(const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 			{
 				// Hide non-reflected billboard entity
-				if (!entity->isReflected() && entity->isVisible())
+				if(!entity->isReflected() && entity->isVisible())
 				{
 					entity->setVisible(false);
 					savedBillboardEntityIDs.push_back(entity->getID());
@@ -466,7 +466,7 @@ void MasterRenderer::_captureWaterReflections()
 		// Sky exposure must not appear in reflections
 		float oldLightness = 0.0f;
 		auto skyEntity = _entityBus->getMainSkyEntity();
-		if (skyEntity != nullptr)
+		if(skyEntity != nullptr)
 		{
 			oldLightness = skyEntity->getLightness();
 			skyEntity->setLightness(skyEntity->getOriginalLightness());
@@ -481,7 +481,7 @@ void MasterRenderer::_captureWaterReflections()
 		_renderSkyEntity();
 
 		// Render terrain entity
-		if (waterEntity->getQuality() != WaterQuality::SKY)
+		if(waterEntity->getQuality() != WaterQuality::SKY)
 		{
 			glEnable(GL_CLIP_DISTANCE0);
 			_renderTerrainEntity();
@@ -489,8 +489,8 @@ void MasterRenderer::_captureWaterReflections()
 		}
 
 		// Render model entities
-		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS ||
-			waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS ||
+		   waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
 		{
 			glEnable(GL_CLIP_DISTANCE2);
 			_renderModelEntities();
@@ -498,8 +498,8 @@ void MasterRenderer::_captureWaterReflections()
 		}
 
 		// Render billboard entities
-		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
-		{		
+		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		{
 			glEnable(GL_CLIP_DISTANCE2);
 			_renderBillboardEntities();
 			glDisable(GL_CLIP_DISTANCE2);
@@ -512,13 +512,13 @@ void MasterRenderer::_captureWaterReflections()
 		_renderBus.setWaterReflectionMap(_waterReflectionCaptureBuffer.getTexture(0));
 
 		// Iterate through all saved model entities
-		for (const auto& savedID : savedModelEntityIDs)
+		for(const auto& savedID : savedModelEntityIDs)
 		{
 			// Iterate through all model entities
-			for (const auto& [keyID, entity] : _entityBus->getModelEntities())
+			for(const auto& [keyID, entity] : _entityBus->getModelEntities())
 			{
 				// Check if IDs match
-				if (entity->getID() == savedID)
+				if(entity->getID() == savedID)
 				{
 					// Show model entity again
 					entity->setVisible(true);
@@ -527,13 +527,13 @@ void MasterRenderer::_captureWaterReflections()
 		}
 
 		// Iterate through all saved billboard entities
-		for (const auto& savedID : savedBillboardEntityIDs)
+		for(const auto& savedID : savedBillboardEntityIDs)
 		{
 			// Iterate through all billboard entities
-			for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+			for(const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 			{
 				// Check if IDs match
-				if (entity->getID() == savedID)
+				if(entity->getID() == savedID)
 				{
 					// Show billboard entity again
 					entity->setVisible(true);
@@ -557,8 +557,8 @@ void MasterRenderer::_captureWaterReflections()
 		_renderBus.setShadowsEnabled(wasShadowsEnabled);
 
 		// Revert sky lightness
-		if (skyEntity != nullptr)
-		{ 
+		if(skyEntity != nullptr)
+		{
 			skyEntity->setLightness(oldLightness);
 		}
 	}

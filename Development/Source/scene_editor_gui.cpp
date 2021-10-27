@@ -108,19 +108,19 @@ void SceneEditor::_loadGUI()
 	leftWindow->createScreen("sceneEditorMenuSoundChoice");
 	leftWindow->getScreen("sceneEditorMenuSoundChoice")->createScrollingList("sounds", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), LVPC::SCROLLING_LIST_COLOR, LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
 	leftWindow->getScreen("sceneEditorMenuSoundChoice")->createButton("back", Vec2(0.0f, -0.9f), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	
+
 	// Left-viewport: sceneEditorMenuPointlight
 	positions = VPC::calculateButtonPositions(3, CH);
 	leftWindow->createScreen("sceneEditorMenuPointlight");
 	leftWindow->getScreen("sceneEditorMenuPointlight")->createButton("place", Vec2(0.0f, positions[0]), Vec2(TW("Place Pointlight"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Place Pointlight", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("sceneEditorMenuPointlight")->createButton("choice", Vec2(0.0f, positions[1]), Vec2(TW("Choose Pointlight"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Choose Pointlight", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("sceneEditorMenuPointlight")->createButton("back", Vec2(0.0f, positions[2]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	
+
 	// Left-viewport: sceneEditorMenuPointlightChoice
 	leftWindow->createScreen("sceneEditorMenuPointlightChoice");
 	leftWindow->getScreen("sceneEditorMenuPointlightChoice")->createScrollingList("pointlights", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), LVPC::SCROLLING_LIST_COLOR, LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
 	leftWindow->getScreen("sceneEditorMenuPointlightChoice")->createButton("back", Vec2(0.0f, -0.9f), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	
+
 	// Left-viewport: sceneEditorMenuSpotlight
 	positions = VPC::calculateButtonPositions(3, CH);
 	leftWindow->createScreen("sceneEditorMenuSpotlight");
@@ -246,7 +246,7 @@ void SceneEditor::_loadGUI()
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsSkyExposure")->createButton("intensity", Vec2(0.0f, positions[1]), Vec2(TW("Intensity"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Intensity", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsSkyExposure")->createButton("speed", Vec2(0.0f, positions[2]), Vec2(TW("Speed"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Speed", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsSkyExposure")->createButton("back", Vec2(0.0f, positions[3]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	
+
 	// Left-viewport: sceneEditorMenuSettingsGraphicsBloom
 	positions = VPC::calculateButtonPositions(5, CH);
 	leftWindow->createScreen("sceneEditorMenuSettingsGraphicsBloom");
@@ -322,7 +322,7 @@ void SceneEditor::_loadGUI()
 	rightWindow->getScreen("soundPropertiesMenu")->createButton("volumeMinus", Vec2(-0.75f, -0.3f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
 	rightWindow->getScreen("soundPropertiesMenu")->createWriteField("volume", Vec2(0.0f, -0.3f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen("soundPropertiesMenu")->createButton("delete", Vec2(0.0f, -0.45f), Vec2(1.0f, 0.1f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	
+
 	// Right-viewport: pointlightPropertiesMenu
 	rightWindow->createScreen("pointlightPropertiesMenu");
 	rightWindow->getScreen("pointlightPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.875f, 0.1f), "Pointlight Menu", Vec3(0.0f, 1.0f, 0.0f));

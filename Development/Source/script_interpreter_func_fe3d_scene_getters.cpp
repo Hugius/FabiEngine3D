@@ -6,25 +6,25 @@ using SVT = ScriptValueType;
 bool ScriptInterpreter::_executeFe3dSceneGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:scene_get_current_id")
+	if(functionName == "fe3d:scene_get_current_id")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _sceneEditor.getLoadedSceneID();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}
-	else if (functionName == "fe3d:scene_is_custom_existing")
+	else if(functionName == "fe3d:scene_is_custom_existing")
 	{
 		auto types = { SVT::STRING };
 
 		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Compose file path
 			string directoryPath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-				("projects\\" + _currentProjectID)) + "\\scenes\\custom\\");
+									("projects\\" + _currentProjectID)) + "\\scenes\\custom\\");
 			string filePath = (directoryPath + arguments[0].getString() + ".fe3d");
 
 			// Return
@@ -38,7 +38,7 @@ bool ScriptInterpreter::_executeFe3dSceneGetterFunction(const string& functionNa
 	}
 
 	// Cannot execute scene functionality when server is running
-	if (_fe3d.networkServer_isRunning())
+	if(_fe3d.networkServer_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:scene` functionality as a networking server!");
 	}

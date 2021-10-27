@@ -14,13 +14,13 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string
 	string currentValueString = "";
 
 	// List string cannot be empty
-	if (listString.empty())
+	if(listString.empty())
 	{
 		return {};
 	}
 
 	// List string cannot start with a comma
-	if (listString.front() == ',')
+	if(listString.front() == ',')
 	{
 		_throwScriptError("cannot start value with a comma!");
 		return {};
@@ -28,15 +28,15 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string
 
 	// For every character in list string
 	unsigned int index = 0;
-	for (const auto& c : listString)
+	for(const auto& c : listString)
 	{
-		if (finishedValue) // First character after a value has been extracted
+		if(finishedValue) // First character after a value has been extracted
 		{
-			if (c == ',') // Ready for next value extraction
+			if(c == ',') // Ready for next value extraction
 			{
 				finishedValue = false;
 			}
-			else if (c != ' ') // After a value has been extracted, a comma must ALWAYS follow
+			else if(c != ' ') // After a value has been extracted, a comma must ALWAYS follow
 			{
 				_throwScriptError("values must be separated by commas!");
 				return {};
@@ -45,32 +45,32 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string
 		else
 		{
 			// Starting build of new value
-			if (!buildingVec3 && !buildingString && !buildingNumber && !buildingBoolean && !buildingVariable)
+			if(!buildingVec3 && !buildingString && !buildingNumber && !buildingBoolean && !buildingVariable)
 			{
-				if (c == '[') // VEC3
+				if(c == '[') // VEC3
 				{
 					currentValueString = "";
 					currentValueString.push_back(c);
 					buildingVec3 = true;
 				}
-				else if (c == '"') // STRING
+				else if(c == '"') // STRING
 				{
 					currentValueString = "";
 					buildingString = true;
 				}
-				else if (isdigit(c) || c == '-') // NUMBER
+				else if(isdigit(c) || c == '-') // NUMBER
 				{
 					currentValueString = "";
 					currentValueString.push_back(c);
 					buildingNumber = true;
 				}
-				else if (c == '<') // BOOLEAN
+				else if(c == '<') // BOOLEAN
 				{
 					currentValueString = "";
 					currentValueString.push_back(c);
 					buildingBoolean = true;
 				}
-				else if (c == ' ') // SPACE
+				else if(c == ' ') // SPACE
 				{
 					currentValueString = "";
 				}
@@ -81,7 +81,7 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string
 					buildingVariable = true;
 				}
 
-				if (index != (listString.size() - 1) || (buildingString || buildingBoolean)) // Skip to next character
+				if(index != (listString.size() - 1) || (buildingString || buildingBoolean)) // Skip to next character
 				{
 					index++;
 					continue;
@@ -92,14 +92,14 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string
 				}
 			}
 
-			if (buildingVec3) // Processing VEC3 value
+			if(buildingVec3) // Processing VEC3 value
 			{
-				if (c == ']') // Add new vec3 value
+				if(c == ']') // Add new vec3 value
 				{
 					currentValueString += c;
 
 					// Check if filled in vec3 value is correct
-					if (_isVec3Value(currentValueString))
+					if(_isVec3Value(currentValueString))
 					{
 						valueList.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, _extractVec3FromString(currentValueString)));
 						buildingVec3 = false;
@@ -116,9 +116,9 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string
 					currentValueString += c;
 				}
 			}
-			else if (buildingString) // Processing STRING value
+			else if(buildingString) // Processing STRING value
 			{
-				if (c == '"') // Add new string value
+				if(c == '"') // Add new string value
 				{
 					valueList.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, currentValueString));
 					buildingString = false;
@@ -129,11 +129,11 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string
 					currentValueString += c;
 				}
 			}
-			else if (buildingNumber) // Processing NUMBER value
+			else if(buildingNumber) // Processing NUMBER value
 			{
-				if (c == '-') // Negative number
+				if(c == '-') // Negative number
 				{
-					if (!currentValueString.empty())
+					if(!currentValueString.empty())
 					{
 						_throwScriptError("invalid decimal syntax!");
 						return {};
@@ -143,28 +143,28 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string
 						currentValueString += c;
 					}
 				}
-				else if (isdigit(c)) // Keep building number
+				else if(isdigit(c)) // Keep building number
 				{
 					currentValueString += c;
 				}
-				else if (c == '.' && !buildingDecimal) // Start building decimal
+				else if(c == '.' && !buildingDecimal) // Start building decimal
 				{
 					currentValueString += c;
 					buildingDecimal = true;
 				}
-				else if (c != ',' && c != ' ')
+				else if(c != ',' && c != ' ')
 				{
 					_throwScriptError("invalid character in number value!");
 					return {};
 				}
 
 				// Check if number building finished
-				if (c == ',' || (index == listString.size() - 1) || c == ' ')
+				if(c == ',' || (index == listString.size() - 1) || c == ' ')
 				{
-					if (buildingDecimal) // Convert to decimal
+					if(buildingDecimal) // Convert to decimal
 					{
 						// Check if decimal value is valid
-						if (currentValueString.back() == '.')
+						if(currentValueString.back() == '.')
 						{
 							_throwScriptError("invalid decimal syntax!");
 							return {};
@@ -176,7 +176,7 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string
 							buildingDecimal = false;
 
 							// Check if next comma still needs to be found
-							if (c != ',')
+							if(c != ',')
 							{
 								finishedValue = true;
 							}
@@ -188,55 +188,55 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string
 						buildingNumber = false;
 
 						// Check if next comma still needs to be found
-						if (c != ',')
+						if(c != ',')
 						{
 							finishedValue = true;
 						}
 					}
 				}
 			}
-			else if (buildingBoolean) // Processing BOOLEAN value
+			else if(buildingBoolean) // Processing BOOLEAN value
 			{
 				// Build value
 				currentValueString += c;
 
 				// Check if value is true, false, or invalid
-				if (currentValueString.size() == 6)
+				if(currentValueString.size() == 6)
 				{
-					if (currentValueString == "<true>") // Add new boolean value
+					if(currentValueString == "<true>") // Add new boolean value
 					{
 						valueList.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, true));
 						buildingBoolean = false;
 						finishedValue = true;
 					}
-					else if (currentValueString != "<false") // Must be "<false" if 6 letter string
+					else if(currentValueString != "<false") // Must be "<false" if 6 letter string
 					{
 						_throwScriptError("invalid boolean syntax!");
 						return {};
 					}
 				}
-				else if (currentValueString.size() == 7 && currentValueString == "<false>") // Add new boolean value
+				else if(currentValueString.size() == 7 && currentValueString == "<false>") // Add new boolean value
 				{
 					valueList.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, false));
 					buildingBoolean = false;
 					finishedValue = true;
 				}
-				else if (currentValueString.size() > 7) // Invalid boolean string
+				else if(currentValueString.size() > 7) // Invalid boolean string
 				{
 					_throwScriptError("invalid boolean syntax!");
 					return {};
 				}
 			}
-			else if (buildingVariable) // Processing VARIABLE value
+			else if(buildingVariable) // Processing VARIABLE value
 			{
 				// Build value
-				if (c != ',' && c != ' ')
+				if(c != ',' && c != ' ')
 				{
 					currentValueString += c;
 				}
 
 				// Check if variable building finished
-				if (c == ',' || (index == listString.size() - 1) || c == ' ')
+				if(c == ',' || (index == listString.size() - 1) || c == ' ')
 				{
 					// Check if accessing individual value from list variable
 					bool isAccessingList = false;
@@ -246,20 +246,20 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string
 					auto vec3Parts = _extractVec3PartFromString(currentValueString);
 
 					// Check if any error was thrown
-					if (_hasThrownError)
+					if(_hasThrownError)
 					{
 						return {};
 					}
 
 					// Remove vec3 part characters
-					if (vec3Parts != Ivec3(0))
+					if(vec3Parts != Ivec3(0))
 					{
 						currentValueString.pop_back();
 						currentValueString.pop_back();
 					}
 
 					// Remove list accessing characters
-					if (isAccessingList)
+					if(isAccessingList)
 					{
 						auto openingBracketFound = find(currentValueString.begin(), currentValueString.end(), '[');
 						auto bracketIndex = static_cast<unsigned int>(distance(currentValueString.begin(), openingBracketFound));
@@ -267,37 +267,37 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string
 					}
 
 					// Check if the specified variable name exists
-					if (_isLocalVariableExisting(currentValueString) || _isGlobalVariableExisting(currentValueString))
+					if(_isLocalVariableExisting(currentValueString) || _isGlobalVariableExisting(currentValueString))
 					{
 						// Retrieve value
 						auto variable = (_isLocalVariableExisting(currentValueString) ? _getLocalVariable(currentValueString) : _getGlobalVariable(currentValueString));
 
 						// Validate vec3 access
-						if (vec3Parts != Ivec3(0))
+						if(vec3Parts != Ivec3(0))
 						{
-							if (variable.getType() == ScriptVariableType::MULTIPLE || variable.getValue().getType() != ScriptValueType::VEC3)
+							if(variable.getType() == ScriptVariableType::MULTIPLE || variable.getValue().getType() != ScriptValueType::VEC3)
 							{
 								_throwScriptError("variable is not a vec3!");
 								return {};
 							}
 						}
 
-						if (vec3Parts.x && variable.getValue().getType() == ScriptValueType::VEC3) // Vec3.x
+						if(vec3Parts.x && variable.getValue().getType() == ScriptValueType::VEC3) // Vec3.x
 						{
 							valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variable.getValue().getVec3().x));
 						}
-						else if (vec3Parts.y && variable.getValue().getType() == ScriptValueType::VEC3) // Vec3.y
+						else if(vec3Parts.y && variable.getValue().getType() == ScriptValueType::VEC3) // Vec3.y
 						{
 							valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variable.getValue().getVec3().y));
 						}
-						else if (vec3Parts.z && variable.getValue().getType() == ScriptValueType::VEC3) // Vec3.z
+						else if(vec3Parts.z && variable.getValue().getType() == ScriptValueType::VEC3) // Vec3.z
 						{
 							valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variable.getValue().getVec3().z));
 						}
-						else if (isAccessingList) // List[index]
+						else if(isAccessingList) // List[index]
 						{
 							// Check if list index is valid
-							if (_validateListIndex(variable, listIndex))
+							if(_validateListIndex(variable, listIndex))
 							{
 								valueList.push_back(variable.getValue(listIndex));
 							}
@@ -306,7 +306,7 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string
 								return {};
 							}
 						}
-						else if (variable.getType() == ScriptVariableType::SINGLE) // Normal value
+						else if(variable.getType() == ScriptVariableType::SINGLE) // Normal value
 						{
 							valueList.push_back(variable.getValue());
 						}
@@ -319,7 +319,7 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string
 						buildingVariable = false;
 
 						// Check if needs to be found yet
-						if (c != ',')
+						if(c != ',')
 						{
 							finishedValue = true;
 						}
@@ -335,9 +335,9 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string
 
 		index++;
 	}
-	
+
 	// Check if not still building any values
-	if (!buildingString && !buildingNumber && !buildingBoolean && !buildingVariable && finishedValue)
+	if(!buildingString && !buildingNumber && !buildingBoolean && !buildingVariable && finishedValue)
 	{
 		return valueList;
 	}

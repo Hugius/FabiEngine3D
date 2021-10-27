@@ -106,37 +106,37 @@ const Matrix44 Math::createRotationMatrix(float x, float y, float z, DirectionOr
 	Matrix44 newMatrix;
 
 	// Create
-	if (order == DirectionOrder::XYZ)
+	if(order == DirectionOrder::XYZ)
 	{
 		newMatrix = (newMatrix * createRotationMatrixX(x));
 		newMatrix = (newMatrix * createRotationMatrixY(y));
 		newMatrix = (newMatrix * createRotationMatrixZ(z));
 	}
-	else if (order == DirectionOrder::XZY)
+	else if(order == DirectionOrder::XZY)
 	{
 		newMatrix = (newMatrix * createRotationMatrixX(x));
 		newMatrix = (newMatrix * createRotationMatrixZ(z));
 		newMatrix = (newMatrix * createRotationMatrixY(y));
 	}
-	else if (order == DirectionOrder::YXZ)
+	else if(order == DirectionOrder::YXZ)
 	{
 		newMatrix = (newMatrix * createRotationMatrixY(y));
 		newMatrix = (newMatrix * createRotationMatrixX(x));
 		newMatrix = (newMatrix * createRotationMatrixZ(z));
 	}
-	else if (order == DirectionOrder::YZX)
+	else if(order == DirectionOrder::YZX)
 	{
 		newMatrix = (newMatrix * createRotationMatrixY(y));
 		newMatrix = (newMatrix * createRotationMatrixZ(z));
 		newMatrix = (newMatrix * createRotationMatrixX(x));
 	}
-	else if (order == DirectionOrder::ZXY)
+	else if(order == DirectionOrder::ZXY)
 	{
 		newMatrix = (newMatrix * createRotationMatrixZ(z));
 		newMatrix = (newMatrix * createRotationMatrixX(x));
 		newMatrix = (newMatrix * createRotationMatrixY(y));
 	}
-	else if (order == DirectionOrder::ZYX)
+	else if(order == DirectionOrder::ZYX)
 	{
 		newMatrix = (newMatrix * createRotationMatrixZ(z));
 		newMatrix = (newMatrix * createRotationMatrixY(y));

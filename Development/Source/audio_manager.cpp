@@ -26,7 +26,7 @@ void AudioManager::createMusic(const string& filename)
 	auto dataPointer = _audioLoader.getMusicDataPointer(filename);
 
 	// Check if data loading went well
-	if (dataPointer != nullptr)
+	if(dataPointer != nullptr)
 	{
 		_musicList.push_back(Music(dataPointer));
 	}
@@ -34,11 +34,11 @@ void AudioManager::createMusic(const string& filename)
 
 void AudioManager::createSound(const string& ID, const string& filename)
 {
-	if (_findIndex(ID) != -1)
+	if(_findIndex(ID) != -1)
 	{
 		Logger::throwError("AudioManager::createSound::1");
 	}
-	else if (ID.empty())
+	else if(ID.empty())
 	{
 		Logger::throwError("AudioManager::createSound::2");
 	}
@@ -47,7 +47,7 @@ void AudioManager::createSound(const string& ID, const string& filename)
 	auto dataPointer = _audioLoader.getChunkDataPointer(filename);
 
 	// Check if data loading went well
-	if (dataPointer != nullptr)
+	if(dataPointer != nullptr)
 	{
 		_soundList.push_back(Sound(ID, filename, dataPointer));
 	}
@@ -57,7 +57,7 @@ void AudioManager::deleteSound(const string& ID)
 {
 	auto index = _findIndex(ID);
 
-	if (index == -1)
+	if(index == -1)
 	{
 		Logger::throwError("AudioManager::deleteSound");
 	}
@@ -76,7 +76,7 @@ Sound& AudioManager::getSound(const string& ID)
 {
 	auto index = _findIndex(ID);
 
-	if (index == -1)
+	if(index == -1)
 	{
 		Logger::throwError("AudioManager::getSound");
 	}
@@ -98,9 +98,9 @@ vector<Music>& AudioManager::getMusic()
 
 int AudioManager::_findIndex(const string& ID)
 {
-	for (size_t i = 0; i < _soundList.size(); i++)
+	for(size_t i = 0; i < _soundList.size(); i++)
 	{
-		if (_soundList[i].getID() == ID)
+		if(_soundList[i].getID() == ID)
 		{
 			return static_cast<int>(i);
 		}

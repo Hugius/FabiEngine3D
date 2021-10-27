@@ -2,7 +2,7 @@
 #include "render_bus.hpp"
 
 void ModelEntityShadowRenderer::bind()
-{	
+{
 	// Bind shader
 	_shader.bind();
 
@@ -34,10 +34,10 @@ void ModelEntityShadowRenderer::unbind()
 
 void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 {
-	if (entity->isVisible() && entity->isShadowed())
+	if(entity->isVisible() && entity->isShadowed())
 	{
 		// Enable face culling
-		if (entity->isFaceCulled())
+		if(entity->isFaceCulled())
 		{
 			glEnable(GL_CULL_FACE);
 		}
@@ -49,7 +49,7 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 		_shader.uploadUniform("u_minTextureAlpha", MIN_TEXTURE_ALPHA);
 
 		// Iterate through parts
-		for (const auto& partID : entity->getPartIDs())
+		for(const auto& partID : entity->getPartIDs())
 		{
 			// Temporary values
 			const auto buffer = entity->getRenderBuffer(partID);
@@ -59,7 +59,7 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 			_shader.uploadUniform("u_isInstanced", buffer->isInstanced());
 
 			// Bind textures
-			if (entity->hasDiffuseMap(partID))
+			if(entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID));
@@ -69,7 +69,7 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 			glBindVertexArray(buffer->getVAO());
 
 			// Render
-			if (buffer->isInstanced())
+			if(buffer->isInstanced())
 			{
 				const auto offsetCount = static_cast<unsigned int>(buffer->getInstancedOffsets().size());
 				glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), offsetCount);
@@ -83,7 +83,7 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 			glBindVertexArray(0);
 
 			// Unbind textures
-			if (entity->hasDiffuseMap(partID))
+			if(entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, 0);
@@ -91,7 +91,7 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 		}
 
 		// Disable face culling
-		if (entity->isFaceCulled())
+		if(entity->isFaceCulled())
 		{
 			glDisable(GL_CULL_FACE);
 		}

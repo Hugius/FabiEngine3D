@@ -21,7 +21,7 @@ BEGIN:
 	auto cacheIterator = _textureCache2D.find(filePath);
 
 	// Return from cache
-	if (cacheIterator != _textureCache2D.end())
+	if(cacheIterator != _textureCache2D.end())
 	{
 		return cacheIterator->second;
 	}
@@ -30,7 +30,7 @@ BEGIN:
 	auto loadedSurface = _loadSurface(filePath);
 
 	// Check surface status
-	if (loadedSurface == nullptr)
+	if(loadedSurface == nullptr)
 	{
 		Logger::throwWarning("Cannot load image file: \"" + filePath + "\"!");
 		return 0;
@@ -44,7 +44,7 @@ BEGIN:
 		SDL_FreeSurface(loadedSurface);
 
 		// Check texture status
-		if (loadedTexture == 0)
+		if(loadedTexture == 0)
 		{
 			return 0;
 		}
@@ -66,7 +66,7 @@ BEGIN:
 	auto cacheIterator = _textureCache3D.find(filePaths);
 
 	// Return from cache
-	if (cacheIterator != _textureCache3D.end())
+	if(cacheIterator != _textureCache3D.end())
 	{
 		return cacheIterator->second;
 	}
@@ -76,19 +76,19 @@ BEGIN:
 	array<SDL_Surface*, 6> loadedSurfaces = {};
 
 	// Start all loading threads
-	for (size_t i = 0; i < filePaths.size(); i++)
+	for(size_t i = 0; i < filePaths.size(); i++)
 	{
 		threads.push_back(async(launch::async, &TextureLoader::_loadSurface, this, filePaths[i]));
 	}
 
 	// Wait for all threads to finish
-	for (size_t i = 0; i < threads.size(); i++)
+	for(size_t i = 0; i < threads.size(); i++)
 	{
 		// Save loaded surface
 		loadedSurfaces[i] = threads[i].get();
 
 		// Error logging
-		if ((loadedSurfaces[i] == nullptr) && !filePaths[i].empty())
+		if((loadedSurfaces[i] == nullptr) && !filePaths[i].empty())
 		{
 			Logger::throwWarning("Cannot load image file: \"" + filePaths[i] + "\"!");
 		}
@@ -98,17 +98,17 @@ BEGIN:
 	TextureID loadedTexture = _convertIntoTexture(loadedSurfaces, filePaths);
 
 	// Memory management
-	for (const auto& surface : loadedSurfaces)
+	for(const auto& surface : loadedSurfaces)
 	{
 		// Only if memory is present
-		if (surface != nullptr)
+		if(surface != nullptr)
 		{
 			SDL_FreeSurface(surface);
 		}
 	}
 
 	// Check texture status
-	if (loadedTexture == 0)
+	if(loadedTexture == 0)
 	{
 		return 0;
 	}
@@ -129,7 +129,7 @@ BEGIN:
 	auto cacheIterator = _bitmapCache.find(filePath);
 
 	// Return from cache
-	if (cacheIterator != _bitmapCache.end())
+	if(cacheIterator != _bitmapCache.end())
 	{
 		return &cacheIterator->second;
 	}
@@ -138,7 +138,7 @@ BEGIN:
 	auto loadedBitmap = _loadBitmap(filePath);
 
 	// Check bitmap status
-	if (loadedBitmap.empty())
+	if(loadedBitmap.empty())
 	{
 		Logger::throwWarning("Cannot load image file: \"" + filePath + "\"!");
 		return nullptr;
@@ -171,7 +171,7 @@ BEGIN:
 	auto textCacheIterator = _textCache.find(make_pair(textContent, fontPath));
 
 	// Return from text cache
-	if (textCacheIterator != _textCache.end())
+	if(textCacheIterator != _textCache.end())
 	{
 		return textCacheIterator->second;
 	}
@@ -180,13 +180,13 @@ BEGIN:
 	auto fontCacheIterator = _fontCache.find(fontPath);
 
 	// Check font status
-	if (fontCacheIterator == _fontCache.end())
+	if(fontCacheIterator == _fontCache.end())
 	{
 		// Load font
 		font = _loadFont(fontPath);
 
 		// Check font status
-		if (font == nullptr)
+		if(font == nullptr)
 		{
 			Logger::throwWarning("Cannot load font file: \"" + fontPath + "\"!");
 			return 0;
@@ -209,7 +209,7 @@ BEGIN:
 	TextureID loadedTexture = _convertIntoTexture(font, textContent);
 
 	// Check texture status
-	if (loadedTexture == 0)
+	if(loadedTexture == 0)
 	{
 		return 0;
 	}
@@ -225,7 +225,7 @@ BEGIN:
 
 void TextureLoader::clearTextureCache2D(const string& filePath)
 {
-	if (_textureCache2D.find(filePath) != _textureCache2D.end())
+	if(_textureCache2D.find(filePath) != _textureCache2D.end())
 	{
 		glDeleteTextures(1, &_textureCache2D[filePath]);
 		_textureCache2D.erase(filePath);
@@ -234,7 +234,7 @@ void TextureLoader::clearTextureCache2D(const string& filePath)
 
 void TextureLoader::clearTextureCache3D(const array<string, 6>& filePaths)
 {
-	if (_textureCache3D.find(filePaths) != _textureCache3D.end())
+	if(_textureCache3D.find(filePaths) != _textureCache3D.end())
 	{
 		glDeleteTextures(1, &_textureCache3D[filePaths]);
 		_textureCache3D.erase(filePaths);
@@ -243,7 +243,7 @@ void TextureLoader::clearTextureCache3D(const array<string, 6>& filePaths)
 
 void TextureLoader::clearBitmapCache(const string& filePath)
 {
-	if (_bitmapCache.find(filePath) != _bitmapCache.end())
+	if(_bitmapCache.find(filePath) != _bitmapCache.end())
 	{
 		_bitmapCache.erase(filePath);
 	}
@@ -252,17 +252,17 @@ void TextureLoader::clearBitmapCache(const string& filePath)
 void TextureLoader::clearFontCache(const string& filePath)
 {
 	// Clear font cache
-	if (_fontCache.find(filePath) != _fontCache.end())
+	if(_fontCache.find(filePath) != _fontCache.end())
 	{
 		TTF_CloseFont(_fontCache[filePath]);
 		_fontCache.erase(filePath);
 	}
 
 	// Clear text cache
-	for (const auto& [key, textureID] : _textCache)
+	for(const auto& [key, textureID] : _textCache)
 	{
 		// Check if font corresponds
-		if (key.second == filePath)
+		if(key.second == filePath)
 		{
 			glDeleteTextures(1, &textureID);
 			_textCache.erase(key);
@@ -278,7 +278,7 @@ void TextureLoader::setAnisotropicFilteringQuality(unsigned int value)
 
 void TextureLoader::_reloadAnisotropicFiltering()
 {
-	for (auto& [path, texture] : _textureCache2D)
+	for(auto& [path, texture] : _textureCache2D)
 	{
 		// Bind
 		glBindTexture(GL_TEXTURE_2D, texture);
@@ -288,7 +288,7 @@ void TextureLoader::_reloadAnisotropicFiltering()
 		glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &currentQuality);
 
 		// Check if texture must be anisotropically filtered
-		if ((currentQuality >= Config::MIN_ANISOTROPIC_FILTERING_QUALITY) && (currentQuality <= Config::MAX_ANISOTROPIC_FILTERING_QUALITY))
+		if((currentQuality >= Config::MIN_ANISOTROPIC_FILTERING_QUALITY) && (currentQuality <= Config::MAX_ANISOTROPIC_FILTERING_QUALITY))
 		{
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(_anisotropicFilteringQuality));
 		}

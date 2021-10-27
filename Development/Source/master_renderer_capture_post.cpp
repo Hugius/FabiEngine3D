@@ -11,7 +11,7 @@ void MasterRenderer::_captureSceneDepth()
 	bool isUnderWater = false;
 
 	// Prepare water depth
-	if (waterDepthNeeded)
+	if(waterDepthNeeded)
 	{
 		// Check if camera is underwater
 		auto waterEntity = _entityBus->getWaterEntity();
@@ -21,9 +21,9 @@ void MasterRenderer::_captureSceneDepth()
 		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x < (waterEntity->getSize() / 2.0f)));
 		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z > (waterEntity->getSize() / 2.0f)));
 		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z < (waterEntity->getSize() / 2.0f)));
-		
+
 		// Determine clipping Y based on being underwater or not
-		if (isUnderWater)
+		if(isUnderWater)
 		{
 			clippingY = waterEntity->getHeight();
 		}
@@ -32,16 +32,16 @@ void MasterRenderer::_captureSceneDepth()
 			clippingY = (waterEntity->getHeight() + waveHeight);
 		}
 	}
-	
+
 	// Determine if scene depth rendering is needed or not
-	if (_renderBus.isDofEnabled() || _renderBus.isLensFlareEnabled() || waterDepthNeeded)
+	if(_renderBus.isDofEnabled() || _renderBus.isLensFlareEnabled() || waterDepthNeeded)
 	{
 		// Bind
 		_sceneDepthCaptureBuffer.bind();
 		glClear(GL_DEPTH_BUFFER_BIT);
 
 		// Validate existence
-		if (_entityBus->getTerrainEntity() != nullptr)
+		if(_entityBus->getTerrainEntity() != nullptr)
 		{
 			// Bind
 			_terrainEntityDepthRenderer.bind();
@@ -52,25 +52,25 @@ void MasterRenderer::_captureSceneDepth()
 			// Unbind
 			_terrainEntityDepthRenderer.unbind();
 		}
-		
+
 		// Validate existence
-		if (!modelEntities.empty())
+		if(!modelEntities.empty())
 		{
 			// Bind
 			_modelEntityDepthRenderer.bind();
 
 			// Render model entities
-			for (const auto& [keyID, modelEntity] : modelEntities)
+			for(const auto& [keyID, modelEntity] : modelEntities)
 			{
 				// Check if entity must be included in depth map
-				if (modelEntity->isDepthMapIncluded())
+				if(modelEntity->isDepthMapIncluded())
 				{
 					// Check if LOD entity needs to be rendered
-					if (modelEntity->isLevelOfDetailed())
+					if(modelEntity->isLevelOfDetailed())
 					{
 						// Try to find LOD entity
 						auto foundPair = modelEntities.find(modelEntity->getLevelOfDetailEntityID());
-						if (foundPair != modelEntities.end())
+						if(foundPair != modelEntities.end())
 						{
 							auto lodEntity = foundPair->second;
 
@@ -114,16 +114,16 @@ void MasterRenderer::_captureSceneDepth()
 		}
 
 		// Validate existence
-		if (!billboardEntities.empty())
+		if(!billboardEntities.empty())
 		{
 			// Bind
 			_billboardEntityDepthRenderer.bind();
 
 			// Render billboard entities
-			for (const auto& [keyID, entity] : billboardEntities)
+			for(const auto& [keyID, entity] : billboardEntities)
 			{
 				// Check if entity must be included in depth map
-				if (entity->isDepthMapIncluded())
+				if(entity->isDepthMapIncluded())
 				{
 					_billboardEntityDepthRenderer.render(entity, clippingY, isUnderWater);
 				}
@@ -147,7 +147,7 @@ void MasterRenderer::_captureSceneDepth()
 
 void MasterRenderer::_captureDOF()
 {
-	if (_renderBus.isDofEnabled())
+	if(_renderBus.isDofEnabled())
 	{
 		// Blur final scene map
 		_dofBlurRenderer.bind();
@@ -170,7 +170,7 @@ void MasterRenderer::_captureDOF()
 
 void MasterRenderer::_captureLensFlare()
 {
-	if (_renderBus.isLensFlareEnabled())
+	if(_renderBus.isLensFlareEnabled())
 	{
 		// Apply lens flare & update final scene map
 		_lensFlareCaptureBuffer.bind();
@@ -185,7 +185,7 @@ void MasterRenderer::_captureLensFlare()
 void MasterRenderer::_captureMotionBlur()
 {
 	// Check if motion blur is enabled
-	if (_renderBus.isMotionBlurEnabled())
+	if(_renderBus.isMotionBlurEnabled())
 	{
 		// Camera speed and blur direction variables
 		float xDifference = (_cameraYawDifference * _renderBus.getMotionBlurStrength());
@@ -196,9 +196,9 @@ void MasterRenderer::_captureMotionBlur()
 		BlurDirection direction;
 
 		// Determine blur direction & mix value
-		if (xDifference != 0.0f || yDifference != 0.0f)
+		if(xDifference != 0.0f || yDifference != 0.0f)
 		{
-			if (xDifference >= yDifference)
+			if(xDifference >= yDifference)
 			{
 				hasMoved = true;
 				direction = BlurDirection::HORIZONTAL;
@@ -213,7 +213,7 @@ void MasterRenderer::_captureMotionBlur()
 		}
 
 		// Apply motion blur
-		if (hasMoved)
+		if(hasMoved)
 		{
 			_motionBlurBlurRenderer.bind();
 			_renderBus.setMotionBlurMap(_motionBlurBlurRenderer.blurTexture(_renderSurface, _renderBus.getFinalSceneMap(), 5, 1.0f, direction));
@@ -241,7 +241,7 @@ void MasterRenderer::_captureMotionBlur()
 
 void MasterRenderer::_captureAntiAliasing()
 {
-	if (_renderBus.isAntiAliasingEnabled())
+	if(_renderBus.isAntiAliasingEnabled())
 	{
 		// Apply anti aliasing & update final scene map
 		_antiAliasingCaptureBuffer.bind();
@@ -255,11 +255,11 @@ void MasterRenderer::_captureAntiAliasing()
 
 void MasterRenderer::_captureBloom()
 {
-	if (_renderBus.isBloomEnabled() && _renderBus.getBloomBlurCount() > 0 && _renderBus.getBloomIntensity() > 0.0f)
+	if(_renderBus.isBloomEnabled() && _renderBus.getBloomBlurCount() > 0 && _renderBus.getBloomIntensity() > 0.0f)
 	{
 		// Determine texture to blur
 		TextureID textureToBlur;
-		if (_renderBus.getBloomType() == BloomType::EVERYTHING)
+		if(_renderBus.getBloomType() == BloomType::EVERYTHING)
 		{
 			textureToBlur = _renderBus.getPrimarySceneMap();
 		}
@@ -271,13 +271,13 @@ void MasterRenderer::_captureBloom()
 		// Blur the scene map (high quality, small blur)
 		_bloomBlurRendererHighQuality.bind();
 		_renderBus.setBloomMap(_bloomBlurRendererHighQuality.blurTexture(_renderSurface, textureToBlur,
-			_renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
+							   _renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
 		_bloomBlurRendererHighQuality.unbind();
 
 		// Blur the blurred scene map (low quality, large blur)
 		_bloomBlurRendererLowQuality.bind();
 		_renderBus.setBloomMap(_bloomBlurRendererLowQuality.blurTexture(_renderSurface, _renderBus.getBloomMap(),
-			_renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
+							   _renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
 		_bloomBlurRendererLowQuality.unbind();
 
 		// Apply bloom & update final scene map

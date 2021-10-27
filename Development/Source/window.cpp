@@ -9,7 +9,7 @@ Window::Window(LibraryLoader& libraryLoader)
 	_windowPointer(libraryLoader.getWindowPointer())
 {
 	hideBorder();
-	disableVsync();	
+	disableVsync();
 }
 
 Window::~Window()
@@ -58,7 +58,7 @@ void Window::disableColorKeying(Vec3 color)
 	SDL_VERSION(&wmInfo.version);
 	SDL_GetWindowWMInfo(_windowPointer, &wmInfo);
 	HWND hwnd = wmInfo.info.win.window;
-	
+
 	// Remove opaqueness property
 	SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED);
 	SetLayeredWindowAttributes(hwnd, RGB(static_cast<int>(color.r * 255.0f), static_cast<int>(color.g * 255), static_cast<int>(color.b * 255)), 0, LWA_ALPHA);

@@ -5,77 +5,77 @@ using SVT = ScriptValueType;
 bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:raycast_get_cursor_ray_position")
+	if(functionName == "fe3d:raycast_get_cursor_ray_position")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate terrain existence
-			if (_validateFe3dTerrain())
+			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d.raycast_getCursorRay().getPosition();
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
 	}
-	else if (functionName == "fe3d:raycast_get_cursor_ray_direction")
+	else if(functionName == "fe3d:raycast_get_cursor_ray_direction")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate terrain existence
-			if (_validateFe3dTerrain())
+			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d.raycast_getCursorRay().getDirection();
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
 	}
-	else if (functionName == "fe3d:raycast_get_point_on_terrain")
+	else if(functionName == "fe3d:raycast_get_point_on_terrain")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate terrain existence
-			if (_validateFe3dTerrain())
+			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d.raycast_getPointOnTerrain();
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
 	}
-	else if (functionName == "fe3d:raycast_is_point_on_terrain_valid")
+	else if(functionName == "fe3d:raycast_is_point_on_terrain_valid")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate terrain existence
-			if (_validateFe3dTerrain())
+			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d.raycast_isPointOnTerrainValid();
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if (functionName == "fe3d:raycast_into_model")
+	else if(functionName == "fe3d:raycast_into_model")
 	{
 		auto types = { SVT::STRING, SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Find aabbEntity ID
 			string result = "";
 			auto foundAabbID = _fe3d.raycast_checkCursorInEntities(arguments[0].getString(), arguments[2].getBoolean()).first;
 
 			// Check if AABB found
-			if (!foundAabbID.empty())
+			if(!foundAabbID.empty())
 			{
 				// Check if AABB has modelEntity parent
-				if (_fe3d.aabbEntity_hasParent(foundAabbID) && 
-					(_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::MODEL_ENTITY))
+				if(_fe3d.aabbEntity_hasParent(foundAabbID) &&
+				   (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::MODEL_ENTITY))
 				{
-					if (arguments[1].getString().empty()) // No specific AABB part
+					if(arguments[1].getString().empty()) // No specific AABB part
 					{
 						result = _fe3d.aabbEntity_getParentID(foundAabbID);
 					}
@@ -88,7 +88,7 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 						reverse(partID.begin(), partID.end());
 
 						// Check if AABB part ID's match
-						if (partID == arguments[1].getString())
+						if(partID == arguments[1].getString())
 						{
 							result = _fe3d.aabbEntity_getParentID(foundAabbID);
 						}
@@ -100,12 +100,12 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}
-	else if (functionName == "fe3d:raycast_into_model_distance")
+	else if(functionName == "fe3d:raycast_into_model_distance")
 	{
 		auto types = { SVT::STRING, SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Find aabbEntity ID
 			float result = -1.0f;
@@ -114,13 +114,13 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 			float foundDistance = intersection.second;
 
 			// Check if AABB found
-			if (!foundAabbID.empty())
+			if(!foundAabbID.empty())
 			{
 				// Check if AABB has modelEntity parent
-				if (_fe3d.aabbEntity_hasParent(foundAabbID) && 
-					(_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::MODEL_ENTITY))
+				if(_fe3d.aabbEntity_hasParent(foundAabbID) &&
+				   (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::MODEL_ENTITY))
 				{
-					if (arguments[1].getString().empty()) // No specific AABB part
+					if(arguments[1].getString().empty()) // No specific AABB part
 					{
 						result = foundDistance;
 					}
@@ -133,7 +133,7 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 						reverse(partID.begin(), partID.end());
 
 						// Check if AABB part ID's match
-						if (partID == arguments[1].getString())
+						if(partID == arguments[1].getString())
 						{
 							result = foundDistance;
 						}
@@ -145,21 +145,21 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
-	else if (functionName == "fe3d:raycast_into_models")
+	else if(functionName == "fe3d:raycast_into_models")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Find aabbEntity ID
 			string result = "";
 			auto foundAabbID = _fe3d.raycast_checkCursorInAny().first;
 
 			// Check if AABB found
-			if (!foundAabbID.empty())
+			if(!foundAabbID.empty())
 			{
 				// Check if AABB has modelEntity parent
-				if (_fe3d.aabbEntity_hasParent(foundAabbID) && 
-					(_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::MODEL_ENTITY))
+				if(_fe3d.aabbEntity_hasParent(foundAabbID) &&
+				   (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::MODEL_ENTITY))
 				{
 					result = _fe3d.aabbEntity_getParentID(foundAabbID);
 				}
@@ -169,21 +169,21 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}
-	else if (functionName == "fe3d:raycast_into_models_distance")
+	else if(functionName == "fe3d:raycast_into_models_distance")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Find aabbEntity ID
 			float result = -1.0f;
 			auto intersection = _fe3d.raycast_checkCursorInAny();
 
 			// Check if AABB found
-			if (!intersection.first.empty())
+			if(!intersection.first.empty())
 			{
 				// Check if AABB has modelEntity parent
-				if (_fe3d.aabbEntity_hasParent(intersection.first) && 
-					(_fe3d.aabbEntity_getParentType(intersection.first) == AabbParentType::MODEL_ENTITY))
+				if(_fe3d.aabbEntity_hasParent(intersection.first) &&
+				   (_fe3d.aabbEntity_getParentType(intersection.first) == AabbParentType::MODEL_ENTITY))
 				{
 					result = intersection.second;
 				}
@@ -193,23 +193,23 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
-	else if (functionName == "fe3d:raycast_into_billboard")
+	else if(functionName == "fe3d:raycast_into_billboard")
 	{
 		auto types = { SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Find aabbEntity ID
 			string result = "";
 			auto foundAabbID = _fe3d.raycast_checkCursorInEntities(arguments[0].getString(), arguments[1].getBoolean()).first;
 
 			// Check if AABB found
-			if (!foundAabbID.empty())
+			if(!foundAabbID.empty())
 			{
 				// Check if AABB has billboardEntity parent
-				if (_fe3d.aabbEntity_hasParent(foundAabbID) &&
-					(_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::BILLBOARD_ENTITY))
+				if(_fe3d.aabbEntity_hasParent(foundAabbID) &&
+				   (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::BILLBOARD_ENTITY))
 				{
 					result = _fe3d.aabbEntity_getParentID(foundAabbID);
 				}
@@ -219,21 +219,21 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}
-	else if (functionName == "fe3d:raycast_into_billboards")
+	else if(functionName == "fe3d:raycast_into_billboards")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Find aabbEntity ID
 			string result = "";
 			auto foundAabbID = _fe3d.raycast_checkCursorInAny().first;
 
 			// Check if AABB found
-			if (!foundAabbID.empty())
+			if(!foundAabbID.empty())
 			{
 				// Check if AABB has billboardEntity parent
-				if (_fe3d.aabbEntity_hasParent(foundAabbID) &&
-					(_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::BILLBOARD_ENTITY))
+				if(_fe3d.aabbEntity_hasParent(foundAabbID) &&
+				   (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::BILLBOARD_ENTITY))
 				{
 					result = _fe3d.aabbEntity_getParentID(foundAabbID);
 				}
@@ -243,23 +243,23 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}
-	else if (functionName == "fe3d:raycast_into_billboard_distance")
+	else if(functionName == "fe3d:raycast_into_billboard_distance")
 	{
 		auto types = { SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Find aabbEntity ID
 			float result = -1.0f;
 			auto intersection = _fe3d.raycast_checkCursorInEntities(arguments[0].getString(), arguments[1].getBoolean());
 
 			// Check if AABB found
-			if (!intersection.first.empty())
+			if(!intersection.first.empty())
 			{
 				// Check if AABB has billboardEntity parent
-				if (_fe3d.aabbEntity_hasParent(intersection.first) &&
-					(_fe3d.aabbEntity_getParentType(intersection.first) == AabbParentType::BILLBOARD_ENTITY))
+				if(_fe3d.aabbEntity_hasParent(intersection.first) &&
+				   (_fe3d.aabbEntity_getParentType(intersection.first) == AabbParentType::BILLBOARD_ENTITY))
 				{
 					result = intersection.second;
 				}
@@ -269,21 +269,21 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
-	else if (functionName == "fe3d:raycast_into_billboards_distance")
+	else if(functionName == "fe3d:raycast_into_billboards_distance")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Find aabbEntity ID
 			float result = -1.0f;
 			auto intersection = _fe3d.raycast_checkCursorInAny();
 
 			// Check if AABB found
-			if (!intersection.first.empty())
+			if(!intersection.first.empty())
 			{
 				// Check if AABB has billboardEntity parent
-				if (_fe3d.aabbEntity_hasParent(intersection.first) &&
-					(_fe3d.aabbEntity_getParentType(intersection.first) == AabbParentType::BILLBOARD_ENTITY))
+				if(_fe3d.aabbEntity_hasParent(intersection.first) &&
+				   (_fe3d.aabbEntity_getParentType(intersection.first) == AabbParentType::BILLBOARD_ENTITY))
 				{
 					result = intersection.second;
 				}
@@ -299,7 +299,7 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 	}
 
 	// Cannot execute raycast functionality when server is running
-	if (_fe3d.networkServer_isRunning())
+	if(_fe3d.networkServer_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:raycast` functionality as a networking server!");
 	}

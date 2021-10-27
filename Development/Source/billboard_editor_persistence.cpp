@@ -13,17 +13,17 @@ using std::istringstream;
 const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 {
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("BillboardEditor::getAllTexturePathsFromFile");
 	}
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d";
+														 ("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d";
 
 	// Warning checking
-	if (!Tools::isFileExisting(filePath))
+	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `billboard.fe3d` missing!");
 		return {};
@@ -35,7 +35,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 	// Read billboard data
 	vector<string> texturePaths;
 	string line;
-	while (getline(file, line))
+	while(getline(file, line))
 	{
 		// Data placeholders
 		string billboardID, diffuseMapPath, emissionMapPath;
@@ -66,13 +66,13 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 		replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 
 		// Save diffuse map path
-		if (!diffuseMapPath.empty())
+		if(!diffuseMapPath.empty())
 		{
 			texturePaths.push_back(diffuseMapPath);
 		}
 
 		// Save emission map path
-		if (!emissionMapPath.empty())
+		if(!emissionMapPath.empty())
 		{
 			texturePaths.push_back(emissionMapPath);
 		}
@@ -88,17 +88,17 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 const vector<string> BillboardEditor::getAllFontPathsFromFile()
 {
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("BillboardEditor::getAllFontPathsFromFile");
 	}
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d";
+														 ("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d";
 
 	// Warning checking
-	if (!Tools::isFileExisting(filePath))
+	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `billboard.fe3d` missing!");
 		return {};
@@ -110,7 +110,7 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile()
 	// Read billboard data
 	vector<string> fontPaths;
 	string line;
-	while (getline(file, line))
+	while(getline(file, line))
 	{
 		// Data placeholders
 		string billboardID, diffuseMapPath, fontPath;
@@ -141,7 +141,7 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile()
 		replace(fontPath.begin(), fontPath.end(), '?', ' ');
 
 		// Save file path
-		if (!fontPath.empty())
+		if(!fontPath.empty())
 		{
 			fontPaths.push_back(fontPath);
 		}
@@ -157,7 +157,7 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile()
 bool BillboardEditor::loadBillboardEntitiesFromFile()
 {
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("BillboardEditor::loadBillboardEntitiesFromFile");
 	}
@@ -167,10 +167,10 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d";
+														 ("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d";
 
 	// Warning checking
-	if (!Tools::isFileExisting(filePath))
+	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `billboard.fe3d` missing!");
 		return false;
@@ -181,7 +181,7 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 
 	// Read billboard data
 	string line;
-	while (getline(file, line))
+	while(getline(file, line))
 	{
 		// Data placeholders
 		string billboardID, diffuseMapPath, emissionMapPath, fontPath, textContent;
@@ -231,19 +231,19 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 		_fe3d.billboardEntity_create(billboardID);
 
 		// Check if billboard creation went well
-		if (_fe3d.billboardEntity_isExisting(billboardID))
+		if(_fe3d.billboardEntity_isExisting(billboardID))
 		{
 			// Add billboard ID
 			_loadedBillboardIDs.push_back(billboardID);
 
 			// Diffuse map
-			if (!diffuseMapPath.empty())
+			if(!diffuseMapPath.empty())
 			{
 				// Set diffuse map
 				_fe3d.billboardEntity_setDiffuseMap(billboardID, diffuseMapPath);
 
 				// Play sprite animation
-				if (isAnimationStarted)
+				if(isAnimationStarted)
 				{
 					_fe3d.billboardEntity_setSpriteAnimationFramestep(billboardID, animationFramestep);
 					_fe3d.billboardEntity_setSpriteAnimationRows(billboardID, animationRows);
@@ -253,13 +253,13 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 			}
 
 			// Emission map
-			if (!emissionMapPath.empty())
+			if(!emissionMapPath.empty())
 			{
 				_fe3d.billboardEntity_setEmissionMap(billboardID, emissionMapPath);
 			}
 
 			// Text
-			if (!fontPath.empty())
+			if(!fontPath.empty())
 			{
 				_fe3d.billboardEntity_setFont(billboardID, fontPath);
 				_fe3d.billboardEntity_setTextContent(billboardID, textContent);
@@ -291,26 +291,26 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 bool BillboardEditor::saveBillboardEntitiesToFile()
 {
 	// Editor must be loaded
-	if (!_isEditorLoaded)
+	if(!_isEditorLoaded)
 	{
 		return false;
 	}
 
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("BillboardEditor::saveBillboardEntitiesToFile");
 	}
 
 	// Compose file path
 	const string filePath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d");
+							 ("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d");
 
 	// Create or overwrite billboard file
 	ofstream file(filePath);
 
 	// Write billboard data
-	for (const auto& billboardID : _loadedBillboardIDs)
+	for(const auto& billboardID : _loadedBillboardIDs)
 	{
 		// Retrieve all values
 		auto size = _fe3d.billboardEntity_getSize(billboardID);

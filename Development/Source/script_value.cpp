@@ -51,7 +51,7 @@ void ScriptValue::setVec3(Vec3 value)
 
 void ScriptValue::setString(const string& value)
 {
-	if (_type != ScriptValueType::STRING)
+	if(_type != ScriptValueType::STRING)
 	{
 		Logger::throwError("ScriptValue::setString");
 	}
@@ -61,7 +61,7 @@ void ScriptValue::setString(const string& value)
 
 void ScriptValue::setDecimal(float value)
 {
-	if (_type != ScriptValueType::DECIMAL)
+	if(_type != ScriptValueType::DECIMAL)
 	{
 		Logger::throwError("ScriptValue::setDecimal");
 	}
@@ -71,7 +71,7 @@ void ScriptValue::setDecimal(float value)
 
 void ScriptValue::setInteger(int value)
 {
-	if (_type != ScriptValueType::INTEGER)
+	if(_type != ScriptValueType::INTEGER)
 	{
 		Logger::throwError("ScriptValue::setInteger");
 	}
@@ -81,7 +81,7 @@ void ScriptValue::setInteger(int value)
 
 void ScriptValue::setBoolean(bool value)
 {
-	if (_type != ScriptValueType::BOOLEAN)
+	if(_type != ScriptValueType::BOOLEAN)
 	{
 		Logger::throwError("ScriptValue::setBoolean");
 	}
@@ -101,7 +101,7 @@ Vec3 ScriptValue::getVec3() const
 
 const string& ScriptValue::getString() const
 {
-	if (_type != ScriptValueType::STRING)
+	if(_type != ScriptValueType::STRING)
 	{
 		Logger::throwError("ScriptValue::getString");
 	}
@@ -111,7 +111,7 @@ const string& ScriptValue::getString() const
 
 float ScriptValue::getDecimal() const
 {
-	if (_type != ScriptValueType::DECIMAL)
+	if(_type != ScriptValueType::DECIMAL)
 	{
 		Logger::throwError("ScriptValue::getDecimal");
 	}
@@ -121,7 +121,7 @@ float ScriptValue::getDecimal() const
 
 int ScriptValue::getInteger() const
 {
-	if (_type != ScriptValueType::INTEGER)
+	if(_type != ScriptValueType::INTEGER)
 	{
 		Logger::throwError("ScriptValue::getInteger");
 	}
@@ -131,7 +131,7 @@ int ScriptValue::getInteger() const
 
 bool ScriptValue::getBoolean() const
 {
-	if (_type != ScriptValueType::BOOLEAN)
+	if(_type != ScriptValueType::BOOLEAN)
 	{
 		Logger::throwError("ScriptValue::getBoolean");
 	}

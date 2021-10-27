@@ -20,7 +20,9 @@ public:
 
 private:
 	// Voids
-	virtual void _dummy() {}
+	virtual void _dummy()
+	{
+	}
 
 	// Strings
 	const string _ID;

@@ -29,7 +29,7 @@ public:
 
 	// Miscellaneous
 	static const sockaddr_in composeSocketAddress(const string& IP, const string& port);
-	
+
 	// Strings
 	static inline const string SERVER_PORT = "61295";
 

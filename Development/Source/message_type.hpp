@@ -2,8 +2,8 @@
 
 enum class MessageType
 {
-	INFO, 
+	INFO,
 	ERR,
-	DEBUG, 
+	DEBUG,
 	WARNING
 };

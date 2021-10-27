@@ -5,7 +5,7 @@ RenderBuffer::RenderBuffer(RenderBufferType type, const float data[], unsigned i
 {
 	// Set buffer type
 	_bufferType = type;
-	
+
 	// Create buffers
 	glGenVertexArrays(1, &_vao);
 	glGenBuffers(1, &_vbo);
@@ -18,48 +18,48 @@ RenderBuffer::RenderBuffer(RenderBufferType type, const float data[], unsigned i
 	glBufferData(GL_ARRAY_BUFFER, (dataCount * sizeof(float)), &data[0], GL_STATIC_DRAW);
 
 	// Store buffer data
-	switch (type)
+	switch(type)
 	{
-	case RenderBufferType::VERTEX:
-	{
-		_vertexCount = dataCount / 3;
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
-		glEnableVertexAttribArray(0);
-		break;
-	}
-	case RenderBufferType::VERTEX_UV:
-	{
-		_vertexCount = dataCount / 5;
-		glEnableVertexAttribArray(0);
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
-		break;
-	}
-	case RenderBufferType::VERTEX_UV_NORMAL:
-	{
-		_vertexCount = dataCount / 8;
-		glEnableVertexAttribArray(0);
-		glEnableVertexAttribArray(1);
-		glEnableVertexAttribArray(2);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
-		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(5 * sizeof(float)));
-		break;
-	}
-	case RenderBufferType::VERTEX_UV_NORMAL_TANGENT:
-	{
-		_vertexCount = dataCount / 11;
-		glEnableVertexAttribArray(0);
-		glEnableVertexAttribArray(1);
-		glEnableVertexAttribArray(2);
-		glEnableVertexAttribArray(3);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
-		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(5 * sizeof(float)));
-		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(8 * sizeof(float)));
-		break;
-	}
+		case RenderBufferType::VERTEX:
+		{
+			_vertexCount = dataCount / 3;
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
+			glEnableVertexAttribArray(0);
+			break;
+		}
+		case RenderBufferType::VERTEX_UV:
+		{
+			_vertexCount = dataCount / 5;
+			glEnableVertexAttribArray(0);
+			glEnableVertexAttribArray(1);
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
+			break;
+		}
+		case RenderBufferType::VERTEX_UV_NORMAL:
+		{
+			_vertexCount = dataCount / 8;
+			glEnableVertexAttribArray(0);
+			glEnableVertexAttribArray(1);
+			glEnableVertexAttribArray(2);
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
+			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(5 * sizeof(float)));
+			break;
+		}
+		case RenderBufferType::VERTEX_UV_NORMAL_TANGENT:
+		{
+			_vertexCount = dataCount / 11;
+			glEnableVertexAttribArray(0);
+			glEnableVertexAttribArray(1);
+			glEnableVertexAttribArray(2);
+			glEnableVertexAttribArray(3);
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
+			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
+			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(5 * sizeof(float)));
+			glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(8 * sizeof(float)));
+			break;
+		}
 	}
 
 	// Unbind buffers
@@ -76,7 +76,7 @@ RenderBuffer::RenderBuffer(float x, float y, float w, float h, bool isCentered)
 	_bufferType = RenderBufferType::VERTEX_UV;
 
 	// Determine center point of the quad
-	if (isCentered)
+	if(isCentered)
 	{
 		data = new float[24]
 		{
@@ -136,14 +136,14 @@ RenderBuffer::~RenderBuffer()
 
 void RenderBuffer::enableInstancing(const vector<Vec3>& offsets)
 {
-	if (_isInstanced)
+	if(_isInstanced)
 	{
 		Logger::throwError("RenderBuffer::enableInstancing::1");
 	}
 	else
 	{
 		// Validate offsets
-		if (offsets.empty())
+		if(offsets.empty())
 		{
 			Logger::throwError("RenderBuffer::enableInstancing::2");
 		}
@@ -175,7 +175,7 @@ void RenderBuffer::enableInstancing(const vector<Vec3>& offsets)
 
 void RenderBuffer::disableInstancing()
 {
-	if (_isInstanced)
+	if(_isInstanced)
 	{
 		glDeleteBuffers(1, &_vbo_instanced);
 		_isInstanced = false;

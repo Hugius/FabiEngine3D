@@ -19,7 +19,8 @@ Ivec2::Ivec2(const int value)
 	this->y = value;
 }
 
-Ivec2::Ivec2(const int x, const int y) {
+Ivec2::Ivec2(const int x, const int y)
+{
 	this->x = x;
 	this->y = y;
 }

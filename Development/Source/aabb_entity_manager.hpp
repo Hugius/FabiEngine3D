@@ -2,7 +2,7 @@
 
 #include "base_entity_manager.hpp"
 
-class AabbEntityManager final :  public BaseEntityManager
+class AabbEntityManager final : public BaseEntityManager
 {
 public:
 	AabbEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);

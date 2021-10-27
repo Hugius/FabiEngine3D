@@ -8,7 +8,7 @@ void WaterEditor::_updateTexturingMenu()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "waterEditorMenuTexturing")
+	if(screen->getID() == "waterEditorMenuTexturing")
 	{
 		// Temporary values
 		auto hasDudvMap = _fe3d.waterEntity_hasDudvMap(_currentWaterID);
@@ -17,19 +17,19 @@ void WaterEditor::_updateTexturingMenu()
 		auto textureRepeat = _fe3d.waterEntity_getTextureRepeat(_currentWaterID);
 
 		// Button management
-		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("dudvMap")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("dudvMap")->isHovered())
 		{
 			// Get the chosen filename
 			const auto rootDirectory = Tools::getRootDirectory();
 			const string targetDirectory = string("game_assets\\textures\\dudv_maps\\");
 
 			// Validate target directory
-			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
+			if(!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
@@ -37,14 +37,14 @@ void WaterEditor::_updateTexturingMenu()
 
 			// Validate chosen file
 			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
-			if (filePath.empty())
+			if(filePath.empty())
 			{
 				return;
 			}
 
 			// Validate directory of file
-			if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-				filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+			if(filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+			   filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
 			{
 				Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
 				return;
@@ -55,14 +55,14 @@ void WaterEditor::_updateTexturingMenu()
 			_fe3d.misc_clearTextureCache2D(newFilePath);
 			_fe3d.waterEntity_setDudvMap(_currentWaterID, newFilePath);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
 		{
 			// Get the chosen filename
 			const auto rootDirectory = Tools::getRootDirectory();
 			const string targetDirectory = string("game_assets\\textures\\normal_maps\\");
 
 			// Validate target directory
-			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
+			if(!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
@@ -70,14 +70,14 @@ void WaterEditor::_updateTexturingMenu()
 
 			// Validate chosen file
 			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
-			if (filePath.empty())
+			if(filePath.empty())
 			{
 				return;
 			}
 
 			// Validate directory of file
-			if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-				filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+			if(filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+			   filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
 			{
 				Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
 				return;
@@ -88,14 +88,14 @@ void WaterEditor::_updateTexturingMenu()
 			_fe3d.misc_clearTextureCache2D(newFilePath);
 			_fe3d.waterEntity_setNormalMap(_currentWaterID, newFilePath);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("displaceMap")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("displaceMap")->isHovered())
 		{
 			// Get the chosen filename
 			const auto rootDirectory = Tools::getRootDirectory();
 			const string targetDirectory = string("game_assets\\textures\\displacement_maps\\");
 
 			// Validate target directory
-			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
+			if(!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
@@ -103,14 +103,14 @@ void WaterEditor::_updateTexturingMenu()
 
 			// Validate chosen file
 			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
-			if (filePath.empty())
+			if(filePath.empty())
 			{
 				return;
 			}
 
 			// Validate directory of file
-			if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-				filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+			if(filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+			   filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
 			{
 				Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
 				return;
@@ -121,19 +121,19 @@ void WaterEditor::_updateTexturingMenu()
 			_fe3d.misc_clearTextureCache2D(newFilePath);
 			_fe3d.waterEntity_setDisplacementMap(_currentWaterID, newFilePath);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
 			_fe3d.waterEntity_setDudvMap(_currentWaterID, "");
 			_fe3d.waterEntity_setNormalMap(_currentWaterID, "");
 			_fe3d.waterEntity_setDisplacementMap(_currentWaterID, "");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("textureRepeat", "Texture Repeat", textureRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("textureRepeat", textureRepeat))
+		if(_gui.getGlobalScreen()->checkValueForm("textureRepeat", textureRepeat))
 		{
 			_fe3d.waterEntity_setTextureRepeat(_currentWaterID, textureRepeat);
 		}

@@ -9,29 +9,29 @@ using std::max;
 void BillboardEntity::updateTransformation()
 {
 	// Position target
-	if (_position != _positionTarget)
+	if(_position != _positionTarget)
 	{
 		// Update position
 		auto speedMultiplier = Math::normalizeVector(_positionTarget - _position);
 		_position += (speedMultiplier * _positionTargetSpeed);
-		
+
 		// Correct position
-		if (fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)
+		if(fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)
 		{
 			_position.x = _positionTarget.x;
 		}
-		if (fabsf(_positionTarget.y - _position.y) <= _positionTargetSpeed)
+		if(fabsf(_positionTarget.y - _position.y) <= _positionTargetSpeed)
 		{
 			_position.y = _positionTarget.y;
 		}
-		if (fabsf(_positionTarget.z - _position.z) <= _positionTargetSpeed)
+		if(fabsf(_positionTarget.z - _position.z) <= _positionTargetSpeed)
 		{
 			_position.z = _positionTarget.z;
 		}
 	}
 
 	// Rotation target
-	if (_rotation != _rotationTarget)
+	if(_rotation != _rotationTarget)
 	{
 		// Update rotation
 		auto difference = Math::calculateVectorDifference(_rotation, _rotationTarget);
@@ -46,22 +46,22 @@ void BillboardEntity::updateTransformation()
 
 		// Correct rotation
 		_rotation = Vec3(Math::limitAngle(_rotation.x), Math::limitAngle(_rotation.y), Math::limitAngle(_rotation.z));
-		if (Math::calculateAngleDifference(_rotation.x, _rotationTarget.x) <= _rotationTargetSpeed)
+		if(Math::calculateAngleDifference(_rotation.x, _rotationTarget.x) <= _rotationTargetSpeed)
 		{
 			_rotation.x = _rotationTarget.x;
 		}
-		if (Math::calculateAngleDifference(_rotation.y, _rotationTarget.y) <= _rotationTargetSpeed)
+		if(Math::calculateAngleDifference(_rotation.y, _rotationTarget.y) <= _rotationTargetSpeed)
 		{
 			_rotation.y = _rotationTarget.y;
 		}
-		if (Math::calculateAngleDifference(_rotation.z, _rotationTarget.z) <= _rotationTargetSpeed)
+		if(Math::calculateAngleDifference(_rotation.z, _rotationTarget.z) <= _rotationTargetSpeed)
 		{
 			_rotation.z = _rotationTarget.z;
 		}
 	}
 
 	// Size target
-	if (_size != _sizeTarget)
+	if(_size != _sizeTarget)
 	{
 		// Update size
 		auto speedMultiplier = Math::normalizeVector(_sizeTarget - _size);
@@ -69,11 +69,11 @@ void BillboardEntity::updateTransformation()
 
 		// Correct size
 		_size = Vec2(max(0.0f, _size.x), max(0.0f, _size.y));
-		if (fabsf(_sizeTarget.x - _size.x) <= _sizeTargetSpeed)
+		if(fabsf(_sizeTarget.x - _size.x) <= _sizeTargetSpeed)
 		{
 			_size.x = _positionTarget.x;
 		}
-		if (fabsf(_sizeTarget.y - _size.y) <= _sizeTargetSpeed)
+		if(fabsf(_sizeTarget.y - _size.y) <= _sizeTargetSpeed)
 		{
 			_size.y = _positionTarget.y;
 		}
@@ -245,11 +245,11 @@ void BillboardEntity::setShadowed(bool value)
 
 void BillboardEntity::startSpriteAnimation(int loops)
 {
-	if (_isSpriteAnimationStarted)
+	if(_isSpriteAnimationStarted)
 	{
 		Logger::throwError("BillboardEntity::startSpriteAnimation::1");
 	}
-	if (loops < -1)
+	if(loops < -1)
 	{
 		Logger::throwError("BillboardEntity::startSpriteAnimation::2");
 	}
@@ -262,11 +262,11 @@ void BillboardEntity::startSpriteAnimation(int loops)
 
 void BillboardEntity::pauseSpriteAnimation()
 {
-	if (!_isSpriteAnimationStarted)
+	if(!_isSpriteAnimationStarted)
 	{
 		Logger::throwError("BillboardEntity::pauseSpriteAnimation::1");
 	}
-	else if (_isSpriteAnimationPaused)
+	else if(_isSpriteAnimationPaused)
 	{
 		Logger::throwError("BillboardEntity::pauseSpriteAnimation::2");
 	}
@@ -276,7 +276,7 @@ void BillboardEntity::pauseSpriteAnimation()
 
 void BillboardEntity::resumeSpriteAnimation()
 {
-	if (!_isSpriteAnimationPaused)
+	if(!_isSpriteAnimationPaused)
 	{
 		Logger::throwError("BillboardEntity::resumeSpriteAnimation");
 	}
@@ -286,7 +286,7 @@ void BillboardEntity::resumeSpriteAnimation()
 
 void BillboardEntity::stopSpriteAnimation()
 {
-	if (!_isSpriteAnimationStarted)
+	if(!_isSpriteAnimationStarted)
 	{
 		Logger::throwError("BillboardEntity::stopSpriteAnimation");
 	}

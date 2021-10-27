@@ -22,7 +22,7 @@ void SkyEditor::load()
 	// Camera
 	_fe3d.camera_reset();
 	_fe3d.camera_setCursorSensitivity(CURSOR_SENSITIVITY);
-	
+
 	// Default graphics
 	_fe3d.gfx_enableMotionBlur();
 	_fe3d.gfx_setMotionBlurStrength(0.1f);
@@ -55,11 +55,11 @@ void SkyEditor::unload()
 	// Miscellaneous
 	_gui.getGlobalScreen()->deleteTextField("skyID");
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
-	if (_fe3d.camera_isThirdPersonViewEnabled())
+	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
 		_fe3d.camera_disableThirdPersonView();
 	}
-	if (_fe3d.misc_isDebugRenderingEnabled())
+	if(_fe3d.misc_isDebugRenderingEnabled())
 	{
 		_fe3d.misc_disableDebugRendering();
 	}

@@ -3,14 +3,14 @@
 bool ScriptInterpreter::_validateListIndex(ScriptVariable& list, unsigned int index)
 {
 	// Check if variable is a list in the first place
-	if (list.getType() == ScriptVariableType::SINGLE)
+	if(list.getType() == ScriptVariableType::SINGLE)
 	{
 		_throwScriptError("variable is not a list!");
 		return false;
 	}
 
 	// Check if list index is valid
-	if (index < 0 || index >= list.getValueCount())
+	if(index < 0 || index >= list.getValueCount())
 	{
 		_throwScriptError("list index out of range");
 		return false;
@@ -21,11 +21,11 @@ bool ScriptInterpreter::_validateListIndex(ScriptVariable& list, unsigned int in
 
 bool ScriptInterpreter::_validateListValueCount(const vector<ScriptValue>& values, unsigned int count)
 {
-	if (values.size() == count) // Check if value amount is correct
+	if(values.size() == count) // Check if value amount is correct
 	{
 		return true;
 	}
-	else if (values.size() < count) // Not enough values
+	else if(values.size() < count) // Not enough values
 	{
 		_throwScriptError("not enough values!");
 		return false;
@@ -39,9 +39,9 @@ bool ScriptInterpreter::_validateListValueCount(const vector<ScriptValue>& value
 
 bool ScriptInterpreter::_validateListValueTypes(const vector<ScriptValue>& values, const vector<ScriptValueType>& types)
 {
-	for (size_t i = 0; i < values.size(); i++)
+	for(size_t i = 0; i < values.size(); i++)
 	{
-		if (values[i].getType() != types[i])
+		if(values[i].getType() != types[i])
 		{
 			_throwScriptError("wrong value type(s)!");
 			return false;
@@ -58,9 +58,9 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	string valueString = "";
 
 	// Extract name
-	for (const auto& c : scriptLine.substr(PUSHING_KEYWORD.size() + 1))
+	for(const auto& c : scriptLine.substr(PUSHING_KEYWORD.size() + 1))
 	{
-		if (c == ' ')
+		if(c == ' ')
 		{
 			break;
 		}
@@ -71,14 +71,14 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	}
 
 	// Check if list name is missing
-	if (nameString.empty())
+	if(nameString.empty())
 	{
 		_throwScriptError("list name missing!");
 		return;
 	}
 
 	// Check if value is present
-	if (scriptLine.size() >= (PUSHING_KEYWORD.size() + nameString.size() + 3))
+	if(scriptLine.size() >= (PUSHING_KEYWORD.size() + nameString.size() + 3))
 	{
 		// Extract remaining text (value)
 		valueString = scriptLine.substr(PUSHING_KEYWORD.size() + nameString.size() + 2);
@@ -90,7 +90,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	}
 
 	// Check if list exists
-	if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
+	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
 		_throwScriptError("list not existing!");
 		return;
@@ -100,23 +100,23 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	auto& listVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
 	// A constant list should not be changed
-	if (listVariable.isConstant())
+	if(listVariable.isConstant())
 	{
 		_throwScriptError("cannot push to list: it is constant!");
 		return;
 	}
-	
+
 	// Determine value type
-	if (_isListValue(valueString)) // LIST
+	if(_isListValue(valueString)) // LIST
 	{
 		_throwScriptError("cannot push a list to another list!");
 		return;
 	}
-	else if (_isVec3Value(valueString)) // VEC3
+	else if(_isVec3Value(valueString)) // VEC3
 	{
 		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::VEC3, _extractVec3FromString(valueString)));
 	}
-	else if (_isStringValue(valueString)) // STRING
+	else if(_isStringValue(valueString)) // STRING
 	{
 		// Removing the "" around the string content
 		valueString.erase(valueString.begin());
@@ -124,15 +124,15 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 
 		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::STRING, valueString));
 	}
-	else if (_isDecimalValue(valueString)) // DECIMAL
+	else if(_isDecimalValue(valueString)) // DECIMAL
 	{
 		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitDecimalString(valueString))));
 	}
-	else if (_isIntegerValue(valueString)) // INTEGER
+	else if(_isIntegerValue(valueString)) // INTEGER
 	{
 		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString))));
 	}
-	else if (_isBooleanValue(valueString)) // BOOLEAN
+	else if(_isBooleanValue(valueString)) // BOOLEAN
 	{
 		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, valueString == "<true>"));
 	}
@@ -149,20 +149,20 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 		auto vec3Parts = _extractVec3PartFromString(valueString);
 
 		// Check if any error was thrown
-		if (_hasThrownError)
+		if(_hasThrownError)
 		{
 			return;
 		}
 
 		// Remove vec3 part text
-		if (vec3Parts != Ivec3(0))
+		if(vec3Parts != Ivec3(0))
 		{
 			valueString.pop_back();
 			valueString.pop_back();
 		}
 
 		// Remove list accessing characters
-		if (isAccessingList)
+		if(isAccessingList)
 		{
 			auto openingBracketFound = find(valueString.begin(), valueString.end(), '[');
 			auto bracketIndex = static_cast<unsigned int>(distance(valueString.begin(), openingBracketFound));
@@ -170,15 +170,15 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 		}
 
 		// Check if using another variable as value
-		if (_isLocalVariableExisting(valueString) || _isGlobalVariableExisting(valueString))
+		if(_isLocalVariableExisting(valueString) || _isGlobalVariableExisting(valueString))
 		{
 			// Retrieve other value
 			auto otherVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
 			// Validate vec3 access
-			if (vec3Parts != Ivec3(0))
+			if(vec3Parts != Ivec3(0))
 			{
-				if (otherVariable.getType() == ScriptVariableType::MULTIPLE || otherVariable.getValue().getType() != ScriptValueType::VEC3)
+				if(otherVariable.getType() == ScriptVariableType::MULTIPLE || otherVariable.getValue().getType() != ScriptValueType::VEC3)
 				{
 					_throwScriptError("variable is not a vec3!");
 					return;
@@ -186,10 +186,10 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 			}
 
 			// Validate list access
-			if (isAccessingList)
+			if(isAccessingList)
 			{
 				// Check if list index is valid
-				if (_validateListIndex(otherVariable, listIndex))
+				if(_validateListIndex(otherVariable, listIndex))
 				{
 					valueIndex = listIndex;
 				}
@@ -199,23 +199,23 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 				}
 			}
 
-			
-			if (otherVariable.getType() == ScriptVariableType::MULTIPLE && !isAccessingList) // List value
+
+			if(otherVariable.getType() == ScriptVariableType::MULTIPLE && !isAccessingList) // List value
 			{
 				_throwScriptError("cannot push a list to another list!");
 				return;
 			}
-			else if (vec3Parts != Ivec3(0)) // Vec3 part value
+			else if(vec3Parts != Ivec3(0)) // Vec3 part value
 			{
-				if (vec3Parts.x && otherVariable.getValue(valueIndex).getType() == ScriptValueType::VEC3)
+				if(vec3Parts.x && otherVariable.getValue(valueIndex).getType() == ScriptValueType::VEC3)
 				{
 					listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, otherVariable.getValue(valueIndex).getVec3().x));
 				}
-				else if (vec3Parts.y && otherVariable.getValue(valueIndex).getType() == ScriptValueType::VEC3)
+				else if(vec3Parts.y && otherVariable.getValue(valueIndex).getType() == ScriptValueType::VEC3)
 				{
 					listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, otherVariable.getValue(valueIndex).getVec3().y));
 				}
-				else if (vec3Parts.z && otherVariable.getValue(valueIndex).getType() == ScriptValueType::VEC3)
+				else if(vec3Parts.z && otherVariable.getValue(valueIndex).getType() == ScriptValueType::VEC3)
 				{
 					listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, otherVariable.getValue(valueIndex).getVec3().z));
 				}
@@ -240,9 +240,9 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 	string indexString = "";
 
 	// Extract name
-	for (const auto& c : scriptLine.substr(PULLING_KEYWORD.size() + 1))
+	for(const auto& c : scriptLine.substr(PULLING_KEYWORD.size() + 1))
 	{
-		if (c == ' ')
+		if(c == ' ')
 		{
 			break;
 		}
@@ -253,14 +253,14 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 	}
 
 	// Check if variable name is missing
-	if (nameString.empty())
+	if(nameString.empty())
 	{
 		_throwScriptError("list name missing!");
 		return;
 	}
 
 	// Check if list index is present
-	if (scriptLine.size() >= (PULLING_KEYWORD.size() + nameString.size() + 3))
+	if(scriptLine.size() >= (PULLING_KEYWORD.size() + nameString.size() + 3))
 	{
 		// Extract remaining text (value)
 		indexString = scriptLine.substr(PULLING_KEYWORD.size() + nameString.size() + 2);
@@ -272,14 +272,14 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 	}
 
 	// Check if list index is invalid
-	if (!_isIntegerValue(indexString) && !_isLocalVariableExisting(indexString) && !_isGlobalVariableExisting(indexString))
+	if(!_isIntegerValue(indexString) && !_isLocalVariableExisting(indexString) && !_isGlobalVariableExisting(indexString))
 	{
 		_throwScriptError("invalid list index!");
 		return;
 	}
 
 	// Check if list exists
-	if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
+	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
 		_throwScriptError("list not existing!");
 		return;
@@ -289,7 +289,7 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 	auto& listVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
 	// A constant list should not be changed
-	if (listVariable.isConstant())
+	if(listVariable.isConstant())
 	{
 		_throwScriptError("cannot push to list: it is constant!");
 		return;
@@ -297,7 +297,7 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 
 	// Determine index
 	unsigned int index = -1;
-	if (_isIntegerValue(indexString)) // Integer value
+	if(_isIntegerValue(indexString)) // Integer value
 	{
 		index = stoi(_limitIntegerString(indexString));
 	}
@@ -307,7 +307,7 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 		auto indexVariable = (_isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString));
 
 		// Check if integer
-		if (indexVariable.getValue().getType() != ScriptValueType::INTEGER)
+		if(indexVariable.getValue().getType() != ScriptValueType::INTEGER)
 		{
 			_throwScriptError("index variable is not an integer!");
 			return;
@@ -318,7 +318,7 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 	}
 
 	// Check if list index is out of range
-	if (!_validateListIndex(listVariable, index))
+	if(!_validateListIndex(listVariable, index))
 	{
 		return;
 	}

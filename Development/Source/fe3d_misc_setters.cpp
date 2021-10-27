@@ -12,7 +12,7 @@ void FabiEngine3D::misc_setCustomCursor(const string& imageEntityID)
 
 void FabiEngine3D::misc_enableWireFrameRendering()
 {
-	if (_core->_renderBus.isWireFrameRenderingEnabled())
+	if(_core->_renderBus.isWireFrameRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to enable wire frame rendering: already enabled!");
 		return;
@@ -23,7 +23,7 @@ void FabiEngine3D::misc_enableWireFrameRendering()
 
 void FabiEngine3D::misc_enableShadowFrameRendering()
 {
-	if (_core->_renderBus.isShadowFrameRenderingEnabled())
+	if(_core->_renderBus.isShadowFrameRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to enable shadow frame rendering: already enabled!");
 		return;
@@ -34,7 +34,7 @@ void FabiEngine3D::misc_enableShadowFrameRendering()
 
 void FabiEngine3D::misc_enableAabbFrameRendering()
 {
-	if (_core->_renderBus.isAabbFrameRenderingEnabled())
+	if(_core->_renderBus.isAabbFrameRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to enable AABB frame rendering: already enabled!");
 		return;
@@ -45,7 +45,7 @@ void FabiEngine3D::misc_enableAabbFrameRendering()
 
 void FabiEngine3D::misc_enableDebugRendering()
 {
-	if (_core->_renderBus.isDebugRenderingEnabled())
+	if(_core->_renderBus.isDebugRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to enable debug rendering: already enabled!");
 		return;
@@ -56,7 +56,7 @@ void FabiEngine3D::misc_enableDebugRendering()
 
 void FabiEngine3D::misc_enableVsync()
 {
-	if (_core->_window.isVsyncEnabled())
+	if(_core->_window.isVsyncEnabled())
 	{
 		Logger::throwWarning("Tried to enable Vsync: already enabled!");
 		return;
@@ -67,18 +67,18 @@ void FabiEngine3D::misc_enableVsync()
 
 void FabiEngine3D::misc_enableSounds()
 {
-	if (_core->_audioPlayer.isSoundsEnabled())
+	if(_core->_audioPlayer.isSoundsEnabled())
 	{
 		Logger::throwWarning("Tried to enable sounds: already enabled!");
 		return;
 	}
-	
+
 	_core->_audioPlayer.setSoundsEnabled(true);
 }
 
 void FabiEngine3D::misc_enableMusic()
 {
-	if (_core->_audioPlayer.isMusicEnabled())
+	if(_core->_audioPlayer.isMusicEnabled())
 	{
 		Logger::throwWarning("Tried to enable music: already enabled!");
 		return;
@@ -89,7 +89,7 @@ void FabiEngine3D::misc_enableMusic()
 
 void FabiEngine3D::misc_disableWireFrameRendering()
 {
-	if (!_core->_renderBus.isWireFrameRenderingEnabled())
+	if(!_core->_renderBus.isWireFrameRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to disable wire frame rendering: not enabled!");
 		return;
@@ -100,7 +100,7 @@ void FabiEngine3D::misc_disableWireFrameRendering()
 
 void FabiEngine3D::misc_disableShadowFrameRendering()
 {
-	if (!_core->_renderBus.isShadowFrameRenderingEnabled())
+	if(!_core->_renderBus.isShadowFrameRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to disable shadow frame rendering: not enabled!");
 		return;
@@ -111,7 +111,7 @@ void FabiEngine3D::misc_disableShadowFrameRendering()
 
 void FabiEngine3D::misc_disableAabbFrameRendering()
 {
-	if (!_core->_renderBus.isAabbFrameRenderingEnabled())
+	if(!_core->_renderBus.isAabbFrameRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to disable AABB frame rendering: not enabled!");
 		return;
@@ -122,7 +122,7 @@ void FabiEngine3D::misc_disableAabbFrameRendering()
 
 void FabiEngine3D::misc_disableDebugRendering()
 {
-	if (!_core->_renderBus.isDebugRenderingEnabled())
+	if(!_core->_renderBus.isDebugRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to disable debug rendering: not enabled!");
 		return;
@@ -133,7 +133,7 @@ void FabiEngine3D::misc_disableDebugRendering()
 
 void FabiEngine3D::misc_disableVsync()
 {
-	if (!_core->_window.isVsyncEnabled())
+	if(!_core->_window.isVsyncEnabled())
 	{
 		Logger::throwWarning("Tried to disable Vsync: not enabled!");
 		return;
@@ -144,7 +144,7 @@ void FabiEngine3D::misc_disableVsync()
 
 void FabiEngine3D::misc_disableSounds()
 {
-	if (!_core->_audioPlayer.isSoundsEnabled())
+	if(!_core->_audioPlayer.isSoundsEnabled())
 	{
 		Logger::throwWarning("Tried to disable sounds: not enabled!");
 		return;
@@ -155,7 +155,7 @@ void FabiEngine3D::misc_disableSounds()
 
 void FabiEngine3D::misc_disableMusic()
 {
-	if (!_core->_audioPlayer.isMusicEnabled())
+	if(!_core->_audioPlayer.isMusicEnabled())
 	{
 		Logger::throwWarning("Tried to disable music: not enabled!");
 		return;
@@ -166,7 +166,7 @@ void FabiEngine3D::misc_disableMusic()
 
 void FabiEngine3D::misc_setCursorVisible(bool isVisible)
 {
-	if (isVisible)
+	if(isVisible)
 	{
 		_core->_window.showCursor();
 	}
@@ -267,7 +267,7 @@ void FabiEngine3D::misc_cacheMusicMultiThreaded(const vector<string>& filePaths)
 
 void FabiEngine3D::misc_startMillisecondTimer()
 {
-	if (_core->_timer.isStarted())
+	if(_core->_timer.isStarted())
 	{
 		Logger::throwWarning("Tried to start milliseconds timer: already started!");
 		return;

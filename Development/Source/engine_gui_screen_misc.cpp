@@ -41,9 +41,9 @@ Vec2 EngineGuiScreen::convertSize(Vec2 size)
 
 bool EngineGuiScreen::isScrollingListExisting(const string& ID)
 {
-	for (const auto& scrollingList : _scrollingLists)
+	for(const auto& scrollingList : _scrollingLists)
 	{
-		if (ID == scrollingList->getID())
+		if(ID == scrollingList->getID())
 		{
 			return true;
 		}
@@ -54,9 +54,9 @@ bool EngineGuiScreen::isScrollingListExisting(const string& ID)
 
 bool EngineGuiScreen::isWriteFieldExisting(const string& ID)
 {
-	for (const auto& writeField : _writeFields)
+	for(const auto& writeField : _writeFields)
 	{
-		if (ID == writeField->getID())
+		if(ID == writeField->getID())
 		{
 			return true;
 		}
@@ -67,9 +67,9 @@ bool EngineGuiScreen::isWriteFieldExisting(const string& ID)
 
 bool EngineGuiScreen::isButtonExisting(const string& ID)
 {
-	for (const auto& button : _buttons)
+	for(const auto& button : _buttons)
 	{
-		if (ID == button->getID())
+		if(ID == button->getID())
 		{
 			return true;
 		}
@@ -80,9 +80,9 @@ bool EngineGuiScreen::isButtonExisting(const string& ID)
 
 bool EngineGuiScreen::isRectangleExisting(const string& ID)
 {
-	for (const auto& rectangle : _rectangles)
+	for(const auto& rectangle : _rectangles)
 	{
-		if (ID == rectangle->getID())
+		if(ID == rectangle->getID())
 		{
 			return true;
 		}
@@ -93,9 +93,9 @@ bool EngineGuiScreen::isRectangleExisting(const string& ID)
 
 bool EngineGuiScreen::isTextFieldExisting(const string& ID)
 {
-	for (const auto& textField : _textFields)
+	for(const auto& textField : _textFields)
 	{
-		if (ID == textField->getID())
+		if(ID == textField->getID())
 		{
 			return true;
 		}
@@ -107,9 +107,9 @@ bool EngineGuiScreen::isTextFieldExisting(const string& ID)
 shared_ptr<EngineGuiScrollingList> EngineGuiScreen::getScrollingList(const string& ID)
 {
 	// Retrieve scrolling list
-	for (const auto& scrollingList : _scrollingLists)
+	for(const auto& scrollingList : _scrollingLists)
 	{
-		if (ID == scrollingList->getID())
+		if(ID == scrollingList->getID())
 		{
 			return scrollingList;
 		}
@@ -122,9 +122,9 @@ shared_ptr<EngineGuiScrollingList> EngineGuiScreen::getScrollingList(const strin
 shared_ptr<EngineGuiWriteField> EngineGuiScreen::getWriteField(const string& ID)
 {
 	// Retrieve write field
-	for (const auto& writeField : _writeFields)
+	for(const auto& writeField : _writeFields)
 	{
-		if (ID == writeField->getID())
+		if(ID == writeField->getID())
 		{
 			return writeField;
 		}
@@ -137,9 +137,9 @@ shared_ptr<EngineGuiWriteField> EngineGuiScreen::getWriteField(const string& ID)
 shared_ptr<EngineGuiButton> EngineGuiScreen::getButton(const string& ID)
 {
 	// Retrieve button
-	for (const auto& button : _buttons)
+	for(const auto& button : _buttons)
 	{
-		if (ID == button->getID())
+		if(ID == button->getID())
 		{
 			return button;
 		}
@@ -152,9 +152,9 @@ shared_ptr<EngineGuiButton> EngineGuiScreen::getButton(const string& ID)
 shared_ptr<EngineGuiRectangle> EngineGuiScreen::getRectangle(const string& ID)
 {
 	// Retrieve rectangle
-	for (const auto& rectangle : _rectangles)
+	for(const auto& rectangle : _rectangles)
 	{
-		if (ID == rectangle->getID())
+		if(ID == rectangle->getID())
 		{
 			return rectangle;
 		}
@@ -167,9 +167,9 @@ shared_ptr<EngineGuiRectangle> EngineGuiScreen::getRectangle(const string& ID)
 shared_ptr<EngineGuiTextField> EngineGuiScreen::getTextField(const string& ID)
 {
 	// Retrieve text field
-	for (const auto& textField : _textFields)
+	for(const auto& textField : _textFields)
 	{
-		if (ID == textField->getID())
+		if(ID == textField->getID())
 		{
 			return textField;
 		}

@@ -22,10 +22,10 @@ void EngineController::FE3D_CONTROLLER_INIT()
 	const string textureDirectoryPath = "engine_assets\\textures\\";
 	const string fontDirectoryPath = "engine_assets\\fonts\\";
 
-	if (application_isExported()) // Application preview
+	if(application_isExported()) // Application preview
 	{
 		// Validate project files & directories
-		if (_topViewportController.isProjectCorrupted(Tools::getRootDirectory()))
+		if(_topViewportController.isProjectCorrupted(Tools::getRootDirectory()))
 		{
 			Logger::throwFatalWarning("Cannot load application: missing files/directories!");
 		}
@@ -53,7 +53,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		_leftViewportController.getScriptEditor().getScriptExecutor().load();
 
 		// Scripting error has been thrown
-		if (!_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
+		if(!_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
 		{
 			application_stop();
 			_mustPromptOnExit = true;
@@ -70,7 +70,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		meshPaths.push_back(string(meshDirectoryPath + "speaker.obj"));
 		meshPaths.push_back(string(meshDirectoryPath + "torch.obj"));
 		misc_cacheMeshesMultiThreaded(meshPaths);
-		
+
 		// Cache 2D engine textures
 		vector<string> texturePaths2D;
 		texturePaths2D.push_back(string(textureDirectoryPath + "a.png"));
@@ -135,7 +135,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		vector<string> fontPaths;
 		fontPaths.push_back(string(fontDirectoryPath + "font.ttf"));
 		misc_cacheFontsMultiThreaded(fontPaths);
-		
+
 		// Default rendering color
 		Tools::setMainRenderingColor(Vec3(0.0f));
 
@@ -164,9 +164,9 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 void EngineController::FE3D_CONTROLLER_UPDATE()
 {
-	if (application_isExported()) // Application preview
+	if(application_isExported()) // Application preview
 	{
-		if (_leftViewportController.getScriptEditor().getScriptExecutor().isRunning()) // Still running
+		if(_leftViewportController.getScriptEditor().getScriptExecutor().isRunning()) // Still running
 		{
 			// Update animation system
 			_leftViewportController.getAnimationEditor().update();
@@ -185,7 +185,7 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 		// Initialize main menu again if user came from another menu
 		static string lastScreen = "";
 		string activeScreen = _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID();
-		if (activeScreen == "main" && lastScreen != "main")
+		if(activeScreen == "main" && lastScreen != "main")
 		{
 			// Restore camera
 			camera_reset();
@@ -216,10 +216,10 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 void EngineController::FE3D_CONTROLLER_DESTROY()
 {
 	// Application preview
-	if (application_isExported())
+	if(application_isExported())
 	{
 		// Check if script was running
-		if (_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
+		if(_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
 		{
 			_leftViewportController.getScriptEditor().getScriptExecutor().unload();
 		}

@@ -28,7 +28,7 @@ void SettingsEditor::load()
 {
 	// GUI
 	_loadGUI();
-	
+
 	// Default graphics
 	_fe3d.gfx_enableBloom();
 	_fe3d.gfx_setBloomType(BloomType::PARTS);
@@ -67,7 +67,7 @@ void SettingsEditor::unload()
 void SettingsEditor::update()
 {
 	// Only if editor is loaded
-	if (!_isEditorLoaded)
+	if(!_isEditorLoaded)
 	{
 		return;
 	}
@@ -76,7 +76,7 @@ void SettingsEditor::update()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "settingsEditorMenuMain")
+	if(screen->getID() == "settingsEditorMenuMain")
 	{
 		// Temporary values
 		auto isAntiAliasingEnabled = _fe3d.gfx_isAntiAliasingEnabled();
@@ -91,108 +91,108 @@ void SettingsEditor::update()
 		auto maxAudioChannels = _fe3d.misc_getMaxAudioChannelCount();
 
 		// Button management
-		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isAntiAliasingEnabled")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isAntiAliasingEnabled")->isHovered())
 		{
 			_gui.getGlobalScreen()->createAnswerForm("isAntiAliasingEnabled", "Anti Aliasing?", Vec2(0.0f, 0.25f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("bloomSize")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("bloomSize")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("bloomSize", "Bloom Size", bloomSize, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("dofSize")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("dofSize")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("dofSize", "DOF Size", dofSize, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("motionBlurSize")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("motionBlurSize")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("motionBlurSize", "Motion Blur Size", motionBlurSize, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("anisotropicFilteringQuality")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("anisotropicFilteringQuality")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("anisotropicFilteringQuality", "Anisotropic Filtering Quality", anisotropicFilteringQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("shadowQuality")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("shadowQuality")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("shadowQuality", "Shadow Quality", shadowQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("cubeReflectionQuality")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("cubeReflectionQuality")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("cubeReflectionQuality", "Cube Reflection Quality", cubeReflectionQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("planarReflectionQuality")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("planarReflectionQuality")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("planarReflectionQuality", "Planar Reflection Quality", planarReflectionQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("refractionQuality")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("refractionQuality")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("refractionQuality", "Refraction Quality", refractionQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("maxAudioChannels")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("maxAudioChannels")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("maxAudioChannels", "Max Audio Channels", maxAudioChannels, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
 		// Update answer forms
-		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
+		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			saveSettingsToFile();
 			unload();
 			return;
 		}
-		if (_gui.getGlobalScreen()->isAnswerFormDenied("back"))
+		if(_gui.getGlobalScreen()->isAnswerFormDenied("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			unload();
 			return;
 		}
-		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("isAntiAliasingEnabled") && !_fe3d.gfx_isAntiAliasingEnabled())
+		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("isAntiAliasingEnabled") && !_fe3d.gfx_isAntiAliasingEnabled())
 		{
 			_fe3d.gfx_enableAntiAliasing();
 		}
-		if (_gui.getGlobalScreen()->isAnswerFormDenied("isAntiAliasingEnabled") && _fe3d.gfx_isAntiAliasingEnabled())
+		if(_gui.getGlobalScreen()->isAnswerFormDenied("isAntiAliasingEnabled") && _fe3d.gfx_isAntiAliasingEnabled())
 		{
 			_fe3d.gfx_disableAntiAliasing();
 		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("bloomSize", bloomSize, {}))
+		if(_gui.getGlobalScreen()->checkValueForm("bloomSize", bloomSize, {}))
 		{
 			_fe3d.gfx_setBloomSize(bloomSize);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("dofSize", dofSize, {}))
+		if(_gui.getGlobalScreen()->checkValueForm("dofSize", dofSize, {}))
 		{
 			_fe3d.gfx_setDofSize(dofSize);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("motionBlurSize", motionBlurSize, {}))
+		if(_gui.getGlobalScreen()->checkValueForm("motionBlurSize", motionBlurSize, {}))
 		{
 			_fe3d.gfx_setMotionBlurSize(motionBlurSize);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("anisotropicFilteringQuality", anisotropicFilteringQuality, {}))
+		if(_gui.getGlobalScreen()->checkValueForm("anisotropicFilteringQuality", anisotropicFilteringQuality, {}))
 		{
 			_fe3d.gfx_setAnisotropicFilteringQuality(anisotropicFilteringQuality);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("shadowQuality", shadowQuality, {}))
+		if(_gui.getGlobalScreen()->checkValueForm("shadowQuality", shadowQuality, {}))
 		{
 			_fe3d.gfx_setShadowQuality(shadowQuality);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("cubeReflectionQuality", cubeReflectionQuality, {}))
+		if(_gui.getGlobalScreen()->checkValueForm("cubeReflectionQuality", cubeReflectionQuality, {}))
 		{
 			_fe3d.gfx_setCubeReflectionQuality(cubeReflectionQuality);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("planarReflectionQuality", planarReflectionQuality, {}))
+		if(_gui.getGlobalScreen()->checkValueForm("planarReflectionQuality", planarReflectionQuality, {}))
 		{
 			_fe3d.gfx_setPlanarReflectionQuality(planarReflectionQuality);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("refractionQuality", refractionQuality, {}))
+		if(_gui.getGlobalScreen()->checkValueForm("refractionQuality", refractionQuality, {}))
 		{
 			_fe3d.gfx_setRefractionQuality(refractionQuality);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("maxAudioChannels", maxAudioChannels, {}))
+		if(_gui.getGlobalScreen()->checkValueForm("maxAudioChannels", maxAudioChannels, {}))
 		{
 			_fe3d.misc_setMaxAudioChannelCount(maxAudioChannels);
 		}
@@ -219,17 +219,17 @@ void SettingsEditor::loadDefaultSettings()
 bool SettingsEditor::loadSettingsFromFile()
 {
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("SettingsEditor::loadSettingsFromFile");
 	}
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\settings.fe3d";
+														 ("projects\\" + _currentProjectID)) + "\\settings.fe3d";
 
 	// Warning checking
-	if (!Tools::isFileExisting(filePath))
+	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `settings.fe3d` missing!");
 		return false;
@@ -259,7 +259,7 @@ bool SettingsEditor::loadSettingsFromFile()
 		audioChannels;
 
 	// Disable anti aliasing
-	if (_fe3d.gfx_isAntiAliasingEnabled())
+	if(_fe3d.gfx_isAntiAliasingEnabled())
 	{
 		_fe3d.gfx_disableAntiAliasing(true);
 	}
@@ -286,14 +286,14 @@ bool SettingsEditor::loadSettingsFromFile()
 bool SettingsEditor::saveSettingsToFile()
 {
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("SettingsEditor::saveSettingsToFile");
 	}
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\settings.fe3d";
+														 ("projects\\" + _currentProjectID)) + "\\settings.fe3d";
 
 	// Create or overwrite settings file
 	ofstream file(filePath);

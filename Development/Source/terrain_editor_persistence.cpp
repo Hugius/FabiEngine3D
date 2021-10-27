@@ -13,17 +13,17 @@ using std::istringstream;
 const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
 {
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("TerrainEditor::getAllTerrainTexturePathsFromFile");
 	}
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
+														 ("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
 
 	// Warning checking
-	if (!Tools::isFileExisting(filePath))
+	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `terrain.fe3d` missing!");
 		return {};
@@ -35,7 +35,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
 	// Read terrain data
 	vector<string> texturePaths;
 	string line;
-	while (getline(file, line))
+	while(getline(file, line))
 	{
 		// Values
 		string terrainID, heightMapPath, diffuseMapPath, normalMapPath,
@@ -87,55 +87,55 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
 		replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
 
 		// Save diffuse map path
-		if (!diffuseMapPath.empty())
+		if(!diffuseMapPath.empty())
 		{
 			texturePaths.push_back(diffuseMapPath);
 		}
 
 		// Save normal map path
-		if (!normalMapPath.empty())
+		if(!normalMapPath.empty())
 		{
 			texturePaths.push_back(normalMapPath);
 		}
 
 		// Save normal map R path
-		if (!normalMapPathR.empty())
+		if(!normalMapPathR.empty())
 		{
 			texturePaths.push_back(normalMapPathR);
 		}
 
 		// Save normal map G path
-		if (!normalMapPathG.empty())
+		if(!normalMapPathG.empty())
 		{
 			texturePaths.push_back(normalMapPathG);
 		}
 
 		// Save normal map B path
-		if (!normalMapPathB.empty())
+		if(!normalMapPathB.empty())
 		{
 			texturePaths.push_back(normalMapPathB);
 		}
 
 		// Save blend map path
-		if (!blendMapPath.empty())
+		if(!blendMapPath.empty())
 		{
 			texturePaths.push_back(blendMapPath);
 		}
 
 		// Save blend map R path
-		if (!blendMapPathR.empty())
+		if(!blendMapPathR.empty())
 		{
 			texturePaths.push_back(blendMapPathR);
 		}
 
 		// Save blend map G path
-		if (!blendMapPathG.empty())
+		if(!blendMapPathG.empty())
 		{
 			texturePaths.push_back(blendMapPathG);
 		}
 
 		// Save blend map B path
-		if (!blendMapPathB.empty())
+		if(!blendMapPathB.empty())
 		{
 			texturePaths.push_back(blendMapPathB);
 		}
@@ -151,17 +151,17 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
 const vector<string> TerrainEditor::getAllTerrainBitmapPathsFromFile()
 {
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("TerrainEditor::getAllTerrainTexturePathsFromFile");
 	}
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
+														 ("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
 
 	// Warning checking
-	if (!Tools::isFileExisting(filePath))
+	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `terrain.fe3d` missing!");
 		return {};
@@ -173,7 +173,7 @@ const vector<string> TerrainEditor::getAllTerrainBitmapPathsFromFile()
 	// Read terrain data
 	vector<string> bitmapPaths;
 	string line;
-	while (getline(file, line))
+	while(getline(file, line))
 	{
 		// Values
 		string terrainID, heightMapPath;
@@ -191,7 +191,7 @@ const vector<string> TerrainEditor::getAllTerrainBitmapPathsFromFile()
 		replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
 
 		// Save height map path
-		if (!heightMapPath.empty())
+		if(!heightMapPath.empty())
 		{
 			bitmapPaths.push_back(heightMapPath);
 		}
@@ -207,7 +207,7 @@ const vector<string> TerrainEditor::getAllTerrainBitmapPathsFromFile()
 bool TerrainEditor::loadTerrainEntitiesFromFile()
 {
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("TerrainEditor::loadTerrainEntitiesFromFile");
 	}
@@ -217,10 +217,10 @@ bool TerrainEditor::loadTerrainEntitiesFromFile()
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
+														 ("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
 
 	// Warning checking
-	if (!Tools::isFileExisting(filePath))
+	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `terrain.fe3d` missing!");
 		return false;
@@ -231,7 +231,7 @@ bool TerrainEditor::loadTerrainEntitiesFromFile()
 
 	// Read terrain data
 	string line;
-	while (getline(file, line))
+	while(getline(file, line))
 	{
 		// Values
 		string terrainID, heightMapPath, diffuseMapPath, normalMapPath,
@@ -287,66 +287,66 @@ bool TerrainEditor::loadTerrainEntitiesFromFile()
 		replace(blendMapPathR.begin(), blendMapPathR.end(), '?', ' ');
 		replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
 		replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
-		
+
 		// Create terrain
 		_fe3d.terrainEntity_create(terrainID, heightMapPath);
 
 		// Check if terrain creation went well
-		if (_fe3d.terrainEntity_isExisting(terrainID))
+		if(_fe3d.terrainEntity_isExisting(terrainID))
 		{
 			// Add terrain ID
 			_loadedTerrainIDs.push_back(terrainID);
 
 			// Diffuse map
-			if (!diffuseMapPath.empty())
+			if(!diffuseMapPath.empty())
 			{
 				_fe3d.terrainEntity_setDiffuseMap(terrainID, diffuseMapPath);
 			}
 
 			// Normal map
-			if (!normalMapPath.empty())
+			if(!normalMapPath.empty())
 			{
 				_fe3d.terrainEntity_setNormalMap(terrainID, normalMapPath);
 			}
 
 			// Normal map R
-			if (!normalMapPathR.empty())
+			if(!normalMapPathR.empty())
 			{
 				_fe3d.terrainEntity_setNormalMapR(terrainID, normalMapPathR);
 			}
 
 			// Normal map G
-			if (!normalMapPathG.empty())
+			if(!normalMapPathG.empty())
 			{
 				_fe3d.terrainEntity_setNormalMapG(terrainID, normalMapPathG);
 			}
 
 			// Normal map B
-			if (!normalMapPathB.empty())
+			if(!normalMapPathB.empty())
 			{
 				_fe3d.terrainEntity_setNormalMapB(terrainID, normalMapPathB);
 			}
 
 			// Blend map
-			if (!blendMapPath.empty())
+			if(!blendMapPath.empty())
 			{
 				_fe3d.terrainEntity_setBlendMap(terrainID, blendMapPath);
 			}
 
 			// Blend map R
-			if (!blendMapPathR.empty())
+			if(!blendMapPathR.empty())
 			{
 				_fe3d.terrainEntity_setDiffuseMapR(terrainID, blendMapPathR);
 			}
 
 			// Blend map G
-			if (!blendMapPathG.empty())
+			if(!blendMapPathG.empty())
 			{
 				_fe3d.terrainEntity_setDiffuseMapG(terrainID, blendMapPathG);
 			}
 
 			// Blend map B
-			if (!blendMapPathB.empty())
+			if(!blendMapPathB.empty())
 			{
 				_fe3d.terrainEntity_setDiffuseMapB(terrainID, blendMapPathB);
 			}
@@ -377,26 +377,26 @@ bool TerrainEditor::loadTerrainEntitiesFromFile()
 bool TerrainEditor::saveTerrainEntitiesToFile()
 {
 	// Editor must be loaded
-	if (!_isEditorLoaded)
+	if(!_isEditorLoaded)
 	{
 		return false;
 	}
 
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("TerrainEditor::saveTerrainEntitiesToFile");
 	}
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
+														 ("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
 
 	// Load terrain file
 	ofstream file(filePath);
 
 	// Write terrain data
-	for (const auto& terrainID : _loadedTerrainIDs)
+	for(const auto& terrainID : _loadedTerrainIDs)
 	{
 		// Values
 		string heightMapPath = _fe3d.terrainEntity_getHeightMapPath(terrainID);

@@ -15,7 +15,7 @@ shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string& ID)
 {
 	auto result = _getWaterEntity(ID);
 
-	if (result == nullptr)
+	if(result == nullptr)
 	{
 		Logger::throwError("WaterEntityManager::getEntity");
 	}
@@ -25,7 +25,7 @@ shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string& ID)
 
 shared_ptr<WaterEntity> WaterEntityManager::getSelectedWater()
 {
-	if (_getWaterEntities().empty() || _selectedID.empty())
+	if(_getWaterEntities().empty() || _selectedID.empty())
 	{
 		return nullptr;
 	}
@@ -42,7 +42,7 @@ const unordered_map<string, shared_ptr<WaterEntity>>& WaterEntityManager::getEnt
 
 void WaterEntityManager::selectWater(const string& ID)
 {
-	if (isExisting(ID) || ID.empty())
+	if(isExisting(ID) || ID.empty())
 	{
 		_selectedID = ID;
 	}
@@ -67,7 +67,7 @@ void WaterEntityManager::loadMesh(const string& ID)
 	vector<float> highQualityBufferData;
 
 	// Check if size is too large
-	if (size > 1024)
+	if(size > 1024)
 	{
 		Logger::throwError("WaterEntityManager::loadMesh");
 	}
@@ -75,9 +75,9 @@ void WaterEntityManager::loadMesh(const string& ID)
 	// Reserving memory for the vertices
 	highQualityBufferData.reserve(size_t(size) * size_t(size) * 30);
 
-	for (float x = -halfSize; x < halfSize; x++) // X direction
+	for(float x = -halfSize; x < halfSize; x++) // X direction
 	{
-		for (float z = -halfSize; z < halfSize; z++) // Z direction
+		for(float z = -halfSize; z < halfSize; z++) // Z direction
 		{
 			float firstVertexX = x;
 			float firstVertexY = 0.0f;
@@ -140,7 +140,7 @@ void WaterEntityManager::loadMesh(const string& ID)
 			highQualityBufferData.push_back(firstUvY);
 		}
 	}
-	
+
 	// Create high quality render buffer
 	entity->setHighQualityRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, &highQualityBufferData[0], static_cast<unsigned int>(highQualityBufferData.size())));
 
@@ -162,10 +162,10 @@ void WaterEntityManager::loadMesh(const string& ID)
 void WaterEntityManager::update()
 {
 	// Update all water entities
-	for (const auto& [keyID, entity] : _getWaterEntities())
+	for(const auto& [keyID, entity] : _getWaterEntities())
 	{
 		// Update water if visible
-		if (entity->isVisible())
+		if(entity->isVisible())
 		{
 			// Update ripple offset
 			Vec2 newOffset = (entity->getRippleOffset() + entity->getSpeed());

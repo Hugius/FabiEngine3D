@@ -4,9 +4,9 @@
 void SceneEditor::_updateSpotlightPlacing()
 {
 	// Only if user is in placement mode
-	if (_isPlacingSpotlight)
+	if(_isPlacingSpotlight)
 	{
-		if (_fe3d.terrainEntity_getSelectedID().empty()) // Placing without terrain
+		if(_fe3d.terrainEntity_getSelectedID().empty()) // Placing without terrain
 		{
 			// Retrieve current position
 			auto newPosition = _fe3d.spotlightEntity_getPosition(PREVIEW_TORCH_ID);
@@ -20,14 +20,14 @@ void SceneEditor::_updateSpotlightPlacing()
 			_fe3d.spotlightEntity_setPosition(PREVIEW_TORCH_ID, newPosition);
 
 			// Check if spotlight must be placed
-			if (_gui.getGlobalScreen()->isValueFormConfirmed())
+			if(_gui.getGlobalScreen()->isValueFormConfirmed())
 			{
 				// Adding a number to make it unique
 			BEGIN1:
 				const string newID = ("spotlight_" + to_string(Math::getRandomInteger(0, INT_MAX)));
 
 				// Check if spotlight already exists
-				if (_fe3d.spotlightEntity_isExisting(newID))
+				if(_fe3d.spotlightEntity_isExisting(newID))
 				{
 					goto BEGIN1;
 				}
@@ -36,7 +36,7 @@ void SceneEditor::_updateSpotlightPlacing()
 				_fe3d.spotlightEntity_create(newID);
 
 				// Check if spotlight creation went well
-				if (_fe3d.spotlightEntity_isExisting(newID))
+				if(_fe3d.spotlightEntity_isExisting(newID))
 				{
 					// Create model
 					const string newModelID = ("@@torch_" + newID);
@@ -65,7 +65,7 @@ void SceneEditor::_updateSpotlightPlacing()
 			}
 
 			// Check if placement mode must be disabled
-			if (_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
+			if(_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
 			{
 				_fe3d.modelEntity_setVisible(PREVIEW_TORCH_ID, false);
 				_fe3d.spotlightEntity_setVisible(PREVIEW_TORCH_ID, false);
@@ -75,13 +75,13 @@ void SceneEditor::_updateSpotlightPlacing()
 		else
 		{
 			// Check if allowed by GUI
-			if (_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// Check if allowed by mouse
-				if (!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Check if a terrain is loaded
-					if (_fe3d.raycast_isPointOnTerrainValid())
+					if(_fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Show preview spotlight
 						_fe3d.spotlightEntity_setVisible(PREVIEW_TORCH_ID, true);
@@ -98,7 +98,7 @@ void SceneEditor::_updateSpotlightPlacing()
 					}
 
 					// Check if spotlight must be placed
-					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.raycast_isPointOnTerrainValid())
+					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Temporary values
 						auto newPosition = _fe3d.spotlightEntity_getPosition(PREVIEW_TORCH_ID);
@@ -108,7 +108,7 @@ void SceneEditor::_updateSpotlightPlacing()
 						const string newID = ("spotlight_" + to_string(Math::getRandomInteger(0, INT_MAX)));
 
 						// Check if spotlight already exists
-						if (_fe3d.spotlightEntity_isExisting(newID))
+						if(_fe3d.spotlightEntity_isExisting(newID))
 						{
 							goto BEGIN2;
 						}
@@ -117,7 +117,7 @@ void SceneEditor::_updateSpotlightPlacing()
 						_fe3d.spotlightEntity_create(newID);
 
 						// Check if spotlight creation went well
-						if (_fe3d.spotlightEntity_isExisting(newID))
+						if(_fe3d.spotlightEntity_isExisting(newID))
 						{
 							// Create model
 							const string newModelID = ("@@torch_" + newID);
@@ -144,7 +144,7 @@ void SceneEditor::_updateSpotlightPlacing()
 							_loadedSpotlightIDs.push_back(newID);
 						}
 					}
-					else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
+					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
 					{
 						_fe3d.modelEntity_setVisible(PREVIEW_TORCH_ID, false);
 						_fe3d.spotlightEntity_setVisible(PREVIEW_TORCH_ID, false);
@@ -165,7 +165,7 @@ void SceneEditor::_updateSpotlightPlacing()
 		}
 
 		// Update preview torch position
-		if (_isPlacingSpotlight)
+		if(_isPlacingSpotlight)
 		{
 			auto spotlightPosition = _fe3d.spotlightEntity_getPosition(PREVIEW_TORCH_ID);
 			spotlightPosition -= TORCH_OFFSET;
@@ -174,9 +174,9 @@ void SceneEditor::_updateSpotlightPlacing()
 	}
 
 	// Update torch positions
-	for (const auto& entityID : _fe3d.modelEntity_getAllIDs())
+	for(const auto& entityID : _fe3d.modelEntity_getAllIDs())
 	{
-		if (entityID.substr(0, string("@@torch").size()) == "@@torch")
+		if(entityID.substr(0, string("@@torch").size()) == "@@torch")
 		{
 			auto spotlightPosition = _fe3d.spotlightEntity_getPosition(entityID.substr(string("@@torch_").size()));
 			spotlightPosition -= TORCH_OFFSET;

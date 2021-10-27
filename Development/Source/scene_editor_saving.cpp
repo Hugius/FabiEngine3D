@@ -11,36 +11,36 @@ using std::ofstream;
 bool SceneEditor::saveEditorSceneToFile()
 {
 	// Must be editing a scene
-	if (_currentSceneID.empty())
+	if(_currentSceneID.empty())
 	{
 		return false;
 	}
 
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("SceneEditor::saveEditorSceneToFile");
 	}
 
 	// Compose file path
 	const string filePath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + _currentSceneID + ".fe3d");
+							 ("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + _currentSceneID + ".fe3d");
 
 	// Create or overwrite scene file
 	ofstream file(filePath);
 
 	// Save all LOD model IDs
 	vector<string> lodEntityIDs;
-	for (const auto& modelID : _fe3d.modelEntity_getAllIDs())
+	for(const auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if not preview entity
-		if (modelID[0] != '@')
+		if(modelID[0] != '@')
 		{
 			// Check if entity has LOD model
-			if (!_fe3d.modelEntity_getLevelOfDetailEntityID(modelID).empty())
+			if(!_fe3d.modelEntity_getLevelOfDetailEntityID(modelID).empty())
 			{
 				// Check if ID not already added to list
-				if (find(lodEntityIDs.begin(), lodEntityIDs.end(), modelID) == lodEntityIDs.end())
+				if(find(lodEntityIDs.begin(), lodEntityIDs.end(), modelID) == lodEntityIDs.end())
 				{
 					lodEntityIDs.push_back(_fe3d.modelEntity_getLevelOfDetailEntityID(modelID));
 				}
@@ -60,7 +60,7 @@ bool SceneEditor::saveEditorSceneToFile()
 
 	// Sky
 	string skyID = _fe3d.skyEntity_getSelectedID();
-	if (!skyID.empty())
+	if(!skyID.empty())
 	{
 		// Data to save
 		string previewID = ("@" + skyID);
@@ -74,7 +74,7 @@ bool SceneEditor::saveEditorSceneToFile()
 
 	// Terrain
 	string terrainID = _fe3d.terrainEntity_getSelectedID();
-	if (!terrainID.empty())
+	if(!terrainID.empty())
 	{
 		// Data to save
 		string previewID = ("@" + terrainID);
@@ -88,7 +88,7 @@ bool SceneEditor::saveEditorSceneToFile()
 
 	// Water
 	string waterID = _fe3d.waterEntity_getSelectedID();
-	if (!waterID.empty())
+	if(!waterID.empty())
 	{
 		// Data to save
 		string previewID = ("@" + waterID);
@@ -103,14 +103,14 @@ bool SceneEditor::saveEditorSceneToFile()
 	}
 
 	// Models
-	for (const auto& modelID : _fe3d.modelEntity_getAllIDs())
+	for(const auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isLodModel = find(lodEntityIDs.begin(), lodEntityIDs.end(), modelID) != lodEntityIDs.end();
-		if ((modelID[0] != '@') || isLodModel)
+		if((modelID[0] != '@') || isLodModel)
 		{
 			// Check if model has bound animation
-			if (!_animationEditor.getStartedAnimationIDs(modelID).empty())
+			if(!_animationEditor.getStartedAnimationIDs(modelID).empty())
 			{
 				// Reset main transformation
 				_fe3d.modelEntity_setBasePosition(modelID, _initialModelPosition[modelID]);
@@ -119,10 +119,10 @@ bool SceneEditor::saveEditorSceneToFile()
 				_fe3d.modelEntity_setBaseSize(modelID, _initialModelSize[modelID]);
 
 				// Reset part transformations
-				for (const auto& partID : _fe3d.modelEntity_getPartIDs(modelID))
+				for(const auto& partID : _fe3d.modelEntity_getPartIDs(modelID))
 				{
 					// Only named parts
-					if (!partID.empty())
+					if(!partID.empty())
 					{
 						_fe3d.modelEntity_setPartPosition(modelID, partID, Vec3(0.0f));
 						_fe3d.modelEntity_setPartRotationOrigin(modelID, partID, Vec3(0.0f));
@@ -165,17 +165,17 @@ bool SceneEditor::saveEditorSceneToFile()
 				animationID;
 
 			// Write instanced offset
-			if (_fe3d.modelEntity_isInstanced(modelID))
+			if(_fe3d.modelEntity_isInstanced(modelID))
 			{
 				// Check if model has any offsets
 				auto instancedOffsets = _fe3d.modelEntity_getInstancedOffsets(modelID);
-				if (!instancedOffsets.empty())
+				if(!instancedOffsets.empty())
 				{
 					// Write space
 					file << " ";
 
 					// Write offsets
-					for (size_t i = 0; i < instancedOffsets.size(); i++)
+					for(size_t i = 0; i < instancedOffsets.size(); i++)
 					{
 						// Write offset
 						file <<
@@ -184,7 +184,7 @@ bool SceneEditor::saveEditorSceneToFile()
 							instancedOffsets[i].z;
 
 						// Write space
-						if (i != (instancedOffsets.size() - 1))
+						if(i != (instancedOffsets.size() - 1))
 						{
 							file << " ";
 						}
@@ -198,10 +198,10 @@ bool SceneEditor::saveEditorSceneToFile()
 	}
 
 	// Billboards
-	for (const auto& billboardID : _fe3d.billboardEntity_getAllIDs())
+	for(const auto& billboardID : _fe3d.billboardEntity_getAllIDs())
 	{
 		// Check if allowed to save
-		if (billboardID[0] != '@')
+		if(billboardID[0] != '@')
 		{
 			// Data to save
 			auto position = _fe3d.billboardEntity_getPosition(billboardID);
@@ -228,10 +228,10 @@ bool SceneEditor::saveEditorSceneToFile()
 	}
 
 	// Sounds
-	for (const auto& soundID : _fe3d.sound_getAllIDs())
+	for(const auto& soundID : _fe3d.sound_getAllIDs())
 	{
 		// Check if allowed to save
-		if (soundID[0] != '@')
+		if(soundID[0] != '@')
 		{
 			// Data to save
 			auto position = _fe3d.sound_getPosition(soundID);
@@ -255,10 +255,10 @@ bool SceneEditor::saveEditorSceneToFile()
 	}
 
 	// Pointlights
-	for (const auto& pointlightID : _fe3d.pointlightEntity_getAllIDs())
+	for(const auto& pointlightID : _fe3d.pointlightEntity_getAllIDs())
 	{
 		// Check if allowed to save
-		if (pointlightID[0] != '@')
+		if(pointlightID[0] != '@')
 		{
 			// Data to save
 			auto position = _fe3d.pointlightEntity_getPosition(pointlightID);
@@ -286,10 +286,10 @@ bool SceneEditor::saveEditorSceneToFile()
 	}
 
 	// Spotlights
-	for (const auto& spotlightID : _fe3d.spotlightEntity_getAllIDs())
+	for(const auto& spotlightID : _fe3d.spotlightEntity_getAllIDs())
 	{
 		// Check if allowed to save
-		if (spotlightID[0] != '@')
+		if(spotlightID[0] != '@')
 		{
 			// Data to save
 			auto position = _fe3d.spotlightEntity_getPosition(spotlightID);
@@ -319,10 +319,10 @@ bool SceneEditor::saveEditorSceneToFile()
 	}
 
 	// Reflections
-	for (const auto& reflectionID : _fe3d.reflectionEntity_getAllIDs())
+	for(const auto& reflectionID : _fe3d.reflectionEntity_getAllIDs())
 	{
 		// Check if allowed to save
-		if (reflectionID[0] != '@')
+		if(reflectionID[0] != '@')
 		{
 			// Data to save
 			auto position = _fe3d.reflectionEntity_getPosition(reflectionID);
@@ -347,7 +347,7 @@ bool SceneEditor::saveEditorSceneToFile()
 	file << "PLANAR_REFLECTION_HEIGHT " << _fe3d.gfx_getPlanarReflectionHeight() << endl;
 
 	// Ambient lighting
-	if (_fe3d.gfx_isAmbientLightingEnabled())
+	if(_fe3d.gfx_isAmbientLightingEnabled())
 	{
 		// Data to save
 		auto ambientLightingColor = _fe3d.gfx_getAmbientLightingColor();
@@ -363,7 +363,7 @@ bool SceneEditor::saveEditorSceneToFile()
 	}
 
 	// Directional lighting
-	if (_fe3d.gfx_isDirectionalLightingEnabled())
+	if(_fe3d.gfx_isDirectionalLightingEnabled())
 	{
 		// Data to save
 		auto directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
@@ -387,7 +387,7 @@ bool SceneEditor::saveEditorSceneToFile()
 	}
 
 	// Shadow settings
-	if (_fe3d.gfx_isShadowsEnabled())
+	if(_fe3d.gfx_isShadowsEnabled())
 	{
 		// Data to save
 		auto size = _fe3d.gfx_getShadowSize();
@@ -398,7 +398,7 @@ bool SceneEditor::saveEditorSceneToFile()
 		auto interval = _fe3d.gfx_getShadowInterval();
 
 		// Write data
-		file << 
+		file <<
 			"GRAPHICS_SHADOWS " <<
 			size << " " <<
 			lightness << " " <<
@@ -409,13 +409,13 @@ bool SceneEditor::saveEditorSceneToFile()
 	}
 
 	// Motion blur settings
-	if (_fe3d.gfx_isMotionBlurEnabled())
+	if(_fe3d.gfx_isMotionBlurEnabled())
 	{
 		file << "GRAPHICS_MOTION_BLUR " << _fe3d.gfx_getMotionBlurStrength() << endl;
 	}
 
 	// DOF settings
-	if (_fe3d.gfx_isDofEnabled())
+	if(_fe3d.gfx_isDofEnabled())
 	{
 		// Data to save
 		auto dynamic = _fe3d.gfx_isDofDynamic();
@@ -431,7 +431,7 @@ bool SceneEditor::saveEditorSceneToFile()
 	}
 
 	// Fog settings
-	if (_fe3d.gfx_isFogEnabled())
+	if(_fe3d.gfx_isFogEnabled())
 	{
 		// Data to save
 		auto minDistance = _fe3d.gfx_getFogMinDistance();
@@ -449,7 +449,7 @@ bool SceneEditor::saveEditorSceneToFile()
 	}
 
 	// Lens flare settings
-	if (_fe3d.gfx_isLensFlareEnabled())
+	if(_fe3d.gfx_isLensFlareEnabled())
 	{
 		// Data to save
 		auto flareMapPath = _fe3d.gfx_getLensFlareMapPath();
@@ -469,13 +469,13 @@ bool SceneEditor::saveEditorSceneToFile()
 	}
 
 	// Sky exposure settings
-	if (_fe3d.gfx_isSkyExposureEnabled())
+	if(_fe3d.gfx_isSkyExposureEnabled())
 	{
 		file << "GRAPHICS_SKY_EXPOSURE " << _fe3d.gfx_getSkyExposureIntensity() << " " << _fe3d.gfx_getSkyExposureSpeed() << endl;
 	}
 
 	// Bloom settings
-	if (_fe3d.gfx_isBloomEnabled())
+	if(_fe3d.gfx_isBloomEnabled())
 	{
 		// Data to save
 		auto type = static_cast<unsigned int>(_fe3d.gfx_getBloomType());

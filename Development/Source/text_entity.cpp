@@ -21,16 +21,16 @@ void TextEntity::updateCharacterEntities()
 	float xCharSize = (this->getSize().x / static_cast<float>(this->_textContent.size()));
 	float yCharSize = this->getSize().y;
 	unsigned int index = 0;
-	
+
 	// Update every character
-	for (const auto& character : _characterEntities)
+	for(const auto& character : _characterEntities)
 	{
 		// Temporary values
 		float xCharOffset = static_cast<float>(index) * xCharSize;
 		float yCharOffset = 0.0f;
 
 		// Check if text is isCentered
-		if (_isCentered)
+		if(_isCentered)
 		{
 			xCharOffset -= (this->getSize().x / 2.0f);
 			yCharOffset -= (yCharSize / 2.0f);
@@ -51,7 +51,7 @@ void TextEntity::updateCharacterEntities()
 		character->setVisible(this->isVisible());
 
 		// Update transformation matrix
-		if (this->isVisible())
+		if(this->isVisible())
 		{
 			character->updateTransformationMatrix();
 		}

@@ -23,10 +23,10 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
 
 	// Start all loading threads
-	for (const auto& filePath : uniqueFilePaths)
+	for(const auto& filePath : uniqueFilePaths)
 	{
 		// Check if texture is not already cached
-		if (_textureCache2D.find(filePath) == _textureCache2D.end())
+		if(_textureCache2D.find(filePath) == _textureCache2D.end())
 		{
 			threads.push_back(async(launch::async, &TextureLoader::_loadSurface, this, filePath));
 			finalFilePaths.push_back(filePath);
@@ -35,16 +35,16 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 	}
 
 	// Wait for all threads to finish
-	while (finishedThreadCount != threadStatuses.size())
+	while(finishedThreadCount != threadStatuses.size())
 	{
 		// For all threads
-		for (size_t i = 0; i < threadStatuses.size(); i++)
+		for(size_t i = 0; i < threadStatuses.size(); i++)
 		{
 			// Check if texture is not processed yet
-			if (!threadStatuses[i])
+			if(!threadStatuses[i])
 			{
 				// Check if thread is finished
-				if (threads[i].wait_until(system_clock::time_point::min()) == future_status::ready)
+				if(threads[i].wait_until(system_clock::time_point::min()) == future_status::ready)
 				{
 					// Retrieve return value
 					auto loadedImage = threads[i].get();
@@ -54,7 +54,7 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 					finishedThreadCount++;
 
 					// Check image status
-					if (loadedImage == nullptr)
+					if(loadedImage == nullptr)
 					{
 						Logger::throwWarning("Cannot load image file: \"" + finalFilePaths[i] + "\"!");
 					}
@@ -67,7 +67,7 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 						SDL_FreeSurface(loadedImage);
 
 						// Check texture status
-						if (loadedTexture != 0)
+						if(loadedTexture != 0)
 						{
 							// Cache texture
 							_textureCache2D[finalFilePaths[i]] = loadedTexture;
@@ -88,14 +88,14 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 	unsigned int finishedThreadCount = 0;
 
 	// Start all loading threads
-	for (const auto& filePaths : filePathsList)
+	for(const auto& filePaths : filePathsList)
 	{
 		// Check if texture is not already cached
-		if (_textureCache3D.find(filePaths) == _textureCache3D.end())
+		if(_textureCache3D.find(filePaths) == _textureCache3D.end())
 		{
 			// 6 threads for every 3D texture
 			threads.push_back({});
-			for (const auto& filePath : filePaths)
+			for(const auto& filePath : filePaths)
 			{
 				threads.back().push_back(async(launch::async, &TextureLoader::_loadSurface, this, filePath));
 			}
@@ -105,20 +105,20 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 	}
 
 	// Wait for all threads to finish
-	while (finishedThreadCount != threadStatuses.size())
+	while(finishedThreadCount != threadStatuses.size())
 	{
 		// For all threads
-		for (size_t i = 0; i < threadStatuses.size(); i++)
+		for(size_t i = 0; i < threadStatuses.size(); i++)
 		{
 			// Check if texture is not processed yet
-			if (!threadStatuses[i])
+			if(!threadStatuses[i])
 			{
 				// Check if all 6 threads are finished
 				bool threadsAreFinished = true;
-				for (size_t j = 0; j < threads[i].size(); j++)
+				for(size_t j = 0; j < threads[i].size(); j++)
 				{
 					// Check if thread is finished
-					if (threads[i][i].wait_until(system_clock::time_point::min()) != future_status::ready)
+					if(threads[i][i].wait_until(system_clock::time_point::min()) != future_status::ready)
 					{
 						threadsAreFinished = false;
 					}
@@ -126,20 +126,20 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 
 				// Process threads if finished
 				array<SDL_Surface*, 6> loadedImages;
-				if (threadsAreFinished)
+				if(threadsAreFinished)
 				{
 					// Update thread status
 					threadStatuses[i] = true;
 					finishedThreadCount++;
 
 					// 6 images for every 3D texture
-					for (size_t j = 0; j < threads[i].size(); j++)
+					for(size_t j = 0; j < threads[i].size(); j++)
 					{
 						// Save loaded image
 						loadedImages[j] = threads[i][j].get();
 
 						// Error logging
-						if ((loadedImages[j] == nullptr) && !finalFilePathsList[i][j].empty())
+						if((loadedImages[j] == nullptr) && !finalFilePathsList[i][j].empty())
 						{
 							Logger::throwWarning("Cannot load image file: \"" + finalFilePathsList[i][j] + "\"!");
 						}
@@ -149,17 +149,17 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 					TextureID loadedTexture = _convertIntoTexture(loadedImages, finalFilePathsList[i]);
 
 					// Memory management
-					for (const auto& image : loadedImages)
+					for(const auto& image : loadedImages)
 					{
 						// Only if memory is present
-						if (image != nullptr)
+						if(image != nullptr)
 						{
 							SDL_FreeSurface(image);
 						}
 					}
 
 					// Check texture status
-					if (loadedTexture != 0)
+					if(loadedTexture != 0)
 					{
 						// Cache texture
 						_textureCache3D[finalFilePathsList[i]] = loadedTexture;
@@ -183,10 +183,10 @@ void TextureLoader::cacheBitmapsMultiThreaded(const vector<string>& filePaths)
 	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
 
 	// Start all loading threads
-	for (const auto& filePath : uniqueFilePaths)
+	for(const auto& filePath : uniqueFilePaths)
 	{
 		// Check if bitmap is not already cached
-		if (_bitmapCache.find(filePath) == _bitmapCache.end())
+		if(_bitmapCache.find(filePath) == _bitmapCache.end())
 		{
 			threads.push_back(async(launch::async, &TextureLoader::_loadBitmap, this, filePath));
 			finalFilePaths.push_back(filePath);
@@ -195,16 +195,16 @@ void TextureLoader::cacheBitmapsMultiThreaded(const vector<string>& filePaths)
 	}
 
 	// Wait for all threads to finish
-	while (finishedThreadCount != threadStatuses.size())
+	while(finishedThreadCount != threadStatuses.size())
 	{
 		// For all threads
-		for (size_t i = 0; i < threadStatuses.size(); i++)
+		for(size_t i = 0; i < threadStatuses.size(); i++)
 		{
 			// Check if bitmap is not processed yet
-			if (!threadStatuses[i])
+			if(!threadStatuses[i])
 			{
 				// Check if thread is finished
-				if (threads[i].wait_until(system_clock::time_point::min()) == future_status::ready)
+				if(threads[i].wait_until(system_clock::time_point::min()) == future_status::ready)
 				{
 					// Retrieve return value
 					auto loadedBitmap = threads[i].get();
@@ -214,7 +214,7 @@ void TextureLoader::cacheBitmapsMultiThreaded(const vector<string>& filePaths)
 					finishedThreadCount++;
 
 					// Check bitmap status
-					if (loadedBitmap.empty())
+					if(loadedBitmap.empty())
 					{
 						Logger::throwWarning("Cannot load image file: \"" + finalFilePaths[i] + "\"!");
 					}
@@ -245,10 +245,10 @@ void TextureLoader::cacheFontsMultiThreaded(const vector<string>& filePaths)
 	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
 
 	// Start all loading threads
-	for (const auto& filePath : uniqueFilePaths)
+	for(const auto& filePath : uniqueFilePaths)
 	{
 		// Check if font is not already cached
-		if (_fontCache.find(filePath) == _fontCache.end())
+		if(_fontCache.find(filePath) == _fontCache.end())
 		{
 			threads.push_back(async(launch::async, &TextureLoader::_loadFont, this, filePath));
 			finalFilePaths.push_back(filePath);
@@ -257,16 +257,16 @@ void TextureLoader::cacheFontsMultiThreaded(const vector<string>& filePaths)
 	}
 
 	// Wait for all threads to finish
-	while (finishedThreadCount != threadStatuses.size())
+	while(finishedThreadCount != threadStatuses.size())
 	{
 		// For all threads
-		for (size_t i = 0; i < threadStatuses.size(); i++)
+		for(size_t i = 0; i < threadStatuses.size(); i++)
 		{
 			// Check if font is not processed yet
-			if (!threadStatuses[i])
+			if(!threadStatuses[i])
 			{
 				// Check if thread is finished
-				if (threads[i].wait_until(system_clock::time_point::min()) == future_status::ready)
+				if(threads[i].wait_until(system_clock::time_point::min()) == future_status::ready)
 				{
 					// Retrieve return value
 					auto loadedFont = threads[i].get();
@@ -276,7 +276,7 @@ void TextureLoader::cacheFontsMultiThreaded(const vector<string>& filePaths)
 					finishedThreadCount++;
 
 					// Check font status
-					if (loadedFont == nullptr)
+					if(loadedFont == nullptr)
 					{
 						Logger::throwWarning("Cannot load font file: \"" + finalFilePaths[i] + "\"!");
 					}

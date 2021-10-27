@@ -20,7 +20,7 @@ Config::Config()
 	// Open config file
 	auto path = string(rootDir + "config.fe3d");
 	ifstream file(path);
-	if (!exists(path))
+	if(!exists(path))
 	{
 		Logger::throwFatalWarning("File `config.fe3d` is missing!");
 	}
@@ -33,9 +33,9 @@ Config::Config()
 	_processOption(file, _windowTitle, "window_title");
 	_processOption(file, _applicationTitle, "application_title");
 	_processOption(file, _isApplicationExported, "application_exported");
-	
+
 	// Check if multiplier is between 0.0 and 1.0
-	if (windowSizeMultiplier < 0.0f || windowSizeMultiplier > 1.0f)
+	if(windowSizeMultiplier < 0.0f || windowSizeMultiplier > 1.0f)
 	{
 		Logger::throwFatalWarning("Configuration file @ option `window_size_multiplier`: must be between 0.0 and 1.0!");
 	}
@@ -47,7 +47,7 @@ Config::Config()
 	_monitorSize.y = DM.h;
 
 	// Set window & viewport dimensions
-	if (_isApplicationExported) // Application preview
+	if(_isApplicationExported) // Application preview
 	{
 		_windowSize.x = static_cast<int>(static_cast<float>(DM.w) * windowSizeMultiplier);
 		_windowSize.y = static_cast<int>(static_cast<float>(DM.h) * windowSizeMultiplier);
@@ -80,7 +80,7 @@ void Config::_processOption(ifstream& file, string& option, string criteria)
 	iss >> field >> equals;
 
 	// Check criteria
-	if (field == criteria)
+	if(field == criteria)
 	{
 		iss >> option;
 	}
@@ -101,7 +101,7 @@ void Config::_processOption(ifstream& file, float& option, string criteria)
 	iss >> field >> equals;
 
 	// Check criteria
-	if (field == criteria)
+	if(field == criteria)
 	{
 		iss >> option;
 	}
@@ -122,7 +122,7 @@ void Config::_processOption(ifstream& file, int& option, string criteria)
 	iss >> field >> equals;
 
 	// Check criteria
-	if (field == criteria)
+	if(field == criteria)
 	{
 		iss >> option;
 	}
@@ -146,14 +146,14 @@ void Config::_processOption(ifstream& file, bool& option, string criteria)
 	iss >> field >> equals >> value;
 
 	// Check criteria
-	if (field == criteria)
+	if(field == criteria)
 	{
 		// Parsing to boolean value
-		if (value == "true")
+		if(value == "true")
 		{
 			option = true;
 		}
-		else if (value == "false")
+		else if(value == "false")
 		{
 			option = false;
 		}
@@ -184,7 +184,7 @@ const Ivec2 Config::getMonitorSize() const
 }
 
 const Ivec2 Config::getWindowSize() const
-{ 
+{
 	return _windowSize;
 }
 

@@ -33,13 +33,13 @@ TextureID BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, Textur
 	_shader.uploadUniform("u_intensity", intensity);
 
 	// Blur the texture horizontally
-	if ((direction == BlurDirection::HORIZONTAL) || (direction == BlurDirection::BOTH))
+	if((direction == BlurDirection::HORIZONTAL) || (direction == BlurDirection::BOTH))
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_isHorizontal", true);
 
 		// Blur multiple times
-		for (unsigned int i = 0; i < blurCount; i++)
+		for(unsigned int i = 0; i < blurCount; i++)
 		{
 			_captureBuffer.bind();
 			_render(entity, texture);
@@ -49,13 +49,13 @@ TextureID BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, Textur
 	}
 
 	// Blur the texture vertically
-	if ((direction == BlurDirection::VERTICAL) || (direction == BlurDirection::BOTH))
+	if((direction == BlurDirection::VERTICAL) || (direction == BlurDirection::BOTH))
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_isHorizontal", false);
 
 		// Blur multiple times
-		for (unsigned int i = 0; i < blurCount; i++)
+		for(unsigned int i = 0; i < blurCount; i++)
 		{
 			_captureBuffer.bind();
 			_render(entity, texture);

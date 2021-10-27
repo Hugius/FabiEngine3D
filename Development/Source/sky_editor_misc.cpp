@@ -14,9 +14,9 @@ bool SkyEditor::isLoaded()
 
 void SkyEditor::unloadSkyEntities()
 {
-	for (const auto& ID : _loadedSkyIDs)
+	for(const auto& ID : _loadedSkyIDs)
 	{
-		if (_fe3d.skyEntity_isExisting(ID))
+		if(_fe3d.skyEntity_isExisting(ID))
 		{
 			_fe3d.skyEntity_delete(ID);
 		}

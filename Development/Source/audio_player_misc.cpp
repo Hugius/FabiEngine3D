@@ -20,7 +20,7 @@ void AudioPlayer::allocateChannels(unsigned int count)
 
 	// Initialize audio channels to none
 	_channels.clear();
-	for (unsigned int i = 0; i < count; i++)
+	for(unsigned int i = 0; i < count; i++)
 	{
 		_channels.push_back("");
 	}
@@ -29,10 +29,10 @@ void AudioPlayer::allocateChannels(unsigned int count)
 void AudioPlayer::update(Camera& camera, vector<Sound>& soundList, vector<Music>& musicList)
 {
 	// Update channel management
-	for (size_t i = 0; i < _channels.size(); i++)
+	for(size_t i = 0; i < _channels.size(); i++)
 	{
 		// Check if audio stopped playing
-		if (!Mix_Playing(static_cast<int>(i)) && !Mix_Paused(static_cast<int>(i)))
+		if(!Mix_Playing(static_cast<int>(i)) && !Mix_Paused(static_cast<int>(i)))
 		{
 			// De-allocate channel
 			_channels[i] = "";
@@ -40,16 +40,16 @@ void AudioPlayer::update(Camera& camera, vector<Sound>& soundList, vector<Music>
 	}
 
 	// Update sound management
-	if (_isSoundsEnabled)
+	if(_isSoundsEnabled)
 	{
 		// For every sound
-		for (auto& sound : soundList)
+		for(auto& sound : soundList)
 		{
 			// Check if 3D sound
-			if (sound.is3D())
+			if(sound.is3D())
 			{
 				// Check if emitting sound
-				if (isSoundStarted(sound))
+				if(isSoundStarted(sound))
 				{
 					// Distance
 					auto cameraPosition = camera.getPosition(); // Camera position
@@ -74,7 +74,7 @@ void AudioPlayer::update(Camera& camera, vector<Sound>& soundList, vector<Music>
 					Uint8 rightStrength = Uint8(255.0f - (255.0f * range)); // Right ear
 
 					// For every sound playback
-					for (const auto& channel : _findSoundChannels(sound))
+					for(const auto& channel : _findSoundChannels(sound))
 					{
 						Mix_SetPanning(channel, leftStrength, rightStrength); // Apply stereo panning
 					}
@@ -87,7 +87,7 @@ void AudioPlayer::update(Camera& camera, vector<Sound>& soundList, vector<Music>
 	}
 
 	// Update music management
-	if (_isMusicEnabled)
+	if(_isMusicEnabled)
 	{
 		playMusic(musicList);
 		_updateMusicVolume();
@@ -96,7 +96,7 @@ void AudioPlayer::update(Camera& camera, vector<Sound>& soundList, vector<Music>
 
 void AudioPlayer::setSoundsEnabled(bool value)
 {
-	if (!value)
+	if(!value)
 	{
 		stopAllSounds();
 	}
@@ -106,7 +106,7 @@ void AudioPlayer::setSoundsEnabled(bool value)
 
 void AudioPlayer::setMusicEnabled(bool value)
 {
-	if (!value)
+	if(!value)
 	{
 		stopMusic();
 	}
@@ -118,9 +118,9 @@ unsigned int AudioPlayer::getUsedChannelCount()
 {
 	int count = 0;
 
-	for (const auto& soundID : _channels)
+	for(const auto& soundID : _channels)
 	{
-		if (soundID.empty())
+		if(soundID.empty())
 		{
 			count++;
 		}
@@ -136,14 +136,14 @@ unsigned int AudioPlayer::getAllocatedChannelCount()
 
 void AudioPlayer::_updateSoundVolume(Sound& sound)
 {
-	if (_isSoundsEnabled)
+	if(_isSoundsEnabled)
 	{
-		if (isSoundStarted(sound))
+		if(isSoundStarted(sound))
 		{
 			auto intVolume = static_cast<int>(sound.getVolume() * 128.0f);
 
 			// For every sound playback
-			for (const auto& channel : _findSoundChannels(sound))
+			for(const auto& channel : _findSoundChannels(sound))
 			{
 				Mix_Volume(channel, intVolume);
 			}
@@ -153,7 +153,7 @@ void AudioPlayer::_updateSoundVolume(Sound& sound)
 
 void AudioPlayer::_updateMusicVolume()
 {
-	if (_isMusicEnabled)
+	if(_isMusicEnabled)
 	{
 		auto intVolume = static_cast<int>(_musicVolume * 128.0f);
 		Mix_VolumeMusic(intVolume);
@@ -164,16 +164,16 @@ vector<int> AudioPlayer::_findSoundChannels(Sound& sound)
 {
 	vector<int> channels;
 
-	for (size_t i = 0; i < _channels.size(); i++)
+	for(size_t i = 0; i < _channels.size(); i++)
 	{
-		if (_channels[i] == sound.getID())
+		if(_channels[i] == sound.getID())
 		{
 			channels.push_back(static_cast<int>(i));
 		}
 	}
 
 	// Find must never fail
-	if (channels.empty())
+	if(channels.empty())
 	{
 		Logger::throwError("AudioPlayer::_findSoundChannels");
 	}
@@ -183,9 +183,9 @@ vector<int> AudioPlayer::_findSoundChannels(Sound& sound)
 
 int AudioPlayer::_getFreeChannel()
 {
-	for (size_t i = 0; i < _channels.size(); i++)
+	for(size_t i = 0; i < _channels.size(); i++)
 	{
-		if (_channels[i].empty())
+		if(_channels[i].empty())
 		{
 			return static_cast<int>(i);
 		}

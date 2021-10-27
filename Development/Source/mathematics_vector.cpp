@@ -92,7 +92,7 @@ const Vec4 Math::normalizeVector(Vec4 vector)
 const float Math::calculateVectorDistance(Vec2 firstPosition, Vec2 secondPosition)
 {
 	// Check if distance is 0
-	if (firstPosition == secondPosition)
+	if(firstPosition == secondPosition)
 	{
 		return 0.0f;
 	}
@@ -108,7 +108,7 @@ const float Math::calculateVectorDistance(Vec2 firstPosition, Vec2 secondPositio
 const float Math::calculateVectorDistance(Vec3 firstPosition, Vec3 secondPosition)
 {
 	// Check if distance is 0
-	if (firstPosition == secondPosition)
+	if(firstPosition == secondPosition)
 	{
 		return 0.0f;
 	}
@@ -125,7 +125,7 @@ const float Math::calculateVectorDistance(Vec3 firstPosition, Vec3 secondPositio
 const float Math::calculateVectorDistance(Vec4 firstPosition, Vec4 secondPosition)
 {
 	// Check if distance is 0
-	if (firstPosition == secondPosition)
+	if(firstPosition == secondPosition)
 	{
 		return 0.0f;
 	}

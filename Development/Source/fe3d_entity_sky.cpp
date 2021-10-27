@@ -8,7 +8,7 @@ void FabiEngine3D::skyEntity_create(const string& ID)
 
 void FabiEngine3D::skyEntity_deleteAll()
 {
-	for (const auto& [keyID, entity] : _core->_skyEntityManager.getEntities())
+	for(const auto& [keyID, entity] : _core->_skyEntityManager.getEntities())
 	{
 		skyEntity_delete(entity->getID());
 	}
@@ -71,7 +71,7 @@ void FabiEngine3D::skyEntity_setDiffuseMapFront(const string& ID, const string& 
 void FabiEngine3D::skyEntity_delete(const string& ID)
 {
 	// Unselect sky if selected
-	if (ID == skyEntity_getSelectedID())
+	if(ID == skyEntity_getSelectedID())
 	{
 		_core->_skyEntityManager.selectMainSky("");
 	}
@@ -122,7 +122,7 @@ void FabiEngine3D::skyEntity_selectMixSky(const string& ID)
 
 const string FabiEngine3D::skyEntity_getSelectedID()
 {
-	if (_core->_skyEntityManager.getSelectedMainSky() != nullptr)
+	if(_core->_skyEntityManager.getSelectedMainSky() != nullptr)
 	{
 		return _core->_skyEntityManager.getSelectedMainSky()->getID();
 	}
@@ -134,7 +134,7 @@ const string FabiEngine3D::skyEntity_getSelectedID()
 
 const string FabiEngine3D::skyEntity_getMixID()
 {
-	if (_core->_skyEntityManager.getSelectedMixSky() != nullptr)
+	if(_core->_skyEntityManager.getSelectedMixSky() != nullptr)
 	{
 		return _core->_skyEntityManager.getSelectedMixSky()->getID();
 	}
@@ -148,7 +148,7 @@ const vector<string> FabiEngine3D::skyEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (const auto& [keyID, entity] : _core->_skyEntityManager.getEntities())
+	for(const auto& [keyID, entity] : _core->_skyEntityManager.getEntities())
 	{
 		IDs.push_back(entity->getID());
 	}

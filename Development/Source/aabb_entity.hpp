@@ -9,7 +9,7 @@
 
 using std::shared_ptr;
 
-class AabbEntity final: public BaseEntity
+class AabbEntity final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;
@@ -33,7 +33,7 @@ public:
 	void setRaycastResponsive(bool value);
 	void setCollisionResponsive(bool value);
 	void setCollided(bool value);
-	
+
 	// Strings
 	const string& getParentID();
 

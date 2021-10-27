@@ -13,17 +13,17 @@ using std::istringstream;
 const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile()
 {
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("SkyEditor::getAllTexturePathsFromFile");
 	}
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
+														 ("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
 
 	// Warning checking
-	if (!Tools::isFileExisting(filePath))
+	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `sky.fe3d` missing!");
 		return {};
@@ -35,7 +35,7 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile()
 	// Read sky data
 	vector<array<string, 6>> texturePaths;
 	string line;
-	while (getline(file, line))
+	while(getline(file, line))
 	{
 		// Values
 		string skyID;
@@ -55,7 +55,7 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile()
 			diffuseMapPaths[5];
 
 		// Perform empty string & space conversions
-		for (auto& diffuseMapPath : diffuseMapPaths)
+		for(auto& diffuseMapPath : diffuseMapPaths)
 		{
 			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
@@ -75,7 +75,7 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile()
 bool SkyEditor::loadSkyEntitiesFromFile()
 {
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("SkyEditor::loadSkyEntitiesFromFile");
 	}
@@ -85,10 +85,10 @@ bool SkyEditor::loadSkyEntitiesFromFile()
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
+														 ("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
 
 	// Warning checking
-	if (!Tools::isFileExisting(filePath))
+	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `sky.fe3d` missing!");
 		return false;
@@ -99,7 +99,7 @@ bool SkyEditor::loadSkyEntitiesFromFile()
 
 	// Read sky data
 	string line;
-	while (getline(file, line))
+	while(getline(file, line))
 	{
 		// For file extraction
 		istringstream iss(line);
@@ -126,7 +126,7 @@ bool SkyEditor::loadSkyEntitiesFromFile()
 			color.b;
 
 		// Perform empty string & space conversions
-		for (auto& diffuseMapPath : diffuseMapPaths)
+		for(auto& diffuseMapPath : diffuseMapPaths)
 		{
 			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
@@ -136,7 +136,7 @@ bool SkyEditor::loadSkyEntitiesFromFile()
 		_fe3d.skyEntity_create(skyID);
 
 		// Check if sky creation went well
-		if (_fe3d.skyEntity_isExisting(skyID))
+		if(_fe3d.skyEntity_isExisting(skyID))
 		{
 			// Add sky ID
 			_loadedSkyIDs.push_back(skyID);
@@ -162,26 +162,26 @@ bool SkyEditor::loadSkyEntitiesFromFile()
 bool SkyEditor::saveSkyEntitiesToFile()
 {
 	// Editor must be loaded
-	if (!_isEditorLoaded)
+	if(!_isEditorLoaded)
 	{
 		return false;
 	}
 
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("SkyEditor::saveSkyEntitiesToFile");
 	}
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
+														 ("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
 
 	// Load sky file
 	ofstream file(filePath);
 
 	// Write sky data
-	for (const auto& skyID : _loadedSkyIDs)
+	for(const auto& skyID : _loadedSkyIDs)
 	{
 		// Values
 		auto diffuseMapPaths = _fe3d.skyEntity_getDiffuseMapPaths(skyID);
@@ -190,7 +190,7 @@ bool SkyEditor::saveSkyEntitiesToFile()
 		Vec3 color = _fe3d.skyEntity_getColor(skyID);
 
 		// Perform empty string & space conversions
-		for (auto& diffuseMapPath : diffuseMapPaths)
+		for(auto& diffuseMapPath : diffuseMapPaths)
 		{
 			diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
@@ -200,7 +200,7 @@ bool SkyEditor::saveSkyEntitiesToFile()
 		file << skyID << " ";
 
 		// Write paths to file
-		for (const auto& diffuseMapPath : diffuseMapPaths)
+		for(const auto& diffuseMapPath : diffuseMapPaths)
 		{
 			file << diffuseMapPath << " ";
 		}

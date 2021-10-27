@@ -24,15 +24,15 @@ void EngineGuiWriteField::update(bool hoverable)
 
 void EngineGuiWriteField::_updateActivation()
 {
-	if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 	{
-		if (_isHovered)
+		if(_isHovered)
 		{
 			_isActive = true;
 		}
 		else
 		{
-			if (!_mustBeActive)
+			if(!_mustBeActive)
 			{
 				_isActive = false;
 			}
@@ -42,17 +42,17 @@ void EngineGuiWriteField::_updateActivation()
 
 void EngineGuiWriteField::_updateTyping()
 {
-	if (_isActive)
+	if(_isActive)
 	{
 		static int passedBarFrames = MAX_PASSED_BAR_FRAMES;
 		static int passedBackspaceFrames = MAX_PASSED_BACKSPACE_FRAMES;
 		static bool barEnabled = true;
 
 		// Update bar animation time
-		if (passedBarFrames >= MAX_PASSED_BAR_FRAMES)
+		if(passedBarFrames >= MAX_PASSED_BAR_FRAMES)
 		{
 			passedBarFrames = 0;
-			
+
 			// Toggle bar animation
 			barEnabled = !barEnabled;
 		}
@@ -62,7 +62,7 @@ void EngineGuiWriteField::_updateTyping()
 		}
 
 		// Check if not writing out of border
-		if ((static_cast<float>(_currentTextContent.size() + 1) * CHAR_WIDTH) < _textField->getOriginalSize().x)
+		if((static_cast<float>(_currentTextContent.size() + 1) * CHAR_WIDTH) < _textField->getOriginalSize().x)
 		{
 			// Letter characters
 			string letterCharacters = " abcdefghijklmnopqrstuvwxyz";
@@ -94,30 +94,30 @@ void EngineGuiWriteField::_updateTyping()
 			specialCharacterMap['='] = '+';
 
 			// Letter characters
-			if (!_noLetters)
+			if(!_noLetters)
 			{
-				for (const auto& c : letterCharacters)
+				for(const auto& c : letterCharacters)
 				{
 					// Check if character is pressed on keyboard
-					if (_fe3d.input_isKeyPressed(InputType(c)))
+					if(_fe3d.input_isKeyPressed(InputType(c)))
 					{
 						// Spacebar
-						if (c == ' ')
+						if(c == ' ')
 						{
 							_currentTextContent += c;
 						}
 						else // Non-spacebar
 						{
-							if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT)) // Uppercase or special character
+							if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT)) // Uppercase or special character
 							{
 								// Convert to uppercase
 								{
 									_currentTextContent += (c - 32);
 								}
 							}
-							else if ((GetKeyState(VK_CAPITAL) & 0x0001) != 0) // Uppercase character
+							else if((GetKeyState(VK_CAPITAL) & 0x0001) != 0) // Uppercase character
 							{
-								if (!_noCaps) // A - Z
+								if(!_noCaps) // A - Z
 								{
 									// Convert to uppercase
 									_currentTextContent += (c - 32);
@@ -133,15 +133,15 @@ void EngineGuiWriteField::_updateTyping()
 			}
 
 			// Number characters
-			if (!_noNumbers)
+			if(!_noNumbers)
 			{
-				for (const auto& element : numberCharacterMap)
+				for(const auto& element : numberCharacterMap)
 				{
 					// Check if character is pressed on keyboard
-					if (_fe3d.input_isKeyPressed(InputType(element.first)))
+					if(_fe3d.input_isKeyPressed(InputType(element.first)))
 					{
 						// Check if shift was pressed
-						if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
+						if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 						{
 							_currentTextContent += element.second;
 						}
@@ -154,15 +154,15 @@ void EngineGuiWriteField::_updateTyping()
 			}
 
 			// Special characters
-			if (!_noSpecials)
+			if(!_noSpecials)
 			{
-				for (const auto& element : specialCharacterMap)
+				for(const auto& element : specialCharacterMap)
 				{
 					// Check if character is pressed on keyboard
-					if (_fe3d.input_isKeyPressed(InputType(element.first)))
+					if(_fe3d.input_isKeyPressed(InputType(element.first)))
 					{
 						// Check if shift was pressed
-						if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
+						if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 						{
 							_currentTextContent += element.second;
 						}
@@ -173,13 +173,13 @@ void EngineGuiWriteField::_updateTyping()
 					}
 				}
 			}
-			else if (_minusAllowed && !_noNumbers) // Minus character (for numbers)
+			else if(_minusAllowed && !_noNumbers) // Minus character (for numbers)
 			{
-				if (_fe3d.input_isKeyPressed(InputType('-')))
+				if(_fe3d.input_isKeyPressed(InputType('-')))
 				{
-					if (!_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) && !_fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
+					if(!_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) && !_fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 					{
-						if (_currentTextContent.empty()) // Minus can only before any number
+						if(_currentTextContent.empty()) // Minus can only before any number
 						{
 							_currentTextContent += '-';
 						}
@@ -189,14 +189,14 @@ void EngineGuiWriteField::_updateTyping()
 		}
 
 		// Remove character
-		if (_fe3d.input_isKeyDown(InputType::KEY_BACKSPACE))
+		if(_fe3d.input_isKeyDown(InputType::KEY_BACKSPACE))
 		{
 			// Check if enough time passed
-			if (passedBackspaceFrames >= MAX_PASSED_BACKSPACE_FRAMES)
+			if(passedBackspaceFrames >= MAX_PASSED_BACKSPACE_FRAMES)
 			{
 				passedBackspaceFrames = 0;
 
-				if (_currentTextContent.size() == 1)
+				if(_currentTextContent.size() == 1)
 				{
 					_currentTextContent = "";
 				}
@@ -219,9 +219,9 @@ void EngineGuiWriteField::_updateTyping()
 		_fe3d.textEntity_setTextContent(_textField->getEntityID(), _currentTextContent + (barEnabled ? "|" : " "), CHAR_WIDTH);
 
 		// Input confirmation
-		if (_fe3d.input_isKeyPressed(InputType::KEY_ENTER))
+		if(_fe3d.input_isKeyPressed(InputType::KEY_ENTER))
 		{
-			if (_currentTextContent != "")
+			if(_currentTextContent != "")
 			{
 				_confirmedInput = true;
 				_isActive = false;
@@ -267,7 +267,7 @@ bool EngineGuiWriteField::hasTextContentChanged()
 const string EngineGuiWriteField::getTextContent()
 {
 	// Check if user filled in a minus without a number
-	if (_currentTextContent == "-" && _noSpecials && _minusAllowed)
+	if(_currentTextContent == "-" && _noSpecials && _minusAllowed)
 	{
 		return "";
 	}

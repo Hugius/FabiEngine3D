@@ -7,7 +7,7 @@ void SceneEditor::_updateSpotlightEditing()
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
 	// Reset selected torch from last frame
-	if (!_dontResetSelectedTorch)
+	if(!_dontResetSelectedTorch)
 	{
 		_selectedTorchID = "";
 	}
@@ -17,29 +17,29 @@ void SceneEditor::_updateSpotlightEditing()
 	}
 
 	// User must not be in placement mode
-	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
+	if(_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
 		// Check which entity is selected
 		auto hoveredAabbID = _fe3d.raycast_checkCursorInAny().first;
 
 		// Check if user selected a torch model
-		for (const auto& entityID : _fe3d.modelEntity_getAllIDs())
+		for(const auto& entityID : _fe3d.modelEntity_getAllIDs())
 		{
 			// Must be spotlight preview entity
-			if (entityID.substr(0, string("@@torch").size()) == "@@torch")
+			if(entityID.substr(0, string("@@torch").size()) == "@@torch")
 			{
 				// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
-				if (hoveredAabbID == entityID && _fe3d.misc_isCursorInsideViewport() &&
-					!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(hoveredAabbID == entityID && _fe3d.misc_isCursorInsideViewport() &&
+				   !_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Select hovered torch
 					_selectSpotlight(entityID.substr(string("@@torch_").size()));
 
 					// Check if user clicked torch
-					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
 						// Check if same torch is not clicked again
-						if (_selectedTorchID != _activeTorchID)
+						if(_selectedTorchID != _activeTorchID)
 						{
 							_activateSpotlight(_selectedTorchID.substr(string("@@torch_").size()));
 						}
@@ -48,7 +48,7 @@ void SceneEditor::_updateSpotlightEditing()
 				else
 				{
 					// Don't reset if torch is active or selected
-					if ((entityID != _activeTorchID) && (entityID != _selectedTorchID))
+					if((entityID != _activeTorchID) && (entityID != _selectedTorchID))
 					{
 						_fe3d.modelEntity_setBaseSize(entityID, DEFAULT_TORCH_SIZE);
 						_fe3d.aabbEntity_setLocalSize(entityID, DEFAULT_TORCH_AABB_SIZE);
@@ -58,16 +58,16 @@ void SceneEditor::_updateSpotlightEditing()
 		}
 
 		// Check if RMB not down
-		if (!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+		if(!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 		{
 			// Check if allowed by GUI
-			if (_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// Check if spotlight is active
-				if (_activeTorchID != "")
+				if(_activeTorchID != "")
 				{
 					// Check if active spotlight cancelled
-					if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedTorchID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+					if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedTorchID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 					{
 						_activeTorchID = "";
 						rightWindow->setActiveScreen("sceneEditorControls");
@@ -77,14 +77,14 @@ void SceneEditor::_updateSpotlightEditing()
 		}
 
 		// Update torch animations
-		if (_selectedTorchID != _activeTorchID)
+		if(_selectedTorchID != _activeTorchID)
 		{
 			_updateTorchAnimation(_selectedTorchID, _selectedTorchSizeDirection);
 		}
 		_updateTorchAnimation(_activeTorchID, _activeTorchSizeDirection);
 
 		// Update properties screen
-		if (!_activeTorchID.empty())
+		if(!_activeTorchID.empty())
 		{
 			// Temporary values
 			const string activeSpotlightID = _activeTorchID.substr(string("@@torch_").size());
@@ -94,19 +94,19 @@ void SceneEditor::_updateSpotlightEditing()
 			rightWindow->setActiveScreen("spotlightPropertiesMenu");
 
 			// Button management
-			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
+				if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
 				{
 					screen->getButton("position")->setHoverable(false);
 					screen->getButton("color")->setHoverable(true);
 				}
-				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
+				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
 				{
 					screen->getButton("position")->setHoverable(true);
 					screen->getButton("color")->setHoverable(false);
 				}
-				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
 					_fe3d.modelEntity_delete(_activeTorchID);
 					_fe3d.spotlightEntity_delete(activeSpotlightID);
@@ -117,7 +117,7 @@ void SceneEditor::_updateSpotlightEditing()
 			}
 
 			// Alternative way of deleting
-			if (_fe3d.input_isKeyPressed(InputType::KEY_DELETE))
+			if(_fe3d.input_isKeyPressed(InputType::KEY_DELETE))
 			{
 				_fe3d.modelEntity_delete(_activeTorchID);
 				_fe3d.spotlightEntity_delete(activeSpotlightID);
@@ -136,7 +136,7 @@ void SceneEditor::_updateSpotlightEditing()
 			auto distance = _fe3d.spotlightEntity_getDistance(activeSpotlightID);
 
 			// Handle position, color
-			if (!screen->getButton("position")->isHoverable())
+			if(!screen->getButton("position")->isHoverable())
 			{
 				// Set value form descriptions
 				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("x")->changeTextContent("X");
@@ -154,7 +154,7 @@ void SceneEditor::_updateSpotlightEditing()
 				// Update entity
 				_fe3d.spotlightEntity_setPosition(activeSpotlightID, position);
 			}
-			else if (!screen->getButton("color")->isHoverable())
+			else if(!screen->getButton("color")->isHoverable())
 			{
 				// Set value form descriptions
 				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("x")->changeTextContent("R");
@@ -179,7 +179,7 @@ void SceneEditor::_updateSpotlightEditing()
 			_handleValueChanging("spotlightPropertiesMenu", "yawMinus", "yaw", yaw, -SPOTLIGHT_YAW_CHANGING_SPEED);
 			_fe3d.modelEntity_setBaseRotation(_activeTorchID, Vec3(0.0f, -yaw, _fe3d.modelEntity_getBaseRotation(_activeTorchID).z));
 			_fe3d.spotlightEntity_setYaw(activeSpotlightID, yaw);
-			
+
 			// Handle pitch
 			_handleValueChanging("spotlightPropertiesMenu", "pitchPlus", "pitch", pitch, SPOTLIGHT_PITCH_CHANGING_SPEED);
 			_handleValueChanging("spotlightPropertiesMenu", "pitchMinus", "pitch", pitch, -SPOTLIGHT_PITCH_CHANGING_SPEED);

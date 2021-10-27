@@ -11,7 +11,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 	bool isConstant = false;
 
 	// Extract optional CONST keyword
-	if (scope == ScriptVariableScope::GLOBAL)
+	if(scope == ScriptVariableScope::GLOBAL)
 	{
 		string possibleConstKeyword = scriptLine.substr(GLOBAL_KEYWORD.size(), CONST_KEYWORD.size() + 2);
 		isConstant = (possibleConstKeyword == (" " + CONST_KEYWORD + " "));
@@ -28,15 +28,15 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 	unsigned int wordIndex = 0;
 	typeIndex += static_cast<unsigned int>((scope == ScriptVariableScope::GLOBAL) ? (GLOBAL_KEYWORD.size() + 1) : 0);
 	typeIndex += static_cast<unsigned int>(isConstant ? (CONST_KEYWORD.size() + 1) : 0);
-	for (const auto& c : scriptLine.substr(typeIndex))
+	for(const auto& c : scriptLine.substr(typeIndex))
 	{
-		if (c == ' ') // Current word ended
+		if(c == ' ') // Current word ended
 		{
 			// Next word
 			wordIndex++;
 
 			// Check if words extracted
-			if (wordIndex == 3)
+			if(wordIndex == 3)
 			{
 				break;
 			}
@@ -51,78 +51,78 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 	equalSignString = words[2];
 
 	// Check if variable type is missing
-	if (typeString.empty())
+	if(typeString.empty())
 	{
 		_throwScriptError("variable type missing!");
 		return;
 	}
 
 	// Check if variable name is missing
-	if (nameString.empty())
+	if(nameString.empty())
 	{
 		_throwScriptError("variable name missing!");
 		return;
 	}
 
 	// Check if variable type is valid
-	if (typeString == LIST_KEYWORD    ||
-		typeString == VEC3_KEYWORD    || 
-		typeString == STRING_KEYWORD  || 
-		typeString == DECIMAL_KEYWORD || 
-		typeString == INTEGER_KEYWORD || 
-		typeString == BOOLEAN_KEYWORD)
+	if(typeString == LIST_KEYWORD ||
+	   typeString == VEC3_KEYWORD ||
+	   typeString == STRING_KEYWORD ||
+	   typeString == DECIMAL_KEYWORD ||
+	   typeString == INTEGER_KEYWORD ||
+	   typeString == BOOLEAN_KEYWORD)
 	{
 		// Validate variable name
 		bool validName = !nameString.empty() &&
 			nameString.substr(0, 5) != "fe3d:" &&
 			nameString.substr(0, 5) != "math:" &&
-			nameString.substr(0, 5) != "misc:" && 
+			nameString.substr(0, 5) != "misc:" &&
 			!isdigit(nameString.front()) &&
 			(isalnum(nameString.front()) || nameString.front() == '_');
 
 		// Forbidden variable names
-		for (const auto& word : { META_KEYWORD, EXECUTE_KEYWORD, LOOP_KEYWORD, BREAK_KEYWORD, IF_KEYWORD, ELIF_KEYWORD, ELSE_KEYWORD, GLOBAL_KEYWORD,
+		for(const auto& word : { META_KEYWORD, EXECUTE_KEYWORD, LOOP_KEYWORD, BREAK_KEYWORD, IF_KEYWORD, ELIF_KEYWORD, ELSE_KEYWORD, GLOBAL_KEYWORD,
 			CONST_KEYWORD, EDIT_KEYWORD, LIST_KEYWORD, VEC3_KEYWORD, STRING_KEYWORD, DECIMAL_KEYWORD, INTEGER_KEYWORD, BOOLEAN_KEYWORD, IS_KEYWORD,
-			NOT_KEYWORD, AND_KEYWORD, OR_KEYWORD, MORE_KEYWORD, LESS_KEYWORD, ADDITION_KEYWORD, SUBTRACTION_KEYWORD, MULTIPLICATION_KEYWORD, 
+			NOT_KEYWORD, AND_KEYWORD, OR_KEYWORD, MORE_KEYWORD, LESS_KEYWORD, ADDITION_KEYWORD, SUBTRACTION_KEYWORD, MULTIPLICATION_KEYWORD,
 			DIVISION_KEYWORD, NEGATION_KEYWORD, CASTING_KEYWORD, PUSHING_KEYWORD, PULLING_KEYWORD, PASS_KEYWORD })
 		{
 			validName = validName && (nameString != word);
 		}
 
 		// Validate variable individual characters
-		for (const auto& c : nameString)
+		for(const auto& c : nameString)
 		{
 			// Only non-alphanumeric character '_'
-			if (c != '_' && !isalnum(c))
+			if(c != '_' && !isalnum(c))
 			{
 				validName = false;
 			}
 		}
 
 		// Check if global variable starts with '_'
-		if (scope == ScriptVariableScope::GLOBAL && nameString.front() != '_')
+		if(scope == ScriptVariableScope::GLOBAL && nameString.front() != '_')
 		{
 			_throwScriptError("global variables must start with an underscore!");
 			return;
 		}
 
 		// Check if local variable does not start with '_'
-		if (scope == ScriptVariableScope::LOCAL && nameString.front() == '_')
+		if(scope == ScriptVariableScope::LOCAL && nameString.front() == '_')
 		{
 			_throwScriptError("local variables cannot start with an underscore!");
 			return;
 		}
 
 		// Check if variable name is valid
-		if (validName)
+		if(validName)
 		{
 			// Retrieve the repsective list of variables
-			auto& variableList = (scope == ScriptVariableScope::LOCAL) ? _localVariables[_executionDepth]: _globalVariables;
+			auto& variableList = (scope == ScriptVariableScope::LOCAL) ? _localVariables[_executionDepth] : _globalVariables;
 
 			// Check if a local variable has already been defined
-			if (scope == ScriptVariableScope::LOCAL)
+			if(scope == ScriptVariableScope::LOCAL)
 			{
-				if (_isLocalVariableExisting(nameString))
+				if(_isLocalVariableExisting(nameString))
 				{
 					_throwScriptError("variable already defined!");
 					return;
@@ -130,7 +130,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 			}
 			else // Global variable
 			{
-				if (_isGlobalVariableExisting(nameString))
+				if(_isGlobalVariableExisting(nameString))
 				{
 					_throwScriptError("variable already defined!");
 					return;
@@ -138,10 +138,10 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 			}
 
 			// Check if equal sign is present
-			if (equalSignString == "=")
+			if(equalSignString == "=")
 			{
 				// Check if value is present
-				if (scriptLine.size() - 1 >= scriptLine.find('=') + 2)
+				if(scriptLine.size() - 1 >= scriptLine.find('=') + 2)
 				{
 					// Extract remaining text (value)
 					valueString = scriptLine.substr(scriptLine.find('=') + 2);
@@ -153,7 +153,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 				}
 
 				// Check if value is of the right type
-				if (typeString == LIST_KEYWORD && _isListValue(valueString)) // LIST
+				if(typeString == LIST_KEYWORD && _isListValue(valueString)) // LIST
 				{
 					// Removing the "" around the string content
 					string listString = valueString.substr(1);
@@ -162,15 +162,15 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 					// Extract the values
 					auto values = _extractValuesFromListString(listString);
 					variableList.insert(make_pair(nameString,
-						ScriptVariable(_fe3d, scope, ScriptVariableType::MULTIPLE, nameString, isConstant, values)));
+										ScriptVariable(_fe3d, scope, ScriptVariableType::MULTIPLE, nameString, isConstant, values)));
 				}
-				else if (typeString == VEC3_KEYWORD && _isVec3Value(valueString)) // VEC3
+				else if(typeString == VEC3_KEYWORD && _isVec3Value(valueString)) // VEC3
 				{
 					auto value = ScriptValue(_fe3d, ScriptValueType::VEC3, _extractVec3FromString(valueString));
 					variableList.insert(make_pair(nameString,
-						ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value })));
+										ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value })));
 				}
-				else if (typeString == STRING_KEYWORD && _isStringValue(valueString)) // STRING
+				else if(typeString == STRING_KEYWORD && _isStringValue(valueString)) // STRING
 				{
 					// Removing the "" around the string content
 					valueString.erase(valueString.begin());
@@ -179,27 +179,27 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 					// Add new string variable
 					auto value = ScriptValue(_fe3d, ScriptValueType::STRING, valueString);
 					variableList.insert(make_pair(nameString,
-						ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value })));
+										ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value })));
 				}
-				else if (typeString == DECIMAL_KEYWORD && _isDecimalValue(valueString)) // DECIMAL
+				else if(typeString == DECIMAL_KEYWORD && _isDecimalValue(valueString)) // DECIMAL
 				{
 					auto value = ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitDecimalString(valueString)));
 					variableList.insert(make_pair(nameString,
-						ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value })));
+										ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value })));
 				}
-				else if (typeString == INTEGER_KEYWORD && _isIntegerValue(valueString)) // INTEGER
+				else if(typeString == INTEGER_KEYWORD && _isIntegerValue(valueString)) // INTEGER
 				{
 					auto value = ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString)));
 					variableList.insert(make_pair(nameString,
-						ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value })));
+										ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value })));
 				}
-				else if (typeString == BOOLEAN_KEYWORD && _isBooleanValue(valueString)) // BOOLEAN - normal
+				else if(typeString == BOOLEAN_KEYWORD && _isBooleanValue(valueString)) // BOOLEAN - normal
 				{
 					auto value = ScriptValue(_fe3d, ScriptValueType::BOOLEAN, (valueString == "<true>"));
 					variableList.insert(make_pair(nameString,
-						ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value })));
+										ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value })));
 				}
-				else if (typeString == BOOLEAN_KEYWORD && (valueString.front() == '(' && valueString.back() == ')')) // BOOLEAN - condition
+				else if(typeString == BOOLEAN_KEYWORD && (valueString.front() == '(' && valueString.back() == ')')) // BOOLEAN - condition
 				{
 					// Removing the ( ) around the string content
 					valueString.erase(valueString.begin());
@@ -208,9 +208,9 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 					// Add new boolean variable
 					auto value = ScriptValue(_fe3d, ScriptValueType::BOOLEAN, _checkConditionString(valueString));
 					variableList.insert(make_pair(nameString,
-						ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value })));
+										ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value })));
 				}
-				else if (valueString.substr(0, 5) == "fe3d:" || valueString.substr(0, 5) == "math:" || valueString.substr(0, 5) == "misc:")
+				else if(valueString.substr(0, 5) == "fe3d:" || valueString.substr(0, 5) == "math:" || valueString.substr(0, 5) == "misc:")
 				{
 					// Save current logger message count
 					auto loggerMessageCount = Logger::getMessageCount();
@@ -223,17 +223,17 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 
 					// Check if any error was thrown
 					_checkEngineWarnings(loggerMessageCount);
-					if (_hasThrownError)
+					if(_hasThrownError)
 					{
 						return;
 					}
 
-					if (typeString == LIST_KEYWORD) // Check if variable is a list
+					if(typeString == LIST_KEYWORD) // Check if variable is a list
 					{
 						// Check if function returned any empty values
-						for (const auto& value : values)
+						for(const auto& value : values)
 						{
-							if (value.getType() == ScriptValueType::EMPTY)
+							if(value.getType() == ScriptValueType::EMPTY)
 							{
 								_throwScriptError("function cannot return empty values!");
 								return;
@@ -241,34 +241,34 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 						}
 
 						// Add list values
-						variableList.insert(make_pair(nameString, 
-							ScriptVariable(_fe3d, scope, ScriptVariableType::MULTIPLE, nameString, isConstant, values)));
+						variableList.insert(make_pair(nameString,
+											ScriptVariable(_fe3d, scope, ScriptVariableType::MULTIPLE, nameString, isConstant, values)));
 					}
-					else if (values.empty()) // Check if function returned 0 values
+					else if(values.empty()) // Check if function returned 0 values
 					{
 						_throwScriptError("function did not return any values!");
 						return;
 					}
-					else if (values.size() > 1) // Check if function returned too many values
+					else if(values.size() > 1) // Check if function returned too many values
 					{
 						_throwScriptError("function returned too many values!");
 						return;
 					}
-					else if (values[0].getType() == ScriptValueType::EMPTY) // Check if function returned an empty value
+					else if(values[0].getType() == ScriptValueType::EMPTY) // Check if function returned an empty value
 					{
 						_throwScriptError("function must return a value!");
 						return;
 					}
 					else if
-						(((typeString == VEC3_KEYWORD)	 && (values[0].getType() == ScriptValueType::VEC3))    || 
-						((typeString == STRING_KEYWORD)  && (values[0].getType() == ScriptValueType::STRING))  ||
-						((typeString == DECIMAL_KEYWORD) && (values[0].getType() == ScriptValueType::DECIMAL)) ||
-						((typeString == INTEGER_KEYWORD) && (values[0].getType() == ScriptValueType::INTEGER)) ||
-						((typeString == BOOLEAN_KEYWORD) && (values[0].getType() == ScriptValueType::BOOLEAN)))
+						(((typeString == VEC3_KEYWORD) && (values[0].getType() == ScriptValueType::VEC3)) ||
+						 ((typeString == STRING_KEYWORD) && (values[0].getType() == ScriptValueType::STRING)) ||
+						 ((typeString == DECIMAL_KEYWORD) && (values[0].getType() == ScriptValueType::DECIMAL)) ||
+						 ((typeString == INTEGER_KEYWORD) && (values[0].getType() == ScriptValueType::INTEGER)) ||
+						 ((typeString == BOOLEAN_KEYWORD) && (values[0].getType() == ScriptValueType::BOOLEAN)))
 					{
-						variableList.insert(make_pair(nameString, 
-							ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, values)));
-					} 
+						variableList.insert(make_pair(nameString,
+											ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, values)));
+					}
 					else
 					{
 						_throwScriptError("function value type does not match the variable type!");
@@ -288,20 +288,20 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 					auto vec3Parts = _extractVec3PartFromString(valueString);
 
 					// Check if any error was thrown
-					if (_hasThrownError)
+					if(_hasThrownError)
 					{
 						return;
 					}
 
 					// Remove vec3 part characters
-					if (vec3Parts != Ivec3(0))
+					if(vec3Parts != Ivec3(0))
 					{
 						valueString.pop_back();
 						valueString.pop_back();
 					}
 
 					// Remove list accessing characters
-					if (isAccessingList)
+					if(isAccessingList)
 					{
 						auto openingBracketFound = find(valueString.begin(), valueString.end(), '[');
 						auto bracketIndex = static_cast<unsigned int>(distance(valueString.begin(), openingBracketFound));
@@ -309,16 +309,16 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 					}
 
 					// Check if using another variable as value
-					if (_isLocalVariableExisting(valueString) || _isGlobalVariableExisting(valueString))
+					if(_isLocalVariableExisting(valueString) || _isGlobalVariableExisting(valueString))
 					{
 						// Retrieve other variable
 						auto otherVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
 						// Validate vec3 access
-						if (vec3Parts != Ivec3(0))
+						if(vec3Parts != Ivec3(0))
 						{
-							if (otherVariable.getType() == ScriptVariableType::MULTIPLE || 
-								otherVariable.getValue().getType() != ScriptValueType::VEC3)
+							if(otherVariable.getType() == ScriptVariableType::MULTIPLE ||
+							   otherVariable.getValue().getType() != ScriptValueType::VEC3)
 							{
 								_throwScriptError("variable is not a vec3!");
 								return;
@@ -326,10 +326,10 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 						}
 
 						// Validate list access
-						if (isAccessingList)
+						if(isAccessingList)
 						{
 							// Check if list index is valid
-							if (_validateListIndex(otherVariable, listIndex))
+							if(_validateListIndex(otherVariable, listIndex))
 							{
 								valueIndex = listIndex;
 							}
@@ -338,41 +338,41 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 								return;
 							}
 						}
-					
+
 						// Check if using part of vec3 variable as value
-						if (typeString == DECIMAL_KEYWORD && vec3Parts != Ivec3(0))
-						{ 
+						if(typeString == DECIMAL_KEYWORD && vec3Parts != Ivec3(0))
+						{
 							// Determine part of vec3 variable
-							if (vec3Parts.x)
+							if(vec3Parts.x)
 							{
 								auto value = ScriptValue(_fe3d, ScriptValueType::DECIMAL, otherVariable.getValue().getVec3().x);
 								variableList.insert(make_pair(nameString,
-									ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value })));
+													ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value })));
 							}
-							else if (vec3Parts.y)
+							else if(vec3Parts.y)
 							{
 								auto value = ScriptValue(_fe3d, ScriptValueType::DECIMAL, otherVariable.getValue().getVec3().y);
 								variableList.insert(make_pair(nameString,
-									ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value })));
+													ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value })));
 							}
-							else if (vec3Parts.z)
+							else if(vec3Parts.z)
 							{
 								auto value = ScriptValue(_fe3d, ScriptValueType::DECIMAL, otherVariable.getValue().getVec3().z);
 								variableList.insert(make_pair(nameString,
-									ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value })));
+													ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value })));
 							}
 						}
 						else if // Check if the value types match
 							((otherVariable.getType() == ScriptVariableType::SINGLE || isAccessingList) &&
-							((typeString == VEC3_KEYWORD   && otherVariable.getValue(valueIndex).getType() == ScriptValueType::VEC3)	||
-							(typeString == STRING_KEYWORD  && otherVariable.getValue(valueIndex).getType() == ScriptValueType::STRING)  ||
-							(typeString == DECIMAL_KEYWORD && otherVariable.getValue(valueIndex).getType() == ScriptValueType::DECIMAL) ||
-							(typeString == INTEGER_KEYWORD && otherVariable.getValue(valueIndex).getType() == ScriptValueType::INTEGER) ||
-							(typeString == BOOLEAN_KEYWORD && otherVariable.getValue(valueIndex).getType() == ScriptValueType::BOOLEAN)))
+							 ((typeString == VEC3_KEYWORD && otherVariable.getValue(valueIndex).getType() == ScriptValueType::VEC3) ||
+							 (typeString == STRING_KEYWORD && otherVariable.getValue(valueIndex).getType() == ScriptValueType::STRING) ||
+							 (typeString == DECIMAL_KEYWORD && otherVariable.getValue(valueIndex).getType() == ScriptValueType::DECIMAL) ||
+							 (typeString == INTEGER_KEYWORD && otherVariable.getValue(valueIndex).getType() == ScriptValueType::INTEGER) ||
+							 (typeString == BOOLEAN_KEYWORD && otherVariable.getValue(valueIndex).getType() == ScriptValueType::BOOLEAN)))
 						{
-							variableList.insert(make_pair(nameString, 
-								ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant,
-								{ otherVariable.getValue(valueIndex) })));
+							variableList.insert(make_pair(nameString,
+												ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant,
+												{ otherVariable.getValue(valueIndex) })));
 						}
 						else
 						{

@@ -16,7 +16,7 @@ shared_ptr<TextEntity> TextEntityManager::getEntity(const string& ID)
 {
 	auto result = _getTextEntity(ID);
 
-	if (result == nullptr)
+	if(result == nullptr)
 	{
 		Logger::throwError("TextEntityManager::getEntity");
 	}
@@ -42,7 +42,7 @@ void TextEntityManager::loadCharacters(const string& ID)
 	auto entity = getEntity(ID);
 
 	// Check if text content changed
-	if ((_textContentMap.find(ID) == _textContentMap.end()) || (entity->getTextContent() != _textContentMap[ID]))
+	if((_textContentMap.find(ID) == _textContentMap.end()) || (entity->getTextContent() != _textContentMap[ID]))
 	{
 		// Temporary values
 		bool isInvalidFont = false;
@@ -50,9 +50,9 @@ void TextEntityManager::loadCharacters(const string& ID)
 		entity->deleteCharacterEntities();
 
 		// For every character
-		for (const auto& c : entity->getTextContent())
+		for(const auto& c : entity->getTextContent())
 		{
-			if (!isInvalidFont)
+			if(!isInvalidFont)
 			{
 				// Create new character entity
 				auto newCharacter = make_shared<ImageEntity>("uselessID");
@@ -64,7 +64,7 @@ void TextEntityManager::loadCharacters(const string& ID)
 				auto texture = _textureLoader.getText(textContent, entity->getFontPath());
 
 				// Check if font loading went well
-				if (texture != 0)
+				if(texture != 0)
 				{
 					newCharacter->setDiffuseMap(texture);
 					entity->createCharacterEntity(newCharacter);
@@ -89,20 +89,20 @@ void TextEntityManager::deleteDynamicTextEntity(const string& ID)
 
 void TextEntityManager::update()
 {
-	for (const auto& [keyID, entity] : _getTextEntities())
+	for(const auto& [keyID, entity] : _getTextEntities())
 	{
 		// Update transformation
 		entity->updateTransformation();
 
 		// Update characters
-		if (entity->isDynamic())
+		if(entity->isDynamic())
 		{
 			entity->updateCharacterEntities();
 		}
 		else
 		{
 			// Update transformation matrix
-			if (entity->isVisible())
+			if(entity->isVisible())
 			{
 				entity->updateTransformationMatrix();
 			}

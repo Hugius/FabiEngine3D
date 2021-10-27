@@ -25,13 +25,13 @@ unsigned int ScriptInterpreter::_countFrontSpaces(const string& scriptLineText)
 	int countedSpaces = 0;
 
 	// For every character
-	for (size_t i = 0; i < scriptLineText.size(); i++)
+	for(size_t i = 0; i < scriptLineText.size(); i++)
 	{
 		// Check if current character is a space
-		if (scriptLineText[i] == ' ')
+		if(scriptLineText[i] == ' ')
 		{
 			// Check if any text comes after the last space character
-			if (i == (scriptLineText.size() - 1))
+			if(i == (scriptLineText.size() - 1))
 			{
 				_throwScriptError("useless indentation!");
 				return 0;
@@ -56,39 +56,39 @@ bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const s
 	const unsigned int currentLineScopeDepth = (countedSpaces / SPACES_PER_INDENT);
 	const bool isScopeDepthInvalid = (currentLineScopeDepth != (scopeDepth + static_cast<int>(_mustIgnoreDeeperScope)));
 
-	if (_hasPassedLoopStatement && isScopeDepthInvalid) // Passed loop statement
+	if(_hasPassedLoopStatement && isScopeDepthInvalid) // Passed loop statement
 	{
 		_throwScriptError("incorrect indentation after LOOP statement!");
 		return false;
 	}
-	else if (_hasPassedIfStatement && isScopeDepthInvalid) // Passed if statement
+	else if(_hasPassedIfStatement && isScopeDepthInvalid) // Passed if statement
 	{
 		_throwScriptError("incorrect indentation after IF statement!");
 		return false;
 	}
-	else if (_hasPassedElifStatement && isScopeDepthInvalid) // Passed elif statement
+	else if(_hasPassedElifStatement && isScopeDepthInvalid) // Passed elif statement
 	{
 		_throwScriptError("incorrect indentation after ELIF statement!");
 		return false;
 	}
-	else if (_hasPassedElseStatement && isScopeDepthInvalid) // Passed else statement
+	else if(_hasPassedElseStatement && isScopeDepthInvalid) // Passed else statement
 	{
 		_throwScriptError("incorrect indentation after ELSE statement!");
 		return false;
 	}
-	else if (currentLineScopeDepth < scopeDepth) // End of current scope
+	else if(currentLineScopeDepth < scopeDepth) // End of current scope
 	{
 		scopeDepth = currentLineScopeDepth;
 	}
-	else if (currentLineScopeDepth > scopeDepth) // Outside of current scope
+	else if(currentLineScopeDepth > scopeDepth) // Outside of current scope
 	{
-		if (_mustIgnoreDeeperScope) // Skip current line
+		if(_mustIgnoreDeeperScope) // Skip current line
 		{
 			return false;
 		}
 		else // Useless indentation
 		{
-			_throwScriptError("useless indentation before statement!"); 
+			_throwScriptError("useless indentation before statement!");
 			return false;
 		}
 	}
@@ -103,14 +103,14 @@ bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const s
 bool ScriptInterpreter::_validateSavesDirectory()
 {
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("ScriptInterpreter::_validateSavesDirectory");
 	}
 
 	// Check if saves directory still exists
 	auto directoryPath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
-	if (!Tools::isDirectoryExisting(directoryPath))
+	if(!Tools::isDirectoryExisting(directoryPath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: directory `saves\\` missing!");
 		return false;
@@ -125,10 +125,10 @@ ScriptConditionStatement* ScriptInterpreter::_getLastConditionStatement(vector<S
 	unsigned int index = static_cast<unsigned int>(statements.size());
 
 	// Loop through conditions backwards
-	while (index--)
+	while(index--)
 	{
 		// Check if scope depth matches
-		if (statements[index].getScopeDepth() == scopeDepth)
+		if(statements[index].getScopeDepth() == scopeDepth)
 		{
 			return &statements[index];
 		}
@@ -141,7 +141,7 @@ ScriptConditionStatement* ScriptInterpreter::_getLastConditionStatement(vector<S
 void ScriptInterpreter::_throwScriptError(const string& message)
 {
 	Logger::throwWarning("ERROR @ script \"" + _currentScriptIDsStack.back() + "\" @ line " +
-		to_string(_currentLineIndexStack.back() + 1) + ": " + message);
+						 to_string(_currentLineIndexStack.back() + 1) + ": " + message);
 	_hasThrownError = true;
 }
 
@@ -149,16 +149,16 @@ void ScriptInterpreter::_checkEngineWarnings(unsigned int lastLoggerMessageCount
 {
 	// Check if any new messages were logged
 	auto messageCount = Logger::getMessageCount();
-	if (messageCount > lastLoggerMessageCount)
+	if(messageCount > lastLoggerMessageCount)
 	{
 		// Retrieve all logged messages
 		auto messageQueue = Logger::getMessageQueue();
 
 		// Iterate through all new messages
-		for (unsigned int i = lastLoggerMessageCount - 1; i < messageCount; i++)
+		for(unsigned int i = lastLoggerMessageCount - 1; i < messageCount; i++)
 		{
 			// Check if logged message is a warning
-			if (messageQueue[i].substr(0, string("[Warn]").size()) == "[Warn]")
+			if(messageQueue[i].substr(0, string("[Warn]").size()) == "[Warn]")
 			{
 				_hasThrownError = true;
 			}
@@ -168,7 +168,7 @@ void ScriptInterpreter::_checkEngineWarnings(unsigned int lastLoggerMessageCount
 
 Vec2 ScriptInterpreter::_convertGuiPositionToViewport(Vec2 position)
 {
-	if (!_fe3d.application_isExported())
+	if(!_fe3d.application_isExported())
 	{
 		auto sizeMultiplier = Vec2(Config::getInst().getViewportSize()) /
 			Vec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y));
@@ -184,7 +184,7 @@ Vec2 ScriptInterpreter::_convertGuiPositionToViewport(Vec2 position)
 
 Vec2 ScriptInterpreter::_convertGuiPositionFromViewport(Vec2 position)
 {
-	if (!_fe3d.application_isExported())
+	if(!_fe3d.application_isExported())
 	{
 		auto sizeMultiplier = Vec2(Config::getInst().getViewportSize()) /
 			Vec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y));
@@ -204,7 +204,7 @@ Vec2 ScriptInterpreter::_convertGuiPositionFromViewport(Vec2 position)
 
 Vec2 ScriptInterpreter::_convertGuiSizeToViewport(Vec2 size)
 {
-	if (!_fe3d.application_isExported())
+	if(!_fe3d.application_isExported())
 	{
 		auto sizeMultiplier = Vec2(Config::getInst().getViewportSize()) /
 			Vec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y));
@@ -216,7 +216,7 @@ Vec2 ScriptInterpreter::_convertGuiSizeToViewport(Vec2 size)
 
 Vec2 ScriptInterpreter::_convertGuiSizeFromViewport(Vec2 size)
 {
-	if (!_fe3d.application_isExported())
+	if(!_fe3d.application_isExported())
 	{
 		auto sizeMultiplier = Vec2(Config::getInst().getViewportSize()) /
 			Vec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y));

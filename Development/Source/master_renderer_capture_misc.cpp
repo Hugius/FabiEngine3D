@@ -7,7 +7,7 @@ void MasterRenderer::_captureWaterRefractions()
 	const auto waterEntity = _entityBus->getWaterEntity();
 
 	// Check if water refractions needed
-	if ((waterEntity != nullptr) && waterEntity->isRefractive())
+	if((waterEntity != nullptr) && waterEntity->isRefractive())
 	{
 		// Start capturing refractions
 		_waterRefractionCaptureBuffer.bind();
@@ -15,7 +15,7 @@ void MasterRenderer::_captureWaterRefractions()
 
 		// Shadows are not needed if no models are rendered, so they should not appear
 		bool wasShadowsEnabled = _renderBus.isShadowsEnabled();
-		if ((waterEntity->getQuality() == WaterQuality::SKY) || (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN))
+		if((waterEntity->getQuality() == WaterQuality::SKY) || (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN))
 		{
 			_renderBus.setShadowsEnabled(false);
 		}
@@ -23,7 +23,7 @@ void MasterRenderer::_captureWaterRefractions()
 		// Sky exposure must not appear in refractions
 		float oldSkyLightness = 0.0f;
 		auto skyEntity = _entityBus->getMainSkyEntity();
-		if (skyEntity != nullptr)
+		if(skyEntity != nullptr)
 		{
 			oldSkyLightness = skyEntity->getLightness();
 			skyEntity->setLightness(skyEntity->getOriginalLightness());
@@ -38,7 +38,7 @@ void MasterRenderer::_captureWaterRefractions()
 		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z < (waterEntity->getSize() / 2.0f)));
 
 		// Calculate clipping plane
-		if (isUnderWater)
+		if(isUnderWater)
 		{
 			const float clippingHeight = -(waterEntity->getHeight());
 			const Vec4 clippingPlane = Vec4(0.0f, 1.0f, 0.0f, clippingHeight);
@@ -55,7 +55,7 @@ void MasterRenderer::_captureWaterRefractions()
 		_renderSkyEntity();
 
 		// Render terrain entity
-		if (waterEntity->getQuality() != WaterQuality::SKY)
+		if(waterEntity->getQuality() != WaterQuality::SKY)
 		{
 			glEnable(GL_CLIP_DISTANCE0);
 			_renderTerrainEntity();
@@ -63,8 +63,8 @@ void MasterRenderer::_captureWaterRefractions()
 		}
 
 		// Render model entities
-		if ((waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS) ||
-			(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS))
+		if((waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS) ||
+		   (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS))
 		{
 			glEnable(GL_CLIP_DISTANCE2);
 			_renderModelEntities();
@@ -72,7 +72,7 @@ void MasterRenderer::_captureWaterRefractions()
 		}
 
 		// Render billboard entities
-		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
 		{
 			glEnable(GL_CLIP_DISTANCE2);
 			_renderBillboardEntities();
@@ -83,7 +83,7 @@ void MasterRenderer::_captureWaterRefractions()
 		_renderBus.setShadowsEnabled(wasShadowsEnabled);
 
 		// Revert sky lightness
-		if (skyEntity != nullptr)
+		if(skyEntity != nullptr)
 		{
 			skyEntity->setLightness(oldSkyLightness);
 		}
@@ -102,7 +102,7 @@ void MasterRenderer::_captureWaterRefractions()
 
 void MasterRenderer::_captureShadows()
 {
-	if (_renderBus.isShadowsEnabled())
+	if(_renderBus.isShadowsEnabled())
 	{
 		// Temporary values
 		auto modelEntities = _entityBus->getModelEntities();
@@ -113,20 +113,20 @@ void MasterRenderer::_captureShadows()
 		glClear(GL_DEPTH_BUFFER_BIT);
 
 		// Validate existence
-		if (!modelEntities.empty())
+		if(!modelEntities.empty())
 		{
 			// Bind
 			_modelEntityShadowRenderer.bind();
 
 			// Render model entities
-			for (const auto& [keyID, modelEntity] : modelEntities)
+			for(const auto& [keyID, modelEntity] : modelEntities)
 			{
 				// Check if LOD entity needs to be rendered
-				if (modelEntity->isLevelOfDetailed())
+				if(modelEntity->isLevelOfDetailed())
 				{
 					// Try to find LOD entity
 					auto foundPair = modelEntities.find(modelEntity->getLevelOfDetailEntityID());
-					if (foundPair != modelEntities.end())
+					if(foundPair != modelEntities.end())
 					{
 						auto lodEntity = foundPair->second;
 
@@ -169,13 +169,13 @@ void MasterRenderer::_captureShadows()
 		}
 
 		// Validate existence
-		if (!billboardEntities.empty())
+		if(!billboardEntities.empty())
 		{
 			// Bind
 			_billboardEntityShadowRenderer.bind();
 
 			// Render billboard entities
-			for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+			for(const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 			{
 				_billboardEntityShadowRenderer.render(entity);
 			}

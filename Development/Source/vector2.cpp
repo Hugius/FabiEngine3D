@@ -19,7 +19,8 @@ Vec2::Vec2(const float value)
 	this->y = value;
 }
 
-Vec2::Vec2(const float x, const float y) {
+Vec2::Vec2(const float x, const float y)
+{
 	this->x = x;
 	this->y = y;
 }

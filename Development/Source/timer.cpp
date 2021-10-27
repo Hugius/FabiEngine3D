@@ -4,7 +4,7 @@
 void Timer::start()
 {
 	// Error checking
-	if (_isStarted)
+	if(_isStarted)
 	{
 		Logger::throwError("Timer::start");
 	}
@@ -18,7 +18,7 @@ void Timer::start()
 float Timer::stop()
 {
 	// Error checking
-	if (!_isStarted)
+	if(!_isStarted)
 	{
 		Logger::throwError("Timer::stop");
 	}
@@ -32,7 +32,7 @@ float Timer::stop()
 void Timer::startDeltaPart(const string& ID)
 {
 	// Error checking
-	if (!_currentID.empty())
+	if(!_currentID.empty())
 	{
 		Logger::throwError("Timer::startDeltaPart");
 	}
@@ -46,7 +46,7 @@ void Timer::startDeltaPart(const string& ID)
 void Timer::stopDeltaPart()
 {
 	// Error checking
-	if (_currentID.empty())
+	if(_currentID.empty())
 	{
 		Logger::throwError("Timer::stopDeltaPart");
 	}
@@ -66,7 +66,7 @@ float Timer::getDeltaPartSum()
 {
 	float sum = 0.0f;
 
-	for (const auto& part : _deltaParts)
+	for(const auto& part : _deltaParts)
 	{
 		sum += part.second;
 	}
@@ -80,14 +80,14 @@ void Timer::sleep(int microseconds)
 	__int64 time2 = 0;
 	__int64 frequency = 0;
 
-	QueryPerformanceCounter((LARGE_INTEGER *)&time1);
-	QueryPerformanceFrequency((LARGE_INTEGER *)&frequency);
+	QueryPerformanceCounter((LARGE_INTEGER*)&time1);
+	QueryPerformanceFrequency((LARGE_INTEGER*)&frequency);
 
-	do 
+	do
 	{
-		QueryPerformanceCounter((LARGE_INTEGER *)&time2);
-	} 
-	while ((time2 - time1) < microseconds);
+		QueryPerformanceCounter((LARGE_INTEGER*)&time2);
+	}
+	while((time2 - time1) < microseconds);
 }
 
 void Timer::increasePassedFrameCount()

@@ -5,99 +5,99 @@ using SVT = ScriptValueType;
 bool ScriptInterpreter::_executeFe3dClientGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:client_is_valid_server_ip")
+	if(functionName == "fe3d:client_is_valid_server_ip")
 	{
 		auto types = { SVT::STRING };
 
 		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			auto result = _fe3d.networkClient_isValidServerIP(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:client_is_running")
+	else if(functionName == "fe3d:client_is_running")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.networkClient_isRunning();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:client_is_connecting")
+	else if(functionName == "fe3d:client_is_connecting")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.networkClient_isConnecting();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:client_is_connected")
+	else if(functionName == "fe3d:client_is_connected")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.networkClient_isConnected();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:client_is_accepted")
+	else if(functionName == "fe3d:client_is_accepted")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.networkClient_isAccepted();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:client_get_pending_protocols")
+	else if(functionName == "fe3d:client_get_pending_protocols")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto messages = _fe3d.networkClient_getPendingMessages();
-			for (const auto& message : messages)
+			for(const auto& message : messages)
 			{
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, string((message.protocol == NetworkProtocol::TCP) ? "TCP" : "UDP")));
 			}
 		}
 	}
-	else if (functionName == "fe3d:client_get_pending_contents")
+	else if(functionName == "fe3d:client_get_pending_contents")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto messages = _fe3d.networkClient_getPendingMessages();
-			for (const auto& message : messages)
+			for(const auto& message : messages)
 			{
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, message.content));
 			}
 		}
 	}
-	else if (functionName == "fe3d:client_get_ping_latency")
+	else if(functionName == "fe3d:client_get_ping_latency")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.networkClient_getPingLatency();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
-	else if (functionName == "fe3d:client_get_server_ip")
+	else if(functionName == "fe3d:client_get_server_ip")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.networkClient_getServerIP();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}
-	else if (functionName == "fe3d:client_get_username")
+	else if(functionName == "fe3d:client_get_username")
 	{
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.networkClient_getUsername();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
@@ -109,7 +109,7 @@ bool ScriptInterpreter::_executeFe3dClientGetterFunction(const string& functionN
 	}
 
 	// Cannot execute client functionality when server is running
-	if (_fe3d.networkServer_isRunning())
+	if(_fe3d.networkServer_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:client` functionality as a networking server!");
 	}

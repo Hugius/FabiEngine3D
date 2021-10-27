@@ -21,7 +21,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 	_fe3d.billboardEntity_setBright("separator", true);
 
 	// Create visible billboards for display and invisible billboards for logic
-	for (unsigned int lineIndex = 0; lineIndex < lineCount; lineIndex++)
+	for(unsigned int lineIndex = 0; lineIndex < lineCount; lineIndex++)
 	{
 		// Generation values
 		const string lineNumberID = to_string(lineIndex);
@@ -66,7 +66,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 		_fe3d.billboardEntity_setBright(lineTextID, true);
 
 		// Iterate through every character
-		for (unsigned int charIndex = 0; charIndex < lineTextString.size(); charIndex++)
+		for(unsigned int charIndex = 0; charIndex < lineTextString.size(); charIndex++)
 		{
 			// Create new character BILLBOARD for logic
 			const string characterID = (lineNumberID + "_" + to_string(charIndex));
@@ -78,7 +78,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			_fe3d.billboardEntity_setVisible(characterID, false);
 
 			// Create new character AABB for logic
-			if (reloadAabbs)
+			if(reloadAabbs)
 			{
 				const Vec3 characterAabbPosition = (characterPosition - Vec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, 0.0f));
 				const Vec3 characterAabbSize = Vec3(TEXT_CHARACTER_SIZE.x, TEXT_CHARACTER_SIZE.y, AABB_DEPTH);
@@ -92,18 +92,18 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 
 void ScriptEditor::_copySelectedText()
 {
-	if (_firstSelectedLineIndex != -1) // Check if anything is selected at all
+	if(_firstSelectedLineIndex != -1) // Check if anything is selected at all
 	{
 		_copyClipboard.clear(); // Clear last copy
 
-		if (_lastSelectedLineIndex == -1) // Check if only 1 line selected
+		if(_lastSelectedLineIndex == -1) // Check if only 1 line selected
 		{
 			_copyClipboard.push_back(_script.getScriptFile(_currentScriptFileID)->getLineText(_firstSelectedLineIndex));
 		}
 		else // If multiple selected lines
 		{
 			// Determine selection direction
-			for (int i = ((_firstSelectedLineIndex > _lastSelectedLineIndex) ? _lastSelectedLineIndex : _firstSelectedLineIndex);
+			for(int i = ((_firstSelectedLineIndex > _lastSelectedLineIndex) ? _lastSelectedLineIndex : _firstSelectedLineIndex);
 				i <= ((_firstSelectedLineIndex > _lastSelectedLineIndex) ? _firstSelectedLineIndex : _lastSelectedLineIndex); i++)
 			{
 				_copyClipboard.push_back(_script.getScriptFile(_currentScriptFileID)->getLineText(i)); // Copy text lines
@@ -113,7 +113,7 @@ void ScriptEditor::_copySelectedText()
 }
 
 ScriptExecutor& ScriptEditor::getScriptExecutor()
-{	
+{
 	return _scriptExecutor;
 }
 

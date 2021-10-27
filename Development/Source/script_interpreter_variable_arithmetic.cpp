@@ -10,15 +10,15 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	// Extract operator & name
 	string words[2] = { "", "" };
 	unsigned int wordIndex = 0;
-	for (const auto& c : scriptLine)
+	for(const auto& c : scriptLine)
 	{
-		if (c == ' ') // Current word ended
+		if(c == ' ') // Current word ended
 		{
 			// Next word
 			wordIndex++;
 
 			// Check if words extracted
-			if (wordIndex == 2)
+			if(wordIndex == 2)
 			{
 				break;
 			}
@@ -32,17 +32,17 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	nameString = words[1];
 
 	// Check if variable name is missing
-	if (nameString.empty())
+	if(nameString.empty())
 	{
 		_throwScriptError("variable name missing!");
 		return;
 	}
 
 	// Only extract value if not negating
-	if (operatorString != NEGATION_KEYWORD)
+	if(operatorString != NEGATION_KEYWORD)
 	{
 		// Check if value is present
-		if (scriptLine.size() >= (operatorString.size() + nameString.size() + 3))
+		if(scriptLine.size() >= (operatorString.size() + nameString.size() + 3))
 		{
 			// Extract remaining text (value)
 			valueString = scriptLine.substr(operatorString.size() + nameString.size() + 2);
@@ -55,8 +55,8 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	}
 
 	// Check if valid arithmetic keyword
-	if (operatorString != ADDITION_KEYWORD && operatorString != SUBTRACTION_KEYWORD && operatorString != MULTIPLICATION_KEYWORD &&
-		operatorString != DIVISION_KEYWORD && operatorString != NEGATION_KEYWORD)
+	if(operatorString != ADDITION_KEYWORD && operatorString != SUBTRACTION_KEYWORD && operatorString != MULTIPLICATION_KEYWORD &&
+	   operatorString != DIVISION_KEYWORD && operatorString != NEGATION_KEYWORD)
 	{
 		_throwScriptError("invalid arithmetic operator!");
 		return;
@@ -71,20 +71,20 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	auto vec3PartsOne = _extractVec3PartFromString(nameString);
 
 	// Check if any error was thrown
-	if (_hasThrownError)
+	if(_hasThrownError)
 	{
 		return;
 	}
 
 	// Remove vec3 part characters
-	if (vec3PartsOne != Ivec3(0))
+	if(vec3PartsOne != Ivec3(0))
 	{
 		nameString.pop_back();
 		nameString.pop_back();
 	}
 
 	// Remove list accessing characters
-	if (isAccessingListOne)
+	if(isAccessingListOne)
 	{
 		auto openingBracketFound = find(nameString.begin(), nameString.end(), '[');
 		auto bracketIndex = static_cast<unsigned int>(distance(nameString.begin(), openingBracketFound));
@@ -92,7 +92,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	}
 
 	// Check if variable exists
-	if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
+	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
 		_throwScriptError("variable not existing!");
 		return;
@@ -102,9 +102,9 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	auto& variableOne = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
 	// Validate vec3 access
-	if (vec3PartsOne != Ivec3(0))
+	if(vec3PartsOne != Ivec3(0))
 	{
-		if (variableOne.getType() == ScriptVariableType::MULTIPLE || variableOne.getValue().getType() != ScriptValueType::VEC3)
+		if(variableOne.getType() == ScriptVariableType::MULTIPLE || variableOne.getValue().getType() != ScriptValueType::VEC3)
 		{
 			_throwScriptError("variable is not a vec3!");
 			return;
@@ -112,10 +112,10 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	}
 
 	// Validate list access
-	if (isAccessingListOne)
+	if(isAccessingListOne)
 	{
 		// Check if list index is valid
-		if (_validateListIndex(variableOne, listIndexOne))
+		if(_validateListIndex(variableOne, listIndexOne))
 		{
 			valueIndexOne = listIndexOne;
 		}
@@ -126,52 +126,52 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	}
 
 	// Check if variable is not a list
-	if (variableOne.getType() == ScriptVariableType::MULTIPLE && !isAccessingListOne)
+	if(variableOne.getType() == ScriptVariableType::MULTIPLE && !isAccessingListOne)
 	{
 		_throwScriptError("arithmetic is not allowed on a list!");
 		return;
 	}
 
 	// Check if variable is of the correct type
-	if (!(variableOne.getValue(valueIndexOne).getType() == ScriptValueType::INTEGER) &&
-		!(variableOne.getValue(valueIndexOne).getType() == ScriptValueType::DECIMAL) &&
-		!(variableOne.getValue(valueIndexOne).getType() == ScriptValueType::VEC3))
+	if(!(variableOne.getValue(valueIndexOne).getType() == ScriptValueType::INTEGER) &&
+	   !(variableOne.getValue(valueIndexOne).getType() == ScriptValueType::DECIMAL) &&
+	   !(variableOne.getValue(valueIndexOne).getType() == ScriptValueType::VEC3))
 	{
 		_throwScriptError("arithmetic is only allowed on number values!");
 		return;
 	}
 
 	// Check if variable can be changed
-	if (variableOne.isConstant())
+	if(variableOne.isConstant())
 	{
 		_throwScriptError("variable cannot be changed, it is constant!");
 		return;
 	}
 
 	// Negation arithmetic operation
-	if (operatorString == NEGATION_KEYWORD)
+	if(operatorString == NEGATION_KEYWORD)
 	{
-		if (variableOne.getValue(valueIndexOne).getType() == ScriptValueType::INTEGER) // INTEGER variable
+		if(variableOne.getValue(valueIndexOne).getType() == ScriptValueType::INTEGER) // INTEGER variable
 		{
 			variableOne.getValue(valueIndexOne).setInteger(variableOne.getValue(valueIndexOne).getInteger() * -1);
 		}
-		else if (variableOne.getValue(valueIndexOne).getType() == ScriptValueType::DECIMAL) // DECIMAL variable
+		else if(variableOne.getValue(valueIndexOne).getType() == ScriptValueType::DECIMAL) // DECIMAL variable
 		{
 			variableOne.getValue(valueIndexOne).setDecimal(variableOne.getValue(valueIndexOne).getDecimal() * -1.0f);
 		}
-		else if (variableOne.getValue(valueIndexOne).getType() == ScriptValueType::VEC3) // VEC3 variable
+		else if(variableOne.getValue(valueIndexOne).getType() == ScriptValueType::VEC3) // VEC3 variable
 		{
-			if (vec3PartsOne.x)
+			if(vec3PartsOne.x)
 			{
 				auto oldValue = variableOne.getValue(valueIndexOne).getVec3();
 				variableOne.getValue(valueIndexOne).setVec3(Vec3(oldValue.x * -1.0f, oldValue.y, oldValue.z));
 			}
-			else if (vec3PartsOne.y)
+			else if(vec3PartsOne.y)
 			{
 				auto oldValue = variableOne.getValue(valueIndexOne).getVec3();
 				variableOne.getValue(valueIndexOne).setVec3(Vec3(oldValue.x, oldValue.y * -1.0f, oldValue.z));
 			}
-			else if (vec3PartsOne.z)
+			else if(vec3PartsOne.z)
 			{
 				auto oldValue = variableOne.getValue(valueIndexOne).getVec3();
 				variableOne.getValue(valueIndexOne).setVec3(Vec3(oldValue.x, oldValue.y, oldValue.z * -1.0f));
@@ -185,7 +185,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	else // Other arithmetic operations
 	{
 		// Check if value is not empty
-		if (valueString.empty())
+		if(valueString.empty())
 		{
 			_throwScriptError("no arithmetic value found!");
 			return;
@@ -197,10 +197,13 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		unsigned int valueIndexTwo = 0;
 		unsigned int vec3Index = 0;
 		auto vec3PartsTwo = _extractVec3PartFromString(valueString);
-		if (_hasThrownError) { return; }
+		if(_hasThrownError)
+		{
+			return;
+		}
 
 		// Remove vec3 part characters
-		if (vec3PartsTwo != Ivec3(0))
+		if(vec3PartsTwo != Ivec3(0))
 		{
 			valueString.pop_back();
 			valueString.pop_back();
@@ -208,7 +211,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		}
 
 		// Remove list accessing characters
-		if (isAccessingListTwo)
+		if(isAccessingListTwo)
 		{
 			auto openingBracketFound = find(valueString.begin(), valueString.end(), '[');
 			auto bracketIndex = static_cast<unsigned int>(distance(valueString.begin(), openingBracketFound));
@@ -217,10 +220,10 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 
 		// Retrieve value variable
 		ScriptVariable* variableTwo = nullptr;
-		if (vec3PartsTwo != Ivec3(0) || isAccessingListTwo)
+		if(vec3PartsTwo != Ivec3(0) || isAccessingListTwo)
 		{
 			// Check if variable exists
-			if (!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))
+			if(!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))
 			{
 				_throwScriptError("variable not existing!");
 				return;
@@ -231,9 +234,9 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		}
 
 		// Validate vec3 access
-		if (vec3PartsTwo != Ivec3(0))
+		if(vec3PartsTwo != Ivec3(0))
 		{
-			if (variableTwo->getType() == ScriptVariableType::MULTIPLE || variableTwo->getValue().getType() != ScriptValueType::VEC3)
+			if(variableTwo->getType() == ScriptVariableType::MULTIPLE || variableTwo->getValue().getType() != ScriptValueType::VEC3)
 			{
 				_throwScriptError("variable is not a vec3!");
 				return;
@@ -241,17 +244,17 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		}
 
 		// Validate list access
-		if (isAccessingListTwo)
+		if(isAccessingListTwo)
 		{
 			// Check if list index is valid
-			if (_validateListIndex(*variableTwo, listIndexTwo))
+			if(_validateListIndex(*variableTwo, listIndexTwo))
 			{
 				valueIndexTwo = listIndexTwo;
 
 				// Check if list item value is valid
-				if (!(variableTwo->getValue(valueIndexTwo).getType() == ScriptValueType::INTEGER) &&
-					!(variableTwo->getValue(valueIndexTwo).getType() == ScriptValueType::DECIMAL) &&
-					!(variableTwo->getValue(valueIndexTwo).getType() == ScriptValueType::VEC3))
+				if(!(variableTwo->getValue(valueIndexTwo).getType() == ScriptValueType::INTEGER) &&
+				   !(variableTwo->getValue(valueIndexTwo).getType() == ScriptValueType::DECIMAL) &&
+				   !(variableTwo->getValue(valueIndexTwo).getType() == ScriptValueType::VEC3))
 				{
 					_throwScriptError("arithmetic is only allowed with number values!");
 					return;
@@ -274,32 +277,32 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 			ScriptValue(_fe3d, ScriptValueType::EMPTY); // Empty
 
 		// Check if arithmetic value is valid
-		if (value.getType() == ScriptValueType::EMPTY)
+		if(value.getType() == ScriptValueType::EMPTY)
 		{
 			_throwScriptError("invalid arithmetic value!");
 			return;
 		}
 
 		// Execute arithmetic operation
-		if ((variableOne.getValue(valueIndexOne).getType() == ScriptValueType::INTEGER) && value.getType() == ScriptValueType::INTEGER) // INTEGER
+		if((variableOne.getValue(valueIndexOne).getType() == ScriptValueType::INTEGER) && value.getType() == ScriptValueType::INTEGER) // INTEGER
 		{
 			// Retrieve current variable value
 			int result = variableOne.getValue(valueIndexOne).getInteger();
 
 			// Determine arithmetic type
-			if (operatorString == ADDITION_KEYWORD)
+			if(operatorString == ADDITION_KEYWORD)
 			{
 				result += value.getInteger();
 			}
-			else if (operatorString == SUBTRACTION_KEYWORD)
+			else if(operatorString == SUBTRACTION_KEYWORD)
 			{
 				result -= value.getInteger();
 			}
-			else if (operatorString == MULTIPLICATION_KEYWORD)
+			else if(operatorString == MULTIPLICATION_KEYWORD)
 			{
 				result *= value.getInteger();
 			}
-			else if (operatorString == DIVISION_KEYWORD)
+			else if(operatorString == DIVISION_KEYWORD)
 			{
 				result /= value.getInteger();
 			}
@@ -310,25 +313,25 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 			// Set resulting value
 			variableOne.getValue(valueIndexOne).setInteger(result);
 		}
-		else if ((variableOne.getValue(valueIndexOne).getType() == ScriptValueType::DECIMAL) && value.getType() == ScriptValueType::DECIMAL) // DECIMAL
+		else if((variableOne.getValue(valueIndexOne).getType() == ScriptValueType::DECIMAL) && value.getType() == ScriptValueType::DECIMAL) // DECIMAL
 		{
 			// Retrieve current variable value
 			float result = variableOne.getValue(valueIndexOne).getDecimal();
 
 			// Determine arithmetic type
-			if (operatorString == ADDITION_KEYWORD)
+			if(operatorString == ADDITION_KEYWORD)
 			{
 				result += value.getDecimal();
 			}
-			else if (operatorString == SUBTRACTION_KEYWORD)
+			else if(operatorString == SUBTRACTION_KEYWORD)
 			{
 				result -= value.getDecimal();
 			}
-			else if (operatorString == MULTIPLICATION_KEYWORD)
+			else if(operatorString == MULTIPLICATION_KEYWORD)
 			{
 				result *= value.getDecimal();
 			}
-			else if (operatorString == DIVISION_KEYWORD)
+			else if(operatorString == DIVISION_KEYWORD)
 			{
 				result /= value.getDecimal();
 			}
@@ -339,40 +342,40 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 			// Set resulting value
 			variableOne.getValue(valueIndexOne).setDecimal(result);
 		}
-		else if ((variableOne.getValue(valueIndexOne).getType() == ScriptValueType::VEC3) && value.getType() == ScriptValueType::DECIMAL) // VEC3 - decimal
+		else if((variableOne.getValue(valueIndexOne).getType() == ScriptValueType::VEC3) && value.getType() == ScriptValueType::DECIMAL) // VEC3 - decimal
 		{
 			// Retrieve current variable value
 			Vec3 oldValue = variableOne.getValue(valueIndexOne).getVec3();
 			Vec3 result = variableOne.getValue(valueIndexOne).getVec3();
 
 			// Determine arithmetic type
-			if (operatorString == ADDITION_KEYWORD)
+			if(operatorString == ADDITION_KEYWORD)
 			{
 				result += value.getDecimal();
 			}
-			else if (operatorString == SUBTRACTION_KEYWORD)
+			else if(operatorString == SUBTRACTION_KEYWORD)
 			{
 				result -= value.getDecimal();
 			}
-			else if (operatorString == MULTIPLICATION_KEYWORD)
+			else if(operatorString == MULTIPLICATION_KEYWORD)
 			{
 				result *= value.getDecimal();
 			}
-			else if (operatorString == DIVISION_KEYWORD)
+			else if(operatorString == DIVISION_KEYWORD)
 			{
 				result /= value.getDecimal();
 			}
 
 			// Set resulting value
-			if (vec3PartsOne.x)
+			if(vec3PartsOne.x)
 			{
 				variableOne.getValue(valueIndexOne).setVec3(Vec3(result.x, oldValue.y, oldValue.z));
 			}
-			else if (vec3PartsOne.y)
+			else if(vec3PartsOne.y)
 			{
 				variableOne.getValue(valueIndexOne).setVec3(Vec3(oldValue.x, result.y, oldValue.z));
 			}
-			else if (vec3PartsOne.z)
+			else if(vec3PartsOne.z)
 			{
 				variableOne.getValue(valueIndexOne).setVec3(Vec3(oldValue.x, oldValue.y, result.z));
 			}
@@ -381,40 +384,40 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 				variableOne.getValue(valueIndexOne).setVec3(result);
 			}
 		}
-		else if ((variableOne.getValue(valueIndexOne).getType() == ScriptValueType::VEC3) && value.getType() == ScriptValueType::VEC3) // VEC3 - vec3
+		else if((variableOne.getValue(valueIndexOne).getType() == ScriptValueType::VEC3) && value.getType() == ScriptValueType::VEC3) // VEC3 - vec3
 		{
 			// Retrieve current variable value
 			Vec3 oldValue = variableOne.getValue(valueIndexOne).getVec3();
 			Vec3 result = variableOne.getValue(valueIndexOne).getVec3();
 
 			// Determine arithmetic type
-			if (operatorString == ADDITION_KEYWORD)
+			if(operatorString == ADDITION_KEYWORD)
 			{
 				result += value.getVec3();
 			}
-			else if (operatorString == SUBTRACTION_KEYWORD)
+			else if(operatorString == SUBTRACTION_KEYWORD)
 			{
 				result -= value.getVec3();
 			}
-			else if (operatorString == MULTIPLICATION_KEYWORD)
+			else if(operatorString == MULTIPLICATION_KEYWORD)
 			{
 				result *= value.getVec3();
 			}
-			else if (operatorString == DIVISION_KEYWORD)
+			else if(operatorString == DIVISION_KEYWORD)
 			{
 				result /= value.getVec3();
 			}
 
 			// Set resulting value
-			if (vec3PartsOne.x)
+			if(vec3PartsOne.x)
 			{
 				variableOne.getValue(valueIndexOne).setVec3(Vec3(result.x, oldValue.y, oldValue.z));
 			}
-			else if (vec3PartsOne.y)
+			else if(vec3PartsOne.y)
 			{
 				variableOne.getValue(valueIndexOne).setVec3(Vec3(oldValue.x, result.y, oldValue.z));
 			}
-			else if (vec3PartsOne.z)
+			else if(vec3PartsOne.z)
 			{
 				variableOne.getValue(valueIndexOne).setVec3(Vec3(oldValue.x, oldValue.y, result.z));
 			}

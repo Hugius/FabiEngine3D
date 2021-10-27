@@ -19,13 +19,13 @@ using std::launch;
 AudioLoader::~AudioLoader()
 {
 	// Delete chunks
-	for (const auto& element : _chunkCache)
+	for(const auto& element : _chunkCache)
 	{
 		Mix_FreeChunk(element.second);
 	}
 
 	// Delete music
-	for (const auto& element : _musicCache)
+	for(const auto& element : _musicCache)
 	{
 		Mix_FreeMusic(element.second);
 	}
@@ -42,10 +42,10 @@ void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
 
 	// Start all loading threads
-	for (const auto& filePath : uniqueFilePaths)
+	for(const auto& filePath : uniqueFilePaths)
 	{
 		// Check if chunk is not already cached
-		if (_chunkCache.find(filePath) == _chunkCache.end())
+		if(_chunkCache.find(filePath) == _chunkCache.end())
 		{
 			threads.push_back(async(launch::async, &AudioLoader::_loadWaveFile, this, filePath));
 			threadStatuses.push_back(false);
@@ -57,16 +57,16 @@ void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 	}
 
 	// Wait for all threads to finish
-	for (size_t i = 0; i < threads.size(); i++)
+	for(size_t i = 0; i < threads.size(); i++)
 	{
 		// Check if chunk is not processed yet
-		if (!threadStatuses[i])
+		if(!threadStatuses[i])
 		{
 			// Retrieve return value
 			auto loadedData = threads[i].get();
 
 			// Check if data loading failed
-			if (loadedData == nullptr)
+			if(loadedData == nullptr)
 			{
 				Logger::throwWarning("Cannot load audio file \"", uniqueFilePaths[i], "\"!");
 			}
@@ -76,7 +76,7 @@ void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 				auto loadedChunk = _loadChunk(uniqueFilePaths[i], (unsigned char*)loadedData);
 
 				// Check if chunk loading went well
-				if (loadedChunk != nullptr)
+				if(loadedChunk != nullptr)
 				{
 					// Logging
 					_throwLoadedMessage(uniqueFilePaths[i]);
@@ -100,10 +100,10 @@ void AudioLoader::cacheMusicMultiThreaded(const vector<string>& filePaths)
 	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
 
 	// Start all loading threads
-	for (const auto& filePath : uniqueFilePaths)
+	for(const auto& filePath : uniqueFilePaths)
 	{
 		// Check if music is not already cached
-		if (_musicCache.find(filePath) == _musicCache.end())
+		if(_musicCache.find(filePath) == _musicCache.end())
 		{
 			threads.push_back(async(launch::async, &AudioLoader::_loadMusic, this, filePath));
 			threadStatuses.push_back(false);
@@ -115,16 +115,16 @@ void AudioLoader::cacheMusicMultiThreaded(const vector<string>& filePaths)
 	}
 
 	// Wait for all threads to finish
-	for (size_t i = 0; i < threads.size(); i++)
+	for(size_t i = 0; i < threads.size(); i++)
 	{
 		// Check if music is not processed yet
-		if (!threadStatuses[i])
+		if(!threadStatuses[i])
 		{
 			// Retrieve return value
 			auto loadedMusic = threads[i].get();
 
 			// Check if music loading failed
-			if (loadedMusic == nullptr)
+			if(loadedMusic == nullptr)
 			{
 				Logger::throwWarning("Cannot load audio file \"", uniqueFilePaths[i], "\"!");
 			}
@@ -147,7 +147,7 @@ BEGIN:
 	auto cacheIterator = _chunkCache.find(filePath);
 
 	// Return from cache
-	if (cacheIterator != _chunkCache.end())
+	if(cacheIterator != _chunkCache.end())
 	{
 		return cacheIterator->second;
 	}
@@ -156,7 +156,7 @@ BEGIN:
 	auto data = _loadWaveFile(filePath);
 
 	// Check if data loading failed
-	if (data == nullptr)
+	if(data == nullptr)
 	{
 		Logger::throwWarning("Cannot load audio file \"", filePath, "\"!");
 		return nullptr;
@@ -167,7 +167,7 @@ BEGIN:
 		auto chunk = _loadChunk(filePath, (unsigned char*)data);
 
 		// Check if chunk loading failed
-		if (chunk == nullptr)
+		if(chunk == nullptr)
 		{
 			return nullptr;
 		}
@@ -192,7 +192,7 @@ BEGIN:
 	auto cacheIterator = _musicCache.find(filePath);
 
 	// Return from cache
-	if (cacheIterator != _musicCache.end())
+	if(cacheIterator != _musicCache.end())
 	{
 		return cacheIterator->second;
 	}
@@ -201,7 +201,7 @@ BEGIN:
 	auto music = _loadMusic(filePath);
 
 	// Check if music loading failed
-	if (music == nullptr)
+	if(music == nullptr)
 	{
 		return nullptr;
 	}
@@ -220,7 +220,7 @@ BEGIN:
 
 void AudioLoader::clearChunkCache(const string& filePath)
 {
-	if (_chunkCache.find(filePath) != _chunkCache.end())
+	if(_chunkCache.find(filePath) != _chunkCache.end())
 	{
 		_chunkCache.erase(filePath);
 	}
@@ -228,7 +228,7 @@ void AudioLoader::clearChunkCache(const string& filePath)
 
 void AudioLoader::clearMusicCache(const string& filePath)
 {
-	if (_musicCache.find(filePath) != _musicCache.end())
+	if(_musicCache.find(filePath) != _musicCache.end())
 	{
 		_musicCache.erase(filePath);
 	}
@@ -240,7 +240,7 @@ Mix_Chunk* AudioLoader::_loadChunk(const string& filePath, unsigned char* data)
 	Mix_Chunk* chunk = Mix_QuickLoad_WAV(data);
 
 	// Check if chunk loading failed
-	if (chunk == nullptr)
+	if(chunk == nullptr)
 	{
 		Logger::throwWarning("Cannot load audio file \"", filePath, "\"!");
 	}
@@ -257,7 +257,7 @@ Mix_Music* AudioLoader::_loadMusic(const string& filePath)
 	Mix_Music* music = Mix_LoadMUS((rootDir + filePath).c_str());
 
 	// Check if music loading failed
-	if (music == nullptr)
+	if(music == nullptr)
 	{
 		Logger::throwWarning("Cannot load audio file \"", filePath, "\"!");
 	}
@@ -282,7 +282,7 @@ char* AudioLoader::_loadWaveFile(const string& filePath)
 
 	// Open WAV file
 	ifstream file(fullFilePath.c_str(), ios::binary);
-	if (!file)
+	if(!file)
 	{
 		return nullptr;
 	}
@@ -294,7 +294,7 @@ char* AudioLoader::_loadWaveFile(const string& filePath)
 	auto dataSize = (DWORD)file.tellg();
 
 	// Allocate memory for the raw audio data
-	auto data = new char[dataSize];       
+	auto data = new char[dataSize];
 
 	// Reset file position
 	file.seekg(0, ios::beg);

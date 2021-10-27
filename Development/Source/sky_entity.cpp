@@ -65,7 +65,7 @@ const array<string, 6>& SkyEntity::getDiffuseMapPaths()
 	return _diffuseMapPaths;
 }
 
-const Matrix44 & SkyEntity::getRotationMatrix()
+const Matrix44& SkyEntity::getRotationMatrix()
 {
 	return _rotationMatrix;
 }

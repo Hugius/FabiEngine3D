@@ -18,7 +18,7 @@ public:
 	AudioPlayer();
 
 	void allocateChannels(unsigned int count);
-	void update(Camera& camera, vector<Sound>& soundList, vector<Music>& musicList);	
+	void update(Camera& camera, vector<Sound>& soundList, vector<Music>& musicList);
 	void setSoundsEnabled(bool value);
 	void setMusicEnabled(bool value);
 	void playSound(Sound& sound, int loops, int fadeMS, bool forcePlay = false);

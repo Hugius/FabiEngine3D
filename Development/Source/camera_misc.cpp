@@ -8,7 +8,7 @@ using std::clamp;
 using std::max;
 
 void Camera::moveFollowX(float value)
-{ 
+{
 	_position += (_rightVector * value);
 }
 
@@ -30,11 +30,11 @@ void Camera::moveFollowZY(float value)
 
 void Camera::enableFirstPersonView(float initialYaw, float initialPitch)
 {
-	if (_isThirdPersonViewEnabled)
+	if(_isThirdPersonViewEnabled)
 	{
 		Logger::throwError("Camera::enableFirstPersonView::1");
 	}
-	if (_isFirstPersonViewEnabled)
+	if(_isFirstPersonViewEnabled)
 	{
 		Logger::throwError("Camera::enableFirstPersonView::2");
 	}
@@ -47,7 +47,7 @@ void Camera::enableFirstPersonView(float initialYaw, float initialPitch)
 
 void Camera::disableFirstPersonView()
 {
-	if (!_isFirstPersonViewEnabled)
+	if(!_isFirstPersonViewEnabled)
 	{
 		Logger::throwError("Camera::disableFirstPersonView");
 	}
@@ -57,11 +57,11 @@ void Camera::disableFirstPersonView()
 
 void Camera::enableThirdPersonView(float initialYaw, float initialPitch)
 {
-	if (_isFirstPersonViewEnabled)
+	if(_isFirstPersonViewEnabled)
 	{
 		Logger::throwError("Camera::enableThirdPersonView::1");
 	}
-	if (_isThirdPersonViewEnabled)
+	if(_isThirdPersonViewEnabled)
 	{
 		Logger::throwError("Camera::enableThirdPersonView::2");
 	}
@@ -74,7 +74,7 @@ void Camera::enableThirdPersonView(float initialYaw, float initialPitch)
 
 void Camera::disableThirdPersonView()
 {
-	if (!_isThirdPersonViewEnabled)
+	if(!_isThirdPersonViewEnabled)
 	{
 		Logger::throwError("Camera::disableThirdPersonView");
 	}

@@ -26,11 +26,11 @@ void AudioEditor::_updateMiscellaneous()
 	bool isPaused = isExisting && _fe3d.sound_isPaused(_currentAudioID);
 
 	// Update audio status symbol
-	if (isPlaying)
+	if(isPlaying)
 	{
 		_fe3d.billboardEntity_setDiffuseMap("@@icon", "engine_assets\\textures\\play.png");
 	}
-	else if (isPaused)
+	else if(isPaused)
 	{
 		_fe3d.billboardEntity_setDiffuseMap("@@icon", "engine_assets\\textures\\pause.png");
 	}

@@ -50,13 +50,13 @@ void BillboardEntityColorRenderer::unbind()
 
 void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> entity)
 {
-	if (entity->isVisible())
+	if(entity->isVisible())
 	{
 		// Temporary values
 		const auto buffer = entity->getRenderBuffer();
 
 		// Enable wire frame
-		if (entity->isWireFramed())
+		if(entity->isWireFramed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
@@ -64,7 +64,7 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 		// Sprite animation
 		Vec2 uvMultiplier = Vec2(1.0f);
 		Vec2 uvAdder = Vec2(0.0f);
-		if (entity->isSpriteAnimationStarted())
+		if(entity->isSpriteAnimationStarted())
 		{
 			// Retrieve values
 			const auto totalColumns = entity->getTotalSpriteAnimationColumns();
@@ -97,12 +97,12 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 		_shader.uploadUniform("u_minTextureAlpha", MIN_TEXTURE_ALPHA);
 
 		// Bind textures
-		if (entity->hasDiffuseMap())
+		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
 		}
-		if (entity->hasEmissionMap())
+		if(entity->hasEmissionMap())
 		{
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap());
@@ -119,19 +119,19 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 		glBindVertexArray(0);
 
 		// Unbind textures
-		if (entity->hasDiffuseMap())
+		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if (entity->hasEmissionMap())
+		if(entity->hasEmissionMap())
 		{
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 
 		// Disable wire frame
-		if (entity->isWireFramed())
+		if(entity->isWireFramed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}

@@ -5,5 +5,5 @@ BaseRenderer::BaseRenderer(const string& vertexFile, const string& fragmentFile,
 	_shader(vertexFile, fragmentFile),
 	_renderBus(renderBus)
 {
-	
+
 }

@@ -46,7 +46,7 @@ private:
 	{
 		auto it = find(list.begin(), list.end(), element);
 
-		if (it == list.end()) // Not found
+		if(it == list.end()) // Not found
 		{
 			Logger::throwError("InputHandler::_getVectorIndex");
 		}

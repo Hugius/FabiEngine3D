@@ -9,35 +9,35 @@ void AnimationEditor::update()
 	_updateAnimationExecution();
 
 	// Editor updates
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateMainMenu();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateChoiceMenu();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateFrameMenu();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateAnimationCreating();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateAnimationChoosing();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateAnimationDeleting();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateCamera();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateMiscellaneous();
 	}
@@ -49,24 +49,24 @@ void AnimationEditor::_updateMainMenu()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "animationEditorMenuMain")
+	if(screen->getID() == "animationEditorMenuMain")
 	{
 		// Button management
-		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 		{
 			_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("animationCreate", "Create Animation", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			_isCreatingAnimation = true;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			_gui.getGlobalScreen()->createChoiceForm("animationList", "Edit Animation", Vec2(0.0f, 0.1f), getAllAnimationIDs());
 			_isChoosingAnimation = true;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			_gui.getGlobalScreen()->createChoiceForm("animationList", "Delete Animation", Vec2(0.0f, 0.1f), getAllAnimationIDs());
 			_isChoosingAnimation = true;
@@ -74,14 +74,14 @@ void AnimationEditor::_updateMainMenu()
 		}
 
 		// Update answer forms
-		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
+		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			saveAnimationsToFile();
 			unload();
 			return;
 		}
-		if (_gui.getGlobalScreen()->isAnswerFormDenied("back"))
+		if(_gui.getGlobalScreen()->isAnswerFormDenied("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			unload();
@@ -92,18 +92,18 @@ void AnimationEditor::_updateMainMenu()
 
 void AnimationEditor::_updateAnimationCreating()
 {
-	if (_isCreatingAnimation)
+	if(_isCreatingAnimation)
 	{
 		// Check if user filled in a new ID
 		string newAnimationID = "";
-		if (_gui.getGlobalScreen()->checkValueForm("animationCreate", newAnimationID, { _currentAnimationID }))
+		if(_gui.getGlobalScreen()->checkValueForm("animationCreate", newAnimationID, { _currentAnimationID }))
 		{
 			// Spaces not allowed
-			if (newAnimationID.find(' ') == string::npos)
+			if(newAnimationID.find(' ') == string::npos)
 			{
 				// Check if animation already exists
 				auto animationIDs = getAllAnimationIDs();
-				if (find(animationIDs.begin(), animationIDs.end(), newAnimationID) == animationIDs.end())
+				if(find(animationIDs.begin(), animationIDs.end(), newAnimationID) == animationIDs.end())
 				{
 					// Go to next screen
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
@@ -136,22 +136,22 @@ void AnimationEditor::_updateAnimationCreating()
 
 void AnimationEditor::_updateAnimationChoosing()
 {
-	if (_isChoosingAnimation)
+	if(_isChoosingAnimation)
 	{
 		// Get selected button ID
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("animationList");
 
 		// Check if a animation ID is hovered
-		if (!selectedButtonID.empty())
+		if(!selectedButtonID.empty())
 		{
 			// Check if LMB is pressed
-			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Select animation
 				_currentAnimationID = selectedButtonID;
 
 				// Go to next screen
-				if (!_isDeletingAnimation)
+				if(!_isDeletingAnimation)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
 					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), "Animation: " + selectedButtonID, 0.025f);
@@ -160,7 +160,7 @@ void AnimationEditor::_updateAnimationChoosing()
 				}
 
 				// Miscellaneous
-				if (_fe3d.modelEntity_isExisting(_getAnimation(selectedButtonID)->getPreviewModelID()))
+				if(_fe3d.modelEntity_isExisting(_getAnimation(selectedButtonID)->getPreviewModelID()))
 				{
 					_fe3d.modelEntity_setVisible(_getAnimation(selectedButtonID)->getPreviewModelID(), true);
 				}
@@ -168,7 +168,7 @@ void AnimationEditor::_updateAnimationChoosing()
 				_isChoosingAnimation = false;
 			}
 		}
-		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("animationList")) // Cancelled choosing
+		else if(_gui.getGlobalScreen()->isChoiceFormCancelled("animationList")) // Cancelled choosing
 		{
 			_isChoosingAnimation = false;
 			_isDeletingAnimation = false;
@@ -179,22 +179,22 @@ void AnimationEditor::_updateAnimationChoosing()
 
 void AnimationEditor::_updateAnimationDeleting()
 {
-	if (_isDeletingAnimation && _currentAnimationID != "")
+	if(_isDeletingAnimation && _currentAnimationID != "")
 	{
 		// Add answer form
-		if (!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
+		if(!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
 		{
 			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
 		}
 
 		// Update answer form
-		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
+		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 		{
 			// Go to main screen
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuMain");
 
 			// Delete animation
-			if (!_getAnimation(_currentAnimationID)->getPreviewModelID().empty())
+			if(!_getAnimation(_currentAnimationID)->getPreviewModelID().empty())
 			{
 				_fe3d.modelEntity_setVisible(_getAnimation(_currentAnimationID)->getPreviewModelID(), false);
 			}
@@ -204,7 +204,7 @@ void AnimationEditor::_updateAnimationDeleting()
 			// Miscellaneous
 			_isDeletingAnimation = false;
 		}
-		if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
+		if(_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 		{
 			_isDeletingAnimation = false;
 			_currentAnimationID = "";

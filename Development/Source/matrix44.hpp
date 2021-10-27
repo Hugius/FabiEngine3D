@@ -24,7 +24,7 @@ struct Matrix44 final
 		const float m20, const float m21, const float m22, const float m23,
 		const float m30, const float m31, const float m32, const float m33
 	);
-	
+
 	// Matrices
 	const Matrix44 operator+(const Matrix44& other) const;
 	const Matrix44 operator-(const Matrix44& other) const;

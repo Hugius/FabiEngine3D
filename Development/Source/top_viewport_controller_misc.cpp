@@ -11,7 +11,7 @@ using std::filesystem::remove_all;
 
 bool TopViewportController::isScriptStarted()
 {
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		return false;
 	}
@@ -23,7 +23,7 @@ bool TopViewportController::isScriptStarted()
 
 bool TopViewportController::isScriptRunning()
 {
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		return false;
 	}
@@ -52,36 +52,36 @@ void TopViewportController::_updateMiscellaneous()
 
 void TopViewportController::_updateProjectCreating()
 {
-	if (_isCreatingProject)
+	if(_isCreatingProject)
 	{
 		// Temporary values
 		string newProjectID;
 
 		// Check if user filled in a new ID
-		if (_gui.getGlobalScreen()->checkValueForm("newProjectID", newProjectID))
+		if(_gui.getGlobalScreen()->checkValueForm("newProjectID", newProjectID))
 		{
 			// Temporary values
 			const string projectDirectoryPath = (Tools::getRootDirectory() + "projects\\");
 			const string newProjectDirectoryPath = (projectDirectoryPath + newProjectID);
 
 			// Check if projects directory exists
-			if (!Tools::isDirectoryExisting(projectDirectoryPath))
+			if(!Tools::isDirectoryExisting(projectDirectoryPath))
 			{
 				Logger::throwWarning("Directory `projects\\` is missing!");
 				return;
 			}
 
-			if (newProjectID.find(' ') != string::npos) // ID contains spaces
+			if(newProjectID.find(' ') != string::npos) // ID contains spaces
 			{
 				Logger::throwWarning("New project name cannot contain any spaces!");
 				return;
 			}
-			else if (Tools::isDirectoryExisting(newProjectDirectoryPath)) // Project already exists
+			else if(Tools::isDirectoryExisting(newProjectDirectoryPath)) // Project already exists
 			{
 				Logger::throwWarning("Project \"" + newProjectID + "\"" + " already exists!");
 				return;
 			}
-			else if (std::any_of(newProjectID.begin(), newProjectID.end(), isupper)) // ID contains capitals
+			else if(std::any_of(newProjectID.begin(), newProjectID.end(), isupper)) // ID contains capitals
 			{
 				Logger::throwWarning("New project name cannot contain any capitals!");
 				return;
@@ -141,7 +141,7 @@ bool TopViewportController::_prepareProjectChoosing(const string& title)
 	const string projectDirectoryPath = (Tools::getRootDirectory() + "projects\\");
 
 	// Check if projects directory exists
-	if (!Tools::isDirectoryExisting(projectDirectoryPath))
+	if(!Tools::isDirectoryExisting(projectDirectoryPath))
 	{
 		Logger::throwWarning("Directory `projects\\` is missing!");
 		return false;
@@ -149,11 +149,11 @@ bool TopViewportController::_prepareProjectChoosing(const string& title)
 
 	// Get all project names
 	vector<string> projectIDs;
-	for (const auto& entry : directory_iterator(projectDirectoryPath))
+	for(const auto& entry : directory_iterator(projectDirectoryPath))
 	{
 		// Extract project ID
 		string projectPath = entry.path().string();
-		if (Tools::isDirectoryExisting(projectPath))
+		if(Tools::isDirectoryExisting(projectPath))
 		{
 			string projectID = projectPath;
 			projectID.erase(0, projectDirectoryPath.size());
@@ -169,17 +169,17 @@ bool TopViewportController::_prepareProjectChoosing(const string& title)
 
 void TopViewportController::_updateProjectLoading()
 {
-	if (_isLoadingProject)
+	if(_isLoadingProject)
 	{
 		// Temporary values
 		const string clickedButtonID = _gui.getGlobalScreen()->checkChoiceForm("projectList");
 		const string projectDirectoryPath = Tools::getRootDirectory() + "projects\\" + clickedButtonID;
 
 		// Check if user clicked a project ID
-		if (clickedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(clickedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			// Check if project is corrupted
-			if (isProjectCorrupted(projectDirectoryPath))
+			if(isProjectCorrupted(projectDirectoryPath))
 			{
 				Logger::throwWarning("Cannot load project: missing files/directories!");
 				return;
@@ -233,7 +233,7 @@ void TopViewportController::_updateProjectLoading()
 			_isLoadingProject = false;
 			_gui.getGlobalScreen()->deleteChoiceForm("projectList");
 		}
-		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("projectList"))
+		else if(_gui.getGlobalScreen()->isChoiceFormCancelled("projectList"))
 		{
 			_isLoadingProject = false;
 			_gui.getGlobalScreen()->deleteChoiceForm("projectList");
@@ -243,30 +243,30 @@ void TopViewportController::_updateProjectLoading()
 
 void TopViewportController::_updateProjectDeleting()
 {
-	if (_isDeletingProject)
+	if(_isDeletingProject)
 	{
 		// Temporary values
 		static string chosenButtonID = "";
 		string clickedButtonID = _gui.getGlobalScreen()->checkChoiceForm("projectList");
 
 		// Check if user clicked a project ID
-		if (clickedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(clickedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
 			chosenButtonID = clickedButtonID;
 			_gui.getGlobalScreen()->deleteChoiceForm("projectList");
 		}
-		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("projectList"))
+		else if(_gui.getGlobalScreen()->isChoiceFormCancelled("projectList"))
 		{
 			_isDeletingProject = false;
 			_gui.getGlobalScreen()->deleteChoiceForm("projectList");
 		}
 
 		// Update answer forms
-		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
+		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 		{
 			// Check if deleting currently opened project
-			if (chosenButtonID == _currentProjectID)
+			if(chosenButtonID == _currentProjectID)
 			{
 				// Unload current project
 				_currentProjectID = "";
@@ -275,7 +275,7 @@ void TopViewportController::_updateProjectDeleting()
 
 			// Check if project directory is still existing
 			const string directoryPath = (Tools::getRootDirectory() + "projects\\" + chosenButtonID);
-			if (!Tools::isDirectoryExisting(directoryPath))
+			if(!Tools::isDirectoryExisting(directoryPath))
 			{
 				Logger::throwWarning("Cannot delete project: missing directory!");
 				return;
@@ -291,7 +291,7 @@ void TopViewportController::_updateProjectDeleting()
 			_isDeletingProject = false;
 			chosenButtonID = "";
 		}
-		if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
+		if(_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 		{
 			_isDeletingProject = false;
 			chosenButtonID = "";
@@ -302,7 +302,7 @@ void TopViewportController::_updateProjectDeleting()
 void TopViewportController::_applyProjectChange()
 {
 	// Change window title
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		_fe3d.misc_setWindowTitle("FabiEngine3D");
 	}
@@ -315,61 +315,61 @@ void TopViewportController::_applyProjectChange()
 	_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 
 	// Unload sky editor
-	if (_skyEditor.isLoaded())
+	if(_skyEditor.isLoaded())
 	{
 		_skyEditor.unload();
 	}
 
 	// Unload terrain editor
-	if (_terrainEditor.isLoaded())
+	if(_terrainEditor.isLoaded())
 	{
 		_terrainEditor.unload();
 	}
 
 	// Unload water editor
-	if (_waterEditor.isLoaded())
+	if(_waterEditor.isLoaded())
 	{
 		_waterEditor.unload();
 	}
 
 	// Unload model editor
-	if (_modelEditor.isLoaded())
+	if(_modelEditor.isLoaded())
 	{
 		_modelEditor.unload();
 	}
 
 	// Unload animation editor
-	if (_animationEditor.isLoaded())
+	if(_animationEditor.isLoaded())
 	{
 		_animationEditor.unload();
 	}
 
 	// Unload billboard editor
-	if (_billboardEditor.isLoaded())
+	if(_billboardEditor.isLoaded())
 	{
 		_billboardEditor.unload();
 	}
 
 	// Unload audio editor
-	if (_audioEditor.isLoaded())
+	if(_audioEditor.isLoaded())
 	{
 		_audioEditor.unload();
 	}
 
 	// Unload scene editor
-	if (_sceneEditor.isLoaded())
+	if(_sceneEditor.isLoaded())
 	{
 		_sceneEditor.unload();
 	}
 
 	// Unload script editor
-	if (_scriptEditor.isLoaded())
+	if(_scriptEditor.isLoaded())
 	{
 		_scriptEditor.unload();
 	}
 
 	// Unload settings editor
-	if (_settingsEditor.isLoaded())
+	if(_settingsEditor.isLoaded())
 	{
 		_settingsEditor.unload();
 	}
@@ -390,26 +390,26 @@ void TopViewportController::_applyProjectChange()
 bool TopViewportController::isProjectCorrupted(const string& projectDirectoryPath)
 {
 	// Check if all default directories are still existing
-	if (!Tools::isDirectoryExisting(projectDirectoryPath) ||
-		!Tools::isDirectoryExisting(projectDirectoryPath + "\\data") ||
-		!Tools::isDirectoryExisting(projectDirectoryPath + "\\saves") ||
-		!Tools::isDirectoryExisting(projectDirectoryPath + "\\scenes") ||
-		!Tools::isDirectoryExisting(projectDirectoryPath + "\\scenes\\custom") ||
-		!Tools::isDirectoryExisting(projectDirectoryPath + "\\scenes\\editor") ||
-		!Tools::isDirectoryExisting(projectDirectoryPath + "\\scripts"))
+	if(!Tools::isDirectoryExisting(projectDirectoryPath) ||
+	   !Tools::isDirectoryExisting(projectDirectoryPath + "\\data") ||
+	   !Tools::isDirectoryExisting(projectDirectoryPath + "\\saves") ||
+	   !Tools::isDirectoryExisting(projectDirectoryPath + "\\scenes") ||
+	   !Tools::isDirectoryExisting(projectDirectoryPath + "\\scenes\\custom") ||
+	   !Tools::isDirectoryExisting(projectDirectoryPath + "\\scenes\\editor") ||
+	   !Tools::isDirectoryExisting(projectDirectoryPath + "\\scripts"))
 	{
 		return true;
 	}
 
 	// Check if all default files are still existing
-	if (!Tools::isFileExisting(projectDirectoryPath + "\\data\\animation.fe3d") ||
-		!Tools::isFileExisting(projectDirectoryPath + "\\data\\audio.fe3d") ||
-		!Tools::isFileExisting(projectDirectoryPath + "\\data\\billboard.fe3d") ||
-		!Tools::isFileExisting(projectDirectoryPath + "\\data\\model.fe3d") ||
-		!Tools::isFileExisting(projectDirectoryPath + "\\data\\sky.fe3d") ||
-		!Tools::isFileExisting(projectDirectoryPath + "\\data\\terrain.fe3d") ||
-		!Tools::isFileExisting(projectDirectoryPath + "\\data\\water.fe3d") ||
-		!Tools::isFileExisting(projectDirectoryPath + "\\settings.fe3d"))
+	if(!Tools::isFileExisting(projectDirectoryPath + "\\data\\animation.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "\\data\\audio.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "\\data\\billboard.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "\\data\\model.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "\\data\\sky.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "\\data\\terrain.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "\\data\\water.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "\\settings.fe3d"))
 	{
 		return true;
 	}

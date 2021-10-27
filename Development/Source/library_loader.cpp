@@ -23,7 +23,7 @@ LibraryLoader::LibraryLoader()
 
 	// Initialize SDL
 	Logger::throwInfo("Initializing SDL...");
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+	if(SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
 		Logger::throwFatalWarning("SDL could not be initialized: ", SDL_GetError());
 	}
@@ -31,35 +31,35 @@ LibraryLoader::LibraryLoader()
 	// Create SDL window
 	Logger::throwInfo("Initializing window...");
 	_windowPointer = SDL_CreateWindow("FabiEngine3D", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, 0,
-		SDL_WINDOW_HIDDEN | SDL_WINDOW_OPENGL);
+									  SDL_WINDOW_HIDDEN | SDL_WINDOW_OPENGL);
 	SDL_GL_CreateContext(_windowPointer);
 
 	// GLEW (OpenGL Extension Wrangler)
 	Logger::throwInfo("Initializing OpenGL...");
 	glewExperimental = GL_TRUE;
 	GLenum initGlew = glewInit();
-	if (initGlew != GLEW_OK)
+	if(initGlew != GLEW_OK)
 	{
 		Logger::throwFatalWarning("GLEW could not be initialized: ", reinterpret_cast<char const*>(glewGetErrorString(initGlew)));
 	}
 
 	// Initialize SDL_image
 	Logger::throwInfo("Initializing SDL_Image...");
-	if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
+	if(!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
 	{
 		Logger::throwFatalWarning("SDL_IMG could not be initialized: ", IMG_GetError());
 	}
 
 	// Initialize SDL_ttf
 	Logger::throwInfo("Initializing SDL_TTF...");
-	if (TTF_Init() == -1)
+	if(TTF_Init() == -1)
 	{
 		Logger::throwFatalWarning("SDL_TTF could not be initialized: ", TTF_GetError());
 	}
 
 	// Initialize SDL_mixer
 	Logger::throwInfo("Initializing SDL_Mixer...");
-	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
+	if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
 	{
 		Logger::throwFatalWarning("SDL_MIX could not be initialized: ", Mix_GetError());
 	}
@@ -67,7 +67,7 @@ LibraryLoader::LibraryLoader()
 	// Initialize Winsock2
 	WSADATA wsaData;
 	auto winsockResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
-	if (winsockResult != 0)
+	if(winsockResult != 0)
 	{
 		Logger::throwFatalWarning("Windows Sockets API could not be initialized: ", winsockResult);
 	}
@@ -107,7 +107,7 @@ const string LibraryLoader::getCpuModel() const
 
 	// Convert to string
 	string nameString;
-	for (unsigned int i = 0; i < 48; i++)
+	for(unsigned int i = 0; i < 48; i++)
 	{
 		nameString.push_back(model[i]);
 	}
@@ -115,10 +115,10 @@ const string LibraryLoader::getCpuModel() const
 	// Remove trailing spaces
 	string result;
 	reverse(nameString.begin(), nameString.end());
-	for (size_t i = 0; i < nameString.size(); i++)
+	for(size_t i = 0; i < nameString.size(); i++)
 	{
 		// Check if end of whitespace found
-		if (nameString[i] != 0)
+		if(nameString[i] != 0)
 		{
 			result = nameString.substr(i);
 			break;

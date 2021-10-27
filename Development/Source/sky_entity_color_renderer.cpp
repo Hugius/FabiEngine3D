@@ -11,7 +11,7 @@ void SkyEntityColorRenderer::bind()
 	_shader.uploadUniform("u_mixValue", _renderBus.getSkyMixValue());
 	_shader.uploadUniform("u_mainCubeMap", 0);
 	_shader.uploadUniform("u_mixCubeMap", 1);
-	
+
 	// Enable depth testing
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
@@ -28,10 +28,10 @@ void SkyEntityColorRenderer::unbind()
 
 void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, const shared_ptr<SkyEntity> mixEntity)
 {
-	if (mainEntity->isVisible())
+	if(mainEntity->isVisible())
 	{
 		// Enable wire frame
-		if (mainEntity->isWireFramed())
+		if(mainEntity->isWireFramed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
@@ -39,21 +39,21 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, cons
 		// Shader uniforms
 		_shader.uploadUniform("u_isWireFramed", (mainEntity->isWireFramed() || _renderBus.isWireFrameRenderingEnabled()));
 		_shader.uploadUniform("u_rotationMatrix", mainEntity->getRotationMatrix());
-		_shader.uploadUniform("u_mainLightness", mainEntity->getLightness());		
+		_shader.uploadUniform("u_mainLightness", mainEntity->getLightness());
 		_shader.uploadUniform("u_mainColor", mainEntity->getColor());
-		if (mixEntity != nullptr)
+		if(mixEntity != nullptr)
 		{
 			_shader.uploadUniform("u_mixLightness", mixEntity->getLightness());
 			_shader.uploadUniform("u_mixColor", mixEntity->getColor());
 		}
-		
+
 		// Bind textures
-		if (mainEntity->hasCubeMap())
+		if(mainEntity->hasCubeMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, mainEntity->getDiffuseMap());
 		}
-		if ((mixEntity != nullptr) && mixEntity->hasCubeMap())
+		if((mixEntity != nullptr) && mixEntity->hasCubeMap())
 		{
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, mixEntity->getDiffuseMap());
@@ -70,19 +70,19 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, cons
 		glBindVertexArray(0);
 
 		// Unbind textures
-		if (mainEntity->hasCubeMap())
+		if(mainEntity->hasCubeMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 		}
-		if ((mixEntity != nullptr) && mixEntity->hasCubeMap())
+		if((mixEntity != nullptr) && mixEntity->hasCubeMap())
 		{
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 		}
 
 		// Disable wire frame
-		if (mainEntity->isWireFramed())
+		if(mainEntity->isWireFramed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}

@@ -69,16 +69,16 @@ void TerrainEntityColorRenderer::processPointlightEntities(const unordered_map<s
 {
 	// Save visible lights
 	vector<shared_ptr<PointlightEntity>> visibleEntities;
-	for (const auto& [keyID, entity] : entities)
+	for(const auto& [keyID, entity] : entities)
 	{
-		if (entity->isVisible())
+		if(entity->isVisible())
 		{
 			visibleEntities.push_back(entity);
 		}
 	}
 
 	// Upload lights
-	for (unsigned int i = 0; i < visibleEntities.size(); i++)
+	for(unsigned int i = 0; i < visibleEntities.size(); i++)
 	{
 		_shader.uploadUniform("u_pointlightPositions[" + to_string(i) + "]", visibleEntities[i]->getPosition());
 		_shader.uploadUniform("u_pointlightColors[" + to_string(i) + "]", visibleEntities[i]->getColor());
@@ -95,16 +95,16 @@ void TerrainEntityColorRenderer::processSpotlightEntities(const unordered_map<st
 {
 	// Save visible lights
 	vector<shared_ptr<SpotlightEntity>> visibleEntities;
-	for (const auto& [keyID, entity] : entities)
+	for(const auto& [keyID, entity] : entities)
 	{
-		if (entity->isVisible())
+		if(entity->isVisible())
 		{
 			visibleEntities.push_back(entity);
 		}
 	}
 
 	// Upload lights
-	for (unsigned int i = 0; i < visibleEntities.size(); i++)
+	for(unsigned int i = 0; i < visibleEntities.size(); i++)
 	{
 		_shader.uploadUniform("u_spotlightPositions[" + to_string(i) + "]", visibleEntities[i]->getPosition());
 		_shader.uploadUniform("u_spotlightFrontVectors[" + to_string(i) + "]", visibleEntities[i]->getFrontVector());
@@ -120,10 +120,10 @@ void TerrainEntityColorRenderer::processSpotlightEntities(const unordered_map<st
 
 void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 {
-	if (entity->isVisible())
+	if(entity->isVisible())
 	{
 		// Enable wire frame
-		if (entity->isWireFramed())
+		if(entity->isWireFramed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
@@ -152,47 +152,47 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 		_shader.uploadUniform("u_hasNormalMapB", entity->hasNormalMapB());
 
 		// Bind textures
-		if (entity->hasDiffuseMap())
+		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
 		}
-		if (entity->hasNormalMap())
+		if(entity->hasNormalMap())
 		{
 			glActiveTexture(GL_TEXTURE2);
 			glBindTexture(GL_TEXTURE_2D, entity->getNormalMap());
 		}
-		if (entity->hasBlendMap())
+		if(entity->hasBlendMap())
 		{
 			glActiveTexture(GL_TEXTURE3);
 			glBindTexture(GL_TEXTURE_2D, entity->getBlendMap());
 		}
-		if (entity->hasDiffuseMapR())
+		if(entity->hasDiffuseMapR())
 		{
 			glActiveTexture(GL_TEXTURE4);
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMapR());
 		}
-		if (entity->hasDiffuseMapG())
+		if(entity->hasDiffuseMapG())
 		{
 			glActiveTexture(GL_TEXTURE5);
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMapG());
 		}
-		if (entity->hasDiffuseMapB())
+		if(entity->hasDiffuseMapB())
 		{
 			glActiveTexture(GL_TEXTURE6);
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMapB());
 		}
-		if (entity->hasNormalMapR())
+		if(entity->hasNormalMapR())
 		{
 			glActiveTexture(GL_TEXTURE7);
 			glBindTexture(GL_TEXTURE_2D, entity->getNormalMapR());
 		}
-		if (entity->hasNormalMapG())
+		if(entity->hasNormalMapG())
 		{
 			glActiveTexture(GL_TEXTURE8);
 			glBindTexture(GL_TEXTURE_2D, entity->getNormalMapG());
 		}
-		if (entity->hasNormalMapB())
+		if(entity->hasNormalMapB())
 		{
 			glActiveTexture(GL_TEXTURE9);
 			glBindTexture(GL_TEXTURE_2D, entity->getNormalMapB());
@@ -209,47 +209,47 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 		glBindVertexArray(0);
 
 		// Unbind textures
-		if (entity->hasDiffuseMap())
+		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if (entity->hasNormalMap())
+		if(entity->hasNormalMap())
 		{
 			glActiveTexture(GL_TEXTURE2);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if (entity->hasBlendMap())
+		if(entity->hasBlendMap())
 		{
 			glActiveTexture(GL_TEXTURE3);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if (entity->hasDiffuseMapR())
+		if(entity->hasDiffuseMapR())
 		{
 			glActiveTexture(GL_TEXTURE4);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if (entity->hasDiffuseMapG())
+		if(entity->hasDiffuseMapG())
 		{
 			glActiveTexture(GL_TEXTURE5);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if (entity->hasDiffuseMapB())
+		if(entity->hasDiffuseMapB())
 		{
 			glActiveTexture(GL_TEXTURE6);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if (entity->hasNormalMapR())
+		if(entity->hasNormalMapR())
 		{
 			glActiveTexture(GL_TEXTURE7);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if (entity->hasNormalMapG())
+		if(entity->hasNormalMapG())
 		{
 			glActiveTexture(GL_TEXTURE8);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if (entity->hasNormalMapB())
+		if(entity->hasNormalMapB())
 		{
 			glActiveTexture(GL_TEXTURE9);
 			glBindTexture(GL_TEXTURE_2D, 0);
@@ -259,7 +259,7 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 		glDisable(GL_CULL_FACE);
 
 		// Disable wire frame
-		if (entity->isWireFramed())
+		if(entity->isWireFramed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}

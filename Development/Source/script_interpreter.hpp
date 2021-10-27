@@ -18,8 +18,8 @@ class ScriptInterpreter final
 {
 public:
 	ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SkyEditor& skyEditor, TerrainEditor& terrainEditor,
-		WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, 
-		BillboardEditor& billboardEditor, AudioEditor& audioEditor, SceneEditor& sceneEditor);
+					  WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor,
+					  BillboardEditor& billboardEditor, AudioEditor& audioEditor, SceneEditor& sceneEditor);
 
 	// Voids
 	void setCurrentProjectID(const string& projectID);

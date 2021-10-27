@@ -4,7 +4,7 @@
 
 void ModelEditor::_tryPartChoosing(const string& nextActiveScreenID)
 {
-	if (_fe3d.modelEntity_isMultiParted(_currentModelID)) // Multiple parts
+	if(_fe3d.modelEntity_isMultiParted(_currentModelID)) // Multiple parts
 	{
 		auto IDs = _fe3d.modelEntity_getPartIDs(_currentModelID);
 		sort(IDs.begin(), IDs.end());

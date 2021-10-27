@@ -14,7 +14,7 @@ void ModelEntity::createPart(const string& ID)
 void ModelEntity::updateTransformation()
 {
 	// Base position target
-	if (_basePosition != _basePositionTarget)
+	if(_basePosition != _basePositionTarget)
 	{
 		auto speedMultiplier = Math::normalizeVector(_basePositionTarget - _basePosition);
 		_basePosition += (speedMultiplier * _basePositionTargetSpeed);
@@ -22,7 +22,7 @@ void ModelEntity::updateTransformation()
 	}
 
 	// Base rotation target
-	if (_baseRotation != _baseRotationTarget)
+	if(_baseRotation != _baseRotationTarget)
 	{
 		auto difference = Math::calculateVectorDifference(_baseRotation, _baseRotationTarget);
 		Vec3 multiplier = Vec3(
@@ -37,7 +37,7 @@ void ModelEntity::updateTransformation()
 	}
 
 	// Base size target
-	if (_baseSize != _baseSizeTarget)
+	if(_baseSize != _baseSizeTarget)
 	{
 		auto speedMultiplier = Math::normalizeVector(_baseSizeTarget - _baseSize);
 		_baseSize += (speedMultiplier * _baseSizeTargetSpeed);
@@ -45,10 +45,10 @@ void ModelEntity::updateTransformation()
 	}
 
 	// Iterate through parts
-	for (auto& part : _parts)
+	for(auto& part : _parts)
 	{
 		// Part position target
-		if (part.position != part.positionTarget)
+		if(part.position != part.positionTarget)
 		{
 			auto speedMultiplier = Math::normalizeVector(part.positionTarget - part.position);
 			part.position += (speedMultiplier * part.positionTargetSpeed);
@@ -56,7 +56,7 @@ void ModelEntity::updateTransformation()
 		}
 
 		// Part rotation target
-		if (part.rotation != part.rotationTarget)
+		if(part.rotation != part.rotationTarget)
 		{
 			auto difference = Math::calculateVectorDifference(part.rotation, part.rotationTarget);
 			Vec3 multiplier = Vec3(
@@ -73,7 +73,7 @@ void ModelEntity::updateTransformation()
 		}
 
 		// Part size target
-		if (part.size != part.sizeTarget)
+		if(part.size != part.sizeTarget)
 		{
 			auto speedMultiplier = Math::normalizeVector(part.sizeTarget - part.size);
 			part.size += (speedMultiplier * part.sizeTargetSpeed);
@@ -84,7 +84,7 @@ void ModelEntity::updateTransformation()
 
 void ModelEntity::updateTransformationMatrix()
 {
-	for (size_t i = 0; i < _parts.size(); i++)
+	for(size_t i = 0; i < _parts.size(); i++)
 	{
 		// Identity matrix
 		_parts[i].transformationMatrix = Matrix44(1.0f);
@@ -475,19 +475,19 @@ void ModelEntity::setEmissionIntensity(const string& partID, float value)
 void ModelEntity::_correctPositionTarget(Vec3& current, Vec3 target, float speed)
 {
 	// Correct X
-	if (fabsf(target.x - current.x) <= speed)
+	if(fabsf(target.x - current.x) <= speed)
 	{
 		current.x = target.x;
 	}
 
 	// Correct Y
-	if (fabsf(target.y - current.y) <= speed)
+	if(fabsf(target.y - current.y) <= speed)
 	{
 		current.y = target.y;
 	}
 
 	// Correct Z
-	if (fabsf(target.z - current.z) <= speed)
+	if(fabsf(target.z - current.z) <= speed)
 	{
 		current.z = target.z;
 	}
@@ -499,19 +499,19 @@ void ModelEntity::_correctRotationTarget(Vec3& current, Vec3 target, float speed
 	current = Vec3(Math::limitAngle(current.x), Math::limitAngle(current.y), Math::limitAngle(current.z));
 
 	// Correct X
-	if (Math::calculateAngleDifference(current.x, target.x) <= speed)
+	if(Math::calculateAngleDifference(current.x, target.x) <= speed)
 	{
 		current.x = target.x;
 	}
 
 	// Correct Y
-	if (Math::calculateAngleDifference(current.y, target.y) <= speed)
+	if(Math::calculateAngleDifference(current.y, target.y) <= speed)
 	{
 		current.y = target.y;
 	}
 
 	// Correct Z
-	if (Math::calculateAngleDifference(current.z, target.z) <= speed)
+	if(Math::calculateAngleDifference(current.z, target.z) <= speed)
 	{
 		current.z = target.z;
 	}
@@ -523,19 +523,19 @@ void ModelEntity::_correctSizeTarget(Vec3& current, Vec3 target, float speed)
 	current = Vec3(max(0.0f, current.x), max(0.0f, current.y), max(0.0f, current.z));
 
 	// Correct X
-	if (fabsf(target.x - current.x) <= speed)
+	if(fabsf(target.x - current.x) <= speed)
 	{
 		current.x = target.x;
 	}
 
 	// Correct Y
-	if (fabsf(target.y - current.y) <= speed)
+	if(fabsf(target.y - current.y) <= speed)
 	{
 		current.y = target.y;
 	}
 
 	// Correct Z
-	if (fabsf(target.z - current.z) <= speed)
+	if(fabsf(target.z - current.z) <= speed)
 	{
 		current.z = target.z;
 	}

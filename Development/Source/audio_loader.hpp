@@ -13,7 +13,7 @@ class AudioLoader final
 {
 public:
 	~AudioLoader();
-	
+
 	Mix_Chunk* getChunkDataPointer(const string& filePath);
 	Mix_Music* getMusicDataPointer(const string& filePath);
 

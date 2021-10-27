@@ -1,11 +1,11 @@
 #include "engine_gui_manager.hpp"
 
 EngineGuiManager::EngineGuiManager(FabiEngine3D& fe3d)
-	: 
+	:
 	_fe3d(fe3d)
 {
 	// Check if loading engine preview
-	if (!_fe3d.application_isExported())
+	if(!_fe3d.application_isExported())
 	{
 		// Global screen
 		_globalScreen = make_shared<EngineGuiGlobalScreen>(_fe3d);
@@ -21,11 +21,11 @@ EngineGuiManager::EngineGuiManager(FabiEngine3D& fe3d)
 void EngineGuiManager::update()
 {
 	// Update viewports
-	for (const auto& viewport : _viewports)
+	for(const auto& viewport : _viewports)
 	{
 		viewport->update(!_globalScreen->isFocused());
 	}
-	
+
 	// Update global screen
 	_globalScreen->update();
 }
@@ -37,9 +37,9 @@ shared_ptr<EngineGuiGlobalScreen> EngineGuiManager::getGlobalScreen()
 
 shared_ptr<EngineGuiViewport> EngineGuiManager::getViewport(const string& ID)
 {
-	for (const auto& viewport : _viewports)
+	for(const auto& viewport : _viewports)
 	{
-		if (ID == viewport->getID())
+		if(ID == viewport->getID())
 		{
 			return viewport;
 		}

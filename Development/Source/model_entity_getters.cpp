@@ -150,7 +150,7 @@ const vector<string> ModelEntity::getPartIDs()
 {
 	vector<string> result;
 
-	for (const auto& part : _parts)
+	for(const auto& part : _parts)
 	{
 		result.push_back(part.ID);
 	}
@@ -291,9 +291,9 @@ const float ModelEntity::getTextureRepeat(const string& partID)
 unsigned int ModelEntity::_getPartIndex(const string& partID)
 {
 	// Validate parts amount
-	if (partID.empty())
+	if(partID.empty())
 	{
-		if (_parts.size() > 1)
+		if(_parts.size() > 1)
 		{
 			Logger::throwError("ModelEntity::_getPartIndex::1");
 		}
@@ -304,9 +304,9 @@ unsigned int ModelEntity::_getPartIndex(const string& partID)
 	}
 
 	// Try to find index
-	for (size_t i = 0; i < _parts.size(); i++)
+	for(size_t i = 0; i < _parts.size(); i++)
 	{
-		if (partID == _parts[i].ID)
+		if(partID == _parts[i].ID)
 		{
 			return static_cast<unsigned int>(i);
 		}

@@ -36,10 +36,10 @@ void ModelEntityDepthRenderer::unbind()
 
 void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, float clippingY, bool isUnderWater)
 {
-	if (entity->isVisible())
+	if(entity->isVisible())
 	{
 		// Enable face culling
-		if (entity->isFaceCulled())
+		if(entity->isFaceCulled())
 		{
 			glEnable(GL_CULL_FACE);
 		}
@@ -54,7 +54,7 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, floa
 		_shader.uploadUniform("u_minTextureAlpha", MIN_TEXTURE_ALPHA);
 
 		// Iterate through parts
-		for (const auto& partID : entity->getPartIDs())
+		for(const auto& partID : entity->getPartIDs())
 		{
 			// Temporary values
 			const auto buffer = entity->getRenderBuffer(partID);
@@ -64,7 +64,7 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, floa
 			_shader.uploadUniform("u_isInstanced", buffer->isInstanced());
 
 			// Bind textures
-			if (entity->hasDiffuseMap(partID))
+			if(entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID));
@@ -74,7 +74,7 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, floa
 			glBindVertexArray(buffer->getVAO());
 
 			// Render
-			if (buffer->isInstanced())
+			if(buffer->isInstanced())
 			{
 				const auto offsetCount = static_cast<unsigned int>(buffer->getInstancedOffsets().size());
 				glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), offsetCount);
@@ -88,7 +88,7 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, floa
 			glBindVertexArray(0);
 
 			// Unbind textures
-			if (entity->hasDiffuseMap(partID))
+			if(entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, 0);
@@ -96,7 +96,7 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, floa
 		}
 
 		// Disable face culling
-		if (entity->isFaceCulled())
+		if(entity->isFaceCulled())
 		{
 			glDisable(GL_CULL_FACE);
 		}

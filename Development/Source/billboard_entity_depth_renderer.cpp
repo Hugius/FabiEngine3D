@@ -36,7 +36,7 @@ void BillboardEntityDepthRenderer::unbind()
 
 void BillboardEntityDepthRenderer::render(const shared_ptr<BillboardEntity> entity, float clippingY, bool isUnderWater)
 {
-	if (entity->isVisible())
+	if(entity->isVisible())
 	{
 		// Temporary values
 		const auto buffer = entity->getRenderBuffer();
@@ -44,7 +44,7 @@ void BillboardEntityDepthRenderer::render(const shared_ptr<BillboardEntity> enti
 		// Sprite animation
 		Vec2 uvMultiplier = Vec2(1.0f);
 		Vec2 uvAdder = Vec2(0.0f);
-		if (entity->isSpriteAnimationStarted())
+		if(entity->isSpriteAnimationStarted())
 		{
 			// Retrieve values
 			const auto totalColumns = entity->getTotalSpriteAnimationColumns();
@@ -70,7 +70,7 @@ void BillboardEntityDepthRenderer::render(const shared_ptr<BillboardEntity> enti
 		_shader.uploadUniform("u_minTextureAlpha", MIN_TEXTURE_ALPHA);
 
 		// Bind textures
-		if (entity->hasDiffuseMap())
+		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
@@ -86,7 +86,7 @@ void BillboardEntityDepthRenderer::render(const shared_ptr<BillboardEntity> enti
 		glBindVertexArray(0);
 
 		// Unbind textures
-		if (entity->hasDiffuseMap())
+		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, 0);

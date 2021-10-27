@@ -4,51 +4,51 @@
 
 void TerrainEditor::update()
 {
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateMainMenu();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateChoiceMenu();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateDiffuseMapMenu();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateBlendMapMenu();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateNormalMapMenu();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateLightingMenu();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateMiscellaneousMenu();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateTerrainCreating();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateTerrainChoosing();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateTerrainDeleting();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateCamera();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateMiscellaneous();
 	}
@@ -60,43 +60,49 @@ void TerrainEditor::_updateMainMenu()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "terrainEditorMenuMain")
+	if(screen->getID() == "terrainEditorMenuMain")
 	{
 		// Button management
-		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
 			_isCreatingTerrain = true;
 			_gui.getGlobalScreen()->createValueForm("terrainCreate", "Create Terrain", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto IDs = getLoadedTerrainIDs();
-			for (auto& ID : IDs) { ID = ID.substr(1); }
+			for(auto& ID : IDs)
+			{
+				ID = ID.substr(1);
+			}
 			_gui.getGlobalScreen()->createChoiceForm("terrainList", "Edit Terrain", Vec2(0.0f, 0.1f), IDs);
 			_isChoosingTerrain = true;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto IDs = getLoadedTerrainIDs();
-			for (auto& ID : IDs) { ID = ID.substr(1); }
+			for(auto& ID : IDs)
+			{
+				ID = ID.substr(1);
+			}
 			_gui.getGlobalScreen()->createChoiceForm("terrainList", "Delete Terrain", Vec2(0.0f, 0.1f), IDs);
 			_isChoosingTerrain = true;
 			_isDeletingTerrain = true;
 		}
 
 		// Update answer forms
-		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
+		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			saveTerrainEntitiesToFile();
 			unload();
 			return;
 		}
-		if (_gui.getGlobalScreen()->isAnswerFormDenied("back"))
+		if(_gui.getGlobalScreen()->isAnswerFormDenied("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			unload();
@@ -111,13 +117,13 @@ void TerrainEditor::_updateChoiceMenu()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "terrainEditorMenuChoice")
+	if(screen->getID() == "terrainEditorMenuChoice")
 	{
 		// Temporary values
 		float maxHeight = _fe3d.terrainEntity_getMaxHeight(_currentTerrainID);
 
 		// Button management
-		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMain");
 			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), false);
@@ -126,33 +132,33 @@ void TerrainEditor::_updateChoiceMenu()
 			_currentTerrainID = "";
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("maxHeight")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("maxHeight")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("maxHeight", "Max Height", maxHeight, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuDiffuseMap");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blendMap")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blendMap")->isHovered())
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuBlendMap");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuNormalMap");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lighting")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lighting")->isHovered())
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuLighting");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("miscellaneous")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("miscellaneous")->isHovered())
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMiscellaneous");
 		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("maxHeight", maxHeight))
+		if(_gui.getGlobalScreen()->checkValueForm("maxHeight", maxHeight))
 		{
 			_fe3d.terrainEntity_setMaxHeight(_currentTerrainID, maxHeight);
 		}
@@ -161,31 +167,31 @@ void TerrainEditor::_updateChoiceMenu()
 
 void TerrainEditor::_updateTerrainCreating()
 {
-	if (_isCreatingTerrain)
+	if(_isCreatingTerrain)
 	{
 		string newTerrainID;
 
 		// Check if user filled in a new ID
-		if (_gui.getGlobalScreen()->checkValueForm("terrainCreate", newTerrainID, {}))
+		if(_gui.getGlobalScreen()->checkValueForm("terrainCreate", newTerrainID, {}))
 		{
 			// @ sign not allowed
-			if (newTerrainID.find('@') == string::npos)
+			if(newTerrainID.find('@') == string::npos)
 			{
 				// Spaces not allowed
-				if (newTerrainID.find(' ') == string::npos)
+				if(newTerrainID.find(' ') == string::npos)
 				{
 					// Add @ sign to new ID
 					newTerrainID = ("@" + newTerrainID);
 
 					// If terrain not existing yet
-					if (find(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), newTerrainID) == _loadedTerrainIDs.end())
+					if(find(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), newTerrainID) == _loadedTerrainIDs.end())
 					{
 						// Get the chosen filename
 						const auto rootDirectory = Tools::getRootDirectory();
 						const string targetDirectory = string("game_assets\\textures\\height_maps\\");
 
 						// Validate target directory
-						if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
+						if(!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 						{
 							Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 							_isCreatingTerrain = false;
@@ -194,15 +200,15 @@ void TerrainEditor::_updateTerrainCreating()
 
 						// Validate chosen file
 						const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "BMP");
-						if (filePath.empty())
+						if(filePath.empty())
 						{
 							_isCreatingTerrain = false;
 							return;
 						}
 
 						// Validate directory of file
-						if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-							filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+						if(filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						   filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
 						{
 							Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
 							_isCreatingTerrain = false;
@@ -215,7 +221,7 @@ void TerrainEditor::_updateTerrainCreating()
 						_fe3d.terrainEntity_create(newTerrainID, newFilePath);
 
 						// Check if terrain creation went well
-						if (_fe3d.terrainEntity_isExisting(newTerrainID))
+						if(_fe3d.terrainEntity_isExisting(newTerrainID))
 						{
 							// Go to next screen
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
@@ -251,7 +257,7 @@ void TerrainEditor::_updateTerrainCreating()
 
 void TerrainEditor::_updateTerrainChoosing()
 {
-	if (_isChoosingTerrain)
+	if(_isChoosingTerrain)
 	{
 		// Get selected button ID
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("terrainList");
@@ -260,19 +266,19 @@ void TerrainEditor::_updateTerrainChoosing()
 		_fe3d.terrainEntity_select("");
 
 		// Check if a terrain ID is hovered
-		if (!selectedButtonID.empty())
+		if(!selectedButtonID.empty())
 		{
 			// Show terrain
 			_fe3d.terrainEntity_select("@" + selectedButtonID);
 
 			// Check if LMB is pressed
-			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Select terrain
 				_currentTerrainID = ("@" + selectedButtonID);
 
 				// Go to next screen
-				if (!_isDeletingTerrain)
+				if(!_isDeletingTerrain)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), "Terrain: " + _currentTerrainID.substr(1), 0.025f);
@@ -284,7 +290,7 @@ void TerrainEditor::_updateTerrainChoosing()
 				_isChoosingTerrain = false;
 			}
 		}
-		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("terrainList")) // Cancelled choosing
+		else if(_gui.getGlobalScreen()->isChoiceFormCancelled("terrainList")) // Cancelled choosing
 		{
 			_isChoosingTerrain = false;
 			_isDeletingTerrain = false;
@@ -295,16 +301,16 @@ void TerrainEditor::_updateTerrainChoosing()
 
 void TerrainEditor::_updateTerrainDeleting()
 {
-	if (_isDeletingTerrain && _currentTerrainID != "")
+	if(_isDeletingTerrain && _currentTerrainID != "")
 	{
 		// Add answer form
-		if (!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
+		if(!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
 		{
 			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
 		}
 
 		// Update answer form
-		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
+		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 		{
 			// Delete entity
 			_fe3d.terrainEntity_delete(_currentTerrainID);
@@ -314,7 +320,7 @@ void TerrainEditor::_updateTerrainDeleting()
 			_isDeletingTerrain = false;
 			_currentTerrainID = "";
 		}
-		if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
+		if(_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 		{
 			_fe3d.terrainEntity_select("");
 			_isDeletingTerrain = false;

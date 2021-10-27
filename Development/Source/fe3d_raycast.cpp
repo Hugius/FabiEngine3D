@@ -5,7 +5,7 @@ using std::numeric_limits;
 
 void FabiEngine3D::raycast_enableTerrainPointing(float distance, float precision)
 {
-	if (_core->_raycaster.isTerrainPointingEnabled())
+	if(_core->_raycaster.isTerrainPointingEnabled())
 	{
 		Logger::throwWarning("Tried to enable terrain raycast pointing: already enabled!");
 		return;
@@ -18,7 +18,7 @@ void FabiEngine3D::raycast_enableTerrainPointing(float distance, float precision
 
 void FabiEngine3D::raycast_disableTerrainPointing()
 {
-	if (!_core->_raycaster.isTerrainPointingEnabled())
+	if(!_core->_raycaster.isTerrainPointingEnabled())
 	{
 		Logger::throwWarning("Tried to disable terrain raycast pointing: not enabled!");
 		return;
@@ -33,14 +33,14 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 	float closestDistance = (numeric_limits<float>::max)();
 
 	// Iterate through AABB entities
-	for (const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
+	for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
 		// Check if parent entity does not have LOD
-		if (!(entity->hasParent() && entity->getParentType() == AabbParentType::MODEL_ENTITY &&
-			_core->_modelEntityManager.getEntity(entity->getParentID())->isLevelOfDetailed()))
+		if(!(entity->hasParent() && entity->getParentType() == AabbParentType::MODEL_ENTITY &&
+		   _core->_modelEntityManager.getEntity(entity->getParentID())->isLevelOfDetailed()))
 		{
 			// Check if AABB is responsive
-			if (entity->isRaycastResponsive() && entity->isVisible())
+			if(entity->isRaycastResponsive() && entity->isVisible())
 			{
 				// Compose AABB dimensions
 				auto position = entity->getPosition();
@@ -55,7 +55,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 				float distance = _core->_raycaster.calculateRayBoxIntersectionDistance(_core->_raycaster.getCursorRay(), Box(position, left, right, bottom, top, back, front));
 
 				// Check if closest to camera
-				if ((distance != -1.0f) && (distance < closestDistance))
+				if((distance != -1.0f) && (distance < closestDistance))
 				{
 					closestDistance = distance;
 					_hoveredAabbID = entity->getID();
@@ -66,7 +66,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 	}
 
 	// Update hovered AABB status
-	if (!_core->_aabbEntityManager.isExisting(_hoveredAabbID) || _hoveredAabbID.empty())
+	if(!_core->_aabbEntityManager.isExisting(_hoveredAabbID) || _hoveredAabbID.empty())
 	{
 		_hoveredAabbID = "";
 		_hoveredAabbDistance = -1.0f;
@@ -80,16 +80,16 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& ID, bool canBeOccluded)
 {
 	// Check whether the AABB can be raycasted if it's occluded by another AABB
-	if (canBeOccluded)
+	if(canBeOccluded)
 	{
 		// Check if raycasting needs to be updated
-		if (!_isRaycastUpdated)
+		if(!_isRaycastUpdated)
 		{
 			raycast_checkCursorInAny();
 		}
 
 		// Check if hovered AABB still exists
-		if (_core->_aabbEntityManager.isExisting(_hoveredAabbID))
+		if(_core->_aabbEntityManager.isExisting(_hoveredAabbID))
 		{
 			auto result = (ID == _hoveredAabbID);
 			return make_pair(result, _hoveredAabbDistance);
@@ -103,7 +103,7 @@ const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& 
 	{
 		auto entity = _core->_aabbEntityManager.getEntity(ID);
 
-		if (entity->isRaycastResponsive() && entity->isVisible())
+		if(entity->isRaycastResponsive() && entity->isVisible())
 		{
 			// Compose AABB dimensions
 			auto position = entity->getPosition();
@@ -127,24 +127,24 @@ const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& 
 const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(const string& ID, bool canBeOccluded)
 {
 	// Check whether the AABB can be raycasted if it's occluded by another AABB
-	if (canBeOccluded)
+	if(canBeOccluded)
 	{
 		// Check if raycasting needs to be updated
-		if (!_isRaycastUpdated)
+		if(!_isRaycastUpdated)
 		{
 			raycast_checkCursorInAny();
 		}
 
 		// Check if hovered AABB is empty or non-existing
-		if (_hoveredAabbID.empty() || !_core->_aabbEntityManager.isExisting(_hoveredAabbID))
+		if(_hoveredAabbID.empty() || !_core->_aabbEntityManager.isExisting(_hoveredAabbID))
 		{
 			return make_pair("", -1.0f);
 		}
 
 		// Check if ID matches (a part of) hovered AABB ID
-		if (_hoveredAabbID.size() >= ID.size())
+		if(_hoveredAabbID.size() >= ID.size())
 		{
-			if (_hoveredAabbID.substr(0, ID.size()) == ID)
+			if(_hoveredAabbID.substr(0, ID.size()) == ID)
 			{
 				return make_pair(_hoveredAabbID, _hoveredAabbDistance);
 			}
@@ -160,13 +160,13 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(cons
 		string closestBoxID = "";
 
 		// Iterate through AABB entities
-		for (const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
+		for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
 		{
-			if (entity->isRaycastResponsive() && entity->isVisible())
+			if(entity->isRaycastResponsive() && entity->isVisible())
 			{
-				if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
+				if(entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 				{
-					if (entity->getID().substr(0, ID.size()) == ID) // If entity matches ID
+					if(entity->getID().substr(0, ID.size()) == ID) // If entity matches ID
 					{
 						// Compose AABB dimensions
 						auto position = entity->getPosition();
@@ -181,7 +181,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(cons
 						float distance = _core->_raycaster.calculateRayBoxIntersectionDistance(_core->_raycaster.getCursorRay(), Box(position, left, right, bottom, top, back, front));
 
 						// Check if closest to camera
-						if ((distance != -1.0f) && (distance < closestDistance))
+						if((distance != -1.0f) && (distance < closestDistance))
 						{
 							closestDistance = distance;
 							closestBoxID = entity->getID();
@@ -192,7 +192,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(cons
 		}
 
 		// Return
-		if (closestBoxID.empty())
+		if(closestBoxID.empty())
 		{
 			return make_pair("", -1.0f);
 		}

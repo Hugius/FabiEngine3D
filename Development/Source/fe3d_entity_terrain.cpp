@@ -9,7 +9,7 @@ void FabiEngine3D::terrainEntity_create(const string& ID, const string& heightMa
 void FabiEngine3D::terrainEntity_deleteAll()
 {
 	// For every terrain entity
-	for (const auto& [keyID, entity] : _core->_terrainEntityManager.getEntities())
+	for(const auto& [keyID, entity] : _core->_terrainEntityManager.getEntities())
 	{
 		terrainEntity_delete(entity->getID());
 	}
@@ -21,7 +21,7 @@ void FabiEngine3D::terrainEntity_deleteAll()
 void FabiEngine3D::terrainEntity_delete(const string& ID)
 {
 	// Unselect terrain if selected
-	if (ID == terrainEntity_getSelectedID())
+	if(ID == terrainEntity_getSelectedID())
 	{
 		_core->_terrainEntityManager.selectTerrain("");
 	}
@@ -136,7 +136,7 @@ const float FabiEngine3D::terrainEntity_getSpecularIntensity(const string& ID)
 
 const string FabiEngine3D::terrainEntity_getSelectedID()
 {
-	if (_core->_terrainEntityManager.getSelectedTerrain() != nullptr)
+	if(_core->_terrainEntityManager.getSelectedTerrain() != nullptr)
 	{
 		return _core->_terrainEntityManager.getSelectedTerrain()->getID();
 	}
@@ -150,7 +150,7 @@ const vector<string> FabiEngine3D::terrainEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (const auto& [keyID, entity] : _core->_terrainEntityManager.getEntities())
+	for(const auto& [keyID, entity] : _core->_terrainEntityManager.getEntities())
 	{
 		IDs.push_back(entity->getID());
 	}
@@ -246,7 +246,7 @@ void FabiEngine3D::terrainEntity_setTextureRepeat(const string& ID, float repeat
 
 void FabiEngine3D::terrainEntity_setDiffuseMap(const string& ID, const string& texturePath)
 {
-	if (texturePath.empty())
+	if(texturePath.empty())
 	{
 		_core->_terrainEntityManager.getEntity(ID)->setDiffuseMap(0);
 		_core->_terrainEntityManager.getEntity(ID)->setDiffuseMapPath("");
@@ -260,7 +260,7 @@ void FabiEngine3D::terrainEntity_setDiffuseMap(const string& ID, const string& t
 
 void FabiEngine3D::terrainEntity_setNormalMap(const string& ID, const string& texturePath)
 {
-	if (texturePath.empty())
+	if(texturePath.empty())
 	{
 		_core->_terrainEntityManager.getEntity(ID)->setNormalMap(0);
 		_core->_terrainEntityManager.getEntity(ID)->setNormalMapPath("");
@@ -274,7 +274,7 @@ void FabiEngine3D::terrainEntity_setNormalMap(const string& ID, const string& te
 
 void FabiEngine3D::terrainEntity_setBlendMap(const string& ID, const string& texturePath)
 {
-	if (texturePath.empty())
+	if(texturePath.empty())
 	{
 		_core->_terrainEntityManager.getEntity(ID)->setBlendMap(0);
 		_core->_terrainEntityManager.getEntity(ID)->setBlendMapPath("");
@@ -288,7 +288,7 @@ void FabiEngine3D::terrainEntity_setBlendMap(const string& ID, const string& tex
 
 void FabiEngine3D::terrainEntity_setDiffuseMapR(const string& ID, const string& texturePath)
 {
-	if (texturePath.empty())
+	if(texturePath.empty())
 	{
 		_core->_terrainEntityManager.getEntity(ID)->setDiffuseMapR(0);
 		_core->_terrainEntityManager.getEntity(ID)->setDiffuseMapPathR("");
@@ -302,7 +302,7 @@ void FabiEngine3D::terrainEntity_setDiffuseMapR(const string& ID, const string& 
 
 void FabiEngine3D::terrainEntity_setDiffuseMapG(const string& ID, const string& texturePath)
 {
-	if (texturePath.empty())
+	if(texturePath.empty())
 	{
 		_core->_terrainEntityManager.getEntity(ID)->setDiffuseMapG(0);
 		_core->_terrainEntityManager.getEntity(ID)->setDiffuseMapPathG("");
@@ -316,7 +316,7 @@ void FabiEngine3D::terrainEntity_setDiffuseMapG(const string& ID, const string& 
 
 void FabiEngine3D::terrainEntity_setDiffuseMapB(const string& ID, const string& texturePath)
 {
-	if (texturePath.empty())
+	if(texturePath.empty())
 	{
 		_core->_terrainEntityManager.getEntity(ID)->setDiffuseMapB(0);
 		_core->_terrainEntityManager.getEntity(ID)->setDiffuseMapPathB("");
@@ -330,7 +330,7 @@ void FabiEngine3D::terrainEntity_setDiffuseMapB(const string& ID, const string& 
 
 void FabiEngine3D::terrainEntity_setNormalMapR(const string& ID, const string& texturePath)
 {
-	if (texturePath.empty())
+	if(texturePath.empty())
 	{
 		_core->_terrainEntityManager.getEntity(ID)->setNormalMapR(0);
 		_core->_terrainEntityManager.getEntity(ID)->setNormalMapPathR("");
@@ -344,7 +344,7 @@ void FabiEngine3D::terrainEntity_setNormalMapR(const string& ID, const string& t
 
 void FabiEngine3D::terrainEntity_setNormalMapG(const string& ID, const string& texturePath)
 {
-	if (texturePath.empty())
+	if(texturePath.empty())
 	{
 		_core->_terrainEntityManager.getEntity(ID)->setNormalMapG(0);
 		_core->_terrainEntityManager.getEntity(ID)->setNormalMapPathG("");
@@ -358,7 +358,7 @@ void FabiEngine3D::terrainEntity_setNormalMapG(const string& ID, const string& t
 
 void FabiEngine3D::terrainEntity_setNormalMapB(const string& ID, const string& texturePath)
 {
-	if (texturePath.empty())
+	if(texturePath.empty())
 	{
 		_core->_terrainEntityManager.getEntity(ID)->setNormalMapB(0);
 		_core->_terrainEntityManager.getEntity(ID)->setNormalMapPathB("");

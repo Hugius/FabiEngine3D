@@ -15,9 +15,9 @@ class TopViewportController final : public BaseViewportController
 {
 public:
 	TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui,
-		SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor,
-		AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor,
-		SceneEditor& sceneEditor, ScriptEditor& scriptEditor, SettingsEditor& settingsEditor);
+						  SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor,
+						  AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor,
+						  SceneEditor& sceneEditor, ScriptEditor& scriptEditor, SettingsEditor& settingsEditor);
 
 	// Voids
 	void initialize() override;

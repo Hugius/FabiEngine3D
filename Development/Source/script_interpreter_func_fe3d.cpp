@@ -8,10 +8,10 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 	auto closingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), ')');
 
 	// Check if function call has opening & closing parentheses
-	if (openingParanthesisFound != scriptLine.end() && closingParanthesisFound != scriptLine.end())
+	if(openingParanthesisFound != scriptLine.end() && closingParanthesisFound != scriptLine.end())
 	{
 		// Check if function call ends with a paranthesis
-		if (scriptLine.back() != ')')
+		if(scriptLine.back() != ')')
 		{
 			_throwScriptError("function call must end with a paranthesis!");
 		}
@@ -24,7 +24,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 			auto arguments = _extractValuesFromListString(argumentString);
 
 			// Check if argument extraction went well
-			if (!_hasThrownError)
+			if(!_hasThrownError)
 			{
 				// Temporary values
 				auto functionName = scriptLine.substr(0, parenthesisIndex);
@@ -80,7 +80,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 				isExecuted = (isExecuted || _executeFe3dMiscGetterFunction(functionName, arguments, returnValues));
 
 				// Check if function call exists
-				if (isExecuted)
+				if(isExecuted)
 				{
 					_engineFunctionCallCount++;
 				}

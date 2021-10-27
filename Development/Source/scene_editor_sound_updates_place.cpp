@@ -4,9 +4,9 @@
 void SceneEditor::_updateSoundPlacing()
 {
 	// Only if user is in placement mode
-	if (!_currentPreviewSoundID.empty())
+	if(!_currentPreviewSoundID.empty())
 	{
-		if (_fe3d.terrainEntity_getSelectedID().empty()) // Placing without terrain
+		if(_fe3d.terrainEntity_getSelectedID().empty()) // Placing without terrain
 		{
 			// Retrieve current position
 			auto newPosition = _fe3d.sound_getPosition(_currentPreviewSoundID);
@@ -20,14 +20,14 @@ void SceneEditor::_updateSoundPlacing()
 			_fe3d.sound_setPosition(_currentPreviewSoundID, newPosition);
 
 			// Check if sound must be placed
-			if (_gui.getGlobalScreen()->isValueFormConfirmed())
+			if(_gui.getGlobalScreen()->isValueFormConfirmed())
 			{
 				// Adding a number to make it unique
 			BEGIN1:
 				const string newID = (_currentPreviewSoundID.substr(1) + "_" + to_string(Math::getRandomInteger(0, INT_MAX)));
 
 				// Check if sound already exists
-				if (_fe3d.sound_isExisting(newID))
+				if(_fe3d.sound_isExisting(newID))
 				{
 					goto BEGIN1;
 				}
@@ -54,7 +54,7 @@ void SceneEditor::_updateSoundPlacing()
 			}
 
 			// Check if placement mode must be disabled
-			if (_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
+			if(_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
 			{
 				// Hide preview speaker
 				_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
@@ -70,16 +70,16 @@ void SceneEditor::_updateSoundPlacing()
 		else // Placing on terrain
 		{
 			// Check if allowed by GUI
-			if (_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// Check if allowed by mouse
-				if (!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Check if a terrain is loaded
-					if (_fe3d.raycast_isPointOnTerrainValid())
+					if(_fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Play preview sound
-						if (!_fe3d.sound_isStarted(_currentPreviewSoundID))
+						if(!_fe3d.sound_isStarted(_currentPreviewSoundID))
 						{
 							_fe3d.sound_play(_currentPreviewSoundID, -1, 0);
 						}
@@ -96,14 +96,14 @@ void SceneEditor::_updateSoundPlacing()
 						_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 
 						// Stop preview sound playback
-						if (_fe3d.sound_isStarted(_currentPreviewSoundID))
+						if(_fe3d.sound_isStarted(_currentPreviewSoundID))
 						{
 							_fe3d.sound_stop(_currentPreviewSoundID, 0);
 						}
 					}
 
 					// Check if model must be placed
-					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.raycast_isPointOnTerrainValid())
+					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Temporary values
 						const auto newPosition = _fe3d.sound_getPosition(_currentPreviewSoundID);
@@ -113,7 +113,7 @@ void SceneEditor::_updateSoundPlacing()
 						const string newID = (_currentPreviewSoundID.substr(1) + "_" + to_string(Math::getRandomInteger(0, INT_MAX)));
 
 						// Check if model already exists
-						if (_fe3d.sound_isExisting(newID))
+						if(_fe3d.sound_isExisting(newID))
 						{
 							goto BEGIN2;
 						}
@@ -141,7 +141,7 @@ void SceneEditor::_updateSoundPlacing()
 						_fe3d.sound_play(newID, -1, 0);
 						_loadedSoundIDs.insert(make_pair(newID, _currentPreviewSoundID));
 					}
-					else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
+					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
 					{
 						// Hide preview speaker
 						_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
@@ -160,7 +160,7 @@ void SceneEditor::_updateSoundPlacing()
 					_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 
 					// Stop preview sound playback
-					if (_fe3d.sound_isStarted(_currentPreviewSoundID))
+					if(_fe3d.sound_isStarted(_currentPreviewSoundID))
 					{
 						_fe3d.sound_stop(_currentPreviewSoundID, 0);
 					}
@@ -172,7 +172,7 @@ void SceneEditor::_updateSoundPlacing()
 				_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 
 				// Stop preview sound playback
-				if (_fe3d.sound_isStarted(_currentPreviewSoundID))
+				if(_fe3d.sound_isStarted(_currentPreviewSoundID))
 				{
 					_fe3d.sound_stop(_currentPreviewSoundID, 0);
 				}
@@ -180,7 +180,7 @@ void SceneEditor::_updateSoundPlacing()
 		}
 
 		// Update preview speaker position
-		if (!_currentPreviewSoundID.empty())
+		if(!_currentPreviewSoundID.empty())
 		{
 			auto soundPosition = _fe3d.sound_getPosition(_currentPreviewSoundID);
 			soundPosition -= SPEAKER_OFFSET;
@@ -189,9 +189,9 @@ void SceneEditor::_updateSoundPlacing()
 	}
 
 	// Update speaker positions
-	for (const auto& entityID : _fe3d.modelEntity_getAllIDs())
+	for(const auto& entityID : _fe3d.modelEntity_getAllIDs())
 	{
-		if (entityID.substr(0, string("@@speaker").size()) == "@@speaker")
+		if(entityID.substr(0, string("@@speaker").size()) == "@@speaker")
 		{
 			auto soundPosition = _fe3d.sound_getPosition(entityID.substr(string("@@speaker_").size()));
 			soundPosition -= SPEAKER_OFFSET;

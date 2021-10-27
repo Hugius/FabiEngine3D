@@ -31,7 +31,7 @@ void EngineGuiTextField::setVisible(bool isVisible)
 void EngineGuiTextField::changeTextContent(const string& content)
 {
 	// Check if text content changed
-	if (content != _fe3d.textEntity_getTextContent(_entityID))
+	if(content != _fe3d.textEntity_getTextContent(_entityID))
 	{
 		auto charWidth = (_originalSize.x / static_cast<float>(_fe3d.textEntity_getTextContent(_entityID).size()));
 		auto charHeight = _originalSize.y;

@@ -4,7 +4,7 @@ Music::Music(Mix_Music* dataPointer)
 	:
 	_dataPointer(dataPointer)
 {
-	
+
 }
 
 Mix_Music* Music::getDataPointer() const

@@ -8,7 +8,7 @@ bool CollisionDetector::checkX(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle,
 	const Vec3 halfAabbSize = (aabbSize / 2.0f);
 
 	// Check if box is inside AABB
-	if (_isInside(aabbPosition, halfAabbSize, boxMiddle, box))
+	if(_isInside(aabbPosition, halfAabbSize, boxMiddle, box))
 	{
 		// Calculate side differences
 		float leftDifference = fabsf((aabbPosition.x - halfAabbSize.x) - (boxMiddle.x + right));
@@ -19,7 +19,7 @@ bool CollisionDetector::checkX(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle,
 		bool rightCollision = (boxMiddleChange.x < 0.0f && rightDifference <= fabs(boxMiddleChange.x));
 
 		// Check for X collision
-		if (leftCollision || rightCollision)
+		if(leftCollision || rightCollision)
 		{
 			return true;
 		}
@@ -42,7 +42,7 @@ bool CollisionDetector::checkY(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle,
 	const Vec3 halfAabbSize = (aabbSize / 2.0f);
 
 	// Check if box is inside AABB
-	if (_isInside(aabbPosition, halfAabbSize, boxMiddle, box))
+	if(_isInside(aabbPosition, halfAabbSize, boxMiddle, box))
 	{
 		// Calculate side differences
 		float bottomDifference = fabsf((aabbPosition.y) - (boxMiddle.y + top));
@@ -53,7 +53,7 @@ bool CollisionDetector::checkY(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle,
 		bool topCollision = (boxMiddleChange.y < 0.0f && topDifference <= fabs(boxMiddleChange.y));
 
 		// Check for Y collision
-		if (bottomCollision || topCollision)
+		if(bottomCollision || topCollision)
 		{
 			return true;
 		}
@@ -76,7 +76,7 @@ bool CollisionDetector::checkZ(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle,
 	const Vec3 halfAabbSize = (aabbSize / 2.0f);
 
 	// Check if box is inside AABB
-	if (_isInside(aabbPosition, halfAabbSize, boxMiddle, box))
+	if(_isInside(aabbPosition, halfAabbSize, boxMiddle, box))
 	{
 		// Calculate side differences
 		float frontDifference = fabsf((aabbPosition.z + halfAabbSize.z) - (boxMiddle.z - front));
@@ -87,7 +87,7 @@ bool CollisionDetector::checkZ(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle,
 		bool backCollision = (boxMiddleChange.z > 0.0f && backDifference <= fabs(boxMiddleChange.z));
 
 		// Check for Z collision
-		if (frontCollision || backCollision)
+		if(frontCollision || backCollision)
 		{
 			return true;
 		}
@@ -116,23 +116,23 @@ bool CollisionDetector::_isInside(Vec3 aabbPosition, Vec3 aabbHalfSize, Vec3 box
 	bool zInsideBox = false;
 
 	// X collision detection
-	if (((boxMiddle.x + right) > (aabbPosition.x - aabbHalfSize.x) && (boxMiddle.x + right) < (aabbPosition.x + aabbHalfSize.x)) ||
-		((boxMiddle.x - left) < (aabbPosition.x + aabbHalfSize.x) && (boxMiddle.x - left) > (aabbPosition.x - aabbHalfSize.x)))
+	if(((boxMiddle.x + right) > (aabbPosition.x - aabbHalfSize.x) && (boxMiddle.x + right) < (aabbPosition.x + aabbHalfSize.x)) ||
+	   ((boxMiddle.x - left) < (aabbPosition.x + aabbHalfSize.x) && (boxMiddle.x - left) > (aabbPosition.x - aabbHalfSize.x)))
 	{
 		xInsideBox = true;
 	}
 
 	// Y collision detection
-	if (((boxMiddle.y + top) > (aabbPosition.y) && (boxMiddle.y + top) < (aabbPosition.y + (aabbHalfSize.y * 2.0f))) ||
-		((boxMiddle.y - bottom) < (aabbPosition.y + (aabbHalfSize.y * 2.0f)) && (boxMiddle.y - bottom) > (aabbPosition.y)))
+	if(((boxMiddle.y + top) > (aabbPosition.y) && (boxMiddle.y + top) < (aabbPosition.y + (aabbHalfSize.y * 2.0f))) ||
+	   ((boxMiddle.y - bottom) < (aabbPosition.y + (aabbHalfSize.y * 2.0f)) && (boxMiddle.y - bottom) > (aabbPosition.y)))
 	{
 		yInsideBox = true;
 
 	}
 
 	// Z collision detection
-	if (((boxMiddle.z + front) > (aabbPosition.z - aabbHalfSize.z) && (boxMiddle.z + front) < (aabbPosition.z + aabbHalfSize.z)) ||
-		((boxMiddle.z - back) < (aabbPosition.z + aabbHalfSize.z) && (boxMiddle.z - back) > (aabbPosition.z - aabbHalfSize.z)))
+	if(((boxMiddle.z + front) > (aabbPosition.z - aabbHalfSize.z) && (boxMiddle.z + front) < (aabbPosition.z + aabbHalfSize.z)) ||
+	   ((boxMiddle.z - back) < (aabbPosition.z + aabbHalfSize.z) && (boxMiddle.z - back) > (aabbPosition.z - aabbHalfSize.z)))
 	{
 		zInsideBox = true;
 	}
@@ -143,7 +143,7 @@ bool CollisionDetector::_isInside(Vec3 aabbPosition, Vec3 aabbHalfSize, Vec3 box
 	bool zTooSmall = ((boxMiddle.z + front) >= (aabbPosition.z + aabbHalfSize.z)) && ((boxMiddle.z - back) <= (aabbPosition.z - aabbHalfSize.z));
 
 	// Check if any collision happened
-	if ((xInsideBox || xTooSmall) && (yInsideBox || yTooSmall) && (zInsideBox || zTooSmall))
+	if((xInsideBox || xTooSmall) && (yInsideBox || yTooSmall) && (zInsideBox || zTooSmall))
 	{
 		return true;
 	}

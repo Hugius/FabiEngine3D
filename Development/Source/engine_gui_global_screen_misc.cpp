@@ -30,7 +30,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, unsigned int& value
 {
 	// Convert from unsigned integer to string
 	vector<string> forbiddenValueStrings;
-	for (auto forbiddenValue : forbiddenValues)
+	for(auto forbiddenValue : forbiddenValues)
 	{
 		forbiddenValueStrings.push_back(to_string(forbiddenValue));
 	}
@@ -46,7 +46,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, int& value, const v
 {
 	// Convert from integer to string
 	vector<string> forbiddenValueStrings;
-	for (auto forbiddenValue : forbiddenValues)
+	for(auto forbiddenValue : forbiddenValues)
 	{
 		forbiddenValueStrings.push_back(to_string(forbiddenValue));
 	}
@@ -62,7 +62,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, float& value, const
 {
 	// Convert from float to integer to string
 	vector<string> forbiddenValueStrings;
-	for (auto forbiddenValue : forbiddenValues)
+	for(auto forbiddenValue : forbiddenValues)
 	{
 		forbiddenValueStrings.push_back(to_string(static_cast<int>(forbiddenValue)));
 	}
@@ -78,7 +78,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, double& value, cons
 {
 	// Convert from double to integer to string
 	vector<string> forbiddenValueStrings;
-	for (auto forbiddenValue : forbiddenValues)
+	for(auto forbiddenValue : forbiddenValues)
 	{
 		forbiddenValueStrings.push_back(to_string(static_cast<int>(forbiddenValue)));
 	}
@@ -113,7 +113,7 @@ bool EngineGuiGlobalScreen::isValueFormExisting(const string& ID)
 void EngineGuiGlobalScreen::_createValueForm(const string& ID, string title, string valueString, Vec2 position, Vec2 size, Vec2 buttonsPosition, bool onlyNumbers, bool minusAllowed)
 {
 	// Validate existence
-	if (isValueFormExisting(ID))
+	if(isValueFormExisting(ID))
 	{
 		Logger::throwError("EngineGuiGlobalScreen::_createValueForm");
 	}
@@ -126,14 +126,14 @@ void EngineGuiGlobalScreen::_createValueForm(const string& ID, string title, str
 	getWriteField(ID)->changeTextContent(valueString);
 
 	// GUI focus & set first writeField active
-	if (!_isFocused)
+	if(!_isFocused)
 	{
 		getWriteField(ID)->setActive(true);
 		_isFocused = true;
 	}
 
 	// Add done & cancel buttons
-	if (!isButtonExisting("value_form_done"))
+	if(!isButtonExisting("value_form_done"))
 	{
 		createButton("value_form_done", buttonsPosition + Vec2(-0.15f, -0.2f), Vec2(0.12f, 0.1f), Vec3(0.0f, 0.1f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Done", Vec3(1.0f), Vec3(0.0f));
 		createButton("value_form_cancel", buttonsPosition + Vec2(0.15f, -0.2f), Vec2(0.18f, 0.1f), Vec3(0.1f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f));
@@ -144,30 +144,30 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 {
 	bool changed = false;
 
-	if (find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) != _valueFormIDs.end())
+	if(find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) != _valueFormIDs.end())
 	{
 		bool done = _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_done")->isHovered();
 		bool cancelled = _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_cancel")->isHovered();
 		bool entered = getWriteField(ID)->confirmedInput();
 
 		// Check if user confirmed or cancelled
-		if (done || entered || cancelled)
+		if(done || entered || cancelled)
 		{
-			if (done || entered) // Pressed done or ENTER
+			if(done || entered) // Pressed done or ENTER
 			{
 				// Retrieve content
 				auto content = getWriteField(ID)->getTextContent();
-				
+
 				// Check if writeField is not empty
-				if (content.empty())
+				if(content.empty())
 				{
 					return false;
 				}
 
 				// Check if written content is not forbidden
-				for (const auto& forbiddenValue : forbiddenValueStrings)
+				for(const auto& forbiddenValue : forbiddenValueStrings)
 				{
-					if (content == forbiddenValue)
+					if(content == forbiddenValue)
 					{
 						return false;
 					}
@@ -179,13 +179,13 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 			}
 
 			// Remove valueform(s)
-			if (_valueFormIDs.size() == 1)
+			if(_valueFormIDs.size() == 1)
 			{
 				_mustDeleteValueForms = true;
 			}
 			else
 			{
-				if (done || cancelled)
+				if(done || cancelled)
 				{
 					_mustDeleteValueForms = true;
 				}
@@ -199,7 +199,7 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 void EngineGuiGlobalScreen::createChoiceForm(const string& ID, string title, Vec2 position, const vector<string>& buttonTitles)
 {
 	// Validate existence
-	if (!_choiceFormID.empty())
+	if(!_choiceFormID.empty())
 	{
 		Logger::throwError("EngineGuiGlobalScreen::createChoiceForm::1");
 	}
@@ -211,10 +211,10 @@ void EngineGuiGlobalScreen::createChoiceForm(const string& ID, string title, Vec
 	createButton("choice_form_cancel", position + Vec2(0.0f, -0.45f), Vec2(0.15f, 0.1f), Vec3(0.1f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f));
 
 	// Add buttons to scrolling list
-	for (const auto& buttonTitle : buttonTitles)
+	for(const auto& buttonTitle : buttonTitles)
 	{
 		// Validate button title
-		if (buttonTitle.empty())
+		if(buttonTitle.empty())
 		{
 			Logger::throwError("EngineGuiGlobalScreen::createChoiceForm::2");
 		}
@@ -230,11 +230,11 @@ void EngineGuiGlobalScreen::createChoiceForm(const string& ID, string title, Vec
 
 const string EngineGuiGlobalScreen::checkChoiceForm(const string& ID)
 {
-	if (ID == _choiceFormID)
+	if(ID == _choiceFormID)
 	{
-		for (const auto& button : getScrollingList(ID)->getButtons()) // For every button
+		for(const auto& button : getScrollingList(ID)->getButtons()) // For every button
 		{
-			if (button->isHovered()) // If button is hovered
+			if(button->isHovered()) // If button is hovered
 			{
 				return button->getID();
 			}
@@ -246,7 +246,7 @@ const string EngineGuiGlobalScreen::checkChoiceForm(const string& ID)
 
 bool EngineGuiGlobalScreen::isChoiceFormCancelled(const string& ID)
 {
-	if (ID == _choiceFormID)
+	if(ID == _choiceFormID)
 	{
 		return (getButton("choice_form_cancel")->isHovered() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT));
 	}
@@ -259,7 +259,7 @@ bool EngineGuiGlobalScreen::isChoiceFormCancelled(const string& ID)
 void EngineGuiGlobalScreen::deleteChoiceForm(const string& ID)
 {
 	// Validate existence
-	if (ID != _choiceFormID)
+	if(ID != _choiceFormID)
 	{
 		Logger::throwError("EngineGuiGlobalScreen::deleteChoiceForm");
 	}
@@ -283,7 +283,7 @@ bool EngineGuiGlobalScreen::isChoiceFormExisting(const string& ID)
 void EngineGuiGlobalScreen::createAnswerForm(const string& ID, string title, Vec2 position)
 {
 	// Validate existence
-	if (!_answerFormID.empty())
+	if(!_answerFormID.empty())
 	{
 		Logger::throwError("EngineGuiGlobalScreen::createAnswerForm");
 	}
@@ -293,7 +293,7 @@ void EngineGuiGlobalScreen::createAnswerForm(const string& ID, string title, Vec
 	createTextField("question", position, Vec2(title.size() * 0.025f, 0.1f), title, Vec3(1.0f));
 	createButton("answer_form_yes", position + Vec2(-0.1f, -0.2f), Vec2(0.075f, 0.1f), Vec3(0.0f, 0.1f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Yes", Vec3(1.0f), Vec3(0.0f));
 	createButton("answer_form_no", position + Vec2(0.1f, -0.2f), Vec2(0.075f, 0.1f), Vec3(0.1f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "No", Vec3(1.0f), Vec3(0.0f));
-	
+
 	// Miscellaneous
 	_isFocused = true;
 	_answerFormID = ID;
@@ -301,9 +301,9 @@ void EngineGuiGlobalScreen::createAnswerForm(const string& ID, string title, Vec
 
 bool EngineGuiGlobalScreen::isAnswerFormConfirmed(const string& ID)
 {
-	if (ID == _answerFormID)
+	if(ID == _answerFormID)
 	{
-		if (getButton("answer_form_yes")->isHovered() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(getButton("answer_form_yes")->isHovered() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			_deleteAnswerForm(ID);
 			return true;
@@ -317,9 +317,9 @@ bool EngineGuiGlobalScreen::isAnswerFormConfirmed(const string& ID)
 
 bool EngineGuiGlobalScreen::isAnswerFormDenied(const string& ID)
 {
-	if (isButtonExisting("answer_form_no") && (ID == _answerFormID))
+	if(isButtonExisting("answer_form_no") && (ID == _answerFormID))
 	{
-		if (getButton("answer_form_no")->isHovered() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(getButton("answer_form_no")->isHovered() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			_deleteAnswerForm(ID);
 			return true;
@@ -334,7 +334,7 @@ bool EngineGuiGlobalScreen::isAnswerFormDenied(const string& ID)
 void EngineGuiGlobalScreen::_deleteAnswerForm(const string& ID)
 {
 	// Validate existence
-	if (ID != _answerFormID)
+	if(ID != _answerFormID)
 	{
 		Logger::throwError("EngineGuiGlobalScreen::_deleteAnswerForm");
 	}
@@ -357,10 +357,10 @@ bool EngineGuiGlobalScreen::isAnswerFormExisting(const string& ID)
 
 void EngineGuiGlobalScreen::_updateValueFormDeleting()
 {
-	if (_mustDeleteValueForms)
+	if(_mustDeleteValueForms)
 	{
 		// Remove valueforms
-		for (const auto& tempID : _valueFormIDs)
+		for(const auto& tempID : _valueFormIDs)
 		{
 			deleteRectangle(tempID);
 			deleteTextField(tempID);

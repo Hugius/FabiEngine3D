@@ -24,7 +24,8 @@ Vec4::Vec4(const float value)
 	this->w = value;
 }
 
-Vec4::Vec4(const float x, const float y, const float z, const float w) {
+Vec4::Vec4(const float x, const float y, const float z, const float w)
+{
 	this->x = x;
 	this->y = y;
 	this->z = z;

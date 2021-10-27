@@ -19,10 +19,10 @@ void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths)
 	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
 
 	// Start all loading threads
-	for (const auto& filePath : uniqueFilePaths)
+	for(const auto& filePath : uniqueFilePaths)
 	{
 		// Check if mesh is not already cached
-		if (_meshCache.find(filePath) == _meshCache.end())
+		if(_meshCache.find(filePath) == _meshCache.end())
 		{
 			threads.push_back(async(launch::async, &MeshLoader::_loadMesh, this, filePath));
 			threadStatuses.push_back(false);
@@ -34,16 +34,16 @@ void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths)
 	}
 
 	// Wait for all threads to finish
-	for (size_t i = 0; i < threadStatuses.size(); i++)
+	for(size_t i = 0; i < threadStatuses.size(); i++)
 	{
 		// Check if mesh is not processed yet
-		if (!threadStatuses[i])
+		if(!threadStatuses[i])
 		{
 			// Retrieve return value
 			auto returnValue = threads[i].get();
 
 			// Check mesh status
-			if (returnValue.second.empty())
+			if(returnValue.second.empty())
 			{
 				Logger::throwWarning(returnValue.first);
 			}
@@ -66,7 +66,7 @@ BEGIN:
 	auto cacheIterator = _meshCache.find(filePath);
 
 	// Return from cache
-	if (cacheIterator != _meshCache.end())
+	if(cacheIterator != _meshCache.end())
 	{
 		return &cacheIterator->second;
 	}
@@ -75,7 +75,7 @@ BEGIN:
 	auto returnValue = _loadMesh(filePath);
 
 	// Check mesh status
-	if (returnValue.second.empty())
+	if(returnValue.second.empty())
 	{
 		Logger::throwWarning(returnValue.first);
 		return nullptr;
@@ -95,7 +95,7 @@ BEGIN:
 
 void MeshLoader::clearMeshCache(const string& filePath)
 {
-	if (_meshCache.find(filePath) != _meshCache.end())
+	if(_meshCache.find(filePath) != _meshCache.end())
 	{
 		_meshCache.erase(filePath);
 	}

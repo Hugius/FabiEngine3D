@@ -6,13 +6,13 @@
 bool ScriptInterpreter::_isListValue(const string& valueString)
 {
 	// Check if value has enough characters
-	if (valueString.empty())
+	if(valueString.empty())
 	{
 		return false;
 	}
 
 	// Check if value is surrounded by braces
-	if (valueString.front() != '{' || valueString.back() != '}')
+	if(valueString.front() != '{' || valueString.back() != '}')
 	{
 		return false;
 	}
@@ -23,13 +23,13 @@ bool ScriptInterpreter::_isListValue(const string& valueString)
 bool ScriptInterpreter::_isVec3Value(const string& valueString)
 {
 	// Check if value has enough characters
-	if (valueString.empty())
+	if(valueString.empty())
 	{
 		return false;
 	}
 
 	// Check if value is surrounded by brackets
-	if (valueString.front() != '[' || valueString.back() != ']')
+	if(valueString.front() != '[' || valueString.back() != ']')
 	{
 		return false;
 	}
@@ -41,21 +41,21 @@ bool ScriptInterpreter::_isVec3Value(const string& valueString)
 	string xyz[3] = { "", "","" };
 	bool isExtracting = false;
 	unsigned int index = 0;
-	for (const auto& c : withoutBrackets)
+	for(const auto& c : withoutBrackets)
 	{
-		if (c == ' ' && isExtracting)
+		if(c == ' ' && isExtracting)
 		{
 			isExtracting = false;
 			index++;
 		}
 
-		if (c != ' ')
+		if(c != ' ')
 		{
 			xyz[index] += c;
 			isExtracting = true;
 		}
 
-		if (index == 3)
+		if(index == 3)
 		{
 			return false;
 		}
@@ -68,7 +68,7 @@ bool ScriptInterpreter::_isVec3Value(const string& valueString)
 bool ScriptInterpreter::_isStringValue(const string& valueString)
 {
 	// Check if value has characters at all
-	if (valueString.empty())
+	if(valueString.empty())
 	{
 		return false;
 	}
@@ -79,29 +79,29 @@ bool ScriptInterpreter::_isStringValue(const string& valueString)
 bool ScriptInterpreter::_isDecimalValue(const string& valueString)
 {
 	// Check if value has characters at all
-	if (valueString.empty())
+	if(valueString.empty())
 	{
 		return false;
 	}
 
 	// Check if value is perhaps negative
 	unsigned int startingIndex = 0;
-	if (valueString.front() == '-')
+	if(valueString.front() == '-')
 	{
 		startingIndex = 1;
 	}
 
 	// Validate every character
 	unsigned dots = 0;
-	for (size_t i = startingIndex; i < valueString.size(); i++)
+	for(size_t i = startingIndex; i < valueString.size(); i++)
 	{
-		if (!isdigit(valueString[i]) && valueString[i] != '.')
+		if(!isdigit(valueString[i]) && valueString[i] != '.')
 		{
 			return false;
 		}
 
 		// Count dots in value
-		if (valueString[i] == '.')
+		if(valueString[i] == '.')
 		{
 			dots++;
 		}
@@ -114,22 +114,22 @@ bool ScriptInterpreter::_isDecimalValue(const string& valueString)
 bool ScriptInterpreter::_isIntegerValue(const string& valueString)
 {
 	// Check if value has characters at all
-	if (valueString.empty())
+	if(valueString.empty())
 	{
 		return false;
 	}
 
 	// Check if value is perhaps negative
 	unsigned int startingIndex = 0;
-	if (valueString.front() == '-')
+	if(valueString.front() == '-')
 	{
 		startingIndex = 1;
 	}
 
 	// Check if every character is a digit
-	for (size_t i = startingIndex; i < valueString.size(); i++)
+	for(size_t i = startingIndex; i < valueString.size(); i++)
 	{
-		if (!isdigit(valueString[i]))
+		if(!isdigit(valueString[i]))
 		{
 			return false;
 		}
@@ -146,7 +146,7 @@ bool ScriptInterpreter::_isBooleanValue(const string& valueString)
 Vec3 ScriptInterpreter::_extractVec3FromString(const string& valueString)
 {
 	// Check if vec3 value
-	if (!_isVec3Value(valueString))
+	if(!_isVec3Value(valueString))
 	{
 		Logger::throwError("ScriptInterpreter::_extractVec3FromString");
 	}
@@ -158,15 +158,15 @@ Vec3 ScriptInterpreter::_extractVec3FromString(const string& valueString)
 	string xyz[3] = { "", "","" };
 	bool isExtracting = false;
 	unsigned int index = 0;
-	for (const auto& c : withoutBrackets)
+	for(const auto& c : withoutBrackets)
 	{
-		if (c == ' ' && isExtracting)
+		if(c == ' ' && isExtracting)
 		{
 			isExtracting = false;
 			index++;
 		}
 
-		if (c != ' ')
+		if(c != ' ')
 		{
 			xyz[index] += c;
 			isExtracting = true;
@@ -181,18 +181,18 @@ Ivec3 ScriptInterpreter::_extractVec3PartFromString(const string& valueString)
 	Ivec3 parts = Ivec3(0);
 	auto stringSize = valueString.size();
 
-	if (stringSize > 2 &&
-		(valueString.substr(stringSize - 2) == ".x" || valueString.substr(stringSize - 2) == ".r"))
+	if(stringSize > 2 &&
+	   (valueString.substr(stringSize - 2) == ".x" || valueString.substr(stringSize - 2) == ".r"))
 	{
 		parts.x = 1;
 	}
-	else if (stringSize > 2 &&
-		(valueString.substr(stringSize - 2) == ".y" || valueString.substr(stringSize - 2) == ".g"))
+	else if(stringSize > 2 &&
+			(valueString.substr(stringSize - 2) == ".y" || valueString.substr(stringSize - 2) == ".g"))
 	{
 		parts.y = 1;
 	}
-	else if (stringSize > 2 &&
-		(valueString.substr(stringSize - 2) == ".z" || valueString.substr(stringSize - 2) == ".b"))
+	else if(stringSize > 2 &&
+			(valueString.substr(stringSize - 2) == ".z" || valueString.substr(stringSize - 2) == ".b"))
 	{
 		parts.z = 1;
 	}
@@ -205,14 +205,14 @@ int ScriptInterpreter::_extractListIndexFromString(const string& valueString, bo
 	// Check if brackets are in string
 	auto openingBracketFound = find(valueString.begin(), valueString.end(), '[');
 	auto closingBracketFound = find(valueString.begin(), valueString.end(), ']');
-	if (openingBracketFound == valueString.end() || closingBracketFound == valueString.end())
+	if(openingBracketFound == valueString.end() || closingBracketFound == valueString.end())
 	{
 		return -1;
 	}
 
 	// Check if brackets are in the right place
 	auto openingBracketIndex = static_cast<unsigned int>(distance(valueString.begin(), openingBracketFound));
-	if (openingBracketIndex == 0)
+	if(openingBracketIndex == 0)
 	{
 		return -1;
 	}
@@ -220,18 +220,18 @@ int ScriptInterpreter::_extractListIndexFromString(const string& valueString, bo
 	// Check if index is a number
 	string indexString = valueString.substr(openingBracketIndex + 1);
 	indexString.pop_back();
-	if (_isIntegerValue(indexString))
+	if(_isIntegerValue(indexString))
 	{
 		isAccessingList = true;
 		return stoi(_limitIntegerString(indexString));
 	}
-	else if (_isLocalVariableExisting(indexString) || _isGlobalVariableExisting(indexString))
+	else if(_isLocalVariableExisting(indexString) || _isGlobalVariableExisting(indexString))
 	{
 		// Retrieve variable
 		auto& variable = (_isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString));
 
 		// Check if variable is an integer
-		if (variable.getType() == ScriptVariableType::MULTIPLE || variable.getValue().getType() != ScriptValueType::INTEGER)
+		if(variable.getType() == ScriptVariableType::MULTIPLE || variable.getValue().getType() != ScriptValueType::INTEGER)
 		{
 			_throwScriptError("list index must be an integer!");
 			return -1;
@@ -251,7 +251,7 @@ int ScriptInterpreter::_extractListIndexFromString(const string& valueString, bo
 
 bool ScriptInterpreter::_validateKeyInputString(const string& inputString)
 {
-	if (KEY_INPUT_STRING_MAP.find(inputString) == KEY_INPUT_STRING_MAP.end())
+	if(KEY_INPUT_STRING_MAP.find(inputString) == KEY_INPUT_STRING_MAP.end())
 	{
 		_throwScriptError("invalid keyboard key!");
 		return false;
@@ -262,7 +262,7 @@ bool ScriptInterpreter::_validateKeyInputString(const string& inputString)
 
 bool ScriptInterpreter::_validateMouseInputString(const string& inputString)
 {
-	if (MOUSE_INPUT_STRING_MAP.find(inputString) == MOUSE_INPUT_STRING_MAP.end())
+	if(MOUSE_INPUT_STRING_MAP.find(inputString) == MOUSE_INPUT_STRING_MAP.end())
 	{
 		_throwScriptError("invalid mouse button!");
 		return false;
@@ -274,10 +274,10 @@ bool ScriptInterpreter::_validateMouseInputString(const string& inputString)
 string ScriptInterpreter::_limitIntegerString(const string& valueString)
 {
 	// Check if negative value
-	if (valueString.front() == '-')
+	if(valueString.front() == '-')
 	{
 		// Cannot be less than -999 999 999
-		if (valueString.size() >= 11)
+		if(valueString.size() >= 11)
 		{
 			return "-1000000000";
 		}
@@ -285,7 +285,7 @@ string ScriptInterpreter::_limitIntegerString(const string& valueString)
 	else // Positive value
 	{
 		// Cannot be more than 999 999 999
-		if (valueString.size() >= 10)
+		if(valueString.size() >= 10)
 		{
 			return "1000000000";
 		}
@@ -301,10 +301,10 @@ string ScriptInterpreter::_limitDecimalString(const string& valueString)
 	string intString = valueString.substr(0, dotIndex);
 
 	// Check if negative value
-	if (valueString.front() == '-')
+	if(valueString.front() == '-')
 	{
 		// Cannot be less than -999 999 999
-		if (intString.size() >= 11)
+		if(intString.size() >= 11)
 		{
 			return "-1000000000.0";
 		}
@@ -312,7 +312,7 @@ string ScriptInterpreter::_limitDecimalString(const string& valueString)
 	else // Positive value
 	{
 		// Cannot be more than 999 999 999
-		if (intString.size() >= 10)
+		if(intString.size() >= 10)
 		{
 			return "1000000000.0";
 		}

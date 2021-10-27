@@ -4,7 +4,7 @@
 void WaterEditor::_updateCamera()
 {
 	// Check if third person view is enabled
-	if (_fe3d.camera_isThirdPersonViewEnabled())
+	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
 		// Update distance scrolling
 		auto scrollOffset = _fe3d.input_getMouseWheelY();
@@ -17,13 +17,13 @@ void WaterEditor::_updateCamera()
 	}
 
 	// Check if allowed by GUI
-	if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+	if(!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Check if RMB pressed
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
+		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
 		{
 			// Check third person view status
-			if (_fe3d.camera_isThirdPersonViewEnabled())
+			if(_fe3d.camera_isThirdPersonViewEnabled())
 			{
 				_fe3d.camera_disableThirdPersonView();
 			}
@@ -35,9 +35,9 @@ void WaterEditor::_updateCamera()
 	}
 
 	// Disable third person view if necessary
-	if (_fe3d.camera_isThirdPersonViewEnabled())
+	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
-		if (_gui.getGlobalScreen()->isFocused())
+		if(_gui.getGlobalScreen()->isFocused())
 		{
 			_fe3d.camera_disableThirdPersonView();
 		}
@@ -47,12 +47,12 @@ void WaterEditor::_updateCamera()
 void WaterEditor::_updateMiscellaneous()
 {
 	// Check if allowed by GUI
-	if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+	if(!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Update reference model visibility
-		if (_fe3d.input_isKeyPressed(InputType::KEY_R))
+		if(_fe3d.input_isKeyPressed(InputType::KEY_R))
 		{
-			if (_fe3d.modelEntity_isVisible("@@cube"))
+			if(_fe3d.modelEntity_isVisible("@@cube"))
 			{
 				_fe3d.modelEntity_setVisible("@@cube", false);
 			}
@@ -63,11 +63,11 @@ void WaterEditor::_updateMiscellaneous()
 		}
 
 		// Update wire frame rendering
-		if (_fe3d.waterEntity_isExisting(_currentWaterID))
+		if(_fe3d.waterEntity_isExisting(_currentWaterID))
 		{
-			if (_fe3d.input_isKeyPressed(InputType::KEY_F))
+			if(_fe3d.input_isKeyPressed(InputType::KEY_F))
 			{
-				if (_fe3d.waterEntity_isWireFramed(_currentWaterID))
+				if(_fe3d.waterEntity_isWireFramed(_currentWaterID))
 				{
 					_fe3d.waterEntity_setWireFramed(_currentWaterID, false);
 				}
@@ -79,9 +79,9 @@ void WaterEditor::_updateMiscellaneous()
 		}
 
 		// Update debug rendering
-		if (_fe3d.input_isKeyPressed(InputType::KEY_H))
+		if(_fe3d.input_isKeyPressed(InputType::KEY_H))
 		{
-			if (_fe3d.misc_isDebugRenderingEnabled())
+			if(_fe3d.misc_isDebugRenderingEnabled())
 			{
 				_fe3d.misc_disableDebugRendering();
 			}

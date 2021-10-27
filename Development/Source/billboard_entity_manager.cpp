@@ -27,7 +27,7 @@ shared_ptr<BillboardEntity> BillboardEntityManager::getEntity(const string& ID)
 {
 	auto result = _getBillboardEntity(ID);
 
-	if (result == nullptr)
+	if(result == nullptr)
 	{
 		Logger::throwError("BillboardEntityManager::getEntity");
 	}
@@ -48,19 +48,19 @@ void BillboardEntityManager::createEntity(const string& ID)
 
 void BillboardEntityManager::update()
 {
-	for (const auto& [keyID, entity] : _getBillboardEntities())
+	for(const auto& [keyID, entity] : _getBillboardEntities())
 	{
 		// Update transformation
 		entity->updateTransformation();
 
 		// Update billboard if visible
-		if (entity->isVisible())
+		if(entity->isVisible())
 		{
 			// 3D camera facing
 			auto facingX = entity->isFacingCameraX();
 			auto facingY = entity->isFacingCameraY();
 			Vec3 rotation = entity->getRotation();
-			if (facingX || facingY)
+			if(facingX || facingY)
 			{
 				// Calculate center of billboard
 				Vec3 position = (entity->getPosition() + Vec3(0.0f, (entity->getSize().y / 2.0f), 0.0f));
@@ -85,18 +85,18 @@ void BillboardEntityManager::update()
 			}
 
 			// Update sprite animations
-			if (entity->isSpriteAnimationStarted() && !entity->isSpriteAnimationPaused() &&
-				(entity->getSpriteAnimationLoops() != entity->getMaxSpriteAnimationLoops()))
+			if(entity->isSpriteAnimationStarted() && !entity->isSpriteAnimationPaused() &&
+			   (entity->getSpriteAnimationLoops() != entity->getMaxSpriteAnimationLoops()))
 			{
-				if (entity->getPassedSpriteAnimationFrames() >= entity->getMaxSpriteAnimationFramestep()) // Is allowed to update
+				if(entity->getPassedSpriteAnimationFrames() >= entity->getMaxSpriteAnimationFramestep()) // Is allowed to update
 				{
 					entity->resetPassedSpriteAnimationFrames(); // Reset counter
 
-					if (entity->getSpriteAnimationColumnIndex() >= entity->getTotalSpriteAnimationColumns() - 1) // Reached total columns
+					if(entity->getSpriteAnimationColumnIndex() >= entity->getTotalSpriteAnimationColumns() - 1) // Reached total columns
 					{
 						entity->setSpriteAnimationColumnIndex(0); // Reset column index
 
-						if (entity->getSpriteAnimationRowIndex() >= entity->getTotalSpriteAnimationRows() - 1) // Reached total rows
+						if(entity->getSpriteAnimationRowIndex() >= entity->getTotalSpriteAnimationRows() - 1) // Reached total rows
 						{
 							entity->increaseSpriteAnimationLoops();
 							entity->setSpriteAnimationRowIndex(0); // Reset row index (animation finished)

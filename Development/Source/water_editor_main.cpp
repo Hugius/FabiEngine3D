@@ -27,7 +27,7 @@ void WaterEditor::load()
 	_fe3d.camera_enableThirdPersonView(INITIAL_CAMERA_YAW, INITIAL_CAMERA_PITCH);
 	_fe3d.camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 	_fe3d.camera_setThirdPersonLookat(Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
-	
+
 	// Default graphics
 	_fe3d.gfx_enableAmbientLighting();
 	_fe3d.gfx_setAmbientLightingColor(Vec3(1.0f));
@@ -84,11 +84,11 @@ void WaterEditor::unload()
 	// Miscellaneous
 	_gui.getGlobalScreen()->deleteTextField("waterID");
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
-	if (_fe3d.camera_isThirdPersonViewEnabled())
+	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
 		_fe3d.camera_disableThirdPersonView();
 	}
-	if (_fe3d.misc_isDebugRenderingEnabled())
+	if(_fe3d.misc_isDebugRenderingEnabled())
 	{
 		_fe3d.misc_disableDebugRendering();
 	}
@@ -125,7 +125,7 @@ void WaterEditor::_loadGUI()
 	leftWindow->getScreen("waterEditorMenuTexturing")->createButton("clearMaps", Vec2(0.0f, positions[3]), Vec2(TW("Clear Maps"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Clear Maps", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("waterEditorMenuTexturing")->createButton("textureRepeat", Vec2(0.0f, positions[4]), Vec2(TW("Texture Repeat"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Texture Repeat", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("waterEditorMenuTexturing")->createButton("back", Vec2(0.0f, positions[5]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	
+
 	// Left-viewport: waterEditorMenuLighting
 	positions = VPC::calculateButtonPositions(7, CH);
 	leftWindow->createScreen("waterEditorMenuLighting");

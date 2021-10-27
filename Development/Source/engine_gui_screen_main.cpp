@@ -15,34 +15,34 @@ EngineGuiScreen::EngineGuiScreen(FabiEngine3D& fe3d, const string& parentID, con
 void EngineGuiScreen::update(bool hoverable)
 {
 	// Update scrolling lists
-	for (const auto& scrollingList : _scrollingLists)
+	for(const auto& scrollingList : _scrollingLists)
 	{
 		scrollingList->update(hoverable);
 		scrollingList->setVisible(_isActive);
 	}
 
 	// Update writeFields
-	for (const auto& writeField : _writeFields)
+	for(const auto& writeField : _writeFields)
 	{
 		writeField->update(hoverable);
 		writeField->setVisible(_isActive);
 	}
 
 	// Update buttons
-	for (const auto& button : _buttons)
+	for(const auto& button : _buttons)
 	{
 		button->update(hoverable);
 		button->setVisible(_isActive);
 	}
 
 	// Update rectangles
-	for (const auto& rectangle : _rectangles)
+	for(const auto& rectangle : _rectangles)
 	{
 		rectangle->setVisible(_isActive);
 	}
 
 	// Update textFields
-	for (const auto& textField : _textFields)
+	for(const auto& textField : _textFields)
 	{
 		textField->setVisible(_isActive);
 	}
@@ -93,9 +93,9 @@ void EngineGuiScreen::createTextField(const string& ID, Vec2 position, Vec2 size
 void EngineGuiScreen::deleteScrollingList(const string& ID)
 {
 	// Delete scrolling list
-	for (size_t i = 0; i < _scrollingLists.size(); i++)
+	for(size_t i = 0; i < _scrollingLists.size(); i++)
 	{
-		if (ID == _scrollingLists[i]->getID())
+		if(ID == _scrollingLists[i]->getID())
 		{
 			_scrollingLists.erase(_scrollingLists.begin() + i);
 			return;
@@ -109,9 +109,9 @@ void EngineGuiScreen::deleteScrollingList(const string& ID)
 void EngineGuiScreen::deleteWriteField(const string& ID)
 {
 	// Delete write field
-	for (size_t i = 0; i < _writeFields.size(); i++)
+	for(size_t i = 0; i < _writeFields.size(); i++)
 	{
-		if (ID == _writeFields[i]->getID())
+		if(ID == _writeFields[i]->getID())
 		{
 			_writeFields.erase(_writeFields.begin() + i);
 			return;
@@ -125,9 +125,9 @@ void EngineGuiScreen::deleteWriteField(const string& ID)
 void EngineGuiScreen::deleteButton(const string& ID)
 {
 	// Delete button
-	for (size_t i = 0; i < _buttons.size(); i++)
+	for(size_t i = 0; i < _buttons.size(); i++)
 	{
-		if (ID == _buttons[i]->getID())
+		if(ID == _buttons[i]->getID())
 		{
 			_buttons.erase(_buttons.begin() + i);
 			return;
@@ -141,9 +141,9 @@ void EngineGuiScreen::deleteButton(const string& ID)
 void EngineGuiScreen::deleteRectangle(const string& ID)
 {
 	// Delete rectangle
-	for (size_t i = 0; i < _rectangles.size(); i++)
+	for(size_t i = 0; i < _rectangles.size(); i++)
 	{
-		if (ID == _rectangles[i]->getID())
+		if(ID == _rectangles[i]->getID())
 		{
 			_rectangles.erase(_rectangles.begin() + i);
 			return;
@@ -157,9 +157,9 @@ void EngineGuiScreen::deleteRectangle(const string& ID)
 void EngineGuiScreen::deleteTextField(const string& ID)
 {
 	// Delete TextField
-	for (size_t i = 0; i < _textFields.size(); i++)
+	for(size_t i = 0; i < _textFields.size(); i++)
 	{
-		if (ID == _textFields[i]->getID())
+		if(ID == _textFields[i]->getID())
 		{
 			_textFields.erase(_textFields.begin() + i);
 			return;

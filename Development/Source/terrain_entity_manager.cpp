@@ -14,7 +14,7 @@ shared_ptr<TerrainEntity> TerrainEntityManager::getEntity(const string& ID)
 {
 	auto result = _getTerrainEntity(ID);
 
-	if (result == nullptr)
+	if(result == nullptr)
 	{
 		Logger::throwError("TerrainEntityManager::getEntity");
 	}
@@ -24,7 +24,7 @@ shared_ptr<TerrainEntity> TerrainEntityManager::getEntity(const string& ID)
 
 shared_ptr<TerrainEntity> TerrainEntityManager::getSelectedTerrain()
 {
-	if (_getTerrainEntities().empty() || _selectedID.empty())
+	if(_getTerrainEntities().empty() || _selectedID.empty())
 	{
 		return nullptr;
 	}
@@ -48,7 +48,7 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 	auto pixelValues = _textureLoader.getBitmap(heightMapPath);
 
 	// Check if height map loading failed
-	if (pixelValues == nullptr)
+	if(pixelValues == nullptr)
 	{
 		deleteEntity(ID);
 		return;
@@ -56,7 +56,7 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 
 	// Check if height map resolution is too high
 	auto heightMapSize = static_cast<unsigned int>(sqrt(static_cast<double>(pixelValues->size())));
-	if (heightMapSize > MAX_SIZE)
+	if(heightMapSize > MAX_SIZE)
 	{
 		Logger::throwWarning("Tried to create terrain with ID \"" + ID + "\": height map resolution too high!");
 		deleteEntity(ID);
@@ -77,7 +77,7 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 
 void TerrainEntityManager::selectTerrain(const string& ID)
 {
-	if (isExisting(ID) || ID.empty())
+	if(isExisting(ID) || ID.empty())
 	{
 		_selectedID = ID;
 	}
@@ -105,9 +105,9 @@ void TerrainEntityManager::loadMesh(const string& ID)
 	vector<Vec2> tempUvCoords;
 	vector<Vec3> tempNormals;
 
-	for (float x = -halfSize; x < halfSize; x++) // X direction
+	for(float x = -halfSize; x < halfSize; x++) // X direction
 	{
-		for (float z = -halfSize; z < halfSize; z++) // Z direction
+		for(float z = -halfSize; z < halfSize; z++) // Z direction
 		{
 			// Calculate vertex
 			float vertexX = x;
@@ -132,14 +132,14 @@ void TerrainEntityManager::loadMesh(const string& ID)
 			tempNormals.push_back(normal);
 		}
 	}
-	
+
 	// Compose vertices, UV coordinates, normals
 	vector<Vec3> vertices;
 	vector<Vec2> uvCoords;
 	vector<Vec3> normals;
-	for (unsigned int x = 0; x < uSize - 1; x++)
+	for(unsigned int x = 0; x < uSize - 1; x++)
 	{
-		for (unsigned int z = 0; z < uSize - 1; z++)
+		for(unsigned int z = 0; z < uSize - 1; z++)
 		{
 			// Indices
 			unsigned int topLeftIndex = (z * uSize) + x;
@@ -178,10 +178,10 @@ void TerrainEntityManager::loadMesh(const string& ID)
 			normals.push_back(tempNormals[topLeftIndex]);
 		}
 	}
-	
+
 	// Calculate tangents
 	vector<Vec3> tangents;
-	for (size_t i = 0; i < vertices.size(); i += 3)
+	for(size_t i = 0; i < vertices.size(); i += 3)
 	{
 		// Vertices of 1 triangle
 		Vec3 v0 = vertices[i + 0];
@@ -213,7 +213,7 @@ void TerrainEntityManager::loadMesh(const string& ID)
 
 	// Compose buffer data
 	vector<float> bufferData;
-	for (size_t i = 0; i < vertices.size(); i++)
+	for(size_t i = 0; i < vertices.size(); i++)
 	{
 		// Vertex coordinate
 		bufferData.push_back(vertices[i].x);
@@ -252,7 +252,7 @@ float TerrainEntityManager::getPixelHeight(const string& ID, float x, float z)
 bool TerrainEntityManager::isInside(const string& ID, float x, float z)
 {
 	// Return true if point is within terrain bounds
-	if (x > 0 && x < getEntity(ID)->getSize() && z > 0 && z < getEntity(ID)->getSize())
+	if(x > 0 && x < getEntity(ID)->getSize() && z > 0 && z < getEntity(ID)->getSize())
 	{
 		return true;
 	}
@@ -265,23 +265,23 @@ bool TerrainEntityManager::isInside(const string& ID, float x, float z)
 float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixelColors)
 {
 	// If reached end of terrain X
-	if (x == size)
+	if(x == size)
 	{
 		x--;
 	}
 
 	// If reached end of terrain Z
-	if (z == size)
+	if(z == size)
 	{
 		z--;
 	}
 
 	// Checking if coordinate inside bounds
-	if (x < 0 || x > size || z < 0 || z > size)
+	if(x < 0 || x > size || z < 0 || z > size)
 	{
 		return 0.0f;
 	}
-	
+
 	// Returning the corresponding height
 	int index = (static_cast<int>(x) * static_cast<int>(size)) + static_cast<int>(z);
 	return ((pixelColors[index]) / 255.0f) * maxHeight;

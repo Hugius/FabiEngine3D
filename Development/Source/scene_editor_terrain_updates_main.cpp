@@ -6,21 +6,21 @@ void SceneEditor::_updateTerrainMenu()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "sceneEditorMenuTerrain")
+	if(screen->getID() == "sceneEditorMenuTerrain")
 	{
 		// Button management
-		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
 		{
 			// Retrieve preview terrain IDs
 			vector<string> terrainIDs;
-			for (const auto& ID : _terrainEditor.getLoadedTerrainIDs())
+			for(const auto& ID : _terrainEditor.getLoadedTerrainIDs())
 			{
-				if (ID[0] == '@')
+				if(ID[0] == '@')
 				{
 					terrainIDs.push_back(ID.substr(1));
 				}
@@ -29,20 +29,20 @@ void SceneEditor::_updateTerrainMenu()
 			// Add choice list
 			_gui.getGlobalScreen()->createChoiceForm("terrainList", "Select Terrain", Vec2(0.0f, 0.1f), terrainIDs);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			_fe3d.terrainEntity_delete(_currentTerrainID);
 			_currentTerrainID = "";
 		}
 
 		// Update terrain choosing
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("terrainList");
-			if (!selectedButtonID.empty())
+			if(!selectedButtonID.empty())
 			{
 				// Delete old
-				if (_fe3d.terrainEntity_isExisting(selectedButtonID))
+				if(_fe3d.terrainEntity_isExisting(selectedButtonID))
 				{
 					_fe3d.terrainEntity_delete(selectedButtonID);
 				}
@@ -52,7 +52,7 @@ void SceneEditor::_updateTerrainMenu()
 				_copyPreviewTerrain(_currentTerrainID, ("@" + selectedButtonID));
 				_gui.getGlobalScreen()->deleteChoiceForm("terrainList");
 			}
-			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("terrainList"))
+			else if(_gui.getGlobalScreen()->isChoiceFormCancelled("terrainList"))
 			{
 				_gui.getGlobalScreen()->deleteChoiceForm("terrainList");
 			}

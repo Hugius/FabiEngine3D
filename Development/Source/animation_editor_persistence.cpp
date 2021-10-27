@@ -12,7 +12,7 @@ using std::istringstream;
 bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 {
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("AnimationEditor::loadAnimationsFromFile");
 	}
@@ -22,10 +22,10 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\data\\animation.fe3d";
+														 ("projects\\" + _currentProjectID)) + "\\data\\animation.fe3d";
 
 	// Warning checking
-	if (!Tools::isFileExisting(filePath))
+	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `animation.fe3d` missing!");
 		return false;
@@ -36,7 +36,7 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 
 	// Read animation data
 	string line;
-	while (getline(file, line))
+	while(getline(file, line))
 	{
 		// Data placeholders
 		string animationID, previewModelID;
@@ -56,7 +56,7 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 
 		// Check if there is any more content in line
 		string temp;
-		if (iss >> temp)
+		if(iss >> temp)
 		{
 			// For file extraction
 			iss = istringstream(line);
@@ -66,17 +66,17 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 
 			// Read frame data
 			vector<AnimationFrame> customFrames;
-			while (true)
+			while(true)
 			{
 				// Check if file has frame data left
 				unsigned int modelPartCount;
-				if (iss >> modelPartCount)
+				if(iss >> modelPartCount)
 				{
 					// Create custom frame
 					AnimationFrame customFrame;
 
 					// For every model part
-					for (unsigned int i = 0; i < modelPartCount; i++)
+					for(unsigned int i = 0; i < modelPartCount; i++)
 					{
 						// Temporary values
 						string partID;
@@ -90,19 +90,19 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 							speedType >> transformationType;
 
 						// Questionmark means empty partID
-						if (partID == "?")
+						if(partID == "?")
 						{
 							partID = "";
 						}
 
 						// Add part to animation only once
-						if (customFrames.empty())
+						if(customFrames.empty())
 						{
 							newAnimation->addPart(partID, Vec3(0.0f), Vec3(0.0f), Vec3(0.0f));
 						}
 
 						// Add part to default frame only once
-						if (customFrames.empty())
+						if(customFrames.empty())
 						{
 							defaultFrame.addPart(partID, Vec3(0.0f), Vec3(0.0f), Vec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
 						}
@@ -124,31 +124,31 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 			newAnimation->addFrame(defaultFrame);
 
 			// Add custom frames to animation
-			for (const auto& customFrame : customFrames)
+			for(const auto& customFrame : customFrames)
 			{
 				newAnimation->addFrame(customFrame);
 			}
 		}
 
 		// Only if loading animations in editor
-		if (mustCheckPreviewModel)
+		if(mustCheckPreviewModel)
 		{
 			// Check if preview model is still existing
-			if (_fe3d.modelEntity_isExisting(newAnimation->getPreviewModelID()))
+			if(_fe3d.modelEntity_isExisting(newAnimation->getPreviewModelID()))
 			{
 				// Check if parts are present
 				bool hasAllParts = true;
-				for (const auto& partID : newAnimation->getPartIDs())
+				for(const auto& partID : newAnimation->getPartIDs())
 				{
 					// Part cannot be empty
-					if (!partID.empty())
+					if(!partID.empty())
 					{
 						hasAllParts = hasAllParts && _fe3d.modelEntity_hasPart(newAnimation->getPreviewModelID(), partID);
 					}
 				}
 
 				// Check if preview model still has all the parts
-				if (hasAllParts)
+				if(hasAllParts)
 				{
 					newAnimation->setInitialSize(_fe3d.modelEntity_getBaseSize(newAnimation->getPreviewModelID()));
 				}
@@ -184,29 +184,29 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 bool AnimationEditor::saveAnimationsToFile()
 {
 	// Editor must be loaded
-	if (!_isEditorLoaded)
+	if(!_isEditorLoaded)
 	{
 		return false;
 	}
 
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("AnimationEditor::saveAnimationsToFile");
 	}
 
 	// Compose full file path
 	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\data\\animation.fe3d";
+														 ("projects\\" + _currentProjectID)) + "\\data\\animation.fe3d";
 
 	// Create or overwrite animation file
 	ofstream file(filePath);
 
 	// Write animation data
-	for (const auto& animation : _animations)
+	for(const auto& animation : _animations)
 	{
 		// Only if animation has data
-		if (!animation->getPreviewModelID().empty() || !animation->getOldPreviewModelID().empty())
+		if(!animation->getPreviewModelID().empty() || !animation->getOldPreviewModelID().empty())
 		{
 			// Retrieve all values
 			auto animationID = animation->getID();
@@ -216,20 +216,20 @@ bool AnimationEditor::saveAnimationsToFile()
 			file << animationID << " " << previewModelID;
 
 			// Check if animation has custom frames
-			if (animation->getFrames().size() > 1)
+			if(animation->getFrames().size() > 1)
 			{
 				// Add space
 				file << " ";
 
 				// For every frame
-				for (unsigned int frameIndex = 1; frameIndex < animation->getFrames().size(); frameIndex++)
+				for(unsigned int frameIndex = 1; frameIndex < animation->getFrames().size(); frameIndex++)
 				{
 					// Write the amount of model parts
 					file << animation->getPartIDs().size() << " ";
 
 					// For every model part
 					unsigned int partIndex = 0;
-					for (auto partID : animation->getPartIDs())
+					for(auto partID : animation->getPartIDs())
 					{
 						// Retrieve data
 						auto frame = animation->getFrames()[frameIndex];
@@ -240,7 +240,7 @@ bool AnimationEditor::saveAnimationsToFile()
 						auto transformationType = static_cast<int>(frame.getTransformationTypes().at(partID));
 
 						// Questionmark means empty partID
-						if (partID.empty())
+						if(partID.empty())
 						{
 							partID = "?";
 						}
@@ -261,7 +261,7 @@ bool AnimationEditor::saveAnimationsToFile()
 							transformationType;
 
 						// Add space
-						if (partIndex != (animation->getPartIDs().size() - 1))
+						if(partIndex != (animation->getPartIDs().size() - 1))
 						{
 							file << " ";
 						}
@@ -269,7 +269,7 @@ bool AnimationEditor::saveAnimationsToFile()
 					}
 
 					// Add space
-					if (frameIndex != (animation->getFrames().size() - 1))
+					if(frameIndex != (animation->getFrames().size() - 1))
 					{
 						file << " ";
 					}

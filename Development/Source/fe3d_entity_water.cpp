@@ -11,7 +11,7 @@ void FabiEngine3D::waterEntity_create(const string& ID)
 void FabiEngine3D::waterEntity_deleteAll()
 {
 	// For every water entity
-	for (const auto& [keyID, entity] : _core->_waterEntityManager.getEntities())
+	for(const auto& [keyID, entity] : _core->_waterEntityManager.getEntities())
 	{
 		waterEntity_delete(entity->getID());
 	}
@@ -23,7 +23,7 @@ void FabiEngine3D::waterEntity_deleteAll()
 void FabiEngine3D::waterEntity_delete(const string& ID)
 {
 	// Unselect water if selected
-	if (ID == waterEntity_getSelectedID())
+	if(ID == waterEntity_getSelectedID())
 	{
 		_core->_waterEntityManager.selectWater("");
 	}
@@ -93,7 +93,7 @@ void FabiEngine3D::waterEntity_setHeight(const string& ID, float height)
 
 void FabiEngine3D::waterEntity_setSize(const string& ID, float size)
 {
-	if (size > WaterEntityManager::MAX_SIZE)
+	if(size > WaterEntityManager::MAX_SIZE)
 	{
 		Logger::throwWarning("Tried to set size of water with ID \"" + ID + "\": too high!");
 		return;
@@ -135,7 +135,7 @@ void FabiEngine3D::waterEntity_setWireFramed(const string& ID, bool enabled)
 
 void FabiEngine3D::waterEntity_setDudvMap(const string& ID, const string& texturePath)
 {
-	if (texturePath.empty())
+	if(texturePath.empty())
 	{
 		_core->_waterEntityManager.getEntity(ID)->setDudvMap(0);
 		_core->_waterEntityManager.getEntity(ID)->setDudvMapPath("");
@@ -149,7 +149,7 @@ void FabiEngine3D::waterEntity_setDudvMap(const string& ID, const string& textur
 
 void FabiEngine3D::waterEntity_setNormalMap(const string& ID, const string& texturePath)
 {
-	if (texturePath.empty())
+	if(texturePath.empty())
 	{
 		_core->_waterEntityManager.getEntity(ID)->setNormalMap(0);
 		_core->_waterEntityManager.getEntity(ID)->setNormalMapPath("");
@@ -163,7 +163,7 @@ void FabiEngine3D::waterEntity_setNormalMap(const string& ID, const string& text
 
 void FabiEngine3D::waterEntity_setDisplacementMap(const string& ID, const string& texturePath)
 {
-	if (texturePath.empty())
+	if(texturePath.empty())
 	{
 		_core->_waterEntityManager.getEntity(ID)->setDisplacementMap(0);
 		_core->_waterEntityManager.getEntity(ID)->setDisplacementMapPath("");
@@ -207,7 +207,7 @@ void FabiEngine3D::waterEntity_setTransparency(const string& ID, float transpare
 
 const string FabiEngine3D::waterEntity_getSelectedID()
 {
-	if (_core->_waterEntityManager.getSelectedWater() != nullptr)
+	if(_core->_waterEntityManager.getSelectedWater() != nullptr)
 	{
 		return _core->_waterEntityManager.getSelectedWater()->getID();
 	}
@@ -221,7 +221,7 @@ const vector<string> FabiEngine3D::waterEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (const auto& [keyID, entity] : _core->_waterEntityManager.getEntities())
+	for(const auto& [keyID, entity] : _core->_waterEntityManager.getEntities())
 	{
 		IDs.push_back(entity->getID());
 	}

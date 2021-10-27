@@ -45,7 +45,7 @@ void ScriptEditor::load()
 
 	// Save anti aliasing state
 	_wasAntiAliasingEnabled = _fe3d.gfx_isAntiAliasingEnabled();
-	if (_wasAntiAliasingEnabled)
+	if(_wasAntiAliasingEnabled)
 	{
 		_fe3d.gfx_disableAntiAliasing(true);
 	}
@@ -71,7 +71,7 @@ void ScriptEditor::unload()
 	_fe3d.gfx_setBloomSize(_originalBloomSize);
 
 	// Reset anti aliasing
-	if (_wasAntiAliasingEnabled)
+	if(_wasAntiAliasingEnabled)
 	{
 		_fe3d.gfx_enableAntiAliasing();
 	}

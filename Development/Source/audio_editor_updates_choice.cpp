@@ -7,7 +7,7 @@ void AudioEditor::_updateChoiceMenu()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "audioEditorMenuChoice")
+	if(screen->getID() == "audioEditorMenuChoice")
 	{
 		// Temporary values
 		bool isExisting = _fe3d.sound_isExisting(_currentAudioID);
@@ -16,10 +16,10 @@ void AudioEditor::_updateChoiceMenu()
 		bool isLoaded = isExisting && _fe3d.sound_isLoaded(_currentAudioID);
 
 		// Button management
-		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			// Stop audio preview
-			if (isPlaying)
+			if(isPlaying)
 			{
 				_fe3d.sound_stop(_currentAudioID, 0);
 			}
@@ -30,37 +30,37 @@ void AudioEditor::_updateChoiceMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuMain");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("play")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("play")->isHovered())
 		{
 			_fe3d.sound_play(_currentAudioID, 0, 0);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("resume")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("resume")->isHovered())
 		{
 			_fe3d.sound_resume(_currentAudioID);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("pause")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("pause")->isHovered())
 		{
 			_fe3d.sound_pause(_currentAudioID);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("stop")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("stop")->isHovered())
 		{
 			_fe3d.sound_stop(_currentAudioID, 0);
 		}
 
 		// Controlling audio playback through keyboard
-		if (_fe3d.input_isKeyPressed(InputType::KEY_SPACE) && !isPlaying && !isPaused && isLoaded)
+		if(_fe3d.input_isKeyPressed(InputType::KEY_SPACE) && !isPlaying && !isPaused && isLoaded)
 		{
 			_fe3d.sound_play(_currentAudioID, 0, 0);
 		}
-		else if (_fe3d.input_isKeyPressed(InputType::KEY_R) && isPaused)
+		else if(_fe3d.input_isKeyPressed(InputType::KEY_R) && isPaused)
 		{
 			_fe3d.sound_resume(_currentAudioID);
 		}
-		else if (_fe3d.input_isKeyPressed(InputType::KEY_P) && isPlaying)
+		else if(_fe3d.input_isKeyPressed(InputType::KEY_P) && isPlaying)
 		{
 			_fe3d.sound_pause(_currentAudioID);
 		}
-		else if (_fe3d.input_isKeyPressed(InputType::KEY_S) && (isPlaying || isPaused))
+		else if(_fe3d.input_isKeyPressed(InputType::KEY_S) && (isPlaying || isPaused))
 		{
 			_fe3d.sound_stop(_currentAudioID, 0);
 		}

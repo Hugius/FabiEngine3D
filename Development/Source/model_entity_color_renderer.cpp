@@ -87,16 +87,16 @@ void ModelEntityColorRenderer::processPointlightEntities(const unordered_map<str
 {
 	// Save visible lights
 	vector<shared_ptr<PointlightEntity>> visibleEntities;
-	for (const auto& [keyID, entity] : entities)
+	for(const auto& [keyID, entity] : entities)
 	{
-		if (entity->isVisible())
+		if(entity->isVisible())
 		{
 			visibleEntities.push_back(entity);
 		}
 	}
 
 	// Upload lights
-	for (unsigned int i = 0; i < visibleEntities.size(); i++)
+	for(unsigned int i = 0; i < visibleEntities.size(); i++)
 	{
 		_shader.uploadUniform("u_pointlightPositions[" + to_string(i) + "]", visibleEntities[i]->getPosition());
 		_shader.uploadUniform("u_pointlightColors[" + to_string(i) + "]", visibleEntities[i]->getColor());
@@ -113,16 +113,16 @@ void ModelEntityColorRenderer::processSpotlightEntities(const unordered_map<stri
 {
 	// Save visible lights
 	vector<shared_ptr<SpotlightEntity>> visibleEntities;
-	for (const auto& [keyID, entity] : entities)
+	for(const auto& [keyID, entity] : entities)
 	{
-		if (entity->isVisible())
+		if(entity->isVisible())
 		{
 			visibleEntities.push_back(entity);
 		}
 	}
 
 	// Upload lights
-	for (unsigned int i = 0; i < visibleEntities.size(); i++)
+	for(unsigned int i = 0; i < visibleEntities.size(); i++)
 	{
 		_shader.uploadUniform("u_spotlightPositions[" + to_string(i) + "]", visibleEntities[i]->getPosition());
 		_shader.uploadUniform("u_spotlightFrontVectors[" + to_string(i) + "]", visibleEntities[i]->getFrontVector());
@@ -138,7 +138,7 @@ void ModelEntityColorRenderer::processSpotlightEntities(const unordered_map<stri
 
 void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities)
 {
-	if (entity->isVisible())
+	if(entity->isVisible())
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_isWireFramed", (entity->isWireFramed() || _renderBus.isWireFrameRenderingEnabled()));
@@ -151,31 +151,31 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		_shader.uploadUniform("u_minTextureAlpha", MIN_TEXTURE_ALPHA);
 
 		// Enable wire frame
-		if (entity->isWireFramed())
+		if(entity->isWireFramed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
 
 		// Enable face culling
-		if (entity->isFaceCulled())
+		if(entity->isFaceCulled())
 		{
 			glEnable(GL_CULL_FACE);
 		}
 
 		// Bind textures
-		if (!entity->getPreviousReflectionEntityID().empty())
+		if(!entity->getPreviousReflectionEntityID().empty())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntities.at(entity->getPreviousReflectionEntityID())->getCubeMap());
 		}
-		if (!entity->getCurrentReflectionEntityID().empty())
+		if(!entity->getCurrentReflectionEntityID().empty())
 		{
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntities.at(entity->getCurrentReflectionEntityID())->getCubeMap());
 		}
 
 		// Iterate through parts
-		for (const auto& partID : entity->getPartIDs())
+		for(const auto& partID : entity->getPartIDs())
 		{
 			// Temporary values
 			const auto buffer = entity->getRenderBuffer(partID);
@@ -207,27 +207,27 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			_shader.uploadUniform("u_reflectionType", static_cast<int>(entity->getReflectionType(partID)));
 
 			// Bind textures
-			if (entity->hasDiffuseMap(partID))
+			if(entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE4);
 				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID));
 			}
-			if (entity->hasEmissionMap(partID))
+			if(entity->hasEmissionMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE5);
 				glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap(partID));
 			}
-			if (entity->hasSpecularMap(partID))
+			if(entity->hasSpecularMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE6);
 				glBindTexture(GL_TEXTURE_2D, entity->getSpecularMap(partID));
 			}
-			if (entity->hasReflectionMap(partID))
+			if(entity->hasReflectionMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE7);
 				glBindTexture(GL_TEXTURE_2D, entity->getReflectionMap(partID));
 			}
-			if (entity->hasNormalMap(partID))
+			if(entity->hasNormalMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE8);
 				glBindTexture(GL_TEXTURE_2D, entity->getNormalMap(partID));
@@ -237,7 +237,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			glBindVertexArray(buffer->getVAO());
 
 			// Render
-			if (buffer->isInstanced())
+			if(buffer->isInstanced())
 			{
 				const auto offsetCount = static_cast<unsigned int>(buffer->getInstancedOffsets().size());
 				glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), offsetCount);
@@ -253,27 +253,27 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			glBindVertexArray(0);
 
 			// Unbind textures
-			if (entity->hasDiffuseMap(partID))
+			if(entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE4);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-			if (entity->hasEmissionMap(partID))
+			if(entity->hasEmissionMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE5);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-			if (entity->hasSpecularMap(partID))
+			if(entity->hasSpecularMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE5);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-			if (entity->hasReflectionMap(partID))
+			if(entity->hasReflectionMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE6);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-			if (entity->hasNormalMap(partID))
+			if(entity->hasNormalMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE7);
 				glBindTexture(GL_TEXTURE_2D, 0);
@@ -281,25 +281,25 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		}
 
 		// Unbind textures
-		if (entity->getPreviousReflectionEntityID().empty())
+		if(entity->getPreviousReflectionEntityID().empty())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 		}
-		if (entity->getCurrentReflectionEntityID().empty())
+		if(entity->getCurrentReflectionEntityID().empty())
 		{
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 		}
 
 		// Disable face culling
-		if (entity->isFaceCulled())
+		if(entity->isFaceCulled())
 		{
 			glDisable(GL_CULL_FACE);
 		}
 
 		// Disable wire frame
-		if (entity->isWireFramed())
+		if(entity->isWireFramed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}

@@ -14,17 +14,17 @@ using std::istringstream;
 const vector<string> ModelEditor::getAllMeshPathsFromFile()
 {
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("ModelEditor::getAllMeshPathsFromFile");
 	}
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
+														 ("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
 
 	// Warning checking
-	if (!Tools::isFileExisting(filePath))
+	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `model.fe3d` missing!");
 		return {};
@@ -36,7 +36,7 @@ const vector<string> ModelEditor::getAllMeshPathsFromFile()
 	// Read model data
 	vector<string> meshPaths;
 	string line;
-	while (getline(file, line))
+	while(getline(file, line))
 	{
 		// For file extraction
 		istringstream iss(line);
@@ -46,7 +46,7 @@ const vector<string> ModelEditor::getAllMeshPathsFromFile()
 		iss >> lineType;
 
 		// Determine line type
-		if (lineType == "MODEL")
+		if(lineType == "MODEL")
 		{
 			// Data placeholders
 			string modelID, meshPath;
@@ -73,17 +73,17 @@ const vector<string> ModelEditor::getAllMeshPathsFromFile()
 const vector<string> ModelEditor::getAllTexturePathsFromFile()
 {
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("ModelEditor::getAllTexturePathsFromFile");
 	}
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
+														 ("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
 
 	// Warning checking
-	if (!Tools::isFileExisting(filePath))
+	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `model.fe3d` missing!");
 		return {};
@@ -95,7 +95,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 	// Read model data
 	vector<string> texturePaths;
 	string line;
-	while (getline(file, line))
+	while(getline(file, line))
 	{
 		// For file extraction
 		istringstream iss(line);
@@ -105,7 +105,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 		iss >> lineType;
 
 		// Determine line type
-		if (lineType == "MODEL")
+		if(lineType == "MODEL")
 		{
 			// Data placeholders
 			string modelID, meshPath, lodEntityID;
@@ -126,12 +126,12 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 				rotationOrder;
 
 			// Read part data
-			while (true)
+			while(true)
 			{
 				// Check if file has any part data left
 				string partID;
 				iss >> partID;
-				if (partID.empty())
+				if(partID.empty())
 				{
 					break;
 				}
@@ -175,31 +175,31 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 				replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 
 				// Diffuse map
-				if (!diffuseMapPath.empty())
+				if(!diffuseMapPath.empty())
 				{
 					texturePaths.push_back(diffuseMapPath);
 				}
 
 				// Emission map
-				if (!emissionMapPath.empty())
+				if(!emissionMapPath.empty())
 				{
 					texturePaths.push_back(emissionMapPath);
 				}
 
 				// Specular map
-				if (!specularMapPath.empty())
+				if(!specularMapPath.empty())
 				{
 					texturePaths.push_back(specularMapPath);
 				}
 
 				// Reflection map
-				if (!reflectionMapPath.empty())
+				if(!reflectionMapPath.empty())
 				{
 					texturePaths.push_back(reflectionMapPath);
 				}
 
 				// Normal map
-				if (!normalMapPath.empty())
+				if(!normalMapPath.empty())
 				{
 					texturePaths.push_back(normalMapPath);
 				}
@@ -217,7 +217,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 bool ModelEditor::loadModelEntitiesFromFile()
 {
 	// Error checking
-	if (_currentProjectID.empty())
+	if(_currentProjectID.empty())
 	{
 		Logger::throwError("ModelEditor::loadModelEntitiesFromFile::1");
 	}
@@ -227,10 +227,10 @@ bool ModelEditor::loadModelEntitiesFromFile()
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
+														 ("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
 
 	// Warning checking
-	if (!Tools::isFileExisting(filePath))
+	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `model.fe3d` missing!");
 		return false;
@@ -241,7 +241,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 
 	// Read model data
 	string line;
-	while (getline(file, line))
+	while(getline(file, line))
 	{
 		// For file extraction
 		istringstream iss(line);
@@ -251,7 +251,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 		iss >> lineType;
 
 		// Determine line type
-		if (lineType == "MODEL")
+		if(lineType == "MODEL")
 		{
 			// Data placeholders
 			string modelID, meshPath, lodEntityID;
@@ -281,13 +281,13 @@ bool ModelEditor::loadModelEntitiesFromFile()
 			_fe3d.modelEntity_create(modelID, meshPath);
 
 			// Check if model creation went well
-			if (_fe3d.modelEntity_isExisting(modelID))
+			if(_fe3d.modelEntity_isExisting(modelID))
 			{
 				// Add model ID
 				_loadedModelIDs.push_back(modelID);
 
 				// Set instancing
-				if (isInstanced)
+				if(isInstanced)
 				{
 					_fe3d.modelEntity_enableInstancing(modelID, { Vec3(0.0f) });
 				}
@@ -300,12 +300,12 @@ bool ModelEditor::loadModelEntitiesFromFile()
 				_fe3d.modelEntity_setRotationOrder(modelID, DirectionOrder(rotationOrder));
 
 				// Read part data
-				while (true)
+				while(true)
 				{
 					// Check if file has any part data left
 					string partID;
 					iss >> partID;
-					if (partID.empty())
+					if(partID.empty())
 					{
 						break;
 					}
@@ -350,31 +350,31 @@ bool ModelEditor::loadModelEntitiesFromFile()
 					replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 
 					// Set diffuse map
-					if (!diffuseMapPath.empty())
+					if(!diffuseMapPath.empty())
 					{
 						_fe3d.modelEntity_setDiffuseMap(modelID, partID, diffuseMapPath);
 					}
 
 					// Set specular map
-					if (!specularMapPath.empty())
+					if(!specularMapPath.empty())
 					{
 						_fe3d.modelEntity_setSpecularMap(modelID, partID, specularMapPath);
 					}
 
 					// Set emission map
-					if (!emissionMapPath.empty())
+					if(!emissionMapPath.empty())
 					{
 						_fe3d.modelEntity_setEmissionMap(modelID, partID, emissionMapPath);
 					}
 
 					// Set reflection map
-					if (!reflectionMapPath.empty())
+					if(!reflectionMapPath.empty())
 					{
 						_fe3d.modelEntity_setReflectionMap(modelID, partID, reflectionMapPath);
 					}
 
 					// Set normal map
-					if (!normalMapPath.empty())
+					if(!normalMapPath.empty())
 					{
 						_fe3d.modelEntity_setNormalMap(modelID, partID, normalMapPath);
 					}
@@ -392,7 +392,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 				}
 			}
 		}
-		else if (lineType == "AABB")
+		else if(lineType == "AABB")
 		{
 			// Data placeholders
 			string aabbID, modelID;

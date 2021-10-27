@@ -12,7 +12,7 @@ shared_ptr<ReflectionEntity> ReflectionEntityManager::getEntity(const string& ID
 {
 	auto result = _getReflectionEntity(ID);
 
-	if (result == nullptr)
+	if(result == nullptr)
 	{
 		Logger::throwError("ReflectionEntityManager::getEntity");
 	}
@@ -48,7 +48,7 @@ void ReflectionEntityManager::createEntity(const string& ID)
 
 void ReflectionEntityManager::update()
 {
-	for (const auto& [keyID, entity] : _getReflectionEntities())
+	for(const auto& [keyID, entity] : _getReflectionEntities())
 	{
 		entity->updateTransformation();
 	}

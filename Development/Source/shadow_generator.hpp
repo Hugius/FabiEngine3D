@@ -6,7 +6,7 @@ class ShadowGenerator final
 {
 public:
 	ShadowGenerator(RenderBus& renderBus);
-	
+
 	// Voids
 	void update();
 	void updateMatrix();

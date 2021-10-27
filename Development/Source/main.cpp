@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
 	controller.application_start();
 
 	// Initiate new scope so engine can end
-	if (controller.mustPromptOnExit())
+	if(controller.mustPromptOnExit())
 	{
 		cout << endl;
 		cout << "Press a key to continue...";

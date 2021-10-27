@@ -3,7 +3,7 @@
 #include "mathematics.hpp"
 #include "box.hpp"
 
-class CollisionDetector final
+class CameraCollisionDetector final
 {
 public:
 	bool checkX(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle, Vec3 boxMiddleChange, Box box);

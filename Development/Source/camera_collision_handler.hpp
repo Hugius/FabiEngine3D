@@ -3,15 +3,16 @@
 #include "aabb_entity.hpp"
 #include "camera.hpp"
 #include "raycaster.hpp"
-#include "collision_detector.hpp"
+#include "camera_collision_detector.hpp"
 #include "terrain_entity_manager.hpp"
 #include "box.hpp"
+#include "direction.hpp"
 
-class CollisionResolver final
+class CameraCollisionHandler final
 {
 public:
 	// Voids
-	void update(const unordered_map<string, shared_ptr<AabbEntity>>& aabbs, TerrainEntityManager& terrainManager, Camera& camera, Raycaster& raycaster, CollisionDetector& collisionDetector);
+	void update(const unordered_map<string, shared_ptr<AabbEntity>>& aabbs, TerrainEntityManager& terrainManager, Camera& camera, Raycaster& raycaster);
 	void setCameraBox(const Box& box);
 	void enableCameraAabbResponse(bool x, bool y, bool z);
 	void disableCameraAabbResponse();
@@ -25,7 +26,7 @@ public:
 
 private:
 	// Voids
-	void _handleCollision(Direction direction, shared_ptr<AabbEntity> aabb, Camera& camera, CollisionDetector& collisionDetector);
+	bool _handleCollision(Direction direction, const unordered_map<string, shared_ptr<AabbEntity>>& aabbs, Camera& camera);
 
 	// Vectors
 	Vec3 _lastCameraPosition = Vec3(0.0f);
@@ -43,5 +44,7 @@ private:
 	bool _isCameraUnderTerrain = false;
 
 	// Miscellaneous
+	CameraCollisionDetector _collisionDetector;
+	Direction _priorityCollisionDirection = Direction::X;
 	Box _cameraBox = Box(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 };

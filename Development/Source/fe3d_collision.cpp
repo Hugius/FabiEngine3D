@@ -3,51 +3,51 @@
 
 void FabiEngine3D::collision_setCameraBox(float left, float right, float bottom, float top, float back, float front)
 {
-	_core->_collisionResolver.setCameraBox(Box(left, right, bottom, top, back, front));
+	_core->_cameraCollisionHandler.setCameraBox(Box(left, right, bottom, top, back, front));
 }
 
 void FabiEngine3D::collision_enableCameraResponse(bool x, bool y, bool z)
 {
-	if(_core->_collisionResolver.isCameraAabbResponseEnabled())
+	if(_core->_cameraCollisionHandler.isCameraAabbResponseEnabled())
 	{
 		Logger::throwWarning("Tried to enable camera AABB response: already enabled!");
 		return;
 	}
 
-	_core->_collisionResolver.enableCameraAabbResponse(x, y, z);
+	_core->_cameraCollisionHandler.enableCameraAabbResponse(x, y, z);
 }
 
 void FabiEngine3D::collision_disableCameraResponse()
 {
-	if(!_core->_collisionResolver.isCameraAabbResponseEnabled())
+	if(!_core->_cameraCollisionHandler.isCameraAabbResponseEnabled())
 	{
 		Logger::throwWarning("Tried to enable camera AABB response: not enabled!");
 		return;
 	}
 
-	_core->_collisionResolver.disableCameraAabbResponse();
+	_core->_cameraCollisionHandler.disableCameraAabbResponse();
 }
 
 void FabiEngine3D::collision_enableTerrainResponse(float cameraHeight, float cameraSpeed)
 {
-	if(_core->_collisionResolver.isCameraTerrainResponseEnabled())
+	if(_core->_cameraCollisionHandler.isCameraTerrainResponseEnabled())
 	{
 		Logger::throwWarning("Tried to enable camera terrain response: already enabled!");
 		return;
 	}
 
-	_core->_collisionResolver.enableCameraTerrainResponse(cameraHeight, cameraSpeed);
+	_core->_cameraCollisionHandler.enableCameraTerrainResponse(cameraHeight, cameraSpeed);
 }
 
 void FabiEngine3D::collision_disableTerrainResponse()
 {
-	if(!_core->_collisionResolver.isCameraTerrainResponseEnabled())
+	if(!_core->_cameraCollisionHandler.isCameraTerrainResponseEnabled())
 	{
 		Logger::throwWarning("Tried to enable camera terrain response: not enabled!");
 		return;
 	}
 
-	_core->_collisionResolver.disableCameraTerrainResponse();
+	_core->_cameraCollisionHandler.disableCameraTerrainResponse();
 }
 
 const string FabiEngine3D::collision_checkCameraWithAny()
@@ -66,7 +66,7 @@ const string FabiEngine3D::collision_checkCameraWithAny()
 
 const bool FabiEngine3D::collision_checkCameraWithTerrain()
 {
-	return _core->_collisionResolver.isCameraUnderTerrain();
+	return _core->_cameraCollisionHandler.isCameraUnderTerrain();
 }
 
 const bool FabiEngine3D::collision_checkCameraWithEntity(const string& ID)
@@ -250,10 +250,10 @@ const bool FabiEngine3D::collision_checkCameraWithEntitiesDirection(const string
 
 const bool FabiEngine3D::collision_isCameraResponseEnabled()
 {
-	return _core->_collisionResolver.isCameraAabbResponseEnabled();
+	return _core->_cameraCollisionHandler.isCameraAabbResponseEnabled();
 }
 
 const bool FabiEngine3D::collision_isTerrainResponseEnabled()
 {
-	return _core->_collisionResolver.isCameraTerrainResponseEnabled();
+	return _core->_cameraCollisionHandler.isCameraTerrainResponseEnabled();
 }

@@ -1,6 +1,6 @@
-#include "collision_detector.hpp"
+#include "camera_collision_detector.hpp"
 
-bool CollisionDetector::checkX(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle, Vec3 boxMiddleChange, Box box)
+bool CameraCollisionDetector::checkX(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle, Vec3 boxMiddleChange, Box box)
 {
 	// Temporary values
 	const auto left = box.getLeft();
@@ -34,7 +34,7 @@ bool CollisionDetector::checkX(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle,
 	}
 }
 
-bool CollisionDetector::checkY(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle, Vec3 boxMiddleChange, Box box)
+bool CameraCollisionDetector::checkY(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle, Vec3 boxMiddleChange, Box box)
 {
 	// Temporary values
 	const auto bottom = box.getBottom();
@@ -68,7 +68,7 @@ bool CollisionDetector::checkY(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle,
 	}
 }
 
-bool CollisionDetector::checkZ(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle, Vec3 boxMiddleChange, Box box)
+bool CameraCollisionDetector::checkZ(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle, Vec3 boxMiddleChange, Box box)
 {
 	// Temporary values
 	const auto back = box.getBack();
@@ -102,7 +102,7 @@ bool CollisionDetector::checkZ(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle,
 	}
 }
 
-bool CollisionDetector::_isInside(Vec3 aabbPosition, Vec3 aabbHalfSize, Vec3 boxMiddle, Box box)
+bool CameraCollisionDetector::_isInside(Vec3 aabbPosition, Vec3 aabbHalfSize, Vec3 boxMiddle, Box box)
 {
 	// Temporary values
 	const auto left = box.getLeft();

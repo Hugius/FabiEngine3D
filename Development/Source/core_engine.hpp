@@ -22,7 +22,7 @@
 #include "text_entity_manager.hpp"
 #include "shadow_generator.hpp"
 #include "raycaster.hpp"
-#include "collision_resolver.hpp"
+#include "camera_collision_handler.hpp"
 #include "timer.hpp"
 #include "audio_manager.hpp"
 #include "audio_player.hpp"
@@ -60,8 +60,7 @@ private:
 	MeshLoader _meshLoader;
 	AudioLoader _audioLoader;
 	RenderBus _renderBus;
-	CollisionDetector _collisionDetector;
-	CollisionResolver _collisionResolver;
+	CameraCollisionHandler _cameraCollisionHandler;
 	Timer _timer;
 	AudioPlayer _audioPlayer;
 	InputHandler _inputHandler;

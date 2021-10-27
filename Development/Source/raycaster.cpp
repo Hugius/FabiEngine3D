@@ -80,7 +80,7 @@ Vec3 Raycaster::getTerrainPoint()
 }
 
 // https://gamedev.stackexchange.com/questions/18436/most-efficient-aabb-vs-ray-collision-algorithms
-float Raycaster::checkRayBoxIntersection(Ray ray, Box box)
+float Raycaster::calculateRayBoxIntersectionDistance(Ray ray, Box box)
 {
 	/*
 		Original formula: point = (origin + distance) * direction

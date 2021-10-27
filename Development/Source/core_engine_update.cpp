@@ -31,7 +31,7 @@ void CoreEngine::_updateApplication()
 			_timer.startDeltaPart("physicsUpdate");
 			_camera.update(lastCursorPosition);
 			_raycaster.update(_fe3d.misc_getCursorPositionRelativeToViewport());
-			_collisionResolver.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _camera, _collisionDetector);
+			_collisionResolver.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _camera, _raycaster, _collisionDetector);
 			_camera.updateMatrices();
 			_timer.stopDeltaPart();
 

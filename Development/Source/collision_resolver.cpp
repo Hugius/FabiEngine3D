@@ -1,117 +1,40 @@
 #include "collision_resolver.hpp"
 #include "logger.hpp"
 
-CollisionResolver::CollisionResolver()
-	:
-	_cameraBox(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)
-{
-
-}
-
 void CollisionResolver::update(
 	const unordered_map<string, shared_ptr<AabbEntity>>& aabbs, 
 	TerrainEntityManager& terrainManager, 
-	Camera& camera, CollisionDetector& collisionDetector)
+	Camera& camera, Raycaster& raycaster, CollisionDetector& collisionDetector)
 {
 	// Check if AABB collision is needed in the first place
 	if (_isCameraAabbResponseEnabled)
 	{
-		// Temporary values
-		static Vec3 oldCameraPosition;
-		bool hasCollidedX = false;
-		bool hasCollidedY = false;
-		bool hasCollidedZ = false;
-
 		// Reset collision
 		for (const auto& [keyID, aabb] : aabbs)
 		{
 			aabb->setCollided(false);
 		}
 
-		// Detect X collision
+		// Handle X collision
 		for (const auto& [keyID, aabb] : aabbs)
 		{
-			// If responsive to camera collision
-			if (aabb->isCollisionResponsive() && aabb->isVisible())
-			{
-				// Check collision with AABB
-				const Vec3 middle = camera.getPosition();
-				const Vec3 middleChange = (middle - oldCameraPosition);
-				auto hasCollided = collisionDetector.checkX(aabb->getPosition(), aabb->getSize(), middle, middleChange, _cameraBox);
-
-				// Update AABB
-				if (hasCollided)
-				{
-					aabb->setCollisionDirection(Direction::X);
-					aabb->setCollided(true);
-				}
-
-				// Respond to X collision
-				if (_isCameraAabbResponseEnabledX && hasCollided)
-				{
-					camera.setPosition(Vec3(oldCameraPosition.x, camera.getPosition().y, camera.getPosition().z));
-				}
-			}
+			_handleCollision(Direction::X, aabb, camera, collisionDetector);
 		}
-		
-		// Detect Y collision
+
+		// Handle Y collision
 		for (const auto& [keyID, aabb] : aabbs)
 		{
-			// If responsive to camera collision
-			if (aabb->isCollisionResponsive() && aabb->isVisible())
-			{
-				// Check collision with AABB
-				const Vec3 middle = camera.getPosition();
-				const Vec3 middleChange = (middle - oldCameraPosition);
-				auto hasCollided = collisionDetector.checkY(aabb->getPosition(), aabb->getSize(), middle, middleChange, _cameraBox);
-
-				// Update AABB
-				if (hasCollided)
-				{
-					aabb->setCollisionDirection(Direction::Y);
-					aabb->setCollided(true);
-				}
-
-				// Respond to Y collision
-				if (_isCameraAabbResponseEnabledY && hasCollided)
-				{
-					// Terrain collision response has priority
-					if (!_isCameraUnderTerrain)
-					{
-						camera.setPosition(Vec3(camera.getPosition().x, oldCameraPosition.y, camera.getPosition().z));
-					}
-				}
-			}
+			_handleCollision(Direction::Y, aabb, camera, collisionDetector);
 		}
 
-		// Detect Z collision
+		// Handle Z collision
 		for (const auto& [keyID, aabb] : aabbs)
 		{
-			// If responsive to camera collision
-			if (aabb->isCollisionResponsive() && aabb->isVisible())
-			{
-				// Check collision with AABB
-				const Vec3 middle = camera.getPosition();
-				const Vec3 middleChange = (middle - oldCameraPosition);
-				auto hasCollided = collisionDetector.checkZ(aabb->getPosition(), aabb->getSize(), middle, middleChange, _cameraBox);
-
-				// Update AABB
-				if (hasCollided)
-				{
-					aabb->setCollisionDirection(Direction::Z);
-					aabb->setCollided(true);
-				}
-
-				// Respond to Z collision
-				if (_isCameraAabbResponseEnabledZ && hasCollided)
-				{
-					camera.setPosition(Vec3(camera.getPosition().x, camera.getPosition().y, oldCameraPosition.z));
-				}
-			}
+			_handleCollision(Direction::Z, aabb, camera, collisionDetector);
 		}
 
-		// Store old camera position
-		oldCameraPosition = camera.getPosition();
+		// Store last camera position
+		_lastCameraPosition = camera.getPosition();
 	}
 	
 	// Check if terrain collision is needed in the first place
@@ -212,4 +135,87 @@ bool CollisionResolver::isCameraAabbResponseEnabled()
 bool CollisionResolver::isCameraTerrainResponseEnabled()
 {
 	return _isCameraTerrainResponseEnabled;
+}
+
+void CollisionResolver::_handleCollision(Direction direction, shared_ptr<AabbEntity> aabb, Camera& camera, CollisionDetector& collisionDetector)
+{
+	switch(direction)
+	{
+		case Direction::X:
+		{
+			// If responsive to camera collision
+			if(aabb->isCollisionResponsive() && aabb->isVisible())
+			{
+				// Check collision with AABB
+				const Vec3 middle = camera.getPosition();
+				const Vec3 middleChange = (middle - _lastCameraPosition);
+				auto hasCollided = collisionDetector.checkX(aabb->getPosition(), aabb->getSize(), middle, middleChange, _cameraBox);
+
+				// Update AABB
+				if(hasCollided)
+				{
+					aabb->setCollisionDirection(Direction::X);
+					aabb->setCollided(true);
+				}
+
+				// Respond to X collision
+				if(_isCameraAabbResponseEnabledX && hasCollided)
+				{
+					camera.setPosition(Vec3(_lastCameraPosition.x, camera.getPosition().y, camera.getPosition().z));
+				}
+			}
+		}
+		case Direction::Y:
+		{
+			// If responsive to camera collision
+			if(aabb->isCollisionResponsive() && aabb->isVisible())
+			{
+				// Check collision with AABB
+				const Vec3 middle = camera.getPosition();
+				const Vec3 middleChange = (middle - _lastCameraPosition);
+				auto hasCollided = collisionDetector.checkY(aabb->getPosition(), aabb->getSize(), middle, middleChange, _cameraBox);
+
+				// Update AABB
+				if(hasCollided)
+				{
+					aabb->setCollisionDirection(Direction::Y);
+					aabb->setCollided(true);
+				}
+
+				// Respond to Y collision
+				if(_isCameraAabbResponseEnabledY && hasCollided)
+				{
+					// Terrain collision response has priority
+					if(!_isCameraUnderTerrain)
+					{
+						camera.setPosition(Vec3(camera.getPosition().x, _lastCameraPosition.y, camera.getPosition().z));
+					}
+				}
+			}
+		}
+		case Direction::Z:
+		{
+			// If responsive to camera collision
+			if(aabb->isCollisionResponsive() && aabb->isVisible())
+			{
+				// Check collision with AABB
+				const Vec3 middle = camera.getPosition();
+				const Vec3 middleChange = (middle - _lastCameraPosition);
+				auto hasCollided = collisionDetector.checkZ(aabb->getPosition(), aabb->getSize(), middle, middleChange, _cameraBox);
+
+				// Update AABB
+				if(hasCollided)
+				{
+					aabb->setCollisionDirection(Direction::Z);
+					aabb->setCollided(true);
+				}
+
+				// Respond to Z collision
+				if(_isCameraAabbResponseEnabledZ && hasCollided)
+				{
+					camera.setPosition(Vec3(camera.getPosition().x, camera.getPosition().y, _lastCameraPosition.z));
+				}
+			}
+		}
+	}
 }

@@ -13,17 +13,6 @@ using std::chrono::nanoseconds;
 CoreEngine::CoreEngine(FabiEngine3D& fe3d)
 	:
 	_fe3d(fe3d),
-	_libraryLoader(),
-	_meshLoader(),
-	_audioLoader(),
-	_renderBus(),
-	_collisionDetector(),
-	_collisionResolver(),
-	_timer(),
-	_audioPlayer(),
-	_inputHandler(),
-	_networkServerAPI(),
-	_networkClientAPI(),
 	_window(_libraryLoader),
 	_audioManager(_audioLoader),
 	_shadowGenerator(_renderBus),

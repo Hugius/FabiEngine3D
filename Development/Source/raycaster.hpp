@@ -18,7 +18,7 @@ public:
 	// Floats
 	float getTerrainPointingDistance();
 	float getTerrainPointingPrecision();
-	float checkRayBoxIntersection(Ray ray, Box box);
+	float calculateRayBoxIntersectionDistance(Ray ray, Box box);
 
 	// Vectors
 	Ray getCursorRay();

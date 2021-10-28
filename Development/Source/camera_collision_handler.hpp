@@ -6,7 +6,7 @@
 #include "camera_collision_detector.hpp"
 #include "terrain_entity_manager.hpp"
 #include "box.hpp"
-#include "direction.hpp"
+#include "direction_order.hpp"
 
 class CameraCollisionHandler final
 {
@@ -45,6 +45,6 @@ private:
 
 	// Miscellaneous
 	CameraCollisionDetector _collisionDetector;
-	Direction _priorityCollisionDirection = Direction::X;
+	DirectionOrder _responseDirectionOrder = DirectionOrder::XYZ;
 	Box _cameraBox = Box(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 };

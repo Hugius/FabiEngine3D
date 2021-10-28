@@ -1,94 +1,9 @@
 #include "camera_collision_handler.hpp"
 #include "logger.hpp"
 
-void CameraCollisionHandler::update(
-	const unordered_map<string, shared_ptr<AabbEntity>>& aabbs,
-	TerrainEntityManager& terrainManager,
-	Camera& camera, Raycaster& raycaster)
+void CameraCollisionHandler::update(const unordered_map<string, shared_ptr<AabbEntity>>& aabbs,
+									TerrainEntityManager& terrainManager, Camera& camera, Raycaster& raycaster)
 {
-	// Check if AABB collision is needed in the first place
-	if(_isCameraAabbResponseEnabled)
-	{
-		// Temporary values
-		bool hasCollidedX = false;
-		bool hasCollidedY = false;
-		bool hasCollidedZ = false;
-
-		// Reset collision
-		for(const auto& [keyID, aabb] : aabbs)
-		{
-			aabb->setCollided(false);
-		}
-
-		// Handle collision
-		switch(_priorityCollisionDirection)
-		{
-			case Direction::X:
-			{
-				bool hasCollidedX = _handleCollision(Direction::X, aabbs, camera);
-				bool hasCollidedY = _handleCollision(Direction::Y, aabbs, camera);
-				bool hasCollidedZ = _handleCollision(Direction::Z, aabbs, camera);
-
-				if(!hasCollidedX)
-				{
-					if(hasCollidedY)
-					{
-						_priorityCollisionDirection = Direction::Y;
-					}
-					if(hasCollidedZ)
-					{
-						_priorityCollisionDirection = Direction::Y;
-					}
-				}
-
-				break;
-			}
-			case Direction::Y:
-			{
-				bool hasCollidedY = _handleCollision(Direction::Y, aabbs, camera);
-				bool hasCollidedX = _handleCollision(Direction::X, aabbs, camera);
-				bool hasCollidedZ = _handleCollision(Direction::Z, aabbs, camera);
-
-				if(!hasCollidedY)
-				{
-					if(hasCollidedX)
-					{
-						_priorityCollisionDirection = Direction::X;
-					}
-					if(hasCollidedZ)
-					{
-						_priorityCollisionDirection = Direction::Z;
-					}
-				}
-
-				break;
-			}
-			case Direction::Z:
-			{
-				bool hasCollidedZ = _handleCollision(Direction::Z, aabbs, camera);
-				bool hasCollidedX = _handleCollision(Direction::X, aabbs, camera);
-				bool hasCollidedY = _handleCollision(Direction::Y, aabbs, camera);
-
-				if(!hasCollidedZ)
-				{
-					if(hasCollidedX)
-					{
-						_priorityCollisionDirection = Direction::X;
-					}
-					if(hasCollidedY)
-					{
-						_priorityCollisionDirection = Direction::Y;
-					}
-				}
-
-				break;
-			}
-		}
-
-		// Store last camera position
-		_lastCameraPosition = camera.getPosition();
-	}
-
 	// Check if terrain collision is needed in the first place
 	_isCameraUnderTerrain = false;
 	if(_isCameraTerrainResponseEnabled)
@@ -105,6 +20,7 @@ void CameraCollisionHandler::update(
 			// If camera goes underground
 			if(cameraPosition.y < targetY)
 			{
+				// Camera is now under terrain
 				_isCameraUnderTerrain = true;
 
 				// Move camera upwards
@@ -118,6 +34,103 @@ void CameraCollisionHandler::update(
 				}
 			}
 		}
+	}
+
+	// Check if AABB collision is needed in the first place
+	if(_isCameraAabbResponseEnabled)
+	{
+		// Temporary values
+		unsigned int x = 0;
+		unsigned int y = 0;
+		unsigned int z = 0;
+
+		// Reset collision
+		for(const auto& [keyID, aabb] : aabbs)
+		{
+			aabb->setCollided(false);
+		}
+
+		// Handle collision
+		switch(_responseDirectionOrder)
+		{
+			case DirectionOrder::XYZ:
+			{
+				x = 3; y = 2; z = 1;
+				x *= static_cast<unsigned int>(_handleCollision(Direction::X, aabbs, camera));
+				y *= static_cast<unsigned int>(_handleCollision(Direction::Y, aabbs, camera));
+				z *= static_cast<unsigned int>(_handleCollision(Direction::Z, aabbs, camera));
+				break;
+			}
+			case DirectionOrder::XZY:
+			{
+				x = 3; z = 2; y = 1;
+				x *= static_cast<unsigned int>(_handleCollision(Direction::X, aabbs, camera));
+				z *= static_cast<unsigned int>(_handleCollision(Direction::Z, aabbs, camera));
+				y *= static_cast<unsigned int>(_handleCollision(Direction::Y, aabbs, camera));
+				break;
+			}
+			case DirectionOrder::YXZ:
+			{
+				y = 3; x = 1; z = 2;
+				y *= static_cast<unsigned int>(_handleCollision(Direction::Y, aabbs, camera));
+				x *= static_cast<unsigned int>(_handleCollision(Direction::X, aabbs, camera));
+				z *= static_cast<unsigned int>(_handleCollision(Direction::Z, aabbs, camera));
+				break;
+			}
+			case DirectionOrder::YZX:
+			{
+				y = 3; z = 2; x = 1;
+				y *= static_cast<unsigned int>(_handleCollision(Direction::Y, aabbs, camera));
+				z *= static_cast<unsigned int>(_handleCollision(Direction::Z, aabbs, camera));
+				z *= static_cast<unsigned int>(_handleCollision(Direction::X, aabbs, camera));
+				break;
+			}
+			case DirectionOrder::ZXY:
+			{
+				z = 3; x = 2; y = 1;
+				z *= static_cast<unsigned int>(_handleCollision(Direction::Z, aabbs, camera));
+				x *= static_cast<unsigned int>(_handleCollision(Direction::X, aabbs, camera));
+				y *= static_cast<unsigned int>(_handleCollision(Direction::Y, aabbs, camera));
+				break;
+			}
+			case DirectionOrder::ZYX:
+			{
+				z = 3; y = 2; x = 1;
+				z *= static_cast<unsigned int>(_handleCollision(Direction::Z, aabbs, camera));
+				y *= static_cast<unsigned int>(_handleCollision(Direction::Y, aabbs, camera));
+				x *= static_cast<unsigned int>(_handleCollision(Direction::X, aabbs, camera));
+				break;
+			}
+		}
+
+		// Rearrange collision order
+		if(x > y && x > z && y > z)
+		{
+			_responseDirectionOrder = DirectionOrder::XYZ;
+		}
+		if(x > y && x > z && z > y)
+		{
+			_responseDirectionOrder = DirectionOrder::XZY;
+		}
+		if(y > x && y > z && x > z)
+		{
+			_responseDirectionOrder = DirectionOrder::YXZ;
+		}
+		if(y > x && y > z && z > x)
+		{
+			_responseDirectionOrder = DirectionOrder::YZX;
+		}
+		if(z > x && z > y && x > y)
+		{
+			_responseDirectionOrder = DirectionOrder::ZYX;
+		}
+		if(z > x && z > y && x > y)
+		{
+			_responseDirectionOrder = DirectionOrder::ZXY;
+		}
+
+		// Store last camera position
+		_lastCameraPosition = camera.getPosition();
 	}
 }
 

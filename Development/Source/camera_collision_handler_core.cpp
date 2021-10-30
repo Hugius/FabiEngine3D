@@ -45,7 +45,13 @@ void CameraCollisionHandler::update(const unordered_map<string, shared_ptr<AabbE
 		unsigned int yPriority = 0;
 		unsigned int zPriority = 0;
 
-		// Handle post-collision
+		// Reset collision
+		for(const auto& [keyID, aabb] : aabbs)
+		{
+			aabb->setCollided(false);
+		}
+
+		// Handle collision
 		switch(_responseDirectionOrder)
 		{
 			case DirectionOrder::XYZ:
@@ -99,30 +105,32 @@ void CameraCollisionHandler::update(const unordered_map<string, shared_ptr<AabbE
 		}
 
 		// Rearrange collision order
-		if((xPriority > yPriority) && (xPriority > zPriority) && (yPriority > zPriority))
+		if((xPriority > yPriority) && (xPriority > zPriority) && (yPriority >= zPriority))
 		{
 			_responseDirectionOrder = DirectionOrder::XYZ;
 		}
-		if((xPriority > yPriority) && (xPriority > zPriority) && (zPriority > yPriority))
+		if((xPriority > yPriority) && (xPriority > zPriority) && (zPriority >= yPriority))
 		{
 			_responseDirectionOrder = DirectionOrder::XZY;
 		}
-		if((yPriority > xPriority) && (yPriority > zPriority) && (xPriority > zPriority))
+		if((yPriority > xPriority) && (yPriority > zPriority) && (xPriority >= zPriority))
 		{
 			_responseDirectionOrder = DirectionOrder::YXZ;
 		}
-		if((yPriority > xPriority) && (yPriority > zPriority) && (zPriority > xPriority))
+		if((yPriority > xPriority) && (yPriority > zPriority) && (zPriority >= xPriority))
 		{
 			_responseDirectionOrder = DirectionOrder::YZX;
 		}
-		if((zPriority > xPriority) && (zPriority > yPriority) && (xPriority > yPriority))
+		if((zPriority > xPriority) && (zPriority > yPriority) && (xPriority >= yPriority))
 		{
 			_responseDirectionOrder = DirectionOrder::ZYX;
 		}
-		if((zPriority > xPriority) && (zPriority > yPriority) && (xPriority > yPriority))
+		if((zPriority > xPriority) && (zPriority > yPriority) && (xPriority >= yPriority))
 		{
 			_responseDirectionOrder = DirectionOrder::ZXY;
 		}
+
+		std::cout << static_cast<int>(_responseDirectionOrder) << std::endl;
 
 		// Store last camera position
 		_lastCameraPosition = camera.getPosition();

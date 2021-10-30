@@ -50,14 +50,13 @@ void CoreEngine::_start()
 	_prepareApplication();
 
 	// Variables
-	auto previous = high_resolution_clock::now();
-	float lag = 0.0f;
+	float renderLag = 0.0f;
 
 	// Main game-loop
 	while(_isRunning)
 	{
 		// Start measuring time
-		auto current = high_resolution_clock::now();
+		auto previousTime = high_resolution_clock::now();
 
 		if(_fe3d.networkServer_isRunning()) // Process application at full speed
 		{
@@ -79,32 +78,38 @@ void CoreEngine::_start()
 		}
 		else // Process application at fixed speed
 		{
-			// Calculate time delay
-			lag += _deltaTimeMS;
+			// Update render lag
+			renderLag += _deltaTimeMS;
 
-			// Check if time delay is getting too much
-			if(lag > (Config::MS_PER_UPDATE * 10.0f))
+			// Check if render lag is getting too much
+			if(renderLag > (Config::MS_PER_UPDATE * 10.0f))
 			{
-				lag = Config::MS_PER_UPDATE;
+				renderLag = Config::MS_PER_UPDATE;
 			}
 
-			// Update (roughly) 144 times per second
-			while(lag >= Config::MS_PER_UPDATE)
+			// Process (roughly) 144 times per second
+			while(renderLag >= Config::MS_PER_UPDATE)
 			{
+				// Retrieve user input
 				_inputHandler.update();
+
+				// Update application
 				_updateApplication();
-				lag -= Config::MS_PER_UPDATE;
+
+				// Update render lag
+				renderLag -= Config::MS_PER_UPDATE;
+				renderLag = std::max(renderLag, 0.0f);
 				_timer.increasePassedFrameCount();
 			}
 
-			// Render application at full speed
+			// Render application
 			_renderApplication();
 		}
 
 		// Calculate delta time
-		auto timeDifference = duration_cast<nanoseconds>(current - previous);
+		auto currentTime = high_resolution_clock::now();
+		auto timeDifference = duration_cast<nanoseconds>(currentTime - previousTime);
 		_deltaTimeMS = static_cast<float>(timeDifference.count()) / 1000000.0f;
-		previous = current;
 	}
 
 	// Finish engine controller

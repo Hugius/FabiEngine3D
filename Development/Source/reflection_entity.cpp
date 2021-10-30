@@ -6,7 +6,7 @@ void ReflectionEntity::updateTransformation()
 	if(_position != _positionTarget)
 	{
 		// Update position
-		auto speedMultiplier = Math::normalizeVector(_positionTarget - _position);
+		auto speedMultiplier = Math::normalize(_positionTarget - _position);
 		_position += (speedMultiplier * _positionTargetSpeed);
 
 		// Correct position

@@ -212,8 +212,8 @@ const Matrix44 Math::createOrthoMatrix(float left, float right, float bottom, fl
 const Matrix44 Math::createViewMatrix(Vec3 eye, Vec3 center, Vec3 up)
 {
 	// Temporary values
-	Vec3 frontVector = normalizeVector(center - eye);
-	Vec3 rightVector = normalizeVector(calculateCrossProduct(frontVector, up));
+	Vec3 frontVector = normalize(center - eye);
+	Vec3 rightVector = normalize(calculateCrossProduct(frontVector, up));
 	Vec3 upVector = calculateCrossProduct(rightVector, frontVector);
 
 	// Result

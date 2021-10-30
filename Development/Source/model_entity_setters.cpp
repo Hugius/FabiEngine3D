@@ -16,7 +16,7 @@ void ModelEntity::updateTransformation()
 	// Base position target
 	if(_basePosition != _basePositionTarget)
 	{
-		auto speedMultiplier = Math::normalizeVector(_basePositionTarget - _basePosition);
+		auto speedMultiplier = Math::normalize(_basePositionTarget - _basePosition);
 		_basePosition += (speedMultiplier * _basePositionTargetSpeed);
 		_correctPositionTarget(_basePosition, _basePositionTarget, _basePositionTargetSpeed);
 	}
@@ -24,7 +24,7 @@ void ModelEntity::updateTransformation()
 	// Base rotation target
 	if(_baseRotation != _baseRotationTarget)
 	{
-		auto difference = Math::calculateVectorDifference(_baseRotation, _baseRotationTarget);
+		auto difference = Math::calculateDifference(_baseRotation, _baseRotationTarget);
 		Vec3 multiplier = Vec3(
 			((difference.x < 180.0f) ? 1.0f : -1.0f),
 			((difference.y < 180.0f) ? 1.0f : -1.0f),
@@ -39,7 +39,7 @@ void ModelEntity::updateTransformation()
 	// Base size target
 	if(_baseSize != _baseSizeTarget)
 	{
-		auto speedMultiplier = Math::normalizeVector(_baseSizeTarget - _baseSize);
+		auto speedMultiplier = Math::normalize(_baseSizeTarget - _baseSize);
 		_baseSize += (speedMultiplier * _baseSizeTargetSpeed);
 		_correctSizeTarget(_baseSize, _baseSizeTarget, _baseSizeTargetSpeed);
 	}
@@ -50,7 +50,7 @@ void ModelEntity::updateTransformation()
 		// Part position target
 		if(part.position != part.positionTarget)
 		{
-			auto speedMultiplier = Math::normalizeVector(part.positionTarget - part.position);
+			auto speedMultiplier = Math::normalize(part.positionTarget - part.position);
 			part.position += (speedMultiplier * part.positionTargetSpeed);
 			_correctPositionTarget(part.position, part.positionTarget, part.positionTargetSpeed);
 		}
@@ -58,7 +58,7 @@ void ModelEntity::updateTransformation()
 		// Part rotation target
 		if(part.rotation != part.rotationTarget)
 		{
-			auto difference = Math::calculateVectorDifference(part.rotation, part.rotationTarget);
+			auto difference = Math::calculateDifference(part.rotation, part.rotationTarget);
 			Vec3 multiplier = Vec3(
 				((difference.x < 180.0f) ? 1.0f : -1.0f),
 				((difference.y < 180.0f) ? 1.0f : -1.0f),
@@ -75,7 +75,7 @@ void ModelEntity::updateTransformation()
 		// Part size target
 		if(part.size != part.sizeTarget)
 		{
-			auto speedMultiplier = Math::normalizeVector(part.sizeTarget - part.size);
+			auto speedMultiplier = Math::normalize(part.sizeTarget - part.size);
 			part.size += (speedMultiplier * part.sizeTargetSpeed);
 			_correctSizeTarget(part.size, part.sizeTarget, part.sizeTargetSpeed);
 		}

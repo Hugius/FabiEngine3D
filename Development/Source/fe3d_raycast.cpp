@@ -51,8 +51,8 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 				float back = (entity->getSize().z / 2.0f);
 				float front = (entity->getSize().z / 2.0f);
 
-				// Check intersection
-				float distance = _core->_raycaster.calculateRayBoxIntersectionDistance(_core->_raycaster.getCursorRay(), Box(position, left, right, bottom, top, back, front));
+				// Calculate intersection distance
+				auto distance = _core->_raycaster.calculateRayBoxIntersectionDistance(_core->_raycaster.getCursorRay(), Box(position, left, right, bottom, top, back, front));
 
 				// Check if closest to camera
 				if((distance != -1.0f) && (distance < closestDistance))
@@ -114,8 +114,8 @@ const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& 
 			float back = (entity->getSize().z / 2.0f);
 			float front = (entity->getSize().z / 2.0f);
 
-			// Calculate intersection & distance
-			float distance = _core->_raycaster.calculateRayBoxIntersectionDistance(_core->_raycaster.getCursorRay(), Box(position, left, right, bottom, top, back, front));
+			// Calculate intersection distance
+			auto distance = _core->_raycaster.calculateRayBoxIntersectionDistance(_core->_raycaster.getCursorRay(), Box(position, left, right, bottom, top, back, front));
 			bool result = (distance != -1.0f);
 
 			// Return
@@ -178,7 +178,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(cons
 						float front = (entity->getSize().z / 2.0f);
 
 						// Check intersection
-						float distance = _core->_raycaster.calculateRayBoxIntersectionDistance(_core->_raycaster.getCursorRay(), Box(position, left, right, bottom, top, back, front));
+						auto distance = _core->_raycaster.calculateRayBoxIntersectionDistance(_core->_raycaster.getCursorRay(), Box(position, left, right, bottom, top, back, front));
 
 						// Check if closest to camera
 						if((distance != -1.0f) && (distance < closestDistance))

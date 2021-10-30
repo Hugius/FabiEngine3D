@@ -2,6 +2,7 @@
 #include "render_bus.hpp"
 #include "configuration.hpp"
 #include "tools.hpp"
+#include "mathematics.hpp"
 
 #include <algorithm>
 
@@ -88,6 +89,12 @@ float Raycaster::calculateRayBoxIntersectionDistance(Ray ray, Box box)
 		Final formula: distance = (point - origin) * (1 / direction)
 	*/
 
+	// Check if ray is invalid
+	if(ray.getDirection() == Vec3(0.0f))
+	{
+		return -1.0f;
+	}
+
 	// Small performance optimization
 	const Vec3 inverseRayDirection = (Vec3(1.0f) / ray.getDirection());
 
@@ -135,7 +142,7 @@ Ray Raycaster::_calculateCursorRay(Ivec2 cursorPosition)
 	Vec4 viewCoords = _convertToViewSpace(clipCoords);
 	Vec3 worldCoords = _convertToWorldSpace(viewCoords);
 
-	return Ray(_renderBus.getCameraPosition(), Math::normalizeVector(worldCoords));
+	return Ray(_renderBus.getCameraPosition(), Math::normalize(worldCoords));
 }
 
 Vec4 Raycaster::_convertToViewSpace(Vec4 clipCoords)

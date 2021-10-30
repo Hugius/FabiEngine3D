@@ -192,11 +192,11 @@ void Camera::updateMatrices()
 	_frontVector.x = (cos(Math::convertToRadians(_yaw)) * cos(Math::convertToRadians(_pitch)));
 	_frontVector.y = sin(Math::convertToRadians(_pitch));
 	_frontVector.z = (sin(Math::convertToRadians(_yaw)) * cos(Math::convertToRadians(_pitch)));
-	_frontVector = Math::normalizeVector(_frontVector);
+	_frontVector = Math::normalize(_frontVector);
 
 	// Calculate the view matrix input
 	_rightVector = Math::calculateCrossProduct(_frontVector, _upVector);
-	_rightVector = Math::normalizeVector(_rightVector);
+	_rightVector = Math::normalize(_rightVector);
 
 	// View matrix
 	_viewMatrix = Math::createViewMatrix(_position, (_position + _frontVector), _upVector);

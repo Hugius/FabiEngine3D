@@ -21,7 +21,8 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\box.cpp" />
     <ClCompile Include="..\..\Source\camera_collision_detector.cpp" />
-    <ClCompile Include="..\..\Source\camera_collision_handler.cpp" />
+    <ClCompile Include="..\..\Source\camera_collision_handler_core.cpp" />
+    <ClCompile Include="..\..\Source\camera_collision_handler_misc.cpp" />
     <ClCompile Include="..\..\Source\ray.cpp" />
     <ClCompile Include="..\..\Source\raycaster.cpp" />
   </ItemGroup>

@@ -318,7 +318,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						// Calculate absolute distance
-						float result = Math::calculateVectorDistance(arguments[0].getVec3(), arguments[1].getVec3());
+						float result = Math::calculateDistance(arguments[0].getVec3(), arguments[1].getVec3());
 						returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 					}
 				}

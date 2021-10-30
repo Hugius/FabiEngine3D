@@ -122,20 +122,11 @@ void SceneEditor::_updateModelEditing()
 				}
 				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
 				{
-					// Freeze model
 					_fe3d.modelEntity_setStaticToCamera(_activeModelID, !_fe3d.modelEntity_isStaticToCamera(_activeModelID));
-
-					// Set AABBs responsiveness
-					for(const auto& aabbID : _fe3d.aabbEntity_getChildIDs(_activeModelID, AabbParentType::MODEL_ENTITY))
-					{
-						_fe3d.aabbEntity_setRaycastResponsive(aabbID, !_fe3d.modelEntity_isStaticToCamera(_activeModelID));
-						_fe3d.aabbEntity_setCollisionResponsive(aabbID, !_fe3d.modelEntity_isStaticToCamera(_activeModelID));
-					}
 				}
 				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
 				{
-					_gui.getGlobalScreen()->createChoiceForm("animationList", "Select Animation", Vec2(0.0f, 0.1f),
-															 _animationEditor.getAllAnimationIDs());
+					_gui.getGlobalScreen()->createChoiceForm("animationList", "Select Animation", Vec2(0.0f, 0.1f), _animationEditor.getAllAnimationIDs());
 				}
 				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
@@ -235,7 +226,7 @@ void SceneEditor::_updateModelEditing()
 			}
 
 			// Update transformations if changed
-			if(position != oldPosition || rotation != oldRotation || size != oldSize)
+			if((position != oldPosition) || (rotation != oldRotation) || (size != oldSize))
 			{
 				// Check if animation is playing
 				auto animationNames = _animationEditor.getStartedAnimationIDs(_activeModelID);

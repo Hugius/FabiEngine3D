@@ -10,7 +10,7 @@ void SpotlightEntity::updateTransformation()
 	if(_position != _positionTarget)
 	{
 		// Update position
-		auto speedMultiplier = Math::normalizeVector(_positionTarget - _position);
+		auto speedMultiplier = Math::normalize(_positionTarget - _position);
 		_position += (speedMultiplier * _positionTargetSpeed);
 
 		// Correct position
@@ -34,7 +34,7 @@ void SpotlightEntity::updateFrontVector()
 	_frontVector.x = (cos(Math::convertToRadians(_yaw)) * cos(Math::convertToRadians(_pitch)));
 	_frontVector.y = sin(Math::convertToRadians(_pitch));
 	_frontVector.z = (sin(Math::convertToRadians(_yaw)) * cos(Math::convertToRadians(_pitch)));
-	_frontVector = Math::normalizeVector(_frontVector);
+	_frontVector = Math::normalize(_frontVector);
 }
 
 void SpotlightEntity::setPosition(Vec3 value)

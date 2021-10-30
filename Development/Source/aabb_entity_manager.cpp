@@ -182,9 +182,17 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 						}
 
 						// Update visibility
-						if(entity->mustFollowParentVisibility())
+						if(parentEntity->isCameraStatic())
 						{
-							entity->setVisible(parentEntity->isVisible());
+							entity->setVisible(false);
+						}
+						else
+						{
+							// Follow parent's visibility
+							if(entity->mustFollowParentVisibility())
+							{
+								entity->setVisible(parentEntity->isVisible());
+							}
 						}
 					}
 				}

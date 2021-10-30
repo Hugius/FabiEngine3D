@@ -12,7 +12,7 @@ void BillboardEntity::updateTransformation()
 	if(_position != _positionTarget)
 	{
 		// Update position
-		auto speedMultiplier = Math::normalizeVector(_positionTarget - _position);
+		auto speedMultiplier = Math::normalize(_positionTarget - _position);
 		_position += (speedMultiplier * _positionTargetSpeed);
 
 		// Correct position
@@ -34,7 +34,7 @@ void BillboardEntity::updateTransformation()
 	if(_rotation != _rotationTarget)
 	{
 		// Update rotation
-		auto difference = Math::calculateVectorDifference(_rotation, _rotationTarget);
+		auto difference = Math::calculateDifference(_rotation, _rotationTarget);
 		Vec3 multiplier = Vec3(
 			((difference.x < 180.0f) ? 1.0f : -1.0f),
 			((difference.y < 180.0f) ? 1.0f : -1.0f),
@@ -64,7 +64,7 @@ void BillboardEntity::updateTransformation()
 	if(_size != _sizeTarget)
 	{
 		// Update size
-		auto speedMultiplier = Math::normalizeVector(_sizeTarget - _size);
+		auto speedMultiplier = Math::normalize(_sizeTarget - _size);
 		_size += (speedMultiplier * _sizeTargetSpeed);
 
 		// Correct size

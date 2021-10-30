@@ -95,7 +95,6 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 		float floatIndex = static_cast<float>(index);
 		Vec3 timePartColor = Vec3(1.0f, 0.0f, 1.0f);
 		Vec3 separatorPartColor = Vec3(1.0f, 0.85f, 0.0f);
-		Vec3 messagePartColor = Vec3(1.0f);
 
 		// Extract message type
 		unsigned int typePartLength = 0;
@@ -113,16 +112,13 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 			}
 		}
 
-		// Check if message is a warning, aka an "error" for the engine user
-		if(typeString == "[Warn]")
-		{
-			messagePartColor = Vec3(1.0f, 0.0f, 0.0f);
-		}
+		// Choose message part color
+		const Vec3 messagePartColor = ((typeString == "[Warn]") ? Vec3(1.0f, 0.0f, 0.0f) : (typeString == "[Debug]") ? Vec3(1.0f, 0.25f, 0.0f) : Vec3(1.0f));
 
 		// Different parts
 		const string timePartText = message.substr(typePartLength, TIME_PART_LENGTH); // Time text" [HH:MM::SS]
-		const string separatorPartText = message.substr(typePartLength + TIME_PART_LENGTH, SEPARATOR_PART_LENGTH); // Seperator part
-		string messagePartText = message.substr(typePartLength + TIME_PART_LENGTH + SEPARATOR_PART_LENGTH); // Message part
+		const string separatorPartText = message.substr((typePartLength + TIME_PART_LENGTH), SEPARATOR_PART_LENGTH); // Seperator part
+		string messagePartText = message.substr((typePartLength + TIME_PART_LENGTH) + SEPARATOR_PART_LENGTH); // Message part
 
 		// Check if message part takes multiple lines
 		vector<string> messageParts;

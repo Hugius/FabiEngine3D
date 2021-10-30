@@ -53,9 +53,33 @@ const float Math::calculateReferenceAngle(float angle)
 	}
 }
 
+const Vec2 Math::calculateAverage(const vector<Vec2>& values)
+{
+	Vec2 total = Vec2(0.0f);
+
+	for(const auto& value : values)
+	{
+		total += value;
+	}
+
+	return (total / static_cast<float>(values.size()));
+}
+
 const Vec3 Math::calculateAverage(const vector<Vec3>& values)
 {
 	Vec3 total = Vec3(0.0f);
+
+	for(const auto& value : values)
+	{
+		total += value;
+	}
+
+	return (total / static_cast<float>(values.size()));
+}
+
+const Vec4 Math::calculateAverage(const vector<Vec4>& values)
+{
+	Vec4 total = Vec4(0.0f);
 
 	for(const auto& value : values)
 	{
@@ -114,6 +138,21 @@ const int Math::getRandomInteger(int min, int max)
 {
 	uniform_int_distribution<int> dist(min, max);
 	return dist(_generator);
+}
+
+const bool Math::isNormalized(Vec2 vector)
+{
+	return (calculateMagnitude(vector) == 1.0f);
+}
+
+const bool Math::isNormalized(Vec3 vector)
+{
+	return (calculateMagnitude(vector) == 1.0f);
+}
+
+const bool Math::isNormalized(Vec4 vector)
+{
+	return (calculateMagnitude(vector) == 1.0f);
 }
 
 const Vec2 Math::convertToNDC(Vec2 position)

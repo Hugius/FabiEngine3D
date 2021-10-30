@@ -14,7 +14,7 @@ const Vec3 Math::calculateCrossProduct(Vec3 firstVector, Vec3 secondVector)
 	return crossVector;
 }
 
-const Vec2 Math::calculateVectorDifference(Vec2 firstPosition, Vec2 secondPosition)
+const Vec2 Math::calculateDifference(Vec2 firstPosition, Vec2 secondPosition)
 {
 	// Calculate
 	float xDistance = fabsf(firstPosition.x - secondPosition.x);
@@ -24,7 +24,7 @@ const Vec2 Math::calculateVectorDifference(Vec2 firstPosition, Vec2 secondPositi
 	return Vec2(xDistance, yDistance);
 }
 
-const Vec3 Math::calculateVectorDifference(Vec3 firstPosition, Vec3 secondPosition)
+const Vec3 Math::calculateDifference(Vec3 firstPosition, Vec3 secondPosition)
 {
 	// Calculate
 	float xDistance = fabsf(firstPosition.x - secondPosition.x);
@@ -35,7 +35,7 @@ const Vec3 Math::calculateVectorDifference(Vec3 firstPosition, Vec3 secondPositi
 	return Vec3(xDistance, yDistance, zDistance);
 }
 
-const Vec4 Math::calculateVectorDifference(Vec4 firstPosition, Vec4 secondPosition)
+const Vec4 Math::calculateDifference(Vec4 firstPosition, Vec4 secondPosition)
 {
 	// Calculate
 	float xDistance = fabsf(firstPosition.x - secondPosition.x);
@@ -47,10 +47,10 @@ const Vec4 Math::calculateVectorDifference(Vec4 firstPosition, Vec4 secondPositi
 	return Vec4(xDistance, yDistance, zDistance, wDistance);
 }
 
-const Vec2 Math::normalizeVector(Vec2 vector)
+const Vec2 Math::normalize(Vec2 vector)
 {
 	// Calculate inverse magnitude
-	float inverseMagnitude = (1.0f / calculateVectorMagnitude(vector));
+	float inverseMagnitude = (1.0f / calculateMagnitude(vector));
 
 	// Normalize
 	vector.x *= inverseMagnitude;
@@ -60,10 +60,10 @@ const Vec2 Math::normalizeVector(Vec2 vector)
 	return vector;
 }
 
-const Vec3 Math::normalizeVector(Vec3 vector)
+const Vec3 Math::normalize(Vec3 vector)
 {
 	// Calculate inverse magnitude
-	float inverseMagnitude = (1.0f / calculateVectorMagnitude(vector));
+	float inverseMagnitude = (1.0f / calculateMagnitude(vector));
 
 	// Normalize
 	vector.x *= inverseMagnitude;
@@ -74,10 +74,10 @@ const Vec3 Math::normalizeVector(Vec3 vector)
 	return vector;
 }
 
-const Vec4 Math::normalizeVector(Vec4 vector)
+const Vec4 Math::normalize(Vec4 vector)
 {
 	// Calculate inverse magnitude
-	float inverseMagnitude = (1.0f / calculateVectorMagnitude(vector));
+	float inverseMagnitude = (1.0f / calculateMagnitude(vector));
 
 	// Normalize
 	vector.x *= inverseMagnitude;
@@ -89,7 +89,7 @@ const Vec4 Math::normalizeVector(Vec4 vector)
 	return vector;
 }
 
-const float Math::calculateVectorDistance(Vec2 firstPosition, Vec2 secondPosition)
+const float Math::calculateDistance(Vec2 firstPosition, Vec2 secondPosition)
 {
 	// Check if distance is 0
 	if(firstPosition == secondPosition)
@@ -102,10 +102,10 @@ const float Math::calculateVectorDistance(Vec2 firstPosition, Vec2 secondPositio
 	float yDistance = fabsf(firstPosition.y - secondPosition.y);
 
 	// Return
-	return calculateVectorMagnitude(Vec2(xDistance, yDistance));
+	return calculateMagnitude(Vec2(xDistance, yDistance));
 }
 
-const float Math::calculateVectorDistance(Vec3 firstPosition, Vec3 secondPosition)
+const float Math::calculateDistance(Vec3 firstPosition, Vec3 secondPosition)
 {
 	// Check if distance is 0
 	if(firstPosition == secondPosition)
@@ -119,10 +119,10 @@ const float Math::calculateVectorDistance(Vec3 firstPosition, Vec3 secondPositio
 	float zDistance = fabsf(firstPosition.z - secondPosition.z);
 
 	// Return
-	return calculateVectorMagnitude(Vec3(xDistance, yDistance, zDistance));
+	return calculateMagnitude(Vec3(xDistance, yDistance, zDistance));
 }
 
-const float Math::calculateVectorDistance(Vec4 firstPosition, Vec4 secondPosition)
+const float Math::calculateDistance(Vec4 firstPosition, Vec4 secondPosition)
 {
 	// Check if distance is 0
 	if(firstPosition == secondPosition)
@@ -137,7 +137,7 @@ const float Math::calculateVectorDistance(Vec4 firstPosition, Vec4 secondPositio
 	float wDistance = fabsf(firstPosition.w - secondPosition.w);
 
 	// Return
-	return calculateVectorMagnitude(Vec4(xDistance, yDistance, zDistance, wDistance));
+	return calculateMagnitude(Vec4(xDistance, yDistance, zDistance, wDistance));
 }
 
 const float Math::calculateDotProduct(Vec2 firstVector, Vec2 secondVector)
@@ -155,17 +155,17 @@ const float Math::calculateDotProduct(Vec4 firstVector, Vec4 secondVector)
 	return ((firstVector.x * secondVector.x) + (firstVector.y * secondVector.y) + (firstVector.z * secondVector.z) + (firstVector.w * secondVector.w));
 }
 
-const float Math::calculateVectorMagnitude(Vec2 vector)
+const float Math::calculateMagnitude(Vec2 vector)
 {
 	return sqrtf((vector.x * vector.x) + (vector.y * vector.y));
 }
 
-const float Math::calculateVectorMagnitude(Vec3 vector)
+const float Math::calculateMagnitude(Vec3 vector)
 {
 	return sqrtf((vector.x * vector.x) + (vector.y * vector.y) + (vector.z * vector.z));
 }
 
-const float Math::calculateVectorMagnitude(Vec4 vector)
+const float Math::calculateMagnitude(Vec4 vector)
 {
 	return sqrtf((vector.x * vector.x) + (vector.y * vector.y) + (vector.z * vector.z) + (vector.w * vector.w));
 }

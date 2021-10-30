@@ -207,13 +207,6 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				_fe3d.modelEntity_setBaseSize(modelID, size);
 				_fe3d.modelEntity_setStaticToCamera(modelID, isFrozen);
 
-				// Set AABBs responsiveness
-				for(const auto& aabbID : _fe3d.aabbEntity_getChildIDs(modelID, AabbParentType::MODEL_ENTITY))
-				{
-					_fe3d.aabbEntity_setRaycastResponsive(aabbID, !isFrozen);
-					_fe3d.aabbEntity_setCollisionResponsive(aabbID, !isFrozen);
-				}
-
 				// Save original transformation
 				if(_isEditorLoaded)
 				{

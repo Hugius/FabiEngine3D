@@ -65,6 +65,7 @@
     <ClInclude Include="..\..\Source\lens_flare_renderer.hpp" />
     <ClInclude Include="..\..\Source\model_entity_depth_renderer.hpp" />
     <ClInclude Include="..\..\Source\motion_blur_renderer.hpp" />
+    <ClInclude Include="..\..\Source\render_utils.hpp" />
     <ClInclude Include="..\..\Source\terrain_entity_depth_renderer.hpp" />
     <ClInclude Include="..\..\Source\image_entity_color_renderer.hpp" />
     <ClInclude Include="..\..\Source\model_entity_color_renderer.hpp" />

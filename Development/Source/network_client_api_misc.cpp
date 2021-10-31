@@ -9,7 +9,7 @@
 
 using std::launch;
 
-bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved, bool mustBeAccepted)
+bool NetworkClientAPI::_sendMessageTCP(const string& content, bool isReserved, bool mustBeAccepted)
 {
 	// Must be running
 	if(!_isRunning)
@@ -41,7 +41,7 @@ bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved, b
 	string message = (content + ';');
 
 	// Send message to server
-	auto sendStatusCode = send(_tcpSocketID, message.c_str(), static_cast<int>(message.size()), 0);
+	auto sendStatusCode = send(_socketTCP, message.c_str(), static_cast<int>(message.size()), 0);
 
 	// Check if sending went well
 	if(sendStatusCode == SOCKET_ERROR)
@@ -64,7 +64,7 @@ bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved, b
 	return true;
 }
 
-bool NetworkClientAPI::_sendUdpMessage(const string& content, bool isReserved, bool mustBeAccepted)
+bool NetworkClientAPI::_sendMessageUDP(const string& content, bool isReserved, bool mustBeAccepted)
 {
 	// Must be running
 	if(!_isRunning)
@@ -96,11 +96,11 @@ bool NetworkClientAPI::_sendUdpMessage(const string& content, bool isReserved, b
 	auto socketAddress = NetworkUtils::composeSocketAddress(_serverIP, _serverPort);
 
 	// Add a semicolon to separate username & content
-	string message = _username + ';' + content;
+	string message = (_username + ';' + content);
 
 	// Send message to server
 	auto sendStatusCode = sendto(
-		_udpSocketID, // UDP socket
+		_socketUDP, // UDP socket
 		message.c_str(), // Message content
 		static_cast<int>(message.size()), // Message size
 		0, // Flags
@@ -123,14 +123,14 @@ bool NetworkClientAPI::_sendUdpMessage(const string& content, bool isReserved, b
 	return true;
 }
 
-int NetworkClientAPI::_waitForServerConnection(SOCKET serverSocketID, const string& serverIP, const string& serverPort)
+int NetworkClientAPI::_waitForServerConnection(SOCKET socket, const string& serverIP, const string& serverPort)
 {
 	// Compose socket address
 	auto socketAddress = NetworkUtils::composeSocketAddress(serverIP, serverPort);
 
 	// Try to connect to server
 	auto connectStatusCode = connect(
-		serverSocketID,
+		socket,
 		reinterpret_cast<sockaddr*>(&socketAddress),
 		sizeof(socketAddress));
 
@@ -164,21 +164,21 @@ void NetworkClientAPI::_setupTCP()
 	}
 
 	// Create socket
-	_tcpSocketID = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
-	if(_tcpSocketID == INVALID_SOCKET)
+	_socketTCP = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
+	if(_socketTCP == INVALID_SOCKET)
 	{
 		Logger::throwError("NetworkClientAPI::_setupTCP::2 ---> ", WSAGetLastError());
 	}
 
 	// Bind socket
-	auto tcpBindStatusCode = bind(_tcpSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
+	auto tcpBindStatusCode = bind(_socketTCP, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
 	if(tcpBindStatusCode == SOCKET_ERROR)
 	{
 		Logger::throwError("NetworkClientAPI::_setupTCP::3 ---> ", WSAGetLastError());
 	}
 
 	// Spawn a thread for connecting to the server
-	_connectionThread = async(launch::async, &NetworkClientAPI::_waitForServerConnection, this, _tcpSocketID, _serverIP, _serverPort);
+	_connectionThread = async(launch::async, &NetworkClientAPI::_waitForServerConnection, this, _socketTCP, _serverIP, _serverPort);
 }
 
 void NetworkClientAPI::_setupUDP()
@@ -200,14 +200,14 @@ void NetworkClientAPI::_setupUDP()
 	}
 
 	// Create socket
-	_udpSocketID = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
-	if(_udpSocketID == INVALID_SOCKET)
+	_socketUDP = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
+	if(_socketUDP == INVALID_SOCKET)
 	{
 		Logger::throwError("NetworkClientAPI::_setupUDP::2 ----> ", WSAGetLastError());
 	}
 
 	// Bind socket
-	auto udpBindStatusCode = bind(_udpSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
+	auto udpBindStatusCode = bind(_socketUDP, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
 	if(udpBindStatusCode == SOCKET_ERROR)
 	{
 		Logger::throwError("NetworkClientAPI::_setupUDP::3 ---> ", WSAGetLastError());
@@ -217,12 +217,12 @@ void NetworkClientAPI::_setupUDP()
 	freeaddrinfo(addressInfo);
 }
 
-tuple<int, int, long long, string> NetworkClientAPI::_waitForTcpMessage(SOCKET tcpSocketID)
+tuple<int, int, long long, string> NetworkClientAPI::_waitForMessageTCP(SOCKET socket)
 {
 	// Retrieve bytes & size
 	char buffer[NetworkUtils::TCP_BUFFER_BYTES];
 	int bufferLength = static_cast<int>(NetworkUtils::TCP_BUFFER_BYTES);
-	auto receiveResult = recv(tcpSocketID, buffer, bufferLength, 0);
+	auto receiveResult = recv(socket, buffer, bufferLength, 0);
 
 	if(receiveResult > 0) // Message received correctly
 	{
@@ -234,7 +234,7 @@ tuple<int, int, long long, string> NetworkClientAPI::_waitForTcpMessage(SOCKET t
 	}
 }
 
-tuple<int, int, string, string, string> NetworkClientAPI::_receiveUdpMessage(SOCKET udpSocketID)
+tuple<int, int, string, string, string> NetworkClientAPI::_receiveMessageUDP(SOCKET socket)
 {
 	// Data store
 	char buffer[NetworkUtils::UDP_BUFFER_BYTES];
@@ -243,7 +243,7 @@ tuple<int, int, string, string, string> NetworkClientAPI::_receiveUdpMessage(SOC
 	int sourceAddressLength = sizeof(sourceAddress);
 
 	// Retrieve data
-	auto receiveResult = recvfrom(udpSocketID, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
+	auto receiveResult = recvfrom(socket, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
 
 	// Extract address
 	auto IP = NetworkUtils::extractAddressIP(&sourceAddress);

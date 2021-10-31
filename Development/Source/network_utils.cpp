@@ -68,7 +68,7 @@ const bool NetworkUtils::isValidIP(const string& IP)
 	return (result > 0);
 }
 
-const bool NetworkUtils::isUdpMessageReady(SOCKET socket)
+const bool NetworkUtils::isMessageReadyUDP(SOCKET socket)
 {
 	fd_set socketSet = fd_set();
 	timeval timeInterval = { 0 , 1 }; // 1 microsecond
@@ -81,11 +81,11 @@ const bool NetworkUtils::isMessageReserved(const string& message)
 {
 	return
 	(
-		(message.substr(0, 7)  == "REQUEST")				||
-		(message.substr(0, 6) == "ACCEPT")					||
-		(message.substr(0, 4) == "PING")					||
-		(message.substr(0, 14) == "SERVER_IS_FULL")			||
-		(message.substr(0, 22) == "USER_ALREADY_CONNECTED") ||
-		(message.substr(0, 22) == "DISCONNECTED_BY_SERVER")
+		(message.substr(0, string("REQUEST").size()) == "REQUEST") ||
+		(message.substr(0, string("ACCEPT").size()) == "ACCEPT") ||
+		(message.substr(0, string("PING").size()) == "PING") ||
+		(message.substr(0, string("SERVER_FULL").size()) == "SERVER_FULL") ||
+		(message.substr(0, string("ALREADY_CONNECTED").size()) == "ALREADY_CONNECTED") ||
+		(message.substr(0, string("DISCONNECTED").size()) == "DISCONNECTED")
 	);
 }

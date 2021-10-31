@@ -28,6 +28,7 @@ bool NetworkServerAPI::isClientConnected(const string& username)
 		}
 	}
 
+	// Return
 	return false;
 }
 
@@ -39,18 +40,8 @@ const string& NetworkServerAPI::getNewClientIP()
 		Logger::throwError("NetworkServerAPI::getNewClientIP");
 	}
 
+	// Return
 	return _newClientIP;
-}
-
-const string& NetworkServerAPI::getNewClientPort()
-{
-	// Must be running
-	if(!_isRunning)
-	{
-		Logger::throwError("NetworkServerAPI::getNewClientPort");
-	}
-
-	return _newClientPort;
 }
 
 const string& NetworkServerAPI::getNewClientUsername()
@@ -61,6 +52,7 @@ const string& NetworkServerAPI::getNewClientUsername()
 		Logger::throwError("NetworkServerAPI::getNewClientUsername");
 	}
 
+	// Return
 	return _newClientUsername;
 }
 
@@ -72,6 +64,7 @@ const string NetworkServerAPI::getOldClientIP()
 		Logger::throwError("NetworkServerAPI::getOldClientIP");
 	}
 
+	// Return
 	if(_oldClientIPs.empty())
 	{
 		return "";
@@ -79,24 +72,6 @@ const string NetworkServerAPI::getOldClientIP()
 	else
 	{
 		return _oldClientIPs.front();
-	}
-}
-
-const string NetworkServerAPI::getOldClientPort()
-{
-	// Must be running
-	if(!_isRunning)
-	{
-		Logger::throwError("NetworkServerAPI::getOldClientPort");
-	}
-
-	if(_oldClientPorts.empty())
-	{
-		return "";
-	}
-	else
-	{
-		return _oldClientPorts.front();
 	}
 }
 
@@ -108,6 +83,7 @@ const string NetworkServerAPI::getOldClientUsername()
 		Logger::throwError("NetworkServerAPI::getOldClientUsername");
 	}
 
+	// Return
 	if(_oldClientUsernames.empty())
 	{
 		return "";
@@ -126,6 +102,7 @@ const vector<NetworkClientMessage>& NetworkServerAPI::getPendingMessages()
 		Logger::throwError("NetworkServerAPI::getPendingMessages");
 	}
 
+	// Return
 	return _pendingMessages;
 }
 
@@ -141,36 +118,22 @@ const vector<string> NetworkServerAPI::getClientIPs()
 	vector<string> clientIPs;
 	for(size_t i = 0; i < _clientIPs.size(); i++)
 	{
+		// Check if client is found
 		if(!_clientUsernames[i].empty())
 		{
 			clientIPs.push_back(_clientIPs[i]);
 		}
 	}
+
+	// Return
 	return clientIPs;
-}
-
-const vector<string> NetworkServerAPI::getClientPorts()
-{
-	// Must be running
-	if(!_isRunning)
-	{
-		Logger::throwError("NetworkServerAPI::getClientPorts");
-	}
-
-	// Client must be fully accepted
-	vector<string> clientPorts;
-	for(size_t i = 0; i < _clientPorts.size(); i++)
-	{
-		if(!_clientUsernames[i].empty())
-		{
-			clientPorts.push_back(_clientPorts[i]);
-		}
-	}
-	return clientPorts;
 }
 
 const vector<string> NetworkServerAPI::getClientUsernames()
 {
+	// Temporary values
+	vector<string> clientUsernames;
+
 	// Must be running
 	if(!_isRunning)
 	{
@@ -178,7 +141,6 @@ const vector<string> NetworkServerAPI::getClientUsernames()
 	}
 
 	// Client must be fully accepted
-	vector<string> clientUsernames;
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
 	{
 		if(!_clientUsernames[i].empty())
@@ -186,10 +148,12 @@ const vector<string> NetworkServerAPI::getClientUsernames()
 			clientUsernames.push_back(_clientUsernames[i]);
 		}
 	}
+
+	// Return
 	return clientUsernames;
 }
 
-void NetworkServerAPI::sendTcpMessage(const string& username, const string& content)
+void NetworkServerAPI::sendMessageTCP(const string& username, const string& content)
 {
 	// Must be running
 	if(!_isRunning)
@@ -206,8 +170,7 @@ void NetworkServerAPI::sendTcpMessage(const string& username, const string& cont
 			// Check if client is found
 			if(username == _clientUsernames[i])
 			{
-				// Send message
-				_sendTcpMessage(_clientSocketIDs[i], content, false);
+				_sendMessageTCP(_clientSockets[i], content, false);
 				return;
 			}
 		}
@@ -217,7 +180,7 @@ void NetworkServerAPI::sendTcpMessage(const string& username, const string& cont
 	Logger::throwError("NetworkServerAPI::sendTcpMessage::2");
 }
 
-void NetworkServerAPI::sendUdpMessage(const string& username, const string& content)
+void NetworkServerAPI::sendMessageUDP(const string& username, const string& content)
 {
 	// Must be running
 	if(!_isRunning)
@@ -234,8 +197,7 @@ void NetworkServerAPI::sendUdpMessage(const string& username, const string& cont
 			// Check if client is found
 			if(username == _clientUsernames[i])
 			{
-				// Send message
-				_sendUdpMessage(_clientIPs[i], _clientPorts[i], content, false);
+				_sendMessageUDP(_clientIPs[i], _clientPortsUDP[i], content, false);
 				return;
 			}
 		}
@@ -245,7 +207,7 @@ void NetworkServerAPI::sendUdpMessage(const string& username, const string& cont
 	Logger::throwError("NetworkServerAPI::sendUdpMessage::2");
 }
 
-void NetworkServerAPI::broadcastTcpMessage(const string& content, const string& exceptionUsername)
+void NetworkServerAPI::broadcastMessageTCP(const string& content, const string& exceptionUsername)
 {
 	// Must be running
 	if(!_isRunning)
@@ -254,7 +216,7 @@ void NetworkServerAPI::broadcastTcpMessage(const string& content, const string& 
 	}
 
 	// Send message to all connected clients
-	for(size_t i = 0; i < _clientSocketIDs.size(); i++)
+	for(size_t i = 0; i < _clientSockets.size(); i++)
 	{
 		// Check exception
 		if(_clientUsernames[i] != exceptionUsername)
@@ -262,14 +224,13 @@ void NetworkServerAPI::broadcastTcpMessage(const string& content, const string& 
 			// Client must be fully accepted
 			if(!_clientUsernames[i].empty())
 			{
-				// Send message
-				_sendTcpMessage(_clientSocketIDs[i], content, false);
+				_sendMessageTCP(_clientSockets[i], content, false);
 			}
 		}
 	}
 }
 
-void NetworkServerAPI::broadcastUdpMessage(const string& content, const string& exceptionUsername)
+void NetworkServerAPI::broadcastMessageUDP(const string& content, const string& exceptionUsername)
 {
 	// Must be running
 	if(!_isRunning)
@@ -286,8 +247,7 @@ void NetworkServerAPI::broadcastUdpMessage(const string& content, const string& 
 			// Client must be fully accepted
 			if(!_clientUsernames[i].empty())
 			{
-				// Send message
-				_sendUdpMessage(_clientIPs[i], _clientPorts[i], content, false);
+				_sendMessageUDP(_clientIPs[i], _clientPortsUDP[i], content, false);
 			}
 		}
 	}
@@ -310,8 +270,7 @@ void NetworkServerAPI::disconnectClient(const string& username)
 			// Check if client is found
 			if(username == _clientUsernames[i])
 			{
-				// Notify client
-				_sendTcpMessage(_clientSocketIDs[i], "DISCONNECTED_BY_SERVER", true);
+				_sendMessageTCP(_clientSockets[i], "DISCONNECTED", true);
 				return;
 			}
 		}

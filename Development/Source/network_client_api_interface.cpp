@@ -109,12 +109,12 @@ const vector<NetworkServerMessage>& NetworkClientAPI::getPendingMessages()
 	return _pendingMessages;
 }
 
-void NetworkClientAPI::sendTcpMessage(const string& content)
+void NetworkClientAPI::sendMessageTCP(const string& content)
 {
-	_sendTcpMessage(content, false, true);
+	_sendMessageTCP(content, false, true);
 }
 
-void NetworkClientAPI::sendUdpMessage(const string& content)
+void NetworkClientAPI::sendMessageUDP(const string& content)
 {
-	_sendUdpMessage(content, false, true);
+	_sendMessageUDP(content, false, true);
 }

@@ -9,14 +9,10 @@ using std::string;
 struct NetworkClientMessage final
 {
 	NetworkClientMessage(
-		const string& IP,
-		const string& port,
 		const string& username,
 		const string& content,
 		const NetworkProtocol protocol)
 		:
-		IP(IP),
-		port(port),
 		username(username),
 		content(content),
 		protocol(protocol)
@@ -24,8 +20,6 @@ struct NetworkClientMessage final
 
 	}
 
-	const string IP;
-	const string port;
 	const string username;
 	const string content;
 	const NetworkProtocol protocol;

@@ -42,7 +42,6 @@
     <ClInclude Include="..\..\Source\script_value_type.hpp" />
     <ClInclude Include="..\..\Source\script_variable_scope.hpp" />
     <ClInclude Include="..\..\Source\script_variable_type.hpp" />
-    <ClInclude Include="..\..\Source\render_utils.hpp" />
     <ClInclude Include="..\..\Source\timer.hpp" />
     <ClInclude Include="..\..\Source\tools.hpp" />
     <ClInclude Include="..\..\Source\transformation_type.hpp" />

@@ -56,7 +56,7 @@ void FabiEngine3D::networkServer_sendMessageTCP(const string& username, const st
 		return;
 	}
 
-	_core->_networkServerAPI.sendTcpMessage(username, content);
+	_core->_networkServerAPI.sendMessageTCP(username, content);
 }
 
 void FabiEngine3D::networkServer_sendMessageUDP(const string& username, const string& content)
@@ -87,7 +87,7 @@ void FabiEngine3D::networkServer_sendMessageUDP(const string& username, const st
 		return;
 	}
 
-	_core->_networkServerAPI.sendUdpMessage(username, content);
+	_core->_networkServerAPI.sendMessageUDP(username, content);
 }
 
 void FabiEngine3D::networkServer_broadcastMessageTCP(const string& content, const string& exceptionUsername)
@@ -98,7 +98,7 @@ void FabiEngine3D::networkServer_broadcastMessageTCP(const string& content, cons
 		return;
 	}
 
-	_core->_networkServerAPI.broadcastTcpMessage(content, exceptionUsername);
+	_core->_networkServerAPI.broadcastMessageTCP(content, exceptionUsername);
 }
 
 void FabiEngine3D::networkServer_broadcastMessageUDP(const string& content, const string& exceptionUsername)
@@ -109,7 +109,7 @@ void FabiEngine3D::networkServer_broadcastMessageUDP(const string& content, cons
 		return;
 	}
 
-	_core->_networkServerAPI.broadcastUdpMessage(content, exceptionUsername);
+	_core->_networkServerAPI.broadcastMessageUDP(content, exceptionUsername);
 }
 
 void FabiEngine3D::networkServer_disconnectClient(const string& username)
@@ -155,17 +155,6 @@ const string FabiEngine3D::networkServer_getNewClientIP()
 	return _core->_networkServerAPI.getNewClientIP();
 }
 
-const string FabiEngine3D::networkServer_getNewClientPort()
-{
-	if(!_core->_networkServerAPI.isRunning())
-	{
-		Logger::throwWarning("Networking server tried to retrieve new client port: not running!");
-		return "";
-	}
-
-	return _core->_networkServerAPI.getNewClientPort();
-}
-
 const string FabiEngine3D::networkServer_getNewClientUsername()
 {
 	if(!_core->_networkServerAPI.isRunning())
@@ -186,17 +175,6 @@ const string FabiEngine3D::networkServer_getOldClientIP()
 	}
 
 	return _core->_networkServerAPI.getOldClientIP();
-}
-
-const string FabiEngine3D::networkServer_getOldClientPort()
-{
-	if(!_core->_networkServerAPI.isRunning())
-	{
-		Logger::throwWarning("Networking server tried to retrieve old client port: not running!");
-		return "";
-	}
-
-	return _core->_networkServerAPI.getOldClientPort();
 }
 
 const string FabiEngine3D::networkServer_getOldClientUsername()
@@ -230,17 +208,6 @@ const vector<string> FabiEngine3D::networkServer_getClientIPs()
 	}
 
 	return _core->_networkServerAPI.getClientIPs();
-}
-
-const vector<string> FabiEngine3D::networkServer_getClientPorts()
-{
-	if(!_core->_networkServerAPI.isRunning())
-	{
-		Logger::throwWarning("Networking server tried to retrieve client ports: not running!");
-		return {};
-	}
-
-	return _core->_networkServerAPI.getClientPorts();
 }
 
 const vector<string> FabiEngine3D::networkServer_getClientUsernames()

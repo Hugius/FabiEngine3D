@@ -46,13 +46,13 @@ void NetworkClientAPI::update()
 				_isConnectedToServer = true;
 
 				// Send acceptance request to server
-				if(!_sendTcpMessage(("REQUEST" + _username), true, false))
+				if(!_sendMessageTCP(("REQUEST" + NetworkUtils::extractSocketPort(_socketUDP) + _username), true, false))
 				{
 					return;
 				}
 
 				// Start a thread to wait for TCP messages
-				_tcpMessageThread = async(launch::async, &NetworkClientAPI::_waitForTcpMessage, this, _tcpSocketID);
+				_messageThreadTCP = async(launch::async, &NetworkClientAPI::_waitForMessageTCP, this, _socketTCP);
 			}
 			else if((connectionErrorCode == WSAECONNREFUSED) || (connectionErrorCode == WSAETIMEDOUT)) // Cannot connect with server
 			{
@@ -79,7 +79,7 @@ void NetworkClientAPI::update()
 	if(_isAcceptedByServer && !_isWaitingForPing)
 	{
 		// Send ping
-		if(!_sendTcpMessage("PING", true, true))
+		if(!_sendMessageTCP("PING", true, true))
 		{
 			return;
 		}
@@ -90,10 +90,10 @@ void NetworkClientAPI::update()
 	}
 
 	// Receive incoming TCP messages
-	if(_tcpMessageThread.wait_until(system_clock::time_point::min()) == future_status::ready)
+	if(_messageThreadTCP.wait_until(system_clock::time_point::min()) == future_status::ready)
 	{
 		// Temporary values
-		const auto& messageResult = _tcpMessageThread.get();
+		const auto& messageResult = _messageThreadTCP.get();
 		const auto& messageStatusCode = get<0>(messageResult);
 		const auto& messageErrorCode = get<1>(messageResult);
 		const auto& messageTimestamp = get<2>(messageResult);
@@ -105,18 +105,18 @@ void NetworkClientAPI::update()
 			{
 				if(character == ';') // End of current message
 				{
-					if(_tcpMessageBuild == "ACCEPT") // Handle ACCEPT message
+					if(_messageBuildTCP == "ACCEPT") // Handle ACCEPT message
 					{
 						_isAcceptedByServer = true;
-						_tcpMessageBuild = "";
+						_messageBuildTCP = "";
 					}
-					else if(_tcpMessageBuild.substr(0, 4) == "PING") // Handle PING message
+					else if(_messageBuildTCP.substr(0, string("PING").size()) == "PING") // Handle PING message
 					{
 						// Calculate ping latency
 						auto latency = (Tools::getTimeSinceEpochMS() - _lastMilliseconds);
 
 						// Subtract the server & client processing delays
-						auto serverReceiveDelay = stoll(_tcpMessageBuild.substr(4));
+						auto serverReceiveDelay = stoll(_messageBuildTCP.substr(4));
 						auto clientReceiveDelay = (Tools::getTimeSinceEpochMS() - messageTimestamp);
 						latency -= serverReceiveDelay;
 						latency -= clientReceiveDelay;
@@ -128,33 +128,33 @@ void NetworkClientAPI::update()
 						}
 						_pingLatencies.push_back(static_cast<unsigned int>(llabs(latency)));
 						_isWaitingForPing = false;
-						_tcpMessageBuild = "";
+						_messageBuildTCP = "";
 					}
-					else if(_tcpMessageBuild == "SERVER_IS_FULL") // Handle SERVER_IS_FULL message
+					else if(_messageBuildTCP == "SERVER_FULL") // Handle SERVER_FULL message
 					{
 						// Disconnect next tick
-						_pendingMessages.push_back(NetworkServerMessage(_tcpMessageBuild, NetworkProtocol::TCP));
-						_tcpMessageBuild = "";
+						_pendingMessages.push_back(NetworkServerMessage(_messageBuildTCP, NetworkProtocol::TCP));
+						_messageBuildTCP = "";
 						_mustDisconnectFromServer = true;
 
 						// Prevent processing more messages
 						break;
 					}
-					else if(_tcpMessageBuild == "USER_ALREADY_CONNECTED") // Handle USER_ALREADY_CONNECTED message
+					else if(_messageBuildTCP == "ALREADY_CONNECTED") // Handle ALREADY_CONNECTED message
 					{
 						// Disconnect next tick
-						_pendingMessages.push_back(NetworkServerMessage(_tcpMessageBuild, NetworkProtocol::TCP));
-						_tcpMessageBuild = "";
+						_pendingMessages.push_back(NetworkServerMessage(_messageBuildTCP, NetworkProtocol::TCP));
+						_messageBuildTCP = "";
 						_mustDisconnectFromServer = true;
 
 						// Prevent processing more messages
 						break;
 					}
-					else if(_tcpMessageBuild == "DISCONNECTED_BY_SERVER") // Handle DISCONNECTED_BY_SERVER message
+					else if(_messageBuildTCP == "DISCONNECTED") // Handle DISCONNECTED message
 					{
 						// Disconnect next tick
-						_pendingMessages.push_back(NetworkServerMessage(_tcpMessageBuild, NetworkProtocol::TCP));
-						_tcpMessageBuild = "";
+						_pendingMessages.push_back(NetworkServerMessage(_messageBuildTCP, NetworkProtocol::TCP));
+						_messageBuildTCP = "";
 						_mustDisconnectFromServer = true;
 
 						// Prevent processing more messages
@@ -162,13 +162,13 @@ void NetworkClientAPI::update()
 					}
 					else // Handle other message
 					{
-						_pendingMessages.push_back(NetworkServerMessage(_tcpMessageBuild, NetworkProtocol::TCP));
-						_tcpMessageBuild = "";
+						_pendingMessages.push_back(NetworkServerMessage(_messageBuildTCP, NetworkProtocol::TCP));
+						_messageBuildTCP = "";
 					}
 				}
 				else // Add to current message build
 				{
-					_tcpMessageBuild += character;
+					_messageBuildTCP += character;
 				}
 			}
 		}
@@ -192,14 +192,14 @@ void NetworkClientAPI::update()
 		}
 
 		// Spawn new TCP message thread
-		_tcpMessageThread = async(launch::async, &NetworkClientAPI::_waitForTcpMessage, this, _tcpSocketID);
+		_messageThreadTCP = async(launch::async, &NetworkClientAPI::_waitForMessageTCP, this, _socketTCP);
 	}
 
 	// Receive incoming UDP messages
-	while(NetworkUtils::isUdpMessageReady(_udpSocketID))
+	while(NetworkUtils::isMessageReadyUDP(_socketUDP))
 	{
 		// Message data
-		const auto& messageResult = _receiveUdpMessage(_udpSocketID);
+		const auto& messageResult = _receiveMessageUDP(_socketUDP);
 		const auto& messageStatusCode = get<0>(messageResult);
 		const auto& messageErrorCode = get<1>(messageResult);
 		const auto& messageContent = get<2>(messageResult);

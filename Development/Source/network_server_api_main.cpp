@@ -10,8 +10,8 @@ using std::launch;
 
 NetworkServerAPI::NetworkServerAPI()
 	:
-	_tcpSocketID(INVALID_SOCKET),
-	_udpSocketID(INVALID_SOCKET)
+	_socketTCP(INVALID_SOCKET),
+	_socketUDP(INVALID_SOCKET)
 {
 
 }
@@ -69,15 +69,15 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 	}
 
 	// Create socket for listening to client connection requests
-	_tcpSocketID = socket(tcpAddressInfo->ai_family, tcpAddressInfo->ai_socktype, tcpAddressInfo->ai_protocol);
-	if(_tcpSocketID == INVALID_SOCKET)
+	_socketTCP = socket(tcpAddressInfo->ai_family, tcpAddressInfo->ai_socktype, tcpAddressInfo->ai_protocol);
+	if(_socketTCP == INVALID_SOCKET)
 	{
 		Logger::throwError("NetworkServerAPI::start::5 ---> ", WSAGetLastError());
 	}
 
 	// Create socket for handling UDP messages
-	_udpSocketID = socket(udpAddressInfo->ai_family, udpAddressInfo->ai_socktype, udpAddressInfo->ai_protocol);
-	if(_udpSocketID == INVALID_SOCKET)
+	_socketUDP = socket(udpAddressInfo->ai_family, udpAddressInfo->ai_socktype, udpAddressInfo->ai_protocol);
+	if(_socketUDP == INVALID_SOCKET)
 	{
 		Logger::throwError("NetworkServerAPI::start::6 ---> ", WSAGetLastError());
 	}
@@ -85,14 +85,14 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 	// Set socket options
 	DWORD trueValue = 1;
 	DWORD falseValue = 0;
-	setsockopt(_tcpSocketID, IPPROTO_TCP, TCP_NODELAY, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
-	setsockopt(_tcpSocketID, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
-	setsockopt(_udpSocketID, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
-	setsockopt(_tcpSocketID, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char*>(&falseValue), sizeof(falseValue));
-	setsockopt(_udpSocketID, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char*>(&falseValue), sizeof(falseValue));
+	setsockopt(_socketTCP, IPPROTO_TCP, TCP_NODELAY, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
+	setsockopt(_socketTCP, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
+	setsockopt(_socketUDP, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
+	setsockopt(_socketTCP, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char*>(&falseValue), sizeof(falseValue));
+	setsockopt(_socketUDP, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char*>(&falseValue), sizeof(falseValue));
 
 	// Bind connection socket
-	auto tcpBindStatusCode = bind(_tcpSocketID, tcpAddressInfo->ai_addr, static_cast<int>(tcpAddressInfo->ai_addrlen));
+	auto tcpBindStatusCode = bind(_socketTCP, tcpAddressInfo->ai_addr, static_cast<int>(tcpAddressInfo->ai_addrlen));
 	if(tcpBindStatusCode == SOCKET_ERROR)
 	{
 		if(WSAGetLastError() == WSAEADDRINUSE) // Server already running on current machine
@@ -109,7 +109,7 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 	}
 
 	// Bind UDP message socket
-	auto udpBindStatusCode = bind(_udpSocketID, udpAddressInfo->ai_addr, static_cast<int>(udpAddressInfo->ai_addrlen));
+	auto udpBindStatusCode = bind(_socketUDP, udpAddressInfo->ai_addr, static_cast<int>(udpAddressInfo->ai_addrlen));
 	if(udpBindStatusCode == SOCKET_ERROR)
 	{
 		if(WSAGetLastError() == WSAEADDRINUSE) // Server already running on current machine
@@ -126,14 +126,14 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 	}
 
 	// Enable listening for any incoming connection requests
-	auto listenStatusCode = listen(_tcpSocketID, SOMAXCONN);
+	auto listenStatusCode = listen(_socketTCP, SOMAXCONN);
 	if(listenStatusCode == SOCKET_ERROR)
 	{
 		Logger::throwError("NetworkServerAPI::start::9 ---> ", WSAGetLastError());
 	}
 
 	// Spawn a thread for accepting incoming connection requests
-	_connectionThread = async(launch::async, &NetworkServerAPI::_waitForClientConnection, this, _tcpSocketID);
+	_connectionThread = async(launch::async, &NetworkServerAPI::_waitForClientConnection, this, _socketTCP);
 
 	// Address infos not needed anymore
 	freeaddrinfo(tcpAddressInfo);
@@ -156,14 +156,14 @@ void NetworkServerAPI::stop()
 	}
 
 	// Close TCP connection socket
-	closesocket(_tcpSocketID);
+	closesocket(_socketTCP);
 
 	// Close UDP message socket
-	closesocket(_udpSocketID);
+	closesocket(_socketUDP);
 
 	// Delete all connected clients
 BEGIN:
-	for(const auto& socketID : _clientSocketIDs)
+	for(const auto& socketID : _clientSockets)
 	{
 		_disconnectClient(socketID);
 		goto BEGIN;
@@ -171,9 +171,9 @@ BEGIN:
 
 	// Miscellaneous
 	_pendingMessages.clear();
-	_tcpMessageThreads.clear();
-	_tcpSocketID = INVALID_SOCKET;
-	_udpSocketID = INVALID_SOCKET;
+	_messageThreadsTCP.clear();
+	_socketTCP = INVALID_SOCKET;
+	_socketUDP = INVALID_SOCKET;
 	_maxClientCount = 0;
 	_newClientUsername = "";
 	_isRunning = false;

@@ -28,8 +28,8 @@ public:
 	void update();
 	void connectToServer(const string& serverIP, const string& serverPort);
 	void disconnectFromServer(bool mustBeAccepted = true);
-	void sendTcpMessage(const string& content);
-	void sendUdpMessage(const string& content);
+	void sendMessageTCP(const string& content);
+	void sendMessageUDP(const string& content);
 	void stop();
 
 	// Strings
@@ -55,22 +55,22 @@ private:
 	void _setupUDP();
 
 	// Strings
-	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET tcpSocketID);
-	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET udpSocketID);
+	tuple<int, int, long long, string> _waitForMessageTCP(SOCKET socket);
+	tuple<int, int, string, string, string> _receiveMessageUDP(SOCKET socket);
 
 	// Integers
-	int _waitForServerConnection(SOCKET serverSocketID, const string& serverIP, const string& serverPort);
+	int _waitForServerConnection(SOCKET socket, const string& serverIP, const string& serverPort);
 
 	// Booleans
-	bool _sendTcpMessage(const string& content, bool isReserved, bool mustBeAccepted);
-	bool _sendUdpMessage(const string& content, bool isReserved, bool mustBeAccepted);
+	bool _sendMessageTCP(const string& content, bool isReserved, bool mustBeAccepted);
+	bool _sendMessageUDP(const string& content, bool isReserved, bool mustBeAccepted);
 
 	// Strings
-	future<tuple<int, int, long long, string>> _tcpMessageThread;
+	future<tuple<int, int, long long, string>> _messageThreadTCP;
 	string _username = "";
 	string _serverIP = "";
 	string _serverPort = "";
-	string _tcpMessageBuild = "";
+	string _messageBuildTCP = "";
 
 	// Integers
 	vector<unsigned int> _pingLatencies;
@@ -87,6 +87,6 @@ private:
 
 	// Miscellaneous
 	vector<NetworkServerMessage> _pendingMessages;
-	SOCKET _tcpSocketID;
-	SOCKET _udpSocketID;
+	SOCKET _socketTCP;
+	SOCKET _socketUDP;
 };

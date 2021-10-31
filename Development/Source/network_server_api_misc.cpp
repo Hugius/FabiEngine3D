@@ -9,7 +9,7 @@
 
 using std::launch;
 
-bool NetworkServerAPI::_sendTcpMessage(SOCKET clientSocketID, const string& content, bool isReserved)
+bool NetworkServerAPI::_sendMessageTCP(SOCKET socket, const string& content, bool isReserved)
 {
 	// Must be running
 	if(!_isRunning)
@@ -35,14 +35,14 @@ bool NetworkServerAPI::_sendTcpMessage(SOCKET clientSocketID, const string& cont
 	string message = (content + ';');
 
 	// Send message to client
-	auto sendStatusCode = send(clientSocketID, message.c_str(), static_cast<int>(message.size()), 0);
+	auto sendStatusCode = send(socket, message.c_str(), static_cast<int>(message.size()), 0);
 
 	// Check if sending went wrong
 	if(sendStatusCode == SOCKET_ERROR)
 	{
 		if(WSAGetLastError() == WSAECONNRESET || WSAGetLastError() == WSAECONNABORTED) // Client lost socket connection
 		{
-			_disconnectClient(clientSocketID);
+			_disconnectClient(socket);
 			return false;
 		}
 		else if(WSAGetLastError() == WSAENOBUFS) // Buffer full
@@ -58,7 +58,7 @@ bool NetworkServerAPI::_sendTcpMessage(SOCKET clientSocketID, const string& cont
 	return true;
 }
 
-bool NetworkServerAPI::_sendUdpMessage(const string& clientIP, const string& clientPort, const string& content, bool isReserved)
+bool NetworkServerAPI::_sendMessageUDP(const string& clientIP, const string& clientPort, const string& content, bool isReserved)
 {
 	// Must be running
 	if(!_isRunning)
@@ -85,7 +85,7 @@ bool NetworkServerAPI::_sendUdpMessage(const string& clientIP, const string& cli
 
 	// Send message to client
 	auto sendStatusCode = sendto(
-		_udpSocketID, // UDP socket
+		_socketUDP, // UDP socket
 		content.c_str(), // Message content
 		static_cast<int>(content.size()), // Message size
 		0, // Flags
@@ -108,38 +108,31 @@ bool NetworkServerAPI::_sendUdpMessage(const string& clientIP, const string& cli
 	return true;
 }
 
-bool NetworkServerAPI::_isClientConnected(const string& IP, const string& port)
+void NetworkServerAPI::_disconnectClient(SOCKET socket)
 {
-	bool foundIP = (find(_clientIPs.begin(), _clientIPs.end(), IP) != _clientIPs.end());
-	bool foundPort = (find(_clientPorts.begin(), _clientPorts.end(), port) != _clientPorts.end());
-	return (foundIP && foundPort);
-}
-
-void NetworkServerAPI::_disconnectClient(SOCKET clientSocketID)
-{
-	for(size_t i = 0; i < _clientSocketIDs.size(); i++)
+	for(size_t i = 0; i < _clientSockets.size(); i++)
 	{
 		// Find list index
-		if(clientSocketID == _clientSocketIDs[i])
+		if(socket == _clientSockets[i])
 		{
 			// Temporarily save username
 			auto clientUsername = _clientUsernames[i];
 
 			// Close socket
-			closesocket(clientSocketID);
+			closesocket(socket);
 
 			// Save disonnected client data
 			_oldClientIPs.push_back(_clientIPs[i]);
-			_oldClientPorts.push_back(_clientPorts[i]);
 			_oldClientUsernames.push_back(_clientUsernames[i]);
 
 			// Remove client data
-			_clientSocketIDs.erase(_clientSocketIDs.begin() + i);
+			_clientSockets.erase(_clientSockets.begin() + i);
 			_clientIPs.erase(_clientIPs.begin() + i);
-			_clientPorts.erase(_clientPorts.begin() + i);
+			_clientPortsTCP.erase(_clientPortsTCP.begin() + i);
+			_clientPortsUDP.erase(_clientPortsUDP.begin() + i);
 			_clientUsernames.erase(_clientUsernames.begin() + i);
-			_clientTcpMessageBuilds.erase(_clientTcpMessageBuilds.begin() + i);
-			_tcpMessageThreads.erase(_tcpMessageThreads.begin() + i);
+			_clientMessageBuildsTCP.erase(_clientMessageBuildsTCP.begin() + i);
+			_messageThreadsTCP.erase(_messageThreadsTCP.begin() + i);
 
 			// Logging (if client was fully accepted)
 			if(!clientUsername.empty())
@@ -152,17 +145,17 @@ void NetworkServerAPI::_disconnectClient(SOCKET clientSocketID)
 	}
 }
 
-SOCKET NetworkServerAPI::_waitForClientConnection(SOCKET listenSocketID)
+SOCKET NetworkServerAPI::_waitForClientConnection(SOCKET socket)
 {
-	return accept(listenSocketID, nullptr, nullptr);
+	return accept(socket, nullptr, nullptr);
 }
 
-tuple<int, int, long long, string> NetworkServerAPI::_waitForTcpMessage(SOCKET clientSocketID)
+tuple<int, int, long long, string> NetworkServerAPI::_waitForMessageTCP(SOCKET socket)
 {
 	// Retrieve bytes & size
 	char buffer[NetworkUtils::TCP_BUFFER_BYTES];
 	int bufferLength = static_cast<int>(NetworkUtils::TCP_BUFFER_BYTES);
-	auto receiveStatusCode = recv(clientSocketID, buffer, bufferLength, 0);
+	auto receiveStatusCode = recv(socket, buffer, bufferLength, 0);
 
 	if(receiveStatusCode > 0) // Message received correctly
 	{
@@ -178,7 +171,7 @@ tuple<int, int, long long, string> NetworkServerAPI::_waitForTcpMessage(SOCKET c
 	}
 }
 
-tuple<int, int, string, string, string> NetworkServerAPI::_receiveUdpMessage(SOCKET udpMessageSocketID)
+tuple<int, int, string, string, string> NetworkServerAPI::_receiveMessageUDP(SOCKET socket)
 {
 	// Data store
 	char buffer[NetworkUtils::UDP_BUFFER_BYTES];
@@ -187,7 +180,7 @@ tuple<int, int, string, string, string> NetworkServerAPI::_receiveUdpMessage(SOC
 	int sourceAddressLength = sizeof(sourceAddress);
 
 	// Receive data
-	auto receiveResult = recvfrom(udpMessageSocketID, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
+	auto receiveResult = recvfrom(socket, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
 
 	// Extract address
 	auto IP = NetworkUtils::extractAddressIP(&sourceAddress);

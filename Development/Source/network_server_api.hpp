@@ -24,22 +24,19 @@ public:
 	// Voids
 	void start(unsigned int maxClientCount);
 	void update();
-	void sendTcpMessage(const string& username, const string& content);
-	void sendUdpMessage(const string& username, const string& content);
-	void broadcastTcpMessage(const string& content, const string& exceptionUsername);
-	void broadcastUdpMessage(const string& content, const string& exceptionUsername);
+	void sendMessageTCP(const string& username, const string& content);
+	void sendMessageUDP(const string& username, const string& content);
+	void broadcastMessageTCP(const string& content, const string& exceptionUsername);
+	void broadcastMessageUDP(const string& content, const string& exceptionUsername);
 	void disconnectClient(const string& username);
 	void stop();
 
 	// Strings
 	const vector<string> getClientIPs();
-	const vector<string> getClientPorts();
 	const vector<string> getClientUsernames();
 	const string& getNewClientIP();
-	const string& getNewClientPort();
 	const string& getNewClientUsername();
 	const string getOldClientIP();
-	const string getOldClientPort();
 	const string getOldClientUsername();
 
 	// Booleans
@@ -51,31 +48,29 @@ public:
 
 private:
 	// Voids
-	void _disconnectClient(SOCKET clientSocketID);
+	void _disconnectClient(SOCKET socket);
 
 	// Strings
-	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET clientSocketID);
-	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET udpMessageSocketID);
+	tuple<int, int, long long, string> _waitForMessageTCP(SOCKET socket);
+	tuple<int, int, string, string, string> _receiveMessageUDP(SOCKET socket);
 
-	// booleans
-	bool _isClientConnected(const string& IP, const string& port);
-	bool _sendTcpMessage(SOCKET clientSocketID, const string& content, bool isReserved);
-	bool _sendUdpMessage(const string& clientIP, const string& clientPort, const string& content, bool isReserved);
+	// Booleans
+	bool _sendMessageTCP(SOCKET socket, const string& content, bool isReserved);
+	bool _sendMessageUDP(const string& clientIP, const string& clientPort, const string& content, bool isReserved);
 
 	// Miscellaneous
-	SOCKET _waitForClientConnection(SOCKET connectionSocketID);
+	SOCKET _waitForClientConnection(SOCKET socket);
 
 	// Strings
-	vector<future<tuple<int, int, long long, string>>> _tcpMessageThreads;
+	vector<future<tuple<int, int, long long, string>>> _messageThreadsTCP;
 	vector<string> _clientIPs;
-	vector<string> _clientPorts;
+	vector<string> _clientPortsTCP;
+	vector<string> _clientPortsUDP;
 	vector<string> _clientUsernames;
-	vector<string> _clientTcpMessageBuilds;
+	vector<string> _clientMessageBuildsTCP;
 	vector<string> _oldClientIPs;
-	vector<string> _oldClientPorts;
 	vector<string> _oldClientUsernames;
 	string _newClientIP = "";
-	string _newClientPort = "";
 	string _newClientUsername = "";
 
 	// Integers
@@ -86,8 +81,8 @@ private:
 
 	// Miscellaneous
 	vector<NetworkClientMessage> _pendingMessages;
-	vector<SOCKET> _clientSocketIDs;
+	vector<SOCKET> _clientSockets;
 	future<SOCKET> _connectionThread;
-	SOCKET _tcpSocketID;
-	SOCKET _udpSocketID;
+	SOCKET _socketTCP;
+	SOCKET _socketUDP;
 };

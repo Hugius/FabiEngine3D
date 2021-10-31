@@ -24,7 +24,7 @@ public:
 
 	// Booleans
 	static const bool isValidIP(const string& IP);
-	static const bool isUdpMessageReady(SOCKET socket);
+	static const bool isMessageReadyUDP(SOCKET socket);
 	static const bool isMessageReserved(const string& message);
 
 	// Miscellaneous
@@ -34,6 +34,7 @@ public:
 	static inline const string SERVER_PORT = "61295";
 
 	// Integers
+	static inline const unsigned int PORT_DIGIT_COUNT = 5;
 	static inline const unsigned int MAX_PING_COUNT = 10;
 	static inline const unsigned int MAX_MESSAGE_CHARACTERS = 128;
 	static inline const unsigned int MAX_USERNAME_CHARACTERS = 16;

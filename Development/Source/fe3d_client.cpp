@@ -92,7 +92,7 @@ void FabiEngine3D::networkClient_sendMessageTCP(const string& content)
 		return;
 	}
 
-	_core->_networkClientAPI.sendTcpMessage(content);
+	_core->_networkClientAPI.sendMessageTCP(content);
 }
 
 void FabiEngine3D::networkClient_sendMessageUDP(const string& content)
@@ -128,7 +128,7 @@ void FabiEngine3D::networkClient_sendMessageUDP(const string& content)
 		return;
 	}
 
-	_core->_networkClientAPI.sendUdpMessage(content);
+	_core->_networkClientAPI.sendMessageUDP(content);
 }
 
 void FabiEngine3D::networkClient_disconnect()

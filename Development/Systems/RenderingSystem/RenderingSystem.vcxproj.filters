@@ -221,6 +221,9 @@
     <ClInclude Include="..\..\Source\motion_blur_renderer.hpp">
       <Filter>Renderers\Post Renderers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\render_utils.hpp">
+      <Filter>Miscellaneous</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\FabiEngine3D\shaders\motion_blur_shader.frag">

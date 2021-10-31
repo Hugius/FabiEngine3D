@@ -84,9 +84,6 @@
     <ClInclude Include="..\..\Source\reflection_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\render_utils.hpp">
-      <Filter>Other</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\camera.hpp">
       <Filter>Camera</Filter>
     </ClInclude>

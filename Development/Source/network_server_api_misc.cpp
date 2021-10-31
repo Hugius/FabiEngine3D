@@ -131,7 +131,7 @@ void NetworkServerAPI::_disconnectClient(SOCKET socket)
 			_clientPortsTCP.erase(_clientPortsTCP.begin() + i);
 			_clientPortsUDP.erase(_clientPortsUDP.begin() + i);
 			_clientUsernames.erase(_clientUsernames.begin() + i);
-			_clientMessageBuildsTCP.erase(_clientMessageBuildsTCP.begin() + i);
+			_messageBuildsTCP.erase(_messageBuildsTCP.begin() + i);
 			_messageThreadsTCP.erase(_messageThreadsTCP.begin() + i);
 
 			// Logging (if client was fully accepted)

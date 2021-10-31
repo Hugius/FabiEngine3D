@@ -63,11 +63,11 @@ private:
 
 	// Strings
 	vector<future<tuple<int, int, long long, string>>> _messageThreadsTCP;
+	vector<string> _messageBuildsTCP;
 	vector<string> _clientIPs;
 	vector<string> _clientPortsTCP;
 	vector<string> _clientPortsUDP;
 	vector<string> _clientUsernames;
-	vector<string> _clientMessageBuildsTCP;
 	vector<string> _oldClientIPs;
 	vector<string> _oldClientUsernames;
 	string _newClientIP = "";

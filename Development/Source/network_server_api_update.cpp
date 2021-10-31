@@ -58,7 +58,7 @@ void NetworkServerAPI::update()
 		_clientPortsTCP.push_back(clientPort);
 		_clientPortsUDP.push_back("");
 		_clientUsernames.push_back("");
-		_clientMessageBuildsTCP.push_back("");
+		_messageBuildsTCP.push_back("");
 
 		// Spawn thread for receiving TCP messages
 		_messageThreadsTCP.push_back(async(launch::async, &NetworkServerAPI::_waitForMessageTCP, this, clientSocketID));
@@ -76,7 +76,7 @@ BEGIN:
 		const auto& clientUsername = _clientUsernames[i];
 
 		// Mutable client data
-		auto& clientMessageBuild = _clientMessageBuildsTCP[i];
+		auto& clientMessageBuild = _messageBuildsTCP[i];
 		auto& messageThread = _messageThreadsTCP[i];
 
 		// Check if the client sent any message
@@ -144,13 +144,13 @@ BEGIN:
 								// Save new username
 								_clientUsernames[i] = newUsername;
 
-								// Logging
-								Logger::throwInfo("Networking client \"" + newUsername + "\" connected to the server!");
-
 								// Miscellaneous
 								_newClientIP = _clientIPs[i];
 								_newClientUsername = _clientUsernames[i];
 								clientMessageBuild = "";
+
+								// Logging
+								Logger::throwInfo("Networking client \"" + newUsername + "\" connected to the server!");
 							}
 						}
 						else if(clientMessageBuild == "PING") // Handle PING message

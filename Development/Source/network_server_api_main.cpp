@@ -171,10 +171,10 @@ BEGIN:
 
 	// Miscellaneous
 	_pendingMessages.clear();
-	_messageThreadsTCP.clear();
 	_socketTCP = INVALID_SOCKET;
 	_socketUDP = INVALID_SOCKET;
 	_maxClientCount = 0;
+	_newClientIP = "";
 	_newClientUsername = "";
 	_isRunning = false;
 

@@ -32,7 +32,7 @@ bool NetworkServerAPI::_sendTcpMessage(SOCKET clientSocketID, const string& cont
 	}
 
 	// Add a semicolon to indicate end of this message
-	string message = content + ';';
+	string message = (content + ';');
 
 	// Send message to client
 	auto sendStatusCode = send(clientSocketID, message.c_str(), static_cast<int>(message.size()), 0);
@@ -85,7 +85,7 @@ bool NetworkServerAPI::_sendUdpMessage(const string& clientIP, const string& cli
 
 	// Send message to client
 	auto sendStatusCode = sendto(
-		_udpMessageSocketID, // UDP socket
+		_udpSocketID, // UDP socket
 		content.c_str(), // Message content
 		static_cast<int>(content.size()), // Message size
 		0, // Flags
@@ -113,23 +113,6 @@ bool NetworkServerAPI::_isClientConnected(const string& IP, const string& port)
 	bool foundIP = (find(_clientIPs.begin(), _clientIPs.end(), IP) != _clientIPs.end());
 	bool foundPort = (find(_clientPorts.begin(), _clientPorts.end(), port) != _clientPorts.end());
 	return (foundIP && foundPort);
-}
-
-void NetworkServerAPI::_acceptClient(SOCKET clientSocketID)
-{
-	// Extract IP & port
-	auto clientIP = NetworkUtils::extractPeerIP(clientSocketID);
-	auto clientPort = NetworkUtils::extractPeerPort(clientSocketID);
-
-	// Save client data
-	_clientSocketIDs.push_back(clientSocketID);
-	_clientIPs.push_back(clientIP);
-	_clientPorts.push_back(clientPort);
-	_clientUsernames.push_back("");
-	_clientTcpMessageBuilds.push_back("");
-
-	// Spawn thread for receiving TCP messages
-	_tcpMessageThreads.push_back(async(launch::async, &NetworkServerAPI::_waitForTcpMessage, this, clientSocketID));
 }
 
 void NetworkServerAPI::_disconnectClient(SOCKET clientSocketID)

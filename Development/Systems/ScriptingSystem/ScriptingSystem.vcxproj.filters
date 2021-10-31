@@ -46,6 +46,9 @@
     <Filter Include="Execution\Interpreter\Function\Audio">
       <UniqueIdentifier>{f0265524-b264-47ea-9dfc-72cb593e78c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Execution\Interpreter\Function\Physics">
+      <UniqueIdentifier>{569ec7b6-6e81-47d4-9f5b-7a8d10b21ac0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\script.cpp">
@@ -81,9 +84,6 @@
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_lighting_setters.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_raycast_setters.cpp">
-      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_scene_setters.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
@@ -91,9 +91,6 @@
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_camera_setters.cpp">
-      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_collision_setters.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_input_getters.cpp">
@@ -210,9 +207,6 @@
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_camera_getters.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_collision_getters.cpp">
-      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_filesystem_getters.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
@@ -231,9 +225,6 @@
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sound_getters.cpp">
       <Filter>Execution\Interpreter\Function\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_raycast_getters.cpp">
-      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_scene_getters.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
@@ -251,6 +242,18 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_spotlight_setters.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_raycast_setters.cpp">
+      <Filter>Execution\Interpreter\Function\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_raycast_getters.cpp">
+      <Filter>Execution\Interpreter\Function\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_collision_getters.cpp">
+      <Filter>Execution\Interpreter\Function\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_collision_setters.cpp">
+      <Filter>Execution\Interpreter\Function\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

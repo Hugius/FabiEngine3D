@@ -45,14 +45,14 @@ void NetworkClientAPI::update()
 				_isConnectingToServer = false;
 				_isConnectedToServer = true;
 
-				// Send username to server
-				if(!_sendTcpMessage(("USERNAME" + _username), true, false))
+				// Send acceptance request to server
+				if(!_sendTcpMessage(("REQUEST" + _username), true, false))
 				{
 					return;
 				}
 
 				// Start a thread to wait for TCP messages
-				_tcpMessageThread = async(launch::async, &NetworkClientAPI::_waitForTcpMessage, this, _connectionSocketID);
+				_tcpMessageThread = async(launch::async, &NetworkClientAPI::_waitForTcpMessage, this, _tcpSocketID);
 			}
 			else if((connectionErrorCode == WSAECONNREFUSED) || (connectionErrorCode == WSAETIMEDOUT)) // Cannot connect with server
 			{
@@ -101,17 +101,36 @@ void NetworkClientAPI::update()
 
 		if(messageStatusCode > 0) // Message is received correctly
 		{
-			// Loop through received message(s)
-			for(const auto& character : messageContent)
+			for(const auto& character : messageContent) // Loop through received message content
 			{
 				if(character == ';') // End of current message
 				{
-					if(_tcpMessageBuild == "ACCEPTED") // Handle ACCEPTED message
+					if(_tcpMessageBuild == "ACCEPT") // Handle ACCEPT message
 					{
 						_isAcceptedByServer = true;
 						_tcpMessageBuild = "";
 					}
-					else if(_tcpMessageBuild == "SERVER_FULL") // Handle SERVER_FULL message
+					else if(_tcpMessageBuild.substr(0, 4) == "PING") // Handle PING message
+					{
+						// Calculate ping latency
+						auto latency = (Tools::getTimeSinceEpochMS() - _lastMilliseconds);
+
+						// Subtract the server & client processing delays
+						auto serverReceiveDelay = stoll(_tcpMessageBuild.substr(4));
+						auto clientReceiveDelay = (Tools::getTimeSinceEpochMS() - messageTimestamp);
+						latency -= serverReceiveDelay;
+						latency -= clientReceiveDelay;
+
+						// Register server latency
+						if(_pingLatencies.size() == NetworkUtils::MAX_PING_COUNT)
+						{
+							_pingLatencies.erase(_pingLatencies.begin());
+						}
+						_pingLatencies.push_back(static_cast<unsigned int>(llabs(latency)));
+						_isWaitingForPing = false;
+						_tcpMessageBuild = "";
+					}
+					else if(_tcpMessageBuild == "SERVER_IS_FULL") // Handle SERVER_IS_FULL message
 					{
 						// Disconnect next tick
 						_pendingMessages.push_back(NetworkServerMessage(_tcpMessageBuild, NetworkProtocol::TCP));
@@ -140,26 +159,6 @@ void NetworkClientAPI::update()
 
 						// Prevent processing more messages
 						break;
-					}
-					else if(_tcpMessageBuild.substr(0, 4) == "PING") // Handle PING message
-					{
-						// Calculate ping latency
-						auto latency = (Tools::getTimeSinceEpochMS() - _lastMilliseconds);
-
-						// Subtract the server & client processing delays
-						auto serverReceiveDelay = stoll(_tcpMessageBuild.substr(4));
-						auto clientReceiveDelay = (Tools::getTimeSinceEpochMS() - messageTimestamp);
-						latency -= serverReceiveDelay;
-						latency -= clientReceiveDelay;
-
-						// Register server latency
-						if(_pingLatencies.size() == NetworkUtils::MAX_PING_COUNT)
-						{
-							_pingLatencies.erase(_pingLatencies.begin());
-						}
-						_pingLatencies.push_back(static_cast<unsigned int>(llabs(latency)));
-						_isWaitingForPing = false;
-						_tcpMessageBuild = "";
 					}
 					else // Handle other message
 					{
@@ -193,14 +192,14 @@ void NetworkClientAPI::update()
 		}
 
 		// Spawn new TCP message thread
-		_tcpMessageThread = async(launch::async, &NetworkClientAPI::_waitForTcpMessage, this, _connectionSocketID);
+		_tcpMessageThread = async(launch::async, &NetworkClientAPI::_waitForTcpMessage, this, _tcpSocketID);
 	}
 
 	// Receive incoming UDP messages
-	while(NetworkUtils::isUdpMessageReady(_udpMessageSocketID))
+	while(NetworkUtils::isUdpMessageReady(_udpSocketID))
 	{
 		// Message data
-		const auto& messageResult = _receiveUdpMessage(_udpMessageSocketID);
+		const auto& messageResult = _receiveUdpMessage(_udpSocketID);
 		const auto& messageStatusCode = get<0>(messageResult);
 		const auto& messageErrorCode = get<1>(messageResult);
 		const auto& messageContent = get<2>(messageResult);

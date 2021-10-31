@@ -8,8 +8,8 @@
 
 NetworkClientAPI::NetworkClientAPI()
 	:
-	_connectionSocketID(INVALID_SOCKET),
-	_udpMessageSocketID(INVALID_SOCKET)
+	_tcpSocketID(INVALID_SOCKET),
+	_udpSocketID(INVALID_SOCKET)
 {
 
 }
@@ -108,20 +108,20 @@ void NetworkClientAPI::disconnectFromServer(bool mustBeAccepted)
 	}
 
 	// Close connection socket
-	if(_connectionSocketID != INVALID_SOCKET)
+	if(_tcpSocketID != INVALID_SOCKET)
 	{
-		closesocket(_connectionSocketID);
+		closesocket(_tcpSocketID);
 	}
 
 	// Close UDP message socket
-	if(_udpMessageSocketID != INVALID_SOCKET)
+	if(_udpSocketID != INVALID_SOCKET)
 	{
-		closesocket(_udpMessageSocketID);
+		closesocket(_udpSocketID);
 	}
 
 	// Reset variables
-	_connectionSocketID = INVALID_SOCKET;
-	_udpMessageSocketID = INVALID_SOCKET;
+	_tcpSocketID = INVALID_SOCKET;
+	_udpSocketID = INVALID_SOCKET;
 	_pendingMessages.clear();
 	_pingLatencies.clear();
 	_lastMilliseconds = 0;
@@ -143,20 +143,20 @@ void NetworkClientAPI::stop()
 	}
 
 	// Close TCP socket
-	if(_connectionSocketID != INVALID_SOCKET)
+	if(_tcpSocketID != INVALID_SOCKET)
 	{
-		closesocket(_connectionSocketID);
+		closesocket(_tcpSocketID);
 	}
 
 	// Close UDP socket
-	if(_udpMessageSocketID != INVALID_SOCKET)
+	if(_udpSocketID != INVALID_SOCKET)
 	{
-		closesocket(_udpMessageSocketID);
+		closesocket(_udpSocketID);
 	}
 
 	// Reset variables
-	_connectionSocketID = INVALID_SOCKET;
-	_udpMessageSocketID = INVALID_SOCKET;
+	_tcpSocketID = INVALID_SOCKET;
+	_udpSocketID = INVALID_SOCKET;
 	_pendingMessages.clear();
 	_pingLatencies.clear();
 	_lastMilliseconds = 0;

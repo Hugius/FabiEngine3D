@@ -81,11 +81,11 @@ const bool NetworkUtils::isMessageReserved(const string& message)
 {
 	return
 	(
-		(message.substr(0, 8)  == "USERNAME")				||
-		(message.substr(0, 11) == "SERVER_FULL")			||
+		(message.substr(0, 7)  == "REQUEST")				||
+		(message.substr(0, 6) == "ACCEPT")					||
+		(message.substr(0, 4) == "PING")					||
+		(message.substr(0, 14) == "SERVER_IS_FULL")			||
 		(message.substr(0, 22) == "USER_ALREADY_CONNECTED") ||
-		(message.substr(0, 8)  == "ACCEPTED")				||
-		(message.substr(0, 4)  == "PING")					||
 		(message.substr(0, 22) == "DISCONNECTED_BY_SERVER")
 	);
 }

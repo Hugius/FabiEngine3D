@@ -130,8 +130,6 @@ void CameraCollisionHandler::update(const unordered_map<string, shared_ptr<AabbE
 			_responseDirectionOrder = DirectionOrder::ZXY;
 		}
 
-		std::cout << static_cast<int>(_responseDirectionOrder) << std::endl;
-
 		// Store last camera position
 		_lastCameraPosition = camera.getPosition();
 	}

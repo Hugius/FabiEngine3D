@@ -38,10 +38,10 @@ bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved, b
 	}
 
 	// Add a semicolon to indicate end of this message
-	string message = content + ';';
+	string message = (content + ';');
 
 	// Send message to server
-	auto sendStatusCode = send(_connectionSocketID, message.c_str(), static_cast<int>(message.size()), 0);
+	auto sendStatusCode = send(_tcpSocketID, message.c_str(), static_cast<int>(message.size()), 0);
 
 	// Check if sending went well
 	if(sendStatusCode == SOCKET_ERROR)
@@ -100,7 +100,7 @@ bool NetworkClientAPI::_sendUdpMessage(const string& content, bool isReserved, b
 
 	// Send message to server
 	auto sendStatusCode = sendto(
-		_udpMessageSocketID, // UDP socket
+		_udpSocketID, // UDP socket
 		message.c_str(), // Message content
 		static_cast<int>(message.size()), // Message size
 		0, // Flags
@@ -164,34 +164,25 @@ void NetworkClientAPI::_setupTCP()
 	}
 
 	// Create socket
-	_connectionSocketID = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
-	if(_connectionSocketID == INVALID_SOCKET)
+	_tcpSocketID = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
+	if(_tcpSocketID == INVALID_SOCKET)
 	{
 		Logger::throwError("NetworkClientAPI::_setupTCP::2 ---> ", WSAGetLastError());
 	}
 
-	// Set socket options
-	DWORD trueValue = 1;
-	DWORD falseValue = 0;
-	setsockopt(_connectionSocketID, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
-	setsockopt(_connectionSocketID, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<char*>(&falseValue), sizeof(falseValue));
-
 	// Bind socket
-	auto tcpBindStatusCode = bind(_connectionSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
+	auto tcpBindStatusCode = bind(_tcpSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
 	if(tcpBindStatusCode == SOCKET_ERROR)
 	{
 		Logger::throwError("NetworkClientAPI::_setupTCP::3 ---> ", WSAGetLastError());
 	}
 
 	// Spawn a thread for connecting to the server
-	_connectionThread = async(launch::async, &NetworkClientAPI::_waitForServerConnection, this, _connectionSocketID, _serverIP, _serverPort);
+	_connectionThread = async(launch::async, &NetworkClientAPI::_waitForServerConnection, this, _tcpSocketID, _serverIP, _serverPort);
 }
 
 void NetworkClientAPI::_setupUDP()
 {
-	// Extract TCP port
-	auto tcpPort = NetworkUtils::extractSocketPort(_connectionSocketID);
-
 	// Compose address info hints
 	addrinfo hints;
 	ZeroMemory(&hints, sizeof(hints));
@@ -201,7 +192,7 @@ void NetworkClientAPI::_setupUDP()
 
 	// Create address info
 	addrinfo* addressInfo = nullptr;
-	auto udpInfoStatusCode = getaddrinfo("0.0.0.0", tcpPort.c_str(), &hints, &addressInfo);
+	auto udpInfoStatusCode = getaddrinfo("0.0.0.0", "0", &hints, &addressInfo);
 	if(udpInfoStatusCode != 0)
 	{
 		Logger::throwError("NetworkClientAPI::_setupUDP::1 ---> ", udpInfoStatusCode);
@@ -209,20 +200,14 @@ void NetworkClientAPI::_setupUDP()
 	}
 
 	// Create socket
-	_udpMessageSocketID = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
-	if(_udpMessageSocketID == INVALID_SOCKET)
+	_udpSocketID = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
+	if(_udpSocketID == INVALID_SOCKET)
 	{
 		Logger::throwError("NetworkClientAPI::_setupUDP::2 ----> ", WSAGetLastError());
 	}
 
-	// Set socket options
-	DWORD trueValue = 1;
-	DWORD falseValue = 0;
-	setsockopt(_udpMessageSocketID, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
-	setsockopt(_udpMessageSocketID, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<char*>(&falseValue), sizeof(falseValue));
-
 	// Bind socket
-	auto udpBindStatusCode = bind(_udpMessageSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
+	auto udpBindStatusCode = bind(_udpSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
 	if(udpBindStatusCode == SOCKET_ERROR)
 	{
 		Logger::throwError("NetworkClientAPI::_setupUDP::3 ---> ", WSAGetLastError());

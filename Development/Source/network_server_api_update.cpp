@@ -53,11 +53,22 @@ void NetworkServerAPI::update()
 			Logger::throwError("NetworkServerAPI::update::1 ---> ", WSAGetLastError());
 		}
 
-		// Save new client
-		_acceptClient(clientSocketID);
+		// Extract IP & port
+		auto clientIP = NetworkUtils::extractPeerIP(clientSocketID);
+		auto clientPort = NetworkUtils::extractPeerPort(clientSocketID);
+
+		// Save client data
+		_clientSocketIDs.push_back(clientSocketID);
+		_clientIPs.push_back(clientIP);
+		_clientPorts.push_back(clientPort);
+		_clientUsernames.push_back("");
+		_clientTcpMessageBuilds.push_back("");
+
+		// Spawn thread for receiving TCP messages
+		_tcpMessageThreads.push_back(async(launch::async, &NetworkServerAPI::_waitForTcpMessage, this, clientSocketID));
 
 		// Spawn connection thread again for next possible client
-		_connectionThread = async(launch::async, &NetworkServerAPI::_waitForClientConnection, this, _connectionSocketID);
+		_connectionThread = async(launch::async, &NetworkServerAPI::_waitForClientConnection, this, _tcpSocketID);
 	}
 
 	// Receive incoming TCP messages
@@ -88,16 +99,16 @@ BEGIN:
 				{
 					if(character == ';') // End of current message
 					{
-						if(clientMessageBuild.substr(0, 8) == "USERNAME") // Handle USERNAME message
+						if(clientMessageBuild.substr(0, 8) == "REQUEST") // Handle REQUEST message
 						{
 							// Extract username
-							auto username = clientMessageBuild.substr(string("USERNAME").size());
+							auto username = clientMessageBuild.substr(string("REQUEST").size());
 
 							// Check if server is full or username is already connected
 							if(_clientIPs.size() > _maxClientCount)
 							{
 								// Reject client
-								if(!_sendTcpMessage(clientSocketID, "SERVER_FULL", true))
+								if(!_sendTcpMessage(clientSocketID, "SERVER_IS_FULL", true))
 								{
 									return;
 								}
@@ -121,7 +132,7 @@ BEGIN:
 							else
 							{
 								// Accept client
-								if(!_sendTcpMessage(clientSocketID, "ACCEPTED", true))
+								if(!_sendTcpMessage(clientSocketID, "ACCEPT", true))
 								{
 									return;
 								}
@@ -191,10 +202,10 @@ BEGIN:
 	}
 
 	// Receive incoming UDP messages
-	while(NetworkUtils::isUdpMessageReady(_udpMessageSocketID))
+	while(NetworkUtils::isUdpMessageReady(_udpSocketID))
 	{
 		// Message data
-		const auto& messageResult = _receiveUdpMessage(_udpMessageSocketID);
+		const auto& messageResult = _receiveUdpMessage(_udpSocketID);
 		const auto& messageStatusCode = get<0>(messageResult);
 		const auto& messageErrorCode = get<1>(messageResult);
 		const auto& messageContent = get<2>(messageResult);

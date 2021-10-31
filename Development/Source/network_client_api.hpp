@@ -23,6 +23,7 @@ public:
 	NetworkClientAPI();
 	~NetworkClientAPI();
 
+	// Voids
 	void start(const string& username);
 	void update();
 	void connectToServer(const string& serverIP, const string& serverPort);
@@ -31,46 +32,52 @@ public:
 	void sendUdpMessage(const string& content);
 	void stop();
 
+	// Strings
+	const string& getUsername();
+	const string& getServerIP();
+
+	// Integers
+	const unsigned int getPingLatency();
+
+	// Booleans
 	const bool isValidServerIP(const string& serverIP);
 	const bool isRunning();
 	const bool isConnectingToServer();
 	const bool isConnectedToServer();
 	const bool isAcceptedByServer();
 
-	const unsigned int getPingLatency();
-
-	const string& getUsername();
-	const string& getServerIP();
-
+	// Miscellaneous
 	const vector<NetworkServerMessage>& getPendingMessages();
 
 private:
-	// Message functions
-	bool _sendTcpMessage(const string& content, bool isReserved, bool mustBeAccepted);
-	bool _sendUdpMessage(const string& content, bool isReserved, bool mustBeAccepted);
-	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET tcpSocketID);
-	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET udpSocketID);
-
-	// Miscellaneous functions
-	int _waitForServerConnection(SOCKET serverSocketID, const string& serverIP, const string& serverPort);
+	// Voids
 	void _setupTCP();
 	void _setupUDP();
 
-	// Connection variables
-	SOCKET _connectionSocketID;
-	future<int> _connectionThread;
+	// Strings
+	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET tcpSocketID);
+	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET udpSocketID);
 
-	// Message variables
+	// Integers
+	int _waitForServerConnection(SOCKET serverSocketID, const string& serverIP, const string& serverPort);
+
+	// Booleans
+	bool _sendTcpMessage(const string& content, bool isReserved, bool mustBeAccepted);
+	bool _sendUdpMessage(const string& content, bool isReserved, bool mustBeAccepted);
+
+	// Strings
 	future<tuple<int, int, long long, string>> _tcpMessageThread;
-	vector<NetworkServerMessage> _pendingMessages;
+	string _username = "";
+	string _serverIP = "";
+	string _serverPort = "";
 	string _tcpMessageBuild = "";
-	SOCKET _udpMessageSocketID;
 
-	// Ping variables
+	// Integers
 	vector<unsigned int> _pingLatencies;
+	future<int> _connectionThread;
 	long long _lastMilliseconds = 0;
 
-	// State variables
+	// Booleans
 	bool _isRunning = false;
 	bool _isConnectingToServer = false;
 	bool _isConnectedToServer = false;
@@ -78,8 +85,8 @@ private:
 	bool _isWaitingForPing = false;
 	bool _mustDisconnectFromServer = false;
 
-	// Miscellaneous variables
-	string _username = "";
-	string _serverIP = "";
-	string _serverPort = "";
+	// Miscellaneous
+	vector<NetworkServerMessage> _pendingMessages;
+	SOCKET _tcpSocketID;
+	SOCKET _udpSocketID;
 };

@@ -9,10 +9,17 @@ bool ScriptInterpreter::_validateListIndex(ScriptVariable& list, unsigned int in
 		return false;
 	}
 
-	// Check if list index is valid
-	if(index < 0 || index >= list.getValueCount())
+	// Check if list index is negative
+	if(index < 0)
 	{
-		_throwScriptError("list index out of range");
+		_throwScriptError("list index is negative!");
+		return false;
+	}
+
+	// Check if list index is out of range
+	if(index >= list.getValueCount())
+	{
+		_throwScriptError("list index is out of range!");
 		return false;
 	}
 
@@ -317,7 +324,7 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 		index = indexVariable.getValue().getInteger();
 	}
 
-	// Check if list index is out of range
+	// Validate list index
 	if(!_validateListIndex(listVariable, index))
 	{
 		return;

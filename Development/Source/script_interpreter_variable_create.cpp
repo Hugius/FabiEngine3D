@@ -119,22 +119,12 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 			// Retrieve the repsective list of variables
 			auto& variableList = (scope == ScriptVariableScope::LOCAL) ? _localVariables[_executionDepth] : _globalVariables;
 
-			// Check if a local variable has already been defined
-			if(scope == ScriptVariableScope::LOCAL)
+			// Check if variable has been defined already
+			if((scope == ScriptVariableScope::LOCAL && _isLocalVariableExisting(nameString)) ||
+			   (scope == ScriptVariableScope::GLOBAL && _isGlobalVariableExisting(nameString)))
 			{
-				if(_isLocalVariableExisting(nameString))
-				{
-					_throwScriptError("variable already defined!");
-					return;
-				}
-			}
-			else // Global variable
-			{
-				if(_isGlobalVariableExisting(nameString))
-				{
-					_throwScriptError("variable already defined!");
-					return;
-				}
+				_throwScriptError("variable already defined!");
+				return;
 			}
 
 			// Check if equal sign is present

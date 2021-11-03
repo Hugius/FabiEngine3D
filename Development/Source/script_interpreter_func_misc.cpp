@@ -84,7 +84,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						}
 					}
 				}
-				else if(functionName == "misc:list_get_size")
+				else if(functionName == "misc:list_size")
 				{
 					auto types = { SVT::STRING };
 
@@ -186,6 +186,234 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 
 						// Return find result
 						returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, foundValue));
+					}
+				}
+				else if(functionName == "misc:list_index")
+				{
+					auto types = { SVT::STRING };
+
+					// Validate arguments
+					if(_validateListValueCount(arguments, 2))
+					{
+						// List name must be string
+						if(arguments[0].getType() != SVT::STRING)
+						{
+							_throwScriptError("wrong value type(s)!");
+							return returnValues;
+						}
+
+						// Check if variable does not exist
+						auto listName = arguments[0].getString();
+						if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
+						{
+							_throwScriptError("list variable \"" + listName + "\" not found!");
+							return returnValues;
+						}
+
+						// Check if variable is not a list
+						auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
+						if(listVariable.getType() == ScriptVariableType::SINGLE)
+						{
+							_throwScriptError("variable \"" + listName + "\" is not a list!");
+							return returnValues;
+						}
+
+						// Try to find value index
+						int foundIndex = -1;
+						for(unsigned int i = 0; i < listVariable.getValues().size(); i++)
+						{
+							if
+								(
+								(listVariable.getValues()[i]->getType() == SVT::VEC3 &&
+								arguments[1].getType() == SVT::VEC3 &&
+								listVariable.getValues()[i]->getVec3() == arguments[1].getVec3())
+
+								||
+
+								(listVariable.getValues()[i]->getType() == SVT::STRING &&
+								arguments[1].getType() == SVT::STRING &&
+								listVariable.getValues()[i]->getString() == arguments[1].getString())
+
+								||
+
+								(listVariable.getValues()[i]->getType() == SVT::DECIMAL &&
+								arguments[1].getType() == SVT::DECIMAL &&
+								listVariable.getValues()[i]->getDecimal() == arguments[1].getDecimal())
+
+								||
+
+								(listVariable.getValues()[i]->getType() == SVT::INTEGER &&
+								arguments[1].getType() == SVT::INTEGER &&
+								listVariable.getValues()[i]->getInteger() == arguments[1].getInteger())
+
+								||
+
+								(listVariable.getValues()[i]->getType() == SVT::BOOLEAN &&
+								arguments[1].getType() == SVT::BOOLEAN &&
+								listVariable.getValues()[i]->getBoolean() == arguments[1].getBoolean())
+								)
+							{
+								foundIndex = i;
+								break;
+							}
+						}
+
+						// Return find result
+						returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, foundIndex));
+					}
+				}
+				else if(functionName == "misc:list_min")
+				{
+					auto types = { SVT::STRING };
+
+					// Validate arguments
+					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					{
+						// Temporary values
+						auto listName = arguments[0].getString();
+
+						// Check if variable not existing
+						if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
+						{
+							_throwScriptError("list variable \"" + listName + "\" not found!");
+							return returnValues;
+						}
+
+						// Check if variable is not a list
+						auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
+						if(listVariable.getType() == ScriptVariableType::SINGLE)
+						{
+							_throwScriptError("variable \"" + listName + "\" is not a list!");
+							return returnValues;
+						}
+
+						// Check if list is empty
+						if(listVariable.getValueCount() == 0)
+						{
+							_throwScriptError("list is empty!");
+							return returnValues;
+						}
+
+						// Check if list values are of different types
+						auto type = listVariable.getValues()[0]->getType();
+						for(const auto& value : listVariable.getValues())
+						{
+							if(value->getType() != type)
+							{
+								_throwScriptError("list values are not of the same type!");
+								return returnValues;
+							}
+						}
+
+						// Determine type of list values
+						if(type == ScriptValueType::INTEGER)
+						{
+							// Compose raw values
+							vector<int> rawValues;
+							for(const auto& value : listVariable.getValues())
+							{
+								rawValues.push_back(value->getInteger());
+							}
+
+							// Return
+							auto result = *std::min_element(std::begin(rawValues), std::end(rawValues));
+							returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
+						}
+						else if(type == ScriptValueType::DECIMAL)
+						{
+							// Compose raw values
+							vector<float> rawValues;
+							for(const auto& value : listVariable.getValues())
+							{
+								rawValues.push_back(value->getDecimal());
+							}
+
+							// Return
+							auto result = *std::min_element(std::begin(rawValues), std::end(rawValues));
+							returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+						}
+						else
+						{
+							_throwScriptError("list values must be numbers!");
+							return returnValues;
+						}
+					}
+				}
+				else if(functionName == "misc:list_max")
+				{
+					auto types = { SVT::STRING };
+
+					// Validate arguments
+					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					{
+						// Temporary values
+						auto listName = arguments[0].getString();
+
+						// Check if variable not existing
+						if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
+						{
+							_throwScriptError("list variable \"" + listName + "\" not found!");
+							return returnValues;
+						}
+
+						// Check if variable is not a list
+						auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
+						if(listVariable.getType() == ScriptVariableType::SINGLE)
+						{
+							_throwScriptError("variable \"" + listName + "\" is not a list!");
+							return returnValues;
+						}
+
+						// Check if list is empty
+						if(listVariable.getValueCount() == 0)
+						{
+							_throwScriptError("list is empty!");
+							return returnValues;
+						}
+
+						// Check if list values are of different types
+						auto type = listVariable.getValues()[0]->getType();
+						for(const auto& value : listVariable.getValues())
+						{
+							if(value->getType() != type)
+							{
+								_throwScriptError("list values are not of the same type!");
+								return returnValues;
+							}
+						}
+
+						// Determine type of list values
+						if(type == ScriptValueType::INTEGER)
+						{
+							// Compose raw values
+							vector<int> rawValues;
+							for(const auto& value : listVariable.getValues())
+							{
+								rawValues.push_back(value->getInteger());
+							}
+
+							// Return
+							auto result = *std::max_element(std::begin(rawValues), std::end(rawValues));
+							returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
+						}
+						else if(type == ScriptValueType::DECIMAL)
+						{
+							// Compose raw values
+							vector<float> rawValues;
+							for(const auto& value : listVariable.getValues())
+							{
+								rawValues.push_back(value->getDecimal());
+							}
+
+							// Return
+							auto result = *std::max_element(std::begin(rawValues), std::end(rawValues));
+							returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+						}
+						else
+						{
+							_throwScriptError("list values must be numbers!");
+							return returnValues;
+						}
 					}
 				}
 				else if(functionName == "misc:list_reverse")

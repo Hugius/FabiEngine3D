@@ -845,6 +845,7 @@ public:
 	void networkServer_broadcastMessageTCP(const string& content, const string& exceptionUsername);
 	void networkServer_broadcastMessageUDP(const string& content, const string& exceptionUsername);
 	void networkServer_disconnectClient(const string& username);
+	void networkServer_disconnectClients();
 	void networkServer_stop();
 
 	// Server interface - getters

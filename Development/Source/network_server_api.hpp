@@ -29,6 +29,7 @@ public:
 	void broadcastMessageTCP(const string& content, const string& exceptionUsername);
 	void broadcastMessageUDP(const string& content, const string& exceptionUsername);
 	void disconnectClient(const string& username);
+	void disconnectClients();
 	void stop();
 
 	// Strings

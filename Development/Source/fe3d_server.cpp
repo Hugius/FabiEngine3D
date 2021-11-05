@@ -128,6 +128,17 @@ void FabiEngine3D::networkServer_disconnectClient(const string& username)
 	_core->_networkServerAPI.disconnectClient(username);
 }
 
+void FabiEngine3D::networkServer_disconnectClients()
+{
+	if(!_core->_networkServerAPI.isRunning())
+	{
+		Logger::throwWarning("Networking server tried to disconnect clients: not running!");
+		return;
+	}
+
+	_core->_networkServerAPI.disconnectClients();
+}
+
 const bool FabiEngine3D::networkServer_isRunning()
 {
 	return _core->_networkServerAPI.isRunning();

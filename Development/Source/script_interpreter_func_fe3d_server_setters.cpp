@@ -86,6 +86,15 @@ bool ScriptInterpreter::_executeFe3dServerSetterFunction(const string& functionN
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
+	else if(functionName == "fe3d:server_disconnect_clients")
+	{
+		// Validate arguments
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			_fe3d.networkServer_disconnectClients();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
 	else
 	{
 		return false;

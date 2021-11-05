@@ -279,3 +279,23 @@ void NetworkServerAPI::disconnectClient(const string& username)
 	// Client not connected
 	Logger::throwError("NetworkServerAPI::disconnectClient::2");
 }
+
+void NetworkServerAPI::disconnectClients()
+{
+	// Must be running
+	if(!_isRunning)
+	{
+		Logger::throwError("NetworkServerAPI::disconnectClients::1");
+	}
+
+	// Send messages
+	for(size_t i = 0; i < _clientUsernames.size(); i++)
+	{
+		// Client must be fully accepted
+		if(!_clientUsernames[i].empty())
+		{
+			_sendMessageTCP(_clientSockets[i], "DISCONNECTED", true);
+			return;
+		}
+	}
+}

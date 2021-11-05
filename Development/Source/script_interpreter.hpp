@@ -153,6 +153,7 @@ private:
 	static inline const string META_KEYWORD = "META";
 	static inline const string EXECUTE_KEYWORD = "EXEC";
 	static inline const string LOOP_KEYWORD = "LOOP";
+	static inline const string CONTINUE_KEYWORD = "CONTINUE";
 	static inline const string BREAK_KEYWORD = "BREAK";
 	static inline const string IF_KEYWORD = "IF";
 	static inline const string ELIF_KEYWORD = "ELIF";

@@ -91,7 +91,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		unsigned int currentLineScopeDepth = countedSpaces / SPACES_PER_INDENT;
 
 		// Detect end of loop
-		bool endOfLoop = false;
+		bool isEndOfLoop = false;
 		if(!loopLineIndices.empty())
 		{
 			if(currentLineScopeDepth <= loopScopeDepths.back()) // End of current loop scope
@@ -105,7 +105,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				{
 					// Go back to current loop's beginning
 					lineIndex = loopLineIndices.back();
-					scopeDepth = loopScopeDepths.back() + 1;
+					scopeDepth = (loopScopeDepths.back() + 1);
 					loopIterationCounts.back()++;
 					continue;
 				}
@@ -119,7 +119,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				}
 				else // Normal loop
 				{
-					endOfLoop = true; // Go back to current loop's beginning after executing current scriptline
+					isEndOfLoop = true; // Go back to current loop's beginning after executing current scriptline
 				}
 			}
 		}
@@ -411,6 +411,22 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		{
 			_processListPull(scriptLineText);
 		}
+		else if(scriptLineText == CONTINUE_KEYWORD)
+		{
+			if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP) // Infinite loop
+			{
+				_throwScriptError("maximum amount of loop iterations reached, perhaps infinite looping?");
+				return;
+			}
+			else // Normal loop
+			{
+				// Go back to current loop's beginning
+				lineIndex = loopLineIndices.back();
+				scopeDepth = (loopScopeDepths.back() + 1);
+				loopIterationCounts.back()++;
+				continue;
+			}
+		}
 		else if(scriptLineText == BREAK_KEYWORD)
 		{
 			scopeDepth = loopScopeDepths.back();
@@ -439,10 +455,10 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 
 		// Go back to current loops beginning
-		if(endOfLoop)
+		if(isEndOfLoop)
 		{
 			lineIndex = loopLineIndices.back();
-			scopeDepth = loopScopeDepths.back() + 1;
+			scopeDepth = (loopScopeDepths.back() + 1);
 			loopIterationCounts.back()++;
 		}
 	}

@@ -44,6 +44,8 @@
     <ClCompile Include="..\..\Source\billboard_editor_updates_texturing.cpp" />
     <ClCompile Include="..\..\Source\billboard_editor_updates_misc.cpp" />
     <ClCompile Include="..\..\Source\billboard_editor_updates_miscellaneous.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_misc_animation.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_misc_custom.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_reflection_updates_edit.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_reflection_updates_main.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_reflection_updates_place.cpp" />
@@ -99,8 +101,8 @@
     <ClCompile Include="..\..\Source\scene_editor_loading.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_loading_custom.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_main.cpp" />
-    <ClCompile Include="..\..\Source\scene_editor_misc_one.cpp" />
-    <ClCompile Include="..\..\Source\scene_editor_misc_two.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_misc_selection.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_misc_other.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_model_updates_edit.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_model_updates_place.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_model_updates_main.cpp" />

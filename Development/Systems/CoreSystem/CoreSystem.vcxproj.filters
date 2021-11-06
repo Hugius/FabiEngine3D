@@ -69,7 +69,7 @@
     <ClCompile Include="..\..\Source\fe3d_entity_sky.cpp">
       <Filter>Interface\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fe3d_entity_terrain.cpp">
+    <ClCompile Include="..\..\Source\fe3d_entity_terrain_setters.cpp">
       <Filter>Interface\Entities</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\fe3d_entity_water.cpp">
@@ -78,7 +78,7 @@
     <ClCompile Include="..\..\Source\fe3d_entity_aabb.cpp">
       <Filter>Interface\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fe3d_entity_billboard.cpp">
+    <ClCompile Include="..\..\Source\fe3d_entity_billboard_getters.cpp">
       <Filter>Interface\Entities</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\fe3d_entity_image.cpp">
@@ -87,7 +87,7 @@
     <ClCompile Include="..\..\Source\fe3d_entity_pointlight.cpp">
       <Filter>Interface\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fe3d_entity_model.cpp">
+    <ClCompile Include="..\..\Source\fe3d_entity_model_getters.cpp">
       <Filter>Interface\Entities</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\fe3d_entity_text.cpp">
@@ -97,6 +97,15 @@
       <Filter>Interface\Entities</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\fe3d_entity_spotlight.cpp">
+      <Filter>Interface\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fe3d_entity_billboard_setters.cpp">
+      <Filter>Interface\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fe3d_entity_model_setters.cpp">
+      <Filter>Interface\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fe3d_entity_terrain_getters.cpp">
       <Filter>Interface\Entities</Filter>
     </ClCompile>
   </ItemGroup>

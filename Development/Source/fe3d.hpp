@@ -850,8 +850,8 @@ public:
 
 	// Server interface - getters
 	const vector<NetworkClientMessage>& networkServer_getPendingMessages();
-	const vector<string>& networkServer_getClientIPs();
-	const vector<string>& networkServer_getClientUsernames();
+	const vector<string> networkServer_getClientIPs();
+	const vector<string> networkServer_getClientUsernames();
 	const string& networkServer_getNewClientIP();
 	const string& networkServer_getNewClientUsername();
 	const string& networkServer_getOldClientIP();

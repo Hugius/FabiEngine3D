@@ -1,8 +1,13 @@
 #include "scene_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <algorithm>
 #include <filesystem>
+
+using std::clamp;
+using std::filesystem::directory_iterator;
+using std::filesystem::remove_all;
 
 void SceneEditor::_updateMiscellaneous()
 {
@@ -275,163 +280,123 @@ void SceneEditor::clearCurrentScene()
 	_loadedReflectionIDs.clear();
 }
 
-void SceneEditor::createCustomScene(const string& ID)
+
+const bool SceneEditor::isLoaded() const
 {
-	_customSceneID = ID;
-	_hasCustomSceneLighting = false;
-	_hasCustomSceneGraphics = false;
-	_hasCustomSceneSky = false;
-	_hasCustomSceneTerrain = false;
-	_hasCustomSceneWater = false;
-	_hasCustomSceneGraphics = false;
-	_customSceneModelIDs.clear();
-	_customSceneBillboardIDs.clear();
-	_customSceneAabbIDs.clear();
-	_customSceneSoundIDs.clear();
-	_customScenePointlightIDs.clear();
-	_customSceneSpotlightIDs.clear();
+	return _isEditorLoaded;
 }
 
-void SceneEditor::addLightingToCustomScene()
+const bool SceneEditor::isSceneExisting(const string& filename) const
 {
-	if(!_customSceneID.empty())
+	// Error checking
+	if(_currentProjectID.empty())
 	{
-		_hasCustomSceneLighting = true;
+		Logger::throwError("SceneEditor::isSceneExisting");
+	}
+
+	// Compose full file path
+	string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
+												   ("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + filename + ".fe3d";
+
+	// Check if scene file exists
+	return (Tools::isFileExisting(filePath));
+}
+
+const string& SceneEditor::getLoadedSceneID() const
+{
+	return _loadedSceneID;
+}
+
+void SceneEditor::setCurrentProjectID(const string& ID)
+{
+	_currentProjectID = ID;
+}
+
+
+const vector<string> SceneEditor::_loadSceneIDs() const
+{
+	// Temporary values
+	vector<string> sceneIDs;
+	string directoryPath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
+							("projects\\" + _currentProjectID)) + "\\scenes\\editor\\");
+
+	// Check if scenes directory exists
+	if(Tools::isDirectoryExisting(directoryPath))
+	{
+		// Get all project IDs
+		for(const auto& entry : directory_iterator(directoryPath))
+		{
+			string sceneID = string(entry.path().string());
+			sceneID.erase(0, directoryPath.size());
+			sceneIDs.push_back(sceneID.substr(0, sceneID.size() - 5));
+		}
 	}
 	else
 	{
-		Logger::throwWarning("Cannot add lighting to custom scene!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: directory `scenes\\editor\\` missing!");
 	}
+
+	return sceneIDs;
 }
 
-void SceneEditor::addGraphicsToCustomScene()
+void SceneEditor::_deleteSceneFile(const string& ID)
 {
-	if(!_customSceneID.empty())
+	// Compose full file path
+	string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
+												   ("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + ID + ".fe3d";
+
+	// Check if scene file is still existing
+	if(Tools::isFileExisting(filePath))
 	{
-		_hasCustomSceneGraphics = true;
+		remove_all(filePath);
 	}
 	else
 	{
-		Logger::throwWarning("Cannot add graphics to custom scene!");
+		Logger::throwWarning("Cannot delete scene with ID \"" + ID + "\"!");
 	}
 }
 
-void SceneEditor::addSkyToCustomScene()
+void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, string writeFieldID, float& value, float adder,
+									   float multiplier, float minimum, float maximum)
 {
-	if(!_customSceneID.empty())
-	{
-		_hasCustomSceneSky = true;
-	}
-	else
-	{
-		Logger::throwWarning("Cannot add sky to custom scene!");
-	}
-}
+	// Temporary values
+	auto writeField = _gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWriteField(writeFieldID);
 
-void SceneEditor::addTerrainToCustomScene()
-{
-	if(!_customSceneID.empty())
+	// Plus & minus button handling
+	if(_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
 	{
-		_hasCustomSceneTerrain = true;
+		if(_gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getButton(buttonID)->isHovered())
+		{
+			value += adder;
+		}
 	}
-	else
-	{
-		Logger::throwWarning("Cannot add terrain to custom scene!");
-	}
-}
 
-void SceneEditor::addWaterToCustomScene()
-{
-	if(!_customSceneID.empty())
+	// WriteField pre-update
+	if(!writeField->isActive())
 	{
-		_hasCustomSceneWater = true;
+		writeField->changeTextContent(to_string(static_cast<int>(value * multiplier)));
 	}
-	else
-	{
-		Logger::throwWarning("Cannot add water to custom scene!");
-	}
-}
 
-void SceneEditor::addModelToCustomScene(const string& ID)
-{
-	if(!_customSceneID.empty())
+	// WriteField handling
+	if(writeField->getTextContent().empty())
 	{
-		_customSceneModelIDs.push_back(ID);
+		value = 0.0f; // Reset value to default
 	}
 	else
 	{
-		Logger::throwWarning("Cannot add model to custom scene!");
+		// Check if something is filled in
+		if(writeField->isActive())
+		{
+			value = (static_cast<float>(stoi(writeField->getTextContent())) / multiplier); // Update value in realtime
+		}
 	}
-}
 
-void SceneEditor::addBillboardToCustomScene(const string& ID)
-{
-	if(!_customSceneID.empty())
-	{
-		_customSceneBillboardIDs.push_back(ID);
-	}
-	else
-	{
-		Logger::throwWarning("Cannot add billboard to custom scene!");
-	}
-}
+	// Clamp value range
+	value = clamp(value, minimum, maximum);
 
-void SceneEditor::addAabbToCustomScene(const string& ID)
-{
-	if(!_customSceneID.empty())
+	// WriteField post-update
+	if(!writeField->isActive())
 	{
-		_customSceneAabbIDs.push_back(ID);
-	}
-	else
-	{
-		Logger::throwWarning("Cannot add AABB to custom scene!");
-	}
-}
-
-void SceneEditor::addSoundToCustomScene(const string& ID)
-{
-	if(!_customSceneID.empty())
-	{
-		_customSceneSoundIDs.push_back(ID);
-	}
-	else
-	{
-		Logger::throwWarning("Cannot add sound to custom scene!");
-	}
-}
-
-void SceneEditor::addPointlightToCustomScene(const string& ID)
-{
-	if(!_customSceneID.empty())
-	{
-		_customScenePointlightIDs.push_back(ID);
-	}
-	else
-	{
-		Logger::throwWarning("Cannot add pointlight to custom scene!");
-	}
-}
-
-void SceneEditor::addSpotlightToCustomScene(const string& ID)
-{
-	if(!_customSceneID.empty())
-	{
-		_customSceneSpotlightIDs.push_back(ID);
-	}
-	else
-	{
-		Logger::throwWarning("Cannot add spotlight to custom scene!");
-	}
-}
-
-void SceneEditor::addReflectionToCustomScene(const string& ID)
-{
-	if(!_customSceneID.empty())
-	{
-		_customSceneReflectionIDs.push_back(ID);
-	}
-	else
-	{
-		Logger::throwWarning("Cannot add reflection to custom scene!");
+		writeField->changeTextContent(to_string(static_cast<int>(value * multiplier)));
 	}
 }

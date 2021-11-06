@@ -279,10 +279,10 @@
     <ClCompile Include="..\..\Source\scene_editor_creation.cpp">
       <Filter>Scene Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_misc_one.cpp">
+    <ClCompile Include="..\..\Source\scene_editor_misc_selection.cpp">
       <Filter>Scene Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_misc_two.cpp">
+    <ClCompile Include="..\..\Source\scene_editor_misc_other.cpp">
       <Filter>Scene Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\scene_editor_billboard_updates_edit.cpp">
@@ -479,6 +479,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\scene_editor_spotlight_updates_place.cpp">
       <Filter>Scene Editor\Spotlight</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_misc_custom.cpp">
+      <Filter>Scene Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_misc_animation.cpp">
+      <Filter>Scene Editor\Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

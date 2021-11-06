@@ -40,43 +40,43 @@ public:
 	void setWireFramed(bool value);
 
 	// Strings
-	const string& getDudvMapPath();
-	const string& getNormalMapPath();
-	const string& getDisplacementMapPath();
+	const string& getDudvMapPath() const;
+	const string& getNormalMapPath() const;
+	const string& getDisplacementMapPath() const;
 
 	// Vectors
-	const Vec3 getColor();
-	const Vec2 getSpeed();
-	const Vec2 getRippleOffset();
-	const Vec2 getWaveOffset();
+	const Vec3 getColor() const;
+	const Vec2 getSpeed() const;
+	const Vec2 getRippleOffset() const;
+	const Vec2 getWaveOffset() const;
 
 	// Decimals
-	const float getHeight();
-	const float getTextureRepeat();
-	const float getWaveHeight();
-	const float getSpecularShininess();
-	const float getSpecularIntensity();
-	const float getSize();
-	const float getTransparency();
+	const float getHeight() const;
+	const float getTextureRepeat() const;
+	const float getWaveHeight() const;
+	const float getSpecularShininess() const;
+	const float getSpecularIntensity() const;
+	const float getSize() const;
+	const float getTransparency() const;
 
 	// Booleans
-	const bool isSpecular();
-	const bool isReflective();
-	const bool isRefractive();
-	const bool isWireFramed();
-	const bool hasLowQualityRenderBuffer();
-	const bool hasHighQualityRenderBuffer();
-	const bool hasDudvMap();
-	const bool hasNormalMap();
-	const bool hasDisplacementMap();
+	const bool isSpecular() const;
+	const bool isReflective() const;
+	const bool isRefractive() const;
+	const bool isWireFramed() const;
+	const bool hasLowQualityRenderBuffer() const;
+	const bool hasHighQualityRenderBuffer() const;
+	const bool hasDudvMap() const;
+	const bool hasNormalMap() const;
+	const bool hasDisplacementMap() const;
 
 	// Miscellaneous
-	const shared_ptr<RenderBuffer> getLowQualityRenderBuffer();
-	const shared_ptr<RenderBuffer> getHighQualityRenderBuffer();
-	const WaterQuality getQuality();
-	const TextureID getDudvMap();
-	const TextureID getNormalMap();
-	const TextureID getDisplacementMap();
+	const shared_ptr<RenderBuffer> getLowQualityRenderBuffer() const;
+	const shared_ptr<RenderBuffer> getHighQualityRenderBuffer() const;
+	const WaterQuality getQuality() const;
+	const TextureID getDudvMap() const;
+	const TextureID getNormalMap() const;
+	const TextureID getDisplacementMap() const;
 
 private:
 	// Vectors

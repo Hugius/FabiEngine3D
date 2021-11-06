@@ -9,7 +9,7 @@ using std::ofstream;
 using std::filesystem::directory_iterator;
 using std::filesystem::remove_all;
 
-bool TopViewportController::isScriptStarted()
+const bool TopViewportController::isScriptStarted() const
 {
 	if(_currentProjectID.empty())
 	{
@@ -21,7 +21,7 @@ bool TopViewportController::isScriptStarted()
 	}
 }
 
-bool TopViewportController::isScriptRunning()
+const bool TopViewportController::isScriptRunning() const
 {
 	if(_currentProjectID.empty())
 	{
@@ -135,7 +135,7 @@ void TopViewportController::_updateProjectCreating()
 	}
 }
 
-bool TopViewportController::_prepareProjectChoosing(const string& title)
+const bool TopViewportController::_prepareProjectChoosing(const string& title) const
 {
 	// Temporary values
 	const string projectDirectoryPath = (Tools::getRootDirectory() + "projects\\");
@@ -387,7 +387,7 @@ void TopViewportController::_applyProjectChange()
 	_settingsEditor.setCurrentProjectID(_currentProjectID);
 }
 
-bool TopViewportController::isProjectCorrupted(const string& projectDirectoryPath)
+const bool TopViewportController::isProjectCorrupted(const string& projectDirectoryPath) const
 {
 	// Check if all default directories are still existing
 	if(!Tools::isDirectoryExisting(projectDirectoryPath) ||

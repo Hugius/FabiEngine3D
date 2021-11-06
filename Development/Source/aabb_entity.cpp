@@ -153,82 +153,82 @@ void AabbEntity::setLocalSize(Vec3 value)
 	_localSize = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
 
-const shared_ptr<RenderBuffer> AabbEntity::getRenderBuffer()
+const shared_ptr<RenderBuffer> AabbEntity::getRenderBuffer()const
 {
 	return _renderBuffer;
 }
 
-const Matrix44& AabbEntity::getTransformationMatrix()
+const Matrix44& AabbEntity::getTransformationMatrix() const
 {
 	return _transformationMatrix;
 }
 
-const Vec3 AabbEntity::getLocalPosition()
+const Vec3 AabbEntity::getLocalPosition() const
 {
 	return _localPosition;
 }
 
-const Vec3 AabbEntity::getLocalSize()
+const Vec3 AabbEntity::getLocalSize() const
 {
 	return _localSize;
 }
 
-const Vec3 AabbEntity::getPosition()
+const Vec3 AabbEntity::getPosition() const
 {
 	return _position;
 }
 
-const Vec3 AabbEntity::getSize()
+const Vec3 AabbEntity::getSize() const
 {
 	return _size;
 }
 
-const string& AabbEntity::getParentID()
+const string& AabbEntity::getParentID() const
 {
 	return _parentID;
 }
-
-const AabbParentType AabbEntity::getParentType()
+ 
+const AabbParentType AabbEntity::getParentType() const
 {
 	return _parentType;
 }
 
-const Direction AabbEntity::getCollisionDirection()
+const Direction AabbEntity::getCollisionDirection() const
 {
 	return _collisionDirection;
 }
 
-const bool AabbEntity::isRaycastResponsive()
+const bool AabbEntity::isRaycastResponsive() const
 {
 	return _isRaycastResponsive;
 }
 
-const bool AabbEntity::isCollisionResponsive()
+const bool AabbEntity::isCollisionResponsive() const
 {
 	return _isCollisionResponsive;
 }
 
-const bool AabbEntity::hasParent()
+const bool AabbEntity::hasParent() const
 {
 	return !_parentID.empty();
 }
 
-const bool AabbEntity::hasCollided()
+const bool AabbEntity::hasCollided() const
 {
 	return _hasCollided;
 }
 
-const bool AabbEntity::hasRenderBuffer()
+const bool AabbEntity::hasRenderBuffer() const
 {
 	return (_renderBuffer != nullptr);
 }
 
-const bool AabbEntity::mustFollowParentTransformation()
+const bool AabbEntity::mustFollowParentTransformation() const
 {
 	return _mustFollowParentTransformation;
 }
 
-const bool AabbEntity::mustFollowParentVisibility()
+const bool AabbEntity::mustFollowParentVisibility() const
 {
 	return _mustFollowParentVisibility;
 }

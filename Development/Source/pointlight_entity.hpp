@@ -20,15 +20,15 @@ public:
 	void setShape(PointlightShape value);
 
 	// Vectors
-	const Vec3 getPosition();
-	const Vec3 getColor();
-	const Vec3 getRadius();
+	const Vec3 getPosition() const;
+	const Vec3 getColor() const;
+	const Vec3 getRadius() const;
 
 	// Decimals
-	const float getIntensity();
+	const float getIntensity() const;
 
 	// Miscellaneous
-	const PointlightShape getShape();
+	const PointlightShape getShape() const;
 
 private:
 	// Vectors

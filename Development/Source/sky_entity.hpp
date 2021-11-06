@@ -28,28 +28,28 @@ public:
 	void setWireFramed(bool value);
 
 	// Strings
-	const array<string, 6>& getDiffuseMapPaths();
+	const array<string, 6>& getDiffuseMapPaths() const;
 
 	// Matrices
-	const Matrix44& getRotationMatrix();
+	const Matrix44& getRotationMatrix() const;
 
 	// Vectors
-	const Vec3 getColor();
+	const Vec3 getColor() const;
 
 	// Decimals
-	const float getOriginalLightness();
-	const float getLightness();
-	const float getRotation();
-	const float getRotationSpeed();
+	const float getOriginalLightness() const;
+	const float getLightness() const;
+	const float getRotation() const;
+	const float getRotationSpeed() const;
 
 	// Booleans
-	const bool hasRenderBuffer();
-	const bool hasCubeMap();
-	const bool isWireFramed();
+	const bool hasRenderBuffer() const;
+	const bool hasCubeMap() const;
+	const bool isWireFramed() const;
 
 	// Miscellaneous
-	const shared_ptr<RenderBuffer> getRenderBuffer();
-	const TextureID getDiffuseMap();
+	const shared_ptr<RenderBuffer> getRenderBuffer() const;
+	const TextureID getDiffuseMap() const;
 
 private:
 	// Strings

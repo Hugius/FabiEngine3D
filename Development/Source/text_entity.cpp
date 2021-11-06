@@ -76,27 +76,27 @@ void TextEntity::setFontPath(const string& fontPath)
 	_fontPath = fontPath;
 }
 
-const bool TextEntity::isCentered()
+const bool TextEntity::isCentered() const
 {
 	return _isCentered;
 }
 
-const bool TextEntity::isDynamic()
+const bool TextEntity::isDynamic() const
 {
 	return _isDynamic;
 }
 
-const vector<shared_ptr<ImageEntity>>& TextEntity::getCharacterEntities()
+const vector<shared_ptr<ImageEntity>>& TextEntity::getCharacterEntities() const
 {
 	return _characterEntities;
 }
 
-const string& TextEntity::getTextContent()
+const string& TextEntity::getTextContent() const
 {
 	return _textContent;
 }
 
-const string& TextEntity::getFontPath()
+const string& TextEntity::getFontPath() const
 {
 	return _fontPath;
 }

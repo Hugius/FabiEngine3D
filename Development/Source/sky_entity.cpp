@@ -55,62 +55,62 @@ void SkyEntity::setWireFramed(bool value)
 	_isWireFramed = value;
 }
 
-const shared_ptr<RenderBuffer> SkyEntity::getRenderBuffer()
+const shared_ptr<RenderBuffer> SkyEntity::getRenderBuffer() const
 {
 	return _renderBuffer;
 }
 
-const array<string, 6>& SkyEntity::getDiffuseMapPaths()
+const array<string, 6>& SkyEntity::getDiffuseMapPaths() const
 {
 	return _diffuseMapPaths;
 }
 
-const Matrix44& SkyEntity::getRotationMatrix()
+const Matrix44& SkyEntity::getRotationMatrix() const
 {
 	return _rotationMatrix;
 }
 
-const Vec3 SkyEntity::getColor()
+const Vec3 SkyEntity::getColor() const
 {
 	return _color;
 }
 
-const TextureID SkyEntity::getDiffuseMap()
+const TextureID SkyEntity::getDiffuseMap() const
 {
 	return _diffuseMap;
 }
 
-const float SkyEntity::getOriginalLightness()
+const float SkyEntity::getOriginalLightness() const
 {
 	return _originalLightness;
 }
 
-const float SkyEntity::getLightness()
+const float SkyEntity::getLightness() const
 {
 	return _lightness;
 }
 
-const float SkyEntity::getRotation()
+const float SkyEntity::getRotation() const
 {
 	return _rotation;
 }
 
-const float SkyEntity::getRotationSpeed()
+const float SkyEntity::getRotationSpeed() const
 {
 	return _rotationSpeed;
 }
 
-const bool SkyEntity::hasCubeMap()
+const bool SkyEntity::hasCubeMap() const
 {
 	return (_diffuseMap != 0);
 }
 
-const bool SkyEntity::isWireFramed()
+const bool SkyEntity::isWireFramed() const
 {
 	return _isWireFramed;
 }
 
-const bool SkyEntity::hasRenderBuffer()
+const bool SkyEntity::hasRenderBuffer() const
 {
 	return (_renderBuffer != nullptr);
 }

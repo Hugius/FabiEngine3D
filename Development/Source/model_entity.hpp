@@ -81,72 +81,72 @@ public:
 	void setRotationOrder(DirectionOrder order);
 
 	// Strings
-	const vector<string> getPartIDs();
-	const string& getMeshPath();
-	const string& getLevelOfDetailEntityID();
-	const string& getPreviousReflectionEntityID();
-	const string& getCurrentReflectionEntityID();
-	const string& getDiffuseMapPath(const string& partID);
-	const string& getEmissionMapPath(const string& partID);
-	const string& getSpecularMapPath(const string& partID);
-	const string& getReflectionMapPath(const string& partID);
-	const string& getNormalMapPath(const string& partID);
+	const vector<string> getPartIDs() const;
+	const string& getMeshPath() const;
+	const string& getLevelOfDetailEntityID() const;
+	const string& getPreviousReflectionEntityID() const;
+	const string& getCurrentReflectionEntityID() const;
+	const string& getDiffuseMapPath(const string& partID) const;
+	const string& getEmissionMapPath(const string& partID) const;
+	const string& getSpecularMapPath(const string& partID) const;
+	const string& getReflectionMapPath(const string& partID) const;
+	const string& getNormalMapPath(const string& partID) const;
 
 	// Matrices
-	const Matrix44& getTransformationMatrix(const string& partID);
+	const Matrix44& getTransformationMatrix(const string& partID) const;
 
 	// Vectors
-	const Vec3 getColor(const string& partID);
-	const Vec3 getLevelOfDetailSize();
-	const Vec3 getBasePosition();
-	const Vec3 getBaseRotation();
-	const Vec3 getBaseRotationOrigin();
-	const Vec3 getBaseSize();
-	const Vec3 getPartPosition(const string& partID);
-	const Vec3 getPartRotation(const string& partID);
-	const Vec3 getPartRotationOrigin(const string& partID);
-	const Vec3 getPartSize(const string& partID);
+	const Vec3 getColor(const string& partID) const;
+	const Vec3 getLevelOfDetailSize() const;
+	const Vec3 getBasePosition() const;
+	const Vec3 getBaseRotation() const;
+	const Vec3 getBaseRotationOrigin() const;
+	const Vec3 getBaseSize() const;
+	const Vec3 getPartPosition(const string& partID) const;
+	const Vec3 getPartRotation(const string& partID) const;
+	const Vec3 getPartRotationOrigin(const string& partID) const;
+	const Vec3 getPartSize(const string& partID) const;
 
 	// Decimals
-	const float getCubeReflectionMixValue();
-	const float getMinHeight();
-	const float getMaxHeight();
-	const float getColorInversion(const string& partID);
-	const float getReflectivity(const string& partID);
-	const float getLightness(const string& partID);
-	const float getSpecularShininess(const string& partID);
-	const float getSpecularIntensity(const string& partID);
-	const float getAlpha(const string& partID);
-	const float getTextureRepeat(const string& partID);
-	const float getEmissionIntensity(const string& partID);
+	const float getCubeReflectionMixValue() const;
+	const float getMinHeight() const;
+	const float getMaxHeight() const;
+	const float getColorInversion(const string& partID) const;
+	const float getReflectivity(const string& partID) const;
+	const float getLightness(const string& partID) const;
+	const float getSpecularShininess(const string& partID) const;
+	const float getSpecularIntensity(const string& partID) const;
+	const float getAlpha(const string& partID) const;
+	const float getTextureRepeat(const string& partID) const;
+	const float getEmissionIntensity(const string& partID) const;
 
 	// Booleans
-	const bool isShadowed();
-	const bool isReflected();
-	const bool isCameraStatic();
-	const bool isDepthMapIncluded();
-	const bool isLevelOfDetailed();
-	const bool isBright();
-	const bool isWireFramed();
-	const bool isFaceCulled();
-	const bool isSpecular(const string& partID);
-	const bool isReflective(const string& partID);
-	const bool hasRenderBuffer(const string& partID);
-	const bool hasDiffuseMap(const string& partID);
-	const bool hasEmissionMap(const string& partID);
-	const bool hasSpecularMap(const string& partID);
-	const bool hasReflectionMap(const string& partID);
-	const bool hasNormalMap(const string& partID);
+	const bool isShadowed() const;
+	const bool isReflected() const;
+	const bool isCameraStatic() const;
+	const bool isDepthMapIncluded() const;
+	const bool isLevelOfDetailed() const;
+	const bool isBright() const;
+	const bool isWireFramed() const;
+	const bool isFaceCulled() const;
+	const bool isSpecular(const string& partID) const;
+	const bool isReflective(const string& partID) const;
+	const bool hasRenderBuffer(const string& partID) const;
+	const bool hasDiffuseMap(const string& partID) const;
+	const bool hasEmissionMap(const string& partID) const;
+	const bool hasSpecularMap(const string& partID) const;
+	const bool hasReflectionMap(const string& partID) const;
+	const bool hasNormalMap(const string& partID) const;
 
 	// Miscellaneous
-	const shared_ptr<RenderBuffer> getRenderBuffer(const string& partID);
-	const TextureID getDiffuseMap(const string& partID);
-	const TextureID getEmissionMap(const string& partID);
-	const TextureID getSpecularMap(const string& partID);
-	const TextureID getReflectionMap(const string& partID);
-	const TextureID getNormalMap(const string& partID);
-	const ReflectionType getReflectionType(const string& partID);
-	const DirectionOrder getRotationOrder();
+	const shared_ptr<RenderBuffer> getRenderBuffer(const string& partID) const;
+	const TextureID getDiffuseMap(const string& partID) const;
+	const TextureID getEmissionMap(const string& partID) const;
+	const TextureID getSpecularMap(const string& partID) const;
+	const TextureID getReflectionMap(const string& partID) const;
+	const TextureID getNormalMap(const string& partID) const;
+	const ReflectionType getReflectionType(const string& partID) const;
+	const DirectionOrder getRotationOrder() const;
 
 private:
 	struct PartData final
@@ -212,7 +212,7 @@ private:
 	void _correctSizeTarget(Vec3& current, Vec3 target, float speed);
 
 	// Integers
-	unsigned int _getPartIndex(const string& partID);
+	unsigned int _getPartIndex(const string& partID) const;
 
 	// Strings
 	string _meshPath = "";

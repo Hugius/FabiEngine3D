@@ -35,30 +35,30 @@ public:
 	void setCollided(bool value);
 
 	// Strings
-	const string& getParentID();
+	const string& getParentID() const;
 
 	// Matrices
-	const Matrix44& getTransformationMatrix();
+	const Matrix44& getTransformationMatrix() const;
 
 	// Vectors
-	const Vec3 getLocalPosition();
-	const Vec3 getLocalSize();
-	const Vec3 getPosition();
-	const Vec3 getSize();
+	const Vec3 getLocalPosition() const;
+	const Vec3 getLocalSize() const;
+	const Vec3 getPosition() const;
+	const Vec3 getSize() const;
 
 	// Booleans
-	const bool isRaycastResponsive();
-	const bool isCollisionResponsive();
-	const bool hasParent();
-	const bool hasCollided();
-	const bool hasRenderBuffer();
-	const bool mustFollowParentTransformation();
-	const bool mustFollowParentVisibility();
+	const bool isRaycastResponsive() const;
+	const bool isCollisionResponsive() const;
+	const bool hasParent() const;
+	const bool hasCollided() const;
+	const bool hasRenderBuffer() const;
+	const bool mustFollowParentTransformation() const;
+	const bool mustFollowParentVisibility() const;
 
 	// Miscellaneous
-	const shared_ptr<RenderBuffer> getRenderBuffer();
-	const AabbParentType getParentType();
-	const Direction getCollisionDirection();
+	const shared_ptr<RenderBuffer> getRenderBuffer() const;
+	const AabbParentType getParentType() const;
+	const Direction getCollisionDirection() const;
 
 private:
 	// Strings

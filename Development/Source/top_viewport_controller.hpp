@@ -24,9 +24,9 @@ public:
 	void update() override;
 
 	// Booleans
-	bool isScriptStarted();
-	bool isScriptRunning();
-	bool isProjectCorrupted(const string& projectDirectoryPath);
+	const bool isScriptStarted() const;
+	const bool isScriptRunning() const;
+	const bool isProjectCorrupted(const string& projectDirectoryPath) const;
 
 	// Vectors
 	static inline const Vec3 BUTTON_COLOR = Vec3(0.0f, 0.1f, 0.0f);
@@ -47,7 +47,7 @@ private:
 	void _applyProjectChange();
 
 	// Booleans
-	bool _prepareProjectChoosing(const string& title);
+	const bool _prepareProjectChoosing(const string& title) const;
 
 	// Strings
 	string _currentProjectID = "";

@@ -125,147 +125,147 @@ void WaterEntity::setTransparency(float value)
 	_transparency = max(0.0f, value);
 }
 
-const float WaterEntity::getHeight()
+const float WaterEntity::getHeight() const
 {
 	return _height;
 }
 
-const Vec3 WaterEntity::getColor()
+const Vec3 WaterEntity::getColor() const
 {
 	return _color;
 }
 
-const TextureID WaterEntity::getDudvMap()
+const TextureID WaterEntity::getDudvMap() const
 {
 	return _dudvMap;
 }
 
-const TextureID WaterEntity::getNormalMap()
+const TextureID WaterEntity::getNormalMap() const
 {
 	return _normalMap;
 }
 
-const TextureID WaterEntity::getDisplacementMap()
+const TextureID WaterEntity::getDisplacementMap() const
 {
 	return _displacementMap;
 }
 
-const string& WaterEntity::getDudvMapPath()
+const string& WaterEntity::getDudvMapPath() const
 {
 	return _dudvMapPath;
 }
 
-const string& WaterEntity::getNormalMapPath()
+const string& WaterEntity::getNormalMapPath() const
 {
 	return _normalMapPath;
 }
 
-const string& WaterEntity::getDisplacementMapPath()
+const string& WaterEntity::getDisplacementMapPath() const
 {
 	return _displacementMapPath;
 }
 
-const Vec2 WaterEntity::getRippleOffset()
+const Vec2 WaterEntity::getRippleOffset() const
 {
 	return _rippleOffset;
 }
 
-const float WaterEntity::getTextureRepeat()
+const float WaterEntity::getTextureRepeat() const
 {
 	return _textureRepeat;
 }
 
-const shared_ptr<RenderBuffer> WaterEntity::getLowQualityRenderBuffer()
+const shared_ptr<RenderBuffer> WaterEntity::getLowQualityRenderBuffer() const
 {
 	return _lowQualityRenderBuffer;
 }
 
-const shared_ptr<RenderBuffer> WaterEntity::getHighQualityRenderBuffer()
+const shared_ptr<RenderBuffer> WaterEntity::getHighQualityRenderBuffer() const
 {
 	return _highQualityRenderBuffer;
 }
 
-const WaterQuality WaterEntity::getQuality()
+const WaterQuality WaterEntity::getQuality() const
 {
 	return _quality;
 }
 
-const Vec2 WaterEntity::getSpeed()
+const Vec2 WaterEntity::getSpeed() const
 {
 	return _speed;
 }
 
-const Vec2 WaterEntity::getWaveOffset()
+const Vec2 WaterEntity::getWaveOffset() const
 {
 	return _waveOffset;
 }
 
-const float WaterEntity::getWaveHeight()
+const float WaterEntity::getWaveHeight() const
 {
 	return _waveHeight;
 }
 
-const float WaterEntity::getSpecularShininess()
+const float WaterEntity::getSpecularShininess() const
 {
 	return _specularShininess;
 }
 
-const float WaterEntity::getSpecularIntensity()
+const float WaterEntity::getSpecularIntensity() const
 {
 	return _specularIntensity;
 }
 
-const float WaterEntity::getSize()
+const float WaterEntity::getSize() const
 {
 	return _size;
 }
 
-const float WaterEntity::getTransparency()
+const float WaterEntity::getTransparency() const
 {
 	return _transparency;
 }
 
-const bool WaterEntity::isSpecular()
+const bool WaterEntity::isSpecular() const
 {
 	return _isSpecular;
 }
 
-const bool WaterEntity::isReflective()
+const bool WaterEntity::isReflective() const
 {
 	return _isReflective;
 }
 
-const bool WaterEntity::isRefractive()
+const bool WaterEntity::isRefractive() const
 {
 	return _isRefractive;
 }
 
-const bool WaterEntity::isWireFramed()
+const bool WaterEntity::isWireFramed() const
 {
 	return _isWireFramed;
 }
 
-const bool WaterEntity::hasLowQualityRenderBuffer()
+const bool WaterEntity::hasLowQualityRenderBuffer() const
 {
 	return (_lowQualityRenderBuffer != nullptr);
 }
 
-const bool WaterEntity::hasHighQualityRenderBuffer()
+const bool WaterEntity::hasHighQualityRenderBuffer() const
 {
 	return (_highQualityRenderBuffer != nullptr);
 }
 
-const bool WaterEntity::hasDudvMap()
+const bool WaterEntity::hasDudvMap() const
 {
 	return (_dudvMap != 0);
 }
 
-const bool WaterEntity::hasNormalMap()
+const bool WaterEntity::hasNormalMap() const
 {
 	return (_normalMap != 0);
 }
 
-const bool WaterEntity::hasDisplacementMap()
+const bool WaterEntity::hasDisplacementMap() const
 {
 	return (_displacementMap != 0);
 }

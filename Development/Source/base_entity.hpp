@@ -13,10 +13,10 @@ public:
 	void setVisible(bool value);
 
 	// Strings
-	const string& getID();
+	const string& getID() const;
 
 	// Booleans
-	const bool isVisible();
+	const bool isVisible() const;
 
 private:
 	// Voids

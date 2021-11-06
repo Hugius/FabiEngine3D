@@ -85,42 +85,42 @@ void SpotlightEntity::setDistance(float value)
 	_distance = max(0.0f, value);
 }
 
-const Vec3 SpotlightEntity::getPosition()
+const Vec3 SpotlightEntity::getPosition() const
 {
 	return _position;
 }
 
-const Vec3 SpotlightEntity::getFrontVector()
+const Vec3 SpotlightEntity::getFrontVector() const
 {
 	return _frontVector;
 }
 
-const Vec3 SpotlightEntity::getColor()
+const Vec3 SpotlightEntity::getColor() const
 {
 	return _color;
 }
 
-const float SpotlightEntity::getYaw()
+const float SpotlightEntity::getYaw() const
 {
 	return _yaw;
 }
 
-const float SpotlightEntity::getPitch()
+const float SpotlightEntity::getPitch() const
 {
 	return _pitch;
 }
 
-const float SpotlightEntity::getIntensity()
+const float SpotlightEntity::getIntensity() const
 {
 	return _intensity;
 }
 
-const float SpotlightEntity::getAngle()
+const float SpotlightEntity::getAngle() const
 {
 	return _angle;
 }
 
-const float SpotlightEntity::getDistance()
+const float SpotlightEntity::getDistance() const
 {
 	return _distance;
 }

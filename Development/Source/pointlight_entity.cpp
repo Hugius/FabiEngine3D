@@ -67,27 +67,27 @@ void PointlightEntity::setShape(PointlightShape value)
 	_shape = value;
 }
 
-const Vec3 PointlightEntity::getPosition()
+const Vec3 PointlightEntity::getPosition() const
 {
 	return _position;
 }
 
-const Vec3 PointlightEntity::getRadius()
+const Vec3 PointlightEntity::getRadius() const
 {
 	return _radius;
 }
 
-const Vec3 PointlightEntity::getColor()
+const Vec3 PointlightEntity::getColor() const
 {
 	return _color;
 }
 
-const float PointlightEntity::getIntensity()
+const float PointlightEntity::getIntensity() const
 {
 	return _intensity;
 }
 
-const PointlightShape PointlightEntity::getShape()
+const PointlightShape PointlightEntity::getShape() const
 {
 	return _shape;
 }

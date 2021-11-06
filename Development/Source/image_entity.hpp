@@ -49,45 +49,45 @@ public:
 	void setPerspectiveDepthEntity(bool value);
 
 	// Strings
-	const string& getDiffuseMapPath();
+	const string& getDiffuseMapPath() const;
 
 	// Matrices
-	const Matrix44 getTransformationMatrix();
+	const Matrix44 getTransformationMatrix() const;
 
 	// Vectors
-	const Vec3 getColor();
-	const Vec2 getPosition();
-	const Vec2 getSize();
-	const Vec2 getMinPosition();
-	const Vec2 getMaxPosition();
+	const Vec3 getColor() const;
+	const Vec2 getPosition() const;
+	const Vec2 getSize() const;
+	const Vec2 getMinPosition() const;
+	const Vec2 getMaxPosition() const;
 
 	// Decimals
-	const float getAlpha();
-	const float getRotation();
+	const float getAlpha() const;
+	const float getRotation() const;
 
 	// Integers
-	const int getMaxSpriteAnimationLoops();
-	const unsigned int getPassedSpriteAnimationFrames();
-	const unsigned int getMaxSpriteAnimationFramestep();
-	const unsigned int getTotalSpriteAnimationRows();
-	const unsigned int getTotalSpriteAnimationColumns();
-	const unsigned int getSpriteAnimationRowIndex();
-	const unsigned int getSpriteAnimationColumnIndex();
-	const unsigned int getSpriteAnimationLoops();
-	const unsigned int getDepth();
+	const int getMaxSpriteAnimationLoops() const;
+	const unsigned int getPassedSpriteAnimationFrames() const;
+	const unsigned int getMaxSpriteAnimationFramestep() const;
+	const unsigned int getTotalSpriteAnimationRows() const;
+	const unsigned int getTotalSpriteAnimationColumns() const;
+	const unsigned int getSpriteAnimationRowIndex() const;
+	const unsigned int getSpriteAnimationColumnIndex() const;
+	const unsigned int getSpriteAnimationLoops() const;
+	const unsigned int getDepth() const;
 
 	// Booleans
-	const bool isMirroredHorizonally();
-	const bool isMirroredVertically();
-	const bool isSpriteAnimationStarted();
-	const bool isSpriteAnimationPaused();
-	const bool isPerspectiveDepthEntity();
-	const bool hasRenderBuffer();
-	const bool hasDiffuseMap();
+	const bool isMirroredHorizonally() const;
+	const bool isMirroredVertically() const;
+	const bool isSpriteAnimationStarted() const;
+	const bool isSpriteAnimationPaused() const;
+	const bool isPerspectiveDepthEntity() const;
+	const bool hasRenderBuffer() const;
+	const bool hasDiffuseMap() const;
 
 	// Miscellaneous
-	const shared_ptr<RenderBuffer> getRenderBuffer();
-	const TextureID getDiffuseMap();
+	const shared_ptr<RenderBuffer> getRenderBuffer() const;
+	const TextureID getDiffuseMap() const;
 
 private:
 	// Matrices

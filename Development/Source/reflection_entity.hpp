@@ -23,13 +23,13 @@ public:
 	void setCubeMap(TextureID value);
 
 	// Vectors
-	const Vec3 getPosition();
+	const Vec3 getPosition() const;
 
 	// Booleans
-	const bool mustCapture();
+	const bool mustCapture() const;
 
 	// Miscellaneous
-	const TextureID getCubeMap();
+	const TextureID getCubeMap() const;
 
 private:
 	// Vectors

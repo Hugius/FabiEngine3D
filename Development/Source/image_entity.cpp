@@ -271,132 +271,132 @@ void ImageEntity::increaseSpriteAnimationLoops()
 	_spriteAnimationLoops++;
 }
 
-const bool ImageEntity::isSpriteAnimationStarted()
+const bool ImageEntity::isSpriteAnimationStarted() const
 {
 	return _isSpriteAnimationStarted;
 }
 
-const bool ImageEntity::isSpriteAnimationPaused()
+const bool ImageEntity::isSpriteAnimationPaused() const
 {
 	return _isSpriteAnimationPaused;
 }
 
-const int ImageEntity::getMaxSpriteAnimationLoops()
+const int ImageEntity::getMaxSpriteAnimationLoops() const
 {
 	return _maxSpriteAnimationLoops;
 }
 
-const unsigned int ImageEntity::getPassedSpriteAnimationFrames()
+const unsigned int ImageEntity::getPassedSpriteAnimationFrames() const
 {
 	return _passedSpriteAnimationFrames;
 }
 
-const unsigned int ImageEntity::getMaxSpriteAnimationFramestep()
+const unsigned int ImageEntity::getMaxSpriteAnimationFramestep() const
 {
 	return _maxSpriteAnimationFramestep;
 }
 
-const unsigned int ImageEntity::getTotalSpriteAnimationRows()
+const unsigned int ImageEntity::getTotalSpriteAnimationRows() const
 {
 	return _totalSpriteAnimationRows;
 }
 
-const unsigned int ImageEntity::getTotalSpriteAnimationColumns()
+const unsigned int ImageEntity::getTotalSpriteAnimationColumns() const
 {
 	return _totalSpriteAnimationColumns;
 }
 
-const unsigned int ImageEntity::getSpriteAnimationRowIndex()
+const unsigned int ImageEntity::getSpriteAnimationRowIndex() const
 {
 	return _spriteAnimationRowIndex;
 }
 
-const unsigned int ImageEntity::getSpriteAnimationColumnIndex()
+const unsigned int ImageEntity::getSpriteAnimationColumnIndex() const
 {
 	return _spriteAnimationColumnIndex;
 }
 
-const unsigned int ImageEntity::getSpriteAnimationLoops()
+const unsigned int ImageEntity::getSpriteAnimationLoops() const
 {
 	return _spriteAnimationLoops;
 }
 
-const bool ImageEntity::hasRenderBuffer()
+const bool ImageEntity::hasRenderBuffer() const
 {
 	return (_renderBuffer != nullptr);
 }
 
-const shared_ptr<RenderBuffer> ImageEntity::getRenderBuffer()
+const shared_ptr<RenderBuffer> ImageEntity::getRenderBuffer() const
 {
 	return _renderBuffer;
 }
 
-const TextureID ImageEntity::getDiffuseMap()
+const TextureID ImageEntity::getDiffuseMap() const
 {
 	return _diffuseMap;
 }
 
-const string& ImageEntity::getDiffuseMapPath()
+const string& ImageEntity::getDiffuseMapPath() const
 {
 	return _diffuseMapPath;
 }
 
-const Vec3 ImageEntity::getColor()
+const Vec3 ImageEntity::getColor() const
 {
 	return _color;
 }
 
-const float ImageEntity::getAlpha()
+const float ImageEntity::getAlpha() const
 {
 	return _alpha;
 }
 
-const bool ImageEntity::isMirroredHorizonally()
+const bool ImageEntity::isMirroredHorizonally() const
 {
 	return _isMirroredHorizontally;
 }
 
-const bool ImageEntity::isMirroredVertically()
+const bool ImageEntity::isMirroredVertically() const
 {
 	return _isMirroredVertically;
 }
 
-const bool ImageEntity::hasDiffuseMap()
+const bool ImageEntity::hasDiffuseMap() const
 {
 	return (_diffuseMap != 0);
 }
 
-const Matrix44 ImageEntity::getTransformationMatrix()
+const Matrix44 ImageEntity::getTransformationMatrix() const
 {
 	return _transformationMatrix;
 }
 
-const Vec2 ImageEntity::getPosition()
+const Vec2 ImageEntity::getPosition() const
 {
 	return _position;
 }
 
-const float ImageEntity::getRotation()
+const float ImageEntity::getRotation() const
 {
 	return _rotation;
 }
 
-const Vec2 ImageEntity::getSize()
+const Vec2 ImageEntity::getSize() const
 {
 	return _size;
 }
 
-const Vec2 ImageEntity::getMinPosition()
+const Vec2 ImageEntity::getMinPosition() const
 {
 	return _minPosition;
 }
 
-const Vec2 ImageEntity::getMaxPosition()
+const Vec2 ImageEntity::getMaxPosition() const
 {
 	return _maxPosition;
 }
 
-const unsigned int ImageEntity::getDepth()
+const unsigned int ImageEntity::getDepth() const
 {
 	return _depth;
 }
@@ -406,7 +406,7 @@ void ImageEntity::setPerspectiveDepthEntity(bool value)
 	_isPerspectiveDepthEntity = value;
 }
 
-const bool ImageEntity::isPerspectiveDepthEntity()
+const bool ImageEntity::isPerspectiveDepthEntity() const
 {
 	return _isPerspectiveDepthEntity;
 }

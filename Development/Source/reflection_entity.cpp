@@ -58,17 +58,17 @@ void ReflectionEntity::setCubeMap(TextureID value)
 	_cubeMap = value;
 }
 
-const Vec3 ReflectionEntity::getPosition()
+const Vec3 ReflectionEntity::getPosition() const
 {
 	return _position;
 }
 
-const bool ReflectionEntity::mustCapture()
+const bool ReflectionEntity::mustCapture() const
 {
 	return _mustCapture;
 }
 
-const TextureID ReflectionEntity::getCubeMap()
+const TextureID ReflectionEntity::getCubeMap() const
 {
 	return _cubeMap;
 }

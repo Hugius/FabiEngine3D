@@ -50,59 +50,59 @@ public:
 	void setWireFramed(bool value);
 
 	// Strings
-	const string& getHeightMapPath();
-	const string& getDiffuseMapPath();
-	const string& getNormalMapPath();
-	const string& getBlendMapPath();
-	const string& getDiffuseMapPathR();
-	const string& getDiffuseMapPathG();
-	const string& getDiffuseMapPathB();
-	const string& getNormalMapPathR();
-	const string& getNormalMapPathG();
-	const string& getNormalMapPathB();
+	const string& getHeightMapPath() const;
+	const string& getDiffuseMapPath() const;
+	const string& getNormalMapPath() const;
+	const string& getBlendMapPath() const;
+	const string& getDiffuseMapPathR() const;
+	const string& getDiffuseMapPathG() const;
+	const string& getDiffuseMapPathB() const;
+	const string& getNormalMapPathR() const;
+	const string& getNormalMapPathG() const;
+	const string& getNormalMapPathB() const;
 
 	// Vectors
-	const vector<Vec3>& getVertices();
-	const vector<Vec3>& getNormals();
-	const vector<Vec2>& getUvCoords();
+	const vector<Vec3>& getVertices() const;
+	const vector<Vec3>& getNormals() const;
+	const vector<Vec2>& getUvCoords() const;
 
 	// Decimals
-	const vector<float>& getPixelValues();
-	const float getTextureRepeat();
-	const float getRedRepeat();
-	const float getGreenRepeat();
-	const float getBlueRepeat();
-	const float getSize();
-	const float getMaxHeight();
-	const float getLightness();
-	const float getSpecularShininess();
-	const float getSpecularIntensity();
+	const vector<float>& getPixelValues() const;
+	const float getTextureRepeat() const;
+	const float getRedRepeat() const;
+	const float getGreenRepeat() const;
+	const float getBlueRepeat() const;
+	const float getSize() const;
+	const float getMaxHeight() const;
+	const float getLightness() const;
+	const float getSpecularShininess() const;
+	const float getSpecularIntensity() const;
 
 	// Booleans
-	const bool isSpecular();
-	const bool isWireFramed();
-	const bool hasRenderBuffer();
-	const bool hasDiffuseMap();
-	const bool hasNormalMap();
-	const bool hasBlendMap();
-	const bool hasDiffuseMapR();
-	const bool hasDiffuseMapG();
-	const bool hasDiffuseMapB();
-	const bool hasNormalMapR();
-	const bool hasNormalMapG();
-	const bool hasNormalMapB();
+	const bool isSpecular() const;
+	const bool isWireFramed() const;
+	const bool hasRenderBuffer() const;
+	const bool hasDiffuseMap() const;
+	const bool hasNormalMap() const;
+	const bool hasBlendMap() const;
+	const bool hasDiffuseMapR() const;
+	const bool hasDiffuseMapG() const;
+	const bool hasDiffuseMapB() const;
+	const bool hasNormalMapR() const;
+	const bool hasNormalMapG() const;
+	const bool hasNormalMapB() const;
 
 	// Miscellaneous
-	const shared_ptr<RenderBuffer> getRenderBuffer();
-	const TextureID getDiffuseMap();
-	const TextureID getNormalMap();
-	const TextureID getBlendMap();
-	const TextureID getDiffuseMapR();
-	const TextureID getDiffuseMapG();
-	const TextureID getDiffuseMapB();
-	const TextureID getNormalMapR();
-	const TextureID getNormalMapG();
-	const TextureID getNormalMapB();
+	const shared_ptr<RenderBuffer> getRenderBuffer() const;
+	const TextureID getDiffuseMap() const;
+	const TextureID getNormalMap() const;
+	const TextureID getBlendMap() const;
+	const TextureID getDiffuseMapR() const;
+	const TextureID getDiffuseMapG() const;
+	const TextureID getDiffuseMapB() const;
+	const TextureID getNormalMapR() const;
+	const TextureID getNormalMapG() const;
+	const TextureID getNormalMapB() const;
 
 private:
 	// Strings

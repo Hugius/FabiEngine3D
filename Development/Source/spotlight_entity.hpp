@@ -22,16 +22,16 @@ public:
 	void setDistance(float value);
 
 	// Vectors
-	const Vec3 getPosition();
-	const Vec3 getFrontVector();
-	const Vec3 getColor();
+	const Vec3 getPosition() const;
+	const Vec3 getFrontVector() const;
+	const Vec3 getColor() const;
 
 	// Decimals
-	const float getYaw();
-	const float getPitch();
-	const float getIntensity();
-	const float getAngle();
-	const float getDistance();
+	const float getYaw() const;
+	const float getPitch() const;
+	const float getIntensity() const;
+	const float getAngle() const;
+	const float getDistance() const;
 
 private:
 	// Vectors

@@ -61,58 +61,58 @@ public:
 	void setEmissionIntensity(float value);
 
 	// Strings
-	const string& getTextContent();
-	const string& getFontPath();
-	const string& getDiffuseMapPath();
-	const string& getEmissionMapPath();
+	const string& getTextContent() const;
+	const string& getFontPath() const;
+	const string& getDiffuseMapPath() const;
+	const string& getEmissionMapPath() const;
 
 	// Matrices
-	const Matrix44& getTransformationMatrix();
+	const Matrix44& getTransformationMatrix() const;
 
 	// Vectors
-	const Vec3 getPosition();
-	const Vec3 getRotation();
-	const Vec3 getColor();
-	const Vec2 getSize();
+	const Vec3 getPosition() const;
+	const Vec3 getRotation() const;
+	const Vec3 getColor() const;
+	const Vec2 getSize() const;
 
 	// Decimals
-	const float getLightness();
-	const float getColorInversion();
-	const float getAlpha();
-	const float getMinHeight();
-	const float getMaxHeight();
-	const float getTextureRepeat();
-	const float getEmissionIntensity();
+	const float getLightness() const;
+	const float getColorInversion() const;
+	const float getAlpha() const;
+	const float getMinHeight() const;
+	const float getMaxHeight() const;
+	const float getTextureRepeat() const;
+	const float getEmissionIntensity() const;
 
 	// Integers
-	const int getMaxSpriteAnimationLoops();
-	const unsigned int getPassedSpriteAnimationFrames();
-	const unsigned int getMaxSpriteAnimationFramestep();
-	const unsigned int getTotalSpriteAnimationRows();
-	const unsigned int getTotalSpriteAnimationColumns();
-	const unsigned int getSpriteAnimationRowIndex();
-	const unsigned int getSpriteAnimationColumnIndex();
-	const unsigned int getSpriteAnimationLoops();
+	const int getMaxSpriteAnimationLoops() const;
+	const unsigned int getPassedSpriteAnimationFrames() const;
+	const unsigned int getMaxSpriteAnimationFramestep() const;
+	const unsigned int getTotalSpriteAnimationRows() const;
+	const unsigned int getTotalSpriteAnimationColumns() const;
+	const unsigned int getSpriteAnimationRowIndex() const;
+	const unsigned int getSpriteAnimationColumnIndex() const;
+	const unsigned int getSpriteAnimationLoops() const;
 
 	// Booleans
-	const bool isSpriteAnimationStarted();
-	const bool isSpriteAnimationPaused();
-	const bool isFacingCameraX();
-	const bool isFacingCameraY();
-	const bool isDepthMapIncluded();
-	const bool isShadowed();
-	const bool isReflected();
-	const bool isBright();
-	const bool isText();
-	const bool isWireFramed();
-	const bool hasRenderBuffer();
-	const bool hasDiffuseMap();
-	const bool hasEmissionMap();
+	const bool isSpriteAnimationStarted() const;
+	const bool isSpriteAnimationPaused() const;
+	const bool isFacingCameraX() const;
+	const bool isFacingCameraY() const;
+	const bool isDepthMapIncluded() const;
+	const bool isShadowed() const;
+	const bool isReflected() const;
+	const bool isBright() const;
+	const bool isText() const;
+	const bool isWireFramed() const;
+	const bool hasRenderBuffer() const;
+	const bool hasDiffuseMap() const;
+	const bool hasEmissionMap() const;
 
 	// Miscellaneous
-	const shared_ptr<RenderBuffer> getRenderBuffer();
-	const TextureID getDiffuseMap();
-	const TextureID getEmissionMap();
+	const shared_ptr<RenderBuffer> getRenderBuffer() const;
+	const TextureID getDiffuseMap() const;
+	const TextureID getEmissionMap() const;
 
 private:
 	// Strings

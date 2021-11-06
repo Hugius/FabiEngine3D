@@ -22,15 +22,15 @@ public:
 	void setFontPath(const string& fontPath);
 
 	// Strings
-	const string& getTextContent();
-	const string& getFontPath();
+	const string& getTextContent() const;
+	const string& getFontPath() const;
 
 	// Booleans
-	const bool isCentered();
-	const bool isDynamic();
+	const bool isCentered() const;
+	const bool isDynamic() const;
 
 	// Miscellaneous
-	const vector<shared_ptr<ImageEntity>>& getCharacterEntities();
+	const vector<shared_ptr<ImageEntity>>& getCharacterEntities() const;
 
 private:
 	// Strings

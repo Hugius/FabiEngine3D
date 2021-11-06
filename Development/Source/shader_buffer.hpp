@@ -13,17 +13,17 @@ class ShaderBuffer final
 public:
 	ShaderBuffer(const string& vertexFilename, const string& fragmentFilename);
 
+	// Voids
 	void bind();
 	void unbind();
-
-	template<typename T>
-	void uploadUniform(const string& ID, const T& data)
+	template<typename T> void uploadUniform(const string& ID, const T& data)
 	{
 		auto uniform = _getUniformID(ID);
 		_uploadUniform(uniform, data);
 	}
 
 private:
+	// Voids
 	void _createProgram(const char* vertexShaderCode, const char* fragmentShaderCode);
 	void _uploadUniform(const UniformID& uniformID, const bool& data);
 	void _uploadUniform(const UniformID& uniformID, const int& data);
@@ -35,13 +35,15 @@ private:
 	void _uploadUniform(const UniformID& uniformID, const Matrix33& data);
 	void _uploadUniform(const UniformID& uniformID, const Matrix44& data);
 
+	// Miscellaneous
 	UniformID _getUniformID(const string& uniformID);
 
-	ShaderID _program = 0;
-
-	map<string, UniformID> _uniformCache;
-
+	// Strings
 	string _vertexFilename = "";
 	string _fragmentFilename = "";
 	string _name = "";
+
+	// Miscellaneous
+	map<string, UniformID> _uniformCache;
+	ShaderID _program = 0;
 };

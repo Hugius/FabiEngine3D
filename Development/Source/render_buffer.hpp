@@ -15,18 +15,22 @@ public:
 	RenderBuffer(float x, float y, float w, float h, bool isCentered); // 2D
 	~RenderBuffer();
 
+	// Voids
 	void enableInstancing(const vector<Vec3>& offsets);
 	void disableInstancing();
 
-	const BufferID getVAO();
+	// Vectors
+	const vector<Vec3>& getInstancedOffsets();
 
+	// Integers
 	const unsigned int getVertexCount();
 
+	// Booleans
 	const bool isInstanced();
 
-	const RenderBufferType getBufferType();
-
-	const vector<Vec3>& getInstancedOffsets();
+	// Miscellaneous
+	const BufferID getVAO();
+	const RenderBufferType getBufferType();	
 
 private:
 	// Vectors
@@ -39,7 +43,7 @@ private:
 	// Booleans
 	bool _isInstanced = false;
 
-	// Miscellaneosu
+	// Miscellaneous
 	RenderBufferType _bufferType;
 	BufferID _vao = 0;
 	BufferID _vbo = 0;

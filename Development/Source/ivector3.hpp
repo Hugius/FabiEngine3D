@@ -6,20 +6,6 @@ struct Vec3;
 
 struct Ivec3 final
 {
-	// Data access
-	union
-	{
-		int f[3];
-
-		struct
-		{
-			int x;
-			int y;
-			int z;
-		};
-	};
-
-	// Creation
 	Ivec3();
 	Ivec3(const Vec3& other);
 	Ivec3(const int value);
@@ -49,4 +35,17 @@ struct Ivec3 final
 	// Booleans
 	const bool operator==(const Ivec3& other) const;
 	const bool operator!=(const Ivec3& other) const;
+
+	// Miscellaneous
+	union
+	{
+		int f[3];
+
+		struct
+		{
+			int x;
+			int y;
+			int z;
+		};
+	};
 };

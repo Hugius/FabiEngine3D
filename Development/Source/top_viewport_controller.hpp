@@ -49,6 +49,18 @@ private:
 	// Booleans
 	bool _prepareProjectChoosing(const string& title);
 
+	// Strings
+	string _currentProjectID = "";
+
+	// Vectors
+	static inline const Vec3 FRAME_COLOR = Vec3(0.075f);
+
+	// Booleans
+	bool _isCreatingProject = false;
+	bool _isLoadingProject = false;
+	bool _isDeletingProject = false;
+
+	// Miscellaneous
 	SkyEditor& _skyEditor;
 	TerrainEditor& _terrainEditor;
 	WaterEditor& _waterEditor;
@@ -59,16 +71,7 @@ private:
 	SceneEditor& _sceneEditor;
 	ScriptEditor& _scriptEditor;
 	SettingsEditor& _settingsEditor;
-
 	shared_ptr<EngineGuiWindow> _projectWindow = nullptr;
 	shared_ptr<EngineGuiWindow> _gameWindow = nullptr;
 	shared_ptr<EngineGuiWindow> _miscWindow = nullptr;
-
-	string _currentProjectID = "";
-
-	static inline const Vec3 FRAME_COLOR = Vec3(0.075f);
-
-	bool _isCreatingProject = false;
-	bool _isLoadingProject = false;
-	bool _isDeletingProject = false;
 };

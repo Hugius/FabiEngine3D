@@ -6,18 +6,21 @@
 
 using std::string;
 
-struct NetworkServerMessage final
+class NetworkServerMessage final
 {
-	NetworkServerMessage(
-		const string& content,
-		const NetworkProtocol protocol)
-		:
-		content(content),
-		protocol(protocol)
-	{
+public:
+	NetworkServerMessage(const string& content, const NetworkProtocol protocol);
 
-	}
+	// Strings
+	const string& getContent() const;
 
-	const string content;
-	const NetworkProtocol protocol;
+	// Miscellaneous
+	const NetworkProtocol getProtocol() const;
+
+private:
+	// Strings
+	string _content;
+
+	// Miscellaneous
+	NetworkProtocol _protocol;
 };

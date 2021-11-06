@@ -6,21 +6,23 @@
 
 using std::string;
 
-struct NetworkClientMessage final
+class NetworkClientMessage final
 {
-	NetworkClientMessage(
-		const string& username,
-		const string& content,
-		const NetworkProtocol protocol)
-		:
-		username(username),
-		content(content),
-		protocol(protocol)
-	{
+public:
+	NetworkClientMessage(const string& username, const string& content, const NetworkProtocol protocol);
 
-	}
+	// Strings
+	const string& getUsername() const;
+	const string& getContent() const;
 
-	const string username;
-	const string content;
-	const NetworkProtocol protocol;
+	// Miscellaneous
+	const NetworkProtocol getProtocol() const;
+
+private:
+	// Strings
+	const string _username;
+	const string _content;
+
+	// Miscellaneous
+	const NetworkProtocol _protocol;
 };

@@ -12,20 +12,25 @@ class EngineController final : public FabiEngine3D
 public:
 	EngineController();
 
+	// Voids
 	void FE3D_CONTROLLER_INIT();
 	void FE3D_CONTROLLER_UPDATE();
 	void FE3D_CONTROLLER_DESTROY();
 
+	// Booleans
 	bool mustPromptOnExit();
 
 private:
+	// Strings
+	string _currentProject = "";
+
+	// Booleans
+	bool _mustPromptOnExit = false;
+
+	// Miscellaneous
 	EngineGuiManager _gui;
 	LeftViewportController _leftViewportController;
 	RightViewportController _rightViewportController;
 	TopViewportController _topViewportController;
 	BottomViewportController _bottomViewportController;
-
-	string _currentProject = "";
-
-	bool _mustPromptOnExit = false;
 };

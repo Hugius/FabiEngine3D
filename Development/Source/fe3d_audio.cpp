@@ -227,7 +227,7 @@ void FabiEngine3D::music_clearPlaylist()
 	}
 
 	// Delete music
-	_core->_audioManager.deleteMusic();
+	_core->_audioManager.deleteAllMusic();
 }
 
 void FabiEngine3D::music_pause()

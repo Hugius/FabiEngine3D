@@ -81,7 +81,7 @@ public:
 	static const int calculateAverage(const vector<int>& values);
 	static const int getRandomInteger(int min, int max);
 
-	// Boolean
+	// Booleans
 	static const bool isNormalized(Vec2 vector);
 	static const bool isNormalized(Vec3 vector);
 	static const bool isNormalized(Vec4 vector);

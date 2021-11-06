@@ -56,5 +56,11 @@
     <ClCompile Include="..\..\Source\network_client_api_interface.cpp">
       <Filter>Client</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\network_client_message.cpp">
+      <Filter>Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\network_server_message.cpp">
+      <Filter>Miscellaneous</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

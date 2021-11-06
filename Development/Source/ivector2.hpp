@@ -6,19 +6,6 @@ struct Vec2;
 
 struct Ivec2 final
 {
-	// Data access
-	union
-	{
-		int f[2];
-
-		struct
-		{
-			int x;
-			int y;
-		};
-	};
-
-	// Creation
 	Ivec2();
 	Ivec2(const Vec2& other);
 	Ivec2(const int value);
@@ -48,4 +35,16 @@ struct Ivec2 final
 	// Booleans
 	const bool operator==(const Ivec2& other) const;
 	const bool operator!=(const Ivec2& other) const;
+
+	// Miscellaneous
+	union
+	{
+		int f[2];
+
+		struct
+		{
+			int x;
+			int y;
+		};
+	};
 };

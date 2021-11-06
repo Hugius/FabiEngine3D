@@ -10,7 +10,7 @@ class AnimationEditor final
 public:
 	AnimationEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, ModelEditor& modelEditor);
 
-	// Setters
+	// Voids
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
@@ -21,22 +21,27 @@ public:
 	void fadeAnimation(const string& animationID, const string& modelID, int framestep);
 	void stopAnimation(const string& animationID, const string& modelID);
 	void stopAllAnimations();
-	bool loadAnimationsFromFile(bool mustCheckPreviewModel = true);
-	bool saveAnimationsToFile();
 
-	// Getters
+	// Strings
+	const vector<string> getAllAnimationIDs();
+	const vector<string> getStartedAnimationIDs();
+	const vector<string> getStartedAnimationIDs(const string& modelID);
+
+	// Booleans
 	bool isLoaded();
 	bool isAnimationExisting(const string& ID);
 	bool isAnimationStarted(const string& animationID, const string& modelID);
 	bool isAnimationPlaying(const string& animationID, const string& modelID);
 	bool isAnimationPaused(const string& animationID, const string& modelID);
 	bool isAnimationFading(const string& animationID, const string& modelID);
+	bool loadAnimationsFromFile(bool mustCheckPreviewModel = true);
+	bool saveAnimationsToFile();
+
+	// Miscellaneous
 	Animation* getAnimationData(const string& animationID, const string& modelID, string baseErrorMessage);
-	const vector<string> getAllAnimationIDs();
-	const vector<string> getStartedAnimationIDs();
-	const vector<string> getStartedAnimationIDs(const string& modelID);
 
 private:
+	// Voids
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateAnimationExecution();
@@ -49,22 +54,17 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 	void _deleteAnimation(const string& ID);
+
+	// Booleans
 	bool _hasReachedFloat(float first, float second, float speed);
 	bool _comparePartIDs(vector<string> first, vector<string> second);
+
+	// Miscellaneous
 	shared_ptr<Animation> _getAnimation(const string& ID);
 
-	// Core
-	FabiEngine3D& _fe3d;
-	EngineGuiManager& _gui;
-	ModelEditor& _modelEditor;
-
-	// Containers
-	vector<shared_ptr<Animation>> _animations;
+	// Strings
 	set<pair<string, string>> _animationsToStop;
 	set<pair<string, string>> _animationsToStartAgain;
-	map<pair<string, string>, Animation> _startedAnimations;
-
-	// Strings
 	string _currentProjectID = "";
 	string _currentAnimationID = "";
 	string _currentPartID = "";
@@ -92,8 +92,8 @@ private:
 
 	// Integers
 	static inline const unsigned int MAX_FRAME_COUNT = 100;
-	unsigned int _currentFrameIndex = 0;
 	int _selectedPartInversionDirection = 1;
+	unsigned int _currentFrameIndex = 0;
 
 	// Booleans
 	bool _mustUpdateCurrentFramePreview = true;
@@ -101,4 +101,11 @@ private:
 	bool _isChoosingAnimation = false;
 	bool _isDeletingAnimation = false;
 	bool _isEditorLoaded = false;
+
+	// Miscellaneous
+	map<pair<string, string>, Animation> _startedAnimations;
+	vector<shared_ptr<Animation>> _animations;
+	FabiEngine3D& _fe3d;
+	EngineGuiManager& _gui;
+	ModelEditor& _modelEditor;
 };

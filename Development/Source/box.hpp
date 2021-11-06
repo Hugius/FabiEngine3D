@@ -11,7 +11,7 @@ public:
 	// Vectors
 	const Vec3 getPosition() const;
 
-	// Floats
+	// Decimals
 	const float getLeft() const;
 	const float getRight() const;
 	const float getBottom() const;
@@ -23,7 +23,7 @@ private:
 	// Vectors
 	Vec3 _position;
 
-	// Floats
+	// Decimals
 	float _left;
 	float _right;
 	float _bottom;

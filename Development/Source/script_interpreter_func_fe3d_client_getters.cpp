@@ -60,7 +60,7 @@ bool ScriptInterpreter::_executeFe3dClientGetterFunction(const string& functionN
 			auto messages = _fe3d.networkClient_getPendingMessages();
 			for(const auto& message : messages)
 			{
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, string((message.protocol == NetworkProtocol::TCP) ? "TCP" : "UDP")));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, string((message.getProtocol() == NetworkProtocol::TCP) ? "TCP" : "UDP")));
 			}
 		}
 	}
@@ -72,7 +72,7 @@ bool ScriptInterpreter::_executeFe3dClientGetterFunction(const string& functionN
 			auto messages = _fe3d.networkClient_getPendingMessages();
 			for(const auto& message : messages)
 			{
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, message.content));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, message.getContent()));
 			}
 		}
 	}

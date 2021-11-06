@@ -11,12 +11,15 @@ public:
 	LibraryLoader();
 	~LibraryLoader();
 
-	SDL_Window* getWindowPointer();
-
+	// Strings
 	const string getCpuModel() const;
 	const string getGpuModel() const;
 	const string getOpenglVersion() const;
 
+	// Miscellaneous
+	SDL_Window* getWindowPointer();
+
 private:
+	// Miscellaneous
 	SDL_Window* _windowPointer = nullptr;
 };

@@ -13,27 +13,48 @@ public:
 	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, int value);
 	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, bool value);
 
+	// Voids
 	void setVec3(Vec3 value);
 	void setString(const string& value);
 	void setDecimal(float value);
 	void setInteger(int value);
 	void setBoolean(bool value);
 
-	const ScriptValueType& getType() const;
-	Vec3 getVec3() const;
+	// Strings
 	const string& getString() const;
+
+	// Vectors
+	Vec3 getVec3() const;
+
+	// Decimals
 	float getDecimal() const;
+
+	// Integers
 	int getInteger() const;
+
+	// Booleans
 	bool getBoolean() const;
 
+	// Miscellaneous
+	const ScriptValueType& getType() const;
+
 private:
-	FabiEngine3D& _fe3d;
-
-	const ScriptValueType _type;
-
-	Vec3 _vec3 = Vec3(0.0f);
+	// Strings
 	string _string = "";
+
+	// Vectors
+	Vec3 _vec3 = Vec3(0.0f);
+
+	// Decimals
 	float _decimal = 0.0f;
+
+	// Integers
 	int _integer = 0;
+
+	// Booleans
 	bool _boolean = false;
+
+	// Miscellaneous
+	const ScriptValueType _type;
+	FabiEngine3D& _fe3d;
 };

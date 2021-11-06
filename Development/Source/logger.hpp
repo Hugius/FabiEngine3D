@@ -29,29 +29,23 @@ class Logger final
 public:
 	Logger() = delete;
 
-	template<typename T, typename...Rest>
-	inline static void throwInfo(T first, Rest...rest)
+	// Voids
+	template<typename T, typename...Rest> inline static void throwInfo(T first, Rest...rest)
 	{
 		_printPrefix(MessageType::INFO);
 		_printMessage(first, rest...);
 	}
-
-	template<typename T, typename...Rest>
-	inline static void throwDebug(T first, Rest...rest)
+	template<typename T, typename...Rest> inline static void throwDebug(T first, Rest...rest)
 	{
 		_printPrefix(MessageType::DEBUG);
 		_printMessage(first, rest...);
 	}
-
-	template<typename T, typename...Rest>
-	inline static void throwWarning(T first, Rest...rest)
+	template<typename T, typename...Rest> inline static void throwWarning(T first, Rest...rest)
 	{
 		_printPrefix(MessageType::WARNING);
 		_printMessage(first, rest...);
 	}
-
-	template<typename T, typename...Rest>
-	inline static void throwFatalWarning(T first, Rest...rest)
+	template<typename T, typename...Rest> inline static void throwFatalWarning(T first, Rest...rest)
 	{
 		cout << endl;
 		_printPrefix(MessageType::WARNING);
@@ -61,9 +55,7 @@ public:
 		auto temp = _getch();
 		exit(420);
 	}
-
-	template<typename T, typename...Rest>
-	inline static void throwError(T first, Rest...rest)
+	template<typename T, typename...Rest> inline static void throwError(T first, Rest...rest)
 	{
 		cout << endl;
 		_printPrefix(MessageType::ERR);
@@ -73,34 +65,30 @@ public:
 		auto temp = _getch();
 		exit(420);
 	}
-
-	inline static const vector<string>& getMessageQueue()
-	{
-		return _messageQueue;
-	}
-
-	inline static unsigned int getMessageCount()
-	{
-		return _messageCount;
-	}
-
 	inline static void setCustomMessageQueue(const vector<string>& customMessages)
 	{
 		_messageQueue = customMessages;
 	}
-
 	inline static void clearMessageQueue()
 	{
 		_messageCount = 0;
 		_messageQueue.clear();
 	}
 
+	// Strings
+	inline static const vector<string>& getMessageQueue()
+	{
+		return _messageQueue;
+	}
+
+	// Integers
+	inline static unsigned int getMessageCount()
+	{
+		return _messageCount;
+	}
+
 private:
-	inline static string _level_string[4] = { "Info", "Error", "Debug", "Warn" };
-
-	inline static vector<string> _messageQueue;
-	inline static unsigned int _messageCount = 0;
-
+	// Voids
 	inline static void _printPrefix(MessageType type)
 	{
 		HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE); // Console access
@@ -134,9 +122,7 @@ private:
 		oss << " > ";
 		_messageQueue.push_back(oss.str());
 	}
-
-	template<typename T, typename...Rest>
-	inline static void _printMessage(T first, Rest&&...rest)
+	template<typename T, typename...Rest> inline static void _printMessage(T first, Rest&&...rest)
 	{
 		// For message queue
 		ostringstream oss;
@@ -154,4 +140,13 @@ private:
 		_messageQueue.back() += oss.str();
 		_messageCount++;
 	}
+
+	// Strings
+	inline static string _level_string[4] = { "Info", "Error", "Debug", "Warn" };
+
+	// Vectors
+	inline static vector<string> _messageQueue;
+
+	// Integers
+	inline static unsigned int _messageCount = 0;
 };

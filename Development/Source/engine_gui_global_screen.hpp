@@ -61,16 +61,16 @@ public:
 	bool isAnswerFormExisting(const string& ID);
 
 	// GUI elements
-	shared_ptr<EngineGuiScrollingList> getScrollingList(const string& ID);
-	shared_ptr<EngineGuiWriteField> getWriteField(const string& ID);
-	shared_ptr<EngineGuiButton> getButton(const string& ID);
-	shared_ptr<EngineGuiRectangle> getRectangle(const string& ID);
-	shared_ptr<EngineGuiTextField> getTextField(const string& ID);
 	const vector<shared_ptr<EngineGuiScrollingList>>& getScrollingLists();
 	const vector<shared_ptr<EngineGuiWriteField>>& getWriteFields();
 	const vector<shared_ptr<EngineGuiButton>>& getButtons();
 	const vector<shared_ptr<EngineGuiRectangle>>& getRectangles();
 	const vector<shared_ptr<EngineGuiTextField>>& getTextFields();
+	shared_ptr<EngineGuiScrollingList> getScrollingList(const string& ID);
+	shared_ptr<EngineGuiWriteField> getWriteField(const string& ID);
+	shared_ptr<EngineGuiButton> getButton(const string& ID);
+	shared_ptr<EngineGuiRectangle> getRectangle(const string& ID);
+	shared_ptr<EngineGuiTextField> getTextField(const string& ID);
 
 private:
 	// Voids

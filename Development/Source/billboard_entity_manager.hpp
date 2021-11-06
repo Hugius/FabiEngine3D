@@ -8,16 +8,16 @@ class BillboardEntityManager final : public BaseEntityManager
 public:
 	BillboardEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus, Camera& camera);
 
-	shared_ptr<BillboardEntity> getEntity(const string& ID);
-
-	const unordered_map<string, shared_ptr<BillboardEntity>>& getEntities();
-
+	// Voids
+	void update() override;
 	void createEntity(const string& ID);
 
-	void update() override;
+	// Miscellaneous
+	const unordered_map<string, shared_ptr<BillboardEntity>>& getEntities();
+	shared_ptr<BillboardEntity> getEntity(const string& ID);
 
 private:
-	Camera& _camera;
-
+	// Miscellaneous
 	const shared_ptr<RenderBuffer> _renderBuffer;
+	Camera& _camera;
 };

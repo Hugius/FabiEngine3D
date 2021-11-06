@@ -131,7 +131,7 @@ const Ivec2 Window::getCursorPosition()
 	return Ivec2(x, y);
 }
 
-bool Window::isCursorVisible()
+const bool Window::isCursorVisible()
 {
 	return static_cast<bool>(SDL_ShowCursor(SDL_QUERY));
 }

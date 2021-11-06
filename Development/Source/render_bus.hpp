@@ -12,7 +12,7 @@ using std::string;
 class RenderBus final
 {
 public:
-	// Textures
+	// Voids
 	void setPrimarySceneMap(TextureID value);
 	void setSecondarySceneMap(TextureID value);
 	void setPlanarReflectionMap(TextureID value);
@@ -25,17 +25,11 @@ public:
 	void setLensFlareMap(TextureID value);
 	void setMotionBlurMap(TextureID value);
 	void setFinalSceneMap(TextureID value);
-
-	// Strings
 	void setCursorEntityID(const string& value);
 	void setLensFlareMapPath(const string& value);
-
-	// Matrices
 	void setViewMatrix(const Matrix44 value);
 	void setProjectionMatrix(const Matrix44 value);
 	void setShadowMatrix(const Matrix44 value);
-
-	// Vectors
 	void setClippingPlane(Vec4 value);
 	void setCameraPosition(Vec3 value);
 	void setCameraFront(Vec3 value);
@@ -47,8 +41,6 @@ public:
 	void setFogColor(Vec3 value);
 	void setFlareSourcePosition(Vec3 value);
 	void setFlareSourceUV(Vec2 value);
-
-	// Decimals
 	void setAmbientLightingIntensity(float value);
 	void setDirectionalLightingIntensity(float value);
 	void setFogMinDistance(float value);
@@ -71,8 +63,6 @@ public:
 	void setMotionBlurStrength(float value);
 	void setMotionBlurMixValue(float value);
 	void setSkyMixValue(float value);
-
-	// Integers
 	void setBloomSize(unsigned int value);
 	void setDofSize(unsigned int value);
 	void setMotionBlurSize(unsigned int value);
@@ -83,8 +73,6 @@ public:
 	void increaseTriangleCount(unsigned int value);
 	void setBloomBlurCount(unsigned int value);
 	void resetTriangleCount();
-
-	// Booleans
 	void setReflectionsEnabled(bool value);
 	void setAntiAliasingEnabled(bool value);
 	void setAmbientLightingEnabled(bool value);
@@ -101,23 +89,7 @@ public:
 	void setShadowFrameRenderingEnabled(bool value);
 	void setTriangleCountingEnabled(bool value);
 	void setDofDynamic(bool value);
-
-	// Miscellaneous
 	void setBloomType(BloomType value);
-
-	// Textures
-	const TextureID getPrimarySceneMap();
-	const TextureID getSecondarySceneMap();
-	const TextureID getPlanarReflectionMap();
-	const TextureID getWaterReflectionMap();
-	const TextureID getWaterRefractionMap();
-	const TextureID getShadowMap();
-	const TextureID getBloomMap();
-	const TextureID getDepthMap();
-	const TextureID getDofMap();
-	const TextureID getLensFlareMap();
-	const TextureID getFinalSceneMap();
-	const TextureID getMotionBlurMap();
 
 	// Strings
 	const string& getCursorEntityID();
@@ -195,6 +167,18 @@ public:
 	const bool isDofDynamic();
 
 	// Miscellaneous
+	const TextureID getPrimarySceneMap();
+	const TextureID getSecondarySceneMap();
+	const TextureID getPlanarReflectionMap();
+	const TextureID getWaterReflectionMap();
+	const TextureID getWaterRefractionMap();
+	const TextureID getShadowMap();
+	const TextureID getBloomMap();
+	const TextureID getDepthMap();
+	const TextureID getDofMap();
+	const TextureID getLensFlareMap();
+	const TextureID getFinalSceneMap();
+	const TextureID getMotionBlurMap();
 	const BloomType getBloomType();
 
 private:

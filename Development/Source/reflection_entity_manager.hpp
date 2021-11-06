@@ -8,10 +8,10 @@ public:
 	ReflectionEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
 
 	// Voids
-	void createEntity(const string& ID);
 	void update() override;
+	void createEntity(const string& ID);
 
 	// Miscellaneous
-	shared_ptr<ReflectionEntity> getEntity(const string& ID);
 	const unordered_map<string, shared_ptr<ReflectionEntity>>& getEntities();
+	shared_ptr<ReflectionEntity> getEntity(const string& ID);
 };

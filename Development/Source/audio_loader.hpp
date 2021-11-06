@@ -14,22 +14,28 @@ class AudioLoader final
 public:
 	~AudioLoader();
 
-	Mix_Chunk* getChunkDataPointer(const string& filePath);
-	Mix_Music* getMusicDataPointer(const string& filePath);
-
+	// Voids
 	void cacheChunksMultiThreaded(const vector<string>& filePaths);
 	void cacheMusicMultiThreaded(const vector<string>& filePaths);
 	void clearChunkCache(const string& filePath);
 	void clearMusicCache(const string& filePath);
 
-private:
-	map<string, Mix_Chunk*> _chunkCache;
-	map<string, Mix_Music*> _musicCache;
+	// Miscellaneous
+	Mix_Chunk* getChunkDataPointer(const string& filePath);
+	Mix_Music* getMusicDataPointer(const string& filePath);
 
+private:
+	// Voids
+	void _throwLoadedMessage(const string& filePath);
+
+	// Characters
+	char* _loadWaveFile(const string& filePath);
+
+	// Miscellaneous
 	Mix_Chunk* _loadChunk(const string& filePath, unsigned char* data);
 	Mix_Music* _loadMusic(const string& filePath);
 
-	void _throwLoadedMessage(const string& filePath);
-
-	char* _loadWaveFile(const string& filePath);
+	// Miscellaneous
+	map<string, Mix_Chunk*> _chunkCache;
+	map<string, Mix_Music*> _musicCache;
 };

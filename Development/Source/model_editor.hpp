@@ -9,20 +9,24 @@ class ModelEditor final
 public:
 	ModelEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 
+	// Voids
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
 	void update();
-	bool loadModelEntitiesFromFile();
-	bool saveModelEntitiesToFile();
 
-	bool isLoaded();
-
+	// Strings
 	const vector<string> getAllMeshPathsFromFile();
 	const vector<string> getAllTexturePathsFromFile();
 	const vector<string>& getLoadedModelIDs();
 
+	// Booleans
+	bool loadModelEntitiesFromFile();
+	bool saveModelEntitiesToFile();
+	bool isLoaded();
+
 private:
+	// Voids
 	void _loadGUI();
 	void _unloadGUI();
 	void _tryPartChoosing(const string& nextActiveScreenID);

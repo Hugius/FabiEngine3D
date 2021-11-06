@@ -6,29 +6,6 @@ struct Ivec4;
 
 struct Vec4 final
 {
-	// Data access
-	union
-	{
-		float f[4];
-
-		struct
-		{
-			float x;
-			float y;
-			float z;
-			float w;
-		};
-
-		struct
-		{
-			float r;
-			float g;
-			float b;
-			float a;
-		};
-	};
-
-	// Creation
 	Vec4();
 	Vec4(const Ivec4& other);
 	Vec4(const float value);
@@ -58,4 +35,26 @@ struct Vec4 final
 	// Booleans
 	const bool operator==(const Vec4& other) const;
 	const bool operator!=(const Vec4& other) const;
+
+	// Miscellaneous
+	union
+	{
+		float f[4];
+
+		struct
+		{
+			float x;
+			float y;
+			float z;
+			float w;
+		};
+
+		struct
+		{
+			float r;
+			float g;
+			float b;
+			float a;
+		};
+	};
 };

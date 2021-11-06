@@ -10,6 +10,7 @@
 class EngineGuiScreen final
 {
 public:
+	// Constructors
 	EngineGuiScreen(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size);
 
 	// Voids
@@ -29,18 +30,6 @@ public:
 	void deleteRectangle(const string& ID);
 	void deleteTextField(const string& ID);
 
-	// GUI elements
-	shared_ptr<EngineGuiScrollingList> getScrollingList(const string& ID);
-	shared_ptr<EngineGuiWriteField> getWriteField(const string& ID);
-	shared_ptr<EngineGuiButton> getButton(const string& ID);
-	shared_ptr<EngineGuiRectangle> getRectangle(const string& ID);
-	shared_ptr<EngineGuiTextField> getTextField(const string& ID);
-	vector<shared_ptr<EngineGuiScrollingList>>& getScrollingLists();
-	vector<shared_ptr<EngineGuiWriteField>>& getWriteFields();
-	vector<shared_ptr<EngineGuiButton>>& getButtons();
-	vector<shared_ptr<EngineGuiRectangle>>& getRectangles();
-	vector<shared_ptr<EngineGuiTextField>>& getTextFields();
-
 	// Strings
 	const string& getID();
 	const string& getParentID();
@@ -56,14 +45,19 @@ public:
 	bool isRectangleExisting(const string& ID);
 	bool isTextFieldExisting(const string& ID);
 
-private:
-	// GUI elements
-	vector<shared_ptr<EngineGuiScrollingList>> _scrollingLists;
-	vector<shared_ptr<EngineGuiWriteField>> _writeFields;
-	vector<shared_ptr<EngineGuiButton>> _buttons;
-	vector<shared_ptr<EngineGuiRectangle>> _rectangles;
-	vector<shared_ptr<EngineGuiTextField>> _textFields;
+	// Miscellaneous
+	shared_ptr<EngineGuiScrollingList> getScrollingList(const string& ID);
+	shared_ptr<EngineGuiWriteField> getWriteField(const string& ID);
+	shared_ptr<EngineGuiButton> getButton(const string& ID);
+	shared_ptr<EngineGuiRectangle> getRectangle(const string& ID);
+	shared_ptr<EngineGuiTextField> getTextField(const string& ID);
+	vector<shared_ptr<EngineGuiScrollingList>>& getScrollingLists();
+	vector<shared_ptr<EngineGuiWriteField>>& getWriteFields();
+	vector<shared_ptr<EngineGuiButton>>& getButtons();
+	vector<shared_ptr<EngineGuiRectangle>>& getRectangles();
+	vector<shared_ptr<EngineGuiTextField>>& getTextFields();
 
+private:
 	// Vectors
 	Vec4 _convertDimensions(Vec2 position, Vec2 size);
 	Vec2 _parentPosition;
@@ -77,5 +71,10 @@ private:
 	bool _isActive = false;
 
 	// Miscellaneous
+	vector<shared_ptr<EngineGuiScrollingList>> _scrollingLists;
+	vector<shared_ptr<EngineGuiWriteField>> _writeFields;
+	vector<shared_ptr<EngineGuiButton>> _buttons;
+	vector<shared_ptr<EngineGuiRectangle>> _rectangles;
+	vector<shared_ptr<EngineGuiTextField>> _textFields;
 	FabiEngine3D& _fe3d;
 };

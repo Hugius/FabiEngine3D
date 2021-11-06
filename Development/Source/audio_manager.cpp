@@ -10,7 +10,7 @@ AudioManager::AudioManager(AudioLoader& audioLoader)
 
 }
 
-void AudioManager::deleteMusic()
+void AudioManager::deleteAllMusic()
 {
 	_musicList.clear();
 }

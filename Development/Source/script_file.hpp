@@ -7,6 +7,7 @@ class ScriptFile final
 public:
 	ScriptFile(FabiEngine3D& fe3d, const string& ID);
 
+	// Voids
 	void addNewLine(const string& textContent);
 	void insertNewLine(unsigned int index, const string& textContent);
 	void setLineText(unsigned int index, const string& textContent);
@@ -16,19 +17,25 @@ public:
 	void setCursorCharIndex(unsigned int index);
 	void changeID(const string& newID);
 
+	// Strings
+	const vector<string>& getLines();
 	const string& getID();
 	const string& getLineText(unsigned int index);
+
+	// Integers
 	unsigned int getLineCount();
 	unsigned int getCursorLineIndex();
 	unsigned int getCursorCharIndex();
-	const vector<string>& getLines();
 
 private:
-	FabiEngine3D& _fe3d;
+	// Strings
+	vector<string> _lines;
 	string _ID;
 
+	// Integers
 	unsigned int _cursorLineIndex = 0;
 	unsigned int _cursorCharIndex = 0;
 
-	vector<string> _lines;
+	// Miscellaneous
+	FabiEngine3D& _fe3d;
 };

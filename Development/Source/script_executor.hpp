@@ -9,6 +9,7 @@ public:
 				   WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor,
 				   BillboardEditor& billboardEditor, AudioEditor& audioEditor, SceneEditor& sceneEditor);
 
+	// Voids
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void update(bool debug);
@@ -16,19 +17,19 @@ public:
 	void resume();
 	void unload();
 
+	// Booleans
 	bool isScriptEmpty();
 	bool isStarted();
 	bool isRunning();
 
 private:
+	// Voids
 	void _validateExecution();
 
-	FabiEngine3D& _fe3d;
-	Script& _script;
-	ScriptInterpreter _scriptInterpreter;
-
+	// Strings
 	vector<string> _pausedSoundIDs;
-
+	
+	// Booleans
 	bool _isStarted = false;
 	bool _isRunning = false;
 	bool _wasCursorVisible = false;
@@ -36,4 +37,9 @@ private:
 	bool _wasTimerStarted = false;
 	bool _wasMusicPaused = false;
 	bool _mustSkipUpdate = false;
+
+	// Miscellaneous
+	FabiEngine3D& _fe3d;
+	Script& _script;
+	ScriptInterpreter _scriptInterpreter;
 };

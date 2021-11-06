@@ -8,10 +8,10 @@ public:
 	TerrainEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
 
 	// Voids
+	void update() override;
 	void createEntity(const string& ID, const string& heightMapPath);
 	void loadMesh(const string& ID);
 	void selectTerrain(const string& ID);
-	void update() override;
 
 	// Decimals
 	float getPixelHeight(const string& ID, float x, float z);
@@ -20,9 +20,9 @@ public:
 	bool isInside(const string& ID, float x, float z);
 
 	// Miscellaneous
+	const unordered_map<string, shared_ptr<TerrainEntity>>& getEntities();
 	shared_ptr<TerrainEntity> getEntity(const string& ID);
 	shared_ptr<TerrainEntity> getSelectedTerrain();
-	const unordered_map<string, shared_ptr<TerrainEntity>>& getEntities();
 
 	// Integers
 	static inline const unsigned int MAX_SIZE = 1024;

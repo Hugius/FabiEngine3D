@@ -6,14 +6,6 @@ struct Matrix33;
 
 struct Matrix44 final
 {
-	// Data access
-	union
-	{
-		float m[4][4];
-		float f[16];
-	};
-
-	// Creation
 	Matrix44();
 	Matrix44(const Matrix33& other);
 	Matrix44(const float value);
@@ -32,4 +24,11 @@ struct Matrix44 final
 
 	// Vectors
 	const Vec4 operator*(const Vec4& other) const;
+
+	// Miscellaneous
+	union
+	{
+		float m[4][4];
+		float f[16];
+	};
 };

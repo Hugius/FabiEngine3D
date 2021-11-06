@@ -8,13 +8,13 @@ public:
 	PointlightEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
 
 	// Voids
-	void createEntity(const string& ID);
 	void update() override;
+	void createEntity(const string& ID);
 
 	// Integers
 	static inline const unsigned int MAX_LIGHT_COUNT = 64;
 
 	// Miscellaneous
-	shared_ptr<PointlightEntity> getEntity(const string& ID);
 	const unordered_map<string, shared_ptr<PointlightEntity>>& getEntities();
+	shared_ptr<PointlightEntity> getEntity(const string& ID);
 };

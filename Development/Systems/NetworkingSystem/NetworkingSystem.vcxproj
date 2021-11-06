@@ -30,10 +30,12 @@
     <ClCompile Include="..\..\Source\network_client_api_main.cpp" />
     <ClCompile Include="..\..\Source\network_client_api_misc.cpp" />
     <ClCompile Include="..\..\Source\network_client_api_update.cpp" />
+    <ClCompile Include="..\..\Source\network_client_message.cpp" />
     <ClCompile Include="..\..\Source\network_server_api_interface.cpp" />
     <ClCompile Include="..\..\Source\network_server_api_misc.cpp" />
     <ClCompile Include="..\..\Source\network_server_api_update.cpp" />
     <ClCompile Include="..\..\Source\network_server_api_main.cpp" />
+    <ClCompile Include="..\..\Source\network_server_message.cpp" />
     <ClCompile Include="..\..\Source\network_utils.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

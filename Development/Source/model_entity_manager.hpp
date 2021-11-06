@@ -9,10 +9,10 @@ public:
 	ModelEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus, Timer& timer);
 
 	// Voids
-	void createEntity(const string& ID, const string& meshPath);
-	void setLevelOfDetailDistance(float distance);
 	void update() override;
 	void update(const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities);
+	void createEntity(const string& ID, const string& meshPath);
+	void setLevelOfDetailDistance(float distance);
 
 	// Decimals
 	float getLevelOfDetailDistance();

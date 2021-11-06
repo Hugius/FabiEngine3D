@@ -14,6 +14,7 @@ public:
 	Window(LibraryLoader& libraryLoader);
 	~Window();
 
+	// Voids
 	void setTitle(const string& title);
 	void setSize(Ivec2 size);
 	void center();
@@ -33,10 +34,14 @@ public:
 	void hideCursor();
 	void setCursorPosition(Ivec2 pos);
 
+	// Vectors
 	const Ivec2 getCursorPosition();
-	bool isCursorVisible();
+
+	// Booleans
+	const bool isCursorVisible();
 	const bool isVsyncEnabled();
 
 private:
+	// Miscellaneous
 	SDL_Window* _windowPointer = nullptr;
 };

@@ -17,9 +17,11 @@ class LeftViewportController final : public BaseViewportController
 public:
 	LeftViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui);
 
+	// Voids
 	void initialize() override;
 	void update() override;
 
+	// Miscellaneous
 	SkyEditor& getSkyEditor();
 	TerrainEditor& getTerrainEditor();
 	WaterEditor& getWaterEditor();
@@ -31,6 +33,7 @@ public:
 	ScriptEditor& getScriptEditor();
 	SettingsEditor& getSettingsEditor();
 
+	// Vectors
 	static inline const Vec3 SCROLLING_LIST_COLOR = Vec3(0.25f);
 	static inline const Vec3 BUTTON_COLOR = Vec3(0.1f, 0.1f, 1.0f);
 	static inline const Vec3 BUTTON_HOVER_COLOR = Vec3(0.5f, 0.5f, 1.0f);
@@ -38,6 +41,17 @@ public:
 	static inline const Vec3 TEXT_HOVER_COLOR = Vec3(0.0f);
 
 private:
+	// Strings
+	string _lastActiveEditorScreen = "";
+
+	// Vectors
+	static inline const Vec3 FRAME_COLOR = Vec3(0.175f);
+
+	// Decimals
+	static inline const float CW = 0.115f;
+	static inline const float CH = 0.0875f;
+
+	// Miscellaneous
 	SkyEditor _skyEditor;
 	TerrainEditor _terrainEditor;
 	WaterEditor _waterEditor;
@@ -48,11 +62,4 @@ private:
 	SceneEditor _sceneEditor;
 	ScriptEditor _scriptEditor;
 	SettingsEditor _settingsEditor;
-
-	string _lastActiveEditorScreen = "";
-
-	static inline const Vec3 FRAME_COLOR = Vec3(0.175f);
-
-	static inline const float CW = 0.115f;
-	static inline const float CH = 0.0875f;
 };

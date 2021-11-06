@@ -39,7 +39,7 @@ private:
 	// Decimals
 	float _positionTargetSpeed = 0.0f;
 
-	// Boolean
+	// Booleans
 	bool _mustCapture = false;
 	bool _isCaptured = false;
 

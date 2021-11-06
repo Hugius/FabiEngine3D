@@ -1,6 +1,6 @@
 #include "script_interpreter.hpp"
 
-vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string& listString)
+const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string& listString)
 {
 	// Temporary variables
 	vector<ScriptValue> valueList;

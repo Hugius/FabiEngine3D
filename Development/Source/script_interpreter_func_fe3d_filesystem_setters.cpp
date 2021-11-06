@@ -12,7 +12,7 @@ using std::filesystem::remove_all;
 
 using SVT = ScriptValueType;
 
-bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
 	if(functionName == "fe3d:directory_create")

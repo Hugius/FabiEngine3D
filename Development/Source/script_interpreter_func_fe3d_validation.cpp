@@ -1,7 +1,7 @@
 #include "script_interpreter.hpp"
 #include "logger.hpp"
 
-bool ScriptInterpreter::_validateFe3dAabb(const string& ID)
+const bool ScriptInterpreter::_validateFe3dAabb(const string& ID)
 {
 	// @ sign is reserved
 	if(ID.front() == '@')
@@ -20,7 +20,7 @@ bool ScriptInterpreter::_validateFe3dAabb(const string& ID)
 	return true;
 }
 
-bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isPreview)
+const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isPreview)
 {
 	if(isPreview)
 	{
@@ -51,7 +51,7 @@ bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isPreview)
 	return true;
 }
 
-bool ScriptInterpreter::_validateFe3dImage(const string& ID)
+const bool ScriptInterpreter::_validateFe3dImage(const string& ID)
 {
 	// @ sign is reserved
 	if(ID.front() == '@')
@@ -70,7 +70,7 @@ bool ScriptInterpreter::_validateFe3dImage(const string& ID)
 	return true;
 }
 
-bool ScriptInterpreter::_validateFe3dPointlight(const string& ID)
+const bool ScriptInterpreter::_validateFe3dPointlight(const string& ID)
 {
 	// @ sign is reserved
 	if(ID.front() == '@')
@@ -89,7 +89,7 @@ bool ScriptInterpreter::_validateFe3dPointlight(const string& ID)
 	return true;
 }
 
-bool ScriptInterpreter::_validateFe3dSpotlight(const string& ID)
+const bool ScriptInterpreter::_validateFe3dSpotlight(const string& ID)
 {
 	// @ sign is reserved
 	if(ID.front() == '@')
@@ -108,7 +108,7 @@ bool ScriptInterpreter::_validateFe3dSpotlight(const string& ID)
 	return true;
 }
 
-bool ScriptInterpreter::_validateFe3dModel(const string& ID, bool isPreview)
+const bool ScriptInterpreter::_validateFe3dModel(const string& ID, bool isPreview)
 {
 	if(isPreview)
 	{
@@ -147,7 +147,7 @@ bool ScriptInterpreter::_validateFe3dModel(const string& ID, bool isPreview)
 	return true;
 }
 
-bool ScriptInterpreter::_validateFe3dReflection(const string& ID)
+const bool ScriptInterpreter::_validateFe3dReflection(const string& ID)
 {
 	// @ sign is reserved
 	if(ID.front() == '@')
@@ -166,7 +166,7 @@ bool ScriptInterpreter::_validateFe3dReflection(const string& ID)
 	return true;
 }
 
-bool ScriptInterpreter::_validateFe3dSky()
+const bool ScriptInterpreter::_validateFe3dSky()
 {
 	// Check if entity exists
 	if(_fe3d.skyEntity_getSelectedID().empty())
@@ -178,7 +178,7 @@ bool ScriptInterpreter::_validateFe3dSky()
 	return true;
 }
 
-bool ScriptInterpreter::_validateFe3dTerrain()
+const bool ScriptInterpreter::_validateFe3dTerrain()
 {
 	// Check if entity exists
 	if(_fe3d.terrainEntity_getSelectedID().empty())
@@ -190,7 +190,7 @@ bool ScriptInterpreter::_validateFe3dTerrain()
 	return true;
 }
 
-bool ScriptInterpreter::_validateFe3dText(const string& ID)
+const bool ScriptInterpreter::_validateFe3dText(const string& ID)
 {
 	// @ sign is reserved
 	if(ID.front() == '@')
@@ -209,7 +209,7 @@ bool ScriptInterpreter::_validateFe3dText(const string& ID)
 	return true;
 }
 
-bool ScriptInterpreter::_validateFe3dWater()
+const bool ScriptInterpreter::_validateFe3dWater()
 {
 	// Check if entity exists
 	if(_fe3d.waterEntity_getSelectedID().empty())
@@ -221,7 +221,7 @@ bool ScriptInterpreter::_validateFe3dWater()
 	return true;
 }
 
-bool ScriptInterpreter::_validateFe3dSound(const string& ID, bool isPreview)
+const bool ScriptInterpreter::_validateFe3dSound(const string& ID, bool isPreview)
 {
 	if(isPreview)
 	{

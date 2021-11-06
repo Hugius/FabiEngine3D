@@ -40,33 +40,33 @@ public:
 	void notifyCursorCenter();
 
 	// Matrices
-	const Matrix44& getViewMatrix();
-	const Matrix44& getProjectionMatrix();
+	const Matrix44& getViewMatrix() const;
+	const Matrix44& getProjectionMatrix() const;
 
 	// Vectors
-	const Vec3 getUpVector();
-	const Vec3 getFrontVector();
-	const Vec3 getRightVector();
-	const Vec3 getPosition();
-	const Vec3 getThirdPersonLookat();
+	const Vec3 getUpVector() const;
+	const Vec3 getFrontVector() const;
+	const Vec3 getRightVector() const;
+	const Vec3 getPosition() const;
+	const Vec3 getThirdPersonLookat() const;
 
 	// Decimals
-	const float getFOV();
-	const float getAspectRatio();
-	const float getYaw();
-	const float getPitch();
-	const float getFirstPersonYaw();
-	const float getFirstPersonPitch();
-	const float getThirdPersonYaw();
-	const float getThirdPersonPitch();
-	const float getThirdPersonDistance();
-	const float getNearDistance();
-	const float getFarDistance();
-	const float getCursorSensitivity();
+	const float getFOV() const;
+	const float getAspectRatio() const;
+	const float getYaw() const;
+	const float getPitch() const;
+	const float getFirstPersonYaw() const;
+	const float getFirstPersonPitch() const;
+	const float getThirdPersonYaw() const;
+	const float getThirdPersonPitch() const;
+	const float getThirdPersonDistance() const;
+	const float getNearDistance() const;
+	const float getFarDistance() const;
+	const float getCursorSensitivity() const;
 
 	// Booleans
-	const bool isThirdPersonViewEnabled();
-	const bool isFirstPersonViewEnabled();
+	const bool isThirdPersonViewEnabled() const;
+	const bool isFirstPersonViewEnabled() const;
 
 private:
 	// Matrices

@@ -1,6 +1,6 @@
 #include "script_interpreter.hpp"
 
-bool ScriptInterpreter::_validateListIndex(ScriptVariable& list, unsigned int index)
+const bool ScriptInterpreter::_validateListIndex(ScriptVariable& list, unsigned int index)
 {
 	// Check if variable is a list in the first place
 	if(list.getType() == ScriptVariableType::SINGLE)
@@ -26,7 +26,7 @@ bool ScriptInterpreter::_validateListIndex(ScriptVariable& list, unsigned int in
 	return true;
 }
 
-bool ScriptInterpreter::_validateListValueCount(const vector<ScriptValue>& values, unsigned int count)
+const bool ScriptInterpreter::_validateListValueCount(const vector<ScriptValue>& values, unsigned int count)
 {
 	if(values.size() == count) // Check if value amount is correct
 	{
@@ -44,7 +44,7 @@ bool ScriptInterpreter::_validateListValueCount(const vector<ScriptValue>& value
 	}
 }
 
-bool ScriptInterpreter::_validateListValueTypes(const vector<ScriptValue>& values, const vector<ScriptValueType>& types)
+const bool ScriptInterpreter::_validateListValueTypes(const vector<ScriptValue>& values, const vector<ScriptValueType>& types)
 {
 	for(size_t i = 0; i < values.size(); i++)
 	{

@@ -17,7 +17,7 @@ public:
 	void resetCaptureBuffer();
 
 	// Miscellaneous
-	TextureID blurTexture(const shared_ptr<ImageEntity> entity, TextureID texture, unsigned int blurCount, float intensity, BlurDirection direction);
+	const TextureID blurTexture(const shared_ptr<ImageEntity> entity, TextureID texture, unsigned int blurCount, float intensity, BlurDirection direction);
 
 private:
 	// Voids

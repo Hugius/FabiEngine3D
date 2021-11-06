@@ -142,92 +142,92 @@ void Camera::setAspectRatio(float value)
 	_aspectRatio = max(0.0f, value);
 }
 
-const Vec3 Camera::getPosition()
+const Vec3 Camera::getPosition() const
 {
 	return _position;
 }
 
-const Vec3 Camera::getFrontVector()
+const Vec3 Camera::getFrontVector() const
 {
 	return _frontVector;
 }
 
-const Vec3 Camera::getRightVector()
+const Vec3 Camera::getRightVector() const
 {
 	return _rightVector;
 }
 
-const Vec3 Camera::getThirdPersonLookat()
+const Vec3 Camera::getThirdPersonLookat() const
 {
 	return _thirdPersonLookat;
 }
 
-const float Camera::getFirstPersonYaw()
+const float Camera::getFirstPersonYaw() const
 {
 	return _yaw;
 }
 
-const float Camera::getFirstPersonPitch()
+const float Camera::getFirstPersonPitch() const
 {
 	return _pitch;
 }
 
-const float Camera::getNearDistance()
+const float Camera::getNearDistance() const
 {
 	return _nearDistance;
 }
 
-const float Camera::getFarDistance()
+const float Camera::getFarDistance() const
 {
 	return _farDistance;
 }
 
-const float Camera::getCursorSensitivity()
+const float Camera::getCursorSensitivity() const
 {
 	return _cursorSensitivity;
 }
 
-const float Camera::getThirdPersonYaw()
+const float Camera::getThirdPersonYaw() const
 {
 	return _thirdPersonYaw;
 }
 
-const float Camera::getThirdPersonPitch()
+const float Camera::getThirdPersonPitch() const
 {
 	return _thirdPersonPitch;
 }
 
-const float Camera::getThirdPersonDistance()
+const float Camera::getThirdPersonDistance() const
 {
 	return _thirdPersonDistance;
 }
 
-const float Camera::getFOV()
+const float Camera::getFOV() const
 {
 	return _fov;
 }
 
-const float Camera::getAspectRatio()
+const float Camera::getAspectRatio() const
 {
 	return _aspectRatio;
 }
 
-const float Camera::getYaw()
+const float Camera::getYaw() const
 {
 	return _yaw;
 }
 
-const float Camera::getPitch()
+const float Camera::getPitch() const
 {
 	return _pitch;
 }
 
-const bool Camera::isFirstPersonViewEnabled()
+const bool Camera::isFirstPersonViewEnabled() const
 {
 	return _isFirstPersonViewEnabled;
 }
 
-const bool Camera::isThirdPersonViewEnabled()
+const bool Camera::isThirdPersonViewEnabled() const
 {
 	return _isThirdPersonViewEnabled;
 }
@@ -257,17 +257,17 @@ void Camera::notifyCursorCenter()
 	_cursorIsBeingCentered = true;
 }
 
-const Matrix44& Camera::getViewMatrix()
+const Matrix44& Camera::getViewMatrix() const
 {
 	return _viewMatrix;
 }
 
-const Matrix44& Camera::getProjectionMatrix()
+const Matrix44& Camera::getProjectionMatrix() const
 {
 	return _projectionMatrix;
 }
 
-const Vec3 Camera::getUpVector()
+const Vec3 Camera::getUpVector() const
 {
 	return _upVector;
 }

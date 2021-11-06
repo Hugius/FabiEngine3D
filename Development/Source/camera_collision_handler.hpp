@@ -20,13 +20,13 @@ public:
 	void disableCameraTerrainResponse();
 
 	// Booleans
-	bool isCameraUnderTerrain();
-	bool isCameraAabbResponseEnabled();
-	bool isCameraTerrainResponseEnabled();
+	const bool isCameraUnderTerrain() const;
+	const bool isCameraAabbResponseEnabled() const;
+	const bool isCameraTerrainResponseEnabled() const;
 
 private:
 	// Voids
-	bool _handleCollision(Direction direction, const unordered_map<string, shared_ptr<AabbEntity>>& aabbs, Camera& camera);
+	const bool _handleCollision(Direction direction, const unordered_map<string, shared_ptr<AabbEntity>>& aabbs, Camera& camera) const;
 
 	// Vectors
 	Vec3 _lastCameraPosition = Vec3(0.0f);

@@ -13,14 +13,14 @@ public:
 	void setType(ScriptConditionType type);
 
 	// Integers
-	const unsigned int getScopeDepth();
+	const unsigned int getScopeDepth() const;
 
 	// Booleans
-	const bool isTrue();
-	const bool isFalse();
+	const bool isTrue() const;
+	const bool isFalse() const;
 
 	// Miscellaneous
-	const ScriptConditionType getType();
+	const ScriptConditionType getType() const;
 
 private:
 	// Integers

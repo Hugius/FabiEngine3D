@@ -1,12 +1,12 @@
 #include "network_server_api.hpp"
 #include "logger.hpp"
 
-bool NetworkServerAPI::isRunning()
+const bool NetworkServerAPI::isRunning() const
 {
 	return _isRunning;
 }
 
-bool NetworkServerAPI::isClientConnected(const string& username)
+const bool NetworkServerAPI::isClientConnected(const string& username) const
 {
 	// Must be running
 	if(!_isRunning)
@@ -32,7 +32,7 @@ bool NetworkServerAPI::isClientConnected(const string& username)
 	return false;
 }
 
-const string& NetworkServerAPI::getNewClientIP()
+const string& NetworkServerAPI::getNewClientIP() const
 {
 	// Must be running
 	if(!_isRunning)
@@ -44,7 +44,7 @@ const string& NetworkServerAPI::getNewClientIP()
 	return _newClientIP;
 }
 
-const string& NetworkServerAPI::getNewClientUsername()
+const string& NetworkServerAPI::getNewClientUsername() const
 {
 	// Must be running
 	if(!_isRunning)
@@ -56,7 +56,7 @@ const string& NetworkServerAPI::getNewClientUsername()
 	return _newClientUsername;
 }
 
-const string NetworkServerAPI::getOldClientIP()
+const string NetworkServerAPI::getOldClientIP() const
 {
 	// Must be running
 	if(!_isRunning)
@@ -75,7 +75,7 @@ const string NetworkServerAPI::getOldClientIP()
 	}
 }
 
-const string NetworkServerAPI::getOldClientUsername()
+const string NetworkServerAPI::getOldClientUsername() const
 {
 	// Must be running
 	if(!_isRunning)
@@ -94,7 +94,7 @@ const string NetworkServerAPI::getOldClientUsername()
 	}
 }
 
-const vector<NetworkClientMessage>& NetworkServerAPI::getPendingMessages()
+const vector<NetworkClientMessage>& NetworkServerAPI::getPendingMessages() const
 {
 	// Must be running
 	if(!_isRunning)
@@ -106,7 +106,7 @@ const vector<NetworkClientMessage>& NetworkServerAPI::getPendingMessages()
 	return _pendingMessages;
 }
 
-const vector<string> NetworkServerAPI::getClientIPs()
+const vector<string> NetworkServerAPI::getClientIPs() const
 {
 	// Must be running
 	if(!_isRunning)
@@ -129,7 +129,7 @@ const vector<string> NetworkServerAPI::getClientIPs()
 	return clientIPs;
 }
 
-const vector<string> NetworkServerAPI::getClientUsernames()
+const vector<string> NetworkServerAPI::getClientUsernames() const
 {
 	// Temporary values
 	vector<string> clientUsernames;

@@ -14,7 +14,7 @@ static const vector<string> extractModelPartIDs(FabiEngine3D& fe3d, const string
 	}
 }
 
-bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
 	if(functionName == "fe3d:model_place")

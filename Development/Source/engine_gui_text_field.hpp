@@ -17,14 +17,14 @@ public:
 	void updateOriginalColor();
 
 	// Strings
-	const string& getID();
-	const string& getEntityID();
-	const string& getParentID();
+	const string& getID() const;
+	const string& getEntityID() const;
+	const string& getParentID() const;
 
 	// Vectors
-	const Vec2 getOriginalPosition();
-	const Vec2 getOriginalSize();
-	const Vec3 getOriginalColor();
+	const Vec2 getOriginalPosition() const;
+	const Vec2 getOriginalSize() const;
+	const Vec3 getOriginalColor() const;
 
 private:
 	// Strings

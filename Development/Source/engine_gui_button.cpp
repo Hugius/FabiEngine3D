@@ -202,32 +202,32 @@ void EngineGuiButton::changeTextContent(const string& content)
 	}
 }
 
-bool EngineGuiButton::isHoverable()
+const bool EngineGuiButton::isHoverable() const
 {
 	return _isHoverable;
 }
 
-bool EngineGuiButton::isHovered()
+const bool EngineGuiButton::isHovered() const
 {
 	return _isHovered;
 }
 
-const string& EngineGuiButton::getID()
+const string& EngineGuiButton::getID() const
 {
 	return _ID;
 }
 
-const string& EngineGuiButton::getParentID()
+const string& EngineGuiButton::getParentID() const
 {
 	return _parentID;
 }
 
-shared_ptr<EngineGuiRectangle> EngineGuiButton::getRectangle()
+shared_ptr<EngineGuiRectangle> EngineGuiButton::getRectangle() const
 {
 	return _rectangle;
 }
 
-shared_ptr<EngineGuiTextField> EngineGuiButton::getTextField()
+shared_ptr<EngineGuiTextField> EngineGuiButton::getTextField() const
 {
 	return _textField;
 }

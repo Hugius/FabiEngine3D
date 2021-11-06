@@ -154,13 +154,13 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 	}
 }
 
-bool ScriptInterpreter::_isLocalVariableExisting(const string& variableID)
+const bool ScriptInterpreter::_isLocalVariableExisting(const string& variableID)
 {
 	auto& variables = _localVariables[_executionDepth];
 	return (variables.find(variableID) != variables.end());
 }
 
-bool ScriptInterpreter::_isGlobalVariableExisting(const string& variableID)
+const bool ScriptInterpreter::_isGlobalVariableExisting(const string& variableID) const
 {
 	return (_globalVariables.find(variableID) != _globalVariables.end());
 }

@@ -57,32 +57,32 @@ void EngineGuiRectangle::updateOriginalColor()
 	_originalColor = _fe3d.imageEntity_getColor(_entityID);
 }
 
-const Vec2 EngineGuiRectangle::getOriginalPosition()
+const Vec2 EngineGuiRectangle::getOriginalPosition() const
 {
 	return _originalPosition;
 }
 
-const Vec2 EngineGuiRectangle::getOriginalSize()
+const Vec2 EngineGuiRectangle::getOriginalSize() const
 {
 	return _originalSize;
 }
 
-const Vec3 EngineGuiRectangle::getOriginalColor()
+const Vec3 EngineGuiRectangle::getOriginalColor() const
 {
 	return _originalColor;
 }
 
-const string& EngineGuiRectangle::getID()
+const string& EngineGuiRectangle::getID() const
 {
 	return _ID;
 }
 
-const string& EngineGuiRectangle::getEntityID()
+const string& EngineGuiRectangle::getEntityID() const
 {
 	return _entityID;
 }
 
-const string& EngineGuiRectangle::getParentID()
+const string& EngineGuiRectangle::getParentID() const
 {
 	return _parentID;
 }

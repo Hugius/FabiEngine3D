@@ -21,16 +21,16 @@ public:
 	void clearDeltaParts();
 
 	// Decimals
-	float stop();
-	float getDeltaPart(const string& ID);
-	float getDeltaPartSum();
+	const float stop();
+	const float getDeltaPart(const string& ID);
+	const float getDeltaPartSum() const;
 
 	// Integers
-	unsigned int getPassedTickCount();
+	const unsigned int getPassedTickCount() const;
 
 	// Booleans
-	bool isStarted();
-	bool isDeltaPartStarted(const string& ID);
+	const bool isStarted() const;
+	const bool isDeltaPartStarted(const string& ID) const;
 
 private:
 	// Strings

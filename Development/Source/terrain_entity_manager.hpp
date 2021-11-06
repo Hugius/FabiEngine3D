@@ -14,10 +14,10 @@ public:
 	void selectTerrain(const string& ID);
 
 	// Decimals
-	float getPixelHeight(const string& ID, float x, float z);
+	const float getPixelHeight(const string& ID, float x, float z);
 
 	// Booleans
-	bool isInside(const string& ID, float x, float z);
+	const bool isInside(const string& ID, float x, float z);
 
 	// Miscellaneous
 	const unordered_map<string, shared_ptr<TerrainEntity>>& getEntities();

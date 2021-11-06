@@ -56,12 +56,12 @@ void Script::reset()
 	_scriptFiles.clear();
 }
 
-unsigned int Script::getScriptFileCount()
+const unsigned int Script::getScriptFileCount() const
 {
 	return static_cast<unsigned int>(_scriptFiles.size());
 }
 
-unsigned int Script::getTotalLineCount()
+const unsigned int Script::getTotalLineCount() const
 {
 	unsigned int total = 0;
 
@@ -73,7 +73,7 @@ unsigned int Script::getTotalLineCount()
 	return total;
 }
 
-bool Script::isScriptFileExisting(const string& ID)
+const bool Script::isScriptFileExisting(const string& ID) const
 {
 	for(const auto& file : _scriptFiles)
 	{
@@ -86,7 +86,7 @@ bool Script::isScriptFileExisting(const string& ID)
 	return false;
 }
 
-shared_ptr<ScriptFile> Script::getScriptFile(const string& ID)
+shared_ptr<ScriptFile> Script::getScriptFile(const string& ID) const
 {
 	for(const auto& file : _scriptFiles)
 	{
@@ -99,7 +99,7 @@ shared_ptr<ScriptFile> Script::getScriptFile(const string& ID)
 	Logger::throwError("Script::getScriptFile");
 }
 
-const vector<string> Script::getAllScriptFileIDs()
+const vector<string> Script::getAllScriptFileIDs() const
 {
 	vector<string> result;
 
@@ -111,7 +111,7 @@ const vector<string> Script::getAllScriptFileIDs()
 	return result;
 }
 
-const vector<pair<string, unsigned int>> Script::findKeyword(const string& keyword)
+const vector<pair<string, unsigned int>> Script::findKeyword(const string& keyword) const
 {
 	// Temporary values
 	vector<pair<string, unsigned int>> result;

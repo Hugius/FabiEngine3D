@@ -270,7 +270,7 @@ public:
 	void modelEntity_setRotationOrder(const string& ID, DirectionOrder order);
 
 	// Model entity interface - getters
-	const vector<string>& modelEntity_getPartIDs(const string& ID);
+	const vector<string> modelEntity_getPartIDs(const string& ID);
 	const vector<string> modelEntity_getAllIDs();
 	const vector<string> modelEntity_getGroupIDs(const string& ID);
 	const string& modelEntity_getMeshPath(const string& ID);

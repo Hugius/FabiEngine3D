@@ -19,11 +19,11 @@ public:
 	const string& getEntityID();
 
 	// Booleans
-	bool isHovered();
+	const bool isHovered() const;
 
 	// Miscellaneous
-	vector<shared_ptr<EngineGuiWindow>>& getWindows();
-	shared_ptr<EngineGuiWindow> getWindow(const string& ID);
+	const vector<shared_ptr<EngineGuiWindow>>& getWindows() const;
+	shared_ptr<EngineGuiWindow> getWindow(const string& ID) const;
 
 private:
 	// Strings

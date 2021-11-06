@@ -30,7 +30,7 @@ void EngineGuiWindow::update(bool hoverable)
 	}
 }
 
-bool EngineGuiWindow::isHovered()
+const bool EngineGuiWindow::isHovered() const
 {
 	// Check if entity is visible anyway
 	if(_fe3d.imageEntity_isVisible(_entityID))
@@ -53,27 +53,27 @@ bool EngineGuiWindow::isHovered()
 	return false;
 }
 
-const string& EngineGuiWindow::getID()
+const string& EngineGuiWindow::getID() const
 {
 	return _ID;
 }
 
-const string& EngineGuiWindow::getEntityID()
+const string& EngineGuiWindow::getEntityID() const
 {
 	return _entityID;
 }
 
-const string& EngineGuiWindow::getParentID()
+const string& EngineGuiWindow::getParentID() const
 {
 	return _parentID;
 }
 
-const Vec2 EngineGuiWindow::getOriginalPosition()
+const Vec2 EngineGuiWindow::getOriginalPosition() const
 {
 	return _originalPosition;
 }
 
-const Vec2 EngineGuiWindow::getOriginalSize()
+const Vec2 EngineGuiWindow::getOriginalSize() const
 {
 	return _originalSize;
 }
@@ -135,17 +135,17 @@ void EngineGuiWindow::setActiveScreen(const string& ID)
 	getActiveScreen()->show();
 }
 
-vector<shared_ptr<EngineGuiScreen>>& EngineGuiWindow::getScreens()
+const vector<shared_ptr<EngineGuiScreen>>& EngineGuiWindow::getScreens()const
 {
 	return _screens;
 }
 
-shared_ptr<EngineGuiScreen> EngineGuiWindow::getActiveScreen()
+shared_ptr<EngineGuiScreen> EngineGuiWindow::getActiveScreen() const
 {
 	return getScreen(_activeScreenID);
 }
 
-shared_ptr<EngineGuiScreen> EngineGuiWindow::getScreen(const string& ID)
+shared_ptr<EngineGuiScreen> EngineGuiWindow::getScreen(const string& ID) const
 {
 	// Retrieve screen
 	for(const auto& screen : _screens)

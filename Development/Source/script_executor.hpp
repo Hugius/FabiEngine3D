@@ -18,9 +18,9 @@ public:
 	void unload();
 
 	// Booleans
-	bool isScriptEmpty();
-	bool isStarted();
-	bool isRunning();
+	const bool isScriptEmpty() const;
+	const bool isStarted() const;
+	const bool isRunning() const;
 
 private:
 	// Voids

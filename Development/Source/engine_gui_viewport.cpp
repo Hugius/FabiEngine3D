@@ -27,7 +27,7 @@ void EngineGuiViewport::update(bool hoverable)
 	}
 }
 
-bool EngineGuiViewport::isHovered()
+const bool EngineGuiViewport::isHovered() const
 {
 	// Check if entity is visible anyway
 	if(_fe3d.imageEntity_isVisible(_entityID))
@@ -86,12 +86,12 @@ void EngineGuiViewport::deleteWindow(const string& ID)
 	Logger::throwError("EngineGuiViewport::deleteWindow");
 }
 
-vector<shared_ptr<EngineGuiWindow>>& EngineGuiViewport::getWindows()
+const vector<shared_ptr<EngineGuiWindow>>& EngineGuiViewport::getWindows() const
 {
 	return _windows;
 }
 
-shared_ptr<EngineGuiWindow> EngineGuiViewport::getWindow(const string& ID)
+shared_ptr<EngineGuiWindow> EngineGuiViewport::getWindow(const string& ID) const
 {
 	// Retrieve window
 	for(const auto& window : _windows)

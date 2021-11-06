@@ -173,17 +173,17 @@ void ScriptExecutor::setCurrentProjectID(const string& projectID)
 	_scriptInterpreter.setCurrentProjectID(projectID);
 }
 
-bool ScriptExecutor::isScriptEmpty()
+const bool ScriptExecutor::isScriptEmpty() const
 {
 	return (_script.getScriptFileCount() == 0);
 }
 
-bool ScriptExecutor::isStarted()
+const bool ScriptExecutor::isStarted() const
 {
 	return _isStarted;
 }
 
-bool ScriptExecutor::isRunning()
+const bool ScriptExecutor::isRunning() const
 {
 	return _isRunning;
 }

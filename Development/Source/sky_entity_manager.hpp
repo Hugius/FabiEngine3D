@@ -17,11 +17,11 @@ public:
 	void setExposureEnabled(bool value);
 
 	// Decimals
-	const float getExposureIntensity();
-	const float getExposureSpeed();
+	const float getExposureIntensity() const;
+	const float getExposureSpeed() const;
 
 	// Booleans
-	const bool isExposureEnabled();
+	const bool isExposureEnabled() const;
 
 	// Miscellaneous
 	const unordered_map<string, shared_ptr<SkyEntity>>& getEntities();

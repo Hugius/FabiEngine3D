@@ -36,8 +36,8 @@ private:
 	void _uploadUniform(const UniformID& uniformID, const Matrix44& data);
 
 	// Miscellaneous
-	UniformID _getUniformID(const string& uniformID);
-
+	const UniformID _getUniformID(const string& uniformID);
+	 
 	// Strings
 	string _vertexFilename = "";
 	string _fragmentFilename = "";

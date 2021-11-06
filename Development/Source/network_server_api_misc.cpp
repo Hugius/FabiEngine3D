@@ -9,7 +9,7 @@
 
 using std::launch;
 
-bool NetworkServerAPI::_sendMessageTCP(SOCKET socket, const string& content, bool isReserved)
+const bool NetworkServerAPI::_sendMessageTCP(SOCKET socket, const string& content, bool isReserved)
 {
 	// Must be running
 	if(!_isRunning)
@@ -58,7 +58,7 @@ bool NetworkServerAPI::_sendMessageTCP(SOCKET socket, const string& content, boo
 	return true;
 }
 
-bool NetworkServerAPI::_sendMessageUDP(const string& clientIP, const string& clientPort, const string& content, bool isReserved)
+const bool NetworkServerAPI::_sendMessageUDP(const string& clientIP, const string& clientPort, const string& content, bool isReserved) const
 {
 	// Must be running
 	if(!_isRunning)
@@ -145,12 +145,12 @@ void NetworkServerAPI::_disconnectClient(SOCKET socket)
 	}
 }
 
-SOCKET NetworkServerAPI::_waitForClientConnection(SOCKET socket)
+const SOCKET NetworkServerAPI::_waitForClientConnection(SOCKET socket) const
 {
 	return accept(socket, nullptr, nullptr);
 }
 
-tuple<int, int, long long, string> NetworkServerAPI::_waitForMessageTCP(SOCKET socket)
+tuple<int, int, long long, string> NetworkServerAPI::_waitForMessageTCP(SOCKET socket) const
 {
 	// Retrieve bytes & size
 	char buffer[NetworkUtils::TCP_BUFFER_BYTES];
@@ -171,7 +171,7 @@ tuple<int, int, long long, string> NetworkServerAPI::_waitForMessageTCP(SOCKET s
 	}
 }
 
-tuple<int, int, string, string, string> NetworkServerAPI::_receiveMessageUDP(SOCKET socket)
+tuple<int, int, string, string, string> NetworkServerAPI::_receiveMessageUDP(SOCKET socket) const
 {
 	// Data store
 	char buffer[NetworkUtils::UDP_BUFFER_BYTES];

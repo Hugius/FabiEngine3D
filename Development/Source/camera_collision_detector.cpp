@@ -1,6 +1,6 @@
 #include "camera_collision_detector.hpp"
 
-bool CameraCollisionDetector::checkX(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle, Vec3 boxMiddleChange, Box box)
+const bool CameraCollisionDetector::checkX(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle, Vec3 boxMiddleChange, Box box) const
 {
 	// Temporary values
 	const auto left = box.getLeft();
@@ -34,7 +34,7 @@ bool CameraCollisionDetector::checkX(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxM
 	}
 }
 
-bool CameraCollisionDetector::checkY(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle, Vec3 boxMiddleChange, Box box)
+const bool CameraCollisionDetector::checkY(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle, Vec3 boxMiddleChange, Box box) const
 {
 	// Temporary values
 	const auto bottom = box.getBottom();
@@ -68,7 +68,7 @@ bool CameraCollisionDetector::checkY(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxM
 	}
 }
 
-bool CameraCollisionDetector::checkZ(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle, Vec3 boxMiddleChange, Box box)
+const bool CameraCollisionDetector::checkZ(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle, Vec3 boxMiddleChange, Box box) const
 {
 	// Temporary values
 	const auto back = box.getBack();
@@ -102,7 +102,7 @@ bool CameraCollisionDetector::checkZ(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxM
 	}
 }
 
-bool CameraCollisionDetector::_isInside(Vec3 aabbPosition, Vec3 aabbHalfSize, Vec3 boxMiddle, Box box)
+const bool CameraCollisionDetector::_isInside(Vec3 aabbPosition, Vec3 aabbHalfSize, Vec3 boxMiddle, Box box) const
 {
 	// Temporary values
 	const auto left = box.getLeft();

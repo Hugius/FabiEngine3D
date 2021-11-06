@@ -52,7 +52,7 @@ void ShadowGenerator::updateMatrix()
 	_renderBus.setShadowMatrix(_createLightSpaceMatrix());
 }
 
-Matrix44 ShadowGenerator::_createLightSpaceMatrix()
+const Matrix44 ShadowGenerator::_createLightSpaceMatrix() const
 {
 	// Temporary values
 	auto eye = _renderBus.getShadowEyePosition();

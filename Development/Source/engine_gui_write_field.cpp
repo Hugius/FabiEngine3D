@@ -247,24 +247,24 @@ void EngineGuiWriteField::setPermActive(bool active)
 	_mustBeActive = active;
 }
 
-bool EngineGuiWriteField::confirmedInput()
+const bool EngineGuiWriteField::confirmedInput() const
 {
 	return _confirmedInput;
 }
 
-bool EngineGuiWriteField::isActive()
+const bool EngineGuiWriteField::isActive() const
 {
 	return _isActive;
 }
 
-bool EngineGuiWriteField::hasTextContentChanged()
+const bool EngineGuiWriteField::hasTextContentChanged()
 {
 	bool result = (_lastTextContent != _currentTextContent);
 	_lastTextContent = _currentTextContent;
 	return result;
 }
 
-const string EngineGuiWriteField::getTextContent()
+const string EngineGuiWriteField::getTextContent() const
 {
 	// Check if user filled in a minus without a number
 	if(_currentTextContent == "-" && _noSpecials && _minusAllowed)

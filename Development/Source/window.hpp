@@ -35,11 +35,11 @@ public:
 	void setCursorPosition(Ivec2 pos);
 
 	// Vectors
-	const Ivec2 getCursorPosition();
+	const Ivec2 getCursorPosition() const;
 
 	// Booleans
-	const bool isCursorVisible();
-	const bool isVsyncEnabled();
+	const bool isCursorVisible() const;
+	const bool isVsyncEnabled() const;
 
 private:
 	// Miscellaneous

@@ -187,17 +187,17 @@ void SkyEntityManager::setExposureEnabled(bool value)
 	_isExposureEnabled = value;
 }
 
-const float SkyEntityManager::getExposureIntensity()
+const float SkyEntityManager::getExposureIntensity() const
 {
 	return _exposureIntensity;
 }
 
-const float SkyEntityManager::getExposureSpeed()
+const float SkyEntityManager::getExposureSpeed() const
 {
 	return _exposureSpeed;
 }
 
-const bool SkyEntityManager::isExposureEnabled()
+const bool SkyEntityManager::isExposureEnabled() const
 {
 	return _isExposureEnabled;
 }

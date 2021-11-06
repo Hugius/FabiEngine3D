@@ -3,7 +3,7 @@
 
 #include <sstream>
 
-bool ScriptInterpreter::_isListValue(const string& valueString)
+const bool ScriptInterpreter::_isListValue(const string& valueString) const
 {
 	// Check if value has enough characters
 	if(valueString.empty())
@@ -20,7 +20,7 @@ bool ScriptInterpreter::_isListValue(const string& valueString)
 	return true;
 }
 
-bool ScriptInterpreter::_isVec3Value(const string& valueString)
+const bool ScriptInterpreter::_isVec3Value(const string& valueString) const
 {
 	// Check if value has enough characters
 	if(valueString.empty())
@@ -65,7 +65,7 @@ bool ScriptInterpreter::_isVec3Value(const string& valueString)
 	return (_isDecimalValue(xyz[0]) && _isDecimalValue(xyz[1]) && _isDecimalValue(xyz[2]));
 }
 
-bool ScriptInterpreter::_isStringValue(const string& valueString)
+const bool ScriptInterpreter::_isStringValue(const string& valueString) const
 {
 	// Check if value has characters at all
 	if(valueString.empty())
@@ -76,7 +76,7 @@ bool ScriptInterpreter::_isStringValue(const string& valueString)
 	return valueString.size() >= 2 && (valueString.front() == '"' && valueString.back() == '"');
 }
 
-bool ScriptInterpreter::_isDecimalValue(const string& valueString)
+const bool ScriptInterpreter::_isDecimalValue(const string& valueString) const
 {
 	// Check if value has characters at all
 	if(valueString.empty())
@@ -111,7 +111,7 @@ bool ScriptInterpreter::_isDecimalValue(const string& valueString)
 	return (valueString.size() >= 3) && (isdigit(valueString[startingIndex]) && isdigit(valueString.back())) && (dots == 1);
 }
 
-bool ScriptInterpreter::_isIntegerValue(const string& valueString)
+const bool ScriptInterpreter::_isIntegerValue(const string& valueString) const
 {
 	// Check if value has characters at all
 	if(valueString.empty())
@@ -138,12 +138,12 @@ bool ScriptInterpreter::_isIntegerValue(const string& valueString)
 	return true;
 }
 
-bool ScriptInterpreter::_isBooleanValue(const string& valueString)
+const bool ScriptInterpreter::_isBooleanValue(const string& valueString) const
 {
 	return (valueString == "<true>" || valueString == "<false>");
 }
 
-Vec3 ScriptInterpreter::_extractVec3FromString(const string& valueString)
+const Vec3 ScriptInterpreter::_extractVec3FromString(const string& valueString)
 {
 	// Check if vec3 value
 	if(!_isVec3Value(valueString))
@@ -176,7 +176,7 @@ Vec3 ScriptInterpreter::_extractVec3FromString(const string& valueString)
 	return Vec3(stof(_limitDecimalString(xyz[0])), stof(_limitDecimalString(xyz[1])), stof(_limitDecimalString(xyz[2])));
 }
 
-Ivec3 ScriptInterpreter::_extractVec3PartFromString(const string& valueString)
+const Ivec3 ScriptInterpreter::_extractVec3PartFromString(const string& valueString) const
 {
 	Ivec3 parts = Ivec3(0);
 	auto stringSize = valueString.size();
@@ -200,7 +200,7 @@ Ivec3 ScriptInterpreter::_extractVec3PartFromString(const string& valueString)
 	return parts;
 }
 
-int ScriptInterpreter::_extractListIndexFromString(const string& valueString, bool& isAccessingList)
+const int ScriptInterpreter::_extractListIndexFromString(const string& valueString, bool& isAccessingList)
 {
 	// Check if brackets are in string
 	auto openingBracketFound = find(valueString.begin(), valueString.end(), '[');
@@ -249,7 +249,7 @@ int ScriptInterpreter::_extractListIndexFromString(const string& valueString, bo
 	}
 }
 
-bool ScriptInterpreter::_validateKeyInputString(const string& inputString)
+const bool ScriptInterpreter::_validateKeyInputString(const string& inputString)
 {
 	if(KEY_INPUT_STRING_MAP.find(inputString) == KEY_INPUT_STRING_MAP.end())
 	{
@@ -260,7 +260,7 @@ bool ScriptInterpreter::_validateKeyInputString(const string& inputString)
 	return true;
 }
 
-bool ScriptInterpreter::_validateMouseInputString(const string& inputString)
+const bool ScriptInterpreter::_validateMouseInputString(const string& inputString)
 {
 	if(MOUSE_INPUT_STRING_MAP.find(inputString) == MOUSE_INPUT_STRING_MAP.end())
 	{
@@ -271,7 +271,7 @@ bool ScriptInterpreter::_validateMouseInputString(const string& inputString)
 	return true;
 }
 
-string ScriptInterpreter::_limitIntegerString(const string& valueString)
+const string ScriptInterpreter::_limitIntegerString(const string& valueString) const
 {
 	// Check if negative value
 	if(valueString.front() == '-')
@@ -294,7 +294,7 @@ string ScriptInterpreter::_limitIntegerString(const string& valueString)
 	return valueString;
 }
 
-string ScriptInterpreter::_limitDecimalString(const string& valueString)
+const string ScriptInterpreter::_limitDecimalString(const string& valueString) const
 {
 	// Cut everything after the dot
 	auto dotIndex = static_cast<unsigned int>(valueString.find('.'));

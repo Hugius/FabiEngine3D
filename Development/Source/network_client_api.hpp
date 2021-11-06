@@ -33,21 +33,21 @@ public:
 	void stop();
 
 	// Strings
-	const string& getUsername();
-	const string& getServerIP();
+	const string& getUsername() const;
+	const string& getServerIP() const;
 
 	// Integers
-	const unsigned int getPingLatency();
+	const unsigned int getPingLatency() const;
 
 	// Booleans
-	const bool isValidServerIP(const string& serverIP);
-	const bool isRunning();
-	const bool isConnectingToServer();
-	const bool isConnectedToServer();
-	const bool isAcceptedByServer();
+	const bool isValidServerIP(const string& serverIP) const;
+	const bool isRunning() const;
+	const bool isConnectingToServer() const;
+	const bool isConnectedToServer() const;
+	const bool isAcceptedByServer() const;
 
 	// Miscellaneous
-	const vector<NetworkServerMessage>& getPendingMessages();
+	const vector<NetworkServerMessage>& getPendingMessages() const;
 
 private:
 	// Voids
@@ -55,15 +55,15 @@ private:
 	void _setupUDP();
 
 	// Strings
-	tuple<int, int, long long, string> _waitForMessageTCP(SOCKET socket);
-	tuple<int, int, string, string, string> _receiveMessageUDP(SOCKET socket);
+	tuple<int, int, long long, string> _waitForMessageTCP(SOCKET socket) const;
+	tuple<int, int, string, string, string> _receiveMessageUDP(SOCKET socket) const;
 
 	// Integers
-	int _waitForServerConnection(SOCKET socket, const string& serverIP, const string& serverPort);
+	int _waitForServerConnection(SOCKET socket, const string& serverIP, const string& serverPort) const;
 
 	// Booleans
 	bool _sendMessageTCP(const string& content, bool isReserved, bool mustBeAccepted);
-	bool _sendMessageUDP(const string& content, bool isReserved, bool mustBeAccepted);
+	bool _sendMessageUDP(const string& content, bool isReserved, bool mustBeAccepted) const;
 
 	// Strings
 	future<tuple<int, int, long long, string>> _messageThreadTCP;

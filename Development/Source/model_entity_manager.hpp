@@ -15,11 +15,11 @@ public:
 	void setLevelOfDetailDistance(float distance);
 
 	// Decimals
-	float getLevelOfDetailDistance();
+	const float getLevelOfDetailDistance() const;
 
 	// Miscellaneous
-	shared_ptr<ModelEntity> getEntity(const string& ID);
 	const unordered_map<string, shared_ptr<ModelEntity>>& getEntities();
+	shared_ptr<ModelEntity> getEntity(const string& ID);
 
 private:
 	// Decimals

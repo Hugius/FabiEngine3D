@@ -16,12 +16,12 @@ public:
 	void changeTextContent(const string& content) override;
 
 	// Strings
-	const string getTextContent();
+	const string getTextContent() const;
 	
 	// Booleans
-	bool confirmedInput();
-	bool isActive();
-	bool hasTextContentChanged();
+	const bool confirmedInput() const;
+	const bool isActive() const;
+	const bool hasTextContentChanged();
 
 private:
 	// Voids

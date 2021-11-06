@@ -16,21 +16,21 @@ public:
 	void update(bool hoverable);
 
 	// Strings
-	const string& getID();
-	const string& getEntityID();
-	const string& getParentID();
+	const string& getID() const;
+	const string& getEntityID() const;
+	const string& getParentID() const;
 
 	// Vectors
-	const Vec2 getOriginalPosition();
-	const Vec2 getOriginalSize();
+	const Vec2 getOriginalPosition() const;
+	const Vec2 getOriginalSize() const;
 
 	// Booleans
-	bool isHovered();
+	const bool isHovered() const;
 
 	// Miscellaneous
-	vector<shared_ptr<EngineGuiScreen>>& getScreens();
-	shared_ptr<EngineGuiScreen> getScreen(const string& ID);
-	shared_ptr<EngineGuiScreen> getActiveScreen();
+	const vector<shared_ptr<EngineGuiScreen>>& getScreens() const;
+	shared_ptr<EngineGuiScreen> getScreen(const string& ID) const;
+	shared_ptr<EngineGuiScreen> getActiveScreen() const;
 
 private:
 	// Strings

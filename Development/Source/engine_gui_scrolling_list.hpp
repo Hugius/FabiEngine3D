@@ -18,11 +18,11 @@ public:
 	void setVisible(bool isVisible);
 
 	// Booleans
-	bool isHovered();
+	const bool isHovered() const;
 
 	// Miscellaneous
-	vector<shared_ptr<EngineGuiButton>>& getButtons();
-	shared_ptr<EngineGuiButton> getButton(const string& ID);
+	const vector<shared_ptr<EngineGuiButton>>& getButtons() const;
+	shared_ptr<EngineGuiButton> getButton(const string& ID) const;
 
 private:
 	// Voids
@@ -31,8 +31,8 @@ private:
 	void _updateScolling();
 
 	// Vectors
-	Vec2 _convertPosition(Vec2 position);
-	Vec2 _convertSize(Vec2 size);
+	const Vec2 _convertPosition(Vec2 position) const;
+	const Vec2 _convertSize(Vec2 size) const;
 
 	// Vectors
 	const Vec3 _buttonColor;

@@ -187,27 +187,27 @@ void RenderBuffer::disableInstancing()
 	}
 }
 
-const BufferID RenderBuffer::getVAO()
+const BufferID RenderBuffer::getVAO() const
 {
 	return _vao;
 }
 
-const unsigned int RenderBuffer::getVertexCount()
+const unsigned int RenderBuffer::getVertexCount() const
 {
 	return _vertexCount;
 }
 
-const bool RenderBuffer::isInstanced()
+const bool RenderBuffer::isInstanced() const
 {
 	return _isInstanced;
 }
 
-const RenderBufferType RenderBuffer::getBufferType()
+const RenderBufferType RenderBuffer::getBufferType() const
 {
 	return _bufferType;
 }
 
-const vector<Vec3>& RenderBuffer::getInstancedOffsets()
+const vector<Vec3>& RenderBuffer::getInstancedOffsets() const
 {
 	return _instancedOffsets;
 }

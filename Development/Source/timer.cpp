@@ -15,7 +15,7 @@ void Timer::start()
 	_isStarted = true;
 }
 
-float Timer::stop()
+const float Timer::stop()
 {
 	// Error checking
 	if(!_isStarted)
@@ -57,12 +57,12 @@ void Timer::stopDeltaPart()
 	_currentID = "";
 }
 
-float Timer::getDeltaPart(const string& ID)
+const float Timer::getDeltaPart(const string& ID)
 {
 	return _deltaParts[ID];
 }
 
-float Timer::getDeltaPartSum()
+const float Timer::getDeltaPartSum() const
 {
 	float sum = 0.0f;
 
@@ -100,17 +100,17 @@ void Timer::clearDeltaParts()
 	_deltaParts.clear();
 }
 
-unsigned int Timer::getPassedTickCount()
+const unsigned int Timer::getPassedTickCount() const
 {
 	return _passedTickCount;
 }
 
-bool Timer::isStarted()
+const bool Timer::isStarted() const
 {
 	return _isStarted;
 }
 
-bool Timer::isDeltaPartStarted(const string& ID)
+const bool Timer::isDeltaPartStarted(const string& ID) const
 {
 	return (!_currentID.empty()) && (ID == _currentID);
 }

@@ -1,7 +1,7 @@
 #include "script_interpreter.hpp"
 #include "logger.hpp"
 
-bool ScriptInterpreter::_checkConditionString(const string& conditionString)
+const bool ScriptInterpreter::_checkConditionString(const string& conditionString)
 {
 	// Check if condition is not empty
 	if(conditionString.empty())
@@ -276,7 +276,7 @@ bool ScriptInterpreter::_checkConditionString(const string& conditionString)
 	return finalCondition;
 }
 
-bool ScriptInterpreter::_validateCondition(ScriptValue& firstValue, const string& comparisonOperator, ScriptValue& secondValue)
+const bool ScriptInterpreter::_validateCondition(ScriptValue& firstValue, const string& comparisonOperator, ScriptValue& secondValue)
 {
 	// Check if comparison values are of the same type
 	if(firstValue.getType() != secondValue.getType())
@@ -303,7 +303,7 @@ bool ScriptInterpreter::_validateCondition(ScriptValue& firstValue, const string
 	return true;
 }
 
-bool ScriptInterpreter::_compareValues(ScriptValue& firstValue, const string& comparisonOperator, ScriptValue& secondValue)
+const bool ScriptInterpreter::_compareValues(ScriptValue& firstValue, const string& comparisonOperator, ScriptValue& secondValue) const
 {
 	if(comparisonOperator == IS_KEYWORD)
 	{

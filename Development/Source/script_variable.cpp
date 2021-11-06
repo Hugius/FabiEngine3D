@@ -16,22 +16,22 @@ ScriptVariable::ScriptVariable(FabiEngine3D& fe3d, ScriptVariableScope scope, Sc
 	}
 }
 
-const string& ScriptVariable::getID()
+const string& ScriptVariable::getID() const
 {
 	return _ID;
 }
 
-ScriptVariableScope ScriptVariable::getScope()
+const ScriptVariableScope ScriptVariable::getScope() const
 {
 	return _scope;
 }
 
-ScriptVariableType ScriptVariable::getType()
+const ScriptVariableType ScriptVariable::getType() const
 {
 	return _type;
 }
 
-bool ScriptVariable::isConstant()
+const bool ScriptVariable::isConstant() const
 {
 	return _isConstant;
 }
@@ -69,7 +69,7 @@ void ScriptVariable::removeValue(unsigned int index)
 	_values.erase(_values.begin() + index);
 }
 
-ScriptValue& ScriptVariable::getValue(unsigned int index)
+ScriptValue& ScriptVariable::getValue(unsigned int index) const
 {
 	// Validate index
 	if(index >= _values.size())
@@ -80,12 +80,12 @@ ScriptValue& ScriptVariable::getValue(unsigned int index)
 	return *_values[index];
 }
 
-vector<shared_ptr<ScriptValue>>& ScriptVariable::getValues()
+const vector<shared_ptr<ScriptValue>>& ScriptVariable::getValues() const
 {
 	return _values;
 }
 
-unsigned int ScriptVariable::getValueCount()
+const unsigned int ScriptVariable::getValueCount() const
 {
 	return static_cast<unsigned int>(_values.size());
 }

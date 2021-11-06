@@ -37,47 +37,49 @@ public:
 	void createAnswerForm(const string& ID, string title, Vec2 position);
 
 	// Strings
-	const string checkChoiceForm(const string& ID);
+	const string& checkChoiceForm(const string& ID);
 
 	// Booleans
-	bool isFocused();
-	bool isScrollingListExisting(const string& ID);
-	bool isWriteFieldExisting(const string& ID);
-	bool isButtonExisting(const string& ID);
-	bool isRectangleExisting(const string& ID);
-	bool isTextFieldExisting(const string& ID);
-	bool checkValueForm(const string& ID, unsigned int& value, const vector<unsigned int>& forbiddenValues = {});
-	bool checkValueForm(const string& ID, int& value, const vector<int>& forbiddenValues = {});
-	bool checkValueForm(const string& ID, float& value, const vector<float>& forbiddenValues = {});
-	bool checkValueForm(const string& ID, double& value, const vector<double>& forbiddenValues = {});
-	bool checkValueForm(const string& ID, string& value, const vector<string>& forbiddenValues = {});
-	bool isValueFormConfirmed();
-	bool isValueFormCancelled();
-	bool isValueFormExisting(const string& ID);
-	bool isChoiceFormCancelled(const string& ID);
-	bool isChoiceFormExisting(const string& ID);
-	bool isAnswerFormConfirmed(const string& ID);
-	bool isAnswerFormDenied(const string& ID);
-	bool isAnswerFormExisting(const string& ID);
+	const bool isFocused() const;
+	const bool isScrollingListExisting(const string& ID) const;
+	const bool isWriteFieldExisting(const string& ID) const;
+	const bool isButtonExisting(const string& ID) const;
+	const bool isRectangleExisting(const string& ID) const;
+	const bool isTextFieldExisting(const string& ID) const;
+	const bool checkValueForm(const string& ID, unsigned int& value, const vector<unsigned int>& forbiddenValues = {});
+	const bool checkValueForm(const string& ID, int& value, const vector<int>& forbiddenValues = {});
+	const bool checkValueForm(const string& ID, float& value, const vector<float>& forbiddenValues = {});
+	const bool checkValueForm(const string& ID, double& value, const vector<double>& forbiddenValues = {});
+	const bool checkValueForm(const string& ID, string& value, const vector<string>& forbiddenValues = {});
+	const bool isValueFormConfirmed() const;
+	const bool isValueFormCancelled() const;
+	const bool isValueFormExisting(const string& ID) const;
+	const bool isChoiceFormCancelled(const string& ID) const;
+	const bool isChoiceFormExisting(const string& ID) const;
+	const bool isAnswerFormConfirmed(const string& ID);
+	const bool isAnswerFormDenied(const string& ID);
+	const bool isAnswerFormExisting(const string& ID) const;
 
 	// GUI elements
-	const vector<shared_ptr<EngineGuiScrollingList>>& getScrollingLists();
-	const vector<shared_ptr<EngineGuiWriteField>>& getWriteFields();
-	const vector<shared_ptr<EngineGuiButton>>& getButtons();
-	const vector<shared_ptr<EngineGuiRectangle>>& getRectangles();
-	const vector<shared_ptr<EngineGuiTextField>>& getTextFields();
-	shared_ptr<EngineGuiScrollingList> getScrollingList(const string& ID);
-	shared_ptr<EngineGuiWriteField> getWriteField(const string& ID);
-	shared_ptr<EngineGuiButton> getButton(const string& ID);
-	shared_ptr<EngineGuiRectangle> getRectangle(const string& ID);
-	shared_ptr<EngineGuiTextField> getTextField(const string& ID);
+	const vector<shared_ptr<EngineGuiScrollingList>>& getScrollingLists() const;
+	const vector<shared_ptr<EngineGuiWriteField>>& getWriteFields() const;
+	const vector<shared_ptr<EngineGuiButton>>& getButtons() const;
+	const vector<shared_ptr<EngineGuiRectangle>>& getRectangles() const;
+	const vector<shared_ptr<EngineGuiTextField>>& getTextFields() const;
+	shared_ptr<EngineGuiScrollingList> getScrollingList(const string& ID) const;
+	shared_ptr<EngineGuiWriteField> getWriteField(const string& ID) const;
+	shared_ptr<EngineGuiButton> getButton(const string& ID) const;
+	shared_ptr<EngineGuiRectangle> getRectangle(const string& ID) const;
+	shared_ptr<EngineGuiTextField> getTextField(const string& ID) const;
 
 private:
 	// Voids
 	void _createValueForm(const string& ID, string title, string valueString, Vec2 position, Vec2 size, Vec2 buttonsPosition, bool onlyNumbers, bool minusAllowed);
 	void _updateValueFormDeleting();
 	void _deleteAnswerForm(const string& ID);
-	bool _checkValueForm(const string& ID, string& valueString, const vector<string>& forbiddenValueStrings);
+
+	// Booleans
+	const bool _checkValueForm(const string& ID, string& valueString, const vector<string>& forbiddenValueStrings);
 
 	// GUI elements
 	vector<shared_ptr<EngineGuiScrollingList>> _scrollingLists;

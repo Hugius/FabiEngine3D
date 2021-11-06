@@ -16,19 +16,19 @@ public:
 	void removeValue(unsigned int index);
 
 	// Strings
-	const string& getID();
+	const string& getID() const;
 
 	// Integers
-	unsigned int getValueCount();
+	const unsigned int getValueCount() const;
 
 	// Booleans
-	bool isConstant();
+	const bool isConstant() const;
 
 	// Miscellaneous
-	vector<shared_ptr<ScriptValue>>& getValues();
-	ScriptValue& getValue(unsigned int index = 0);
-	ScriptVariableScope getScope();
-	ScriptVariableType getType();
+	const vector<shared_ptr<ScriptValue>>& getValues() const;
+	ScriptValue& getValue(unsigned int index = 0) const;
+	const ScriptVariableScope getScope() const;
+	const ScriptVariableType getType() const;
 
 private:
 	// Strings

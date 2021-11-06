@@ -244,12 +244,12 @@ void TerrainEntityManager::loadMesh(const string& ID)
 	entity->setNormals(normals);
 }
 
-float TerrainEntityManager::getPixelHeight(const string& ID, float x, float z)
+const float TerrainEntityManager::getPixelHeight(const string& ID, float x, float z)
 {
 	return _getPixelHeight(x, z, getEntity(ID)->getSize(), getEntity(ID)->getMaxHeight(), getEntity(ID)->getPixelValues());
 }
 
-bool TerrainEntityManager::isInside(const string& ID, float x, float z)
+const bool TerrainEntityManager::isInside(const string& ID, float x, float z)
 {
 	// Return true if point is within terrain bounds
 	if(x > 0 && x < getEntity(ID)->getSize() && z > 0 && z < getEntity(ID)->getSize())

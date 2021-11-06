@@ -16,19 +16,19 @@ public:
 	void setLocked(bool locked);
 
 	// Integers
-	const int getMouseWheelX();
-	const int getMouseWheelY();
+	const int getMouseWheelX() const;
+	const int getMouseWheelY() const;
 
 	// Booleans
-	const bool isLocked();
-	const bool isKeyDown(InputType key);
-	const bool isKeyPressed(InputType key);
-	const bool isMouseDown(InputType button);
-	const bool isMousePressed(InputType button);
+	const bool isLocked() const;
+	const bool isKeyDown(InputType key) const;
+	const bool isKeyPressed(InputType key) const;
+	const bool isMouseDown(InputType button) const;
+	const bool isMousePressed(InputType button) const;
 
 private:
 	// Integers
-	inline unsigned int _getVectorIndex(vector<InputType>& list, InputType element)
+	inline const unsigned int _getVectorIndex(const vector<InputType>& list, InputType element) const
 	{
 		auto it = find(list.begin(), list.end(), element);
 
@@ -43,7 +43,7 @@ private:
 	}
 
 	// Booleans
-	inline bool _isInVector(vector<InputType>& list, InputType element)
+	inline const bool _isInVector(const vector<InputType>& list, InputType element) const
 	{
 		return find(list.begin(), list.end(), element) != list.end();
 	}

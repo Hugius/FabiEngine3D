@@ -55,33 +55,33 @@ void Raycaster::setTerrainPointingPrecision(float precision)
 	_terrainPointingPrecision = precision;
 }
 
-bool Raycaster::isTerrainPointingEnabled()
+const bool Raycaster::isTerrainPointingEnabled() const
 {
 	return _isTerrainPointingEnabled;
 }
 
-float Raycaster::getTerrainPointingDistance()
+const float Raycaster::getTerrainPointingDistance() const
 {
 	return _terrainPointingDistance;
 }
 
-float Raycaster::getTerrainPointingPrecision()
+const float Raycaster::getTerrainPointingPrecision() const
 {
 	return _terrainPointingPrecision;
 }
 
-Ray Raycaster::getCursorRay()
+const Ray Raycaster::getCursorRay() const
 {
 	return _cursorRay;
 }
 
-Vec3 Raycaster::getTerrainPoint()
+const Vec3 Raycaster::getTerrainPoint() const
 {
 	return _terrainPoint;
 }
 
 // https://gamedev.stackexchange.com/questions/18436/most-efficient-aabb-vs-ray-collision-algorithms
-float Raycaster::calculateRayBoxIntersectionDistance(Ray ray, Box box)
+const float Raycaster::calculateRayBoxIntersectionDistance(Ray ray, Box box) const
 {
 	/*
 		Original formula: point = (origin + distance) * direction
@@ -134,7 +134,7 @@ float Raycaster::calculateRayBoxIntersectionDistance(Ray ray, Box box)
 	return minIntersectionDistance;
 }
 
-Ray Raycaster::_calculateCursorRay(Ivec2 cursorPosition)
+const Ray Raycaster::_calculateCursorRay(Ivec2 cursorPosition) const
 {
 	Vec2 screenCoords = Tools::convertFromScreenCoords(cursorPosition);
 	Vec2 ndcCoords = Math::convertToNDC(screenCoords);
@@ -145,7 +145,7 @@ Ray Raycaster::_calculateCursorRay(Ivec2 cursorPosition)
 	return Ray(_renderBus.getCameraPosition(), Math::normalize(worldCoords));
 }
 
-Vec4 Raycaster::_convertToViewSpace(Vec4 clipCoords)
+const Vec4 Raycaster::_convertToViewSpace(Vec4 clipCoords) const
 {
 	Matrix44 invertedProjection = Math::invertMatrix(_renderBus.getProjectionMatrix());
 	Vec4 viewCoords = (invertedProjection * clipCoords);
@@ -153,7 +153,7 @@ Vec4 Raycaster::_convertToViewSpace(Vec4 clipCoords)
 	return Vec4(viewCoords.x, viewCoords.y, -1.0f, 0.0f);
 }
 
-Vec3 Raycaster::_convertToWorldSpace(Vec4 viewCoords)
+const Vec3 Raycaster::_convertToWorldSpace(Vec4 viewCoords) const
 {
 	Matrix44 invertedView = Math::invertMatrix(_renderBus.getViewMatrix());
 	Vec4 worldCoords = (invertedView * viewCoords);
@@ -161,12 +161,12 @@ Vec3 Raycaster::_convertToWorldSpace(Vec4 viewCoords)
 	return Vec3(worldCoords.x, worldCoords.y, worldCoords.z);
 }
 
-Vec3 Raycaster::getPointOnRay(Ray ray, float distance)
+const Vec3 Raycaster::getPointOnRay(Ray ray, float distance) const
 {
 	return (ray.getPosition() + (ray.getDirection() * distance));
 }
 
-bool Raycaster::_isUnderTerrain(float distance)
+const bool Raycaster::_isUnderTerrain(float distance) const
 {
 	// Scale ray
 	Vec3 scaledRay = getPointOnRay(_cursorRay, distance);
@@ -182,7 +182,7 @@ bool Raycaster::_isUnderTerrain(float distance)
 	return (scaledRay.y < terrainHeight);
 }
 
-Vec3 Raycaster::_calculateTerrainPoint()
+const Vec3 Raycaster::_calculateTerrainPoint() const
 {
 	// Temporary values
 	float distance = 0.0f;

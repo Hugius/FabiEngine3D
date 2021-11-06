@@ -55,32 +55,32 @@ void EngineGuiTextField::updateOriginalColor()
 	_originalColor = _fe3d.textEntity_getColor(_entityID);
 }
 
-const Vec2 EngineGuiTextField::getOriginalPosition()
+const Vec2 EngineGuiTextField::getOriginalPosition() const
 {
 	return _originalPosition;
 }
 
-const Vec2 EngineGuiTextField::getOriginalSize()
+const Vec2 EngineGuiTextField::getOriginalSize() const
 {
 	return _originalSize;
 }
 
-const Vec3 EngineGuiTextField::getOriginalColor()
+const Vec3 EngineGuiTextField::getOriginalColor() const
 {
 	return _originalColor;
 }
 
-const string& EngineGuiTextField::getID()
+const string& EngineGuiTextField::getID() const
 {
 	return _ID;
 }
 
-const string& EngineGuiTextField::getEntityID()
+const string& EngineGuiTextField::getEntityID() const
 {
 	return _entityID;
 }
 
-const string& EngineGuiTextField::getParentID()
+const string& EngineGuiTextField::getParentID() const
 {
 	return _parentID;
 }

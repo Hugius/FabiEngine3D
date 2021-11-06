@@ -64,7 +64,7 @@ bool NetworkClientAPI::_sendMessageTCP(const string& content, bool isReserved, b
 	return true;
 }
 
-bool NetworkClientAPI::_sendMessageUDP(const string& content, bool isReserved, bool mustBeAccepted)
+bool NetworkClientAPI::_sendMessageUDP(const string& content, bool isReserved, bool mustBeAccepted) const
 {
 	// Must be running
 	if(!_isRunning)
@@ -123,7 +123,7 @@ bool NetworkClientAPI::_sendMessageUDP(const string& content, bool isReserved, b
 	return true;
 }
 
-int NetworkClientAPI::_waitForServerConnection(SOCKET socket, const string& serverIP, const string& serverPort)
+int NetworkClientAPI::_waitForServerConnection(SOCKET socket, const string& serverIP, const string& serverPort) const
 {
 	// Compose socket address
 	auto socketAddress = NetworkUtils::composeSocketAddress(serverIP, serverPort);
@@ -217,7 +217,7 @@ void NetworkClientAPI::_setupUDP()
 	freeaddrinfo(addressInfo);
 }
 
-tuple<int, int, long long, string> NetworkClientAPI::_waitForMessageTCP(SOCKET socket)
+tuple<int, int, long long, string> NetworkClientAPI::_waitForMessageTCP(SOCKET socket) const
 {
 	// Retrieve bytes & size
 	char buffer[NetworkUtils::TCP_BUFFER_BYTES];
@@ -234,7 +234,7 @@ tuple<int, int, long long, string> NetworkClientAPI::_waitForMessageTCP(SOCKET s
 	}
 }
 
-tuple<int, int, string, string, string> NetworkClientAPI::_receiveMessageUDP(SOCKET socket)
+tuple<int, int, string, string, string> NetworkClientAPI::_receiveMessageUDP(SOCKET socket) const
 {
 	// Data store
 	char buffer[NetworkUtils::UDP_BUFFER_BYTES];

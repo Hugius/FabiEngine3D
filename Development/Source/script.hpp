@@ -14,18 +14,18 @@ public:
 	void reset();
 
 	// Strings
-	const vector<string> getAllScriptFileIDs();
+	const vector<string> getAllScriptFileIDs() const;
 
 	// Integers
-	const vector<pair<string, unsigned int>> findKeyword(const string& keyword);
-	unsigned int getScriptFileCount();
-	unsigned int getTotalLineCount();
+	const vector<pair<string, unsigned int>> findKeyword(const string& keyword) const;
+	const unsigned int getScriptFileCount() const;
+	const unsigned int getTotalLineCount() const;
 
 	// Booleans
-	bool isScriptFileExisting(const string& ID);
+	const bool isScriptFileExisting(const string& ID) const;
 
 	// Miscellaneous
-	shared_ptr<ScriptFile> getScriptFile(const string& ID);
+	shared_ptr<ScriptFile> getScriptFile(const string& ID) const;
 
 private:
 	// Miscellaneous

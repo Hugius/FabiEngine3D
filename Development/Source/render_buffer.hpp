@@ -20,17 +20,17 @@ public:
 	void disableInstancing();
 
 	// Vectors
-	const vector<Vec3>& getInstancedOffsets();
+	const vector<Vec3>& getInstancedOffsets() const;
 
 	// Integers
-	const unsigned int getVertexCount();
+	const unsigned int getVertexCount() const;
 
 	// Booleans
-	const bool isInstanced();
+	const bool isInstanced() const;
 
 	// Miscellaneous
-	const BufferID getVAO();
-	const RenderBufferType getBufferType();	
+	const BufferID getVAO() const;
+	const RenderBufferType getBufferType() const;
 
 private:
 	// Vectors

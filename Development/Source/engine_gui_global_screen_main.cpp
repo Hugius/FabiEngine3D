@@ -69,7 +69,7 @@ void EngineGuiGlobalScreen::createTextField(const string& ID, Vec2 position, Vec
 	_textFields.push_back(make_shared<EngineGuiTextField>(_fe3d, "globalscreen", ID, position, size, textContent, textColor, isCentered));
 }
 
-bool EngineGuiGlobalScreen::isScrollingListExisting(const string& ID)
+const bool EngineGuiGlobalScreen::isScrollingListExisting(const string& ID) const
 {
 	for(const auto& scrollingList : _scrollingLists)
 	{
@@ -82,7 +82,7 @@ bool EngineGuiGlobalScreen::isScrollingListExisting(const string& ID)
 	return false;
 }
 
-bool EngineGuiGlobalScreen::isWriteFieldExisting(const string& ID)
+const bool EngineGuiGlobalScreen::isWriteFieldExisting(const string& ID) const
 {
 	for(const auto& writeField : _writeFields)
 	{
@@ -95,7 +95,7 @@ bool EngineGuiGlobalScreen::isWriteFieldExisting(const string& ID)
 	return false;
 }
 
-bool EngineGuiGlobalScreen::isButtonExisting(const string& ID)
+const bool EngineGuiGlobalScreen::isButtonExisting(const string& ID) const
 {
 	for(const auto& button : _buttons)
 	{
@@ -108,7 +108,7 @@ bool EngineGuiGlobalScreen::isButtonExisting(const string& ID)
 	return false;
 }
 
-bool EngineGuiGlobalScreen::isRectangleExisting(const string& ID)
+const bool EngineGuiGlobalScreen::isRectangleExisting(const string& ID) const
 {
 	for(const auto& rectangle : _rectangles)
 	{
@@ -121,7 +121,7 @@ bool EngineGuiGlobalScreen::isRectangleExisting(const string& ID)
 	return false;
 }
 
-bool EngineGuiGlobalScreen::isTextFieldExisting(const string& ID)
+const bool EngineGuiGlobalScreen::isTextFieldExisting(const string& ID) const
 {
 	for(const auto& textField : _textFields)
 	{
@@ -134,7 +134,7 @@ bool EngineGuiGlobalScreen::isTextFieldExisting(const string& ID)
 	return false;
 }
 
-shared_ptr<EngineGuiScrollingList> EngineGuiGlobalScreen::getScrollingList(const string& ID)
+shared_ptr<EngineGuiScrollingList> EngineGuiGlobalScreen::getScrollingList(const string& ID) const
 {
 	// Retrieve scrolling list
 	for(const auto& scrollingList : _scrollingLists)
@@ -149,7 +149,7 @@ shared_ptr<EngineGuiScrollingList> EngineGuiGlobalScreen::getScrollingList(const
 	Logger::throwError("EngineGuiGlobalScreen::getScrollingList");
 }
 
-shared_ptr<EngineGuiWriteField> EngineGuiGlobalScreen::getWriteField(const string& ID)
+shared_ptr<EngineGuiWriteField> EngineGuiGlobalScreen::getWriteField(const string& ID) const
 {
 	// Retrieve write field
 	for(const auto& writeField : _writeFields)
@@ -164,7 +164,7 @@ shared_ptr<EngineGuiWriteField> EngineGuiGlobalScreen::getWriteField(const strin
 	Logger::throwError("EngineGuiGlobalScreen::getWriteField");
 }
 
-shared_ptr<EngineGuiButton> EngineGuiGlobalScreen::getButton(const string& ID)
+shared_ptr<EngineGuiButton> EngineGuiGlobalScreen::getButton(const string& ID) const
 {
 	// Retrieve button
 	for(const auto& button : _buttons)
@@ -179,7 +179,7 @@ shared_ptr<EngineGuiButton> EngineGuiGlobalScreen::getButton(const string& ID)
 	Logger::throwError("EngineGuiGlobalScreen::getButton");
 }
 
-shared_ptr<EngineGuiRectangle> EngineGuiGlobalScreen::getRectangle(const string& ID)
+shared_ptr<EngineGuiRectangle> EngineGuiGlobalScreen::getRectangle(const string& ID) const
 {
 	// Retrieve rectangle
 	for(const auto& rectangle : _rectangles)
@@ -194,7 +194,7 @@ shared_ptr<EngineGuiRectangle> EngineGuiGlobalScreen::getRectangle(const string&
 	Logger::throwError("EngineGuiGlobalScreen::getRectangle");
 }
 
-shared_ptr<EngineGuiTextField> EngineGuiGlobalScreen::getTextField(const string& ID)
+shared_ptr<EngineGuiTextField> EngineGuiGlobalScreen::getTextField(const string& ID) const
 {
 	// Retrieve text field
 	for(const auto& textField : _textFields)
@@ -209,27 +209,27 @@ shared_ptr<EngineGuiTextField> EngineGuiGlobalScreen::getTextField(const string&
 	Logger::throwError("EngineGuiGlobalScreen::getTextField");
 }
 
-const vector<shared_ptr<EngineGuiScrollingList>>& EngineGuiGlobalScreen::getScrollingLists()
+const vector<shared_ptr<EngineGuiScrollingList>>& EngineGuiGlobalScreen::getScrollingLists() const
 {
 	return _scrollingLists;
 }
 
-const vector<shared_ptr<EngineGuiWriteField>>& EngineGuiGlobalScreen::getWriteFields()
+const vector<shared_ptr<EngineGuiWriteField>>& EngineGuiGlobalScreen::getWriteFields() const
 {
 	return _writeFields;
 }
 
-const vector<shared_ptr<EngineGuiButton>>& EngineGuiGlobalScreen::getButtons()
+const vector<shared_ptr<EngineGuiButton>>& EngineGuiGlobalScreen::getButtons() const
 {
 	return _buttons;
 }
 
-const vector<shared_ptr<EngineGuiRectangle>>& EngineGuiGlobalScreen::getRectangles()
+const vector<shared_ptr<EngineGuiRectangle>>& EngineGuiGlobalScreen::getRectangles() const
 {
 	return _rectangles;
 }
 
-const vector<shared_ptr<EngineGuiTextField>>& EngineGuiGlobalScreen::getTextFields()
+const vector<shared_ptr<EngineGuiTextField>>& EngineGuiGlobalScreen::getTextFields() const
 {
 	return _textFields;
 }

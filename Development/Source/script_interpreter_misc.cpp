@@ -10,17 +10,17 @@ void ScriptInterpreter::setCurrentProjectID(const string& projectID)
 	_currentProjectID = projectID;
 }
 
-bool ScriptInterpreter::hasThrownError()
+const bool ScriptInterpreter::hasThrownError() const
 {
 	return _hasThrownError;
 }
 
-bool ScriptInterpreter::gameMustStop()
+const bool ScriptInterpreter::gameMustStop() const
 {
 	return _mustStopApplication;
 }
 
-unsigned int ScriptInterpreter::_countFrontSpaces(const string& scriptLineText)
+const unsigned int ScriptInterpreter::_countFrontSpaces(const string& scriptLineText)
 {
 	int countedSpaces = 0;
 
@@ -50,7 +50,7 @@ unsigned int ScriptInterpreter::_countFrontSpaces(const string& scriptLineText)
 	return countedSpaces;
 }
 
-bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const string& scriptLineText, unsigned int& scopeDepth)
+const bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const string& scriptLineText, unsigned int& scopeDepth)
 {
 	// Temporary values
 	const unsigned int currentLineScopeDepth = (countedSpaces / SPACES_PER_INDENT);
@@ -100,7 +100,7 @@ bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const s
 	return true;
 }
 
-bool ScriptInterpreter::_validateSavesDirectory()
+const bool ScriptInterpreter::_validateSavesDirectory() const
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -119,7 +119,7 @@ bool ScriptInterpreter::_validateSavesDirectory()
 	return true;
 }
 
-ScriptConditionStatement* ScriptInterpreter::_getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth)
+ScriptConditionStatement* ScriptInterpreter::_getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth) const
 {
 	// Temporary values
 	unsigned int index = static_cast<unsigned int>(statements.size());
@@ -166,7 +166,7 @@ void ScriptInterpreter::_checkEngineWarnings(unsigned int lastLoggerMessageCount
 	}
 }
 
-Vec2 ScriptInterpreter::_convertGuiPositionToViewport(Vec2 position)
+const Vec2 ScriptInterpreter::_convertGuiPositionToViewport(Vec2 position) const
 {
 	if(!_fe3d.application_isExported())
 	{
@@ -182,7 +182,7 @@ Vec2 ScriptInterpreter::_convertGuiPositionToViewport(Vec2 position)
 	return position;
 }
 
-Vec2 ScriptInterpreter::_convertGuiPositionFromViewport(Vec2 position)
+const Vec2 ScriptInterpreter::_convertGuiPositionFromViewport(Vec2 position) const
 {
 	if(!_fe3d.application_isExported())
 	{
@@ -202,7 +202,7 @@ Vec2 ScriptInterpreter::_convertGuiPositionFromViewport(Vec2 position)
 	return position;
 }
 
-Vec2 ScriptInterpreter::_convertGuiSizeToViewport(Vec2 size)
+const Vec2 ScriptInterpreter::_convertGuiSizeToViewport(Vec2 size) const
 {
 	if(!_fe3d.application_isExported())
 	{
@@ -214,7 +214,7 @@ Vec2 ScriptInterpreter::_convertGuiSizeToViewport(Vec2 size)
 	return size;
 }
 
-Vec2 ScriptInterpreter::_convertGuiSizeFromViewport(Vec2 size)
+const Vec2 ScriptInterpreter::_convertGuiSizeFromViewport(Vec2 size) const
 {
 	if(!_fe3d.application_isExported())
 	{

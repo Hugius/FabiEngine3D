@@ -20,11 +20,11 @@ public:
 	void unbind();
 
 	// Vectors
-	Ivec2 getSize();
+	const Ivec2 getSize() const;
 
 	// Miscellaneous
-	BufferID getFBO();
-	TextureID getTexture(unsigned int index);
+	const BufferID getFBO() const;
+	const TextureID getTexture(unsigned int index) const;
 
 private:
 	// Vectors

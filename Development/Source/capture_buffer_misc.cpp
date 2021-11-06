@@ -13,17 +13,17 @@ void CaptureBuffer::unbind()
 	glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 }
 
-Ivec2 CaptureBuffer::getSize()
+const Ivec2 CaptureBuffer::getSize() const
 {
 	return _size;
 }
 
-BufferID CaptureBuffer::getFBO()
+const BufferID CaptureBuffer::getFBO() const
 {
 	return _fbo;
 }
 
-BufferID CaptureBuffer::getTexture(unsigned int index)
+const BufferID CaptureBuffer::getTexture(unsigned int index) const
 {
 	return _textures[index];
 }

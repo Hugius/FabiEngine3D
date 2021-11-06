@@ -19,16 +19,16 @@ public:
 	void setHoverable(bool isHoverable);
 
 	// Strings
-	const string& getID();
-	const string& getParentID();
+	const string& getID() const;
+	const string& getParentID() const;
 
 	// Booleans
-	bool isHoverable();
-	bool isHovered();
+	const bool isHoverable() const;
+	const bool isHovered() const;
 
 	// Miscellaneous
-	shared_ptr<EngineGuiRectangle> getRectangle();
-	shared_ptr<EngineGuiTextField> getTextField();
+	shared_ptr<EngineGuiRectangle> getRectangle() const;
+	shared_ptr<EngineGuiTextField> getTextField() const;
 
 protected:
 	// Voids

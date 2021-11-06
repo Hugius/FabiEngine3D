@@ -1,6 +1,6 @@
 #include "script_interpreter.hpp"
 
-vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& scriptLine)
+const vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& scriptLine)
 {
 	// Temporary values
 	vector<ScriptValue> returnValues;

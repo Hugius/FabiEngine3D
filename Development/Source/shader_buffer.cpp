@@ -113,7 +113,7 @@ void ShaderBuffer::_createProgram(const char* vertexShaderCode, const char* frag
 	Logger::throwInfo("Loaded fragment shader: \"shaders\\" + _fragmentFilename + "\"");
 }
 
-UniformID ShaderBuffer::_getUniformID(const string& uniformID)
+const UniformID ShaderBuffer::_getUniformID(const string& uniformID)
 {
 	auto it = _uniformCache.find(uniformID);
 	if(it == _uniformCache.end())

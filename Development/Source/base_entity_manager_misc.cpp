@@ -1,7 +1,7 @@
 #include "base_entity_manager.hpp"
 #include "logger.hpp"
 
-bool BaseEntityManager::isExisting(const string& ID)
+const bool BaseEntityManager::isExisting(const string& ID)
 {
 	switch(_type)
 	{

@@ -31,35 +31,37 @@ public:
 	void deleteTextField(const string& ID);
 
 	// Strings
-	const string& getID();
-	const string& getParentID();
+	const string& getID() const;
+	const string& getParentID() const;
 
 	// Vectors
-	Vec2 convertPosition(Vec2 position);
-	Vec2 convertSize(Vec2 size);
+	const Vec2 convertPosition(Vec2 position) const;
+	const Vec2 convertSize(Vec2 size) const;
 
 	// Booleans
-	bool isScrollingListExisting(const string& ID);
-	bool isWriteFieldExisting(const string& ID);
-	bool isButtonExisting(const string& ID);
-	bool isRectangleExisting(const string& ID);
-	bool isTextFieldExisting(const string& ID);
+	const bool isScrollingListExisting(const string& ID) const;
+	const bool isWriteFieldExisting(const string& ID) const;
+	const bool isButtonExisting(const string& ID) const;
+	const bool isRectangleExisting(const string& ID) const;
+	const bool isTextFieldExisting(const string& ID) const;
 
 	// Miscellaneous
-	shared_ptr<EngineGuiScrollingList> getScrollingList(const string& ID);
-	shared_ptr<EngineGuiWriteField> getWriteField(const string& ID);
-	shared_ptr<EngineGuiButton> getButton(const string& ID);
-	shared_ptr<EngineGuiRectangle> getRectangle(const string& ID);
-	shared_ptr<EngineGuiTextField> getTextField(const string& ID);
-	vector<shared_ptr<EngineGuiScrollingList>>& getScrollingLists();
-	vector<shared_ptr<EngineGuiWriteField>>& getWriteFields();
-	vector<shared_ptr<EngineGuiButton>>& getButtons();
-	vector<shared_ptr<EngineGuiRectangle>>& getRectangles();
-	vector<shared_ptr<EngineGuiTextField>>& getTextFields();
+	shared_ptr<EngineGuiScrollingList> getScrollingList(const string& ID) const;
+	shared_ptr<EngineGuiWriteField> getWriteField(const string& ID) const;
+	shared_ptr<EngineGuiButton> getButton(const string& ID) const;
+	shared_ptr<EngineGuiRectangle> getRectangle(const string& ID) const;
+	shared_ptr<EngineGuiTextField> getTextField(const string& ID) const;
+	const vector<shared_ptr<EngineGuiScrollingList>>& getScrollingLists() const;
+	const vector<shared_ptr<EngineGuiWriteField>>& getWriteFields() const;
+	const vector<shared_ptr<EngineGuiButton>>& getButtons() const;
+	const vector<shared_ptr<EngineGuiRectangle>>& getRectangles() const;
+	const vector<shared_ptr<EngineGuiTextField>>& getTextFields() const;
 
 private:
 	// Vectors
-	Vec4 _convertDimensions(Vec2 position, Vec2 size);
+	const Vec4 _convertDimensions(Vec2 position, Vec2 size) const;
+
+	// Vectors
 	Vec2 _parentPosition;
 	Vec2 _parentSize;
 

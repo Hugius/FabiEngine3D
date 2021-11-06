@@ -3,7 +3,7 @@
 
 using SVT = ScriptValueType;
 
-bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
 	if(functionName == "fe3d:scene_load")

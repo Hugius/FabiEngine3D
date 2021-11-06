@@ -26,7 +26,7 @@ void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, stri
 	_createValueForm(ID, title, value, position, size, buttonsPosition, false, false);
 }
 
-bool EngineGuiGlobalScreen::checkValueForm(const string& ID, unsigned int& value, const vector<unsigned int>& forbiddenValues)
+const bool EngineGuiGlobalScreen::checkValueForm(const string& ID, unsigned int& value, const vector<unsigned int>& forbiddenValues)
 {
 	// Convert from unsigned integer to string
 	vector<string> forbiddenValueStrings;
@@ -42,7 +42,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, unsigned int& value
 	return result; // Return
 }
 
-bool EngineGuiGlobalScreen::checkValueForm(const string& ID, int& value, const vector<int>& forbiddenValues)
+const bool EngineGuiGlobalScreen::checkValueForm(const string& ID, int& value, const vector<int>& forbiddenValues)
 {
 	// Convert from integer to string
 	vector<string> forbiddenValueStrings;
@@ -58,7 +58,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, int& value, const v
 	return result; // Return
 }
 
-bool EngineGuiGlobalScreen::checkValueForm(const string& ID, float& value, const vector<float>& forbiddenValues)
+const bool EngineGuiGlobalScreen::checkValueForm(const string& ID, float& value, const vector<float>& forbiddenValues)
 {
 	// Convert from float to integer to string
 	vector<string> forbiddenValueStrings;
@@ -74,7 +74,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, float& value, const
 	return result; // Return
 }
 
-bool EngineGuiGlobalScreen::checkValueForm(const string& ID, double& value, const vector<double>& forbiddenValues)
+const bool EngineGuiGlobalScreen::checkValueForm(const string& ID, double& value, const vector<double>& forbiddenValues)
 {
 	// Convert from double to integer to string
 	vector<string> forbiddenValueStrings;
@@ -90,22 +90,22 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, double& value, cons
 	return result; // Return
 }
 
-bool EngineGuiGlobalScreen::checkValueForm(const string& ID, string& value, const vector<string>& forbiddenValues)
+const bool EngineGuiGlobalScreen::checkValueForm(const string& ID, string& value, const vector<string>& forbiddenValues)
 {
 	return _checkValueForm(ID, value, forbiddenValues);
 }
 
-bool EngineGuiGlobalScreen::isValueFormConfirmed()
+const bool EngineGuiGlobalScreen::isValueFormConfirmed() const
 {
 	return (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_done")->isHovered());
 }
 
-bool EngineGuiGlobalScreen::isValueFormCancelled()
+const bool EngineGuiGlobalScreen::isValueFormCancelled() const
 {
 	return (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_cancel")->isHovered());
 }
 
-bool EngineGuiGlobalScreen::isValueFormExisting(const string& ID)
+const bool EngineGuiGlobalScreen::isValueFormExisting(const string& ID) const
 {
 	return find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) != _valueFormIDs.end();
 }
@@ -140,7 +140,7 @@ void EngineGuiGlobalScreen::_createValueForm(const string& ID, string title, str
 	}
 }
 
-bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueString, const vector<string>& forbiddenValueStrings)
+const bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueString, const vector<string>& forbiddenValueStrings)
 {
 	bool changed = false;
 
@@ -228,7 +228,7 @@ void EngineGuiGlobalScreen::createChoiceForm(const string& ID, string title, Vec
 	_choiceFormID = ID;
 }
 
-const string EngineGuiGlobalScreen::checkChoiceForm(const string& ID)
+const string& EngineGuiGlobalScreen::checkChoiceForm(const string& ID)
 {
 	if(ID == _choiceFormID)
 	{
@@ -244,7 +244,7 @@ const string EngineGuiGlobalScreen::checkChoiceForm(const string& ID)
 	return "";
 }
 
-bool EngineGuiGlobalScreen::isChoiceFormCancelled(const string& ID)
+const bool EngineGuiGlobalScreen::isChoiceFormCancelled(const string& ID) const
 {
 	if(ID == _choiceFormID)
 	{
@@ -275,7 +275,7 @@ void EngineGuiGlobalScreen::deleteChoiceForm(const string& ID)
 	_choiceFormID = "";
 }
 
-bool EngineGuiGlobalScreen::isChoiceFormExisting(const string& ID)
+const bool EngineGuiGlobalScreen::isChoiceFormExisting(const string& ID) const
 {
 	return (ID == _choiceFormID);
 }
@@ -299,7 +299,7 @@ void EngineGuiGlobalScreen::createAnswerForm(const string& ID, string title, Vec
 	_answerFormID = ID;
 }
 
-bool EngineGuiGlobalScreen::isAnswerFormConfirmed(const string& ID)
+const bool EngineGuiGlobalScreen::isAnswerFormConfirmed(const string& ID)
 {
 	if(ID == _answerFormID)
 	{
@@ -315,7 +315,7 @@ bool EngineGuiGlobalScreen::isAnswerFormConfirmed(const string& ID)
 	return false;
 }
 
-bool EngineGuiGlobalScreen::isAnswerFormDenied(const string& ID)
+const bool EngineGuiGlobalScreen::isAnswerFormDenied(const string& ID)
 {
 	if(isButtonExisting("answer_form_no") && (ID == _answerFormID))
 	{
@@ -350,7 +350,7 @@ void EngineGuiGlobalScreen::_deleteAnswerForm(const string& ID)
 	_answerFormID = "";
 }
 
-bool EngineGuiGlobalScreen::isAnswerFormExisting(const string& ID)
+const bool EngineGuiGlobalScreen::isAnswerFormExisting(const string& ID) const
 {
 	return (ID == _answerFormID);
 }
@@ -383,7 +383,7 @@ void EngineGuiGlobalScreen::setFocus(bool focused)
 	_isFocused = focused;
 }
 
-bool EngineGuiGlobalScreen::isFocused()
+const bool EngineGuiGlobalScreen::isFocused() const
 {
 	return _isFocused;
 }

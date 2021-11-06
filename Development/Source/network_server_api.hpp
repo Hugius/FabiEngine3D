@@ -33,34 +33,34 @@ public:
 	void stop();
 
 	// Strings
-	const vector<string> getClientIPs();
-	const vector<string> getClientUsernames();
-	const string& getNewClientIP();
-	const string& getNewClientUsername();
-	const string getOldClientIP();
-	const string getOldClientUsername();
+	const vector<string> getClientIPs() const;
+	const vector<string> getClientUsernames() const;
+	const string& getNewClientIP() const;
+	const string& getNewClientUsername() const;
+	const string getOldClientIP() const;
+	const string getOldClientUsername() const;
 
 	// Booleans
-	bool isRunning();
-	bool isClientConnected(const string& username);
+	const bool isRunning() const;
+	const bool isClientConnected(const string& username) const;
 
 	// Miscellaneous
-	const vector<NetworkClientMessage>& getPendingMessages();
+	const vector<NetworkClientMessage>& getPendingMessages() const;
 
 private:
 	// Voids
 	void _disconnectClient(SOCKET socket);
 
 	// Strings
-	tuple<int, int, long long, string> _waitForMessageTCP(SOCKET socket);
-	tuple<int, int, string, string, string> _receiveMessageUDP(SOCKET socket);
+	tuple<int, int, long long, string> _waitForMessageTCP(SOCKET socket) const;
+	tuple<int, int, string, string, string> _receiveMessageUDP(SOCKET socket) const;
 
 	// Booleans
-	bool _sendMessageTCP(SOCKET socket, const string& content, bool isReserved);
-	bool _sendMessageUDP(const string& clientIP, const string& clientPort, const string& content, bool isReserved);
+	const bool _sendMessageTCP(SOCKET socket, const string& content, bool isReserved);
+	const bool _sendMessageUDP(const string& clientIP, const string& clientPort, const string& content, bool isReserved) const;
 
 	// Miscellaneous
-	SOCKET _waitForClientConnection(SOCKET socket);
+	const SOCKET _waitForClientConnection(SOCKET socket) const;
 
 	// Strings
 	vector<future<tuple<int, int, long long, string>>> _messageThreadsTCP;

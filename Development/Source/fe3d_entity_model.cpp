@@ -599,7 +599,7 @@ const vector<Vec3>& FabiEngine3D::modelEntity_getInstancedOffsets(const string& 
 	}
 }
 
-const vector<string>& FabiEngine3D::modelEntity_getPartIDs(const string& ID)
+const vector<string> FabiEngine3D::modelEntity_getPartIDs(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getPartIDs();
 }

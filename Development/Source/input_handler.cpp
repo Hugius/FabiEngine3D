@@ -111,37 +111,37 @@ void InputHandler::setLocked(bool locked)
 	_isLocked = locked;
 }
 
-const bool InputHandler::isLocked()
+const bool InputHandler::isLocked() const
 {
 	return _isLocked;
 }
 
-const bool InputHandler::isKeyDown(InputType key)
+const bool InputHandler::isKeyDown(InputType key) const
 {
 	return _isInVector(_keysDown, key);
 }
 
-const bool InputHandler::isKeyPressed(InputType key)
+const bool InputHandler::isKeyPressed(InputType key) const
 {
 	return _isInVector(_keysPressed, key);
 }
 
-const bool InputHandler::isMouseDown(InputType button)
+const bool InputHandler::isMouseDown(InputType button) const
 {
 	return _isInVector(_mouseDown, button);
 }
 
-const bool InputHandler::isMousePressed(InputType button)
+const bool InputHandler::isMousePressed(InputType button) const
 {
 	return _isInVector(_mousePressed, button);
 }
 
-const int InputHandler::getMouseWheelX()
+const int InputHandler::getMouseWheelX() const
 {
 	return _mouseWheelX;
 }
 
-const int InputHandler::getMouseWheelY()
+const int InputHandler::getMouseWheelY() const
 {
 	return _mouseWheelY;
 }

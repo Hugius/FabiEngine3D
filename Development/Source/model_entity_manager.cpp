@@ -197,7 +197,7 @@ void ModelEntityManager::setLevelOfDetailDistance(float distance)
 	_levelOfDetailDistance = max(0.0f, distance);
 }
 
-float ModelEntityManager::getLevelOfDetailDistance()
+const float ModelEntityManager::getLevelOfDetailDistance() const
 {
 	return _levelOfDetailDistance;
 }

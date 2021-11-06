@@ -1,17 +1,17 @@
 #include "network_client_api.hpp"
 #include "logger.hpp"
 
-const bool NetworkClientAPI::isValidServerIP(const string& serverIP)
+const bool NetworkClientAPI::isValidServerIP(const string& serverIP) const
 {
 	return (NetworkUtils::isValidIP(serverIP) && (serverIP != "0.0.0.0"));
 }
 
-const bool NetworkClientAPI::isRunning()
+const bool NetworkClientAPI::isRunning() const
 {
 	return _isRunning;
 }
 
-const bool NetworkClientAPI::isConnectingToServer()
+const bool NetworkClientAPI::isConnectingToServer() const
 {
 	// Must be running
 	if(!_isRunning)
@@ -22,7 +22,7 @@ const bool NetworkClientAPI::isConnectingToServer()
 	return _isConnectingToServer;
 }
 
-const bool NetworkClientAPI::isConnectedToServer()
+const bool NetworkClientAPI::isConnectedToServer() const
 {
 	// Must be running
 	if(!_isRunning)
@@ -33,7 +33,7 @@ const bool NetworkClientAPI::isConnectedToServer()
 	return _isConnectedToServer;
 }
 
-const bool NetworkClientAPI::isAcceptedByServer()
+const bool NetworkClientAPI::isAcceptedByServer() const
 {
 	// Must be running
 	if(!_isRunning)
@@ -44,7 +44,7 @@ const bool NetworkClientAPI::isAcceptedByServer()
 	return _isAcceptedByServer;
 }
 
-const unsigned int NetworkClientAPI::getPingLatency()
+const unsigned int NetworkClientAPI::getPingLatency() const
 {
 	// Must be running
 	if(!_isRunning)
@@ -76,12 +76,12 @@ const unsigned int NetworkClientAPI::getPingLatency()
 	return averagePing;
 }
 
-const string& NetworkClientAPI::getUsername()
+const string& NetworkClientAPI::getUsername() const
 {
 	return _username;
 }
 
-const string& NetworkClientAPI::getServerIP()
+const string& NetworkClientAPI::getServerIP() const
 {
 	// Must be running
 	if(!_isRunning)
@@ -98,7 +98,7 @@ const string& NetworkClientAPI::getServerIP()
 	return _serverIP;
 }
 
-const vector<NetworkServerMessage>& NetworkClientAPI::getPendingMessages()
+const vector<NetworkServerMessage>& NetworkClientAPI::getPendingMessages() const
 {
 	// Must be running
 	if(!_isRunning)

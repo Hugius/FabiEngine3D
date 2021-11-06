@@ -63,12 +63,12 @@ void ScriptFile::changeID(const string& newID)
 	_ID = newID;
 }
 
-const string& ScriptFile::getID()
+const string& ScriptFile::getID() const
 {
 	return _ID;
 }
 
-const string& ScriptFile::getLineText(unsigned int index)
+const string& ScriptFile::getLineText(unsigned int index) const
 {
 	if(index >= _lines.size())
 	{
@@ -80,22 +80,22 @@ const string& ScriptFile::getLineText(unsigned int index)
 	}
 }
 
-unsigned int ScriptFile::getLineCount()
+const unsigned int ScriptFile::getLineCount() const
 {
 	return static_cast<unsigned int>(_lines.size());
 }
 
-unsigned int ScriptFile::getCursorLineIndex()
+const unsigned int ScriptFile::getCursorLineIndex() const
 {
 	return _cursorLineIndex;
 }
 
-unsigned int ScriptFile::getCursorCharIndex()
+const unsigned int ScriptFile::getCursorCharIndex() const
 {
 	return _cursorCharIndex;
 }
 
-const vector<string>& ScriptFile::getLines()
+const vector<string>& ScriptFile::getLines() const
 {
 	return _lines;
 }

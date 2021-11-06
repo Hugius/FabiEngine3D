@@ -16,29 +16,29 @@ public:
 	void setTerrainPointingPrecision(float precision);
 
 	// Decimals
-	float getTerrainPointingDistance();
-	float getTerrainPointingPrecision();
-	float calculateRayBoxIntersectionDistance(Ray ray, Box box);
+	const float getTerrainPointingDistance() const;
+	const float getTerrainPointingPrecision() const;
+	const float calculateRayBoxIntersectionDistance(Ray ray, Box box) const;
 
 	// Vectors
-	Ray getCursorRay();
-	Vec3 getTerrainPoint();
-	Vec3 getPointOnRay(Ray ray, float distance);
+	const Ray getCursorRay() const;
+	const Vec3 getTerrainPoint() const;
+	const Vec3 getPointOnRay(Ray ray, float distance) const;
 
 	// Booleans
-	bool isTerrainPointingEnabled();
+	const bool isTerrainPointingEnabled() const;
 
 private:
 	// Vectors
-	Vec4 _convertToViewSpace(Vec4 clipCoords);
-	Vec3 _convertToWorldSpace(Vec4 viewCoords);
-	Vec3 _calculateTerrainPoint();
+	const Vec4 _convertToViewSpace(Vec4 clipCoords) const;
+	const Vec3 _convertToWorldSpace(Vec4 viewCoords) const;
+	const Vec3 _calculateTerrainPoint() const;
 
 	// Booleans
-	bool _isUnderTerrain(float distance);
+	const bool _isUnderTerrain(float distance) const;
 
 	// Miscellaneous
-	Ray _calculateCursorRay(Ivec2 cursorPosition);
+	const Ray _calculateCursorRay(Ivec2 cursorPosition) const;
 
 	// Vectors
 	Ray _cursorRay = Ray(Vec3(0.0f), Vec3(0.0f));

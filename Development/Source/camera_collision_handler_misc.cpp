@@ -54,22 +54,22 @@ void CameraCollisionHandler::disableCameraTerrainResponse()
 	_isCameraTerrainResponseEnabled = false;
 }
 
-bool CameraCollisionHandler::isCameraUnderTerrain()
+const bool CameraCollisionHandler::isCameraUnderTerrain() const
 {
 	return _isCameraUnderTerrain;
 }
 
-bool CameraCollisionHandler::isCameraAabbResponseEnabled()
+const bool CameraCollisionHandler::isCameraAabbResponseEnabled() const
 {
 	return _isCameraAabbResponseEnabled;
 }
 
-bool CameraCollisionHandler::isCameraTerrainResponseEnabled()
+const bool CameraCollisionHandler::isCameraTerrainResponseEnabled() const
 {
 	return _isCameraTerrainResponseEnabled;
 }
 
-bool CameraCollisionHandler::_handleCollision(Direction direction, const unordered_map<string, shared_ptr<AabbEntity>>& aabbs, Camera& camera)
+const bool CameraCollisionHandler::_handleCollision(Direction direction, const unordered_map<string, shared_ptr<AabbEntity>>& aabbs, Camera& camera) const
 {
 	for(const auto& [keyID, aabb] : aabbs)
 	{

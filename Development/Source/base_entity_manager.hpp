@@ -35,7 +35,7 @@ public:
 	void deleteAllEntities();
 
 	// Booleans
-	bool isExisting(const string& ID);
+	const bool isExisting(const string& ID);
 
 protected:
 	// Voids

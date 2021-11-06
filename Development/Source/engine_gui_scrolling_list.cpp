@@ -202,7 +202,7 @@ void EngineGuiScrollingList::_updateButtons(bool hoverable)
 	}
 }
 
-Vec2 EngineGuiScrollingList::_convertPosition(Vec2 position)
+const Vec2 EngineGuiScrollingList::_convertPosition(Vec2 position) const
 {
 	Vec2 listPosition = _fe3d.imageEntity_getPosition(_entityID);
 	Vec2 listSize = _fe3d.imageEntity_getSize(_entityID);
@@ -210,7 +210,7 @@ Vec2 EngineGuiScrollingList::_convertPosition(Vec2 position)
 	return buttonPosition;
 }
 
-Vec2 EngineGuiScrollingList::_convertSize(Vec2 size)
+const Vec2 EngineGuiScrollingList::_convertSize(Vec2 size) const
 {
 	Vec2 listPosition = _fe3d.imageEntity_getPosition(_entityID);
 	Vec2 listSize = _fe3d.imageEntity_getSize(_entityID);
@@ -218,12 +218,12 @@ Vec2 EngineGuiScrollingList::_convertSize(Vec2 size)
 	return buttonSize;
 }
 
-bool EngineGuiScrollingList::isHovered()
+const bool EngineGuiScrollingList::isHovered() const
 {
 	return _isHovered;
 }
 
-shared_ptr<EngineGuiButton> EngineGuiScrollingList::getButton(const string& ID)
+shared_ptr<EngineGuiButton> EngineGuiScrollingList::getButton(const string& ID) const
 {
 	for(const auto& button : _buttons)
 	{
@@ -236,7 +236,7 @@ shared_ptr<EngineGuiButton> EngineGuiScrollingList::getButton(const string& ID)
 	return nullptr;
 }
 
-vector<shared_ptr<EngineGuiButton>>& EngineGuiScrollingList::getButtons()
+const vector<shared_ptr<EngineGuiButton>>& EngineGuiScrollingList::getButtons() const
 {
 	return _buttons;
 }

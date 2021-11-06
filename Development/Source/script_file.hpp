@@ -18,14 +18,14 @@ public:
 	void changeID(const string& newID);
 
 	// Strings
-	const vector<string>& getLines();
-	const string& getID();
-	const string& getLineText(unsigned int index);
+	const vector<string>& getLines() const;
+	const string& getID() const;
+	const string& getLineText(unsigned int index) const;
 
 	// Integers
-	unsigned int getLineCount();
-	unsigned int getCursorLineIndex();
-	unsigned int getCursorCharIndex();
+	const unsigned int getLineCount() const;
+	const unsigned int getCursorLineIndex() const;
+	const unsigned int getCursorCharIndex() const;
 
 private:
 	// Strings

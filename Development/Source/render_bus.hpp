@@ -92,94 +92,94 @@ public:
 	void setBloomType(BloomType value);
 
 	// Strings
-	const string& getCursorEntityID();
-	const string& getLensFlareMapPath();
+	const string& getCursorEntityID() const;
+	const string& getLensFlareMapPath() const;
 
 	// Matrices
-	const Matrix44 getViewMatrix();
-	const Matrix44 getProjectionMatrix();
-	const Matrix44 getShadowMatrix();
+	const Matrix44 getViewMatrix() const;
+	const Matrix44 getProjectionMatrix() const;
+	const Matrix44 getShadowMatrix() const;
 
 	// Vectors
-	const Vec4 getClippingPlane();
-	const Vec3 getCameraPosition();
-	const Vec3 getCameraFront();
-	const Vec3 getAmbientLightingColor();
-	const Vec3 getDirectionalLightingColor();
-	const Vec3 getDirectionalLightingPosition();
-	const Vec3 getShadowEyePosition();
-	const Vec3 getShadowCenterPosition();
-	const Vec3 getFogColor();
-	const Vec3 getFlareSourcePosition();
-	const Vec2 getFlareSourceUV();
+	const Vec4 getClippingPlane() const;
+	const Vec3 getCameraPosition() const;
+	const Vec3 getCameraFront() const;
+	const Vec3 getAmbientLightingColor() const;
+	const Vec3 getDirectionalLightingColor() const;
+	const Vec3 getDirectionalLightingPosition() const;
+	const Vec3 getShadowEyePosition() const;
+	const Vec3 getShadowCenterPosition() const;
+	const Vec3 getFogColor() const;
+	const Vec3 getFlareSourcePosition() const;
+	const Vec2 getFlareSourceUV() const;
 
 	// Decimals
-	const float getAmbientLightingIntensity();
-	const float getDirectionalLightingIntensity();
-	const float getFogMinDistance();
-	const float getFogMaxDistance();
-	const float getFogThickness();
-	const float getBloomIntensity();
-	const float getCameraYaw();
-	const float getCameraPitch();
-	const float getNearDistance();
-	const float getFarDistance();
-	const float getDofMaxDistance();
-	const float getDofBlurDistance();
-	const float getPlanarReflectionHeight();
-	const float getShadowAreaSize();
-	const float getShadowAreaReach();
-	const float getShadowLightness();
-	const float getLensFlareAlpha();
-	const float getLensFlareIntensity();
-	const float getLensFlareSensitivity();
-	const float getMotionBlurStrength();
-	const float getMotionBlurMixValue();
-	const float getSkyMixValue();
+	const float getAmbientLightingIntensity() const;
+	const float getDirectionalLightingIntensity() const;
+	const float getFogMinDistance() const;
+	const float getFogMaxDistance() const;
+	const float getFogThickness() const;
+	const float getBloomIntensity() const;
+	const float getCameraYaw() const;
+	const float getCameraPitch() const;
+	const float getNearDistance() const;
+	const float getFarDistance() const;
+	const float getDofMaxDistance() const;
+	const float getDofBlurDistance() const;
+	const float getPlanarReflectionHeight() const;
+	const float getShadowAreaSize() const;
+	const float getShadowAreaReach() const;
+	const float getShadowLightness() const;
+	const float getLensFlareAlpha() const;
+	const float getLensFlareIntensity() const;
+	const float getLensFlareSensitivity() const;
+	const float getMotionBlurStrength() const;
+	const float getMotionBlurMixValue() const;
+	const float getSkyMixValue() const;
 
 	// Integers
-	const unsigned int getBloomSize();
-	const unsigned int getDofSize();
-	const unsigned int getMotionBlurSize();
-	const unsigned int getShadowQuality();
-	const unsigned int getCubeReflectionQuality();
-	const unsigned int getPlanarReflectionQuality();
-	const unsigned int getRefractionQuality();
-	const unsigned int getBloomBlurCount();
-	const unsigned int getTriangleCount();
+	const unsigned int getBloomSize() const;
+	const unsigned int getDofSize() const;
+	const unsigned int getMotionBlurSize() const;
+	const unsigned int getShadowQuality() const;
+	const unsigned int getCubeReflectionQuality() const;
+	const unsigned int getPlanarReflectionQuality() const;
+	const unsigned int getRefractionQuality() const;
+	const unsigned int getBloomBlurCount() const;
+	const unsigned int getTriangleCount() const;
 
 	// Booleans
-	const bool isReflectionsEnabled();
-	const bool isAntiAliasingEnabled();
-	const bool isAmbientLightingEnabled();
-	const bool isDirectionalLightingEnabled();
-	const bool isFogEnabled();
-	const bool isBloomEnabled();
-	const bool isShadowsEnabled();
-	const bool isDofEnabled();
-	const bool isMotionBlurEnabled();
-	const bool isLensFlareEnabled();
-	const bool isWireFrameRenderingEnabled();
-	const bool isAabbFrameRenderingEnabled();
-	const bool isShadowFrameRenderingEnabled();
-	const bool isDebugRenderingEnabled();
-	const bool isTriangleCountingEnabled();
-	const bool isDofDynamic();
+	const bool isReflectionsEnabled() const;
+	const bool isAntiAliasingEnabled() const;
+	const bool isAmbientLightingEnabled() const;
+	const bool isDirectionalLightingEnabled() const;
+	const bool isFogEnabled() const;
+	const bool isBloomEnabled() const;
+	const bool isShadowsEnabled() const;
+	const bool isDofEnabled() const;
+	const bool isMotionBlurEnabled() const;
+	const bool isLensFlareEnabled() const;
+	const bool isWireFrameRenderingEnabled() const;
+	const bool isAabbFrameRenderingEnabled() const;
+	const bool isShadowFrameRenderingEnabled() const;
+	const bool isDebugRenderingEnabled() const;
+	const bool isTriangleCountingEnabled() const;
+	const bool isDofDynamic() const;
 
 	// Miscellaneous
-	const TextureID getPrimarySceneMap();
-	const TextureID getSecondarySceneMap();
-	const TextureID getPlanarReflectionMap();
-	const TextureID getWaterReflectionMap();
-	const TextureID getWaterRefractionMap();
-	const TextureID getShadowMap();
-	const TextureID getBloomMap();
-	const TextureID getDepthMap();
-	const TextureID getDofMap();
-	const TextureID getLensFlareMap();
-	const TextureID getFinalSceneMap();
-	const TextureID getMotionBlurMap();
-	const BloomType getBloomType();
+	const TextureID getPrimarySceneMap() const;
+	const TextureID getSecondarySceneMap() const;
+	const TextureID getPlanarReflectionMap() const;
+	const TextureID getWaterReflectionMap() const;
+	const TextureID getWaterRefractionMap() const;
+	const TextureID getShadowMap() const;
+	const TextureID getBloomMap() const;
+	const TextureID getDepthMap() const;
+	const TextureID getDofMap() const;
+	const TextureID getLensFlareMap() const;
+	const TextureID getFinalSceneMap() const;
+	const TextureID getMotionBlurMap() const;
+	const BloomType getBloomType() const;
 
 private:
 	// Textures

@@ -17,7 +17,7 @@ public:
 	void deleteAllMusic();
 
 	// Booleans
-	bool isSoundExisting(const string& ID);
+	const bool isSoundExisting(const string& ID) const;
 
 	// Miscellaneous
 	vector<Sound>& getSounds();
@@ -26,7 +26,7 @@ public:
 
 private:
 	// Integers
-	int _findIndex(const string& ID);
+	const int _findIndex(const string& ID) const;
 
 	// Miscellaneous
 	vector<Sound> _soundList;

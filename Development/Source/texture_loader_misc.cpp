@@ -156,7 +156,7 @@ BEGIN:
 	}
 }
 
-const unsigned int TextureLoader::getAnisotropicFilteringQuality()
+const unsigned int TextureLoader::getAnisotropicFilteringQuality()const
 {
 	return _anisotropicFilteringQuality;
 }

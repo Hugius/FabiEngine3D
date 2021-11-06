@@ -16,14 +16,14 @@ public:
 	void unloadTerrainEntities();
 
 	// Strings
-	const vector<string> getAllTerrainBitmapPathsFromFile();
-	const vector<string> getAllTerrainTexturePathsFromFile();
+	const vector<string> getAllTerrainBitmapPathsFromFile() const;
+	const vector<string> getAllTerrainTexturePathsFromFile() const;
 	const vector<string>& getLoadedTerrainIDs();
 
 	// Booleans
-	bool loadTerrainEntitiesFromFile();
-	bool saveTerrainEntitiesToFile();
-	bool isLoaded();
+	const bool loadTerrainEntitiesFromFile();
+	const bool saveTerrainEntitiesToFile() const;
+	const bool isLoaded() const;
 
 private:
 	// Voids

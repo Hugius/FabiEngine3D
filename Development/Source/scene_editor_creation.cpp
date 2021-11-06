@@ -1,7 +1,7 @@
 #include "scene_editor.hpp"
 #include "logger.hpp"
 
-bool SceneEditor::_copyPreviewSky(const string& newID, const string& previewID)
+const bool SceneEditor::_copyPreviewSky(const string& newID, const string& previewID)
 {
 	// Error checking
 	if(_fe3d.skyEntity_isExisting(newID))
@@ -29,7 +29,7 @@ bool SceneEditor::_copyPreviewSky(const string& newID, const string& previewID)
 	return true;
 }
 
-bool SceneEditor::_copyPreviewTerrain(const string& newID, const string& previewID)
+const bool SceneEditor::_copyPreviewTerrain(const string& newID, const string& previewID)
 {
 	// Error checking
 	if(_fe3d.terrainEntity_isExisting(newID))
@@ -124,7 +124,7 @@ bool SceneEditor::_copyPreviewTerrain(const string& newID, const string& preview
 	return true;
 }
 
-bool SceneEditor::_copyPreviewWater(const string& newID, const string& previewID)
+const bool SceneEditor::_copyPreviewWater(const string& newID, const string& previewID)
 {
 	// Error checking
 	if(_fe3d.waterEntity_isExisting(newID))
@@ -187,7 +187,7 @@ bool SceneEditor::_copyPreviewWater(const string& newID, const string& previewID
 	return true;
 }
 
-bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool fromOutside)
+const bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool fromOutside)
 {
 	// Error checking
 	if(_fe3d.modelEntity_isExisting(newID) && !_fe3d.modelEntity_isInstanced(previewID))
@@ -295,7 +295,7 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 	return true;
 }
 
-bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool fromOutside)
+const bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool fromOutside)
 {
 	// Error checking
 	if(_fe3d.billboardEntity_isExisting(newID))
@@ -367,7 +367,7 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 	return true;
 }
 
-bool SceneEditor::_copyPreviewSound(const string& newID, const string& previewID, Vec3 position, bool fromOutside)
+const bool SceneEditor::_copyPreviewSound(const string& newID, const string& previewID, Vec3 position, bool fromOutside)
 {
 	// Error checking
 	if(_fe3d.sound_isExisting(newID))

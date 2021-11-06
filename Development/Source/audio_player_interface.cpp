@@ -253,7 +253,7 @@ void AudioPlayer::setMusicVolume(float volume)
 	}
 }
 
-float AudioPlayer::getMusicVolume()
+const float AudioPlayer::getMusicVolume() const
 {
 	if(_isMusicEnabled)
 	{
@@ -263,7 +263,7 @@ float AudioPlayer::getMusicVolume()
 	return -1.0f;
 }
 
-bool AudioPlayer::isChannelAvailable()
+const bool AudioPlayer::isChannelAvailable() const
 {
 	for(size_t i = 0; i < _channels.size(); i++)
 	{
@@ -276,12 +276,12 @@ bool AudioPlayer::isChannelAvailable()
 	return false;
 }
 
-bool AudioPlayer::isSoundsEnabled()
+const bool AudioPlayer::isSoundsEnabled() const
 {
 	return _isSoundsEnabled;
 }
 
-bool AudioPlayer::isSoundStarted(Sound& sound)
+const bool AudioPlayer::isSoundStarted(Sound& sound) const
 {
 	if(_isSoundsEnabled)
 	{
@@ -297,7 +297,7 @@ bool AudioPlayer::isSoundStarted(Sound& sound)
 	return false;
 }
 
-bool AudioPlayer::isSoundPlaying(Sound& sound)
+const bool AudioPlayer::isSoundPlaying(Sound& sound) const
 {
 	if(_isSoundsEnabled)
 	{
@@ -307,7 +307,7 @@ bool AudioPlayer::isSoundPlaying(Sound& sound)
 	return false;
 }
 
-bool AudioPlayer::isSoundPaused(Sound& sound)
+const bool AudioPlayer::isSoundPaused(Sound& sound) const
 {
 	if(_isSoundsEnabled)
 	{
@@ -317,12 +317,12 @@ bool AudioPlayer::isSoundPaused(Sound& sound)
 	return false;
 }
 
-bool AudioPlayer::isMusicEnabled()
+const bool AudioPlayer::isMusicEnabled() const
 {
 	return _isMusicEnabled;
 }
 
-bool AudioPlayer::isMusicStarted()
+const bool AudioPlayer::isMusicStarted() const
 {
 	if(_isMusicEnabled)
 	{
@@ -332,7 +332,7 @@ bool AudioPlayer::isMusicStarted()
 	return false;
 }
 
-bool AudioPlayer::isMusicPlaying()
+const bool AudioPlayer::isMusicPlaying() const
 {
 	if(_isMusicEnabled)
 	{
@@ -342,7 +342,7 @@ bool AudioPlayer::isMusicPlaying()
 	return false;
 }
 
-bool AudioPlayer::isMusicPaused()
+const bool AudioPlayer::isMusicPaused() const
 {
 	if(_isMusicEnabled)
 	{

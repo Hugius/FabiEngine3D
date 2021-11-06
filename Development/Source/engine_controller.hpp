@@ -18,7 +18,7 @@ public:
 	void FE3D_CONTROLLER_DESTROY();
 
 	// Booleans
-	bool mustPromptOnExit();
+	const bool mustPromptOnExit() const;
 
 private:
 	// Strings

@@ -114,7 +114,7 @@ void AudioPlayer::setMusicEnabled(bool value)
 	_isMusicEnabled = value;
 }
 
-unsigned int AudioPlayer::getUsedChannelCount()
+const unsigned int AudioPlayer::getUsedChannelCount() const
 {
 	int count = 0;
 
@@ -129,7 +129,7 @@ unsigned int AudioPlayer::getUsedChannelCount()
 	return count;
 }
 
-unsigned int AudioPlayer::getAllocatedChannelCount()
+const unsigned int AudioPlayer::getAllocatedChannelCount() const
 {
 	return static_cast<unsigned int>(_channels.size());
 }
@@ -160,7 +160,7 @@ void AudioPlayer::_updateMusicVolume()
 	}
 }
 
-vector<int> AudioPlayer::_findSoundChannels(Sound& sound)
+const  vector<int> AudioPlayer::_findSoundChannels(Sound& sound) const
 {
 	vector<int> channels;
 
@@ -181,7 +181,7 @@ vector<int> AudioPlayer::_findSoundChannels(Sound& sound)
 	return channels;
 }
 
-int AudioPlayer::_getFreeChannel()
+const  int AudioPlayer::_getFreeChannel() const
 {
 	for(size_t i = 0; i < _channels.size(); i++)
 	{

@@ -123,12 +123,12 @@ void ScriptEditor::setCurrentProjectID(const string& projectID)
 	_scriptExecutor.setCurrentProjectID(projectID);
 }
 
-bool ScriptEditor::isLoaded()
+const bool ScriptEditor::isLoaded() const
 {
 	return _isEditorLoaded;
 }
 
-bool ScriptEditor::isWritingScript()
+const bool ScriptEditor::isWritingScript() const
 {
 	return !_currentScriptFileID.empty();
 }

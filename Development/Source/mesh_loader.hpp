@@ -22,6 +22,8 @@ public:
 
 private:
 	// Miscellaneous
-	pair<string, vector<shared_ptr<MeshPart>>> _loadMesh(const string& filePathe);
+	pair<string, vector<shared_ptr<MeshPart>>> _loadMesh(const string& filePath);
+
+	// Miscellaneous
 	map<string, vector<shared_ptr<MeshPart>>> _meshCache;
 };

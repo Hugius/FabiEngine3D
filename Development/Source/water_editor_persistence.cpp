@@ -10,7 +10,7 @@ using std::ifstream;
 using std::ofstream;
 using std::istringstream;
 
-const vector<string> WaterEditor::getAllWaterTexturePathsFromFile()
+const vector<string> WaterEditor::getAllWaterTexturePathsFromFile() const
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -80,7 +80,7 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile()
 	return texturePaths;
 }
 
-bool WaterEditor::loadWaterEntitiesFromFile()
+const bool WaterEditor::loadWaterEntitiesFromFile()
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -205,7 +205,7 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 	return true;
 }
 
-bool WaterEditor::saveWaterEntitiesToFile()
+const bool WaterEditor::saveWaterEntitiesToFile() const
 {
 	// Editor must be loaded
 	if(!_isEditorLoaded)

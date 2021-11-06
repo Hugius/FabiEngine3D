@@ -11,7 +11,7 @@ using std::ifstream;
 using std::ofstream;
 using std::istringstream;
 
-const vector<string> ModelEditor::getAllMeshPathsFromFile()
+const vector<string> ModelEditor::getAllMeshPathsFromFile() const
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -70,7 +70,7 @@ const vector<string> ModelEditor::getAllMeshPathsFromFile()
 	return meshPaths;
 }
 
-const vector<string> ModelEditor::getAllTexturePathsFromFile()
+const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -214,7 +214,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 	return texturePaths;
 }
 
-bool ModelEditor::loadModelEntitiesFromFile()
+const bool ModelEditor::loadModelEntitiesFromFile()
 {
 	// Error checking
 	if(_currentProjectID.empty())

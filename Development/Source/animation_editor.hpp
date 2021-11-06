@@ -23,19 +23,19 @@ public:
 	void stopAllAnimations();
 
 	// Strings
-	const vector<string> getAllAnimationIDs();
-	const vector<string> getStartedAnimationIDs();
-	const vector<string> getStartedAnimationIDs(const string& modelID);
+	const vector<string> getAllAnimationIDs() const;
+	const vector<string> getStartedAnimationIDs() const;
+	const vector<string> getStartedAnimationIDs(const string& modelID) const;
 
 	// Booleans
-	bool isLoaded();
-	bool isAnimationExisting(const string& ID);
-	bool isAnimationStarted(const string& animationID, const string& modelID);
-	bool isAnimationPlaying(const string& animationID, const string& modelID);
-	bool isAnimationPaused(const string& animationID, const string& modelID);
-	bool isAnimationFading(const string& animationID, const string& modelID);
-	bool loadAnimationsFromFile(bool mustCheckPreviewModel = true);
-	bool saveAnimationsToFile();
+	const bool isLoaded() const;
+	const bool isAnimationExisting(const string& ID) const;
+	const bool isAnimationStarted(const string& animationID, const string& modelID) const;
+	const bool isAnimationPlaying(const string& animationID, const string& modelID) const;
+	const bool isAnimationPaused(const string& animationID, const string& modelID) const;
+	const bool isAnimationFading(const string& animationID, const string& modelID) const;
+	const bool loadAnimationsFromFile(bool mustCheckPreviewModel = true);
+	const bool saveAnimationsToFile() const;
 
 	// Miscellaneous
 	Animation* getAnimationData(const string& animationID, const string& modelID, string baseErrorMessage);
@@ -56,11 +56,11 @@ private:
 	void _deleteAnimation(const string& ID);
 
 	// Booleans
-	bool _hasReachedFloat(float first, float second, float speed);
-	bool _comparePartIDs(vector<string> first, vector<string> second);
+	const bool _hasReachedFloat(float first, float second, float speed) const;
+	const bool _comparePartIDs(vector<string> first, vector<string> second) const;
 
 	// Miscellaneous
-	shared_ptr<Animation> _getAnimation(const string& ID);
+	shared_ptr<Animation> _getAnimation(const string& ID) const;
 
 	// Strings
 	set<pair<string, string>> _animationsToStop;

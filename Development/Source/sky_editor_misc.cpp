@@ -7,7 +7,7 @@ void SkyEditor::setCurrentProjectID(const string& projectID)
 	_currentProjectID = projectID;
 }
 
-bool SkyEditor::isLoaded()
+const bool SkyEditor::isLoaded() const
 {
 	return _isEditorLoaded;
 }

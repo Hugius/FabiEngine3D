@@ -9,7 +9,7 @@ using std::ifstream;
 using std::ofstream;
 using std::istringstream;
 
-bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
+const bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -181,7 +181,7 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 	return true;
 }
 
-bool AnimationEditor::saveAnimationsToFile()
+const bool AnimationEditor::saveAnimationsToFile() const
 {
 	// Editor must be loaded
 	if(!_isEditorLoaded)

@@ -226,7 +226,7 @@ void EngineController::FE3D_CONTROLLER_DESTROY()
 	}
 }
 
-bool EngineController::mustPromptOnExit()
+const bool EngineController::mustPromptOnExit() const
 {
 	return _mustPromptOnExit;
 }

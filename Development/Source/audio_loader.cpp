@@ -34,7 +34,7 @@ AudioLoader::~AudioLoader()
 void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 {
 	// Temporary values
-	vector<future<char*>> threads;
+	vector<future<const char*>> threads;
 	vector<bool> threadStatuses;
 
 	// Remove duplicates
@@ -234,7 +234,7 @@ void AudioLoader::clearMusicCache(const string& filePath)
 	}
 }
 
-Mix_Chunk* AudioLoader::_loadChunk(const string& filePath, unsigned char* data)
+Mix_Chunk* AudioLoader::_loadChunk(const string& filePath, unsigned char* data) const
 {
 	// Load audio data into an SDL chunk
 	Mix_Chunk* chunk = Mix_QuickLoad_WAV(data);
@@ -248,7 +248,7 @@ Mix_Chunk* AudioLoader::_loadChunk(const string& filePath, unsigned char* data)
 	return chunk;
 }
 
-Mix_Music* AudioLoader::_loadMusic(const string& filePath)
+Mix_Music* AudioLoader::_loadMusic(const string& filePath) const
 {
 	// Get application root directory
 	const auto rootDir = Tools::getRootDirectory();
@@ -274,7 +274,7 @@ void AudioLoader::_throwLoadedMessage(const string& filePath)
 	Logger::throwInfo("Loaded ", extension, " audio file: \"" + filePath + "\""); // Log message
 }
 
-char* AudioLoader::_loadWaveFile(const string& filePath)
+const char* AudioLoader::_loadWaveFile(const string& filePath) const
 {
 	// Get application root directory
 	const auto rootDir = Tools::getRootDirectory();

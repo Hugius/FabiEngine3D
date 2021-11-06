@@ -29,11 +29,11 @@ private:
 	void _throwLoadedMessage(const string& filePath);
 
 	// Characters
-	char* _loadWaveFile(const string& filePath);
+	const char* _loadWaveFile(const string& filePath) const;
 
 	// Miscellaneous
-	Mix_Chunk* _loadChunk(const string& filePath, unsigned char* data);
-	Mix_Music* _loadMusic(const string& filePath);
+	Mix_Chunk* _loadChunk(const string& filePath, unsigned char* data) const;
+	Mix_Music* _loadMusic(const string& filePath) const;
 
 	// Miscellaneous
 	map<string, Mix_Chunk*> _chunkCache;

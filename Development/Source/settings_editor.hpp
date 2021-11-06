@@ -14,11 +14,11 @@ public:
 	void unload();
 	void update();
 	void loadDefaultSettings();
-	bool loadSettingsFromFile();
-	bool saveSettingsToFile();
 
 	// Booleans
-	bool isLoaded();
+	const bool loadSettingsFromFile() const;
+	const bool saveSettingsToFile() const;
+	const bool isLoaded() const;
 
 private:
 	// Voids

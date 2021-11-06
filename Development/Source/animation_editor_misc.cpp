@@ -8,7 +8,7 @@ void AnimationEditor::setCurrentProjectID(const string& projectID)
 	_currentProjectID = projectID;
 }
 
-bool AnimationEditor::isLoaded()
+const bool AnimationEditor::isLoaded() const
 {
 	return _isEditorLoaded;
 }
@@ -27,12 +27,12 @@ void AnimationEditor::_deleteAnimation(const string& ID)
 	Logger::throwError("AnimationEditor::_deleteAnimation");
 }
 
-bool AnimationEditor::_hasReachedFloat(float first, float second, float speed)
+const bool AnimationEditor::_hasReachedFloat(float first, float second, float speed) const
 {
 	return (first >= (second - fabsf(speed))) && (first <= (second + fabsf(speed)));
 }
 
-bool AnimationEditor::_comparePartIDs(vector<string> first, vector<string> second)
+const bool AnimationEditor::_comparePartIDs(vector<string> first, vector<string> second) const
 {
 	// Check size
 	if(first.size() != second.size())
@@ -53,7 +53,7 @@ bool AnimationEditor::_comparePartIDs(vector<string> first, vector<string> secon
 	return true;
 }
 
-shared_ptr<Animation> AnimationEditor::_getAnimation(const string& ID)
+shared_ptr<Animation> AnimationEditor::_getAnimation(const string& ID) const
 {
 	for(const auto& animation : _animations)
 	{
@@ -66,7 +66,7 @@ shared_ptr<Animation> AnimationEditor::_getAnimation(const string& ID)
 	Logger::throwError("AnimationEditor::_getAnimation");
 }
 
-const vector<string> AnimationEditor::getAllAnimationIDs()
+const vector<string> AnimationEditor::getAllAnimationIDs() const
 {
 	vector<string> IDs;
 
@@ -82,7 +82,7 @@ const vector<string> AnimationEditor::getAllAnimationIDs()
 	return IDs;
 }
 
-const vector<string> AnimationEditor::getStartedAnimationIDs()
+const vector<string> AnimationEditor::getStartedAnimationIDs() const
 {
 	set<string> names;
 
@@ -94,7 +94,7 @@ const vector<string> AnimationEditor::getStartedAnimationIDs()
 	return vector<string>(names.begin(), names.end());
 }
 
-const vector<string> AnimationEditor::getStartedAnimationIDs(const string& modelID)
+const vector<string> AnimationEditor::getStartedAnimationIDs(const string& modelID) const
 {
 	set<string> names;
 

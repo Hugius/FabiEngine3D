@@ -8,7 +8,7 @@
 using std::ifstream;
 using std::ofstream;
 
-bool SceneEditor::saveCustomSceneToFile()
+const bool SceneEditor::saveCustomSceneToFile()
 {
 	// Error checking
 	if(_currentProjectID.empty())

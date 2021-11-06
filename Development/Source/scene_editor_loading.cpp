@@ -10,7 +10,7 @@ using std::ifstream;
 using std::ofstream;
 using std::istringstream;
 
-bool SceneEditor::loadEditorSceneFromFile(const string& filename)
+const bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 {
 	// Error checking
 	if(_currentProjectID.empty())

@@ -10,7 +10,7 @@ using std::ifstream;
 using std::ofstream;
 using std::istringstream;
 
-const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
+const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -148,7 +148,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
 	return texturePaths;
 }
 
-const vector<string> TerrainEditor::getAllTerrainBitmapPathsFromFile()
+const vector<string> TerrainEditor::getAllTerrainBitmapPathsFromFile() const
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -204,7 +204,7 @@ const vector<string> TerrainEditor::getAllTerrainBitmapPathsFromFile()
 	return bitmapPaths;
 }
 
-bool TerrainEditor::loadTerrainEntitiesFromFile()
+const bool TerrainEditor::loadTerrainEntitiesFromFile()
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -374,7 +374,7 @@ bool TerrainEditor::loadTerrainEntitiesFromFile()
 	return true;
 }
 
-bool TerrainEditor::saveTerrainEntitiesToFile()
+const bool TerrainEditor::saveTerrainEntitiesToFile() const
 {
 	// Editor must be loaded
 	if(!_isEditorLoaded)

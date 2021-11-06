@@ -216,7 +216,7 @@ void SettingsEditor::loadDefaultSettings()
 	_fe3d.misc_setMaxAudioChannelCount(Config::MIN_AUDIO_CHANNELS);
 }
 
-bool SettingsEditor::loadSettingsFromFile()
+const bool SettingsEditor::loadSettingsFromFile() const
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -283,7 +283,7 @@ bool SettingsEditor::loadSettingsFromFile()
 	return true;
 }
 
-bool SettingsEditor::saveSettingsToFile()
+const bool SettingsEditor::saveSettingsToFile() const
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -335,7 +335,7 @@ void SettingsEditor::setCurrentProjectID(const string& projectID)
 	_currentProjectID = projectID;
 }
 
-bool SettingsEditor::isLoaded()
+const bool SettingsEditor::isLoaded() const
 {
 	return _isEditorLoaded;
 }

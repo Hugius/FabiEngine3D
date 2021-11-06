@@ -68,7 +68,7 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 	}
 }
 
-bool AnimationEditor::isAnimationExisting(const string& ID)
+const bool AnimationEditor::isAnimationExisting(const string& ID) const
 {
 	for(const auto& animation : _animations)
 	{
@@ -81,7 +81,7 @@ bool AnimationEditor::isAnimationExisting(const string& ID)
 	return false;
 }
 
-bool AnimationEditor::isAnimationStarted(const string& animationID, const string& modelID)
+const bool AnimationEditor::isAnimationStarted(const string& animationID, const string& modelID) const
 {
 	// Temporary values
 	string errorMessage = "Tried to retrieve animation started status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -99,7 +99,7 @@ bool AnimationEditor::isAnimationStarted(const string& animationID, const string
 	return false;
 }
 
-bool AnimationEditor::isAnimationPlaying(const string& animationID, const string& modelID)
+const bool AnimationEditor::isAnimationPlaying(const string& animationID, const string& modelID) const
 {
 	// Temporary values
 	string errorMessage = "Tried to retrieve animation playing status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -121,7 +121,7 @@ bool AnimationEditor::isAnimationPlaying(const string& animationID, const string
 	return false;
 }
 
-bool AnimationEditor::isAnimationPaused(const string& animationID, const string& modelID)
+const bool AnimationEditor::isAnimationPaused(const string& animationID, const string& modelID) const
 {
 	// Temporary values
 	string errorMessage = "Tried to retrieve animation pausing status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -143,7 +143,7 @@ bool AnimationEditor::isAnimationPaused(const string& animationID, const string&
 	return false;
 }
 
-bool AnimationEditor::isAnimationFading(const string& animationID, const string& modelID)
+const bool AnimationEditor::isAnimationFading(const string& animationID, const string& modelID) const
 {
 	// Temporary values
 	string errorMessage = "Tried to retrieve animation fading status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";

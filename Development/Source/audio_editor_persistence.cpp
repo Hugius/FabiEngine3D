@@ -9,7 +9,7 @@ using std::ifstream;
 using std::ofstream;
 using std::istringstream;
 
-const vector<string> AudioEditor::getAllAudioPathsFromFile()
+const vector<string> AudioEditor::getAllAudioPathsFromFile() const
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -59,7 +59,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile()
 	return audioPaths;
 }
 
-bool AudioEditor::loadAudioEntitiesFromFile()
+const bool AudioEditor::loadAudioEntitiesFromFile()
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -122,7 +122,7 @@ bool AudioEditor::loadAudioEntitiesFromFile()
 	return true;
 }
 
-bool AudioEditor::saveAudioEntitiesToFile()
+const bool AudioEditor::saveAudioEntitiesToFile() const
 {
 	// Editor must be loaded
 	if(!_isEditorLoaded)

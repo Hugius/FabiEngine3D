@@ -7,7 +7,7 @@ void WaterEditor::setCurrentProjectID(const string& projectID)
 	_currentProjectID = projectID;
 }
 
-bool WaterEditor::isLoaded()
+const bool WaterEditor::isLoaded() const
 {
 	return _isEditorLoaded;
 }

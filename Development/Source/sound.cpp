@@ -74,27 +74,27 @@ void Sound::setMaxDistance(float value)
 	}
 }
 
-Vec3 Sound::getPosition() const
+const Vec3 Sound::getPosition() const
 {
 	return _position;
 }
 
-float Sound::getMaxDistance() const
+const float Sound::getMaxDistance() const
 {
 	return _maxDistance;
 }
 
-float Sound::getVolume() const
+const float Sound::getVolume() const
 {
 	return _volume;
 }
 
-float Sound::getMaxVolume() const
+const float Sound::getMaxVolume() const
 {
 	return _maxVolume;
 }
 
-bool Sound::is3D() const
+const bool Sound::is3D() const
 {
 	return _is3D;
 }

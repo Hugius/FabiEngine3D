@@ -25,15 +25,15 @@ public:
 	const string& getFilePath() const;
 
 	// Vectors
-	Vec3 getPosition() const;
+	const Vec3 getPosition() const;
 
 	// Decimals
-	float getVolume() const;
-	float getMaxVolume() const;
-	float getMaxDistance() const;
+	const float getVolume() const;
+	const float getMaxVolume() const;
+	const float getMaxDistance() const;
 
 	// Booleans
-	bool is3D() const;
+	const bool is3D() const;
 
 	// Miscellaneous
 	Mix_Chunk* getDataPointer() const;

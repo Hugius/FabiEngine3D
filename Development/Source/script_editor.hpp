@@ -15,12 +15,12 @@ public:
 	void load();
 	void unload();
 	void update();
-	bool loadScriptFiles(bool isLoggingEnabled = true);
-	bool saveScriptFiles();
 
 	// Booleans
-	bool isLoaded();
-	bool isWritingScript();
+	const bool loadScriptFiles(bool isLoggingEnabled = true);
+	const bool saveScriptFiles();
+	const bool isLoaded() const;
+	const bool isWritingScript() const;
 
 	// Miscellaneous
 	ScriptExecutor& getScriptExecutor();

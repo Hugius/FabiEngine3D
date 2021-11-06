@@ -7,7 +7,7 @@ void TerrainEditor::setCurrentProjectID(const string& projectID)
 	_currentProjectID = projectID;
 }
 
-bool TerrainEditor::isLoaded()
+const bool TerrainEditor::isLoaded() const
 {
 	return _isEditorLoaded;
 }

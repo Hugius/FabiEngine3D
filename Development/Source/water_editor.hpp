@@ -16,13 +16,13 @@ public:
 	void unloadWaterEntities();
 
 	// Strings
-	const vector<string> getAllWaterTexturePathsFromFile();
+	const vector<string> getAllWaterTexturePathsFromFile() const;
 	const vector<string>& getLoadedWaterIDs();
 
 	// Booleans
-	bool loadWaterEntitiesFromFile();
-	bool saveWaterEntitiesToFile();
-	bool isLoaded();
+	const bool loadWaterEntitiesFromFile();
+	const bool saveWaterEntitiesToFile() const;
+	const bool isLoaded() const;
 
 private:
 	// Voids

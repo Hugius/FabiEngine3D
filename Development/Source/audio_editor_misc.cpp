@@ -7,7 +7,7 @@ void AudioEditor::setCurrentProjectID(const string& projectID)
 	_currentProjectID = projectID;
 }
 
-bool AudioEditor::isLoaded()
+const bool AudioEditor::isLoaded() const
 {
 	return _isEditorLoaded;
 }

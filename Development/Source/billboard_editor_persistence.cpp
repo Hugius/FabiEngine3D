@@ -10,7 +10,7 @@ using std::ifstream;
 using std::ofstream;
 using std::istringstream;
 
-const vector<string> BillboardEditor::getAllTexturePathsFromFile()
+const vector<string> BillboardEditor::getAllTexturePathsFromFile() const
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -85,7 +85,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 	return texturePaths;
 }
 
-const vector<string> BillboardEditor::getAllFontPathsFromFile()
+const vector<string> BillboardEditor::getAllFontPathsFromFile() const
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -154,7 +154,7 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile()
 	return fontPaths;
 }
 
-bool BillboardEditor::loadBillboardEntitiesFromFile()
+const bool BillboardEditor::loadBillboardEntitiesFromFile()
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -288,7 +288,7 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 	return true;
 }
 
-bool BillboardEditor::saveBillboardEntitiesToFile()
+const bool BillboardEditor::saveBillboardEntitiesToFile() const
 {
 	// Editor must be loaded
 	if(!_isEditorLoaded)

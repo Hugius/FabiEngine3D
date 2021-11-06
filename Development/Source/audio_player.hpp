@@ -36,22 +36,22 @@ public:
 	void setMusicVolume(float volume);
 
 	// Decimals
-	float getMusicVolume();
+	const float getMusicVolume() const;
 
 	// Integers
-	unsigned int getUsedChannelCount();
-	unsigned int getAllocatedChannelCount();
+	const unsigned int getUsedChannelCount() const;
+	const unsigned int getAllocatedChannelCount() const;
 
 	// Booleans
-	bool isChannelAvailable();
-	bool isSoundsEnabled();
-	bool isSoundStarted(Sound& sound);
-	bool isSoundPlaying(Sound& sound);
-	bool isSoundPaused(Sound& sound);
-	bool isMusicEnabled();
-	bool isMusicStarted();
-	bool isMusicPlaying();
-	bool isMusicPaused();
+	const bool isChannelAvailable() const;
+	const bool isSoundsEnabled() const;
+	const bool isSoundStarted(Sound& sound) const;
+	const bool isSoundPlaying(Sound& sound) const;
+	const bool isSoundPaused(Sound& sound) const;
+	const bool isMusicEnabled() const;
+	const bool isMusicStarted() const;
+	const bool isMusicPlaying() const;
+	const bool isMusicPaused() const;
 
 private:
 	// Voids
@@ -59,8 +59,8 @@ private:
 	void _updateMusicVolume();
 
 	// Integers
-	vector<int> _findSoundChannels(Sound& sound);
-	int _getFreeChannel();
+	const vector<int> _findSoundChannels(Sound& sound)  const;
+	const int _getFreeChannel() const;
 
 	// Strings
 	vector<string> _channels;

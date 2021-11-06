@@ -45,15 +45,15 @@ public:
 	void clearCurrentScene();
 
 	// Strings
-	const string& getLoadedSceneID();
+	const string& getLoadedSceneID() const;
 
 	// Booleans
-	bool isLoaded();
-	bool isSceneExisting(const string& filename);
-	bool loadEditorSceneFromFile(const string& filename);
-	bool saveEditorSceneToFile();
-	bool loadCustomSceneFromFile(const string& filename);
-	bool saveCustomSceneToFile();
+	const bool isLoaded() const;
+	const bool isSceneExisting(const string& filename) const;
+	const bool loadEditorSceneFromFile(const string& filename);
+	const bool saveEditorSceneToFile();
+	const bool loadCustomSceneFromFile(const string& filename);
+	const bool saveCustomSceneToFile();
 
 private:
 	// Voids
@@ -133,15 +133,15 @@ private:
 	void _handleValueChanging(const string& screenID, string buttonID, string writeFieldID, float& value, float adder, float multiplier = 1.0f, float minimum = numeric_limits<float>::lowest(), float maximum = numeric_limits<float>::max());
 
 	// Strings
-	vector<string> _loadSceneIDs();
+	const vector<string> _loadSceneIDs() const;
 
 	// Booleans
-	bool _copyPreviewSky(const string& newID, const string& previewID);
-	bool _copyPreviewTerrain(const string& newID, const string& previewID);
-	bool _copyPreviewWater(const string& newID, const string& previewID);
-	bool _copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
-	bool _copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
-	bool _copyPreviewSound(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
+	const bool _copyPreviewSky(const string& newID, const string& previewID);
+	const bool _copyPreviewTerrain(const string& newID, const string& previewID);
+	const bool _copyPreviewWater(const string& newID, const string& previewID);
+	const bool _copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
+	const bool _copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
+	const bool _copyPreviewSound(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
 
 	// Strings
 	static inline const string PREVIEW_SPEAKER_ID = "@@previewSpeaker";

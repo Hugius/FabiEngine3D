@@ -15,14 +15,14 @@ public:
 	void update();
 
 	// Strings
-	const vector<string> getAllTexturePathsFromFile();
-	const vector<string> getAllFontPathsFromFile();
+	const vector<string> getAllTexturePathsFromFile() const;
+	const vector<string> getAllFontPathsFromFile() const;
 	const vector<string>& getLoadedBillboardIDs();
 
 	// Booleans
-	bool loadBillboardEntitiesFromFile();
-	bool saveBillboardEntitiesToFile();
-	bool isLoaded();
+	const bool loadBillboardEntitiesFromFile();
+	const bool saveBillboardEntitiesToFile() const;
+	const bool isLoaded() const;
 
 private:
 	// Voids

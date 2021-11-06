@@ -67,7 +67,7 @@ void AudioManager::deleteSound(const string& ID)
 	}
 }
 
-bool AudioManager::isSoundExisting(const string& ID)
+const bool AudioManager::isSoundExisting(const string& ID) const
 {
 	return _findIndex(ID) != -1;
 }
@@ -96,7 +96,7 @@ vector<Music>& AudioManager::getMusic()
 	return _musicList;
 }
 
-int AudioManager::_findIndex(const string& ID)
+const int AudioManager::_findIndex(const string& ID) const
 {
 	for(size_t i = 0; i < _soundList.size(); i++)
 	{

@@ -35,7 +35,7 @@ public:
 	const vector<float>& loadBitmap(const string& filePath);
 
 	// Integers
-	const unsigned int getAnisotropicFilteringQuality();
+	const unsigned int getAnisotropicFilteringQuality() const;
 
 	// Miscellaneous
 	const TextureID loadTexture2D(const string& filePath, bool isMipmapped, bool isAnisotropic);

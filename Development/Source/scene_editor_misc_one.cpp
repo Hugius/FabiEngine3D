@@ -9,12 +9,12 @@ using std::clamp;
 using std::filesystem::directory_iterator;
 using std::filesystem::remove_all;
 
-bool SceneEditor::isLoaded()
+const bool SceneEditor::isLoaded() const
 {
 	return _isEditorLoaded;
 }
 
-bool SceneEditor::isSceneExisting(const string& filename)
+const bool SceneEditor::isSceneExisting(const string& filename) const
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -30,7 +30,7 @@ bool SceneEditor::isSceneExisting(const string& filename)
 	return (Tools::isFileExisting(filePath));
 }
 
-const string& SceneEditor::getLoadedSceneID()
+const string& SceneEditor::getLoadedSceneID() const
 {
 	return _loadedSceneID;
 }
@@ -300,7 +300,7 @@ void SceneEditor::_deactivateReflection()
 	_activeCameraID = "";
 }
 
-vector<string> SceneEditor::_loadSceneIDs()
+const vector<string> SceneEditor::_loadSceneIDs() const
 {
 	// Temporary values
 	vector<string> sceneIDs;

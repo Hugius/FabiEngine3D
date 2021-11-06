@@ -16,13 +16,13 @@ public:
 	void unloadSkyEntities();
 
 	// Strings
-	const vector<array<string, 6>> getAllTexturePathsFromFile();
+	const vector<array<string, 6>> getAllTexturePathsFromFile() const;
 	const vector<string>& getLoadedSkyIDs();
 
 	// Booleans
-	bool loadSkyEntitiesFromFile();
-	bool saveSkyEntitiesToFile();
-	bool isLoaded();
+	const bool loadSkyEntitiesFromFile();
+	const bool saveSkyEntitiesToFile() const;
+	const bool isLoaded() const;
 
 private:
 	// Voids

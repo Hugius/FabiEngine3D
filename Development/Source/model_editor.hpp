@@ -16,14 +16,14 @@ public:
 	void update();
 
 	// Strings
-	const vector<string> getAllMeshPathsFromFile();
-	const vector<string> getAllTexturePathsFromFile();
+	const vector<string> getAllMeshPathsFromFile() const;
+	const vector<string> getAllTexturePathsFromFile() const;
 	const vector<string>& getLoadedModelIDs();
 
 	// Booleans
-	bool loadModelEntitiesFromFile();
-	bool saveModelEntitiesToFile();
-	bool isLoaded();
+	const bool loadModelEntitiesFromFile();
+	const bool saveModelEntitiesToFile() const;
+	const bool isLoaded() const;
 
 private:
 	// Voids

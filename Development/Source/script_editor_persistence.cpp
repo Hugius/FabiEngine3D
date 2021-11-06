@@ -11,7 +11,7 @@ using std::ofstream;
 using std::istringstream;
 using std::filesystem::directory_iterator;
 
-bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
+const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -89,7 +89,7 @@ bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	return true;
 }
 
-bool ScriptEditor::saveScriptFiles()
+const bool ScriptEditor::saveScriptFiles()
 {
 	// Editor must be loaded
 	if(!_isEditorLoaded)

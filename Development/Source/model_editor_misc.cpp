@@ -23,7 +23,7 @@ void ModelEditor::setCurrentProjectID(const string& projectID)
 	_currentProjectID = projectID;
 }
 
-bool ModelEditor::isLoaded()
+const bool ModelEditor::isLoaded() const
 {
 	return _isEditorLoaded;
 }

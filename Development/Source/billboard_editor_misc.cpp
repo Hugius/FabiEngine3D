@@ -7,7 +7,7 @@ void BillboardEditor::setCurrentProjectID(const string& projectID)
 	_currentProjectID = projectID;
 }
 
-bool BillboardEditor::isLoaded()
+const bool BillboardEditor::isLoaded() const
 {
 	return _isEditorLoaded;
 }

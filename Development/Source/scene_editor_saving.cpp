@@ -8,7 +8,7 @@
 using std::ifstream;
 using std::ofstream;
 
-bool SceneEditor::saveEditorSceneToFile()
+const bool SceneEditor::saveEditorSceneToFile()
 {
 	// Must be editing a scene
 	if(_currentSceneID.empty())

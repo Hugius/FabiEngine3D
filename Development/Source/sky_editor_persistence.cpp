@@ -10,7 +10,7 @@ using std::ifstream;
 using std::ofstream;
 using std::istringstream;
 
-const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile()
+const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile() const
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -72,7 +72,7 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile()
 	return texturePaths;
 }
 
-bool SkyEditor::loadSkyEntitiesFromFile()
+const bool SkyEditor::loadSkyEntitiesFromFile()
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -159,7 +159,7 @@ bool SkyEditor::loadSkyEntitiesFromFile()
 	return true;
 }
 
-bool SkyEditor::saveSkyEntitiesToFile()
+const bool SkyEditor::saveSkyEntitiesToFile() const
 {
 	// Editor must be loaded
 	if(!_isEditorLoaded)

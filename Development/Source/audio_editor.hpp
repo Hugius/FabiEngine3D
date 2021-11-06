@@ -15,13 +15,13 @@ public:
 	void unload();
 
 	// Strings
-	const vector<string> getAllAudioPathsFromFile();
+	const vector<string> getAllAudioPathsFromFile() const;
 	const vector<string>& getLoadedAudioIDs();
 
 	// Booleans
-	bool loadAudioEntitiesFromFile();
-	bool saveAudioEntitiesToFile();
-	bool isLoaded();
+	const bool loadAudioEntitiesFromFile();
+	const bool saveAudioEntitiesToFile() const;
+	const bool isLoaded() const;
 
 private:
 	// Voids

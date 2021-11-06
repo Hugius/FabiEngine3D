@@ -58,7 +58,7 @@ void FabiEngine3D::modelEntity_setDiffuseMap(const string& ID, const string& par
 	}
 	else
 	{
-		_core->_modelEntityManager.getEntity(ID)->setDiffuseMap(partID, _core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_modelEntityManager.getEntity(ID)->setDiffuseMap(partID, _core->_textureLoader.loadTexture2D(texturePath, true, true));
 		_core->_modelEntityManager.getEntity(ID)->setDiffuseMapPath(partID, texturePath);
 	}
 }
@@ -72,7 +72,7 @@ void FabiEngine3D::modelEntity_setEmissionMap(const string& ID, const string& pa
 	}
 	else
 	{
-		_core->_modelEntityManager.getEntity(ID)->setEmissionMap(partID, _core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_modelEntityManager.getEntity(ID)->setEmissionMap(partID, _core->_textureLoader.loadTexture2D(texturePath, true, true));
 		_core->_modelEntityManager.getEntity(ID)->setEmissionMapPath(partID, texturePath);
 	}
 }
@@ -86,7 +86,7 @@ void FabiEngine3D::modelEntity_setSpecularMap(const string& ID, const string& pa
 	}
 	else
 	{
-		_core->_modelEntityManager.getEntity(ID)->setSpecularMap(partID, _core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_modelEntityManager.getEntity(ID)->setSpecularMap(partID, _core->_textureLoader.loadTexture2D(texturePath, true, true));
 		_core->_modelEntityManager.getEntity(ID)->setSpecularMapPath(partID, texturePath);
 	}
 }
@@ -100,7 +100,7 @@ void FabiEngine3D::modelEntity_setNormalMap(const string& ID, const string& part
 	}
 	else
 	{
-		_core->_modelEntityManager.getEntity(ID)->setNormalMap(partID, _core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_modelEntityManager.getEntity(ID)->setNormalMap(partID, _core->_textureLoader.loadTexture2D(texturePath, true, true));
 		_core->_modelEntityManager.getEntity(ID)->setNormalMapPath(partID, texturePath);
 	}
 }
@@ -114,7 +114,7 @@ void FabiEngine3D::modelEntity_setReflectionMap(const string& ID, const string& 
 	}
 	else
 	{
-		_core->_modelEntityManager.getEntity(ID)->setReflectionMap(partID, _core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_modelEntityManager.getEntity(ID)->setReflectionMap(partID, _core->_textureLoader.loadTexture2D(texturePath, true, true));
 		_core->_modelEntityManager.getEntity(ID)->setReflectionMapPath(partID, texturePath);
 	}
 }

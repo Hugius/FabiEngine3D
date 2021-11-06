@@ -152,7 +152,7 @@ void FabiEngine3D::billboardEntity_setDiffuseMap(const string& ID, const string&
 	}
 	else
 	{
-		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture2D(texturePath, true, true), false);
+		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.loadTexture2D(texturePath, true, true), false);
 		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMapPath(texturePath);
 	}
 }
@@ -166,7 +166,7 @@ void FabiEngine3D::billboardEntity_setEmissionMap(const string& ID, const string
 	}
 	else
 	{
-		_core->_billboardEntityManager.getEntity(ID)->setEmissionMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_billboardEntityManager.getEntity(ID)->setEmissionMap(_core->_textureLoader.loadTexture2D(texturePath, true, true));
 		_core->_billboardEntityManager.getEntity(ID)->setEmissionMapPath(texturePath);
 	}
 }
@@ -315,7 +315,7 @@ void FabiEngine3D::billboardEntity_setFont(const string& ID, const string& fontP
 	auto textContent = entity->getTextContent();
 	if(!textContent.empty())
 	{
-		entity->setDiffuseMap(_core->_textureLoader.getText(textContent, fontPath), true);
+		entity->setDiffuseMap(_core->_textureLoader.loadTexture2D(textContent, fontPath), true);
 	}
 }
 
@@ -339,7 +339,7 @@ void FabiEngine3D::billboardEntity_setTextContent(const string& ID, const string
 		entity->setTextContent(textContent);
 
 		// Load diffuse map
-		entity->setDiffuseMap(_core->_textureLoader.getText(textContent, fontPath), true);
+		entity->setDiffuseMap(_core->_textureLoader.loadTexture2D(textContent, fontPath), true);
 	}
 }
 

@@ -133,7 +133,7 @@ void AnimationEditor::_updateChoiceMenu()
 					lastFrameCopy.clearParts();
 
 					// Add default data for every model part
-					for(auto partID : currentAnimation->getPartIDs())
+					for(const auto& partID : currentAnimation->getPartIDs())
 					{
 						lastFrameCopy.addPart(partID, Vec3(0.0f), Vec3(0.0f), Vec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
 					}
@@ -258,7 +258,7 @@ void AnimationEditor::_updateChoiceMenu()
 					if(partIDs.size() > 1)
 					{
 						// Iterate through parts
-						for(auto partID : partIDs)
+						for(const auto& partID : partIDs)
 						{
 							// Add part to animation
 							currentAnimation->addPart(partID, Vec3(0.0f), Vec3(0.0f), Vec3(0.0f));

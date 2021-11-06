@@ -142,7 +142,7 @@ void FabiEngine3D::waterEntity_setDudvMap(const string& ID, const string& textur
 	}
 	else
 	{
-		_core->_waterEntityManager.getEntity(ID)->setDudvMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_waterEntityManager.getEntity(ID)->setDudvMap(_core->_textureLoader.loadTexture2D(texturePath, true, true));
 		_core->_waterEntityManager.getEntity(ID)->setDudvMapPath(texturePath);
 	}
 }
@@ -156,7 +156,7 @@ void FabiEngine3D::waterEntity_setNormalMap(const string& ID, const string& text
 	}
 	else
 	{
-		_core->_waterEntityManager.getEntity(ID)->setNormalMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_waterEntityManager.getEntity(ID)->setNormalMap(_core->_textureLoader.loadTexture2D(texturePath, true, true));
 		_core->_waterEntityManager.getEntity(ID)->setNormalMapPath(texturePath);
 	}
 }
@@ -170,7 +170,7 @@ void FabiEngine3D::waterEntity_setDisplacementMap(const string& ID, const string
 	}
 	else
 	{
-		_core->_waterEntityManager.getEntity(ID)->setDisplacementMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_waterEntityManager.getEntity(ID)->setDisplacementMap(_core->_textureLoader.loadTexture2D(texturePath, true, true));
 		_core->_waterEntityManager.getEntity(ID)->setDisplacementMapPath(texturePath);
 	}
 }

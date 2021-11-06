@@ -35,17 +35,16 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 	_createEntity(ID);
 
 	// Load mesh file
-	auto partsPointer = _meshLoader.loadMesh(meshPath);
+	auto parts = _meshLoader.loadMesh(meshPath);
 
 	// Check if model loading failed
-	if(partsPointer == nullptr)
+	if(parts.empty())
 	{
 		deleteEntity(ID);
 		return;
 	}
 
 	// Check if multiparted model only has 1 part
-	auto parts = *partsPointer;
 	if((parts.size() == 1) && !parts[0]->getID().empty())
 	{
 		Logger::throwWarning("Multiparted model with ID \"" + ID + "\" only has 1 part!");

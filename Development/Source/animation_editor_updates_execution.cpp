@@ -25,7 +25,7 @@ void AnimationEditor::_updateAnimationExecution()
 
 			// For every model part in this frame
 			unsigned int finishedPartCount = 0;
-			for(auto partID : animation.getPartIDs())
+			for(const auto& partID : animation.getPartIDs())
 			{
 				// Check if model still exists
 				if(!_fe3d.modelEntity_isExisting(animation.getAnimatedModelID()))

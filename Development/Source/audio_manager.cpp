@@ -23,7 +23,7 @@ void AudioManager::deleteAllSounds()
 void AudioManager::createMusic(const string& filename)
 {
 	// Load data
-	auto dataPointer = _audioLoader.getMusicDataPointer(filename);
+	auto dataPointer = _audioLoader.loadMusic(filename);
 
 	// Check if data loading went well
 	if(dataPointer != nullptr)
@@ -44,7 +44,7 @@ void AudioManager::createSound(const string& ID, const string& filename)
 	}
 
 	// Load data
-	auto dataPointer = _audioLoader.getChunkDataPointer(filename);
+	auto dataPointer = _audioLoader.loadChunk(filename);
 
 	// Check if data loading went well
 	if(dataPointer != nullptr)

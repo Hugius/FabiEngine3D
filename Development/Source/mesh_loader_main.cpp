@@ -105,7 +105,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 
 			// Check if able to add to existing mesh part
 			bool isAlreadyExisting = false;
-			for(auto& meshPart : meshParts)
+			for(const auto& meshPart : meshParts)
 			{
 				// Find mesh part
 				if(meshPart->getID() == selectedPartID)
@@ -147,7 +147,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 	}
 
 	// Calculate tangents for normal mapping
-	for(auto& meshPart : meshParts)
+	for(const auto& meshPart : meshParts)
 	{
 		for(size_t i = 0; i < meshPart->getVertices().size(); i += 3)
 		{

@@ -30,7 +30,7 @@ void FabiEngine3D::imageEntity_setDiffuseMap(const string& ID, const string& tex
 	}
 	else
 	{
-		_core->_imageEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture2D(texturePath, false, false));
+		_core->_imageEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.loadTexture2D(texturePath, false, false));
 		_core->_imageEntityManager.getEntity(ID)->setDiffuseMapPath(texturePath);
 	}
 }

@@ -466,7 +466,7 @@ void FabiEngine3D::gfx_setMotionBlurStrength(float strength)
 
 void FabiEngine3D::gfx_setLensFlareMap(const string& texturePath)
 {
-	_core->_renderBus.setLensFlareMap(_core->_textureLoader.getTexture2D(texturePath, false, false));
+	_core->_renderBus.setLensFlareMap(_core->_textureLoader.loadTexture2D(texturePath, false, false));
 	_core->_renderBus.setLensFlareMapPath(texturePath);
 }
 

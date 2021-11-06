@@ -140,7 +140,7 @@ void AudioLoader::cacheMusicMultiThreaded(const vector<string>& filePaths)
 	}
 }
 
-Mix_Chunk* AudioLoader::getChunkDataPointer(const string& filePath)
+Mix_Chunk* AudioLoader::loadChunk(const string& filePath)
 {
 BEGIN:
 	// Search cache
@@ -185,7 +185,7 @@ BEGIN:
 	}
 }
 
-Mix_Music* AudioLoader::getMusicDataPointer(const string& filePath)
+Mix_Music* AudioLoader::loadMusic(const string& filePath)
 {
 BEGIN:
 	// Search cache

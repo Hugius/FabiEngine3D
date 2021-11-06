@@ -21,8 +21,8 @@ public:
 	void clearMusicCache(const string& filePath);
 
 	// Miscellaneous
-	Mix_Chunk* getChunkDataPointer(const string& filePath);
-	Mix_Music* getMusicDataPointer(const string& filePath);
+	Mix_Chunk* loadChunk(const string& filePath);
+	Mix_Music* loadMusic(const string& filePath);
 
 private:
 	// Voids

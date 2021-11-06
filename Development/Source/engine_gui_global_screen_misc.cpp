@@ -30,7 +30,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, unsigned int& value
 {
 	// Convert from unsigned integer to string
 	vector<string> forbiddenValueStrings;
-	for(auto forbiddenValue : forbiddenValues)
+	for(const auto& forbiddenValue : forbiddenValues)
 	{
 		forbiddenValueStrings.push_back(to_string(forbiddenValue));
 	}
@@ -46,7 +46,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, int& value, const v
 {
 	// Convert from integer to string
 	vector<string> forbiddenValueStrings;
-	for(auto forbiddenValue : forbiddenValues)
+	for(const auto& forbiddenValue : forbiddenValues)
 	{
 		forbiddenValueStrings.push_back(to_string(forbiddenValue));
 	}
@@ -62,7 +62,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, float& value, const
 {
 	// Convert from float to integer to string
 	vector<string> forbiddenValueStrings;
-	for(auto forbiddenValue : forbiddenValues)
+	for(const auto& forbiddenValue : forbiddenValues)
 	{
 		forbiddenValueStrings.push_back(to_string(static_cast<int>(forbiddenValue)));
 	}
@@ -78,7 +78,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, double& value, cons
 {
 	// Convert from double to integer to string
 	vector<string> forbiddenValueStrings;
-	for(auto forbiddenValue : forbiddenValues)
+	for(const auto& forbiddenValue : forbiddenValues)
 	{
 		forbiddenValueStrings.push_back(to_string(static_cast<int>(forbiddenValue)));
 	}

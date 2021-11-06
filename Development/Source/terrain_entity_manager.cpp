@@ -45,17 +45,17 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 	_createEntity(ID);
 
 	// Load height map
-	auto pixelValues = _textureLoader.getBitmap(heightMapPath);
+	auto pixelValues = _textureLoader.loadBitmap(heightMapPath);
 
 	// Check if height map loading failed
-	if(pixelValues == nullptr)
+	if(pixelValues.empty())
 	{
 		deleteEntity(ID);
 		return;
 	}
 
 	// Check if height map resolution is too high
-	auto heightMapSize = static_cast<unsigned int>(sqrt(static_cast<double>(pixelValues->size())));
+	auto heightMapSize = static_cast<unsigned int>(sqrt(static_cast<double>(pixelValues.size())));
 	if(heightMapSize > MAX_SIZE)
 	{
 		Logger::throwWarning("Tried to create terrain with ID \"" + ID + "\": height map resolution too high!");
@@ -68,7 +68,7 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 
 	// Set properties
 	entity->setHeightMapPath(heightMapPath);
-	entity->setPixelValues(*pixelValues);
+	entity->setPixelValues(pixelValues);
 	entity->setSize(static_cast<float>(heightMapSize));
 
 	// Load mesh

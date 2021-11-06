@@ -14,7 +14,7 @@ TextureLoader::TextureLoader(RenderBus& renderBus)
 
 }
 
-TextureID TextureLoader::getTexture2D(const string& filePath, bool isMipmapped, bool isAnisotropic)
+TextureID TextureLoader::loadTexture2D(const string& filePath, bool isMipmapped, bool isAnisotropic)
 {
 BEGIN:
 	// Search cache
@@ -59,7 +59,7 @@ BEGIN:
 	}
 }
 
-TextureID TextureLoader::getTexture3D(const array<string, 6>& filePaths)
+TextureID TextureLoader::loadTexture3D(const array<string, 6>& filePaths)
 {
 BEGIN:
 	// Search cache
@@ -122,7 +122,7 @@ BEGIN:
 	}
 }
 
-const vector<float>* TextureLoader::getBitmap(const string& filePath)
+const vector<float>& TextureLoader::loadBitmap(const string& filePath)
 {
 BEGIN:
 	// Search cache
@@ -131,7 +131,7 @@ BEGIN:
 	// Return from cache
 	if(cacheIterator != _bitmapCache.end())
 	{
-		return &cacheIterator->second;
+		return cacheIterator->second;
 	}
 
 	// Load bitmap
@@ -141,7 +141,7 @@ BEGIN:
 	if(loadedBitmap.empty())
 	{
 		Logger::throwWarning("Cannot load image file: \"" + filePath + "\"!");
-		return nullptr;
+		return {};
 	}
 	else
 	{
@@ -161,7 +161,7 @@ const unsigned int TextureLoader::getAnisotropicFilteringQuality()
 	return _anisotropicFilteringQuality;
 }
 
-TextureID TextureLoader::getText(const string& textContent, const string& fontPath)
+TextureID TextureLoader::loadTexture2D(const string& textContent, const string& fontPath)
 {
 BEGIN:
 	// Temporary values
@@ -278,7 +278,7 @@ void TextureLoader::setAnisotropicFilteringQuality(unsigned int value)
 
 void TextureLoader::_reloadAnisotropicFiltering()
 {
-	for(auto& [path, texture] : _textureCache2D)
+	for(const auto& [path, texture] : _textureCache2D)
 	{
 		// Bind
 		glBindTexture(GL_TEXTURE_2D, texture);

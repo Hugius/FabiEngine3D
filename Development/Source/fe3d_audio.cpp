@@ -144,7 +144,7 @@ const vector<string> FabiEngine3D::sound_getAllIDs()
 {
 	vector<string> IDs;
 
-	for(auto chunk : _core->_audioManager.getSounds())
+	for(const auto& chunk : _core->_audioManager.getSounds())
 	{
 		IDs.push_back(chunk.getID());
 	}

@@ -335,55 +335,55 @@ void MasterRenderer::_renderDebugScreens()
 
 	// Scene - text
 	shared_ptr<TextEntity> sceneText = make_shared<TextEntity>("sceneText");
-	sceneText->setDiffuseMap(_textureLoader.getText("Scene Render", fontPath));
+	sceneText->setDiffuseMap(_textureLoader.loadTexture2D("Scene Render", fontPath));
 	sceneText->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, 0.4f, calcTextWidth("Scene Render"), charHeight, true));
 	sceneText->setColor(textColor);
 
 	// Shadow - text
 	shared_ptr<TextEntity> shadowText = make_shared<TextEntity>("shadowText");
-	shadowText->setDiffuseMap(_textureLoader.getText("Shadow Render", fontPath));
+	shadowText->setDiffuseMap(_textureLoader.loadTexture2D("Shadow Render", fontPath));
 	shadowText->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.4f, calcTextWidth("Shadow Render"), charHeight, true));
 	shadowText->setColor(textColor);
 
 	// Bloom - text
 	shared_ptr<TextEntity> bloomText = make_shared<TextEntity>("bloomText");
-	bloomText->setDiffuseMap(_textureLoader.getText("Bloom Render", fontPath));
+	bloomText->setDiffuseMap(_textureLoader.loadTexture2D("Bloom Render", fontPath));
 	bloomText->setRenderBuffer(make_shared<RenderBuffer>(0.666f, 0.4f, calcTextWidth("Bloom Render"), charHeight, true));
 	bloomText->setColor(textColor);
 
 	// Planar reflection - text
 	shared_ptr<TextEntity> planarReflectionText = make_shared<TextEntity>("planarReflectionText");
-	planarReflectionText->setDiffuseMap(_textureLoader.getText("Planar Reflection Render", fontPath));
+	planarReflectionText->setDiffuseMap(_textureLoader.loadTexture2D("Planar Reflection Render", fontPath));
 	planarReflectionText->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, -0.26f, calcTextWidth("Planar Reflection Render"), charHeight, true));
 	planarReflectionText->setColor(textColor);
 
 	// Water reflection - text
 	shared_ptr<TextEntity> waterReflectionText = make_shared<TextEntity>("waterReflectionText");
-	waterReflectionText->setDiffuseMap(_textureLoader.getText("Water Reflection Render", fontPath));
+	waterReflectionText->setDiffuseMap(_textureLoader.loadTexture2D("Water Reflection Render", fontPath));
 	waterReflectionText->setRenderBuffer(make_shared<RenderBuffer>(0.0f, -0.26f, calcTextWidth("Water Reflection Render"), charHeight, true));
 	waterReflectionText->setColor(textColor);
 
 	// Water refraction - text
 	shared_ptr<TextEntity> waterRefractionText = make_shared<TextEntity>("waterRefractionText");
-	waterRefractionText->setDiffuseMap(_textureLoader.getText("Water Refraction Render", fontPath));
+	waterRefractionText->setDiffuseMap(_textureLoader.loadTexture2D("Water Refraction Render", fontPath));
 	waterRefractionText->setRenderBuffer(make_shared<RenderBuffer>(0.666f, -0.26f, calcTextWidth("Water Refraction Render"), charHeight, true));
 	waterRefractionText->setColor(textColor);
 
 	// Depth - text
 	shared_ptr<TextEntity> depthText = make_shared<TextEntity>("depthText");
-	depthText->setDiffuseMap(_textureLoader.getText("Depth Render", fontPath));
+	depthText->setDiffuseMap(_textureLoader.loadTexture2D("Depth Render", fontPath));
 	depthText->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, -0.92f, calcTextWidth("Depth Render"), charHeight, true));
 	depthText->setColor(textColor);
 
 	// DOF - text
 	shared_ptr<TextEntity> dofText = make_shared<TextEntity>("dofText");
-	dofText->setDiffuseMap(_textureLoader.getText("DOF Render", fontPath));
+	dofText->setDiffuseMap(_textureLoader.loadTexture2D("DOF Render", fontPath));
 	dofText->setRenderBuffer(make_shared<RenderBuffer>(0.0f, -0.92f, calcTextWidth("DOF Render"), charHeight, true));
 	dofText->setColor(textColor);
 
 	// Motion blur - text
 	shared_ptr<TextEntity> motionText = make_shared<TextEntity>("motionBlurText");
-	motionText->setDiffuseMap(_textureLoader.getText("Motion Blur Render", fontPath));
+	motionText->setDiffuseMap(_textureLoader.loadTexture2D("Motion Blur Render", fontPath));
 	motionText->setRenderBuffer(make_shared<RenderBuffer>(0.666f, -0.92f, calcTextWidth("Motion Blur Render"), charHeight, true));
 	motionText->setColor(textColor);
 

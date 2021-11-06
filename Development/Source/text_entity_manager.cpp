@@ -61,7 +61,7 @@ void TextEntityManager::loadCharacters(const string& ID)
 				// Load text map
 				string textContent = "";
 				textContent += c;
-				auto texture = _textureLoader.getText(textContent, entity->getFontPath());
+				auto texture = _textureLoader.loadTexture2D(textContent, entity->getFontPath());
 
 				// Check if font loading went well
 				if(texture != 0)

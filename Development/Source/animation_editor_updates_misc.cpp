@@ -130,7 +130,7 @@ void AnimationEditor::_updateMiscellaneous()
 				if(_fe3d.modelEntity_isExisting(currentAnimation->getPreviewModelID()))
 				{
 					// For every animation part
-					for(auto partID : currentAnimation->getPartIDs())
+					for(const auto& partID : currentAnimation->getPartIDs())
 					{
 						if(partID.empty()) // Base transformation
 						{
@@ -158,7 +158,7 @@ void AnimationEditor::_updateMiscellaneous()
 							auto frame = currentAnimation->getFrames()[frameIndex];
 
 							// For every part of frame
-							for(auto partID : currentAnimation->getPartIDs())
+							for(const auto& partID : currentAnimation->getPartIDs())
 							{
 								// Check if model has part
 								if(_fe3d.modelEntity_hasPart(currentAnimation->getPreviewModelID(), partID) || partID.empty())

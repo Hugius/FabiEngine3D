@@ -38,9 +38,9 @@ public:
 	const unsigned int getAnisotropicFilteringQuality();
 
 	// Miscellaneous
-	TextureID loadTexture2D(const string& filePath, bool isMipmapped, bool isAnisotropic);
-	TextureID loadTexture2D(const string& textContent, const string& fontPath);
-	TextureID loadTexture3D(const array<string, 6>& filePaths);
+	const TextureID loadTexture2D(const string& filePath, bool isMipmapped, bool isAnisotropic);
+	const TextureID loadTexture2D(const string& textContent, const string& fontPath);
+	const TextureID loadTexture3D(const array<string, 6>& filePaths);
 
 private:
 	// Voids

@@ -205,7 +205,7 @@ void FabiEngine3D::waterEntity_setTransparency(const string& ID, float transpare
 	_core->_waterEntityManager.getEntity(ID)->setTransparency(transparency);
 }
 
-const string FabiEngine3D::waterEntity_getSelectedID()
+const string& FabiEngine3D::waterEntity_getSelectedID()
 {
 	if(_core->_waterEntityManager.getSelectedWater() != nullptr)
 	{

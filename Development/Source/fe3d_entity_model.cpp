@@ -583,7 +583,7 @@ const string& FabiEngine3D::modelEntity_getLevelOfDetailEntityID(const string& I
 	return _core->_modelEntityManager.getEntity(ID)->getLevelOfDetailEntityID();
 }
 
-const vector<Vec3> FabiEngine3D::modelEntity_getInstancedOffsets(const string& ID)
+const vector<Vec3>& FabiEngine3D::modelEntity_getInstancedOffsets(const string& ID)
 {
 	// Temporary values
 	auto entity = _core->_modelEntityManager.getEntity(ID);
@@ -599,7 +599,7 @@ const vector<Vec3> FabiEngine3D::modelEntity_getInstancedOffsets(const string& I
 	}
 }
 
-const vector<string> FabiEngine3D::modelEntity_getPartIDs(const string& ID)
+const vector<string>& FabiEngine3D::modelEntity_getPartIDs(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getPartIDs();
 }

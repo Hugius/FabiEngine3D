@@ -20,9 +20,9 @@ public:
 
 private:
 	// Strings
-	const string _username;
-	const string _content;
+	string _username;
+	string _content;
 
 	// Miscellaneous
-	const NetworkProtocol _protocol;
+	NetworkProtocol _protocol;
 };

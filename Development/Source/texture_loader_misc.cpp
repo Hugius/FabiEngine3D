@@ -14,7 +14,7 @@ TextureLoader::TextureLoader(RenderBus& renderBus)
 
 }
 
-TextureID TextureLoader::loadTexture2D(const string& filePath, bool isMipmapped, bool isAnisotropic)
+const TextureID TextureLoader::loadTexture2D(const string& filePath, bool isMipmapped, bool isAnisotropic)
 {
 BEGIN:
 	// Search cache
@@ -59,7 +59,7 @@ BEGIN:
 	}
 }
 
-TextureID TextureLoader::loadTexture3D(const array<string, 6>& filePaths)
+const TextureID TextureLoader::loadTexture3D(const array<string, 6>& filePaths)
 {
 BEGIN:
 	// Search cache
@@ -161,7 +161,7 @@ const unsigned int TextureLoader::getAnisotropicFilteringQuality()
 	return _anisotropicFilteringQuality;
 }
 
-TextureID TextureLoader::loadTexture2D(const string& textContent, const string& fontPath)
+const TextureID TextureLoader::loadTexture2D(const string& textContent, const string& fontPath)
 {
 BEGIN:
 	// Temporary values

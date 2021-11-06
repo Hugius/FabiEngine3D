@@ -80,8 +80,8 @@ public:
 	// Sky entity interface - getters
 	const vector<string> skyEntity_getAllIDs();
 	const array<string, 6>& skyEntity_getDiffuseMapPaths(const string& ID);
-	const string skyEntity_getSelectedID();
-	const string skyEntity_getMixID();
+	const string& skyEntity_getSelectedID();
+	const string& skyEntity_getMixID();
 	const Vec3 skyEntity_getColor(const string& ID);
 	const float skyEntity_getLightness(const string& ID);
 	const float skyEntity_getOriginalLightness(const string& ID);
@@ -125,7 +125,7 @@ public:
 
 	// Terrain entity interface - getters
 	const vector<string> terrainEntity_getAllIDs();
-	const string terrainEntity_getSelectedID();
+	const string& terrainEntity_getSelectedID();
 	const string& terrainEntity_getHeightMapPath(const string& ID);
 	const string& terrainEntity_getBlendMapPath(const string& ID);
 	const string& terrainEntity_getDiffuseMapPath(const string& ID);
@@ -190,7 +190,7 @@ public:
 	const string& waterEntity_getDudvMapPath(const string& ID);
 	const string& waterEntity_getNormalMapPath(const string& ID);
 	const string& waterEntity_getDisplacementMapPath(const string& ID);
-	const string waterEntity_getSelectedID();
+	const string& waterEntity_getSelectedID();
 	const Vec3 waterEntity_getColor(const string& ID);
 	const Vec2 waterEntity_getSpeed(const string& ID);
 	const float waterEntity_getHeight(const string& ID);
@@ -270,7 +270,7 @@ public:
 	void modelEntity_setRotationOrder(const string& ID, DirectionOrder order);
 
 	// Model entity interface - getters
-	const vector<string> modelEntity_getPartIDs(const string& ID);
+	const vector<string>& modelEntity_getPartIDs(const string& ID);
 	const vector<string> modelEntity_getAllIDs();
 	const vector<string> modelEntity_getGroupIDs(const string& ID);
 	const string& modelEntity_getMeshPath(const string& ID);
@@ -280,7 +280,7 @@ public:
 	const string& modelEntity_getReflectionMapPath(const string& ID, const string& partID);
 	const string& modelEntity_getNormalMapPath(const string& ID, const string& partID);
 	const string& modelEntity_getLevelOfDetailEntityID(const string& ID);
-	const vector<Vec3> modelEntity_getInstancedOffsets(const string& ID);
+	const vector<Vec3>& modelEntity_getInstancedOffsets(const string& ID);
 	const Vec3 modelEntity_getLevelOfDetailSize(const string& ID);
 	const Vec3 modelEntity_getBasePosition(const string& ID);
 	const Vec3 modelEntity_getBaseRotation(const string& ID);
@@ -849,13 +849,13 @@ public:
 	void networkServer_stop();
 
 	// Server interface - getters
-	const vector<NetworkClientMessage> networkServer_getPendingMessages();
-	const vector<string> networkServer_getClientIPs();
-	const vector<string> networkServer_getClientUsernames();
-	const string networkServer_getNewClientIP();
-	const string networkServer_getNewClientUsername();
-	const string networkServer_getOldClientIP();
-	const string networkServer_getOldClientUsername();
+	const vector<NetworkClientMessage>& networkServer_getPendingMessages();
+	const vector<string>& networkServer_getClientIPs();
+	const vector<string>& networkServer_getClientUsernames();
+	const string& networkServer_getNewClientIP();
+	const string& networkServer_getNewClientUsername();
+	const string& networkServer_getOldClientIP();
+	const string& networkServer_getOldClientUsername();
 	const bool networkServer_isRunning();
 	const bool networkServer_isClientConnected(const string& username);
 
@@ -868,9 +868,9 @@ public:
 	void networkClient_stop();
 
 	// Client interface - getters
-	const vector<NetworkServerMessage> networkClient_getPendingMessages();
+	const vector<NetworkServerMessage>& networkClient_getPendingMessages();
 	const string& networkClient_getUsername();
-	const string networkClient_getServerIP();
+	const string& networkClient_getServerIP();
 	const unsigned int networkClient_getPingLatency();
 	const bool networkClient_isValidServerIP(const string& serverIP);
 	const bool networkClient_isRunning();

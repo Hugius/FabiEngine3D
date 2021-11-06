@@ -120,7 +120,7 @@ void FabiEngine3D::skyEntity_selectMixSky(const string& ID)
 	_core->_skyEntityManager.selectMixSky(ID);
 }
 
-const string FabiEngine3D::skyEntity_getSelectedID()
+const string& FabiEngine3D::skyEntity_getSelectedID()
 {
 	if(_core->_skyEntityManager.getSelectedMainSky() != nullptr)
 	{
@@ -132,7 +132,7 @@ const string FabiEngine3D::skyEntity_getSelectedID()
 	}
 }
 
-const string FabiEngine3D::skyEntity_getMixID()
+const string& FabiEngine3D::skyEntity_getMixID()
 {
 	if(_core->_skyEntityManager.getSelectedMixSky() != nullptr)
 	{

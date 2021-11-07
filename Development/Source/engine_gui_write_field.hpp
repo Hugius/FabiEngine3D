@@ -7,7 +7,7 @@ class EngineGuiWriteField final : public EngineGuiButton
 {
 public:
 	EngineGuiWriteField(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor,
-						Vec3 textColor, Vec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed);
+						Vec3 textColor, Vec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered);
 
 	// Voids
 	void update(bool hoverable) override;

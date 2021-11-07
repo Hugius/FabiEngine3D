@@ -553,6 +553,7 @@ public:
 	const unsigned int imageEntity_getSpriteAnimationColumnIndex(const string& ID);
 	const bool imageEntity_isExisting(const string& ID);
 	const bool imageEntity_isVisible(const string& ID);
+	const bool imageEntity_isCentered(const string& ID);
 	const bool imageEntity_isMirroredHorizontally(const string& ID);
 	const bool imageEntity_isMirroredVertically(const string& ID);
 	const bool imageEntity_isSpriteAnimationStarted(const string& ID);

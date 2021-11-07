@@ -8,7 +8,7 @@ class EngineGuiScrollingList final : public EngineGuiRectangle
 {
 public:
 	EngineGuiScrollingList(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color,
-						   Vec3 buttonColor, Vec3 buttonHoverColor, Vec3 textColor, Vec3 textHoverColor, Vec2 charSize);
+						   Vec3 buttonColor, Vec3 buttonHoverColor, Vec3 textColor, Vec3 textHoverColor, Vec2 charSize, bool isCentered);
 
 	// Voids
 	void update(bool isHoverable);

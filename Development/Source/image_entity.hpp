@@ -47,6 +47,7 @@ public:
 	void resetPassedSpriteAnimationFrames();
 	void increaseSpriteAnimationLoops();
 	void setPerspectiveDepthEntity(bool value);
+	void setCentered(bool value);
 
 	// Strings
 	const string& getDiffuseMapPath() const;
@@ -77,6 +78,7 @@ public:
 	const unsigned int getDepth() const;
 
 	// Booleans
+	const bool isCentered() const;
 	const bool isMirroredHorizonally() const;
 	const bool isMirroredVertically() const;
 	const bool isSpriteAnimationStarted() const;
@@ -125,6 +127,7 @@ private:
 	unsigned int _depth = 0;
 
 	// Booleans
+	bool _isCentered = false;
 	bool _isSpriteAnimationStarted = false;
 	bool _isSpriteAnimationPaused = false;
 	bool _isMirroredHorizontally = false;

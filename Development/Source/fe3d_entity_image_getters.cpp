@@ -71,6 +71,11 @@ const bool FabiEngine3D::imageEntity_isVisible(const string& ID)
 	return _core->_imageEntityManager.getEntity(ID)->isVisible();
 }
 
+const bool FabiEngine3D::imageEntity_isCentered(const string& ID)
+{
+	return _core->_imageEntityManager.getEntity(ID)->isCentered();
+}
+
 const bool FabiEngine3D::imageEntity_isSpriteAnimationStarted(const string& ID)
 {
 	return _core->_imageEntityManager.getEntity(ID)->isSpriteAnimationStarted();

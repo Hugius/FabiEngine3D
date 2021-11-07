@@ -351,6 +351,11 @@ const float ImageEntity::getAlpha() const
 	return _alpha;
 }
 
+const bool ImageEntity::isCentered() const
+{
+	return _isCentered;
+}
+
 const bool ImageEntity::isMirroredHorizonally() const
 {
 	return _isMirroredHorizontally;
@@ -404,6 +409,11 @@ const unsigned int ImageEntity::getDepth() const
 void ImageEntity::setPerspectiveDepthEntity(bool value)
 {
 	_isPerspectiveDepthEntity = value;
+}
+
+void ImageEntity::setCentered(bool value)
+{
+	_isCentered = value;
 }
 
 const bool ImageEntity::isPerspectiveDepthEntity() const

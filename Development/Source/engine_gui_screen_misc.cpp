@@ -25,7 +25,7 @@ const Vec2 EngineGuiScreen::convertPosition(Vec2 position) const
 {
 	Vec2 screenPosition = _parentPosition;
 	Vec2 screenSize = _parentSize;
-	Vec2 buttonPosition = screenPosition + (position * (screenSize / 2.0f));
+	Vec2 buttonPosition = (screenPosition + (position * (screenSize / 2.0f)));
 
 	return buttonPosition;
 }

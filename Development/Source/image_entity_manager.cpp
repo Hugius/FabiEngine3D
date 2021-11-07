@@ -33,6 +33,7 @@ void ImageEntityManager::createEntity(const string& ID, bool isCentered)
 {
 	_createEntity(ID);
 	getEntity(ID)->setRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer);
+	getEntity(ID)->setCentered(isCentered);
 }
 
 void ImageEntityManager::update()

@@ -128,9 +128,9 @@ void SceneEditor::load()
 	_fe3d.reflectionEntity_setVisible(PREVIEW_CAMERA_ID, false);
 
 	// Create ID textFields
-	_gui.getGlobalScreen()->createTextField("modelID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f), true);
-	_gui.getGlobalScreen()->createTextField("billboardID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f), true);
-	_gui.getGlobalScreen()->createTextField("soundID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f), true);
+	_gui.getGlobalScreen()->createTextField("modelID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f), true, false);
+	_gui.getGlobalScreen()->createTextField("billboardID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f), true, false);
+	_gui.getGlobalScreen()->createTextField("soundID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f), true, false);
 
 	// Miscellaneous
 	_fe3d.collision_enableCameraResponse(true, true, true);

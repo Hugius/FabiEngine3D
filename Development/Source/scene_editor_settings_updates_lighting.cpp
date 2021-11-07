@@ -53,7 +53,7 @@ void SceneEditor::_updateAmbientLightingSettingsMenu()
 			}
 			else
 			{
-				_fe3d.gfx_disableAmbientLighting();
+				_fe3d.gfx_disableAmbientLighting(false);
 			}
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
@@ -128,7 +128,7 @@ void SceneEditor::_updateDirectionalLightingSettingsMenu()
 			}
 			else
 			{
-				_fe3d.gfx_disableDirectionalLighting();
+				_fe3d.gfx_disableDirectionalLighting(false);
 			}
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())

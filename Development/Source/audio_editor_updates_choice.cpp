@@ -32,7 +32,7 @@ void AudioEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("play")->isHovered())
 		{
-			_fe3d.sound_play(_currentAudioID, 0, 0);
+			_fe3d.sound_play(_currentAudioID, 0, 0, false);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("resume")->isHovered())
 		{
@@ -50,7 +50,7 @@ void AudioEditor::_updateChoiceMenu()
 		// Controlling audio playback through keyboard
 		if(_fe3d.input_isKeyPressed(InputType::KEY_SPACE) && !isPlaying && !isPaused && isLoaded)
 		{
-			_fe3d.sound_play(_currentAudioID, 0, 0);
+			_fe3d.sound_play(_currentAudioID, 0, 0, false);
 		}
 		else if(_fe3d.input_isKeyPressed(InputType::KEY_R) && isPaused)
 		{

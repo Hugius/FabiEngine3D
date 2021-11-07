@@ -136,7 +136,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 			}
 			else
 			{
-				_fe3d.gfx_disableShadows();
+				_fe3d.gfx_disableShadows(false);
 			}
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
@@ -250,7 +250,7 @@ void SceneEditor::_updateMotionBlurGraphicsSettingsMenu()
 			}
 			else
 			{
-				_fe3d.gfx_disableMotionBlur();
+				_fe3d.gfx_disableMotionBlur(false);
 			}
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("strength")->isHovered())
@@ -302,7 +302,7 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 			}
 			else
 			{
-				_fe3d.gfx_disableDOF();
+				_fe3d.gfx_disableDOF(false);
 			}
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("dynamic")->isHovered())

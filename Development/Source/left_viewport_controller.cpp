@@ -89,7 +89,7 @@ void LeftViewportController::update()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animationEditor")->isHovered())
 		{
-			if(_modelEditor.loadModelEntitiesFromFile() && _animationEditor.loadAnimationsFromFile())
+			if(_modelEditor.loadModelEntitiesFromFile() && _animationEditor.loadAnimationsFromFile(true))
 			{
 				_animationEditor.load();
 				window->setActiveScreen("animationEditorMenuMain");
@@ -118,7 +118,7 @@ void LeftViewportController::update()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("scriptEditor")->isHovered())
 		{
-			if(_scriptEditor.loadScriptFiles())
+			if(_scriptEditor.loadScriptFiles(true))
 			{
 				_scriptEditor.load();
 				window->setActiveScreen("scriptEditorMenuMain");

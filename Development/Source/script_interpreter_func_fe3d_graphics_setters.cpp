@@ -19,7 +19,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.gfx_disableFog();
+			_fe3d.gfx_disableFog(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -81,7 +81,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.gfx_disableDOF();
+			_fe3d.gfx_disableDOF(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -132,7 +132,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.gfx_disableShadows();
+			_fe3d.gfx_disableShadows(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -161,7 +161,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.gfx_disableMotionBlur();
+			_fe3d.gfx_disableMotionBlur(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -190,7 +190,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.gfx_disableLensFlare();
+			_fe3d.gfx_disableLensFlare(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

@@ -28,7 +28,7 @@ void SkyEditor::load()
 	_fe3d.gfx_setMotionBlurStrength(0.1f);
 
 	// Miscellaneous
-	_gui.getGlobalScreen()->createTextField("skyID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->createTextField("skyID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f), true);
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("skyEditorControls");
 	_isEditorLoaded = true;
 }

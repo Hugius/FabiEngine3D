@@ -37,7 +37,7 @@ void SceneEditor::_updateModelPlacing()
 					}
 					else // Create new model
 					{
-						_copyPreviewModel(rawID, _currentPreviewModelID, Vec3(0.0f));
+						_copyPreviewModel(rawID, _currentPreviewModelID, Vec3(0.0f), false);
 						_fe3d.modelEntity_disableInstancing(rawID);
 						_fe3d.modelEntity_enableInstancing(rawID, { newPosition });
 					}
@@ -55,7 +55,7 @@ void SceneEditor::_updateModelPlacing()
 					}
 
 					// Create model
-					_copyPreviewModel(newID, _currentPreviewModelID, newPosition);
+					_copyPreviewModel(newID, _currentPreviewModelID, newPosition, false);
 				}
 			}
 
@@ -108,7 +108,7 @@ void SceneEditor::_updateModelPlacing()
 							}
 							else // Create new model
 							{
-								_copyPreviewModel(rawID, _currentPreviewModelID, Vec3(0.0f));
+								_copyPreviewModel(rawID, _currentPreviewModelID, Vec3(0.0f), false);
 								_fe3d.modelEntity_disableInstancing(rawID);
 								_fe3d.modelEntity_enableInstancing(rawID, { newPosition });
 							}
@@ -126,7 +126,7 @@ void SceneEditor::_updateModelPlacing()
 							}
 
 							// Create model
-							_copyPreviewModel(newID, _currentPreviewModelID, newPosition);
+							_copyPreviewModel(newID, _currentPreviewModelID, newPosition, false);
 						}
 					}
 					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode

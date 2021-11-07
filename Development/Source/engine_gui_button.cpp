@@ -1,31 +1,31 @@
 #include "engine_gui_button.hpp"
 #include "tools.hpp"
 
-EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, string textContent, Vec3 textColor, Vec3 textHoverColor, bool sizeChangeEnabled, bool colorChangeEnabled)
+EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, string textContent, Vec3 textColor, Vec3 textHoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
 	_parentID(parentID),
-	_rectangle(make_shared<EngineGuiRectangle>(fe3d, parentID + "_button", ID, position, size, color)),
+	_rectangle(make_shared<EngineGuiRectangle>(fe3d, parentID + "_button", ID, position, size, color, true)),
 	_textField(make_shared<EngineGuiTextField>(fe3d, parentID + "_button", ID, position,
-			   Vec2(size.x* TEXT_WIDTH_MULTIPLIER, size.y* TEXT_HEIGHT_MULTIPLIER), textContent, textColor)),
+			   Vec2(size.x* TEXT_WIDTH_MULTIPLIER, size.y* TEXT_HEIGHT_MULTIPLIER), textContent, textColor, true, false)),
 	_hoverColor(hoverColor),
 	_textHoverColor(textHoverColor),
-	_sizeChangeEnabled(sizeChangeEnabled),
-	_colorChangeEnabled(colorChangeEnabled)
+	_isSizeChangeEnabled(isSizeIncreaseEnabled),
+	_isColorChangeEnabled(isColorChangeEnabled)
 {
 
 }
 
-EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, const string& texturePath, Vec3 hoverColor, bool sizeIncreaseEnabled, bool colorChangeEnabled)
+EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, const string& texturePath, Vec3 hoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
 	_parentID(parentID),
-	_rectangle(make_shared<EngineGuiRectangle>(fe3d, parentID + "_button", ID, position, size, texturePath)),
+	_rectangle(make_shared<EngineGuiRectangle>(fe3d, parentID + "_button", ID, position, size, texturePath, true)),
 	_hoverColor(hoverColor),
-	_sizeChangeEnabled(sizeIncreaseEnabled),
-	_colorChangeEnabled(colorChangeEnabled)
+	_isSizeChangeEnabled(isSizeIncreaseEnabled),
+	_isColorChangeEnabled(isColorChangeEnabled)
 {
 
 }
@@ -70,7 +70,7 @@ void EngineGuiButton::_updateHovering(bool isHoverable)
 					_isHovered = true;
 
 					// Update increased size
-					if(_sizeChangeEnabled)
+					if(_isSizeChangeEnabled)
 					{
 						// Temporary values
 						string rectangleID = _rectangle->getEntityID();
@@ -97,7 +97,7 @@ void EngineGuiButton::_updateHovering(bool isHoverable)
 					}
 
 					// Update to changed color
-					if(_colorChangeEnabled)
+					if(_isColorChangeEnabled)
 					{
 						// Rectangle
 						_fe3d.imageEntity_setColor(_rectangle->getEntityID(), _hoverColor);

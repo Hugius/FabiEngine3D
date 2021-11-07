@@ -148,7 +148,7 @@ void FabiEngine3D::networkClient_disconnect()
 		return;
 	}
 
-	_core->_networkClientAPI.disconnectFromServer();
+	_core->_networkClientAPI.disconnectFromServer(true);
 }
 
 void FabiEngine3D::networkClient_stop()

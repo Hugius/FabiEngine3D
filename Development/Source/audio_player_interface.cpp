@@ -4,11 +4,11 @@
 
 using std::clamp;
 
-void AudioPlayer::playSound(Sound& sound, int loops, int fadeMS, bool forcePlay)
+void AudioPlayer::playSound(Sound& sound, int loops, int fadeMS, bool mustForcePlay)
 {
 	if(_isSoundsEnabled)
 	{
-		if(!isSoundStarted(sound) || forcePlay)
+		if(!isSoundStarted(sound) || mustForcePlay)
 		{
 			// Try to find free channel
 			auto channel = _getFreeChannel();
@@ -41,7 +41,7 @@ void AudioPlayer::playSound(Sound& sound, int loops, int fadeMS, bool forcePlay)
 	}
 }
 
-void AudioPlayer::playMusic(vector<Music>& musicList, bool forcePlay)
+void AudioPlayer::playMusic(vector<Music>& musicList, bool mustForcePlay)
 {
 	if(_isMusicEnabled)
 	{
@@ -49,7 +49,7 @@ void AudioPlayer::playMusic(vector<Music>& musicList, bool forcePlay)
 		if(!musicList.empty())
 		{
 			// Check if music is allowed to play
-			if(!isMusicStarted() || forcePlay)
+			if(!isMusicStarted() || mustForcePlay)
 			{
 				// Select next song
 				unsigned int musicIndex;

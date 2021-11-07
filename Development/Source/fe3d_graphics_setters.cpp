@@ -111,7 +111,7 @@ void FabiEngine3D::gfx_enableLensFlare()
 	_core->_renderBus.setLensFlareEnabled(true);
 }
 
-void FabiEngine3D::gfx_disableAmbientLighting(bool resetProperties)
+void FabiEngine3D::gfx_disableAmbientLighting(bool mustResetProperties)
 {
 	if(!_core->_renderBus.isAmbientLightingEnabled())
 	{
@@ -121,14 +121,14 @@ void FabiEngine3D::gfx_disableAmbientLighting(bool resetProperties)
 
 	_core->_renderBus.setAmbientLightingEnabled(false);
 
-	if(resetProperties)
+	if(mustResetProperties)
 	{
 		_core->_renderBus.setAmbientLightingColor(1.0f);
 		_core->_renderBus.setAmbientLightingIntensity(1.0f);
 	}
 }
 
-void FabiEngine3D::gfx_disableDirectionalLighting(bool resetProperties)
+void FabiEngine3D::gfx_disableDirectionalLighting(bool mustResetProperties)
 {
 	if(!_core->_renderBus.isDirectionalLightingEnabled())
 	{
@@ -138,7 +138,7 @@ void FabiEngine3D::gfx_disableDirectionalLighting(bool resetProperties)
 
 	_core->_renderBus.setDirectionalLightingEnabled(false);
 
-	if(resetProperties)
+	if(mustResetProperties)
 	{
 		_core->_renderBus.setDirectionalLightingPosition(Vec3(0.0f));
 		_core->_renderBus.setDirectionalLightingColor(1.0f);
@@ -146,7 +146,7 @@ void FabiEngine3D::gfx_disableDirectionalLighting(bool resetProperties)
 	}
 }
 
-void FabiEngine3D::gfx_disableFog(bool resetProperties)
+void FabiEngine3D::gfx_disableFog(bool mustResetProperties)
 {
 	if(!_core->_renderBus.isFogEnabled())
 	{
@@ -156,7 +156,7 @@ void FabiEngine3D::gfx_disableFog(bool resetProperties)
 
 	_core->_renderBus.setFogEnabled(false);
 
-	if(resetProperties)
+	if(mustResetProperties)
 	{
 		_core->_renderBus.setFogMinDistance(0.0f);
 		_core->_renderBus.setFogMaxDistance(0.0f);
@@ -165,7 +165,7 @@ void FabiEngine3D::gfx_disableFog(bool resetProperties)
 	}
 }
 
-void FabiEngine3D::gfx_disableAntiAliasing(bool resetProperties)
+void FabiEngine3D::gfx_disableAntiAliasing(bool mustResetProperties)
 {
 	if(!_core->_renderBus.isAntiAliasingEnabled())
 	{
@@ -176,7 +176,7 @@ void FabiEngine3D::gfx_disableAntiAliasing(bool resetProperties)
 	_core->_renderBus.setAntiAliasingEnabled(false);
 }
 
-void FabiEngine3D::gfx_disableShadows(bool resetProperties)
+void FabiEngine3D::gfx_disableShadows(bool mustResetProperties)
 {
 	if(!_core->_renderBus.isShadowsEnabled())
 	{
@@ -186,7 +186,7 @@ void FabiEngine3D::gfx_disableShadows(bool resetProperties)
 
 	_core->_renderBus.setShadowsEnabled(false);
 
-	if(resetProperties)
+	if(mustResetProperties)
 	{
 		_core->_renderBus.setShadowEyePosition(Vec3(0.0f));
 		_core->_renderBus.setShadowCenterPosition(Vec3(0.0f));
@@ -198,7 +198,7 @@ void FabiEngine3D::gfx_disableShadows(bool resetProperties)
 	}
 }
 
-void FabiEngine3D::gfx_disableBloom(bool resetProperties)
+void FabiEngine3D::gfx_disableBloom(bool mustResetProperties)
 {
 	if(!_core->_renderBus.isBloomEnabled())
 	{
@@ -208,7 +208,7 @@ void FabiEngine3D::gfx_disableBloom(bool resetProperties)
 
 	_core->_renderBus.setBloomEnabled(false);
 
-	if(resetProperties)
+	if(mustResetProperties)
 	{
 		_core->_renderBus.setBloomType(BloomType());
 		_core->_renderBus.setBloomIntensity(0.0f);
@@ -216,7 +216,7 @@ void FabiEngine3D::gfx_disableBloom(bool resetProperties)
 	}
 }
 
-void FabiEngine3D::gfx_disableSkyExposure(bool resetProperties)
+void FabiEngine3D::gfx_disableSkyExposure(bool mustResetProperties)
 {
 	if(!_core->_skyEntityManager.isExposureEnabled())
 	{
@@ -226,14 +226,14 @@ void FabiEngine3D::gfx_disableSkyExposure(bool resetProperties)
 
 	_core->_skyEntityManager.setExposureEnabled(false);
 
-	if(resetProperties)
+	if(mustResetProperties)
 	{
 		_core->_skyEntityManager.setExposureIntensity(0.0f);
 		_core->_skyEntityManager.setExposureSpeed(0.0f);
 	}
 }
 
-void FabiEngine3D::gfx_disableDOF(bool resetProperties)
+void FabiEngine3D::gfx_disableDOF(bool mustResetProperties)
 {
 	if(!_core->_renderBus.isDofEnabled())
 	{
@@ -243,7 +243,7 @@ void FabiEngine3D::gfx_disableDOF(bool resetProperties)
 
 	_core->_renderBus.setDofEnabled(false);
 
-	if(resetProperties)
+	if(mustResetProperties)
 	{
 		_core->_renderBus.setDofDynamic(false);
 		_core->_renderBus.setDofMaxDistance(0.0f);
@@ -251,7 +251,7 @@ void FabiEngine3D::gfx_disableDOF(bool resetProperties)
 	}
 }
 
-void FabiEngine3D::gfx_disableMotionBlur(bool resetProperties)
+void FabiEngine3D::gfx_disableMotionBlur(bool mustResetProperties)
 {
 	if(!_core->_renderBus.isMotionBlurEnabled())
 	{
@@ -261,13 +261,13 @@ void FabiEngine3D::gfx_disableMotionBlur(bool resetProperties)
 
 	_core->_renderBus.setMotionBlurEnabled(false);
 
-	if(resetProperties)
+	if(mustResetProperties)
 	{
 		_core->_renderBus.setMotionBlurStrength(0.0f);
 	}
 }
 
-void FabiEngine3D::gfx_disableLensFlare(bool resetProperties)
+void FabiEngine3D::gfx_disableLensFlare(bool mustResetProperties)
 {
 	if(!_core->_renderBus.isLensFlareEnabled())
 	{
@@ -277,7 +277,7 @@ void FabiEngine3D::gfx_disableLensFlare(bool resetProperties)
 
 	_core->_renderBus.setLensFlareEnabled(false);
 
-	if(resetProperties)
+	if(mustResetProperties)
 	{
 		_core->_renderBus.setLensFlareMap(0);
 		_core->_renderBus.setLensFlareMapPath("");

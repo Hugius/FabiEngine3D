@@ -21,9 +21,9 @@ public:
 	void createWriteField(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, Vec3 textColor, Vec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed);
 	void createButton(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, string textContent, Vec3 textColor, Vec3 textHoverColor);
 	void createButton(const string& ID, Vec2 position, Vec2 size, const string& texturePath, Vec3 hoverColor);
-	void createRectangle(const string& ID, Vec2 position, Vec2 size, Vec3 color, bool isCentered = true);
-	void createRectangle(const string& ID, Vec2 position, Vec2 size, const string& texturePath, bool isCentered = true);
-	void createTextField(const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 textColor, bool isCentered = true, bool isDynamic = false);
+	void createRectangle(const string& ID, Vec2 position, Vec2 size, Vec3 color, bool isCentered);
+	void createRectangle(const string& ID, Vec2 position, Vec2 size, const string& texturePath, bool isCentered);
+	void createTextField(const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 textColor, bool isCentered, bool isDynamic);
 	void deleteScrollingList(const string& ID);
 	void deleteWriteField(const string& ID);
 	void deleteButton(const string& ID);

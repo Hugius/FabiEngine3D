@@ -180,7 +180,7 @@ void TopViewportController::_updateGameScreenManagement()
 				}
 				else
 				{
-					_scriptEditor.loadScriptFiles();
+					_scriptEditor.loadScriptFiles(true);
 					_scriptEditor.getScriptExecutor().load();
 				}
 			}
@@ -191,7 +191,7 @@ void TopViewportController::_updateGameScreenManagement()
 			else if(gameScreen->getButton("restart")->isHovered())
 			{
 				_scriptEditor.getScriptExecutor().unload();
-				_scriptEditor.loadScriptFiles();
+				_scriptEditor.loadScriptFiles(true);
 				_scriptEditor.getScriptExecutor().load();
 			}
 			else if(gameScreen->getButton("stop")->isHovered())

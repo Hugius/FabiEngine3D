@@ -17,7 +17,7 @@ public:
 	void update();
 
 	// Booleans
-	const bool loadScriptFiles(bool isLoggingEnabled = true);
+	const bool loadScriptFiles(bool isLoggingEnabled);
 	const bool saveScriptFiles();
 	const bool isLoaded() const;
 	const bool isWritingScript() const;

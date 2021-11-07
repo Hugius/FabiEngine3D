@@ -55,7 +55,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.modelEntity_delete(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -70,7 +70,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.modelEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -85,7 +85,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.modelEntity_setBasePosition(arguments[0].getString(),
 												  Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
@@ -101,7 +101,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.modelEntity_setBaseRotation(arguments[0].getString(),
 												  Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
@@ -117,7 +117,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.modelEntity_setBaseRotationOrigin(arguments[0].getString(),
 														Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
@@ -133,7 +133,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.modelEntity_setBaseSize(arguments[0].getString(),
 											  Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
@@ -149,7 +149,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.modelEntity_moveBase(arguments[0].getString(),
 										   Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
@@ -165,7 +165,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.modelEntity_rotateBase(arguments[0].getString(),
 											 Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
@@ -181,7 +181,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.modelEntity_scaleBase(arguments[0].getString(),
 											Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
@@ -197,7 +197,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.modelEntity_moveBaseTo(arguments[0].getString(),
 											 Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
@@ -213,7 +213,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.modelEntity_rotateBaseTo(arguments[0].getString(),
 											   Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
@@ -229,7 +229,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.modelEntity_scaleBaseTo(arguments[0].getString(),
 											  Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
@@ -245,7 +245,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.modelEntity_setMinHeight(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -260,7 +260,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.modelEntity_setMaxHeight(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -275,7 +275,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				// Retrieve all bound AABB IDs
 				auto aabbIDs = _fe3d.aabbEntity_getChildIDs(arguments[0].getString(), AabbParentType::MODEL_ENTITY);
@@ -306,7 +306,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				// Retrieve all bound AABB IDs
 				auto aabbIDs = _fe3d.aabbEntity_getChildIDs(arguments[0].getString(), AabbParentType::MODEL_ENTITY);
@@ -337,7 +337,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_animationEditor.startAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -352,7 +352,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_animationEditor.pauseAnimation(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -367,7 +367,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_animationEditor.resumeAnimation(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -382,7 +382,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_animationEditor.fadeAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -397,7 +397,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_animationEditor.stopAnimation(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -412,7 +412,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				// Retrieve animation data
 				string errorMessage = "Tried to set animation speed with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
@@ -435,7 +435,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				// Retrieve animation data
 				string errorMessage = "Tried to set animation autopaused option with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
@@ -458,7 +458,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				// Set color
 				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
@@ -480,7 +480,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				// Set lightness
 				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
@@ -501,7 +501,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				// Set alpha
 				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
@@ -522,7 +522,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString()))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				// Set emission intensity
 				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))

@@ -187,7 +187,7 @@ const bool SceneEditor::_copyPreviewWater(const string& newID, const string& pre
 	return true;
 }
 
-const bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool fromOutside)
+const bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool isFromOutside)
 {
 	// Error checking
 	if(_fe3d.modelEntity_isExisting(newID) && !_fe3d.modelEntity_isInstanced(previewID))
@@ -283,7 +283,7 @@ const bool SceneEditor::_copyPreviewModel(const string& newID, const string& pre
 	}
 
 	// Save ID
-	if(fromOutside)
+	if(isFromOutside)
 	{
 		_outsideLoadedModelIDs[newID] = previewID;
 	}
@@ -295,7 +295,7 @@ const bool SceneEditor::_copyPreviewModel(const string& newID, const string& pre
 	return true;
 }
 
-const bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool fromOutside)
+const bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool isFromOutside)
 {
 	// Error checking
 	if(_fe3d.billboardEntity_isExisting(newID))
@@ -355,7 +355,7 @@ const bool SceneEditor::_copyPreviewBillboard(const string& newID, const string&
 	_fe3d.billboardEntity_setLightness(newID, _fe3d.billboardEntity_getLightness(previewID));
 
 	// Save ID
-	if(fromOutside)
+	if(isFromOutside)
 	{
 		_outsideLoadedBillboardIDs[newID] = previewID;
 	}
@@ -367,7 +367,7 @@ const bool SceneEditor::_copyPreviewBillboard(const string& newID, const string&
 	return true;
 }
 
-const bool SceneEditor::_copyPreviewSound(const string& newID, const string& previewID, Vec3 position, bool fromOutside)
+const bool SceneEditor::_copyPreviewSound(const string& newID, const string& previewID, Vec3 position, bool isFromOutside)
 {
 	// Error checking
 	if(_fe3d.sound_isExisting(newID))
@@ -386,7 +386,7 @@ const bool SceneEditor::_copyPreviewSound(const string& newID, const string& pre
 	_fe3d.sound_make3D(newID, position, 0.0f, 0.0f);
 
 	// Save ID
-	if(fromOutside)
+	if(isFromOutside)
 	{
 		_outsideLoadedSoundIDs[newID] = previewID;
 	}

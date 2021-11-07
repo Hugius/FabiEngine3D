@@ -184,7 +184,7 @@ const bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 			}
 
 			// Create model
-			if(_copyPreviewModel(modelID, previewID, position))
+			if(_copyPreviewModel(modelID, previewID, position, false))
 			{
 				// Check if preview model instancing changed
 				if(_fe3d.modelEntity_isExisting(previewID))
@@ -401,7 +401,7 @@ const bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 			replace(textContent.begin(), textContent.end(), '?', ' ');
 
 			// Create billboard
-			if(_copyPreviewBillboard(billboardID, previewID, position))
+			if(_copyPreviewBillboard(billboardID, previewID, position, false))
 			{
 				// Set properties
 				_fe3d.billboardEntity_setRotation(billboardID, rotation);
@@ -486,11 +486,11 @@ const bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 				maxDistance;
 
 			// Create sound
-			if(_copyPreviewSound(soundID, previewID, position))
+			if(_copyPreviewSound(soundID, previewID, position, false))
 			{
 				_fe3d.sound_setMaxVolume(soundID, maxVolume);
 				_fe3d.sound_setMaxDistance(soundID, maxDistance);
-				_fe3d.sound_play(soundID, -1, 0);
+				_fe3d.sound_play(soundID, -1, 0, false);
 			}
 		}
 		else if(lineType == "POINTLIGHT")

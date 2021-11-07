@@ -79,7 +79,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString()))
+			if(_validateFe3dSound(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.sound_isStarted(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -94,7 +94,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString()))
+			if(_validateFe3dSound(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.sound_isPlaying(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -109,7 +109,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString()))
+			if(_validateFe3dSound(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.sound_isPaused(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -124,7 +124,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString()))
+			if(_validateFe3dSound(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.sound_getVolume(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -139,7 +139,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString()))
+			if(_validateFe3dSound(arguments[0].getString(), false))
 			{
 				// Only for 3D sound
 				if(!_fe3d.sound_is3D(arguments[0].getString()))
@@ -161,7 +161,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString()))
+			if(_validateFe3dSound(arguments[0].getString(), false))
 			{
 				// Only for 3D sound
 				if(!_fe3d.sound_is3D(arguments[0].getString()))
@@ -184,7 +184,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString()))
+			if(_validateFe3dSound(arguments[0].getString(), false))
 			{
 				// Only for 3D sound
 				if(!_fe3d.sound_is3D(arguments[0].getString()))

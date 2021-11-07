@@ -49,7 +49,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		_leftViewportController.getSettingsEditor().loadSettingsFromFile();
 
 		// Initialize script execution
-		_leftViewportController.getScriptEditor().loadScriptFiles();
+		_leftViewportController.getScriptEditor().loadScriptFiles(true);
 		_leftViewportController.getScriptEditor().getScriptExecutor().load();
 
 		// Scripting error has been thrown

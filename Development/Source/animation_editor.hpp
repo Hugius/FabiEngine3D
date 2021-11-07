@@ -34,7 +34,7 @@ public:
 	const bool isAnimationPlaying(const string& animationID, const string& modelID) const;
 	const bool isAnimationPaused(const string& animationID, const string& modelID) const;
 	const bool isAnimationFading(const string& animationID, const string& modelID) const;
-	const bool loadAnimationsFromFile(bool mustCheckPreviewModel = true);
+	const bool loadAnimationsFromFile(bool mustCheckPreviewModel);
 	const bool saveAnimationsToFile() const;
 
 	// Miscellaneous

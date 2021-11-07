@@ -156,7 +156,7 @@ void SettingsEditor::update()
 		}
 		if(_gui.getGlobalScreen()->isAnswerFormDenied("isAntiAliasingEnabled") && _fe3d.gfx_isAntiAliasingEnabled())
 		{
-			_fe3d.gfx_disableAntiAliasing();
+			_fe3d.gfx_disableAntiAliasing(false);
 		}
 
 		// Update value forms
@@ -204,7 +204,7 @@ void SettingsEditor::update()
 
 void SettingsEditor::loadDefaultSettings()
 {
-	_fe3d.gfx_isAntiAliasingEnabled() ? _fe3d.gfx_disableAntiAliasing() : void();
+	_fe3d.gfx_isAntiAliasingEnabled() ? _fe3d.gfx_disableAntiAliasing(false) : void();
 	_fe3d.gfx_setBloomSize(Config::MIN_BLOOM_SIZE);
 	_fe3d.gfx_setDofSize(Config::MIN_DOF_SIZE);
 	_fe3d.gfx_setMotionBlurSize(Config::MIN_MOTION_BLUR_SIZE);

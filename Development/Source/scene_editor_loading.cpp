@@ -199,7 +199,7 @@ const bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			}
 
 			// Create model
-			if(_copyPreviewModel(modelID, previewID, position))
+			if(_copyPreviewModel(modelID, previewID, position, false))
 			{
 				// Set properties
 				_fe3d.modelEntity_setBaseRotation(modelID, rotation);
@@ -278,7 +278,7 @@ const bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				size.y;
 
 			// Create billboard
-			if(_copyPreviewBillboard(billboardID, previewID, position))
+			if(_copyPreviewBillboard(billboardID, previewID, position, false))
 			{
 				_fe3d.billboardEntity_setRotation(billboardID, rotation);
 				_fe3d.billboardEntity_setSize(billboardID, size);
@@ -321,11 +321,11 @@ const bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			}
 
 			// Create sound
-			if(_copyPreviewSound(soundID, previewID, position))
+			if(_copyPreviewSound(soundID, previewID, position, false))
 			{
 				_fe3d.sound_setMaxVolume(soundID, maxVolume);
 				_fe3d.sound_setMaxDistance(soundID, maxDistance);
-				_fe3d.sound_play(soundID, -1, 0);
+				_fe3d.sound_play(soundID, -1, 0, false);
 			}
 		}
 		else if(lineType == "POINTLIGHT")

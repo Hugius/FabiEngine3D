@@ -13,7 +13,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dBillboard(arguments[0].getString()))
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.billboardEntity_isVisible(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -28,7 +28,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dBillboard(arguments[0].getString()))
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.billboardEntity_getPosition(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
@@ -43,7 +43,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dBillboard(arguments[0].getString()))
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.billboardEntity_getRotation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
@@ -58,7 +58,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dBillboard(arguments[0].getString()))
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.billboardEntity_getSize(arguments[0].getString()).x;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dBillboard(arguments[0].getString()))
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.billboardEntity_getSize(arguments[0].getString()).y;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -88,7 +88,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dBillboard(arguments[0].getString()))
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.billboardEntity_getColor(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
@@ -103,7 +103,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dBillboard(arguments[0].getString()))
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.billboardEntity_getMinHeight(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -118,7 +118,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dBillboard(arguments[0].getString()))
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.billboardEntity_getMaxHeight(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -133,7 +133,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dBillboard(arguments[0].getString()))
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.billboardEntity_getAlpha(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -148,7 +148,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dBillboard(arguments[0].getString()))
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.billboardEntity_getLightness(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -163,7 +163,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dBillboard(arguments[0].getString()))
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.billboardEntity_isFacingCameraX(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -178,7 +178,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dBillboard(arguments[0].getString()))
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.billboardEntity_isFacingCameraY(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -193,7 +193,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dBillboard(arguments[0].getString()))
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.billboardEntity_isSpriteAnimationStarted(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -208,7 +208,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dBillboard(arguments[0].getString()))
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.billboardEntity_isSpriteAnimationPlaying(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -223,7 +223,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dBillboard(arguments[0].getString()))
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.billboardEntity_isSpriteAnimationPaused(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -304,7 +304,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dBillboard(arguments[0].getString()))
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				// Check if billboard is not of type text
 				if(!_fe3d.billboardEntity_isText(arguments[0].getString()))

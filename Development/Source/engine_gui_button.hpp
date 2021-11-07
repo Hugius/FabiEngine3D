@@ -8,9 +8,9 @@ class EngineGuiButton
 {
 public:
 	EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor,
-					string textContent, Vec3 textColor, Vec3 textHoverColor, bool sizeIncreaseEnabled = true, bool colorChangeEnabled = true);
+					string textContent, Vec3 textColor, Vec3 textHoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled);
 	EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size,
-					const string& texturePath, Vec3 hoverColor, bool sizeChangeEnabled = true, bool colorChangeEnabled = true);
+					const string& texturePath, Vec3 hoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled);
 
 	// Voids
 	virtual void update(bool isHoverable);
@@ -60,6 +60,6 @@ private:
 	static inline const float TEXT_HEIGHT_MULTIPLIER = 0.75f;
 
 	// Booleans
-	const bool _sizeChangeEnabled;
-	const bool _colorChangeEnabled;
+	const bool _isSizeChangeEnabled;
+	const bool _isColorChangeEnabled;
 };

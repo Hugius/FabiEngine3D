@@ -37,7 +37,7 @@ void AudioEditor::load()
 	_fe3d.billboardEntity_setBright("@@icon", true);
 
 	// Miscellaneous
-	_gui.getGlobalScreen()->createTextField("audioID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->createTextField("audioID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f), true);
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("audioEditorControls");
 	_isEditorLoaded = true;
 }

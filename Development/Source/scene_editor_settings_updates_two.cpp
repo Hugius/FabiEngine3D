@@ -32,7 +32,7 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 			}
 			else
 			{
-				_fe3d.gfx_disableFog();
+				_fe3d.gfx_disableFog(false);
 			}
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("minDistance")->isHovered())
@@ -126,7 +126,7 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			}
 			else
 			{
-				_fe3d.gfx_disableLensFlare();
+				_fe3d.gfx_disableLensFlare(false);
 			}
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("flareMap")->isHovered())
@@ -216,7 +216,7 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 			}
 			else
 			{
-				_fe3d.gfx_disableSkyExposure();
+				_fe3d.gfx_disableSkyExposure(false);
 			}
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
@@ -278,7 +278,7 @@ void SceneEditor::_updateBloomGraphicsSettingsMenu()
 			}
 			else
 			{
-				_fe3d.gfx_disableBloom();
+				_fe3d.gfx_disableBloom(false);
 			}
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("type")->isHovered())

@@ -139,9 +139,9 @@ private:
 	const bool _copyPreviewSky(const string& newID, const string& previewID);
 	const bool _copyPreviewTerrain(const string& newID, const string& previewID);
 	const bool _copyPreviewWater(const string& newID, const string& previewID);
-	const bool _copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
-	const bool _copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
-	const bool _copyPreviewSound(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
+	const bool _copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool isFromOutside);
+	const bool _copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool isFromOutside);
+	const bool _copyPreviewSound(const string& newID, const string& previewID, Vec3 position, bool isFromOutside);
 
 	// Strings
 	static inline const string PREVIEW_SPEAKER_ID = "@@previewSpeaker";

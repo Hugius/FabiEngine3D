@@ -19,7 +19,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& f
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.gfx_disableAmbientLighting();
+			_fe3d.gfx_disableAmbientLighting(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -59,7 +59,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& f
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.gfx_disableDirectionalLighting();
+			_fe3d.gfx_disableDirectionalLighting(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

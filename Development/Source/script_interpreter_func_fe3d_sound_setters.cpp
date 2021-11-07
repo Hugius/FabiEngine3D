@@ -87,7 +87,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString()))
+			if(_validateFe3dSound(arguments[0].getString(), false))
 			{
 				_fe3d.sound_delete(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -120,9 +120,9 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString()))
+			if(_validateFe3dSound(arguments[0].getString(), false))
 			{
-				_fe3d.sound_play(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger());
+				_fe3d.sound_play(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger(), false);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -135,7 +135,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString()))
+			if(_validateFe3dSound(arguments[0].getString(), false))
 			{
 				_fe3d.sound_play(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger(), true);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -150,7 +150,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString()))
+			if(_validateFe3dSound(arguments[0].getString(), false))
 			{
 				_fe3d.sound_pause(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -174,7 +174,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString()))
+			if(_validateFe3dSound(arguments[0].getString(), false))
 			{
 				_fe3d.sound_resume(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -198,7 +198,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString()))
+			if(_validateFe3dSound(arguments[0].getString(), false))
 			{
 				_fe3d.sound_stop(arguments[0].getString(), arguments[1].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -222,7 +222,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString()))
+			if(_validateFe3dSound(arguments[0].getString(), false))
 			{
 				// Only for 2D sound
 				if(_fe3d.sound_is3D(arguments[0].getString()))
@@ -245,7 +245,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString()))
+			if(_validateFe3dSound(arguments[0].getString(), false))
 			{
 				// Only for 3D sound
 				if(!_fe3d.sound_is3D(arguments[0].getString()))
@@ -270,7 +270,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString()))
+			if(_validateFe3dSound(arguments[0].getString(), false))
 			{
 				// Only for 3D sound
 				if(!_fe3d.sound_is3D(arguments[0].getString()))
@@ -293,7 +293,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString()))
+			if(_validateFe3dSound(arguments[0].getString(), false))
 			{
 				// Only for 3D sound
 				if(!_fe3d.sound_is3D(arguments[0].getString()))

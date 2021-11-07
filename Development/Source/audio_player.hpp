@@ -22,8 +22,8 @@ public:
 	void update(Camera& camera, vector<Sound>& soundList, vector<Music>& musicList);
 	void setSoundsEnabled(bool value);
 	void setMusicEnabled(bool value);
-	void playSound(Sound& sound, int loops, int fadeMS, bool forcePlay = false);
-	void playMusic(vector<Music>& musicList, bool forcePlay = false);
+	void playSound(Sound& sound, int loops, int fadeMS, bool mustForcePlay);
+	void playMusic(vector<Music>& musicList, bool mustForcePlay);
 	void pauseAllSounds();
 	void pauseSound(Sound& sound);
 	void pauseMusic();

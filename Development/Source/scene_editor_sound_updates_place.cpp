@@ -49,7 +49,7 @@ void SceneEditor::_updateSoundPlacing()
 				// Create sound
 				_fe3d.sound_create(newID, _fe3d.sound_getFilePath(_currentPreviewSoundID));
 				_fe3d.sound_make3D(newID, newPosition, DEFAULT_SOUND_MAX_VOLUME, DEFAULT_SOUND_MAX_DISTANCE);
-				_fe3d.sound_play(newID, -1, 0);
+				_fe3d.sound_play(newID, -1, 0, false);
 				_loadedSoundIDs.insert(make_pair(newID, _currentPreviewSoundID));
 			}
 
@@ -81,7 +81,7 @@ void SceneEditor::_updateSoundPlacing()
 						// Play preview sound
 						if(!_fe3d.sound_isStarted(_currentPreviewSoundID))
 						{
-							_fe3d.sound_play(_currentPreviewSoundID, -1, 0);
+							_fe3d.sound_play(_currentPreviewSoundID, -1, 0, false);
 						}
 
 						// Show preview speaker
@@ -138,7 +138,7 @@ void SceneEditor::_updateSoundPlacing()
 						// Create sound
 						_fe3d.sound_create(newID, _fe3d.sound_getFilePath(_currentPreviewSoundID));
 						_fe3d.sound_make3D(newID, newPosition, DEFAULT_SOUND_MAX_VOLUME, DEFAULT_SOUND_MAX_DISTANCE);
-						_fe3d.sound_play(newID, -1, 0);
+						_fe3d.sound_play(newID, -1, 0, false);
 						_loadedSoundIDs.insert(make_pair(newID, _currentPreviewSoundID));
 					}
 					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode

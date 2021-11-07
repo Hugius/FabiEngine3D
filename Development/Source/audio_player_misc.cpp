@@ -89,7 +89,7 @@ void AudioPlayer::update(Camera& camera, vector<Sound>& soundList, vector<Music>
 	// Update music management
 	if(_isMusicEnabled)
 	{
-		playMusic(musicList);
+		playMusic(musicList, false);
 		_updateMusicVolume();
 	}
 }

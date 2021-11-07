@@ -21,7 +21,7 @@ public:
 	void createButton(const string& ID, Vec2 position, Vec2 size, const string& texturePath, Vec3 hoverColor);
 	void createRectangle(const string& ID, Vec2 position, Vec2 size, Vec3 color);
 	void createRectangle(const string& ID, Vec2 position, Vec2 size, const string& texturePath);
-	void createTextField(const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 textColor, bool isCentered = true);
+	void createTextField(const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 textColor, bool isCentered);
 	void deleteScrollingList(const string& ID);
 	void deleteWriteField(const string& ID);
 	void deleteButton(const string& ID);

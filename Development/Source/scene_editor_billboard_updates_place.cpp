@@ -34,7 +34,7 @@ void SceneEditor::_updateBillboardPlacing()
 				}
 
 				// Create billboard
-				_copyPreviewBillboard(newID, _currentPreviewBillboardID, newPosition);
+				_copyPreviewBillboard(newID, _currentPreviewBillboardID, newPosition, false);
 			}
 
 			// Check if placement mode must be disabled
@@ -85,7 +85,7 @@ void SceneEditor::_updateBillboardPlacing()
 						}
 
 						// Create billboard
-						_copyPreviewBillboard(newID, _currentPreviewBillboardID, newPosition);
+						_copyPreviewBillboard(newID, _currentPreviewBillboardID, newPosition, false);
 					}
 					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
 					{

@@ -258,13 +258,13 @@ void SceneEditor::_loadGUI()
 
 	// Right-viewport: modelPropertiesMenu
 	rightWindow->createScreen("modelPropertiesMenu");
-	rightWindow->getScreen("modelPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.25f, 0.1f), "Model Menu", Vec3(0.0f, 1.0f, 0.0f));
+	rightWindow->getScreen("modelPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.25f, 0.1f), "Model Menu", Vec3(0.0f, 1.0f, 0.0f), true, false);
 	rightWindow->getScreen("modelPropertiesMenu")->createButton("position", Vec2(0.0f, 0.8f), Vec2(0.75f, 0.2f), "position.png", Vec3(1.0f));
 	rightWindow->getScreen("modelPropertiesMenu")->createButton("rotation", Vec2(0.0f, 0.55f), Vec2(0.75f, 0.2f), "rotation.png", Vec3(1.0f));
 	rightWindow->getScreen("modelPropertiesMenu")->createButton("size", Vec2(0.0f, 0.3f), Vec2(0.75f, 0.2f), "size.png", Vec3(1.0f));
-	rightWindow->getScreen("modelPropertiesMenu")->createTextField("x", Vec2(0.0f, 0.135f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f));
-	rightWindow->getScreen("modelPropertiesMenu")->createTextField("y", Vec2(0.0f, -0.115f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f));
-	rightWindow->getScreen("modelPropertiesMenu")->createTextField("z", Vec2(0.0f, -0.365f), Vec2(0.25f, 0.1f), "Z", Vec3(1.0f));
+	rightWindow->getScreen("modelPropertiesMenu")->createTextField("x", Vec2(0.0f, 0.135f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f), true, false);
+	rightWindow->getScreen("modelPropertiesMenu")->createTextField("y", Vec2(0.0f, -0.115f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f), true, false);
+	rightWindow->getScreen("modelPropertiesMenu")->createTextField("z", Vec2(0.0f, -0.365f), Vec2(0.25f, 0.1f), "Z", Vec3(1.0f), true, false);
 	rightWindow->getScreen("modelPropertiesMenu")->createButton("xPlus", Vec2(0.75f, 0.025f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("modelPropertiesMenu")->createButton("yPlus", Vec2(0.75f, -0.225f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("modelPropertiesMenu")->createButton("zPlus", Vec2(0.75f, -0.475f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
@@ -280,13 +280,13 @@ void SceneEditor::_loadGUI()
 
 	// Right-viewport: billboardPropertiesMenu
 	rightWindow->createScreen("billboardPropertiesMenu");
-	rightWindow->getScreen("billboardPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.75f, 0.1f), "Billboard Menu", Vec3(0.0f, 1.0f, 0.0f));
+	rightWindow->getScreen("billboardPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.75f, 0.1f), "Billboard Menu", Vec3(0.0f, 1.0f, 0.0f), true, false);
 	rightWindow->getScreen("billboardPropertiesMenu")->createButton("position", Vec2(0.0f, 0.8f), Vec2(0.75f, 0.2f), "position.png", Vec3(1.0f));
 	rightWindow->getScreen("billboardPropertiesMenu")->createButton("rotation", Vec2(0.0f, 0.55f), Vec2(0.75f, 0.2f), "rotation.png", Vec3(1.0f));
 	rightWindow->getScreen("billboardPropertiesMenu")->createButton("size", Vec2(0.0f, 0.3f), Vec2(0.75f, 0.2f), "size.png", Vec3(1.0f));
-	rightWindow->getScreen("billboardPropertiesMenu")->createTextField("x", Vec2(0.0f, 0.135f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f));
-	rightWindow->getScreen("billboardPropertiesMenu")->createTextField("y", Vec2(0.0f, -0.115f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f));
-	rightWindow->getScreen("billboardPropertiesMenu")->createTextField("z", Vec2(0.0f, -0.365f), Vec2(0.25f, 0.1f), "Z", Vec3(1.0f));
+	rightWindow->getScreen("billboardPropertiesMenu")->createTextField("x", Vec2(0.0f, 0.135f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f), true, false);
+	rightWindow->getScreen("billboardPropertiesMenu")->createTextField("y", Vec2(0.0f, -0.115f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f), true, false);
+	rightWindow->getScreen("billboardPropertiesMenu")->createTextField("z", Vec2(0.0f, -0.365f), Vec2(0.25f, 0.1f), "Z", Vec3(1.0f), true, false);
 	rightWindow->getScreen("billboardPropertiesMenu")->createButton("xPlus", Vec2(0.75f, 0.025f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("billboardPropertiesMenu")->createButton("yPlus", Vec2(0.75f, -0.225f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("billboardPropertiesMenu")->createButton("zPlus", Vec2(0.75f, -0.475f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
@@ -300,10 +300,10 @@ void SceneEditor::_loadGUI()
 
 	// Right-viewport: soundPropertiesMenu
 	rightWindow->createScreen("soundPropertiesMenu");
-	rightWindow->getScreen("soundPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.25f, 0.1f), "Sound Menu", Vec3(0.0f, 1.0f, 0.0f));
-	rightWindow->getScreen("soundPropertiesMenu")->createTextField("x", Vec2(0.0f, 0.81f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f));
-	rightWindow->getScreen("soundPropertiesMenu")->createTextField("y", Vec2(0.0f, 0.56f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f));
-	rightWindow->getScreen("soundPropertiesMenu")->createTextField("z", Vec2(0.0f, 0.31f), Vec2(0.25f, 0.1f), "Z", Vec3(1.0f));
+	rightWindow->getScreen("soundPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.25f, 0.1f), "Sound Menu", Vec3(0.0f, 1.0f, 0.0f), true, false);
+	rightWindow->getScreen("soundPropertiesMenu")->createTextField("x", Vec2(0.0f, 0.81f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f), true, false);
+	rightWindow->getScreen("soundPropertiesMenu")->createTextField("y", Vec2(0.0f, 0.56f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f), true, false);
+	rightWindow->getScreen("soundPropertiesMenu")->createTextField("z", Vec2(0.0f, 0.31f), Vec2(0.25f, 0.1f), "Z", Vec3(1.0f), true, false);
 	rightWindow->getScreen("soundPropertiesMenu")->createButton("xPlus", Vec2(0.75f, 0.7f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("soundPropertiesMenu")->createButton("yPlus", Vec2(0.75f, 0.45f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("soundPropertiesMenu")->createButton("zPlus", Vec2(0.75f, 0.2f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
@@ -313,11 +313,11 @@ void SceneEditor::_loadGUI()
 	rightWindow->getScreen("soundPropertiesMenu")->createWriteField("x", Vec2(0.0f, 0.7f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen("soundPropertiesMenu")->createWriteField("y", Vec2(0.0f, 0.45f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen("soundPropertiesMenu")->createWriteField("z", Vec2(0.0f, 0.2f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("soundPropertiesMenu")->createTextField("distance", Vec2(0.0f, 0.06f), Vec2(1.5f, 0.1f), "Max distance", Vec3(1.0f));
+	rightWindow->getScreen("soundPropertiesMenu")->createTextField("distance", Vec2(0.0f, 0.06f), Vec2(1.5f, 0.1f), "Max distance", Vec3(1.0f), true, false);
 	rightWindow->getScreen("soundPropertiesMenu")->createButton("distancePlus", Vec2(0.75f, -0.05f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("soundPropertiesMenu")->createButton("distanceMinus", Vec2(-0.75f, -0.05f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
 	rightWindow->getScreen("soundPropertiesMenu")->createWriteField("distance", Vec2(0.0f, -0.05f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("soundPropertiesMenu")->createTextField("volume", Vec2(0.0f, -0.19f), Vec2(1.25f, 0.1f), "Max volume", Vec3(1.0f));
+	rightWindow->getScreen("soundPropertiesMenu")->createTextField("volume", Vec2(0.0f, -0.19f), Vec2(1.25f, 0.1f), "Max volume", Vec3(1.0f), true, false);
 	rightWindow->getScreen("soundPropertiesMenu")->createButton("volumePlus", Vec2(0.75f, -0.3f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("soundPropertiesMenu")->createButton("volumeMinus", Vec2(-0.75f, -0.3f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
 	rightWindow->getScreen("soundPropertiesMenu")->createWriteField("volume", Vec2(0.0f, -0.3f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
@@ -325,13 +325,13 @@ void SceneEditor::_loadGUI()
 
 	// Right-viewport: pointlightPropertiesMenu
 	rightWindow->createScreen("pointlightPropertiesMenu");
-	rightWindow->getScreen("pointlightPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.875f, 0.1f), "Pointlight Menu", Vec3(0.0f, 1.0f, 0.0f));
+	rightWindow->getScreen("pointlightPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.875f, 0.1f), "Pointlight Menu", Vec3(0.0f, 1.0f, 0.0f), true, false);
 	rightWindow->getScreen("pointlightPropertiesMenu")->createButton("position", Vec2(0.0f, 0.8f), Vec2(0.75f, 0.2f), "position.png", Vec3(1.0f));
 	rightWindow->getScreen("pointlightPropertiesMenu")->createButton("radius", Vec2(0.0f, 0.6f), Vec2(0.75f, 0.2f), "radius.png", Vec3(1.0f));
 	rightWindow->getScreen("pointlightPropertiesMenu")->createButton("color", Vec2(0.0f, 0.4f), Vec2(0.75f, 0.2f), "color.png", Vec3(1.0f));
-	rightWindow->getScreen("pointlightPropertiesMenu")->createTextField("x", Vec2(0.0f, 0.235f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f));
-	rightWindow->getScreen("pointlightPropertiesMenu")->createTextField("y", Vec2(0.0f, 0.01f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f));
-	rightWindow->getScreen("pointlightPropertiesMenu")->createTextField("z", Vec2(0.0f, -0.215f), Vec2(0.25f, 0.1f), "Z", Vec3(1.0f));
+	rightWindow->getScreen("pointlightPropertiesMenu")->createTextField("x", Vec2(0.0f, 0.235f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f), true, false);
+	rightWindow->getScreen("pointlightPropertiesMenu")->createTextField("y", Vec2(0.0f, 0.01f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f), true, false);
+	rightWindow->getScreen("pointlightPropertiesMenu")->createTextField("z", Vec2(0.0f, -0.215f), Vec2(0.25f, 0.1f), "Z", Vec3(1.0f), true, false);
 	rightWindow->getScreen("pointlightPropertiesMenu")->createButton("xPlus", Vec2(0.75f, 0.125f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("pointlightPropertiesMenu")->createButton("yPlus", Vec2(0.75f, -0.1f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("pointlightPropertiesMenu")->createButton("zPlus", Vec2(0.75f, -0.325f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
@@ -341,7 +341,7 @@ void SceneEditor::_loadGUI()
 	rightWindow->getScreen("pointlightPropertiesMenu")->createWriteField("x", Vec2(0.0f, 0.125f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen("pointlightPropertiesMenu")->createWriteField("y", Vec2(0.0f, -0.1f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen("pointlightPropertiesMenu")->createWriteField("z", Vec2(0.0f, -0.325f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("pointlightPropertiesMenu")->createTextField("intensity", Vec2(0.0f, -0.44f), Vec2(1.125f, 0.1f), "Intensity", Vec3(1.0f));
+	rightWindow->getScreen("pointlightPropertiesMenu")->createTextField("intensity", Vec2(0.0f, -0.44f), Vec2(1.125f, 0.1f), "Intensity", Vec3(1.0f), true, false);
 	rightWindow->getScreen("pointlightPropertiesMenu")->createButton("intensityPlus", Vec2(0.75f, -0.55f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("pointlightPropertiesMenu")->createButton("intensityMinus", Vec2(-0.75f, -0.55f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
 	rightWindow->getScreen("pointlightPropertiesMenu")->createWriteField("intensity", Vec2(0.0f, -0.55f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
@@ -350,12 +350,12 @@ void SceneEditor::_loadGUI()
 
 	// Right-viewport: spotlightPropertiesMenu
 	rightWindow->createScreen("spotlightPropertiesMenu");
-	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.75f, 0.1f), "Spotlight Menu", Vec3(0.0f, 1.0f, 0.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.75f, 0.1f), "Spotlight Menu", Vec3(0.0f, 1.0f, 0.0f), true, false);
 	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("position", Vec2(-0.5f, 0.8f), Vec2(0.75f, 0.2f), "position.png", Vec3(1.0f));
 	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("color", Vec2(0.5f, 0.8f), Vec2(0.75f, 0.2f), "color.png", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("x", Vec2(0.0f, 0.725f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("y", Vec2(0.0f, 0.525f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("z", Vec2(0.0f, 0.325f), Vec2(0.25f, 0.1f), "Z", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("x", Vec2(0.0f, 0.725f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f), true, false);
+	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("y", Vec2(0.0f, 0.525f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f), true, false);
+	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("z", Vec2(0.0f, 0.325f), Vec2(0.25f, 0.1f), "Z", Vec3(1.0f), true, false);
 	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("xPlus", Vec2(0.75f, 0.625f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("yPlus", Vec2(0.75f, 0.425f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("zPlus", Vec2(0.75f, 0.225f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
@@ -365,23 +365,23 @@ void SceneEditor::_loadGUI()
 	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("x", Vec2(0.0f, 0.625f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("y", Vec2(0.0f, 0.425f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("z", Vec2(0.0f, 0.225f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("yaw", Vec2(0.0f, 0.125f), Vec2(0.375f, 0.1f), "Yaw", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("yaw", Vec2(0.0f, 0.125f), Vec2(0.375f, 0.1f), "Yaw", Vec3(1.0f), true, false);
 	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("yawPlus", Vec2(0.75f, 0.025f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("yawMinus", Vec2(-0.75f, 0.025f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
 	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("yaw", Vec2(0.0f, 0.025f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("pitch", Vec2(0.0f, -0.075f), Vec2(0.625f, 0.1f), "Pitch", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("pitch", Vec2(0.0f, -0.075f), Vec2(0.625f, 0.1f), "Pitch", Vec3(1.0f), true, false);
 	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("pitchPlus", Vec2(0.75f, -0.175f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("pitchMinus", Vec2(-0.75f, -0.175f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
 	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("pitch", Vec2(0.0f, -0.175f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("intensity", Vec2(0.0f, -0.275f), Vec2(1.125f, 0.1f), "Intensity", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("intensity", Vec2(0.0f, -0.275f), Vec2(1.125f, 0.1f), "Intensity", Vec3(1.0f), true, false);
 	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("intensityPlus", Vec2(0.75f, -0.375f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("intensityMinus", Vec2(-0.75f, -0.375f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
 	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("intensity", Vec2(0.0f, -0.375f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("angle", Vec2(0.0f, -0.475f), Vec2(0.625f, 0.1f), "Angle", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("angle", Vec2(0.0f, -0.475f), Vec2(0.625f, 0.1f), "Angle", Vec3(1.0f), true, false);
 	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("anglePlus", Vec2(0.75f, -0.575f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("angleMinus", Vec2(-0.75f, -0.575f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
 	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("angle", Vec2(0.0f, -0.575f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("distance", Vec2(0.0f, -0.675f), Vec2(1.0f, 0.1f), "Distance", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("distance", Vec2(0.0f, -0.675f), Vec2(1.0f, 0.1f), "Distance", Vec3(1.0f), true, false);
 	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("distancePlus", Vec2(0.75f, -0.775f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("distanceMinus", Vec2(-0.75f, -0.775f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
 	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("distance", Vec2(0.0f, -0.775f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
@@ -389,10 +389,10 @@ void SceneEditor::_loadGUI()
 
 	// Right-viewport: reflectionPropertiesMenu
 	rightWindow->createScreen("reflectionPropertiesMenu");
-	rightWindow->getScreen("reflectionPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.875f, 0.1f), "Reflection Menu", Vec3(0.0f, 1.0f, 0.0f));
-	rightWindow->getScreen("reflectionPropertiesMenu")->createTextField("x", Vec2(0.0f, 0.81f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f));
-	rightWindow->getScreen("reflectionPropertiesMenu")->createTextField("y", Vec2(0.0f, 0.56f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f));
-	rightWindow->getScreen("reflectionPropertiesMenu")->createTextField("z", Vec2(0.0f, 0.31f), Vec2(0.25f, 0.1f), "Z", Vec3(1.0f));
+	rightWindow->getScreen("reflectionPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.875f, 0.1f), "Reflection Menu", Vec3(0.0f, 1.0f, 0.0f), true, false);
+	rightWindow->getScreen("reflectionPropertiesMenu")->createTextField("x", Vec2(0.0f, 0.81f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f), true, false);
+	rightWindow->getScreen("reflectionPropertiesMenu")->createTextField("y", Vec2(0.0f, 0.56f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f), true, false);
+	rightWindow->getScreen("reflectionPropertiesMenu")->createTextField("z", Vec2(0.0f, 0.31f), Vec2(0.25f, 0.1f), "Z", Vec3(1.0f), true, false);
 	rightWindow->getScreen("reflectionPropertiesMenu")->createButton("xPlus", Vec2(0.75f, 0.7f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("reflectionPropertiesMenu")->createButton("yPlus", Vec2(0.75f, 0.45f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("reflectionPropertiesMenu")->createButton("zPlus", Vec2(0.75f, 0.2f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));

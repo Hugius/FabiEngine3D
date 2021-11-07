@@ -12,108 +12,108 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\aabb_parent_type.hpp">
+    <ClInclude Include="..\..\..\src\aabb_parent_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\animation_speed_type.hpp">
+    <ClInclude Include="..\..\..\src\animation_speed_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\blur_direction.hpp">
+    <ClInclude Include="..\..\..\src\blur_direction.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\buffer_type.hpp">
+    <ClInclude Include="..\..\..\src\buffer_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\direction.hpp">
+    <ClInclude Include="..\..\..\src\direction.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\entity_type.hpp">
+    <ClInclude Include="..\..\..\src\entity_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\message_type.hpp">
+    <ClInclude Include="..\..\..\src\message_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\script_condition_type.hpp">
+    <ClInclude Include="..\..\..\src\script_condition_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\script_type.hpp">
+    <ClInclude Include="..\..\..\src\script_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\script_value_type.hpp">
+    <ClInclude Include="..\..\..\src\script_value_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\script_variable_scope.hpp">
+    <ClInclude Include="..\..\..\src\script_variable_scope.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\script_variable_type.hpp">
+    <ClInclude Include="..\..\..\src\script_variable_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\input_type.hpp">
+    <ClInclude Include="..\..\..\src\input_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\transformation_type.hpp">
+    <ClInclude Include="..\..\..\src\transformation_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\configuration.hpp">
+    <ClInclude Include="..\..\..\src\configuration.hpp">
       <Filter>Other</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\input_handler.hpp">
+    <ClInclude Include="..\..\..\src\input_handler.hpp">
       <Filter>Other</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\logger.hpp">
+    <ClInclude Include="..\..\..\src\logger.hpp">
       <Filter>Other</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\timer.hpp">
+    <ClInclude Include="..\..\..\src\timer.hpp">
       <Filter>Other</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\tools.hpp">
+    <ClInclude Include="..\..\..\src\tools.hpp">
       <Filter>Other</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\library_loader.hpp">
+    <ClInclude Include="..\..\..\src\library_loader.hpp">
       <Filter>Other</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\network_protocol.hpp">
+    <ClInclude Include="..\..\..\src\network_protocol.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\water_quality.hpp">
+    <ClInclude Include="..\..\..\src\water_quality.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\bloom_type.hpp">
+    <ClInclude Include="..\..\..\src\bloom_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\reflection_type.hpp">
+    <ClInclude Include="..\..\..\src\reflection_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\camera.hpp">
+    <ClInclude Include="..\..\..\src\camera.hpp">
       <Filter>Camera</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\pointlight_shape.hpp">
+    <ClInclude Include="..\..\..\src\pointlight_shape.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\direction_order.hpp">
+    <ClInclude Include="..\..\..\src\direction_order.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\configuration.cpp">
+    <ClCompile Include="..\..\..\src\configuration.cpp">
       <Filter>Other</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\timer.cpp">
+    <ClCompile Include="..\..\..\src\timer.cpp">
       <Filter>Other</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\input_handler.cpp">
+    <ClCompile Include="..\..\..\src\input_handler.cpp">
       <Filter>Other</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\tools.cpp">
+    <ClCompile Include="..\..\..\src\tools.cpp">
       <Filter>Other</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\library_loader.cpp">
+    <ClCompile Include="..\..\..\src\library_loader.cpp">
       <Filter>Other</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\camera_main.cpp">
+    <ClCompile Include="..\..\..\src\camera_main.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\camera_misc.cpp">
+    <ClCompile Include="..\..\..\src\camera_misc.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
   </ItemGroup>

@@ -21,39 +21,39 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\box.cpp">
+    <ClCompile Include="..\..\..\src\box.cpp">
       <Filter>Data Structures</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\raycaster.cpp">
+    <ClCompile Include="..\..\..\src\raycaster.cpp">
       <Filter>Core\Raycasting</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\ray.cpp">
+    <ClCompile Include="..\..\..\src\ray.cpp">
       <Filter>Data Structures</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\camera_collision_detector.cpp">
+    <ClCompile Include="..\..\..\src\camera_collision_detector.cpp">
       <Filter>Core\Collision\Detection</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\camera_collision_handler_core.cpp">
+    <ClCompile Include="..\..\..\src\camera_collision_handler_core.cpp">
       <Filter>Core\Collision\Response</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\camera_collision_handler_misc.cpp">
+    <ClCompile Include="..\..\..\src\camera_collision_handler_misc.cpp">
       <Filter>Core\Collision\Response</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\box.hpp">
+    <ClInclude Include="..\..\..\src\box.hpp">
       <Filter>Data Structures</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\raycaster.hpp">
+    <ClInclude Include="..\..\..\src\raycaster.hpp">
       <Filter>Core\Raycasting</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\ray.hpp">
+    <ClInclude Include="..\..\..\src\ray.hpp">
       <Filter>Data Structures</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\camera_collision_detector.hpp">
+    <ClInclude Include="..\..\..\src\camera_collision_detector.hpp">
       <Filter>Core\Collision\Detection</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\camera_collision_handler.hpp">
+    <ClInclude Include="..\..\..\src\camera_collision_handler.hpp">
       <Filter>Core\Collision\Response</Filter>
     </ClInclude>
   </ItemGroup>

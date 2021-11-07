@@ -19,19 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\box.cpp" />
-    <ClCompile Include="..\..\Source\camera_collision_detector.cpp" />
-    <ClCompile Include="..\..\Source\camera_collision_handler_core.cpp" />
-    <ClCompile Include="..\..\Source\camera_collision_handler_misc.cpp" />
-    <ClCompile Include="..\..\Source\ray.cpp" />
-    <ClCompile Include="..\..\Source\raycaster.cpp" />
+    <ClCompile Include="..\..\..\src\box.cpp" />
+    <ClCompile Include="..\..\..\src\camera_collision_detector.cpp" />
+    <ClCompile Include="..\..\..\src\camera_collision_handler_core.cpp" />
+    <ClCompile Include="..\..\..\src\camera_collision_handler_misc.cpp" />
+    <ClCompile Include="..\..\..\src\ray.cpp" />
+    <ClCompile Include="..\..\..\src\raycaster.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\box.hpp" />
-    <ClInclude Include="..\..\Source\camera_collision_detector.hpp" />
-    <ClInclude Include="..\..\Source\camera_collision_handler.hpp" />
-    <ClInclude Include="..\..\Source\ray.hpp" />
-    <ClInclude Include="..\..\Source\raycaster.hpp" />
+    <ClInclude Include="..\..\..\src\box.hpp" />
+    <ClInclude Include="..\..\..\src\camera_collision_detector.hpp" />
+    <ClInclude Include="..\..\..\src\camera_collision_handler.hpp" />
+    <ClInclude Include="..\..\..\src\ray.hpp" />
+    <ClInclude Include="..\..\..\src\raycaster.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

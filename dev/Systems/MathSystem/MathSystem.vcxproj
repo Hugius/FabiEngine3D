@@ -19,29 +19,29 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\ivector2.hpp" />
-    <ClInclude Include="..\..\Source\ivector3.hpp" />
-    <ClInclude Include="..\..\Source\ivector4.hpp" />
-    <ClInclude Include="..\..\Source\mathematics.hpp" />
-    <ClInclude Include="..\..\Source\matrix33.hpp" />
-    <ClInclude Include="..\..\Source\matrix44.hpp" />
-    <ClInclude Include="..\..\Source\vector2.hpp" />
-    <ClInclude Include="..\..\Source\vector3.hpp" />
-    <ClInclude Include="..\..\Source\vector4.hpp" />
+    <ClInclude Include="..\..\..\src\ivector2.hpp" />
+    <ClInclude Include="..\..\..\src\ivector3.hpp" />
+    <ClInclude Include="..\..\..\src\ivector4.hpp" />
+    <ClInclude Include="..\..\..\src\mathematics.hpp" />
+    <ClInclude Include="..\..\..\src\matrix33.hpp" />
+    <ClInclude Include="..\..\..\src\matrix44.hpp" />
+    <ClInclude Include="..\..\..\src\vector2.hpp" />
+    <ClInclude Include="..\..\..\src\vector3.hpp" />
+    <ClInclude Include="..\..\..\src\vector4.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\ivector2.cpp" />
-    <ClCompile Include="..\..\Source\ivector3.cpp" />
-    <ClCompile Include="..\..\Source\ivector4.cpp" />
-    <ClCompile Include="..\..\Source\mathematics_matrix_creation.cpp" />
-    <ClCompile Include="..\..\Source\mathematics_matrix_misc.cpp" />
-    <ClCompile Include="..\..\Source\mathematics_misc.cpp" />
-    <ClCompile Include="..\..\Source\mathematics_vector.cpp" />
-    <ClCompile Include="..\..\Source\matrix33.cpp" />
-    <ClCompile Include="..\..\Source\matrix44.cpp" />
-    <ClCompile Include="..\..\Source\vector2.cpp" />
-    <ClCompile Include="..\..\Source\vector3.cpp" />
-    <ClCompile Include="..\..\Source\vector4.cpp" />
+    <ClCompile Include="..\..\..\src\ivector2.cpp" />
+    <ClCompile Include="..\..\..\src\ivector3.cpp" />
+    <ClCompile Include="..\..\..\src\ivector4.cpp" />
+    <ClCompile Include="..\..\..\src\mathematics_matrix_creation.cpp" />
+    <ClCompile Include="..\..\..\src\mathematics_matrix_misc.cpp" />
+    <ClCompile Include="..\..\..\src\mathematics_misc.cpp" />
+    <ClCompile Include="..\..\..\src\mathematics_vector.cpp" />
+    <ClCompile Include="..\..\..\src\matrix33.cpp" />
+    <ClCompile Include="..\..\..\src\matrix44.cpp" />
+    <ClCompile Include="..\..\..\src\vector2.cpp" />
+    <ClCompile Include="..\..\..\src\vector3.cpp" />
+    <ClCompile Include="..\..\..\src\vector4.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

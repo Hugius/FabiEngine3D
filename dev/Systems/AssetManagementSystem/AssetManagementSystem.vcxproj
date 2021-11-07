@@ -144,19 +144,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\audio_loader.cpp" />
-    <ClCompile Include="..\..\Source\mesh_loader_interface.cpp" />
-    <ClCompile Include="..\..\Source\mesh_loader_main.cpp" />
-    <ClCompile Include="..\..\Source\mesh_part.cpp" />
-    <ClCompile Include="..\..\Source\texture_loader_misc.cpp" />
-    <ClCompile Include="..\..\Source\texture_loader_thread.cpp" />
-    <ClCompile Include="..\..\Source\texture_loader_main.cpp" />
+    <ClCompile Include="..\..\..\src\audio_loader.cpp" />
+    <ClCompile Include="..\..\..\src\mesh_loader_interface.cpp" />
+    <ClCompile Include="..\..\..\src\mesh_loader_main.cpp" />
+    <ClCompile Include="..\..\..\src\mesh_part.cpp" />
+    <ClCompile Include="..\..\..\src\texture_loader_misc.cpp" />
+    <ClCompile Include="..\..\..\src\texture_loader_thread.cpp" />
+    <ClCompile Include="..\..\..\src\texture_loader_main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\audio_loader.hpp" />
-    <ClInclude Include="..\..\Source\mesh_loader.hpp" />
-    <ClInclude Include="..\..\Source\mesh_part.hpp" />
-    <ClInclude Include="..\..\Source\texture_loader.hpp" />
+    <ClInclude Include="..\..\..\src\audio_loader.hpp" />
+    <ClInclude Include="..\..\..\src\mesh_loader.hpp" />
+    <ClInclude Include="..\..\..\src\mesh_part.hpp" />
+    <ClInclude Include="..\..\..\src\texture_loader.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

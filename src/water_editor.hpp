@@ -1,0 +1,70 @@
+#pragma once
+
+#include "fe3d.hpp"
+#include "engine_gui_manager.hpp"
+
+class WaterEditor final
+{
+public:
+	WaterEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
+
+	// Voids
+	void setCurrentProjectID(const string& projectID);
+	void load();
+	void update();
+	void unload();
+	void unloadWaterEntities();
+
+	// Strings
+	const vector<string> getAllWaterTexturePathsFromFile() const;
+	const vector<string>& getLoadedWaterIDs();
+
+	// Booleans
+	const bool loadWaterEntitiesFromFile();
+	const bool saveWaterEntitiesToFile() const;
+	const bool isLoaded() const;
+
+private:
+	// Voids
+	void _loadGUI();
+	void _unloadGUI();
+	void _updateMainMenu();
+	void _updateChoiceMenu();
+	void _updateTexturingMenu();
+	void _updateLightingMenu();
+	void _updateMiscellaneousMenu();
+	void _updateWaterCreating();
+	void _updateWaterChoosing();
+	void _updateWaterDeleting();
+	void _updateCamera();
+	void _updateMiscellaneous();
+
+	// Strings
+	vector <string> _loadedWaterIDs;
+	string _currentProjectID = "";
+	string _currentWaterID = "";
+
+	// Decimals
+	static inline const float CW = 0.115f;
+	static inline const float CH = 0.0875f;
+	static inline const float CURSOR_SENSITIVITY = 0.025f;
+	static inline const float INITIAL_CAMERA_YAW = 45.0f;
+	static inline const float INITIAL_CAMERA_PITCH = 45.0f;
+	static inline const float INITIAL_CAMERA_DISTANCE = 2.5f;
+	static inline const float MIN_CAMERA_PITCH = 1.0f;
+	static inline const float GRID_Y_OFFSET = 1.5f;
+	static inline const float GRID_SIZE = 1024.0f;
+	static inline const float GRID_UV = 10.0f;
+	static inline const float CAMERA_DISTANCE_SPEED = 5.0f;
+	static inline const float MIN_CAMERA_DISTANCE = 0.5f;
+
+	// Booleans
+	bool _isCreatingWater = false;
+	bool _isChoosingWater = false;
+	bool _isDeletingWater = false;
+	bool _isEditorLoaded = false;
+
+	// Miscellaneous
+	FabiEngine3D& _fe3d;
+	EngineGuiManager& _gui;
+};

@@ -19,17 +19,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\audio_manager.cpp" />
-    <ClCompile Include="..\..\Source\audio_player_interface.cpp" />
-    <ClCompile Include="..\..\Source\audio_player_misc.cpp" />
-    <ClCompile Include="..\..\Source\music.cpp" />
-    <ClCompile Include="..\..\Source\sound.cpp" />
+    <ClCompile Include="..\..\..\src\audio_manager.cpp" />
+    <ClCompile Include="..\..\..\src\audio_player_interface.cpp" />
+    <ClCompile Include="..\..\..\src\audio_player_misc.cpp" />
+    <ClCompile Include="..\..\..\src\music.cpp" />
+    <ClCompile Include="..\..\..\src\sound.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\audio_manager.hpp" />
-    <ClInclude Include="..\..\Source\audio_player.hpp" />
-    <ClInclude Include="..\..\Source\music.hpp" />
-    <ClInclude Include="..\..\Source\sound.hpp" />
+    <ClInclude Include="..\..\..\src\audio_manager.hpp" />
+    <ClInclude Include="..\..\..\src\audio_player.hpp" />
+    <ClInclude Include="..\..\..\src\music.hpp" />
+    <ClInclude Include="..\..\..\src\sound.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

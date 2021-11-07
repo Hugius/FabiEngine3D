@@ -12,39 +12,39 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\audio_loader.cpp">
+    <ClCompile Include="..\..\..\src\audio_loader.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\mesh_loader_main.cpp">
+    <ClCompile Include="..\..\..\src\mesh_loader_main.cpp">
       <Filter>Mesh</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\mesh_loader_interface.cpp">
+    <ClCompile Include="..\..\..\src\mesh_loader_interface.cpp">
       <Filter>Mesh</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\texture_loader_thread.cpp">
+    <ClCompile Include="..\..\..\src\texture_loader_thread.cpp">
       <Filter>Texture</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\texture_loader_main.cpp">
+    <ClCompile Include="..\..\..\src\texture_loader_main.cpp">
       <Filter>Texture</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\texture_loader_misc.cpp">
+    <ClCompile Include="..\..\..\src\texture_loader_misc.cpp">
       <Filter>Texture</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\mesh_part.cpp">
+    <ClCompile Include="..\..\..\src\mesh_part.cpp">
       <Filter>Mesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\audio_loader.hpp">
+    <ClInclude Include="..\..\..\src\audio_loader.hpp">
       <Filter>Audio</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\mesh_part.hpp">
+    <ClInclude Include="..\..\..\src\mesh_part.hpp">
       <Filter>Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\mesh_loader.hpp">
+    <ClInclude Include="..\..\..\src\mesh_loader.hpp">
       <Filter>Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\texture_loader.hpp">
+    <ClInclude Include="..\..\..\src\texture_loader.hpp">
       <Filter>Texture</Filter>
     </ClInclude>
   </ItemGroup>

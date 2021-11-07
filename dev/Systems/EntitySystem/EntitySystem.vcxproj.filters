@@ -24,168 +24,168 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\base_entity_manager_misc.cpp">
+    <ClCompile Include="..\..\..\src\base_entity_manager_misc.cpp">
       <Filter>Managers\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\base_entity_manager_main.cpp">
+    <ClCompile Include="..\..\..\src\base_entity_manager_main.cpp">
       <Filter>Managers\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\entity_bus.cpp">
+    <ClCompile Include="..\..\..\src\entity_bus.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\aabb_entity_manager.cpp">
+    <ClCompile Include="..\..\..\src\aabb_entity_manager.cpp">
       <Filter>Managers\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_entity_manager.cpp">
+    <ClCompile Include="..\..\..\src\billboard_entity_manager.cpp">
       <Filter>Managers\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\image_entity_manager.cpp">
+    <ClCompile Include="..\..\..\src\image_entity_manager.cpp">
       <Filter>Managers\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\pointlight_entity_manager.cpp">
+    <ClCompile Include="..\..\..\src\pointlight_entity_manager.cpp">
       <Filter>Managers\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_entity_manager.cpp">
+    <ClCompile Include="..\..\..\src\model_entity_manager.cpp">
       <Filter>Managers\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\text_entity_manager.cpp">
+    <ClCompile Include="..\..\..\src\text_entity_manager.cpp">
       <Filter>Managers\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\sky_entity_manager.cpp">
+    <ClCompile Include="..\..\..\src\sky_entity_manager.cpp">
       <Filter>Managers\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\terrain_entity_manager.cpp">
+    <ClCompile Include="..\..\..\src\terrain_entity_manager.cpp">
       <Filter>Managers\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\water_entity_manager.cpp">
+    <ClCompile Include="..\..\..\src\water_entity_manager.cpp">
       <Filter>Managers\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\base_entity.cpp">
+    <ClCompile Include="..\..\..\src\base_entity.cpp">
       <Filter>Data Structures\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\aabb_entity.cpp">
+    <ClCompile Include="..\..\..\src\aabb_entity.cpp">
       <Filter>Data Structures\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_entity_getters.cpp">
+    <ClCompile Include="..\..\..\src\billboard_entity_getters.cpp">
       <Filter>Data Structures\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_entity_setters.cpp">
+    <ClCompile Include="..\..\..\src\billboard_entity_setters.cpp">
       <Filter>Data Structures\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\image_entity.cpp">
+    <ClCompile Include="..\..\..\src\image_entity.cpp">
       <Filter>Data Structures\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\pointlight_entity.cpp">
+    <ClCompile Include="..\..\..\src\pointlight_entity.cpp">
       <Filter>Data Structures\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_entity_getters.cpp">
+    <ClCompile Include="..\..\..\src\model_entity_getters.cpp">
       <Filter>Data Structures\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_entity_setters.cpp">
+    <ClCompile Include="..\..\..\src\model_entity_setters.cpp">
       <Filter>Data Structures\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\sky_entity.cpp">
+    <ClCompile Include="..\..\..\src\sky_entity.cpp">
       <Filter>Data Structures\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\terrain_entity_getters.cpp">
+    <ClCompile Include="..\..\..\src\terrain_entity_getters.cpp">
       <Filter>Data Structures\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\terrain_entity_setters.cpp">
+    <ClCompile Include="..\..\..\src\terrain_entity_setters.cpp">
       <Filter>Data Structures\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\text_entity.cpp">
+    <ClCompile Include="..\..\..\src\text_entity.cpp">
       <Filter>Data Structures\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\water_entity.cpp">
+    <ClCompile Include="..\..\..\src\water_entity.cpp">
       <Filter>Data Structures\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\reflection_entity.cpp">
+    <ClCompile Include="..\..\..\src\reflection_entity.cpp">
       <Filter>Data Structures\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\reflection_entity_manager.cpp">
+    <ClCompile Include="..\..\..\src\reflection_entity_manager.cpp">
       <Filter>Managers\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\spotlight_entity.cpp">
+    <ClCompile Include="..\..\..\src\spotlight_entity.cpp">
       <Filter>Data Structures\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\spotlight_entity_manager.cpp">
+    <ClCompile Include="..\..\..\src\spotlight_entity_manager.cpp">
       <Filter>Managers\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\base_entity_manager.hpp">
+    <ClInclude Include="..\..\..\src\base_entity_manager.hpp">
       <Filter>Managers\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\entity_bus.hpp">
+    <ClInclude Include="..\..\..\src\entity_bus.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\text_entity_manager.hpp">
+    <ClInclude Include="..\..\..\src\text_entity_manager.hpp">
       <Filter>Managers\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\aabb_entity_manager.hpp">
+    <ClInclude Include="..\..\..\src\aabb_entity_manager.hpp">
       <Filter>Managers\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\billboard_entity_manager.hpp">
+    <ClInclude Include="..\..\..\src\billboard_entity_manager.hpp">
       <Filter>Managers\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\image_entity_manager.hpp">
+    <ClInclude Include="..\..\..\src\image_entity_manager.hpp">
       <Filter>Managers\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\pointlight_entity_manager.hpp">
+    <ClInclude Include="..\..\..\src\pointlight_entity_manager.hpp">
       <Filter>Managers\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\model_entity_manager.hpp">
+    <ClInclude Include="..\..\..\src\model_entity_manager.hpp">
       <Filter>Managers\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\sky_entity_manager.hpp">
+    <ClInclude Include="..\..\..\src\sky_entity_manager.hpp">
       <Filter>Managers\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\terrain_entity_manager.hpp">
+    <ClInclude Include="..\..\..\src\terrain_entity_manager.hpp">
       <Filter>Managers\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\water_entity_manager.hpp">
+    <ClInclude Include="..\..\..\src\water_entity_manager.hpp">
       <Filter>Managers\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\base_entity.hpp">
+    <ClInclude Include="..\..\..\src\base_entity.hpp">
       <Filter>Data Structures\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\aabb_entity.hpp">
+    <ClInclude Include="..\..\..\src\aabb_entity.hpp">
       <Filter>Data Structures\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\billboard_entity.hpp">
+    <ClInclude Include="..\..\..\src\billboard_entity.hpp">
       <Filter>Data Structures\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\image_entity.hpp">
+    <ClInclude Include="..\..\..\src\image_entity.hpp">
       <Filter>Data Structures\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\pointlight_entity.hpp">
+    <ClInclude Include="..\..\..\src\pointlight_entity.hpp">
       <Filter>Data Structures\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\model_entity.hpp">
+    <ClInclude Include="..\..\..\src\model_entity.hpp">
       <Filter>Data Structures\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\sky_entity.hpp">
+    <ClInclude Include="..\..\..\src\sky_entity.hpp">
       <Filter>Data Structures\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\terrain_entity.hpp">
+    <ClInclude Include="..\..\..\src\terrain_entity.hpp">
       <Filter>Data Structures\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\text_entity.hpp">
+    <ClInclude Include="..\..\..\src\text_entity.hpp">
       <Filter>Data Structures\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\water_entity.hpp">
+    <ClInclude Include="..\..\..\src\water_entity.hpp">
       <Filter>Data Structures\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\reflection_entity.hpp">
+    <ClInclude Include="..\..\..\src\reflection_entity.hpp">
       <Filter>Data Structures\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\reflection_entity_manager.hpp">
+    <ClInclude Include="..\..\..\src\reflection_entity_manager.hpp">
       <Filter>Managers\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\spotlight_entity.hpp">
+    <ClInclude Include="..\..\..\src\spotlight_entity.hpp">
       <Filter>Data Structures\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\spotlight_entity_manager.hpp">
+    <ClInclude Include="..\..\..\src\spotlight_entity_manager.hpp">
       <Filter>Managers\Entities</Filter>
     </ClInclude>
   </ItemGroup>

@@ -18,69 +18,69 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\mathematics.hpp">
+    <ClInclude Include="..\..\..\src\mathematics.hpp">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\matrix33.hpp">
+    <ClInclude Include="..\..\..\src\matrix33.hpp">
       <Filter>Matrix</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\matrix44.hpp">
+    <ClInclude Include="..\..\..\src\matrix44.hpp">
       <Filter>Matrix</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\vector4.hpp">
+    <ClInclude Include="..\..\..\src\vector4.hpp">
       <Filter>Vector\Float</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\vector2.hpp">
+    <ClInclude Include="..\..\..\src\vector2.hpp">
       <Filter>Vector\Float</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\vector3.hpp">
+    <ClInclude Include="..\..\..\src\vector3.hpp">
       <Filter>Vector\Float</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\ivector4.hpp">
+    <ClInclude Include="..\..\..\src\ivector4.hpp">
       <Filter>Vector\Integer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\ivector2.hpp">
+    <ClInclude Include="..\..\..\src\ivector2.hpp">
       <Filter>Vector\Integer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\ivector3.hpp">
+    <ClInclude Include="..\..\..\src\ivector3.hpp">
       <Filter>Vector\Integer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\matrix33.cpp">
+    <ClCompile Include="..\..\..\src\matrix33.cpp">
       <Filter>Matrix</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\matrix44.cpp">
+    <ClCompile Include="..\..\..\src\matrix44.cpp">
       <Filter>Matrix</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\mathematics_misc.cpp">
+    <ClCompile Include="..\..\..\src\mathematics_misc.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\mathematics_matrix_creation.cpp">
+    <ClCompile Include="..\..\..\src\mathematics_matrix_creation.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\mathematics_vector.cpp">
+    <ClCompile Include="..\..\..\src\mathematics_vector.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\vector2.cpp">
+    <ClCompile Include="..\..\..\src\vector2.cpp">
       <Filter>Vector\Float</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\vector3.cpp">
+    <ClCompile Include="..\..\..\src\vector3.cpp">
       <Filter>Vector\Float</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\vector4.cpp">
+    <ClCompile Include="..\..\..\src\vector4.cpp">
       <Filter>Vector\Float</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\ivector4.cpp">
+    <ClCompile Include="..\..\..\src\ivector4.cpp">
       <Filter>Vector\Integer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\ivector2.cpp">
+    <ClCompile Include="..\..\..\src\ivector2.cpp">
       <Filter>Vector\Integer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\ivector3.cpp">
+    <ClCompile Include="..\..\..\src\ivector3.cpp">
       <Filter>Vector\Integer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\mathematics_matrix_misc.cpp">
+    <ClCompile Include="..\..\..\src\mathematics_matrix_misc.cpp">
       <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>

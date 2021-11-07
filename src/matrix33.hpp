@@ -1,0 +1,33 @@
+#pragma once
+
+#include "vector3.hpp"
+
+struct Matrix44;
+
+struct Matrix33 final
+{
+	Matrix33();
+	Matrix33(const Matrix44& other);
+	Matrix33(const float value);
+	Matrix33
+	(
+		const float m00, const float m01, const float m02,
+		const float m10, const float m11, const float m12,
+		const float m20, const float m21, const float m22
+	);
+
+	// Matrices
+	const Matrix33 operator+(const Matrix33& other) const;
+	const Matrix33 operator-(const Matrix33& other) const;
+	const Matrix33 operator*(const Matrix33& other) const;
+
+	// Vectors
+	const Vec3 operator*(const Vec3& other) const;
+
+	// Miscellaneous
+	union
+	{
+		float m[3][3];
+		float f[9];
+	};
+};

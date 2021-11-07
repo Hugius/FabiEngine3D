@@ -177,372 +177,372 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\animation_editor_main.cpp">
+    <ClCompile Include="..\..\..\src\animation_editor_main.cpp">
       <Filter>Animation Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\animation_editor_misc.cpp">
+    <ClCompile Include="..\..\..\src\animation_editor_misc.cpp">
       <Filter>Animation Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\animation_editor_updates_main.cpp">
+    <ClCompile Include="..\..\..\src\animation_editor_updates_main.cpp">
       <Filter>Animation Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\animation_editor_updates_frame.cpp">
+    <ClCompile Include="..\..\..\src\animation_editor_updates_frame.cpp">
       <Filter>Animation Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\animation_editor_updates_choice.cpp">
+    <ClCompile Include="..\..\..\src\animation_editor_updates_choice.cpp">
       <Filter>Animation Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\audio_editor_main.cpp">
+    <ClCompile Include="..\..\..\src\audio_editor_main.cpp">
       <Filter>Audio Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\audio_editor_misc.cpp">
+    <ClCompile Include="..\..\..\src\audio_editor_misc.cpp">
       <Filter>Audio Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\audio_editor_updates_main.cpp">
+    <ClCompile Include="..\..\..\src\audio_editor_updates_main.cpp">
       <Filter>Audio Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\audio_editor_updates_choice.cpp">
+    <ClCompile Include="..\..\..\src\audio_editor_updates_choice.cpp">
       <Filter>Audio Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_editor_main.cpp">
+    <ClCompile Include="..\..\..\src\billboard_editor_main.cpp">
       <Filter>Billboard Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_editor_misc.cpp">
+    <ClCompile Include="..\..\..\src\billboard_editor_misc.cpp">
       <Filter>Billboard Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_editor_updates_main.cpp">
+    <ClCompile Include="..\..\..\src\billboard_editor_updates_main.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_editor_updates_texturing.cpp">
+    <ClCompile Include="..\..\..\src\billboard_editor_updates_texturing.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\sky_editor_misc.cpp">
+    <ClCompile Include="..\..\..\src\sky_editor_misc.cpp">
       <Filter>Sky Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\sky_editor_main.cpp">
+    <ClCompile Include="..\..\..\src\sky_editor_main.cpp">
       <Filter>Sky Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_main.cpp">
+    <ClCompile Include="..\..\..\src\model_editor_main.cpp">
       <Filter>Model Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_misc.cpp">
+    <ClCompile Include="..\..\..\src\model_editor_misc.cpp">
       <Filter>Model Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_updates_aabb.cpp">
+    <ClCompile Include="..\..\..\src\model_editor_updates_aabb.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_updates_lighting.cpp">
+    <ClCompile Include="..\..\..\src\model_editor_updates_lighting.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_updates_misc.cpp">
+    <ClCompile Include="..\..\..\src\model_editor_updates_misc.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_updates_main.cpp">
+    <ClCompile Include="..\..\..\src\model_editor_updates_main.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_updates_texturing.cpp">
+    <ClCompile Include="..\..\..\src\model_editor_updates_texturing.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_updates_miscellaneous.cpp">
+    <ClCompile Include="..\..\..\src\model_editor_updates_miscellaneous.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_loading.cpp">
+    <ClCompile Include="..\..\..\src\model_editor_loading.cpp">
       <Filter>Model Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_saving.cpp">
+    <ClCompile Include="..\..\..\src\model_editor_saving.cpp">
       <Filter>Model Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_main.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_main.cpp">
       <Filter>Scene Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_gui.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_gui.cpp">
       <Filter>Scene Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_updates_main.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_updates_main.cpp">
       <Filter>Scene Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_pointlight_updates_edit.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_pointlight_updates_edit.cpp">
       <Filter>Scene Editor\Pointlight</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_pointlight_updates_place.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_pointlight_updates_place.cpp">
       <Filter>Scene Editor\Pointlight</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_pointlight_updates_main.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_pointlight_updates_main.cpp">
       <Filter>Scene Editor\Pointlight</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_settings_updates_one.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_settings_updates_one.cpp">
       <Filter>Scene Editor\Settings</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_settings_updates_two.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_settings_updates_two.cpp">
       <Filter>Scene Editor\Settings</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_creation.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_creation.cpp">
       <Filter>Scene Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_misc_selection.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_misc_selection.cpp">
       <Filter>Scene Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_misc_other.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_misc_other.cpp">
       <Filter>Scene Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_billboard_updates_edit.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_billboard_updates_edit.cpp">
       <Filter>Scene Editor\Billboard</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_billboard_updates_main.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_billboard_updates_main.cpp">
       <Filter>Scene Editor\Billboard</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_billboard_updates_place.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_billboard_updates_place.cpp">
       <Filter>Scene Editor\Billboard</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_model_updates_edit.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_model_updates_edit.cpp">
       <Filter>Scene Editor\Model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_model_updates_place.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_model_updates_place.cpp">
       <Filter>Scene Editor\Model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_model_updates_main.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_model_updates_main.cpp">
       <Filter>Scene Editor\Model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_sound_updates_edit.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_sound_updates_edit.cpp">
       <Filter>Scene Editor\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_sound_updates_place.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_sound_updates_place.cpp">
       <Filter>Scene Editor\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_sound_updates_main.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_sound_updates_main.cpp">
       <Filter>Scene Editor\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_editor_main.cpp">
+    <ClCompile Include="..\..\..\src\script_editor_main.cpp">
       <Filter>Script Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_editor_updates_writer.cpp">
+    <ClCompile Include="..\..\..\src\script_editor_updates_writer.cpp">
       <Filter>Script Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_editor_updates_main.cpp">
+    <ClCompile Include="..\..\..\src\script_editor_updates_main.cpp">
       <Filter>Script Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_editor_updates_selector.cpp">
+    <ClCompile Include="..\..\..\src\script_editor_updates_selector.cpp">
       <Filter>Script Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_editor_misc.cpp">
+    <ClCompile Include="..\..\..\src\script_editor_misc.cpp">
       <Filter>Script Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\settings_editor.cpp">
+    <ClCompile Include="..\..\..\src\settings_editor.cpp">
       <Filter>Settings Editor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\animation_editor_updates_misc.cpp">
+    <ClCompile Include="..\..\..\src\animation_editor_updates_misc.cpp">
       <Filter>Animation Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_editor_updates_misc.cpp">
+    <ClCompile Include="..\..\..\src\billboard_editor_updates_misc.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\terrain_editor_updates_main.cpp">
+    <ClCompile Include="..\..\..\src\terrain_editor_updates_main.cpp">
       <Filter>Terrain Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\terrain_editor_updates_misc.cpp">
+    <ClCompile Include="..\..\..\src\terrain_editor_updates_misc.cpp">
       <Filter>Terrain Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\terrain_editor_updates_diffuse.cpp">
+    <ClCompile Include="..\..\..\src\terrain_editor_updates_diffuse.cpp">
       <Filter>Terrain Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\terrain_editor_updates_lighting.cpp">
+    <ClCompile Include="..\..\..\src\terrain_editor_updates_lighting.cpp">
       <Filter>Terrain Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\sky_editor_updates_main.cpp">
+    <ClCompile Include="..\..\..\src\sky_editor_updates_main.cpp">
       <Filter>Sky Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\sky_editor_updates_texturing.cpp">
+    <ClCompile Include="..\..\..\src\sky_editor_updates_texturing.cpp">
       <Filter>Sky Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\sky_editor_updates_miscellaneous.cpp">
+    <ClCompile Include="..\..\..\src\sky_editor_updates_miscellaneous.cpp">
       <Filter>Sky Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\sky_editor_updates_misc.cpp">
+    <ClCompile Include="..\..\..\src\sky_editor_updates_misc.cpp">
       <Filter>Sky Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\water_editor_updates_main.cpp">
+    <ClCompile Include="..\..\..\src\water_editor_updates_main.cpp">
       <Filter>Water Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\water_editor_updates_lighting.cpp">
+    <ClCompile Include="..\..\..\src\water_editor_updates_lighting.cpp">
       <Filter>Water Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\water_editor_updates_misc.cpp">
+    <ClCompile Include="..\..\..\src\water_editor_updates_misc.cpp">
       <Filter>Water Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\terrain_editor_misc.cpp">
+    <ClCompile Include="..\..\..\src\terrain_editor_misc.cpp">
       <Filter>Terrain Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\water_editor_misc.cpp">
+    <ClCompile Include="..\..\..\src\water_editor_misc.cpp">
       <Filter>Water Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\terrain_editor_main.cpp">
+    <ClCompile Include="..\..\..\src\terrain_editor_main.cpp">
       <Filter>Terrain Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\water_editor_main.cpp">
+    <ClCompile Include="..\..\..\src\water_editor_main.cpp">
       <Filter>Water Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\water_editor_updates_texturing.cpp">
+    <ClCompile Include="..\..\..\src\water_editor_updates_texturing.cpp">
       <Filter>Water Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\water_editor_updates_miscellaneous.cpp">
+    <ClCompile Include="..\..\..\src\water_editor_updates_miscellaneous.cpp">
       <Filter>Water Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_loading_custom.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_loading_custom.cpp">
       <Filter>Scene Editor\Persistence\Custom</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_saving_custom.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_saving_custom.cpp">
       <Filter>Scene Editor\Persistence\Custom</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_loading.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_loading.cpp">
       <Filter>Scene Editor\Persistence\Editor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_saving.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_saving.cpp">
       <Filter>Scene Editor\Persistence\Editor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_sky_updates_main.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_sky_updates_main.cpp">
       <Filter>Scene Editor\Sky</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_water_updates_main.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_water_updates_main.cpp">
       <Filter>Scene Editor\Water</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_terrain_updates_main.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_terrain_updates_main.cpp">
       <Filter>Scene Editor\Terrain</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_editor_updates_lighting.cpp">
+    <ClCompile Include="..\..\..\src\billboard_editor_updates_lighting.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_editor_updates_miscellaneous.cpp">
+    <ClCompile Include="..\..\..\src\billboard_editor_updates_miscellaneous.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_editor_updates_animation.cpp">
+    <ClCompile Include="..\..\..\src\billboard_editor_updates_animation.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_settings_updates_lighting.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_settings_updates_lighting.cpp">
       <Filter>Scene Editor\Settings</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_reflection_updates_main.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_reflection_updates_main.cpp">
       <Filter>Scene Editor\Reflection</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_reflection_updates_place.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_reflection_updates_place.cpp">
       <Filter>Scene Editor\Reflection</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_reflection_updates_edit.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_reflection_updates_edit.cpp">
       <Filter>Scene Editor\Reflection</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\animation.cpp">
+    <ClCompile Include="..\..\..\src\animation.cpp">
       <Filter>Animation Editor\Data Structures</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\animation_frame.cpp">
+    <ClCompile Include="..\..\..\src\animation_frame.cpp">
       <Filter>Animation Editor\Data Structures</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\terrain_editor_updates_normal.cpp">
+    <ClCompile Include="..\..\..\src\terrain_editor_updates_normal.cpp">
       <Filter>Terrain Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\terrain_editor_updates_blend.cpp">
+    <ClCompile Include="..\..\..\src\terrain_editor_updates_blend.cpp">
       <Filter>Terrain Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\terrain_editor_updates_miscellaneous.cpp">
+    <ClCompile Include="..\..\..\src\terrain_editor_updates_miscellaneous.cpp">
       <Filter>Terrain Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\animation_editor_updates_execution.cpp">
+    <ClCompile Include="..\..\..\src\animation_editor_updates_execution.cpp">
       <Filter>Animation Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\animation_editor_interface.cpp">
+    <ClCompile Include="..\..\..\src\animation_editor_interface.cpp">
       <Filter>Animation Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_editor_saving.cpp">
+    <ClCompile Include="..\..\..\src\script_editor_saving.cpp">
       <Filter>Script Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\sky_editor_saving.cpp">
+    <ClCompile Include="..\..\..\src\sky_editor_saving.cpp">
       <Filter>Sky Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\terrain_editor_saving.cpp">
+    <ClCompile Include="..\..\..\src\terrain_editor_saving.cpp">
       <Filter>Terrain Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\water_editor_saving.cpp">
+    <ClCompile Include="..\..\..\src\water_editor_saving.cpp">
       <Filter>Water Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_editor_saving.cpp">
+    <ClCompile Include="..\..\..\src\billboard_editor_saving.cpp">
       <Filter>Billboard Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\audio_editor_saving.cpp">
+    <ClCompile Include="..\..\..\src\audio_editor_saving.cpp">
       <Filter>Audio Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\animation_editor_saving.cpp">
+    <ClCompile Include="..\..\..\src\animation_editor_saving.cpp">
       <Filter>Animation Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_spotlight_updates_edit.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_spotlight_updates_edit.cpp">
       <Filter>Scene Editor\Spotlight</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_spotlight_updates_main.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_spotlight_updates_main.cpp">
       <Filter>Scene Editor\Spotlight</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_spotlight_updates_place.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_spotlight_updates_place.cpp">
       <Filter>Scene Editor\Spotlight</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_misc_custom.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_misc_custom.cpp">
       <Filter>Scene Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_misc_animation.cpp">
+    <ClCompile Include="..\..\..\src\scene_editor_misc_animation.cpp">
       <Filter>Scene Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\sky_editor_loading.cpp">
+    <ClCompile Include="..\..\..\src\sky_editor_loading.cpp">
       <Filter>Sky Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\terrain_editor_loading.cpp">
+    <ClCompile Include="..\..\..\src\terrain_editor_loading.cpp">
       <Filter>Terrain Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\water_editor_loading.cpp">
+    <ClCompile Include="..\..\..\src\water_editor_loading.cpp">
       <Filter>Water Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_editor_loading.cpp">
+    <ClCompile Include="..\..\..\src\billboard_editor_loading.cpp">
       <Filter>Billboard Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\animation_editor_loading.cpp">
+    <ClCompile Include="..\..\..\src\animation_editor_loading.cpp">
       <Filter>Animation Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\audio_editor_loading.cpp">
+    <ClCompile Include="..\..\..\src\audio_editor_loading.cpp">
       <Filter>Audio Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_editor_loading.cpp">
+    <ClCompile Include="..\..\..\src\script_editor_loading.cpp">
       <Filter>Script Editor\Persistence</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\animation_editor.hpp">
+    <ClInclude Include="..\..\..\src\animation_editor.hpp">
       <Filter>Animation Editor\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\animation.hpp">
+    <ClInclude Include="..\..\..\src\animation.hpp">
       <Filter>Animation Editor\Data Structures</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\animation_frame.hpp">
+    <ClInclude Include="..\..\..\src\animation_frame.hpp">
       <Filter>Animation Editor\Data Structures</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\audio_editor.hpp">
+    <ClInclude Include="..\..\..\src\audio_editor.hpp">
       <Filter>Audio Editor\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\billboard_editor.hpp">
+    <ClInclude Include="..\..\..\src\billboard_editor.hpp">
       <Filter>Billboard Editor\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\sky_editor.hpp">
+    <ClInclude Include="..\..\..\src\sky_editor.hpp">
       <Filter>Sky Editor\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\model_editor.hpp">
+    <ClInclude Include="..\..\..\src\model_editor.hpp">
       <Filter>Model Editor\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\scene_editor.hpp">
+    <ClInclude Include="..\..\..\src\scene_editor.hpp">
       <Filter>Scene Editor\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\script_editor.hpp">
+    <ClInclude Include="..\..\..\src\script_editor.hpp">
       <Filter>Script Editor\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\settings_editor.hpp">
+    <ClInclude Include="..\..\..\src\settings_editor.hpp">
       <Filter>Settings Editor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\water_editor.hpp">
+    <ClInclude Include="..\..\..\src\water_editor.hpp">
       <Filter>Water Editor\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\terrain_editor.hpp">
+    <ClInclude Include="..\..\..\src\terrain_editor.hpp">
       <Filter>Terrain Editor\Core</Filter>
     </ClInclude>
   </ItemGroup>

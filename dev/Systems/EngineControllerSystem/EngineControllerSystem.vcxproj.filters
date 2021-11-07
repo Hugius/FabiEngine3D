@@ -1,51 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\..\Source\engine_controller.cpp">
+    <ClCompile Include="..\..\..\src\engine_controller.cpp">
       <Filter>Core Controller</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\left_viewport_controller.cpp">
+    <ClCompile Include="..\..\..\src\left_viewport_controller.cpp">
       <Filter>Viewport Controllers\Left</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\right_viewport_controller.cpp">
+    <ClCompile Include="..\..\..\src\right_viewport_controller.cpp">
       <Filter>Viewport Controllers\Right</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\top_viewport_controller_main.cpp">
+    <ClCompile Include="..\..\..\src\top_viewport_controller_main.cpp">
       <Filter>Viewport Controllers\Top</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\top_viewport_controller_misc.cpp">
+    <ClCompile Include="..\..\..\src\top_viewport_controller_misc.cpp">
       <Filter>Viewport Controllers\Top</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\bottom_viewport_controller_main.cpp">
+    <ClCompile Include="..\..\..\src\bottom_viewport_controller_main.cpp">
       <Filter>Viewport Controllers\Bottom</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\bottom_viewport_controller_console.cpp">
+    <ClCompile Include="..\..\..\src\bottom_viewport_controller_console.cpp">
       <Filter>Viewport Controllers\Bottom</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\base_viewport_controller.cpp">
+    <ClCompile Include="..\..\..\src\base_viewport_controller.cpp">
       <Filter>Viewport Controllers\Base</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\main.cpp">
+    <ClCompile Include="..\..\..\src\main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\engine_controller.hpp">
+    <ClInclude Include="..\..\..\src\engine_controller.hpp">
       <Filter>Core Controller</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\left_viewport_controller.hpp">
+    <ClInclude Include="..\..\..\src\left_viewport_controller.hpp">
       <Filter>Viewport Controllers\Left</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\right_viewport_controller.hpp">
+    <ClInclude Include="..\..\..\src\right_viewport_controller.hpp">
       <Filter>Viewport Controllers\Right</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\top_viewport_controller.hpp">
+    <ClInclude Include="..\..\..\src\top_viewport_controller.hpp">
       <Filter>Viewport Controllers\Top</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\bottom_viewport_controller.hpp">
+    <ClInclude Include="..\..\..\src\bottom_viewport_controller.hpp">
       <Filter>Viewport Controllers\Bottom</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\base_viewport_controller.hpp">
+    <ClInclude Include="..\..\..\src\base_viewport_controller.hpp">
       <Filter>Viewport Controllers\Base</Filter>
     </ClInclude>
   </ItemGroup>

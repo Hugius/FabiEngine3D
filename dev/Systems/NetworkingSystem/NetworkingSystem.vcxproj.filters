@@ -12,54 +12,54 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\network_client_message.hpp">
+    <ClInclude Include="..\..\..\src\network_client_message.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\network_utils.hpp">
+    <ClInclude Include="..\..\..\src\network_utils.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\network_server_message.hpp">
+    <ClInclude Include="..\..\..\src\network_server_message.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\network_server_api.hpp">
+    <ClInclude Include="..\..\..\src\network_server_api.hpp">
       <Filter>Server</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\network_client_api.hpp">
+    <ClInclude Include="..\..\..\src\network_client_api.hpp">
       <Filter>Client</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\network_utils.cpp">
+    <ClCompile Include="..\..\..\src\network_utils.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\network_server_api_main.cpp">
+    <ClCompile Include="..\..\..\src\network_server_api_main.cpp">
       <Filter>Server</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\network_server_api_misc.cpp">
+    <ClCompile Include="..\..\..\src\network_server_api_misc.cpp">
       <Filter>Server</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\network_server_api_update.cpp">
+    <ClCompile Include="..\..\..\src\network_server_api_update.cpp">
       <Filter>Server</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\network_client_api_main.cpp">
+    <ClCompile Include="..\..\..\src\network_client_api_main.cpp">
       <Filter>Client</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\network_client_api_misc.cpp">
+    <ClCompile Include="..\..\..\src\network_client_api_misc.cpp">
       <Filter>Client</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\network_client_api_update.cpp">
+    <ClCompile Include="..\..\..\src\network_client_api_update.cpp">
       <Filter>Client</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\network_server_api_interface.cpp">
+    <ClCompile Include="..\..\..\src\network_server_api_interface.cpp">
       <Filter>Server</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\network_client_api_interface.cpp">
+    <ClCompile Include="..\..\..\src\network_client_api_interface.cpp">
       <Filter>Client</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\network_client_message.cpp">
+    <ClCompile Include="..\..\..\src\network_client_message.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\network_server_message.cpp">
+    <ClCompile Include="..\..\..\src\network_server_message.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>

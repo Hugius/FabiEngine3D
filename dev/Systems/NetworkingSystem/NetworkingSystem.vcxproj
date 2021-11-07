@@ -19,24 +19,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\network_client_api.hpp" />
-    <ClInclude Include="..\..\Source\network_client_message.hpp" />
-    <ClInclude Include="..\..\Source\network_server_message.hpp" />
-    <ClInclude Include="..\..\Source\network_server_api.hpp" />
-    <ClInclude Include="..\..\Source\network_utils.hpp" />
+    <ClInclude Include="..\..\..\src\network_client_api.hpp" />
+    <ClInclude Include="..\..\..\src\network_client_message.hpp" />
+    <ClInclude Include="..\..\..\src\network_server_message.hpp" />
+    <ClInclude Include="..\..\..\src\network_server_api.hpp" />
+    <ClInclude Include="..\..\..\src\network_utils.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\network_client_api_interface.cpp" />
-    <ClCompile Include="..\..\Source\network_client_api_main.cpp" />
-    <ClCompile Include="..\..\Source\network_client_api_misc.cpp" />
-    <ClCompile Include="..\..\Source\network_client_api_update.cpp" />
-    <ClCompile Include="..\..\Source\network_client_message.cpp" />
-    <ClCompile Include="..\..\Source\network_server_api_interface.cpp" />
-    <ClCompile Include="..\..\Source\network_server_api_misc.cpp" />
-    <ClCompile Include="..\..\Source\network_server_api_update.cpp" />
-    <ClCompile Include="..\..\Source\network_server_api_main.cpp" />
-    <ClCompile Include="..\..\Source\network_server_message.cpp" />
-    <ClCompile Include="..\..\Source\network_utils.cpp" />
+    <ClCompile Include="..\..\..\src\network_client_api_interface.cpp" />
+    <ClCompile Include="..\..\..\src\network_client_api_main.cpp" />
+    <ClCompile Include="..\..\..\src\network_client_api_misc.cpp" />
+    <ClCompile Include="..\..\..\src\network_client_api_update.cpp" />
+    <ClCompile Include="..\..\..\src\network_client_message.cpp" />
+    <ClCompile Include="..\..\..\src\network_server_api_interface.cpp" />
+    <ClCompile Include="..\..\..\src\network_server_api_misc.cpp" />
+    <ClCompile Include="..\..\..\src\network_server_api_update.cpp" />
+    <ClCompile Include="..\..\..\src\network_server_api_main.cpp" />
+    <ClCompile Include="..\..\..\src\network_server_message.cpp" />
+    <ClCompile Include="..\..\..\src\network_utils.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

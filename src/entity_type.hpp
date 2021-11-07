@@ -1,0 +1,16 @@
+#pragma once
+
+enum class EntityType
+{
+	SKY,
+	TERRAIN,
+	WATER,
+	MODEL,
+	BILLBOARD,
+	AABB,
+	POINTLIGHT,
+	SPOTLIGHT,
+	REFLECTION,
+	IMAGE,
+	TEXT
+};

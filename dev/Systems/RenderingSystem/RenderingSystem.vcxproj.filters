@@ -45,186 +45,186 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\capture_buffer_main.cpp">
+    <ClCompile Include="..\..\..\src\capture_buffer_main.cpp">
       <Filter>Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\capture_buffer_misc.cpp">
+    <ClCompile Include="..\..\..\src\capture_buffer_misc.cpp">
       <Filter>Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\render_buffer.cpp">
+    <ClCompile Include="..\..\..\src\render_buffer.cpp">
       <Filter>Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\shader_buffer.cpp">
+    <ClCompile Include="..\..\..\src\shader_buffer.cpp">
       <Filter>Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\master_renderer_capture_reflection_cube.cpp">
+    <ClCompile Include="..\..\..\src\master_renderer_capture_reflection_cube.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\master_renderer_capture_post.cpp">
+    <ClCompile Include="..\..\..\src\master_renderer_capture_post.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\master_renderer_draw.cpp">
+    <ClCompile Include="..\..\..\src\master_renderer_draw.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\master_renderer_main.cpp">
+    <ClCompile Include="..\..\..\src\master_renderer_main.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\render_bus_getters.cpp">
+    <ClCompile Include="..\..\..\src\render_bus_getters.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\render_bus_setters.cpp">
+    <ClCompile Include="..\..\..\src\render_bus_setters.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\shadow_generator.cpp">
+    <ClCompile Include="..\..\..\src\shadow_generator.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\window.cpp">
+    <ClCompile Include="..\..\..\src\window.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\base_renderer.cpp">
+    <ClCompile Include="..\..\..\src\base_renderer.cpp">
       <Filter>Renderers\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\blur_renderer.cpp">
+    <ClCompile Include="..\..\..\src\blur_renderer.cpp">
       <Filter>Renderers\Post Renderers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\anti_aliasing_renderer.cpp">
+    <ClCompile Include="..\..\..\src\anti_aliasing_renderer.cpp">
       <Filter>Renderers\Post Renderers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\aabb_entity_color_renderer.cpp">
+    <ClCompile Include="..\..\..\src\aabb_entity_color_renderer.cpp">
       <Filter>Renderers\Entity Renderers\Color</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_entity_color_renderer.cpp">
+    <ClCompile Include="..\..\..\src\billboard_entity_color_renderer.cpp">
       <Filter>Renderers\Entity Renderers\Color</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\image_entity_color_renderer.cpp">
+    <ClCompile Include="..\..\..\src\image_entity_color_renderer.cpp">
       <Filter>Renderers\Entity Renderers\Color</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_entity_color_renderer.cpp">
+    <ClCompile Include="..\..\..\src\model_entity_color_renderer.cpp">
       <Filter>Renderers\Entity Renderers\Color</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\sky_entity_color_renderer.cpp">
+    <ClCompile Include="..\..\..\src\sky_entity_color_renderer.cpp">
       <Filter>Renderers\Entity Renderers\Color</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\terrain_entity_color_renderer.cpp">
+    <ClCompile Include="..\..\..\src\terrain_entity_color_renderer.cpp">
       <Filter>Renderers\Entity Renderers\Color</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\water_entity_color_renderer.cpp">
+    <ClCompile Include="..\..\..\src\water_entity_color_renderer.cpp">
       <Filter>Renderers\Entity Renderers\Color</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\terrain_entity_depth_renderer.cpp">
+    <ClCompile Include="..\..\..\src\terrain_entity_depth_renderer.cpp">
       <Filter>Renderers\Entity Renderers\Depth</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_entity_depth_renderer.cpp">
+    <ClCompile Include="..\..\..\src\model_entity_depth_renderer.cpp">
       <Filter>Renderers\Entity Renderers\Depth</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_entity_depth_renderer.cpp">
+    <ClCompile Include="..\..\..\src\billboard_entity_depth_renderer.cpp">
       <Filter>Renderers\Entity Renderers\Depth</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_entity_shadow_renderer.cpp">
+    <ClCompile Include="..\..\..\src\model_entity_shadow_renderer.cpp">
       <Filter>Renderers\Entity Renderers\Depth</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_entity_shadow_renderer.cpp">
+    <ClCompile Include="..\..\..\src\billboard_entity_shadow_renderer.cpp">
       <Filter>Renderers\Entity Renderers\Depth</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\bloom_renderer.cpp">
+    <ClCompile Include="..\..\..\src\bloom_renderer.cpp">
       <Filter>Renderers\Post Renderers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\dof_renderer.cpp">
+    <ClCompile Include="..\..\..\src\dof_renderer.cpp">
       <Filter>Renderers\Post Renderers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\lens_flare_renderer.cpp">
+    <ClCompile Include="..\..\..\src\lens_flare_renderer.cpp">
       <Filter>Renderers\Post Renderers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\motion_blur_renderer.cpp">
+    <ClCompile Include="..\..\..\src\motion_blur_renderer.cpp">
       <Filter>Renderers\Post Renderers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\master_renderer_capture_misc.cpp">
+    <ClCompile Include="..\..\..\src\master_renderer_capture_misc.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\master_renderer_capture_reflection_water.cpp">
+    <ClCompile Include="..\..\..\src\master_renderer_capture_reflection_water.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\capture_buffer.hpp">
+    <ClInclude Include="..\..\..\src\capture_buffer.hpp">
       <Filter>Buffers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\render_buffer.hpp">
+    <ClInclude Include="..\..\..\src\render_buffer.hpp">
       <Filter>Buffers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\shader_buffer.hpp">
+    <ClInclude Include="..\..\..\src\shader_buffer.hpp">
       <Filter>Buffers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\master_renderer.hpp">
+    <ClInclude Include="..\..\..\src\master_renderer.hpp">
       <Filter>Master Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\render_bus.hpp">
+    <ClInclude Include="..\..\..\src\render_bus.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\shadow_generator.hpp">
+    <ClInclude Include="..\..\..\src\shadow_generator.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\window.hpp">
+    <ClInclude Include="..\..\..\src\window.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\base_renderer.hpp">
+    <ClInclude Include="..\..\..\src\base_renderer.hpp">
       <Filter>Renderers\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\blur_renderer.hpp">
+    <ClInclude Include="..\..\..\src\blur_renderer.hpp">
       <Filter>Renderers\Post Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\anti_aliasing_renderer.hpp">
+    <ClInclude Include="..\..\..\src\anti_aliasing_renderer.hpp">
       <Filter>Renderers\Post Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\aabb_entity_color_renderer.hpp">
+    <ClInclude Include="..\..\..\src\aabb_entity_color_renderer.hpp">
       <Filter>Renderers\Entity Renderers\Color</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\billboard_entity_color_renderer.hpp">
+    <ClInclude Include="..\..\..\src\billboard_entity_color_renderer.hpp">
       <Filter>Renderers\Entity Renderers\Color</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\image_entity_color_renderer.hpp">
+    <ClInclude Include="..\..\..\src\image_entity_color_renderer.hpp">
       <Filter>Renderers\Entity Renderers\Color</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\model_entity_color_renderer.hpp">
+    <ClInclude Include="..\..\..\src\model_entity_color_renderer.hpp">
       <Filter>Renderers\Entity Renderers\Color</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\sky_entity_color_renderer.hpp">
+    <ClInclude Include="..\..\..\src\sky_entity_color_renderer.hpp">
       <Filter>Renderers\Entity Renderers\Color</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\terrain_entity_color_renderer.hpp">
+    <ClInclude Include="..\..\..\src\terrain_entity_color_renderer.hpp">
       <Filter>Renderers\Entity Renderers\Color</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\water_entity_color_renderer.hpp">
+    <ClInclude Include="..\..\..\src\water_entity_color_renderer.hpp">
       <Filter>Renderers\Entity Renderers\Color</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\terrain_entity_depth_renderer.hpp">
+    <ClInclude Include="..\..\..\src\terrain_entity_depth_renderer.hpp">
       <Filter>Renderers\Entity Renderers\Depth</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\model_entity_depth_renderer.hpp">
+    <ClInclude Include="..\..\..\src\model_entity_depth_renderer.hpp">
       <Filter>Renderers\Entity Renderers\Depth</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\billboard_entity_depth_renderer.hpp">
+    <ClInclude Include="..\..\..\src\billboard_entity_depth_renderer.hpp">
       <Filter>Renderers\Entity Renderers\Depth</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\model_entity_shadow_renderer.hpp">
+    <ClInclude Include="..\..\..\src\model_entity_shadow_renderer.hpp">
       <Filter>Renderers\Entity Renderers\Depth</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\billboard_entity_shadow_renderer.hpp">
+    <ClInclude Include="..\..\..\src\billboard_entity_shadow_renderer.hpp">
       <Filter>Renderers\Entity Renderers\Depth</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\bloom_renderer.hpp">
+    <ClInclude Include="..\..\..\src\bloom_renderer.hpp">
       <Filter>Renderers\Post Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\dof_renderer.hpp">
+    <ClInclude Include="..\..\..\src\dof_renderer.hpp">
       <Filter>Renderers\Post Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\lens_flare_renderer.hpp">
+    <ClInclude Include="..\..\..\src\lens_flare_renderer.hpp">
       <Filter>Renderers\Post Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\motion_blur_renderer.hpp">
+    <ClInclude Include="..\..\..\src\motion_blur_renderer.hpp">
       <Filter>Renderers\Post Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\render_utils.hpp">
+    <ClInclude Include="..\..\..\src\render_utils.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
   </ItemGroup>

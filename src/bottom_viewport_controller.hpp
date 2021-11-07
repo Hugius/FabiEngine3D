@@ -38,5 +38,5 @@ private:
 	// Miscellaneous
 	TopViewportController& _topViewportController;
 	ScriptEditor& _scriptEditor;
-	shared_ptr<EngineGuiScreen> _statsScreen;
+	shared_ptr<EngineGuiScreen> _statsScreen = nullptr;
 };

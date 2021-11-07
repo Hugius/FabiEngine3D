@@ -4,7 +4,6 @@
 #include "tools.hpp"
 
 #include <fstream>
-#include <algorithm>
 
 using std::ifstream;
 using std::ofstream;

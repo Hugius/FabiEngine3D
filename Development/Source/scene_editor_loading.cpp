@@ -4,7 +4,6 @@
 
 #include <fstream>
 #include <sstream>
-#include <algorithm>
 
 using std::ifstream;
 using std::ofstream;

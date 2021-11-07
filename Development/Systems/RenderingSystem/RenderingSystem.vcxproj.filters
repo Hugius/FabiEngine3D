@@ -57,7 +57,7 @@
     <ClCompile Include="..\..\Source\shader_buffer.cpp">
       <Filter>Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\master_renderer_capture_reflection.cpp">
+    <ClCompile Include="..\..\Source\master_renderer_capture_reflection_cube.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\master_renderer_capture_post.cpp">
@@ -139,6 +139,9 @@
       <Filter>Renderers\Post Renderers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\master_renderer_capture_misc.cpp">
+      <Filter>Master Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\master_renderer_capture_reflection_water.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
   </ItemGroup>

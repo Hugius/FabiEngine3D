@@ -30,6 +30,7 @@
     <ClCompile Include="..\..\Source\dof_renderer.cpp" />
     <ClCompile Include="..\..\Source\lens_flare_renderer.cpp" />
     <ClCompile Include="..\..\Source\master_renderer_capture_misc.cpp" />
+    <ClCompile Include="..\..\Source\master_renderer_capture_reflection_water.cpp" />
     <ClCompile Include="..\..\Source\model_entity_depth_renderer.cpp" />
     <ClCompile Include="..\..\Source\motion_blur_renderer.cpp" />
     <ClCompile Include="..\..\Source\terrain_entity_depth_renderer.cpp" />
@@ -40,7 +41,7 @@
     <ClCompile Include="..\..\Source\render_bus_setters.cpp" />
     <ClCompile Include="..\..\Source\capture_buffer_main.cpp" />
     <ClCompile Include="..\..\Source\capture_buffer_misc.cpp" />
-    <ClCompile Include="..\..\Source\master_renderer_capture_reflection.cpp" />
+    <ClCompile Include="..\..\Source\master_renderer_capture_reflection_cube.cpp" />
     <ClCompile Include="..\..\Source\master_renderer_capture_post.cpp" />
     <ClCompile Include="..\..\Source\master_renderer_draw.cpp" />
     <ClCompile Include="..\..\Source\master_renderer_main.cpp" />

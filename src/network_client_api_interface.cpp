@@ -78,6 +78,12 @@ const unsigned int NetworkClientAPI::getPingLatency() const
 
 const string& NetworkClientAPI::getUsername() const
 {
+	// Must be running
+	if(!_isRunning)
+	{
+		Logger::throwError("NetworkClientAPI::getUsername::1");
+	}
+
 	return _username;
 }
 

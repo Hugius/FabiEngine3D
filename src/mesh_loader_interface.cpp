@@ -59,16 +59,16 @@ void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths)
 	}
 }
 
-const vector<shared_ptr<MeshPart>>& MeshLoader::loadMesh(const string& filePath)
+const vector<shared_ptr<MeshPart>>* MeshLoader::loadMesh(const string& filePath)
 {
-BEGIN:
+	BEGIN:
 	// Search cache
 	auto cacheIterator = _meshCache.find(filePath);
 
 	// Return from cache
 	if(cacheIterator != _meshCache.end())
 	{
-		return cacheIterator->second;
+		return &cacheIterator->second;
 	}
 
 	// Load mesh
@@ -78,7 +78,7 @@ BEGIN:
 	if(returnValue.second.empty())
 	{
 		Logger::throwWarning(returnValue.first);
-		return {};
+		return nullptr;
 	}
 	else
 	{

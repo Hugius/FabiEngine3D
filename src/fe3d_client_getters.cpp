@@ -60,12 +60,18 @@ const bool FabiEngine3D::networkClient_isValidServerIP(const string& serverIP)
 	return _core->_networkClientAPI.isValidServerIP(serverIP);
 }
 
-const string& FabiEngine3D::networkClient_getUsername()
+const string FabiEngine3D::networkClient_getUsername()
 {
+	if(!_core->_networkClientAPI.isRunning())
+	{
+		Logger::throwWarning("Networking client tried to retrieve username: not running!");
+		return "";
+	}
+
 	return _core->_networkClientAPI.getUsername();
 }
 
-const string& FabiEngine3D::networkClient_getServerIP()
+const string FabiEngine3D::networkClient_getServerIP()
 {
 	if(!_core->_networkClientAPI.isRunning())
 	{
@@ -86,7 +92,7 @@ const string& FabiEngine3D::networkClient_getServerIP()
 	return _core->_networkClientAPI.getServerIP();
 }
 
-const vector<NetworkServerMessage>& FabiEngine3D::networkClient_getPendingMessages()
+const vector<NetworkServerMessage> FabiEngine3D::networkClient_getPendingMessages()
 {
 	if(!_core->_networkClientAPI.isRunning())
 	{

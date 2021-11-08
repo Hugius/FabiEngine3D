@@ -160,9 +160,9 @@ const shared_ptr<RenderBuffer> TerrainEntity::getRenderBuffer() const
 	return _renderBuffer;
 }
 
-const vector<float>& TerrainEntity::getPixelValues() const
+const vector<float>& TerrainEntity::getPixels() const
 {
-	return _pixelValues;
+	return _pixels;
 }
 
 const bool TerrainEntity::isSpecular() const

@@ -18,7 +18,7 @@ public:
 	void clearMeshCache(const string& filePath);
 
 	// Miscellaneous
-	const vector<shared_ptr<MeshPart>>& loadMesh(const string& filePath);
+	const vector<shared_ptr<MeshPart>>* loadMesh(const string& filePath);
 
 private:
 	// Miscellaneous

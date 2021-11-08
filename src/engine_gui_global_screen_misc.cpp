@@ -228,7 +228,7 @@ void EngineGuiGlobalScreen::createChoiceForm(const string& ID, string title, Vec
 	_choiceFormID = ID;
 }
 
-const string& EngineGuiGlobalScreen::checkChoiceForm(const string& ID)
+const string EngineGuiGlobalScreen::checkChoiceForm(const string& ID)
 {
 	if(ID == _choiceFormID)
 	{

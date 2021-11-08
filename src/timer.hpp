@@ -40,12 +40,12 @@ private:
 	map<string, float> _deltaParts;
 
 	// Integers
-	LARGE_INTEGER _frequency;
-	LARGE_INTEGER _time1;
-	LARGE_INTEGER _time2;
-	LARGE_INTEGER _specificFrequency;
-	LARGE_INTEGER _specificTime1;
-	LARGE_INTEGER _specificTime2;
+	LARGE_INTEGER _frequency = {};
+	LARGE_INTEGER _time1 = {};
+	LARGE_INTEGER _time2 = {};
+	LARGE_INTEGER _specificFrequency = {};
+	LARGE_INTEGER _specificTime1 = {};
+	LARGE_INTEGER _specificTime2 = {};
 	unsigned int _passedTickCount = 0;
 
 	// Booleans

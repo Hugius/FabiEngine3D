@@ -14,7 +14,7 @@ public:
 
 	// Voids
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
-	void setPixelValues(const vector<float>& value);
+	void setPixels(const vector<float>& value);
 	void setVertices(const vector<Vec3> value);
 	void setNormals(const vector<Vec3> value);
 	void setUvCoords(const vector<Vec2> value);
@@ -67,7 +67,7 @@ public:
 	const vector<Vec2>& getUvCoords() const;
 
 	// Decimals
-	const vector<float>& getPixelValues() const;
+	const vector<float>& getPixels() const;
 	const float getTextureRepeat() const;
 	const float getRedRepeat() const;
 	const float getGreenRepeat() const;
@@ -123,7 +123,7 @@ private:
 	vector<Vec2> _uvCoords;
 
 	// Decimals
-	vector<float> _pixelValues;
+	vector<float> _pixels;
 	float _redRepeat = 1.0f;
 	float _greenRepeat = 1.0f;
 	float _blueRepeat = 1.0f;

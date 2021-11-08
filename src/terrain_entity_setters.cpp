@@ -7,9 +7,9 @@ void TerrainEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 	_renderBuffer = value;
 }
 
-void TerrainEntity::setPixelValues(const vector<float>& value)
+void TerrainEntity::setPixels(const vector<float>& value)
 {
-	_pixelValues = value;
+	_pixels = value;
 }
 
 void TerrainEntity::setVertices(const vector<Vec3> value)

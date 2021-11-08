@@ -35,16 +35,17 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 	_createEntity(ID);
 
 	// Load mesh file
-	auto parts = _meshLoader.loadMesh(meshPath);
+	auto partsPointer = _meshLoader.loadMesh(meshPath);
 
 	// Check if model loading failed
-	if(parts.empty())
+	if(partsPointer == nullptr)
 	{
 		deleteEntity(ID);
 		return;
 	}
 
 	// Check if multiparted model only has 1 part
+	auto& parts = *partsPointer;
 	if((parts.size() == 1) && !parts[0]->getID().empty())
 	{
 		Logger::throwWarning("Multiparted model with ID \"" + ID + "\" only has 1 part!");
@@ -165,7 +166,7 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 				if(!reflectionDistanceMap.empty())
 				{
 					// Temporary values
-					auto closestReflectionEntityID = reflectionDistanceMap.begin()->second->getID();
+					auto& closestReflectionEntityID = reflectionDistanceMap.begin()->second->getID();
 
 					// Check if current reflection changed
 					if(entity->getCurrentReflectionEntityID() != closestReflectionEntityID)

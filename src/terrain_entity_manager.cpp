@@ -45,17 +45,18 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 	_createEntity(ID);
 
 	// Load height map
-	auto pixelValues = _textureLoader.loadBitmap(heightMapPath);
+	auto pixelsPointer = _textureLoader.loadBitmap(heightMapPath);
 
 	// Check if height map loading failed
-	if(pixelValues.empty())
+	if(pixelsPointer == nullptr)
 	{
 		deleteEntity(ID);
 		return;
 	}
 
 	// Check if height map resolution is too high
-	auto heightMapSize = static_cast<unsigned int>(sqrt(static_cast<double>(pixelValues.size())));
+	auto& pixels = *pixelsPointer;
+	auto heightMapSize = static_cast<unsigned int>(sqrt(static_cast<double>(pixels.size())));
 	if(heightMapSize > MAX_SIZE)
 	{
 		Logger::throwWarning("Tried to create terrain with ID \"" + ID + "\": height map resolution too high!");
@@ -68,7 +69,7 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 
 	// Set properties
 	entity->setHeightMapPath(heightMapPath);
-	entity->setPixelValues(pixelValues);
+	entity->setPixels(pixels);
 	entity->setSize(static_cast<float>(heightMapSize));
 
 	// Load mesh
@@ -96,7 +97,7 @@ void TerrainEntityManager::loadMesh(const string& ID)
 {
 	// Temporary values
 	auto entity = getEntity(ID);
-	const auto& pixelColors = entity->getPixelValues();
+	const auto& pixels = entity->getPixels();
 	const float size = entity->getSize();
 	const unsigned int uSize = static_cast<unsigned int>(size);
 	const float halfSize = size / 2.0f;
@@ -111,7 +112,7 @@ void TerrainEntityManager::loadMesh(const string& ID)
 		{
 			// Calculate vertex
 			float vertexX = x;
-			float vertexY = _getPixelHeight(x + halfSize, z + halfSize, size, maxHeight, pixelColors);
+			float vertexY = _getPixelHeight(x + halfSize, z + halfSize, size, maxHeight, pixels);
 			float vertexZ = z;
 
 			// Calculate UV coordinate
@@ -119,10 +120,10 @@ void TerrainEntityManager::loadMesh(const string& ID)
 			float uvY = ((z + halfSize) / size);
 
 			// Calculate normal vector
-			float LH = _getPixelHeight(x + halfSize - 1, z + halfSize, size, maxHeight, pixelColors);
-			float RH = _getPixelHeight(x + halfSize + 1, z + halfSize, size, maxHeight, pixelColors);
-			float UH = _getPixelHeight(x + halfSize, z + halfSize + 1, size, maxHeight, pixelColors);
-			float DH = _getPixelHeight(x + halfSize, z + halfSize - 1, size, maxHeight, pixelColors);
+			float LH = _getPixelHeight(x + halfSize - 1, z + halfSize, size, maxHeight, pixels);
+			float RH = _getPixelHeight(x + halfSize + 1, z + halfSize, size, maxHeight, pixels);
+			float UH = _getPixelHeight(x + halfSize, z + halfSize + 1, size, maxHeight, pixels);
+			float DH = _getPixelHeight(x + halfSize, z + halfSize - 1, size, maxHeight, pixels);
 			Vec3 normal = Vec3(LH - RH, 3.0f, DH - UH);
 			normal = Math::normalize(normal);
 
@@ -246,7 +247,7 @@ void TerrainEntityManager::loadMesh(const string& ID)
 
 const float TerrainEntityManager::getPixelHeight(const string& ID, float x, float z)
 {
-	return _getPixelHeight(x, z, getEntity(ID)->getSize(), getEntity(ID)->getMaxHeight(), getEntity(ID)->getPixelValues());
+	return _getPixelHeight(x, z, getEntity(ID)->getSize(), getEntity(ID)->getMaxHeight(), getEntity(ID)->getPixels());
 }
 
 const bool TerrainEntityManager::isInside(const string& ID, float x, float z)
@@ -262,7 +263,7 @@ const bool TerrainEntityManager::isInside(const string& ID, float x, float z)
 	}
 }
 
-float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixelColors)
+float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixels)
 {
 	// If reached end of terrain X
 	if(x == size)
@@ -284,5 +285,5 @@ float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float 
 
 	// Returning the corresponding height
 	int index = (static_cast<int>(x) * static_cast<int>(size)) + static_cast<int>(z);
-	return ((pixelColors[index]) / 255.0f) * maxHeight;
+	return ((pixels[index]) / 255.0f) * maxHeight;
 }

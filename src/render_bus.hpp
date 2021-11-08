@@ -272,5 +272,5 @@ private:
 	bool _isDofDynamic = false;
 
 	// Miscellaneous
-	BloomType _bloomType;
+	BloomType _bloomType = BloomType::EVERYTHING;
 };

@@ -218,7 +218,7 @@ const int ScriptInterpreter::_extractListIndexFromString(const string& valueStri
 	}
 
 	// Check if index is a number
-	string indexString = valueString.substr(openingBracketIndex + 1);
+	string indexString = valueString.substr(static_cast<size_t>(openingBracketIndex + 1));
 	indexString.pop_back();
 	if(_isIntegerValue(indexString))
 	{

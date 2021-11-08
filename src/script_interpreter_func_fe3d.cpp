@@ -19,7 +19,7 @@ const vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const st
 		{
 			// Extract arguments from argument string
 			auto parenthesisIndex = static_cast<unsigned int>(distance(scriptLine.begin(), openingParanthesisFound));
-			string argumentString = scriptLine.substr(parenthesisIndex + 1);
+			string argumentString = scriptLine.substr(static_cast<size_t>(parenthesisIndex + 1));
 			argumentString.pop_back();
 			auto arguments = _extractValuesFromListString(argumentString);
 

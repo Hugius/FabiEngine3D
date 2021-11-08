@@ -32,7 +32,7 @@ public:
 	void setAnisotropicFilteringQuality(unsigned int value);
 
 	// Decimals
-	const vector<float>& loadBitmap(const string& filePath);
+	const vector<float>* loadBitmap(const string& filePath);
 
 	// Integers
 	const unsigned int getAnisotropicFilteringQuality() const;

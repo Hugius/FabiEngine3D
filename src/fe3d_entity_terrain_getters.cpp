@@ -101,7 +101,7 @@ const float FabiEngine3D::terrainEntity_getSpecularIntensity(const string& ID)
 	return _core->_terrainEntityManager.getEntity(ID)->getSpecularIntensity();
 }
 
-const string& FabiEngine3D::terrainEntity_getSelectedID()
+const string FabiEngine3D::terrainEntity_getSelectedID()
 {
 	if(_core->_terrainEntityManager.getSelectedTerrain() != nullptr)
 	{

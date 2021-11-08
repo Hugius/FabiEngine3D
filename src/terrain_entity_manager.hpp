@@ -32,5 +32,5 @@ private:
 	string _selectedID = "";
 
 	// Decimals
-	float _getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixelColors);
+	float _getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixels);
 };

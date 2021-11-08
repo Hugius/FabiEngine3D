@@ -61,7 +61,7 @@ const string FabiEngine3D::networkServer_getOldClientUsername() const
 	return _core->_networkServerAPI.getOldClientUsername();
 }
 
-const vector<NetworkClientMessage>& FabiEngine3D::networkServer_getPendingMessages()
+const vector<NetworkClientMessage> FabiEngine3D::networkServer_getPendingMessages()
 {
 	if(!_core->_networkServerAPI.isRunning())
 	{

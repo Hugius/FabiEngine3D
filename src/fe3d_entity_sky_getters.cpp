@@ -1,7 +1,7 @@
 #include "fe3d.hpp"
 #include "core_engine.hpp"
 
-const string& FabiEngine3D::skyEntity_getSelectedID() const
+const string FabiEngine3D::skyEntity_getSelectedID() const
 {
 	if(_core->_skyEntityManager.getSelectedMainSky() != nullptr)
 	{
@@ -13,7 +13,7 @@ const string& FabiEngine3D::skyEntity_getSelectedID() const
 	}
 }
 
-const string& FabiEngine3D::skyEntity_getMixID() const
+const string FabiEngine3D::skyEntity_getMixID() const
 {
 	if(_core->_skyEntityManager.getSelectedMixSky() != nullptr)
 	{

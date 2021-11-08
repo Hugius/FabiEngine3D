@@ -37,7 +37,7 @@ public:
 	void createAnswerForm(const string& ID, string title, Vec2 position);
 
 	// Strings
-	const string& checkChoiceForm(const string& ID);
+	const string checkChoiceForm(const string& ID);
 
 	// Booleans
 	const bool isFocused() const;

@@ -122,7 +122,7 @@ BEGIN:
 	}
 }
 
-const vector<float>& TextureLoader::loadBitmap(const string& filePath)
+const vector<float>* TextureLoader::loadBitmap(const string& filePath)
 {
 BEGIN:
 	// Search cache
@@ -131,7 +131,7 @@ BEGIN:
 	// Return from cache
 	if(cacheIterator != _bitmapCache.end())
 	{
-		return cacheIterator->second;
+		return &cacheIterator->second;
 	}
 
 	// Load bitmap
@@ -141,7 +141,7 @@ BEGIN:
 	if(loadedBitmap.empty())
 	{
 		Logger::throwWarning("Cannot load image file: \"" + filePath + "\"!");
-		return {};
+		return nullptr;
 	}
 	else
 	{

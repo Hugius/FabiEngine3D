@@ -21,9 +21,6 @@ public:
 	const bool mustPromptOnExit() const;
 
 private:
-	// Strings
-	string _currentProject = "";
-
 	// Booleans
 	bool _mustPromptOnExit = false;
 

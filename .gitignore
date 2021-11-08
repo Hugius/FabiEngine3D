@@ -39,7 +39,7 @@ dev/Systems/NetworkingSystem.pdb
 dev/Systems/PhysicsSystem.pdb
 dev/Systems/RenderingSystem.pdb
 dev/Systems/ScriptingSystem.pdb
-src/binaries/FabiEngine3D.pdb
-src/binaries/FabiEngine3D.iobj
-src/binaries/FabiEngine3D.ipdb
-src/projects/*/
+app/binaries/FabiEngine3D.pdb
+app/binaries/FabiEngine3D.iobj
+app/binaries/FabiEngine3D.ipdb
+app/projects/*/

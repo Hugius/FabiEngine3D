@@ -56,7 +56,7 @@ const string& NetworkServerAPI::getNewClientUsername() const
 	return _newClientUsername;
 }
 
-const string NetworkServerAPI::getOldClientIP() const
+const string& NetworkServerAPI::getOldClientIP() const
 {
 	// Must be running
 	if(!_isRunning)
@@ -75,7 +75,7 @@ const string NetworkServerAPI::getOldClientIP() const
 	}
 }
 
-const string NetworkServerAPI::getOldClientUsername() const
+const string& NetworkServerAPI::getOldClientUsername() const
 {
 	// Must be running
 	if(!_isRunning)

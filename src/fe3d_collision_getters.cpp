@@ -1,7 +1,7 @@
 #include "fe3d.hpp"
 #include "core_engine.hpp"
 
-const string FabiEngine3D::collision_checkCameraWithAny()
+const string FabiEngine3D::collision_checkCameraWithAny() const
 {
 	for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities()) // Iterate through AABB entities
 	{
@@ -15,17 +15,17 @@ const string FabiEngine3D::collision_checkCameraWithAny()
 	return "";
 }
 
-const bool FabiEngine3D::collision_checkCameraWithTerrain()
+const bool FabiEngine3D::collision_checkCameraWithTerrain() const
 {
 	return _core->_cameraCollisionHandler.isCameraUnderTerrain();
 }
 
-const bool FabiEngine3D::collision_checkCameraWithEntity(const string& ID)
+const bool FabiEngine3D::collision_checkCameraWithEntity(const string& ID) const
 {
 	return _core->_aabbEntityManager.getEntity(ID)->hasCollided();
 }
 
-const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfID, const string& otherID)
+const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfID, const string& otherID) const
 {
 	// Check if self entity does not exist
 	if(!_core->_aabbEntityManager.isExisting(selfID))
@@ -113,7 +113,7 @@ const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfI
 	return "";
 }
 
-const string FabiEngine3D::collision_checkCameraWithEntities(const string& ID)
+const string FabiEngine3D::collision_checkCameraWithEntities(const string& ID) const
 {
 	// Iterate through AABB entities
 	for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
@@ -137,7 +137,7 @@ const string FabiEngine3D::collision_checkCameraWithEntities(const string& ID)
 	return "";
 }
 
-const bool FabiEngine3D::collision_checkCameraWithEntityDirection(const string& ID, Direction direction)
+const bool FabiEngine3D::collision_checkCameraWithEntityDirection(const string& ID, Direction direction) const
 {
 	// Check if collided
 	if(_core->_aabbEntityManager.getEntity(ID)->hasCollided())
@@ -152,7 +152,7 @@ const bool FabiEngine3D::collision_checkCameraWithEntityDirection(const string& 
 	return false;
 }
 
-const bool FabiEngine3D::collision_checkCameraWithAnyDirection(Direction direction)
+const bool FabiEngine3D::collision_checkCameraWithAnyDirection(Direction direction) const
 {
 	// Iterate through AABB entities
 	for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
@@ -171,7 +171,7 @@ const bool FabiEngine3D::collision_checkCameraWithAnyDirection(Direction directi
 	return false;
 }
 
-const bool FabiEngine3D::collision_checkCameraWithEntitiesDirection(const string& ID, Direction direction)
+const bool FabiEngine3D::collision_checkCameraWithEntitiesDirection(const string& ID, Direction direction) const
 {
 	// Iterate through AABB entities
 	for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
@@ -199,12 +199,12 @@ const bool FabiEngine3D::collision_checkCameraWithEntitiesDirection(const string
 	return false;
 }
 
-const bool FabiEngine3D::collision_isCameraResponseEnabled()
+const bool FabiEngine3D::collision_isCameraResponseEnabled() const
 {
 	return _core->_cameraCollisionHandler.isCameraAabbResponseEnabled();
 }
 
-const bool FabiEngine3D::collision_isTerrainResponseEnabled()
+const bool FabiEngine3D::collision_isTerrainResponseEnabled() const
 {
 	return _core->_cameraCollisionHandler.isCameraTerrainResponseEnabled();
 }

@@ -35,7 +35,7 @@ Config::Config()
 	_processOption(file, _isApplicationExported, "application_exported");
 
 	// Check if multiplier is between 0.0 and 1.0
-	if(windowSizeMultiplier < 0.0f || windowSizeMultiplier > 1.0f)
+	if((windowSizeMultiplier < 0.0f) || (windowSizeMultiplier > 1.0f))
 	{
 		Logger::throwFatalWarning("Configuration file @ option `window_size_multiplier`: must be between 0.0 and 1.0!");
 	}

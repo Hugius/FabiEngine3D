@@ -32,17 +32,17 @@ void FabiEngine3D::application_stop()
 	_core->_stop();
 }
 
-bool FabiEngine3D::application_isPaused()
+const bool FabiEngine3D::application_isPaused() const
 {
 	return _core->_isPaused;
 }
 
-bool FabiEngine3D::application_isExported()
+const bool FabiEngine3D::application_isExported() const
 {
 	return Config::getInst().isApplicationExported();
 }
 
-const string& FabiEngine3D::application_getTitle()
+const string& FabiEngine3D::application_getTitle() const
 {
 	return Config::getInst().getApplicationTitle();
 }

@@ -2,17 +2,17 @@
 #include "core_engine.hpp"
 #include "configuration.hpp"
 
-const unsigned int FabiEngine3D::misc_getTriangleCount()
+const unsigned int FabiEngine3D::misc_getTriangleCount() const
 {
 	return _core->_renderBus.getTriangleCount();
 }
 
-const float FabiEngine3D::misc_getFPS()
+const float FabiEngine3D::misc_getFPS() const
 {
 	return (1000.0f / _core->_deltaTimeMS);
 }
 
-const float FabiEngine3D::misc_stopMillisecondTimer()
+const float FabiEngine3D::misc_stopMillisecondTimer() const
 {
 	if(!_core->_timer.isStarted())
 	{
@@ -23,34 +23,34 @@ const float FabiEngine3D::misc_stopMillisecondTimer()
 	return _core->_timer.stop();
 }
 
-const float FabiEngine3D::misc_getLevelOfDetailDistance()
+const float FabiEngine3D::misc_getLevelOfDetailDistance() const
 {
 	return _core->_modelEntityManager.getLevelOfDetailDistance();
 }
 
-const string FabiEngine3D::misc_getCpuModel()
+const string FabiEngine3D::misc_getCpuModel() const
 {
 	return _core->_libraryLoader.getCpuModel();
 }
 
-const string FabiEngine3D::misc_getGpuModel()
+const string FabiEngine3D::misc_getGpuModel() const
 {
 	return _core->_libraryLoader.getGpuModel();
 }
 
-const string FabiEngine3D::misc_getOpenglVersion()
+const string FabiEngine3D::misc_getOpenglVersion() const
 {
 	return _core->_libraryLoader.getOpenglVersion();
 }
 
-const Ivec2 FabiEngine3D::misc_getCursorPosition()
+const Ivec2 FabiEngine3D::misc_getCursorPosition() const
 {
 	Ivec2 cursorPosition = _core->_window.getCursorPosition();
 
 	return Ivec2(cursorPosition.x, (Config::getInst().getWindowSize().y - cursorPosition.y));
 }
 
-const Ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport()
+const Ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport() const
 {
 	if(application_isExported())
 	{
@@ -78,17 +78,17 @@ const Ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport()
 	}
 }
 
-const bool FabiEngine3D::misc_isMillisecondTimerStarted()
+const bool FabiEngine3D::misc_isMillisecondTimerStarted() const
 {
 	return _core->_timer.isStarted();
 }
 
-const bool FabiEngine3D::misc_isCursorVisible()
+const bool FabiEngine3D::misc_isCursorVisible() const
 {
 	return _core->_window.isCursorVisible();
 }
 
-const bool FabiEngine3D::misc_isCursorInsideViewport()
+const bool FabiEngine3D::misc_isCursorInsideViewport() const
 {
 	// Temporary values
 	auto cursorPosition = misc_getCursorPosition();
@@ -107,7 +107,7 @@ const bool FabiEngine3D::misc_isCursorInsideViewport()
 	return false;
 }
 
-const bool FabiEngine3D::misc_isCursorInsideWindow()
+const bool FabiEngine3D::misc_isCursorInsideWindow() const
 {
 	// Temporary values
 	auto cursorPosition = misc_getCursorPosition();
@@ -125,12 +125,12 @@ const bool FabiEngine3D::misc_isCursorInsideWindow()
 	return false;
 }
 
-const bool FabiEngine3D::misc_checkInterval(unsigned int ticks)
+const bool FabiEngine3D::misc_checkInterval(unsigned int ticks) const
 {
 	return ((_core->_timer.getPassedTickCount() % ticks) == 0);
 }
 
-const vector<pair<string, int>> FabiEngine3D::misc_getUpdateProfilingStatistics()
+const vector<pair<string, int>> FabiEngine3D::misc_getUpdateProfilingStatistics() const
 {
 	// Final list of timer IDs
 	vector<pair<string, int>> result =
@@ -160,7 +160,7 @@ const vector<pair<string, int>> FabiEngine3D::misc_getUpdateProfilingStatistics(
 	return result;
 }
 
-const vector<pair<string, int>> FabiEngine3D::misc_getRenderProfilingStatistics()
+const vector<pair<string, int>> FabiEngine3D::misc_getRenderProfilingStatistics() const
 {
 	// Final list of timer IDs
 	vector<pair<string, int>> result =
@@ -190,42 +190,42 @@ const vector<pair<string, int>> FabiEngine3D::misc_getRenderProfilingStatistics(
 	return result;
 }
 
-const bool FabiEngine3D::misc_isVsyncEnabled()
+const bool FabiEngine3D::misc_isVsyncEnabled() const
 {
 	return _core->_window.isVsyncEnabled();
 }
 
-const bool FabiEngine3D::misc_isWireFrameRenderingEnabled()
+const bool FabiEngine3D::misc_isWireFrameRenderingEnabled() const
 {
 	return _core->_renderBus.isWireFrameRenderingEnabled();
 }
 
-const bool FabiEngine3D::misc_isShadowFrameRenderingEnabled()
+const bool FabiEngine3D::misc_isShadowFrameRenderingEnabled() const
 {
 	return _core->_renderBus.isShadowFrameRenderingEnabled();
 }
 
-const bool FabiEngine3D::misc_isAabbFrameRenderingEnabled()
+const bool FabiEngine3D::misc_isAabbFrameRenderingEnabled() const
 {
 	return _core->_renderBus.isAabbFrameRenderingEnabled();
 }
 
-const bool FabiEngine3D::misc_isDebugRenderingEnabled()
+const bool FabiEngine3D::misc_isDebugRenderingEnabled() const
 {
 	return _core->_renderBus.isDebugRenderingEnabled();
 }
 
-const bool FabiEngine3D::misc_isSoundsEnabled()
+const bool FabiEngine3D::misc_isSoundsEnabled() const
 {
 	return _core->_audioPlayer.isSoundsEnabled();
 }
 
-const bool FabiEngine3D::misc_isMusicEnabled()
+const bool FabiEngine3D::misc_isMusicEnabled() const
 {
 	return _core->_audioPlayer.isMusicEnabled();
 }
 
-const unsigned int FabiEngine3D::misc_getMaxAudioChannelCount()
+const unsigned int FabiEngine3D::misc_getMaxAudioChannelCount() const
 {
 	return _core->_audioPlayer.getAllocatedChannelCount();
 }

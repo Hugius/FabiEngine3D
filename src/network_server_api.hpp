@@ -35,10 +35,10 @@ public:
 	// Strings
 	const vector<string> getClientIPs() const;
 	const vector<string> getClientUsernames() const;
-	const string& getNewClientIP() const;
-	const string& getNewClientUsername() const;
-	const string& getOldClientIP() const;
-	const string& getOldClientUsername() const;
+	const string getNewClientIP() const;
+	const string getNewClientUsername() const;
+	const string getOldClientIP() const;
+	const string getOldClientUsername() const;
 
 	// Booleans
 	const bool isRunning() const;

@@ -17,7 +17,7 @@ const bool FabiEngine3D::networkServer_isClientConnected(const string& username)
 	return _core->_networkServerAPI.isClientConnected(username);
 }
 
-const string& FabiEngine3D::networkServer_getNewClientIP()
+const string FabiEngine3D::networkServer_getNewClientIP() const
 {
 	if(!_core->_networkServerAPI.isRunning())
 	{
@@ -28,7 +28,7 @@ const string& FabiEngine3D::networkServer_getNewClientIP()
 	return _core->_networkServerAPI.getNewClientIP();
 }
 
-const string& FabiEngine3D::networkServer_getNewClientUsername()
+const string FabiEngine3D::networkServer_getNewClientUsername() const
 {
 	if(!_core->_networkServerAPI.isRunning())
 	{
@@ -39,7 +39,7 @@ const string& FabiEngine3D::networkServer_getNewClientUsername()
 	return _core->_networkServerAPI.getNewClientUsername();
 }
 
-const string& FabiEngine3D::networkServer_getOldClientIP()
+const string FabiEngine3D::networkServer_getOldClientIP() const
 {
 	if(!_core->_networkServerAPI.isRunning())
 	{
@@ -50,7 +50,7 @@ const string& FabiEngine3D::networkServer_getOldClientIP()
 	return _core->_networkServerAPI.getOldClientIP();
 }
 
-const string& FabiEngine3D::networkServer_getOldClientUsername()
+const string FabiEngine3D::networkServer_getOldClientUsername() const
 {
 	if(!_core->_networkServerAPI.isRunning())
 	{

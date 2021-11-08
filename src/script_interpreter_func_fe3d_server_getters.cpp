@@ -90,7 +90,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& fun
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto messages = _fe3d.networkServer_getPendingMessages();
+			const auto& messages = _fe3d.networkServer_getPendingMessages();
 			for(const auto& message : messages)
 			{
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, string((message.getProtocol() == NetworkProtocol::TCP) ? "TCP" : "UDP")));
@@ -102,7 +102,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& fun
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto messages = _fe3d.networkServer_getPendingMessages();
+			const auto& messages = _fe3d.networkServer_getPendingMessages();
 			for(const auto& message : messages)
 			{
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, message.getUsername()));
@@ -114,7 +114,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& fun
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto messages = _fe3d.networkServer_getPendingMessages();
+			const auto& messages = _fe3d.networkServer_getPendingMessages();
 			for(const auto& message : messages)
 			{
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, message.getContent()));

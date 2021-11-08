@@ -78,24 +78,24 @@ public:
 	void skyEntity_setWireFramed(const string& ID, bool enabled);
 
 	// Sky entity interface - getters
-	const vector<string> skyEntity_getAllIDs();
-	const array<string, 6>& skyEntity_getDiffuseMapPaths(const string& ID);
-	const string& skyEntity_getSelectedID();
-	const string& skyEntity_getMixID();
-	const Vec3 skyEntity_getColor(const string& ID);
-	const float skyEntity_getLightness(const string& ID);
-	const float skyEntity_getOriginalLightness(const string& ID);
-	const float skyEntity_getRotationSpeed(const string& ID);
-	const float skyEntity_getMixValue();
-	const bool skyEntity_isExisting(const string& ID);
-	const bool skyEntity_isVisible(const string& ID);
-	const bool skyEntity_isWireFramed(const string& ID);
-	const bool skyEntity_hasDiffuseMapRight(const string& ID);
-	const bool skyEntity_hasDiffuseMapLeft(const string& ID);
-	const bool skyEntity_hasDiffuseMapTop(const string& ID);
-	const bool skyEntity_hasDiffuseMapBottom(const string& ID);
-	const bool skyEntity_hasDiffuseMapBack(const string& ID);
-	const bool skyEntity_hasDiffuseMapFront(const string& ID);
+	const vector<string> skyEntity_getAllIDs() const;
+	const array<string, 6>& skyEntity_getDiffuseMapPaths(const string& ID) const;
+	const string& skyEntity_getSelectedID() const;
+	const string& skyEntity_getMixID() const;
+	const Vec3 skyEntity_getColor(const string& ID) const;
+	const float skyEntity_getLightness(const string& ID) const;
+	const float skyEntity_getOriginalLightness(const string& ID) const;
+	const float skyEntity_getRotationSpeed(const string& ID) const;
+	const float skyEntity_getMixValue() const;
+	const bool skyEntity_isExisting(const string& ID) const;
+	const bool skyEntity_isVisible(const string& ID) const;
+	const bool skyEntity_isWireFramed(const string& ID) const;
+	const bool skyEntity_hasDiffuseMapRight(const string& ID) const;
+	const bool skyEntity_hasDiffuseMapLeft(const string& ID) const;
+	const bool skyEntity_hasDiffuseMapTop(const string& ID) const;
+	const bool skyEntity_hasDiffuseMapBottom(const string& ID) const;
+	const bool skyEntity_hasDiffuseMapBack(const string& ID) const;
+	const bool skyEntity_hasDiffuseMapFront(const string& ID) const;
 
 	// Terrain entity interface - setters
 	void terrainEntity_create(const string& ID, const string& heightMapPath);
@@ -853,10 +853,10 @@ public:
 	const vector<NetworkClientMessage>& networkServer_getPendingMessages();
 	const vector<string> networkServer_getClientIPs();
 	const vector<string> networkServer_getClientUsernames();
-	const string& networkServer_getNewClientIP();
-	const string& networkServer_getNewClientUsername();
-	const string& networkServer_getOldClientIP();
-	const string& networkServer_getOldClientUsername();
+	const string networkServer_getNewClientIP() const;
+	const string networkServer_getNewClientUsername() const;
+	const string networkServer_getOldClientIP() const;
+	const string networkServer_getOldClientUsername() const;
 	const bool networkServer_isRunning();
 	const bool networkServer_isClientConnected(const string& username);
 

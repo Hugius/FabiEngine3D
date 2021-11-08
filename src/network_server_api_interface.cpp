@@ -32,7 +32,7 @@ const bool NetworkServerAPI::isClientConnected(const string& username) const
 	return false;
 }
 
-const string& NetworkServerAPI::getNewClientIP() const
+const string NetworkServerAPI::getNewClientIP() const
 {
 	// Must be running
 	if(!_isRunning)
@@ -44,7 +44,7 @@ const string& NetworkServerAPI::getNewClientIP() const
 	return _newClientIP;
 }
 
-const string& NetworkServerAPI::getNewClientUsername() const
+const string NetworkServerAPI::getNewClientUsername() const
 {
 	// Must be running
 	if(!_isRunning)
@@ -56,7 +56,7 @@ const string& NetworkServerAPI::getNewClientUsername() const
 	return _newClientUsername;
 }
 
-const string& NetworkServerAPI::getOldClientIP() const
+const string NetworkServerAPI::getOldClientIP() const
 {
 	// Must be running
 	if(!_isRunning)
@@ -75,7 +75,7 @@ const string& NetworkServerAPI::getOldClientIP() const
 	}
 }
 
-const string& NetworkServerAPI::getOldClientUsername() const
+const string NetworkServerAPI::getOldClientUsername() const
 {
 	// Must be running
 	if(!_isRunning)

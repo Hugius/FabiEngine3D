@@ -8,7 +8,6 @@
 
 using std::ifstream;
 using std::istringstream;
-using std::filesystem::directory_iterator;
 
 const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 {
@@ -36,21 +35,20 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	}
 
 	// Retrieve all filenames in the scripts directory
-	for(const auto& entry : directory_iterator(directoryPath))
+	for(const auto& fileName : Tools::getFilesFromDirectory(directoryPath))
 	{
-		// Extract filename
-		string filename = string(entry.path().string());
-		filename.erase(0, directoryPath.size());
+		// Extract extension
+		const string extension = fileName.substr(fileName.size() - 5, 5);
 
 		// Check if script file exists & check if the file extension is correct
-		if(Tools::isFileExisting(directoryPath + filename) && (filename.substr(filename.size() - 5, 5) == ".fe3d"))
+		if(Tools::isFileExisting(directoryPath + fileName) && (extension == ".fe3d"))
 		{
 			// Load script file
-			ifstream file(directoryPath + filename);
+			ifstream file(directoryPath + fileName);
 			string line;
 
 			// Add script file to script
-			string scriptFileID = filename.substr(0, filename.size() - 5); // No file extension
+			string scriptFileID = fileName.substr(0, fileName.size() - 5); // No file extension
 			_script.createScriptFile(scriptFileID);
 
 			// Extract cursor indices

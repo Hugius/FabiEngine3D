@@ -12,10 +12,16 @@ public:
 	Tools() = delete;
 
 	// Voids
-	static void createNewDirectory(const string& directoryPath);
 	static void setMainRenderingColor(Vec3 color);
+	static void createDirectory(const string& path);
+	static void copyDirectory(const string& fromPath, const string& toPath);
+	static void copyFile(const string& fromPath, const string& toPath);
+	static void deleteDirectory(const string& path);
+	static void deleteFile(const string& path);
 
 	// Strings
+	static const vector<string> getFilesFromDirectory(const string& path);
+	static const vector<string> getDirectoriesFromDirectory(const string& path);
 	static const string vec2str(Ivec2 vec);
 	static const string vec2str(Vec2 vec);
 	static const string vec2str(Vec3 vec);
@@ -23,6 +29,7 @@ public:
 	static const string getRootDirectoryPath();
 	static const string chooseExplorerFile(const string& startingDirectory, const string& fileType);
 	static const string chooseExplorerDirectory(const string& startingDirectory);
+	static const string convertToAbsolutePath(const string& path);
 
 	// Vectors
 	static const Vec2 convertFromScreenCoords(Ivec2 position);
@@ -35,6 +42,6 @@ public:
 	static const long long getTimeSinceEpochMS();
 
 	// Booleans
-	static const bool isDirectoryExisting(const string& directoryPath);
-	static const bool isFileExisting(const string& filePath);
+	static const bool isDirectoryExisting(const string& path);
+	static const bool isFileExisting(const string& path);
 };

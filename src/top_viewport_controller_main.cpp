@@ -7,8 +7,6 @@
 #include <sstream>
 #include <filesystem>
 
-using namespace std;
-
 using TVPC = TopViewportController;
 
 TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, SceneEditor& sceneEditor, ScriptEditor& scriptEditor, SettingsEditor& settingsEditor)
@@ -308,11 +306,20 @@ void TopViewportController::_updateMiscScreenManagement()
 		// Compose application directory path
 		const string rootDirectoryPath = Tools::getRootDirectoryPath();
 		const string exportDirectoryPath = string(chosenDirectoryPath + "\\" + _currentProjectID + "\\");
+		const string rootBinariesPath = string(rootDirectoryPath + "binaries\\");
+		const string exportBinariesPath = string(exportDirectoryPath + "binaries\\");
 
 		// Create application directory
-		Tools::createNewDirectory(exportDirectoryPath);
-		filesystem::copy(string(rootDirectoryPath + "binaries\\"), string(exportDirectoryPath + "binaries\\"), filesystem::copy_options::recursive);
-		
+		Tools::createDirectory(exportDirectoryPath);
+
+		// Copy directories
+		Tools::createDirectory(exportBinariesPath);
+		Tools::copyDirectory(string(rootDirectoryPath + "binaries"), string(exportDirectoryPath + "binaries"));
+		Tools::copyDirectory(string(rootDirectoryPath + "engine_assets"), string(exportDirectoryPath + "engine_assets"));
+		Tools::copyDirectory(string(rootDirectoryPath + "shaders"), string(exportDirectoryPath + "shaders"));
+
+		// Copy files
+		Tools::copyFile(string(rootDirectoryPath + "config.fe3d"), string(exportDirectoryPath + "config.fe3d"));
 	}
 	else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("docs")->isHovered())
 	{

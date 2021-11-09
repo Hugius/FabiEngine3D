@@ -3,11 +3,8 @@
 #include "tools.hpp"
 
 #include <algorithm>
-#include <filesystem>
 
 using std::clamp;
-using std::filesystem::directory_iterator;
-using std::filesystem::remove_all;
 
 void SceneEditor::_updateMiscellaneous()
 {
@@ -313,7 +310,7 @@ void SceneEditor::setCurrentProjectID(const string& ID)
 }
 
 
-const vector<string> SceneEditor::_loadSceneIDs() const
+const vector<string> SceneEditor::_getSceneIDs() const
 {
 	// Temporary values
 	vector<string> sceneIDs;
@@ -323,12 +320,11 @@ const vector<string> SceneEditor::_loadSceneIDs() const
 	// Check if scenes directory exists
 	if(Tools::isDirectoryExisting(directoryPath))
 	{
-		// Get all project IDs
-		for(const auto& entry : directory_iterator(directoryPath))
+		// Get all scene IDs
+		for(const auto& fileName : Tools::getFilesFromDirectory(directoryPath))
 		{
-			string sceneID = string(entry.path().string());
-			sceneID.erase(0, directoryPath.size());
-			sceneIDs.push_back(sceneID.substr(0, sceneID.size() - 5));
+			auto nameSize = (fileName.size() - string(".fe3d").size());
+			sceneIDs.push_back(fileName.substr(0, nameSize));
 		}
 	}
 	else
@@ -348,7 +344,7 @@ void SceneEditor::_deleteSceneFile(const string& ID)
 	// Check if scene file is still existing
 	if(Tools::isFileExisting(filePath))
 	{
-		remove_all(filePath);
+		Tools::deleteFile(filePath);
 	}
 	else
 	{

@@ -8,7 +8,6 @@
 using std::endl;
 using std::ios;
 using std::ofstream;
-using std::filesystem::remove_all;
 
 using SVT = ScriptValueType;
 
@@ -34,7 +33,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string&
 			}
 			else
 			{
-				Tools::createNewDirectory(newDirectoryPath);
+				Tools::createDirectory(newDirectoryPath);
 			}
 
 			// Return
@@ -56,7 +55,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string&
 			// Check if directory exists
 			if(Tools::isDirectoryExisting(newDirectoryPath))
 			{
-				remove_all(newDirectoryPath);
+				Tools::deleteDirectory(newDirectoryPath);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 			else

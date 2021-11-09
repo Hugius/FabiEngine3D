@@ -2,12 +2,9 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-#include <filesystem>
-
 #pragma warning(disable:4996) // Disabling annoying warning
 
 using std::make_shared;
-using std::filesystem::exists;
 
 pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& filePath)
 {
@@ -24,7 +21,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 	// Load .obj file
 	string path = rootDir + filePath;
 	FILE* file = fopen(path.c_str(), "r");
-	if(!exists(path) || filePath.empty())
+	if(!Tools::isFileExisting(path) || filePath.empty())
 	{
 		string warningMessage = string("Cannot load mesh file: \"" + filePath + "\"!");
 		return make_pair(warningMessage, meshParts);

@@ -133,7 +133,7 @@ private:
 	void _handleValueChanging(const string& screenID, string buttonID, string writeFieldID, float& value, float adder, float multiplier = 1.0f, float minimum = numeric_limits<float>::lowest(), float maximum = numeric_limits<float>::max());
 
 	// Strings
-	const vector<string> _loadSceneIDs() const;
+	const vector<string> _getSceneIDs() const;
 
 	// Booleans
 	const bool _copyPreviewSky(const string& newID, const string& previewID);

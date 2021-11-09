@@ -2,12 +2,9 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-#include <filesystem>
 #include <fstream>
 
 using std::ofstream;
-using std::filesystem::directory_iterator;
-using std::filesystem::remove_all;
 
 const bool TopViewportController::isScriptStarted() const
 {
@@ -89,15 +86,15 @@ void TopViewportController::_updateProjectCreating()
 			else // Project is non-existent
 			{
 				// Generate new project directory
-				Tools::createNewDirectory(newProjectDirectoryPath);
+				Tools::createDirectory(newProjectDirectoryPath);
 
 				// Generate project subdirectories
-				Tools::createNewDirectory(newProjectDirectoryPath + "\\data");
-				Tools::createNewDirectory(newProjectDirectoryPath + "\\saves");
-				Tools::createNewDirectory(newProjectDirectoryPath + "\\scenes");
-				Tools::createNewDirectory(newProjectDirectoryPath + "\\scenes\\custom");
-				Tools::createNewDirectory(newProjectDirectoryPath + "\\scenes\\editor");
-				Tools::createNewDirectory(newProjectDirectoryPath + "\\scripts");
+				Tools::createDirectory(newProjectDirectoryPath + "\\data");
+				Tools::createDirectory(newProjectDirectoryPath + "\\saves");
+				Tools::createDirectory(newProjectDirectoryPath + "\\scenes");
+				Tools::createDirectory(newProjectDirectoryPath + "\\scenes\\custom");
+				Tools::createDirectory(newProjectDirectoryPath + "\\scenes\\editor");
+				Tools::createDirectory(newProjectDirectoryPath + "\\scripts");
 
 				// Create new empty project files
 				auto file = ofstream(string(newProjectDirectoryPath + "\\data\\animation.fe3d"));
@@ -148,18 +145,7 @@ const bool TopViewportController::_prepareProjectChoosing(const string& title) c
 	}
 
 	// Get all project names
-	vector<string> projectIDs;
-	for(const auto& entry : directory_iterator(projectDirectoryPath))
-	{
-		// Extract project ID
-		string projectPath = entry.path().string();
-		if(Tools::isDirectoryExisting(projectPath))
-		{
-			string projectID = projectPath;
-			projectID.erase(0, projectDirectoryPath.size());
-			projectIDs.push_back(projectID);
-		}
-	}
+	auto projectIDs = Tools::getDirectoriesFromDirectory(projectDirectoryPath);
 
 	// Add buttons
 	_gui.getGlobalScreen()->createChoiceForm("projectList", title, Vec2(0.0f, 0.1f), projectIDs);
@@ -282,7 +268,7 @@ void TopViewportController::_updateProjectDeleting()
 			}
 
 			// Delete project directory
-			remove_all(directoryPath);
+			Tools::deleteDirectory(directoryPath);
 
 			// Logging
 			Logger::throwInfo("Existing project \"" + chosenButtonID + "\" deleted!");

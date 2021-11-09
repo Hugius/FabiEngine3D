@@ -1,5 +1,6 @@
 #include "tools.hpp"
 #include "configuration.hpp"
+#include "logger.hpp"
 
 #include <filesystem>
 #include <windows.h>
@@ -8,10 +9,51 @@
 #include <GLEW/glew.h>
 
 using std::to_string;
+using std::filesystem::exists;
+using std::filesystem::create_directory;
 using std::filesystem::absolute;
+using std::filesystem::remove;
+using std::filesystem::remove_all;
+using std::filesystem::exists;
+using std::filesystem::is_directory;
+using std::filesystem::directory_iterator;
 using std::chrono::duration_cast;
 using std::chrono::milliseconds;
 using std::chrono::system_clock;
+
+const vector<string> Tools::getFilesFromDirectory(const string& path)
+{
+	vector<string> fileNames;
+
+	for(const auto& entry : directory_iterator(path))
+	{
+		string filePath = entry.path().string();
+		filePath.erase(0, path.size());
+		fileNames.push_back(filePath);
+	}
+
+	return fileNames;
+}
+
+const vector<string> Tools::getDirectoriesFromDirectory(const string& path)
+{
+	vector<string> directoryNames;
+
+	for(const auto& entry : directory_iterator(path))
+	{
+		// Extract path
+		string directoryPath = entry.path().string();
+
+		// Check if path is directory
+		if(isDirectoryExisting(directoryPath))
+		{
+			directoryPath.erase(0, path.size());
+			directoryNames.push_back(directoryPath);
+		}
+	}
+
+	return directoryNames;
+}
 
 const string Tools::vec2str(Ivec2 vec)
 {
@@ -46,7 +88,7 @@ const string Tools::getRootDirectoryPath()
 	string rootDir = buffer;
 
 	// Convert to absolute path if it's relative
-	rootDir = absolute(rootDir).string();
+	rootDir = convertToAbsolutePath(rootDir);
 
 	// Cut to engine root directory
 	rootDir = rootDir.substr(0, rootDir.size() - string("binaries\\FabiEngine3D.exe").size());
@@ -129,23 +171,74 @@ const string Tools::chooseExplorerDirectory(const string& startingDirectory)
 	return "";
 }
 
-const bool Tools::isDirectoryExisting(const string& filePath)
+const string Tools::convertToAbsolutePath(const string& path)
 {
-	struct stat fileInfo;
-	int result = stat(filePath.c_str(), &fileInfo);
-	return (result == 0 && (fileInfo.st_mode & S_IFDIR));
+	return absolute(path).string();
 }
 
-const bool Tools::isFileExisting(const string& filePath)
+const bool Tools::isDirectoryExisting(const string& path)
 {
-	struct stat fileInfo;
-	bool isExisting = stat(filePath.c_str(), &fileInfo) == 0;
-	return (isExisting && !isDirectoryExisting(filePath));
+	return (exists(path) && is_directory(path));
 }
 
-void Tools::createNewDirectory(const string& directoryPath)
+const bool Tools::isFileExisting(const string& path)
 {
-	auto temp = _mkdir(directoryPath.c_str());
+	return (exists(path) && !is_directory(path));
+}
+
+void Tools::createDirectory(const string& path)
+{
+	create_directory(path);
+}
+
+void Tools::copyDirectory(const string& fromPath, const string& toPath)
+{
+	// Error checking
+	if(!isDirectoryExisting(fromPath))
+	{
+		Logger::throwError("Tools::copyDirectory");
+		return;
+	}
+
+	using namespace std;
+	filesystem::copy(fromPath, toPath, filesystem::copy_options::recursive);
+}
+
+void Tools::copyFile(const string& fromPath, const string& toPath)
+{
+	// Error checking
+	if(!isFileExisting(fromPath))
+	{
+		Logger::throwError("Tools::copyFile");
+		return;
+	}
+
+	using namespace std;
+	filesystem::copy_file(fromPath, toPath);
+}
+
+void Tools::deleteDirectory(const string& path)
+{
+	// Error checking
+	if(!isDirectoryExisting(path))
+	{
+		Logger::throwError("Tools::deleteDirectory");
+		return;
+	}
+
+	remove_all(path);
+}
+
+void Tools::deleteFile(const string& path)
+{
+	// Error checking
+	if(!isFileExisting(path))
+	{
+		Logger::throwError("Tools::deleteFile");
+		return;
+	}
+
+	remove(path);
 }
 
 void Tools::setMainRenderingColor(Vec3 color)

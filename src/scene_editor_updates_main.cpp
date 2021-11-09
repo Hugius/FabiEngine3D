@@ -213,14 +213,14 @@ void SceneEditor::_updateMainMenu()
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			_isChoosingScene = true;
-			auto IDs = _loadSceneIDs();
+			auto IDs = _getSceneIDs();
 			sort(IDs.begin(), IDs.end());
 			_gui.getGlobalScreen()->createChoiceForm("sceneList", "Edit Scene", Vec2(0.0f, 0.1f), IDs);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			_isDeletingScene = true;
-			auto IDs = _loadSceneIDs();
+			auto IDs = _getSceneIDs();
 			sort(IDs.begin(), IDs.end());
 			_gui.getGlobalScreen()->createChoiceForm("sceneList", "Delete Scene", Vec2(0.0f, 0.1f), IDs);
 		}
@@ -229,7 +229,7 @@ void SceneEditor::_updateMainMenu()
 		string newSceneName;
 		if(_gui.getGlobalScreen()->checkValueForm("sceneCreate", newSceneName, {}))
 		{
-			auto sceneNames = _loadSceneIDs();
+			auto sceneNames = _getSceneIDs();
 
 			// If scene ID not existing yet
 			if(find(sceneNames.begin(), sceneNames.end(), newSceneName) == sceneNames.end())

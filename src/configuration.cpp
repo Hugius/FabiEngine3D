@@ -3,10 +3,8 @@
 #include "tools.hpp"
 
 #include <SDL\\SDL.h>
-#include <filesystem>
 
 using std::istringstream;
-using std::filesystem::exists;
 
 Config::Config()
 {
@@ -20,7 +18,7 @@ Config::Config()
 	// Open config file
 	auto path = string(rootDir + "config.fe3d");
 	ifstream file(path);
-	if(!exists(path))
+	if(!Tools::isFileExisting(path))
 	{
 		Logger::throwFatalWarning("File `config.fe3d` is missing!");
 	}

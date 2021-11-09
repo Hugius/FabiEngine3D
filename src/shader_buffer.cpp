@@ -4,11 +4,9 @@
 
 #include <fstream>
 #include <sstream>
-#include <filesystem>
 
 using std::ifstream;
 using std::ofstream;
-using std::filesystem::exists;
 
 ShaderBuffer::ShaderBuffer(const string& vertexFilename, const string& fragmentFilename)
 {
@@ -27,13 +25,13 @@ ShaderBuffer::ShaderBuffer(const string& vertexFilename, const string& fragmentF
 	const auto fragmentPath = ("shaders\\" + _fragmentFilename);
 
 	// Check if vertex shader file exists
-	if(!exists(rootDir + vertexPath))
+	if(!Tools::isFileExisting(rootDir + vertexPath))
 	{
 		Logger::throwFatalWarning("Directory `shaders\\` is missing or corrupted!");
 	}
 
 	// Check if fragment shader file exists
-	if(!exists(rootDir + fragmentPath))
+	if(!Tools::isFileExisting(rootDir + fragmentPath))
 	{
 		Logger::throwFatalWarning("Directory `shaders\\` is missing or corrupted!");
 	}

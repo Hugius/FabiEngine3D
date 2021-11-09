@@ -17,7 +17,7 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile() const
 	}
 
 	// Compose file path
-	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
 														 ("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
 
 	// Warning checking
@@ -82,7 +82,7 @@ const bool SkyEditor::loadSkyEntitiesFromFile()
 	_loadedSkyIDs.clear();
 
 	// Compose file path
-	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
 														 ("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
 
 	// Warning checking

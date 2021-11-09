@@ -18,7 +18,7 @@ const bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 	}
 
 	// Compose file path
-	const string filePath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string filePath = (Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
 							 ("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + filename + ".fe3d");
 
 	// Warning checking

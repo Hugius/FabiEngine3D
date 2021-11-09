@@ -26,33 +26,33 @@ void BillboardEditor::_updateTexturingMenu()
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("font")->isHovered())
 		{
 			// Get the chosen filename
-			const auto rootDirectory = Tools::getRootDirectory();
-			const string targetDirectory = string("game_assets\\fonts\\");
+			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
+			const string targetDirectoryPath = string("game_assets\\fonts\\");
 
 			// Validate target directory
-			if(!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
+			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{
-				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "TTF");
+			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "TTF");
 			if(filePath.empty())
 			{
 				return;
 			}
 
 			// Validate directory of file
-			if(filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-			   filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
+			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
-				Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
 				return;
 			}
 
 			// Set font
-			const string finalFilePath = filePath.substr(rootDirectory.size());
+			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clearFontCache(finalFilePath);
 			_fe3d.billboardEntity_setFont(_currentBillboardID, finalFilePath);
 
@@ -69,66 +69,66 @@ void BillboardEditor::_updateTexturingMenu()
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
 			// Get the chosen filename
-			const auto rootDirectory = Tools::getRootDirectory();
-			const string targetDirectory = string("game_assets\\textures\\diffuse_maps\\");
+			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
+			const string targetDirectoryPath = string("game_assets\\textures\\diffuse_maps\\");
 
 			// Validate target directory
-			if(!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
+			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{
-				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
 			if(filePath.empty())
 			{
 				return;
 			}
 
 			// Validate directory of file
-			if(filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-			   filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
+			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
-				Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
 				return;
 			}
 
 			// Set diffuse map
-			const string finalFilePath = filePath.substr(rootDirectory.size());
+			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clearTextureCache2D(finalFilePath);
 			_fe3d.billboardEntity_setDiffuseMap(_currentBillboardID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
 		{
 			// Get the chosen filename
-			const auto rootDirectory = Tools::getRootDirectory();
-			const string targetDirectory = string("game_assets\\textures\\emission_maps\\");
+			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
+			const string targetDirectoryPath = string("game_assets\\textures\\emission_maps\\");
 
 			// Validate target directory
-			if(!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
+			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{
-				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
 			if(filePath.empty())
 			{
 				return;
 			}
 
 			// Validate directory of file
-			if(filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-			   filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
+			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
-				Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
 				return;
 			}
 
 			// Set emission map
-			const string finalFilePath = filePath.substr(rootDirectory.size());
+			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clearTextureCache2D(finalFilePath);
 			_fe3d.billboardEntity_setEmissionMap(_currentBillboardID, finalFilePath);
 		}

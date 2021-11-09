@@ -23,7 +23,7 @@ const bool ModelEditor::saveModelEntitiesToFile() const
 	}
 
 	// Compose file path
-	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
 														 ("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
 
 	// Create or overwrite model file

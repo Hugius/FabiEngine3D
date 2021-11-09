@@ -4,6 +4,7 @@
 #include <filesystem>
 #include <windows.h>
 #include <direct.h>
+#include <shlobj_core.h>
 #include <GLEW/glew.h>
 
 using std::to_string;
@@ -32,7 +33,7 @@ const string Tools::vec2str(Vec4 vec)
 	return string(to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z) + " " + to_string(vec.w));
 }
 
-const string Tools::getRootDirectory()
+const string Tools::getRootDirectoryPath()
 {
 	// Temporary values
 	char buffer[256];
@@ -64,13 +65,12 @@ const long long Tools::getTimeSinceEpochMS()
 	return duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
 }
 
-const string Tools::getWinExplorerFilename(const string& startingDirectory, const string& fileType)
+const string Tools::chooseExplorerFile(const string& startingDirectory, const string& fileType)
 {
-	// Prepare filter C-string
+	// Temporary values
 	string filter = fileType;
 	filter.push_back('\0');
 	filter += "*." + fileType + '\0';
-	auto startingDirectoryStringC = startingDirectory.c_str();
 
 	// Open file explorer
 	OPENFILENAME ofn;
@@ -87,13 +87,46 @@ const string Tools::getWinExplorerFilename(const string& startingDirectory, cons
 	ofn.lpstrFileTitle = titleBuffer;
 	ofn.lpstrFileTitle[0] = '\0';
 	ofn.nMaxFileTitle = sizeof(titleBuffer);
-	ofn.lpstrInitialDir = startingDirectoryStringC;
+	ofn.lpstrInitialDir = startingDirectory.c_str();
 	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 	GetOpenFileName(&ofn);
 
-	// Return chosen filename or nothing if cancelled
-	string filePath = ofn.lpstrFile;
-	return filePath;
+	// Return chosen file
+	return ofn.lpstrFile;
+}
+
+const string Tools::chooseExplorerDirectory(const string& startingDirectory)
+{
+	// Compose brose info
+	BROWSEINFO browseInfo = {};
+	browseInfo.ulFlags = (BIF_RETURNONLYFSDIRS | BIF_NEWDIALOGSTYLE);
+	browseInfo.lpfn = nullptr;
+	browseInfo.lParam = LPARAM(startingDirectory.c_str());
+
+	// Open file explorer
+	LPITEMIDLIST pidl = SHBrowseForFolder(&browseInfo);
+
+	// Check if user selected a directory
+	if(pidl != 0)
+	{
+		// Extract directory path
+		char directoryPath[MAX_PATH];
+		SHGetPathFromIDList(pidl, directoryPath);
+
+		// Free memory
+		IMalloc* imalloc = 0;
+		if(SUCCEEDED(SHGetMalloc(&imalloc)))
+		{
+			imalloc->Free(pidl);
+			imalloc->Release();
+		}
+
+		// Return chosen directory
+		return directoryPath;
+	}
+
+	// No directory chosen
+	return "";
 }
 
 const bool Tools::isDirectoryExisting(const string& filePath)

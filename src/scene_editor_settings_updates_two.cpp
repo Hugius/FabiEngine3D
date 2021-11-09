@@ -104,8 +104,8 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 	if(screen->getID() == "sceneEditorMenuSettingsGraphicsLensFlare")
 	{
 		// Temporary values
-		const auto rootDirectory = Tools::getRootDirectory();
-		const string targetDirectory = string("game_assets\\textures\\flare_maps\\");
+		const auto rootDirectoryPath = Tools::getRootDirectoryPath();
+		const string targetDirectoryPath = string("game_assets\\textures\\flare_maps\\");
 		auto isEnabled = _fe3d.gfx_isLensFlareEnabled();
 		auto flareMapPath = _fe3d.gfx_getLensFlareMapPath();
 		auto intensity = _fe3d.gfx_getLensFlareIntensity();
@@ -132,29 +132,29 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("flareMap")->isHovered())
 		{
 			// Validate target directory
-			if(!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
+			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{
-				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
 			if(filePath.empty())
 			{
 				return;
 			}
 
 			// Validate directory of file
-			if(filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-			   filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
+			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
-				Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
 				return;
 			}
 
 			// Save lens flare path
-			flareMapPath = filePath.substr(rootDirectory.size());
+			flareMapPath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clearTextureCache2D(flareMapPath);
 			_fe3d.gfx_setLensFlareMap(flareMapPath);
 		}

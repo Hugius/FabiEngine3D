@@ -22,7 +22,7 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	_script.reset();
 
 	// Compose directory path
-	const string directoryPath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string directoryPath = (Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
 								  ("projects\\" + _currentProjectID)) + "\\scripts\\");
 
 	// Warning checking

@@ -21,7 +21,7 @@ const bool ScriptEditor::saveScriptFiles()
 	}
 
 	// Compose directory path
-	const string directoryPath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string directoryPath = (Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
 								  ("projects\\" + _currentProjectID)) + "\\scripts\\");
 
 	// Delete all text files containing deleted scripts

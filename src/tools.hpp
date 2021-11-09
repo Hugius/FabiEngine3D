@@ -20,8 +20,9 @@ public:
 	static const string vec2str(Vec2 vec);
 	static const string vec2str(Vec3 vec);
 	static const string vec2str(Vec4 vec);
-	static const string getRootDirectory();
-	static const string getWinExplorerFilename(const string& startingDirectory, const string& fileType);
+	static const string getRootDirectoryPath();
+	static const string chooseExplorerFile(const string& startingDirectory, const string& fileType);
+	static const string chooseExplorerDirectory(const string& startingDirectory);
 
 	// Vectors
 	static const Vec2 convertFromScreenCoords(Ivec2 position);

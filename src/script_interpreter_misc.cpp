@@ -109,7 +109,7 @@ const bool ScriptInterpreter::_validateSavesDirectory() const
 	}
 
 	// Check if saves directory still exists
-	auto directoryPath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
+	auto directoryPath = Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
 	if(!Tools::isDirectoryExisting(directoryPath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: directory `saves\\` missing!");

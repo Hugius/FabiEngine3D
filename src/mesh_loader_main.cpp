@@ -19,7 +19,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 	string selectedPartID = "";
 
 	// Get application root directory
-	const auto rootDir = Tools::getRootDirectory();
+	const auto rootDir = Tools::getRootDirectoryPath();
 
 	// Load .obj file
 	string path = rootDir + filePath;

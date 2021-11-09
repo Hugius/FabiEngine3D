@@ -25,7 +25,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 	if(application_isExported()) // Application preview
 	{
 		// Validate project files & directories
-		if(_topViewportController.isProjectCorrupted(Tools::getRootDirectory()))
+		if(_topViewportController.isProjectCorrupted(Tools::getRootDirectoryPath()))
 		{
 			Logger::throwFatalWarning("Cannot load application: missing files/directories!");
 		}

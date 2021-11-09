@@ -222,19 +222,19 @@ void ModelEditor::_updateModelCreating()
 					if(find(_loadedModelIDs.begin(), _loadedModelIDs.end(), newModelID) == _loadedModelIDs.end())
 					{
 						// Get the chosen filename
-						const auto rootDirectory = Tools::getRootDirectory();
-						const string targetDirectory = string("game_assets\\meshes\\");
+						const auto rootDirectoryPath = Tools::getRootDirectoryPath();
+						const string targetDirectoryPath = string("game_assets\\meshes\\");
 
 						// Validate target directory
-						if(!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
+						if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 						{
-							Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+							Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 							_isCreatingModel = false;
 							return;
 						}
 
 						// Validate chosen file
-						const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "OBJ");
+						const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "OBJ");
 						if(filePath.empty())
 						{
 							_isCreatingModel = false;
@@ -242,16 +242,16 @@ void ModelEditor::_updateModelCreating()
 						}
 
 						// Validate directory of file
-						if(filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-						   filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+						if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
+						   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 						{
-							Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+							Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
 							_isCreatingModel = false;
 							return;
 						}
 
 						// Create model
-						const string finalFilePath = filePath.substr(rootDirectory.size());
+						const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 						_fe3d.misc_clearMeshCache(finalFilePath);
 						_fe3d.modelEntity_create(newModelID, finalFilePath);
 

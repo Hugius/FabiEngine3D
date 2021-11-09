@@ -8,7 +8,7 @@
 vector<float> TextureLoader::_loadBitmap(const string& filePath)
 {
 	// Get application root directory
-	const auto rootDir = Tools::getRootDirectory();
+	const auto rootDir = Tools::getRootDirectoryPath();
 
 	// Temporary values
 	vector<float> pixelIntensities;
@@ -57,7 +57,7 @@ SDL_Surface* TextureLoader::_loadSurface(const string& filePath)
 	auto temp = freopen("NUL:", "w", stderr);
 
 	// Get application root directory
-	const auto rootDir = Tools::getRootDirectory();
+	const auto rootDir = Tools::getRootDirectoryPath();
 
 	// Load SDL surface
 	SDL_Surface* surface = IMG_Load(string(rootDir + filePath).c_str());
@@ -69,7 +69,7 @@ SDL_Surface* TextureLoader::_loadSurface(const string& filePath)
 TTF_Font* TextureLoader::_loadFont(const string& filePath)
 {
 	// Get application root directory
-	const auto rootDir = Tools::getRootDirectory();
+	const auto rootDir = Tools::getRootDirectoryPath();
 
 	// Load TTF font
 	TTF_Font* font = TTF_OpenFont((rootDir + filePath).c_str(), 32);
@@ -128,7 +128,7 @@ TextureID TextureLoader::_convertIntoTexture(SDL_Surface* surface, const string&
 TextureID TextureLoader::_convertIntoTexture(const array<SDL_Surface*, 6>& surfaces, const array<string, 6>& filePaths)
 {
 	// Get application root directory
-	const auto rootDir = Tools::getRootDirectory();
+	const auto rootDir = Tools::getRootDirectoryPath();
 
 	// Temporary values
 	TextureID texture;

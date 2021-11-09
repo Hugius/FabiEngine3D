@@ -37,7 +37,7 @@ private:
 	void _copySelectedText();
 
 	// Strings
-	static inline const string FONT_PATH = "engine_assets\\fonts\\font.ttf";
+	static inline const string FONT_PATH = "engine\\fonts\\font.ttf";
 	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
 	vector<string> _scriptFilenamesToDelete;
 	vector<string> _copyClipboard;

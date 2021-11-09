@@ -24,7 +24,7 @@ const bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 
 	// Compose file path
 	const string filePath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-							 ("projects\\" + _currentProjectID)) + "\\scenes\\custom\\" + fileName + ".fe3d");
+							 ("game\\" + _currentProjectID)) + "\\scenes\\custom\\" + fileName + ".fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))

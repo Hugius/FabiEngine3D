@@ -23,7 +23,7 @@ const bool ScriptEditor::saveScriptFiles()
 
 	// Compose directory path
 	const string directoryPath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-								  ("projects\\" + _currentProjectID)) + "\\scripts\\");
+								  ("game\\" + _currentProjectID)) + "\\scripts\\");
 
 	// Delete all text files containing deleted scripts
 	for(const auto& fileName : _scriptFilenamesToDelete)

@@ -42,7 +42,7 @@ void SettingsEditor::load()
 	// Editor billboards
 	_fe3d.billboardEntity_create("@@icon");
 	_fe3d.billboardEntity_setPosition("@@icon", Vec3(0.0f, -0.5f, -1.5f));
-	_fe3d.billboardEntity_setDiffuseMap("@@icon", "engine_assets\\textures\\settings.png");
+	_fe3d.billboardEntity_setDiffuseMap("@@icon", "engine\\textures\\settings.png");
 	_fe3d.billboardEntity_setBright("@@icon", true);
 
 	// Miscellaneous
@@ -226,7 +226,7 @@ const bool SettingsEditor::loadSettingsFromFile() const
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("projects\\" + _currentProjectID)) + "\\data\\settings.fe3d";
+														 ("game\\" + _currentProjectID)) + "\\data\\settings.fe3d";
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -293,7 +293,7 @@ const bool SettingsEditor::saveSettingsToFile() const
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("projects\\" + _currentProjectID)) + "\\data\\settings.fe3d";
+														 ("game\\" + _currentProjectID)) + "\\data\\settings.fe3d";
 
 	// Create or overwrite settings file
 	ofstream file(filePath);

@@ -23,7 +23,7 @@ const bool TerrainEditor::saveTerrainEntitiesToFile() const
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
+														 ("game\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
 
 	// Load terrain file
 	ofstream file(filePath);

@@ -23,7 +23,7 @@ const bool AnimationEditor::saveAnimationsToFile() const
 
 	// Compose full file path
 	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("projects\\" + _currentProjectID)) + "\\data\\animation.fe3d";
+														 ("game\\" + _currentProjectID)) + "\\data\\animation.fe3d";
 
 	// Create or overwrite animation file
 	ofstream file(filePath);

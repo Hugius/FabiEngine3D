@@ -20,7 +20,7 @@ const bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 
 	// Compose file path
 	const string filePath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-							 ("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + fileName + ".fe3d");
+							 ("game\\" + _currentProjectID)) + "\\scenes\\editor\\" + fileName + ".fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -307,7 +307,7 @@ const bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			{
 				// Create model
 				const string newModelID = ("@@speaker_" + soundID);
-				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\speaker.obj");
+				_fe3d.modelEntity_create(newModelID, "engine\\meshes\\speaker.obj");
 				_fe3d.modelEntity_setBasePosition(newModelID, position);
 				_fe3d.modelEntity_setBaseSize(newModelID, DEFAULT_SPEAKER_SIZE);
 				_fe3d.modelEntity_setShadowed(newModelID, false);
@@ -357,7 +357,7 @@ const bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			{
 				// Create model
 				const string newModelID = ("@@lamp_" + pointlightID);
-				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\lamp.obj");
+				_fe3d.modelEntity_create(newModelID, "engine\\meshes\\lamp.obj");
 				_fe3d.modelEntity_setBasePosition(newModelID, position);
 				_fe3d.modelEntity_setBaseSize(newModelID, DEFAULT_LAMP_SIZE);
 				_fe3d.modelEntity_setColor(newModelID, "", color);
@@ -408,7 +408,7 @@ const bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			{
 				// Create model
 				const string newModelID = ("@@torch_" + spotlightID);
-				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\torch.obj");
+				_fe3d.modelEntity_create(newModelID, "engine\\meshes\\torch.obj");
 				_fe3d.modelEntity_setBasePosition(newModelID, position);
 				_fe3d.modelEntity_setBaseRotation(newModelID, Vec3(0.0f, -yaw, pitch));
 				_fe3d.modelEntity_setBaseSize(newModelID, DEFAULT_TORCH_SIZE);
@@ -453,7 +453,7 @@ const bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			{
 				// Create model
 				const string newModelID = ("@@camera_" + reflectionID);
-				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\camera.obj");
+				_fe3d.modelEntity_create(newModelID, "engine\\meshes\\camera.obj");
 				_fe3d.modelEntity_setBasePosition(newModelID, position);
 				_fe3d.modelEntity_setBaseSize(newModelID, DEFAULT_CAMERA_SIZE);
 				_fe3d.modelEntity_setShadowed(newModelID, false);

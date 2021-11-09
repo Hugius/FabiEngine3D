@@ -30,7 +30,7 @@ const bool SceneEditor::saveCustomSceneToFile()
 
 	// Compose file path
 	const string filePath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-							 ("projects\\" + _currentProjectID)) + "\\scenes\\custom\\" + _customSceneID + ".fe3d");
+							 ("game\\" + _currentProjectID)) + "\\scenes\\custom\\" + _customSceneID + ".fe3d");
 
 	// Create or overwrite file
 	ofstream file(filePath);

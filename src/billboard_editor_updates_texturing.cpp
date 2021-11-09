@@ -27,7 +27,7 @@ void BillboardEditor::_updateTexturingMenu()
 		{
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("game_assets\\fonts\\");
+			const string targetDirectoryPath = string(_currentProjectID + "\\assets\\fonts\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
@@ -70,7 +70,7 @@ void BillboardEditor::_updateTexturingMenu()
 		{
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("game_assets\\textures\\diffuse_maps\\");
+			const string targetDirectoryPath = string(_currentProjectID + "\\assets\\textures\\diffuse_maps\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
@@ -103,7 +103,7 @@ void BillboardEditor::_updateTexturingMenu()
 		{
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("game_assets\\textures\\emission_maps\\");
+			const string targetDirectoryPath = string(_currentProjectID + "\\assets\\textures\\emission_maps\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))

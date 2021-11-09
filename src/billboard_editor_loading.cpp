@@ -19,7 +19,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile() const
 
 	// Compose file path
 	const string filePath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d");
+														 ("game\\" + _currentProjectID)) + "\\data\\billboard.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -94,7 +94,7 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile() const
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d";
+														 ("game\\" + _currentProjectID)) + "\\data\\billboard.fe3d";
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -166,7 +166,7 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d";
+														 ("game\\" + _currentProjectID)) + "\\data\\billboard.fe3d";
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))

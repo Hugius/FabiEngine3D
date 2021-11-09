@@ -23,7 +23,7 @@ const bool SkyEditor::saveSkyEntitiesToFile() const
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
+														 ("game\\" + _currentProjectID)) + "\\data\\sky.fe3d";
 
 	// Load sky file
 	ofstream file(filePath);

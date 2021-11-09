@@ -14,7 +14,7 @@ EngineGuiTextField::EngineGuiTextField(FabiEngine3D& fe3d, const string& parentI
 	_fe3d.textEntity_setPosition(_entityID, position);
 	_fe3d.textEntity_setSize(_entityID, size);
 	_fe3d.textEntity_setColor(_entityID, color);
-	_fe3d.textEntity_setFont(_entityID, "engine_assets\\fonts\\font.ttf");
+	_fe3d.textEntity_setFont(_entityID, "engine\\fonts\\font.ttf");
 	_fe3d.textEntity_setTextContent(_entityID, textContent);
 }
 

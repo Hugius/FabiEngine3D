@@ -294,7 +294,7 @@ const bool SceneEditor::isSceneExisting(const string& fileName) const
 
 	// Compose full file path
 	string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-												   ("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + fileName + ".fe3d";
+												   ("game\\" + _currentProjectID)) + "\\scenes\\editor\\" + fileName + ".fe3d";
 
 	// Check if scene file exists
 	return (Tools::isFileExisting(filePath));
@@ -316,7 +316,7 @@ const vector<string> SceneEditor::_getSceneIDs() const
 	// Temporary values
 	vector<string> sceneIDs;
 	string directoryPath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-							("projects\\" + _currentProjectID)) + "\\scenes\\editor\\");
+							("game\\" + _currentProjectID)) + "\\scenes\\editor\\");
 
 	// Check if scenes directory exists
 	if(Tools::isDirectoryExisting(directoryPath))
@@ -340,7 +340,7 @@ void SceneEditor::_deleteSceneFile(const string& ID)
 {
 	// Compose full file path
 	string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-												   ("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + ID + ".fe3d";
+												   ("game\\" + _currentProjectID)) + "\\scenes\\editor\\" + ID + ".fe3d";
 
 	// Check if scene file is still existing
 	if(Tools::isFileExisting(filePath))

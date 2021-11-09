@@ -58,13 +58,13 @@ void TopViewportController::_updateProjectCreating()
 		if(_gui.getGlobalScreen()->checkValueForm("newProjectID", newProjectID))
 		{
 			// Temporary values
-			const string projectDirectoryPath = (Tools::getRootDirectoryPath() + "projects\\");
+			const string projectDirectoryPath = (Tools::getRootDirectoryPath() + "game\\");
 			const string newProjectDirectoryPath = (projectDirectoryPath + newProjectID);
 
-			// Check if projects directory exists
+			// Check if game directory exists
 			if(!Tools::isDirectoryExisting(projectDirectoryPath))
 			{
-				Logger::throwWarning("Directory `projects\\` is missing!");
+				Logger::throwWarning("Directory `game\\` is missing!");
 				return;
 			}
 
@@ -89,12 +89,29 @@ void TopViewportController::_updateProjectCreating()
 				Tools::createDirectory(newProjectDirectoryPath);
 
 				// Generate project subdirectories
-				Tools::createDirectory(newProjectDirectoryPath + "\\data");
-				Tools::createDirectory(newProjectDirectoryPath + "\\saves");
-				Tools::createDirectory(newProjectDirectoryPath + "\\scenes");
-				Tools::createDirectory(newProjectDirectoryPath + "\\scenes\\custom");
-				Tools::createDirectory(newProjectDirectoryPath + "\\scenes\\editor");
-				Tools::createDirectory(newProjectDirectoryPath + "\\scripts");
+				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\audio\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\fonts\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\meshes\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\blend_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\cube_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\diffuse_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\displacement_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\dudv_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\emission_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\flare_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\height_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\image_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\normal_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\reflection_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\specular_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\data\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\saves\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\scenes\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\scenes\\custom\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\scenes\\editor\\");
+				Tools::createDirectory(newProjectDirectoryPath + "\\scripts\\");
 
 				// Create config file
 				auto file = ofstream(string(newProjectDirectoryPath + "\\config.fe3d"));
@@ -143,12 +160,12 @@ void TopViewportController::_updateProjectCreating()
 const bool TopViewportController::_prepareProjectChoosing(const string& title) const
 {
 	// Temporary values
-	const string projectDirectoryPath = (Tools::getRootDirectoryPath() + "projects\\");
+	const string projectDirectoryPath = (Tools::getRootDirectoryPath() + "game\\");
 
-	// Check if projects directory exists
+	// Check if game directory exists
 	if(!Tools::isDirectoryExisting(projectDirectoryPath))
 	{
-		Logger::throwWarning("Directory `projects\\` is missing!");
+		Logger::throwWarning("Directory `game\\` is missing!");
 		return false;
 	}
 
@@ -167,7 +184,7 @@ void TopViewportController::_updateProjectLoading()
 	{
 		// Temporary values
 		const string clickedButtonID = _gui.getGlobalScreen()->checkChoiceForm("projectList");
-		const string projectDirectoryPath = Tools::getRootDirectoryPath() + "projects\\" + clickedButtonID;
+		const string projectDirectoryPath = Tools::getRootDirectoryPath() + "game\\" + clickedButtonID;
 
 		// Check if user clicked a project ID
 		if(clickedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -268,7 +285,7 @@ void TopViewportController::_updateProjectDeleting()
 			}
 
 			// Check if project directory is still existing
-			const string directoryPath = (Tools::getRootDirectoryPath() + "projects\\" + chosenButtonID);
+			const string directoryPath = (Tools::getRootDirectoryPath() + "game\\" + chosenButtonID);
 			if(!Tools::isDirectoryExisting(directoryPath))
 			{
 				Logger::throwWarning("Cannot delete project: missing directory!");

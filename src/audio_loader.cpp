@@ -251,10 +251,10 @@ Mix_Chunk* AudioLoader::_loadChunk(const string& filePath, unsigned char* data) 
 Mix_Music* AudioLoader::_loadMusic(const string& filePath) const
 {
 	// Get application root directory
-	const auto rootDir = Tools::getRootDirectoryPath();
+	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 
 	// Load SDL music
-	Mix_Music* music = Mix_LoadMUS((rootDir + filePath).c_str());
+	Mix_Music* music = Mix_LoadMUS((rootDirectoryPath + filePath).c_str());
 
 	// Check if music loading failed
 	if(music == nullptr)
@@ -277,8 +277,8 @@ void AudioLoader::_throwLoadedMessage(const string& filePath)
 const char* AudioLoader::_loadWaveFile(const string& filePath) const
 {
 	// Get application root directory
-	const auto rootDir = Tools::getRootDirectoryPath();
-	auto fullFilePath = string(rootDir + filePath);
+	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
+	auto fullFilePath = string(rootDirectoryPath + filePath);
 
 	// Open WAV file
 	ifstream file(fullFilePath.c_str(), ios::binary);

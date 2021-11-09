@@ -24,7 +24,7 @@ const bool SceneEditor::saveEditorSceneToFile()
 
 	// Compose file path
 	const string filePath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-							 ("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + _currentSceneID + ".fe3d");
+							 ("game\\" + _currentProjectID)) + "\\scenes\\editor\\" + _currentSceneID + ".fe3d");
 
 	// Create or overwrite scene file
 	ofstream file(filePath);

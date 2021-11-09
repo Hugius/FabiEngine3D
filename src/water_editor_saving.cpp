@@ -23,7 +23,7 @@ const bool WaterEditor::saveWaterEntitiesToFile() const
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("projects\\" + _currentProjectID)) + "\\data\\water.fe3d";
+														 ("game\\" + _currentProjectID)) + "\\data\\water.fe3d";
 
 	// Load water file
 	ofstream file(filePath);

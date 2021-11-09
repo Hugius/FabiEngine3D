@@ -109,7 +109,7 @@ const bool ScriptInterpreter::_validateSavesDirectory() const
 	}
 
 	// Check if saves directory still exists
-	auto directoryPath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
+	auto directoryPath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" : ("game\\" + _currentProjectID)) + "\\saves\\";
 	if(!Tools::isDirectoryExisting(directoryPath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: directory `saves\\` missing!");

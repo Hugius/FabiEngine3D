@@ -20,7 +20,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string&
 		{
 			// Compose directory paths
 			string directoryPath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-				("projects\\" + _currentProjectID)) + "\\saves\\");
+				("game\\" + _currentProjectID)) + "\\saves\\");
 			string newDirectoryPath = string(directoryPath + arguments[0].getString());
 
 			// Return
@@ -37,7 +37,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string&
 		{
 			// Compose file path
 			string directoryPath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-				("projects\\" + _currentProjectID)) + "\\saves\\");
+				("game\\" + _currentProjectID)) + "\\saves\\");
 			string filePath = (directoryPath + arguments[0].getString());
 
 			// Return
@@ -54,7 +54,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string&
 		{
 			// Compose file path
 			string directoryPath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-				("projects\\" + _currentProjectID)) + "\\saves\\");
+				("game\\" + _currentProjectID)) + "\\saves\\");
 			string filePath = (directoryPath + arguments[0].getString());
 
 			// Check if file exists

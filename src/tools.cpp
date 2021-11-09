@@ -97,16 +97,16 @@ const string Tools::getRootDirectoryPath()
 	GetModuleFileName(nullptr, buffer, static_cast<DWORD>(len));
 
 	// Create final string
-	string rootDir = buffer;
+	string rootDirectoryPath = buffer;
 
 	// Convert to absolute path if it's relative
-	rootDir = convertToAbsolutePath(rootDir);
+	rootDirectoryPath = convertToAbsolutePath(rootDirectoryPath);
 
 	// Cut to engine root directory
-	rootDir = rootDir.substr(0, rootDir.size() - string("binaries\\FabiEngine3D.exe").size());
+	rootDirectoryPath = rootDirectoryPath.substr(0, (rootDirectoryPath.size() - string("binaries\\FabiEngine3D.exe").size()));
 
 	// Return
-	return rootDir;
+	return rootDirectoryPath;
 }
 
 const float Tools::getWindowAspectRatio()

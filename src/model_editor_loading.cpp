@@ -21,7 +21,7 @@ const vector<string> ModelEditor::getAllMeshPathsFromFile() const
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
+														 ("game\\" + _currentProjectID)) + "\\data\\model.fe3d";
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -80,7 +80,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
+														 ("game\\" + _currentProjectID)) + "\\data\\model.fe3d";
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -227,7 +227,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
+														 ("game\\" + _currentProjectID)) + "\\data\\model.fe3d";
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))

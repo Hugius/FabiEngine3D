@@ -20,7 +20,7 @@ void TerrainEditor::_updateNormalMapMenu()
 		{
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("game_assets\\textures\\normal_maps\\");
+			const string targetDirectoryPath = string(_currentProjectID + "\\assets\\textures\\normal_maps\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
@@ -53,7 +53,7 @@ void TerrainEditor::_updateNormalMapMenu()
 		{
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("game_assets\\textures\\normal_maps\\");
+			const string targetDirectoryPath = string(_currentProjectID + "\\assets\\textures\\normal_maps\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
@@ -86,7 +86,7 @@ void TerrainEditor::_updateNormalMapMenu()
 		{
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("game_assets\\textures\\normal_maps\\");
+			const string targetDirectoryPath = string(_currentProjectID + "\\assets\\textures\\normal_maps\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
@@ -119,7 +119,7 @@ void TerrainEditor::_updateNormalMapMenu()
 		{
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("game_assets\\textures\\normal_maps\\");
+			const string targetDirectoryPath = string(_currentProjectID + "\\assets\\textures\\normal_maps\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))

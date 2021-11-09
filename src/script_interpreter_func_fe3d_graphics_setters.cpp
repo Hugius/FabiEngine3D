@@ -201,7 +201,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			const string targetDirectoryPath = string("game_assets\\textures\\flare_maps\\");
+			const string targetDirectoryPath = string(_currentProjectID + "\\assets\\textures\\flare_maps\\");
 			const string filePath = (targetDirectoryPath + arguments[0].getString());
 			_fe3d.gfx_setLensFlareMap(filePath);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));

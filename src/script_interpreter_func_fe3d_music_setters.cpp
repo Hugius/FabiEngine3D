@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dMusicSetterFunction(const string& func
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.music_addToPlaylist("game_assets\\audio\\" + arguments[0].getString());
+			_fe3d.music_addToPlaylist(string(_currentProjectID + "\\assets\\audio\\" + arguments[0].getString()));
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

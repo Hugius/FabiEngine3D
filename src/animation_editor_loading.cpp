@@ -21,7 +21,7 @@ const bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("projects\\" + _currentProjectID)) + "\\data\\animation.fe3d";
+														 ("game\\" + _currentProjectID)) + "\\data\\animation.fe3d";
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))

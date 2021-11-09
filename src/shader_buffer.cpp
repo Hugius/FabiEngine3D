@@ -20,25 +20,25 @@ ShaderBuffer::ShaderBuffer(const string& vertexFilename, const string& fragmentF
 	ifstream fragmentFile;
 
 	// Compose file paths
-	const auto rootDir = Tools::getRootDirectoryPath();
-	const auto vertexPath = ("shaders\\" + _vertexFilename);
-	const auto fragmentPath = ("shaders\\" + _fragmentFilename);
+	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
+	const auto vertexPath = ("engine\\shaders\\" + _vertexFilename);
+	const auto fragmentPath = ("engine\\shaders\\" + _fragmentFilename);
 
 	// Check if vertex shader file exists
-	if(!Tools::isFileExisting(rootDir + vertexPath))
+	if(!Tools::isFileExisting(rootDirectoryPath + vertexPath))
 	{
-		Logger::throwFatalWarning("Directory `shaders\\` is missing or corrupted!");
+		Logger::throwFatalWarning("Directory `engine\\` is missing or corrupted!");
 	}
 
 	// Check if fragment shader file exists
-	if(!Tools::isFileExisting(rootDir + fragmentPath))
+	if(!Tools::isFileExisting(rootDirectoryPath + fragmentPath))
 	{
-		Logger::throwFatalWarning("Directory `shaders\\` is missing or corrupted!");
+		Logger::throwFatalWarning("Directory `engine\\` is missing or corrupted!");
 	}
 
 	// Open the shader text files
-	vertexFile.open(rootDir + vertexPath);
-	fragmentFile.open(rootDir + fragmentPath);
+	vertexFile.open(rootDirectoryPath + vertexPath);
+	fragmentFile.open(rootDirectoryPath + fragmentPath);
 
 	// Extract shader code
 	ostringstream vShaderStream, fShaderStream;
@@ -107,8 +107,8 @@ void ShaderBuffer::_createProgram(const char* vertexShaderCode, const char* frag
 	glDeleteShader(fragment);
 
 	// Logging
-	Logger::throwInfo("Loaded vertex shader: \"shaders\\" + _vertexFilename + "\"");
-	Logger::throwInfo("Loaded fragment shader: \"shaders\\" + _fragmentFilename + "\"");
+	Logger::throwInfo("Loaded vertex shader: \"engine\\shaders\\" + _vertexFilename + "\"");
+	Logger::throwInfo("Loaded fragment shader: \"engine\\shaders\\" + _fragmentFilename + "\"");
 }
 
 const UniformID ShaderBuffer::_getUniformID(const string& uniformID)

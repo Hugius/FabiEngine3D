@@ -29,7 +29,7 @@ void SceneEditor::load()
 	_fe3d.gfx_setPlanarReflectionHeight(0.0f);
 
 	// Directional light source
-	const string texturePath = "engine_assets\\textures\\light_source.png";
+	const string texturePath = "engine\\textures\\light_source.png";
 	_fe3d.billboardEntity_create("@@lightSource");
 	_fe3d.billboardEntity_setSize("@@lightSource", Vec2(0.0f));
 	_fe3d.billboardEntity_setDiffuseMap("@@lightSource", texturePath);

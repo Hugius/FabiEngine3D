@@ -261,7 +261,7 @@ void MasterRenderer::_renderCustomCursor()
 void MasterRenderer::_renderDebugScreens()
 {
 	// Temporary values
-	const string fontPath = "engine_assets\\fonts\\font.ttf";
+	const string fontPath = "engine\\fonts\\font.ttf";
 	const Vec3 textColor = Vec3(0.75f);
 	const float charWidth = 0.025f;
 	const float charHeight = 0.1f;

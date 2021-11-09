@@ -180,7 +180,7 @@ const bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& func
 		{
 			// Compose file path
 			string directoryPath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-									("projects\\" + _currentProjectID)) + "\\scenes\\custom\\");
+									("game\\" + _currentProjectID)) + "\\scenes\\custom\\");
 			string filePath = (directoryPath + arguments[0].getString() + ".fe3d");
 
 			// Check if file exists

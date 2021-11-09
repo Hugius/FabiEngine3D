@@ -49,14 +49,14 @@ void AnimationEditor::load()
 	_fe3d.gfx_setShadowLightness(0.25f);
 
 	// Editor models
-	_fe3d.modelEntity_create("@@cube", "engine_assets\\meshes\\cube.obj");
+	_fe3d.modelEntity_create("@@cube", "engine\\meshes\\cube.obj");
 	_fe3d.modelEntity_setBasePosition("@@cube", Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
-	_fe3d.modelEntity_setDiffuseMap("@@cube", "", "engine_assets\\textures\\cube.png");
+	_fe3d.modelEntity_setDiffuseMap("@@cube", "", "engine\\textures\\cube.png");
 	_fe3d.modelEntity_setFaceCulled("@@cube", true);
-	_fe3d.modelEntity_create("@@grid", "engine_assets\\meshes\\plane.obj");
+	_fe3d.modelEntity_create("@@grid", "engine\\meshes\\plane.obj");
 	_fe3d.modelEntity_setBasePosition("@@grid", Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d.modelEntity_setBaseSize("@@grid", Vec3(GRID_SIZE, 1.0f, GRID_SIZE));
-	_fe3d.modelEntity_setDiffuseMap("@@grid", "", "engine_assets\\textures\\grid.png");
+	_fe3d.modelEntity_setDiffuseMap("@@grid", "", "engine\\textures\\grid.png");
 	_fe3d.modelEntity_setTextureRepeat("@@grid", "", GRID_UV);
 	_fe3d.modelEntity_setShadowed("@@grid", false);
 

@@ -18,7 +18,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile() const
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d";
+														 ("game\\" + _currentProjectID)) + "\\data\\audio.fe3d";
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -71,7 +71,7 @@ const bool AudioEditor::loadAudioEntitiesFromFile()
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d";
+														 ("game\\" + _currentProjectID)) + "\\data\\audio.fe3d";
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))

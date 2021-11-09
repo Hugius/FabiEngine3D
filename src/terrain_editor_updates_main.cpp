@@ -188,7 +188,7 @@ void TerrainEditor::_updateTerrainCreating()
 					{
 						// Get the chosen file name
 						const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-						const string targetDirectoryPath = string("game_assets\\textures\\height_maps\\");
+						const string targetDirectoryPath = string(_currentProjectID + "\\assets\\textures\\height_maps\\");
 
 						// Validate target directory
 						if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))

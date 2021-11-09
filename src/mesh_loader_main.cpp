@@ -16,10 +16,10 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 	string selectedPartID = "";
 
 	// Get application root directory
-	const auto rootDir = Tools::getRootDirectoryPath();
+	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 
 	// Load .obj file
-	string path = rootDir + filePath;
+	string path = rootDirectoryPath + filePath;
 	FILE* file = fopen(path.c_str(), "r");
 	if(!Tools::isFileExisting(path) || filePath.empty())
 	{

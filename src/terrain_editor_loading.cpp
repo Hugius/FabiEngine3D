@@ -19,7 +19,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
+														 ("game\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -157,7 +157,7 @@ const vector<string> TerrainEditor::getAllTerrainBitmapPathsFromFile() const
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
+														 ("game\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -216,7 +216,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 
 	// Compose file path
 	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
+														 ("game\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))

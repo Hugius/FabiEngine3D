@@ -262,7 +262,7 @@ void TopViewportController::_updateMiscScreenManagement()
 	{
 		// Get the chosen file name
 		const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-		const string targetDirectoryPath = string("game_assets\\");
+		const string targetDirectoryPath = string(_currentProjectID + "\\assets\\");
 
 		// Validate target directory
 		if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
@@ -312,10 +312,8 @@ void TopViewportController::_updateMiscScreenManagement()
 
 		// Copy directories
 		Tools::copyDirectory(string(rootDirectoryPath + "binaries"), string(exportDirectoryPath + "binaries"));
-		Tools::copyDirectory(string(rootDirectoryPath + "engine_assets"), string(exportDirectoryPath + "engine_assets"));
-		Tools::copyDirectory(string(rootDirectoryPath + "game_assets"), string(exportDirectoryPath + "game_assets"));
-		Tools::copyDirectory(string(rootDirectoryPath + "shaders"), string(exportDirectoryPath + "shaders"));
-		Tools::copyDirectory(string(rootDirectoryPath + "projects\\" + _currentProjectID), exportDirectoryPath);
+		Tools::copyDirectory(string(rootDirectoryPath + "engine"), string(exportDirectoryPath + "engine"));
+		Tools::copyDirectory(string(rootDirectoryPath + "game\\" + _currentProjectID), exportDirectoryPath);
 	}
 	else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("docs")->isHovered())
 	{

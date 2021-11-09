@@ -23,7 +23,7 @@ const bool AudioEditor::saveAudioEntitiesToFile() const
 
 	// Compose file path
 	const string filePath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-							 ("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d");
+							 ("game\\" + _currentProjectID)) + "\\data\\audio.fe3d");
 
 	// Create or overwrite audio file
 	ofstream file(filePath);

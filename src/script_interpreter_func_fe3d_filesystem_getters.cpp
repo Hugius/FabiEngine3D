@@ -1,5 +1,6 @@
 #include "script_interpreter.hpp"
 #include "tools.hpp"
+#include "configuration.hpp"
 
 #include <fstream>
 
@@ -12,14 +13,14 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string&
 	// Determine type of function
 	if(functionName == "fe3d:directory_is_existing")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose directory paths
-			string directoryPath = (Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
-									("projects\\" + _currentProjectID)) + "\\saves\\");
+			string directoryPath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
+				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string newDirectoryPath = string(directoryPath + arguments[0].getString());
 
 			// Return
@@ -29,14 +30,14 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string&
 	}
 	else if(functionName == "fe3d:file_is_existing")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path
-			string directoryPath = (Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
-									("projects\\" + _currentProjectID)) + "\\saves\\");
+			string directoryPath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
+				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string filePath = (directoryPath + arguments[0].getString());
 
 			// Return
@@ -46,14 +47,14 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string&
 	}
 	else if(functionName == "fe3d:file_read")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path
-			string directoryPath = (Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
-									("projects\\" + _currentProjectID)) + "\\saves\\");
+			string directoryPath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
+				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string filePath = (directoryPath + arguments[0].getString());
 
 			// Check if file exists

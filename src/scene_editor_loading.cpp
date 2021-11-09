@@ -1,6 +1,7 @@
 #include "scene_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
+#include "configuration.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -18,7 +19,7 @@ const bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 	}
 
 	// Compose file path
-	const string filePath = (Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
+	const string filePath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
 							 ("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + fileName + ".fe3d");
 
 	// Warning checking

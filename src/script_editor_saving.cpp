@@ -1,6 +1,7 @@
 #include "script_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
+#include "configuration.hpp"
 
 #include <fstream>
 
@@ -21,7 +22,7 @@ const bool ScriptEditor::saveScriptFiles()
 	}
 
 	// Compose directory path
-	const string directoryPath = (Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
+	const string directoryPath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
 								  ("projects\\" + _currentProjectID)) + "\\scripts\\");
 
 	// Delete all text files containing deleted scripts

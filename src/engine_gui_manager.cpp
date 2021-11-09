@@ -1,11 +1,12 @@
 #include "engine_gui_manager.hpp"
+#include "configuration.hpp"
 
 EngineGuiManager::EngineGuiManager(FabiEngine3D& fe3d)
 	:
 	_fe3d(fe3d)
 {
 	// Check if loading engine preview
-	if(!_fe3d.application_isExported())
+	if(!Config::getInst().isApplicationExported())
 	{
 		// Global screen
 		_globalScreen = make_shared<EngineGuiGlobalScreen>(_fe3d);

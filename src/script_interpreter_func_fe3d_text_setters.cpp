@@ -40,7 +40,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 			_fe3d.textEntity_setTextContent(ID, arguments[2].getString());
 
 			// In-engine viewport boundaries
-			if(!_fe3d.application_isExported())
+			if(!Config::getInst().isApplicationExported())
 			{
 				auto minPosition = Math::convertToNDC(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition()));
 				auto maxPosition = Math::convertToNDC(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition() + Config::getInst().getViewportSize()));

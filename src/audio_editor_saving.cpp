@@ -1,6 +1,7 @@
 #include "audio_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
+#include "configuration.hpp"
 
 #include <fstream>
 
@@ -21,7 +22,7 @@ const bool AudioEditor::saveAudioEntitiesToFile() const
 	}
 
 	// Compose file path
-	const string filePath = (Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
+	const string filePath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
 							 ("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d");
 
 	// Create or overwrite audio file

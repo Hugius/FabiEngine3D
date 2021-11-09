@@ -39,7 +39,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			_fe3d.imageEntity_setDiffuseMap(ID, string(("game_assets\\textures\\image_maps\\") + arguments[1].getString()));
 
 			// In-engine viewport boundaries
-			if(!_fe3d.application_isExported())
+			if(!Config::getInst().isApplicationExported())
 			{
 				auto minPosition = Math::convertToNDC(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition()));
 				auto maxPosition = Math::convertToNDC(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition() + Config::getInst().getViewportSize()));

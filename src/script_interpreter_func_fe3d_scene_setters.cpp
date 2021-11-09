@@ -1,5 +1,6 @@
 #include "script_interpreter.hpp"
 #include "tools.hpp"
+#include "configuration.hpp"
 
 using SVT = ScriptValueType;
 
@@ -178,7 +179,7 @@ const bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Compose file path
-			string directoryPath = (Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
+			string directoryPath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
 									("projects\\" + _currentProjectID)) + "\\scenes\\custom\\");
 			string filePath = (directoryPath + arguments[0].getString() + ".fe3d");
 

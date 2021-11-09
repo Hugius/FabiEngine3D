@@ -1,6 +1,7 @@
 #include "water_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
+#include "configuration.hpp"
 
 #include <fstream>
 
@@ -21,7 +22,7 @@ const bool WaterEditor::saveWaterEntitiesToFile() const
 	}
 
 	// Compose file path
-	const string filePath = Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
 														 ("projects\\" + _currentProjectID)) + "\\data\\water.fe3d";
 
 	// Load water file

@@ -2,6 +2,7 @@
 #include "left_viewport_controller.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
+#include "configuration.hpp"
 
 #include <fstream>
 
@@ -23,7 +24,7 @@ const bool ModelEditor::saveModelEntitiesToFile() const
 	}
 
 	// Compose file path
-	const string filePath = Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
 														 ("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
 
 	// Create or overwrite model file

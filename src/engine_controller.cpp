@@ -22,13 +22,25 @@ void EngineController::FE3D_CONTROLLER_INIT()
 	const string textureDirectoryPath = "engine_assets\\textures\\";
 	const string fontDirectoryPath = "engine_assets\\fonts\\";
 
-	if(application_isExported()) // Application preview
+	if(Config::getInst().isApplicationExported()) // Application preview
 	{
 		// Validate project files & directories
 		if(_topViewportController.isProjectCorrupted(Tools::getRootDirectoryPath()))
 		{
 			Logger::throwFatalWarning("Cannot load application: missing files/directories!");
 		}
+
+		// Set title of application to run
+		_leftViewportController.getSkyEditor().setCurrentProjectID("test");
+		_leftViewportController.getTerrainEditor().setCurrentProjectID("test");
+		_leftViewportController.getWaterEditor().setCurrentProjectID("test");
+		_leftViewportController.getModelEditor().setCurrentProjectID("test");
+		_leftViewportController.getAnimationEditor().setCurrentProjectID("test");
+		_leftViewportController.getBillboardEditor().setCurrentProjectID("test");
+		_leftViewportController.getAudioEditor().setCurrentProjectID("test");
+		_leftViewportController.getScriptEditor().setCurrentProjectID("test");
+		_leftViewportController.getSceneEditor().setCurrentProjectID("test");
+		_leftViewportController.getSettingsEditor().setCurrentProjectID("test");
 
 		// Default rendering color
 		Tools::setMainRenderingColor(Vec3(0.0f));
@@ -152,7 +164,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 void EngineController::FE3D_CONTROLLER_UPDATE()
 {
-	if(application_isExported()) // Application preview
+	if(Config::getInst().isApplicationExported()) // Application preview
 	{
 		if(_leftViewportController.getScriptEditor().getScriptExecutor().isRunning()) // Still running
 		{
@@ -204,7 +216,7 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 void EngineController::FE3D_CONTROLLER_DESTROY()
 {
 	// Application preview
-	if(application_isExported())
+	if(Config::getInst().isApplicationExported())
 	{
 		// Check if script was running
 		if(_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())

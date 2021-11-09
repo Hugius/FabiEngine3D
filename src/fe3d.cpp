@@ -36,8 +36,3 @@ const bool FabiEngine3D::application_isPaused() const
 {
 	return _core->_isPaused;
 }
-
-const bool FabiEngine3D::application_isExported() const
-{
-	return Config::getInst().isApplicationExported();
-}

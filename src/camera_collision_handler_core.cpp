@@ -1,7 +1,5 @@
 #include "camera_collision_handler.hpp"
 
-#include <iostream>
-
 void CameraCollisionHandler::update(const unordered_map<string, shared_ptr<AabbEntity>>& aabbs,
 									TerrainEntityManager& terrainManager, Camera& camera, Raycaster& raycaster)
 {

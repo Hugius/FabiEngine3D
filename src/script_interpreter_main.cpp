@@ -145,7 +145,7 @@ void ScriptInterpreter::load()
 	}
 
 	// Load all editor assets of this project if in application preview
-	if(_fe3d.application_isExported())
+	if(Config::getInst().isApplicationExported())
 	{
 		// Gather all file paths
 		auto skyTexturePaths = _skyEditor.getAllTexturePathsFromFile();
@@ -310,7 +310,7 @@ void ScriptInterpreter::unload()
 	_fe3d.skyEntity_setMixValue(0.0f);
 
 	// Select engine background again
-	if(!_fe3d.application_isExported())
+	if(!Config::getInst().isApplicationExported())
 	{
 		_fe3d.skyEntity_selectMainSky("@@engineBackground");
 	}

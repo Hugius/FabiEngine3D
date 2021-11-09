@@ -54,7 +54,6 @@ public:
 
 	// Application interface - getters
 	const bool application_isPaused() const;
-	const bool application_isExported() const;
 
 	// Sky entity interface - setters
 	void skyEntity_create(const string& ID);

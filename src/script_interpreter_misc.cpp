@@ -109,7 +109,7 @@ const bool ScriptInterpreter::_validateSavesDirectory() const
 	}
 
 	// Check if saves directory still exists
-	auto directoryPath = Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
+	auto directoryPath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
 	if(!Tools::isDirectoryExisting(directoryPath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: directory `saves\\` missing!");
@@ -168,7 +168,7 @@ void ScriptInterpreter::_checkEngineWarnings(unsigned int lastLoggerMessageCount
 
 const Vec2 ScriptInterpreter::_convertGuiPositionToViewport(Vec2 position) const
 {
-	if(!_fe3d.application_isExported())
+	if(!Config::getInst().isApplicationExported())
 	{
 		auto sizeMultiplier = Vec2(Config::getInst().getViewportSize()) /
 			Vec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y));
@@ -184,7 +184,7 @@ const Vec2 ScriptInterpreter::_convertGuiPositionToViewport(Vec2 position) const
 
 const Vec2 ScriptInterpreter::_convertGuiPositionFromViewport(Vec2 position) const
 {
-	if(!_fe3d.application_isExported())
+	if(!Config::getInst().isApplicationExported())
 	{
 		auto sizeMultiplier = Vec2(Config::getInst().getViewportSize()) /
 			Vec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y));
@@ -204,7 +204,7 @@ const Vec2 ScriptInterpreter::_convertGuiPositionFromViewport(Vec2 position) con
 
 const Vec2 ScriptInterpreter::_convertGuiSizeToViewport(Vec2 size) const
 {
-	if(!_fe3d.application_isExported())
+	if(!Config::getInst().isApplicationExported())
 	{
 		auto sizeMultiplier = Vec2(Config::getInst().getViewportSize()) /
 			Vec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y));
@@ -216,7 +216,7 @@ const Vec2 ScriptInterpreter::_convertGuiSizeToViewport(Vec2 size) const
 
 const Vec2 ScriptInterpreter::_convertGuiSizeFromViewport(Vec2 size) const
 {
-	if(!_fe3d.application_isExported())
+	if(!Config::getInst().isApplicationExported())
 	{
 		auto sizeMultiplier = Vec2(Config::getInst().getViewportSize()) /
 			Vec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y));

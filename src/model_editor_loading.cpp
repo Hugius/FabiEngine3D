@@ -2,6 +2,7 @@
 #include "left_viewport_controller.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
+#include "configuration.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -19,7 +20,7 @@ const vector<string> ModelEditor::getAllMeshPathsFromFile() const
 	}
 
 	// Compose file path
-	const string filePath = Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
 														 ("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
 
 	// Warning checking
@@ -78,7 +79,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 	}
 
 	// Compose file path
-	const string filePath = Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
 														 ("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
 
 	// Warning checking
@@ -225,7 +226,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 	_loadedModelIDs.clear();
 
 	// Compose file path
-	const string filePath = Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
 														 ("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
 
 	// Warning checking

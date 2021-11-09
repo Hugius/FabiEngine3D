@@ -23,22 +23,35 @@ using std::chrono::system_clock;
 
 const vector<string> Tools::getFilesFromDirectory(const string& path)
 {
-	vector<string> fileNames;
+	// Error checking
+	if(!isDirectoryExisting(path))
+	{
+		Logger::throwError("Tools::getFilesFromDirectory");
+		return {};
+	}
 
+	// Retrieve files
+	vector<string> fileNames;
 	for(const auto& entry : directory_iterator(path))
 	{
 		string filePath = entry.path().string();
 		filePath.erase(0, path.size());
 		fileNames.push_back(filePath);
 	}
-
 	return fileNames;
 }
 
 const vector<string> Tools::getDirectoriesFromDirectory(const string& path)
 {
-	vector<string> directoryNames;
+	// Error checking
+	if(!isDirectoryExisting(path))
+	{
+		Logger::throwError("Tools::getDirectoriesFromDirectory");
+		return {};
+	}
 
+	// Retrieve directories
+	vector<string> directoryNames;
 	for(const auto& entry : directory_iterator(path))
 	{
 		// Extract path
@@ -51,7 +64,6 @@ const vector<string> Tools::getDirectoriesFromDirectory(const string& path)
 			directoryNames.push_back(directoryPath);
 		}
 	}
-
 	return directoryNames;
 }
 

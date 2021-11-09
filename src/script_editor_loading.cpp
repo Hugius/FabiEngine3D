@@ -1,6 +1,7 @@
 #include "script_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
+#include "configuration.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -21,8 +22,8 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	_script.reset();
 
 	// Compose directory path
-	const string directoryPath = (Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
-								  ("projects\\" + _currentProjectID)) + "\\scripts\\");
+	const string directoryPath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\scripts\\");
 
 	// Warning checking
 	if(!Tools::isDirectoryExisting(directoryPath))

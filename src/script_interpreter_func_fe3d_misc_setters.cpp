@@ -1,6 +1,7 @@
 #include "script_interpreter.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
+#include "configuration.hpp"
 
 #include <algorithm>
 
@@ -50,7 +51,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			if(_fe3d.application_isExported()) // Application preview
+			if(Config::getInst().isApplicationExported()) // Application preview
 			{
 				_fe3d.application_stop();
 			}

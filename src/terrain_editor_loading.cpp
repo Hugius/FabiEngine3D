@@ -1,6 +1,7 @@
 #include "terrain_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
+#include "configuration.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -17,7 +18,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 	}
 
 	// Compose file path
-	const string filePath = Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
 														 ("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
 
 	// Warning checking
@@ -155,7 +156,7 @@ const vector<string> TerrainEditor::getAllTerrainBitmapPathsFromFile() const
 	}
 
 	// Compose file path
-	const string filePath = Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
 														 ("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
 
 	// Warning checking
@@ -214,7 +215,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 	_loadedTerrainIDs.clear();
 
 	// Compose file path
-	const string filePath = Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
 														 ("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
 
 	// Warning checking

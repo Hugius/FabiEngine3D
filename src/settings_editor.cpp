@@ -225,7 +225,7 @@ const bool SettingsEditor::loadSettingsFromFile() const
 	}
 
 	// Compose file path
-	const string filePath = Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
 														 ("projects\\" + _currentProjectID)) + "\\data\\settings.fe3d";
 
 	// Warning checking
@@ -292,7 +292,7 @@ const bool SettingsEditor::saveSettingsToFile() const
 	}
 
 	// Compose file path
-	const string filePath = Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
 														 ("projects\\" + _currentProjectID)) + "\\data\\settings.fe3d";
 
 	// Create or overwrite settings file

@@ -1,4 +1,5 @@
 #include "script_executor.hpp"
+#include "configuration.hpp"
 
 ScriptExecutor::ScriptExecutor(FabiEngine3D& fe3d, Script& script, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, SceneEditor& sceneEditor)
 	:
@@ -37,7 +38,7 @@ void ScriptExecutor::update(bool debug)
 		}
 
 		// Custom cursor is only enabled in engine preview
-		if(!_fe3d.application_isExported())
+		if(!Config::getInst().isApplicationExported())
 		{
 			// Custom cursor must be inside of viewport or PC cursor must be visible
 			if(_fe3d.misc_isCursorInsideViewport() || _fe3d.misc_isCursorVisible())

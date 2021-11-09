@@ -1,6 +1,7 @@
 #include "audio_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
+#include "configuration.hpp"
 
 #include <fstream>
 
@@ -16,7 +17,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile() const
 	}
 
 	// Compose file path
-	const string filePath = Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
 														 ("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d";
 
 	// Warning checking
@@ -69,7 +70,7 @@ const bool AudioEditor::loadAudioEntitiesFromFile()
 	_loadedAudioIDs.clear();
 
 	// Compose file path
-	const string filePath = Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
 														 ("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d";
 
 	// Warning checking

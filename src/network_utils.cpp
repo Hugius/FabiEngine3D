@@ -1,7 +1,6 @@
 #define WIN32_LEAN_AND_MEAN
 
 #include "network_utils.hpp"
-#include <iostream>
 
 #include <ws2tcpip.h>
 

@@ -98,7 +98,7 @@ void TopViewportController::_updateProjectCreating()
 
 				// Create config file
 				auto file = ofstream(string(newProjectDirectoryPath + "\\config.fe3d"));
-				file << "window_size_multiplier = 1.0" << endl;
+				file << "window_size_multiplier = 0.75" << endl;
 				file << "window_fullscreen      = false" << endl;
 				file << "window_borderless      = false" << endl;
 				file << "window_title           = MyGame" << endl;

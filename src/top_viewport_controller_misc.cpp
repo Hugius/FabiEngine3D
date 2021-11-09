@@ -96,8 +96,14 @@ void TopViewportController::_updateProjectCreating()
 				Tools::createDirectory(newProjectDirectoryPath + "\\scenes\\editor");
 				Tools::createDirectory(newProjectDirectoryPath + "\\scripts");
 
-				// Create new empty project files
-				auto file = ofstream(string(newProjectDirectoryPath + "\\data\\animation.fe3d"));
+				// Create config file
+				auto file = ofstream(string(newProjectDirectoryPath + "\\config.fe3d"));
+				file << "window_size_multiplier = 1.0" << endl;
+				file << "window_fullscreen      = false" << endl;
+				file << "window_borderless      = false" << endl;
+				file << "window_title           = MyGame" << endl;
+
+				// Create new empty project files 
 				file.close();
 				file = ofstream(string(newProjectDirectoryPath + "\\data\\audio.fe3d"));
 				file.close();
@@ -105,13 +111,15 @@ void TopViewportController::_updateProjectCreating()
 				file.close();
 				file = ofstream(string(newProjectDirectoryPath + "\\data\\model.fe3d"));
 				file.close();
+				file = ofstream(string(newProjectDirectoryPath + "\\data\\settings.fe3d"));
+				file.close();
 				file = ofstream(string(newProjectDirectoryPath + "\\data\\sky.fe3d"));
 				file.close();
 				file = ofstream(string(newProjectDirectoryPath + "\\data\\terrain.fe3d"));
 				file.close();
 				file = ofstream(string(newProjectDirectoryPath + "\\data\\water.fe3d"));
 				file.close();
-				file = ofstream(string(newProjectDirectoryPath + "\\settings.fe3d"));
+				file = ofstream(string(newProjectDirectoryPath + "\\data\\animation.fe3d"));
 				file.close();
 
 				// Load current project
@@ -395,7 +403,8 @@ const bool TopViewportController::isProjectCorrupted(const string& projectDirect
 	   !Tools::isFileExisting(projectDirectoryPath + "\\data\\sky.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "\\data\\terrain.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "\\data\\water.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "\\settings.fe3d"))
+	   !Tools::isFileExisting(projectDirectoryPath + "\\data\\settings.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "\\config.fe3d"))
 	{
 		return true;
 	}

@@ -108,7 +108,7 @@ void AudioEditor::_updateAudioCreating()
 					// Check if audio not already exists
 					if(find(_loadedAudioIDs.begin(), _loadedAudioIDs.end(), newAudioID) == _loadedAudioIDs.end())
 					{
-						// Get the chosen filename
+						// Get the chosen file name
 						const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 						const string targetDirectoryPath = string("game_assets\\audio\\");
 

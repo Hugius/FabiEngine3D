@@ -283,7 +283,7 @@ const bool SceneEditor::isLoaded() const
 	return _isEditorLoaded;
 }
 
-const bool SceneEditor::isSceneExisting(const string& filename) const
+const bool SceneEditor::isSceneExisting(const string& fileName) const
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -293,7 +293,7 @@ const bool SceneEditor::isSceneExisting(const string& filename) const
 
 	// Compose full file path
 	string filePath = Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
-												   ("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + filename + ".fe3d";
+												   ("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + fileName + ".fe3d";
 
 	// Check if scene file exists
 	return (Tools::isFileExisting(filePath));

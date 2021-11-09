@@ -9,7 +9,7 @@ using std::ifstream;
 using std::ofstream;
 using std::istringstream;
 
-const bool SceneEditor::loadEditorSceneFromFile(const string& filename)
+const bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 {
 	// Error checking
 	if(_currentProjectID.empty())
@@ -19,12 +19,12 @@ const bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 
 	// Compose file path
 	const string filePath = (Tools::getRootDirectoryPath() + (_fe3d.application_isExported() ? "" :
-							 ("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + filename + ".fe3d");
+							 ("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + fileName + ".fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
-		Logger::throwWarning("Cannot load scene with ID \"" + filename + "\"!");
+		Logger::throwWarning("Cannot load scene with ID \"" + fileName + "\"!");
 		return false;
 	}
 
@@ -680,7 +680,7 @@ const bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 	file.close();
 
 	// Set new scene ID
-	_loadedSceneID = filename;
+	_loadedSceneID = fileName;
 
 	// Logging
 	Logger::throwInfo("Scene data from project \"" + _currentProjectID + "\" loaded!");

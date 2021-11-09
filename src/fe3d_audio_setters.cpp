@@ -140,9 +140,9 @@ void FabiEngine3D::sound_setMaxVolume(const string& ID, float volume)
 	_core->_audioManager.getSound(ID).setMaxVolume(volume);
 }
 
-void FabiEngine3D::music_addToPlaylist(const string& filename)
+void FabiEngine3D::music_addToPlaylist(const string& fileName)
 {
-	_core->_audioManager.createMusic(filename);
+	_core->_audioManager.createMusic(fileName);
 	_core->_audioPlayer.playMusic(_core->_audioManager.getMusic(), true);
 }
 

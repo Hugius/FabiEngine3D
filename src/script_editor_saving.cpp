@@ -25,9 +25,9 @@ const bool ScriptEditor::saveScriptFiles()
 								  ("projects\\" + _currentProjectID)) + "\\scripts\\");
 
 	// Delete all text files containing deleted scripts
-	for(const auto& filename : _scriptFilenamesToDelete)
+	for(const auto& fileName : _scriptFilenamesToDelete)
 	{
-		const string finalPath = directoryPath + filename + ".fe3d";
+		const string finalPath = directoryPath + fileName + ".fe3d";
 
 		// Check if file exists
 		if(Tools::isFileExisting(finalPath))

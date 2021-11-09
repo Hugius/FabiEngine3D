@@ -20,10 +20,10 @@ void AudioManager::deleteAllSounds()
 	_soundList.clear();
 }
 
-void AudioManager::createMusic(const string& filename)
+void AudioManager::createMusic(const string& fileName)
 {
 	// Load data
-	auto dataPointer = _audioLoader.loadMusic(filename);
+	auto dataPointer = _audioLoader.loadMusic(fileName);
 
 	// Check if data loading went well
 	if(dataPointer != nullptr)
@@ -32,7 +32,7 @@ void AudioManager::createMusic(const string& filename)
 	}
 }
 
-void AudioManager::createSound(const string& ID, const string& filename)
+void AudioManager::createSound(const string& ID, const string& fileName)
 {
 	if(_findIndex(ID) != -1)
 	{
@@ -44,12 +44,12 @@ void AudioManager::createSound(const string& ID, const string& filename)
 	}
 
 	// Load data
-	auto dataPointer = _audioLoader.loadChunk(filename);
+	auto dataPointer = _audioLoader.loadChunk(fileName);
 
 	// Check if data loading went well
 	if(dataPointer != nullptr)
 	{
-		_soundList.push_back(Sound(ID, filename, dataPointer));
+		_soundList.push_back(Sound(ID, fileName, dataPointer));
 	}
 }
 

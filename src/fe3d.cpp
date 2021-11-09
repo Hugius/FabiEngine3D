@@ -41,8 +41,3 @@ const bool FabiEngine3D::application_isExported() const
 {
 	return Config::getInst().isApplicationExported();
 }
-
-const string& FabiEngine3D::application_getTitle() const
-{
-	return Config::getInst().getApplicationTitle();
-}

@@ -221,7 +221,7 @@ void ModelEditor::_updateModelCreating()
 					// If model not existing yet
 					if(find(_loadedModelIDs.begin(), _loadedModelIDs.end(), newModelID) == _loadedModelIDs.end())
 					{
-						// Get the chosen filename
+						// Get the chosen file name
 						const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 						const string targetDirectoryPath = string("game_assets\\meshes\\");
 

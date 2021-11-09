@@ -53,7 +53,6 @@ public:
 	void application_stop();
 
 	// Application interface - getters
-	const string& application_getTitle() const;
 	const bool application_isPaused() const;
 	const bool application_isExported() const;
 

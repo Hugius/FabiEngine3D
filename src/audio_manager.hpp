@@ -10,8 +10,8 @@ public:
 	AudioManager(AudioLoader& audioLoader);
 
 	// Voids
-	void createSound(const string& ID, const string& filename);
-	void createMusic(const string& filename);
+	void createSound(const string& ID, const string& fileName);
+	void createMusic(const string& fileName);
 	void deleteSound(const string& ID);
 	void deleteAllSounds();
 	void deleteAllMusic();

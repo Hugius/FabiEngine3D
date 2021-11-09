@@ -30,18 +30,6 @@ void EngineController::FE3D_CONTROLLER_INIT()
 			Logger::throwFatalWarning("Cannot load application: missing files/directories!");
 		}
 
-		// Set title of application to run
-		_leftViewportController.getSkyEditor().setCurrentProjectID(application_getTitle());
-		_leftViewportController.getTerrainEditor().setCurrentProjectID(application_getTitle());
-		_leftViewportController.getWaterEditor().setCurrentProjectID(application_getTitle());
-		_leftViewportController.getModelEditor().setCurrentProjectID(application_getTitle());
-		_leftViewportController.getAnimationEditor().setCurrentProjectID(application_getTitle());
-		_leftViewportController.getBillboardEditor().setCurrentProjectID(application_getTitle());
-		_leftViewportController.getAudioEditor().setCurrentProjectID(application_getTitle());
-		_leftViewportController.getScriptEditor().setCurrentProjectID(application_getTitle());
-		_leftViewportController.getSceneEditor().setCurrentProjectID(application_getTitle());
-		_leftViewportController.getSettingsEditor().setCurrentProjectID(application_getTitle());
-
 		// Default rendering color
 		Tools::setMainRenderingColor(Vec3(0.0f));
 

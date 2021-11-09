@@ -186,7 +186,7 @@ void TerrainEditor::_updateTerrainCreating()
 					// If terrain not existing yet
 					if(find(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), newTerrainID) == _loadedTerrainIDs.end())
 					{
-						// Get the chosen filename
+						// Get the chosen file name
 						const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 						const string targetDirectoryPath = string("game_assets\\textures\\height_maps\\");
 

@@ -21,7 +21,7 @@ void TerrainEditor::_updateBlendMapMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blendMap")->isHovered())
 		{
-			// Get the chosen filename
+			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("game_assets\\textures\\blend_maps\\");
 
@@ -54,7 +54,7 @@ void TerrainEditor::_updateBlendMapMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("redMap")->isHovered())
 		{
-			// Get the chosen filename
+			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("game_assets\\textures\\diffuse_maps\\");
 
@@ -87,7 +87,7 @@ void TerrainEditor::_updateBlendMapMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenMap")->isHovered())
 		{
-			// Get the chosen filename
+			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("game_assets\\textures\\diffuse_maps\\");
 
@@ -120,7 +120,7 @@ void TerrainEditor::_updateBlendMapMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueMap")->isHovered())
 		{
-			// Get the chosen filename
+			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("game_assets\\textures\\diffuse_maps\\");
 

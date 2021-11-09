@@ -8,54 +8,54 @@ using std::istringstream;
 
 Config::Config()
 {
-	// Get application root directory
-	char buffer[256];
-	size_t len = sizeof(buffer);
-	GetModuleFileName(nullptr, buffer, static_cast<DWORD>(len));
-	string rootDir = buffer;
-	rootDir = rootDir.substr(0, rootDir.size() - string("binaries\\FabiEngine3D.exe").size());
+	// Temporary values
+	const string filePath = string(Tools::getRootDirectoryPath() + "config.fe3d");
 
-	// Open config file
-	auto path = string(rootDir + "config.fe3d");
-	ifstream file(path);
-	if(!Tools::isFileExisting(path))
+	// Check if config file exists
+	if(Tools::isFileExisting(filePath))
 	{
-		Logger::throwFatalWarning("File `config.fe3d` is missing!");
-	}
+		// Open config file
+		ifstream file(filePath);
 
-	// Store config file content
-	float windowSizeMultiplier = 0.0f;
-	_processOption(file, windowSizeMultiplier, "window_size_multiplier");
-	_processOption(file, _isWindowFullscreen, "window_fullscreen");
-	_processOption(file, _isWindowBorderless, "window_borderless");
-	_processOption(file, _windowTitle, "window_title");
-	_processOption(file, _applicationTitle, "application_title");
-	_processOption(file, _isApplicationExported, "application_exported");
+		// Store config file content
+		float windowSizeMultiplier = 0.0f;
+		_processOption(file, windowSizeMultiplier, "window_size_multiplier");
+		_processOption(file, _isWindowFullscreen, "window_fullscreen");
+		_processOption(file, _isWindowBorderless, "window_borderless");
+		_processOption(file, _windowTitle, "window_title");
 
-	// Check if multiplier is between 0.0 and 1.0
-	if((windowSizeMultiplier < 0.0f) || (windowSizeMultiplier > 1.0f))
-	{
-		Logger::throwFatalWarning("Configuration file @ option `window_size_multiplier`: must be between 0.0 and 1.0!");
-	}
+		// Check if multiplier is between 0.0 and 1.0
+		if((windowSizeMultiplier < 0.0f) || (windowSizeMultiplier > 1.0f))
+		{
+			Logger::throwFatalWarning("Configuration file @ option `window_size_multiplier`: must be between 0.0 and 1.0!");
+		}
 
-	// Save monitor dimensions
-	SDL_DisplayMode DM;
-	SDL_GetDesktopDisplayMode(0, &DM);
-	_monitorSize.x = DM.w;
-	_monitorSize.y = DM.h;
+		// Save monitor dimensions
+		SDL_DisplayMode DM;
+		SDL_GetDesktopDisplayMode(0, &DM);
+		_monitorSize.x = DM.w;
+		_monitorSize.y = DM.h;
 
-	// Set window & viewport dimensions
-	if(_isApplicationExported) // Application preview
-	{
+		// Set window & viewport dimensions
 		_windowSize.x = static_cast<int>(static_cast<float>(DM.w) * windowSizeMultiplier);
 		_windowSize.y = static_cast<int>(static_cast<float>(DM.h) * windowSizeMultiplier);
 		_viewportSize.x = static_cast<int>(static_cast<float>(_windowSize.x));
 		_viewportSize.y = static_cast<int>(static_cast<float>(_windowSize.y));
 		_viewportPosition.x = 0;
 		_viewportPosition.y = 0;
+
+		// Miscellaneous 
+		_isApplicationExported = true;
 	}
-	else // Engine preview
+	else
 	{
+		// Save monitor dimensions
+		SDL_DisplayMode DM;
+		SDL_GetDesktopDisplayMode(0, &DM);
+		_monitorSize.x = DM.w;
+		_monitorSize.y = DM.h;
+
+		// Set window & viewport dimensions
 		_isWindowFullscreen = false;
 		_isWindowBorderless = false;
 		_windowSize.x = static_cast<int>(static_cast<float>(DM.w) * 0.9f);
@@ -64,6 +64,9 @@ Config::Config()
 		_viewportSize.y = static_cast<int>(0.75f * static_cast<float>(_windowSize.y));
 		_viewportPosition.x = static_cast<int>(0.125f * static_cast<float>(_windowSize.x));
 		_viewportPosition.y = static_cast<int>(0.2f * static_cast<float>(_windowSize.y));
+
+		// Miscellaneous 
+		_isApplicationExported = false;
 	}
 }
 
@@ -164,11 +167,6 @@ void Config::_processOption(ifstream& file, bool& option, string criteria)
 	{
 		Logger::throwFatalWarning("Configuration file @ option `" + criteria + "`: invalid option field!");
 	}
-}
-
-const string& Config::getApplicationTitle() const
-{
-	return _applicationTitle;
 }
 
 const string& Config::getWindowTitle() const

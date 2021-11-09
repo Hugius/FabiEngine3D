@@ -18,7 +18,6 @@ public:
 	void operator=(Config const&) = delete;
 
 	// Strings
-	const string& getApplicationTitle()	const;
 	const string& getWindowTitle() const;
 
 	// Vectors
@@ -71,7 +70,6 @@ private:
 	void _processOption(ifstream& file, bool& option, string criteria);
 
 	// Strings
-	string _applicationTitle = "";
 	string _windowTitle = "";
 
 	// Vectors

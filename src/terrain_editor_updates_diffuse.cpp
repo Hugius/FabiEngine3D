@@ -18,7 +18,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
-			// Get the chosen filename
+			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("game_assets\\textures\\diffuse_maps\\");
 

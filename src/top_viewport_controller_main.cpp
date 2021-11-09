@@ -260,7 +260,7 @@ void TopViewportController::_updateMiscScreenManagement()
 	// Button management
 	if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("uncache")->isHovered())
 	{
-		// Get the chosen filename
+		// Get the chosen file name
 		const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 		const string targetDirectoryPath = string("game_assets\\");
 
@@ -303,23 +303,27 @@ void TopViewportController::_updateMiscScreenManagement()
 			return;
 		}
 
-		// Compose application directory path
+		// Compose important paths
 		const string rootDirectoryPath = Tools::getRootDirectoryPath();
 		const string exportDirectoryPath = string(chosenDirectoryPath + "\\" + _currentProjectID + "\\");
-		const string rootBinariesPath = string(rootDirectoryPath + "binaries\\");
-		const string exportBinariesPath = string(exportDirectoryPath + "binaries\\");
 
 		// Create application directory
 		Tools::createDirectory(exportDirectoryPath);
 
-		// Copy directories
-		Tools::createDirectory(exportBinariesPath);
+		// Copy main directories
 		Tools::copyDirectory(string(rootDirectoryPath + "binaries"), string(exportDirectoryPath + "binaries"));
 		Tools::copyDirectory(string(rootDirectoryPath + "engine_assets"), string(exportDirectoryPath + "engine_assets"));
+		Tools::copyDirectory(string(rootDirectoryPath + "game_assets"), string(exportDirectoryPath + "game_assets"));
 		Tools::copyDirectory(string(rootDirectoryPath + "shaders"), string(exportDirectoryPath + "shaders"));
 
-		// Copy files
-		Tools::copyFile(string(rootDirectoryPath + "config.fe3d"), string(exportDirectoryPath + "config.fe3d"));
+		// Copy project directories
+		Tools::copyDirectory(string(rootDirectoryPath + "projects\\" + _currentProjectID + "\\data"), string(exportDirectoryPath + "data"));
+		Tools::copyDirectory(string(rootDirectoryPath + "projects\\" + _currentProjectID + "\\saves"), string(exportDirectoryPath + "saves"));
+		Tools::copyDirectory(string(rootDirectoryPath + "projects\\" + _currentProjectID + "\\scenes"), string(exportDirectoryPath + "scenes"));
+		Tools::copyDirectory(string(rootDirectoryPath + "projects\\" + _currentProjectID + "\\scripts"), string(exportDirectoryPath + "scripts"));
+
+		// Copy project files
+		Tools::copyFile(string(rootDirectoryPath + "projects\\" + _currentProjectID + "\\config.fe3d"), string(exportDirectoryPath + "config.fe3d"));
 	}
 	else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("docs")->isHovered())
 	{

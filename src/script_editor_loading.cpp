@@ -34,7 +34,7 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 		return false;
 	}
 
-	// Retrieve all filenames in the scripts directory
+	// Retrieve all fileNames in the scripts directory
 	for(const auto& fileName : Tools::getFilesFromDirectory(directoryPath))
 	{
 		// Extract extension

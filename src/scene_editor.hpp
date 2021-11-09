@@ -49,10 +49,10 @@ public:
 
 	// Booleans
 	const bool isLoaded() const;
-	const bool isSceneExisting(const string& filename) const;
-	const bool loadEditorSceneFromFile(const string& filename);
+	const bool isSceneExisting(const string& fileName) const;
+	const bool loadEditorSceneFromFile(const string& fileName);
 	const bool saveEditorSceneToFile();
-	const bool loadCustomSceneFromFile(const string& filename);
+	const bool loadCustomSceneFromFile(const string& fileName);
 	const bool saveCustomSceneToFile();
 
 private:

@@ -110,7 +110,7 @@ void AudioEditor::_updateAudioCreating()
 					{
 						// Get the chosen file name
 						const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-						const string targetDirectoryPath = string(_currentProjectID + "\\assets\\audio\\");
+						const string targetDirectoryPath = string("game\\" + _currentProjectID + "\\assets\\audio\\");
 
 						// Validate target directory
 						if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))

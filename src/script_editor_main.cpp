@@ -86,7 +86,7 @@ void ScriptEditor::unload()
 	_script.reset();
 
 	// Reset editor properties
-	_scriptFilenamesToDelete.clear();
+	_scriptFileNamesToDelete.clear();
 	_copyClipboard.clear();
 	_currentScriptFileID = "";
 	_scrollingAcceleration = 0.0f;

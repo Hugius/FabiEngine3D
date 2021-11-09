@@ -23,12 +23,16 @@ const bool ModelEditor::saveModelEntitiesToFile() const
 		Logger::throwError("ModelEditor::saveModelEntitiesToFile");
 	}
 
-	// Compose file path
-	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("game\\" + _currentProjectID)) + "\\data\\model.fe3d";
-
-	// Create or overwrite model file
-	ofstream file(filePath);
+	// Create or overwrite file
+	ofstream file;
+	if(Config::getInst().isApplicationExported())
+	{
+		file.open(Tools::getRootDirectoryPath() + "data\\model.fe3d");
+	}
+	else
+	{
+		file.open(Tools::getRootDirectoryPath() + "game\\" + _currentProjectID + "\\data\\model.fe3d");
+	}
 
 	// Write model data
 	for(const auto& modelID : _loadedModelIDs)

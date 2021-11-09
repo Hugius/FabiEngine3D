@@ -11,7 +11,7 @@ using std::map;
 class ShaderBuffer final
 {
 public:
-	ShaderBuffer(const string& vertexFilename, const string& fragmentFilename);
+	ShaderBuffer(const string& vertexFileName, const string& fragmentFileName);
 
 	// Voids
 	void bind();
@@ -39,8 +39,8 @@ private:
 	const UniformID _getUniformID(const string& uniformID);
 	 
 	// Strings
-	string _vertexFilename = "";
-	string _fragmentFilename = "";
+	string _vertexFileName = "";
+	string _fragmentFileName = "";
 	string _name = "";
 
 	// Miscellaneous

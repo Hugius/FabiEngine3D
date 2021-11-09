@@ -8,12 +8,12 @@
 using std::ifstream;
 using std::ofstream;
 
-ShaderBuffer::ShaderBuffer(const string& vertexFilename, const string& fragmentFilename)
+ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentFileName)
 {
 	// Temporary values
-	_name = vertexFilename.substr(0, vertexFilename.size() - 5);
-	_vertexFilename = vertexFilename;
-	_fragmentFilename = fragmentFilename;
+	_name = vertexFileName.substr(0, vertexFileName.size() - 5);
+	_vertexFileName = vertexFileName;
+	_fragmentFileName = fragmentFileName;
 	string vertexCode;
 	string fragmentCode;
 	ifstream vertexFile;
@@ -21,8 +21,8 @@ ShaderBuffer::ShaderBuffer(const string& vertexFilename, const string& fragmentF
 
 	// Compose file paths
 	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-	const auto vertexPath = ("engine\\shaders\\" + _vertexFilename);
-	const auto fragmentPath = ("engine\\shaders\\" + _fragmentFilename);
+	const auto vertexPath = ("engine\\shaders\\" + _vertexFileName);
+	const auto fragmentPath = ("engine\\shaders\\" + _fragmentFileName);
 
 	// Check if vertex shader file exists
 	if(!Tools::isFileExisting(rootDirectoryPath + vertexPath))
@@ -107,8 +107,8 @@ void ShaderBuffer::_createProgram(const char* vertexShaderCode, const char* frag
 	glDeleteShader(fragment);
 
 	// Logging
-	Logger::throwInfo("Loaded vertex shader: \"engine\\shaders\\" + _vertexFilename + "\"");
-	Logger::throwInfo("Loaded fragment shader: \"engine\\shaders\\" + _fragmentFilename + "\"");
+	Logger::throwInfo("Loaded vertex shader: \"engine\\shaders\\" + _vertexFileName + "\"");
+	Logger::throwInfo("Loaded fragment shader: \"engine\\shaders\\" + _fragmentFileName + "\"");
 }
 
 const UniformID ShaderBuffer::_getUniformID(const string& uniformID)

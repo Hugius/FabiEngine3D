@@ -1,0 +1,4 @@
+window_size_multiplier = 0.75
+window_fullscreen      = false
+window_borderless      = false
+window_title           = MyGame

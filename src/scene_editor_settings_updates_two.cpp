@@ -105,7 +105,7 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 	{
 		// Temporary values
 		const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-		const string targetDirectoryPath = string(_currentProjectID + "\\assets\\textures\\flare_maps\\");
+		const string targetDirectoryPath = string("game\\" + _currentProjectID + "\\assets\\textures\\flare_maps\\");
 		auto isEnabled = _fe3d.gfx_isLensFlareEnabled();
 		auto flareMapPath = _fe3d.gfx_getLensFlareMapPath();
 		auto intensity = _fe3d.gfx_getLensFlareIntensity();

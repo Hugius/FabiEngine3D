@@ -19,8 +19,9 @@ const bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 	}
 
 	// Compose file path
-	const string filePath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-							 ("game\\" + _currentProjectID)) + "\\scenes\\editor\\" + fileName + ".fe3d");
+	const bool isExported = Config::getInst().isApplicationExported();
+	const string rootPath = Tools::getRootDirectoryPath();
+	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\scenes\\editor\\" + fileName + ".fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))

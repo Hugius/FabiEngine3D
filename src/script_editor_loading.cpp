@@ -22,8 +22,9 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	_script.reset();
 
 	// Compose directory path
-	const string directoryPath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-		("game\\" + _currentProjectID)) + "\\scripts\\");
+	const bool isExported = Config::getInst().isApplicationExported();
+	const string rootPath = Tools::getRootDirectoryPath();
+	const string directoryPath = (rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\scripts\\");
 
 	// Warning checking
 	if(!Tools::isDirectoryExisting(directoryPath))

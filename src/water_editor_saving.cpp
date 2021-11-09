@@ -21,12 +21,16 @@ const bool WaterEditor::saveWaterEntitiesToFile() const
 		Logger::throwError("WaterEditor::saveWaterEntitiesToFile");
 	}
 
-	// Compose file path
-	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("game\\" + _currentProjectID)) + "\\data\\water.fe3d";
-
-	// Load water file
-	ofstream file(filePath);
+	// Create or overwrite file
+	ofstream file;
+	if(Config::getInst().isApplicationExported())
+	{
+		file.open(Tools::getRootDirectoryPath() + "data\\water.fe3d");
+	}
+	else
+	{
+		file.open(Tools::getRootDirectoryPath() + "game\\" + _currentProjectID + "\\data\\water.fe3d");
+	}
 
 	// Write water data
 	for(const auto& waterID : _loadedWaterIDs)

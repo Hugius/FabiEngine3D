@@ -21,12 +21,16 @@ const bool AnimationEditor::saveAnimationsToFile() const
 		Logger::throwError("AnimationEditor::saveAnimationsToFile");
 	}
 
-	// Compose full file path
-	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("game\\" + _currentProjectID)) + "\\data\\animation.fe3d";
-
-	// Create or overwrite animation file
-	ofstream file(filePath);
+	// Create or overwrite file
+	ofstream file;
+	if(Config::getInst().isApplicationExported())
+	{
+		file.open(Tools::getRootDirectoryPath() + "data\\animation.fe3d");
+	}
+	else
+	{
+		file.open(Tools::getRootDirectoryPath() + "game\\" + _currentProjectID + "\\data\\animation.fe3d");
+	}
 
 	// Write animation data
 	for(const auto& animation : _animations)

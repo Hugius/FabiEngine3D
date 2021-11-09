@@ -21,12 +21,16 @@ const bool SkyEditor::saveSkyEntitiesToFile() const
 		Logger::throwError("SkyEditor::saveSkyEntitiesToFile");
 	}
 
-	// Compose file path
-	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("game\\" + _currentProjectID)) + "\\data\\sky.fe3d";
-
-	// Load sky file
-	ofstream file(filePath);
+	// Create or overwrite file
+	ofstream file;
+	if(Config::getInst().isApplicationExported())
+	{
+		file.open(Tools::getRootDirectoryPath() + "data\\sky.fe3d");
+	}
+	else
+	{
+		file.open(Tools::getRootDirectoryPath() + "game\\" + _currentProjectID + "\\data\\sky.fe3d");
+	}
 
 	// Write sky data
 	for(const auto& skyID : _loadedSkyIDs)

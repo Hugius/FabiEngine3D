@@ -225,8 +225,9 @@ const bool SettingsEditor::loadSettingsFromFile() const
 	}
 
 	// Compose file path
-	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("game\\" + _currentProjectID)) + "\\data\\settings.fe3d";
+	const bool isExported = Config::getInst().isApplicationExported();
+	const string rootPath = Tools::getRootDirectoryPath();
+	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\data\\settings.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -291,12 +292,16 @@ const bool SettingsEditor::saveSettingsToFile() const
 		Logger::throwError("SettingsEditor::saveSettingsToFile");
 	}
 
-	// Compose file path
-	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("game\\" + _currentProjectID)) + "\\data\\settings.fe3d";
-
-	// Create or overwrite settings file
-	ofstream file(filePath);
+	// Create or overwrite file
+	ofstream file;
+	if(Config::getInst().isApplicationExported())
+	{
+		file.open(Tools::getRootDirectoryPath() + "data\\settings.fe3d");
+	}
+	else
+	{
+		file.open(Tools::getRootDirectoryPath() + "game\\" + _currentProjectID + "\\data\\settings.fe3d");
+	}
 
 	// Get values
 	auto isAntiAliasingEnabled = _fe3d.gfx_isAntiAliasingEnabled();

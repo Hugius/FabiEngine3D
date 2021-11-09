@@ -80,100 +80,98 @@ void TopViewportController::_updateProjectScreenManagement()
 	auto leftScreen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if(topScreen->getID() == "main")
+	if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 	{
-		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(topScreen->getButton("newProject")->isHovered())
 		{
-			if(topScreen->getButton("newProject")->isHovered())
+			_gui.getGlobalScreen()->createValueForm("newProjectID", "Create Project", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+			_isCreatingProject = true;
+		}
+		else if(topScreen->getButton("loadProject")->isHovered())
+		{
+			if(_prepareProjectChoosing("Load Project"))
 			{
-				_gui.getGlobalScreen()->createValueForm("newProjectID", "Create Project", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
-				_isCreatingProject = true;
-			}
-			else if(topScreen->getButton("loadProject")->isHovered())
-			{
-				if(_prepareProjectChoosing("Load Project"))
-				{
-					_isLoadingProject = true;
-				}
-			}
-			else if(topScreen->getButton("saveProject")->isHovered())
-			{
-				_saveCurrentProject();
-			}
-			else if(topScreen->getButton("deleteProject")->isHovered())
-			{
-				if(_prepareProjectChoosing("Delete Project"))
-				{
-					_isDeletingProject = true;
-				}
-			}
-			else if(topScreen->getButton("quitEngine")->isHovered())
-			{
-				// Check if currently in an editor (except for scene editor)
-				if(_currentProjectID != "" && leftScreen->getID() != "main" && leftScreen->getID() != "sceneEditorMenuMain")
-				{
-					_gui.getGlobalScreen()->createAnswerForm("quit", "Save Changes?", Vec2(0.0f, 0.25f));
-				}
-				else // Otherwise, just stop the engine
-				{
-					_fe3d.application_stop();
-				}
+				_isLoadingProject = true;
 			}
 		}
-
-		// Update specific processes
-		_updateProjectCreating();
-		_updateProjectLoading();
-		_updateProjectDeleting();
-
-		// Quitting with ESCAPE
-		if(_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && (leftScreen->getID() == "main") && !_gui.getGlobalScreen()->isFocused())
+		else if(topScreen->getButton("saveProject")->isHovered())
 		{
-			// Check if script execution not started
-			if(!_scriptEditor.getScriptExecutor().isStarted())
+			_saveCurrentProject();
+		}
+		else if(topScreen->getButton("deleteProject")->isHovered())
+		{
+			if(_prepareProjectChoosing("Delete Project"))
+			{
+				_isDeletingProject = true;
+			}
+		}
+		else if(topScreen->getButton("quitEngine")->isHovered())
+		{
+			// Check if currently in editor (except for scene editor)
+			if((_currentProjectID != "") && (leftScreen->getID() != "main") && (leftScreen->getID() != "sceneEditorMenuMain"))
+			{
+				_gui.getGlobalScreen()->createAnswerForm("quit", "Save Changes?", Vec2(0.0f, 0.25f));
+			}
+			else
 			{
 				_fe3d.application_stop();
 			}
 		}
-
-		// Update answer forms
-		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("quit"))
-		{
-			_saveCurrentProject();
-			_fe3d.application_stop();
-		}
-		if(_gui.getGlobalScreen()->isAnswerFormDenied("quit"))
-		{
-			_fe3d.application_stop();
-		}
-
-		// Update buttons hoverability
-		topScreen->getButton("saveProject")->setHoverable(_currentProjectID != "");
 	}
+
+	// Update specific processes
+	_updateProjectCreating();
+	_updateProjectLoading();
+	_updateProjectDeleting();
+
+	// Quitting with ESCAPE
+	if(_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && (leftScreen->getID() == "main") && !_gui.getGlobalScreen()->isFocused())
+	{
+		// Check if script execution not started
+		if(!_scriptEditor.getScriptExecutor().isStarted())
+		{
+			_fe3d.application_stop();
+		}
+	}
+
+	// Update answer forms
+	if(_gui.getGlobalScreen()->isAnswerFormConfirmed("quit"))
+	{
+		_saveCurrentProject();
+		_fe3d.application_stop();
+	}
+	if(_gui.getGlobalScreen()->isAnswerFormDenied("quit"))
+	{
+		_fe3d.application_stop();
+	}
+
+	// Update buttons hoverability
+	topScreen->getButton("newProject")->setHoverable(!_scriptEditor.getScriptExecutor().isStarted());
+	topScreen->getButton("loadProject")->setHoverable(!_scriptEditor.getScriptExecutor().isStarted());
+	topScreen->getButton("saveProject")->setHoverable(!_currentProjectID.empty() && !_scriptEditor.getScriptExecutor().isStarted());
+	topScreen->getButton("deleteProject")->setHoverable(!_scriptEditor.getScriptExecutor().isStarted());
 }
 
 void TopViewportController::_updateGameScreenManagement()
 {
 	// Temporary values
-	auto projectScreen = _projectWindow->getActiveScreen();
-	auto gameScreen = _gameWindow->getScreen("main");
-	auto miscScreen = _miscWindow->getScreen("main");
+	auto screen = _gameWindow->getScreen("main");
 
 	// Check if currently a project is loaded
 	if(_currentProjectID.empty())
 	{
-		gameScreen->getButton("play")->setHoverable(false);
-		gameScreen->getButton("pause")->setHoverable(false);
-		gameScreen->getButton("restart")->setHoverable(false);
-		gameScreen->getButton("stop")->setHoverable(false);
-		gameScreen->getButton("debug")->setHoverable(false);
+		screen->getButton("play")->setHoverable(false);
+		screen->getButton("pause")->setHoverable(false);
+		screen->getButton("restart")->setHoverable(false);
+		screen->getButton("stop")->setHoverable(false);
+		screen->getButton("debug")->setHoverable(false);
 	}
 	else
 	{
 		// Check if LMB pressed
 		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			if(gameScreen->getButton("play")->isHovered())
+			if(screen->getButton("play")->isHovered())
 			{
 				// Resume game or load game
 				if(_scriptEditor.getScriptExecutor().isStarted())
@@ -186,21 +184,21 @@ void TopViewportController::_updateGameScreenManagement()
 					_scriptEditor.getScriptExecutor().load();
 				}
 			}
-			else if(gameScreen->getButton("pause")->isHovered())
+			else if(screen->getButton("pause")->isHovered())
 			{
 				_scriptEditor.getScriptExecutor().pause();
 			}
-			else if(gameScreen->getButton("restart")->isHovered())
+			else if(screen->getButton("restart")->isHovered())
 			{
 				_scriptEditor.getScriptExecutor().unload();
 				_scriptEditor.loadScriptFiles(true);
 				_scriptEditor.getScriptExecutor().load();
 			}
-			else if(gameScreen->getButton("stop")->isHovered())
+			else if(screen->getButton("stop")->isHovered())
 			{
 				_scriptEditor.getScriptExecutor().unload();
 			}
-			else if(gameScreen->getButton("debug")->isHovered())
+			else if(screen->getButton("debug")->isHovered())
 			{
 				_scriptEditor.getScriptExecutor().resume();
 				_scriptEditor.getScriptExecutor().update(true);
@@ -211,16 +209,11 @@ void TopViewportController::_updateGameScreenManagement()
 		// Update buttons hoverability
 		static bool wasInMainMenu = false;
 		bool isInMainMenu = (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "main");
-		gameScreen->getButton("play")->setHoverable(isInMainMenu && !_scriptEditor.getScriptExecutor().isScriptEmpty() && !isScriptRunning());
-		gameScreen->getButton("pause")->setHoverable(isInMainMenu && isScriptRunning() && !_fe3d.networkServer_isRunning());
-		gameScreen->getButton("restart")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isStarted());
-		gameScreen->getButton("stop")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isStarted());
-		gameScreen->getButton("debug")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isStarted());
-		projectScreen->getButton("newProject")->setHoverable(!_scriptEditor.getScriptExecutor().isStarted());
-		projectScreen->getButton("loadProject")->setHoverable(!_scriptEditor.getScriptExecutor().isStarted());
-		projectScreen->getButton("saveProject")->setHoverable(!_scriptEditor.getScriptExecutor().isStarted());
-		projectScreen->getButton("deleteProject")->setHoverable(!_scriptEditor.getScriptExecutor().isStarted());
-		miscScreen->getButton("uncache")->setHoverable(!_scriptEditor.getScriptExecutor().isStarted());
+		screen->getButton("play")->setHoverable(isInMainMenu && !_scriptEditor.getScriptExecutor().isScriptEmpty() && !isScriptRunning());
+		screen->getButton("pause")->setHoverable(isInMainMenu && isScriptRunning() && !_fe3d.networkServer_isRunning());
+		screen->getButton("restart")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isStarted());
+		screen->getButton("stop")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isStarted());
+		screen->getButton("debug")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isStarted());
 
 		// Reload script files every second or if user came into menu
 		bool cameIntoMenu = (!wasInMainMenu && isInMainMenu);
@@ -262,7 +255,7 @@ void TopViewportController::_updateMiscScreenManagement()
 	{
 		// Get the chosen file name
 		const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-		const string targetDirectoryPath = string(_currentProjectID + "\\assets\\");
+		const string targetDirectoryPath = string("game\\" + _currentProjectID + "\\assets\\");
 
 		// Validate target directory
 		if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
@@ -321,6 +314,7 @@ void TopViewportController::_updateMiscScreenManagement()
 	}
 
 	// Update buttons hoverability
+	screen->getButton("uncache")->setHoverable(!_currentProjectID.empty() && !_scriptEditor.getScriptExecutor().isStarted());
 	screen->getButton("export")->setHoverable(!_currentProjectID.empty());
 }
 

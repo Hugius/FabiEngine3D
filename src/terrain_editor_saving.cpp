@@ -15,18 +15,16 @@ const bool TerrainEditor::saveTerrainEntitiesToFile() const
 		return false;
 	}
 
-	// Error checking
-	if(_currentProjectID.empty())
+	// Create or overwrite file
+	ofstream file;
+	if(Config::getInst().isApplicationExported())
 	{
-		Logger::throwError("TerrainEditor::saveTerrainEntitiesToFile");
+		file.open(Tools::getRootDirectoryPath() + "data\\terrain.fe3d");
 	}
-
-	// Compose file path
-	const string filePath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-														 ("game\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
-
-	// Load terrain file
-	ofstream file(filePath);
+	else
+	{
+		file.open(Tools::getRootDirectoryPath() + "game\\" + _currentProjectID + "\\data\\terrain.fe3d");
+	}
 
 	// Write terrain data
 	for(const auto& terrainID : _loadedTerrainIDs)

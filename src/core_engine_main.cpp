@@ -264,11 +264,20 @@ void CoreEngine::_prepareApplication()
 		if(!Config::getInst().isApplicationExported() || (Config::getInst().isApplicationExported() && !_fe3d.networkServer_isRunning()))
 		{
 			// Set window properties
-			_window.setSize(Config::getInst().getWindowSize());
-			Config::getInst().isWindowFullscreen() ? _window.enableFullscreen() : void();
-			!Config::getInst().isWindowBorderless() ? _window.showBorder() : void();
-			Config::getInst().isApplicationExported() ? _window.setTitle(Config::getInst().getWindowTitle()) : void();
 			_window.showWindow();
+			_window.setSize(Config::getInst().getWindowSize());
+			if(Config::getInst().isWindowFullscreen())
+			{
+				_window.enableFullscreen();
+			}
+			if(!Config::getInst().isWindowBorderless())
+			{
+				_window.showBorder();
+			}
+			if(Config::getInst().isApplicationExported())
+			{
+				_window.setTitle(Config::getInst().getWindowTitle());
+			}
 
 			// Only if in engine preview
 			if(Config::getInst().isApplicationExported())

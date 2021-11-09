@@ -39,7 +39,7 @@ private:
 	// Strings
 	static inline const string FONT_PATH = "engine\\fonts\\font.ttf";
 	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
-	vector<string> _scriptFilenamesToDelete;
+	vector<string> _scriptFileNamesToDelete;
 	vector<string> _copyClipboard;
 	string _currentProjectID = "";
 	string _currentScriptFileID = "";

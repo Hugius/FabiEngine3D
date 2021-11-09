@@ -21,29 +21,50 @@ const bool ScriptEditor::saveScriptFiles()
 		Logger::throwError("ScriptEditor::saveScriptsToFile");
 	}
 
-	// Compose directory path
-	const string directoryPath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-								  ("game\\" + _currentProjectID)) + "\\scripts\\");
-
 	// Delete all text files containing deleted scripts
-	for(const auto& fileName : _scriptFilenamesToDelete)
+	for(const auto& fileName : _scriptFileNamesToDelete)
 	{
-		const string finalPath = directoryPath + fileName + ".fe3d";
+		if(Config::getInst().isApplicationExported())
+		{
+			// Compose file path
+			const string filePath = string(Tools::getRootDirectoryPath() + "scripts\\" + fileName + ".fe3d");
+
+			// Check if file exists
+			if(Tools::isFileExisting(filePath))
+			{
+				Tools::deleteFile(filePath);
+			}
+		}
+		else
+		{
+			// Compose file path
+			const string filePath = string(Tools::getRootDirectoryPath() + "game\\" + _currentProjectID + "scripts\\" + fileName + ".fe3d");
+
+			// Check if file exists
+			if(Tools::isFileExisting(filePath))
+			{
+				Tools::deleteFile(filePath);
+			}
+		}
 
 		// Check if file exists
-		if(Tools::isFileExisting(finalPath))
-		{
-			DeleteFile(LPCSTR(finalPath.c_str()));
-		}
+
 	}
-	_scriptFilenamesToDelete.clear();
+	_scriptFileNamesToDelete.clear();
 
 	// Write every script to a text file
 	for(const auto& scriptID : _script.getAllScriptFileIDs())
 	{
-		// Create or overwrite script file
+		// Create or overwrite file
 		ofstream file;
-		file.open(directoryPath + scriptID + ".fe3d");
+		if(Config::getInst().isApplicationExported())
+		{
+			file.open(Tools::getRootDirectoryPath() + "scripts\\" + scriptID + ".fe3d");
+		}
+		else
+		{
+			file.open(Tools::getRootDirectoryPath() + "game\\" + _currentProjectID + "scripts\\" + scriptID + ".fe3d");
+		}
 
 		// Write cursor indices to file
 		file << _script.getScriptFile(scriptID)->getCursorLineIndex() << " " << _script.getScriptFile(scriptID)->getCursorCharIndex() << endl;

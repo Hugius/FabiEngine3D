@@ -229,112 +229,112 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\app\shaders\motion_blur_shader.frag">
+    <None Include="..\..\..\app\engine\shaders\motion_blur_shader.frag">
       <Filter>Shaders\Post Shaders</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\motion_blur_shader.vert">
+    <None Include="..\..\..\app\engine\shaders\motion_blur_shader.vert">
       <Filter>Shaders\Post Shaders</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\anti_aliasing_shader.frag">
+    <None Include="..\..\..\app\engine\shaders\anti_aliasing_shader.frag">
       <Filter>Shaders\Post Shaders</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\anti_aliasing_shader.vert">
+    <None Include="..\..\..\app\engine\shaders\anti_aliasing_shader.vert">
       <Filter>Shaders\Post Shaders</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\bloom_shader.frag">
+    <None Include="..\..\..\app\engine\shaders\bloom_shader.frag">
       <Filter>Shaders\Post Shaders</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\bloom_shader.vert">
+    <None Include="..\..\..\app\engine\shaders\bloom_shader.vert">
       <Filter>Shaders\Post Shaders</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\blur_shader.frag">
+    <None Include="..\..\..\app\engine\shaders\blur_shader.frag">
       <Filter>Shaders\Post Shaders</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\blur_shader.vert">
+    <None Include="..\..\..\app\engine\shaders\blur_shader.vert">
       <Filter>Shaders\Post Shaders</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\dof_shader.frag">
+    <None Include="..\..\..\app\engine\shaders\dof_shader.frag">
       <Filter>Shaders\Post Shaders</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\dof_shader.vert">
+    <None Include="..\..\..\app\engine\shaders\dof_shader.vert">
       <Filter>Shaders\Post Shaders</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\lens_flare_shader.frag">
+    <None Include="..\..\..\app\engine\shaders\lens_flare_shader.frag">
       <Filter>Shaders\Post Shaders</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\lens_flare_shader.vert">
+    <None Include="..\..\..\app\engine\shaders\lens_flare_shader.vert">
       <Filter>Shaders\Post Shaders</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\aabb_entity_color_shader.frag">
+    <None Include="..\..\..\app\engine\shaders\aabb_entity_color_shader.frag">
       <Filter>Shaders\Entity Shaders\Color</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\aabb_entity_color_shader.vert">
+    <None Include="..\..\..\app\engine\shaders\aabb_entity_color_shader.vert">
       <Filter>Shaders\Entity Shaders\Color</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\billboard_entity_color_shader.frag">
+    <None Include="..\..\..\app\engine\shaders\billboard_entity_color_shader.frag">
       <Filter>Shaders\Entity Shaders\Color</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\billboard_entity_color_shader.vert">
+    <None Include="..\..\..\app\engine\shaders\billboard_entity_color_shader.vert">
       <Filter>Shaders\Entity Shaders\Color</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\image_entity_color_shader.frag">
+    <None Include="..\..\..\app\engine\shaders\image_entity_color_shader.frag">
       <Filter>Shaders\Entity Shaders\Color</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\image_entity_color_shader.vert">
+    <None Include="..\..\..\app\engine\shaders\image_entity_color_shader.vert">
       <Filter>Shaders\Entity Shaders\Color</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\model_entity_color_shader.frag">
+    <None Include="..\..\..\app\engine\shaders\model_entity_color_shader.frag">
       <Filter>Shaders\Entity Shaders\Color</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\model_entity_color_shader.vert">
+    <None Include="..\..\..\app\engine\shaders\model_entity_color_shader.vert">
       <Filter>Shaders\Entity Shaders\Color</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\sky_entity_color_shader.frag">
+    <None Include="..\..\..\app\engine\shaders\sky_entity_color_shader.frag">
       <Filter>Shaders\Entity Shaders\Color</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\sky_entity_color_shader.vert">
+    <None Include="..\..\..\app\engine\shaders\sky_entity_color_shader.vert">
       <Filter>Shaders\Entity Shaders\Color</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\terrain_entity_color_shader.frag">
+    <None Include="..\..\..\app\engine\shaders\terrain_entity_color_shader.frag">
       <Filter>Shaders\Entity Shaders\Color</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\terrain_entity_color_shader.vert">
+    <None Include="..\..\..\app\engine\shaders\terrain_entity_color_shader.vert">
       <Filter>Shaders\Entity Shaders\Color</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\water_entity_color_shader.frag">
+    <None Include="..\..\..\app\engine\shaders\water_entity_color_shader.frag">
       <Filter>Shaders\Entity Shaders\Color</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\water_entity_color_shader.vert">
+    <None Include="..\..\..\app\engine\shaders\water_entity_color_shader.vert">
       <Filter>Shaders\Entity Shaders\Color</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\terrain_entity_depth_shader.vert">
+    <None Include="..\..\..\app\engine\shaders\terrain_entity_depth_shader.vert">
       <Filter>Shaders\Entity Shaders\Depth</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\terrain_entity_depth_shader.frag">
+    <None Include="..\..\..\app\engine\shaders\terrain_entity_depth_shader.frag">
       <Filter>Shaders\Entity Shaders\Depth</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\model_entity_depth_shader.vert">
+    <None Include="..\..\..\app\engine\shaders\model_entity_depth_shader.vert">
       <Filter>Shaders\Entity Shaders\Depth</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\model_entity_depth_shader.frag">
+    <None Include="..\..\..\app\engine\shaders\model_entity_depth_shader.frag">
       <Filter>Shaders\Entity Shaders\Depth</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\billboard_entity_depth_shader.vert">
+    <None Include="..\..\..\app\engine\shaders\billboard_entity_depth_shader.vert">
       <Filter>Shaders\Entity Shaders\Depth</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\billboard_entity_depth_shader.frag">
+    <None Include="..\..\..\app\engine\shaders\billboard_entity_depth_shader.frag">
       <Filter>Shaders\Entity Shaders\Depth</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\billboard_entity_shadow_shader.vert">
+    <None Include="..\..\..\app\engine\shaders\billboard_entity_shadow_shader.vert">
       <Filter>Shaders\Entity Shaders\Depth</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\billboard_entity_shadow_shader.frag">
+    <None Include="..\..\..\app\engine\shaders\billboard_entity_shadow_shader.frag">
       <Filter>Shaders\Entity Shaders\Depth</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\model_entity_shadow_shader.vert">
+    <None Include="..\..\..\app\engine\shaders\model_entity_shadow_shader.vert">
       <Filter>Shaders\Entity Shaders\Depth</Filter>
     </None>
-    <None Include="..\..\..\app\shaders\model_entity_shadow_shader.frag">
+    <None Include="..\..\..\app\engine\shaders\model_entity_shadow_shader.frag">
       <Filter>Shaders\Entity Shaders\Depth</Filter>
     </None>
   </ItemGroup>

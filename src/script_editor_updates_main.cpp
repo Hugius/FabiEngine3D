@@ -54,7 +54,7 @@ void ScriptEditor::_updateGUI()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			_scriptFilenamesToDelete.push_back(_currentScriptFileID);
+			_scriptFileNamesToDelete.push_back(_currentScriptFileID);
 			_fe3d.billboardEntity_deleteAll();
 			_script.removeScriptFile(_currentScriptFileID);
 			_isWritingScript = false;
@@ -242,7 +242,7 @@ void ScriptEditor::_updateMiscellaneous()
 		auto existingScriptFileIDs = _script.getAllScriptFileIDs();
 		if(find(existingScriptFileIDs.begin(), existingScriptFileIDs.end(), newScriptFileID) == existingScriptFileIDs.end())
 		{
-			_scriptFilenamesToDelete.push_back(_currentScriptFileID);
+			_scriptFileNamesToDelete.push_back(_currentScriptFileID);
 			_script.renameScriptFile(_currentScriptFileID, newScriptFileID);
 			_currentScriptFileID = newScriptFileID;
 		}

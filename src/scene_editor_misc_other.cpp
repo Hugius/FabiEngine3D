@@ -186,9 +186,9 @@ void SceneEditor::clearCurrentScene()
 	}
 
 	// Hide lightsource billboard
-	if(_fe3d.billboardEntity_isExisting("@@lightSource"))
+	if(_fe3d.billboardEntity_isExisting("@@directionalLightSource"))
 	{
-		_fe3d.billboardEntity_setVisible("@@lightSource", false);
+		_fe3d.billboardEntity_setVisible("@@directionalLightSource", false);
 	}
 
 	// Delete AABB entities

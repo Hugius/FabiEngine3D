@@ -373,8 +373,8 @@ const bool SceneEditor::saveEditorSceneToFile()
 		auto directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
 		auto directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
 		auto directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
-		auto billboardSize = _fe3d.billboardEntity_getSize("@@lightSource").x;
-		auto billboardLightness = _fe3d.billboardEntity_getLightness("@@lightSource");
+		auto billboardSize = _fe3d.billboardEntity_getSize("@@directionalLightSource").x;
+		auto billboardLightness = _fe3d.billboardEntity_getLightness("@@directionalLightSource");
 
 		// Write data
 		file <<

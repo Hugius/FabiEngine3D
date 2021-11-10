@@ -214,15 +214,16 @@ void ScriptInterpreter::load()
 
 	// Directional light source
 	const string texturePath = "engine\\assets\\textures\\light_source.png";
-	_fe3d.billboardEntity_create("@@lightSource");
-	_fe3d.billboardEntity_setSize("@@lightSource", Vec2(0.0f));
-	_fe3d.billboardEntity_setDiffuseMap("@@lightSource", texturePath);
-	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
-	_fe3d.billboardEntity_setShadowed("@@lightSource", false);
-	_fe3d.billboardEntity_setReflected("@@lightSource", true);
-	_fe3d.billboardEntity_setBright("@@lightSource", true);
-	_fe3d.billboardEntity_setCameraFacingX("@@lightSource", true);
-	_fe3d.billboardEntity_setCameraFacingY("@@lightSource", true);
+	_fe3d.billboardEntity_create("@@directionalLightSource");
+	_fe3d.billboardEntity_setSize("@@directionalLightSource", Vec2(0.0f));
+	_fe3d.billboardEntity_setDiffuseMap("@@directionalLightSource", texturePath);
+	_fe3d.billboardEntity_setDepthMapIncluded("@@directionalLightSource", false);
+	_fe3d.billboardEntity_setShadowed("@@directionalLightSource", false);
+	_fe3d.billboardEntity_setReflected("@@directionalLightSource", true);
+	_fe3d.billboardEntity_setBright("@@directionalLightSource", true);
+	_fe3d.billboardEntity_setCameraFacingX("@@directionalLightSource", true);
+	_fe3d.billboardEntity_setCameraFacingY("@@directionalLightSource", true);
+	_fe3d.billboardEntity_setVisible("@@directionalLightSource", false);
 
 	// Miscellaneous
 	if(_fe3d.misc_isVsyncEnabled())

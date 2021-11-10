@@ -55,7 +55,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetterFunction(const string& f
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.billboardEntity_getSize("@@lightSource").x;
+			auto result = _fe3d.billboardEntity_getSize("@@directionalLightSource").x;
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}

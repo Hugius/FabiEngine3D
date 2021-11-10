@@ -28,15 +28,15 @@ void AudioEditor::_updateMiscellaneous()
 	// Update audio status symbol
 	if(isPlaying)
 	{
-		_fe3d.billboardEntity_setDiffuseMap("@@icon", "engine\\textures\\play.png");
+		_fe3d.billboardEntity_setDiffuseMap("@@icon", "engine\\assets\\textures\\play.png");
 	}
 	else if(isPaused)
 	{
-		_fe3d.billboardEntity_setDiffuseMap("@@icon", "engine\\textures\\pause.png");
+		_fe3d.billboardEntity_setDiffuseMap("@@icon", "engine\\assets\\textures\\pause.png");
 	}
 	else
 	{
-		_fe3d.billboardEntity_setDiffuseMap("@@icon", "engine\\textures\\stop.png");
+		_fe3d.billboardEntity_setDiffuseMap("@@icon", "engine\\assets\\textures\\stop.png");
 	}
 	_fe3d.billboardEntity_rotate("@@icon", Vec3(0.0f, 0.5f, 0.0f));
 }

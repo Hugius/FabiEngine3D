@@ -40,7 +40,7 @@ void SceneEditor::_updateSpotlightPlacing()
 				{
 					// Create model
 					const string newModelID = ("@@torch_" + newID);
-					_fe3d.modelEntity_create(newModelID, "engine\\meshes\\torch.obj");
+					_fe3d.modelEntity_create(newModelID, "engine\\assets\\meshes\\torch.obj");
 					_fe3d.modelEntity_setBaseSize(newModelID, DEFAULT_TORCH_SIZE);
 					_fe3d.modelEntity_setShadowed(newModelID, false);
 					_fe3d.modelEntity_setReflected(newModelID, false);
@@ -121,7 +121,7 @@ void SceneEditor::_updateSpotlightPlacing()
 						{
 							// Create model
 							const string newModelID = ("@@torch_" + newID);
-							_fe3d.modelEntity_create(newModelID, "engine\\meshes\\torch.obj");
+							_fe3d.modelEntity_create(newModelID, "engine\\assets\\meshes\\torch.obj");
 							_fe3d.modelEntity_setBaseSize(newModelID, DEFAULT_TORCH_SIZE);
 							_fe3d.modelEntity_setShadowed(newModelID, false);
 							_fe3d.modelEntity_setReflected(newModelID, false);

@@ -6,7 +6,7 @@ void SceneEditor::_selectModel(const string& ID)
 	_selectedModelID = ID;
 
 	// Change cursor
-	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine\\textures\\cursor_pointing.png");
+	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
 	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
@@ -55,7 +55,7 @@ void SceneEditor::_selectBillboard(const string& ID)
 	_selectedBillboardID = ID;
 
 	// Change cursor
-	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine\\textures\\cursor_pointing.png");
+	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
 	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
@@ -104,7 +104,7 @@ void SceneEditor::_selectSound(const string& ID)
 	_selectedSpeakerID = ("@@speaker_" + ID);
 
 	// Change cursor
-	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine\\textures\\cursor_pointing.png");
+	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
 	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
@@ -125,7 +125,7 @@ void SceneEditor::_selectPointlight(const string& ID)
 	_selectedLampID = ("@@lamp_" + ID);
 
 	// Change cursor
-	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine\\textures\\cursor_pointing.png");
+	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_pointing.png");
 }
 
 void SceneEditor::_selectSpotlight(const string& ID)
@@ -134,7 +134,7 @@ void SceneEditor::_selectSpotlight(const string& ID)
 	_selectedTorchID = ("@@torch_" + ID);
 
 	// Change cursor
-	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine\\textures\\cursor_pointing.png");
+	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_pointing.png");
 }
 
 void SceneEditor::_selectReflection(const string& ID)
@@ -143,7 +143,7 @@ void SceneEditor::_selectReflection(const string& ID)
 	_selectedCameraID = ("@@camera_" + ID);
 
 	// Change cursor
-	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine\\textures\\cursor_pointing.png");
+	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_pointing.png");
 }
 
 void SceneEditor::_activateSound(const string& ID)

@@ -149,9 +149,9 @@ void CoreEngine::_stop()
 void CoreEngine::_prepareApplication()
 {
 	// Temporary values
-	const string meshDirectoryPath = "engine\\meshes\\";
-	const string textureDirectoryPath = "engine\\textures\\";
-	const string fontDirectoryPath = "engine\\fonts\\";
+	const string meshDirectoryPath = "engine\\assets\\meshes\\";
+	const string textureDirectoryPath = "engine\\assets\\textures\\";
+	const string fontDirectoryPath = "engine\\assets\\fonts\\";
 
 	// Validate engine assets directory
 	if
@@ -223,7 +223,7 @@ void CoreEngine::_prepareApplication()
 	// Create engine logo
 	shared_ptr<ImageEntity> logo = make_shared<ImageEntity>("logo");
 	logo->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
-	logo->setDiffuseMap(_textureLoader.loadTexture2D("engine\\textures\\logo.png", false, false));
+	logo->setDiffuseMap(_textureLoader.loadTexture2D("engine\\assets\\textures\\logo.png", false, false));
 
 	// Calculate logo resolution
 	SDL_DisplayMode DM;

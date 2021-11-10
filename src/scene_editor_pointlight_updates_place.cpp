@@ -40,7 +40,7 @@ void SceneEditor::_updatePointlightPlacing()
 				{
 					// Create model
 					const string newModelID = ("@@lamp_" + newID);
-					_fe3d.modelEntity_create(newModelID, "engine\\meshes\\lamp.obj");
+					_fe3d.modelEntity_create(newModelID, "engine\\assets\\meshes\\lamp.obj");
 					_fe3d.modelEntity_setBaseSize(newModelID, DEFAULT_LAMP_SIZE);
 					_fe3d.modelEntity_setShadowed(newModelID, false);
 					_fe3d.modelEntity_setReflected(newModelID, false);
@@ -119,7 +119,7 @@ void SceneEditor::_updatePointlightPlacing()
 						{
 							// Create model
 							const string newModelID = ("@@lamp_" + newID);
-							_fe3d.modelEntity_create(newModelID, "engine\\meshes\\lamp.obj");
+							_fe3d.modelEntity_create(newModelID, "engine\\assets\\meshes\\lamp.obj");
 							_fe3d.modelEntity_setBaseSize(newModelID, DEFAULT_LAMP_SIZE);
 							_fe3d.modelEntity_setShadowed(newModelID, false);
 							_fe3d.modelEntity_setReflected(newModelID, false);

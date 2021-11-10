@@ -29,7 +29,6 @@ public:
 	static const string getRootDirectoryPath();
 	static const string chooseExplorerFile(const string& startingDirectory, const string& fileType);
 	static const string chooseExplorerDirectory(const string& startingDirectory);
-	static const string convertToAbsolutePath(const string& path);
 
 	// Vectors
 	static const Vec2 convertFromScreenCoords(Ivec2 position);

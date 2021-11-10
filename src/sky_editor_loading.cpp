@@ -54,14 +54,21 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile() const
 			diffuseMapPaths[4] >>
 			diffuseMapPaths[5];
 
-		// Perform empty string & space conversions
+		// Iterate through paths
 		for(auto& diffuseMapPath : diffuseMapPaths)
 		{
+			// Perform empty string & space conversions
 			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+
+			// Convert to full path
+			if(!Config::getInst().isApplicationExported())
+			{
+				diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
+			}
 		}
 
-		// Save file path
+		// Save paths
 		texturePaths.push_back(diffuseMapPaths);
 	}
 
@@ -126,11 +133,18 @@ const bool SkyEditor::loadSkyEntitiesFromFile()
 			color.g >>
 			color.b;
 
-		// Perform empty string & space conversions
+		// Iterate through paths
 		for(auto& diffuseMapPath : diffuseMapPaths)
 		{
+			// Perform empty string & space conversions
 			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+
+			// Convert to full path
+			if(!Config::getInst().isApplicationExported())
+			{
+				diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
+			}
 		}
 
 		// Create sky

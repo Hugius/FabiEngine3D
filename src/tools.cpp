@@ -99,8 +99,8 @@ const string Tools::getRootDirectoryPath()
 	// Create final string
 	string rootDirectoryPath = buffer;
 
-	// Convert to absolute path if it's relative
-	rootDirectoryPath = convertToAbsolutePath(rootDirectoryPath);
+	// Convert to absolute path if path is relative
+	rootDirectoryPath = absolute(rootDirectoryPath).string();
 
 	// Cut to engine root directory
 	rootDirectoryPath = rootDirectoryPath.substr(0, (rootDirectoryPath.size() - string("binaries\\FabiEngine3D.exe").size()));
@@ -181,11 +181,6 @@ const string Tools::chooseExplorerDirectory(const string& startingDirectory)
 
 	// No directory chosen
 	return "";
-}
-
-const string Tools::convertToAbsolutePath(const string& path)
-{
-	return absolute(path).string();
 }
 
 const bool Tools::isDirectoryExisting(const string& path)

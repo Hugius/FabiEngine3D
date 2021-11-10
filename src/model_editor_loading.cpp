@@ -59,6 +59,12 @@ const vector<string> ModelEditor::getAllMeshPathsFromFile() const
 			meshPath = (meshPath == "?") ? "" : meshPath;
 			replace(meshPath.begin(), meshPath.end(), '?', ' ');
 
+			// Convert to full path
+			if(!Config::getInst().isApplicationExported())
+			{
+				meshPath = string("game\\" + _currentProjectID + "\\" + meshPath);
+			}
+
 			// Save mesh path
 			meshPaths.push_back(meshPath);
 		}
@@ -179,30 +185,65 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 				// Diffuse map
 				if(!diffuseMapPath.empty())
 				{
+					// Convert to full path
+					if(!Config::getInst().isApplicationExported())
+					{
+						diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
+					}
+
+					// Save path
 					texturePaths.push_back(diffuseMapPath);
 				}
 
 				// Emission map
 				if(!emissionMapPath.empty())
 				{
+					// Convert to full path
+					if(!Config::getInst().isApplicationExported())
+					{
+						emissionMapPath = string("game\\" + _currentProjectID + "\\" + emissionMapPath);
+					}
+
+					// Save path
 					texturePaths.push_back(emissionMapPath);
 				}
 
 				// Specular map
 				if(!specularMapPath.empty())
 				{
+					// Convert to full path
+					if(!Config::getInst().isApplicationExported())
+					{
+						specularMapPath = string("game\\" + _currentProjectID + "\\" + specularMapPath);
+					}
+					
+					// Save path
 					texturePaths.push_back(specularMapPath);
 				}
 
 				// Reflection map
 				if(!reflectionMapPath.empty())
 				{
+					// Convert to full path
+					if(!Config::getInst().isApplicationExported())
+					{
+						reflectionMapPath = string("game\\" + _currentProjectID + "\\" + reflectionMapPath);
+					}
+
+					// Save path
 					texturePaths.push_back(reflectionMapPath);
 				}
 
 				// Normal map
 				if(!normalMapPath.empty())
 				{
+					// Convert to full path
+					if(!Config::getInst().isApplicationExported())
+					{
+						normalMapPath = string("game\\" + _currentProjectID + "\\" + normalMapPath);
+					}
+
+					// Save path
 					texturePaths.push_back(normalMapPath);
 				}
 			}
@@ -280,6 +321,12 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 			replace(meshPath.begin(), meshPath.end(), '?', ' ');
 			replace(lodEntityID.begin(), lodEntityID.end(), '?', ' ');
 
+			// Convert to full path
+			if(!Config::getInst().isApplicationExported())
+			{
+				meshPath = string("game\\" + _currentProjectID + "\\" + meshPath);
+			}
+
 			// Create model
 			_fe3d.modelEntity_create(modelID, meshPath);
 
@@ -352,33 +399,68 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 					replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
 					replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 
-					// Set diffuse map
+					// Diffuse map
 					if(!diffuseMapPath.empty())
 					{
+						// Convert to full path
+						if(!Config::getInst().isApplicationExported())
+						{
+							diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
+						}
+
+						// Set path
 						_fe3d.modelEntity_setDiffuseMap(modelID, partID, diffuseMapPath);
 					}
 
-					// Set specular map
+					// Specular map
 					if(!specularMapPath.empty())
 					{
+						// Convert to full path
+						if(!Config::getInst().isApplicationExported())
+						{
+							specularMapPath = string("game\\" + _currentProjectID + "\\" + specularMapPath);
+						}
+
+						// Set path
 						_fe3d.modelEntity_setSpecularMap(modelID, partID, specularMapPath);
 					}
 
-					// Set emission map
+					// Emission map
 					if(!emissionMapPath.empty())
 					{
+						// Convert to full path
+						if(!Config::getInst().isApplicationExported())
+						{
+							emissionMapPath = string("game\\" + _currentProjectID + "\\" + emissionMapPath);
+						}
+
+						// Set path
 						_fe3d.modelEntity_setEmissionMap(modelID, partID, emissionMapPath);
 					}
 
-					// Set reflection map
+					// Reflection map
 					if(!reflectionMapPath.empty())
 					{
+						// Convert to full path
+						if(!Config::getInst().isApplicationExported())
+						{
+							reflectionMapPath = string("game\\" + _currentProjectID + "\\" + reflectionMapPath);
+						}
+
+						// Set path
 						_fe3d.modelEntity_setReflectionMap(modelID, partID, reflectionMapPath);
 					}
 
-					// Set normal map
+					// Normal map
 					if(!normalMapPath.empty())
 					{
+						// Convert to full path
+						if(!Config::getInst().isApplicationExported())
+						{
+							normalMapPath = string("game\\" + _currentProjectID + "\\" + normalMapPath);
+						}
+
+						// Set path
 						_fe3d.modelEntity_setNormalMap(modelID, partID, normalMapPath);
 					}
 

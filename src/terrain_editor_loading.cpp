@@ -86,57 +86,120 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 		replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
 		replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
 
-		// Save diffuse map path
+		// Diffuse map
 		if(!diffuseMapPath.empty())
 		{
+			// Convert to full path
+			if(!Config::getInst().isApplicationExported())
+			{
+				diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
+			}
+
+			// Save path
 			texturePaths.push_back(diffuseMapPath);
 		}
 
-		// Save normal map path
+		// Normal map
 		if(!normalMapPath.empty())
 		{
+			// Convert to full path
+			if(!Config::getInst().isApplicationExported())
+			{
+				normalMapPath = string("game\\" + _currentProjectID + "\\" + normalMapPath);
+			}
+
+			// Save path
 			texturePaths.push_back(normalMapPath);
 		}
 
-		// Save normal map R path
+		// Normal map R
 		if(!normalMapPathR.empty())
 		{
+			// Convert to full path
+			if(!Config::getInst().isApplicationExported())
+			{
+				normalMapPathR = string("game\\" + _currentProjectID + "\\" + normalMapPathR);
+			}
+
+			// Save path
 			texturePaths.push_back(normalMapPathR);
 		}
 
-		// Save normal map G path
+		// Normal map G
 		if(!normalMapPathG.empty())
 		{
+			// Convert to full path
+			if(!Config::getInst().isApplicationExported())
+			{
+				normalMapPathG = string("game\\" + _currentProjectID + "\\" + normalMapPathG);
+			}
+
+			// Save path
 			texturePaths.push_back(normalMapPathG);
 		}
 
-		// Save normal map B path
+		// Normal map B
 		if(!normalMapPathB.empty())
 		{
+			// Convert to full path
+			if(!Config::getInst().isApplicationExported())
+			{
+				normalMapPathB = string("game\\" + _currentProjectID + "\\" + normalMapPathB);
+			}
+
+			// Save path
 			texturePaths.push_back(normalMapPathB);
 		}
 
-		// Save blend map path
+		// Blend map
 		if(!blendMapPath.empty())
 		{
+			// Convert to full path
+			if(!Config::getInst().isApplicationExported())
+			{
+				blendMapPath = string("game\\" + _currentProjectID + "\\" + blendMapPath);
+			}
+
+			// Save path
 			texturePaths.push_back(blendMapPath);
 		}
 
-		// Save blend map R path
+		// Blend map R
 		if(!blendMapPathR.empty())
 		{
+			// Convert to full path
+			if(!Config::getInst().isApplicationExported())
+			{
+				blendMapPathR = string("game\\" + _currentProjectID + "\\" + blendMapPathR);
+			}
+
+			// Save path
 			texturePaths.push_back(blendMapPathR);
 		}
 
-		// Save blend map G path
+		// Blend map G
 		if(!blendMapPathG.empty())
 		{
+			// Convert to full path
+			if(!Config::getInst().isApplicationExported())
+			{
+				blendMapPathG = string("game\\" + _currentProjectID + "\\" + blendMapPathG);
+			}
+
+			// Save path
 			texturePaths.push_back(blendMapPathG);
 		}
 
-		// Save blend map B path
+		// Blend map B
 		if(!blendMapPathB.empty())
 		{
+			// Convert to full path
+			if(!Config::getInst().isApplicationExported())
+			{
+				blendMapPathB = string("game\\" + _currentProjectID + "\\" + blendMapPathB);
+			}
+
+			// Save path
 			texturePaths.push_back(blendMapPathB);
 		}
 	}
@@ -191,9 +254,16 @@ const vector<string> TerrainEditor::getAllTerrainBitmapPathsFromFile() const
 		heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
 		replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
 
-		// Save height map path
+		// Height map
 		if(!heightMapPath.empty())
 		{
+			// Convert to full path
+			if(!Config::getInst().isApplicationExported())
+			{
+				heightMapPath = string("game\\" + _currentProjectID + "\\" + heightMapPath);
+			}
+			
+			// Save path
 			bitmapPaths.push_back(heightMapPath);
 		}
 	}
@@ -302,54 +372,117 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 			// Diffuse map
 			if(!diffuseMapPath.empty())
 			{
+				// Convert to full path
+				if(!Config::getInst().isApplicationExported())
+				{
+					diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
+				}
+
+				// Set path
 				_fe3d.terrainEntity_setDiffuseMap(terrainID, diffuseMapPath);
 			}
 
 			// Normal map
 			if(!normalMapPath.empty())
 			{
+				// Convert to full path
+				if(!Config::getInst().isApplicationExported())
+				{
+					normalMapPath = string("game\\" + _currentProjectID + "\\" + normalMapPath);
+				}
+
+				// Set path
 				_fe3d.terrainEntity_setNormalMap(terrainID, normalMapPath);
 			}
 
 			// Normal map R
 			if(!normalMapPathR.empty())
 			{
+				// Convert to full path
+				if(!Config::getInst().isApplicationExported())
+				{
+					normalMapPathR = string("game\\" + _currentProjectID + "\\" + normalMapPathR);
+				}
+
+				// Set path
 				_fe3d.terrainEntity_setNormalMapR(terrainID, normalMapPathR);
 			}
 
 			// Normal map G
 			if(!normalMapPathG.empty())
 			{
+				// Convert to full path
+				if(!Config::getInst().isApplicationExported())
+				{
+					normalMapPathG = string("game\\" + _currentProjectID + "\\" + normalMapPathG);
+				}
+
+				// Set path
 				_fe3d.terrainEntity_setNormalMapG(terrainID, normalMapPathG);
 			}
 
 			// Normal map B
 			if(!normalMapPathB.empty())
 			{
+				// Convert to full path
+				if(!Config::getInst().isApplicationExported())
+				{
+					normalMapPathB = string("game\\" + _currentProjectID + "\\" + normalMapPathB);
+				}
+
+				// Set path
 				_fe3d.terrainEntity_setNormalMapB(terrainID, normalMapPathB);
 			}
 
 			// Blend map
 			if(!blendMapPath.empty())
 			{
+				// Convert to full path
+				if(!Config::getInst().isApplicationExported())
+				{
+					blendMapPath = string("game\\" + _currentProjectID + "\\" + blendMapPath);
+				}
+
+				// Set path
 				_fe3d.terrainEntity_setBlendMap(terrainID, blendMapPath);
 			}
 
 			// Blend map R
 			if(!blendMapPathR.empty())
 			{
+				// Convert to full path
+				if(!Config::getInst().isApplicationExported())
+				{
+					blendMapPathR = string("game\\" + _currentProjectID + "\\" + blendMapPathR);
+				}
+
+				// Set path
 				_fe3d.terrainEntity_setDiffuseMapR(terrainID, blendMapPathR);
 			}
 
 			// Blend map G
 			if(!blendMapPathG.empty())
 			{
+				// Convert to full path
+				if(!Config::getInst().isApplicationExported())
+				{
+					blendMapPathG = string("game\\" + _currentProjectID + "\\" + blendMapPathG);
+				}
+
+				// Set path
 				_fe3d.terrainEntity_setDiffuseMapG(terrainID, blendMapPathG);
 			}
 
 			// Blend map B
 			if(!blendMapPathB.empty())
 			{
+				// Convert to full path
+				if(!Config::getInst().isApplicationExported())
+				{
+					blendMapPathB = string("game\\" + _currentProjectID + "\\" + blendMapPathB);
+				}
+
+				// Set path
 				_fe3d.terrainEntity_setDiffuseMapB(terrainID, blendMapPathB);
 			}
 

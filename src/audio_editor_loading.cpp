@@ -49,7 +49,13 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile() const
 		audioPath = (audioPath == "?") ? "" : audioPath;
 		replace(audioPath.begin(), audioPath.end(), '?', ' ');
 
-		// Save file path
+		// Convert to full path
+		if(!Config::getInst().isApplicationExported())
+		{
+			audioPath = string("game\\" + _currentProjectID + "\\" + audioPath);
+		}
+
+		// Save path
 		audioPaths.push_back(audioPath);
 	}
 
@@ -101,6 +107,12 @@ const bool AudioEditor::loadAudioEntitiesFromFile()
 		// Perform empty string & space conversions
 		audioPath = (audioPath == "?") ? "" : audioPath;
 		replace(audioPath.begin(), audioPath.end(), '?', ' ');
+
+		// Convert to full path
+		if(!Config::getInst().isApplicationExported())
+		{
+			audioPath = string("game\\" + _currentProjectID + "\\" + audioPath);
+		}
 
 		// Create audio
 		_fe3d.sound_create(audioID, audioPath);

@@ -638,6 +638,12 @@ const bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			flareMapPath = (flareMapPath == "?") ? "" : flareMapPath;
 			replace(flareMapPath.begin(), flareMapPath.end(), '?', ' ');
 
+			// Convert to full path
+			if(!Config::getInst().isApplicationExported())
+			{
+				flareMapPath = string("game\\" + _currentProjectID + "\\" + flareMapPath);
+			}
+
 			// Enable lens flare
 			_fe3d.gfx_enableLensFlare();
 			_fe3d.gfx_setLensFlareMap(flareMapPath);

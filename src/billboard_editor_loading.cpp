@@ -65,15 +65,29 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile() const
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 
-		// Save diffuse map path
+		// Diffuse map
 		if(!diffuseMapPath.empty())
 		{
+			// Convert to full path
+			if(!Config::getInst().isApplicationExported())
+			{
+				diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
+			}
+
+			// Save path
 			texturePaths.push_back(diffuseMapPath);
 		}
 
-		// Save emission map path
+		// Emission map
 		if(!emissionMapPath.empty())
 		{
+			// Convert to full path
+			if(!Config::getInst().isApplicationExported())
+			{
+				emissionMapPath = string("game\\" + _currentProjectID + "\\" + emissionMapPath);
+			}
+
+			// Save path
 			texturePaths.push_back(emissionMapPath);
 		}
 	}
@@ -141,9 +155,16 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile() const
 		fontPath = (fontPath == "?") ? "" : fontPath;
 		replace(fontPath.begin(), fontPath.end(), '?', ' ');
 
-		// Save file path
+		// Font
 		if(!fontPath.empty())
 		{
+			// Convert to full path
+			if(!Config::getInst().isApplicationExported())
+			{
+				fontPath = string("game\\" + _currentProjectID + "\\" + fontPath);
+			}
+
+			// Save path
 			fontPaths.push_back(fontPath);
 		}
 	}
@@ -241,7 +262,13 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 			// Diffuse map
 			if(!diffuseMapPath.empty())
 			{
-				// Set diffuse map
+				// Convert to full path
+				if(!Config::getInst().isApplicationExported())
+				{
+					diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
+				}
+
+				// Set path
 				_fe3d.billboardEntity_setDiffuseMap(billboardID, diffuseMapPath);
 
 				// Play sprite animation
@@ -257,12 +284,26 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 			// Emission map
 			if(!emissionMapPath.empty())
 			{
+				// Convert to full path
+				if(!Config::getInst().isApplicationExported())
+				{
+					emissionMapPath = string("game\\" + _currentProjectID + "\\" + emissionMapPath);
+				}
+
+				// Set path
 				_fe3d.billboardEntity_setEmissionMap(billboardID, emissionMapPath);
 			}
 
-			// Text
+			// Font
 			if(!fontPath.empty())
 			{
+				// Convert to full path
+				if(!Config::getInst().isApplicationExported())
+				{
+					fontPath = string("game\\" + _currentProjectID + "\\" + fontPath);
+				}
+
+				// Set path
 				_fe3d.billboardEntity_setFont(billboardID, fontPath);
 				_fe3d.billboardEntity_setTextContent(billboardID, textContent);
 			}

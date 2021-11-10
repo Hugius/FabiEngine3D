@@ -58,17 +58,42 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile() const
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 		replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
 
-		// Save file path
+		// DUDV map
 		if(!dudvMapPath.empty())
 		{
+			// Convert to full path
+			if(!Config::getInst().isApplicationExported())
+			{
+				dudvMapPath = string("game\\" + _currentProjectID + "\\" + dudvMapPath);
+			}
+
+			// Save path
 			texturePaths.push_back(dudvMapPath);
 		}
+
+		// Normal map
 		if(!normalMapPath.empty())
 		{
+			// Convert to full path
+			if(!Config::getInst().isApplicationExported())
+			{
+				normalMapPath = string("game\\" + _currentProjectID + "\\" + normalMapPath);
+			}
+
+			// Save path
 			texturePaths.push_back(normalMapPath);
 		}
+
+		// Displacement map
 		if(!displacementMapPath.empty())
 		{
+			// Convert to full path
+			if(!Config::getInst().isApplicationExported())
+			{
+				displacementMapPath = string("game\\" + _currentProjectID + "\\" + displacementMapPath);
+			}
+
+			// Save path
 			texturePaths.push_back(displacementMapPath);
 		}
 	}
@@ -164,18 +189,39 @@ const bool WaterEditor::loadWaterEntitiesFromFile()
 			// DUDV map
 			if(dudvMapPath != "")
 			{
+				// Convert to full path
+				if(!Config::getInst().isApplicationExported())
+				{
+					dudvMapPath = string("game\\" + _currentProjectID + "\\" + dudvMapPath);
+				}
+
+				// Set path
 				_fe3d.waterEntity_setDudvMap(waterID, dudvMapPath);
 			}
 
 			// Normal map
 			if(normalMapPath != "")
 			{
+				// Convert to full path
+				if(!Config::getInst().isApplicationExported())
+				{
+					normalMapPath = string("game\\" + _currentProjectID + "\\" + normalMapPath);
+				}
+
+				// Set path
 				_fe3d.waterEntity_setNormalMap(waterID, normalMapPath);
 			}
 
 			// Displacement map
 			if(displacementMapPath != "")
 			{
+				// Convert to full path
+				if(!Config::getInst().isApplicationExported())
+				{
+					displacementMapPath = string("game\\" + _currentProjectID + "\\" + displacementMapPath);
+				}
+
+				// Set path
 				_fe3d.waterEntity_setDisplacementMap(waterID, displacementMapPath);
 			}
 

@@ -33,10 +33,18 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 
 			// Create image
 			_fe3d.imageEntity_create(ID, true);
+
+			// Set diffuse map
+			const auto isExported = Config::getInst().isApplicationExported();
+			const auto rootPath = Tools::getRootDirectoryPath();
+			const string targetDirectoryPath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\assets\\textures\\image_maps\\");
+			const string filePath = (targetDirectoryPath + arguments[1].getString());
+			_fe3d.imageEntity_setDiffuseMap(ID, filePath);
+
+			// Set properties
 			_fe3d.imageEntity_setPosition(ID, _convertGuiPositionToViewport(Vec2(arguments[2].getDecimal(), arguments[3].getDecimal())));
 			_fe3d.imageEntity_setRotation(ID, arguments[4].getDecimal());
 			_fe3d.imageEntity_setSize(ID, _convertGuiSizeToViewport(Vec2(arguments[5].getDecimal(), arguments[6].getDecimal())));
-			_fe3d.imageEntity_setDiffuseMap(ID, string(("game_assets\\textures\\image_maps\\") + arguments[1].getString()));
 
 			// In-engine viewport boundaries
 			if(!Config::getInst().isApplicationExported())

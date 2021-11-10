@@ -25,11 +25,11 @@ const bool AudioEditor::saveAudioEntitiesToFile() const
 	ofstream file;
 	if(Config::getInst().isApplicationExported())
 	{
-		file.open(Tools::getRootDirectoryPath() + "data\\billboard.fe3d");
+		file.open(Tools::getRootDirectoryPath() + "data\\audio.fe3d");
 	}
 	else
 	{
-		file.open(Tools::getRootDirectoryPath() + "game\\" + _currentProjectID + "\\data\\billboard.fe3d");
+		file.open(Tools::getRootDirectoryPath() + "game\\" + _currentProjectID + "\\data\\audio.fe3d");
 	}
 
 	// Write audio data

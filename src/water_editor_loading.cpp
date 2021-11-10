@@ -18,9 +18,9 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile() const
 	}
 
 	// Compose file path
-	const bool isExported = Config::getInst().isApplicationExported();
-	const string rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\data\\water.fe3d");
+	const auto isExported = Config::getInst().isApplicationExported();
+	const auto rootPath = Tools::getRootDirectoryPath();
+	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\water.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -92,8 +92,8 @@ const bool WaterEditor::loadWaterEntitiesFromFile()
 	_loadedWaterIDs.clear();
 
 	// Compose file path
-	const bool isExported = Config::getInst().isApplicationExported();
-	const string rootPath = Tools::getRootDirectoryPath();
+	const auto isExported = Config::getInst().isApplicationExported();
+	const auto rootPath = Tools::getRootDirectoryPath();
 	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\data\\water.fe3d");
 
 	// Warning checking

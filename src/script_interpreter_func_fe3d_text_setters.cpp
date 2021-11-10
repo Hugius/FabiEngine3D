@@ -33,10 +33,17 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 
 			// Create text
 			_fe3d.textEntity_create(ID, true, true);
+
+			// Set font
+			const auto isExported = Config::getInst().isApplicationExported();
+			const auto rootPath = Tools::getRootDirectoryPath();
+			const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "assets\\fonts\\" + arguments[1].getString());
+			_fe3d.textEntity_setFont(ID, filePath);
+
+			// Set properties
 			_fe3d.textEntity_setPosition(ID, _convertGuiPositionToViewport(Vec2(arguments[3].getDecimal(), arguments[4].getDecimal())));
 			_fe3d.textEntity_setRotation(ID, arguments[5].getDecimal());
 			_fe3d.textEntity_setSize(ID, _convertGuiSizeToViewport(Vec2(arguments[6].getDecimal(), arguments[7].getDecimal())));
-			_fe3d.textEntity_setFont(ID, string(_currentProjectID + "\\assets\\fonts\\") + arguments[1].getString());
 			_fe3d.textEntity_setTextContent(ID, arguments[2].getString());
 
 			// In-engine viewport boundaries

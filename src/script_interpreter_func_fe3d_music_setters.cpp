@@ -1,4 +1,6 @@
 #include "script_interpreter.hpp"
+#include "configuration.hpp"
+#include "tools.hpp"
 
 using SVT = ScriptValueType;
 
@@ -12,7 +14,15 @@ const bool ScriptInterpreter::_executeFe3dMusicSetterFunction(const string& func
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.music_addToPlaylist(string(_currentProjectID + "\\assets\\audio\\" + arguments[0].getString()));
+			// Compose file path
+			const auto isExported = Config::getInst().isApplicationExported();
+			const auto rootPath = Tools::getRootDirectoryPath();
+			const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "assets\\audio\\" + arguments[0].getString());
+
+			// Add to playlist
+			_fe3d.music_addToPlaylist(filePath);
+
+			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

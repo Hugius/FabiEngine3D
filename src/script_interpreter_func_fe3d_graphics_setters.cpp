@@ -1,4 +1,6 @@
 #include "script_interpreter.hpp"
+#include "configuration.hpp"
+#include "tools.hpp"
 
 using SVT = ScriptValueType;
 
@@ -201,9 +203,16 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			const string targetDirectoryPath = string("game\\" + _currentProjectID + "\\assets\\textures\\flare_maps\\");
+			// Compose file path
+			const auto isExported = Config::getInst().isApplicationExported();
+			const auto rootPath = Tools::getRootDirectoryPath();
+			const string targetDirectoryPath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\assets\\textures\\flare_maps\\");
 			const string filePath = (targetDirectoryPath + arguments[0].getString());
+
+			// Set flare map
 			_fe3d.gfx_setLensFlareMap(filePath);
+
+			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

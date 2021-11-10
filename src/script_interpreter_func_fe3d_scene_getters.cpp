@@ -24,9 +24,10 @@ const bool ScriptInterpreter::_executeFe3dSceneGetterFunction(const string& func
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Compose file path
-			string directoryPath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-									("game\\" + _currentProjectID)) + "\\scenes\\custom\\");
-			string filePath = (directoryPath + arguments[0].getString() + ".fe3d");
+			const auto isExported = Config::getInst().isApplicationExported();
+			const auto rootPath = Tools::getRootDirectoryPath();
+			const string directoryPath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\scenes\\custom\\");
+			const string filePath = string(directoryPath + arguments[0].getString() + ".fe3d");
 
 			// Return
 			auto result = Tools::isFileExisting(filePath);

@@ -19,9 +19,10 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string&
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose directory paths
-			string directoryPath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-				("game\\" + _currentProjectID)) + "\\saves\\");
-			string newDirectoryPath = string(directoryPath + arguments[0].getString());
+			const auto isExported = Config::getInst().isApplicationExported();
+			const auto rootPath = Tools::getRootDirectoryPath();
+			const string directoryPath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\saves\\");
+			const string newDirectoryPath = string(directoryPath + arguments[0].getString());
 
 			// Return
 			auto result = Tools::isDirectoryExisting(newDirectoryPath);
@@ -36,9 +37,10 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string&
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path
-			string directoryPath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-				("game\\" + _currentProjectID)) + "\\saves\\");
-			string filePath = (directoryPath + arguments[0].getString());
+			const auto isExported = Config::getInst().isApplicationExported();
+			const auto rootPath = Tools::getRootDirectoryPath();
+			const string directoryPath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\saves\\");
+			const string filePath = (directoryPath + arguments[0].getString());
 
 			// Return
 			auto result = Tools::isFileExisting(filePath);
@@ -53,9 +55,10 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string&
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path
-			string directoryPath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-				("game\\" + _currentProjectID)) + "\\saves\\");
-			string filePath = (directoryPath + arguments[0].getString());
+			const auto isExported = Config::getInst().isApplicationExported();
+			const auto rootPath = Tools::getRootDirectoryPath();
+			const string directoryPath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\saves\\");
+			const string filePath = (directoryPath + arguments[0].getString());
 
 			// Check if file exists
 			if(Tools::isFileExisting(filePath))

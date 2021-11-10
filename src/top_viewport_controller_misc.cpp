@@ -59,7 +59,7 @@ void TopViewportController::_updateProjectCreating()
 		{
 			// Temporary values
 			const string projectDirectoryPath = (Tools::getRootDirectoryPath() + "game\\");
-			const string newProjectDirectoryPath = (projectDirectoryPath + newProjectID);
+			const string newProjectDirectoryPath = (projectDirectoryPath + newProjectID + "\\");
 
 			// Check if game directory exists
 			if(!Tools::isDirectoryExisting(projectDirectoryPath))
@@ -89,32 +89,32 @@ void TopViewportController::_updateProjectCreating()
 				Tools::createDirectory(newProjectDirectoryPath);
 
 				// Generate project subdirectories
-				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\audio\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\fonts\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\meshes\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\blend_maps\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\cube_maps\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\diffuse_maps\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\displacement_maps\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\dudv_maps\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\emission_maps\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\flare_maps\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\height_maps\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\image_maps\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\normal_maps\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\reflection_maps\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\assets\\textures\\specular_maps\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\data\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\saves\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\scenes\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\scenes\\custom\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\scenes\\editor\\");
-				Tools::createDirectory(newProjectDirectoryPath + "\\scripts\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\audio\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\fonts\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\meshes\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\textures\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\textures\\blend_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\textures\\cube_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\textures\\diffuse_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\textures\\displacement_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\textures\\dudv_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\textures\\emission_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\textures\\flare_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\textures\\height_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\textures\\image_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\textures\\normal_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\textures\\reflection_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\textures\\specular_maps\\");
+				Tools::createDirectory(newProjectDirectoryPath + "data\\");
+				Tools::createDirectory(newProjectDirectoryPath + "saves\\");
+				Tools::createDirectory(newProjectDirectoryPath + "scenes\\");
+				Tools::createDirectory(newProjectDirectoryPath + "scenes\\custom\\");
+				Tools::createDirectory(newProjectDirectoryPath + "scenes\\editor\\");
+				Tools::createDirectory(newProjectDirectoryPath + "scripts\\");
 
 				// Create config file
-				auto file = ofstream(string(newProjectDirectoryPath + "\\config.fe3d"));
+				auto file = ofstream(newProjectDirectoryPath + "config.fe3d");
 				file << "window_size_multiplier = 0.75" << endl;
 				file << "window_fullscreen      = false" << endl;
 				file << "window_borderless      = false" << endl;
@@ -122,21 +122,21 @@ void TopViewportController::_updateProjectCreating()
 
 				// Create new empty project files 
 				file.close();
-				file = ofstream(string(newProjectDirectoryPath + "\\data\\audio.fe3d"));
+				file = ofstream(newProjectDirectoryPath + "data\\audio.fe3d");
 				file.close();
-				file = ofstream(string(newProjectDirectoryPath + "\\data\\billboard.fe3d"));
+				file = ofstream(newProjectDirectoryPath + "data\\billboard.fe3d");
 				file.close();
-				file = ofstream(string(newProjectDirectoryPath + "\\data\\model.fe3d"));
+				file = ofstream(newProjectDirectoryPath + "data\\model.fe3d");
 				file.close();
-				file = ofstream(string(newProjectDirectoryPath + "\\data\\settings.fe3d"));
+				file = ofstream(newProjectDirectoryPath + "data\\settings.fe3d");
 				file.close();
-				file = ofstream(string(newProjectDirectoryPath + "\\data\\sky.fe3d"));
+				file = ofstream(newProjectDirectoryPath + "data\\sky.fe3d");
 				file.close();
-				file = ofstream(string(newProjectDirectoryPath + "\\data\\terrain.fe3d"));
+				file = ofstream(newProjectDirectoryPath + "data\\terrain.fe3d");
 				file.close();
-				file = ofstream(string(newProjectDirectoryPath + "\\data\\water.fe3d"));
+				file = ofstream(newProjectDirectoryPath + "data\\water.fe3d");
 				file.close();
-				file = ofstream(string(newProjectDirectoryPath + "\\data\\animation.fe3d"));
+				file = ofstream(newProjectDirectoryPath + "data\\animation.fe3d");
 				file.close();
 
 				// Load current project
@@ -184,7 +184,7 @@ void TopViewportController::_updateProjectLoading()
 	{
 		// Temporary values
 		const string clickedButtonID = _gui.getGlobalScreen()->checkChoiceForm("projectList");
-		const string projectDirectoryPath = Tools::getRootDirectoryPath() + "game\\" + clickedButtonID;
+		const string projectDirectoryPath = string(Tools::getRootDirectoryPath() + "game\\" + clickedButtonID + "\\");
 
 		// Check if user clicked a project ID
 		if(clickedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -402,26 +402,26 @@ const bool TopViewportController::isProjectCorrupted(const string& projectDirect
 {
 	// Check if all default directories are still existing
 	if(!Tools::isDirectoryExisting(projectDirectoryPath) ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "\\data") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "\\saves") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "\\scenes") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "\\scenes\\custom") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "\\scenes\\editor") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "\\scripts"))
+	   !Tools::isDirectoryExisting(projectDirectoryPath + "data") ||
+	   !Tools::isDirectoryExisting(projectDirectoryPath + "saves") ||
+	   !Tools::isDirectoryExisting(projectDirectoryPath + "scenes") ||
+	   !Tools::isDirectoryExisting(projectDirectoryPath + "scenes\\custom") ||
+	   !Tools::isDirectoryExisting(projectDirectoryPath + "scenes\\editor") ||
+	   !Tools::isDirectoryExisting(projectDirectoryPath + "scripts"))
 	{
 		return true;
 	}
 
 	// Check if all default files are still existing
-	if(!Tools::isFileExisting(projectDirectoryPath + "\\data\\animation.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "\\data\\audio.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "\\data\\billboard.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "\\data\\model.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "\\data\\sky.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "\\data\\terrain.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "\\data\\water.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "\\data\\settings.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "\\config.fe3d"))
+	if(!Tools::isFileExisting(projectDirectoryPath + "data\\animation.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "data\\audio.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "data\\billboard.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "data\\model.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "data\\sky.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "data\\terrain.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "data\\water.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "data\\settings.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "config.fe3d"))
 	{
 		return true;
 	}

@@ -18,9 +18,9 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 	}
 
 	// Compose file path
-	const bool isExported = Config::getInst().isApplicationExported();
-	const string rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\data\\terrain.fe3d");
+	const auto isExported = Config::getInst().isApplicationExported();
+	const auto rootPath = Tools::getRootDirectoryPath();
+	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\terrain.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -157,9 +157,9 @@ const vector<string> TerrainEditor::getAllTerrainBitmapPathsFromFile() const
 	}
 
 	// Compose file path
-	const bool isExported = Config::getInst().isApplicationExported();
-	const string rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(filePath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\data\\terrain.fe3d");
+	const auto isExported = Config::getInst().isApplicationExported();
+	const auto rootPath = Tools::getRootDirectoryPath();
+	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\terrain.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -217,9 +217,9 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 	_loadedTerrainIDs.clear();
 
 	// Compose file path
-	const bool isExported = Config::getInst().isApplicationExported();
-	const string rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\data\\terrain.fe3d");
+	const auto isExported = Config::getInst().isApplicationExported();
+	const auto rootPath = Tools::getRootDirectoryPath();
+	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\terrain.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))

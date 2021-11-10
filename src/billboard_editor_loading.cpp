@@ -18,9 +18,9 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile() const
 	}
 
 	// Compose file path
-	const bool isExported = Config::getInst().isApplicationExported();
-	const string rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\data\\billboard.fe3d");
+	const auto isExported = Config::getInst().isApplicationExported();
+	const auto rootPath = Tools::getRootDirectoryPath();
+	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\billboard.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -94,9 +94,9 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile() const
 	}
 
 	// Compose file path
-	const bool isExported = Config::getInst().isApplicationExported();
-	const string rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\data\\billboard.fe3d");
+	const auto isExported = Config::getInst().isApplicationExported();
+	const auto rootPath = Tools::getRootDirectoryPath();
+	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\billboard.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -167,9 +167,9 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 	_loadedBillboardIDs.clear();
 
 	// Compose file path
-	const bool isExported = Config::getInst().isApplicationExported();
-	const string rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\data\\billboard.fe3d");
+	const auto isExported = Config::getInst().isApplicationExported();
+	const auto rootPath = Tools::getRootDirectoryPath();
+	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\billboard.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))

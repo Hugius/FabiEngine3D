@@ -108,8 +108,12 @@ const bool ScriptInterpreter::_validateSavesDirectory() const
 		Logger::throwError("ScriptInterpreter::_validateSavesDirectory");
 	}
 
+	// Compose directory path
+	const auto isExported = Config::getInst().isApplicationExported();
+	const auto rootPath = Tools::getRootDirectoryPath();
+	const auto directoryPath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\saves\\");
+
 	// Check if saves directory still exists
-	auto directoryPath = Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" : ("game\\" + _currentProjectID)) + "\\saves\\";
 	if(!Tools::isDirectoryExisting(directoryPath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: directory `saves\\` missing!");

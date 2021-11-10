@@ -63,62 +63,62 @@ void EngineController::FE3D_CONTROLLER_INIT()
 	{
 		// Cache engine meshes
 		vector<string> meshPaths;
-		meshPaths.push_back(string(meshDirectoryPath + "camera.obj"));
-		meshPaths.push_back(string(meshDirectoryPath + "cube.obj"));
-		meshPaths.push_back(string(meshDirectoryPath + "lamp.obj"));
-		meshPaths.push_back(string(meshDirectoryPath + "plane.obj"));
-		meshPaths.push_back(string(meshDirectoryPath + "speaker.obj"));
-		meshPaths.push_back(string(meshDirectoryPath + "torch.obj"));
+		meshPaths.push_back(meshDirectoryPath + "camera.obj");
+		meshPaths.push_back(meshDirectoryPath + "cube.obj");
+		meshPaths.push_back(meshDirectoryPath + "lamp.obj");
+		meshPaths.push_back(meshDirectoryPath + "plane.obj");
+		meshPaths.push_back(meshDirectoryPath + "speaker.obj");
+		meshPaths.push_back(meshDirectoryPath + "torch.obj");
 		misc_cacheMeshesMultiThreaded(meshPaths);
 
 		// Cache 2D engine textures
 		vector<string> texturePaths2D;
-		texturePaths2D.push_back(string(textureDirectoryPath + "a.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "b.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "backspace.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "c.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "color.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "ctrl.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "cube.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "cursor_default.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "cursor_pointing.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "cursor_text.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "d.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "debug.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "down.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "enter.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "esc.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "f.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "grid.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "h.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "left.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "light_source.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "minus.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "mouse.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "mouse_left.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "mouse_middle.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "mouse_right.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "p.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "pause.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "play.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "plus.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "position.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "r.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "radius.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "restart.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "right.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "rotation.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "s.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "settings.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "shape_circle.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "shape_square.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "shift.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "size.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "space.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "stop.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "up.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "v.png"));
-		texturePaths2D.push_back(string(textureDirectoryPath + "w.png"));
+		texturePaths2D.push_back(textureDirectoryPath + "a.png");
+		texturePaths2D.push_back(textureDirectoryPath + "b.png");
+		texturePaths2D.push_back(textureDirectoryPath + "backspace.png");
+		texturePaths2D.push_back(textureDirectoryPath + "c.png");
+		texturePaths2D.push_back(textureDirectoryPath + "color.png");
+		texturePaths2D.push_back(textureDirectoryPath + "ctrl.png");
+		texturePaths2D.push_back(textureDirectoryPath + "cube.png");
+		texturePaths2D.push_back(textureDirectoryPath + "cursor_default.png");
+		texturePaths2D.push_back(textureDirectoryPath + "cursor_pointing.png");
+		texturePaths2D.push_back(textureDirectoryPath + "cursor_text.png");
+		texturePaths2D.push_back(textureDirectoryPath + "d.png");
+		texturePaths2D.push_back(textureDirectoryPath + "debug.png");
+		texturePaths2D.push_back(textureDirectoryPath + "down.png");
+		texturePaths2D.push_back(textureDirectoryPath + "enter.png");
+		texturePaths2D.push_back(textureDirectoryPath + "esc.png");
+		texturePaths2D.push_back(textureDirectoryPath + "f.png");
+		texturePaths2D.push_back(textureDirectoryPath + "grid.png");
+		texturePaths2D.push_back(textureDirectoryPath + "h.png");
+		texturePaths2D.push_back(textureDirectoryPath + "left.png");
+		texturePaths2D.push_back(textureDirectoryPath + "light_source.png");
+		texturePaths2D.push_back(textureDirectoryPath + "minus.png");
+		texturePaths2D.push_back(textureDirectoryPath + "mouse.png");
+		texturePaths2D.push_back(textureDirectoryPath + "mouse_left.png");
+		texturePaths2D.push_back(textureDirectoryPath + "mouse_middle.png");
+		texturePaths2D.push_back(textureDirectoryPath + "mouse_right.png");
+		texturePaths2D.push_back(textureDirectoryPath + "p.png");
+		texturePaths2D.push_back(textureDirectoryPath + "pause.png");
+		texturePaths2D.push_back(textureDirectoryPath + "play.png");
+		texturePaths2D.push_back(textureDirectoryPath + "plus.png");
+		texturePaths2D.push_back(textureDirectoryPath + "position.png");
+		texturePaths2D.push_back(textureDirectoryPath + "r.png");
+		texturePaths2D.push_back(textureDirectoryPath + "radius.png");
+		texturePaths2D.push_back(textureDirectoryPath + "restart.png");
+		texturePaths2D.push_back(textureDirectoryPath + "right.png");
+		texturePaths2D.push_back(textureDirectoryPath + "rotation.png");
+		texturePaths2D.push_back(textureDirectoryPath + "s.png");
+		texturePaths2D.push_back(textureDirectoryPath + "settings.png");
+		texturePaths2D.push_back(textureDirectoryPath + "shape_circle.png");
+		texturePaths2D.push_back(textureDirectoryPath + "shape_square.png");
+		texturePaths2D.push_back(textureDirectoryPath + "shift.png");
+		texturePaths2D.push_back(textureDirectoryPath + "size.png");
+		texturePaths2D.push_back(textureDirectoryPath + "space.png");
+		texturePaths2D.push_back(textureDirectoryPath + "stop.png");
+		texturePaths2D.push_back(textureDirectoryPath + "up.png");
+		texturePaths2D.push_back(textureDirectoryPath + "v.png");
+		texturePaths2D.push_back(textureDirectoryPath + "w.png");
 		misc_cacheTexturesMultiThreaded2D(texturePaths2D);
 
 		// Cache 3D engine textures
@@ -133,7 +133,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 		// Cache engine fonts
 		vector<string> fontPaths;
-		fontPaths.push_back(string(fontDirectoryPath + "font.ttf"));
+		fontPaths.push_back(fontDirectoryPath + "font.ttf");
 		misc_cacheFontsMultiThreaded(fontPaths);
 
 		// Default rendering color

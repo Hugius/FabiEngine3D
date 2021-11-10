@@ -293,9 +293,9 @@ const bool SceneEditor::isSceneExisting(const string& fileName) const
 	}
 
 	// Compose file path
-	const bool isExported = Config::getInst().isApplicationExported();
-	const string rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\scenes\\editor\\" + fileName + ".fe3d");
+	const auto isExported = Config::getInst().isApplicationExported();
+	const auto rootPath = Tools::getRootDirectoryPath();
+	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "scenes\\editor\\" + fileName + ".fe3d");
 
 	// Check if scene file exists
 	return Tools::isFileExisting(filePath);
@@ -317,8 +317,8 @@ const vector<string> SceneEditor::_getSceneIDs() const
 	vector<string> sceneIDs;
 
 	// Compose directory path
-	const bool isExported = Config::getInst().isApplicationExported();
-	const string rootPath = Tools::getRootDirectoryPath();
+	const auto isExported = Config::getInst().isApplicationExported();
+	const auto rootPath = Tools::getRootDirectoryPath();
 	const string directoryPath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\scenes\\editor\\");
 
 	// Check if scenes directory exists
@@ -342,9 +342,9 @@ const vector<string> SceneEditor::_getSceneIDs() const
 void SceneEditor::_deleteSceneFile(const string& ID)
 {
 	// Compose full file path
-	const bool isExported = Config::getInst().isApplicationExported();
-	const string rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\scenes\\editor\\" + ID + ".fe3d");
+	const auto isExported = Config::getInst().isApplicationExported();
+	const auto rootPath = Tools::getRootDirectoryPath();
+	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "scenes\\editor\\" + ID + ".fe3d");
 
 	// Check if scene file is still existing
 	if(Tools::isFileExisting(filePath))

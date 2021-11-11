@@ -6,6 +6,20 @@ FabiEngine3D is a custom game engine, created for simple 3D video games on PC. I
 
 `Development started on April 7, 2020.`
 
+![starvation](doc/images/engine.png)
+
+## Games
+
+### Starvation
+
+A singleplayer medieval first person survival game in which you have only 1 enemy: death! There are multiple survival factors that you need to watch out for, such as: hunger, thirst, body temperature, oxygen and sickness. You will have to figure out on your own how to surive the longest using tools, resources, animals and buildings, before the Grim Reaper comes for your soul...
+![starvation](doc/images/starvation.png)
+
+### White Noise
+
+A multiplayer first person shooter game based in a science-fiction setting: a space station! You can join a server with up to 3 other friends to see who is the best at shooting each other. Watch out, because 1 bullet is enough to make the endless void of space your final resting place!
+![white_noise](doc/images/white_noise.png)
+
 ## Documentation
 
 - [Theoretical Framework](doc/documents/THEORETICAL_FRAMEWORK.md)
@@ -22,15 +36,3 @@ FabiEngine3D is a custom game engine, created for simple 3D video games on PC. I
 - [Networking](doc/documents/NETWORKING.md)
 - [Runtime](doc/documents/RUNTIME.md)
 - [Miscellaneous](doc/documents/MISCELLANEOUS.md)
-
-## Games
-
-### Starvation
-
-A singleplayer medieval first person survival game in which you have only 1 enemy: death! There are multiple survival factors that you need to watch out for, such as: hunger, thirst, body temperature, oxygen and sickness. You will have to figure out on your own how to surive the longest using tools, resources, animals and buildings, before the Grim Reaper comes for your soul...
-![starvation](doc/images/starvation.png)
-
-### White Noise
-
-A multiplayer first person shooter game based in a science-fiction setting: a space station! You can join a server with up to 3 other friends to see who is the best at shooting each other. Watch out, because 1 bullet is enough to make the endless void of space your final resting place!
-![white_noise](doc/images/white_noise.png)

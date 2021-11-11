@@ -72,6 +72,18 @@ const bool TerrainEditor::saveTerrainEntitiesToFile() const
 		replace(normalMapPathG.begin(), normalMapPathG.end(), ' ', '?');
 		replace(normalMapPathB.begin(), normalMapPathB.end(), ' ', '?');
 
+		// Convert to short path
+		heightMapPath = heightMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
+		diffuseMapPath = diffuseMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
+		normalMapPath = normalMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
+		blendMapPath = blendMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
+		blendMapPathR = blendMapPathR.substr(string("game\\" + _currentProjectID + "\\").size());
+		blendMapPathG = blendMapPathG.substr(string("game\\" + _currentProjectID + "\\").size());
+		blendMapPathB = blendMapPathB.substr(string("game\\" + _currentProjectID + "\\").size());
+		normalMapPathR = normalMapPathR.substr(string("game\\" + _currentProjectID + "\\").size());
+		normalMapPathG = normalMapPathG.substr(string("game\\" + _currentProjectID + "\\").size());
+		normalMapPathB = normalMapPathB.substr(string("game\\" + _currentProjectID + "\\").size());
+
 		// Write terrain data to file
 		file <<
 			terrainID << " " <<

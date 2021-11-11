@@ -61,6 +61,11 @@ const bool WaterEditor::saveWaterEntitiesToFile() const
 		replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
 		replace(displacementMapPath.begin(), displacementMapPath.end(), ' ', '?');
 
+		// Convert to short path
+		dudvMapPath = dudvMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
+		normalMapPath = normalMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
+		displacementMapPath = displacementMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
+
 		// Write data to file
 		file <<
 			waterID << " " <<

@@ -61,7 +61,7 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile() const
 		// DUDV map
 		if(!dudvMapPath.empty())
 		{
-			// Convert to full path
+			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				dudvMapPath = string("game\\" + _currentProjectID + "\\" + dudvMapPath);
@@ -74,7 +74,7 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile() const
 		// Normal map
 		if(!normalMapPath.empty())
 		{
-			// Convert to full path
+			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				normalMapPath = string("game\\" + _currentProjectID + "\\" + normalMapPath);
@@ -87,7 +87,7 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile() const
 		// Displacement map
 		if(!displacementMapPath.empty())
 		{
-			// Convert to full path
+			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				displacementMapPath = string("game\\" + _currentProjectID + "\\" + displacementMapPath);
@@ -189,7 +189,7 @@ const bool WaterEditor::loadWaterEntitiesFromFile()
 			// DUDV map
 			if(dudvMapPath != "")
 			{
-				// Convert to full path
+				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
 					dudvMapPath = string("game\\" + _currentProjectID + "\\" + dudvMapPath);
@@ -202,7 +202,7 @@ const bool WaterEditor::loadWaterEntitiesFromFile()
 			// Normal map
 			if(normalMapPath != "")
 			{
-				// Convert to full path
+				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
 					normalMapPath = string("game\\" + _currentProjectID + "\\" + normalMapPath);
@@ -215,7 +215,7 @@ const bool WaterEditor::loadWaterEntitiesFromFile()
 			// Displacement map
 			if(displacementMapPath != "")
 			{
-				// Convert to full path
+				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
 					displacementMapPath = string("game\\" + _currentProjectID + "\\" + displacementMapPath);

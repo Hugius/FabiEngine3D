@@ -63,6 +63,11 @@ const bool BillboardEditor::saveBillboardEntitiesToFile() const
 		replace(fontPath.begin(), fontPath.end(), ' ', '?');
 		replace(textContent.begin(), textContent.end(), ' ', '?');
 
+		// Convert to short path
+		diffuseMapPath = diffuseMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
+		emissionMapPath = emissionMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
+		fontPath = fontPath.substr(string("game\\" + _currentProjectID + "\\").size());
+
 		// Write data to file
 		file <<
 			billboardID << " " <<

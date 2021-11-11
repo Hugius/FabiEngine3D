@@ -68,7 +68,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile() const
 		// Diffuse map
 		if(!diffuseMapPath.empty())
 		{
-			// Convert to full path
+			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
@@ -81,7 +81,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile() const
 		// Emission map
 		if(!emissionMapPath.empty())
 		{
-			// Convert to full path
+			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				emissionMapPath = string("game\\" + _currentProjectID + "\\" + emissionMapPath);
@@ -158,7 +158,7 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile() const
 		// Font
 		if(!fontPath.empty())
 		{
-			// Convert to full path
+			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				fontPath = string("game\\" + _currentProjectID + "\\" + fontPath);
@@ -262,7 +262,7 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 			// Diffuse map
 			if(!diffuseMapPath.empty())
 			{
-				// Convert to full path
+				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
 					diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
@@ -284,7 +284,7 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 			// Emission map
 			if(!emissionMapPath.empty())
 			{
-				// Convert to full path
+				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
 					emissionMapPath = string("game\\" + _currentProjectID + "\\" + emissionMapPath);
@@ -297,7 +297,7 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 			// Font
 			if(!fontPath.empty())
 			{
-				// Convert to full path
+				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
 					fontPath = string("game\\" + _currentProjectID + "\\" + fontPath);

@@ -59,7 +59,7 @@ const vector<string> ModelEditor::getAllMeshPathsFromFile() const
 			meshPath = (meshPath == "?") ? "" : meshPath;
 			replace(meshPath.begin(), meshPath.end(), '?', ' ');
 
-			// Convert to full path
+			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				meshPath = string("game\\" + _currentProjectID + "\\" + meshPath);
@@ -185,7 +185,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 				// Diffuse map
 				if(!diffuseMapPath.empty())
 				{
-					// Convert to full path
+					// Convert to long path
 					if(!Config::getInst().isApplicationExported())
 					{
 						diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
@@ -198,7 +198,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 				// Emission map
 				if(!emissionMapPath.empty())
 				{
-					// Convert to full path
+					// Convert to long path
 					if(!Config::getInst().isApplicationExported())
 					{
 						emissionMapPath = string("game\\" + _currentProjectID + "\\" + emissionMapPath);
@@ -211,7 +211,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 				// Specular map
 				if(!specularMapPath.empty())
 				{
-					// Convert to full path
+					// Convert to long path
 					if(!Config::getInst().isApplicationExported())
 					{
 						specularMapPath = string("game\\" + _currentProjectID + "\\" + specularMapPath);
@@ -224,7 +224,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 				// Reflection map
 				if(!reflectionMapPath.empty())
 				{
-					// Convert to full path
+					// Convert to long path
 					if(!Config::getInst().isApplicationExported())
 					{
 						reflectionMapPath = string("game\\" + _currentProjectID + "\\" + reflectionMapPath);
@@ -237,7 +237,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 				// Normal map
 				if(!normalMapPath.empty())
 				{
-					// Convert to full path
+					// Convert to long path
 					if(!Config::getInst().isApplicationExported())
 					{
 						normalMapPath = string("game\\" + _currentProjectID + "\\" + normalMapPath);
@@ -321,7 +321,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 			replace(meshPath.begin(), meshPath.end(), '?', ' ');
 			replace(lodEntityID.begin(), lodEntityID.end(), '?', ' ');
 
-			// Convert to full path
+			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				meshPath = string("game\\" + _currentProjectID + "\\" + meshPath);
@@ -402,7 +402,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 					// Diffuse map
 					if(!diffuseMapPath.empty())
 					{
-						// Convert to full path
+						// Convert to long path
 						if(!Config::getInst().isApplicationExported())
 						{
 							diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
@@ -415,7 +415,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 					// Specular map
 					if(!specularMapPath.empty())
 					{
-						// Convert to full path
+						// Convert to long path
 						if(!Config::getInst().isApplicationExported())
 						{
 							specularMapPath = string("game\\" + _currentProjectID + "\\" + specularMapPath);
@@ -428,7 +428,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 					// Emission map
 					if(!emissionMapPath.empty())
 					{
-						// Convert to full path
+						// Convert to long path
 						if(!Config::getInst().isApplicationExported())
 						{
 							emissionMapPath = string("game\\" + _currentProjectID + "\\" + emissionMapPath);
@@ -441,7 +441,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 					// Reflection map
 					if(!reflectionMapPath.empty())
 					{
-						// Convert to full path
+						// Convert to long path
 						if(!Config::getInst().isApplicationExported())
 						{
 							reflectionMapPath = string("game\\" + _currentProjectID + "\\" + reflectionMapPath);
@@ -454,7 +454,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 					// Normal map
 					if(!normalMapPath.empty())
 					{
-						// Convert to full path
+						// Convert to long path
 						if(!Config::getInst().isApplicationExported())
 						{
 							normalMapPath = string("game\\" + _currentProjectID + "\\" + normalMapPath);

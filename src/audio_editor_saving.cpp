@@ -42,6 +42,9 @@ const bool AudioEditor::saveAudioEntitiesToFile() const
 		audioPath = (audioPath.empty()) ? "?" : audioPath;
 		replace(audioPath.begin(), audioPath.end(), ' ', '?');
 
+		// Convert to short path
+		audioPath = audioPath.substr(string("game\\" + _currentProjectID + "\\").size());
+
 		// Write data to file
 		file << audioID << " " << audioPath << endl;
 	}

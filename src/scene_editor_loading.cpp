@@ -638,7 +638,7 @@ const bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			flareMapPath = (flareMapPath == "?") ? "" : flareMapPath;
 			replace(flareMapPath.begin(), flareMapPath.end(), '?', ' ');
 
-			// Convert to full path
+			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				flareMapPath = string("game\\" + _currentProjectID + "\\" + flareMapPath);

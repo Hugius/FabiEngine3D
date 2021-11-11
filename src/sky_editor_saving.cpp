@@ -37,15 +37,19 @@ const bool SkyEditor::saveSkyEntitiesToFile() const
 	{
 		// Values
 		auto diffuseMapPaths = _fe3d.skyEntity_getDiffuseMapPaths(skyID);
-		float rotationSpeed = _fe3d.skyEntity_getRotationSpeed(skyID);
-		float lightness = _fe3d.skyEntity_getLightness(skyID);
-		Vec3 color = _fe3d.skyEntity_getColor(skyID);
+		auto rotationSpeed = _fe3d.skyEntity_getRotationSpeed(skyID);
+		auto lightness = _fe3d.skyEntity_getLightness(skyID);
+		auto color = _fe3d.skyEntity_getColor(skyID);
 
-		// Perform empty string & space conversions
+		// Iterate through paths
 		for(auto& diffuseMapPath : diffuseMapPaths)
 		{
+			// Perform empty string & space conversions
 			diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
+
+			// Convert to short path
+			diffuseMapPath = diffuseMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
 		}
 
 		// Write ID to file

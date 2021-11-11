@@ -89,7 +89,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 		// Diffuse map
 		if(!diffuseMapPath.empty())
 		{
-			// Convert to full path
+			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
@@ -102,7 +102,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 		// Normal map
 		if(!normalMapPath.empty())
 		{
-			// Convert to full path
+			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				normalMapPath = string("game\\" + _currentProjectID + "\\" + normalMapPath);
@@ -115,7 +115,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 		// Normal map R
 		if(!normalMapPathR.empty())
 		{
-			// Convert to full path
+			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				normalMapPathR = string("game\\" + _currentProjectID + "\\" + normalMapPathR);
@@ -128,7 +128,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 		// Normal map G
 		if(!normalMapPathG.empty())
 		{
-			// Convert to full path
+			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				normalMapPathG = string("game\\" + _currentProjectID + "\\" + normalMapPathG);
@@ -141,7 +141,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 		// Normal map B
 		if(!normalMapPathB.empty())
 		{
-			// Convert to full path
+			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				normalMapPathB = string("game\\" + _currentProjectID + "\\" + normalMapPathB);
@@ -154,7 +154,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 		// Blend map
 		if(!blendMapPath.empty())
 		{
-			// Convert to full path
+			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				blendMapPath = string("game\\" + _currentProjectID + "\\" + blendMapPath);
@@ -167,7 +167,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 		// Blend map R
 		if(!blendMapPathR.empty())
 		{
-			// Convert to full path
+			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				blendMapPathR = string("game\\" + _currentProjectID + "\\" + blendMapPathR);
@@ -180,7 +180,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 		// Blend map G
 		if(!blendMapPathG.empty())
 		{
-			// Convert to full path
+			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				blendMapPathG = string("game\\" + _currentProjectID + "\\" + blendMapPathG);
@@ -193,7 +193,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 		// Blend map B
 		if(!blendMapPathB.empty())
 		{
-			// Convert to full path
+			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				blendMapPathB = string("game\\" + _currentProjectID + "\\" + blendMapPathB);
@@ -257,7 +257,7 @@ const vector<string> TerrainEditor::getAllTerrainBitmapPathsFromFile() const
 		// Height map
 		if(!heightMapPath.empty())
 		{
-			// Convert to full path
+			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				heightMapPath = string("game\\" + _currentProjectID + "\\" + heightMapPath);
@@ -372,7 +372,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 			// Diffuse map
 			if(!diffuseMapPath.empty())
 			{
-				// Convert to full path
+				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
 					diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
@@ -385,7 +385,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 			// Normal map
 			if(!normalMapPath.empty())
 			{
-				// Convert to full path
+				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
 					normalMapPath = string("game\\" + _currentProjectID + "\\" + normalMapPath);
@@ -398,7 +398,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 			// Normal map R
 			if(!normalMapPathR.empty())
 			{
-				// Convert to full path
+				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
 					normalMapPathR = string("game\\" + _currentProjectID + "\\" + normalMapPathR);
@@ -411,7 +411,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 			// Normal map G
 			if(!normalMapPathG.empty())
 			{
-				// Convert to full path
+				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
 					normalMapPathG = string("game\\" + _currentProjectID + "\\" + normalMapPathG);
@@ -424,7 +424,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 			// Normal map B
 			if(!normalMapPathB.empty())
 			{
-				// Convert to full path
+				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
 					normalMapPathB = string("game\\" + _currentProjectID + "\\" + normalMapPathB);
@@ -437,7 +437,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 			// Blend map
 			if(!blendMapPath.empty())
 			{
-				// Convert to full path
+				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
 					blendMapPath = string("game\\" + _currentProjectID + "\\" + blendMapPath);
@@ -450,7 +450,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 			// Blend map R
 			if(!blendMapPathR.empty())
 			{
-				// Convert to full path
+				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
 					blendMapPathR = string("game\\" + _currentProjectID + "\\" + blendMapPathR);
@@ -463,7 +463,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 			// Blend map G
 			if(!blendMapPathG.empty())
 			{
-				// Convert to full path
+				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
 					blendMapPathG = string("game\\" + _currentProjectID + "\\" + blendMapPathG);
@@ -476,7 +476,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 			// Blend map B
 			if(!blendMapPathB.empty())
 			{
-				// Convert to full path
+				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
 					blendMapPathB = string("game\\" + _currentProjectID + "\\" + blendMapPathB);

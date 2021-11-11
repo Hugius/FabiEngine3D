@@ -49,7 +49,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile() const
 		audioPath = (audioPath == "?") ? "" : audioPath;
 		replace(audioPath.begin(), audioPath.end(), '?', ' ');
 
-		// Convert to full path
+		// Convert to long path
 		if(!Config::getInst().isApplicationExported())
 		{
 			audioPath = string("game\\" + _currentProjectID + "\\" + audioPath);
@@ -108,7 +108,7 @@ const bool AudioEditor::loadAudioEntitiesFromFile()
 		audioPath = (audioPath == "?") ? "" : audioPath;
 		replace(audioPath.begin(), audioPath.end(), '?', ' ');
 
-		// Convert to full path
+		// Convert to long path
 		if(!Config::getInst().isApplicationExported())
 		{
 			audioPath = string("game\\" + _currentProjectID + "\\" + audioPath);

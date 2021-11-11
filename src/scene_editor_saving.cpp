@@ -464,6 +464,9 @@ const bool SceneEditor::saveEditorSceneToFile()
 		flareMapPath = (flareMapPath.empty()) ? "?" : flareMapPath;
 		replace(flareMapPath.begin(), flareMapPath.end(), ' ', '?');
 
+		// Convert to short path
+		flareMapPath = flareMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
+
 		// Write data
 		file <<
 			"GRAPHICS_LENS_FLARE " <<

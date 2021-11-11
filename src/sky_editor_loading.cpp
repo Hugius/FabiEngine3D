@@ -61,7 +61,7 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile() const
 			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 
-			// Convert to full path
+			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
@@ -140,7 +140,7 @@ const bool SkyEditor::loadSkyEntitiesFromFile()
 			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 
-			// Convert to full path
+			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);

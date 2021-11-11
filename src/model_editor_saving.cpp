@@ -52,6 +52,9 @@ const bool ModelEditor::saveModelEntitiesToFile() const
 		replace(meshPath.begin(), meshPath.end(), ' ', '?');
 		replace(lodEntityID.begin(), lodEntityID.end(), ' ', '?');
 
+		// Convert to short path
+		meshPath = meshPath.substr(string("game\\" + _currentProjectID + "\\").size());
+
 		// Write data to file
 		file << "MODEL " <<
 			modelID << " " <<
@@ -100,6 +103,13 @@ const bool ModelEditor::saveModelEntitiesToFile() const
 			replace(specularMapPath.begin(), specularMapPath.end(), ' ', '?');
 			replace(reflectionMapPath.begin(), reflectionMapPath.end(), ' ', '?');
 			replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
+
+			// Convert to short path
+			diffuseMapPath = diffuseMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
+			emissionMapPath = emissionMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
+			specularMapPath = specularMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
+			reflectionMapPath = reflectionMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
+			normalMapPath = normalMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
 
 			// Write data to file
 			file <<

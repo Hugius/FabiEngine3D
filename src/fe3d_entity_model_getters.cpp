@@ -14,6 +14,7 @@ const bool FabiEngine3D::modelEntity_isVisible(const string& ID) const
 const bool FabiEngine3D::modelEntity_isInstanced(const string& ID) const
 {
 	auto entity = _core->_modelEntityManager.getEntity(ID);
+
 	return entity->getRenderBuffer(entity->getPartIDs()[0])->isInstanced();
 }
 
@@ -252,18 +253,9 @@ const string& FabiEngine3D::modelEntity_getLevelOfDetailEntityID(const string& I
 
 const vector<Vec3>& FabiEngine3D::modelEntity_getInstancedOffsets(const string& ID) const
 {
-	// Temporary values
 	auto entity = _core->_modelEntityManager.getEntity(ID);
 
-	// Check if model is instanced
-	if(modelEntity_isInstanced(ID))
-	{
-		return entity->getRenderBuffer(entity->getPartIDs()[0])->getInstancedOffsets();
-	}
-	else
-	{
-		return {};
-	}
+	return entity->getRenderBuffer(entity->getPartIDs()[0])->getInstancedOffsets();
 }
 
 const vector<string> FabiEngine3D::modelEntity_getPartIDs(const string& ID) const

@@ -66,7 +66,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 			normalMapPathG >>
 			normalMapPathB;
 
-		// Perform empty string & space conversions
+		// Convert empty string
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 		normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
 		normalMapPathR = (normalMapPathR == "?") ? "" : normalMapPathR;
@@ -76,6 +76,8 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 		blendMapPathR = (blendMapPathR == "?") ? "" : blendMapPathR;
 		blendMapPathG = (blendMapPathG == "?") ? "" : blendMapPathG;
 		blendMapPathB = (blendMapPathB == "?") ? "" : blendMapPathB;
+
+		// Convert spaces
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 		replace(normalMapPathR.begin(), normalMapPathR.end(), '?', ' ');
@@ -250,8 +252,10 @@ const vector<string> TerrainEditor::getAllTerrainBitmapPathsFromFile() const
 			terrainID >>
 			heightMapPath;
 
-		// Perform empty string & space conversions
+		// Convert empty string
 		heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
+
+		// Convert spaces
 		replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
 
 		// Height map
@@ -338,7 +342,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 			specularShininess >>
 			specularIntensity;
 
-		// Perform empty string & space conversions
+		// Convert empty string
 		heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 		normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
@@ -349,6 +353,8 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 		blendMapPathR = (blendMapPathR == "?") ? "" : blendMapPathR;
 		blendMapPathG = (blendMapPathG == "?") ? "" : blendMapPathG;
 		blendMapPathB = (blendMapPathB == "?") ? "" : blendMapPathB;
+
+		// Convert spaces
 		replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');

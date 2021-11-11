@@ -55,8 +55,10 @@ const vector<string> ModelEditor::getAllMeshPathsFromFile() const
 			// Read data from file
 			iss >> modelID >> meshPath;
 
-			// Perform empty string & space conversions
+			// Convert empty string
 			meshPath = (meshPath == "?") ? "" : meshPath;
+
+			// Convert spaces
 			replace(meshPath.begin(), meshPath.end(), '?', ' ');
 
 			// Convert to long path
@@ -170,12 +172,14 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 					color.b >>
 					textureRepeat;
 
-				// Perform empty string & space conversions
+				// Convert empty string
 				diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 				emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
 				specularMapPath = (specularMapPath == "?") ? "" : specularMapPath;
 				reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
 				normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
+
+				// Convert spaces
 				replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 				replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 				replace(specularMapPath.begin(), specularMapPath.end(), '?', ' ');
@@ -315,9 +319,11 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 				isFaceCulled >>
 				rotationOrder;
 
-			// Perform empty string & space conversions
+			// Convert empty string
 			meshPath = (meshPath == "?") ? "" : meshPath;
 			lodEntityID = (lodEntityID == "?") ? "" : lodEntityID;
+
+			// Convert spaces
 			replace(meshPath.begin(), meshPath.end(), '?', ' ');
 			replace(lodEntityID.begin(), lodEntityID.end(), '?', ' ');
 
@@ -386,13 +392,15 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 						color.b >>
 						textureRepeat;
 
-					// Perform empty string & space conversions
+					// Convert empty string
 					partID = (partID == "?") ? "" : partID;
 					diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 					emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
 					specularMapPath = (specularMapPath == "?") ? "" : specularMapPath;
 					reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
 					normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
+
+					// Convert spaces
 					replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 					replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 					replace(specularMapPath.begin(), specularMapPath.end(), '?', ' ');

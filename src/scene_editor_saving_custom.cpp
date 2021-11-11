@@ -349,8 +349,10 @@ const bool SceneEditor::saveCustomSceneToFile()
 			auto animationRowIndex = _fe3d.billboardEntity_getSpriteAnimationRowIndex(billboardID);
 			auto animationColumnIndex = _fe3d.billboardEntity_getSpriteAnimationColumnIndex(billboardID);
 
-			// Perform empty string & space conversions
+			// Convert empty string
 			textContent = (textContent.empty()) ? "?" : textContent;
+
+			// Convert spaces
 			replace(textContent.begin(), textContent.end(), ' ', '?');
 
 			// Extract preview ID
@@ -675,8 +677,10 @@ const bool SceneEditor::saveCustomSceneToFile()
 			auto intensity = _fe3d.gfx_getLensFlareIntensity();
 			auto sensitivity = _fe3d.gfx_getLensFlareSensitivity();
 
-			// Perform empty string & space conversions
+			// Convert empty string
 			flareMapPath = (flareMapPath.empty()) ? "?" : flareMapPath;
+
+			// Convert spaces
 			replace(flareMapPath.begin(), flareMapPath.end(), ' ', '?');
 
 			// Write data

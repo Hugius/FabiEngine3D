@@ -144,8 +144,10 @@ const bool SceneEditor::saveEditorSceneToFile()
 			auto animationID = (_animationEditor.getStartedAnimationIDs(modelID).empty()) ? "" :
 				_animationEditor.getStartedAnimationIDs(modelID).front();
 
-			// Perform empty string & space conversions
+			// Convert empty string
 			animationID = (animationID.empty()) ? "?" : animationID;
+
+			// Convert spaces
 			replace(animationID.begin(), animationID.end(), ' ', '?');
 
 			// Extract preview ID
@@ -460,12 +462,14 @@ const bool SceneEditor::saveEditorSceneToFile()
 		auto intensity = _fe3d.gfx_getLensFlareIntensity();
 		auto sensitivity = _fe3d.gfx_getLensFlareSensitivity();
 
-		// Perform empty string & space conversions
-		flareMapPath = (flareMapPath.empty()) ? "?" : flareMapPath;
-		replace(flareMapPath.begin(), flareMapPath.end(), ' ', '?');
-
 		// Convert to short path
-		flareMapPath = flareMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
+		flareMapPath = string(flareMapPath.empty() ? "" : flareMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+
+		// Convert empty string
+		flareMapPath = (flareMapPath.empty()) ? "?" : flareMapPath;
+
+		// Convert spaces
+		replace(flareMapPath.begin(), flareMapPath.end(), ' ', '?');
 
 		// Write data
 		file <<

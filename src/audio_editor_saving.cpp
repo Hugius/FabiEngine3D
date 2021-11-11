@@ -38,12 +38,14 @@ const bool AudioEditor::saveAudioEntitiesToFile() const
 		// Retrieve all values
 		auto audioPath = _fe3d.sound_getFilePath(audioID);
 
-		// Perform empty string & space conversions
-		audioPath = (audioPath.empty()) ? "?" : audioPath;
-		replace(audioPath.begin(), audioPath.end(), ' ', '?');
-
 		// Convert to short path
-		audioPath = audioPath.substr(string("game\\" + _currentProjectID + "\\").size());
+		audioPath = string(audioPath.empty() ? "" : audioPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+
+		// Convert empty string
+		audioPath = (audioPath.empty()) ? "?" : audioPath;
+
+		// Convert spaces
+		replace(audioPath.begin(), audioPath.end(), ' ', '?');
 
 		// Write data to file
 		file << audioID << " " << audioPath << endl;

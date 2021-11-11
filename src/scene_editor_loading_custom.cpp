@@ -397,8 +397,10 @@ const bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				animationRowIndex >>
 				animationColumnIndex;
 
-			// Perform empty string & space conversions
+			// Convert empty string
 			textContent = (textContent == "?") ? "" : textContent;
+
+			// Convert spaces
 			replace(textContent.begin(), textContent.end(), '?', ' ');
 
 			// Create billboard
@@ -726,8 +728,10 @@ const bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 			// Read data from file
 			iss >> flareMapPath >> intensity >> sensitivity;
 
-			// Perform empty string & space conversions
+			// Convert empty string
 			flareMapPath = (flareMapPath == "?") ? "" : flareMapPath;
+
+			// Convert spaces
 			replace(flareMapPath.begin(), flareMapPath.end(), '?', ' ');
 
 			// Enable lens flare

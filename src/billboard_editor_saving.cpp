@@ -53,20 +53,22 @@ const bool BillboardEditor::saveBillboardEntitiesToFile() const
 		auto lightness = _fe3d.billboardEntity_getLightness(billboardID);
 		auto textureRepeat = _fe3d.billboardEntity_getTextureRepeat(billboardID);
 
-		// Perform empty string & space conversions
+		// Convert to short path
+		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+		emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+		fontPath = string(fontPath.empty() ? "" : fontPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+
+		// Convert empty string
 		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 		emissionMapPath = (emissionMapPath.empty()) ? "?" : emissionMapPath;
 		fontPath = (fontPath.empty()) ? "?" : fontPath;
 		textContent = (textContent.empty()) ? "?" : textContent;
+
+		// Convert spaces
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 		replace(emissionMapPath.begin(), emissionMapPath.end(), ' ', '?');
 		replace(fontPath.begin(), fontPath.end(), ' ', '?');
 		replace(textContent.begin(), textContent.end(), ' ', '?');
-
-		// Convert to short path
-		diffuseMapPath = diffuseMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
-		emissionMapPath = emissionMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
-		fontPath = fontPath.substr(string("game\\" + _currentProjectID + "\\").size());
 
 		// Write data to file
 		file <<

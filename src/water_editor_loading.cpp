@@ -50,10 +50,12 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile() const
 			normalMapPath >>
 			displacementMapPath;
 
-		// Perform empty string & space conversions
+		// Convert empty string
 		dudvMapPath = (dudvMapPath == "?" ? "" : dudvMapPath);
 		normalMapPath = (normalMapPath == "?" ? "" : normalMapPath);
 		displacementMapPath = (displacementMapPath == "?" ? "" : displacementMapPath);
+
+		// Convert spaces
 		replace(dudvMapPath.begin(), dudvMapPath.end(), '?', ' ');
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 		replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
@@ -169,10 +171,12 @@ const bool WaterEditor::loadWaterEntitiesFromFile()
 			specularShininess >>
 			specularIntensity;
 
-		// Perform empty string & space conversions
+		// Convert empty string
 		dudvMapPath = (dudvMapPath == "?" ? "" : dudvMapPath);
 		normalMapPath = (normalMapPath == "?" ? "" : normalMapPath);
 		displacementMapPath = (displacementMapPath == "?" ? "" : displacementMapPath);
+
+		// Convert spaces
 		replace(dudvMapPath.begin(), dudvMapPath.end(), '?', ' ');
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 		replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');

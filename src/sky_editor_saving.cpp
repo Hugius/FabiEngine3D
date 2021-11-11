@@ -44,12 +44,14 @@ const bool SkyEditor::saveSkyEntitiesToFile() const
 		// Iterate through paths
 		for(auto& diffuseMapPath : diffuseMapPaths)
 		{
-			// Perform empty string & space conversions
-			diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
-			replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
-
 			// Convert to short path
-			diffuseMapPath = diffuseMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
+			diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+
+			// Convert empty string
+			diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
+
+			// Convert spaces
+			replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 		}
 
 		// Write ID to file

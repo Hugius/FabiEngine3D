@@ -185,8 +185,10 @@ const bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				isFrozen >>
 				animationID;
 
-			// Perform empty string & space conversions
+			// Convert empty string
 			animationID = (animationID == "?") ? "" : animationID;
+
+			// Convert spaces
 			replace(animationID.begin(), animationID.end(), '?', ' ');
 
 			// Check if preview model instancing changed
@@ -634,8 +636,10 @@ const bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			// Read data from file
 			iss >> flareMapPath >> intensity >> sensitivity;
 
-			// Perform empty string & space conversions
+			// Convert empty string
 			flareMapPath = (flareMapPath == "?") ? "" : flareMapPath;
+
+			// Convert spaces
 			replace(flareMapPath.begin(), flareMapPath.end(), '?', ' ');
 
 			// Convert to long path

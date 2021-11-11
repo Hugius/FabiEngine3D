@@ -57,8 +57,10 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile() const
 		// Iterate through paths
 		for(auto& diffuseMapPath : diffuseMapPaths)
 		{
-			// Perform empty string & space conversions
+			// Convert empty string
 			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+
+			// Convert spaces
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 
 			// Convert to long path
@@ -136,8 +138,10 @@ const bool SkyEditor::loadSkyEntitiesFromFile()
 		// Iterate through paths
 		for(auto& diffuseMapPath : diffuseMapPaths)
 		{
-			// Perform empty string & space conversions
+			// Convert empty string
 			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+
+			// Convert spaces
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 
 			// Convert to long path

@@ -59,9 +59,11 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile() const
 			diffuseMapPath >>
 			emissionMapPath;
 
-		// Perform empty string & space conversions
+		// Convert empty string
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 		emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
+
+		// Convert spaces
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 
@@ -151,8 +153,10 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile() const
 			isShadowed >>
 			fontPath;
 
-		// Perform empty string & space conversions
+		// Convert empty string
 		fontPath = (fontPath == "?") ? "" : fontPath;
+
+		// Convert spaces
 		replace(fontPath.begin(), fontPath.end(), '?', ' ');
 
 		// Font
@@ -240,11 +244,13 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 			lightness >>
 			textureRepeat;
 
-		// Perform empty string & space conversions
+		// Convert empty string
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 		emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
 		fontPath = (fontPath == "?") ? "" : fontPath;
 		textContent = (textContent == "?") ? "" : textContent;
+
+		// Convert spaces
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 		replace(fontPath.begin(), fontPath.end(), '?', ' ');

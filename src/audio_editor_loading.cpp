@@ -45,8 +45,10 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile() const
 		// Read from file
 		iss >> audioID >> audioPath;
 
-		// Perform empty string & space conversions
+		// Convert empty string
 		audioPath = (audioPath == "?") ? "" : audioPath;
+
+		// Convert spaces
 		replace(audioPath.begin(), audioPath.end(), '?', ' ');
 
 		// Convert to long path
@@ -104,8 +106,10 @@ const bool AudioEditor::loadAudioEntitiesFromFile()
 		// Read from file
 		iss >> audioID >> audioPath;
 
-		// Perform empty string & space conversions
+		// Convert empty string
 		audioPath = (audioPath == "?") ? "" : audioPath;
+
+		// Convert spaces
 		replace(audioPath.begin(), audioPath.end(), '?', ' ');
 
 		// Convert to long path

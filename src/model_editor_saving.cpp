@@ -46,14 +46,16 @@ const bool ModelEditor::saveModelEntitiesToFile() const
 		auto isFaceCulled = _fe3d.modelEntity_isFaceCulled(modelID);
 		auto rotationOrder = static_cast<unsigned int>(_fe3d.modelEntity_getRotationOrder(modelID));
 
-		// Perform empty string & space conversions
+		// Convert to short path
+		meshPath = string(meshPath.empty() ? "" : meshPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+
+		// Convert empty string
 		meshPath = (meshPath.empty()) ? "?" : meshPath;
 		lodEntityID = (lodEntityID.empty()) ? "?" : lodEntityID;
+
+		// Convert spaces
 		replace(meshPath.begin(), meshPath.end(), ' ', '?');
 		replace(lodEntityID.begin(), lodEntityID.end(), ' ', '?');
-
-		// Convert to short path
-		meshPath = meshPath.substr(string("game\\" + _currentProjectID + "\\").size());
 
 		// Write data to file
 		file << "MODEL " <<
@@ -91,25 +93,27 @@ const bool ModelEditor::saveModelEntitiesToFile() const
 			auto isReflective = _fe3d.modelEntity_isReflective(modelID, partID);
 			auto reflectionType = static_cast<unsigned int>(_fe3d.modelEntity_getReflectionType(modelID, partID));
 
-			// Perform empty string & space conversions
+			// Convert to short path
+			diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+			emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+			specularMapPath = string(specularMapPath.empty() ? "" : specularMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+			reflectionMapPath = string(reflectionMapPath.empty() ? "" : reflectionMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+			normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+
+			// Convert empty string
 			partID = (partID.empty()) ? "?" : partID;
 			diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 			emissionMapPath = (emissionMapPath.empty()) ? "?" : emissionMapPath;
 			specularMapPath = (specularMapPath.empty()) ? "?" : specularMapPath;
 			reflectionMapPath = (reflectionMapPath.empty()) ? "?" : reflectionMapPath;
 			normalMapPath = (normalMapPath.empty()) ? "?" : normalMapPath;
+
+			// Convert spaces
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 			replace(emissionMapPath.begin(), emissionMapPath.end(), ' ', '?');
 			replace(specularMapPath.begin(), specularMapPath.end(), ' ', '?');
 			replace(reflectionMapPath.begin(), reflectionMapPath.end(), ' ', '?');
 			replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
-
-			// Convert to short path
-			diffuseMapPath = diffuseMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
-			emissionMapPath = emissionMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
-			specularMapPath = specularMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
-			reflectionMapPath = reflectionMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
-			normalMapPath = normalMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
 
 			// Write data to file
 			file <<

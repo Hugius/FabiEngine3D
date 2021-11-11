@@ -53,18 +53,20 @@ const bool WaterEditor::saveWaterEntitiesToFile() const
 		auto isReflective = _fe3d.waterEntity_isReflective(waterID);
 		auto isRefractive = _fe3d.waterEntity_isRefractive(waterID);
 
-		// Perform empty string & space conversions
+		// Convert to short path
+		dudvMapPath = string(dudvMapPath.empty() ? "" : dudvMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+		normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+		displacementMapPath = string(displacementMapPath.empty() ? "" : displacementMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+
+		// Convert empty string
 		dudvMapPath = (dudvMapPath.empty() ? "?" : dudvMapPath);
 		normalMapPath = (normalMapPath.empty() ? "?" : normalMapPath);
 		displacementMapPath = (displacementMapPath.empty() ? "?" : displacementMapPath);
+
+		// Convert spaces
 		replace(dudvMapPath.begin(), dudvMapPath.end(), ' ', '?');
 		replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
 		replace(displacementMapPath.begin(), displacementMapPath.end(), ' ', '?');
-
-		// Convert to short path
-		dudvMapPath = dudvMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
-		normalMapPath = normalMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
-		displacementMapPath = displacementMapPath.substr(string("game\\" + _currentProjectID + "\\").size());
 
 		// Write data to file
 		file <<

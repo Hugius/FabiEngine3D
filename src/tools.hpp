@@ -16,6 +16,8 @@ public:
 	static void createDirectory(const string& path);
 	static void copyDirectory(const string& fromPath, const string& toPath);
 	static void copyFile(const string& fromPath, const string& toPath);
+	static void renameDirectory(const string& oldPath, const string& newPath);
+	static void renameFile(const string& oldPath, const string& newPath);
 	static void deleteDirectory(const string& path);
 	static void deleteFile(const string& path);
 

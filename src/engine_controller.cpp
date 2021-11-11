@@ -30,17 +30,17 @@ void EngineController::FE3D_CONTROLLER_INIT()
 			Logger::throwFatalWarning("Cannot load application: missing files/directories!");
 		}
 
-		// Set title of application to run
-		_leftViewportController.getSkyEditor().setCurrentProjectID("test");
-		_leftViewportController.getTerrainEditor().setCurrentProjectID("test");
-		_leftViewportController.getWaterEditor().setCurrentProjectID("test");
-		_leftViewportController.getModelEditor().setCurrentProjectID("test");
-		_leftViewportController.getAnimationEditor().setCurrentProjectID("test");
-		_leftViewportController.getBillboardEditor().setCurrentProjectID("test");
-		_leftViewportController.getAudioEditor().setCurrentProjectID("test");
-		_leftViewportController.getScriptEditor().setCurrentProjectID("test");
-		_leftViewportController.getSceneEditor().setCurrentProjectID("test");
-		_leftViewportController.getSettingsEditor().setCurrentProjectID("test");
+		// Set project ID
+		_leftViewportController.getSkyEditor().setCurrentProjectID(Config::getInst().getWindowTitle());
+		_leftViewportController.getTerrainEditor().setCurrentProjectID(Config::getInst().getWindowTitle());
+		_leftViewportController.getWaterEditor().setCurrentProjectID(Config::getInst().getWindowTitle());
+		_leftViewportController.getModelEditor().setCurrentProjectID(Config::getInst().getWindowTitle());
+		_leftViewportController.getAnimationEditor().setCurrentProjectID(Config::getInst().getWindowTitle());
+		_leftViewportController.getBillboardEditor().setCurrentProjectID(Config::getInst().getWindowTitle());
+		_leftViewportController.getAudioEditor().setCurrentProjectID(Config::getInst().getWindowTitle());
+		_leftViewportController.getScriptEditor().setCurrentProjectID(Config::getInst().getWindowTitle());
+		_leftViewportController.getSceneEditor().setCurrentProjectID(Config::getInst().getWindowTitle());
+		_leftViewportController.getSettingsEditor().setCurrentProjectID(Config::getInst().getWindowTitle());
 
 		// Default rendering color
 		Tools::setMainRenderingColor(Vec3(0.0f));

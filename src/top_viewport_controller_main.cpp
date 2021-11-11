@@ -307,6 +307,11 @@ void TopViewportController::_updateMiscScreenManagement()
 		Tools::copyDirectory(string(rootDirectoryPath + "binaries"), string(exportDirectoryPath + "binaries"));
 		Tools::copyDirectory(string(rootDirectoryPath + "engine"), string(exportDirectoryPath + "engine"));
 		Tools::copyDirectory(string(rootDirectoryPath + "game\\" + _currentProjectID), exportDirectoryPath);
+
+		// Rename executable
+		auto oldPath = string(exportDirectoryPath + "binaries\\FabiEngine3D.exe");
+		auto newPath = string(exportDirectoryPath + "binaries\\" + _currentProjectID + ".exe");
+		Tools::renameFile(oldPath, newPath);
 	}
 	else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("docs")->isHovered())
 	{

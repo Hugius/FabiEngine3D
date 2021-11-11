@@ -12,6 +12,7 @@ using std::to_string;
 using std::filesystem::exists;
 using std::filesystem::create_directory;
 using std::filesystem::absolute;
+using std::filesystem::rename;
 using std::filesystem::remove;
 using std::filesystem::remove_all;
 using std::filesystem::exists;
@@ -222,6 +223,30 @@ void Tools::copyFile(const string& fromPath, const string& toPath)
 
 	using namespace std;
 	filesystem::copy_file(fromPath, toPath);
+}
+
+void Tools::renameDirectory(const string& oldPath, const string& newPath)
+{
+	// Error checking
+	if(!isDirectoryExisting(oldPath))
+	{
+		Logger::throwError("Tools::renameDirectory");
+		return;
+	}
+
+	rename(oldPath, newPath);
+}
+
+void Tools::renameFile(const string& oldPath, const string& newPath)
+{
+	// Error checking
+	if(!isFileExisting(oldPath))
+	{
+		Logger::throwError("Tools::renameFile");
+		return;
+	}
+
+	rename(oldPath, newPath);
 }
 
 void Tools::deleteDirectory(const string& path)

@@ -83,7 +83,7 @@ void TopViewportController::_updateProjectCreating()
 				Logger::throwWarning("New project name cannot contain any capitals!");
 				return;
 			}
-			else // Project is non-existent
+			else // Project not existing
 			{
 				// Generate new project directory
 				Tools::createDirectory(newProjectDirectoryPath);
@@ -181,7 +181,7 @@ void TopViewportController::_updateProjectLoading()
 		// Check if user clicked a project ID
 		if(clickedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			// Check if project is corrupted
+			// Check if project corrupted
 			if(isProjectCorrupted(projectDirectoryPath))
 			{
 				Logger::throwWarning("Cannot load project: missing files/directories!");

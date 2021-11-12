@@ -159,7 +159,7 @@ void TopViewportController::_updateGameScreenManagement()
 	// Temporary values
 	auto screen = _gameWindow->getScreen("main");
 
-	// Check if currently a project is loaded
+	// Check if currently any project loaded
 	if(_currentProjectID.empty())
 	{
 		screen->getButton("play")->setHoverable(false);
@@ -302,26 +302,34 @@ void TopViewportController::_updateMiscScreenManagement()
 		const string rootDirectoryPath = Tools::getRootDirectoryPath();
 		const string exportDirectoryPath = string(chosenDirectoryPath + "\\" + _currentProjectID + "\\");
 
-		// Create application directory
-		Tools::createDirectory(exportDirectoryPath);
+		// Check if project already exported
+		if(Tools::isDirectoryExisting(exportDirectoryPath))
+		{
+			Logger::throwWarning("Project already exported to that location!");
+		}
+		else
+		{
+			// Create application directory
+			Tools::createDirectory(exportDirectoryPath);
 
-		// Copy directories
-		Tools::copyDirectory(string(rootDirectoryPath + "binaries"), string(exportDirectoryPath + "binaries"));
-		Tools::copyDirectory(string(rootDirectoryPath + "engine"), string(exportDirectoryPath + "engine"));
-		Tools::copyDirectory(string(rootDirectoryPath + "projects\\" + _currentProjectID), exportDirectoryPath);
+			// Copy directories
+			Tools::copyDirectory(string(rootDirectoryPath + "binaries"), string(exportDirectoryPath + "binaries"));
+			Tools::copyDirectory(string(rootDirectoryPath + "engine"), string(exportDirectoryPath + "engine"));
+			Tools::copyDirectory(string(rootDirectoryPath + "projects\\" + _currentProjectID), exportDirectoryPath);
 
-		// Rename executable
-		auto oldPath = string(exportDirectoryPath + "binaries\\fe3d.exe");
-		auto newPath = string(exportDirectoryPath + "binaries\\" + _currentProjectID + ".exe");
-		Tools::renameFile(oldPath, newPath);
+			// Rename executable
+			auto oldPath = string(exportDirectoryPath + "binaries\\fe3d.exe");
+			auto newPath = string(exportDirectoryPath + "binaries\\" + _currentProjectID + ".exe");
+			Tools::renameFile(oldPath, newPath);
 
-		// Create config file
-		auto file = ofstream(exportDirectoryPath + "config.fe3d");
-		file << "window_size_multiplier = 0.75" << endl;
-		file << "window_fullscreen      = false" << endl;
-		file << "window_borderless      = false" << endl;
-		file << "window_title           = MyGame";
-		file.close();
+			// Create configuration file
+			auto file = ofstream(exportDirectoryPath + "config.fe3d");
+			file << "window_size_multiplier = 0.75" << endl;
+			file << "window_fullscreen      = false" << endl;
+			file << "window_borderless      = false" << endl;
+			file << "window_title           = MyGame";
+			file.close();
+		}
 	}
 	else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("docs")->isHovered())
 	{

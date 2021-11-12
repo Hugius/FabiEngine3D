@@ -35,6 +35,7 @@ A multiplayer first person shooter game based in a science-fiction setting: a sp
 - [Audio Editor](doc/documents/AUDIO_EDITOR.md)
 - [Scene Editor](doc/documents/SCENE_EDITOR.md)
 - [Script Editor](doc/documents/SCRIPT_EDITOR.md)
+- [Settings](doc/documents/SETTINGS.md)
 - [FabScript](doc/documents/FABSCRIPT.md)
 - [Scripting Functions](doc/documents/SCRIPT_FUNCTIONS.md)
 - [Networking](doc/documents/NETWORKING.md)

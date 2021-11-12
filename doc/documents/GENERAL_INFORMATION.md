@@ -110,8 +110,8 @@
 
 <img src="doc/images/engine.png" width="100%"/>
 
-- Left viewport: editor menus and project settings
-- Top viewport: project management & game preview management
+- Left viewport: editors & settings
+- Top viewport: project management & preview management
 - Right viewport: controls & properties
 - Bottom viewport: statistics & logging
 - Mid viewport: 3D display screen

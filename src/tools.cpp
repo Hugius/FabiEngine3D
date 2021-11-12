@@ -204,7 +204,12 @@ void Tools::copyDirectory(const string& fromPath, const string& toPath)
 	// Error checking
 	if(!isDirectoryExisting(fromPath))
 	{
-		Logger::throwError("Tools::copyDirectory");
+		Logger::throwError("Tools::copyDirectory::1");
+		return;
+	}
+	if(isDirectoryExisting(toPath))
+	{
+		Logger::throwError("Tools::copyDirectory::2");
 		return;
 	}
 
@@ -217,7 +222,12 @@ void Tools::copyFile(const string& fromPath, const string& toPath)
 	// Error checking
 	if(!isFileExisting(fromPath))
 	{
-		Logger::throwError("Tools::copyFile");
+		Logger::throwError("Tools::copyFile::1");
+		return;
+	}
+	if(isFileExisting(toPath))
+	{
+		Logger::throwError("Tools::copyFile::2");
 		return;
 	}
 

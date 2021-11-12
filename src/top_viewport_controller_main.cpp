@@ -7,6 +7,8 @@
 #include <sstream>
 #include <filesystem>
 
+using std::ofstream;
+
 using TVPC = TopViewportController;
 
 TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, SceneEditor& sceneEditor, ScriptEditor& scriptEditor, SettingsEditor& settingsEditor)
@@ -309,9 +311,17 @@ void TopViewportController::_updateMiscScreenManagement()
 		Tools::copyDirectory(string(rootDirectoryPath + "game\\" + _currentProjectID), exportDirectoryPath);
 
 		// Rename executable
-		auto oldPath = string(exportDirectoryPath + "binaries\\FabiEngine3D.exe");
+		auto oldPath = string(exportDirectoryPath + "binaries\\fe3d.exe");
 		auto newPath = string(exportDirectoryPath + "binaries\\" + _currentProjectID + ".exe");
 		Tools::renameFile(oldPath, newPath);
+
+		// Create config file
+		auto file = ofstream(exportDirectoryPath + "config.fe3d");
+		file << "window_size_multiplier = 0.75" << endl;
+		file << "window_fullscreen      = false" << endl;
+		file << "window_borderless      = false" << endl;
+		file << "window_title           = MyGame";
+		file.close();
 	}
 	else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("docs")->isHovered())
 	{

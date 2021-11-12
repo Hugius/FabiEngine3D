@@ -104,7 +104,7 @@ const string Tools::getRootDirectoryPath()
 	rootDirectoryPath = absolute(rootDirectoryPath).string();
 
 	// Cut to engine root directory
-	rootDirectoryPath = rootDirectoryPath.substr(0, (rootDirectoryPath.size() - string("binaries\\FabiEngine3D.exe").size()));
+	rootDirectoryPath = rootDirectoryPath.substr(0, (rootDirectoryPath.size() - string("binaries\\fe3d.exe").size()));
 
 	// Return
 	return rootDirectoryPath;

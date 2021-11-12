@@ -113,31 +113,23 @@ void TopViewportController::_updateProjectCreating()
 				Tools::createDirectory(newProjectDirectoryPath + "scenes\\editor\\");
 				Tools::createDirectory(newProjectDirectoryPath + "scripts\\");
 
-				// Create config file
-				auto file = ofstream(newProjectDirectoryPath + "config.fe3d");
-				file << "window_size_multiplier = 0.75" << endl;
-				file << "window_fullscreen      = false" << endl;
-				file << "window_borderless      = false" << endl;
-				file << "window_title           = MyGame" << endl;
-
-				// Create new empty project files 
-				file.close();
-				file = ofstream(newProjectDirectoryPath + "data\\audio.fe3d");
-				file.close();
-				file = ofstream(newProjectDirectoryPath + "data\\billboard.fe3d");
-				file.close();
-				file = ofstream(newProjectDirectoryPath + "data\\model.fe3d");
-				file.close();
-				file = ofstream(newProjectDirectoryPath + "data\\settings.fe3d");
-				file.close();
-				file = ofstream(newProjectDirectoryPath + "data\\sky.fe3d");
-				file.close();
-				file = ofstream(newProjectDirectoryPath + "data\\terrain.fe3d");
-				file.close();
-				file = ofstream(newProjectDirectoryPath + "data\\water.fe3d");
-				file.close();
-				file = ofstream(newProjectDirectoryPath + "data\\animation.fe3d");
-				file.close();
+				// Create new empty project files
+				auto animationFile = ofstream(newProjectDirectoryPath + "data\\animation.fe3d");
+				auto audioFile = ofstream(newProjectDirectoryPath + "data\\audio.fe3d");
+				auto billboardFile = ofstream(newProjectDirectoryPath + "data\\billboard.fe3d");
+				auto modelFile = ofstream(newProjectDirectoryPath + "data\\model.fe3d");
+				auto settingsFile = ofstream(newProjectDirectoryPath + "data\\settings.fe3d");
+				auto skyFile = ofstream(newProjectDirectoryPath + "data\\sky.fe3d");
+				auto terrainFile = ofstream(newProjectDirectoryPath + "data\\terrain.fe3d");
+				auto waterFile = ofstream(newProjectDirectoryPath + "data\\water.fe3d");
+				animationFile.close();
+				audioFile.close();
+				billboardFile.close();
+				modelFile.close();
+				settingsFile.close();
+				skyFile.close();
+				terrainFile.close();
+				waterFile.close();
 
 				// Load current project
 				_currentProjectID = newProjectID;
@@ -417,11 +409,10 @@ const bool TopViewportController::isProjectCorrupted(const string& projectDirect
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\audio.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\billboard.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\model.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "data\\settings.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\sky.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\terrain.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "data\\water.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "data\\settings.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "config.fe3d"))
+	   !Tools::isFileExisting(projectDirectoryPath + "data\\water.fe3d"))
 	{
 		return true;
 	}

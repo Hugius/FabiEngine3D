@@ -177,29 +177,30 @@ void RightViewportController::initialize()
 
 	// Right-viewport: scriptEditorControls
 	rightWindow->createScreen("scriptEditorControls");
-	rightWindow->getScreen("scriptEditorControls")->createRectangle("mouseLeft", Vec2(-1.1f, 0.65f), Vec2(0.6f, 0.15f), "mouse_left.png", false);
-	rightWindow->getScreen("scriptEditorControls")->createRectangle("mouseRight", Vec2(-1.1f, 0.45f), Vec2(0.6f, 0.15f), "mouse_right.png", false);
-	rightWindow->getScreen("scriptEditorControls")->createRectangle("mouseMiddle", Vec2(-1.1f, 0.25f), Vec2(0.6f, 0.15f), "mouse_middle.png", false);
-	rightWindow->getScreen("scriptEditorControls")->createRectangle("enter", Vec2(-0.975f, 0.05f), Vec2(0.45f, 0.15f), "enter.png", false);
-	rightWindow->getScreen("scriptEditorControls")->createRectangle("backspace", Vec2(-0.975f, -0.15f), Vec2(0.45f, 0.15f), "backspace.png", false);
-	rightWindow->getScreen("scriptEditorControls")->createRectangle("left", Vec2(-0.975f, -0.35f), Vec2(0.45f, 0.15f), "left.png", false);
-	rightWindow->getScreen("scriptEditorControls")->createRectangle("right", Vec2(-0.475f, -0.35f), Vec2(0.45f, 0.15f), "right.png", false);
-	rightWindow->getScreen("scriptEditorControls")->createRectangle("up", Vec2(0.025f, -0.35f), Vec2(0.45f, 0.15f), "up.png", false);
-	rightWindow->getScreen("scriptEditorControls")->createRectangle("down", Vec2(0.525f, -0.35f), Vec2(0.45f, 0.15f), "down.png", false);
-	rightWindow->getScreen("scriptEditorControls")->createRectangle("ctrlC", Vec2(-0.975f, -0.65f), Vec2(0.45f, 0.15f), "ctrl.png", false);
-	rightWindow->getScreen("scriptEditorControls")->createRectangle("c", Vec2(-0.475f, -0.65f), Vec2(0.45f, 0.15f), "c.png", false);
-	rightWindow->getScreen("scriptEditorControls")->createRectangle("ctrlV", Vec2(-0.975f, -0.825f), Vec2(0.45f, 0.15f), "ctrl.png", false);
-	rightWindow->getScreen("scriptEditorControls")->createRectangle("v", Vec2(-0.475f, -0.825f), Vec2(0.45f, 0.15f), "v.png", false);
-	rightWindow->getScreen("scriptEditorControls")->createRectangle("esc", Vec2(-0.975f, -0.35f), Vec2(0.45f, 0.15f), "esc.png", false);
+	rightWindow->getScreen("scriptEditorControls")->createRectangle("mouseLeft", Vec2(-1.1f, 0.7f), Vec2(0.6f, 0.15f), "mouse_left.png", false);
+	rightWindow->getScreen("scriptEditorControls")->createRectangle("mouseRight", Vec2(-1.1f, 0.5f), Vec2(0.6f, 0.15f), "mouse_right.png", false);
+	rightWindow->getScreen("scriptEditorControls")->createRectangle("mouseMiddle", Vec2(-1.1f, 0.3f), Vec2(0.6f, 0.15f), "mouse_middle.png", false);
+	rightWindow->getScreen("scriptEditorControls")->createRectangle("enter", Vec2(-0.975f, 0.1f), Vec2(0.45f, 0.15f), "enter.png", false);
+	rightWindow->getScreen("scriptEditorControls")->createRectangle("backspace", Vec2(-0.975f, -0.1f), Vec2(0.45f, 0.15f), "backspace.png", false);
+	rightWindow->getScreen("scriptEditorControls")->createRectangle("left", Vec2(-0.975f, -0.3f), Vec2(0.45f, 0.15f), "left.png", false);
+	rightWindow->getScreen("scriptEditorControls")->createRectangle("right", Vec2(-0.475f, -0.3f), Vec2(0.45f, 0.15f), "right.png", false);
+	rightWindow->getScreen("scriptEditorControls")->createRectangle("up", Vec2(0.025f, -0.3f), Vec2(0.45f, 0.15f), "up.png", false);
+	rightWindow->getScreen("scriptEditorControls")->createRectangle("down", Vec2(0.525f, -0.3f), Vec2(0.45f, 0.15f), "down.png", false);
+	rightWindow->getScreen("scriptEditorControls")->createRectangle("ctrlC", Vec2(-0.975f, -0.55f), Vec2(0.45f, 0.15f), "ctrl.png", false);
+	rightWindow->getScreen("scriptEditorControls")->createRectangle("c", Vec2(-0.475f, -0.55f), Vec2(0.45f, 0.15f), "c.png", false);
+	rightWindow->getScreen("scriptEditorControls")->createRectangle("ctrlV", Vec2(-0.975f, -0.75f), Vec2(0.45f, 0.15f), "ctrl.png", false);
+	rightWindow->getScreen("scriptEditorControls")->createRectangle("v", Vec2(-0.475f, -0.75f), Vec2(0.45f, 0.15f), "v.png", false);
+	rightWindow->getScreen("scriptEditorControls")->createRectangle("esc", Vec2(-0.975f, -0.95f), Vec2(0.45f, 0.15f), "esc.png", false);
 	rightWindow->getScreen("scriptEditorControls")->createTextField("title", Vec2(0.0f, 0.9f), Vec2(TW("Editor Controls"), CH), "Editor Controls", WHITE, true, false);
-	rightWindow->getScreen("scriptEditorControls")->createTextField("mouseLeft", Vec2(-0.5f, 0.675f), Vec2(TW("Place Cursor"), CH), "Place Cursor", BLACK, false, false);
-	rightWindow->getScreen("scriptEditorControls")->createTextField("mouseRight", Vec2(-0.5f, 0.475f), Vec2(TW("Select Line"), CH), "Select Line", BLACK, false, false);
-	rightWindow->getScreen("scriptEditorControls")->createTextField("enter", Vec2(-0.5f, 0.275f), Vec2(TW("Next Line"), CH), "Next Line", BLACK, false, false);
-	rightWindow->getScreen("scriptEditorControls")->createTextField("backspace", Vec2(-0.5f, 0.075f), Vec2(TW("Remove Char"), CH), "Remove Char", BLACK, false, false);
-	rightWindow->getScreen("scriptEditorControls")->createTextField("esc", Vec2(-0.5f, -0.125f), Vec2(TW("Back"), CH), "Back", BLACK, false, false);
-	rightWindow->getScreen("scriptEditorControls")->createTextField("arrows", Vec2(-0.525f, -0.47f), Vec2(TW("Navigation"), CH), "Navigation", BLACK, false, false);
-	rightWindow->getScreen("scriptEditorControls")->createTextField("ctrlC", Vec2(0.0f, -0.625f), Vec2(TW("Copy"), CH), "Copy", BLACK, false, false);
-	rightWindow->getScreen("scriptEditorControls")->createTextField("ctrlV", Vec2(0.0f, -0.8f), Vec2(TW("Paste"), CH), "Paste", BLACK, false, false);
+	rightWindow->getScreen("scriptEditorControls")->createTextField("mouseLeft", Vec2(-0.5f, 0.725f), Vec2(TW("Place Cursor"), CH), "Place Cursor", BLACK, false, false);
+	rightWindow->getScreen("scriptEditorControls")->createTextField("mouseRight", Vec2(-0.5f, 0.525f), Vec2(TW("Select Line"), CH), "Select Line", BLACK, false, false);
+	rightWindow->getScreen("scriptEditorControls")->createTextField("mouseMiddle", Vec2(-0.5f, 0.325f), Vec2(TW("Scroll Lines"), CH), "Scroll Lines", BLACK, false, false);
+	rightWindow->getScreen("scriptEditorControls")->createTextField("enter", Vec2(-0.5f, 0.125f), Vec2(TW("Next Line"), CH), "Next Line", BLACK, false, false);
+	rightWindow->getScreen("scriptEditorControls")->createTextField("backspace", Vec2(-0.5f, -0.075f), Vec2(TW("Remove Char"), CH), "Remove Char", BLACK, false, false);
+	rightWindow->getScreen("scriptEditorControls")->createTextField("arrows", Vec2(-0.525f, -0.4f), Vec2(TW("Navigation"), CH), "Navigation", BLACK, false, false);
+	rightWindow->getScreen("scriptEditorControls")->createTextField("ctrlC", Vec2(0.0f, -0.525f), Vec2(TW("Copy"), CH), "Copy", BLACK, false, false);
+	rightWindow->getScreen("scriptEditorControls")->createTextField("ctrlV", Vec2(0.0f, -0.725f), Vec2(TW("Paste"), CH), "Paste", BLACK, false, false);
+	rightWindow->getScreen("scriptEditorControls")->createTextField("esc", Vec2(-0.5f, -0.925f), Vec2(TW("Back"), CH), "Back", BLACK, false, false);
 
 	// Default screen
 	rightWindow->setActiveScreen("mainMenuControls");

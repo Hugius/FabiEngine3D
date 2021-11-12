@@ -1,4 +1,5 @@
-# FabiEngine3D Script Functions
+# FabiEngine3D Scripting Functions
+
 - [Environment](SCRIPT_FE3D_ENVIRONMENT.md)
 - [Model](SCRIPT_FE3D_MODEL.md)
 - [Billboard](SCRIPT_FE3D_BILLBOARD.md)

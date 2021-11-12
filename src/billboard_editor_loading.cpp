@@ -20,7 +20,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile() const
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\billboard.fe3d");
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\billboard.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -73,7 +73,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile() const
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
+				diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 			}
 
 			// Save path
@@ -86,7 +86,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile() const
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				emissionMapPath = string("game\\" + _currentProjectID + "\\" + emissionMapPath);
+				emissionMapPath = string("projects\\" + _currentProjectID + "\\" + emissionMapPath);
 			}
 
 			// Save path
@@ -112,7 +112,7 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile() const
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\billboard.fe3d");
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\billboard.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -165,7 +165,7 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile() const
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				fontPath = string("game\\" + _currentProjectID + "\\" + fontPath);
+				fontPath = string("projects\\" + _currentProjectID + "\\" + fontPath);
 			}
 
 			// Save path
@@ -194,7 +194,7 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\billboard.fe3d");
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\billboard.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -271,7 +271,7 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
-					diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
+					diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 				}
 
 				// Set path
@@ -293,7 +293,7 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
-					emissionMapPath = string("game\\" + _currentProjectID + "\\" + emissionMapPath);
+					emissionMapPath = string("projects\\" + _currentProjectID + "\\" + emissionMapPath);
 				}
 
 				// Set path
@@ -306,7 +306,7 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
-					fontPath = string("game\\" + _currentProjectID + "\\" + fontPath);
+					fontPath = string("projects\\" + _currentProjectID + "\\" + fontPath);
 				}
 
 				// Set path

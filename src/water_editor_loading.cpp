@@ -20,7 +20,7 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile() const
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\water.fe3d");
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\water.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -66,7 +66,7 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile() const
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				dudvMapPath = string("game\\" + _currentProjectID + "\\" + dudvMapPath);
+				dudvMapPath = string("projects\\" + _currentProjectID + "\\" + dudvMapPath);
 			}
 
 			// Save path
@@ -79,7 +79,7 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile() const
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				normalMapPath = string("game\\" + _currentProjectID + "\\" + normalMapPath);
+				normalMapPath = string("projects\\" + _currentProjectID + "\\" + normalMapPath);
 			}
 
 			// Save path
@@ -92,7 +92,7 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile() const
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				displacementMapPath = string("game\\" + _currentProjectID + "\\" + displacementMapPath);
+				displacementMapPath = string("projects\\" + _currentProjectID + "\\" + displacementMapPath);
 			}
 
 			// Save path
@@ -121,7 +121,7 @@ const bool WaterEditor::loadWaterEntitiesFromFile()
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\data\\water.fe3d");
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID)) + "\\data\\water.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -196,7 +196,7 @@ const bool WaterEditor::loadWaterEntitiesFromFile()
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
-					dudvMapPath = string("game\\" + _currentProjectID + "\\" + dudvMapPath);
+					dudvMapPath = string("projects\\" + _currentProjectID + "\\" + dudvMapPath);
 				}
 
 				// Set path
@@ -209,7 +209,7 @@ const bool WaterEditor::loadWaterEntitiesFromFile()
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
-					normalMapPath = string("game\\" + _currentProjectID + "\\" + normalMapPath);
+					normalMapPath = string("projects\\" + _currentProjectID + "\\" + normalMapPath);
 				}
 
 				// Set path
@@ -222,7 +222,7 @@ const bool WaterEditor::loadWaterEntitiesFromFile()
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
-					displacementMapPath = string("game\\" + _currentProjectID + "\\" + displacementMapPath);
+					displacementMapPath = string("projects\\" + _currentProjectID + "\\" + displacementMapPath);
 				}
 
 				// Set path

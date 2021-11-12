@@ -20,7 +20,7 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile() const
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\sky.fe3d");
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\sky.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -66,7 +66,7 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile() const
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
+				diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 			}
 		}
 
@@ -95,7 +95,7 @@ const bool SkyEditor::loadSkyEntitiesFromFile()
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\sky.fe3d");
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\sky.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -147,7 +147,7 @@ const bool SkyEditor::loadSkyEntitiesFromFile()
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
+				diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 			}
 		}
 

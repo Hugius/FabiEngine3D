@@ -38,7 +38,7 @@ const bool ScriptEditor::saveScriptFiles()
 		else
 		{
 			// Compose file path
-			const string filePath = string(Tools::getRootDirectoryPath() + "game\\" + _currentProjectID + "scripts\\" + fileName + ".fe3d");
+			const string filePath = string(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "scripts\\" + fileName + ".fe3d");
 
 			// Check if file exists
 			if(Tools::isFileExisting(filePath))
@@ -63,7 +63,7 @@ const bool ScriptEditor::saveScriptFiles()
 		}
 		else
 		{
-			file.open(Tools::getRootDirectoryPath() + "game\\" + _currentProjectID + "scripts\\" + scriptID + ".fe3d");
+			file.open(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "scripts\\" + scriptID + ".fe3d");
 		}
 
 		// Write cursor indices to file

@@ -29,7 +29,7 @@ const bool AnimationEditor::saveAnimationsToFile() const
 	}
 	else
 	{
-		file.open(Tools::getRootDirectoryPath() + "game\\" + _currentProjectID + "\\data\\animation.fe3d");
+		file.open(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\animation.fe3d");
 	}
 
 	// Write animation data

@@ -43,16 +43,14 @@
 
 - Engine GUI
 - Realtime statistics
-- Realtime logging console
+- Realtime logging
 - Keyboard input
 - Mouse input
 - Custom interpreted gameplay programming language ("FabScript")
 
-## Entry Point
+## Folder Structure
 
 > You can start the engine by running `~\app\binaries\fe3d.exe`
-
-## Folder Structure
 
 ### Overview
 
@@ -61,8 +59,8 @@
 └── app
   └── binaries (do NOT touch)
   └── engine (do NOT touch)
-  └── game
-    └── my_game
+  └── projects
+    └── <your_project>
       └── assets
         └── audio
         └── fonts
@@ -91,18 +89,22 @@
 
 ### Explanation
 
-- `~\app\`: contains the executable engine application.
-  - `binaries\`: contains the `.exe` file
+- `~\app\`: contains the engine application
+  - `binaries\`: contains the engine executable
   - `engine\`: contains runtime engine files
-  - `game\`: contains all your projects
+  - `projects\`: contains all your projects
     - `assets\`: contains all project assets
+      - `audio\`: contains all project audio files
+      - `fonts\`: contains all project font files
+      - `meshes\`: contains all project mesh files
+      - `textures\`: contains all project texture files
     - `data\`: contains all project editor data
     - `saves\`: contains all project save files
     - `scenes\`: contains all project scene files
     - `scripts\`: contains all project script files
-- `~\dev\`: contains the engine development systems.
-- `~\doc\`: contains the engine documentation.
-- `~\src\`: contains the engine source code.
+- `~\dev\`: contains the engine development systems
+- `~\doc\`: contains the engine documentation
+- `~\src\`: contains the engine source code
 
 ## Engine Interface
 
@@ -110,45 +112,6 @@
 
 - Left viewport: editor menus and project settings
 - Top viewport: project management & game preview management
-- Right viewport: controls & scene editor properties
-- Bottom viewport: statistics & logging console
+- Right viewport: controls & properties
+- Bottom viewport: statistics & logging
 - Mid viewport: 3D display screen
-
-## Development Order
-
-- **Project management**
-  > In the top-viewport you can create, edit, save and delete projects. 1 project = 1 game.
-- **Environment editor**
-  > This is where you can create environment entities. There are 3 types of environments: sky, terrain, water.
-- **Model editor**
-  > This is where you can create model entities composed of a mesh, textures, AABBs and other properties.
-- **Animation editor**
-  > This is where you can create custom animations using keyframe. Types of animation: translation, rotation, scaling.
-- **Billboard editor**
-  > This is where you can create billboard entities composed of texture/color/text and other properties.
-- **Audio editor**
-  > This is where you can create audio entities composed of an audio file.
-- **Scene editor**
-  > This is where you bring all the created environment, models, animations, billboards and audio together into a scene.
-- **Script editor**
-  > This is where you define your game logic. There are 3 types of logic: initialization, update, destruction.
-- **Project settings**
-  > This is where you can setup mostly graphical properties of your game such as shadow quality, reflection quality, etc.
-
-## Project Management
-
-- You can **create/edit/save/delete** a project in the top viewport.
-- 1 project = 1 game.
-- Every **project** is a different **game** and must have a **unique** name.
-- A project has its own folder in the engine `projects\` directory.
-- An important note is to **NOT** change anything in this directory!
-
-## Project Settings
-
-- Every project/game has its own settings file.
-- All settings will be saved in `projects\<your_project>\settings.fe3d`.
-- FXAA (default: ON). **Range**: ON or OFF.
-- Shadow quality (default: 2048). **Range**: 512 to 8192.
-- Reflection quality (default: 256). **Range**: 128 to 2048.
-- Refraction quality (default: 256). **Range**: 128 to 2048.
-- Max audio channels (default: 128). **Range**: 32 to 512.

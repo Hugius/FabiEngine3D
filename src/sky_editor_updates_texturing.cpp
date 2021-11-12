@@ -20,7 +20,7 @@ void SkyEditor::_updateTexturingMenu()
 		{
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("game\\" + _currentProjectID + "\\assets\\textures\\cube_maps\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\cube_maps\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
@@ -53,7 +53,7 @@ void SkyEditor::_updateTexturingMenu()
 		{
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("game\\" + _currentProjectID + "\\assets\\textures\\cube_maps\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\cube_maps\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
@@ -86,7 +86,7 @@ void SkyEditor::_updateTexturingMenu()
 		{
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("game\\" + _currentProjectID + "\\assets\\textures\\cube_maps\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\cube_maps\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
@@ -119,7 +119,7 @@ void SkyEditor::_updateTexturingMenu()
 		{
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("game\\" + _currentProjectID + "\\assets\\textures\\cube_maps\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\cube_maps\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
@@ -152,7 +152,7 @@ void SkyEditor::_updateTexturingMenu()
 		{
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("game\\" + _currentProjectID + "\\assets\\textures\\cube_maps\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\cube_maps\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
@@ -185,7 +185,7 @@ void SkyEditor::_updateTexturingMenu()
 		{
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("game\\" + _currentProjectID + "\\assets\\textures\\cube_maps\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\cube_maps\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))

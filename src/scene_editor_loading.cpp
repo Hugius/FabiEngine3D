@@ -21,7 +21,7 @@ const bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "scenes\\editor\\" + fileName + ".fe3d");
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "scenes\\editor\\" + fileName + ".fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -645,7 +645,7 @@ const bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				flareMapPath = string("game\\" + _currentProjectID + "\\" + flareMapPath);
+				flareMapPath = string("projects\\" + _currentProjectID + "\\" + flareMapPath);
 			}
 
 			// Enable lens flare

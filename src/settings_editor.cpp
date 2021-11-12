@@ -227,7 +227,7 @@ const bool SettingsEditor::loadSettingsFromFile() const
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\settings.fe3d");
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\settings.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -300,7 +300,7 @@ const bool SettingsEditor::saveSettingsToFile() const
 	}
 	else
 	{
-		file.open(Tools::getRootDirectoryPath() + "game\\" + _currentProjectID + "\\data\\settings.fe3d");
+		file.open(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\settings.fe3d");
 	}
 
 	// Get values

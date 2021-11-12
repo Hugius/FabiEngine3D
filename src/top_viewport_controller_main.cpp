@@ -257,7 +257,7 @@ void TopViewportController::_updateMiscScreenManagement()
 	{
 		// Get the chosen file name
 		const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-		const string targetDirectoryPath = string("game\\" + _currentProjectID + "\\assets\\");
+		const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\");
 
 		// Validate target directory
 		if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
@@ -308,7 +308,7 @@ void TopViewportController::_updateMiscScreenManagement()
 		// Copy directories
 		Tools::copyDirectory(string(rootDirectoryPath + "binaries"), string(exportDirectoryPath + "binaries"));
 		Tools::copyDirectory(string(rootDirectoryPath + "engine"), string(exportDirectoryPath + "engine"));
-		Tools::copyDirectory(string(rootDirectoryPath + "game\\" + _currentProjectID), exportDirectoryPath);
+		Tools::copyDirectory(string(rootDirectoryPath + "projects\\" + _currentProjectID), exportDirectoryPath);
 
 		// Rename executable
 		auto oldPath = string(exportDirectoryPath + "binaries\\fe3d.exe");

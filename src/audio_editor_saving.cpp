@@ -29,7 +29,7 @@ const bool AudioEditor::saveAudioEntitiesToFile() const
 	}
 	else
 	{
-		file.open(Tools::getRootDirectoryPath() + "game\\" + _currentProjectID + "\\data\\audio.fe3d");
+		file.open(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\audio.fe3d");
 	}
 
 	// Write audio data
@@ -39,7 +39,7 @@ const bool AudioEditor::saveAudioEntitiesToFile() const
 		auto audioPath = _fe3d.sound_getFilePath(audioID);
 
 		// Convert to short path
-		audioPath = string(audioPath.empty() ? "" : audioPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+		audioPath = string(audioPath.empty() ? "" : audioPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
 		// Convert empty string
 		audioPath = (audioPath.empty()) ? "?" : audioPath;

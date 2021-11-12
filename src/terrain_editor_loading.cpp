@@ -20,7 +20,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\terrain.fe3d");
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\terrain.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -94,7 +94,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
+				diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 			}
 
 			// Save path
@@ -107,7 +107,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				normalMapPath = string("game\\" + _currentProjectID + "\\" + normalMapPath);
+				normalMapPath = string("projects\\" + _currentProjectID + "\\" + normalMapPath);
 			}
 
 			// Save path
@@ -120,7 +120,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				normalMapPathR = string("game\\" + _currentProjectID + "\\" + normalMapPathR);
+				normalMapPathR = string("projects\\" + _currentProjectID + "\\" + normalMapPathR);
 			}
 
 			// Save path
@@ -133,7 +133,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				normalMapPathG = string("game\\" + _currentProjectID + "\\" + normalMapPathG);
+				normalMapPathG = string("projects\\" + _currentProjectID + "\\" + normalMapPathG);
 			}
 
 			// Save path
@@ -146,7 +146,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				normalMapPathB = string("game\\" + _currentProjectID + "\\" + normalMapPathB);
+				normalMapPathB = string("projects\\" + _currentProjectID + "\\" + normalMapPathB);
 			}
 
 			// Save path
@@ -159,7 +159,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				blendMapPath = string("game\\" + _currentProjectID + "\\" + blendMapPath);
+				blendMapPath = string("projects\\" + _currentProjectID + "\\" + blendMapPath);
 			}
 
 			// Save path
@@ -172,7 +172,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				blendMapPathR = string("game\\" + _currentProjectID + "\\" + blendMapPathR);
+				blendMapPathR = string("projects\\" + _currentProjectID + "\\" + blendMapPathR);
 			}
 
 			// Save path
@@ -185,7 +185,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				blendMapPathG = string("game\\" + _currentProjectID + "\\" + blendMapPathG);
+				blendMapPathG = string("projects\\" + _currentProjectID + "\\" + blendMapPathG);
 			}
 
 			// Save path
@@ -198,7 +198,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				blendMapPathB = string("game\\" + _currentProjectID + "\\" + blendMapPathB);
+				blendMapPathB = string("projects\\" + _currentProjectID + "\\" + blendMapPathB);
 			}
 
 			// Save path
@@ -224,7 +224,7 @@ const vector<string> TerrainEditor::getAllTerrainBitmapPathsFromFile() const
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\terrain.fe3d");
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\terrain.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -264,7 +264,7 @@ const vector<string> TerrainEditor::getAllTerrainBitmapPathsFromFile() const
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				heightMapPath = string("game\\" + _currentProjectID + "\\" + heightMapPath);
+				heightMapPath = string("projects\\" + _currentProjectID + "\\" + heightMapPath);
 			}
 			
 			// Save path
@@ -293,7 +293,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\terrain.fe3d");
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\terrain.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -381,7 +381,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
-					diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
+					diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 				}
 
 				// Set path
@@ -394,7 +394,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
-					normalMapPath = string("game\\" + _currentProjectID + "\\" + normalMapPath);
+					normalMapPath = string("projects\\" + _currentProjectID + "\\" + normalMapPath);
 				}
 
 				// Set path
@@ -407,7 +407,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
-					normalMapPathR = string("game\\" + _currentProjectID + "\\" + normalMapPathR);
+					normalMapPathR = string("projects\\" + _currentProjectID + "\\" + normalMapPathR);
 				}
 
 				// Set path
@@ -420,7 +420,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
-					normalMapPathG = string("game\\" + _currentProjectID + "\\" + normalMapPathG);
+					normalMapPathG = string("projects\\" + _currentProjectID + "\\" + normalMapPathG);
 				}
 
 				// Set path
@@ -433,7 +433,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
-					normalMapPathB = string("game\\" + _currentProjectID + "\\" + normalMapPathB);
+					normalMapPathB = string("projects\\" + _currentProjectID + "\\" + normalMapPathB);
 				}
 
 				// Set path
@@ -446,7 +446,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
-					blendMapPath = string("game\\" + _currentProjectID + "\\" + blendMapPath);
+					blendMapPath = string("projects\\" + _currentProjectID + "\\" + blendMapPath);
 				}
 
 				// Set path
@@ -459,7 +459,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
-					blendMapPathR = string("game\\" + _currentProjectID + "\\" + blendMapPathR);
+					blendMapPathR = string("projects\\" + _currentProjectID + "\\" + blendMapPathR);
 				}
 
 				// Set path
@@ -472,7 +472,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
-					blendMapPathG = string("game\\" + _currentProjectID + "\\" + blendMapPathG);
+					blendMapPathG = string("projects\\" + _currentProjectID + "\\" + blendMapPathG);
 				}
 
 				// Set path
@@ -485,7 +485,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
-					blendMapPathB = string("game\\" + _currentProjectID + "\\" + blendMapPathB);
+					blendMapPathB = string("projects\\" + _currentProjectID + "\\" + blendMapPathB);
 				}
 
 				// Set path

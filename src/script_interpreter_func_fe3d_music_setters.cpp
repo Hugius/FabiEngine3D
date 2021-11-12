@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dMusicSetterFunction(const string& func
 			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "assets\\audio\\" + arguments[0].getString());
+			const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\audio\\" + arguments[0].getString());
 
 			// Add to playlist
 			_fe3d.music_addToPlaylist(filePath);

@@ -29,7 +29,7 @@ const bool BillboardEditor::saveBillboardEntitiesToFile() const
 	}
 	else
 	{
-		file.open(Tools::getRootDirectoryPath() + "game\\" + _currentProjectID + "\\data\\billboard.fe3d");
+		file.open(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\billboard.fe3d");
 	}
 
 	// Write billboard data
@@ -54,9 +54,9 @@ const bool BillboardEditor::saveBillboardEntitiesToFile() const
 		auto textureRepeat = _fe3d.billboardEntity_getTextureRepeat(billboardID);
 
 		// Convert to short path
-		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
-		emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
-		fontPath = string(fontPath.empty() ? "" : fontPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		fontPath = string(fontPath.empty() ? "" : fontPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
 		// Convert empty string
 		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;

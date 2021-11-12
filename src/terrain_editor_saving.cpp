@@ -23,7 +23,7 @@ const bool TerrainEditor::saveTerrainEntitiesToFile() const
 	}
 	else
 	{
-		file.open(Tools::getRootDirectoryPath() + "game\\" + _currentProjectID + "\\data\\terrain.fe3d");
+		file.open(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\terrain.fe3d");
 	}
 
 	// Write terrain data
@@ -51,16 +51,16 @@ const bool TerrainEditor::saveTerrainEntitiesToFile() const
 		auto isSpecular = _fe3d.terrainEntity_isSpecular(terrainID);
 
 		// Convert to short path
-		heightMapPath = string(heightMapPath.empty() ? "" : heightMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
-		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
-		normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
-		blendMapPath = string(blendMapPath.empty() ? "" : blendMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
-		blendMapPathR = string(blendMapPathR.empty() ? "" : blendMapPathR.substr(string("game\\" + _currentProjectID + "\\").size()));
-		blendMapPathG = string(blendMapPathG.empty() ? "" : blendMapPathG.substr(string("game\\" + _currentProjectID + "\\").size()));
-		blendMapPathB = string(blendMapPathB.empty() ? "" : blendMapPathB.substr(string("game\\" + _currentProjectID + "\\").size()));
-		normalMapPathR = string(normalMapPathR.empty() ? "" : normalMapPathR.substr(string("game\\" + _currentProjectID + "\\").size()));
-		normalMapPathG = string(normalMapPathG.empty() ? "" : normalMapPathG.substr(string("game\\" + _currentProjectID + "\\").size()));
-		normalMapPathB = string(normalMapPathB.empty() ? "" : normalMapPathB.substr(string("game\\" + _currentProjectID + "\\").size()));
+		heightMapPath = string(heightMapPath.empty() ? "" : heightMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		blendMapPath = string(blendMapPath.empty() ? "" : blendMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		blendMapPathR = string(blendMapPathR.empty() ? "" : blendMapPathR.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		blendMapPathG = string(blendMapPathG.empty() ? "" : blendMapPathG.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		blendMapPathB = string(blendMapPathB.empty() ? "" : blendMapPathB.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		normalMapPathR = string(normalMapPathR.empty() ? "" : normalMapPathR.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		normalMapPathG = string(normalMapPathG.empty() ? "" : normalMapPathG.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		normalMapPathB = string(normalMapPathB.empty() ? "" : normalMapPathB.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
 		// Convert empty string
 		heightMapPath = (heightMapPath.empty()) ? "?" : heightMapPath;

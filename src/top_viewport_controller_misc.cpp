@@ -58,13 +58,13 @@ void TopViewportController::_updateProjectCreating()
 		if(_gui.getGlobalScreen()->checkValueForm("newProjectID", newProjectID))
 		{
 			// Temporary values
-			const string projectDirectoryPath = (Tools::getRootDirectoryPath() + "game\\");
+			const string projectDirectoryPath = (Tools::getRootDirectoryPath() + "projects\\");
 			const string newProjectDirectoryPath = (projectDirectoryPath + newProjectID + "\\");
 
 			// Check if game directory exists
 			if(!Tools::isDirectoryExisting(projectDirectoryPath))
 			{
-				Logger::throwWarning("Directory `game\\` is missing!");
+				Logger::throwWarning("Directory `projects\\` is missing!");
 				return;
 			}
 
@@ -152,12 +152,12 @@ void TopViewportController::_updateProjectCreating()
 const bool TopViewportController::_prepareProjectChoosing(const string& title) const
 {
 	// Temporary values
-	const string projectDirectoryPath = (Tools::getRootDirectoryPath() + "game\\");
+	const string projectDirectoryPath = (Tools::getRootDirectoryPath() + "projects\\");
 
 	// Check if game directory exists
 	if(!Tools::isDirectoryExisting(projectDirectoryPath))
 	{
-		Logger::throwWarning("Directory `game\\` is missing!");
+		Logger::throwWarning("Directory `projects\\` is missing!");
 		return false;
 	}
 
@@ -176,7 +176,7 @@ void TopViewportController::_updateProjectLoading()
 	{
 		// Temporary values
 		const string clickedButtonID = _gui.getGlobalScreen()->checkChoiceForm("projectList");
-		const string projectDirectoryPath = string(Tools::getRootDirectoryPath() + "game\\" + clickedButtonID + "\\");
+		const string projectDirectoryPath = string(Tools::getRootDirectoryPath() + "projects\\" + clickedButtonID + "\\");
 
 		// Check if user clicked a project ID
 		if(clickedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -277,7 +277,7 @@ void TopViewportController::_updateProjectDeleting()
 			}
 
 			// Check if project directory is still existing
-			const string directoryPath = (Tools::getRootDirectoryPath() + "game\\" + chosenButtonID);
+			const string directoryPath = (Tools::getRootDirectoryPath() + "projects\\" + chosenButtonID);
 			if(!Tools::isDirectoryExisting(directoryPath))
 			{
 				Logger::throwWarning("Cannot delete project: missing directory!");

@@ -29,7 +29,7 @@ const bool SkyEditor::saveSkyEntitiesToFile() const
 	}
 	else
 	{
-		file.open(Tools::getRootDirectoryPath() + "game\\" + _currentProjectID + "\\data\\sky.fe3d");
+		file.open(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\sky.fe3d");
 	}
 
 	// Write sky data
@@ -45,7 +45,7 @@ const bool SkyEditor::saveSkyEntitiesToFile() const
 		for(auto& diffuseMapPath : diffuseMapPaths)
 		{
 			// Convert to short path
-			diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+			diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
 			// Convert empty string
 			diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;

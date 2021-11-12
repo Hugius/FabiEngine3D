@@ -31,7 +31,7 @@ const bool ModelEditor::saveModelEntitiesToFile() const
 	}
 	else
 	{
-		file.open(Tools::getRootDirectoryPath() + "game\\" + _currentProjectID + "\\data\\model.fe3d");
+		file.open(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\model.fe3d");
 	}
 
 	// Write model data
@@ -47,7 +47,7 @@ const bool ModelEditor::saveModelEntitiesToFile() const
 		auto rotationOrder = static_cast<unsigned int>(_fe3d.modelEntity_getRotationOrder(modelID));
 
 		// Convert to short path
-		meshPath = string(meshPath.empty() ? "" : meshPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+		meshPath = string(meshPath.empty() ? "" : meshPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
 		// Convert empty string
 		meshPath = (meshPath.empty()) ? "?" : meshPath;
@@ -94,11 +94,11 @@ const bool ModelEditor::saveModelEntitiesToFile() const
 			auto reflectionType = static_cast<unsigned int>(_fe3d.modelEntity_getReflectionType(modelID, partID));
 
 			// Convert to short path
-			diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
-			emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
-			specularMapPath = string(specularMapPath.empty() ? "" : specularMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
-			reflectionMapPath = string(reflectionMapPath.empty() ? "" : reflectionMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
-			normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+			diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+			emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+			specularMapPath = string(specularMapPath.empty() ? "" : specularMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+			reflectionMapPath = string(reflectionMapPath.empty() ? "" : reflectionMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+			normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
 			// Convert empty string
 			partID = (partID.empty()) ? "?" : partID;

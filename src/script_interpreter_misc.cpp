@@ -111,7 +111,7 @@ const bool ScriptInterpreter::_validateSavesDirectory() const
 	// Compose directory path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto directoryPath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID)) + "\\saves\\");
+	const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\");
 
 	// Check if saves directory still exists
 	if(!Tools::isDirectoryExisting(directoryPath))

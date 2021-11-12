@@ -29,7 +29,7 @@ const bool WaterEditor::saveWaterEntitiesToFile() const
 	}
 	else
 	{
-		file.open(Tools::getRootDirectoryPath() + "game\\" + _currentProjectID + "\\data\\water.fe3d");
+		file.open(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\water.fe3d");
 	}
 
 	// Write water data
@@ -54,9 +54,9 @@ const bool WaterEditor::saveWaterEntitiesToFile() const
 		auto isRefractive = _fe3d.waterEntity_isRefractive(waterID);
 
 		// Convert to short path
-		dudvMapPath = string(dudvMapPath.empty() ? "" : dudvMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
-		normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
-		displacementMapPath = string(displacementMapPath.empty() ? "" : displacementMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+		dudvMapPath = string(dudvMapPath.empty() ? "" : dudvMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		displacementMapPath = string(displacementMapPath.empty() ? "" : displacementMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
 		// Convert empty string
 		dudvMapPath = (dudvMapPath.empty() ? "?" : dudvMapPath);

@@ -19,7 +19,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile() const
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\audio.fe3d");
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\audio.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -54,7 +54,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile() const
 		// Convert to long path
 		if(!Config::getInst().isApplicationExported())
 		{
-			audioPath = string("game\\" + _currentProjectID + "\\" + audioPath);
+			audioPath = string("projects\\" + _currentProjectID + "\\" + audioPath);
 		}
 
 		// Save path
@@ -81,7 +81,7 @@ const bool AudioEditor::loadAudioEntitiesFromFile()
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\audio.fe3d");
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\audio.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -115,7 +115,7 @@ const bool AudioEditor::loadAudioEntitiesFromFile()
 		// Convert to long path
 		if(!Config::getInst().isApplicationExported())
 		{
-			audioPath = string("game\\" + _currentProjectID + "\\" + audioPath);
+			audioPath = string("projects\\" + _currentProjectID + "\\" + audioPath);
 		}
 
 		// Create audio

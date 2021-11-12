@@ -30,7 +30,7 @@ const bool SceneEditor::saveEditorSceneToFile()
 	}
 	else
 	{
-		file.open(Tools::getRootDirectoryPath() + "game\\" + _currentProjectID + "\\scenes\\editor\\" + _currentSceneID + ".fe3d");
+		file.open(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\scenes\\editor\\" + _currentSceneID + ".fe3d");
 	}
 
 	// Save all LOD model IDs
@@ -463,7 +463,7 @@ const bool SceneEditor::saveEditorSceneToFile()
 		auto sensitivity = _fe3d.gfx_getLensFlareSensitivity();
 
 		// Convert to short path
-		flareMapPath = string(flareMapPath.empty() ? "" : flareMapPath.substr(string("game\\" + _currentProjectID + "\\").size()));
+		flareMapPath = string(flareMapPath.empty() ? "" : flareMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
 		// Convert empty string
 		flareMapPath = (flareMapPath.empty()) ? "?" : flareMapPath;

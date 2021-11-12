@@ -41,4 +41,4 @@ dev/Systems/ScriptingSystem.pdb
 app/binaries/*.pdb
 app/binaries/*.iobj
 app/binaries/*.ipdb
-app/game/*/
+app/projects/*/

@@ -22,7 +22,7 @@ const vector<string> ModelEditor::getAllMeshPathsFromFile() const
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\model.fe3d");
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\model.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -64,7 +64,7 @@ const vector<string> ModelEditor::getAllMeshPathsFromFile() const
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				meshPath = string("game\\" + _currentProjectID + "\\" + meshPath);
+				meshPath = string("projects\\" + _currentProjectID + "\\" + meshPath);
 			}
 
 			// Save mesh path
@@ -90,7 +90,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\model.fe3d");
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\model.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -192,7 +192,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 					// Convert to long path
 					if(!Config::getInst().isApplicationExported())
 					{
-						diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
+						diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 					}
 
 					// Save path
@@ -205,7 +205,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 					// Convert to long path
 					if(!Config::getInst().isApplicationExported())
 					{
-						emissionMapPath = string("game\\" + _currentProjectID + "\\" + emissionMapPath);
+						emissionMapPath = string("projects\\" + _currentProjectID + "\\" + emissionMapPath);
 					}
 
 					// Save path
@@ -218,7 +218,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 					// Convert to long path
 					if(!Config::getInst().isApplicationExported())
 					{
-						specularMapPath = string("game\\" + _currentProjectID + "\\" + specularMapPath);
+						specularMapPath = string("projects\\" + _currentProjectID + "\\" + specularMapPath);
 					}
 					
 					// Save path
@@ -231,7 +231,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 					// Convert to long path
 					if(!Config::getInst().isApplicationExported())
 					{
-						reflectionMapPath = string("game\\" + _currentProjectID + "\\" + reflectionMapPath);
+						reflectionMapPath = string("projects\\" + _currentProjectID + "\\" + reflectionMapPath);
 					}
 
 					// Save path
@@ -244,7 +244,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 					// Convert to long path
 					if(!Config::getInst().isApplicationExported())
 					{
-						normalMapPath = string("game\\" + _currentProjectID + "\\" + normalMapPath);
+						normalMapPath = string("projects\\" + _currentProjectID + "\\" + normalMapPath);
 					}
 
 					// Save path
@@ -275,7 +275,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("game\\" + _currentProjectID + "\\")) + "data\\model.fe3d");
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\model.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -330,7 +330,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				meshPath = string("game\\" + _currentProjectID + "\\" + meshPath);
+				meshPath = string("projects\\" + _currentProjectID + "\\" + meshPath);
 			}
 
 			// Create model
@@ -413,7 +413,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 						// Convert to long path
 						if(!Config::getInst().isApplicationExported())
 						{
-							diffuseMapPath = string("game\\" + _currentProjectID + "\\" + diffuseMapPath);
+							diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 						}
 
 						// Set path
@@ -426,7 +426,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 						// Convert to long path
 						if(!Config::getInst().isApplicationExported())
 						{
-							specularMapPath = string("game\\" + _currentProjectID + "\\" + specularMapPath);
+							specularMapPath = string("projects\\" + _currentProjectID + "\\" + specularMapPath);
 						}
 
 						// Set path
@@ -439,7 +439,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 						// Convert to long path
 						if(!Config::getInst().isApplicationExported())
 						{
-							emissionMapPath = string("game\\" + _currentProjectID + "\\" + emissionMapPath);
+							emissionMapPath = string("projects\\" + _currentProjectID + "\\" + emissionMapPath);
 						}
 
 						// Set path
@@ -452,7 +452,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 						// Convert to long path
 						if(!Config::getInst().isApplicationExported())
 						{
-							reflectionMapPath = string("game\\" + _currentProjectID + "\\" + reflectionMapPath);
+							reflectionMapPath = string("projects\\" + _currentProjectID + "\\" + reflectionMapPath);
 						}
 
 						// Set path
@@ -465,7 +465,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 						// Convert to long path
 						if(!Config::getInst().isApplicationExported())
 						{
-							normalMapPath = string("game\\" + _currentProjectID + "\\" + normalMapPath);
+							normalMapPath = string("projects\\" + _currentProjectID + "\\" + normalMapPath);
 						}
 
 						// Set path

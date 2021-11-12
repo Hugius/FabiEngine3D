@@ -7,9 +7,7 @@
 - **Client**: a networking program that sends messages to a networking server.
 - **TCP**: a networking protocol: Transmission Control Protocol.
 - **UDP**: a networking protocol: User Datagram Protocol.
-- **Translation**: this word is equal to "position".
-- **Scaling**: this word is equal to "size".
-- **Transformation**: the combination of translation, rotation, scaling.
+- **Transformation**: the combination of position, rotation, size.
 - **Collision**: intersection between 2 things (example: between the camera and a model).
 - **Raycasting**: the process of "casting" a ray (example: from the camera position towards where the camera is looking.
 - **Wireframe**: the "skeleton" of a mesh; draws only the lines between vertices.

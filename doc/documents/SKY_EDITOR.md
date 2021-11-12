@@ -2,10 +2,10 @@
 
 ## General
 
-- All sky entities will be saved in `~\projects\<your_project>\data\sky.fe3d`.
-- You can create/edit/delete sky entities.
-- Every created sky entity can be placed in a scene.
-- Each sky entity is rendered as a cube map, which consists of 6 different images: left, right, bottom, top, back, front.
+- All skies will be saved in `~\projects\<your_project>\data\sky.fe3d`.
+- You can create/edit/delete skies.
+- Every created sky can be placed in a scene.
+- Each sky is rendered as a cube map, which consists of 6 different textures: left, right, bottom, top, back, front.
 
 ## Controls
 

@@ -179,9 +179,9 @@ void RightViewportController::initialize()
 	rightWindow->createScreen("scriptEditorControls");
 	rightWindow->getScreen("scriptEditorControls")->createRectangle("mouseLeft", Vec2(-1.1f, 0.65f), Vec2(0.6f, 0.15f), "mouse_left.png", false);
 	rightWindow->getScreen("scriptEditorControls")->createRectangle("mouseRight", Vec2(-1.1f, 0.45f), Vec2(0.6f, 0.15f), "mouse_right.png", false);
-	rightWindow->getScreen("scriptEditorControls")->createRectangle("enter", Vec2(-0.975f, 0.25f), Vec2(0.45f, 0.15f), "enter.png", false);
-	rightWindow->getScreen("scriptEditorControls")->createRectangle("backspace", Vec2(-0.975f, 0.05f), Vec2(0.45f, 0.15f), "backspace.png", false);
-	rightWindow->getScreen("scriptEditorControls")->createRectangle("esc", Vec2(-0.975f, -0.15f), Vec2(0.45f, 0.15f), "esc.png", false);
+	rightWindow->getScreen("scriptEditorControls")->createRectangle("mouseMiddle", Vec2(-1.1f, 0.25f), Vec2(0.6f, 0.15f), "mouse_middle.png", false);
+	rightWindow->getScreen("scriptEditorControls")->createRectangle("enter", Vec2(-0.975f, 0.05f), Vec2(0.45f, 0.15f), "enter.png", false);
+	rightWindow->getScreen("scriptEditorControls")->createRectangle("backspace", Vec2(-0.975f, -0.15f), Vec2(0.45f, 0.15f), "backspace.png", false);
 	rightWindow->getScreen("scriptEditorControls")->createRectangle("left", Vec2(-0.975f, -0.35f), Vec2(0.45f, 0.15f), "left.png", false);
 	rightWindow->getScreen("scriptEditorControls")->createRectangle("right", Vec2(-0.475f, -0.35f), Vec2(0.45f, 0.15f), "right.png", false);
 	rightWindow->getScreen("scriptEditorControls")->createRectangle("up", Vec2(0.025f, -0.35f), Vec2(0.45f, 0.15f), "up.png", false);
@@ -190,6 +190,7 @@ void RightViewportController::initialize()
 	rightWindow->getScreen("scriptEditorControls")->createRectangle("c", Vec2(-0.475f, -0.65f), Vec2(0.45f, 0.15f), "c.png", false);
 	rightWindow->getScreen("scriptEditorControls")->createRectangle("ctrlV", Vec2(-0.975f, -0.825f), Vec2(0.45f, 0.15f), "ctrl.png", false);
 	rightWindow->getScreen("scriptEditorControls")->createRectangle("v", Vec2(-0.475f, -0.825f), Vec2(0.45f, 0.15f), "v.png", false);
+	rightWindow->getScreen("scriptEditorControls")->createRectangle("esc", Vec2(-0.975f, -0.35f), Vec2(0.45f, 0.15f), "esc.png", false);
 	rightWindow->getScreen("scriptEditorControls")->createTextField("title", Vec2(0.0f, 0.9f), Vec2(TW("Editor Controls"), CH), "Editor Controls", WHITE, true, false);
 	rightWindow->getScreen("scriptEditorControls")->createTextField("mouseLeft", Vec2(-0.5f, 0.675f), Vec2(TW("Place Cursor"), CH), "Place Cursor", BLACK, false, false);
 	rightWindow->getScreen("scriptEditorControls")->createTextField("mouseRight", Vec2(-0.5f, 0.475f), Vec2(TW("Select Line"), CH), "Select Line", BLACK, false, false);

@@ -2,9 +2,10 @@
 
 ## General
 
-- All terrain entities will be saved in `~\projects\<your_project>\data\terrain.fe3d`.
-- You can create/edit/delete terrain entities.
-- Every created terrain entity can be placed in a scene.
+- All terrains will be saved in `~\projects\<your_project>\data\terrain.fe3d`.
+- You can create/edit/delete terrains.
+- Every created terrain can be placed in a scene.
+- Each terrain is generated with a height map.
 
 ## Controls
 

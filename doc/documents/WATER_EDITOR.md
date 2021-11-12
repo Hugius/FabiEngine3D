@@ -2,10 +2,10 @@
 
 ## General
 
-- All water entities will be saved in `~\projects\<your_project>\data\water.fe3d`.
-- You can create/edit/delete water entities.
-- Every created water entity can be placed in a scene.
-- The water entity is simply a flat plane in 3D space.
+- All waters will be saved in `~\projects\<your_project>\data\water.fe3d`.
+- You can create/edit/delete waters.
+- Every created water can be placed in a scene.
+- Each water is rendered as a flat plane in 3D space.
 
 ## Controls
 

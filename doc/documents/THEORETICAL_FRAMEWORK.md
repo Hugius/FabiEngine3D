@@ -36,8 +36,12 @@
 - **Light mapping**: using a texture to make parts of a model brighter.
 - **Reflection mapping**: using a texture to make parts of a model reflective.
 - **Normal mapping**: using a texture to improve lighting effects on a model.
-- **Height mapping**: using a grayscale texture to generate a terrain.
+- **Height mapping**: using a texture to generate a terrain mesh.
 - **Blend mapping**: using a texture to blend multiple textures together onto a terrain.
 - **DUDV mapping**: using a texture to distort the texture of a water surface (example: water ripples).
-- **Displacement mapping**: using a texture to create waves in the water surface mesh.
+- **Displacement mapping**: using a texture to create waves in the water mesh.
 - **Flare mapping**: using a texture to achieve a lens flare effect when the camera is looking at a directional lighting caster.
+- **Vertex**: a point (XYZ) in space within a 3D mesh.
+- **UV coordinate**: a coordinate (XY) used for mapping 2D texture onto a 3D mesh.
+- **Normal vector**: a normalized vector that points in the opposite direction of a surface; used for lighting calculations.
+- **Fragment**: every pixel that canpossibly end up on your screen.

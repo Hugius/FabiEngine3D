@@ -9,7 +9,7 @@
 ## Controls
 
 - Press RMB to toggle the camera
-- Press MMB to zoom the camera
+- Scroll MMB to zoom the camera
 - Move the camera with your mouse
 - Press H to toggle debug rendering
 - Press R to toggle the reference box
@@ -18,25 +18,39 @@
 
 ## Texturing
 
-- The terrain entity is generated through a **height map** texture.
-- The terrain can have a base **diffuse map** texture.
-- Multitexturing can be done through a **blend map**.
-- Every color **channel** (R,G,B) of the blend map **represents** a different **diffuse map**.
-- The rendering of **every diffuse map** can be improved with a **normal map**.
-- In total you can use **10 different textures** for terrain rendering (1x heightmap, 1x blendmap, 4x diffusemap, 4x normalmap).
-- **Height map**: grayscaled 24bit `BMP` format image file from `~projects\<your_project>\assets\textures\height_maps\`.
-- **Blend map**: colored 24bit `PNG` format image file from `~projects\<your_project>\assets\textures\blend_maps\`.
-- **Diffuse maps**: colored 24bit `PNG` format image file from `~projects\<your_project>\assets\textures\diffuse_maps\`.
-- **Normal maps**: colored 24bit `PNG` format image file from `~projects\<your_project>\assets\textures\normal_maps\`.
+- **Height map**: grayscaled `24bit BMP` format image file from `~\projects\<your_project>\assets\textures\height_maps\`.
+- **Blend map**: colored `24bit PNG` format image file from `~\projects\<your_project>\assets\textures\blend_maps\`.
+- **Diffuse map**: colored `24bit PNG` format image file from `~\projects\<your_project>\assets\textures\diffuse_maps\`.
+- **Normal map**: colored `24bit PNG` format image file from `~\projects\<your_project>\assets\textures\normal_maps\`.
+
+## Blend Mapping
+
+Using a blend map you can render multiple textures onto a terrain mesh. Every color channel (R,G,B) of the blend map represents a different diffuse/normal map. This means that in total you can use up to 10 different textures for terrain rendering:
+
+- 1x height map
+- 1x blend map
+- 1x base diffuse map
+- 1x base normal map
+- 3x blend diffuse map
+- 3x blend normal map
 
 ## Properties
 
-- **Max height**: the maximum height of the terrain, which is calculated based on the height map pixel intensities. **Range**: 0 to inf.
-- **UV repeat**: the amount of times the main diffuse map texture is repeated. **Range**: 0 to inf.
-- **Red UV**: the amount of times the diffuse map texture of the RED blend map channel is repeated. **Range**: 0 to inf.
-- **Green UV**: the amount of times the diffuse map texture of the GREEN blend map channel is repeated. **Range**: 0 to inf.
-- **Blue UV**: the amount of times the diffuse map texture of the BLUE blend map channel is repeated. **Range**: 0 to inf.
-- **Specular**: enable or disable specular lighting on the terrain. **Range**: ON or OFF.
-- **Spec factor**: the shininess of the specular lighting. **Range**: 0 to 256.
-- **Spec intensity**: the intensity of the specular lighting. **Range**: 0 to inf.
-- **Lightness**: the brightness of the terrain fragments. **Range**: 0 to inf.
+- **Max Height**: the maximum height of the terrain, which is calculated based on the height map pixel intensities.
+  - **Range**: 0 to inf.
+- **Lightness**: the brightness of the terrain fragments.
+  - **Range**: 0 to inf.
+- **Specular**: enable or disable specular lighting on the terrain.
+  - **Range**: ON or OFF.
+- **Specular Factor**: the shininess of the specular lighting.
+  - **Range**: 0 to 256.
+- **Specular Intensity**: the intensity of the specular lighting.
+  - **Range**: 0 to inf.
+- **Texture Repeat**: the amount of times the base textures are repeated.
+  - **Range**: 0 to inf.
+- **Red Repeat**: the amount of times the textures of the red blend map channel are repeated.
+  - **Range**: 0 to inf.
+- **Green Repeat**: the amount of times the textures of the green blend map channel are repeated.
+  - **Range**: 0 to inf.
+- **Blue Repeat**: the amount of times the textures of the blue blend map channel are repeated.
+  - **Range**: 0 to inf.

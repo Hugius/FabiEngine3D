@@ -4,8 +4,7 @@
 
 - All terrain entities will be saved in `~\projects\<your_project>\data\terrain.fe3d`.
 - You can create/edit/delete terrain entities.
-- Every created terrain entity can be placed in a **scene** later on.
-- You can rotate the **camera** around the terrain by using your mouse **scroll wheel**.
+- Every created terrain entity can be placed in a scene.
 
 ## Controls
 
@@ -14,7 +13,7 @@
 - Move the camera with your mouse
 - Press H to toggle debug rendering
 - Press R to toggle the reference box
-- Press F to toggle wireframed rendering
+- Press F to toggle the wire frame
 - Press ESC to go back
 
 ## Texturing

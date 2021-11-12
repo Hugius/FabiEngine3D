@@ -74,19 +74,19 @@
     <OutDir>$(SolutionDir)..\app\binaries\</OutDir>
     <IncludePath>$(SolutionDir)Libraries\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Libraries\;$(SolutionDir)Systems\;$(LibraryPath)</LibraryPath>
-    <TargetName>FabiEngine3D</TargetName>
+    <TargetName>fe3d</TargetName>
     <IntDir>$(ProjectDir)Temp\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)..\app\binaries\</OutDir>
-    <TargetName>FabiEngine3D</TargetName>
+    <TargetName>fe3d</TargetName>
     <IncludePath>$(SolutionDir)Libraries\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Libraries\;$(SolutionDir)Systems\;$(LibraryPath)</LibraryPath>
     <IntDir>$(ProjectDir)Temp\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)..\app\binaries\</OutDir>
-    <TargetName>FabiEngine3D</TargetName>
+    <TargetName>fe3d</TargetName>
     <IntDir>$(ProjectDir)Temp\</IntDir>
     <IncludePath>$(SolutionDir)Libraries\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Libraries\;$(SolutionDir)Systems\;$(LibraryPath)</LibraryPath>
@@ -95,7 +95,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)..\app\binaries\</OutDir>
     <IntDir>$(ProjectDir)Temp\</IntDir>
-    <TargetName>FabiEngine3D</TargetName>
+    <TargetName>fe3d</TargetName>
     <IncludePath>$(SolutionDir)Libraries\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Libraries\;$(SolutionDir)Systems\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>

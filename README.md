@@ -6,25 +6,29 @@ FabiEngine3D is a custom game engine, created for simple 3D video games on PC. I
 
 `Development started on April 7, 2020.`
 
-![starvation](doc/images/engine.png)
+<img src="doc/images/engine.png" width="100%"/>
 
 ## Games
 
 ### Starvation
 
 A singleplayer medieval first person survival game in which you have only 1 enemy: death! There are multiple survival factors that you need to watch out for, such as: hunger, thirst, body temperature, oxygen and sickness. You will have to figure out on your own how to surive the longest using tools, resources, animals and buildings, before the Grim Reaper comes for your soul...
-![starvation](doc/images/starvation.png)
+
+<img src="doc/images/starvation.png" width="100%"/>
 
 ### White Noise
 
 A multiplayer first person shooter game based in a science-fiction setting: a space station! You can join a server with up to 3 other friends to see who is the best at shooting each other. Watch out, because 1 bullet is enough to make the endless void of space your final resting place!
-![white_noise](doc/images/white_noise.png)
+
+<img src="doc/images/white_noise.png" width="100%"/>
 
 ## Documentation
 
 - [Theoretical Framework](doc/documents/THEORETICAL_FRAMEWORK.md)
-- [General Information](doc/documents/GENERAL.md)
-- [Environment Editor](doc/documents/ENVIRONMENT_EDITOR.md)
+- [General Information](doc/documents/GENERAL_INFORMATION.md)
+- [Sky Editor](doc/documents/SKY_EDITOR.md)
+- [Terrain Editor](doc/documents/TERRAIN_EDITOR.md)
+- [Water Editor](doc/documents/WATER_EDITOR.md)
 - [Model Editor](doc/documents/MODEL_EDITOR.md)
 - [Animation Editor](doc/documents/ANIMATION_EDITOR.md)
 - [Billboard Editor](doc/documents/BILLBOARD_EDITOR.md)

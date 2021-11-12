@@ -1,5 +1,4 @@
 dev/.vs/
-dev/UpgradeLog.htm
 dev/Systems/AssetManagementSystem/Temp/
 dev/Systems/AudioSystem/Temp/
 dev/Systems/CoreSystem/Temp/
@@ -39,7 +38,7 @@ dev/Systems/NetworkingSystem.pdb
 dev/Systems/PhysicsSystem.pdb
 dev/Systems/RenderingSystem.pdb
 dev/Systems/ScriptingSystem.pdb
-app/binaries/FabiEngine3D.pdb
-app/binaries/FabiEngine3D.iobj
-app/binaries/FabiEngine3D.ipdb
+app/binaries/*.pdb
+app/binaries/*.iobj
+app/binaries/*.ipdb
 app/game/*/

@@ -1,5 +1,7 @@
 # Camera
-### Setters
+
+## Setters
+
 - `fe3d:camera_move`(`DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
   Moves the XYZ camera position with speed **xyz**.
 - `fe3d:camera_set_position`(`DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
@@ -40,7 +42,9 @@
   Locks pitch rotations when first person camera is enabled.
 - `fe3d:camera_unlock_pitch`() ---> `NONE`  
   Unlocks pitch rotations when first person camera is enabled.
-### Getters
+
+## Getters
+
 - `fe3d:camera_get_position`() ---> `VEC3`  
   Returns the XYZ camera position.
 - `fe3d:camera_get_yaw`() ---> `DEC`  

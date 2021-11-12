@@ -1,5 +1,7 @@
 # Billboard
-### Setters
+
+## Setters
+
 - `fe3d:billboard_place`(`STR` newID, `STR` previewID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
   Places a new billboard with **newID** (cannot start with @) based on billboard with **previewID** at position as **xyz**.
 - `fe3d:billboard_delete`(`STR` ID) ---> `NONE`  
@@ -44,7 +46,9 @@
   Stops the playing sprite animation of billboard with **ID**.
 - `fe3d:billboard_set_text`(`STR` ID, `STR` text) ---> `NONE`  
   Sets the text content of billboard with **ID**.
+
 ### Getters
+
 - `fe3d:billboard_is_existing`(`STR` ID) ---> `BOOL`  
   Returns true if billboard with **ID** is existing.
 - `fe3d:billboard_find_ids`(`STR` subID) ---> `LIST`  

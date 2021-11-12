@@ -211,7 +211,7 @@ void FabiEngine3D::terrainEntity_setSpecular(const string& ID, bool enabled)
 	_core->_terrainEntityManager.getEntity(ID)->setSpecular(enabled);
 }
 
-void FabiEngine3D::terrainEntity_setWireFramed(const string& ID, bool enabled)
+void FabiEngine3D::terrainEntity_setWireframed(const string& ID, bool enabled)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setWireFramed(enabled);
+	_core->_terrainEntityManager.getEntity(ID)->setWireframed(enabled);
 }

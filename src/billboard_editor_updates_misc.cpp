@@ -83,18 +83,18 @@ void BillboardEditor::_updateMiscellaneous()
 			}
 		}
 
-		// Update wire frame rendering
+		// Update wireframe rendering
 		if(_fe3d.billboardEntity_isExisting(_currentBillboardID))
 		{
 			if(_fe3d.input_isKeyPressed(InputType::KEY_F))
 			{
-				if(_fe3d.billboardEntity_isWireFramed(_currentBillboardID))
+				if(_fe3d.billboardEntity_isWireframed(_currentBillboardID))
 				{
-					_fe3d.billboardEntity_setWireFramed(_currentBillboardID, false);
+					_fe3d.billboardEntity_setWireframed(_currentBillboardID, false);
 				}
 				else
 				{
-					_fe3d.billboardEntity_setWireFramed(_currentBillboardID, true);
+					_fe3d.billboardEntity_setWireframed(_currentBillboardID, true);
 				}
 			}
 		}

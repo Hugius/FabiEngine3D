@@ -50,9 +50,9 @@ void SkyEntity::setRotationSpeed(float value)
 	_rotationSpeed = value;
 }
 
-void SkyEntity::setWireFramed(bool value)
+void SkyEntity::setWireframed(bool value)
 {
-	_isWireFramed = value;
+	_isWireframed = value;
 }
 
 const shared_ptr<RenderBuffer> SkyEntity::getRenderBuffer() const
@@ -105,9 +105,9 @@ const bool SkyEntity::hasCubeMap() const
 	return (_diffuseMap != 0);
 }
 
-const bool SkyEntity::isWireFramed() const
+const bool SkyEntity::isWireframed() const
 {
-	return _isWireFramed;
+	return _isWireframed;
 }
 
 const bool SkyEntity::hasRenderBuffer() const

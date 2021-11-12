@@ -31,7 +31,7 @@ void RightViewportController::initialize()
 	rightWindow->getScreen("skyEditorControls")->createTextField("mouseRight", Vec2(-0.5f, 0.675f), Vec2(TW("Toggle Camera"), CH), "Toggle Camera", BLACK, false, false);
 	rightWindow->getScreen("skyEditorControls")->createTextField("mouse", Vec2(-0.5f, 0.475f), Vec2(TW("Move Camera"), CH), "Move Camera", BLACK, false, false);
 	rightWindow->getScreen("skyEditorControls")->createTextField("h", Vec2(-0.5f, 0.275f), Vec2(TW("Debug Render"), CH), "Debug Render", BLACK, false, false);
-	rightWindow->getScreen("skyEditorControls")->createTextField("f", Vec2(-0.5f, 0.075f), Vec2(TW("Wire Frame"), CH), "Wire Frame", BLACK, false, false);
+	rightWindow->getScreen("skyEditorControls")->createTextField("f", Vec2(-0.5f, 0.075f), Vec2(TW("Wireframe"), CH), "Wireframe", BLACK, false, false);
 	rightWindow->getScreen("skyEditorControls")->createTextField("esc", Vec2(-0.5f, -0.125f), Vec2(TW("Back"), CH), "Back", BLACK, false, false);
 
 	// Right-viewport: terrainEditorControls
@@ -49,7 +49,7 @@ void RightViewportController::initialize()
 	rightWindow->getScreen("terrainEditorControls")->createTextField("mouse", Vec2(-0.5f, 0.275f), Vec2(TW("Move Camera"), CH), "Move Camera", BLACK, false, false);
 	rightWindow->getScreen("terrainEditorControls")->createTextField("h", Vec2(-0.5f, 0.075f), Vec2(TW("Debug Render"), CH), "Debug Render", BLACK, false, false);
 	rightWindow->getScreen("terrainEditorControls")->createTextField("r", Vec2(-0.5f, -0.125f), Vec2(TW("Reference Box"), CH), "Reference Box", BLACK, false, false);
-	rightWindow->getScreen("terrainEditorControls")->createTextField("f", Vec2(-0.5f, -0.325f), Vec2(TW("Wire Frame"), CH), "Wire Frame", BLACK, false, false);
+	rightWindow->getScreen("terrainEditorControls")->createTextField("f", Vec2(-0.5f, -0.325f), Vec2(TW("Wireframe"), CH), "Wireframe", BLACK, false, false);
 	rightWindow->getScreen("terrainEditorControls")->createTextField("esc", Vec2(-0.5f, -0.525f), Vec2(TW("Back"), CH), "Back", BLACK, false, false);
 
 	// Right-viewport: waterEditorControls
@@ -67,7 +67,7 @@ void RightViewportController::initialize()
 	rightWindow->getScreen("waterEditorControls")->createTextField("mouse", Vec2(-0.5f, 0.275f), Vec2(TW("Move Camera"), CH), "Move Camera", BLACK, false, false);
 	rightWindow->getScreen("waterEditorControls")->createTextField("h", Vec2(-0.5f, 0.075f), Vec2(TW("Debug Render"), CH), "Debug Render", BLACK, false, false);
 	rightWindow->getScreen("waterEditorControls")->createTextField("r", Vec2(-0.5f, -0.125f), Vec2(TW("Reference Box"), CH), "Reference Box", BLACK, false, false);
-	rightWindow->getScreen("waterEditorControls")->createTextField("f", Vec2(-0.5f, -0.325f), Vec2(TW("Wire Frame"), CH), "Wire Frame", BLACK, false, false);
+	rightWindow->getScreen("waterEditorControls")->createTextField("f", Vec2(-0.5f, -0.325f), Vec2(TW("Wireframe"), CH), "Wireframe", BLACK, false, false);
 	rightWindow->getScreen("waterEditorControls")->createTextField("esc", Vec2(-0.5f, -0.525f), Vec2(TW("Back"), CH), "Back", BLACK, false, false);
 
 	// Right-viewport: modelEditorControls
@@ -87,7 +87,7 @@ void RightViewportController::initialize()
 	rightWindow->getScreen("modelEditorControls")->createTextField("mouse", Vec2(-0.5f, 0.275f), Vec2(TW("Move Camera"), CH), "Move Camera", BLACK, false, false);
 	rightWindow->getScreen("modelEditorControls")->createTextField("h", Vec2(-0.5f, 0.075f), Vec2(TW("Debug Render"), CH), "Debug Render", BLACK, false, false);
 	rightWindow->getScreen("modelEditorControls")->createTextField("r", Vec2(-0.5f, -0.125f), Vec2(TW("Reference Box"), CH), "Reference Box", BLACK, false, false);
-	rightWindow->getScreen("modelEditorControls")->createTextField("f", Vec2(-0.5f, -0.325f), Vec2(TW("Wire Frame"), CH), "Wire Frame", BLACK, false, false);
+	rightWindow->getScreen("modelEditorControls")->createTextField("f", Vec2(-0.5f, -0.325f), Vec2(TW("Wireframe"), CH), "Wireframe", BLACK, false, false);
 	rightWindow->getScreen("modelEditorControls")->createTextField("space", Vec2(-0.5f, -0.525f), Vec2(TW("Move Up"), CH), "Move Up", BLACK, false, false);
 	rightWindow->getScreen("modelEditorControls")->createTextField("shift", Vec2(-0.5f, -0.725f), Vec2(TW("Move Down"), CH), "Move Down", BLACK, false, false);
 	rightWindow->getScreen("modelEditorControls")->createTextField("esc", Vec2(-0.5f, -0.925f), Vec2(TW("Back"), CH), "Back", BLACK, false, false);
@@ -109,7 +109,7 @@ void RightViewportController::initialize()
 	rightWindow->getScreen("animationEditorControls")->createTextField("mouse", Vec2(-0.5f, 0.275f), Vec2(TW("Move Camera"), CH), "Move Camera", BLACK, false, false);
 	rightWindow->getScreen("animationEditorControls")->createTextField("h", Vec2(-0.5f, 0.075f), Vec2(TW("Debug Render"), CH), "Debug Render", BLACK, false, false);
 	rightWindow->getScreen("animationEditorControls")->createTextField("r", Vec2(-0.5f, -0.125f), Vec2(TW("Reference Box"), CH), "Reference Box", BLACK, false, false);
-	rightWindow->getScreen("animationEditorControls")->createTextField("f", Vec2(-0.5f, -0.325f), Vec2(TW("Wire Frame"), CH), "Wire Frame", BLACK, false, false);
+	rightWindow->getScreen("animationEditorControls")->createTextField("f", Vec2(-0.5f, -0.325f), Vec2(TW("Wireframe"), CH), "Wireframe", BLACK, false, false);
 	rightWindow->getScreen("animationEditorControls")->createTextField("space", Vec2(-0.5f, -0.525f), Vec2(TW("Move Up"), CH), "Move Up", BLACK, false, false);
 	rightWindow->getScreen("animationEditorControls")->createTextField("shift", Vec2(-0.5f, -0.725f), Vec2(TW("Move Down"), CH), "Move Down", BLACK, false, false);
 	rightWindow->getScreen("animationEditorControls")->createTextField("esc", Vec2(-0.5f, -0.925f), Vec2(TW("Back"), CH), "Back", BLACK, false, false);
@@ -131,7 +131,7 @@ void RightViewportController::initialize()
 	rightWindow->getScreen("billboardEditorControls")->createTextField("mouse", Vec2(-0.5f, 0.275f), Vec2(TW("Move Camera"), CH), "Move Camera", BLACK, false, false);
 	rightWindow->getScreen("billboardEditorControls")->createTextField("h", Vec2(-0.5f, 0.075f), Vec2(TW("Debug Render"), CH), "Debug Render", BLACK, false, false);
 	rightWindow->getScreen("billboardEditorControls")->createTextField("r", Vec2(-0.5f, -0.125f), Vec2(TW("Reference Box"), CH), "Reference Box", BLACK, false, false);
-	rightWindow->getScreen("billboardEditorControls")->createTextField("f", Vec2(-0.5f, -0.325f), Vec2(TW("Wire Frame"), CH), "Wire Frame", BLACK, false, false);
+	rightWindow->getScreen("billboardEditorControls")->createTextField("f", Vec2(-0.5f, -0.325f), Vec2(TW("Wireframe"), CH), "Wireframe", BLACK, false, false);
 	rightWindow->getScreen("billboardEditorControls")->createTextField("space", Vec2(-0.5f, -0.525f), Vec2(TW("Move Up"), CH), "Move Up", BLACK, false, false);
 	rightWindow->getScreen("billboardEditorControls")->createTextField("shift", Vec2(-0.5f, -0.725f), Vec2(TW("Move Down"), CH), "Move Down", BLACK, false, false);
 	rightWindow->getScreen("billboardEditorControls")->createTextField("esc", Vec2(-0.5f, -0.925f), Vec2(TW("Back"), CH), "Back", BLACK, false, false);
@@ -171,7 +171,7 @@ void RightViewportController::initialize()
 	rightWindow->getScreen("sceneEditorControls")->createTextField("mouseRight", Vec2(-0.5f, 0.275f), Vec2(TW("Toggle Camera"), CH), "Toggle Camera", BLACK, false, false);
 	rightWindow->getScreen("sceneEditorControls")->createTextField("mouse", Vec2(-0.5f, 0.075f), Vec2(TW("Move Camera"), CH), "Move Camera", BLACK, false, false);
 	rightWindow->getScreen("sceneEditorControls")->createTextField("h", Vec2(-0.5f, -0.125f), Vec2(TW("Debug Render"), CH), "Debug Render", BLACK, false, false);
-	rightWindow->getScreen("sceneEditorControls")->createTextField("f", Vec2(-0.5f, -0.325f), Vec2(TW("Wire Frame"), CH), "Wire Frame", BLACK, false, false);
+	rightWindow->getScreen("sceneEditorControls")->createTextField("f", Vec2(-0.5f, -0.325f), Vec2(TW("Wireframe"), CH), "Wireframe", BLACK, false, false);
 	rightWindow->getScreen("sceneEditorControls")->createTextField("b", Vec2(-0.5f, -0.525f), Vec2(TW("Toggle AABB"), CH), "Toggle AABB", BLACK, false, false);
 	rightWindow->getScreen("sceneEditorControls")->createTextField("wasd", Vec2(0.025f, -0.925f), Vec2(TW("Movement"), CH), "Movement", BLACK, false, false);
 

@@ -111,7 +111,7 @@ void SkyEditor::_updateChoiceMenu()
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuMain");
 			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("skyID")->getEntityID(), false);
-			_fe3d.skyEntity_setWireFramed(_currentSkyID, false);
+			_fe3d.skyEntity_setWireframed(_currentSkyID, false);
 			_fe3d.skyEntity_selectMainSky("@@engineBackground");
 			_currentSkyID = "";
 			return;

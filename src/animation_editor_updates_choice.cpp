@@ -47,7 +47,7 @@ void AnimationEditor::_updateChoiceMenu()
 			// Hide preview model
 			if(_fe3d.modelEntity_isExisting(currentAnimation->getPreviewModelID()))
 			{
-				_fe3d.modelEntity_setWireFramed(currentAnimation->getPreviewModelID(), false);
+				_fe3d.modelEntity_setWireframed(currentAnimation->getPreviewModelID(), false);
 				_fe3d.modelEntity_setVisible(currentAnimation->getPreviewModelID(), false);
 			}
 

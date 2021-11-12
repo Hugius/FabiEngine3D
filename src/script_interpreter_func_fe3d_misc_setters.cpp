@@ -154,37 +154,37 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:wireFrame_enable_rendering")
+	else if(functionName == "fe3d:wireframe_enable_rendering")
 	{
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			// Cannot execute wire frame functionality when server is running
+			// Cannot execute wireframe functionality when server is running
 			if(_fe3d.networkServer_isRunning())
 			{
-				_throwScriptError("cannot access `fe3d:wireFrame` functionality as a networking server!");
+				_throwScriptError("cannot access `fe3d:wireframe` functionality as a networking server!");
 				return true;
 			}
 
-			// Enable wire frame rendering
-			_fe3d.misc_enableWireFrameRendering();
+			// Enable wireframe rendering
+			_fe3d.misc_enableWireframeRendering();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:wireFrame_disable_rendering")
+	else if(functionName == "fe3d:wireframe_disable_rendering")
 	{
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			// Cannot execute wire frame functionality when server is running
+			// Cannot execute wireframe functionality when server is running
 			if(_fe3d.networkServer_isRunning())
 			{
-				_throwScriptError("cannot access `fe3d:wireFrame` functionality as a networking server!");
+				_throwScriptError("cannot access `fe3d:wireframe` functionality as a networking server!");
 				return true;
 			}
 
-			// Disable wire frame rendering
-			_fe3d.misc_disableWireFrameRendering();
+			// Disable wireframe rendering
+			_fe3d.misc_disableWireframeRendering();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

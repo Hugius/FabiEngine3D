@@ -81,9 +81,9 @@ void FabiEngine3D::waterEntity_setRefractive(const string& ID, bool enabled)
 	_core->_waterEntityManager.getEntity(ID)->setRefractive(enabled);
 }
 
-void FabiEngine3D::waterEntity_setWireFramed(const string& ID, bool enabled)
+void FabiEngine3D::waterEntity_setWireframed(const string& ID, bool enabled)
 {
-	_core->_waterEntityManager.getEntity(ID)->setWireFramed(enabled);
+	_core->_waterEntityManager.getEntity(ID)->setWireframed(enabled);
 }
 
 void FabiEngine3D::waterEntity_setDudvMap(const string& ID, const string& texturePath)

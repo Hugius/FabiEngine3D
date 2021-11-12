@@ -233,9 +233,9 @@ void BillboardEntity::setBright(bool value)
 	_isBright = value;
 }
 
-void BillboardEntity::setWireFramed(bool value)
+void BillboardEntity::setWireframed(bool value)
 {
-	_isWireFramed = value;
+	_isWireframed = value;
 }
 
 void BillboardEntity::setShadowed(bool value)

@@ -126,9 +126,9 @@ void FabiEngine3D::billboardEntity_setEmissionMap(const string& ID, const string
 	}
 }
 
-void FabiEngine3D::billboardEntity_setWireFramed(const string& ID, bool enabled)
+void FabiEngine3D::billboardEntity_setWireframed(const string& ID, bool enabled)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setWireFramed(enabled);
+	_core->_billboardEntityManager.getEntity(ID)->setWireframed(enabled);
 }
 
 void FabiEngine3D::billboardEntity_setCameraFacingX(const string& ID, bool enabled)

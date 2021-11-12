@@ -21,7 +21,7 @@ uniform vec3 u_mainColor;
 uniform vec3 u_mixColor;
 
 // Boolean uniforms
-uniform bool u_isWireFramed;
+uniform bool u_isWireframed;
 
 // Out variables
 layout (location = 0) out vec4 o_primaryColor;
@@ -30,8 +30,8 @@ layout (location = 1) out vec4 o_secondaryColor;
 // Process fragment
 void main()
 {
-	// Wire frame color
-	if(u_isWireFramed)
+	// Wireframe color
+	if(u_isWireframed)
 	{
 		o_primaryColor = vec4(FRAME_COLOR, 1.0f);
 		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);

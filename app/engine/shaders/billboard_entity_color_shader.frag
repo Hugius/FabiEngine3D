@@ -28,7 +28,7 @@ uniform float u_alpha;
 uniform float u_emissionIntensity;
 
 // Boolean uniforms
-uniform bool u_isWireFramed;
+uniform bool u_isWireframed;
 uniform bool u_isFogEnabled;
 uniform bool u_hasDiffuseMap;
 uniform bool u_isBright;
@@ -46,8 +46,8 @@ vec3 calculateFog(vec3 color);
 // Process fragment
 void main()
 {
-	// Wire frame color
-	if(u_isWireFramed)
+	// Wireframe color
+	if(u_isWireframed)
 	{
 		o_primaryColor = vec4(FRAME_COLOR, 1.0f);
 		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);

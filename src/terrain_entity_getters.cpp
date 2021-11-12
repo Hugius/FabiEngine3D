@@ -170,9 +170,9 @@ const bool TerrainEntity::isSpecular() const
 	return _isSpecular;
 }
 
-const bool TerrainEntity::isWireFramed() const
+const bool TerrainEntity::isWireframed() const
 {
-	return _isWireFramed;
+	return _isWireframed;
 }
 
 const bool TerrainEntity::hasRenderBuffer() const

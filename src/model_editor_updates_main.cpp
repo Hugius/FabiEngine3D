@@ -144,7 +144,7 @@ void ModelEditor::_updateChoiceMenu()
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			// Hide model
-			_fe3d.modelEntity_setWireFramed(_currentModelID, false);
+			_fe3d.modelEntity_setWireframed(_currentModelID, false);
 			_fe3d.modelEntity_setVisible(_currentModelID, false);
 
 			// Go back to main screen

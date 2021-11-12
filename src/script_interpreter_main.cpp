@@ -436,9 +436,9 @@ void ScriptInterpreter::unload()
 	{
 		_fe3d.misc_disableAabbFrameRendering();
 	}
-	if(_fe3d.misc_isWireFrameRenderingEnabled())
+	if(_fe3d.misc_isWireframeRenderingEnabled())
 	{
-		_fe3d.misc_disableWireFrameRendering();
+		_fe3d.misc_disableWireframeRendering();
 	}
 	if(!_fe3d.misc_isVsyncEnabled())
 	{

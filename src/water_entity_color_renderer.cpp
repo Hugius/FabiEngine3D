@@ -125,8 +125,8 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 {
 	if(entity->hasLowQualityRenderBuffer() && entity->hasHighQualityRenderBuffer() && entity->isVisible())
 	{
-		// Enable wire frame
-		if(entity->isWireFramed())
+		// Enable wireframe
+		if(entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
@@ -139,7 +139,7 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().z < (entity->getSize() / 2.0f));
 
 		// Shader uniforms
-		_shader.uploadUniform("u_isWireFramed", (entity->isWireFramed() || _renderBus.isWireFrameRenderingEnabled()));
+		_shader.uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus.isWireframeRenderingEnabled()));
 		_shader.uploadUniform("u_rippleOffset", entity->getRippleOffset());
 		_shader.uploadUniform("u_waveOffset", entity->getWaveOffset());
 		_shader.uploadUniform("u_waveHeight", entity->getWaveHeight());
@@ -216,8 +216,8 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 
-		// Disable wire frame
-		if(entity->isWireFramed())
+		// Disable wireframe
+		if(entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}

@@ -73,7 +73,7 @@ public:
 	void skyEntity_setLightness(const string& ID, float lightness);
 	void skyEntity_setRotationSpeed(const string& ID, float speed);
 	void skyEntity_setColor(const string& ID, Vec3 color);
-	void skyEntity_setWireFramed(const string& ID, bool enabled);
+	void skyEntity_setWireframed(const string& ID, bool enabled);
 
 	// Sky entity interface - getters
 	const vector<string> skyEntity_getAllIDs() const;
@@ -87,7 +87,7 @@ public:
 	const float skyEntity_getMixValue() const;
 	const bool skyEntity_isExisting(const string& ID) const;
 	const bool skyEntity_isVisible(const string& ID) const;
-	const bool skyEntity_isWireFramed(const string& ID) const;
+	const bool skyEntity_isWireframed(const string& ID) const;
 	const bool skyEntity_hasDiffuseMapRight(const string& ID) const;
 	const bool skyEntity_hasDiffuseMapLeft(const string& ID) const;
 	const bool skyEntity_hasDiffuseMapTop(const string& ID) const;
@@ -119,7 +119,7 @@ public:
 	void terrainEntity_setSpecularShininess(const string& ID, float shininess);
 	void terrainEntity_setSpecularIntensity(const string& ID, float intensity);
 	void terrainEntity_setSpecular(const string& ID, bool enabled);
-	void terrainEntity_setWireFramed(const string& ID, bool enabled);
+	void terrainEntity_setWireframed(const string& ID, bool enabled);
 
 	// Terrain entity interface - getters
 	const vector<string> terrainEntity_getAllIDs() const;
@@ -147,7 +147,7 @@ public:
 	const bool terrainEntity_isExisting(const string& ID) const;
 	const bool terrainEntity_isVisible(const string& ID) const;
 	const bool terrainEntity_isSpecular(const string& ID) const;
-	const bool terrainEntity_isWireFramed(const string& ID) const;
+	const bool terrainEntity_isWireframed(const string& ID) const;
 	const bool terrainEntity_isInside(const string& ID, float x, float z) const;
 	const bool terrainEntity_hasBlendMap(const string& ID) const;
 	const bool terrainEntity_hasDiffuseMap(const string& ID) const;
@@ -171,7 +171,7 @@ public:
 	void waterEntity_setSpecular(const string& ID, bool enabled);
 	void waterEntity_setReflective(const string& ID, bool enabled);
 	void waterEntity_setRefractive(const string& ID, bool enabled);
-	void waterEntity_setWireFramed(const string& ID, bool enabled);
+	void waterEntity_setWireframed(const string& ID, bool enabled);
 	void waterEntity_setDudvMap(const string& ID, const string& texturePath);
 	void waterEntity_setNormalMap(const string& ID, const string& texturePath);
 	void waterEntity_setDisplacementMap(const string& ID, const string& texturePath);
@@ -203,7 +203,7 @@ public:
 	const bool waterEntity_isSpecular(const string& ID) const;
 	const bool waterEntity_isReflective(const string& ID) const;
 	const bool waterEntity_isRefractive(const string& ID) const;
-	const bool waterEntity_isWireFramed(const string& ID) const;
+	const bool waterEntity_isWireframed(const string& ID) const;
 	const bool waterEntity_hasDudvMap(const string& ID) const;
 	const bool waterEntity_hasNormalMap(const string& ID) const;
 	const bool waterEntity_hasDisplacementMap(const string& ID) const;
@@ -229,7 +229,7 @@ public:
 	void modelEntity_setReflected(const string& ID, bool enabled);
 	void modelEntity_setDepthMapIncluded(const string& ID, bool enabled);
 	void modelEntity_setStaticToCamera(const string& ID, bool enabled);
-	void modelEntity_setWireFramed(const string& ID, bool enabled);
+	void modelEntity_setWireframed(const string& ID, bool enabled);
 	void modelEntity_setBasePosition(const string& ID, Vec3 position);
 	void modelEntity_setBaseRotation(const string& ID, Vec3 rotation);
 	void modelEntity_setBaseRotationOrigin(const string& ID, Vec3 rotationOrigin);
@@ -308,7 +308,7 @@ public:
 	const bool modelEntity_isShadowed(const string& ID) const;
 	const bool modelEntity_isReflected(const string& ID) const;
 	const bool modelEntity_isStaticToCamera(const string& ID) const;
-	const bool modelEntity_isWireFramed(const string& ID) const;
+	const bool modelEntity_isWireframed(const string& ID) const;
 	const bool modelEntity_isDepthMapIncluded(const string& ID) const;
 	const bool modelEntity_hasPart(const string& ID, const string& partID) const;
 	const bool modelEntity_isBright(const string& ID) const;
@@ -363,7 +363,7 @@ public:
 	void billboardEntity_setShadowed(const string& ID, bool enabled);
 	void billboardEntity_setReflected(const string& ID, bool enabled);
 	void billboardEntity_setBright(const string& ID, bool enabled);
-	void billboardEntity_setWireFramed(const string& ID, bool enabled);
+	void billboardEntity_setWireframed(const string& ID, bool enabled);
 
 	// Billboard entity interface - getters
 	const vector<string> billboardEntity_getAllIDs() const;
@@ -396,7 +396,7 @@ public:
 	const bool billboardEntity_isShadowed(const string& ID) const;
 	const bool billboardEntity_isReflected(const string& ID) const;
 	const bool billboardEntity_isBright(const string& ID) const;
-	const bool billboardEntity_isWireFramed(const string& ID) const;
+	const bool billboardEntity_isWireframed(const string& ID) const;
 	const bool billboardEntity_isSpriteAnimationStarted(const string& ID) const;
 	const bool billboardEntity_isSpriteAnimationPlaying(const string& ID) const;
 	const bool billboardEntity_isSpriteAnimationPaused(const string& ID) const;
@@ -878,14 +878,14 @@ public:
 	const bool networkClient_isAccepted() const;
 
 	// Miscellaneous interface - setters
-	void misc_enableWireFrameRendering();
+	void misc_enableWireframeRendering();
 	void misc_enableShadowFrameRendering();
 	void misc_enableAabbFrameRendering();
 	void misc_enableDebugRendering();
 	void misc_enableVsync();
 	void misc_enableSounds();
 	void misc_enableMusic();
-	void misc_disableWireFrameRendering();
+	void misc_disableWireframeRendering();
 	void misc_disableShadowFrameRendering();
 	void misc_disableAabbFrameRendering();
 	void misc_disableDebugRendering();
@@ -933,7 +933,7 @@ public:
 	const bool misc_checkInterval(unsigned int ticks) const;
 	const bool misc_isMillisecondTimerStarted() const;
 	const bool misc_isVsyncEnabled() const;
-	const bool misc_isWireFrameRenderingEnabled() const;
+	const bool misc_isWireframeRenderingEnabled() const;
 	const bool misc_isShadowFrameRenderingEnabled() const;
 	const bool misc_isAabbFrameRenderingEnabled() const;
 	const bool misc_isDebugRenderingEnabled() const;

@@ -120,7 +120,7 @@ void WaterEditor::_updateChoiceMenu()
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMain");
 			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("waterID")->getEntityID(), false);
-			_fe3d.waterEntity_setWireFramed(_currentWaterID, false);
+			_fe3d.waterEntity_setWireframed(_currentWaterID, false);
 			_fe3d.waterEntity_select("");
 			_currentWaterID = "";
 			return;

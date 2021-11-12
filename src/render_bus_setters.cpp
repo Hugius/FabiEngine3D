@@ -348,9 +348,9 @@ void RenderBus::setLensFlareEnabled(bool value)
 	_isLensFlareEnabled = value;
 }
 
-void RenderBus::setWireFrameRenderingEnabled(bool value)
+void RenderBus::setWireframeRenderingEnabled(bool value)
 {
-	_isWireFrameRenderingEnabled = value;
+	_isWireframeRenderingEnabled = value;
 }
 
 void RenderBus::setAabbFrameRenderingEnabled(bool value)

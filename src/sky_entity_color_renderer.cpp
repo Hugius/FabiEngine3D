@@ -30,14 +30,14 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, cons
 {
 	if(mainEntity->isVisible())
 	{
-		// Enable wire frame
-		if(mainEntity->isWireFramed())
+		// Enable wireframe
+		if(mainEntity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
 
 		// Shader uniforms
-		_shader.uploadUniform("u_isWireFramed", (mainEntity->isWireFramed() || _renderBus.isWireFrameRenderingEnabled()));
+		_shader.uploadUniform("u_isWireframed", (mainEntity->isWireframed() || _renderBus.isWireframeRenderingEnabled()));
 		_shader.uploadUniform("u_rotationMatrix", mainEntity->getRotationMatrix());
 		_shader.uploadUniform("u_mainLightness", mainEntity->getLightness());
 		_shader.uploadUniform("u_mainColor", mainEntity->getColor());
@@ -81,8 +81,8 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, cons
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 		}
 
-		// Disable wire frame
-		if(mainEntity->isWireFramed())
+		// Disable wireframe
+		if(mainEntity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}

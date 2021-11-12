@@ -76,7 +76,7 @@ public:
 	void setSpecular(const string& partID, bool value);
 	void setReflective(const string& partID, bool value);
 	void setReflectionType(const string& partID, ReflectionType value);
-	void setWireFramed(bool value);
+	void setWireframed(bool value);
 	void setFaceCulled(bool value);
 	void setRotationOrder(DirectionOrder order);
 
@@ -127,7 +127,7 @@ public:
 	const bool isDepthMapIncluded() const;
 	const bool isLevelOfDetailed() const;
 	const bool isBright() const;
-	const bool isWireFramed() const;
+	const bool isWireframed() const;
 	const bool isFaceCulled() const;
 	const bool isSpecular(const string& partID) const;
 	const bool isReflective(const string& partID) const;
@@ -245,7 +245,7 @@ private:
 	bool _isDepthMapIncluded = true;
 	bool _isLevelOfDetailed = false;
 	bool _isBright = false;
-	bool _isWireFramed = false;
+	bool _isWireframed = false;
 	bool _isFaceCulled = false;
 
 	// Miscellaneous

@@ -26,9 +26,9 @@ const bool FabiEngine3D::waterEntity_isRefractive(const string& ID) const
 	return _core->_waterEntityManager.getEntity(ID)->isRefractive();
 }
 
-const bool FabiEngine3D::waterEntity_isWireFramed(const string& ID) const
+const bool FabiEngine3D::waterEntity_isWireframed(const string& ID) const
 {
-	return _core->_waterEntityManager.getEntity(ID)->isWireFramed();
+	return _core->_waterEntityManager.getEntity(ID)->isWireframed();
 }
 
 const bool FabiEngine3D::waterEntity_hasDudvMap(const string& ID) const

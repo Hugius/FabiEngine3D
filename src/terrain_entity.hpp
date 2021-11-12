@@ -47,7 +47,7 @@ public:
 	void setSpecularShininess(float value);
 	void setSpecularIntensity(float value);
 	void setSpecular(bool value);
-	void setWireFramed(bool value);
+	void setWireframed(bool value);
 
 	// Strings
 	const string& getHeightMapPath() const;
@@ -80,7 +80,7 @@ public:
 
 	// Booleans
 	const bool isSpecular() const;
-	const bool isWireFramed() const;
+	const bool isWireframed() const;
 	const bool hasRenderBuffer() const;
 	const bool hasDiffuseMap() const;
 	const bool hasNormalMap() const;
@@ -136,7 +136,7 @@ private:
 
 	// Booleans
 	bool _isSpecular = false;
-	bool _isWireFramed = false;
+	bool _isWireframed = false;
 
 	// Miscellaneous
 	shared_ptr<RenderBuffer> _renderBuffer = nullptr;

@@ -62,18 +62,18 @@ void WaterEditor::_updateMiscellaneous()
 			}
 		}
 
-		// Update wire frame rendering
+		// Update wireframe rendering
 		if(_fe3d.waterEntity_isExisting(_currentWaterID))
 		{
 			if(_fe3d.input_isKeyPressed(InputType::KEY_F))
 			{
-				if(_fe3d.waterEntity_isWireFramed(_currentWaterID))
+				if(_fe3d.waterEntity_isWireframed(_currentWaterID))
 				{
-					_fe3d.waterEntity_setWireFramed(_currentWaterID, false);
+					_fe3d.waterEntity_setWireframed(_currentWaterID, false);
 				}
 				else
 				{
-					_fe3d.waterEntity_setWireFramed(_currentWaterID, true);
+					_fe3d.waterEntity_setWireframed(_currentWaterID, true);
 				}
 			}
 		}

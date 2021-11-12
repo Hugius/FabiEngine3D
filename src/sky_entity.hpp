@@ -25,7 +25,7 @@ public:
 	void setLightness(float value);
 	void setRotation(float value);
 	void setRotationSpeed(float value);
-	void setWireFramed(bool value);
+	void setWireframed(bool value);
 
 	// Strings
 	const array<string, 6>& getDiffuseMapPaths() const;
@@ -45,7 +45,7 @@ public:
 	// Booleans
 	const bool hasRenderBuffer() const;
 	const bool hasCubeMap() const;
-	const bool isWireFramed() const;
+	const bool isWireframed() const;
 
 	// Miscellaneous
 	const shared_ptr<RenderBuffer> getRenderBuffer() const;
@@ -68,7 +68,7 @@ private:
 	float _rotation = 0.0f;
 
 	// Booleans
-	bool _isWireFramed = false;
+	bool _isWireframed = false;
 
 	// Miscellaneous
 	shared_ptr<RenderBuffer> _renderBuffer = nullptr;

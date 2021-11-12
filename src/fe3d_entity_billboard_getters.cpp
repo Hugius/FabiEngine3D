@@ -158,9 +158,9 @@ const bool FabiEngine3D::billboardEntity_isText(const string& ID) const
 	return _core->_billboardEntityManager.getEntity(ID)->isText();
 }
 
-const bool FabiEngine3D::billboardEntity_isWireFramed(const string& ID) const
+const bool FabiEngine3D::billboardEntity_isWireframed(const string& ID) const
 {
-	return _core->_billboardEntityManager.getEntity(ID)->isWireFramed();
+	return _core->_billboardEntityManager.getEntity(ID)->isWireframed();
 }
 
 const int FabiEngine3D::billboardEntity_getRemainingSpriteAnimationLoops(const string& ID) const

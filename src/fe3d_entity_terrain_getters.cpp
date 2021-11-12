@@ -16,9 +16,9 @@ const bool FabiEngine3D::terrainEntity_isSpecular(const string& ID) const
 	return _core->_terrainEntityManager.getEntity(ID)->isSpecular();
 }
 
-const bool FabiEngine3D::terrainEntity_isWireFramed(const string& ID) const
+const bool FabiEngine3D::terrainEntity_isWireframed(const string& ID) const
 {
-	return _core->_terrainEntityManager.getEntity(ID)->isWireFramed();
+	return _core->_terrainEntityManager.getEntity(ID)->isWireframed();
 }
 
 const float FabiEngine3D::terrainEntity_getSize(const string& ID) const

@@ -37,7 +37,7 @@ public:
 	void setSpecular(bool value);
 	void setReflective(bool value);
 	void setRefractive(bool value);
-	void setWireFramed(bool value);
+	void setWireframed(bool value);
 
 	// Strings
 	const string& getDudvMapPath() const;
@@ -63,7 +63,7 @@ public:
 	const bool isSpecular() const;
 	const bool isReflective() const;
 	const bool isRefractive() const;
-	const bool isWireFramed() const;
+	const bool isWireframed() const;
 	const bool hasLowQualityRenderBuffer() const;
 	const bool hasHighQualityRenderBuffer() const;
 	const bool hasDudvMap() const;
@@ -103,7 +103,7 @@ private:
 	bool _isSpecular = false;
 	bool _isReflective = false;
 	bool _isRefractive = false;
-	bool _isWireFramed = false;
+	bool _isWireframed = false;
 
 	// Miscellaneous
 	shared_ptr<RenderBuffer> _lowQualityRenderBuffer = nullptr;

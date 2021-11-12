@@ -157,9 +157,9 @@ void TerrainEntity::setSpecular(bool value)
 	_isSpecular = value;
 }
 
-void TerrainEntity::setWireFramed(bool value)
+void TerrainEntity::setWireframed(bool value)
 {
-	_isWireFramed = value;
+	_isWireframed = value;
 }
 
 void TerrainEntity::setLightness(float value)

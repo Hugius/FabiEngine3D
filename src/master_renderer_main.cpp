@@ -95,7 +95,7 @@ void MasterRenderer::renderScene(EntityBus* entityBus)
 	// General stuff
 	_entityBus = entityBus;
 
-	if(_renderBus.isWireFrameRenderingEnabled()) // Wire frame rendering
+	if(_renderBus.isWireframeRenderingEnabled()) // Wireframe rendering
 	{
 		glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);

@@ -335,9 +335,9 @@ const bool RenderBus::isLensFlareEnabled() const
 	return _isLensFlareEnabled;
 }
 
-const bool RenderBus::isWireFrameRenderingEnabled() const
+const bool RenderBus::isWireframeRenderingEnabled() const
 {
-	return _isWireFrameRenderingEnabled;
+	return _isWireframeRenderingEnabled;
 }
 
 const bool RenderBus::isAabbFrameRenderingEnabled() const

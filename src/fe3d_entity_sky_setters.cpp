@@ -110,9 +110,9 @@ void FabiEngine3D::skyEntity_setColor(const string& ID, Vec3 color)
 	_core->_skyEntityManager.getEntity(ID)->setColor(color);
 }
 
-void FabiEngine3D::skyEntity_setWireFramed(const string& ID, bool enabled)
+void FabiEngine3D::skyEntity_setWireframed(const string& ID, bool enabled)
 {
-	_core->_skyEntityManager.getEntity(ID)->setWireFramed(enabled);
+	_core->_skyEntityManager.getEntity(ID)->setWireframed(enabled);
 }
 
 void FabiEngine3D::skyEntity_selectMixSky(const string& ID)

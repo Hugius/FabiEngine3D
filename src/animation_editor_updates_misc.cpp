@@ -93,7 +93,7 @@ void AnimationEditor::_updateMiscellaneous()
 			}
 		}
 
-		// Wire frame model rendering
+		// Wireframe model rendering
 		if(!_currentAnimationID.empty())
 		{
 			const auto modelID = _getAnimation(_currentAnimationID)->getPreviewModelID();
@@ -101,13 +101,13 @@ void AnimationEditor::_updateMiscellaneous()
 			{
 				if(_fe3d.input_isKeyPressed(InputType::KEY_F))
 				{
-					if(_fe3d.modelEntity_isWireFramed(modelID))
+					if(_fe3d.modelEntity_isWireframed(modelID))
 					{
-						_fe3d.modelEntity_setWireFramed(modelID, false);
+						_fe3d.modelEntity_setWireframed(modelID, false);
 					}
 					else
 					{
-						_fe3d.modelEntity_setWireFramed(modelID, true);
+						_fe3d.modelEntity_setWireframed(modelID, true);
 					}
 				}
 			}

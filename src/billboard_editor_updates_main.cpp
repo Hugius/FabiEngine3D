@@ -122,7 +122,7 @@ void BillboardEditor::_updateChoiceMenu()
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			_fe3d.billboardEntity_setWireFramed(_currentBillboardID, false);
+			_fe3d.billboardEntity_setWireframed(_currentBillboardID, false);
 			_fe3d.billboardEntity_setVisible(_currentBillboardID, false);
 			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
 			_currentBillboardID = "";

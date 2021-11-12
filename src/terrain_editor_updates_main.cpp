@@ -127,7 +127,7 @@ void TerrainEditor::_updateChoiceMenu()
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMain");
 			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), false);
-			_fe3d.terrainEntity_setWireFramed(_currentTerrainID, false);
+			_fe3d.terrainEntity_setWireframed(_currentTerrainID, false);
 			_fe3d.terrainEntity_select("");
 			_currentTerrainID = "";
 			return;

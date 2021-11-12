@@ -77,9 +77,9 @@ const bool FabiEngine3D::skyEntity_isVisible(const string& ID) const
 	return _core->_skyEntityManager.getEntity(ID)->isVisible();
 }
 
-const bool FabiEngine3D::skyEntity_isWireFramed(const string& ID) const
+const bool FabiEngine3D::skyEntity_isWireframed(const string& ID) const
 {
-	return _core->_skyEntityManager.getEntity(ID)->isWireFramed();
+	return _core->_skyEntityManager.getEntity(ID)->isWireframed();
 }
 
 const bool FabiEngine3D::skyEntity_hasDiffuseMapRight(const string& ID) const

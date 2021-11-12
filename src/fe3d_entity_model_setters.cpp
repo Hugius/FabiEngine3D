@@ -329,9 +329,9 @@ void FabiEngine3D::modelEntity_setStaticToCamera(const string& ID, bool enabled)
 	_core->_modelEntityManager.getEntity(ID)->setCameraStatic(enabled);
 }
 
-void FabiEngine3D::modelEntity_setWireFramed(const string& ID, bool enabled)
+void FabiEngine3D::modelEntity_setWireframed(const string& ID, bool enabled)
 {
-	_core->_modelEntityManager.getEntity(ID)->setWireFramed(enabled);
+	_core->_modelEntityManager.getEntity(ID)->setWireframed(enabled);
 }
 
 void FabiEngine3D::modelEntity_setAlpha(const string& ID, const string& partID, float alpha)

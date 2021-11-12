@@ -110,9 +110,9 @@ void WaterEntity::setRefractive(bool value)
 	_isRefractive = value;
 }
 
-void WaterEntity::setWireFramed(bool value)
+void WaterEntity::setWireframed(bool value)
 {
-	_isWireFramed = value;
+	_isWireframed = value;
 }
 
 void WaterEntity::setSize(float value)
@@ -240,9 +240,9 @@ const bool WaterEntity::isRefractive() const
 	return _isRefractive;
 }
 
-const bool WaterEntity::isWireFramed() const
+const bool WaterEntity::isWireframed() const
 {
-	return _isWireFramed;
+	return _isWireframed;
 }
 
 const bool WaterEntity::hasLowQualityRenderBuffer() const

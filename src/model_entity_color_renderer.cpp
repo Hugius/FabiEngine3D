@@ -141,7 +141,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 	if(entity->isVisible())
 	{
 		// Shader uniforms
-		_shader.uploadUniform("u_isWireFramed", (entity->isWireFramed() || _renderBus.isWireFrameRenderingEnabled()));
+		_shader.uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus.isWireframeRenderingEnabled()));
 		_shader.uploadUniform("u_positionY", entity->getBasePosition().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
@@ -150,8 +150,8 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		_shader.uploadUniform("u_viewMatrix", (entity->isCameraStatic() ? Matrix44(Matrix33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
 		_shader.uploadUniform("u_minTextureAlpha", MIN_TEXTURE_ALPHA);
 
-		// Enable wire frame
-		if(entity->isWireFramed())
+		// Enable wireframe
+		if(entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
@@ -298,8 +298,8 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			glDisable(GL_CULL_FACE);
 		}
 
-		// Disable wire frame
-		if(entity->isWireFramed())
+		// Disable wireframe
+		if(entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}

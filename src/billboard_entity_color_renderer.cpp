@@ -55,8 +55,8 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 		// Temporary values
 		const auto buffer = entity->getRenderBuffer();
 
-		// Enable wire frame
-		if(entity->isWireFramed())
+		// Enable wireframe
+		if(entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
@@ -78,7 +78,7 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 		}
 
 		// Shader uniforms
-		_shader.uploadUniform("u_isWireFramed", (entity->isWireFramed() || _renderBus.isWireFrameRenderingEnabled()));
+		_shader.uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus.isWireframeRenderingEnabled()));
 		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
 		_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap());
 		_shader.uploadUniform("u_hasEmissionMap", entity->hasEmissionMap());
@@ -130,8 +130,8 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 
-		// Disable wire frame
-		if(entity->isWireFramed())
+		// Disable wireframe
+		if(entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}

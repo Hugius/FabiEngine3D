@@ -417,9 +417,9 @@ void ModelEntity::setLevelOfDetailed(bool value)
 	_isLevelOfDetailed = value;
 }
 
-void ModelEntity::setWireFramed(bool value)
+void ModelEntity::setWireframed(bool value)
 {
-	_isWireFramed = value;
+	_isWireframed = value;
 }
 
 void ModelEntity::setBright(bool value)

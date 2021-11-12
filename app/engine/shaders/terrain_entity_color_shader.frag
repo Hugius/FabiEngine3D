@@ -66,7 +66,7 @@ uniform int u_pointlightCount;
 uniform int u_spotlightCount;
 
 // Boolean uniforms
-uniform bool u_isWireFramed;
+uniform bool u_isWireframed;
 uniform bool u_isSpecular;
 uniform bool u_isAmbientLightingEnabled;
 uniform bool u_isDirectionalLightingEnabled;
@@ -101,8 +101,8 @@ float calculateShadows();
 // Process fragment
 void main()
 {
-	// Wire frame color
-	if(u_isWireFramed)
+	// Wireframe color
+	if(u_isWireframed)
 	{
 		o_primaryColor = vec4(FRAME_COLOR, 1.0f);
 		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);

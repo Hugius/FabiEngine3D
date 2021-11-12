@@ -243,9 +243,9 @@ const bool ModelEntity::isLevelOfDetailed() const
 	return _isLevelOfDetailed;
 }
 
-const bool ModelEntity::isWireFramed() const
+const bool ModelEntity::isWireframed() const
 {
-	return _isWireFramed;
+	return _isWireframed;
 }
 
 const float ModelEntity::getLightness(const string& partID) const

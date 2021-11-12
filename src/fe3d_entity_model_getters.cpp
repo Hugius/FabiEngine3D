@@ -48,9 +48,9 @@ const bool FabiEngine3D::modelEntity_isStaticToCamera(const string& ID) const
 	return _core->_modelEntityManager.getEntity(ID)->isCameraStatic();
 }
 
-const bool FabiEngine3D::modelEntity_isWireFramed(const string& ID) const
+const bool FabiEngine3D::modelEntity_isWireframed(const string& ID) const
 {
-	return _core->_modelEntityManager.getEntity(ID)->isWireFramed();
+	return _core->_modelEntityManager.getEntity(ID)->isWireframed();
 }
 
 const bool FabiEngine3D::modelEntity_isDepthMapIncluded(const string& ID) const

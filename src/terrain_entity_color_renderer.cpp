@@ -122,8 +122,8 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 {
 	if(entity->isVisible())
 	{
-		// Enable wire frame
-		if(entity->isWireFramed())
+		// Enable wireframe
+		if(entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
@@ -132,7 +132,7 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 		glEnable(GL_CULL_FACE);
 
 		// Shader uniforms
-		_shader.uploadUniform("u_isWireFramed", (entity->isWireFramed() || _renderBus.isWireFrameRenderingEnabled()));
+		_shader.uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus.isWireframeRenderingEnabled()));
 		_shader.uploadUniform("u_isSpecular", entity->isSpecular());
 		_shader.uploadUniform("u_textureRepeat", entity->getTextureRepeat());
 		_shader.uploadUniform("u_redRepeat", entity->getRedRepeat());
@@ -258,8 +258,8 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 		// Disable face culling
 		glDisable(GL_CULL_FACE);
 
-		// Disable wire frame
-		if(entity->isWireFramed())
+		// Disable wireframe
+		if(entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}

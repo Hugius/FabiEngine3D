@@ -175,9 +175,9 @@ const bool BillboardEntity::isBright() const
 	return _isBright;
 }
 
-const bool BillboardEntity::isWireFramed() const
+const bool BillboardEntity::isWireframed() const
 {
-	return _isWireFramed;
+	return _isWireframed;
 }
 
 const bool BillboardEntity::hasRenderBuffer() const

@@ -165,7 +165,7 @@ void SceneEditor::_loadGUI()
 	// Left-viewport: sceneEditorMenuSettingsLightingAmbient
 	positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("sceneEditorMenuSettingsLightingAmbient");
-	leftWindow->getScreen("sceneEditorMenuSettingsLightingAmbient")->createButton("isEnabled", Vec2(0.0f, positions[0]), Vec2(TW("Enabled: NO"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: NO", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("sceneEditorMenuSettingsLightingAmbient")->createButton("isEnabled", Vec2(0.0f, positions[0]), Vec2(TW("Enabled: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsLightingAmbient")->createButton("color", Vec2(0.0f, positions[1]), Vec2(TW("Color"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Color", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsLightingAmbient")->createButton("intensity", Vec2(0.0f, positions[2]), Vec2(TW("Intensity"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Intensity", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsLightingAmbient")->createButton("back", Vec2(0.0f, positions[3]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
@@ -173,7 +173,7 @@ void SceneEditor::_loadGUI()
 	// Left-viewport: sceneEditorMenuSettingsLightingDirectional
 	positions = VPC::calculateButtonPositions(6, CH);
 	leftWindow->createScreen("sceneEditorMenuSettingsLightingDirectional");
-	leftWindow->getScreen("sceneEditorMenuSettingsLightingDirectional")->createButton("isEnabled", Vec2(0.0f, positions[0]), Vec2(TW("Enabled: NO"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: NO", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("sceneEditorMenuSettingsLightingDirectional")->createButton("isEnabled", Vec2(0.0f, positions[0]), Vec2(TW("Enabled: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsLightingDirectional")->createButton("position", Vec2(0.0f, positions[2]), Vec2(TW("Position"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Position", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsLightingDirectional")->createButton("color", Vec2(0.0f, positions[1]), Vec2(TW("Color"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Color", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsLightingDirectional")->createButton("intensity", Vec2(0.0f, positions[2]), Vec2(TW("Intensity"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Intensity", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
@@ -195,7 +195,7 @@ void SceneEditor::_loadGUI()
 	// Left-viewport: sceneEditorMenuSettingsGraphicsShadows
 	positions = VPC::calculateButtonPositions(8, CH);
 	leftWindow->createScreen("sceneEditorMenuSettingsGraphicsShadows");
-	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsShadows")->createButton("isEnabled", Vec2(0.0f, positions[0]), Vec2(TW("Enabled: NO"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: NO", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsShadows")->createButton("isEnabled", Vec2(0.0f, positions[0]), Vec2(TW("Enabled: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsShadows")->createButton("position", Vec2(0.0f, positions[1]), Vec2(TW("Position"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Position", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsShadows")->createButton("center", Vec2(0.0f, positions[2]), Vec2(TW("Center"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Center", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsShadows")->createButton("size", Vec2(0.0f, positions[3]), Vec2(TW("Size"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Size", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
@@ -207,23 +207,23 @@ void SceneEditor::_loadGUI()
 	// Left-viewport: sceneEditorMenuSettingsGraphicsMotionBlur
 	positions = VPC::calculateButtonPositions(3, CH);
 	leftWindow->createScreen("sceneEditorMenuSettingsGraphicsMotionBlur");
-	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsMotionBlur")->createButton("isEnabled", Vec2(0.0f, positions[0]), Vec2(TW("Enabled: NO"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: NO", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsMotionBlur")->createButton("isEnabled", Vec2(0.0f, positions[0]), Vec2(TW("Enabled: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsMotionBlur")->createButton("sensitivity", Vec2(0.0f, positions[1]), Vec2(TW("Sensitivity"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sensitivity", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsMotionBlur")->createButton("back", Vec2(0.0f, positions[2]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 
 	// Left-viewport: sceneEditorMenuSettingsGraphicsDof
 	positions = VPC::calculateButtonPositions(5, CH);
 	leftWindow->createScreen("sceneEditorMenuSettingsGraphicsDof");
-	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsDof")->createButton("isEnabled", Vec2(0.0f, positions[0]), Vec2(TW("Enabled: NO"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: NO", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsDof")->createButton("isDynamic", Vec2(0.0f, positions[1]), Vec2(TW("Dynamic: NO"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Dynamic: NO", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsDof")->createButton("isEnabled", Vec2(0.0f, positions[0]), Vec2(TW("Enabled: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsDof")->createButton("isDynamic", Vec2(0.0f, positions[1]), Vec2(TW("Dynamic: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Dynamic: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsDof")->createButton("blurDistance", Vec2(0.0f, positions[2]), Vec2(TW("Blur Distance"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Blur Distance", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsDof")->createButton("maxDistance", Vec2(0.0f, positions[3]), Vec2(TW("Max Distance"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Max Distance", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsDof")->createButton("dynamicDistance", Vec2(0.0f, positions[3]), Vec2(TW("Dynamic Distance"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Dynamic Distance", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsDof")->createButton("back", Vec2(0.0f, positions[4]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 
 	// Left-viewport: sceneEditorMenuSettingsGraphicsFog
 	positions = VPC::calculateButtonPositions(6, CH);
 	leftWindow->createScreen("sceneEditorMenuSettingsGraphicsFog");
-	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsFog")->createButton("isEnabled", Vec2(0.0f, positions[0]), Vec2(TW("Enabled: NO"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: NO", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsFog")->createButton("isEnabled", Vec2(0.0f, positions[0]), Vec2(TW("Enabled: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsFog")->createButton("minDistance", Vec2(0.0f, positions[1]), Vec2(TW("Min Distance"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Min Distance", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsFog")->createButton("maxDistance", Vec2(0.0f, positions[2]), Vec2(TW("Max Distance"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Max Distance", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsFog")->createButton("thickness", Vec2(0.0f, positions[3]), Vec2(TW("Thickness"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Thickness", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
@@ -233,7 +233,7 @@ void SceneEditor::_loadGUI()
 	// Left-viewport: sceneEditorMenuSettingsGraphicsLensFlare
 	positions = VPC::calculateButtonPositions(5, CH);
 	leftWindow->createScreen("sceneEditorMenuSettingsGraphicsLensFlare");
-	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsLensFlare")->createButton("isEnabled", Vec2(0.0f, positions[0]), Vec2(TW("Enabled: NO"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: NO", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsLensFlare")->createButton("isEnabled", Vec2(0.0f, positions[0]), Vec2(TW("Enabled: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsLensFlare")->createButton("flareMap", Vec2(0.0f, positions[1]), Vec2(TW("Flare Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Flare Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsLensFlare")->createButton("intensity", Vec2(0.0f, positions[2]), Vec2(TW("Intensity"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Intensity", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsLensFlare")->createButton("sensitivity", Vec2(0.0f, positions[3]), Vec2(TW("Sensitivity"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sensitivity", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
@@ -242,7 +242,7 @@ void SceneEditor::_loadGUI()
 	// Left-viewport: sceneEditorMenuSettingsGraphicsSkyExposure
 	positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("sceneEditorMenuSettingsGraphicsSkyExposure");
-	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsSkyExposure")->createButton("isEnabled", Vec2(0.0f, positions[0]), Vec2(TW("Enabled: NO"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: NO", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsSkyExposure")->createButton("isEnabled", Vec2(0.0f, positions[0]), Vec2(TW("Enabled: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsSkyExposure")->createButton("intensity", Vec2(0.0f, positions[1]), Vec2(TW("Intensity"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Intensity", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsSkyExposure")->createButton("speed", Vec2(0.0f, positions[2]), Vec2(TW("Speed"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Speed", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsSkyExposure")->createButton("back", Vec2(0.0f, positions[3]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
@@ -250,7 +250,7 @@ void SceneEditor::_loadGUI()
 	// Left-viewport: sceneEditorMenuSettingsGraphicsBloom
 	positions = VPC::calculateButtonPositions(5, CH);
 	leftWindow->createScreen("sceneEditorMenuSettingsGraphicsBloom");
-	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsBloom")->createButton("isEnabled", Vec2(0.0f, positions[0]), Vec2(TW("Enabled: NO"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: NO", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsBloom")->createButton("isEnabled", Vec2(0.0f, positions[0]), Vec2(TW("Enabled: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsBloom")->createButton("type", Vec2(0.0f, positions[1]), Vec2(TW("Type: EVERYTHING"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Type: EVERYTHING", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsBloom")->createButton("intensity", Vec2(0.0f, positions[2]), Vec2(TW("Intensity"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Intensity", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("sceneEditorMenuSettingsGraphicsBloom")->createButton("blurs", Vec2(0.0f, positions[3]), Vec2(TW("Blurs"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Blurs", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);

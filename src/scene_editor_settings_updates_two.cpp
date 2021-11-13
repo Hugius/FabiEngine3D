@@ -91,7 +91,7 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 		screen->getButton("color")->setHoverable(isEnabled);
 
 		// Update button text contents
-		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 	}
 }
 
@@ -184,7 +184,7 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 		screen->getButton("sensitivity")->setHoverable(isEnabled);
 
 		// Update button text contents
-		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 	}
 }
 
@@ -245,7 +245,7 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 		screen->getButton("speed")->setHoverable(isEnabled);
 
 		// Update button text contents
-		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 	}
 }
 
@@ -319,7 +319,7 @@ void SceneEditor::_updateBloomGraphicsSettingsMenu()
 		screen->getButton("blurs")->setHoverable(isEnabled);
 
 		// Update button text contents
-		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 		screen->getButton("type")->changeTextContent((type == BloomType::EVERYTHING) ? "Type: EVERYTHING" : "Type: PARTS");
 	}
 }

@@ -168,7 +168,7 @@ void RightViewportController::initialize()
 	rightWindow->getScreen("sceneEditorControls")->createTextField("title", Vec2(0.0f, 0.9f), Vec2(TW("Editor Controls"), CH), "Editor Controls", WHITE, true, false);
 	rightWindow->getScreen("sceneEditorControls")->createTextField("mouseLeft", Vec2(-0.5f, 0.675f), Vec2(TW("Place"), CH), "Place", BLACK, false, false);
 	rightWindow->getScreen("sceneEditorControls")->createTextField("mouseMiddle", Vec2(-0.5f, 0.475f), Vec2(TW("Cancel"), CH), "Cancel", BLACK, false, false);
-	rightWindow->getScreen("sceneEditorControls")->createTextField("mouseRight", Vec2(-0.5f, 0.275f), Vec2(TW("Toggle Camera"), CH), "Toggle Camera", BLACK, false, false);
+	rightWindow->getScreen("sceneEditorControls")->createTextField("mouseRight", Vec2(-0.5f, 0.275f), Vec2(TW("Enable Camera"), CH), "Enable Camera", BLACK, false, false);
 	rightWindow->getScreen("sceneEditorControls")->createTextField("mouse", Vec2(-0.5f, 0.075f), Vec2(TW("Move Camera"), CH), "Move Camera", BLACK, false, false);
 	rightWindow->getScreen("sceneEditorControls")->createTextField("h", Vec2(-0.5f, -0.125f), Vec2(TW("Debug Render"), CH), "Debug Render", BLACK, false, false);
 	rightWindow->getScreen("sceneEditorControls")->createTextField("f", Vec2(-0.5f, -0.325f), Vec2(TW("Wireframe"), CH), "Wireframe", BLACK, false, false);

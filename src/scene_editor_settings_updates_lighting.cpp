@@ -94,7 +94,7 @@ void SceneEditor::_updateAmbientLightingSettingsMenu()
 		screen->getButton("intensity")->setHoverable(isEnabled);
 
 		// Update button text contents
-		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 	}
 }
 
@@ -205,6 +205,6 @@ void SceneEditor::_updateDirectionalLightingSettingsMenu()
 		screen->getButton("billboardSize")->setHoverable(isEnabled);
 
 		// Update button text contents
-		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 	}
 }

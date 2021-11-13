@@ -218,7 +218,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		screen->getButton("interval")->setHoverable(isEnabled);
 
 		// Update button text contents
-		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 		screen->getButton("follow")->changeTextContent(isFollowingCamera ? "Follow Cam: ON" : "Follow Cam: OFF");
 	}
 }
@@ -269,7 +269,7 @@ void SceneEditor::_updateMotionBlurGraphicsSettingsMenu()
 		screen->getButton("sensitivity")->setHoverable(isEnabled);
 
 		// Update button text contents
-		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 	}
 }
 
@@ -310,32 +310,32 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 			isDynamic = !isDynamic;
 			_fe3d.gfx_setDofDynamic(isDynamic);
 		}
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("dynamicDistance")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("dynamicDistance", "Dynamic Distance", maxDistance, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blurDistance")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("blurDistance", "Blur Distance", blurDistance, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("maxDistance")->isHovered())
-		{
-			_gui.getGlobalScreen()->createValueForm("maxDistance", "Max Distance", maxDistance, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-		}
 
 		// Update value forms
+		if(_gui.getGlobalScreen()->checkValueForm("dynamicDistance", maxDistance))
+		{
+			_fe3d.gfx_setDofMaxDistance(maxDistance);
+		}
 		if(_gui.getGlobalScreen()->checkValueForm("blurDistance", blurDistance))
 		{
 			_fe3d.gfx_setDofBlurDistance(blurDistance);
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance))
-		{
-			_fe3d.gfx_setDofMaxDistance(maxDistance);
-		}
 
 		// Update buttons hoverability
 		screen->getButton("isDynamic")->setHoverable(isEnabled);
+		screen->getButton("dynamicDistance")->setHoverable(isEnabled && isDynamic);
 		screen->getButton("blurDistance")->setHoverable(isEnabled);
-		screen->getButton("maxDistance")->setHoverable(isEnabled && isDynamic);
 
 		// Update button text contents
-		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
-		screen->getButton("isDynamic")->changeTextContent(isDynamic ? "Dynamic: YES" : "Dynamic: NO");
+		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
+		screen->getButton("isDynamic")->changeTextContent(isDynamic ? "Dynamic: ON" : "Dynamic: OFF");
 	}
 }

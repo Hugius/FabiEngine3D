@@ -1,13 +1,13 @@
 # Water Editor
 
-## General
+## 1. General
 
 - All waters will be saved in `~\projects\<your_project>\data\water.fe3d`.
 - You can create/edit/delete waters.
 - Every created water can be placed in a scene.
 - Each water is rendered as a flat plane in 3D space.
 
-## Controls
+## 2. Controls
 
 - Press RMB to toggle camera
 - Scroll MMB to zoom camera
@@ -17,13 +17,13 @@
 - Press F to toggle wireframe
 - Press ESC to go back
 
-## Resources
+## 3. Resources
 
 - **DUDV map**: colored `24bit PNG` format image from `~\projects\<your_project>\assets\textures\dudv_maps\`.
 - **Displacement map**: grayscaled `24bit PNG` format image from `~\projects\<your_project>\assets\textures\displacement_maps\`.
 - **Normal map**: colored `24bit PNG` format image from `~\projects\<your_project>\assets\textures\normal_maps\`.
 
-## Properties
+## 4. Properties
 
 - **Size**: the XZ size of the water plane in scene space.
   - **Range** 0 to inf.

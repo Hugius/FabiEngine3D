@@ -1,6 +1,6 @@
 # Billboard Editor
 
-## General
+## 1. General
 
 - All billboards will be saved in `~\projects\<your_project>\data\billboard.fe3d`.
 - You can create/edit/delete billboards.
@@ -8,7 +8,7 @@
 - Each billboard has 1 AABB.
 - The AABB is bound to the billboard's transformation, so the AABB will transform with the billboard.
 
-## Controls
+## 2. Controls
 
 - Press RMB to toggle camera
 - Scroll MMB to zoom camera
@@ -20,13 +20,13 @@
 - Press SPACE to move upwards
 - Press SHIFT to move downwards
 
-## Resources
+## 3. Resources
 
 - **Font**: `TTF` format font file from `~\projects\<your_project>\assets\fonts`.
 - **Diffuse Map**: colored `24bit/32bit PNG` format image file from `~\projects\<your_project>\assets\textures\diffuse_maps`
 - **Emission Map**: colored `24bit/32bit PNG` format image file from `~\projects\<your_project>\assets\textures\emission_maps`
 
-## Properties
+## 4. Properties
 
 - **Size**: the size of the billboard.
   - **Range**: 0 to inf.

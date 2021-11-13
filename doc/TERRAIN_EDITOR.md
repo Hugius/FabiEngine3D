@@ -1,13 +1,13 @@
 # Terrain Editor
 
-## General
+## 1. General
 
 - All terrains will be saved in `~\projects\<your_project>\data\terrain.fe3d`.
 - You can create/edit/delete terrains.
 - Every created terrain can be placed in a scene.
 - Each terrain is generated with a height map.
 
-## Controls
+## 2. Controls
 
 - Press RMB to toggle camera
 - Scroll MMB to zoom camera
@@ -17,14 +17,14 @@
 - Press F to toggle wireframe
 - Press ESC to go back
 
-## Resources
+## 3. Resources
 
 - **Height map**: grayscaled `24bit BMP` format image file from `~\projects\<your_project>\assets\textures\height_maps\`.
 - **Blend map**: colored `24bit PNG` format image file from `~\projects\<your_project>\assets\textures\blend_maps\`.
 - **Diffuse map**: colored `24bit PNG` format image file from `~\projects\<your_project>\assets\textures\diffuse_maps\`.
 - **Normal map**: colored `24bit PNG` format image file from `~\projects\<your_project>\assets\textures\normal_maps\`.
 
-## Blend Mapping
+## 4. Blend Mapping
 
 Using a blend map you can render multiple textures onto a terrain mesh. Every color channel (R,G,B) of the blend map represents a different diffuse/normal map. This means that in total you can use up to 10 different textures for terrain rendering:
 
@@ -35,7 +35,7 @@ Using a blend map you can render multiple textures onto a terrain mesh. Every co
 - 3x blend diffuse map
 - 3x blend normal map
 
-## Properties
+## 5. Properties
 
 - **Max Height**: the maximum height of the terrain, which is calculated based on the height map pixel intensities.
   - **Range**: 0 to inf.

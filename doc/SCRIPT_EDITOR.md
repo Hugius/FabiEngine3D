@@ -1,13 +1,13 @@
 # Script Editor
 
-## General
+## 1. General
 
 - All scripts will be saved in `~\projects\<your_project>\scripts\`.
 - You can create/edit/rename/delete scripts
 - You can search in scripts for a certain keyword (case sensitive).
 - Script files have a line limit of 100, to force you to create small but readable scripts.
 
-## Controls
+## 2. Controls
 
 - Press LMB to place the cursor
 - Hold RMB to select lines

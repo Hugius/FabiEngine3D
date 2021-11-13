@@ -1,13 +1,13 @@
 # Sky Editor
 
-## General
+## 1. General
 
 - All skies will be saved in `~\projects\<your_project>\data\sky.fe3d`.
 - You can create/edit/delete skies.
 - Every created sky can be placed in a scene.
 - Each sky is rendered as a cube map, which consists of 6 different textures: left, right, bottom, top, back, front.
 
-## Controls
+## 2. Controls
 
 - Press RMB to toggle camera
 - Move camera with your mouse
@@ -15,13 +15,13 @@
 - Press F to toggle wireframe
 - Press ESC to go back
 
-## Resources
+## 3. Resources
 
 - You can load the images from `~\projects\<your_project>\assets\textures\cube_maps\`.
 - The image format must be a colored `24bit PNG`.
 - The image resolutions must be exactly the same.
 
-## Properties
+## 4. Properties
 
 - **Rotation Speed**: the speed of rotation around the Y axis.
   - **Range**: inf to inf

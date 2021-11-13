@@ -1,6 +1,6 @@
 # Model Editor
 
-## General
+## 1. General
 
 - All models will be saved in `~\projects\<your_project>\data\model.fe3d`.
 - You can create/edit/delete models.
@@ -8,7 +8,7 @@
 - A model cannot exist without having a mesh.
 - The new model name cannot contain the '@' character, because is it reserved by the engine.
 
-## Controls
+## 2. Controls
 
 - Press RMB to toggle camera
 - Scroll MMB to zoom camera
@@ -20,7 +20,7 @@
 - Press SPACE to move upwards
 - Press SHIFT to move downwards
 
-## Resources
+## 3. Resources
 
 - **Mesh**: `OBJ` format mesh file from `~\projects\<your_project>\assets\meshes`.
 - **Diffuse map**: colored `24bit/32bit PNG` format image file from `~\projects\<your_project>\assets\textures\diffuse_maps\`.
@@ -29,7 +29,7 @@
 - **Reflection map**: colored `24bit PNG` format image file from `~\projects\<your_project>\assets\textures\reflection_maps\`.
 - **Normal map**: colored `24bit PNG` format image file from `~\projects\<your_project>\assets\textures\normal_maps\`.
 
-## Mesh
+## 4. Mesh
 
 - Make sure the center of your mesh is XYZ(0,0,0).
 - The mesh should be modeled so that the lowest vertex (Y coordinate) is positioned at the center.
@@ -38,7 +38,7 @@
 - You can start a new mesh part by writing `FE3D_PART <name>` in the OBJ file.
 - If a mesh is multiparted, you can specify textures/lighting for each mesh part.
 
-## Properties
+## 5. Properties
 
 - **Size**: size multiplier of the mesh.
   - **Range**: 0 to inf.

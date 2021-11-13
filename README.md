@@ -1,4 +1,4 @@
-![logo](doc/images/logo.png)
+![logo](doc/logo.png)
 
 ## Introduction
 
@@ -6,7 +6,7 @@ FabiEngine3D is a custom game engine, created for simple 3D video games on PC. I
 
 `Development started on April 7, 2020.`
 
-<img src="doc/images/engine.png" width="100%"/>
+<img src="doc/engine.png" width="100%"/>
 
 ## Games
 
@@ -14,30 +14,30 @@ FabiEngine3D is a custom game engine, created for simple 3D video games on PC. I
 
 A singleplayer medieval first person survival game in which you have only 1 enemy: death! There are multiple survival factors that you need to watch out for, such as: hunger, thirst, body temperature, oxygen and sickness. You will have to figure out on your own how to surive the longest using tools, resources, animals and buildings, before the Grim Reaper comes for your soul...
 
-<img src="doc/images/starvation.png" width="100%"/>
+<img src="doc/starvation.png" width="100%"/>
 
 ### White Noise
 
 A multiplayer first person shooter game based in a science-fiction setting: a space station! You can join a server with up to 3 other friends to see who is the best at shooting each other. Watch out, because 1 bullet is enough to make the endless void of space your final resting place!
 
-<img src="doc/images/white_noise.png" width="100%"/>
+<img src="doc/white_noise.png" width="100%"/>
 
 ## Documentation
 
-- [Theoretical Framework](doc/documents/THEORETICAL_FRAMEWORK.md)
-- [General Information](doc/documents/GENERAL_INFORMATION.md)
-- [Sky Editor](doc/documents/SKY_EDITOR.md)
-- [Terrain Editor](doc/documents/TERRAIN_EDITOR.md)
-- [Water Editor](doc/documents/WATER_EDITOR.md)
-- [Model Editor](doc/documents/MODEL_EDITOR.md)
-- [Animation Editor](doc/documents/ANIMATION_EDITOR.md)
-- [Billboard Editor](doc/documents/BILLBOARD_EDITOR.md)
-- [Audio Editor](doc/documents/AUDIO_EDITOR.md)
-- [Scene Editor](doc/documents/SCENE_EDITOR.md)
-- [Script Editor](doc/documents/SCRIPT_EDITOR.md)
-- [Settings](doc/documents/SETTINGS.md)
-- [FabScript](doc/documents/FABSCRIPT.md)
-- [Scripting Functions](doc/documents/SCRIPT_FUNCTIONS.md)
-- [Networking](doc/documents/NETWORKING.md)
-- [Runtime](doc/documents/RUNTIME.md)
-- [Miscellaneous](doc/documents/MISCELLANEOUS.md)
+- [Theoretical Framework](doc/THEORETICAL_FRAMEWORK.md)
+- [General Information](doc/GENERAL_INFORMATION.md)
+- [Sky Editor](doc/SKY_EDITOR.md)
+- [Terrain Editor](doc/TERRAIN_EDITOR.md)
+- [Water Editor](doc/WATER_EDITOR.md)
+- [Model Editor](doc/MODEL_EDITOR.md)
+- [Animation Editor](doc/ANIMATION_EDITOR.md)
+- [Billboard Editor](doc/BILLBOARD_EDITOR.md)
+- [Audio Editor](doc/AUDIO_EDITOR.md)
+- [Scene Editor](doc/SCENE_EDITOR.md)
+- [Script Editor](doc/SCRIPT_EDITOR.md)
+- [Settings](doc/SETTINGS.md)
+- [FabScript](doc/FABSCRIPT.md)
+- [Scripting Functions](doc/SCRIPT_FUNCTIONS.md)
+- [Networking](doc/NETWORKING.md)
+- [Runtime](doc/RUNTIME.md)
+- [Miscellaneous](doc/MISCELLANEOUS.md)

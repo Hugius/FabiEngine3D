@@ -1,13 +1,13 @@
 # Animation Editor
 
-## General
+## 1. General
 
 - All animations will be saved in `~\projects\<your_project>\data\animation.fe3d`.
 - You can create/edit/delete animations for models.
 - Every created animation can be applied to models through scripting.
 - You can select a preview model for the animation playback.
 
-## Controls
+## 2. Controls
 
 - Press RMB to toggle camera
 - Scroll MMB to zoom camera
@@ -19,7 +19,7 @@
 - Press SPACE to move upwards
 - Press SHIFT to move downwards
 
-## Keyframes
+## 3. Keyframes
 
 - Each animation consists of 1 or more keyframes.
 - You can create/edit/delete keyframes.
@@ -27,7 +27,7 @@
 - The last keyframe should be the same as the first keyframe.
 - If the model is multiparted, each part can be animated independently.
 
-## Properties
+## 4. Properties
 
 - **Transformation**: the target transformation.
   - **Range**: -inf to inf.

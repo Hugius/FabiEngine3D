@@ -1,15 +1,15 @@
 # General Information
 
-## Features
+## 1. Features
 
-### Asset Loading
+### 1.1 Asset Loading
 
 - Multithreaded OBJ mesh file loading
 - Multithreaded PNG texture file loading
 - Multithreaded WAV audio file loading
 - Efficient (pre-)caching system
 
-### Rendering
+### 1.2 Rendering
 
 - **3D rendering**: sky, terrain, water, model, billboard
 - **2D rendering**: image, text
@@ -17,13 +17,13 @@
 - **Graphics**: ambient lighting, directional lighting, specular lighting, point lighting, spot lighting, shadows, cube reflections, planar reflections, fog, skyHDR
 - **Post processing**: bloom, DOF, motion blur, anti-aliasing, lens flare
 
-### Audio
+### 1.3 Audio
 
 - Custom music playlist
 - 2D audio playback
 - 3D audio playback
 
-### Physics
+### 1.4 Physics
 
 - 3D AABB system
 - 3D Collision detection system
@@ -32,14 +32,14 @@
 - 3D camera system
 - Custom math library
 
-### Networking
+### 1.5 Networking
 
 - Central networking server
 - Multiple networking clients
 - TCP messaging
 - UDP messaging
 
-### Miscellaneous
+### 1.6 Miscellaneous
 
 - Engine GUI
 - Realtime statistics
@@ -48,11 +48,11 @@
 - Mouse input
 - Custom interpreted gameplay programming language ("FabScript")
 
-## Folder Structure
+## 2. Folder Structure
 
 > You can start the engine by running `~\app\binaries\fe3d.exe`
 
-### Overview
+### 2.1 Overview
 
 ```text
 ~
@@ -87,7 +87,7 @@
 └── src (do NOT touch)
 ```
 
-### Explanation
+### 2.2 Explanation
 
 - `~\app\`: contains the engine application
   - `binaries\`: contains the engine executable
@@ -106,12 +106,12 @@
 - `~\doc\`: contains the engine documentation
 - `~\src\`: contains the engine source code
 
-## Engine Interface
+## 3. Engine Interface
 
-<img src="doc/images/engine.png" width="100%"/>
+<img src="engine.png" width="100%"/>
 
-- Left viewport: editors & settings
-- Top viewport: project management & preview management
-- Right viewport: controls & properties
-- Bottom viewport: statistics & logging
-- Mid viewport: 3D display screen
+- **Left viewport**: editors & settings
+- **Top viewport**: project management & preview management
+- **Right viewport**: controls & properties
+- **Bottom viewport**: statistics & logging
+- **Mid viewport**: 3D display screen

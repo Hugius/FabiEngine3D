@@ -233,7 +233,7 @@ void SceneEditor::_updateMotionBlurGraphicsSettingsMenu()
 	{
 		// Temporary values
 		auto isEnabled = _fe3d.gfx_isMotionBlurEnabled();
-		auto strength = _fe3d.gfx_getMotionBlurStrength();
+		auto sensitivity = _fe3d.gfx_getMotionBlurStrength();
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -253,20 +253,20 @@ void SceneEditor::_updateMotionBlurGraphicsSettingsMenu()
 				_fe3d.gfx_disableMotionBlur(false);
 			}
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("strength")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("sensitivity")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("strength", "Strength", (strength * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("sensitivity", "Sensitivity", (sensitivity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
-		if(_gui.getGlobalScreen()->checkValueForm("strength", strength))
+		if(_gui.getGlobalScreen()->checkValueForm("sensitivity", sensitivity))
 		{
-			strength /= 100.0f;
-			_fe3d.gfx_setMotionBlurStrength(strength);
+			sensitivity /= 100.0f;
+			_fe3d.gfx_setMotionBlurStrength(sensitivity);
 		}
 
 		// Update buttons hoverability
-		screen->getButton("strength")->setHoverable(isEnabled);
+		screen->getButton("sensitivity")->setHoverable(isEnabled);
 
 		// Update button text contents
 		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
@@ -305,7 +305,7 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 				_fe3d.gfx_disableDOF(false);
 			}
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("dynamic")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isDynamic")->isHovered())
 		{
 			isDynamic = !isDynamic;
 			_fe3d.gfx_setDofDynamic(isDynamic);
@@ -330,12 +330,12 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("dynamic")->setHoverable(isEnabled);
+		screen->getButton("isDynamic")->setHoverable(isEnabled);
 		screen->getButton("blurDistance")->setHoverable(isEnabled);
 		screen->getButton("maxDistance")->setHoverable(isEnabled && isDynamic);
 
 		// Update button text contents
 		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
-		screen->getButton("dynamic")->changeTextContent(isDynamic ? "Dynamic: YES" : "Dynamic: NO");
+		screen->getButton("isDynamic")->changeTextContent(isDynamic ? "Dynamic: YES" : "Dynamic: NO");
 	}
 }

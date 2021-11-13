@@ -176,22 +176,16 @@
   - **Range**: YES or NO
 - **Position**: the position of the shadow source.
   - **Range**: -inf to inf
-- **Size**: the size of the shadowed area.
-  - **Range**: 0 to inf
 - **Center**: the point where the shadow source is looking at.
   - **Range**: -inf to inf
+- **Size**: the size of the shadowed area.
+  - **Range**: 0 to inf
+- **Lightness**: the lightness of the shadows.
+  - **Range**: 0 to inf
 - **Follow Cam**: enable or disable shadows following the camera.
   - **Range**: ON or OFF
-- **Lightness**: the lightness of the shadows.
-  - **Range**: -inf to inf
 - **Interval**: the engine execution frame interval between camera follow updates.
-  - **Range**: -inf to inf
-- You can enable **directional shadows** casted from a certain **position** (**Range**: -inf to inf).
-- Shadows are rendered within boxed borders with a certain **size** (**Range**: 0 to inf).
-- You can determine the direction of the shadows by setting the **center position** (**Range**: -inf to inf).
-- There is an option to make the shadow box **follow the camera** at a certain **interval** (**Range**: 0 to inf) measured in frames.
-- You can choose to enable **lighted shadowing**, which means that you can still see **directional lighting** effects in the casted shadows.
-- You can choose to adjust the **lightness** (**Range**: 0 to inf) of the casted shadows.
+  - **Range**: 0 to inf
 
 ### Motion blur
 

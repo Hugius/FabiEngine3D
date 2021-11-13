@@ -10,12 +10,12 @@
 
 ## Controls
 
-- Press RMB to toggle the camera
-- Scroll MMB to zoom the camera
-- Move the camera with your mouse
+- Press RMB to toggle camera
+- Scroll MMB to zoom camera
+- Move camera with your mouse
 - Press H to toggle debug rendering
-- Press R to toggle the reference box
-- Press F to toggle the wire frame
+- Press R to toggle reference box
+- Press F to toggle wireframe
 - Press ESC to go back
 - Press SPACE to move upwards
 - Press SHIFT to move downwards

@@ -9,10 +9,10 @@
 
 ## Controls
 
-- Press RMB to toggle the camera
-- Move the camera with your mouse
+- Press RMB to toggle camera
+- Move camera with your mouse
 - Press H to toggle debug rendering
-- Press F to toggle the wire frame
+- Press F to toggle wireframe
 - Press ESC to go back
 
 ## Resources

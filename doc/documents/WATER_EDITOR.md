@@ -9,12 +9,12 @@
 
 ## Controls
 
-- Press RMB to toggle the camera
-- Scroll MMB to zoom the camera
-- Move the camera with your mouse
+- Press RMB to toggle camera
+- Scroll MMB to zoom camera
+- Move camera with your mouse
 - Press H to toggle debug rendering
-- Press R to toggle the reference box
-- Press F to toggle the wire frame
+- Press R to toggle reference box
+- Press F to toggle wireframe
 - Press ESC to go back
 
 ## Resources
@@ -47,5 +47,5 @@
   - **Range**: -inf to inf.
 - **Transparency**: the percentage that determines how transparent the water is.
   - **Range**: 0 to 100.
-- **Quality**: determines which entities are captured by reflections & refractions.
+- **Quality**: determines everything that is captured by reflections & refractions.
   - **Range**: 1 (only sky) or 2 (sky + terrain) or 3 (sky + terrain + models) or 4 (sky + terrain + models + billboards).

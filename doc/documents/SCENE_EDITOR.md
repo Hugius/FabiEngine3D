@@ -1,76 +1,191 @@
 # Scene Editor
 
-![scene](../images/scene_editor.png)
-
 ## General
 
-- All scenes will be saved in `projects\<your_project>\scenes\editor\`.
-- **Everything** that you **place** in a scene (environment, model, billboard, sound, light) is **connected** to the **editors**. Only the things you change in the scene editor will be saved into the scene. For example: if you have a scene full of **green trees** and you change the color of that model to **red** in the **model editor**, those trees in the scene will become **red as well**.
-- Use the `WASD` keys to move around.
-- Use the `SPACE` key to move **up**.
-- Use the `LSHIFT` key to move **down**.
-- Hold `RMB` and move the mouse to look around.
-- Click on a placed model to select it (if it has a correct AABB).
-- You can toggle **debug rendering** with the `H` key.
-- You can toggle **wireframe rendering** with the `F` key.
-- You can toggle **AABB rendering** with the `B` key.
+- All scenes will be saved in `~\projects\<your_project>\scenes\editor\`.
+- Every entity that you place is based on the version in their editor, only the changes made in the scene editor are saved.
+- Placed entities can be selected if it has 1 or more bound AABBs.
 
-## Environment
+## Controls
 
-- Sky: you can select **only 1** sky entity, created in the environment editor.
-- Terrain: you can select **only 1** terrain entity, created in the environment editor.
-- Water: you can select **only 1** water entity, created in the environment editor.
+- Press LMB to place entity
+- Press RMB to toggle camera
+- Press MMB to cancel entity placement
+- Move camera with your mouse
+- Press H to toggle debug rendering
+- Press F to toggle wireframe
+- Press B to toggle AABBs
+- Use WASD to move around
+- Press SPACE to move upwards
+- Press SHIFT to move downwards
+- Press ESC to go back
+
+## Sky
+
+- You can select/delete up to 1 water entity from the water editor.
+
+## Terrain
+
+- You can select/delete up to 1 water entity from the water editor.
+
+## Water
+
+- You can select/delete up to 1 water entity from the water editor.
+- The water can be moved upwards and downwards
 
 ## Models
 
-- You can **place and delete** models in the scene.
-- If a terrain is selected, the model will be placed **on top** of the terrain.
-- If no terrain is selected, the model will be placed at **XYZ(0,0,0)**.
-- You can attach an (endless) **animation** to a placed model.
-- You can **"freeze"** into local space rendering, which means its position is not affected by camera movement.
-- Every placed model has a **position** (**Range**: -inf to inf) that can be **edited**.
-- Every placed model has a **rotation** (**Range**: -360 to 360) that can be **edited**.
-- Every placed model has a **size** (**Range**: 0 to inf) that can be **edited**.
+### General
+
+- You can place/edit/delete models in the scene.
+- If a terrain is selected, you can place the model on top of the terrain with your mouse.
+- If no terrain is selected, you must specify the position of the model.
+- You can attach an (endless) animation to a placed model.
+- You can "freeze" a placed model into local space, which means its position is not affected by camera movement.
+
+### Properties
+
+- **Position**: the position of the model in the scene.
+  - **Range**: -inf to inf
+- **Rotation**: the rotation of the model.
+  - **Range**: 0 to 360
+- **Size**: the size of the model.
+  - **Range**: 0 to inf
 
 ## Billboards
 
-- You can **place and delete** billboards in the scene.
-- If a terrain is selected, the billboard will be placed **on top** of the terrain.
-- If no terrain is selected, the billboard will be placed at **XYZ(0,0,0)**.
-- Every placed billboard has a **position** (**Range**: -inf to inf) that can be **edited**.
-- Every placed billboard has a **rotation** (**Range**: -360 to 360) that can be **edited**.
-- Every placed billboard has a **size** (**Range**: 0 to inf) that can be **edited**.
+### General
+
+- You can place/edit/delete billboards in the scene.
+- If a terrain is selected, you can place the model on top of the terrain with your mouse.
+- If no terrain is selected, you must specify the position of the sound.
+
+### Properties
+
+- **Position**: the position of the billboard in the scene.
+  - **Range**: -inf to inf
+- **Rotation**: the rotation of the billboard.
+  - **Range**: 0 to 360
+- **Size**: the size of the billboard.
+  - **Range**: 0 to inf
 
 ## Sounds
 
-- You can **place and delete** 3D sound casters in the scene.
-- If a terrain is selected, the sound caster will be placed **on top** of the terrain.
-- If no terrain is selected, the sound caster will be placed at **XYZ(0,0,0)**.
-- Every placed sound caster has a **position** (**Range**: -inf to inf) that can be **edited**.
-- Every placed sound caster has a **maximum volume** (**Range**: 0 to 100) that can be **edited**.
-- Every placed sound caster has a **maximum distance** (**Range**: 0 to inf) that can be **edited**.
+### General
 
-## Lighting
+- You can place/edit/delete sounds in the scene.
+- The sounds you place are in 3D space.
+- If a terrain is selected, you can place the sound on top of the terrain with your mouse.
+- If no terrain is selected, you must specify the position of the model.
 
-- You can enable **ambient lighting** which has a **color** (**Range**: 0 to 255) & **intensity** (**Range**: 0 to inf).
-- You can enable **directional lighting** which has a **color** (**Range**: 0 to 255) & **intensity** (**Range**: 0 to inf) & **position** (**Range**: -inf to inf).
-- Directional lighting has the option to show a **light source billboard**, which has a **size** (**Range**: 0 to inf).
-- You can **place and delete** point lights in the scene.
-- If a terrain is selected, the point light will be placed **on top** of the terrain.
-- If no terrain is selected, the point light will be placed at **XYZ(0,0,0)**.
-- Every placed point light has a **position** (**Range**: -inf to inf) that can be **edited**.
-- Every placed point light has a **maximum distance** (**Range**: 0 to inf) that can be **edited**.
-- Every placed point light has an **intensity** (**Range**: 0 to inf) that can be **edited**.
-- Every placed point light has a **color** (**Range**: 0 to 255) that can be **edited**.
+### Properties
+
+- **Position**: the position of the sound in the scene.
+  - **Range**: -inf to inf
+- **Max Distance**: the maximum distance on which the sound is hearable.
+  - **Range**: 0 to inf
+- **Max Volume**: the volume of the sound when 100% hearable.
+  - **Range**: 0 to inf
+
+## Pointlights
+
+### General
+
+- You can place/edit/delete pointlights in the scene.
+- If a terrain is selected, you can place the pointlight on top of the terrain with your mouse.
+- If no terrain is selected, you must specify the position of the pointlight.
+
+### Properties
+
+- **Position**: the position of the pointlight in the scene.
+  - **Range**: -inf to inf
+- **Radius**: the radius of the light emitted by the pointlight emission.
+  - **Range**: 0 to 360
+- **Color**: the color of the light emitted by the pointlight emission.
+  - **Range**: 0 to 255
+- **Intensity**: the intensity of the light emitted by the pointlight emission.
+  - **Range**: 0 to 255
+- **Shape**: the shape of the light emitted by the pointlight.
+  - **Range**: 0 to 255
+
+## Spotlights
+
+### General
+
+- You can place/edit/delete spotlights in the scene.
+- If a terrain is selected, you can place the spotlight on top of the terrain with your mouse.
+- If no terrain is selected, you must specify the position of the spotlight.
+
+### Properties
+
+- **Position**: the position of the spotlight in the scene.
+  - **Range**: -inf to inf
+- **Color**: the color of the light emitted by the spotlight.
+  - **Range**: 0 to 255
+- **Yaw**: the yaw of the spotlight direction.
+  - **Range**: 0 to 360
+- **Pitch**: the pitch of the spotlight direction.
+  - **Range**: 0 to 360
+- **Intensity**: the size of the light emitted by the spotlight.
+  - **Range**: 0 to inf
+- **Angle**: the angle of the spotlight direction.
+  - **Range**: 0 to 45
+- **Distance**: the distance of the light emitted by the spotlight.
+  - **Range**: 0 to inf
+
+## Reflections
+
+### General
+
+- You can place/edit/delete reflections in the scene.
+- Reflections capture their surroundings into a cube map.
+- The resulting cube maps are used for cube reflections.
+- If a terrain is selected, you can place the reflection on top of the terrain with your mouse.
+- If no terrain is selected, you must specify the position of the reflection.
+
+### Properties
+
+- **Position**: the position of the reflection in the scene.
+  - **Range**: -inf to inf
 
 ## Settings
 
-- **Editor speed**: camera movement speed & value changing speed (**Range**: 0 to inf).
-- **LOD distance**: minimum distance by which level of detailed models will appear/disappear (**Range**: 0 to inf).
-- **Reflection height**: the Y coordinate from which scene reflections are captured (**Range**: -inf to inf).
+### Ambient Lighting
 
-## Settings - Graphics - Shadows
+- **Color**: the color of the light emitted by the ambient lighting.
+  - **Range**: 0 to 255
+- **Intensity**: the intensity of the light emitted by the ambient lighting.
+  - **Range**: 0 to inf
 
+### Directional Lighting
+
+- **Enabled**: enable or disable directional lighting in the scene.
+  - **Range**: YES or NO
+- **Position**: the position of the directional lighting source.
+  - **Range**: -inf to inf
+- **Color**: the color of the light emitted by the directional lighting.
+  - **Range**: 0 to 255
+- **Intensity**: the intensity of the light emitted by the directional lighting.
+  - **Range**: 0 to inf
+- **Billboard Size**: the size of the directional lighting source billboard.
+  - **Range**: 0 to inf
+
+### Shadows
+
+- **Enabled**: enable or disable shadows in the scene.
+  - **Range**: YES or NO
+- **Position**: the position of the shadow source.
+  - **Range**: -inf to inf
+- **Size**: the size of the shadowed area.
+  - **Range**: 0 to inf
+- **Center**: the point where the shadow source is looking at.
+  - **Range**: -inf to inf
+- **Follow Cam**: enable or disable shadows following the camera.
+  - **Range**: ON or OFF
+- **Lightness**: the lightness of the shadows.
+  - **Range**: -inf to inf
+- **Interval**: the engine execution frame interval between camera follow updates.
+  - **Range**: -inf to inf
 - You can enable **directional shadows** casted from a certain **position** (**Range**: -inf to inf).
 - Shadows are rendered within boxed borders with a certain **size** (**Range**: 0 to inf).
 - You can determine the direction of the shadows by setting the **center position** (**Range**: -inf to inf).
@@ -78,28 +193,37 @@
 - You can choose to enable **lighted shadowing**, which means that you can still see **directional lighting** effects in the casted shadows.
 - You can choose to adjust the **lightness** (**Range**: 0 to inf) of the casted shadows.
 
-## Settings - Graphics - Motion blur
+### Motion blur
 
 - You can enable **motion blur** with a custom **strength** (**Range**: 0 to inf).
 
-## Settings - Graphics - Depth Of Field
+### Depth Of Field
 
 - You can enable dynamic **Depth Of Field** or enable a static **distant blur**.
 - The distance to objects for dynamic DOF can be adjusted with the **DOF distance** (**Range**: 0 to inf) property.
 - You can change he distance from which the blur starts with the **blur distance** (**Range**: 0 to inf) property.
 
-## Settings - Graphics - Fog
+### Fog
 
 - You can enable **fog** based on a **minimum distance** (**Range**: 0 to inf) & **maximum distance** (**Range**: 0 to inf).
 - Additionally you can set the **fog intensity** (**Range**: 0 to inf) & **fog color** (**Range**: 0 to 255).
 
-## Settings - Graphics - Lens Flare
+### Lens Flare
 
 - You can enable a **lens flare** for directional lighting based on a **flare map texture**.
 - The brightness of the flare can be adjusted with the **intensity** (**Range**: 0 to inf) property.
 - You can change how fast the flare fades with the **multiplier** (**Range**: 0 to inf) property).
 - **Flare map**: colored 24bit `PNG` format image file from `game_assets\textures\flare_maps`.
 
-## Settings - Graphics - Dynamic sky exposure
+### Sky Exposure
 
 - You can enable **dynamic sky exposure** based on extra **intensity** (**Range**: 0 to inf) that is added to the sky lightness.
+
+### Miscellaneous
+
+- **Editor Speed**: defines the speed for camera movement and value changing.
+  - **Range**: 0 to inf
+- **LOD Distance**: minimum distance by which LOD models will appear/disappear.
+  - **Range**: 0 to inf
+- **Planar Height**: the Y coordinate from where planar reflections are captured.
+  - **Range**: -inf to inf

@@ -22,7 +22,7 @@
 - **Ambient lighting**: the overall brightness of a scene.
 - **Directional lighting**: diffuse lighting based on a directional light source (example: the sun).
 - **Point lighting**: individual light casters that show light around them (example: a torch).
-- **Spot lighting**: a spot light casted from a position with a direction (example: a flashlight).
+- **Spot lighting**: individual light casters that show light from a position towards a direction (example: a flashlight).
 - **Specular lighting**: specular lighting is a light reflection from any light caster.
 - **DOF**: Depth Of Field; a post-processing effect that blurs all non-focused pixels.
 - **Motion blur**: pixels will be blurred in the motion direction of the camera.

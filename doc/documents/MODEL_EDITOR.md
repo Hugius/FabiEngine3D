@@ -10,12 +10,12 @@
 
 ## Controls
 
-- Press RMB to toggle the camera
-- Scroll MMB to zoom the camera
-- Move the camera with your mouse
+- Press RMB to toggle camera
+- Scroll MMB to zoom camera
+- Move camera with your mouse
 - Press H to toggle debug rendering
-- Press R to toggle the reference box
-- Press F to toggle the wire frame
+- Press R to toggle reference box
+- Press F to toggle wireframe
 - Press ESC to go back
 - Press SPACE to move upwards
 - Press SHIFT to move downwards
@@ -31,7 +31,7 @@
 
 ## Mesh
 
-- Make sure the center of your mesh is `XYZ(0,0,0)`
+- Make sure the center of your mesh is XYZ(0,0,0).
 - The mesh should be modeled so that the lowest vertex (Y coordinate) is positioned at the center.
 - A mesh can consist of multiple parts (which are collections of vertices).
 - In the mesh file, you need to specify when a part of vertices starts.

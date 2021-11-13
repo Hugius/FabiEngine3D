@@ -32,15 +32,15 @@ void BillboardEditor::_updateAnimationMenu()
 		{
 			_gui.getGlobalScreen()->createValueForm("columns", "Columns", animationColumnCount, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speed")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("framestep")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("speed", "Framestep", animationFramestep, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("framestep", "Framestep", animationFramestep, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
 		if(_gui.getGlobalScreen()->checkValueForm("rows", animationRowCount, { 0 }) ||
 		   _gui.getGlobalScreen()->checkValueForm("columns", animationColumnCount, { 0 }) ||
-		   _gui.getGlobalScreen()->checkValueForm("speed", animationFramestep, {}))
+		   _gui.getGlobalScreen()->checkValueForm("framestep", animationFramestep, {}))
 		{
 			// Only if animation is already playing
 			if(isPlaying)

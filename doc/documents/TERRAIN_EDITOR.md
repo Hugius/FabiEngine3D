@@ -17,7 +17,7 @@
 - Press F to toggle the wire frame
 - Press ESC to go back
 
-## Texturing
+## Resources
 
 - **Height map**: grayscaled `24bit BMP` format image file from `~\projects\<your_project>\assets\textures\height_maps\`.
 - **Blend map**: colored `24bit PNG` format image file from `~\projects\<your_project>\assets\textures\blend_maps\`.

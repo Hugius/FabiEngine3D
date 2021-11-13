@@ -17,7 +17,7 @@
 - Press F to toggle the wire frame
 - Press ESC to go back
 
-## Textures
+## Resources
 
 - **DUDV map**: colored `24bit PNG` format image from `~\projects\<your_project>\assets\textures\dudv_maps\`.
 - **Displacement map**: grayscaled `24bit PNG` format image from `~\projects\<your_project>\assets\textures\displacement_maps\`.

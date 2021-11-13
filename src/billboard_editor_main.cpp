@@ -146,7 +146,7 @@ void BillboardEditor::_loadGUI()
 	leftWindow->createScreen("billboardEditorMenuAnimation");
 	leftWindow->getScreen("billboardEditorMenuAnimation")->createButton("rows", Vec2(0.0f, positions[0]), Vec2(TW("Rows"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Rows", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("billboardEditorMenuAnimation")->createButton("columns", Vec2(0.0f, positions[1]), Vec2(TW("Columns"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Columns", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("billboardEditorMenuAnimation")->createButton("speed", Vec2(0.0f, positions[2]), Vec2(TW("Framestep"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Framestep", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("billboardEditorMenuAnimation")->createButton("framestep", Vec2(0.0f, positions[2]), Vec2(TW("Framestep"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Framestep", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("billboardEditorMenuAnimation")->createButton("animate", Vec2(0.0f, positions[3]), Vec2(TW("Animate"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Animate", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("billboardEditorMenuAnimation")->createButton("back", Vec2(0.0f, positions[4]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 

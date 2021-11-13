@@ -15,7 +15,7 @@
 - Press F to toggle the wire frame
 - Press ESC to go back
 
-## Textures
+## Resources
 
 - You can load the images from `~\projects\<your_project>\assets\textures\cube_maps\`.
 - The image format must be a colored `24bit PNG`.

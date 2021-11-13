@@ -20,26 +20,23 @@
 - Press SPACE to move upwards
 - Press SHIFT to move downwards
 
-## Mesh
+## Resources
 
-- Mesh: `OBJ` format mesh file from `~\projects\<your_project>\assets\meshes`.
-- Make sure the center of your mesh is `XYZ(0,0,0)`
-- The mesh should be modeled so that the lowest vertex (Y coordinate) is positioned at the center.
-
-## Multiparted mesh
-
-- A mesh can consist of multiple parts (which are collections of vertices).
-- In the mesh file, you need to specify when a part of vertices starts.
-- You can start a new mesh part by writing `FE3D_PART <name>` in the OBJ file.
-- If a mesh is multiparted, you can specify textures/lighting for each mesh part.
-
-## Textures
-
+- **Mesh**: `OBJ` format mesh file from `~\projects\<your_project>\assets\meshes`.
 - **Diffuse map**: colored `24bit/32bit PNG` format image file from `~\projects\<your_project>\assets\textures\diffuse_maps\`.
 - **Emission map**: colored `24bit PNG` format image file from `~\projects\<your_project>\assets\textures\emission_maps\`.
 - **Specular map**: colored `24bit PNG` format image file from `~\projects\<your_project>\assets\textures\specular_maps\`.
 - **Reflection map**: colored `24bit PNG` format image file from `~\projects\<your_project>\assets\textures\reflection_maps\`.
 - **Normal map**: colored `24bit PNG` format image file from `~\projects\<your_project>\assets\textures\normal_maps\`.
+
+## Mesh
+
+- Make sure the center of your mesh is `XYZ(0,0,0)`
+- The mesh should be modeled so that the lowest vertex (Y coordinate) is positioned at the center.
+- A mesh can consist of multiple parts (which are collections of vertices).
+- In the mesh file, you need to specify when a part of vertices starts.
+- You can start a new mesh part by writing `FE3D_PART <name>` in the OBJ file.
+- If a mesh is multiparted, you can specify textures/lighting for each mesh part.
 
 ## Properties
 
@@ -47,7 +44,7 @@
   - **Range**: 0 to inf.
 - **Texture Repeat**: the amount of times the textures are repeated.
   - **Range**: 0 to inf.
-- **Color**: the RGB color that will be mixed with the model rendering.
+- **Color**: the RGB color that will be mixed with the model fragments.
   - **Range**: 0 to 255.
 - **Lightness**: the brightness of the model fragments.
   - **Range**: 0 to inf.

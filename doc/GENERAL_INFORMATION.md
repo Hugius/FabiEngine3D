@@ -108,7 +108,7 @@
 
 ## 3. Engine Interface
 
-<img src="engine.png" width="100%"/>
+<img src="images/engine.png" width="100%"/>
 
 - **Left Viewport**: editors & settings
 - **Top Viewport**: project management & preview management

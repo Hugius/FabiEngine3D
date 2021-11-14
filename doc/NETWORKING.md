@@ -48,11 +48,12 @@
 ## 3. TCP & UDP
 
 - On top of the IP protocol, there are 2 different protocols for sending data through networking: TCP & UDP.
-- TCP: this protocol guarantees that the sent data will ALWAYS arrive at the recipient in the same order the data was sent.
-- UDP: this protocol cannot guarantee that the data will arrive at the recipient (even though 99% of the messages will).
-- Performance-wise UDP is much faster than TCP because of the reliability differences.
-- TCP example scenario: you have a multiplayer game with a live chat. The chat messages must always arrive (and in the same order).
-- UDP example scenario: you need to send player positions to other players through the server. It is no big deal if some data gets lost.
+- TCP stands for "Transmission Control Protocol".
+- UDP stands for "User Datagram Protocol".
+- TCP is relatively slow, because it guarantees that the sent data will always arrive at the recipient in the same order the data was sent.
+- UDP is relatively fast, because it cannot guarantee that the data will always arrive at the recipient in the same order the data was sent.
+- TCP example scenario: you need to send chat messages to other players. The chat messages must always arrive (and in the same order).
+- UDP example scenario: you need to send your player position to other players. It is no big deal if some data gets lost.
 - You can choose which protocol you want to use when sending a message. This gives you more control over performance decisions.
 
 ## 4. Messaging

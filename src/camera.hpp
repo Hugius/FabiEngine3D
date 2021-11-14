@@ -84,7 +84,7 @@ private:
 	// Decimals
 	static inline const float DEFAULT_FOV_ANGLE = 90.0f;
 	static inline const float DEFAULT_NEAR_Z = 0.01f;
-	static inline const float DEFAULT_FAR_Z = 3000.0f;
+	static inline const float DEFAULT_FAR_Z = 2500.0f;
 	static inline const float DEFAULT_CURSOR_SENSITIVITY = 0.01f;
 	static inline const float MIN_PITCH_ANGLE = -89.99f;
 	static inline const float MAX_PITCH_ANGLE = 89.99f;

@@ -7,7 +7,7 @@
 - The Z axis is depth (back & front).
 - The 3D coordinate system works on decimals with XYZ(0,0,0) as center coordinate. They can go in any direction (positive & negative).
 - The 2D coordinate system works on decimals with XY(0,0) as center coordinate. The range is between -1.0 and 1.0 from left to right & bottom to top.
-- The maximum render distance is fixed at 3000.0 (the reference box in the model editor has a size of 1.0).
+- The maximum render distance is fixed at 2500.0 (the reference box in the model editor has a size of 1.0).
 
 ## 2. Rotation system
 
@@ -53,7 +53,6 @@
 
 ## 7. Miscellaneous
 
-- Billboards are not affected by shadows or lighting.
 - Image entities and text entities are rendered in the order you placed them (last placed entity on top).
 - Centering the cursor might take 1 frame (or more) in time, because it might not be centered instantly by Microsoft Windows.
 - The engine updates all logic at a fixed speed (144 ticks per second), even if the rendering FPS is higher/lower.

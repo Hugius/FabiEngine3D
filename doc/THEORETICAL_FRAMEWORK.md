@@ -5,8 +5,7 @@
 - **SDL2**: a multimedia library that supports things like: window rendering, asset loading, keyboard input, etc.
 - **Server**: a networking program that processes messages from networking clients.
 - **Client**: a networking program that sends messages to a networking server.
-- **TCP**: a networking protocol: Transmission Control Protocol.
-- **UDP**: a networking protocol: User Datagram Protocol.
+
 - **Transformation**: the combination of position, rotation, size.
 - **Collision**: intersection between 2 things (example: between the camera and a model).
 - **Raycasting**: the process of "casting" a ray (example: from the camera position towards where the camera is looking.

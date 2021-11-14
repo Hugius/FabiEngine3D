@@ -29,11 +29,8 @@
 - **Reflection map**: colored `24bit PNG` format image file from `~\projects\<your_project>\assets\textures\reflection_maps\`.
 - **Normal map**: colored `24bit PNG` format image file from `~\projects\<your_project>\assets\textures\normal_maps\`.
 
-## 4. Mesh
+## 4. Multiparted Mesh
 
-- Make sure that the mesh file contains: `v`, `vt`, `vn`, `f`.
-- Make sure that the center of your mesh is XYZ(0,0,0).
-- The mesh should be modeled so that the lowest vertex (Y coordinate) is positioned at the center.
 - A mesh can consist of multiple parts (which are collections of vertices).
 - In the mesh file, you need to specify when a part of vertices starts.
 - You can start a new mesh part by writing `FE3D_PART <name>` in the OBJ file.

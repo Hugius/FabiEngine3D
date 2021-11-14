@@ -10,11 +10,11 @@
 
 ## 2. Controls
 
-- Press SPACE to play the audio
-- Press R to resume the audio
-- Press P to pause the audio
-- Press S to stop the audio
-- Press ESC to go back
+- Press `SPACE` to play the audio
+- Press `R` to resume the audio
+- Press `P` to pause the audio
+- Press `S` to stop the audio
+- Press `ESC` to go back
 
 ## 3. Resources
 

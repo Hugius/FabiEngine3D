@@ -46,7 +46,7 @@
 - Realtime logging
 - Keyboard input
 - Mouse input
-- Custom interpreted gameplay programming language ("FabScript")
+- Custom interpreted programming language ("FabScript")
 
 ## 2. Folder Structure
 

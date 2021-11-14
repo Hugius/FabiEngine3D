@@ -1,6 +1,8 @@
-# FabiEngine3D Scripting Functions
+# Engine Scripting Functions
 
-- [Environment](SCRIPT_FE3D_ENVIRONMENT.md)
+- [Sky](SCRIPT_FE3D_SKY.md)
+ [Sky](SCRIPT_FE3D_TERRAIN.md)
+  [Sky](SCRIPT_FE3D_WATER.md)
 - [Model](SCRIPT_FE3D_MODEL.md)
 - [Billboard](SCRIPT_FE3D_BILLBOARD.md)
 - [AABB](SCRIPT_FE3D_AABB.md)

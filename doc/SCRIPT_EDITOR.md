@@ -9,12 +9,12 @@
 
 ## 2. Controls
 
-- Press LMB to place the cursor
-- Hold RMB to select lines
-- Scroll MMB to scroll through the lines
-- Press ENTER to add a new line
-- Press BACKSPACE to remove a character
 - You can use the mouse or arrow keys to navigate through the code
-- Press CTRL + C to copy 1 or more lines
-- Press CTRL + V to paste 1 or more lines
-- Press ESC to go back
+- Press `LMB` to place the cursor
+- Hold `RMB` to select lines
+- Scroll `MMB` to scroll through the lines
+- Press `ENTER` to add a new line
+- Press `BACKSPACE` to remove a character
+- Press `CTRL` + `C` to copy 1 or more lines
+- Press `CTRL` + `V` to paste 1 or more lines
+- Press `ESC` to go back

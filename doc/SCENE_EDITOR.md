@@ -8,17 +8,17 @@
 
 ## 2. Controls
 
-- Press LMB to place entity
-- Press RMB to toggle camera
-- Press MMB to cancel entity placement
 - Move camera with your mouse
-- Press H to toggle debug rendering
-- Press F to toggle wireframe
-- Press B to toggle AABBs
-- Use WASD to move around
-- Press SPACE to move upwards
-- Press SHIFT to move downwards
-- Press ESC to go back
+- Press `LMB` to place entity
+- Press `RMB` to toggle camera
+- Press `MMB` to cancel entity placement
+- Press `H` to toggle debug rendering
+- Press `F` to toggle wireframe
+- Press `B` to toggle AABBs
+- Use `WASD` to move around
+- Press `SPACE` to move upwards
+- Press `SHIFT` to move downwards
+- Press `ESC` to go back
 
 ## 3. Sky
 

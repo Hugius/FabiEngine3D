@@ -1,5 +1,5 @@
-# Miscellaneous functions
-### Getters
+# Miscellaneous Scripting functions
+
 - `misc:list_concat`(`STR` firstName, `STR` secondName) ---> `LIST`  
   Returns the lists with **firstName** and **secondName** concatenated together. **firstName** and **secondName** must be put in string values.
 - `misc:list_get_size`(`STR` name) ---> `INT`  

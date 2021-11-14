@@ -19,7 +19,7 @@ Config::Config()
 
 		// Store config file content
 		float windowSizeMultiplier = 0.0f;
-		_processOption(file, windowSizeMultiplier, "window_size_multiplier");
+		_processOption(file, windowSizeMultiplier, "window_size");
 		_processOption(file, _isWindowFullscreen, "window_fullscreen");
 		_processOption(file, _isWindowBorderless, "window_borderless");
 		_processOption(file, _windowTitle, "window_title");
@@ -27,7 +27,7 @@ Config::Config()
 		// Check if multiplier is between 0.0 and 1.0
 		if((windowSizeMultiplier < 0.0f) || (windowSizeMultiplier > 1.0f))
 		{
-			Logger::throwFatalWarning("Configuration file @ option `window_size_multiplier`: must be between 0.0 and 1.0!");
+			Logger::throwFatalWarning("Configuration file @ option `window_size`: must be between 0.0 and 1.0!");
 		}
 
 		// Save monitor dimensions

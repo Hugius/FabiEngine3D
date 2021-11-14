@@ -1,59 +1,59 @@
 # Miscellaneous
-### Coordinate system
-- The **X axis** is horizontal (left & right).
-- The **Y axis** is vertical (down & up).
-- The **Z axis** is what makes a 3D world (back & front).
-- The **3D coordinate system** works on decimals with **XYZ(0.0, 0.0, 0.0)** as **center** coordinate. They can go in **any** direction (positive & negative).
-- The **2D coordinate system** works on decimals with **XY(0.0, 0.0)** as **center** coordinate. The range is between **-1.0 and 1.0** from left to right & bottom to top.
-- The **maximum render distance** is 3000.0 (the **reference box** in the **model editor** has a size of 1.0).
-### Rotation system
-- Beware of the **[Gimbal lock](https://en.wikipedia.org/wiki/Gimbal_lock)** when **rotating** objects in all 3 (XYZ) directions!
-- Rotations of **models** & **billboards** are **Y-based**. This means that X & Z rotations are **relative** to the Y rotation.
-- All rotational **degrees** cannot be higher than 360 or lower than -360 (example: 500 degrees will be 140 degrees).
-- X rotations go **towards** the direction of the X axis.
-- Z rotations go **towards** the direction of the Z axis.
-- Y rotations go **around** the direction of the Y axis.
-- FabiEngine3D does **NOT** support a camera roll, because of the infamous Gimbal Lock.
-- FabiEngine3D **does** come with first person camera support, but **NOT** third person.
-### AABB system
-- Bound **model AABBs** are adjusted to the transformation (position, rotation, size) of the model **automatically**. They will only rotate in **1 direction** (the direction with the greatest angle of rotation).
-- Bound **billboard AABBs** are adjusted to the transformation (position, rotation, size) of the billboard **automatically**. They will rotate only in **1 direction** (the direction with the greatest angle of rotation).
-- **"Rotated"** AABBs will be translated and/or scaled in **90 degrees** directions (0, 90, 180, 270, etc).
-- If you want to access an individual **AABB** bound to a **model**, the ID is composed like this: **modelID + "@" + aabbName**.
-- If you want to access an individual **AABB** bound to a **bilboard**, the ID is composed like this: **billboardID + "@" + aabbName**.
-### Performance
-![performance](../images/performance.png)
-- You can use the performance statistics to analyze your **application's performance**.
-- The amounts of entities are the **total** amounts.
-- The amount of triangles is the **realtime** amount of triangles being rendered every frame.
-- `coreUpdate` includes all function calls and calculations in your **update scripts**.
-- `bufferSwap` means the actual buffering on the **output screen**.
-- Make use of **LOD models** to improve your performance on **high-poly models**.
-- **Lower the graphics quality** in the project settings to improve your **graphics performance**.
-- The water refraction effect has a **huge** impact on performance, because all **models** & **billboards** have to be rendered **twice**.
-- The in-engine logging console **can** have impact on performance during in-engine gameplay runtime, because of scripting **error checks**. The higher the **amount** of console messages, the **bigger** the performance impact. To resolve this, simply **clear** the console messages.
-### Value limits for frequently used values
-- **Color** values (r,g,b) are clamped between 0.0 and 1.0 (0% and 100% respectively).
-- **Alpha/transparency** values are clamped between 0.0 and 1.0 (0% and 100% respectively).
-- **Mix** values are clamped between 0.0 and 1.0 (0% and 100% respectively).
-- **Volume** values are clamped between 0.0 and 1.0 (0% and 100% respectively).
-- **Size/width/height** values cannot be lower than 0.0 (a size of 0.0 is not visible).
-- **Lightness/intensity/brightness** values cannot be lower than 0.0 (there cannot be less light than complete darkness).
-- **Distance** values are absolute (cannot be lower than 0.0).
-- **UV repeat** values cannot be lower than 0 (something cannot repeat negatively).
-- **Factor** values cannot be lower than 0.0 (you cannot take the power of a negative value).
-- **Index** values cannot be lower than 0 (because a negative index does not exist).
-- **Rotation angle** values cannot be higher than 360 or lower than -360 (example: 500 degrees will be 140 degrees).
-### Miscellaneous
-- **Billboards** are **NOT** affected by any **lighting**.
-- **Image** entities and **text** entities are rendered in the **order** you placed them (last placed entity on top).
-- **Centering** the **cursor** might take 1 frame (or more) in **time**, because it will **NOT** be centered instantly.
-- The engine **updates** its logic at a **fixed speed** (144 ticks/second). Even if the rendering FPS is higher/lower.
-### Tips & tricks
-- You can create your own custom **subfolders** within the main folder of `user\assets`.
-- Internal engine updates happen **after** the scripting updates.
-- The top viewport has a button called "**uncache**" which forces the engine to load an asset again, even if it was cached.
-- You can **clear** the console output by pressing **C** when hovering the **console window**.
-### Known issues
-- There is a VERY rare **bug** when using the first person camera system; if the cursor does not center anymore and the camera keeps spinning very fast, click on the **window border** once. This bug does not occur in fullscreen mode.
-- If FabiEngine3D crashes with the error `"WASAPI can't find requested audio endpoint: Element not found."`, then you do not have an active audio device enabled or you have sound driver problems.
+
+## 1. Coordinate system
+
+- The X axis is horizontal (left & right).
+- The Y axis is vertical (down & up).
+- The Z axis is depth (back & front).
+- The 3D coordinate system works on decimals with XYZ(0,0,0) as center coordinate. They can go in any direction (positive & negative).
+- The 2D coordinate system works on decimals with XY(0,0) as center coordinate. The range is between -1.0 and 1.0 from left to right & bottom to top.
+- The maximum render distance is fixed at 3000.0 (the reference box in the model editor has a size of 1.0).
+
+## 2. Rotation system
+
+- Beware of the [gimbal lock](https://en.wikipedia.org/wiki/Gimbal_lock) when rotating objects in all 3 (XYZ) directions!
+- FabiEngine3D does not support a camera roll, because of the infamous gimbal lock.
+- All rotational degrees are converted between 0&deg; and 360&deg; (example: 500&deg; = 140&deg;, -500&deg; = 220&deg;).
+- X rotations go around the X axis.
+- Y rotations go around the Y axis.
+- Z rotations go around the Z axis.
+
+## 3. AABB system
+
+- AABBs that are bound to a parent (model/billboard) will only rotate in the direction with the greatest angle of rotation.
+- "Rotated" AABBs will be translated and/or scaled in 90 degrees directions (0, 90, 180, 270, etc).
+- If you want to access an individual AABB bound to a model, its ID is composed like this: `<model_id> + "@" + <aabb_id>`.
+- If you want to access an individual AABB bound to a bilboard, its ID is composed like this: `<billboard_id> + "@" + <aabb_id>`.
+
+## 4. Performance
+
+- You can use the performance statistics in the bottom viewport to analyze your application's performance.
+- In the statistics, the amount of entities is the total existing entity amount.
+- In the statistics, the amount of triangles is the realtime triangle amount being rendered every frame.
+- `coreUpdate` includes all function calls and calculations in your update scripts.
+- `physicsUpdate` contains: camera calculations, raycasting, collision.
+- `bufferSwap` means the actual buffering on the output screen.
+- Make use of LOD models to improve your performance on high-poly models.
+- Lower the graphics quality in the project settings to improve your graphics performance.
+- The water reflection/refraction effects have a huge impact on performance, because a lot of entities have to be rendered twice.
+- The in-engine logging console can have impact on performance during in-engine application runtime, because of scripting error checks. The higher the amount of console messages, the bigger the performance impact. To resolve this, simply clear the console messages.
+
+## 5. Tips & tricks
+
+- You can create your own custom subfolders within the subfolders of `~\projects\<your_project>\assets\`.
+- Internal engine updates happen after the scripting updates.
+- The top viewport has a button called `UNCACHE` which removes the chosen asset from the cache (if it was cached).
+- The top viewport has a button called `DOCS` that redirects you instantly to the FabiEngine3D documentation.
+- You can clear the logging console in the bottom viewport by pressing `C` while hovering over the logging console.
+
+## 6. Known issues
+
+- There is a very rare bug when using the first person camera; if the cursor does not center anymore and the camera keeps spinning very fast, click on the window border once. This bug does not occur in fullscreen mode.
+- If FabiEngine3D crashes with the error `SDL_MIX could not be initialized: WASAPI can't find requested audio endpoint: Element not found.`, then you do not have an active audio device enabled or you have sound driver problems.
+
+## 7. Miscellaneous
+
+- Billboards are NOT affected by any lighting.
+- Image entities and text entities are rendered in the order you placed them (last placed entity on top).
+- Centering the cursor might take 1 frame (or more) in time, because it might not be centered instantly by Microsoft Windows.
+- The engine updates all logic at a fixed speed (144 ticks per second), even if the rendering FPS is higher/lower.

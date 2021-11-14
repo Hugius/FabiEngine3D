@@ -17,8 +17,8 @@
 - **AABB**: Axis Aligned Bounding Box; a 3D box used for collision.
 - **LOD model**: Level Of Detail model; a less-detailed version of a model.
 - **Camera**: everything in 3D space is looked at from a certain position (like filming with a camera).
-- **Yaw**: the horizontal view angle of the camera (0 to 360 degrees).
-- **Pitch**: the vertical view angle of the camera (-90 to 90 degrees).
+- **Yaw**: the horizontal view angle of the camera (0&deg; to 360&deg;).
+- **Pitch**: the vertical view angle of the camera (-90&deg; to 90&deg;).
 - **Ambient lighting**: the overall brightness of a scene.
 - **Directional lighting**: diffuse lighting based on a directional light source (example: the sun).
 - **Point lighting**: individual light casters that show light around them (example: a torch).

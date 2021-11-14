@@ -7,7 +7,7 @@
 - `fe3d:application_stop`() ---> `NONE`  
   Terminates the application.
 - `fe3d:print`(`VEC3/STR/DEC/INT/BOOL` message) ---> `NONE`  
-  Prints a value to the console (both internal & external). Accepts various message types.
+  Prints a value to the logging console (both internal & external). Accepts various message types.
 - `fe3d:scene_load`(`STR` ID) ---> `NONE`  
   Loads an editor scene with **ID** into the game. Any previously loaded scene will be cleared.
 - `fe3d:scene_clear`() ---> `NONE`  

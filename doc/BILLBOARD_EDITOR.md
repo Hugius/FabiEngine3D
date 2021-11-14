@@ -29,26 +29,26 @@
 ## 4. Properties
 
 - **Size**: the size of the billboard.
-  - **Range**: 0 to inf.
+  - **Range**: 0 to inf
 - **Text Content**: the text content of the billboard.
-  - **Range**: none.
+  - **Range**: none
 - **Texture Repeat**: the amount of times the textures are repeated.
-  - **Range**: 0 to inf.
+  - **Range**: 0 to inf
 - **Rows**: the amount of rows in the sprite animation texture.
-  - **Range**: 1 to inf.
+  - **Range**: 1 to inf
 - **Columns**: the amount of columns in the sprite animation texture.
-  - **Range**: 1 to inf.
+  - **Range**: 1 to inf
 - **Framestep**: the amount of engine execution frames between the sprite animation frame cycles.
-  - **Range**: 0 to inf.
+  - **Range**: 0 to inf
 - **Color**: the RGB color that will be mixed with the billboard fragments.
-  - **Range**: 0 to 255.
+  - **Range**: 0 to 255
 - **Lightness**: the brightness of the billboard fragments.
-  - **Range**: 0 to inf.
+  - **Range**: 0 to inf
 - **Shadowed**: enable or disable billboard capturing in shadows.
-  - **Range**: ON or OFF.
+  - **Range**: ON or OFF
 - **Reflected**: enable or disable billboard capturing in reflections.
-  - **Range**: ON or OFF.
+  - **Range**: ON or OFF
 - **Facing X**: enable or disable horizontal billboard facing towards the camera.
-  - **Range**: ON or OFF.
+  - **Range**: ON or OFF
 - **Facing Y**: enable or disable vertical billboard facing towards the camera.
-  - **Range**: ON or OFF.
+  - **Range**: ON or OFF

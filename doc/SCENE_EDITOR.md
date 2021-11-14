@@ -22,15 +22,15 @@
 
 ## 3. Sky
 
-- You can select/delete up to 1 water entity from the water editor.
+- You can select/delete up to 1 sky from the sky editor.
 
 ## 4. Terrain
 
-- You can select/delete up to 1 water entity from the water editor.
+- You can select/delete up to 1 terrain from the terrain editor.
 
 ## 5. Water
 
-- You can select/delete up to 1 water entity from the water editor.
+- You can select/delete up to 1 water from the water editor.
 - The water can be moved upwards and downwards
 
 ## 6. Models

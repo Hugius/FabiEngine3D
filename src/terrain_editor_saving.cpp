@@ -16,15 +16,7 @@ const bool TerrainEditor::saveTerrainEntitiesToFile() const
 	}
 
 	// Create or overwrite file
-	ofstream file;
-	if(Config::getInst().isApplicationExported())
-	{
-		file.open(Tools::getRootDirectoryPath() + "data\\terrain.fe3d");
-	}
-	else
-	{
-		file.open(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\terrain.fe3d");
-	}
+	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\terrain.fe3d");
 
 	// Write terrain data
 	for(const auto& terrainID : _loadedTerrainIDs)

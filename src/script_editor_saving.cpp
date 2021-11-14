@@ -39,15 +39,7 @@ const bool ScriptEditor::saveScriptFiles()
 	for(const auto& scriptID : _script.getAllScriptFileIDs())
 	{
 		// Create or overwrite file
-		ofstream file;
-		if(Config::getInst().isApplicationExported())
-		{
-			file.open(Tools::getRootDirectoryPath() + "scripts\\" + scriptID + ".fe3d");
-		}
-		else
-		{
-			file.open(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\scripts\\" + scriptID + ".fe3d");
-		}
+		ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\scripts\\" + scriptID + ".fe3d");
 
 		// Write cursor indices to file
 		file << _script.getScriptFile(scriptID)->getCursorLineIndex() << " " << _script.getScriptFile(scriptID)->getCursorCharIndex() << endl;

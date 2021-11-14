@@ -203,14 +203,17 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 
 void EngineController::FE3D_CONTROLLER_DESTROY()
 {
-	// Application preview
-	if(Config::getInst().isApplicationExported())
+	if(Config::getInst().isApplicationExported()) // Application preview
 	{
 		// Check if script was running
 		if(_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
 		{
 			_leftViewportController.getScriptEditor().getScriptExecutor().unload();
 		}
+	}
+	else // Engine preview
+	{
+
 	}
 }
 

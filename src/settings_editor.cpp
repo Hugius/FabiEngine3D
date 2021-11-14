@@ -293,15 +293,7 @@ const bool SettingsEditor::saveSettingsToFile() const
 	}
 
 	// Create or overwrite file
-	ofstream file;
-	if(Config::getInst().isApplicationExported())
-	{
-		file.open(Tools::getRootDirectoryPath() + "data\\settings.fe3d");
-	}
-	else
-	{
-		file.open(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\settings.fe3d");
-	}
+	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\settings.fe3d");
 
 	// Get values
 	auto isAntiAliasingEnabled = _fe3d.gfx_isAntiAliasingEnabled();

@@ -53,7 +53,9 @@
 
 ## 7. Miscellaneous
 
-- Billboards are NOT affected by any lighting.
+- Billboards are not affected by shadows or lighting.
 - Image entities and text entities are rendered in the order you placed them (last placed entity on top).
 - Centering the cursor might take 1 frame (or more) in time, because it might not be centered instantly by Microsoft Windows.
 - The engine updates all logic at a fixed speed (144 ticks per second), even if the rendering FPS is higher/lower.
+- Emission maps are used for bloom if the specified bloom type is `PARTS`.
+- Bloomed fragments are not affected by shadows or lighting.

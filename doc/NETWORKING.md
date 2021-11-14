@@ -49,7 +49,7 @@
 
 - On top of the IP protocol, there are 2 different protocols for sending data through networking: TCP & UDP.
 - TCP: this protocol guarantees that the sent data will ALWAYS arrive at the recipient in the same order the data was sent.
-- UDP: this protocol can NOT guarantee that the data will arrive at the recipient (even though 99% of the messages will).
+- UDP: this protocol cannot guarantee that the data will arrive at the recipient (even though 99% of the messages will).
 - Performance-wise UDP is much faster than TCP because of the reliability differences.
 - TCP example scenario: you have a multiplayer game with a live chat. The chat messages must always arrive (and in the same order).
 - UDP example scenario: you need to send player positions to other players through the server. It is no big deal if some data gets lost.
@@ -57,7 +57,7 @@
 
 ## 4. Messaging
 
-- A network message must NOT be longer than 128 characters or contain any semicolons (`;`).
+- A network message cannot be longer than 128 characters or contain any semicolons (`;`).
 - There is no guarantee that if you send multiple messages right after each other, they will arrive at the same time.
 - Every update/tick in either the server or the client, the pending messages will be cleared before receiving new messages.
 - Some messages are reserved for the engine: `REQUEST`, `ACCEPT`, `PING`, `SERVER_FULL`, `ALREADY_CONNECTED`, `DISCONNECTED`.

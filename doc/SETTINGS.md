@@ -1,22 +1,22 @@
 # Settings
 
 - **Anti Aliasing**: enable or disable the anti-aliasing effect.
-  - **Range**: ON or OFF
+  - **Range**: `ON` or `OFF`
 - **Bloom**: the size of the bloom effect blur.
-  - **Range**: 1 to 5
+  - **Range**: `1` to `5`
 - **DOF**: the thickness of the DOF effect blur.
-  - **Range**: 1 to 5
+  - **Range**: `1` to `5`
 - **Motion Blur**: the intensity of the motion blur blur.
-  - **Range**: 1 to 5
+  - **Range**: `1` to `5`
 - **Aniso Filtering**: the amount of samples used in anisotropic filtering.
-  - **Range**: 1 to 16
+  - **Range**: `1` to `16`
 - **Shadow**: the quality of shadows.
-  - **Range**: 2048 to 16384
+  - **Range**: `2048` to `16384`
 - **Cube Reflection**: the quality of cube reflections.
-  - **Range**: 128 to 1024
+  - **Range**: `128` to `1024`
 - **Planar Reflection**: the quality of planar reflections.
-  - **Range**: 128 to 1024
+  - **Range**: `128` to `1024`
 - **Refraction**: the quality of cube refractions.
-  - **Range**: 128 to 1024
+  - **Range**: `128` to `1024`
 - **Audio**: the amount of allocated audio channels.
-  - **Range**: 64 to 512
+  - **Range**: `64` to `512`

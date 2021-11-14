@@ -65,12 +65,12 @@ Line 2 of every script file must specify its execution state: entry or waiting.
 
 - A variable name must be unique and not conflict with FabScript keywords.
 - A variable name must start with an alphabetic character (abc...).
-- A global variable name must start with '_'
+- A global variable name must start with `_`
 
 ### 4.6 Basic Values
 
 - Types to choose from: `VEC3` (vector3), `STR` (string), `INT` (integer), `DEC` (decimal), `BOOL` (boolean).
-- A boolean can only be true or false just like binary (example: `<true>` or `<false>`) (NOTE: the < and > are in this case NOT placeholders).
+- A boolean can only be true or false just like binary (example: `<true>` or `<false>`) (NOTE: the `<` and `>` are not placeholders).
 - A string can be any characters, as long as it's surrounded with " " (example: `"hello world"`).
 - An integer is a whole number which can also be negative (example: `42`).
 - A decimal is a floating point number which can also be negative (example: `42.536`).

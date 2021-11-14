@@ -30,12 +30,12 @@
 ## 4. Properties
 
 - **Transformation**: the target transformation.
-  - **Range**: -inf to inf
+  - **Range**: `-inf` to `inf`
 - **Type**: the type of transformation.
-  - **Range**: MOVE or ROTATE or SCALE
+  - **Range**: `MOVE` or `ROTATE` or `SCALE`
 - **Speed**: the speed of the transformation change.
-  - **Range**: -inf to inf
+  - **Range**: `-inf` to `inf`
 - **Type**: the type of speed
-  - **Range**: LINEAR or EXPONENT or INSTANT.
+  - **Range**: `LINEAR` or `EXPONENT` or `INSTANT`
 - **Rotation origin**: the local origin which the model is rotated around.
-  - **Range**: -inf to inf
+  - **Range**: `-inf` to `inf`

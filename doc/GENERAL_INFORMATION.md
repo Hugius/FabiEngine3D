@@ -11,11 +11,11 @@
 
 ### 1.2 Rendering
 
-- **3D rendering**: sky, terrain, water, model, billboard
-- **2D rendering**: image, text
+- **3D Rendering**: sky, terrain, water, model, billboard
+- **2D Rendering**: image, text
 - **Textures**: blend, cube, diffuse, displacement, dudv, emission, flare, height, image, normal, reflection, specular
-- **Graphics**: ambient lighting, directional lighting, specular lighting, point lighting, spot lighting, shadows, cube reflections, planar reflections, fog, skyHDR
-- **Post processing**: bloom, DOF, motion blur, anti-aliasing, lens flare
+- **Graphics**: ambient lighting, directional lighting, specular lighting, point lighting, spot lighting, shadows, cube reflections, planar reflections, fog, sky exposure
+- **Post Processing**: bloom, DOF, motion blur, anti-aliasing, lens flare
 
 ### 1.3 Audio
 
@@ -110,8 +110,8 @@
 
 <img src="engine.png" width="100%"/>
 
-- **Left viewport**: editors & settings
-- **Top viewport**: project management & preview management
-- **Right viewport**: controls & properties
-- **Bottom viewport**: statistics & logging
-- **Mid viewport**: 3D display screen
+- **Left Viewport**: editors & settings
+- **Top Viewport**: project management & preview management
+- **Right Viewport**: controls & properties
+- **Bottom Viewport**: statistics & logging
+- **Mid Viewport**: 3D display screen

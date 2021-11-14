@@ -35,7 +35,7 @@
 - `fe3d:collision_disable_camera_terrain_response`() ---> `NONE`  
   Disables camera collision with the terrain surface (if existing).
 - `fe3d:collision_set_camera_box`(`DEC` bottom, `DEC` top, `DEC` left, `DEC` right, `DEC` front, `DEC` back) ---> `NONE`  
-  Defines the dimensions of the bounding box around the camera. All parameters are offsets from the camera position. NOTE: this box is NOT an AABB entity.
+  Defines the dimensions of the bounding box around the camera. All parameters are offsets from the camera position. NOTE: this box is not an AABB entity.
 - `fe3d:collision_enable_camera_aabb_response`(`BOOL` x, `BOOL` y, `BOOL` z) ---> `NONE`  
   Enables collision detection & response between the camera and AABBs. You can specify which directions (**x** and/or **y** and/or **z**) of collision need to be checked.
 - `fe3d:collision_disable_camera_aabb_response`() ---> `NONE`  

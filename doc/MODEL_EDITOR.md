@@ -31,7 +31,8 @@
 
 ## 4. Mesh
 
-- Make sure the center of your mesh is XYZ(0,0,0).
+- Make sure that the mesh file contains: `v`, `vt`, `vn`, `f`.
+- Make sure that the center of your mesh is XYZ(0,0,0).
 - The mesh should be modeled so that the lowest vertex (Y coordinate) is positioned at the center.
 - A mesh can consist of multiple parts (which are collections of vertices).
 - In the mesh file, you need to specify when a part of vertices starts.
@@ -41,33 +42,33 @@
 ## 5. Properties
 
 - **Size**: size multiplier of the mesh.
-  - **Range**: 0 to inf
+  - **Range**: `0` to `inf`
 - **Texture Repeat**: the amount of times the textures are repeated.
-  - **Range**: 0 to inf
+  - **Range**: `0` to `inf`
 - **Color**: the RGB color that will be mixed with the model fragments.
-  - **Range**: 0 to 255
+  - **Range**: `0` to `255`
 - **Lightness**: the brightness of the model fragments.
-  - **Range**: 0 to inf
+  - **Range**: `0` to `inf`
 - **Specular**: enable or disable specular lighting on the model.
-  - **Range**: ON or OFF
+  - **Range**: `ON` or `OFF`
 - **Specular Factor**: the shininess of the specular lighting.
-  - **Range**: 0 to 256
+  - **Range**: `0` to `256`
 - **Specular Intensity**: the intensity of the specular lighting.
-  - **Range**: 0 to inf
+  - **Range**: `0` to `inf`
 - **Reflective**: enable or disable full sky reflection or vertical scene reflection.
-  - **Range**: ON or OFF
+  - **Range**: `ON` or `OFF`
 - **Type**: the type of reflection that is rendered onto the model.
-  - **Range**: CUBE or PLANAR
+  - **Range**: `CUBE` or `PLANAR`
 - **Reflectivity**: the percentage of how reflective the model is.
-  - **Range**: 0 to 100
+  - **Range**: `0` to `100`
 - **Level Of Detail**: the ID of another model representing the LOD version of the current model. If you want to remove the LOD, fill in "@".
-  - **Range**: none
+  - **Range**: `none`
 - **Instanced**: enable or disable instanced rendering for this model (disables AABBs).
-  - **Range**: ON or OFF
+  - **Range**: `ON` or `OFF`
 - **Culling**: enable or disable the face culling performance optimization.
-  - **Range**: ON or OFF
+  - **Range**: `ON` or `OFF`
 - **Rotation**: the order of directions in which the model is rotated.
-  - **Range**: XYZ, XZY, YXZ, YZX, ZXY, ZYX
+  - **Range**: `XYZ` or `XZY` or `YXZ` or `YZX` or `ZXY` or `ZYX`
 
 ## AABB editor
 

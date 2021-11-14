@@ -15,31 +15,34 @@
 - **Model**: a 3D object in 3D space.
 - **Billboard**: a 2D quad in 3D space.
 - **AABB**: Axis Aligned Bounding Box; a 3D box used for collision.
-- **LOD model**: Level Of Detail model; a less-detailed version of a model.
+- **LOD Model**: Level Of Detail model; a less-detailed version of a model.
 - **Camera**: everything in 3D space is looked at from a certain position (like filming with a camera).
 - **Yaw**: the horizontal view angle of the camera (0&deg; to 360&deg;).
 - **Pitch**: the vertical view angle of the camera (-90&deg; to 90&deg;).
-- **Ambient lighting**: the overall brightness of a scene.
-- **Directional lighting**: diffuse lighting based on a directional light source (example: the sun).
-- **Point lighting**: individual light casters that show light around them (example: a torch).
-- **Spot lighting**: individual light casters that show light from a position towards a direction (example: a flashlight).
-- **Specular lighting**: specular lighting is a light reflection from any light caster.
+- **Ambient Lighting**: the overall brightness of a scene.
+- **Directional Lighting**: diffuse lighting based on a directional light source (example: the sun).
+- **Point Lighting**: individual light casters that show light around them (example: a torch).
+- **Spot Lighting**: individual light casters that show light from a position towards a direction (example: a flashlight).
+- **Specular Lighting**: specular lighting is a light reflection from any light caster.
 - **DOF**: Depth Of Field; a post-processing effect that blurs all non-focused pixels.
-- **Motion blur**: pixels will be blurred in the motion direction of the camera.
-- **SkyHDR**: an effect that affects the brightness of the sky based on the camera pitch angle.
-- **Diffuse mapping**: using a texture to give a variety of colors to a model.
-- **Cube mapping**: using a texture to give a variety of colors to a 3D cube map.
-- **Billboard mapping**: using a texture to give a variety of colors to a billboard.
-- **Image mapping**: using a texture to give a variety of colors to a GUI image.
-- **Light mapping**: using a texture to make parts of a model brighter.
-- **Reflection mapping**: using a texture to make parts of a model reflective.
-- **Normal mapping**: using a texture to improve lighting effects on a model.
-- **Height mapping**: using a texture to generate a terrain mesh.
-- **Blend mapping**: using a texture to blend multiple textures together onto a terrain.
-- **DUDV mapping**: using a texture to distort the texture of a water surface (example: water ripples).
-- **Displacement mapping**: using a texture to create waves in the water mesh.
-- **Flare mapping**: using a texture to achieve a lens flare effect when the camera is looking at a directional lighting caster.
+- **Motion Blur**: pixels will be blurred in the motion direction of the camera.
+- **Sky Exposure**: an effect that affects the brightness of the sky based on the camera pitch angle.
+- **Anisotropic Filtering**: a technique that improves texture quality when looked at from oblique camera angles.
+- **Anti Aliasing**: a technique that improves the rendering quality by smoothing out jagged edges on the screen.
+- **Diffuse Mapping**: using a texture to give a variety of colors to a model.
+- **Cube Mapping**: using a texture to give a variety of colors to a 3D cube map.
+- **Billboard Mapping**: using a texture to give a variety of colors to a billboard.
+- **Image Mapping**: using a texture to give a variety of colors to a GUI image.
+- **Emission Mapping**: using a texture to make parts of a model appear brighter.
+- **Reflection Mapping**: using a texture to make parts of a model reflective.
+- **Normal Mapping**: using a texture to improve lighting effects on a model.
+- **Height Mapping**: using a texture to generate a terrain mesh.
+- **Blend Mapping**: using a texture to blend multiple textures together onto a terrain.
+- **DUDV Mapping**: using a texture to distort the texture of a water surface (example: water ripples).
+- **Displacement Mapping**: using a texture to create waves in the water mesh.
+- **Flare Mapping**: using a texture to achieve a lens flare effect when the camera is looking at a directional lighting caster.
 - **Vertex**: a point (XYZ) in space within a 3D mesh.
-- **UV coordinate**: a coordinate (XY) used for mapping 2D texture onto a 3D mesh.
-- **Normal vector**: a normalized vector that points in the opposite direction of a surface; used for lighting calculations.
+- **UV Coordinate**: a coordinate (XY) used for mapping 2D texture onto a 3D mesh.
+- **Normal Vector**: a normalized vector that points in the opposite direction of a surface; used for lighting calculations.
 - **Fragment**: every pixel that canpossibly end up on your screen.
+- **OBJ file**: a geometry data file, used for modelling.

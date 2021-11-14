@@ -23,15 +23,7 @@ const bool SceneEditor::saveEditorSceneToFile()
 	}
 
 	// Create or overwrite file
-	ofstream file;
-	if(Config::getInst().isApplicationExported())
-	{
-		file.open(Tools::getRootDirectoryPath() + "scenes\\editor\\" + _currentSceneID + ".fe3d");
-	}
-	else
-	{
-		file.open(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\scenes\\editor\\" + _currentSceneID + ".fe3d");
-	}
+	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\scenes\\editor\\" + _currentSceneID + ".fe3d");
 
 	// Save all LOD model IDs
 	vector<string> lodEntityIDs;
@@ -505,7 +497,7 @@ const bool SceneEditor::saveEditorSceneToFile()
 	file.close();
 
 	// Logging
-	Logger::throwInfo("Scene data from project \"" + _currentProjectID + "\" saved!");
+	Logger::throwInfo("Scene data saved!");
 
 	// Return
 	return true;

@@ -24,31 +24,14 @@ const bool ScriptEditor::saveScriptFiles()
 	// Delete all text files containing deleted scripts
 	for(const auto& fileName : _scriptFileNamesToDelete)
 	{
-		if(Config::getInst().isApplicationExported())
-		{
-			// Compose file path
-			const string filePath = string(Tools::getRootDirectoryPath() + "scripts\\" + fileName + ".fe3d");
-
-			// Check if file exists
-			if(Tools::isFileExisting(filePath))
-			{
-				Tools::deleteFile(filePath);
-			}
-		}
-		else
-		{
-			// Compose file path
-			const string filePath = string(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "scripts\\" + fileName + ".fe3d");
-
-			// Check if file exists
-			if(Tools::isFileExisting(filePath))
-			{
-				Tools::deleteFile(filePath);
-			}
-		}
+		// Compose file path
+		const string filePath = string(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\scripts\\" + fileName + ".fe3d");
 
 		// Check if file exists
-
+		if(Tools::isFileExisting(filePath))
+		{
+			Tools::deleteFile(filePath);
+		}
 	}
 	_scriptFileNamesToDelete.clear();
 
@@ -63,7 +46,7 @@ const bool ScriptEditor::saveScriptFiles()
 		}
 		else
 		{
-			file.open(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "scripts\\" + scriptID + ".fe3d");
+			file.open(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\scripts\\" + scriptID + ".fe3d");
 		}
 
 		// Write cursor indices to file
@@ -80,7 +63,7 @@ const bool ScriptEditor::saveScriptFiles()
 	}
 
 	// Logging
-	Logger::throwInfo("Script data from project \"" + _currentProjectID + "\" saved!");
+	Logger::throwInfo("Script data saved!");
 
 	// Return
 	return true;

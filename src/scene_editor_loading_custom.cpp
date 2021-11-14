@@ -13,7 +13,7 @@ using std::istringstream;
 const bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 {
 	// Error checking
-	if(_currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("SceneEditor::loadCustomSceneFromFile::1");
 	}
@@ -24,7 +24,7 @@ const bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 
 	// Compose file path
 	const string filePath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
-							 ("projects\\" + _currentProjectID)) + "\\scenes\\custom\\" + fileName + ".fe3d");
+							 ("projects\\" + _currentProjectID + "\\")) + "scenes\\custom\\" + fileName + ".fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
@@ -781,7 +781,7 @@ const bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 	_loadedSceneID = fileName;
 
 	// Logging
-	Logger::throwInfo("Scene data from project \"" + _currentProjectID + "\" loaded!");
+	Logger::throwInfo("Scene data loaded!");
 
 	// Return
 	return true;

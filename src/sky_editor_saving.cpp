@@ -76,7 +76,7 @@ const bool SkyEditor::saveSkyEntitiesToFile() const
 	file.close();
 
 	// Logging
-	Logger::throwInfo("Sky data from project \"" + _currentProjectID + "\" saved!");
+	Logger::throwInfo("Sky data saved!");
 
 	// Return
 	return true;

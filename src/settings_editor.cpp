@@ -219,7 +219,7 @@ void SettingsEditor::loadDefaultSettings()
 const bool SettingsEditor::loadSettingsFromFile() const
 {
 	// Error checking
-	if(_currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("SettingsEditor::loadSettingsFromFile");
 	}
@@ -232,7 +232,7 @@ const bool SettingsEditor::loadSettingsFromFile() const
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `settings.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `settings.fe3d` missing!");
 		return false;
 	}
 

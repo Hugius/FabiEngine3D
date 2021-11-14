@@ -114,7 +114,7 @@ const bool TerrainEditor::saveTerrainEntitiesToFile() const
 	file.close();
 
 	// Logging
-	Logger::throwInfo("Terrain data from project \"" + _currentProjectID + "\" saved!");
+	Logger::throwInfo("Terrain data saved!");
 
 	// Return
 	return true;

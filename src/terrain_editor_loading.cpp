@@ -12,7 +12,7 @@ using std::istringstream;
 const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 {
 	// Error checking
-	if(_currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("TerrainEditor::getAllTerrainTexturePathsFromFile");
 	}
@@ -25,7 +25,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `terrain.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `terrain.fe3d` missing!");
 		return {};
 	}
 
@@ -216,7 +216,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 const vector<string> TerrainEditor::getAllTerrainBitmapPathsFromFile() const
 {
 	// Error checking
-	if(_currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("TerrainEditor::getAllTerrainTexturePathsFromFile");
 	}
@@ -229,7 +229,7 @@ const vector<string> TerrainEditor::getAllTerrainBitmapPathsFromFile() const
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `terrain.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `terrain.fe3d` missing!");
 		return {};
 	}
 
@@ -282,7 +282,7 @@ const vector<string> TerrainEditor::getAllTerrainBitmapPathsFromFile() const
 const bool TerrainEditor::loadTerrainEntitiesFromFile()
 {
 	// Error checking
-	if(_currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("TerrainEditor::loadTerrainEntitiesFromFile");
 	}
@@ -298,7 +298,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `terrain.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `terrain.fe3d` missing!");
 		return false;
 	}
 
@@ -509,7 +509,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 	file.close();
 
 	// Logging
-	Logger::throwInfo("Terrain data from project \"" + _currentProjectID + "\" loaded!");
+	Logger::throwInfo("Terrain data loaded!");
 
 	// Return
 	return true;

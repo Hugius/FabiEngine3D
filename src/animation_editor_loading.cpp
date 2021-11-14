@@ -11,7 +11,7 @@ using std::istringstream;
 const bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 {
 	// Error checking
-	if(_currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("AnimationEditor::loadAnimationsFromFile");
 	}
@@ -27,7 +27,7 @@ const bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `animation.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `animation.fe3d` missing!");
 		return false;
 	}
 
@@ -175,7 +175,7 @@ const bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 	file.close();
 
 	// Logging
-	Logger::throwInfo("Animation data from project \"" + _currentProjectID + "\" loaded!");
+	Logger::throwInfo("Animation data loaded!");
 
 	// Return
 	return true;

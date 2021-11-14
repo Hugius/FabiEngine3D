@@ -25,7 +25,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string&
 			// Compose directory path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\");
+			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const string newDirectoryPath = string(directoryPath + arguments[0].getString());
 
 			// Check if directory exists
@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string&
 			// Compose directory path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\");
+			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const string newDirectoryPath = string(directoryPath + arguments[0].getString());
 
 			// Check if directory exists
@@ -77,7 +77,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string&
 			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\");
+			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const string filePath = string(directoryPath + arguments[0].getString());
 
 			// Check if file exists
@@ -105,7 +105,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string&
 			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\");
+			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const string filePath = string(directoryPath + arguments[0].getString());
 
 			// Check if file exists
@@ -130,7 +130,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string&
 			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\");
+			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const string filePath = string(directoryPath + arguments[0].getString());
 
 			// Check if file exists
@@ -186,7 +186,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string&
 			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\");
+			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const string filePath = string(directoryPath + arguments[0].getString());
 
 			// Check if file exists
@@ -213,7 +213,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string&
 			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\");
+			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const string filePath = string(directoryPath + arguments[0].getString());
 
 			// Check if file exists

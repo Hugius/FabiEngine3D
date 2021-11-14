@@ -22,15 +22,7 @@ const bool AudioEditor::saveAudioEntitiesToFile() const
 	}
 
 	// Create or overwrite file
-	ofstream file;
-	if(Config::getInst().isApplicationExported())
-	{
-		file.open(Tools::getRootDirectoryPath() + "data\\audio.fe3d");
-	}
-	else
-	{
-		file.open(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\audio.fe3d");
-	}
+	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\audio.fe3d");
 
 	// Write audio data
 	for(const auto& audioID : _loadedAudioIDs)
@@ -55,7 +47,7 @@ const bool AudioEditor::saveAudioEntitiesToFile() const
 	file.close();
 
 	// Logging
-	Logger::throwInfo("Audio data from project \"" + _currentProjectID + "\" saved!");
+	Logger::throwInfo("Audio data saved!");
 
 	// Return
 	return true;

@@ -12,7 +12,7 @@ using std::istringstream;
 const vector<string> WaterEditor::getAllWaterTexturePathsFromFile() const
 {
 	// Error checking
-	if(_currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("WaterEditor::getAllWaterTexturePathsFromFile");
 	}
@@ -25,7 +25,7 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile() const
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `water.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `water.fe3d` missing!");
 		return {};
 	}
 
@@ -110,7 +110,7 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile() const
 const bool WaterEditor::loadWaterEntitiesFromFile()
 {
 	// Error checking
-	if(_currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("WaterEditor::loadWaterEntitiesFromFile");
 	}
@@ -121,12 +121,12 @@ const bool WaterEditor::loadWaterEntitiesFromFile()
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID)) + "\\data\\water.fe3d");
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\water.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `water.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `water.fe3d` missing!");
 		return false;
 	}
 
@@ -250,7 +250,7 @@ const bool WaterEditor::loadWaterEntitiesFromFile()
 	file.close();
 
 	// Logging
-	Logger::throwInfo("Water data from project \"" + _currentProjectID + "\" loaded!");
+	Logger::throwInfo("Water data loaded!");
 
 	// Return
 	return true;

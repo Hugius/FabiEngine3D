@@ -96,7 +96,7 @@ const bool WaterEditor::saveWaterEntitiesToFile() const
 	file.close();
 
 	// Logging
-	Logger::throwInfo("Water data from project \"" + _currentProjectID + "\" saved!");
+	Logger::throwInfo("Water data saved!");
 
 	// Return
 	return true;

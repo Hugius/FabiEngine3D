@@ -24,15 +24,7 @@ const bool ModelEditor::saveModelEntitiesToFile() const
 	}
 
 	// Create or overwrite file
-	ofstream file;
-	if(Config::getInst().isApplicationExported())
-	{
-		file.open(Tools::getRootDirectoryPath() + "data\\model.fe3d");
-	}
-	else
-	{
-		file.open(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\model.fe3d");
-	}
+	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\model.fe3d");
 
 	// Write model data
 	for(const auto& modelID : _loadedModelIDs)
@@ -173,7 +165,7 @@ const bool ModelEditor::saveModelEntitiesToFile() const
 	file.close();
 
 	// Logging
-	Logger::throwInfo("Model data from project \"" + _currentProjectID + "\" saved!");
+	Logger::throwInfo("Model data saved!");
 
 	// Return
 	return true;

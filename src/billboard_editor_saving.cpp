@@ -22,15 +22,7 @@ const bool BillboardEditor::saveBillboardEntitiesToFile() const
 	}
 
 	// Create or overwrite file
-	ofstream file;
-	if(Config::getInst().isApplicationExported())
-	{
-		file.open(Tools::getRootDirectoryPath() + "data\\billboard.fe3d");
-	}
-	else
-	{
-		file.open(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\billboard.fe3d");
-	}
+	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\billboard.fe3d");
 
 	// Write billboard data
 	for(const auto& billboardID : _loadedBillboardIDs)
@@ -98,7 +90,7 @@ const bool BillboardEditor::saveBillboardEntitiesToFile() const
 	file.close();
 
 	// Logging
-	Logger::throwInfo("Billboard data from project \"" + _currentProjectID + "\" saved!");
+	Logger::throwInfo("Billboard data saved!");
 
 	// Return
 	return true;

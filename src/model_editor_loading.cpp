@@ -14,7 +14,7 @@ using std::istringstream;
 const vector<string> ModelEditor::getAllMeshPathsFromFile() const
 {
 	// Error checking
-	if(_currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("ModelEditor::getAllMeshPathsFromFile");
 	}
@@ -27,7 +27,7 @@ const vector<string> ModelEditor::getAllMeshPathsFromFile() const
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `model.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `model.fe3d` missing!");
 		return {};
 	}
 
@@ -82,7 +82,7 @@ const vector<string> ModelEditor::getAllMeshPathsFromFile() const
 const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 {
 	// Error checking
-	if(_currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("ModelEditor::getAllTexturePathsFromFile");
 	}
@@ -95,7 +95,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `model.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `model.fe3d` missing!");
 		return {};
 	}
 
@@ -264,7 +264,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 const bool ModelEditor::loadModelEntitiesFromFile()
 {
 	// Error checking
-	if(_currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("ModelEditor::loadModelEntitiesFromFile::1");
 	}
@@ -280,7 +280,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `model.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `model.fe3d` missing!");
 		return false;
 	}
 
@@ -520,7 +520,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 	file.close();
 
 	// Logging
-	Logger::throwInfo("Model data from project \"" + _currentProjectID + "\" loaded!");
+	Logger::throwInfo("Model data loaded!");
 
 	// Return
 	return true;

@@ -12,7 +12,7 @@ using std::istringstream;
 const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile() const
 {
 	// Error checking
-	if(_currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("SkyEditor::getAllTexturePathsFromFile");
 	}
@@ -25,7 +25,7 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile() const
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `sky.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `sky.fe3d` missing!");
 		return {};
 	}
 
@@ -84,7 +84,7 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile() const
 const bool SkyEditor::loadSkyEntitiesFromFile()
 {
 	// Error checking
-	if(_currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("SkyEditor::loadSkyEntitiesFromFile");
 	}
@@ -100,7 +100,7 @@ const bool SkyEditor::loadSkyEntitiesFromFile()
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `sky.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `sky.fe3d` missing!");
 		return false;
 	}
 
@@ -172,7 +172,7 @@ const bool SkyEditor::loadSkyEntitiesFromFile()
 	file.close();
 
 	// Logging
-	Logger::throwInfo("Sky data from project \"" + _currentProjectID + "\" loaded!");
+	Logger::throwInfo("Sky data loaded!");
 
 	// Return
 	return true;

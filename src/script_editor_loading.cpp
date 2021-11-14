@@ -13,7 +13,7 @@ using std::istringstream;
 const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 {
 	// Error checking
-	if(_currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("ScriptEditor::loadScriptsFromFile");
 	}
@@ -24,14 +24,14 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	// Compose directory path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string directoryPath = (rootPath + (isExported ? "" : ("projects\\" + _currentProjectID)) + "\\scripts\\");
+	const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "scripts\\");
 
 	// Warning checking
 	if(!Tools::isDirectoryExisting(directoryPath))
 	{
 		if(isLoggingEnabled)
 		{
-			Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: directory `scripts\\` missing!");
+			Logger::throwWarning("Project corrupted: directory `scripts\\` missing!");
 		}
 		return false;
 	}
@@ -78,7 +78,7 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	// Logging
 	if(isLoggingEnabled)
 	{
-		Logger::throwInfo("Script data from project \"" + _currentProjectID + "\" loaded!");
+		Logger::throwInfo("Script data loaded!");
 	}
 
 	// Miscellaneous

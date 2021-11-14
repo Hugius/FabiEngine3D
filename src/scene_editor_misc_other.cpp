@@ -319,7 +319,7 @@ const vector<string> SceneEditor::_getSceneIDs() const
 	// Compose directory path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID)) + "\\scenes\\editor\\");
+	const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "scenes\\editor\\");
 
 	// Check if scenes directory exists
 	if(Tools::isDirectoryExisting(directoryPath))
@@ -333,7 +333,7 @@ const vector<string> SceneEditor::_getSceneIDs() const
 	}
 	else
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: directory `scenes\\editor\\` missing!");
+		Logger::throwWarning("Project corrupted: directory `scenes\\editor\\` missing!");
 	}
 
 	return sceneIDs;

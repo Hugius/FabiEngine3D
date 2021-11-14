@@ -13,7 +13,7 @@ using std::istringstream;
 const bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 {
 	// Error checking
-	if(_currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("SceneEditor::loadEditorSceneFromFile::1");
 	}
@@ -695,7 +695,7 @@ const bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 	_loadedSceneID = fileName;
 
 	// Logging
-	Logger::throwInfo("Scene data from project \"" + _currentProjectID + "\" loaded!");
+	Logger::throwInfo("Scene data loaded!");
 
 	// Return
 	return true;

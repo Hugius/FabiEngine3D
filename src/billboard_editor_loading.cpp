@@ -12,7 +12,7 @@ using std::istringstream;
 const vector<string> BillboardEditor::getAllTexturePathsFromFile() const
 {
 	// Error checking
-	if(_currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("BillboardEditor::getAllTexturePathsFromFile");
 	}
@@ -25,7 +25,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile() const
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `billboard.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `billboard.fe3d` missing!");
 		return {};
 	}
 
@@ -104,7 +104,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile() const
 const vector<string> BillboardEditor::getAllFontPathsFromFile() const
 {
 	// Error checking
-	if(_currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("BillboardEditor::getAllFontPathsFromFile");
 	}
@@ -117,7 +117,7 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile() const
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `billboard.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `billboard.fe3d` missing!");
 		return {};
 	}
 
@@ -183,7 +183,7 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile() const
 const bool BillboardEditor::loadBillboardEntitiesFromFile()
 {
 	// Error checking
-	if(_currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("BillboardEditor::loadBillboardEntitiesFromFile");
 	}
@@ -199,7 +199,7 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `billboard.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `billboard.fe3d` missing!");
 		return false;
 	}
 
@@ -331,7 +331,7 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 	file.close();
 
 	// Logging
-	Logger::throwInfo("Billboard data from project \"" + _currentProjectID + "\" loaded!");
+	Logger::throwInfo("Billboard data loaded!");
 
 	// Return
 	return true;

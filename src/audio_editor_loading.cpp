@@ -11,7 +11,7 @@ using std::istringstream;
 const vector<string> AudioEditor::getAllAudioPathsFromFile() const
 {
 	// Error checking
-	if(_currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("AudioEditor::getAllAudioPathsFromFile");
 	}
@@ -24,7 +24,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile() const
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `audio.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `audio.fe3d` missing!");
 		return {};
 	}
 
@@ -70,7 +70,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile() const
 const bool AudioEditor::loadAudioEntitiesFromFile()
 {
 	// Error checking
-	if(_currentProjectID.empty())
+	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("AudioEditor::loadAudioEntitiesFromFile");
 	}
@@ -86,7 +86,7 @@ const bool AudioEditor::loadAudioEntitiesFromFile()
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `audio.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `audio.fe3d` missing!");
 		return false;
 	}
 
@@ -133,7 +133,7 @@ const bool AudioEditor::loadAudioEntitiesFromFile()
 	file.close();
 
 	// Logging
-	Logger::throwInfo("Audio data from project \"" + _currentProjectID + "\" loaded!");
+	Logger::throwInfo("Audio data loaded!");
 
 	// Return
 	return true;

@@ -22,15 +22,7 @@ const bool AnimationEditor::saveAnimationsToFile() const
 	}
 
 	// Create or overwrite file
-	ofstream file;
-	if(Config::getInst().isApplicationExported())
-	{
-		file.open(Tools::getRootDirectoryPath() + "data\\animation.fe3d");
-	}
-	else
-	{
-		file.open(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\animation.fe3d");
-	}
+	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\animation.fe3d");
 
 	// Write animation data
 	for(const auto& animation : _animations)
@@ -115,7 +107,7 @@ const bool AnimationEditor::saveAnimationsToFile() const
 	file.close();
 
 	// Logging
-	Logger::throwInfo("Animation data from project \"" + _currentProjectID + "\" saved!");
+	Logger::throwInfo("Animation data saved!");
 
 	// Return
 	return true;

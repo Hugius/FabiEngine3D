@@ -1,33 +1,18 @@
-# Billboard Editor
+# Billboard Entity
 
 ## 1. General
 
-- All billboards will be saved in `~\projects\<your_project>\data\billboard.fe3d`.
-- You can create/edit/delete billboards.
-- Every created billboard can be placed in a scene.
-- Billboards are not affected by shadows or lighting.
-- Each billboard has 1 AABB.
-- The AABB is bound to the billboard's transformation, so the AABB will transform with the billboard.
+- The billboard entity is a 2D quad in 3D space.
+- Instead of a solid quad, the texture of the billboard entity can be transparent text (based on a font).
+- Billboard entities are not affected by shadows or lighting.
 
-## 2. Controls
+## 2. Resources
 
-- Move camera with your mouse
-- Press `RMB` to toggle camera
-- Scroll `MMB` to zoom camera
-- Press `H` to toggle debug rendering
-- Press `R` to toggle reference box
-- Press `F` to toggle wireframe
-- Press `ESC` to go back
-- Press `SPACE` to move upwards
-- Press `SHIFT` to move downwards
+- Font
+- Diffuse map
+- Emission map
 
-## 3. Resources
-
-- **Font**: `TTF` format font file from `~\projects\<your_project>\assets\fonts`.
-- **Diffuse Map**: colored `24bit/32bit PNG` format image file from `~\projects\<your_project>\assets\textures\diffuse_maps`
-- **Emission Map**: colored `24bit/32bit PNG` format image file from `~\projects\<your_project>\assets\textures\emission_maps`
-
-## 4. Properties
+## 3. Properties
 
 - **Size**: the size of the billboard.
   - **Constraints**: `0` to `inf`

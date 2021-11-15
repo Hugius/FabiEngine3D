@@ -115,3 +115,12 @@
 - **Right Viewport**: controls & properties
 - **Bottom Viewport**: statistics & logging
 - **Mid Viewport**: 3D display screen
+
+## 3. Terminology
+
+- **Boolean**: can only be `true` or `false`
+- **Integer**: a number (example: `3`)
+- **Decimal**: a floating point number (example: `3.1415`)
+- **Vector2**: a collection of 2 decimals
+- **Vector3**: a collection of 3 decimals
+- **String**: a concatenation of characters(example: `hello123!@#`)

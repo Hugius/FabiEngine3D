@@ -20,10 +20,7 @@
 
 ## 3. AABB system
 
-- AABBs that are bound to a parent (model/billboard) will only rotate in the direction with the greatest angle of rotation.
-- "Rotated" AABBs will be translated and/or scaled in 90 degrees directions (0, 90, 180, 270, etc).
-- If you want to access an individual AABB bound to a model, its ID is composed like this: `<model_id> + "@" + <aabb_id>`.
-- If you want to access an individual AABB bound to a bilboard, its ID is composed like this: `<billboard_id> + "@" + <aabb_id>`.
+
 
 ## 4. Performance
 

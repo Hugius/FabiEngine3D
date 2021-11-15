@@ -29,43 +29,38 @@
 - **Reflection map**: colored `24bit PNG` format image file from `~\projects\<your_project>\assets\textures\reflection_maps\`.
 - **Normal map**: colored `24bit PNG` format image file from `~\projects\<your_project>\assets\textures\normal_maps\`.
 
-## 4. Multiparted Mesh
 
-- A mesh can consist of multiple parts (which are collections of vertices).
-- In the mesh file, you need to specify when a part of vertices starts.
-- You can start a new mesh part by writing `FE3D_PART <name>` in the OBJ file.
-- If a mesh is multiparted, you can specify textures/lighting for each mesh part.
 
 ## 5. Properties
 
 - **Size**: size multiplier of the mesh.
-  - **Range**: `0` to `inf`
+  - **Constraints**: `0` to `inf`
 - **Texture Repeat**: the amount of times the textures are repeated.
-  - **Range**: `0` to `inf`
+  - **Constraints**: `0` to `inf`
 - **Color**: the RGB color that will be mixed with the model fragments.
-  - **Range**: `0` to `255`
+  - **Constraints**: `0` to `255`
 - **Lightness**: the brightness of the model fragments.
-  - **Range**: `0` to `inf`
+  - **Constraints**: `0` to `inf`
 - **Specular**: enable or disable specular lighting on the model.
-  - **Range**: `ON` or `OFF`
+  - **Constraints**: `ON` or `OFF`
 - **Specular Factor**: the shininess of the specular lighting.
-  - **Range**: `0` to `256`
+  - **Constraints**: `0` to `256`
 - **Specular Intensity**: the intensity of the specular lighting.
-  - **Range**: `0` to `inf`
+  - **Constraints**: `0` to `inf`
 - **Reflective**: enable or disable full sky reflection or vertical scene reflection.
-  - **Range**: `ON` or `OFF`
+  - **Constraints**: `ON` or `OFF`
 - **Type**: the type of reflection that is rendered onto the model.
-  - **Range**: `CUBE` or `PLANAR`
+  - **Constraints**: `CUBE` or `PLANAR`
 - **Reflectivity**: the percentage of how reflective the model is.
-  - **Range**: `0` to `100`
+  - **Constraints**: `0` to `100`
 - **Level Of Detail**: the ID of another model representing the LOD version of the current model. If you want to remove the LOD, fill in "@".
-  - **Range**: `none`
+  - **Constraints**: `none`
 - **Instanced**: enable or disable instanced rendering for this model (disables AABBs).
-  - **Range**: `ON` or `OFF`
+  - **Constraints**: `ON` or `OFF`
 - **Culling**: enable or disable the face culling performance optimization.
-  - **Range**: `ON` or `OFF`
+  - **Constraints**: `ON` or `OFF`
 - **Rotation**: the order of directions in which the model is rotated.
-  - **Range**: `XYZ` or `XZY` or `YXZ` or `YZX` or `ZXY` or `ZYX`
+  - **Constraints**: `XYZ` or `XZY` or `YXZ` or `YZX` or `ZXY` or `ZYX`
 
 ## AABB editor
 

@@ -42,7 +42,7 @@ float calculateFlareVisibility()
 {
     if (u_isLensFlareEnabled && (u_lensFlareIntensity > 0.0f) && (u_lensFlareAlpha > 0.0f))
     {
-        // Calculate scene depth
+        // Calculate world depth
         float flareDepth = texture(u_depthMap, u_flareSourceUV).r;
         float flareFragmentDepth = (convertDepthToPerspective(flareDepth) / u_farDistance);
 

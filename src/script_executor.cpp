@@ -1,11 +1,11 @@
 #include "script_executor.hpp"
 #include "configuration.hpp"
 
-ScriptExecutor::ScriptExecutor(FabiEngine3D& fe3d, Script& script, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, SceneEditor& sceneEditor)
+ScriptExecutor::ScriptExecutor(FabiEngine3D& fe3d, Script& script, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, WorldEditor& worldEditor)
 	:
 	_fe3d(fe3d),
 	_script(script),
-	_scriptInterpreter(fe3d, script, skyEditor, terrainEditor, waterEditor, modelEditor, animationEditor, billboardEditor, audioEditor, sceneEditor)
+	_scriptInterpreter(fe3d, script, skyEditor, terrainEditor, waterEditor, modelEditor, animationEditor, billboardEditor, audioEditor, worldEditor)
 {
 
 }

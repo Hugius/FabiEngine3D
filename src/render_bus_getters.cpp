@@ -20,14 +20,14 @@ const TextureID RenderBus::getBloomMap() const
 	return _bloomMap;
 }
 
-const TextureID RenderBus::getPrimarySceneMap() const
+const TextureID RenderBus::getPrimaryWorldMap() const
 {
-	return _primarySceneMap;
+	return _primaryWorldMap;
 }
 
-const TextureID RenderBus::getSecondarySceneMap() const
+const TextureID RenderBus::getSecondaryWorldMap() const
 {
-	return _secondarySceneMap;
+	return _secondaryWorldMap;
 }
 
 const TextureID RenderBus::getShadowMap() const
@@ -55,9 +55,9 @@ const TextureID RenderBus::getDofMap() const
 	return _dofMap;
 }
 
-const TextureID RenderBus::getFinalSceneMap() const
+const TextureID RenderBus::getFinalWorldMap() const
 {
-	return _finalSceneMap;
+	return _finalWorldMap;
 }
 
 const Matrix44 RenderBus::getViewMatrix() const

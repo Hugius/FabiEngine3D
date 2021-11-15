@@ -8,11 +8,11 @@ void AntiAliasingRenderer::bind()
 	_shader.bind();
 
 	// Shader uniforms
-	_shader.uploadUniform("u_sceneMap", 0);
+	_shader.uploadUniform("u_worldMap", 0);
 
 	// Bind textures
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalWorldMap());
 }
 
 void AntiAliasingRenderer::unbind()

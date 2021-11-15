@@ -11,7 +11,7 @@ using std::ofstream;
 
 using TVPC = TopViewportController;
 
-TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, SceneEditor& sceneEditor, ScriptEditor& scriptEditor, SettingsEditor& settingsEditor)
+TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, WorldEditor& worldEditor, ScriptEditor& scriptEditor, SettingsEditor& settingsEditor)
 	:
 	BaseViewportController(fe3d, gui),
 	_skyEditor(skyEditor),
@@ -21,7 +21,7 @@ TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManage
 	_animationEditor(animationEditor),
 	_billboardEditor(billboardEditor),
 	_audioEditor(audioEditor),
-	_sceneEditor(sceneEditor),
+	_worldEditor(worldEditor),
 	_scriptEditor(scriptEditor),
 	_settingsEditor(settingsEditor)
 {
@@ -109,8 +109,8 @@ void TopViewportController::_updateProjectScreenManagement()
 		}
 		else if(topScreen->getButton("quitEngine")->isHovered())
 		{
-			// Check if currently in editor (except for scene editor)
-			if((_currentProjectID != "") && (leftScreen->getID() != "main") && (leftScreen->getID() != "sceneEditorMenuMain"))
+			// Check if currently in editor (except for world editor)
+			if((_currentProjectID != "") && (leftScreen->getID() != "main") && (leftScreen->getID() != "worldEditorMenuMain"))
 			{
 				_gui.getGlobalScreen()->createAnswerForm("quit", "Save Changes?", Vec2(0.0f, 0.25f));
 			}
@@ -357,7 +357,7 @@ void TopViewportController::_saveCurrentProject()
 	_animationEditor.saveAnimationsToFile();
 	_billboardEditor.saveBillboardEntitiesToFile();
 	_audioEditor.saveAudioEntitiesToFile();
-	_sceneEditor.saveEditorSceneToFile();
+	_worldEditor.saveEditorWorldToFile();
 	_scriptEditor.saveScriptFiles();
 	_settingsEditor.saveSettingsToFile();
 

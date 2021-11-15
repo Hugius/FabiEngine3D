@@ -41,7 +41,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			// Validate preview model ID
 			if(_validateFe3dModel("@" + arguments[1].getString(), true))
 			{
-				_sceneEditor.copyPreviewModel(arguments[0].getString(), ("@" + arguments[1].getString()),
+				_worldEditor.copyPreviewModel(arguments[0].getString(), ("@" + arguments[1].getString()),
 											  Vec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}

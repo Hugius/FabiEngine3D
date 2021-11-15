@@ -8,7 +8,7 @@ void DofRenderer::bind()
 
 	// Shader uniforms
 	_shader.uploadUniform("u_depthMap", 0);
-	_shader.uploadUniform("u_sceneMap", 1);
+	_shader.uploadUniform("u_worldMap", 1);
 	_shader.uploadUniform("u_dofMap", 2);
 	_shader.uploadUniform("u_nearDistance", _renderBus.getNearDistance());
 	_shader.uploadUniform("u_farDistance", _renderBus.getFarDistance());
@@ -21,7 +21,7 @@ void DofRenderer::bind()
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _renderBus.getDepthMap());
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalWorldMap());
 	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, _renderBus.getDofMap());
 }

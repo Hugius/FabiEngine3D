@@ -4,7 +4,7 @@
 
 - All models will be saved in `~\projects\<your_project>\data\model.fe3d`.
 - You can create/edit/delete models.
-- Every created model can be placed in a scene.
+- Every created model can be placed in a world.
 - A model cannot exist without having a mesh.
 - The new model name cannot contain the '@' character, because is it reserved by the engine.
 
@@ -47,7 +47,7 @@
   - **Constraints**: `0` to `256`
 - **Specular Intensity**: the intensity of the specular lighting.
   - **Constraints**: `0` to `inf`
-- **Reflective**: enable or disable full sky reflection or vertical scene reflection.
+- **Reflective**: enable or disable full sky reflection or vertical world reflection.
   - **Constraints**: `ON` or `OFF`
 - **Type**: the type of reflection that is rendered onto the model.
   - **Constraints**: `CUBE` or `PLANAR`

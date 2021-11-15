@@ -4,7 +4,7 @@
 
 - All audio will be saved in `~\projects\<your_project>\data\audio.fe3d`.
 - You can create/edit/delete audio.
-- Every created audio can be placed in a scene.
+- Every created audio can be placed in a world.
 - Every created audio can be played with scripting.
 - All audio playback in this editor is at 50% volume.
 

@@ -7,7 +7,7 @@
 #include "model_editor.hpp"
 #include "billboard_editor.hpp"
 #include "audio_editor.hpp"
-#include "scene_editor.hpp"
+#include "world_editor.hpp"
 #include "script_editor.hpp"
 #include "settings_editor.hpp"
 
@@ -17,7 +17,7 @@ public:
 	TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui,
 						  SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor,
 						  AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor,
-						  SceneEditor& sceneEditor, ScriptEditor& scriptEditor, SettingsEditor& settingsEditor);
+						  WorldEditor& worldEditor, ScriptEditor& scriptEditor, SettingsEditor& settingsEditor);
 
 	// Voids
 	void initialize() override;
@@ -68,7 +68,7 @@ private:
 	BillboardEditor& _billboardEditor;
 	AnimationEditor& _animationEditor;
 	AudioEditor& _audioEditor;
-	SceneEditor& _sceneEditor;
+	WorldEditor& _worldEditor;
 	ScriptEditor& _scriptEditor;
 	SettingsEditor& _settingsEditor;
 	shared_ptr<EngineGuiWindow> _projectWindow = nullptr;

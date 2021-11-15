@@ -55,16 +55,16 @@
     <Filter Include="Model Editor\Persistence">
       <UniqueIdentifier>{ccdde067-10ba-42a2-8bea-4d2c63cb049d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene Editor">
+    <Filter Include="World Editor">
       <UniqueIdentifier>{e3af34ba-dd02-4a5a-b056-925d4e711595}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene Editor\Core">
+    <Filter Include="World Editor\Core">
       <UniqueIdentifier>{d3d88ca1-85ef-42ec-895f-8e025772dd50}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene Editor\Settings">
+    <Filter Include="World Editor\Settings">
       <UniqueIdentifier>{27269715-c8cf-44f4-9496-444ba01514e4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene Editor\Miscellaneous">
+    <Filter Include="World Editor\Miscellaneous">
       <UniqueIdentifier>{5aa80d36-fbba-4b8a-8a17-87b4ad255715}</UniqueIdentifier>
     </Filter>
     <Filter Include="Script Editor">
@@ -118,34 +118,34 @@
     <Filter Include="Terrain Editor\Miscellaneous">
       <UniqueIdentifier>{874f3f11-4af9-4678-b56b-09709d9252bc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene Editor\Billboard">
+    <Filter Include="World Editor\Billboard">
       <UniqueIdentifier>{f2bb771e-b877-4eae-91b1-20e1208ed48c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene Editor\Model">
+    <Filter Include="World Editor\Model">
       <UniqueIdentifier>{0725081c-ce09-4ba4-aca4-247cf8a4eb32}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene Editor\Sound">
+    <Filter Include="World Editor\Sound">
       <UniqueIdentifier>{a79fe924-4760-4e94-b817-3591b6e1133b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene Editor\Sky">
+    <Filter Include="World Editor\Sky">
       <UniqueIdentifier>{3316dca3-322a-4803-a69a-feeebefa98f2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene Editor\Terrain">
+    <Filter Include="World Editor\Terrain">
       <UniqueIdentifier>{3face351-f6d1-425f-bba7-cafe1f428f31}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene Editor\Water">
+    <Filter Include="World Editor\Water">
       <UniqueIdentifier>{7a1a04ff-1353-4638-9e4a-1b3e6d8b4503}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene Editor\Reflection">
+    <Filter Include="World Editor\Reflection">
       <UniqueIdentifier>{22fd3606-00be-4ca6-8682-ac1f43f7a6ef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene Editor\Persistence">
+    <Filter Include="World Editor\Persistence">
       <UniqueIdentifier>{4f779ec4-4d0d-44ed-92ff-ad5c3244da08}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene Editor\Persistence\Editor">
+    <Filter Include="World Editor\Persistence\Editor">
       <UniqueIdentifier>{d501544b-39db-41f9-9471-343b717f5762}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene Editor\Persistence\Custom">
+    <Filter Include="World Editor\Persistence\Custom">
       <UniqueIdentifier>{4ceef589-4ca6-4266-a3a4-efaca2751088}</UniqueIdentifier>
     </Filter>
     <Filter Include="Script Editor\Persistence">
@@ -169,10 +169,10 @@
     <Filter Include="Animation Editor\Persistence">
       <UniqueIdentifier>{f67f8919-3990-4cee-b59b-97e1c29774c0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene Editor\Pointlight">
+    <Filter Include="World Editor\Pointlight">
       <UniqueIdentifier>{6ec4ef62-8c51-427c-9abf-329dbdc1b9b2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene Editor\Spotlight">
+    <Filter Include="World Editor\Spotlight">
       <UniqueIdentifier>{aea86504-0afd-4aef-8db1-993fe0469761}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -252,65 +252,65 @@
     <ClCompile Include="..\..\..\src\model_editor_saving.cpp">
       <Filter>Model Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_main.cpp">
-      <Filter>Scene Editor\Core</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_main.cpp">
+      <Filter>World Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_gui.cpp">
-      <Filter>Scene Editor\Core</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_gui.cpp">
+      <Filter>World Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_updates_main.cpp">
-      <Filter>Scene Editor\Core</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_updates_main.cpp">
+      <Filter>World Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_pointlight_updates_edit.cpp">
-      <Filter>Scene Editor\Pointlight</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_pointlight_updates_edit.cpp">
+      <Filter>World Editor\Pointlight</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_pointlight_updates_place.cpp">
-      <Filter>Scene Editor\Pointlight</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_pointlight_updates_place.cpp">
+      <Filter>World Editor\Pointlight</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_pointlight_updates_main.cpp">
-      <Filter>Scene Editor\Pointlight</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_pointlight_updates_main.cpp">
+      <Filter>World Editor\Pointlight</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_settings_updates_one.cpp">
-      <Filter>Scene Editor\Settings</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_settings_updates_one.cpp">
+      <Filter>World Editor\Settings</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_settings_updates_two.cpp">
-      <Filter>Scene Editor\Settings</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_settings_updates_two.cpp">
+      <Filter>World Editor\Settings</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_creation.cpp">
-      <Filter>Scene Editor\Miscellaneous</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_creation.cpp">
+      <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_misc_selection.cpp">
-      <Filter>Scene Editor\Miscellaneous</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_misc_selection.cpp">
+      <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_misc_other.cpp">
-      <Filter>Scene Editor\Miscellaneous</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_misc_other.cpp">
+      <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_billboard_updates_edit.cpp">
-      <Filter>Scene Editor\Billboard</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_billboard_updates_edit.cpp">
+      <Filter>World Editor\Billboard</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_billboard_updates_main.cpp">
-      <Filter>Scene Editor\Billboard</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_billboard_updates_main.cpp">
+      <Filter>World Editor\Billboard</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_billboard_updates_place.cpp">
-      <Filter>Scene Editor\Billboard</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_billboard_updates_place.cpp">
+      <Filter>World Editor\Billboard</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_model_updates_edit.cpp">
-      <Filter>Scene Editor\Model</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_model_updates_edit.cpp">
+      <Filter>World Editor\Model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_model_updates_place.cpp">
-      <Filter>Scene Editor\Model</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_model_updates_place.cpp">
+      <Filter>World Editor\Model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_model_updates_main.cpp">
-      <Filter>Scene Editor\Model</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_model_updates_main.cpp">
+      <Filter>World Editor\Model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_sound_updates_edit.cpp">
-      <Filter>Scene Editor\Sound</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_sound_updates_edit.cpp">
+      <Filter>World Editor\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_sound_updates_place.cpp">
-      <Filter>Scene Editor\Sound</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_sound_updates_place.cpp">
+      <Filter>World Editor\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_sound_updates_main.cpp">
-      <Filter>Scene Editor\Sound</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_sound_updates_main.cpp">
+      <Filter>World Editor\Sound</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_editor_main.cpp">
       <Filter>Script Editor\Core</Filter>
@@ -387,26 +387,26 @@
     <ClCompile Include="..\..\..\src\water_editor_updates_miscellaneous.cpp">
       <Filter>Water Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_loading_custom.cpp">
-      <Filter>Scene Editor\Persistence\Custom</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_loading_custom.cpp">
+      <Filter>World Editor\Persistence\Custom</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_saving_custom.cpp">
-      <Filter>Scene Editor\Persistence\Custom</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_saving_custom.cpp">
+      <Filter>World Editor\Persistence\Custom</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_loading.cpp">
-      <Filter>Scene Editor\Persistence\Editor</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_loading.cpp">
+      <Filter>World Editor\Persistence\Editor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_saving.cpp">
-      <Filter>Scene Editor\Persistence\Editor</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_saving.cpp">
+      <Filter>World Editor\Persistence\Editor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_sky_updates_main.cpp">
-      <Filter>Scene Editor\Sky</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_sky_updates_main.cpp">
+      <Filter>World Editor\Sky</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_water_updates_main.cpp">
-      <Filter>Scene Editor\Water</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_water_updates_main.cpp">
+      <Filter>World Editor\Water</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_terrain_updates_main.cpp">
-      <Filter>Scene Editor\Terrain</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_terrain_updates_main.cpp">
+      <Filter>World Editor\Terrain</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\billboard_editor_updates_lighting.cpp">
       <Filter>Billboard Editor\Updates</Filter>
@@ -417,17 +417,17 @@
     <ClCompile Include="..\..\..\src\billboard_editor_updates_animation.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_settings_updates_lighting.cpp">
-      <Filter>Scene Editor\Settings</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_settings_updates_lighting.cpp">
+      <Filter>World Editor\Settings</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_reflection_updates_main.cpp">
-      <Filter>Scene Editor\Reflection</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_reflection_updates_main.cpp">
+      <Filter>World Editor\Reflection</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_reflection_updates_place.cpp">
-      <Filter>Scene Editor\Reflection</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_reflection_updates_place.cpp">
+      <Filter>World Editor\Reflection</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_reflection_updates_edit.cpp">
-      <Filter>Scene Editor\Reflection</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_reflection_updates_edit.cpp">
+      <Filter>World Editor\Reflection</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\animation.cpp">
       <Filter>Animation Editor\Data Structures</Filter>
@@ -471,20 +471,20 @@
     <ClCompile Include="..\..\..\src\animation_editor_saving.cpp">
       <Filter>Animation Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_spotlight_updates_edit.cpp">
-      <Filter>Scene Editor\Spotlight</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_spotlight_updates_edit.cpp">
+      <Filter>World Editor\Spotlight</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_spotlight_updates_main.cpp">
-      <Filter>Scene Editor\Spotlight</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_spotlight_updates_main.cpp">
+      <Filter>World Editor\Spotlight</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_spotlight_updates_place.cpp">
-      <Filter>Scene Editor\Spotlight</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_spotlight_updates_place.cpp">
+      <Filter>World Editor\Spotlight</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_misc_custom.cpp">
-      <Filter>Scene Editor\Miscellaneous</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_misc_custom.cpp">
+      <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\scene_editor_misc_animation.cpp">
-      <Filter>Scene Editor\Miscellaneous</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_misc_animation.cpp">
+      <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sky_editor_loading.cpp">
       <Filter>Sky Editor\Persistence</Filter>
@@ -530,8 +530,8 @@
     <ClInclude Include="..\..\..\src\model_editor.hpp">
       <Filter>Model Editor\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\scene_editor.hpp">
-      <Filter>Scene Editor\Core</Filter>
+    <ClInclude Include="..\..\..\src\world_editor.hpp">
+      <Filter>World Editor\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\script_editor.hpp">
       <Filter>Script Editor\Core</Filter>

@@ -7,14 +7,14 @@ void MotionBlurRenderer::bind()
 	_shader.bind();
 
 	// Shader uniforms
-	_shader.uploadUniform("u_sceneMap", 0);
+	_shader.uploadUniform("u_worldMap", 0);
 	_shader.uploadUniform("u_motionBlurMap", 1);
 	_shader.uploadUniform("u_mixValue", _renderBus.getMotionBlurMixValue());
 	_shader.uploadUniform("u_isMotionBlurEnabled", _renderBus.isMotionBlurEnabled());
 
 	// Bind textures
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalWorldMap());
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, _renderBus.getMotionBlurMap());
 }

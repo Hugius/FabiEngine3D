@@ -40,7 +40,7 @@ void TopViewportController::_updateMiscellaneous()
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("waterEditor")->setHoverable(hoverable);
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("modelEditor")->setHoverable(hoverable);
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("billboardEditor")->setHoverable(hoverable);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("sceneEditor")->setHoverable(hoverable);
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("worldEditor")->setHoverable(hoverable);
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("animationEditor")->setHoverable(hoverable);
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("audioEditor")->setHoverable(hoverable);
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("scriptEditor")->setHoverable(hoverable);
@@ -108,9 +108,9 @@ void TopViewportController::_updateProjectCreating()
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\textures\\specular_maps\\");
 				Tools::createDirectory(newProjectDirectoryPath + "data\\");
 				Tools::createDirectory(newProjectDirectoryPath + "saves\\");
-				Tools::createDirectory(newProjectDirectoryPath + "scenes\\");
-				Tools::createDirectory(newProjectDirectoryPath + "scenes\\custom\\");
-				Tools::createDirectory(newProjectDirectoryPath + "scenes\\editor\\");
+				Tools::createDirectory(newProjectDirectoryPath + "worlds\\");
+				Tools::createDirectory(newProjectDirectoryPath + "worlds\\custom\\");
+				Tools::createDirectory(newProjectDirectoryPath + "worlds\\editor\\");
 				Tools::createDirectory(newProjectDirectoryPath + "scripts\\");
 
 				// Create new empty project files
@@ -359,10 +359,10 @@ void TopViewportController::_applyProjectChange()
 		_audioEditor.unload();
 	}
 
-	// Unload scene editor
-	if(_sceneEditor.isLoaded())
+	// Unload world editor
+	if(_worldEditor.isLoaded())
 	{
-		_sceneEditor.unload();
+		_worldEditor.unload();
 	}
 
 	// Unload script editor
@@ -385,7 +385,7 @@ void TopViewportController::_applyProjectChange()
 	_animationEditor.setCurrentProjectID(_currentProjectID);
 	_billboardEditor.setCurrentProjectID(_currentProjectID);
 	_audioEditor.setCurrentProjectID(_currentProjectID);
-	_sceneEditor.setCurrentProjectID(_currentProjectID);
+	_worldEditor.setCurrentProjectID(_currentProjectID);
 	_scriptEditor.setCurrentProjectID(_currentProjectID);
 	_settingsEditor.setCurrentProjectID(_currentProjectID);
 }
@@ -396,9 +396,9 @@ const bool TopViewportController::isProjectCorrupted(const string& projectDirect
 	if(!Tools::isDirectoryExisting(projectDirectoryPath) ||
 	   !Tools::isDirectoryExisting(projectDirectoryPath + "data") ||
 	   !Tools::isDirectoryExisting(projectDirectoryPath + "saves") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "scenes") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "scenes\\custom") ||
-	   !Tools::isDirectoryExisting(projectDirectoryPath + "scenes\\editor") ||
+	   !Tools::isDirectoryExisting(projectDirectoryPath + "worlds") ||
+	   !Tools::isDirectoryExisting(projectDirectoryPath + "worlds\\custom") ||
+	   !Tools::isDirectoryExisting(projectDirectoryPath + "worlds\\editor") ||
 	   !Tools::isDirectoryExisting(projectDirectoryPath + "scripts"))
 	{
 		return true;

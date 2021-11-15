@@ -14,8 +14,8 @@ LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, EngineGuiMana
 	_animationEditor(fe3d, gui, _modelEditor),
 	_billboardEditor(fe3d, gui),
 	_audioEditor(fe3d, gui),
-	_sceneEditor(fe3d, gui, _skyEditor, _terrainEditor, _waterEditor, _modelEditor, _animationEditor, _billboardEditor, _audioEditor),
-	_scriptEditor(fe3d, gui, _skyEditor, _terrainEditor, _waterEditor, _modelEditor, _animationEditor, _billboardEditor, _audioEditor, _sceneEditor),
+	_worldEditor(fe3d, gui, _skyEditor, _terrainEditor, _waterEditor, _modelEditor, _animationEditor, _billboardEditor, _audioEditor),
+	_scriptEditor(fe3d, gui, _skyEditor, _terrainEditor, _waterEditor, _modelEditor, _animationEditor, _billboardEditor, _audioEditor, _worldEditor),
 	_settingsEditor(fe3d, gui)
 {
 
@@ -37,7 +37,7 @@ void LeftViewportController::initialize()
 	leftWindow->getScreen("main")->createButton("animationEditor", Vec2(0.0f, positions[4]), Vec2(TW("Animation Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Animation Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("main")->createButton("billboardEditor", Vec2(0.0f, positions[5]), Vec2(TW("Billboard Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Billboard Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("main")->createButton("audioEditor", Vec2(0.0f, positions[6]), Vec2(TW("Audio Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Audio Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("main")->createButton("sceneEditor", Vec2(0.0f, positions[7]), Vec2(TW("Scene Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Scene Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("main")->createButton("worldEditor", Vec2(0.0f, positions[7]), Vec2(TW("World Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "World Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("main")->createButton("scriptEditor", Vec2(0.0f, positions[8]), Vec2(TW("Script Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Script Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("main")->createButton("settingsEditor", Vec2(0.0f, positions[9]), Vec2(TW("Settings"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Settings", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 
@@ -111,10 +111,10 @@ void LeftViewportController::update()
 				window->setActiveScreen("audioEditorMenuMain");
 			}
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("sceneEditor")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("worldEditor")->isHovered())
 		{
-			_sceneEditor.load();
-			window->setActiveScreen("sceneEditorMenuMain");
+			_worldEditor.load();
+			window->setActiveScreen("worldEditorMenuMain");
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("scriptEditor")->isHovered())
 		{
@@ -142,7 +142,7 @@ void LeftViewportController::update()
 	_animationEditor.update();
 	_billboardEditor.update();
 	_audioEditor.update();
-	_sceneEditor.update();
+	_worldEditor.update();
 	_scriptEditor.update();
 	_settingsEditor.update();
 }
@@ -182,9 +182,9 @@ AudioEditor& LeftViewportController::getAudioEditor()
 	return _audioEditor;
 }
 
-SceneEditor& LeftViewportController::getSceneEditor()
+WorldEditor& LeftViewportController::getWorldEditor()
 {
-	return _sceneEditor;
+	return _worldEditor;
 }
 
 ScriptEditor& LeftViewportController::getScriptEditor()

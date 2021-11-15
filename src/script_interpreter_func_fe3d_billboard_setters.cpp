@@ -30,7 +30,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 			if(_validateFe3dBillboard("@" + arguments[1].getString(), true))
 			{
 				// Copy preview billboard
-				_sceneEditor.copyPreviewBillboard(arguments[0].getString(), ("@" + arguments[1].getString()),
+				_worldEditor.copyPreviewBillboard(arguments[0].getString(), ("@" + arguments[1].getString()),
 												  Vec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
 
 				// Stop animation if started

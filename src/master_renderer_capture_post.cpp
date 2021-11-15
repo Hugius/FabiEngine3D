@@ -1,7 +1,7 @@
 #include "master_renderer.hpp"
 #include "render_bus.hpp"
 
-void MasterRenderer::_captureSceneDepth()
+void MasterRenderer::_captureWorldDepth()
 {
 	// Temporary values
 	auto modelEntities = _entityBus->getModelEntities();
@@ -33,11 +33,11 @@ void MasterRenderer::_captureSceneDepth()
 		}
 	}
 
-	// Determine if scene depth rendering is needed or not
+	// Determine if world depth rendering is needed or not
 	if(_renderBus.isDofEnabled() || _renderBus.isLensFlareEnabled() || waterDepthNeeded)
 	{
 		// Bind
-		_sceneDepthCaptureBuffer.bind();
+		_worldDepthCaptureBuffer.bind();
 		glClear(GL_DEPTH_BUFFER_BIT);
 
 		// Validate existence
@@ -99,7 +99,7 @@ void MasterRenderer::_captureSceneDepth()
 						}
 						else
 						{
-							Logger::throwError("MasterRenderer::_captureSceneDepth");
+							Logger::throwError("MasterRenderer::_captureWorldDepth");
 						}
 					}
 					else // Render high-quality entity
@@ -134,10 +134,10 @@ void MasterRenderer::_captureSceneDepth()
 		}
 
 		// Unbind
-		_sceneDepthCaptureBuffer.unbind();
+		_worldDepthCaptureBuffer.unbind();
 
 		// Update depth map
-		_renderBus.setDepthMap(_sceneDepthCaptureBuffer.getTexture(0));
+		_renderBus.setDepthMap(_worldDepthCaptureBuffer.getTexture(0));
 	}
 	else
 	{
@@ -149,18 +149,18 @@ void MasterRenderer::_captureDOF()
 {
 	if(_renderBus.isDofEnabled())
 	{
-		// Blur final scene map
+		// Blur final world map
 		_dofBlurRenderer.bind();
-		_renderBus.setDofMap(_dofBlurRenderer.blurTexture(_renderSurface, _renderBus.getFinalSceneMap(), 2, 1.0f, BlurDirection::BOTH));
+		_renderBus.setDofMap(_dofBlurRenderer.blurTexture(_renderSurface, _renderBus.getFinalWorldMap(), 2, 1.0f, BlurDirection::BOTH));
 		_dofBlurRenderer.unbind();
 
-		// Apply DOF & update final scene map
+		// Apply DOF & update final world map
 		_dofCaptureBuffer.bind();
 		_dofRenderer.bind();
 		_dofRenderer.render(_renderSurface);
 		_dofRenderer.unbind();
 		_dofCaptureBuffer.unbind();
-		_renderBus.setFinalSceneMap(_dofCaptureBuffer.getTexture(0));
+		_renderBus.setFinalWorldMap(_dofCaptureBuffer.getTexture(0));
 	}
 	else
 	{
@@ -172,13 +172,13 @@ void MasterRenderer::_captureLensFlare()
 {
 	if(_renderBus.isLensFlareEnabled())
 	{
-		// Apply lens flare & update final scene map
+		// Apply lens flare & update final world map
 		_lensFlareCaptureBuffer.bind();
 		_lensFlareRenderer.bind();
 		_lensFlareRenderer.render(_renderSurface);
 		_lensFlareRenderer.unbind();
 		_lensFlareCaptureBuffer.unbind();
-		_renderBus.setFinalSceneMap(_lensFlareCaptureBuffer.getTexture(0));
+		_renderBus.setFinalWorldMap(_lensFlareCaptureBuffer.getTexture(0));
 	}
 }
 
@@ -216,7 +216,7 @@ void MasterRenderer::_captureMotionBlur()
 		if(hasMoved)
 		{
 			_motionBlurBlurRenderer.bind();
-			_renderBus.setMotionBlurMap(_motionBlurBlurRenderer.blurTexture(_renderSurface, _renderBus.getFinalSceneMap(), 5, 1.0f, direction));
+			_renderBus.setMotionBlurMap(_motionBlurBlurRenderer.blurTexture(_renderSurface, _renderBus.getFinalWorldMap(), 5, 1.0f, direction));
 			_motionBlurBlurRenderer.unbind();
 		}
 		else
@@ -225,13 +225,13 @@ void MasterRenderer::_captureMotionBlur()
 			_renderBus.setMotionBlurMap(0);
 		}
 
-		// Apply motion blur & update final scene map
+		// Apply motion blur & update final world map
 		_motionBlurCaptureBuffer.bind();
 		_motionBlurRenderer.bind();
 		_motionBlurRenderer.render(_renderSurface);
 		_motionBlurRenderer.unbind();
 		_motionBlurCaptureBuffer.unbind();
-		_renderBus.setFinalSceneMap(_motionBlurCaptureBuffer.getTexture(0));
+		_renderBus.setFinalWorldMap(_motionBlurCaptureBuffer.getTexture(0));
 	}
 	else // No motion blur
 	{
@@ -243,13 +243,13 @@ void MasterRenderer::_captureAntiAliasing()
 {
 	if(_renderBus.isAntiAliasingEnabled())
 	{
-		// Apply anti aliasing & update final scene map
+		// Apply anti aliasing & update final world map
 		_antiAliasingCaptureBuffer.bind();
 		_antiAliasingRenderer.bind();
 		_antiAliasingRenderer.render(_renderSurface);
 		_antiAliasingRenderer.unbind();
 		_antiAliasingCaptureBuffer.unbind();
-		_renderBus.setFinalSceneMap(_antiAliasingCaptureBuffer.getTexture(0));
+		_renderBus.setFinalWorldMap(_antiAliasingCaptureBuffer.getTexture(0));
 	}
 }
 
@@ -261,32 +261,32 @@ void MasterRenderer::_captureBloom()
 		TextureID textureToBlur;
 		if(_renderBus.getBloomType() == BloomType::EVERYTHING)
 		{
-			textureToBlur = _renderBus.getPrimarySceneMap();
+			textureToBlur = _renderBus.getPrimaryWorldMap();
 		}
-		else // Blur secondary scene map
+		else // Blur secondary world map
 		{
-			textureToBlur = _renderBus.getSecondarySceneMap();
+			textureToBlur = _renderBus.getSecondaryWorldMap();
 		}
 
-		// Blur the scene map (high quality, small blur)
+		// Blur the world map (high quality, small blur)
 		_bloomBlurRendererHighQuality.bind();
 		_renderBus.setBloomMap(_bloomBlurRendererHighQuality.blurTexture(_renderSurface, textureToBlur,
 							   _renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
 		_bloomBlurRendererHighQuality.unbind();
 
-		// Blur the blurred scene map (low quality, large blur)
+		// Blur the blurred world map (low quality, large blur)
 		_bloomBlurRendererLowQuality.bind();
 		_renderBus.setBloomMap(_bloomBlurRendererLowQuality.blurTexture(_renderSurface, _renderBus.getBloomMap(),
 							   _renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
 		_bloomBlurRendererLowQuality.unbind();
 
-		// Apply bloom & update final scene map
+		// Apply bloom & update final world map
 		_bloomCaptureBuffer.bind();
 		_bloomRenderer.bind();
 		_bloomRenderer.render(_renderSurface);
 		_bloomRenderer.unbind();
 		_bloomCaptureBuffer.unbind();
-		_renderBus.setFinalSceneMap(_bloomCaptureBuffer.getTexture(0));
+		_renderBus.setFinalWorldMap(_bloomCaptureBuffer.getTexture(0));
 	}
 	else
 	{

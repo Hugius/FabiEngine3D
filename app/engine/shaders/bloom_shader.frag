@@ -5,7 +5,7 @@
 in vec2 f_uv;
 
 // Textures
-layout (location = 0) uniform sampler2D u_sceneMap;
+layout (location = 0) uniform sampler2D u_worldMap;
 layout (location = 1) uniform sampler2D u_bloomMap;
 
 // Boolean uniforms
@@ -20,16 +20,16 @@ void main()
     // Validate
 	if (!u_isBloomEnabled)
 	{
-        o_finalColor.rgb = texture(u_sceneMap, f_uv).rgb;
+        o_finalColor.rgb = texture(u_worldMap, f_uv).rgb;
 		o_finalColor.a = 1.0f;
 		return;
     }
 
 	// Texture mapping
-	vec3 sceneColor = texture(u_sceneMap, f_uv).rgb;
+	vec3 worldColor = texture(u_worldMap, f_uv).rgb;
 	vec3 bloomColor = texture(u_bloomMap, f_uv).rgb;
 
 	// Final color
-    o_finalColor.rgb = (sceneColor + bloomColor);
+    o_finalColor.rgb = (worldColor + bloomColor);
 	o_finalColor.a = 1.0f;
 }

@@ -4,7 +4,7 @@
 
 - All terrains will be saved in `~\projects\<your_project>\data\terrain.fe3d`.
 - You can create/edit/delete terrains.
-- Every created terrain can be placed in a scene.
+- Every created terrain can be placed in a world.
 - Each terrain is generated with a height map.
 
 ## 2. Controls

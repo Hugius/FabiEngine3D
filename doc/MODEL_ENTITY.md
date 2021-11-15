@@ -31,7 +31,7 @@
   - **Constraints**: `0` to `256`
 - **Specular Intensity**: the intensity of the specular lighting.
   - **Constraints**: `0` to `inf`
-- **Reflective**: enable or disable full sky reflection or vertical scene reflection.
+- **Reflective**: enable or disable full sky reflection or vertical world reflection.
   - **Constraints**: `ON` or `OFF`
 - **Type**: the type of reflection that is rendered onto the model.
   - **Constraints**: `CUBE` or `PLANAR`

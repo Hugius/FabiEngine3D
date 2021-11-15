@@ -33,7 +33,7 @@ public:
 	// Voids
 	void update();
 	void renderEngineLogo(shared_ptr<ImageEntity> entity, shared_ptr<TextEntity> text, Ivec2 viewport);
-	void renderScene(EntityBus* entityBus);
+	void renderWorld(EntityBus* entityBus);
 	void reloadBloomBlurCaptureBuffer();
 	void reloadDofBlurCaptureBuffer();
 	void reloadMotionBlurBlurCaptureBuffer();
@@ -51,7 +51,7 @@ private:
 	void _capturePlanarReflections();
 	void _captureWaterReflections();
 	void _captureWaterRefractions();
-	void _captureSceneDepth();
+	void _captureWorldDepth();
 	void _captureShadows();
 	void _captureAntiAliasing();
 	void _captureBloom();
@@ -64,7 +64,7 @@ private:
 	void _renderModelEntities();
 	void _renderBillboardEntities();
 	void _renderAabbEntities();
-	void _renderFinalSceneImage();
+	void _renderFinalWorldImage();
 	void _renderGUI();
 	void _renderCustomCursor();
 	void _renderDebugScreens();
@@ -105,8 +105,8 @@ private:
 	CaptureBuffer _waterReflectionCaptureBuffer;
 	CaptureBuffer _waterRefractionCaptureBuffer;
 	CaptureBuffer _shadowCaptureBuffer;
-	CaptureBuffer _sceneDepthCaptureBuffer;
-	CaptureBuffer _sceneColorCaptureBuffer;
+	CaptureBuffer _worldDepthCaptureBuffer;
+	CaptureBuffer _worldColorCaptureBuffer;
 	CaptureBuffer _antiAliasingCaptureBuffer;
 	CaptureBuffer _bloomCaptureBuffer;
 	CaptureBuffer _dofCaptureBuffer;

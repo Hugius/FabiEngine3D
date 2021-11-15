@@ -56,11 +56,11 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_raycast_getters.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_reflection_setters.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_reflection_getters.cpp" />
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_scene_getters.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_world_getters.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_server_getters.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_server_setters.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_raycast_setters.cpp" />
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_scene_setters.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_world_setters.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sky_setters.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sky_getters.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sound_setters.cpp" />

@@ -57,7 +57,7 @@ A multiplayer first person shooter game based in a science-fiction setting: a sp
 - [Animation Editor](doc/ANIMATION_EDITOR.md)
 - [Billboard Editor](doc/BILLBOARD_EDITOR.md)
 - [Audio Editor](doc/AUDIO_EDITOR.md)
-- [Scene Editor](doc/SCENE_EDITOR.md)
+- [World Editor](doc/WORLD_EDITOR.md)
 - [Script Editor](doc/SCRIPT_EDITOR.md)
 - [Settings Editor](doc/SETTINGS_EDITOR.md)
 

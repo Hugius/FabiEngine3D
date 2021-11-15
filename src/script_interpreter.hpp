@@ -12,14 +12,14 @@
 #include "animation_editor.hpp"
 #include "billboard_editor.hpp"
 #include "audio_editor.hpp"
-#include "scene_editor.hpp"
+#include "world_editor.hpp"
 
 class ScriptInterpreter final
 {
 public:
 	ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SkyEditor& skyEditor, TerrainEditor& terrainEditor,
 					  WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor,
-					  BillboardEditor& billboardEditor, AudioEditor& audioEditor, SceneEditor& sceneEditor);
+					  BillboardEditor& billboardEditor, AudioEditor& audioEditor, WorldEditor& worldEditor);
 
 	// Voids
 	void setCurrentProjectID(const string& projectID);
@@ -115,8 +115,8 @@ private:
 	const bool _executeFe3dMusicGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dFilesystemSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dFilesystemGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
-	const bool _executeFe3dSceneSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
-	const bool _executeFe3dSceneGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dWorldSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dWorldGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dServerSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dServerGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dClientSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
@@ -228,7 +228,7 @@ private:
 	AnimationEditor& _animationEditor;
 	BillboardEditor& _billboardEditor;
 	AudioEditor& _audioEditor;
-	SceneEditor& _sceneEditor;
+	WorldEditor& _worldEditor;
 	static inline const map<string, InputType> KEY_INPUT_STRING_MAP =
 	{
 		{"KEY_A", InputType::KEY_A},

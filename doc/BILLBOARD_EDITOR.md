@@ -4,7 +4,7 @@
 
 - All billboards will be saved in `~\projects\<your_project>\data\billboard.fe3d`.
 - You can create/edit/delete billboards.
-- Every created billboard can be placed in a scene.
+- Every created billboard can be placed in a world.
 - Billboards are not affected by shadows or lighting.
 - Each billboard has 1 AABB.
 - The AABB is bound to the billboard's transformation, so the AABB will transform with the billboard.

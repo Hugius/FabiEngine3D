@@ -4,7 +4,7 @@
 
 - All skies will be saved in `~\projects\<your_project>\data\sky.fe3d`.
 - You can create/edit/delete skies.
-- Every created sky can be placed in a scene.
+- Every created sky can be placed in a world.
 - Each sky is rendered as a cube map, which consists of 6 different textures: left, right, bottom, top, back, front.
 
 ## 2. Controls

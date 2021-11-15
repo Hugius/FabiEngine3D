@@ -174,13 +174,13 @@ void MasterRenderer::_renderAabbEntities()
 	}
 }
 
-void MasterRenderer::_renderFinalSceneImage()
+void MasterRenderer::_renderFinalWorldImage()
 {
 	// Mirror
 	_renderSurface->setMirroredVertically(true);
 
 	// Update diffuse map
-	_renderSurface->setDiffuseMap(_renderBus.getFinalSceneMap());
+	_renderSurface->setDiffuseMap(_renderBus.getFinalWorldMap());
 
 	// Render
 	_imageEntityColorRenderer.bind();
@@ -270,11 +270,11 @@ void MasterRenderer::_renderDebugScreens()
 		return (static_cast<float>(text.size()) * charWidth);
 	};
 
-	// Scene - surface
-	shared_ptr<ImageEntity> sceneSurface = make_shared<ImageEntity>("sceneSurface");
-	sceneSurface->setDiffuseMap(_renderBus.getPrimarySceneMap());
-	sceneSurface->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, 0.666f, 0.666f, 0.666f, true));
-	sceneSurface->setMirroredVertically(true);
+	// World - surface
+	shared_ptr<ImageEntity> worldSurface = make_shared<ImageEntity>("worldSurface");
+	worldSurface->setDiffuseMap(_renderBus.getPrimaryWorldMap());
+	worldSurface->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, 0.666f, 0.666f, 0.666f, true));
+	worldSurface->setMirroredVertically(true);
 
 	// Shadow - surface
 	shared_ptr<ImageEntity> shadowSurface = make_shared<ImageEntity>("shadowSurface");
@@ -333,11 +333,11 @@ void MasterRenderer::_renderDebugScreens()
 	motionBlurSurface->setRenderBuffer(make_shared<RenderBuffer>(0.666f, -0.666f, 0.666f, 0.666f, true));
 	motionBlurSurface->setMirroredVertically(true);
 
-	// Scene - text
-	shared_ptr<TextEntity> sceneText = make_shared<TextEntity>("sceneText");
-	sceneText->setDiffuseMap(_textureLoader.loadTexture2D("Scene Render", fontPath));
-	sceneText->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, 0.4f, calcTextWidth("Scene Render"), charHeight, true));
-	sceneText->setColor(textColor);
+	// World - text
+	shared_ptr<TextEntity> worldText = make_shared<TextEntity>("worldText");
+	worldText->setDiffuseMap(_textureLoader.loadTexture2D("World Render", fontPath));
+	worldText->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, 0.4f, calcTextWidth("World Render"), charHeight, true));
+	worldText->setColor(textColor);
 
 	// Shadow - text
 	shared_ptr<TextEntity> shadowText = make_shared<TextEntity>("shadowText");
@@ -391,7 +391,7 @@ void MasterRenderer::_renderDebugScreens()
 	_imageEntityColorRenderer.bind();
 
 	// Render debug surfaces
-	_imageEntityColorRenderer.render(sceneSurface);
+	_imageEntityColorRenderer.render(worldSurface);
 	_imageEntityColorRenderer.render(shadowSurface);
 	_imageEntityColorRenderer.render(bloomSurface);
 	_imageEntityColorRenderer.render(planarReflectionSurface);
@@ -402,7 +402,7 @@ void MasterRenderer::_renderDebugScreens()
 	_imageEntityColorRenderer.render(motionBlurSurface);
 
 	// Render debug text
-	_imageEntityColorRenderer.render(sceneText);
+	_imageEntityColorRenderer.render(worldText);
 	_imageEntityColorRenderer.render(shadowText);
 	_imageEntityColorRenderer.render(bloomText);
 	_imageEntityColorRenderer.render(planarReflectionText);

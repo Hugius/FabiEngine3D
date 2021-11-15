@@ -12,7 +12,7 @@
 
 ## 1.3 Properties
 
-- **Size**: the XZ size of the water plane in scene space.
+- **Size**: the XZ size of the water plane in world space.
   - **Constraints** `0` to `inf`
 - **Texture Repeat**: the amount of times the textures are repeated.
   - **Constraints**: `0` to `inf`

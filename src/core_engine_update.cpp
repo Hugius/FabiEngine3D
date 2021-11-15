@@ -134,7 +134,7 @@ void CoreEngine::_renderApplication()
 	EntityBus entityBus(mainSky, mixSky, terrain, water, models, billboards, AABBs, pointlights, spotlights, reflections, images, texts);
 
 	// Render entities
-	_masterRenderer.renderScene(&entityBus);
+	_masterRenderer.renderWorld(&entityBus);
 
 	// Swap GPU buffer
 	_timer.startDeltaPart("bufferSwap");

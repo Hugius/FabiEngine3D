@@ -171,7 +171,7 @@ const bool ScriptInterpreter::_validateFe3dSky()
 	// Check if entity exists
 	if(_fe3d.skyEntity_getSelectedID().empty())
 	{
-		_throwScriptError("current scene has no sky entity!");
+		_throwScriptError("current world has no sky entity!");
 		return false;
 	}
 
@@ -183,7 +183,7 @@ const bool ScriptInterpreter::_validateFe3dTerrain()
 	// Check if entity exists
 	if(_fe3d.terrainEntity_getSelectedID().empty())
 	{
-		_throwScriptError("current scene has no terrain entity!");
+		_throwScriptError("current world has no terrain entity!");
 		return false;
 	}
 
@@ -214,7 +214,7 @@ const bool ScriptInterpreter::_validateFe3dWater()
 	// Check if entity exists
 	if(_fe3d.waterEntity_getSelectedID().empty())
 	{
-		_throwScriptError("current scene has no water entity!");
+		_throwScriptError("current world has no water entity!");
 		return false;
 	}
 

@@ -80,8 +80,8 @@
           └── specular_maps
       └── data (do NOT touch)
       └── saves (do NOT touch)
-      └── scenes (do NOT touch)
       └── scripts (do NOT touch)
+      └── worlds (do NOT touch)
 └── dev (do NOT touch)
 └── doc (do NOT touch)
 └── src (do NOT touch)
@@ -100,7 +100,7 @@
       - `textures\`: contains all project texture files
     - `data\`: contains all project editor data
     - `saves\`: contains all project save files
-    - `scenes\`: contains all project scene files
+    - `worlds\`: contains all project world files
     - `scripts\`: contains all project script files
 - `~\dev\`: contains the engine development systems
 - `~\doc\`: contains the engine documentation

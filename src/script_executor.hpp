@@ -7,7 +7,7 @@ class ScriptExecutor final
 public:
 	ScriptExecutor(FabiEngine3D& fe3d, Script& script, SkyEditor& skyEditor, TerrainEditor& terrainEditor,
 				   WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor,
-				   BillboardEditor& billboardEditor, AudioEditor& audioEditor, SceneEditor& sceneEditor);
+				   BillboardEditor& billboardEditor, AudioEditor& audioEditor, WorldEditor& worldEditor);
 
 	// Voids
 	void setCurrentProjectID(const string& projectID);

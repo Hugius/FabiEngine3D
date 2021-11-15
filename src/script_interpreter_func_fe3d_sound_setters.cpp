@@ -70,7 +70,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 				auto maxDistance = arguments[6].getDecimal();
 
 				// Add sound
-				_sceneEditor.copyPreviewSound(newID, ("@" + previewID), position);
+				_worldEditor.copyPreviewSound(newID, ("@" + previewID), position);
 				_fe3d.sound_setMaxVolume(newID, maxVolume);
 				_fe3d.sound_setMaxDistance(newID, maxDistance);
 

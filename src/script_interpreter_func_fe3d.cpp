@@ -74,8 +74,8 @@ const vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const st
 				isExecuted = (isExecuted || _executeFe3dClientGetterFunction(functionName, arguments, returnValues));
 				isExecuted = (isExecuted || _executeFe3dFilesystemSetterFunction(functionName, arguments, returnValues));
 				isExecuted = (isExecuted || _executeFe3dFilesystemGetterFunction(functionName, arguments, returnValues));
-				isExecuted = (isExecuted || _executeFe3dSceneSetterFunction(functionName, arguments, returnValues));
-				isExecuted = (isExecuted || _executeFe3dSceneGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dWorldSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dWorldGetterFunction(functionName, arguments, returnValues));
 				isExecuted = (isExecuted || _executeFe3dMiscSetterFunction(functionName, arguments, returnValues));
 				isExecuted = (isExecuted || _executeFe3dMiscGetterFunction(functionName, arguments, returnValues));
 

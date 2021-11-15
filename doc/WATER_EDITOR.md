@@ -4,7 +4,7 @@
 
 - All waters will be saved in `~\projects\<your_project>\data\water.fe3d`.
 - You can create/edit/delete waters.
-- Every created water can be placed in a scene.
+- Every created water can be placed in a world.
 - Each water is rendered as a flat plane in 3D space.
 
 ## 2. Controls
@@ -25,7 +25,7 @@
 
 ## 4. Properties
 
-- **Size**: the XZ size of the water plane in scene space.
+- **Size**: the XZ size of the water plane in world space.
   - **Constraints** `0` to `inf`
 - **Texture Repeat**: the amount of times the textures are repeated.
   - **Constraints**: `0` to `inf`

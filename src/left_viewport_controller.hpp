@@ -6,7 +6,7 @@
 #include "water_editor.hpp"
 #include "model_editor.hpp"
 #include "billboard_editor.hpp"
-#include "scene_editor.hpp"
+#include "world_editor.hpp"
 #include "animation_editor.hpp"
 #include "script_editor.hpp"
 #include "audio_editor.hpp"
@@ -29,7 +29,7 @@ public:
 	AnimationEditor& getAnimationEditor();
 	BillboardEditor& getBillboardEditor();
 	AudioEditor& getAudioEditor();
-	SceneEditor& getSceneEditor();
+	WorldEditor& getWorldEditor();
 	ScriptEditor& getScriptEditor();
 	SettingsEditor& getSettingsEditor();
 
@@ -59,7 +59,7 @@ private:
 	AnimationEditor _animationEditor;
 	BillboardEditor _billboardEditor;
 	AudioEditor _audioEditor;
-	SceneEditor _sceneEditor;
+	WorldEditor _worldEditor;
 	ScriptEditor _scriptEditor;
 	SettingsEditor _settingsEditor;
 };

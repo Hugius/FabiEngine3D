@@ -38,8 +38,8 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_motionBlurBlurRenderer("blur_shader.vert", "blur_shader.frag", renderBus)
 {
 	// Post-processing capture buffers
-	_sceneDepthCaptureBuffer.createDepthTexture(Ivec2(0), Config::getInst().getViewportSize());
-	_sceneColorCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getViewportSize(), 2, false);
+	_worldDepthCaptureBuffer.createDepthTexture(Ivec2(0), Config::getInst().getViewportSize());
+	_worldColorCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getViewportSize(), 2, false);
 	_antiAliasingCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getViewportSize(), 1, false);
 	_bloomCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getViewportSize(), 1, false);
 	_dofCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getViewportSize(), 1, false);
@@ -90,7 +90,7 @@ void MasterRenderer::renderEngineLogo(shared_ptr<ImageEntity> logo, shared_ptr<T
 	_imageEntityColorRenderer.unbind();
 }
 
-void MasterRenderer::renderScene(EntityBus* entityBus)
+void MasterRenderer::renderWorld(EntityBus* entityBus)
 {
 	// General stuff
 	_entityBus = entityBus;
@@ -122,14 +122,14 @@ void MasterRenderer::renderScene(EntityBus* entityBus)
 		_captureWaterRefractions();
 		_timer.stopDeltaPart();
 		_timer.startDeltaPart("depthPreRender");
-		_captureSceneDepth();
+		_captureWorldDepth();
 		_timer.stopDeltaPart();
 		_timer.startDeltaPart("shadowPreRender");
 		_captureShadows();
 		_timer.stopDeltaPart();
 
-		// Bind scene capture buffer
-		_sceneColorCaptureBuffer.bind();
+		// Bind world capture buffer
+		_worldColorCaptureBuffer.bind();
 
 		// 3D rendering
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -154,11 +154,11 @@ void MasterRenderer::renderScene(EntityBus* entityBus)
 		_timer.stopDeltaPart();
 		_renderBus.setTriangleCountingEnabled(false);
 
-		// Unbind scene capture buffer
-		_sceneColorCaptureBuffer.unbind();
-		_renderBus.setFinalSceneMap(_sceneColorCaptureBuffer.getTexture(0));
-		_renderBus.setPrimarySceneMap(_sceneColorCaptureBuffer.getTexture(0));
-		_renderBus.setSecondarySceneMap(_sceneColorCaptureBuffer.getTexture(1));
+		// Unbind world capture buffer
+		_worldColorCaptureBuffer.unbind();
+		_renderBus.setFinalWorldMap(_worldColorCaptureBuffer.getTexture(0));
+		_renderBus.setPrimaryWorldMap(_worldColorCaptureBuffer.getTexture(0));
+		_renderBus.setSecondaryWorldMap(_worldColorCaptureBuffer.getTexture(1));
 
 		// Post-captures
 		_timer.startDeltaPart("postProcessing");
@@ -178,10 +178,10 @@ void MasterRenderer::renderScene(EntityBus* entityBus)
 			_renderDebugScreens();
 			glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 		}
-		else // Render final scene texture
+		else // Render final world texture
 		{
 			glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y + 0);
-			_renderFinalSceneImage();
+			_renderFinalWorldImage();
 			glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 
 		}

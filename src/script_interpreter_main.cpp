@@ -6,7 +6,7 @@
 
 using std::istringstream;
 
-ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, SceneEditor& sceneEditor)
+ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, WorldEditor& worldEditor)
 	:
 	_fe3d(fe3d),
 	_script(script),
@@ -17,7 +17,7 @@ ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SkyEdit
 	_animationEditor(animationEditor),
 	_billboardEditor(billboardEditor),
 	_audioEditor(audioEditor),
-	_sceneEditor(sceneEditor)
+	_worldEditor(worldEditor)
 {
 
 }

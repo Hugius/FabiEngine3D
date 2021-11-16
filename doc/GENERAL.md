@@ -124,3 +124,10 @@
 - **Vector2**: a collection of 2 decimals
 - **Vector3**: a collection of 3 decimals
 - **String**: a concatenation of characters(example: `hello123!@#`)
+- **Vector**: a mathematical element that has both a direction and a magnitude.
+- **Normalized Vector**: a vector with magnitude of exactly 1.
+- **Vertex**: a coordinate (XYZ) in 3D mesh.
+- **Fragment**: every pixel that can possibly end up on your screen.
+- **UV Coordinate**: a coordinate (XY) which used for mapping a 2D texture onto a 3D mesh.
+- **Normal Vector**: a normalized vector that points in the opposite direction of a surface which is used for lighting calculations.
+- **INF**: an infinite value.

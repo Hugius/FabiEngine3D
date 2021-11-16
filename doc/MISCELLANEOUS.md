@@ -1,22 +1,8 @@
 # Miscellaneous
 
-## 1. Coordinate system
 
-- The X axis is horizontal (left & right).
-- The Y axis is vertical (down & up).
-- The Z axis is depth (back & front).
-- The 3D coordinate system works on decimals with XYZ(0,0,0) as center coordinate. They can go in any direction (positive & negative).
-- The 2D coordinate system works on decimals with XY(0,0) as center coordinate. The range is between -1.0 and 1.0 from left to right & bottom to top.
-- The maximum render distance is fixed at 2500.0 (the reference box in the model editor has a size of 1.0).
 
-## 2. Rotation system
 
-- Beware of the [gimbal lock](https://en.wikipedia.org/wiki/Gimbal_lock) when rotating objects in all 3 (XYZ) directions!
-- FabiEngine3D does not support a camera roll, because of the infamous gimbal lock.
-- All rotational degrees are converted between 0&deg; and 360&deg; (example: 500&deg; = 140&deg;, -500&deg; = 220&deg;).
-- X rotations go around the X axis.
-- Y rotations go around the Y axis.
-- Z rotations go around the Z axis.
 
 ## 3. AABB system
 

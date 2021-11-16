@@ -26,8 +26,7 @@ A multiplayer first person shooter game based in a science-fiction setting: a sp
 
 ### Basics
 
-- [Theoretical Framework](doc/THEORETICAL_FRAMEWORK.md)
-- [General Information](doc/GENERAL_INFORMATION.md)
+- [General](doc/GENERAL.md)
 - [Assets](doc/ASSETS.md)
 - [Entities](doc/ENTITIES.md)
 - [Camera](doc/CAMERA.md)

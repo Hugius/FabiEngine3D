@@ -30,8 +30,8 @@ void Camera::reset()
 	// Decimals
 	_aspectRatio = static_cast<float>(Config::getInst().getWindowSize().x) / static_cast<float>(Config::getInst().getWindowSize().y);
 	_fov = DEFAULT_FOV_ANGLE;
-	_nearDistance = DEFAULT_NEAR_Z;
-	_farDistance = DEFAULT_FAR_Z;
+	_nearDistance = NEAR_DISTANCE;
+	_farDistance = FAR_DISTANCE;
 	_cursorSensitivity = DEFAULT_CURSOR_SENSITIVITY;
 	_minFirstPersonPitch = MIN_PITCH_ANGLE;
 	_maxFirstPersonPitch = MAX_PITCH_ANGLE;
@@ -150,7 +150,7 @@ void Camera::update(Ivec2 lastCursorPosition)
 		_thirdPersonPitchAcceleration *= 0.75f;
 
 		// Update distance
-		_thirdPersonDistance = clamp(_thirdPersonDistance, MIN_THIRD_PERSON_DISTANCE, MAX_THIRD_PERSON_DISTANCE);
+		_thirdPersonDistance = max(MIN_THIRD_PERSON_DISTANCE, _thirdPersonDistance);
 
 		// Calculate position multipliers
 		float xMultiplier = cos(Math::convertToRadians(_thirdPersonPitch)) * sin(Math::convertToRadians(_thirdPersonYaw));

@@ -15,7 +15,6 @@ public:
 	void update(Ivec2 lastCursorPosition);
 	void updateMatrices();
 	void move(Vec3 value);
-	void setUpVector(Vec3 value);
 	void setPosition(Vec3 value);
 	void setThirdPersonLookat(Vec3 value);
 	void setThirdPersonDistance(float value);
@@ -28,8 +27,6 @@ public:
 	void setMaxFirstPersonPitch(float value);
 	void setMinThirdPersonPitch(float value);
 	void setMaxThirdPersonPitch(float value);
-	void setNearDistance(float value);
-	void setFarDistance(float value);
 	void moveFollowX(float value);
 	void moveFollowZY(float value);
 	void moveFollowZ(float value);
@@ -38,6 +35,7 @@ public:
 	void enableThirdPersonView(float initialYaw, float initialPitch);
 	void disableThirdPersonView();
 	void notifyCursorCenter();
+	void invertUpVector();
 
 	// Matrices
 	const Matrix44& getViewMatrix() const;
@@ -82,14 +80,14 @@ private:
 	Vec3 _thirdPersonLookat = Vec3(0.0f);
 
 	// Decimals
-	static inline const float DEFAULT_FOV_ANGLE = 90.0f;
-	static inline const float DEFAULT_NEAR_Z = 0.01f;
-	static inline const float DEFAULT_FAR_Z = 2500.0f;
+	static inline const float NEAR_DISTANCE = 0.01f;
+	static inline const float FAR_DISTANCE = 2500.0f;
 	static inline const float DEFAULT_CURSOR_SENSITIVITY = 0.01f;
+	static inline const float DEFAULT_FOV_ANGLE = 90.0f;
+	static inline const float MAX_FOV_ANGLE = 150.0f;
 	static inline const float MIN_PITCH_ANGLE = -89.99f;
 	static inline const float MAX_PITCH_ANGLE = 89.99f;
 	static inline const float MIN_THIRD_PERSON_DISTANCE = 0.01f;
-	static inline const float MAX_THIRD_PERSON_DISTANCE = numeric_limits<float>::max();
 	static inline const float MAX_ACCELERATION = 10.0f;
 	float _aspectRatio = 0.0f;
 	float _fov = 0.0f;

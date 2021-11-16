@@ -110,16 +110,6 @@ void FabiEngine3D::camera_setPitch(float angle)
 	_core->_camera.setPitch(angle);
 }
 
-void FabiEngine3D::camera_setNearDistance(float distance)
-{
-	_core->_camera.setNearDistance(distance);
-}
-
-void FabiEngine3D::camera_setFarDistance(float distance)
-{
-	_core->_camera.setFarDistance(distance);
-}
-
 void FabiEngine3D::camera_setMinFirstPersonPitch(float angle)
 {
 	_core->_camera.setMinFirstPersonPitch(angle);

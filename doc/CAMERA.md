@@ -98,7 +98,7 @@
   - Constraints: between -90.0 and 90.0
 - **Third Person Distance**: the distance from the camera to the third person lookat.
   - Type: `decimal`
-  - Constraints: between 0.0 and inf
+  - Constraints: between 0.01 and inf
 - **Third Person Lookat**: the position where the third person view is looking at.
   - Type: `decimal`
   - Constraints: none
@@ -110,7 +110,7 @@
   - Constraints: between 0.0 and inf
 - **First Person View**: is first person view enabled?
   - Type: `boolean`
-  - Constraints: between -90.0 and 90.0
+  - Constraints: between none
 - **Third Person View**: is third person view enabled?
   - Type: `boolean`
-  - Constraints: between -90.0 and 90.0
+  - Constraints: between none

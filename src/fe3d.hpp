@@ -672,8 +672,6 @@ public:
 	void camera_setMaxFirstPersonPitch(float angle);
 	void camera_setMinThirdPersonPitch(float angle);
 	void camera_setMaxThirdPersonPitch(float angle);
-	void camera_setNearDistance(float distance);
-	void camera_setFarDistance(float distance);
 	void camera_setCursorSensitivity(float speed);
 
 	// Camera interface - getters

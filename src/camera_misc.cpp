@@ -84,7 +84,7 @@ void Camera::disableThirdPersonView()
 
 void Camera::setFOV(float value)
 {
-	_fov = max(0.0f, value);
+	_fov = clamp(value, 0.0f, MAX_FOV_ANGLE);
 }
 
 void Camera::setCursorSensitivity(float value)
@@ -100,16 +100,6 @@ void Camera::setYaw(float value)
 void Camera::setPitch(float value)
 {
 	_pitch = clamp(value, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
-}
-
-void Camera::setNearDistance(float value)
-{
-	_nearDistance = max(0.0f, value);
-}
-
-void Camera::setFarDistance(float value)
-{
-	_farDistance = max(0.0f, value);
 }
 
 void Camera::setMinFirstPersonPitch(float value)
@@ -237,9 +227,9 @@ void Camera::move(Vec3 value)
 	_position += value;
 }
 
-void Camera::setUpVector(Vec3 value)
+void Camera::invertUpVector()
 {
-	_upVector = value;
+	_upVector *= -1.0f;
 }
 
 void Camera::setPosition(Vec3 value)

@@ -24,7 +24,7 @@ private:
 	const Matrix44 _createLightSpaceMatrix() const;
 
 	// Decimals
-	static inline const float NEAR_Z = 0.01f;
+	static inline const float NEAR_DISTANCE = 0.01f;
 
 	// Integers
 	unsigned int _interval = 0;

@@ -14,7 +14,6 @@ void MasterRenderer::_captureCubeReflections()
 	// Save original camera status
 	const auto originalCameraAspectRatio = _camera.getAspectRatio();
 	const auto originalCameraFOV = _camera.getFOV();
-	const auto originalCameraUpVector = _camera.getUpVector();
 	const auto originalCameraYaw = _camera.getYaw();
 	const auto originalCameraPitch = _camera.getPitch();
 	const auto originalCameraPosition = _camera.getPosition();
@@ -63,9 +62,9 @@ void MasterRenderer::_captureCubeReflections()
 	}
 
 	// Prepare camera
+	_camera.invertUpVector();
 	_camera.setAspectRatio(1.0f);
 	_camera.setFOV(90.0f);
-	_camera.setUpVector(Vec3(0.0f, -1.0f, 0.0f));
 
 	// Iterate through all reflection entities
 	for(const auto& [keyID, entity] : _entityBus->getReflectionEntities())
@@ -197,9 +196,9 @@ void MasterRenderer::_captureCubeReflections()
 	}
 
 	// Revert camera
+	_camera.invertUpVector();
 	_camera.setAspectRatio(originalCameraAspectRatio);
 	_camera.setFOV(originalCameraFOV);
-	_camera.setUpVector(originalCameraUpVector);
 	_camera.setYaw(originalCameraYaw);
 	_camera.setPitch(originalCameraPitch);
 	_camera.setPosition(originalCameraPosition);

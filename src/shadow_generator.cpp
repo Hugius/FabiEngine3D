@@ -62,7 +62,7 @@ const Matrix44 ShadowGenerator::_createLightSpaceMatrix() const
 
 	// Matrix generation
 	Matrix44 lightViewMatrix = Math::createViewMatrix(eye, center, Vec3(0.0f, 1.0f, 0.0f));
-	Matrix44 lightProjectionMatrix = Math::createOrthoMatrix(-size / 2.0f, size / 2.0f, -size / 2.0f, size / 2.0f, NEAR_Z, reach);
+	Matrix44 lightProjectionMatrix = Math::createOrthoMatrix(-size / 2.0f, size / 2.0f, -size / 2.0f, size / 2.0f, NEAR_DISTANCE, reach);
 
 	// Return
 	return (lightProjectionMatrix * lightViewMatrix);

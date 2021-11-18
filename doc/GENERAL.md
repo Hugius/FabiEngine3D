@@ -14,8 +14,9 @@
 - **3D Rendering**: sky, terrain, water, model, billboard
 - **2D Rendering**: image, text
 - **Textures**: blend, cube, diffuse, displacement, dudv, emission, flare, height, image, normal, reflection, specular
-- **Graphics**: ambient lighting, directional lighting, specular lighting, point lighting, spot lighting, shadows, cube reflections, planar reflections, fog, sky exposure
+- **Lighting**: ambient lighting, directional lighting, specular lighting, point lighting, spot lighting
 - **Post Processing**: bloom, DOF, motion blur, anti-aliasing, lens flare
+- **Other**: shadows, cube reflections, planar reflections, fog, sky exposure
 
 ### 1.3 Audio
 
@@ -116,7 +117,7 @@
 - **Bottom Viewport**: statistics & logging
 - **Mid Viewport**: 3D display screen
 
-## 3. Terminology
+## 4. Terminology
 
 - **Boolean**: can only be `true` or `false`
 - **Integer**: a number (example: `3`)
@@ -131,3 +132,7 @@
 - **UV Coordinate**: a coordinate (XY) which used for mapping a 2D texture onto a 3D mesh.
 - **Normal Vector**: a normalized vector that points in the opposite direction of a surface which is used for lighting calculations.
 - **INF**: an infinite value.
+- **First Person View**: the world is viewed directly through the "eyes" of the camera.
+- **Third Person View**: the world is viewed indirectly from a distance.
+- **Global Illumination**: an indirect form of global lighting in the world.
+- **Gimbal Lock**: incorrect rotation as a result of 2 parallel rotation axes.

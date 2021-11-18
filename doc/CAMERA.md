@@ -20,7 +20,7 @@
 - Y rotations go around the Y axis.
 - Z rotations go around the Z axis.
 - Rotational degrees are automatically converted between 0&deg; and 360&deg; (example: 500&deg; = 140&deg;, -500&deg; = 220&deg;).
-- **WARNING**: Rotating objects in every direction (XYZ) at the same time can cause problems!
+- **WARNING**: Rotating objects in every direction (XYZ) at the same time can cause the infamous gimbal lock!
 
 ## 3. Camera angles
 

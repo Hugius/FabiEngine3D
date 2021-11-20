@@ -116,7 +116,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 			// Data placeholders
 			string modelID, previewID;
 			Vec3 position, rotation, rotationOrigin, size, color;
-			float minHeight, maxHeight, alpha, lightness;
+			float minHeight, maxHeight, transparency, lightness;
 			unsigned partCount;
 			bool isVisible, isFrozen, isAabbRaycastResponsive, isAabbCollisionResponsive;
 
@@ -150,7 +150,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				color.b >>
 				minHeight >>
 				maxHeight >>
-				alpha >>
+				transparency >>
 				lightness >>
 				partCount;
 
@@ -206,7 +206,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				_fe3d.modelEntity_setColor(modelID, "", color);
 				_fe3d.modelEntity_setMinHeight(modelID, minHeight);
 				_fe3d.modelEntity_setMaxHeight(modelID, maxHeight);
-				//_fe3d.modelEntity_setAlpha(modelID, alpha);
+				//_fe3d.modelEntity_setTransparency(modelID, transparency);
 				//_fe3d.modelEntity_setLightness(modelID, lightness);
 				_fe3d.modelEntity_setVisible(modelID, isVisible);
 				for(const auto& ID : _fe3d.aabbEntity_getChildIDs(modelID, AabbParentType::MODEL_ENTITY))

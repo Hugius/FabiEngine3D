@@ -457,9 +457,9 @@ void ModelEntity::setMaxHeight(float value)
 	_maxHeight = value;
 }
 
-void ModelEntity::setAlpha(const string& partID, float value)
+void ModelEntity::setTransparency(const string& partID, float value)
 {
-	_parts[_getPartIndex(partID)].alpha = clamp(value, 0.0f, 1.0f);
+	_parts[_getPartIndex(partID)].transparency = clamp(value, 0.0f, 1.0f);
 }
 
 void ModelEntity::setTextureRepeat(const string& partID, float value)

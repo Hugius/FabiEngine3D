@@ -138,7 +138,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 			auto color = _fe3d.modelEntity_getColor(modelID, "");
 			auto minHeight = _fe3d.modelEntity_getMinHeight(modelID);
 			auto maxHeight = _fe3d.modelEntity_getMaxHeight(modelID);
-			auto alpha = _fe3d.modelEntity_getAlpha(modelID, "");
+			auto transparency = _fe3d.modelEntity_getTransparency(modelID, "");
 			auto lightness = _fe3d.modelEntity_getLightness(modelID, "");
 
 			// Extract preview ID
@@ -178,7 +178,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 				color.b << " " <<
 				minHeight << " " <<
 				maxHeight << " " <<
-				alpha << " " <<
+				transparency << " " <<
 				lightness << " " <<
 				_fe3d.modelEntity_getPartIDs(modelID).size();
 

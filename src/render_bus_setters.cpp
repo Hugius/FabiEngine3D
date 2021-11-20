@@ -155,9 +155,9 @@ void RenderBus::setShadowLightness(float value)
 	_shadowLightness = max(0.0f, value);
 }
 
-void RenderBus::setLensFlareAlpha(float value)
+void RenderBus::setLensFlareTransparency(float value)
 {
-	_lensFlareAlpha = max(0.0f, value);
+	_lensFlareTransparency = max(0.0f, value);
 }
 
 void RenderBus::setLensFlareIntensity(float value)

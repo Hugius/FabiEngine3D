@@ -70,9 +70,9 @@ const float BillboardEntity::getColorInversion() const
 	return _colorInversion;
 }
 
-const float BillboardEntity::getAlpha() const
+const float BillboardEntity::getTransparency() const
 {
-	return _alpha;
+	return _transparency;
 }
 
 const float BillboardEntity::getMinHeight() const

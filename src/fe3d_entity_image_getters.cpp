@@ -16,9 +16,9 @@ const float FabiEngine3D::imageEntity_getRotation(const string& ID) const
 	return _core->_imageEntityManager.getEntity(ID)->getRotation();
 }
 
-const float FabiEngine3D::imageEntity_getAlpha(const string& ID) const
+const float FabiEngine3D::imageEntity_getTransparency(const string& ID) const
 {
-	return _core->_imageEntityManager.getEntity(ID)->getAlpha();
+	return _core->_imageEntityManager.getEntity(ID)->getTransparency();
 }
 
 const int FabiEngine3D::imageEntity_getRemainingSpriteAnimationLoops(const string& ID) const

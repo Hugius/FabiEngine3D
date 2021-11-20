@@ -47,7 +47,7 @@ void TerrainEntityColorRenderer::bind()
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _renderBus.getShadowMap());
 
-	// Enable depth testing
+	// Enable depth
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 }
@@ -58,7 +58,7 @@ void TerrainEntityColorRenderer::unbind()
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	// Disable depth testing
+	// Disable depth
 	glDisable(GL_DEPTH_TEST);
 
 	// Unbind shader

@@ -41,6 +41,7 @@ private:
 	Vec3 _color = Vec3(1.0f);
 
 	// Decimals
+	static inline const float MAX_ANGLE = 45.0f;
 	float _positionTargetSpeed = 0.0f;
 	float _yaw = 0.0f;
 	float _pitch = 0.0f;

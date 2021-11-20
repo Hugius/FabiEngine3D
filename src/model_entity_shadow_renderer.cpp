@@ -14,14 +14,14 @@ void ModelEntityShadowRenderer::bind()
 	glEnable(GL_CLIP_DISTANCE0);
 	glEnable(GL_CLIP_DISTANCE1);
 
-	// Enable depth testing
+	// Enable depth
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 }
 
 void ModelEntityShadowRenderer::unbind()
 {
-	// Disable depth testing
+	// Disable depth
 	glDisable(GL_DEPTH_TEST);
 
 	// Disable clipping
@@ -46,7 +46,7 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 		_shader.uploadUniform("u_positionY", entity->getBasePosition().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
-		_shader.uploadUniform("u_minTextureAlpha", MIN_TEXTURE_ALPHA);
+		_shader.uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
 		// Iterate through parts
 		for(const auto& partID : entity->getPartIDs())

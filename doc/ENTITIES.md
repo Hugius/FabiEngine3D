@@ -12,7 +12,7 @@
 
 - **ID**: the identifier of the entity.
   - Type: `string`
-  - Constraints: must be unique, cannot change
+  - Constraints: must be unique, cannot be changed
 - **Visible**: the visibility of the entity in the world.
   - Type: `boolean`
   - Constraints: none

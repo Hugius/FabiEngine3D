@@ -13,14 +13,14 @@ void BillboardEntityShadowRenderer::bind()
 	glEnable(GL_CLIP_DISTANCE0);
 	glEnable(GL_CLIP_DISTANCE1);
 
-	// Enable depth testing
+	// Enable depth
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 }
 
 void BillboardEntityShadowRenderer::unbind()
 {
-	// Disable depth testing
+	// Disable depth
 	glDisable(GL_DEPTH_TEST);
 
 	// Disable clipping
@@ -62,7 +62,7 @@ void BillboardEntityShadowRenderer::render(const shared_ptr<BillboardEntity> ent
 		_shader.uploadUniform("u_textureRepeat", entity->getTextureRepeat());
 		_shader.uploadUniform("u_uvAdder", uvAdder);
 		_shader.uploadUniform("u_uvMultiplier", uvMultiplier);
-		_shader.uploadUniform("u_minTextureAlpha", MIN_TEXTURE_ALPHA);
+		_shader.uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
 		// Bind textures
 		if(entity->hasDiffuseMap())

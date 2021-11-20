@@ -17,7 +17,7 @@ uniform vec2 u_flareSourceUV;
 uniform float u_farDistance;
 uniform float u_nearDistance;
 uniform float u_lensFlareIntensity;
-uniform float u_lensFlareAlpha;
+uniform float u_lensFlareTransparency;
 
 // Boolean uniforms
 uniform bool u_isLensFlareEnabled;
@@ -40,7 +40,7 @@ void main()
 
 float calculateFlareVisibility()
 {
-    if (u_isLensFlareEnabled && (u_lensFlareIntensity > 0.0f) && (u_lensFlareAlpha > 0.0f))
+    if (u_isLensFlareEnabled && (u_lensFlareIntensity > 0.0f) && (u_lensFlareTransparency > 0.0f))
     {
         // Calculate world depth
         float flareDepth = texture(u_depthMap, u_flareSourceUV).r;

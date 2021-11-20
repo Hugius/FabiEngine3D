@@ -13,26 +13,38 @@
 ## 1.3 Properties
 
 - **Size**: the XZ size of the water plane in world space.
-  - Constraints `0` to `inf`
+  - Type: `decimal`
+  - Constraints: at least `0.0`
 - **Texture Repeat**: the amount of times the textures are repeated.
-  - Constraints: `0` to `inf`
+  - Type: `decimal`
+  - Constraints: at least `0.0`
 - **Color**: the RGB color that will be mixed with the water fragments.
-  - Constraints: `0` to `255`
+  - Type: `decimal`
+  - Constraints: between `0.0` and `1.0`
 - **Reflective**: enable or disable reflections on the water.
-  - Constraints: `ON` or `OFF`
+  - Type: `decimal`
+  - Constraints: none
 - **Refractive**: enable or disable refractions on the water.
-  - Constraints: `ON` or `OFF`
+  - Type: `decimal`
+  - Constraints: none
 - **Specular**: enable or disable specular lighting on the water.
-  - Constraints: `ON` or `OFF`
+  - Type: `decimal`
+  - Constraints: none
 - **Specular Factor**: the shininess of the specular lighting.
-  - Constraints: `0` to `256`
+  - Type: `decimal`
+  - Constraints: at least `0.0`
 - **Specular Intesity**: the intensity of the specular lighting.
-  - Constraints: `0` to `inf`
+  - Type: `decimal`
+  - Constraints: at least `0.0`
 - **Wave Height**: the height of the waves.
-  - Constraints: `0` to `inf`
+  - Type: `decimal`
+  - Constraints: at least `0.0`
 - **Water Speed**: the speed of water rippling/waving movement.
-  - Constraints: `-inf` to `inf`
+  - Type: `decimal`
+  - Constraints: none
 - **Transparency**: the percentage that determines how transparent the water is.
-  - Constraints: `0` to `100`
+  - Type: `decimal`
+  - Constraints: between `0.0` and `1.0`
 - **Quality**: determines everything that is captured by reflections & refractions.
+  - Type: `decimal`
   - Constraints: `1` (only sky) or `2` (sky + terrain) or `3` (sky + terrain + models) or `4` (sky + terrain + models + billboards)

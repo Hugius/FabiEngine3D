@@ -490,9 +490,9 @@ float calculateShadows()
 			}
 
 			// Long-distance shadows fading
-			float alpha = (fragmentDistance - (halfSize * 0.9f)); // Only for the outer 10% of the shadowed area
-			alpha = clamp(alpha, 0.0f, halfSize * 0.1f); // Cannot be negative
-			alpha /= (halfSize * 0.1f); // Convert value to 0.0 - 1.0 range
+			float transparency = (fragmentDistance - (halfSize * 0.9f)); // Only for the outer 10% of the shadowed area
+			transparency = clamp(transparency, 0.0f, halfSize * 0.1f); // Cannot be negative
+			transparency /= (halfSize * 0.1f); // Convert value to 0.0 - 1.0 range
 
 			// Debug area frame rendering
 			if (u_isShadowFrameRenderEnabled)
@@ -504,7 +504,7 @@ float calculateShadows()
 			}
 
 			// Return
-			return mix(shadow, 1.0f, alpha);
+			return mix(shadow, 1.0f, transparency);
 		}
 
 		// No shadow

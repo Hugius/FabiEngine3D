@@ -20,7 +20,7 @@ public:
 	void setDiffuseMapPath(const string& value);
 	void setMirroredHorizontally(bool value);
 	void setMirroredVertically(bool value);
-	void setAlpha(float value);
+	void setTransparency(float value);
 	void setColor(Vec3 value);
 	void setMinPosition(Vec2 value);
 	void setMaxPosition(Vec2 value);
@@ -63,7 +63,7 @@ public:
 	const Vec2 getMaxPosition() const;
 
 	// Decimals
-	const float getAlpha() const;
+	const float getTransparency() const;
 	const float getRotation() const;
 
 	// Integers
@@ -113,7 +113,7 @@ private:
 	float _positionTargetSpeed = 0.0f;
 	float _rotationTargetSpeed = 0.0f;
 	float _sizeTargetSpeed = 0.0f;
-	float _alpha = 1.0f;
+	float _transparency = 1.0f;
 
 	// Integers
 	int _maxSpriteAnimationLoops = 0;

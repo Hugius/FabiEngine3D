@@ -21,9 +21,9 @@ const float FabiEngine3D::billboardEntity_getMaxHeight(const string& ID) const
 	return _core->_billboardEntityManager.getEntity(ID)->getMaxHeight();
 }
 
-const float FabiEngine3D::billboardEntity_getAlpha(const string& ID) const
+const float FabiEngine3D::billboardEntity_getTransparency(const string& ID) const
 {
-	return _core->_billboardEntityManager.getEntity(ID)->getAlpha();
+	return _core->_billboardEntityManager.getEntity(ID)->getTransparency();
 }
 
 const float FabiEngine3D::billboardEntity_getTextureRepeat(const string& ID) const

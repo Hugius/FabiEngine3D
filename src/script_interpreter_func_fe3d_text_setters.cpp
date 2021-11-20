@@ -263,7 +263,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_set_alpha")
+	else if(functionName == "fe3d:text_set_transparency")
 	{
 		auto types = { SVT::STRING, SVT::DECIMAL };
 
@@ -273,7 +273,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 			// Validate existence
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				_fe3d.textEntity_setAlpha(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.textEntity_setTransparency(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

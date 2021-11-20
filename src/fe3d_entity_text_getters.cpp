@@ -21,9 +21,9 @@ const float FabiEngine3D::textEntity_getRotation(const string& ID) const
 	return _core->_textEntityManager.getEntity(ID)->getRotation();
 }
 
-const float FabiEngine3D::textEntity_getAlpha(const string& ID) const
+const float FabiEngine3D::textEntity_getTransparency(const string& ID) const
 {
-	return _core->_textEntityManager.getEntity(ID)->getAlpha();
+	return _core->_textEntityManager.getEntity(ID)->getTransparency();
 }
 
 const Vec2 FabiEngine3D::textEntity_getSize(const string& ID) const

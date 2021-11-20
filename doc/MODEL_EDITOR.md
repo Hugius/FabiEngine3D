@@ -54,7 +54,7 @@
 - **Reflectivity**: the percentage of how reflective the model is.
   - Constraints: `0` to `100`
 - **Level Of Detail**: the ID of another model representing the LOD version of the current model. If you want to remove the LOD, fill in "@".
-  - Constraints: `none`
+  - Constraints: none
 - **Instanced**: enable or disable instanced rendering for this model (disables AABBs).
   - Constraints: `ON` or `OFF`
 - **Culling**: enable or disable the face culling performance optimization.

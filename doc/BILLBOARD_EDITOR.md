@@ -32,7 +32,7 @@
 - **Size**: the size of the billboard.
   - Constraints: `0` to `inf`
 - **Text Content**: the text content of the billboard.
-  - Constraints: `none`
+  - Constraints: none
 - **Texture Repeat**: the amount of times the textures are repeated.
   - Constraints: `0` to `inf`
 - **Rows**: the amount of rows in the sprite animation texture.

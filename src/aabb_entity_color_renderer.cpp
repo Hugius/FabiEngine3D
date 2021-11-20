@@ -9,14 +9,14 @@ void AabbEntityColorRenderer::bind()
 	_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
 	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
 
-	// Enable depth testing
+	// Enable depth
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 }
 
 void AabbEntityColorRenderer::unbind()
 {
-	// Disable depth testing
+	// Disable depth
 	glDisable(GL_DEPTH_TEST);
 
 	// Unbind shader

@@ -111,14 +111,14 @@ vec4 calculateWaterColor()
 	vec2 refractionUV = vec2(ndc.x, ndc.y);
 
 	// Depth map
-	float alpha = 1.0f;
-	if (u_transparency > 0.0f)
+	float transparency = 1.0f;
+	if (u_transparency < 1.0f)
 	{
 		float depth = texture(u_depthMap, refractionUV).r;
 		float floorDistance = convertDepthToPerspective(depth);
 		float waterDistance = convertDepthToPerspective(gl_FragCoord.z);
-		float waterDepth = floorDistance - waterDistance;
-		alpha = clamp(waterDepth / (u_transparency * 10.0f), 0.0f, 1.0f);
+		float waterDepth = (floorDistance - waterDistance);
+		transparency = clamp(waterDepth / ((1.0f - u_transparency) * 10.0f), 0.0f, 1.0f);
 	}
 
 	// DUDV mapping
@@ -196,7 +196,7 @@ vec4 calculateWaterColor()
 	}
 
 	// Return final color
-	return vec4(finalColor, alpha);
+	return vec4(finalColor, transparency);
 }
 
 vec3 calculateLights(vec3 normal)

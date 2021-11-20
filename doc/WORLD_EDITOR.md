@@ -229,7 +229,7 @@
 - **Enabled**: enable or disable the lens flare effect.
   - Constraints: `ON` or `OFF`
 - **Flare Map**: colored `24bit PNG` format image file from `~\projects\<your_project>\assets\textures\flare_maps`.
-  - Constraints: `none`
+  - Constraints: none
 - **Intensity**: the intensity of the lens flare effect.
   - Constraints: `0` to `inf`
 - **Sensitivity**: the sensitivity of the lens flare effect.

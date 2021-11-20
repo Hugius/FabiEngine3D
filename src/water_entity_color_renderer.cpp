@@ -38,21 +38,21 @@ void WaterEntityColorRenderer::bind()
 	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, _renderBus.getDepthMap());
 
-	// Enable depth testing
+	// Enable depth
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 
-	// Enable alpha blending
+	// Enable transparency
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void WaterEntityColorRenderer::unbind()
 {
-	// Disable alpha blending
+	// Disable transparency
 	glDisable(GL_BLEND);
 
-	// Disable depth testing
+	// Disable depth
 	glDisable(GL_DEPTH_TEST);
 
 	// Unbind textures

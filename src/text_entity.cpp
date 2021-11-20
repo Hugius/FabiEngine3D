@@ -45,7 +45,7 @@ void TextEntity::updateCharacterEntities()
 		character->setColor(this->getColor());
 		character->setMirroredHorizontally(this->isMirroredHorizonally());
 		character->setMirroredVertically(this->isMirroredVertically());
-		character->setAlpha(this->getAlpha());
+		character->setTransparency(this->getTransparency());
 		character->setMinPosition(this->getMinPosition());
 		character->setMaxPosition(this->getMaxPosition());
 		character->setVisible(this->isVisible());

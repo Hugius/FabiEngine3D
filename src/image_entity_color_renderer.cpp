@@ -12,14 +12,14 @@ void ImageEntityColorRenderer::bind()
 	_shader.uploadUniform("u_farDistance", _renderBus.getFarDistance());
 	_shader.uploadUniform("u_diffuseMap", 0);
 
-	// Enable alpha blending
+	// Enable transparency
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void ImageEntityColorRenderer::unbind()
 {
-	// Disable alpha blending
+	// Disable transparency
 	glDisable(GL_BLEND);
 
 	// Unbind shader
@@ -61,7 +61,7 @@ void ImageEntityColorRenderer::render(const shared_ptr<ImageEntity> entity)
 		_shader.uploadUniform("u_windowSize", Vec2(Config::getInst().getWindowSize()));
 		_shader.uploadUniform("u_minPosition", entity->getMinPosition());
 		_shader.uploadUniform("u_maxPosition", entity->getMaxPosition());
-		_shader.uploadUniform("u_alpha", entity->getAlpha());
+		_shader.uploadUniform("u_transparency", entity->getTransparency());
 		_shader.uploadUniform("u_isPerspectiveDepthEntity", entity->isPerspectiveDepthEntity());
 		_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap());
 

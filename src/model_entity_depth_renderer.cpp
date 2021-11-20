@@ -15,14 +15,14 @@ void ModelEntityDepthRenderer::bind()
 	glEnable(GL_CLIP_DISTANCE1);
 	glEnable(GL_CLIP_DISTANCE2);
 
-	// Enable depth testing
+	// Enable depth
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 }
 
 void ModelEntityDepthRenderer::unbind()
 {
-	// Disable depth testing
+	// Disable depth
 	glDisable(GL_DEPTH_TEST);
 
 	// Disable clipping
@@ -51,7 +51,7 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, floa
 		_shader.uploadUniform("u_clippingY", clippingY);
 		_shader.uploadUniform("u_isUnderWater", isUnderWater);
 		_shader.uploadUniform("u_viewMatrix", (entity->isCameraStatic() ? Matrix44(Matrix33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
-		_shader.uploadUniform("u_minTextureAlpha", MIN_TEXTURE_ALPHA);
+		_shader.uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
 		// Iterate through parts
 		for(const auto& partID : entity->getPartIDs())

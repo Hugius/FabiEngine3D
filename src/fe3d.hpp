@@ -257,7 +257,7 @@ public:
 	void modelEntity_setLightness(const string& ID, const string& partID, float lightness);
 	void modelEntity_setColorInversion(const string& ID, const string& partID, float colorInversion);
 	void modelEntity_setEmissionIntensity(const string& ID, const string& partID, float intensity);
-	void modelEntity_setAlpha(const string& ID, const string& partID, float alpha);
+	void modelEntity_setTransparency(const string& ID, const string& partID, float transparency);
 	void modelEntity_setColor(const string& ID, const string& partID, Vec3 color);
 	void modelEntity_setMinHeight(const string& ID, float height);
 	void modelEntity_setMaxHeight(const string& ID, float height);
@@ -294,7 +294,7 @@ public:
 	const float modelEntity_getLightness(const string& ID, const string& partID) const;
 	const float modelEntity_getSpecularShininess(const string& ID, const string& partID) const;
 	const float modelEntity_getSpecularIntensity(const string& ID, const string& partID) const;
-	const float modelEntity_getAlpha(const string& ID, const string& partID) const;
+	const float modelEntity_getTransparency(const string& ID, const string& partID) const;
 	const float modelEntity_getMinHeight(const string& ID) const;
 	const float modelEntity_getMaxHeight(const string& ID) const;
 	const float modelEntity_getTextureRepeat(const string& ID, const string& partID) const;
@@ -347,7 +347,7 @@ public:
 	void billboardEntity_setMaxHeight(const string& ID, float height);
 	void billboardEntity_setLightness(const string& ID, float lightness);
 	void billboardEntity_setColorInversion(const string& ID, float colorInversion);
-	void billboardEntity_setAlpha(const string& ID, float alpha);
+	void billboardEntity_setTransparency(const string& ID, float transparency);
 	void billboardEntity_setTextureRepeat(const string& ID, float repeat);
 	void billboardEntity_setEmissionIntensity(const string& ID, float intensity);
 	void billboardEntity_startSpriteAnimation(const string& ID, int loops);
@@ -379,7 +379,7 @@ public:
 	const float billboardEntity_getColorInversion(const string& ID) const;
 	const float billboardEntity_getMinHeight(const string& ID) const;
 	const float billboardEntity_getMaxHeight(const string& ID) const;
-	const float billboardEntity_getAlpha(const string& ID) const;
+	const float billboardEntity_getTransparency(const string& ID) const;
 	const float billboardEntity_getTextureRepeat(const string& ID) const;
 	const float billboardEntity_getEmissionIntensity(const string& ID) const;
 	const int billboardEntity_getRemainingSpriteAnimationLoops(const string& ID) const;
@@ -509,7 +509,7 @@ public:
 	void imageEntity_setVisible(const string& ID, bool isVisible);
 	void imageEntity_setDiffuseMap(const string& ID, const string& texturePath);
 	void imageEntity_setColor(const string& ID, Vec3 color);
-	void imageEntity_setAlpha(const string& ID, float alpha);
+	void imageEntity_setTransparency(const string& ID, float transparency);
 	void imageEntity_setMinPosition(const string& ID, Vec2 minPos);
 	void imageEntity_setMaxPosition(const string& ID, Vec2 maxPos);
 	void imageEntity_setPosition(const string& ID, Vec2 position);
@@ -542,7 +542,7 @@ public:
 	const Vec2 imageEntity_getMinPosition(const string& ID) const;
 	const Vec2 imageEntity_getMaxPosition(const string& ID) const;
 	const float imageEntity_getRotation(const string& ID) const;
-	const float imageEntity_getAlpha(const string& ID) const;
+	const float imageEntity_getTransparency(const string& ID) const;
 	const int imageEntity_getRemainingSpriteAnimationLoops(const string& ID) const;
 	const unsigned int imageEntity_getSpriteAnimationRows(const string& ID) const;
 	const unsigned int imageEntity_getSpriteAnimationColumns(const string& ID) const;
@@ -567,7 +567,7 @@ public:
 	void textEntity_setFont(const string& ID, const string& fontPath);
 	void textEntity_setTextContent(const string& ID, const string& textContent, float charWidth = -1.0f, float charHeight = -1.0f);
 	void textEntity_setColor(const string& ID, Vec3 color);
-	void textEntity_setAlpha(const string& ID, float alpha);
+	void textEntity_setTransparency(const string& ID, float transparency);
 	void textEntity_setMinPosition(const string& ID, Vec2 minPos);
 	void textEntity_setMaxPosition(const string& ID, Vec2 maxPos);
 	void textEntity_setPosition(const string& ID, Vec2 position);
@@ -590,7 +590,7 @@ public:
 	const Vec2 textEntity_getMinPosition(const string& ID) const;
 	const Vec2 textEntity_getMaxPosition(const string& ID) const;
 	const float textEntity_getRotation(const string& ID) const;
-	const float textEntity_getAlpha(const string& ID) const;
+	const float textEntity_getTransparency(const string& ID) const;
 	const bool textEntity_isExisting(const string& ID) const;
 	const bool textEntity_isVisible(const string& ID) const;
 

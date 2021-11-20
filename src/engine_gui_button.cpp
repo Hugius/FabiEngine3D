@@ -161,23 +161,23 @@ void EngineGuiButton::setHoverable(bool isHoverable)
 	if(isHoverable)
 	{
 		// Rectangle
-		_fe3d.imageEntity_setAlpha(_rectangle->getEntityID(), 1.0f);
+		_fe3d.imageEntity_setTransparency(_rectangle->getEntityID(), 1.0f);
 
 		// Text
 		if(_textField != nullptr)
 		{
-			_fe3d.textEntity_setAlpha(_textField->getEntityID(), 1.0f);
+			_fe3d.textEntity_setTransparency(_textField->getEntityID(), 1.0f);
 		}
 	}
 	else
 	{
 		// Rectangle
-		_fe3d.imageEntity_setAlpha(_rectangle->getEntityID(), 0.25f);
+		_fe3d.imageEntity_setTransparency(_rectangle->getEntityID(), 0.25f);
 
 		// Text
 		if(_textField != nullptr)
 		{
-			_fe3d.textEntity_setAlpha(_textField->getEntityID(), 0.25f);
+			_fe3d.textEntity_setTransparency(_textField->getEntityID(), 0.25f);
 		}
 	}
 }

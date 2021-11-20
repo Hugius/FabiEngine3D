@@ -96,9 +96,9 @@ void FabiEngine3D::textEntity_setColor(const string& ID, Vec3 color)
 	_core->_textEntityManager.getEntity(ID)->setColor(color);
 }
 
-void FabiEngine3D::textEntity_setAlpha(const string& ID, float alpha)
+void FabiEngine3D::textEntity_setTransparency(const string& ID, float transparency)
 {
-	_core->_textEntityManager.getEntity(ID)->setAlpha(alpha);
+	_core->_textEntityManager.getEntity(ID)->setTransparency(transparency);
 }
 
 void FabiEngine3D::textEntity_setPosition(const string& ID, Vec2 position)

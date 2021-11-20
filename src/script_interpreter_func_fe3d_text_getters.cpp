@@ -191,7 +191,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_get_alpha")
+	else if(functionName == "fe3d:text_get_transparency")
 	{
 		auto types = { SVT::STRING };
 
@@ -201,7 +201,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 			// Validate existence
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				auto result = _fe3d.textEntity_getAlpha(arguments[0].getString());
+				auto result = _fe3d.textEntity_getTransparency(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}

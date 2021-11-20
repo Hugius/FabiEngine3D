@@ -327,7 +327,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				// Calculate average lightness
+				// Calculate average
 				vector<float> total;
 				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
 				{
@@ -349,7 +349,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				// Calculate average color
+				// Calculate average
 				vector<Vec3> total;
 				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
 				{
@@ -361,7 +361,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_alpha")
+	else if(functionName == "fe3d:model_get_transparency")
 	{
 		auto types = { SVT::STRING, SVT::STRING };
 
@@ -371,11 +371,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				// Calculate average alpha
+				// Calculate average
 				vector<float> total;
 				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
 				{
-					total.push_back(_fe3d.modelEntity_getAlpha(arguments[0].getString(), partID));
+					total.push_back(_fe3d.modelEntity_getTransparency(arguments[0].getString(), partID));
 				}
 
 				// Return
@@ -393,7 +393,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				// Calculate average emission intensity
+				// Calculate average
 				vector<float> total;
 				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
 				{

@@ -119,20 +119,21 @@
 
 ## 4. Terminology
 
-- **Boolean**: can only be `true` or `false`
-- **Integer**: a number (example: `3`)
-- **Decimal**: a floating point number (example: `3.1415`)
-- **Vector2**: a collection of 2 decimals
-- **Vector3**: a collection of 3 decimals
 - **String**: a concatenation of characters(example: `hello123!@#`)
-- **Vector**: a mathematical element that has both a direction and a magnitude.
-- **Normalized Vector**: a vector with magnitude of exactly 1.
-- **Vertex**: a coordinate (XYZ) in 3D mesh.
-- **Fragment**: every pixel that can possibly end up on your screen.
-- **UV Coordinate**: a coordinate (XY) which used for mapping a 2D texture onto a 3D mesh.
-- **Normal Vector**: a normalized vector that points in the opposite direction of a surface which is used for lighting calculations.
-- **INF**: an infinite value.
-- **First Person View**: the world is viewed directly through the "eyes" of the camera.
-- **Third Person View**: the world is viewed indirectly from a distance.
-- **Global Illumination**: an indirect form of global lighting in the world.
-- **Gimbal Lock**: incorrect rotation as a result of 2 parallel rotation axes.
+- **Vector3**: a collection of 3 decimals
+- **Vector2**: a collection of 2 decimals
+- **Decimal**: a floating point number (example: `3.1415`)
+- **Integer**: a number (example: `3`)
+- **Boolean**: can only be `true` or `false`
+- **Vector**: a mathematical element that has both a direction and a magnitude
+- **Normalized Vector**: a vector with magnitude of exactly 1
+- **Vertex**: a coordinate (XYZ) in 3D mesh
+- **Fragment**: every pixel that can possibly end up on your screen
+- **UV Coordinate**: a coordinate (XY) which used for mapping a 2D texture onto a 3D mesh
+- **Normal Vector**: a normalized vector that points in the opposite direction of a surface which is used for lighting calculations
+- **INF**: an infinite value
+- **First Person View**: the world is viewed directly through the "eyes" of the camera
+- **Third Person View**: the world is viewed indirectly from a distance
+- **Global Illumination**: an indirect form of global lighting in the world
+- **Gimbal Lock**: incorrect rotation as a result of 2 parallel rotation axes
+- **RGB**: Red Green Blue

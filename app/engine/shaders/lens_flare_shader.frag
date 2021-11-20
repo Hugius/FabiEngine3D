@@ -11,7 +11,7 @@ layout (location = 2) uniform sampler2D u_flareMap;
 
 // Float uniforms
 uniform float u_lensFlareIntensity;
-uniform float u_lensFlareAlpha;
+uniform float u_lensFlareTransparency;
 
 // Boolean uniforms
 uniform bool u_isLensFlareEnabled;
@@ -36,6 +36,6 @@ void main()
 
     // Final color
     o_finalColor.rgb = worldColor;
-    o_finalColor.rgb += (flareColor * u_lensFlareAlpha * u_lensFlareIntensity * f_flareVisibility);
+    o_finalColor.rgb += (flareColor * u_lensFlareTransparency * u_lensFlareIntensity * f_flareVisibility);
 	o_finalColor.a = 1.0f;
 }

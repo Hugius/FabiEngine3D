@@ -150,9 +150,9 @@ const float RenderBus::getShadowLightness() const
 	return _shadowLightness;
 }
 
-const float RenderBus::getLensFlareAlpha() const
+const float RenderBus::getLensFlareTransparency() const
 {
-	return _lensFlareAlpha;
+	return _lensFlareTransparency;
 }
 
 const float RenderBus::getLensFlareIntensity() const

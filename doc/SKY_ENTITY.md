@@ -13,8 +13,11 @@
 ## 3. Properties
 
 - **Rotation Speed**: the speed of rotation around the Y axis.
-  - Constraints: `-inf` to `inf`
+  - Type: `decimal`
+  - Constraints: none
 - **Lightness**: the brightness of the sky fragments.
-  - Constraints: `0` to `inf`
+  - Type: `decimal`
+  - Constraints: at least `0.0`
 - **Color**: the RGB color that will be mixed with the sky fragments.
-  - Constraints: `0` to `255`
+  - Type: `vector3`
+  - Constraints: between `0.0` and `1.0`

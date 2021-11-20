@@ -191,9 +191,9 @@ const float FabiEngine3D::modelEntity_getSpecularIntensity(const string& ID, con
 	return _core->_modelEntityManager.getEntity(ID)->getSpecularIntensity(partID);
 }
 
-const float FabiEngine3D::modelEntity_getAlpha(const string& ID, const string& partID) const
+const float FabiEngine3D::modelEntity_getTransparency(const string& ID, const string& partID) const
 {
-	return _core->_modelEntityManager.getEntity(ID)->getAlpha(partID);
+	return _core->_modelEntityManager.getEntity(ID)->getTransparency(partID);
 }
 
 const float FabiEngine3D::modelEntity_getMinHeight(const string& ID) const

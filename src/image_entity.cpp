@@ -102,9 +102,9 @@ void ImageEntity::setMirroredVertically(bool value)
 	_isMirroredVertically = value;
 }
 
-void ImageEntity::setAlpha(float value)
+void ImageEntity::setTransparency(float value)
 {
-	_alpha = clamp(value, 0.0f, 1.0f);
+	_transparency = clamp(value, 0.0f, 1.0f);
 }
 
 void ImageEntity::setPosition(Vec2 value)
@@ -346,9 +346,9 @@ const Vec3 ImageEntity::getColor() const
 	return _color;
 }
 
-const float ImageEntity::getAlpha() const
+const float ImageEntity::getTransparency() const
 {
-	return _alpha;
+	return _transparency;
 }
 
 const bool ImageEntity::isCentered() const

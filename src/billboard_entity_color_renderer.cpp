@@ -23,21 +23,21 @@ void BillboardEntityColorRenderer::bind()
 	glEnable(GL_CLIP_DISTANCE0);
 	glEnable(GL_CLIP_DISTANCE1);
 
-	// Enable depth testing
+	// Enable depth
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 
-	// Enable alpha blending
+	// Enable transparency
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void BillboardEntityColorRenderer::unbind()
 {
-	// Disable alpha blending
+	// Disable transparency
 	glDisable(GL_BLEND);
 
-	// Disable depth testing
+	// Disable depth
 	glDisable(GL_DEPTH_TEST);
 
 	// Disable clipping
@@ -88,13 +88,13 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 		_shader.uploadUniform("u_positionY", entity->getPosition().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
-		_shader.uploadUniform("u_alpha", entity->getAlpha());
+		_shader.uploadUniform("u_transparency", entity->getTransparency());
 		_shader.uploadUniform("u_isBright", entity->isBright());
 		_shader.uploadUniform("u_emissionIntensity", entity->getEmissionIntensity());
 		_shader.uploadUniform("u_textureRepeat", entity->getTextureRepeat());
 		_shader.uploadUniform("u_uvAdder", uvAdder);
 		_shader.uploadUniform("u_uvMultiplier", uvMultiplier);
-		_shader.uploadUniform("u_minTextureAlpha", MIN_TEXTURE_ALPHA);
+		_shader.uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
 		// Bind textures
 		if(entity->hasDiffuseMap())

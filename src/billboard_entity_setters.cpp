@@ -346,9 +346,9 @@ void BillboardEntity::setColorInversion(float value)
 	_colorInversion = clamp(value, 0.0f, 1.0f);
 }
 
-void BillboardEntity::setAlpha(float value)
+void BillboardEntity::setTransparency(float value)
 {
-	_alpha = clamp(value, 0.0f, 1.0f);
+	_transparency = clamp(value, 0.0f, 1.0f);
 }
 
 void BillboardEntity::setMinHeight(float value)

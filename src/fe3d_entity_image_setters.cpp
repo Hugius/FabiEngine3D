@@ -85,9 +85,9 @@ void FabiEngine3D::imageEntity_setColor(const string& ID, Vec3 color)
 	_core->_imageEntityManager.getEntity(ID)->setColor(color);
 }
 
-void FabiEngine3D::imageEntity_setAlpha(const string& ID, float alpha)
+void FabiEngine3D::imageEntity_setTransparency(const string& ID, float transparency)
 {
-	_core->_imageEntityManager.getEntity(ID)->setAlpha(alpha);
+	_core->_imageEntityManager.getEntity(ID)->setTransparency(transparency);
 }
 
 void FabiEngine3D::imageEntity_setMinPosition(const string& ID, Vec2 minPos)

@@ -334,9 +334,9 @@ void FabiEngine3D::modelEntity_setWireframed(const string& ID, bool enabled)
 	_core->_modelEntityManager.getEntity(ID)->setWireframed(enabled);
 }
 
-void FabiEngine3D::modelEntity_setAlpha(const string& ID, const string& partID, float alpha)
+void FabiEngine3D::modelEntity_setTransparency(const string& ID, const string& partID, float transparency)
 {
-	_core->_modelEntityManager.getEntity(ID)->setAlpha(partID, alpha);
+	_core->_modelEntityManager.getEntity(ID)->setTransparency(partID, transparency);
 }
 
 void FabiEngine3D::modelEntity_setShadowed(const string& ID, bool enabled)

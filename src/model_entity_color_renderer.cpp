@@ -46,11 +46,11 @@ void ModelEntityColorRenderer::bind()
 	glEnable(GL_CLIP_DISTANCE0);
 	glEnable(GL_CLIP_DISTANCE1);
 
-	// Enable depth testing
+	// Enable depth
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 
-	// Enable alpha blending
+	// Enable transparency
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -69,10 +69,10 @@ void ModelEntityColorRenderer::unbind()
 	glActiveTexture(GL_TEXTURE3);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	// Disable alpha blending
+	// Disable transparency
 	glDisable(GL_BLEND);
 
-	// Disable depth testing
+	// Disable depth
 	glDisable(GL_DEPTH_TEST);
 
 	// Disable clipping
@@ -148,7 +148,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		_shader.uploadUniform("u_isBright", entity->isBright());
 		_shader.uploadUniform("u_cubeReflectionMixValue", entity->getCubeReflectionMixValue());
 		_shader.uploadUniform("u_viewMatrix", (entity->isCameraStatic() ? Matrix44(Matrix33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
-		_shader.uploadUniform("u_minTextureAlpha", MIN_TEXTURE_ALPHA);
+		_shader.uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
 		// Enable wireframe
 		if(entity->isWireframed())
@@ -188,7 +188,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			_shader.uploadUniform("u_isReflective", entity->isReflective(partID));
 			_shader.uploadUniform("u_emissionIntensity", entity->getEmissionIntensity(partID));
 			_shader.uploadUniform("u_textureRepeat", entity->getTextureRepeat(partID));
-			_shader.uploadUniform("u_alpha", entity->getAlpha(partID));
+			_shader.uploadUniform("u_transparency", entity->getTransparency(partID));
 			_shader.uploadUniform("u_isSpecular", entity->isSpecular(partID));
 			_shader.uploadUniform("u_reflectivity", entity->getReflectivity(partID));
 			_shader.uploadUniform("u_lightness", entity->getLightness(partID));

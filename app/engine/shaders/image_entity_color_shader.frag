@@ -14,7 +14,7 @@ uniform vec2 u_minPosition;
 uniform vec2 u_maxPosition;
 
 // Float uniforms
-uniform float u_alpha;
+uniform float u_transparency;
 uniform float u_nearDistance;
 uniform float u_farDistance;
 
@@ -55,12 +55,12 @@ void main()
 			diffuseMapColor.rgb  = pow(diffuseMapColor.rgb, vec3(2.2f));
 			diffuseMapColor.rgb *= u_color;
 			diffuseMapColor.rgb  = pow(diffuseMapColor.rgb, vec3(1.0f / 2.2f));
-			diffuseMapColor.a   *= u_alpha;
+			diffuseMapColor.a   *= u_transparency;
 			o_finalColor = diffuseMapColor;
 		}
 		else // Render color only
 		{
-			o_finalColor = vec4(u_color, u_alpha);
+			o_finalColor = vec4(u_color, u_transparency);
 			o_finalColor.rgb = pow(o_finalColor.rgb, vec3(1.0f / 2.2f));
 		}
 	}

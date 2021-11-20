@@ -271,7 +271,7 @@ void MasterRenderer::_updateLensFlare()
 		auto flareSourcePosition = _renderBus.getDirectionalLightingPosition();
 		auto viewMatrix = _renderBus.getViewMatrix();
 		auto projectionMatrix = _renderBus.getProjectionMatrix();
-		float alpha = 0.0f;
+		float transparency = 0.0f;
 
 		// Calculate screen position
 		Vec4 flareSourceClip = (projectionMatrix * viewMatrix * Vec4(flareSourcePosition.x, flareSourcePosition.y, flareSourcePosition.z, 1.0f));
@@ -282,12 +282,12 @@ void MasterRenderer::_updateLensFlare()
 		if((flareSourceNDC.x > -1.0f) && (flareSourceNDC.x < 1.0f) && (flareSourceNDC.y > -1.0f) && (flareSourceNDC.y < 1.0f))
 		{
 
-			alpha = (1.0f - (max(fabsf(flareSourceNDC.x), fabsf(flareSourceNDC.y)) / _renderBus.getLensFlareSensitivity()));
-			alpha = clamp(alpha, 0.0f, 1.0f);
+			transparency = (1.0f - (max(fabsf(flareSourceNDC.x), fabsf(flareSourceNDC.y)) / _renderBus.getLensFlareSensitivity()));
+			transparency = clamp(transparency, 0.0f, 1.0f);
 		}
 
 		// Update shader properties
-		_renderBus.setLensFlareAlpha(alpha);
+		_renderBus.setLensFlareTransparency(transparency);
 		_renderBus.setFlareSourcePosition(flareSourcePosition);
 		_renderBus.setFlareSourceUV(flareSourceUV);
 	}

@@ -248,7 +248,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			}
 		}
 	}
-	else if(functionName == "fe3d:image_set_alpha")
+	else if(functionName == "fe3d:image_set_transparency")
 	{
 		auto types = { SVT::STRING, SVT::DECIMAL };
 
@@ -258,7 +258,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				_fe3d.imageEntity_setAlpha(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.imageEntity_setTransparency(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

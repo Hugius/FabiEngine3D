@@ -176,7 +176,7 @@ const bool ScriptInterpreter::_executeFe3dImageGetterFunction(const string& func
 			}
 		}
 	}
-	else if(functionName == "fe3d:image_get_alpha")
+	else if(functionName == "fe3d:image_get_transparency")
 	{
 		auto types = { SVT::STRING };
 
@@ -186,7 +186,7 @@ const bool ScriptInterpreter::_executeFe3dImageGetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				auto result = _fe3d.imageEntity_getAlpha(arguments[0].getString());
+				auto result = _fe3d.imageEntity_getTransparency(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}

@@ -12,14 +12,14 @@ void SkyEntityColorRenderer::bind()
 	_shader.uploadUniform("u_mainCubeMap", 0);
 	_shader.uploadUniform("u_mixCubeMap", 1);
 
-	// Enable depth testing
+	// Enable depth
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 }
 
 void SkyEntityColorRenderer::unbind()
 {
-	// Disable depth testing
+	// Disable depth
 	glDisable(GL_DEPTH_TEST);
 
 	// Unbind shader

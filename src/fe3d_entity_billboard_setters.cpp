@@ -181,9 +181,9 @@ void FabiEngine3D::billboardEntity_setColorInversion(const string& ID, float col
 	_core->_billboardEntityManager.getEntity(ID)->setColorInversion(colorInversion);
 }
 
-void FabiEngine3D::billboardEntity_setAlpha(const string& ID, float alpha)
+void FabiEngine3D::billboardEntity_setTransparency(const string& ID, float transparency)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setAlpha(alpha);
+	_core->_billboardEntityManager.getEntity(ID)->setTransparency(transparency);
 }
 
 void FabiEngine3D::billboardEntity_setTextureRepeat(const string& ID, float repeat)

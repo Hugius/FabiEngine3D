@@ -278,9 +278,9 @@ const float ModelEntity::getEmissionIntensity(const string& partID) const
 	return _parts[_getPartIndex(partID)].emissionIntensity;
 }
 
-const float ModelEntity::getAlpha(const string& partID) const
+const float ModelEntity::getTransparency(const string& partID) const
 {
-	return _parts[_getPartIndex(partID)].alpha;
+	return _parts[_getPartIndex(partID)].transparency;
 }
 
 const float ModelEntity::getTextureRepeat(const string& partID) const

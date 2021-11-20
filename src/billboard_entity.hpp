@@ -54,7 +54,7 @@ public:
 	void increaseSpriteAnimationLoops();
 	void setLightness(float value);
 	void setColorInversion(float value);
-	void setAlpha(float value);
+	void setTransparency(float value);
 	void setMinHeight(float value);
 	void setMaxHeight(float value);
 	void setTextureRepeat(float value);
@@ -78,7 +78,7 @@ public:
 	// Decimals
 	const float getLightness() const;
 	const float getColorInversion() const;
-	const float getAlpha() const;
+	const float getTransparency() const;
 	const float getMinHeight() const;
 	const float getMaxHeight() const;
 	const float getTextureRepeat() const;
@@ -141,7 +141,7 @@ private:
 	float _sizeTargetSpeed = 0.0f;
 	float _lightness = 1.0f;
 	float _colorInversion = 0.0f;
-	float _alpha = 1.0f;
+	float _transparency = 1.0f;
 	float _minHeight = -(numeric_limits<float>::max)();
 	float _maxHeight = (numeric_limits<float>::max)();
 

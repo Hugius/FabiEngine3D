@@ -493,7 +493,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_set_alpha")
+	else if(functionName == "fe3d:model_set_transparency")
 	{
 		auto types = { SVT::STRING, SVT::STRING, SVT::DECIMAL };
 
@@ -503,10 +503,10 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				// Set alpha
+				// Set transparency
 				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
 				{
-					_fe3d.modelEntity_setAlpha(arguments[0].getString(), partID, arguments[2].getDecimal());
+					_fe3d.modelEntity_setTransparency(arguments[0].getString(), partID, arguments[2].getDecimal());
 				}
 
 				// Return

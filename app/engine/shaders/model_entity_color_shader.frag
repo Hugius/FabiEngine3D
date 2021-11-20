@@ -50,8 +50,8 @@ uniform float u_ambientLightingIntensity;
 uniform float u_directionalLightingIntensity;
 uniform float u_specularShininess;
 uniform float u_specularIntensity;
-uniform float u_alpha;
-uniform float u_minTextureAlpha;
+uniform float u_transparency;
+uniform float u_minTextureTransparency;
 uniform float u_colorInversion;
 uniform float u_shadowAreaSize;
 uniform float u_fogMinDistance;
@@ -170,7 +170,7 @@ void main()
     primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
 
 	// Set final colors
-	o_primaryColor = vec4(primaryColor, u_alpha);
+	o_primaryColor = vec4(primaryColor, u_transparency);
 	o_secondaryColor = vec4((isBright ? primaryColor : vec3(0.0f)), 1.0f);
 }
 
@@ -183,7 +183,7 @@ vec3 calculateDiffuseMapping()
 		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
 
 		// Check if transparent
-		if (diffuseMapColor.a < u_minTextureAlpha)
+		if (diffuseMapColor.a < u_minTextureTransparency)
 		{
 			discard;
 		}
@@ -205,7 +205,7 @@ vec3 calculateEmissionMapping()
 		vec4 emissionMapColor = texture(u_emissionMap, f_uv);
 
 		// Check if transparent
-		if (emissionMapColor.a < u_minTextureAlpha)
+		if (emissionMapColor.a < u_minTextureTransparency)
 		{
 			return vec3(0.0f);
 		}
@@ -227,7 +227,7 @@ vec3 calculateSpecularMapping()
 		vec4 specularMapColor = texture(u_specularMap, f_uv);
 
 		// Check if transparent
-		if (specularMapColor.a < u_minTextureAlpha)
+		if (specularMapColor.a < u_minTextureTransparency)
 		{
 			return vec3(0.0f);
 		}
@@ -249,7 +249,7 @@ vec3 calculateReflectionMapping()
 		vec4 reflectionMapColor = texture(u_reflectionMap, f_uv);
 
 		// Check if transparent
-		if (reflectionMapColor.a < u_minTextureAlpha)
+		if (reflectionMapColor.a < u_minTextureTransparency)
 		{
 			return vec3(0.0f);
 		}
@@ -517,10 +517,10 @@ float calculateShadows()
 			}
 
 			// Long-distance shadows fading
-			float alpha = (fragmentDistance - (halfSize * 0.9f)); // Only for the outer 10% of the shadowed area
-			alpha = clamp(alpha, 0.0f, halfSize * 0.1f); // Cannot be negative
-			alpha = clamp(alpha, 0.0f, halfSize * 0.1f); // Cannot be negative
-			alpha /= (halfSize * 0.1f); // Convert value to 0.0 - 1.0 range
+			float transparency = (fragmentDistance - (halfSize * 0.9f)); // Only for the outer 10% of the shadowed area
+			transparency = clamp(transparency, 0.0f, halfSize * 0.1f); // Cannot be negative
+			transparency = clamp(transparency, 0.0f, halfSize * 0.1f); // Cannot be negative
+			transparency /= (halfSize * 0.1f); // Convert value to 0.0 - 1.0 range
 
 			// Debug area frame rendering
 			if (u_isShadowFrameRenderEnabled)
@@ -532,7 +532,7 @@ float calculateShadows()
 			}
 
 			// Return
-			return mix(shadow, 1.0f, alpha);
+			return mix(shadow, 1.0f, transparency);
 		}
 
 		// No shadow

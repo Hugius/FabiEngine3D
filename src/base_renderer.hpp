@@ -14,7 +14,7 @@ public:
 
 protected:
 	// Decimals
-	static inline const float MIN_TEXTURE_ALPHA = 0.25f;
+	static inline const float MIN_TEXTURE_TRANSPARENCY = 0.25f;
 
 	// Miscellaneous
 	ShaderBuffer _shader;

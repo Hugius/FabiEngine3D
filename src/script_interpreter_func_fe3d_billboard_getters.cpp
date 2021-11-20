@@ -125,7 +125,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_alpha")
+	else if(functionName == "fe3d:billboard_get_transparency")
 	{
 		auto types = { SVT::STRING };
 
@@ -135,7 +135,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.billboardEntity_getAlpha(arguments[0].getString());
+				auto result = _fe3d.billboardEntity_getTransparency(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}

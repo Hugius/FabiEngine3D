@@ -100,19 +100,19 @@ const unsigned int BillboardEntity::getPassedSpriteAnimationFrames() const
 	return _passedSpriteAnimationFrames;
 }
 
-const unsigned int BillboardEntity::getMaxSpriteAnimationFramestep() const
+const unsigned int BillboardEntity::getSpriteAnimationFramestep() const
 {
-	return _maxSpriteAnimationFramestep;
+	return _spriteAnimationFramestep;
 }
 
-const unsigned int BillboardEntity::getTotalSpriteAnimationRows() const
+const unsigned int BillboardEntity::getTotalSpriteAnimationRowCount() const
 {
-	return _totalSpriteAnimationRows;
+	return _totalSpriteAnimationRowCount;
 }
 
-const unsigned int BillboardEntity::getTotalSpriteAnimationColumns() const
+const unsigned int BillboardEntity::getTotalSpriteAnimationColumnCount() const
 {
-	return _totalSpriteAnimationColumns;
+	return _totalSpriteAnimationColumnCount;
 }
 
 const unsigned int BillboardEntity::getSpriteAnimationRowIndex() const

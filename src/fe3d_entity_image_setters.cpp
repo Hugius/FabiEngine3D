@@ -162,19 +162,19 @@ void FabiEngine3D::imageEntity_stopSpriteAnimation(const string& ID)
 	entity->stopSpriteAnimationAnimation();
 }
 
-void FabiEngine3D::imageEntity_setSpriteAnimationRows(const string& ID, int rows)
+void FabiEngine3D::imageEntity_setSpriteAnimationRowCount(const string& ID, int count)
 {
-	_core->_imageEntityManager.getEntity(ID)->setTotalSpriteAnimationRows(rows);
+	_core->_imageEntityManager.getEntity(ID)->setTotalSpriteAnimationRowCount(count);
 }
 
-void FabiEngine3D::imageEntity_setSpriteAnimationColumns(const string& ID, int columns)
+void FabiEngine3D::imageEntity_setSpriteAnimationColumnCount(const string& ID, int count)
 {
-	_core->_imageEntityManager.getEntity(ID)->setTotalSpriteAnimationColumns(columns);
+	_core->_imageEntityManager.getEntity(ID)->setTotalSpriteAnimationColumnCount(count);
 }
 
 void FabiEngine3D::imageEntity_setSpriteAnimationFramestep(const string& ID, int framestep)
 {
-	_core->_imageEntityManager.getEntity(ID)->setMaxSpriteAnimationFramestep(framestep);
+	_core->_imageEntityManager.getEntity(ID)->setSpriteAnimationFramestep(framestep);
 }
 
 void FabiEngine3D::imageEntity_setSpriteAnimationRowIndex(const string& ID, unsigned int index)

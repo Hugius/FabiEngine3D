@@ -40,9 +40,9 @@ public:
 	void stopSpriteAnimationAnimation();
 	void setSpriteAnimationRowIndex(unsigned int value);
 	void setSpriteAnimationColumnIndex(unsigned int value);
-	void setTotalSpriteAnimationRows(unsigned int value);
-	void setTotalSpriteAnimationColumns(unsigned int value);
-	void setMaxSpriteAnimationFramestep(unsigned int value);
+	void setTotalSpriteAnimationRowCount(unsigned int value);
+	void setTotalSpriteAnimationColumnCount(unsigned int value);
+	void setSpriteAnimationFramestep(unsigned int value);
 	void increasePassedSpriteAnimationFrames();
 	void resetPassedSpriteAnimationFrames();
 	void increaseSpriteAnimationLoops();
@@ -69,9 +69,9 @@ public:
 	// Integers
 	const int getMaxSpriteAnimationLoops() const;
 	const unsigned int getPassedSpriteAnimationFrames() const;
-	const unsigned int getMaxSpriteAnimationFramestep() const;
-	const unsigned int getTotalSpriteAnimationRows() const;
-	const unsigned int getTotalSpriteAnimationColumns() const;
+	const unsigned int getSpriteAnimationFramestep() const;
+	const unsigned int getTotalSpriteAnimationRowCount() const;
+	const unsigned int getTotalSpriteAnimationColumnCount() const;
 	const unsigned int getSpriteAnimationRowIndex() const;
 	const unsigned int getSpriteAnimationColumnIndex() const;
 	const unsigned int getSpriteAnimationLoops() const;
@@ -117,10 +117,10 @@ private:
 
 	// Integers
 	int _maxSpriteAnimationLoops = 0;
-	unsigned int _maxSpriteAnimationFramestep = 0;
+	unsigned int _spriteAnimationFramestep = 0;
 	unsigned int _passedSpriteAnimationFrames = 0;
-	unsigned int _totalSpriteAnimationRows = 0;
-	unsigned int _totalSpriteAnimationColumns = 0;
+	unsigned int _totalSpriteAnimationRowCount = 0;
+	unsigned int _totalSpriteAnimationColumnCount = 0;
 	unsigned int _spriteAnimationRowIndex = 0;
 	unsigned int _spriteAnimationColumnIndex = 0;
 	unsigned int _spriteAnimationLoops = 0;

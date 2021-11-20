@@ -298,19 +298,19 @@ void FabiEngine3D::billboardEntity_stopSpriteAnimation(const string& ID)
 	entity->stopSpriteAnimation();
 }
 
-void FabiEngine3D::billboardEntity_setSpriteAnimationRows(const string& ID, unsigned int rows)
+void FabiEngine3D::billboardEntity_setSpriteAnimationRowCount(const string& ID, unsigned int count)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setTotalSpriteAnimationRows(rows);
+	_core->_billboardEntityManager.getEntity(ID)->setTotalSpriteAnimationRowCount(count);
 }
 
-void FabiEngine3D::billboardEntity_setSpriteAnimationColumns(const string& ID, unsigned int columns)
+void FabiEngine3D::billboardEntity_setSpriteAnimationColumnCount(const string& ID, unsigned int count)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setTotalSpriteAnimationColumns(columns);
+	_core->_billboardEntityManager.getEntity(ID)->setTotalSpriteAnimationColumnCount(count);
 }
 
 void FabiEngine3D::billboardEntity_setSpriteAnimationFramestep(const string& ID, unsigned int framestep)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setMaxSpriteAnimationFramestep(framestep);
+	_core->_billboardEntityManager.getEntity(ID)->setSpriteAnimationFramestep(framestep);
 }
 
 void FabiEngine3D::billboardEntity_setSpriteAnimationRowIndex(const string& ID, unsigned int index)

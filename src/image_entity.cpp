@@ -241,19 +241,19 @@ void ImageEntity::setSpriteAnimationColumnIndex(unsigned int value)
 	_spriteAnimationColumnIndex = value;
 }
 
-void ImageEntity::setTotalSpriteAnimationRows(unsigned int value)
+void ImageEntity::setTotalSpriteAnimationRowCount(unsigned int value)
 {
-	_totalSpriteAnimationRows = value;
+	_totalSpriteAnimationRowCount = value;
 }
 
-void ImageEntity::setTotalSpriteAnimationColumns(unsigned int value)
+void ImageEntity::setTotalSpriteAnimationColumnCount(unsigned int value)
 {
-	_totalSpriteAnimationColumns = value;
+	_totalSpriteAnimationColumnCount = value;
 }
 
-void ImageEntity::setMaxSpriteAnimationFramestep(unsigned int value)
+void ImageEntity::setSpriteAnimationFramestep(unsigned int value)
 {
-	_maxSpriteAnimationFramestep = value;
+	_spriteAnimationFramestep = value;
 }
 
 void ImageEntity::increasePassedSpriteAnimationFrames()
@@ -291,19 +291,19 @@ const unsigned int ImageEntity::getPassedSpriteAnimationFrames() const
 	return _passedSpriteAnimationFrames;
 }
 
-const unsigned int ImageEntity::getMaxSpriteAnimationFramestep() const
+const unsigned int ImageEntity::getSpriteAnimationFramestep() const
 {
-	return _maxSpriteAnimationFramestep;
+	return _spriteAnimationFramestep;
 }
 
-const unsigned int ImageEntity::getTotalSpriteAnimationRows() const
+const unsigned int ImageEntity::getTotalSpriteAnimationRowCount() const
 {
-	return _totalSpriteAnimationRows;
+	return _totalSpriteAnimationRowCount;
 }
 
-const unsigned int ImageEntity::getTotalSpriteAnimationColumns() const
+const unsigned int ImageEntity::getTotalSpriteAnimationColumnCount() const
 {
-	return _totalSpriteAnimationColumns;
+	return _totalSpriteAnimationColumnCount;
 }
 
 const unsigned int ImageEntity::getSpriteAnimationRowIndex() const

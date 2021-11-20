@@ -51,45 +51,36 @@ void ImageEntityManager::update(bool isEnginePaused)
 		// Update sprite animation
 		if(!isEnginePaused)
 		{
-			// Animation is playing
-			if(entity->isSpriteAnimationStarted() && !entity->isSpriteAnimationPaused())
+			// Update sprite animations
+			if(entity->isSpriteAnimationStarted() && !entity->isSpriteAnimationPaused() &&
+			   (entity->getSpriteAnimationLoops() != entity->getMaxSpriteAnimationLoops()))
 			{
-				// Amount of loops not reached yet
-				if(entity->getSpriteAnimationLoops() != entity->getMaxSpriteAnimationLoops())
+				if(entity->getPassedSpriteAnimationFrames() >= entity->getSpriteAnimationFramestep()) // Is allowed to update
 				{
-					// Animation not finished yet
-					if(entity->getPassedSpriteAnimationFrames() >= entity->getMaxSpriteAnimationFramestep())
+					entity->resetPassedSpriteAnimationFrames(); // Reset counter
+
+					if(entity->getSpriteAnimationColumnIndex() >= entity->getTotalSpriteAnimationColumnCount() - 1) // Reached column count
 					{
-						// Reset frame counter
-						entity->resetPassedSpriteAnimationFrames();
+						entity->setSpriteAnimationColumnIndex(0); // Reset column index
 
-						// Reached total columns
-						if(entity->getSpriteAnimationColumnIndex() >= (entity->getTotalSpriteAnimationColumns() - 1))
+						if(entity->getSpriteAnimationRowIndex() >= entity->getTotalSpriteAnimationRowCount() - 1) // Reached row count
 						{
-							// Reset column index
-							entity->setSpriteAnimationColumnIndex(0);
-
-							// Reached total rows
-							if(entity->getSpriteAnimationRowIndex() >= (entity->getTotalSpriteAnimationRows() - 1))
-							{
-								// Reset row index (animation finished)
-								entity->setSpriteAnimationRowIndex(0);
-								entity->increaseSpriteAnimationLoops();
-							}
-							else // Next row
-							{
-								entity->setSpriteAnimationRowIndex(entity->getSpriteAnimationRowIndex() + 1);
-							}
+							entity->increaseSpriteAnimationLoops();
+							entity->setSpriteAnimationRowIndex(0); // Reset row index (animation finished)
 						}
-						else // Next column
+						else // Next row
 						{
-							entity->setSpriteAnimationColumnIndex(entity->getSpriteAnimationColumnIndex() + 1);
+							entity->setSpriteAnimationRowIndex(entity->getSpriteAnimationRowIndex() + 1);
 						}
 					}
-					else // Increase frame counter
+					else // Next column
 					{
-						entity->increasePassedSpriteAnimationFrames();
+						entity->setSpriteAnimationColumnIndex(entity->getSpriteAnimationColumnIndex() + 1);
 					}
+				}
+				else // Increase counter
+				{
+					entity->increasePassedSpriteAnimationFrames();
 				}
 			}
 		}

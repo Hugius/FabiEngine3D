@@ -39,8 +39,8 @@ const bool BillboardEditor::saveBillboardEntitiesToFile() const
 		auto isReflected = _fe3d.billboardEntity_isReflected(billboardID);
 		auto isShadowed = _fe3d.billboardEntity_isShadowed(billboardID);
 		auto isAnimationStarted = _fe3d.billboardEntity_isSpriteAnimationStarted(billboardID);
-		auto animationRows = _fe3d.billboardEntity_getSpriteAnimationRows(billboardID);
-		auto animationColumns = _fe3d.billboardEntity_getSpriteAnimationColumns(billboardID);
+		auto animationRowCount = _fe3d.billboardEntity_getSpriteAnimationRowCount(billboardID);
+		auto animationColumnCount = _fe3d.billboardEntity_getSpriteAnimationColumnCount(billboardID);
 		auto animationFramestep = _fe3d.billboardEntity_getSpriteAnimationFramestep(billboardID);
 		auto lightness = _fe3d.billboardEntity_getLightness(billboardID);
 		auto textureRepeat = _fe3d.billboardEntity_getTextureRepeat(billboardID);
@@ -79,8 +79,8 @@ const bool BillboardEditor::saveBillboardEntitiesToFile() const
 			fontPath << " " <<
 			textContent << " " <<
 			isAnimationStarted << " " <<
-			animationRows << " " <<
-			animationColumns << " " <<
+			animationRowCount << " " <<
+			animationColumnCount << " " <<
 			animationFramestep << " " <<
 			lightness << " " <<
 			textureRepeat << endl;

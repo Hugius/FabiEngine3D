@@ -9,8 +9,8 @@ void BillboardEditor::_updateAnimationMenu()
 	if(screen->getID() == "billboardEditorMenuAnimation")
 	{
 		// Temporary values
-		auto animationRowCount = _fe3d.billboardEntity_getSpriteAnimationRows(_currentBillboardID);
-		auto animationColumnCount = _fe3d.billboardEntity_getSpriteAnimationColumns(_currentBillboardID);
+		auto animationRowCount = _fe3d.billboardEntity_getSpriteAnimationRowCount(_currentBillboardID);
+		auto animationColumnCount = _fe3d.billboardEntity_getSpriteAnimationColumnCount(_currentBillboardID);
 		auto animationFramestep = _fe3d.billboardEntity_getSpriteAnimationFramestep(_currentBillboardID);
 		auto isPlaying = _fe3d.billboardEntity_isSpriteAnimationPlaying(_currentBillboardID);
 
@@ -54,8 +54,8 @@ void BillboardEditor::_updateAnimationMenu()
 		screen->getButton("animate")->setHoverable(!isPlaying && (animationRowCount != 0) && (animationColumnCount != 0));
 
 		// Update animation values
-		_fe3d.billboardEntity_setSpriteAnimationRows(_currentBillboardID, animationRowCount);
-		_fe3d.billboardEntity_setSpriteAnimationColumns(_currentBillboardID, animationColumnCount);
+		_fe3d.billboardEntity_setSpriteAnimationRowCount(_currentBillboardID, animationRowCount);
+		_fe3d.billboardEntity_setSpriteAnimationColumnCount(_currentBillboardID, animationColumnCount);
 		_fe3d.billboardEntity_setSpriteAnimationFramestep(_currentBillboardID, animationFramestep);
 	}
 }

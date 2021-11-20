@@ -306,19 +306,19 @@ void BillboardEntity::setSpriteAnimationColumnIndex(unsigned int value)
 	_spriteAnimationColumnIndex = value;
 }
 
-void BillboardEntity::setTotalSpriteAnimationRows(unsigned int value)
+void BillboardEntity::setTotalSpriteAnimationRowCount(unsigned int value)
 {
-	_totalSpriteAnimationRows = value;
+	_totalSpriteAnimationRowCount = value;
 }
 
-void BillboardEntity::setTotalSpriteAnimationColumns(unsigned int value)
+void BillboardEntity::setTotalSpriteAnimationColumnCount(unsigned int value)
 {
-	_totalSpriteAnimationColumns = value;
+	_totalSpriteAnimationColumnCount = value;
 }
 
-void BillboardEntity::setMaxSpriteAnimationFramestep(unsigned int value)
+void BillboardEntity::setSpriteAnimationFramestep(unsigned int value)
 {
-	_maxSpriteAnimationFramestep = value;
+	_spriteAnimationFramestep = value;
 }
 
 void BillboardEntity::increasePassedSpriteAnimationFrames()

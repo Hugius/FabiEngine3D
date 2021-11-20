@@ -40,7 +40,7 @@
   - Constraints: none
 - **Rotation**: the XYZ rotation of the mesh
   - Constraints: between `0.0` and `360.0`
-- **Rotation Origin**: the XYZ position that the model rotates around
+- **Rotation Origin**: the XYZ position that the mesh rotates around
   - Constraints: none
 - **Size**: the XYZ size multiplier of the mesh
   - Constraints: at least `0.0`
@@ -52,26 +52,26 @@
   - Constraints: at least `0.0`
 - **LOD Size**: the XYZ size multiplier of the LOD entity mesh
   - Constraints: at least `0.0`
-- **Color**: the RGB color of the mesh
+- **Color**: the RGB color multiplier of the fragments
   - Constraints: between `0.0` and `1.0`
 
 ### 3.3 `decimal`
 
 - **Texture Repeat**: the amount of times the textures are repeated
   - Constraints: at least `0.0`
-- **Lightness**: the brightness of the mesh
+- **Lightness**: the lightness multiplier of the mesh
   - Constraints: at least `0.0`
 - **Specular Shininess**: the shininess of the specular lighting
   - Constraints: at least `0.0`
 - **Specular Intensity**: the intensity of the specular lighting
   - Constraints: at least `0.0`
-- **Reflectivity**: the percentage of how reflective the model is
+- **Reflectivity**: the percentage of how reflective the mesh is
   - Constraints: between `0.0` and `1.0`
 - **Min Height**: WIP
   - Constraints: between `WIP` and `WIP`
 - **Max Height**: WIP
   - Constraints: between `WIP` and `WIP`
-- **Transparency**: the transparency of the mesh
+- **Transparency**: the transparency of the fragments
   - Constraints: between `0.0` and `1.0`
 - **Color Inversion**: NOT SURE IF WE NEED TO KEEP IT
   - Constraints: at least `0.0`
@@ -86,9 +86,9 @@
 
 ### 3.4 `boolean`
 
-- **Specular**: specular lighting is rendered on the model
+- **Specular**: specular lighting is rendered on the mesh
   - Constraints: none
-- **Reflective**: the mesh is reflective
+- **Reflective**: cube/planar reflections are rendered on the mesh
   - Constraints: none
 - **Instanced**: the mesh is rendered using instanced rendering (disables AABBs)
   - Constraints: none
@@ -107,7 +107,7 @@
 
 ### 3.5 `enumeration`
 
-- **Reflection Type**: the type of reflection rendering
+- **Reflection Type**: the type of reflection
   - Constraints: `CUBE` or `PLANAR`
-- **Rotation Order**: the order of directions in which the model is rotated
+- **Rotation Order**: the order of directions in which the mesh is rotated
   - Constraints: `XYZ` or `XZY` or `YXZ` or `YZX` or `ZXY` or `ZYX`

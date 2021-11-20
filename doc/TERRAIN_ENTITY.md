@@ -16,37 +16,37 @@
 
 ### 3.1 `string`
 
-- **Height Map Path**: the path of the height map file.
+- **Height Map Path**: the path of the height map file
   - Constraints: none
-- **Blend Map Path**: the path of the blend map file.
+- **Blend Map Path**: the path of the blend map file
   - Constraints: none
-- **Diffuse Map Path**: the path of the diffuse map file.
+- **Diffuse Map Path**: the path of the diffuse map file
   - Constraints: none
-- **Normal Map Path**: the path of the normal map file.
+- **Normal Map Path**: the path of the normal map file
   - Constraints: none
 
 ### 3.2 `decimal`
 
-- **Max Height**: the maximum height of the terrain, which is calculated based on the height map pixel intensities.
+- **Max Height**: the maximum height of the mesh
   - Constraints: at least `0.0`
-- **Lightness**: the brightness of the terrain fragments.
+- **Lightness**: the lightness multiplier of the fragments
   - Constraints: at least `0.0`
-- **Specular Shininess**: the shininess of the specular lighting.
+- **Specular Shininess**: the shininess of the specular lighting
   - Constraints: at least `0.0`
-- **Specular Intensity**: the intensity of the specular lighting.
+- **Specular Intensity**: the intensity of the specular lighting
   - Constraints: at least `0.0`
-- **Texture Repeat**: the amount of times the base textures are repeated.
+- **Texture Repeat**: the amount of times the base textures are repeated
   - Constraints: at least `0.0`
-- **Red Repeat**: the amount of times the textures of the red blend map channel are repeated.
+- **Red Repeat**: the amount of times the textures of the red blend map channel are repeated
   - Constraints: at least `0.0`
-- **Green Repeat**: the amount of times the textures of the green blend map channel are repeated.
+- **Green Repeat**: the amount of times the textures of the green blend map channel are repeated
   - Constraints: at least `0.0`
-- **Blue Repeat**: the amount of times the textures of the blue blend map channel are repeated.
+- **Blue Repeat**: the amount of times the textures of the blue blend map channel are repeated
   - Constraints: at least `0.0`
 
 ### 3.3 `boolean`
 
-- **Specular**: specular lighting is rendered on the terrain.
+- **Specular**: specular lighting is rendered on the mesh
   - Constraints: none
-- **Wireframed**: the mesh is rendered as a wireframe.
+- **Wireframed**: the mesh is rendered as a wireframe
   - Constraints: none

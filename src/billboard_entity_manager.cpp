@@ -88,15 +88,15 @@ void BillboardEntityManager::update()
 			if(entity->isSpriteAnimationStarted() && !entity->isSpriteAnimationPaused() &&
 			   (entity->getSpriteAnimationLoops() != entity->getMaxSpriteAnimationLoops()))
 			{
-				if(entity->getPassedSpriteAnimationFrames() >= entity->getMaxSpriteAnimationFramestep()) // Is allowed to update
+				if(entity->getPassedSpriteAnimationFrames() >= entity->getSpriteAnimationFramestep()) // Is allowed to update
 				{
 					entity->resetPassedSpriteAnimationFrames(); // Reset counter
 
-					if(entity->getSpriteAnimationColumnIndex() >= entity->getTotalSpriteAnimationColumns() - 1) // Reached total columns
+					if(entity->getSpriteAnimationColumnIndex() >= entity->getTotalSpriteAnimationColumnCount() - 1) // Reached column count
 					{
 						entity->setSpriteAnimationColumnIndex(0); // Reset column index
 
-						if(entity->getSpriteAnimationRowIndex() >= entity->getTotalSpriteAnimationRows() - 1) // Reached total rows
+						if(entity->getSpriteAnimationRowIndex() >= entity->getTotalSpriteAnimationRowCount() - 1) // Reached row count
 						{
 							entity->increaseSpriteAnimationLoops();
 							entity->setSpriteAnimationRowIndex(0); // Reset row index (animation finished)

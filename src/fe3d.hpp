@@ -357,11 +357,11 @@ public:
 	void billboardEntity_setTextureRepeat(const string& ID, float repeat);
 	void billboardEntity_setEmissionIntensity(const string& ID, float intensity);
 	void billboardEntity_startSpriteAnimation(const string& ID, int loops);
-	void billboardEntity_setSpriteAnimationRows(const string& ID, unsigned int rows);
-	void billboardEntity_setSpriteAnimationColumns(const string& ID, unsigned int columns);
-	void billboardEntity_setSpriteAnimationFramestep(const string& ID, unsigned int framestep);
+	void billboardEntity_setSpriteAnimationRowCount(const string& ID, unsigned int count);
+	void billboardEntity_setSpriteAnimationColumnCount(const string& ID, unsigned int count);
 	void billboardEntity_setSpriteAnimationRowIndex(const string& ID, unsigned int index);
 	void billboardEntity_setSpriteAnimationColumnIndex(const string& ID, unsigned int index);
+	void billboardEntity_setSpriteAnimationFramestep(const string& ID, unsigned int framestep);
 	void billboardEntity_setVisible(const string& ID, bool isVisible);
 	void billboardEntity_setCameraFacingX(const string& ID, bool enabled);
 	void billboardEntity_setCameraFacingY(const string& ID, bool enabled);
@@ -389,11 +389,11 @@ public:
 	const float billboardEntity_getTextureRepeat(const string& ID) const;
 	const float billboardEntity_getEmissionIntensity(const string& ID) const;
 	const int billboardEntity_getRemainingSpriteAnimationLoops(const string& ID) const;
-	const unsigned int billboardEntity_getSpriteAnimationRows(const string& ID) const;
-	const unsigned int billboardEntity_getSpriteAnimationColumns(const string& ID) const;
-	const unsigned int billboardEntity_getSpriteAnimationFramestep(const string& ID) const;
+	const unsigned int billboardEntity_getSpriteAnimationRowCount(const string& ID) const;
+	const unsigned int billboardEntity_getSpriteAnimationColumnCount(const string& ID) const;
 	const unsigned int billboardEntity_getSpriteAnimationRowIndex(const string& ID) const;
 	const unsigned int billboardEntity_getSpriteAnimationColumnIndex(const string& ID) const;
+	const unsigned int billboardEntity_getSpriteAnimationFramestep(const string& ID) const;
 	const bool billboardEntity_isExisting(const string& ID) const;
 	const bool billboardEntity_isVisible(const string& ID) const;
 	const bool billboardEntity_isFacingCameraX(const string& ID) const;
@@ -533,11 +533,11 @@ public:
 	void imageEntity_pauseSpriteAnimation(const string& ID);
 	void imageEntity_resumeSpriteAnimation(const string& ID);
 	void imageEntity_stopSpriteAnimation(const string& ID);
-	void imageEntity_setSpriteAnimationRows(const string& ID, int rows);
-	void imageEntity_setSpriteAnimationColumns(const string& ID, int columns);
-	void imageEntity_setSpriteAnimationFramestep(const string& ID, int framestep);
+	void imageEntity_setSpriteAnimationRowCount(const string& ID, int count);
+	void imageEntity_setSpriteAnimationColumnCount(const string& ID, int count);
 	void imageEntity_setSpriteAnimationRowIndex(const string& ID, unsigned int index);
 	void imageEntity_setSpriteAnimationColumnIndex(const string& ID, unsigned int index);
+	void imageEntity_setSpriteAnimationFramestep(const string& ID, int framestep);
 
 	// Image entity interface - getters
 	const vector<string> imageEntity_getAllIDs() const;
@@ -550,11 +550,11 @@ public:
 	const float imageEntity_getRotation(const string& ID) const;
 	const float imageEntity_getTransparency(const string& ID) const;
 	const int imageEntity_getRemainingSpriteAnimationLoops(const string& ID) const;
-	const unsigned int imageEntity_getSpriteAnimationRows(const string& ID) const;
-	const unsigned int imageEntity_getSpriteAnimationColumns(const string& ID) const;
-	const unsigned int imageEntity_getSpriteAnimationFramestep(const string& ID) const;
+	const unsigned int imageEntity_getSpriteAnimationRowCount(const string& ID) const;
+	const unsigned int imageEntity_getSpriteAnimationColumnCount(const string& ID) const;
 	const unsigned int imageEntity_getSpriteAnimationRowIndex(const string& ID) const;
 	const unsigned int imageEntity_getSpriteAnimationColumnIndex(const string& ID) const;
+	const unsigned int imageEntity_getSpriteAnimationFramestep(const string& ID) const;
 	const bool imageEntity_isExisting(const string& ID) const;
 	const bool imageEntity_isVisible(const string& ID) const;
 	const bool imageEntity_isCentered(const string& ID) const;

@@ -106,19 +106,19 @@ const bool FabiEngine3D::imageEntity_isMirroredVertically(const string& ID) cons
 	return _core->_imageEntityManager.getEntity(ID)->isMirroredVertically();
 }
 
-const unsigned int FabiEngine3D::imageEntity_getSpriteAnimationRows(const string& ID) const
+const unsigned int FabiEngine3D::imageEntity_getSpriteAnimationRowCount(const string& ID) const
 {
-	return _core->_imageEntityManager.getEntity(ID)->getTotalSpriteAnimationRows();
+	return _core->_imageEntityManager.getEntity(ID)->getTotalSpriteAnimationRowCount();
 }
 
-const unsigned int FabiEngine3D::imageEntity_getSpriteAnimationColumns(const string& ID) const
+const unsigned int FabiEngine3D::imageEntity_getSpriteAnimationColumnCount(const string& ID) const
 {
-	return _core->_imageEntityManager.getEntity(ID)->getTotalSpriteAnimationColumns();
+	return _core->_imageEntityManager.getEntity(ID)->getTotalSpriteAnimationColumnCount();
 }
 
 const unsigned int FabiEngine3D::imageEntity_getSpriteAnimationFramestep(const string& ID) const
 {
-	return _core->_imageEntityManager.getEntity(ID)->getMaxSpriteAnimationFramestep();
+	return _core->_imageEntityManager.getEntity(ID)->getSpriteAnimationFramestep();
 }
 
 const unsigned int FabiEngine3D::imageEntity_getSpriteAnimationRowIndex(const string& ID) const

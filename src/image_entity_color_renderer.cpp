@@ -41,13 +41,13 @@ void ImageEntityColorRenderer::render(const shared_ptr<ImageEntity> entity)
 		if(entity->isSpriteAnimationStarted())
 		{
 			// Retrieve values
-			const auto totalColumns = entity->getTotalSpriteAnimationColumns();
-			const auto totalRows = entity->getTotalSpriteAnimationRows();
-			const auto columnIndex = entity->getSpriteAnimationColumnIndex();
+			const auto rowCount = entity->getTotalSpriteAnimationRowCount();
+			const auto columnCount = entity->getTotalSpriteAnimationColumnCount();
 			const auto rowIndex = entity->getSpriteAnimationRowIndex();
+			const auto columnIndex = entity->getSpriteAnimationColumnIndex();
 
 			// Apply values
-			uvMultiplier = Vec2(1.0f / static_cast<float>(totalColumns), 1.0f / static_cast<float>(totalRows));
+			uvMultiplier = Vec2(1.0f / static_cast<float>(columnCount), 1.0f / static_cast<float>(rowCount));
 			uvAdder = Vec2(static_cast<float>(columnIndex) * uvMultiplier.x, static_cast<float>(rowIndex) * uvMultiplier.y);
 		}
 

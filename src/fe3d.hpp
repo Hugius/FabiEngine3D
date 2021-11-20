@@ -63,13 +63,13 @@ public:
 	void skyEntity_selectMainSky(const string& ID);
 	void skyEntity_selectMixSky(const string& ID);
 	void skyEntity_setMixValue(float mixValue);
-	void skyEntity_setDiffuseMaps(const string& ID, const array<string, 6>& texturePaths);
-	void skyEntity_setDiffuseMapRight(const string& ID, const string& texturePath);
-	void skyEntity_setDiffuseMapLeft(const string& ID, const string& texturePath);
-	void skyEntity_setDiffuseMapTop(const string& ID, const string& texturePath);
-	void skyEntity_setDiffuseMapBottom(const string& ID, const string& texturePath);
-	void skyEntity_setDiffuseMapBack(const string& ID, const string& texturePath);
-	void skyEntity_setDiffuseMapFront(const string& ID, const string& texturePath);
+	void skyEntity_setCubeMaps(const string& ID, const array<string, 6>& texturePaths);
+	void skyEntity_setCubeMapRight(const string& ID, const string& texturePath);
+	void skyEntity_setCubeMapLeft(const string& ID, const string& texturePath);
+	void skyEntity_setCubeMapTop(const string& ID, const string& texturePath);
+	void skyEntity_setCubeMapBottom(const string& ID, const string& texturePath);
+	void skyEntity_setCubeMapBack(const string& ID, const string& texturePath);
+	void skyEntity_setCubeMapFront(const string& ID, const string& texturePath);
 	void skyEntity_setLightness(const string& ID, float lightness);
 	void skyEntity_setRotation(const string& ID, float rotation);
 	void skyEntity_setColor(const string& ID, Vec3 color);
@@ -77,7 +77,13 @@ public:
 
 	// Sky entity interface - getters
 	const vector<string> skyEntity_getAllIDs() const;
-	const array<string, 6>& skyEntity_getDiffuseMapPaths(const string& ID) const;
+	const array<string, 6>& skyEntity_getCubeMapPaths(const string& ID) const;
+	const string& skyEntity_getCubeMapRight(const string& ID) const;
+	const string& skyEntity_getCubeMapLeft(const string& ID) const;
+	const string& skyEntity_getCubeMapTop(const string& ID) const;
+	const string& skyEntity_getCubeMapBottom(const string& ID) const;
+	const string& skyEntity_getCubeMapBack(const string& ID) const;
+	const string& skyEntity_getCubeMapFront(const string& ID) const;
 	const string skyEntity_getSelectedID() const;
 	const string skyEntity_getMixID() const;
 	const Vec3 skyEntity_getColor(const string& ID) const;
@@ -88,12 +94,12 @@ public:
 	const bool skyEntity_isExisting(const string& ID) const;
 	const bool skyEntity_isVisible(const string& ID) const;
 	const bool skyEntity_isWireframed(const string& ID) const;
-	const bool skyEntity_hasDiffuseMapRight(const string& ID) const;
-	const bool skyEntity_hasDiffuseMapLeft(const string& ID) const;
-	const bool skyEntity_hasDiffuseMapTop(const string& ID) const;
-	const bool skyEntity_hasDiffuseMapBottom(const string& ID) const;
-	const bool skyEntity_hasDiffuseMapBack(const string& ID) const;
-	const bool skyEntity_hasDiffuseMapFront(const string& ID) const;
+	const bool skyEntity_hasCubeMapRight(const string& ID) const;
+	const bool skyEntity_hasCubeMapLeft(const string& ID) const;
+	const bool skyEntity_hasCubeMapTop(const string& ID) const;
+	const bool skyEntity_hasCubeMapBottom(const string& ID) const;
+	const bool skyEntity_hasCubeMapBack(const string& ID) const;
+	const bool skyEntity_hasCubeMapFront(const string& ID) const;
 
 	// Terrain entity interface - setters
 	void terrainEntity_create(const string& ID, const string& heightMapPath);

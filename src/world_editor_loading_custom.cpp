@@ -123,7 +123,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 			// Read ID from file
 			iss >> modelID;
 
-			// Check if LOD entitty
+			// Check if level of detail entitty
 			bool makeInvisible = (modelID[0] == '@');
 
 			// Read main data from file
@@ -271,7 +271,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 					_fe3d.modelEntity_enableInstancing(modelID, instancedOffsets);
 				}
 
-				// Hide model if LOD
+				// Make invisible
 				if(makeInvisible)
 				{
 					_fe3d.modelEntity_setVisible(modelID, false);

@@ -15,9 +15,9 @@ void SkyEntity::updateRotationMatrix()
 	_rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(_rotation));
 }
 
-void SkyEntity::setDiffuseMapPaths(const array<string, 6>& value)
+void SkyEntity::setCubeMapPaths(const array<string, 6>& value)
 {
-	_diffuseMapPaths = value;
+	_cubeMapPaths = value;
 }
 
 void SkyEntity::setColor(Vec3 value)
@@ -27,7 +27,7 @@ void SkyEntity::setColor(Vec3 value)
 
 void SkyEntity::setCubeMap(TextureID value)
 {
-	_diffuseMap = value;
+	_cubeMap = value;
 }
 
 void SkyEntity::setInitialLightness(float value)
@@ -55,9 +55,9 @@ const shared_ptr<RenderBuffer> SkyEntity::getRenderBuffer() const
 	return _renderBuffer;
 }
 
-const array<string, 6>& SkyEntity::getDiffuseMapPaths() const
+const array<string, 6>& SkyEntity::getCubeMapPaths() const
 {
-	return _diffuseMapPaths;
+	return _cubeMapPaths;
 }
 
 const Matrix44& SkyEntity::getRotationMatrix() const
@@ -70,9 +70,9 @@ const Vec3 SkyEntity::getColor() const
 	return _color;
 }
 
-const TextureID SkyEntity::getDiffuseMap() const
+const TextureID SkyEntity::getCubeMap() const
 {
-	return _diffuseMap;
+	return _cubeMap;
 }
 
 const float SkyEntity::getInitialLightness() const
@@ -92,7 +92,7 @@ const float SkyEntity::getRotation() const
 
 const bool SkyEntity::hasCubeMap() const
 {
-	return (_diffuseMap != 0);
+	return (_cubeMap != 0);
 }
 
 const bool SkyEntity::isWireframed() const

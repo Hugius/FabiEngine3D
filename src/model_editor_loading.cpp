@@ -118,7 +118,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 		if(lineType == "MODEL")
 		{
 			// Data placeholders
-			string modelID, meshPath, lodEntityID;
+			string modelID, meshPath, levelOfDetailEntityID;
 			unsigned int rotationOrder;
 			bool isInstanced, isFaceCulled;
 			Vec3 size;
@@ -130,7 +130,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 				size.x >>
 				size.y >>
 				size.z >>
-				lodEntityID >>
+				levelOfDetailEntityID >>
 				isInstanced >>
 				isFaceCulled >>
 				rotationOrder;
@@ -302,7 +302,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 		if(lineType == "MODEL")
 		{
 			// Data placeholders
-			string modelID, meshPath, lodEntityID;
+			string modelID, meshPath, levelOfDetailEntityID;
 			unsigned int rotationOrder;
 			bool isInstanced, isFaceCulled;
 			Vec3 size;
@@ -314,18 +314,18 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 				size.x >>
 				size.y >>
 				size.z >>
-				lodEntityID >>
+				levelOfDetailEntityID >>
 				isInstanced >>
 				isFaceCulled >>
 				rotationOrder;
 
 			// Convert empty string
 			meshPath = (meshPath == "?") ? "" : meshPath;
-			lodEntityID = (lodEntityID == "?") ? "" : lodEntityID;
+			levelOfDetailEntityID = (levelOfDetailEntityID == "?") ? "" : levelOfDetailEntityID;
 
 			// Convert spaces
 			replace(meshPath.begin(), meshPath.end(), '?', ' ');
-			replace(lodEntityID.begin(), lodEntityID.end(), '?', ' ');
+			replace(levelOfDetailEntityID.begin(), levelOfDetailEntityID.end(), '?', ' ');
 
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
@@ -351,7 +351,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 				// Set properties
 				_fe3d.modelEntity_setVisible(modelID, false);
 				_fe3d.modelEntity_setBaseSize(modelID, size);
-				_fe3d.modelEntity_setLevelOfDetailEntity(modelID, lodEntityID);
+				_fe3d.modelEntity_setLevelOfDetailEntity(modelID, levelOfDetailEntityID);
 				_fe3d.modelEntity_setFaceCulled(modelID, isFaceCulled);
 				_fe3d.modelEntity_setRotationOrder(modelID, DirectionOrder(rotationOrder));
 

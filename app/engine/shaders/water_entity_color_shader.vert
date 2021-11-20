@@ -16,7 +16,7 @@ uniform mat4 u_projectionMatrix;
 uniform vec2 u_waveOffset;
 
 // Float uniforms
-uniform float u_heightOffset;
+uniform float u_height;
 uniform float u_textureRepeat;
 uniform float u_waveHeight;
 
@@ -34,8 +34,8 @@ void main()
 	// Variable for position altering
 	vec3 newPosition = v_pos;
 
-	// Add dynamic position offset
-	newPosition += vec3(0.0f, u_heightOffset, 0.0f);
+	// Set height
+	newPosition.y = u_height;
 
 	// Pre-calculate UV out variable
 	f_uv = (v_uv * u_textureRepeat);

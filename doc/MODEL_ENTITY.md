@@ -17,78 +17,97 @@
 
 ## 3. Properties
 
-### 3.1 String
+### 3.1 `string`
 
-- **Level Of Detail**: the ID of another model entity representing the LOD version of the current model entity.
-  - Type: `string`
-  - Constraints: must exist
-- **Rotation**: the order of directions in which the model is rotated.
-  - Type: `string`
-  - Constraints: `XYZ` or `XZY` or `YXZ` or `YZX` or `ZXY` or `ZYX`
-
-### 3.2 Vector3
-
-- **Position**: the position of the mesh.
-  - Type: `vector3`
+- **Mesh Path**: the path of the mesh file
+  - Constraints: cannot be changed
+- **Diffuse Map Path**: the path of the diffuse map file
   - Constraints: none
-- **Rotation**: the rotation of the mesh.
-  - Type: `vector3`
+- **Emission Map Path**: the path of the emission map file
+  - Constraints: none
+- **Specular Map Path**: the path of the specular map file
+  - Constraints: none
+- **Reflection Map Path**: the path of the reflection map file
+  - Constraints: none
+- **Normal Map Path**: the path of the normal map file
+  - Constraints: none
+- **LOD Entity ID**: the ID of another model entity representing the LOD version of the current model entity
+  - Constraints: entity must exist
+
+### 3.2 `vector3`
+
+- **Position**: the XYZ position of the mesh
+  - Constraints: none
+- **Rotation**: the XYZ rotation of the mesh
   - Constraints: between `0.0` and `360.0`
-- **Rotation Origin**: the origin that the model rotates around.
-  - Type: `vector3`
+- **Rotation Origin**: the XYZ position that the model rotates around
   - Constraints: none
-- **Size**: size multiplier of the mesh.
-  - Type: `vector3`
+- **Size**: the XYZ size multiplier of the mesh
   - Constraints: at least `0.0`
-- **Color**: the RGB color of the mesh.
-  - Type: `vector3`
+- **Position Target**: the target XYZ position of the mesh
+  - Constraints: none
+- **Rotation Target**: the target XYZ rotation of the mesh
+  - Constraints: between `0.0` and `360.0`
+- **Size Target**: the target XYZ size multiplier of the mesh
+  - Constraints: at least `0.0`
+- **LOD Size**: the XYZ size multiplier of the LOD entity mesh
+  - Constraints: at least `0.0`
+- **Color**: the RGB color of the mesh
   - Constraints: between `0.0` and `1.0`
 
-### 3.3 Vector2
+### 3.3 `decimal`
 
-### 3.4 Decimal
-
-- **Texture Repeat**: the amount of times the textures are repeated.
-  - Type: `decimal`
+- **Texture Repeat**: the amount of times the textures are repeated
   - Constraints: at least `0.0`
-- **Lightness**: the brightness of the mesh.
-  - Type: `decimal`
+- **Lightness**: the brightness of the mesh
   - Constraints: at least `0.0`
-- **Specular Factor**: the shininess of the specular lighting.
-  - Type: `decimal`
+- **Specular Shininess**: the shininess of the specular lighting
   - Constraints: at least `0.0`
-- **Specular Intensity**: the intensity of the specular lighting.
-  - Type: `decimal`
+- **Specular Intensity**: the intensity of the specular lighting
   - Constraints: at least `0.0`
-- **Type**: the type of reflection that is rendered onto the model.
-  - Type: `decimal`
-  - Constraints: `CUBE` or `PLANAR`
-- **Reflectivity**: the percentage of how reflective the model is.
-  - Type: `decimal`
+- **Reflectivity**: the percentage of how reflective the model is
   - Constraints: between `0.0` and `1.0`
 - **Min Height**: WIP
-  - Type: `decimal`
   - Constraints: between `WIP` and `WIP`
 - **Max Height**: WIP
-  - Type: `decimal`
   - Constraints: between `WIP` and `WIP`
-- **Transparency**: the transparency of the mesh.
-  - Type: `decimal`
+- **Transparency**: the transparency of the mesh
   - Constraints: between `0.0` and `1.0`
+- **Color Inversion**: NOT SURE IF WE NEED TO KEEP IT
+  - Constraints: at least `0.0`
+- **Emission Intensity**: the intensity of the emission map
+  - Constraints: between `0.0` and `1.0`
+- **Position Target Speed**: the speed with which the mesh moves to the target position
+  - Constraints: at least `0.0`
+- **Rotation Target Speed**: the speed with which the mesh rotates to the target rotation
+  - Constraints: at least `0.0`
+- **Size Target Speed**: the speed with which the mesh scales to the target size
+  - Constraints: at least `0.0`
 
-### 3.5 Integer
+### 3.4 `boolean`
 
-### 3.6 Boolean
+- **Specular**: specular lighting is rendered on the model
+  - Constraints: none
+- **Reflective**: the mesh is reflective
+  - Constraints: none
+- **Instanced**: the mesh is rendered using instanced rendering (disables AABBs)
+  - Constraints: none
+- **Face Culled**: the mesh uses the face culling optimization
+  - Constraints: none
+- **Bright**: the mesh is bloomed?? WIP
+  - Constraints: none
+- **Wireframed**: the mesh is rendered as a wireframe
+  - Constraints: none
+- **Camera Static**: the mesh is not being affected by the camera position
+  - Constraints: none
+- **Shadowed**: the mesh is captured for shadow rendering
+  - Constraints: none
+- **Reflected**: the mesh is captured for reflection rendering
+  - Constraints: none
 
-- **Specular**: enable or disable specular lighting on the model.
-  - Type: `boolean`
-  - Constraints: none
-- **Reflective**: enable or disable full sky reflection or vertical world reflection.
-  - Type: `boolean`
-  - Constraints: none
-- **Instanced**: enable or disable instanced rendering for this model (disables AABBs).
-  - Type: `boolean`
-  - Constraints: none
-- **Culling**: enable or disable the face culling performance optimization.
-  - Type: `boolean`
-  - Constraints: none
+### 3.5 `enumeration`
+
+- **Reflection Type**: the type of reflection rendering
+  - Constraints: `CUBE` or `PLANAR`
+- **Rotation Order**: the order of directions in which the model is rotated
+  - Constraints: `XYZ` or `XZY` or `YXZ` or `YZX` or `ZXY` or `ZYX`

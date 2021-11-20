@@ -264,37 +264,37 @@ void ModelEntity::scalePart(const string& partID, Vec3 value)
 void ModelEntity::moveBaseTo(Vec3 target, float speed)
 {
 	_basePositionTarget = target;
-	_basePositionTargetSpeed = fabsf(speed);
+	_basePositionTargetSpeed = max(0.0f, speed);
 }
 
 void ModelEntity::rotateBaseTo(Vec3 target, float speed)
 {
 	_baseRotationTarget = Vec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
-	_baseRotationTargetSpeed = fabsf(speed);
+	_baseRotationTargetSpeed = max(0.0f, speed);
 }
 
 void ModelEntity::scaleBaseTo(Vec3 target, float speed)
 {
 	_baseSizeTarget = Vec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
-	_baseSizeTargetSpeed = fabsf(speed);
+	_baseSizeTargetSpeed = max(0.0f, speed);
 }
 
 void ModelEntity::movePartTo(const string& partID, Vec3 target, float speed)
 {
 	_parts[_getPartIndex(partID)].positionTarget = target;
-	_parts[_getPartIndex(partID)].positionTargetSpeed = fabsf(speed);
+	_parts[_getPartIndex(partID)].positionTargetSpeed = max(0.0f, speed);
 }
 
 void ModelEntity::rotatePartTo(const string& partID, Vec3 target, float speed)
 {
 	_parts[_getPartIndex(partID)].rotationTarget = Vec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
-	_parts[_getPartIndex(partID)].rotationTargetSpeed = fabsf(speed);
+	_parts[_getPartIndex(partID)].rotationTargetSpeed = max(0.0f, speed);
 }
 
 void ModelEntity::scalePartTo(const string& partID, Vec3 target, float speed)
 {
 	_parts[_getPartIndex(partID)].sizeTarget = Vec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
-	_parts[_getPartIndex(partID)].sizeTargetSpeed = fabsf(speed);
+	_parts[_getPartIndex(partID)].sizeTargetSpeed = max(0.0f, speed);
 }
 
 void ModelEntity::setColor(const string& partID, Vec3 value)
@@ -469,7 +469,7 @@ void ModelEntity::setTextureRepeat(const string& partID, float value)
 
 void ModelEntity::setEmissionIntensity(const string& partID, float value)
 {
-	_parts[_getPartIndex(partID)].emissionIntensity = value;
+	_parts[_getPartIndex(partID)].emissionIntensity = max(0.0f, value);
 }
 
 void ModelEntity::_correctPositionTarget(Vec3& current, Vec3 target, float speed)

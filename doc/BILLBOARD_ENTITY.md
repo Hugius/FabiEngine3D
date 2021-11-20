@@ -14,27 +14,56 @@
 
 ## 3. Properties
 
-- **Size**: the size of the billboard.
-  - Constraints: `0` to `inf`
+### 3.1 `string`
+
 - **Text Content**: the text content of the billboard.
+  - Type: `string`
   - Constraints: none
+- **Diffuse Map Path**: the text content of the billboard.
+  - Type: `string`
+  - Constraints: none
+- **Emission Map Path**: the text content of the billboard.
+  - Type: `string`
+  - Constraints: none
+- **Font Path**: the text content of the billboard.
+  - Type: `string`
+  - Constraints: none
+
+### 3.2 `decimal`
+
+- **Size**: the size of the billboard.
+  - Type: `decimal`
+  - Constraints: at least `0.0`
 - **Texture Repeat**: the amount of times the textures are repeated.
-  - Constraints: `0` to `inf`
+  - Type: `decimal`
+  - Constraints: at least `0.0`
 - **Rows**: the amount of rows in the sprite animation texture.
-  - Constraints: `1` to `inf`
+  - Type: `decimal`
+  - Constraints: at least `1.0`
 - **Columns**: the amount of columns in the sprite animation texture.
-  - Constraints: `1` to `inf`
+  - Type: `decimal`
+  - Constraints: at least `1.0`
 - **Framestep**: the amount of engine execution frames between the sprite animation frame cycles.
-  - Constraints: `0` to `inf`
+  - Type: `decimal`
+  - Constraints: at least `0.0`
 - **Color**: the RGB color that will be mixed with the billboard fragments.
-  - Constraints: `0` to `255`
+  - Type: `decimal`
+  - Constraints: between `0.0` to `1.0`
 - **Lightness**: the brightness of the billboard fragments.
-  - Constraints: `0` to `inf`
+  - Type: `decimal`
+  - Constraints: at least `0.0`
+
+### 3.3 `boolean`
+
 - **Shadowed**: enable or disable billboard capturing in shadows.
-  - Constraints: `ON` or `OFF`
+  - Type: `boolean`
+  - Constraints: none
 - **Reflected**: enable or disable billboard capturing in reflections.
-  - Constraints: `ON` or `OFF`
+  - Type: `boolean`
+  - Constraints: none
 - **Facing X**: enable or disable horizontal billboard facing towards the camera.
-  - Constraints: `ON` or `OFF`
+  - Type: `boolean`
+  - Constraints: none
 - **Facing Y**: enable or disable vertical billboard facing towards the camera.
-  - Constraints: `ON` or `OFF`
+  - Type: `boolean`
+  - Constraints: none

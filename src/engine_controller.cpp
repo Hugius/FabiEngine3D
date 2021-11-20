@@ -129,7 +129,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 		// Default engine background
 		skyEntity_create("@@engineBackground");
-		skyEntity_setDiffuseMaps("@@engineBackground", texturePaths3D);
+		skyEntity_setCubeMaps("@@engineBackground", texturePaths3D);
 
 		// Custom cursor texture
 		imageEntity_create("@@cursor", true);

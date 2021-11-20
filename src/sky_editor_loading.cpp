@@ -39,7 +39,7 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile() const
 	{
 		// Values
 		string skyID;
-		array<string, 6> diffuseMapPaths = {};
+		array<string, 6> cubeMapPaths = {};
 
 		// For file extraction
 		istringstream iss(line);
@@ -47,15 +47,15 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile() const
 		// Load base data
 		iss >>
 			skyID >>
-			diffuseMapPaths[0] >>
-			diffuseMapPaths[1] >>
-			diffuseMapPaths[2] >>
-			diffuseMapPaths[3] >>
-			diffuseMapPaths[4] >>
-			diffuseMapPaths[5];
+			cubeMapPaths[0] >>
+			cubeMapPaths[1] >>
+			cubeMapPaths[2] >>
+			cubeMapPaths[3] >>
+			cubeMapPaths[4] >>
+			cubeMapPaths[5];
 
 		// Iterate through paths
-		for(auto& diffuseMapPath : diffuseMapPaths)
+		for(auto& diffuseMapPath : cubeMapPaths)
 		{
 			// Convert empty string
 			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
@@ -71,7 +71,7 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile() const
 		}
 
 		// Save paths
-		texturePaths.push_back(diffuseMapPaths);
+		texturePaths.push_back(cubeMapPaths);
 	}
 
 	// Close file
@@ -116,19 +116,19 @@ const bool SkyEditor::loadSkyEntitiesFromFile()
 
 		// Values
 		string skyID;
-		array<string, 6> diffuseMapPaths{};
+		array<string, 6> cubeMapPaths{};
 		float rotation, lightness;
 		Vec3 color;
 
 		// Load base data
 		iss >>
 			skyID >>
-			diffuseMapPaths[0] >>
-			diffuseMapPaths[1] >>
-			diffuseMapPaths[2] >>
-			diffuseMapPaths[3] >>
-			diffuseMapPaths[4] >>
-			diffuseMapPaths[5] >>
+			cubeMapPaths[0] >>
+			cubeMapPaths[1] >>
+			cubeMapPaths[2] >>
+			cubeMapPaths[3] >>
+			cubeMapPaths[4] >>
+			cubeMapPaths[5] >>
 			rotation >>
 			lightness >>
 			color.r >>
@@ -136,18 +136,18 @@ const bool SkyEditor::loadSkyEntitiesFromFile()
 			color.b;
 
 		// Iterate through paths
-		for(auto& diffuseMapPath : diffuseMapPaths)
+		for(auto& cubeMapPath : cubeMapPaths)
 		{
 			// Convert empty string
-			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+			cubeMapPath = (cubeMapPath == "?") ? "" : cubeMapPath;
 
 			// Convert spaces
-			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+			replace(cubeMapPath.begin(), cubeMapPath.end(), '?', ' ');
 
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
+				cubeMapPath = string("projects\\" + _currentProjectID + "\\" + cubeMapPath);
 			}
 		}
 
@@ -161,7 +161,7 @@ const bool SkyEditor::loadSkyEntitiesFromFile()
 			_loadedSkyIDs.push_back(skyID);
 
 			// Set properties
-			_fe3d.skyEntity_setDiffuseMaps(skyID, diffuseMapPaths);
+			_fe3d.skyEntity_setCubeMaps(skyID, cubeMapPaths);
 			_fe3d.skyEntity_setLightness(skyID, lightness);
 			_fe3d.skyEntity_setRotation(skyID, rotation);
 			_fe3d.skyEntity_setColor(skyID, color);

@@ -28,31 +28,31 @@ const bool SkyEditor::saveSkyEntitiesToFile() const
 	for(const auto& skyID : _loadedSkyIDs)
 	{
 		// Values
-		auto diffuseMapPaths = _fe3d.skyEntity_getDiffuseMapPaths(skyID);
+		auto cubeMapPaths = _fe3d.skyEntity_getCubeMapPaths(skyID);
 		auto rotation = _fe3d.skyEntity_getRotation(skyID);
 		auto lightness = _fe3d.skyEntity_getLightness(skyID);
 		auto color = _fe3d.skyEntity_getColor(skyID);
 
 		// Iterate through paths
-		for(auto& diffuseMapPath : diffuseMapPaths)
+		for(auto& cubeMapPath : cubeMapPaths)
 		{
 			// Convert to short path
-			diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+			cubeMapPath = string(cubeMapPath.empty() ? "" : cubeMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
 			// Convert empty string
-			diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
+			cubeMapPath = (cubeMapPath.empty()) ? "?" : cubeMapPath;
 
 			// Convert spaces
-			replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
+			replace(cubeMapPath.begin(), cubeMapPath.end(), ' ', '?');
 		}
 
 		// Write ID to file
 		file << skyID << " ";
 
 		// Write paths to file
-		for(const auto& diffuseMapPath : diffuseMapPaths)
+		for(const auto& cubeMapPath : cubeMapPaths)
 		{
-			file << diffuseMapPath << " ";
+			file << cubeMapPath << " ";
 		}
 
 		// Write data to file

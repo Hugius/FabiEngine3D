@@ -43,7 +43,7 @@ Using a blend map you can render multiple textures onto a terrain mesh. Every co
   - Constraints: `0` to `inf`
 - **Specular**: enable or disable specular lighting on the terrain.
   - Constraints: `ON` or `OFF`
-- **Specular Factor**: the shininess of the specular lighting.
+- **Specular Shininess**: the shininess of the specular lighting.
   - Constraints: `0` to `256`
 - **Specular Intensity**: the intensity of the specular lighting.
   - Constraints: `0` to `inf`

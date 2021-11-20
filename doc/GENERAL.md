@@ -140,3 +140,6 @@
 - **RGB**: Red Green Blue
 - **Mouse**: the physical peripheral known as "the mouse"
 - **Cursor**: the pointer within FabiEngine3D that is moved using the mouse
+- **Wireframe**: rendering mode that only draws lines/wires between all vertices
+- **Face Culling**: an optimization technique where non-visible vertices are not rendered
+- **Instanced Rendering**: an optimization technique that is efficient for rendering a lot of the same meshes.

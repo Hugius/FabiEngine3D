@@ -21,10 +21,10 @@ void ModelEditor::_updateMiscellaneousMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lodEntityID")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("levelOfDetailEntityID")->isHovered())
 		{
 			levelOfDetailEntityID = (levelOfDetailEntityID.empty()) ? levelOfDetailEntityID : levelOfDetailEntityID.substr(1, levelOfDetailEntityID.size() - 1);
-			_gui.getGlobalScreen()->createValueForm("lodEntityID", "LOD entity ID", levelOfDetailEntityID, Vec2(0.0f, 0.1f), Vec2(0.4f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("levelOfDetailEntityID", "level of detail entity ID", levelOfDetailEntityID, Vec2(0.0f, 0.1f), Vec2(0.4f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isInstanced")->isHovered())
 		{
@@ -73,17 +73,17 @@ void ModelEditor::_updateMiscellaneousMenu()
 		}
 
 		// Update value forms
-		if(_gui.getGlobalScreen()->checkValueForm("lodEntityID", levelOfDetailEntityID, {}))
+		if(_gui.getGlobalScreen()->checkValueForm("levelOfDetailEntityID", levelOfDetailEntityID, {}))
 		{
-			if(levelOfDetailEntityID == "@") // No LOD entity
+			if(levelOfDetailEntityID == "@") // No level of detail entity
 			{
 				_fe3d.modelEntity_setLevelOfDetailEntity(_currentModelID, "");
 			}
-			else if(find(_loadedModelIDs.begin(), _loadedModelIDs.end(), ("@" + levelOfDetailEntityID)) == _loadedModelIDs.end()) // Check LOD entity
+			else if(find(_loadedModelIDs.begin(), _loadedModelIDs.end(), ("@" + levelOfDetailEntityID)) == _loadedModelIDs.end()) // Check level of detail entity
 			{
-				Logger::throwWarning("Cannot find LOD entity with ID \"" + levelOfDetailEntityID + "\"");
+				Logger::throwWarning("Cannot find level of detail entity with ID \"" + levelOfDetailEntityID + "\"");
 			}
-			else // Set LOD entity
+			else // Set level of detail entity
 			{
 				_fe3d.modelEntity_setLevelOfDetailEntity(_currentModelID, ("@" + levelOfDetailEntityID));
 			}

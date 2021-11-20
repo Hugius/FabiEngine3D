@@ -87,34 +87,34 @@ void MasterRenderer::_renderModelEntities()
 		// Render model entities
 		for(const auto& [keyID, modelEntity] : modelEntities)
 		{
-			// Check if LOD entity needs to be rendered
+			// Check if level of detail entity needs to be rendered
 			if(modelEntity->isLevelOfDetailed())
 			{
-				// Try to find LOD entity
-				auto lodEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityID())->second;
+				// Try to find level of detail entity
+				auto levelOfDetailEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityID())->second;
 
 				// Save initial transformation
-				Vec3 initialPosition = lodEntity->getBasePosition();
-				Vec3 initialRotation = lodEntity->getBaseRotation();
-				Vec3 initialSize = lodEntity->getBaseSize();
-				bool initialVisibility = lodEntity->isVisible();
+				Vec3 initialPosition = levelOfDetailEntity->getBasePosition();
+				Vec3 initialRotation = levelOfDetailEntity->getBaseRotation();
+				Vec3 initialSize = levelOfDetailEntity->getBaseSize();
+				bool initialVisibility = levelOfDetailEntity->isVisible();
 
 				// Change transformation
-				lodEntity->setBasePosition(modelEntity->getBasePosition());
-				lodEntity->setBaseRotation(modelEntity->getBaseRotation());
-				lodEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * initialSize);
-				lodEntity->setVisible(modelEntity->isVisible());
-				lodEntity->updateTransformationMatrix();
+				levelOfDetailEntity->setBasePosition(modelEntity->getBasePosition());
+				levelOfDetailEntity->setBaseRotation(modelEntity->getBaseRotation());
+				levelOfDetailEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * initialSize);
+				levelOfDetailEntity->setVisible(modelEntity->isVisible());
+				levelOfDetailEntity->updateTransformationMatrix();
 
-				// Render LOD entity
-				_modelEntityColorRenderer.render(lodEntity, _entityBus->getReflectionEntities());
+				// Render level of detail entity
+				_modelEntityColorRenderer.render(levelOfDetailEntity, _entityBus->getReflectionEntities());
 
 				// Revert to initial transformation
-				lodEntity->setBasePosition(initialPosition);
-				lodEntity->setBaseRotation(initialRotation);
-				lodEntity->setBaseSize(initialSize);
-				lodEntity->setVisible(initialVisibility);
-				lodEntity->updateTransformationMatrix();
+				levelOfDetailEntity->setBasePosition(initialPosition);
+				levelOfDetailEntity->setBaseRotation(initialRotation);
+				levelOfDetailEntity->setBaseSize(initialSize);
+				levelOfDetailEntity->setVisible(initialVisibility);
+				levelOfDetailEntity->updateTransformationMatrix();
 			}
 			else // Render high-quality entity
 			{

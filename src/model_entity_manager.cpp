@@ -111,12 +111,12 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 		// Update model if visible
 		if(entity->isVisible())
 		{
-			// Check if model has LOD
+			// Check if model has level of detail entity
 			if(!entity->getLevelOfDetailEntityID().empty())
 			{
-				// Check if LOD entity still exists
-				auto lodEntityPair = getEntities().find(entity->getID());
-				if(lodEntityPair == getEntities().end())
+				// Check if level of detail entity still exists
+				auto levelOfDetailEntityPair = getEntities().find(entity->getID());
+				if(levelOfDetailEntityPair == getEntities().end())
 				{
 					Logger::throwError("ModelEntityManager::update");
 				}
@@ -126,7 +126,7 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 				Vec3 entityPosition = entity->getBasePosition();
 				auto absolsuteDistance = Math::calculateDistance(cameraPosition, entityPosition);
 
-				// Check if entity is farther than LOD distance
+				// Check if entity is farther than level of detail distance
 				bool isFarEnough = (absolsuteDistance > _levelOfDetailDistance) && (!entity->getLevelOfDetailEntityID().empty());
 				entity->setLevelOfDetailed(isFarEnough);
 			}

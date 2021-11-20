@@ -121,37 +121,37 @@ void MasterRenderer::_captureShadows()
 			// Render model entities
 			for(const auto& [keyID, modelEntity] : modelEntities)
 			{
-				// Check if LOD entity needs to be rendered
+				// Check if level of detail entity needs to be rendered
 				if(modelEntity->isLevelOfDetailed())
 				{
-					// Try to find LOD entity
+					// Try to find level of detail entity
 					auto foundPair = modelEntities.find(modelEntity->getLevelOfDetailEntityID());
 					if(foundPair != modelEntities.end())
 					{
-						auto lodEntity = foundPair->second;
+						auto levelOfDetailEntity = foundPair->second;
 
 						// Save initial transformation
-						Vec3 initialPosition = lodEntity->getBasePosition();
-						Vec3 initialRotation = lodEntity->getBaseRotation();
-						Vec3 initialSize = lodEntity->getBaseSize();
-						bool initialVisibility = lodEntity->isVisible();
+						Vec3 initialPosition = levelOfDetailEntity->getBasePosition();
+						Vec3 initialRotation = levelOfDetailEntity->getBaseRotation();
+						Vec3 initialSize = levelOfDetailEntity->getBaseSize();
+						bool initialVisibility = levelOfDetailEntity->isVisible();
 
 						// Change transformation
-						lodEntity->setBasePosition(modelEntity->getBasePosition());
-						lodEntity->setBaseRotation(modelEntity->getBaseRotation());
-						lodEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * initialSize);
-						lodEntity->setVisible(modelEntity->isVisible());
-						lodEntity->updateTransformationMatrix();
+						levelOfDetailEntity->setBasePosition(modelEntity->getBasePosition());
+						levelOfDetailEntity->setBaseRotation(modelEntity->getBaseRotation());
+						levelOfDetailEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * initialSize);
+						levelOfDetailEntity->setVisible(modelEntity->isVisible());
+						levelOfDetailEntity->updateTransformationMatrix();
 
-						// Render LOD entity
-						_modelEntityShadowRenderer.render(lodEntity);
+						// Render level of detail entity
+						_modelEntityShadowRenderer.render(levelOfDetailEntity);
 
 						// Revert to initial transformation
-						lodEntity->setBasePosition(initialPosition);
-						lodEntity->setBaseRotation(initialRotation);
-						lodEntity->setBaseSize(initialSize);
-						lodEntity->setVisible(initialVisibility);
-						lodEntity->updateTransformationMatrix();
+						levelOfDetailEntity->setBasePosition(initialPosition);
+						levelOfDetailEntity->setBaseRotation(initialRotation);
+						levelOfDetailEntity->setBaseSize(initialSize);
+						levelOfDetailEntity->setVisible(initialVisibility);
+						levelOfDetailEntity->updateTransformationMatrix();
 					}
 					else
 					{

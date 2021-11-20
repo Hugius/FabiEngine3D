@@ -37,7 +37,7 @@
   - Constraints: `ON` or `OFF`
 - **Specular**: enable or disable specular lighting on the water.
   - Constraints: `ON` or `OFF`
-- **Specular Factor**: the shininess of the specular lighting.
+- **Specular Shininess**: the shininess of the specular lighting.
   - Constraints: `0` to `256`
 - **Specular Intesity**: the intensity of the specular lighting.
   - Constraints: `0` to `inf`

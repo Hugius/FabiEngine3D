@@ -155,7 +155,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			// Read ID from file
 			iss >> modelID;
 
-			// If LOD entity, only load if executing game
+			// If level of detail entity, only load if executing game
 			bool makeInvisible = false;
 			if(modelID[0] == '@')
 			{
@@ -254,7 +254,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 					_fe3d.modelEntity_enableInstancing(modelID, instancedOffsets);
 				}
 
-				// Hide model if LOD (and executing game)
+				// Make invisible
 				if(makeInvisible)
 				{
 					_fe3d.modelEntity_setVisible(modelID, false);

@@ -25,20 +25,20 @@ const bool WorldEditor::saveEditorWorldToFile()
 	// Create or overwrite file
 	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\worlds\\editor\\" + _currentWorldID + ".fe3d");
 
-	// Save all LOD model IDs
-	vector<string> lodEntityIDs;
+	// Save all level of detail entity IDs
+	vector<string> levelOfDetailEntityIDs;
 	for(const auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if not preview entity
 		if(modelID[0] != '@')
 		{
-			// Check if entity has LOD model
+			// Check if entity has level of detail model
 			if(!_fe3d.modelEntity_getLevelOfDetailEntityID(modelID).empty())
 			{
 				// Check if ID not already added to list
-				if(find(lodEntityIDs.begin(), lodEntityIDs.end(), modelID) == lodEntityIDs.end())
+				if(find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) == levelOfDetailEntityIDs.end())
 				{
-					lodEntityIDs.push_back(_fe3d.modelEntity_getLevelOfDetailEntityID(modelID));
+					levelOfDetailEntityIDs.push_back(_fe3d.modelEntity_getLevelOfDetailEntityID(modelID));
 				}
 			}
 		}
@@ -102,8 +102,8 @@ const bool WorldEditor::saveEditorWorldToFile()
 	for(const auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if allowed to save
-		bool isLodModel = find(lodEntityIDs.begin(), lodEntityIDs.end(), modelID) != lodEntityIDs.end();
-		if((modelID[0] != '@') || isLodModel)
+		bool isLevelOfDetailEntity = find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) != levelOfDetailEntityIDs.end();
+		if((modelID[0] != '@') || isLevelOfDetailEntity)
 		{
 			// Check if model has bound animation
 			if(!_animationEditor.getStartedAnimationIDs(modelID).empty())
@@ -338,7 +338,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 	// Editor camera speed
 	file << "EDITOR_SPEED " << _editorSpeed << endl;
 
-	// LOD distance
+	// Level of detail distance
 	file << "LOD_DISTANCE " << _fe3d.misc_getLevelOfDetailDistance() << endl;
 
 	// Reflection height

@@ -12,56 +12,54 @@
 
 ## 1.3 Properties
 
-### 3.1 String
+### 3.1 `string`
 
-### 3.2 Vector3
+- **DUDV Map Path**: the path of the DUDV map file.
+  - Constraints: none
+- **Displacement Map Path**: the path of the displacement map file.
+  - Constraints: none
+- **Normal Map Path**: the path of the normal map file.
+  - Constraints: none
+
+### 3.2 `vector3`
 
 - **Color**: the RGB color that will be mixed with the water fragments.
-  - Type: `vector3`
   - Constraints: between `0.0` and `1.0`
 
-### 3.3 Vector2
+### 3.3 `vector2`
 
-### 3.4 Decimal
+- **Water Speed**: the speed of water rippling/waving movement.
+  - Constraints: none
 
+### 3.4 `decimal`
+
+- **Height**: the Y position of the water plane in world space.
+  - Constraints: at least `0.0`
 - **Size**: the XZ size of the water plane in world space.
-  - Type: `decimal`
-  - Constraints: at least `0.0`
-- **Texture Repeat**: the amount of times the textures are repeated.
-  - Type: `decimal`
-  - Constraints: at least `0.0`
-- **Specular Factor**: the shininess of the specular lighting.
-  - Type: `decimal`
-  - Constraints: at least `0.0`
-- **Specular Intesity**: the intensity of the specular lighting.
-  - Type: `decimal`
   - Constraints: at least `0.0`
 - **Wave Height**: the height of the waves.
-  - Type: `decimal`
   - Constraints: at least `0.0`
-- **Water Speed**: the speed of water rippling/waving movement.
-  - Type: `decimal`
-  - Constraints: none
+- **Texture Repeat**: the amount of times the textures are repeated.
+  - Constraints: at least `0.0`
+- **Specular Shininess**: the shininess of the specular lighting.
+  - Constraints: at least `0.0`
+- **Specular Intesity**: the intensity of the specular lighting.
+  - Constraints: at least `0.0`
 - **Transparency**: the percentage that determines how transparent the water is.
-  - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
 
-### 3.5 Integer
+### 3.5 `boolean`
 
-### 3.6 Boolean
-
-- **Reflective**: enable or disable reflections on the water.
-  - Type: `boolean`
+- **Reflective**: the water is reflective.
   - Constraints: none
-- **Refractive**: enable or disable refractions on the water.
-  - Type: `boolean`
+- **Refractive**: the water is refractive.
   - Constraints: none
-- **Specular**: enable or disable specular lighting on the water.
-  - Type: `boolean`
+- **Specular**: specular lighting is rendered on the water.
+  - Constraints: none
+- **Wireframed**: the mesh is rendered as a wireframe.
   - Constraints: none
 
-### 3.7 Enumeration
+### 3.6 `enumeration`
 
 - **Quality**: determines everything that is captured by reflections & refractions.
-  - Type: `enumeration`
   - Constraints: `SKY` or `SKY_TERRAIN` or `SKY_TERRAIN_MODELS` or `SKY_TERRAIN_MODELS_BILLBOARDS`

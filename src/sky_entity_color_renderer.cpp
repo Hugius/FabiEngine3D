@@ -51,12 +51,12 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, cons
 		if(mainEntity->hasCubeMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, mainEntity->getDiffuseMap());
+			glBindTexture(GL_TEXTURE_CUBE_MAP, mainEntity->getCubeMap());
 		}
 		if((mixEntity != nullptr) && mixEntity->hasCubeMap())
 		{
 			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, mixEntity->getDiffuseMap());
+			glBindTexture(GL_TEXTURE_CUBE_MAP, mixEntity->getCubeMap());
 		}
 
 		// Bind buffer

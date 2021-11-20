@@ -178,7 +178,7 @@ void ModelEditor::_loadGUI()
 	// Left-viewport: modelEditorMenuMiscellaneous
 	positions = VPC::calculateButtonPositions(5, CH);
 	leftWindow->createScreen("modelEditorMenuMiscellaneous");
-	leftWindow->getScreen("modelEditorMenuMiscellaneous")->createButton("lodEntityID", Vec2(0.0f, positions[0]), Vec2(TW("Level Of Detail"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Level Of Detail", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("modelEditorMenuMiscellaneous")->createButton("levelOfDetailEntityID", Vec2(0.0f, positions[0]), Vec2(TW("Level Of Detail"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Level Of Detail", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("modelEditorMenuMiscellaneous")->createButton("isInstanced", Vec2(0.0f, positions[1]), Vec2(TW("Instanced: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Instanced: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("modelEditorMenuMiscellaneous")->createButton("isFaceCulled", Vec2(0.0f, positions[2]), Vec2(TW("Culling: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Culling: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("modelEditorMenuMiscellaneous")->createButton("rotationOrder", Vec2(0.0f, positions[3]), Vec2(TW("Rotation: Y X Z"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Rotation : Y X Z", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);

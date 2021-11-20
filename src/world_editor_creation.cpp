@@ -17,7 +17,7 @@ const bool WorldEditor::_copyPreviewSky(const string& newID, const string& previ
 
 	// Create new sky
 	_fe3d.skyEntity_create(newID);
-	_fe3d.skyEntity_setDiffuseMaps(newID, _fe3d.skyEntity_getDiffuseMapPaths(previewID));
+	_fe3d.skyEntity_setCubeMaps(newID, _fe3d.skyEntity_getCubeMapPaths(previewID));
 	_fe3d.skyEntity_setLightness(newID, _fe3d.skyEntity_getLightness(previewID));
 	_fe3d.skyEntity_setRotation(newID, _fe3d.skyEntity_getRotation(previewID));
 	_fe3d.skyEntity_setColor(newID, _fe3d.skyEntity_getColor(previewID));

@@ -79,16 +79,16 @@ public:
 	const TextureID getDisplacementMap() const;
 
 private:
+	// Strings
+	string _dudvMapPath = "";
+	string _normalMapPath = "";
+	string _displacementMapPath = "";
+
 	// Vectors
 	Vec3 _color = Vec3(1.0f);
 	Vec2 _speed = Vec2(0.0f);
 	Vec2 _rippleOffset = Vec2(0.0f);
 	Vec2 _waveOffset = Vec2(0.0f);
-
-	// Strings
-	string _dudvMapPath = "";
-	string _normalMapPath = "";
-	string _displacementMapPath = "";
 
 	// Decimals
 	float _height = 0.0f;

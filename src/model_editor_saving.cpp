@@ -33,7 +33,7 @@ const bool ModelEditor::saveModelEntitiesToFile() const
 		auto isMultiParted = _fe3d.modelEntity_isMultiParted(modelID);
 		auto meshPath = _fe3d.modelEntity_getMeshPath(modelID);
 		auto modelSize = _fe3d.modelEntity_getBaseSize(modelID);
-		auto lodEntityID = _fe3d.modelEntity_getLevelOfDetailEntityID(modelID);
+		auto levelOfDetailEntityID = _fe3d.modelEntity_getLevelOfDetailEntityID(modelID);
 		auto isInstanced = _fe3d.modelEntity_isInstanced(modelID);
 		auto isFaceCulled = _fe3d.modelEntity_isFaceCulled(modelID);
 		auto rotationOrder = static_cast<unsigned int>(_fe3d.modelEntity_getRotationOrder(modelID));
@@ -43,11 +43,11 @@ const bool ModelEditor::saveModelEntitiesToFile() const
 
 		// Convert empty string
 		meshPath = (meshPath.empty()) ? "?" : meshPath;
-		lodEntityID = (lodEntityID.empty()) ? "?" : lodEntityID;
+		levelOfDetailEntityID = (levelOfDetailEntityID.empty()) ? "?" : levelOfDetailEntityID;
 
 		// Convert spaces
 		replace(meshPath.begin(), meshPath.end(), ' ', '?');
-		replace(lodEntityID.begin(), lodEntityID.end(), ' ', '?');
+		replace(levelOfDetailEntityID.begin(), levelOfDetailEntityID.end(), ' ', '?');
 
 		// Write data to file
 		file << "MODEL " <<
@@ -56,7 +56,7 @@ const bool ModelEditor::saveModelEntitiesToFile() const
 			modelSize.x << " " <<
 			modelSize.y << " " <<
 			modelSize.z << " " <<
-			lodEntityID << " " <<
+			levelOfDetailEntityID << " " <<
 			isInstanced << " " <<
 			isFaceCulled << " " <<
 			rotationOrder;

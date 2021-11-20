@@ -35,21 +35,21 @@ const bool WorldEditor::saveCustomWorldToFile()
 	// Create or overwrite file
 	ofstream file(filePath);
 
-	// Save model LOD IDs
-	vector<string> lodEntityIDs;
+	// Save model level of detail IDs
+	vector<string> levelOfDetailEntityIDs;
 	for(const auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isCustomWorldModel = find(_customWorldModelIDs.begin(), _customWorldModelIDs.end(), modelID) != _customWorldModelIDs.end();
 		if((modelID[0] != '@') && isCustomWorldModel)
 		{
-			// Check if entity has LOD ID
+			// Check if entity has level of detail entity
 			if(!_fe3d.modelEntity_getLevelOfDetailEntityID(modelID).empty())
 			{
 				// Check if ID not already added to list
-				if(find(lodEntityIDs.begin(), lodEntityIDs.end(), modelID) == lodEntityIDs.end())
+				if(find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) == levelOfDetailEntityIDs.end())
 				{
-					lodEntityIDs.push_back(_fe3d.modelEntity_getLevelOfDetailEntityID(modelID));
+					levelOfDetailEntityIDs.push_back(_fe3d.modelEntity_getLevelOfDetailEntityID(modelID));
 				}
 			}
 		}
@@ -118,10 +118,10 @@ const bool WorldEditor::saveCustomWorldToFile()
 	for(const auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if allowed to save
-		bool isLodModel = find(lodEntityIDs.begin(), lodEntityIDs.end(), modelID) != lodEntityIDs.end();
+		bool isLevelOfDetailEntity = find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) != levelOfDetailEntityIDs.end();
 		bool isCustomWorldModel =
 			find(_customWorldModelIDs.begin(), _customWorldModelIDs.end(), modelID) != _customWorldModelIDs.end();
-		if(((modelID[0] != '@') || isLodModel) && isCustomWorldModel)
+		if(((modelID[0] != '@') || isLevelOfDetailEntity) && isCustomWorldModel)
 		{
 			// Retrieve all bound AABB IDs
 			auto aabbIDs = _fe3d.aabbEntity_getChildIDs(modelID, AabbParentType::MODEL_ENTITY);
@@ -267,7 +267,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	for(const auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if allowed to save
-		bool isLodModel = find(lodEntityIDs.begin(), lodEntityIDs.end(), modelID) != lodEntityIDs.end();
+		bool isLodModel = find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) != levelOfDetailEntityIDs.end();
 		bool isCustomWorldModel =
 			find(_customWorldModelIDs.begin(), _customWorldModelIDs.end(), modelID) != _customWorldModelIDs.end();
 		if(((modelID[0] != '@') || isLodModel) && isCustomWorldModel)

@@ -12,27 +12,34 @@
 
 ## 3. Properties
 
-### 3.1 String
+### 3.1 `string`
 
-### 3.2 Vector3
+- **Right Cube Map Path**: the path of the right part of the cube map file.
+  - Constraints: none
+- **Left Cube Map Path**: the path of the left part of the cube map file.
+  - Constraints: none
+- **Top Cube Map Path**: the path of the top part of the cube map file.
+  - Constraints: none
+- **Bottom Cube Map Path**: the path of the bottom part of the cube map file.
+  - Constraints: none
+- **Back Cube Map Path**: the path of the back part of the cube map file.
+  - Constraints: none
+- **Front Cube Map Path**: the path of the front part of the cube map file.
+  - Constraints: none
+
+### 3.2 `vector3`
 
 - **Color**: the RGB color that will be mixed with the sky fragments.
-  - Type: `vector3`
   - Constraints: between `0.0` and `1.0`
 
-### 3.3 Vector2
+### 3.3 `decimal`
 
-### 3.4 Decimal
-
-- **Rotation**: the rotation of the mesh around the Y axis.
-  - Type: `decimal`
+- **Rotation**: the XYZ rotation of the mesh around the Y axis.
   - Constraints: between `0.0` and `360.0`
 - **Lightness**: the brightness of the sky fragments.
-  - Type: `decimal`
   - Constraints: at least `0.0`
 
-### 3.5 Integer
+### 3.4 `boolean`
 
-### 3.6 Boolean
-
-### 3.7 Enumeration
+- **Wireframed**: the mesh is rendered as a wireframe.
+  - Constraints: none

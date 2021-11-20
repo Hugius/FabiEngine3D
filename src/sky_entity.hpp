@@ -21,10 +21,9 @@ public:
 	void setDiffuseMapPaths(const array<string, 6>& value);
 	void setColor(Vec3 value);
 	void setCubeMap(TextureID value);
-	void setOriginalLightness(float value);
+	void setInitialLightness(float value);
 	void setLightness(float value);
 	void setRotation(float value);
-	void setRotationSpeed(float value);
 	void setWireframed(bool value);
 
 	// Strings
@@ -37,10 +36,9 @@ public:
 	const Vec3 getColor() const;
 
 	// Decimals
-	const float getOriginalLightness() const;
+	const float getInitialLightness() const;
 	const float getLightness() const;
 	const float getRotation() const;
-	const float getRotationSpeed() const;
 
 	// Booleans
 	const bool hasRenderBuffer() const;
@@ -62,9 +60,8 @@ private:
 	Vec3 _color = Vec3(1.0f);
 
 	// Decimals
-	float _originalLightness = 1.0f;
+	float _initialLightness = 1.0f;
 	float _lightness = 1.0f;
-	float _rotationSpeed = 0.0f;
 	float _rotation = 0.0f;
 
 	// Booleans

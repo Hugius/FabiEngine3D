@@ -11,8 +11,8 @@ void BottomViewportController::_updateConsoleScrolling()
 	{
 		// Temporary values
 		const auto screen = window->getScreen("main");
-		const float minY = window->getOriginalPosition().y - (window->getOriginalSize().y / 2.0f);
-		const float maxY = window->getOriginalPosition().y + (window->getOriginalSize().y / 2.0f);
+		const float minY = window->getInitialPosition().y - (window->getInitialSize().y / 2.0f);
+		const float maxY = window->getInitialPosition().y + (window->getInitialSize().y / 2.0f);
 		const float oldestMessage = _fe3d.textEntity_getPosition(screen->getTextField(_consoleMessageQueue[0].first + "_time")->getEntityID()).y + CHAR_SIZE.y;
 
 		// Calculate message part count for latest message Y
@@ -37,7 +37,7 @@ void BottomViewportController::_updateConsoleScrolling()
 		}
 
 		// Check if there are enough messages to scroll through
-		if((static_cast<float>(messageLineCount) * CHAR_SIZE.y) > window->getOriginalSize().y)
+		if((static_cast<float>(messageLineCount) * CHAR_SIZE.y) > window->getInitialSize().y)
 		{
 			// Only allow scrolling when not trying to scroll too far
 			if
@@ -78,8 +78,8 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 	auto screen = window->getScreen("main");
 	const float timePartOffset = CHAR_SIZE.x * static_cast<float>(TIME_PART_LENGTH) * 2.0f; // Offset from time part
 	const float separatorPartOffset = CHAR_SIZE.x * static_cast<float>(SEPARATOR_PART_LENGTH) * 2.0f; // Offset from separator part
-	const Vec2 minPosition = Vec2(-1.0f, window->getOriginalPosition().y - (window->getOriginalSize().y / 2.0f));
-	const Vec2 maxPosition = Vec2(0.995f, window->getOriginalPosition().y + (window->getOriginalSize().y / 2.0f));
+	const Vec2 minPosition = Vec2(-1.0f, window->getInitialPosition().y - (window->getInitialSize().y / 2.0f));
+	const Vec2 maxPosition = Vec2(0.995f, window->getInitialPosition().y + (window->getInitialSize().y / 2.0f));
 
 	// Add to stack for synchronization
 	string newID = to_string(_consoleMessageQueue.size());
@@ -127,7 +127,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 		{
 			// Check if message length is bigger than window size
 			float offset = CHAR_SIZE.x * static_cast<float>(TIME_PART_LENGTH + 3);
-			if(offset + (static_cast<float>(i) * CHAR_SIZE.x) > window->getOriginalSize().x)
+			if(offset + (static_cast<float>(i) * CHAR_SIZE.x) > window->getInitialSize().x)
 			{
 				// Cut a part of the full message
 				messageParts.push_back(messagePartText.substr(0, i));

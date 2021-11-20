@@ -100,7 +100,7 @@ void SkyEditor::_loadGUI()
 	// Left-viewport: skyEditorMenuMiscellaneous
 	positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("skyEditorMenuMiscellaneous");
-	leftWindow->getScreen("skyEditorMenuMiscellaneous")->createButton("rotationSpeed", Vec2(0.0f, positions[0]), Vec2(TW("Rotation Speed"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Rotation Speed", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("skyEditorMenuMiscellaneous")->createButton("rotation", Vec2(0.0f, positions[0]), Vec2(TW("Rotation"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Rotation", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("skyEditorMenuMiscellaneous")->createButton("lightness", Vec2(0.0f, positions[1]), Vec2(TW("Lightness"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Lightness", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("skyEditorMenuMiscellaneous")->createButton("color", Vec2(0.0f, positions[2]), Vec2(TW("Color"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Color", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("skyEditorMenuMiscellaneous")->createButton("back", Vec2(0.0f, positions[3]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);

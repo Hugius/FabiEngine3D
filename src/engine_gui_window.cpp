@@ -8,8 +8,8 @@ EngineGuiWindow::EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, con
 	_ID(ID),
 	_entityID("@" + parentID + "_" + ID),
 	_parentID(parentID),
-	_originalPosition(position),
-	_originalSize(size)
+	_initialPosition(position),
+	_initialSize(size)
 {
 	_fe3d.imageEntity_create(_entityID, true);
 	_fe3d.imageEntity_setPosition(_entityID, position);
@@ -68,14 +68,14 @@ const string& EngineGuiWindow::getParentID() const
 	return _parentID;
 }
 
-const Vec2 EngineGuiWindow::getOriginalPosition() const
+const Vec2 EngineGuiWindow::getInitialPosition() const
 {
-	return _originalPosition;
+	return _initialPosition;
 }
 
-const Vec2 EngineGuiWindow::getOriginalSize() const
+const Vec2 EngineGuiWindow::getInitialSize() const
 {
-	return _originalSize;
+	return _initialSize;
 }
 
 void EngineGuiWindow::createScreen(const string& ID)

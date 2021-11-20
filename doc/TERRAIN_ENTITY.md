@@ -14,15 +14,20 @@
 
 ## 3. Properties
 
+### 3.1 String
+
+### 3.2 Vector3
+
+### 3.3 Vector2
+
+### 3.4 Decimal
+
 - **Max Height**: the maximum height of the terrain, which is calculated based on the height map pixel intensities.
   - Type: `decimal`
   - Constraints: at least `0.0`
 - **Lightness**: the brightness of the terrain fragments.
   - Type: `decimal`
   - Constraints: at least `0.0`
-- **Specular**: enable or disable specular lighting on the terrain.
-  - Type: `boolean`
-  - Constraints: none
 - **Specular Factor**: the shininess of the specular lighting.
   - Type: `decimal`
   - Constraints: at least `0.0`
@@ -41,3 +46,13 @@
 - **Blue Repeat**: the amount of times the textures of the blue blend map channel are repeated.
   - Type: `decimal`
   - Constraints: at least `0.0`
+
+### 3.5 Integer
+
+### 3.6 Boolean
+
+- **Specular**: enable or disable specular lighting on the terrain.
+  - Type: `boolean`
+  - Constraints: none
+
+### 3.7 Enumeration

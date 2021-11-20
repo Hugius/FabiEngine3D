@@ -11,9 +11,9 @@ public:
 
 	// Voids
 	virtual void setVisible(bool isVisible);
-	void updateOriginalPosition();
-	void updateOriginalSize();
-	void updateOriginalColor();
+	void updateInitialPosition();
+	void updateInitialSize();
+	void updateInitialColor();
 
 	// Strings
 	const string& getID() const;
@@ -21,9 +21,9 @@ public:
 	const string& getParentID() const;
 
 	// Vectors
-	const Vec2 getOriginalPosition() const;
-	const Vec2 getOriginalSize() const;
-	const Vec3 getOriginalColor() const;
+	const Vec2 getInitialPosition() const;
+	const Vec2 getInitialSize() const;
+	const Vec3 getInitialColor() const;
 
 protected:
 	// Strings
@@ -32,9 +32,9 @@ protected:
 	const string _parentID;
 
 	// Vectors
-	Vec2 _originalPosition;
-	Vec2 _originalSize;
-	Vec3 _originalColor;
+	Vec2 _initialPosition;
+	Vec2 _initialSize;
+	Vec3 _initialColor;
 
 	// Miscellaneous
 	FabiEngine3D& _fe3d;

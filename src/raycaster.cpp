@@ -84,7 +84,7 @@ const Vec3 Raycaster::getTerrainPoint() const
 const float Raycaster::calculateRayBoxIntersectionDistance(Ray ray, Box box) const
 {
 	/*
-		Original formula: point = (origin + distance) * direction
+		Initial formula: point = (origin + distance) * direction
 		Rearranged formula: distance = (point - origin) / direction
 		Final formula: distance = (point - origin) * (1 / direction)
 	*/

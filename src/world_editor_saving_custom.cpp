@@ -62,15 +62,15 @@ const bool WorldEditor::saveCustomWorldToFile()
 		// Data to save
 		auto previewID = ("@" + skyID);
 		auto color = _fe3d.skyEntity_getColor(skyID);
-		auto rotationSpeed = _fe3d.skyEntity_getRotationSpeed(skyID);
-		auto lightness = _fe3d.skyEntity_getOriginalLightness(skyID);
+		auto rotation = _fe3d.skyEntity_getRotation(skyID);
+		auto lightness = _fe3d.skyEntity_getInitialLightness(skyID);
 
 		// Write data
 		file <<
 			"SKY " <<
 			skyID << " " <<
 			previewID << " " <<
-			rotationSpeed << " " <<
+			rotation << " " <<
 			lightness << " " <<
 			color.r << " " <<
 			color.g << " " <<

@@ -11,19 +11,19 @@ void MasterRenderer::_captureCubeReflections()
 	// Temporary values
 	const auto reflectionQuality = _renderBus.getCubeReflectionQuality();
 
-	// Save original camera status
-	const auto originalCameraAspectRatio = _camera.getAspectRatio();
-	const auto originalCameraFOV = _camera.getFOV();
-	const auto originalCameraYaw = _camera.getYaw();
-	const auto originalCameraPitch = _camera.getPitch();
-	const auto originalCameraPosition = _camera.getPosition();
+	// Save initial camera status
+	const auto initialCameraAspectRatio = _camera.getAspectRatio();
+	const auto initialCameraFOV = _camera.getFOV();
+	const auto initialCameraYaw = _camera.getYaw();
+	const auto initialCameraPitch = _camera.getPitch();
+	const auto initialCameraPosition = _camera.getPosition();
 
-	// Save original shadow status
-	const auto originalShadowEyePosition = _renderBus.getShadowEyePosition();
-	const auto originalShadowAreaCenter = _renderBus.getShadowCenterPosition();
-	const auto originalShadowAreaSize = _renderBus.getShadowAreaSize();
-	const auto originalShadowAreaReach = _renderBus.getShadowAreaReach();
-	const auto originalShadowMatrix = _renderBus.getShadowMatrix();
+	// Save initial shadow status
+	const auto initialShadowEyePosition = _renderBus.getShadowEyePosition();
+	const auto initialShadowAreaCenter = _renderBus.getShadowCenterPosition();
+	const auto initialShadowAreaSize = _renderBus.getShadowAreaSize();
+	const auto initialShadowAreaReach = _renderBus.getShadowAreaReach();
+	const auto initialShadowMatrix = _renderBus.getShadowMatrix();
 
 	// Iterate through all model entities
 	vector<string> savedModelEntityIDs;
@@ -58,7 +58,7 @@ void MasterRenderer::_captureCubeReflections()
 	if(skyEntity != nullptr)
 	{
 		oldLightness = skyEntity->getLightness();
-		skyEntity->setLightness(skyEntity->getOriginalLightness());
+		skyEntity->setLightness(skyEntity->getInitialLightness());
 	}
 
 	// Prepare camera
@@ -197,19 +197,19 @@ void MasterRenderer::_captureCubeReflections()
 
 	// Revert camera
 	_camera.invertUpVector();
-	_camera.setAspectRatio(originalCameraAspectRatio);
-	_camera.setFOV(originalCameraFOV);
-	_camera.setYaw(originalCameraYaw);
-	_camera.setPitch(originalCameraPitch);
-	_camera.setPosition(originalCameraPosition);
+	_camera.setAspectRatio(initialCameraAspectRatio);
+	_camera.setFOV(initialCameraFOV);
+	_camera.setYaw(initialCameraYaw);
+	_camera.setPitch(initialCameraPitch);
+	_camera.setPosition(initialCameraPosition);
 	_camera.updateMatrices();
 
 	// Revert shadows
-	_renderBus.setShadowEyePosition(originalShadowEyePosition);
-	_renderBus.setShadowCenterPosition(originalShadowAreaCenter);
-	_renderBus.setShadowAreaSize(originalShadowAreaSize);
-	_renderBus.setShadowAreaReach(originalShadowAreaReach);
-	_renderBus.setShadowMatrix(originalShadowMatrix);
+	_renderBus.setShadowEyePosition(initialShadowEyePosition);
+	_renderBus.setShadowCenterPosition(initialShadowAreaCenter);
+	_renderBus.setShadowAreaSize(initialShadowAreaSize);
+	_renderBus.setShadowAreaReach(initialShadowAreaReach);
+	_renderBus.setShadowMatrix(initialShadowMatrix);
 }
 
 void MasterRenderer::_capturePlanarReflections()
@@ -279,19 +279,19 @@ void MasterRenderer::_capturePlanarReflections()
 	}
 
 	// Move down
-	const Vec3 originalCameraPosition = _camera.getPosition();
-	_camera.setPosition(Vec3(originalCameraPosition.x, originalCameraPosition.y - (cameraDistance * 2.0f), originalCameraPosition.z));
+	const Vec3 initialCameraPosition = _camera.getPosition();
+	_camera.setPosition(Vec3(initialCameraPosition.x, initialCameraPosition.y - (cameraDistance * 2.0f), initialCameraPosition.z));
 
 	// Look up
-	const float originalCameraPitch = _camera.getPitch();
-	_camera.setPitch(-originalCameraPitch);
+	const float initialCameraPitch = _camera.getPitch();
+	_camera.setPitch(-initialCameraPitch);
 
 	// Update camera
 	_camera.updateMatrices();
 
-	// Use original camera properties for correct specular lighting
-	_renderBus.setCameraPosition(originalCameraPosition);
-	_renderBus.setCameraPitch(originalCameraPitch);
+	// Use initial camera properties for correct specular lighting
+	_renderBus.setCameraPosition(initialCameraPosition);
+	_renderBus.setCameraPitch(initialCameraPitch);
 
 	// Disable reflections
 	_renderBus.setReflectionsEnabled(false);
@@ -302,7 +302,7 @@ void MasterRenderer::_capturePlanarReflections()
 	if(skyEntity != nullptr)
 	{
 		oldSkyLightness = skyEntity->getLightness();
-		skyEntity->setLightness(skyEntity->getOriginalLightness());
+		skyEntity->setLightness(skyEntity->getInitialLightness());
 	}
 
 	// Calculate clipping plane
@@ -361,10 +361,10 @@ void MasterRenderer::_capturePlanarReflections()
 	}
 
 	// Look down
-	_camera.setPitch(originalCameraPitch);
+	_camera.setPitch(initialCameraPitch);
 
 	// Move up
-	_camera.setPosition(originalCameraPosition);
+	_camera.setPosition(initialCameraPosition);
 
 	// Update camera
 	_camera.updateMatrices();

@@ -210,7 +210,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				_fe3d.modelEntity_setBaseSize(modelID, size);
 				_fe3d.modelEntity_setStaticToCamera(modelID, isFrozen);
 
-				// Save original transformation
+				// Save initial transformation
 				if(_isEditorLoaded)
 				{
 					_initialModelPosition[modelID] = position;

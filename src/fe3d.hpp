@@ -71,7 +71,7 @@ public:
 	void skyEntity_setDiffuseMapBack(const string& ID, const string& texturePath);
 	void skyEntity_setDiffuseMapFront(const string& ID, const string& texturePath);
 	void skyEntity_setLightness(const string& ID, float lightness);
-	void skyEntity_setRotationSpeed(const string& ID, float speed);
+	void skyEntity_setRotation(const string& ID, float rotation);
 	void skyEntity_setColor(const string& ID, Vec3 color);
 	void skyEntity_setWireframed(const string& ID, bool enabled);
 
@@ -82,8 +82,8 @@ public:
 	const string skyEntity_getMixID() const;
 	const Vec3 skyEntity_getColor(const string& ID) const;
 	const float skyEntity_getLightness(const string& ID) const;
-	const float skyEntity_getOriginalLightness(const string& ID) const;
-	const float skyEntity_getRotationSpeed(const string& ID) const;
+	const float skyEntity_getInitialLightness(const string& ID) const;
+	const float skyEntity_getRotation(const string& ID) const;
 	const float skyEntity_getMixValue() const;
 	const bool skyEntity_isExisting(const string& ID) const;
 	const bool skyEntity_isVisible(const string& ID) const;

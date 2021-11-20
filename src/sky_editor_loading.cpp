@@ -117,7 +117,7 @@ const bool SkyEditor::loadSkyEntitiesFromFile()
 		// Values
 		string skyID;
 		array<string, 6> diffuseMapPaths{};
-		float rotationSpeed, lightness;
+		float rotation, lightness;
 		Vec3 color;
 
 		// Load base data
@@ -129,7 +129,7 @@ const bool SkyEditor::loadSkyEntitiesFromFile()
 			diffuseMapPaths[3] >>
 			diffuseMapPaths[4] >>
 			diffuseMapPaths[5] >>
-			rotationSpeed >>
+			rotation >>
 			lightness >>
 			color.r >>
 			color.g >>
@@ -163,7 +163,7 @@ const bool SkyEditor::loadSkyEntitiesFromFile()
 			// Set properties
 			_fe3d.skyEntity_setDiffuseMaps(skyID, diffuseMapPaths);
 			_fe3d.skyEntity_setLightness(skyID, lightness);
-			_fe3d.skyEntity_setRotationSpeed(skyID, rotationSpeed);
+			_fe3d.skyEntity_setRotation(skyID, rotation);
 			_fe3d.skyEntity_setColor(skyID, color);
 		}
 	}

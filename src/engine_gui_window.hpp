@@ -21,8 +21,8 @@ public:
 	const string& getParentID() const;
 
 	// Vectors
-	const Vec2 getOriginalPosition() const;
-	const Vec2 getOriginalSize() const;
+	const Vec2 getInitialPosition() const;
+	const Vec2 getInitialSize() const;
 
 	// Booleans
 	const bool isHovered() const;
@@ -40,8 +40,8 @@ private:
 	string _activeScreenID = "";
 
 	// Vectors
-	const Vec2 _originalPosition;
-	const Vec2 _originalSize;
+	const Vec2 _initialPosition;
+	const Vec2 _initialSize;
 
 	// Miscellaneous
 	vector<shared_ptr<EngineGuiScreen>> _screens;

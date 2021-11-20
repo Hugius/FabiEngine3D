@@ -62,16 +62,16 @@ void AudioPlayer::update(Camera& camera, vector<Sound>& soundList, vector<Music>
 					sound.setVolume(volume); // Update sound volume
 
 					// Panning
-					auto cameraFront = camera.getFrontVector(); // From camera vector
+					auto cameraDirection = camera.getFrontVector();
 					Matrix44 rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(90.0f));
-					Vec3 pointVector = cameraPosition - sound.getPosition(); // To camera vector
-					Vec4 result = (rotationMatrix * Vec4(pointVector.x, pointVector.y, pointVector.z, 1.0f));
-					pointVector = Vec3(result.x, result.y, result.z); // Rotate direction
-					pointVector = Math::normalize(pointVector); // Normalize
-					float dot = Math::calculateDotProduct(pointVector, cameraFront); // Dot product
-					float range = ((dot / 2.0f) + 0.5f); // Convert (-1 to 1) scale to (0.0f to 1.0f) scale
-					Uint8 leftStrength = Uint8(255.0f * range); // Left ear
-					Uint8 rightStrength = Uint8(255.0f - (255.0f * range)); // Right ear
+					Vec3 soundDirection = (cameraPosition - sound.getPosition());
+					Vec4 result = (rotationMatrix * Vec4(soundDirection.x, soundDirection.y, soundDirection.z, 1.0f));
+					soundDirection = Vec3(result.x, result.y, result.z);
+					soundDirection = Math::normalize(soundDirection);
+					float dot = Math::calculateDotProduct(soundDirection, cameraDirection);
+					float range = ((dot / 2.0f) + 0.5f);
+					Uint8 leftStrength = Uint8(255.0f * range);
+					Uint8 rightStrength = Uint8(255.0f - leftStrength);
 
 					// For every sound playback
 					for(const auto& channel : _findSoundChannels(sound))

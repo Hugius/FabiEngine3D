@@ -92,7 +92,7 @@ void FabiEngine3D::skyEntity_selectMainSky(const string& ID)
 void FabiEngine3D::skyEntity_setLightness(const string& ID, float lightness)
 {
 	_core->_skyEntityManager.getEntity(ID)->setLightness(lightness);
-	_core->_skyEntityManager.getEntity(ID)->setOriginalLightness(lightness);
+	_core->_skyEntityManager.getEntity(ID)->setInitialLightness(lightness);
 }
 
 void FabiEngine3D::skyEntity_setMixValue(float mixValue)
@@ -100,9 +100,9 @@ void FabiEngine3D::skyEntity_setMixValue(float mixValue)
 	_core->_renderBus.setSkyMixValue(mixValue);
 }
 
-void FabiEngine3D::skyEntity_setRotationSpeed(const string& ID, float speed)
+void FabiEngine3D::skyEntity_setRotation(const string& ID, float rotation)
 {
-	_core->_skyEntityManager.getEntity(ID)->setRotationSpeed(speed);
+	_core->_skyEntityManager.getEntity(ID)->setRotation(rotation);
 }
 
 void FabiEngine3D::skyEntity_setColor(const string& ID, Vec3 color)

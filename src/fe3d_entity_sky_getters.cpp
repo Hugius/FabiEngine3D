@@ -47,14 +47,14 @@ const float FabiEngine3D::skyEntity_getLightness(const string& ID) const
 	return _core->_skyEntityManager.getEntity(ID)->getLightness();
 }
 
-const float FabiEngine3D::skyEntity_getOriginalLightness(const string& ID) const
+const float FabiEngine3D::skyEntity_getInitialLightness(const string& ID) const
 {
-	return _core->_skyEntityManager.getEntity(ID)->getOriginalLightness();
+	return _core->_skyEntityManager.getEntity(ID)->getInitialLightness();
 }
 
-const float FabiEngine3D::skyEntity_getRotationSpeed(const string& ID) const
+const float FabiEngine3D::skyEntity_getRotation(const string& ID) const
 {
-	return _core->_skyEntityManager.getEntity(ID)->getRotationSpeed();
+	return _core->_skyEntityManager.getEntity(ID)->getRotation();
 }
 
 const float FabiEngine3D::skyEntity_getMixValue() const

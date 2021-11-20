@@ -30,9 +30,9 @@ void SkyEntity::setCubeMap(TextureID value)
 	_diffuseMap = value;
 }
 
-void SkyEntity::setOriginalLightness(float value)
+void SkyEntity::setInitialLightness(float value)
 {
-	_originalLightness = max(0.0f, value);
+	_initialLightness = max(0.0f, value);
 }
 
 void SkyEntity::setLightness(float value)
@@ -43,11 +43,6 @@ void SkyEntity::setLightness(float value)
 void SkyEntity::setRotation(float value)
 {
 	_rotation = Math::limitAngle(value);
-}
-
-void SkyEntity::setRotationSpeed(float value)
-{
-	_rotationSpeed = value;
 }
 
 void SkyEntity::setWireframed(bool value)
@@ -80,9 +75,9 @@ const TextureID SkyEntity::getDiffuseMap() const
 	return _diffuseMap;
 }
 
-const float SkyEntity::getOriginalLightness() const
+const float SkyEntity::getInitialLightness() const
 {
-	return _originalLightness;
+	return _initialLightness;
 }
 
 const float SkyEntity::getLightness() const
@@ -93,11 +88,6 @@ const float SkyEntity::getLightness() const
 const float SkyEntity::getRotation() const
 {
 	return _rotation;
-}
-
-const float SkyEntity::getRotationSpeed() const
-{
-	return _rotationSpeed;
 }
 
 const bool SkyEntity::hasCubeMap() const

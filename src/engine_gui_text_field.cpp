@@ -6,9 +6,9 @@ EngineGuiTextField::EngineGuiTextField(FabiEngine3D& fe3d, const string& parentI
 	_ID(ID),
 	_entityID("@" + parentID + "_" + ID),
 	_parentID(parentID),
-	_originalPosition(position),
-	_originalSize(size),
-	_originalColor(color)
+	_initialPosition(position),
+	_initialSize(size),
+	_initialColor(color)
 {
 	_fe3d.textEntity_create(_entityID, isCentered, isDynamic);
 	_fe3d.textEntity_setPosition(_entityID, position);
@@ -33,41 +33,41 @@ void EngineGuiTextField::changeTextContent(const string& content)
 	// Check if text content changed
 	if(content != _fe3d.textEntity_getTextContent(_entityID))
 	{
-		auto charWidth = (_originalSize.x / static_cast<float>(_fe3d.textEntity_getTextContent(_entityID).size()));
-		auto charHeight = _originalSize.y;
+		auto charWidth = (_initialSize.x / static_cast<float>(_fe3d.textEntity_getTextContent(_entityID).size()));
+		auto charHeight = _initialSize.y;
 		_fe3d.textEntity_setTextContent(_entityID, content, charWidth, charHeight);
-		updateOriginalSize();
+		updateInitialSize();
 	}
 }
 
-void EngineGuiTextField::updateOriginalPosition()
+void EngineGuiTextField::updateInitialPosition()
 {
-	_originalPosition = _fe3d.textEntity_getPosition(_entityID);
+	_initialPosition = _fe3d.textEntity_getPosition(_entityID);
 }
 
-void EngineGuiTextField::updateOriginalSize()
+void EngineGuiTextField::updateInitialSize()
 {
-	_originalSize = _fe3d.textEntity_getSize(_entityID);
+	_initialSize = _fe3d.textEntity_getSize(_entityID);
 }
 
-void EngineGuiTextField::updateOriginalColor()
+void EngineGuiTextField::updateInitialColor()
 {
-	_originalColor = _fe3d.textEntity_getColor(_entityID);
+	_initialColor = _fe3d.textEntity_getColor(_entityID);
 }
 
-const Vec2 EngineGuiTextField::getOriginalPosition() const
+const Vec2 EngineGuiTextField::getInitialPosition() const
 {
-	return _originalPosition;
+	return _initialPosition;
 }
 
-const Vec2 EngineGuiTextField::getOriginalSize() const
+const Vec2 EngineGuiTextField::getInitialSize() const
 {
-	return _originalSize;
+	return _initialSize;
 }
 
-const Vec3 EngineGuiTextField::getOriginalColor() const
+const Vec3 EngineGuiTextField::getInitialColor() const
 {
-	return _originalColor;
+	return _initialColor;
 }
 
 const string& EngineGuiTextField::getID() const

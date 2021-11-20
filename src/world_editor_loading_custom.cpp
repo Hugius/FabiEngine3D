@@ -53,13 +53,13 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 			// Data placeholders
 			string skyID, previewID;
 			Vec3 color;
-			float rotationSpeed, lightness;
+			float rotation, lightness;
 
 			// Read data from file
 			iss >>
 				skyID >>
 				previewID >>
-				rotationSpeed >>
+				rotation >>
 				lightness >>
 				color.r >>
 				color.g >>
@@ -68,7 +68,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 			// Create sky
 			if(_copyPreviewSky(skyID, previewID))
 			{
-				_fe3d.skyEntity_setRotationSpeed(skyID, rotationSpeed);
+				_fe3d.skyEntity_setRotation(skyID, rotation);
 				_fe3d.skyEntity_setLightness(skyID, lightness);
 				_fe3d.skyEntity_setColor(skyID, color);
 			}

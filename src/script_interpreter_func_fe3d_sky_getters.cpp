@@ -31,19 +31,6 @@ const bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:sky_get_rotation_speed")
-	{
-		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			// Validate sky existence
-			if(_validateFe3dSky())
-			{
-				auto result = _fe3d.skyEntity_getRotationSpeed(_fe3d.skyEntity_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
-			}
-		}
-	}
 	else if(functionName == "fe3d:sky_get_lightness")
 	{
 		// Validate arguments
@@ -66,6 +53,19 @@ const bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functi
 			if(_validateFe3dSky())
 			{
 				auto result = _fe3d.skyEntity_getColor(_fe3d.skyEntity_getSelectedID());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_get_rotation")
+	{
+		// Validate arguments
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Validate sky existence
+			if(_validateFe3dSky())
+			{
+				auto result = _fe3d.skyEntity_getRotation(_fe3d.skyEntity_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}

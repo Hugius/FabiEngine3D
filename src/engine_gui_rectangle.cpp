@@ -6,9 +6,9 @@ EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentI
 	_ID(ID),
 	_entityID("@" + parentID + "_" + ID),
 	_parentID(parentID),
-	_originalPosition(position),
-	_originalSize(size),
-	_originalColor(color)
+	_initialPosition(position),
+	_initialSize(size),
+	_initialColor(color)
 {
 	_fe3d.imageEntity_create(_entityID, isCentered);
 	_fe3d.imageEntity_setPosition(_entityID, position);
@@ -22,9 +22,9 @@ EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentI
 	_ID(ID),
 	_entityID("@" + parentID + "_" + ID),
 	_parentID(parentID),
-	_originalPosition(position),
-	_originalSize(size),
-	_originalColor(Vec3(1.0f))
+	_initialPosition(position),
+	_initialSize(size),
+	_initialColor(Vec3(1.0f))
 {
 	_fe3d.imageEntity_create(_entityID, isCentered);
 	_fe3d.imageEntity_setPosition(_entityID, position);
@@ -42,34 +42,34 @@ void EngineGuiRectangle::setVisible(bool isVisible)
 	_fe3d.imageEntity_setVisible(_entityID, isVisible);
 }
 
-void EngineGuiRectangle::updateOriginalPosition()
+void EngineGuiRectangle::updateInitialPosition()
 {
-	_originalPosition = _fe3d.imageEntity_getPosition(_entityID);
+	_initialPosition = _fe3d.imageEntity_getPosition(_entityID);
 }
 
-void EngineGuiRectangle::updateOriginalSize()
+void EngineGuiRectangle::updateInitialSize()
 {
-	_originalSize = _fe3d.imageEntity_getSize(_entityID);
+	_initialSize = _fe3d.imageEntity_getSize(_entityID);
 }
 
-void EngineGuiRectangle::updateOriginalColor()
+void EngineGuiRectangle::updateInitialColor()
 {
-	_originalColor = _fe3d.imageEntity_getColor(_entityID);
+	_initialColor = _fe3d.imageEntity_getColor(_entityID);
 }
 
-const Vec2 EngineGuiRectangle::getOriginalPosition() const
+const Vec2 EngineGuiRectangle::getInitialPosition() const
 {
-	return _originalPosition;
+	return _initialPosition;
 }
 
-const Vec2 EngineGuiRectangle::getOriginalSize() const
+const Vec2 EngineGuiRectangle::getInitialSize() const
 {
-	return _originalSize;
+	return _initialSize;
 }
 
-const Vec3 EngineGuiRectangle::getOriginalColor() const
+const Vec3 EngineGuiRectangle::getInitialColor() const
 {
-	return _originalColor;
+	return _initialColor;
 }
 
 const string& EngineGuiRectangle::getID() const

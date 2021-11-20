@@ -35,21 +35,6 @@ const bool ScriptInterpreter::_executeFe3dSkySetterFunction(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:sky_set_rotation_speed")
-	{
-		auto types = { SVT::DECIMAL };
-
-		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate sky existence
-			if(_validateFe3dSky())
-			{
-				_fe3d.skyEntity_setRotationSpeed(_fe3d.skyEntity_getSelectedID(), arguments[0].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-			}
-		}
-	}
 	else if(functionName == "fe3d:sky_set_lightness")
 	{
 		auto types = { SVT::DECIMAL };
@@ -79,6 +64,21 @@ const bool ScriptInterpreter::_executeFe3dSkySetterFunction(const string& functi
 					arguments[0].getDecimal(),
 					arguments[1].getDecimal(),
 					arguments[2].getDecimal()));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_set_rotation")
+	{
+		auto types = {SVT::DECIMAL};
+
+		// Validate arguments
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate sky existence
+			if(_validateFe3dSky())
+			{
+				_fe3d.skyEntity_setRotation(_fe3d.skyEntity_getSelectedID(), arguments[0].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

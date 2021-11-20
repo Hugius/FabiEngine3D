@@ -29,7 +29,7 @@ const bool SkyEditor::saveSkyEntitiesToFile() const
 	{
 		// Values
 		auto diffuseMapPaths = _fe3d.skyEntity_getDiffuseMapPaths(skyID);
-		auto rotationSpeed = _fe3d.skyEntity_getRotationSpeed(skyID);
+		auto rotation = _fe3d.skyEntity_getRotation(skyID);
 		auto lightness = _fe3d.skyEntity_getLightness(skyID);
 		auto color = _fe3d.skyEntity_getColor(skyID);
 
@@ -57,7 +57,7 @@ const bool SkyEditor::saveSkyEntitiesToFile() const
 
 		// Write data to file
 		file <<
-			rotationSpeed << " " <<
+			rotation << " " <<
 			lightness << " " <<
 			color.r << " " <<
 			color.g << " " <<

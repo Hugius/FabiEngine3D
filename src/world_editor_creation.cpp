@@ -19,7 +19,7 @@ const bool WorldEditor::_copyPreviewSky(const string& newID, const string& previ
 	_fe3d.skyEntity_create(newID);
 	_fe3d.skyEntity_setDiffuseMaps(newID, _fe3d.skyEntity_getDiffuseMapPaths(previewID));
 	_fe3d.skyEntity_setLightness(newID, _fe3d.skyEntity_getLightness(previewID));
-	_fe3d.skyEntity_setRotationSpeed(newID, _fe3d.skyEntity_getRotationSpeed(previewID));
+	_fe3d.skyEntity_setRotation(newID, _fe3d.skyEntity_getRotation(previewID));
 	_fe3d.skyEntity_setColor(newID, _fe3d.skyEntity_getColor(previewID));
 	_fe3d.skyEntity_selectMainSky(newID);
 
@@ -274,7 +274,7 @@ const bool WorldEditor::_copyPreviewModel(const string& newID, const string& pre
 		_fe3d.aabbEntity_setLocalSize(newAabbID, _fe3d.aabbEntity_getSize(previewAabbID));
 	}
 
-	// Save original transformation
+	// Save initial transformation
 	if(_isEditorLoaded)
 	{
 		_initialModelPosition[newID] = _fe3d.modelEntity_getBasePosition(previewID);

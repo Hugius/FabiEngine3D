@@ -74,27 +74,27 @@ void MasterRenderer::_captureWorldDepth()
 						{
 							auto lodEntity = foundPair->second;
 
-							// Save original transformation
-							Vec3 originalPosition = lodEntity->getBasePosition();
-							Vec3 originalRotation = lodEntity->getBaseRotation();
-							Vec3 originalSize = lodEntity->getBaseSize();
-							bool originalVisibility = lodEntity->isVisible();
+							// Save initial transformation
+							Vec3 initialPosition = lodEntity->getBasePosition();
+							Vec3 initialRotation = lodEntity->getBaseRotation();
+							Vec3 initialSize = lodEntity->getBaseSize();
+							bool initialVisibility = lodEntity->isVisible();
 
 							// Change transformation
 							lodEntity->setBasePosition(modelEntity->getBasePosition());
 							lodEntity->setBaseRotation(modelEntity->getBaseRotation());
-							lodEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
+							lodEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * initialSize);
 							lodEntity->setVisible(modelEntity->isVisible());
 							lodEntity->updateTransformationMatrix();
 
 							// Render LOD entity
 							_modelEntityDepthRenderer.render(lodEntity, clippingY, isUnderWater);
 
-							// Revert to original transformation
-							lodEntity->setBasePosition(originalPosition);
-							lodEntity->setBaseRotation(originalRotation);
-							lodEntity->setBaseSize(originalSize);
-							lodEntity->setVisible(originalVisibility);
+							// Revert to initial transformation
+							lodEntity->setBasePosition(initialPosition);
+							lodEntity->setBaseRotation(initialRotation);
+							lodEntity->setBaseSize(initialSize);
+							lodEntity->setVisible(initialVisibility);
 							lodEntity->updateTransformationMatrix();
 						}
 						else

@@ -125,6 +125,7 @@
 - **Decimal**: a floating point number (example: `3.1415`)
 - **Integer**: a number (example: `3`)
 - **Boolean**: can only be `true` or `false`
+- **Enumeration**: a limited amount of types (example: MALE, FEMALE, OTHER)
 - **Vector**: a mathematical element that has both a direction and a magnitude
 - **Normalized Vector**: a vector with magnitude of exactly 1
 - **Vertex**: a coordinate (XYZ) in 3D mesh
@@ -137,3 +138,5 @@
 - **Global Illumination**: an indirect form of global lighting in the world
 - **Gimbal Lock**: incorrect rotation as a result of 2 parallel rotation axes
 - **RGB**: Red Green Blue
+- **Mouse**: the physical peripheral known as "the mouse"
+- **Cursor**: the pointer within FabiEngine3D that is moved using the mouse

@@ -130,7 +130,6 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		// Default engine background
 		skyEntity_create("@@engineBackground");
 		skyEntity_setDiffuseMaps("@@engineBackground", texturePaths3D);
-		skyEntity_setRotationSpeed("@@engineBackground", 0.002f);
 
 		// Custom cursor texture
 		imageEntity_create("@@cursor", true);
@@ -184,6 +183,9 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 			skyEntity_setLightness("@@engineBackground", 1.0f);
 		}
 		lastScreen = activeScreen;
+
+		// Update background
+		skyEntity_setRotation("@@engineBackground", skyEntity_getRotation("@@engineBackground") + 0.0025f);
 
 		// Update custom cursor
 		imageEntity_setPosition("@@cursor", Math::convertToNDC(Tools::convertFromScreenCoords(misc_getCursorPosition())));

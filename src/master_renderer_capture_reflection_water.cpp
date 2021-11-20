@@ -61,19 +61,19 @@ void MasterRenderer::_captureWaterReflections()
 		}
 
 		// Move down
-		const Vec3 originalCameraPosition = _camera.getPosition();
-		_camera.setPosition(Vec3(originalCameraPosition.x, originalCameraPosition.y - (cameraDistance * 2.0f), originalCameraPosition.z));
+		const Vec3 initialCameraPosition = _camera.getPosition();
+		_camera.setPosition(Vec3(initialCameraPosition.x, initialCameraPosition.y - (cameraDistance * 2.0f), initialCameraPosition.z));
 
 		// Look up
-		const float originalCameraPitch = _camera.getPitch();
-		_camera.setPitch(-originalCameraPitch);
+		const float initialCameraPitch = _camera.getPitch();
+		_camera.setPitch(-initialCameraPitch);
 
 		// Update camera
 		_camera.updateMatrices();
 
-		// Use original camera properties for correct specular lighting
-		_renderBus.setCameraPosition(originalCameraPosition);
-		_renderBus.setCameraPitch(originalCameraPitch);
+		// Use initial camera properties for correct specular lighting
+		_renderBus.setCameraPosition(initialCameraPosition);
+		_renderBus.setCameraPitch(initialCameraPitch);
 
 		// Disable reflections
 		_renderBus.setReflectionsEnabled(false);
@@ -88,7 +88,7 @@ void MasterRenderer::_captureWaterReflections()
 		if(skyEntity != nullptr)
 		{
 			oldLightness = skyEntity->getLightness();
-			skyEntity->setLightness(skyEntity->getOriginalLightness());
+			skyEntity->setLightness(skyEntity->getInitialLightness());
 		}
 
 		// Calculate clipping plane
@@ -161,10 +161,10 @@ void MasterRenderer::_captureWaterReflections()
 		}
 
 		// Look down
-		_camera.setPitch(originalCameraPitch);
+		_camera.setPitch(initialCameraPitch);
 
 		// Move up
-		_camera.setPosition(originalCameraPosition);
+		_camera.setPosition(initialCameraPosition);
 
 		// Update camera
 		_camera.updateMatrices();

@@ -40,10 +40,10 @@ void EngineGuiScrollingList::createButton(const string& ID, string textContent)
 	// Define list boundaries
 	string rectangleID = _buttons.back()->getRectangle()->getEntityID();
 	string textID = _buttons.back()->getTextField()->getEntityID();
-	_fe3d.imageEntity_setMinPosition(rectangleID, Vec2(-1.0f, _originalPosition.y - (_originalSize.y / 2.0f)));
-	_fe3d.textEntity_setMinPosition(textID, Vec2(-1.0f, _originalPosition.y - (_originalSize.y / 2.0f)));
-	_fe3d.imageEntity_setMaxPosition(rectangleID, Vec2(1.0f, _originalPosition.y + (_originalSize.y / 2.0f)));
-	_fe3d.textEntity_setMaxPosition(textID, Vec2(1.0f, _originalPosition.y + (_originalSize.y / 2.0f)));
+	_fe3d.imageEntity_setMinPosition(rectangleID, Vec2(-1.0f, _initialPosition.y - (_initialSize.y / 2.0f)));
+	_fe3d.textEntity_setMinPosition(textID, Vec2(-1.0f, _initialPosition.y - (_initialSize.y / 2.0f)));
+	_fe3d.imageEntity_setMaxPosition(rectangleID, Vec2(1.0f, _initialPosition.y + (_initialSize.y / 2.0f)));
+	_fe3d.textEntity_setMaxPosition(textID, Vec2(1.0f, _initialPosition.y + (_initialSize.y / 2.0f)));
 }
 
 void EngineGuiScrollingList::deleteButton(const string& ID)
@@ -128,9 +128,9 @@ void EngineGuiScrollingList::_updateScolling()
 
 		// Checking if cursor is inside scrolling list
 		Vec2 cursorPosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
-		if(cursorPosition.x > _originalPosition.x - (_originalSize.x / 2.0f) && cursorPosition.x < _originalPosition.x + (_originalSize.x / 2.0f))
+		if(cursorPosition.x > _initialPosition.x - (_initialSize.x / 2.0f) && cursorPosition.x < _initialPosition.x + (_initialSize.x / 2.0f))
 		{
-			if(cursorPosition.y > _originalPosition.y - (_originalSize.y / 2.0f) && cursorPosition.y < _originalPosition.y + (_originalSize.y / 2.0f))
+			if(cursorPosition.y > _initialPosition.y - (_initialSize.y / 2.0f) && cursorPosition.y < _initialPosition.y + (_initialSize.y / 2.0f))
 			{
 				float scrollingAcceleration = (static_cast<float>(-_fe3d.input_getMouseWheelY()) / SCROLL_WHEEL_DIVIDER);
 				_scrollingSpeed += scrollingAcceleration;
@@ -181,8 +181,8 @@ void EngineGuiScrollingList::_updateScolling()
 			// Determine whether moving or resetting the positions
 			if(mustReset)
 			{
-				_fe3d.imageEntity_setPosition(rectangleID, button->getRectangle()->getOriginalPosition());
-				_fe3d.textEntity_setPosition(textID, button->getTextField()->getOriginalPosition());
+				_fe3d.imageEntity_setPosition(rectangleID, button->getRectangle()->getInitialPosition());
+				_fe3d.textEntity_setPosition(textID, button->getTextField()->getInitialPosition());
 			}
 			else
 			{

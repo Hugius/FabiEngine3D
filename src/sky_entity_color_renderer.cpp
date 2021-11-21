@@ -36,27 +36,35 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, cons
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
 
-		// Shader uniforms
+		// Main entity shader uniforms
 		_shader.uploadUniform("u_isWireframed", (mainEntity->isWireframed() || _renderBus.isWireframeRenderingEnabled()));
 		_shader.uploadUniform("u_rotationMatrix", mainEntity->getRotationMatrix());
 		_shader.uploadUniform("u_mainLightness", mainEntity->getLightness());
 		_shader.uploadUniform("u_mainColor", mainEntity->getColor());
+		_shader.uploadUniform("u_wireframeColor", mainEntity->getWireframeColor());
+
+		// Mix entity shader uniforms
 		if(mixEntity != nullptr)
 		{
 			_shader.uploadUniform("u_mixLightness", mixEntity->getLightness());
 			_shader.uploadUniform("u_mixColor", mixEntity->getColor());
 		}
 
-		// Bind textures
+		// Bind main entity textures
 		if(mainEntity->hasCubeMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, mainEntity->getCubeMap());
 		}
-		if((mixEntity != nullptr) && mixEntity->hasCubeMap())
+
+		// Bind mix entity textures
+		if(mixEntity != nullptr)
 		{
-			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, mixEntity->getCubeMap());
+			if(mixEntity->hasCubeMap())
+			{
+				glActiveTexture(GL_TEXTURE1);
+				glBindTexture(GL_TEXTURE_CUBE_MAP, mixEntity->getCubeMap());
+			}
 		}
 
 		// Bind buffer
@@ -69,16 +77,21 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, cons
 		// Unbind buffer
 		glBindVertexArray(0);
 
-		// Unbind textures
+		// Unbind main entity textures
 		if(mainEntity->hasCubeMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 		}
-		if((mixEntity != nullptr) && mixEntity->hasCubeMap())
+
+		// Bind mix entity textures
+		if(mixEntity != nullptr)
 		{
-			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+			if(mixEntity->hasCubeMap())
+			{
+				glActiveTexture(GL_TEXTURE1);
+				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+			}
 		}
 
 		// Disable wireframe

@@ -74,6 +74,7 @@ public:
 	void skyEntity_setRotation(const string& ID, float rotation);
 	void skyEntity_setColor(const string& ID, Vec3 color);
 	void skyEntity_setWireframed(const string& ID, bool enabled);
+	void skyEntity_setWireframeColor(const string& ID, Vec3 color);
 
 	// Sky entity interface - getters
 	const vector<string> skyEntity_getAllIDs() const;
@@ -86,6 +87,7 @@ public:
 	const string& skyEntity_getCubeMapFront(const string& ID) const;
 	const string skyEntity_getSelectedID() const;
 	const string skyEntity_getMixID() const;
+	const Vec3 skyEntity_getWireframeColor(const string& ID) const;
 	const Vec3 skyEntity_getColor(const string& ID) const;
 	const float skyEntity_getLightness(const string& ID) const;
 	const float skyEntity_getInitialLightness(const string& ID) const;
@@ -126,6 +128,7 @@ public:
 	void terrainEntity_setSpecularIntensity(const string& ID, float intensity);
 	void terrainEntity_setSpecular(const string& ID, bool enabled);
 	void terrainEntity_setWireframed(const string& ID, bool enabled);
+	void terrainEntity_setWireframeColor(const string& ID, Vec3 color);
 
 	// Terrain entity interface - getters
 	const vector<string> terrainEntity_getAllIDs() const;
@@ -140,6 +143,7 @@ public:
 	const string& terrainEntity_getNormalMapPathR(const string& ID) const;
 	const string& terrainEntity_getNormalMapPathG(const string& ID) const;
 	const string& terrainEntity_getNormalMapPathB(const string& ID) const;
+	const Vec3 terrainEntity_getWireframeColor(const string& ID) const;
 	const float terrainEntity_getMaxHeight(const string& ID) const;
 	const float terrainEntity_getTextureRepeat(const string& ID) const;
 	const float terrainEntity_getLightness(const string& ID) const;
@@ -178,6 +182,7 @@ public:
 	void waterEntity_setReflective(const string& ID, bool enabled);
 	void waterEntity_setRefractive(const string& ID, bool enabled);
 	void waterEntity_setWireframed(const string& ID, bool enabled);
+	void waterEntity_setWireframeColor(const string& ID, Vec3 color);
 	void waterEntity_setDudvMap(const string& ID, const string& texturePath);
 	void waterEntity_setNormalMap(const string& ID, const string& texturePath);
 	void waterEntity_setDisplacementMap(const string& ID, const string& texturePath);
@@ -195,6 +200,7 @@ public:
 	const string& waterEntity_getNormalMapPath(const string& ID) const;
 	const string& waterEntity_getDisplacementMapPath(const string& ID) const;
 	const string waterEntity_getSelectedID() const;
+	const Vec3 waterEntity_getWireframeColor(const string& ID) const;
 	const Vec3 waterEntity_getColor(const string& ID) const;
 	const Vec2 waterEntity_getSpeed(const string& ID) const;
 	const float waterEntity_getHeight(const string& ID) const;
@@ -538,10 +544,13 @@ public:
 	void imageEntity_setSpriteAnimationRowIndex(const string& ID, unsigned int index);
 	void imageEntity_setSpriteAnimationColumnIndex(const string& ID, unsigned int index);
 	void imageEntity_setSpriteAnimationFramestep(const string& ID, int framestep);
+	void imageEntity_setWireframed(const string& ID, bool enabled);
+	void imageEntity_setWireframeColor(const string& ID, Vec3 color);
 
 	// Image entity interface - getters
 	const vector<string> imageEntity_getAllIDs() const;
 	const string& imageEntity_getDiffuseMapPath(const string& ID) const;
+	const Vec3 imageEntity_getWireframeColor(const string& ID) const;
 	const Vec3 imageEntity_getColor(const string& ID) const;
 	const Vec2 imageEntity_getPosition(const string& ID) const;
 	const Vec2 imageEntity_getSize(const string& ID) const;
@@ -564,6 +573,7 @@ public:
 	const bool imageEntity_isSpriteAnimationPlaying(const string& ID) const;
 	const bool imageEntity_isSpriteAnimationPaused(const string& ID) const;
 	const bool imageEntity_hasDiffuseMap(const string& ID) const;
+	const bool imageEntity_isWireframed(const string& ID) const;
 
 	// Text entity interface - setters
 	void textEntity_create(const string& ID, bool isCentered, bool isDynamic);

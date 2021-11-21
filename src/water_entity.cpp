@@ -115,6 +115,11 @@ void WaterEntity::setWireframed(bool value)
 	_isWireframed = value;
 }
 
+void WaterEntity::setWireframeColor(Vec3 value)
+{
+	_wireframeColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+}
+
 void WaterEntity::setSize(float value)
 {
 	_size = max(0.0f, value);
@@ -198,6 +203,11 @@ const Vec2 WaterEntity::getSpeed() const
 const Vec2 WaterEntity::getWaveOffset() const
 {
 	return _waveOffset;
+}
+
+const Vec3 WaterEntity::getWireframeColor() const
+{
+	return _wireframeColor;
 }
 
 const float WaterEntity::getWaveHeight() const

@@ -107,6 +107,11 @@ void ImageEntity::setTransparency(float value)
 	_transparency = clamp(value, 0.0f, 1.0f);
 }
 
+void ImageEntity::setWireframeColor(Vec3 value)
+{
+	_wireframeColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+}
+
 void ImageEntity::setPosition(Vec2 value)
 {
 	_position = value;
@@ -341,6 +346,11 @@ const string& ImageEntity::getDiffuseMapPath() const
 	return _diffuseMapPath;
 }
 
+const Vec3 ImageEntity::getWireframeColor() const
+{
+	return _wireframeColor;
+}
+
 const Vec3 ImageEntity::getColor() const
 {
 	return _color;
@@ -349,6 +359,11 @@ const Vec3 ImageEntity::getColor() const
 const float ImageEntity::getTransparency() const
 {
 	return _transparency;
+}
+
+const bool ImageEntity::isWireframed() const
+{
+	return _isWireframed;
 }
 
 const bool ImageEntity::isCentered() const
@@ -414,6 +429,11 @@ void ImageEntity::setPerspectiveDepthEntity(bool value)
 void ImageEntity::setCentered(bool value)
 {
 	_isCentered = value;
+}
+
+void ImageEntity::setWireframed(bool value)
+{
+	_isWireframed = value;
 }
 
 const bool ImageEntity::isPerspectiveDepthEntity() const

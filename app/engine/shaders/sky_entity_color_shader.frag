@@ -1,9 +1,6 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-// Constant variables
-#define WIREFRAME_COLOR vec3(1.0f, 1.0f, 1.0f)
-
 // In variables
 in vec3 f_uv;
 
@@ -17,6 +14,7 @@ uniform float u_mixLightness;
 uniform float u_mixValue;
 
 // Vector uniforms
+uniform vec3 u_wireframeColor;
 uniform vec3 u_mainColor;
 uniform vec3 u_mixColor;
 
@@ -33,7 +31,7 @@ void main()
 	// Wireframe color
 	if(u_isWireframed)
 	{
-		o_primaryColor = vec4(WIREFRAME_COLOR, 1.0f);
+		o_primaryColor = vec4(u_wireframeColor, 1.0f);
 		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 		return;
 	}

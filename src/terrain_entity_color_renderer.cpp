@@ -150,6 +150,7 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 		_shader.uploadUniform("u_hasNormalMapR", entity->hasNormalMapR());
 		_shader.uploadUniform("u_hasNormalMapG", entity->hasNormalMapG());
 		_shader.uploadUniform("u_hasNormalMapB", entity->hasNormalMapB());
+		_shader.uploadUniform("u_wireframeColor", entity->getWireframeColor());
 
 		// Bind textures
 		if(entity->hasDiffuseMap())

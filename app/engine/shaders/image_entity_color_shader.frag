@@ -12,6 +12,7 @@ uniform vec3 u_color;
 uniform vec2 u_windowSize;
 uniform vec2 u_minPosition;
 uniform vec2 u_maxPosition;
+uniform vec3 u_wireframeColor;
 
 // Float uniforms
 uniform float u_transparency;
@@ -21,6 +22,7 @@ uniform float u_farDistance;
 // Boolean uniforms
 uniform bool u_isPerspectiveDepthEntity;
 uniform bool u_hasDiffuseMap;
+uniform bool u_isWireframed;
 
 // Out variables
 layout (location = 0) out vec4 o_finalColor;
@@ -31,6 +33,13 @@ float convertDepthToPerspective(float depth);
 // Process fragment
 void main()
 {
+	// Wireframe color
+	if(u_isWireframed)
+	{
+		o_finalColor = vec4(u_wireframeColor, 1.0f);
+		return;
+	}
+
 	// Calculate fragment position and convert to NDC
 	vec2 normalizedPosition = (gl_FragCoord.xy / u_windowSize);
 	vec2 ndcPosition = ((normalizedPosition * 2.0f) - vec2(1.0f));

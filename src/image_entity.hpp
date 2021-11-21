@@ -21,6 +21,7 @@ public:
 	void setMirroredHorizontally(bool value);
 	void setMirroredVertically(bool value);
 	void setTransparency(float value);
+	void setWireframeColor(Vec3 value);
 	void setColor(Vec3 value);
 	void setMinPosition(Vec2 value);
 	void setMaxPosition(Vec2 value);
@@ -48,6 +49,7 @@ public:
 	void increaseSpriteAnimationLoops();
 	void setPerspectiveDepthEntity(bool value);
 	void setCentered(bool value);
+	void setWireframed(bool value);
 
 	// Strings
 	const string& getDiffuseMapPath() const;
@@ -56,6 +58,7 @@ public:
 	const Matrix44 getTransformationMatrix() const;
 
 	// Vectors
+	const Vec3 getWireframeColor() const;
 	const Vec3 getColor() const;
 	const Vec2 getPosition() const;
 	const Vec2 getSize() const;
@@ -78,6 +81,7 @@ public:
 	const unsigned int getDepth() const;
 
 	// Booleans
+	const bool isWireframed() const;
 	const bool isCentered() const;
 	const bool isMirroredHorizonally() const;
 	const bool isMirroredVertically() const;
@@ -100,6 +104,7 @@ private:
 
 	// Vectors
 	Vec3 _color = Vec3(1.0f);
+	Vec3 _wireframeColor = Vec3(1.0f);
 	Vec2 _minPosition = Vec2(-1.0f);
 	Vec2 _maxPosition = Vec2(1.0f);
 	Vec2 _position = Vec2(0.0f);
@@ -133,6 +138,7 @@ private:
 	bool _isMirroredHorizontally = false;
 	bool _isMirroredVertically = false;
 	bool _isPerspectiveDepthEntity = false;
+	bool _isWireframed = false;
 
 	// Miscellaneous
 	shared_ptr<RenderBuffer> _renderBuffer = nullptr;

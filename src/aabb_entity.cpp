@@ -100,6 +100,11 @@ void AabbEntity::setCollided(bool value)
 	_hasCollided = value;
 }
 
+void AabbEntity::setColor(Vec3 value)
+{
+	_color = value;
+}
+
 void AabbEntity::setPosition(Vec3 value)
 {
 	_position = value;
@@ -181,6 +186,11 @@ const Vec3 AabbEntity::getPosition() const
 const Vec3 AabbEntity::getSize() const
 {
 	return _size;
+}
+
+const Vec3 AabbEntity::getColor() const
+{
+	return _color;
 }
 
 const string& AabbEntity::getParentID() const

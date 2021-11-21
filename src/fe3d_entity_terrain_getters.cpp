@@ -170,6 +170,11 @@ const string& FabiEngine3D::terrainEntity_getNormalMapPathB(const string& ID) co
 	return _core->_terrainEntityManager.getEntity(ID)->getNormalMapPathB();
 }
 
+const Vec3 FabiEngine3D::terrainEntity_getWireframeColor(const string& ID) const
+{
+	return _core->_terrainEntityManager.getEntity(ID)->getWireframeColor();
+}
+
 const float FabiEngine3D::terrainEntity_getRedRepeat(const string& ID) const
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getRedRepeat();

@@ -48,6 +48,7 @@ public:
 	void setSpecularIntensity(float value);
 	void setSpecular(bool value);
 	void setWireframed(bool value);
+	void setWireframeColor(Vec3 value);
 
 	// Strings
 	const string& getHeightMapPath() const;
@@ -65,6 +66,7 @@ public:
 	const vector<Vec3>& getVertices() const;
 	const vector<Vec3>& getNormals() const;
 	const vector<Vec2>& getUvCoords() const;
+	const Vec3 getWireframeColor() const;
 
 	// Decimals
 	const vector<float>& getPixels() const;
@@ -121,6 +123,7 @@ private:
 	vector<Vec3> _vertices;
 	vector<Vec3> _normals;
 	vector<Vec2> _uvCoords;
+	Vec3 _wireframeColor = Vec3(1.0f);
 
 	// Decimals
 	vector<float> _pixels;

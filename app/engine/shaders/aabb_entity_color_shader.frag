@@ -1,8 +1,8 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-// Constant variables
-#define WIREFRAME_COLOR vec3(1.0f, 0.0f, 0.0f)
+// Vector uniforms
+uniform vec3 u_color;
 
 // Out variables
 layout (location = 0) out vec4 o_primaryColor;
@@ -12,7 +12,7 @@ layout (location = 1) out vec4 o_secondaryColor;
 void main()
 {
 	// Apply gamma correction
-	vec3 primaryColor = pow(WIREFRAME_COLOR, vec3(1.0f / 2.2f));
+	vec3 primaryColor = pow(u_color, vec3(1.0f / 2.2f));
 
 	// Set final colors
 	o_primaryColor = vec4(primaryColor, 1.0f);

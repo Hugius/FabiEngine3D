@@ -50,6 +50,11 @@ void SkyEntity::setWireframed(bool value)
 	_isWireframed = value;
 }
 
+void SkyEntity::setWireframeColor(Vec3 value)
+{
+	_wireframeColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+}
+
 const shared_ptr<RenderBuffer> SkyEntity::getRenderBuffer() const
 {
 	return _renderBuffer;
@@ -63,6 +68,11 @@ const array<string, 6>& SkyEntity::getCubeMapPaths() const
 const Matrix44& SkyEntity::getRotationMatrix() const
 {
 	return _rotationMatrix;
+}
+
+const Vec3 SkyEntity::getWireframeColor() const
+{
+	return _wireframeColor;
 }
 
 const Vec3 SkyEntity::getColor() const

@@ -1,6 +1,7 @@
 #include "terrain_entity.hpp"
 
 using std::max;
+using std::clamp;
 
 void TerrainEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 {
@@ -160,6 +161,11 @@ void TerrainEntity::setSpecular(bool value)
 void TerrainEntity::setWireframed(bool value)
 {
 	_isWireframed = value;
+}
+
+void TerrainEntity::setWireframeColor(Vec3 value)
+{
+	_wireframeColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
 void TerrainEntity::setLightness(float value)

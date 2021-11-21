@@ -86,6 +86,11 @@ void FabiEngine3D::waterEntity_setWireframed(const string& ID, bool enabled)
 	_core->_waterEntityManager.getEntity(ID)->setWireframed(enabled);
 }
 
+void FabiEngine3D::waterEntity_setWireframeColor(const string& ID, Vec3 color)
+{
+	_core->_waterEntityManager.getEntity(ID)->setWireframeColor(color);
+}
+
 void FabiEngine3D::waterEntity_setDudvMap(const string& ID, const string& texturePath)
 {
 	if(texturePath.empty())

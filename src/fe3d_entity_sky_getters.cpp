@@ -25,6 +25,11 @@ const string FabiEngine3D::skyEntity_getMixID() const
 	}
 }
 
+const Vec3 FabiEngine3D::skyEntity_getWireframeColor(const string& ID) const
+{
+	return _core->_skyEntityManager.getEntity(ID)->getWireframeColor();
+}
+
 const vector<string> FabiEngine3D::skyEntity_getAllIDs() const
 {
 	vector<string> IDs;

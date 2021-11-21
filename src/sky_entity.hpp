@@ -25,6 +25,7 @@ public:
 	void setLightness(float value);
 	void setRotation(float value);
 	void setWireframed(bool value);
+	void setWireframeColor(Vec3 value);
 
 	// Strings
 	const array<string, 6>& getCubeMapPaths() const;
@@ -33,6 +34,7 @@ public:
 	const Matrix44& getRotationMatrix() const;
 
 	// Vectors
+	const Vec3 getWireframeColor() const;
 	const Vec3 getColor() const;
 
 	// Decimals
@@ -57,6 +59,7 @@ private:
 	Matrix44 _rotationMatrix = Matrix44(1.0f);
 
 	// Vectors
+	Vec3 _wireframeColor = Vec3(1.0f);
 	Vec3 _color = Vec3(1.0f);
 
 	// Decimals

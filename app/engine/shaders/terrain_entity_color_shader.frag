@@ -4,7 +4,6 @@
 // Constant variables
 #define MAX_POINTLIGHT_COUNT 64
 #define MAX_SPOTLIGHT_COUNT 64
-#define WIREFRAME_COLOR vec3(1.0f, 1.0f, 1.0f)
 #define SPOTLIGHT_SMOOTHING_MULTIPLIER 0.95f
 
 // In variables
@@ -39,6 +38,7 @@ uniform vec3 u_directionalLightingColor;
 uniform vec3 u_directionalLightPosition;
 uniform vec3 u_shadowAreaCenter;
 uniform vec3 u_fogColor;
+uniform vec3 u_wireframeColor;
 
 // Float uniforms
 uniform float u_pointlightIntensities[MAX_POINTLIGHT_COUNT];
@@ -104,7 +104,7 @@ void main()
 	// Wireframe color
 	if(u_isWireframed)
 	{
-		o_primaryColor = vec4(WIREFRAME_COLOR, 1.0f);
+		o_primaryColor = vec4(u_wireframeColor, 1.0f);
 		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 		return;
 	}

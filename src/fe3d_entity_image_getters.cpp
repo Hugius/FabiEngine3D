@@ -46,6 +46,11 @@ const string& FabiEngine3D::imageEntity_getDiffuseMapPath(const string& ID) cons
 	_core->_imageEntityManager.getEntity(ID)->getDiffuseMapPath();
 }
 
+const Vec3 FabiEngine3D::imageEntity_getWireframeColor(const string& ID) const
+{
+	_core->_imageEntityManager.getEntity(ID)->getWireframeColor();
+}
+
 const Vec2 FabiEngine3D::imageEntity_getSize(const string& ID) const
 {
 	return _core->_imageEntityManager.getEntity(ID)->getSize();
@@ -94,6 +99,11 @@ const bool FabiEngine3D::imageEntity_isSpriteAnimationPaused(const string& ID) c
 const bool FabiEngine3D::imageEntity_hasDiffuseMap(const string& ID) const
 {
 	return _core->_imageEntityManager.getEntity(ID)->hasDiffuseMap();
+}
+
+const bool FabiEngine3D::imageEntity_isWireframed(const string& ID) const
+{
+	return _core->_imageEntityManager.getEntity(ID)->isWireframed();
 }
 
 const bool FabiEngine3D::imageEntity_isMirroredHorizontally(const string& ID) const

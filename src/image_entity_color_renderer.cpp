@@ -64,6 +64,8 @@ void ImageEntityColorRenderer::render(const shared_ptr<ImageEntity> entity)
 		_shader.uploadUniform("u_transparency", entity->getTransparency());
 		_shader.uploadUniform("u_isPerspectiveDepthEntity", entity->isPerspectiveDepthEntity());
 		_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap());
+		_shader.uploadUniform("u_wireframeColor", entity->getWireframeColor());
+		_shader.uploadUniform("u_isWireframed", entity->isWireframed());
 
 		// Bind textures
 		if(entity->hasDiffuseMap())

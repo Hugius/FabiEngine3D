@@ -38,6 +38,7 @@ public:
 	void setReflective(bool value);
 	void setRefractive(bool value);
 	void setWireframed(bool value);
+	void setWireframeColor(Vec3 value);
 
 	// Strings
 	const string& getDudvMapPath() const;
@@ -49,6 +50,7 @@ public:
 	const Vec2 getSpeed() const;
 	const Vec2 getRippleOffset() const;
 	const Vec2 getWaveOffset() const;
+	const Vec3 getWireframeColor() const;
 
 	// Decimals
 	const float getHeight() const;
@@ -85,6 +87,7 @@ private:
 	string _displacementMapPath = "";
 
 	// Vectors
+	Vec3 _wireframeColor = Vec3(1.0f);
 	Vec3 _color = Vec3(1.0f);
 	Vec2 _speed = Vec2(0.0f);
 	Vec2 _rippleOffset = Vec2(0.0f);

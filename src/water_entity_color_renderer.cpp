@@ -139,6 +139,7 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().z < (entity->getSize() / 2.0f));
 
 		// Shader uniforms
+		_shader.uploadUniform("u_isUnderWater", isUnderWater);
 		_shader.uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus.isWireframeRenderingEnabled()));
 		_shader.uploadUniform("u_rippleOffset", entity->getRippleOffset());
 		_shader.uploadUniform("u_waveOffset", entity->getWaveOffset());
@@ -155,7 +156,7 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 		_shader.uploadUniform("u_hasDisplacementMap", entity->hasDisplacementMap());
 		_shader.uploadUniform("u_hasDudvMap", entity->hasDudvMap());
 		_shader.uploadUniform("u_hasNormalMap", entity->hasNormalMap());
-		_shader.uploadUniform("u_isUnderWater", isUnderWater);
+		_shader.uploadUniform("u_wireframeColor", entity->getWireframeColor());
 
 		// Bind textures
 		if(entity->hasDudvMap())

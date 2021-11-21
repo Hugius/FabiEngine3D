@@ -3,7 +3,6 @@
 
 // Constant variables
 #define MAX_LIGHT_COUNT 128
-#define WIREFRAME_COLOR vec3(1.0f, 1.0f, 1.0f)
 
 // In variables
 in vec3 f_position;
@@ -17,7 +16,7 @@ layout (location = 2) uniform sampler2D u_depthMap;
 layout (location = 3) uniform sampler2D u_dudvMap;
 layout (location = 4) uniform sampler2D u_normalMap;
 
-// Vector uniforms
+// Vector3 uniforms
 uniform vec3 u_pointlightPositions[MAX_LIGHT_COUNT];
 uniform vec3 u_pointlightRadiuses[MAX_LIGHT_COUNT];
 uniform vec3 u_pointlightColors[MAX_LIGHT_COUNT];
@@ -26,6 +25,7 @@ uniform vec3 u_directionalLightPosition;
 uniform vec3 u_cameraPosition;
 uniform vec3 u_color;
 uniform vec3 u_fogColor;
+uniform vec3 u_wireframeColor;
 
 // Vector2 uniforms
 uniform vec2 u_rippleOffset;
@@ -75,7 +75,7 @@ void main()
 	// Wireframe color
 	if(u_isWireframed)
 	{
-		o_primaryColor = vec4(WIREFRAME_COLOR, 1.0f);
+		o_primaryColor = vec4(u_wireframeColor, 1.0f);
 		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 		return;
 	}

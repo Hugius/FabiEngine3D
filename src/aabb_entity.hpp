@@ -33,6 +33,7 @@ public:
 	void setRaycastResponsive(bool value);
 	void setCollisionResponsive(bool value);
 	void setCollided(bool value);
+	void setColor(Vec3 value);
 
 	// Strings
 	const string& getParentID() const;
@@ -45,6 +46,7 @@ public:
 	const Vec3 getLocalSize() const;
 	const Vec3 getPosition() const;
 	const Vec3 getSize() const;
+	const Vec3 getColor() const;
 
 	// Booleans
 	const bool isRaycastResponsive() const;
@@ -74,6 +76,7 @@ private:
 	Vec3 _size = Vec3(1.0f);
 	Vec3 _positionTarget = Vec3(0.0f);
 	Vec3 _sizeTarget = Vec3(1.0f);
+	Vec3 _color = Vec3(1.0f);
 
 	// Decimals
 	float _positionTargetSpeed = 0.0f;

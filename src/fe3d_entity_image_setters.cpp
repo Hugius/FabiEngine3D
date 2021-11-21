@@ -177,6 +177,16 @@ void FabiEngine3D::imageEntity_setSpriteAnimationFramestep(const string& ID, int
 	_core->_imageEntityManager.getEntity(ID)->setSpriteAnimationFramestep(framestep);
 }
 
+void FabiEngine3D::imageEntity_setWireframed(const string& ID, bool enabled)
+{
+	_core->_imageEntityManager.getEntity(ID)->setWireframed(enabled);
+}
+
+void FabiEngine3D::imageEntity_setWireframeColor(const string& ID, Vec3 color)
+{
+	_core->_imageEntityManager.getEntity(ID)->setWireframeColor(color);
+}
+
 void FabiEngine3D::imageEntity_setSpriteAnimationRowIndex(const string& ID, unsigned int index)
 {
 	_core->_imageEntityManager.getEntity(ID)->setSpriteAnimationRowIndex(index);

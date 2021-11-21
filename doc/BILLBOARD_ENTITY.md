@@ -95,7 +95,7 @@
   - Constraints: none
 - **Bright**: enable or disable vertical billboard facing towards the camera
   - Constraints: none
-- **Wireframed**: enable or disable vertical billboard facing towards the camera
+- **Wireframed**: the mesh is rendered as a wireframe
   - Constraints: none
-- **Text**: the billboard is text
+- **Textual**: the diffuse map is textual
   - Constraints: none

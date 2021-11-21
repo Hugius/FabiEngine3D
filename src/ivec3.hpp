@@ -1,10 +1,11 @@
 #pragma once
 
-#include "ivec2.hpp"
-#include "ivec4.hpp"
-#include "fvec2.hpp"
-#include "fvec3.hpp"
-#include "fvec4.hpp"
+struct ivec2;
+struct ivec3;
+struct ivec4;
+struct fvec2;
+struct fvec3;
+struct fvec4;
 
 struct ivec3 final
 {
@@ -15,8 +16,8 @@ struct ivec3 final
 	ivec3(const fvec2& other);
 	ivec3(const fvec3& other);
 	ivec3(const fvec4& other);
-	ivec3(const int value);
-	ivec3(const int x, const int y, const int z);
+	ivec3(const int& value);
+	ivec3(const int& x, const int& y, const int& z);
 
 	// Voids
 	void operator+=(const ivec3& other);

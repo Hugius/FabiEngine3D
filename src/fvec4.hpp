@@ -1,13 +1,23 @@
 #pragma once
 
-#include "ivec4.hpp"
+struct fvec2;
+struct fvec3;
+struct fvec4;
+struct ivec2;
+struct ivec3;
+struct ivec4;
 
 struct fvec4 final
 {
 	fvec4();
+	fvec4(const fvec2& other);
+	fvec4(const fvec3& other);
+	fvec4(const fvec4& other);
+	fvec4(const ivec2& other);
+	fvec4(const ivec3& other);
 	fvec4(const ivec4& other);
-	fvec4(const float value);
-	fvec4(const float x, const float y, const float z, const float w);
+	fvec4(const float& value);
+	fvec4(const float& x, const float& y, const float& z, const float& w);
 
 	// Voids
 	void operator+=(const fvec4& v);

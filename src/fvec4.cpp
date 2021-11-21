@@ -1,4 +1,8 @@
+#include "fvec2.hpp"
+#include "fvec3.hpp"
 #include "fvec4.hpp"
+#include "ivec2.hpp"
+#include "ivec3.hpp"
 #include "ivec4.hpp"
 
 fvec4::fvec4()
@@ -6,6 +10,47 @@ fvec4::fvec4()
 	this->x = 0.0f;
 	this->y = 0.0f;
 	this->z = 0.0f;
+	this->w = 0.0f;
+}
+
+fvec4::fvec4(const fvec2& other)
+{
+	this->x = other.x;
+	this->y = other.y;
+	this->z = 0.0f;
+	this->w = 0.0f;
+}
+
+fvec4::fvec4(const fvec3& other)
+{
+	this->x = other.x;
+	this->y = other.y;
+	this->z = other.z;
+	this->w = 0.0f;
+}
+
+fvec4::fvec4(const fvec4& other)
+{
+	this->x = other.x;
+	this->y = other.y;
+	this->z = other.z;
+	this->w = other.w;
+}
+
+fvec4::fvec4(const ivec2& other)
+{
+	this->x = static_cast<float>(other.x);
+	this->y = static_cast<float>(other.y);
+	this->z = 0.0f;
+	this->w = 0.0f;
+}
+
+fvec4::fvec4(const ivec3& other)
+{
+	this->x = static_cast<float>(other.x);
+	this->y = static_cast<float>(other.y);
+	this->z = static_cast<float>(other.z);
+	this->w = 0.0f;
 }
 
 fvec4::fvec4(const ivec4& other)
@@ -16,7 +61,7 @@ fvec4::fvec4(const ivec4& other)
 	this->w = static_cast<float>(other.w);
 }
 
-fvec4::fvec4(const float value)
+fvec4::fvec4(const float& value)
 {
 	this->x = value;
 	this->y = value;
@@ -24,7 +69,7 @@ fvec4::fvec4(const float value)
 	this->w = value;
 }
 
-fvec4::fvec4(const float x, const float y, const float z, const float w)
+fvec4::fvec4(const float& x, const float& y, const float& z, const float& w)
 {
 	this->x = x;
 	this->y = y;

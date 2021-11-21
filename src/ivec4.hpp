@@ -1,10 +1,11 @@
 #pragma once
 
-#include "ivec2.hpp"
-#include "ivec3.hpp"
-#include "fvec2.hpp"
-#include "fvec3.hpp"
-#include "fvec4.hpp"
+struct ivec2;
+struct ivec3;
+struct ivec4;
+struct fvec2;
+struct fvec3;
+struct fvec4;
 
 struct ivec4 final
 {

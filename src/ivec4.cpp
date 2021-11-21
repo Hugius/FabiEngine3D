@@ -1,4 +1,8 @@
+#include "ivec2.hpp"
+#include "ivec3.hpp"
 #include "ivec4.hpp"
+#include "fvec2.hpp"
+#include "fvec3.hpp"
 #include "fvec4.hpp"
 
 ivec4::ivec4()

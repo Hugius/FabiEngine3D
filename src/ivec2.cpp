@@ -1,5 +1,9 @@
 #include "ivec2.hpp"
+#include "ivec3.hpp"
+#include "ivec4.hpp"
 #include "fvec2.hpp"
+#include "fvec3.hpp"
+#include "fvec4.hpp"
 
 ivec2::ivec2()
 {
@@ -43,13 +47,13 @@ ivec2::ivec2(const fvec4& other)
 	this->y = static_cast<int>(other.y);
 }
 
-ivec2::ivec2(const int value)
+ivec2::ivec2(const int& value)
 {
 	this->x = value;
 	this->y = value;
 }
 
-ivec2::ivec2(const int x, const int y)
+ivec2::ivec2(const int& x, const int& y)
 {
 	this->x = x;
 	this->y = y;

@@ -1,7 +1,9 @@
+#include "fvec2.hpp"
 #include "mat22.hpp"
 #include "mat33.hpp"
+#include "mat44.hpp"
 
-mat22::mat22(const float m00, const float m01, const float m10, const float m11)
+mat22::mat22(const float& m00, const float& m01, const float& m10, const float& m11)
 {
 	this->m[0][0] = m00;
 	this->m[1][0] = m10;
@@ -20,6 +22,14 @@ mat22::mat22()
 	this->m[1][1] = 1.0f;
 }
 
+mat22::mat22(const mat22& other)
+{
+	this->m[0][0] = other.m[0][0];
+	this->m[1][0] = other.m[1][0];
+	this->m[0][1] = other.m[0][1];
+	this->m[1][1] = other.m[1][1];
+}
+
 mat22::mat22(const mat33& other)
 {
 	this->m[0][0] = other.m[0][0];
@@ -36,7 +46,7 @@ mat22::mat22(const mat44& other)
 	this->m[1][1] = other.m[1][1];
 }
 
-mat22::mat22(const float value)
+mat22::mat22(const float& value)
 {
 	for(int i = 0; i < 4; i++)
 	{

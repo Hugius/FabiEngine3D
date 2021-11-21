@@ -24,6 +24,7 @@ public:
 	Math() = delete;
 
 	// Matrices
+	static const mat22 invertMatrix(mat22 matrix);
 	static const mat33 invertMatrix(mat33 matrix);
 	static const mat44 invertMatrix(mat44 matrix);
 	static const mat33 transposeMatrix(mat33 matrix);
@@ -59,6 +60,7 @@ public:
 	static const fvec2 convertToNDC(fvec2 position);
 
 	// Decimals
+	static const float calculateDeterminant(mat22 matrix);
 	static const float calculateDeterminant(mat33 matrix);
 	static const float calculateDeterminant(mat44 matrix);
 	static const float calculateDistance(fvec2 firstPosition, fvec2 secondPosition);

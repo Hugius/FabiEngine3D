@@ -1,5 +1,35 @@
 #include "mathematics.hpp"
 
+const mat22 Math::invertMatrix(mat22 matrix)
+{
+	// Calculate determinant
+	auto determinant = calculateDeterminant(matrix);
+
+	// Check if determinant is invalid
+	if(determinant == 0.0f)
+	{
+		return mat22(0.0f);
+	}
+
+	// Result
+	mat22 tempMatrix;
+
+	// Calculate
+	tempMatrix.f[0] = matrix.f[3];
+	tempMatrix.f[1] = -matrix.f[1];
+	tempMatrix.f[2] = -matrix.f[2];
+	tempMatrix.f[3] = matrix.f[0];
+
+	// Multiply
+	for(unsigned int i = 0; i < 4; i++)
+	{
+		matrix.f[i] = (tempMatrix.f[i] * (1.0f / determinant));
+	}
+
+	// Return
+	return matrix;
+}
+
 const mat33 Math::invertMatrix(mat33 matrix)
 {
 	// Calculate determinant
@@ -217,10 +247,23 @@ const mat44 Math::transposeMatrix(mat44 matrix)
 	return matrix;
 }
 
+const float Math::calculateDeterminant(mat22 matrix)
+{
+	// Result
+	float values[2] = {};
+
+	// Calculate
+	values[0] = (matrix.m[0][0] * matrix.m[1][1]);
+	values[1] = (matrix.m[1][0] * matrix.m[0][1]);
+
+	// Return
+	return (values[0] - values[1]);
+}
+
 const float Math::calculateDeterminant(mat33 matrix)
 {
 	// Result
-	float values[3];
+	float values[3] = {};
 
 	// Calculate
 	values[0] = (matrix.m[0][0] * ((matrix.m[1][1] * matrix.m[2][2]) - (matrix.m[2][1] * matrix.m[1][2])));
@@ -234,7 +277,7 @@ const float Math::calculateDeterminant(mat33 matrix)
 const float Math::calculateDeterminant(mat44 matrix)
 {
 	// Result
-	float values[4];
+	float values[4] = {};
 
 	// Calculate
 	values[0] = matrix.m[0][0] * ((matrix.m[1][1] * ((matrix.m[2][2] * matrix.m[3][3]) - (matrix.m[2][3] * matrix.m[3][2]))) - (matrix.m[1][2] * ((matrix.m[2][1] * matrix.m[3][3]) - (matrix.m[2][3] * matrix.m[3][1]))) + (matrix.m[1][3] * ((matrix.m[2][1] * matrix.m[3][2]) - (matrix.m[2][2] * matrix.m[3][1]))));

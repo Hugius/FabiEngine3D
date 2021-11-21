@@ -4,24 +4,24 @@
 const bool WorldEditor::_copyPreviewSky(const string& newID, const string& previewID)
 {
 	// Error checking
-	if(_fe3d.skyEntity_isExisting(newID))
+	if(_fe3d.sky_isExisting(newID))
 	{
 		Logger::throwWarning("World sky with ID \"" + newID + "\" already exists!");
 		return false;
 	}
-	if(!_fe3d.skyEntity_isExisting(previewID))
+	if(!_fe3d.sky_isExisting(previewID))
 	{
 		Logger::throwWarning("Editor sky of world sky with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
 	// Create new sky
-	_fe3d.skyEntity_create(newID);
-	_fe3d.skyEntity_setCubeMaps(newID, _fe3d.skyEntity_getCubeMapPaths(previewID));
-	_fe3d.skyEntity_setLightness(newID, _fe3d.skyEntity_getLightness(previewID));
-	_fe3d.skyEntity_setRotation(newID, _fe3d.skyEntity_getRotation(previewID));
-	_fe3d.skyEntity_setColor(newID, _fe3d.skyEntity_getColor(previewID));
-	_fe3d.skyEntity_selectMainSky(newID);
+	_fe3d.sky_create(newID);
+	_fe3d.sky_setCubeMaps(newID, _fe3d.sky_getCubeMapPaths(previewID));
+	_fe3d.sky_setLightness(newID, _fe3d.sky_getLightness(previewID));
+	_fe3d.sky_setRotation(newID, _fe3d.sky_getRotation(previewID));
+	_fe3d.sky_setColor(newID, _fe3d.sky_getColor(previewID));
+	_fe3d.sky_selectMainSky(newID);
 
 	// Save ID
 	_loadedSkyID = newID;
@@ -32,90 +32,90 @@ const bool WorldEditor::_copyPreviewSky(const string& newID, const string& previ
 const bool WorldEditor::_copyPreviewTerrain(const string& newID, const string& previewID)
 {
 	// Error checking
-	if(_fe3d.terrainEntity_isExisting(newID))
+	if(_fe3d.terrain_isExisting(newID))
 	{
 		Logger::throwWarning("World terrain with ID \"" + newID + "\" already exists!");
 		return false;
 	}
-	if(!_fe3d.terrainEntity_isExisting(previewID))
+	if(!_fe3d.terrain_isExisting(previewID))
 	{
 		Logger::throwWarning("Editor terrain of world terrain with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
 	// Delete old
-	if(_fe3d.terrainEntity_isExisting(newID))
+	if(_fe3d.terrain_isExisting(newID))
 	{
-		_fe3d.terrainEntity_delete(newID);
+		_fe3d.terrain_delete(newID);
 	}
 
 	// Create terrain entity
-	_fe3d.terrainEntity_create(newID, _fe3d.terrainEntity_getHeightMapPath(previewID));
-	_fe3d.terrainEntity_select(newID);
+	_fe3d.terrain_create(newID, _fe3d.terrain_getHeightMapPath(previewID));
+	_fe3d.terrain_select(newID);
 
 	// Fill terrain entity
-	_fe3d.terrainEntity_setMaxHeight(newID, _fe3d.terrainEntity_getMaxHeight(previewID));
-	_fe3d.terrainEntity_setTextureRepeat(newID, _fe3d.terrainEntity_getTextureRepeat(previewID));
-	_fe3d.terrainEntity_setLightness(newID, _fe3d.terrainEntity_getLightness(previewID));
-	_fe3d.terrainEntity_setRedRepeat(newID, _fe3d.terrainEntity_getRedRepeat(previewID));
-	_fe3d.terrainEntity_setGreenRepeat(newID, _fe3d.terrainEntity_getGreenRepeat(previewID));
-	_fe3d.terrainEntity_setBlueRepeat(newID, _fe3d.terrainEntity_getBlueRepeat(previewID));
-	_fe3d.terrainEntity_setSpecular(newID, _fe3d.terrainEntity_isSpecular(previewID));
-	_fe3d.terrainEntity_setSpecularShininess(newID, _fe3d.terrainEntity_getSpecularShininess(previewID));
-	_fe3d.terrainEntity_setSpecularIntensity(newID, _fe3d.terrainEntity_getSpecularIntensity(previewID));
+	_fe3d.terrain_setMaxHeight(newID, _fe3d.terrain_getMaxHeight(previewID));
+	_fe3d.terrain_setTextureRepeat(newID, _fe3d.terrain_getTextureRepeat(previewID));
+	_fe3d.terrain_setLightness(newID, _fe3d.terrain_getLightness(previewID));
+	_fe3d.terrain_setRedRepeat(newID, _fe3d.terrain_getRedRepeat(previewID));
+	_fe3d.terrain_setGreenRepeat(newID, _fe3d.terrain_getGreenRepeat(previewID));
+	_fe3d.terrain_setBlueRepeat(newID, _fe3d.terrain_getBlueRepeat(previewID));
+	_fe3d.terrain_setSpecular(newID, _fe3d.terrain_isSpecular(previewID));
+	_fe3d.terrain_setSpecularShininess(newID, _fe3d.terrain_getSpecularShininess(previewID));
+	_fe3d.terrain_setSpecularIntensity(newID, _fe3d.terrain_getSpecularIntensity(previewID));
 
 	// Diffuse map
-	if(_fe3d.terrainEntity_hasDiffuseMap(previewID))
+	if(_fe3d.terrain_hasDiffuseMap(previewID))
 	{
-		_fe3d.terrainEntity_setDiffuseMap(newID, _fe3d.terrainEntity_getDiffuseMapPath(previewID));
+		_fe3d.terrain_setDiffuseMap(newID, _fe3d.terrain_getDiffuseMapPath(previewID));
 	}
 
 	// Normal map
-	if(_fe3d.terrainEntity_hasNormalMap(previewID))
+	if(_fe3d.terrain_hasNormalMap(previewID))
 	{
-		_fe3d.terrainEntity_setNormalMap(newID, _fe3d.terrainEntity_getNormalMapPath(previewID));
+		_fe3d.terrain_setNormalMap(newID, _fe3d.terrain_getNormalMapPath(previewID));
 	}
 
 	// Normal map R
-	if(_fe3d.terrainEntity_hasNormalMapR(previewID))
+	if(_fe3d.terrain_hasNormalMapR(previewID))
 	{
-		_fe3d.terrainEntity_setNormalMapR(newID, _fe3d.terrainEntity_getNormalMapPathR(previewID));
+		_fe3d.terrain_setNormalMapR(newID, _fe3d.terrain_getNormalMapPathR(previewID));
 	}
 
 	// Normal map G
-	if(_fe3d.terrainEntity_hasNormalMapG(previewID))
+	if(_fe3d.terrain_hasNormalMapG(previewID))
 	{
-		_fe3d.terrainEntity_setNormalMapG(newID, _fe3d.terrainEntity_getNormalMapPathG(previewID));
+		_fe3d.terrain_setNormalMapG(newID, _fe3d.terrain_getNormalMapPathG(previewID));
 	}
 
 	// Normal map B
-	if(_fe3d.terrainEntity_hasNormalMapB(previewID))
+	if(_fe3d.terrain_hasNormalMapB(previewID))
 	{
-		_fe3d.terrainEntity_setNormalMapB(newID, _fe3d.terrainEntity_getNormalMapPathB(previewID));
+		_fe3d.terrain_setNormalMapB(newID, _fe3d.terrain_getNormalMapPathB(previewID));
 	}
 
 	// Blend map
-	if(_fe3d.terrainEntity_hasBlendMap(previewID))
+	if(_fe3d.terrain_hasBlendMap(previewID))
 	{
-		_fe3d.terrainEntity_setBlendMap(newID, _fe3d.terrainEntity_getBlendMapPath(previewID));
+		_fe3d.terrain_setBlendMap(newID, _fe3d.terrain_getBlendMapPath(previewID));
 	}
 
 	// Blend map red
-	if(_fe3d.terrainEntity_hasDiffuseMapR(previewID))
+	if(_fe3d.terrain_hasDiffuseMapR(previewID))
 	{
-		_fe3d.terrainEntity_setDiffuseMapR(newID, _fe3d.terrainEntity_getDiffuseMapPathR(previewID));
+		_fe3d.terrain_setDiffuseMapR(newID, _fe3d.terrain_getDiffuseMapPathR(previewID));
 	}
 
 	// Blend map green
-	if(_fe3d.terrainEntity_hasDiffuseMapG(previewID))
+	if(_fe3d.terrain_hasDiffuseMapG(previewID))
 	{
-		_fe3d.terrainEntity_setDiffuseMapG(newID, _fe3d.terrainEntity_getDiffuseMapPathG(previewID));
+		_fe3d.terrain_setDiffuseMapG(newID, _fe3d.terrain_getDiffuseMapPathG(previewID));
 	}
 
 	// Blend map blue
-	if(_fe3d.terrainEntity_hasDiffuseMapB(previewID))
+	if(_fe3d.terrain_hasDiffuseMapB(previewID))
 	{
-		_fe3d.terrainEntity_setDiffuseMapB(newID, _fe3d.terrainEntity_getDiffuseMapPathB(previewID));
+		_fe3d.terrain_setDiffuseMapB(newID, _fe3d.terrain_getDiffuseMapPathB(previewID));
 	}
 
 	// Save ID
@@ -127,58 +127,58 @@ const bool WorldEditor::_copyPreviewTerrain(const string& newID, const string& p
 const bool WorldEditor::_copyPreviewWater(const string& newID, const string& previewID)
 {
 	// Error checking
-	if(_fe3d.waterEntity_isExisting(newID))
+	if(_fe3d.water_isExisting(newID))
 	{
 		Logger::throwWarning("World water with ID \"" + newID + "\" already exists!");
 		return false;
 	}
-	if(!_fe3d.waterEntity_isExisting(previewID))
+	if(!_fe3d.water_isExisting(previewID))
 	{
 		Logger::throwWarning("Editor water of world water with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
 	// Delete old
-	if(_fe3d.waterEntity_isExisting(newID))
+	if(_fe3d.water_isExisting(newID))
 	{
-		_fe3d.waterEntity_delete(newID);
+		_fe3d.water_delete(newID);
 	}
 
 	// Create water entity
-	_fe3d.waterEntity_create(newID);
-	_fe3d.waterEntity_select(newID);
+	_fe3d.water_create(newID);
+	_fe3d.water_select(newID);
 
 	// Fill water entity
-	_fe3d.waterEntity_setHeight(newID, _fe3d.waterEntity_getHeight(previewID));
-	_fe3d.waterEntity_setSize(newID, _fe3d.waterEntity_getSize(previewID));
-	_fe3d.waterEntity_setSpecular(newID, _fe3d.waterEntity_isSpecular(previewID));
-	_fe3d.waterEntity_setReflective(newID, _fe3d.waterEntity_isReflective(previewID));
-	_fe3d.waterEntity_setRefractive(newID, _fe3d.waterEntity_isRefractive(previewID));
-	_fe3d.waterEntity_setWaveHeight(newID, _fe3d.waterEntity_getWaveHeight(previewID));
-	_fe3d.waterEntity_setQuality(newID, _fe3d.waterEntity_getQuality(previewID));
-	_fe3d.waterEntity_setSpecularShininess(newID, _fe3d.waterEntity_getSpecularShininess(previewID));
-	_fe3d.waterEntity_setSpecularIntensity(newID, _fe3d.waterEntity_getSpecularIntensity(previewID));
-	_fe3d.waterEntity_setTransparency(newID, _fe3d.waterEntity_getTransparency(previewID));
-	_fe3d.waterEntity_setColor(newID, _fe3d.waterEntity_getColor(previewID));
-	_fe3d.waterEntity_setTextureRepeat(newID, _fe3d.waterEntity_getTextureRepeat(previewID));
-	_fe3d.waterEntity_setSpeed(newID, _fe3d.waterEntity_getSpeed(previewID));
+	_fe3d.water_setHeight(newID, _fe3d.water_getHeight(previewID));
+	_fe3d.water_setSize(newID, _fe3d.water_getSize(previewID));
+	_fe3d.water_setSpecular(newID, _fe3d.water_isSpecular(previewID));
+	_fe3d.water_setReflective(newID, _fe3d.water_isReflective(previewID));
+	_fe3d.water_setRefractive(newID, _fe3d.water_isRefractive(previewID));
+	_fe3d.water_setWaveHeight(newID, _fe3d.water_getWaveHeight(previewID));
+	_fe3d.water_setQuality(newID, _fe3d.water_getQuality(previewID));
+	_fe3d.water_setSpecularShininess(newID, _fe3d.water_getSpecularShininess(previewID));
+	_fe3d.water_setSpecularIntensity(newID, _fe3d.water_getSpecularIntensity(previewID));
+	_fe3d.water_setTransparency(newID, _fe3d.water_getTransparency(previewID));
+	_fe3d.water_setColor(newID, _fe3d.water_getColor(previewID));
+	_fe3d.water_setTextureRepeat(newID, _fe3d.water_getTextureRepeat(previewID));
+	_fe3d.water_setSpeed(newID, _fe3d.water_getSpeed(previewID));
 
 	// DUDV map
-	if(_fe3d.waterEntity_hasDudvMap(previewID))
+	if(_fe3d.water_hasDudvMap(previewID))
 	{
-		_fe3d.waterEntity_setDudvMap(newID, _fe3d.waterEntity_getDudvMapPath(previewID));
+		_fe3d.water_setDudvMap(newID, _fe3d.water_getDudvMapPath(previewID));
 	}
 
 	// Normal map
-	if(_fe3d.waterEntity_hasNormalMap(previewID))
+	if(_fe3d.water_hasNormalMap(previewID))
 	{
-		_fe3d.waterEntity_setNormalMap(newID, _fe3d.waterEntity_getNormalMapPath(previewID));
+		_fe3d.water_setNormalMap(newID, _fe3d.water_getNormalMapPath(previewID));
 	}
 
 	// Displacement map
-	if(_fe3d.waterEntity_hasDisplacementMap(previewID))
+	if(_fe3d.water_hasDisplacementMap(previewID))
 	{
-		_fe3d.waterEntity_setDisplacementMap(newID, _fe3d.waterEntity_getDisplacementMapPath(previewID));
+		_fe3d.water_setDisplacementMap(newID, _fe3d.water_getDisplacementMapPath(previewID));
 	}
 
 	// Save ID
@@ -190,96 +190,96 @@ const bool WorldEditor::_copyPreviewWater(const string& newID, const string& pre
 const bool WorldEditor::_copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool isFromOutside)
 {
 	// Error checking
-	if(_fe3d.modelEntity_isExisting(newID) && !_fe3d.modelEntity_isInstanced(previewID))
+	if(_fe3d.model_isExisting(newID) && !_fe3d.model_isInstanced(previewID))
 	{
 		Logger::throwWarning("Model with ID \"" + newID + "\" already exists!");
 		return false;
 	}
-	if(!_fe3d.modelEntity_isExisting(previewID))
+	if(!_fe3d.model_isExisting(previewID))
 	{
 		Logger::throwWarning("Editor model of model with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
 	// Create model entity
-	_fe3d.modelEntity_create(newID, _fe3d.modelEntity_getMeshPath(previewID));
+	_fe3d.model_create(newID, _fe3d.model_getMeshPath(previewID));
 
 	// Set instancing
-	if(_fe3d.modelEntity_isInstanced(previewID))
+	if(_fe3d.model_isInstanced(previewID))
 	{
-		_fe3d.modelEntity_enableInstancing(newID, { Vec3(0.0f) });
+		_fe3d.model_enableInstancing(newID, { Vec3(0.0f) });
 	}
 
 	// Set properties
-	_fe3d.modelEntity_setBasePosition(newID, position);
-	_fe3d.modelEntity_setBaseSize(newID, _fe3d.modelEntity_getBaseSize(previewID));
-	_fe3d.modelEntity_setLevelOfDetailSize(newID, _fe3d.modelEntity_getBaseSize(previewID));
-	_fe3d.modelEntity_setStaticToCamera(newID, _fe3d.modelEntity_isStaticToCamera(previewID));
-	_fe3d.modelEntity_setLevelOfDetailEntity(newID, _fe3d.modelEntity_getLevelOfDetailEntityID(previewID));
-	_fe3d.modelEntity_setFaceCulled(newID, _fe3d.modelEntity_isFaceCulled(previewID));
-	_fe3d.modelEntity_setRotationOrder(newID, _fe3d.modelEntity_getRotationOrder(previewID));
+	_fe3d.model_setBasePosition(newID, position);
+	_fe3d.model_setBaseSize(newID, _fe3d.model_getBaseSize(previewID));
+	_fe3d.model_setLevelOfDetailSize(newID, _fe3d.model_getBaseSize(previewID));
+	_fe3d.model_setStaticToCamera(newID, _fe3d.model_isStaticToCamera(previewID));
+	_fe3d.model_setLevelOfDetail(newID, _fe3d.model_getLevelOfDetailID(previewID));
+	_fe3d.model_setFaceCulled(newID, _fe3d.model_isFaceCulled(previewID));
+	_fe3d.model_setRotationOrder(newID, _fe3d.model_getRotationOrder(previewID));
 
 	// Set parts
-	for(const auto& partID : _fe3d.modelEntity_getPartIDs(previewID))
+	for(const auto& partID : _fe3d.model_getPartIDs(previewID))
 	{
 		// Set diffuse map
-		if(_fe3d.modelEntity_hasDiffuseMap(previewID, partID))
+		if(_fe3d.model_hasDiffuseMap(previewID, partID))
 		{
-			_fe3d.modelEntity_setDiffuseMap(newID, partID, _fe3d.modelEntity_getDiffuseMapPath(previewID, partID));
+			_fe3d.model_setDiffuseMap(newID, partID, _fe3d.model_getDiffuseMapPath(previewID, partID));
 		}
 
 		// Set emission map
-		if(_fe3d.modelEntity_hasEmissionMap(previewID, partID))
+		if(_fe3d.model_hasEmissionMap(previewID, partID))
 		{
-			_fe3d.modelEntity_setEmissionMap(newID, partID, _fe3d.modelEntity_getEmissionMapPath(previewID, partID));
+			_fe3d.model_setEmissionMap(newID, partID, _fe3d.model_getEmissionMapPath(previewID, partID));
 		}
 
 		// Set specular map
-		if(_fe3d.modelEntity_hasSpecularMap(previewID, partID))
+		if(_fe3d.model_hasSpecularMap(previewID, partID))
 		{
-			_fe3d.modelEntity_setSpecularMap(newID, partID, _fe3d.modelEntity_getSpecularMapPath(previewID, partID));
+			_fe3d.model_setSpecularMap(newID, partID, _fe3d.model_getSpecularMapPath(previewID, partID));
 		}
 
 		// Set reflection map
-		if(_fe3d.modelEntity_hasReflectionMap(previewID, partID))
+		if(_fe3d.model_hasReflectionMap(previewID, partID))
 		{
-			_fe3d.modelEntity_setReflectionMap(newID, partID, _fe3d.modelEntity_getReflectionMapPath(previewID, partID));
+			_fe3d.model_setReflectionMap(newID, partID, _fe3d.model_getReflectionMapPath(previewID, partID));
 		}
 
 		// Set normal map
-		if(_fe3d.modelEntity_hasNormalMap(previewID, partID))
+		if(_fe3d.model_hasNormalMap(previewID, partID))
 		{
-			_fe3d.modelEntity_setNormalMap(newID, partID, _fe3d.modelEntity_getNormalMapPath(previewID, partID));
+			_fe3d.model_setNormalMap(newID, partID, _fe3d.model_getNormalMapPath(previewID, partID));
 		}
 
 		// Set properties
-		_fe3d.modelEntity_setLightness(newID, partID, _fe3d.modelEntity_getLightness(previewID, partID));
-		_fe3d.modelEntity_setSpecular(newID, partID, _fe3d.modelEntity_isSpecular(previewID, partID));
-		_fe3d.modelEntity_setSpecularShininess(newID, partID, _fe3d.modelEntity_getSpecularShininess(previewID, partID));
-		_fe3d.modelEntity_setSpecularIntensity(newID, partID, _fe3d.modelEntity_getSpecularIntensity(previewID, partID));
-		_fe3d.modelEntity_setReflective(newID, partID, _fe3d.modelEntity_isReflective(previewID, partID));
-		_fe3d.modelEntity_setReflectionType(newID, partID, _fe3d.modelEntity_getReflectionType(previewID, partID));
-		_fe3d.modelEntity_setReflectivity(newID, partID, _fe3d.modelEntity_getReflectivity(previewID, partID));
-		_fe3d.modelEntity_setColor(newID, partID, _fe3d.modelEntity_getColor(previewID, partID));
-		_fe3d.modelEntity_setTextureRepeat(newID, partID, _fe3d.modelEntity_getTextureRepeat(previewID, partID));
+		_fe3d.model_setLightness(newID, partID, _fe3d.model_getLightness(previewID, partID));
+		_fe3d.model_setSpecular(newID, partID, _fe3d.model_isSpecular(previewID, partID));
+		_fe3d.model_setSpecularShininess(newID, partID, _fe3d.model_getSpecularShininess(previewID, partID));
+		_fe3d.model_setSpecularIntensity(newID, partID, _fe3d.model_getSpecularIntensity(previewID, partID));
+		_fe3d.model_setReflective(newID, partID, _fe3d.model_isReflective(previewID, partID));
+		_fe3d.model_setReflectionType(newID, partID, _fe3d.model_getReflectionType(previewID, partID));
+		_fe3d.model_setReflectivity(newID, partID, _fe3d.model_getReflectivity(previewID, partID));
+		_fe3d.model_setColor(newID, partID, _fe3d.model_getColor(previewID, partID));
+		_fe3d.model_setTextureRepeat(newID, partID, _fe3d.model_getTextureRepeat(previewID, partID));
 	}
 
 	// Bind AABB entities to model entity
-	for(const auto& previewAabbID : _fe3d.aabbEntity_getChildIDs(previewID, AabbParentType::MODEL_ENTITY))
+	for(const auto& previewAabbID : _fe3d.aabb_getChildIDs(previewID, AabbParentType::MODEL_ENTITY))
 	{
 		const string newAabbID = (newID + "@" + previewAabbID.substr(string(previewID + "_").size()));
-		_fe3d.aabbEntity_create(newAabbID);
-		_fe3d.aabbEntity_setParent(newAabbID, newID, AabbParentType::MODEL_ENTITY);
-		_fe3d.aabbEntity_setLocalPosition(newAabbID, _fe3d.aabbEntity_getPosition(previewAabbID));
-		_fe3d.aabbEntity_setLocalSize(newAabbID, _fe3d.aabbEntity_getSize(previewAabbID));
+		_fe3d.aabb_create(newAabbID);
+		_fe3d.aabb_setParent(newAabbID, newID, AabbParentType::MODEL_ENTITY);
+		_fe3d.aabb_setLocalPosition(newAabbID, _fe3d.aabb_getPosition(previewAabbID));
+		_fe3d.aabb_setLocalSize(newAabbID, _fe3d.aabb_getSize(previewAabbID));
 	}
 
 	// Save initial transformation
 	if(_isEditorLoaded)
 	{
-		_initialModelPosition[newID] = _fe3d.modelEntity_getBasePosition(previewID);
-		_initialModelRotation[newID] = _fe3d.modelEntity_getBaseRotation(previewID);
-		_initialModelSize[newID] = _fe3d.modelEntity_getBaseSize(previewID);
+		_initialModelPosition[newID] = _fe3d.model_getBasePosition(previewID);
+		_initialModelRotation[newID] = _fe3d.model_getBaseRotation(previewID);
+		_initialModelSize[newID] = _fe3d.model_getBaseSize(previewID);
 	}
 
 	// Save ID
@@ -298,61 +298,61 @@ const bool WorldEditor::_copyPreviewModel(const string& newID, const string& pre
 const bool WorldEditor::_copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool isFromOutside)
 {
 	// Error checking
-	if(_fe3d.billboardEntity_isExisting(newID))
+	if(_fe3d.billboard_isExisting(newID))
 	{
 		Logger::throwWarning("Billboard with ID \"" + newID + "\" already exists!");
 		return false;
 	}
-	if(!_fe3d.billboardEntity_isExisting(previewID))
+	if(!_fe3d.billboard_isExisting(previewID))
 	{
 		Logger::throwWarning("Editor billboard of billboard with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
 	// Create billboard entity
-	_fe3d.billboardEntity_create(newID);
+	_fe3d.billboard_create(newID);
 
 	// Bind AABB entity
-	_fe3d.aabbEntity_create(newID);
-	_fe3d.aabbEntity_setParent(newID, newID, AabbParentType::BILLBOARD_ENTITY);
+	_fe3d.aabb_create(newID);
+	_fe3d.aabb_setParent(newID, newID, AabbParentType::BILLBOARD_ENTITY);
 
 	// Diffuse map
-	if(_fe3d.billboardEntity_hasDiffuseMap(previewID) && !_fe3d.billboardEntity_isText(previewID))
+	if(_fe3d.billboard_hasDiffuseMap(previewID) && !_fe3d.billboard_isText(previewID))
 	{
-		_fe3d.billboardEntity_setDiffuseMap(newID, _fe3d.billboardEntity_getDiffuseMapPath(previewID));
+		_fe3d.billboard_setDiffuseMap(newID, _fe3d.billboard_getDiffuseMapPath(previewID));
 	}
 
 	// Emission map
-	if(_fe3d.billboardEntity_hasEmissionMap(previewID))
+	if(_fe3d.billboard_hasEmissionMap(previewID))
 	{
-		_fe3d.billboardEntity_setEmissionMap(newID, _fe3d.billboardEntity_getEmissionMapPath(previewID));
+		_fe3d.billboard_setEmissionMap(newID, _fe3d.billboard_getEmissionMapPath(previewID));
 	}
 
 	// Text
-	if(_fe3d.billboardEntity_isText(previewID))
+	if(_fe3d.billboard_isText(previewID))
 	{
-		_fe3d.billboardEntity_setFont(newID, _fe3d.billboardEntity_getFontPath(previewID));
-		_fe3d.billboardEntity_setTextContent(newID, _fe3d.billboardEntity_getTextContent(previewID));
+		_fe3d.billboard_setFont(newID, _fe3d.billboard_getFontPath(previewID));
+		_fe3d.billboard_setTextContent(newID, _fe3d.billboard_getTextContent(previewID));
 	}
 
 	// Start sprite animation
-	if(_fe3d.billboardEntity_isSpriteAnimationStarted(previewID))
+	if(_fe3d.billboard_isSpriteAnimationStarted(previewID))
 	{
-		_fe3d.billboardEntity_setSpriteAnimationRowCount(newID, _fe3d.billboardEntity_getSpriteAnimationRowCount(previewID));
-		_fe3d.billboardEntity_setSpriteAnimationColumnCount(newID, _fe3d.billboardEntity_getSpriteAnimationColumnCount(previewID));
-		_fe3d.billboardEntity_setSpriteAnimationFramestep(newID, _fe3d.billboardEntity_getSpriteAnimationFramestep(previewID));
-		_fe3d.billboardEntity_startSpriteAnimation(newID, -1);
+		_fe3d.billboard_setSpriteAnimationRowCount(newID, _fe3d.billboard_getSpriteAnimationRowCount(previewID));
+		_fe3d.billboard_setSpriteAnimationColumnCount(newID, _fe3d.billboard_getSpriteAnimationColumnCount(previewID));
+		_fe3d.billboard_setSpriteAnimationFramestep(newID, _fe3d.billboard_getSpriteAnimationFramestep(previewID));
+		_fe3d.billboard_startSpriteAnimation(newID, -1);
 	}
 
 	// Set properties
-	_fe3d.billboardEntity_setPosition(newID, position);
-	_fe3d.billboardEntity_setSize(newID, _fe3d.billboardEntity_getSize(previewID));
-	_fe3d.billboardEntity_setCameraFacingX(newID, _fe3d.billboardEntity_isFacingCameraX(previewID));
-	_fe3d.billboardEntity_setCameraFacingY(newID, _fe3d.billboardEntity_isFacingCameraY(previewID));
-	_fe3d.billboardEntity_setColor(newID, _fe3d.billboardEntity_getColor(previewID));
-	_fe3d.billboardEntity_setShadowed(newID, _fe3d.billboardEntity_isShadowed(previewID));
-	_fe3d.billboardEntity_setReflected(newID, _fe3d.billboardEntity_isReflected(previewID));
-	_fe3d.billboardEntity_setLightness(newID, _fe3d.billboardEntity_getLightness(previewID));
+	_fe3d.billboard_setPosition(newID, position);
+	_fe3d.billboard_setSize(newID, _fe3d.billboard_getSize(previewID));
+	_fe3d.billboard_setCameraFacingX(newID, _fe3d.billboard_isFacingCameraX(previewID));
+	_fe3d.billboard_setCameraFacingY(newID, _fe3d.billboard_isFacingCameraY(previewID));
+	_fe3d.billboard_setColor(newID, _fe3d.billboard_getColor(previewID));
+	_fe3d.billboard_setShadowed(newID, _fe3d.billboard_isShadowed(previewID));
+	_fe3d.billboard_setReflected(newID, _fe3d.billboard_isReflected(previewID));
+	_fe3d.billboard_setLightness(newID, _fe3d.billboard_getLightness(previewID));
 
 	// Save ID
 	if(isFromOutside)

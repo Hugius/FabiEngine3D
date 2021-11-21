@@ -4,9 +4,9 @@
 
 void ModelEditor::_tryPartChoosing(const string& nextActiveScreenID)
 {
-	if(_fe3d.modelEntity_isMultiParted(_currentModelID)) // Multiple parts
+	if(_fe3d.model_isMultiParted(_currentModelID)) // Multiple parts
 	{
-		auto IDs = _fe3d.modelEntity_getPartIDs(_currentModelID);
+		auto IDs = _fe3d.model_getPartIDs(_currentModelID);
 		sort(IDs.begin(), IDs.end());
 		_gui.getGlobalScreen()->createChoiceForm("partList", "Select Part", Vec2(0.0f, 0.1f), IDs);
 		_isChoosingPart = true;

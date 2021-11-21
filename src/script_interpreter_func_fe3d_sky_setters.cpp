@@ -15,7 +15,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetterFunction(const string& functi
 			// Validate sky existence
 			if(_validateFe3dSky())
 			{
-				_fe3d.skyEntity_selectMixSky("@" + arguments[0].getString());
+				_fe3d.sky_selectMixSky("@" + arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -30,7 +30,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetterFunction(const string& functi
 			// Validate sky existence
 			if(_validateFe3dSky())
 			{
-				_fe3d.skyEntity_setMixValue(arguments[0].getDecimal());
+				_fe3d.sky_setMixValue(arguments[0].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -45,7 +45,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetterFunction(const string& functi
 			// Validate sky existence
 			if(_validateFe3dSky())
 			{
-				_fe3d.skyEntity_setLightness(_fe3d.skyEntity_getSelectedID(), arguments[0].getDecimal());
+				_fe3d.sky_setLightness(_fe3d.sky_getSelectedID(), arguments[0].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -60,7 +60,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetterFunction(const string& functi
 			// Validate sky existence
 			if(_validateFe3dSky())
 			{
-				_fe3d.skyEntity_setColor(_fe3d.skyEntity_getSelectedID(), Vec3(
+				_fe3d.sky_setColor(_fe3d.sky_getSelectedID(), Vec3(
 					arguments[0].getDecimal(),
 					arguments[1].getDecimal(),
 					arguments[2].getDecimal()));
@@ -78,7 +78,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetterFunction(const string& functi
 			// Validate sky existence
 			if(_validateFe3dSky())
 			{
-				_fe3d.skyEntity_setRotation(_fe3d.skyEntity_getSelectedID(), arguments[0].getDecimal());
+				_fe3d.sky_setRotation(_fe3d.sky_getSelectedID(), arguments[0].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -89,7 +89,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetterFunction(const string& functi
 	}
 
 	// Cannot execute sky functionality when server is running
-	if(_fe3d.networkServer_isRunning())
+	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:sky` functionality as a networking server!");
 	}

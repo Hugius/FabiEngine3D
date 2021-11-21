@@ -16,8 +16,8 @@ void WorldEditor::_updateSpotlightMenu()
 			// Reset placing
 			if(_isPlacingSpotlight)
 			{
-				_fe3d.modelEntity_setVisible(PREVIEW_TORCH_ID, false);
-				_fe3d.spotlightEntity_setVisible(PREVIEW_TORCH_ID, false);
+				_fe3d.model_setVisible(PREVIEW_TORCH_ID, false);
+				_fe3d.spotlight_setVisible(PREVIEW_TORCH_ID, false);
 				_isPlacingSpotlight = false;
 			}
 
@@ -40,13 +40,13 @@ void WorldEditor::_updateSpotlightMenu()
 
 			// Set new preview spotlight
 			_isPlacingSpotlight = true;
-			_fe3d.modelEntity_setVisible(PREVIEW_TORCH_ID, true);
-			_fe3d.spotlightEntity_setVisible(PREVIEW_TORCH_ID, true);
-			_fe3d.spotlightEntity_setPosition(PREVIEW_TORCH_ID, Vec3(0.0f));
+			_fe3d.model_setVisible(PREVIEW_TORCH_ID, true);
+			_fe3d.spotlight_setVisible(PREVIEW_TORCH_ID, true);
+			_fe3d.spotlight_setPosition(PREVIEW_TORCH_ID, Vec3(0.0f));
 			_fe3d.misc_centerCursor();
 
 			// Add position value forms for placing without terrain
-			if(_fe3d.terrainEntity_getSelectedID().empty())
+			if(_fe3d.terrain_getSelectedID().empty())
 			{
 				_gui.getGlobalScreen()->createValueForm("positionX", "X", 0.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				_gui.getGlobalScreen()->createValueForm("positionY", "Y", 0.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
@@ -61,7 +61,7 @@ void WorldEditor::_updateSpotlightMenu()
 			_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlights")->deleteButtons();
 
 			// Add the ID of every placed spotlight
-			auto IDs = _fe3d.spotlightEntity_getAllIDs();
+			auto IDs = _fe3d.spotlight_getAllIDs();
 			sort(IDs.begin(), IDs.end());
 			for(auto& spotlightID : IDs)
 			{
@@ -94,7 +94,7 @@ void WorldEditor::_updateSpotlightChoosingMenu()
 		for(const auto& button : screen->getScrollingList("spotlights")->getButtons())
 		{
 			// Check if spotlight is still existing
-			if(!_fe3d.spotlightEntity_isExisting(button->getID()))
+			if(!_fe3d.spotlight_isExisting(button->getID()))
 			{
 				// Delete button
 				screen->getScrollingList("spotlights")->deleteButton(button->getID());
@@ -103,7 +103,7 @@ void WorldEditor::_updateSpotlightChoosingMenu()
 		}
 
 		// Iterate through every placed spotlight
-		for(const auto& spotlightID : _fe3d.spotlightEntity_getAllIDs())
+		for(const auto& spotlightID : _fe3d.spotlight_getAllIDs())
 		{
 			// Check if spotlight is not a preview
 			if(spotlightID[0] != '@')

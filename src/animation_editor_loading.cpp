@@ -134,7 +134,7 @@ const bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 		if(mustCheckPreviewModel)
 		{
 			// Check if preview model is still existing
-			if(_fe3d.modelEntity_isExisting(newAnimation->getPreviewModelID()))
+			if(_fe3d.model_isExisting(newAnimation->getPreviewModelID()))
 			{
 				// Check if parts are present
 				bool hasAllParts = true;
@@ -143,14 +143,14 @@ const bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 					// Part cannot be empty
 					if(!partID.empty())
 					{
-						hasAllParts = hasAllParts && _fe3d.modelEntity_hasPart(newAnimation->getPreviewModelID(), partID);
+						hasAllParts = hasAllParts && _fe3d.model_hasPart(newAnimation->getPreviewModelID(), partID);
 					}
 				}
 
 				// Check if preview model still has all the parts
 				if(hasAllParts)
 				{
-					newAnimation->setInitialSize(_fe3d.modelEntity_getBaseSize(newAnimation->getPreviewModelID()));
+					newAnimation->setInitialSize(_fe3d.model_getBaseSize(newAnimation->getPreviewModelID()));
 				}
 				else // Clear preview model
 				{

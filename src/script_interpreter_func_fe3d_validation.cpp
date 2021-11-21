@@ -11,7 +11,7 @@ const bool ScriptInterpreter::_validateFe3dAabb(const string& ID)
 	}
 
 	// Check if entity exists
-	if(!_fe3d.aabbEntity_isExisting(ID))
+	if(!_fe3d.aabb_isExisting(ID))
 	{
 		_throwScriptError("requested AABB with ID \"" + ID + "\" does not exist!");
 		return false;
@@ -25,7 +25,7 @@ const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isPr
 	if(isPreview)
 	{
 		// Validate existence
-		if(!_fe3d.billboardEntity_isExisting(ID))
+		if(!_fe3d.billboard_isExisting(ID))
 		{
 			_throwScriptError("requested preview billboard with ID \"" + ID.substr(1) + "\" does not exist!");
 			return false;
@@ -41,7 +41,7 @@ const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isPr
 		}
 
 		// Validate existence
-		if(!_fe3d.billboardEntity_isExisting(ID))
+		if(!_fe3d.billboard_isExisting(ID))
 		{
 			_throwScriptError("requested billboard with ID \"" + ID + "\" does not exist!");
 			return false;
@@ -61,7 +61,7 @@ const bool ScriptInterpreter::_validateFe3dImage(const string& ID)
 	}
 
 	// Check if entity exists
-	if(!_fe3d.imageEntity_isExisting(ID))
+	if(!_fe3d.image_isExisting(ID))
 	{
 		_throwScriptError("requested image with ID \"" + ID + "\" does not exist!");
 		return false;
@@ -80,7 +80,7 @@ const bool ScriptInterpreter::_validateFe3dPointlight(const string& ID)
 	}
 
 	// Check if entity exists
-	if(!_fe3d.pointlightEntity_isExisting(ID))
+	if(!_fe3d.pointlight_isExisting(ID))
 	{
 		_throwScriptError("requested pointlight with ID \"" + ID + "\" does not exist!");
 		return false;
@@ -99,7 +99,7 @@ const bool ScriptInterpreter::_validateFe3dSpotlight(const string& ID)
 	}
 
 	// Check if entity exists
-	if(!_fe3d.spotlightEntity_isExisting(ID))
+	if(!_fe3d.spotlight_isExisting(ID))
 	{
 		_throwScriptError("requested spotlight with ID \"" + ID + "\" does not exist!");
 		return false;
@@ -113,14 +113,14 @@ const bool ScriptInterpreter::_validateFe3dModel(const string& ID, bool isPrevie
 	if(isPreview)
 	{
 		// Validate existence
-		if(!_fe3d.modelEntity_isExisting(ID))
+		if(!_fe3d.model_isExisting(ID))
 		{
 			_throwScriptError("requested preview model with ID \"" + ID.substr(1) + "\" does not exist!");
 			return false;
 		}
 
 		// Cannot access an instanced model
-		if(_fe3d.modelEntity_isInstanced(ID))
+		if(_fe3d.model_isInstanced(ID))
 		{
 			_throwScriptError("requested preview model with ID \"" + ID.substr(1) + "\" cannot be instanced!");
 			return false;
@@ -136,7 +136,7 @@ const bool ScriptInterpreter::_validateFe3dModel(const string& ID, bool isPrevie
 		}
 
 		// Validate existence
-		if(!_fe3d.modelEntity_isExisting(ID))
+		if(!_fe3d.model_isExisting(ID))
 		{
 			_throwScriptError("requested model with ID \"" + ID + "\" does not exist!");
 			return false;
@@ -157,7 +157,7 @@ const bool ScriptInterpreter::_validateFe3dReflection(const string& ID)
 	}
 
 	// Check if entity exists
-	if(!_fe3d.reflectionEntity_isExisting(ID))
+	if(!_fe3d.reflection_isExisting(ID))
 	{
 		_throwScriptError("requested reflection with ID \"" + ID + "\" does not exist!");
 		return false;
@@ -169,7 +169,7 @@ const bool ScriptInterpreter::_validateFe3dReflection(const string& ID)
 const bool ScriptInterpreter::_validateFe3dSky()
 {
 	// Check if entity exists
-	if(_fe3d.skyEntity_getSelectedID().empty())
+	if(_fe3d.sky_getSelectedID().empty())
 	{
 		_throwScriptError("current world has no sky entity!");
 		return false;
@@ -181,7 +181,7 @@ const bool ScriptInterpreter::_validateFe3dSky()
 const bool ScriptInterpreter::_validateFe3dTerrain()
 {
 	// Check if entity exists
-	if(_fe3d.terrainEntity_getSelectedID().empty())
+	if(_fe3d.terrain_getSelectedID().empty())
 	{
 		_throwScriptError("current world has no terrain entity!");
 		return false;
@@ -200,7 +200,7 @@ const bool ScriptInterpreter::_validateFe3dText(const string& ID)
 	}
 
 	// Check if entity exists
-	if(!_fe3d.textEntity_isExisting(ID))
+	if(!_fe3d.text_isExisting(ID))
 	{
 		_throwScriptError("requested text with ID \"" + ID + "\" does not exist!");
 		return false;
@@ -212,7 +212,7 @@ const bool ScriptInterpreter::_validateFe3dText(const string& ID)
 const bool ScriptInterpreter::_validateFe3dWater()
 {
 	// Check if entity exists
-	if(_fe3d.waterEntity_getSelectedID().empty())
+	if(_fe3d.water_getSelectedID().empty())
 	{
 		_throwScriptError("current world has no water entity!");
 		return false;

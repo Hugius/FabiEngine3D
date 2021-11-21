@@ -30,16 +30,16 @@ void WorldEditor::load()
 
 	// Directional light source
 	const string texturePath = "engine\\assets\\textures\\light_source.png";
-	_fe3d.billboardEntity_create("@@directionalLightSource");
-	_fe3d.billboardEntity_setSize("@@directionalLightSource", Vec2(0.0f));
-	_fe3d.billboardEntity_setDiffuseMap("@@directionalLightSource", texturePath);
-	_fe3d.billboardEntity_setDepthMapIncluded("@@directionalLightSource", false);
-	_fe3d.billboardEntity_setShadowed("@@directionalLightSource", false);
-	_fe3d.billboardEntity_setReflected("@@directionalLightSource", true);
-	_fe3d.billboardEntity_setBright("@@directionalLightSource", true);
-	_fe3d.billboardEntity_setCameraFacingX("@@directionalLightSource", true);
-	_fe3d.billboardEntity_setCameraFacingY("@@directionalLightSource", true);
-	_fe3d.billboardEntity_setVisible("@@directionalLightSource", false);
+	_fe3d.billboard_create("@@directionalLightSource");
+	_fe3d.billboard_setSize("@@directionalLightSource", Vec2(0.0f));
+	_fe3d.billboard_setDiffuseMap("@@directionalLightSource", texturePath);
+	_fe3d.billboard_setDepthMapIncluded("@@directionalLightSource", false);
+	_fe3d.billboard_setShadowed("@@directionalLightSource", false);
+	_fe3d.billboard_setReflected("@@directionalLightSource", true);
+	_fe3d.billboard_setBright("@@directionalLightSource", true);
+	_fe3d.billboard_setCameraFacingX("@@directionalLightSource", true);
+	_fe3d.billboard_setCameraFacingY("@@directionalLightSource", true);
+	_fe3d.billboard_setVisible("@@directionalLightSource", false);
 
 	// Load preview skies
 	_skyEditor.loadSkyEntitiesFromFile();
@@ -55,7 +55,7 @@ void WorldEditor::load()
 	for(const auto& modelID : _modelEditor.getLoadedModelIDs())
 	{
 		// Check if there is a model entity present
-		if(_fe3d.modelEntity_isExisting(modelID))
+		if(_fe3d.model_isExisting(modelID))
 		{
 			_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuModelPlace")->getScrollingList("modelList")->
 				createButton(modelID, modelID.substr(1));
@@ -70,7 +70,7 @@ void WorldEditor::load()
 	for(const auto& billboardID : _billboardEditor.getLoadedBillboardIDs())
 	{
 		// Check if there is a billboard entity present
-		if(_fe3d.billboardEntity_isExisting(billboardID))
+		if(_fe3d.billboard_isExisting(billboardID))
 		{
 			_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuBillboardPlace")->getScrollingList("billboardList")->
 				createButton(billboardID, billboardID.substr(1));
@@ -79,12 +79,12 @@ void WorldEditor::load()
 
 	// Load preview sounds
 	_audioEditor.loadAudioEntitiesFromFile();
-	_fe3d.modelEntity_create(PREVIEW_SPEAKER_ID, SPEAKER_MODEL_PATH);
-	_fe3d.modelEntity_setBaseSize(PREVIEW_SPEAKER_ID, DEFAULT_SPEAKER_SIZE);
-	_fe3d.modelEntity_setShadowed(PREVIEW_SPEAKER_ID, false);
-	_fe3d.modelEntity_setReflected(PREVIEW_SPEAKER_ID, false);
-	_fe3d.modelEntity_setBright(PREVIEW_SPEAKER_ID, true);
-	_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
+	_fe3d.model_create(PREVIEW_SPEAKER_ID, SPEAKER_MODEL_PATH);
+	_fe3d.model_setBaseSize(PREVIEW_SPEAKER_ID, DEFAULT_SPEAKER_SIZE);
+	_fe3d.model_setShadowed(PREVIEW_SPEAKER_ID, false);
+	_fe3d.model_setReflected(PREVIEW_SPEAKER_ID, false);
+	_fe3d.model_setBright(PREVIEW_SPEAKER_ID, true);
+	_fe3d.model_setVisible(PREVIEW_SPEAKER_ID, false);
 	for(const auto& audioID : _audioEditor.getLoadedAudioIDs())
 	{
 		_fe3d.sound_make3D(audioID, Vec3(0.0f), DEFAULT_SOUND_MAX_VOLUME, DEFAULT_SOUND_MAX_DISTANCE);
@@ -93,40 +93,40 @@ void WorldEditor::load()
 	}
 
 	// Load preview pointlight
-	_fe3d.modelEntity_create(PREVIEW_LAMP_ID, LAMP_MODEL_PATH);
-	_fe3d.modelEntity_setBaseSize(PREVIEW_LAMP_ID, DEFAULT_LAMP_SIZE);
-	_fe3d.modelEntity_setShadowed(PREVIEW_LAMP_ID, false);
-	_fe3d.modelEntity_setReflected(PREVIEW_LAMP_ID, false);
-	_fe3d.modelEntity_setBright(PREVIEW_LAMP_ID, true);
-	_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, false);
-	_fe3d.pointlightEntity_create(PREVIEW_LAMP_ID);
-	_fe3d.pointlightEntity_setRadius(PREVIEW_LAMP_ID, Vec3(DEFAULT_POINTLIGHT_RADIUS));
-	_fe3d.pointlightEntity_setIntensity(PREVIEW_LAMP_ID, DEFAULT_POINTLIGHT_INTENSITY);
-	_fe3d.pointlightEntity_setVisible(PREVIEW_LAMP_ID, false);
+	_fe3d.model_create(PREVIEW_LAMP_ID, LAMP_MODEL_PATH);
+	_fe3d.model_setBaseSize(PREVIEW_LAMP_ID, DEFAULT_LAMP_SIZE);
+	_fe3d.model_setShadowed(PREVIEW_LAMP_ID, false);
+	_fe3d.model_setReflected(PREVIEW_LAMP_ID, false);
+	_fe3d.model_setBright(PREVIEW_LAMP_ID, true);
+	_fe3d.model_setVisible(PREVIEW_LAMP_ID, false);
+	_fe3d.pointlight_create(PREVIEW_LAMP_ID);
+	_fe3d.pointlight_setRadius(PREVIEW_LAMP_ID, Vec3(DEFAULT_POINTLIGHT_RADIUS));
+	_fe3d.pointlight_setIntensity(PREVIEW_LAMP_ID, DEFAULT_POINTLIGHT_INTENSITY);
+	_fe3d.pointlight_setVisible(PREVIEW_LAMP_ID, false);
 
 	// Load preview spotlight
-	_fe3d.modelEntity_create(PREVIEW_TORCH_ID, TORCH_MODEL_PATH);
-	_fe3d.modelEntity_setBaseSize(PREVIEW_TORCH_ID, DEFAULT_TORCH_SIZE);
-	_fe3d.modelEntity_setShadowed(PREVIEW_TORCH_ID, false);
-	_fe3d.modelEntity_setReflected(PREVIEW_TORCH_ID, false);
-	_fe3d.modelEntity_setBright(PREVIEW_TORCH_ID, true);
-	_fe3d.modelEntity_setVisible(PREVIEW_TORCH_ID, false);
-	_fe3d.spotlightEntity_create(PREVIEW_TORCH_ID);
-	_fe3d.spotlightEntity_setPitch(PREVIEW_TORCH_ID, DEFAULT_SPOTLIGHT_PITCH);
-	_fe3d.spotlightEntity_setIntensity(PREVIEW_TORCH_ID, DEFAULT_SPOTLIGHT_INTENSITY);
-	_fe3d.spotlightEntity_setAngle(PREVIEW_TORCH_ID, DEFAULT_SPOTLIGHT_ANGLE);
-	_fe3d.spotlightEntity_setDistance(PREVIEW_TORCH_ID, DEFAULT_SPOTLIGHT_DISTANCE);
-	_fe3d.spotlightEntity_setVisible(PREVIEW_TORCH_ID, false);
+	_fe3d.model_create(PREVIEW_TORCH_ID, TORCH_MODEL_PATH);
+	_fe3d.model_setBaseSize(PREVIEW_TORCH_ID, DEFAULT_TORCH_SIZE);
+	_fe3d.model_setShadowed(PREVIEW_TORCH_ID, false);
+	_fe3d.model_setReflected(PREVIEW_TORCH_ID, false);
+	_fe3d.model_setBright(PREVIEW_TORCH_ID, true);
+	_fe3d.model_setVisible(PREVIEW_TORCH_ID, false);
+	_fe3d.spotlight_create(PREVIEW_TORCH_ID);
+	_fe3d.spotlight_setPitch(PREVIEW_TORCH_ID, DEFAULT_SPOTLIGHT_PITCH);
+	_fe3d.spotlight_setIntensity(PREVIEW_TORCH_ID, DEFAULT_SPOTLIGHT_INTENSITY);
+	_fe3d.spotlight_setAngle(PREVIEW_TORCH_ID, DEFAULT_SPOTLIGHT_ANGLE);
+	_fe3d.spotlight_setDistance(PREVIEW_TORCH_ID, DEFAULT_SPOTLIGHT_DISTANCE);
+	_fe3d.spotlight_setVisible(PREVIEW_TORCH_ID, false);
 
 	// Load preview reflection
-	_fe3d.modelEntity_create(PREVIEW_CAMERA_ID, CAMERA_MODEL_PATH);
-	_fe3d.modelEntity_setBaseSize(PREVIEW_CAMERA_ID, DEFAULT_CAMERA_SIZE);
-	_fe3d.modelEntity_setShadowed(PREVIEW_CAMERA_ID, false);
-	_fe3d.modelEntity_setReflected(PREVIEW_CAMERA_ID, false);
-	_fe3d.modelEntity_setBright(PREVIEW_CAMERA_ID, true);
-	_fe3d.modelEntity_setVisible(PREVIEW_CAMERA_ID, false);
-	_fe3d.reflectionEntity_create(PREVIEW_CAMERA_ID);
-	_fe3d.reflectionEntity_setVisible(PREVIEW_CAMERA_ID, false);
+	_fe3d.model_create(PREVIEW_CAMERA_ID, CAMERA_MODEL_PATH);
+	_fe3d.model_setBaseSize(PREVIEW_CAMERA_ID, DEFAULT_CAMERA_SIZE);
+	_fe3d.model_setShadowed(PREVIEW_CAMERA_ID, false);
+	_fe3d.model_setReflected(PREVIEW_CAMERA_ID, false);
+	_fe3d.model_setBright(PREVIEW_CAMERA_ID, true);
+	_fe3d.model_setVisible(PREVIEW_CAMERA_ID, false);
+	_fe3d.reflection_create(PREVIEW_CAMERA_ID);
+	_fe3d.reflection_setVisible(PREVIEW_CAMERA_ID, false);
 
 	// Create ID textFields
 	_gui.getGlobalScreen()->createTextField("modelID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f), true, false);
@@ -152,12 +152,12 @@ void WorldEditor::unload()
 	_skyEditor.unloadSkyEntities();
 	_terrainEditor.unloadTerrainEntities();
 	_waterEditor.unloadWaterEntities();
-	_fe3d.modelEntity_deleteAll();
-	_fe3d.billboardEntity_deleteAll();
+	_fe3d.model_deleteAll();
+	_fe3d.billboard_deleteAll();
 	_fe3d.sound_deleteAll();
-	_fe3d.pointlightEntity_deleteAll();
-	_fe3d.spotlightEntity_deleteAll();
-	_fe3d.reflectionEntity_deleteAll();
+	_fe3d.pointlight_deleteAll();
+	_fe3d.spotlight_deleteAll();
+	_fe3d.reflection_deleteAll();
 
 	// Reset editor properties
 	_loadedModelIDs.clear();

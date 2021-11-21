@@ -18,7 +18,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& funct
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute cursor functionality when server is running
-			if(_fe3d.networkServer_isRunning())
+			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:cursor` functionality as a networking server!");
 				return true;
@@ -35,7 +35,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& funct
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute cursor functionality when server is running
-			if(_fe3d.networkServer_isRunning())
+			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:cursor` functionality as a networking server!");
 				return true;
@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& funct
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute cursor functionality when server is running
-			if(_fe3d.networkServer_isRunning())
+			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:cursor` functionality as a networking server!");
 				return true;
@@ -69,7 +69,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& funct
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute window functionality when server is running
-			if(_fe3d.networkServer_isRunning())
+			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:window` functionality as a networking server!");
 				return true;
@@ -86,7 +86,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& funct
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute window functionality when server is running
-			if(_fe3d.networkServer_isRunning())
+			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:window` functionality as a networking server!");
 				return true;
@@ -112,7 +112,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& funct
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute Vsync functionality when server is running
-			if(_fe3d.networkServer_isRunning())
+			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:vsync` functionality as a networking server!");
 				return true;

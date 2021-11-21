@@ -183,7 +183,7 @@ void ScriptInterpreter::load()
 	}
 
 	// No sky at default
-	_fe3d.skyEntity_selectMainSky("");
+	_fe3d.sky_selectMainSky("");
 
 	// Load preview skies
 	_skyEditor.loadSkyEntitiesFromFile();
@@ -214,16 +214,16 @@ void ScriptInterpreter::load()
 
 	// Directional light source
 	const string texturePath = "engine\\assets\\textures\\light_source.png";
-	_fe3d.billboardEntity_create("@@directionalLightSource");
-	_fe3d.billboardEntity_setSize("@@directionalLightSource", Vec2(0.0f));
-	_fe3d.billboardEntity_setDiffuseMap("@@directionalLightSource", texturePath);
-	_fe3d.billboardEntity_setDepthMapIncluded("@@directionalLightSource", false);
-	_fe3d.billboardEntity_setShadowed("@@directionalLightSource", false);
-	_fe3d.billboardEntity_setReflected("@@directionalLightSource", true);
-	_fe3d.billboardEntity_setBright("@@directionalLightSource", true);
-	_fe3d.billboardEntity_setCameraFacingX("@@directionalLightSource", true);
-	_fe3d.billboardEntity_setCameraFacingY("@@directionalLightSource", true);
-	_fe3d.billboardEntity_setVisible("@@directionalLightSource", false);
+	_fe3d.billboard_create("@@directionalLightSource");
+	_fe3d.billboard_setSize("@@directionalLightSource", Vec2(0.0f));
+	_fe3d.billboard_setDiffuseMap("@@directionalLightSource", texturePath);
+	_fe3d.billboard_setDepthMapIncluded("@@directionalLightSource", false);
+	_fe3d.billboard_setShadowed("@@directionalLightSource", false);
+	_fe3d.billboard_setReflected("@@directionalLightSource", true);
+	_fe3d.billboard_setBright("@@directionalLightSource", true);
+	_fe3d.billboard_setCameraFacingX("@@directionalLightSource", true);
+	_fe3d.billboard_setCameraFacingY("@@directionalLightSource", true);
+	_fe3d.billboard_setVisible("@@directionalLightSource", false);
 
 	// Miscellaneous
 	if(_fe3d.misc_isVsyncEnabled())
@@ -300,20 +300,20 @@ void ScriptInterpreter::executeDestruction()
 void ScriptInterpreter::unload()
 {
 	// Delete all sky entities except the engine background
-	for(const auto& ID : _fe3d.skyEntity_getAllIDs())
+	for(const auto& ID : _fe3d.sky_getAllIDs())
 	{
 		if(ID != "@@engineBackground")
 		{
-			_fe3d.skyEntity_delete(ID);
+			_fe3d.sky_delete(ID);
 		}
 	}
-	_fe3d.skyEntity_selectMixSky("");
-	_fe3d.skyEntity_setMixValue(0.0f);
+	_fe3d.sky_selectMixSky("");
+	_fe3d.sky_setMixValue(0.0f);
 
 	// Select engine background again
 	if(!Config::getInst().isApplicationExported())
 	{
-		_fe3d.skyEntity_selectMainSky("@@engineBackground");
+		_fe3d.sky_selectMainSky("@@engineBackground");
 	}
 
 	// Reset audio
@@ -331,33 +331,33 @@ void ScriptInterpreter::unload()
 	_animationEditor.stopAllAnimations();
 
 	// Delete all other entities
-	_fe3d.terrainEntity_deleteAll();
-	_fe3d.waterEntity_deleteAll();
-	_fe3d.modelEntity_deleteAll();
-	_fe3d.billboardEntity_deleteAll();
-	_fe3d.aabbEntity_deleteAll();
+	_fe3d.terrain_deleteAll();
+	_fe3d.water_deleteAll();
+	_fe3d.model_deleteAll();
+	_fe3d.billboard_deleteAll();
+	_fe3d.aabb_deleteAll();
 	_fe3d.sound_deleteAll();
-	_fe3d.pointlightEntity_deleteAll();
-	_fe3d.spotlightEntity_deleteAll();
-	_fe3d.reflectionEntity_deleteAll();
+	_fe3d.pointlight_deleteAll();
+	_fe3d.spotlight_deleteAll();
+	_fe3d.reflection_deleteAll();
 
 	// Delete game image entities
-	for(const auto& ID : _fe3d.imageEntity_getAllIDs())
+	for(const auto& ID : _fe3d.image_getAllIDs())
 	{
 		// Cannot delete engine image entities
 		if(ID.front() != '@')
 		{
-			_fe3d.imageEntity_delete(ID);
+			_fe3d.image_delete(ID);
 		}
 	}
 
 	// Delete game text entities
-	for(const auto& ID : _fe3d.textEntity_getAllIDs())
+	for(const auto& ID : _fe3d.text_getAllIDs())
 	{
 		// Cannot delete engine text entities
 		if(ID.front() != '@')
 		{
-			_fe3d.textEntity_delete(ID);
+			_fe3d.text_delete(ID);
 		}
 	}
 
@@ -420,15 +420,15 @@ void ScriptInterpreter::unload()
 	}
 
 	// Reset networking server
-	if(_fe3d.networkServer_isRunning())
+	if(_fe3d.server_isRunning())
 	{
-		_fe3d.networkServer_stop();
+		_fe3d.server_stop();
 	}
 
 	// Reset networking client
-	if(_fe3d.networkClient_isRunning())
+	if(_fe3d.client_isRunning())
 	{
-		_fe3d.networkClient_stop();
+		_fe3d.client_stop();
 	}
 
 	// Miscellaneous

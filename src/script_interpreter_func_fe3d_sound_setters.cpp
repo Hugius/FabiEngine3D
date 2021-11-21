@@ -314,7 +314,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 	}
 
 	// Cannot execute sound functionality when server is running
-	if(_fe3d.networkServer_isRunning())
+	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:sound` functionality as a networking server!");
 	}

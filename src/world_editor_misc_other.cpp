@@ -60,9 +60,9 @@ void WorldEditor::_updateMiscellaneous()
 	}
 
 	// Enable terrain raycast pointing
-	if(!_fe3d.terrainEntity_getSelectedID().empty())
+	if(!_fe3d.terrain_getSelectedID().empty())
 	{
-		_fe3d.raycast_enableTerrainPointing(_fe3d.terrainEntity_getSize(_fe3d.terrainEntity_getSelectedID()), 0.1f);
+		_fe3d.raycast_enableTerrainPointing(_fe3d.terrain_getSize(_fe3d.terrain_getSelectedID()), 0.1f);
 	}
 }
 
@@ -128,23 +128,23 @@ void WorldEditor::clearCurrentWorld()
 	if(!_loadedSkyID.empty())
 	{
 		// Delete sky
-		if(_fe3d.skyEntity_isExisting(_loadedSkyID))
+		if(_fe3d.sky_isExisting(_loadedSkyID))
 		{
-			_fe3d.skyEntity_delete(_loadedSkyID);
+			_fe3d.sky_delete(_loadedSkyID);
 		}
 
 		// Miscellaneous
-		_fe3d.skyEntity_selectMixSky("");
-		_fe3d.skyEntity_setMixValue(0.0f);
+		_fe3d.sky_selectMixSky("");
+		_fe3d.sky_setMixValue(0.0f);
 	}
 
 	// Delete terrain entity
 	if(!_loadedTerrainID.empty())
 	{
 		// Delete terrain
-		if(_fe3d.terrainEntity_isExisting(_loadedTerrainID))
+		if(_fe3d.terrain_isExisting(_loadedTerrainID))
 		{
-			_fe3d.terrainEntity_delete(_loadedTerrainID);
+			_fe3d.terrain_delete(_loadedTerrainID);
 		}
 	}
 
@@ -152,9 +152,9 @@ void WorldEditor::clearCurrentWorld()
 	if(!_loadedWaterID.empty())
 	{
 		// Delete water
-		if(_fe3d.waterEntity_isExisting(_loadedWaterID))
+		if(_fe3d.water_isExisting(_loadedWaterID))
 		{
-			_fe3d.waterEntity_delete(_loadedWaterID);
+			_fe3d.water_delete(_loadedWaterID);
 		}
 	}
 
@@ -162,9 +162,9 @@ void WorldEditor::clearCurrentWorld()
 	for(const auto& [ID, previewID] : _loadedModelIDs)
 	{
 		// Delete model
-		if(_fe3d.modelEntity_isExisting(ID))
+		if(_fe3d.model_isExisting(ID))
 		{
-			_fe3d.modelEntity_delete(ID);
+			_fe3d.model_delete(ID);
 		}
 
 		// Stop animation
@@ -179,25 +179,25 @@ void WorldEditor::clearCurrentWorld()
 	for(const auto& [ID, previewID] : _loadedBillboardIDs)
 	{
 		// Delete billboard
-		if(_fe3d.billboardEntity_isExisting(ID))
+		if(_fe3d.billboard_isExisting(ID))
 		{
-			_fe3d.billboardEntity_delete(ID);
+			_fe3d.billboard_delete(ID);
 		}
 	}
 
 	// Hide lightsource billboard
-	if(_fe3d.billboardEntity_isExisting("@@directionalLightSource"))
+	if(_fe3d.billboard_isExisting("@@directionalLightSource"))
 	{
-		_fe3d.billboardEntity_setVisible("@@directionalLightSource", false);
+		_fe3d.billboard_setVisible("@@directionalLightSource", false);
 	}
 
 	// Delete AABB entities
 	for(const auto& ID : _loadedAabbIDs)
 	{
 		// Delete AABB
-		if(_fe3d.aabbEntity_isExisting(ID))
+		if(_fe3d.aabb_isExisting(ID))
 		{
-			_fe3d.aabbEntity_delete(ID);
+			_fe3d.aabb_delete(ID);
 		}
 	}
 
@@ -212,7 +212,7 @@ void WorldEditor::clearCurrentWorld()
 			// Delete corresponding speaker model
 			if(!_currentWorldID.empty())
 			{
-				_fe3d.modelEntity_delete("@@speaker_" + ID);
+				_fe3d.model_delete("@@speaker_" + ID);
 			}
 		}
 	}
@@ -220,15 +220,15 @@ void WorldEditor::clearCurrentWorld()
 	// Delete pointlight entities
 	for(const auto& ID : _loadedPointlightIDs)
 	{
-		if(_fe3d.pointlightEntity_isExisting(ID))
+		if(_fe3d.pointlight_isExisting(ID))
 		{
 			// Delete pointlight
-			_fe3d.pointlightEntity_delete(ID);
+			_fe3d.pointlight_delete(ID);
 
 			// Delete corresponding lamp model
 			if(!_currentWorldID.empty())
 			{
-				_fe3d.modelEntity_delete("@@lamp_" + ID);
+				_fe3d.model_delete("@@lamp_" + ID);
 			}
 		}
 	}
@@ -236,15 +236,15 @@ void WorldEditor::clearCurrentWorld()
 	// Delete spotlight entities
 	for(const auto& ID : _loadedSpotlightIDs)
 	{
-		if(_fe3d.spotlightEntity_isExisting(ID))
+		if(_fe3d.spotlight_isExisting(ID))
 		{
 			// Delete spotlight
-			_fe3d.spotlightEntity_delete(ID);
+			_fe3d.spotlight_delete(ID);
 
 			// Delete corresponding torch model
 			if(!_currentWorldID.empty())
 			{
-				_fe3d.modelEntity_delete("@@torch_" + ID);
+				_fe3d.model_delete("@@torch_" + ID);
 			}
 		}
 	}
@@ -252,15 +252,15 @@ void WorldEditor::clearCurrentWorld()
 	// Delete reflection entities
 	for(const auto& ID : _loadedReflectionIDs)
 	{
-		if(_fe3d.reflectionEntity_isExisting(ID))
+		if(_fe3d.reflection_isExisting(ID))
 		{
 			// Delete reflection
-			_fe3d.reflectionEntity_delete(ID);
+			_fe3d.reflection_delete(ID);
 
 			// Delete corresponding camera model
 			if(!_currentWorldID.empty())
 			{
-				_fe3d.modelEntity_delete("@@camera_" + ID);
+				_fe3d.model_delete("@@camera_" + ID);
 			}
 		}
 	}

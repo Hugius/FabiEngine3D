@@ -182,10 +182,10 @@ const bool WaterEditor::loadWaterEntitiesFromFile()
 		replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
 
 		// Create water
-		_fe3d.waterEntity_create(waterID);
+		_fe3d.water_create(waterID);
 
 		// Check if water creation went well
-		if(_fe3d.waterEntity_isExisting(waterID))
+		if(_fe3d.water_isExisting(waterID))
 		{
 			// Add water ID
 			_loadedWaterIDs.push_back(waterID);
@@ -200,7 +200,7 @@ const bool WaterEditor::loadWaterEntitiesFromFile()
 				}
 
 				// Set path
-				_fe3d.waterEntity_setDudvMap(waterID, dudvMapPath);
+				_fe3d.water_setDudvMap(waterID, dudvMapPath);
 			}
 
 			// Normal map
@@ -213,7 +213,7 @@ const bool WaterEditor::loadWaterEntitiesFromFile()
 				}
 
 				// Set path
-				_fe3d.waterEntity_setNormalMap(waterID, normalMapPath);
+				_fe3d.water_setNormalMap(waterID, normalMapPath);
 			}
 
 			// Displacement map
@@ -226,23 +226,23 @@ const bool WaterEditor::loadWaterEntitiesFromFile()
 				}
 
 				// Set path
-				_fe3d.waterEntity_setDisplacementMap(waterID, displacementMapPath);
+				_fe3d.water_setDisplacementMap(waterID, displacementMapPath);
 			}
 
 			// Set properties
-			_fe3d.waterEntity_setHeight(waterID, height);
-			_fe3d.waterEntity_setSize(waterID, size);
-			_fe3d.waterEntity_setSpecular(waterID, isSpecular);
-			_fe3d.waterEntity_setReflective(waterID, isReflective);
-			_fe3d.waterEntity_setRefractive(waterID, isRefractive);
-			_fe3d.waterEntity_setWaveHeight(waterID, waveHeight);
-			_fe3d.waterEntity_setQuality(waterID, static_cast<WaterQuality>(quality));
-			_fe3d.waterEntity_setSpecularShininess(waterID, specularShininess);
-			_fe3d.waterEntity_setSpecularIntensity(waterID, specularIntensity);
-			_fe3d.waterEntity_setTransparency(waterID, transparency);
-			_fe3d.waterEntity_setColor(waterID, color);
-			_fe3d.waterEntity_setTextureRepeat(waterID, textureRepeat);
-			_fe3d.waterEntity_setSpeed(waterID, speed);
+			_fe3d.water_setHeight(waterID, height);
+			_fe3d.water_setSize(waterID, size);
+			_fe3d.water_setSpecular(waterID, isSpecular);
+			_fe3d.water_setReflective(waterID, isReflective);
+			_fe3d.water_setRefractive(waterID, isRefractive);
+			_fe3d.water_setWaveHeight(waterID, waveHeight);
+			_fe3d.water_setQuality(waterID, static_cast<WaterQuality>(quality));
+			_fe3d.water_setSpecularShininess(waterID, specularShininess);
+			_fe3d.water_setSpecularIntensity(waterID, specularIntensity);
+			_fe3d.water_setTransparency(waterID, transparency);
+			_fe3d.water_setColor(waterID, color);
+			_fe3d.water_setTextureRepeat(waterID, textureRepeat);
+			_fe3d.water_setSpeed(waterID, speed);
 		}
 	}
 

@@ -13,7 +13,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& func
 			// Validate water existence
 			if(_validateFe3dWater())
 			{
-				auto result = _fe3d.waterEntity_getSpeed(_fe3d.waterEntity_getSelectedID()).x;
+				auto result = _fe3d.water_getSpeed(_fe3d.water_getSelectedID()).x;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -26,7 +26,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& func
 			// Validate water existence
 			if(_validateFe3dWater())
 			{
-				auto result = _fe3d.waterEntity_getSpeed(_fe3d.waterEntity_getSelectedID()).y;
+				auto result = _fe3d.water_getSpeed(_fe3d.water_getSelectedID()).y;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -39,7 +39,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& func
 			// Validate water existence
 			if(_validateFe3dWater())
 			{
-				auto result = _fe3d.waterEntity_getHeight(_fe3d.waterEntity_getSelectedID());
+				auto result = _fe3d.water_getHeight(_fe3d.water_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& func
 			// Validate water existence
 			if(_validateFe3dWater())
 			{
-				auto result = _fe3d.waterEntity_getColor(_fe3d.waterEntity_getSelectedID());
+				auto result = _fe3d.water_getColor(_fe3d.water_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
@@ -65,7 +65,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& func
 			// Validate water existence
 			if(_validateFe3dWater())
 			{
-				auto result = _fe3d.waterEntity_getTransparency(_fe3d.waterEntity_getSelectedID());
+				auto result = _fe3d.water_getTransparency(_fe3d.water_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -76,7 +76,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& func
 	}
 
 	// Cannot execute water functionality when server is running
-	if(_fe3d.networkServer_isRunning())
+	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:water` functionality as a networking server!");
 	}

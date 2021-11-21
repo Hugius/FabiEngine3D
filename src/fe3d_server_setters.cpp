@@ -1,7 +1,7 @@
 #include "fe3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::networkServer_start(unsigned int maxClientCount)
+void FabiEngine3D::server_start(unsigned int maxClientCount)
 {
 	if(_core->_networkServerAPI.isRunning())
 	{
@@ -17,7 +17,7 @@ void FabiEngine3D::networkServer_start(unsigned int maxClientCount)
 	_core->_networkServerAPI.start(maxClientCount);
 }
 
-void FabiEngine3D::networkServer_stop()
+void FabiEngine3D::server_stop()
 {
 	if(!_core->_networkServerAPI.isRunning())
 	{
@@ -28,7 +28,7 @@ void FabiEngine3D::networkServer_stop()
 	_core->_networkServerAPI.stop();
 }
 
-void FabiEngine3D::networkServer_sendMessageTCP(const string& username, const string& content)
+void FabiEngine3D::server_sendMessageTCP(const string& username, const string& content)
 {
 	if(!_core->_networkServerAPI.isRunning())
 	{
@@ -59,7 +59,7 @@ void FabiEngine3D::networkServer_sendMessageTCP(const string& username, const st
 	_core->_networkServerAPI.sendMessageTCP(username, content);
 }
 
-void FabiEngine3D::networkServer_sendMessageUDP(const string& username, const string& content)
+void FabiEngine3D::server_sendMessageUDP(const string& username, const string& content)
 {
 	if(!_core->_networkServerAPI.isRunning())
 	{
@@ -90,7 +90,7 @@ void FabiEngine3D::networkServer_sendMessageUDP(const string& username, const st
 	_core->_networkServerAPI.sendMessageUDP(username, content);
 }
 
-void FabiEngine3D::networkServer_broadcastMessageTCP(const string& content, const string& exceptionUsername)
+void FabiEngine3D::server_broadcastMessageTCP(const string& content, const string& exceptionUsername)
 {
 	if(!_core->_networkServerAPI.isRunning())
 	{
@@ -101,7 +101,7 @@ void FabiEngine3D::networkServer_broadcastMessageTCP(const string& content, cons
 	_core->_networkServerAPI.broadcastMessageTCP(content, exceptionUsername);
 }
 
-void FabiEngine3D::networkServer_broadcastMessageUDP(const string& content, const string& exceptionUsername)
+void FabiEngine3D::server_broadcastMessageUDP(const string& content, const string& exceptionUsername)
 {
 	if(!_core->_networkServerAPI.isRunning())
 	{
@@ -112,7 +112,7 @@ void FabiEngine3D::networkServer_broadcastMessageUDP(const string& content, cons
 	_core->_networkServerAPI.broadcastMessageUDP(content, exceptionUsername);
 }
 
-void FabiEngine3D::networkServer_disconnectClient(const string& username)
+void FabiEngine3D::server_disconnectClient(const string& username)
 {
 	if(!_core->_networkServerAPI.isRunning())
 	{
@@ -128,7 +128,7 @@ void FabiEngine3D::networkServer_disconnectClient(const string& username)
 	_core->_networkServerAPI.disconnectClient(username);
 }
 
-void FabiEngine3D::networkServer_disconnectClients()
+void FabiEngine3D::server_disconnectClients()
 {
 	if(!_core->_networkServerAPI.isRunning())
 	{

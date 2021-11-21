@@ -23,15 +23,15 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 			}
 
 			// Check if reflection already exists
-			if(_fe3d.reflectionEntity_isExisting(ID))
+			if(_fe3d.reflection_isExisting(ID))
 			{
 				_throwScriptError("reflection with ID \"" + ID + "\" already exists!");
 				return true;
 			}
 
 			// Create reflection
-			_fe3d.reflectionEntity_create(ID);
-			_fe3d.reflectionEntity_setPosition(ID, Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+			_fe3d.reflection_create(ID);
+			_fe3d.reflection_setPosition(ID, Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 
 			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -47,7 +47,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
 			{
-				_fe3d.reflectionEntity_delete(arguments[0].getString());
+				_fe3d.reflection_delete(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -62,7 +62,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
 			{
-				_fe3d.reflectionEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
+				_fe3d.reflection_setVisible(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -77,7 +77,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
 			{
-				_fe3d.reflectionEntity_setPosition(arguments[0].getString(),
+				_fe3d.reflection_setPosition(arguments[0].getString(),
 												   Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -93,7 +93,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
 			{
-				_fe3d.reflectionEntity_move(arguments[0].getString(),
+				_fe3d.reflection_move(arguments[0].getString(),
 											Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -109,7 +109,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
 			{
-				_fe3d.reflectionEntity_moveTo(arguments[0].getString(),
+				_fe3d.reflection_moveTo(arguments[0].getString(),
 											  Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -125,7 +125,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
 			{
-				_fe3d.reflectionEntity_capture(arguments[0].getString());
+				_fe3d.reflection_capture(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -136,7 +136,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 	}
 
 	// Cannot execute reflection functionality when server is running
-	if(_fe3d.networkServer_isRunning())
+	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:reflection` functionality as a networking server!");
 	}

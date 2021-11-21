@@ -16,8 +16,8 @@ void WorldEditor::_updatePointlightMenu()
 			// Reset placing
 			if(_isPlacingPointlight)
 			{
-				_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, false);
-				_fe3d.pointlightEntity_setVisible(PREVIEW_LAMP_ID, false);
+				_fe3d.model_setVisible(PREVIEW_LAMP_ID, false);
+				_fe3d.pointlight_setVisible(PREVIEW_LAMP_ID, false);
 				_isPlacingPointlight = false;
 			}
 
@@ -40,13 +40,13 @@ void WorldEditor::_updatePointlightMenu()
 
 			// Set new preview pointlight
 			_isPlacingPointlight = true;
-			_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, true);
-			_fe3d.pointlightEntity_setVisible(PREVIEW_LAMP_ID, true);
-			_fe3d.pointlightEntity_setPosition(PREVIEW_LAMP_ID, Vec3(0.0f));
+			_fe3d.model_setVisible(PREVIEW_LAMP_ID, true);
+			_fe3d.pointlight_setVisible(PREVIEW_LAMP_ID, true);
+			_fe3d.pointlight_setPosition(PREVIEW_LAMP_ID, Vec3(0.0f));
 			_fe3d.misc_centerCursor();
 
 			// Add position value forms for placing without terrain
-			if(_fe3d.terrainEntity_getSelectedID().empty())
+			if(_fe3d.terrain_getSelectedID().empty())
 			{
 				_gui.getGlobalScreen()->createValueForm("positionX", "X", 0.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				_gui.getGlobalScreen()->createValueForm("positionY", "Y", 0.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
@@ -61,7 +61,7 @@ void WorldEditor::_updatePointlightMenu()
 			_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlights")->deleteButtons();
 
 			// Add the ID of every placed pointlight
-			auto IDs = _fe3d.pointlightEntity_getAllIDs();
+			auto IDs = _fe3d.pointlight_getAllIDs();
 			sort(IDs.begin(), IDs.end());
 			for(auto& pointlightID : IDs)
 			{
@@ -94,7 +94,7 @@ void WorldEditor::_updatePointlightChoosingMenu()
 		for(const auto& button : screen->getScrollingList("pointlights")->getButtons())
 		{
 			// Check if pointlight is still existing
-			if(!_fe3d.pointlightEntity_isExisting(button->getID()))
+			if(!_fe3d.pointlight_isExisting(button->getID()))
 			{
 				// Delete button
 				screen->getScrollingList("pointlights")->deleteButton(button->getID());
@@ -103,7 +103,7 @@ void WorldEditor::_updatePointlightChoosingMenu()
 		}
 
 		// Iterate through every placed pointlight
-		for(const auto& pointlightID : _fe3d.pointlightEntity_getAllIDs())
+		for(const auto& pointlightID : _fe3d.pointlight_getAllIDs())
 		{
 			// Check if pointlight is not a preview
 			if(pointlightID[0] != '@')

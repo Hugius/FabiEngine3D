@@ -76,7 +76,7 @@ void BottomViewportController::update()
 		// Display FPS
 		string fpsTextID = _statsScreen->getTextField("fps")->getEntityID();
 		string text = "FPS: " + to_string(static_cast<int>(fps));
-		_fe3d.textEntity_setTextContent(fpsTextID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d.text_setTextContent(fpsTextID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 		fpsList.clear();
 	}
 	else
@@ -89,7 +89,7 @@ void BottomViewportController::update()
 	{
 		string textID = _statsScreen->getTextField("cpuModel")->getEntityID();
 		string text = ("CPU: " + _fe3d.misc_getCpuModel());
-		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d.text_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	// Update GPU stats
@@ -97,7 +97,7 @@ void BottomViewportController::update()
 	{
 		string textID = _statsScreen->getTextField("gpuModel")->getEntityID();
 		string text = ("GPU: " + _fe3d.misc_getGpuModel());
-		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d.text_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	// Update OpenGL version
@@ -105,7 +105,7 @@ void BottomViewportController::update()
 	{
 		string textID = _statsScreen->getTextField("openglVersion")->getEntityID();
 		string text = "OpenGL Version: " + _fe3d.misc_getOpenglVersion();
-		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d.text_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	// Update camera position/yaw/pitch
@@ -118,7 +118,7 @@ void BottomViewportController::update()
 					   to_string(static_cast<int>(_fe3d.camera_getPosition().z)) + " " +
 					   to_string(static_cast<int>(_fe3d.camera_getYaw())) + " " +
 					   to_string(static_cast<int>(_fe3d.camera_getPitch())));
-		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d.text_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	// Update cursor position
@@ -129,7 +129,7 @@ void BottomViewportController::update()
 			to_string(static_cast<int>(_fe3d.raycast_getCursorRay().getDirection().x * 100.0f)) + "% " +
 			to_string(static_cast<int>(_fe3d.raycast_getCursorRay().getDirection().y * 100.0f)) + "% " +
 			to_string(static_cast<int>(_fe3d.raycast_getCursorRay().getDirection().z * 100.0f)) + "%";
-		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d.text_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	// Update triangle count
@@ -137,7 +137,7 @@ void BottomViewportController::update()
 	{
 		string textID = _statsScreen->getTextField("triangleCount")->getEntityID();
 		string text = "Triangles: " + to_string(static_cast<int>(_fe3d.misc_getTriangleCount()));
-		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d.text_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	// Update model entity count
@@ -145,9 +145,9 @@ void BottomViewportController::update()
 	{
 		// Count visible models
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d.modelEntity_getAllIDs())
+		for(const auto& entityID : _fe3d.model_getAllIDs())
 		{
-			if(_fe3d.modelEntity_isVisible(entityID))
+			if(_fe3d.model_isVisible(entityID))
 			{
 				entityCount++;
 			}
@@ -156,7 +156,7 @@ void BottomViewportController::update()
 		// Set text content
 		string textID = _statsScreen->getTextField("modelEntityCount")->getEntityID();
 		string text = "Model Entities: " + to_string(entityCount);
-		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d.text_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	// Update billboard entity count
@@ -164,9 +164,9 @@ void BottomViewportController::update()
 	{
 		// Count visible entities
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d.billboardEntity_getAllIDs())
+		for(const auto& entityID : _fe3d.billboard_getAllIDs())
 		{
-			if(_fe3d.billboardEntity_isVisible(entityID))
+			if(_fe3d.billboard_isVisible(entityID))
 			{
 				entityCount++;
 			}
@@ -175,7 +175,7 @@ void BottomViewportController::update()
 		// Set text content
 		string textID = _statsScreen->getTextField("billboardEntityCount")->getEntityID();
 		string text = "Billboard Entities: " + to_string(entityCount);
-		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d.text_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	// Update AABB entity count
@@ -183,9 +183,9 @@ void BottomViewportController::update()
 	{
 		// Count visible entities
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d.aabbEntity_getAllIDs())
+		for(const auto& entityID : _fe3d.aabb_getAllIDs())
 		{
-			if(_fe3d.aabbEntity_isVisible(entityID))
+			if(_fe3d.aabb_isVisible(entityID))
 			{
 				entityCount++;
 			}
@@ -194,7 +194,7 @@ void BottomViewportController::update()
 		// Set text content
 		string textID = _statsScreen->getTextField("aabbEntityCount")->getEntityID();
 		string text = "AABB Entities: " + to_string(entityCount);
-		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d.text_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	// Update light entity count
@@ -202,16 +202,16 @@ void BottomViewportController::update()
 	{
 		// Count visible entities
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d.pointlightEntity_getAllIDs())
+		for(const auto& entityID : _fe3d.pointlight_getAllIDs())
 		{
-			if(_fe3d.pointlightEntity_isVisible(entityID))
+			if(_fe3d.pointlight_isVisible(entityID))
 			{
 				entityCount++;
 			}
 		}
-		for(const auto& entityID : _fe3d.spotlightEntity_getAllIDs())
+		for(const auto& entityID : _fe3d.spotlight_getAllIDs())
 		{
-			if(_fe3d.spotlightEntity_isVisible(entityID))
+			if(_fe3d.spotlight_isVisible(entityID))
 			{
 				entityCount++;
 			}
@@ -220,7 +220,7 @@ void BottomViewportController::update()
 		// Set text content
 		string textID = _statsScreen->getTextField("lightEntityCount")->getEntityID();
 		string text = "Light Entities: " + to_string(entityCount);
-		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d.text_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	// Update reflection entity count
@@ -228,9 +228,9 @@ void BottomViewportController::update()
 	{
 		// Count visible entities
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d.reflectionEntity_getAllIDs())
+		for(const auto& entityID : _fe3d.reflection_getAllIDs())
 		{
-			if(_fe3d.reflectionEntity_isVisible(entityID))
+			if(_fe3d.reflection_isVisible(entityID))
 			{
 				entityCount++;
 			}
@@ -239,7 +239,7 @@ void BottomViewportController::update()
 		// Set text content
 		string textID = _statsScreen->getTextField("reflectionEntityCount")->getEntityID();
 		string text = "Reflection Entities: " + to_string(entityCount);
-		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d.text_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	// Update GUI entity count
@@ -247,16 +247,16 @@ void BottomViewportController::update()
 	{
 		// Count visible entities
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d.imageEntity_getAllIDs())
+		for(const auto& entityID : _fe3d.image_getAllIDs())
 		{
-			if(_fe3d.imageEntity_isVisible(entityID))
+			if(_fe3d.image_isVisible(entityID))
 			{
 				entityCount++;
 			}
 		}
-		for(const auto& entityID : _fe3d.textEntity_getAllIDs())
+		for(const auto& entityID : _fe3d.text_getAllIDs())
 		{
-			if(_fe3d.textEntity_isVisible(entityID))
+			if(_fe3d.text_isVisible(entityID))
 			{
 				entityCount++;
 			}
@@ -265,7 +265,7 @@ void BottomViewportController::update()
 		// Set text content
 		string textID = _statsScreen->getTextField("imageEntityCount")->getEntityID();
 		string text = "GUI Entities: " + to_string(entityCount);
-		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d.text_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	// Update update-profiling
@@ -275,7 +275,7 @@ void BottomViewportController::update()
 		for(const auto& [key, value] : updateStatistics)
 		{
 			string textID = _statsScreen->getTextField(key)->getEntityID();
-			_fe3d.textEntity_setTextContent(textID, key + ": " + to_string(value) + "%", CHAR_SIZE.x, CHAR_SIZE.y);
+			_fe3d.text_setTextContent(textID, key + ": " + to_string(value) + "%", CHAR_SIZE.x, CHAR_SIZE.y);
 		}
 	}
 
@@ -286,7 +286,7 @@ void BottomViewportController::update()
 		for(const auto& [key, value] : renderStatistics)
 		{
 			string textID = _statsScreen->getTextField(key)->getEntityID();
-			_fe3d.textEntity_setTextContent(textID, key + ": " + to_string(value) + "%", CHAR_SIZE.x, CHAR_SIZE.y);
+			_fe3d.text_setTextContent(textID, key + ": " + to_string(value) + "%", CHAR_SIZE.x, CHAR_SIZE.y);
 		}
 	}
 

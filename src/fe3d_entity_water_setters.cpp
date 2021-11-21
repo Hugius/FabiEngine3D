@@ -1,27 +1,27 @@
 #include "fe3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::waterEntity_create(const string& ID)
+void FabiEngine3D::water_create(const string& ID)
 {
 	_core->_waterEntityManager.createEntity(ID);
 }
 
-void FabiEngine3D::waterEntity_deleteAll()
+void FabiEngine3D::water_deleteAll()
 {
 	// For every water entity
 	for(const auto& [keyID, entity] : _core->_waterEntityManager.getEntities())
 	{
-		waterEntity_delete(entity->getID());
+		water_delete(entity->getID());
 	}
 
 	// Unselect water
 	_core->_waterEntityManager.selectWater("");
 }
 
-void FabiEngine3D::waterEntity_delete(const string& ID)
+void FabiEngine3D::water_delete(const string& ID)
 {
 	// Unselect water if selected
-	if(ID == waterEntity_getSelectedID())
+	if(ID == water_getSelectedID())
 	{
 		_core->_waterEntityManager.selectWater("");
 	}
@@ -29,22 +29,22 @@ void FabiEngine3D::waterEntity_delete(const string& ID)
 	_core->_waterEntityManager.deleteEntity(ID);
 }
 
-void FabiEngine3D::waterEntity_setVisible(const string& ID, bool isVisible)
+void FabiEngine3D::water_setVisible(const string& ID, bool isVisible)
 {
 	_core->_waterEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
-void FabiEngine3D::waterEntity_select(const string& ID)
+void FabiEngine3D::water_select(const string& ID)
 {
 	_core->_waterEntityManager.selectWater(ID);
 }
 
-void FabiEngine3D::waterEntity_setHeight(const string& ID, float height)
+void FabiEngine3D::water_setHeight(const string& ID, float height)
 {
 	_core->_waterEntityManager.getEntity(ID)->setHeight(height);
 }
 
-void FabiEngine3D::waterEntity_setSize(const string& ID, float size)
+void FabiEngine3D::water_setSize(const string& ID, float size)
 {
 	if(size > WaterEntityManager::MAX_SIZE)
 	{
@@ -56,42 +56,42 @@ void FabiEngine3D::waterEntity_setSize(const string& ID, float size)
 	_core->_waterEntityManager.loadMesh(ID);
 }
 
-void FabiEngine3D::waterEntity_setSpecular(const string& ID, bool enabled)
+void FabiEngine3D::water_setSpecular(const string& ID, bool enabled)
 {
 	_core->_waterEntityManager.getEntity(ID)->setSpecular(enabled);
 }
 
-void FabiEngine3D::waterEntity_setTextureRepeat(const string& ID, float repeat)
+void FabiEngine3D::water_setTextureRepeat(const string& ID, float repeat)
 {
 	_core->_waterEntityManager.getEntity(ID)->setTextureRepeat(repeat);
 }
 
-void FabiEngine3D::waterEntity_setQuality(const string& ID, WaterQuality quality)
+void FabiEngine3D::water_setQuality(const string& ID, WaterQuality quality)
 {
 	_core->_waterEntityManager.getEntity(ID)->setQuality(quality);
 }
 
-void FabiEngine3D::waterEntity_setReflective(const string& ID, bool enabled)
+void FabiEngine3D::water_setReflective(const string& ID, bool enabled)
 {
 	_core->_waterEntityManager.getEntity(ID)->setReflective(enabled);
 }
 
-void FabiEngine3D::waterEntity_setRefractive(const string& ID, bool enabled)
+void FabiEngine3D::water_setRefractive(const string& ID, bool enabled)
 {
 	_core->_waterEntityManager.getEntity(ID)->setRefractive(enabled);
 }
 
-void FabiEngine3D::waterEntity_setWireframed(const string& ID, bool enabled)
+void FabiEngine3D::water_setWireframed(const string& ID, bool enabled)
 {
 	_core->_waterEntityManager.getEntity(ID)->setWireframed(enabled);
 }
 
-void FabiEngine3D::waterEntity_setWireframeColor(const string& ID, Vec3 color)
+void FabiEngine3D::water_setWireframeColor(const string& ID, Vec3 color)
 {
 	_core->_waterEntityManager.getEntity(ID)->setWireframeColor(color);
 }
 
-void FabiEngine3D::waterEntity_setDudvMap(const string& ID, const string& texturePath)
+void FabiEngine3D::water_setDudvMap(const string& ID, const string& texturePath)
 {
 	if(texturePath.empty())
 	{
@@ -105,7 +105,7 @@ void FabiEngine3D::waterEntity_setDudvMap(const string& ID, const string& textur
 	}
 }
 
-void FabiEngine3D::waterEntity_setNormalMap(const string& ID, const string& texturePath)
+void FabiEngine3D::water_setNormalMap(const string& ID, const string& texturePath)
 {
 	if(texturePath.empty())
 	{
@@ -119,7 +119,7 @@ void FabiEngine3D::waterEntity_setNormalMap(const string& ID, const string& text
 	}
 }
 
-void FabiEngine3D::waterEntity_setDisplacementMap(const string& ID, const string& texturePath)
+void FabiEngine3D::water_setDisplacementMap(const string& ID, const string& texturePath)
 {
 	if(texturePath.empty())
 	{
@@ -133,32 +133,32 @@ void FabiEngine3D::waterEntity_setDisplacementMap(const string& ID, const string
 	}
 }
 
-void FabiEngine3D::waterEntity_setWaveHeight(const string& ID, float height)
+void FabiEngine3D::water_setWaveHeight(const string& ID, float height)
 {
 	_core->_waterEntityManager.getEntity(ID)->setWaveHeight(height);
 }
 
-void FabiEngine3D::waterEntity_setSpecularShininess(const string& ID, float shininess)
+void FabiEngine3D::water_setSpecularShininess(const string& ID, float shininess)
 {
 	_core->_waterEntityManager.getEntity(ID)->setSpecularShininess(shininess);
 }
 
-void FabiEngine3D::waterEntity_setSpecularIntensity(const string& ID, float intensity)
+void FabiEngine3D::water_setSpecularIntensity(const string& ID, float intensity)
 {
 	_core->_waterEntityManager.getEntity(ID)->setSpecularIntensity(intensity);
 }
 
-void FabiEngine3D::waterEntity_setSpeed(const string& ID, Vec2 speed)
+void FabiEngine3D::water_setSpeed(const string& ID, Vec2 speed)
 {
 	_core->_waterEntityManager.getEntity(ID)->setSpeed(speed);
 }
 
-void FabiEngine3D::waterEntity_setColor(const string& ID, Vec3 color)
+void FabiEngine3D::water_setColor(const string& ID, Vec3 color)
 {
 	_core->_waterEntityManager.getEntity(ID)->setColor(color);
 }
 
-void FabiEngine3D::waterEntity_setTransparency(const string& ID, float transparency)
+void FabiEngine3D::water_setTransparency(const string& ID, float transparency)
 {
 	_core->_waterEntityManager.getEntity(ID)->setTransparency(transparency);
 }

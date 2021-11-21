@@ -31,16 +31,16 @@ void WorldEditor::_updateWaterMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			_fe3d.waterEntity_delete(_currentWaterID);
+			_fe3d.water_delete(_currentWaterID);
 			_currentWaterID = "";
 		}
 		else if(_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("up")->isHovered())
 		{
-			_fe3d.waterEntity_setHeight(_currentWaterID, (_fe3d.waterEntity_getHeight(_currentWaterID) + (_editorSpeed / 100.0f)));
+			_fe3d.water_setHeight(_currentWaterID, (_fe3d.water_getHeight(_currentWaterID) + (_editorSpeed / 100.0f)));
 		}
 		else if(_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("down")->isHovered())
 		{
-			_fe3d.waterEntity_setHeight(_currentWaterID, (_fe3d.waterEntity_getHeight(_currentWaterID) - (_editorSpeed / 100.0f)));
+			_fe3d.water_setHeight(_currentWaterID, (_fe3d.water_getHeight(_currentWaterID) - (_editorSpeed / 100.0f)));
 		}
 
 		// Update water choosing
@@ -50,9 +50,9 @@ void WorldEditor::_updateWaterMenu()
 			if(!selectedButtonID.empty())
 			{
 				// Delete old
-				if(_fe3d.waterEntity_isExisting(selectedButtonID))
+				if(_fe3d.water_isExisting(selectedButtonID))
 				{
-					_fe3d.waterEntity_delete(selectedButtonID);
+					_fe3d.water_delete(selectedButtonID);
 				}
 
 				// Create new
@@ -72,6 +72,6 @@ void WorldEditor::_updateWaterMenu()
 		screen->getButton("delete")->setHoverable(_currentWaterID != "");
 
 		// Update water selection
-		_fe3d.waterEntity_select(_currentWaterID);
+		_fe3d.water_select(_currentWaterID);
 	}
 }

@@ -16,9 +16,9 @@ void WaterEditor::unloadWaterEntities()
 {
 	for(const auto& ID : _loadedWaterIDs)
 	{
-		if(_fe3d.waterEntity_isExisting(ID))
+		if(_fe3d.water_isExisting(ID))
 		{
-			_fe3d.waterEntity_delete(ID);
+			_fe3d.water_delete(ID);
 		}
 	}
 }

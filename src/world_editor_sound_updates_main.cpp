@@ -64,7 +64,7 @@ void WorldEditor::_updateSoundPlacingMenu()
 			if(!_currentPreviewSoundID.empty())
 			{
 				// Hide preview speaker
-				_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
+				_fe3d.model_setVisible(PREVIEW_SPEAKER_ID, false);
 
 				// Stop preview sound playback
 				if(_fe3d.sound_isStarted(_currentPreviewSoundID))
@@ -73,7 +73,7 @@ void WorldEditor::_updateSoundPlacingMenu()
 				}
 
 				// Miscellaneous
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), false);
+				_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), false);
 				_currentPreviewSoundID = "";
 			}
 
@@ -102,15 +102,15 @@ void WorldEditor::_updateSoundPlacingMenu()
 
 					// Set new preview sound
 					_currentPreviewSoundID = audioID;
-					_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, true);
+					_fe3d.model_setVisible(PREVIEW_SPEAKER_ID, true);
 					_fe3d.sound_setPosition(_currentPreviewSoundID, Vec3(0.0f));
 					_fe3d.sound_play(_currentPreviewSoundID, -1, 0, false);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), true);
-					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), "Sound: " + _currentPreviewSoundID.substr(1), 0.025f);
+					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), true);
+					_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), "Sound: " + _currentPreviewSoundID.substr(1), 0.025f);
 					_fe3d.misc_centerCursor();
 
 					// Add position value forms for placing without terrain
-					if(_fe3d.terrainEntity_getSelectedID().empty())
+					if(_fe3d.terrain_getSelectedID().empty())
 					{
 						_gui.getGlobalScreen()->createValueForm("positionX", "X", 0.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 						_gui.getGlobalScreen()->createValueForm("positionY", "Y", 0.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));

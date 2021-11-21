@@ -7,10 +7,10 @@ void WorldEditor::_updateModelPlacing()
 	// Only if user is in placement mode
 	if(!_currentPreviewModelID.empty())
 	{
-		if(_fe3d.terrainEntity_getSelectedID().empty()) // Placing without terrain
+		if(_fe3d.terrain_getSelectedID().empty()) // Placing without terrain
 		{
 			// Retrieve current position
-			auto newPosition = _fe3d.modelEntity_getBasePosition(_currentPreviewModelID);
+			auto newPosition = _fe3d.model_getBasePosition(_currentPreviewModelID);
 
 			// Update value forms
 			_gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, {});
@@ -18,7 +18,7 @@ void WorldEditor::_updateModelPlacing()
 			_gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, {});
 
 			// Update position
-			_fe3d.modelEntity_setBasePosition(_currentPreviewModelID, newPosition);
+			_fe3d.model_setBasePosition(_currentPreviewModelID, newPosition);
 
 			// Check if model must be placed
 			if(_gui.getGlobalScreen()->isValueFormConfirmed())
@@ -26,20 +26,20 @@ void WorldEditor::_updateModelPlacing()
 				// Remove the '@'
 				const string rawID = _currentPreviewModelID.substr(1);
 
-				if(_fe3d.modelEntity_isInstanced(_currentPreviewModelID)) // Instanced model
+				if(_fe3d.model_isInstanced(_currentPreviewModelID)) // Instanced model
 				{
-					if(_fe3d.modelEntity_isExisting(rawID)) // Add to existing offsets
+					if(_fe3d.model_isExisting(rawID)) // Add to existing offsets
 					{
-						auto offsets = _fe3d.modelEntity_getInstancedOffsets(rawID);
+						auto offsets = _fe3d.model_getInstancedOffsets(rawID);
 						offsets.push_back(newPosition);
-						_fe3d.modelEntity_disableInstancing(rawID);
-						_fe3d.modelEntity_enableInstancing(rawID, offsets);
+						_fe3d.model_disableInstancing(rawID);
+						_fe3d.model_enableInstancing(rawID, offsets);
 					}
 					else // Create new model
 					{
 						_copyPreviewModel(rawID, _currentPreviewModelID, Vec3(0.0f), false);
-						_fe3d.modelEntity_disableInstancing(rawID);
-						_fe3d.modelEntity_enableInstancing(rawID, { newPosition });
+						_fe3d.model_disableInstancing(rawID);
+						_fe3d.model_enableInstancing(rawID, { newPosition });
 					}
 				}
 				else // Non-instanced model
@@ -49,7 +49,7 @@ void WorldEditor::_updateModelPlacing()
 					const string newID = (rawID + "_" + to_string(Math::getRandomInteger(0, INT_MAX)));
 
 					// Check if model already exists
-					if(_fe3d.modelEntity_isExisting(newID))
+					if(_fe3d.model_isExisting(newID))
 					{
 						goto BEGIN1;
 					}
@@ -62,8 +62,8 @@ void WorldEditor::_updateModelPlacing()
 			// Check if placement mode must be disabled
 			if(_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
 			{
-				_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
+				_fe3d.model_setVisible(_currentPreviewModelID, false);
+				_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
 				_currentPreviewModelID = "";
 			}
 		}
@@ -79,15 +79,15 @@ void WorldEditor::_updateModelPlacing()
 					if(_fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Show preview model
-						_fe3d.modelEntity_setVisible(_currentPreviewModelID, true);
+						_fe3d.model_setVisible(_currentPreviewModelID, true);
 
 						// Update position
-						_fe3d.modelEntity_setBasePosition(_currentPreviewModelID, (_fe3d.raycast_getPointOnTerrain() + MODEL_TERRAIN_OFFSET));
+						_fe3d.model_setBasePosition(_currentPreviewModelID, (_fe3d.raycast_getPointOnTerrain() + MODEL_TERRAIN_OFFSET));
 					}
 					else
 					{
 						// Hide preview model
-						_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
+						_fe3d.model_setVisible(_currentPreviewModelID, false);
 					}
 
 					// Check if model must be placed
@@ -95,22 +95,22 @@ void WorldEditor::_updateModelPlacing()
 					{
 						// Temporary values
 						const string rawID = _currentPreviewModelID.substr(1);
-						const auto newPosition = _fe3d.modelEntity_getBasePosition(_currentPreviewModelID);
+						const auto newPosition = _fe3d.model_getBasePosition(_currentPreviewModelID);
 
-						if(_fe3d.modelEntity_isInstanced(_currentPreviewModelID)) // Instanced model
+						if(_fe3d.model_isInstanced(_currentPreviewModelID)) // Instanced model
 						{
-							if(_fe3d.modelEntity_isExisting(rawID)) // Add to existing offsets
+							if(_fe3d.model_isExisting(rawID)) // Add to existing offsets
 							{
-								auto offsets = _fe3d.modelEntity_getInstancedOffsets(rawID);
+								auto offsets = _fe3d.model_getInstancedOffsets(rawID);
 								offsets.push_back(newPosition);
-								_fe3d.modelEntity_disableInstancing(rawID);
-								_fe3d.modelEntity_enableInstancing(rawID, offsets);
+								_fe3d.model_disableInstancing(rawID);
+								_fe3d.model_enableInstancing(rawID, offsets);
 							}
 							else // Create new model
 							{
 								_copyPreviewModel(rawID, _currentPreviewModelID, Vec3(0.0f), false);
-								_fe3d.modelEntity_disableInstancing(rawID);
-								_fe3d.modelEntity_enableInstancing(rawID, { newPosition });
+								_fe3d.model_disableInstancing(rawID);
+								_fe3d.model_enableInstancing(rawID, { newPosition });
 							}
 						}
 						else // Non-instanced model
@@ -120,7 +120,7 @@ void WorldEditor::_updateModelPlacing()
 							const string newID = (rawID + "_" + to_string(Math::getRandomInteger(0, INT_MAX)));
 
 							// Check if model already exists
-							if(_fe3d.modelEntity_isExisting(newID))
+							if(_fe3d.model_isExisting(newID))
 							{
 								goto BEGIN2;
 							}
@@ -131,19 +131,19 @@ void WorldEditor::_updateModelPlacing()
 					}
 					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
 					{
-						_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
-						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
+						_fe3d.model_setVisible(_currentPreviewModelID, false);
+						_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
 						_currentPreviewModelID = "";
 					}
 				}
 				else
 				{
-					_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
+					_fe3d.model_setVisible(_currentPreviewModelID, false);
 				}
 			}
 			else
 			{
-				_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
+				_fe3d.model_setVisible(_currentPreviewModelID, false);
 			}
 		}
 	}

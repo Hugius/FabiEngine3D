@@ -13,7 +13,7 @@ void WaterEditor::_updateCamera()
 		_fe3d.camera_setThirdPersonDistance(cameraDistance);
 
 		// Hide cursor
-		_fe3d.imageEntity_setVisible("@@cursor", false);
+		_fe3d.image_setVisible("@@cursor", false);
 	}
 
 	// Check if allowed by GUI
@@ -52,28 +52,28 @@ void WaterEditor::_updateMiscellaneous()
 		// Update reference model visibility
 		if(_fe3d.input_isKeyPressed(InputType::KEY_R))
 		{
-			if(_fe3d.modelEntity_isVisible("@@cube"))
+			if(_fe3d.model_isVisible("@@cube"))
 			{
-				_fe3d.modelEntity_setVisible("@@cube", false);
+				_fe3d.model_setVisible("@@cube", false);
 			}
 			else
 			{
-				_fe3d.modelEntity_setVisible("@@cube", true);
+				_fe3d.model_setVisible("@@cube", true);
 			}
 		}
 
 		// Update wireframe rendering
-		if(_fe3d.waterEntity_isExisting(_currentWaterID))
+		if(_fe3d.water_isExisting(_currentWaterID))
 		{
 			if(_fe3d.input_isKeyPressed(InputType::KEY_F))
 			{
-				if(_fe3d.waterEntity_isWireframed(_currentWaterID))
+				if(_fe3d.water_isWireframed(_currentWaterID))
 				{
-					_fe3d.waterEntity_setWireframed(_currentWaterID, false);
+					_fe3d.water_setWireframed(_currentWaterID, false);
 				}
 				else
 				{
-					_fe3d.waterEntity_setWireframed(_currentWaterID, true);
+					_fe3d.water_setWireframed(_currentWaterID, true);
 				}
 			}
 		}

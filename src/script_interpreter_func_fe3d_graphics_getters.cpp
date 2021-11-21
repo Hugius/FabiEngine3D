@@ -119,7 +119,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetterFunction(const string& f
 	}
 
 	// Cannot execute graphics functionality when server is running
-	if(_fe3d.networkServer_isRunning())
+	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:graphics` functionality as a networking server!");
 	}

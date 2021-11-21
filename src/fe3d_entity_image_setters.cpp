@@ -1,27 +1,27 @@
 #include "fe3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::imageEntity_deleteAll()
+void FabiEngine3D::image_deleteAll()
 {
 	_core->_imageEntityManager.deleteAllEntities();
 }
 
-void FabiEngine3D::imageEntity_create(const string& ID, bool isCentered)
+void FabiEngine3D::image_create(const string& ID, bool isCentered)
 {
 	_core->_imageEntityManager.createEntity(ID, isCentered);
 }
 
-void FabiEngine3D::imageEntity_delete(const string& ID)
+void FabiEngine3D::image_delete(const string& ID)
 {
 	_core->_imageEntityManager.deleteEntity(ID);
 }
 
-void FabiEngine3D::imageEntity_setVisible(const string& ID, bool isVisible)
+void FabiEngine3D::image_setVisible(const string& ID, bool isVisible)
 {
 	_core->_imageEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
-void FabiEngine3D::imageEntity_setDiffuseMap(const string& ID, const string& texturePath)
+void FabiEngine3D::image_setDiffuseMap(const string& ID, const string& texturePath)
 {
 	if(texturePath.empty())
 	{
@@ -35,72 +35,72 @@ void FabiEngine3D::imageEntity_setDiffuseMap(const string& ID, const string& tex
 	}
 }
 
-void FabiEngine3D::imageEntity_setPosition(const string& ID, Vec2 position)
+void FabiEngine3D::image_setPosition(const string& ID, Vec2 position)
 {
 	_core->_imageEntityManager.getEntity(ID)->setPosition(position);
 }
 
-void FabiEngine3D::imageEntity_setRotation(const string& ID, float rotation)
+void FabiEngine3D::image_setRotation(const string& ID, float rotation)
 {
 	_core->_imageEntityManager.getEntity(ID)->setRotation(rotation);
 }
 
-void FabiEngine3D::imageEntity_setSize(const string& ID, Vec2 size)
+void FabiEngine3D::image_setSize(const string& ID, Vec2 size)
 {
 	_core->_imageEntityManager.getEntity(ID)->setSize(size);
 }
 
-void FabiEngine3D::imageEntity_move(const string& ID, Vec2 position)
+void FabiEngine3D::image_move(const string& ID, Vec2 position)
 {
 	_core->_imageEntityManager.getEntity(ID)->move(position);
 }
 
-void FabiEngine3D::imageEntity_rotate(const string& ID, float rotation)
+void FabiEngine3D::image_rotate(const string& ID, float rotation)
 {
 	_core->_imageEntityManager.getEntity(ID)->rotate(rotation);
 }
 
-void FabiEngine3D::imageEntity_scale(const string& ID, Vec2 size)
+void FabiEngine3D::image_scale(const string& ID, Vec2 size)
 {
 	_core->_imageEntityManager.getEntity(ID)->scale(size);
 }
 
-void FabiEngine3D::imageEntity_moveTo(const string& ID, Vec2 target, float speed)
+void FabiEngine3D::image_moveTo(const string& ID, Vec2 target, float speed)
 {
 	_core->_imageEntityManager.getEntity(ID)->moveTo(target, speed);
 }
 
-void FabiEngine3D::imageEntity_rotateTo(const string& ID, float target, float speed)
+void FabiEngine3D::image_rotateTo(const string& ID, float target, float speed)
 {
 	_core->_imageEntityManager.getEntity(ID)->rotateTo(target, speed);
 }
 
-void FabiEngine3D::imageEntity_scaleTo(const string& ID, Vec2 target, float speed)
+void FabiEngine3D::image_scaleTo(const string& ID, Vec2 target, float speed)
 {
 	_core->_imageEntityManager.getEntity(ID)->scaleTo(target, speed);
 }
 
-void FabiEngine3D::imageEntity_setColor(const string& ID, Vec3 color)
+void FabiEngine3D::image_setColor(const string& ID, Vec3 color)
 {
 	_core->_imageEntityManager.getEntity(ID)->setColor(color);
 }
 
-void FabiEngine3D::imageEntity_setTransparency(const string& ID, float transparency)
+void FabiEngine3D::image_setTransparency(const string& ID, float transparency)
 {
 	_core->_imageEntityManager.getEntity(ID)->setTransparency(transparency);
 }
 
-void FabiEngine3D::imageEntity_setMinPosition(const string& ID, Vec2 minPos)
+void FabiEngine3D::image_setMinPosition(const string& ID, Vec2 minPos)
 {
 	_core->_imageEntityManager.getEntity(ID)->setMinPosition(minPos);
 }
 
-void FabiEngine3D::imageEntity_setMaxPosition(const string& ID, Vec2 maxPos)
+void FabiEngine3D::image_setMaxPosition(const string& ID, Vec2 maxPos)
 {
 	_core->_imageEntityManager.getEntity(ID)->setMaxPosition(maxPos);
 }
 
-void FabiEngine3D::imageEntity_startSpriteAnimation(const string& ID, int loops)
+void FabiEngine3D::image_startSpriteAnimation(const string& ID, int loops)
 {
 	auto entity = _core->_imageEntityManager.getEntity(ID);
 
@@ -118,7 +118,7 @@ void FabiEngine3D::imageEntity_startSpriteAnimation(const string& ID, int loops)
 	entity->startSpriteAnimation(loops);
 }
 
-void FabiEngine3D::imageEntity_pauseSpriteAnimation(const string& ID)
+void FabiEngine3D::image_pauseSpriteAnimation(const string& ID)
 {
 	auto entity = _core->_imageEntityManager.getEntity(ID);
 
@@ -136,7 +136,7 @@ void FabiEngine3D::imageEntity_pauseSpriteAnimation(const string& ID)
 	entity->pauseSpriteAnimation();
 }
 
-void FabiEngine3D::imageEntity_resumeSpriteAnimation(const string& ID)
+void FabiEngine3D::image_resumeSpriteAnimation(const string& ID)
 {
 	auto entity = _core->_imageEntityManager.getEntity(ID);
 
@@ -149,7 +149,7 @@ void FabiEngine3D::imageEntity_resumeSpriteAnimation(const string& ID)
 	entity->resumeSpriteAnimation();
 }
 
-void FabiEngine3D::imageEntity_stopSpriteAnimation(const string& ID)
+void FabiEngine3D::image_stopSpriteAnimation(const string& ID)
 {
 	auto entity = _core->_imageEntityManager.getEntity(ID);
 
@@ -162,47 +162,47 @@ void FabiEngine3D::imageEntity_stopSpriteAnimation(const string& ID)
 	entity->stopSpriteAnimationAnimation();
 }
 
-void FabiEngine3D::imageEntity_setSpriteAnimationRowCount(const string& ID, int count)
+void FabiEngine3D::image_setSpriteAnimationRowCount(const string& ID, int count)
 {
 	_core->_imageEntityManager.getEntity(ID)->setTotalSpriteAnimationRowCount(count);
 }
 
-void FabiEngine3D::imageEntity_setSpriteAnimationColumnCount(const string& ID, int count)
+void FabiEngine3D::image_setSpriteAnimationColumnCount(const string& ID, int count)
 {
 	_core->_imageEntityManager.getEntity(ID)->setTotalSpriteAnimationColumnCount(count);
 }
 
-void FabiEngine3D::imageEntity_setSpriteAnimationFramestep(const string& ID, int framestep)
+void FabiEngine3D::image_setSpriteAnimationFramestep(const string& ID, int framestep)
 {
 	_core->_imageEntityManager.getEntity(ID)->setSpriteAnimationFramestep(framestep);
 }
 
-void FabiEngine3D::imageEntity_setWireframed(const string& ID, bool enabled)
+void FabiEngine3D::image_setWireframed(const string& ID, bool enabled)
 {
 	_core->_imageEntityManager.getEntity(ID)->setWireframed(enabled);
 }
 
-void FabiEngine3D::imageEntity_setWireframeColor(const string& ID, Vec3 color)
+void FabiEngine3D::image_setWireframeColor(const string& ID, Vec3 color)
 {
 	_core->_imageEntityManager.getEntity(ID)->setWireframeColor(color);
 }
 
-void FabiEngine3D::imageEntity_setSpriteAnimationRowIndex(const string& ID, unsigned int index)
+void FabiEngine3D::image_setSpriteAnimationRowIndex(const string& ID, unsigned int index)
 {
 	_core->_imageEntityManager.getEntity(ID)->setSpriteAnimationRowIndex(index);
 }
 
-void FabiEngine3D::imageEntity_setSpriteAnimationColumnIndex(const string& ID, unsigned int index)
+void FabiEngine3D::image_setSpriteAnimationColumnIndex(const string& ID, unsigned int index)
 {
 	_core->_imageEntityManager.getEntity(ID)->setSpriteAnimationColumnIndex(index);
 }
 
-void FabiEngine3D::imageEntity_setMirroredHorizontally(const string& ID, bool mirrored)
+void FabiEngine3D::image_setMirroredHorizontally(const string& ID, bool mirrored)
 {
 	_core->_imageEntityManager.getEntity(ID)->setMirroredHorizontally(mirrored);
 }
 
-void FabiEngine3D::imageEntity_setMirroredVertically(const string& ID, bool mirrored)
+void FabiEngine3D::image_setMirroredVertically(const string& ID, bool mirrored)
 {
 	_core->_imageEntityManager.getEntity(ID)->setMirroredVertically(mirrored);
 }

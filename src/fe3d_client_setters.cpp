@@ -1,7 +1,7 @@
 #include "fe3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::networkClient_start(const string & username)
+void FabiEngine3D::client_start(const string & username)
 {
 	if(_core->_networkClientAPI.isRunning())
 	{
@@ -32,7 +32,7 @@ void FabiEngine3D::networkClient_start(const string & username)
 	_core->_networkClientAPI.start(username);
 }
 
-void FabiEngine3D::networkClient_connect(const string& serverIP)
+void FabiEngine3D::client_connect(const string& serverIP)
 {
 	if(!_core->_networkClientAPI.isRunning())
 	{
@@ -58,7 +58,7 @@ void FabiEngine3D::networkClient_connect(const string& serverIP)
 	_core->_networkClientAPI.connectToServer(serverIP, NetworkUtils::SERVER_PORT);
 }
 
-void FabiEngine3D::networkClient_sendMessageTCP(const string& content)
+void FabiEngine3D::client_sendMessageTCP(const string& content)
 {
 	if(!_core->_networkClientAPI.isRunning())
 	{
@@ -94,7 +94,7 @@ void FabiEngine3D::networkClient_sendMessageTCP(const string& content)
 	_core->_networkClientAPI.sendMessageTCP(content);
 }
 
-void FabiEngine3D::networkClient_sendMessageUDP(const string& content)
+void FabiEngine3D::client_sendMessageUDP(const string& content)
 {
 	if(!_core->_networkClientAPI.isRunning())
 	{
@@ -130,7 +130,7 @@ void FabiEngine3D::networkClient_sendMessageUDP(const string& content)
 	_core->_networkClientAPI.sendMessageUDP(content);
 }
 
-void FabiEngine3D::networkClient_disconnect()
+void FabiEngine3D::client_disconnect()
 {
 	if(!_core->_networkClientAPI.isRunning())
 	{
@@ -151,7 +151,7 @@ void FabiEngine3D::networkClient_disconnect()
 	_core->_networkClientAPI.disconnectFromServer(true);
 }
 
-void FabiEngine3D::networkClient_stop()
+void FabiEngine3D::client_stop()
 {
 	if(!_core->_networkClientAPI.isRunning())
 	{

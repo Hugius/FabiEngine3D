@@ -24,7 +24,7 @@ void AnimationEditor::_updateCamera()
 		_fe3d.camera_setThirdPersonLookat(cameraLookat);
 
 		// Hide cursor
-		_fe3d.imageEntity_setVisible("@@cursor", false);
+		_fe3d.image_setVisible("@@cursor", false);
 
 		// Update shadows
 		const auto distance = _fe3d.camera_getThirdPersonDistance();
@@ -70,13 +70,13 @@ void AnimationEditor::_updateMiscellaneous()
 		// Update reference model visibility
 		if(_fe3d.input_isKeyPressed(InputType::KEY_R))
 		{
-			if(_fe3d.modelEntity_isVisible("@@cube"))
+			if(_fe3d.model_isVisible("@@cube"))
 			{
-				_fe3d.modelEntity_setVisible("@@cube", false);
+				_fe3d.model_setVisible("@@cube", false);
 			}
 			else
 			{
-				_fe3d.modelEntity_setVisible("@@cube", true);
+				_fe3d.model_setVisible("@@cube", true);
 			}
 		}
 
@@ -100,7 +100,7 @@ void AnimationEditor::_updateMiscellaneous()
 			const auto animation = _getAnimation(_currentAnimationID);
 
 			// Check if animation has preview model
-			if(_fe3d.modelEntity_isExisting(animation->getPreviewModelID()))
+			if(_fe3d.model_isExisting(animation->getPreviewModelID()))
 			{
 				// Check if F is pressed
 				if(_fe3d.input_isKeyPressed(InputType::KEY_F))
@@ -108,13 +108,13 @@ void AnimationEditor::_updateMiscellaneous()
 					// For every part
 					for(const auto& partID : animation->getPartIDs())
 					{
-						if(_fe3d.modelEntity_isWireframed(animation->getPreviewModelID(), partID))
+						if(_fe3d.model_isWireframed(animation->getPreviewModelID(), partID))
 						{
-							_fe3d.modelEntity_setWireframed(animation->getPreviewModelID(), partID, false);
+							_fe3d.model_setWireframed(animation->getPreviewModelID(), partID, false);
 						}
 						else
 						{
-							_fe3d.modelEntity_setWireframed(animation->getPreviewModelID(), partID, true);
+							_fe3d.model_setWireframed(animation->getPreviewModelID(), partID, true);
 						}
 					}
 				}
@@ -135,24 +135,24 @@ void AnimationEditor::_updateMiscellaneous()
 			if(!isAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID()))
 			{
 				// Check if animation has a preview model
-				if(_fe3d.modelEntity_isExisting(currentAnimation->getPreviewModelID()))
+				if(_fe3d.model_isExisting(currentAnimation->getPreviewModelID()))
 				{
 					// For every animation part
 					for(const auto& partID : currentAnimation->getPartIDs())
 					{
 						if(partID.empty()) // Base transformation
 						{
-							_fe3d.modelEntity_setBasePosition(currentAnimation->getPreviewModelID(), Vec3(0.0f));
-							_fe3d.modelEntity_setBaseRotationOrigin(currentAnimation->getPreviewModelID(), Vec3(0.0f));
-							_fe3d.modelEntity_setBaseRotation(currentAnimation->getPreviewModelID(), Vec3(0.0f));
-							_fe3d.modelEntity_setBaseSize(currentAnimation->getPreviewModelID(), currentAnimation->getInitialSize());
+							_fe3d.model_setBasePosition(currentAnimation->getPreviewModelID(), Vec3(0.0f));
+							_fe3d.model_setBaseRotationOrigin(currentAnimation->getPreviewModelID(), Vec3(0.0f));
+							_fe3d.model_setBaseRotation(currentAnimation->getPreviewModelID(), Vec3(0.0f));
+							_fe3d.model_setBaseSize(currentAnimation->getPreviewModelID(), currentAnimation->getInitialSize());
 						}
 						else // Part transformation
 						{
-							_fe3d.modelEntity_setPartPosition(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-							_fe3d.modelEntity_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-							_fe3d.modelEntity_setPartRotation(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-							_fe3d.modelEntity_setPartSize(currentAnimation->getPreviewModelID(), partID, Vec3(1.0f));
+							_fe3d.model_setPartPosition(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
+							_fe3d.model_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
+							_fe3d.model_setPartRotation(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
+							_fe3d.model_setPartSize(currentAnimation->getPreviewModelID(), partID, Vec3(1.0f));
 						}
 					}
 
@@ -169,7 +169,7 @@ void AnimationEditor::_updateMiscellaneous()
 							for(const auto& partID : currentAnimation->getPartIDs())
 							{
 								// Check if model has part
-								if(_fe3d.modelEntity_hasPart(currentAnimation->getPreviewModelID(), partID) || partID.empty())
+								if(_fe3d.model_hasPart(currentAnimation->getPreviewModelID(), partID) || partID.empty())
 								{
 									// Determine type of transformation
 									if(frame.getTransformationTypes().at(partID) == TransformationType::MOVEMENT)
@@ -178,36 +178,36 @@ void AnimationEditor::_updateMiscellaneous()
 										auto newPosition = (currentAnimation->getInitialSize() * frame.getTargetTransformations().at(partID));
 										if(partID.empty())
 										{
-											_fe3d.modelEntity_setBasePosition(currentAnimation->getPreviewModelID(), newPosition);
+											_fe3d.model_setBasePosition(currentAnimation->getPreviewModelID(), newPosition);
 										}
 										else
 										{
-											_fe3d.modelEntity_setPartPosition(currentAnimation->getPreviewModelID(), partID, newPosition);
+											_fe3d.model_setPartPosition(currentAnimation->getPreviewModelID(), partID, newPosition);
 										}
 									}
 									else if(frame.getTransformationTypes().at(partID) == TransformationType::ROTATION)
 									{
 										// Origin
-										auto currentModelSize = _fe3d.modelEntity_getBaseSize(currentAnimation->getPreviewModelID());
+										auto currentModelSize = _fe3d.model_getBaseSize(currentAnimation->getPreviewModelID());
 										auto newOrigin = (currentModelSize * frame.getRotationOrigins().at(partID));
 										if(partID.empty())
 										{
-											_fe3d.modelEntity_setBaseRotationOrigin(currentAnimation->getPreviewModelID(), newOrigin);
+											_fe3d.model_setBaseRotationOrigin(currentAnimation->getPreviewModelID(), newOrigin);
 										}
 										else
 										{
-											_fe3d.modelEntity_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, newOrigin);
+											_fe3d.model_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, newOrigin);
 										}
 
 										// Rotation
 										auto newRotation = frame.getTargetTransformations().at(partID);
 										if(partID.empty())
 										{
-											_fe3d.modelEntity_setBaseRotation(currentAnimation->getPreviewModelID(), newRotation);
+											_fe3d.model_setBaseRotation(currentAnimation->getPreviewModelID(), newRotation);
 										}
 										else
 										{
-											_fe3d.modelEntity_setPartRotation(currentAnimation->getPreviewModelID(), partID, newRotation);
+											_fe3d.model_setPartRotation(currentAnimation->getPreviewModelID(), partID, newRotation);
 										}
 									}
 									else if(frame.getTransformationTypes().at(partID) == TransformationType::SCALING)
@@ -217,11 +217,11 @@ void AnimationEditor::_updateMiscellaneous()
 										auto newSize = (modelSize + (modelSize * frame.getTargetTransformations().at(partID)));
 										if(partID.empty())
 										{
-											_fe3d.modelEntity_setBaseSize(currentAnimation->getPreviewModelID(), newSize);
+											_fe3d.model_setBaseSize(currentAnimation->getPreviewModelID(), newSize);
 										}
 										else
 										{
-											_fe3d.modelEntity_setPartSize(currentAnimation->getPreviewModelID(), partID, newSize);
+											_fe3d.model_setPartSize(currentAnimation->getPreviewModelID(), partID, newSize);
 										}
 									}
 								}
@@ -241,21 +241,21 @@ void AnimationEditor::_updateMiscellaneous()
 		else
 		{
 			// Check if wireframe color reached minimum
-			if(_fe3d.modelEntity_getWireframeColor(currentAnimation->getPreviewModelID(), partID) == 0.0f)
+			if(_fe3d.model_getWireframeColor(currentAnimation->getPreviewModelID(), partID) == 0.0f)
 			{
 				_selectedPartHighlightDirection *= -1;
 			}
 
 			// Check if wireframe color reached maximum
-			if(_fe3d.modelEntity_getWireframeColor(currentAnimation->getPreviewModelID(), partID) == 1.0f)
+			if(_fe3d.model_getWireframeColor(currentAnimation->getPreviewModelID(), partID) == 1.0f)
 			{
 				_selectedPartHighlightDirection *= -1;
 			}
 
 			// Set wireframe color
-			const auto color = _fe3d.modelEntity_getWireframeColor(currentAnimation->getPreviewModelID(), partID);
+			const auto color = _fe3d.model_getWireframeColor(currentAnimation->getPreviewModelID(), partID);
 			const float speed = (PART_HIGHLIGHT_SPEED * static_cast<float>(_selectedPartHighlightDirection));
-			_fe3d.modelEntity_setWireframeColor(currentAnimation->getPreviewModelID(), partID, (color + speed));
+			_fe3d.model_setWireframeColor(currentAnimation->getPreviewModelID(), partID, (color + speed));
 		}
 	}
 }

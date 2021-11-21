@@ -20,7 +20,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& funct
 			}
 
 			// Find full entity IDs based on part ID
-			for(const auto& ID : _fe3d.aabbEntity_getAllIDs())
+			for(const auto& ID : _fe3d.aabb_getAllIDs())
 			{
 				// If substring matches
 				if(arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -29,7 +29,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& funct
 					if(ID.front() != '@')
 					{
 						// Only non-bound AABBs
-						if(!_fe3d.aabbEntity_hasParent(ID))
+						if(!_fe3d.aabb_hasParent(ID))
 						{
 							returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
 						}
@@ -53,14 +53,14 @@ const bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& funct
 			}
 
 			// Cannot access a bound entity
-			if(!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
+			if(!_fe3d.aabb_getParentID(arguments[0].getString()).empty())
 			{
 				_throwScriptError("cannot access AABB with ID \"" + arguments[0].getString() + "\": bound to model or billboard!");
 				return true;
 			}
 
 			// Check if existing
-			auto result = _fe3d.aabbEntity_isExisting(arguments[0].getString());
+			auto result = _fe3d.aabb_isExisting(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
@@ -75,14 +75,14 @@ const bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& funct
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
-				if(!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
+				if(!_fe3d.aabb_getParentID(arguments[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + arguments[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
 				// Get visibility
-				auto result = _fe3d.aabbEntity_isVisible(arguments[0].getString());
+				auto result = _fe3d.aabb_isVisible(arguments[0].getString());
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -100,14 +100,14 @@ const bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& funct
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
-				if(!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
+				if(!_fe3d.aabb_getParentID(arguments[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + arguments[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
 				// Get position
-				auto result = _fe3d.aabbEntity_getPosition(arguments[0].getString());
+				auto result = _fe3d.aabb_getPosition(arguments[0].getString());
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
@@ -125,14 +125,14 @@ const bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& funct
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
-				if(!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
+				if(!_fe3d.aabb_getParentID(arguments[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + arguments[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
 				// Get size
-				auto result = _fe3d.aabbEntity_getSize(arguments[0].getString());
+				auto result = _fe3d.aabb_getSize(arguments[0].getString());
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
@@ -144,7 +144,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& funct
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.aabbEntity_getAllIDs();
+			auto result = _fe3d.aabb_getAllIDs();
 
 			// For every AABB
 			for(const auto& ID : result)
@@ -153,7 +153,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& funct
 				if(ID.front() != '@')
 				{
 					// Only non-bound AABBs
-					if(!_fe3d.aabbEntity_hasParent(ID))
+					if(!_fe3d.aabb_hasParent(ID))
 					{
 						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
 					}
@@ -167,7 +167,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& funct
 	}
 
 	// Cannot execute AABB functionality when server is running
-	if(_fe3d.networkServer_isRunning())
+	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:aabb` functionality as a networking server!");
 	}

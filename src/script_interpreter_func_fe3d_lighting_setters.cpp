@@ -72,7 +72,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& f
 		{
 			auto position = Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal());
 			_fe3d.gfx_setDirectionalLightingPosition(position);
-			_fe3d.billboardEntity_setPosition("@@directionalLightSource", position);
+			_fe3d.billboard_setPosition("@@directionalLightSource", position);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -105,8 +105,8 @@ const bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& f
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.billboardEntity_setSize("@@directionalLightSource", Vec2(arguments[0].getDecimal()));
-			_fe3d.billboardEntity_setVisible("@@directionalLightSource", (arguments[0].getDecimal() != 0.0f));
+			_fe3d.billboard_setSize("@@directionalLightSource", Vec2(arguments[0].getDecimal()));
+			_fe3d.billboard_setVisible("@@directionalLightSource", (arguments[0].getDecimal() != 0.0f));
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -116,7 +116,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& f
 	}
 
 	// Cannot execute lighting functionality when server is running
-	if(_fe3d.networkServer_isRunning())
+	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:lighting` functionality as a networking server!");
 	}

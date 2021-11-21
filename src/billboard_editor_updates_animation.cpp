@@ -9,10 +9,10 @@ void BillboardEditor::_updateAnimationMenu()
 	if(screen->getID() == "billboardEditorMenuAnimation")
 	{
 		// Temporary values
-		auto animationRowCount = _fe3d.billboardEntity_getSpriteAnimationRowCount(_currentBillboardID);
-		auto animationColumnCount = _fe3d.billboardEntity_getSpriteAnimationColumnCount(_currentBillboardID);
-		auto animationFramestep = _fe3d.billboardEntity_getSpriteAnimationFramestep(_currentBillboardID);
-		auto isPlaying = _fe3d.billboardEntity_isSpriteAnimationPlaying(_currentBillboardID);
+		auto animationRowCount = _fe3d.billboard_getSpriteAnimationRowCount(_currentBillboardID);
+		auto animationColumnCount = _fe3d.billboard_getSpriteAnimationColumnCount(_currentBillboardID);
+		auto animationFramestep = _fe3d.billboard_getSpriteAnimationFramestep(_currentBillboardID);
+		auto isPlaying = _fe3d.billboard_isSpriteAnimationPlaying(_currentBillboardID);
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -22,7 +22,7 @@ void BillboardEditor::_updateAnimationMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animate")->isHovered())
 		{
-			_fe3d.billboardEntity_startSpriteAnimation(_currentBillboardID, -1);
+			_fe3d.billboard_startSpriteAnimation(_currentBillboardID, -1);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rows")->isHovered())
 		{
@@ -45,8 +45,8 @@ void BillboardEditor::_updateAnimationMenu()
 			// Only if animation is already playing
 			if(isPlaying)
 			{
-				_fe3d.billboardEntity_stopSpriteAnimation(_currentBillboardID);
-				_fe3d.billboardEntity_startSpriteAnimation(_currentBillboardID, -1);
+				_fe3d.billboard_stopSpriteAnimation(_currentBillboardID);
+				_fe3d.billboard_startSpriteAnimation(_currentBillboardID, -1);
 			}
 		}
 
@@ -54,8 +54,8 @@ void BillboardEditor::_updateAnimationMenu()
 		screen->getButton("animate")->setHoverable(!isPlaying && (animationRowCount != 0) && (animationColumnCount != 0));
 
 		// Update animation values
-		_fe3d.billboardEntity_setSpriteAnimationRowCount(_currentBillboardID, animationRowCount);
-		_fe3d.billboardEntity_setSpriteAnimationColumnCount(_currentBillboardID, animationColumnCount);
-		_fe3d.billboardEntity_setSpriteAnimationFramestep(_currentBillboardID, animationFramestep);
+		_fe3d.billboard_setSpriteAnimationRowCount(_currentBillboardID, animationRowCount);
+		_fe3d.billboard_setSpriteAnimationColumnCount(_currentBillboardID, animationColumnCount);
+		_fe3d.billboard_setSpriteAnimationFramestep(_currentBillboardID, animationFramestep);
 	}
 }

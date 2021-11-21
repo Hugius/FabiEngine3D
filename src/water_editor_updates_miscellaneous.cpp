@@ -9,10 +9,10 @@ void WaterEditor::_updateMiscellaneousMenu()
 	if(screen->getID() == "waterEditorMenuMiscellaneous")
 	{
 		// Temporary values
-		auto speed = _fe3d.waterEntity_getSpeed(_currentWaterID);
-		auto transparency = _fe3d.waterEntity_getTransparency(_currentWaterID);
-		auto waveHeight = _fe3d.waterEntity_getWaveHeight(_currentWaterID);
-		auto quality = _fe3d.waterEntity_getQuality(_currentWaterID);
+		auto speed = _fe3d.water_getSpeed(_currentWaterID);
+		auto transparency = _fe3d.water_getTransparency(_currentWaterID);
+		auto waveHeight = _fe3d.water_getWaveHeight(_currentWaterID);
+		auto quality = _fe3d.water_getQuality(_currentWaterID);
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -54,34 +54,34 @@ void WaterEditor::_updateMiscellaneousMenu()
 			}
 
 			// Update water quality
-			_fe3d.waterEntity_setQuality(_currentWaterID, quality);
+			_fe3d.water_setQuality(_currentWaterID, quality);
 		}
 
 		// Update value forms
 		if(_gui.getGlobalScreen()->checkValueForm("speedX", speed.x))
 		{
 			speed.x /= 100000.0f;
-			_fe3d.waterEntity_setSpeed(_currentWaterID, speed);
+			_fe3d.water_setSpeed(_currentWaterID, speed);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("speedZ", speed.y))
 		{
 			speed.y /= 100000.0f;
-			_fe3d.waterEntity_setSpeed(_currentWaterID, speed);
+			_fe3d.water_setSpeed(_currentWaterID, speed);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("transparency", transparency))
 		{
 			transparency /= 100.0f;
-			_fe3d.waterEntity_setTransparency(_currentWaterID, transparency);
+			_fe3d.water_setTransparency(_currentWaterID, transparency);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("waveHeight", waveHeight))
 		{
 			waveHeight /= 100.0f;
-			_fe3d.waterEntity_setWaveHeight(_currentWaterID, waveHeight);
+			_fe3d.water_setWaveHeight(_currentWaterID, waveHeight);
 		}
 
 		// Update buttons hoverability
-		screen->getButton("waveHeight")->setHoverable(_fe3d.waterEntity_hasDisplacementMap(_currentWaterID));
-		screen->getButton("speed")->setHoverable(_fe3d.waterEntity_hasDudvMap(_currentWaterID) || _fe3d.waterEntity_hasDisplacementMap(_currentWaterID));
+		screen->getButton("waveHeight")->setHoverable(_fe3d.water_hasDisplacementMap(_currentWaterID));
+		screen->getButton("speed")->setHoverable(_fe3d.water_hasDudvMap(_currentWaterID) || _fe3d.water_hasDisplacementMap(_currentWaterID));
 
 		// Update button text contents
 		screen->getButton("quality")->changeTextContent("Quality: " + to_string(static_cast<int>(quality) + 1));

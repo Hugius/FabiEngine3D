@@ -11,10 +11,10 @@ void WaterEditor::_updateTexturingMenu()
 	if(screen->getID() == "waterEditorMenuTexturing")
 	{
 		// Temporary values
-		auto hasDudvMap = _fe3d.waterEntity_hasDudvMap(_currentWaterID);
-		auto hasNormalMap = _fe3d.waterEntity_hasNormalMap(_currentWaterID);
-		auto hasDisplacementMap = _fe3d.waterEntity_hasDisplacementMap(_currentWaterID);
-		auto textureRepeat = _fe3d.waterEntity_getTextureRepeat(_currentWaterID);
+		auto hasDudvMap = _fe3d.water_hasDudvMap(_currentWaterID);
+		auto hasNormalMap = _fe3d.water_hasNormalMap(_currentWaterID);
+		auto hasDisplacementMap = _fe3d.water_hasDisplacementMap(_currentWaterID);
+		auto textureRepeat = _fe3d.water_getTextureRepeat(_currentWaterID);
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -53,7 +53,7 @@ void WaterEditor::_updateTexturingMenu()
 			// Set DUDV map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clearTextureCache2D(newFilePath);
-			_fe3d.waterEntity_setDudvMap(_currentWaterID, newFilePath);
+			_fe3d.water_setDudvMap(_currentWaterID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
 		{
@@ -86,7 +86,7 @@ void WaterEditor::_updateTexturingMenu()
 			// Set normal map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clearTextureCache2D(newFilePath);
-			_fe3d.waterEntity_setNormalMap(_currentWaterID, newFilePath);
+			_fe3d.water_setNormalMap(_currentWaterID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("displaceMap")->isHovered())
 		{
@@ -119,13 +119,13 @@ void WaterEditor::_updateTexturingMenu()
 			// Set displacement map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clearTextureCache2D(newFilePath);
-			_fe3d.waterEntity_setDisplacementMap(_currentWaterID, newFilePath);
+			_fe3d.water_setDisplacementMap(_currentWaterID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
-			_fe3d.waterEntity_setDudvMap(_currentWaterID, "");
-			_fe3d.waterEntity_setNormalMap(_currentWaterID, "");
-			_fe3d.waterEntity_setDisplacementMap(_currentWaterID, "");
+			_fe3d.water_setDudvMap(_currentWaterID, "");
+			_fe3d.water_setNormalMap(_currentWaterID, "");
+			_fe3d.water_setDisplacementMap(_currentWaterID, "");
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
@@ -135,7 +135,7 @@ void WaterEditor::_updateTexturingMenu()
 		// Update value forms
 		if(_gui.getGlobalScreen()->checkValueForm("textureRepeat", textureRepeat))
 		{
-			_fe3d.waterEntity_setTextureRepeat(_currentWaterID, textureRepeat);
+			_fe3d.water_setTextureRepeat(_currentWaterID, textureRepeat);
 		}
 
 		// Update buttons hoverability

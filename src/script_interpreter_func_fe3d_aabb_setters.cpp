@@ -20,16 +20,16 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 			}
 
 			// Check if AABB entity already exists
-			if(_fe3d.aabbEntity_isExisting(arguments[0].getString()))
+			if(_fe3d.aabb_isExisting(arguments[0].getString()))
 			{
 				_throwScriptError("AABB with ID \"" + arguments[0].getString() + "\" already exists!");
 				return true;
 			}
 
 			// Place AABB
-			_fe3d.aabbEntity_create(arguments[0].getString());
-			_fe3d.aabbEntity_setBasePosition(arguments[0].getString(), Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-			_fe3d.aabbEntity_setBaseSize(arguments[0].getString(), Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()));
+			_fe3d.aabb_create(arguments[0].getString());
+			_fe3d.aabb_setBasePosition(arguments[0].getString(), Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+			_fe3d.aabb_setBaseSize(arguments[0].getString(), Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()));
 
 			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -46,14 +46,14 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot delete a bound entity
-				if(!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
+				if(!_fe3d.aabb_getParentID(arguments[0].getString()).empty())
 				{
 					_throwScriptError("cannot delete AABB with ID \"" + arguments[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
 				// Delete AABB
-				_fe3d.aabbEntity_delete(arguments[0].getString());
+				_fe3d.aabb_delete(arguments[0].getString());
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -71,14 +71,14 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
-				if(!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
+				if(!_fe3d.aabb_getParentID(arguments[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + arguments[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
 				// Set visibility
-				_fe3d.aabbEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
+				_fe3d.aabb_setVisible(arguments[0].getString(), arguments[1].getBoolean());
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -96,14 +96,14 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
-				if(!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
+				if(!_fe3d.aabb_getParentID(arguments[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + arguments[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
 				// Set position
-				_fe3d.aabbEntity_setBasePosition(arguments[0].getString(),
+				_fe3d.aabb_setBasePosition(arguments[0].getString(),
 												 Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 
 				// Return
@@ -122,14 +122,14 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
-				if(!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
+				if(!_fe3d.aabb_getParentID(arguments[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + arguments[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
 				// Set size
-				_fe3d.aabbEntity_setBaseSize(arguments[0].getString(),
+				_fe3d.aabb_setBaseSize(arguments[0].getString(),
 											 Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 
 				// Return
@@ -148,14 +148,14 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
-				if(!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
+				if(!_fe3d.aabb_getParentID(arguments[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + arguments[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
 				// Move position
-				_fe3d.aabbEntity_move(arguments[0].getString(),
+				_fe3d.aabb_move(arguments[0].getString(),
 									  Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 
 				// Return
@@ -174,14 +174,14 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
-				if(!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
+				if(!_fe3d.aabb_getParentID(arguments[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + arguments[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
 				// Scale size
-				_fe3d.aabbEntity_scale(arguments[0].getString(),
+				_fe3d.aabb_scale(arguments[0].getString(),
 									   Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 
 				// Return
@@ -200,14 +200,14 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
-				if(!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
+				if(!_fe3d.aabb_getParentID(arguments[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + arguments[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
 				// Move position
-				_fe3d.aabbEntity_moveTo(arguments[0].getString(),
+				_fe3d.aabb_moveTo(arguments[0].getString(),
 										Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 
 				// Return
@@ -226,14 +226,14 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
-				if(!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
+				if(!_fe3d.aabb_getParentID(arguments[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + arguments[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
 				// Scale size
-				_fe3d.aabbEntity_scaleTo(arguments[0].getString(),
+				_fe3d.aabb_scaleTo(arguments[0].getString(),
 										 Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 
 				// Return
@@ -252,14 +252,14 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
-				if(!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
+				if(!_fe3d.aabb_getParentID(arguments[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + arguments[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
 				// Set responsiveness
-				_fe3d.aabbEntity_setRaycastResponsive(arguments[0].getString(), arguments[1].getBoolean());
+				_fe3d.aabb_setRaycastResponsive(arguments[0].getString(), arguments[1].getBoolean());
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -277,14 +277,14 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
-				if(!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
+				if(!_fe3d.aabb_getParentID(arguments[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + arguments[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
 				// Set responsiveness
-				_fe3d.aabbEntity_setCollisionResponsive(arguments[0].getString(), arguments[1].getBoolean());
+				_fe3d.aabb_setCollisionResponsive(arguments[0].getString(), arguments[1].getBoolean());
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -297,7 +297,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 	}
 
 	// Cannot execute AABB functionality when server is running
-	if(_fe3d.networkServer_isRunning())
+	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:aabb` functionality as a networking server!");
 	}

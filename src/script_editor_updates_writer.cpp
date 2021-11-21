@@ -10,7 +10,7 @@ void ScriptEditor::_updateTextWriter()
 		// Change cursor texture
 		if(_fe3d.misc_isCursorInsideViewport())
 		{
-			_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_text.png");
+			_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_text.png");
 		}
 
 		// Reload all AABB entities when LMB is pressed
@@ -464,28 +464,28 @@ void ScriptEditor::_updateTextWriter()
 		}
 
 		// If cursor billboard not existing, create new one
-		if(!_fe3d.billboardEntity_isExisting("cursor"))
+		if(!_fe3d.billboard_isExisting("cursor"))
 		{
-			_fe3d.billboardEntity_create("cursor");
-			_fe3d.billboardEntity_setFont("cursor", FONT_PATH);
-			_fe3d.billboardEntity_setSize("cursor", TEXT_CHARACTER_SIZE);
+			_fe3d.billboard_create("cursor");
+			_fe3d.billboard_setFont("cursor", FONT_PATH);
+			_fe3d.billboard_setSize("cursor", TEXT_CHARACTER_SIZE);
 		}
 
 		// Update cursor billboard text & position
 		Vec3 position;
 		if(cursorCharIndex == 0) // Default line position
 		{
-			Vec3 linePosition = _fe3d.billboardEntity_getPosition(to_string(cursorLineIndex));
+			Vec3 linePosition = _fe3d.billboard_getPosition(to_string(cursorLineIndex));
 			position = Vec3(SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET - HORIZONTAL_CHARACTER_OFFSET, linePosition.y, linePosition.z);
 		}
 		else // Mid-text position
 		{
-			position = _fe3d.billboardEntity_getPosition(to_string(cursorLineIndex) + "_" + to_string(cursorCharIndex - 1));
+			position = _fe3d.billboard_getPosition(to_string(cursorLineIndex) + "_" + to_string(cursorCharIndex - 1));
 		}
 		position += Vec3(TEXT_CHARACTER_SIZE.x / 2.0f, 0.0f, 0.0f);
-		_fe3d.billboardEntity_setPosition("cursor", position);
+		_fe3d.billboard_setPosition("cursor", position);
 		bool showBar = ((barEnabled && _firstSelectedLineIndex == -1) || _activeActionKey != InputType::NONE);
-		_fe3d.billboardEntity_setTextContent("cursor", (showBar ? "|" : " "));
+		_fe3d.billboard_setTextContent("cursor", (showBar ? "|" : " "));
 
 		// Set new cursor indices
 		_script.getScriptFile(_currentScriptFileID)->setCursorLineIndex(cursorLineIndex);

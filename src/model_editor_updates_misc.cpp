@@ -25,7 +25,7 @@ void ModelEditor::_updateCamera()
 		_fe3d.camera_setThirdPersonLookat(cameraLookat);
 
 		// Hide cursor
-		_fe3d.imageEntity_setVisible("@@cursor", false);
+		_fe3d.image_setVisible("@@cursor", false);
 
 		// Update shadows
 		const auto distance = _fe3d.camera_getThirdPersonDistance();
@@ -71,30 +71,30 @@ void ModelEditor::_updateMiscellaneous()
 		// Update reference model visibility
 		if(_fe3d.input_isKeyPressed(InputType::KEY_R))
 		{
-			if(_fe3d.modelEntity_isVisible("@@cube"))
+			if(_fe3d.model_isVisible("@@cube"))
 			{
-				_fe3d.modelEntity_setVisible("@@cube", false);
+				_fe3d.model_setVisible("@@cube", false);
 			}
 			else
 			{
-				_fe3d.modelEntity_setVisible("@@cube", true);
+				_fe3d.model_setVisible("@@cube", true);
 			}
 		}
 
 		// Update wireframe model rendering
-		if(_fe3d.modelEntity_isExisting(_currentModelID))
+		if(_fe3d.model_isExisting(_currentModelID))
 		{
 			if(_fe3d.input_isKeyPressed(InputType::KEY_F))
 			{
-				for(const auto& partID : _fe3d.modelEntity_getPartIDs(_currentModelID))
+				for(const auto& partID : _fe3d.model_getPartIDs(_currentModelID))
 				{
-					if(_fe3d.modelEntity_isWireframed(_currentModelID, partID))
+					if(_fe3d.model_isWireframed(_currentModelID, partID))
 					{
-						_fe3d.modelEntity_setWireframed(_currentModelID, partID, false);
+						_fe3d.model_setWireframed(_currentModelID, partID, false);
 					}
 					else
 					{
-						_fe3d.modelEntity_setWireframed(_currentModelID, partID, true);
+						_fe3d.model_setWireframed(_currentModelID, partID, true);
 					}
 				}
 			}

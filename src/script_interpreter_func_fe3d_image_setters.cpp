@@ -25,34 +25,34 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			}
 
 			// Check if imageEntity already exists
-			if(_fe3d.imageEntity_isExisting(ID))
+			if(_fe3d.image_isExisting(ID))
 			{
 				_throwScriptError("image with ID \"" + ID + "\" already exists!");
 				return true;
 			}
 
 			// Create image
-			_fe3d.imageEntity_create(ID, true);
+			_fe3d.image_create(ID, true);
 
 			// Set diffuse map
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\textures\\image_maps\\");
 			const string filePath = (targetDirectoryPath + arguments[1].getString());
-			_fe3d.imageEntity_setDiffuseMap(ID, filePath);
+			_fe3d.image_setDiffuseMap(ID, filePath);
 
 			// Set properties
-			_fe3d.imageEntity_setPosition(ID, _convertGuiPositionToViewport(Vec2(arguments[2].getDecimal(), arguments[3].getDecimal())));
-			_fe3d.imageEntity_setRotation(ID, arguments[4].getDecimal());
-			_fe3d.imageEntity_setSize(ID, _convertGuiSizeToViewport(Vec2(arguments[5].getDecimal(), arguments[6].getDecimal())));
+			_fe3d.image_setPosition(ID, _convertGuiPositionToViewport(Vec2(arguments[2].getDecimal(), arguments[3].getDecimal())));
+			_fe3d.image_setRotation(ID, arguments[4].getDecimal());
+			_fe3d.image_setSize(ID, _convertGuiSizeToViewport(Vec2(arguments[5].getDecimal(), arguments[6].getDecimal())));
 
 			// In-engine viewport boundaries
 			if(!Config::getInst().isApplicationExported())
 			{
 				auto minPosition = Math::convertToNDC(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition()));
 				auto maxPosition = Math::convertToNDC(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition() + Config::getInst().getViewportSize()));
-				_fe3d.imageEntity_setMinPosition(ID, minPosition);
-				_fe3d.imageEntity_setMaxPosition(ID, maxPosition);
+				_fe3d.image_setMinPosition(ID, minPosition);
+				_fe3d.image_setMaxPosition(ID, maxPosition);
 			}
 
 			// Return
@@ -69,7 +69,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				_fe3d.imageEntity_delete(arguments[0].getString());
+				_fe3d.image_delete(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -84,7 +84,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				_fe3d.imageEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
+				_fe3d.image_setVisible(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -100,7 +100,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				Vec2 position = _convertGuiPositionToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				_fe3d.imageEntity_setPosition(arguments[0].getString(), position);
+				_fe3d.image_setPosition(arguments[0].getString(), position);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -116,7 +116,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				Vec2 change = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				_fe3d.imageEntity_move(arguments[0].getString(), change);
+				_fe3d.image_move(arguments[0].getString(), change);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -133,7 +133,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			{
 				Vec2 target = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				Vec2 speed = _convertGuiSizeToViewport(Vec2(arguments[3].getDecimal(), arguments[3].getDecimal()));
-				_fe3d.imageEntity_moveTo(arguments[0].getString(), target, speed.x);
+				_fe3d.image_moveTo(arguments[0].getString(), target, speed.x);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -148,7 +148,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				_fe3d.imageEntity_setRotation(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.image_setRotation(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -163,7 +163,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				_fe3d.imageEntity_rotate(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.image_rotate(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -178,7 +178,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				_fe3d.imageEntity_rotateTo(arguments[0].getString(), arguments[1].getDecimal(), arguments[2].getDecimal());
+				_fe3d.image_rotateTo(arguments[0].getString(), arguments[1].getDecimal(), arguments[2].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -194,7 +194,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				Vec2 size = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				_fe3d.imageEntity_setSize(arguments[0].getString(), size);
+				_fe3d.image_setSize(arguments[0].getString(), size);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -210,7 +210,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				Vec2 change = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				_fe3d.imageEntity_scale(arguments[0].getString(), change);
+				_fe3d.image_scale(arguments[0].getString(), change);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -227,7 +227,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			{
 				Vec2 target = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				Vec2 speed = _convertGuiSizeToViewport(Vec2(arguments[3].getDecimal(), arguments[3].getDecimal()));
-				_fe3d.imageEntity_scaleTo(arguments[0].getString(), target, speed.x);
+				_fe3d.image_scaleTo(arguments[0].getString(), target, speed.x);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -242,7 +242,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				_fe3d.imageEntity_setColor(arguments[0].getString(),
+				_fe3d.image_setColor(arguments[0].getString(),
 										   Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -258,7 +258,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				_fe3d.imageEntity_setTransparency(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.image_setTransparency(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -273,10 +273,10 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				_fe3d.imageEntity_setSpriteAnimationRowCount(arguments[0].getString(), arguments[1].getInteger());
-				_fe3d.imageEntity_setSpriteAnimationColumnCount(arguments[0].getString(), arguments[2].getInteger());
-				_fe3d.imageEntity_setSpriteAnimationFramestep(arguments[0].getString(), arguments[3].getInteger());
-				_fe3d.imageEntity_startSpriteAnimation(arguments[0].getString(), arguments[4].getInteger());
+				_fe3d.image_setSpriteAnimationRowCount(arguments[0].getString(), arguments[1].getInteger());
+				_fe3d.image_setSpriteAnimationColumnCount(arguments[0].getString(), arguments[2].getInteger());
+				_fe3d.image_setSpriteAnimationFramestep(arguments[0].getString(), arguments[3].getInteger());
+				_fe3d.image_startSpriteAnimation(arguments[0].getString(), arguments[4].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -291,7 +291,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				_fe3d.imageEntity_pauseSpriteAnimation(arguments[0].getString());
+				_fe3d.image_pauseSpriteAnimation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -306,7 +306,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				_fe3d.imageEntity_resumeSpriteAnimation(arguments[0].getString());
+				_fe3d.image_resumeSpriteAnimation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -321,7 +321,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				_fe3d.imageEntity_stopSpriteAnimation(arguments[0].getString());
+				_fe3d.image_stopSpriteAnimation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -336,7 +336,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				_fe3d.imageEntity_setMirroredHorizontally(arguments[0].getString(), arguments[1].getBoolean());
+				_fe3d.image_setMirroredHorizontally(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -351,7 +351,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				_fe3d.imageEntity_setMirroredVertically(arguments[0].getString(), arguments[1].getBoolean());
+				_fe3d.image_setMirroredVertically(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -362,7 +362,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	}
 
 	// Cannot execute image functionality when server is running
-	if(_fe3d.networkServer_isRunning())
+	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:image` functionality as a networking server!");
 	}

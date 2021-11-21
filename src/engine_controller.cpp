@@ -128,13 +128,13 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		Tools::setMainRenderingColor(Vec3(0.0f));
 
 		// Default engine background
-		skyEntity_create("@@engineBackground");
-		skyEntity_setCubeMaps("@@engineBackground", texturePaths3D);
+		sky_create("@@engineBackground");
+		sky_setCubeMaps("@@engineBackground", texturePaths3D);
 
 		// Custom cursor texture
-		imageEntity_create("@@cursor", true);
-		imageEntity_setSize("@@cursor", Vec2(0.075f, 0.075f * Tools::getWindowAspectRatio()));
-		imageEntity_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_default.png");
+		image_create("@@cursor", true);
+		image_setSize("@@cursor", Vec2(0.075f, 0.075f * Tools::getWindowAspectRatio()));
+		image_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_default.png");
 		misc_setCustomCursor("@@cursor");
 		misc_setCursorVisible(false);
 
@@ -178,19 +178,19 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 			camera_reset();
 
 			// Restore background
-			skyEntity_selectMainSky("@@engineBackground");
-			skyEntity_setMixValue(0.0f);
-			skyEntity_setLightness("@@engineBackground", 1.0f);
+			sky_selectMainSky("@@engineBackground");
+			sky_setMixValue(0.0f);
+			sky_setLightness("@@engineBackground", 1.0f);
 		}
 		lastScreen = activeScreen;
 
 		// Update background
-		skyEntity_setRotation("@@engineBackground", skyEntity_getRotation("@@engineBackground") + 0.0025f);
+		sky_setRotation("@@engineBackground", sky_getRotation("@@engineBackground") + 0.0025f);
 
 		// Update custom cursor
-		imageEntity_setPosition("@@cursor", Math::convertToNDC(Tools::convertFromScreenCoords(misc_getCursorPosition())));
-		imageEntity_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_default.png");
-		imageEntity_setVisible("@@cursor", misc_isCursorInsideWindow());
+		image_setPosition("@@cursor", Math::convertToNDC(Tools::convertFromScreenCoords(misc_getCursorPosition())));
+		image_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_default.png");
+		image_setVisible("@@cursor", misc_isCursorInsideWindow());
 
 		// Update GUI manager
 		_gui.update();

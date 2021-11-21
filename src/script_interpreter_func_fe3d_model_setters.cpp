@@ -6,7 +6,7 @@ static const vector<string> extractModelPartIDs(FabiEngine3D& fe3d, const string
 {
 	if(partID.empty())
 	{
-		return fe3d.modelEntity_getPartIDs(modelID);
+		return fe3d.model_getPartIDs(modelID);
 	}
 	else
 	{
@@ -32,7 +32,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			}
 
 			// Check if modelEntity already exists
-			if(_fe3d.modelEntity_isExisting(arguments[0].getString()))
+			if(_fe3d.model_isExisting(arguments[0].getString()))
 			{
 				_throwScriptError("model with ID \"" + arguments[0].getString() + "\" already exists!");
 				return true;
@@ -57,7 +57,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_fe3d.modelEntity_delete(arguments[0].getString());
+				_fe3d.model_delete(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -72,7 +72,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_fe3d.modelEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
+				_fe3d.model_setVisible(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -87,7 +87,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_fe3d.modelEntity_setBasePosition(arguments[0].getString(),
+				_fe3d.model_setBasePosition(arguments[0].getString(),
 												  Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -103,7 +103,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_fe3d.modelEntity_setBaseRotation(arguments[0].getString(),
+				_fe3d.model_setBaseRotation(arguments[0].getString(),
 												  Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -119,7 +119,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_fe3d.modelEntity_setBaseRotationOrigin(arguments[0].getString(),
+				_fe3d.model_setBaseRotationOrigin(arguments[0].getString(),
 														Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -135,7 +135,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_fe3d.modelEntity_setBaseSize(arguments[0].getString(),
+				_fe3d.model_setBaseSize(arguments[0].getString(),
 											  Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -151,7 +151,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_fe3d.modelEntity_moveBase(arguments[0].getString(),
+				_fe3d.model_moveBase(arguments[0].getString(),
 										   Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -167,7 +167,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_fe3d.modelEntity_rotateBase(arguments[0].getString(),
+				_fe3d.model_rotateBase(arguments[0].getString(),
 											 Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -183,7 +183,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_fe3d.modelEntity_scaleBase(arguments[0].getString(),
+				_fe3d.model_scaleBase(arguments[0].getString(),
 											Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -199,7 +199,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_fe3d.modelEntity_moveBaseTo(arguments[0].getString(),
+				_fe3d.model_moveBaseTo(arguments[0].getString(),
 											 Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -215,7 +215,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_fe3d.modelEntity_rotateBaseTo(arguments[0].getString(),
+				_fe3d.model_rotateBaseTo(arguments[0].getString(),
 											   Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -231,7 +231,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_fe3d.modelEntity_scaleBaseTo(arguments[0].getString(),
+				_fe3d.model_scaleBaseTo(arguments[0].getString(),
 											  Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -247,7 +247,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_fe3d.modelEntity_setMinHeight(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.model_setMinHeight(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -262,7 +262,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_fe3d.modelEntity_setMaxHeight(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.model_setMaxHeight(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -278,7 +278,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				// Retrieve all bound AABB IDs
-				auto aabbIDs = _fe3d.aabbEntity_getChildIDs(arguments[0].getString(), AabbParentType::MODEL_ENTITY);
+				auto aabbIDs = _fe3d.aabb_getChildIDs(arguments[0].getString(), AabbParentType::MODEL_ENTITY);
 
 				// Check if modelEntity has no AABBs
 				if(aabbIDs.empty())
@@ -290,7 +290,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 				// Set responsiveness
 				for(const auto& ID : aabbIDs)
 				{
-					_fe3d.aabbEntity_setRaycastResponsive(ID, arguments[1].getBoolean());
+					_fe3d.aabb_setRaycastResponsive(ID, arguments[1].getBoolean());
 				}
 
 				// Return
@@ -309,7 +309,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				// Retrieve all bound AABB IDs
-				auto aabbIDs = _fe3d.aabbEntity_getChildIDs(arguments[0].getString(), AabbParentType::MODEL_ENTITY);
+				auto aabbIDs = _fe3d.aabb_getChildIDs(arguments[0].getString(), AabbParentType::MODEL_ENTITY);
 
 				// Check if modelEntity has no AABBs
 				if(aabbIDs.empty())
@@ -321,7 +321,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 				// Set responsiveness
 				for(const auto& ID : aabbIDs)
 				{
-					_fe3d.aabbEntity_setCollisionResponsive(ID, arguments[1].getBoolean());
+					_fe3d.aabb_setCollisionResponsive(ID, arguments[1].getBoolean());
 				}
 
 				// Return
@@ -463,7 +463,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 				// Set color
 				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
 				{
-					_fe3d.modelEntity_setColor(arguments[0].getString(), partID,
+					_fe3d.model_setColor(arguments[0].getString(), partID,
 											   Vec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
 				}
 
@@ -485,7 +485,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 				// Set lightness
 				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
 				{
-					_fe3d.modelEntity_setLightness(arguments[0].getString(), partID, arguments[2].getDecimal());
+					_fe3d.model_setLightness(arguments[0].getString(), partID, arguments[2].getDecimal());
 				}
 
 				// Return
@@ -506,7 +506,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 				// Set transparency
 				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
 				{
-					_fe3d.modelEntity_setTransparency(arguments[0].getString(), partID, arguments[2].getDecimal());
+					_fe3d.model_setTransparency(arguments[0].getString(), partID, arguments[2].getDecimal());
 				}
 
 				// Return
@@ -527,7 +527,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 				// Set emission intensity
 				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
 				{
-					_fe3d.modelEntity_setEmissionIntensity(arguments[0].getString(), partID, arguments[2].getDecimal());
+					_fe3d.model_setEmissionIntensity(arguments[0].getString(), partID, arguments[2].getDecimal());
 				}
 
 				// Return
@@ -541,7 +541,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 
 	// Cannot execute model functionality when server is running
-	if(_fe3d.networkServer_isRunning())
+	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:model` functionality as a networking server!");
 	}

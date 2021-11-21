@@ -20,7 +20,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 			}
 
 			// Check if existing
-			auto result = _fe3d.textEntity_isExisting(arguments[0].getString());
+			auto result = _fe3d.text_isExisting(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
@@ -39,7 +39,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 			}
 
 			// Find full entity IDs based on part ID
-			for(const auto& ID : _fe3d.textEntity_getAllIDs())
+			for(const auto& ID : _fe3d.text_getAllIDs())
 			{
 				// If substring matches
 				if(arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -58,7 +58,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.textEntity_getAllIDs();
+			auto result = _fe3d.text_getAllIDs();
 
 			// For every text
 			for(const auto& ID : result)
@@ -81,7 +81,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 			// Validate existence
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				auto result = _fe3d.textEntity_isVisible(arguments[0].getString());
+				auto result = _fe3d.text_isVisible(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -96,7 +96,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 			// Validate existence
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				auto result = _fe3d.textEntity_getPosition(arguments[0].getString());
+				auto result = _fe3d.text_getPosition(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, _convertGuiPositionFromViewport(result).x));
 			}
 		}
@@ -111,7 +111,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 			// Validate existence
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				auto result = _fe3d.textEntity_getPosition(arguments[0].getString());
+				auto result = _fe3d.text_getPosition(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, _convertGuiPositionFromViewport(result).y));
 			}
 		}
@@ -126,7 +126,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 			// Validate existence
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				auto result = _fe3d.textEntity_getRotation(arguments[0].getString());
+				auto result = _fe3d.text_getRotation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -141,7 +141,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 			// Validate existence
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				auto result = _fe3d.textEntity_getSize(arguments[0].getString());
+				auto result = _fe3d.text_getSize(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, _convertGuiSizeFromViewport(result).x));
 			}
 		}
@@ -156,7 +156,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 			// Validate existence
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				auto result = _fe3d.textEntity_getSize(arguments[0].getString());
+				auto result = _fe3d.text_getSize(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, _convertGuiSizeFromViewport(result).y));
 			}
 		}
@@ -171,7 +171,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 			// Validate existence
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				auto result = _fe3d.textEntity_getColor(arguments[0].getString());
+				auto result = _fe3d.text_getColor(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
@@ -186,7 +186,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 			// Validate existence
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				auto result = _fe3d.textEntity_getTextContent(arguments[0].getString());
+				auto result = _fe3d.text_getTextContent(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 			}
 		}
@@ -201,7 +201,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 			// Validate existence
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				auto result = _fe3d.textEntity_getTransparency(arguments[0].getString());
+				auto result = _fe3d.text_getTransparency(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -212,7 +212,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 	}
 
 	// Cannot execute text functionality when server is running
-	if(_fe3d.networkServer_isRunning())
+	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:text` functionality as a networking server!");
 	}

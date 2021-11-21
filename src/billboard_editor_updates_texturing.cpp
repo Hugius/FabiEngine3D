@@ -11,11 +11,11 @@ void BillboardEditor::_updateTexturingMenu()
 	if(screen->getID() == "billboardEditorMenuTexturing")
 	{
 		// Temporary values
-		auto textContent = _fe3d.billboardEntity_getTextContent(_currentBillboardID);
-		auto isText = _fe3d.billboardEntity_isText(_currentBillboardID);
-		auto hasDiffuseMap = _fe3d.billboardEntity_hasDiffuseMap(_currentBillboardID);
-		auto hasEmissionMap = _fe3d.billboardEntity_hasEmissionMap(_currentBillboardID);
-		auto textureRepeat = _fe3d.billboardEntity_getTextureRepeat(_currentBillboardID);
+		auto textContent = _fe3d.billboard_getTextContent(_currentBillboardID);
+		auto isText = _fe3d.billboard_isText(_currentBillboardID);
+		auto hasDiffuseMap = _fe3d.billboard_hasDiffuseMap(_currentBillboardID);
+		auto hasEmissionMap = _fe3d.billboard_hasEmissionMap(_currentBillboardID);
+		auto textureRepeat = _fe3d.billboard_getTextureRepeat(_currentBillboardID);
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -54,12 +54,12 @@ void BillboardEditor::_updateTexturingMenu()
 			// Set font
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clearFontCache(finalFilePath);
-			_fe3d.billboardEntity_setFont(_currentBillboardID, finalFilePath);
+			_fe3d.billboard_setFont(_currentBillboardID, finalFilePath);
 
 			// Set default text
 			if(textContent.empty())
 			{
-				_fe3d.billboardEntity_setTextContent(_currentBillboardID, "text");
+				_fe3d.billboard_setTextContent(_currentBillboardID, "text");
 			}
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textContent")->isHovered())
@@ -97,7 +97,7 @@ void BillboardEditor::_updateTexturingMenu()
 			// Set diffuse map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clearTextureCache2D(finalFilePath);
-			_fe3d.billboardEntity_setDiffuseMap(_currentBillboardID, finalFilePath);
+			_fe3d.billboard_setDiffuseMap(_currentBillboardID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
 		{
@@ -130,12 +130,12 @@ void BillboardEditor::_updateTexturingMenu()
 			// Set emission map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clearTextureCache2D(finalFilePath);
-			_fe3d.billboardEntity_setEmissionMap(_currentBillboardID, finalFilePath);
+			_fe3d.billboard_setEmissionMap(_currentBillboardID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
-			_fe3d.billboardEntity_setDiffuseMap(_currentBillboardID, "");
-			_fe3d.billboardEntity_setEmissionMap(_currentBillboardID, "");
+			_fe3d.billboard_setDiffuseMap(_currentBillboardID, "");
+			_fe3d.billboard_setEmissionMap(_currentBillboardID, "");
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
@@ -145,11 +145,11 @@ void BillboardEditor::_updateTexturingMenu()
 		// Update value forms
 		if(_gui.getGlobalScreen()->checkValueForm("textContent", textContent, {}))
 		{
-			_fe3d.billboardEntity_setTextContent(_currentBillboardID, textContent);
+			_fe3d.billboard_setTextContent(_currentBillboardID, textContent);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("textureRepeat", textureRepeat, {}))
 		{
-			_fe3d.billboardEntity_setTextureRepeat(_currentBillboardID, textureRepeat);
+			_fe3d.billboard_setTextureRepeat(_currentBillboardID, textureRepeat);
 		}
 
 		// Update buttons hoverability

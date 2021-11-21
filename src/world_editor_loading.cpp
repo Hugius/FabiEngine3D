@@ -142,7 +142,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				}
 
 				// Set height
-				_fe3d.waterEntity_setHeight(waterID, height);
+				_fe3d.water_setHeight(waterID, height);
 			}
 		}
 		else if(lineType == "MODEL")
@@ -192,10 +192,10 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			replace(animationID.begin(), animationID.end(), '?', ' ');
 
 			// Check if preview model instancing changed
-			if(_fe3d.modelEntity_isExisting(previewID))
+			if(_fe3d.model_isExisting(previewID))
 			{
-				if(_fe3d.modelEntity_isInstanced(previewID) && (modelID != previewID.substr(1)) ||
-				   !_fe3d.modelEntity_isInstanced(previewID) && (modelID == previewID.substr(1)))
+				if(_fe3d.model_isInstanced(previewID) && (modelID != previewID.substr(1)) ||
+				   !_fe3d.model_isInstanced(previewID) && (modelID == previewID.substr(1)))
 				{
 					Logger::throwWarning("Model instancing with ID \"" + modelID + "\" differs from base model!");
 					continue;
@@ -206,9 +206,9 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			if(_copyPreviewModel(modelID, previewID, position, false))
 			{
 				// Set properties
-				_fe3d.modelEntity_setBaseRotation(modelID, rotation);
-				_fe3d.modelEntity_setBaseSize(modelID, size);
-				_fe3d.modelEntity_setStaticToCamera(modelID, isFrozen);
+				_fe3d.model_setBaseRotation(modelID, rotation);
+				_fe3d.model_setBaseSize(modelID, size);
+				_fe3d.model_setStaticToCamera(modelID, isFrozen);
 
 				// Save initial transformation
 				if(_isEditorLoaded)
@@ -225,7 +225,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				}
 
 				// Check if instanced
-				if(_fe3d.modelEntity_isInstanced(modelID))
+				if(_fe3d.model_isInstanced(modelID))
 				{
 					// Read offset data from file
 					vector<Vec3> instancedOffsets;
@@ -250,14 +250,14 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 					}
 
 					// Add offsets
-					_fe3d.modelEntity_disableInstancing(modelID);
-					_fe3d.modelEntity_enableInstancing(modelID, instancedOffsets);
+					_fe3d.model_disableInstancing(modelID);
+					_fe3d.model_enableInstancing(modelID, instancedOffsets);
 				}
 
 				// Make invisible
 				if(makeInvisible)
 				{
-					_fe3d.modelEntity_setVisible(modelID, false);
+					_fe3d.model_setVisible(modelID, false);
 				}
 			}
 		}
@@ -284,8 +284,8 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			// Create billboard
 			if(_copyPreviewBillboard(billboardID, previewID, position, false))
 			{
-				_fe3d.billboardEntity_setRotation(billboardID, rotation);
-				_fe3d.billboardEntity_setSize(billboardID, size);
+				_fe3d.billboard_setRotation(billboardID, rotation);
+				_fe3d.billboard_setSize(billboardID, size);
 			}
 		}
 		else if(lineType == "SOUND")
@@ -310,18 +310,18 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			{
 				// Create model
 				const string newModelID = ("@@speaker_" + soundID);
-				_fe3d.modelEntity_create(newModelID, "engine\\assets\\meshes\\speaker.obj");
-				_fe3d.modelEntity_setBasePosition(newModelID, position);
-				_fe3d.modelEntity_setBaseSize(newModelID, DEFAULT_SPEAKER_SIZE);
-				_fe3d.modelEntity_setShadowed(newModelID, false);
-				_fe3d.modelEntity_setReflected(newModelID, false);
-				_fe3d.modelEntity_setBright(newModelID, true);
+				_fe3d.model_create(newModelID, "engine\\assets\\meshes\\speaker.obj");
+				_fe3d.model_setBasePosition(newModelID, position);
+				_fe3d.model_setBaseSize(newModelID, DEFAULT_SPEAKER_SIZE);
+				_fe3d.model_setShadowed(newModelID, false);
+				_fe3d.model_setReflected(newModelID, false);
+				_fe3d.model_setBright(newModelID, true);
 
 				// Bind AABB
-				_fe3d.aabbEntity_create(newModelID);
-				_fe3d.aabbEntity_setParent(newModelID, newModelID, AabbParentType::MODEL_ENTITY);
-				_fe3d.aabbEntity_setLocalSize(newModelID, DEFAULT_SPEAKER_AABB_SIZE);
-				_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
+				_fe3d.aabb_create(newModelID);
+				_fe3d.aabb_setParent(newModelID, newModelID, AabbParentType::MODEL_ENTITY);
+				_fe3d.aabb_setLocalSize(newModelID, DEFAULT_SPEAKER_AABB_SIZE);
+				_fe3d.aabb_setCollisionResponsive(newModelID, false);
 			}
 
 			// Create sound
@@ -360,28 +360,28 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			{
 				// Create model
 				const string newModelID = ("@@lamp_" + pointlightID);
-				_fe3d.modelEntity_create(newModelID, "engine\\assets\\meshes\\lamp.obj");
-				_fe3d.modelEntity_setBasePosition(newModelID, position);
-				_fe3d.modelEntity_setBaseSize(newModelID, DEFAULT_LAMP_SIZE);
-				_fe3d.modelEntity_setColor(newModelID, "", color);
-				_fe3d.modelEntity_setShadowed(newModelID, false);
-				_fe3d.modelEntity_setReflected(newModelID, false);
-				_fe3d.modelEntity_setBright(newModelID, true);
+				_fe3d.model_create(newModelID, "engine\\assets\\meshes\\lamp.obj");
+				_fe3d.model_setBasePosition(newModelID, position);
+				_fe3d.model_setBaseSize(newModelID, DEFAULT_LAMP_SIZE);
+				_fe3d.model_setColor(newModelID, "", color);
+				_fe3d.model_setShadowed(newModelID, false);
+				_fe3d.model_setReflected(newModelID, false);
+				_fe3d.model_setBright(newModelID, true);
 
 				// Bind AABB
-				_fe3d.aabbEntity_create(newModelID);
-				_fe3d.aabbEntity_setParent(newModelID, newModelID, AabbParentType::MODEL_ENTITY);
-				_fe3d.aabbEntity_setLocalSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
-				_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
+				_fe3d.aabb_create(newModelID);
+				_fe3d.aabb_setParent(newModelID, newModelID, AabbParentType::MODEL_ENTITY);
+				_fe3d.aabb_setLocalSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
+				_fe3d.aabb_setCollisionResponsive(newModelID, false);
 			}
 
 			// Create pointlight
-			_fe3d.pointlightEntity_create(pointlightID);
-			_fe3d.pointlightEntity_setPosition(pointlightID, position);
-			_fe3d.pointlightEntity_setRadius(pointlightID, radius);
-			_fe3d.pointlightEntity_setColor(pointlightID, color);
-			_fe3d.pointlightEntity_setIntensity(pointlightID, intensity);
-			_fe3d.pointlightEntity_setShape(pointlightID, PointlightShape(shape));
+			_fe3d.pointlight_create(pointlightID);
+			_fe3d.pointlight_setPosition(pointlightID, position);
+			_fe3d.pointlight_setRadius(pointlightID, radius);
+			_fe3d.pointlight_setColor(pointlightID, color);
+			_fe3d.pointlight_setIntensity(pointlightID, intensity);
+			_fe3d.pointlight_setShape(pointlightID, PointlightShape(shape));
 			_loadedPointlightIDs.push_back(pointlightID);
 		}
 		else if(lineType == "SPOTLIGHT")
@@ -411,31 +411,31 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			{
 				// Create model
 				const string newModelID = ("@@torch_" + spotlightID);
-				_fe3d.modelEntity_create(newModelID, "engine\\assets\\meshes\\torch.obj");
-				_fe3d.modelEntity_setBasePosition(newModelID, position);
-				_fe3d.modelEntity_setBaseRotation(newModelID, Vec3(0.0f, -yaw, pitch));
-				_fe3d.modelEntity_setBaseSize(newModelID, DEFAULT_TORCH_SIZE);
-				_fe3d.modelEntity_setColor(newModelID, "", color);
-				_fe3d.modelEntity_setShadowed(newModelID, false);
-				_fe3d.modelEntity_setReflected(newModelID, false);
-				_fe3d.modelEntity_setBright(newModelID, true);
+				_fe3d.model_create(newModelID, "engine\\assets\\meshes\\torch.obj");
+				_fe3d.model_setBasePosition(newModelID, position);
+				_fe3d.model_setBaseRotation(newModelID, Vec3(0.0f, -yaw, pitch));
+				_fe3d.model_setBaseSize(newModelID, DEFAULT_TORCH_SIZE);
+				_fe3d.model_setColor(newModelID, "", color);
+				_fe3d.model_setShadowed(newModelID, false);
+				_fe3d.model_setReflected(newModelID, false);
+				_fe3d.model_setBright(newModelID, true);
 
 				// Bind AABB
-				_fe3d.aabbEntity_create(newModelID);
-				_fe3d.aabbEntity_setParent(newModelID, newModelID, AabbParentType::MODEL_ENTITY);
-				_fe3d.aabbEntity_setLocalSize(newModelID, DEFAULT_TORCH_AABB_SIZE);
-				_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
+				_fe3d.aabb_create(newModelID);
+				_fe3d.aabb_setParent(newModelID, newModelID, AabbParentType::MODEL_ENTITY);
+				_fe3d.aabb_setLocalSize(newModelID, DEFAULT_TORCH_AABB_SIZE);
+				_fe3d.aabb_setCollisionResponsive(newModelID, false);
 			}
 
 			// Create spotlight
-			_fe3d.spotlightEntity_create(spotlightID);
-			_fe3d.spotlightEntity_setPosition(spotlightID, position);
-			_fe3d.spotlightEntity_setColor(spotlightID, color);
-			_fe3d.spotlightEntity_setYaw(spotlightID, yaw);
-			_fe3d.spotlightEntity_setPitch(spotlightID, pitch);
-			_fe3d.spotlightEntity_setIntensity(spotlightID, intensity);
-			_fe3d.spotlightEntity_setAngle(spotlightID, angle);
-			_fe3d.spotlightEntity_setDistance(spotlightID, distance);
+			_fe3d.spotlight_create(spotlightID);
+			_fe3d.spotlight_setPosition(spotlightID, position);
+			_fe3d.spotlight_setColor(spotlightID, color);
+			_fe3d.spotlight_setYaw(spotlightID, yaw);
+			_fe3d.spotlight_setPitch(spotlightID, pitch);
+			_fe3d.spotlight_setIntensity(spotlightID, intensity);
+			_fe3d.spotlight_setAngle(spotlightID, angle);
+			_fe3d.spotlight_setDistance(spotlightID, distance);
 			_loadedSpotlightIDs.push_back(spotlightID);
 		}
 		else if(lineType == "REFLECTION")
@@ -456,24 +456,24 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			{
 				// Create model
 				const string newModelID = ("@@camera_" + reflectionID);
-				_fe3d.modelEntity_create(newModelID, "engine\\assets\\meshes\\camera.obj");
-				_fe3d.modelEntity_setBasePosition(newModelID, position);
-				_fe3d.modelEntity_setBaseSize(newModelID, DEFAULT_CAMERA_SIZE);
-				_fe3d.modelEntity_setShadowed(newModelID, false);
-				_fe3d.modelEntity_setReflected(newModelID, false);
-				_fe3d.modelEntity_setBright(newModelID, true);
+				_fe3d.model_create(newModelID, "engine\\assets\\meshes\\camera.obj");
+				_fe3d.model_setBasePosition(newModelID, position);
+				_fe3d.model_setBaseSize(newModelID, DEFAULT_CAMERA_SIZE);
+				_fe3d.model_setShadowed(newModelID, false);
+				_fe3d.model_setReflected(newModelID, false);
+				_fe3d.model_setBright(newModelID, true);
 
 				// Bind AABB
-				_fe3d.aabbEntity_create(newModelID);
-				_fe3d.aabbEntity_setParent(newModelID, newModelID, AabbParentType::MODEL_ENTITY);
-				_fe3d.aabbEntity_setLocalSize(newModelID, DEFAULT_CAMERA_AABB_SIZE);
-				_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
+				_fe3d.aabb_create(newModelID);
+				_fe3d.aabb_setParent(newModelID, newModelID, AabbParentType::MODEL_ENTITY);
+				_fe3d.aabb_setLocalSize(newModelID, DEFAULT_CAMERA_AABB_SIZE);
+				_fe3d.aabb_setCollisionResponsive(newModelID, false);
 			}
 
 			// Create reflection
-			_fe3d.reflectionEntity_create(reflectionID);
-			_fe3d.reflectionEntity_setPosition(reflectionID, position);
-			_fe3d.reflectionEntity_capture(reflectionID);
+			_fe3d.reflection_create(reflectionID);
+			_fe3d.reflection_setPosition(reflectionID, position);
+			_fe3d.reflection_capture(reflectionID);
 			_loadedReflectionIDs.push_back(reflectionID);
 		}
 		else if(lineType == "EDITOR_SPEED")
@@ -548,10 +548,10 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			_fe3d.gfx_setDirectionalLightingColor(color);
 
 			// Set lightsource billboard
-			_fe3d.billboardEntity_setPosition("@@directionalLightSource", position);
-			_fe3d.billboardEntity_setSize("@@directionalLightSource", Vec2(billboardSize));
-			_fe3d.billboardEntity_setColor("@@directionalLightSource", color);
-			_fe3d.billboardEntity_setVisible("@@directionalLightSource", (billboardSize != 0.0f));
+			_fe3d.billboard_setPosition("@@directionalLightSource", position);
+			_fe3d.billboard_setSize("@@directionalLightSource", Vec2(billboardSize));
+			_fe3d.billboard_setColor("@@directionalLightSource", color);
+			_fe3d.billboard_setVisible("@@directionalLightSource", (billboardSize != 0.0f));
 		}
 		else if(lineType == "GRAPHICS_SHADOWS")
 		{

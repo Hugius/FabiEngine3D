@@ -373,10 +373,10 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 		}
 
 		// Create terrain
-		_fe3d.terrainEntity_create(terrainID, heightMapPath);
+		_fe3d.terrain_create(terrainID, heightMapPath);
 
 		// Check if terrain creation went well
-		if(_fe3d.terrainEntity_isExisting(terrainID))
+		if(_fe3d.terrain_isExisting(terrainID))
 		{
 			// Add terrain ID
 			_loadedTerrainIDs.push_back(terrainID);
@@ -391,7 +391,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 				}
 
 				// Set path
-				_fe3d.terrainEntity_setDiffuseMap(terrainID, diffuseMapPath);
+				_fe3d.terrain_setDiffuseMap(terrainID, diffuseMapPath);
 			}
 
 			// Normal map
@@ -404,7 +404,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 				}
 
 				// Set path
-				_fe3d.terrainEntity_setNormalMap(terrainID, normalMapPath);
+				_fe3d.terrain_setNormalMap(terrainID, normalMapPath);
 			}
 
 			// Normal map R
@@ -417,7 +417,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 				}
 
 				// Set path
-				_fe3d.terrainEntity_setNormalMapR(terrainID, normalMapPathR);
+				_fe3d.terrain_setNormalMapR(terrainID, normalMapPathR);
 			}
 
 			// Normal map G
@@ -430,7 +430,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 				}
 
 				// Set path
-				_fe3d.terrainEntity_setNormalMapG(terrainID, normalMapPathG);
+				_fe3d.terrain_setNormalMapG(terrainID, normalMapPathG);
 			}
 
 			// Normal map B
@@ -443,7 +443,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 				}
 
 				// Set path
-				_fe3d.terrainEntity_setNormalMapB(terrainID, normalMapPathB);
+				_fe3d.terrain_setNormalMapB(terrainID, normalMapPathB);
 			}
 
 			// Blend map
@@ -456,7 +456,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 				}
 
 				// Set path
-				_fe3d.terrainEntity_setBlendMap(terrainID, blendMapPath);
+				_fe3d.terrain_setBlendMap(terrainID, blendMapPath);
 			}
 
 			// Blend map R
@@ -469,7 +469,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 				}
 
 				// Set path
-				_fe3d.terrainEntity_setDiffuseMapR(terrainID, blendMapPathR);
+				_fe3d.terrain_setDiffuseMapR(terrainID, blendMapPathR);
 			}
 
 			// Blend map G
@@ -482,7 +482,7 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 				}
 
 				// Set path
-				_fe3d.terrainEntity_setDiffuseMapG(terrainID, blendMapPathG);
+				_fe3d.terrain_setDiffuseMapG(terrainID, blendMapPathG);
 			}
 
 			// Blend map B
@@ -495,19 +495,19 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 				}
 
 				// Set path
-				_fe3d.terrainEntity_setDiffuseMapB(terrainID, blendMapPathB);
+				_fe3d.terrain_setDiffuseMapB(terrainID, blendMapPathB);
 			}
 
 			// Set properties
-			_fe3d.terrainEntity_setMaxHeight(terrainID, maxHeight);
-			_fe3d.terrainEntity_setTextureRepeat(terrainID, textureRepeat);
-			_fe3d.terrainEntity_setLightness(terrainID, lightness);
-			_fe3d.terrainEntity_setRedRepeat(terrainID, redRepeat);
-			_fe3d.terrainEntity_setGreenRepeat(terrainID, greenRepeat);
-			_fe3d.terrainEntity_setBlueRepeat(terrainID, blueRepeat);
-			_fe3d.terrainEntity_setSpecular(terrainID, isSpecular);
-			_fe3d.terrainEntity_setSpecularShininess(terrainID, specularShininess);
-			_fe3d.terrainEntity_setSpecularIntensity(terrainID, specularIntensity);
+			_fe3d.terrain_setMaxHeight(terrainID, maxHeight);
+			_fe3d.terrain_setTextureRepeat(terrainID, textureRepeat);
+			_fe3d.terrain_setLightness(terrainID, lightness);
+			_fe3d.terrain_setRedRepeat(terrainID, redRepeat);
+			_fe3d.terrain_setGreenRepeat(terrainID, greenRepeat);
+			_fe3d.terrain_setBlueRepeat(terrainID, blueRepeat);
+			_fe3d.terrain_setSpecular(terrainID, isSpecular);
+			_fe3d.terrain_setSpecularShininess(terrainID, specularShininess);
+			_fe3d.terrain_setSpecularIntensity(terrainID, specularIntensity);
 		}
 	}
 

@@ -6,7 +6,7 @@ static const vector<string> extractModelPartIDs(FabiEngine3D& fe3d, const string
 {
 	if(partID.empty())
 	{
-		return fe3d.modelEntity_getPartIDs(modelID);
+		return fe3d.model_getPartIDs(modelID);
 	}
 	else
 	{
@@ -32,7 +32,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 			}
 
 			// Check if existing
-			auto result = _fe3d.modelEntity_isExisting(arguments[0].getString());
+			auto result = _fe3d.model_isExisting(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
@@ -51,7 +51,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 			}
 
 			// Find full entity IDs based on part ID
-			for(const auto& ID : _fe3d.modelEntity_getAllIDs())
+			for(const auto& ID : _fe3d.model_getAllIDs())
 			{
 				// If substring matches
 				if(arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -70,7 +70,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.modelEntity_getAllIDs();
+			auto result = _fe3d.model_getAllIDs();
 
 			// For every model
 			for(const auto& ID : result)
@@ -93,7 +93,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.modelEntity_isVisible(arguments[0].getString());
+				auto result = _fe3d.model_isVisible(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -108,7 +108,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.modelEntity_getBasePosition(arguments[0].getString());
+				auto result = _fe3d.model_getBasePosition(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
@@ -123,7 +123,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.modelEntity_getBaseRotation(arguments[0].getString());
+				auto result = _fe3d.model_getBaseRotation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
@@ -138,7 +138,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.modelEntity_getBaseRotationOrigin(arguments[0].getString());
+				auto result = _fe3d.model_getBaseRotationOrigin(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
@@ -153,7 +153,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.modelEntity_getBaseSize(arguments[0].getString());
+				auto result = _fe3d.model_getBaseSize(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
@@ -168,7 +168,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.modelEntity_getMinHeight(arguments[0].getString());
+				auto result = _fe3d.model_getMinHeight(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -183,7 +183,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.modelEntity_getMaxHeight(arguments[0].getString());
+				auto result = _fe3d.model_getMaxHeight(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -331,7 +331,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 				vector<float> total;
 				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
 				{
-					total.push_back(_fe3d.modelEntity_getLightness(arguments[0].getString(), partID));
+					total.push_back(_fe3d.model_getLightness(arguments[0].getString(), partID));
 				}
 
 				// Return
@@ -353,7 +353,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 				vector<Vec3> total;
 				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
 				{
-					total.push_back(_fe3d.modelEntity_getColor(arguments[0].getString(), partID));
+					total.push_back(_fe3d.model_getColor(arguments[0].getString(), partID));
 				}
 
 				// Return
@@ -375,7 +375,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 				vector<float> total;
 				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
 				{
-					total.push_back(_fe3d.modelEntity_getTransparency(arguments[0].getString(), partID));
+					total.push_back(_fe3d.model_getTransparency(arguments[0].getString(), partID));
 				}
 
 				// Return
@@ -397,7 +397,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 				vector<float> total;
 				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
 				{
-					total.push_back(_fe3d.modelEntity_getEmissionIntensity(arguments[0].getString(), partID));
+					total.push_back(_fe3d.model_getEmissionIntensity(arguments[0].getString(), partID));
 				}
 
 				// Return
@@ -411,7 +411,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 
 	// Cannot execute model functionality when server is running
-	if(_fe3d.networkServer_isRunning())
+	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:model` functionality as a networking server!");
 	}

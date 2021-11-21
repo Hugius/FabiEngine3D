@@ -138,24 +138,24 @@ void ModelEditor::_updateChoiceMenu()
 	if(screen->getID() == "modelEditorMenuChoice")
 	{
 		// Temporary values
-		auto size = _fe3d.modelEntity_getBaseSize(_currentModelID);
+		auto size = _fe3d.model_getBaseSize(_currentModelID);
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			// Disable wireframed rendering
-			for(const auto& partID : _fe3d.modelEntity_getPartIDs(_currentModelID))
+			for(const auto& partID : _fe3d.model_getPartIDs(_currentModelID))
 			{
-				_fe3d.modelEntity_setWireframed(_currentModelID, partID, false);
+				_fe3d.model_setWireframed(_currentModelID, partID, false);
 			}
 
 			// Hide model
-			_fe3d.modelEntity_setVisible(_currentModelID, false);
+			_fe3d.model_setVisible(_currentModelID, false);
 
 			// Go back to main screen
 			_currentModelID = "";
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuMain");
-			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
+			_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
 			return;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
@@ -186,21 +186,21 @@ void ModelEditor::_updateChoiceMenu()
 		if(_gui.getGlobalScreen()->checkValueForm("sizeX", size.x))
 		{
 			size.x /= 100.0f;
-			_fe3d.modelEntity_setBaseSize(_currentModelID, size);
+			_fe3d.model_setBaseSize(_currentModelID, size);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("sizeY", size.y))
 		{
 			size.y /= 100.0f;
-			_fe3d.modelEntity_setBaseSize(_currentModelID, size);
+			_fe3d.model_setBaseSize(_currentModelID, size);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("sizeZ", size.z))
 		{
 			size.z /= 100.0f;
-			_fe3d.modelEntity_setBaseSize(_currentModelID, size);
+			_fe3d.model_setBaseSize(_currentModelID, size);
 		}
 
 		// Update buttons hoverability
-		screen->getButton("aabb")->setHoverable(!_fe3d.modelEntity_isInstanced(_currentModelID));
+		screen->getButton("aabb")->setHoverable(!_fe3d.model_isInstanced(_currentModelID));
 	}
 }
 
@@ -258,10 +258,10 @@ void ModelEditor::_updateModelCreating()
 						// Create model
 						const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 						_fe3d.misc_clearMeshCache(finalFilePath);
-						_fe3d.modelEntity_create(newModelID, finalFilePath);
+						_fe3d.model_create(newModelID, finalFilePath);
 
 						// Check if model creation went well
-						if(_fe3d.modelEntity_isExisting(newModelID))
+						if(_fe3d.model_isExisting(newModelID))
 						{
 							// Go to next screen
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
@@ -271,8 +271,8 @@ void ModelEditor::_updateModelCreating()
 							_loadedModelIDs.push_back(newModelID);
 
 							// Miscellaneous
-							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), "Model: " + newModelID.substr(1), 0.025f);
-							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), true);
+							_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), "Model: " + newModelID.substr(1), 0.025f);
+							_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), true);
 							_isCreatingModel = false;
 						}
 					}
@@ -304,7 +304,7 @@ void ModelEditor::_updateModelChoosing()
 		// Hide last model
 		if(_hoveredModelID != "")
 		{
-			_fe3d.modelEntity_setVisible(_hoveredModelID, false);
+			_fe3d.model_setVisible(_hoveredModelID, false);
 		}
 
 		// Check if a model ID is hovered
@@ -324,12 +324,12 @@ void ModelEditor::_updateModelChoosing()
 				if(!_isDeletingModel)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), "Model: " + _currentModelID.substr(1), 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), true);
+					_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), "Model: " + _currentModelID.substr(1), 0.025f);
+					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), true);
 				}
 
 				// Miscellaneous
-				_fe3d.modelEntity_setVisible(_currentModelID, true);
+				_fe3d.model_setVisible(_currentModelID, true);
 				_gui.getGlobalScreen()->deleteChoiceForm("modelList");
 				_isChoosingModel = false;
 			}
@@ -348,7 +348,7 @@ void ModelEditor::_updateModelChoosing()
 		// Show hovered model
 		if(_hoveredModelID != "")
 		{
-			_fe3d.modelEntity_setVisible(_hoveredModelID, true);
+			_fe3d.model_setVisible(_hoveredModelID, true);
 		}
 	}
 }
@@ -366,14 +366,14 @@ void ModelEditor::_updateModelDeleting()
 		// Update answer form
 		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 		{
-			_fe3d.modelEntity_delete(_currentModelID);
+			_fe3d.model_delete(_currentModelID);
 			_loadedModelIDs.erase(remove(_loadedModelIDs.begin(), _loadedModelIDs.end(), _currentModelID), _loadedModelIDs.end());
 			_isDeletingModel = false;
 			_currentModelID = "";
 		}
 		if(_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 		{
-			_fe3d.modelEntity_setVisible(_currentModelID, false);
+			_fe3d.model_setVisible(_currentModelID, false);
 			_isDeletingModel = false;
 			_currentModelID = "";
 		}
@@ -398,8 +398,8 @@ void ModelEditor::_updatePartChoosing()
 
 				// Go to next screen
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen(_nextActiveScreenID);
-				_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("partID")->getEntityID(), ("Part: " + _currentPartID), 0.025f);
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("partID")->getEntityID(), true);
+				_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("partID")->getEntityID(), ("Part: " + _currentPartID), 0.025f);
+				_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("partID")->getEntityID(), true);
 
 				// Miscellaneous
 				_gui.getGlobalScreen()->deleteChoiceForm("partList");

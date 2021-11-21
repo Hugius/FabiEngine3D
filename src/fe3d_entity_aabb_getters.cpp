@@ -1,7 +1,7 @@
 #include "fe3d.hpp"
 #include "core_engine.hpp"
 
-const Vec3 FabiEngine3D::aabbEntity_getPosition(const string& ID) const
+const Vec3 FabiEngine3D::aabb_getPosition(const string& ID) const
 {
 	if(_core->_aabbEntityManager.getEntity(ID)->hasParent())
 	{
@@ -13,7 +13,7 @@ const Vec3 FabiEngine3D::aabbEntity_getPosition(const string& ID) const
 	}
 }
 
-const Vec3 FabiEngine3D::aabbEntity_getSize(const string& ID) const
+const Vec3 FabiEngine3D::aabb_getSize(const string& ID) const
 {
 	if(_core->_aabbEntityManager.getEntity(ID)->hasParent())
 	{
@@ -25,32 +25,32 @@ const Vec3 FabiEngine3D::aabbEntity_getSize(const string& ID) const
 	}
 }
 
-const bool FabiEngine3D::aabbEntity_isRaycastResponsive(const string& ID) const
+const bool FabiEngine3D::aabb_isRaycastResponsive(const string& ID) const
 {
 	return _core->_aabbEntityManager.getEntity(ID)->isRaycastResponsive();
 }
 
-const bool FabiEngine3D::aabbEntity_isCollisionResponsive(const string& ID) const
+const bool FabiEngine3D::aabb_isCollisionResponsive(const string& ID) const
 {
 	return _core->_aabbEntityManager.getEntity(ID)->isCollisionResponsive();
 }
 
-const bool FabiEngine3D::aabbEntity_isExisting(const string& ID) const
+const bool FabiEngine3D::aabb_isExisting(const string& ID) const
 {
 	return _core->_aabbEntityManager.isExisting(ID);
 }
 
-const bool FabiEngine3D::aabbEntity_isVisible(const string& ID) const
+const bool FabiEngine3D::aabb_isVisible(const string& ID) const
 {
 	return _core->_aabbEntityManager.getEntity(ID)->isVisible();
 }
 
-const bool FabiEngine3D::aabbEntity_hasParent(const string& ID) const
+const bool FabiEngine3D::aabb_hasParent(const string& ID) const
 {
 	return _core->_aabbEntityManager.getEntity(ID)->hasParent();
 }
 
-const vector<string> FabiEngine3D::aabbEntity_getChildIDs(const string& parentID, AabbParentType parentType) const
+const vector<string> FabiEngine3D::aabb_getChildIDs(const string& parentID, AabbParentType parentType) const
 {
 	vector<string> IDs;
 
@@ -73,7 +73,7 @@ const vector<string> FabiEngine3D::aabbEntity_getChildIDs(const string& parentID
 	return IDs;
 }
 
-const vector<string> FabiEngine3D::aabbEntity_getAllIDs() const
+const vector<string> FabiEngine3D::aabb_getAllIDs() const
 {
 	vector<string> IDs;
 
@@ -85,12 +85,12 @@ const vector<string> FabiEngine3D::aabbEntity_getAllIDs() const
 	return IDs;
 }
 
-const string& FabiEngine3D::aabbEntity_getParentID(const string& ID) const
+const string& FabiEngine3D::aabb_getParentID(const string& ID) const
 {
 	return _core->_aabbEntityManager.getEntity(ID)->getParentID();
 }
 
-const AabbParentType FabiEngine3D::aabbEntity_getParentType(const string& ID) const
+const AabbParentType FabiEngine3D::aabb_getParentType(const string& ID) const
 {
 	return _core->_aabbEntityManager.getEntity(ID)->getParentType();
 }

@@ -15,7 +15,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.billboardEntity_isVisible(arguments[0].getString());
+				auto result = _fe3d.billboard_isVisible(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -30,7 +30,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.billboardEntity_getPosition(arguments[0].getString());
+				auto result = _fe3d.billboard_getPosition(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
@@ -45,7 +45,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.billboardEntity_getRotation(arguments[0].getString());
+				auto result = _fe3d.billboard_getRotation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
@@ -60,7 +60,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.billboardEntity_getSize(arguments[0].getString()).x;
+				auto result = _fe3d.billboard_getSize(arguments[0].getString()).x;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -75,7 +75,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.billboardEntity_getSize(arguments[0].getString()).y;
+				auto result = _fe3d.billboard_getSize(arguments[0].getString()).y;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -90,7 +90,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.billboardEntity_getColor(arguments[0].getString());
+				auto result = _fe3d.billboard_getColor(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
@@ -105,7 +105,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.billboardEntity_getMinHeight(arguments[0].getString());
+				auto result = _fe3d.billboard_getMinHeight(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -120,7 +120,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.billboardEntity_getMaxHeight(arguments[0].getString());
+				auto result = _fe3d.billboard_getMaxHeight(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -135,7 +135,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.billboardEntity_getTransparency(arguments[0].getString());
+				auto result = _fe3d.billboard_getTransparency(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -150,7 +150,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.billboardEntity_getLightness(arguments[0].getString());
+				auto result = _fe3d.billboard_getLightness(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -165,7 +165,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.billboardEntity_isFacingCameraX(arguments[0].getString());
+				auto result = _fe3d.billboard_isFacingCameraX(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -180,7 +180,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.billboardEntity_isFacingCameraY(arguments[0].getString());
+				auto result = _fe3d.billboard_isFacingCameraY(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -195,7 +195,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.billboardEntity_isSpriteAnimationStarted(arguments[0].getString());
+				auto result = _fe3d.billboard_isSpriteAnimationStarted(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -210,7 +210,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.billboardEntity_isSpriteAnimationPlaying(arguments[0].getString());
+				auto result = _fe3d.billboard_isSpriteAnimationPlaying(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -225,7 +225,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.billboardEntity_isSpriteAnimationPaused(arguments[0].getString());
+				auto result = _fe3d.billboard_isSpriteAnimationPaused(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -245,7 +245,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 			}
 
 			// Check if existing
-			auto result = _fe3d.billboardEntity_isExisting(arguments[0].getString());
+			auto result = _fe3d.billboard_isExisting(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
@@ -264,7 +264,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 			}
 
 			// Find full entity IDs based on part ID
-			for(const auto& ID : _fe3d.billboardEntity_getAllIDs())
+			for(const auto& ID : _fe3d.billboard_getAllIDs())
 			{
 				// If substring matches
 				if(arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -283,7 +283,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.billboardEntity_getAllIDs();
+			auto result = _fe3d.billboard_getAllIDs();
 
 			// For every billboard
 			for(const auto& ID : result)
@@ -307,14 +307,14 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				// Check if billboard is not of type text
-				if(!_fe3d.billboardEntity_isText(arguments[0].getString()))
+				if(!_fe3d.billboard_isText(arguments[0].getString()))
 				{
 					_throwScriptError("billboard with ID \"" + arguments[0].getString() + "\" is not of type text!");
 					return true;
 				}
 				else
 				{
-					auto result = _fe3d.billboardEntity_getTextContent(arguments[0].getString());
+					auto result = _fe3d.billboard_getTextContent(arguments[0].getString());
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 				}
 			}
@@ -326,7 +326,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& 
 	}
 
 	// Cannot execute billboard functionality when server is running
-	if(_fe3d.networkServer_isRunning())
+	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:billboard` functionality as a networking server!");
 	}

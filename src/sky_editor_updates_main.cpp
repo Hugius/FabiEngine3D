@@ -110,9 +110,9 @@ void SkyEditor::_updateChoiceMenu()
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuMain");
-			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("skyID")->getEntityID(), false);
-			_fe3d.skyEntity_setWireframed(_currentSkyID, false);
-			_fe3d.skyEntity_selectMainSky("@@engineBackground");
+			_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("skyID")->getEntityID(), false);
+			_fe3d.sky_setWireframed(_currentSkyID, false);
+			_fe3d.sky_selectMainSky("@@engineBackground");
 			_currentSkyID = "";
 			return;
 		}
@@ -126,7 +126,7 @@ void SkyEditor::_updateChoiceMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("miscellaneous")->setHoverable(_fe3d.skyEntity_isExisting(_currentSkyID));
+		screen->getButton("miscellaneous")->setHoverable(_fe3d.sky_isExisting(_currentSkyID));
 	}
 }
 
@@ -152,10 +152,10 @@ void SkyEditor::_updateSkyCreating()
 					if(find(_loadedSkyIDs.begin(), _loadedSkyIDs.end(), newSkyID) == _loadedSkyIDs.end())
 					{
 						// Create sky
-						_fe3d.skyEntity_create(newSkyID);
+						_fe3d.sky_create(newSkyID);
 
 						// Check if sky creation went well
-						if(_fe3d.skyEntity_isExisting(newSkyID))
+						if(_fe3d.sky_isExisting(newSkyID))
 						{
 							// Go to next screen
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
@@ -163,11 +163,11 @@ void SkyEditor::_updateSkyCreating()
 							// Select sky
 							_currentSkyID = newSkyID;
 							_loadedSkyIDs.push_back(newSkyID);
-							_fe3d.skyEntity_selectMainSky(newSkyID);
+							_fe3d.sky_selectMainSky(newSkyID);
 
 							// Miscellaneous
-							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("skyID")->getEntityID(), "Sky: " + newSkyID.substr(1), 0.025f);
-							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("skyID")->getEntityID(), true);
+							_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("skyID")->getEntityID(), "Sky: " + newSkyID.substr(1), 0.025f);
+							_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("skyID")->getEntityID(), true);
 							_isCreatingSky = false;
 						}
 					}
@@ -197,13 +197,13 @@ void SkyEditor::_updateSkyChoosing()
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("skyList");
 
 		// Hide last sky
-		_fe3d.skyEntity_selectMainSky("@@engineBackground");
+		_fe3d.sky_selectMainSky("@@engineBackground");
 
 		// Check if a sky ID is hovered
 		if(!selectedButtonID.empty())
 		{
 			// Show sky
-			_fe3d.skyEntity_selectMainSky("@" + selectedButtonID);
+			_fe3d.sky_selectMainSky("@" + selectedButtonID);
 
 			// Check if LMB is pressed
 			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -215,8 +215,8 @@ void SkyEditor::_updateSkyChoosing()
 				if(!_isDeletingSky)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
-					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("skyID")->getEntityID(), "Sky: " + _currentSkyID.substr(1), 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("skyID")->getEntityID(), true);
+					_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("skyID")->getEntityID(), "Sky: " + _currentSkyID.substr(1), 0.025f);
+					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("skyID")->getEntityID(), true);
 				}
 
 				// Miscellaneous
@@ -247,7 +247,7 @@ void SkyEditor::_updateSkyDeleting()
 		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 		{
 			// Delete entity
-			_fe3d.skyEntity_delete(_currentSkyID);
+			_fe3d.sky_delete(_currentSkyID);
 
 			// Delete from ID record
 			_loadedSkyIDs.erase(remove(_loadedSkyIDs.begin(), _loadedSkyIDs.end(), _currentSkyID), _loadedSkyIDs.end());
@@ -255,12 +255,12 @@ void SkyEditor::_updateSkyDeleting()
 			_currentSkyID = "";
 
 			// Enable engine background
-			_fe3d.skyEntity_selectMainSky("@@engineBackground");
+			_fe3d.sky_selectMainSky("@@engineBackground");
 		}
 		if(_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 		{
 			// Enable engine background
-			_fe3d.skyEntity_selectMainSky("@@engineBackground");
+			_fe3d.sky_selectMainSky("@@engineBackground");
 
 			// Miscellaneous
 			_isDeletingSky = false;

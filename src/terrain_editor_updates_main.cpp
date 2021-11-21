@@ -120,15 +120,15 @@ void TerrainEditor::_updateChoiceMenu()
 	if(screen->getID() == "terrainEditorMenuChoice")
 	{
 		// Temporary values
-		float maxHeight = _fe3d.terrainEntity_getMaxHeight(_currentTerrainID);
+		float maxHeight = _fe3d.terrain_getMaxHeight(_currentTerrainID);
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMain");
-			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), false);
-			_fe3d.terrainEntity_setWireframed(_currentTerrainID, false);
-			_fe3d.terrainEntity_select("");
+			_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), false);
+			_fe3d.terrain_setWireframed(_currentTerrainID, false);
+			_fe3d.terrain_select("");
 			_currentTerrainID = "";
 			return;
 		}
@@ -160,7 +160,7 @@ void TerrainEditor::_updateChoiceMenu()
 		// Update value forms
 		if(_gui.getGlobalScreen()->checkValueForm("maxHeight", maxHeight))
 		{
-			_fe3d.terrainEntity_setMaxHeight(_currentTerrainID, maxHeight);
+			_fe3d.terrain_setMaxHeight(_currentTerrainID, maxHeight);
 		}
 	}
 }
@@ -218,10 +218,10 @@ void TerrainEditor::_updateTerrainCreating()
 						// Create terrain
 						const string newFilePath = filePath.substr(rootDirectoryPath.size());
 						_fe3d.misc_clearBitmapCache(newFilePath);
-						_fe3d.terrainEntity_create(newTerrainID, newFilePath);
+						_fe3d.terrain_create(newTerrainID, newFilePath);
 
 						// Check if terrain creation went well
-						if(_fe3d.terrainEntity_isExisting(newTerrainID))
+						if(_fe3d.terrain_isExisting(newTerrainID))
 						{
 							// Go to next screen
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
@@ -229,11 +229,11 @@ void TerrainEditor::_updateTerrainCreating()
 							// Select terrain
 							_currentTerrainID = newTerrainID;
 							_loadedTerrainIDs.push_back(newTerrainID);
-							_fe3d.terrainEntity_select(newTerrainID);
+							_fe3d.terrain_select(newTerrainID);
 
 							// Miscellaneous
-							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), "Terrain: " + newTerrainID.substr(1), 0.025f);
-							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), true);
+							_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), "Terrain: " + newTerrainID.substr(1), 0.025f);
+							_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), true);
 							_isCreatingTerrain = false;
 						}
 					}
@@ -263,13 +263,13 @@ void TerrainEditor::_updateTerrainChoosing()
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("terrainList");
 
 		// Hide last terrain
-		_fe3d.terrainEntity_select("");
+		_fe3d.terrain_select("");
 
 		// Check if a terrain ID is hovered
 		if(!selectedButtonID.empty())
 		{
 			// Show terrain
-			_fe3d.terrainEntity_select("@" + selectedButtonID);
+			_fe3d.terrain_select("@" + selectedButtonID);
 
 			// Check if LMB is pressed
 			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -281,8 +281,8 @@ void TerrainEditor::_updateTerrainChoosing()
 				if(!_isDeletingTerrain)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
-					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), "Terrain: " + _currentTerrainID.substr(1), 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), true);
+					_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), "Terrain: " + _currentTerrainID.substr(1), 0.025f);
+					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), true);
 				}
 
 				// Miscellaneous
@@ -313,7 +313,7 @@ void TerrainEditor::_updateTerrainDeleting()
 		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 		{
 			// Delete entity
-			_fe3d.terrainEntity_delete(_currentTerrainID);
+			_fe3d.terrain_delete(_currentTerrainID);
 
 			// Delete from ID record
 			_loadedTerrainIDs.erase(remove(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), _currentTerrainID), _loadedTerrainIDs.end());
@@ -322,7 +322,7 @@ void TerrainEditor::_updateTerrainDeleting()
 		}
 		if(_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 		{
-			_fe3d.terrainEntity_select("");
+			_fe3d.terrain_select("");
 			_isDeletingTerrain = false;
 			_currentTerrainID = "";
 		}

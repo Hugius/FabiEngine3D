@@ -15,7 +15,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetterFunction(const string& fu
 			// Validate terrain existence
 			if(_validateFe3dTerrain())
 			{
-				_fe3d.terrainEntity_setLightness(_fe3d.terrainEntity_getSelectedID(), arguments[0].getDecimal());
+				_fe3d.terrain_setLightness(_fe3d.terrain_getSelectedID(), arguments[0].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -26,7 +26,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetterFunction(const string& fu
 	}
 
 	// Cannot execute terrain functionality when server is running
-	if(_fe3d.networkServer_isRunning())
+	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:terrain` functionality as a networking server!");
 	}

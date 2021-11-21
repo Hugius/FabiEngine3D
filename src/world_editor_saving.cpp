@@ -27,18 +27,18 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 	// Save all level of detail entity IDs
 	vector<string> levelOfDetailEntityIDs;
-	for(const auto& modelID : _fe3d.modelEntity_getAllIDs())
+	for(const auto& modelID : _fe3d.model_getAllIDs())
 	{
 		// Check if not preview entity
 		if(modelID[0] != '@')
 		{
 			// Check if entity has level of detail model
-			if(!_fe3d.modelEntity_getLevelOfDetailEntityID(modelID).empty())
+			if(!_fe3d.model_getLevelOfDetailID(modelID).empty())
 			{
 				// Check if ID not already added to list
 				if(find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) == levelOfDetailEntityIDs.end())
 				{
-					levelOfDetailEntityIDs.push_back(_fe3d.modelEntity_getLevelOfDetailEntityID(modelID));
+					levelOfDetailEntityIDs.push_back(_fe3d.model_getLevelOfDetailID(modelID));
 				}
 			}
 		}
@@ -55,7 +55,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 	file << "CAMERA_PITCH " << _fe3d.camera_getPitch() << endl;
 
 	// Sky
-	string skyID = _fe3d.skyEntity_getSelectedID();
+	string skyID = _fe3d.sky_getSelectedID();
 	if(!skyID.empty())
 	{
 		// Data to save
@@ -69,7 +69,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 	}
 
 	// Terrain
-	string terrainID = _fe3d.terrainEntity_getSelectedID();
+	string terrainID = _fe3d.terrain_getSelectedID();
 	if(!terrainID.empty())
 	{
 		// Data to save
@@ -83,12 +83,12 @@ const bool WorldEditor::saveEditorWorldToFile()
 	}
 
 	// Water
-	string waterID = _fe3d.waterEntity_getSelectedID();
+	string waterID = _fe3d.water_getSelectedID();
 	if(!waterID.empty())
 	{
 		// Data to save
 		string previewID = ("@" + waterID);
-		auto height = _fe3d.waterEntity_getHeight(waterID);
+		auto height = _fe3d.water_getHeight(waterID);
 
 		// Write data
 		file <<
@@ -99,7 +99,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 	}
 
 	// Models
-	for(const auto& modelID : _fe3d.modelEntity_getAllIDs())
+	for(const auto& modelID : _fe3d.model_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isLevelOfDetailEntity = find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) != levelOfDetailEntityIDs.end();
@@ -109,30 +109,30 @@ const bool WorldEditor::saveEditorWorldToFile()
 			if(!_animationEditor.getStartedAnimationIDs(modelID).empty())
 			{
 				// Reset main transformation
-				_fe3d.modelEntity_setBasePosition(modelID, _initialModelPosition[modelID]);
-				_fe3d.modelEntity_setBaseRotationOrigin(modelID, Vec3(0.0f));
-				_fe3d.modelEntity_setBaseRotation(modelID, _initialModelRotation[modelID]);
-				_fe3d.modelEntity_setBaseSize(modelID, _initialModelSize[modelID]);
+				_fe3d.model_setBasePosition(modelID, _initialModelPosition[modelID]);
+				_fe3d.model_setBaseRotationOrigin(modelID, Vec3(0.0f));
+				_fe3d.model_setBaseRotation(modelID, _initialModelRotation[modelID]);
+				_fe3d.model_setBaseSize(modelID, _initialModelSize[modelID]);
 
 				// Reset part transformations
-				for(const auto& partID : _fe3d.modelEntity_getPartIDs(modelID))
+				for(const auto& partID : _fe3d.model_getPartIDs(modelID))
 				{
 					// Only named parts
 					if(!partID.empty())
 					{
-						_fe3d.modelEntity_setPartPosition(modelID, partID, Vec3(0.0f));
-						_fe3d.modelEntity_setPartRotationOrigin(modelID, partID, Vec3(0.0f));
-						_fe3d.modelEntity_setPartRotation(modelID, partID, Vec3(0.0f));
-						_fe3d.modelEntity_setPartSize(modelID, partID, Vec3(1.0f));
+						_fe3d.model_setPartPosition(modelID, partID, Vec3(0.0f));
+						_fe3d.model_setPartRotationOrigin(modelID, partID, Vec3(0.0f));
+						_fe3d.model_setPartRotation(modelID, partID, Vec3(0.0f));
+						_fe3d.model_setPartSize(modelID, partID, Vec3(1.0f));
 					}
 				}
 			}
 
 			// Data to save
-			auto position = _fe3d.modelEntity_getBasePosition(modelID);
-			auto rotation = _fe3d.modelEntity_getBaseRotation(modelID);
-			auto size = _fe3d.modelEntity_getBaseSize(modelID);
-			auto isFrozen = _fe3d.modelEntity_isStaticToCamera(modelID);
+			auto position = _fe3d.model_getBasePosition(modelID);
+			auto rotation = _fe3d.model_getBaseRotation(modelID);
+			auto size = _fe3d.model_getBaseSize(modelID);
+			auto isFrozen = _fe3d.model_isStaticToCamera(modelID);
 			auto animationID = (_animationEditor.getStartedAnimationIDs(modelID).empty()) ? "" :
 				_animationEditor.getStartedAnimationIDs(modelID).front();
 
@@ -163,10 +163,10 @@ const bool WorldEditor::saveEditorWorldToFile()
 				animationID;
 
 			// Write instanced offset
-			if(_fe3d.modelEntity_isInstanced(modelID))
+			if(_fe3d.model_isInstanced(modelID))
 			{
 				// Check if model has any offsets
-				auto instancedOffsets = _fe3d.modelEntity_getInstancedOffsets(modelID);
+				auto instancedOffsets = _fe3d.model_getInstancedOffsets(modelID);
 				if(!instancedOffsets.empty())
 				{
 					// Write space
@@ -196,15 +196,15 @@ const bool WorldEditor::saveEditorWorldToFile()
 	}
 
 	// Billboards
-	for(const auto& billboardID : _fe3d.billboardEntity_getAllIDs())
+	for(const auto& billboardID : _fe3d.billboard_getAllIDs())
 	{
 		// Check if allowed to save
 		if(billboardID[0] != '@')
 		{
 			// Data to save
-			auto position = _fe3d.billboardEntity_getPosition(billboardID);
-			auto rotation = _fe3d.billboardEntity_getRotation(billboardID);
-			auto size = _fe3d.billboardEntity_getSize(billboardID);
+			auto position = _fe3d.billboard_getPosition(billboardID);
+			auto rotation = _fe3d.billboard_getRotation(billboardID);
+			auto size = _fe3d.billboard_getSize(billboardID);
 
 			// Extract preview ID
 			string previewID = _loadedBillboardIDs.at(billboardID);
@@ -253,17 +253,17 @@ const bool WorldEditor::saveEditorWorldToFile()
 	}
 
 	// Pointlights
-	for(const auto& pointlightID : _fe3d.pointlightEntity_getAllIDs())
+	for(const auto& pointlightID : _fe3d.pointlight_getAllIDs())
 	{
 		// Check if allowed to save
 		if(pointlightID[0] != '@')
 		{
 			// Data to save
-			auto position = _fe3d.pointlightEntity_getPosition(pointlightID);
-			auto radius = _fe3d.pointlightEntity_getRadius(pointlightID);
-			auto color = _fe3d.pointlightEntity_getColor(pointlightID);
-			auto intensity = _fe3d.pointlightEntity_getIntensity(pointlightID);
-			auto shape = static_cast<unsigned int>(_fe3d.pointlightEntity_getShape(pointlightID));
+			auto position = _fe3d.pointlight_getPosition(pointlightID);
+			auto radius = _fe3d.pointlight_getRadius(pointlightID);
+			auto color = _fe3d.pointlight_getColor(pointlightID);
+			auto intensity = _fe3d.pointlight_getIntensity(pointlightID);
+			auto shape = static_cast<unsigned int>(_fe3d.pointlight_getShape(pointlightID));
 
 			// Write data
 			file <<
@@ -284,19 +284,19 @@ const bool WorldEditor::saveEditorWorldToFile()
 	}
 
 	// Spotlights
-	for(const auto& spotlightID : _fe3d.spotlightEntity_getAllIDs())
+	for(const auto& spotlightID : _fe3d.spotlight_getAllIDs())
 	{
 		// Check if allowed to save
 		if(spotlightID[0] != '@')
 		{
 			// Data to save
-			auto position = _fe3d.spotlightEntity_getPosition(spotlightID);
-			auto color = _fe3d.spotlightEntity_getColor(spotlightID);
-			auto yaw = _fe3d.spotlightEntity_getYaw(spotlightID);
-			auto pitch = _fe3d.spotlightEntity_getPitch(spotlightID);
-			auto intensity = _fe3d.spotlightEntity_getIntensity(spotlightID);
-			auto angle = _fe3d.spotlightEntity_getAngle(spotlightID);
-			auto distance = _fe3d.spotlightEntity_getDistance(spotlightID);
+			auto position = _fe3d.spotlight_getPosition(spotlightID);
+			auto color = _fe3d.spotlight_getColor(spotlightID);
+			auto yaw = _fe3d.spotlight_getYaw(spotlightID);
+			auto pitch = _fe3d.spotlight_getPitch(spotlightID);
+			auto intensity = _fe3d.spotlight_getIntensity(spotlightID);
+			auto angle = _fe3d.spotlight_getAngle(spotlightID);
+			auto distance = _fe3d.spotlight_getDistance(spotlightID);
 
 			// Write data
 			file <<
@@ -317,13 +317,13 @@ const bool WorldEditor::saveEditorWorldToFile()
 	}
 
 	// Reflections
-	for(const auto& reflectionID : _fe3d.reflectionEntity_getAllIDs())
+	for(const auto& reflectionID : _fe3d.reflection_getAllIDs())
 	{
 		// Check if allowed to save
 		if(reflectionID[0] != '@')
 		{
 			// Data to save
-			auto position = _fe3d.reflectionEntity_getPosition(reflectionID);
+			auto position = _fe3d.reflection_getPosition(reflectionID);
 
 			// Write data
 			file <<
@@ -367,8 +367,8 @@ const bool WorldEditor::saveEditorWorldToFile()
 		auto directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
 		auto directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
 		auto directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
-		auto billboardSize = _fe3d.billboardEntity_getSize("@@directionalLightSource").x;
-		auto billboardLightness = _fe3d.billboardEntity_getLightness("@@directionalLightSource");
+		auto billboardSize = _fe3d.billboard_getSize("@@directionalLightSource").x;
+		auto billboardLightness = _fe3d.billboard_getLightness("@@directionalLightSource");
 
 		// Write data
 		file <<

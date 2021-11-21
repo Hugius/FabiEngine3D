@@ -47,7 +47,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			// Set normal map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clearTextureCache2D(newFilePath);
-			_fe3d.terrainEntity_setNormalMap(_currentTerrainID, newFilePath);
+			_fe3d.terrain_setNormalMap(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("redMap")->isHovered())
 		{
@@ -80,7 +80,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			// Set normal map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clearTextureCache2D(newFilePath);
-			_fe3d.terrainEntity_setNormalMapR(_currentTerrainID, newFilePath);
+			_fe3d.terrain_setNormalMapR(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenMap")->isHovered())
 		{
@@ -113,7 +113,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			// Set normal map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clearTextureCache2D(newFilePath);
-			_fe3d.terrainEntity_setNormalMapG(_currentTerrainID, newFilePath);
+			_fe3d.terrain_setNormalMapG(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueMap")->isHovered())
 		{
@@ -146,24 +146,24 @@ void TerrainEditor::_updateNormalMapMenu()
 			// Set normal map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clearTextureCache2D(newFilePath);
-			_fe3d.terrainEntity_setNormalMapB(_currentTerrainID, newFilePath);
+			_fe3d.terrain_setNormalMapB(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
-			_fe3d.terrainEntity_setNormalMap(_currentTerrainID, "");
-			_fe3d.terrainEntity_setNormalMapR(_currentTerrainID, "");
-			_fe3d.terrainEntity_setNormalMapG(_currentTerrainID, "");
-			_fe3d.terrainEntity_setNormalMapB(_currentTerrainID, "");
+			_fe3d.terrain_setNormalMap(_currentTerrainID, "");
+			_fe3d.terrain_setNormalMapR(_currentTerrainID, "");
+			_fe3d.terrain_setNormalMapG(_currentTerrainID, "");
+			_fe3d.terrain_setNormalMapB(_currentTerrainID, "");
 		}
 
 		// Update buttons hoverability
-		screen->getButton("redMap")->setHoverable(_fe3d.terrainEntity_hasBlendMap(_currentTerrainID));
-		screen->getButton("greenMap")->setHoverable(_fe3d.terrainEntity_hasBlendMap(_currentTerrainID));
-		screen->getButton("blueMap")->setHoverable(_fe3d.terrainEntity_hasBlendMap(_currentTerrainID));
+		screen->getButton("redMap")->setHoverable(_fe3d.terrain_hasBlendMap(_currentTerrainID));
+		screen->getButton("greenMap")->setHoverable(_fe3d.terrain_hasBlendMap(_currentTerrainID));
+		screen->getButton("blueMap")->setHoverable(_fe3d.terrain_hasBlendMap(_currentTerrainID));
 		screen->getButton("clearMaps")->setHoverable(
-			_fe3d.terrainEntity_hasNormalMap(_currentTerrainID) ||
-			_fe3d.terrainEntity_hasNormalMapR(_currentTerrainID) ||
-			_fe3d.terrainEntity_hasNormalMapG(_currentTerrainID) ||
-			_fe3d.terrainEntity_hasNormalMapB(_currentTerrainID));
+			_fe3d.terrain_hasNormalMap(_currentTerrainID) ||
+			_fe3d.terrain_hasNormalMapR(_currentTerrainID) ||
+			_fe3d.terrain_hasNormalMapG(_currentTerrainID) ||
+			_fe3d.terrain_hasNormalMapB(_currentTerrainID));
 	}
 }

@@ -16,7 +16,7 @@ void WorldEditor::_updateReflectionMenu()
 			// Reset placing
 			if(_isPlacingReflection)
 			{
-				_fe3d.modelEntity_setVisible(PREVIEW_CAMERA_ID, false);
+				_fe3d.model_setVisible(PREVIEW_CAMERA_ID, false);
 				_isPlacingReflection = false;
 			}
 
@@ -39,12 +39,12 @@ void WorldEditor::_updateReflectionMenu()
 
 			// Set new preview reflection
 			_isPlacingReflection = true;
-			_fe3d.modelEntity_setVisible(PREVIEW_CAMERA_ID, true);
-			_fe3d.reflectionEntity_setPosition(PREVIEW_CAMERA_ID, Vec3(0.0f));
+			_fe3d.model_setVisible(PREVIEW_CAMERA_ID, true);
+			_fe3d.reflection_setPosition(PREVIEW_CAMERA_ID, Vec3(0.0f));
 			_fe3d.misc_centerCursor();
 
 			// Add position value forms for placing without terrain
-			if(_fe3d.terrainEntity_getSelectedID().empty())
+			if(_fe3d.terrain_getSelectedID().empty())
 			{
 				_gui.getGlobalScreen()->createValueForm("positionX", "X", 0.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				_gui.getGlobalScreen()->createValueForm("positionY", "Y", 0.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
@@ -59,7 +59,7 @@ void WorldEditor::_updateReflectionMenu()
 			_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflections")->deleteButtons();
 
 			// Add the ID of every placed reflection
-			auto IDs = _fe3d.reflectionEntity_getAllIDs();
+			auto IDs = _fe3d.reflection_getAllIDs();
 			sort(IDs.begin(), IDs.end());
 			for(auto& reflectionID : IDs)
 			{
@@ -92,7 +92,7 @@ void WorldEditor::_updateReflectionChoosingMenu()
 		for(const auto& button : screen->getScrollingList("reflections")->getButtons())
 		{
 			// Check if reflection is still existing
-			if(!_fe3d.reflectionEntity_isExisting(button->getID()))
+			if(!_fe3d.reflection_isExisting(button->getID()))
 			{
 				// Delete button
 				screen->getScrollingList("reflections")->deleteButton(button->getID());
@@ -101,7 +101,7 @@ void WorldEditor::_updateReflectionChoosingMenu()
 		}
 
 		// Iterate through every placed reflection
-		for(const auto& reflectionID : _fe3d.reflectionEntity_getAllIDs())
+		for(const auto& reflectionID : _fe3d.reflection_getAllIDs())
 		{
 			// Check if reflection is not a preview
 			if(reflectionID[0] != '@')

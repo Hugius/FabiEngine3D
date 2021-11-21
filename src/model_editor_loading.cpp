@@ -334,10 +334,10 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 			}
 
 			// Create model
-			_fe3d.modelEntity_create(modelID, meshPath);
+			_fe3d.model_create(modelID, meshPath);
 
 			// Check if model creation went well
-			if(_fe3d.modelEntity_isExisting(modelID))
+			if(_fe3d.model_isExisting(modelID))
 			{
 				// Add model ID
 				_loadedModelIDs.push_back(modelID);
@@ -345,15 +345,15 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 				// Set instancing
 				if(isInstanced)
 				{
-					_fe3d.modelEntity_enableInstancing(modelID, { Vec3(0.0f) });
+					_fe3d.model_enableInstancing(modelID, { Vec3(0.0f) });
 				}
 
 				// Set properties
-				_fe3d.modelEntity_setVisible(modelID, false);
-				_fe3d.modelEntity_setBaseSize(modelID, size);
-				_fe3d.modelEntity_setLevelOfDetailEntity(modelID, levelOfDetailEntityID);
-				_fe3d.modelEntity_setFaceCulled(modelID, isFaceCulled);
-				_fe3d.modelEntity_setRotationOrder(modelID, DirectionOrder(rotationOrder));
+				_fe3d.model_setVisible(modelID, false);
+				_fe3d.model_setBaseSize(modelID, size);
+				_fe3d.model_setLevelOfDetail(modelID, levelOfDetailEntityID);
+				_fe3d.model_setFaceCulled(modelID, isFaceCulled);
+				_fe3d.model_setRotationOrder(modelID, DirectionOrder(rotationOrder));
 
 				// Read part data
 				while(true)
@@ -417,7 +417,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 						}
 
 						// Set path
-						_fe3d.modelEntity_setDiffuseMap(modelID, partID, diffuseMapPath);
+						_fe3d.model_setDiffuseMap(modelID, partID, diffuseMapPath);
 					}
 
 					// Specular map
@@ -430,7 +430,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 						}
 
 						// Set path
-						_fe3d.modelEntity_setSpecularMap(modelID, partID, specularMapPath);
+						_fe3d.model_setSpecularMap(modelID, partID, specularMapPath);
 					}
 
 					// Emission map
@@ -443,7 +443,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 						}
 
 						// Set path
-						_fe3d.modelEntity_setEmissionMap(modelID, partID, emissionMapPath);
+						_fe3d.model_setEmissionMap(modelID, partID, emissionMapPath);
 					}
 
 					// Reflection map
@@ -456,7 +456,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 						}
 
 						// Set path
-						_fe3d.modelEntity_setReflectionMap(modelID, partID, reflectionMapPath);
+						_fe3d.model_setReflectionMap(modelID, partID, reflectionMapPath);
 					}
 
 					// Normal map
@@ -469,19 +469,19 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 						}
 
 						// Set path
-						_fe3d.modelEntity_setNormalMap(modelID, partID, normalMapPath);
+						_fe3d.model_setNormalMap(modelID, partID, normalMapPath);
 					}
 
 					// Set properties
-					_fe3d.modelEntity_setColor(modelID, partID, color);
-					_fe3d.modelEntity_setSpecular(modelID, partID, isSpecular);
-					_fe3d.modelEntity_setSpecularShininess(modelID, partID, specularShininess);
-					_fe3d.modelEntity_setSpecularIntensity(modelID, partID, specularIntensity);
-					_fe3d.modelEntity_setReflectivity(modelID, partID, reflectivity);
-					_fe3d.modelEntity_setLightness(modelID, partID, lightness);
-					_fe3d.modelEntity_setTextureRepeat(modelID, partID, textureRepeat);
-					_fe3d.modelEntity_setReflective(modelID, partID, isReflective);
-					_fe3d.modelEntity_setReflectionType(modelID, partID, ReflectionType(reflectionType));
+					_fe3d.model_setColor(modelID, partID, color);
+					_fe3d.model_setSpecular(modelID, partID, isSpecular);
+					_fe3d.model_setSpecularShininess(modelID, partID, specularShininess);
+					_fe3d.model_setSpecularIntensity(modelID, partID, specularIntensity);
+					_fe3d.model_setReflectivity(modelID, partID, reflectivity);
+					_fe3d.model_setLightness(modelID, partID, lightness);
+					_fe3d.model_setTextureRepeat(modelID, partID, textureRepeat);
+					_fe3d.model_setReflective(modelID, partID, isReflective);
+					_fe3d.model_setReflectionType(modelID, partID, ReflectionType(reflectionType));
 				}
 			}
 		}
@@ -503,12 +503,12 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 				size.z;
 
 			// Create AABB
-			_fe3d.aabbEntity_create(aabbID);
+			_fe3d.aabb_create(aabbID);
 
 			// Set properties
-			_fe3d.aabbEntity_setParent(aabbID, modelID, AabbParentType::MODEL_ENTITY);
-			_fe3d.aabbEntity_setLocalPosition(aabbID, position);
-			_fe3d.aabbEntity_setLocalSize(aabbID, size);
+			_fe3d.aabb_setParent(aabbID, modelID, AabbParentType::MODEL_ENTITY);
+			_fe3d.aabb_setLocalPosition(aabbID, position);
+			_fe3d.aabb_setLocalSize(aabbID, size);
 		}
 		else
 		{

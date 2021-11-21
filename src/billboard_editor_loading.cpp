@@ -257,10 +257,10 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 		replace(textContent.begin(), textContent.end(), '?', ' ');
 
 		// Create billboard
-		_fe3d.billboardEntity_create(billboardID);
+		_fe3d.billboard_create(billboardID);
 
 		// Check if billboard creation went well
-		if(_fe3d.billboardEntity_isExisting(billboardID))
+		if(_fe3d.billboard_isExisting(billboardID))
 		{
 			// Add billboard ID
 			_loadedBillboardIDs.push_back(billboardID);
@@ -275,15 +275,15 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 				}
 
 				// Set path
-				_fe3d.billboardEntity_setDiffuseMap(billboardID, diffuseMapPath);
+				_fe3d.billboard_setDiffuseMap(billboardID, diffuseMapPath);
 
 				// Play sprite animation
 				if(isAnimationStarted)
 				{
-					_fe3d.billboardEntity_setSpriteAnimationFramestep(billboardID, animationFramestep);
-					_fe3d.billboardEntity_setSpriteAnimationRowCount(billboardID, animationRowCount);
-					_fe3d.billboardEntity_setSpriteAnimationColumnCount(billboardID, animationColumnCount);
-					_fe3d.billboardEntity_startSpriteAnimation(billboardID, -1);
+					_fe3d.billboard_setSpriteAnimationFramestep(billboardID, animationFramestep);
+					_fe3d.billboard_setSpriteAnimationRowCount(billboardID, animationRowCount);
+					_fe3d.billboard_setSpriteAnimationColumnCount(billboardID, animationColumnCount);
+					_fe3d.billboard_startSpriteAnimation(billboardID, -1);
 				}
 			}
 
@@ -297,7 +297,7 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 				}
 
 				// Set path
-				_fe3d.billboardEntity_setEmissionMap(billboardID, emissionMapPath);
+				_fe3d.billboard_setEmissionMap(billboardID, emissionMapPath);
 			}
 
 			// Font
@@ -310,20 +310,20 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 				}
 
 				// Set path
-				_fe3d.billboardEntity_setFont(billboardID, fontPath);
-				_fe3d.billboardEntity_setTextContent(billboardID, textContent);
+				_fe3d.billboard_setFont(billboardID, fontPath);
+				_fe3d.billboard_setTextContent(billboardID, textContent);
 			}
 
 			// Set properties
-			_fe3d.billboardEntity_setVisible(billboardID, false);
-			_fe3d.billboardEntity_setSize(billboardID, size);
-			_fe3d.billboardEntity_setColor(billboardID, color);
-			_fe3d.billboardEntity_setLightness(billboardID, lightness);
-			_fe3d.billboardEntity_setCameraFacingX(billboardID, isFacingX);
-			_fe3d.billboardEntity_setCameraFacingY(billboardID, isFacingY);
-			_fe3d.billboardEntity_setShadowed(billboardID, isShadowed);
-			_fe3d.billboardEntity_setReflected(billboardID, isReflected);
-			_fe3d.billboardEntity_setTextureRepeat(billboardID, textureRepeat);
+			_fe3d.billboard_setVisible(billboardID, false);
+			_fe3d.billboard_setSize(billboardID, size);
+			_fe3d.billboard_setColor(billboardID, color);
+			_fe3d.billboard_setLightness(billboardID, lightness);
+			_fe3d.billboard_setCameraFacingX(billboardID, isFacingX);
+			_fe3d.billboard_setCameraFacingY(billboardID, isFacingY);
+			_fe3d.billboard_setShadowed(billboardID, isShadowed);
+			_fe3d.billboard_setReflected(billboardID, isReflected);
+			_fe3d.billboard_setTextureRepeat(billboardID, textureRepeat);
 		}
 	}
 

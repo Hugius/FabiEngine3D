@@ -31,10 +31,10 @@ void AudioEditor::load()
 	_fe3d.camera_setYaw(270.0f);
 
 	// Editor billboards
-	_fe3d.billboardEntity_create("@@icon");
-	_fe3d.billboardEntity_setPosition("@@icon", Vec3(0.0f, -0.5f, -1.5f));
-	_fe3d.billboardEntity_setDiffuseMap("@@icon", "engine\\assets\\textures\\stop.png");
-	_fe3d.billboardEntity_setBright("@@icon", true);
+	_fe3d.billboard_create("@@icon");
+	_fe3d.billboard_setPosition("@@icon", Vec3(0.0f, -0.5f, -1.5f));
+	_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\textures\\stop.png");
+	_fe3d.billboard_setBright("@@icon", true);
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->createTextField("audioID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f), true, false);
@@ -52,7 +52,7 @@ void AudioEditor::unload()
 
 	// Delete created entities
 	_fe3d.sound_deleteAll();
-	_fe3d.billboardEntity_delete("@@icon");
+	_fe3d.billboard_delete("@@icon");
 
 	// Reset editor properties
 	_loadedAudioIDs.clear();

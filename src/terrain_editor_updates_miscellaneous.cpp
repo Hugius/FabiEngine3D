@@ -9,19 +9,19 @@ void TerrainEditor::_updateMiscellaneousMenu()
 	if(screen->getID() == "terrainEditorMenuMiscellaneous")
 	{
 		// Temporary values
-		auto textureRepeat = _fe3d.terrainEntity_getTextureRepeat(_currentTerrainID);
-		auto redRepeat = _fe3d.terrainEntity_getRedRepeat(_currentTerrainID);
-		auto greenRepeat = _fe3d.terrainEntity_getGreenRepeat(_currentTerrainID);
-		auto blueRepeat = _fe3d.terrainEntity_getBlueRepeat(_currentTerrainID);
-		auto hasBlendMap = _fe3d.terrainEntity_hasBlendMap(_currentTerrainID);
-		auto hasDiffuseMap = _fe3d.terrainEntity_hasDiffuseMap(_currentTerrainID);
-		auto hasNormalMap = _fe3d.terrainEntity_hasNormalMap(_currentTerrainID);
-		auto hasDiffuseMapR = _fe3d.terrainEntity_hasDiffuseMapR(_currentTerrainID);
-		auto hasDiffuseMapG = _fe3d.terrainEntity_hasDiffuseMapG(_currentTerrainID);
-		auto hasDiffuseMapB = _fe3d.terrainEntity_hasDiffuseMapB(_currentTerrainID);
-		auto hasNormalMapR = _fe3d.terrainEntity_hasNormalMapR(_currentTerrainID);
-		auto hasNormalMapG = _fe3d.terrainEntity_hasNormalMapG(_currentTerrainID);
-		auto hasNormalMapB = _fe3d.terrainEntity_hasNormalMapB(_currentTerrainID);
+		auto textureRepeat = _fe3d.terrain_getTextureRepeat(_currentTerrainID);
+		auto redRepeat = _fe3d.terrain_getRedRepeat(_currentTerrainID);
+		auto greenRepeat = _fe3d.terrain_getGreenRepeat(_currentTerrainID);
+		auto blueRepeat = _fe3d.terrain_getBlueRepeat(_currentTerrainID);
+		auto hasBlendMap = _fe3d.terrain_hasBlendMap(_currentTerrainID);
+		auto hasDiffuseMap = _fe3d.terrain_hasDiffuseMap(_currentTerrainID);
+		auto hasNormalMap = _fe3d.terrain_hasNormalMap(_currentTerrainID);
+		auto hasDiffuseMapR = _fe3d.terrain_hasDiffuseMapR(_currentTerrainID);
+		auto hasDiffuseMapG = _fe3d.terrain_hasDiffuseMapG(_currentTerrainID);
+		auto hasDiffuseMapB = _fe3d.terrain_hasDiffuseMapB(_currentTerrainID);
+		auto hasNormalMapR = _fe3d.terrain_hasNormalMapR(_currentTerrainID);
+		auto hasNormalMapG = _fe3d.terrain_hasNormalMapG(_currentTerrainID);
+		auto hasNormalMapB = _fe3d.terrain_hasNormalMapB(_currentTerrainID);
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -49,19 +49,19 @@ void TerrainEditor::_updateMiscellaneousMenu()
 		// Update value forms
 		if(_gui.getGlobalScreen()->checkValueForm("textureRepeat", textureRepeat))
 		{
-			_fe3d.terrainEntity_setTextureRepeat(_currentTerrainID, textureRepeat);
+			_fe3d.terrain_setTextureRepeat(_currentTerrainID, textureRepeat);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("redRepeat", redRepeat))
 		{
-			_fe3d.terrainEntity_setRedRepeat(_currentTerrainID, redRepeat);
+			_fe3d.terrain_setRedRepeat(_currentTerrainID, redRepeat);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("greenRepeat", greenRepeat))
 		{
-			_fe3d.terrainEntity_setGreenRepeat(_currentTerrainID, greenRepeat);
+			_fe3d.terrain_setGreenRepeat(_currentTerrainID, greenRepeat);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("blueRepeat", blueRepeat))
 		{
-			_fe3d.terrainEntity_setBlueRepeat(_currentTerrainID, blueRepeat);
+			_fe3d.terrain_setBlueRepeat(_currentTerrainID, blueRepeat);
 		}
 
 		// Update buttons hoverability

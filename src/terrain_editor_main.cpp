@@ -39,16 +39,16 @@ void TerrainEditor::load()
 	_fe3d.gfx_setMotionBlurStrength(0.1f);
 
 	// Editor models
-	_fe3d.modelEntity_create("@@cube", "engine\\assets\\meshes\\cube.obj");
-	_fe3d.modelEntity_setBasePosition("@@cube", Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
-	_fe3d.modelEntity_setDiffuseMap("@@cube", "", "engine\\assets\\textures\\cube.png");
-	_fe3d.modelEntity_setFaceCulled("@@cube", true);
-	_fe3d.modelEntity_create("@@grid", "engine\\assets\\meshes\\plane.obj");
-	_fe3d.modelEntity_setBasePosition("@@grid", Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
-	_fe3d.modelEntity_setBaseSize("@@grid", Vec3(GRID_SIZE, 1.0f, GRID_SIZE));
-	_fe3d.modelEntity_setDiffuseMap("@@grid", "", "engine\\assets\\textures\\grid.png");
-	_fe3d.modelEntity_setTextureRepeat("@@grid", "", GRID_UV);
-	_fe3d.modelEntity_setShadowed("@@grid", false);
+	_fe3d.model_create("@@cube", "engine\\assets\\meshes\\cube.obj");
+	_fe3d.model_setBasePosition("@@cube", Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
+	_fe3d.model_setDiffuseMap("@@cube", "", "engine\\assets\\textures\\cube.png");
+	_fe3d.model_setFaceCulled("@@cube", true);
+	_fe3d.model_create("@@grid", "engine\\assets\\meshes\\plane.obj");
+	_fe3d.model_setBasePosition("@@grid", Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
+	_fe3d.model_setBaseSize("@@grid", Vec3(GRID_SIZE, 1.0f, GRID_SIZE));
+	_fe3d.model_setDiffuseMap("@@grid", "", "engine\\assets\\textures\\grid.png");
+	_fe3d.model_setTextureRepeat("@@grid", "", GRID_UV);
+	_fe3d.model_setShadowed("@@grid", false);
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->createTextField("terrainID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f), true, false);
@@ -70,7 +70,7 @@ void TerrainEditor::unload()
 	unloadTerrainEntities();
 
 	// Editor models
-	_fe3d.modelEntity_deleteAll();
+	_fe3d.model_deleteAll();
 
 	// Reset editor properties
 	_loadedTerrainIDs.clear();

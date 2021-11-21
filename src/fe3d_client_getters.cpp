@@ -2,12 +2,12 @@
 #include "fe3d.hpp"
 #include "core_engine.hpp"
 
-const bool FabiEngine3D::networkClient_isRunning() const
+const bool FabiEngine3D::client_isRunning() const
 {
 	return _core->_networkClientAPI.isRunning();
 }
 
-const bool FabiEngine3D::networkClient_isConnecting() const
+const bool FabiEngine3D::client_isConnecting() const
 {
 	if(!_core->_networkClientAPI.isRunning())
 	{
@@ -18,7 +18,7 @@ const bool FabiEngine3D::networkClient_isConnecting() const
 	return _core->_networkClientAPI.isConnectingToServer();
 }
 
-const bool FabiEngine3D::networkClient_isConnected() const
+const bool FabiEngine3D::client_isConnected() const
 {
 	if(!_core->_networkClientAPI.isRunning())
 	{
@@ -29,12 +29,12 @@ const bool FabiEngine3D::networkClient_isConnected() const
 	return _core->_networkClientAPI.isConnectedToServer();
 }
 
-const bool FabiEngine3D::networkClient_isAccepted() const
+const bool FabiEngine3D::client_isAccepted() const
 {
 	return _core->_networkClientAPI.isAcceptedByServer();
 }
 
-const unsigned int FabiEngine3D::networkClient_getPingLatency() const
+const unsigned int FabiEngine3D::client_getPingLatency() const
 {
 	if(!_core->_networkClientAPI.isRunning())
 	{
@@ -55,12 +55,12 @@ const unsigned int FabiEngine3D::networkClient_getPingLatency() const
 	return _core->_networkClientAPI.getPingLatency();
 }
 
-const bool FabiEngine3D::networkClient_isValidServerIP(const string& serverIP) const
+const bool FabiEngine3D::client_isValidServerIP(const string& serverIP) const
 {
 	return _core->_networkClientAPI.isValidServerIP(serverIP);
 }
 
-const string FabiEngine3D::networkClient_getUsername() const
+const string FabiEngine3D::client_getUsername() const
 {
 	if(!_core->_networkClientAPI.isRunning())
 	{
@@ -71,7 +71,7 @@ const string FabiEngine3D::networkClient_getUsername() const
 	return _core->_networkClientAPI.getUsername();
 }
 
-const string FabiEngine3D::networkClient_getServerIP() const
+const string FabiEngine3D::client_getServerIP() const
 {
 	if(!_core->_networkClientAPI.isRunning())
 	{
@@ -92,7 +92,7 @@ const string FabiEngine3D::networkClient_getServerIP() const
 	return _core->_networkClientAPI.getServerIP();
 }
 
-const vector<NetworkServerMessage> FabiEngine3D::networkClient_getPendingMessages() const
+const vector<NetworkServerMessage> FabiEngine3D::client_getPendingMessages() const
 {
 	if(!_core->_networkClientAPI.isRunning())
 	{

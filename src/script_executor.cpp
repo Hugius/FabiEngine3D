@@ -43,7 +43,7 @@ void ScriptExecutor::update(bool debug)
 			// Custom cursor must be inside of viewport or PC cursor must be visible
 			if(_fe3d.misc_isCursorInsideViewport() || _fe3d.misc_isCursorVisible())
 			{
-				_fe3d.imageEntity_setVisible("@@cursor", false);
+				_fe3d.image_setVisible("@@cursor", false);
 			}
 		}
 

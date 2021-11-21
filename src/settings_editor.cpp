@@ -40,10 +40,10 @@ void SettingsEditor::load()
 	_fe3d.camera_setYaw(270.0f);
 
 	// Editor billboards
-	_fe3d.billboardEntity_create("@@icon");
-	_fe3d.billboardEntity_setPosition("@@icon", Vec3(0.0f, -0.5f, -1.5f));
-	_fe3d.billboardEntity_setDiffuseMap("@@icon", "engine\\assets\\textures\\settings.png");
-	_fe3d.billboardEntity_setBright("@@icon", true);
+	_fe3d.billboard_create("@@icon");
+	_fe3d.billboard_setPosition("@@icon", Vec3(0.0f, -0.5f, -1.5f));
+	_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\textures\\settings.png");
+	_fe3d.billboard_setBright("@@icon", true);
 
 	// Miscellaneous
 	_isEditorLoaded = true;
@@ -58,7 +58,7 @@ void SettingsEditor::unload()
 	_fe3d.gfx_disableBloom(true);
 
 	// Delete created entities
-	_fe3d.billboardEntity_delete("@@icon");
+	_fe3d.billboard_delete("@@icon");
 
 	// Reset editor properties
 	_isEditorLoaded = false;
@@ -198,7 +198,7 @@ void SettingsEditor::update()
 		}
 
 		// Miscellaneous
-		_fe3d.billboardEntity_rotate("@@icon", Vec3(0.0f, 0.5f, 0.0f));
+		_fe3d.billboard_rotate("@@icon", Vec3(0.0f, 0.5f, 0.0f));
 	}
 }
 

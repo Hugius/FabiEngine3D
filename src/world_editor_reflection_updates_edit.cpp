@@ -23,7 +23,7 @@ void WorldEditor::_updateReflectionEditing()
 		auto hoveredAabbID = _fe3d.raycast_checkCursorInAny().first;
 
 		// Check if user selected a camera model
-		for(const auto& ID : _fe3d.modelEntity_getAllIDs())
+		for(const auto& ID : _fe3d.model_getAllIDs())
 		{
 			// Must be reflection preview entity
 			if(ID.substr(0, string("@@camera").size()) == "@@camera")
@@ -97,12 +97,12 @@ void WorldEditor::_updateReflectionEditing()
 			{
 				if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("capture")->isHovered())
 				{
-					_fe3d.reflectionEntity_capture(activeReflectionID);
+					_fe3d.reflection_capture(activeReflectionID);
 				}
 				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
-					_fe3d.modelEntity_delete(_activeCameraID);
-					_fe3d.reflectionEntity_delete(activeReflectionID);
+					_fe3d.model_delete(_activeCameraID);
+					_fe3d.reflection_delete(activeReflectionID);
 					rightWindow->setActiveScreen("worldEditorControls");
 					_activeCameraID = "";
 					return;
@@ -112,15 +112,15 @@ void WorldEditor::_updateReflectionEditing()
 			// Alternative way of deleting
 			if(_fe3d.input_isKeyPressed(InputType::KEY_DELETE))
 			{
-				_fe3d.modelEntity_delete(_activeCameraID);
-				_fe3d.reflectionEntity_delete(activeReflectionID);
+				_fe3d.model_delete(_activeCameraID);
+				_fe3d.reflection_delete(activeReflectionID);
 				rightWindow->setActiveScreen("worldEditorControls");
 				_activeCameraID = "";
 				return;
 			}
 
 			// Get current values
-			auto position = _fe3d.reflectionEntity_getPosition(activeReflectionID);
+			auto position = _fe3d.reflection_getPosition(activeReflectionID);
 
 			// Update value filling and changing
 			_handleValueChanging("reflectionPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / 100.0f));
@@ -131,7 +131,7 @@ void WorldEditor::_updateReflectionEditing()
 			_handleValueChanging("reflectionPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / 100.0f));
 
 			// Apply new values
-			_fe3d.reflectionEntity_setPosition(activeReflectionID, position);
+			_fe3d.reflection_setPosition(activeReflectionID, position);
 		}
 	}
 }

@@ -46,16 +46,16 @@ void BillboardEditor::load()
 	_fe3d.gfx_setShadowLightness(0.25f);
 
 	// Editor models
-	_fe3d.modelEntity_create("@@cube", "engine\\assets\\meshes\\cube.obj");
-	_fe3d.modelEntity_setBasePosition("@@cube", Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
-	_fe3d.modelEntity_setDiffuseMap("@@cube", "", "engine\\assets\\textures\\cube.png");
-	_fe3d.modelEntity_setFaceCulled("@@cube", true);
-	_fe3d.modelEntity_create("@@grid", "engine\\assets\\meshes\\plane.obj");
-	_fe3d.modelEntity_setBasePosition("@@grid", Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
-	_fe3d.modelEntity_setBaseSize("@@grid", Vec3(GRID_SIZE, 1.0f, GRID_SIZE));
-	_fe3d.modelEntity_setDiffuseMap("@@grid", "", "engine\\assets\\textures\\grid.png");
-	_fe3d.modelEntity_setTextureRepeat("@@grid", "", GRID_UV);
-	_fe3d.modelEntity_setShadowed("@@grid", false);
+	_fe3d.model_create("@@cube", "engine\\assets\\meshes\\cube.obj");
+	_fe3d.model_setBasePosition("@@cube", Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
+	_fe3d.model_setDiffuseMap("@@cube", "", "engine\\assets\\textures\\cube.png");
+	_fe3d.model_setFaceCulled("@@cube", true);
+	_fe3d.model_create("@@grid", "engine\\assets\\meshes\\plane.obj");
+	_fe3d.model_setBasePosition("@@grid", Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
+	_fe3d.model_setBaseSize("@@grid", Vec3(GRID_SIZE, 1.0f, GRID_SIZE));
+	_fe3d.model_setDiffuseMap("@@grid", "", "engine\\assets\\textures\\grid.png");
+	_fe3d.model_setTextureRepeat("@@grid", "", GRID_UV);
+	_fe3d.model_setShadowed("@@grid", false);
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->createTextField("billboardID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f), true, false);
@@ -82,10 +82,10 @@ void BillboardEditor::unload()
 	_fe3d.gfx_disableShadows(true);
 
 	// Delete billboards
-	_fe3d.billboardEntity_deleteAll();
+	_fe3d.billboard_deleteAll();
 
 	// Editor models
-	_fe3d.modelEntity_deleteAll();
+	_fe3d.model_deleteAll();
 
 	// Delete billboard ID TextField
 	_gui.getGlobalScreen()->deleteTextField("billboardID");

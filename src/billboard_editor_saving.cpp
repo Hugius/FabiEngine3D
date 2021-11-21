@@ -28,22 +28,22 @@ const bool BillboardEditor::saveBillboardEntitiesToFile() const
 	for(const auto& billboardID : _loadedBillboardIDs)
 	{
 		// Retrieve all values
-		auto size = _fe3d.billboardEntity_getSize(billboardID);
-		auto color = _fe3d.billboardEntity_getColor(billboardID);
-		auto diffuseMapPath = _fe3d.billboardEntity_getDiffuseMapPath(billboardID);
-		auto emissionMapPath = _fe3d.billboardEntity_getEmissionMapPath(billboardID);
-		auto fontPath = _fe3d.billboardEntity_getFontPath(billboardID);
-		auto textContent = _fe3d.billboardEntity_getTextContent(billboardID);
-		auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(billboardID);
-		auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(billboardID);
-		auto isReflected = _fe3d.billboardEntity_isReflected(billboardID);
-		auto isShadowed = _fe3d.billboardEntity_isShadowed(billboardID);
-		auto isAnimationStarted = _fe3d.billboardEntity_isSpriteAnimationStarted(billboardID);
-		auto animationRowCount = _fe3d.billboardEntity_getSpriteAnimationRowCount(billboardID);
-		auto animationColumnCount = _fe3d.billboardEntity_getSpriteAnimationColumnCount(billboardID);
-		auto animationFramestep = _fe3d.billboardEntity_getSpriteAnimationFramestep(billboardID);
-		auto lightness = _fe3d.billboardEntity_getLightness(billboardID);
-		auto textureRepeat = _fe3d.billboardEntity_getTextureRepeat(billboardID);
+		auto size = _fe3d.billboard_getSize(billboardID);
+		auto color = _fe3d.billboard_getColor(billboardID);
+		auto diffuseMapPath = _fe3d.billboard_getDiffuseMapPath(billboardID);
+		auto emissionMapPath = _fe3d.billboard_getEmissionMapPath(billboardID);
+		auto fontPath = _fe3d.billboard_getFontPath(billboardID);
+		auto textContent = _fe3d.billboard_getTextContent(billboardID);
+		auto isFacingX = _fe3d.billboard_isFacingCameraX(billboardID);
+		auto isFacingY = _fe3d.billboard_isFacingCameraY(billboardID);
+		auto isReflected = _fe3d.billboard_isReflected(billboardID);
+		auto isShadowed = _fe3d.billboard_isShadowed(billboardID);
+		auto isAnimationStarted = _fe3d.billboard_isSpriteAnimationStarted(billboardID);
+		auto animationRowCount = _fe3d.billboard_getSpriteAnimationRowCount(billboardID);
+		auto animationColumnCount = _fe3d.billboard_getSpriteAnimationColumnCount(billboardID);
+		auto animationFramestep = _fe3d.billboard_getSpriteAnimationFramestep(billboardID);
+		auto lightness = _fe3d.billboard_getLightness(billboardID);
+		auto textureRepeat = _fe3d.billboard_getTextureRepeat(billboardID);
 
 		// Convert to short path
 		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));

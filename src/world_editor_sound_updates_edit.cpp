@@ -22,7 +22,7 @@ void WorldEditor::_updateSoundEditing()
 		auto hoveredAabbID = _fe3d.raycast_checkCursorInAny().first;
 
 		// Check if user selected a speaker model
-		for(const auto& ID : _fe3d.modelEntity_getAllIDs())
+		for(const auto& ID : _fe3d.model_getAllIDs())
 		{
 			// Must be sound preview entity
 			if(ID.substr(0, string("@@speaker").size()) == "@@speaker")
@@ -35,7 +35,7 @@ void WorldEditor::_updateSoundEditing()
 					_selectSound(ID.substr(string("@@speaker_").size()));
 
 					// Change cursor
-					_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_pointing.png");
+					_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_pointing.png");
 
 					// Check if user clicked speaker
 					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -99,7 +99,7 @@ void WorldEditor::_updateSoundEditing()
 			{
 				if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
-					_fe3d.modelEntity_delete(_activeSpeakerID);
+					_fe3d.model_delete(_activeSpeakerID);
 					_fe3d.sound_delete(activeSoundID);
 					rightWindow->setActiveScreen("worldEditorControls");
 					_activeSpeakerID = "";
@@ -110,7 +110,7 @@ void WorldEditor::_updateSoundEditing()
 			// Alternative way of deleting
 			if(_fe3d.input_isKeyPressed(InputType::KEY_DELETE))
 			{
-				_fe3d.modelEntity_delete(_activeSpeakerID);
+				_fe3d.model_delete(_activeSpeakerID);
 				_fe3d.sound_delete(activeSoundID);
 				rightWindow->setActiveScreen("worldEditorControls");
 				_activeSpeakerID = "";
@@ -145,7 +145,7 @@ void WorldEditor::_updateSoundEditing()
 		// Check if sound is still selected or active
 		if(_selectedSpeakerID.empty() && _activeSpeakerID.empty())
 		{
-			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), false);
+			_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), false);
 		}
 	}
 }

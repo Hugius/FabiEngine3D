@@ -16,9 +16,9 @@ void TerrainEditor::unloadTerrainEntities()
 {
 	for(const auto& ID : _loadedTerrainIDs)
 	{
-		if(_fe3d.terrainEntity_isExisting(ID))
+		if(_fe3d.terrain_isExisting(ID))
 		{
-			_fe3d.terrainEntity_delete(ID);
+			_fe3d.terrain_delete(ID);
 		}
 	}
 }

@@ -28,7 +28,7 @@ void WorldEditor::_updateModelMenu()
 			_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->deleteButtons();
 
 			// Add the ID of every placed model
-			auto IDs = _fe3d.modelEntity_getAllIDs();
+			auto IDs = _fe3d.model_getAllIDs();
 			sort(IDs.begin(), IDs.end());
 			for(auto& modelID : IDs)
 			{
@@ -63,8 +63,8 @@ void WorldEditor::_updateModelPlacingMenu()
 			// Reset placing
 			if(!_currentPreviewModelID.empty())
 			{
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
-				_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
+				_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
+				_fe3d.model_setVisible(_currentPreviewModelID, false);
 				_currentPreviewModelID = "";
 			}
 
@@ -78,7 +78,7 @@ void WorldEditor::_updateModelPlacingMenu()
 			for(const auto& modelID : _modelEditor.getLoadedModelIDs())
 			{
 				// Check if model has mesh
-				if(_fe3d.modelEntity_isExisting(modelID))
+				if(_fe3d.model_isExisting(modelID))
 				{
 					// Check if button is hovered
 					if(screen->getScrollingList("modelList")->getButton(modelID)->isHovered())
@@ -96,14 +96,14 @@ void WorldEditor::_updateModelPlacingMenu()
 
 						// Set new preview model
 						_currentPreviewModelID = modelID;
-						_fe3d.modelEntity_setBasePosition(_currentPreviewModelID, Vec3(0.0f));
-						_fe3d.modelEntity_setVisible(_currentPreviewModelID, true);
-						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), true);
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), "Model: " + _currentPreviewModelID.substr(1), 0.025f);
+						_fe3d.model_setBasePosition(_currentPreviewModelID, Vec3(0.0f));
+						_fe3d.model_setVisible(_currentPreviewModelID, true);
+						_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), true);
+						_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), "Model: " + _currentPreviewModelID.substr(1), 0.025f);
 						_fe3d.misc_centerCursor();
 
 						// Add position value forms for placing without terrain
-						if(_fe3d.terrainEntity_getSelectedID().empty())
+						if(_fe3d.terrain_getSelectedID().empty())
 						{
 							_gui.getGlobalScreen()->createValueForm("positionX", "X", 0.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 							_gui.getGlobalScreen()->createValueForm("positionY", "Y", 0.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
@@ -131,7 +131,7 @@ void WorldEditor::_updateModelChoosingMenu()
 		for(const auto& button : _gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->getButtons())
 		{
 			// Check if model is still existing
-			if(!_fe3d.modelEntity_isExisting(button->getID()))
+			if(!_fe3d.model_isExisting(button->getID()))
 			{
 				// Delete button
 				_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->deleteButton(button->getID());
@@ -140,7 +140,7 @@ void WorldEditor::_updateModelChoosingMenu()
 		}
 
 		// Iterate through every placed model
-		for(const auto& modelID : _fe3d.modelEntity_getAllIDs())
+		for(const auto& modelID : _fe3d.model_getAllIDs())
 		{
 			// Check if model is not a preview model
 			if(modelID[0] != '@')

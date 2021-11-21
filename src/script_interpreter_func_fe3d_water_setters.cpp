@@ -15,7 +15,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetterFunction(const string& func
 			// Validate water existence
 			if(_validateFe3dWater())
 			{
-				_fe3d.waterEntity_setSpeed(_fe3d.waterEntity_getSelectedID(),
+				_fe3d.water_setSpeed(_fe3d.water_getSelectedID(),
 										   Vec2(arguments[0].getDecimal() / 100000.0f, arguments[1].getDecimal() / 100000.0f));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -31,7 +31,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetterFunction(const string& func
 			// Validate water existence
 			if(_validateFe3dWater())
 			{
-				_fe3d.waterEntity_setColor(_fe3d.waterEntity_getSelectedID(), Vec3(
+				_fe3d.water_setColor(_fe3d.water_getSelectedID(), Vec3(
 					arguments[0].getDecimal(),
 					arguments[1].getDecimal(),
 					arguments[2].getDecimal()));
@@ -49,7 +49,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetterFunction(const string& func
 			// Validate water existence
 			if(_validateFe3dWater())
 			{
-				_fe3d.waterEntity_setTransparency(_fe3d.waterEntity_getSelectedID(), arguments[0].getDecimal());
+				_fe3d.water_setTransparency(_fe3d.water_getSelectedID(), arguments[0].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -60,7 +60,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetterFunction(const string& func
 	}
 
 	// Cannot execute water functionality when server is running
-	if(_fe3d.networkServer_isRunning())
+	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:water` functionality as a networking server!");
 	}

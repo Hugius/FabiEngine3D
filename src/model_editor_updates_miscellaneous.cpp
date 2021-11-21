@@ -10,10 +10,10 @@ void ModelEditor::_updateMiscellaneousMenu()
 	if(screen->getID() == "modelEditorMenuMiscellaneous")
 	{
 		// Temporary values
-		auto levelOfDetailEntityID = _fe3d.modelEntity_getLevelOfDetailEntityID(_currentModelID);
-		auto isInstanced = _fe3d.modelEntity_isInstanced(_currentModelID);
-		auto isFaceCulled = _fe3d.modelEntity_isFaceCulled(_currentModelID);
-		auto rotationOrder = _fe3d.modelEntity_getRotationOrder(_currentModelID);
+		auto levelOfDetailEntityID = _fe3d.model_getLevelOfDetailID(_currentModelID);
+		auto isInstanced = _fe3d.model_isInstanced(_currentModelID);
+		auto isFaceCulled = _fe3d.model_isFaceCulled(_currentModelID);
+		auto rotationOrder = _fe3d.model_getRotationOrder(_currentModelID);
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -31,17 +31,17 @@ void ModelEditor::_updateMiscellaneousMenu()
 			isInstanced = !isInstanced;
 			if(isInstanced)
 			{
-				_fe3d.modelEntity_enableInstancing(_currentModelID, { Vec3(0.0f) });
+				_fe3d.model_enableInstancing(_currentModelID, { Vec3(0.0f) });
 			}
 			else
 			{
-				_fe3d.modelEntity_disableInstancing(_currentModelID);
+				_fe3d.model_disableInstancing(_currentModelID);
 			}
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFaceCulled")->isHovered())
 		{
 			isFaceCulled = !isFaceCulled;
-			_fe3d.modelEntity_setFaceCulled(_currentModelID, isFaceCulled);
+			_fe3d.model_setFaceCulled(_currentModelID, isFaceCulled);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotationOrder")->isHovered())
 		{
@@ -69,7 +69,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 			{
 				rotationOrder = DirectionOrder::XYZ;
 			}
-			_fe3d.modelEntity_setRotationOrder(_currentModelID, rotationOrder);
+			_fe3d.model_setRotationOrder(_currentModelID, rotationOrder);
 		}
 
 		// Update value forms
@@ -77,7 +77,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 		{
 			if(levelOfDetailEntityID == "@") // No level of detail entity
 			{
-				_fe3d.modelEntity_setLevelOfDetailEntity(_currentModelID, "");
+				_fe3d.model_setLevelOfDetail(_currentModelID, "");
 			}
 			else if(find(_loadedModelIDs.begin(), _loadedModelIDs.end(), ("@" + levelOfDetailEntityID)) == _loadedModelIDs.end()) // Check level of detail entity
 			{
@@ -85,7 +85,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 			}
 			else // Set level of detail entity
 			{
-				_fe3d.modelEntity_setLevelOfDetailEntity(_currentModelID, ("@" + levelOfDetailEntityID));
+				_fe3d.model_setLevelOfDetail(_currentModelID, ("@" + levelOfDetailEntityID));
 			}
 		}
 

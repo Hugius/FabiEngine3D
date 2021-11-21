@@ -235,7 +235,7 @@ void WorldEditor::_updateMainMenu()
 			if(find(worldNames.begin(), worldNames.end(), newWorldName) == worldNames.end())
 			{
 				// Disable engine background
-				_fe3d.skyEntity_selectMainSky("");
+				_fe3d.sky_selectMainSky("");
 
 				// Create new world
 				_currentWorldID = newWorldName;
@@ -259,7 +259,7 @@ void WorldEditor::_updateMainMenu()
 				if(_isChoosingWorld)
 				{
 					// Disable engine background
-					_fe3d.skyEntity_selectMainSky("");
+					_fe3d.sky_selectMainSky("");
 
 					// Try to load world
 					if(loadEditorWorldFromFile(_currentWorldID))
@@ -270,7 +270,7 @@ void WorldEditor::_updateMainMenu()
 					else
 					{
 						// Enable engine background
-						_fe3d.skyEntity_selectMainSky("@@engineBackground");
+						_fe3d.sky_selectMainSky("@@engineBackground");
 					}
 				}
 				else if(_isDeletingWorld) // Prepare deleting confirmation
@@ -376,7 +376,7 @@ void WorldEditor::_updateChoiceMenu()
 			clearCurrentWorld();
 
 			// Enable engine background
-			_fe3d.skyEntity_selectMainSky("@@engineBackground");
+			_fe3d.sky_selectMainSky("@@engineBackground");
 
 			// No selected world
 			_currentWorldID = "";
@@ -402,7 +402,7 @@ void WorldEditor::_updateChoiceMenu()
 			clearCurrentWorld();
 
 			// Enable engine background
-			_fe3d.skyEntity_selectMainSky("@@engineBackground");
+			_fe3d.sky_selectMainSky("@@engineBackground");
 
 			// No selected world
 			_currentWorldID = "";
@@ -433,7 +433,7 @@ void WorldEditor::_updateCamera()
 			// Disable cursor while in FPS mode
 			if(_fe3d.camera_isFirstPersonViewEnabled())
 			{
-				_fe3d.imageEntity_setVisible("@@cursor", false);
+				_fe3d.image_setVisible("@@cursor", false);
 			}
 		}
 		else
@@ -447,7 +447,7 @@ void WorldEditor::_updateCamera()
 			// Cannot show cursor if outside of engine window
 			if(_fe3d.misc_isCursorInsideWindow())
 			{
-				_fe3d.imageEntity_setVisible("@@cursor", true);
+				_fe3d.image_setVisible("@@cursor", true);
 			}
 		}
 

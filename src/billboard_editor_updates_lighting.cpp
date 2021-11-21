@@ -10,10 +10,10 @@ void BillboardEditor::_updateLightingMenu()
 	if(screen->getID() == "billboardEditorMenuLighting")
 	{
 		// Temporary values
-		auto lightness = _fe3d.billboardEntity_getLightness(_currentBillboardID);
-		auto isReflected = _fe3d.billboardEntity_isReflected(_currentBillboardID);
-		auto isShadowed = _fe3d.billboardEntity_isShadowed(_currentBillboardID);
-		auto color = _fe3d.billboardEntity_getColor(_currentBillboardID);
+		auto lightness = _fe3d.billboard_getLightness(_currentBillboardID);
+		auto isReflected = _fe3d.billboard_isReflected(_currentBillboardID);
+		auto isShadowed = _fe3d.billboard_isShadowed(_currentBillboardID);
+		auto color = _fe3d.billboard_getColor(_currentBillboardID);
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -34,34 +34,34 @@ void BillboardEditor::_updateLightingMenu()
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isShadowed")->isHovered())
 		{
 			isShadowed = !isShadowed;
-			_fe3d.billboardEntity_setShadowed(_currentBillboardID, isShadowed);
+			_fe3d.billboard_setShadowed(_currentBillboardID, isShadowed);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isReflected")->isHovered())
 		{
 			isReflected = !isReflected;
-			_fe3d.billboardEntity_setReflected(_currentBillboardID, isReflected);
+			_fe3d.billboard_setReflected(_currentBillboardID, isReflected);
 		}
 
 		// Update value forms
 		if(_gui.getGlobalScreen()->checkValueForm("colorR", color.r, {}))
 		{
 			color.r /= 255.0f;
-			_fe3d.billboardEntity_setColor(_currentBillboardID, color);
+			_fe3d.billboard_setColor(_currentBillboardID, color);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("colorG", color.g, {}))
 		{
 			color.g /= 255.0f;
-			_fe3d.billboardEntity_setColor(_currentBillboardID, color);
+			_fe3d.billboard_setColor(_currentBillboardID, color);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("colorB", color.b, {}))
 		{
 			color.b /= 255.0f;
-			_fe3d.billboardEntity_setColor(_currentBillboardID, color);
+			_fe3d.billboard_setColor(_currentBillboardID, color);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("lightness", lightness, {}))
 		{
 			lightness /= 100.0f;
-			_fe3d.billboardEntity_setLightness(_currentBillboardID, lightness);
+			_fe3d.billboard_setLightness(_currentBillboardID, lightness);
 		}
 
 		// Update button text contents

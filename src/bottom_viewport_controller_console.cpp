@@ -13,12 +13,12 @@ void BottomViewportController::_updateConsoleScrolling()
 		const auto screen = window->getScreen("main");
 		const float minY = window->getInitialPosition().y - (window->getInitialSize().y / 2.0f);
 		const float maxY = window->getInitialPosition().y + (window->getInitialSize().y / 2.0f);
-		const float oldestMessage = _fe3d.textEntity_getPosition(screen->getTextField(_consoleMessageQueue[0].first + "_time")->getEntityID()).y + CHAR_SIZE.y;
+		const float oldestMessage = _fe3d.text_getPosition(screen->getTextField(_consoleMessageQueue[0].first + "_time")->getEntityID()).y + CHAR_SIZE.y;
 
 		// Calculate message part count for latest message Y
 		const string latestMessageID = _consoleMessageQueue.back().first;
 		const string entityID = screen->getTextField(latestMessageID + "_msg_0")->getEntityID();
-		float latestMessageY = _fe3d.textEntity_getPosition(entityID).y - CHAR_SIZE.y;
+		float latestMessageY = _fe3d.text_getPosition(entityID).y - CHAR_SIZE.y;
 
 		// Count all message text lines
 		unsigned int messageLineCount = static_cast<unsigned int>(_consoleMessageQueue.size());
@@ -54,16 +54,16 @@ void BottomViewportController::_updateConsoleScrolling()
 			for(const auto& [ID, message] : _consoleMessageQueue)
 			{
 				// Move time part
-				_fe3d.textEntity_move(screen->getTextField(ID + "_time")->getEntityID(), Vec2(0.0f, -scrollingSpeed));
+				_fe3d.text_move(screen->getTextField(ID + "_time")->getEntityID(), Vec2(0.0f, -scrollingSpeed));
 
 				// Move separator part
-				_fe3d.textEntity_move(screen->getTextField(ID + "_separator")->getEntityID(), Vec2(0.0f, -scrollingSpeed));
+				_fe3d.text_move(screen->getTextField(ID + "_separator")->getEntityID(), Vec2(0.0f, -scrollingSpeed));
 
 				// Move all message parts
 				unsigned int index = 0;
 				while(screen->isTextFieldExisting(ID + "_msg_" + to_string(index)))
 				{
-					_fe3d.textEntity_move(screen->getTextField(ID + "_msg_" + to_string(index))->getEntityID(), Vec2(0.0f, -scrollingSpeed));
+					_fe3d.text_move(screen->getTextField(ID + "_msg_" + to_string(index))->getEntityID(), Vec2(0.0f, -scrollingSpeed));
 					index++;
 				}
 			}
@@ -146,9 +146,9 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 		{
 			if(alreadyExisting) // Previous message
 			{
-				_fe3d.textEntity_setPosition(screen->getTextField(ID + "_time")->getEntityID(),
+				_fe3d.text_setPosition(screen->getTextField(ID + "_time")->getEntityID(),
 											 screen->convertPosition(Vec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
-				_fe3d.textEntity_setPosition(screen->getTextField(ID + "_separator")->getEntityID(),
+				_fe3d.text_setPosition(screen->getTextField(ID + "_separator")->getEntityID(),
 											 screen->convertPosition(Vec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
 			}
 			else // New message
@@ -156,16 +156,16 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 				// Add time TextField & add boundaries
 				screen->createTextField(ID + "_time", Vec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)), Vec2(0.0f), "", timePartColor, false, false);
 				string timeID = screen->getTextField(ID + "_time")->getEntityID();
-				_fe3d.textEntity_setTextContent(timeID, timePartText, CHAR_SIZE.x, CHAR_SIZE.y);
-				_fe3d.textEntity_setMinPosition(timeID, minPosition);
-				_fe3d.textEntity_setMaxPosition(timeID, maxPosition);
+				_fe3d.text_setTextContent(timeID, timePartText, CHAR_SIZE.x, CHAR_SIZE.y);
+				_fe3d.text_setMinPosition(timeID, minPosition);
+				_fe3d.text_setMaxPosition(timeID, maxPosition);
 
 				// Add separator TextField & add boundaries
 				screen->createTextField(ID + "_separator", Vec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)), Vec2(0.0f), "", separatorPartColor, false, false);
 				string separatorID = screen->getTextField(ID + "_separator")->getEntityID();
-				_fe3d.textEntity_setTextContent(separatorID, separatorPartText, CHAR_SIZE.x, CHAR_SIZE.y);
-				_fe3d.textEntity_setMinPosition(separatorID, minPosition);
-				_fe3d.textEntity_setMaxPosition(separatorID, maxPosition);
+				_fe3d.text_setTextContent(separatorID, separatorPartText, CHAR_SIZE.x, CHAR_SIZE.y);
+				_fe3d.text_setMinPosition(separatorID, minPosition);
+				_fe3d.text_setMaxPosition(separatorID, maxPosition);
 			}
 		}
 		else // Console prints multiple lines reversed
@@ -184,7 +184,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 
 			if(alreadyExisting) // Previous message
 			{
-				_fe3d.textEntity_setPosition(screen->getTextField(TextFieldID)->getEntityID(),
+				_fe3d.text_setPosition(screen->getTextField(TextFieldID)->getEntityID(),
 											 screen->convertPosition(Vec2(-1.0f + timePartOffset + separatorPartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
 			}
 			else // New message
@@ -192,11 +192,11 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 				// Add message part
 				screen->createTextField(TextFieldID, Vec2(-1.0f + timePartOffset + separatorPartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)),
 										Vec2(0.0f), "", messagePartColor, false, false);
-				_fe3d.textEntity_setTextContent(screen->getTextField(TextFieldID)->getEntityID(), messageParts[i], CHAR_SIZE.x, CHAR_SIZE.y);
+				_fe3d.text_setTextContent(screen->getTextField(TextFieldID)->getEntityID(), messageParts[i], CHAR_SIZE.x, CHAR_SIZE.y);
 
 				// Add boundaries
-				_fe3d.textEntity_setMinPosition(screen->getTextField(TextFieldID)->getEntityID(), minPosition);
-				_fe3d.textEntity_setMaxPosition(screen->getTextField(TextFieldID)->getEntityID(), maxPosition);
+				_fe3d.text_setMinPosition(screen->getTextField(TextFieldID)->getEntityID(), minPosition);
+				_fe3d.text_setMaxPosition(screen->getTextField(TextFieldID)->getEntityID(), maxPosition);
 			}
 
 			// If printing the message in multiple parts, time & seperator should be printed last
@@ -204,9 +204,9 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 			{
 				if(alreadyExisting) // Previous message
 				{
-					_fe3d.textEntity_setPosition(screen->getTextField(ID + "_time")->getEntityID(),
+					_fe3d.text_setPosition(screen->getTextField(ID + "_time")->getEntityID(),
 												 screen->convertPosition(Vec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
-					_fe3d.textEntity_setPosition(screen->getTextField(ID + "_separator")->getEntityID(),
+					_fe3d.text_setPosition(screen->getTextField(ID + "_separator")->getEntityID(),
 												 screen->convertPosition(Vec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
 				}
 				else // New message
@@ -214,16 +214,16 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 					// Add time TextField & add boundaries
 					screen->createTextField(ID + "_time", Vec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)), Vec2(0.0f), "", timePartColor, false, false);
 					string timeID = screen->getTextField(ID + "_time")->getEntityID();
-					_fe3d.textEntity_setTextContent(timeID, timePartText, CHAR_SIZE.x, CHAR_SIZE.y);
-					_fe3d.textEntity_setMinPosition(timeID, minPosition);
-					_fe3d.textEntity_setMaxPosition(timeID, maxPosition);
+					_fe3d.text_setTextContent(timeID, timePartText, CHAR_SIZE.x, CHAR_SIZE.y);
+					_fe3d.text_setMinPosition(timeID, minPosition);
+					_fe3d.text_setMaxPosition(timeID, maxPosition);
 
 					// Add separator TextField & add boundaries
 					screen->createTextField(ID + "_separator", Vec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)), Vec2(0.0f), "", separatorPartColor, false, false);
 					string separatorID = screen->getTextField(ID + "_separator")->getEntityID();
-					_fe3d.textEntity_setTextContent(separatorID, separatorPartText, CHAR_SIZE.x, CHAR_SIZE.y);
-					_fe3d.textEntity_setMinPosition(separatorID, minPosition);
-					_fe3d.textEntity_setMaxPosition(separatorID, maxPosition);
+					_fe3d.text_setTextContent(separatorID, separatorPartText, CHAR_SIZE.x, CHAR_SIZE.y);
+					_fe3d.text_setMinPosition(separatorID, minPosition);
+					_fe3d.text_setMaxPosition(separatorID, maxPosition);
 				}
 			}
 

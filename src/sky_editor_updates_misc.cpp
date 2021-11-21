@@ -6,7 +6,7 @@ void SkyEditor::_updateCamera()
 	if(_fe3d.camera_isFirstPersonViewEnabled())
 	{
 		// Hide cursor
-		_fe3d.imageEntity_setVisible("@@cursor", false);
+		_fe3d.image_setVisible("@@cursor", false);
 	}
 
 	// Check if allowed by GUI
@@ -43,17 +43,17 @@ void SkyEditor::_updateMiscellaneous()
 	if(!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Update wireframe rendering
-		if(_fe3d.skyEntity_isExisting(_currentSkyID))
+		if(_fe3d.sky_isExisting(_currentSkyID))
 		{
 			if(_fe3d.input_isKeyPressed(InputType::KEY_F))
 			{
-				if(_fe3d.skyEntity_isWireframed(_currentSkyID))
+				if(_fe3d.sky_isWireframed(_currentSkyID))
 				{
-					_fe3d.skyEntity_setWireframed(_currentSkyID, false);
+					_fe3d.sky_setWireframed(_currentSkyID, false);
 				}
 				else
 				{
-					_fe3d.skyEntity_setWireframed(_currentSkyID, true);
+					_fe3d.sky_setWireframed(_currentSkyID, true);
 				}
 			}
 		}

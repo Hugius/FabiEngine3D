@@ -28,10 +28,10 @@ const bool SkyEditor::saveSkyEntitiesToFile() const
 	for(const auto& skyID : _loadedSkyIDs)
 	{
 		// Values
-		auto cubeMapPaths = _fe3d.skyEntity_getCubeMapPaths(skyID);
-		auto rotation = _fe3d.skyEntity_getRotation(skyID);
-		auto lightness = _fe3d.skyEntity_getLightness(skyID);
-		auto color = _fe3d.skyEntity_getColor(skyID);
+		auto cubeMapPaths = _fe3d.sky_getCubeMapPaths(skyID);
+		auto rotation = _fe3d.sky_getRotation(skyID);
+		auto lightness = _fe3d.sky_getLightness(skyID);
+		auto color = _fe3d.sky_getColor(skyID);
 
 		// Iterate through paths
 		for(auto& cubeMapPath : cubeMapPaths)

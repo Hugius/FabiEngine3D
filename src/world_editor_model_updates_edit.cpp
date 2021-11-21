@@ -22,7 +22,7 @@ void WorldEditor::_updateModelEditing()
 		auto hoveredID = _fe3d.raycast_checkCursorInAny().first;
 
 		// Check if user selected a model
-		for(const auto& ID : _fe3d.modelEntity_getAllIDs())
+		for(const auto& ID : _fe3d.model_getAllIDs())
 		{
 			// Must not be preview entity
 			if(ID[0] != '@')
@@ -118,7 +118,7 @@ void WorldEditor::_updateModelEditing()
 				}
 				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
 				{
-					_fe3d.modelEntity_setStaticToCamera(_activeModelID, !_fe3d.modelEntity_isStaticToCamera(_activeModelID));
+					_fe3d.model_setStaticToCamera(_activeModelID, !_fe3d.model_isStaticToCamera(_activeModelID));
 				}
 				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
 				{
@@ -126,7 +126,7 @@ void WorldEditor::_updateModelEditing()
 				}
 				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
-					_fe3d.modelEntity_delete(_activeModelID);
+					_fe3d.model_delete(_activeModelID);
 					rightWindow->setActiveScreen("worldEditorControls");
 					_activeModelID = "";
 					return;
@@ -145,21 +145,21 @@ void WorldEditor::_updateModelEditing()
 					_animationEditor.stopAnimation(lastAnimationID.back(), _activeModelID);
 
 					// Reset main transformation
-					_fe3d.modelEntity_setBasePosition(_activeModelID, _initialModelPosition[_activeModelID]);
-					_fe3d.modelEntity_setBaseRotationOrigin(_activeModelID, Vec3(0.0f));
-					_fe3d.modelEntity_setBaseRotation(_activeModelID, _initialModelRotation[_activeModelID]);
-					_fe3d.modelEntity_setBaseSize(_activeModelID, _initialModelSize[_activeModelID]);
+					_fe3d.model_setBasePosition(_activeModelID, _initialModelPosition[_activeModelID]);
+					_fe3d.model_setBaseRotationOrigin(_activeModelID, Vec3(0.0f));
+					_fe3d.model_setBaseRotation(_activeModelID, _initialModelRotation[_activeModelID]);
+					_fe3d.model_setBaseSize(_activeModelID, _initialModelSize[_activeModelID]);
 
 					// Reset part transformations
-					for(const auto& partID : _fe3d.modelEntity_getPartIDs(_activeModelID))
+					for(const auto& partID : _fe3d.model_getPartIDs(_activeModelID))
 					{
 						// Only named parts
 						if(!partID.empty())
 						{
-							_fe3d.modelEntity_setPartPosition(_activeModelID, partID, Vec3(0.0f));
-							_fe3d.modelEntity_setPartRotationOrigin(_activeModelID, partID, Vec3(0.0f));
-							_fe3d.modelEntity_setPartRotation(_activeModelID, partID, Vec3(0.0f));
-							_fe3d.modelEntity_setPartSize(_activeModelID, partID, Vec3(1.0f));
+							_fe3d.model_setPartPosition(_activeModelID, partID, Vec3(0.0f));
+							_fe3d.model_setPartRotationOrigin(_activeModelID, partID, Vec3(0.0f));
+							_fe3d.model_setPartRotation(_activeModelID, partID, Vec3(0.0f));
+							_fe3d.model_setPartSize(_activeModelID, partID, Vec3(1.0f));
 						}
 					}
 				}
@@ -178,16 +178,16 @@ void WorldEditor::_updateModelEditing()
 			// Alternative way of deleting
 			if(_fe3d.input_isKeyPressed(InputType::KEY_DELETE))
 			{
-				_fe3d.modelEntity_delete(_activeModelID);
+				_fe3d.model_delete(_activeModelID);
 				rightWindow->setActiveScreen("worldEditorControls");
 				_activeModelID = "";
 				return;
 			}
 
 			// Get current transformation
-			auto position = _fe3d.modelEntity_getBasePosition(_activeModelID);
-			auto rotation = _fe3d.modelEntity_getBaseRotation(_activeModelID);
-			auto size = _fe3d.modelEntity_getBaseSize(_activeModelID);
+			auto position = _fe3d.model_getBasePosition(_activeModelID);
+			auto rotation = _fe3d.model_getBaseRotation(_activeModelID);
+			auto size = _fe3d.model_getBaseSize(_activeModelID);
 			auto oldPosition = position;
 			auto oldRotation = rotation;
 			auto oldSize = size;
@@ -250,21 +250,21 @@ void WorldEditor::_updateModelEditing()
 					}
 
 					// Set new transformations
-					_fe3d.modelEntity_setBasePosition(_activeModelID, _initialModelPosition[_activeModelID]);
-					_fe3d.modelEntity_setBaseRotationOrigin(_activeModelID, Vec3(0.0f));
-					_fe3d.modelEntity_setBaseRotation(_activeModelID, _initialModelRotation[_activeModelID]);
-					_fe3d.modelEntity_setBaseSize(_activeModelID, _initialModelSize[_activeModelID]);
+					_fe3d.model_setBasePosition(_activeModelID, _initialModelPosition[_activeModelID]);
+					_fe3d.model_setBaseRotationOrigin(_activeModelID, Vec3(0.0f));
+					_fe3d.model_setBaseRotation(_activeModelID, _initialModelRotation[_activeModelID]);
+					_fe3d.model_setBaseSize(_activeModelID, _initialModelSize[_activeModelID]);
 
 					// Reset part transformations
-					for(const auto& partID : _fe3d.modelEntity_getPartIDs(_activeModelID))
+					for(const auto& partID : _fe3d.model_getPartIDs(_activeModelID))
 					{
 						// Only named parts
 						if(!partID.empty())
 						{
-							_fe3d.modelEntity_setPartPosition(_activeModelID, partID, Vec3(0.0f));
-							_fe3d.modelEntity_setPartRotationOrigin(_activeModelID, partID, Vec3(0.0f));
-							_fe3d.modelEntity_setPartRotation(_activeModelID, partID, Vec3(0.0f));
-							_fe3d.modelEntity_setPartSize(_activeModelID, partID, Vec3(1.0f));
+							_fe3d.model_setPartPosition(_activeModelID, partID, Vec3(0.0f));
+							_fe3d.model_setPartRotationOrigin(_activeModelID, partID, Vec3(0.0f));
+							_fe3d.model_setPartRotation(_activeModelID, partID, Vec3(0.0f));
+							_fe3d.model_setPartSize(_activeModelID, partID, Vec3(1.0f));
 						}
 					}
 
@@ -275,26 +275,26 @@ void WorldEditor::_updateModelEditing()
 				{
 					// Update position
 					_initialModelPosition[_activeModelID] = position;
-					_fe3d.modelEntity_setBasePosition(_activeModelID, position);
+					_fe3d.model_setBasePosition(_activeModelID, position);
 
 					// Update rotation
 					_initialModelRotation[_activeModelID] = rotation;
-					_fe3d.modelEntity_setBaseRotation(_activeModelID, rotation);
+					_fe3d.model_setBaseRotation(_activeModelID, rotation);
 
 					// Update size
 					_initialModelSize[_activeModelID] = size;
-					_fe3d.modelEntity_setBaseSize(_activeModelID, size);
+					_fe3d.model_setBaseSize(_activeModelID, size);
 				}
 			}
 
 			// Update button text contents
-			screen->getButton("freeze")->changeTextContent(_fe3d.modelEntity_isStaticToCamera(_activeModelID) ? "Unfreeze" : "Freeze");
+			screen->getButton("freeze")->changeTextContent(_fe3d.model_isStaticToCamera(_activeModelID) ? "Unfreeze" : "Freeze");
 		}
 
 		// Check if model is still selected or active
 		if(_selectedModelID.empty() && _activeModelID.empty())
 		{
-			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
+			_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
 		}
 	}
 }

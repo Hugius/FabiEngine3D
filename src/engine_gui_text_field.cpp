@@ -10,49 +10,49 @@ EngineGuiTextField::EngineGuiTextField(FabiEngine3D& fe3d, const string& parentI
 	_initialSize(size),
 	_initialColor(color)
 {
-	_fe3d.textEntity_create(_entityID, isCentered, isDynamic);
-	_fe3d.textEntity_setPosition(_entityID, position);
-	_fe3d.textEntity_setSize(_entityID, size);
-	_fe3d.textEntity_setColor(_entityID, color);
-	_fe3d.textEntity_setFont(_entityID, "engine\\assets\\fonts\\font.ttf");
-	_fe3d.textEntity_setTextContent(_entityID, textContent);
+	_fe3d.text_create(_entityID, isCentered, isDynamic);
+	_fe3d.text_setPosition(_entityID, position);
+	_fe3d.text_setSize(_entityID, size);
+	_fe3d.text_setColor(_entityID, color);
+	_fe3d.text_setFont(_entityID, "engine\\assets\\fonts\\font.ttf");
+	_fe3d.text_setTextContent(_entityID, textContent);
 }
 
 EngineGuiTextField::~EngineGuiTextField()
 {
-	_fe3d.textEntity_delete(_entityID);
+	_fe3d.text_delete(_entityID);
 }
 
 void EngineGuiTextField::setVisible(bool isVisible)
 {
-	_fe3d.textEntity_setVisible(_entityID, isVisible);
+	_fe3d.text_setVisible(_entityID, isVisible);
 }
 
 void EngineGuiTextField::changeTextContent(const string& content)
 {
 	// Check if text content changed
-	if(content != _fe3d.textEntity_getTextContent(_entityID))
+	if(content != _fe3d.text_getTextContent(_entityID))
 	{
-		auto charWidth = (_initialSize.x / static_cast<float>(_fe3d.textEntity_getTextContent(_entityID).size()));
+		auto charWidth = (_initialSize.x / static_cast<float>(_fe3d.text_getTextContent(_entityID).size()));
 		auto charHeight = _initialSize.y;
-		_fe3d.textEntity_setTextContent(_entityID, content, charWidth, charHeight);
+		_fe3d.text_setTextContent(_entityID, content, charWidth, charHeight);
 		updateInitialSize();
 	}
 }
 
 void EngineGuiTextField::updateInitialPosition()
 {
-	_initialPosition = _fe3d.textEntity_getPosition(_entityID);
+	_initialPosition = _fe3d.text_getPosition(_entityID);
 }
 
 void EngineGuiTextField::updateInitialSize()
 {
-	_initialSize = _fe3d.textEntity_getSize(_entityID);
+	_initialSize = _fe3d.text_getSize(_entityID);
 }
 
 void EngineGuiTextField::updateInitialColor()
 {
-	_initialColor = _fe3d.textEntity_getColor(_entityID);
+	_initialColor = _fe3d.text_getColor(_entityID);
 }
 
 const Vec2 EngineGuiTextField::getInitialPosition() const

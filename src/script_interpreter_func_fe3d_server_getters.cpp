@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& fun
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.networkServer_isRunning();
+			auto result = _fe3d.server_isRunning();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
@@ -21,7 +21,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& fun
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			auto result = _fe3d.networkServer_isClientConnected(arguments[0].getString());
+			auto result = _fe3d.server_isClientConnected(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
@@ -30,7 +30,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& fun
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto IP = _fe3d.networkServer_getNewClientIP();
+			auto IP = _fe3d.server_getNewClientIP();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, IP));
 		}
 	}
@@ -39,7 +39,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& fun
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto username = _fe3d.networkServer_getNewClientUsername();
+			auto username = _fe3d.server_getNewClientUsername();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, username));
 		}
 	}
@@ -48,7 +48,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& fun
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto IP = _fe3d.networkServer_getOldClientIP();
+			auto IP = _fe3d.server_getOldClientIP();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, IP));
 		}
 	}
@@ -57,7 +57,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& fun
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto username = _fe3d.networkServer_getOldClientUsername();
+			auto username = _fe3d.server_getOldClientUsername();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, username));
 		}
 	}
@@ -66,7 +66,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& fun
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto IPs = _fe3d.networkServer_getClientIPs();
+			auto IPs = _fe3d.server_getClientIPs();
 			for(const auto& IP : IPs)
 			{
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, IP));
@@ -78,7 +78,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& fun
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto usernames = _fe3d.networkServer_getClientUsernames();
+			auto usernames = _fe3d.server_getClientUsernames();
 			for(const auto& username : usernames)
 			{
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, username));
@@ -90,7 +90,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& fun
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			const auto& messages = _fe3d.networkServer_getPendingMessages();
+			const auto& messages = _fe3d.server_getPendingMessages();
 			for(const auto& message : messages)
 			{
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, string((message.getProtocol() == NetworkProtocol::TCP) ? "TCP" : "UDP")));
@@ -102,7 +102,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& fun
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			const auto& messages = _fe3d.networkServer_getPendingMessages();
+			const auto& messages = _fe3d.server_getPendingMessages();
 			for(const auto& message : messages)
 			{
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, message.getUsername()));
@@ -114,7 +114,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& fun
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			const auto& messages = _fe3d.networkServer_getPendingMessages();
+			const auto& messages = _fe3d.server_getPendingMessages();
 			for(const auto& message : messages)
 			{
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, message.getContent()));
@@ -127,7 +127,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& fun
 	}
 
 	// Cannot execute server functionality when client is running
-	if(_fe3d.networkClient_isRunning())
+	if(_fe3d.client_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:server` functionality as a networking client!");
 	}

@@ -117,14 +117,14 @@ void BillboardEditor::_updateChoiceMenu()
 	if(screen->getID() == "billboardEditorMenuChoice")
 	{
 		// Temporary values
-		auto size = _fe3d.billboardEntity_getSize(_currentBillboardID);
+		auto size = _fe3d.billboard_getSize(_currentBillboardID);
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			_fe3d.billboardEntity_setWireframed(_currentBillboardID, false);
-			_fe3d.billboardEntity_setVisible(_currentBillboardID, false);
-			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
+			_fe3d.billboard_setWireframed(_currentBillboardID, false);
+			_fe3d.billboard_setVisible(_currentBillboardID, false);
+			_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
 			_currentBillboardID = "";
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuMain");
 			return;
@@ -155,16 +155,16 @@ void BillboardEditor::_updateChoiceMenu()
 		if(_gui.getGlobalScreen()->checkValueForm("sizeX", size.x, { 0.0f }))
 		{
 			size.x /= 100.0f;
-			_fe3d.billboardEntity_setSize(_currentBillboardID, size);
+			_fe3d.billboard_setSize(_currentBillboardID, size);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("sizeY", size.y, { 0.0f }))
 		{
 			size.y /= 100.0f;
-			_fe3d.billboardEntity_setSize(_currentBillboardID, size);
+			_fe3d.billboard_setSize(_currentBillboardID, size);
 		}
 
 		// Update buttons hoverability
-		screen->getButton("animation")->setHoverable(_fe3d.billboardEntity_hasDiffuseMap(_currentBillboardID) && !_fe3d.billboardEntity_isText(_currentBillboardID));
+		screen->getButton("animation")->setHoverable(_fe3d.billboard_hasDiffuseMap(_currentBillboardID) && !_fe3d.billboard_isText(_currentBillboardID));
 	}
 }
 
@@ -190,10 +190,10 @@ void BillboardEditor::_updateBillboardCreating()
 					if(find(_loadedBillboardIDs.begin(), _loadedBillboardIDs.end(), newBillboardID) == _loadedBillboardIDs.end())
 					{
 						// Create billboard
-						_fe3d.billboardEntity_create(newBillboardID);
+						_fe3d.billboard_create(newBillboardID);
 
 						// Check if billboard creation went well
-						if(_fe3d.billboardEntity_isExisting(newBillboardID))
+						if(_fe3d.billboard_isExisting(newBillboardID))
 						{
 							// Go to next screen
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
@@ -203,8 +203,8 @@ void BillboardEditor::_updateBillboardCreating()
 							_loadedBillboardIDs.push_back(newBillboardID);
 
 							// Miscellaneous
-							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), "Billboard: " + newBillboardID.substr(1), 0.025f);
-							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), true);
+							_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), "Billboard: " + newBillboardID.substr(1), 0.025f);
+							_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), true);
 							_isCreatingBillboard = false;
 						}
 					}
@@ -236,7 +236,7 @@ void BillboardEditor::_updateBillboardChoosing()
 		// Hide last billboard
 		if(_hoveredBillboardID != "")
 		{
-			_fe3d.billboardEntity_setVisible(_hoveredBillboardID, false);
+			_fe3d.billboard_setVisible(_hoveredBillboardID, false);
 		}
 
 		// Check if a billboard ID is hovered
@@ -256,12 +256,12 @@ void BillboardEditor::_updateBillboardChoosing()
 				if(!_isDeletingBillboard)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
-					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), "Billboard: " + _currentBillboardID.substr(1), 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), true);
+					_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), "Billboard: " + _currentBillboardID.substr(1), 0.025f);
+					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), true);
 				}
 
 				// Miscellaneous
-				_fe3d.billboardEntity_setVisible(_currentBillboardID, true);
+				_fe3d.billboard_setVisible(_currentBillboardID, true);
 				_gui.getGlobalScreen()->deleteChoiceForm("billboardList");
 				_isChoosingBillboard = false;
 			}
@@ -285,7 +285,7 @@ void BillboardEditor::_updateBillboardChoosing()
 		// Show hovered billboard
 		if(_hoveredBillboardID != "")
 		{
-			_fe3d.billboardEntity_setVisible(_hoveredBillboardID, true);
+			_fe3d.billboard_setVisible(_hoveredBillboardID, true);
 		}
 	}
 }
@@ -307,7 +307,7 @@ void BillboardEditor::_updateBillboardDeleting()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuMain");
 
 			// Delete billboard
-			_fe3d.billboardEntity_delete(_currentBillboardID);
+			_fe3d.billboard_delete(_currentBillboardID);
 			_loadedBillboardIDs.erase(remove(_loadedBillboardIDs.begin(), _loadedBillboardIDs.end(), _currentBillboardID), _loadedBillboardIDs.end());
 			_currentBillboardID = "";
 
@@ -316,7 +316,7 @@ void BillboardEditor::_updateBillboardDeleting()
 		}
 		if(_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 		{
-			_fe3d.billboardEntity_setVisible(_currentBillboardID, false);
+			_fe3d.billboard_setVisible(_currentBillboardID, false);
 			_isDeletingBillboard = false;
 			_currentBillboardID = "";
 		}

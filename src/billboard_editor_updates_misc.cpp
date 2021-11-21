@@ -27,7 +27,7 @@ void BillboardEditor::_updateCamera()
 		_fe3d.camera_setThirdPersonLookat(cameraLookat);
 
 		// Hide cursor
-		_fe3d.imageEntity_setVisible("@@cursor", false);
+		_fe3d.image_setVisible("@@cursor", false);
 
 		// Update shadows
 		const auto distance = _fe3d.camera_getThirdPersonDistance();
@@ -73,28 +73,28 @@ void BillboardEditor::_updateMiscellaneous()
 		// Update reference model visibility
 		if(_fe3d.input_isKeyPressed(InputType::KEY_R))
 		{
-			if(_fe3d.modelEntity_isVisible("@@cube"))
+			if(_fe3d.model_isVisible("@@cube"))
 			{
-				_fe3d.modelEntity_setVisible("@@cube", false);
+				_fe3d.model_setVisible("@@cube", false);
 			}
 			else
 			{
-				_fe3d.modelEntity_setVisible("@@cube", true);
+				_fe3d.model_setVisible("@@cube", true);
 			}
 		}
 
 		// Update wireframe rendering
-		if(_fe3d.billboardEntity_isExisting(_currentBillboardID))
+		if(_fe3d.billboard_isExisting(_currentBillboardID))
 		{
 			if(_fe3d.input_isKeyPressed(InputType::KEY_F))
 			{
-				if(_fe3d.billboardEntity_isWireframed(_currentBillboardID))
+				if(_fe3d.billboard_isWireframed(_currentBillboardID))
 				{
-					_fe3d.billboardEntity_setWireframed(_currentBillboardID, false);
+					_fe3d.billboard_setWireframed(_currentBillboardID, false);
 				}
 				else
 				{
-					_fe3d.billboardEntity_setWireframed(_currentBillboardID, true);
+					_fe3d.billboard_setWireframed(_currentBillboardID, true);
 				}
 			}
 		}

@@ -46,8 +46,8 @@ void SkyEditor::_updateTexturingMenu()
 
 			// Set diffuse map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache3D(_fe3d.skyEntity_getCubeMapPaths(_currentSkyID));
-			_fe3d.skyEntity_setCubeMapRight(_currentSkyID, finalFilePath);
+			_fe3d.misc_clearTextureCache3D(_fe3d.sky_getCubeMapPaths(_currentSkyID));
+			_fe3d.sky_setCubeMapRight(_currentSkyID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("leftMap")->isHovered())
 		{
@@ -79,8 +79,8 @@ void SkyEditor::_updateTexturingMenu()
 
 			// Set diffuse map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache3D(_fe3d.skyEntity_getCubeMapPaths(_currentSkyID));
-			_fe3d.skyEntity_setCubeMapLeft(_currentSkyID, finalFilePath);
+			_fe3d.misc_clearTextureCache3D(_fe3d.sky_getCubeMapPaths(_currentSkyID));
+			_fe3d.sky_setCubeMapLeft(_currentSkyID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("topMap")->isHovered())
 		{
@@ -112,8 +112,8 @@ void SkyEditor::_updateTexturingMenu()
 
 			// Set diffuse map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache3D(_fe3d.skyEntity_getCubeMapPaths(_currentSkyID));
-			_fe3d.skyEntity_setCubeMapTop(_currentSkyID, finalFilePath);
+			_fe3d.misc_clearTextureCache3D(_fe3d.sky_getCubeMapPaths(_currentSkyID));
+			_fe3d.sky_setCubeMapTop(_currentSkyID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("bottomMap")->isHovered())
 		{
@@ -145,8 +145,8 @@ void SkyEditor::_updateTexturingMenu()
 
 			// Set diffuse map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache3D(_fe3d.skyEntity_getCubeMapPaths(_currentSkyID));
-			_fe3d.skyEntity_setCubeMapBottom(_currentSkyID, finalFilePath);
+			_fe3d.misc_clearTextureCache3D(_fe3d.sky_getCubeMapPaths(_currentSkyID));
+			_fe3d.sky_setCubeMapBottom(_currentSkyID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("frontMap")->isHovered())
 		{
@@ -178,8 +178,8 @@ void SkyEditor::_updateTexturingMenu()
 
 			// Set diffuse map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache3D(_fe3d.skyEntity_getCubeMapPaths(_currentSkyID));
-			_fe3d.skyEntity_setCubeMapFront(_currentSkyID, finalFilePath);
+			_fe3d.misc_clearTextureCache3D(_fe3d.sky_getCubeMapPaths(_currentSkyID));
+			_fe3d.sky_setCubeMapFront(_currentSkyID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("backMap")->isHovered())
 		{
@@ -211,21 +211,21 @@ void SkyEditor::_updateTexturingMenu()
 
 			// Set diffuse map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache3D(_fe3d.skyEntity_getCubeMapPaths(_currentSkyID));
-			_fe3d.skyEntity_setCubeMapBack(_currentSkyID, finalFilePath);
+			_fe3d.misc_clearTextureCache3D(_fe3d.sky_getCubeMapPaths(_currentSkyID));
+			_fe3d.sky_setCubeMapBack(_currentSkyID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
-			_fe3d.skyEntity_setCubeMaps(_currentSkyID, { "","","","","","" });
+			_fe3d.sky_setCubeMaps(_currentSkyID, { "","","","","","" });
 		}
 
 		// Update buttons hoverability
 		screen->getButton("clearMaps")->setHoverable(
-			_fe3d.skyEntity_hasCubeMapRight(_currentSkyID) ||
-			_fe3d.skyEntity_hasCubeMapLeft(_currentSkyID) ||
-			_fe3d.skyEntity_hasCubeMapTop(_currentSkyID) ||
-			_fe3d.skyEntity_hasCubeMapBottom(_currentSkyID) ||
-			_fe3d.skyEntity_hasCubeMapFront(_currentSkyID) ||
-			_fe3d.skyEntity_hasCubeMapBack(_currentSkyID));
+			_fe3d.sky_hasCubeMapRight(_currentSkyID) ||
+			_fe3d.sky_hasCubeMapLeft(_currentSkyID) ||
+			_fe3d.sky_hasCubeMapTop(_currentSkyID) ||
+			_fe3d.sky_hasCubeMapBottom(_currentSkyID) ||
+			_fe3d.sky_hasCubeMapFront(_currentSkyID) ||
+			_fe3d.sky_hasCubeMapBack(_currentSkyID));
 	}
 }

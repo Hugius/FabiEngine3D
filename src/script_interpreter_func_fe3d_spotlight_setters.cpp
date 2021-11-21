@@ -23,21 +23,21 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 			}
 
 			// Check if spotlight entity already exists
-			if(_fe3d.spotlightEntity_isExisting(ID))
+			if(_fe3d.spotlight_isExisting(ID))
 			{
 				_throwScriptError("spotlight with ID \"" + ID + "\" already exists!");
 				return true;
 			}
 
 			// Create spotlight
-			_fe3d.spotlightEntity_create(ID);
-			_fe3d.spotlightEntity_setPosition(ID, Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-			_fe3d.spotlightEntity_setColor(ID, Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()));
-			_fe3d.spotlightEntity_setYaw(ID, arguments[7].getDecimal());
-			_fe3d.spotlightEntity_setPitch(ID, arguments[8].getDecimal());
-			_fe3d.spotlightEntity_setIntensity(ID, arguments[9].getDecimal());
-			_fe3d.spotlightEntity_setAngle(ID, arguments[10].getDecimal());
-			_fe3d.spotlightEntity_setDistance(ID, arguments[11].getDecimal());
+			_fe3d.spotlight_create(ID);
+			_fe3d.spotlight_setPosition(ID, Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+			_fe3d.spotlight_setColor(ID, Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()));
+			_fe3d.spotlight_setYaw(ID, arguments[7].getDecimal());
+			_fe3d.spotlight_setPitch(ID, arguments[8].getDecimal());
+			_fe3d.spotlight_setIntensity(ID, arguments[9].getDecimal());
+			_fe3d.spotlight_setAngle(ID, arguments[10].getDecimal());
+			_fe3d.spotlight_setDistance(ID, arguments[11].getDecimal());
 
 			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -53,7 +53,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
-				_fe3d.spotlightEntity_delete(arguments[0].getString());
+				_fe3d.spotlight_delete(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -68,7 +68,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
-				_fe3d.spotlightEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
+				_fe3d.spotlight_setVisible(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -83,7 +83,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
-				_fe3d.spotlightEntity_setPosition(arguments[0].getString(),
+				_fe3d.spotlight_setPosition(arguments[0].getString(),
 												  Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -99,7 +99,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
-				_fe3d.spotlightEntity_move(arguments[0].getString(),
+				_fe3d.spotlight_move(arguments[0].getString(),
 										   Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -115,7 +115,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
-				_fe3d.spotlightEntity_moveTo(arguments[0].getString(),
+				_fe3d.spotlight_moveTo(arguments[0].getString(),
 											 Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -131,7 +131,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
-				_fe3d.spotlightEntity_setColor(arguments[0].getString(),
+				_fe3d.spotlight_setColor(arguments[0].getString(),
 											   Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -147,7 +147,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
-				_fe3d.spotlightEntity_setYaw(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.spotlight_setYaw(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -162,7 +162,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
-				_fe3d.spotlightEntity_setPitch(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.spotlight_setPitch(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -177,7 +177,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
-				_fe3d.spotlightEntity_setIntensity(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.spotlight_setIntensity(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -192,7 +192,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
-				_fe3d.spotlightEntity_setAngle(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.spotlight_setAngle(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -207,7 +207,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
-				_fe3d.spotlightEntity_setDistance(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.spotlight_setDistance(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -218,7 +218,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 	}
 
 	// Cannot execute spotlight functionality when server is running
-	if(_fe3d.networkServer_isRunning())
+	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:spotlight` functionality as a networking server!");
 	}

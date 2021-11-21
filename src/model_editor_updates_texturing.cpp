@@ -13,13 +13,13 @@ void ModelEditor::_updateTexturingMenu()
 	if(screen->getID() == "modelEditorMenuTexturing")
 	{
 		// Temporary values
-		auto textureRepeat = _fe3d.modelEntity_getTextureRepeat(_currentModelID, _currentPartID);
+		auto textureRepeat = _fe3d.model_getTextureRepeat(_currentModelID, _currentPartID);
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			_currentPartID = "";
-			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("partID")->getEntityID(), false);
+			_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("partID")->getEntityID(), false);
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			return;
 		}
@@ -54,7 +54,7 @@ void ModelEditor::_updateTexturingMenu()
 			// Set diffuse map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clearTextureCache2D(finalFilePath);
-			_fe3d.modelEntity_setDiffuseMap(_currentModelID, _currentPartID, finalFilePath);
+			_fe3d.model_setDiffuseMap(_currentModelID, _currentPartID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
 		{
@@ -87,7 +87,7 @@ void ModelEditor::_updateTexturingMenu()
 			// Set emission map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clearTextureCache2D(finalFilePath);
-			_fe3d.modelEntity_setEmissionMap(_currentModelID, _currentPartID, finalFilePath);
+			_fe3d.model_setEmissionMap(_currentModelID, _currentPartID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularMap")->isHovered())
 		{
@@ -120,7 +120,7 @@ void ModelEditor::_updateTexturingMenu()
 			// Set specular map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clearTextureCache2D(finalFilePath);
-			_fe3d.modelEntity_setSpecularMap(_currentModelID, _currentPartID, finalFilePath);
+			_fe3d.model_setSpecularMap(_currentModelID, _currentPartID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectionMap")->isHovered())
 		{
@@ -153,7 +153,7 @@ void ModelEditor::_updateTexturingMenu()
 			// Set reflection map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clearTextureCache2D(finalFilePath);
-			_fe3d.modelEntity_setReflectionMap(_currentModelID, _currentPartID, finalFilePath);
+			_fe3d.model_setReflectionMap(_currentModelID, _currentPartID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
 		{
@@ -186,15 +186,15 @@ void ModelEditor::_updateTexturingMenu()
 			// Set normal map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clearTextureCache2D(finalFilePath);
-			_fe3d.modelEntity_setNormalMap(_currentModelID, _currentPartID, finalFilePath);
+			_fe3d.model_setNormalMap(_currentModelID, _currentPartID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
-			_fe3d.modelEntity_setDiffuseMap(_currentModelID, _currentPartID, "");
-			_fe3d.modelEntity_setEmissionMap(_currentModelID, _currentPartID, "");
-			_fe3d.modelEntity_setSpecularMap(_currentModelID, _currentPartID, "");
-			_fe3d.modelEntity_setReflectionMap(_currentModelID, _currentPartID, "");
-			_fe3d.modelEntity_setNormalMap(_currentModelID, _currentPartID, "");
+			_fe3d.model_setDiffuseMap(_currentModelID, _currentPartID, "");
+			_fe3d.model_setEmissionMap(_currentModelID, _currentPartID, "");
+			_fe3d.model_setSpecularMap(_currentModelID, _currentPartID, "");
+			_fe3d.model_setReflectionMap(_currentModelID, _currentPartID, "");
+			_fe3d.model_setNormalMap(_currentModelID, _currentPartID, "");
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
@@ -204,7 +204,7 @@ void ModelEditor::_updateTexturingMenu()
 		// Update value forms
 		if(_gui.getGlobalScreen()->checkValueForm("textureRepeat", textureRepeat, {}))
 		{
-			_fe3d.modelEntity_setTextureRepeat(_currentModelID, _currentPartID, textureRepeat);
+			_fe3d.model_setTextureRepeat(_currentModelID, _currentPartID, textureRepeat);
 		}
 	}
 }

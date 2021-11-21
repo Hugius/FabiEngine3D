@@ -20,7 +20,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 			}
 
 			// Check if existing
-			auto result = _fe3d.spotlightEntity_isExisting(arguments[0].getString());
+			auto result = _fe3d.spotlight_isExisting(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
@@ -39,7 +39,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 			}
 
 			// Find full entity IDs based on part ID
-			for(const auto& ID : _fe3d.spotlightEntity_getAllIDs())
+			for(const auto& ID : _fe3d.spotlight_getAllIDs())
 			{
 				// If substring matches
 				if(arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -58,7 +58,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.spotlightEntity_getAllIDs();
+			auto result = _fe3d.spotlight_getAllIDs();
 
 			// For every spotlight
 			for(const auto& ID : result)
@@ -81,7 +81,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
-				auto result = _fe3d.spotlightEntity_isVisible(arguments[0].getString());
+				auto result = _fe3d.spotlight_isVisible(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -96,7 +96,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
-				auto result = _fe3d.spotlightEntity_getPosition(arguments[0].getString());
+				auto result = _fe3d.spotlight_getPosition(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
@@ -111,7 +111,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
-				auto result = _fe3d.spotlightEntity_getColor(arguments[0].getString());
+				auto result = _fe3d.spotlight_getColor(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
@@ -126,7 +126,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
-				auto result = _fe3d.spotlightEntity_getYaw(arguments[0].getString());
+				auto result = _fe3d.spotlight_getYaw(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -141,7 +141,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
-				auto result = _fe3d.spotlightEntity_getPitch(arguments[0].getString());
+				auto result = _fe3d.spotlight_getPitch(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -156,7 +156,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
-				auto result = _fe3d.spotlightEntity_getIntensity(arguments[0].getString());
+				auto result = _fe3d.spotlight_getIntensity(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -171,7 +171,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
-				auto result = _fe3d.spotlightEntity_getAngle(arguments[0].getString());
+				auto result = _fe3d.spotlight_getAngle(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -186,7 +186,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
-				auto result = _fe3d.spotlightEntity_getDistance(arguments[0].getString());
+				auto result = _fe3d.spotlight_getDistance(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -197,7 +197,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 	}
 
 	// Cannot execute spotlight functionality when server is running
-	if(_fe3d.networkServer_isRunning())
+	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:spotlight` functionality as a networking server!");
 	}

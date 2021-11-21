@@ -55,7 +55,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetterFunction(const string& f
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.billboardEntity_getSize("@@directionalLightSource").x;
+			auto result = _fe3d.billboard_getSize("@@directionalLightSource").x;
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
@@ -65,7 +65,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetterFunction(const string& f
 	}
 
 	// Cannot execute lighting functionality when server is running
-	if(_fe3d.networkServer_isRunning())
+	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:lighting` functionality as a networking server!");
 	}

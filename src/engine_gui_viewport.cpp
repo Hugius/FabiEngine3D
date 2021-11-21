@@ -8,15 +8,15 @@ EngineGuiViewport::EngineGuiViewport(FabiEngine3D& fe3d, const string& ID, Vec2 
 	_ID(ID),
 	_entityID("@" + ID)
 {
-	_fe3d.imageEntity_create(_entityID, true);
-	_fe3d.imageEntity_setPosition(_entityID, position);
-	_fe3d.imageEntity_setSize(_entityID, size);
-	_fe3d.imageEntity_setColor(_entityID, color);
+	_fe3d.image_create(_entityID, true);
+	_fe3d.image_setPosition(_entityID, position);
+	_fe3d.image_setSize(_entityID, size);
+	_fe3d.image_setColor(_entityID, color);
 }
 
 EngineGuiViewport::~EngineGuiViewport()
 {
-	_fe3d.imageEntity_delete(_entityID);
+	_fe3d.image_delete(_entityID);
 }
 
 void EngineGuiViewport::update(bool hoverable)
@@ -30,12 +30,12 @@ void EngineGuiViewport::update(bool hoverable)
 const bool EngineGuiViewport::isHovered() const
 {
 	// Check if entity is visible anyway
-	if(_fe3d.imageEntity_isVisible(_entityID))
+	if(_fe3d.image_isVisible(_entityID))
 	{
 		// Convert dimensions to same space
 		Vec2 cursorPosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
-		Vec2 buttonPosition = _fe3d.imageEntity_getPosition(_entityID);
-		Vec2 buttonSize = _fe3d.imageEntity_getSize(_entityID);
+		Vec2 buttonPosition = _fe3d.image_getPosition(_entityID);
+		Vec2 buttonSize = _fe3d.image_getSize(_entityID);
 
 		// Check if cursor inside entity
 		if(cursorPosition.x > buttonPosition.x - (buttonSize.x / 2.0f) && cursorPosition.x < buttonPosition.x + (buttonSize.x / 2.0f)) // X axis
@@ -62,8 +62,8 @@ const string& EngineGuiViewport::getEntityID()
 
 void EngineGuiViewport::createWindow(const string& ID, Vec2 position, Vec2 size, Vec3 color)
 {
-	Vec2 viewportPosition = _fe3d.imageEntity_getPosition(_entityID);
-	Vec2 viewportSize = _fe3d.imageEntity_getSize(_entityID);
+	Vec2 viewportPosition = _fe3d.image_getPosition(_entityID);
+	Vec2 viewportSize = _fe3d.image_getSize(_entityID);
 	Vec2 windowPosition = viewportPosition + (position * viewportSize);
 	Vec2 windowSize = (size / 2.0f) * viewportSize;
 

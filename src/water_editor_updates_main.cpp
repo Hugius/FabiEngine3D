@@ -113,15 +113,15 @@ void WaterEditor::_updateChoiceMenu()
 	if(screen->getID() == "waterEditorMenuChoice")
 	{
 		// Temporary values
-		float size = _fe3d.waterEntity_getSize(_currentWaterID);
+		float size = _fe3d.water_getSize(_currentWaterID);
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMain");
-			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("waterID")->getEntityID(), false);
-			_fe3d.waterEntity_setWireframed(_currentWaterID, false);
-			_fe3d.waterEntity_select("");
+			_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("waterID")->getEntityID(), false);
+			_fe3d.water_setWireframed(_currentWaterID, false);
+			_fe3d.water_select("");
 			_currentWaterID = "";
 			return;
 		}
@@ -145,12 +145,12 @@ void WaterEditor::_updateChoiceMenu()
 		// Update value forms
 		if(_gui.getGlobalScreen()->checkValueForm("size", size, { 0.0f }))
 		{
-			_fe3d.waterEntity_setSize(_currentWaterID, size);
+			_fe3d.water_setSize(_currentWaterID, size);
 		}
 
 		// Update buttons hoverability
-		screen->getButton("lighting")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
-		screen->getButton("miscellaneous")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
+		screen->getButton("lighting")->setHoverable(_fe3d.water_isExisting(_currentWaterID));
+		screen->getButton("miscellaneous")->setHoverable(_fe3d.water_isExisting(_currentWaterID));
 	}
 }
 
@@ -176,10 +176,10 @@ void WaterEditor::_updateWaterCreating()
 					if(find(_loadedWaterIDs.begin(), _loadedWaterIDs.end(), newWaterID) == _loadedWaterIDs.end())
 					{
 						// Create water
-						_fe3d.waterEntity_create(newWaterID);
+						_fe3d.water_create(newWaterID);
 
 						// Check if water creation went well
-						if(_fe3d.waterEntity_isExisting(newWaterID))
+						if(_fe3d.water_isExisting(newWaterID))
 						{
 							// Go to next screen
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
@@ -187,11 +187,11 @@ void WaterEditor::_updateWaterCreating()
 							// Select water
 							_currentWaterID = newWaterID;
 							_loadedWaterIDs.push_back(newWaterID);
-							_fe3d.waterEntity_select(newWaterID);
+							_fe3d.water_select(newWaterID);
 
 							// Miscellaneous
-							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("waterID")->getEntityID(), "Water: " + newWaterID.substr(1), 0.025f);
-							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("waterID")->getEntityID(), true);
+							_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("waterID")->getEntityID(), "Water: " + newWaterID.substr(1), 0.025f);
+							_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("waterID")->getEntityID(), true);
 							_isCreatingWater = false;
 						}
 					}
@@ -221,13 +221,13 @@ void WaterEditor::_updateWaterChoosing()
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("waterList");
 
 		// Hide last water
-		_fe3d.waterEntity_select("");
+		_fe3d.water_select("");
 
 		// Check if a water ID is hovered
 		if(!selectedButtonID.empty())
 		{
 			// Show water
-			_fe3d.waterEntity_select("@" + selectedButtonID);
+			_fe3d.water_select("@" + selectedButtonID);
 
 			// Check if LMB is pressed
 			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -239,8 +239,8 @@ void WaterEditor::_updateWaterChoosing()
 				if(!_isDeletingWater)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
-					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("waterID")->getEntityID(), "Water: " + _currentWaterID.substr(1), 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("waterID")->getEntityID(), true);
+					_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("waterID")->getEntityID(), "Water: " + _currentWaterID.substr(1), 0.025f);
+					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("waterID")->getEntityID(), true);
 				}
 
 				// Miscellaneous
@@ -271,7 +271,7 @@ void WaterEditor::_updateWaterDeleting()
 		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 		{
 			// Delete entity
-			_fe3d.waterEntity_delete(_currentWaterID);
+			_fe3d.water_delete(_currentWaterID);
 
 			// Delete from ID record
 			_loadedWaterIDs.erase(remove(_loadedWaterIDs.begin(), _loadedWaterIDs.end(), _currentWaterID), _loadedWaterIDs.end());
@@ -280,7 +280,7 @@ void WaterEditor::_updateWaterDeleting()
 		}
 		if(_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 		{
-			_fe3d.waterEntity_select("");
+			_fe3d.water_select("");
 			_isDeletingWater = false;
 			_currentWaterID = "";
 		}

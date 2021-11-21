@@ -28,22 +28,22 @@ const bool WaterEditor::saveWaterEntitiesToFile() const
 	for(const auto& waterID : _loadedWaterIDs)
 	{
 		// Values
-		auto dudvMapPath = _fe3d.waterEntity_getDudvMapPath(waterID);
-		auto normalMapPath = _fe3d.waterEntity_getNormalMapPath(waterID);
-		auto displacementMapPath = _fe3d.waterEntity_getDisplacementMapPath(waterID);
-		auto color = _fe3d.waterEntity_getColor(waterID);
-		auto height = _fe3d.waterEntity_getHeight(waterID);
-		auto speed = _fe3d.waterEntity_getSpeed(waterID);
-		auto size = _fe3d.waterEntity_getSize(waterID);
-		auto textureRepeat = _fe3d.waterEntity_getTextureRepeat(waterID);
-		auto waveHeight = _fe3d.waterEntity_getWaveHeight(waterID);
-		auto transparency = _fe3d.waterEntity_getTransparency(waterID);
-		auto specularShininess = _fe3d.waterEntity_getSpecularShininess(waterID);
-		auto specularIntensity = _fe3d.waterEntity_getSpecularIntensity(waterID);
-		auto quality = static_cast<unsigned int>(_fe3d.waterEntity_getQuality(waterID));
-		auto isSpecular = _fe3d.waterEntity_isSpecular(waterID);
-		auto isReflective = _fe3d.waterEntity_isReflective(waterID);
-		auto isRefractive = _fe3d.waterEntity_isRefractive(waterID);
+		auto dudvMapPath = _fe3d.water_getDudvMapPath(waterID);
+		auto normalMapPath = _fe3d.water_getNormalMapPath(waterID);
+		auto displacementMapPath = _fe3d.water_getDisplacementMapPath(waterID);
+		auto color = _fe3d.water_getColor(waterID);
+		auto height = _fe3d.water_getHeight(waterID);
+		auto speed = _fe3d.water_getSpeed(waterID);
+		auto size = _fe3d.water_getSize(waterID);
+		auto textureRepeat = _fe3d.water_getTextureRepeat(waterID);
+		auto waveHeight = _fe3d.water_getWaveHeight(waterID);
+		auto transparency = _fe3d.water_getTransparency(waterID);
+		auto specularShininess = _fe3d.water_getSpecularShininess(waterID);
+		auto specularIntensity = _fe3d.water_getSpecularIntensity(waterID);
+		auto quality = static_cast<unsigned int>(_fe3d.water_getQuality(waterID));
+		auto isSpecular = _fe3d.water_isSpecular(waterID);
+		auto isReflective = _fe3d.water_isReflective(waterID);
+		auto isRefractive = _fe3d.water_isRefractive(waterID);
 
 		// Convert to short path
 		dudvMapPath = string(dudvMapPath.empty() ? "" : dudvMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));

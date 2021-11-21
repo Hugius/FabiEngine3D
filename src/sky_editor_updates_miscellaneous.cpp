@@ -9,9 +9,9 @@ void SkyEditor::_updateMiscellaneousMenu()
 	if(screen->getID() == "skyEditorMenuMiscellaneous")
 	{
 		// Temporary values
-		float rotation = _fe3d.skyEntity_getRotation(_currentSkyID);
-		float lightness = _fe3d.skyEntity_getLightness(_currentSkyID);
-		Vec3 color = _fe3d.skyEntity_getColor(_currentSkyID);
+		float rotation = _fe3d.sky_getRotation(_currentSkyID);
+		float lightness = _fe3d.sky_getLightness(_currentSkyID);
+		Vec3 color = _fe3d.sky_getColor(_currentSkyID);
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -37,27 +37,27 @@ void SkyEditor::_updateMiscellaneousMenu()
 		// Update value forms
 		if(_gui.getGlobalScreen()->checkValueForm("rotation", rotation))
 		{
-			_fe3d.skyEntity_setRotation(_currentSkyID, rotation);
+			_fe3d.sky_setRotation(_currentSkyID, rotation);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
 		{
 			lightness /= 100.0f;
-			_fe3d.skyEntity_setLightness(_currentSkyID, lightness);
+			_fe3d.sky_setLightness(_currentSkyID, lightness);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("colorR", color.r))
 		{
 			color.r /= 255.0f;
-			_fe3d.skyEntity_setColor(_currentSkyID, color);
+			_fe3d.sky_setColor(_currentSkyID, color);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("colorG", color.g))
 		{
 			color.g /= 255.0f;
-			_fe3d.skyEntity_setColor(_currentSkyID, color);
+			_fe3d.sky_setColor(_currentSkyID, color);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("colorB", color.b))
 		{
 			color.b /= 255.0f;
-			_fe3d.skyEntity_setColor(_currentSkyID, color);
+			_fe3d.sky_setColor(_currentSkyID, color);
 		}
 	}
 }

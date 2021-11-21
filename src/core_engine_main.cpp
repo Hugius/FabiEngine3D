@@ -58,7 +58,7 @@ void CoreEngine::_start()
 		// Start measuring time
 		auto previousTime = high_resolution_clock::now();
 
-		if(_fe3d.networkServer_isRunning()) // Process application at full speed
+		if(_fe3d.server_isRunning()) // Process application at full speed
 		{
 			// Retrieve user input if not exported
 			if(!Config::getInst().isApplicationExported())
@@ -261,7 +261,7 @@ void CoreEngine::_prepareApplication()
 		}
 
 		// Create window if necessary
-		if(!Config::getInst().isApplicationExported() || (Config::getInst().isApplicationExported() && !_fe3d.networkServer_isRunning()))
+		if(!Config::getInst().isApplicationExported() || (Config::getInst().isApplicationExported() && !_fe3d.server_isRunning()))
 		{
 			// Set window properties
 			_window.showWindow();

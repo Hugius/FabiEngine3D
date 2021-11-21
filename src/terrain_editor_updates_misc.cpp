@@ -14,7 +14,7 @@ void TerrainEditor::_updateCamera()
 		_fe3d.camera_setThirdPersonDistance(cameraDistance);
 
 		// Hide cursor
-		_fe3d.imageEntity_setVisible("@@cursor", false);
+		_fe3d.image_setVisible("@@cursor", false);
 	}
 
 	// Check if allowed by GUI
@@ -53,28 +53,28 @@ void TerrainEditor::_updateMiscellaneous()
 		// Update reference model visibility
 		if(_fe3d.input_isKeyPressed(InputType::KEY_R))
 		{
-			if(_fe3d.modelEntity_isVisible("@@cube"))
+			if(_fe3d.model_isVisible("@@cube"))
 			{
-				_fe3d.modelEntity_setVisible("@@cube", false);
+				_fe3d.model_setVisible("@@cube", false);
 			}
 			else
 			{
-				_fe3d.modelEntity_setVisible("@@cube", true);
+				_fe3d.model_setVisible("@@cube", true);
 			}
 		}
 
 		// Update wireframe rendering
-		if(_fe3d.terrainEntity_isExisting(_currentTerrainID))
+		if(_fe3d.terrain_isExisting(_currentTerrainID))
 		{
 			if(_fe3d.input_isKeyPressed(InputType::KEY_F))
 			{
-				if(_fe3d.terrainEntity_isWireframed(_currentTerrainID))
+				if(_fe3d.terrain_isWireframed(_currentTerrainID))
 				{
-					_fe3d.terrainEntity_setWireframed(_currentTerrainID, false);
+					_fe3d.terrain_setWireframed(_currentTerrainID, false);
 				}
 				else
 				{
-					_fe3d.terrainEntity_setWireframed(_currentTerrainID, true);
+					_fe3d.terrain_setWireframed(_currentTerrainID, true);
 				}
 			}
 		}

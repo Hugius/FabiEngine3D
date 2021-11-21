@@ -31,7 +31,7 @@ void WorldEditor::_updateTerrainMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			_fe3d.terrainEntity_delete(_currentTerrainID);
+			_fe3d.terrain_delete(_currentTerrainID);
 			_currentTerrainID = "";
 		}
 
@@ -42,9 +42,9 @@ void WorldEditor::_updateTerrainMenu()
 			if(!selectedButtonID.empty())
 			{
 				// Delete old
-				if(_fe3d.terrainEntity_isExisting(selectedButtonID))
+				if(_fe3d.terrain_isExisting(selectedButtonID))
 				{
-					_fe3d.terrainEntity_delete(selectedButtonID);
+					_fe3d.terrain_delete(selectedButtonID);
 				}
 
 				// Create new
@@ -59,7 +59,7 @@ void WorldEditor::_updateTerrainMenu()
 		}
 
 		// Update terrain selection
-		_fe3d.terrainEntity_select(_currentTerrainID);
+		_fe3d.terrain_select(_currentTerrainID);
 
 		// Update buttons hoverability
 		screen->getButton("delete")->setHoverable(_currentTerrainID != "");

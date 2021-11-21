@@ -31,7 +31,7 @@ void WorldEditor::_updateSkyMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			_fe3d.skyEntity_delete(_currentSkyID);
+			_fe3d.sky_delete(_currentSkyID);
 			_currentSkyID = "";
 		}
 
@@ -42,9 +42,9 @@ void WorldEditor::_updateSkyMenu()
 			if(!selectedButtonID.empty())
 			{
 				// Delete old
-				if(_fe3d.skyEntity_isExisting(selectedButtonID))
+				if(_fe3d.sky_isExisting(selectedButtonID))
 				{
-					_fe3d.skyEntity_delete(selectedButtonID);
+					_fe3d.sky_delete(selectedButtonID);
 				}
 
 				// Create new
@@ -62,6 +62,6 @@ void WorldEditor::_updateSkyMenu()
 		screen->getButton("delete")->setHoverable(_currentSkyID != "");
 
 		// Update sky selection
-		_fe3d.skyEntity_selectMainSky(_currentSkyID);
+		_fe3d.sky_selectMainSky(_currentSkyID);
 	}
 }

@@ -37,33 +37,33 @@ const bool WorldEditor::saveCustomWorldToFile()
 
 	// Save model level of detail IDs
 	vector<string> levelOfDetailEntityIDs;
-	for(const auto& modelID : _fe3d.modelEntity_getAllIDs())
+	for(const auto& modelID : _fe3d.model_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isCustomWorldModel = find(_customWorldModelIDs.begin(), _customWorldModelIDs.end(), modelID) != _customWorldModelIDs.end();
 		if((modelID[0] != '@') && isCustomWorldModel)
 		{
 			// Check if entity has level of detail entity
-			if(!_fe3d.modelEntity_getLevelOfDetailEntityID(modelID).empty())
+			if(!_fe3d.model_getLevelOfDetailID(modelID).empty())
 			{
 				// Check if ID not already added to list
 				if(find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) == levelOfDetailEntityIDs.end())
 				{
-					levelOfDetailEntityIDs.push_back(_fe3d.modelEntity_getLevelOfDetailEntityID(modelID));
+					levelOfDetailEntityIDs.push_back(_fe3d.model_getLevelOfDetailID(modelID));
 				}
 			}
 		}
 	}
 
 	// Sky
-	string skyID = _fe3d.skyEntity_getSelectedID();
+	string skyID = _fe3d.sky_getSelectedID();
 	if(!skyID.empty() && _hasCustomWorldSky)
 	{
 		// Data to save
 		auto previewID = ("@" + skyID);
-		auto color = _fe3d.skyEntity_getColor(skyID);
-		auto rotation = _fe3d.skyEntity_getRotation(skyID);
-		auto lightness = _fe3d.skyEntity_getInitialLightness(skyID);
+		auto color = _fe3d.sky_getColor(skyID);
+		auto rotation = _fe3d.sky_getRotation(skyID);
+		auto lightness = _fe3d.sky_getInitialLightness(skyID);
 
 		// Write data
 		file <<
@@ -78,7 +78,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	}
 
 	// Terrain
-	string terrainID = _fe3d.terrainEntity_getSelectedID();
+	string terrainID = _fe3d.terrain_getSelectedID();
 	if(!terrainID.empty() && _hasCustomWorldTerrain)
 	{
 		// Data to save
@@ -92,14 +92,14 @@ const bool WorldEditor::saveCustomWorldToFile()
 	}
 
 	// Water
-	string waterID = _fe3d.waterEntity_getSelectedID();
+	string waterID = _fe3d.water_getSelectedID();
 	if(!waterID.empty() && _hasCustomWorldWater)
 	{
 		// Data to save
 		string previewID = ("@" + waterID);
-		auto color = _fe3d.waterEntity_getColor(waterID);
-		auto speed = _fe3d.waterEntity_getSpeed(waterID);
-		auto transparency = _fe3d.waterEntity_getTransparency(waterID);
+		auto color = _fe3d.water_getColor(waterID);
+		auto speed = _fe3d.water_getSpeed(waterID);
+		auto transparency = _fe3d.water_getTransparency(waterID);
 
 		// Write data
 		file <<
@@ -115,7 +115,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	}
 
 	// Models
-	for(const auto& modelID : _fe3d.modelEntity_getAllIDs())
+	for(const auto& modelID : _fe3d.model_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isLevelOfDetailEntity = find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) != levelOfDetailEntityIDs.end();
@@ -124,22 +124,22 @@ const bool WorldEditor::saveCustomWorldToFile()
 		if(((modelID[0] != '@') || isLevelOfDetailEntity) && isCustomWorldModel)
 		{
 			// Retrieve all bound AABB IDs
-			auto aabbIDs = _fe3d.aabbEntity_getChildIDs(modelID, AabbParentType::MODEL_ENTITY);
+			auto aabbIDs = _fe3d.aabb_getChildIDs(modelID, AabbParentType::MODEL_ENTITY);
 
 			// Data to save
-			auto isVisible = _fe3d.modelEntity_isVisible(modelID);
-			auto isFrozen = _fe3d.modelEntity_isStaticToCamera(modelID);
-			auto isAabbRaycastResponsive = aabbIDs.empty() ? false : _fe3d.aabbEntity_isRaycastResponsive(aabbIDs.front());
-			auto isAabbCollisionResponsive = aabbIDs.empty() ? false : _fe3d.aabbEntity_isCollisionResponsive(aabbIDs.front());
-			auto position = _fe3d.modelEntity_getBasePosition(modelID);
-			auto rotation = _fe3d.modelEntity_getBaseRotation(modelID);
-			auto rotationOrigin = _fe3d.modelEntity_getBaseRotationOrigin(modelID);
-			auto size = _fe3d.modelEntity_getBaseSize(modelID);
-			auto color = _fe3d.modelEntity_getColor(modelID, "");
-			auto minHeight = _fe3d.modelEntity_getMinHeight(modelID);
-			auto maxHeight = _fe3d.modelEntity_getMaxHeight(modelID);
-			auto transparency = _fe3d.modelEntity_getTransparency(modelID, "");
-			auto lightness = _fe3d.modelEntity_getLightness(modelID, "");
+			auto isVisible = _fe3d.model_isVisible(modelID);
+			auto isFrozen = _fe3d.model_isStaticToCamera(modelID);
+			auto isAabbRaycastResponsive = aabbIDs.empty() ? false : _fe3d.aabb_isRaycastResponsive(aabbIDs.front());
+			auto isAabbCollisionResponsive = aabbIDs.empty() ? false : _fe3d.aabb_isCollisionResponsive(aabbIDs.front());
+			auto position = _fe3d.model_getBasePosition(modelID);
+			auto rotation = _fe3d.model_getBaseRotation(modelID);
+			auto rotationOrigin = _fe3d.model_getBaseRotationOrigin(modelID);
+			auto size = _fe3d.model_getBaseSize(modelID);
+			auto color = _fe3d.model_getColor(modelID, "");
+			auto minHeight = _fe3d.model_getMinHeight(modelID);
+			auto maxHeight = _fe3d.model_getMaxHeight(modelID);
+			auto transparency = _fe3d.model_getTransparency(modelID, "");
+			auto lightness = _fe3d.model_getLightness(modelID, "");
 
 			// Extract preview ID
 			string previewID;
@@ -180,10 +180,10 @@ const bool WorldEditor::saveCustomWorldToFile()
 				maxHeight << " " <<
 				transparency << " " <<
 				lightness << " " <<
-				_fe3d.modelEntity_getPartIDs(modelID).size();
+				_fe3d.model_getPartIDs(modelID).size();
 
 			// Check if model is multi-parted
-			auto partIDs = _fe3d.modelEntity_getPartIDs(modelID);
+			auto partIDs = _fe3d.model_getPartIDs(modelID);
 			if(partIDs.size() > 1)
 			{
 				// Write part IDs
@@ -206,10 +206,10 @@ const bool WorldEditor::saveCustomWorldToFile()
 						file << " ";
 
 						// Retrieve transformation
-						position = _fe3d.modelEntity_getPartPosition(modelID, partIDs[i]);
-						rotation = _fe3d.modelEntity_getPartRotation(modelID, partIDs[i]);
-						rotationOrigin = _fe3d.modelEntity_getPartRotationOrigin(modelID, partIDs[i]);
-						size = _fe3d.modelEntity_getPartSize(modelID, partIDs[i]);
+						position = _fe3d.model_getPartPosition(modelID, partIDs[i]);
+						rotation = _fe3d.model_getPartRotation(modelID, partIDs[i]);
+						rotationOrigin = _fe3d.model_getPartRotationOrigin(modelID, partIDs[i]);
+						size = _fe3d.model_getPartSize(modelID, partIDs[i]);
 
 						// Write transformation
 						file <<
@@ -231,10 +231,10 @@ const bool WorldEditor::saveCustomWorldToFile()
 			}
 
 			// Write instanced offsets
-			if(_fe3d.modelEntity_isInstanced(modelID))
+			if(_fe3d.model_isInstanced(modelID))
 			{
 				// Check if model has any offsets
-				auto instancedOffsets = _fe3d.modelEntity_getInstancedOffsets(modelID);
+				auto instancedOffsets = _fe3d.model_getInstancedOffsets(modelID);
 				if(!instancedOffsets.empty())
 				{
 					// Write space
@@ -264,7 +264,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	}
 
 	// Animations
-	for(const auto& modelID : _fe3d.modelEntity_getAllIDs())
+	for(const auto& modelID : _fe3d.model_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isLodModel = find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) != levelOfDetailEntityIDs.end();
@@ -319,7 +319,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	}
 
 	// Billboards
-	for(const auto& billboardID : _fe3d.billboardEntity_getAllIDs())
+	for(const auto& billboardID : _fe3d.billboard_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isCustomWorldBillboard =
@@ -327,27 +327,27 @@ const bool WorldEditor::saveCustomWorldToFile()
 		if((billboardID[0] != '@') && isCustomWorldBillboard)
 		{
 			// Retrieve all bound AABB IDs
-			auto aabbIDs = _fe3d.aabbEntity_getChildIDs(billboardID, AabbParentType::BILLBOARD_ENTITY);
+			auto aabbIDs = _fe3d.aabb_getChildIDs(billboardID, AabbParentType::BILLBOARD_ENTITY);
 
 			// Data to save
-			auto isVisible = _fe3d.billboardEntity_isVisible(billboardID);
-			auto isAabbRaycastResponsive = aabbIDs.empty() ? false : _fe3d.aabbEntity_isRaycastResponsive(aabbIDs.front());
-			auto isAabbCollisionResponsive = aabbIDs.empty() ? false : _fe3d.aabbEntity_isCollisionResponsive(aabbIDs.front());
-			auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(billboardID);
-			auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(billboardID);
-			auto isAnimationPlaying = _fe3d.billboardEntity_isSpriteAnimationStarted(billboardID);
-			auto isAnimationPaused = _fe3d.billboardEntity_isSpriteAnimationPaused(billboardID);
-			auto position = _fe3d.billboardEntity_getPosition(billboardID);
-			auto rotation = _fe3d.billboardEntity_getRotation(billboardID);
-			auto size = _fe3d.billboardEntity_getSize(billboardID);
-			auto color = _fe3d.billboardEntity_getColor(billboardID);
-			auto textContent = _fe3d.billboardEntity_getTextContent(billboardID);
-			auto lightness = _fe3d.billboardEntity_getLightness(billboardID);
-			auto minHeight = _fe3d.billboardEntity_getMinHeight(billboardID);
-			auto maxHeight = _fe3d.billboardEntity_getMaxHeight(billboardID);
-			auto remainingAnimationLoops = _fe3d.billboardEntity_getRemainingSpriteAnimationLoops(billboardID);
-			auto animationRowIndex = _fe3d.billboardEntity_getSpriteAnimationRowIndex(billboardID);
-			auto animationColumnIndex = _fe3d.billboardEntity_getSpriteAnimationColumnIndex(billboardID);
+			auto isVisible = _fe3d.billboard_isVisible(billboardID);
+			auto isAabbRaycastResponsive = aabbIDs.empty() ? false : _fe3d.aabb_isRaycastResponsive(aabbIDs.front());
+			auto isAabbCollisionResponsive = aabbIDs.empty() ? false : _fe3d.aabb_isCollisionResponsive(aabbIDs.front());
+			auto isFacingX = _fe3d.billboard_isFacingCameraX(billboardID);
+			auto isFacingY = _fe3d.billboard_isFacingCameraY(billboardID);
+			auto isAnimationPlaying = _fe3d.billboard_isSpriteAnimationStarted(billboardID);
+			auto isAnimationPaused = _fe3d.billboard_isSpriteAnimationPaused(billboardID);
+			auto position = _fe3d.billboard_getPosition(billboardID);
+			auto rotation = _fe3d.billboard_getRotation(billboardID);
+			auto size = _fe3d.billboard_getSize(billboardID);
+			auto color = _fe3d.billboard_getColor(billboardID);
+			auto textContent = _fe3d.billboard_getTextContent(billboardID);
+			auto lightness = _fe3d.billboard_getLightness(billboardID);
+			auto minHeight = _fe3d.billboard_getMinHeight(billboardID);
+			auto maxHeight = _fe3d.billboard_getMaxHeight(billboardID);
+			auto remainingAnimationLoops = _fe3d.billboard_getRemainingSpriteAnimationLoops(billboardID);
+			auto animationRowIndex = _fe3d.billboard_getSpriteAnimationRowIndex(billboardID);
+			auto animationColumnIndex = _fe3d.billboard_getSpriteAnimationColumnIndex(billboardID);
 
 			// Convert empty string
 			textContent = (textContent.empty()) ? "?" : textContent;
@@ -400,19 +400,19 @@ const bool WorldEditor::saveCustomWorldToFile()
 	}
 
 	// AABBs
-	for(const auto& aabbID : _fe3d.aabbEntity_getAllIDs())
+	for(const auto& aabbID : _fe3d.aabb_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isCustomWorldAabb =
 			find(_customWorldAabbIDs.begin(), _customWorldAabbIDs.end(), aabbID) != _customWorldAabbIDs.end();
-		if((aabbID[0] != '@') && isCustomWorldAabb && _fe3d.aabbEntity_getParentID(aabbID).empty())
+		if((aabbID[0] != '@') && isCustomWorldAabb && _fe3d.aabb_getParentID(aabbID).empty())
 		{
 			// Data to save
-			auto isVisible = _fe3d.aabbEntity_isVisible(aabbID);
-			auto isRaycastResponsive = _fe3d.aabbEntity_isRaycastResponsive(aabbID);
-			auto isCollisionResponsive = _fe3d.aabbEntity_isCollisionResponsive(aabbID);
-			auto position = _fe3d.aabbEntity_getPosition(aabbID);
-			auto size = _fe3d.aabbEntity_getSize(aabbID);
+			auto isVisible = _fe3d.aabb_isVisible(aabbID);
+			auto isRaycastResponsive = _fe3d.aabb_isRaycastResponsive(aabbID);
+			auto isCollisionResponsive = _fe3d.aabb_isCollisionResponsive(aabbID);
+			auto position = _fe3d.aabb_getPosition(aabbID);
+			auto size = _fe3d.aabb_getSize(aabbID);
 
 			// Write data
 			file <<
@@ -468,7 +468,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	}
 
 	// Pointlights
-	for(const auto& pointlightID : _fe3d.pointlightEntity_getAllIDs())
+	for(const auto& pointlightID : _fe3d.pointlight_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isCustomWorldPointlight =
@@ -476,10 +476,10 @@ const bool WorldEditor::saveCustomWorldToFile()
 		if((pointlightID[0] != '@') && isCustomWorldPointlight)
 		{
 			// Data to save
-			auto position = _fe3d.pointlightEntity_getPosition(pointlightID);
-			auto radius = _fe3d.pointlightEntity_getRadius(pointlightID);
-			auto color = _fe3d.pointlightEntity_getColor(pointlightID);
-			auto intensity = _fe3d.pointlightEntity_getIntensity(pointlightID);
+			auto position = _fe3d.pointlight_getPosition(pointlightID);
+			auto radius = _fe3d.pointlight_getRadius(pointlightID);
+			auto color = _fe3d.pointlight_getColor(pointlightID);
+			auto intensity = _fe3d.pointlight_getIntensity(pointlightID);
 
 			// Write data
 			file <<
@@ -499,7 +499,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	}
 
 	// Spotlights
-	for(const auto& spotlightID : _fe3d.spotlightEntity_getAllIDs())
+	for(const auto& spotlightID : _fe3d.spotlight_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isCustomWorldSpotlight =
@@ -507,13 +507,13 @@ const bool WorldEditor::saveCustomWorldToFile()
 		if((spotlightID[0] != '@') && isCustomWorldSpotlight)
 		{
 			// Data to save
-			auto position = _fe3d.spotlightEntity_getPosition(spotlightID);
-			auto color = _fe3d.spotlightEntity_getColor(spotlightID);
-			auto yaw = _fe3d.spotlightEntity_getYaw(spotlightID);
-			auto pitch = _fe3d.spotlightEntity_getPitch(spotlightID);
-			auto intensity = _fe3d.spotlightEntity_getIntensity(spotlightID);
-			auto angle = _fe3d.spotlightEntity_getAngle(spotlightID);
-			auto distance = _fe3d.spotlightEntity_getDistance(spotlightID);
+			auto position = _fe3d.spotlight_getPosition(spotlightID);
+			auto color = _fe3d.spotlight_getColor(spotlightID);
+			auto yaw = _fe3d.spotlight_getYaw(spotlightID);
+			auto pitch = _fe3d.spotlight_getPitch(spotlightID);
+			auto intensity = _fe3d.spotlight_getIntensity(spotlightID);
+			auto angle = _fe3d.spotlight_getAngle(spotlightID);
+			auto distance = _fe3d.spotlight_getDistance(spotlightID);
 
 			// Write data
 			file <<
@@ -534,7 +534,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	}
 
 	// Reflections
-	for(const auto& reflectionID : _fe3d.reflectionEntity_getAllIDs())
+	for(const auto& reflectionID : _fe3d.reflection_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isCustomWorldReflection =
@@ -542,7 +542,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 		if((reflectionID[0] != '@') && isCustomWorldReflection)
 		{
 			// Data to save
-			auto position = _fe3d.reflectionEntity_getPosition(reflectionID);
+			auto position = _fe3d.reflection_getPosition(reflectionID);
 
 			// Write data
 			file <<
@@ -586,8 +586,8 @@ const bool WorldEditor::saveCustomWorldToFile()
 			auto directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
 			auto directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
 			auto directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
-			auto billboardSize = _fe3d.billboardEntity_getSize("@@directionalLightSource").x;
-			auto billboardLightness = _fe3d.billboardEntity_getLightness("@@directionalLightSource");
+			auto billboardSize = _fe3d.billboard_getSize("@@directionalLightSource").x;
+			auto billboardLightness = _fe3d.billboard_getLightness("@@directionalLightSource");
 
 			// Write data
 			file <<

@@ -22,7 +22,7 @@ void CoreEngine::_updateApplication()
 	_timer.stopDeltaPart();
 
 	// An exported server application does not have engine updates
-	if(!(Config::getInst().isApplicationExported() && _fe3d.networkServer_isRunning()))
+	if(!(Config::getInst().isApplicationExported() && _fe3d.server_isRunning()))
 	{
 		// Only update 3D if engine not paused
 		if(!_isPaused)

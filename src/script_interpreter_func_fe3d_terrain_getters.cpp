@@ -15,8 +15,8 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetterFunction(const string& fu
 			// Validate terrain existence
 			if(_validateFe3dTerrain())
 			{
-				float halfTerrainSize = (_fe3d.terrainEntity_getSize(_fe3d.terrainEntity_getSelectedID()) / 2.0f);
-				auto result = _fe3d.terrainEntity_getPixelHeight(_fe3d.terrainEntity_getSelectedID(),
+				float halfTerrainSize = (_fe3d.terrain_getSize(_fe3d.terrain_getSelectedID()) / 2.0f);
+				auto result = _fe3d.terrain_getPixelHeight(_fe3d.terrain_getSelectedID(),
 																 (arguments[0].getDecimal() + halfTerrainSize),
 																 (arguments[1].getDecimal() + halfTerrainSize));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -31,7 +31,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetterFunction(const string& fu
 			// Validate terrain existence
 			if(_validateFe3dTerrain())
 			{
-				auto result = _fe3d.terrainEntity_getMaxHeight(_fe3d.terrainEntity_getSelectedID());
+				auto result = _fe3d.terrain_getMaxHeight(_fe3d.terrain_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -44,7 +44,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetterFunction(const string& fu
 			// Validate terrain existence
 			if(_validateFe3dTerrain())
 			{
-				auto result = _fe3d.terrainEntity_getSize(_fe3d.terrainEntity_getSelectedID());
+				auto result = _fe3d.terrain_getSize(_fe3d.terrain_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -57,7 +57,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetterFunction(const string& fu
 			// Validate terrain existence
 			if(_validateFe3dTerrain())
 			{
-				auto result = _fe3d.terrainEntity_getLightness(_fe3d.terrainEntity_getSelectedID());
+				auto result = _fe3d.terrain_getLightness(_fe3d.terrain_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -68,7 +68,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetterFunction(const string& fu
 	}
 
 	// Cannot execute terrain functionality when server is running
-	if(_fe3d.networkServer_isRunning())
+	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:terrain` functionality as a networking server!");
 	}

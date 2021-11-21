@@ -30,7 +30,7 @@ void ScriptEditor::load()
 	_fe3d.camera_setPitch(0.0f);
 
 	// Background
-	_fe3d.skyEntity_selectMainSky("");
+	_fe3d.sky_selectMainSky("");
 	Tools::setMainRenderingColor(BACKGROUND_COLOR);
 
 	// Default graphics
@@ -61,7 +61,7 @@ void ScriptEditor::unload()
 	_unloadGUI();
 
 	// Background
-	_fe3d.skyEntity_selectMainSky("@@engineBackground");
+	_fe3d.sky_selectMainSky("@@engineBackground");
 	Tools::setMainRenderingColor(Vec3(0.0f));
 
 	// Default graphics
@@ -77,10 +77,10 @@ void ScriptEditor::unload()
 	}
 
 	// Delete created entities
-	_fe3d.modelEntity_deleteAll();
-	_fe3d.billboardEntity_deleteAll();
-	_fe3d.aabbEntity_deleteAll();
-	_fe3d.pointlightEntity_deleteAll();
+	_fe3d.model_deleteAll();
+	_fe3d.billboard_deleteAll();
+	_fe3d.aabb_deleteAll();
+	_fe3d.pointlight_deleteAll();
 
 	// Unload script
 	_script.reset();

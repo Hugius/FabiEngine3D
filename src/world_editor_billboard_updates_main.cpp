@@ -28,7 +28,7 @@ void WorldEditor::_updateBillboardMenu()
 			_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuBillboardChoice")->getScrollingList("billboardList")->deleteButtons();
 
 			// Add the ID of every placed billboard
-			auto IDs = _fe3d.billboardEntity_getAllIDs();
+			auto IDs = _fe3d.billboard_getAllIDs();
 			sort(IDs.begin(), IDs.end());
 			for(auto& billboardID : IDs)
 			{
@@ -63,8 +63,8 @@ void WorldEditor::_updateBillboardPlacingMenu()
 			// Reset placing
 			if(!_currentPreviewBillboardID.empty())
 			{
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
-				_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, false);
+				_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
+				_fe3d.billboard_setVisible(_currentPreviewBillboardID, false);
 				_currentPreviewBillboardID = "";
 			}
 
@@ -78,7 +78,7 @@ void WorldEditor::_updateBillboardPlacingMenu()
 			for(const auto& billboardID : _billboardEditor.getLoadedBillboardIDs())
 			{
 				// Check if billboard has a billboard entity
-				if(_fe3d.billboardEntity_isExisting(billboardID))
+				if(_fe3d.billboard_isExisting(billboardID))
 				{
 					// Check if button is hovered
 					if(screen->getScrollingList("billboardList")->getButton(billboardID)->isHovered())
@@ -95,14 +95,14 @@ void WorldEditor::_updateBillboardPlacingMenu()
 
 						// Set new preview billboard
 						_currentPreviewBillboardID = billboardID;
-						_fe3d.billboardEntity_setPosition(_currentPreviewBillboardID, Vec3(0.0f));
-						_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, true);
-						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), true);
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), "Billboard: " + _currentPreviewBillboardID.substr(1), 0.025f);
+						_fe3d.billboard_setPosition(_currentPreviewBillboardID, Vec3(0.0f));
+						_fe3d.billboard_setVisible(_currentPreviewBillboardID, true);
+						_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), true);
+						_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), "Billboard: " + _currentPreviewBillboardID.substr(1), 0.025f);
 						_fe3d.misc_centerCursor();
 
 						// Add position value forms for placing without terrain
-						if(_fe3d.terrainEntity_getSelectedID().empty())
+						if(_fe3d.terrain_getSelectedID().empty())
 						{
 							_gui.getGlobalScreen()->createValueForm("positionX", "X", 0.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 							_gui.getGlobalScreen()->createValueForm("positionY", "Y", 0.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
@@ -130,7 +130,7 @@ void WorldEditor::_updateBillboardChoosingMenu()
 		for(const auto& button : _gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuBillboardChoice")->getScrollingList("billboardList")->getButtons())
 		{
 			// Check if billboard is still existing
-			if(!_fe3d.billboardEntity_isExisting(button->getID()))
+			if(!_fe3d.billboard_isExisting(button->getID()))
 			{
 				// Delete button
 				_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuBillboardChoice")->getScrollingList("billboardList")->deleteButton(button->getID());
@@ -139,7 +139,7 @@ void WorldEditor::_updateBillboardChoosingMenu()
 		}
 
 		// Iterate through every placed billboard
-		for(const auto& billboardID : _fe3d.billboardEntity_getAllIDs())
+		for(const auto& billboardID : _fe3d.billboard_getAllIDs())
 		{
 			// Check if billboard is not a preview billboard
 			if(billboardID[0] != '@')

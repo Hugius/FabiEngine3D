@@ -212,7 +212,7 @@ void TopViewportController::_updateGameScreenManagement()
 		static bool wasInMainMenu = false;
 		bool isInMainMenu = (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "main");
 		screen->getButton("play")->setHoverable(isInMainMenu && !_scriptEditor.getScriptExecutor().isScriptEmpty() && !isScriptRunning());
-		screen->getButton("pause")->setHoverable(isInMainMenu && isScriptRunning() && !_fe3d.networkServer_isRunning());
+		screen->getButton("pause")->setHoverable(isInMainMenu && isScriptRunning() && !_fe3d.server_isRunning());
 		screen->getButton("restart")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isStarted());
 		screen->getButton("stop")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isStarted());
 		screen->getButton("debug")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isStarted());
@@ -231,7 +231,7 @@ void TopViewportController::_updateGameScreenManagement()
 			// Check if ESCAPE pressed
 			if(_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if(_fe3d.networkServer_isRunning()) // Server application cannot be paused, only on or off
+				if(_fe3d.server_isRunning()) // Server application cannot be paused, only on or off
 				{
 					_scriptEditor.getScriptExecutor().unload();
 				}

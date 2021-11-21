@@ -19,7 +19,7 @@ void WorldEditor::_updateBillboardEditing()
 	if(_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingPointlight && !_isPlacingReflection)
 	{
 		// Check if user selected a billboard
-		for(const auto& ID : _fe3d.billboardEntity_getAllIDs())
+		for(const auto& ID : _fe3d.billboard_getAllIDs())
 		{
 			// Must not be preview entity
 			if(ID[0] != '@')
@@ -117,7 +117,7 @@ void WorldEditor::_updateBillboardEditing()
 				}
 				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
-					_fe3d.billboardEntity_delete(_activeBillboardID);
+					_fe3d.billboard_delete(_activeBillboardID);
 					rightWindow->setActiveScreen("worldEditorControls");
 					_activeBillboardID = "";
 					return;
@@ -127,16 +127,16 @@ void WorldEditor::_updateBillboardEditing()
 			// Alternative way of deleting
 			if(_fe3d.input_isKeyPressed(InputType::KEY_DELETE))
 			{
-				_fe3d.billboardEntity_delete(_activeBillboardID);
+				_fe3d.billboard_delete(_activeBillboardID);
 				rightWindow->setActiveScreen("worldEditorControls");
 				_activeBillboardID = "";
 				return;
 			}
 
 			// Get current values
-			auto position = _fe3d.billboardEntity_getPosition(_activeBillboardID);
-			auto rotation = _fe3d.billboardEntity_getRotation(_activeBillboardID);
-			auto size = _fe3d.billboardEntity_getSize(_activeBillboardID);
+			auto position = _fe3d.billboard_getPosition(_activeBillboardID);
+			auto rotation = _fe3d.billboard_getRotation(_activeBillboardID);
+			auto size = _fe3d.billboard_getSize(_activeBillboardID);
 
 			// Enabling all axes by default
 			screen->getButton("xMinus")->setHoverable(true);
@@ -166,7 +166,7 @@ void WorldEditor::_updateBillboardEditing()
 				_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / 100.0f));
 				_handleValueChanging("billboardPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / 100.0f));
 				_handleValueChanging("billboardPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / 100.0f));
-				_fe3d.billboardEntity_setPosition(_activeBillboardID, position);
+				_fe3d.billboard_setPosition(_activeBillboardID, position);
 			}
 			else if(!screen->getButton("rotation")->isHoverable())
 			{
@@ -176,7 +176,7 @@ void WorldEditor::_updateBillboardEditing()
 				_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", rotation.y, -(_editorSpeed / 25.0f));
 				_handleValueChanging("billboardPropertiesMenu", "zPlus", "z", rotation.z, (_editorSpeed / 25.0f));
 				_handleValueChanging("billboardPropertiesMenu", "zMinus", "z", rotation.z, -(_editorSpeed / 25.0f));
-				_fe3d.billboardEntity_setRotation(_activeBillboardID, rotation);
+				_fe3d.billboard_setRotation(_activeBillboardID, rotation);
 			}
 			else if(!screen->getButton("size")->isHoverable())
 			{
@@ -184,14 +184,14 @@ void WorldEditor::_updateBillboardEditing()
 				_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", size.x, -(_editorSpeed / 100.0f), BILLBOARD_SIZE_MULTIPLIER, 0.0f);
 				_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", size.y, (_editorSpeed / 100.0f), BILLBOARD_SIZE_MULTIPLIER, 0.0f);
 				_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", size.y, -(_editorSpeed / 100.0f), BILLBOARD_SIZE_MULTIPLIER, 0.0f);
-				_fe3d.billboardEntity_setSize(_activeBillboardID, size);
+				_fe3d.billboard_setSize(_activeBillboardID, size);
 			}
 		}
 
 		// Check if billboard is still selected or active
 		if(_selectedBillboardID.empty() && _activeBillboardID.empty())
 		{
-			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
+			_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
 		}
 	}
 }

@@ -21,11 +21,11 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 		   (isControlKeyDown && _fe3d.input_isKeyPressed(InputType::KEY_X))) // CTRL + X
 		{
 			// Delete selection billboards
-			for(const auto& ID : _fe3d.billboardEntity_getAllIDs())
+			for(const auto& ID : _fe3d.billboard_getAllIDs())
 			{
 				if(ID.substr(0, string("selection_").size()) == "selection_")
 				{
-					_fe3d.billboardEntity_delete(ID);
+					_fe3d.billboard_delete(ID);
 				}
 			}
 
@@ -109,27 +109,27 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 			string textID = ("text_" + to_string(hoveredLineIndex));
 
 			// Check if line has text to be selected
-			if(!_fe3d.billboardEntity_isExisting(selectionID) && _fe3d.billboardEntity_isExisting(textID))
+			if(!_fe3d.billboard_isExisting(selectionID) && _fe3d.billboard_isExisting(textID))
 			{
 				// Check if line text is empty
-				if(_fe3d.billboardEntity_getTextContent(textID).empty())
+				if(_fe3d.billboard_getTextContent(textID).empty())
 				{
-					Vec3 lineTextPosition = (_fe3d.billboardEntity_getPosition(textID));
+					Vec3 lineTextPosition = (_fe3d.billboard_getPosition(textID));
 					lineTextPosition.x = (SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET);
 					lineTextPosition.z -= SELECTION_DEPTH;
-					_fe3d.billboardEntity_create(selectionID);
-					_fe3d.billboardEntity_setColor(selectionID, SELECTION_COLOR);
-					_fe3d.billboardEntity_setPosition(selectionID, lineTextPosition);
-					_fe3d.billboardEntity_setSize(selectionID, TEXT_CHARACTER_SIZE);
+					_fe3d.billboard_create(selectionID);
+					_fe3d.billboard_setColor(selectionID, SELECTION_COLOR);
+					_fe3d.billboard_setPosition(selectionID, lineTextPosition);
+					_fe3d.billboard_setSize(selectionID, TEXT_CHARACTER_SIZE);
 				}
 				else // Line is not empty
 				{
-					const Vec3 lineTextPosition = (_fe3d.billboardEntity_getPosition(textID) - Vec3(0.0f, 0.0f, SELECTION_DEPTH));
-					const auto lineTextSize = (_fe3d.billboardEntity_getSize(textID));
-					_fe3d.billboardEntity_create(selectionID);
-					_fe3d.billboardEntity_setColor(selectionID, SELECTION_COLOR);
-					_fe3d.billboardEntity_setPosition(selectionID, lineTextPosition);
-					_fe3d.billboardEntity_setSize(selectionID, lineTextSize);
+					const Vec3 lineTextPosition = (_fe3d.billboard_getPosition(textID) - Vec3(0.0f, 0.0f, SELECTION_DEPTH));
+					const auto lineTextSize = (_fe3d.billboard_getSize(textID));
+					_fe3d.billboard_create(selectionID);
+					_fe3d.billboard_setColor(selectionID, SELECTION_COLOR);
+					_fe3d.billboard_setPosition(selectionID, lineTextPosition);
+					_fe3d.billboard_setSize(selectionID, lineTextSize);
 				}
 			}
 
@@ -149,7 +149,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 					if((lastDirection < 0 && currentDirection > 0) ||
 					   (currentDirection < 0 && lastDirection > 0))
 					{
-						_fe3d.billboardEntity_delete("selection_" + to_string(_lastSelectedLineIndex));
+						_fe3d.billboard_delete("selection_" + to_string(_lastSelectedLineIndex));
 					}
 				}
 

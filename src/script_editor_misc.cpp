@@ -7,18 +7,18 @@ using std::istringstream;
 void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 {
 	// Remove all existing BILLBOARD & AABB entities
-	_fe3d.billboardEntity_deleteAll();
-	_fe3d.aabbEntity_deleteAll();
+	_fe3d.billboard_deleteAll();
+	_fe3d.aabb_deleteAll();
 
 	// Create line separator BILLBOARD
 	float lineCount = static_cast<float>(_script.getScriptFile(_currentScriptFileID)->getLineCount());
 	Vec2 separatorSize = Vec2((TEXT_CHARACTER_SIZE.x / 4.0f), (lineCount * VERTICAL_LINE_OFFSET));
 	Vec3 separatorPosition = SCRIPT_TEXT_STARTING_POSITION + Vec3(HORIZONTAL_LINE_OFFSET / 2.0f, -(((lineCount - 1) / 2.0f) * VERTICAL_LINE_OFFSET), 0.0f);
-	_fe3d.billboardEntity_create("separator");
-	_fe3d.billboardEntity_setPosition("separator", (separatorPosition - Vec3(0.0f, separatorSize.y / 2.0f, 0.0f)));
-	_fe3d.billboardEntity_setSize("separator", separatorSize);
-	_fe3d.billboardEntity_setColor("separator", SEPARATOR_COLOR);
-	_fe3d.billboardEntity_setBright("separator", true);
+	_fe3d.billboard_create("separator");
+	_fe3d.billboard_setPosition("separator", (separatorPosition - Vec3(0.0f, separatorSize.y / 2.0f, 0.0f)));
+	_fe3d.billboard_setSize("separator", separatorSize);
+	_fe3d.billboard_setColor("separator", SEPARATOR_COLOR);
+	_fe3d.billboard_setBright("separator", true);
 
 	// Create visible billboards for display and invisible billboards for logic
 	for(unsigned int lineIndex = 0; lineIndex < lineCount; lineIndex++)
@@ -37,33 +37,33 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			Vec3(HORIZONTAL_LINE_OFFSET, 0.0f, 0.0f);
 
 		// Create line number BILLBOARD
-		_fe3d.billboardEntity_create(lineNumberID);
-		_fe3d.billboardEntity_setFont(lineNumberID, FONT_PATH);
-		_fe3d.billboardEntity_setTextContent(lineNumberID, lineNumberString);
-		_fe3d.billboardEntity_setPosition(lineNumberID, (lineNumberPosition - Vec3(0.0f, lineNumberSize.y / 2.0f, 0.0f)));
-		_fe3d.billboardEntity_setSize(lineNumberID, lineNumberSize);
-		_fe3d.billboardEntity_setColor(lineNumberID, LINE_NUMBER_COLOR);
-		_fe3d.billboardEntity_setBright(lineNumberID, true);
+		_fe3d.billboard_create(lineNumberID);
+		_fe3d.billboard_setFont(lineNumberID, FONT_PATH);
+		_fe3d.billboard_setTextContent(lineNumberID, lineNumberString);
+		_fe3d.billboard_setPosition(lineNumberID, (lineNumberPosition - Vec3(0.0f, lineNumberSize.y / 2.0f, 0.0f)));
+		_fe3d.billboard_setSize(lineNumberID, lineNumberSize);
+		_fe3d.billboard_setColor(lineNumberID, LINE_NUMBER_COLOR);
+		_fe3d.billboard_setBright(lineNumberID, true);
 
 		// Create line number AABB
 		const Vec3 lineAabbPosition = (lineNumberPosition - Vec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, AABB_DEPTH));
 		const Vec3 lineAabbSize = Vec3(TEXT_CHARACTER_SIZE.x * static_cast<float>(MAX_CHARACTERS_PER_LINE * 2) * 1.1f, TEXT_CHARACTER_SIZE.y, AABB_DEPTH);
-		_fe3d.aabbEntity_create(lineNumberID);
-		_fe3d.aabbEntity_setBasePosition(lineNumberID, lineAabbPosition);
-		_fe3d.aabbEntity_setBaseSize(lineNumberID, lineAabbSize);
+		_fe3d.aabb_create(lineNumberID);
+		_fe3d.aabb_setBasePosition(lineNumberID, lineAabbPosition);
+		_fe3d.aabb_setBaseSize(lineNumberID, lineAabbSize);
 
 		// Create line text display BILLBOARD
 		istringstream iss(lineTextString);
 		string noWhiteSpace;
 		iss >> noWhiteSpace;
 		bool isComment = (noWhiteSpace.substr(0, 3) == "///");
-		_fe3d.billboardEntity_create(lineTextID);
-		_fe3d.billboardEntity_setFont(lineTextID, FONT_PATH);
-		_fe3d.billboardEntity_setTextContent(lineTextID, lineTextString);
-		_fe3d.billboardEntity_setPosition(lineTextID, (lineTextPosition - Vec3(0.0f, lineTextSize.y / 2.0f, 0.0f)));
-		_fe3d.billboardEntity_setSize(lineTextID, lineTextSize);
-		_fe3d.billboardEntity_setColor(lineTextID, (isComment ? COMMENT_TEXT_COLOR : DEFAULT_TEXT_COLOR));
-		_fe3d.billboardEntity_setBright(lineTextID, true);
+		_fe3d.billboard_create(lineTextID);
+		_fe3d.billboard_setFont(lineTextID, FONT_PATH);
+		_fe3d.billboard_setTextContent(lineTextID, lineTextString);
+		_fe3d.billboard_setPosition(lineTextID, (lineTextPosition - Vec3(0.0f, lineTextSize.y / 2.0f, 0.0f)));
+		_fe3d.billboard_setSize(lineTextID, lineTextSize);
+		_fe3d.billboard_setColor(lineTextID, (isComment ? COMMENT_TEXT_COLOR : DEFAULT_TEXT_COLOR));
+		_fe3d.billboard_setBright(lineTextID, true);
 
 		// Iterate through every character
 		for(unsigned int charIndex = 0; charIndex < lineTextString.size(); charIndex++)
@@ -72,19 +72,19 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			const string characterID = (lineNumberID + "_" + to_string(charIndex));
 			const float characterX = (HORIZONTAL_LINE_OFFSET + (HORIZONTAL_CHARACTER_OFFSET * static_cast<float>(charIndex)));
 			const Vec3 characterPosition = (SCRIPT_TEXT_STARTING_POSITION + Vec3(characterX, -VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex), 0.0f));
-			_fe3d.billboardEntity_create(characterID);
-			_fe3d.billboardEntity_setPosition(characterID, (characterPosition - Vec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, 0.0f)));
-			_fe3d.billboardEntity_setSize(characterID, TEXT_CHARACTER_SIZE);
-			_fe3d.billboardEntity_setVisible(characterID, false);
+			_fe3d.billboard_create(characterID);
+			_fe3d.billboard_setPosition(characterID, (characterPosition - Vec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, 0.0f)));
+			_fe3d.billboard_setSize(characterID, TEXT_CHARACTER_SIZE);
+			_fe3d.billboard_setVisible(characterID, false);
 
 			// Create new character AABB for logic
 			if(reloadAabbs)
 			{
 				const Vec3 characterAabbPosition = (characterPosition - Vec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, 0.0f));
 				const Vec3 characterAabbSize = Vec3(TEXT_CHARACTER_SIZE.x, TEXT_CHARACTER_SIZE.y, AABB_DEPTH);
-				_fe3d.aabbEntity_create(characterID);
-				_fe3d.aabbEntity_setBasePosition(characterID, characterAabbPosition);
-				_fe3d.aabbEntity_setBaseSize(characterID, characterAabbSize);
+				_fe3d.aabb_create(characterID);
+				_fe3d.aabb_setBasePosition(characterID, characterAabbPosition);
+				_fe3d.aabb_setBaseSize(characterID, characterAabbSize);
 			}
 		}
 	}

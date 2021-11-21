@@ -20,7 +20,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 			}
 
 			// Check if existing
-			auto result = _fe3d.reflectionEntity_isExisting(arguments[0].getString());
+			auto result = _fe3d.reflection_isExisting(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
@@ -39,7 +39,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 			}
 
 			// Find full entity IDs based on part ID
-			for(const auto& ID : _fe3d.reflectionEntity_getAllIDs())
+			for(const auto& ID : _fe3d.reflection_getAllIDs())
 			{
 				// If substring matches
 				if(arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -58,7 +58,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.reflectionEntity_getAllIDs();
+			auto result = _fe3d.reflection_getAllIDs();
 
 			// For every reflection
 			for(const auto& ID : result)
@@ -81,7 +81,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
 			{
-				auto result = _fe3d.reflectionEntity_isVisible(arguments[0].getString());
+				auto result = _fe3d.reflection_isVisible(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -96,7 +96,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
 			{
-				auto result = _fe3d.reflectionEntity_getPosition(arguments[0].getString());
+				auto result = _fe3d.reflection_getPosition(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
@@ -107,7 +107,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 	}
 
 	// Cannot execute reflection functionality when server is running
-	if(_fe3d.networkServer_isRunning())
+	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:reflection` functionality as a networking server!");
 	}

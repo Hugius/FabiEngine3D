@@ -94,9 +94,9 @@ void MasterRenderer::_renderModelEntities()
 				auto levelOfDetailEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityID())->second;
 
 				// Save initial transformation
-				Vec3 initialPosition = levelOfDetailEntity->getBasePosition();
-				Vec3 initialRotation = levelOfDetailEntity->getBaseRotation();
-				Vec3 initialSize = levelOfDetailEntity->getBaseSize();
+				fvec3 initialPosition = levelOfDetailEntity->getBasePosition();
+				fvec3 initialRotation = levelOfDetailEntity->getBaseRotation();
+				fvec3 initialSize = levelOfDetailEntity->getBaseSize();
 				bool initialVisibility = levelOfDetailEntity->isVisible();
 
 				// Change transformation
@@ -262,7 +262,7 @@ void MasterRenderer::_renderDebugScreens()
 {
 	// Temporary values
 	const string fontPath = "engine\\assets\\fonts\\font.ttf";
-	const Vec3 textColor = Vec3(0.75f);
+	const fvec3 textColor = fvec3(0.75f);
 	const float charWidth = 0.025f;
 	const float charHeight = 0.1f;
 	function<float(string)> calcTextWidth = [&](string text)
@@ -279,42 +279,42 @@ void MasterRenderer::_renderDebugScreens()
 	// Shadow - surface
 	shared_ptr<ImageEntity> shadowSurface = make_shared<ImageEntity>("shadowSurface");
 	shadowSurface->setDiffuseMap(_renderBus.getShadowMap());
-	shadowSurface->setColor(Vec3(static_cast<float>(_renderBus.getShadowMap() != 0)));
+	shadowSurface->setColor(fvec3(static_cast<float>(_renderBus.getShadowMap() != 0)));
 	shadowSurface->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.666f, 0.666f, 0.666f, true));
 	shadowSurface->setMirroredVertically(true);
 
 	// Bloom - surface
 	shared_ptr<ImageEntity> bloomSurface = make_shared<ImageEntity>("bloomSurface");
 	bloomSurface->setDiffuseMap(_renderBus.getBloomMap());
-	bloomSurface->setColor(Vec3(static_cast<float>(_renderBus.getBloomMap() != 0)));
+	bloomSurface->setColor(fvec3(static_cast<float>(_renderBus.getBloomMap() != 0)));
 	bloomSurface->setRenderBuffer(make_shared<RenderBuffer>(0.666f, 0.666f, 0.666f, 0.666f, true));
 	bloomSurface->setMirroredVertically(true);
 
 	// Planar reflection - surface
 	shared_ptr<ImageEntity> planarReflectionSurface = make_shared<ImageEntity>("planarReflectionSurface");
 	planarReflectionSurface->setDiffuseMap(_renderBus.getPlanarReflectionMap());
-	planarReflectionSurface->setColor(Vec3(static_cast<float>(_renderBus.getPlanarReflectionMap() != 0)));
+	planarReflectionSurface->setColor(fvec3(static_cast<float>(_renderBus.getPlanarReflectionMap() != 0)));
 	planarReflectionSurface->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, 0.0f, 0.666f, 0.666f, true));
 	planarReflectionSurface->setMirroredVertically(true);
 
 	// Water reflection - surface
 	shared_ptr<ImageEntity> waterReflectionSurface = make_shared<ImageEntity>("waterReflectionSurface");
 	waterReflectionSurface->setDiffuseMap(_renderBus.getWaterReflectionMap());
-	waterReflectionSurface->setColor(Vec3(static_cast<float>(_renderBus.getWaterReflectionMap() != 0)));
+	waterReflectionSurface->setColor(fvec3(static_cast<float>(_renderBus.getWaterReflectionMap() != 0)));
 	waterReflectionSurface->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 0.666f, 0.666f, true));
 	waterReflectionSurface->setMirroredVertically(true);
 
 	// Water refraction - surface
 	shared_ptr<ImageEntity> waterRefractionSurface = make_shared<ImageEntity>("waterRefractionSurface");
 	waterRefractionSurface->setDiffuseMap(_renderBus.getWaterRefractionMap());
-	waterRefractionSurface->setColor(Vec3(static_cast<float>(_renderBus.getWaterRefractionMap() != 0)));
+	waterRefractionSurface->setColor(fvec3(static_cast<float>(_renderBus.getWaterRefractionMap() != 0)));
 	waterRefractionSurface->setRenderBuffer(make_shared<RenderBuffer>(0.666f, 0.0f, 0.666f, 0.666f, true));
 	waterRefractionSurface->setMirroredVertically(true);
 
 	// Depth - surface
 	shared_ptr<ImageEntity> depthSurface = make_shared<ImageEntity>("depthSurface");
 	depthSurface->setDiffuseMap(_renderBus.getDepthMap());
-	depthSurface->setColor(Vec3(static_cast<float>(_renderBus.getDepthMap() != 0)));
+	depthSurface->setColor(fvec3(static_cast<float>(_renderBus.getDepthMap() != 0)));
 	depthSurface->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, -0.666f, 0.666f, 0.666f, true));
 	depthSurface->setMirroredVertically(true);
 	depthSurface->setPerspectiveDepthEntity(true);
@@ -322,14 +322,14 @@ void MasterRenderer::_renderDebugScreens()
 	// DOF - surface
 	shared_ptr<ImageEntity> dofSurface = make_shared<ImageEntity>("dofSurface");
 	dofSurface->setDiffuseMap(_renderBus.getDofMap());
-	dofSurface->setColor(Vec3(static_cast<float>(_renderBus.getDofMap() != 0)));
+	dofSurface->setColor(fvec3(static_cast<float>(_renderBus.getDofMap() != 0)));
 	dofSurface->setRenderBuffer(make_shared<RenderBuffer>(0.0f, -0.666f, 0.666f, 0.666f, true));
 	dofSurface->setMirroredVertically(true);
 
 	// Motion blur - surface
 	shared_ptr<ImageEntity> motionBlurSurface = make_shared<ImageEntity>("motionBlurSurface");
 	motionBlurSurface->setDiffuseMap(_renderBus.getMotionBlurMap());
-	motionBlurSurface->setColor(Vec3(static_cast<float>(_renderBus.getMotionBlurMap() != 0)));
+	motionBlurSurface->setColor(fvec3(static_cast<float>(_renderBus.getMotionBlurMap() != 0)));
 	motionBlurSurface->setRenderBuffer(make_shared<RenderBuffer>(0.666f, -0.666f, 0.666f, 0.666f, true));
 	motionBlurSurface->setMirroredVertically(true);
 

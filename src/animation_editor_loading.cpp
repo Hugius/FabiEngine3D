@@ -80,7 +80,7 @@ const bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 					{
 						// Temporary values
 						string partID;
-						Vec3 targetTransformation, rotationOrigin, speed;
+						fvec3 targetTransformation, rotationOrigin, speed;
 						int speedType, transformationType;
 
 						// Read data from file
@@ -98,13 +98,13 @@ const bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 						// Add part to animation only once
 						if(customFrames.empty())
 						{
-							newAnimation->addPart(partID, Vec3(0.0f), Vec3(0.0f), Vec3(0.0f));
+							newAnimation->addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
 						}
 
 						// Add part to default frame only once
 						if(customFrames.empty())
 						{
-							defaultFrame.addPart(partID, Vec3(0.0f), Vec3(0.0f), Vec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
+							defaultFrame.addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
 						}
 
 						// Add part to custom frame

@@ -42,15 +42,15 @@ void WorldEditor::_updatePointlightMenu()
 			_isPlacingPointlight = true;
 			_fe3d.model_setVisible(PREVIEW_LAMP_ID, true);
 			_fe3d.pointlight_setVisible(PREVIEW_LAMP_ID, true);
-			_fe3d.pointlight_setPosition(PREVIEW_LAMP_ID, Vec3(0.0f));
+			_fe3d.pointlight_setPosition(PREVIEW_LAMP_ID, fvec3(0.0f));
 			_fe3d.misc_centerCursor();
 
 			// Add position value forms for placing without terrain
 			if(_fe3d.terrain_getSelectedID().empty())
 			{
-				_gui.getGlobalScreen()->createValueForm("positionX", "X", 0.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->createValueForm("positionY", "Y", 0.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->createValueForm("positionZ", "Z", 0.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("positionZ", "Z", 0.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 			}
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choice")->isHovered())

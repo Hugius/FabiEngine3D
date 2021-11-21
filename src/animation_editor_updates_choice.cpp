@@ -32,17 +32,17 @@ void AnimationEditor::_updateChoiceMenu()
 
 					if(partID.empty()) // Base transformation
 					{
-						_fe3d.model_setBasePosition(currentAnimation->getPreviewModelID(), Vec3(0.0f));
-						_fe3d.model_setBaseRotationOrigin(currentAnimation->getPreviewModelID(), Vec3(0.0f));
-						_fe3d.model_setBaseRotation(currentAnimation->getPreviewModelID(), Vec3(0.0f));
+						_fe3d.model_setBasePosition(currentAnimation->getPreviewModelID(), fvec3(0.0f));
+						_fe3d.model_setBaseRotationOrigin(currentAnimation->getPreviewModelID(), fvec3(0.0f));
+						_fe3d.model_setBaseRotation(currentAnimation->getPreviewModelID(), fvec3(0.0f));
 						_fe3d.model_setBaseSize(currentAnimation->getPreviewModelID(), currentAnimation->getInitialSize());
 					}
 					else // Part transformation
 					{
-						_fe3d.model_setPartPosition(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-						_fe3d.model_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-						_fe3d.model_setPartRotation(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-						_fe3d.model_setPartSize(currentAnimation->getPreviewModelID(), partID, Vec3(1.0f));
+						_fe3d.model_setPartPosition(currentAnimation->getPreviewModelID(), partID, fvec3(0.0f));
+						_fe3d.model_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, fvec3(0.0f));
+						_fe3d.model_setPartRotation(currentAnimation->getPreviewModelID(), partID, fvec3(0.0f));
+						_fe3d.model_setPartSize(currentAnimation->getPreviewModelID(), partID, fvec3(1.0f));
 					}
 
 					// Disable wireframed rendering
@@ -65,7 +65,7 @@ void AnimationEditor::_updateChoiceMenu()
 			{
 				ID = ID.substr(1);
 			}
-			_gui.getGlobalScreen()->createChoiceForm("modelList", "Select Model", Vec2(-0.5f, 0.1f), modelIDs);
+			_gui.getGlobalScreen()->createChoiceForm("modelList", "Select Model", fvec2(-0.5f, 0.1f), modelIDs);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("play")->isHovered())
 		{
@@ -74,17 +74,17 @@ void AnimationEditor::_updateChoiceMenu()
 			{
 				if(partID.empty()) // Base transformation
 				{
-					_fe3d.model_setBasePosition(currentAnimation->getPreviewModelID(), Vec3(0.0f));
-					_fe3d.model_setBaseRotationOrigin(currentAnimation->getPreviewModelID(), Vec3(0.0f));
-					_fe3d.model_setBaseRotation(currentAnimation->getPreviewModelID(), Vec3(0.0f));
+					_fe3d.model_setBasePosition(currentAnimation->getPreviewModelID(), fvec3(0.0f));
+					_fe3d.model_setBaseRotationOrigin(currentAnimation->getPreviewModelID(), fvec3(0.0f));
+					_fe3d.model_setBaseRotation(currentAnimation->getPreviewModelID(), fvec3(0.0f));
 					_fe3d.model_setBaseSize(currentAnimation->getPreviewModelID(), currentAnimation->getInitialSize());
 				}
 				else // Part transformation
 				{
-					_fe3d.model_setPartPosition(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-					_fe3d.model_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-					_fe3d.model_setPartRotation(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-					_fe3d.model_setPartSize(currentAnimation->getPreviewModelID(), partID, Vec3(1.0f));
+					_fe3d.model_setPartPosition(currentAnimation->getPreviewModelID(), partID, fvec3(0.0f));
+					_fe3d.model_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, fvec3(0.0f));
+					_fe3d.model_setPartRotation(currentAnimation->getPreviewModelID(), partID, fvec3(0.0f));
+					_fe3d.model_setPartSize(currentAnimation->getPreviewModelID(), partID, fvec3(1.0f));
 				}
 			}
 
@@ -102,17 +102,17 @@ void AnimationEditor::_updateChoiceMenu()
 			{
 				if(partID.empty()) // Base transformation
 				{
-					_fe3d.model_setBasePosition(currentAnimation->getPreviewModelID(), Vec3(0.0f));
-					_fe3d.model_setBaseRotationOrigin(currentAnimation->getPreviewModelID(), Vec3(0.0f));
-					_fe3d.model_setBaseRotation(currentAnimation->getPreviewModelID(), Vec3(0.0f));
+					_fe3d.model_setBasePosition(currentAnimation->getPreviewModelID(), fvec3(0.0f));
+					_fe3d.model_setBaseRotationOrigin(currentAnimation->getPreviewModelID(), fvec3(0.0f));
+					_fe3d.model_setBaseRotation(currentAnimation->getPreviewModelID(), fvec3(0.0f));
 					_fe3d.model_setBaseSize(currentAnimation->getPreviewModelID(), currentAnimation->getInitialSize());
 				}
 				else // Part transformation
 				{
-					_fe3d.model_setPartPosition(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-					_fe3d.model_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-					_fe3d.model_setPartRotation(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-					_fe3d.model_setPartSize(currentAnimation->getPreviewModelID(), partID, Vec3(1.0f));
+					_fe3d.model_setPartPosition(currentAnimation->getPreviewModelID(), partID, fvec3(0.0f));
+					_fe3d.model_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, fvec3(0.0f));
+					_fe3d.model_setPartRotation(currentAnimation->getPreviewModelID(), partID, fvec3(0.0f));
+					_fe3d.model_setPartSize(currentAnimation->getPreviewModelID(), partID, fvec3(1.0f));
 				}
 			}
 		}
@@ -134,7 +134,7 @@ void AnimationEditor::_updateChoiceMenu()
 					// Add default data for every model part
 					for(const auto& partID : currentAnimation->getPartIDs())
 					{
-						lastFrameCopy.addPart(partID, Vec3(0.0f), Vec3(0.0f), Vec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
+						lastFrameCopy.addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
 					}
 				}
 			}
@@ -249,8 +249,8 @@ void AnimationEditor::_updateChoiceMenu()
 					AnimationFrame defaultFrame;
 
 					// Add default part
-					currentAnimation->addPart("", Vec3(0.0f), Vec3(0.0f), Vec3(0.0f));
-					defaultFrame.addPart("", Vec3(0.0f), Vec3(0.0f), Vec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
+					currentAnimation->addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
+					defaultFrame.addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
 
 					// Add custom parts
 					auto partIDs = _fe3d.model_getPartIDs(_hoveredModelID);
@@ -260,10 +260,10 @@ void AnimationEditor::_updateChoiceMenu()
 						for(const auto& partID : partIDs)
 						{
 							// Add part to animation
-							currentAnimation->addPart(partID, Vec3(0.0f), Vec3(0.0f), Vec3(0.0f));
+							currentAnimation->addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
 
 							// Add part to frame
-							defaultFrame.addPart(partID, Vec3(0.0f), Vec3(0.0f), Vec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
+							defaultFrame.addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
 						}
 					}
 

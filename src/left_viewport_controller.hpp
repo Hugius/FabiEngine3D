@@ -34,18 +34,18 @@ public:
 	SettingsEditor& getSettingsEditor();
 
 	// Vectors
-	static inline const Vec3 SCROLLING_LIST_COLOR = Vec3(0.25f);
-	static inline const Vec3 BUTTON_COLOR = Vec3(0.1f, 0.1f, 1.0f);
-	static inline const Vec3 BUTTON_HOVER_COLOR = Vec3(0.5f, 0.5f, 1.0f);
-	static inline const Vec3 TEXT_COLOR = Vec3(1.0f);
-	static inline const Vec3 TEXT_HOVER_COLOR = Vec3(0.0f);
+	static inline const fvec3 SCROLLING_LIST_COLOR = fvec3(0.25f);
+	static inline const fvec3 BUTTON_COLOR = fvec3(0.1f, 0.1f, 1.0f);
+	static inline const fvec3 BUTTON_HOVER_COLOR = fvec3(0.5f, 0.5f, 1.0f);
+	static inline const fvec3 TEXT_COLOR = fvec3(1.0f);
+	static inline const fvec3 TEXT_HOVER_COLOR = fvec3(0.0f);
 
 private:
 	// Strings
 	string _lastActiveEditorScreen = "";
 
 	// Vectors
-	static inline const Vec3 FRAME_COLOR = Vec3(0.175f);
+	static inline const fvec3 FRAME_COLOR = fvec3(0.175f);
 
 	// Decimals
 	static inline const float CW = 0.115f;

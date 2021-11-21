@@ -35,17 +35,17 @@ void BillboardEntity::updateTransformation()
 	{
 		// Update rotation
 		auto difference = Math::calculateDifference(_rotation, _rotationTarget);
-		Vec3 multiplier = Vec3(
+		fvec3 multiplier = fvec3(
 			((difference.x < 180.0f) ? 1.0f : -1.0f),
 			((difference.y < 180.0f) ? 1.0f : -1.0f),
 			((difference.z < 180.0f) ? 1.0f : -1.0f));
-		Vec3 speed = (Vec3(_rotationTargetSpeed) * multiplier);
+		fvec3 speed = (fvec3(_rotationTargetSpeed) * multiplier);
 		_rotation.x += ((_rotation.x < _rotationTarget.x) ? speed.x : (_rotation.x > _rotationTarget.x) ? -speed.x : 0.0f);
 		_rotation.y += ((_rotation.y < _rotationTarget.y) ? speed.y : (_rotation.y > _rotationTarget.y) ? -speed.y : 0.0f);
 		_rotation.z += ((_rotation.z < _rotationTarget.z) ? speed.z : (_rotation.z > _rotationTarget.z) ? -speed.z : 0.0f);
 
 		// Correct rotation
-		_rotation = Vec3(Math::limitAngle(_rotation.x), Math::limitAngle(_rotation.y), Math::limitAngle(_rotation.z));
+		_rotation = fvec3(Math::limitAngle(_rotation.x), Math::limitAngle(_rotation.y), Math::limitAngle(_rotation.z));
 		if(Math::calculateAngleDifference(_rotation.x, _rotationTarget.x) <= _rotationTargetSpeed)
 		{
 			_rotation.x = _rotationTarget.x;
@@ -68,7 +68,7 @@ void BillboardEntity::updateTransformation()
 		_size += (speedMultiplier * _sizeTargetSpeed);
 
 		// Correct size
-		_size = Vec2(max(0.0f, _size.x), max(0.0f, _size.y));
+		_size = fvec2(max(0.0f, _size.x), max(0.0f, _size.y));
 		if(fabsf(_sizeTarget.x - _size.x) <= _sizeTargetSpeed)
 		{
 			_size.x = _positionTarget.x;
@@ -83,18 +83,18 @@ void BillboardEntity::updateTransformation()
 void BillboardEntity::updateTransformationMatrix()
 {
 	// Identity matrix
-	_transformationMatrix = Matrix44(1.0f);
+	_transformationMatrix = mat44(1.0f);
 
 	// Translation matrix
-	Matrix44 translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, _position.z);
+	mat44 translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, _position.z);
 	_transformationMatrix = (_transformationMatrix * translationMatrix);
 
 	// Rotation origin matrix - translate
-	Matrix44 rotationOriginMatrix = Math::createTranslationMatrix(0.0f, (_size.y / 2.0f), 0.0f);
+	mat44 rotationOriginMatrix = Math::createTranslationMatrix(0.0f, (_size.y / 2.0f), 0.0f);
 	_transformationMatrix = (_transformationMatrix * rotationOriginMatrix);
 
 	// Rotation matrix
-	Matrix44 rotationMatrix = Math::createRotationMatrix(
+	mat44 rotationMatrix = Math::createRotationMatrix(
 		Math::convertToRadians(_rotation.x),
 		Math::convertToRadians(_rotation.y),
 		Math::convertToRadians(_rotation.z), DirectionOrder::YXZ);
@@ -105,7 +105,7 @@ void BillboardEntity::updateTransformationMatrix()
 	_transformationMatrix = (_transformationMatrix * rotationOriginMatrix);
 
 	// Scaling matrix
-	Matrix44 scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, 1.0f);
+	mat44 scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, 1.0f);
 	_transformationMatrix = (_transformationMatrix * scalingMatrix);
 }
 
@@ -135,72 +135,72 @@ void BillboardEntity::setEmissionMap(TextureID value)
 	_emissionMap = value;
 }
 
-void BillboardEntity::setPosition(Vec3 value)
+void BillboardEntity::setPosition(fvec3 value)
 {
 	_position = value;
 	_positionTarget = value;
 }
 
-void BillboardEntity::setRotation(Vec3 value)
+void BillboardEntity::setRotation(fvec3 value)
 {
-	_rotation = Vec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
-	_rotationTarget = Vec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
+	_rotation = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
+	_rotationTarget = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
 }
 
-void BillboardEntity::setSize(Vec2 value)
+void BillboardEntity::setSize(fvec2 value)
 {
-	_size = Vec2(max(0.0f, value.x), max(0.0f, value.y));
-	_sizeTarget = Vec2(max(0.0f, value.x), max(0.0f, value.y));
+	_size = fvec2(max(0.0f, value.x), max(0.0f, value.y));
+	_sizeTarget = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void BillboardEntity::move(Vec3 value)
+void BillboardEntity::move(fvec3 value)
 {
 	_position += value;
 	_positionTarget += value;
 }
 
-void BillboardEntity::rotate(Vec3 value)
+void BillboardEntity::rotate(fvec3 value)
 {
 	_rotation += value;
 	_rotationTarget += value;
-	_rotation = Vec3(Math::limitAngle(_rotation.x), Math::limitAngle(_rotation.y), Math::limitAngle(_rotation.z));
-	_rotationTarget = Vec3(Math::limitAngle(_rotationTarget.x), Math::limitAngle(_rotationTarget.y), Math::limitAngle(_rotationTarget.z));
+	_rotation = fvec3(Math::limitAngle(_rotation.x), Math::limitAngle(_rotation.y), Math::limitAngle(_rotation.z));
+	_rotationTarget = fvec3(Math::limitAngle(_rotationTarget.x), Math::limitAngle(_rotationTarget.y), Math::limitAngle(_rotationTarget.z));
 }
 
-void BillboardEntity::scale(Vec2 value)
+void BillboardEntity::scale(fvec2 value)
 {
 	_size += value;
 	_sizeTarget += value;
-	_size = Vec2(max(0.0f, _size.x), max(0.0f, _size.y));
-	_sizeTarget = Vec2(max(0.0f, _sizeTarget.x), max(0.0f, _sizeTarget.y));
+	_size = fvec2(max(0.0f, _size.x), max(0.0f, _size.y));
+	_sizeTarget = fvec2(max(0.0f, _sizeTarget.x), max(0.0f, _sizeTarget.y));
 }
 
-void BillboardEntity::moveTo(Vec3 target, float speed)
+void BillboardEntity::moveTo(fvec3 target, float speed)
 {
 	_positionTarget = target;
 	_positionTargetSpeed = speed;
 }
 
-void BillboardEntity::rotateTo(Vec3 target, float speed)
+void BillboardEntity::rotateTo(fvec3 target, float speed)
 {
-	_rotationTarget = Vec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
+	_rotationTarget = fvec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
 	_rotationTargetSpeed = speed;
 }
 
-void BillboardEntity::scaleTo(Vec2 target, float speed)
+void BillboardEntity::scaleTo(fvec2 target, float speed)
 {
-	_sizeTarget = Vec2(max(0.0f, target.x), max(0.0f, target.y));
+	_sizeTarget = fvec2(max(0.0f, target.x), max(0.0f, target.y));
 	_sizeTargetSpeed = speed;
 }
 
-void BillboardEntity::setColor(Vec3 value)
+void BillboardEntity::setColor(fvec3 value)
 {
-	_color = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void BillboardEntity::setWireframeColor(Vec3 value)
+void BillboardEntity::setWireframeColor(fvec3 value)
 {
-	_wireframeColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
 void BillboardEntity::setTextContent(const string& value)

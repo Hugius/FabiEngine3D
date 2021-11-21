@@ -41,27 +41,27 @@ const bool FabiEngine3D::billboard_isVisible(const string& ID) const
 	return _core->_billboardEntityManager.getEntity(ID)->isVisible();
 }
 
-const Vec3 FabiEngine3D::billboard_getPosition(const string& ID) const
+const fvec3 FabiEngine3D::billboard_getPosition(const string& ID) const
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getPosition();
 }
 
-const Vec3 FabiEngine3D::billboard_getRotation(const string& ID) const
+const fvec3 FabiEngine3D::billboard_getRotation(const string& ID) const
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getRotation();
 }
 
-const Vec2 FabiEngine3D::billboard_getSize(const string& ID) const
+const fvec2 FabiEngine3D::billboard_getSize(const string& ID) const
 {
-	return Vec2(_core->_billboardEntityManager.getEntity(ID)->getSize().x, _core->_billboardEntityManager.getEntity(ID)->getSize().y);
+	return fvec2(_core->_billboardEntityManager.getEntity(ID)->getSize().x, _core->_billboardEntityManager.getEntity(ID)->getSize().y);
 }
 
-const Vec3 FabiEngine3D::billboard_getColor(const string& ID) const
+const fvec3 FabiEngine3D::billboard_getColor(const string& ID) const
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getColor();
 }
 
-const Vec3 FabiEngine3D::billboard_getWireframeColor(const string& ID) const
+const fvec3 FabiEngine3D::billboard_getWireframeColor(const string& ID) const
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getWireframeColor();
 }

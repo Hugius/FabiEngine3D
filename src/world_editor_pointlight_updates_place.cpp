@@ -56,7 +56,7 @@ void WorldEditor::_updatePointlightPlacing()
 					_fe3d.pointlight_delete(newID);
 					_fe3d.pointlight_create(newID);
 					_fe3d.pointlight_setPosition(newID, newPosition);
-					_fe3d.pointlight_setRadius(newID, Vec3(DEFAULT_POINTLIGHT_RADIUS));
+					_fe3d.pointlight_setRadius(newID, fvec3(DEFAULT_POINTLIGHT_RADIUS));
 					_fe3d.pointlight_setIntensity(newID, DEFAULT_POINTLIGHT_INTENSITY);
 					_loadedPointlightIDs.push_back(newID);
 				}
@@ -135,7 +135,7 @@ void WorldEditor::_updatePointlightPlacing()
 							_fe3d.pointlight_delete(newID);
 							_fe3d.pointlight_create(newID);
 							_fe3d.pointlight_setPosition(newID, newPosition);
-							_fe3d.pointlight_setRadius(newID, Vec3(DEFAULT_POINTLIGHT_RADIUS));
+							_fe3d.pointlight_setRadius(newID, fvec3(DEFAULT_POINTLIGHT_RADIUS));
 							_fe3d.pointlight_setIntensity(newID, DEFAULT_POINTLIGHT_INTENSITY);
 							_loadedPointlightIDs.push_back(newID);
 						}

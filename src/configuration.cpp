@@ -174,22 +174,22 @@ const string& Config::getWindowTitle() const
 	return _windowTitle;
 }
 
-const Ivec2 Config::getMonitorSize() const
+const ivec2 Config::getMonitorSize() const
 {
 	return _monitorSize;
 }
 
-const Ivec2 Config::getWindowSize() const
+const ivec2 Config::getWindowSize() const
 {
 	return _windowSize;
 }
 
-const Ivec2 Config::getViewportPosition() const
+const ivec2 Config::getViewportPosition() const
 {
 	return _viewportPosition;
 }
 
-const Ivec2 Config::getViewportSize() const
+const ivec2 Config::getViewportSize() const
 {
 	return _viewportSize;
 }

@@ -16,7 +16,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetterFunction(const string& func
 			if(_validateFe3dWater())
 			{
 				_fe3d.water_setSpeed(_fe3d.water_getSelectedID(),
-										   Vec2(arguments[0].getDecimal() / 100000.0f, arguments[1].getDecimal() / 100000.0f));
+										   fvec2(arguments[0].getDecimal() / 100000.0f, arguments[1].getDecimal() / 100000.0f));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -31,7 +31,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetterFunction(const string& func
 			// Validate water existence
 			if(_validateFe3dWater())
 			{
-				_fe3d.water_setColor(_fe3d.water_getSelectedID(), Vec3(
+				_fe3d.water_setColor(_fe3d.water_getSelectedID(), fvec3(
 					arguments[0].getDecimal(),
 					arguments[1].getDecimal(),
 					arguments[2].getDecimal()));

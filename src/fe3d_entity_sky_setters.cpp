@@ -105,7 +105,7 @@ void FabiEngine3D::sky_setRotation(const string& ID, float rotation)
 	_core->_skyEntityManager.getEntity(ID)->setRotation(rotation);
 }
 
-void FabiEngine3D::sky_setColor(const string& ID, Vec3 color)
+void FabiEngine3D::sky_setColor(const string& ID, fvec3 color)
 {
 	_core->_skyEntityManager.getEntity(ID)->setColor(color);
 }
@@ -115,7 +115,7 @@ void FabiEngine3D::sky_setWireframed(const string& ID, bool enabled)
 	_core->_skyEntityManager.getEntity(ID)->setWireframed(enabled);
 }
 
-void FabiEngine3D::sky_setWireframeColor(const string& ID, Vec3 color)
+void FabiEngine3D::sky_setWireframeColor(const string& ID, fvec3 color)
 {
 	_core->_skyEntityManager.getEntity(ID)->setWireframeColor(color);
 }

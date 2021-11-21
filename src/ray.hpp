@@ -5,14 +5,14 @@
 class Ray final
 {
 public:
-	Ray(Vec3 position, Vec3 direction);
+	Ray(fvec3 position, fvec3 direction);
 
 	// Vectors
-	const Vec3 getPosition() const;
-	const Vec3 getDirection() const;
+	const fvec3 getPosition() const;
+	const fvec3 getDirection() const;
 
 private:
 	// Vectors
-	Vec3 _position;
-	Vec3 _direction;
+	fvec3 _position;
+	fvec3 _direction;
 };

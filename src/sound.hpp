@@ -13,9 +13,9 @@ public:
 	Sound(const string& ID, const string& filePath, Mix_Chunk* dataPointer);
 
 	// Voids
-	void make3D(Vec3 position, float maxVolume, float maxDistance);
-	void setPosition(Vec3 value);
-	void move(Vec3 value);
+	void make3D(fvec3 position, float maxVolume, float maxDistance);
+	void setPosition(fvec3 value);
+	void move(fvec3 value);
 	void setVolume(float value);
 	void setMaxVolume(float value);
 	void setMaxDistance(float value);
@@ -25,7 +25,7 @@ public:
 	const string& getFilePath() const;
 
 	// Vectors
-	const Vec3 getPosition() const;
+	const fvec3 getPosition() const;
 
 	// Decimals
 	const float getVolume() const;
@@ -44,7 +44,7 @@ private:
 	string _filePath = "";
 
 	// Vectors
-	Vec3 _position = Vec3(0.0f);
+	fvec3 _position = fvec3(0.0f);
 
 	// Decimals
 	float _volume = 1.0f;

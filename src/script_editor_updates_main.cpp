@@ -32,25 +32,25 @@ void ScriptEditor::_updateGUI()
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("search")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("search", "Search Script", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("search", "Search Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("scriptCreate", "Create Script", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("scriptCreate", "Create Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto IDs = _script.getAllScriptFileIDs();
 			sort(IDs.begin(), IDs.end());
-			_gui.getGlobalScreen()->createChoiceForm("scriptFileList", "Edit Script", Vec2(0.0f, 0.1f), IDs);
+			_gui.getGlobalScreen()->createChoiceForm("scriptFileList", "Edit Script", fvec2(0.0f, 0.1f), IDs);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rename")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("scriptRename", "Rename Script", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("scriptRename", "Rename Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -67,7 +67,7 @@ void ScriptEditor::_updateGUI()
 			// Search hotkey
 			if(_fe3d.input_isKeyPressed(InputType::KEY_F) && !_gui.getGlobalScreen()->isFocused())
 			{
-				_gui.getGlobalScreen()->createValueForm("search", "Search Keyword", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("search", "Search Keyword", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			}
 		}
 
@@ -135,7 +135,7 @@ void ScriptEditor::_updateMiscellaneous()
 			if(_fe3d.camera_getPosition().y < (lastLineHeight + CAMERA_OFFSET)) // Camera must not go out of screen
 			{
 				_scrollingAcceleration = 0.0f;
-				_fe3d.camera_setPosition(Vec3(CAMERA_POSITION.x, lastLineHeight + CAMERA_OFFSET, CAMERA_POSITION.z));
+				_fe3d.camera_setPosition(fvec3(CAMERA_POSITION.x, lastLineHeight + CAMERA_OFFSET, CAMERA_POSITION.z));
 			}
 			else if(_fe3d.camera_getPosition().y == (lastLineHeight + CAMERA_OFFSET) && _scrollingAcceleration < 0.0f) // Tried to scroll down
 			{
@@ -154,7 +154,7 @@ void ScriptEditor::_updateMiscellaneous()
 		{
 			_scrollingAcceleration = 0.0f;
 			float currentLineHeight = _fe3d.billboard_getPosition(to_string(currentLineIndex)).y;
-			_fe3d.camera_setPosition(Vec3(CAMERA_POSITION.x, currentLineHeight + CAMERA_OFFSET, CAMERA_POSITION.z));
+			_fe3d.camera_setPosition(fvec3(CAMERA_POSITION.x, currentLineHeight + CAMERA_OFFSET, CAMERA_POSITION.z));
 		}
 		lastLineIndex = currentLineIndex;
 	}
@@ -162,7 +162,7 @@ void ScriptEditor::_updateMiscellaneous()
 	// Smooth camera movement
 	_scrollingAcceleration = clamp(_scrollingAcceleration, -MAX_SCROLLING_ACCELERATION, MAX_SCROLLING_ACCELERATION);
 	_scrollingAcceleration *= 0.95f;
-	_fe3d.camera_move(Vec3(0.0f, _scrollingAcceleration, 0.0f));
+	_fe3d.camera_move(fvec3(0.0f, _scrollingAcceleration, 0.0f));
 
 	// Check if user filled in a keyword
 	string keyword;

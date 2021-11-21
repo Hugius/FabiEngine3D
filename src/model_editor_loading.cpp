@@ -121,7 +121,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 			string modelID, meshPath, levelOfDetailEntityID;
 			unsigned int rotationOrder;
 			bool isInstanced, isFaceCulled;
-			Vec3 size;
+			fvec3 size;
 
 			// Read data from file
 			iss >>
@@ -148,7 +148,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 
 				// Data placeholders
 				string diffuseMapPath, emissionMapPath, specularMapPath, reflectionMapPath, normalMapPath;
-				Vec3 color;
+				fvec3 color;
 				float textureRepeat, specularShininess, specularIntensity, reflectivity, lightness;
 				unsigned int reflectionType;
 				bool isSpecular, isReflective;
@@ -305,7 +305,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 			string modelID, meshPath, levelOfDetailEntityID;
 			unsigned int rotationOrder;
 			bool isInstanced, isFaceCulled;
-			Vec3 size;
+			fvec3 size;
 
 			// Read data from file
 			iss >>
@@ -345,7 +345,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 				// Set instancing
 				if(isInstanced)
 				{
-					_fe3d.model_enableInstancing(modelID, { Vec3(0.0f) });
+					_fe3d.model_enableInstancing(modelID, { fvec3(0.0f) });
 				}
 
 				// Set properties
@@ -371,7 +371,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 					float textureRepeat, specularShininess, specularIntensity, reflectivity, lightness;
 					unsigned int reflectionType;
 					bool isSpecular, isReflective;
-					Vec3 color;
+					fvec3 color;
 
 					// Read data from file
 					iss >>
@@ -489,7 +489,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 		{
 			// Data placeholders
 			string aabbID, modelID;
-			Vec3 position, size;
+			fvec3 position, size;
 
 			// Read data from file
 			iss >>

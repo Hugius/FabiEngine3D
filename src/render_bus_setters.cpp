@@ -65,72 +65,72 @@ void RenderBus::setFinalWorldMap(TextureID value)
 	_finalWorldMap = value;
 }
 
-void RenderBus::setViewMatrix(const Matrix44 value)
+void RenderBus::setViewMatrix(const mat44 value)
 {
 	_viewMatrix = value;
 }
 
-void RenderBus::setProjectionMatrix(const Matrix44 value)
+void RenderBus::setProjectionMatrix(const mat44 value)
 {
 	_projectionMatrix = value;
 }
 
-void RenderBus::setShadowMatrix(const Matrix44 value)
+void RenderBus::setShadowMatrix(const mat44 value)
 {
 	_shadowMatrix = value;
 }
 
-void RenderBus::setFlareSourceUV(Vec2 value)
+void RenderBus::setFlareSourceUV(fvec2 value)
 {
 	_flareSourceUV = value;
 }
 
-void RenderBus::setClippingPlane(Vec4 value)
+void RenderBus::setClippingPlane(fvec4 value)
 {
 	_clippingPlane = value;
 }
 
-void RenderBus::setCameraPosition(Vec3 value)
+void RenderBus::setCameraPosition(fvec3 value)
 {
 	_cameraPosition = value;
 }
 
-void RenderBus::setCameraFront(Vec3 value)
+void RenderBus::setCameraFront(fvec3 value)
 {
 	_cameraFront = value;
 }
 
-void RenderBus::setAmbientLightingColor(Vec3 value)
+void RenderBus::setAmbientLightingColor(fvec3 value)
 {
-	_ambientLightColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+	_ambientLightColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void RenderBus::setDirectionalLightingPosition(Vec3 value)
+void RenderBus::setDirectionalLightingPosition(fvec3 value)
 {
 	_directionalLightPosition = value;
 }
 
-void RenderBus::setDirectionalLightingColor(Vec3 value)
+void RenderBus::setDirectionalLightingColor(fvec3 value)
 {
-	_directionalLightColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+	_directionalLightColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void RenderBus::setShadowEyePosition(Vec3 value)
+void RenderBus::setShadowEyePosition(fvec3 value)
 {
 	_shadowEyePosition = value;
 }
 
-void RenderBus::setShadowCenterPosition(Vec3 value)
+void RenderBus::setShadowCenterPosition(fvec3 value)
 {
 	_shadowCenterPosition = value;
 }
 
-void RenderBus::setFogColor(Vec3 value)
+void RenderBus::setFogColor(fvec3 value)
 {
-	_fogColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+	_fogColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void RenderBus::setFlareSourcePosition(Vec3 value)
+void RenderBus::setFlareSourcePosition(fvec3 value)
 {
 	_flareSourcePosition = value;
 }

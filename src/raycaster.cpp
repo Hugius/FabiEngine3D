@@ -17,7 +17,7 @@ Raycaster::Raycaster(RenderBus& renderBus, TerrainEntityManager& terrainManager)
 
 }
 
-void Raycaster::update(Ivec2 cursorPosition)
+void Raycaster::update(ivec2 cursorPosition)
 {
 	// Update raycasting
 	_cursorRay = _calculateCursorRay(cursorPosition);
@@ -31,12 +31,12 @@ void Raycaster::update(Ivec2 cursorPosition)
 		}
 		else
 		{
-			_terrainPoint = Vec3(-1.0f);
+			_terrainPoint = fvec3(-1.0f);
 		}
 	}
 	else
 	{
-		_terrainPoint = Vec3(-1.0f);
+		_terrainPoint = fvec3(-1.0f);
 	}
 }
 
@@ -75,7 +75,7 @@ const Ray Raycaster::getCursorRay() const
 	return _cursorRay;
 }
 
-const Vec3 Raycaster::getTerrainPoint() const
+const fvec3 Raycaster::getTerrainPoint() const
 {
 	return _terrainPoint;
 }
@@ -90,13 +90,13 @@ const float Raycaster::calculateRayBoxIntersectionDistance(Ray ray, Box box) con
 	*/
 
 	// Check if ray is invalid
-	if(ray.getDirection() == Vec3(0.0f))
+	if(ray.getDirection() == fvec3(0.0f))
 	{
 		return -1.0f;
 	}
 
 	// Small performance optimization
-	const Vec3 inverseRayDirection = (Vec3(1.0f) / ray.getDirection());
+	const fvec3 inverseRayDirection = (fvec3(1.0f) / ray.getDirection());
 
 	// Calculate box points
 	float minX = (box.getPosition().x - box.getLeft());
@@ -134,34 +134,34 @@ const float Raycaster::calculateRayBoxIntersectionDistance(Ray ray, Box box) con
 	return minIntersectionDistance;
 }
 
-const Ray Raycaster::_calculateCursorRay(Ivec2 cursorPosition) const
+const Ray Raycaster::_calculateCursorRay(ivec2 cursorPosition) const
 {
-	Vec2 screenCoords = Tools::convertFromScreenCoords(cursorPosition);
-	Vec2 ndcCoords = Math::convertToNDC(screenCoords);
-	Vec4 clipCoords = Vec4(ndcCoords.x, ndcCoords.y, -1.0f, 1.0f);
-	Vec4 viewCoords = _convertToViewSpace(clipCoords);
-	Vec3 worldCoords = _convertToWorldSpace(viewCoords);
+	fvec2 screenCoords = Tools::convertFromScreenCoords(cursorPosition);
+	fvec2 ndcCoords = Math::convertToNDC(screenCoords);
+	fvec4 clipCoords = fvec4(ndcCoords.x, ndcCoords.y, -1.0f, 1.0f);
+	fvec4 viewCoords = _convertToViewSpace(clipCoords);
+	fvec3 worldCoords = _convertToWorldSpace(viewCoords);
 
 	return Ray(_renderBus.getCameraPosition(), Math::normalize(worldCoords));
 }
 
-const Vec4 Raycaster::_convertToViewSpace(Vec4 clipCoords) const
+const fvec4 Raycaster::_convertToViewSpace(fvec4 clipCoords) const
 {
-	Matrix44 invertedProjection = Math::invertMatrix(_renderBus.getProjectionMatrix());
-	Vec4 viewCoords = (invertedProjection * clipCoords);
+	mat44 invertedProjection = Math::invertMatrix(_renderBus.getProjectionMatrix());
+	fvec4 viewCoords = (invertedProjection * clipCoords);
 
-	return Vec4(viewCoords.x, viewCoords.y, -1.0f, 0.0f);
+	return fvec4(viewCoords.x, viewCoords.y, -1.0f, 0.0f);
 }
 
-const Vec3 Raycaster::_convertToWorldSpace(Vec4 viewCoords) const
+const fvec3 Raycaster::_convertToWorldSpace(fvec4 viewCoords) const
 {
-	Matrix44 invertedView = Math::invertMatrix(_renderBus.getViewMatrix());
-	Vec4 worldCoords = (invertedView * viewCoords);
+	mat44 invertedView = Math::invertMatrix(_renderBus.getViewMatrix());
+	fvec4 worldCoords = (invertedView * viewCoords);
 
-	return Vec3(worldCoords.x, worldCoords.y, worldCoords.z);
+	return fvec3(worldCoords.x, worldCoords.y, worldCoords.z);
 }
 
-const Vec3 Raycaster::getPointOnRay(Ray ray, float distance) const
+const fvec3 Raycaster::getPointOnRay(Ray ray, float distance) const
 {
 	return (ray.getPosition() + (ray.getDirection() * distance));
 }
@@ -169,7 +169,7 @@ const Vec3 Raycaster::getPointOnRay(Ray ray, float distance) const
 const bool Raycaster::_isUnderTerrain(float distance) const
 {
 	// Scale ray
-	Vec3 scaledRay = getPointOnRay(_cursorRay, distance);
+	fvec3 scaledRay = getPointOnRay(_cursorRay, distance);
 
 	// Retrieve height
 	auto selectedTerrain = _terrainManager.getSelectedTerrain();
@@ -182,7 +182,7 @@ const bool Raycaster::_isUnderTerrain(float distance) const
 	return (scaledRay.y < terrainHeight);
 }
 
-const Vec3 Raycaster::_calculateTerrainPoint() const
+const fvec3 Raycaster::_calculateTerrainPoint() const
 {
 	// Temporary values
 	float distance = 0.0f;
@@ -195,7 +195,7 @@ const Vec3 Raycaster::_calculateTerrainPoint() const
 		{
 			// Calculate point on terrain
 			distance -= (_terrainPointingPrecision / 2.0f);
-			Vec3 endPoint = getPointOnRay(_cursorRay, distance);
+			fvec3 endPoint = getPointOnRay(_cursorRay, distance);
 
 			// Check if selected point is inside the terrain size
 			auto selectedTerrain = _terrainManager.getSelectedTerrain();
@@ -217,5 +217,5 @@ const Vec3 Raycaster::_calculateTerrainPoint() const
 		}
 	}
 
-	return Vec3(-1.0f);
+	return fvec3(-1.0f);
 }

@@ -21,10 +21,10 @@ public:
 	const string& getWindowTitle() const;
 
 	// Vectors
-	const Ivec2 getMonitorSize() const;
-	const Ivec2 getWindowSize()	const;
-	const Ivec2 getViewportSize() const;
-	const Ivec2 getViewportPosition() const;
+	const ivec2 getMonitorSize() const;
+	const ivec2 getWindowSize()	const;
+	const ivec2 getViewportSize() const;
+	const ivec2 getViewportPosition() const;
 
 	// Decimals
 	static inline const float MS_PER_UPDATE = (1000.0f / 144.0f);
@@ -73,10 +73,10 @@ private:
 	string _windowTitle = "";
 
 	// Vectors
-	Ivec2 _monitorSize = Ivec2(0);
-	Ivec2 _windowSize = Ivec2(0);
-	Ivec2 _viewportSize = Ivec2(0);
-	Ivec2 _viewportPosition = Ivec2(0);
+	ivec2 _monitorSize = ivec2(0);
+	ivec2 _windowSize = ivec2(0);
+	ivec2 _viewportSize = ivec2(0);
+	ivec2 _viewportPosition = ivec2(0);
 
 	// Booleans
 	bool _isWindowFullscreen = false;

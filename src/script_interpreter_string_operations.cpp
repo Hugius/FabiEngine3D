@@ -143,7 +143,7 @@ const bool ScriptInterpreter::_isBooleanValue(const string& valueString) const
 	return (valueString == "<true>" || valueString == "<false>");
 }
 
-const Vec3 ScriptInterpreter::_extractVec3FromString(const string& valueString)
+const fvec3 ScriptInterpreter::_extractVec3FromString(const string& valueString)
 {
 	// Check if vec3 value
 	if(!_isVec3Value(valueString))
@@ -173,12 +173,12 @@ const Vec3 ScriptInterpreter::_extractVec3FromString(const string& valueString)
 		}
 	}
 
-	return Vec3(stof(_limitDecimalString(xyz[0])), stof(_limitDecimalString(xyz[1])), stof(_limitDecimalString(xyz[2])));
+	return fvec3(stof(_limitDecimalString(xyz[0])), stof(_limitDecimalString(xyz[1])), stof(_limitDecimalString(xyz[2])));
 }
 
-const Ivec3 ScriptInterpreter::_extractVec3PartFromString(const string& valueString) const
+const ivec3 ScriptInterpreter::_extractVec3PartFromString(const string& valueString) const
 {
-	Ivec3 parts = Ivec3(0);
+	ivec3 parts = ivec3(0);
 	auto stringSize = valueString.size();
 
 	if(stringSize > 2 &&

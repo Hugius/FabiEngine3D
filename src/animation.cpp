@@ -25,7 +25,7 @@ void Animation::addFrame(const AnimationFrame& value)
 	_frames.push_back(value);
 }
 
-void Animation::addPart(const string& partID, Vec3 totalMovement, Vec3 totalRotation, Vec3 totalScaling)
+void Animation::addPart(const string& partID, fvec3 totalMovement, fvec3 totalRotation, fvec3 totalScaling)
 {
 	_partIDs.push_back(partID);
 	_totalMovements.insert(make_pair(partID, totalMovement));
@@ -33,17 +33,17 @@ void Animation::addPart(const string& partID, Vec3 totalMovement, Vec3 totalRota
 	_totalScalings.insert(make_pair(partID, totalScaling));
 }
 
-void Animation::setTotalMovement(const string& partID, Vec3 value)
+void Animation::setTotalMovement(const string& partID, fvec3 value)
 {
 	_totalMovements.at(partID) = value;
 }
 
-void Animation::setTotalRotation(const string& partID, Vec3 value)
+void Animation::setTotalRotation(const string& partID, fvec3 value)
 {
 	_totalRotations.at(partID) = value;
 }
 
-void Animation::setTotalScaling(const string& partID, Vec3 value)
+void Animation::setTotalScaling(const string& partID, fvec3 value)
 {
 	_totalScalings.at(partID) = value;
 }
@@ -63,9 +63,9 @@ void Animation::setAnimatedModelID(const string& value)
 	_animatedModelID = value;
 }
 
-void Animation::setInitialSize(Vec3 value)
+void Animation::setInitialSize(fvec3 value)
 {
-	_initialSize = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
+	_initialSize = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
 
 void Animation::setSpeedMultiplier(float value)
@@ -113,17 +113,17 @@ const string& Animation::getID() const
 	return _ID;
 }
 
-const map<string, Vec3>& Animation::getTotalMovements() const
+const map<string, fvec3>& Animation::getTotalMovements() const
 {
 	return _totalMovements;
 }
 
-const map<string, Vec3>& Animation::getTotalRotations() const
+const map<string, fvec3>& Animation::getTotalRotations() const
 {
 	return _totalRotations;
 }
 
-const map<string, Vec3>& Animation::getTotalScalings() const
+const map<string, fvec3>& Animation::getTotalScalings() const
 {
 	return _totalScalings;
 }
@@ -148,7 +148,7 @@ const string& Animation::getAnimatedModelID() const
 	return _animatedModelID;
 }
 
-const Vec3 Animation::getInitialSize() const
+const fvec3 Animation::getInitialSize() const
 {
 	return _initialSize;
 }

@@ -6,7 +6,7 @@
 class EngineGuiWindow final
 {
 public:
-	EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color);
+	EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color);
 	~EngineGuiWindow();
 
 	// Voids
@@ -21,8 +21,8 @@ public:
 	const string& getParentID() const;
 
 	// Vectors
-	const Vec2 getInitialPosition() const;
-	const Vec2 getInitialSize() const;
+	const fvec2 getInitialPosition() const;
+	const fvec2 getInitialSize() const;
 
 	// Booleans
 	const bool isHovered() const;
@@ -40,8 +40,8 @@ private:
 	string _activeScreenID = "";
 
 	// Vectors
-	const Vec2 _initialPosition;
-	const Vec2 _initialSize;
+	const fvec2 _initialPosition;
+	const fvec2 _initialSize;
 
 	// Miscellaneous
 	vector<shared_ptr<EngineGuiScreen>> _screens;

@@ -86,7 +86,7 @@ void FabiEngine3D::water_setWireframed(const string& ID, bool enabled)
 	_core->_waterEntityManager.getEntity(ID)->setWireframed(enabled);
 }
 
-void FabiEngine3D::water_setWireframeColor(const string& ID, Vec3 color)
+void FabiEngine3D::water_setWireframeColor(const string& ID, fvec3 color)
 {
 	_core->_waterEntityManager.getEntity(ID)->setWireframeColor(color);
 }
@@ -148,12 +148,12 @@ void FabiEngine3D::water_setSpecularIntensity(const string& ID, float intensity)
 	_core->_waterEntityManager.getEntity(ID)->setSpecularIntensity(intensity);
 }
 
-void FabiEngine3D::water_setSpeed(const string& ID, Vec2 speed)
+void FabiEngine3D::water_setSpeed(const string& ID, fvec2 speed)
 {
 	_core->_waterEntityManager.getEntity(ID)->setSpeed(speed);
 }
 
-void FabiEngine3D::water_setColor(const string& ID, Vec3 color)
+void FabiEngine3D::water_setColor(const string& ID, fvec3 color)
 {
 	_core->_waterEntityManager.getEntity(ID)->setColor(color);
 }

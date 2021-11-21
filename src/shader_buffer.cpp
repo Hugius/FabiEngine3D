@@ -165,27 +165,27 @@ void ShaderBuffer::_uploadUniform(const UniformID& uniformID, const double& data
 	glUniform1d(uniformID, data);
 }
 
-void ShaderBuffer::_uploadUniform(const UniformID& uniformID, const Vec2& data)
+void ShaderBuffer::_uploadUniform(const UniformID& uniformID, const fvec2& data)
 {
 	glUniform2f(uniformID, data.x, data.y);
 }
 
-void ShaderBuffer::_uploadUniform(const UniformID& uniformID, const Vec3& data)
+void ShaderBuffer::_uploadUniform(const UniformID& uniformID, const fvec3& data)
 {
 	glUniform3f(uniformID, data.x, data.y, data.z);
 }
 
-void ShaderBuffer::_uploadUniform(const UniformID& uniformID, const Vec4& data)
+void ShaderBuffer::_uploadUniform(const UniformID& uniformID, const fvec4& data)
 {
 	glUniform4f(uniformID, data.x, data.y, data.z, data.w);
 }
 
-void ShaderBuffer::_uploadUniform(const UniformID& uniformID, const Matrix33& data)
+void ShaderBuffer::_uploadUniform(const UniformID& uniformID, const mat33& data)
 {
 	glUniformMatrix3fv(uniformID, 1, GL_FALSE, data.f);
 }
 
-void ShaderBuffer::_uploadUniform(const UniformID& uniformID, const Matrix44& data)
+void ShaderBuffer::_uploadUniform(const UniformID& uniformID, const mat44& data)
 {
 	glUniformMatrix4fv(uniformID, 1, GL_FALSE, data.f);
 }

@@ -27,7 +27,7 @@ void WorldEditor::_updateWaterMenu()
 			}
 
 			// Add choice list
-			_gui.getGlobalScreen()->createChoiceForm("waterList", "Select Water", Vec2(0.0f, 0.1f), waterIDs);
+			_gui.getGlobalScreen()->createChoiceForm("waterList", "Select Water", fvec2(0.0f, 0.1f), waterIDs);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{

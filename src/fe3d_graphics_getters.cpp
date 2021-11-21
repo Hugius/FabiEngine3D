@@ -76,7 +76,7 @@ const unsigned int FabiEngine3D::gfx_getRefractionQuality() const
 	return _core->_renderBus.getRefractionQuality();
 }
 
-const Vec3 FabiEngine3D::gfx_getAmbientLightingColor() const
+const fvec3 FabiEngine3D::gfx_getAmbientLightingColor() const
 {
 	return _core->_renderBus.getAmbientLightingColor();
 }
@@ -91,12 +91,12 @@ const float FabiEngine3D::gfx_getDirectionalLightingIntensity() const
 	return _core->_renderBus.getDirectionalLightingIntensity();
 }
 
-const Vec3 FabiEngine3D::gfx_getDirectionalLightingPosition() const
+const fvec3 FabiEngine3D::gfx_getDirectionalLightingPosition() const
 {
 	return _core->_renderBus.getDirectionalLightingPosition();
 }
 
-const Vec3 FabiEngine3D::gfx_getDirectionalLightingColor() const
+const fvec3 FabiEngine3D::gfx_getDirectionalLightingColor() const
 {
 	return _core->_renderBus.getDirectionalLightingColor();
 }
@@ -116,7 +116,7 @@ const float FabiEngine3D::gfx_getFogThickness() const
 	return _core->_renderBus.getFogThickness();
 }
 
-const Vec3 FabiEngine3D::gfx_getFogColor() const
+const fvec3 FabiEngine3D::gfx_getFogColor() const
 {
 	return _core->_renderBus.getFogColor();
 }
@@ -126,12 +126,12 @@ const float FabiEngine3D::gfx_getPlanarReflectionHeight() const
 	return _core->_renderBus.getPlanarReflectionHeight();
 }
 
-const Vec3 FabiEngine3D::gfx_getShadowEye() const
+const fvec3 FabiEngine3D::gfx_getShadowEye() const
 {
 	return _core->_renderBus.getShadowEyePosition();
 }
 
-const Vec3 FabiEngine3D::gfx_getShadowCenter() const
+const fvec3 FabiEngine3D::gfx_getShadowCenter() const
 {
 	return _core->_renderBus.getShadowCenterPosition();
 }

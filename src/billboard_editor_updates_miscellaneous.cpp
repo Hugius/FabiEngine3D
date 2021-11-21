@@ -31,7 +31,7 @@ void BillboardEditor::_updateMiscellaneousMenu()
 		}
 
 		// Reset rotations if not facing camera
-		Vec3 rotation = _fe3d.billboard_getRotation(_currentBillboardID);
+		fvec3 rotation = _fe3d.billboard_getRotation(_currentBillboardID);
 		if(!isFacingX)
 		{
 			rotation.x = 0.0f;

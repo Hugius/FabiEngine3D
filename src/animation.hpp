@@ -15,14 +15,14 @@ public:
 	void addFrame(const AnimationFrame& value);
 	void setFrame(unsigned int index, const AnimationFrame& value);
 	void setFrames(const vector<AnimationFrame>& value);
-	void addPart(const string& partID, Vec3 totalMovement, Vec3 totalRotation, Vec3 totalScaling);
+	void addPart(const string& partID, fvec3 totalMovement, fvec3 totalRotation, fvec3 totalScaling);
 	void setPreviewModelID(const string& value);
 	void setOldPreviewModelID(const string& value);
 	void setAnimatedModelID(const string& value);
-	void setTotalMovement(const string& partID, Vec3 value);
-	void setTotalRotation(const string& partID, Vec3 value);
-	void setTotalScaling(const string& partID, Vec3 value);
-	void setInitialSize(Vec3 value);
+	void setTotalMovement(const string& partID, fvec3 value);
+	void setTotalRotation(const string& partID, fvec3 value);
+	void setTotalScaling(const string& partID, fvec3 value);
+	void setInitialSize(fvec3 value);
 	void setSpeedMultiplier(float value);
 	void setTimesToPlay(int value);
 	void setFadeFramestep(int value);
@@ -39,10 +39,10 @@ public:
 	const string& getAnimatedModelID() const;
 
 	// Vectors
-	const map<string, Vec3>& getTotalMovements() const;
-	const map<string, Vec3>& getTotalRotations() const;
-	const map<string, Vec3>& getTotalScalings() const;
-	const Vec3 getInitialSize() const;
+	const map<string, fvec3>& getTotalMovements() const;
+	const map<string, fvec3>& getTotalRotations() const;
+	const map<string, fvec3>& getTotalScalings() const;
+	const fvec3 getInitialSize() const;
 
 	// Decimals
 	const float getSpeedMultiplier() const;
@@ -69,10 +69,10 @@ private:
 	string _animatedModelID = "";
 
 	// Vectors
-	map<string, Vec3> _totalMovements;
-	map<string, Vec3> _totalRotations;
-	map<string, Vec3> _totalScalings;
-	Vec3 _initialSize = Vec3(0.0f);
+	map<string, fvec3> _totalMovements;
+	map<string, fvec3> _totalRotations;
+	map<string, fvec3> _totalScalings;
+	fvec3 _initialSize = fvec3(0.0f);
 
 	// Decimals
 	float _speedMultiplier = 1.0f;

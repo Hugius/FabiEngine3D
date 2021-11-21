@@ -21,17 +21,17 @@ void FabiEngine3D::reflection_setVisible(const string& ID, bool isVisible)
 	_core->_reflectionEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
-void FabiEngine3D::reflection_setPosition(const string& ID, Vec3 position)
+void FabiEngine3D::reflection_setPosition(const string& ID, fvec3 position)
 {
 	_core->_reflectionEntityManager.getEntity(ID)->setPosition(position);
 }
 
-void FabiEngine3D::reflection_move(const string& ID, Vec3 change)
+void FabiEngine3D::reflection_move(const string& ID, fvec3 change)
 {
 	_core->_reflectionEntityManager.getEntity(ID)->move(change);
 }
 
-void FabiEngine3D::reflection_moveTo(const string& ID, Vec3 target, float speed)
+void FabiEngine3D::reflection_moveTo(const string& ID, fvec3 target, float speed)
 {
 	_core->_reflectionEntityManager.getEntity(ID)->moveTo(target, speed);
 }

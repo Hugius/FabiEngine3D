@@ -1,6 +1,6 @@
 #include "mathematics.hpp"
 
-const Matrix33 Math::invertMatrix(Matrix33 matrix)
+const mat33 Math::invertMatrix(mat33 matrix)
 {
 	// Calculate determinant
 	auto determinant = calculateDeterminant(matrix);
@@ -8,11 +8,11 @@ const Matrix33 Math::invertMatrix(Matrix33 matrix)
 	// Check if determinant is invalid
 	if(determinant == 0.0f)
 	{
-		return Matrix33(0.0f);
+		return mat33(0.0f);
 	}
 
 	// Result
-	Matrix33 tempMatrix;
+	mat33 tempMatrix;
 
 	// Calculate
 	tempMatrix.f[0] = ((matrix.m[1][1] * matrix.m[2][2]) - (matrix.m[2][1] * matrix.m[1][2]));
@@ -35,7 +35,7 @@ const Matrix33 Math::invertMatrix(Matrix33 matrix)
 	return matrix;
 }
 
-const Matrix44 Math::invertMatrix(Matrix44 matrix)
+const mat44 Math::invertMatrix(mat44 matrix)
 {
 	// Calculate determinant
 	auto determinant = calculateDeterminant(matrix);
@@ -43,11 +43,11 @@ const Matrix44 Math::invertMatrix(Matrix44 matrix)
 	// Check if determinant is invalid
 	if(determinant == 0.0f)
 	{
-		return Matrix44(0.0f);
+		return mat44(0.0f);
 	}
 
 	// Result
-	Matrix44 tempMatrix;
+	mat44 tempMatrix;
 
 	// Calculate
 	tempMatrix.f[0] =
@@ -173,10 +173,10 @@ const Matrix44 Math::invertMatrix(Matrix44 matrix)
 	return matrix;
 }
 
-const Matrix33 Math::transposeMatrix(Matrix33 matrix)
+const mat33 Math::transposeMatrix(mat33 matrix)
 {
 	// Copy current matrix to temporary matrix
-	Matrix33 tempMatrix;
+	mat33 tempMatrix;
 	for(unsigned int i = 0; i < 9; i++)
 	{
 		tempMatrix.f[i] = matrix.f[i];
@@ -195,10 +195,10 @@ const Matrix33 Math::transposeMatrix(Matrix33 matrix)
 	return matrix;
 }
 
-const Matrix44 Math::transposeMatrix(Matrix44 matrix)
+const mat44 Math::transposeMatrix(mat44 matrix)
 {
 	// Copy current matrix to temporary matrix
-	Matrix44 tempMatrix;
+	mat44 tempMatrix;
 	for(int i = 0; i < 16; i++)
 	{
 		tempMatrix.f[i] = matrix.f[i];
@@ -217,7 +217,7 @@ const Matrix44 Math::transposeMatrix(Matrix44 matrix)
 	return matrix;
 }
 
-const float Math::calculateDeterminant(Matrix33 matrix)
+const float Math::calculateDeterminant(mat33 matrix)
 {
 	// Result
 	float values[3];
@@ -231,7 +231,7 @@ const float Math::calculateDeterminant(Matrix33 matrix)
 	return (values[0] - values[1] + values[2]);
 }
 
-const float Math::calculateDeterminant(Matrix44 matrix)
+const float Math::calculateDeterminant(mat44 matrix)
 {
 	// Result
 	float values[4];

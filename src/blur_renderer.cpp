@@ -2,9 +2,9 @@
 #include "render_bus.hpp"
 #include "configuration.hpp"
 
-void BlurRenderer::loadCaptureBuffer(Ivec2 bufferSize)
+void BlurRenderer::loadCaptureBuffer(ivec2 bufferSize)
 {
-	_captureBuffer.createColorTexture(Ivec2(0), bufferSize, 1, true);
+	_captureBuffer.createColorTexture(ivec2(0), bufferSize, 1, true);
 }
 
 void BlurRenderer::resetCaptureBuffer()

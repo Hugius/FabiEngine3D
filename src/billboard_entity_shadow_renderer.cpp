@@ -39,8 +39,8 @@ void BillboardEntityShadowRenderer::render(const shared_ptr<BillboardEntity> ent
 		const auto buffer = entity->getRenderBuffer();
 
 		// Sprite animation
-		Vec2 uvMultiplier = Vec2(1.0f);
-		Vec2 uvAdder = Vec2(0.0f);
+		fvec2 uvMultiplier = fvec2(1.0f);
+		fvec2 uvAdder = fvec2(0.0f);
 		if(entity->isSpriteAnimationStarted())
 		{
 			// Retrieve values
@@ -50,8 +50,8 @@ void BillboardEntityShadowRenderer::render(const shared_ptr<BillboardEntity> ent
 			const auto columnIndex = entity->getSpriteAnimationColumnIndex();
 
 			// Apply values
-			uvMultiplier = Vec2(1.0f / static_cast<float>(columnCount), 1.0f / static_cast<float>(rowCount));
-			uvAdder = Vec2(static_cast<float>(columnIndex) * uvMultiplier.x, static_cast<float>(rowIndex) * uvMultiplier.y);
+			uvMultiplier = fvec2(1.0f / static_cast<float>(columnCount), 1.0f / static_cast<float>(rowCount));
+			uvAdder = fvec2(static_cast<float>(columnIndex) * uvMultiplier.x, static_cast<float>(rowIndex) * uvMultiplier.y);
 		}
 
 		// Shader uniforms

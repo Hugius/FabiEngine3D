@@ -5,7 +5,7 @@ const shared_ptr<RenderBuffer> BillboardEntity::getRenderBuffer() const
 	return _renderBuffer;
 }
 
-const Matrix44& BillboardEntity::getTransformationMatrix() const
+const mat44& BillboardEntity::getTransformationMatrix() const
 {
 	return _transformationMatrix;
 }
@@ -20,27 +20,27 @@ const TextureID BillboardEntity::getEmissionMap() const
 	return _emissionMap;
 }
 
-const Vec3 BillboardEntity::getPosition() const
+const fvec3 BillboardEntity::getPosition() const
 {
 	return _position;
 }
 
-const Vec3 BillboardEntity::getRotation() const
+const fvec3 BillboardEntity::getRotation() const
 {
 	return _rotation;
 }
 
-const Vec2 BillboardEntity::getSize() const
+const fvec2 BillboardEntity::getSize() const
 {
 	return _size;
 }
 
-const Vec3 BillboardEntity::getColor() const
+const fvec3 BillboardEntity::getColor() const
 {
 	return _color;
 }
 
-const Vec3 BillboardEntity::getWireframeColor() const
+const fvec3 BillboardEntity::getWireframeColor() const
 {
 	return _wireframeColor;
 }

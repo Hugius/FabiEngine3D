@@ -38,24 +38,24 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_motionBlurBlurRenderer("blur_shader.vert", "blur_shader.frag", renderBus)
 {
 	// Post-processing capture buffers
-	_worldDepthCaptureBuffer.createDepthTexture(Ivec2(0), Config::getInst().getViewportSize());
-	_worldColorCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getViewportSize(), 2, false);
-	_antiAliasingCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getViewportSize(), 1, false);
-	_bloomCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getViewportSize(), 1, false);
-	_dofCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getViewportSize(), 1, false);
-	_lensFlareCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getViewportSize(), 1, false);
-	_motionBlurCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getViewportSize(), 1, false);
+	_worldDepthCaptureBuffer.createDepthTexture(ivec2(0), Config::getInst().getViewportSize());
+	_worldColorCaptureBuffer.createColorTexture(ivec2(0), Config::getInst().getViewportSize(), 2, false);
+	_antiAliasingCaptureBuffer.createColorTexture(ivec2(0), Config::getInst().getViewportSize(), 1, false);
+	_bloomCaptureBuffer.createColorTexture(ivec2(0), Config::getInst().getViewportSize(), 1, false);
+	_dofCaptureBuffer.createColorTexture(ivec2(0), Config::getInst().getViewportSize(), 1, false);
+	_lensFlareCaptureBuffer.createColorTexture(ivec2(0), Config::getInst().getViewportSize(), 1, false);
+	_motionBlurCaptureBuffer.createColorTexture(ivec2(0), Config::getInst().getViewportSize(), 1, false);
 	_bloomBlurRendererHighQuality.loadCaptureBuffer(Config::getInst().getViewportSize() / Config::MIN_BLOOM_SIZE);
 	_bloomBlurRendererLowQuality.loadCaptureBuffer(Config::getInst().getViewportSize() / (Config::MIN_BLOOM_SIZE * 2));
 	_dofBlurRenderer.loadCaptureBuffer(Config::getInst().getViewportSize() / Config::MIN_DOF_SIZE);
 	_motionBlurBlurRenderer.loadCaptureBuffer(Config::getInst().getViewportSize() / Config::MIN_MOTION_BLUR_SIZE);
 
 	// Miscellaneous capture buffers
-	_cubeReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
-	_planarReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
-	_waterReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
-	_waterRefractionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFRACTION_QUALITY), 1, false);
-	_shadowCaptureBuffer.createDepthTexture(Ivec2(0), Ivec2(Config::MIN_SHADOW_QUALITY));
+	_cubeReflectionCaptureBuffer.createColorTexture(ivec2(0), ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
+	_planarReflectionCaptureBuffer.createColorTexture(ivec2(0), ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
+	_waterReflectionCaptureBuffer.createColorTexture(ivec2(0), ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
+	_waterRefractionCaptureBuffer.createColorTexture(ivec2(0), ivec2(Config::MIN_REFRACTION_QUALITY), 1, false);
+	_shadowCaptureBuffer.createDepthTexture(ivec2(0), ivec2(Config::MIN_SHADOW_QUALITY));
 
 	// Render surface
 	_renderSurface = make_shared<ImageEntity>("renderSurface");
@@ -68,7 +68,7 @@ void MasterRenderer::update()
 	_updateLensFlare();
 }
 
-void MasterRenderer::renderEngineLogo(shared_ptr<ImageEntity> logo, shared_ptr<TextEntity> text, Ivec2 viewport)
+void MasterRenderer::renderEngineLogo(shared_ptr<ImageEntity> logo, shared_ptr<TextEntity> text, ivec2 viewport)
 {
 	// Prepare
 	glViewport(0, 0, viewport.x, viewport.y);
@@ -221,31 +221,31 @@ void MasterRenderer::reloadMotionBlurBlurCaptureBuffer()
 void MasterRenderer::reloadCubeReflectionCaptureBuffer()
 {
 	_cubeReflectionCaptureBuffer.reset();
-	_cubeReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(_renderBus.getCubeReflectionQuality()), 1, false);
+	_cubeReflectionCaptureBuffer.createColorTexture(ivec2(0), ivec2(_renderBus.getCubeReflectionQuality()), 1, false);
 }
 
 void MasterRenderer::reloadPlanarReflectionCaptureBuffer()
 {
 	_planarReflectionCaptureBuffer.reset();
-	_planarReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(_renderBus.getPlanarReflectionQuality()), 1, false);
+	_planarReflectionCaptureBuffer.createColorTexture(ivec2(0), ivec2(_renderBus.getPlanarReflectionQuality()), 1, false);
 }
 
 void MasterRenderer::reloadWaterReflectionCaptureBuffer()
 {
 	_waterReflectionCaptureBuffer.reset();
-	_waterReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(_renderBus.getPlanarReflectionQuality()), 1, false);
+	_waterReflectionCaptureBuffer.createColorTexture(ivec2(0), ivec2(_renderBus.getPlanarReflectionQuality()), 1, false);
 }
 
 void MasterRenderer::reloadWaterRefractionCaptureBuffer()
 {
 	_waterRefractionCaptureBuffer.reset();
-	_waterRefractionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(_renderBus.getRefractionQuality()), 1, false);
+	_waterRefractionCaptureBuffer.createColorTexture(ivec2(0), ivec2(_renderBus.getRefractionQuality()), 1, false);
 }
 
 void MasterRenderer::reloadShadowCaptureBuffer()
 {
 	_shadowCaptureBuffer.reset();
-	_shadowCaptureBuffer.createDepthTexture(Ivec2(0), Ivec2(_renderBus.getShadowQuality()));
+	_shadowCaptureBuffer.createDepthTexture(ivec2(0), ivec2(_renderBus.getShadowQuality()));
 }
 
 void MasterRenderer::_updateMotionBlur()
@@ -274,9 +274,9 @@ void MasterRenderer::_updateLensFlare()
 		float transparency = 0.0f;
 
 		// Calculate screen position
-		Vec4 flareSourceClip = (projectionMatrix * viewMatrix * Vec4(flareSourcePosition.x, flareSourcePosition.y, flareSourcePosition.z, 1.0f));
-		Vec2 flareSourceNDC = (Vec2(flareSourceClip.x, flareSourceClip.y) / flareSourceClip.w);
-		Vec2 flareSourceUV = Vec2(((flareSourceNDC.x + 1.0f) / 2.0f), ((flareSourceNDC.y + 1.0f) / 2.0f));
+		fvec4 flareSourceClip = (projectionMatrix * viewMatrix * fvec4(flareSourcePosition.x, flareSourcePosition.y, flareSourcePosition.z, 1.0f));
+		fvec2 flareSourceNDC = (fvec2(flareSourceClip.x, flareSourceClip.y) / flareSourceClip.w);
+		fvec2 flareSourceUV = fvec2(((flareSourceNDC.x + 1.0f) / 2.0f), ((flareSourceNDC.y + 1.0f) / 2.0f));
 
 		// Check if flare source is visible
 		if((flareSourceNDC.x > -1.0f) && (flareSourceNDC.x < 1.0f) && (flareSourceNDC.y > -1.0f) && (flareSourceNDC.y < 1.0f))

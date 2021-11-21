@@ -1,6 +1,6 @@
 #include "engine_gui_text_field.hpp"
 
-EngineGuiTextField::EngineGuiTextField(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 color, bool isCentered, bool isDynamic)
+EngineGuiTextField::EngineGuiTextField(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, string textContent, fvec3 color, bool isCentered, bool isDynamic)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -55,17 +55,17 @@ void EngineGuiTextField::updateInitialColor()
 	_initialColor = _fe3d.text_getColor(_entityID);
 }
 
-const Vec2 EngineGuiTextField::getInitialPosition() const
+const fvec2 EngineGuiTextField::getInitialPosition() const
 {
 	return _initialPosition;
 }
 
-const Vec2 EngineGuiTextField::getInitialSize() const
+const fvec2 EngineGuiTextField::getInitialSize() const
 {
 	return _initialSize;
 }
 
-const Vec3 EngineGuiTextField::getInitialColor() const
+const fvec3 EngineGuiTextField::getInitialColor() const
 {
 	return _initialColor;
 }

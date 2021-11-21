@@ -43,14 +43,14 @@ const string FabiEngine3D::misc_getOpenglVersion() const
 	return _core->_libraryLoader.getOpenglVersion();
 }
 
-const Ivec2 FabiEngine3D::misc_getCursorPosition() const
+const ivec2 FabiEngine3D::misc_getCursorPosition() const
 {
-	Ivec2 cursorPosition = _core->_window.getCursorPosition();
+	ivec2 cursorPosition = _core->_window.getCursorPosition();
 
-	return Ivec2(cursorPosition.x, (Config::getInst().getWindowSize().y - cursorPosition.y));
+	return ivec2(cursorPosition.x, (Config::getInst().getWindowSize().y - cursorPosition.y));
 }
 
-const Ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport() const
+const ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport() const
 {
 	if(Config::getInst().isApplicationExported())
 	{
@@ -64,17 +64,17 @@ const Ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport() const
 		auto viewportSize = Config::getInst().getViewportSize();
 
 		// Calculate viewport position Y offset, because GUI borders are not all of the same size
-		Ivec2 offset = Ivec2(viewportPosition.x, windowSize.y - (viewportPosition.y + viewportSize.y));
+		ivec2 offset = ivec2(viewportPosition.x, windowSize.y - (viewportPosition.y + viewportSize.y));
 
 		// Apply Y offset to cursor position
-		Vec2 relativeCursorPosition = Vec2(_core->_window.getCursorPosition()) - Vec2(offset);
+		fvec2 relativeCursorPosition = fvec2(_core->_window.getCursorPosition()) - fvec2(offset);
 
 		// Convert fullscreen coords to viewport coords
-		relativeCursorPosition = (relativeCursorPosition / Vec2(viewportSize)) * Vec2(windowSize);
+		relativeCursorPosition = (relativeCursorPosition / fvec2(viewportSize)) * fvec2(windowSize);
 
 		// Return
-		Ivec2 result = Ivec2(relativeCursorPosition);
-		return Ivec2(result.x, (Config::getInst().getWindowSize().y - result.y));
+		ivec2 result = ivec2(relativeCursorPosition);
+		return ivec2(result.x, (Config::getInst().getWindowSize().y - result.y));
 	}
 }
 

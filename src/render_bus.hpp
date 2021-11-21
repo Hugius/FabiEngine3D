@@ -27,20 +27,20 @@ public:
 	void setFinalWorldMap(TextureID value);
 	void setCursorEntityID(const string& value);
 	void setLensFlareMapPath(const string& value);
-	void setViewMatrix(const Matrix44 value);
-	void setProjectionMatrix(const Matrix44 value);
-	void setShadowMatrix(const Matrix44 value);
-	void setClippingPlane(Vec4 value);
-	void setCameraPosition(Vec3 value);
-	void setCameraFront(Vec3 value);
-	void setAmbientLightingColor(Vec3 value);
-	void setDirectionalLightingPosition(Vec3 value);
-	void setDirectionalLightingColor(Vec3 value);
-	void setShadowEyePosition(Vec3 value);
-	void setShadowCenterPosition(Vec3 value);
-	void setFogColor(Vec3 value);
-	void setFlareSourcePosition(Vec3 value);
-	void setFlareSourceUV(Vec2 value);
+	void setViewMatrix(const mat44 value);
+	void setProjectionMatrix(const mat44 value);
+	void setShadowMatrix(const mat44 value);
+	void setClippingPlane(fvec4 value);
+	void setCameraPosition(fvec3 value);
+	void setCameraFront(fvec3 value);
+	void setAmbientLightingColor(fvec3 value);
+	void setDirectionalLightingPosition(fvec3 value);
+	void setDirectionalLightingColor(fvec3 value);
+	void setShadowEyePosition(fvec3 value);
+	void setShadowCenterPosition(fvec3 value);
+	void setFogColor(fvec3 value);
+	void setFlareSourcePosition(fvec3 value);
+	void setFlareSourceUV(fvec2 value);
 	void setAmbientLightingIntensity(float value);
 	void setDirectionalLightingIntensity(float value);
 	void setFogMinDistance(float value);
@@ -96,22 +96,22 @@ public:
 	const string& getLensFlareMapPath() const;
 
 	// Matrices
-	const Matrix44 getViewMatrix() const;
-	const Matrix44 getProjectionMatrix() const;
-	const Matrix44 getShadowMatrix() const;
+	const mat44 getViewMatrix() const;
+	const mat44 getProjectionMatrix() const;
+	const mat44 getShadowMatrix() const;
 
 	// Vectors
-	const Vec4 getClippingPlane() const;
-	const Vec3 getCameraPosition() const;
-	const Vec3 getCameraFront() const;
-	const Vec3 getAmbientLightingColor() const;
-	const Vec3 getDirectionalLightingColor() const;
-	const Vec3 getDirectionalLightingPosition() const;
-	const Vec3 getShadowEyePosition() const;
-	const Vec3 getShadowCenterPosition() const;
-	const Vec3 getFogColor() const;
-	const Vec3 getFlareSourcePosition() const;
-	const Vec2 getFlareSourceUV() const;
+	const fvec4 getClippingPlane() const;
+	const fvec3 getCameraPosition() const;
+	const fvec3 getCameraFront() const;
+	const fvec3 getAmbientLightingColor() const;
+	const fvec3 getDirectionalLightingColor() const;
+	const fvec3 getDirectionalLightingPosition() const;
+	const fvec3 getShadowEyePosition() const;
+	const fvec3 getShadowCenterPosition() const;
+	const fvec3 getFogColor() const;
+	const fvec3 getFlareSourcePosition() const;
+	const fvec2 getFlareSourceUV() const;
 
 	// Decimals
 	const float getAmbientLightingIntensity() const;
@@ -201,22 +201,22 @@ private:
 	string _lensFlareMapPath = "";
 
 	// Matrices
-	Matrix44 _viewMatrix = Matrix44(1.0f);
-	Matrix44 _projectionMatrix = Matrix44(1.0f);
-	Matrix44 _shadowMatrix = Matrix44(1.0f);
+	mat44 _viewMatrix = mat44(1.0f);
+	mat44 _projectionMatrix = mat44(1.0f);
+	mat44 _shadowMatrix = mat44(1.0f);
 
 	// Vectors
-	Vec4 _clippingPlane = Vec4(0.0f);
-	Vec3 _cameraPosition = Vec3(0.0f);
-	Vec3 _cameraFront = Vec3(0.0f);
-	Vec3 _directionalLightPosition = Vec3(0.0f);
-	Vec3 _shadowEyePosition = Vec3(0.0f);
-	Vec3 _shadowCenterPosition = Vec3(0.0f);
-	Vec3 _flareSourcePosition = Vec3(0.0f);
-	Vec3 _ambientLightColor = Vec3(1.0f);
-	Vec3 _directionalLightColor = Vec3(1.0f);
-	Vec3 _fogColor = Vec3(1.0f);
-	Vec2 _flareSourceUV = Vec2(0.0f);
+	fvec4 _clippingPlane = fvec4(0.0f);
+	fvec3 _cameraPosition = fvec3(0.0f);
+	fvec3 _cameraFront = fvec3(0.0f);
+	fvec3 _directionalLightPosition = fvec3(0.0f);
+	fvec3 _shadowEyePosition = fvec3(0.0f);
+	fvec3 _shadowCenterPosition = fvec3(0.0f);
+	fvec3 _flareSourcePosition = fvec3(0.0f);
+	fvec3 _ambientLightColor = fvec3(1.0f);
+	fvec3 _directionalLightColor = fvec3(1.0f);
+	fvec3 _fogColor = fvec3(1.0f);
+	fvec2 _flareSourceUV = fvec2(0.0f);
 
 	// Decimals
 	float _ambientLightIntensity = 1.0f;

@@ -168,10 +168,10 @@ void WaterEntityManager::update()
 		if(entity->isVisible())
 		{
 			// Update ripple offset
-			Vec2 newOffset = entity->getRippleOffset();
+			fvec2 newOffset = entity->getRippleOffset();
 			newOffset.x += entity->getSpeed().x;
 			newOffset.y -= entity->getSpeed().y;
-			newOffset = Vec2(fmodf(newOffset.x, 1.0f), fmodf(newOffset.y, 1.0f));
+			newOffset = fvec2(fmodf(newOffset.x, 1.0f), fmodf(newOffset.y, 1.0f));
 			entity->setRippleOffset(newOffset);
 
 			// Update wave offset

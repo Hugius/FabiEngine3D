@@ -21,7 +21,7 @@ public:
 
 private:
 	// Matrices
-	const Matrix44 _createLightSpaceMatrix() const;
+	const mat44 _createLightSpaceMatrix() const;
 
 	// Decimals
 	static inline const float NEAR_DISTANCE = 0.01f;

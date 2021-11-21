@@ -53,9 +53,9 @@ const float Math::calculateReferenceAngle(float angle)
 	}
 }
 
-const Vec2 Math::calculateAverage(const vector<Vec2>& values)
+const fvec2 Math::calculateAverage(const vector<fvec2>& values)
 {
-	Vec2 total = Vec2(0.0f);
+	fvec2 total = fvec2(0.0f);
 
 	for(const auto& value : values)
 	{
@@ -65,9 +65,9 @@ const Vec2 Math::calculateAverage(const vector<Vec2>& values)
 	return (total / static_cast<float>(values.size()));
 }
 
-const Vec3 Math::calculateAverage(const vector<Vec3>& values)
+const fvec3 Math::calculateAverage(const vector<fvec3>& values)
 {
-	Vec3 total = Vec3(0.0f);
+	fvec3 total = fvec3(0.0f);
 
 	for(const auto& value : values)
 	{
@@ -77,9 +77,9 @@ const Vec3 Math::calculateAverage(const vector<Vec3>& values)
 	return (total / static_cast<float>(values.size()));
 }
 
-const Vec4 Math::calculateAverage(const vector<Vec4>& values)
+const fvec4 Math::calculateAverage(const vector<fvec4>& values)
 {
-	Vec4 total = Vec4(0.0f);
+	fvec4 total = fvec4(0.0f);
 
 	for(const auto& value : values)
 	{
@@ -140,35 +140,35 @@ const int Math::getRandomInteger(int min, int max)
 	return dist(_generator);
 }
 
-const bool Math::isNormalized(Vec2 vector)
+const bool Math::isNormalized(fvec2 vector)
 {
 	return (calculateMagnitude(vector) == 1.0f);
 }
 
-const bool Math::isNormalized(Vec3 vector)
+const bool Math::isNormalized(fvec3 vector)
 {
 	return (calculateMagnitude(vector) == 1.0f);
 }
 
-const bool Math::isNormalized(Vec4 vector)
+const bool Math::isNormalized(fvec4 vector)
 {
 	return (calculateMagnitude(vector) == 1.0f);
 }
 
-const Vec2 Math::convertToNDC(Vec2 position)
+const fvec2 Math::convertToNDC(fvec2 position)
 {
 	position.x = ((position.x * 2.0f) - 1.0f);
 	position.y = ((position.y * 2.0f) - 1.0f);
 
-	return Vec2(position.x, position.y);
+	return fvec2(position.x, position.y);
 }
 
-const Vec2 Math::convertFromNDC(Vec2 position)
+const fvec2 Math::convertFromNDC(fvec2 position)
 {
 	position.x += 1.0f;
 	position.y += 1.0f;
 	position.x /= 2.0f;
 	position.y /= 2.0f;
 
-	return Vec2(position.x, position.y);
+	return fvec2(position.x, position.y);
 }

@@ -27,27 +27,27 @@ void FabiEngine3D::pointlight_setVisible(const string& ID, bool isVisible)
 	_core->_pointlightEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
-void FabiEngine3D::pointlight_setPosition(const string& ID, Vec3 position)
+void FabiEngine3D::pointlight_setPosition(const string& ID, fvec3 position)
 {
 	_core->_pointlightEntityManager.getEntity(ID)->setPosition(position);
 }
 
-void FabiEngine3D::pointlight_move(const string& ID, Vec3 change)
+void FabiEngine3D::pointlight_move(const string& ID, fvec3 change)
 {
 	_core->_pointlightEntityManager.getEntity(ID)->move(change);
 }
 
-void FabiEngine3D::pointlight_moveTo(const string& ID, Vec3 target, float speed)
+void FabiEngine3D::pointlight_moveTo(const string& ID, fvec3 target, float speed)
 {
 	_core->_pointlightEntityManager.getEntity(ID)->moveTo(target, speed);
 }
 
-void FabiEngine3D::pointlight_setRadius(const string& ID, Vec3 radius)
+void FabiEngine3D::pointlight_setRadius(const string& ID, fvec3 radius)
 {
 	_core->_pointlightEntityManager.getEntity(ID)->setRadius(radius);
 }
 
-void FabiEngine3D::pointlight_setColor(const string& ID, Vec3 color)
+void FabiEngine3D::pointlight_setColor(const string& ID, fvec3 color)
 {
 	_core->_pointlightEntityManager.getEntity(ID)->setColor(color);
 }

@@ -36,8 +36,8 @@ void ImageEntityColorRenderer::render(const shared_ptr<ImageEntity> entity)
 		const auto buffer = entity->getRenderBuffer();
 
 		// Sprite animation
-		Vec2 uvMultiplier = Vec2(1.0f);
-		Vec2 uvAdder = Vec2(0.0f);
+		fvec2 uvMultiplier = fvec2(1.0f);
+		fvec2 uvAdder = fvec2(0.0f);
 		if(entity->isSpriteAnimationStarted())
 		{
 			// Retrieve values
@@ -47,8 +47,8 @@ void ImageEntityColorRenderer::render(const shared_ptr<ImageEntity> entity)
 			const auto columnIndex = entity->getSpriteAnimationColumnIndex();
 
 			// Apply values
-			uvMultiplier = Vec2(1.0f / static_cast<float>(columnCount), 1.0f / static_cast<float>(rowCount));
-			uvAdder = Vec2(static_cast<float>(columnIndex) * uvMultiplier.x, static_cast<float>(rowIndex) * uvMultiplier.y);
+			uvMultiplier = fvec2(1.0f / static_cast<float>(columnCount), 1.0f / static_cast<float>(rowCount));
+			uvAdder = fvec2(static_cast<float>(columnIndex) * uvMultiplier.x, static_cast<float>(rowIndex) * uvMultiplier.y);
 		}
 
 		// Shader uniforms
@@ -58,7 +58,7 @@ void ImageEntityColorRenderer::render(const shared_ptr<ImageEntity> entity)
 		_shader.uploadUniform("u_isMirroredHorizontally", entity->isMirroredHorizonally());
 		_shader.uploadUniform("u_isMirroredVertically", entity->isMirroredVertically());
 		_shader.uploadUniform("u_color", entity->getColor());
-		_shader.uploadUniform("u_windowSize", Vec2(Config::getInst().getWindowSize()));
+		_shader.uploadUniform("u_windowSize", fvec2(Config::getInst().getWindowSize()));
 		_shader.uploadUniform("u_minPosition", entity->getMinPosition());
 		_shader.uploadUniform("u_maxPosition", entity->getMaxPosition());
 		_shader.uploadUniform("u_transparency", entity->getTransparency());

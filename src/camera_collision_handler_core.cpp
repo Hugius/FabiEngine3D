@@ -11,7 +11,7 @@ void CameraCollisionHandler::update(const unordered_map<string, shared_ptr<AabbE
 		if(terrainManager.getSelectedTerrain() != nullptr)
 		{
 			// Retrieve height of terrain point at camera position
-			Vec3 cameraPosition = camera.getPosition();
+			fvec3 cameraPosition = camera.getPosition();
 			const float terrainX = (cameraPosition.x + (terrainManager.getSelectedTerrain()->getSize() / 2.0f));
 			const float terrainZ = (cameraPosition.z + (terrainManager.getSelectedTerrain()->getSize() / 2.0f));
 			const float terrainY = (terrainManager.getPixelHeight(terrainManager.getSelectedTerrain()->getID(), terrainX, terrainZ) + _cameraTerrainHeight);
@@ -23,13 +23,13 @@ void CameraCollisionHandler::update(const unordered_map<string, shared_ptr<AabbE
 				_isCameraUnderTerrain = true;
 
 				// Move camera upwards
-				camera.move(Vec3(0.0f, fabsf(cameraPosition.y - terrainY) * _cameraTerrainSpeed, 0.0f));
+				camera.move(fvec3(0.0f, fabsf(cameraPosition.y - terrainY) * _cameraTerrainSpeed, 0.0f));
 				cameraPosition.y = camera.getPosition().y;
 
 				// Correct moved distance
 				if(cameraPosition.y > terrainY)
 				{
-					camera.setPosition(Vec3(cameraPosition.x, terrainY, cameraPosition.z));
+					camera.setPosition(fvec3(cameraPosition.x, terrainY, cameraPosition.z));
 				}
 			}
 		}

@@ -26,17 +26,17 @@ public:
 	void setWireframed(bool value);
 	void setDiffuseMap(TextureID value, bool isTextual);
 	void setEmissionMap(TextureID value);
-	void setPosition(Vec3 value);
-	void setRotation(Vec3 value);
-	void setSize(Vec2 value);
-	void move(Vec3 value);
-	void rotate(Vec3 value);
-	void scale(Vec2 value);
-	void moveTo(Vec3 target, float speed);
-	void rotateTo(Vec3 target, float speed);
-	void scaleTo(Vec2 target, float speed);
-	void setColor(Vec3 color);
-	void setWireframeColor(Vec3 value);
+	void setPosition(fvec3 value);
+	void setRotation(fvec3 value);
+	void setSize(fvec2 value);
+	void move(fvec3 value);
+	void rotate(fvec3 value);
+	void scale(fvec2 value);
+	void moveTo(fvec3 target, float speed);
+	void rotateTo(fvec3 target, float speed);
+	void scaleTo(fvec2 target, float speed);
+	void setColor(fvec3 color);
+	void setWireframeColor(fvec3 value);
 	void setTextContent(const string& value);
 	void setFontPath(const string& value);
 	void setDiffuseMapPath(const string& value);
@@ -67,14 +67,14 @@ public:
 	const string& getEmissionMapPath() const;
 
 	// Matrices
-	const Matrix44& getTransformationMatrix() const;
+	const mat44& getTransformationMatrix() const;
 
 	// Vectors
-	const Vec3 getPosition() const;
-	const Vec3 getRotation() const;
-	const Vec3 getColor() const;
-	const Vec3 getWireframeColor() const;
-	const Vec2 getSize() const;
+	const fvec3 getPosition() const;
+	const fvec3 getRotation() const;
+	const fvec3 getColor() const;
+	const fvec3 getWireframeColor() const;
+	const fvec2 getSize() const;
 
 	// Decimals
 	const float getLightness() const;
@@ -122,17 +122,17 @@ private:
 	string _fontPath = "";
 
 	// Matrices
-	Matrix44 _transformationMatrix = Matrix44(1.0f);
+	mat44 _transformationMatrix = mat44(1.0f);
 
 	// Vectors
-	Vec3 _position = Vec3(0.0f);
-	Vec3 _rotation = Vec3(0.0f);
-	Vec3 _positionTarget = Vec3(0.0f);
-	Vec3 _rotationTarget = Vec3(0.0f);
-	Vec3 _color = Vec3(1.0f);
-	Vec3 _wireframeColor = Vec3(1.0f);
-	Vec2 _size = Vec2(1.0f);
-	Vec2 _sizeTarget = Vec2(1.0f);
+	fvec3 _position = fvec3(0.0f);
+	fvec3 _rotation = fvec3(0.0f);
+	fvec3 _positionTarget = fvec3(0.0f);
+	fvec3 _rotationTarget = fvec3(0.0f);
+	fvec3 _color = fvec3(1.0f);
+	fvec3 _wireframeColor = fvec3(1.0f);
+	fvec2 _size = fvec2(1.0f);
+	fvec2 _sizeTarget = fvec2(1.0f);
 
 	// Decimals
 	float _emissionIntensity = 1.0f;

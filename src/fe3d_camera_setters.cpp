@@ -75,17 +75,17 @@ void FabiEngine3D::camera_moveFollowZ(float speed)
 	_core->_camera.moveFollowZ(speed);
 }
 
-void FabiEngine3D::camera_move(Vec3 speed)
+void FabiEngine3D::camera_move(fvec3 speed)
 {
 	_core->_camera.move(speed);
 }
 
-void FabiEngine3D::camera_setPosition(Vec3 position)
+void FabiEngine3D::camera_setPosition(fvec3 position)
 {
 	_core->_camera.setPosition(position);
 }
 
-void FabiEngine3D::camera_setThirdPersonLookat(Vec3 position)
+void FabiEngine3D::camera_setThirdPersonLookat(fvec3 position)
 {
 	_core->_camera.setThirdPersonLookat(position);
 }

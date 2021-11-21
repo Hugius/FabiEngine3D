@@ -60,72 +60,72 @@ const TextureID RenderBus::getFinalWorldMap() const
 	return _finalWorldMap;
 }
 
-const Matrix44 RenderBus::getViewMatrix() const
+const mat44 RenderBus::getViewMatrix() const
 {
 	return _viewMatrix;
 }
 
-const Matrix44 RenderBus::getProjectionMatrix() const
+const mat44 RenderBus::getProjectionMatrix() const
 {
 	return _projectionMatrix;
 }
 
-const Matrix44 RenderBus::getShadowMatrix() const
+const mat44 RenderBus::getShadowMatrix() const
 {
 	return _shadowMatrix;
 }
 
-const Vec2 RenderBus::getFlareSourceUV() const
+const fvec2 RenderBus::getFlareSourceUV() const
 {
 	return _flareSourceUV;
 }
 
-const Vec4 RenderBus::getClippingPlane() const
+const fvec4 RenderBus::getClippingPlane() const
 {
 	return _clippingPlane;
 }
 
-const Vec3 RenderBus::getCameraPosition() const
+const fvec3 RenderBus::getCameraPosition() const
 {
 	return _cameraPosition;
 }
 
-const Vec3 RenderBus::getCameraFront() const
+const fvec3 RenderBus::getCameraFront() const
 {
 	return _cameraFront;
 }
 
-const Vec3 RenderBus::getAmbientLightingColor() const
+const fvec3 RenderBus::getAmbientLightingColor() const
 {
 	return _ambientLightColor;
 }
 
-const Vec3 RenderBus::getDirectionalLightingPosition() const
+const fvec3 RenderBus::getDirectionalLightingPosition() const
 {
 	return _directionalLightPosition;
 }
 
-const Vec3 RenderBus::getShadowEyePosition() const
+const fvec3 RenderBus::getShadowEyePosition() const
 {
 	return _shadowEyePosition;
 }
 
-const Vec3 RenderBus::getShadowCenterPosition() const
+const fvec3 RenderBus::getShadowCenterPosition() const
 {
 	return _shadowCenterPosition;
 }
 
-const Vec3 RenderBus::getFogColor() const
+const fvec3 RenderBus::getFogColor() const
 {
 	return _fogColor;
 }
 
-const Vec3 RenderBus::getFlareSourcePosition() const
+const fvec3 RenderBus::getFlareSourcePosition() const
 {
 	return _flareSourcePosition;
 }
 
-const Vec3 RenderBus::getDirectionalLightingColor() const
+const fvec3 RenderBus::getDirectionalLightingColor() const
 {
 	return _directionalLightColor;
 }

@@ -16,11 +16,11 @@ public:
 
 	// Voids
 	void setTitle(const string& title);
-	void setSize(Ivec2 size);
+	void setSize(ivec2 size);
 	void center();
 	void setOpacity(float value);
-	void enableColorKeying(Vec3 color);
-	void disableColorKeying(Vec3 color);
+	void enableColorKeying(fvec3 color);
+	void disableColorKeying(fvec3 color);
 	void showBorder();
 	void hideBorder();
 	void enableFullscreen();
@@ -32,10 +32,10 @@ public:
 	void hideWindow();
 	void showCursor();
 	void hideCursor();
-	void setCursorPosition(Ivec2 pos);
+	void setCursorPosition(ivec2 pos);
 
 	// Vectors
-	const Ivec2 getCursorPosition() const;
+	const ivec2 getCursorPosition() const;
 
 	// Booleans
 	const bool isCursorVisible() const;

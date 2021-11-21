@@ -13,17 +13,17 @@ void TerrainEntity::setPixels(const vector<float>& value)
 	_pixels = value;
 }
 
-void TerrainEntity::setVertices(const vector<Vec3> value)
+void TerrainEntity::setVertices(const vector<fvec3> value)
 {
 	_vertices = value;
 }
 
-void TerrainEntity::setUvCoords(const vector<Vec2> value)
+void TerrainEntity::setUvCoords(const vector<fvec2> value)
 {
 	_uvCoords = value;
 }
 
-void TerrainEntity::setNormals(const vector<Vec3> value)
+void TerrainEntity::setNormals(const vector<fvec3> value)
 {
 	_normals = value;
 }
@@ -163,9 +163,9 @@ void TerrainEntity::setWireframed(bool value)
 	_isWireframed = value;
 }
 
-void TerrainEntity::setWireframeColor(Vec3 value)
+void TerrainEntity::setWireframeColor(fvec3 value)
 {
-	_wireframeColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
 void TerrainEntity::setLightness(float value)

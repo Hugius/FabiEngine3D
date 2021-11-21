@@ -66,17 +66,17 @@ void WorldEditor::_updateMiscellaneous()
 	}
 }
 
-void WorldEditor::copyPreviewModel(const string& newID, const string& previewID, Vec3 position)
+void WorldEditor::copyPreviewModel(const string& newID, const string& previewID, fvec3 position)
 {
 	_copyPreviewModel(newID, previewID, position, true);
 }
 
-void WorldEditor::copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position)
+void WorldEditor::copyPreviewBillboard(const string& newID, const string& previewID, fvec3 position)
 {
 	_copyPreviewBillboard(newID, previewID, position, true);
 }
 
-void WorldEditor::copyPreviewSound(const string& newID, const string& previewID, Vec3 position)
+void WorldEditor::copyPreviewSound(const string& newID, const string& previewID, fvec3 position)
 {
 	_copyPreviewSound(newID, previewID, position, true);
 }

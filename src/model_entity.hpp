@@ -23,7 +23,7 @@ public:
 	void setCameraStatic(bool value);
 	void setDepthMapIncluded(bool value);
 	void setLevelOfDetailed(bool value);
-	void setLevelOfDetailSize(Vec3 value);
+	void setLevelOfDetailSize(fvec3 value);
 	void setLevelOfDetailEntityID(const string& value);
 	void setMeshPath(const string& value);
 	void setPreviousReflectionEntityID(const string& value);
@@ -39,28 +39,28 @@ public:
 	void setSpecularMap(const string& partID, TextureID value);
 	void setReflectionMap(const string& partID, TextureID value);
 	void setNormalMap(const string& partID, TextureID value);
-	void setBasePosition(Vec3 value);
-	void setBaseRotation(Vec3 value);
-	void setBaseRotationOrigin(Vec3 value);
-	void setBaseSize(Vec3 value);
-	void setPartPosition(const string& partID, Vec3 value);
-	void setPartRotation(const string& partID, Vec3 value);
-	void setPartRotationOrigin(const string& partID, Vec3 value);
-	void setPartSize(const string& partID, Vec3 value);
-	void moveBase(Vec3 value);
-	void rotateBase(Vec3 value);
-	void scaleBase(Vec3 value);
-	void movePart(const string& partID, Vec3 value);
-	void rotatePart(const string& partID, Vec3 value);
-	void scalePart(const string& partID, Vec3 value);
-	void moveBaseTo(Vec3 target, float speed);
-	void rotateBaseTo(Vec3 target, float speed);
-	void scaleBaseTo(Vec3 target, float speed);
-	void movePartTo(const string& partID, Vec3 target, float speed);
-	void rotatePartTo(const string& partID, Vec3 target, float speed);
-	void scalePartTo(const string& partID, Vec3 target, float speed);
-	void setColor(const string& partID, Vec3 value);
-	void setWireframeColor(const string& partID, Vec3 value);
+	void setBasePosition(fvec3 value);
+	void setBaseRotation(fvec3 value);
+	void setBaseRotationOrigin(fvec3 value);
+	void setBaseSize(fvec3 value);
+	void setPartPosition(const string& partID, fvec3 value);
+	void setPartRotation(const string& partID, fvec3 value);
+	void setPartRotationOrigin(const string& partID, fvec3 value);
+	void setPartSize(const string& partID, fvec3 value);
+	void moveBase(fvec3 value);
+	void rotateBase(fvec3 value);
+	void scaleBase(fvec3 value);
+	void movePart(const string& partID, fvec3 value);
+	void rotatePart(const string& partID, fvec3 value);
+	void scalePart(const string& partID, fvec3 value);
+	void moveBaseTo(fvec3 target, float speed);
+	void rotateBaseTo(fvec3 target, float speed);
+	void scaleBaseTo(fvec3 target, float speed);
+	void movePartTo(const string& partID, fvec3 target, float speed);
+	void rotatePartTo(const string& partID, fvec3 target, float speed);
+	void scalePartTo(const string& partID, fvec3 target, float speed);
+	void setColor(const string& partID, fvec3 value);
+	void setWireframeColor(const string& partID, fvec3 value);
 	void setDiffuseMapPath(const string& partID, const string& value);
 	void setEmissionMapPath(const string& partID, const string& value);
 	void setSpecularMapPath(const string& partID, const string& value);
@@ -93,20 +93,20 @@ public:
 	const string& getNormalMapPath(const string& partID) const;
 
 	// Matrices
-	const Matrix44& getTransformationMatrix(const string& partID) const;
+	const mat44& getTransformationMatrix(const string& partID) const;
 
 	// Vectors
-	const Vec3 getColor(const string& partID) const;
-	const Vec3 getWireframeColor(const string& partID) const;
-	const Vec3 getLevelOfDetailSize() const;
-	const Vec3 getBasePosition() const;
-	const Vec3 getBaseRotation() const;
-	const Vec3 getBaseRotationOrigin() const;
-	const Vec3 getBaseSize() const;
-	const Vec3 getPartPosition(const string& partID) const;
-	const Vec3 getPartRotation(const string& partID) const;
-	const Vec3 getPartRotationOrigin(const string& partID) const;
-	const Vec3 getPartSize(const string& partID) const;
+	const fvec3 getColor(const string& partID) const;
+	const fvec3 getWireframeColor(const string& partID) const;
+	const fvec3 getLevelOfDetailSize() const;
+	const fvec3 getBasePosition() const;
+	const fvec3 getBaseRotation() const;
+	const fvec3 getBaseRotationOrigin() const;
+	const fvec3 getBaseSize() const;
+	const fvec3 getPartPosition(const string& partID) const;
+	const fvec3 getPartRotation(const string& partID) const;
+	const fvec3 getPartRotationOrigin(const string& partID) const;
+	const fvec3 getPartSize(const string& partID) const;
 
 	// Decimals
 	const float getCubeReflectionMixValue() const;
@@ -167,18 +167,18 @@ private:
 		string normalMapPath = "";
 
 		// Matrices
-		Matrix44 transformationMatrix = Matrix44(1.0f);
+		mat44 transformationMatrix = mat44(1.0f);
 
 		// Vectors
-		Vec3 position = Vec3(0.0f);
-		Vec3 rotation = Vec3(0.0f);
-		Vec3 rotationOrigin = Vec3(0.0f);
-		Vec3 size = Vec3(1.0f);
-		Vec3 positionTarget = Vec3(0.0f);
-		Vec3 rotationTarget = Vec3(0.0f);
-		Vec3 sizeTarget = Vec3(1.0f);
-		Vec3 color = Vec3(1.0f);
-		Vec3 wireframeColor = Vec3(1.0f);
+		fvec3 position = fvec3(0.0f);
+		fvec3 rotation = fvec3(0.0f);
+		fvec3 rotationOrigin = fvec3(0.0f);
+		fvec3 size = fvec3(1.0f);
+		fvec3 positionTarget = fvec3(0.0f);
+		fvec3 rotationTarget = fvec3(0.0f);
+		fvec3 sizeTarget = fvec3(1.0f);
+		fvec3 color = fvec3(1.0f);
+		fvec3 wireframeColor = fvec3(1.0f);
 
 		// Decimals
 		float positionTargetSpeed = 0.0f;
@@ -208,9 +208,9 @@ private:
 	};
 
 	// Voids
-	void _correctPositionTarget(Vec3& current, Vec3 target, float speed);
-	void _correctRotationTarget(Vec3& current, Vec3 target, float speed);
-	void _correctSizeTarget(Vec3& current, Vec3 target, float speed);
+	void _correctPositionTarget(fvec3& current, fvec3 target, float speed);
+	void _correctRotationTarget(fvec3& current, fvec3 target, float speed);
+	void _correctSizeTarget(fvec3& current, fvec3 target, float speed);
 
 	// Integers
 	unsigned int _getPartIndex(const string& partID) const;
@@ -222,14 +222,14 @@ private:
 	string _currentReflectionEntityID = "";
 
 	// Vectors
-	Vec3 _basePosition = Vec3(0.0f);
-	Vec3 _baseRotation = Vec3(0.0f);
-	Vec3 _baseRotationOrigin = Vec3(0.0f);
-	Vec3 _baseSize = Vec3(1.0f);
-	Vec3 _basePositionTarget = Vec3(0.0f);
-	Vec3 _baseRotationTarget = Vec3(0.0f);
-	Vec3 _baseSizeTarget = Vec3(1.0f);
-	Vec3 _levelOfDetailSize = Vec3(1.0f);
+	fvec3 _basePosition = fvec3(0.0f);
+	fvec3 _baseRotation = fvec3(0.0f);
+	fvec3 _baseRotationOrigin = fvec3(0.0f);
+	fvec3 _baseSize = fvec3(1.0f);
+	fvec3 _basePositionTarget = fvec3(0.0f);
+	fvec3 _baseRotationTarget = fvec3(0.0f);
+	fvec3 _baseSizeTarget = fvec3(1.0f);
+	fvec3 _levelOfDetailSize = fvec3(1.0f);
 
 	// Decimals
 	float _basePositionTargetSpeed = 0.0f;

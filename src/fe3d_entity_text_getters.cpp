@@ -11,7 +11,7 @@ const bool FabiEngine3D::text_isVisible(const string& ID) const
 	return _core->_textEntityManager.getEntity(ID)->isVisible();
 }
 
-const Vec2 FabiEngine3D::text_getPosition(const string& ID) const
+const fvec2 FabiEngine3D::text_getPosition(const string& ID) const
 {
 	return _core->_textEntityManager.getEntity(ID)->getPosition();
 }
@@ -26,22 +26,22 @@ const float FabiEngine3D::text_getTransparency(const string& ID) const
 	return _core->_textEntityManager.getEntity(ID)->getTransparency();
 }
 
-const Vec2 FabiEngine3D::text_getSize(const string& ID) const
+const fvec2 FabiEngine3D::text_getSize(const string& ID) const
 {
 	return _core->_textEntityManager.getEntity(ID)->getSize();
 }
 
-const Vec2 FabiEngine3D::text_getMinPosition(const string& ID) const
+const fvec2 FabiEngine3D::text_getMinPosition(const string& ID) const
 {
 	return  _core->_textEntityManager.getEntity(ID)->getMinPosition();
 }
 
-const Vec2 FabiEngine3D::text_getMaxPosition(const string& ID) const
+const fvec2 FabiEngine3D::text_getMaxPosition(const string& ID) const
 {
 	return  _core->_textEntityManager.getEntity(ID)->getMaxPosition();
 }
 
-const Vec3 FabiEngine3D::text_getColor(const string& ID) const
+const fvec3 FabiEngine3D::text_getColor(const string& ID) const
 {
 	return _core->_textEntityManager.getEntity(ID)->getColor();
 }

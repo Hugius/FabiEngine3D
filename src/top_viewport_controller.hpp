@@ -29,10 +29,10 @@ public:
 	const bool isProjectCorrupted(const string& projectDirectoryPath) const;
 
 	// Vectors
-	static inline const Vec3 BUTTON_COLOR = Vec3(0.0f, 0.1f, 0.0f);
-	static inline const Vec3 BUTTON_HOVER_COLOR = Vec3(0.0f, 1.0f, 0.0f);
-	static inline const Vec3 TEXT_COLOR = Vec3(1.0f);
-	static inline const Vec3 TEXT_HOVER_COLOR = Vec3(0.0f);
+	static inline const fvec3 BUTTON_COLOR = fvec3(0.0f, 0.1f, 0.0f);
+	static inline const fvec3 BUTTON_HOVER_COLOR = fvec3(0.0f, 1.0f, 0.0f);
+	static inline const fvec3 TEXT_COLOR = fvec3(1.0f);
+	static inline const fvec3 TEXT_HOVER_COLOR = fvec3(0.0f);
 
 private:
 	// Voids
@@ -53,7 +53,7 @@ private:
 	string _currentProjectID = "";
 
 	// Vectors
-	static inline const Vec3 FRAME_COLOR = Vec3(0.075f);
+	static inline const fvec3 FRAME_COLOR = fvec3(0.075f);
 
 	// Booleans
 	bool _isCreatingProject = false;

@@ -187,7 +187,7 @@ const bool WorldEditor::_copyPreviewWater(const string& newID, const string& pre
 	return true;
 }
 
-const bool WorldEditor::_copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool isFromOutside)
+const bool WorldEditor::_copyPreviewModel(const string& newID, const string& previewID, fvec3 position, bool isFromOutside)
 {
 	// Error checking
 	if(_fe3d.model_isExisting(newID) && !_fe3d.model_isInstanced(previewID))
@@ -207,7 +207,7 @@ const bool WorldEditor::_copyPreviewModel(const string& newID, const string& pre
 	// Set instancing
 	if(_fe3d.model_isInstanced(previewID))
 	{
-		_fe3d.model_enableInstancing(newID, { Vec3(0.0f) });
+		_fe3d.model_enableInstancing(newID, { fvec3(0.0f) });
 	}
 
 	// Set properties
@@ -295,7 +295,7 @@ const bool WorldEditor::_copyPreviewModel(const string& newID, const string& pre
 	return true;
 }
 
-const bool WorldEditor::_copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool isFromOutside)
+const bool WorldEditor::_copyPreviewBillboard(const string& newID, const string& previewID, fvec3 position, bool isFromOutside)
 {
 	// Error checking
 	if(_fe3d.billboard_isExisting(newID))
@@ -367,7 +367,7 @@ const bool WorldEditor::_copyPreviewBillboard(const string& newID, const string&
 	return true;
 }
 
-const bool WorldEditor::_copyPreviewSound(const string& newID, const string& previewID, Vec3 position, bool isFromOutside)
+const bool WorldEditor::_copyPreviewSound(const string& newID, const string& previewID, fvec3 position, bool isFromOutside)
 {
 	// Error checking
 	if(_fe3d.sound_isExisting(newID))

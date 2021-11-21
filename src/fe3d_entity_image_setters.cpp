@@ -35,7 +35,7 @@ void FabiEngine3D::image_setDiffuseMap(const string& ID, const string& texturePa
 	}
 }
 
-void FabiEngine3D::image_setPosition(const string& ID, Vec2 position)
+void FabiEngine3D::image_setPosition(const string& ID, fvec2 position)
 {
 	_core->_imageEntityManager.getEntity(ID)->setPosition(position);
 }
@@ -45,12 +45,12 @@ void FabiEngine3D::image_setRotation(const string& ID, float rotation)
 	_core->_imageEntityManager.getEntity(ID)->setRotation(rotation);
 }
 
-void FabiEngine3D::image_setSize(const string& ID, Vec2 size)
+void FabiEngine3D::image_setSize(const string& ID, fvec2 size)
 {
 	_core->_imageEntityManager.getEntity(ID)->setSize(size);
 }
 
-void FabiEngine3D::image_move(const string& ID, Vec2 position)
+void FabiEngine3D::image_move(const string& ID, fvec2 position)
 {
 	_core->_imageEntityManager.getEntity(ID)->move(position);
 }
@@ -60,12 +60,12 @@ void FabiEngine3D::image_rotate(const string& ID, float rotation)
 	_core->_imageEntityManager.getEntity(ID)->rotate(rotation);
 }
 
-void FabiEngine3D::image_scale(const string& ID, Vec2 size)
+void FabiEngine3D::image_scale(const string& ID, fvec2 size)
 {
 	_core->_imageEntityManager.getEntity(ID)->scale(size);
 }
 
-void FabiEngine3D::image_moveTo(const string& ID, Vec2 target, float speed)
+void FabiEngine3D::image_moveTo(const string& ID, fvec2 target, float speed)
 {
 	_core->_imageEntityManager.getEntity(ID)->moveTo(target, speed);
 }
@@ -75,12 +75,12 @@ void FabiEngine3D::image_rotateTo(const string& ID, float target, float speed)
 	_core->_imageEntityManager.getEntity(ID)->rotateTo(target, speed);
 }
 
-void FabiEngine3D::image_scaleTo(const string& ID, Vec2 target, float speed)
+void FabiEngine3D::image_scaleTo(const string& ID, fvec2 target, float speed)
 {
 	_core->_imageEntityManager.getEntity(ID)->scaleTo(target, speed);
 }
 
-void FabiEngine3D::image_setColor(const string& ID, Vec3 color)
+void FabiEngine3D::image_setColor(const string& ID, fvec3 color)
 {
 	_core->_imageEntityManager.getEntity(ID)->setColor(color);
 }
@@ -90,12 +90,12 @@ void FabiEngine3D::image_setTransparency(const string& ID, float transparency)
 	_core->_imageEntityManager.getEntity(ID)->setTransparency(transparency);
 }
 
-void FabiEngine3D::image_setMinPosition(const string& ID, Vec2 minPos)
+void FabiEngine3D::image_setMinPosition(const string& ID, fvec2 minPos)
 {
 	_core->_imageEntityManager.getEntity(ID)->setMinPosition(minPos);
 }
 
-void FabiEngine3D::image_setMaxPosition(const string& ID, Vec2 maxPos)
+void FabiEngine3D::image_setMaxPosition(const string& ID, fvec2 maxPos)
 {
 	_core->_imageEntityManager.getEntity(ID)->setMaxPosition(maxPos);
 }
@@ -182,7 +182,7 @@ void FabiEngine3D::image_setWireframed(const string& ID, bool enabled)
 	_core->_imageEntityManager.getEntity(ID)->setWireframed(enabled);
 }
 
-void FabiEngine3D::image_setWireframeColor(const string& ID, Vec3 color)
+void FabiEngine3D::image_setWireframeColor(const string& ID, fvec3 color)
 {
 	_core->_imageEntityManager.getEntity(ID)->setWireframeColor(color);
 }

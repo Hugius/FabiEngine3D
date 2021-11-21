@@ -58,11 +58,11 @@ void WaterEditor::_updateMainMenu()
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("waterCreate", "Create Water", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("waterCreate", "Create Water", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isCreatingWater = true;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
@@ -72,7 +72,7 @@ void WaterEditor::_updateMainMenu()
 			{
 				ID = ID.substr(1);
 			}
-			_gui.getGlobalScreen()->createChoiceForm("waterList", "Edit Water", Vec2(0.0f, 0.1f), IDs);
+			_gui.getGlobalScreen()->createChoiceForm("waterList", "Edit Water", fvec2(0.0f, 0.1f), IDs);
 			_isChoosingWater = true;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
@@ -82,7 +82,7 @@ void WaterEditor::_updateMainMenu()
 			{
 				ID = ID.substr(1);
 			}
-			_gui.getGlobalScreen()->createChoiceForm("waterList", "Delete Water", Vec2(0.0f, 0.1f), IDs);
+			_gui.getGlobalScreen()->createChoiceForm("waterList", "Delete Water", fvec2(0.0f, 0.1f), IDs);
 			_isChoosingWater = true;
 			_isDeletingWater = true;
 		}
@@ -127,7 +127,7 @@ void WaterEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("size", "Size", size, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("size", "Size", size, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("texturing")->isHovered())
 		{
@@ -264,7 +264,7 @@ void WaterEditor::_updateWaterDeleting()
 		// Add answer form
 		if(!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
 		{
-			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
 		// Update answer form

@@ -134,7 +134,7 @@ RenderBuffer::~RenderBuffer()
 	glDeleteBuffers(1, &_vbo_instanced);
 }
 
-void RenderBuffer::enableInstancing(const vector<Vec3>& offsets)
+void RenderBuffer::enableInstancing(const vector<fvec3>& offsets)
 {
 	if(_isInstanced)
 	{
@@ -156,7 +156,7 @@ void RenderBuffer::enableInstancing(const vector<Vec3>& offsets)
 		glBindBuffer(GL_ARRAY_BUFFER, _vbo_instanced);
 
 		// Allocate buffer data
-		glBufferData(GL_ARRAY_BUFFER, (offsets.size() * sizeof(Vec3)), &offsets[0], GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, (offsets.size() * sizeof(fvec3)), &offsets[0], GL_STATIC_DRAW);
 
 		// Store buffer data
 		glEnableVertexAttribArray(4);
@@ -207,7 +207,7 @@ const RenderBufferType RenderBuffer::getBufferType() const
 	return _bufferType;
 }
 
-const vector<Vec3>& RenderBuffer::getInstancedOffsets() const
+const vector<fvec3>& RenderBuffer::getInstancedOffsets() const
 {
 	return _instancedOffsets;
 }

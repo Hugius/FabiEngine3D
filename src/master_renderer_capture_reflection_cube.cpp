@@ -279,8 +279,8 @@ void MasterRenderer::_capturePlanarReflections()
 	}
 
 	// Move down
-	const Vec3 initialCameraPosition = _camera.getPosition();
-	_camera.setPosition(Vec3(initialCameraPosition.x, initialCameraPosition.y - (cameraDistance * 2.0f), initialCameraPosition.z));
+	const fvec3 initialCameraPosition = _camera.getPosition();
+	_camera.setPosition(fvec3(initialCameraPosition.x, initialCameraPosition.y - (cameraDistance * 2.0f), initialCameraPosition.z));
 
 	// Look up
 	const float initialCameraPitch = _camera.getPitch();
@@ -307,7 +307,7 @@ void MasterRenderer::_capturePlanarReflections()
 
 	// Calculate clipping plane
 	const float clippingHeight = -(_renderBus.getPlanarReflectionHeight() + 0.0000001f);
-	const Vec4 clippingPlane = Vec4(0.0f, 1.0f, 0.0f, clippingHeight);
+	const fvec4 clippingPlane = fvec4(0.0f, 1.0f, 0.0f, clippingHeight);
 	_renderBus.setClippingPlane(clippingPlane);
 
 	// Render sky entity

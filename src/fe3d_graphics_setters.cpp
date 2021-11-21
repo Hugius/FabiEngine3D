@@ -140,7 +140,7 @@ void FabiEngine3D::gfx_disableDirectionalLighting(bool mustResetProperties)
 
 	if(mustResetProperties)
 	{
-		_core->_renderBus.setDirectionalLightingPosition(Vec3(0.0f));
+		_core->_renderBus.setDirectionalLightingPosition(fvec3(0.0f));
 		_core->_renderBus.setDirectionalLightingColor(1.0f);
 		_core->_renderBus.setDirectionalLightingIntensity(1.0f);
 	}
@@ -161,7 +161,7 @@ void FabiEngine3D::gfx_disableFog(bool mustResetProperties)
 		_core->_renderBus.setFogMinDistance(0.0f);
 		_core->_renderBus.setFogMaxDistance(0.0f);
 		_core->_renderBus.setFogThickness(0.0f);
-		_core->_renderBus.setFogColor(Vec3(0.0f));
+		_core->_renderBus.setFogColor(fvec3(0.0f));
 	}
 }
 
@@ -188,8 +188,8 @@ void FabiEngine3D::gfx_disableShadows(bool mustResetProperties)
 
 	if(mustResetProperties)
 	{
-		_core->_renderBus.setShadowEyePosition(Vec3(0.0f));
-		_core->_renderBus.setShadowCenterPosition(Vec3(0.0f));
+		_core->_renderBus.setShadowEyePosition(fvec3(0.0f));
+		_core->_renderBus.setShadowCenterPosition(fvec3(0.0f));
 		_core->_renderBus.setShadowAreaSize(0.0f);
 		_core->_renderBus.setShadowAreaReach(0.0f);
 		_core->_renderBus.setShadowLightness(0.0f);
@@ -339,7 +339,7 @@ void FabiEngine3D::gfx_setShadowQuality(unsigned int quality)
 	_core->_masterRenderer.reloadShadowCaptureBuffer();
 }
 
-void FabiEngine3D::gfx_setAmbientLightingColor(Vec3 color)
+void FabiEngine3D::gfx_setAmbientLightingColor(fvec3 color)
 {
 	_core->_renderBus.setAmbientLightingColor(color);
 }
@@ -349,12 +349,12 @@ void FabiEngine3D::gfx_setAmbientLightingIntensity(float intensity)
 	_core->_renderBus.setAmbientLightingIntensity(intensity);
 }
 
-void FabiEngine3D::gfx_setDirectionalLightingPosition(Vec3 position)
+void FabiEngine3D::gfx_setDirectionalLightingPosition(fvec3 position)
 {
 	_core->_renderBus.setDirectionalLightingPosition(position);
 }
 
-void FabiEngine3D::gfx_setDirectionalLightingColor(Vec3 color)
+void FabiEngine3D::gfx_setDirectionalLightingColor(fvec3 color)
 {
 	_core->_renderBus.setDirectionalLightingColor(color);
 }
@@ -364,7 +364,7 @@ void FabiEngine3D::gfx_setDirectionalLightingIntensity(float intensity)
 	_core->_renderBus.setDirectionalLightingIntensity(intensity);
 }
 
-void FabiEngine3D::gfx_setFogColor(Vec3 color)
+void FabiEngine3D::gfx_setFogColor(fvec3 color)
 {
 	_core->_renderBus.setFogColor(color);
 }
@@ -384,12 +384,12 @@ void FabiEngine3D::gfx_setFogMaxDistance(float maxDistance)
 	_core->_renderBus.setFogMaxDistance(maxDistance);
 }
 
-void FabiEngine3D::gfx_setShadowEyePosition(Vec3 position)
+void FabiEngine3D::gfx_setShadowEyePosition(fvec3 position)
 {
 	_core->_renderBus.setShadowEyePosition(position);
 }
 
-void FabiEngine3D::gfx_setShadowCenterPosition(Vec3 position)
+void FabiEngine3D::gfx_setShadowCenterPosition(fvec3 position)
 {
 	_core->_renderBus.setShadowCenterPosition(position);
 }

@@ -13,12 +13,12 @@ const vector<string> FabiEngine3D::spotlight_getAllIDs() const
 	return IDs;
 }
 
-const Vec3 FabiEngine3D::spotlight_getPosition(const string& ID) const
+const fvec3 FabiEngine3D::spotlight_getPosition(const string& ID) const
 {
 	return _core->_spotlightEntityManager.getEntity(ID)->getPosition();
 }
 
-const Vec3 FabiEngine3D::spotlight_getColor(const string& ID) const
+const fvec3 FabiEngine3D::spotlight_getColor(const string& ID) const
 {
 	return _core->_spotlightEntityManager.getEntity(ID)->getColor();
 }

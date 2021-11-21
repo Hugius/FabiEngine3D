@@ -28,8 +28,8 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 
 			// Place AABB
 			_fe3d.aabb_create(arguments[0].getString());
-			_fe3d.aabb_setBasePosition(arguments[0].getString(), Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-			_fe3d.aabb_setBaseSize(arguments[0].getString(), Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()));
+			_fe3d.aabb_setBasePosition(arguments[0].getString(), fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+			_fe3d.aabb_setBaseSize(arguments[0].getString(), fvec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()));
 
 			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -104,7 +104,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 
 				// Set position
 				_fe3d.aabb_setBasePosition(arguments[0].getString(),
-												 Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+												 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -130,7 +130,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 
 				// Set size
 				_fe3d.aabb_setBaseSize(arguments[0].getString(),
-											 Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+											 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -156,7 +156,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 
 				// Move position
 				_fe3d.aabb_move(arguments[0].getString(),
-									  Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+									  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -182,7 +182,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 
 				// Scale size
 				_fe3d.aabb_scale(arguments[0].getString(),
-									   Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+									   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -208,7 +208,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 
 				// Move position
 				_fe3d.aabb_moveTo(arguments[0].getString(),
-										Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
+										fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -234,7 +234,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 
 				// Scale size
 				_fe3d.aabb_scaleTo(arguments[0].getString(),
-										 Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
+										 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));

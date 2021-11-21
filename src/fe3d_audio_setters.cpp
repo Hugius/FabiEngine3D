@@ -8,7 +8,7 @@ void FabiEngine3D::sound_create(const string& ID, const string& filePath)
 	_core->_audioManager.createSound(ID, filePath);
 }
 
-void FabiEngine3D::sound_make3D(const string& ID, Vec3 position, float maxVolume, float maxDistance)
+void FabiEngine3D::sound_make3D(const string& ID, fvec3 position, float maxVolume, float maxDistance)
 {
 	_core->_audioManager.getSound(ID).make3D(position, maxVolume, maxDistance);
 }
@@ -120,12 +120,12 @@ void FabiEngine3D::sound_setVolume(const string& ID, float volume)
 	_core->_audioManager.getSound(ID).setVolume(volume);
 }
 
-void FabiEngine3D::sound_setPosition(const string& ID, Vec3 position)
+void FabiEngine3D::sound_setPosition(const string& ID, fvec3 position)
 {
 	_core->_audioManager.getSound(ID).setPosition(position);
 }
 
-void FabiEngine3D::sound_move(const string& ID, Vec3 change)
+void FabiEngine3D::sound_move(const string& ID, fvec3 change)
 {
 	_core->_audioManager.getSound(ID).move(change);
 }

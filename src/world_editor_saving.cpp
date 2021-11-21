@@ -110,7 +110,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 			{
 				// Reset main transformation
 				_fe3d.model_setBasePosition(modelID, _initialModelPosition[modelID]);
-				_fe3d.model_setBaseRotationOrigin(modelID, Vec3(0.0f));
+				_fe3d.model_setBaseRotationOrigin(modelID, fvec3(0.0f));
 				_fe3d.model_setBaseRotation(modelID, _initialModelRotation[modelID]);
 				_fe3d.model_setBaseSize(modelID, _initialModelSize[modelID]);
 
@@ -120,10 +120,10 @@ const bool WorldEditor::saveEditorWorldToFile()
 					// Only named parts
 					if(!partID.empty())
 					{
-						_fe3d.model_setPartPosition(modelID, partID, Vec3(0.0f));
-						_fe3d.model_setPartRotationOrigin(modelID, partID, Vec3(0.0f));
-						_fe3d.model_setPartRotation(modelID, partID, Vec3(0.0f));
-						_fe3d.model_setPartSize(modelID, partID, Vec3(1.0f));
+						_fe3d.model_setPartPosition(modelID, partID, fvec3(0.0f));
+						_fe3d.model_setPartRotationOrigin(modelID, partID, fvec3(0.0f));
+						_fe3d.model_setPartRotation(modelID, partID, fvec3(0.0f));
+						_fe3d.model_setPartSize(modelID, partID, fvec3(1.0f));
 					}
 				}
 			}

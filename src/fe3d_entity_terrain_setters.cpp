@@ -216,7 +216,7 @@ void FabiEngine3D::terrain_setWireframed(const string& ID, bool enabled)
 	_core->_terrainEntityManager.getEntity(ID)->setWireframed(enabled);
 }
 
-void FabiEngine3D::terrain_setWireframeColor(const string& ID, Vec3 color)
+void FabiEngine3D::terrain_setWireframeColor(const string& ID, fvec3 color)
 {
 	_core->_terrainEntityManager.getEntity(ID)->setWireframeColor(color);
 }

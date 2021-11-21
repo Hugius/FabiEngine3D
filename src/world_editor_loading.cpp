@@ -48,7 +48,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		if(lineType == "CAMERA_POSITION")
 		{
 			// Data placeholders
-			Vec3 position;
+			fvec3 position;
 
 			// Read data from file
 			iss >> position.x >> position.y >> position.z;
@@ -149,7 +149,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		{
 			// Data placeholders
 			string modelID, previewID, animationID;
-			Vec3 position, rotation, size;
+			fvec3 position, rotation, size;
 			bool isFrozen;
 
 			// Read ID from file
@@ -228,7 +228,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				if(_fe3d.model_isInstanced(modelID))
 				{
 					// Read offset data from file
-					vector<Vec3> instancedOffsets;
+					vector<fvec3> instancedOffsets;
 					while(true)
 					{
 						// Check if file has offset data left
@@ -242,7 +242,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 						}
 						else // Add offset
 						{
-							Vec3 offset;
+							fvec3 offset;
 							offset.x = stof(nextElement);
 							iss >> offset.y >> offset.z;
 							instancedOffsets.push_back(offset);
@@ -265,8 +265,8 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		{
 			// Data placeholders
 			string billboardID, previewID;
-			Vec3 position, rotation;
-			Vec2 size;
+			fvec3 position, rotation;
+			fvec2 size;
 
 			// Read data from file
 			iss >>
@@ -292,7 +292,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		{
 			// Data placeholders
 			string soundID, previewID;
-			Vec3 position;
+			fvec3 position;
 			float maxVolume, maxDistance;
 
 			// Read data from file
@@ -336,7 +336,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		{
 			// Data placeholders
 			string pointlightID;
-			Vec3 position, radius, color;
+			fvec3 position, radius, color;
 			float intensity;
 			unsigned int shape;
 
@@ -388,7 +388,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		{
 			// Data placeholders
 			string spotlightID;
-			Vec3 position, color;
+			fvec3 position, color;
 			float yaw, pitch, intensity, angle, distance;
 
 			// Read data from file
@@ -413,7 +413,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				const string newModelID = ("@@torch_" + spotlightID);
 				_fe3d.model_create(newModelID, "engine\\assets\\meshes\\torch.obj");
 				_fe3d.model_setBasePosition(newModelID, position);
-				_fe3d.model_setBaseRotation(newModelID, Vec3(0.0f, -yaw, pitch));
+				_fe3d.model_setBaseRotation(newModelID, fvec3(0.0f, -yaw, pitch));
 				_fe3d.model_setBaseSize(newModelID, DEFAULT_TORCH_SIZE);
 				_fe3d.model_setColor(newModelID, "", color);
 				_fe3d.model_setShadowed(newModelID, false);
@@ -442,7 +442,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		{
 			// Data placeholders
 			string reflectionID;
-			Vec3 position;
+			fvec3 position;
 
 			// Read data from file
 			iss >>
@@ -509,7 +509,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "LIGHTING_AMBIENT")
 		{
 			// Data placeholders
-			Vec3 color;
+			fvec3 color;
 			float intensity;
 
 			// Read data from file
@@ -527,7 +527,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "LIGHTING_DIRECTIONAL")
 		{
 			// Data placeholders
-			Vec3 position, color;
+			fvec3 position, color;
 			float intensity, billboardSize;
 
 			// Read data from file
@@ -549,7 +549,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			// Set lightsource billboard
 			_fe3d.billboard_setPosition("@@directionalLightSource", position);
-			_fe3d.billboard_setSize("@@directionalLightSource", Vec2(billboardSize));
+			_fe3d.billboard_setSize("@@directionalLightSource", fvec2(billboardSize));
 			_fe3d.billboard_setColor("@@directionalLightSource", color);
 			_fe3d.billboard_setVisible("@@directionalLightSource", (billboardSize != 0.0f));
 		}
@@ -557,7 +557,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		{
 			// Data placeholders
 			float size, lightness;
-			Vec3 position, center;
+			fvec3 position, center;
 			bool isFollowingCamera;
 			int interval;
 
@@ -615,7 +615,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		{
 			// Data placeholders
 			float minDistance, maxDistance, thickness;
-			Vec3 color;
+			fvec3 color;
 
 			// Read data from file
 			iss >> minDistance >> maxDistance >> thickness >> color.r >> color.g >> color.b;

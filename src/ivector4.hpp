@@ -2,12 +2,12 @@
 
 #include <cmath>
 
-struct Vec4;
+struct fvec4;
 
 struct Ivec4 final
 {
 	Ivec4();
-	Ivec4(const Vec4& other);
+	Ivec4(const fvec4& other);
 	Ivec4(const int value);
 	Ivec4(const int x, const int y, const int z, const int w);
 

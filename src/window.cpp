@@ -22,7 +22,7 @@ void Window::setTitle(const string& title)
 	SDL_SetWindowTitle(_windowPointer, title.c_str());
 }
 
-void Window::setSize(Ivec2 size)
+void Window::setSize(ivec2 size)
 {
 	SDL_SetWindowSize(_windowPointer, size.x, size.y);
 	center();
@@ -38,7 +38,7 @@ void Window::setOpacity(float value)
 	SDL_SetWindowOpacity(_windowPointer, value);
 }
 
-void Window::enableColorKeying(Vec3 color)
+void Window::enableColorKeying(fvec3 color)
 {
 	// Get window handle
 	SDL_SysWMinfo wmInfo;
@@ -51,7 +51,7 @@ void Window::enableColorKeying(Vec3 color)
 	SetLayeredWindowAttributes(hwnd, RGB(static_cast<int>(color.r * 255.0f), static_cast<int>(color.g * 255), static_cast<int>(color.b * 255)), 0, LWA_COLORKEY);
 }
 
-void Window::disableColorKeying(Vec3 color)
+void Window::disableColorKeying(fvec3 color)
 {
 	// Get window handle
 	SDL_SysWMinfo wmInfo;
@@ -119,16 +119,16 @@ void Window::hideCursor()
 	SDL_ShowCursor(SDL_DISABLE);
 }
 
-void Window::setCursorPosition(Ivec2 pos)
+void Window::setCursorPosition(ivec2 pos)
 {
 	SDL_WarpMouseInWindow(_windowPointer, pos.x, pos.y);
 }
 
-const Ivec2 Window::getCursorPosition() const
+const ivec2 Window::getCursorPosition() const
 {
 	int x, y;
 	SDL_GetMouseState(&x, &y);
-	return Ivec2(x, y);
+	return ivec2(x, y);
 }
 
 const bool Window::isCursorVisible() const

@@ -215,7 +215,7 @@ void ScriptInterpreter::load()
 	// Directional light source
 	const string texturePath = "engine\\assets\\textures\\light_source.png";
 	_fe3d.billboard_create("@@directionalLightSource");
-	_fe3d.billboard_setSize("@@directionalLightSource", Vec2(0.0f));
+	_fe3d.billboard_setSize("@@directionalLightSource", fvec2(0.0f));
 	_fe3d.billboard_setDiffuseMap("@@directionalLightSource", texturePath);
 	_fe3d.billboard_setDepthMapIncluded("@@directionalLightSource", false);
 	_fe3d.billboard_setShadowed("@@directionalLightSource", false);

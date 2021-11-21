@@ -122,7 +122,7 @@ void WorldEditor::_updateModelEditing()
 				}
 				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
 				{
-					_gui.getGlobalScreen()->createChoiceForm("animationList", "Select Animation", Vec2(0.0f, 0.1f), _animationEditor.getAllAnimationIDs());
+					_gui.getGlobalScreen()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), _animationEditor.getAllAnimationIDs());
 				}
 				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
@@ -146,7 +146,7 @@ void WorldEditor::_updateModelEditing()
 
 					// Reset main transformation
 					_fe3d.model_setBasePosition(_activeModelID, _initialModelPosition[_activeModelID]);
-					_fe3d.model_setBaseRotationOrigin(_activeModelID, Vec3(0.0f));
+					_fe3d.model_setBaseRotationOrigin(_activeModelID, fvec3(0.0f));
 					_fe3d.model_setBaseRotation(_activeModelID, _initialModelRotation[_activeModelID]);
 					_fe3d.model_setBaseSize(_activeModelID, _initialModelSize[_activeModelID]);
 
@@ -156,10 +156,10 @@ void WorldEditor::_updateModelEditing()
 						// Only named parts
 						if(!partID.empty())
 						{
-							_fe3d.model_setPartPosition(_activeModelID, partID, Vec3(0.0f));
-							_fe3d.model_setPartRotationOrigin(_activeModelID, partID, Vec3(0.0f));
-							_fe3d.model_setPartRotation(_activeModelID, partID, Vec3(0.0f));
-							_fe3d.model_setPartSize(_activeModelID, partID, Vec3(1.0f));
+							_fe3d.model_setPartPosition(_activeModelID, partID, fvec3(0.0f));
+							_fe3d.model_setPartRotationOrigin(_activeModelID, partID, fvec3(0.0f));
+							_fe3d.model_setPartRotation(_activeModelID, partID, fvec3(0.0f));
+							_fe3d.model_setPartSize(_activeModelID, partID, fvec3(1.0f));
 						}
 					}
 				}
@@ -251,7 +251,7 @@ void WorldEditor::_updateModelEditing()
 
 					// Set new transformations
 					_fe3d.model_setBasePosition(_activeModelID, _initialModelPosition[_activeModelID]);
-					_fe3d.model_setBaseRotationOrigin(_activeModelID, Vec3(0.0f));
+					_fe3d.model_setBaseRotationOrigin(_activeModelID, fvec3(0.0f));
 					_fe3d.model_setBaseRotation(_activeModelID, _initialModelRotation[_activeModelID]);
 					_fe3d.model_setBaseSize(_activeModelID, _initialModelSize[_activeModelID]);
 
@@ -261,10 +261,10 @@ void WorldEditor::_updateModelEditing()
 						// Only named parts
 						if(!partID.empty())
 						{
-							_fe3d.model_setPartPosition(_activeModelID, partID, Vec3(0.0f));
-							_fe3d.model_setPartRotationOrigin(_activeModelID, partID, Vec3(0.0f));
-							_fe3d.model_setPartRotation(_activeModelID, partID, Vec3(0.0f));
-							_fe3d.model_setPartSize(_activeModelID, partID, Vec3(1.0f));
+							_fe3d.model_setPartPosition(_activeModelID, partID, fvec3(0.0f));
+							_fe3d.model_setPartRotationOrigin(_activeModelID, partID, fvec3(0.0f));
+							_fe3d.model_setPartRotation(_activeModelID, partID, fvec3(0.0f));
+							_fe3d.model_setPartSize(_activeModelID, partID, fvec3(1.0f));
 						}
 					}
 

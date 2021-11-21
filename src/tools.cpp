@@ -68,22 +68,22 @@ const vector<string> Tools::getDirectoriesFromDirectory(const string& path)
 	return directoryNames;
 }
 
-const string Tools::vec2str(Ivec2 vec)
+const string Tools::vec2str(ivec2 vec)
 {
 	return string(to_string(vec.x) + " " + to_string(vec.y));
 }
 
-const string Tools::vec2str(Vec2 vec)
+const string Tools::vec2str(fvec2 vec)
 {
 	return string(to_string(vec.x) + " " + to_string(vec.y));
 }
 
-const string Tools::vec2str(Vec3 vec)
+const string Tools::vec2str(fvec3 vec)
 {
 	return string(to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z));
 }
 
-const string Tools::vec2str(Vec4 vec)
+const string Tools::vec2str(fvec4 vec)
 {
 	return string(to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z) + " " + to_string(vec.w));
 }
@@ -283,23 +283,23 @@ void Tools::deleteFile(const string& path)
 	remove(path);
 }
 
-void Tools::setMainRenderingColor(Vec3 color)
+void Tools::setMainRenderingColor(fvec3 color)
 {
 	glClearColor(color.r, color.g, color.b, 1.0f);
 }
 
-const Ivec2 Tools::convertToScreenCoords(Vec2 position)
+const ivec2 Tools::convertToScreenCoords(fvec2 position)
 {
 	const float x = (position.x * static_cast<float>(Config::getInst().getWindowSize().x));
 	const float y = (position.y * static_cast<float>(Config::getInst().getWindowSize().y));
 
-	return Ivec2(static_cast<int>(x), static_cast<int>(y));
+	return ivec2(static_cast<int>(x), static_cast<int>(y));
 }
 
-const Vec2 Tools::convertFromScreenCoords(Ivec2 position)
+const fvec2 Tools::convertFromScreenCoords(ivec2 position)
 {
 	const float x = (static_cast<float>(position.x) / static_cast<float>(Config::getInst().getWindowSize().x));
 	const float y = (static_cast<float>(position.y) / static_cast<float>(Config::getInst().getWindowSize().y));
 
-	return Vec2(x, y);
+	return fvec2(x, y);
 }

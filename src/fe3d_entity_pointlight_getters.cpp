@@ -16,17 +16,17 @@ const PointlightShape FabiEngine3D::pointlight_getShape(const string& ID) const
 	return _core->_pointlightEntityManager.getEntity(ID)->getShape();
 }
 
-const Vec3 FabiEngine3D::pointlight_getPosition(const string& ID) const
+const fvec3 FabiEngine3D::pointlight_getPosition(const string& ID) const
 {
 	return _core->_pointlightEntityManager.getEntity(ID)->getPosition();
 }
 
-const Vec3 FabiEngine3D::pointlight_getRadius(const string& ID) const
+const fvec3 FabiEngine3D::pointlight_getRadius(const string& ID) const
 {
 	return _core->_pointlightEntityManager.getEntity(ID)->getRadius();
 }
 
-const Vec3 FabiEngine3D::pointlight_getColor(const string& ID) const
+const fvec3 FabiEngine3D::pointlight_getColor(const string& ID) const
 {
 	return _core->_pointlightEntityManager.getEntity(ID)->getColor();
 }

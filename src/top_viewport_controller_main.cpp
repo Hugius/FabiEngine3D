@@ -31,9 +31,9 @@ TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManage
 void TopViewportController::initialize()
 {
 	// Top-viewport windows
-	_gui.getViewport("top")->createWindow("projectWindow", Vec2(-0.25f, 0.0f), Vec2(0.9875f, 1.5f), TVPC::FRAME_COLOR);
-	_gui.getViewport("top")->createWindow("runWindow", Vec2(0.125f, 0.0f), Vec2(0.4875f, 1.5f), TVPC::FRAME_COLOR);
-	_gui.getViewport("top")->createWindow("miscWindow", Vec2(0.375f, 0.0f), Vec2(0.4875f, 1.5f), TVPC::FRAME_COLOR);
+	_gui.getViewport("top")->createWindow("projectWindow", fvec2(-0.25f, 0.0f), fvec2(0.9875f, 1.5f), TVPC::FRAME_COLOR);
+	_gui.getViewport("top")->createWindow("runWindow", fvec2(0.125f, 0.0f), fvec2(0.4875f, 1.5f), TVPC::FRAME_COLOR);
+	_gui.getViewport("top")->createWindow("miscWindow", fvec2(0.375f, 0.0f), fvec2(0.4875f, 1.5f), TVPC::FRAME_COLOR);
 	_projectWindow = _gui.getViewport("top")->getWindow("projectWindow");
 	_gameWindow = _gui.getViewport("top")->getWindow("runWindow");
 	_miscWindow = _gui.getViewport("top")->getWindow("miscWindow");
@@ -42,29 +42,29 @@ void TopViewportController::initialize()
 	_projectWindow->createScreen("main");
 	_projectWindow->setActiveScreen("main");
 	auto screen = _projectWindow->getScreen("main");
-	screen->createButton("newProject", Vec2(-0.767f, 0.0f), Vec2(0.15f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "NEW", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
-	screen->createButton("loadProject", Vec2(-0.384f, 0.0f), Vec2(0.2f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "LOAD", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
-	screen->createButton("saveProject", Vec2(0.0f, 0.0f), Vec2(0.2f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "SAVE", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
-	screen->createButton("deleteProject", Vec2(0.384f, 0.0f), Vec2(0.3f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "DELETE", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
-	screen->createButton("quitEngine", Vec2(0.767f, 0.0f), Vec2(0.2f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "QUIT", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
+	screen->createButton("newProject", fvec2(-0.767f, 0.0f), fvec2(0.15f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "NEW", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
+	screen->createButton("loadProject", fvec2(-0.384f, 0.0f), fvec2(0.2f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "LOAD", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
+	screen->createButton("saveProject", fvec2(0.0f, 0.0f), fvec2(0.2f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "SAVE", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
+	screen->createButton("deleteProject", fvec2(0.384f, 0.0f), fvec2(0.3f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "DELETE", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
+	screen->createButton("quitEngine", fvec2(0.767f, 0.0f), fvec2(0.2f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "QUIT", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
 
 	// Top-viewport: gameWindow
 	_gameWindow->createScreen("main");
 	_gameWindow->setActiveScreen("main");
 	screen = _gameWindow->getScreen("main");
-	screen->createButton("play", Vec2(-0.73f, 0.0f), Vec2(0.2f, 1.75f), "play.png", Vec3(2.0f), true, true, true);
-	screen->createButton("pause", Vec2(-0.36f, 0.0f), Vec2(0.2f, 1.75f), "pause.png", Vec3(2.0f), true, true, true);
-	screen->createButton("restart", Vec2(0.0f, 0.0f), Vec2(0.2f, 1.75f), "restart.png", Vec3(2.0f), true, true, true);
-	screen->createButton("stop", Vec2(0.36f, 0.0f), Vec2(0.2f, 1.75f), "stop.png", Vec3(2.0f), true, true, true);
-	screen->createButton("debug", Vec2(0.73f, 0.0f), Vec2(0.2f, 1.75f), "debug.png", Vec3(2.0f), true, true, true);
+	screen->createButton("play", fvec2(-0.73f, 0.0f), fvec2(0.2f, 1.75f), "play.png", fvec3(2.0f), true, true, true);
+	screen->createButton("pause", fvec2(-0.36f, 0.0f), fvec2(0.2f, 1.75f), "pause.png", fvec3(2.0f), true, true, true);
+	screen->createButton("restart", fvec2(0.0f, 0.0f), fvec2(0.2f, 1.75f), "restart.png", fvec3(2.0f), true, true, true);
+	screen->createButton("stop", fvec2(0.36f, 0.0f), fvec2(0.2f, 1.75f), "stop.png", fvec3(2.0f), true, true, true);
+	screen->createButton("debug", fvec2(0.73f, 0.0f), fvec2(0.2f, 1.75f), "debug.png", fvec3(2.0f), true, true, true);
 
 	// Top-viewport: miscWindow
 	_miscWindow->createScreen("main");
 	_miscWindow->setActiveScreen("main");
 	screen = _miscWindow->getScreen("main");
-	screen->createButton("uncache", Vec2(-0.5875f, 0.0f), Vec2(0.55f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "UNCACHE", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
-	screen->createButton("export", Vec2(0.075f, 0.0f), Vec2(0.5f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "EXPORT", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
-	screen->createButton("docs", Vec2(0.6625f, 0.0f), Vec2(0.4f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "DOCS", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
+	screen->createButton("uncache", fvec2(-0.5875f, 0.0f), fvec2(0.55f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "UNCACHE", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
+	screen->createButton("export", fvec2(0.075f, 0.0f), fvec2(0.5f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "EXPORT", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
+	screen->createButton("docs", fvec2(0.6625f, 0.0f), fvec2(0.4f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "DOCS", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
 }
 
 void TopViewportController::update()
@@ -86,7 +86,7 @@ void TopViewportController::_updateProjectScreenManagement()
 	{
 		if(topScreen->getButton("newProject")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("newProjectID", "Create Project", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("newProjectID", "Create Project", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isCreatingProject = true;
 		}
 		else if(topScreen->getButton("loadProject")->isHovered())
@@ -112,7 +112,7 @@ void TopViewportController::_updateProjectScreenManagement()
 			// Check if currently in editor (except for world editor)
 			if((_currentProjectID != "") && (leftScreen->getID() != "main") && (leftScreen->getID() != "worldEditorMenuMain"))
 			{
-				_gui.getGlobalScreen()->createAnswerForm("quit", "Save Changes?", Vec2(0.0f, 0.25f));
+				_gui.getGlobalScreen()->createAnswerForm("quit", "Save Changes?", fvec2(0.0f, 0.25f));
 			}
 			else
 			{

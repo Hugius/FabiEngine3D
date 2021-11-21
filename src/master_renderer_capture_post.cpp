@@ -75,9 +75,9 @@ void MasterRenderer::_captureWorldDepth()
 							auto levelOfDetailEntity = foundPair->second;
 
 							// Save initial transformation
-							Vec3 initialPosition = levelOfDetailEntity->getBasePosition();
-							Vec3 initialRotation = levelOfDetailEntity->getBaseRotation();
-							Vec3 initialSize = levelOfDetailEntity->getBaseSize();
+							fvec3 initialPosition = levelOfDetailEntity->getBasePosition();
+							fvec3 initialRotation = levelOfDetailEntity->getBaseRotation();
+							fvec3 initialSize = levelOfDetailEntity->getBaseSize();
 							bool initialVisibility = levelOfDetailEntity->isVisible();
 
 							// Change transformation

@@ -5,11 +5,11 @@
 class Box final
 {
 public:
-	Box(Vec3 position, float left, float right, float bottom, float top, float back, float front);
+	Box(fvec3 position, float left, float right, float bottom, float top, float back, float front);
 	Box(float left, float right, float bottom, float top, float back, float front);
 
 	// Vectors
-	const Vec3 getPosition() const;
+	const fvec3 getPosition() const;
 
 	// Decimals
 	const float getLeft() const;
@@ -21,7 +21,7 @@ public:
 
 private:
 	// Vectors
-	Vec3 _position;
+	fvec3 _position;
 
 	// Decimals
 	float _left;

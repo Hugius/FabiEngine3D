@@ -208,21 +208,21 @@ void WorldEditor::_updateMainMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("worldCreate", "Create World", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("worldCreate", "Create World", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			_isChoosingWorld = true;
 			auto IDs = _getWorldIDs();
 			sort(IDs.begin(), IDs.end());
-			_gui.getGlobalScreen()->createChoiceForm("worldList", "Edit World", Vec2(0.0f, 0.1f), IDs);
+			_gui.getGlobalScreen()->createChoiceForm("worldList", "Edit World", fvec2(0.0f, 0.1f), IDs);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			_isDeletingWorld = true;
 			auto IDs = _getWorldIDs();
 			sort(IDs.begin(), IDs.end());
-			_gui.getGlobalScreen()->createChoiceForm("worldList", "Delete World", Vec2(0.0f, 0.1f), IDs);
+			_gui.getGlobalScreen()->createChoiceForm("worldList", "Delete World", fvec2(0.0f, 0.1f), IDs);
 		}
 
 		// Check if user filled in a new ID
@@ -275,7 +275,7 @@ void WorldEditor::_updateMainMenu()
 				}
 				else if(_isDeletingWorld) // Prepare deleting confirmation
 				{
-					_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 				}
 
 				// Miscellaneous
@@ -314,7 +314,7 @@ void WorldEditor::_updateChoiceMenu()
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
 			return;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("sky")->isHovered())
@@ -467,11 +467,11 @@ void WorldEditor::_updateCamera()
 			// Y movement
 			if(_fe3d.input_isKeyDown(InputType::KEY_SPACE))
 			{
-				_fe3d.camera_move(Vec3(0.0f, _editorSpeed / 75.0f, 0.0f));
+				_fe3d.camera_move(fvec3(0.0f, _editorSpeed / 75.0f, 0.0f));
 			}
 			if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 			{
-				_fe3d.camera_move(Vec3(0.0f, -(_editorSpeed / 75.0f), 0.0f));
+				_fe3d.camera_move(fvec3(0.0f, -(_editorSpeed / 75.0f), 0.0f));
 			}
 
 			// Z movement

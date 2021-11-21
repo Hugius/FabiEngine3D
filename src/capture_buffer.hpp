@@ -13,14 +13,14 @@ public:
 	~CaptureBuffer();
 
 	// Voids
-	void createColorTexture(Ivec2 position, Ivec2 size, unsigned int count, bool isTextureClamped);
-	void createDepthTexture(Ivec2 position, Ivec2 size);
+	void createColorTexture(ivec2 position, ivec2 size, unsigned int count, bool isTextureClamped);
+	void createDepthTexture(ivec2 position, ivec2 size);
 	void reset();
 	void bind();
 	void unbind();
 
 	// Vectors
-	const Ivec2 getSize() const;
+	const ivec2 getSize() const;
 
 	// Miscellaneous
 	const BufferID getFBO() const;
@@ -28,8 +28,8 @@ public:
 
 private:
 	// Vectors
-	Ivec2 _position = Ivec2(0);
-	Ivec2 _size = Ivec2(0);
+	ivec2 _position = ivec2(0);
+	ivec2 _size = ivec2(0);
 
 	// Booleans
 	bool _isInitialized = false;

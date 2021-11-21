@@ -13,7 +13,7 @@ const vector<string> FabiEngine3D::reflection_getAllIDs() const
 	return IDs;
 }
 
-const Vec3 FabiEngine3D::reflection_getPosition(const string& ID) const
+const fvec3 FabiEngine3D::reflection_getPosition(const string& ID) const
 {
 	return _core->_reflectionEntityManager.getEntity(ID)->getPosition();
 }

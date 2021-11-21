@@ -31,7 +31,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		}
 
 		// Default rendering color
-		Tools::setMainRenderingColor(Vec3(0.0f));
+		Tools::setMainRenderingColor(fvec3(0.0f));
 
 		// Load application settings
 		_leftViewportController.getSettingsEditor().loadSettingsFromFile();
@@ -125,7 +125,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		misc_cacheFontsMultiThreaded(fontPaths);
 
 		// Default rendering color
-		Tools::setMainRenderingColor(Vec3(0.0f));
+		Tools::setMainRenderingColor(fvec3(0.0f));
 
 		// Default engine background
 		sky_create("@@engineBackground");
@@ -133,7 +133,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 		// Custom cursor texture
 		image_create("@@cursor", true);
-		image_setSize("@@cursor", Vec2(0.075f, 0.075f * Tools::getWindowAspectRatio()));
+		image_setSize("@@cursor", fvec2(0.075f, 0.075f * Tools::getWindowAspectRatio()));
 		image_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_default.png");
 		misc_setCustomCursor("@@cursor");
 		misc_setCursorVisible(false);

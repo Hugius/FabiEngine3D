@@ -28,7 +28,7 @@ void AnimationEditor::_updateCamera()
 
 		// Update shadows
 		const auto distance = _fe3d.camera_getThirdPersonDistance();
-		_fe3d.gfx_setShadowEyePosition(Vec3(cameraLookat + Vec3(distance * 2.0f)));
+		_fe3d.gfx_setShadowEyePosition(fvec3(cameraLookat + fvec3(distance * 2.0f)));
 		_fe3d.gfx_setShadowCenterPosition(cameraLookat);
 		_fe3d.gfx_setShadowAreaSize(distance * 4.0f);
 		_fe3d.gfx_setShadowAreaReach(distance * 8.0f);
@@ -142,17 +142,17 @@ void AnimationEditor::_updateMiscellaneous()
 					{
 						if(partID.empty()) // Base transformation
 						{
-							_fe3d.model_setBasePosition(currentAnimation->getPreviewModelID(), Vec3(0.0f));
-							_fe3d.model_setBaseRotationOrigin(currentAnimation->getPreviewModelID(), Vec3(0.0f));
-							_fe3d.model_setBaseRotation(currentAnimation->getPreviewModelID(), Vec3(0.0f));
+							_fe3d.model_setBasePosition(currentAnimation->getPreviewModelID(), fvec3(0.0f));
+							_fe3d.model_setBaseRotationOrigin(currentAnimation->getPreviewModelID(), fvec3(0.0f));
+							_fe3d.model_setBaseRotation(currentAnimation->getPreviewModelID(), fvec3(0.0f));
 							_fe3d.model_setBaseSize(currentAnimation->getPreviewModelID(), currentAnimation->getInitialSize());
 						}
 						else // Part transformation
 						{
-							_fe3d.model_setPartPosition(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-							_fe3d.model_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-							_fe3d.model_setPartRotation(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-							_fe3d.model_setPartSize(currentAnimation->getPreviewModelID(), partID, Vec3(1.0f));
+							_fe3d.model_setPartPosition(currentAnimation->getPreviewModelID(), partID, fvec3(0.0f));
+							_fe3d.model_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, fvec3(0.0f));
+							_fe3d.model_setPartRotation(currentAnimation->getPreviewModelID(), partID, fvec3(0.0f));
+							_fe3d.model_setPartSize(currentAnimation->getPreviewModelID(), partID, fvec3(1.0f));
 						}
 					}
 
@@ -213,7 +213,7 @@ void AnimationEditor::_updateMiscellaneous()
 									else if(frame.getTransformationTypes().at(partID) == TransformationType::SCALING)
 									{
 										// Size
-										auto modelSize = (partID.empty() ? currentAnimation->getInitialSize() : Vec3(1.0f));
+										auto modelSize = (partID.empty() ? currentAnimation->getInitialSize() : fvec3(1.0f));
 										auto newSize = (modelSize + (modelSize * frame.getTargetTransformations().at(partID)));
 										if(partID.empty())
 										{

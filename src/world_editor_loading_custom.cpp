@@ -52,7 +52,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		{
 			// Data placeholders
 			string skyID, previewID;
-			Vec3 color;
+			fvec3 color;
 			float rotation, lightness;
 
 			// Read data from file
@@ -88,8 +88,8 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		{
 			// Data placeholders
 			string waterID, previewID;
-			Vec3 color;
-			Vec2 speed;
+			fvec3 color;
+			fvec2 speed;
 			float transparency;
 
 			// Read data from file
@@ -115,7 +115,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		{
 			// Data placeholders
 			string modelID, previewID;
-			Vec3 position, rotation, rotationOrigin, size, color;
+			fvec3 position, rotation, rotationOrigin, size, color;
 			float minHeight, maxHeight, transparency, lightness;
 			unsigned partCount;
 			bool isVisible, isFrozen, isAabbRaycastResponsive, isAabbCollisionResponsive;
@@ -245,7 +245,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				// Read offset data from file
 				if(_fe3d.model_isInstanced(modelID))
 				{
-					vector<Vec3> instancedOffsets;
+					vector<fvec3> instancedOffsets;
 					while(true)
 					{
 						// Check if file has offset data left
@@ -259,7 +259,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 						}
 						else // Add offset
 						{
-							Vec3 offset;
+							fvec3 offset;
 							offset.x = stof(nextElement);
 							iss >> offset.y >> offset.z;
 							instancedOffsets.push_back(offset);
@@ -298,7 +298,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				fadeFramestep;
 
 			// Read speed data from file
-			map<string, Vec3> speeds;
+			map<string, fvec3> speeds;
 			while(true)
 			{
 				// Check if file has speed data left
@@ -313,7 +313,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				else // Create speed
 				{
 					string partID = (nextElement == "?") ? "" : nextElement;
-					Vec3 speed;
+					fvec3 speed;
 					iss >> speed.x >> speed.y >> speed.z;
 					speeds[partID] = speed;
 				}
@@ -360,8 +360,8 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		{
 			// Data placeholders
 			string billboardID, previewID, textContent;
-			Vec3 position, rotation, color;
-			Vec2 size;
+			fvec3 position, rotation, color;
+			fvec2 size;
 			float lightness, minHeight, maxHeight;
 			int remainingAnimationLoops;
 			unsigned int animationRowIndex, animationColumnIndex;
@@ -446,7 +446,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		{
 			// Data placeholders
 			string aabbID;
-			Vec3 position, size;
+			fvec3 position, size;
 			bool isVisible, isRaycastResponsive, isCollisionResponsive;
 
 			// Read data from file
@@ -475,7 +475,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		{
 			// Data placeholders
 			string soundID, previewID;
-			Vec3 position;
+			fvec3 position;
 			float maxVolume, maxDistance;
 
 			// Read data from file
@@ -500,7 +500,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		{
 			// Data placeholders
 			string pointlightID;
-			Vec3 position, radius, color;
+			fvec3 position, radius, color;
 			float intensity;
 
 			// Read data from file
@@ -528,7 +528,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		{
 			// Data placeholders
 			string spotlightID;
-			Vec3 position, color;
+			fvec3 position, color;
 			float yaw, pitch, intensity, angle, distance;
 
 			// Read data from file
@@ -560,7 +560,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		{
 			// Data placeholders
 			string reflectionID;
-			Vec3 position;
+			fvec3 position;
 
 			// Read data from file
 			iss >>
@@ -601,7 +601,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		else if(lineType == "LIGHTING_AMBIENT")
 		{
 			// Data placeholders
-			Vec3 color;
+			fvec3 color;
 			float intensity;
 
 			// Read data from file
@@ -619,7 +619,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		else if(lineType == "LIGHTING_DIRECTIONAL")
 		{
 			// Data placeholders
-			Vec3 position, color;
+			fvec3 position, color;
 			float intensity, billboardSize;
 
 			// Read data from file
@@ -641,7 +641,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 			// Set lightsource billboard
 			_fe3d.billboard_setPosition("@@directionalLightSource", position);
-			_fe3d.billboard_setSize("@@directionalLightSource", Vec2(billboardSize));
+			_fe3d.billboard_setSize("@@directionalLightSource", fvec2(billboardSize));
 			_fe3d.billboard_setColor("@@directionalLightSource", color);
 			_fe3d.billboard_setVisible("@@directionalLightSource", (billboardSize != 0.0f));
 		}
@@ -649,7 +649,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		{
 			// Data placeholders
 			float size, lightness;
-			Vec3 position, center;
+			fvec3 position, center;
 			bool isFollowingCamera;
 			int interval;
 
@@ -707,7 +707,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		{
 			// Data placeholders
 			float minDistance, maxDistance, thickness;
-			Vec3 color;
+			fvec3 color;
 
 			// Read data from file
 			iss >> minDistance >> maxDistance >> thickness >> color.r >> color.g >> color.b;

@@ -95,7 +95,7 @@ void WorldEditor::_updateBillboardPlacingMenu()
 
 						// Set new preview billboard
 						_currentPreviewBillboardID = billboardID;
-						_fe3d.billboard_setPosition(_currentPreviewBillboardID, Vec3(0.0f));
+						_fe3d.billboard_setPosition(_currentPreviewBillboardID, fvec3(0.0f));
 						_fe3d.billboard_setVisible(_currentPreviewBillboardID, true);
 						_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), true);
 						_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), "Billboard: " + _currentPreviewBillboardID.substr(1), 0.025f);
@@ -104,9 +104,9 @@ void WorldEditor::_updateBillboardPlacingMenu()
 						// Add position value forms for placing without terrain
 						if(_fe3d.terrain_getSelectedID().empty())
 						{
-							_gui.getGlobalScreen()->createValueForm("positionX", "X", 0.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-							_gui.getGlobalScreen()->createValueForm("positionY", "Y", 0.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-							_gui.getGlobalScreen()->createValueForm("positionZ", "Z", 0.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+							_gui.getGlobalScreen()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+							_gui.getGlobalScreen()->createValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+							_gui.getGlobalScreen()->createValueForm("positionZ", "Z", 0.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 						}
 
 						// Disable billboard choosing

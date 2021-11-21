@@ -38,8 +38,8 @@ void ShadowGenerator::updateMatrix()
 		auto centerPosition = _renderBus.getShadowCenterPosition();
 
 		// Update eye & center
-		Vec3 newEyePosition = Vec3(cameraPosition.x, 0.0f, cameraPosition.z);
-		Vec3 newCenterPosition = Vec3(cameraPosition.x, 0.0f, cameraPosition.z);
+		fvec3 newEyePosition = fvec3(cameraPosition.x, 0.0f, cameraPosition.z);
+		fvec3 newCenterPosition = fvec3(cameraPosition.x, 0.0f, cameraPosition.z);
 		newEyePosition += eyePosition;
 		newCenterPosition += centerPosition;
 
@@ -52,7 +52,7 @@ void ShadowGenerator::updateMatrix()
 	_renderBus.setShadowMatrix(_createLightSpaceMatrix());
 }
 
-const Matrix44 ShadowGenerator::_createLightSpaceMatrix() const
+const mat44 ShadowGenerator::_createLightSpaceMatrix() const
 {
 	// Temporary values
 	auto eye = _renderBus.getShadowEyePosition();
@@ -61,8 +61,8 @@ const Matrix44 ShadowGenerator::_createLightSpaceMatrix() const
 	auto reach = _renderBus.getShadowAreaReach();
 
 	// Matrix generation
-	Matrix44 lightViewMatrix = Math::createViewMatrix(eye, center, Vec3(0.0f, 1.0f, 0.0f));
-	Matrix44 lightProjectionMatrix = Math::createOrthoMatrix(-size / 2.0f, size / 2.0f, -size / 2.0f, size / 2.0f, NEAR_DISTANCE, reach);
+	mat44 lightViewMatrix = Math::createViewMatrix(eye, center, fvec3(0.0f, 1.0f, 0.0f));
+	mat44 lightProjectionMatrix = Math::createOrthoMatrix(-size / 2.0f, size / 2.0f, -size / 2.0f, size / 2.0f, NEAR_DISTANCE, reach);
 
 	// Return
 	return (lightProjectionMatrix * lightViewMatrix);

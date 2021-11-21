@@ -50,12 +50,12 @@ private:
 	const string _limitDecimalString(const string& valueString) const;
 
 	// Vectors
-	const Vec3 _extractVec3FromString(const string& valueString);
-	const Ivec3 _extractVec3PartFromString(const string& valueString) const;
-	const Vec2 _convertGuiPositionToViewport(Vec2 position) const;
-	const Vec2 _convertGuiPositionFromViewport(Vec2 position) const;
-	const Vec2 _convertGuiSizeToViewport(Vec2 size) const;
-	const Vec2 _convertGuiSizeFromViewport(Vec2 size) const;
+	const fvec3 _extractVec3FromString(const string& valueString);
+	const ivec3 _extractVec3PartFromString(const string& valueString) const;
+	const fvec2 _convertGuiPositionToViewport(fvec2 position) const;
+	const fvec2 _convertGuiPositionFromViewport(fvec2 position) const;
+	const fvec2 _convertGuiSizeToViewport(fvec2 size) const;
+	const fvec2 _convertGuiSizeFromViewport(fvec2 size) const;
 
 	// Integers
 	const int _extractListIndexFromString(const string& valueString, bool& isAccessingList);

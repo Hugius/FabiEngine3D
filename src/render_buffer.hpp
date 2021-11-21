@@ -16,11 +16,11 @@ public:
 	~RenderBuffer();
 
 	// Voids
-	void enableInstancing(const vector<Vec3>& offsets);
+	void enableInstancing(const vector<fvec3>& offsets);
 	void disableInstancing();
 
 	// Vectors
-	const vector<Vec3>& getInstancedOffsets() const;
+	const vector<fvec3>& getInstancedOffsets() const;
 
 	// Integers
 	const unsigned int getVertexCount() const;
@@ -34,7 +34,7 @@ public:
 
 private:
 	// Vectors
-	vector<Vec3> _instancedOffsets;
+	vector<fvec3> _instancedOffsets;
 
 	// Integers
 	unsigned int _vertexCount = 0;

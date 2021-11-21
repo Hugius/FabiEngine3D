@@ -118,7 +118,7 @@ const bool SkyEditor::loadSkyEntitiesFromFile()
 		string skyID;
 		array<string, 6> cubeMapPaths{};
 		float rotation, lightness;
-		Vec3 color;
+		fvec3 color;
 
 		// Load base data
 		iss >>

@@ -28,7 +28,7 @@ Mix_Chunk* Sound::getDataPointer() const
 	return _dataPointer;
 }
 
-void Sound::make3D(Vec3 position, float maxVolume, float maxDistance)
+void Sound::make3D(fvec3 position, float maxVolume, float maxDistance)
 {
 	_is3D = true;
 
@@ -37,7 +37,7 @@ void Sound::make3D(Vec3 position, float maxVolume, float maxDistance)
 	setMaxDistance(maxDistance);
 }
 
-void Sound::setPosition(Vec3 value)
+void Sound::setPosition(fvec3 value)
 {
 	if(_is3D)
 	{
@@ -45,7 +45,7 @@ void Sound::setPosition(Vec3 value)
 	}
 }
 
-void Sound::move(Vec3 value)
+void Sound::move(fvec3 value)
 {
 	if(_is3D)
 	{
@@ -74,7 +74,7 @@ void Sound::setMaxDistance(float value)
 	}
 }
 
-const Vec3 Sound::getPosition() const
+const fvec3 Sound::getPosition() const
 {
 	return _position;
 }

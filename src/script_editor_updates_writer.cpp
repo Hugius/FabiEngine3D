@@ -472,17 +472,17 @@ void ScriptEditor::_updateTextWriter()
 		}
 
 		// Update cursor billboard text & position
-		Vec3 position;
+		fvec3 position;
 		if(cursorCharIndex == 0) // Default line position
 		{
-			Vec3 linePosition = _fe3d.billboard_getPosition(to_string(cursorLineIndex));
-			position = Vec3(SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET - HORIZONTAL_CHARACTER_OFFSET, linePosition.y, linePosition.z);
+			fvec3 linePosition = _fe3d.billboard_getPosition(to_string(cursorLineIndex));
+			position = fvec3(SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET - HORIZONTAL_CHARACTER_OFFSET, linePosition.y, linePosition.z);
 		}
 		else // Mid-text position
 		{
 			position = _fe3d.billboard_getPosition(to_string(cursorLineIndex) + "_" + to_string(cursorCharIndex - 1));
 		}
-		position += Vec3(TEXT_CHARACTER_SIZE.x / 2.0f, 0.0f, 0.0f);
+		position += fvec3(TEXT_CHARACTER_SIZE.x / 2.0f, 0.0f, 0.0f);
 		_fe3d.billboard_setPosition("cursor", position);
 		bool showBar = ((barEnabled && _firstSelectedLineIndex == -1) || _activeActionKey != InputType::NONE);
 		_fe3d.billboard_setTextContent("cursor", (showBar ? "|" : " "));

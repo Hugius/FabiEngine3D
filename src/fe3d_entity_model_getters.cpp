@@ -116,57 +116,57 @@ const DirectionOrder FabiEngine3D::model_getRotationOrder(const string& ID) cons
 	return _core->_modelEntityManager.getEntity(ID)->getRotationOrder();
 }
 
-const Vec3 FabiEngine3D::model_getBasePosition(const string& ID) const
+const fvec3 FabiEngine3D::model_getBasePosition(const string& ID) const
 {
 	return _core->_modelEntityManager.getEntity(ID)->getBasePosition();
 }
 
-const Vec3 FabiEngine3D::model_getBaseRotation(const string& ID) const
+const fvec3 FabiEngine3D::model_getBaseRotation(const string& ID) const
 {
 	return _core->_modelEntityManager.getEntity(ID)->getBaseRotation();
 }
 
-const Vec3 FabiEngine3D::model_getBaseRotationOrigin(const string& ID) const
+const fvec3 FabiEngine3D::model_getBaseRotationOrigin(const string& ID) const
 {
 	return _core->_modelEntityManager.getEntity(ID)->getBaseRotationOrigin();
 }
 
-const Vec3 FabiEngine3D::model_getBaseSize(const string& ID) const
+const fvec3 FabiEngine3D::model_getBaseSize(const string& ID) const
 {
 	return _core->_modelEntityManager.getEntity(ID)->getBaseSize();
 }
 
-const Vec3 FabiEngine3D::model_getPartPosition(const string& ID, const string& partID) const
+const fvec3 FabiEngine3D::model_getPartPosition(const string& ID, const string& partID) const
 {
 	return _core->_modelEntityManager.getEntity(ID)->getPartPosition(partID);
 }
 
-const Vec3 FabiEngine3D::model_getPartRotation(const string& ID, const string& partID) const
+const fvec3 FabiEngine3D::model_getPartRotation(const string& ID, const string& partID) const
 {
 	return _core->_modelEntityManager.getEntity(ID)->getPartRotation(partID);
 }
 
-const Vec3 FabiEngine3D::model_getPartRotationOrigin(const string& ID, const string& partID) const
+const fvec3 FabiEngine3D::model_getPartRotationOrigin(const string& ID, const string& partID) const
 {
 	return _core->_modelEntityManager.getEntity(ID)->getPartRotationOrigin(partID);
 }
 
-const Vec3 FabiEngine3D::model_getPartSize(const string& ID, const string& partID) const
+const fvec3 FabiEngine3D::model_getPartSize(const string& ID, const string& partID) const
 {
 	return _core->_modelEntityManager.getEntity(ID)->getPartSize(partID);
 }
 
-const Vec3 FabiEngine3D::model_getColor(const string& ID, const string& partID) const
+const fvec3 FabiEngine3D::model_getColor(const string& ID, const string& partID) const
 {
 	return _core->_modelEntityManager.getEntity(ID)->getColor(partID);
 }
 
-const Vec3 FabiEngine3D::model_getWireframeColor(const string& ID, const string& partID) const
+const fvec3 FabiEngine3D::model_getWireframeColor(const string& ID, const string& partID) const
 {
 	return _core->_modelEntityManager.getEntity(ID)->getWireframeColor(partID);
 }
 
-const Vec3 FabiEngine3D::model_getLevelOfDetailSize(const string& ID) const
+const fvec3 FabiEngine3D::model_getLevelOfDetailSize(const string& ID) const
 {
 	_core->_modelEntityManager.getEntity(ID)->getLevelOfDetailSize();
 }
@@ -251,7 +251,7 @@ const string& FabiEngine3D::model_getLevelOfDetailID(const string& ID) const
 	return _core->_modelEntityManager.getEntity(ID)->getLevelOfDetailEntityID();
 }
 
-const vector<Vec3>& FabiEngine3D::model_getInstancedOffsets(const string& ID) const
+const vector<fvec3>& FabiEngine3D::model_getInstancedOffsets(const string& ID) const
 {
 	auto entity = _core->_modelEntityManager.getEntity(ID);
 

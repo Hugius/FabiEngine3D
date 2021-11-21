@@ -7,14 +7,14 @@ class ScriptValue final
 {
 public:
 	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type);
-	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, Vec3 value);
+	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, fvec3 value);
 	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, const string& value);
 	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, float value);
 	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, int value);
 	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, bool value);
 
 	// Voids
-	void setVec3(Vec3 value);
+	void setVec3(fvec3 value);
 	void setString(const string& value);
 	void setDecimal(float value);
 	void setInteger(int value);
@@ -24,7 +24,7 @@ public:
 	const string& getString() const;
 
 	// Vectors
-	Vec3 getVec3() const;
+	fvec3 getVec3() const;
 
 	// Decimals
 	float getDecimal() const;
@@ -43,7 +43,7 @@ private:
 	string _string = "";
 
 	// Vectors
-	Vec3 _vec3 = Vec3(0.0f);
+	fvec3 _vec3 = fvec3(0.0f);
 
 	// Decimals
 	float _decimal = 0.0f;

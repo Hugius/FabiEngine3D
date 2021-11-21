@@ -139,8 +139,8 @@ const bool WaterEditor::loadWaterEntitiesFromFile()
 	{
 		// Values
 		string waterID, dudvMapPath, normalMapPath, displacementMapPath;
-		Vec3 color;
-		Vec2 speed;
+		fvec3 color;
+		fvec2 speed;
 		float height, size, textureRepeat, waveHeight, transparency, specularShininess, specularIntensity;
 		unsigned int quality;
 		bool isSpecular, isReflective, isRefractive;

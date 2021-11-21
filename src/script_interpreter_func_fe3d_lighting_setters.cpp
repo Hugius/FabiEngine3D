@@ -30,7 +30,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& f
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.gfx_setAmbientLightingColor(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
+			_fe3d.gfx_setAmbientLightingColor(fvec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -70,7 +70,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& f
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			auto position = Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal());
+			auto position = fvec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal());
 			_fe3d.gfx_setDirectionalLightingPosition(position);
 			_fe3d.billboard_setPosition("@@directionalLightSource", position);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -83,7 +83,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& f
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.gfx_setDirectionalLightingColor(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
+			_fe3d.gfx_setDirectionalLightingColor(fvec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -105,7 +105,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& f
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.billboard_setSize("@@directionalLightSource", Vec2(arguments[0].getDecimal()));
+			_fe3d.billboard_setSize("@@directionalLightSource", fvec2(arguments[0].getDecimal()));
 			_fe3d.billboard_setVisible("@@directionalLightSource", (arguments[0].getDecimal() != 0.0f));
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}

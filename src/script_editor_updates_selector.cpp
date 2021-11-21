@@ -114,7 +114,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				// Check if line text is empty
 				if(_fe3d.billboard_getTextContent(textID).empty())
 				{
-					Vec3 lineTextPosition = (_fe3d.billboard_getPosition(textID));
+					fvec3 lineTextPosition = (_fe3d.billboard_getPosition(textID));
 					lineTextPosition.x = (SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET);
 					lineTextPosition.z -= SELECTION_DEPTH;
 					_fe3d.billboard_create(selectionID);
@@ -124,7 +124,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				}
 				else // Line is not empty
 				{
-					const Vec3 lineTextPosition = (_fe3d.billboard_getPosition(textID) - Vec3(0.0f, 0.0f, SELECTION_DEPTH));
+					const fvec3 lineTextPosition = (_fe3d.billboard_getPosition(textID) - fvec3(0.0f, 0.0f, SELECTION_DEPTH));
 					const auto lineTextSize = (_fe3d.billboard_getSize(textID));
 					_fe3d.billboard_create(selectionID);
 					_fe3d.billboard_setColor(selectionID, SELECTION_COLOR);

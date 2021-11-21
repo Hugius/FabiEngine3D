@@ -17,15 +17,15 @@ Camera::Camera(RenderBus& renderBus, Window& window)
 void Camera::reset()
 {
 	// Matrices
-	_viewMatrix = Matrix44(1.0f);
-	_projectionMatrix = Matrix44(1.0f);
+	_viewMatrix = mat44(1.0f);
+	_projectionMatrix = mat44(1.0f);
 
 	// Vectors
 	_upVector = DEFAULT_UP_VECTOR;
-	_frontVector = Vec3(0.0f);
-	_rightVector = Vec3(0.0f);
-	_position = Vec3(0.0f);
-	_thirdPersonLookat = Vec3(0.0f);
+	_frontVector = fvec3(0.0f);
+	_rightVector = fvec3(0.0f);
+	_position = fvec3(0.0f);
+	_thirdPersonLookat = fvec3(0.0f);
 
 	// Decimals
 	_aspectRatio = static_cast<float>(Config::getInst().getWindowSize().x) / static_cast<float>(Config::getInst().getWindowSize().y);
@@ -56,10 +56,10 @@ void Camera::reset()
 	_cursorIsBeingCentered = false;
 }
 
-void Camera::update(Ivec2 lastCursorPosition)
+void Camera::update(ivec2 lastCursorPosition)
 {
 	// Temporary values
-	Ivec2 currenCursorPosition = _window.getCursorPosition();
+	ivec2 currenCursorPosition = _window.getCursorPosition();
 	const int left = Config::getInst().getViewportPosition().x;
 	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getViewportPosition().y + Config::getInst().getViewportSize().y);
 	const int xMiddle = left + (Config::getInst().getViewportSize().x / 2);
@@ -76,7 +76,7 @@ void Camera::update(Ivec2 lastCursorPosition)
 	// Check if cursor reached center or cursor moved
 	if(_cursorIsBeingCentered)
 	{
-		if(currenCursorPosition == Ivec2(xMiddle, yMiddle) || currenCursorPosition != lastCursorPosition)
+		if(currenCursorPosition == ivec2(xMiddle, yMiddle) || currenCursorPosition != lastCursorPosition)
 		{
 			_cursorIsBeingCentered = false;
 		}

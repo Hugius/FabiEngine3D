@@ -350,7 +350,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				// Calculate average
-				vector<Vec3> total;
+				vector<fvec3> total;
 				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
 				{
 					total.push_back(_fe3d.model_getColor(arguments[0].getString(), partID));

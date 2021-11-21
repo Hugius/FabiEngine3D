@@ -92,7 +92,7 @@ void WorldEditor::_updateSpeakerHighlighting(const string& ID, int& direction)
 
 		// Set new sizes
 		const auto color = _fe3d.model_getBaseSize(ID);
-		Vec3 speed = (Vec3(SPEAKER_HIGHLIGHT_SPEED) * Vec3(static_cast<float>(direction)));
+		fvec3 speed = (fvec3(SPEAKER_HIGHLIGHT_SPEED) * fvec3(static_cast<float>(direction)));
 		speed *= ((DEFAULT_SPEAKER_SIZE * SPEAKER_SIZE_INCREASE) - DEFAULT_SPEAKER_SIZE);
 		_fe3d.model_setBaseSize(ID, (color + speed));
 	}
@@ -125,7 +125,7 @@ void WorldEditor::_updateLampHighlighting(const string& ID, int& direction)
 
 		// Set new sizes
 		const auto size = _fe3d.model_getBaseSize(ID);
-		Vec3 speed = (Vec3(LAMP_HIGHLIGHT_SPEED) * Vec3(static_cast<float>(direction)));
+		fvec3 speed = (fvec3(LAMP_HIGHLIGHT_SPEED) * fvec3(static_cast<float>(direction)));
 		speed *= ((DEFAULT_LAMP_SIZE * LAMP_SIZE_INCREASE) - DEFAULT_LAMP_SIZE);
 		_fe3d.model_setBaseSize(ID, (size + speed));
 	}
@@ -158,7 +158,7 @@ void WorldEditor::_updateTorchHighlighting(const string& ID, int& direction)
 
 		// Set new sizes
 		const auto size = _fe3d.model_getBaseSize(ID);
-		Vec3 speed = (Vec3(TORCH_HIGHLIGHT_SPEED) * Vec3(static_cast<float>(direction)));
+		fvec3 speed = (fvec3(TORCH_HIGHLIGHT_SPEED) * fvec3(static_cast<float>(direction)));
 		speed *= ((DEFAULT_TORCH_SIZE * TORCH_SIZE_INCREASE) - DEFAULT_TORCH_SIZE);
 		_fe3d.model_setBaseSize(ID, (size + speed));
 	}
@@ -191,7 +191,7 @@ void WorldEditor::_updateCameraHighlighting(const string& ID, int& direction)
 
 		// Set new sizes
 		const auto size = _fe3d.model_getBaseSize(ID);
-		Vec3 speed = (Vec3(CAMERA_HIGHLIGHT_SPEED) * Vec3(static_cast<float>(direction)));
+		fvec3 speed = (fvec3(CAMERA_HIGHLIGHT_SPEED) * fvec3(static_cast<float>(direction)));
 		speed *= ((DEFAULT_CAMERA_SIZE * CAMERA_SIZE_INCREASE) - DEFAULT_CAMERA_SIZE);
 		_fe3d.model_setBaseSize(ID, (size + speed));
 	}

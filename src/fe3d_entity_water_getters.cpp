@@ -58,7 +58,7 @@ const string FabiEngine3D::water_getSelectedID() const
 	}
 }
 
-const Vec3 FabiEngine3D::water_getWireframeColor(const string& ID) const
+const fvec3 FabiEngine3D::water_getWireframeColor(const string& ID) const
 {
 	return _core->_waterEntityManager.getEntity(ID)->getWireframeColor();
 }
@@ -85,7 +85,7 @@ const float FabiEngine3D::water_getTextureRepeat(const string& ID) const
 	return _core->_waterEntityManager.getEntity(ID)->getTextureRepeat();
 }
 
-const Vec2 FabiEngine3D::water_getSpeed(const string& ID) const
+const fvec2 FabiEngine3D::water_getSpeed(const string& ID) const
 {
 	return _core->_waterEntityManager.getEntity(ID)->getSpeed();
 }
@@ -135,7 +135,7 @@ const float FabiEngine3D::water_getHeight(const string& ID) const
 	return _core->_waterEntityManager.getEntity(ID)->getHeight();
 }
 
-const Vec3 FabiEngine3D::water_getColor(const string& ID) const
+const fvec3 FabiEngine3D::water_getColor(const string& ID) const
 {
 	return _core->_waterEntityManager.getEntity(ID)->getColor();
 }

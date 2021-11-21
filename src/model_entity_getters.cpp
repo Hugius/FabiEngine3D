@@ -6,7 +6,7 @@ const shared_ptr<RenderBuffer> ModelEntity::getRenderBuffer(const string& partID
 	return _parts[_getPartIndex(partID)].renderBuffer;
 }
 
-const Matrix44& ModelEntity::getTransformationMatrix(const string& partID) const
+const mat44& ModelEntity::getTransformationMatrix(const string& partID) const
 {
 	return _parts[_getPartIndex(partID)].transformationMatrix;
 }
@@ -36,57 +36,57 @@ const TextureID ModelEntity::getNormalMap(const string& partID) const
 	return _parts[_getPartIndex(partID)].normalMap;
 }
 
-const Vec3 ModelEntity::getColor(const string& partID) const
+const fvec3 ModelEntity::getColor(const string& partID) const
 {
 	return _parts[_getPartIndex(partID)].color;
 }
 
-const Vec3 ModelEntity::getWireframeColor(const string& partID) const
+const fvec3 ModelEntity::getWireframeColor(const string& partID) const
 {
 	return _parts[_getPartIndex(partID)].wireframeColor;
 }
 
-const Vec3 ModelEntity::getBasePosition() const
+const fvec3 ModelEntity::getBasePosition() const
 {
 	return _basePosition;
 }
 
-const Vec3 ModelEntity::getBaseRotation() const
+const fvec3 ModelEntity::getBaseRotation() const
 {
 	return _baseRotation;
 }
 
-const Vec3 ModelEntity::getBaseRotationOrigin() const
+const fvec3 ModelEntity::getBaseRotationOrigin() const
 {
 	return _baseRotationOrigin;
 }
 
-const Vec3 ModelEntity::getBaseSize() const
+const fvec3 ModelEntity::getBaseSize() const
 {
 	return _baseSize;
 }
 
-const Vec3 ModelEntity::getPartPosition(const string& partID) const
+const fvec3 ModelEntity::getPartPosition(const string& partID) const
 {
 	return _parts[_getPartIndex(partID)].position;
 }
 
-const Vec3 ModelEntity::getPartRotation(const string& partID) const
+const fvec3 ModelEntity::getPartRotation(const string& partID) const
 {
 	return _parts[_getPartIndex(partID)].rotation;
 }
 
-const Vec3 ModelEntity::getPartRotationOrigin(const string& partID) const
+const fvec3 ModelEntity::getPartRotationOrigin(const string& partID) const
 {
 	return _parts[_getPartIndex(partID)].rotationOrigin;
 }
 
-const Vec3 ModelEntity::getPartSize(const string& partID) const
+const fvec3 ModelEntity::getPartSize(const string& partID) const
 {
 	return _parts[_getPartIndex(partID)].size;
 }
 
-const Vec3 ModelEntity::getLevelOfDetailSize() const
+const fvec3 ModelEntity::getLevelOfDetailSize() const
 {
 	return _levelOfDetailSize;
 }

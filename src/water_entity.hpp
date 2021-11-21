@@ -17,10 +17,10 @@ public:
 	void setLowQualityRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setHighQualityRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setQuality(WaterQuality value);
-	void setSpeed(Vec2 value);
-	void setRippleOffset(Vec2 value);
-	void setWaveOffset(Vec2 value);
-	void setColor(Vec3 value);
+	void setSpeed(fvec2 value);
+	void setRippleOffset(fvec2 value);
+	void setWaveOffset(fvec2 value);
+	void setColor(fvec3 value);
 	void setDudvMap(TextureID value);
 	void setNormalMap(TextureID value);
 	void setDisplacementMap(TextureID value);
@@ -38,7 +38,7 @@ public:
 	void setReflective(bool value);
 	void setRefractive(bool value);
 	void setWireframed(bool value);
-	void setWireframeColor(Vec3 value);
+	void setWireframeColor(fvec3 value);
 
 	// Strings
 	const string& getDudvMapPath() const;
@@ -46,11 +46,11 @@ public:
 	const string& getDisplacementMapPath() const;
 
 	// Vectors
-	const Vec3 getColor() const;
-	const Vec2 getSpeed() const;
-	const Vec2 getRippleOffset() const;
-	const Vec2 getWaveOffset() const;
-	const Vec3 getWireframeColor() const;
+	const fvec3 getColor() const;
+	const fvec2 getSpeed() const;
+	const fvec2 getRippleOffset() const;
+	const fvec2 getWaveOffset() const;
+	const fvec3 getWireframeColor() const;
 
 	// Decimals
 	const float getHeight() const;
@@ -87,11 +87,11 @@ private:
 	string _displacementMapPath = "";
 
 	// Vectors
-	Vec3 _wireframeColor = Vec3(1.0f);
-	Vec3 _color = Vec3(1.0f);
-	Vec2 _speed = Vec2(0.0f);
-	Vec2 _rippleOffset = Vec2(0.0f);
-	Vec2 _waveOffset = Vec2(0.0f);
+	fvec3 _wireframeColor = fvec3(1.0f);
+	fvec3 _color = fvec3(1.0f);
+	fvec2 _speed = fvec2(0.0f);
+	fvec2 _rippleOffset = fvec2(0.0f);
+	fvec2 _waveOffset = fvec2(0.0f);
 
 	// Decimals
 	float _height = 0.0f;

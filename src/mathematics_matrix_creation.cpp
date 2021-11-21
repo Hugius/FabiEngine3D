@@ -1,9 +1,9 @@
 #include "mathematics.hpp"
 
-const Matrix44 Math::createTranslationMatrixX(float value)
+const mat44 Math::createTranslationMatrixX(float value)
 {
 	// Result
-	Matrix44 newMatrix;
+	mat44 newMatrix;
 
 	// Create
 	newMatrix.m[3][0] = value;
@@ -12,10 +12,10 @@ const Matrix44 Math::createTranslationMatrixX(float value)
 	return newMatrix;
 }
 
-const Matrix44 Math::createTranslationMatrixY(float value)
+const mat44 Math::createTranslationMatrixY(float value)
 {
 	// Result
-	Matrix44 newMatrix;
+	mat44 newMatrix;
 
 	// Create
 	newMatrix.m[3][1] = value;
@@ -24,10 +24,10 @@ const Matrix44 Math::createTranslationMatrixY(float value)
 	return newMatrix;
 }
 
-const Matrix44 Math::createTranslationMatrixZ(float value)
+const mat44 Math::createTranslationMatrixZ(float value)
 {
 	// Result
-	Matrix44 newMatrix;
+	mat44 newMatrix;
 
 	// Create
 	newMatrix.m[3][2] = value;
@@ -36,10 +36,10 @@ const Matrix44 Math::createTranslationMatrixZ(float value)
 	return newMatrix;
 }
 
-const Matrix44 Math::createTranslationMatrix(float x, float y, float z)
+const mat44 Math::createTranslationMatrix(float x, float y, float z)
 {
 	// Result
-	Matrix44 newMatrix;
+	mat44 newMatrix;
 
 	// Create
 	newMatrix.m[3][0] = x;
@@ -50,10 +50,10 @@ const Matrix44 Math::createTranslationMatrix(float x, float y, float z)
 	return newMatrix;
 }
 
-const Matrix44 Math::createScalingMatrix(float x, float y, float z)
+const mat44 Math::createScalingMatrix(float x, float y, float z)
 {
 	// Result
-	Matrix44 newMatrix;
+	mat44 newMatrix;
 
 	// Create
 	newMatrix.m[0][0] = x;
@@ -64,10 +64,10 @@ const Matrix44 Math::createScalingMatrix(float x, float y, float z)
 	return newMatrix;
 }
 
-const Matrix44 Math::createScalingMatrixX(float value)
+const mat44 Math::createScalingMatrixX(float value)
 {
 	// Result
-	Matrix44 newMatrix;
+	mat44 newMatrix;
 
 	// Create
 	newMatrix.m[0][0] = value;
@@ -76,10 +76,10 @@ const Matrix44 Math::createScalingMatrixX(float value)
 	return newMatrix;
 }
 
-const Matrix44 Math::createScalingMatrixY(float value)
+const mat44 Math::createScalingMatrixY(float value)
 {
 	// Result
-	Matrix44 newMatrix;
+	mat44 newMatrix;
 
 	// Create
 	newMatrix.m[1][1] = value;
@@ -88,10 +88,10 @@ const Matrix44 Math::createScalingMatrixY(float value)
 	return newMatrix;
 }
 
-const Matrix44 Math::createScalingMatrixZ(float value)
+const mat44 Math::createScalingMatrixZ(float value)
 {
 	// Result
-	Matrix44 newMatrix;
+	mat44 newMatrix;
 
 	// Create
 	newMatrix.m[2][2] = value;
@@ -100,10 +100,10 @@ const Matrix44 Math::createScalingMatrixZ(float value)
 	return newMatrix;
 }
 
-const Matrix44 Math::createRotationMatrix(float x, float y, float z, DirectionOrder order)
+const mat44 Math::createRotationMatrix(float x, float y, float z, DirectionOrder order)
 {
 	// Result
-	Matrix44 newMatrix;
+	mat44 newMatrix;
 
 	// Create
 	if(order == DirectionOrder::XYZ)
@@ -147,10 +147,10 @@ const Matrix44 Math::createRotationMatrix(float x, float y, float z, DirectionOr
 	return newMatrix;
 }
 
-const Matrix44 Math::createRotationMatrixX(float angle)
+const mat44 Math::createRotationMatrixX(float angle)
 {
 	// Result
-	Matrix44 newMatrix;
+	mat44 newMatrix;
 
 	// Create
 	newMatrix.m[1][1] = cos(angle);
@@ -162,10 +162,10 @@ const Matrix44 Math::createRotationMatrixX(float angle)
 	return newMatrix;
 }
 
-const Matrix44 Math::createRotationMatrixY(float angle)
+const mat44 Math::createRotationMatrixY(float angle)
 {
 	// Result
-	Matrix44 newMatrix;
+	mat44 newMatrix;
 
 	// Create
 	newMatrix.m[0][0] = cos(angle);
@@ -177,10 +177,10 @@ const Matrix44 Math::createRotationMatrixY(float angle)
 	return newMatrix;
 }
 
-const Matrix44 Math::createRotationMatrixZ(float angle)
+const mat44 Math::createRotationMatrixZ(float angle)
 {
 	// Result
-	Matrix44 newMatrix;
+	mat44 newMatrix;
 
 	// Create
 	newMatrix.m[0][0] = cos(angle);
@@ -192,10 +192,10 @@ const Matrix44 Math::createRotationMatrixZ(float angle)
 	return newMatrix;
 }
 
-const Matrix44 Math::createOrthoMatrix(float left, float right, float bottom, float top, float near, float far)
+const mat44 Math::createOrthoMatrix(float left, float right, float bottom, float top, float near, float far)
 {
 	// Result
-	Matrix44 newMatrix;
+	mat44 newMatrix;
 
 	// Create
 	newMatrix.m[0][0] = 2.0f / (right - left);
@@ -209,15 +209,15 @@ const Matrix44 Math::createOrthoMatrix(float left, float right, float bottom, fl
 	return newMatrix;
 };
 
-const Matrix44 Math::createViewMatrix(Vec3 eye, Vec3 center, Vec3 up)
+const mat44 Math::createViewMatrix(fvec3 eye, fvec3 center, fvec3 up)
 {
 	// Temporary values
-	Vec3 frontVector = normalize(center - eye);
-	Vec3 rightVector = normalize(calculateCrossProduct(frontVector, up));
-	Vec3 upVector = calculateCrossProduct(rightVector, frontVector);
+	fvec3 frontVector = normalize(center - eye);
+	fvec3 rightVector = normalize(calculateCrossProduct(frontVector, up));
+	fvec3 upVector = calculateCrossProduct(rightVector, frontVector);
 
 	// Result
-	Matrix44 newMatrix(1.0f);
+	mat44 newMatrix(1.0f);
 
 	// Create
 	newMatrix.m[0][0] = rightVector.x;
@@ -237,13 +237,13 @@ const Matrix44 Math::createViewMatrix(Vec3 eye, Vec3 center, Vec3 up)
 	return newMatrix;
 }
 
-const Matrix44 Math::createProjectionMatrix(float fov, float aspect, float near, float far)
+const mat44 Math::createProjectionMatrix(float fov, float aspect, float near, float far)
 {
 	// Temporary values
 	const float tanHalfFovY = tan(fov / 2.0f);
 
 	// Create
-	Matrix44 newMatrix(0.0f);
+	mat44 newMatrix(0.0f);
 	newMatrix.m[0][0] = 1.0f / (aspect * tanHalfFovY);
 	newMatrix.m[1][1] = 1.0f / tanHalfFovY;
 	newMatrix.m[2][2] = -((far + near) / (far - near));

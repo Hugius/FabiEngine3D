@@ -42,7 +42,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			if(_validateFe3dModel("@" + arguments[1].getString(), true))
 			{
 				_worldEditor.copyPreviewModel(arguments[0].getString(), ("@" + arguments[1].getString()),
-											  Vec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
+											  fvec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -88,7 +88,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_setBasePosition(arguments[0].getString(),
-												  Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+												  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -104,7 +104,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_setBaseRotation(arguments[0].getString(),
-												  Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+												  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -120,7 +120,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_setBaseRotationOrigin(arguments[0].getString(),
-														Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+														fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -136,7 +136,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_setBaseSize(arguments[0].getString(),
-											  Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+											  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -152,7 +152,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_moveBase(arguments[0].getString(),
-										   Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+										   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -168,7 +168,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_rotateBase(arguments[0].getString(),
-											 Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+											 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -184,7 +184,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_scaleBase(arguments[0].getString(),
-											Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+											fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -200,7 +200,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_moveBaseTo(arguments[0].getString(),
-											 Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
+											 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -216,7 +216,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_rotateBaseTo(arguments[0].getString(),
-											   Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
+											   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -232,7 +232,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_scaleBaseTo(arguments[0].getString(),
-											  Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
+											  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -464,7 +464,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
 				{
 					_fe3d.model_setColor(arguments[0].getString(), partID,
-											   Vec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
+											   fvec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
 				}
 
 				// Return

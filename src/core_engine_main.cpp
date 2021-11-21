@@ -230,10 +230,10 @@ void CoreEngine::_prepareApplication()
 	SDL_GetDesktopDisplayMode(0, &DM);
 	float width = static_cast<float>(DM.w);
 	float height = static_cast<float>(DM.h);
-	Ivec2 logoResolution = Ivec2(static_cast<int>(width * 0.4f), static_cast<int>(height * 0.2f));
+	ivec2 logoResolution = ivec2(static_cast<int>(width * 0.4f), static_cast<int>(height * 0.2f));
 
 	// Render logo
-	Vec3 keyingColor = Vec3(0.2f);
+	fvec3 keyingColor = fvec3(0.2f);
 	if(Config::getInst().isApplicationExported())
 	{
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);

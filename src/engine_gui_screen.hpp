@@ -11,19 +11,19 @@ class EngineGuiScreen final
 {
 public:
 	// Constructors
-	EngineGuiScreen(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size);
+	EngineGuiScreen(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size);
 
 	// Voids
 	void update(bool hoverable);
 	void show();
 	void hide();
-	void createScrollingList(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 buttonColor, Vec3 buttonHoverColor, Vec3 textColor, Vec3 textHoverColor, Vec2 charSize, bool isCentered);
-	void createWriteField(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, Vec3 textColor, Vec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered);
-	void createButton(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, string textContent, Vec3 textColor, Vec3 textHoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered);
-	void createButton(const string& ID, Vec2 position, Vec2 size, const string& texturePath, Vec3 hoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered);
-	void createRectangle(const string& ID, Vec2 position, Vec2 size, Vec3 color, bool isCentered);
-	void createRectangle(const string& ID, Vec2 position, Vec2 size, const string& texturePath, bool isCentered);
-	void createTextField(const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 textColor, bool isCentered, bool isDynamic);
+	void createScrollingList(const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 buttonColor, fvec3 buttonHoverColor, fvec3 textColor, fvec3 textHoverColor, fvec2 charSize, bool isCentered);
+	void createWriteField(const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor, fvec3 textColor, fvec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered);
+	void createButton(const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor, string textContent, fvec3 textColor, fvec3 textHoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered);
+	void createButton(const string& ID, fvec2 position, fvec2 size, const string& texturePath, fvec3 hoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered);
+	void createRectangle(const string& ID, fvec2 position, fvec2 size, fvec3 color, bool isCentered);
+	void createRectangle(const string& ID, fvec2 position, fvec2 size, const string& texturePath, bool isCentered);
+	void createTextField(const string& ID, fvec2 position, fvec2 size, string textContent, fvec3 textColor, bool isCentered, bool isDynamic);
 	void deleteScrollingList(const string& ID);
 	void deleteWriteField(const string& ID);
 	void deleteButton(const string& ID);
@@ -35,8 +35,8 @@ public:
 	const string& getParentID() const;
 
 	// Vectors
-	const Vec2 convertPosition(Vec2 position) const;
-	const Vec2 convertSize(Vec2 size) const;
+	const fvec2 convertPosition(fvec2 position) const;
+	const fvec2 convertSize(fvec2 size) const;
 
 	// Booleans
 	const bool isScrollingListExisting(const string& ID) const;
@@ -59,11 +59,11 @@ public:
 
 private:
 	// Vectors
-	const Vec4 _convertDimensions(Vec2 position, Vec2 size) const;
+	const fvec4 _convertDimensions(fvec2 position, fvec2 size) const;
 
 	// Vectors
-	Vec2 _parentPosition;
-	Vec2 _parentSize;
+	fvec2 _parentPosition;
+	fvec2 _parentSize;
 
 	// Strings
 	const string _ID;

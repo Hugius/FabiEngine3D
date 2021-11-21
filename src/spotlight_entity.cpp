@@ -37,27 +37,27 @@ void SpotlightEntity::updateFrontVector()
 	_frontVector = Math::normalize(_frontVector);
 }
 
-void SpotlightEntity::setPosition(Vec3 value)
+void SpotlightEntity::setPosition(fvec3 value)
 {
 	_position = value;
 	_positionTarget = value;
 }
 
-void SpotlightEntity::move(Vec3 value)
+void SpotlightEntity::move(fvec3 value)
 {
 	_position += value;
 	_positionTarget += value;
 }
 
-void SpotlightEntity::moveTo(Vec3 target, float speed)
+void SpotlightEntity::moveTo(fvec3 target, float speed)
 {
 	_positionTarget = target;
 	_positionTargetSpeed = speed;
 }
 
-void SpotlightEntity::setColor(Vec3 value)
+void SpotlightEntity::setColor(fvec3 value)
 {
-	_color = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
 void SpotlightEntity::setYaw(float value)
@@ -85,17 +85,17 @@ void SpotlightEntity::setDistance(float value)
 	_distance = max(0.0f, value);
 }
 
-const Vec3 SpotlightEntity::getPosition() const
+const fvec3 SpotlightEntity::getPosition() const
 {
 	return _position;
 }
 
-const Vec3 SpotlightEntity::getFrontVector() const
+const fvec3 SpotlightEntity::getFrontVector() const
 {
 	return _frontVector;
 }
 
-const Vec3 SpotlightEntity::getColor() const
+const fvec3 SpotlightEntity::getColor() const
 {
 	return _color;
 }

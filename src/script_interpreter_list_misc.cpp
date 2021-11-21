@@ -162,7 +162,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 		}
 
 		// Remove vec3 part text
-		if(vec3Parts != Ivec3(0))
+		if(vec3Parts != ivec3(0))
 		{
 			valueString.pop_back();
 			valueString.pop_back();
@@ -183,7 +183,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 			auto otherVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
 			// Validate vec3 access
-			if(vec3Parts != Ivec3(0))
+			if(vec3Parts != ivec3(0))
 			{
 				if(otherVariable.getType() == ScriptVariableType::MULTIPLE || otherVariable.getValue().getType() != ScriptValueType::VEC3)
 				{
@@ -212,7 +212,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 				_throwScriptError("cannot push a list to another list!");
 				return;
 			}
-			else if(vec3Parts != Ivec3(0)) // Vec3 part value
+			else if(vec3Parts != ivec3(0)) // VEC3 part value
 			{
 				if(vec3Parts.x && otherVariable.getValue(valueIndex).getType() == ScriptValueType::VEC3)
 				{

@@ -48,57 +48,57 @@ void FabiEngine3D::billboard_setVisible(const string& ID, bool isVisible)
 	_core->_billboardEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
-void FabiEngine3D::billboard_move(const string& ID, Vec3 change)
+void FabiEngine3D::billboard_move(const string& ID, fvec3 change)
 {
 	_core->_billboardEntityManager.getEntity(ID)->move(change);
 }
 
-void FabiEngine3D::billboard_rotate(const string& ID, Vec3 change)
+void FabiEngine3D::billboard_rotate(const string& ID, fvec3 change)
 {
 	_core->_billboardEntityManager.getEntity(ID)->rotate(change);
 }
 
-void FabiEngine3D::billboard_scale(const string& ID, Vec2 change)
+void FabiEngine3D::billboard_scale(const string& ID, fvec2 change)
 {
 	_core->_billboardEntityManager.getEntity(ID)->scale(change);
 }
 
-void FabiEngine3D::billboard_moveTo(const string& ID, Vec3 target, float speed)
+void FabiEngine3D::billboard_moveTo(const string& ID, fvec3 target, float speed)
 {
 	_core->_billboardEntityManager.getEntity(ID)->moveTo(target, speed);
 }
 
-void FabiEngine3D::billboard_rotateTo(const string& ID, Vec3 target, float speed)
+void FabiEngine3D::billboard_rotateTo(const string& ID, fvec3 target, float speed)
 {
 	_core->_billboardEntityManager.getEntity(ID)->rotateTo(target, speed);
 }
 
-void FabiEngine3D::billboard_scaleTo(const string& ID, Vec2 target, float speed)
+void FabiEngine3D::billboard_scaleTo(const string& ID, fvec2 target, float speed)
 {
 	_core->_billboardEntityManager.getEntity(ID)->scaleTo(target, speed);
 }
 
-void FabiEngine3D::billboard_setPosition(const string& ID, Vec3 position)
+void FabiEngine3D::billboard_setPosition(const string& ID, fvec3 position)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setPosition(position);
 }
 
-void FabiEngine3D::billboard_setRotation(const string& ID, Vec3 rotation)
+void FabiEngine3D::billboard_setRotation(const string& ID, fvec3 rotation)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setRotation(rotation);
 }
 
-void FabiEngine3D::billboard_setSize(const string& ID, Vec2 size)
+void FabiEngine3D::billboard_setSize(const string& ID, fvec2 size)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setSize(size);
 }
 
-void FabiEngine3D::billboard_setColor(const string& ID, Vec3 color)
+void FabiEngine3D::billboard_setColor(const string& ID, fvec3 color)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setColor(color);
 }
 
-void FabiEngine3D::billboard_setWireframeColor(const string& ID, Vec3 color)
+void FabiEngine3D::billboard_setWireframeColor(const string& ID, fvec3 color)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setWireframeColor(color);
 }

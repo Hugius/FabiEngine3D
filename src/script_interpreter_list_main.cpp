@@ -252,7 +252,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 					}
 
 					// Remove vec3 part characters
-					if(vec3Parts != Ivec3(0))
+					if(vec3Parts != ivec3(0))
 					{
 						currentValueString.pop_back();
 						currentValueString.pop_back();
@@ -273,7 +273,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 						auto variable = (_isLocalVariableExisting(currentValueString) ? _getLocalVariable(currentValueString) : _getGlobalVariable(currentValueString));
 
 						// Validate vec3 access
-						if(vec3Parts != Ivec3(0))
+						if(vec3Parts != ivec3(0))
 						{
 							if(variable.getType() == ScriptVariableType::MULTIPLE || variable.getValue().getType() != ScriptValueType::VEC3)
 							{
@@ -282,15 +282,15 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 							}
 						}
 
-						if(vec3Parts.x && variable.getValue().getType() == ScriptValueType::VEC3) // Vec3.x
+						if(vec3Parts.x && variable.getValue().getType() == ScriptValueType::VEC3) // VEC3.x
 						{
 							valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variable.getValue().getVec3().x));
 						}
-						else if(vec3Parts.y && variable.getValue().getType() == ScriptValueType::VEC3) // Vec3.y
+						else if(vec3Parts.y && variable.getValue().getType() == ScriptValueType::VEC3) // VEC3.y
 						{
 							valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variable.getValue().getVec3().y));
 						}
-						else if(vec3Parts.z && variable.getValue().getType() == ScriptValueType::VEC3) // Vec3.z
+						else if(vec3Parts.z && variable.getValue().getType() == ScriptValueType::VEC3) // VEC3.z
 						{
 							valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variable.getValue().getVec3().z));
 						}

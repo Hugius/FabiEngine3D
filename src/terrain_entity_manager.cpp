@@ -102,9 +102,9 @@ void TerrainEntityManager::loadMesh(const string& ID)
 	const unsigned int uSize = static_cast<unsigned int>(size);
 	const float halfSize = size / 2.0f;
 	const float maxHeight = entity->getMaxHeight();
-	vector<Vec3> tempVertices;
-	vector<Vec2> tempUvCoords;
-	vector<Vec3> tempNormals;
+	vector<fvec3> tempVertices;
+	vector<fvec2> tempUvCoords;
+	vector<fvec3> tempNormals;
 
 	for(float x = -halfSize; x < halfSize; x++) // X direction
 	{
@@ -124,20 +124,20 @@ void TerrainEntityManager::loadMesh(const string& ID)
 			float RH = _getPixelHeight(x + halfSize + 1, z + halfSize, size, maxHeight, pixels);
 			float UH = _getPixelHeight(x + halfSize, z + halfSize + 1, size, maxHeight, pixels);
 			float DH = _getPixelHeight(x + halfSize, z + halfSize - 1, size, maxHeight, pixels);
-			Vec3 normal = Vec3(LH - RH, 3.0f, DH - UH);
+			fvec3 normal = fvec3(LH - RH, 3.0f, DH - UH);
 			normal = Math::normalize(normal);
 
 			// Add data
-			tempVertices.push_back(Vec3(vertexX, vertexY, vertexZ));
-			tempUvCoords.push_back(Vec2(uvX, uvY));
+			tempVertices.push_back(fvec3(vertexX, vertexY, vertexZ));
+			tempUvCoords.push_back(fvec2(uvX, uvY));
 			tempNormals.push_back(normal);
 		}
 	}
 
 	// Compose vertices, UV coordinates, normals
-	vector<Vec3> vertices;
-	vector<Vec2> uvCoords;
-	vector<Vec3> normals;
+	vector<fvec3> vertices;
+	vector<fvec2> uvCoords;
+	vector<fvec3> normals;
 	for(unsigned int x = 0; x < uSize - 1; x++)
 	{
 		for(unsigned int z = 0; z < uSize - 1; z++)
@@ -181,30 +181,30 @@ void TerrainEntityManager::loadMesh(const string& ID)
 	}
 
 	// Calculate tangents
-	vector<Vec3> tangents;
+	vector<fvec3> tangents;
 	for(size_t i = 0; i < vertices.size(); i += 3)
 	{
 		// Vertices of 1 triangle
-		Vec3 v0 = vertices[i + 0];
-		Vec3 v1 = vertices[i + 1];
-		Vec3 v2 = vertices[i + 2];
+		fvec3 v0 = vertices[i + 0];
+		fvec3 v1 = vertices[i + 1];
+		fvec3 v2 = vertices[i + 2];
 
 		// Shortcuts for UVs
-		Vec2 uv0 = uvCoords[i + 0];
-		Vec2 uv1 = uvCoords[i + 1];
-		Vec2 uv2 = uvCoords[i + 2];
+		fvec2 uv0 = uvCoords[i + 0];
+		fvec2 uv1 = uvCoords[i + 1];
+		fvec2 uv2 = uvCoords[i + 2];
 
 		// Vertex delta
-		Vec3 deltaPos1 = v1 - v0;
-		Vec3 deltaPos2 = v2 - v0;
+		fvec3 deltaPos1 = v1 - v0;
+		fvec3 deltaPos2 = v2 - v0;
 
 		// UV delta
-		Vec2 deltaUV1 = uv1 - uv0;
-		Vec2 deltaUV2 = uv2 - uv0;
+		fvec2 deltaUV1 = uv1 - uv0;
+		fvec2 deltaUV2 = uv2 - uv0;
 
 		// Calculate tangent vector
 		float r = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);
-		Vec3 tangent = (deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r;
+		fvec3 tangent = (deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r;
 
 		// Add to list
 		tangents.push_back(tangent);

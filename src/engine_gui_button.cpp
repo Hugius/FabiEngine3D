@@ -1,14 +1,14 @@
 #include "engine_gui_button.hpp"
 #include "tools.hpp"
 
-EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, string textContent, Vec3 textColor, Vec3 textHoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered)
+EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor, string textContent, fvec3 textColor, fvec3 textHoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
 	_parentID(parentID),
 	_rectangle(make_shared<EngineGuiRectangle>(fe3d, parentID + "_button", ID, position, size, color, isCentered)),
 	_textField(make_shared<EngineGuiTextField>(fe3d, parentID + "_button", ID, position,
-			   Vec2(size.x* TEXT_WIDTH_MULTIPLIER, size.y* TEXT_HEIGHT_MULTIPLIER), textContent, textColor, isCentered, false)),
+			   fvec2(size.x* TEXT_WIDTH_MULTIPLIER, size.y* TEXT_HEIGHT_MULTIPLIER), textContent, textColor, isCentered, false)),
 	_hoverColor(hoverColor),
 	_textHoverColor(textHoverColor),
 	_isSizeChangeEnabled(isSizeIncreaseEnabled),
@@ -17,7 +17,7 @@ EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, con
 
 }
 
-EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, const string& texturePath, Vec3 hoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered)
+EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, const string& texturePath, fvec3 hoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -55,9 +55,9 @@ void EngineGuiButton::_updateHovering(bool isHoverable)
 	if(_fe3d.image_isVisible(_rectangle->getEntityID()))
 	{
 		// Convert dimensions to same space
-		Vec2 cursorPosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
-		Vec2 buttonPosition = _fe3d.image_getPosition(_rectangle->getEntityID());
-		Vec2 buttonSize = _fe3d.image_getSize(_rectangle->getEntityID());
+		fvec2 cursorPosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
+		fvec2 buttonPosition = _fe3d.image_getPosition(_rectangle->getEntityID());
+		fvec2 buttonSize = _fe3d.image_getSize(_rectangle->getEntityID());
 
 		// Check if cursor inside button
 		if(cursorPosition.x > buttonPosition.x - (buttonSize.x / 2.0f) && cursorPosition.x < buttonPosition.x + (buttonSize.x / 2.0f)) // X axis
@@ -196,7 +196,7 @@ void EngineGuiButton::changeTextContent(const string& content)
 		getTextField()->updateInitialSize();
 
 		// Update rectangle
-		auto newRectangleSize = Vec2(getTextField()->getInitialSize() / Vec2(TEXT_WIDTH_MULTIPLIER, TEXT_HEIGHT_MULTIPLIER));
+		auto newRectangleSize = fvec2(getTextField()->getInitialSize() / fvec2(TEXT_WIDTH_MULTIPLIER, TEXT_HEIGHT_MULTIPLIER));
 		_fe3d.image_setSize(getRectangle()->getEntityID(), newRectangleSize);
 		getRectangle()->updateInitialSize();
 	}

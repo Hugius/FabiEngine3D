@@ -1,6 +1,6 @@
 #include "engine_gui_rectangle.hpp"
 
-EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, bool isCentered)
+EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -16,7 +16,7 @@ EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentI
 	_fe3d.image_setColor(_entityID, color);
 }
 
-EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, const string& texturePath, bool isCentered)
+EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, const string& texturePath, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -24,7 +24,7 @@ EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentI
 	_parentID(parentID),
 	_initialPosition(position),
 	_initialSize(size),
-	_initialColor(Vec3(1.0f))
+	_initialColor(fvec3(1.0f))
 {
 	_fe3d.image_create(_entityID, isCentered);
 	_fe3d.image_setPosition(_entityID, position);
@@ -57,17 +57,17 @@ void EngineGuiRectangle::updateInitialColor()
 	_initialColor = _fe3d.image_getColor(_entityID);
 }
 
-const Vec2 EngineGuiRectangle::getInitialPosition() const
+const fvec2 EngineGuiRectangle::getInitialPosition() const
 {
 	return _initialPosition;
 }
 
-const Vec2 EngineGuiRectangle::getInitialSize() const
+const fvec2 EngineGuiRectangle::getInitialSize() const
 {
 	return _initialSize;
 }
 
-const Vec3 EngineGuiRectangle::getInitialColor() const
+const fvec3 EngineGuiRectangle::getInitialColor() const
 {
 	return _initialColor;
 }

@@ -37,7 +37,7 @@ void WorldEditor::_updateModelPlacing()
 					}
 					else // Create new model
 					{
-						_copyPreviewModel(rawID, _currentPreviewModelID, Vec3(0.0f), false);
+						_copyPreviewModel(rawID, _currentPreviewModelID, fvec3(0.0f), false);
 						_fe3d.model_disableInstancing(rawID);
 						_fe3d.model_enableInstancing(rawID, { newPosition });
 					}
@@ -108,7 +108,7 @@ void WorldEditor::_updateModelPlacing()
 							}
 							else // Create new model
 							{
-								_copyPreviewModel(rawID, _currentPreviewModelID, Vec3(0.0f), false);
+								_copyPreviewModel(rawID, _currentPreviewModelID, fvec3(0.0f), false);
 								_fe3d.model_disableInstancing(rawID);
 								_fe3d.model_enableInstancing(rawID, { newPosition });
 							}

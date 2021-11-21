@@ -14,27 +14,27 @@ public:
 	MeshPart(const string& ID);
 
 	// Voids
-	void addVertex(Vec3 value);
-	void addNormal(Vec3 value);
-	void addTangent(Vec3 value);
-	void addUV(Vec2 value);
+	void addVertex(fvec3 value);
+	void addNormal(fvec3 value);
+	void addTangent(fvec3 value);
+	void addUV(fvec2 value);
 
 	// Strings
 	const string& getID() const;
 
 	// Vectors
-	const vector<Vec3>& getVertices() const;
-	const vector<Vec3>& getNormals() const;
-	const vector<Vec3>& getTangents() const;
-	const vector<Vec2>& getUVs() const;
+	const vector<fvec3>& getVertices() const;
+	const vector<fvec3>& getNormals() const;
+	const vector<fvec3>& getTangents() const;
+	const vector<fvec2>& getUVs() const;
 
 private:
 	// Strings
 	const string _ID;
 
 	// Vectors
-	vector<Vec3> _vertices;
-	vector<Vec3> _normals;
-	vector<Vec3> _tangents;
-	vector<Vec2> _uvs;
+	vector<fvec3> _vertices;
+	vector<fvec3> _normals;
+	vector<fvec3> _tangents;
+	vector<fvec2> _uvs;
 };

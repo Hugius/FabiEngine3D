@@ -122,7 +122,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 				}
 
 				// Remove vec3 part characters
-				if(vec3Parts != Ivec3(0))
+				if(vec3Parts != ivec3(0))
 				{
 					elementString.pop_back();
 					elementString.pop_back();
@@ -142,15 +142,15 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 					// Retrieve variable value
 					auto variable = (_isLocalVariableExisting(elementString) ? _getLocalVariable(elementString) : _getGlobalVariable(elementString));
 
-					if(vec3Parts.x) // Vec3.x
+					if(vec3Parts.x) // VEC3.x
 					{
 						comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variable.getValue().getVec3().x));
 					}
-					else if(vec3Parts.y) // Vec3.y
+					else if(vec3Parts.y) // VEC3.y
 					{
 						comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variable.getValue().getVec3().y));
 					}
-					else if(vec3Parts.z) // Vec3.z
+					else if(vec3Parts.z) // VEC3.z
 					{
 						comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variable.getValue().getVec3().z));
 					}

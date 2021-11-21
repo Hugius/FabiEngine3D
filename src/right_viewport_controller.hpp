@@ -13,9 +13,9 @@ public:
 
 private:
 	// Vectors
-	static inline const Vec3 FRAME_COLOR = Vec3(0.175f);
-	static inline const Vec3 BLACK = Vec3(0.0f);
-	static inline const Vec3 WHITE = Vec3(1.0f);
+	static inline const fvec3 FRAME_COLOR = fvec3(0.175f);
+	static inline const fvec3 BLACK = fvec3(0.0f);
+	static inline const fvec3 WHITE = fvec3(1.0f);
 
 	// Decimals
 	static inline const float CW = 0.115f;

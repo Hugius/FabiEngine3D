@@ -10,9 +10,9 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 {
 	// Declare variables
 	vector<shared_ptr<MeshPart>> meshParts;
-	vector<Vec3> temp_positions;
-	vector<Vec2> temp_uvs;
-	vector<Vec3> temp_normals;
+	vector<fvec3> temp_positions;
+	vector<fvec2> temp_uvs;
+	vector<fvec3> temp_normals;
 	string selectedPartID = "";
 
 	// Get application root directory
@@ -58,7 +58,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 		}
 		else if(strcmp(lineHeader, "v") == 0) // Vertices
 		{
-			Vec3 vertex;
+			fvec3 vertex;
 			auto temp = fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
 			temp_positions.push_back(vertex);
 
@@ -66,7 +66,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 		}
 		else if(strcmp(lineHeader, "vt") == 0) // UV coordinates
 		{
-			Vec2 uv;
+			fvec2 uv;
 			auto temp = fscanf(file, "%f %f\n", &uv.x, &uv.y);
 			temp_uvs.push_back(uv);
 
@@ -74,7 +74,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 		}
 		else if(strcmp(lineHeader, "vn") == 0) // Normals
 		{
-			Vec3 normal;
+			fvec3 normal;
 			auto temp = fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
 			temp_normals.push_back(normal);
 
@@ -149,26 +149,26 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 		for(size_t i = 0; i < meshPart->getVertices().size(); i += 3)
 		{
 			// Vertices of 1 triangle
-			Vec3 v0 = meshPart->getVertices()[i + 0];
-			Vec3 v1 = meshPart->getVertices()[i + 1];
-			Vec3 v2 = meshPart->getVertices()[i + 2];
+			fvec3 v0 = meshPart->getVertices()[i + 0];
+			fvec3 v1 = meshPart->getVertices()[i + 1];
+			fvec3 v2 = meshPart->getVertices()[i + 2];
 
 			// Shortcuts for UVs
-			Vec2 uv0 = meshPart->getUVs()[i + 0];
-			Vec2 uv1 = meshPart->getUVs()[i + 1];
-			Vec2 uv2 = meshPart->getUVs()[i + 2];
+			fvec2 uv0 = meshPart->getUVs()[i + 0];
+			fvec2 uv1 = meshPart->getUVs()[i + 1];
+			fvec2 uv2 = meshPart->getUVs()[i + 2];
 
 			// Vertex delta
-			Vec3 deltaPos1 = (v1 - v0);
-			Vec3 deltaPos2 = (v2 - v0);
+			fvec3 deltaPos1 = (v1 - v0);
+			fvec3 deltaPos2 = (v2 - v0);
 
 			// UV delta
-			Vec2 deltaUV1 = (uv1 - uv0);
-			Vec2 deltaUV2 = (uv2 - uv0);
+			fvec2 deltaUV1 = (uv1 - uv0);
+			fvec2 deltaUV2 = (uv2 - uv0);
 
 			// Calculate tangent vector
 			float r = (1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x));
-			Vec3 tangent = ((deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r);
+			fvec3 tangent = ((deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r);
 
 			// Add to current mesh part
 			meshPart->addTangent(tangent);

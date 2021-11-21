@@ -12,10 +12,10 @@ EngineGuiManager::EngineGuiManager(FabiEngine3D& fe3d)
 		_globalScreen = make_shared<EngineGuiGlobalScreen>(_fe3d);
 
 		// Viewports
-		_viewports.push_back(make_shared<EngineGuiViewport>(_fe3d, "top", Vec2(0.0f, 0.95f), Vec2(2.0f, 0.1f), FRAME_COLOR));
-		_viewports.push_back(make_shared<EngineGuiViewport>(_fe3d, "left", Vec2(-0.875f, 0.15f), Vec2(0.25f, 1.5f), FRAME_COLOR));
-		_viewports.push_back(make_shared<EngineGuiViewport>(_fe3d, "right", Vec2(0.875f, 0.15f), Vec2(0.25f, 1.5f), FRAME_COLOR));
-		_viewports.push_back(make_shared<EngineGuiViewport>(_fe3d, "bottom", Vec2(0.0f, -0.8f), Vec2(2.0f, 0.4f), FRAME_COLOR));
+		_viewports.push_back(make_shared<EngineGuiViewport>(_fe3d, "top", fvec2(0.0f, 0.95f), fvec2(2.0f, 0.1f), FRAME_COLOR));
+		_viewports.push_back(make_shared<EngineGuiViewport>(_fe3d, "left", fvec2(-0.875f, 0.15f), fvec2(0.25f, 1.5f), FRAME_COLOR));
+		_viewports.push_back(make_shared<EngineGuiViewport>(_fe3d, "right", fvec2(0.875f, 0.15f), fvec2(0.25f, 1.5f), FRAME_COLOR));
+		_viewports.push_back(make_shared<EngineGuiViewport>(_fe3d, "bottom", fvec2(0.0f, -0.8f), fvec2(2.0f, 0.4f), FRAME_COLOR));
 	}
 }
 

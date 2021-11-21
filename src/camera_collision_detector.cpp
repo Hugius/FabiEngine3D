@@ -1,11 +1,11 @@
 #include "camera_collision_detector.hpp"
 
-const bool CameraCollisionDetector::checkX(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle, Vec3 boxMiddleChange, Box box) const
+const bool CameraCollisionDetector::checkX(fvec3 aabbPosition, fvec3 aabbSize, fvec3 boxMiddle, fvec3 boxMiddleChange, Box box) const
 {
 	// Temporary values
 	const auto left = box.getLeft();
 	const auto right = box.getRight();
-	const Vec3 halfAabbSize = (aabbSize / 2.0f);
+	const fvec3 halfAabbSize = (aabbSize / 2.0f);
 
 	// Check if box is inside AABB
 	if(_isInside(aabbPosition, halfAabbSize, boxMiddle, box))
@@ -34,12 +34,12 @@ const bool CameraCollisionDetector::checkX(Vec3 aabbPosition, Vec3 aabbSize, Vec
 	}
 }
 
-const bool CameraCollisionDetector::checkY(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle, Vec3 boxMiddleChange, Box box) const
+const bool CameraCollisionDetector::checkY(fvec3 aabbPosition, fvec3 aabbSize, fvec3 boxMiddle, fvec3 boxMiddleChange, Box box) const
 {
 	// Temporary values
 	const auto bottom = box.getBottom();
 	const auto top = box.getTop();
-	const Vec3 halfAabbSize = (aabbSize / 2.0f);
+	const fvec3 halfAabbSize = (aabbSize / 2.0f);
 
 	// Check if box is inside AABB
 	if(_isInside(aabbPosition, halfAabbSize, boxMiddle, box))
@@ -68,12 +68,12 @@ const bool CameraCollisionDetector::checkY(Vec3 aabbPosition, Vec3 aabbSize, Vec
 	}
 }
 
-const bool CameraCollisionDetector::checkZ(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle, Vec3 boxMiddleChange, Box box) const
+const bool CameraCollisionDetector::checkZ(fvec3 aabbPosition, fvec3 aabbSize, fvec3 boxMiddle, fvec3 boxMiddleChange, Box box) const
 {
 	// Temporary values
 	const auto back = box.getBack();
 	const auto front = box.getFront();
-	const Vec3 halfAabbSize = (aabbSize / 2.0f);
+	const fvec3 halfAabbSize = (aabbSize / 2.0f);
 
 	// Check if box is inside AABB
 	if(_isInside(aabbPosition, halfAabbSize, boxMiddle, box))
@@ -102,7 +102,7 @@ const bool CameraCollisionDetector::checkZ(Vec3 aabbPosition, Vec3 aabbSize, Vec
 	}
 }
 
-const bool CameraCollisionDetector::_isInside(Vec3 aabbPosition, Vec3 aabbHalfSize, Vec3 boxMiddle, Box box) const
+const bool CameraCollisionDetector::_isInside(fvec3 aabbPosition, fvec3 aabbHalfSize, fvec3 boxMiddle, Box box) const
 {
 	// Temporary values
 	const auto left = box.getLeft();

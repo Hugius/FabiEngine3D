@@ -27,7 +27,7 @@ void WorldEditor::_updateSkyMenu()
 			}
 
 			// Add choice list
-			_gui.getGlobalScreen()->createChoiceForm("skyList", "Select Sky", Vec2(0.0f, 0.1f), skyIDs);
+			_gui.getGlobalScreen()->createChoiceForm("skyList", "Select Sky", fvec2(0.0f, 0.1f), skyIDs);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{

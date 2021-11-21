@@ -11,18 +11,18 @@ public:
 
 	// Voids
 	void updateTransformation();
-	void setPosition(Vec3 value);
-	void move(Vec3 value);
-	void moveTo(Vec3 target, float speed);
-	void setRadius(Vec3 value);
-	void setColor(Vec3 value);
+	void setPosition(fvec3 value);
+	void move(fvec3 value);
+	void moveTo(fvec3 target, float speed);
+	void setRadius(fvec3 value);
+	void setColor(fvec3 value);
 	void setIntensity(float value);
 	void setShape(PointlightShape value);
 
 	// Vectors
-	const Vec3 getPosition() const;
-	const Vec3 getColor() const;
-	const Vec3 getRadius() const;
+	const fvec3 getPosition() const;
+	const fvec3 getColor() const;
+	const fvec3 getRadius() const;
 
 	// Decimals
 	const float getIntensity() const;
@@ -32,10 +32,10 @@ public:
 
 private:
 	// Vectors
-	Vec3 _position = Vec3(0.0f);
-	Vec3 _positionTarget = Vec3(0.0f);
-	Vec3 _radius = Vec3(0.0f);
-	Vec3 _color = Vec3(1.0f);
+	fvec3 _position = fvec3(0.0f);
+	fvec3 _positionTarget = fvec3(0.0f);
+	fvec3 _radius = fvec3(0.0f);
+	fvec3 _color = fvec3(1.0f);
 
 	// Decimals
 	float _positionTargetSpeed = 0.0f;

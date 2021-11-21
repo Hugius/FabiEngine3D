@@ -176,13 +176,13 @@ void WorldEditor::_updateSpotlightEditing()
 			// Handle yaw
 			_handleValueChanging("spotlightPropertiesMenu", "yawPlus", "yaw", yaw, SPOTLIGHT_YAW_CHANGING_SPEED);
 			_handleValueChanging("spotlightPropertiesMenu", "yawMinus", "yaw", yaw, -SPOTLIGHT_YAW_CHANGING_SPEED);
-			_fe3d.model_setBaseRotation(_activeTorchID, Vec3(0.0f, -yaw, _fe3d.model_getBaseRotation(_activeTorchID).z));
+			_fe3d.model_setBaseRotation(_activeTorchID, fvec3(0.0f, -yaw, _fe3d.model_getBaseRotation(_activeTorchID).z));
 			_fe3d.spotlight_setYaw(activeSpotlightID, yaw);
 
 			// Handle pitch
 			_handleValueChanging("spotlightPropertiesMenu", "pitchPlus", "pitch", pitch, SPOTLIGHT_PITCH_CHANGING_SPEED);
 			_handleValueChanging("spotlightPropertiesMenu", "pitchMinus", "pitch", pitch, -SPOTLIGHT_PITCH_CHANGING_SPEED);
-			_fe3d.model_setBaseRotation(_activeTorchID, Vec3(0.0f, _fe3d.model_getBaseRotation(_activeTorchID).y, pitch));
+			_fe3d.model_setBaseRotation(_activeTorchID, fvec3(0.0f, _fe3d.model_getBaseRotation(_activeTorchID).y, pitch));
 			_fe3d.spotlight_setPitch(activeSpotlightID, pitch);
 
 			// Handle intensity

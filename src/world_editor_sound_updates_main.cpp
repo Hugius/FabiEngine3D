@@ -103,7 +103,7 @@ void WorldEditor::_updateSoundPlacingMenu()
 					// Set new preview sound
 					_currentPreviewSoundID = audioID;
 					_fe3d.model_setVisible(PREVIEW_SPEAKER_ID, true);
-					_fe3d.sound_setPosition(_currentPreviewSoundID, Vec3(0.0f));
+					_fe3d.sound_setPosition(_currentPreviewSoundID, fvec3(0.0f));
 					_fe3d.sound_play(_currentPreviewSoundID, -1, 0, false);
 					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), true);
 					_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), "Sound: " + _currentPreviewSoundID.substr(1), 0.025f);
@@ -112,9 +112,9 @@ void WorldEditor::_updateSoundPlacingMenu()
 					// Add position value forms for placing without terrain
 					if(_fe3d.terrain_getSelectedID().empty())
 					{
-						_gui.getGlobalScreen()->createValueForm("positionX", "X", 0.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-						_gui.getGlobalScreen()->createValueForm("positionY", "Y", 0.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-						_gui.getGlobalScreen()->createValueForm("positionZ", "Z", 0.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+						_gui.getGlobalScreen()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+						_gui.getGlobalScreen()->createValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+						_gui.getGlobalScreen()->createValueForm("positionZ", "Z", 0.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 					}
 
 					// Disable sound choosing

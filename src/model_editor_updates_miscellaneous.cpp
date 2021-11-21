@@ -24,14 +24,14 @@ void ModelEditor::_updateMiscellaneousMenu()
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("levelOfDetailEntityID")->isHovered())
 		{
 			levelOfDetailEntityID = (levelOfDetailEntityID.empty()) ? levelOfDetailEntityID : levelOfDetailEntityID.substr(1, levelOfDetailEntityID.size() - 1);
-			_gui.getGlobalScreen()->createValueForm("levelOfDetailEntityID", "level of detail entity ID", levelOfDetailEntityID, Vec2(0.0f, 0.1f), Vec2(0.4f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("levelOfDetailEntityID", "level of detail entity ID", levelOfDetailEntityID, fvec2(0.0f, 0.1f), fvec2(0.4f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isInstanced")->isHovered())
 		{
 			isInstanced = !isInstanced;
 			if(isInstanced)
 			{
-				_fe3d.model_enableInstancing(_currentModelID, { Vec3(0.0f) });
+				_fe3d.model_enableInstancing(_currentModelID, { fvec3(0.0f) });
 			}
 			else
 			{

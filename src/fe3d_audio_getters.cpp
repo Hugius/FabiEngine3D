@@ -20,7 +20,7 @@ const string& FabiEngine3D::sound_getFilePath(const string& ID) const
 	return _core->_audioManager.getSound(ID).getFilePath();
 }
 
-const Vec3 FabiEngine3D::sound_getPosition(const string& ID) const
+const fvec3 FabiEngine3D::sound_getPosition(const string& ID) const
 {
 	return _core->_audioManager.getSound(ID).getPosition();
 }

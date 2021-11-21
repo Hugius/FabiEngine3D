@@ -25,11 +25,11 @@ void ModelEntity::updateTransformation()
 	if(_baseRotation != _baseRotationTarget)
 	{
 		auto difference = Math::calculateDifference(_baseRotation, _baseRotationTarget);
-		Vec3 multiplier = Vec3(
+		fvec3 multiplier = fvec3(
 			((difference.x < 180.0f) ? 1.0f : -1.0f),
 			((difference.y < 180.0f) ? 1.0f : -1.0f),
 			((difference.z < 180.0f) ? 1.0f : -1.0f));
-		Vec3 speed = (Vec3(_baseRotationTargetSpeed) * multiplier);
+		fvec3 speed = (fvec3(_baseRotationTargetSpeed) * multiplier);
 		_baseRotation.x += ((_baseRotation.x < _baseRotationTarget.x) ? speed.x : (_baseRotation.x > _baseRotationTarget.x) ? -speed.x : 0.0f);
 		_baseRotation.y += ((_baseRotation.y < _baseRotationTarget.y) ? speed.y : (_baseRotation.y > _baseRotationTarget.y) ? -speed.y : 0.0f);
 		_baseRotation.z += ((_baseRotation.z < _baseRotationTarget.z) ? speed.z : (_baseRotation.z > _baseRotationTarget.z) ? -speed.z : 0.0f);
@@ -59,13 +59,13 @@ void ModelEntity::updateTransformation()
 		if(part.rotation != part.rotationTarget)
 		{
 			auto difference = Math::calculateDifference(part.rotation, part.rotationTarget);
-			Vec3 multiplier = Vec3(
+			fvec3 multiplier = fvec3(
 				((difference.x < 180.0f) ? 1.0f : -1.0f),
 				((difference.y < 180.0f) ? 1.0f : -1.0f),
 				((difference.z < 180.0f) ? 1.0f : -1.0f));
-			Vec3 speed = (Vec3(part.rotationTargetSpeed) * multiplier);
-			Vec3 rotation = part.rotation;
-			Vec3 target = part.rotationTarget;
+			fvec3 speed = (fvec3(part.rotationTargetSpeed) * multiplier);
+			fvec3 rotation = part.rotation;
+			fvec3 target = part.rotationTarget;
 			part.rotation.x += ((rotation.x < target.x) ? speed.x : (rotation.x > target.x) ? -speed.x : 0.0f);
 			part.rotation.y += ((rotation.y < target.y) ? speed.y : (rotation.y > target.y) ? -speed.y : 0.0f);
 			part.rotation.z += ((rotation.z < target.z) ? speed.z : (rotation.z > target.z) ? -speed.z : 0.0f);
@@ -87,22 +87,22 @@ void ModelEntity::updateTransformationMatrix()
 	for(size_t i = 0; i < _parts.size(); i++)
 	{
 		// Identity matrix
-		_parts[i].transformationMatrix = Matrix44(1.0f);
+		_parts[i].transformationMatrix = mat44(1.0f);
 
 		// Base translation matrix
-		Matrix44 baseTranslationMatrix = Math::createTranslationMatrix(_basePosition.x, _basePosition.y, _basePosition.z);
+		mat44 baseTranslationMatrix = Math::createTranslationMatrix(_basePosition.x, _basePosition.y, _basePosition.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * baseTranslationMatrix);
 
 		// Translation matrix
-		Matrix44 translationMatrix = Math::createTranslationMatrix(_parts[i].position.x, _parts[i].position.y, _parts[i].position.z);
+		mat44 translationMatrix = Math::createTranslationMatrix(_parts[i].position.x, _parts[i].position.y, _parts[i].position.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * translationMatrix);
 
 		// Base rotation origin matrix - translate back
-		Matrix44 baseRotationOriginMatrix = Math::createTranslationMatrix(_baseRotationOrigin.x, _baseRotationOrigin.y, _baseRotationOrigin.z);
+		mat44 baseRotationOriginMatrix = Math::createTranslationMatrix(_baseRotationOrigin.x, _baseRotationOrigin.y, _baseRotationOrigin.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * baseRotationOriginMatrix);
 
 		// Base rotation matrix
-		Matrix44 baseRotationMatrix = Math::createRotationMatrix(
+		mat44 baseRotationMatrix = Math::createRotationMatrix(
 			Math::convertToRadians(_baseRotation.x),
 			Math::convertToRadians(_baseRotation.y),
 			Math::convertToRadians(_baseRotation.z), _rotationOrder);
@@ -113,11 +113,11 @@ void ModelEntity::updateTransformationMatrix()
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * baseRotationOriginMatrix);
 
 		// Rotation origin matrix - translate back
-		Matrix44 rotationOriginMatrix = Math::createTranslationMatrix(_parts[i].rotationOrigin.x, _parts[i].rotationOrigin.y, _parts[i].rotationOrigin.z);
+		mat44 rotationOriginMatrix = Math::createTranslationMatrix(_parts[i].rotationOrigin.x, _parts[i].rotationOrigin.y, _parts[i].rotationOrigin.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * rotationOriginMatrix);
 
 		// Rotation matrix
-		Matrix44 rotationMatrix = Math::createRotationMatrix(
+		mat44 rotationMatrix = Math::createRotationMatrix(
 			Math::convertToRadians(_parts[i].rotation.x),
 			Math::convertToRadians(_parts[i].rotation.y),
 			Math::convertToRadians(_parts[i].rotation.z), _rotationOrder);
@@ -128,11 +128,11 @@ void ModelEntity::updateTransformationMatrix()
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * rotationOriginMatrix);
 
 		// Base scaling matrix
-		Matrix44 baseScalingMatrix = Math::createScalingMatrix(_baseSize.x, _baseSize.y, _baseSize.z);
+		mat44 baseScalingMatrix = Math::createScalingMatrix(_baseSize.x, _baseSize.y, _baseSize.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * baseScalingMatrix);
 
 		// Scaling matrix
-		Matrix44 scalingMatrix = Math::createScalingMatrix(_parts[i].size.x, _parts[i].size.y, _parts[i].size.z);
+		mat44 scalingMatrix = Math::createScalingMatrix(_parts[i].size.x, _parts[i].size.y, _parts[i].size.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * scalingMatrix);
 	}
 }
@@ -167,147 +167,147 @@ void ModelEntity::setNormalMap(const string& partID, TextureID value)
 	_parts[_getPartIndex(partID)].normalMap = value;
 }
 
-void ModelEntity::setBasePosition(Vec3 value)
+void ModelEntity::setBasePosition(fvec3 value)
 {
 	_basePosition = value;
 	_basePositionTarget = _basePosition;
 }
 
-void ModelEntity::setBaseRotation(Vec3 value)
+void ModelEntity::setBaseRotation(fvec3 value)
 {
-	_baseRotation = Vec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
-	_baseRotationTarget = Vec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
+	_baseRotation = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
+	_baseRotationTarget = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
 }
 
-void ModelEntity::setBaseRotationOrigin(Vec3 value)
+void ModelEntity::setBaseRotationOrigin(fvec3 value)
 {
 	_baseRotationOrigin = value;
 }
 
-void ModelEntity::setBaseSize(Vec3 value)
+void ModelEntity::setBaseSize(fvec3 value)
 {
-	_baseSize = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
-	_baseSizeTarget = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
+	_baseSize = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
+	_baseSizeTarget = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
 
-void ModelEntity::setPartPosition(const string& partID, Vec3 value)
+void ModelEntity::setPartPosition(const string& partID, fvec3 value)
 {
 	_parts[_getPartIndex(partID)].position = value;
 	_parts[_getPartIndex(partID)].positionTarget = value;
 }
 
-void ModelEntity::setPartRotation(const string& partID, Vec3 value)
+void ModelEntity::setPartRotation(const string& partID, fvec3 value)
 {
-	_parts[_getPartIndex(partID)].rotation = Vec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
-	_parts[_getPartIndex(partID)].rotationTarget = Vec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
+	_parts[_getPartIndex(partID)].rotation = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
+	_parts[_getPartIndex(partID)].rotationTarget = fvec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
 }
 
-void ModelEntity::setPartRotationOrigin(const string& partID, Vec3 value)
+void ModelEntity::setPartRotationOrigin(const string& partID, fvec3 value)
 {
 	_parts[_getPartIndex(partID)].rotationOrigin = value;
 }
 
-void ModelEntity::setPartSize(const string& partID, Vec3 value)
+void ModelEntity::setPartSize(const string& partID, fvec3 value)
 {
-	_parts[_getPartIndex(partID)].size = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
-	_parts[_getPartIndex(partID)].sizeTarget = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
+	_parts[_getPartIndex(partID)].size = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
+	_parts[_getPartIndex(partID)].sizeTarget = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
 
-void ModelEntity::moveBase(Vec3 value)
+void ModelEntity::moveBase(fvec3 value)
 {
 	_basePosition += value;
 	_basePositionTarget += value;
 }
 
-void ModelEntity::rotateBase(Vec3 value)
+void ModelEntity::rotateBase(fvec3 value)
 {
 	_baseRotation += value;
 	_baseRotationTarget += value;
-	_baseRotation = Vec3(Math::limitAngle(_baseRotation.x), Math::limitAngle(_baseRotation.y), Math::limitAngle(_baseRotation.z));
-	_baseRotationTarget = Vec3(Math::limitAngle(_baseRotationTarget.x), Math::limitAngle(_baseRotationTarget.y), Math::limitAngle(_baseRotationTarget.z));
+	_baseRotation = fvec3(Math::limitAngle(_baseRotation.x), Math::limitAngle(_baseRotation.y), Math::limitAngle(_baseRotation.z));
+	_baseRotationTarget = fvec3(Math::limitAngle(_baseRotationTarget.x), Math::limitAngle(_baseRotationTarget.y), Math::limitAngle(_baseRotationTarget.z));
 }
 
-void ModelEntity::scaleBase(Vec3 value)
+void ModelEntity::scaleBase(fvec3 value)
 {
 	_baseSize += value;
 	_baseSizeTarget += value;
-	_baseSize = Vec3(max(0.0f, _baseSize.x), max(0.0f, _baseSize.y), max(0.0f, _baseSize.z));
-	_baseSizeTarget = Vec3(max(0.0f, _baseSizeTarget.x), max(0.0f, _baseSizeTarget.y), max(0.0f, _baseSizeTarget.z));
+	_baseSize = fvec3(max(0.0f, _baseSize.x), max(0.0f, _baseSize.y), max(0.0f, _baseSize.z));
+	_baseSizeTarget = fvec3(max(0.0f, _baseSizeTarget.x), max(0.0f, _baseSizeTarget.y), max(0.0f, _baseSizeTarget.z));
 }
 
-void ModelEntity::movePart(const string& partID, Vec3 value)
+void ModelEntity::movePart(const string& partID, fvec3 value)
 {
 	_parts[_getPartIndex(partID)].position += value;
 	_parts[_getPartIndex(partID)].positionTarget += value;
 }
 
-void ModelEntity::rotatePart(const string& partID, Vec3 value)
+void ModelEntity::rotatePart(const string& partID, fvec3 value)
 {
-	Vec3& rotation = _parts[_getPartIndex(partID)].rotation;
-	Vec3& rotationTarget = _parts[_getPartIndex(partID)].rotationTarget;
+	fvec3& rotation = _parts[_getPartIndex(partID)].rotation;
+	fvec3& rotationTarget = _parts[_getPartIndex(partID)].rotationTarget;
 	rotation += value;
 	rotationTarget += value;
-	rotation = Vec3(Math::limitAngle(rotation.x), Math::limitAngle(rotation.y), Math::limitAngle(rotation.z));
-	rotationTarget = Vec3(Math::limitAngle(rotationTarget.x), Math::limitAngle(rotationTarget.y), Math::limitAngle(rotationTarget.z));
+	rotation = fvec3(Math::limitAngle(rotation.x), Math::limitAngle(rotation.y), Math::limitAngle(rotation.z));
+	rotationTarget = fvec3(Math::limitAngle(rotationTarget.x), Math::limitAngle(rotationTarget.y), Math::limitAngle(rotationTarget.z));
 }
 
-void ModelEntity::scalePart(const string& partID, Vec3 value)
+void ModelEntity::scalePart(const string& partID, fvec3 value)
 {
-	Vec3& size = _parts[_getPartIndex(partID)].size;
-	Vec3& sizeTarget = _parts[_getPartIndex(partID)].sizeTarget;
+	fvec3& size = _parts[_getPartIndex(partID)].size;
+	fvec3& sizeTarget = _parts[_getPartIndex(partID)].sizeTarget;
 	size += value;
 	sizeTarget += value;
-	size = Vec3(max(0.0f, size.x), max(0.0f, size.y), max(0.0f, size.z));
-	sizeTarget = Vec3(max(0.0f, sizeTarget.x), max(0.0f, sizeTarget.y), max(0.0f, sizeTarget.z));
+	size = fvec3(max(0.0f, size.x), max(0.0f, size.y), max(0.0f, size.z));
+	sizeTarget = fvec3(max(0.0f, sizeTarget.x), max(0.0f, sizeTarget.y), max(0.0f, sizeTarget.z));
 }
 
-void ModelEntity::moveBaseTo(Vec3 target, float speed)
+void ModelEntity::moveBaseTo(fvec3 target, float speed)
 {
 	_basePositionTarget = target;
 	_basePositionTargetSpeed = max(0.0f, speed);
 }
 
-void ModelEntity::rotateBaseTo(Vec3 target, float speed)
+void ModelEntity::rotateBaseTo(fvec3 target, float speed)
 {
-	_baseRotationTarget = Vec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
+	_baseRotationTarget = fvec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
 	_baseRotationTargetSpeed = max(0.0f, speed);
 }
 
-void ModelEntity::scaleBaseTo(Vec3 target, float speed)
+void ModelEntity::scaleBaseTo(fvec3 target, float speed)
 {
-	_baseSizeTarget = Vec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
+	_baseSizeTarget = fvec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
 	_baseSizeTargetSpeed = max(0.0f, speed);
 }
 
-void ModelEntity::movePartTo(const string& partID, Vec3 target, float speed)
+void ModelEntity::movePartTo(const string& partID, fvec3 target, float speed)
 {
 	_parts[_getPartIndex(partID)].positionTarget = target;
 	_parts[_getPartIndex(partID)].positionTargetSpeed = max(0.0f, speed);
 }
 
-void ModelEntity::rotatePartTo(const string& partID, Vec3 target, float speed)
+void ModelEntity::rotatePartTo(const string& partID, fvec3 target, float speed)
 {
-	_parts[_getPartIndex(partID)].rotationTarget = Vec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
+	_parts[_getPartIndex(partID)].rotationTarget = fvec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
 	_parts[_getPartIndex(partID)].rotationTargetSpeed = max(0.0f, speed);
 }
 
-void ModelEntity::scalePartTo(const string& partID, Vec3 target, float speed)
+void ModelEntity::scalePartTo(const string& partID, fvec3 target, float speed)
 {
-	_parts[_getPartIndex(partID)].sizeTarget = Vec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
+	_parts[_getPartIndex(partID)].sizeTarget = fvec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
 	_parts[_getPartIndex(partID)].sizeTargetSpeed = max(0.0f, speed);
 }
 
-void ModelEntity::setColor(const string& partID, Vec3 value)
+void ModelEntity::setColor(const string& partID, fvec3 value)
 {
-	_parts[_getPartIndex(partID)].color = Vec3(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f), clamp(value.z, 0.0f, 1.0f));
+	_parts[_getPartIndex(partID)].color = fvec3(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f), clamp(value.z, 0.0f, 1.0f));
 }
 
-void ModelEntity::setWireframeColor(const string& partID, Vec3 value)
+void ModelEntity::setWireframeColor(const string& partID, fvec3 value)
 {
-	_parts[_getPartIndex(partID)].wireframeColor = Vec3(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f), clamp(value.z, 0.0f, 1.0f));
+	_parts[_getPartIndex(partID)].wireframeColor = fvec3(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f), clamp(value.z, 0.0f, 1.0f));
 }
 
-void ModelEntity::setLevelOfDetailSize(Vec3 value)
+void ModelEntity::setLevelOfDetailSize(fvec3 value)
 {
 	_levelOfDetailSize = value;
 }
@@ -472,7 +472,7 @@ void ModelEntity::setEmissionIntensity(const string& partID, float value)
 	_parts[_getPartIndex(partID)].emissionIntensity = max(0.0f, value);
 }
 
-void ModelEntity::_correctPositionTarget(Vec3& current, Vec3 target, float speed)
+void ModelEntity::_correctPositionTarget(fvec3& current, fvec3 target, float speed)
 {
 	// Correct X
 	if(fabsf(target.x - current.x) <= speed)
@@ -493,10 +493,10 @@ void ModelEntity::_correctPositionTarget(Vec3& current, Vec3 target, float speed
 	}
 }
 
-void ModelEntity::_correctRotationTarget(Vec3& current, Vec3 target, float speed)
+void ModelEntity::_correctRotationTarget(fvec3& current, fvec3 target, float speed)
 {
 	// Correct current
-	current = Vec3(Math::limitAngle(current.x), Math::limitAngle(current.y), Math::limitAngle(current.z));
+	current = fvec3(Math::limitAngle(current.x), Math::limitAngle(current.y), Math::limitAngle(current.z));
 
 	// Correct X
 	if(Math::calculateAngleDifference(current.x, target.x) <= speed)
@@ -517,10 +517,10 @@ void ModelEntity::_correctRotationTarget(Vec3& current, Vec3 target, float speed
 	}
 }
 
-void ModelEntity::_correctSizeTarget(Vec3& current, Vec3 target, float speed)
+void ModelEntity::_correctSizeTarget(fvec3& current, fvec3 target, float speed)
 {
 	// Correct current
-	current = Vec3(max(0.0f, current.x), max(0.0f, current.y), max(0.0f, current.z));
+	current = fvec3(max(0.0f, current.x), max(0.0f, current.y), max(0.0f, current.z));
 
 	// Correct X
 	if(fabsf(target.x - current.x) <= speed)

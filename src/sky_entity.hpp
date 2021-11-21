@@ -19,23 +19,23 @@ public:
 	void updateRotationMatrix();
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setCubeMapPaths(const array<string, 6>& value);
-	void setColor(Vec3 value);
+	void setColor(fvec3 value);
 	void setCubeMap(TextureID value);
 	void setInitialLightness(float value);
 	void setLightness(float value);
 	void setRotation(float value);
 	void setWireframed(bool value);
-	void setWireframeColor(Vec3 value);
+	void setWireframeColor(fvec3 value);
 
 	// Strings
 	const array<string, 6>& getCubeMapPaths() const;
 
 	// Matrices
-	const Matrix44& getRotationMatrix() const;
+	const mat44& getRotationMatrix() const;
 
 	// Vectors
-	const Vec3 getWireframeColor() const;
-	const Vec3 getColor() const;
+	const fvec3 getWireframeColor() const;
+	const fvec3 getColor() const;
 
 	// Decimals
 	const float getInitialLightness() const;
@@ -56,11 +56,11 @@ private:
 	array<string, 6> _cubeMapPaths = { "", "", "", "", "", "" };
 
 	// Matrices
-	Matrix44 _rotationMatrix = Matrix44(1.0f);
+	mat44 _rotationMatrix = mat44(1.0f);
 
 	// Vectors
-	Vec3 _wireframeColor = Vec3(1.0f);
-	Vec3 _color = Vec3(1.0f);
+	fvec3 _wireframeColor = fvec3(1.0f);
+	fvec3 _color = fvec3(1.0f);
 
 	// Decimals
 	float _initialLightness = 1.0f;

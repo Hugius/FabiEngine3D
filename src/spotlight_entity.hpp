@@ -11,10 +11,10 @@ public:
 	// Voids
 	void updateTransformation();
 	void updateFrontVector();
-	void setPosition(Vec3 value);
-	void move(Vec3 value);
-	void moveTo(Vec3 target, float speed);
-	void setColor(Vec3 value);
+	void setPosition(fvec3 value);
+	void move(fvec3 value);
+	void moveTo(fvec3 target, float speed);
+	void setColor(fvec3 value);
 	void setYaw(float value);
 	void setPitch(float value);
 	void setIntensity(float value);
@@ -22,9 +22,9 @@ public:
 	void setDistance(float value);
 
 	// Vectors
-	const Vec3 getPosition() const;
-	const Vec3 getFrontVector() const;
-	const Vec3 getColor() const;
+	const fvec3 getPosition() const;
+	const fvec3 getFrontVector() const;
+	const fvec3 getColor() const;
 
 	// Decimals
 	const float getYaw() const;
@@ -35,10 +35,10 @@ public:
 
 private:
 	// Vectors
-	Vec3 _position = Vec3(0.0f);
-	Vec3 _positionTarget = Vec3(0.0f);
-	Vec3 _frontVector = Vec3(0.0f);
-	Vec3 _color = Vec3(1.0f);
+	fvec3 _position = fvec3(0.0f);
+	fvec3 _positionTarget = fvec3(0.0f);
+	fvec3 _frontVector = fvec3(0.0f);
+	fvec3 _color = fvec3(1.0f);
 
 	// Decimals
 	static inline const float MAX_ANGLE = 45.0f;

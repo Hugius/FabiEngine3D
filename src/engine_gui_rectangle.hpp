@@ -5,8 +5,8 @@
 class EngineGuiRectangle
 {
 public:
-	EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, bool isCentered);
-	EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, const string& texturePath, bool isCentered);
+	EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, bool isCentered);
+	EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, const string& texturePath, bool isCentered);
 	~EngineGuiRectangle();
 
 	// Voids
@@ -21,9 +21,9 @@ public:
 	const string& getParentID() const;
 
 	// Vectors
-	const Vec2 getInitialPosition() const;
-	const Vec2 getInitialSize() const;
-	const Vec3 getInitialColor() const;
+	const fvec2 getInitialPosition() const;
+	const fvec2 getInitialSize() const;
+	const fvec3 getInitialColor() const;
 
 protected:
 	// Strings
@@ -32,9 +32,9 @@ protected:
 	const string _parentID;
 
 	// Vectors
-	Vec2 _initialPosition;
-	Vec2 _initialSize;
-	Vec3 _initialColor;
+	fvec2 _initialPosition;
+	fvec2 _initialSize;
+	fvec3 _initialColor;
 
 	// Miscellaneous
 	FabiEngine3D& _fe3d;

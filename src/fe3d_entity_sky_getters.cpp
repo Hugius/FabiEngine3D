@@ -25,7 +25,7 @@ const string FabiEngine3D::sky_getMixID() const
 	}
 }
 
-const Vec3 FabiEngine3D::sky_getWireframeColor(const string& ID) const
+const fvec3 FabiEngine3D::sky_getWireframeColor(const string& ID) const
 {
 	return _core->_skyEntityManager.getEntity(ID)->getWireframeColor();
 }
@@ -97,7 +97,7 @@ const float FabiEngine3D::sky_getMixValue() const
 	return _core->_renderBus.getSkyMixValue();
 }
 
-const Vec3 FabiEngine3D::sky_getColor(const string& ID) const
+const fvec3 FabiEngine3D::sky_getColor(const string& ID) const
 {
 	return _core->_skyEntityManager.getEntity(ID)->getColor();
 }

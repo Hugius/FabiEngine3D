@@ -17,13 +17,13 @@ public:
 	void updateTransformation();
 	void capture();
 	void setCaptured();
-	void setPosition(Vec3 value);
-	void move(Vec3 value);
-	void moveTo(Vec3 target, float speed);
+	void setPosition(fvec3 value);
+	void move(fvec3 value);
+	void moveTo(fvec3 target, float speed);
 	void setCubeMap(TextureID value);
 
 	// Vectors
-	const Vec3 getPosition() const;
+	const fvec3 getPosition() const;
 
 	// Booleans
 	const bool mustCapture() const;
@@ -33,8 +33,8 @@ public:
 
 private:
 	// Vectors
-	Vec3 _position = Vec3(0.0f);
-	Vec3 _positionTarget = Vec3(0.0f);
+	fvec3 _position = fvec3(0.0f);
+	fvec3 _positionTarget = fvec3(0.0f);
 
 	// Decimals
 	float _positionTargetSpeed = 0.0f;

@@ -284,7 +284,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 					}
 
 					// Remove vec3 part characters
-					if(vec3Parts != Ivec3(0))
+					if(vec3Parts != ivec3(0))
 					{
 						valueString.pop_back();
 						valueString.pop_back();
@@ -305,7 +305,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 						auto otherVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
 						// Validate vec3 access
-						if(vec3Parts != Ivec3(0))
+						if(vec3Parts != ivec3(0))
 						{
 							if(otherVariable.getType() == ScriptVariableType::MULTIPLE ||
 							   otherVariable.getValue().getType() != ScriptValueType::VEC3)
@@ -330,7 +330,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 						}
 
 						// Check if using part of vec3 variable as value
-						if(typeString == DECIMAL_KEYWORD && vec3Parts != Ivec3(0))
+						if(typeString == DECIMAL_KEYWORD && vec3Parts != ivec3(0))
 						{
 							// Determine part of vec3 variable
 							if(vec3Parts.x)

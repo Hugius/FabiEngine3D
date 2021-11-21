@@ -4,7 +4,7 @@
 
 using std::max;
 
-Box::Box(Vec3 position, float left, float right, float bottom, float top, float back, float front)
+Box::Box(fvec3 position, float left, float right, float bottom, float top, float back, float front)
 	:
 	_position(position),
 	_left(max(0.0f, left)),
@@ -19,7 +19,7 @@ Box::Box(Vec3 position, float left, float right, float bottom, float top, float 
 
 Box::Box(float left, float right, float bottom, float top, float back, float front)
 	:
-	_position(Vec3(0.0f)),
+	_position(fvec3(0.0f)),
 	_left(max(0.0f, left)),
 	_right(max(0.0f, right)),
 	_bottom(max(0.0f, bottom)),
@@ -30,7 +30,7 @@ Box::Box(float left, float right, float bottom, float top, float back, float fro
 
 }
 
-const Vec3 Box::getPosition() const
+const fvec3 Box::getPosition() const
 {
 	return _position;
 }

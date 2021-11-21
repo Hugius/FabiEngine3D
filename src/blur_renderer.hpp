@@ -13,7 +13,7 @@ public:
 	// Voids
 	void bind() override;
 	void unbind() override;
-	void loadCaptureBuffer(Ivec2 bufferSize);
+	void loadCaptureBuffer(ivec2 bufferSize);
 	void resetCaptureBuffer();
 
 	// Miscellaneous

@@ -61,27 +61,27 @@ const float FabiEngine3D::camera_getCursorSensitivity() const
 	return _core->_camera.getCursorSensitivity();
 }
 
-const Vec3 FabiEngine3D::camera_getPosition() const
+const fvec3 FabiEngine3D::camera_getPosition() const
 {
 	return _core->_camera.getPosition();
 }
 
-const Vec3 FabiEngine3D::camera_getUpVector() const
+const fvec3 FabiEngine3D::camera_getUpVector() const
 {
 	return _core->_camera.getUpVector();
 }
 
-const Vec3 FabiEngine3D::camera_getFrontVector() const
+const fvec3 FabiEngine3D::camera_getFrontVector() const
 {
 	return _core->_camera.getFrontVector();
 }
 
-const Vec3 FabiEngine3D::camera_getRightVector() const
+const fvec3 FabiEngine3D::camera_getRightVector() const
 {
 	return _core->_camera.getRightVector();
 }
 
-const Vec3 FabiEngine3D::camera_getThirdPersonLookat() const
+const fvec3 FabiEngine3D::camera_getThirdPersonLookat() const
 {
 	return _core->_camera.getThirdPersonLookat();
 }

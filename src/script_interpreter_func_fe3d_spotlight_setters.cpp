@@ -31,8 +31,8 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 
 			// Create spotlight
 			_fe3d.spotlight_create(ID);
-			_fe3d.spotlight_setPosition(ID, Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-			_fe3d.spotlight_setColor(ID, Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()));
+			_fe3d.spotlight_setPosition(ID, fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+			_fe3d.spotlight_setColor(ID, fvec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()));
 			_fe3d.spotlight_setYaw(ID, arguments[7].getDecimal());
 			_fe3d.spotlight_setPitch(ID, arguments[8].getDecimal());
 			_fe3d.spotlight_setIntensity(ID, arguments[9].getDecimal());
@@ -84,7 +84,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
 				_fe3d.spotlight_setPosition(arguments[0].getString(),
-												  Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+												  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -100,7 +100,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
 				_fe3d.spotlight_move(arguments[0].getString(),
-										   Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+										   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -116,7 +116,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
 				_fe3d.spotlight_moveTo(arguments[0].getString(),
-											 Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
+											 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -132,7 +132,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
 				_fe3d.spotlight_setColor(arguments[0].getString(),
-											   Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+											   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

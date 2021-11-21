@@ -1,27 +1,27 @@
 #include "engine_gui_global_screen.hpp"
 #include "logger.hpp"
 
-void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, unsigned int value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
+void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, unsigned int value, fvec2 position, fvec2 size, fvec2 buttonsPosition)
 {
 	_createValueForm(ID, title, to_string(static_cast<int>(value)), position, size, buttonsPosition, true, false);
 }
 
-void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, int value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
+void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, int value, fvec2 position, fvec2 size, fvec2 buttonsPosition)
 {
 	_createValueForm(ID, title, to_string(value), position, size, buttonsPosition, true, true);
 }
 
-void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, float value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
+void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, float value, fvec2 position, fvec2 size, fvec2 buttonsPosition)
 {
 	_createValueForm(ID, title, to_string(static_cast<int>(value)), position, size, buttonsPosition, true, true);
 }
 
-void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, double value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
+void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, double value, fvec2 position, fvec2 size, fvec2 buttonsPosition)
 {
 	_createValueForm(ID, title, to_string(static_cast<int>(value)), position, size, buttonsPosition, true, true);
 }
 
-void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, string value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
+void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, string value, fvec2 position, fvec2 size, fvec2 buttonsPosition)
 {
 	_createValueForm(ID, title, value, position, size, buttonsPosition, false, false);
 }
@@ -110,7 +110,7 @@ const bool EngineGuiGlobalScreen::isValueFormExisting(const string& ID) const
 	return find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) != _valueFormIDs.end();
 }
 
-void EngineGuiGlobalScreen::_createValueForm(const string& ID, string title, string valueString, Vec2 position, Vec2 size, Vec2 buttonsPosition, bool onlyNumbers, bool minusAllowed)
+void EngineGuiGlobalScreen::_createValueForm(const string& ID, string title, string valueString, fvec2 position, fvec2 size, fvec2 buttonsPosition, bool onlyNumbers, bool minusAllowed)
 {
 	// Validate existence
 	if(isValueFormExisting(ID))
@@ -120,9 +120,9 @@ void EngineGuiGlobalScreen::_createValueForm(const string& ID, string title, str
 
 	// Create value form
 	_valueFormIDs.push_back(ID);
-	createRectangle(ID, position + Vec2(0.0f, 0.15f), Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f), true);
-	createTextField(ID, position + Vec2(0.0f, 0.15f), Vec2(title.size() * 0.025f, 0.1f), title, Vec3(1.0f), true, false);
-	createWriteField(ID, position, size, Vec3(0.25f), Vec3(0.5f), Vec3(1.0f), Vec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers, (onlyNumbers && minusAllowed), true);
+	createRectangle(ID, position + fvec2(0.0f, 0.15f), fvec2(title.size() * 0.0275f, 0.125f), fvec3(0.0f), true);
+	createTextField(ID, position + fvec2(0.0f, 0.15f), fvec2(title.size() * 0.025f, 0.1f), title, fvec3(1.0f), true, false);
+	createWriteField(ID, position, size, fvec3(0.25f), fvec3(0.5f), fvec3(1.0f), fvec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers, (onlyNumbers && minusAllowed), true);
 	getWriteField(ID)->changeTextContent(valueString);
 
 	// GUI focus & set first writeField active
@@ -135,8 +135,8 @@ void EngineGuiGlobalScreen::_createValueForm(const string& ID, string title, str
 	// Add done & cancel buttons
 	if(!isButtonExisting("value_form_done"))
 	{
-		createButton("value_form_done", buttonsPosition + Vec2(-0.15f, -0.2f), Vec2(0.12f, 0.1f), Vec3(0.0f, 0.1f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Done", Vec3(1.0f), Vec3(0.0f), true, true, true);
-		createButton("value_form_cancel", buttonsPosition + Vec2(0.15f, -0.2f), Vec2(0.18f, 0.1f), Vec3(0.1f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f), true, true, true);
+		createButton("value_form_done", buttonsPosition + fvec2(-0.15f, -0.2f), fvec2(0.12f, 0.1f), fvec3(0.0f, 0.1f, 0.0f), fvec3(0.0f, 1.0f, 0.0f), "Done", fvec3(1.0f), fvec3(0.0f), true, true, true);
+		createButton("value_form_cancel", buttonsPosition + fvec2(0.15f, -0.2f), fvec2(0.18f, 0.1f), fvec3(0.1f, 0.0f, 0.0f), fvec3(1.0f, 0.0f, 0.0f), "Cancel", fvec3(1.0f), fvec3(0.0f), true, true, true);
 	}
 }
 
@@ -196,7 +196,7 @@ const bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valu
 	return changed;
 }
 
-void EngineGuiGlobalScreen::createChoiceForm(const string& ID, string title, Vec2 position, const vector<string>& buttonTitles)
+void EngineGuiGlobalScreen::createChoiceForm(const string& ID, string title, fvec2 position, const vector<string>& buttonTitles)
 {
 	// Validate existence
 	if(!_choiceFormID.empty())
@@ -205,10 +205,10 @@ void EngineGuiGlobalScreen::createChoiceForm(const string& ID, string title, Vec
 	}
 
 	// Create choice form
-	createRectangle(ID, position + Vec2(0.0f, 0.475f), Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f), true);
-	createTextField(ID, position + Vec2(0.0f, 0.475f), Vec2(title.size() * 0.025f, 0.1f), title, Vec3(1.0f), true, false);
-	createScrollingList(ID, position, Vec2(0.5, 0.75f), Vec3(0.25f), Vec3(0.0f, 0.1f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), Vec3(1.0f), Vec3(0.0f), Vec2(0.075f, 0.2f), true);
-	createButton("choice_form_cancel", position + Vec2(0.0f, -0.45f), Vec2(0.15f, 0.1f), Vec3(0.1f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f), true, true, true);
+	createRectangle(ID, position + fvec2(0.0f, 0.475f), fvec2(title.size() * 0.0275f, 0.125f), fvec3(0.0f), true);
+	createTextField(ID, position + fvec2(0.0f, 0.475f), fvec2(title.size() * 0.025f, 0.1f), title, fvec3(1.0f), true, false);
+	createScrollingList(ID, position, fvec2(0.5, 0.75f), fvec3(0.25f), fvec3(0.0f, 0.1f, 0.0f), fvec3(0.0f, 1.0f, 0.0f), fvec3(1.0f), fvec3(0.0f), fvec2(0.075f, 0.2f), true);
+	createButton("choice_form_cancel", position + fvec2(0.0f, -0.45f), fvec2(0.15f, 0.1f), fvec3(0.1f, 0.0f, 0.0f), fvec3(1.0f, 0.0f, 0.0f), "Cancel", fvec3(1.0f), fvec3(0.0f), true, true, true);
 
 	// Add buttons to scrolling list
 	for(const auto& buttonTitle : buttonTitles)
@@ -280,7 +280,7 @@ const bool EngineGuiGlobalScreen::isChoiceFormExisting(const string& ID) const
 	return (ID == _choiceFormID);
 }
 
-void EngineGuiGlobalScreen::createAnswerForm(const string& ID, string title, Vec2 position)
+void EngineGuiGlobalScreen::createAnswerForm(const string& ID, string title, fvec2 position)
 {
 	// Validate existence
 	if(!_answerFormID.empty())
@@ -289,10 +289,10 @@ void EngineGuiGlobalScreen::createAnswerForm(const string& ID, string title, Vec
 	}
 
 	// Create answer form
-	createRectangle("question", position, Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f), true);
-	createTextField("question", position, Vec2(title.size() * 0.025f, 0.1f), title, Vec3(1.0f), true, false);
-	createButton("answer_form_yes", position + Vec2(-0.1f, -0.2f), Vec2(0.075f, 0.1f), Vec3(0.0f, 0.1f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Yes", Vec3(1.0f), Vec3(0.0f), true, true, true);
-	createButton("answer_form_no", position + Vec2(0.1f, -0.2f), Vec2(0.075f, 0.1f), Vec3(0.1f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "No", Vec3(1.0f), Vec3(0.0f), true, true, true);
+	createRectangle("question", position, fvec2(title.size() * 0.0275f, 0.125f), fvec3(0.0f), true);
+	createTextField("question", position, fvec2(title.size() * 0.025f, 0.1f), title, fvec3(1.0f), true, false);
+	createButton("answer_form_yes", position + fvec2(-0.1f, -0.2f), fvec2(0.075f, 0.1f), fvec3(0.0f, 0.1f, 0.0f), fvec3(0.0f, 1.0f, 0.0f), "Yes", fvec3(1.0f), fvec3(0.0f), true, true, true);
+	createButton("answer_form_no", position + fvec2(0.1f, -0.2f), fvec2(0.075f, 0.1f), fvec3(0.1f, 0.0f, 0.0f), fvec3(1.0f, 0.0f, 0.0f), "No", fvec3(1.0f), fvec3(0.0f), true, true, true);
 
 	// Miscellaneous
 	_isFocused = true;

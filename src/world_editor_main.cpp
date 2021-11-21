@@ -31,7 +31,7 @@ void WorldEditor::load()
 	// Directional light source
 	const string texturePath = "engine\\assets\\textures\\light_source.png";
 	_fe3d.billboard_create("@@directionalLightSource");
-	_fe3d.billboard_setSize("@@directionalLightSource", Vec2(0.0f));
+	_fe3d.billboard_setSize("@@directionalLightSource", fvec2(0.0f));
 	_fe3d.billboard_setDiffuseMap("@@directionalLightSource", texturePath);
 	_fe3d.billboard_setDepthMapIncluded("@@directionalLightSource", false);
 	_fe3d.billboard_setShadowed("@@directionalLightSource", false);
@@ -87,7 +87,7 @@ void WorldEditor::load()
 	_fe3d.model_setVisible(PREVIEW_SPEAKER_ID, false);
 	for(const auto& audioID : _audioEditor.getLoadedAudioIDs())
 	{
-		_fe3d.sound_make3D(audioID, Vec3(0.0f), DEFAULT_SOUND_MAX_VOLUME, DEFAULT_SOUND_MAX_DISTANCE);
+		_fe3d.sound_make3D(audioID, fvec3(0.0f), DEFAULT_SOUND_MAX_VOLUME, DEFAULT_SOUND_MAX_DISTANCE);
 		_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuSoundPlace")->getScrollingList("sounds")->
 			createButton(audioID, audioID.substr(1));
 	}
@@ -100,7 +100,7 @@ void WorldEditor::load()
 	_fe3d.model_setBright(PREVIEW_LAMP_ID, true);
 	_fe3d.model_setVisible(PREVIEW_LAMP_ID, false);
 	_fe3d.pointlight_create(PREVIEW_LAMP_ID);
-	_fe3d.pointlight_setRadius(PREVIEW_LAMP_ID, Vec3(DEFAULT_POINTLIGHT_RADIUS));
+	_fe3d.pointlight_setRadius(PREVIEW_LAMP_ID, fvec3(DEFAULT_POINTLIGHT_RADIUS));
 	_fe3d.pointlight_setIntensity(PREVIEW_LAMP_ID, DEFAULT_POINTLIGHT_INTENSITY);
 	_fe3d.pointlight_setVisible(PREVIEW_LAMP_ID, false);
 
@@ -129,9 +129,9 @@ void WorldEditor::load()
 	_fe3d.reflection_setVisible(PREVIEW_CAMERA_ID, false);
 
 	// Create ID textFields
-	_gui.getGlobalScreen()->createTextField("modelID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f), true, false);
-	_gui.getGlobalScreen()->createTextField("billboardID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f), true, false);
-	_gui.getGlobalScreen()->createTextField("soundID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f), true, false);
+	_gui.getGlobalScreen()->createTextField("modelID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
+	_gui.getGlobalScreen()->createTextField("billboardID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
+	_gui.getGlobalScreen()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 
 	// Miscellaneous
 	_fe3d.collision_enableCameraResponse(true, true, true);

@@ -2,39 +2,39 @@
 
 #include <cmath>
 
-struct Vec3;
+struct fvec3;
 
-struct Ivec3 final
+struct ivec3 final
 {
-	Ivec3();
-	Ivec3(const Vec3& other);
-	Ivec3(const int value);
-	Ivec3(const int x, const int y, const int z);
+	ivec3();
+	ivec3(const fvec3& other);
+	ivec3(const int value);
+	ivec3(const int x, const int y, const int z);
 
 	// Voids
-	void operator+=(const Ivec3& other);
-	void operator-=(const Ivec3& other);
-	void operator*=(const Ivec3& other);
-	void operator/=(const Ivec3& other);
+	void operator+=(const ivec3& other);
+	void operator-=(const ivec3& other);
+	void operator*=(const ivec3& other);
+	void operator/=(const ivec3& other);
 	void operator+=(const int& other);
 	void operator-=(const int& other);
 	void operator/=(const int& other);
 	void operator*=(const int& other);
 
 	// Vectors
-	const Ivec3 operator-() const;
-	const Ivec3 operator+(const Ivec3& other) const;
-	const Ivec3 operator-(const Ivec3& other) const;
-	const Ivec3 operator*(const Ivec3& other) const;
-	const Ivec3 operator/(const Ivec3& other) const;
-	const Ivec3 operator+(const int& other) const;
-	const Ivec3 operator-(const int& other) const;
-	const Ivec3 operator*(const int& other) const;
-	const Ivec3 operator/(const int& other) const;
+	const ivec3 operator-() const;
+	const ivec3 operator+(const ivec3& other) const;
+	const ivec3 operator-(const ivec3& other) const;
+	const ivec3 operator*(const ivec3& other) const;
+	const ivec3 operator/(const ivec3& other) const;
+	const ivec3 operator+(const int& other) const;
+	const ivec3 operator-(const int& other) const;
+	const ivec3 operator*(const int& other) const;
+	const ivec3 operator/(const int& other) const;
 
 	// Booleans
-	const bool operator==(const Ivec3& other) const;
-	const bool operator!=(const Ivec3& other) const;
+	const bool operator==(const ivec3& other) const;
+	const bool operator!=(const ivec3& other) const;
 
 	// Miscellaneous
 	union

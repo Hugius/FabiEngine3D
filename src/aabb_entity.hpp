@@ -18,14 +18,14 @@ public:
 	void updateTransformation();
 	void updateTransformationMatrix();
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
-	void setLocalPosition(Vec3 value);
-	void setLocalSize(Vec3 value);
-	void setPosition(Vec3 value);
-	void setSize(Vec3 value);
-	void move(Vec3 value);
-	void scale(Vec3 value);
-	void moveTo(Vec3 target, float speed);
-	void scaleTo(Vec3 target, float speed);
+	void setLocalPosition(fvec3 value);
+	void setLocalSize(fvec3 value);
+	void setPosition(fvec3 value);
+	void setSize(fvec3 value);
+	void move(fvec3 value);
+	void scale(fvec3 value);
+	void moveTo(fvec3 target, float speed);
+	void scaleTo(fvec3 target, float speed);
 	void setParent(const string& parentID, AabbParentType parentType);
 	void setFollowParentTransformation(bool mustFollow);
 	void setFollowParentVisibility(bool mustFollow);
@@ -33,20 +33,20 @@ public:
 	void setRaycastResponsive(bool value);
 	void setCollisionResponsive(bool value);
 	void setCollided(bool value);
-	void setColor(Vec3 value);
+	void setColor(fvec3 value);
 
 	// Strings
 	const string& getParentID() const;
 
 	// Matrices
-	const Matrix44& getTransformationMatrix() const;
+	const mat44& getTransformationMatrix() const;
 
 	// Vectors
-	const Vec3 getLocalPosition() const;
-	const Vec3 getLocalSize() const;
-	const Vec3 getPosition() const;
-	const Vec3 getSize() const;
-	const Vec3 getColor() const;
+	const fvec3 getLocalPosition() const;
+	const fvec3 getLocalSize() const;
+	const fvec3 getPosition() const;
+	const fvec3 getSize() const;
+	const fvec3 getColor() const;
 
 	// Booleans
 	const bool isRaycastResponsive() const;
@@ -67,16 +67,16 @@ private:
 	string _parentID = "";
 
 	// Matrices
-	Matrix44 _transformationMatrix = Matrix44(1.0f);
+	mat44 _transformationMatrix = mat44(1.0f);
 
 	// Vectors
-	Vec3 _localPosition = Vec3(0.0f);
-	Vec3 _localSize = Vec3(1.0f);
-	Vec3 _position = Vec3(0.0f);
-	Vec3 _size = Vec3(1.0f);
-	Vec3 _positionTarget = Vec3(0.0f);
-	Vec3 _sizeTarget = Vec3(1.0f);
-	Vec3 _color = Vec3(1.0f);
+	fvec3 _localPosition = fvec3(0.0f);
+	fvec3 _localSize = fvec3(1.0f);
+	fvec3 _position = fvec3(0.0f);
+	fvec3 _size = fvec3(1.0f);
+	fvec3 _positionTarget = fvec3(0.0f);
+	fvec3 _sizeTarget = fvec3(1.0f);
+	fvec3 _color = fvec3(1.0f);
 
 	// Decimals
 	float _positionTargetSpeed = 0.0f;

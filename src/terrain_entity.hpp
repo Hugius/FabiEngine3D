@@ -15,9 +15,9 @@ public:
 	// Voids
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setPixels(const vector<float>& value);
-	void setVertices(const vector<Vec3> value);
-	void setNormals(const vector<Vec3> value);
-	void setUvCoords(const vector<Vec2> value);
+	void setVertices(const vector<fvec3> value);
+	void setNormals(const vector<fvec3> value);
+	void setUvCoords(const vector<fvec2> value);
 	void setHeightMapPath(const string& value);
 	void setDiffuseMap(TextureID value);
 	void setDiffuseMapPath(const string& value);
@@ -48,7 +48,7 @@ public:
 	void setSpecularIntensity(float value);
 	void setSpecular(bool value);
 	void setWireframed(bool value);
-	void setWireframeColor(Vec3 value);
+	void setWireframeColor(fvec3 value);
 
 	// Strings
 	const string& getHeightMapPath() const;
@@ -63,10 +63,10 @@ public:
 	const string& getNormalMapPathB() const;
 
 	// Vectors
-	const vector<Vec3>& getVertices() const;
-	const vector<Vec3>& getNormals() const;
-	const vector<Vec2>& getUvCoords() const;
-	const Vec3 getWireframeColor() const;
+	const vector<fvec3>& getVertices() const;
+	const vector<fvec3>& getNormals() const;
+	const vector<fvec2>& getUvCoords() const;
+	const fvec3 getWireframeColor() const;
 
 	// Decimals
 	const vector<float>& getPixels() const;
@@ -120,10 +120,10 @@ private:
 	string _normalMapPathB = "";
 
 	// Vectors
-	vector<Vec3> _vertices;
-	vector<Vec3> _normals;
-	vector<Vec2> _uvCoords;
-	Vec3 _wireframeColor = Vec3(1.0f);
+	vector<fvec3> _vertices;
+	vector<fvec3> _normals;
+	vector<fvec2> _uvCoords;
+	fvec3 _wireframeColor = fvec3(1.0f);
 
 	// Decimals
 	vector<float> _pixels;

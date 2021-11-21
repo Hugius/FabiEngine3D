@@ -5,7 +5,7 @@
 void CoreEngine::_updateApplication()
 {
 	// Temporary values
-	static Ivec2 lastCursorPosition = _window.getCursorPosition();
+	static ivec2 lastCursorPosition = _window.getCursorPosition();
 
 	// Exit application
 	if(_inputHandler.isKeyDown(InputType::WINDOW_X_BUTTON))

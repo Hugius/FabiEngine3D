@@ -13,7 +13,7 @@ void CaptureBuffer::unbind()
 	glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 }
 
-const Ivec2 CaptureBuffer::getSize() const
+const ivec2 CaptureBuffer::getSize() const
 {
 	return _size;
 }

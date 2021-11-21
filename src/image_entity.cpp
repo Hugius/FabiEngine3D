@@ -51,7 +51,7 @@ void ImageEntity::updateTransformation()
 		_size += (speedMultiplier * _sizeTargetSpeed);
 
 		// Correct size
-		_size = Vec2(max(0.0f, _size.x), max(0.0f, _size.y));
+		_size = fvec2(max(0.0f, _size.x), max(0.0f, _size.y));
 		if(fabsf(_sizeTarget.x - _size.x) <= _sizeTargetSpeed)
 		{
 			_size.x = _positionTarget.x;
@@ -65,9 +65,9 @@ void ImageEntity::updateTransformation()
 
 void ImageEntity::updateTransformationMatrix()
 {
-	Matrix44 translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, 0.0f);
-	Matrix44 rotationMatrix = Math::createRotationMatrixX(Math::convertToRadians(_rotation));
-	Matrix44 scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, 1.0f);
+	mat44 translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, 0.0f);
+	mat44 rotationMatrix = Math::createRotationMatrixX(Math::convertToRadians(_rotation));
+	mat44 scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, 1.0f);
 
 	_transformationMatrix = (translationMatrix * rotationMatrix * scalingMatrix);
 }
@@ -87,9 +87,9 @@ void ImageEntity::setDiffuseMapPath(const string& value)
 	_diffuseMapPath = value;
 }
 
-void ImageEntity::setColor(Vec3 value)
+void ImageEntity::setColor(fvec3 value)
 {
-	_color = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
 void ImageEntity::setMirroredHorizontally(bool value)
@@ -107,12 +107,12 @@ void ImageEntity::setTransparency(float value)
 	_transparency = clamp(value, 0.0f, 1.0f);
 }
 
-void ImageEntity::setWireframeColor(Vec3 value)
+void ImageEntity::setWireframeColor(fvec3 value)
 {
-	_wireframeColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void ImageEntity::setPosition(Vec2 value)
+void ImageEntity::setPosition(fvec2 value)
 {
 	_position = value;
 	_positionTarget = value;
@@ -124,13 +124,13 @@ void ImageEntity::setRotation(float value)
 	_rotationTarget = Math::limitAngle(value);
 }
 
-void ImageEntity::setSize(Vec2 value)
+void ImageEntity::setSize(fvec2 value)
 {
-	_size = Vec2(max(0.0f, value.x), max(0.0f, value.y));
-	_sizeTarget = Vec2(max(0.0f, value.x), max(0.0f, value.y));
+	_size = fvec2(max(0.0f, value.x), max(0.0f, value.y));
+	_sizeTarget = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void ImageEntity::move(Vec2 value)
+void ImageEntity::move(fvec2 value)
 {
 	_position += value;
 	_positionTarget += value;
@@ -144,15 +144,15 @@ void ImageEntity::rotate(float value)
 	_rotationTarget = Math::limitAngle(_rotationTarget);
 }
 
-void ImageEntity::scale(Vec2 value)
+void ImageEntity::scale(fvec2 value)
 {
 	_size += value;
 	_sizeTarget += value;
-	_size = Vec2(max(0.0f, _size.x), max(0.0f, _size.y));
-	_sizeTarget = Vec2(max(0.0f, _sizeTarget.x), max(0.0f, _sizeTarget.y));
+	_size = fvec2(max(0.0f, _size.x), max(0.0f, _size.y));
+	_sizeTarget = fvec2(max(0.0f, _sizeTarget.x), max(0.0f, _sizeTarget.y));
 }
 
-void ImageEntity::moveTo(Vec2 target, float speed)
+void ImageEntity::moveTo(fvec2 target, float speed)
 {
 	_positionTarget = target;
 	_positionTargetSpeed = speed;
@@ -164,18 +164,18 @@ void ImageEntity::rotateTo(float target, float speed)
 	_rotationTargetSpeed = speed;
 }
 
-void ImageEntity::scaleTo(Vec2 target, float speed)
+void ImageEntity::scaleTo(fvec2 target, float speed)
 {
-	_sizeTarget = Vec2(max(0.0f, target.x), max(0.0f, target.y));
+	_sizeTarget = fvec2(max(0.0f, target.x), max(0.0f, target.y));
 	_sizeTargetSpeed = speed;
 }
 
-void ImageEntity::setMinPosition(Vec2 value)
+void ImageEntity::setMinPosition(fvec2 value)
 {
 	_minPosition = value;
 }
 
-void ImageEntity::setMaxPosition(Vec2 value)
+void ImageEntity::setMaxPosition(fvec2 value)
 {
 	_maxPosition = value;
 }
@@ -346,12 +346,12 @@ const string& ImageEntity::getDiffuseMapPath() const
 	return _diffuseMapPath;
 }
 
-const Vec3 ImageEntity::getWireframeColor() const
+const fvec3 ImageEntity::getWireframeColor() const
 {
 	return _wireframeColor;
 }
 
-const Vec3 ImageEntity::getColor() const
+const fvec3 ImageEntity::getColor() const
 {
 	return _color;
 }
@@ -386,12 +386,12 @@ const bool ImageEntity::hasDiffuseMap() const
 	return (_diffuseMap != 0);
 }
 
-const Matrix44 ImageEntity::getTransformationMatrix() const
+const mat44 ImageEntity::getTransformationMatrix() const
 {
 	return _transformationMatrix;
 }
 
-const Vec2 ImageEntity::getPosition() const
+const fvec2 ImageEntity::getPosition() const
 {
 	return _position;
 }
@@ -401,17 +401,17 @@ const float ImageEntity::getRotation() const
 	return _rotation;
 }
 
-const Vec2 ImageEntity::getSize() const
+const fvec2 ImageEntity::getSize() const
 {
 	return _size;
 }
 
-const Vec2 ImageEntity::getMinPosition() const
+const fvec2 ImageEntity::getMinPosition() const
 {
 	return _minPosition;
 }
 
-const Vec2 ImageEntity::getMaxPosition() const
+const fvec2 ImageEntity::getMaxPosition() const
 {
 	return _maxPosition;
 }

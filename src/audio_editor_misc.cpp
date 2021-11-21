@@ -38,5 +38,5 @@ void AudioEditor::_updateMiscellaneous()
 	{
 		_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\textures\\stop.png");
 	}
-	_fe3d.billboard_rotate("@@icon", Vec3(0.0f, 0.5f, 0.0f));
+	_fe3d.billboard_rotate("@@icon", fvec3(0.0f, 0.5f, 0.0f));
 }

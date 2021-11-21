@@ -41,9 +41,9 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 			_fe3d.text_setFont(ID, filePath);
 
 			// Set properties
-			_fe3d.text_setPosition(ID, _convertGuiPositionToViewport(Vec2(arguments[3].getDecimal(), arguments[4].getDecimal())));
+			_fe3d.text_setPosition(ID, _convertGuiPositionToViewport(fvec2(arguments[3].getDecimal(), arguments[4].getDecimal())));
 			_fe3d.text_setRotation(ID, arguments[5].getDecimal());
-			_fe3d.text_setSize(ID, _convertGuiSizeToViewport(Vec2(arguments[6].getDecimal(), arguments[7].getDecimal())));
+			_fe3d.text_setSize(ID, _convertGuiSizeToViewport(fvec2(arguments[6].getDecimal(), arguments[7].getDecimal())));
 			_fe3d.text_setTextContent(ID, arguments[2].getString());
 
 			// In-engine viewport boundaries
@@ -99,7 +99,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 			// Validate existence
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				Vec2 position = _convertGuiPositionToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				fvec2 position = _convertGuiPositionToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				_fe3d.text_setPosition(arguments[0].getString(), position);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -115,7 +115,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 			// Validate existence
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				Vec2 change = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				fvec2 change = _convertGuiSizeToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				_fe3d.text_move(arguments[0].getString(), change);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -131,8 +131,8 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 			// Validate existence
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				Vec2 target = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				Vec2 speed = _convertGuiSizeToViewport(Vec2(arguments[3].getDecimal(), arguments[3].getDecimal()));
+				fvec2 target = _convertGuiSizeToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				fvec2 speed = _convertGuiSizeToViewport(fvec2(arguments[3].getDecimal(), arguments[3].getDecimal()));
 				_fe3d.text_moveTo(arguments[0].getString(), target, speed.x);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -163,8 +163,8 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 			// Validate existence
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				Vec2 target = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				Vec2 speed = _convertGuiSizeToViewport(Vec2(arguments[3].getDecimal(), arguments[3].getDecimal()));
+				fvec2 target = _convertGuiSizeToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				fvec2 speed = _convertGuiSizeToViewport(fvec2(arguments[3].getDecimal(), arguments[3].getDecimal()));
 				_fe3d.text_scaleTo(arguments[0].getString(), target, speed.x);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -210,7 +210,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 			// Validate existence
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				Vec2 size = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				fvec2 size = _convertGuiSizeToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				_fe3d.text_setSize(arguments[0].getString(), size);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -226,7 +226,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 			// Validate existence
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				Vec2 change = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				fvec2 change = _convertGuiSizeToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				_fe3d.text_scale(arguments[0].getString(), change);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -243,7 +243,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 			if(_validateFe3dText(arguments[0].getString()))
 			{
 				_fe3d.text_setColor(arguments[0].getString(),
-										  Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+										  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

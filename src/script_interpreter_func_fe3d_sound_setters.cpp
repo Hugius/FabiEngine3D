@@ -65,7 +65,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 			if(_validateFe3dSound("@" + previewID, true))
 			{
 				// Temporary values
-				auto position = Vec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal());
+				auto position = fvec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal());
 				auto maxVolume = arguments[5].getDecimal();
 				auto maxDistance = arguments[6].getDecimal();
 
@@ -257,7 +257,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 				// Execute function
 				_fe3d.sound_setPosition(
 					arguments[0].getString(),
-					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+					fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

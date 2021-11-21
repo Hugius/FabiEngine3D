@@ -2,7 +2,7 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-EngineGuiWindow::EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color)
+EngineGuiWindow::EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -36,9 +36,9 @@ const bool EngineGuiWindow::isHovered() const
 	if(_fe3d.image_isVisible(_entityID))
 	{
 		// Convert dimensions to same space
-		Vec2 cursorPosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
-		Vec2 buttonPosition = _fe3d.image_getPosition(_entityID);
-		Vec2 buttonSize = _fe3d.image_getSize(_entityID);
+		fvec2 cursorPosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
+		fvec2 buttonPosition = _fe3d.image_getPosition(_entityID);
+		fvec2 buttonSize = _fe3d.image_getSize(_entityID);
 
 		// Check if cursor inside entity
 		if(cursorPosition.x > buttonPosition.x - (buttonSize.x / 2.0f) && cursorPosition.x < buttonPosition.x + (buttonSize.x / 2.0f)) // X axis
@@ -68,12 +68,12 @@ const string& EngineGuiWindow::getParentID() const
 	return _parentID;
 }
 
-const Vec2 EngineGuiWindow::getInitialPosition() const
+const fvec2 EngineGuiWindow::getInitialPosition() const
 {
 	return _initialPosition;
 }
 
-const Vec2 EngineGuiWindow::getInitialSize() const
+const fvec2 EngineGuiWindow::getInitialSize() const
 {
 	return _initialSize;
 }
@@ -90,8 +90,8 @@ void EngineGuiWindow::createScreen(const string& ID)
 	}
 
 	// Add new screen
-	Vec2 windowPosition = _fe3d.image_getPosition(_entityID);
-	Vec2 windowSize = _fe3d.image_getSize(_entityID);
+	fvec2 windowPosition = _fe3d.image_getPosition(_entityID);
+	fvec2 windowSize = _fe3d.image_getSize(_entityID);
 	_screens.push_back(make_shared<EngineGuiScreen>(_fe3d, _parentID + "_" + _ID, ID, windowPosition, windowSize));
 	getScreen(ID)->hide();
 }

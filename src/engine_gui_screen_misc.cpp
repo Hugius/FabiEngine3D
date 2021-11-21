@@ -21,20 +21,20 @@ const string& EngineGuiScreen::getParentID() const
 	return _parentID;
 }
 
-const Vec2 EngineGuiScreen::convertPosition(Vec2 position) const
+const fvec2 EngineGuiScreen::convertPosition(fvec2 position) const
 {
-	Vec2 screenPosition = _parentPosition;
-	Vec2 screenSize = _parentSize;
-	Vec2 buttonPosition = (screenPosition + (position * (screenSize / 2.0f)));
+	fvec2 screenPosition = _parentPosition;
+	fvec2 screenSize = _parentSize;
+	fvec2 buttonPosition = (screenPosition + (position * (screenSize / 2.0f)));
 
 	return buttonPosition;
 }
 
-const Vec2 EngineGuiScreen::convertSize(Vec2 size) const
+const fvec2 EngineGuiScreen::convertSize(fvec2 size) const
 {
-	Vec2 screenPosition = _parentPosition;
-	Vec2 screenSize = _parentSize;
-	Vec2 buttonSize = (size / 2.0f) * screenSize;
+	fvec2 screenPosition = _parentPosition;
+	fvec2 screenSize = _parentSize;
+	fvec2 buttonSize = (size / 2.0f) * screenSize;
 
 	return buttonSize;
 }
@@ -204,12 +204,12 @@ const vector<shared_ptr<EngineGuiTextField>>& EngineGuiScreen::getTextFields() c
 	return _textFields;
 }
 
-const Vec4 EngineGuiScreen::_convertDimensions(Vec2 position, Vec2 size) const
+const fvec4 EngineGuiScreen::_convertDimensions(fvec2 position, fvec2 size) const
 {
-	Vec2 screenPosition = _parentPosition;
-	Vec2 screenSize = _parentSize;
-	Vec2 buttonPosition = (screenPosition + (position * (screenSize / 2.0f)));
-	Vec2 buttonSize = (size / 2.0f) * screenSize;
+	fvec2 screenPosition = _parentPosition;
+	fvec2 screenSize = _parentSize;
+	fvec2 buttonPosition = (screenPosition + (position * (screenSize / 2.0f)));
+	fvec2 buttonSize = (size / 2.0f) * screenSize;
 
-	return Vec4(buttonPosition.x, buttonPosition.y, buttonSize.x, buttonSize.y);
+	return fvec4(buttonPosition.x, buttonPosition.y, buttonSize.x, buttonSize.y);
 }

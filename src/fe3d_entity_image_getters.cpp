@@ -6,7 +6,7 @@ const bool FabiEngine3D::image_isExisting(const string& ID) const
 	return _core->_imageEntityManager.isExisting(ID);
 }
 
-const Vec2 FabiEngine3D::image_getPosition(const string& ID) const
+const fvec2 FabiEngine3D::image_getPosition(const string& ID) const
 {
 	return _core->_imageEntityManager.getEntity(ID)->getPosition();
 }
@@ -46,27 +46,27 @@ const string& FabiEngine3D::image_getDiffuseMapPath(const string& ID) const
 	_core->_imageEntityManager.getEntity(ID)->getDiffuseMapPath();
 }
 
-const Vec3 FabiEngine3D::image_getWireframeColor(const string& ID) const
+const fvec3 FabiEngine3D::image_getWireframeColor(const string& ID) const
 {
 	_core->_imageEntityManager.getEntity(ID)->getWireframeColor();
 }
 
-const Vec2 FabiEngine3D::image_getSize(const string& ID) const
+const fvec2 FabiEngine3D::image_getSize(const string& ID) const
 {
 	return _core->_imageEntityManager.getEntity(ID)->getSize();
 }
 
-const Vec2 FabiEngine3D::image_getMinPosition(const string& ID) const
+const fvec2 FabiEngine3D::image_getMinPosition(const string& ID) const
 {
 	return _core->_imageEntityManager.getEntity(ID)->getMinPosition();
 }
 
-const Vec2 FabiEngine3D::image_getMaxPosition(const string& ID) const
+const fvec2 FabiEngine3D::image_getMaxPosition(const string& ID) const
 {
 	return _core->_imageEntityManager.getEntity(ID)->getMaxPosition();
 }
 
-const Vec3 FabiEngine3D::image_getColor(const string& ID) const
+const fvec3 FabiEngine3D::image_getColor(const string& ID) const
 {
 	return _core->_imageEntityManager.getEntity(ID)->getColor();
 }

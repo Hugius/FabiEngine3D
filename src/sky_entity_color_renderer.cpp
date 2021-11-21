@@ -6,7 +6,7 @@ void SkyEntityColorRenderer::bind()
 	_shader.bind();
 
 	// Shader uniforms
-	_shader.uploadUniform("u_viewMatrix", Matrix44(Matrix33(_renderBus.getViewMatrix())));
+	_shader.uploadUniform("u_viewMatrix", mat44(mat33(_renderBus.getViewMatrix())));
 	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_mixValue", _renderBus.getSkyMixValue());
 	_shader.uploadUniform("u_mainCubeMap", 0);

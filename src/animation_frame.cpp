@@ -11,7 +11,7 @@ void AnimationFrame::clearParts()
 	_transformationTypes.clear();
 }
 
-void AnimationFrame::addPart(const string& partID, Vec3 targetTransformation, Vec3 rotationOrigin, Vec3 speed, AnimationSpeedType animationSpeedType, TransformationType transformationType)
+void AnimationFrame::addPart(const string& partID, fvec3 targetTransformation, fvec3 rotationOrigin, fvec3 speed, AnimationSpeedType animationSpeedType, TransformationType transformationType)
 {
 	_targetTransformations.insert(make_pair(partID, targetTransformation));
 	_rotationOrigins.insert(make_pair(partID, rotationOrigin));
@@ -20,17 +20,17 @@ void AnimationFrame::addPart(const string& partID, Vec3 targetTransformation, Ve
 	_transformationTypes.insert(make_pair(partID, transformationType));
 }
 
-void AnimationFrame::setTargetTransformation(const string& partID, Vec3 value)
+void AnimationFrame::setTargetTransformation(const string& partID, fvec3 value)
 {
 	_targetTransformations.at(partID) = value;
 }
 
-void AnimationFrame::setRotationOrigin(const string& partID, Vec3 value)
+void AnimationFrame::setRotationOrigin(const string& partID, fvec3 value)
 {
 	_rotationOrigins.at(partID) = value;
 }
 
-void AnimationFrame::setSpeed(const string& partID, Vec3 value)
+void AnimationFrame::setSpeed(const string& partID, fvec3 value)
 {
 	_speeds.at(partID) = value;
 }
@@ -45,17 +45,17 @@ void AnimationFrame::setTransformationType(const string& partID, TransformationT
 	_transformationTypes.at(partID) = value;
 }
 
-const map<string, Vec3>& AnimationFrame::getTargetTransformations() const
+const map<string, fvec3>& AnimationFrame::getTargetTransformations() const
 {
 	return _targetTransformations;
 }
 
-const map<string, Vec3>& AnimationFrame::getRotationOrigins() const
+const map<string, fvec3>& AnimationFrame::getRotationOrigins() const
 {
 	return _rotationOrigins;
 }
 
-const map<string, Vec3>& AnimationFrame::getSpeeds() const
+const map<string, fvec3>& AnimationFrame::getSpeeds() const
 {
 	return _speeds;
 }

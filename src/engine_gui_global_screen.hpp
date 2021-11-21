@@ -15,26 +15,26 @@ public:
 	// Voids
 	void update();
 	void setFocus(bool focused);
-	void createScrollingList(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 buttonColor, Vec3 buttonHoverColor, Vec3 textColor, Vec3 textHoverColor, Vec2 charSize, bool isCentered);
-	void createWriteField(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, Vec3 textColor, Vec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered);
-	void createButton(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, string textContent, Vec3 textColor, Vec3 textHoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered);
-	void createButton(const string& ID, Vec2 position, Vec2 size, const string& texturePath, Vec3 hoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered);
-	void createRectangle(const string& ID, Vec2 position, Vec2 size, Vec3 color, bool isCentered);
-	void createRectangle(const string& ID, Vec2 position, Vec2 size, const string& texturePath, bool isCentered);
-	void createTextField(const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 textColor, bool isCentered, bool isDynamic);
+	void createScrollingList(const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 buttonColor, fvec3 buttonHoverColor, fvec3 textColor, fvec3 textHoverColor, fvec2 charSize, bool isCentered);
+	void createWriteField(const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor, fvec3 textColor, fvec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered);
+	void createButton(const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor, string textContent, fvec3 textColor, fvec3 textHoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered);
+	void createButton(const string& ID, fvec2 position, fvec2 size, const string& texturePath, fvec3 hoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered);
+	void createRectangle(const string& ID, fvec2 position, fvec2 size, fvec3 color, bool isCentered);
+	void createRectangle(const string& ID, fvec2 position, fvec2 size, const string& texturePath, bool isCentered);
+	void createTextField(const string& ID, fvec2 position, fvec2 size, string textContent, fvec3 textColor, bool isCentered, bool isDynamic);
 	void deleteScrollingList(const string& ID);
 	void deleteWriteField(const string& ID);
 	void deleteButton(const string& ID);
 	void deleteRectangle(const string& ID);
 	void deleteTextField(const string& ID);
-	void createValueForm(const string& ID, string title, unsigned int value, Vec2 position, Vec2 size, Vec2 buttonsPosition);
-	void createValueForm(const string& ID, string title, int value, Vec2 position, Vec2 size, Vec2 buttonsPosition);
-	void createValueForm(const string& ID, string title, float value, Vec2 position, Vec2 size, Vec2 buttonsPosition);
-	void createValueForm(const string& ID, string title, double value, Vec2 position, Vec2 size, Vec2 buttonsPosition);
-	void createValueForm(const string& ID, string title, string value, Vec2 position, Vec2 size, Vec2 buttonsPosition);
-	void createChoiceForm(const string& ID, string title, Vec2 position, const vector<string>& buttonTitles);
+	void createValueForm(const string& ID, string title, unsigned int value, fvec2 position, fvec2 size, fvec2 buttonsPosition);
+	void createValueForm(const string& ID, string title, int value, fvec2 position, fvec2 size, fvec2 buttonsPosition);
+	void createValueForm(const string& ID, string title, float value, fvec2 position, fvec2 size, fvec2 buttonsPosition);
+	void createValueForm(const string& ID, string title, double value, fvec2 position, fvec2 size, fvec2 buttonsPosition);
+	void createValueForm(const string& ID, string title, string value, fvec2 position, fvec2 size, fvec2 buttonsPosition);
+	void createChoiceForm(const string& ID, string title, fvec2 position, const vector<string>& buttonTitles);
 	void deleteChoiceForm(const string& ID);
-	void createAnswerForm(const string& ID, string title, Vec2 position);
+	void createAnswerForm(const string& ID, string title, fvec2 position);
 
 	// Strings
 	const string checkChoiceForm(const string& ID);
@@ -74,7 +74,7 @@ public:
 
 private:
 	// Voids
-	void _createValueForm(const string& ID, string title, string valueString, Vec2 position, Vec2 size, Vec2 buttonsPosition, bool onlyNumbers, bool minusAllowed);
+	void _createValueForm(const string& ID, string title, string valueString, fvec2 position, fvec2 size, fvec2 buttonsPosition, bool onlyNumbers, bool minusAllowed);
 	void _updateValueFormDeleting();
 	void _deleteAnswerForm(const string& ID);
 

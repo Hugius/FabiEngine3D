@@ -7,8 +7,8 @@
 class EngineGuiScrollingList final : public EngineGuiRectangle
 {
 public:
-	EngineGuiScrollingList(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color,
-						   Vec3 buttonColor, Vec3 buttonHoverColor, Vec3 textColor, Vec3 textHoverColor, Vec2 charSize, bool isCentered);
+	EngineGuiScrollingList(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color,
+						   fvec3 buttonColor, fvec3 buttonHoverColor, fvec3 textColor, fvec3 textHoverColor, fvec2 charSize, bool isCentered);
 
 	// Voids
 	void update(bool isHoverable);
@@ -31,15 +31,15 @@ private:
 	void _updateScolling();
 
 	// Vectors
-	const Vec2 _convertPosition(Vec2 position) const;
-	const Vec2 _convertSize(Vec2 size) const;
+	const fvec2 _convertPosition(fvec2 position) const;
+	const fvec2 _convertSize(fvec2 size) const;
 
 	// Vectors
-	const Vec3 _buttonColor;
-	const Vec3 _buttonHoverColor;
-	const Vec3 _textColor;
-	const Vec3 _textHoverColor;
-	const Vec2 _charSize;
+	const fvec3 _buttonColor;
+	const fvec3 _buttonHoverColor;
+	const fvec3 _textColor;
+	const fvec3 _textHoverColor;
+	const fvec2 _charSize;
 
 	// Decimals
 	static inline const float SCROLL_WHEEL_DIVIDER = 100.0f;

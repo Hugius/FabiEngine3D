@@ -144,87 +144,87 @@ void FabiEngine3D::model_setReflective(const string& ID, const string& partID, b
 	_core->_modelEntityManager.getEntity(ID)->setReflective(partID, enabled);
 }
 
-void FabiEngine3D::model_setBasePosition(const string& ID, Vec3 position)
+void FabiEngine3D::model_setBasePosition(const string& ID, fvec3 position)
 {
 	_core->_modelEntityManager.getEntity(ID)->setBasePosition(position);
 }
 
-void FabiEngine3D::model_setBaseRotation(const string& ID, Vec3 rotation)
+void FabiEngine3D::model_setBaseRotation(const string& ID, fvec3 rotation)
 {
 	_core->_modelEntityManager.getEntity(ID)->setBaseRotation(rotation);
 }
 
-void FabiEngine3D::model_setBaseRotationOrigin(const string& ID, Vec3 rotationOrigin)
+void FabiEngine3D::model_setBaseRotationOrigin(const string& ID, fvec3 rotationOrigin)
 {
 	_core->_modelEntityManager.getEntity(ID)->setBaseRotationOrigin(rotationOrigin);
 }
 
-void FabiEngine3D::model_setBaseSize(const string& ID, Vec3 size)
+void FabiEngine3D::model_setBaseSize(const string& ID, fvec3 size)
 {
 	_core->_modelEntityManager.getEntity(ID)->setBaseSize(size);
 }
 
-void FabiEngine3D::model_setPartPosition(const string& ID, const string& partID, Vec3 position)
+void FabiEngine3D::model_setPartPosition(const string& ID, const string& partID, fvec3 position)
 {
 	_core->_modelEntityManager.getEntity(ID)->setPartPosition(partID, position);
 }
 
-void FabiEngine3D::model_setPartRotation(const string& ID, const string& partID, Vec3 rotation)
+void FabiEngine3D::model_setPartRotation(const string& ID, const string& partID, fvec3 rotation)
 {
 	_core->_modelEntityManager.getEntity(ID)->setPartRotation(partID, rotation);
 }
 
-void FabiEngine3D::model_setPartRotationOrigin(const string& ID, const string& partID, Vec3 rotationOrigin)
+void FabiEngine3D::model_setPartRotationOrigin(const string& ID, const string& partID, fvec3 rotationOrigin)
 {
 	_core->_modelEntityManager.getEntity(ID)->setPartRotationOrigin(partID, rotationOrigin);
 }
 
-void FabiEngine3D::model_setPartSize(const string& ID, const string& partID, Vec3 size)
+void FabiEngine3D::model_setPartSize(const string& ID, const string& partID, fvec3 size)
 {
 	_core->_modelEntityManager.getEntity(ID)->setPartSize(partID, size);
 }
 
-void FabiEngine3D::model_moveBase(const string& ID, Vec3 change)
+void FabiEngine3D::model_moveBase(const string& ID, fvec3 change)
 {
 	_core->_modelEntityManager.getEntity(ID)->moveBase(change);
 }
 
-void FabiEngine3D::model_rotateBase(const string& ID, Vec3 change)
+void FabiEngine3D::model_rotateBase(const string& ID, fvec3 change)
 {
 	_core->_modelEntityManager.getEntity(ID)->rotateBase(change);
 }
 
-void FabiEngine3D::model_scaleBase(const string& ID, Vec3 change)
+void FabiEngine3D::model_scaleBase(const string& ID, fvec3 change)
 {
 	_core->_modelEntityManager.getEntity(ID)->scaleBase(change);
 }
 
-void FabiEngine3D::model_movePart(const string& ID, const string& partID, Vec3 change)
+void FabiEngine3D::model_movePart(const string& ID, const string& partID, fvec3 change)
 {
 	_core->_modelEntityManager.getEntity(ID)->movePart(partID, change);
 }
 
-void FabiEngine3D::model_rotatePart(const string& ID, const string& partID, Vec3 change)
+void FabiEngine3D::model_rotatePart(const string& ID, const string& partID, fvec3 change)
 {
 	_core->_modelEntityManager.getEntity(ID)->rotatePart(partID, change);
 }
 
-void FabiEngine3D::model_scalePart(const string& ID, const string& partID, Vec3 change)
+void FabiEngine3D::model_scalePart(const string& ID, const string& partID, fvec3 change)
 {
 	_core->_modelEntityManager.getEntity(ID)->scalePart(partID, change);
 }
 
-void FabiEngine3D::model_moveBaseTo(const string& ID, Vec3 target, float speed)
+void FabiEngine3D::model_moveBaseTo(const string& ID, fvec3 target, float speed)
 {
 	_core->_modelEntityManager.getEntity(ID)->moveBaseTo(target, speed);
 }
 
-void FabiEngine3D::model_rotateBaseTo(const string& ID, Vec3 target, float speed)
+void FabiEngine3D::model_rotateBaseTo(const string& ID, fvec3 target, float speed)
 {
 	_core->_modelEntityManager.getEntity(ID)->rotateBaseTo(target, speed);
 }
 
-void FabiEngine3D::model_scaleBaseTo(const string& ID, Vec3 target, float speed)
+void FabiEngine3D::model_scaleBaseTo(const string& ID, fvec3 target, float speed)
 {
 	_core->_modelEntityManager.getEntity(ID)->scaleBaseTo(target, speed);
 }
@@ -264,22 +264,22 @@ void FabiEngine3D::model_setMaxHeight(const string& ID, float height)
 	_core->_modelEntityManager.getEntity(ID)->setMaxHeight(height);
 }
 
-void FabiEngine3D::model_movePartTo(const string& ID, const string& partID, Vec3 target, float speed)
+void FabiEngine3D::model_movePartTo(const string& ID, const string& partID, fvec3 target, float speed)
 {
 	_core->_modelEntityManager.getEntity(ID)->movePartTo(partID, target, speed);
 }
 
-void FabiEngine3D::model_rotatePartTo(const string& ID, const string& partID, Vec3 target, float speed)
+void FabiEngine3D::model_rotatePartTo(const string& ID, const string& partID, fvec3 target, float speed)
 {
 	_core->_modelEntityManager.getEntity(ID)->rotatePartTo(partID, target, speed);
 }
 
-void FabiEngine3D::model_scalePartTo(const string& ID, const string& partID, Vec3 target, float speed)
+void FabiEngine3D::model_scalePartTo(const string& ID, const string& partID, fvec3 target, float speed)
 {
 	_core->_modelEntityManager.getEntity(ID)->scalePartTo(partID, target, speed);
 }
 
-void FabiEngine3D::model_setLevelOfDetailSize(const string& ID, Vec3 size)
+void FabiEngine3D::model_setLevelOfDetailSize(const string& ID, fvec3 size)
 {
 	_core->_modelEntityManager.getEntity(ID)->setLevelOfDetailSize(size);
 }
@@ -289,7 +289,7 @@ void FabiEngine3D::model_setTextureRepeat(const string& ID, const string& partID
 	_core->_modelEntityManager.getEntity(ID)->setTextureRepeat(partID, repeat);
 }
 
-void FabiEngine3D::model_enableInstancing(const string& ID, vector<Vec3> offsets)
+void FabiEngine3D::model_enableInstancing(const string& ID, vector<fvec3> offsets)
 {
 	auto entity = _core->_modelEntityManager.getEntity(ID);
 
@@ -344,12 +344,12 @@ void FabiEngine3D::model_setDepthMapIncluded(const string& ID, bool enabled)
 	_core->_modelEntityManager.getEntity(ID)->setDepthMapIncluded(enabled);
 }
 
-void FabiEngine3D::model_setColor(const string& ID, const string& partID, Vec3 color)
+void FabiEngine3D::model_setColor(const string& ID, const string& partID, fvec3 color)
 {
 	_core->_modelEntityManager.getEntity(ID)->setColor(partID, color);
 }
 
-void FabiEngine3D::model_setWireframeColor(const string& ID, const string& partID, Vec3 color)
+void FabiEngine3D::model_setWireframeColor(const string& ID, const string& partID, fvec3 color)
 {
 	_core->_modelEntityManager.getEntity(ID)->setWireframeColor(partID, color);
 }

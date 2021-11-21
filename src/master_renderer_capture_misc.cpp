@@ -41,13 +41,13 @@ void MasterRenderer::_captureWaterRefractions()
 		if(isUnderWater)
 		{
 			const float clippingHeight = -(waterEntity->getHeight());
-			const Vec4 clippingPlane = Vec4(0.0f, 1.0f, 0.0f, clippingHeight);
+			const fvec4 clippingPlane = fvec4(0.0f, 1.0f, 0.0f, clippingHeight);
 			_renderBus.setClippingPlane(clippingPlane);
 		}
 		else
 		{
 			const float clippingHeight = (waterEntity->getHeight() + waveHeight);
-			const Vec4 clippingPlane = Vec4(0.0f, -1.0f, 0.0f, clippingHeight);
+			const fvec4 clippingPlane = fvec4(0.0f, -1.0f, 0.0f, clippingHeight);
 			_renderBus.setClippingPlane(clippingPlane);
 		}
 
@@ -131,9 +131,9 @@ void MasterRenderer::_captureShadows()
 						auto levelOfDetailEntity = foundPair->second;
 
 						// Save initial transformation
-						Vec3 initialPosition = levelOfDetailEntity->getBasePosition();
-						Vec3 initialRotation = levelOfDetailEntity->getBaseRotation();
-						Vec3 initialSize = levelOfDetailEntity->getBaseSize();
+						fvec3 initialPosition = levelOfDetailEntity->getBasePosition();
+						fvec3 initialRotation = levelOfDetailEntity->getBaseRotation();
+						fvec3 initialSize = levelOfDetailEntity->getBaseSize();
 						bool initialVisibility = levelOfDetailEntity->isVisible();
 
 						// Change transformation

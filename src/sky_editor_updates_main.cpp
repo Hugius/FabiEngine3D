@@ -52,11 +52,11 @@ void SkyEditor::_updateMainMenu()
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("skyCreate", "Create Sky", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("skyCreate", "Create Sky", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isCreatingSky = true;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
@@ -66,7 +66,7 @@ void SkyEditor::_updateMainMenu()
 			{
 				ID = ID.substr(1);
 			}
-			_gui.getGlobalScreen()->createChoiceForm("skyList", "Edit Sky", Vec2(0.0f, 0.1f), IDs);
+			_gui.getGlobalScreen()->createChoiceForm("skyList", "Edit Sky", fvec2(0.0f, 0.1f), IDs);
 			_isChoosingSky = true;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
@@ -76,7 +76,7 @@ void SkyEditor::_updateMainMenu()
 			{
 				ID = ID.substr(1);
 			}
-			_gui.getGlobalScreen()->createChoiceForm("skyList", "Delete Sky", Vec2(0.0f, 0.1f), IDs);
+			_gui.getGlobalScreen()->createChoiceForm("skyList", "Delete Sky", fvec2(0.0f, 0.1f), IDs);
 			_isChoosingSky = true;
 			_isDeletingSky = true;
 		}
@@ -240,7 +240,7 @@ void SkyEditor::_updateSkyDeleting()
 		// Add answer form
 		if(!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
 		{
-			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
 		// Update answer form

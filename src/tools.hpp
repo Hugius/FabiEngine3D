@@ -12,7 +12,7 @@ public:
 	Tools() = delete;
 
 	// Voids
-	static void setMainRenderingColor(Vec3 color);
+	static void setMainRenderingColor(fvec3 color);
 	static void createDirectory(const string& path);
 	static void copyDirectory(const string& fromPath, const string& toPath);
 	static void copyFile(const string& fromPath, const string& toPath);
@@ -24,17 +24,17 @@ public:
 	// Strings
 	static const vector<string> getFilesFromDirectory(const string& path);
 	static const vector<string> getDirectoriesFromDirectory(const string& path);
-	static const string vec2str(Ivec2 vec);
-	static const string vec2str(Vec2 vec);
-	static const string vec2str(Vec3 vec);
-	static const string vec2str(Vec4 vec);
+	static const string vec2str(ivec2 vec);
+	static const string vec2str(fvec2 vec);
+	static const string vec2str(fvec3 vec);
+	static const string vec2str(fvec4 vec);
 	static const string getRootDirectoryPath();
 	static const string chooseExplorerFile(const string& startingDirectory, const string& fileType);
 	static const string chooseExplorerDirectory(const string& startingDirectory);
 
 	// Vectors
-	static const Vec2 convertFromScreenCoords(Ivec2 position);
-	static const Ivec2 convertToScreenCoords(Vec2 position);
+	static const fvec2 convertFromScreenCoords(ivec2 position);
+	static const ivec2 convertToScreenCoords(fvec2 position);
 
 	// Decimals
 	static const float getWindowAspectRatio();

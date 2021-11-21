@@ -184,14 +184,14 @@ const Ray FabiEngine3D::raycast_getCursorRay() const
 	return _core->_raycaster.getCursorRay();
 }
 
-const Vec3 FabiEngine3D::raycast_getPointOnTerrain() const
+const fvec3 FabiEngine3D::raycast_getPointOnTerrain() const
 {
 	return _core->_raycaster.getTerrainPoint();
 }
 
 const bool FabiEngine3D::raycast_isPointOnTerrainValid() const
 {
-	return (_core->_raycaster.getTerrainPoint() != Vec3(-1.0f));
+	return (_core->_raycaster.getTerrainPoint() != fvec3(-1.0f));
 }
 
 const bool FabiEngine3D::raycast_isTerrainPointingEnabled() const

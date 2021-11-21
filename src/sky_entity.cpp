@@ -20,9 +20,9 @@ void SkyEntity::setCubeMapPaths(const array<string, 6>& value)
 	_cubeMapPaths = value;
 }
 
-void SkyEntity::setColor(Vec3 value)
+void SkyEntity::setColor(fvec3 value)
 {
-	_color = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
 void SkyEntity::setCubeMap(TextureID value)
@@ -50,9 +50,9 @@ void SkyEntity::setWireframed(bool value)
 	_isWireframed = value;
 }
 
-void SkyEntity::setWireframeColor(Vec3 value)
+void SkyEntity::setWireframeColor(fvec3 value)
 {
-	_wireframeColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
 const shared_ptr<RenderBuffer> SkyEntity::getRenderBuffer() const
@@ -65,17 +65,17 @@ const array<string, 6>& SkyEntity::getCubeMapPaths() const
 	return _cubeMapPaths;
 }
 
-const Matrix44& SkyEntity::getRotationMatrix() const
+const mat44& SkyEntity::getRotationMatrix() const
 {
 	return _rotationMatrix;
 }
 
-const Vec3 SkyEntity::getWireframeColor() const
+const fvec3 SkyEntity::getWireframeColor() const
 {
 	return _wireframeColor;
 }
 
-const Vec3 SkyEntity::getColor() const
+const fvec3 SkyEntity::getColor() const
 {
 	return _color;
 }

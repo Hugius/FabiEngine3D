@@ -10,9 +10,9 @@ void WaterEntity::setHeight(float value)
 	_height = value;
 }
 
-void WaterEntity::setColor(Vec3 value)
+void WaterEntity::setColor(fvec3 value)
 {
-	_color = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
 void WaterEntity::setDudvMap(TextureID value)
@@ -45,7 +45,7 @@ void WaterEntity::setDisplacementMapPath(const string& value)
 	_displacementMapPath = value;
 }
 
-void WaterEntity::setRippleOffset(Vec2 value)
+void WaterEntity::setRippleOffset(fvec2 value)
 {
 	_rippleOffset = value;
 }
@@ -70,12 +70,12 @@ void WaterEntity::setQuality(WaterQuality quality)
 	_quality = quality;
 }
 
-void WaterEntity::setSpeed(Vec2 value)
+void WaterEntity::setSpeed(fvec2 value)
 {
 	_speed = value;
 }
 
-void WaterEntity::setWaveOffset(Vec2 value)
+void WaterEntity::setWaveOffset(fvec2 value)
 {
 	_waveOffset = value;
 }
@@ -115,9 +115,9 @@ void WaterEntity::setWireframed(bool value)
 	_isWireframed = value;
 }
 
-void WaterEntity::setWireframeColor(Vec3 value)
+void WaterEntity::setWireframeColor(fvec3 value)
 {
-	_wireframeColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
 void WaterEntity::setSize(float value)
@@ -135,7 +135,7 @@ const float WaterEntity::getHeight() const
 	return _height;
 }
 
-const Vec3 WaterEntity::getColor() const
+const fvec3 WaterEntity::getColor() const
 {
 	return _color;
 }
@@ -170,7 +170,7 @@ const string& WaterEntity::getDisplacementMapPath() const
 	return _displacementMapPath;
 }
 
-const Vec2 WaterEntity::getRippleOffset() const
+const fvec2 WaterEntity::getRippleOffset() const
 {
 	return _rippleOffset;
 }
@@ -195,17 +195,17 @@ const WaterQuality WaterEntity::getQuality() const
 	return _quality;
 }
 
-const Vec2 WaterEntity::getSpeed() const
+const fvec2 WaterEntity::getSpeed() const
 {
 	return _speed;
 }
 
-const Vec2 WaterEntity::getWaveOffset() const
+const fvec2 WaterEntity::getWaveOffset() const
 {
 	return _waveOffset;
 }
 
-const Vec3 WaterEntity::getWireframeColor() const
+const fvec3 WaterEntity::getWireframeColor() const
 {
 	return _wireframeColor;
 }

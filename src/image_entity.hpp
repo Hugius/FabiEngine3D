@@ -21,19 +21,19 @@ public:
 	void setMirroredHorizontally(bool value);
 	void setMirroredVertically(bool value);
 	void setTransparency(float value);
-	void setWireframeColor(Vec3 value);
-	void setColor(Vec3 value);
-	void setMinPosition(Vec2 value);
-	void setMaxPosition(Vec2 value);
-	void setPosition(Vec2 value);
+	void setWireframeColor(fvec3 value);
+	void setColor(fvec3 value);
+	void setMinPosition(fvec2 value);
+	void setMaxPosition(fvec2 value);
+	void setPosition(fvec2 value);
 	void setRotation(float value);
-	void setSize(Vec2 value);
-	void move(Vec2 value);
+	void setSize(fvec2 value);
+	void move(fvec2 value);
 	void rotate(float value);
-	void scale(Vec2 value);
-	void moveTo(Vec2 target, float speed);
+	void scale(fvec2 value);
+	void moveTo(fvec2 target, float speed);
 	void rotateTo(float target, float speed);
-	void scaleTo(Vec2 target, float speed);
+	void scaleTo(fvec2 target, float speed);
 	void setDepth(unsigned int value);
 	void startSpriteAnimation(int loops);
 	void pauseSpriteAnimation();
@@ -55,15 +55,15 @@ public:
 	const string& getDiffuseMapPath() const;
 
 	// Matrices
-	const Matrix44 getTransformationMatrix() const;
+	const mat44 getTransformationMatrix() const;
 
 	// Vectors
-	const Vec3 getWireframeColor() const;
-	const Vec3 getColor() const;
-	const Vec2 getPosition() const;
-	const Vec2 getSize() const;
-	const Vec2 getMinPosition() const;
-	const Vec2 getMaxPosition() const;
+	const fvec3 getWireframeColor() const;
+	const fvec3 getColor() const;
+	const fvec2 getPosition() const;
+	const fvec2 getSize() const;
+	const fvec2 getMinPosition() const;
+	const fvec2 getMaxPosition() const;
 
 	// Decimals
 	const float getTransparency() const;
@@ -97,20 +97,20 @@ public:
 
 private:
 	// Matrices
-	Matrix44 _transformationMatrix = Matrix44(1.0f);
+	mat44 _transformationMatrix = mat44(1.0f);
 
 	// Strings
 	string _diffuseMapPath = "";
 
 	// Vectors
-	Vec3 _color = Vec3(1.0f);
-	Vec3 _wireframeColor = Vec3(1.0f);
-	Vec2 _minPosition = Vec2(-1.0f);
-	Vec2 _maxPosition = Vec2(1.0f);
-	Vec2 _position = Vec2(0.0f);
-	Vec2 _size = Vec2(1.0f);
-	Vec2 _positionTarget = Vec2(0.0f);
-	Vec2 _sizeTarget = Vec2(1.0f);
+	fvec3 _color = fvec3(1.0f);
+	fvec3 _wireframeColor = fvec3(1.0f);
+	fvec2 _minPosition = fvec2(-1.0f);
+	fvec2 _maxPosition = fvec2(1.0f);
+	fvec2 _position = fvec2(0.0f);
+	fvec2 _size = fvec2(1.0f);
+	fvec2 _positionTarget = fvec2(0.0f);
+	fvec2 _sizeTarget = fvec2(1.0f);
 
 	// Decimals
 	float _rotation = 0.0f;

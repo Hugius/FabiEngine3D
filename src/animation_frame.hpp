@@ -15,17 +15,17 @@ class AnimationFrame final
 public:
 	// Voids
 	void clearParts();
-	void addPart(const string& partID, Vec3 targetTransformation, Vec3 rotationOrigin, Vec3 speed, AnimationSpeedType animationSpeedType, TransformationType transformationType);
-	void setTargetTransformation(const string& partID, Vec3 value);
-	void setRotationOrigin(const string& partID, Vec3 value);
-	void setSpeed(const string& partID, Vec3 value);
+	void addPart(const string& partID, fvec3 targetTransformation, fvec3 rotationOrigin, fvec3 speed, AnimationSpeedType animationSpeedType, TransformationType transformationType);
+	void setTargetTransformation(const string& partID, fvec3 value);
+	void setRotationOrigin(const string& partID, fvec3 value);
+	void setSpeed(const string& partID, fvec3 value);
 	void setSpeedType(const string& partID, AnimationSpeedType value);
 	void setTransformationType(const string& partID, TransformationType value);
 
 	// Vectors
-	const map<string, Vec3>& getTargetTransformations() const;
-	const map<string, Vec3>& getRotationOrigins() const;
-	const map<string, Vec3>& getSpeeds() const;
+	const map<string, fvec3>& getTargetTransformations() const;
+	const map<string, fvec3>& getRotationOrigins() const;
+	const map<string, fvec3>& getSpeeds() const;
 
 	// Miscellaneous
 	const map<string, AnimationSpeedType>& getSpeedTypes() const;
@@ -33,9 +33,9 @@ public:
 
 private:
 	// Vectors
-	map<string, Vec3> _targetTransformations;
-	map<string, Vec3> _rotationOrigins;
-	map<string, Vec3> _speeds;
+	map<string, fvec3> _targetTransformations;
+	map<string, fvec3> _rotationOrigins;
+	map<string, fvec3> _speeds;
 
 	// Miscellaneous
 	map<string, AnimationSpeedType> _speedTypes;

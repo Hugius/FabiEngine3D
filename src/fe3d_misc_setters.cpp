@@ -189,7 +189,7 @@ void FabiEngine3D::misc_centerCursor()
 	_core->_camera.notifyCursorCenter();
 }
 
-void FabiEngine3D::misc_setCursorPosition(Ivec2 pos)
+void FabiEngine3D::misc_setCursorPosition(ivec2 pos)
 {
 	_core->_window.setCursorPosition(pos);
 }

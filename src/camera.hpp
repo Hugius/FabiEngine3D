@@ -12,11 +12,11 @@ public:
 
 	// Voids
 	void reset();
-	void update(Ivec2 lastCursorPosition);
+	void update(ivec2 lastCursorPosition);
 	void updateMatrices();
-	void move(Vec3 value);
-	void setPosition(Vec3 value);
-	void setThirdPersonLookat(Vec3 value);
+	void move(fvec3 value);
+	void setPosition(fvec3 value);
+	void setThirdPersonLookat(fvec3 value);
 	void setThirdPersonDistance(float value);
 	void setAspectRatio(float value);
 	void setFOV(float value);
@@ -38,15 +38,15 @@ public:
 	void invertUpVector();
 
 	// Matrices
-	const Matrix44& getViewMatrix() const;
-	const Matrix44& getProjectionMatrix() const;
+	const mat44& getViewMatrix() const;
+	const mat44& getProjectionMatrix() const;
 
 	// Vectors
-	const Vec3 getUpVector() const;
-	const Vec3 getFrontVector() const;
-	const Vec3 getRightVector() const;
-	const Vec3 getPosition() const;
-	const Vec3 getThirdPersonLookat() const;
+	const fvec3 getUpVector() const;
+	const fvec3 getFrontVector() const;
+	const fvec3 getRightVector() const;
+	const fvec3 getPosition() const;
+	const fvec3 getThirdPersonLookat() const;
 
 	// Decimals
 	const float getFOV() const;
@@ -68,16 +68,16 @@ public:
 
 private:
 	// Matrices
-	Matrix44 _viewMatrix = Matrix44(1.0f);
-	Matrix44 _projectionMatrix = Matrix44(1.0f);
+	mat44 _viewMatrix = mat44(1.0f);
+	mat44 _projectionMatrix = mat44(1.0f);
 
 	// Vectors
-	static inline const Vec3 DEFAULT_UP_VECTOR = Vec3(0.0f, 1.0f, 0.0f);
-	Vec3 _upVector = Vec3(0.0f);
-	Vec3 _frontVector = Vec3(0.0f);
-	Vec3 _rightVector = Vec3(0.0f);
-	Vec3 _position = Vec3(0.0f);
-	Vec3 _thirdPersonLookat = Vec3(0.0f);
+	static inline const fvec3 DEFAULT_UP_VECTOR = fvec3(0.0f, 1.0f, 0.0f);
+	fvec3 _upVector = fvec3(0.0f);
+	fvec3 _frontVector = fvec3(0.0f);
+	fvec3 _rightVector = fvec3(0.0f);
+	fvec3 _position = fvec3(0.0f);
+	fvec3 _thirdPersonLookat = fvec3(0.0f);
 
 	// Decimals
 	static inline const float NEAR_DISTANCE = 0.01f;

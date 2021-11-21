@@ -2,14 +2,14 @@
 
 #include "vector3.hpp"
 
-struct Matrix44;
+struct mat44;
 
-struct Matrix33 final
+struct mat33 final
 {
-	Matrix33();
-	Matrix33(const Matrix44& other);
-	Matrix33(const float value);
-	Matrix33
+	mat33();
+	mat33(const mat44& other);
+	mat33(const float value);
+	mat33
 	(
 		const float m00, const float m01, const float m02,
 		const float m10, const float m11, const float m12,
@@ -17,12 +17,12 @@ struct Matrix33 final
 	);
 
 	// Matrices
-	const Matrix33 operator+(const Matrix33& other) const;
-	const Matrix33 operator-(const Matrix33& other) const;
-	const Matrix33 operator*(const Matrix33& other) const;
+	const mat33 operator+(const mat33& other) const;
+	const mat33 operator-(const mat33& other) const;
+	const mat33 operator*(const mat33& other) const;
 
 	// Vectors
-	const Vec3 operator*(const Vec3& other) const;
+	const fvec3 operator*(const fvec3& other) const;
 
 	// Miscellaneous
 	union

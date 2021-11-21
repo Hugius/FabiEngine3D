@@ -8,7 +8,7 @@ void ModelEditor::_tryPartChoosing(const string& nextActiveScreenID)
 	{
 		auto IDs = _fe3d.model_getPartIDs(_currentModelID);
 		sort(IDs.begin(), IDs.end());
-		_gui.getGlobalScreen()->createChoiceForm("partList", "Select Part", Vec2(0.0f, 0.1f), IDs);
+		_gui.getGlobalScreen()->createChoiceForm("partList", "Select Part", fvec2(0.0f, 0.1f), IDs);
 		_isChoosingPart = true;
 		_nextActiveScreenID = nextActiveScreenID;
 	}

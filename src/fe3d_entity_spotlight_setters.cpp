@@ -27,22 +27,22 @@ void FabiEngine3D::spotlight_setVisible(const string& ID, bool isVisible)
 	_core->_spotlightEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
-void FabiEngine3D::spotlight_setPosition(const string& ID, Vec3 position)
+void FabiEngine3D::spotlight_setPosition(const string& ID, fvec3 position)
 {
 	_core->_spotlightEntityManager.getEntity(ID)->setPosition(position);
 }
 
-void FabiEngine3D::spotlight_move(const string& ID, Vec3 change)
+void FabiEngine3D::spotlight_move(const string& ID, fvec3 change)
 {
 	_core->_spotlightEntityManager.getEntity(ID)->move(change);
 }
 
-void FabiEngine3D::spotlight_moveTo(const string& ID, Vec3 target, float speed)
+void FabiEngine3D::spotlight_moveTo(const string& ID, fvec3 target, float speed)
 {
 	_core->_spotlightEntityManager.getEntity(ID)->moveTo(target, speed);
 }
 
-void FabiEngine3D::spotlight_setColor(const string& ID, Vec3 color)
+void FabiEngine3D::spotlight_setColor(const string& ID, fvec3 color)
 {
 	_core->_spotlightEntityManager.getEntity(ID)->setColor(color);
 }

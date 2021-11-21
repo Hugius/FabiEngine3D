@@ -72,7 +72,7 @@ private:
 	string _hoveredPartID = "";
 
 	// Vectors
-	Vec3 _cameraLookatPosition = Vec3(0.0f);
+	fvec3 _cameraLookatPosition = fvec3(0.0f);
 
 	// Decimals
 	static inline const float CW = 0.115f;

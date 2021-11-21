@@ -9,7 +9,7 @@ Ivec4::Ivec4()
 	this->w = 0;
 }
 
-Ivec4::Ivec4(const Vec4& other)
+Ivec4::Ivec4(const fvec4& other)
 {
 	this->x = static_cast<int>(other.x);
 	this->y = static_cast<int>(other.y);

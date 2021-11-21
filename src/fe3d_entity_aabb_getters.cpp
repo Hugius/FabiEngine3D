@@ -1,7 +1,7 @@
 #include "fe3d.hpp"
 #include "core_engine.hpp"
 
-const Vec3 FabiEngine3D::aabb_getPosition(const string& ID) const
+const fvec3 FabiEngine3D::aabb_getPosition(const string& ID) const
 {
 	if(_core->_aabbEntityManager.getEntity(ID)->hasParent())
 	{
@@ -13,7 +13,7 @@ const Vec3 FabiEngine3D::aabb_getPosition(const string& ID) const
 	}
 }
 
-const Vec3 FabiEngine3D::aabb_getSize(const string& ID) const
+const fvec3 FabiEngine3D::aabb_getSize(const string& ID) const
 {
 	if(_core->_aabbEntityManager.getEntity(ID)->hasParent())
 	{

@@ -39,8 +39,8 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile() const
 	{
 		// Data placeholders
 		string billboardID, diffuseMapPath, emissionMapPath;
-		Vec2 size;
-		Vec3 color;
+		fvec2 size;
+		fvec3 color;
 		bool facingX, facingY;
 
 		// For file extraction
@@ -131,8 +131,8 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile() const
 	{
 		// Data placeholders
 		string billboardID, diffuseMapPath, fontPath;
-		Vec2 size;
-		Vec3 color;
+		fvec2 size;
+		fvec3 color;
 		bool facingX, facingY, isReflected, isShadowed;
 
 		// For file extraction
@@ -212,8 +212,8 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 	{
 		// Data placeholders
 		string billboardID, diffuseMapPath, emissionMapPath, fontPath, textContent;
-		Vec2 size;
-		Vec3 color;
+		fvec2 size;
+		fvec3 color;
 		float lightness, textureRepeat;
 		bool isFacingX, isFacingY, isReflected, isShadowed, isAnimationStarted;
 		unsigned int animationRowCount, animationColumnCount, animationFramestep;

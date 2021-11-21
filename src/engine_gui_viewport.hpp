@@ -6,12 +6,12 @@
 class EngineGuiViewport final
 {
 public:
-	EngineGuiViewport(FabiEngine3D& fe3d, const string& ID, Vec2 position, Vec2 size, Vec3 color);
+	EngineGuiViewport(FabiEngine3D& fe3d, const string& ID, fvec2 position, fvec2 size, fvec3 color);
 	~EngineGuiViewport();
 
 	// Voids
 	void update(bool hoverable);
-	void createWindow(const string& ID, Vec2 position, Vec2 size, Vec3 color);
+	void createWindow(const string& ID, fvec2 position, fvec2 size, fvec3 color);
 	void deleteWindow(const string& ID);
 
 	// Strings

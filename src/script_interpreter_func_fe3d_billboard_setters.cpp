@@ -31,7 +31,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 			{
 				// Copy preview billboard
 				_worldEditor.copyPreviewBillboard(arguments[0].getString(), ("@" + arguments[1].getString()),
-												  Vec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
+												  fvec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
 
 				// Stop animation if started
 				if(_fe3d.billboard_isSpriteAnimationStarted(arguments[0].getString()))
@@ -85,7 +85,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				_fe3d.billboard_setPosition(arguments[0].getString(),
-												  Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+												  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -101,7 +101,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				_fe3d.billboard_setRotation(arguments[0].getString(),
-												  Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+												  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -116,7 +116,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				_fe3d.billboard_setSize(arguments[0].getString(), Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				_fe3d.billboard_setSize(arguments[0].getString(), fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -132,7 +132,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				_fe3d.billboard_move(arguments[0].getString(),
-										   Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+										   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -148,7 +148,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				_fe3d.billboard_rotate(arguments[0].getString(),
-											 Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+											 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -163,7 +163,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				_fe3d.billboard_scale(arguments[0].getString(), Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				_fe3d.billboard_scale(arguments[0].getString(), fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -179,7 +179,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				_fe3d.billboard_moveTo(arguments[0].getString(),
-											 Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
+											 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -195,7 +195,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				_fe3d.billboard_rotateTo(arguments[0].getString(),
-											   Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
+											   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -211,7 +211,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				_fe3d.billboard_scaleTo(arguments[0].getString(),
-											  Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()), arguments[3].getDecimal());
+											  fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()), arguments[3].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -227,7 +227,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				_fe3d.billboard_setColor(arguments[0].getString(),
-											   Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+											   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

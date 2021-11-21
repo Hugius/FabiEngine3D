@@ -39,9 +39,9 @@ public:
 	void addPointlightToCustomWorld(const string& ID);
 	void addSpotlightToCustomWorld(const string& ID);
 	void addReflectionToCustomWorld(const string& ID);
-	void copyPreviewModel(const string& newID, const string& previewID, Vec3 position);
-	void copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position);
-	void copyPreviewSound(const string& newID, const string& previewID, Vec3 position);
+	void copyPreviewModel(const string& newID, const string& previewID, fvec3 position);
+	void copyPreviewBillboard(const string& newID, const string& previewID, fvec3 position);
+	void copyPreviewSound(const string& newID, const string& previewID, fvec3 position);
 	void clearCurrentWorld();
 
 	// Strings
@@ -145,9 +145,9 @@ private:
 	const bool _copyPreviewSky(const string& newID, const string& previewID);
 	const bool _copyPreviewTerrain(const string& newID, const string& previewID);
 	const bool _copyPreviewWater(const string& newID, const string& previewID);
-	const bool _copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool isFromOutside);
-	const bool _copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool isFromOutside);
-	const bool _copyPreviewSound(const string& newID, const string& previewID, Vec3 position, bool isFromOutside);
+	const bool _copyPreviewModel(const string& newID, const string& previewID, fvec3 position, bool isFromOutside);
+	const bool _copyPreviewBillboard(const string& newID, const string& previewID, fvec3 position, bool isFromOutside);
+	const bool _copyPreviewSound(const string& newID, const string& previewID, fvec3 position, bool isFromOutside);
 
 	// Strings
 	static inline const string PREVIEW_SPEAKER_ID = "@@previewSpeaker";
@@ -164,9 +164,9 @@ private:
 	map<string, string> _outsideLoadedBillboardIDs;
 	map<string, string> _loadedSoundIDs;
 	map<string, string> _outsideLoadedSoundIDs;
-	map<string, Vec3> _initialModelPosition;
-	map<string, Vec3> _initialModelRotation;
-	map<string, Vec3> _initialModelSize;
+	map<string, fvec3> _initialModelPosition;
+	map<string, fvec3> _initialModelRotation;
+	map<string, fvec3> _initialModelSize;
 	vector<string> _customWorldModelIDs;
 	vector<string> _customWorldBillboardIDs;
 	vector<string> _customWorldAabbIDs;
@@ -205,24 +205,24 @@ private:
 	string _currentWorldID = "";
 
 	// Vectors
-	static inline const Vec3 DEFAULT_SPEAKER_SIZE = Vec3(1.0f, 1.0f, 1.0f);
-	static inline const Vec3 DEFAULT_SPEAKER_AABB_SIZE = Vec3(1.05f, 1.05f, 0.9f);
-	static inline const Vec3 DEFAULT_LAMP_SIZE = Vec3(1.0f, 1.0f, 1.0f);
-	static inline const Vec3 DEFAULT_LAMP_AABB_SIZE = Vec3(0.6f, 1.0f, 0.6f);
-	static inline const Vec3 DEFAULT_TORCH_SIZE = Vec3(1.0f, 1.0f, 1.0f);
-	static inline const Vec3 DEFAULT_TORCH_AABB_SIZE = Vec3(1.0f, 0.25f, 0.3f);
-	static inline const Vec3 DEFAULT_CAMERA_SIZE = Vec3(1.0f, 1.0f, 1.0f);
-	static inline const Vec3 DEFAULT_CAMERA_AABB_SIZE = Vec3(1.0f, 1.0f, 1.0f);
-	static inline const Vec3 MODEL_TERRAIN_OFFSET = Vec3(0.0f, 0.0f, 0.0f);
-	static inline const Vec3 BILLBOARD_TERRAIN_OFFSET = Vec3(0.0f, 0.0f, 0.0f);
-	static inline const Vec3 SOUND_TERRAIN_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
-	static inline const Vec3 POINTLIGHT_TERRAIN_OFFSET = Vec3(0.0f, 1.5f, 0.0f);
-	static inline const Vec3 SPOTLIGHT_TERRAIN_OFFSET = Vec3(0.0f, 1.5f, 0.0f);
-	static inline const Vec3 REFLECTION_TERRAIN_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
-	static inline const Vec3 SPEAKER_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
-	static inline const Vec3 LAMP_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
-	static inline const Vec3 TORCH_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
-	static inline const Vec3 CAMERA_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
+	static inline const fvec3 DEFAULT_SPEAKER_SIZE = fvec3(1.0f, 1.0f, 1.0f);
+	static inline const fvec3 DEFAULT_SPEAKER_AABB_SIZE = fvec3(1.05f, 1.05f, 0.9f);
+	static inline const fvec3 DEFAULT_LAMP_SIZE = fvec3(1.0f, 1.0f, 1.0f);
+	static inline const fvec3 DEFAULT_LAMP_AABB_SIZE = fvec3(0.6f, 1.0f, 0.6f);
+	static inline const fvec3 DEFAULT_TORCH_SIZE = fvec3(1.0f, 1.0f, 1.0f);
+	static inline const fvec3 DEFAULT_TORCH_AABB_SIZE = fvec3(1.0f, 0.25f, 0.3f);
+	static inline const fvec3 DEFAULT_CAMERA_SIZE = fvec3(1.0f, 1.0f, 1.0f);
+	static inline const fvec3 DEFAULT_CAMERA_AABB_SIZE = fvec3(1.0f, 1.0f, 1.0f);
+	static inline const fvec3 MODEL_TERRAIN_OFFSET = fvec3(0.0f, 0.0f, 0.0f);
+	static inline const fvec3 BILLBOARD_TERRAIN_OFFSET = fvec3(0.0f, 0.0f, 0.0f);
+	static inline const fvec3 SOUND_TERRAIN_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
+	static inline const fvec3 POINTLIGHT_TERRAIN_OFFSET = fvec3(0.0f, 1.5f, 0.0f);
+	static inline const fvec3 SPOTLIGHT_TERRAIN_OFFSET = fvec3(0.0f, 1.5f, 0.0f);
+	static inline const fvec3 REFLECTION_TERRAIN_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
+	static inline const fvec3 SPEAKER_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
+	static inline const fvec3 LAMP_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
+	static inline const fvec3 TORCH_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
+	static inline const fvec3 CAMERA_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
 
 	// Decimals
 	static inline const float DEFAULT_SOUND_MAX_VOLUME = 1.0f;

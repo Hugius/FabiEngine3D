@@ -17,7 +17,7 @@ public:
 	shared_ptr<EngineGuiViewport> getViewport(const string& ID);
 
 	// Vectors
-	static inline const Vec3 FRAME_COLOR = Vec3(0.025f);
+	static inline const fvec3 FRAME_COLOR = fvec3(0.025f);
 
 private:
 	// Miscellaneous

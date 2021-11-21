@@ -60,7 +60,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetterFunction(const string& functi
 			// Validate sky existence
 			if(_validateFe3dSky())
 			{
-				_fe3d.sky_setColor(_fe3d.sky_getSelectedID(), Vec3(
+				_fe3d.sky_setColor(_fe3d.sky_getSelectedID(), fvec3(
 					arguments[0].getDecimal(),
 					arguments[1].getDecimal(),
 					arguments[2].getDecimal()));

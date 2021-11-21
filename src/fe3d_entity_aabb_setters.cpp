@@ -46,42 +46,42 @@ void FabiEngine3D::aabb_setFollowParentVisibility(const string& ID, bool mustFol
 	_core->_aabbEntityManager.getEntity(ID)->setFollowParentVisibility(mustFollow);
 }
 
-void FabiEngine3D::aabb_setLocalPosition(const string& ID, Vec3 position)
+void FabiEngine3D::aabb_setLocalPosition(const string& ID, fvec3 position)
 {
 	_core->_aabbEntityManager.getEntity(ID)->setLocalPosition(position);
 }
 
-void FabiEngine3D::aabb_setLocalSize(const string& ID, Vec3 size)
+void FabiEngine3D::aabb_setLocalSize(const string& ID, fvec3 size)
 {
 	_core->_aabbEntityManager.getEntity(ID)->setLocalSize(size);
 }
 
-void FabiEngine3D::aabb_setBasePosition(const string& ID, Vec3 position)
+void FabiEngine3D::aabb_setBasePosition(const string& ID, fvec3 position)
 {
 	_core->_aabbEntityManager.getEntity(ID)->setPosition(position);
 }
 
-void FabiEngine3D::aabb_setBaseSize(const string& ID, Vec3 size)
+void FabiEngine3D::aabb_setBaseSize(const string& ID, fvec3 size)
 {
 	_core->_aabbEntityManager.getEntity(ID)->setSize(size);
 }
 
-void FabiEngine3D::aabb_move(const string& ID, Vec3 change)
+void FabiEngine3D::aabb_move(const string& ID, fvec3 change)
 {
 	_core->_aabbEntityManager.getEntity(ID)->move(change);
 }
 
-void FabiEngine3D::aabb_scale(const string& ID, Vec3 change)
+void FabiEngine3D::aabb_scale(const string& ID, fvec3 change)
 {
 	_core->_aabbEntityManager.getEntity(ID)->scale(change);
 }
 
-void FabiEngine3D::aabb_moveTo(const string& ID, Vec3 target, float speed)
+void FabiEngine3D::aabb_moveTo(const string& ID, fvec3 target, float speed)
 {
 	_core->_aabbEntityManager.getEntity(ID)->moveTo(target, speed);
 }
 
-void FabiEngine3D::aabb_scaleTo(const string& ID, Vec3 target, float speed)
+void FabiEngine3D::aabb_scaleTo(const string& ID, fvec3 target, float speed)
 {
 	_core->_aabbEntityManager.getEntity(ID)->scaleTo(target, speed);
 }

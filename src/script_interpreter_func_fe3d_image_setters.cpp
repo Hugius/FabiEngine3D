@@ -42,9 +42,9 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			_fe3d.image_setDiffuseMap(ID, filePath);
 
 			// Set properties
-			_fe3d.image_setPosition(ID, _convertGuiPositionToViewport(Vec2(arguments[2].getDecimal(), arguments[3].getDecimal())));
+			_fe3d.image_setPosition(ID, _convertGuiPositionToViewport(fvec2(arguments[2].getDecimal(), arguments[3].getDecimal())));
 			_fe3d.image_setRotation(ID, arguments[4].getDecimal());
-			_fe3d.image_setSize(ID, _convertGuiSizeToViewport(Vec2(arguments[5].getDecimal(), arguments[6].getDecimal())));
+			_fe3d.image_setSize(ID, _convertGuiSizeToViewport(fvec2(arguments[5].getDecimal(), arguments[6].getDecimal())));
 
 			// In-engine viewport boundaries
 			if(!Config::getInst().isApplicationExported())
@@ -99,7 +99,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				Vec2 position = _convertGuiPositionToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				fvec2 position = _convertGuiPositionToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				_fe3d.image_setPosition(arguments[0].getString(), position);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -115,7 +115,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				Vec2 change = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				fvec2 change = _convertGuiSizeToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				_fe3d.image_move(arguments[0].getString(), change);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -131,8 +131,8 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				Vec2 target = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				Vec2 speed = _convertGuiSizeToViewport(Vec2(arguments[3].getDecimal(), arguments[3].getDecimal()));
+				fvec2 target = _convertGuiSizeToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				fvec2 speed = _convertGuiSizeToViewport(fvec2(arguments[3].getDecimal(), arguments[3].getDecimal()));
 				_fe3d.image_moveTo(arguments[0].getString(), target, speed.x);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -193,7 +193,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				Vec2 size = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				fvec2 size = _convertGuiSizeToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				_fe3d.image_setSize(arguments[0].getString(), size);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -209,7 +209,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				Vec2 change = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				fvec2 change = _convertGuiSizeToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				_fe3d.image_scale(arguments[0].getString(), change);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -225,8 +225,8 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				Vec2 target = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				Vec2 speed = _convertGuiSizeToViewport(Vec2(arguments[3].getDecimal(), arguments[3].getDecimal()));
+				fvec2 target = _convertGuiSizeToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				fvec2 speed = _convertGuiSizeToViewport(fvec2(arguments[3].getDecimal(), arguments[3].getDecimal()));
 				_fe3d.image_scaleTo(arguments[0].getString(), target, speed.x);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -243,7 +243,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.image_setColor(arguments[0].getString(),
-										   Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+										   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

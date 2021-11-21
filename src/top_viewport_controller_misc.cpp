@@ -165,7 +165,7 @@ const bool TopViewportController::_prepareProjectChoosing(const string& title) c
 	auto projectIDs = Tools::getDirectoriesFromDirectory(projectDirectoryPath);
 
 	// Add buttons
-	_gui.getGlobalScreen()->createChoiceForm("projectList", title, Vec2(0.0f, 0.1f), projectIDs);
+	_gui.getGlobalScreen()->createChoiceForm("projectList", title, fvec2(0.0f, 0.1f), projectIDs);
 
 	return true;
 }
@@ -255,7 +255,7 @@ void TopViewportController::_updateProjectDeleting()
 		// Check if user clicked a project ID
 		if(clickedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 			chosenButtonID = clickedButtonID;
 			_gui.getGlobalScreen()->deleteChoiceForm("projectList");
 		}

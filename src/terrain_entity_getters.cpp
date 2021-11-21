@@ -95,22 +95,22 @@ const string& TerrainEntity::getNormalMapPathB() const
 	return _normalMapPathB;
 }
 
-const vector<Vec3>& TerrainEntity::getVertices() const
+const vector<fvec3>& TerrainEntity::getVertices() const
 {
 	return _vertices;
 }
 
-const vector<Vec2>& TerrainEntity::getUvCoords() const
+const vector<fvec2>& TerrainEntity::getUvCoords() const
 {
 	return _uvCoords;
 }
 
-const Vec3 TerrainEntity::getWireframeColor() const
+const fvec3 TerrainEntity::getWireframeColor() const
 {
 	return _wireframeColor;
 }
 
-const vector<Vec3>& TerrainEntity::getNormals() const
+const vector<fvec3>& TerrainEntity::getNormals() const
 {
 	return _normals;
 }

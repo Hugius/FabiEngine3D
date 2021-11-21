@@ -4,37 +4,37 @@
 
 struct Ivec4;
 
-struct Vec4 final
+struct fvec4 final
 {
-	Vec4();
-	Vec4(const Ivec4& other);
-	Vec4(const float value);
-	Vec4(const float x, const float y, const float z, const float w);
+	fvec4();
+	fvec4(const Ivec4& other);
+	fvec4(const float value);
+	fvec4(const float x, const float y, const float z, const float w);
 
 	// Voids
-	void operator+=(const Vec4& v);
-	void operator-=(const Vec4& v);
-	void operator*=(const Vec4& v);
-	void operator/=(const Vec4& v);
+	void operator+=(const fvec4& v);
+	void operator-=(const fvec4& v);
+	void operator*=(const fvec4& v);
+	void operator/=(const fvec4& v);
 	void operator+=(const float& value);
 	void operator-=(const float& value);
 	void operator/=(const float& value);
 	void operator*=(const float& value);
 
 	// Vectors
-	const Vec4 operator-() const;
-	const Vec4 operator+(const Vec4& v) const;
-	const Vec4 operator-(const Vec4& v) const;
-	const Vec4 operator*(const Vec4& v) const;
-	const Vec4 operator/(const Vec4& v) const;
-	const Vec4 operator+(const float& value) const;
-	const Vec4 operator-(const float& value) const;
-	const Vec4 operator/(const float& value) const;
-	const Vec4 operator*(const float& value) const;
+	const fvec4 operator-() const;
+	const fvec4 operator+(const fvec4& v) const;
+	const fvec4 operator-(const fvec4& v) const;
+	const fvec4 operator*(const fvec4& v) const;
+	const fvec4 operator/(const fvec4& v) const;
+	const fvec4 operator+(const float& value) const;
+	const fvec4 operator-(const float& value) const;
+	const fvec4 operator/(const float& value) const;
+	const fvec4 operator*(const float& value) const;
 
 	// Booleans
-	const bool operator==(const Vec4& other) const;
-	const bool operator!=(const Vec4& other) const;
+	const bool operator==(const fvec4& other) const;
+	const bool operator!=(const fvec4& other) const;
 
 	// Miscellaneous
 	union

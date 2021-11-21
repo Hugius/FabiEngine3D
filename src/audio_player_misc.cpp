@@ -63,10 +63,10 @@ void AudioPlayer::update(Camera& camera, vector<Sound>& soundList, vector<Music>
 
 					// Panning
 					auto cameraDirection = camera.getFrontVector();
-					Matrix44 rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(90.0f));
-					Vec3 soundDirection = (cameraPosition - sound.getPosition());
-					Vec4 result = (rotationMatrix * Vec4(soundDirection.x, soundDirection.y, soundDirection.z, 1.0f));
-					soundDirection = Vec3(result.x, result.y, result.z);
+					mat44 rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(90.0f));
+					fvec3 soundDirection = (cameraPosition - sound.getPosition());
+					fvec4 result = (rotationMatrix * fvec4(soundDirection.x, soundDirection.y, soundDirection.z, 1.0f));
+					soundDirection = fvec3(result.x, result.y, result.z);
 					soundDirection = Math::normalize(soundDirection);
 					float dot = Math::calculateDotProduct(soundDirection, cameraDirection);
 					float range = ((dot / 2.0f) + 0.5f);

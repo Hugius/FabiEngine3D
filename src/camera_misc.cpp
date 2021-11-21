@@ -14,7 +14,7 @@ void Camera::moveFollowX(float value)
 
 void Camera::moveFollowZ(float value)
 {
-	Vec3 tempFront = _frontVector;
+	fvec3 tempFront = _frontVector;
 	tempFront.x = cos(Math::convertToRadians(_yaw));
 	tempFront.z = sin(Math::convertToRadians(_yaw));
 	_position.x += (tempFront.x * value);
@@ -132,22 +132,22 @@ void Camera::setAspectRatio(float value)
 	_aspectRatio = max(0.0f, value);
 }
 
-const Vec3 Camera::getPosition() const
+const fvec3 Camera::getPosition() const
 {
 	return _position;
 }
 
-const Vec3 Camera::getFrontVector() const
+const fvec3 Camera::getFrontVector() const
 {
 	return _frontVector;
 }
 
-const Vec3 Camera::getRightVector() const
+const fvec3 Camera::getRightVector() const
 {
 	return _rightVector;
 }
 
-const Vec3 Camera::getThirdPersonLookat() const
+const fvec3 Camera::getThirdPersonLookat() const
 {
 	return _thirdPersonLookat;
 }
@@ -222,7 +222,7 @@ const bool Camera::isThirdPersonViewEnabled() const
 	return _isThirdPersonViewEnabled;
 }
 
-void Camera::move(Vec3 value)
+void Camera::move(fvec3 value)
 {
 	_position += value;
 }
@@ -232,12 +232,12 @@ void Camera::invertUpVector()
 	_upVector *= -1.0f;
 }
 
-void Camera::setPosition(Vec3 value)
+void Camera::setPosition(fvec3 value)
 {
 	_position = value;
 }
 
-void Camera::setThirdPersonLookat(Vec3 value)
+void Camera::setThirdPersonLookat(fvec3 value)
 {
 	_thirdPersonLookat = value;
 }
@@ -247,17 +247,17 @@ void Camera::notifyCursorCenter()
 	_cursorIsBeingCentered = true;
 }
 
-const Matrix44& Camera::getViewMatrix() const
+const mat44& Camera::getViewMatrix() const
 {
 	return _viewMatrix;
 }
 
-const Matrix44& Camera::getProjectionMatrix() const
+const mat44& Camera::getProjectionMatrix() const
 {
 	return _projectionMatrix;
 }
 
-const Vec3 Camera::getUpVector() const
+const fvec3 Camera::getUpVector() const
 {
 	return _upVector;
 }

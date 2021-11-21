@@ -10,7 +10,7 @@ public:
 	Raycaster(RenderBus& renderBus, TerrainEntityManager& terrainManager);
 
 	// Voids
-	void update(Ivec2 cursorPosition);
+	void update(ivec2 cursorPosition);
 	void setTerrainPointingEnabled(bool enabled);
 	void setTerrainPointingDistance(float distance);
 	void setTerrainPointingPrecision(float precision);
@@ -22,27 +22,27 @@ public:
 
 	// Vectors
 	const Ray getCursorRay() const;
-	const Vec3 getTerrainPoint() const;
-	const Vec3 getPointOnRay(Ray ray, float distance) const;
+	const fvec3 getTerrainPoint() const;
+	const fvec3 getPointOnRay(Ray ray, float distance) const;
 
 	// Booleans
 	const bool isTerrainPointingEnabled() const;
 
 private:
 	// Vectors
-	const Vec4 _convertToViewSpace(Vec4 clipCoords) const;
-	const Vec3 _convertToWorldSpace(Vec4 viewCoords) const;
-	const Vec3 _calculateTerrainPoint() const;
+	const fvec4 _convertToViewSpace(fvec4 clipCoords) const;
+	const fvec3 _convertToWorldSpace(fvec4 viewCoords) const;
+	const fvec3 _calculateTerrainPoint() const;
 
 	// Booleans
 	const bool _isUnderTerrain(float distance) const;
 
 	// Miscellaneous
-	const Ray _calculateCursorRay(Ivec2 cursorPosition) const;
+	const Ray _calculateCursorRay(ivec2 cursorPosition) const;
 
 	// Vectors
-	Ray _cursorRay = Ray(Vec3(0.0f), Vec3(0.0f));
-	Vec3 _terrainPoint = Vec3(0.0f);
+	Ray _cursorRay = Ray(fvec3(0.0f), fvec3(0.0f));
+	fvec3 _terrainPoint = fvec3(0.0f);
 
 	// Decimals
 	float _terrainPointingDistance = 0.0f;

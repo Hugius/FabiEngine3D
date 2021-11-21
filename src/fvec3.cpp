@@ -1,5 +1,5 @@
-#include "vector3.hpp"
-#include "ivector3.hpp"
+#include "fvec3.hpp"
+#include "ivec3.hpp"
 
 fvec3::fvec3()
 {

@@ -1,5 +1,5 @@
-#include "vector2.hpp"
-#include "ivector2.hpp"
+#include "fvec2.hpp"
+#include "ivec2.hpp"
 
 fvec2::fvec2()
 {

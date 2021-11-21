@@ -1,5 +1,5 @@
-#include "vector4.hpp"
-#include "ivector4.hpp"
+#include "fvec4.hpp"
+#include "ivec4.hpp"
 
 fvec4::fvec4()
 {
@@ -8,7 +8,7 @@ fvec4::fvec4()
 	this->z = 0.0f;
 }
 
-fvec4::fvec4(const Ivec4& other)
+fvec4::fvec4(const ivec4& other)
 {
 	this->x = static_cast<float>(other.x);
 	this->y = static_cast<float>(other.y);

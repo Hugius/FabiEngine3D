@@ -1,12 +1,13 @@
 #pragma once
 
-#include "vector4.hpp"
-
-struct mat33;
+#include "fvec4.hpp"
+#include "mat22.hpp"
+#include "mat33.hpp"
 
 struct mat44 final
 {
 	mat44();
+	mat44(const mat22& other);
 	mat44(const mat33& other);
 	mat44(const float value);
 	mat44

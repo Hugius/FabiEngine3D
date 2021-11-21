@@ -1,13 +1,20 @@
 #pragma once
 
-#include <cmath>
-
-struct fvec3;
+#include "ivec2.hpp"
+#include "ivec4.hpp"
+#include "fvec2.hpp"
+#include "fvec3.hpp"
+#include "fvec4.hpp"
 
 struct ivec3 final
 {
 	ivec3();
+	ivec3(const ivec2& other);
+	ivec3(const ivec3& other);
+	ivec3(const ivec4& other);
+	ivec3(const fvec2& other);
 	ivec3(const fvec3& other);
+	ivec3(const fvec4& other);
 	ivec3(const int value);
 	ivec3(const int x, const int y, const int z);
 

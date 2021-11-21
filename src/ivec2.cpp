@@ -1,5 +1,5 @@
-#include "ivector2.hpp"
-#include "vector2.hpp"
+#include "ivec2.hpp"
+#include "fvec2.hpp"
 
 ivec2::ivec2()
 {
@@ -7,7 +7,37 @@ ivec2::ivec2()
 	this->y = 0;
 }
 
+ivec2::ivec2(const ivec2& other)
+{
+	this->x = other.x;
+	this->y = other.y;
+}
+
+ivec2::ivec2(const ivec3& other)
+{
+	this->x = other.x;
+	this->y = other.y;
+}
+
+ivec2::ivec2(const ivec4& other)
+{
+	this->x = other.x;
+	this->y = other.y;
+}
+
 ivec2::ivec2(const fvec2& other)
+{
+	this->x = static_cast<int>(other.x);
+	this->y = static_cast<int>(other.y);
+}
+
+ivec2::ivec2(const fvec3& other)
+{
+	this->x = static_cast<int>(other.x);
+	this->y = static_cast<int>(other.y);
+}
+
+ivec2::ivec2(const fvec4& other)
 {
 	this->x = static_cast<int>(other.x);
 	this->y = static_cast<int>(other.y);

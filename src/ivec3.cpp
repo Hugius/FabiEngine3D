@@ -1,5 +1,5 @@
-#include "ivector3.hpp"
-#include "vector3.hpp"
+#include "ivec3.hpp"
+#include "fvec3.hpp"
 
 ivec3::ivec3()
 {
@@ -8,7 +8,42 @@ ivec3::ivec3()
 	this->z = 0;
 }
 
+ivec3::ivec3(const ivec2& other)
+{
+	this->x = other.x;
+	this->y = other.y;
+	this->z = 0;
+}
+
+ivec3::ivec3(const ivec3& other)
+{
+	this->x = other.x;
+	this->y = other.y;
+	this->z = other.z;
+}
+
+ivec3::ivec3(const ivec4& other)
+{
+	this->x = other.x;
+	this->y = other.y;
+	this->z = other.z;
+}
+
+ivec3::ivec3(const fvec2& other)
+{
+	this->x = static_cast<int>(other.x);
+	this->y = static_cast<int>(other.y);
+	this->z = 0;
+}
+
 ivec3::ivec3(const fvec3& other)
+{
+	this->x = static_cast<int>(other.x);
+	this->y = static_cast<int>(other.y);
+	this->z = static_cast<int>(other.z);
+}
+
+ivec3::ivec3(const fvec4& other)
 {
 	this->x = static_cast<int>(other.x);
 	this->y = static_cast<int>(other.y);

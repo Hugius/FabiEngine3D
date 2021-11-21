@@ -19,29 +19,31 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\ivector2.hpp" />
-    <ClInclude Include="..\..\..\src\ivector3.hpp" />
-    <ClInclude Include="..\..\..\src\ivector4.hpp" />
+    <ClInclude Include="..\..\..\src\ivec2.hpp" />
+    <ClInclude Include="..\..\..\src\ivec3.hpp" />
+    <ClInclude Include="..\..\..\src\ivec4.hpp" />
+    <ClInclude Include="..\..\..\src\mat22.hpp" />
     <ClInclude Include="..\..\..\src\mathematics.hpp" />
-    <ClInclude Include="..\..\..\src\matrix33.hpp" />
-    <ClInclude Include="..\..\..\src\matrix44.hpp" />
-    <ClInclude Include="..\..\..\src\vector2.hpp" />
-    <ClInclude Include="..\..\..\src\vector3.hpp" />
-    <ClInclude Include="..\..\..\src\vector4.hpp" />
+    <ClInclude Include="..\..\..\src\mat33.hpp" />
+    <ClInclude Include="..\..\..\src\mat44.hpp" />
+    <ClInclude Include="..\..\..\src\fvec2.hpp" />
+    <ClInclude Include="..\..\..\src\fvec3.hpp" />
+    <ClInclude Include="..\..\..\src\fvec4.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\ivector2.cpp" />
-    <ClCompile Include="..\..\..\src\ivector3.cpp" />
-    <ClCompile Include="..\..\..\src\ivector4.cpp" />
+    <ClCompile Include="..\..\..\src\ivec2.cpp" />
+    <ClCompile Include="..\..\..\src\ivec3.cpp" />
+    <ClCompile Include="..\..\..\src\ivec4.cpp" />
+    <ClCompile Include="..\..\..\src\mat22.cpp" />
     <ClCompile Include="..\..\..\src\mathematics_matrix_creation.cpp" />
     <ClCompile Include="..\..\..\src\mathematics_matrix_misc.cpp" />
     <ClCompile Include="..\..\..\src\mathematics_misc.cpp" />
     <ClCompile Include="..\..\..\src\mathematics_vector.cpp" />
-    <ClCompile Include="..\..\..\src\matrix33.cpp" />
-    <ClCompile Include="..\..\..\src\matrix44.cpp" />
-    <ClCompile Include="..\..\..\src\vector2.cpp" />
-    <ClCompile Include="..\..\..\src\vector3.cpp" />
-    <ClCompile Include="..\..\..\src\vector4.cpp" />
+    <ClCompile Include="..\..\..\src\mat33.cpp" />
+    <ClCompile Include="..\..\..\src\mat44.cpp" />
+    <ClCompile Include="..\..\..\src\fvec2.cpp" />
+    <ClCompile Include="..\..\..\src\fvec3.cpp" />
+    <ClCompile Include="..\..\..\src\fvec4.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -1,8 +1,6 @@
 #pragma once
 
-#include <cmath>
-
-struct ivec3;
+#include "ivec3.hpp"
 
 struct fvec3 final
 {

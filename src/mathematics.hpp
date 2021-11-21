@@ -1,12 +1,14 @@
 #pragma once
 
-#include "ivector2.hpp"
-#include "ivector3.hpp"
-#include "vector2.hpp"
-#include "vector3.hpp"
-#include "vector4.hpp"
-#include "matrix33.hpp"
-#include "matrix44.hpp"
+#include "ivec2.hpp"
+#include "ivec3.hpp"
+#include "ivec4.hpp"
+#include "fvec2.hpp"
+#include "fvec3.hpp"
+#include "fvec4.hpp"
+#include "mat22.hpp"
+#include "mat33.hpp"
+#include "mat44.hpp"
 #include "direction_order.hpp"
 
 #include <vector>

@@ -5,36 +5,36 @@ void WorldEditor::_updateModelEditing()
 	// Temporary values
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
-	// Reset selected model from last frame
-	if(!_dontResetSelectedModel)
-	{
-		_selectedModelID = "";
-	}
-	else
-	{
-		_dontResetSelectedModel = false;
-	}
-
-	// User must not be in placement mode
+	// User must not be placing anything
 	if(_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
+		// Reset selected model from last frame
+		if(!_dontResetSelectedModel)
+		{
+			_selectedModelID = "";
+		}
+		else
+		{
+			_dontResetSelectedModel = false;
+		}
+
 		// Check which entity is selected
 		auto hoveredID = _fe3d.raycast_checkCursorInAny().first;
 
 		// Check if user selected a model
-		for(const auto& entityID : _fe3d.modelEntity_getAllIDs())
+		for(const auto& ID : _fe3d.modelEntity_getAllIDs())
 		{
 			// Must not be preview entity
-			if(entityID[0] != '@')
+			if(ID[0] != '@')
 			{
-				bool hovered = (hoveredID.size() >= entityID.size()) && (hoveredID.substr(0, entityID.size()) == entityID);
+				bool hovered = (hoveredID.size() >= ID.size()) && (hoveredID.substr(0, ID.size()) == ID);
 
 				// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
 				if(hovered && _fe3d.misc_isCursorInsideViewport() &&
 				   !_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Select hovered model
-					_selectModel(entityID);
+					_selectModel(ID);
 
 					// Check if user clicked model
 					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -48,14 +48,10 @@ void WorldEditor::_updateModelEditing()
 				}
 				else
 				{
-					// Don't reset if model is active or selected
-					if((entityID != _activeModelID) && (entityID != _selectedModelID))
+					// Unselect if necessary
+					if((ID != _selectedModelID) && (ID != _activeModelID))
 					{
-						// Reset all parts
-						for(const auto& partID : _fe3d.modelEntity_getPartIDs(entityID))
-						{
-							_fe3d.modelEntity_setColorInversion(entityID, partID, 0.0f);
-						}
+						_unselectModel(ID);
 					}
 				}
 			}
@@ -80,12 +76,12 @@ void WorldEditor::_updateModelEditing()
 			}
 		}
 
-		// Update model blinking
+		// Update model highlighting
 		if(_selectedModelID != _activeModelID)
 		{
-			_updateModelBlinking(_selectedModelID, _selectedModelInversionDirection);
+			_updateModelHighlighting(_selectedModelID, _selectedModelHighlightDirection);
 		}
-		_updateModelBlinking(_activeModelID, _activeModelInversionDirection);
+		_updateModelHighlighting(_activeModelID, _activeModelHighlightDirection);
 
 		// Update properties screen
 		if(_activeModelID != "")
@@ -299,24 +295,6 @@ void WorldEditor::_updateModelEditing()
 		if(_selectedModelID.empty() && _activeModelID.empty())
 		{
 			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
-		}
-	}
-	else
-	{
-		if(rightWindow->getActiveScreen()->getID() != "main")
-		{
-			// Reset when user wants to place models again
-			for(const auto& entityID : _fe3d.modelEntity_getAllIDs())
-			{
-				// Check if not preview entity
-				if(entityID[0] != '@')
-				{
-					rightWindow->setActiveScreen("worldEditorControls");
-					_selectedModelInversionDirection = 1;
-					_activeModelID = "";
-					_selectedModelID = "";
-				}
-			}
 		}
 	}
 }

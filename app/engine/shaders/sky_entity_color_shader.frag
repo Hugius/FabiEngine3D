@@ -2,7 +2,7 @@
 #extension GL_ARB_explicit_uniform_location : require
 
 // Constant variables
-#define FRAME_COLOR vec3(1.0f, 1.0f, 1.0f)
+#define WIREFRAME_COLOR vec3(1.0f, 1.0f, 1.0f)
 
 // In variables
 in vec3 f_uv;
@@ -33,7 +33,7 @@ void main()
 	// Wireframe color
 	if(u_isWireframed)
 	{
-		o_primaryColor = vec4(FRAME_COLOR, 1.0f);
+		o_primaryColor = vec4(WIREFRAME_COLOR, 1.0f);
 		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 		return;
 	}

@@ -93,21 +93,29 @@ void AnimationEditor::_updateMiscellaneous()
 			}
 		}
 
-		// Wireframe model rendering
+		// Update wireframe model rendering
 		if(!_currentAnimationID.empty())
 		{
-			const auto modelID = _getAnimation(_currentAnimationID)->getPreviewModelID();
-			if(_fe3d.modelEntity_isExisting(modelID))
+			// Temporary values
+			const auto animation = _getAnimation(_currentAnimationID);
+
+			// Check if animation has preview model
+			if(_fe3d.modelEntity_isExisting(animation->getPreviewModelID()))
 			{
+				// Check if F is pressed
 				if(_fe3d.input_isKeyPressed(InputType::KEY_F))
 				{
-					if(_fe3d.modelEntity_isWireframed(modelID))
+					// For every part
+					for(const auto& partID : animation->getPartIDs())
 					{
-						_fe3d.modelEntity_setWireframed(modelID, false);
-					}
-					else
-					{
-						_fe3d.modelEntity_setWireframed(modelID, true);
+						if(_fe3d.modelEntity_isWireframed(animation->getPreviewModelID(), partID))
+						{
+							_fe3d.modelEntity_setWireframed(animation->getPreviewModelID(), partID, false);
+						}
+						else
+						{
+							_fe3d.modelEntity_setWireframed(animation->getPreviewModelID(), partID, true);
+						}
 					}
 				}
 			}
@@ -224,30 +232,30 @@ void AnimationEditor::_updateMiscellaneous()
 			}
 		}
 
-		// Update hovered model part inversion
+		// Update model part highlighting
 		auto partID = (_hoveredPartID.empty() ? _currentPartID : _hoveredPartID);
 		if(partID.empty())
 		{
-			_selectedPartInversionDirection = 1; // Reset direction
+			_selectedPartHighlightDirection = 1; // Reset direction
 		}
 		else
 		{
-			// Check if inversion reached minimum
-			if(_fe3d.modelEntity_getColorInversion(currentAnimation->getPreviewModelID(), partID) == 0.0f)
+			// Check if wireframe color reached minimum
+			if(_fe3d.modelEntity_getWireframeColor(currentAnimation->getPreviewModelID(), partID) == 0.0f)
 			{
-				_selectedPartInversionDirection *= -1;
+				_selectedPartHighlightDirection *= -1;
 			}
 
-			// Check if inversion reached maximum
-			if(_fe3d.modelEntity_getColorInversion(currentAnimation->getPreviewModelID(), partID) == 1.0f)
+			// Check if wireframe color reached maximum
+			if(_fe3d.modelEntity_getWireframeColor(currentAnimation->getPreviewModelID(), partID) == 1.0f)
 			{
-				_selectedPartInversionDirection *= -1;
+				_selectedPartHighlightDirection *= -1;
 			}
 
-			// Set model inversion
-			float speed = (PART_BLINKING_SPEED * static_cast<float>(_selectedPartInversionDirection));
-			float newInversion = (_fe3d.modelEntity_getColorInversion(currentAnimation->getPreviewModelID(), partID) + speed);
-			_fe3d.modelEntity_setColorInversion(currentAnimation->getPreviewModelID(), partID, newInversion);
+			// Set wireframe color
+			const auto color = _fe3d.modelEntity_getWireframeColor(currentAnimation->getPreviewModelID(), partID);
+			const float speed = (PART_HIGHLIGHT_SPEED * static_cast<float>(_selectedPartHighlightDirection));
+			_fe3d.modelEntity_setWireframeColor(currentAnimation->getPreviewModelID(), partID, (color + speed));
 		}
 	}
 }

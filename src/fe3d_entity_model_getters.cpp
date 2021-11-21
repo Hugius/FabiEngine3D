@@ -48,9 +48,9 @@ const bool FabiEngine3D::modelEntity_isStaticToCamera(const string& ID) const
 	return _core->_modelEntityManager.getEntity(ID)->isCameraStatic();
 }
 
-const bool FabiEngine3D::modelEntity_isWireframed(const string& ID) const
+const bool FabiEngine3D::modelEntity_isWireframed(const string& ID, const string& partID) const
 {
-	return _core->_modelEntityManager.getEntity(ID)->isWireframed();
+	return _core->_modelEntityManager.getEntity(ID)->isWireframed(partID);
 }
 
 const bool FabiEngine3D::modelEntity_isDepthMapIncluded(const string& ID) const
@@ -161,6 +161,11 @@ const Vec3 FabiEngine3D::modelEntity_getColor(const string& ID, const string& pa
 	return _core->_modelEntityManager.getEntity(ID)->getColor(partID);
 }
 
+const Vec3 FabiEngine3D::modelEntity_getWireframeColor(const string& ID, const string& partID) const
+{
+	return _core->_modelEntityManager.getEntity(ID)->getWireframeColor(partID);
+}
+
 const Vec3 FabiEngine3D::modelEntity_getLevelOfDetailSize(const string& ID) const
 {
 	_core->_modelEntityManager.getEntity(ID)->getLevelOfDetailSize();
@@ -169,11 +174,6 @@ const Vec3 FabiEngine3D::modelEntity_getLevelOfDetailSize(const string& ID) cons
 const float FabiEngine3D::modelEntity_getLightness(const string& ID, const string& partID) const
 {
 	return _core->_modelEntityManager.getEntity(ID)->getLightness(partID);
-}
-
-const float FabiEngine3D::modelEntity_getColorInversion(const string& ID, const string& partID) const
-{
-	return _core->_modelEntityManager.getEntity(ID)->getColorInversion(partID);
 }
 
 const float FabiEngine3D::modelEntity_getReflectivity(const string& ID, const string& partID) const

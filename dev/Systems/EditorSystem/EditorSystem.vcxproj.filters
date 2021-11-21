@@ -483,7 +483,7 @@
     <ClCompile Include="..\..\..\src\world_editor_misc_custom.cpp">
       <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_misc_animation.cpp">
+    <ClCompile Include="..\..\..\src\world_editor_misc_highlighting.cpp">
       <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sky_editor_loading.cpp">
@@ -506,6 +506,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_editor_loading.cpp">
       <Filter>Script Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\world_editor_misc_activation.cpp">
+      <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

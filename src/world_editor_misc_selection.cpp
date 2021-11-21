@@ -8,45 +8,23 @@ void WorldEditor::_selectModel(const string& ID)
 	// Change cursor
 	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_pointing.png");
 
+	// Enable wireframed rendering
+	for(const auto& partID : _fe3d.modelEntity_getPartIDs(_selectedModelID))
+	{
+		_fe3d.modelEntity_setWireframed(_selectedModelID, partID, true);
+	}
+
 	// Check if nothing is active
 	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		// Removing the unique number from the modelID and updating the text content
-		string tempID = ID;
+		string tempID = _selectedModelID;
 		reverse(tempID.begin(), tempID.end());
 		string rawID = tempID.substr(tempID.find('_') + 1);
 		reverse(rawID.begin(), rawID.end());
 		_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), true);
 		_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), "Selected model: " + rawID, 0.025f);
 	}
-}
-
-void WorldEditor::_activateModel(const string& ID)
-{
-	// Set ID
-	_activeModelID = ID;
-
-	// Temporary values
-	auto rightWindow = _gui.getViewport("right")->getWindow("main");
-	auto position = _fe3d.modelEntity_getBasePosition(_activeModelID);
-
-	// Update buttons hoverability
-	rightWindow->getScreen("modelPropertiesMenu")->getButton("position")->setHoverable(false);
-	rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
-	rightWindow->getScreen("modelPropertiesMenu")->getButton("size")->setHoverable(true);
-
-	// Filling write fields
-	rightWindow->getScreen("modelPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-	rightWindow->getScreen("modelPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-	rightWindow->getScreen("modelPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
-
-	// Removing the unique number from the modelID and updating the text content
-	string tempID = ID;
-	reverse(tempID.begin(), tempID.end());
-	string rawID = tempID.substr(tempID.find('_') + 1);
-	reverse(rawID.begin(), rawID.end());
-	_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), true);
-	_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), "Active model: " + rawID, 0.025f);
 }
 
 void WorldEditor::_selectBillboard(const string& ID)
@@ -56,6 +34,9 @@ void WorldEditor::_selectBillboard(const string& ID)
 
 	// Change cursor
 	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_pointing.png");
+
+	// Enable wireframed rendering
+	_fe3d.billboardEntity_setWireframed(_selectedBillboardID, true);
 
 	// Check if nothing is active
 	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
@@ -68,34 +49,6 @@ void WorldEditor::_selectBillboard(const string& ID)
 		_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), true);
 		_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), "Selected billboard: " + rawID, 0.025f);
 	}
-}
-
-void WorldEditor::_activateBillboard(const string& ID)
-{
-	// Set ID
-	_activeBillboardID = ID;
-
-	// Temporary values
-	auto rightWindow = _gui.getViewport("right")->getWindow("main");
-	auto position = _fe3d.billboardEntity_getPosition(_activeBillboardID);
-
-	// Update buttons hoverability
-	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("position")->setHoverable(false);
-	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(true);
-	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("size")->setHoverable(true);
-
-	// Filling write fields
-	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
-
-	// Removing the unique number from the billboardID and updating the text content
-	string tempID = ID;
-	reverse(tempID.begin(), tempID.end());
-	string rawID = tempID.substr(tempID.find('_') + 1);
-	reverse(rawID.begin(), rawID.end());
-	_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), true);
-	_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), "Active billboard: " + rawID, 0.025f);
 }
 
 void WorldEditor::_selectSound(const string& ID)
@@ -146,116 +99,41 @@ void WorldEditor::_selectReflection(const string& ID)
 	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_pointing.png");
 }
 
-void WorldEditor::_activateSound(const string& ID)
+void WorldEditor::_unselectModel(const string& ID)
 {
-	// Set ID
-	_activeSpeakerID = ("@@speaker_" + ID);
-
-	// Temporary values
-	auto rightWindow = _gui.getViewport("right")->getWindow("main");
-	auto position = _fe3d.sound_getPosition(_activeSpeakerID.substr(string("@@speaker_").size()));
-	auto maxVolume = _fe3d.sound_getMaxVolume(_activeSpeakerID.substr(string("@@speaker_").size()));
-	auto maxDistance = _fe3d.sound_getMaxDistance(_activeSpeakerID.substr(string("@@speaker_").size()));
-
-	// Filling write fields
-	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("volume")->changeTextContent(to_string(static_cast<int>(maxVolume * 100.0f)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("distance")->changeTextContent(to_string(static_cast<int>(maxDistance)));
-
-	// Removing the unique number from the soundID and updating the text content
-	string tempID = ID;
-	reverse(tempID.begin(), tempID.end());
-	string rawID = tempID.substr(tempID.find('_') + 1);
-	reverse(rawID.begin(), rawID.end());
-	_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), true);
-	_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), "Active sound: " + rawID, 0.025f);
+	for(const auto& partID : _fe3d.modelEntity_getPartIDs(ID))
+	{
+		_fe3d.modelEntity_setWireframeColor(ID, partID, 1.0f);
+		_fe3d.modelEntity_setWireframed(ID, partID, false);
+	}
 }
 
-void WorldEditor::_activatePointlight(const string& ID)
+void WorldEditor::_unselectBillboard(const string& ID)
 {
-	// Set ID
-	_activeLampID = ("@@lamp_" + ID);
-
-	// Temporary values
-	auto rightWindow = _gui.getViewport("right")->getWindow("main");
-	auto position = _fe3d.modelEntity_getBasePosition(_activeLampID);
-
-	// Update buttons hoverability
-	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("position")->setHoverable(false);
-	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("radius")->setHoverable(true);
-	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("color")->setHoverable(true);
-
-	// Filling writeFields
-	rightWindow->getScreen("pointlightPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-	rightWindow->getScreen("pointlightPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-	rightWindow->getScreen("pointlightPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
+	_fe3d.billboardEntity_setWireframeColor(ID, 1.0f);
+	_fe3d.billboardEntity_setWireframed(ID, false);
 }
 
-void WorldEditor::_activateSpotlight(const string& ID)
+void WorldEditor::_unselectSound(const string& ID)
 {
-	// Set ID
-	_activeTorchID = ("@@torch_" + ID);
-
-	// Temporary values
-	auto rightWindow = _gui.getViewport("right")->getWindow("main");
-	auto position = _fe3d.modelEntity_getBasePosition(_activeTorchID);
-
-	// Update buttons hoverability
-	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("position")->setHoverable(false);
-	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("color")->setHoverable(true);
-
-	// Filling writeFields
-	rightWindow->getScreen("spotlightPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-	rightWindow->getScreen("spotlightPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-	rightWindow->getScreen("spotlightPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
+	_fe3d.modelEntity_setBaseSize(ID, DEFAULT_SPEAKER_SIZE);
+	_fe3d.aabbEntity_setLocalSize(ID, DEFAULT_SPEAKER_AABB_SIZE);
 }
 
-void WorldEditor::_activateReflection(const string& ID)
+void WorldEditor::_unselectPointlight(const string& ID)
 {
-	// Set ID
-	_activeCameraID = ("@@camera_" + ID);
-
-	// Temporary values
-	auto rightWindow = _gui.getViewport("right")->getWindow("main");
-	auto position = _fe3d.modelEntity_getBasePosition(_activeCameraID);
-
-	// Filling writeFields
-	rightWindow->getScreen("reflectionPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-	rightWindow->getScreen("reflectionPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-	rightWindow->getScreen("reflectionPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
+	_fe3d.modelEntity_setBaseSize(ID, DEFAULT_LAMP_SIZE);
+	_fe3d.aabbEntity_setLocalSize(ID, DEFAULT_LAMP_AABB_SIZE);
 }
 
-void WorldEditor::_deactivateModel()
+void WorldEditor::_unselectSpotlight(const string& ID)
 {
-	_activeModelID = "";
-	_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
+	_fe3d.modelEntity_setBaseSize(ID, DEFAULT_TORCH_SIZE);
+	_fe3d.aabbEntity_setLocalSize(ID, DEFAULT_TORCH_AABB_SIZE);
 }
 
-void WorldEditor::_deactivateBillboard()
+void WorldEditor::_unselectReflection(const string& ID)
 {
-	_activeBillboardID = "";
-	_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
-}
-
-void WorldEditor::_deactivateSound()
-{
-	_activeSpeakerID = "";
-	_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), false);
-}
-
-void WorldEditor::_deactivatePointlight()
-{
-	_activeLampID = "";
-}
-
-void WorldEditor::_deactivateSpotlight()
-{
-	_activeTorchID = "";
-}
-
-void WorldEditor::_deactivateReflection()
-{
-	_activeCameraID = "";
+	_fe3d.modelEntity_setBaseSize(ID, DEFAULT_CAMERA_SIZE);
+	_fe3d.aabbEntity_setLocalSize(ID, DEFAULT_CAMERA_AABB_SIZE);
 }

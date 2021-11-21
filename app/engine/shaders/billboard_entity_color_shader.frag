@@ -1,9 +1,6 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-// Constant variables
-#define FRAME_COLOR vec3(1.0f, 1.0f, 1.0f)
-
 // In variables
 in vec2 f_uv;
 in vec3 f_position;
@@ -14,6 +11,7 @@ layout (location = 1) uniform sampler2D u_emissionMap;
 
 // Vector uniforms
 uniform vec3 u_color;
+uniform vec3 u_wireframeColor;
 uniform vec3 u_cameraPosition;
 uniform vec3 u_fogColor;
 
@@ -22,7 +20,6 @@ uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
 uniform float u_fogThickness;
 uniform float u_lightness;
-uniform float u_colorInversion;
 uniform float u_minTextureTransparency;
 uniform float u_transparency;
 uniform float u_emissionIntensity;
@@ -49,7 +46,7 @@ void main()
 	// Wireframe color
 	if(u_isWireframed)
 	{
-		o_primaryColor = vec4(FRAME_COLOR, 1.0f);
+		o_primaryColor = vec4(u_wireframeColor, 1.0f);
 		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 		return;
 	}
@@ -67,7 +64,6 @@ void main()
 	primaryColor *= u_color;
 	primaryColor *= u_lightness;
 	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
-	primaryColor  = mix(primaryColor, (vec3(1.0f) - primaryColor), clamp(u_colorInversion, 0.0f, 1.0f));
 
 	// Apply fog
 	primaryColor = calculateFog(primaryColor);

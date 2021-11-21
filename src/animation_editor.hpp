@@ -88,11 +88,11 @@ private:
 	static inline const float MIN_CAMERA_DISTANCE = 0.5f;
 	static inline const float CAMERA_DISTANCE_SPEED = 0.25f;
 	static inline const float CAMERA_LOOKAT_SPEED = 0.025f;
-	static inline const float PART_BLINKING_SPEED = 0.025f;
+	static inline const float PART_HIGHLIGHT_SPEED = 0.025f;
 
 	// Integers
 	static inline const unsigned int MAX_FRAME_COUNT = 100;
-	int _selectedPartInversionDirection = 1;
+	int _selectedPartHighlightDirection = 1;
 	unsigned int _currentFrameIndex = 0;
 
 	// Booleans

@@ -5,34 +5,34 @@ void WorldEditor::_updateSoundEditing()
 	// Temporary values
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
-	// Reset selected speaker from last frame
-	if(!_dontResetSelectedSpeaker)
-	{
-		_selectedSpeakerID = "";
-	}
-	else
-	{
-		_dontResetSelectedSpeaker = false;
-	}
-
-	// User must not be in placement mode
+	// User must not be placing anything
 	if(_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
+		// Reset selected speaker from last frame
+		if(!_dontResetSelectedSpeaker)
+		{
+			_selectedSpeakerID = "";
+		}
+		else
+		{
+			_dontResetSelectedSpeaker = false;
+		}
+
 		// Check which entity is selected
 		auto hoveredAabbID = _fe3d.raycast_checkCursorInAny().first;
 
 		// Check if user selected a speaker model
-		for(const auto& entityID : _fe3d.modelEntity_getAllIDs())
+		for(const auto& ID : _fe3d.modelEntity_getAllIDs())
 		{
 			// Must be sound preview entity
-			if(entityID.substr(0, string("@@speaker").size()) == "@@speaker")
+			if(ID.substr(0, string("@@speaker").size()) == "@@speaker")
 			{
 				// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
-				if(hoveredAabbID == entityID && _fe3d.misc_isCursorInsideViewport() &&
+				if(hoveredAabbID == ID && _fe3d.misc_isCursorInsideViewport() &&
 				   !_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Select hovered speaker
-					_selectSound(entityID.substr(string("@@speaker_").size()));
+					_selectSound(ID.substr(string("@@speaker_").size()));
 
 					// Change cursor
 					_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_pointing.png");
@@ -49,11 +49,10 @@ void WorldEditor::_updateSoundEditing()
 				}
 				else
 				{
-					// Don't reset if speaker is active or selected
-					if((entityID != _activeSpeakerID) && (entityID != _selectedSpeakerID))
+					// Unselect if necessary
+					if((ID != _selectedSpeakerID) && (ID != _activeSpeakerID))
 					{
-						_fe3d.modelEntity_setBaseSize(entityID, DEFAULT_SPEAKER_SIZE);
-						_fe3d.aabbEntity_setLocalSize(entityID, DEFAULT_SPEAKER_AABB_SIZE);
+						_unselectSound(ID);
 					}
 				}
 			}
@@ -78,12 +77,12 @@ void WorldEditor::_updateSoundEditing()
 			}
 		}
 
-		// Update speaker animations
+		// Update speaker highlighting
 		if(_selectedSpeakerID != _activeSpeakerID)
 		{
-			_updateSpeakerAnimation(_selectedSpeakerID, _selectedSpeakerSizeDirection);
+			_updateSpeakerHighlighting(_selectedSpeakerID, _selectedSpeakerHighlightDirection);
 		}
-		_updateSpeakerAnimation(_activeSpeakerID, _activeSpeakerSizeDirection);
+		_updateSpeakerHighlighting(_activeSpeakerID, _activeSpeakerHighlightDirection);
 
 		// Update properties screen
 		if(_activeSpeakerID != "")

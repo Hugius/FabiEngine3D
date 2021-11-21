@@ -4,7 +4,7 @@
 // Constant variables
 #define MAX_POINTLIGHT_COUNT 64
 #define MAX_SPOTLIGHT_COUNT 64
-#define FRAME_COLOR vec3(1.0f, 1.0f, 1.0f)
+#define WIREFRAME_COLOR vec3(1.0f, 1.0f, 1.0f)
 #define SPOTLIGHT_SMOOTHING_MULTIPLIER 0.95f
 
 // In variables
@@ -104,7 +104,7 @@ void main()
 	// Wireframe color
 	if(u_isWireframed)
 	{
-		o_primaryColor = vec4(FRAME_COLOR, 1.0f);
+		o_primaryColor = vec4(WIREFRAME_COLOR, 1.0f);
 		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 		return;
 	}

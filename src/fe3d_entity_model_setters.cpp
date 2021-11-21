@@ -249,11 +249,6 @@ void FabiEngine3D::modelEntity_setLightness(const string& ID, const string& part
 	_core->_modelEntityManager.getEntity(ID)->setLightness(partID, lightness);
 }
 
-void FabiEngine3D::modelEntity_setColorInversion(const string& ID, const string& partID, float colorInversion)
-{
-	_core->_modelEntityManager.getEntity(ID)->setColorInversion(partID, colorInversion);
-}
-
 void FabiEngine3D::modelEntity_setEmissionIntensity(const string& ID, const string& partID, float intensity)
 {
 	_core->_modelEntityManager.getEntity(ID)->setEmissionIntensity(partID, intensity);
@@ -329,9 +324,9 @@ void FabiEngine3D::modelEntity_setStaticToCamera(const string& ID, bool enabled)
 	_core->_modelEntityManager.getEntity(ID)->setCameraStatic(enabled);
 }
 
-void FabiEngine3D::modelEntity_setWireframed(const string& ID, bool enabled)
+void FabiEngine3D::modelEntity_setWireframed(const string& ID, const string& partID, bool enabled)
 {
-	_core->_modelEntityManager.getEntity(ID)->setWireframed(enabled);
+	_core->_modelEntityManager.getEntity(ID)->setWireframed(partID, enabled);
 }
 
 void FabiEngine3D::modelEntity_setTransparency(const string& ID, const string& partID, float transparency)
@@ -352,6 +347,11 @@ void FabiEngine3D::modelEntity_setDepthMapIncluded(const string& ID, bool enable
 void FabiEngine3D::modelEntity_setColor(const string& ID, const string& partID, Vec3 color)
 {
 	_core->_modelEntityManager.getEntity(ID)->setColor(partID, color);
+}
+
+void FabiEngine3D::modelEntity_setWireframeColor(const string& ID, const string& partID, Vec3 color)
+{
+	_core->_modelEntityManager.getEntity(ID)->setWireframeColor(partID, color);
 }
 
 void FabiEngine3D::modelEntity_setReflected(const string& ID, bool enabled)

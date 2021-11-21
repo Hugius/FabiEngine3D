@@ -98,6 +98,11 @@ void FabiEngine3D::billboardEntity_setColor(const string& ID, Vec3 color)
 	_core->_billboardEntityManager.getEntity(ID)->setColor(color);
 }
 
+void FabiEngine3D::billboardEntity_setWireframeColor(const string& ID, Vec3 color)
+{
+	_core->_billboardEntityManager.getEntity(ID)->setWireframeColor(color);
+}
+
 void FabiEngine3D::billboardEntity_setDiffuseMap(const string& ID, const string& texturePath)
 {
 	if(texturePath.empty())
@@ -174,11 +179,6 @@ void FabiEngine3D::billboardEntity_setMaxHeight(const string& ID, float height)
 void FabiEngine3D::billboardEntity_setLightness(const string& ID, float lightness)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setLightness(lightness);
-}
-
-void FabiEngine3D::billboardEntity_setColorInversion(const string& ID, float colorInversion)
-{
-	_core->_billboardEntityManager.getEntity(ID)->setColorInversion(colorInversion);
 }
 
 void FabiEngine3D::billboardEntity_setTransparency(const string& ID, float transparency)

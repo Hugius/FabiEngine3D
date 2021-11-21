@@ -40,6 +40,11 @@ const Vec3 BillboardEntity::getColor() const
 	return _color;
 }
 
+const Vec3 BillboardEntity::getWireframeColor() const
+{
+	return _wireframeColor;
+}
+
 const string& BillboardEntity::getTextContent() const
 {
 	return _textContent;
@@ -63,11 +68,6 @@ const string& BillboardEntity::getEmissionMapPath() const
 const float BillboardEntity::getLightness() const
 {
 	return _lightness;
-}
-
-const float BillboardEntity::getColorInversion() const
-{
-	return _colorInversion;
 }
 
 const float BillboardEntity::getTransparency() const

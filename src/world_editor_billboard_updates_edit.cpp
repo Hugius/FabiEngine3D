@@ -15,25 +15,25 @@ void WorldEditor::_updateBillboardEditing()
 		_dontResetSelectedBillboard = false;
 	}
 
-	// User must not be in placement mode
+	// User must not be placing anything
 	if(_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingPointlight && !_isPlacingReflection)
 	{
 		// Check if user selected a billboard
-		for(const auto& entityID : _fe3d.billboardEntity_getAllIDs())
+		for(const auto& ID : _fe3d.billboardEntity_getAllIDs())
 		{
 			// Must not be preview entity
-			if(entityID[0] != '@')
+			if(ID[0] != '@')
 			{
 				// Check which entity is selected
 				auto hoveredAabbID = _fe3d.raycast_checkCursorInAny().first;
-				bool hovered = (hoveredAabbID.size() >= entityID.size()) && (hoveredAabbID.substr(0, entityID.size()) == entityID);
+				bool hovered = (hoveredAabbID.size() >= ID.size()) && (hoveredAabbID.substr(0, ID.size()) == ID);
 
 				// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
 				if(hovered && _fe3d.misc_isCursorInsideViewport() &&
 				   !_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Select hovered billboard
-					_selectBillboard(entityID);
+					_selectBillboard(ID);
 
 					// Check if user clicked billboard
 					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -47,10 +47,10 @@ void WorldEditor::_updateBillboardEditing()
 				}
 				else
 				{
-					// Don't reset if billboard is active or selected
-					if((entityID != _activeBillboardID) && (entityID != _selectedBillboardID))
+					// Unselect if necessary
+					if((ID != _selectedBillboardID) && (ID != _activeBillboardID))
 					{
-						_fe3d.billboardEntity_setColorInversion(entityID, 0.0f);
+						_unselectBillboard(ID);
 					}
 				}
 			}
@@ -75,12 +75,12 @@ void WorldEditor::_updateBillboardEditing()
 			}
 		}
 
-		// Update billboard blinking
+		// Update billboard highlighting
 		if(_selectedBillboardID != _activeBillboardID)
 		{
-			_updateBillboardBlinking(_selectedBillboardID, _selectedBillboardInversionDirection);
+			_updateBillboardHighlighting(_selectedBillboardID, _selectedBillboardHighlightDirection);
 		}
-		_updateBillboardBlinking(_activeBillboardID, _activeBillboardInversionDirection);
+		_updateBillboardHighlighting(_activeBillboardID, _activeBillboardHighlightDirection);
 
 		// Update properties screen
 		if(_activeBillboardID != "")
@@ -192,24 +192,6 @@ void WorldEditor::_updateBillboardEditing()
 		if(_selectedBillboardID.empty() && _activeBillboardID.empty())
 		{
 			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
-		}
-	}
-	else
-	{
-		if(rightWindow->getActiveScreen()->getID() != "main")
-		{
-			// Reset when user wants to place billboards again
-			for(const auto& entityID : _fe3d.billboardEntity_getAllIDs())
-			{
-				// Check if not preview entity
-				if(entityID[0] != '@')
-				{
-					rightWindow->setActiveScreen("worldEditorControls");
-					_selectedBillboardInversionDirection = 1;
-					_activeBillboardID = "";
-					_selectedBillboardID = "";
-				}
-			}
 		}
 	}
 }

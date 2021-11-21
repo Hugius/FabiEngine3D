@@ -89,6 +89,9 @@ void WorldEditor::_updateSoundPlacingMenu()
 				// Check if button is hovered
 				if(screen->getScrollingList("sounds")->getButton(audioID)->isHovered())
 				{
+					// Reset right window
+					_gui.getViewport("right")->getWindow("main")->setActiveScreen("worldEditorControls");
+
 					// Deactivate everything
 					_deactivateModel();
 					_deactivateBillboard();

@@ -141,19 +141,12 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 	if(entity->isVisible())
 	{
 		// Shader uniforms
-		_shader.uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus.isWireframeRenderingEnabled()));
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_isBright", entity->isBright());
 		_shader.uploadUniform("u_cubeReflectionMixValue", entity->getCubeReflectionMixValue());
 		_shader.uploadUniform("u_viewMatrix", (entity->isCameraStatic() ? Matrix44(Matrix33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
 		_shader.uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
-
-		// Enable wireframe
-		if(entity->isWireframed())
-		{
-			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		}
 
 		// Enable face culling
 		if(entity->isFaceCulled())
@@ -194,7 +187,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			_shader.uploadUniform("u_specularShininess", entity->getSpecularShininess(partID));
 			_shader.uploadUniform("u_specularIntensity", entity->getSpecularIntensity(partID));
 			_shader.uploadUniform("u_color", entity->getColor(partID));
-			_shader.uploadUniform("u_colorInversion", entity->getColorInversion(partID));
+			_shader.uploadUniform("u_wireframeColor", entity->getWireframeColor(partID));
 			_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap(partID));
 			_shader.uploadUniform("u_hasEmissionMap", entity->hasEmissionMap(partID));
 			_shader.uploadUniform("u_hasSpecularMap", entity->hasSpecularMap(partID));
@@ -204,6 +197,13 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			_shader.uploadUniform("u_normalTransformationMatrix", normalTransformationMatrix);
 			_shader.uploadUniform("u_isInstanced", buffer->isInstanced());
 			_shader.uploadUniform("u_reflectionType", static_cast<int>(entity->getReflectionType(partID)));
+			_shader.uploadUniform("u_isWireframed", (entity->isWireframed(partID) || _renderBus.isWireframeRenderingEnabled()));
+
+			// Enable wireframe
+			if(entity->isWireframed(partID))
+			{
+				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			}
 
 			// Bind textures
 			if(entity->hasDiffuseMap(partID))
@@ -277,6 +277,12 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 				glActiveTexture(GL_TEXTURE7);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
+
+			// Disable wireframe
+			if(entity->isWireframed(partID))
+			{
+				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			}
 		}
 
 		// Unbind textures
@@ -295,12 +301,6 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		if(entity->isFaceCulled())
 		{
 			glDisable(GL_CULL_FACE);
-		}
-
-		// Disable wireframe
-		if(entity->isWireframed())
-		{
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}
 	}
 }

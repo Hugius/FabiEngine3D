@@ -83,6 +83,9 @@ void WorldEditor::_updateModelPlacingMenu()
 					// Check if button is hovered
 					if(screen->getScrollingList("modelList")->getButton(modelID)->isHovered())
 					{
+						// Reset right window
+						_gui.getViewport("right")->getWindow("main")->setActiveScreen("worldEditorControls");
+
 						// Deactivate everything
 						_deactivateModel();
 						_deactivateBillboard();

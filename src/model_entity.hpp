@@ -60,7 +60,7 @@ public:
 	void rotatePartTo(const string& partID, Vec3 target, float speed);
 	void scalePartTo(const string& partID, Vec3 target, float speed);
 	void setColor(const string& partID, Vec3 value);
-	void setColorInversion(const string& partID, float value);
+	void setWireframeColor(const string& partID, Vec3 value);
 	void setDiffuseMapPath(const string& partID, const string& value);
 	void setEmissionMapPath(const string& partID, const string& value);
 	void setSpecularMapPath(const string& partID, const string& value);
@@ -76,7 +76,7 @@ public:
 	void setSpecular(const string& partID, bool value);
 	void setReflective(const string& partID, bool value);
 	void setReflectionType(const string& partID, ReflectionType value);
-	void setWireframed(bool value);
+	void setWireframed(const string& partID, bool value);
 	void setFaceCulled(bool value);
 	void setRotationOrder(DirectionOrder order);
 
@@ -97,6 +97,7 @@ public:
 
 	// Vectors
 	const Vec3 getColor(const string& partID) const;
+	const Vec3 getWireframeColor(const string& partID) const;
 	const Vec3 getLevelOfDetailSize() const;
 	const Vec3 getBasePosition() const;
 	const Vec3 getBaseRotation() const;
@@ -111,7 +112,6 @@ public:
 	const float getCubeReflectionMixValue() const;
 	const float getMinHeight() const;
 	const float getMaxHeight() const;
-	const float getColorInversion(const string& partID) const;
 	const float getReflectivity(const string& partID) const;
 	const float getLightness(const string& partID) const;
 	const float getSpecularShininess(const string& partID) const;
@@ -127,8 +127,8 @@ public:
 	const bool isDepthMapIncluded() const;
 	const bool isLevelOfDetailed() const;
 	const bool isBright() const;
-	const bool isWireframed() const;
 	const bool isFaceCulled() const;
+	const bool isWireframed(const string& partID) const;
 	const bool isSpecular(const string& partID) const;
 	const bool isReflective(const string& partID) const;
 	const bool hasRenderBuffer(const string& partID) const;
@@ -178,12 +178,12 @@ private:
 		Vec3 rotationTarget = Vec3(0.0f);
 		Vec3 sizeTarget = Vec3(1.0f);
 		Vec3 color = Vec3(1.0f);
+		Vec3 wireframeColor = Vec3(1.0f);
 
 		// Decimals
 		float positionTargetSpeed = 0.0f;
 		float rotationTargetSpeed = 0.0f;
 		float sizeTargetSpeed = 0.0f;
-		float colorInversion = 0.0f;
 		float reflectivity = 0.5f;
 		float lightness = 1.0f;
 		float specularShininess = 1.0f;
@@ -195,6 +195,7 @@ private:
 		// Booleans
 		bool isSpecular = false;
 		bool isReflective = false;
+		bool isWireframed = false;
 
 		// Miscellaneous
 		shared_ptr<RenderBuffer> renderBuffer = nullptr;
@@ -245,7 +246,6 @@ private:
 	bool _isDepthMapIncluded = true;
 	bool _isLevelOfDetailed = false;
 	bool _isBright = false;
-	bool _isWireframed = false;
 	bool _isFaceCulled = false;
 
 	// Miscellaneous

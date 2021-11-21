@@ -106,7 +106,7 @@ void AnimationEditor::unload()
 	_hoveredPartID = "";
 	_cameraLookatPosition = Vec3(0.0f);
 	_currentFrameIndex = 0;
-	_selectedPartInversionDirection = 1;
+	_selectedPartHighlightDirection = 1;
 	_mustUpdateCurrentFramePreview = true;
 	_isCreatingAnimation = false;
 	_isChoosingAnimation = false;

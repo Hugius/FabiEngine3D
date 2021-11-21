@@ -302,14 +302,14 @@ void ModelEntity::setColor(const string& partID, Vec3 value)
 	_parts[_getPartIndex(partID)].color = Vec3(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f), clamp(value.z, 0.0f, 1.0f));
 }
 
+void ModelEntity::setWireframeColor(const string& partID, Vec3 value)
+{
+	_parts[_getPartIndex(partID)].wireframeColor = Vec3(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f), clamp(value.z, 0.0f, 1.0f));
+}
+
 void ModelEntity::setLevelOfDetailSize(Vec3 value)
 {
 	_levelOfDetailSize = value;
-}
-
-void ModelEntity::setColorInversion(const string& partID, float value)
-{
-	_parts[_getPartIndex(partID)].colorInversion = clamp(value, 0.0f, 1.0f);
 }
 
 void ModelEntity::setMeshPath(const string& value)
@@ -417,9 +417,9 @@ void ModelEntity::setLevelOfDetailed(bool value)
 	_isLevelOfDetailed = value;
 }
 
-void ModelEntity::setWireframed(bool value)
+void ModelEntity::setWireframed(const string& partID, bool value)
 {
-	_isWireframed = value;
+	_parts[_getPartIndex(partID)].isWireframed = value;
 }
 
 void ModelEntity::setBright(bool value)

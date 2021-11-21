@@ -6,34 +6,34 @@ void WorldEditor::_updatePointlightEditing()
 	// Temporary values
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
-	// Reset selected lamp from last frame
-	if(!_dontResetSelectedLamp)
-	{
-		_selectedLampID = "";
-	}
-	else
-	{
-		_dontResetSelectedLamp = false;
-	}
-
-	// User must not be in placement mode
+	// User must not be placing anything
 	if(_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
+		// Reset selected lamp from last frame
+		if(!_dontResetSelectedLamp)
+		{
+			_selectedLampID = "";
+		}
+		else
+		{
+			_dontResetSelectedLamp = false;
+		}
+
 		// Check which entity is selected
 		auto hoveredAabbID = _fe3d.raycast_checkCursorInAny().first;
 
 		// Check if user selected a lamp model
-		for(const auto& entityID : _fe3d.modelEntity_getAllIDs())
+		for(const auto& ID : _fe3d.modelEntity_getAllIDs())
 		{
 			// Must be pointlight preview entity
-			if(entityID.substr(0, string("@@lamp").size()) == "@@lamp")
+			if(ID.substr(0, string("@@lamp").size()) == "@@lamp")
 			{
 				// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
-				if(hoveredAabbID == entityID && _fe3d.misc_isCursorInsideViewport() &&
+				if(hoveredAabbID == ID && _fe3d.misc_isCursorInsideViewport() &&
 				   !_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Select hovered lamp
-					_selectPointlight(entityID.substr(string("@@lamp_").size()));
+					_selectPointlight(ID.substr(string("@@lamp_").size()));
 
 					// Check if user clicked lamp
 					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -47,11 +47,10 @@ void WorldEditor::_updatePointlightEditing()
 				}
 				else
 				{
-					// Don't reset if lamp is active or selected
-					if((entityID != _activeLampID) && (entityID != _selectedLampID))
+					// Unselect if necessary
+					if((ID != _selectedLampID) && (ID != _activeLampID))
 					{
-						_fe3d.modelEntity_setBaseSize(entityID, DEFAULT_LAMP_SIZE);
-						_fe3d.aabbEntity_setLocalSize(entityID, DEFAULT_LAMP_AABB_SIZE);
+						_unselectPointlight(ID);
 					}
 				}
 			}
@@ -76,12 +75,12 @@ void WorldEditor::_updatePointlightEditing()
 			}
 		}
 
-		// Update lamp animations
+		// Update lamp highlighting
 		if(_selectedLampID != _activeLampID)
 		{
-			_updateLampAnimation(_selectedLampID, _selectedLampSizeDirection);
+			_updateLampHighlighting(_selectedLampID, _selectedLampHighlightDirection);
 		}
-		_updateLampAnimation(_activeLampID, _activeLampSizeDirection);
+		_updateLampHighlighting(_activeLampID, _activeLampHighlightDirection);
 
 		// Update properties screen
 		if(!_activeLampID.empty())

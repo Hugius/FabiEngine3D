@@ -47,7 +47,8 @@
     <ClCompile Include="..\..\..\src\billboard_editor_updates_texturing.cpp" />
     <ClCompile Include="..\..\..\src\billboard_editor_updates_misc.cpp" />
     <ClCompile Include="..\..\..\src\billboard_editor_updates_miscellaneous.cpp" />
-    <ClCompile Include="..\..\..\src\world_editor_misc_animation.cpp" />
+    <ClCompile Include="..\..\..\src\world_editor_misc_activation.cpp" />
+    <ClCompile Include="..\..\..\src\world_editor_misc_highlighting.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_misc_custom.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_reflection_updates_edit.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_reflection_updates_main.cpp" />

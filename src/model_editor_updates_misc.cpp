@@ -86,13 +86,16 @@ void ModelEditor::_updateMiscellaneous()
 		{
 			if(_fe3d.input_isKeyPressed(InputType::KEY_F))
 			{
-				if(_fe3d.modelEntity_isWireframed(_currentModelID))
+				for(const auto& partID : _fe3d.modelEntity_getPartIDs(_currentModelID))
 				{
-					_fe3d.modelEntity_setWireframed(_currentModelID, false);
-				}
-				else
-				{
-					_fe3d.modelEntity_setWireframed(_currentModelID, true);
+					if(_fe3d.modelEntity_isWireframed(_currentModelID, partID))
+					{
+						_fe3d.modelEntity_setWireframed(_currentModelID, partID, false);
+					}
+					else
+					{
+						_fe3d.modelEntity_setWireframed(_currentModelID, partID, true);
+					}
 				}
 			}
 		}

@@ -6,34 +6,34 @@ void WorldEditor::_updateReflectionEditing()
 	// Temporary values
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
-	// Reset selected camera from last frame
-	if(!_dontResetSelectedCamera)
-	{
-		_selectedCameraID = "";
-	}
-	else
-	{
-		_dontResetSelectedCamera = false;
-	}
-
-	// User must not be in placement mode
+	// User must not be placing anything
 	if(_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
+		// Reset selected camera from last frame
+		if(!_dontResetSelectedCamera)
+		{
+			_selectedCameraID = "";
+		}
+		else
+		{
+			_dontResetSelectedCamera = false;
+		}
+
 		// Check which entity is selected
 		auto hoveredAabbID = _fe3d.raycast_checkCursorInAny().first;
 
 		// Check if user selected a camera model
-		for(const auto& entityID : _fe3d.modelEntity_getAllIDs())
+		for(const auto& ID : _fe3d.modelEntity_getAllIDs())
 		{
 			// Must be reflection preview entity
-			if(entityID.substr(0, string("@@camera").size()) == "@@camera")
+			if(ID.substr(0, string("@@camera").size()) == "@@camera")
 			{
 				// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
-				if(hoveredAabbID == entityID && _fe3d.misc_isCursorInsideViewport() &&
+				if(hoveredAabbID == ID && _fe3d.misc_isCursorInsideViewport() &&
 				   !_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Select hovered camera
-					_selectReflection(entityID.substr(string("@@camera_").size()));
+					_selectReflection(ID.substr(string("@@camera_").size()));
 
 					// Check if user clicked camera
 					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -47,11 +47,10 @@ void WorldEditor::_updateReflectionEditing()
 				}
 				else
 				{
-					// Don't reset if camera is active or selected
-					if((entityID != _activeCameraID) && (entityID != _selectedCameraID))
+					// Unselect if necessary
+					if((ID != _selectedCameraID) && (ID != _activeCameraID))
 					{
-						_fe3d.modelEntity_setBaseSize(entityID, DEFAULT_CAMERA_SIZE);
-						_fe3d.aabbEntity_setLocalSize(entityID, DEFAULT_CAMERA_AABB_SIZE);
+						_unselectReflection(ID);
 					}
 				}
 			}
@@ -76,12 +75,12 @@ void WorldEditor::_updateReflectionEditing()
 			}
 		}
 
-		// Update camera animations
+		// Update camera highlighting
 		if(_selectedCameraID != _activeCameraID)
 		{
-			_updateCameraAnimation(_selectedCameraID, _selectedCameraSizeDirection);
+			_updateCameraHighlighting(_selectedCameraID, _selectedCameraHighlightDirection);
 		}
-		_updateCameraAnimation(_activeCameraID, _activeCameraSizeDirection);
+		_updateCameraHighlighting(_activeCameraID, _activeCameraHighlightDirection);
 
 		// Update properties screen
 		if(!_activeCameraID.empty())

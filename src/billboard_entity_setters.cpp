@@ -198,6 +198,11 @@ void BillboardEntity::setColor(Vec3 value)
 	_color = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
+void BillboardEntity::setWireframeColor(Vec3 value)
+{
+	_wireframeColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+}
+
 void BillboardEntity::setTextContent(const string& value)
 {
 	_textContent = value;
@@ -339,11 +344,6 @@ void BillboardEntity::increaseSpriteAnimationLoops()
 void BillboardEntity::setLightness(float value)
 {
 	_lightness = max(0.0f, value);
-}
-
-void BillboardEntity::setColorInversion(float value)
-{
-	_colorInversion = clamp(value, 0.0f, 1.0f);
 }
 
 void BillboardEntity::setTransparency(float value)

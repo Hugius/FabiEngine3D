@@ -21,12 +21,15 @@ void AnimationEditor::_updateChoiceMenu()
 				stopAnimation(_currentAnimationID, currentAnimation->getPreviewModelID());
 			}
 
-			// Reset preview model transformation
+			// Check if animation has preview model
 			if(_fe3d.modelEntity_isExisting(currentAnimation->getPreviewModelID()))
 			{
-				// For every model part
+				// For every part
 				for(const auto& partID : currentAnimation->getPartIDs())
 				{
+					// Hide preview model
+					_fe3d.modelEntity_setVisible(currentAnimation->getPreviewModelID(), false);
+
 					if(partID.empty()) // Base transformation
 					{
 						_fe3d.modelEntity_setBasePosition(currentAnimation->getPreviewModelID(), Vec3(0.0f));
@@ -41,14 +44,10 @@ void AnimationEditor::_updateChoiceMenu()
 						_fe3d.modelEntity_setPartRotation(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
 						_fe3d.modelEntity_setPartSize(currentAnimation->getPreviewModelID(), partID, Vec3(1.0f));
 					}
-				}
-			}
 
-			// Hide preview model
-			if(_fe3d.modelEntity_isExisting(currentAnimation->getPreviewModelID()))
-			{
-				_fe3d.modelEntity_setWireframed(currentAnimation->getPreviewModelID(), false);
-				_fe3d.modelEntity_setVisible(currentAnimation->getPreviewModelID(), false);
+					// Disable wireframed rendering
+					_fe3d.modelEntity_setWireframed(currentAnimation->getPreviewModelID(), partID, false);
+				}
 			}
 
 			// Reset some values

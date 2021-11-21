@@ -235,7 +235,7 @@ public:
 	void modelEntity_setReflected(const string& ID, bool enabled);
 	void modelEntity_setDepthMapIncluded(const string& ID, bool enabled);
 	void modelEntity_setStaticToCamera(const string& ID, bool enabled);
-	void modelEntity_setWireframed(const string& ID, bool enabled);
+	void modelEntity_setWireframed(const string& ID, const string& partID, bool enabled);
 	void modelEntity_setBasePosition(const string& ID, Vec3 position);
 	void modelEntity_setBaseRotation(const string& ID, Vec3 rotation);
 	void modelEntity_setBaseRotationOrigin(const string& ID, Vec3 rotationOrigin);
@@ -261,10 +261,10 @@ public:
 	void modelEntity_setSpecularIntensity(const string& ID, const string& partID, float intensity);
 	void modelEntity_setReflectivity(const string& ID, const string& partID, float reflectivity);
 	void modelEntity_setLightness(const string& ID, const string& partID, float lightness);
-	void modelEntity_setColorInversion(const string& ID, const string& partID, float colorInversion);
 	void modelEntity_setEmissionIntensity(const string& ID, const string& partID, float intensity);
 	void modelEntity_setTransparency(const string& ID, const string& partID, float transparency);
 	void modelEntity_setColor(const string& ID, const string& partID, Vec3 color);
+	void modelEntity_setWireframeColor(const string& ID, const string& partID, Vec3 color);
 	void modelEntity_setMinHeight(const string& ID, float height);
 	void modelEntity_setMaxHeight(const string& ID, float height);
 	void modelEntity_setTextureRepeat(const string& ID, const string& partID, float repeat);
@@ -295,7 +295,7 @@ public:
 	const Vec3 modelEntity_getPartRotationOrigin(const string& ID, const string& partID) const;
 	const Vec3 modelEntity_getPartSize(const string& ID, const string& partID) const;
 	const Vec3 modelEntity_getColor(const string& ID, const string& partID) const;
-	const float modelEntity_getColorInversion(const string& ID, const string& partID) const;
+	const Vec3 modelEntity_getWireframeColor(const string& ID, const string& partID) const;
 	const float modelEntity_getReflectivity(const string& ID, const string& partID) const;
 	const float modelEntity_getLightness(const string& ID, const string& partID) const;
 	const float modelEntity_getSpecularShininess(const string& ID, const string& partID) const;
@@ -314,7 +314,7 @@ public:
 	const bool modelEntity_isShadowed(const string& ID) const;
 	const bool modelEntity_isReflected(const string& ID) const;
 	const bool modelEntity_isStaticToCamera(const string& ID) const;
-	const bool modelEntity_isWireframed(const string& ID) const;
+	const bool modelEntity_isWireframed(const string& ID, const string& partID) const;
 	const bool modelEntity_isDepthMapIncluded(const string& ID) const;
 	const bool modelEntity_hasPart(const string& ID, const string& partID) const;
 	const bool modelEntity_isBright(const string& ID) const;
@@ -349,10 +349,10 @@ public:
 	void billboardEntity_rotateTo(const string& ID, Vec3 target, float speed);
 	void billboardEntity_scaleTo(const string& ID, Vec2 target, float speed);
 	void billboardEntity_setColor(const string& ID, Vec3 color);
+	void billboardEntity_setWireframeColor(const string& ID, Vec3 color);
 	void billboardEntity_setMinHeight(const string& ID, float height);
 	void billboardEntity_setMaxHeight(const string& ID, float height);
 	void billboardEntity_setLightness(const string& ID, float lightness);
-	void billboardEntity_setColorInversion(const string& ID, float colorInversion);
 	void billboardEntity_setTransparency(const string& ID, float transparency);
 	void billboardEntity_setTextureRepeat(const string& ID, float repeat);
 	void billboardEntity_setEmissionIntensity(const string& ID, float intensity);
@@ -381,8 +381,8 @@ public:
 	const Vec3 billboardEntity_getRotation(const string& ID) const;
 	const Vec2 billboardEntity_getSize(const string& ID) const;
 	const Vec3 billboardEntity_getColor(const string& ID) const;
+	const Vec3 billboardEntity_getWireframeColor(const string& ID) const;
 	const float billboardEntity_getLightness(const string& ID) const;
-	const float billboardEntity_getColorInversion(const string& ID) const;
 	const float billboardEntity_getMinHeight(const string& ID) const;
 	const float billboardEntity_getMaxHeight(const string& ID) const;
 	const float billboardEntity_getTransparency(const string& ID) const;

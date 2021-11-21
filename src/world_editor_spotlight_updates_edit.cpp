@@ -6,34 +6,34 @@ void WorldEditor::_updateSpotlightEditing()
 	// Temporary values
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
-	// Reset selected torch from last frame
-	if(!_dontResetSelectedTorch)
-	{
-		_selectedTorchID = "";
-	}
-	else
-	{
-		_dontResetSelectedTorch = false;
-	}
-
-	// User must not be in placement mode
+	// User must not be placing anything
 	if(_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
+		// Reset selected torch from last frame
+		if(!_dontResetSelectedTorch)
+		{
+			_selectedTorchID = "";
+		}
+		else
+		{
+			_dontResetSelectedTorch = false;
+		}
+
 		// Check which entity is selected
 		auto hoveredAabbID = _fe3d.raycast_checkCursorInAny().first;
 
 		// Check if user selected a torch model
-		for(const auto& entityID : _fe3d.modelEntity_getAllIDs())
+		for(const auto& ID : _fe3d.modelEntity_getAllIDs())
 		{
 			// Must be spotlight preview entity
-			if(entityID.substr(0, string("@@torch").size()) == "@@torch")
+			if(ID.substr(0, string("@@torch").size()) == "@@torch")
 			{
 				// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
-				if(hoveredAabbID == entityID && _fe3d.misc_isCursorInsideViewport() &&
+				if(hoveredAabbID == ID && _fe3d.misc_isCursorInsideViewport() &&
 				   !_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Select hovered torch
-					_selectSpotlight(entityID.substr(string("@@torch_").size()));
+					_selectSpotlight(ID.substr(string("@@torch_").size()));
 
 					// Check if user clicked torch
 					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -47,11 +47,10 @@ void WorldEditor::_updateSpotlightEditing()
 				}
 				else
 				{
-					// Don't reset if torch is active or selected
-					if((entityID != _activeTorchID) && (entityID != _selectedTorchID))
+					// Unselect if necessary
+					if((ID != _selectedTorchID) && (ID != _activeTorchID))
 					{
-						_fe3d.modelEntity_setBaseSize(entityID, DEFAULT_TORCH_SIZE);
-						_fe3d.aabbEntity_setLocalSize(entityID, DEFAULT_TORCH_AABB_SIZE);
+						_unselectSpotlight(ID);
 					}
 				}
 			}
@@ -76,12 +75,12 @@ void WorldEditor::_updateSpotlightEditing()
 			}
 		}
 
-		// Update torch animations
+		// Update torch highlighting
 		if(_selectedTorchID != _activeTorchID)
 		{
-			_updateTorchAnimation(_selectedTorchID, _selectedTorchSizeDirection);
+			_updateTorchHighlighting(_selectedTorchID, _selectedTorchHighlightDirection);
 		}
-		_updateTorchAnimation(_activeTorchID, _activeTorchSizeDirection);
+		_updateTorchHighlighting(_activeTorchID, _activeTorchHighlightDirection);
 
 		// Update properties screen
 		if(!_activeTorchID.empty())

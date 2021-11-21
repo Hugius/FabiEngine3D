@@ -41,6 +41,11 @@ const Vec3 ModelEntity::getColor(const string& partID) const
 	return _parts[_getPartIndex(partID)].color;
 }
 
+const Vec3 ModelEntity::getWireframeColor(const string& partID) const
+{
+	return _parts[_getPartIndex(partID)].wireframeColor;
+}
+
 const Vec3 ModelEntity::getBasePosition() const
 {
 	return _basePosition;
@@ -84,11 +89,6 @@ const Vec3 ModelEntity::getPartSize(const string& partID) const
 const Vec3 ModelEntity::getLevelOfDetailSize() const
 {
 	return _levelOfDetailSize;
-}
-
-const float ModelEntity::getColorInversion(const string& partID) const
-{
-	return _parts[_getPartIndex(partID)].colorInversion;
 }
 
 const float ModelEntity::getCubeReflectionMixValue() const
@@ -161,6 +161,11 @@ const vector<string> ModelEntity::getPartIDs() const
 const bool ModelEntity::isFaceCulled() const
 {
 	return _isFaceCulled;
+}
+
+const bool ModelEntity::isWireframed(const string& partID) const
+{
+	return _parts[_getPartIndex(partID)].isWireframed;
 }
 
 const bool ModelEntity::isSpecular(const string& partID) const
@@ -241,11 +246,6 @@ const bool ModelEntity::isDepthMapIncluded() const
 const bool ModelEntity::isLevelOfDetailed() const
 {
 	return _isLevelOfDetailed;
-}
-
-const bool ModelEntity::isWireframed() const
-{
-	return _isWireframed;
 }
 
 const float ModelEntity::getLightness(const string& partID) const

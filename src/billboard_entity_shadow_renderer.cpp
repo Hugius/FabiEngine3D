@@ -56,7 +56,6 @@ void BillboardEntityShadowRenderer::render(const shared_ptr<BillboardEntity> ent
 
 		// Shader uniforms
 		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
-		_shader.uploadUniform("u_positionY", entity->getPosition().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_textureRepeat", entity->getTextureRepeat());

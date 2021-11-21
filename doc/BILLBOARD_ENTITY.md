@@ -93,13 +93,10 @@
   - Constraints: none
 - **Facing Y**: the mesh is vertically facing the camera
   - Constraints: none
-- **Facing Y**: enable or disable vertical billboard facing towards the camera
+- **Bright**: enable or disable vertical billboard facing towards the camera
   - Constraints: none
-- **Facing Y**: enable or disable vertical billboard facing towards the camera
+- **Wireframed**: enable or disable vertical billboard facing towards the camera
   - Constraints: none
-- **Facing Y**: enable or disable vertical billboard facing towards the camera
+- **Text**: enable or disable vertical billboard facing towards the camera
   - Constraints: none
-- **Facing Y**: enable or disable vertical billboard facing towards the camera
-  - Constraints: none
-- **Facing Y**: enable or disable vertical billboard facing towards the camera
-  - Constraints: none
+

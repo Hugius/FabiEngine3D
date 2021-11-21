@@ -142,7 +142,6 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus.isWireframeRenderingEnabled()));
-		_shader.uploadUniform("u_positionY", entity->getBasePosition().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_isBright", entity->isBright());

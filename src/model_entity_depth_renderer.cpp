@@ -45,7 +45,6 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, floa
 		}
 
 		// Shader uniforms
-		_shader.uploadUniform("u_positionY", entity->getBasePosition().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_clippingY", clippingY);

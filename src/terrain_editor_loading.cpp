@@ -366,6 +366,12 @@ const bool TerrainEditor::loadTerrainEntitiesFromFile()
 		replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
 		replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
 
+		// Convert to long path
+		if(!Config::getInst().isApplicationExported())
+		{
+			heightMapPath = string("projects\\" + _currentProjectID + "\\" + heightMapPath);
+		}
+
 		// Create terrain
 		_fe3d.terrainEntity_create(terrainID, heightMapPath);
 

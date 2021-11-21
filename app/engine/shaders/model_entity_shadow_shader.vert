@@ -11,7 +11,6 @@ uniform mat4 u_transformationMatrix;
 uniform mat4 u_lightSpaceMatrix;
 
 // Float uniforms
-uniform float u_positionY;
 uniform float u_minHeight;
 uniform float u_maxHeight;
 
@@ -30,8 +29,8 @@ void main()
 
 	// GLSL variables
 	gl_Position = lightSpacePosition;
-	gl_ClipDistance[0] = dot(worldSpacePosition, vec4(0.0f,  1.0f, 0.0f, -(u_positionY + u_minHeight)));
-	gl_ClipDistance[1] = dot(worldSpacePosition, vec4(0.0f, -1.0f, 0.0f,  (u_positionY + u_maxHeight)));
+	gl_ClipDistance[0] = dot(worldSpacePosition, vec4(0.0f,  1.0f, 0.0f, -u_minHeight));
+	gl_ClipDistance[1] = dot(worldSpacePosition, vec4(0.0f, -1.0f, 0.0f,  u_maxHeight));
 	
 	// Out variables
 	f_uv = vec2(v_uv.x, -v_uv.y);

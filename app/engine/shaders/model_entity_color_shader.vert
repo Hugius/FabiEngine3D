@@ -19,7 +19,6 @@ uniform mat3 u_normalTransformationMatrix;
 uniform vec4 u_clippingPlane;
 
 // Float uniforms
-uniform float u_positionY;
 uniform float u_minHeight;
 uniform float u_maxHeight;
 uniform float u_textureRepeat;
@@ -44,21 +43,21 @@ void main()
 {
 	// In variables
 	vec4 worldSpacePosition = (u_transformationMatrix * vec4(v_pos, 1.0f)) + ((u_isInstanced == true) ? vec4(v_offset, 0.0f) : vec4(0.0f));
-	vec4 viewSpacePosition  = (u_viewMatrix * worldSpacePosition);
-	vec4 clipSpacePosition  = (u_projectionMatrix * viewSpacePosition);
+	vec4 viewSpacePosition = (u_viewMatrix * worldSpacePosition);
+	vec4 clipSpacePosition = (u_projectionMatrix * viewSpacePosition);
 
 	// GLSL variables
 	gl_Position = clipSpacePosition;
-	gl_ClipDistance[0] = dot(worldSpacePosition, vec4(0.0f,  1.0f, 0.0f, -(u_positionY + u_minHeight)));
-	gl_ClipDistance[1] = dot(worldSpacePosition, vec4(0.0f, -1.0f, 0.0f,  (u_positionY + u_maxHeight)));
+	gl_ClipDistance[0] = dot(worldSpacePosition, vec4(0.0f,  1.0f, 0.0f, -u_minHeight));
+	gl_ClipDistance[1] = dot(worldSpacePosition, vec4(0.0f, -1.0f, 0.0f,  u_maxHeight));
 	gl_ClipDistance[2] = dot(worldSpacePosition, u_clippingPlane);
 	
 	// Out variables
-	f_position       = worldSpacePosition.xyz;
-	f_uv        = (vec2(v_uv.x, -v_uv.y) * u_textureRepeat);
-	f_normal    = normalize(u_normalTransformationMatrix * v_normal);
+	f_position = worldSpacePosition.xyz;
+	f_uv = (vec2(v_uv.x, -v_uv.y) * u_textureRepeat);
+	f_normal = normalize(u_normalTransformationMatrix * v_normal);
 	f_shadowPosition = u_shadowMatrix * worldSpacePosition;
-	f_clip      = clipSpacePosition;
+	f_clip = clipSpacePosition;
     f_tbnMatrix = calculateTbnMatrix();
 }
 

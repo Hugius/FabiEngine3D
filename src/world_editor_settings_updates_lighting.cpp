@@ -131,17 +131,17 @@ void WorldEditor::_updateDirectionalLightingSettingsMenu()
 				_fe3d.gfx_disableDirectionalLighting(false);
 			}
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
-		{
-			_gui.getGlobalScreen()->createValueForm("colorR", "R", color.r * 255.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			_gui.getGlobalScreen()->createValueForm("colorG", "G", color.g * 255.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			_gui.getGlobalScreen()->createValueForm("colorB", "B", color.b * 255.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("positionX", "X", position.x, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			_gui.getGlobalScreen()->createValueForm("positionY", "Y", position.y, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			_gui.getGlobalScreen()->createValueForm("positionZ", "Z", position.z, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("colorR", "R", color.r * 255.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("colorG", "G", color.g * 255.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("colorB", "B", color.b * 255.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
@@ -153,6 +153,21 @@ void WorldEditor::_updateDirectionalLightingSettingsMenu()
 		}
 
 		// Update value forms
+		if(_gui.getGlobalScreen()->checkValueForm("positionX", position.x))
+		{
+			_fe3d.gfx_setDirectionalLightingPosition(position);
+			_fe3d.billboardEntity_setPosition("@@directionalLightSource", position);
+		}
+		if(_gui.getGlobalScreen()->checkValueForm("positionY", position.y))
+		{
+			_fe3d.gfx_setDirectionalLightingPosition(position);
+			_fe3d.billboardEntity_setPosition("@@directionalLightSource", position);
+		}
+		if(_gui.getGlobalScreen()->checkValueForm("positionZ", position.z))
+		{
+			_fe3d.gfx_setDirectionalLightingPosition(position);
+			_fe3d.billboardEntity_setPosition("@@directionalLightSource", position);
+		}
 		if(_gui.getGlobalScreen()->checkValueForm("colorR", color.r))
 		{
 			color.r /= 255.0f;
@@ -170,21 +185,6 @@ void WorldEditor::_updateDirectionalLightingSettingsMenu()
 			color.b /= 255.0f;
 			_fe3d.gfx_setDirectionalLightingColor(color);
 			_fe3d.billboardEntity_setColor("@@directionalLightSource", color);
-		}
-		if(_gui.getGlobalScreen()->checkValueForm("positionX", position.x))
-		{
-			_fe3d.gfx_setDirectionalLightingPosition(position);
-			_fe3d.billboardEntity_setPosition("@@directionalLightSource", position);
-		}
-		if(_gui.getGlobalScreen()->checkValueForm("positionY", position.y))
-		{
-			_fe3d.gfx_setDirectionalLightingPosition(position);
-			_fe3d.billboardEntity_setPosition("@@directionalLightSource", position);
-		}
-		if(_gui.getGlobalScreen()->checkValueForm("positionZ", position.z))
-		{
-			_fe3d.gfx_setDirectionalLightingPosition(position);
-			_fe3d.billboardEntity_setPosition("@@directionalLightSource", position);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
 		{

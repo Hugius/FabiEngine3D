@@ -67,10 +67,10 @@
   - Constraints: at least `0.0`
 - **Reflectivity**: the percentage of how reflective the mesh is
   - Constraints: between `0.0` and `1.0`
-- **Min Height**: WIP
-  - Constraints: between `WIP` and `WIP`
-- **Max Height**: WIP
-  - Constraints: between `WIP` and `WIP`
+- **Min Height**: the minimum world height from which fragments are visible
+  - Constraints: none
+- **Max Height**: the maximum world height to which fragments are visible
+  - Constraints: none
 - **Transparency**: the transparency of the fragments
   - Constraints: between `0.0` and `1.0`
 - **Color Inversion**: NOT SURE IF WE NEED TO KEEP IT

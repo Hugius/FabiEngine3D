@@ -61,10 +61,10 @@
   - Constraints: at least `0.0`
 - **Transparency**: the transparency of the fragments
   - Constraints: between `0.0` and `1.0`
-- **Min Height**: REKOREKGOIEROGIERKIG
-  - Constraints: at least `0.0`
-- **Max Height**: REKOREKGOIEROGIERKIG
-  - Constraints: at least `0.0`
+- **Min Height**: the minimum world height from which fragments are visible
+  - Constraints: none
+- **Max Height**: the maximum world height to which fragments are visible
+  - Constraints: none
 - **Color Inversion**: REFGIJOREJGREIGJERGJERIGJ
   - Constraints: at least `0.0`
 
@@ -97,6 +97,5 @@
   - Constraints: none
 - **Wireframed**: enable or disable vertical billboard facing towards the camera
   - Constraints: none
-- **Text**: enable or disable vertical billboard facing towards the camera
+- **Text**: the billboard is text
   - Constraints: none
-

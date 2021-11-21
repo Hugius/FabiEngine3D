@@ -155,7 +155,7 @@ const bool FabiEngine3D::billboardEntity_hasEmissionMap(const string& ID) const
 
 const bool FabiEngine3D::billboardEntity_isText(const string& ID) const
 {
-	return _core->_billboardEntityManager.getEntity(ID)->isText();
+	return _core->_billboardEntityManager.getEntity(ID)->isTextual();
 }
 
 const bool FabiEngine3D::billboardEntity_isWireframed(const string& ID) const

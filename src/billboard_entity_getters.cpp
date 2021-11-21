@@ -195,7 +195,7 @@ const bool BillboardEntity::hasEmissionMap() const
 	return (_emissionMap != 0);
 }
 
-const bool BillboardEntity::isText() const
+const bool BillboardEntity::isTextual() const
 {
-	return _isText;
+	return _isTextual;
 }

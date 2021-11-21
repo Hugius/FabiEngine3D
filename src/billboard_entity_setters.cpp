@@ -124,10 +124,10 @@ void BillboardEntity::setCameraFacingY(bool value)
 	_isFacingCameraY = value;
 }
 
-void BillboardEntity::setDiffuseMap(TextureID value, bool isText)
+void BillboardEntity::setDiffuseMap(TextureID value, bool isTextual)
 {
 	_diffuseMap = value;
-	_isText = isText;
+	_isTextual = isTextual;
 }
 
 void BillboardEntity::setEmissionMap(TextureID value)

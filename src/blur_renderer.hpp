@@ -10,7 +10,7 @@ class BlurRenderer final : public BaseRenderer
 public:
 	using BaseRenderer::BaseRenderer;
 
-	// Voids
+	// VOID
 	void bind() override;
 	void unbind() override;
 	void loadCaptureBuffer(ivec2 bufferSize);
@@ -20,7 +20,7 @@ public:
 	const TextureID blurTexture(const shared_ptr<ImageEntity> entity, TextureID texture, unsigned int blurCount, float intensity, BlurDirection direction);
 
 private:
-	// Voids
+	// VOID
 	void _render(const shared_ptr<ImageEntity> entity, TextureID texture);
 
 	// Miscellaneous

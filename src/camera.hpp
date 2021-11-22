@@ -10,7 +10,7 @@ class Camera final
 public:
 	Camera(RenderBus& renderBus, Window& window);
 
-	// Voids
+	// VOID
 	void reset();
 	void update(ivec2 lastCursorPosition);
 	void updateMatrices();
@@ -37,18 +37,18 @@ public:
 	void notifyCursorCenter();
 	void invertUpVector();
 
-	// Matrices
+	// MAT44
 	const mat44& getViewMatrix() const;
 	const mat44& getProjectionMatrix() const;
 
-	// Vectors
+	// FVEC3
 	const fvec3 getUpVector() const;
 	const fvec3 getFrontVector() const;
 	const fvec3 getRightVector() const;
 	const fvec3 getPosition() const;
 	const fvec3 getThirdPersonLookat() const;
 
-	// Decimals
+	// FLOAT
 	const float getFOV() const;
 	const float getAspectRatio() const;
 	const float getYaw() const;
@@ -62,16 +62,16 @@ public:
 	const float getFarDistance() const;
 	const float getCursorSensitivity() const;
 
-	// Booleans
+	// BOOL
 	const bool isThirdPersonViewEnabled() const;
 	const bool isFirstPersonViewEnabled() const;
 
 private:
-	// Matrices
+	// MAT44
 	mat44 _viewMatrix = mat44(1.0f);
 	mat44 _projectionMatrix = mat44(1.0f);
 
-	// Vectors
+	// FVEC3
 	static inline const fvec3 DEFAULT_UP_VECTOR = fvec3(0.0f, 1.0f, 0.0f);
 	fvec3 _upVector = fvec3(0.0f);
 	fvec3 _frontVector = fvec3(0.0f);
@@ -79,7 +79,7 @@ private:
 	fvec3 _position = fvec3(0.0f);
 	fvec3 _thirdPersonLookat = fvec3(0.0f);
 
-	// Decimals
+	// FLOAT
 	static inline const float NEAR_DISTANCE = 0.01f;
 	static inline const float FAR_DISTANCE = 2500.0f;
 	static inline const float DEFAULT_CURSOR_SENSITIVITY = 0.01f;
@@ -110,7 +110,7 @@ private:
 	float _farDistance = 0.0f;
 	float _cursorSensitivity = 0.0f;
 
-	// Booleans
+	// BOOL
 	bool _isThirdPersonViewEnabled = false;
 	bool _isFirstPersonViewEnabled = false;
 	bool _mustCenterCursor = false;

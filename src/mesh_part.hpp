@@ -13,28 +13,32 @@ class MeshPart final
 public:
 	MeshPart(const string& ID);
 
-	// Voids
+	// VOID
 	void addVertex(fvec3 value);
 	void addNormal(fvec3 value);
 	void addTangent(fvec3 value);
 	void addUV(fvec2 value);
 
-	// Strings
+	// STRING
 	const string& getID() const;
 
-	// Vectors
+	// FVEC3
 	const vector<fvec3>& getVertices() const;
 	const vector<fvec3>& getNormals() const;
 	const vector<fvec3>& getTangents() const;
+
+	// FVEC2
 	const vector<fvec2>& getUVs() const;
 
 private:
-	// Strings
+	// STRING
 	const string _ID;
 
-	// Vectors
+	// FVEC3
 	vector<fvec3> _vertices;
 	vector<fvec3> _normals;
 	vector<fvec3> _tangents;
+
+	// FVEC2
 	vector<fvec2> _uvs;
 };

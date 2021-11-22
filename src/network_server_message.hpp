@@ -11,14 +11,14 @@ class NetworkServerMessage final
 public:
 	NetworkServerMessage(const string& content, const NetworkProtocol protocol);
 
-	// Strings
+	// STRING
 	const string& getContent() const;
 
 	// Miscellaneous
 	const NetworkProtocol getProtocol() const;
 
 private:
-	// Strings
+	// STRING
 	string _content;
 
 	// Miscellaneous

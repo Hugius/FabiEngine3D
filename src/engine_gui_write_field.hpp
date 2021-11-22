@@ -9,37 +9,37 @@ public:
 	EngineGuiWriteField(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor,
 						fvec3 textColor, fvec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered);
 
-	// Voids
+	// VOID
 	void update(bool hoverable) override;
 	void setActive(bool active);
 	void setPermActive(bool active);
 	void changeTextContent(const string& content) override;
 
-	// Strings
+	// STRING
 	const string getTextContent() const;
 	
-	// Booleans
+	// BOOL
 	const bool confirmedInput() const;
 	const bool isActive() const;
 	const bool hasTextContentChanged();
 
 private:
-	// Voids
+	// VOID
 	void _updateActivation();
 	void _updateTyping();
 
-	// Strings
+	// STRING
 	string _lastTextContent = "";
 	string _currentTextContent = "";
 
-	// Decimals
+	// FLOAT
 	static inline const float CHAR_WIDTH = 0.02f;
 
-	// Integers
+	// INT
 	static inline const int MAX_PASSED_BAR_FRAMES = 50;
 	static inline const int MAX_PASSED_BACKSPACE_FRAMES = 20;
 
-	// Booleans
+	// BOOL
 	const bool _noNumbers;
 	const bool _noCaps;
 	const bool _noSpecials;

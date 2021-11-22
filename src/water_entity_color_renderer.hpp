@@ -14,7 +14,7 @@ class WaterEntityColorRenderer final : public BaseRenderer
 public:
 	using BaseRenderer::BaseRenderer;
 
-	// Voids
+	// VOID
 	void bind() override;
 	void unbind() override;
 	void processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>>& entities);

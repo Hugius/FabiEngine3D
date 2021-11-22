@@ -13,7 +13,7 @@ class ReflectionEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	// Voids
+	// VOID
 	void updateTransformation();
 	void capture();
 	void setCaptured();
@@ -22,24 +22,24 @@ public:
 	void moveTo(fvec3 target, float speed);
 	void setCubeMap(TextureID value);
 
-	// Vectors
+	// FVEC3
 	const fvec3 getPosition() const;
 
-	// Booleans
+	// BOOL
 	const bool mustCapture() const;
 
 	// Miscellaneous
 	const TextureID getCubeMap() const;
 
 private:
-	// Vectors
+	// FVEC3
 	fvec3 _position = fvec3(0.0f);
 	fvec3 _positionTarget = fvec3(0.0f);
 
-	// Decimals
+	// FLOAT
 	float _positionTargetSpeed = 0.0f;
 
-	// Booleans
+	// BOOL
 	bool _mustCapture = false;
 	bool _isCaptured = false;
 

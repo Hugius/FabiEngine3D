@@ -14,7 +14,7 @@ class NetworkUtils final
 public:
 	NetworkUtils() = delete;
 
-	// Strings
+	// STRING
 	static const string extractAddressIP(sockaddr_in* address);
 	static const string extractAddressPort(sockaddr_in* address);
 	static const string extractSocketIP(SOCKET socket);
@@ -22,7 +22,7 @@ public:
 	static const string extractPeerIP(SOCKET socket);
 	static const string extractPeerPort(SOCKET socket);
 
-	// Booleans
+	// BOOL
 	static const bool isValidIP(const string& IP);
 	static const bool isMessageReadyUDP(SOCKET socket);
 	static const bool isMessageReserved(const string& message);
@@ -30,10 +30,10 @@ public:
 	// Miscellaneous
 	static const sockaddr_in composeSocketAddress(const string& IP, const string& port);
 
-	// Strings
+	// STRING
 	static inline const string SERVER_PORT = "61295";
 
-	// Integers
+	// UNSIGNED INT
 	static inline const unsigned int PORT_DIGIT_COUNT = 5;
 	static inline const unsigned int MAX_PING_COUNT = 10;
 	static inline const unsigned int MAX_MESSAGE_CHARACTERS = 128;

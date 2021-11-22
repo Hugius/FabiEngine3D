@@ -15,7 +15,7 @@ class SkyEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	// Voids
+	// VOID
 	void updateRotationMatrix();
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setCubeMapPaths(const array<string, 6>& value);
@@ -27,22 +27,22 @@ public:
 	void setWireframed(bool value);
 	void setWireframeColor(fvec3 value);
 
-	// Strings
+	// STRING
 	const array<string, 6>& getCubeMapPaths() const;
 
-	// Matrices
+	// MAT44
 	const mat44& getRotationMatrix() const;
 
-	// Vectors
+	// FVEC3
 	const fvec3 getWireframeColor() const;
 	const fvec3 getColor() const;
 
-	// Decimals
+	// FLOAT
 	const float getInitialLightness() const;
 	const float getLightness() const;
 	const float getRotation() const;
 
-	// Booleans
+	// BOOL
 	const bool hasRenderBuffer() const;
 	const bool hasCubeMap() const;
 	const bool isWireframed() const;
@@ -52,22 +52,22 @@ public:
 	const TextureID getCubeMap() const;
 
 private:
-	// Strings
+	// STRING
 	array<string, 6> _cubeMapPaths = { "", "", "", "", "", "" };
 
-	// Matrices
+	// MAT44
 	mat44 _rotationMatrix = mat44(1.0f);
 
-	// Vectors
+	// FVEC3
 	fvec3 _wireframeColor = fvec3(1.0f);
 	fvec3 _color = fvec3(1.0f);
 
-	// Decimals
+	// FLOAT
 	float _initialLightness = 1.0f;
 	float _lightness = 1.0f;
 	float _rotation = 0.0f;
 
-	// Booleans
+	// BOOL
 	bool _isWireframed = false;
 
 	// Miscellaneous

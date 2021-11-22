@@ -19,7 +19,7 @@ struct fvec4 final
 	fvec4(const float& value);
 	fvec4(const float& x, const float& y, const float& z, const float& w);
 
-	// Voids
+	// VOID
 	void operator+=(const fvec4& v);
 	void operator-=(const fvec4& v);
 	void operator*=(const fvec4& v);
@@ -29,7 +29,7 @@ struct fvec4 final
 	void operator/=(const float& value);
 	void operator*=(const float& value);
 
-	// Vectors
+	// FVEC4
 	const fvec4 operator-() const;
 	const fvec4 operator+(const fvec4& v) const;
 	const fvec4 operator-(const fvec4& v) const;
@@ -40,7 +40,7 @@ struct fvec4 final
 	const fvec4 operator/(const float& value) const;
 	const fvec4 operator*(const float& value) const;
 
-	// Booleans
+	// BOOL
 	const bool operator==(const fvec4& other) const;
 	const bool operator!=(const fvec4& other) const;
 

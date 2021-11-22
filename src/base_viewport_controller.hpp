@@ -8,14 +8,14 @@ class BaseViewportController
 public:
 	BaseViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui);
 
-	// Voids
+	// VOID
 	virtual void initialize() = 0;
 	virtual void update() = 0;
 
-	// Decimals
+	// FLOAT
 	static const vector<float> calculateButtonPositions(unsigned int buttonCount, float buttonHeight);
 
-	// Decimals
+	// FLOAT
 	static const float calculateTextWidth(const string& text, float charWidth);
 
 protected:

@@ -7,7 +7,7 @@ class AabbEntityManager final : public BaseEntityManager
 public:
 	AabbEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
 
-	// Voids
+	// VOID
 	void update() override;
 	void createEntity(const string& ID);
 	void update(const unordered_map<string, shared_ptr<ModelEntity>>& modelEntities, const unordered_map<string, shared_ptr<BillboardEntity>>& billboardEntities);

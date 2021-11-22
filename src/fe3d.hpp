@@ -969,13 +969,13 @@ protected:
 	virtual void FE3D_CONTROLLER_DESTROY() = 0;
 
 private:
-	// Strings
+	// STRING
 	string _hoveredAabbID = "";
 
-	// Decimals
+	// FLOAT
 	float _hoveredAabbDistance = -1.0f;
 
-	// Booleans
+	// BOOL
 	bool _isRaycastUpdated = false;
 
 	// Miscellaneous

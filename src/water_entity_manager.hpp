@@ -7,7 +7,7 @@ class WaterEntityManager final : public BaseEntityManager
 public:
 	WaterEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
 
-	// Voids
+	// VOID
 	void update() override;
 	void createEntity(const string& ID);
 	void loadMesh(const string& ID);
@@ -18,10 +18,10 @@ public:
 	shared_ptr<WaterEntity> getEntity(const string& ID);
 	shared_ptr<WaterEntity> getSelectedWater();
 
-	// Integers
+	// UNSIGNED INT
 	static inline const unsigned int MAX_SIZE = 1024;
 
 private:
-	// Strings
+	// STRING
 	string _selectedID = "";
 };

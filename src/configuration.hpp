@@ -14,22 +14,22 @@ class Config final
 public:
 	Config(Config const&) = delete;
 
-	// Voids
+	// VOID
 	void operator=(Config const&) = delete;
 
-	// Strings
+	// STRING
 	const string& getWindowTitle() const;
 
-	// Vectors
+	// FVEC2
 	const ivec2 getMonitorSize() const;
 	const ivec2 getWindowSize()	const;
 	const ivec2 getViewportSize() const;
 	const ivec2 getViewportPosition() const;
 
-	// Decimals
+	// FLOAT
 	static inline const float MS_PER_UPDATE = (1000.0f / 144.0f);
 
-	// Integers
+	// UNSIGNED INT
 	static inline const unsigned int MIN_BLOOM_SIZE = 1;
 	static inline const unsigned int MAX_BLOOM_SIZE = 5;
 	static inline const unsigned int MIN_DOF_SIZE = 1;
@@ -48,7 +48,7 @@ public:
 	static inline const unsigned int MAX_AUDIO_CHANNELS = 512;
 	static inline const unsigned int UPDATES_PER_SECOND = 144;
 
-	// Booleans
+	// BOOL
 	const bool isWindowFullscreen()	const;
 	const bool isWindowBorderless()	const;
 	const bool isApplicationExported() const;
@@ -63,22 +63,22 @@ public:
 private:
 	Config();
 
-	// Voids
+	// VOID
 	void _processOption(ifstream& file, string& option, string criteria);
 	void _processOption(ifstream& file, float& option, string criteria);
 	void _processOption(ifstream& file, int& option, string criteria);
 	void _processOption(ifstream& file, bool& option, string criteria);
 
-	// Strings
+	// STRING
 	string _windowTitle = "";
 
-	// Vectors
+	// FVEC2
 	ivec2 _monitorSize = ivec2(0);
 	ivec2 _windowSize = ivec2(0);
 	ivec2 _viewportSize = ivec2(0);
 	ivec2 _viewportPosition = ivec2(0);
 
-	// Booleans
+	// BOOL
 	bool _isWindowFullscreen = false;
 	bool _isWindowBorderless = false;
 	bool _isApplicationExported = false;

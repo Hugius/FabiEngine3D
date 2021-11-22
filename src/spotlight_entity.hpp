@@ -8,7 +8,7 @@ class SpotlightEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	// Voids
+	// VOID
 	void updateTransformation();
 	void updateFrontVector();
 	void setPosition(fvec3 value);
@@ -21,12 +21,12 @@ public:
 	void setAngle(float value);
 	void setDistance(float value);
 
-	// Vectors
+	// FVEC3
 	const fvec3 getPosition() const;
 	const fvec3 getFrontVector() const;
 	const fvec3 getColor() const;
 
-	// Decimals
+	// FLOAT
 	const float getYaw() const;
 	const float getPitch() const;
 	const float getIntensity() const;
@@ -34,13 +34,13 @@ public:
 	const float getDistance() const;
 
 private:
-	// Vectors
+	// FVEC3
 	fvec3 _position = fvec3(0.0f);
 	fvec3 _positionTarget = fvec3(0.0f);
 	fvec3 _frontVector = fvec3(0.0f);
 	fvec3 _color = fvec3(1.0f);
 
-	// Decimals
+	// FLOAT
 	static inline const float MAX_ANGLE = 45.0f;
 	float _positionTargetSpeed = 0.0f;
 	float _yaw = 0.0f;

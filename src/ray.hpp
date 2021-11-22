@@ -7,12 +7,12 @@ class Ray final
 public:
 	Ray(fvec3 position, fvec3 direction);
 
-	// Vectors
+	// FVEC3
 	const fvec3 getPosition() const;
 	const fvec3 getDirection() const;
 
 private:
-	// Vectors
+	// FVEC3
 	fvec3 _position;
 	fvec3 _direction;
 };

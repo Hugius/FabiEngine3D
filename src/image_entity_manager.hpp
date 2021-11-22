@@ -7,7 +7,7 @@ class ImageEntityManager final : public BaseEntityManager
 public:
 	ImageEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
 
-	// Voids
+	// VOID
 	void update() override;
 	void update(bool isEnginePaused);
 	void createEntity(const string& ID, bool isCentered);

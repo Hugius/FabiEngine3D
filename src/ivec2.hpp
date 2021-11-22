@@ -19,7 +19,7 @@ struct ivec2 final
 	ivec2(const int& value);
 	ivec2(const int& x, const int& y);
 
-	// Voids
+	// VOID
 	void operator+=(const ivec2& other);
 	void operator-=(const ivec2& other);
 	void operator*=(const ivec2& other);
@@ -29,7 +29,7 @@ struct ivec2 final
 	void operator/=(const int& other);
 	void operator*=(const int& other);
 
-	// Vectors
+	// IVEC2
 	const ivec2 operator-() const;
 	const ivec2 operator+(const ivec2& other) const;
 	const ivec2 operator-(const ivec2& other) const;
@@ -40,7 +40,7 @@ struct ivec2 final
 	const ivec2 operator*(const int& other) const;
 	const ivec2 operator/(const int& other) const;
 
-	// Booleans
+	// BOOL
 	const bool operator==(const ivec2& other) const;
 	const bool operator!=(const ivec2& other) const;
 

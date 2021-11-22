@@ -288,7 +288,7 @@ const float ModelEntity::getTextureRepeat(const string& partID) const
 	return _parts[_getPartIndex(partID)].textureRepeat;
 }
 
-unsigned int ModelEntity::_getPartIndex(const string& partID) const
+const unsigned int ModelEntity::_getPartIndex(const string& partID) const
 {
 	// Validate parts amount
 	if(partID.empty())

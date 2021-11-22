@@ -12,17 +12,17 @@ public:
 	EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size,
 					const string& texturePath, fvec3 hoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered);
 
-	// Voids
+	// VOID
 	virtual void update(bool isHoverable);
 	virtual void changeTextContent(const string& content);
 	void setVisible(bool isVisible);
 	void setHoverable(bool isHoverable);
 
-	// Strings
+	// STRING
 	const string& getID() const;
 	const string& getParentID() const;
 
-	// Booleans
+	// BOOL
 	const bool isHoverable() const;
 	const bool isHovered() const;
 
@@ -31,18 +31,18 @@ public:
 	shared_ptr<EngineGuiTextField> getTextField() const;
 
 protected:
-	// Voids
+	// VOID
 	void _updateHovering(bool hoverable);
 
-	// Strings
+	// STRING
 	const string _ID;
 	const string _parentID;
 
-	// Vectors
+	// FVEC3
 	const fvec3 _hoverColor;
 	const fvec3 _textHoverColor;
 
-	// Booleans
+	// BOOL
 	bool _isHovered = false;
 	bool _isHoverable = true;
 
@@ -52,14 +52,14 @@ protected:
 	shared_ptr<EngineGuiTextField> _textField = nullptr;
 
 private:
-	// Decimals
+	// FLOAT
 	static inline const float TOTAL_SIZE_INCREASE = 1.125f;
 	static inline const float INCREASE_MULTIPLIER = 1.005f;
 	static inline const float DECREASE_MULTIPLIER = 0.995f;
 	static inline const float TEXT_WIDTH_MULTIPLIER = 0.9f;
 	static inline const float TEXT_HEIGHT_MULTIPLIER = 0.75f;
 
-	// Booleans
+	// BOOL
 	const bool _isSizeChangeEnabled;
 	const bool _isColorChangeEnabled;
 };

@@ -12,7 +12,7 @@ class EngineGuiGlobalScreen final
 public:
 	EngineGuiGlobalScreen(FabiEngine3D& fe3d);
 
-	// Voids
+	// VOID
 	void update();
 	void setFocus(bool focused);
 	void createScrollingList(const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 buttonColor, fvec3 buttonHoverColor, fvec3 textColor, fvec3 textHoverColor, fvec2 charSize, bool isCentered);
@@ -36,10 +36,10 @@ public:
 	void deleteChoiceForm(const string& ID);
 	void createAnswerForm(const string& ID, string title, fvec2 position);
 
-	// Strings
+	// STRING
 	const string checkChoiceForm(const string& ID);
 
-	// Booleans
+	// BOOL
 	const bool isFocused() const;
 	const bool isScrollingListExisting(const string& ID) const;
 	const bool isWriteFieldExisting(const string& ID) const;
@@ -73,12 +73,12 @@ public:
 	shared_ptr<EngineGuiTextField> getTextField(const string& ID) const;
 
 private:
-	// Voids
+	// VOID
 	void _createValueForm(const string& ID, string title, string valueString, fvec2 position, fvec2 size, fvec2 buttonsPosition, bool onlyNumbers, bool minusAllowed);
 	void _updateValueFormDeleting();
 	void _deleteAnswerForm(const string& ID);
 
-	// Booleans
+	// BOOL
 	const bool _checkValueForm(const string& ID, string& valueString, const vector<string>& forbiddenValueStrings);
 
 	// GUI elements
@@ -88,12 +88,12 @@ private:
 	vector<shared_ptr<EngineGuiRectangle>> _rectangles;
 	vector<shared_ptr<EngineGuiTextField>> _textFields;
 
-	// Strings
+	// STRING
 	vector<string> _valueFormIDs;
 	string _choiceFormID = "";
 	string _answerFormID = "";
 
-	// Booleans
+	// BOOL
 	bool _isFocused = false;
 	bool _mustDeleteValueForms = false;
 

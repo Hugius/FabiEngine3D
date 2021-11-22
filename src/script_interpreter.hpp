@@ -21,7 +21,7 @@ public:
 					  WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor,
 					  BillboardEditor& billboardEditor, AudioEditor& audioEditor, WorldEditor& worldEditor);
 
-	// Voids
+	// VOID
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void executeInitialization();
@@ -29,12 +29,12 @@ public:
 	void executeDestruction();
 	void unload();
 
-	// Booleans
+	// BOOL
 	const bool hasThrownError() const;
 	const bool gameMustStop() const;
 
 private:
-	// Voids
+	// VOID
 	void _executeScript(const string& scriptID, ScriptType scriptType);
 	void _processVariableCreation(const string& scriptLine, ScriptVariableScope scope);
 	void _processVariableAlteration(const string& scriptLine);
@@ -45,23 +45,27 @@ private:
 	void _throwScriptError(const string& message);
 	void _checkEngineWarnings(unsigned int lastLoggerMessageCount);
 
-	// Strings
+	// STRING
 	const string _limitIntegerString(const string& valueString) const;
 	const string _limitDecimalString(const string& valueString) const;
 
-	// Vectors
+	// FVEC3
 	const fvec3 _extractVec3FromString(const string& valueString);
 	const ivec3 _extractVec3PartFromString(const string& valueString) const;
+
+	// FVEC2
 	const fvec2 _convertGuiPositionToViewport(fvec2 position) const;
 	const fvec2 _convertGuiPositionFromViewport(fvec2 position) const;
 	const fvec2 _convertGuiSizeToViewport(fvec2 size) const;
 	const fvec2 _convertGuiSizeFromViewport(fvec2 size) const;
 
-	// Integers
+	// INT
 	const int _extractListIndexFromString(const string& valueString, bool& isAccessingList);
+
+	// UNSIGNED INT
 	const unsigned int _countFrontSpaces(const string& scriptLineText);
 
-	// Booleans
+	// BOOL
 	const bool _isListValue(const string& valueString) const;
 	const bool _isVec3Value(const string& valueString) const;
 	const bool _isStringValue(const string& valueString) const;
@@ -149,7 +153,7 @@ private:
 	ScriptVariable& _getGlobalVariable(const string& variableID);
 	ScriptConditionStatement* _getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth) const;
 
-	// Strings
+	// STRING
 	static inline const string META_KEYWORD = "META";
 	static inline const string EXECUTE_KEYWORD = "EXEC";
 	static inline const string LOOP_KEYWORD = "LOOP";
@@ -192,10 +196,10 @@ private:
 	string _updateEntryID = "";
 	string _destroyEntryID = "";
 
-	// Decimals
+	// FLOAT
 	map<string, float> _debuggingTimes;
 
-	// Integers
+	// UNSIGNED INT
 	static inline const unsigned int SPACES_PER_INDENT = 4;
 	static inline const unsigned int MAX_ITERATIONS_PER_LOOP = 1000;
 	static inline const unsigned int MAX_EXECUTION_DEPTH = 10;
@@ -203,7 +207,7 @@ private:
 	unsigned int _engineFunctionCallCount = 0;
 	unsigned int _executionDepth = 0;
 
-	// Booleans
+	// BOOL
 	bool _hasThrownError = false;
 	bool _mustStopApplication = false;
 	bool _hasPassedLoopStatement = false;

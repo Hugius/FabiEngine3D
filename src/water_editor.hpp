@@ -8,24 +8,24 @@ class WaterEditor final
 public:
 	WaterEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 
-	// Voids
+	// VOID
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void update();
 	void unload();
 	void unloadWaterEntities();
 
-	// Strings
+	// STRING
 	const vector<string> getAllWaterTexturePathsFromFile() const;
 	const vector<string>& getLoadedWaterIDs();
 
-	// Booleans
+	// BOOL
 	const bool loadWaterEntitiesFromFile();
 	const bool saveWaterEntitiesToFile() const;
 	const bool isLoaded() const;
 
 private:
-	// Voids
+	// VOID
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateMainMenu();
@@ -39,12 +39,12 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	// Strings
+	// STRING
 	vector <string> _loadedWaterIDs;
 	string _currentProjectID = "";
 	string _currentWaterID = "";
 
-	// Decimals
+	// FLOAT
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 	static inline const float CURSOR_SENSITIVITY = 0.025f;
@@ -58,7 +58,7 @@ private:
 	static inline const float CAMERA_DISTANCE_SPEED = 5.0f;
 	static inline const float MIN_CAMERA_DISTANCE = 0.5f;
 
-	// Booleans
+	// BOOL
 	bool _isCreatingWater = false;
 	bool _isChoosingWater = false;
 	bool _isDeletingWater = false;

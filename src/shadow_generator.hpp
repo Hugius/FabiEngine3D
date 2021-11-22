@@ -7,30 +7,30 @@ class ShadowGenerator final
 public:
 	ShadowGenerator(RenderBus& renderBus);
 
-	// Voids
+	// VOID
 	void update();
 	void updateMatrix();
 	void setInterval(unsigned int value);
 	void setFollowingCamera(bool value);
 
-	// Integers
+	// UNSIGNED INT
 	const unsigned int getInterval() const;
 
-	// Booleans
+	// BOOL
 	const bool isFollowingCamera() const;
 
 private:
-	// Matrices
+	// MAT44
 	const mat44 _createLightSpaceMatrix() const;
 
-	// Decimals
+	// FLOAT
 	static inline const float NEAR_DISTANCE = 0.01f;
 
-	// Integers
+	// UNSIGNED INT
 	unsigned int _interval = 0;
 	unsigned int _passedFrames = 0;
 
-	// Booleans
+	// BOOL
 	bool _isFollowingCamera = false;
 
 	// Miscellaneous

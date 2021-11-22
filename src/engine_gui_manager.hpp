@@ -9,14 +9,14 @@ class EngineGuiManager final
 public:
 	EngineGuiManager(FabiEngine3D& fe3d);
 
-	// Voids
+	// VOID
 	void update();
 
 	// Miscellaneous
 	shared_ptr<EngineGuiGlobalScreen> getGlobalScreen();
 	shared_ptr<EngineGuiViewport> getViewport(const string& ID);
 
-	// Vectors
+	// FVEC3
 	static inline const fvec3 FRAME_COLOR = fvec3(0.025f);
 
 private:

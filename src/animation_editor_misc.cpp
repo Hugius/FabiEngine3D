@@ -49,7 +49,7 @@ const bool AnimationEditor::_comparePartIDs(vector<string> first, vector<string>
 		}
 	}
 
-	// Vectors contents are the same
+	// Contents are the same
 	return true;
 }
 

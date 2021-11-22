@@ -21,7 +21,7 @@ public:
 	NetworkServerAPI();
 	~NetworkServerAPI();
 
-	// Voids
+	// VOID
 	void start(unsigned int maxClientCount);
 	void update();
 	void sendMessageTCP(const string& username, const string& content);
@@ -32,7 +32,7 @@ public:
 	void disconnectClients();
 	void stop();
 
-	// Strings
+	// STRING
 	const vector<string> getClientIPs() const;
 	const vector<string> getClientUsernames() const;
 	const string getNewClientIP() const;
@@ -40,7 +40,7 @@ public:
 	const string getOldClientIP() const;
 	const string getOldClientUsername() const;
 
-	// Booleans
+	// BOOL
 	const bool isRunning() const;
 	const bool isClientConnected(const string& username) const;
 
@@ -48,21 +48,21 @@ public:
 	const vector<NetworkClientMessage>& getPendingMessages() const;
 
 private:
-	// Voids
+	// VOID
 	void _disconnectClient(SOCKET socket);
 
-	// Strings
+	// STRING
 	tuple<int, int, long long, string> _waitForMessageTCP(SOCKET socket) const;
 	tuple<int, int, string, string, string> _receiveMessageUDP(SOCKET socket) const;
 
-	// Booleans
+	// BOOL
 	const bool _sendMessageTCP(SOCKET socket, const string& content, bool isReserved);
 	const bool _sendMessageUDP(const string& clientIP, const string& clientPort, const string& content, bool isReserved) const;
 
 	// Miscellaneous
 	const SOCKET _waitForClientConnection(SOCKET socket) const;
 
-	// Strings
+	// STRING
 	vector<future<tuple<int, int, long long, string>>> _messageThreadsTCP;
 	vector<string> _messageBuildsTCP;
 	vector<string> _clientIPs;
@@ -74,10 +74,10 @@ private:
 	string _newClientIP = "";
 	string _newClientUsername = "";
 
-	// Integers
+	// UNSIGNED INT
 	unsigned int _maxClientCount = 0;
 
-	// Booleans
+	// BOOL
 	bool _isRunning = false;
 
 	// Miscellaneous

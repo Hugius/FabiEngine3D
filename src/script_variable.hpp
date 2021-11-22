@@ -9,19 +9,19 @@ class ScriptVariable final
 public:
 	ScriptVariable(FabiEngine3D& fe3d, ScriptVariableScope scope, ScriptVariableType type, const string& ID, bool constant, vector<ScriptValue> values);
 
-	// Voids
+	// VOID
 	void changeValues(vector<ScriptValue> values);
 	void changeValue(ScriptValue value, unsigned int index = 0);
 	void addValue(ScriptValue value);
 	void removeValue(unsigned int index);
 
-	// Strings
+	// STRING
 	const string& getID() const;
 
-	// Integers
+	// UNSIGNED INT
 	const unsigned int getValueCount() const;
 
-	// Booleans
+	// BOOL
 	const bool isConstant() const;
 
 	// Miscellaneous
@@ -31,10 +31,10 @@ public:
 	const ScriptVariableType getType() const;
 
 private:
-	// Strings
+	// STRING
 	string _ID;
 
-	// Booleans
+	// BOOL
 	const bool _isConstant;
 
 	// Miscellaneous

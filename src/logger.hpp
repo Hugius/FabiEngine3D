@@ -29,7 +29,7 @@ class Logger final
 public:
 	Logger() = delete;
 
-	// Voids
+	// VOID
 	template<typename T, typename...Rest> inline static void throwInfo(T first, Rest...rest)
 	{
 		_printPrefix(MessageType::INFO);
@@ -75,20 +75,20 @@ public:
 		_messageQueue.clear();
 	}
 
-	// Strings
+	// STRING
 	inline static const vector<string>& getMessageQueue()
 	{
 		return _messageQueue;
 	}
 
-	// Integers
+	// UNSIGNED INT
 	inline static unsigned int getMessageCount()
 	{
 		return _messageCount;
 	}
 
 private:
-	// Voids
+	// VOID
 	inline static void _printPrefix(MessageType type)
 	{
 		HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE); // Console access
@@ -141,12 +141,10 @@ private:
 		_messageCount++;
 	}
 
-	// Strings
+	// STRING
+	inline static vector<string> _messageQueue;
 	inline static string _level_string[4] = { "Info", "Error", "Debug", "Warn" };
 
-	// Vectors
-	inline static vector<string> _messageQueue;
-
-	// Integers
+	// UNSIGNED INT
 	inline static unsigned int _messageCount = 0;
 };

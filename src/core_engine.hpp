@@ -37,7 +37,7 @@ class CoreEngine final
 private:
 	CoreEngine(FabiEngine3D& fe3d);
 
-	// Voids
+	// VOID
 	void _start();
 	void _pause();
 	void _resume();
@@ -47,10 +47,10 @@ private:
 	void _renderApplication();
 	void _updateWindowFading();
 
-	// Decimals
+	// FLOAT
 	float _deltaTimeMS = 0.0f;
 
-	// Booleans
+	// BOOL
 	bool _isPaused = false;
 	bool _isRunning = false;
 

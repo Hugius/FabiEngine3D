@@ -13,7 +13,7 @@ class WaterEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	// Voids
+	// VOID
 	void setLowQualityRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setHighQualityRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setQuality(WaterQuality value);
@@ -40,19 +40,21 @@ public:
 	void setWireframed(bool value);
 	void setWireframeColor(fvec3 value);
 
-	// Strings
+	// STRING
 	const string& getDudvMapPath() const;
 	const string& getNormalMapPath() const;
 	const string& getDisplacementMapPath() const;
 
-	// Vectors
+	// FVEC3
 	const fvec3 getColor() const;
+	const fvec3 getWireframeColor() const;
+
+	// FVEC2
 	const fvec2 getSpeed() const;
 	const fvec2 getRippleOffset() const;
 	const fvec2 getWaveOffset() const;
-	const fvec3 getWireframeColor() const;
 
-	// Decimals
+	// FLOAT
 	const float getHeight() const;
 	const float getTextureRepeat() const;
 	const float getWaveHeight() const;
@@ -61,7 +63,7 @@ public:
 	const float getSize() const;
 	const float getTransparency() const;
 
-	// Booleans
+	// BOOL
 	const bool isSpecular() const;
 	const bool isReflective() const;
 	const bool isRefractive() const;
@@ -81,19 +83,21 @@ public:
 	const TextureID getDisplacementMap() const;
 
 private:
-	// Strings
+	// STRING
 	string _dudvMapPath = "";
 	string _normalMapPath = "";
 	string _displacementMapPath = "";
 
-	// Vectors
+	// FVEC3
 	fvec3 _wireframeColor = fvec3(1.0f);
 	fvec3 _color = fvec3(1.0f);
+
+	// FVEC2
 	fvec2 _speed = fvec2(0.0f);
 	fvec2 _rippleOffset = fvec2(0.0f);
 	fvec2 _waveOffset = fvec2(0.0f);
 
-	// Decimals
+	// FLOAT
 	float _height = 0.0f;
 	float _size = 1.0f;
 	float _textureRepeat = 1.0f;
@@ -102,7 +106,7 @@ private:
 	float _specularIntensity = 1.0f;
 	float _transparency = 0.0f;
 
-	// Booleans
+	// BOOL
 	bool _isSpecular = false;
 	bool _isReflective = false;
 	bool _isRefractive = false;

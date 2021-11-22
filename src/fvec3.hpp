@@ -19,7 +19,7 @@ struct fvec3 final
 	fvec3(const float& value);
 	fvec3(const float& x, const float& y, const float& z);
 
-	// Voids
+	// VOID
 	void operator+=(const float& other);
 	void operator-=(const float& other);
 	void operator*=(const float& other);
@@ -29,7 +29,7 @@ struct fvec3 final
 	void operator*=(const fvec3& other);
 	void operator/=(const fvec3& other);
 
-	// Vectors
+	// FVEC3
 	const fvec3 operator+(const fvec3& other) const;
 	const fvec3 operator-(const fvec3& other) const;
 	const fvec3 operator*(const fvec3& other) const;
@@ -40,7 +40,7 @@ struct fvec3 final
 	const fvec3 operator/(const float& other) const;
 	const fvec3 operator-() const;
 
-	// Booleans
+	// BOOL
 	const bool operator==(const fvec3& other) const;
 	const bool operator!=(const fvec3& other) const;
 

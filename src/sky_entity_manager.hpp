@@ -7,7 +7,7 @@ class SkyEntityManager final : public BaseEntityManager
 public:
 	SkyEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
 
-	// Voids
+	// VOID
 	void update() override;
 	void createEntity(const string& ID);
 	void selectMainSky(const string& ID);
@@ -16,11 +16,11 @@ public:
 	void setExposureSpeed(float value);
 	void setExposureEnabled(bool value);
 
-	// Decimals
+	// FLOAT
 	const float getExposureIntensity() const;
 	const float getExposureSpeed() const;
 
-	// Booleans
+	// BOOL
 	const bool isExposureEnabled() const;
 
 	// Miscellaneous
@@ -30,15 +30,15 @@ public:
 	shared_ptr<SkyEntity> getSelectedMixSky();
 
 private:
-	// Strings
+	// STRING
 	string _selectedMainID = "";
 	string _selectedMixID = "";
 
-	// Decimals
+	// FLOAT
 	float _exposureIntensity = 0.0f;
 	float _exposureSpeed = 0.0f;
 
-	// Booleans
+	// BOOL
 	bool _isExposureEnabled = false;
 
 	// Miscellaneous

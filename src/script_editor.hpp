@@ -10,13 +10,13 @@ class ScriptEditor final
 public:
 	ScriptEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, WorldEditor& worldEditor);
 
-	// Voids
+	// VOID
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
 	void update();
 
-	// Booleans
+	// BOOL
 	const bool loadScriptFiles(bool isLoggingEnabled);
 	const bool saveScriptFiles();
 	const bool isLoaded() const;
@@ -26,7 +26,7 @@ public:
 	ScriptExecutor& getScriptExecutor();
 
 private:
-	// Voids
+	// VOID
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateGUI();
@@ -36,7 +36,7 @@ private:
 	void _reloadScriptTextDisplay(bool reloadAabbs);
 	void _copySelectedText();
 
-	// Strings
+	// STRING
 	static inline const string FONT_PATH = "engine\\assets\\fonts\\font.ttf";
 	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
 	vector<string> _scriptFileNamesToDelete;
@@ -44,7 +44,7 @@ private:
 	string _currentProjectID = "";
 	string _currentScriptFileID = "";
 
-	// Vectors
+	// FVEC3
 	static inline const fvec3 CAMERA_POSITION = fvec3(0.0f, 0.0f, 10.0f);
 	static inline const fvec3 SCRIPT_TEXT_STARTING_POSITION = fvec3(-11.0f, 6.0f, 0.5f);
 	static inline const fvec3 BACKGROUND_COLOR = fvec3(0.05f);
@@ -53,9 +53,11 @@ private:
 	static inline const fvec3 SEPARATOR_COLOR = fvec3(1.0f, 0.85f, 0.0f);
 	static inline const fvec3 DEFAULT_TEXT_COLOR = fvec3(1.0f);
 	static inline const fvec3 COMMENT_TEXT_COLOR = fvec3(0.0f, 0.75f, 0.0f);
+
+	// FVEC2
 	static inline const fvec2 TEXT_CHARACTER_SIZE = fvec2(0.25f, 0.75f);
 
-	// Decimals
+	// FLOAT
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 	static inline const float SCROLLING_SPEED = 0.1f;
@@ -69,7 +71,11 @@ private:
 	static inline const float AABB_DEPTH = 0.01f;
 	float _scrollingAcceleration = 0.0f;
 
-	// Integers
+	// INT
+	int _firstSelectedLineIndex = -1;
+	int _lastSelectedLineIndex = -1;
+
+	// UNSIGNED INT
 	static inline const unsigned int CONTINUOUS_TEXT_ACTION_FRAME_MINIMUM = 75;
 	static inline const unsigned int CONTINUOUS_TEXT_ACTION_INTERVAL = 5;
 	static inline const unsigned int MAX_PASSED_BAR_FRAMES = 50;
@@ -77,12 +83,10 @@ private:
 	static inline const unsigned int MAX_LINE_COUNT = 100;
 	static inline const unsigned int MAX_VISIBLE_LINES = 13;
 	static inline const unsigned int BLOOM_SIZE = 1;
-	int _firstSelectedLineIndex = -1;
-	int _lastSelectedLineIndex = -1;
 	unsigned int _initialBloomSize = 0;
 	unsigned int _passedFrames = 0;
 
-	// Characters
+	// CHAR
 	static inline const vector<pair<char, char>> NUMBER_CHARACTERS =
 	{
 		{'0', ')'},
@@ -110,7 +114,7 @@ private:
 		{'=', '+'  }
 	};
 
-	// Booleans
+	// BOOL
 	bool _wasAntiAliasingEnabled = false;
 	bool _isScriptLoadedFromFile = false;
 	bool _isWritingScript = false;

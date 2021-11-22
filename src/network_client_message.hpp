@@ -11,7 +11,7 @@ class NetworkClientMessage final
 public:
 	NetworkClientMessage(const string& username, const string& content, const NetworkProtocol protocol);
 
-	// Strings
+	// STRING
 	const string& getUsername() const;
 	const string& getContent() const;
 
@@ -19,7 +19,7 @@ public:
 	const NetworkProtocol getProtocol() const;
 
 private:
-	// Strings
+	// STRING
 	string _username;
 	string _content;
 

@@ -8,7 +8,7 @@ class BillboardEntityManager final : public BaseEntityManager
 public:
 	BillboardEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus, Camera& camera);
 
-	// Voids
+	// VOID
 	void update() override;
 	void createEntity(const string& ID);
 

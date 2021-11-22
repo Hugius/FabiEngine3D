@@ -15,17 +15,17 @@ public:
 	RenderBuffer(float x, float y, float w, float h, bool isCentered); // 2D
 	~RenderBuffer();
 
-	// Voids
+	// VOID
 	void enableInstancing(const vector<fvec3>& offsets);
 	void disableInstancing();
 
-	// Vectors
+	// FVEC3
 	const vector<fvec3>& getInstancedOffsets() const;
 
-	// Integers
+	// UNSIGNED INT
 	const unsigned int getVertexCount() const;
 
-	// Booleans
+	// BOOL
 	const bool isInstanced() const;
 
 	// Miscellaneous
@@ -33,14 +33,14 @@ public:
 	const RenderBufferType getBufferType() const;
 
 private:
-	// Vectors
+	// FVEC3
 	vector<fvec3> _instancedOffsets;
 
-	// Integers
+	// UNSIGNED INT
 	unsigned int _vertexCount = 0;
 	unsigned int _offsetCount = 0;
 
-	// Booleans
+	// BOOL
 	bool _isInstanced = false;
 
 	// Miscellaneous

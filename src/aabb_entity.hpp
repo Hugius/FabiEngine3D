@@ -14,7 +14,7 @@ class AabbEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	// Voids
+	// VOID
 	void updateTransformation();
 	void updateTransformationMatrix();
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
@@ -35,20 +35,20 @@ public:
 	void setCollided(bool value);
 	void setColor(fvec3 value);
 
-	// Strings
+	// STRING
 	const string& getParentID() const;
 
-	// Matrices
+	// MAT44
 	const mat44& getTransformationMatrix() const;
 
-	// Vectors
+	// FVEC3
 	const fvec3 getLocalPosition() const;
 	const fvec3 getLocalSize() const;
 	const fvec3 getPosition() const;
 	const fvec3 getSize() const;
 	const fvec3 getColor() const;
 
-	// Booleans
+	// BOOL
 	const bool isRaycastResponsive() const;
 	const bool isCollisionResponsive() const;
 	const bool hasParent() const;
@@ -63,13 +63,13 @@ public:
 	const Direction getCollisionDirection() const;
 
 private:
-	// Strings
+	// STRING
 	string _parentID = "";
 
-	// Matrices
+	// MAT44
 	mat44 _transformationMatrix = mat44(1.0f);
 
-	// Vectors
+	// FVEC3
 	fvec3 _localPosition = fvec3(0.0f);
 	fvec3 _localSize = fvec3(1.0f);
 	fvec3 _position = fvec3(0.0f);
@@ -78,11 +78,11 @@ private:
 	fvec3 _sizeTarget = fvec3(1.0f);
 	fvec3 _color = fvec3(1.0f);
 
-	// Decimals
+	// FLOAT
 	float _positionTargetSpeed = 0.0f;
 	float _sizeTargetSpeed = 0.0f;
 
-	// Booleans
+	// BOOL
 	bool _mustFollowParentTransformation = true;
 	bool _mustFollowParentVisibility = true;
 	bool _isRaycastResponsive = true;

@@ -12,7 +12,7 @@ class TextEntity final : public ImageEntity
 public:
 	using ImageEntity::ImageEntity;
 
-	// Voids
+	// VOID
 	void setCentered(bool value);
 	void setDynamic(bool value);
 	void createCharacterEntity(shared_ptr<ImageEntity> character);
@@ -21,11 +21,11 @@ public:
 	void setTextContent(const string& text);
 	void setFontPath(const string& fontPath);
 
-	// Strings
+	// STRING
 	const string& getTextContent() const;
 	const string& getFontPath() const;
 
-	// Booleans
+	// BOOL
 	const bool isCentered() const;
 	const bool isDynamic() const;
 
@@ -33,11 +33,11 @@ public:
 	const vector<shared_ptr<ImageEntity>>& getCharacterEntities() const;
 
 private:
-	// Strings
+	// STRING
 	string _textContent = "";
 	string _fontPath = "";
 
-	// Booleans
+	// BOOL
 	bool _isCentered = false;
 	bool _isDynamic = false;
 

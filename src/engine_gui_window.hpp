@@ -9,22 +9,22 @@ public:
 	EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color);
 	~EngineGuiWindow();
 
-	// Voids
+	// VOID
 	void createScreen(const string& ID);
 	void deleteScreen(const string& ID);
 	void setActiveScreen(const string& ID);
 	void update(bool hoverable);
 
-	// Strings
+	// STRING
 	const string& getID() const;
 	const string& getEntityID() const;
 	const string& getParentID() const;
 
-	// Vectors
+	// FVEC2
 	const fvec2 getInitialPosition() const;
 	const fvec2 getInitialSize() const;
 
-	// Booleans
+	// BOOL
 	const bool isHovered() const;
 
 	// Miscellaneous
@@ -33,13 +33,13 @@ public:
 	shared_ptr<EngineGuiScreen> getActiveScreen() const;
 
 private:
-	// Strings
+	// STRING
 	const string _ID;
 	const string _entityID;
 	const string _parentID;
 	string _activeScreenID = "";
 
-	// Vectors
+	// FVEC2
 	const fvec2 _initialPosition;
 	const fvec2 _initialSize;
 

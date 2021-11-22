@@ -7,17 +7,17 @@ class RightViewportController final : public BaseViewportController
 public:
 	using BaseViewportController::BaseViewportController;
 	
-	// Voids
+	// VOID
 	void initialize() override;
 	void update() override;
 
 private:
-	// Vectors
+	// FVEC3
 	static inline const fvec3 FRAME_COLOR = fvec3(0.175f);
 	static inline const fvec3 BLACK = fvec3(0.0f);
 	static inline const fvec3 WHITE = fvec3(1.0f);
 
-	// Decimals
+	// FLOAT
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 };

@@ -7,7 +7,7 @@ class TextEntityManager final : public BaseEntityManager
 public:
 	TextEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
 	
-	// Voids
+	// VOID
 	void update() override;
 	void createEntity(const string& ID, bool isCentered, bool isDynamic);
 	void loadCharacters(const string& ID);
@@ -18,7 +18,7 @@ public:
 	shared_ptr<TextEntity> getEntity(const string& ID);
 
 private:
-	// Strings
+	// STRING
 	map<string, string> _textContentMap;
 
 	// Miscellaneous

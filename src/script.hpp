@@ -7,21 +7,21 @@ class Script final
 public:
 	Script(FabiEngine3D& fe3d);
 
-	// Voids
+	// VOID
 	void createScriptFile(const string& ID);
 	void renameScriptFile(const string& ID, const string& newID);
 	void removeScriptFile(const string& ID);
 	void reset();
 
-	// Strings
+	// STRING
 	const vector<string> getAllScriptFileIDs() const;
 
-	// Integers
+	// UNSIGNED INT
 	const vector<pair<string, unsigned int>> findKeyword(const string& keyword) const;
 	const unsigned int getScriptFileCount() const;
 	const unsigned int getTotalLineCount() const;
 
-	// Booleans
+	// BOOL
 	const bool isScriptFileExisting(const string& ID) const;
 
 	// Miscellaneous

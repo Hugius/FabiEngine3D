@@ -9,32 +9,36 @@ public:
 	EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, const string& texturePath, bool isCentered);
 	~EngineGuiRectangle();
 
-	// Voids
+	// VOID
 	virtual void setVisible(bool isVisible);
 	void updateInitialPosition();
 	void updateInitialSize();
 	void updateInitialColor();
 
-	// Strings
+	// STRING
 	const string& getID() const;
 	const string& getEntityID() const;
 	const string& getParentID() const;
 
-	// Vectors
-	const fvec2 getInitialPosition() const;
-	const fvec2 getInitialSize() const;
+	// FVEC3
 	const fvec3 getInitialColor() const;
 
+	// FVEC2
+	const fvec2 getInitialPosition() const;
+	const fvec2 getInitialSize() const;
+
 protected:
-	// Strings
+	// STRING
 	const string _ID;
 	const string _entityID;
 	const string _parentID;
 
-	// Vectors
+	// FVEC3
+	fvec3 _initialColor;
+
+	// FVEC2
 	fvec2 _initialPosition;
 	fvec2 _initialSize;
-	fvec3 _initialColor;
 
 	// Miscellaneous
 	FabiEngine3D& _fe3d;

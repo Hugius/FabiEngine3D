@@ -11,7 +11,7 @@ public:
 	LibraryLoader();
 	~LibraryLoader();
 
-	// Strings
+	// STRING
 	const string getCpuModel() const;
 	const string getGpuModel() const;
 	const string getOpenglVersion() const;

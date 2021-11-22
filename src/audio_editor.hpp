@@ -8,23 +8,23 @@ class AudioEditor final
 public:
 	AudioEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 
-	// Voids
+	// VOID
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void update();
 	void unload();
 
-	// Strings
+	// STRING
 	const vector<string> getAllAudioPathsFromFile() const;
 	const vector<string>& getLoadedAudioIDs();
 
-	// Booleans
+	// BOOL
 	const bool loadAudioEntitiesFromFile();
 	const bool saveAudioEntitiesToFile() const;
 	const bool isLoaded() const;
 
 private:
-	// Voids
+	// VOID
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateMainMenu();
@@ -34,17 +34,17 @@ private:
 	void _updateAudioDeleting();
 	void _updateMiscellaneous();
 
-	// Strings
+	// STRING
 	vector<string> _loadedAudioIDs;
 	string _currentAudioID = "";
 	string _hoveredAudioID = "";
 	string _currentProjectID = "";
 
-	// Decimals
+	// FLOAT
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 
-	// Booleans
+	// BOOL
 	bool _isCreatingAudio = false;
 	bool _isChoosingAudio = false;
 	bool _isDeletingAudio = false;

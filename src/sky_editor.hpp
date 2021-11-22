@@ -8,24 +8,24 @@ class SkyEditor final
 public:
 	SkyEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 
-	// Voids
+	// VOID
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void update();
 	void unload();
 	void unloadSkyEntities();
 
-	// Strings
+	// STRING
 	const vector<array<string, 6>> getAllTexturePathsFromFile() const;
 	const vector<string>& getLoadedSkyIDs();
 
-	// Booleans
+	// BOOL
 	const bool loadSkyEntitiesFromFile();
 	const bool saveSkyEntitiesToFile() const;
 	const bool isLoaded() const;
 
 private:
-	// Voids
+	// VOID
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateMainMenu();
@@ -38,17 +38,17 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	// Strings
+	// STRING
 	vector <string> _loadedSkyIDs;
 	string _currentProjectID = "";
 	string _currentSkyID = "";
 
-	// Decimals
+	// FLOAT
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 	static inline const float CURSOR_SENSITIVITY = 0.025f;
 
-	// Booleans
+	// BOOL
 	bool _isCreatingSky = false;
 	bool _isChoosingSky = false;
 	bool _isDeletingSky = false;

@@ -29,16 +29,16 @@ class BaseEntityManager
 public:
 	BaseEntityManager(EntityType type, MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
 
-	// Voids
+	// VOID
 	virtual void update() = 0;
 	void deleteEntity(const string& ID);
 	void deleteAllEntities();
 
-	// Booleans
+	// BOOL
 	const bool isExisting(const string& ID);
 
 protected:
-	// Voids
+	// VOID
 	void _createEntity(const string& ID);
 
 	// Miscellaneous
@@ -72,7 +72,7 @@ protected:
 	RenderBus& _renderBus;
 
 private:
-	// Integers
+	// UNSIGNED INT
 	static inline unsigned int _guiDepth = 0;
 
 	// Miscellaneous

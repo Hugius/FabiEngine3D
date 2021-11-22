@@ -12,7 +12,7 @@ class ImageEntity : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	// Voids
+	// VOID
 	void updateTransformation();
 	void updateTransformationMatrix();
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
@@ -51,26 +51,30 @@ public:
 	void setCentered(bool value);
 	void setWireframed(bool value);
 
-	// Strings
+	// STRING
 	const string& getDiffuseMapPath() const;
 
-	// Matrices
+	// MAT44
 	const mat44 getTransformationMatrix() const;
 
-	// Vectors
+	// FVEC3
 	const fvec3 getWireframeColor() const;
 	const fvec3 getColor() const;
+
+	// FVEC2
 	const fvec2 getPosition() const;
 	const fvec2 getSize() const;
 	const fvec2 getMinPosition() const;
 	const fvec2 getMaxPosition() const;
 
-	// Decimals
+	// FLOAT
 	const float getTransparency() const;
 	const float getRotation() const;
 
-	// Integers
+	// INT
 	const int getMaxSpriteAnimationLoops() const;
+
+	// UNSIGNED INT
 	const unsigned int getPassedSpriteAnimationFrames() const;
 	const unsigned int getSpriteAnimationFramestep() const;
 	const unsigned int getTotalSpriteAnimationRowCount() const;
@@ -80,7 +84,7 @@ public:
 	const unsigned int getSpriteAnimationLoops() const;
 	const unsigned int getDepth() const;
 
-	// Booleans
+	// BOOL
 	const bool isWireframed() const;
 	const bool isCentered() const;
 	const bool isMirroredHorizonally() const;
@@ -96,15 +100,17 @@ public:
 	const TextureID getDiffuseMap() const;
 
 private:
-	// Matrices
+	// MAT44
 	mat44 _transformationMatrix = mat44(1.0f);
 
-	// Strings
+	// STRING
 	string _diffuseMapPath = "";
 
-	// Vectors
+	// FVEC3
 	fvec3 _color = fvec3(1.0f);
 	fvec3 _wireframeColor = fvec3(1.0f);
+
+	// FVEC2
 	fvec2 _minPosition = fvec2(-1.0f);
 	fvec2 _maxPosition = fvec2(1.0f);
 	fvec2 _position = fvec2(0.0f);
@@ -112,7 +118,7 @@ private:
 	fvec2 _positionTarget = fvec2(0.0f);
 	fvec2 _sizeTarget = fvec2(1.0f);
 
-	// Decimals
+	// FLOAT
 	float _rotation = 0.0f;
 	float _rotationTarget = 0.0f;
 	float _positionTargetSpeed = 0.0f;
@@ -120,8 +126,10 @@ private:
 	float _sizeTargetSpeed = 0.0f;
 	float _transparency = 1.0f;
 
-	// Integers
+	// INT
 	int _maxSpriteAnimationLoops = 0;
+
+	// UNSIGNED INT
 	unsigned int _spriteAnimationFramestep = 0;
 	unsigned int _passedSpriteAnimationFrames = 0;
 	unsigned int _totalSpriteAnimationRowCount = 0;
@@ -131,7 +139,7 @@ private:
 	unsigned int _spriteAnimationLoops = 0;
 	unsigned int _depth = 0;
 
-	// Booleans
+	// BOOL
 	bool _isCentered = false;
 	bool _isSpriteAnimationStarted = false;
 	bool _isSpriteAnimationPaused = false;

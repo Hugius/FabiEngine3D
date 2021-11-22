@@ -13,7 +13,7 @@ public:
 	// Constructors
 	EngineGuiScreen(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size);
 
-	// Voids
+	// VOID
 	void update(bool hoverable);
 	void show();
 	void hide();
@@ -30,15 +30,15 @@ public:
 	void deleteRectangle(const string& ID);
 	void deleteTextField(const string& ID);
 
-	// Strings
+	// STRING
 	const string& getID() const;
 	const string& getParentID() const;
 
-	// Vectors
+	// FVEC2
 	const fvec2 convertPosition(fvec2 position) const;
 	const fvec2 convertSize(fvec2 size) const;
 
-	// Booleans
+	// BOOL
 	const bool isScrollingListExisting(const string& ID) const;
 	const bool isWriteFieldExisting(const string& ID) const;
 	const bool isButtonExisting(const string& ID) const;
@@ -58,18 +58,18 @@ public:
 	const vector<shared_ptr<EngineGuiTextField>>& getTextFields() const;
 
 private:
-	// Vectors
+	// FVEC4
 	const fvec4 _convertDimensions(fvec2 position, fvec2 size) const;
 
-	// Vectors
+	// FVEC2
 	fvec2 _parentPosition;
 	fvec2 _parentSize;
 
-	// Strings
+	// STRING
 	const string _ID;
 	const string _parentID;
 
-	// Booleans
+	// BOOL
 	bool _isActive = false;
 
 	// Miscellaneous

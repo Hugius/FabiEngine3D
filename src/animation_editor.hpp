@@ -10,7 +10,7 @@ class AnimationEditor final
 public:
 	AnimationEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, ModelEditor& modelEditor);
 
-	// Voids
+	// VOID
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
@@ -22,12 +22,12 @@ public:
 	void stopAnimation(const string& animationID, const string& modelID);
 	void stopAllAnimations();
 
-	// Strings
+	// STRING
 	const vector<string> getAllAnimationIDs() const;
 	const vector<string> getStartedAnimationIDs() const;
 	const vector<string> getStartedAnimationIDs(const string& modelID) const;
 
-	// Booleans
+	// BOOL
 	const bool isLoaded() const;
 	const bool isAnimationExisting(const string& ID) const;
 	const bool isAnimationStarted(const string& animationID, const string& modelID) const;
@@ -41,7 +41,7 @@ public:
 	Animation* getAnimationData(const string& animationID, const string& modelID, string baseErrorMessage);
 
 private:
-	// Voids
+	// VOID
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateAnimationExecution();
@@ -55,14 +55,14 @@ private:
 	void _updateMiscellaneous();
 	void _deleteAnimation(const string& ID);
 
-	// Booleans
+	// BOOL
 	const bool _hasReachedFloat(float first, float second, float speed) const;
 	const bool _comparePartIDs(vector<string> first, vector<string> second) const;
 
 	// Miscellaneous
 	shared_ptr<Animation> _getAnimation(const string& ID) const;
 
-	// Strings
+	// STRING
 	set<pair<string, string>> _animationsToStop;
 	set<pair<string, string>> _animationsToStartAgain;
 	string _currentProjectID = "";
@@ -71,10 +71,10 @@ private:
 	string _hoveredModelID = "";
 	string _hoveredPartID = "";
 
-	// Vectors
+	// FVEC3
 	fvec3 _cameraLookatPosition = fvec3(0.0f);
 
-	// Decimals
+	// FLOAT
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 	static inline const float CURSOR_SENSITIVITY = 0.025f;
@@ -90,12 +90,14 @@ private:
 	static inline const float CAMERA_LOOKAT_SPEED = 0.025f;
 	static inline const float PART_HIGHLIGHT_SPEED = 0.025f;
 
-	// Integers
-	static inline const unsigned int MAX_FRAME_COUNT = 100;
+	// INT
 	int _selectedPartHighlightDirection = 1;
+
+	// UNSIGNED INT
+	static inline const unsigned int MAX_FRAME_COUNT = 100;
 	unsigned int _currentFrameIndex = 0;
 
-	// Booleans
+	// BOOL
 	bool _mustUpdateCurrentFramePreview = true;
 	bool _isCreatingAnimation = false;
 	bool _isChoosingAnimation = false;

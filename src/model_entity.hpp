@@ -14,7 +14,7 @@ class ModelEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	// Voids
+	// VOID
 	void createPart(const string& ID);
 	void updateTransformation();
 	void updateTransformationMatrix();
@@ -80,7 +80,7 @@ public:
 	void setFaceCulled(bool value);
 	void setRotationOrder(DirectionOrder order);
 
-	// Strings
+	// STRING
 	const vector<string> getPartIDs() const;
 	const string& getMeshPath() const;
 	const string& getLevelOfDetailEntityID() const;
@@ -92,10 +92,10 @@ public:
 	const string& getReflectionMapPath(const string& partID) const;
 	const string& getNormalMapPath(const string& partID) const;
 
-	// Matrices
+	// MAT44
 	const mat44& getTransformationMatrix(const string& partID) const;
 
-	// Vectors
+	// FVEC3
 	const fvec3 getColor(const string& partID) const;
 	const fvec3 getWireframeColor(const string& partID) const;
 	const fvec3 getLevelOfDetailSize() const;
@@ -108,7 +108,7 @@ public:
 	const fvec3 getPartRotationOrigin(const string& partID) const;
 	const fvec3 getPartSize(const string& partID) const;
 
-	// Decimals
+	// FLOAT
 	const float getCubeReflectionMixValue() const;
 	const float getMinHeight() const;
 	const float getMaxHeight() const;
@@ -120,7 +120,7 @@ public:
 	const float getTextureRepeat(const string& partID) const;
 	const float getEmissionIntensity(const string& partID) const;
 
-	// Booleans
+	// BOOL
 	const bool isShadowed() const;
 	const bool isReflected() const;
 	const bool isCameraStatic() const;
@@ -158,7 +158,7 @@ private:
 
 		}
 
-		// Strings
+		// STRING
 		const string ID;
 		string diffuseMapPath = "";
 		string emissionMapPath = "";
@@ -166,10 +166,10 @@ private:
 		string reflectionMapPath = "";
 		string normalMapPath = "";
 
-		// Matrices
+		// MAT44
 		mat44 transformationMatrix = mat44(1.0f);
 
-		// Vectors
+		// FVEC3
 		fvec3 position = fvec3(0.0f);
 		fvec3 rotation = fvec3(0.0f);
 		fvec3 rotationOrigin = fvec3(0.0f);
@@ -180,7 +180,7 @@ private:
 		fvec3 color = fvec3(1.0f);
 		fvec3 wireframeColor = fvec3(1.0f);
 
-		// Decimals
+		// FLOAT
 		float positionTargetSpeed = 0.0f;
 		float rotationTargetSpeed = 0.0f;
 		float sizeTargetSpeed = 0.0f;
@@ -192,7 +192,7 @@ private:
 		float emissionIntensity = 1.0f;
 		float textureRepeat = 1.0f;
 
-		// Booleans
+		// BOOL
 		bool isSpecular = false;
 		bool isReflective = false;
 		bool isWireframed = false;
@@ -207,21 +207,21 @@ private:
 		ReflectionType reflectionType = ReflectionType::CUBE;
 	};
 
-	// Voids
+	// VOID
 	void _correctPositionTarget(fvec3& current, fvec3 target, float speed);
 	void _correctRotationTarget(fvec3& current, fvec3 target, float speed);
 	void _correctSizeTarget(fvec3& current, fvec3 target, float speed);
 
-	// Integers
-	unsigned int _getPartIndex(const string& partID) const;
+	// UNSIGNED INT
+	const unsigned int _getPartIndex(const string& partID) const;
 
-	// Strings
+	// STRING
 	string _meshPath = "";
 	string _levelOfDetailEntityID = "";
 	string _previousReflectionEntityID = "";
 	string _currentReflectionEntityID = "";
 
-	// Vectors
+	// FVEC3
 	fvec3 _basePosition = fvec3(0.0f);
 	fvec3 _baseRotation = fvec3(0.0f);
 	fvec3 _baseRotationOrigin = fvec3(0.0f);
@@ -231,7 +231,7 @@ private:
 	fvec3 _baseSizeTarget = fvec3(1.0f);
 	fvec3 _levelOfDetailSize = fvec3(1.0f);
 
-	// Decimals
+	// FLOAT
 	float _basePositionTargetSpeed = 0.0f;
 	float _baseRotationTargetSpeed = 0.0f;
 	float _baseSizeTargetSpeed = 0.0f;
@@ -239,7 +239,7 @@ private:
 	float _minHeight = -(numeric_limits<float>::max)();
 	float _maxHeight = (numeric_limits<float>::max)();
 
-	// Booleans
+	// BOOL
 	bool _isCameraStatic = false;
 	bool _isShadowed = true;
 	bool _isReflected = true;

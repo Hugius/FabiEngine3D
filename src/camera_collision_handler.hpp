@@ -11,7 +11,7 @@
 class CameraCollisionHandler final
 {
 public:
-	// Voids
+	// VOID
 	void update(const unordered_map<string, shared_ptr<AabbEntity>>& aabbs, TerrainEntityManager& terrainManager, Camera& camera, Raycaster& raycaster);
 	void setCameraBox(const Box& box);
 	void enableCameraAabbResponse(bool x, bool y, bool z);
@@ -19,23 +19,23 @@ public:
 	void enableCameraTerrainResponse(float cameraHeight, float cameraSpeed);
 	void disableCameraTerrainResponse();
 
-	// Booleans
+	// BOOL
 	const bool isCameraUnderTerrain() const;
 	const bool isCameraAabbResponseEnabled() const;
 	const bool isCameraTerrainResponseEnabled() const;
 
 private:
-	// Voids
+	// VOID
 	const bool _handleCollision(Direction direction, const unordered_map<string, shared_ptr<AabbEntity>>& aabbs, Camera& camera) const;
 
-	// Vectors
+	// FVEC3
 	fvec3 _lastCameraPosition = fvec3(0.0f);
 
-	// Decimals
+	// FLOAT
 	float _cameraTerrainHeight = 0.0f;
 	float _cameraTerrainSpeed = 0.0f;
 
-	// Booleans
+	// BOOL
 	bool _isCameraAabbResponseEnabled = false;
 	bool _isCameraAabbResponseEnabledX = false;
 	bool _isCameraAabbResponseEnabledY = false;

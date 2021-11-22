@@ -12,14 +12,14 @@ class CaptureBuffer final
 public:
 	~CaptureBuffer();
 
-	// Voids
+	// VOID
 	void createColorTexture(ivec2 position, ivec2 size, unsigned int count, bool isTextureClamped);
 	void createDepthTexture(ivec2 position, ivec2 size);
 	void reset();
 	void bind();
 	void unbind();
 
-	// Vectors
+	// FVEC2
 	const ivec2 getSize() const;
 
 	// Miscellaneous
@@ -27,11 +27,11 @@ public:
 	const TextureID getTexture(unsigned int index) const;
 
 private:
-	// Vectors
+	// FVEC2
 	ivec2 _position = ivec2(0);
 	ivec2 _size = ivec2(0);
 
-	// Booleans
+	// BOOL
 	bool _isInitialized = false;
 
 	// Miscellaneous

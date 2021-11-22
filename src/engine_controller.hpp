@@ -12,16 +12,16 @@ class EngineController final : public FabiEngine3D
 public:
 	EngineController();
 
-	// Voids
+	// VOID
 	void FE3D_CONTROLLER_INIT();
 	void FE3D_CONTROLLER_UPDATE();
 	void FE3D_CONTROLLER_DESTROY();
 
-	// Booleans
+	// BOOL
 	const bool mustPromptOnExit() const;
 
 private:
-	// Booleans
+	// BOOL
 	bool _mustPromptOnExit = false;
 
 	// Miscellaneous

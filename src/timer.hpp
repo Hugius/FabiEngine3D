@@ -12,7 +12,7 @@ using std::map;
 class Timer final
 {
 public:
-	// Voids
+	// VOID
 	void start();
 	void startDeltaPart(const string& ID);
 	void stopDeltaPart();
@@ -20,34 +20,36 @@ public:
 	void increasePassedFrameCount();
 	void clearDeltaParts();
 
-	// Decimals
+	// FLOAT
 	const float stop();
 	const float getDeltaPart(const string& ID);
 	const float getDeltaPartSum() const;
 
-	// Integers
+	// UNSIGNED INT
 	const unsigned int getPassedTickCount() const;
 
-	// Booleans
+	// BOOL
 	const bool isStarted() const;
 	const bool isDeltaPartStarted(const string& ID) const;
 
 private:
-	// Strings
+	// STRING
 	string _currentID = "";
 
-	// Decimals
+	// FLOAT
 	map<string, float> _deltaParts;
 
-	// Integers
+	// UNSIGNED INT
+	unsigned int _passedTickCount = 0;
+
+	// BOOL
+	bool _isStarted = false;
+
+	// Miscellaneous
 	LARGE_INTEGER _frequency = {};
 	LARGE_INTEGER _time1 = {};
 	LARGE_INTEGER _time2 = {};
 	LARGE_INTEGER _specificFrequency = {};
 	LARGE_INTEGER _specificTime1 = {};
 	LARGE_INTEGER _specificTime2 = {};
-	unsigned int _passedTickCount = 0;
-
-	// Booleans
-	bool _isStarted = false;
 };

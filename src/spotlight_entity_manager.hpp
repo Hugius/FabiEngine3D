@@ -7,7 +7,7 @@ class SpotlightEntityManager final : public BaseEntityManager
 public:
 	SpotlightEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
 
-	// Voids
+	// VOID
 	void update() override;
 	void createEntity(const string& ID);
 
@@ -15,6 +15,6 @@ public:
 	const unordered_map<string, shared_ptr<SpotlightEntity>>& getEntities();
 	shared_ptr<SpotlightEntity> getEntity(const string& ID);
 
-	// Integers
+	// UNSIGNED INT
 	static inline const unsigned int MAX_LIGHT_COUNT = 64;
 };

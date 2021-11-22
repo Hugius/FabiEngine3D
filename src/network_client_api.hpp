@@ -23,7 +23,7 @@ public:
 	NetworkClientAPI();
 	~NetworkClientAPI();
 
-	// Voids
+	// VOID
 	void start(const string& username);
 	void update();
 	void connectToServer(const string& serverIP, const string& serverPort);
@@ -32,14 +32,14 @@ public:
 	void sendMessageUDP(const string& content);
 	void stop();
 
-	// Strings
+	// STRING
 	const string& getUsername() const;
 	const string& getServerIP() const;
 
-	// Integers
+	// UNSIGNED INT
 	const unsigned int getPingLatency() const;
 
-	// Booleans
+	// BOOL
 	const bool isValidServerIP(const string& serverIP) const;
 	const bool isRunning() const;
 	const bool isConnectingToServer() const;
@@ -50,34 +50,38 @@ public:
 	const vector<NetworkServerMessage>& getPendingMessages() const;
 
 private:
-	// Voids
+	// VOID
 	void _setupTCP();
 	void _setupUDP();
 
-	// Strings
+	// STRING
 	tuple<int, int, long long, string> _waitForMessageTCP(SOCKET socket) const;
 	tuple<int, int, string, string, string> _receiveMessageUDP(SOCKET socket) const;
 
-	// Integers
+	// INT
 	int _waitForServerConnection(SOCKET socket, const string& serverIP, const string& serverPort) const;
 
-	// Booleans
+	// BOOL
 	bool _sendMessageTCP(const string& content, bool isReserved, bool mustBeAccepted);
 	bool _sendMessageUDP(const string& content, bool isReserved, bool mustBeAccepted) const;
 
-	// Strings
+	// STRING
 	future<tuple<int, int, long long, string>> _messageThreadTCP;
 	string _username = "";
 	string _serverIP = "";
 	string _serverPort = "";
 	string _messageBuildTCP = "";
 
-	// Integers
-	vector<unsigned int> _pingLatencies;
-	future<int> _connectionThread;
+	// LONG LONG
 	long long _lastMilliseconds = 0;
 
-	// Booleans
+	// INT
+	future<int> _connectionThread;
+
+	// UNSIGNED INT
+	vector<unsigned int> _pingLatencies;
+
+	// BOOL
 	bool _isRunning = false;
 	bool _isConnectingToServer = false;
 	bool _isConnectedToServer = false;

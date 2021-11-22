@@ -21,7 +21,7 @@ class WorldEditor final
 public:
 	WorldEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor);
 
-	// Voids
+	// VOID
 	void setCurrentProjectID(const string& ID);
 	void load();
 	void unload();
@@ -44,10 +44,10 @@ public:
 	void copyPreviewSound(const string& newID, const string& previewID, fvec3 position);
 	void clearCurrentWorld();
 
-	// Strings
+	// STRING
 	const string& getLoadedWorldID() const;
 
-	// Booleans
+	// BOOL
 	const bool isLoaded() const;
 	const bool isWorldExisting(const string& fileName) const;
 	const bool loadEditorWorldFromFile(const string& fileName);
@@ -56,7 +56,7 @@ public:
 	const bool saveCustomWorldToFile();
 
 private:
-	// Voids
+	// VOID
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateSkyMenu();
@@ -138,10 +138,10 @@ private:
 	void _deactivateReflection();
 	void _handleValueChanging(const string& screenID, string buttonID, string writeFieldID, float& value, float adder, float multiplier = 1.0f, float minimum = numeric_limits<float>::lowest(), float maximum = numeric_limits<float>::max());
 
-	// Strings
+	// STRING
 	const vector<string> _getWorldIDs() const;
 
-	// Booleans
+	// BOOL
 	const bool _copyPreviewSky(const string& newID, const string& previewID);
 	const bool _copyPreviewTerrain(const string& newID, const string& previewID);
 	const bool _copyPreviewWater(const string& newID, const string& previewID);
@@ -149,7 +149,7 @@ private:
 	const bool _copyPreviewBillboard(const string& newID, const string& previewID, fvec3 position, bool isFromOutside);
 	const bool _copyPreviewSound(const string& newID, const string& previewID, fvec3 position, bool isFromOutside);
 
-	// Strings
+	// STRING
 	static inline const string PREVIEW_SPEAKER_ID = "@@previewSpeaker";
 	static inline const string PREVIEW_LAMP_ID = "@@previewLamp";
 	static inline const string PREVIEW_TORCH_ID = "@@previewTorch";
@@ -204,7 +204,7 @@ private:
 	string _currentProjectID = "";
 	string _currentWorldID = "";
 
-	// Vectors
+	// FVEC3
 	static inline const fvec3 DEFAULT_SPEAKER_SIZE = fvec3(1.0f, 1.0f, 1.0f);
 	static inline const fvec3 DEFAULT_SPEAKER_AABB_SIZE = fvec3(1.05f, 1.05f, 0.9f);
 	static inline const fvec3 DEFAULT_LAMP_SIZE = fvec3(1.0f, 1.0f, 1.0f);
@@ -224,7 +224,7 @@ private:
 	static inline const fvec3 TORCH_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
 	static inline const fvec3 CAMERA_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
 
-	// Decimals
+	// FLOAT
 	static inline const float DEFAULT_SOUND_MAX_VOLUME = 1.0f;
 	static inline const float DEFAULT_SOUND_MAX_DISTANCE = 25.0f;
 	static inline const float DEFAULT_POINTLIGHT_RADIUS = 5.0f;
@@ -257,7 +257,7 @@ private:
 	static inline const float CH = 0.0875f;
 	float _editorSpeed = 1.0f;
 
-	// Integers
+	// INT
 	int _selectedModelHighlightDirection = 1;
 	int _activeModelHighlightDirection = 1;
 	int _selectedBillboardHighlightDirection = 1;
@@ -271,7 +271,7 @@ private:
 	int _selectedCameraHighlightDirection = 1;
 	int _activeCameraHighlightDirection = 1;
 
-	// Booleans
+	// BOOL
 	bool _hasCustomWorldLighting = false;
 	bool _hasCustomWorldGraphics = false;
 	bool _hasCustomWorldSky = false;

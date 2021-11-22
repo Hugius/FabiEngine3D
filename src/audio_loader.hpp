@@ -14,7 +14,7 @@ class AudioLoader final
 public:
 	~AudioLoader();
 
-	// Voids
+	// VOID
 	void cacheChunksMultiThreaded(const vector<string>& filePaths);
 	void cacheMusicMultiThreaded(const vector<string>& filePaths);
 	void clearChunkCache(const string& filePath);
@@ -25,10 +25,10 @@ public:
 	Mix_Music* loadMusic(const string& filePath);
 
 private:
-	// Voids
+	// VOID
 	void _throwLoadedMessage(const string& filePath);
 
-	// Characters
+	// CHAR
 	const char* _loadWaveFile(const string& filePath) const;
 
 	// Miscellaneous

@@ -13,7 +13,7 @@ class BillboardEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	// Voids
+	// VOID
 	void updateTransformation();
 	void updateTransformationMatrix();
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
@@ -60,23 +60,25 @@ public:
 	void setTextureRepeat(float value);
 	void setEmissionIntensity(float value);
 
-	// Strings
+	// STRING
 	const string& getTextContent() const;
 	const string& getFontPath() const;
 	const string& getDiffuseMapPath() const;
 	const string& getEmissionMapPath() const;
 
-	// Matrices
+	// MAT44
 	const mat44& getTransformationMatrix() const;
 
-	// Vectors
+	// FVEC3
 	const fvec3 getPosition() const;
 	const fvec3 getRotation() const;
 	const fvec3 getColor() const;
 	const fvec3 getWireframeColor() const;
+
+	// FVEC2
 	const fvec2 getSize() const;
 
-	// Decimals
+	// FLOAT
 	const float getLightness() const;
 	const float getTransparency() const;
 	const float getMinHeight() const;
@@ -84,8 +86,10 @@ public:
 	const float getTextureRepeat() const;
 	const float getEmissionIntensity() const;
 
-	// Integers
+	// INT
 	const int getMaxSpriteAnimationLoops() const;
+
+	// UNSIGNED INT
 	const unsigned int getPassedSpriteAnimationFrames() const;
 	const unsigned int getSpriteAnimationFramestep() const;
 	const unsigned int getTotalSpriteAnimationRowCount() const;
@@ -94,7 +98,7 @@ public:
 	const unsigned int getSpriteAnimationColumnIndex() const;
 	const unsigned int getSpriteAnimationLoops() const;
 
-	// Booleans
+	// BOOL
 	const bool isSpriteAnimationStarted() const;
 	const bool isSpriteAnimationPaused() const;
 	const bool isFacingCameraX() const;
@@ -115,26 +119,28 @@ public:
 	const TextureID getEmissionMap() const;
 
 private:
-	// Strings
+	// STRING
 	string _textContent = "";
 	string _diffuseMapPath = "";
 	string _emissionMapPath = "";
 	string _fontPath = "";
 
-	// Matrices
+	// MAT44
 	mat44 _transformationMatrix = mat44(1.0f);
 
-	// Vectors
+	// FVEC3
 	fvec3 _position = fvec3(0.0f);
 	fvec3 _rotation = fvec3(0.0f);
 	fvec3 _positionTarget = fvec3(0.0f);
 	fvec3 _rotationTarget = fvec3(0.0f);
 	fvec3 _color = fvec3(1.0f);
 	fvec3 _wireframeColor = fvec3(1.0f);
+
+	// FVEC3
 	fvec2 _size = fvec2(1.0f);
 	fvec2 _sizeTarget = fvec2(1.0f);
 
-	// Decimals
+	// FLOAT
 	float _emissionIntensity = 1.0f;
 	float _textureRepeat = 1.0f;
 	float _positionTargetSpeed = 0.0f;
@@ -145,8 +151,10 @@ private:
 	float _minHeight = -(numeric_limits<float>::max)();
 	float _maxHeight = (numeric_limits<float>::max)();
 
-	// Integers
+	// INT
 	int _maxSpriteAnimationLoops = 0;
+
+	// UNSIGNED INT
 	unsigned int _spriteAnimationFramestep = 0;
 	unsigned int _passedSpriteAnimationFrames = 0;
 	unsigned int _totalSpriteAnimationRowCount = 0;
@@ -155,7 +163,7 @@ private:
 	unsigned int _spriteAnimationColumnIndex = 0;
 	unsigned int _spriteAnimationLoops = 0;
 
-	// Booleans
+	// BOOL
 	bool _isSpriteAnimationStarted = false;
 	bool _isSpriteAnimationPaused = false;
 	bool _isFacingCameraX = false;

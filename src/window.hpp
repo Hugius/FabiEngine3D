@@ -14,7 +14,7 @@ public:
 	Window(LibraryLoader& libraryLoader);
 	~Window();
 
-	// Voids
+	// VOID
 	void setTitle(const string& title);
 	void setSize(ivec2 size);
 	void center();
@@ -34,10 +34,10 @@ public:
 	void hideCursor();
 	void setCursorPosition(ivec2 pos);
 
-	// Vectors
+	// FVEC2
 	const ivec2 getCursorPosition() const;
 
-	// Booleans
+	// BOOL
 	const bool isCursorVisible() const;
 	const bool isVsyncEnabled() const;
 

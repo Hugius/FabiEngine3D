@@ -8,31 +8,31 @@ class SettingsEditor final
 public:
 	SettingsEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 
-	// Voids
+	// VOID
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
 	void update();
 	void loadDefaultSettings();
 
-	// Booleans
+	// BOOL
 	const bool loadSettingsFromFile() const;
 	const bool saveSettingsToFile() const;
 	const bool isLoaded() const;
 
 private:
-	// Voids
+	// VOID
 	void _loadGUI();
 	void _unloadGUI();
 
-	// Strings
+	// STRING
 	string _currentProjectID = "";
 
-	// Decimals
+	// FLOAT
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 
-	// Booleans
+	// BOOL
 	bool _isEditorLoaded = false;
 
 	// Miscellaneous

@@ -12,7 +12,7 @@ using std::string;
 class RenderBus final
 {
 public:
-	// Voids
+	// VOID
 	void setPrimaryWorldMap(TextureID value);
 	void setSecondaryWorldMap(TextureID value);
 	void setPlanarReflectionMap(TextureID value);
@@ -91,17 +91,19 @@ public:
 	void setDofDynamic(bool value);
 	void setBloomType(BloomType value);
 
-	// Strings
+	// STRING
 	const string& getCursorEntityID() const;
 	const string& getLensFlareMapPath() const;
 
-	// Matrices
+	// MAT44
 	const mat44 getViewMatrix() const;
 	const mat44 getProjectionMatrix() const;
 	const mat44 getShadowMatrix() const;
 
-	// Vectors
+	// FVEC4
 	const fvec4 getClippingPlane() const;
+
+	// FVEC3
 	const fvec3 getCameraPosition() const;
 	const fvec3 getCameraFront() const;
 	const fvec3 getAmbientLightingColor() const;
@@ -111,9 +113,11 @@ public:
 	const fvec3 getShadowCenterPosition() const;
 	const fvec3 getFogColor() const;
 	const fvec3 getFlareSourcePosition() const;
+
+	// FVEC2
 	const fvec2 getFlareSourceUV() const;
 
-	// Decimals
+	// FLOAT
 	const float getAmbientLightingIntensity() const;
 	const float getDirectionalLightingIntensity() const;
 	const float getFogMinDistance() const;
@@ -137,7 +141,7 @@ public:
 	const float getMotionBlurMixValue() const;
 	const float getSkyMixValue() const;
 
-	// Integers
+	// UNSIGNED INT
 	const unsigned int getBloomSize() const;
 	const unsigned int getDofSize() const;
 	const unsigned int getMotionBlurSize() const;
@@ -148,7 +152,7 @@ public:
 	const unsigned int getBloomBlurCount() const;
 	const unsigned int getTriangleCount() const;
 
-	// Booleans
+	// BOOL
 	const bool isReflectionsEnabled() const;
 	const bool isAntiAliasingEnabled() const;
 	const bool isAmbientLightingEnabled() const;
@@ -196,17 +200,19 @@ private:
 	TextureID _finalWorldMap = 0;
 	TextureID _motionBlurMap = 0;
 
-	// Strings
+	// STRING
 	string _cursorEntityID = "";
 	string _lensFlareMapPath = "";
 
-	// Matrices
+	// MAT44
 	mat44 _viewMatrix = mat44(1.0f);
 	mat44 _projectionMatrix = mat44(1.0f);
 	mat44 _shadowMatrix = mat44(1.0f);
 
-	// Vectors
+	// FVEC4
 	fvec4 _clippingPlane = fvec4(0.0f);
+
+	// FVEC3
 	fvec3 _cameraPosition = fvec3(0.0f);
 	fvec3 _cameraFront = fvec3(0.0f);
 	fvec3 _directionalLightPosition = fvec3(0.0f);
@@ -216,9 +222,11 @@ private:
 	fvec3 _ambientLightColor = fvec3(1.0f);
 	fvec3 _directionalLightColor = fvec3(1.0f);
 	fvec3 _fogColor = fvec3(1.0f);
+
+	// FVEC2
 	fvec2 _flareSourceUV = fvec2(0.0f);
 
-	// Decimals
+	// FLOAT
 	float _ambientLightIntensity = 1.0f;
 	float _directionalLightIntensity = 1.0f;
 	float _bloomIntensity = 1.0f;
@@ -242,7 +250,7 @@ private:
 	float _motionBlurMixValue = 0.0f;
 	float _skyMixValue = 0.0f;
 
-	// Integers
+	// UNSIGNED INT
 	unsigned int _bloomSize = Config::MIN_BLOOM_SIZE;
 	unsigned int _dofSize = Config::MIN_DOF_SIZE;
 	unsigned int _motionBlurSize = Config::MIN_MOTION_BLUR_SIZE;
@@ -253,7 +261,7 @@ private:
 	unsigned int _bloomBlurCount = 0;
 	unsigned int _triangleCount = 0;
 
-	// Booleans
+	// BOOL
 	bool _isReflectionsEnabled = true;
 	bool _isAntiAliasingEnabled = false;
 	bool _isAmbientLightingEnabled = false;

@@ -7,15 +7,15 @@ class ScriptConditionStatement final
 public:
 	ScriptConditionStatement(unsigned int scopeDepth, bool isTrue);
 
-	// Voids
+	// VOID
 	void setTrue();
 	void setFalse();
 	void setType(ScriptConditionType type);
 
-	// Integers
+	// UNSIGNED INT
 	const unsigned int getScopeDepth() const;
 
-	// Booleans
+	// BOOL
 	const bool isTrue() const;
 	const bool isFalse() const;
 
@@ -23,10 +23,10 @@ public:
 	const ScriptConditionType getType() const;
 
 private:
-	// Integers
+	// UNSIGNED INT
 	const unsigned int _scopeDepth;
 
-	// Booleans
+	// BOOL
 	bool _conditionResult = false;
 
 	// Miscellaneous

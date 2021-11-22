@@ -9,7 +9,7 @@ public:
 				   WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor,
 				   BillboardEditor& billboardEditor, AudioEditor& audioEditor, WorldEditor& worldEditor);
 
-	// Voids
+	// VOID
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void update(bool debug);
@@ -17,19 +17,19 @@ public:
 	void resume();
 	void unload();
 
-	// Booleans
+	// BOOL
 	const bool isScriptEmpty() const;
 	const bool isStarted() const;
 	const bool isRunning() const;
 
 private:
-	// Voids
+	// VOID
 	void _validateExecution();
 
-	// Strings
+	// STRING
 	vector<string> _pausedSoundIDs;
 	
-	// Booleans
+	// BOOL
 	bool _isStarted = false;
 	bool _isRunning = false;
 	bool _wasCursorVisible = false;

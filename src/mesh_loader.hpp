@@ -13,7 +13,7 @@ using std::shared_ptr;
 class MeshLoader final
 {
 public:
-	// Voids
+	// VOID
 	void cacheMeshesMultiThreaded(const vector<string>& meshPaths);
 	void clearMeshCache(const string& filePath);
 

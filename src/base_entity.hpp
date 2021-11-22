@@ -9,22 +9,22 @@ class BaseEntity
 public:
 	BaseEntity(const string& ID);
 
-	// Voids
+	// VOID
 	void setVisible(bool value);
 
-	// Strings
+	// STRING
 	const string& getID() const;
 
-	// Booleans
+	// BOOL
 	const bool isVisible() const;
 
 private:
-	// Voids
+	// VOID
 	virtual void _dummy() {}
 
-	// Strings
+	// STRING
 	const string _ID;
 
-	// Booleans
+	// BOOL
 	bool _isVisible = true;
 };

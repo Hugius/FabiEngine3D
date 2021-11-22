@@ -9,24 +9,24 @@ class ModelEditor final
 public:
 	ModelEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 
-	// Voids
+	// VOID
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
 	void update();
 
-	// Strings
+	// STRING
 	const vector<string> getAllMeshPathsFromFile() const;
 	const vector<string> getAllTexturePathsFromFile() const;
 	const vector<string>& getLoadedModelIDs();
 
-	// Booleans
+	// BOOL
 	const bool loadModelEntitiesFromFile();
 	const bool saveModelEntitiesToFile() const;
 	const bool isLoaded() const;
 
 private:
-	// Voids
+	// VOID
 	void _loadGUI();
 	void _unloadGUI();
 	void _tryPartChoosing(const string& nextActiveScreenID);
@@ -47,7 +47,7 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	// Strings
+	// STRING
 	vector<string> _loadedModelIDs;
 	string _currentModelID = "";
 	string _currentPartID = "";
@@ -56,7 +56,7 @@ private:
 	string _hoveredModelID = "";
 	string _nextActiveScreenID = "";
 
-	// Decimals
+	// FLOAT
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 	static inline const float CURSOR_SENSITIVITY = 0.025f;
@@ -71,7 +71,7 @@ private:
 	static inline const float CAMERA_DISTANCE_SPEED = 0.25f;
 	static inline const float CAMERA_LOOKAT_SPEED = 0.025f;
 
-	// Booleans
+	// BOOL
 	bool _isCreatingModel = false;
 	bool _isChoosingModel = false;
 	bool _isDeletingModel = false;

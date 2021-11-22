@@ -7,7 +7,7 @@ class ReflectionEntityManager final : public BaseEntityManager
 public:
 	ReflectionEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
 
-	// Voids
+	// VOID
 	void update() override;
 	void createEntity(const string& ID);
 

@@ -7,16 +7,16 @@ class TerrainEntityManager final : public BaseEntityManager
 public:
 	TerrainEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
 
-	// Voids
+	// VOID
 	void update() override;
 	void createEntity(const string& ID, const string& heightMapPath);
 	void loadMesh(const string& ID);
 	void selectTerrain(const string& ID);
 
-	// Decimals
+	// FLOAT
 	const float getPixelHeight(const string& ID, float x, float z);
 
-	// Booleans
+	// BOOL
 	const bool isInside(const string& ID, float x, float z);
 
 	// Miscellaneous
@@ -24,13 +24,13 @@ public:
 	shared_ptr<TerrainEntity> getEntity(const string& ID);
 	shared_ptr<TerrainEntity> getSelectedTerrain();
 
-	// Integers
+	// UNSIGNED INT
 	static inline const unsigned int MAX_SIZE = 1024;
 
 private:
-	// Strings
+	// STRING
 	string _selectedID = "";
 
-	// Decimals
+	// FLOAT
 	float _getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixels);
 };

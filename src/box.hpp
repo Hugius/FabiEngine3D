@@ -8,10 +8,10 @@ public:
 	Box(fvec3 position, float left, float right, float bottom, float top, float back, float front);
 	Box(float left, float right, float bottom, float top, float back, float front);
 
-	// Vectors
+	// FVEC3
 	const fvec3 getPosition() const;
 
-	// Decimals
+	// FLOAT
 	const float getLeft() const;
 	const float getRight() const;
 	const float getBottom() const;
@@ -20,10 +20,10 @@ public:
 	const float getFront() const;
 
 private:
-	// Vectors
+	// FVEC3
 	fvec3 _position;
 
-	// Decimals
+	// FLOAT
 	float _left;
 	float _right;
 	float _bottom;

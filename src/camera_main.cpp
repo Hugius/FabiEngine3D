@@ -16,18 +16,18 @@ Camera::Camera(RenderBus& renderBus, Window& window)
 
 void Camera::reset()
 {
-	// Matrices
+	// MAT44
 	_viewMatrix = mat44(1.0f);
 	_projectionMatrix = mat44(1.0f);
 
-	// Vectors
+	// FVEC3
 	_upVector = DEFAULT_UP_VECTOR;
 	_frontVector = fvec3(0.0f);
 	_rightVector = fvec3(0.0f);
 	_position = fvec3(0.0f);
 	_thirdPersonLookat = fvec3(0.0f);
 
-	// Decimals
+	// FLOAT
 	_aspectRatio = static_cast<float>(Config::getInst().getWindowSize().x) / static_cast<float>(Config::getInst().getWindowSize().y);
 	_fov = DEFAULT_FOV_ANGLE;
 	_nearDistance = NEAR_DISTANCE;
@@ -49,7 +49,7 @@ void Camera::reset()
 	_thirdPersonPitchAcceleration = 0.0f;
 	_thirdPersonDistance = 0.0f;
 
-	// Booleans
+	// BOOL
 	_isFirstPersonViewEnabled = false;
 	_isThirdPersonViewEnabled = false;
 	_mustCenterCursor = false;

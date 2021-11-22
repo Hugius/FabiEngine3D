@@ -19,23 +19,23 @@ public:
 						  AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor,
 						  WorldEditor& worldEditor, ScriptEditor& scriptEditor, SettingsEditor& settingsEditor);
 
-	// Voids
+	// VOID
 	void initialize() override;
 	void update() override;
 
-	// Booleans
+	// BOOL
 	const bool isScriptStarted() const;
 	const bool isScriptRunning() const;
 	const bool isProjectCorrupted(const string& projectDirectoryPath) const;
 
-	// Vectors
+	// FVEC3
 	static inline const fvec3 BUTTON_COLOR = fvec3(0.0f, 0.1f, 0.0f);
 	static inline const fvec3 BUTTON_HOVER_COLOR = fvec3(0.0f, 1.0f, 0.0f);
 	static inline const fvec3 TEXT_COLOR = fvec3(1.0f);
 	static inline const fvec3 TEXT_HOVER_COLOR = fvec3(0.0f);
 
 private:
-	// Voids
+	// VOID
 	void _updateProjectScreenManagement();
 	void _updateGameScreenManagement();
 	void _updateMiscScreenManagement();
@@ -46,16 +46,16 @@ private:
 	void _saveCurrentProject();
 	void _applyProjectChange();
 
-	// Booleans
+	// BOOL
 	const bool _prepareProjectChoosing(const string& title) const;
 
-	// Strings
+	// STRING
 	string _currentProjectID = "";
 
-	// Vectors
+	// FVEC3
 	static inline const fvec3 FRAME_COLOR = fvec3(0.075f);
 
-	// Booleans
+	// BOOL
 	bool _isCreatingProject = false;
 	bool _isLoadingProject = false;
 	bool _isDeletingProject = false;

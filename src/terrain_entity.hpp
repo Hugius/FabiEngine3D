@@ -12,7 +12,7 @@ class TerrainEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	// Voids
+	// VOID
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setPixels(const vector<float>& value);
 	void setVertices(const vector<fvec3> value);
@@ -50,7 +50,7 @@ public:
 	void setWireframed(bool value);
 	void setWireframeColor(fvec3 value);
 
-	// Strings
+	// STRING
 	const string& getHeightMapPath() const;
 	const string& getDiffuseMapPath() const;
 	const string& getNormalMapPath() const;
@@ -62,13 +62,15 @@ public:
 	const string& getNormalMapPathG() const;
 	const string& getNormalMapPathB() const;
 
-	// Vectors
+	// FVEC3
 	const vector<fvec3>& getVertices() const;
 	const vector<fvec3>& getNormals() const;
-	const vector<fvec2>& getUvCoords() const;
 	const fvec3 getWireframeColor() const;
 
-	// Decimals
+	// FVEC2
+	const vector<fvec2>& getUvCoords() const;
+
+	// FLOAT
 	const vector<float>& getPixels() const;
 	const float getTextureRepeat() const;
 	const float getRedRepeat() const;
@@ -80,7 +82,7 @@ public:
 	const float getSpecularShininess() const;
 	const float getSpecularIntensity() const;
 
-	// Booleans
+	// BOOL
 	const bool isSpecular() const;
 	const bool isWireframed() const;
 	const bool hasRenderBuffer() const;
@@ -107,7 +109,7 @@ public:
 	const TextureID getNormalMapB() const;
 
 private:
-	// Strings
+	// STRING
 	string _heightMapPath = "";
 	string _diffuseMapPath = "";
 	string _normalMapPath = "";
@@ -119,13 +121,15 @@ private:
 	string _normalMapPathG = "";
 	string _normalMapPathB = "";
 
-	// Vectors
+	// FVEC3
 	vector<fvec3> _vertices;
 	vector<fvec3> _normals;
-	vector<fvec2> _uvCoords;
 	fvec3 _wireframeColor = fvec3(1.0f);
 
-	// Decimals
+	// FVEC2
+	vector<fvec2> _uvCoords;
+
+	// FLOAT
 	vector<float> _pixels;
 	float _redRepeat = 1.0f;
 	float _greenRepeat = 1.0f;
@@ -137,7 +141,7 @@ private:
 	float _specularShininess = 1.0f;
 	float _specularIntensity = 1.0f;
 
-	// Booleans
+	// BOOL
 	bool _isSpecular = false;
 	bool _isWireframed = false;
 

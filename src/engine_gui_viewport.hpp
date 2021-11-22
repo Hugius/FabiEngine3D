@@ -9,16 +9,16 @@ public:
 	EngineGuiViewport(FabiEngine3D& fe3d, const string& ID, fvec2 position, fvec2 size, fvec3 color);
 	~EngineGuiViewport();
 
-	// Voids
+	// VOID
 	void update(bool hoverable);
 	void createWindow(const string& ID, fvec2 position, fvec2 size, fvec3 color);
 	void deleteWindow(const string& ID);
 
-	// Strings
+	// STRING
 	const string& getID();
 	const string& getEntityID();
 
-	// Booleans
+	// BOOL
 	const bool isHovered() const;
 
 	// Miscellaneous
@@ -26,7 +26,7 @@ public:
 	shared_ptr<EngineGuiWindow> getWindow(const string& ID) const;
 
 private:
-	// Strings
+	// STRING
 	const string _ID;
 	const string _entityID;
 

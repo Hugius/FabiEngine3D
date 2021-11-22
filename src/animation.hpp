@@ -11,7 +11,7 @@ class Animation final
 public:
 	Animation(const string& ID);
 
-	// Voids
+	// VOID
 	void addFrame(const AnimationFrame& value);
 	void setFrame(unsigned int index, const AnimationFrame& value);
 	void setFrames(const vector<AnimationFrame>& value);
@@ -31,29 +31,31 @@ public:
 	void setPaused(bool value);
 	void setAutoPaused(bool value);
 
-	// Strings
+	// STRING
 	const string& getID() const;
 	const vector<string>& getPartIDs() const;
 	const string& getPreviewModelID() const;
 	const string& getOldPreviewModelID() const;
 	const string& getAnimatedModelID() const;
 
-	// Vectors
+	// FVEC3
 	const map<string, fvec3>& getTotalMovements() const;
 	const map<string, fvec3>& getTotalRotations() const;
 	const map<string, fvec3>& getTotalScalings() const;
 	const fvec3 getInitialSize() const;
 
-	// Decimals
+	// FLOAT
 	const float getSpeedMultiplier() const;
 
-	// Integers
+	// INT
 	const int getTimesToPlay() const;
 	const int getFadeFramestep() const;
 	const int getFadeFrameIndex() const;
+
+	// UNSIGNED INT
 	const unsigned int getFrameIndex() const;
 
-	// Booleans
+	// BOOL
 	const bool isPaused() const;
 	const bool isAutoPaused() const;
 
@@ -61,29 +63,31 @@ public:
 	const vector<AnimationFrame>& getFrames() const;
 
 private:
-	// Strings
+	// STRING
 	const string _ID;
 	vector<string> _partIDs;
 	string _previewModelID = "";
 	string _oldPreviewModelID = "";
 	string _animatedModelID = "";
 
-	// Vectors
+	// FVEC3
 	map<string, fvec3> _totalMovements;
 	map<string, fvec3> _totalRotations;
 	map<string, fvec3> _totalScalings;
 	fvec3 _initialSize = fvec3(0.0f);
 
-	// Decimals
+	// FLOAT
 	float _speedMultiplier = 1.0f;
 
-	// Integers
+	// INT
 	int _timesToPlay = 0;
 	int _fadeFramestep = -1;
 	int _fadeFrameIndex = -1;
+
+	// UNSIGNED INT
 	unsigned int _frameIndex = 0;
 
-	// Booleans
+	// BOOL
 	bool _isPaused = false;
 	bool _isAutoPaused = false;
 

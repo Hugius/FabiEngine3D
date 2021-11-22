@@ -17,7 +17,7 @@ class AudioPlayer final
 public:
 	AudioPlayer();
 
-	// Voids
+	// VOID
 	void allocateChannels(unsigned int count);
 	void update(Camera& camera, vector<Sound>& soundList, vector<Music>& musicList);
 	void setSoundsEnabled(bool value);
@@ -35,14 +35,14 @@ public:
 	void stopMusic();
 	void setMusicVolume(float volume);
 
-	// Decimals
+	// FLOAT
 	const float getMusicVolume() const;
 
-	// Integers
+	// UNSIGNED INT
 	const unsigned int getUsedChannelCount() const;
 	const unsigned int getAllocatedChannelCount() const;
 
-	// Booleans
+	// BOOL
 	const bool isChannelAvailable() const;
 	const bool isSoundsEnabled() const;
 	const bool isSoundStarted(Sound& sound) const;
@@ -54,21 +54,21 @@ public:
 	const bool isMusicPaused() const;
 
 private:
-	// Voids
+	// VOID
 	void _updateSoundVolume(Sound& sound);
 	void _updateMusicVolume();
 
-	// Integers
+	// INT
 	const vector<int> _findSoundChannels(Sound& sound)  const;
 	const int _getFreeChannel() const;
 
-	// Strings
+	// STRING
 	vector<string> _channels;
 
-	// Decimals
+	// FLOAT
 	float _musicVolume = 1.0f;
 
-	// Booleans
+	// BOOL
 	bool _isSoundsEnabled = true;
 	bool _isMusicEnabled = true;
 };

@@ -20,7 +20,7 @@ class TextureLoader final
 public:
 	TextureLoader(RenderBus& renderBus);
 
-	// Voids
+	// VOID
 	void cacheTexturesMultiThreaded2D(const vector<string>& filePaths, bool isMipmapped, bool isAnisotropic);
 	void cacheTexturesMultiThreaded3D(const vector<array<string, 6>>& filePathsList);
 	void cacheBitmapsMultiThreaded(const vector<string>& filePaths);
@@ -31,10 +31,10 @@ public:
 	void clearFontCache(const string& filePath);
 	void setAnisotropicFilteringQuality(unsigned int value);
 
-	// Decimals
+	// FLOAT
 	const vector<float>* loadBitmap(const string& filePath);
 
-	// Integers
+	// UNSIGNED INT
 	const unsigned int getAnisotropicFilteringQuality() const;
 
 	// Miscellaneous
@@ -43,10 +43,10 @@ public:
 	const TextureID loadTexture3D(const array<string, 6>& filePaths);
 
 private:
-	// Voids
+	// VOID
 	void _reloadAnisotropicFiltering();
 
-	// Decimals
+	// FLOAT
 	vector<float> _loadBitmap(const string& filePath);
 
 	// Miscellaneous
@@ -56,10 +56,10 @@ private:
 	TextureID _convertIntoTexture(const array<SDL_Surface*, 6>& surfaces, const array<string, 6>& filePaths);
 	TextureID _convertIntoTexture(TTF_Font* font, const string& textContent);
 
-	// Decimals
+	// FLOAT
 	map<string, vector<float>> _bitmapCache;
 
-	// Integers
+	// UNSIGNED INT
 	unsigned int _anisotropicFilteringQuality = Config::MIN_ANISOTROPIC_FILTERING_QUALITY;
 
 	// Miscellaneous

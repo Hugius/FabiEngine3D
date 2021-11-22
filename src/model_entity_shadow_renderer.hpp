@@ -8,7 +8,7 @@ class ModelEntityShadowRenderer final : public BaseRenderer
 public:
 	using BaseRenderer::BaseRenderer;
 
-	// Voids
+	// VOID
 	void bind() override;
 	void unbind() override;
 	void render(const shared_ptr<ModelEntity> entity);

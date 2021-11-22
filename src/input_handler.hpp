@@ -11,15 +11,15 @@ using std::vector;
 class InputHandler final
 {
 public:
-	// Voids
+	// VOID
 	void update();
 	void setLocked(bool locked);
 
-	// Integers
+	// INT
 	const int getMouseWheelX() const;
 	const int getMouseWheelY() const;
 
-	// Booleans
+	// BOOL
 	const bool isLocked() const;
 	const bool isKeyDown(InputType key) const;
 	const bool isKeyPressed(InputType key) const;
@@ -27,7 +27,7 @@ public:
 	const bool isMousePressed(InputType button) const;
 
 private:
-	// Integers
+	// UNSIGNED INT
 	inline const unsigned int _getVectorIndex(const vector<InputType>& list, InputType element) const
 	{
 		auto it = find(list.begin(), list.end(), element);
@@ -42,17 +42,17 @@ private:
 		}
 	}
 
-	// Booleans
+	// BOOL
 	inline const bool _isInVector(const vector<InputType>& list, InputType element) const
 	{
 		return find(list.begin(), list.end(), element) != list.end();
 	}
 
-	// Integers
+	// INT
 	int _mouseWheelX = 0;
 	int _mouseWheelY = 0;
 
-	// Booleans
+	// BOOL
 	bool _isLocked = false;
 
 	// Miscellaneous

@@ -9,14 +9,14 @@ class AudioManager final
 public:
 	AudioManager(AudioLoader& audioLoader);
 
-	// Voids
+	// VOID
 	void createSound(const string& ID, const string& fileName);
 	void createMusic(const string& fileName);
 	void deleteSound(const string& ID);
 	void deleteAllSounds();
 	void deleteAllMusic();
 
-	// Booleans
+	// BOOL
 	const bool isSoundExisting(const string& ID) const;
 
 	// Miscellaneous
@@ -25,7 +25,7 @@ public:
 	Sound& getSound(const string& ID);
 
 private:
-	// Integers
+	// INT
 	const int _findIndex(const string& ID) const;
 
 	// Miscellaneous

@@ -12,7 +12,7 @@ void BillboardEditor::_updateTexturingMenu()
 	{
 		// Temporary values
 		auto textContent = _fe3d.billboard_getTextContent(_currentBillboardID);
-		auto isText = _fe3d.billboard_isText(_currentBillboardID);
+		auto isTextual = _fe3d.billboard_isTextual(_currentBillboardID);
 		auto hasDiffuseMap = _fe3d.billboard_hasDiffuseMap(_currentBillboardID);
 		auto hasEmissionMap = _fe3d.billboard_hasEmissionMap(_currentBillboardID);
 		auto textureRepeat = _fe3d.billboard_getTextureRepeat(_currentBillboardID);
@@ -153,11 +153,11 @@ void BillboardEditor::_updateTexturingMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("font")->setHoverable(!hasDiffuseMap || isText);
-		screen->getButton("textContent")->setHoverable(isText);
-		screen->getButton("diffuseMap")->setHoverable(!isText);
-		screen->getButton("diffuseMap")->setHoverable(!isText);
-		screen->getButton("clearMaps")->setHoverable((hasDiffuseMap && !isText) || hasEmissionMap);
-		screen->getButton("textureRepeat")->setHoverable((hasDiffuseMap && !isText) || hasEmissionMap);
+		screen->getButton("font")->setHoverable(!hasDiffuseMap || isTextual);
+		screen->getButton("textContent")->setHoverable(isTextual);
+		screen->getButton("diffuseMap")->setHoverable(!isTextual);
+		screen->getButton("diffuseMap")->setHoverable(!isTextual);
+		screen->getButton("clearMaps")->setHoverable((hasDiffuseMap && !isTextual) || hasEmissionMap);
+		screen->getButton("textureRepeat")->setHoverable((hasDiffuseMap && !isTextual) || hasEmissionMap);
 	}
 }

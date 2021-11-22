@@ -153,7 +153,7 @@ const bool FabiEngine3D::billboard_hasEmissionMap(const string& ID) const
 	return _core->_billboardEntityManager.getEntity(ID)->hasEmissionMap();
 }
 
-const bool FabiEngine3D::billboard_isText(const string& ID) const
+const bool FabiEngine3D::billboard_isTextual(const string& ID) const
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isTextual();
 }

@@ -146,6 +146,26 @@ void FabiEngine3D::text_scaleTo(const string& ID, fvec2 target, float speed)
 	_core->_textEntityManager.getEntity(ID)->scaleTo(target, speed);
 }
 
+void FabiEngine3D::text_setMirroredHorizontally(const string& ID, bool mirrored)
+{
+	_core->_textEntityManager.getEntity(ID)->setMirroredHorizontally(mirrored);
+}
+
+void FabiEngine3D::text_setMirroredVertically(const string& ID, bool mirrored)
+{
+	_core->_textEntityManager.getEntity(ID)->setMirroredVertically(mirrored);
+}
+
+void FabiEngine3D::text_setWireframed(const string& ID, bool enabled)
+{
+	_core->_textEntityManager.getEntity(ID)->setWireframed(enabled);
+}
+
+void FabiEngine3D::text_setWireframeColor(const string& ID, fvec3 color)
+{
+	_core->_textEntityManager.getEntity(ID)->setWireframeColor(color);
+}
+
 void FabiEngine3D::text_setMinPosition(const string& ID, fvec2 minPos)
 {
 	_core->_textEntityManager.getEntity(ID)->setMinPosition(minPos);

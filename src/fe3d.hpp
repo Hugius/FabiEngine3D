@@ -414,7 +414,7 @@ public:
 	const bool billboard_isSpriteAnimationPaused(const string& ID) const;
 	const bool billboard_hasDiffuseMap(const string& ID) const;
 	const bool billboard_hasEmissionMap(const string& ID) const;
-	const bool billboard_isText(const string& ID) const;
+	const bool billboard_isTextual(const string& ID) const;
 
 	// AABB - setters
 	void aabb_create(const string& ID);
@@ -595,6 +595,10 @@ public:
 	void text_moveTo(const string& ID, fvec2 target, float speed);
 	void text_rotateTo(const string& ID, float target, float speed);
 	void text_scaleTo(const string& ID, fvec2 target, float speed);
+	void text_setMirroredHorizontally(const string& ID, bool mirrored);
+	void text_setMirroredVertically(const string& ID, bool mirrored);
+	void text_setWireframed(const string& ID, bool enabled);
+	void text_setWireframeColor(const string& ID, fvec3 color);
 
 	// TEXT - getters
 	const vector<string> text_getAllIDs() const;
@@ -609,6 +613,11 @@ public:
 	const float text_getTransparency(const string& ID) const;
 	const bool text_isExisting(const string& ID) const;
 	const bool text_isVisible(const string& ID) const;
+	const bool text_isCentered(const string& ID) const;
+	const bool text_isDynamic(const string& ID) const;
+	const bool text_isMirroredHorizontally(const string& ID) const;
+	const bool text_isMirroredVertically(const string& ID) const;
+	const bool text_isWireframed(const string& ID) const;
 
 	// SOUND - setters
 	void sound_create(const string& ID, const string& filePath);

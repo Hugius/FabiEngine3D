@@ -164,7 +164,7 @@ void BillboardEditor::_updateChoiceMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("animation")->setHoverable(_fe3d.billboard_hasDiffuseMap(_currentBillboardID) && !_fe3d.billboard_isText(_currentBillboardID));
+		screen->getButton("animation")->setHoverable(_fe3d.billboard_hasDiffuseMap(_currentBillboardID) && !_fe3d.billboard_isTextual(_currentBillboardID));
 	}
 }
 

@@ -455,7 +455,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				// Check if billboard is not of type text
-				if(!_fe3d.billboard_isText(arguments[0].getString()))
+				if(!_fe3d.billboard_isTextual(arguments[0].getString()))
 				{
 					_throwScriptError("billboard with ID \"" + arguments[0].getString() + "\" is not of type text!");
 					return true;

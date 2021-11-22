@@ -317,7 +317,7 @@ const bool WorldEditor::_copyPreviewBillboard(const string& newID, const string&
 	_fe3d.aabb_setParent(newID, newID, AabbParentType::BILLBOARD_ENTITY);
 
 	// Diffuse map
-	if(_fe3d.billboard_hasDiffuseMap(previewID) && !_fe3d.billboard_isText(previewID))
+	if(_fe3d.billboard_hasDiffuseMap(previewID) && !_fe3d.billboard_isTextual(previewID))
 	{
 		_fe3d.billboard_setDiffuseMap(newID, _fe3d.billboard_getDiffuseMapPath(previewID));
 	}
@@ -329,7 +329,7 @@ const bool WorldEditor::_copyPreviewBillboard(const string& newID, const string&
 	}
 
 	// Text
-	if(_fe3d.billboard_isText(previewID))
+	if(_fe3d.billboard_isTextual(previewID))
 	{
 		_fe3d.billboard_setFont(newID, _fe3d.billboard_getFontPath(previewID));
 		_fe3d.billboard_setTextContent(newID, _fe3d.billboard_getTextContent(previewID));

@@ -33,6 +33,6 @@ private:
 	// BOOL
 	bool _isFollowingCamera = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	RenderBus& _renderBus;
 };

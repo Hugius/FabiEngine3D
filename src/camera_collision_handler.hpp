@@ -43,7 +43,7 @@ private:
 	bool _isCameraTerrainResponseEnabled = false;
 	bool _isCameraUnderTerrain = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	CameraCollisionDetector _collisionDetector;
 	DirectionOrder _responseDirectionOrder = DirectionOrder::XYZ;
 	Box _cameraBox = Box(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);

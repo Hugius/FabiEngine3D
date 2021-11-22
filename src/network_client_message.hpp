@@ -15,7 +15,7 @@ public:
 	const string& getUsername() const;
 	const string& getContent() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const NetworkProtocol getProtocol() const;
 
 private:
@@ -23,6 +23,6 @@ private:
 	string _username;
 	string _content;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	NetworkProtocol _protocol;
 };

@@ -19,7 +19,7 @@ public:
 	static const float calculateTextWidth(const string& text, float charWidth);
 
 protected:
-	// Miscellaneous
+	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;
 };

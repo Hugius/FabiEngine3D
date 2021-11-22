@@ -23,7 +23,7 @@ public:
 	// BOOL
 	const bool isExposureEnabled() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const unordered_map<string, shared_ptr<SkyEntity>>& getEntities();
 	shared_ptr<SkyEntity> getEntity(const string& ID);
 	shared_ptr<SkyEntity> getSelectedMainSky();
@@ -41,6 +41,6 @@ private:
 	// BOOL
 	bool _isExposureEnabled = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> _renderBuffer;
 };

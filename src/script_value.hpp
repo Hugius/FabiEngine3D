@@ -35,7 +35,7 @@ public:
 	// BOOL
 	bool getBoolean() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const ScriptValueType& getType() const;
 
 private:
@@ -54,7 +54,7 @@ private:
 	// BOOL
 	bool _boolean = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const ScriptValueType _type;
 	FabiEngine3D& _fe3d;
 };

@@ -27,7 +27,7 @@ public:
 	// FLOAT
 	const float getIntensity() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const PointlightShape getShape() const;
 
 private:
@@ -41,6 +41,6 @@ private:
 	float _positionTargetSpeed = 0.0f;
 	float _intensity = 1.0f;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	PointlightShape _shape = PointlightShape::CIRCLE;
 };

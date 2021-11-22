@@ -27,7 +27,7 @@ public:
 	static const bool isMessageReadyUDP(SOCKET socket);
 	static const bool isMessageReserved(const string& message);
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	static const sockaddr_in composeSocketAddress(const string& IP, const string& port);
 
 	// STRING

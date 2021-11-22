@@ -74,7 +74,7 @@ public:
 	const bool hasNormalMap() const;
 	const bool hasDisplacementMap() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> getLowQualityRenderBuffer() const;
 	const shared_ptr<RenderBuffer> getHighQualityRenderBuffer() const;
 	const WaterQuality getQuality() const;
@@ -112,7 +112,7 @@ private:
 	bool _isRefractive = false;
 	bool _isWireframed = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	shared_ptr<RenderBuffer> _lowQualityRenderBuffer = nullptr;
 	shared_ptr<RenderBuffer> _highQualityRenderBuffer = nullptr;
 	WaterQuality _quality = WaterQuality::SKY;

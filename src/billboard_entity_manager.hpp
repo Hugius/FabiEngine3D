@@ -12,12 +12,12 @@ public:
 	void update() override;
 	void createEntity(const string& ID);
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const unordered_map<string, shared_ptr<BillboardEntity>>& getEntities();
 	shared_ptr<BillboardEntity> getEntity(const string& ID);
 
 private:
-	// Miscellaneous
+	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> _renderBuffer;
 	Camera& _camera;
 };

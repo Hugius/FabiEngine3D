@@ -55,7 +55,7 @@ private:
 	// BOOL
 	bool _isLocked = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	vector<InputType> _keysDown;
 	vector<InputType> _keysPressed;
 	vector<InputType> _keysPressed_mayNotPress;

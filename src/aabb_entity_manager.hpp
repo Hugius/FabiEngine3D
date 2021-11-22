@@ -12,11 +12,11 @@ public:
 	void createEntity(const string& ID);
 	void update(const unordered_map<string, shared_ptr<ModelEntity>>& modelEntities, const unordered_map<string, shared_ptr<BillboardEntity>>& billboardEntities);
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const unordered_map<string, shared_ptr<AabbEntity>>& getEntities();
 	shared_ptr<AabbEntity> getEntity(const string& ID);
 
 private:
-	// Miscellaneous
+	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> _renderBuffer;
 };

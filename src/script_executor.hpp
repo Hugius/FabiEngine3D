@@ -38,7 +38,7 @@ private:
 	bool _wasMusicPaused = false;
 	bool _mustSkipUpdate = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
 	Script& _script;
 	ScriptInterpreter _scriptInterpreter;

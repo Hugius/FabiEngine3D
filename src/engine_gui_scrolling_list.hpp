@@ -20,7 +20,7 @@ public:
 	// BOOL
 	const bool isHovered() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const vector<shared_ptr<EngineGuiButton>>& getButtons() const;
 	shared_ptr<EngineGuiButton> getButton(const string& ID) const;
 
@@ -51,6 +51,6 @@ private:
 	// BOOL
 	bool _isHovered = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	vector<shared_ptr<EngineGuiButton>> _buttons;
 };

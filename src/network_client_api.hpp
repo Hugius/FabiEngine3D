@@ -46,7 +46,7 @@ public:
 	const bool isConnectedToServer() const;
 	const bool isAcceptedByServer() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const vector<NetworkServerMessage>& getPendingMessages() const;
 
 private:
@@ -89,7 +89,7 @@ private:
 	bool _isWaitingForPing = false;
 	bool _mustDisconnectFromServer = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	vector<NetworkServerMessage> _pendingMessages;
 	SOCKET _socketTCP;
 	SOCKET _socketUDP;

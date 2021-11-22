@@ -11,7 +11,7 @@ public:
 	void update() override;
 	void createEntity(const string& ID);
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const unordered_map<string, shared_ptr<PointlightEntity>>& getEntities();
 	shared_ptr<PointlightEntity> getEntity(const string& ID);
 

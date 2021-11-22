@@ -14,13 +14,13 @@ public:
 	// STRING
 	const string& getContent() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const NetworkProtocol getProtocol() const;
 
 private:
 	// STRING
 	string _content;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	NetworkProtocol _protocol;
 };

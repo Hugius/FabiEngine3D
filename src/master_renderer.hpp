@@ -73,7 +73,7 @@ private:
 	float _cameraYawDifference = 0.0f;
 	float _cameraPitchDifference = 0.0f;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	Camera& _camera;
 	Timer& _timer;
 	RenderBus& _renderBus;

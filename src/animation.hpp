@@ -59,7 +59,7 @@ public:
 	const bool isPaused() const;
 	const bool isAutoPaused() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const vector<AnimationFrame>& getFrames() const;
 
 private:
@@ -91,6 +91,6 @@ private:
 	bool _isPaused = false;
 	bool _isAutoPaused = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	vector<AnimationFrame> _frames;
 };

@@ -45,7 +45,7 @@ private:
 	// BOOL
 	bool _isStarted = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	LARGE_INTEGER _frequency = {};
 	LARGE_INTEGER _time1 = {};
 	LARGE_INTEGER _time2 = {};

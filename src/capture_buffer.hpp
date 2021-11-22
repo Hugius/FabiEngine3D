@@ -22,7 +22,7 @@ public:
 	// FVEC2
 	const ivec2 getSize() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const BufferID getFBO() const;
 	const TextureID getTexture(unsigned int index) const;
 
@@ -34,7 +34,7 @@ private:
 	// BOOL
 	bool _isInitialized = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	vector<TextureID> _textures;
 	BufferID _fbo = 0;
 	BufferID _rbo = 0;

@@ -16,14 +16,14 @@ public:
 	void loadCaptureBuffer(ivec2 bufferSize);
 	void resetCaptureBuffer();
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const TextureID blurTexture(const shared_ptr<ImageEntity> entity, TextureID texture, unsigned int blurCount, float intensity, BlurDirection direction);
 
 private:
 	// VOID
 	void _render(const shared_ptr<ImageEntity> entity, TextureID texture);
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	CaptureBuffer _captureBuffer;
 };
 

@@ -138,7 +138,7 @@ public:
 	const bool hasReflectionMap(const string& partID) const;
 	const bool hasNormalMap(const string& partID) const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> getRenderBuffer(const string& partID) const;
 	const TextureID getDiffuseMap(const string& partID) const;
 	const TextureID getEmissionMap(const string& partID) const;
@@ -197,7 +197,7 @@ private:
 		bool isReflective = false;
 		bool isWireframed = false;
 
-		// Miscellaneous
+		// MISCELLANEOUS
 		shared_ptr<RenderBuffer> renderBuffer = nullptr;
 		TextureID diffuseMap = 0;
 		TextureID emissionMap = 0;
@@ -248,7 +248,7 @@ private:
 	bool _isBright = false;
 	bool _isFaceCulled = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	vector<PartData> _parts;
 	DirectionOrder _rotationOrder = DirectionOrder::YXZ;
 };

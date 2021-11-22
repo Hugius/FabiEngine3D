@@ -28,7 +28,7 @@ public:
 	// BOOL
 	const bool isInstanced() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const BufferID getVAO() const;
 	const RenderBufferType getBufferType() const;
 
@@ -43,7 +43,7 @@ private:
 	// BOOL
 	bool _isInstanced = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	RenderBufferType _bufferType;
 	BufferID _vao = 0;
 	BufferID _vbo = 0;

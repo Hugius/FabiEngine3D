@@ -12,7 +12,7 @@ public:
 	// VOID
 	void update();
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	shared_ptr<EngineGuiGlobalScreen> getGlobalScreen();
 	shared_ptr<EngineGuiViewport> getViewport(const string& ID);
 
@@ -20,7 +20,7 @@ public:
 	static inline const fvec3 FRAME_COLOR = fvec3(0.025f);
 
 private:
-	// Miscellaneous
+	// MISCELLANEOUS
 	vector<shared_ptr<EngineGuiViewport>> _viewports;
 	shared_ptr<EngineGuiGlobalScreen> _globalScreen;
 	FabiEngine3D& _fe3d;

@@ -12,12 +12,12 @@ public:
 	void update(bool isEnginePaused);
 	void createEntity(const string& ID, bool isCentered);
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const unordered_map<string, shared_ptr<ImageEntity>>& getEntities();
 	shared_ptr<ImageEntity> getEntity(const string& ID);
 
 private:
-	// Miscellaneous
+	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> _centeredRenderBuffer;
 	const shared_ptr<RenderBuffer> _nonCenteredRenderBuffer;
 };

@@ -144,7 +144,7 @@ private:
 	const bool _validateMouseInputString(const string& inputString);
 	const bool _validateSavesDirectory() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const vector<ScriptValue> _extractValuesFromListString(const string& listString);
 	const vector<ScriptValue> _processEngineFunctionCall(const string& scriptLine);
 	const vector<ScriptValue> _processMathematicalFunctionCall(const string& scriptLine);
@@ -220,7 +220,7 @@ private:
 	bool _isExecutingUpdate = false;
 	bool _isExecutingDestruction = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	unordered_map<unsigned int, unordered_map<string, ScriptVariable>> _localVariables;
 	unordered_map<string, ScriptVariable> _globalVariables;
 	FabiEngine3D& _fe3d;

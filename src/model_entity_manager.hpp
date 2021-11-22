@@ -17,7 +17,7 @@ public:
 	// FLOAT
 	const float getLevelOfDetailDistance() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const unordered_map<string, shared_ptr<ModelEntity>>& getEntities();
 	shared_ptr<ModelEntity> getEntity(const string& ID);
 
@@ -26,6 +26,6 @@ private:
 	static inline const float CUBE_REFLECTION_OVERLAP_SPEED = 0.01f;
 	float _levelOfDetailDistance = 0.0f;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	Timer& _timer;
 };

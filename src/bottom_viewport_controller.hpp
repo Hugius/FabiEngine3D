@@ -37,7 +37,7 @@ private:
 	static inline const unsigned int TIME_PART_LENGTH = 10;
 	static inline const unsigned int SEPARATOR_PART_LENGTH = 3;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	TopViewportController& _topViewportController;
 	ScriptEditor& _scriptEditor;
 	shared_ptr<EngineGuiScreen> _statsScreen = nullptr;

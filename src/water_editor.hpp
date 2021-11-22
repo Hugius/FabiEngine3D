@@ -64,7 +64,7 @@ private:
 	bool _isDeletingWater = false;
 	bool _isEditorLoaded = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;
 };

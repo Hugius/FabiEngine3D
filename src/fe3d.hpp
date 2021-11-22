@@ -978,6 +978,6 @@ private:
 	// BOOL
 	bool _isRaycastUpdated = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	CoreEngine* _core = nullptr;
 };

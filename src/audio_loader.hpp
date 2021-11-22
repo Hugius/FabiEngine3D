@@ -20,7 +20,7 @@ public:
 	void clearChunkCache(const string& filePath);
 	void clearMusicCache(const string& filePath);
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	Mix_Chunk* loadChunk(const string& filePath);
 	Mix_Music* loadMusic(const string& filePath);
 
@@ -31,11 +31,11 @@ private:
 	// CHAR
 	const char* _loadWaveFile(const string& filePath) const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	Mix_Chunk* _loadChunk(const string& filePath, unsigned char* data) const;
 	Mix_Music* _loadMusic(const string& filePath) const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	map<string, Mix_Chunk*> _chunkCache;
 	map<string, Mix_Music*> _musicCache;
 };

@@ -42,6 +42,6 @@ public:
 	const bool isVsyncEnabled() const;
 
 private:
-	// Miscellaneous
+	// MISCELLANEOUS
 	SDL_Window* _windowPointer = nullptr;
 };

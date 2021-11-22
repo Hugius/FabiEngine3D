@@ -24,11 +24,11 @@ public:
 	// BOOL
 	const bool isScriptFileExisting(const string& ID) const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	shared_ptr<ScriptFile> getScriptFile(const string& ID) const;
 
 private:
-	// Miscellaneous
+	// MISCELLANEOUS
 	vector<shared_ptr<ScriptFile>> _scriptFiles;
 	FabiEngine3D& _fe3d;
 };

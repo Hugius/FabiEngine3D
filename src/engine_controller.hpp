@@ -24,7 +24,7 @@ private:
 	// BOOL
 	bool _mustPromptOnExit = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	EngineGuiManager _gui;
 	LeftViewportController _leftViewportController;
 	RightViewportController _rightViewportController;

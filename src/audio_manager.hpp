@@ -19,7 +19,7 @@ public:
 	// BOOL
 	const bool isSoundExisting(const string& ID) const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	vector<Sound>& getSounds();
 	vector<Music>& getMusic();
 	Sound& getSound(const string& ID);
@@ -28,7 +28,7 @@ private:
 	// INT
 	const int _findIndex(const string& ID) const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	vector<Sound> _soundList;
 	vector<Music> _musicList;
 	AudioLoader& _audioLoader;

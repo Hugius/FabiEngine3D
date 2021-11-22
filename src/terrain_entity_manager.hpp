@@ -19,7 +19,7 @@ public:
 	// BOOL
 	const bool isInside(const string& ID, float x, float z);
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const unordered_map<string, shared_ptr<TerrainEntity>>& getEntities();
 	shared_ptr<TerrainEntity> getEntity(const string& ID);
 	shared_ptr<TerrainEntity> getSelectedTerrain();

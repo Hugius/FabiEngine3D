@@ -97,6 +97,6 @@ private:
 	bool _isFocused = false;
 	bool _mustDeleteValueForms = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
 };

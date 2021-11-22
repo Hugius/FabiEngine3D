@@ -100,6 +100,6 @@ private:
 	static inline const float DEG2RAD = 0.01745329251994329576923690768489f;
 	static inline const float RAD2DEG = 57.295779513082320876798154814278f;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	static inline mt19937 _generator = mt19937(static_cast<unsigned int>(time(nullptr)));
 };

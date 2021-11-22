@@ -21,7 +21,7 @@ public:
 	void initialize() override;
 	void update() override;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	SkyEditor& getSkyEditor();
 	TerrainEditor& getTerrainEditor();
 	WaterEditor& getWaterEditor();
@@ -51,7 +51,7 @@ private:
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	SkyEditor _skyEditor;
 	TerrainEditor _terrainEditor;
 	WaterEditor _waterEditor;

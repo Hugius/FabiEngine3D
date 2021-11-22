@@ -54,7 +54,7 @@ private:
 	bool _isPaused = false;
 	bool _isRunning = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
 	LibraryLoader _libraryLoader;
 	MeshLoader _meshLoader;

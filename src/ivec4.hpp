@@ -44,7 +44,7 @@ struct ivec4 final
 	const bool operator==(const ivec4& other) const;
 	const bool operator!=(const ivec4& other) const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	union
 	{
 		int f[4];

@@ -35,7 +35,7 @@ public:
 	// BOOL
 	const bool is3D() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	Mix_Chunk* getDataPointer() const;
 
 private:
@@ -54,6 +54,6 @@ private:
 	// BOOL
 	bool _is3D = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	Mix_Chunk* _dataPointer = nullptr;
 };

@@ -7,10 +7,10 @@ class Music final
 public:
 	Music(Mix_Music* dataPointer);
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	Mix_Music* getDataPointer() const;
 
 private:
-	// Miscellaneous
+	// MISCELLANEOUS
 	Mix_Music* _dataPointer = nullptr;
 };

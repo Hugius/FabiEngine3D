@@ -22,7 +22,7 @@ struct mat44 final
 	// FVEC4
 	const fvec4 operator*(const fvec4& other) const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	union
 	{
 		float m[4][4];

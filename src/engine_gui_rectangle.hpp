@@ -40,6 +40,6 @@ protected:
 	fvec2 _initialPosition;
 	fvec2 _initialSize;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
 };

@@ -16,7 +16,7 @@ protected:
 	// FLOAT
 	static inline const float MIN_TEXTURE_TRANSPARENCY = 0.25f;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	ShaderBuffer _shader;
 	RenderBus& _renderBus;
 };

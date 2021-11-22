@@ -19,7 +19,7 @@ public:
 	const bool isTrue() const;
 	const bool isFalse() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const ScriptConditionType getType() const;
 
 private:
@@ -29,6 +29,6 @@ private:
 	// BOOL
 	bool _conditionResult = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	ScriptConditionType _type = ScriptConditionType::IF;
 };

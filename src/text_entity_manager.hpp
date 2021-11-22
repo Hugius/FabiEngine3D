@@ -13,7 +13,7 @@ public:
 	void loadCharacters(const string& ID);
 	void deleteDynamicTextEntity(const string& ID);
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const unordered_map<string, shared_ptr<TextEntity>>& getEntities();
 	shared_ptr<TextEntity> getEntity(const string& ID);
 
@@ -21,7 +21,7 @@ private:
 	// STRING
 	map<string, string> _textContentMap;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> _centeredRenderBuffer;
 	const shared_ptr<RenderBuffer> _nonCenteredRenderBuffer;
 };

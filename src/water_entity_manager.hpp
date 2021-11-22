@@ -13,7 +13,7 @@ public:
 	void loadMesh(const string& ID);
 	void selectWater(const string& ID);
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const unordered_map<string, shared_ptr<WaterEntity>>& getEntities();
 	shared_ptr<WaterEntity> getEntity(const string& ID);
 	shared_ptr<WaterEntity> getSelectedWater();

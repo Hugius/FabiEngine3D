@@ -60,7 +60,7 @@ private:
 	bool _isLoadingProject = false;
 	bool _isDeletingProject = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	SkyEditor& _skyEditor;
 	TerrainEditor& _terrainEditor;
 	WaterEditor& _waterEditor;

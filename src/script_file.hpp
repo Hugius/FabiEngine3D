@@ -36,6 +36,6 @@ private:
 	unsigned int _cursorLineIndex = 0;
 	unsigned int _cursorCharIndex = 0;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
 };

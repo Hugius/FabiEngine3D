@@ -26,7 +26,7 @@ public:
 	const bool isHoverable() const;
 	const bool isHovered() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	shared_ptr<EngineGuiRectangle> getRectangle() const;
 	shared_ptr<EngineGuiTextField> getTextField() const;
 
@@ -46,7 +46,7 @@ protected:
 	bool _isHovered = false;
 	bool _isHoverable = true;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
 	shared_ptr<EngineGuiRectangle> _rectangle = nullptr;
 	shared_ptr<EngineGuiTextField> _textField = nullptr;

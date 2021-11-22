@@ -28,7 +28,7 @@ public:
 	// BOOL
 	const bool mustCapture() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const TextureID getCubeMap() const;
 
 private:
@@ -43,6 +43,6 @@ private:
 	bool _mustCapture = false;
 	bool _isCaptured = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	TextureID _cubeMap;
 };

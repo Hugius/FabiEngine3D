@@ -22,7 +22,7 @@ public:
 	const bool isLoaded() const;
 	const bool isWritingScript() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	ScriptExecutor& getScriptExecutor();
 
 private:
@@ -124,7 +124,7 @@ private:
 	bool _hasClickedLMB = false;
 	bool _isEditorLoaded = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;
 	Script _script;

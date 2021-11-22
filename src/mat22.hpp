@@ -22,7 +22,7 @@ struct mat22 final
 	// FVEC2
 	const fvec2 operator*(const fvec2& other) const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	union
 	{
 		float m[2][2];

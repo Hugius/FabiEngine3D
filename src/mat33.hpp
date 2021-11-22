@@ -22,7 +22,7 @@ struct mat33 final
 	// FVEC3
 	const fvec3 operator*(const fvec3& other) const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	union
 	{
 		float m[3][3];

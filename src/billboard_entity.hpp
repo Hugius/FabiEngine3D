@@ -113,7 +113,7 @@ public:
 	const bool hasDiffuseMap() const;
 	const bool hasEmissionMap() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> getRenderBuffer() const;
 	const TextureID getDiffuseMap() const;
 	const TextureID getEmissionMap() const;
@@ -175,7 +175,7 @@ private:
 	bool _isWireframed = false;
 	bool _isTextual = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
 	TextureID _diffuseMap = 0;
 	TextureID _emissionMap = 0;

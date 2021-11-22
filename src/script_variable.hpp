@@ -24,7 +24,7 @@ public:
 	// BOOL
 	const bool isConstant() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const vector<shared_ptr<ScriptValue>>& getValues() const;
 	ScriptValue& getValue(unsigned int index = 0) const;
 	const ScriptVariableScope getScope() const;
@@ -37,7 +37,7 @@ private:
 	// BOOL
 	const bool _isConstant;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	vector<shared_ptr<ScriptValue>> _values;
 	ScriptVariableScope _scope;
 	ScriptVariableType _type;

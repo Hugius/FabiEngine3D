@@ -44,7 +44,7 @@ struct fvec2 final
 	const bool operator==(const fvec2& other) const;
 	const bool operator!=(const fvec2& other) const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	union
 	{
 		float f[2];

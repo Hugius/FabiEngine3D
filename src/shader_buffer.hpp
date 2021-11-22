@@ -35,7 +35,7 @@ private:
 	void _uploadUniform(const UniformID& uniformID, const mat33& data);
 	void _uploadUniform(const UniformID& uniformID, const mat44& data);
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const UniformID _getUniformID(const string& uniformID);
 	 
 	// STRING
@@ -43,7 +43,7 @@ private:
 	string _fragmentFileName = "";
 	string _name = "";
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	map<string, UniformID> _uniformCache;
 	ShaderID _program = 0;
 };

@@ -16,10 +16,10 @@ public:
 	const string getGpuModel() const;
 	const string getOpenglVersion() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	SDL_Window* getWindowPointer();
 
 private:
-	// Miscellaneous
+	// MISCELLANEOUS
 	SDL_Window* _windowPointer = nullptr;
 };

@@ -53,7 +53,7 @@ public:
 	const bool isWindowBorderless()	const;
 	const bool isApplicationExported() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	static Config& getInst()
 	{
 		static Config instance;

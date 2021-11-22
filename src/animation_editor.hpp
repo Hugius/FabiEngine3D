@@ -37,7 +37,7 @@ public:
 	const bool loadAnimationsFromFile(bool mustCheckPreviewModel);
 	const bool saveAnimationsToFile() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	Animation* getAnimationData(const string& animationID, const string& modelID, string baseErrorMessage);
 
 private:
@@ -59,7 +59,7 @@ private:
 	const bool _hasReachedFloat(float first, float second, float speed) const;
 	const bool _comparePartIDs(vector<string> first, vector<string> second) const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	shared_ptr<Animation> _getAnimation(const string& ID) const;
 
 	// STRING
@@ -104,7 +104,7 @@ private:
 	bool _isDeletingAnimation = false;
 	bool _isEditorLoaded = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	map<pair<string, string>, Animation> _startedAnimations;
 	vector<shared_ptr<Animation>> _animations;
 	FabiEngine3D& _fe3d;

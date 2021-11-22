@@ -29,7 +29,7 @@ public:
 	const bool isCentered() const;
 	const bool isDynamic() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const vector<shared_ptr<ImageEntity>>& getCharacterEntities() const;
 
 private:
@@ -41,6 +41,6 @@ private:
 	bool _isCentered = false;
 	bool _isDynamic = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	vector<shared_ptr<ImageEntity>> _characterEntities;
 };

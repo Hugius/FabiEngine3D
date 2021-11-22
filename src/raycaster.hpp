@@ -27,7 +27,7 @@ public:
 	// BOOL
 	const bool isTerrainPointingEnabled() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const Ray getCursorRay() const;
 
 private:
@@ -41,7 +41,7 @@ private:
 	// BOOL
 	const bool _isUnderTerrain(float distance) const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const Ray _calculateCursorRay(ivec2 cursorPosition) const;
 
 	// FVEC3
@@ -54,7 +54,7 @@ private:
 	// BOOL
 	bool _isTerrainPointingEnabled = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	RenderBus& _renderBus;
 	TerrainEntityManager& _terrainManager;
 	Ray _cursorRay = Ray(fvec3(0.0f), fvec3(0.0f));

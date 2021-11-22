@@ -44,7 +44,7 @@ public:
 	const bool isRunning() const;
 	const bool isClientConnected(const string& username) const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const vector<NetworkClientMessage>& getPendingMessages() const;
 
 private:
@@ -59,7 +59,7 @@ private:
 	const bool _sendMessageTCP(SOCKET socket, const string& content, bool isReserved);
 	const bool _sendMessageUDP(const string& clientIP, const string& clientPort, const string& content, bool isReserved) const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const SOCKET _waitForClientConnection(SOCKET socket) const;
 
 	// STRING
@@ -80,7 +80,7 @@ private:
 	// BOOL
 	bool _isRunning = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	vector<NetworkClientMessage> _pendingMessages;
 	vector<SOCKET> _clientSockets;
 	future<SOCKET> _connectionThread;

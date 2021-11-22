@@ -57,7 +57,7 @@ public:
 	const bool mustFollowParentTransformation() const;
 	const bool mustFollowParentVisibility() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> getRenderBuffer() const;
 	const AabbParentType getParentType() const;
 	const Direction getCollisionDirection() const;
@@ -89,7 +89,7 @@ private:
 	bool _isCollisionResponsive = true;
 	bool _hasCollided = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
 	AabbParentType _parentType;
 	Direction _collisionDirection;

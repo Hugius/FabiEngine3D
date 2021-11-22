@@ -95,7 +95,7 @@ public:
 	const bool hasRenderBuffer() const;
 	const bool hasDiffuseMap() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> getRenderBuffer() const;
 	const TextureID getDiffuseMap() const;
 
@@ -148,7 +148,7 @@ private:
 	bool _isPerspectiveDepthEntity = false;
 	bool _isWireframed = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
 	TextureID _diffuseMap = 0;
 };

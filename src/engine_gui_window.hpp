@@ -27,7 +27,7 @@ public:
 	// BOOL
 	const bool isHovered() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const vector<shared_ptr<EngineGuiScreen>>& getScreens() const;
 	shared_ptr<EngineGuiScreen> getScreen(const string& ID) const;
 	shared_ptr<EngineGuiScreen> getActiveScreen() const;
@@ -43,7 +43,7 @@ private:
 	const fvec2 _initialPosition;
 	const fvec2 _initialSize;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	vector<shared_ptr<EngineGuiScreen>> _screens;
 	FabiEngine3D& _fe3d;
 };

@@ -116,7 +116,7 @@ private:
 	bool _mustCenterCursor = false;
 	bool _cursorIsBeingCentered = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	RenderBus& _renderBus;
 	Window& _window;
 };

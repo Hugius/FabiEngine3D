@@ -37,7 +37,7 @@ public:
 	// UNSIGNED INT
 	const unsigned int getAnisotropicFilteringQuality() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const TextureID loadTexture2D(const string& filePath, bool isMipmapped, bool isAnisotropic);
 	const TextureID loadTexture2D(const string& textContent, const string& fontPath);
 	const TextureID loadTexture3D(const array<string, 6>& filePaths);
@@ -49,7 +49,7 @@ private:
 	// FLOAT
 	vector<float> _loadBitmap(const string& filePath);
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	SDL_Surface* _loadSurface(const string& filePath);
 	TTF_Font* _loadFont(const string& filePath);
 	TextureID _convertIntoTexture(SDL_Surface* surface, const string& filePath, bool isMipmapped, bool isAnisotropic);
@@ -62,7 +62,7 @@ private:
 	// UNSIGNED INT
 	unsigned int _anisotropicFilteringQuality = Config::MIN_ANISOTROPIC_FILTERING_QUALITY;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	RenderBus& _renderBus;
 	map<string, TextureID> _textureCache2D;
 	map<array<string, 6>, TextureID> _textureCache3D;

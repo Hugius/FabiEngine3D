@@ -21,7 +21,7 @@ public:
 	// BOOL
 	const bool isHovered() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const vector<shared_ptr<EngineGuiWindow>>& getWindows() const;
 	shared_ptr<EngineGuiWindow> getWindow(const string& ID) const;
 
@@ -30,7 +30,7 @@ private:
 	const string _ID;
 	const string _entityID;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	vector<shared_ptr<EngineGuiWindow>> _windows;
 	FabiEngine3D& _fe3d;
 };

@@ -170,7 +170,7 @@ public:
 	const bool isTriangleCountingEnabled() const;
 	const bool isDofDynamic() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const TextureID getPrimaryWorldMap() const;
 	const TextureID getSecondaryWorldMap() const;
 	const TextureID getPlanarReflectionMap() const;
@@ -279,6 +279,6 @@ private:
 	bool _isTriangleCountingEnabled = false;
 	bool _isDofDynamic = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	BloomType _bloomType = BloomType::EVERYTHING;
 };

@@ -41,7 +41,7 @@ protected:
 	// VOID
 	void _createEntity(const string& ID);
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	unordered_map<string, shared_ptr<WaterEntity>>& _getWaterEntities();
 	unordered_map<string, shared_ptr<SkyEntity>>& _getSkyEntities();
 	unordered_map<string, shared_ptr<TerrainEntity>>& _getTerrainEntities();
@@ -65,7 +65,7 @@ protected:
 	shared_ptr<ImageEntity>	_getImageEntity(const string& ID);
 	shared_ptr<TextEntity> _getTextEntity(const string& ID);
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	EntityType _type;
 	MeshLoader& _meshLoader;
 	TextureLoader& _textureLoader;
@@ -75,7 +75,7 @@ private:
 	// UNSIGNED INT
 	static inline unsigned int _guiDepth = 0;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	unordered_map<string, shared_ptr<SkyEntity>> _skyEntities;
 	unordered_map<string, shared_ptr<TerrainEntity>> _terrainEntities;
 	unordered_map<string, shared_ptr<WaterEntity>> _waterEntities;

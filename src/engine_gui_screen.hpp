@@ -45,7 +45,7 @@ public:
 	const bool isRectangleExisting(const string& ID) const;
 	const bool isTextFieldExisting(const string& ID) const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	shared_ptr<EngineGuiScrollingList> getScrollingList(const string& ID) const;
 	shared_ptr<EngineGuiWriteField> getWriteField(const string& ID) const;
 	shared_ptr<EngineGuiButton> getButton(const string& ID) const;
@@ -72,7 +72,7 @@ private:
 	// BOOL
 	bool _isActive = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	vector<shared_ptr<EngineGuiScrollingList>> _scrollingLists;
 	vector<shared_ptr<EngineGuiWriteField>> _writeFields;
 	vector<shared_ptr<EngineGuiButton>> _buttons;

@@ -27,7 +27,7 @@ public:
 	const map<string, fvec3>& getRotationOrigins() const;
 	const map<string, fvec3>& getSpeeds() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const map<string, AnimationSpeedType>& getSpeedTypes() const;
 	const map<string, TransformationType>& getTransformationTypes() const;
 
@@ -37,7 +37,7 @@ private:
 	map<string, fvec3> _rotationOrigins;
 	map<string, fvec3> _speeds;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	map<string, AnimationSpeedType> _speedTypes;
 	map<string, TransformationType> _transformationTypes;
 };

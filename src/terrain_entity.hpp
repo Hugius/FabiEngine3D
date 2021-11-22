@@ -96,7 +96,7 @@ public:
 	const bool hasNormalMapG() const;
 	const bool hasNormalMapB() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> getRenderBuffer() const;
 	const TextureID getDiffuseMap() const;
 	const TextureID getNormalMap() const;
@@ -145,7 +145,7 @@ private:
 	bool _isSpecular = false;
 	bool _isWireframed = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
 	TextureID _diffuseMap = 0;
 	TextureID _normalMap = 0;

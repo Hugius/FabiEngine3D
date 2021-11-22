@@ -47,7 +47,7 @@ public:
 	const bool hasCubeMap() const;
 	const bool isWireframed() const;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> getRenderBuffer() const;
 	const TextureID getCubeMap() const;
 
@@ -70,7 +70,7 @@ private:
 	// BOOL
 	bool _isWireframed = false;
 
-	// Miscellaneous
+	// MISCELLANEOUS
 	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
 	TextureID _cubeMap = 0;
 };

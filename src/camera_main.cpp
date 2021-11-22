@@ -202,9 +202,9 @@ void Camera::updateMatrices()
 	_viewMatrix = Math::createViewMatrix(_position, (_position + _frontVector), _upVector);
 
 	// Projection matrix
-	_projectionMatrix = Math::createProjectionMatrix(Math::convertToRadians(_fov), _aspectRatio, _nearDistance, _farDistance);
+	_projectionMatrix = Math::createPerspectiveProjectionMatrix(Math::convertToRadians(_fov), _aspectRatio, _nearDistance, _farDistance);
 
-	// Update renderbus
+	// Update render bus
 	_renderBus.setCameraYaw(_yaw);
 	_renderBus.setCameraPitch(_pitch);
 	_renderBus.setCameraFront(_frontVector);

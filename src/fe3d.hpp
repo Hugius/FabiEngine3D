@@ -817,8 +817,8 @@ public:
 	const fvec3 gfx_getAmbientLightingColor() const;
 	const fvec3 gfx_getDirectionalLightingColor() const;
 	const fvec3 gfx_getFogColor() const;
-	const fvec3 gfx_getShadowEye() const;
-	const fvec3 gfx_getShadowCenter() const;
+	const fvec3 gfx_getShadowEyePosition() const;
+	const fvec3 gfx_getShadowCenterPosition() const;
 	const float gfx_getAmbientLightingIntensity() const;
 	const float gfx_getDirectionalLightingIntensity() const;
 	const float gfx_getFogMinDistance() const;

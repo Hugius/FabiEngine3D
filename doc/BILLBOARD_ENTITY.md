@@ -93,7 +93,7 @@
   - Constraints: none
 - **Facing Y**: the mesh is vertically facing the camera
   - Constraints: none
-- **Bright**: enable or disable vertical billboard facing towards the camera
+- **Bright**: the mesh is captured for bloom rendering
   - Constraints: none
 - **Wireframed**: the mesh is rendered as a wireframe
   - Constraints: none

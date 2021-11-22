@@ -18,13 +18,6 @@ void MasterRenderer::_captureCubeReflections()
 	const auto initialCameraPitch = _camera.getPitch();
 	const auto initialCameraPosition = _camera.getPosition();
 
-	// Save initial shadow status
-	const auto initialShadowEyePosition = _renderBus.getShadowEyePosition();
-	const auto initialShadowAreaCenter = _renderBus.getShadowCenterPosition();
-	const auto initialShadowAreaSize = _renderBus.getShadowAreaSize();
-	const auto initialShadowAreaReach = _renderBus.getShadowAreaReach();
-	const auto initialShadowMatrix = _renderBus.getShadowMatrix();
-
 	// Iterate through all model entities
 	vector<string> savedModelEntityIDs;
 	for(const auto& [keyID, entity] : _entityBus->getModelEntities())
@@ -123,7 +116,7 @@ void MasterRenderer::_captureCubeReflections()
 				_camera.updateMatrices();
 
 				// Update shadows
-				_shadowGenerator.updateMatrix();
+				_shadowGenerator.generate();
 				_captureShadows();
 
 				// Start capturing reflections
@@ -205,11 +198,7 @@ void MasterRenderer::_captureCubeReflections()
 	_camera.updateMatrices();
 
 	// Revert shadows
-	_renderBus.setShadowEyePosition(initialShadowEyePosition);
-	_renderBus.setShadowCenterPosition(initialShadowAreaCenter);
-	_renderBus.setShadowAreaSize(initialShadowAreaSize);
-	_renderBus.setShadowAreaReach(initialShadowAreaReach);
-	_renderBus.setShadowMatrix(initialShadowMatrix);
+	_shadowGenerator.generate();
 }
 
 void MasterRenderer::_capturePlanarReflections()

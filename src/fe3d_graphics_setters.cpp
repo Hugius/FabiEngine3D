@@ -188,11 +188,11 @@ void FabiEngine3D::gfx_disableShadows(bool mustResetProperties)
 
 	if(mustResetProperties)
 	{
-		_core->_renderBus.setShadowEyePosition(fvec3(0.0f));
-		_core->_renderBus.setShadowCenterPosition(fvec3(0.0f));
-		_core->_renderBus.setShadowAreaSize(0.0f);
-		_core->_renderBus.setShadowAreaReach(0.0f);
-		_core->_renderBus.setShadowLightness(0.0f);
+		_core->_shadowGenerator.setEyePosition(fvec3(0.0f));
+		_core->_shadowGenerator.setCenterPosition(fvec3(0.0f));
+		_core->_shadowGenerator.setAreaSize(0.0f);
+		_core->_shadowGenerator.setAreaReach(0.0f);
+		_core->_shadowGenerator.setLightness(0.0f);
 		_core->_shadowGenerator.setInterval(0);
 		_core->_shadowGenerator.setFollowingCamera(false);
 	}
@@ -386,27 +386,27 @@ void FabiEngine3D::gfx_setFogMaxDistance(float maxDistance)
 
 void FabiEngine3D::gfx_setShadowEyePosition(fvec3 position)
 {
-	_core->_renderBus.setShadowEyePosition(position);
+	_core->_shadowGenerator.setEyePosition(position);
 }
 
 void FabiEngine3D::gfx_setShadowCenterPosition(fvec3 position)
 {
-	_core->_renderBus.setShadowCenterPosition(position);
+	_core->_shadowGenerator.setCenterPosition(position);
 }
 
 void FabiEngine3D::gfx_setShadowAreaSize(float size)
 {
-	_core->_renderBus.setShadowAreaSize(size);
+	_core->_shadowGenerator.setAreaSize(size);
 }
 
 void FabiEngine3D::gfx_setShadowAreaReach(float reach)
 {
-	_core->_renderBus.setShadowAreaReach(reach);
+	_core->_shadowGenerator.setAreaReach(reach);
 }
 
 void FabiEngine3D::gfx_setShadowLightness(float lightness)
 {
-	_core->_renderBus.setShadowLightness(lightness);
+	_core->_shadowGenerator.setLightness(lightness);
 }
 
 void FabiEngine3D::gfx_setShadowInterval(unsigned int interval)

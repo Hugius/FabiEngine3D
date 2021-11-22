@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetterFunction(const string& f
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.gfx_getShadowEye();
+			auto result = _fe3d.gfx_getShadowEyePosition();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 		}
 	}

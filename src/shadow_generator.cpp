@@ -19,7 +19,7 @@ void ShadowGenerator::update()
 		{
 			_passedFrames = 0;
 
-			updateMatrix();
+			generate();
 		}
 		else
 		{
@@ -28,44 +28,55 @@ void ShadowGenerator::update()
 	}
 }
 
-void ShadowGenerator::updateMatrix()
+void ShadowGenerator::generate()
 {
+	// Temporary values
+	auto newEyePosition = _eyePosition;
+	auto newCenterPosition = _centerPosition;
+	auto newAreaSize = _areaSize;
+	auto newAreaReach = _areaReach;
+	auto newLightness = _lightness;
+
+	// Follow camera
 	if(_isFollowingCamera)
 	{
 		// Temporary values
 		auto cameraPosition = _renderBus.getCameraPosition();
-		auto eyePosition = _renderBus.getShadowEyePosition();
-		auto centerPosition = _renderBus.getShadowCenterPosition();
 
 		// Update eye & center
-		fvec3 newEyePosition = fvec3(cameraPosition.x, 0.0f, cameraPosition.z);
-		fvec3 newCenterPosition = fvec3(cameraPosition.x, 0.0f, cameraPosition.z);
-		newEyePosition += eyePosition;
-		newCenterPosition += centerPosition;
-
-		// Apply
-		_renderBus.setShadowEyePosition(newEyePosition);
-		_renderBus.setShadowCenterPosition(newCenterPosition);
+		newEyePosition.x += cameraPosition.x;
+		newEyePosition.z += cameraPosition.z;
+		newCenterPosition.x += cameraPosition.x;
+		newCenterPosition.z += cameraPosition.z;
 	}
 
-	// Create light space matrix
-	_renderBus.setShadowMatrix(_createLightSpaceMatrix());
+	// Update render bus
+	_renderBus.setShadowEyePosition(newEyePosition);
+	_renderBus.setShadowCenterPosition(newCenterPosition);
+	_renderBus.setShadowAreaSize(newAreaSize);
+	_renderBus.setShadowAreaReach(newAreaReach);
+	_renderBus.setShadowLightness(newLightness);
+	
+	// Create shadow matrix
+	_renderBus.setShadowMatrix(_createShadowMatrix(newEyePosition, newCenterPosition, newAreaSize, newAreaReach));
 }
 
-const mat44 ShadowGenerator::_createLightSpaceMatrix() const
+const mat44 ShadowGenerator::_createShadowMatrix(fvec3 eyePosition, fvec3 centerPosition, float areaSize, float areaReach) const
 {
 	// Temporary values
-	auto eye = _renderBus.getShadowEyePosition();
-	auto center = _renderBus.getShadowCenterPosition();
-	auto size = _renderBus.getShadowAreaSize();
-	auto reach = _renderBus.getShadowAreaReach();
+	float left = -(areaSize / 2.0f);
+	float right = (areaSize / 2.0f);
+	float bottom = -(areaSize / 2.0f);
+	float top = (areaSize / 2.0f);
+	float near = NEAR_DISTANCE;
+	float far = areaReach;
 
 	// Matrix generation
-	mat44 lightViewMatrix = Math::createViewMatrix(eye, center, fvec3(0.0f, 1.0f, 0.0f));
-	mat44 lightProjectionMatrix = Math::createOrthoMatrix(-size / 2.0f, size / 2.0f, -size / 2.0f, size / 2.0f, NEAR_DISTANCE, reach);
+	mat44 viewMatrix = Math::createViewMatrix(eyePosition, centerPosition, fvec3(0.0f, 1.0f, 0.0f));
+	mat44 projectionMatrix = Math::createOrthographicProjectionMatrix(left, right, bottom, top, near, far);
 
 	// Return
-	return (lightProjectionMatrix * lightViewMatrix);
+	return (projectionMatrix * viewMatrix);
 }
 
 void ShadowGenerator::setInterval(unsigned int value)
@@ -77,6 +88,56 @@ void ShadowGenerator::setInterval(unsigned int value)
 void ShadowGenerator::setFollowingCamera(bool value)
 {
 	_isFollowingCamera = value;
+}
+
+void ShadowGenerator::setEyePosition(fvec3 value)
+{
+	_eyePosition = value;
+}
+
+void ShadowGenerator::setCenterPosition(fvec3 value)
+{
+	_centerPosition = value;
+}
+
+void ShadowGenerator::setAreaSize(float value)
+{
+	_areaSize = value;
+}
+
+void ShadowGenerator::setAreaReach(float value)
+{
+	_areaReach = value;
+}
+
+void ShadowGenerator::setLightness(float value)
+{
+	_lightness = value;
+}
+
+const fvec3 ShadowGenerator::getEyePosition() const
+{
+	return _eyePosition;
+}
+
+const fvec3 ShadowGenerator::getCenterPosition() const
+{
+	return _centerPosition;
+}
+
+const float ShadowGenerator::getAreaSize() const
+{
+	return _areaSize;
+}
+
+const float ShadowGenerator::getAreaReach() const
+{
+	return _areaReach;
+}
+
+const float ShadowGenerator::getLightness() const
+{
+	return _lightness;
 }
 
 const unsigned int ShadowGenerator::getInterval() const

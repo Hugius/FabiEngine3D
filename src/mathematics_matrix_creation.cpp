@@ -192,7 +192,7 @@ const mat44 Math::createRotationMatrixZ(float angle)
 	return newMatrix;
 }
 
-const mat44 Math::createOrthoMatrix(float left, float right, float bottom, float top, float near, float far)
+const mat44 Math::createOrthographicProjectionMatrix(float left, float right, float bottom, float top, float near, float far)
 {
 	// Result
 	mat44 newMatrix;
@@ -237,7 +237,7 @@ const mat44 Math::createViewMatrix(fvec3 eye, fvec3 center, fvec3 up)
 	return newMatrix;
 }
 
-const mat44 Math::createProjectionMatrix(float fov, float aspect, float near, float far)
+const mat44 Math::createPerspectiveProjectionMatrix(float fov, float aspect, float near, float far)
 {
 	// Temporary values
 	const float tanHalfFovY = tan(fov / 2.0f);

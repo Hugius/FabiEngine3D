@@ -126,14 +126,14 @@ const float FabiEngine3D::gfx_getPlanarReflectionHeight() const
 	return _core->_renderBus.getPlanarReflectionHeight();
 }
 
-const fvec3 FabiEngine3D::gfx_getShadowEye() const
+const fvec3 FabiEngine3D::gfx_getShadowEyePosition() const
 {
-	return _core->_renderBus.getShadowEyePosition();
+	return _core->_shadowGenerator.getEyePosition();
 }
 
-const fvec3 FabiEngine3D::gfx_getShadowCenter() const
+const fvec3 FabiEngine3D::gfx_getShadowCenterPosition() const
 {
-	return _core->_renderBus.getShadowCenterPosition();
+	return _core->_shadowGenerator.getCenterPosition();
 }
 
 const string& FabiEngine3D::gfx_getLensFlareMapPath() const
@@ -143,17 +143,17 @@ const string& FabiEngine3D::gfx_getLensFlareMapPath() const
 
 const float FabiEngine3D::gfx_getShadowSize() const
 {
-	return _core->_renderBus.getShadowAreaSize();
+	return _core->_shadowGenerator.getAreaSize();
 }
 
 const float FabiEngine3D::gfx_getShadowReach() const
 {
-	return _core->_renderBus.getShadowAreaReach();
+	return _core->_shadowGenerator.getAreaReach();
 }
 
 const float FabiEngine3D::gfx_getShadowLightness() const
 {
-	return _core->_renderBus.getShadowLightness();
+	return _core->_shadowGenerator.getLightness();
 }
 
 const bool FabiEngine3D::gfx_isShadowFollowingCamera() const

@@ -94,7 +94,7 @@ void AudioEditor::_updateAudioCreating()
 		string newAudioID = "";
 
 		// Check if user filled in a new ID
-		if(_gui.getGlobalScreen()->checkValueForm("audioCreate", newAudioID, { _currentAudioID }))
+		if(_gui.getGlobalScreen()->checkValueForm("audioCreate", newAudioID, {_currentAudioID }))
 		{
 			// Check if ID starts with @ sign
 			if(newAudioID[0] != '@')

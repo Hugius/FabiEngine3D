@@ -35,7 +35,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				// Determine type of function
 				if(functionName == "misc:list_concat")
 				{
-					auto types = { SVT::STRING, SVT::STRING };
+					auto types = {SVT::STRING, SVT::STRING };
 
 					// Validate arguments
 					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -86,7 +86,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				}
 				else if(functionName == "misc:list_size")
 				{
-					auto types = { SVT::STRING };
+					auto types = {SVT::STRING };
 
 					// Validate arguments
 					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -116,7 +116,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				}
 				else if(functionName == "misc:list_contains")
 				{
-					auto types = { SVT::STRING };
+					auto types = {SVT::STRING };
 
 					// Validate arguments
 					if(_validateListValueCount(arguments, 2))
@@ -150,12 +150,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 						{
 							if
 								(
-								(value->getType() == SVT::VEC3 &&
-								arguments[1].getType() == SVT::VEC3 &&
-								value->getVec3() == arguments[1].getVec3())
-
-								||
-
 								(value->getType() == SVT::STRING &&
 								arguments[1].getType() == SVT::STRING &&
 								value->getString() == arguments[1].getString())
@@ -190,7 +184,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				}
 				else if(functionName == "misc:list_index")
 				{
-					auto types = { SVT::STRING };
+					auto types = {SVT::STRING };
 
 					// Validate arguments
 					if(_validateListValueCount(arguments, 2))
@@ -224,11 +218,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 						{
 							if
 								(
-								(listVariable.getValues()[i]->getType() == SVT::VEC3 &&
-								arguments[1].getType() == SVT::VEC3 &&
-								listVariable.getValues()[i]->getVec3() == arguments[1].getVec3())
-
-								||
 
 								(listVariable.getValues()[i]->getType() == SVT::STRING &&
 								arguments[1].getType() == SVT::STRING &&
@@ -251,6 +240,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 								(listVariable.getValues()[i]->getType() == SVT::BOOLEAN &&
 								arguments[1].getType() == SVT::BOOLEAN &&
 								listVariable.getValues()[i]->getBoolean() == arguments[1].getBoolean())
+
 								)
 							{
 								foundIndex = i;
@@ -264,7 +254,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				}
 				else if(functionName == "misc:list_min")
 				{
-					auto types = { SVT::STRING };
+					auto types = {SVT::STRING };
 
 					// Validate arguments
 					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -341,7 +331,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				}
 				else if(functionName == "misc:list_max")
 				{
-					auto types = { SVT::STRING };
+					auto types = {SVT::STRING };
 
 					// Validate arguments
 					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -418,7 +408,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				}
 				else if(functionName == "misc:list_reverse")
 				{
-					auto types = { SVT::STRING };
+					auto types = {SVT::STRING };
 
 					// Validate arguments
 					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -452,7 +442,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				}
 				else if(functionName == "misc:string_concat")
 				{
-					auto types = { SVT::STRING, SVT::STRING };
+					auto types = {SVT::STRING, SVT::STRING };
 
 					// Validate arguments
 					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -462,7 +452,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				}
 				else if(functionName == "misc:string_get_size")
 				{
-					auto types = { SVT::STRING };
+					auto types = {SVT::STRING };
 
 					// Validate arguments
 					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -473,7 +463,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				}
 				else if(functionName == "misc:string_contains")
 				{
-					auto types = { SVT::STRING, SVT::STRING };
+					auto types = {SVT::STRING, SVT::STRING };
 
 					// Validate arguments
 					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -484,7 +474,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				}
 				else if(functionName == "misc:string_get_part")
 				{
-					auto types = { SVT::STRING, SVT::INTEGER, SVT::INTEGER };
+					auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER };
 
 					// Validate arguments
 					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -504,7 +494,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				}
 				else if(functionName == "misc:string_split")
 				{
-					auto types = { SVT::STRING, SVT::STRING };
+					auto types = {SVT::STRING, SVT::STRING };
 
 					// Validate arguments
 					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -542,7 +532,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				}
 				else if(functionName == "misc:string_reverse")
 				{
-					auto types = { SVT::STRING };
+					auto types = {SVT::STRING };
 
 					// Validate arguments
 					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -562,7 +552,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				}
 				else if(functionName == "misc:get_random_integer")
 				{
-					auto types = { SVT::INTEGER, SVT::INTEGER };
+					auto types = {SVT::INTEGER, SVT::INTEGER };
 
 					// Validate arguments
 					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -573,7 +563,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				}
 				else if(functionName == "misc:get_random_decimal")
 				{
-					auto types = { SVT::DECIMAL, SVT::DECIMAL };
+					auto types = {SVT::DECIMAL, SVT::DECIMAL };
 
 					// Validate arguments
 					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

@@ -44,7 +44,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:sky_get_color")
+	else if(functionName == "fe3d:sky_get_color_r")
 	{
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -52,8 +52,34 @@ const bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functi
 			// Validate sky existence
 			if(_validateFe3dSky())
 			{
-				auto result = _fe3d.sky_getColor(_fe3d.sky_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+				auto result = _fe3d.sky_getColor(_fe3d.sky_getSelectedID()).r;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_get_color_g")
+	{
+		// Validate arguments
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Validate sky existence
+			if(_validateFe3dSky())
+			{
+				auto result = _fe3d.sky_getColor(_fe3d.sky_getSelectedID()).g;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_get_color_b")
+	{
+		// Validate arguments
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Validate sky existence
+			if(_validateFe3dSky())
+			{
+				auto result = _fe3d.sky_getColor(_fe3d.sky_getSelectedID()).b;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -66,7 +92,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functi
 			if(_validateFe3dSky())
 			{
 				auto result = _fe3d.sky_getRotation(_fe3d.sky_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}

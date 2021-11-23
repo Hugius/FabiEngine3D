@@ -15,12 +15,11 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 	string elementBuild = "";
 	unsigned int index = 0;
 	bool buildingString = false;
-	bool buildingVec3 = false;
 
 	// Extract all invidual elements of the if statement
 	for(const auto& c : conditionString)
 	{
-		if(c == ' ' && elementBuild.empty() && !buildingString && !buildingVec3) // Check for useless whitespace
+		if(c == ' ' && elementBuild.empty() && !buildingString) // Check for useless whitespace
 		{
 			index++;
 			continue;
@@ -30,7 +29,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 			elementBuild += c;
 			elements.push_back(elementBuild);
 		}
-		else if(c == ' ' && !buildingString && !buildingVec3) // Check for whitespace
+		else if(c == ' ' && !buildingString) // Check for whitespace
 		{
 			elements.push_back(elementBuild);
 			elementBuild.clear();
@@ -44,14 +43,6 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 			else if(c == '"' && buildingString)
 			{
 				buildingString = false;
-			}
-			else if(c == '[')
-			{
-				buildingVec3 = true;
-			}
-			else if(c == ']')
-			{
-				buildingVec3 = false;
 			}
 
 			// Add character
@@ -84,11 +75,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 	{
 		if(mustBeValue)
 		{
-			if(_isVec3Value(elementString)) // VEC3
-			{
-				comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, _extractVec3FromString(elementString)));
-			}
-			else if(_isStringValue(elementString)) // STRING
+			if(_isStringValue(elementString)) // STRING
 			{
 				elementString.erase(elementString.begin());
 				elementString.pop_back();
@@ -112,20 +99,10 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 				bool isAccessingList = false;
 				auto listIndex = _extractListIndexFromString(elementString, isAccessingList);
 
-				// Check if accessing individual float from vec3 variable
-				auto vec3Parts = _extractVec3PartFromString(elementString);
-
 				// Check if any error was thrown
 				if(_hasThrownError)
 				{
 					return false;
-				}
-
-				// Remove vec3 part characters
-				if(vec3Parts != ivec3(0))
-				{
-					elementString.pop_back();
-					elementString.pop_back();
 				}
 
 				// Remove list accessing characters
@@ -142,19 +119,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 					// Retrieve variable value
 					auto variable = (_isLocalVariableExisting(elementString) ? _getLocalVariable(elementString) : _getGlobalVariable(elementString));
 
-					if(vec3Parts.x) // VEC3.x
-					{
-						comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variable.getValue().getVec3().x));
-					}
-					else if(vec3Parts.y) // VEC3.y
-					{
-						comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variable.getValue().getVec3().y));
-					}
-					else if(vec3Parts.z) // VEC3.z
-					{
-						comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variable.getValue().getVec3().z));
-					}
-					else if(isAccessingList) // List[index]
+					if(isAccessingList) // List[index]
 					{
 						// Check if list index is valid
 						if(_validateListIndex(variable, listIndex))
@@ -307,11 +272,7 @@ const bool ScriptInterpreter::_compareValues(ScriptValue& firstValue, const stri
 {
 	if(comparisonOperator == IS_KEYWORD)
 	{
-		if(firstValue.getType() == ScriptValueType::VEC3)
-		{
-			return (firstValue.getVec3() == secondValue.getVec3());
-		}
-		else if(firstValue.getType() == ScriptValueType::STRING)
+		if(firstValue.getType() == ScriptValueType::STRING)
 		{
 			return (firstValue.getString() == secondValue.getString());
 		}
@@ -330,11 +291,7 @@ const bool ScriptInterpreter::_compareValues(ScriptValue& firstValue, const stri
 	}
 	else if(comparisonOperator == NOT_KEYWORD)
 	{
-		if(firstValue.getType() == ScriptValueType::VEC3)
-		{
-			return (firstValue.getVec3() != secondValue.getVec3());
-		}
-		else if(firstValue.getType() == ScriptValueType::STRING)
+		if(firstValue.getType() == ScriptValueType::STRING)
 		{
 			return (firstValue.getString() != secondValue.getString());
 		}

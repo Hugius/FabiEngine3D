@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 	// Determine type of function
 	if(functionName == "fe3d:aabb_place")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -37,7 +37,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:aabb_delete")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -62,7 +62,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:aabb_set_visible")
 	{
-		auto types = { SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -87,7 +87,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:aabb_set_position")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -113,7 +113,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:aabb_set_size")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -139,7 +139,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:aabb_move")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -165,7 +165,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:aabb_scale")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -191,7 +191,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:aabb_move_to")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -217,7 +217,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:aabb_scale_to")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -243,7 +243,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:aabb_set_raycast_responsive")
 	{
-		auto types = { SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -268,7 +268,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:aabb_set_collision_responsive")
 	{
-		auto types = { SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

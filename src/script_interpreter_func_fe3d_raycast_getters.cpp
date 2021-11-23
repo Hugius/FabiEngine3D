@@ -5,7 +5,7 @@ using SVT = ScriptValueType;
 const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if(functionName == "fe3d:raycast_get_cursor_ray_position")
+	if(functionName == "fe3d:raycast_get_cursor_ray_position_x")
 	{
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -13,12 +13,12 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 			// Validate terrain existence
 			if(_validateFe3dTerrain())
 			{
-				auto result = _fe3d.raycast_getCursorRay().getPosition();
-				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+				auto result = _fe3d.raycast_getCursorRay().getPosition().x;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:raycast_get_cursor_ray_direction")
+	else if(functionName == "fe3d:raycast_get_cursor_ray_position_y")
 	{
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -26,12 +26,12 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 			// Validate terrain existence
 			if(_validateFe3dTerrain())
 			{
-				auto result = _fe3d.raycast_getCursorRay().getDirection();
-				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+				auto result = _fe3d.raycast_getCursorRay().getPosition().y;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:raycast_get_point_on_terrain")
+	else if(functionName == "fe3d:raycast_get_cursor_ray_position_z")
 	{
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -39,8 +39,86 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 			// Validate terrain existence
 			if(_validateFe3dTerrain())
 			{
-				auto result = _fe3d.raycast_getPointOnTerrain();
-				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+				auto result = _fe3d.raycast_getCursorRay().getPosition().z;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:raycast_get_cursor_ray_direction_x")
+	{
+		// Validate arguments
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Validate terrain existence
+			if(_validateFe3dTerrain())
+			{
+				auto result = _fe3d.raycast_getCursorRay().getDirection().x;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:raycast_get_cursor_ray_direction_y")
+	{
+		// Validate arguments
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Validate terrain existence
+			if(_validateFe3dTerrain())
+			{
+				auto result = _fe3d.raycast_getCursorRay().getDirection().y;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:raycast_get_cursor_ray_direction_z")
+	{
+		// Validate arguments
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Validate terrain existence
+			if(_validateFe3dTerrain())
+			{
+				auto result = _fe3d.raycast_getCursorRay().getDirection().z;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:raycast_get_point_on_terrain_x")
+	{
+		// Validate arguments
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Validate terrain existence
+			if(_validateFe3dTerrain())
+			{
+				auto result = _fe3d.raycast_getPointOnTerrain().x;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:raycast_get_point_on_terrain_y")
+	{
+		// Validate arguments
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Validate terrain existence
+			if(_validateFe3dTerrain())
+			{
+				auto result = _fe3d.raycast_getPointOnTerrain().y;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:raycast_get_point_on_terrain_z")
+	{
+		// Validate arguments
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Validate terrain existence
+			if(_validateFe3dTerrain())
+			{
+				auto result = _fe3d.raycast_getPointOnTerrain().z;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -59,7 +137,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	}
 	else if(functionName == "fe3d:raycast_into_model")
 	{
-		auto types = { SVT::STRING, SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -102,7 +180,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	}
 	else if(functionName == "fe3d:raycast_into_model_distance")
 	{
-		auto types = { SVT::STRING, SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -195,7 +273,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	}
 	else if(functionName == "fe3d:raycast_into_billboard")
 	{
-		auto types = { SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -245,7 +323,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	}
 	else if(functionName == "fe3d:raycast_into_billboard_distance")
 	{
-		auto types = { SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

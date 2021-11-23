@@ -353,7 +353,6 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 						_throwScriptError("ELSE statement cannot have a condition!");
 						return;
 					}
-
 				}
 				else
 				{
@@ -371,7 +370,6 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			(
 			scriptLineText.substr(0, CONST_KEYWORD.size() + 1) == CONST_KEYWORD + " " ||
 			scriptLineText.substr(0, LIST_KEYWORD.size() + 1) == LIST_KEYWORD + " " ||
-			scriptLineText.substr(0, VEC3_KEYWORD.size() + 1) == VEC3_KEYWORD + " " ||
 			scriptLineText.substr(0, STRING_KEYWORD.size() + 1) == STRING_KEYWORD + " " ||
 			scriptLineText.substr(0, DECIMAL_KEYWORD.size() + 1) == DECIMAL_KEYWORD + " " ||
 			scriptLineText.substr(0, INTEGER_KEYWORD.size() + 1) == INTEGER_KEYWORD + " " ||

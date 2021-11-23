@@ -9,7 +9,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 	// Determine type of function
 	if(functionName == "fe3d:text_place")
 	{
-		auto types = { SVT::STRING, SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -61,7 +61,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_delete")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -76,7 +76,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_set_visible")
 	{
-		auto types = { SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -91,7 +91,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_set_position")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -107,7 +107,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_move")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -123,7 +123,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_move_to")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -140,7 +140,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_rotate_to")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -155,7 +155,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_scale_to")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -172,7 +172,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_set_rotation")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -187,7 +187,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_rotate")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -202,7 +202,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_set_size")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -218,7 +218,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_scale")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -234,7 +234,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_set_color")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -250,7 +250,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_set_content")
 	{
-		auto types = { SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -265,7 +265,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_set_transparency")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

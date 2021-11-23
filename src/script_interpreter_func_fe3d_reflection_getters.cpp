@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 	// Determine type of function
 	if(functionName == "fe3d:reflection_is_existing")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -26,7 +26,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 	}
 	else if(functionName == "fe3d:reflection_find_ids")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 	}
 	else if(functionName == "fe3d:reflection_is_visible")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -86,9 +86,9 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 			}
 		}
 	}
-	else if(functionName == "fe3d:reflection_get_position")
+	else if(functionName == "fe3d:reflection_get_position_x")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -96,8 +96,38 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
 			{
-				auto result = _fe3d.reflection_getPosition(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+				auto result = _fe3d.reflection_getPosition(arguments[0].getString()).x;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:reflection_get_position_y")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dReflection(arguments[0].getString()))
+			{
+				auto result = _fe3d.reflection_getPosition(arguments[0].getString()).y;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:reflection_get_position_z")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dReflection(arguments[0].getString()))
+			{
+				auto result = _fe3d.reflection_getPosition(arguments[0].getString()).z;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}

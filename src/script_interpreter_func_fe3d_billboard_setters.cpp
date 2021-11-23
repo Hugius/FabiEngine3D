@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	// Determine type of function
 	if(functionName == "fe3d:billboard_place")
 	{
-		auto types = { SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -46,7 +46,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_delete")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -61,7 +61,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_set_visible")
 	{
-		auto types = { SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -76,7 +76,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_set_position")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -92,7 +92,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_set_rotation")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -108,7 +108,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_set_size")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -123,7 +123,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_move")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -139,7 +139,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_rotate")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -155,7 +155,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_scale")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -170,7 +170,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_move_to")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -186,7 +186,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_rotate_to")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -202,7 +202,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_scale_to")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -218,7 +218,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_set_color")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -234,7 +234,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_set_min_height")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -249,7 +249,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_set_max_height")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -264,7 +264,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_set_transparency")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -279,7 +279,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_set_lightness")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -294,7 +294,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_set_aabb_raycast_responsive")
 	{
-		auto types = { SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -325,7 +325,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_set_aabb_collision_responsive")
 	{
-		auto types = { SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -356,7 +356,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_set_camera_facing_x")
 	{
-		auto types = { SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -371,7 +371,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_set_camera_facing_y")
 	{
-		auto types = { SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -386,7 +386,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_start_animation")
 	{
-		auto types = { SVT::STRING, SVT::INTEGER };
+		auto types = {SVT::STRING, SVT::INTEGER };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -401,7 +401,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_pause_animation")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -416,7 +416,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_resume_animation")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -431,7 +431,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_stop_animation")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -446,7 +446,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:billboard_set_text")
 	{
-		auto types = { SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

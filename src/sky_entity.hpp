@@ -53,7 +53,7 @@ public:
 
 private:
 	// STRING
-	array<string, 6> _cubeMapPaths = { "", "", "", "", "", "" };
+	array<string, 6> _cubeMapPaths = {"", "", "", "", "", "" };
 
 	// MAT44
 	mat44 _rotationMatrix = mat44(1.0f);

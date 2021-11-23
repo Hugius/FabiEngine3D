@@ -143,7 +143,7 @@ private:
 
 	// STRING
 	inline static vector<string> _messageQueue;
-	inline static string _level_string[4] = { "Info", "Error", "Debug", "Warn" };
+	inline static string _level_string[4] = {"Info", "Error", "Debug", "Warn" };
 
 	// UNSIGNED INT
 	inline static unsigned int _messageCount = 0;

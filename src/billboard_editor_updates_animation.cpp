@@ -38,8 +38,8 @@ void BillboardEditor::_updateAnimationMenu()
 		}
 
 		// Update value forms
-		if(_gui.getGlobalScreen()->checkValueForm("rows", animationRowCount, { 0 }) ||
-		   _gui.getGlobalScreen()->checkValueForm("columns", animationColumnCount, { 0 }) ||
+		if(_gui.getGlobalScreen()->checkValueForm("rows", animationRowCount, {0 }) ||
+		   _gui.getGlobalScreen()->checkValueForm("columns", animationColumnCount, {0 }) ||
 		   _gui.getGlobalScreen()->checkValueForm("framestep", animationFramestep, {}))
 		{
 			// Only if animation is already playing

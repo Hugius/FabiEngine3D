@@ -124,7 +124,7 @@ void CaptureBuffer::createDepthTexture(ivec2 position, ivec2 size)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 		// Texture border
-		const float borderColor[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+		const float borderColor[] = {1.0f, 1.0f, 1.0f, 1.0f };
 		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
 
 		// Unbind texture

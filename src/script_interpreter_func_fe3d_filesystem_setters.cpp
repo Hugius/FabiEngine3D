@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string&
 	// Determine type of function
 	if(functionName == "fe3d:directory_create")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
@@ -44,7 +44,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string&
 	}
 	else if(functionName == "fe3d:directory_delete")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
@@ -69,7 +69,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string&
 	}
 	else if(functionName == "fe3d:file_create")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, 2) && _validateSavesDirectory())
@@ -97,7 +97,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string&
 	}
 	else if(functionName == "fe3d:file_delete")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
@@ -122,7 +122,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string&
 	}
 	else if(functionName == "fe3d:file_write")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, 2) && _validateSavesDirectory())
@@ -140,14 +140,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string&
 				ofstream file(filePath, ios::app);
 
 				// Determine which type of value to print
-				if(arguments[1].getType() == SVT::VEC3)
-				{
-					file << "[" +
-						to_string(arguments[1].getVec3().x) << " " <<
-						to_string(arguments[1].getVec3().y) << " " <<
-						to_string(arguments[1].getVec3().z) + "]";
-				}
-				else if(arguments[1].getType() == SVT::STRING)
+				if(arguments[1].getType() == SVT::STRING)
 				{
 					file << arguments[1].getString();
 				}
@@ -178,7 +171,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string&
 	}
 	else if(functionName == "fe3d:file_add_new_line")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
@@ -205,7 +198,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string&
 	}
 	else if(functionName == "fe3d:file_clear")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())

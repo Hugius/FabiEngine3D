@@ -1,6 +1,6 @@
 #include "script_interpreter.hpp"
 
-const bool ScriptInterpreter::_validateListIndex(ScriptVariable& list, unsigned int index)
+const bool ScriptInterpreter::_validateListIndex(const ScriptVariable& list, unsigned int index)
 {
 	// Check if variable is a list in the first place
 	if(list.getType() == ScriptVariableType::SINGLE)
@@ -119,10 +119,6 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 		_throwScriptError("cannot push a list to another list!");
 		return;
 	}
-	else if(_isVec3Value(valueString)) // VEC3
-	{
-		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::VEC3, _extractVec3FromString(valueString)));
-	}
 	else if(_isStringValue(valueString)) // STRING
 	{
 		// Removing the "" around the string content
@@ -152,20 +148,10 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 		bool isAccessingList = false;
 		auto listIndex = _extractListIndexFromString(valueString, isAccessingList);
 
-		// Check if accessing individual float from vec3 variable
-		auto vec3Parts = _extractVec3PartFromString(valueString);
-
 		// Check if any error was thrown
 		if(_hasThrownError)
 		{
 			return;
-		}
-
-		// Remove vec3 part text
-		if(vec3Parts != ivec3(0))
-		{
-			valueString.pop_back();
-			valueString.pop_back();
 		}
 
 		// Remove list accessing characters
@@ -181,16 +167,6 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 		{
 			// Retrieve other value
 			auto otherVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
-
-			// Validate vec3 access
-			if(vec3Parts != ivec3(0))
-			{
-				if(otherVariable.getType() == ScriptVariableType::MULTIPLE || otherVariable.getValue().getType() != ScriptValueType::VEC3)
-				{
-					_throwScriptError("variable is not a vec3!");
-					return;
-				}
-			}
 
 			// Validate list access
 			if(isAccessingList)
@@ -211,21 +187,6 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 			{
 				_throwScriptError("cannot push a list to another list!");
 				return;
-			}
-			else if(vec3Parts != ivec3(0)) // VEC3 part value
-			{
-				if(vec3Parts.x && otherVariable.getValue(valueIndex).getType() == ScriptValueType::VEC3)
-				{
-					listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, otherVariable.getValue(valueIndex).getVec3().x));
-				}
-				else if(vec3Parts.y && otherVariable.getValue(valueIndex).getType() == ScriptValueType::VEC3)
-				{
-					listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, otherVariable.getValue(valueIndex).getVec3().y));
-				}
-				else if(vec3Parts.z && otherVariable.getValue(valueIndex).getType() == ScriptValueType::VEC3)
-				{
-					listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, otherVariable.getValue(valueIndex).getVec3().z));
-				}
 			}
 			else // Normal value (or list access)
 			{

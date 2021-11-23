@@ -10,7 +10,7 @@ static const vector<string> extractModelPartIDs(FabiEngine3D& fe3d, const string
 	}
 	else
 	{
-		return { partID };
+		return {partID };
 	}
 }
 
@@ -19,7 +19,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	// Determine type of function
 	if(functionName == "fe3d:model_is_existing")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -38,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_find_ids")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -85,7 +85,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_is_visible")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -98,9 +98,9 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_position")
+	else if(functionName == "fe3d:model_get_position_x")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -108,14 +108,14 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.model_getBasePosition(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+				auto result = _fe3d.model_getBasePosition(arguments[0].getString()).x;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_rotation")
+	else if(functionName == "fe3d:model_get_position_y")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -123,14 +123,14 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.model_getBaseRotation(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+				auto result = _fe3d.model_getBasePosition(arguments[0].getString()).y;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_rotation_origin")
+	else if(functionName == "fe3d:model_get_position_z")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -138,14 +138,14 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.model_getBaseRotationOrigin(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+				auto result = _fe3d.model_getBasePosition(arguments[0].getString()).z;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_size")
+	else if(functionName == "fe3d:model_get_rotation_x")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -153,14 +153,134 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.model_getBaseSize(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+				auto result = _fe3d.model_getBaseRotation(arguments[0].getString()).x;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_rotation_y")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.model_getBaseRotation(arguments[0].getString()).y;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_rotation_z")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.model_getBaseRotation(arguments[0].getString()).z;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_rotation_origin_x")
+	{
+		auto types = {SVT::STRING };
+
+		// Validate arguments
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.model_getBaseRotationOrigin(arguments[0].getString()).x;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_rotation_origin_y")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.model_getBaseRotationOrigin(arguments[0].getString()).y;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_rotation_origin_z")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.model_getBaseRotationOrigin(arguments[0].getString()).z;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_size_x")
+	{
+		auto types = {SVT::STRING };
+
+		// Validate arguments
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.model_getBaseSize(arguments[0].getString()).x;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_size_y")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.model_getBaseSize(arguments[0].getString()).y;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_size_z")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.model_getBaseSize(arguments[0].getString()).z;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
 	else if(functionName == "fe3d:model_get_min_height")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -175,7 +295,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_get_max_height")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -190,7 +310,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_is_animation_started")
 	{
-		auto types = { SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -205,7 +325,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_is_animation_playing")
 	{
-		auto types = { SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -220,7 +340,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_is_animation_paused")
 	{
-		auto types = { SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -235,7 +355,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_is_animation_fading")
 	{
-		auto types = { SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -250,7 +370,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_get_animation_speed")
 	{
-		auto types = { SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -273,7 +393,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_is_animation_autopaused")
 	{
-		auto types = { SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -296,7 +416,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_get_animation_frame_index")
 	{
-		auto types = { SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -319,7 +439,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_get_lightness")
 	{
-		auto types = { SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -339,9 +459,9 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_color")
+	else if(functionName == "fe3d:model_get_color_r")
 	{
-		auto types = { SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -357,13 +477,57 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 				}
 
 				// Return
-				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, Math::calculateAverage(total)));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, Math::calculateAverage(total).r));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_color_g")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		// Validate arguments
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				// Calculate average
+				vector<fvec3> total;
+				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
+				{
+					total.push_back(_fe3d.model_getColor(arguments[0].getString(), partID));
+				}
+
+				// Return
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, Math::calculateAverage(total).g));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_color_b")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		// Validate arguments
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				// Calculate average
+				vector<fvec3> total;
+				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
+				{
+					total.push_back(_fe3d.model_getColor(arguments[0].getString(), partID));
+				}
+
+				// Return
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, Math::calculateAverage(total).b));
 			}
 		}
 	}
 	else if(functionName == "fe3d:model_get_transparency")
 	{
-		auto types = { SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -385,7 +549,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_get_emission_intensity")
 	{
-		auto types = { SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

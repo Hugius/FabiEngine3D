@@ -49,10 +49,6 @@ private:
 	const string _limitIntegerString(const string& valueString) const;
 	const string _limitDecimalString(const string& valueString) const;
 
-	// FVEC3
-	const fvec3 _extractVec3FromString(const string& valueString);
-	const ivec3 _extractVec3PartFromString(const string& valueString) const;
-
 	// FVEC2
 	const fvec2 _convertGuiPositionToViewport(fvec2 position) const;
 	const fvec2 _convertGuiPositionFromViewport(fvec2 position) const;
@@ -67,7 +63,6 @@ private:
 
 	// BOOL
 	const bool _isListValue(const string& valueString) const;
-	const bool _isVec3Value(const string& valueString) const;
 	const bool _isStringValue(const string& valueString) const;
 	const bool _isDecimalValue(const string& valueString) const;
 	const bool _isIntegerValue(const string& valueString) const;
@@ -77,7 +72,7 @@ private:
 	const bool _checkConditionString(const string& conditionString);
 	const bool _validateCondition(ScriptValue& firstValue, const string& comparisonOperator, ScriptValue& secondValue);
 	const bool _compareValues(ScriptValue& firstValue, const string& comparisonOperator, ScriptValue& secondValue) const;
-	const bool _validateListIndex(ScriptVariable& list, unsigned int index);
+	const bool _validateListIndex(const ScriptVariable& list, unsigned int index);
 	const bool _validateListValueCount(const vector<ScriptValue>& values, unsigned int count);
 	const bool _validateListValueTypes(const vector<ScriptValue>& values, const vector<ScriptValueType>& types);
 	const bool _executeFe3dInputGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
@@ -166,7 +161,6 @@ private:
 	static inline const string CONST_KEYWORD = "CONST";
 	static inline const string EDIT_KEYWORD = "EDIT";
 	static inline const string LIST_KEYWORD = "LIST";
-	static inline const string VEC3_KEYWORD = "VEC3";
 	static inline const string STRING_KEYWORD = "STR";
 	static inline const string DECIMAL_KEYWORD = "DEC";
 	static inline const string INTEGER_KEYWORD = "INT";

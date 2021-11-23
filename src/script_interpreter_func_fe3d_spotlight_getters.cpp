@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 	// Determine type of function
 	if(functionName == "fe3d:spotlight_is_existing")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -26,7 +26,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:spotlight_find_ids")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:spotlight_is_visible")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -86,9 +86,9 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 			}
 		}
 	}
-	else if(functionName == "fe3d:spotlight_get_position")
+	else if(functionName == "fe3d:spotlight_get_position_x")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -96,14 +96,14 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
-				auto result = _fe3d.spotlight_getPosition(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+				auto result = _fe3d.spotlight_getPosition(arguments[0].getString()).x;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:spotlight_get_color")
+	else if(functionName == "fe3d:spotlight_get_position_y")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -111,14 +111,74 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
-				auto result = _fe3d.spotlight_getColor(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+				auto result = _fe3d.spotlight_getPosition(arguments[0].getString()).y;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:spotlight_get_position_z")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dSpotlight(arguments[0].getString()))
+			{
+				auto result = _fe3d.spotlight_getPosition(arguments[0].getString()).z;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:spotlight_get_color_r")
+	{
+		auto types = {SVT::STRING };
+
+		// Validate arguments
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dSpotlight(arguments[0].getString()))
+			{
+				auto result = _fe3d.spotlight_getColor(arguments[0].getString()).r;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:spotlight_get_color_g")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dSpotlight(arguments[0].getString()))
+			{
+				auto result = _fe3d.spotlight_getColor(arguments[0].getString()).g;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:spotlight_get_color_b")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dSpotlight(arguments[0].getString()))
+			{
+				auto result = _fe3d.spotlight_getColor(arguments[0].getString()).b;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
 	else if(functionName == "fe3d:spotlight_get_yaw")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -133,7 +193,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:spotlight_get_pitch")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -148,7 +208,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:spotlight_get_intensity")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -163,7 +223,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:spotlight_get_angle")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -178,7 +238,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:spotlight_get_distance")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

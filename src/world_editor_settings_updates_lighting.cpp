@@ -1,30 +1,5 @@
 #include "world_editor.hpp"
 
-void WorldEditor::_updateLightingSettingsMenu()
-{
-	// Temporary values
-	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
-
-	// Screen management
-	if(screen->getID() == "worldEditorMenuSettingsLighting")
-	{
-		// Button management
-		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
-		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettings");
-			return;
-		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("ambient")->isHovered())
-		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettingsLightingAmbient");
-		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("directional")->isHovered())
-		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettingsLightingDirectional");
-		}
-	}
-}
-
 void WorldEditor::_updateAmbientLightingSettingsMenu()
 {
 	// Temporary values

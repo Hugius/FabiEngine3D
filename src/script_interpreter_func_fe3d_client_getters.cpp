@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetterFunction(const string& fun
 	// Determine type of function
 	if(functionName == "fe3d:client_is_valid_server_ip")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

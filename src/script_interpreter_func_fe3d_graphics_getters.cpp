@@ -32,13 +32,31 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetterFunction(const string& f
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:graphics_get_fog_color")
+	else if(functionName == "fe3d:graphics_get_fog_color_r")
 	{
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.gfx_getFogColor();
-			returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+			auto result = _fe3d.gfx_getFogColor().r;
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+		}
+	}
+	else if(functionName == "fe3d:graphics_get_fog_color_g")
+	{
+		// Validate arguments
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.gfx_getFogColor().g;
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+		}
+	}
+	else if(functionName == "fe3d:graphics_get_fog_color_b")
+	{
+		// Validate arguments
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.gfx_getFogColor().b;
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:graphics_is_dof_dynamic")
@@ -68,13 +86,31 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetterFunction(const string& f
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:graphics_get_shadow_position")
+	else if(functionName == "fe3d:graphics_get_shadow_position_x")
 	{
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.gfx_getShadowEyePosition();
-			returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+			auto result = _fe3d.gfx_getShadowEyePosition().x;
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+		}
+	}
+	else if(functionName == "fe3d:graphics_get_shadow_position_y")
+	{
+		// Validate arguments
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.gfx_getShadowEyePosition().y;
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+		}
+	}
+	else if(functionName == "fe3d:graphics_get_shadow_position_z")
+	{
+		// Validate arguments
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.gfx_getShadowEyePosition().z;
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:graphics_get_motion_blur_strength")

@@ -96,7 +96,7 @@ void AnimationEditor::_updateAnimationCreating()
 	{
 		// Check if user filled in a new ID
 		string newAnimationID = "";
-		if(_gui.getGlobalScreen()->checkValueForm("animationCreate", newAnimationID, { _currentAnimationID }))
+		if(_gui.getGlobalScreen()->checkValueForm("animationCreate", newAnimationID, {_currentAnimationID }))
 		{
 			// Spaces not allowed
 			if(newAnimationID.find(' ') == string::npos)

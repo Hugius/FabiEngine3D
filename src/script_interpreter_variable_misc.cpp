@@ -86,14 +86,6 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 		string newValue = variable.getValue().getBoolean() ? "<true>" : "<false>";
 		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::STRING, newValue));
 	}
-	else if((variable.getValue().getType() == ScriptValueType::VEC3) && (typeString == STRING_KEYWORD)) // From VEC3 to STR
-	{
-		string newValue = "[" +
-			to_string(variable.getValue().getVec3().x) + " " +
-			to_string(variable.getValue().getVec3().y) + " " +
-			to_string(variable.getValue().getVec3().z) + "]";
-		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::STRING, newValue));
-	}
 	else if((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == BOOLEAN_KEYWORD)) // From STR to BOOL
 	{
 		// Check if string can be casted
@@ -131,19 +123,6 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 		else
 		{
 			_throwScriptError("variable cannot be typecasted to decimal: invalid string!");
-			return;
-		}
-	}
-	else if((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == VEC3_KEYWORD)) // From STR to VEC3
-	{
-		// Check if string can be casted
-		if(_isVec3Value(variable.getValue().getString()))
-		{
-			variable.changeValue(ScriptValue(_fe3d, ScriptValueType::VEC3, _extractVec3FromString(variable.getValue().getString())));
-		}
-		else
-		{
-			_throwScriptError("variable cannot be typecasted to vec3: invalid string!");
 			return;
 		}
 	}

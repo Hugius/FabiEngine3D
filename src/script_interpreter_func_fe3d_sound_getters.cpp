@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 	// Determine type of function
 	if(functionName == "fe3d:sound_is_existing")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -26,7 +26,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_find_ids")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_is_started")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -88,7 +88,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_is_playing")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -103,7 +103,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_is_paused")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -118,7 +118,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_get_volume")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -131,9 +131,9 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound_get_position")
+	else if(functionName == "fe3d:sound_get_position_x")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -148,14 +148,58 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 					return true;
 				}
 
-				auto result = _fe3d.sound_getPosition(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+				auto result = _fe3d.sound_getPosition(arguments[0].getString()).x;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sound_get_position_y")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dSound(arguments[0].getString(), false))
+			{
+				// Only for 3D sound
+				if(!_fe3d.sound_is3D(arguments[0].getString()))
+				{
+					_throwScriptError("cannot retrieve position of 2D sound with ID \"" + arguments[0].getString() + "\"!");
+					return true;
+				}
+
+				auto result = _fe3d.sound_getPosition(arguments[0].getString()).y;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sound_get_position_z")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dSound(arguments[0].getString(), false))
+			{
+				// Only for 3D sound
+				if(!_fe3d.sound_is3D(arguments[0].getString()))
+				{
+					_throwScriptError("cannot retrieve position of 2D sound with ID \"" + arguments[0].getString() + "\"!");
+					return true;
+				}
+
+				auto result = _fe3d.sound_getPosition(arguments[0].getString()).z;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
 	else if(functionName == "fe3d:sound_get_max_volume")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -178,7 +222,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_get_max_distance")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

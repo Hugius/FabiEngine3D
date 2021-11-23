@@ -9,7 +9,7 @@ const bool ScriptInterpreter::_executeFe3dMusicSetterFunction(const string& func
 	// Determine type of function
 	if(functionName == "fe3d:music_add_to_playlist")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -55,7 +55,7 @@ const bool ScriptInterpreter::_executeFe3dMusicSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:music_set_volume")
 	{
-		auto types = { SVT::DECIMAL };
+		auto types = {SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

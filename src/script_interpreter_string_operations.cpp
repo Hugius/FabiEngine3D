@@ -20,51 +20,6 @@ const bool ScriptInterpreter::_isListValue(const string& valueString) const
 	return true;
 }
 
-const bool ScriptInterpreter::_isVec3Value(const string& valueString) const
-{
-	// Check if value has enough characters
-	if(valueString.empty())
-	{
-		return false;
-	}
-
-	// Check if value is surrounded by brackets
-	if(valueString.front() != '[' || valueString.back() != ']')
-	{
-		return false;
-	}
-
-	// Remove brackets
-	auto withoutBrackets = valueString.substr(1, valueString.size() - 2);
-
-	// Extract XYZ
-	string xyz[3] = { "", "","" };
-	bool isExtracting = false;
-	unsigned int index = 0;
-	for(const auto& c : withoutBrackets)
-	{
-		if(c == ' ' && isExtracting)
-		{
-			isExtracting = false;
-			index++;
-		}
-
-		if(c != ' ')
-		{
-			xyz[index] += c;
-			isExtracting = true;
-		}
-
-		if(index == 3)
-		{
-			return false;
-		}
-	}
-
-	// Check if value is a valid vec3
-	return (_isDecimalValue(xyz[0]) && _isDecimalValue(xyz[1]) && _isDecimalValue(xyz[2]));
-}
-
 const bool ScriptInterpreter::_isStringValue(const string& valueString) const
 {
 	// Check if value has characters at all
@@ -141,63 +96,6 @@ const bool ScriptInterpreter::_isIntegerValue(const string& valueString) const
 const bool ScriptInterpreter::_isBooleanValue(const string& valueString) const
 {
 	return (valueString == "<true>" || valueString == "<false>");
-}
-
-const fvec3 ScriptInterpreter::_extractVec3FromString(const string& valueString)
-{
-	// Check if vec3 value
-	if(!_isVec3Value(valueString))
-	{
-		Logger::throwError("ScriptInterpreter::_extractVec3FromString");
-	}
-
-	// Remove brackets
-	auto withoutBrackets = valueString.substr(1, valueString.size() - 2);
-
-	// Extract XYZ
-	string xyz[3] = { "", "","" };
-	bool isExtracting = false;
-	unsigned int index = 0;
-	for(const auto& c : withoutBrackets)
-	{
-		if(c == ' ' && isExtracting)
-		{
-			isExtracting = false;
-			index++;
-		}
-
-		if(c != ' ')
-		{
-			xyz[index] += c;
-			isExtracting = true;
-		}
-	}
-
-	return fvec3(stof(_limitDecimalString(xyz[0])), stof(_limitDecimalString(xyz[1])), stof(_limitDecimalString(xyz[2])));
-}
-
-const ivec3 ScriptInterpreter::_extractVec3PartFromString(const string& valueString) const
-{
-	ivec3 parts = ivec3(0);
-	auto stringSize = valueString.size();
-
-	if(stringSize > 2 &&
-	   (valueString.substr(stringSize - 2) == ".x" || valueString.substr(stringSize - 2) == ".r"))
-	{
-		parts.x = 1;
-	}
-	else if(stringSize > 2 &&
-			(valueString.substr(stringSize - 2) == ".y" || valueString.substr(stringSize - 2) == ".g"))
-	{
-		parts.y = 1;
-	}
-	else if(stringSize > 2 &&
-			(valueString.substr(stringSize - 2) == ".z" || valueString.substr(stringSize - 2) == ".b"))
-	{
-		parts.z = 1;
-	}
-
-	return parts;
 }
 
 const int ScriptInterpreter::_extractListIndexFromString(const string& valueString, bool& isAccessingList)

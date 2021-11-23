@@ -68,7 +68,7 @@ void Camera::update(ivec2 lastCursorPosition)
 	// Update cursor centering
 	if(_mustCenterCursor)
 	{
-		_window.setCursorPosition({ xMiddle, yMiddle });
+		_window.setCursorPosition({xMiddle, yMiddle });
 		_mustCenterCursor = false;
 		_cursorIsBeingCentered = true;
 	}
@@ -115,7 +115,7 @@ void Camera::update(ivec2 lastCursorPosition)
 		_pitch = _firstPersonPitch;
 
 		// Spawn cursor in middle of screen
-		_window.setCursorPosition({ xMiddle, yMiddle });
+		_window.setCursorPosition({xMiddle, yMiddle });
 	}
 	else
 	{
@@ -170,7 +170,7 @@ void Camera::update(ivec2 lastCursorPosition)
 		_pitch = -(_thirdPersonPitch);
 
 		// Spawn cursor in middle of screen
-		_window.setCursorPosition({ xMiddle, yMiddle });
+		_window.setCursorPosition({xMiddle, yMiddle });
 	}
 	else
 	{

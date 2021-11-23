@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetterFunction(const string& 
 	// Determine type of function
 	if(functionName == "fe3d:collision_enable_camera_terrain_response")
 	{
-		auto types = { SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -28,7 +28,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetterFunction(const string& 
 	else if(functionName == "fe3d:collision_set_camera_box")
 	{
 		// Bottom top left right front back
-		auto types = { SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -42,7 +42,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:collision_enable_camera_response")
 	{
-		auto types = { SVT::BOOLEAN, SVT::BOOLEAN, SVT::BOOLEAN };
+		auto types = {SVT::BOOLEAN, SVT::BOOLEAN, SVT::BOOLEAN };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

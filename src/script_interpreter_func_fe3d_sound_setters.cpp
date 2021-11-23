@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 	// Determine type of function
 	if(functionName == "fe3d:sound_place_2D")
 	{
-		auto types = { SVT::STRING, SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -38,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_place_3D")
 	{
-		auto types = { SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -81,7 +81,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_delete")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -114,7 +114,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_play")
 	{
-		auto types = { SVT::STRING, SVT::INTEGER, SVT::INTEGER };
+		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -129,7 +129,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_play_forced")
 	{
-		auto types = { SVT::STRING, SVT::INTEGER, SVT::INTEGER };
+		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -144,7 +144,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_pause")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -168,7 +168,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_resume")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -192,7 +192,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_stop")
 	{
-		auto types = { SVT::STRING, SVT::INTEGER };
+		auto types = {SVT::STRING, SVT::INTEGER };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -216,7 +216,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_set_volume")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -239,7 +239,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_set_position")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -264,7 +264,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_set_max_volume")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -287,7 +287,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_set_max_distance")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

@@ -152,12 +152,12 @@ void BillboardEditor::_updateChoiceMenu()
 		}
 
 		// Update value forms
-		if(_gui.getGlobalScreen()->checkValueForm("sizeX", size.x, { 0.0f }))
+		if(_gui.getGlobalScreen()->checkValueForm("sizeX", size.x, {0.0f }))
 		{
 			size.x /= 100.0f;
 			_fe3d.billboard_setSize(_currentBillboardID, size);
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("sizeY", size.y, { 0.0f }))
+		if(_gui.getGlobalScreen()->checkValueForm("sizeY", size.y, {0.0f }))
 		{
 			size.y /= 100.0f;
 			_fe3d.billboard_setSize(_currentBillboardID, size);
@@ -175,7 +175,7 @@ void BillboardEditor::_updateBillboardCreating()
 		string newBillboardID = "";
 
 		// Check if user filled in a new ID
-		if(_gui.getGlobalScreen()->checkValueForm("billboardCreate", newBillboardID, { _currentBillboardID }))
+		if(_gui.getGlobalScreen()->checkValueForm("billboardCreate", newBillboardID, {_currentBillboardID }))
 		{
 			// @ sign not allowed
 			if(newBillboardID.find('@') == string::npos)

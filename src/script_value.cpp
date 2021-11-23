@@ -9,13 +9,6 @@ ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type)
 
 }
 
-ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, fvec3 value)
-	:
-	ScriptValue(fe3d, type)
-{
-	setVec3(value);
-}
-
 ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, const string& value)
 	:
 	ScriptValue(fe3d, type)
@@ -42,11 +35,6 @@ ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, bool value)
 	ScriptValue(fe3d, type)
 {
 	setBoolean(value);
-}
-
-void ScriptValue::setVec3(fvec3 value)
-{
-	_vec3 = value;
 }
 
 void ScriptValue::setString(const string& value)
@@ -92,11 +80,6 @@ void ScriptValue::setBoolean(bool value)
 const ScriptValueType& ScriptValue::getType() const
 {
 	return _type;
-}
-
-fvec3 ScriptValue::getVec3() const
-{
-	return _vec3;
 }
 
 const string& ScriptValue::getString() const

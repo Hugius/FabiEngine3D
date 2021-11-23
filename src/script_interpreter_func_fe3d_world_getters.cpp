@@ -18,7 +18,7 @@ const bool ScriptInterpreter::_executeFe3dWorldGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:world_is_custom_existing")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

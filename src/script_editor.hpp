@@ -102,16 +102,16 @@ private:
 	};
 	static inline const vector<pair<char, char>> SPECIAL_CHARACTERS =
 	{
-		{'.', '>'  },
-		{',', '<'  },
-		{'/', '?'  },
-		{';', ':'  },
+		{'.', '>'},
+		{',', '<'},
+		{'/', '?'},
+		{';', ':'},
 		{'\'', '\"'},
-		{'[', '{'  },
-		{']', '}'  },
-		{'\\', '|' },
-		{'-', '_'  },
-		{'=', '+'  }
+		{'[', '{'},
+		{']', '}'},
+		{'\\', '|'},
+		{'-', '_'},
+		{'=', '+'}
 	};
 
 	// BOOL
@@ -132,7 +132,12 @@ private:
 	InputType _activeActionKey = InputType::NONE;
 	static inline const vector<InputType> ACTION_KEYS =
 	{
-		InputType::KEY_ENTER, InputType::KEY_BACKSPACE, InputType::KEY_DELETE,
-		InputType::KEY_LEFT, InputType::KEY_RIGHT, InputType::KEY_UP, InputType::KEY_DOWN
+		InputType::KEY_ENTER,
+		InputType::KEY_BACKSPACE,
+		InputType::KEY_DELETE,
+		InputType::KEY_LEFT,
+		InputType::KEY_RIGHT,
+		InputType::KEY_UP,
+		InputType::KEY_DOWN
 	};
 };

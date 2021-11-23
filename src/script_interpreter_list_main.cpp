@@ -45,36 +45,30 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 		else
 		{
 			// Starting build of new value
-			if(!buildingVec3 && !buildingString && !buildingNumber && !buildingBoolean && !buildingVariable)
+			if(!buildingString && !buildingNumber && !buildingBoolean && !buildingVariable)
 			{
-				if(c == '[') // VEC3
-				{
-					currentValueString = "";
-					currentValueString.push_back(c);
-					buildingVec3 = true;
-				}
-				else if(c == '"') // STRING
+				if(c == '"') // String
 				{
 					currentValueString = "";
 					buildingString = true;
 				}
-				else if(isdigit(c) || c == '-') // NUMBER
+				else if(isdigit(c) || c == '-') // Number
 				{
 					currentValueString = "";
 					currentValueString.push_back(c);
 					buildingNumber = true;
 				}
-				else if(c == '<') // BOOLEAN
+				else if(c == '<') // Boolean
 				{
 					currentValueString = "";
 					currentValueString.push_back(c);
 					buildingBoolean = true;
 				}
-				else if(c == ' ') // SPACE
+				else if(c == ' ') // Space
 				{
 					currentValueString = "";
 				}
-				else // Possible VARIABLE
+				else // Possible variable
 				{
 					currentValueString = "";
 					currentValueString.push_back(c);
@@ -92,31 +86,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 				}
 			}
 
-			if(buildingVec3) // Processing VEC3 value
-			{
-				if(c == ']') // Add new vec3 value
-				{
-					currentValueString += c;
-
-					// Check if filled in vec3 value is correct
-					if(_isVec3Value(currentValueString))
-					{
-						valueList.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, _extractVec3FromString(currentValueString)));
-						buildingVec3 = false;
-						finishedValue = true;
-					}
-					else
-					{
-						_throwScriptError("invalid VEC3 syntax!");
-						return {};
-					}
-				}
-				else // Keep building vec3
-				{
-					currentValueString += c;
-				}
-			}
-			else if(buildingString) // Processing STRING value
+			if(buildingString) // Processing string value
 			{
 				if(c == '"') // Add new string value
 				{
@@ -129,7 +99,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 					currentValueString += c;
 				}
 			}
-			else if(buildingNumber) // Processing NUMBER value
+			else if(buildingNumber) // Processing number value
 			{
 				if(c == '-') // Negative number
 				{
@@ -195,7 +165,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 					}
 				}
 			}
-			else if(buildingBoolean) // Processing BOOLEAN value
+			else if(buildingBoolean) // Processing boolean value
 			{
 				// Build value
 				currentValueString += c;
@@ -227,7 +197,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 					return {};
 				}
 			}
-			else if(buildingVariable) // Processing VARIABLE value
+			else if(buildingVariable) // Processing variable value
 			{
 				// Build value
 				if(c != ',' && c != ' ')
@@ -242,20 +212,10 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 					bool isAccessingList = false;
 					auto listIndex = _extractListIndexFromString(currentValueString, isAccessingList);
 
-					// Check if accessing individual float from vec3 variable
-					auto vec3Parts = _extractVec3PartFromString(currentValueString);
-
 					// Check if any error was thrown
 					if(_hasThrownError)
 					{
 						return {};
-					}
-
-					// Remove vec3 part characters
-					if(vec3Parts != ivec3(0))
-					{
-						currentValueString.pop_back();
-						currentValueString.pop_back();
 					}
 
 					// Remove list accessing characters
@@ -272,29 +232,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 						// Retrieve value
 						auto variable = (_isLocalVariableExisting(currentValueString) ? _getLocalVariable(currentValueString) : _getGlobalVariable(currentValueString));
 
-						// Validate vec3 access
-						if(vec3Parts != ivec3(0))
-						{
-							if(variable.getType() == ScriptVariableType::MULTIPLE || variable.getValue().getType() != ScriptValueType::VEC3)
-							{
-								_throwScriptError("variable is not a vec3!");
-								return {};
-							}
-						}
-
-						if(vec3Parts.x && variable.getValue().getType() == ScriptValueType::VEC3) // VEC3.x
-						{
-							valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variable.getValue().getVec3().x));
-						}
-						else if(vec3Parts.y && variable.getValue().getType() == ScriptValueType::VEC3) // VEC3.y
-						{
-							valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variable.getValue().getVec3().y));
-						}
-						else if(vec3Parts.z && variable.getValue().getType() == ScriptValueType::VEC3) // VEC3.z
-						{
-							valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variable.getValue().getVec3().z));
-						}
-						else if(isAccessingList) // List[index]
+						if(isAccessingList) // List[index]
 						{
 							// Check if list index is valid
 							if(_validateListIndex(variable, listIndex))

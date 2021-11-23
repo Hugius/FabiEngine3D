@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 	// Determine type of function
 	if(functionName == "fe3d:text_is_existing")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -26,7 +26,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_find_ids")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_is_visible")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -88,7 +88,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_get_position_x")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -103,7 +103,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_get_position_y")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -118,7 +118,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_get_rotation")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -133,7 +133,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_get_width")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -148,7 +148,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_get_height")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -161,9 +161,9 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_get_color")
+	else if(functionName == "fe3d:text_get_color_r")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -171,14 +171,44 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 			// Validate existence
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				auto result = _fe3d.text_getColor(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+				auto result = _fe3d.text_getColor(arguments[0].getString()).r;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:text_get_color_g")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dText(arguments[0].getString()))
+			{
+				auto result = _fe3d.text_getColor(arguments[0].getString()).g;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:text_get_color_b")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dText(arguments[0].getString()))
+			{
+				auto result = _fe3d.text_getColor(arguments[0].getString()).b;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
 	else if(functionName == "fe3d:text_get_content")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -193,7 +223,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:text_get_transparency")
 	{
-		auto types = { SVT::STRING };
+		auto types = {SVT::STRING };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

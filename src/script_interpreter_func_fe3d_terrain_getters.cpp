@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetterFunction(const string& fu
 	// Determine type of function
 	if(functionName == "fe3d:terrain_get_pixel_height")
 	{
-		auto types = { SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

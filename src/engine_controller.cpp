@@ -117,7 +117,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		texturePaths3D[3] = string(textureDirectoryPath + "background_bottom.png");
 		texturePaths3D[4] = string(textureDirectoryPath + "background_back.png");
 		texturePaths3D[5] = string(textureDirectoryPath + "background_front.png");
-		misc_cacheTexturesMultiThreaded3D({ texturePaths3D });
+		misc_cacheTexturesMultiThreaded3D({texturePaths3D });
 
 		// Cache engine fonts
 		vector<string> fontPaths;

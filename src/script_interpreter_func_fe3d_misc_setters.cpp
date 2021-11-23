@@ -70,11 +70,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 		if(_validateListValueCount(arguments, 1))
 		{
 			// Determine which type of value to print
-			if(arguments[0].getType() == SVT::VEC3)
-			{
-				Logger::throwInfo(Tools::vec2str(arguments[0].getVec3()));
-			}
-			else if(arguments[0].getType() == SVT::STRING)
+			if(arguments[0].getType() == SVT::STRING)
 			{
 				Logger::throwInfo(arguments[0].getString());
 			}
@@ -102,7 +98,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:cursor_set_visible")
 	{
-		auto types = { SVT::BOOLEAN };
+		auto types = {SVT::BOOLEAN };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -224,7 +220,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:time_interval")
 	{
-		auto types = { SVT::INTEGER };
+		auto types = {SVT::INTEGER };
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

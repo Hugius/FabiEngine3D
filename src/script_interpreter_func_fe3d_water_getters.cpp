@@ -44,7 +44,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& func
 			}
 		}
 	}
-	else if(functionName == "fe3d:water_get_color")
+	else if(functionName == "fe3d:water_get_color_r")
 	{
 		// Validate arguments
 		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -52,8 +52,34 @@ const bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& func
 			// Validate water existence
 			if(_validateFe3dWater())
 			{
-				auto result = _fe3d.water_getColor(_fe3d.water_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+				auto result = _fe3d.water_getColor(_fe3d.water_getSelectedID()).r;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_get_color_g")
+	{
+		// Validate arguments
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Validate water existence
+			if(_validateFe3dWater())
+			{
+				auto result = _fe3d.water_getColor(_fe3d.water_getSelectedID()).g;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_get_color_b")
+	{
+		// Validate arguments
+		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Validate water existence
+			if(_validateFe3dWater())
+			{
+				auto result = _fe3d.water_getColor(_fe3d.water_getSelectedID()).b;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}

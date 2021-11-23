@@ -34,20 +34,20 @@ void ScriptInterpreter::load()
 
 		// Determine script type
 		string scriptType = "";
-		if(scriptFile->getLineText(0) == (META_KEYWORD + " script_type_init"))
+		if(scriptFile->getLineText(0) == (META_KEYWORD + " script_type_initialize"))
 		{
-			_initScriptIDs.push_back(scriptID);
-			scriptType = "script_type_init";
+			_initializeScriptIDs.push_back(scriptID);
+			scriptType = "script_type_initialize";
 		}
 		else if(scriptFile->getLineText(0) == (META_KEYWORD + " script_type_update"))
 		{
 			_updateScriptIDs.push_back(scriptID);
 			scriptType = "script_type_update";
 		}
-		else if(scriptFile->getLineText(0) == (META_KEYWORD + " script_type_destroy"))
+		else if(scriptFile->getLineText(0) == (META_KEYWORD + " script_type_terminate"))
 		{
-			_destroyScriptIDs.push_back(scriptID);
-			scriptType = "script_type_destroy";
+			_terminateScriptIDs.push_back(scriptID);
+			scriptType = "script_type_terminate";
 		}
 		else
 		{
@@ -60,17 +60,17 @@ void ScriptInterpreter::load()
 		if(scriptFile->getLineText(1) == (META_KEYWORD + " script_execution_entry"))
 		{
 			// Set entry point
-			if(scriptType == "script_type_init" && _initEntryID.empty())
+			if(scriptType == "script_type_initialize" && _initEntryID.empty())
 			{
-				_initEntryID = _initScriptIDs.back();
+				_initEntryID = _initializeScriptIDs.back();
 			}
 			else if(scriptType == "script_type_update" && _updateEntryID.empty())
 			{
 				_updateEntryID = _updateScriptIDs.back();
 			}
-			else if(scriptType == "script_type_destroy" && _destroyEntryID.empty())
+			else if(scriptType == "script_type_terminate" && _terminateEntryID.empty())
 			{
-				_destroyEntryID = _destroyScriptIDs.back();
+				_terminateEntryID = _terminateScriptIDs.back();
 			}
 			else
 			{
@@ -92,9 +92,9 @@ void ScriptInterpreter::load()
 	}
 
 	// No entry point errors
-	if(_initEntryID.empty() && !_initScriptIDs.empty())
+	if(_initEntryID.empty() && !_initializeScriptIDs.empty())
 	{
-		Logger::throwWarning("No script_execution_entry META defined for INIT script(s)!");
+		Logger::throwWarning("No script_execution_entry META defined for INITIALIZE script(s)!");
 		_hasThrownError = true;
 		return;
 	}
@@ -104,9 +104,9 @@ void ScriptInterpreter::load()
 		_hasThrownError = true;
 		return;
 	}
-	if(_destroyEntryID.empty() && !_destroyScriptIDs.empty())
+	if(_terminateEntryID.empty() && !_terminateScriptIDs.empty())
 	{
-		Logger::throwWarning("No script_execution_entry META defined for DESTROY script(s)!");
+		Logger::throwWarning("No script_execution_entry META defined for TERMINATE script(s)!");
 		_hasThrownError = true;
 		return;
 	}
@@ -114,12 +114,13 @@ void ScriptInterpreter::load()
 	// Comment optimization for runtime execution
 	for(const auto& scriptID : _script.getAllScriptFileIDs())
 	{
+		// Retrieve script file
 		auto scriptFile = _script.getScriptFile(scriptID);
 
-		// Loop through every line
+		// Iterate through every line
 		for(unsigned int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
 		{
-			// Remove trailing whitespace of comments
+			// Remove trailing whitespace from comments
 			auto scriptLineText = scriptFile->getLineText(lineIndex);
 			auto scriptLineTextStream = istringstream(scriptLineText);
 			string noWhiteSpace;
@@ -182,7 +183,7 @@ void ScriptInterpreter::load()
 		_fe3d.misc_cacheSoundsMultiThreaded(audioPaths);
 	}
 
-	// No sky at default
+	// No sky by default
 	_fe3d.sky_selectMainSky("");
 
 	// Load preview skies
@@ -236,26 +237,26 @@ void ScriptInterpreter::load()
 	_checkEngineWarnings(lastLoggerMessageCount);
 }
 
-void ScriptInterpreter::executeInitialization()
+void ScriptInterpreter::executeInitializeScripts()
 {
 	if(_initEntryID != "")
 	{
 		_isExecutingInitialization = true;
 
-		_executeScript(_initEntryID, ScriptType::INIT);
+		_executeScript(_initEntryID, ScriptType::INITIALIZE);
 
 		_isExecutingInitialization = false;
 	}
 }
 
-void ScriptInterpreter::executeUpdate(bool debug)
+void ScriptInterpreter::executeUpdateScripts(bool isDebugging)
 {
 	if(_updateEntryID != "")
 	{
 		_isExecutingUpdate = true;
 
 		// Start debugging if specified
-		_isDebugging = debug;
+		_isDebugging = isDebugging;
 		_debuggingTimes.clear();
 
 		// Execute update scripting
@@ -285,15 +286,15 @@ void ScriptInterpreter::executeUpdate(bool debug)
 	}
 }
 
-void ScriptInterpreter::executeDestruction()
+void ScriptInterpreter::executeTerminateScripts()
 {
-	if(_destroyEntryID != "")
+	if(_terminateEntryID != "")
 	{
-		_isExecutingDestruction = true;
+		_isExecutingTerminate = true;
 
-		_executeScript(_destroyEntryID, ScriptType::DESTROY);
+		_executeScript(_terminateEntryID, ScriptType::TERMINATE);
 
-		_isExecutingDestruction = false;
+		_isExecutingTerminate = false;
 	}
 }
 
@@ -455,13 +456,13 @@ void ScriptInterpreter::unload()
 	_localVariables.clear();
 	_currentScriptIDsStack.clear();
 	_currentLineIndexStack.clear();
-	_initScriptIDs.clear();
+	_initializeScriptIDs.clear();
 	_updateScriptIDs.clear();
-	_destroyScriptIDs.clear();
+	_terminateScriptIDs.clear();
 	_globalVariables.clear();
 	_initEntryID = "";
 	_updateEntryID = "";
-	_destroyEntryID = "";
+	_terminateEntryID = "";
 	_engineFunctionCallCount = 0;
 	_executionDepth = 0;
 	_hasThrownError = false;

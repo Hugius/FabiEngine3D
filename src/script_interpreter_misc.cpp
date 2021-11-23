@@ -128,7 +128,7 @@ ScriptConditionStatement* ScriptInterpreter::_getLastConditionStatement(vector<S
 	// Temporary values
 	unsigned int index = static_cast<unsigned int>(statements.size());
 
-	// Loop through conditions backwards
+	// Iterate through conditions backwards
 	while(index--)
 	{
 		// Check if scope depth matches

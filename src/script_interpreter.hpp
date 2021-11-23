@@ -24,9 +24,9 @@ public:
 	// VOID
 	void setCurrentProjectID(const string& projectID);
 	void load();
-	void executeInitialization();
-	void executeUpdate(bool debug);
-	void executeDestruction();
+	void executeInitializeScripts();
+	void executeUpdateScripts(bool isDebugging);
+	void executeTerminateScripts();
 	void unload();
 
 	// BOOL
@@ -182,13 +182,13 @@ private:
 	static inline const string PASS_KEYWORD = "PASS";
 	vector<string> _currentScriptIDsStack;
 	vector<string> _lineStringStreams;
-	vector<string> _initScriptIDs;
+	vector<string> _initializeScriptIDs;
 	vector<string> _updateScriptIDs;
-	vector<string> _destroyScriptIDs;
+	vector<string> _terminateScriptIDs;
 	string _currentProjectID = "";
 	string _initEntryID = "";
 	string _updateEntryID = "";
-	string _destroyEntryID = "";
+	string _terminateEntryID = "";
 
 	// FLOAT
 	map<string, float> _debuggingTimes;
@@ -212,7 +212,7 @@ private:
 	bool _isDebugging = false;
 	bool _isExecutingInitialization = false;
 	bool _isExecutingUpdate = false;
-	bool _isExecutingDestruction = false;
+	bool _isExecutingTerminate = false;
 
 	// MISCELLANEOUS
 	unordered_map<unsigned int, unordered_map<string, ScriptVariable>> _localVariables;

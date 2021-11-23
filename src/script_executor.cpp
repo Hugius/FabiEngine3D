@@ -14,7 +14,7 @@ void ScriptExecutor::load()
 {
 	// Start script execution & run initialization scripts
 	_scriptInterpreter.load();
-	_scriptInterpreter.executeInitialization();
+	_scriptInterpreter.executeInitializeScripts();
 	_isStarted = true;
 	_isRunning = true;
 	_mustSkipUpdate = true;
@@ -30,7 +30,7 @@ void ScriptExecutor::update(bool debug)
 		// Skip first frame, then update fulltime
 		if(!_mustSkipUpdate || debug)
 		{
-			_scriptInterpreter.executeUpdate(debug);
+			_scriptInterpreter.executeUpdateScripts(debug);
 		}
 		else
 		{
@@ -145,8 +145,8 @@ void ScriptExecutor::unload()
 {
 	if(_isStarted)
 	{
-		// Execute destruction scripts
-		_scriptInterpreter.executeDestruction();
+		// Execute terminate scripts
+		_scriptInterpreter.executeTerminateScripts();
 
 		// Unload script execution
 		_scriptInterpreter.unload();

@@ -20,9 +20,9 @@ Comments are pieces of text that do not get executed by the FabScript interprete
 
 Line 1 of every script file must specify its type: initialization, update, destruction.
 
-- Initialization script: `META script_type_init`.
+- Initialize script: `META script_type_initialize`.
 - Update script: `META script_type_update`.
-- Destruction script: `META script_type_destroy`.
+- Terminate script: `META script_type_terminate`.
 
 Line 2 of every script file must specify its execution state: entry or waiting.
 
@@ -32,7 +32,7 @@ Line 2 of every script file must specify its execution state: entry or waiting.
 ### 3.2 Example Code
 
 ```text
-1. META script_type_init
+1. META script_type_initialize
 2. META script_execution_entry
 3. 
 4. /// Your code goes here
@@ -69,19 +69,13 @@ Line 2 of every script file must specify its execution state: entry or waiting.
 
 ### 4.6 Basic Values
 
-- Types to choose from: `VEC3` (vector3), `STR` (string), `INT` (integer), `DEC` (decimal), `BOOL` (boolean).
+- Types to choose from: `STR` (string), `INT` (integer), `DEC` (decimal), `BOOL` (boolean).
 - A boolean can only be true or false just like binary (example: `<true>` or `<false>`) (NOTE: the `<` and `>` are not placeholders).
 - A string can be any characters, as long as it's surrounded with " " (example: `"hello world"`).
 - An integer is a whole number which can also be negative (example: `42`).
 - A decimal is a floating point number which can also be negative (example: `42.536`).
 
-### 4.7 Special Values - VEC3
-
-- A vec3 is composed of 3 individual decimal values (example: `[1.0 2.0 3.0]`).
-- Usually a VEC3 is a position/direction or color.
-- To access/change the individual components, add .x/.y/.z or .r/.g/.b after the variable name (example: `<name>.x`).
-
-### 4.8 Special Values - LIST
+### 4.7 Special Values - LIST
 
 - A list is a special type of variable that holds 0 or more individual values (example: `{42, "test", <false>}`).
 - A list cannot hold another list value/variable.
@@ -89,9 +83,8 @@ Line 2 of every script file must specify its execution state: entry or waiting.
 - You can add a new value to the list using: `PUSH <name> <value>`.
 - You can delete an existing value from the list using: `PULL <name> <index>`.
 - Remember: an index starts from 0!
-- You cannot access a VEC3 decimal from a list directly.
 
-### 4.9 Type Casting
+### 4.8 Type Casting
 
 - You can cast a variable to a different type using: `CAST <name> <type>`.
 - You can cast from INT to DEC and vice versa.
@@ -99,43 +92,37 @@ Line 2 of every script file must specify its execution state: entry or waiting.
 - You can cast from BOOL to STR and vice versa (if possible).
 - You can cast from INT to STR and vice versa (if possible).
 - You can cast from DEC to STR and vice versa (if possible).
-- You can cast from VEC3 to STR and vice versa (if possible).
 - You cannot cast (an element of) a LIST variable.
 
-### 4.10 Example Code
+### 4.9 Example Code
 
 ```text
 1.  /// Variable syntax for each type
-2.  BOOL myBoolean = <false>
-3.  STR myString = "hello world"
+2.  STR myString = "hello world"
+3.  DEC myDecimal = 42.94858
 4.  INT myInteger = 42
-5.  DEC myDecimal = 42.94858
-6.  VEC3 myVector = [1.0 2.0 3.0]
-7.  LIST myList = {42, myBoolean, [4 2 0]}
-8. 
-9.  /// Constant variables
-10. CONST STR immutableString = "i cannot be changed"
-11. STR mutableString = "try to change me"
-12. EDIT mutableString = "i changed you"
-13. 
-14. /// Global variables
-15. GLOB INT _someInteger = 5
-16. GLOB CONST INT _constInteger = 5
-17. 
-18. /// Casting variables
-19. CAST myDecimal INT
-20. STR intString = "123"
-21. CAST intString INT
-22. 
-23. /// Vector3 variable
-24. VEC3 redColor = [1.0 0.0 0.0]
-25. DEC redValue = redColor.r
-26. 
-27. /// List variable
-28. LIST myList = {"hello", 123, 45.0, redColor, redColor.x, <false>}
-29. STR temp1 = myList[0]
-30. PUSH temp1 "newValue"
-31. PULL temp1 6
+5.  BOOL myBoolean = <false>
+6.  LIST myList = {42, myBoolean, [4 2 0]}
+7.
+8.  /// Constant variables
+9.  CONST STR immutableString = "i cannot be changed"
+10. STR mutableString = "try to change me"
+11. EDIT mutableString = "i changed you"
+12.
+13. /// Global variables
+14. GLOB INT _someInteger = 5
+15. GLOB CONST INT _constInteger = 5
+16.
+17. /// Casting variables
+18. CAST myDecimal INT
+19. STR intString = "123"
+20. CAST intString INT
+21.
+22. /// List variable
+23. LIST myList = {"hello", 45.0, 123, <false>}
+24. STR firstElement = myList[0]
+25. PUSH firstElement "newValue"
+26. PULL firstElement 6
 ```
 
 ## 5. Arithmetic Operations
@@ -183,13 +170,13 @@ Line 2 of every script file must specify its execution state: entry or waiting.
 6. /// > true
 ```
 
-## 7. Logical Operations
+## 7. Logic Operations
 
 ### 7.1 General
 
 - To check if all the comparison statements are true: `<comparison> AND <comparison>`.
 - To check if any of the comparison statements are true: `<comparison> OR <comparison>`.
-- You cannot combine the `AND` and `OR` keywords in one logical statement.
+- You cannot combine the `AND` and `OR` keywords in one logic statement.
 
 ### 7.2 Example Code
 
@@ -202,15 +189,15 @@ Line 2 of every script file must specify its execution state: entry or waiting.
 6. /// > false
 ```
 
-## 8. Conditional Operations
+## 8. Condition Operations
 
 ### 8.1 General
 
 - There are 3 types: `IF`, `ELIF`, `ELSE`.
-- Every logical statement must end with a `:`.
-- All code under a logical statement must must be indented with 4 spaces / 1 tab.
-- You can chain these conditional operations, in the described order.
-- Conditional statements can be nested infinitely.
+- Every logic statement must end with a `:`.
+- All code under a logic statement must must be indented with 4 spaces / 1 tab.
+- You can chain these condition operations, in the described order.
+- Condition statements can be nested infinitely.
 - Works the same as in other programming languages.
 
 ### 8.2 Example Code
@@ -293,18 +280,18 @@ Line 2 of every script file must specify its execution state: entry or waiting.
 ```text
 1. STR myString = "i am printed"
 2. fe3d:camera_set_position(1.0, 2.0, 3.0)
-3. VEC3 camPos = fe3d:camera_get_position()
+3. DEC z = fe3d:camera_get_position_z()
 4. fe3d:print(myString)
-5. fe3d:print(camPos)
+5. fe3d:print(z)
 6.
 7. /// Console output:
 8. /// > i am printed
-9. /// > 1.0 2.0 3.0
+9. /// > 3.0
 ```
 
 ## 12. Tips & Tricks
 
-- You can use the `PASS` statement as an empty placeholder for conditional statements or loops.
+- You can use the `PASS` statement as an empty placeholder for condition statements or loops.
 - Be careful with loops as they can become infinite. Luckily this will get detected by the interpreter.
 - Integer values are clamped between -999999999 and 999999999 to prevent overflow.
 - Decimal values are clamped between -999999999.0 and 999999999.0 to prevent overflow.

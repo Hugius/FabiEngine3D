@@ -966,7 +966,7 @@ public:
 protected:
 	virtual void FE3D_CONTROLLER_INIT() = 0;
 	virtual void FE3D_CONTROLLER_UPDATE() = 0;
-	virtual void FE3D_CONTROLLER_DESTROY() = 0;
+	virtual void FE3D_CONTROLLER_TERMINATE() = 0;
 
 private:
 	// STRING

@@ -189,16 +189,16 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			// Check if script is of the same type
 			if
 				(
-				(scriptType == ScriptType::INIT &&
+				(scriptType == ScriptType::INITIALIZE &&
 				(find(_updateScriptIDs.begin(), _updateScriptIDs.end(), scriptToExecute) != _updateScriptIDs.end() ||
-				find(_destroyScriptIDs.begin(), _destroyScriptIDs.end(), scriptToExecute) != _destroyScriptIDs.end()))
+				find(_terminateScriptIDs.begin(), _terminateScriptIDs.end(), scriptToExecute) != _terminateScriptIDs.end()))
 				||
 				(scriptType == ScriptType::UPDATE &&
-				(find(_initScriptIDs.begin(), _initScriptIDs.end(), scriptToExecute) != _initScriptIDs.end() ||
-				find(_destroyScriptIDs.begin(), _destroyScriptIDs.end(), scriptToExecute) != _destroyScriptIDs.end()))
+				(find(_initializeScriptIDs.begin(), _initializeScriptIDs.end(), scriptToExecute) != _initializeScriptIDs.end() ||
+				find(_terminateScriptIDs.begin(), _terminateScriptIDs.end(), scriptToExecute) != _terminateScriptIDs.end()))
 				||
-				(scriptType == ScriptType::DESTROY &&
-				(find(_initScriptIDs.begin(), _initScriptIDs.end(), scriptToExecute) != _initScriptIDs.end() ||
+				(scriptType == ScriptType::TERMINATE &&
+				(find(_initializeScriptIDs.begin(), _initializeScriptIDs.end(), scriptToExecute) != _initializeScriptIDs.end() ||
 				find(_updateScriptIDs.begin(), _updateScriptIDs.end(), scriptToExecute) != _updateScriptIDs.end()))
 				)
 			{
@@ -207,8 +207,8 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			}
 
 			// Check if script exists
-			auto& scriptList = (scriptType == ScriptType::INIT) ? _initScriptIDs :
-				(scriptType == ScriptType::UPDATE) ? _updateScriptIDs : _destroyScriptIDs;
+			auto& scriptList = (scriptType == ScriptType::INITIALIZE) ? _initializeScriptIDs :
+				(scriptType == ScriptType::UPDATE) ? _updateScriptIDs : _terminateScriptIDs;
 			if(find(scriptList.begin(), scriptList.end(), scriptToExecute) != scriptList.end())
 			{
 				// Pause timer

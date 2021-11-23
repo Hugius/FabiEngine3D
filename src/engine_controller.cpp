@@ -203,7 +203,7 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 	}
 }
 
-void EngineController::FE3D_CONTROLLER_DESTROY()
+void EngineController::FE3D_CONTROLLER_TERMINATE()
 {
 	if(Config::getInst().isApplicationExported()) // Application preview
 	{

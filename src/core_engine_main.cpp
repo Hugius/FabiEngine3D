@@ -113,7 +113,7 @@ void CoreEngine::_start()
 	}
 
 	// Finish engine controller
-	_fe3d.FE3D_CONTROLLER_DESTROY();
+	_fe3d.FE3D_CONTROLLER_TERMINATE();
 }
 
 void CoreEngine::_pause()

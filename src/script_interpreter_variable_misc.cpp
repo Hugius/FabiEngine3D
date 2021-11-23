@@ -7,7 +7,7 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 	string nameString = "";
 	string typeString = "";
 
-	// Extract name
+	// Extract variable name
 	for(const auto& c : scriptLine.substr(CASTING_KEYWORD.size() + 1))
 	{
 		if(c == ' ')
@@ -20,50 +20,48 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 		}
 	}
 
-	// Check if variable exists
+	// Check if variable not existing
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
 		_throwScriptError("variable not existing!");
 		return;
 	}
 
-	// Check if type is present
-	if(scriptLine.size() >= (CASTING_KEYWORD.size() + nameString.size() + 3))
-	{
-		// Extract remaining text (type)
-		typeString = scriptLine.substr(CASTING_KEYWORD.size() + nameString.size() + 2);
-	}
-	else
+	// Check if type is missing
+	if(scriptLine.size() < (CASTING_KEYWORD.size() + nameString.size() + 3))
 	{
 		_throwScriptError("type missing!");
 		return;
 	}
 
+	// Extract new variable type
+	typeString = scriptLine.substr(CASTING_KEYWORD.size() + nameString.size() + 2);
+
 	// Retrieve variable
 	auto& variable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
-	// Check if variable is not a list
+	// Check if variable is a list
 	if(variable.getType() == ScriptVariableType::MULTIPLE)
 	{
 		_throwScriptError("LIST variables cannot be typecasted!");
 		return;
 	}
 
-	// Check if variable can be changed
+	// Check if variable is constant
 	if(variable.isConstant())
 	{
 		_throwScriptError("constant variables cannot be typecasted!");
 		return;
 	}
 
-	// Determine to which new type the variable must cast
-	if((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == DECIMAL_KEYWORD)) // From INT to DEC
-	{
-		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, static_cast<float>(variable.getValue().getInteger())));
-	}
-	else if((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == BOOLEAN_KEYWORD)) // From INT to BOOL
+	// Determine new type
+	if((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == BOOLEAN_KEYWORD)) // From INT to BOOL
 	{
 		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, static_cast<bool>(variable.getValue().getInteger())));
+	}
+	else if((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == DECIMAL_KEYWORD)) // From INT to DEC
+	{
+		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, static_cast<float>(variable.getValue().getInteger())));
 	}
 	else if((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == STRING_KEYWORD)) // From INT to STR
 	{
@@ -88,47 +86,44 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 	}
 	else if((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == BOOLEAN_KEYWORD)) // From STR to BOOL
 	{
-		// Check if string can be casted
-		if(_isBooleanValue(variable.getValue().getString()))
+		// Check if string invalid
+		if(!_isBooleanValue(variable.getValue().getString()))
 		{
-			bool newValue = (variable.getValue().getString() == "<true>") ? true : false;
-			variable.changeValue(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, newValue));
-		}
-		else
-		{
-			_throwScriptError("variable cannot be typecasted to BOOL: invalid string!");
+			_throwScriptError("invalid boolean string!");
 			return;
 		}
+
+		// Cast to boolean
+		bool newValue = (variable.getValue().getString() == "<true>") ? true : false;
+		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, newValue));
 	}
 	else if((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == INTEGER_KEYWORD)) // From STR to INT
 	{
-		// Check if string can be casted
-		if(_isIntegerValue(variable.getValue().getString()))
+		// Check if string invalid
+		if(!_isIntegerValue(variable.getValue().getString()))
 		{
-			variable.changeValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(variable.getValue().getString()))));
-		}
-		else
-		{
-			_throwScriptError("variable cannot be typecasted to INT: invalid string!");
+			_throwScriptError("invalid integer string!");
 			return;
 		}
+
+		// Cast to integer
+		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(variable.getValue().getString()))));
 	}
 	else if((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == DECIMAL_KEYWORD)) // From STR to DEC
 	{
-		// Check if string can be casted
-		if(_isDecimalValue(variable.getValue().getString()))
+		// Check if string invalid
+		if(!_isDecimalValue(variable.getValue().getString()))
 		{
-			variable.changeValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitDecimalString(variable.getValue().getString()))));
-		}
-		else
-		{
-			_throwScriptError("variable cannot be typecasted to DEC: invalid string!");
+			_throwScriptError("invalid decimal string!");
 			return;
 		}
+
+		// Cast to decimal
+		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitDecimalString(variable.getValue().getString()))));
 	}
 	else
 	{
-		_throwScriptError("variable cannot be typecasted: wrong type!");
+		_throwScriptError("invalid casting type!");
 		return;
 	}
 }
@@ -136,6 +131,7 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 const bool ScriptInterpreter::_isLocalVariableExisting(const string& variableID)
 {
 	auto& variables = _localVariables[_executionDepth];
+
 	return (variables.find(variableID) != variables.end());
 }
 

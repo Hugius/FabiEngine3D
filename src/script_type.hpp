@@ -2,7 +2,7 @@
 
 enum class ScriptType
 {
-	INIT,
+	INITIALIZE,
 	UPDATE,
-	DESTROY
+	TERMINATE
 };

@@ -91,7 +91,7 @@ BEGIN:
 
 			if(messageStatusCode > 0) // Message is received correctly
 			{
-				for(const auto& character : messageContent) // Loop through received messages
+				for(const auto& character : messageContent) // Iterate through received messages
 				{
 					if(character == ';') // End of current message
 					{

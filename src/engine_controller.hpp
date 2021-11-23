@@ -15,7 +15,7 @@ public:
 	// VOID
 	void FE3D_CONTROLLER_INIT();
 	void FE3D_CONTROLLER_UPDATE();
-	void FE3D_CONTROLLER_DESTROY();
+	void FE3D_CONTROLLER_TERMINATE();
 
 	// BOOL
 	const bool mustPromptOnExit() const;

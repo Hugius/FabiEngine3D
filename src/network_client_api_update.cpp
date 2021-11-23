@@ -101,7 +101,7 @@ void NetworkClientAPI::update()
 
 		if(messageStatusCode > 0) // Message is received correctly
 		{
-			for(const auto& character : messageContent) // Loop through received message content
+			for(const auto& character : messageContent) // Iterate through received message content
 			{
 				if(character == ';') // End of current message
 				{

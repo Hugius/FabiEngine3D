@@ -61,12 +61,12 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 
 	// Values needed for final boolean return
 	vector<bool> conditions;
-	vector<string> logicalOperators;
+	vector<string> logicOperators;
 
 	// Temporary values
 	bool mustBeValue = true;
 	bool mustBeComparisonOperator = false;
-	bool mustBeLogicalOperator = false;
+	bool mustBeLogicOperator = false;
 	vector<ScriptValue> comparisonValues;
 	string comparisonOperator = "";
 
@@ -137,7 +137,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 					}
 					else // Cannot be list variable
 					{
-						_throwScriptError("list variable cannot be used in a condition!");
+						_throwScriptError("LIST variable cannot be used in a condition!");
 						return false;
 					}
 				}
@@ -157,7 +157,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 					conditions.push_back(_compareValues(comparisonValues.front(), comparisonOperator, comparisonValues.back()));
 					comparisonValues.clear();
 					mustBeValue = false;
-					mustBeLogicalOperator = true;
+					mustBeLogicOperator = true;
 				}
 				else
 				{
@@ -184,23 +184,23 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 				return false;
 			}
 		}
-		else if(mustBeLogicalOperator)
+		else if(mustBeLogicOperator)
 		{
 			if(elementString == AND_KEYWORD || elementString == OR_KEYWORD)
 			{
-				logicalOperators.push_back(elementString);
-				mustBeLogicalOperator = false;
+				logicOperators.push_back(elementString);
+				mustBeLogicOperator = false;
 				mustBeValue = true;
 			}
 			else
 			{
-				_throwScriptError("invalid logical operator!");
+				_throwScriptError("invalid logic operator!");
 				return false;
 			}
 		}
 	}
 
-	// Check if condition did not end with a logical operator
+	// Check if condition did not end with a logic operator
 	if(mustBeValue || mustBeComparisonOperator)
 	{
 		_throwScriptError("condition is incomplete!");
@@ -215,24 +215,24 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 
 	// Multiple conditions
 	bool finalCondition = conditions[0];
-	string currentLogicalOperator = "";
+	string currentLogicOperator = "";
 	for(size_t i = 1; i < conditions.size(); i++)
 	{
-		if(currentLogicalOperator.empty()) // Save logical operator
+		if(currentLogicOperator.empty()) // Save logic operator
 		{
-			currentLogicalOperator = logicalOperators[i - 1];
+			currentLogicOperator = logicOperators[i - 1];
 		}
-		else if(currentLogicalOperator != logicalOperators[i - 1]) // Check logical operator
+		else if(currentLogicOperator != logicOperators[i - 1]) // Check logic operator
 		{
-			_throwScriptError("cannot use different logical operators!");
+			_throwScriptError("cannot use different logic operators!");
 			return false;
 		}
 
-		if(logicalOperators[i - 1] == AND_KEYWORD) // AND
+		if(logicOperators[i - 1] == AND_KEYWORD) // AND
 		{
 			finalCondition = finalCondition && conditions[i];
 		}
-		else if(logicalOperators[i - 1] == OR_KEYWORD) // OR
+		else if(logicOperators[i - 1] == OR_KEYWORD) // OR
 		{
 			finalCondition = finalCondition || conditions[i];
 		}
@@ -253,14 +253,14 @@ const bool ScriptInterpreter::_validateCondition(ScriptValue& firstValue, const 
 	// Check if not trying to compare string values with the wrong operator
 	if((comparisonOperator == MORE_KEYWORD || comparisonOperator == LESS_KEYWORD) && firstValue.getType() == ScriptValueType::STRING)
 	{
-		_throwScriptError("invalid comparison operator for string values!");
+		_throwScriptError("invalid comparison operator for STR values!");
 		return false;
 	}
 
 	// Check if not trying to compare boolean values with the wrong operator
 	if((comparisonOperator == MORE_KEYWORD || comparisonOperator == LESS_KEYWORD) && firstValue.getType() == ScriptValueType::BOOLEAN)
 	{
-		_throwScriptError("invalid comparison operator for boolean values!");
+		_throwScriptError("invalid comparison operator for BOOL values!");
 		return false;
 	}
 

@@ -45,7 +45,7 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 	// Check if variable is not a list
 	if(variable.getType() == ScriptVariableType::MULTIPLE)
 	{
-		_throwScriptError("list variables cannot be typecasted!");
+		_throwScriptError("LIST variables cannot be typecasted!");
 		return;
 	}
 
@@ -96,7 +96,7 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 		}
 		else
 		{
-			_throwScriptError("variable cannot be typecasted to boolean: invalid string!");
+			_throwScriptError("variable cannot be typecasted to BOOL: invalid string!");
 			return;
 		}
 	}
@@ -109,7 +109,7 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 		}
 		else
 		{
-			_throwScriptError("variable cannot be typecasted to integer: invalid string!");
+			_throwScriptError("variable cannot be typecasted to INT: invalid string!");
 			return;
 		}
 	}
@@ -122,7 +122,7 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 		}
 		else
 		{
-			_throwScriptError("variable cannot be typecasted to decimal: invalid string!");
+			_throwScriptError("variable cannot be typecasted to DEC: invalid string!");
 			return;
 		}
 	}

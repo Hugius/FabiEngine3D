@@ -35,7 +35,7 @@ void WorldEditor::_updateBillboardMenu()
 				// Check if billboard is not a preview
 				if(billboardID[0] != '@')
 				{
-					// Removing the unique number from the billboardID
+					// Removing the unique number from the ID
 					reverse(billboardID.begin(), billboardID.end());
 					string rawID = billboardID.substr(billboardID.find('_') + 1);
 					reverse(rawID.begin(), rawID.end());

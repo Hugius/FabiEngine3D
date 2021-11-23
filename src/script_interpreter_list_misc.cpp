@@ -5,21 +5,21 @@ const bool ScriptInterpreter::_validateListIndex(const ScriptVariable& list, uns
 	// Check if variable is a list in the first place
 	if(list.getType() == ScriptVariableType::SINGLE)
 	{
-		_throwScriptError("variable is not a list!");
+		_throwScriptError("variable is not a LIST!");
 		return false;
 	}
 
 	// Check if list index is negative
 	if(index < 0)
 	{
-		_throwScriptError("list index is negative!");
+		_throwScriptError("LIST index is negative!");
 		return false;
 	}
 
 	// Check if list index is out of range
 	if(index >= list.getValueCount())
 	{
-		_throwScriptError("list index is out of range!");
+		_throwScriptError("LIST index is out of range!");
 		return false;
 	}
 
@@ -80,7 +80,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	// Check if list name is missing
 	if(nameString.empty())
 	{
-		_throwScriptError("list name missing!");
+		_throwScriptError("LIST name missing!");
 		return;
 	}
 
@@ -99,7 +99,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	// Check if list exists
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwScriptError("list not existing!");
+		_throwScriptError("LIST not existing!");
 		return;
 	}
 
@@ -109,14 +109,14 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	// A constant list should not be changed
 	if(listVariable.isConstant())
 	{
-		_throwScriptError("cannot push to list: it is constant!");
+		_throwScriptError("cannot push to LIST: it is constant!");
 		return;
 	}
 
 	// Determine value type
 	if(_isListValue(valueString)) // LIST
 	{
-		_throwScriptError("cannot push a list to another list!");
+		_throwScriptError("cannot push a LIST to another list!");
 		return;
 	}
 	else if(_isStringValue(valueString)) // STRING
@@ -185,7 +185,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 
 			if(otherVariable.getType() == ScriptVariableType::MULTIPLE && !isAccessingList) // List value
 			{
-				_throwScriptError("cannot push a list to another list!");
+				_throwScriptError("cannot push a LIST to another list!");
 				return;
 			}
 			else // Normal value (or list access)
@@ -223,7 +223,7 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 	// Check if variable name is missing
 	if(nameString.empty())
 	{
-		_throwScriptError("list name missing!");
+		_throwScriptError("LIST name missing!");
 		return;
 	}
 
@@ -235,21 +235,21 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 	}
 	else
 	{
-		_throwScriptError("list index missing!");
+		_throwScriptError("LIST index missing!");
 		return;
 	}
 
 	// Check if list index is invalid
 	if(!_isIntegerValue(indexString) && !_isLocalVariableExisting(indexString) && !_isGlobalVariableExisting(indexString))
 	{
-		_throwScriptError("invalid list index!");
+		_throwScriptError("invalid LIST index!");
 		return;
 	}
 
 	// Check if list exists
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwScriptError("list not existing!");
+		_throwScriptError("LIST not existing!");
 		return;
 	}
 
@@ -259,7 +259,7 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 	// A constant list should not be changed
 	if(listVariable.isConstant())
 	{
-		_throwScriptError("cannot push to list: it is constant!");
+		_throwScriptError("cannot push to LIST: it is constant!");
 		return;
 	}
 
@@ -277,7 +277,7 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 		// Check if integer
 		if(indexVariable.getValue().getType() != ScriptValueType::INTEGER)
 		{
-			_throwScriptError("index variable is not an integer!");
+			_throwScriptError("index variable is not an INT!");
 			return;
 		}
 

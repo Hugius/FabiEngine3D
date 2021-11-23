@@ -324,7 +324,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 						}
 						else
 						{
-							_throwScriptError("list values must be numbers!");
+							_throwScriptError("LIST values must be INT or DEC!");
 							return returnValues;
 						}
 					}
@@ -401,7 +401,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 						}
 						else
 						{
-							_throwScriptError("list values must be numbers!");
+							_throwScriptError("LIST values must be INT or DEC!");
 							return returnValues;
 						}
 					}

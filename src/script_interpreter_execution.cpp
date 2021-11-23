@@ -98,7 +98,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			{
 				if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP) // Infinite loop
 				{
-					_throwScriptError("maximum amount of loop iterations reached, perhaps infinite looping?");
+					_throwScriptError("maximum amount of LOOP iterations reached, perhaps infinite looping?");
 					return;
 				}
 				else // Normal loop
@@ -114,7 +114,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			{
 				if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP) // Infinite loop
 				{
-					_throwScriptError("maximum amount of loop iterations reached, perhaps infinite looping?");
+					_throwScriptError("maximum amount of LOOP iterations reached, perhaps infinite looping?");
 					return;
 				}
 				else // Normal loop
@@ -413,7 +413,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		{
 			if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP) // Infinite loop
 			{
-				_throwScriptError("maximum amount of loop iterations reached, perhaps infinite looping?");
+				_throwScriptError("maximum amount of LOOP iterations reached, perhaps infinite looping?");
 				return;
 			}
 			else // Normal loop

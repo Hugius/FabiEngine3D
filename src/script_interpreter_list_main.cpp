@@ -105,7 +105,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 				{
 					if(!currentValueString.empty())
 					{
-						_throwScriptError("invalid decimal syntax!");
+						_throwScriptError("invalid DEC syntax!");
 						return {};
 					}
 					else
@@ -136,7 +136,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 						// Check if decimal value is valid
 						if(currentValueString.back() == '.')
 						{
-							_throwScriptError("invalid decimal syntax!");
+							_throwScriptError("invalid DEC syntax!");
 							return {};
 						}
 						else
@@ -181,7 +181,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 					}
 					else if(currentValueString != "<false") // Must be "<false" if 6 letter string
 					{
-						_throwScriptError("invalid boolean syntax!");
+						_throwScriptError("invalid BOOL syntax!");
 						return {};
 					}
 				}
@@ -193,7 +193,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 				}
 				else if(currentValueString.size() > 7) // Invalid boolean string
 				{
-					_throwScriptError("invalid boolean syntax!");
+					_throwScriptError("invalid BOOL syntax!");
 					return {};
 				}
 			}
@@ -250,7 +250,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 						}
 						else // Cannot be list variable
 						{
-							_throwScriptError("list cannot be used inside another list!");
+							_throwScriptError("LIST cannot be used inside another LIST!");
 							return {};
 						}
 

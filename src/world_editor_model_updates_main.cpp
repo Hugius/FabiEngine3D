@@ -35,7 +35,7 @@ void WorldEditor::_updateModelMenu()
 				// Check if model is not a preview model
 				if(modelID[0] != '@')
 				{
-					// Removing the unique number from the modelID
+					// Removing the unique number from the ID
 					reverse(modelID.begin(), modelID.end());
 					string rawID = modelID.substr(modelID.find('_') + 1);
 					reverse(rawID.begin(), rawID.end());

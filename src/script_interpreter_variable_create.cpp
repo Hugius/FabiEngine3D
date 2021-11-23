@@ -331,7 +331,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		}
 		else
 		{
-			_throwScriptError("variable value types don't match!");
+			_throwScriptError("variable value types do not match!");
 			return;
 		}
 	}

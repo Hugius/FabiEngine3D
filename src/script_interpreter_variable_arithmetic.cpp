@@ -108,7 +108,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	// Check if variable is not a list
 	if(variableOne.getType() == ScriptVariableType::MULTIPLE && !isAccessingListOne)
 	{
-		_throwScriptError("arithmetic is not allowed on a list!");
+		_throwScriptError("arithmetic is not allowed on a LIST!");
 		return;
 	}
 

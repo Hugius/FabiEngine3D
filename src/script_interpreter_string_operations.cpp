@@ -131,7 +131,7 @@ const int ScriptInterpreter::_extractListIndexFromString(const string& valueStri
 		// Check if variable is an integer
 		if(variable.getType() == ScriptVariableType::MULTIPLE || variable.getValue().getType() != ScriptValueType::INTEGER)
 		{
-			_throwScriptError("list index must be an integer!");
+			_throwScriptError("LIST index must be of type INT!");
 			return -1;
 		}
 		else
@@ -142,7 +142,7 @@ const int ScriptInterpreter::_extractListIndexFromString(const string& valueStri
 	}
 	else
 	{
-		_throwScriptError("invalid list indexing syntax!");
+		_throwScriptError("invalid LIST indexing syntax!");
 		return -1;
 	}
 }

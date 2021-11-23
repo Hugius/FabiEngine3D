@@ -98,7 +98,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:cursor_set_visible")
 	{
-		auto types = {SVT::BOOLEAN };
+		auto types = {SVT::BOOLEAN};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -220,7 +220,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:time_interval")
 	{
-		auto types = {SVT::INTEGER };
+		auto types = {SVT::INTEGER};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

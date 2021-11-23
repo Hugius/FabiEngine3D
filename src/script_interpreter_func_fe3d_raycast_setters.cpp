@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastSetterFunction(const string& fu
 	// Determine type of function
 	if(functionName == "fe3d:raycast_enable_terrain_pointing")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

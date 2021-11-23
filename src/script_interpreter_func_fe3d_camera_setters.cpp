@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetterFunction(const string& fun
 	// Determine type of function
 	if(functionName == "fe3d:camera_move")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -18,7 +18,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:camera_set_position")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -29,7 +29,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:camera_set_lookat_position")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -40,7 +40,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:camera_follow_x")
 	{
-		auto types = {SVT::DECIMAL };
+		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -51,7 +51,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:camera_follow_z")
 	{
-		auto types = {SVT::DECIMAL };
+		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -62,7 +62,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:camera_follow_zy")
 	{
-		auto types = {SVT::DECIMAL };
+		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:camera_set_yaw")
 	{
-		auto types = {SVT::DECIMAL };
+		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -84,7 +84,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:camera_set_pitch")
 	{
-		auto types = {SVT::DECIMAL };
+		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -95,7 +95,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:camera_set_fov")
 	{
-		auto types = {SVT::DECIMAL };
+		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -106,7 +106,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:camera_set_cursor_sensitivity")
 	{
-		auto types = {SVT::DECIMAL };
+		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -117,7 +117,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:camera_enable_first_person_view")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -137,7 +137,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:camera_set_min_first_person_pitch")
 	{
-		auto types = {SVT::DECIMAL };
+		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -148,7 +148,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:camera_set_max_first_person_pitch")
 	{
-		auto types = {SVT::DECIMAL };
+		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -159,7 +159,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:camera_enable_third_person_view")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -179,7 +179,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:camera_set_min_third_person_pitch")
 	{
-		auto types = {SVT::DECIMAL };
+		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -190,7 +190,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:camera_set_max_third_person_pitch")
 	{
-		auto types = {SVT::DECIMAL };
+		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -201,7 +201,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:camera_set_third_person_distance")
 	{
-		auto types = {SVT::DECIMAL };
+		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -212,7 +212,7 @@ const bool ScriptInterpreter::_executeFe3dCameraSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:camera_set_third_person_lookat")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

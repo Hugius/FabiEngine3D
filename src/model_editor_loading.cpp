@@ -345,7 +345,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 				// Set instancing
 				if(isInstanced)
 				{
-					_fe3d.model_enableInstancing(modelID, {fvec3(0.0f) });
+					_fe3d.model_enableInstancing(modelID, {fvec3(0.0f)});
 				}
 
 				// Set properties

@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& funct
 	// Determine type of function
 	if(functionName == "fe3d:aabb_find_ids")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -40,7 +40,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:aabb_is_existing")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -66,7 +66,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:aabb_is_visible")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -91,7 +91,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:aabb_get_position_x")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -160,7 +160,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& funct
 	}
 	else if(functionName == "fe3d:aabb_get_size_x")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

@@ -199,7 +199,7 @@ TextureID TextureLoader::_convertIntoTexture(const array<SDL_Surface*, 6>& surfa
 TextureID TextureLoader::_convertIntoTexture(TTF_Font* font, const string& textContent)
 {
 	// Load color
-	SDL_Color* color = new SDL_Color{255, 255, 255, 255 };
+	SDL_Color* color = new SDL_Color{255, 255, 255, 255};
 
 	// No empty text
 	string finalTextContent = (textContent.empty() ? " " : textContent);

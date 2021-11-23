@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetterFunction(const string& func
 	// Determine type of function
 	if(functionName == "fe3d:water_set_speed")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -23,7 +23,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:water_set_color")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -41,7 +41,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:water_set_transparency")
 	{
-		auto types = {SVT::DECIMAL };
+		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

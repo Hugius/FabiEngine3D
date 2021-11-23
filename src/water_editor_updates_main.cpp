@@ -143,7 +143,7 @@ void WaterEditor::_updateChoiceMenu()
 		}
 
 		// Update value forms
-		if(_gui.getGlobalScreen()->checkValueForm("size", size, {0.0f }))
+		if(_gui.getGlobalScreen()->checkValueForm("size", size, {0.0f}))
 		{
 			_fe3d.water_setSize(_currentWaterID, size);
 		}

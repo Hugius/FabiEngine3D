@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetterFunction(const string& fu
 	// Determine type of function
 	if(functionName == "fe3d:terrain_set_lightness")
 	{
-		auto types = {SVT::DECIMAL };
+		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 	// Determine type of function
 	if(functionName == "fe3d:spotlight_place")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -45,7 +45,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:spotlight_delete")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -60,7 +60,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:spotlight_set_visible")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -75,7 +75,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:spotlight_set_position")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -91,7 +91,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:spotlight_move")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -107,7 +107,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:spotlight_move_to")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -123,7 +123,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:spotlight_set_color")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -139,7 +139,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:spotlight_set_yaw")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -154,7 +154,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:spotlight_set_pitch")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -169,7 +169,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:spotlight_set_intensity")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -184,7 +184,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:spotlight_set_angle")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -199,7 +199,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& 
 	}
 	else if(functionName == "fe3d:spotlight_set_distance")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

@@ -216,7 +216,7 @@ void SkyEditor::_updateTexturingMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
-			_fe3d.sky_setCubeMaps(_currentSkyID, {"","","","","","" });
+			_fe3d.sky_setCubeMaps(_currentSkyID, {"","","","","",""});
 		}
 
 		// Update buttons hoverability

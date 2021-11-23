@@ -8,7 +8,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	string valueString = "";
 
 	// Extract operator & name
-	string words[2] = {"", "" };
+	string words[2] = {"", ""};
 	unsigned int wordIndex = 0;
 	for(const auto& c : scriptLine)
 	{

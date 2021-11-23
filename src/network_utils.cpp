@@ -70,7 +70,7 @@ const bool NetworkUtils::isValidIP(const string& IP)
 const bool NetworkUtils::isMessageReadyUDP(SOCKET socket)
 {
 	fd_set socketSet = fd_set();
-	timeval timeInterval = {0 , 1 }; // 1 microsecond
+	timeval timeInterval = {0 , 1}; // 1 microsecond
 	FD_ZERO(&socketSet);
 	FD_SET(socket, &socketSet);
 	return (select(0, &socketSet, nullptr, nullptr, &timeInterval) > 0);

@@ -137,7 +137,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	}
 	else if(functionName == "fe3d:raycast_into_model")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -180,7 +180,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	}
 	else if(functionName == "fe3d:raycast_into_model_distance")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -273,7 +273,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	}
 	else if(functionName == "fe3d:raycast_into_billboard")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -323,7 +323,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	}
 	else if(functionName == "fe3d:raycast_into_billboard_distance")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

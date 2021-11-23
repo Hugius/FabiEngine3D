@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 	// Determine type of function
 	if(functionName == "fe3d:reflection_is_existing")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -26,7 +26,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 	}
 	else if(functionName == "fe3d:reflection_find_ids")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 	}
 	else if(functionName == "fe3d:reflection_is_visible")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -88,7 +88,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 	}
 	else if(functionName == "fe3d:reflection_get_position_x")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

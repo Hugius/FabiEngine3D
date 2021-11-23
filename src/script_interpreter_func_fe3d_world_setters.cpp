@@ -9,7 +9,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 	// Determine type of function
 	if(functionName == "fe3d:world_load")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -30,7 +30,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:world_add_custom")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -68,7 +68,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:world_add_custom_model")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -79,7 +79,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:world_add_custom_billboard")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -90,7 +90,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:world_add_custom_aabb")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -101,7 +101,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:world_add_custom_sound")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -112,7 +112,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:world_add_custom_light")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -123,7 +123,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:world_add_custom_reflection")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -161,7 +161,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:world_load_custom")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -173,7 +173,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:world_delete_custom")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

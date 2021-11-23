@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetterFunction(const string& fun
 	// Determine type of function
 	if(functionName == "fe3d:server_start")
 	{
-		auto types = {SVT::INTEGER };
+		auto types = {SVT::INTEGER};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -33,7 +33,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:server_send_tcp_message")
 	{
-		auto types = {SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -44,7 +44,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:server_send_udp_message")
 	{
-		auto types = {SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -55,7 +55,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:server_broadcast_tcp_message")
 	{
-		auto types = {SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -66,7 +66,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:server_broadcast_udp_message")
 	{
-		auto types = {SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -77,7 +77,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetterFunction(const string& fun
 	}
 	else if(functionName == "fe3d:server_disconnect_client")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

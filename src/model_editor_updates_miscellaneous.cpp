@@ -31,7 +31,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 			isInstanced = !isInstanced;
 			if(isInstanced)
 			{
-				_fe3d.model_enableInstancing(_currentModelID, {fvec3(0.0f) });
+				_fe3d.model_enableInstancing(_currentModelID, {fvec3(0.0f)});
 			}
 			else
 			{

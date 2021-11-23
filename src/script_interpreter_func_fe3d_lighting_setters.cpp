@@ -25,7 +25,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& f
 	}
 	else if(functionName == "fe3d:lighting_set_ambient_color")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -36,7 +36,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& f
 	}
 	else if(functionName == "fe3d:lighting_set_ambient_intensity")
 	{
-		auto types = {SVT::DECIMAL };
+		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -65,7 +65,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& f
 	}
 	else if(functionName == "fe3d:lighting_set_directional_position")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -78,7 +78,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& f
 	}
 	else if(functionName == "fe3d:lighting_set_directional_color")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -89,7 +89,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& f
 	}
 	else if(functionName == "fe3d:lighting_set_directional_intensity")
 	{
-		auto types = {SVT::DECIMAL };
+		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -100,7 +100,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& f
 	}
 	else if(functionName == "fe3d:lighting_set_directional_billboard_size")
 	{
-		auto types = {SVT::DECIMAL };
+		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

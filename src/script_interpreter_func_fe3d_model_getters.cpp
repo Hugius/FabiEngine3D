@@ -10,7 +10,7 @@ static const vector<string> extractModelPartIDs(FabiEngine3D& fe3d, const string
 	}
 	else
 	{
-		return {partID };
+		return {partID};
 	}
 }
 
@@ -19,7 +19,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	// Determine type of function
 	if(functionName == "fe3d:model_is_existing")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -38,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_find_ids")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -85,7 +85,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_is_visible")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -100,7 +100,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_get_position_x")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -145,7 +145,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_get_rotation_x")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -190,7 +190,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_get_rotation_origin_x")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -235,7 +235,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_get_size_x")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -280,7 +280,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_get_min_height")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -295,7 +295,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_get_max_height")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -310,7 +310,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_is_animation_started")
 	{
-		auto types = {SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -325,7 +325,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_is_animation_playing")
 	{
-		auto types = {SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -340,7 +340,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_is_animation_paused")
 	{
-		auto types = {SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -355,7 +355,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_is_animation_fading")
 	{
-		auto types = {SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -370,7 +370,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_get_animation_speed")
 	{
-		auto types = {SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -393,7 +393,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_is_animation_autopaused")
 	{
-		auto types = {SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -416,7 +416,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_get_animation_frame_index")
 	{
-		auto types = {SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -439,7 +439,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_get_lightness")
 	{
-		auto types = {SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -461,7 +461,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_get_color_r")
 	{
-		auto types = {SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -527,7 +527,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_get_transparency")
 	{
-		auto types = {SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -549,7 +549,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_get_emission_intensity")
 	{
-		auto types = {SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

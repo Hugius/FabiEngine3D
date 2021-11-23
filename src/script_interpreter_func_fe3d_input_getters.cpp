@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetterFunction(const string& func
 	// Determine type of function
 	if(functionName == "fe3d:input_is_key_down")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -21,7 +21,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:input_is_key_pressed")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -35,7 +35,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:input_is_mouse_down")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -49,7 +49,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:input_is_mouse_pressed")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

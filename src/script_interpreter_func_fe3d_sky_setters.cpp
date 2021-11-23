@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetterFunction(const string& functi
 	// Determine function type
 	if(functionName == "fe3d:sky_mix")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -22,7 +22,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetterFunction(const string& functi
 	}
 	else if(functionName == "fe3d:sky_set_mix_value")
 	{
-		auto types = {SVT::DECIMAL };
+		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -37,7 +37,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetterFunction(const string& functi
 	}
 	else if(functionName == "fe3d:sky_set_lightness")
 	{
-		auto types = {SVT::DECIMAL };
+		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetterFunction(const string& functi
 	}
 	else if(functionName == "fe3d:sky_set_color")
 	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

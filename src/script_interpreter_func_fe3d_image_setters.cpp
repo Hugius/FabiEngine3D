@@ -9,7 +9,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	// Determine type of function
 	if(functionName == "fe3d:image_place")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -61,7 +61,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:image_delete")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -76,7 +76,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:image_set_visible")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -91,7 +91,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:image_set_position")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -107,7 +107,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:image_move")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -123,7 +123,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:image_move_to")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -140,7 +140,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:image_set_rotation")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -155,7 +155,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:image_rotate")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -170,7 +170,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:image_rotate_to")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -185,7 +185,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:image_set_size")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -201,7 +201,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:image_scale")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -217,7 +217,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:image_scale_to")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -234,7 +234,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:image_set_color")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -250,7 +250,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:image_set_transparency")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -265,7 +265,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:image_start_animation")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER, SVT::INTEGER, SVT::INTEGER };
+		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER, SVT::INTEGER, SVT::INTEGER};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -283,7 +283,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:image_pause_animation")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -298,7 +298,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:image_resume_animation")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -313,7 +313,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:image_stop_animation")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -328,7 +328,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:image_set_mirrored_horizontally")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -343,7 +343,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:image_set_mirrored_vertically")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

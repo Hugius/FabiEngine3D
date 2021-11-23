@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 	// Determine type of function
 	if(functionName == "fe3d:reflection_place")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -39,7 +39,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 	}
 	else if(functionName == "fe3d:reflection_delete")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -54,7 +54,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 	}
 	else if(functionName == "fe3d:reflection_set_visible")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -69,7 +69,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 	}
 	else if(functionName == "fe3d:reflection_set_position")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -85,7 +85,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 	}
 	else if(functionName == "fe3d:reflection_move")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -101,7 +101,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 	}
 	else if(functionName == "fe3d:reflection_move_to")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -117,7 +117,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 	}
 	else if(functionName == "fe3d:reflection_capture")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

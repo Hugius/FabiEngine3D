@@ -10,7 +10,7 @@ static const vector<string> extractModelPartIDs(FabiEngine3D& fe3d, const string
 	}
 	else
 	{
-		return {partID };
+		return {partID};
 	}
 }
 
@@ -19,7 +19,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	// Determine type of function
 	if(functionName == "fe3d:model_place")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -49,7 +49,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_delete")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -64,7 +64,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_set_visible")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -79,7 +79,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_set_position")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -95,7 +95,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_set_rotation")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -111,7 +111,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_set_rotation_origin")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -127,7 +127,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_set_size")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -143,7 +143,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_move")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -159,7 +159,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_rotate")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -175,7 +175,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_scale")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -191,7 +191,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_move_to")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -207,7 +207,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_rotate_to")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -223,7 +223,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_scale_to")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -239,7 +239,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_set_min_height")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -254,7 +254,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_set_max_height")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -269,7 +269,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_set_aabb_raycast_responsive")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -300,7 +300,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_set_aabb_collision_responsive")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -331,7 +331,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_start_animation")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER };
+		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -346,7 +346,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_pause_animation")
 	{
-		auto types = {SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -361,7 +361,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_resume_animation")
 	{
-		auto types = {SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -376,7 +376,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_fade_animation")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER };
+		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -391,7 +391,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_stop_animation")
 	{
-		auto types = {SVT::STRING, SVT::STRING };
+		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -406,7 +406,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_set_animation_speed")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -429,7 +429,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_set_animation_autopaused")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN };
+		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -452,7 +452,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_set_color")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -474,7 +474,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_set_lightness")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -495,7 +495,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_set_transparency")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -516,7 +516,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:model_set_emission_intensity")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

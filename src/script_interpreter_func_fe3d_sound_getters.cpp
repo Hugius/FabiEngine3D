@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 	// Determine type of function
 	if(functionName == "fe3d:sound_is_existing")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -26,7 +26,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_find_ids")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_is_started")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -88,7 +88,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_is_playing")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -103,7 +103,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_is_paused")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -118,7 +118,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_get_volume")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -133,7 +133,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_get_position_x")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -199,7 +199,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_get_max_volume")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -222,7 +222,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 	}
 	else if(functionName == "fe3d:sound_get_max_distance")
 	{
-		auto types = {SVT::STRING };
+		auto types = {SVT::STRING};
 
 		// Validate arguments
 		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

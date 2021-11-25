@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dWorldGetterFunction(const string& func
 	if(functionName == "fe3d:world_get_current_id")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _worldEditor.getLoadedWorldID();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
@@ -21,7 +21,7 @@ const bool ScriptInterpreter::_executeFe3dWorldGetterFunction(const string& func
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();

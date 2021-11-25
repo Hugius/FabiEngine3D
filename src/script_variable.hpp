@@ -10,8 +10,8 @@ public:
 	ScriptVariable(FabiEngine3D& fe3d, ScriptVariableScope scope, ScriptVariableType type, const string& ID, bool constant, vector<ScriptValue> values);
 
 	// VOID
-	void changeValues(vector<ScriptValue> values);
-	void changeValue(ScriptValue value, unsigned int index = 0);
+	void setValues(vector<ScriptValue> values);
+	void setValue(ScriptValue value, unsigned int index = 0);
 	void addValue(ScriptValue value);
 	void removeValue(unsigned int index);
 

@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 	if(functionName == "fe3d:graphics_enable_fog")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.gfx_enableFog();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -19,7 +19,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 	else if(functionName == "fe3d:graphics_disable_fog")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.gfx_disableFog(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -30,7 +30,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.gfx_setFogColor(fvec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -41,7 +41,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.gfx_setFogThickness(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.gfx_setFogMinDistance(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -63,7 +63,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.gfx_setFogMaxDistance(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -72,7 +72,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 	else if(functionName == "fe3d:graphics_enable_dof")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.gfx_enableDOF();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -81,7 +81,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 	else if(functionName == "fe3d:graphics_disable_dof")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.gfx_disableDOF(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -92,7 +92,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.gfx_setDofMaxDistance(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -103,7 +103,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.gfx_setDofBlurDistance(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -114,7 +114,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 		auto types = {SVT::BOOLEAN};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.gfx_setDofDynamic(arguments[0].getBoolean());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -123,7 +123,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 	else if(functionName == "fe3d:graphics_enable_shadows")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.gfx_enableShadows();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -132,7 +132,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 	else if(functionName == "fe3d:graphics_disable_shadows")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.gfx_disableShadows(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -143,7 +143,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.gfx_setShadowEyePosition(fvec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -152,7 +152,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 	else if(functionName == "fe3d:graphics_enable_motion_blur")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.gfx_enableMotionBlur();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -161,7 +161,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 	else if(functionName == "fe3d:graphics_disable_motion_blur")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.gfx_disableMotionBlur(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -172,7 +172,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.gfx_setMotionBlurStrength(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -181,7 +181,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 	else if(functionName == "fe3d:graphics_enable_lens_flare")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.gfx_enableLensFlare();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -190,7 +190,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 	else if(functionName == "fe3d:graphics_disable_lens_flare")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.gfx_disableLensFlare(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -201,7 +201,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
@@ -221,7 +221,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.gfx_setLensFlareIntensity(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -232,7 +232,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& f
 		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.gfx_setLensFlareSensitivity(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));

@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
 			if(arguments[0].getString().front() == '@')
@@ -29,7 +29,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
 			if(arguments[0].getString().front() == '@')
@@ -56,7 +56,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 	else if(functionName == "fe3d:reflection_get_all_ids")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.reflection_getAllIDs();
 
@@ -76,7 +76,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
@@ -91,7 +91,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
@@ -106,7 +106,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
@@ -121,7 +121,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string&
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))

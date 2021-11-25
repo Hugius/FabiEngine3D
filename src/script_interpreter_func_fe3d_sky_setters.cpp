@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetterFunction(const string& functi
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate sky existence
 			if(_validateFe3dSky())
@@ -25,7 +25,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetterFunction(const string& functi
 		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate sky existence
 			if(_validateFe3dSky())
@@ -40,7 +40,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetterFunction(const string& functi
 		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate sky existence
 			if(_validateFe3dSky())
@@ -55,7 +55,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetterFunction(const string& functi
 		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate sky existence
 			if(_validateFe3dSky())
@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dSkySetterFunction(const string& functi
 		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate sky existence
 			if(_validateFe3dSky())

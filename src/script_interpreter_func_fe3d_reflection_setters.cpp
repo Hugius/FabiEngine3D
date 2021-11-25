@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Temporary values
 			auto ID = arguments[0].getString();
@@ -42,7 +42,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
@@ -57,7 +57,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
@@ -72,7 +72,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
@@ -88,7 +88,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
@@ -104,7 +104,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
@@ -120,7 +120,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string&
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))

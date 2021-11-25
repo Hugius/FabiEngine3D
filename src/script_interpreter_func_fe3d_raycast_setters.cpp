@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastSetterFunction(const string& fu
 		auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.raycast_enableTerrainPointing(arguments[0].getDecimal(), arguments[1].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -19,7 +19,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastSetterFunction(const string& fu
 	else if(functionName == "fe3d:raycast_disable_terrain_pointing")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.raycast_disableTerrainPointing();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));

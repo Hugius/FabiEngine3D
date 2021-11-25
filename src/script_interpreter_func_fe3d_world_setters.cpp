@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_worldEditor.clearCurrentWorld();
 			_worldEditor.loadEditorWorldFromFile(arguments[0].getString());
@@ -22,7 +22,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 	else if(functionName == "fe3d:world_clear")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_worldEditor.clearCurrentWorld();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -33,7 +33,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_worldEditor.createCustomWorld(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -42,7 +42,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 	else if(functionName == "fe3d:world_add_custom_sky")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_worldEditor.addSkyToCustomWorld();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -51,7 +51,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 	else if(functionName == "fe3d:world_add_custom_terrain")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_worldEditor.addTerrainToCustomWorld();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -60,7 +60,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 	else if(functionName == "fe3d:world_add_custom_water")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_worldEditor.addWaterToCustomWorld();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -71,7 +71,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_worldEditor.addModelToCustomWorld(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -82,7 +82,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_worldEditor.addBillboardToCustomWorld(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -93,7 +93,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_worldEditor.addAabbToCustomWorld(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -104,7 +104,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_worldEditor.addSoundToCustomWorld(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -115,7 +115,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_worldEditor.addPointlightToCustomWorld(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -126,7 +126,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_worldEditor.addReflectionToCustomWorld(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -135,7 +135,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 	else if(functionName == "fe3d:world_add_custom_lighting")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_worldEditor.addLightingToCustomWorld();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -144,7 +144,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 	else if(functionName == "fe3d:world_add_custom_graphics")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_worldEditor.addGraphicsToCustomWorld();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -153,7 +153,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 	else if(functionName == "fe3d:world_save_custom")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_worldEditor.saveCustomWorldToFile();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -164,7 +164,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_worldEditor.clearCurrentWorld();
 			_worldEditor.loadCustomWorldFromFile(arguments[0].getString());
@@ -176,7 +176,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetterFunction(const string& func
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();

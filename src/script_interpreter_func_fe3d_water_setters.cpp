@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetterFunction(const string& func
 		auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate water existence
 			if(_validateFe3dWater())
@@ -26,7 +26,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetterFunction(const string& func
 		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate water existence
 			if(_validateFe3dWater())
@@ -44,7 +44,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetterFunction(const string& func
 		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate water existence
 			if(_validateFe3dWater())

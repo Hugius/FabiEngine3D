@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
 			if(arguments[0].getString().front() == '@')
@@ -41,7 +41,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Temporary values
 			string newID = arguments[0].getString();
@@ -84,7 +84,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dSound(arguments[0].getString(), false))
@@ -97,7 +97,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 	else if(functionName == "fe3d:sound_enable")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.misc_enableSounds();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -106,7 +106,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 	else if(functionName == "fe3d:sound_disable")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.misc_disableSounds();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -117,7 +117,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dSound(arguments[0].getString(), false))
@@ -132,7 +132,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dSound(arguments[0].getString(), false))
@@ -147,7 +147,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dSound(arguments[0].getString(), false))
@@ -160,7 +160,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 	else if(functionName == "fe3d:sound_pause_all")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.sound_pauseAll();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -171,7 +171,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dSound(arguments[0].getString(), false))
@@ -184,7 +184,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 	else if(functionName == "fe3d:sound_resume_all")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.sound_resumeAll();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -195,7 +195,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		auto types = {SVT::STRING, SVT::INTEGER};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dSound(arguments[0].getString(), false))
@@ -208,7 +208,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 	else if(functionName == "fe3d:sound_stop_all")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.sound_stopAll();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -219,7 +219,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dSound(arguments[0].getString(), false))
@@ -242,7 +242,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dSound(arguments[0].getString(), false))
@@ -267,7 +267,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dSound(arguments[0].getString(), false))
@@ -290,7 +290,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& func
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dSound(arguments[0].getString(), false))

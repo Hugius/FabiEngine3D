@@ -8,7 +8,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	if(functionName == "fe3d:raycast_get_cursor_ray_position_x")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate terrain existence
 			if(_validateFe3dTerrain())
@@ -21,7 +21,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	else if(functionName == "fe3d:raycast_get_cursor_ray_position_y")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate terrain existence
 			if(_validateFe3dTerrain())
@@ -34,7 +34,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	else if(functionName == "fe3d:raycast_get_cursor_ray_position_z")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate terrain existence
 			if(_validateFe3dTerrain())
@@ -47,7 +47,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	else if(functionName == "fe3d:raycast_get_cursor_ray_direction_x")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate terrain existence
 			if(_validateFe3dTerrain())
@@ -60,7 +60,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	else if(functionName == "fe3d:raycast_get_cursor_ray_direction_y")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate terrain existence
 			if(_validateFe3dTerrain())
@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	else if(functionName == "fe3d:raycast_get_cursor_ray_direction_z")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate terrain existence
 			if(_validateFe3dTerrain())
@@ -86,7 +86,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	else if(functionName == "fe3d:raycast_get_point_on_terrain_x")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate terrain existence
 			if(_validateFe3dTerrain())
@@ -99,7 +99,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	else if(functionName == "fe3d:raycast_get_point_on_terrain_y")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate terrain existence
 			if(_validateFe3dTerrain())
@@ -112,7 +112,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	else if(functionName == "fe3d:raycast_get_point_on_terrain_z")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate terrain existence
 			if(_validateFe3dTerrain())
@@ -125,7 +125,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	else if(functionName == "fe3d:raycast_is_point_on_terrain_valid")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate terrain existence
 			if(_validateFe3dTerrain())
@@ -140,7 +140,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Find aabbEntity ID
 			string result = "";
@@ -183,7 +183,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Find aabbEntity ID
 			float result = -1.0f;
@@ -226,7 +226,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	else if(functionName == "fe3d:raycast_into_models")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Find aabbEntity ID
 			string result = "";
@@ -250,7 +250,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	else if(functionName == "fe3d:raycast_into_models_distance")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Find aabbEntity ID
 			float result = -1.0f;
@@ -276,7 +276,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Find aabbEntity ID
 			string result = "";
@@ -300,7 +300,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	else if(functionName == "fe3d:raycast_into_billboards")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Find aabbEntity ID
 			string result = "";
@@ -326,7 +326,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Find aabbEntity ID
 			float result = -1.0f;
@@ -350,7 +350,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	else if(functionName == "fe3d:raycast_into_billboards_distance")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Find aabbEntity ID
 			float result = -1.0f;

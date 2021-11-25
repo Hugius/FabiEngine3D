@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
 			if(arguments[0].getString().front() == '@')
@@ -49,7 +49,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -64,7 +64,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -79,7 +79,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -95,7 +95,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -111,7 +111,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -126,7 +126,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -142,7 +142,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -158,7 +158,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -173,7 +173,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -189,7 +189,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -205,7 +205,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -221,7 +221,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -237,7 +237,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -252,7 +252,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -267,7 +267,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -282,7 +282,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -297,7 +297,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -328,7 +328,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -359,7 +359,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -374,7 +374,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -389,7 +389,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::INTEGER};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -404,7 +404,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -419,7 +419,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -434,7 +434,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
@@ -449,7 +449,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))

@@ -8,7 +8,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& func
 	if(functionName == "fe3d:water_get_speed_x")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate water existence
 			if(_validateFe3dWater())
@@ -21,7 +21,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& func
 	else if(functionName == "fe3d:water_get_speed_z")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate water existence
 			if(_validateFe3dWater())
@@ -34,7 +34,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& func
 	else if(functionName == "fe3d:water_get_height")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate water existence
 			if(_validateFe3dWater())
@@ -47,7 +47,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& func
 	else if(functionName == "fe3d:water_get_color_r")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate water existence
 			if(_validateFe3dWater())
@@ -60,7 +60,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& func
 	else if(functionName == "fe3d:water_get_color_g")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate water existence
 			if(_validateFe3dWater())
@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& func
 	else if(functionName == "fe3d:water_get_color_b")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate water existence
 			if(_validateFe3dWater())
@@ -86,7 +86,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& func
 	else if(functionName == "fe3d:water_get_transparency")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate water existence
 			if(_validateFe3dWater())

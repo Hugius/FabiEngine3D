@@ -44,6 +44,7 @@ private:
 	void _processListPull(const string& scriptLine);
 	void _throwScriptError(const string& message);
 	void _checkEngineWarnings(unsigned int lastLoggerMessageCount);
+	void _performArithmeticOperation(ScriptValue& leftValue, const string& operatorString, ScriptValue& rightValue);
 
 	// STRING
 	const string _limitIntegerString(const string& valueString) const;
@@ -59,7 +60,7 @@ private:
 	const int _extractListIndexFromString(const string& valueString, bool& isAccessingList);
 
 	// UNSIGNED INT
-	const unsigned int _countFrontSpaces(const string& scriptLineText);
+	const unsigned int _countLeadingSpaces(const string& scriptLineText);
 
 	// BOOL
 	const bool _isListValue(const string& valueString) const;
@@ -73,8 +74,8 @@ private:
 	const bool _validateCondition(ScriptValue& firstValue, const string& comparisonOperator, ScriptValue& secondValue);
 	const bool _compareValues(ScriptValue& firstValue, const string& comparisonOperator, ScriptValue& secondValue) const;
 	const bool _validateListIndex(const ScriptVariable& list, unsigned int index);
-	const bool _validateListValueCount(const vector<ScriptValue>& values, unsigned int count);
-	const bool _validateListValueTypes(const vector<ScriptValue>& values, const vector<ScriptValueType>& types);
+	const bool _validateArgumentCount(const vector<ScriptValue>& values, unsigned int count);
+	const bool _validateArgumentTypes(const vector<ScriptValue>& values, const vector<ScriptValueType>& types);
 	const bool _executeFe3dInputGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dCameraSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dCameraGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);

@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dMusicSetterFunction(const string& func
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
@@ -29,7 +29,7 @@ const bool ScriptInterpreter::_executeFe3dMusicSetterFunction(const string& func
 	else if(functionName == "fe3d:music_clear_playlist")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.music_clearPlaylist();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -38,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dMusicSetterFunction(const string& func
 	else if(functionName == "fe3d:music_enable")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.misc_enableMusic();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -47,7 +47,7 @@ const bool ScriptInterpreter::_executeFe3dMusicSetterFunction(const string& func
 	else if(functionName == "fe3d:music_disable")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.misc_disableMusic();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -58,7 +58,7 @@ const bool ScriptInterpreter::_executeFe3dMusicSetterFunction(const string& func
 		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.music_setVolume(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -67,7 +67,7 @@ const bool ScriptInterpreter::_executeFe3dMusicSetterFunction(const string& func
 	else if(functionName == "fe3d:music_pause")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.music_pause();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -76,7 +76,7 @@ const bool ScriptInterpreter::_executeFe3dMusicSetterFunction(const string& func
 	else if(functionName == "fe3d:music_resume")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.music_resume();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));

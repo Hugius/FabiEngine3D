@@ -22,13 +22,14 @@ const bool ScriptInterpreter::_isListValue(const string& valueString) const
 
 const bool ScriptInterpreter::_isStringValue(const string& valueString) const
 {
-	// Check if value has characters at all
+	// Check if value is empty
 	if(valueString.empty())
 	{
 		return false;
 	}
 
-	return valueString.size() >= 2 && (valueString.front() == '"' && valueString.back() == '"');
+	// Check if value is a valid string
+	return (valueString.size() >= 2) && (valueString.front() == '"') && (valueString.back() == '"');
 }
 
 const bool ScriptInterpreter::_isDecimalValue(const string& valueString) const
@@ -95,27 +96,27 @@ const bool ScriptInterpreter::_isIntegerValue(const string& valueString) const
 
 const bool ScriptInterpreter::_isBooleanValue(const string& valueString) const
 {
-	return (valueString == "<true>" || valueString == "<false>");
+	return (valueString == "<true>") || (valueString == "<false>");
 }
 
 const int ScriptInterpreter::_extractListIndexFromString(const string& valueString, bool& isAccessingList)
 {
 	// Check if brackets are in string
-	auto openingBracketFound = find(valueString.begin(), valueString.end(), '[');
+	auto isOpeningBracketFound = find(valueString.begin(), valueString.end(), '[');
 	auto closingBracketFound = find(valueString.begin(), valueString.end(), ']');
-	if(openingBracketFound == valueString.end() || closingBracketFound == valueString.end())
+	if(isOpeningBracketFound == valueString.end() || closingBracketFound == valueString.end())
 	{
 		return -1;
 	}
 
 	// Check if brackets are in the right place
-	auto openingBracketIndex = static_cast<unsigned int>(distance(valueString.begin(), openingBracketFound));
+	auto openingBracketIndex = static_cast<unsigned int>(distance(valueString.begin(), isOpeningBracketFound));
 	if(openingBracketIndex == 0)
 	{
 		return -1;
 	}
 
-	// Check if index is a number
+	// Validate list index
 	string indexString = valueString.substr(static_cast<size_t>(openingBracketIndex + 1));
 	indexString.pop_back();
 	if(_isIntegerValue(indexString))
@@ -128,21 +129,20 @@ const int ScriptInterpreter::_extractListIndexFromString(const string& valueStri
 		// Retrieve variable
 		auto& variable = (_isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString));
 
-		// Check if variable is an integer
+		// Check if variable is not an integer
 		if(variable.getType() == ScriptVariableType::MULTIPLE || variable.getValue().getType() != ScriptValueType::INTEGER)
 		{
 			_throwScriptError("LIST index must be of type INT!");
 			return -1;
 		}
-		else
-		{
-			isAccessingList = true;
-			return variable.getValue().getInteger();
-		}
+
+		// Return
+		isAccessingList = true;
+		return variable.getValue().getInteger();
 	}
 	else
 	{
-		_throwScriptError("invalid LIST indexing syntax!");
+		_throwScriptError("invalid LIST index syntax!");
 		return -1;
 	}
 }
@@ -174,7 +174,7 @@ const string ScriptInterpreter::_limitIntegerString(const string& valueString) c
 	// Check if negative value
 	if(valueString.front() == '-')
 	{
-		// Cannot be less than -999 999 999
+		// Cannot be less than -999999999
 		if(valueString.size() >= 11)
 		{
 			return "-1000000000";
@@ -182,7 +182,7 @@ const string ScriptInterpreter::_limitIntegerString(const string& valueString) c
 	}
 	else // Positive value
 	{
-		// Cannot be more than 999 999 999
+		// Cannot be more than 999999999
 		if(valueString.size() >= 10)
 		{
 			return "1000000000";
@@ -201,7 +201,7 @@ const string ScriptInterpreter::_limitDecimalString(const string& valueString) c
 	// Check if negative value
 	if(valueString.front() == '-')
 	{
-		// Cannot be less than -999 999 999
+		// Cannot be less than -999999999
 		if(intString.size() >= 11)
 		{
 			return "-1000000000.0";
@@ -209,7 +209,7 @@ const string ScriptInterpreter::_limitDecimalString(const string& valueString) c
 	}
 	else // Positive value
 	{
-		// Cannot be more than 999 999 999
+		// Cannot be more than 999999999
 		if(intString.size() >= 10)
 		{
 			return "1000000000.0";

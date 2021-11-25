@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetterFunction(const string& 
 		auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.collision_enableTerrainResponse(arguments[0].getDecimal(), arguments[1].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -19,7 +19,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetterFunction(const string& 
 	else if(functionName == "fe3d:collision_disable_camera_terrain_response")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.collision_disableTerrainResponse();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -31,7 +31,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetterFunction(const string& 
 		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.collision_setCameraBox(
 				arguments[0].getDecimal(), arguments[1].getDecimal(),
@@ -45,7 +45,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetterFunction(const string& 
 		auto types = {SVT::BOOLEAN, SVT::BOOLEAN, SVT::BOOLEAN};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.collision_enableCameraResponse(arguments[0].getBoolean(), arguments[1].getBoolean(), arguments[2].getBoolean());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -54,7 +54,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetterFunction(const string& 
 	else if(functionName == "fe3d:collision_disable_camera_response")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.collision_disableCameraResponse();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));

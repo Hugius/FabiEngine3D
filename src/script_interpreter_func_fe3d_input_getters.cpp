@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetterFunction(const string& func
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			if(_validateKeyInputString(arguments[0].getString()))
 			{
@@ -24,7 +24,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetterFunction(const string& func
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			if(_validateKeyInputString(arguments[0].getString()))
 			{
@@ -38,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetterFunction(const string& func
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			if(_validateMouseInputString(arguments[0].getString()))
 			{
@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetterFunction(const string& func
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			if(_validateMouseInputString(arguments[0].getString()))
 			{
@@ -64,7 +64,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetterFunction(const string& func
 	else if(functionName == "fe3d:input_get_mousewheel_direction")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.input_getMouseWheelY();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));

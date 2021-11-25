@@ -8,7 +8,7 @@ const bool ScriptInterpreter::_executeFe3dMusicGetterFunction(const string& func
 	if(functionName == "fe3d:music_get_volume")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.music_getVolume();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dMusicGetterFunction(const string& func
 	else if(functionName == "fe3d:music_is_started")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.music_isStarted();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -26,7 +26,7 @@ const bool ScriptInterpreter::_executeFe3dMusicGetterFunction(const string& func
 	else if(functionName == "fe3d:music_is_playing")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.music_isPlaying();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -35,7 +35,7 @@ const bool ScriptInterpreter::_executeFe3dMusicGetterFunction(const string& func
 	else if(functionName == "fe3d:music_is_paused")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.music_isPaused();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));

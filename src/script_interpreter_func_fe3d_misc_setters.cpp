@@ -15,7 +15,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 	if(functionName == "fe3d:application_pause")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Cannot execute pausing functionality when server is running
 			if(_fe3d.server_isRunning())
@@ -32,7 +32,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 	else if(functionName == "fe3d:application_resume")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Cannot execute pausing functionality when server is running
 			if(_fe3d.server_isRunning())
@@ -49,7 +49,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 	else if(functionName == "fe3d:application_stop")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			if(Config::getInst().isApplicationExported()) // Application preview
 			{
@@ -67,7 +67,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 	else if(functionName == "fe3d:print")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 1))
+		if(_validateArgumentCount(arguments, 1))
 		{
 			// Determine which type of value to print
 			if(arguments[0].getType() == SVT::STRING)
@@ -101,7 +101,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 		auto types = {SVT::BOOLEAN};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Cannot execute cursor functionality when server is running
 			if(_fe3d.server_isRunning())
@@ -118,7 +118,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 	else if(functionName == "fe3d:cursor_center")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Cannot execute cursor functionality when server is running
 			if(_fe3d.server_isRunning())
@@ -135,7 +135,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 	else if(functionName == "fe3d:timer_start")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.misc_startMillisecondTimer();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -144,7 +144,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 	else if(functionName == "fe3d:timer_stop")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.misc_stopMillisecondTimer();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -153,7 +153,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 	else if(functionName == "fe3d:wireframe_enable_rendering")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Cannot execute wireframe functionality when server is running
 			if(_fe3d.server_isRunning())
@@ -170,7 +170,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 	else if(functionName == "fe3d:wireframe_disable_rendering")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Cannot execute wireframe functionality when server is running
 			if(_fe3d.server_isRunning())
@@ -187,7 +187,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 	else if(functionName == "fe3d:aabbs_enable_rendering")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Cannot execute AABBs functionality when server is running
 			if(_fe3d.server_isRunning())
@@ -204,7 +204,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 	else if(functionName == "fe3d:aabbs_disable_rendering")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Cannot execute AABBs functionality when server is running
 			if(_fe3d.server_isRunning())
@@ -223,7 +223,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 		auto types = {SVT::INTEGER};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			auto result = _fe3d.misc_checkInterval(arguments[0].getInteger());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -232,7 +232,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 	else if(functionName == "fe3d:vsync_enable")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Cannot execute Vsync functionality when server is running
 			if(_fe3d.server_isRunning())
@@ -249,7 +249,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& funct
 	else if(functionName == "fe3d:vsync_disable")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Cannot execute Vsync functionality when server is running
 			if(_fe3d.server_isRunning())

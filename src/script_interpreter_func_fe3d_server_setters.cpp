@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetterFunction(const string& fun
 		auto types = {SVT::INTEGER};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// CoreEngine must know if application is a networking server, so server can only be started in initialization phase
 			if(!_isExecutingInitialization)
@@ -36,7 +36,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetterFunction(const string& fun
 		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.server_sendMessageTCP(arguments[0].getString(), arguments[1].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -47,7 +47,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetterFunction(const string& fun
 		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.server_sendMessageUDP(arguments[0].getString(), arguments[1].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -58,7 +58,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetterFunction(const string& fun
 		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.server_broadcastMessageTCP(arguments[0].getString(), arguments[1].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -69,7 +69,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetterFunction(const string& fun
 		auto types = {SVT::STRING, SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.server_broadcastMessageUDP(arguments[0].getString(), arguments[1].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -80,7 +80,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetterFunction(const string& fun
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.server_disconnectClient(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -89,7 +89,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetterFunction(const string& fun
 	else if(functionName == "fe3d:server_disconnect_clients")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.server_disconnectClients();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));

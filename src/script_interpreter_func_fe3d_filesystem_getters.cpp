@@ -16,7 +16,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string&
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose directory paths
 			const auto isExported = Config::getInst().isApplicationExported();
@@ -34,7 +34,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string&
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string&
 		auto types = {SVT::STRING};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();

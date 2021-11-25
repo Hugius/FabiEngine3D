@@ -3,13 +3,7 @@
 
 void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 {
-	// Temporary values
-	string nameString = "";
-	string equalSignString = "";
-	string valueString = "";
-	bool isConstant = false;
-
-	// Extract name & equal sign
+	// Extract variable name & equal sign
 	string words[2] = {"", ""};
 	unsigned int wordIndex = 0;
 	for(const auto& c : scriptLine.substr(EDIT_KEYWORD.size() + 1))
@@ -30,8 +24,8 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 			words[wordIndex] += c;
 		}
 	}
-	nameString = words[0];
-	equalSignString = words[1];
+	string nameString = words[0];
+	string equalSignString = words[1];
 
 	// Check if variable name is missing
 	if(nameString.empty())
@@ -40,30 +34,26 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		return;
 	}
 
-	// Check if equal string is present
-	if(equalSignString == "=")
-	{
-		// Check if value is present
-		if(scriptLine.size() - 1 >= scriptLine.find('=') + 2)
-		{
-			// Extract remaining text (value)
-			valueString = scriptLine.substr(scriptLine.find('=') + 2);
-		}
-		else
-		{
-			_throwScriptError("value missing!");
-			return;
-		}
-	}
-	else
+	// Check if equal string is missing
+	if(equalSignString != "=")
 	{
 		_throwScriptError("equal sign missing!");
 		return;
 	}
 
-	// Check if changing individual value from list variable
-	bool isAccessingListOne = false;
-	auto listIndexOne = _extractListIndexFromString(nameString, isAccessingListOne);
+	// Check if value is missing
+	if(scriptLine.size() < (scriptLine.find('=') + 3))
+	{
+		_throwScriptError("value missing!");
+		return;
+	}
+
+	// Extract value
+	string valueString = scriptLine.substr(scriptLine.find('=') + 2);
+
+	// Prepare list access
+	bool isAccessingLeftList = false;
+	auto leftListIndex = _extractListIndexFromString(nameString, isAccessingLeftList);
 
 	// Check if any error was thrown
 	if(_hasThrownError)
@@ -72,38 +62,38 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	}
 
 	// Remove list accessing characters
-	if(isAccessingListOne)
+	if(isAccessingLeftList)
 	{
-		auto openingBracketFound = find(nameString.begin(), nameString.end(), '[');
-		auto bracketIndex = static_cast<unsigned int>(distance(nameString.begin(), openingBracketFound));
+		auto isOpeningBracketFound = find(nameString.begin(), nameString.end(), '[');
+		auto bracketIndex = static_cast<unsigned int>(distance(nameString.begin(), isOpeningBracketFound));
 		nameString = nameString.substr(0, bracketIndex);
 	}
 
-	// Check if variable exists
+	// Check if left variable existing
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwScriptError("variable not existing!");
+		_throwScriptError("variable \"" + nameString + "\" not existing!");
 		return;
 	}
 
-	// Retrieve variable
-	auto& variableOne = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
+	// Retrieve left variable
+	auto& leftVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
-	// A constant variable should not be changed
-	if(variableOne.isConstant())
+	// Check if left variable is constant
+	if(leftVariable.isConstant())
 	{
-		_throwScriptError("variable cannot be changed: it is constant!");
+		_throwScriptError("constant variables cannot be changed!");
 		return;
 	}
 
 	// Validate list access
-	unsigned int valueIndexOne = 0;
-	if(isAccessingListOne)
+	unsigned int leftValueIndex = 0;
+	if(isAccessingLeftList)
 	{
 		// Check if list index is valid
-		if(_validateListIndex(variableOne, listIndexOne))
+		if(_validateListIndex(leftVariable, leftListIndex))
 		{
-			valueIndexOne = listIndexOne;
+			leftValueIndex = leftListIndex;
 		}
 		else // Error
 		{
@@ -112,54 +102,60 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	}
 
 	// Temporary values
-	bool isSingleVariable = (variableOne.getType() == ScriptVariableType::SINGLE || isAccessingListOne);
-	bool isStringVariable = (variableOne.getValue(valueIndexOne).getType() == ScriptValueType::STRING);
-	bool isDecimalVariable = (variableOne.getValue(valueIndexOne).getType() == ScriptValueType::DECIMAL);
-	bool isIntegerVariable = (variableOne.getValue(valueIndexOne).getType() == ScriptValueType::INTEGER);
-	bool isBooleanVariable = (variableOne.getValue(valueIndexOne).getType() == ScriptValueType::BOOLEAN);
+	bool isSingleVariable = (leftVariable.getType() == ScriptVariableType::SINGLE || isAccessingLeftList);
+	bool isStringVariable = (leftVariable.getValue(leftValueIndex).getType() == ScriptValueType::STRING);
+	bool isDecimalVariable = (leftVariable.getValue(leftValueIndex).getType() == ScriptValueType::DECIMAL);
+	bool isIntegerVariable = (leftVariable.getValue(leftValueIndex).getType() == ScriptValueType::INTEGER);
+	bool isBooleanVariable = (leftVariable.getValue(leftValueIndex).getType() == ScriptValueType::BOOLEAN);
 
 	// Determine value type
-	if(variableOne.getType() == ScriptVariableType::MULTIPLE && _isListValue(valueString)) // LIST
+	if(leftVariable.getType() == ScriptVariableType::MULTIPLE && _isListValue(valueString))
 	{
-		// Removing the "" around the string content
+		// Remove the ""
 		string listString = valueString.substr(1);
 		listString.pop_back();
 
 		// Extract the values
 		auto values = _extractValuesFromListString(listString);
-		variableOne.changeValues(values);
+		leftVariable.setValues(values);
 	}
-	else if(isSingleVariable && isStringVariable && _isStringValue(valueString)) // STRING
+	else if(isSingleVariable && isStringVariable && _isStringValue(valueString))
 	{
+		// Remove the ""
 		valueString.erase(valueString.begin());
 		valueString.pop_back();
-		variableOne.getValue(valueIndexOne).setString(valueString);
+
+		// Set value
+		leftVariable.getValue(leftValueIndex).setString(valueString);
 	}
-	else if(isSingleVariable && isDecimalVariable && _isDecimalValue(valueString)) // DECIMAL
+	else if(isSingleVariable && isDecimalVariable && _isDecimalValue(valueString))
 	{
-		variableOne.getValue(valueIndexOne).setDecimal(stof(_limitDecimalString(valueString)));
+		leftVariable.getValue(leftValueIndex).setDecimal(stof(_limitDecimalString(valueString)));
 	}
-	else if(isSingleVariable && isIntegerVariable && _isIntegerValue(valueString)) // INTEGER
+	else if(isSingleVariable && isIntegerVariable && _isIntegerValue(valueString))
 	{
-		variableOne.getValue(valueIndexOne).setInteger(stoi(_limitIntegerString(valueString)));
+		leftVariable.getValue(leftValueIndex).setInteger(stoi(_limitIntegerString(valueString)));
 	}
-	else if(isSingleVariable && isBooleanVariable && _isBooleanValue(valueString)) // BOOLEAN
+	else if(isSingleVariable && isBooleanVariable && _isBooleanValue(valueString))
 	{
-		variableOne.getValue(valueIndexOne).setBoolean(valueString == "<true>");
+		leftVariable.getValue(leftValueIndex).setBoolean(valueString == "<true>");
 	}
-	else if(isSingleVariable && isBooleanVariable && ((valueString.front() == '(') && (valueString.back() == ')'))) // BOOLEAN
+	else if(isSingleVariable && isBooleanVariable && ((valueString.front() == '(') && (valueString.back() == ')')))
 	{
+		// Remove the ()
 		valueString.erase(valueString.begin());
 		valueString.pop_back();
-		variableOne.getValue(valueIndexOne).setBoolean(_checkConditionString(valueString));
+
+		// Set value
+		leftVariable.getValue(leftValueIndex).setBoolean(_checkConditionString(valueString));
 	}
-	else if(valueString.substr(0, 5) == "fe3d:" || valueString.substr(0, 5) == "math:" || valueString.substr(0, 5) == "misc:") // FUNCTION
+	else if(valueString.substr(0, 5) == "fe3d:" || valueString.substr(0, 5) == "math:" || valueString.substr(0, 5) == "misc:")
 	{
 		// Save current logger message count
 		auto loggerMessageCount = Logger::getMessageCount();
 
 		// Call function
-		auto values =
+		auto returnValues =
 			(valueString.substr(0, 5) == "fe3d:") ? _processEngineFunctionCall(valueString) :
 			(valueString.substr(0, 5) == "math:") ? _processMathematicalFunctionCall(valueString) :
 			_processMiscellaneousFunctionCall(valueString);
@@ -171,63 +167,63 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 			return;
 		}
 
-		if(variableOne.getType() == ScriptVariableType::MULTIPLE) // Variable is a list
+		// Check if function returned any empty values
+		for(const auto& value : returnValues)
 		{
-			// Check if function returned any empty values
-			for(const auto& value : values)
+			if(value.getType() == ScriptValueType::EMPTY)
 			{
-				if(value.getType() == ScriptValueType::EMPTY)
-				{
-					_throwScriptError("function cannot return empty values!");
-					return;
-				}
+				_throwScriptError("function returned empty value!");
+				return;
 			}
-
-			// Change list values
-			variableOne.changeValues(values);
 		}
-		else if(values.empty()) // Function returned no values
+
+		// Process return values
+		if(leftVariable.getType() == ScriptVariableType::MULTIPLE)
 		{
-			_throwScriptError("function did not return any values!");
+			leftVariable.setValues(returnValues);
+		}
+		else if(returnValues.empty())
+		{
+			_throwScriptError("function returned no values!");
 			return;
 		}
-		else if(values.size() > 1) // Function returned too many values
+		else if(returnValues.size() > 1)
 		{
 			_throwScriptError("function returned too many values!");
 			return;
 		}
-		else if(values[0].getType() == ScriptValueType::EMPTY) // Function returned an empty value
+		else if(returnValues[0].getType() == ScriptValueType::EMPTY)
 		{
 			_throwScriptError("function must return a value!");
 			return;
 		}
-		else if(isSingleVariable && isStringVariable && (values[0].getType() == ScriptValueType::STRING)) // STRING
+		else if(isSingleVariable && isStringVariable && (returnValues[0].getType() == ScriptValueType::STRING))
 		{
-			variableOne.getValue(valueIndexOne).setString(values[0].getString());
+			leftVariable.getValue(leftValueIndex).setString(returnValues[0].getString());
 		}
-		else if(isSingleVariable && isDecimalVariable && (values[0].getType() == ScriptValueType::DECIMAL)) // DECIMAL
+		else if(isSingleVariable && isDecimalVariable && (returnValues[0].getType() == ScriptValueType::DECIMAL))
 		{
-			variableOne.getValue(valueIndexOne).setDecimal(values[0].getDecimal());
+			leftVariable.getValue(leftValueIndex).setDecimal(returnValues[0].getDecimal());
 		}
-		else if(isSingleVariable && isIntegerVariable && (values[0].getType() == ScriptValueType::INTEGER)) // INTEGER
+		else if(isSingleVariable && isIntegerVariable && (returnValues[0].getType() == ScriptValueType::INTEGER))
 		{
-			variableOne.getValue(valueIndexOne).setInteger(values[0].getInteger());
+			leftVariable.getValue(leftValueIndex).setInteger(returnValues[0].getInteger());
 		}
-		else if(isSingleVariable && isBooleanVariable && (values[0].getType() == ScriptValueType::BOOLEAN)) // BOOLEAN
+		else if(isSingleVariable && isBooleanVariable && (returnValues[0].getType() == ScriptValueType::BOOLEAN))
 		{
-			variableOne.getValue(valueIndexOne).setBoolean(values[0].getBoolean());
+			leftVariable.getValue(leftValueIndex).setBoolean(returnValues[0].getBoolean());
 		}
 		else
 		{
-			_throwScriptError("function type does not match the variable type!");
+			_throwScriptError("function returned incorrect value type!");
 			return;
 		}
 	}
 	else
 	{
-		// Check if accessing individual value from list variable
-		bool isAccessingListTwo = false;
-		auto listIndexTwo = _extractListIndexFromString(valueString, isAccessingListTwo);
+		// Prepare list access
+		bool isAccessingRightList = false;
+		auto rightListIndex = _extractListIndexFromString(valueString, isAccessingRightList);
 
 		// Check if any error was thrown
 		if(_hasThrownError)
@@ -236,47 +232,57 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		}
 
 		// Remove list accessing characters
-		if(isAccessingListTwo)
+		if(isAccessingRightList)
 		{
-			auto openingBracketFound = find(valueString.begin(), valueString.end(), '[');
-			auto bracketIndex = static_cast<unsigned int>(distance(valueString.begin(), openingBracketFound));
+			auto isOpeningBracketFound = find(valueString.begin(), valueString.end(), '[');
+			auto bracketIndex = static_cast<unsigned int>(distance(valueString.begin(), isOpeningBracketFound));
 			valueString = valueString.substr(0, bracketIndex);
 		}
 
-		// Check if using another variable as value
+		// Check if right variable is not existing
 		if(!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))
 		{
-			_throwScriptError("invalid value!");
+			_throwScriptError("variable \"" + valueString + "\" not existing!");
 			return;
 		}
 
 		// Retrieve other value
-		auto variableTwo = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
+		const auto& rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
 		// Validate list access
-		unsigned int valueIndexTwo = 0;
-		if(isAccessingListTwo)
+		unsigned int rightValueIndex = 0;
+		if(isAccessingRightList)
 		{
-			// Check if list index is valid
-			if(_validateListIndex(variableTwo, listIndexTwo))
-			{
-				valueIndexTwo = listIndexTwo;
-			}
-			else // Error
+			// Check if list index is invalid
+			if(!_validateListIndex(rightVariable, rightListIndex))
 			{
 				return;
 			}
+
+			// Copy list index
+			rightValueIndex = rightListIndex;
 		}
 
-		// Check if the value types match
-		bool isSingleVariable = (variableTwo.getType() == ScriptVariableType::SINGLE || isAccessingListTwo);
-		if(isSingleVariable && (variableOne.getValue(valueIndexOne).getType() == variableTwo.getValue(valueIndexTwo).getType()))
+		// Determine right variable type
+		if((leftVariable.getType() == ScriptVariableType::MULTIPLE) && (rightVariable.getType() == ScriptVariableType::MULTIPLE))
 		{
-			variableOne.changeValue(variableTwo.getValue(valueIndexTwo), valueIndexOne);
+			// Extract values
+			vector<ScriptValue> values = {};
+			for(unsigned int i = 0; i < rightVariable.getValueCount(); i++)
+			{
+				values.push_back(rightVariable.getValue(i));
+			}
+
+			// Set values
+			leftVariable.setValues(values);
+		}
+		else if(leftVariable.getValue(leftValueIndex).getType() == rightVariable.getValue(rightValueIndex).getType())
+		{
+			leftVariable.setValue(rightVariable.getValue(rightValueIndex), leftValueIndex);
 		}
 		else
 		{
-			_throwScriptError("variable types do not match!");
+			_throwScriptError("value types not matching!");
 			return;
 		}
 	}

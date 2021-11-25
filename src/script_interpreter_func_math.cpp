@@ -41,7 +41,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 					auto types = {SVT::DECIMAL};
 
 					// Validate arguments
-					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 					{
 						float angle = Math::convertToRadians(arguments[0].getDecimal());
 						returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, tan(angle)));
@@ -52,7 +52,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 					auto types = {SVT::DECIMAL};
 
 					// Validate arguments
-					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 					{
 						float angle = Math::convertToRadians(arguments[0].getDecimal());
 						returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, sin(angle)));
@@ -63,7 +63,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 					auto types = {SVT::DECIMAL};
 
 					// Validate arguments
-					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 					{
 						float angle = Math::convertToRadians(arguments[0].getDecimal());
 						returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, cos(angle)));
@@ -74,7 +74,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 					auto types = {SVT::DECIMAL};
 
 					// Validate arguments
-					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 					{
 						float angle = atan(arguments[0].getDecimal());
 						float result = Math::convertToDegrees(angle);
@@ -86,7 +86,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 					auto types = {SVT::DECIMAL};
 
 					// Validate arguments
-					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 					{
 						float angle = asin(arguments[0].getDecimal());
 						float result = Math::convertToDegrees(angle);
@@ -98,7 +98,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 					auto types = {SVT::DECIMAL};
 
 					// Validate arguments
-					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 					{
 						float angle = acos(arguments[0].getDecimal());
 						float result = Math::convertToDegrees(angle);
@@ -110,7 +110,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 					auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
 					// Validate arguments
-					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 					{
 						float angle = atan2(arguments[0].getDecimal(), arguments[1].getDecimal());
 						float result = Math::convertToDegrees(angle);
@@ -120,7 +120,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 				else if(functionName == "math:pow")
 				{
 					// Validate arguments
-					if(_validateListValueCount(arguments, 2))
+					if(_validateArgumentCount(arguments, 2))
 					{
 						if(arguments[0].getType() == SVT::INTEGER && arguments[1].getType() == SVT::INTEGER)
 						{
@@ -141,7 +141,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 				else if(functionName == "math:min")
 				{
 					// Validate arguments
-					if(_validateListValueCount(arguments, 2))
+					if(_validateArgumentCount(arguments, 2))
 					{
 						if(arguments[0].getType() == SVT::INTEGER && arguments[1].getType() == SVT::INTEGER)
 						{
@@ -162,7 +162,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 				else if(functionName == "math:max")
 				{
 					// Validate arguments
-					if(_validateListValueCount(arguments, 2))
+					if(_validateArgumentCount(arguments, 2))
 					{
 						if(arguments[0].getType() == SVT::INTEGER && arguments[1].getType() == SVT::INTEGER)
 						{
@@ -185,7 +185,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 					auto types = {SVT::DECIMAL};
 
 					// Validate arguments
-					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 					{
 						returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, round(arguments[0].getDecimal())));
 					}
@@ -195,7 +195,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 					auto types = {SVT::DECIMAL};
 
 					// Validate arguments
-					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 					{
 						returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, floor(arguments[0].getDecimal())));
 					}
@@ -205,7 +205,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 					auto types = {SVT::DECIMAL};
 
 					// Validate arguments
-					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 					{
 						returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, ceil(arguments[0].getDecimal())));
 					}
@@ -213,7 +213,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 				else if(functionName == "math:clamp")
 				{
 					// Validate arguments
-					if(_validateListValueCount(arguments, 3))
+					if(_validateArgumentCount(arguments, 3))
 					{
 						if(arguments[0].getType() == SVT::INTEGER &&
 						   arguments[2].getType() == SVT::INTEGER &&
@@ -241,7 +241,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 					auto types = {SVT::DECIMAL};
 
 					// Validate arguments
-					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 					{
 						returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, sqrtf(arguments[0].getDecimal())));
 					}
@@ -249,7 +249,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 				else if(functionName == "math:abs")
 				{
 					// Validate arguments
-					if(_validateListValueCount(arguments, 1))
+					if(_validateArgumentCount(arguments, 1))
 					{
 						// Determine type of value
 						if(arguments[0].getType() == SVT::INTEGER)
@@ -269,7 +269,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 				else if(functionName == "math:pi")
 				{
 					// Validate arguments
-					if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+					if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 					{
 						auto result = Math::getPI();
 						returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -280,7 +280,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 					auto types = {SVT::INTEGER};
 
 					// Validate arguments
-					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 					{
 						auto result = (arguments[0].getInteger() % 2) == 0;
 						returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -291,7 +291,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 					auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
 					// Validate arguments
-					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 					{
 						// Calculate angle difference
 						float result = Math::calculateAngleDifference(arguments[0].getDecimal(), arguments[1].getDecimal());
@@ -303,7 +303,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 					auto types = {SVT::DECIMAL};
 
 					// Validate arguments
-					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 					{
 						// Calculate absolute distance
 						float result = Math::calculateReferenceAngle(arguments[0].getDecimal());
@@ -315,7 +315,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 					auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 					// Validate arguments
-					if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 					{
 						// Calculate absolute distance
 						fvec3 first = fvec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal());

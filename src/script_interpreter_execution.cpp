@@ -70,7 +70,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 
 		// Count front spaces (and check if it went well)
-		unsigned int countedSpaces = _countFrontSpaces(scriptLineText);
+		unsigned int countedSpaces = _countLeadingSpaces(scriptLineText);
 		if(_hasThrownError)
 		{
 			return;

@@ -20,7 +20,7 @@ const bool ScriptInterpreter::gameMustStop() const
 	return _mustStopApplication;
 }
 
-const unsigned int ScriptInterpreter::_countFrontSpaces(const string& scriptLineText)
+const unsigned int ScriptInterpreter::_countLeadingSpaces(const string& scriptLineText)
 {
 	int countedSpaces = 0;
 
@@ -33,7 +33,7 @@ const unsigned int ScriptInterpreter::_countFrontSpaces(const string& scriptLine
 			// Check if any text comes after the last space character
 			if(i == (scriptLineText.size() - 1))
 			{
-				_throwScriptError("useless indentation!");
+				_throwScriptError("unnecessary indentation!");
 				return 0;
 			}
 			else
@@ -56,22 +56,22 @@ const bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, c
 	const unsigned int currentLineScopeDepth = (countedSpaces / SPACES_PER_INDENT);
 	const bool isScopeDepthInvalid = (currentLineScopeDepth != (scopeDepth + static_cast<int>(_mustIgnoreDeeperScope)));
 
-	if(_hasPassedLoopStatement && isScopeDepthInvalid) // Passed loop statement
+	if(_hasPassedLoopStatement && isScopeDepthInvalid) // Passed LOOP statement
 	{
 		_throwScriptError("incorrect indentation after LOOP statement!");
 		return false;
 	}
-	else if(_hasPassedIfStatement && isScopeDepthInvalid) // Passed if statement
+	else if(_hasPassedIfStatement && isScopeDepthInvalid) // Passed IF statement
 	{
 		_throwScriptError("incorrect indentation after IF statement!");
 		return false;
 	}
-	else if(_hasPassedElifStatement && isScopeDepthInvalid) // Passed elif statement
+	else if(_hasPassedElifStatement && isScopeDepthInvalid) // Passed ELIF statement
 	{
 		_throwScriptError("incorrect indentation after ELIF statement!");
 		return false;
 	}
-	else if(_hasPassedElseStatement && isScopeDepthInvalid) // Passed else statement
+	else if(_hasPassedElseStatement && isScopeDepthInvalid) // Passed ELSE statement
 	{
 		_throwScriptError("incorrect indentation after ELSE statement!");
 		return false;
@@ -86,9 +86,9 @@ const bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, c
 		{
 			return false;
 		}
-		else // Useless indentation
+		else // Unnecessary indentation
 		{
-			_throwScriptError("useless indentation before statement!");
+			_throwScriptError("unnecessary indentation before statement!");
 			return false;
 		}
 	}
@@ -123,25 +123,6 @@ const bool ScriptInterpreter::_validateSavesDirectory() const
 	return true;
 }
 
-ScriptConditionStatement* ScriptInterpreter::_getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth) const
-{
-	// Temporary values
-	unsigned int index = static_cast<unsigned int>(statements.size());
-
-	// Iterate through conditions backwards
-	while(index--)
-	{
-		// Check if scope depth matches
-		if(statements[index].getScopeDepth() == scopeDepth)
-		{
-			return &statements[index];
-		}
-	}
-
-	// No condition statement
-	return nullptr;
-}
-
 void ScriptInterpreter::_throwScriptError(const string& message)
 {
 	Logger::throwWarning("ERROR @ script \"" + _currentScriptIDsStack.back() + "\" @ line " +
@@ -156,7 +137,7 @@ void ScriptInterpreter::_checkEngineWarnings(unsigned int lastLoggerMessageCount
 	if(messageCount > lastLoggerMessageCount)
 	{
 		// Retrieve all logged messages
-		auto messageQueue = Logger::getMessageQueue();
+		const auto& messageQueue = Logger::getMessageQueue();
 
 		// Iterate through all new messages
 		for(unsigned int i = lastLoggerMessageCount - 1; i < messageCount; i++)

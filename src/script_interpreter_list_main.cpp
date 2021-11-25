@@ -4,13 +4,12 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 {
 	// Temporary variables
 	vector<ScriptValue> valueList;
-	bool buildingVec3 = false;
-	bool buildingString = false;
-	bool buildingNumber = false;
-	bool buildingDecimal = false;
-	bool buildingBoolean = false;
-	bool buildingVariable = false;
-	bool finishedValue = false;
+	bool isBuildingString = false;
+	bool isBuildingNumber = false;
+	bool isBuildingDecimal = false;
+	bool isBuildingBoolean = false;
+	bool isBuildingVariable = false;
+	bool hasFinishedValue = false;
 	string currentValueString = "";
 
 	// List string cannot be empty
@@ -30,11 +29,11 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 	unsigned int index = 0;
 	for(const auto& c : listString)
 	{
-		if(finishedValue) // First character after a value has been extracted
+		if(hasFinishedValue) // First character after a value has been extracted
 		{
 			if(c == ',') // Ready for next value extraction
 			{
-				finishedValue = false;
+				hasFinishedValue = false;
 			}
 			else if(c != ' ') // After a value has been extracted, a comma must ALWAYS follow
 			{
@@ -45,24 +44,24 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 		else
 		{
 			// Starting build of new value
-			if(!buildingString && !buildingNumber && !buildingBoolean && !buildingVariable)
+			if(!isBuildingString && !isBuildingNumber && !isBuildingBoolean && !isBuildingVariable)
 			{
 				if(c == '"') // String
 				{
 					currentValueString = "";
-					buildingString = true;
+					isBuildingString = true;
 				}
 				else if(isdigit(c) || c == '-') // Number
 				{
 					currentValueString = "";
 					currentValueString.push_back(c);
-					buildingNumber = true;
+					isBuildingNumber = true;
 				}
 				else if(c == '<') // Boolean
 				{
 					currentValueString = "";
 					currentValueString.push_back(c);
-					buildingBoolean = true;
+					isBuildingBoolean = true;
 				}
 				else if(c == ' ') // Space
 				{
@@ -72,10 +71,10 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 				{
 					currentValueString = "";
 					currentValueString.push_back(c);
-					buildingVariable = true;
+					isBuildingVariable = true;
 				}
 
-				if(index != (listString.size() - 1) || (buildingString || buildingBoolean)) // Skip to next character
+				if(index != (listString.size() - 1) || (isBuildingString || isBuildingBoolean)) // Skip to next character
 				{
 					index++;
 					continue;
@@ -86,20 +85,20 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 				}
 			}
 
-			if(buildingString) // Processing string value
+			if(isBuildingString) // Processing string value
 			{
 				if(c == '"') // Add new string value
 				{
 					valueList.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, currentValueString));
-					buildingString = false;
-					finishedValue = true;
+					isBuildingString = false;
+					hasFinishedValue = true;
 				}
 				else // Keep building string
 				{
 					currentValueString += c;
 				}
 			}
-			else if(buildingNumber) // Processing number value
+			else if(isBuildingNumber) // Processing number value
 			{
 				if(c == '-') // Negative number
 				{
@@ -117,10 +116,10 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 				{
 					currentValueString += c;
 				}
-				else if(c == '.' && !buildingDecimal) // Start building decimal
+				else if(c == '.' && !isBuildingDecimal) // Start building decimal
 				{
 					currentValueString += c;
-					buildingDecimal = true;
+					isBuildingDecimal = true;
 				}
 				else if(c != ',' && c != ' ')
 				{
@@ -131,7 +130,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 				// Check if number building finished
 				if(c == ',' || (index == listString.size() - 1) || c == ' ')
 				{
-					if(buildingDecimal) // Convert to decimal
+					if(isBuildingDecimal) // Convert to decimal
 					{
 						// Check if decimal value is valid
 						if(currentValueString.back() == '.')
@@ -142,30 +141,30 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 						else
 						{
 							valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitDecimalString(currentValueString))));
-							buildingNumber = false;
-							buildingDecimal = false;
+							isBuildingNumber = false;
+							isBuildingDecimal = false;
 
 							// Check if next comma still needs to be found
 							if(c != ',')
 							{
-								finishedValue = true;
+								hasFinishedValue = true;
 							}
 						}
 					}
 					else // Convert to integer
 					{
 						valueList.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(currentValueString))));
-						buildingNumber = false;
+						isBuildingNumber = false;
 
 						// Check if next comma still needs to be found
 						if(c != ',')
 						{
-							finishedValue = true;
+							hasFinishedValue = true;
 						}
 					}
 				}
 			}
-			else if(buildingBoolean) // Processing boolean value
+			else if(isBuildingBoolean) // Processing boolean value
 			{
 				// Build value
 				currentValueString += c;
@@ -176,8 +175,8 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 					if(currentValueString == "<true>") // Add new boolean value
 					{
 						valueList.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, true));
-						buildingBoolean = false;
-						finishedValue = true;
+						isBuildingBoolean = false;
+						hasFinishedValue = true;
 					}
 					else if(currentValueString != "<false") // Must be "<false" if 6 letter string
 					{
@@ -188,8 +187,8 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 				else if(currentValueString.size() == 7 && currentValueString == "<false>") // Add new boolean value
 				{
 					valueList.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, false));
-					buildingBoolean = false;
-					finishedValue = true;
+					isBuildingBoolean = false;
+					hasFinishedValue = true;
 				}
 				else if(currentValueString.size() > 7) // Invalid boolean string
 				{
@@ -197,7 +196,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 					return {};
 				}
 			}
-			else if(buildingVariable) // Processing variable value
+			else if(isBuildingVariable) // Processing variable value
 			{
 				// Build value
 				if(c != ',' && c != ' ')
@@ -208,7 +207,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 				// Check if variable building finished
 				if(c == ',' || (index == listString.size() - 1) || c == ' ')
 				{
-					// Check if accessing individual value from list variable
+					// Prepare list access
 					bool isAccessingList = false;
 					auto listIndex = _extractListIndexFromString(currentValueString, isAccessingList);
 
@@ -221,8 +220,8 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 					// Remove list accessing characters
 					if(isAccessingList)
 					{
-						auto openingBracketFound = find(currentValueString.begin(), currentValueString.end(), '[');
-						auto bracketIndex = static_cast<unsigned int>(distance(currentValueString.begin(), openingBracketFound));
+						auto isOpeningBracketFound = find(currentValueString.begin(), currentValueString.end(), '[');
+						auto bracketIndex = static_cast<unsigned int>(distance(currentValueString.begin(), isOpeningBracketFound));
 						currentValueString = currentValueString.substr(0, bracketIndex);
 					}
 
@@ -254,12 +253,12 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 							return {};
 						}
 
-						buildingVariable = false;
+						isBuildingVariable = false;
 
 						// Check if needs to be found yet
 						if(c != ',')
 						{
-							finishedValue = true;
+							hasFinishedValue = true;
 						}
 					}
 					else
@@ -275,7 +274,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 	}
 
 	// Check if not still building any values
-	if(!buildingString && !buildingNumber && !buildingBoolean && !buildingVariable && finishedValue)
+	if(!isBuildingString && !isBuildingNumber && !isBuildingBoolean && !isBuildingVariable && hasFinishedValue)
 	{
 		return valueList;
 	}

@@ -36,7 +36,7 @@ const bool ScriptVariable::isConstant() const
 	return _isConstant;
 }
 
-void ScriptVariable::changeValues(vector<ScriptValue> values)
+void ScriptVariable::setValues(vector<ScriptValue> values)
 {
 	_values.clear();
 
@@ -46,7 +46,7 @@ void ScriptVariable::changeValues(vector<ScriptValue> values)
 	}
 }
 
-void ScriptVariable::changeValue(ScriptValue value, unsigned int index)
+void ScriptVariable::setValue(ScriptValue value, unsigned int index)
 {
 	// Check if variable is immutable
 	if(_isConstant)

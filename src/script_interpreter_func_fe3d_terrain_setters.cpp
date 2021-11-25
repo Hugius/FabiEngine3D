@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetterFunction(const string& fu
 		auto types = {SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate terrain existence
 			if(_validateFe3dTerrain())

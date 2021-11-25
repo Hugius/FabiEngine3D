@@ -8,7 +8,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functi
 	if(functionName == "fe3d:sky_get_mix_id")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate sky existence
 			if(_validateFe3dSky())
@@ -21,7 +21,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functi
 	else if(functionName == "fe3d:sky_get_mix_value")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate sky existence
 			if(_validateFe3dSky())
@@ -34,7 +34,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functi
 	else if(functionName == "fe3d:sky_get_lightness")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate sky existence
 			if(_validateFe3dSky())
@@ -47,7 +47,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functi
 	else if(functionName == "fe3d:sky_get_color_r")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate sky existence
 			if(_validateFe3dSky())
@@ -60,7 +60,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functi
 	else if(functionName == "fe3d:sky_get_color_g")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate sky existence
 			if(_validateFe3dSky())
@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functi
 	else if(functionName == "fe3d:sky_get_color_b")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate sky existence
 			if(_validateFe3dSky())
@@ -86,7 +86,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functi
 	else if(functionName == "fe3d:sky_get_rotation")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate sky existence
 			if(_validateFe3dSky())

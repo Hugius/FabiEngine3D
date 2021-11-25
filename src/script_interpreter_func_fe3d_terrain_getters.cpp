@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetterFunction(const string& fu
 		auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
 		// Validate arguments
-		if(_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate terrain existence
 			if(_validateFe3dTerrain())
@@ -26,7 +26,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetterFunction(const string& fu
 	else if(functionName == "fe3d:terrain_get_max_height")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate terrain existence
 			if(_validateFe3dTerrain())
@@ -39,7 +39,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetterFunction(const string& fu
 	else if(functionName == "fe3d:terrain_get_size")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate terrain existence
 			if(_validateFe3dTerrain())
@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetterFunction(const string& fu
 	else if(functionName == "fe3d:terrain_get_lightness")
 	{
 		// Validate arguments
-		if(_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Validate terrain existence
 			if(_validateFe3dTerrain())

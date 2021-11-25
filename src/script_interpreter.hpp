@@ -151,7 +151,7 @@ private:
 
 	// STRING
 	static inline const string META_KEYWORD = "META";
-	static inline const string EXECUTE_KEYWORD = "EXEC";
+	static inline const string EXECUTE_KEYWORD = "EXECUTE";
 	static inline const string LOOP_KEYWORD = "LOOP";
 	static inline const string CONTINUE_KEYWORD = "CONTINUE";
 	static inline const string BREAK_KEYWORD = "BREAK";
@@ -161,11 +161,11 @@ private:
 	static inline const string GLOBAL_KEYWORD = "GLOB";
 	static inline const string CONST_KEYWORD = "CONST";
 	static inline const string EDIT_KEYWORD = "EDIT";
-	static inline const string LIST_KEYWORD = "LIST";
+	static inline const string LIST_KEYWORD = "LST";
 	static inline const string STRING_KEYWORD = "STR";
 	static inline const string DECIMAL_KEYWORD = "DEC";
 	static inline const string INTEGER_KEYWORD = "INT";
-	static inline const string BOOLEAN_KEYWORD = "BOOL";
+	static inline const string BOOLEAN_KEYWORD = "BOL";
 	static inline const string IS_KEYWORD = "IS";
 	static inline const string NOT_KEYWORD = "NOT";
 	static inline const string AND_KEYWORD = "AND";

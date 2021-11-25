@@ -104,13 +104,12 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 				{
 					if(!currentValueString.empty())
 					{
-						_throwScriptError("invalid DEC syntax!");
+						_throwScriptError("invalid INT or DEC syntax!");
 						return {};
 					}
-					else
-					{
-						currentValueString += c;
-					}
+
+					// Add character
+					currentValueString += c;
 				}
 				else if(isdigit(c)) // Keep building number
 				{
@@ -121,9 +120,9 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 					currentValueString += c;
 					isBuildingDecimal = true;
 				}
-				else if(c != ',' && c != ' ')
+				else if(c != ',' && c != ' ') // Invalid character
 				{
-					_throwScriptError("invalid character in number value!");
+					_throwScriptError("invalid INT or DEC syntax!");
 					return {};
 				}
 
@@ -138,21 +137,21 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 							_throwScriptError("invalid DEC syntax!");
 							return {};
 						}
-						else
-						{
-							valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitDecimalString(currentValueString))));
-							isBuildingNumber = false;
-							isBuildingDecimal = false;
 
-							// Check if next comma still needs to be found
-							if(c != ',')
-							{
-								hasFinishedValue = true;
-							}
+						// Add value
+						valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitDecimalString(currentValueString))));
+						isBuildingNumber = false;
+						isBuildingDecimal = false;
+
+						// Check if next comma still needs to be found
+						if(c != ',')
+						{
+							hasFinishedValue = true;
 						}
 					}
 					else // Convert to integer
 					{
+						// Add value
 						valueList.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(currentValueString))));
 						isBuildingNumber = false;
 
@@ -166,31 +165,23 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 			}
 			else if(isBuildingBoolean) // Processing boolean value
 			{
-				// Build value
+				// Add character
 				currentValueString += c;
 
-				// Check if value is true, false, or invalid
-				if(currentValueString.size() == 6)
+				// Check if value is true/false/invalid
+				if(currentValueString == "<true>")
 				{
-					if(currentValueString == "<true>") // Add new boolean value
-					{
-						valueList.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, true));
-						isBuildingBoolean = false;
-						hasFinishedValue = true;
-					}
-					else if(currentValueString != "<false") // Must be "<false" if 6 letter string
-					{
-						_throwScriptError("invalid BOOL syntax!");
-						return {};
-					}
+					valueList.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, true));
+					isBuildingBoolean = false;
+					hasFinishedValue = true;
 				}
-				else if(currentValueString.size() == 7 && currentValueString == "<false>") // Add new boolean value
+				else if(currentValueString == "<false>")
 				{
 					valueList.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, false));
 					isBuildingBoolean = false;
 					hasFinishedValue = true;
 				}
-				else if(currentValueString.size() > 7) // Invalid boolean string
+				else if(currentValueString.size() > string("<false>").size())
 				{
 					_throwScriptError("invalid BOOL syntax!");
 					return {};
@@ -198,7 +189,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 			}
 			else if(isBuildingVariable) // Processing variable value
 			{
-				// Build value
+				// Add character
 				if(c != ',' && c != ' ')
 				{
 					currentValueString += c;
@@ -225,62 +216,61 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 						currentValueString = currentValueString.substr(0, bracketIndex);
 					}
 
-					// Check if the specified variable name exists
-					if(_isLocalVariableExisting(currentValueString) || _isGlobalVariableExisting(currentValueString))
-					{
-						// Retrieve value
-						auto variable = (_isLocalVariableExisting(currentValueString) ? _getLocalVariable(currentValueString) : _getGlobalVariable(currentValueString));
-
-						if(isAccessingList) // List[index]
-						{
-							// Check if list index is valid
-							if(_validateListIndex(variable, listIndex))
-							{
-								valueList.push_back(variable.getValue(listIndex));
-							}
-							else // Error
-							{
-								return {};
-							}
-						}
-						else if(variable.getType() == ScriptVariableType::SINGLE) // Normal value
-						{
-							valueList.push_back(variable.getValue());
-						}
-						else // Cannot be list variable
-						{
-							_throwScriptError("LIST cannot be used inside another LIST!");
-							return {};
-						}
-
-						isBuildingVariable = false;
-
-						// Check if needs to be found yet
-						if(c != ',')
-						{
-							hasFinishedValue = true;
-						}
-					}
-					else
+					// Check if variable is not existing
+					if(!_isLocalVariableExisting(currentValueString) && !_isGlobalVariableExisting(currentValueString))
 					{
 						_throwScriptError("variable not existing!");
 						return {};
+					}
+
+					// Retrieve variable
+					const auto& variable = (_isLocalVariableExisting(currentValueString) ? _getLocalVariable(currentValueString) : _getGlobalVariable(currentValueString));
+
+					// Validate list access
+					unsigned int valueIndex = 0;
+					if(isAccessingList)
+					{
+						// Check if list index is invalid
+						if(!_validateListIndex(variable, listIndex))
+						{
+							return {};
+						}
+
+						// Copy list index
+						valueIndex = listIndex;
+					}
+
+					// Check if variable is a list
+					if(variable.getType() == ScriptVariableType::MULTIPLE)
+					{
+						_throwScriptError("LIST cannot be used inside another LIST!");
+						return {};
+					}
+
+					// Add value
+					valueList.push_back(variable.getValue(valueIndex));
+					isBuildingVariable = false;
+
+					// Check if needs to be found yet
+					if(c != ',')
+					{
+						hasFinishedValue = true;
 					}
 				}
 			}
 		}
 
+		// Increment index
 		index++;
 	}
 
-	// Check if not still building any values
-	if(!isBuildingString && !isBuildingNumber && !isBuildingBoolean && !isBuildingVariable && hasFinishedValue)
-	{
-		return valueList;
-	}
-	else // Syntax is wrong
+	// Check if still building any values
+	if(isBuildingString || isBuildingNumber || isBuildingBoolean || isBuildingVariable)
 	{
 		_throwScriptError("invalid value(s) syntax!");
 		return {};
 	}
+
+	// Return values
+	return valueList;
 }

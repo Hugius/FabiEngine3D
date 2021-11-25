@@ -22,13 +22,13 @@ public:
 	const string& getString() const;
 
 	// FLOAT
-	float getDecimal() const;
+	const float getDecimal() const;
 
 	// INT
-	int getInteger() const;
+	const int getInteger() const;
 
 	// BOOL
-	bool getBoolean() const;
+	const bool getBoolean() const;
 
 	// MISCELLANEOUS
 	const ScriptValueType& getType() const;
@@ -47,6 +47,6 @@ private:
 	bool _boolean = false;
 
 	// MISCELLANEOUS
-	const ScriptValueType _type;
+	ScriptValueType _type;
 	FabiEngine3D& _fe3d;
 };

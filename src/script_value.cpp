@@ -92,7 +92,7 @@ const string& ScriptValue::getString() const
 	return _string;
 }
 
-float ScriptValue::getDecimal() const
+const float ScriptValue::getDecimal() const
 {
 	if(_type != ScriptValueType::DECIMAL)
 	{
@@ -102,7 +102,7 @@ float ScriptValue::getDecimal() const
 	return _decimal;
 }
 
-int ScriptValue::getInteger() const
+const int ScriptValue::getInteger() const
 {
 	if(_type != ScriptValueType::INTEGER)
 	{
@@ -112,7 +112,7 @@ int ScriptValue::getInteger() const
 	return _integer;
 }
 
-bool ScriptValue::getBoolean() const
+const bool ScriptValue::getBoolean() const
 {
 	if(_type != ScriptValueType::BOOLEAN)
 	{

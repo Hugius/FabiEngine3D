@@ -10,10 +10,11 @@ public:
 	ScriptVariable(FabiEngine3D& fe3d, ScriptVariableScope scope, ScriptVariableType type, const string& ID, bool constant, vector<ScriptValue> values);
 
 	// VOID
+	void addValue(ScriptValue value);
 	void setValues(vector<ScriptValue> values);
 	void setValue(ScriptValue value, unsigned int index = 0);
-	void addValue(ScriptValue value);
 	void removeValue(unsigned int index);
+	void clearValues();
 
 	// STRING
 	const string& getID() const;
@@ -25,7 +26,6 @@ public:
 	const bool isConstant() const;
 
 	// MISCELLANEOUS
-	const vector<shared_ptr<ScriptValue>>& getValues() const;
 	ScriptValue& getValue(unsigned int index = 0) const;
 	const ScriptVariableScope getScope() const;
 	const ScriptVariableType getType() const;
@@ -35,7 +35,7 @@ private:
 	string _ID;
 
 	// BOOL
-	const bool _isConstant;
+	bool _isConstant;
 
 	// MISCELLANEOUS
 	vector<shared_ptr<ScriptValue>> _values;

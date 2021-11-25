@@ -69,6 +69,11 @@ void ScriptVariable::removeValue(unsigned int index)
 	_values.erase(_values.begin() + index);
 }
 
+void ScriptVariable::clearValues()
+{
+	_values.clear();
+}
+
 ScriptValue& ScriptVariable::getValue(unsigned int index) const
 {
 	// Validate index
@@ -78,11 +83,6 @@ ScriptValue& ScriptVariable::getValue(unsigned int index) const
 	}
 
 	return *_values[index];
-}
-
-const vector<shared_ptr<ScriptValue>>& ScriptVariable::getValues() const
-{
-	return _values;
 }
 
 const unsigned int ScriptVariable::getValueCount() const

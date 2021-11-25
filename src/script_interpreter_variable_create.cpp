@@ -316,9 +316,6 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 	}
 	else
 	{
-		// Temporary values
-		unsigned int valueIndex = 0;
-
 		// Prepare list access
 		bool isAccessingList = false;
 		auto listIndex = _extractListIndexFromString(valueString, isAccessingList);
@@ -348,6 +345,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		const auto& rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
 		// Validate list access
+		unsigned int valueIndex = 0;
 		if(isAccessingList)
 		{
 			// Check if list index is invalid

@@ -75,12 +75,13 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 						}
 
 						// Return concatenated lists
-						auto firstListValues = firstListVariable.getValues();
-						auto secondListValues = secondListVariable.getValues();
-						firstListValues.insert(firstListValues.end(), secondListValues.begin(), secondListValues.end());
-						for(const auto& value : firstListValues)
+						for(unsigned int i = 0; i < firstListVariable.getValueCount(); i++)
 						{
-							returnValues.push_back(*value);
+							returnValues.push_back(firstListVariable.getValue(i));
+						}
+						for(unsigned int i = 0; i < secondListVariable.getValueCount(); i++)
+						{
+							returnValues.push_back(secondListVariable.getValue(i));
 						}
 					}
 				}
@@ -145,41 +146,48 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 						}
 
 						// Try to find value
-						bool foundValue = false;
-						for(const auto& value : listVariable.getValues())
+						bool hasFoundValue = false;
+						for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
 						{
-							if
-								(
-								(value->getType() == SVT::STRING &&
-								arguments[1].getType() == SVT::STRING &&
-								value->getString() == arguments[1].getString())
-
-								||
-
-								(value->getType() == SVT::DECIMAL &&
-								arguments[1].getType() == SVT::DECIMAL &&
-								value->getDecimal() == arguments[1].getDecimal())
-
-								||
-
-								(value->getType() == SVT::INTEGER &&
-								arguments[1].getType() == SVT::INTEGER &&
-								value->getInteger() == arguments[1].getInteger())
-
-								||
-
-								(value->getType() == SVT::BOOLEAN &&
-								arguments[1].getType() == SVT::BOOLEAN &&
-								value->getBoolean() == arguments[1].getBoolean())
-								)
+							// String
+							if((listVariable.getValue(i).getType() == SVT::STRING) &&
+							   (arguments[1].getType() == SVT::STRING) &&
+							   (listVariable.getValue(i).getString() == arguments[1].getString()))
 							{
-								foundValue = true;
+								hasFoundValue = true;
+								break;
+							}
+
+							// Decimal
+							if((listVariable.getValue(i).getType() == SVT::DECIMAL) &&
+							   (arguments[1].getType() == SVT::DECIMAL) &&
+							   (listVariable.getValue(i).getDecimal() == arguments[1].getDecimal()))
+							{
+								hasFoundValue = true;
+								break;
+							}
+
+							// Integer
+							if((listVariable.getValue(i).getType() == SVT::INTEGER) &&
+							   (arguments[1].getType() == SVT::INTEGER) &&
+							   (listVariable.getValue(i).getInteger() == arguments[1].getInteger()))
+							{
+								hasFoundValue = true;
+								break;
+							}
+
+							// Boolean
+							if((listVariable.getValue(i).getType() == SVT::BOOLEAN) &&
+							   (arguments[1].getType() == SVT::BOOLEAN) &&
+							   (listVariable.getValue(i).getBoolean() == arguments[1].getBoolean()))
+							{
+								hasFoundValue = true;
 								break;
 							}
 						}
 
 						// Return find result
-						returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, foundValue));
+						returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, hasFoundValue));
 					}
 				}
 				else if(functionName == "misc:list_index")
@@ -214,34 +222,39 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 
 						// Try to find value index
 						int foundIndex = -1;
-						for(unsigned int i = 0; i < listVariable.getValues().size(); i++)
+						for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
 						{
-							if
-								(
+							// String
+							if((listVariable.getValue(i).getType() == SVT::STRING) &&
+							   (arguments[1].getType() == SVT::STRING) &&
+							   (listVariable.getValue(i).getString() == arguments[1].getString()))
+							{
+								foundIndex = i;
+								break;
+							}
 
-								(listVariable.getValues()[i]->getType() == SVT::STRING &&
-								arguments[1].getType() == SVT::STRING &&
-								listVariable.getValues()[i]->getString() == arguments[1].getString())
+							// Decimal
+							if((listVariable.getValue(i).getType() == SVT::DECIMAL) &&
+							   (arguments[1].getType() == SVT::DECIMAL) &&
+							   (listVariable.getValue(i).getDecimal() == arguments[1].getDecimal()))
+							{
+								foundIndex = i;
+								break;
+							}
 
-								||
+							// Integer
+							if((listVariable.getValue(i).getType() == SVT::INTEGER) &&
+							   (arguments[1].getType() == SVT::INTEGER) &&
+							   (listVariable.getValue(i).getInteger() == arguments[1].getInteger()))
+							{
+								foundIndex = i;
+								break;
+							}
 
-								(listVariable.getValues()[i]->getType() == SVT::DECIMAL &&
-								arguments[1].getType() == SVT::DECIMAL &&
-								listVariable.getValues()[i]->getDecimal() == arguments[1].getDecimal())
-
-								||
-
-								(listVariable.getValues()[i]->getType() == SVT::INTEGER &&
-								arguments[1].getType() == SVT::INTEGER &&
-								listVariable.getValues()[i]->getInteger() == arguments[1].getInteger())
-
-								||
-
-								(listVariable.getValues()[i]->getType() == SVT::BOOLEAN &&
-								arguments[1].getType() == SVT::BOOLEAN &&
-								listVariable.getValues()[i]->getBoolean() == arguments[1].getBoolean())
-
-								)
+							// Boolean
+							if((listVariable.getValue(i).getType() == SVT::BOOLEAN) &&
+							   (arguments[1].getType() == SVT::BOOLEAN) &&
+							   (listVariable.getValue(i).getBoolean() == arguments[1].getBoolean()))
 							{
 								foundIndex = i;
 								break;
@@ -285,10 +298,10 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 						}
 
 						// Check if list values are of different types
-						auto type = listVariable.getValues()[0]->getType();
-						for(const auto& value : listVariable.getValues())
+						auto type = listVariable.getValue(0).getType();
+						for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
 						{
-							if(value->getType() != type)
+							if(listVariable.getValue(i).getType() != type)
 							{
 								_throwScriptError("list values are not of the same type!");
 								return returnValues;
@@ -300,9 +313,9 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 						{
 							// Compose raw values
 							vector<int> rawValues;
-							for(const auto& value : listVariable.getValues())
+							for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
 							{
-								rawValues.push_back(value->getInteger());
+								rawValues.push_back(listVariable.getValue(i).getInteger());
 							}
 
 							// Return
@@ -313,9 +326,9 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 						{
 							// Compose raw values
 							vector<float> rawValues;
-							for(const auto& value : listVariable.getValues())
+							for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
 							{
-								rawValues.push_back(value->getDecimal());
+								rawValues.push_back(listVariable.getValue(i).getDecimal());
 							}
 
 							// Return
@@ -362,10 +375,10 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 						}
 
 						// Check if list values are of different types
-						auto type = listVariable.getValues()[0]->getType();
-						for(const auto& value : listVariable.getValues())
+						auto type = listVariable.getValue(0).getType();
+						for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
 						{
-							if(value->getType() != type)
+							if(listVariable.getValue(i).getType() != type)
 							{
 								_throwScriptError("list values are not of the same type!");
 								return returnValues;
@@ -377,9 +390,9 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 						{
 							// Compose raw values
 							vector<int> rawValues;
-							for(const auto& value : listVariable.getValues())
+							for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
 							{
-								rawValues.push_back(value->getInteger());
+								rawValues.push_back(listVariable.getValue(i).getInteger());
 							}
 
 							// Return
@@ -390,9 +403,9 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 						{
 							// Compose raw values
 							vector<float> rawValues;
-							for(const auto& value : listVariable.getValues())
+							for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
 							{
-								rawValues.push_back(value->getDecimal());
+								rawValues.push_back(listVariable.getValue(i).getDecimal());
 							}
 
 							// Return
@@ -431,12 +444,11 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 							return returnValues;
 						}
 
-						// Return list elements in reverse order
-						auto values = listVariable.getValues();
-						reverse(values.begin(), values.end());
-						for(const auto& value : values)
+						// Return values in reversed order
+						vector<ScriptValue> values = {};
+						for(unsigned int i = (listVariable.getValueCount() - 1); i >= 0; i--)
 						{
-							returnValues.push_back(*value);
+							returnValues.push_back(listVariable.getValue(i));
 						}
 					}
 				}

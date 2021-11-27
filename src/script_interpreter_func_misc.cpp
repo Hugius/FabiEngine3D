@@ -49,14 +49,14 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				// Check if first variable not existing
 				if(!_isLocalVariableExisting(firstName) && !_isGlobalVariableExisting(firstName))
 				{
-					_throwScriptError("list variable \"" + firstName + "\" not found!");
+					_throwScriptError("variable \"" + firstName + "\" not existing!");
 					return returnValues;
 				}
 
 				// Check if second variable not existing
 				if(!_isLocalVariableExisting(secondName) && !_isGlobalVariableExisting(secondName))
 				{
-					_throwScriptError("list variable \"" + secondName + "\" not found!");
+					_throwScriptError("variable \"" + secondName + "\" not existing!");
 					return returnValues;
 				}
 
@@ -100,7 +100,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				// Check if variable not existing
 				if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 				{
-					_throwScriptError("list variable \"" + listName + "\" not found!");
+					_throwScriptError("variable \"" + listName + "\" not existing!");
 					return returnValues;
 				}
 
@@ -127,7 +127,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				// List name must be string
 				if(arguments[0].getType() != SVT::STRING)
 				{
-					_throwScriptError("wrong value type(s)!");
+					_throwScriptError("incorrect argument type!");
 					return returnValues;
 				}
 
@@ -135,7 +135,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				auto listName = arguments[0].getString();
 				if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 				{
-					_throwScriptError("list variable \"" + listName + "\" not found!");
+					_throwScriptError("variable \"" + listName + "\" not existing!");
 					return returnValues;
 				}
 
@@ -202,7 +202,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				// List name must be string
 				if(arguments[0].getType() != SVT::STRING)
 				{
-					_throwScriptError("wrong value type(s)!");
+					_throwScriptError("incorrect argument type!");
 					return returnValues;
 				}
 
@@ -210,7 +210,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				auto listName = arguments[0].getString();
 				if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 				{
-					_throwScriptError("list variable \"" + listName + "\" not found!");
+					_throwScriptError("variable \"" + listName + "\" not existing!");
 					return returnValues;
 				}
 
@@ -280,7 +280,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				// Check if variable not existing
 				if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 				{
-					_throwScriptError("list variable \"" + listName + "\" not found!");
+					_throwScriptError("variable \"" + listName + "\" not existing!");
 					return returnValues;
 				}
 
@@ -295,7 +295,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				// Check if list is empty
 				if(listVariable.getValueCount() == 0)
 				{
-					_throwScriptError("list is empty!");
+					_throwScriptError("LIST \"" + listName + "\" is empty!");
 					return returnValues;
 				}
 
@@ -305,7 +305,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				{
 					if(listVariable.getValue(i).getType() != type)
 					{
-						_throwScriptError("values inside LIST not of same type!");
+						_throwScriptError("values inside LIST \"" + listName + "\" not of same type!");
 						return returnValues;
 					}
 				}
@@ -339,7 +339,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				}
 				else
 				{
-					_throwScriptError("LIST values must be INT or DEC!");
+					_throwScriptError("values inside LIST \"" + listName + "\" must be INT or DEC!");
 					return returnValues;
 				}
 			}
@@ -357,7 +357,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				// Check if variable not existing
 				if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 				{
-					_throwScriptError("list variable \"" + listName + "\" not found!");
+					_throwScriptError("variable \"" + listName + "\" not existing!");
 					return returnValues;
 				}
 
@@ -372,7 +372,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				// Check if list is empty
 				if(listVariable.getValueCount() == 0)
 				{
-					_throwScriptError("list is empty!");
+					_throwScriptError("LIST \"" + listName + "\" is empty!");
 					return returnValues;
 				}
 
@@ -382,7 +382,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				{
 					if(listVariable.getValue(i).getType() != type)
 					{
-						_throwScriptError("list values are not of the same type!");
+						_throwScriptError("values inside LIST \"" + listName + "\" not of same type!");
 						return returnValues;
 					}
 				}
@@ -416,7 +416,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				}
 				else
 				{
-					_throwScriptError("LIST values must be INT or DEC!");
+					_throwScriptError("values inside LIST \"" + listName + "\" must be INT or DEC!");
 					return returnValues;
 				}
 			}
@@ -434,7 +434,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				// Check if variable not existing
 				if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 				{
-					_throwScriptError("list variable \"" + listName + "\" not found!");
+					_throwScriptError("variable \"" + listName + "\" not existing!");
 					return returnValues;
 				}
 
@@ -448,7 +448,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 
 				// Return values in reversed order
 				vector<ScriptValue> values = {};
-				for(unsigned int i = (listVariable.getValueCount() - 1); i >= 0; i--)
+				for(int i = (static_cast<int>(listVariable.getValueCount()) - 1); i > -1; i--)
 				{
 					returnValues.push_back(listVariable.getValue(i));
 				}
@@ -514,8 +514,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 			if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 			{
 				// Validate splitter
-				if((arguments[1].getString().size() > 1) ||
-				   (arguments[0].getString().find(arguments[1].getString()) == string::npos))
+				if((arguments[1].getString().size() > 1) || (arguments[0].getString().find(arguments[1].getString()) == string::npos))
 				{
 					_throwScriptError("string splitter not found!");
 					return returnValues;
@@ -588,7 +587,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 		}
 		else
 		{
-			_throwScriptError("misc function not found!");
+			_throwScriptError("misc function not existing!");
 		}
 	}
 

@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_validateArgumentTypes(const vector<ScriptValue>& 
 		// Compare value types
 		if(values[i].getType() != types[i])
 		{
-			_throwScriptError("incorrect argument type" + string((values.size() == 1) ? "" : "s") + "!");
+			_throwScriptError("incorrect argument type!");
 			return false;
 		}
 	}
@@ -83,15 +83,16 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 		return;
 	}
 
-	// Check if value is present
-	if(scriptLine.size() < (PUSHING_KEYWORD.size() + nameString.size() + 3))
+	// Check if value is missing
+	auto minLineSize = (PUSHING_KEYWORD.size() + nameString.size() + 3);
+	if(scriptLine.size() < minLineSize)
 	{
 		_throwScriptError("value missing!");
 		return;
 	}
 
 	// Extract value
-	string valueString = scriptLine.substr(PUSHING_KEYWORD.size() + nameString.size() + 2);
+	string valueString = scriptLine.substr(minLineSize - 1);
 
 	// Check if list exists
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))

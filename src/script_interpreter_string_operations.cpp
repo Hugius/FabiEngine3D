@@ -101,7 +101,7 @@ const bool ScriptInterpreter::_isBooleanValue(const string& valueString) const
 
 const int ScriptInterpreter::_extractListIndexFromString(const string& valueString, bool& isAccessingList)
 {
-	// Check if brackets are in string
+	// Check if brackets are present
 	auto isOpeningBracketFound = find(valueString.begin(), valueString.end(), '[');
 	auto closingBracketFound = find(valueString.begin(), valueString.end(), ']');
 	if(isOpeningBracketFound == valueString.end() || closingBracketFound == valueString.end())
@@ -111,7 +111,8 @@ const int ScriptInterpreter::_extractListIndexFromString(const string& valueStri
 
 	// Check if brackets are in the right place
 	auto openingBracketIndex = static_cast<unsigned int>(distance(valueString.begin(), isOpeningBracketFound));
-	if(openingBracketIndex == 0)
+	auto closingBracketIndex = static_cast<unsigned int>(distance(valueString.begin(), isOpeningBracketFound));
+	if((openingBracketIndex == 0) || (closingBracketIndex == 0) || (openingBracketIndex > closingBracketIndex))
 	{
 		return -1;
 	}
@@ -124,13 +125,20 @@ const int ScriptInterpreter::_extractListIndexFromString(const string& valueStri
 		isAccessingList = true;
 		return stoi(_limitIntegerString(indexString));
 	}
-	else if(_isLocalVariableExisting(indexString) || _isGlobalVariableExisting(indexString))
+	else
 	{
+		// Check if variable is not existing
+		if(!_isLocalVariableExisting(indexString) && !_isGlobalVariableExisting(indexString))
+		{
+			_throwScriptError("variable \"" + indexString + "\" not existing!");
+			return -1;
+		}
+
 		// Retrieve variable
 		auto& variable = (_isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString));
 
 		// Check if variable is not an integer
-		if(variable.getType() == ScriptVariableType::MULTIPLE || variable.getValue().getType() != ScriptValueType::INTEGER)
+		if((variable.getType() == ScriptVariableType::MULTIPLE) || variable.getValue().getType() != ScriptValueType::INTEGER)
 		{
 			_throwScriptError("LIST index must be of type INT!");
 			return -1;
@@ -139,11 +147,6 @@ const int ScriptInterpreter::_extractListIndexFromString(const string& valueStri
 		// Return
 		isAccessingList = true;
 		return variable.getValue().getInteger();
-	}
-	else
-	{
-		_throwScriptError("invalid LIST index syntax!");
-		return -1;
 	}
 }
 

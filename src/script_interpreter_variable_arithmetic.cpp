@@ -44,6 +44,24 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		return;
 	}
 
+	// Prepare list access
+	bool isAccessingLeftList = false;
+	auto leftListIndex = _extractListIndexFromString(nameString, isAccessingLeftList);
+
+	// Check if any error was thrown
+	if(_hasThrownError)
+	{
+		return;
+	}
+
+	// Remove list accessing characters
+	if(isAccessingLeftList)
+	{
+		auto isOpeningBracketFound = find(nameString.begin(), nameString.end(), '[');
+		auto bracketIndex = static_cast<unsigned int>(distance(nameString.begin(), isOpeningBracketFound));
+		nameString = nameString.substr(0, bracketIndex);
+	}
+
 	// Check if left variable is not existing
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
@@ -54,6 +72,20 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	// Retrieve left variable
 	auto& leftVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
+	// Validate list access
+	unsigned int leftValueIndex = 0;
+	if(isAccessingLeftList)
+	{
+		// Check if list index is invalid
+		if(!_validateListIndex(leftVariable, leftListIndex))
+		{
+			return;
+		}
+
+		// Copy list index
+		leftValueIndex = leftListIndex;
+	}
+
 	// Check if left variable is constant
 	if(leftVariable.isConstant())
 	{
@@ -62,106 +94,140 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	}
 
 	// Validate left variable
-	if(leftVariable.getType() == ScriptVariableType::MULTIPLE)
+	if(!isAccessingLeftList && (leftVariable.getType() == ScriptVariableType::MULTIPLE))
 	{
 		_throwScriptError("arithmetic not allowed on LIST values!");
 		return;
 	}
-	else if(leftVariable.getValue().getType() == ScriptValueType::STRING)
+	else if(leftVariable.getValue(leftValueIndex).getType() == ScriptValueType::STRING)
 	{
 		_throwScriptError("arithmetic not allowed on STR values!");
 		return;
 	}
-	else if(leftVariable.getValue().getType() == ScriptValueType::BOOLEAN)
+	else if(leftVariable.getValue(leftValueIndex).getType() == ScriptValueType::BOOLEAN)
 	{
 		_throwScriptError("arithmetic not allowed on BOOL values!");
 		return;
 	}
 
-	if(operatorString == NEGATION_KEYWORD) // Negation arithmetic
+	// Negation arithmetic
+	if(operatorString == NEGATION_KEYWORD)
 	{
-		if(leftVariable.getValue().getType() == ScriptValueType::INTEGER)
+		if(leftVariable.getValue(leftValueIndex).getType() == ScriptValueType::INTEGER)
 		{
-			auto integer = leftVariable.getValue().getInteger();
+			auto integer = leftVariable.getValue(leftValueIndex).getInteger();
 			integer *= -1;
-			leftVariable.getValue().setInteger(integer);
+			leftVariable.getValue(leftValueIndex).setInteger(integer);
+			return;
 		}
 		else
 		{
-			auto decimal = leftVariable.getValue().getDecimal();
+			auto decimal = leftVariable.getValue(leftValueIndex).getDecimal();
 			decimal *= -1.0f;
-			leftVariable.getValue().setDecimal(decimal);
+			leftVariable.getValue(leftValueIndex).setDecimal(decimal);
+			return;
 		}
 	}
-	else // Other arithmetic
+
+	// Check if value is missing
+	auto minLineSize = (operatorString.size() + nameString.size() + (isAccessingLeftList ? (to_string(leftListIndex).size() + 2) : 0) + 3);
+	if(scriptLine.size() < minLineSize)
 	{
-		// Check if value is present
-		if(scriptLine.size() < (nameString.size() + operatorString.size() + 3))
+		_throwScriptError("value missing!");
+		return;
+	}
+
+	// Extract value
+	string valueString = scriptLine.substr(minLineSize - 1);
+
+	// Determine value type
+	if(_isListValue(valueString))
+	{
+		_throwScriptError("arithmetic not allowed on LIST values!");
+	}
+	else if(_isStringValue(valueString))
+	{
+		_throwScriptError("arithmetic not allowed on STR values!");
+		return;
+	}
+	else if(_isDecimalValue(valueString))
+	{
+		auto value = ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitIntegerString(valueString)));
+		_performArithmeticOperation(leftVariable.getValue(leftValueIndex), operatorString, value);
+	}
+	else if(_isIntegerValue(valueString))
+	{
+		auto value = ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString)));
+		_performArithmeticOperation(leftVariable.getValue(leftValueIndex), operatorString, value);
+	}
+	else if(_isBooleanValue(valueString))
+	{
+		_throwScriptError("arithmetic not allowed on BOOL values!");
+		return;
+	}
+	else
+	{
+		// Prepare list access
+		bool isAccessingRightList = false;
+		auto rightListIndex = _extractListIndexFromString(valueString, isAccessingRightList);
+
+		// Check if any error was thrown
+		if(_hasThrownError)
 		{
-			_throwScriptError("value missing!");
 			return;
 		}
 
-		// Extract value
-		string valueString = scriptLine.substr(operatorString.size() + nameString.size() + 2);
+		// Remove list accessing characters
+		if(isAccessingRightList)
+		{
+			auto isOpeningBracketFound = find(valueString.begin(), valueString.end(), '[');
+			auto bracketIndex = static_cast<unsigned int>(distance(valueString.begin(), isOpeningBracketFound));
+			valueString = valueString.substr(0, bracketIndex);
+		}
 
-		// Determine value type
-		if(_isListValue(valueString))
+		// Check if right variable is not existing
+		if(!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))
+		{
+			_throwScriptError("variable \"" + valueString + "\" not existing!");
+			return;
+		}
+
+		// Retrieve right variable
+		const auto& rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
+
+		// Validate list access
+		unsigned int rightValueIndex = 0;
+		if(isAccessingRightList)
+		{
+			// Check if list index is invalid
+			if(!_validateListIndex(rightVariable, rightListIndex))
+			{
+				return;
+			}
+
+			// Copy list index
+			rightValueIndex = rightListIndex;
+		}
+
+		// Validate right variable
+		if(!isAccessingRightList && (rightVariable.getType() == ScriptVariableType::MULTIPLE))
 		{
 			_throwScriptError("arithmetic not allowed on LIST values!");
+			return;
 		}
-		else if(_isStringValue(valueString))
+		else if(rightVariable.getValue(rightValueIndex).getType() == ScriptValueType::STRING)
 		{
 			_throwScriptError("arithmetic not allowed on STR values!");
 			return;
 		}
-		else if(_isDecimalValue(valueString))
-		{
-			auto value = ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitIntegerString(valueString)));
-			_performArithmeticOperation(leftVariable.getValue(), operatorString, value);
-		}
-		else if(_isIntegerValue(valueString))
-		{
-			auto value = ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString)));
-			_performArithmeticOperation(leftVariable.getValue(), operatorString, value);
-		}
-		else if(_isBooleanValue(valueString))
+		else if(rightVariable.getValue(rightValueIndex).getType() == ScriptValueType::BOOLEAN)
 		{
 			_throwScriptError("arithmetic not allowed on BOOL values!");
 			return;
 		}
-		else
-		{
-			// Check if right variable is not existing
-			if(!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))
-			{
-				_throwScriptError("variable \"" + valueString + "\" not existing!");
-				return;
-			}
 
-			// Retrieve right variable
-			const auto& rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
-
-			// Validate right variable
-			if(rightVariable.getType() == ScriptVariableType::MULTIPLE)
-			{
-				_throwScriptError("arithmetic not allowed on LIST values!");
-				return;
-			}
-			else if(rightVariable.getValue().getType() == ScriptValueType::STRING)
-			{
-				_throwScriptError("arithmetic not allowed on STR values!");
-				return;
-			}
-			else if(rightVariable.getValue().getType() == ScriptValueType::BOOLEAN)
-			{
-				_throwScriptError("arithmetic not allowed on BOOL values!");
-				return;
-			}
-
-			// Perform arithmetic operation
-			_performArithmeticOperation(leftVariable.getValue(), operatorString, rightVariable.getValue());
-		}
+		// Perform arithmetic operation
+		_performArithmeticOperation(leftVariable.getValue(leftValueIndex), operatorString, rightVariable.getValue(rightValueIndex));
 	}
 }
 

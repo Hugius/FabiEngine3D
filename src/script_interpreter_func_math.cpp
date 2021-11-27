@@ -328,7 +328,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(co
 		}
 		else
 		{
-			_throwScriptError("math function not found!");
+			_throwScriptError("math function not existing!");
 		}
 	}
 

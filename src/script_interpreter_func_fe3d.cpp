@@ -84,7 +84,7 @@ const vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const st
 		// Check if function call not existing
 		if(!isExecuted)
 		{
-			_throwScriptError("fe3d function not found!");
+			_throwScriptError("fe3d function not existing!");
 
 		}
 

@@ -42,14 +42,15 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	}
 
 	// Check if value is missing
-	if(scriptLine.size() < (scriptLine.find('=') + 3))
+	auto minLineSize = (scriptLine.find('=') + 3);
+	if(scriptLine.size() < minLineSize)
 	{
 		_throwScriptError("value missing!");
 		return;
 	}
 
 	// Extract value
-	string valueString = scriptLine.substr(scriptLine.find('=') + 2);
+	string valueString = scriptLine.substr(minLineSize - 1);
 
 	// Prepare list access
 	bool isAccessingLeftList = false;

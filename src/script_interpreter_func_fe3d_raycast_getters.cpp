@@ -379,7 +379,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 	// Cannot execute raycast functionality when server is running
 	if(_fe3d.server_isRunning())
 	{
-		_throwScriptError("cannot access `fe3d:raycast` functionality as a networking server!");
+		_throwScriptError("cannot access `fe3d:raycast` functionality as networking server!");
 	}
 
 	return true;

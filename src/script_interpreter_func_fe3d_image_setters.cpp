@@ -364,7 +364,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& func
 	// Cannot execute image functionality when server is running
 	if(_fe3d.server_isRunning())
 	{
-		_throwScriptError("cannot access `fe3d:image` functionality as a networking server!");
+		_throwScriptError("cannot access `fe3d:image` functionality as networking server!");
 	}
 
 	// Return

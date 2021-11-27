@@ -577,7 +577,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& func
 	// Cannot execute model functionality when server is running
 	if(_fe3d.server_isRunning())
 	{
-		_throwScriptError("cannot access `fe3d:model` functionality as a networking server!");
+		_throwScriptError("cannot access `fe3d:model` functionality as networking server!");
 	}
 
 	// Return

@@ -5,21 +5,21 @@ const bool ScriptInterpreter::_validateListIndex(const ScriptVariable& list, uns
 	// Check if variable is not a list
 	if(list.getType() == ScriptVariableType::SINGLE)
 	{
-		_throwScriptError("variable is not a LIST!");
+		_throwScriptError("variable \"" + list.getID() + "\" not of type LIST!");
 		return false;
 	}
 
 	// Check if list index is negative
 	if(index < 0)
 	{
-		_throwScriptError("LIST index is negative!");
+		_throwScriptError("LIST index negative!");
 		return false;
 	}
 
 	// Check if list index is out of range
 	if(index >= list.getValueCount())
 	{
-		_throwScriptError("LIST index is out of range!");
+		_throwScriptError("LIST index out of range!");
 		return false;
 	}
 
@@ -86,7 +86,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	// Check if value is present
 	if(scriptLine.size() < (PUSHING_KEYWORD.size() + nameString.size() + 3))
 	{
-		_throwScriptError("LIST value missing!");
+		_throwScriptError("value missing!");
 		return;
 	}
 
@@ -111,12 +111,12 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	}
 
 	// Determine value type
-	if(_isListValue(valueString)) // LIST
+	if(_isListValue(valueString))
 	{
 		_throwScriptError("cannot push LIST to LIST!");
 		return;
 	}
-	else if(_isStringValue(valueString)) // STR
+	else if(_isStringValue(valueString))
 	{
 		// Remove the []
 		valueString.erase(valueString.begin());
@@ -125,15 +125,15 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 		// Add value
 		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::STRING, valueString));
 	}
-	else if(_isDecimalValue(valueString)) // DEC
+	else if(_isDecimalValue(valueString))
 	{
 		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitDecimalString(valueString))));
 	}
-	else if(_isIntegerValue(valueString)) // INT
+	else if(_isIntegerValue(valueString))
 	{
 		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString))));
 	}
-	else if(_isBooleanValue(valueString)) // BOOL
+	else if(_isBooleanValue(valueString))
 	{
 		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, (valueString == "<true>")));
 	}

@@ -32,7 +32,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 	// Detect infinite recursion
 	if(_executionDepth >= MAX_EXECUTION_DEPTH)
 	{
-		_throwScriptError("too many script execution layers, perhaps infinite recursion?");
+		_throwScriptError("maximum amount of execution layers reached, perhaps infinite recursion?");
 		return;
 	}
 
@@ -158,7 +158,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			   scriptLineText.substr(0, ELIF_KEYWORD.size()) == ELIF_KEYWORD ||
 			   scriptLineText.substr(0, ELSE_KEYWORD.size()) == ELSE_KEYWORD)
 			{
-				_throwScriptError("no LOOP/IF/ELIF/ELSE statement allowed as the last line!");
+				_throwScriptError("no LOOP/IF/ELIF/ELSE statement allowed as last line!");
 				return;
 			}
 		}
@@ -206,9 +206,13 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				return;
 			}
 
+			// Find script list
+			auto& scriptList =
+				(scriptType == ScriptType::INITIALIZE) ? _initializeScriptIDs :
+				(scriptType == ScriptType::UPDATE) ? _updateScriptIDs :
+				_terminateScriptIDs;
+
 			// Check if script exists
-			auto& scriptList = (scriptType == ScriptType::INITIALIZE) ? _initializeScriptIDs :
-				(scriptType == ScriptType::UPDATE) ? _updateScriptIDs : _terminateScriptIDs;
 			if(find(scriptList.begin(), scriptList.end(), scriptToExecute) != scriptList.end())
 			{
 				// Pause timer
@@ -228,13 +232,13 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			}
 			else
 			{
-				_throwScriptError("script does not exist!");
+				_throwScriptError("script \"" + scriptToExecute + "\" not existing!");
 				return;
 			}
 		}
 		else if(scriptLineText.substr(0, LOOP_KEYWORD.size()) == LOOP_KEYWORD)
 		{
-			// Check if loop statement ends with colon
+			// Check if "loop" statement ends with colon
 			if(scriptLineText == (LOOP_KEYWORD + ":"))
 			{
 				loopScopeDepths.push_back(scopeDepth); // Save loop's scope depth
@@ -245,7 +249,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			}
 			else
 			{
-				_throwScriptError("LOOP statement must end with colon!");
+				_throwScriptError("LOOP statement must end with ':'!");
 				return;
 			}
 		}
@@ -273,7 +277,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			}
 			else
 			{
-				_throwScriptError("IF statement must end with colon!");
+				_throwScriptError("IF statement must end with ':'!");
 				return;
 			}
 		}
@@ -309,13 +313,13 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				}
 				else
 				{
-					_throwScriptError("ELIF statement can only come after if or elif statement!");
+					_throwScriptError("ELIF statement can only come after IF or ELIF statement!");
 					return;
 				}
 			}
 			else
 			{
-				_throwScriptError("ELIF statement must end with colon!");
+				_throwScriptError("ELIF statement must end with ':'!");
 				return;
 			}
 		}
@@ -350,19 +354,19 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 					}
 					else
 					{
-						_throwScriptError("ELSE statement cannot have a condition!");
+						_throwScriptError("ELSE statement cannot have condition!");
 						return;
 					}
 				}
 				else
 				{
-					_throwScriptError("ELSE statement can only come after if or elif statement!");
+					_throwScriptError("ELSE statement can only come after IF or ELIF statement!");
 					return;
 				}
 			}
 			else
 			{
-				_throwScriptError("ELSE statement must end with colon!");
+				_throwScriptError("ELSE statement must end with ':'!");
 				return;
 			}
 		}

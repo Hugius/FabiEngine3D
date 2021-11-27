@@ -21,7 +21,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 	// List string cannot start with a comma
 	if(listString.front() == ',')
 	{
-		_throwScriptError("cannot start value with a comma!");
+		_throwScriptError("cannot start value with ','!");
 		return {};
 	}
 
@@ -37,7 +37,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 			}
 			else if(c != ' ') // After a value has been extracted, a comma must ALWAYS follow
 			{
-				_throwScriptError("values must be separated by commas!");
+				_throwScriptError("values must be separated by ','!");
 				return {};
 			}
 		}
@@ -219,7 +219,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 					// Check if variable is not existing
 					if(!_isLocalVariableExisting(currentValueString) && !_isGlobalVariableExisting(currentValueString))
 					{
-						_throwScriptError("variable not existing!");
+						_throwScriptError("variable \"" + currentValueString + "\" not existing!");
 						return {};
 					}
 
@@ -241,9 +241,9 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 					}
 
 					// Check if variable is a list
-					if(variable.getType() == ScriptVariableType::MULTIPLE)
+					if(!isAccessingList && variable.getType() == ScriptVariableType::MULTIPLE)
 					{
-						_throwScriptError("LIST cannot be used inside another LIST!");
+						_throwScriptError("LIST cannot be used inside LIST!");
 						return {};
 					}
 
@@ -267,7 +267,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 	// Check if still building any values
 	if(isBuildingString || isBuildingNumber || isBuildingBoolean || isBuildingVariable)
 	{
-		_throwScriptError("invalid value(s) syntax!");
+		_throwScriptError("invalid syntax!");
 		return {};
 	}
 

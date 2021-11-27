@@ -25,7 +25,7 @@ void FabiEngine3D::client_start(const string & username)
 	}
 	if(find(username.begin(), username.end(), ';') != username.end())
 	{
-		Logger::throwWarning("Networking client tried to start: username cannot contain semicolons!");
+		Logger::throwWarning("Networking client tried to start: username cannot contain ':'!");
 		return;
 	}
 
@@ -77,7 +77,7 @@ void FabiEngine3D::client_sendMessageTCP(const string& content)
 	}
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
-		Logger::throwWarning("Networking client tried to send TCP message: cannot contain semicolons!");
+		Logger::throwWarning("Networking client tried to send TCP message: cannot contain ':'!");
 		return;
 	}
 	if(NetworkUtils::isMessageReserved(content))
@@ -113,7 +113,7 @@ void FabiEngine3D::client_sendMessageUDP(const string& content)
 	}
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
-		Logger::throwWarning("Networking client tried to send UDP message: cannot contain semicolons!");
+		Logger::throwWarning("Networking client tried to send UDP message: cannot contain ':'!");
 		return;
 	}
 	if(NetworkUtils::isMessageReserved(content))

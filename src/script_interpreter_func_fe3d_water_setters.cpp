@@ -62,7 +62,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetterFunction(const string& func
 	// Cannot execute water functionality when server is running
 	if(_fe3d.server_isRunning())
 	{
-		_throwScriptError("cannot access `fe3d:water` functionality as a networking server!");
+		_throwScriptError("cannot access `fe3d:water` functionality as networking server!");
 	}
 
 	// Return

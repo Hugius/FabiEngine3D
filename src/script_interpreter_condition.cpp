@@ -72,7 +72,12 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 	{
 		if(mustBeValue)
 		{
-			if(_isStringValue(elementString))
+			if(_isListValue(elementString))
+			{
+				_throwScriptError("LIST value cannot be used in condition!");
+				return false;
+			}
+			else if(_isStringValue(elementString))
 			{
 				elementString.erase(elementString.begin());
 				elementString.pop_back();
@@ -92,6 +97,24 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 			}
 			else
 			{
+				// Prepare list access
+				bool isAccessingList = false;
+				auto listIndex = _extractListIndexFromString(elementString, isAccessingList);
+
+				// Check if any error was thrown
+				if(_hasThrownError)
+				{
+					return {};
+				}
+
+				// Remove list accessing characters
+				if(isAccessingList)
+				{
+					auto isOpeningBracketFound = find(elementString.begin(), elementString.end(), '[');
+					auto bracketIndex = static_cast<unsigned int>(distance(elementString.begin(), isOpeningBracketFound));
+					elementString = elementString.substr(0, bracketIndex);
+				}
+
 				// Check if variable is not existing
 				if(!_isLocalVariableExisting(elementString) && !_isGlobalVariableExisting(elementString))
 				{
@@ -102,15 +125,29 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 				// Retrieve variable
 				const auto& variable = (_isLocalVariableExisting(elementString) ? _getLocalVariable(elementString) : _getGlobalVariable(elementString));
 
-				// Check if variable is a list
-				if(variable.getType() == ScriptVariableType::MULTIPLE)
+				// Validate list access
+				unsigned int valueIndex = 0;
+				if(isAccessingList)
 				{
-					_throwScriptError("LIST variable cannot be used in a condition!");
+					// Check if list index is invalid
+					if(!_validateListIndex(variable, listIndex))
+					{
+						return {};
+					}
+
+					// Copy list index
+					valueIndex = listIndex;
+				}
+
+				// Check if variable is a list
+				if(!isAccessingList && variable.getType() == ScriptVariableType::MULTIPLE)
+				{
+					_throwScriptError("LIST variable cannot be used in condition!");
 					return false;
 				}
 
 				// Add value
-				comparisonValues.push_back(variable.getValue());
+				comparisonValues.push_back(variable.getValue(valueIndex));
 			}
 
 			// Check if current condition is fully composed
@@ -168,7 +205,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 	// Check if condition did not end with a logic operator
 	if(mustBeValue || mustBeComparisonOperator)
 	{
-		_throwScriptError("condition is incomplete!");
+		_throwScriptError("condition incomplete!");
 		return false;
 	}
 

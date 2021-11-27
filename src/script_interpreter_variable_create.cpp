@@ -131,14 +131,14 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 	// Check if global variable starts with '_'
 	if(scope == ScriptVariableScope::GLOBAL && nameString.front() != '_')
 	{
-		_throwScriptError("global variables must start with underscore!");
+		_throwScriptError("global variables must start with '_'!");
 		return;
 	}
 
 	// Check if local variable does not start with '_'
 	if(scope == ScriptVariableScope::LOCAL && nameString.front() == '_')
 	{
-		_throwScriptError("local variables cannot start with underscore!");
+		_throwScriptError("local variables cannot start with '_'!");
 		return;
 	}
 
@@ -156,7 +156,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 	if((scope == ScriptVariableScope::LOCAL && _isLocalVariableExisting(nameString)) ||
 	   (scope == ScriptVariableScope::GLOBAL && _isGlobalVariableExisting(nameString)))
 	{
-		_throwScriptError("variable already defined!");
+		_throwScriptError("variable \"" + nameString + "\" already defined!");
 		return;
 	}
 
@@ -289,7 +289,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		}
 		else if(returnValues[0].getType() == ScriptValueType::EMPTY)
 		{
-			_throwScriptError("function must return a value!");
+			_throwScriptError("function must return value!");
 			return;
 		}
 		else if((typeString == STRING_KEYWORD) && (returnValues[0].getType() == ScriptValueType::STRING))

@@ -57,7 +57,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	// Check if left variable is constant
 	if(leftVariable.isConstant())
 	{
-		_throwScriptError("constant variables cannot be changed!");
+		_throwScriptError("CONST variables cannot be changed!");
 		return;
 	}
 

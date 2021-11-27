@@ -50,7 +50,7 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 	// Check if variable is constant
 	if(variable.isConstant())
 	{
-		_throwScriptError("constant variables cannot be typecasted!");
+		_throwScriptError("CONST variables cannot be typecasted!");
 		return;
 	}
 

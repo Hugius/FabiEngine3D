@@ -82,7 +82,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	// Check if left variable is constant
 	if(leftVariable.isConstant())
 	{
-		_throwScriptError("constant variables cannot be changed!");
+		_throwScriptError("CONST variables cannot be changed!");
 		return;
 	}
 
@@ -194,7 +194,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		}
 		else if(returnValues[0].getType() == ScriptValueType::EMPTY)
 		{
-			_throwScriptError("function must return a value!");
+			_throwScriptError("function must return value!");
 			return;
 		}
 		else if(isSingleVariable && isStringVariable && (returnValues[0].getType() == ScriptValueType::STRING))

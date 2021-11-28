@@ -124,7 +124,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 		if(((modelID[0] != '@') || isLevelOfDetailEntity) && isCustomWorldModel)
 		{
 			// Retrieve all bound AABB IDs
-			auto aabbIDs = _fe3d.aabb_getChildIDs(modelID, AabbParentType::MODEL);
+			auto aabbIDs = _fe3d.aabb_getChildIDs(modelID, AabbParentEntityType::MODEL);
 
 			// Data to save
 			auto isVisible = _fe3d.model_isVisible(modelID);
@@ -327,7 +327,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 		if((billboardID[0] != '@') && isCustomWorldBillboard)
 		{
 			// Retrieve all bound AABB IDs
-			auto aabbIDs = _fe3d.aabb_getChildIDs(billboardID, AabbParentType::BILLBOARD);
+			auto aabbIDs = _fe3d.aabb_getChildIDs(billboardID, AabbParentEntityType::BILLBOARD);
 
 			// Data to save
 			auto isVisible = _fe3d.billboard_isVisible(billboardID);

@@ -1,6 +1,6 @@
 #pragma once
 
-enum class AabbParentType
+enum class AabbParentEntityType
 {
 	MODEL,
 	BILLBOARD

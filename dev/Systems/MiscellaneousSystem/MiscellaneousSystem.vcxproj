@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\aabb_parent_type.hpp" />
+    <ClInclude Include="..\..\..\src\aabb_parent_entity_type.hpp" />
     <ClInclude Include="..\..\..\src\animation_speed_type.hpp" />
     <ClInclude Include="..\..\..\src\bloom_type.hpp" />
     <ClInclude Include="..\..\..\src\blur_direction.hpp" />

@@ -3,7 +3,7 @@
 #include "input_type.hpp"
 #include "direction.hpp"
 #include "direction_order.hpp"
-#include "aabb_parent_type.hpp"
+#include "aabb_parent_entity_type.hpp"
 #include "network_client_message.hpp"
 #include "network_server_message.hpp"
 #include "mathematics.hpp"
@@ -418,7 +418,7 @@ public:
 
 	// AABB - setters
 	void aabb_create(const string& ID);
-	void aabb_setParent(const string& ID, const string& parentID, AabbParentType parentType);
+	void aabb_setParent(const string& ID, const string& parentID, AabbParentEntityType parentEntityType);
 	void aabb_deleteAll();
 	void aabb_delete(const string& ID);
 	void aabb_setVisible(const string& ID, bool isVisible);
@@ -436,7 +436,7 @@ public:
 	void aabb_scaleTo(const string& ID, fvec3 target, float speed);
 
 	// AABB - getters
-	const vector<string> aabb_getChildIDs(const string& parentID, AabbParentType parentType) const;
+	const vector<string> aabb_getChildIDs(const string& parentID, AabbParentEntityType parentEntityType) const;
 	const vector<string> aabb_getAllIDs() const;
 	const string& aabb_getParentID(const string& ID) const;
 	const fvec3 aabb_getPosition(const string& ID) const;
@@ -446,7 +446,7 @@ public:
 	const bool aabb_isExisting(const string& ID) const;
 	const bool aabb_isVisible(const string& ID) const;
 	const bool aabb_hasParent(const string& ID) const;
-	const AabbParentType aabb_getParentType(const string& ID) const;
+	const AabbParentEntityType aabb_getParentEntityType(const string& ID) const;
 
 	// POINTLIGHT - setters
 	void pointlight_create(const string& ID);

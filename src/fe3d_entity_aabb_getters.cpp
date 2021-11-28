@@ -50,7 +50,7 @@ const bool FabiEngine3D::aabb_hasParent(const string& ID) const
 	return _core->_aabbEntityManager.getEntity(ID)->hasParent();
 }
 
-const vector<string> FabiEngine3D::aabb_getChildIDs(const string& parentID, AabbParentType parentType) const
+const vector<string> FabiEngine3D::aabb_getChildIDs(const string& parentID, AabbParentEntityType parentEntityType) const
 {
 	vector<string> IDs;
 
@@ -62,8 +62,8 @@ const vector<string> FabiEngine3D::aabb_getChildIDs(const string& parentID, Aabb
 		{
 			// Check if parent matches
 			if(parentID == entity->getParentEntityID() && (
-				(entity->getParentEntityType() == AabbParentType::MODEL && (parentType == AabbParentType::MODEL)) ||
-				(entity->getParentEntityType() == AabbParentType::BILLBOARD && (parentType == AabbParentType::BILLBOARD))))
+				(entity->getParentEntityType() == AabbParentEntityType::MODEL && (parentEntityType == AabbParentEntityType::MODEL)) ||
+				(entity->getParentEntityType() == AabbParentEntityType::BILLBOARD && (parentEntityType == AabbParentEntityType::BILLBOARD))))
 			{
 				IDs.push_back(entity->getID());
 			}
@@ -90,7 +90,7 @@ const string& FabiEngine3D::aabb_getParentID(const string& ID) const
 	return _core->_aabbEntityManager.getEntity(ID)->getParentEntityID();
 }
 
-const AabbParentType FabiEngine3D::aabb_getParentType(const string& ID) const
+const AabbParentEntityType FabiEngine3D::aabb_getParentEntityType(const string& ID) const
 {
 	return _core->_aabbEntityManager.getEntity(ID)->getParentEntityType();
 }

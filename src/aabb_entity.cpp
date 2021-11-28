@@ -64,10 +64,10 @@ void AabbEntity::updateTransformationMatrix()
 	_transformationMatrix = (translationMatrix * scalingMatrix);
 }
 
-void AabbEntity::setParent(const string& parentID, AabbParentType parentType)
+void AabbEntity::setParent(const string& parentID, AabbParentEntityType parentEntityType)
 {
 	_parentEntityID = parentID;
-	_parentEntityType = parentType;
+	_parentEntityType = parentEntityType;
 }
 
 void AabbEntity::setFollowParentEntityTransformation(bool mustFollow)
@@ -198,7 +198,7 @@ const string& AabbEntity::getParentEntityID() const
 	return _parentEntityID;
 }
  
-const AabbParentType AabbEntity::getParentEntityType() const
+const AabbParentEntityType AabbEntity::getParentEntityType() const
 {
 	return _parentEntityType;
 }

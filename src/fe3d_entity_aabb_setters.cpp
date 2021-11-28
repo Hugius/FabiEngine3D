@@ -6,9 +6,9 @@ void FabiEngine3D::aabb_create(const string& ID)
 	_core->_aabbEntityManager.createEntity(ID);
 }
 
-void FabiEngine3D::aabb_setParent(const string& ID, const string& parentID, AabbParentType parentType)
+void FabiEngine3D::aabb_setParent(const string& ID, const string& parentID, AabbParentEntityType parentEntityType)
 {
-	_core->_aabbEntityManager.getEntity(ID)->setParent(parentID, parentType);
+	_core->_aabbEntityManager.getEntity(ID)->setParent(parentID, parentEntityType);
 }
 
 void FabiEngine3D::aabb_deleteAll()

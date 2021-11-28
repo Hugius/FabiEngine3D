@@ -73,7 +73,7 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 		if(entity->hasParent())
 		{
 			// Determine parent type
-			if(entity->getParentEntityType() == AabbParentType::MODEL)
+			if(entity->getParentEntityType() == AabbParentEntityType::MODEL)
 			{
 				// Try to find the parent entity
 				auto foundPair = modelEntities.find(entity->getParentEntityID());

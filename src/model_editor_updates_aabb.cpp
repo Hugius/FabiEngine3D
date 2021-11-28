@@ -25,7 +25,7 @@ void ModelEditor::_updateMainAabbMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto IDs = _fe3d.aabb_getChildIDs(_currentModelID, AabbParentType::MODEL);
+			auto IDs = _fe3d.aabb_getChildIDs(_currentModelID, AabbParentEntityType::MODEL);
 			for(auto& ID : IDs)
 			{
 				ID = ID.substr(string(_currentModelID + "@").size());
@@ -36,7 +36,7 @@ void ModelEditor::_updateMainAabbMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto IDs = _fe3d.aabb_getChildIDs(_currentModelID, AabbParentType::MODEL);
+			auto IDs = _fe3d.aabb_getChildIDs(_currentModelID, AabbParentEntityType::MODEL);
 			for(auto& ID : IDs)
 			{
 				ID = ID.substr(string(_currentModelID + "@").size());
@@ -65,7 +65,7 @@ void ModelEditor::_updateChoiceAabbMenu()
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			// Show all AABBs
-			for(const auto& aabbID : _fe3d.aabb_getChildIDs(_currentModelID, AabbParentType::MODEL))
+			for(const auto& aabbID : _fe3d.aabb_getChildIDs(_currentModelID, AabbParentEntityType::MODEL))
 			{
 				_fe3d.aabb_setVisible(aabbID, true);
 				_fe3d.aabb_setFollowParentVisibility(aabbID, true);
@@ -148,7 +148,7 @@ void ModelEditor::_updateAabbCreating()
 
 						// Bind AABB
 						_fe3d.aabb_create(_currentModelID + "@" + _currentAabbID);
-						_fe3d.aabb_setParent((_currentModelID + "@" + _currentAabbID), _currentModelID, AabbParentType::MODEL);
+						_fe3d.aabb_setParent((_currentModelID + "@" + _currentAabbID), _currentModelID, AabbParentEntityType::MODEL);
 
 						// Go to next screen
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
@@ -184,7 +184,7 @@ void ModelEditor::_updateAabbChoosing()
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("aabbList");
 
 		// Hide all AABBs
-		for(const auto& aabbID : _fe3d.aabb_getChildIDs(_currentModelID, AabbParentType::MODEL))
+		for(const auto& aabbID : _fe3d.aabb_getChildIDs(_currentModelID, AabbParentEntityType::MODEL))
 		{
 			_fe3d.aabb_setVisible(aabbID, false);
 			_fe3d.aabb_setFollowParentVisibility(aabbID, false);
@@ -219,7 +219,7 @@ void ModelEditor::_updateAabbChoosing()
 		else if(_gui.getGlobalScreen()->isChoiceFormCancelled("aabbList")) // Cancelled choosing
 		{
 			// Show all AABBs again
-			for(const auto& aabbID : _fe3d.aabb_getChildIDs(_currentModelID, AabbParentType::MODEL))
+			for(const auto& aabbID : _fe3d.aabb_getChildIDs(_currentModelID, AabbParentEntityType::MODEL))
 			{
 				_fe3d.aabb_setVisible(aabbID, true);
 				_fe3d.aabb_setFollowParentVisibility(aabbID, true);

@@ -141,7 +141,7 @@ const bool ModelEditor::saveModelEntitiesToFile() const
 		if(!isInstanced)
 		{
 			// Write AABB data
-			for(const auto& aabbID : _fe3d.aabb_getChildIDs(modelID, AabbParentType::MODEL))
+			for(const auto& aabbID : _fe3d.aabb_getChildIDs(modelID, AabbParentEntityType::MODEL))
 			{
 				// Retrieve all values
 				auto position = _fe3d.aabb_getPosition(aabbID);

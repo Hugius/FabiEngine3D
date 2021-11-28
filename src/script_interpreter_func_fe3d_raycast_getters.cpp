@@ -151,7 +151,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 			{
 				// Check if AABB has modelEntity parent
 				if(_fe3d.aabb_hasParent(foundAabbID) &&
-				   (_fe3d.aabb_getParentType(foundAabbID) == AabbParentType::MODEL))
+				   (_fe3d.aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::MODEL))
 				{
 					if(arguments[1].getString().empty()) // No specific AABB part
 					{
@@ -196,7 +196,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 			{
 				// Check if AABB has modelEntity parent
 				if(_fe3d.aabb_hasParent(foundAabbID) &&
-				   (_fe3d.aabb_getParentType(foundAabbID) == AabbParentType::MODEL))
+				   (_fe3d.aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::MODEL))
 				{
 					if(arguments[1].getString().empty()) // No specific AABB part
 					{
@@ -237,7 +237,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 			{
 				// Check if AABB has modelEntity parent
 				if(_fe3d.aabb_hasParent(foundAabbID) &&
-				   (_fe3d.aabb_getParentType(foundAabbID) == AabbParentType::MODEL))
+				   (_fe3d.aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::MODEL))
 				{
 					result = _fe3d.aabb_getParentID(foundAabbID);
 				}
@@ -261,7 +261,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 			{
 				// Check if AABB has modelEntity parent
 				if(_fe3d.aabb_hasParent(intersection.first) &&
-				   (_fe3d.aabb_getParentType(intersection.first) == AabbParentType::MODEL))
+				   (_fe3d.aabb_getParentEntityType(intersection.first) == AabbParentEntityType::MODEL))
 				{
 					result = intersection.second;
 				}
@@ -287,7 +287,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 			{
 				// Check if AABB has billboardEntity parent
 				if(_fe3d.aabb_hasParent(foundAabbID) &&
-				   (_fe3d.aabb_getParentType(foundAabbID) == AabbParentType::BILLBOARD))
+				   (_fe3d.aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::BILLBOARD))
 				{
 					result = _fe3d.aabb_getParentID(foundAabbID);
 				}
@@ -311,7 +311,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 			{
 				// Check if AABB has billboardEntity parent
 				if(_fe3d.aabb_hasParent(foundAabbID) &&
-				   (_fe3d.aabb_getParentType(foundAabbID) == AabbParentType::BILLBOARD))
+				   (_fe3d.aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::BILLBOARD))
 				{
 					result = _fe3d.aabb_getParentID(foundAabbID);
 				}
@@ -337,7 +337,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 			{
 				// Check if AABB has billboardEntity parent
 				if(_fe3d.aabb_hasParent(intersection.first) &&
-				   (_fe3d.aabb_getParentType(intersection.first) == AabbParentType::BILLBOARD))
+				   (_fe3d.aabb_getParentEntityType(intersection.first) == AabbParentEntityType::BILLBOARD))
 				{
 					result = intersection.second;
 				}
@@ -361,7 +361,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& fu
 			{
 				// Check if AABB has billboardEntity parent
 				if(_fe3d.aabb_hasParent(intersection.first) &&
-				   (_fe3d.aabb_getParentType(intersection.first) == AabbParentType::BILLBOARD))
+				   (_fe3d.aabb_getParentEntityType(intersection.first) == AabbParentEntityType::BILLBOARD))
 				{
 					result = intersection.second;
 				}

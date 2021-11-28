@@ -3,7 +3,7 @@
 #include "base_entity.hpp"
 #include "render_buffer.hpp"
 #include "direction.hpp"
-#include "aabb_parent_type.hpp"
+#include "aabb_parent_entity_type.hpp"
 
 #include <memory>
 
@@ -26,7 +26,7 @@ public:
 	void scale(fvec3 value);
 	void moveTo(fvec3 target, float speed);
 	void scaleTo(fvec3 target, float speed);
-	void setParent(const string& parentID, AabbParentType parentType);
+	void setParent(const string& parentID, AabbParentEntityType parentEntityType);
 	void setFollowParentEntityTransformation(bool mustFollow);
 	void setFollowParentEntityVisibility(bool mustFollow);
 	void setCollisionDirection(Direction value);
@@ -59,7 +59,7 @@ public:
 
 	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> getRenderBuffer() const;
-	const AabbParentType getParentEntityType() const;
+	const AabbParentEntityType getParentEntityType() const;
 	const Direction getCollisionDirection() const;
 
 private:
@@ -91,6 +91,6 @@ private:
 
 	// MISCELLANEOUS
 	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
-	AabbParentType _parentEntityType;
+	AabbParentEntityType _parentEntityType;
 	Direction _collisionDirection;
 };

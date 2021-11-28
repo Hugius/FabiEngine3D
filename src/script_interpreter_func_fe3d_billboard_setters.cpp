@@ -303,7 +303,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				// Retrieve all bound AABB IDs
-				auto aabbIDs = _fe3d.aabb_getChildIDs(arguments[0].getString(), AabbParentType::BILLBOARD);
+				auto aabbIDs = _fe3d.aabb_getChildIDs(arguments[0].getString(), AabbParentEntityType::BILLBOARD);
 
 				// Check if billboardEntity has no AABBs
 				if(aabbIDs.empty())
@@ -334,7 +334,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& 
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				// Retrieve all bound AABB IDs
-				auto aabbIDs = _fe3d.aabb_getChildIDs(arguments[0].getString(), AabbParentType::BILLBOARD);
+				auto aabbIDs = _fe3d.aabb_getChildIDs(arguments[0].getString(), AabbParentEntityType::BILLBOARD);
 
 				// Check if billboardEntity has no AABBs
 				if(aabbIDs.empty())

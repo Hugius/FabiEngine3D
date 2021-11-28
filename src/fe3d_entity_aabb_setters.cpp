@@ -38,12 +38,12 @@ void FabiEngine3D::aabb_setCollisionResponsive(const string& ID, bool responsive
 
 void FabiEngine3D::aabb_setFollowParentTransformation(const string& ID, bool mustFollow)
 {
-	_core->_aabbEntityManager.getEntity(ID)->setFollowParentTransformation(mustFollow);
+	_core->_aabbEntityManager.getEntity(ID)->setFollowParentEntityTransformation(mustFollow);
 }
 
 void FabiEngine3D::aabb_setFollowParentVisibility(const string& ID, bool mustFollow)
 {
-	_core->_aabbEntityManager.getEntity(ID)->setFollowParentVisibility(mustFollow);
+	_core->_aabbEntityManager.getEntity(ID)->setFollowParentEntityVisibility(mustFollow);
 }
 
 void FabiEngine3D::aabb_setLocalPosition(const string& ID, fvec3 position)

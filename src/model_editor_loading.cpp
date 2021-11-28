@@ -506,7 +506,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 			_fe3d.aabb_create(aabbID);
 
 			// Set properties
-			_fe3d.aabb_setParent(aabbID, modelID, AabbParentType::MODEL_ENTITY);
+			_fe3d.aabb_setParent(aabbID, modelID, AabbParentType::MODEL);
 			_fe3d.aabb_setLocalPosition(aabbID, position);
 			_fe3d.aabb_setLocalSize(aabbID, size);
 		}

@@ -67,17 +67,17 @@ void AabbEntity::updateTransformationMatrix()
 void AabbEntity::setParent(const string& parentID, AabbParentType parentType)
 {
 	_parentEntityID = parentID;
-	_parentType = parentType;
+	_parentEntityType = parentType;
 }
 
-void AabbEntity::setFollowParentTransformation(bool mustFollow)
+void AabbEntity::setFollowParentEntityTransformation(bool mustFollow)
 {
-	_mustFollowParentTransformation = mustFollow;
+	_mustFollowParentEntityTransformation = mustFollow;
 }
 
-void AabbEntity::setFollowParentVisibility(bool mustFollow)
+void AabbEntity::setFollowParentEntityVisibility(bool mustFollow)
 {
-	_mustFollowParentVisibility = mustFollow;
+	_mustFollowParentEntityVisibility = mustFollow;
 }
 
 void AabbEntity::setCollisionDirection(Direction value)
@@ -198,9 +198,9 @@ const string& AabbEntity::getParentEntityID() const
 	return _parentEntityID;
 }
  
-const AabbParentType AabbEntity::getParentType() const
+const AabbParentType AabbEntity::getParentEntityType() const
 {
-	return _parentType;
+	return _parentEntityType;
 }
 
 const Direction AabbEntity::getCollisionDirection() const
@@ -233,12 +233,12 @@ const bool AabbEntity::hasRenderBuffer() const
 	return (_renderBuffer != nullptr);
 }
 
-const bool AabbEntity::mustFollowParentTransformation() const
+const bool AabbEntity::mustFollowParentEntityTransformation() const
 {
-	return _mustFollowParentTransformation;
+	return _mustFollowParentEntityTransformation;
 }
 
-const bool AabbEntity::mustFollowParentVisibility() const
+const bool AabbEntity::mustFollowParentEntityVisibility() const
 {
-	return _mustFollowParentVisibility;
+	return _mustFollowParentEntityVisibility;
 }

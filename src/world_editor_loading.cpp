@@ -319,7 +319,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 				// Bind AABB
 				_fe3d.aabb_create(newModelID);
-				_fe3d.aabb_setParent(newModelID, newModelID, AabbParentType::MODEL_ENTITY);
+				_fe3d.aabb_setParent(newModelID, newModelID, AabbParentType::MODEL);
 				_fe3d.aabb_setLocalSize(newModelID, DEFAULT_SPEAKER_AABB_SIZE);
 				_fe3d.aabb_setCollisionResponsive(newModelID, false);
 			}
@@ -370,7 +370,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 				// Bind AABB
 				_fe3d.aabb_create(newModelID);
-				_fe3d.aabb_setParent(newModelID, newModelID, AabbParentType::MODEL_ENTITY);
+				_fe3d.aabb_setParent(newModelID, newModelID, AabbParentType::MODEL);
 				_fe3d.aabb_setLocalSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
 				_fe3d.aabb_setCollisionResponsive(newModelID, false);
 			}
@@ -422,7 +422,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 				// Bind AABB
 				_fe3d.aabb_create(newModelID);
-				_fe3d.aabb_setParent(newModelID, newModelID, AabbParentType::MODEL_ENTITY);
+				_fe3d.aabb_setParent(newModelID, newModelID, AabbParentType::MODEL);
 				_fe3d.aabb_setLocalSize(newModelID, DEFAULT_TORCH_AABB_SIZE);
 				_fe3d.aabb_setCollisionResponsive(newModelID, false);
 			}
@@ -465,7 +465,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 				// Bind AABB
 				_fe3d.aabb_create(newModelID);
-				_fe3d.aabb_setParent(newModelID, newModelID, AabbParentType::MODEL_ENTITY);
+				_fe3d.aabb_setParent(newModelID, newModelID, AabbParentType::MODEL);
 				_fe3d.aabb_setLocalSize(newModelID, DEFAULT_CAMERA_AABB_SIZE);
 				_fe3d.aabb_setCollisionResponsive(newModelID, false);
 			}

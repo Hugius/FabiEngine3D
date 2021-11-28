@@ -73,7 +73,7 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 		if(entity->hasParent())
 		{
 			// Determine parent type
-			if(entity->getParentType() == AabbParentType::MODEL_ENTITY)
+			if(entity->getParentEntityType() == AabbParentType::MODEL)
 			{
 				// Try to find the parent entity
 				auto foundPair = modelEntities.find(entity->getParentEntityID());
@@ -86,7 +86,7 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 					if(!parentEntity->isLevelOfDetailed())
 					{
 						// AABB must be allowed to follow parent
-						if(entity->mustFollowParentTransformation())
+						if(entity->mustFollowParentEntityTransformation())
 						{
 							// Retrieve maximum rotation & direction (based on parent rotation)
 							Direction rotationDirection;
@@ -189,7 +189,7 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 						else
 						{
 							// Follow parent's visibility
-							if(entity->mustFollowParentVisibility())
+							if(entity->mustFollowParentEntityVisibility())
 							{
 								entity->setVisible(parentEntity->isVisible());
 							}
@@ -211,7 +211,7 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 					auto parentEntity = foundPair->second;
 
 					// AABB must be allowed to follow parent
-					if(entity->mustFollowParentTransformation())
+					if(entity->mustFollowParentEntityTransformation())
 					{
 						const auto parentSize = parentEntity->getSize();
 						auto newAabbSize = fvec3(parentSize.x, parentSize.y, 0.0f);
@@ -268,7 +268,7 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 					}
 
 					// Update visibility
-					if(entity->mustFollowParentVisibility())
+					if(entity->mustFollowParentEntityVisibility())
 					{
 						entity->setVisible(parentEntity->isVisible());
 					}

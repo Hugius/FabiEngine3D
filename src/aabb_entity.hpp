@@ -27,8 +27,8 @@ public:
 	void moveTo(fvec3 target, float speed);
 	void scaleTo(fvec3 target, float speed);
 	void setParent(const string& parentID, AabbParentType parentType);
-	void setFollowParentTransformation(bool mustFollow);
-	void setFollowParentVisibility(bool mustFollow);
+	void setFollowParentEntityTransformation(bool mustFollow);
+	void setFollowParentEntityVisibility(bool mustFollow);
 	void setCollisionDirection(Direction value);
 	void setRaycastResponsive(bool value);
 	void setCollisionResponsive(bool value);
@@ -54,12 +54,12 @@ public:
 	const bool hasParent() const;
 	const bool hasCollided() const;
 	const bool hasRenderBuffer() const;
-	const bool mustFollowParentTransformation() const;
-	const bool mustFollowParentVisibility() const;
+	const bool mustFollowParentEntityTransformation() const;
+	const bool mustFollowParentEntityVisibility() const;
 
 	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> getRenderBuffer() const;
-	const AabbParentType getParentType() const;
+	const AabbParentType getParentEntityType() const;
 	const Direction getCollisionDirection() const;
 
 private:
@@ -83,14 +83,14 @@ private:
 	float _sizeTargetSpeed = 0.0f;
 
 	// BOOL
-	bool _mustFollowParentTransformation = true;
-	bool _mustFollowParentVisibility = true;
+	bool _mustFollowParentEntityTransformation = true;
+	bool _mustFollowParentEntityVisibility = true;
 	bool _isRaycastResponsive = true;
 	bool _isCollisionResponsive = true;
 	bool _hasCollided = false;
 
 	// MISCELLANEOUS
 	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
-	AabbParentType _parentType;
+	AabbParentType _parentEntityType;
 	Direction _collisionDirection;
 };

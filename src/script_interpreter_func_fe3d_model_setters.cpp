@@ -278,7 +278,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				// Retrieve all bound AABB IDs
-				auto aabbIDs = _fe3d.aabb_getChildIDs(arguments[0].getString(), AabbParentType::MODEL_ENTITY);
+				auto aabbIDs = _fe3d.aabb_getChildIDs(arguments[0].getString(), AabbParentType::MODEL);
 
 				// Check if modelEntity has no AABBs
 				if(aabbIDs.empty())
@@ -309,7 +309,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& func
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				// Retrieve all bound AABB IDs
-				auto aabbIDs = _fe3d.aabb_getChildIDs(arguments[0].getString(), AabbParentType::MODEL_ENTITY);
+				auto aabbIDs = _fe3d.aabb_getChildIDs(arguments[0].getString(), AabbParentType::MODEL);
 
 				// Check if modelEntity has no AABBs
 				if(aabbIDs.empty())

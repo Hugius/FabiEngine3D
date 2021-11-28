@@ -25,7 +25,12 @@
 - **Normal Map Path**: the path of the normal map file
   - Constraints: none
 
-### 3.2 `decimal`
+### 3.2 `decimal3`
+
+- **Wireframe Color**: the RGB color multiplier of the wireframe
+  - Constraints: between `0.0` and `1.0`
+
+### 3.3 `decimal`
 
 - **Max Height**: the maximum height of the mesh
   - Constraints: at least `0.0`
@@ -44,7 +49,7 @@
 - **Blue Repeat**: the amount of times the textures of the blue blend map channel are repeated
   - Constraints: at least `0.0`
 
-### 3.3 `boolean`
+### 3.4 `boolean`
 
 - **Specular**: specular lighting is rendered on the mesh
   - Constraints: none

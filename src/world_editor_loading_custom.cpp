@@ -209,7 +209,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				//_fe3d.model_setTransparency(modelID, transparency);
 				//_fe3d.model_setLightness(modelID, lightness);
 				_fe3d.model_setVisible(modelID, isVisible);
-				for(const auto& ID : _fe3d.aabb_getChildIDs(modelID, AabbParentType::MODEL_ENTITY))
+				for(const auto& ID : _fe3d.aabb_getChildIDs(modelID, AabbParentType::MODEL))
 				{
 					_fe3d.aabb_setRaycastResponsive(ID, isAabbRaycastResponsive);
 					_fe3d.aabb_setCollisionResponsive(ID, isAabbCollisionResponsive);
@@ -417,7 +417,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				_fe3d.billboard_setMinHeight(billboardID, minHeight);
 				_fe3d.billboard_setMaxHeight(billboardID, maxHeight);
 				_fe3d.billboard_setVisible(billboardID, isVisible);
-				for(const auto& ID : _fe3d.aabb_getChildIDs(billboardID, AabbParentType::BILLBOARD_ENTITY))
+				for(const auto& ID : _fe3d.aabb_getChildIDs(billboardID, AabbParentType::BILLBOARD))
 				{
 					_fe3d.aabb_setRaycastResponsive(ID, isAabbRaycastResponsive);
 					_fe3d.aabb_setCollisionResponsive(ID, isAabbCollisionResponsive);

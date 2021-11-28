@@ -124,6 +124,7 @@ private:
 	// FVEC3
 	vector<fvec3> _vertices;
 	vector<fvec3> _normals;
+	fvec3 _color = fvec3(1.0f);
 	fvec3 _wireframeColor = fvec3(1.0f);
 
 	// FVEC2

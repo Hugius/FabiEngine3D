@@ -59,8 +59,8 @@ private:
 	mat44 _rotationMatrix = mat44(1.0f);
 
 	// FVEC3
-	fvec3 _wireframeColor = fvec3(1.0f);
 	fvec3 _color = fvec3(1.0f);
+	fvec3 _wireframeColor = fvec3(1.0f);
 
 	// FLOAT
 	float _initialLightness = 1.0f;

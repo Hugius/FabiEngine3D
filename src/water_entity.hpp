@@ -89,8 +89,8 @@ private:
 	string _displacementMapPath = "";
 
 	// FVEC3
-	fvec3 _wireframeColor = fvec3(1.0f);
 	fvec3 _color = fvec3(1.0f);
+	fvec3 _wireframeColor = fvec3(1.0f);
 
 	// FVEC2
 	fvec2 _speed = fvec2(0.0f);

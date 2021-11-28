@@ -52,3 +52,10 @@
   - Constraints: none
 - **Collision Responsive**: the mesh is responsive to collision detection/resolving
   - Constraints: none
+
+### 2.5 `enumeration`
+
+- **Parent Type**: the type of the parent entity
+  - Constraints: `MODEL` or `BILLBOARD`
+- **Collision Direction**: the direction from which the collision happened
+  - Constraints: `X` or `Y` or `Z`

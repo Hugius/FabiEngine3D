@@ -5,6 +5,7 @@
 - The billboard entity is a 2D quad in 3D space.
 - Instead of a solid quad, the texture of the billboard entity can be transparent text (based on a font).
 - Billboard entities are not affected by shadows or lighting.
+- Sprite animations can be applied to the diffuse/emission map.
 
 ## 2. Resources
 
@@ -37,6 +38,8 @@
   - Constraints: between `0.0` and `360.0`
 - **Color**: the RGB color multiplier of the fragments
   - Constraints: between `0.0` to `1.0`
+- **Wireframe Color**: the RGB color multiplier of the wireframe
+  - Constraints: between `0.0` and `1.0`
 
 ### 3.3 `decimal2`
 
@@ -98,4 +101,8 @@
 - **Wireframed**: the mesh is rendered as a wireframe
   - Constraints: none
 - **Textual**: the diffuse map is textual
+  - Constraints: none
+- **Animation Started**: the sprite animation is started (can still be paused)
+  - Constraints: none
+- **Animation Paused**: the sprite animation is paused
   - Constraints: none

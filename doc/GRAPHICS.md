@@ -52,24 +52,35 @@
 
 ### 2.1 Motion Blur
 
-- Motion blur happens when the camera view moves.
+- Motion blur is an effect that blurs the screen in the camera view move direction.
 - Blurring is either horizontal or vertical.
 
 ### 2.2 Depth Of Field
 
+- Depth Of Field is an effect that blurs all pixels that are not in focus by the camera.
+- The effect is either dynamic or static.
+
 ### 2.4 Lens Flare
+
+- Lens flare is an effect that mimics camera lens flares.
+- Flare maps are used to render this type of effect.
 
 ### 2.5 Sky Exposure
 
+- Sky exposure is an effect that makes the sky very bright when not looking at it.
+
 ### 2.6 Bloom
+
+- Bloom is an effect that adds realism to the rendering of very bright objects.
+- Emission maps can be used to render this type of effect.
 
 ## 3. Miscellaneous
 
 ### 3.1 Gamma Correction
 
-- Gamma correction is the correction of monitors displaying colors in a non-linear.
+- Gamma correction is the reverse process of monitors displaying colors in a non-linear space.
 - Lighting calculations are done in linear space.
-- After gamma correction the lighting looks better.
+- After gamma correction the lighting looks smoother.
 
 ### 3.2 Normal Mapping
 

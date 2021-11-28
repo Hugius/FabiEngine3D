@@ -17,7 +17,7 @@ void FabiEngine3D::billboard_deleteAll()
 void FabiEngine3D::billboard_delete(const string& ID)
 {
 	// Delete all bound AABB entities if existing
-	for(const auto& aabbID : aabb_getChildIDs(ID, AabbParentType::BILLBOARD_ENTITY))
+	for(const auto& aabbID : aabb_getChildIDs(ID, AabbParentType::BILLBOARD))
 	{
 		_core->_aabbEntityManager.deleteEntity(aabbID);
 	}

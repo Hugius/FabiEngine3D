@@ -18,7 +18,7 @@ void FabiEngine3D::model_deleteAll()
 void FabiEngine3D::model_delete(const string& ID)
 {
 	// Delete all bound AABB entities if existing
-	for(const auto& aabbID : aabb_getChildIDs(ID, AabbParentType::MODEL_ENTITY))
+	for(const auto& aabbID : aabb_getChildIDs(ID, AabbParentType::MODEL))
 	{
 		_core->_aabbEntityManager.deleteEntity(aabbID);
 	}

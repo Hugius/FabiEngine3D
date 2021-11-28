@@ -54,6 +54,8 @@
   - Constraints: at least `0.0`
 - **Color**: the RGB color multiplier of the fragments
   - Constraints: between `0.0` and `1.0`
+- **Wireframe Color**: the RGB color multiplier of the wireframe
+  - Constraints: between `0.0` and `1.0`
 
 ### 3.3 `decimal`
 

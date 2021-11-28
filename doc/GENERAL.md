@@ -120,8 +120,8 @@
 ## 4. Terminology
 
 - **String**: a concatenation of characters(example: `hello123!@#`)
-- **Vector3**: a collection of 3 decimals
-- **Vector2**: a collection of 2 decimals
+- **Decimal3**: a collection of 3 decimals
+- **Decimal2**: a collection of 2 decimals
 - **Decimal**: a floating point number (example: `3.1415`)
 - **Integer**: a number (example: `3`)
 - **Boolean**: can only be `true` or `false`
@@ -143,3 +143,9 @@
 - **Wireframe**: rendering mode that only draws lines/wires between all vertices
 - **Face Culling**: an optimization technique where non-visible vertices are not rendered
 - **Instanced Rendering**: an optimization technique that is efficient for rendering a lot of the same meshes.
+- **Raycasting**: the process of casting a ray from a position towards a direction
+- **AABB**: Axis Aligned Bounding Box
+- **Collision Detection**: the process of detecting collision between 2 AABBs
+- **Collision Resolving**: the process of resolving collision between 2 AABBs
+- **Reference Angle**: a rotational angle converted between 0&deg; and 90&deg;
+- **Transformation**: the combination of position/rotation/size

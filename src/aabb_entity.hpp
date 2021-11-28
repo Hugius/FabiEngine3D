@@ -36,7 +36,7 @@ public:
 	void setColor(fvec3 value);
 
 	// STRING
-	const string& getParentID() const;
+	const string& getParentEntityID() const;
 
 	// MAT44
 	const mat44& getTransformationMatrix() const;
@@ -64,7 +64,7 @@ public:
 
 private:
 	// STRING
-	string _parentID = "";
+	string _parentEntityID = "";
 
 	// MAT44
 	mat44 _transformationMatrix = mat44(1.0f);

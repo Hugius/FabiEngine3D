@@ -69,15 +69,15 @@ Line 2 of every script file must specify its execution state: entry or waiting.
 
 ### 4.6 Basic Values
 
-- Types to choose from: `STR` (string), `INT` (integer), `DEC` (decimal), `BOOL` (boolean).
-- A boolean can only be true or false just like binary (example: `<true>` or `<false>`) (NOTE: the `<` and `>` are not placeholders).
-- A string can be any characters, as long as it's surrounded with " " (example: `"hello world"`).
-- An integer is a whole number which can also be negative (example: `42`).
-- A decimal is a floating point number which can also be negative (example: `42.536`).
+- Types to choose from: `STR` (string), `INT` (integer), `DEC` (decimal), `BOL` (boolean).
+- A string is a concatenation of any characters, as long as they are surrounded with `"` `"`. Example: `"hello world"`.
+- A decimal is a floating point number which can also be negative. Example: `-42.536`.
+- An integer is a whole number which can also be negative. Example: `-42`.
+- A boolean can only be true or false. Example: `<true>` or `<false>` (NOTE: the `<` and `>` are not placeholders).
 
-### 4.7 Special Values - LIST
+### 4.7 Special Value
 
-- A list is a special type of variable that holds 0 or more individual values (example: `{42, "test", <false>}`).
+- A list is a special type of value that holds 0 or more individual values. Example: `{42, "test", <false>}` (NOTE: the `<` and `>` are not placeholders).
 - A list cannot hold another list value/variable.
 - You can access individual list components using: `<name>[<index>]`.
 - You can add a new value to the list using: `PUSH <name> <value>`.
@@ -87,42 +87,47 @@ Line 2 of every script file must specify its execution state: entry or waiting.
 ### 4.8 Type Casting
 
 - You can cast a variable to a different type using: `CAST <name> <type>`.
-- You can cast from INT to DEC and vice versa.
-- You can cast from INT to BOOL and vice versa.
-- You can cast from BOOL to STR and vice versa (if possible).
-- You can cast from INT to STR and vice versa (if possible).
-- You can cast from DEC to STR and vice versa (if possible).
-- You cannot cast (an element of) a LIST variable.
+- You can cast from `INT` to `DEC` and vice versa.
+- You can cast from `INT` to `BOL` and vice versa.
+- You can cast from `BOL` to `STR` and vice versa (if possible).
+- You can cast from `INT` to `STR` and vice versa (if possible).
+- You can cast from `DEC` to `STR` and vice versa (if possible).
+- You cannot cast (an element of) a `LST` variable.
 
 ### 4.9 Example Code
 
 ```text
-1.  /// Variable syntax for each type
+1.  /// String variable
 2.  STR myString = "hello world"
-3.  DEC myDecimal = 42.94858
-4.  INT myInteger = 42
-5.  BOOL myBoolean = <false>
-6.  LIST myList = {42, myBoolean, [4 2 0]}
-7.
-8.  /// Constant variables
-9.  CONST STR immutableString = "i cannot be changed"
-10. STR mutableString = "try to change me"
-11. EDIT mutableString = "i changed you"
+3.
+4.  /// Decimal variable
+5.  DEC myDecimal = 42.94858
+6.
+7.  /// Integer variable
+8.  INT myInteger = 42
+9.
+10. /// Boolean variable
+11. BOL myBoolean = <false>
 12.
-13. /// Global variables
-14. GLOB INT _someInteger = 5
-15. GLOB CONST INT _constInteger = 5
-16.
-17. /// Casting variables
-18. CAST myDecimal INT
-19. STR intString = "123"
-20. CAST intString INT
-21.
-22. /// List variable
-23. LIST myList = {"hello", 45.0, 123, <false>}
-24. STR firstElement = myList[0]
-25. PUSH firstElement "newValue"
-26. PULL firstElement 6
+13. /// List variable
+14. LST myList = {42, myBoolean, "test123", 45.0}
+15. STR firstElement = myList[0]
+16. PUSH myList "newValue"
+17. PULL myList 2
+18.
+19. /// Constant variable
+20. CONST STR immutableString = "i cannot be changed"
+21. STR mutableString = "try to change me"
+22. EDIT mutableString = "i changed you"
+23.
+24. /// Global variable
+25. GLOB INT _someInteger = 5
+26. GLOB CONST INT _constInteger = 5
+27.
+28. /// Variable casting
+29. CAST myDecimal INT
+30. STR intString = "123"
+31. CAST intString INT
 ```
 
 ## 5. Arithmetic Operations
@@ -157,13 +162,13 @@ Line 2 of every script file must specify its execution state: entry or waiting.
 - To check if one value is higher than the other: `<value> MORE <value>` (only works for `INT` and `DEC` values).
 - To check if one value is lower than the other: `<value> LESS <value>` (only works for `INT` and `DEC` values).
 - You cannot use different comparison value types (example: `5 IS 5.0` will not work, but `5 IS 5` will).
-- You can set the value of a `BOOL` variable to the result of a condition using: `... <name> = (<condition>)`.
+- You can set the value of a `BOL` variable to the result of a condition using: `... <name> = (<condition>)`.
 
 ### 6.2 Example Code
 
 ```text
 1. INT age = 12
-2. BOOL isUnderAge = (age LESS 18)
+2. BOL isUnderAge = (age LESS 18)
 3. fe3d:print(isUnderAge)
 4.
 5. /// Console output:
@@ -182,7 +187,7 @@ Line 2 of every script file must specify its execution state: entry or waiting.
 
 ```text
 1. INT age = 999
-2. BOOL isValidAge = (age MORE 0 AND age LESS 100)
+2. BOL isValidAge = (age MORE 0 AND age LESS 100)
 3. fe3d:print(isValidAge)
 4.
 5. /// Console output:
@@ -246,7 +251,7 @@ Line 2 of every script file must specify its execution state: entry or waiting.
 
 - The scripts that have the `execution_entry` META defined run first.
 - From there you can decide the order of execution yourself.
-- You can execute another script file using: `EXEC <name>`.
+- You can execute another script file using: `EXECUTE <name>`.
 - After the script is executed, the program will continue running the script where it left off.
 - The script that is executed must have the same type as the calling script.
 - This works the same as in other programming languages.
@@ -256,7 +261,7 @@ Line 2 of every script file must specify its execution state: entry or waiting.
 
 ```text
 1.  /// Code in main_script.fe3d
-2.  EXEC print_script
+2.  EXECUTE print_script
 3.  fe3d:print("goodbye world!")
 4.
 5.  /// Code in print_script.fe3d
@@ -278,21 +283,18 @@ Line 2 of every script file must specify its execution state: entry or waiting.
 ### 11.2 Example Code
 
 ```text
-1. STR myString = "i am printed"
-2. fe3d:camera_set_position(1.0, 2.0, 3.0)
-3. DEC z = fe3d:camera_get_position_z()
-4. fe3d:print(myString)
-5. fe3d:print(z)
-6.
-7. /// Console output:
-8. /// > i am printed
-9. /// > 3.0
+1. fe3d:camera_set_position(1.0, 2.0, 3.0)
+2. DEC z = fe3d:camera_get_position_z()
+3. fe3d:print(z)
+4.
+5. /// Console output:
+6. /// > 3.0
 ```
 
 ## 12. Tips & Tricks
 
 - You can use the `PASS` statement as an empty placeholder for condition statements or loops.
 - Be careful with loops as they can become infinite. Luckily this will get detected by the interpreter.
-- Integer values are clamped between -999999999 and 999999999 to prevent overflow.
-- Decimal values are clamped between -999999999.0 and 999999999.0 to prevent overflow.
+- Integer values are clamped between `-999999999` and `999999999` to prevent overflow.
+- Decimal values are clamped between `-999999999.0` and `999999999.0` to prevent overflow.
 - Decimal values have a fixed precision of 5 decimals after the dot.

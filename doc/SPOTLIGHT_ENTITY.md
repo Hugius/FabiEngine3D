@@ -1,19 +1,34 @@
-# Sky
+# Spotlight Entity
 
-## 1.1 General
+## 1. General
 
-- The sky entity is simply a 3D cube, called a [skybox](https://en.wikipedia.org/wiki/Skybox_(video_games)), that is rendered around the camera.
-- A skybox is static and has an infinite size, which creates the illusion of a real sky.
+- The spotlight entity is a 3D light in 3D space.
+- Emitted light is casted in a direction from a position.
 
-## 1.2 Resources
+## 2. Properties
 
-- Cube Map
+### 2.1 `decimal3`
 
-## 1.3 Properties
+- **Position**: the XYZ position of the light
+  - Constraints: none
+- **Position Target**: the target XYZ position of the light
+  - Constraints: none
+- **Front Vector**: the XYZ radius of the light
+  - Constraints: at least `0.0`
+- **Color**: the RGB color multiplier of the fragments
+  - Constraints: between `0.0` to `1.0`
 
-- **Rotation Speed**: the speed of rotation around the Y axis.
-  - Constraints: `-inf` to `inf`
-- **Lightness**: the brightness of the sky fragments.
-  - Constraints: `0` to `inf`
-- **Color**: the RGB color that will be mixed with the sky fragments.
-  - Constraints: `0` to `255`
+### 2.2 `decimal`
+
+- **Position Target Speed**: the speed with which the light moves to the target position
+  - Constraints: at least `0.0`
+- **Intensity**: the intensity of the light emission
+  - Constraints: at least `0.0`
+- **Yaw**: the horizontal rotation of the light direction
+  - Constraints: between `0.0` and `360.0`
+- **Pitch**: the vertical rotation of the light direction
+  - Constraints: between `0.0` and `360.0`
+- **Angle**: the angle of the light direction
+  - Constraints: between `0.0` and `45.0`
+- **Distance**: the maximum distance of the light emission
+  - Constraints: at least `0.0`

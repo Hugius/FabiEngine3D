@@ -21,12 +21,12 @@
 - **Normal Map Path**: the path of the normal map file
   - Constraints: none
 
-### 3.2 `vector3`
+### 3.2 `decimal3`
 
 - **Color**: the RGB color multiplier
   - Constraints: between `0.0` and `1.0`
 
-### 3.3 `vector2`
+### 3.3 `decimal2`
 
 - **Speed**: the speed of  the rippling/waving movement
   - Constraints: none

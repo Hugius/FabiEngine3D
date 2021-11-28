@@ -25,7 +25,7 @@
 - **Font Path**: the path of the font file
   - Constraints: none
 
-### 3.2 `vector3`
+### 3.2 `decimal3`
 
 - **Position**: the XYZ position of the mesh
   - Constraints: none
@@ -38,7 +38,7 @@
 - **Color**: the RGB color multiplier of the fragments
   - Constraints: between `0.0` to `1.0`
 
-### 3.3 `vector2`
+### 3.3 `decimal2`
 
 - **Size**: the XY size of the mesh
   - Constraints: at least `0.0`

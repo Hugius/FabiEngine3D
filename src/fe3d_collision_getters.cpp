@@ -56,7 +56,7 @@ const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfI
 			}
 
 			// Do not check own entity AABB('s)
-			if(other->getParentID() == self->getParentID())
+			if(other->getParentEntityID() == self->getParentEntityID())
 			{
 				continue;
 			}

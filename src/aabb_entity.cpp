@@ -66,7 +66,7 @@ void AabbEntity::updateTransformationMatrix()
 
 void AabbEntity::setParent(const string& parentID, AabbParentType parentType)
 {
-	_parentID = parentID;
+	_parentEntityID = parentID;
 	_parentType = parentType;
 }
 
@@ -193,9 +193,9 @@ const fvec3 AabbEntity::getColor() const
 	return _color;
 }
 
-const string& AabbEntity::getParentID() const
+const string& AabbEntity::getParentEntityID() const
 {
-	return _parentID;
+	return _parentEntityID;
 }
  
 const AabbParentType AabbEntity::getParentType() const
@@ -220,7 +220,7 @@ const bool AabbEntity::isCollisionResponsive() const
 
 const bool AabbEntity::hasParent() const
 {
-	return !_parentID.empty();
+	return !_parentEntityID.empty();
 }
 
 const bool AabbEntity::hasCollided() const

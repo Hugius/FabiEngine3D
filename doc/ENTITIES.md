@@ -3,18 +3,22 @@
 ## 1. General
 
 - In FabiEngine3D, an entity is a thing that can be placed in the world (both 2D and 3D).
-- Most entities are renderable/visible.
+- All entities have something to do with rendering.
+- Some entities are visible objects.
 - All entities have a position, which makes them placeable in the world.
 - Every entity must be traceable, which is why they have an ID.
 - Entities have a lifecycle; they are created/mutated/deleted.
 
 ## 2. Properties
 
-- **ID**: the identifier of the entity.
-  - Type: `string`
+### 2.1 `string`
+
+- **ID**: the identifier of the entity
   - Constraints: must be unique, cannot be changed
-- **Visible**: the visibility of the entity in the world.
-  - Type: `boolean`
+
+### 2.2 `boolean`
+
+- **Visible**: the visibility of the entity in the world
   - Constraints: none
 
 ## 3. Types

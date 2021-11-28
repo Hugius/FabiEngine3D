@@ -27,7 +27,7 @@
 - **Front Cube Map Path**: the path of the front part of the cube map file
   - Constraints: none
 
-### 3.2 `vector3`
+### 3.2 `decimal3`
 
 - **Color**: the RGB color multiplier of the fragments
   - Constraints: between `0.0` and `1.0`

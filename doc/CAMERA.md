@@ -45,72 +45,57 @@
 
 ## 4. Properties
 
-- **Position**: the 3D position of the camera in the world.
-  - Type: `vector3`
+### 4.1 `decimal3`
+
+- **Position**: the 3D position of the camera in the world
   - Constraints: none
-- **Right Vector**: the normalized vector of the X camera direction.
-  - Type: `vector3`
+- **Right Vector**: the normalized vector of the X camera direction
   - Constraints: between -1.0 and 1.0
-- **Up Vector**: the normalized vector of the Y camera direction.
-  - Type: `vector3`
+- **Up Vector**: the normalized vector of the Y camera direction
   - Constraints: between -1.0 and 1.0
-- **Front Vector**: the normalized vector of the Z camera direction.
-  - Type: `vector3`
+- **Front Vector**: the normalized vector of the Z camera direction
   - Constraints: between -1.0 and 1.0
-- **FOV**: the visible field of view angle.
-  - Type: `decimal`
+
+### 4.2 `decimal`
+
+- **FOV**: the visible field of view angle
   - Constraints: between 0.0 and 150.0
-- **Near Distance**: the minimum visible distance.
-  - Type: `decimal`
+- **Near Distance**: the minimum visible distance
   - Constraints: fixed at 0.01
-- **Far Distance**: the maximum visible distance.
-  - Type: `decimal`
+- **Far Distance**: the maximum visible distance
   - Constraints: fixed at 2500.0
-- **Yaw**: the horizontal rotation of the camera direction.
-  - Type: `decimal`
+- **Yaw**: the horizontal rotation of the camera direction
   - Constraints: between 0.0 and 360.0
-- **Pitch**: the vertical rotation of the camera direction.
-  - Type: `decimal`
+- **Pitch**: the vertical rotation of the camera direction
   - Constraints: between -90.0 and 90.0
-- **First Person Yaw**: the current yaw of the first person view.
-  - Type: `decimal`
+- **First Person Yaw**: the current yaw of the first person view
   - Constraints: between 0.0 and 360.0
-- **First Person Pitch**: the current pitch of the first person view.
-  - Type: `decimal`
+- **First Person Pitch**: the current pitch of the first person view
   - Constraints: between -90.0 and 90.0
-- **Min First Person Pitch**: the minimum pitch of the first person view.
-  - Type: `decimal`
+- **Min First Person Pitch**: the minimum pitch of the first person view
   - Constraints: between -90.0 and 90.0
-- **Max First Person Pitch**: the maximum pitch of the first person view.
-  - Type: `decimal`
+- **Max First Person Pitch**: the maximum pitch of the first person view
   - Constraints: between -90.0 and 90.0
-- **Third Person Yaw**: the current yaw of the third view camera.
-  - Type: `decimal`
+- **Third Person Yaw**: the current yaw of the third view camera
   - Constraints: between 0.0 and 360.0
-- **Third Person Pitch**: the current pitch of the third person view.
-  - Type: `decimal`
+- **Third Person Pitch**: the current pitch of the third person view
   - Constraints: between -90.0 and 90.0
-- **Min Third Person Pitch**: the minimum pitch of the third person view.
-  - Type: `decimal`
+- **Min Third Person Pitch**: the minimum pitch of the third person view
   - Constraints: between -90.0 and 90.0
-- **Max Third Person Pitch**: the maximum pitch of the third person view.
-  - Type: `decimal`
+- **Max Third Person Pitch**: the maximum pitch of the third person view
   - Constraints: between -90.0 and 90.0
-- **Third Person Distance**: the distance from the camera to the third person lookat.
-  - Type: `decimal`
+- **Third Person Distance**: the distance from the camera to the third person lookat
   - Constraints: between 0.01 and inf
-- **Third Person Lookat**: the position where the third person view is looking at.
-  - Type: `decimal`
+- **Third Person Lookat**: the position where the third person view is looking at
   - Constraints: none
-- **Aspect Ratio**: the vertical rotation of the camera direction.
-  - Type: `decimal`
+- **Aspect Ratio**: the vertical rotation of the camera direction
   - Constraints: between 0.0 and inf
-- **Cursor Sensitivity**: the speed with which the cursor moves the first/third person view.
-  - Type: `decimal`
+- **Cursor Sensitivity**: the speed with which the cursor moves the first/third person view
   - Constraints: between 0.0 and inf
-- **First Person View**: is first person view enabled?
-  - Type: `boolean`
+
+### 4.3 `boolean`
+
+- **First Person View**: first person view is enabled
   - Constraints: between none
-- **Third Person View**: is third person view enabled?
-  - Type: `boolean`
+- **Third Person View**: third person view is enabled
   - Constraints: between none

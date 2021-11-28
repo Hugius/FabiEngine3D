@@ -13,7 +13,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 	{
 		// Check if parent entity is not level of detailed
 		if(!(entity->hasParent() && entity->getParentType() == AabbParentType::MODEL_ENTITY &&
-		   _core->_modelEntityManager.getEntity(entity->getParentID())->isLevelOfDetailed()))
+		   _core->_modelEntityManager.getEntity(entity->getParentEntityID())->isLevelOfDetailed()))
 		{
 			// Check if AABB is responsive
 			if(entity->isRaycastResponsive() && entity->isVisible())

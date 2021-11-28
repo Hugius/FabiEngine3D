@@ -76,7 +76,7 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 			if(entity->getParentType() == AabbParentType::MODEL_ENTITY)
 			{
 				// Try to find the parent entity
-				auto foundPair = modelEntities.find(entity->getParentID());
+				auto foundPair = modelEntities.find(entity->getParentEntityID());
 				if(foundPair != modelEntities.end())
 				{
 					// Temporary values
@@ -204,7 +204,7 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 			else
 			{
 				// Try to find the parent entity
-				auto foundPair = billboardEntities.find(entity->getParentID());
+				auto foundPair = billboardEntities.find(entity->getParentEntityID());
 				if(foundPair != billboardEntities.end())
 				{
 					// Temporary values

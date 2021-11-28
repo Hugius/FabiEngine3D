@@ -1,19 +1,25 @@
-# Sky
+# Reflection Entity
 
-## 1.1 General
+## 1. General
 
-- The sky entity is simply a 3D cube, called a [skybox](https://en.wikipedia.org/wiki/Skybox_(video_games)), that is rendered around the camera.
-- A skybox is static and has an infinite size, which creates the illusion of a real sky.
+- The reflection entity is a 3D captor in 3D space.
+- Everything around the entity is captured into a cube map.
+- The cube map is used for cube reflections.
 
-## 1.2 Resources
+## 2. Resources
 
 - Cube Map
 
-## 1.3 Properties
+## 3. Properties
 
-- **Rotation Speed**: the speed of rotation around the Y axis.
-  - Constraints: `-inf` to `inf`
-- **Lightness**: the brightness of the sky fragments.
-  - Constraints: `0` to `inf`
-- **Color**: the RGB color that will be mixed with the sky fragments.
-  - Constraints: `0` to `255`
+### 3.1 `decimal3`
+
+- **Position**: the XYZ position of the captor
+  - Constraints: none
+- **Position Target**: the target XYZ position of the captor
+  - Constraints: none
+
+### 3.2 `decimal`
+
+- **Position Target Speed**: the speed with which the captor moves to the target position
+  - Constraints: at least `0.0`

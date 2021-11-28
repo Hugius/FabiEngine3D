@@ -46,11 +46,14 @@
 ### 1.9 Shadows
 
 - Shadows are casted from a directional shadow source.
--
+- Shadow mapping is used to render this type of lighting.
 
 ## 2. Post Processing
 
 ### 2.1 Motion Blur
+
+- Motion blur happens when the camera view moves.
+- Blurring is either horizontal or vertical.
 
 ### 2.2 Depth Of Field
 
@@ -63,6 +66,10 @@
 ## 3. Miscellaneous
 
 ### 3.1 Gamma Correction
+
+- Gamma correction is the correction of monitors displaying colors in a non-linear.
+- Lighting calculations are done in linear space.
+- After gamma correction the lighting looks better.
 
 ### 3.2 Normal Mapping
 

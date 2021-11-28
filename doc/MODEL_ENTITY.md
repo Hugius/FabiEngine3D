@@ -34,7 +34,7 @@
 - **LOD Entity ID**: the ID of another model entity representing the LOD version of the current model entity
   - Constraints: entity must exist
 
-### 3.2 `vector3`
+### 3.2 `decimal3`
 
 - **Position**: the XYZ position of the mesh
   - Constraints: none

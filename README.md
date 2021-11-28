@@ -31,6 +31,8 @@ A multiplayer first person shooter game based in a science-fiction setting: a sp
 - [Entities](doc/ENTITIES.md)
 - [Camera](doc/CAMERA.md)
 - [Graphics](doc/GRAPHICS.md)
+- [Physics](doc/PHYSICS.md)
+- [Audio](doc/AUDIO.md)
 
 ### Entities
 
@@ -45,7 +47,6 @@ A multiplayer first person shooter game based in a science-fiction setting: a sp
 - [Reflection Entity](doc/REFLECTION_ENTITY.md)
 - [Image Entity](doc/IMAGE_ENTITY.md)
 - [Text Entity](doc/TEXT_ENTITY.md)
-- [Sound Entity](doc/SOUND_ENTITY.md)
 
 ### Editors
 

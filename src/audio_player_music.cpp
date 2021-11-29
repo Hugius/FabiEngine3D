@@ -3,9 +3,44 @@
 
 using std::clamp;
 
+void AudioPlayer::playMusic(vector<Music>& musicList, bool mustForcePlay)
+{
+	// Check if music is playing
+	if(isMusicStarted() && !mustForcePlay)
+	{
+		Logger::throwError("AudioPlayer::playMusic::1");
+	}
+
+	// Check if music is not defined
+	if(musicList.empty())
+	{
+		Logger::throwError("AudioPlayer::playMusic::2");
+	}
+
+	// Select next music
+	unsigned int musicIndex;
+	if(musicList.size() == 1)
+	{
+		musicIndex = 0;
+	}
+	else
+	{
+		musicIndex = Math::getRandomInteger(0, static_cast<int>(musicList.size() - 1));
+	}
+
+	// Play music
+	Mix_PlayMusic(musicList[musicIndex].getDataPointer(), 0);
+
+	// Update volume
+	_updateMusicVolume();
+}
+
 void AudioPlayer::_updateMusicVolume()
 {
-	Mix_VolumeMusic(static_cast<int>(_musicVolume * 128.0f));
+	if(isMusicStarted())
+	{
+		Mix_VolumeMusic(static_cast<int>(_musicVolume * 128.0f));
+	}
 }
 
 void AudioPlayer::setMusicVolume(float volume)
@@ -33,63 +68,40 @@ const bool AudioPlayer::isMusicPaused() const
 	return Mix_PausedMusic();
 }
 
-void AudioPlayer::playMusic(vector<Music>& musicList, bool mustForcePlay)
-{
-	// Check if any music is existing
-	if(!musicList.empty())
-	{
-		// Check if music is allowed to play
-		if(!isMusicStarted() || mustForcePlay)
-		{
-			// Select next song
-			unsigned int musicIndex;
-			if(musicList.size() == 1)
-			{
-				musicIndex = 0;
-			}
-			else
-			{
-				musicIndex = Math::getRandomInteger(0, static_cast<int>(musicList.size() - 1));
-			}
-
-			// Play music
-			Mix_PlayMusic(musicList[musicIndex].getDataPointer(), 0);
-
-			// Set volume
-			_updateMusicVolume();
-		}
-	}
-}
-
 void AudioPlayer::pauseMusic()
 {
-	if(isMusicPlaying())
+	// Check if music is not playing
+	if(!isMusicPlaying())
 	{
-		if(!isMusicPaused())
-		{
-			Mix_PauseMusic();
-		}
-		else
-		{
-			Logger::throwError("AudioPlayer::pauseMusic::1");
-		}
+		Logger::throwError("AudioPlayer::pauseMusic::1");
 	}
-	else
+
+	// Check if music is paused
+	if(isMusicPaused())
 	{
 		Logger::throwError("AudioPlayer::pauseMusic::2");
 	}
+
+	// Pause music
+	Mix_PauseMusic();
 }
 
 void AudioPlayer::resumeMusic()
 {
-	if(isMusicStarted() && isMusicPaused())
+	// Check if music is not started
+	if(!isMusicStarted())
 	{
-		Mix_ResumeMusic();
+		Logger::throwError("AudioPlayer::resumeMusic::1");
 	}
-	else
+
+	// Check if music is not paused
+	if(!isMusicPaused())
 	{
-		Logger::throwError("AudioPlayer::resumeMusic");
+		Logger::throwError("AudioPlayer::resumeMusic::2");
 	}
+
+	// Resume music
+	Mix_ResumeMusic();
 }
 
 void AudioPlayer::stopMusic()
@@ -100,13 +112,12 @@ void AudioPlayer::stopMusic()
 		resumeMusic();
 	}
 
-	// Check if music is started
-	if(isMusicStarted())
-	{
-		Mix_HaltMusic();
-	}
-	else
+	// Check if music is not started
+	if(!isMusicStarted())
 	{
 		Logger::throwError("AudioPlayer::stopMusic");
 	}
+
+	// Stop music
+	Mix_HaltMusic();
 }

@@ -13,7 +13,7 @@
   - Constraints: none
 - **Position Target**: the target XYZ position of the light
   - Constraints: none
-- **Front Vector**: the XYZ radius of the light
+- **Front Vector**: the normalized vector of the light direction
   - Constraints: at least `0.0`
 - **Color**: the RGB color multiplier of the fragments
   - Constraints: between `0.0` to `1.0`

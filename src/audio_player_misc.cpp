@@ -11,7 +11,7 @@ AudioPlayer::AudioPlayer()
 
 void AudioPlayer::update(Camera& camera, vector<Music>& musicList, vector<Sound2D>& soundList2D, vector<Sound3D>& soundList3D)
 {
-	// Update channel management
+	// Update channels
 	for(size_t i = 0; i < _channels.size(); i++)
 	{
 		// Check if audio stopped playing
@@ -22,17 +22,17 @@ void AudioPlayer::update(Camera& camera, vector<Music>& musicList, vector<Sound2
 		}
 	}
 
-	// Update 2D sound management
+	// Update 2D sounds
 	for(auto& sound : soundList2D)
 	{
-		// Update playing volume
+		// Update sound volume
 		_updateSoundVolume2D(sound);
 	}
 
-	// Update 3D sound management
+	// Update 3D sounds
 	for(auto& sound : soundList3D)
 	{
-		// Check if emitting sound
+		// Check if sound is started
 		if(isSoundStarted3D(sound))
 		{
 			// Distance
@@ -65,11 +65,11 @@ void AudioPlayer::update(Camera& camera, vector<Music>& musicList, vector<Sound2
 			}
 		}
 
-		// Update playing volume
+		// Update sound volume
 		_updateSoundVolume3D(sound);
 	}
 
-	// Update music management
+	// Update music
 	playMusic(musicList, false);
 	_updateMusicVolume();
 }

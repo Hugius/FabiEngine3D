@@ -10,14 +10,33 @@ AudioManager::AudioManager(AudioLoader& audioLoader)
 
 }
 
-void AudioManager::deleteAllMusic()
+void AudioManager::deleteMusic()
 {
 	_musicList.clear();
 }
 
-void AudioManager::deleteAllSounds()
+void AudioManager::deleteSounds2D()
 {
-	_soundList.clear();
+	_soundList2D.clear();
+}
+
+void AudioManager::deleteSounds3D()
+{
+	_soundList3D.clear();
+}
+
+void AudioManager::deleteSound3D(const string& ID)
+{
+	auto index = _findSoundIndex3D(ID);
+
+	if(index == -1)
+	{
+		Logger::throwError("AudioManager::deleteSound3D");
+	}
+	else
+	{
+		_soundList3D.erase(_soundList3D.begin() + index);
+	}
 }
 
 void AudioManager::createMusic(const string& fileName)
@@ -32,15 +51,15 @@ void AudioManager::createMusic(const string& fileName)
 	}
 }
 
-void AudioManager::createSound(const string& ID, const string& fileName)
+void AudioManager::createSound2D(const string& ID, const string& fileName)
 {
-	if(_findIndex(ID) != -1)
+	if(_findSoundIndex2D(ID) != -1)
 	{
-		Logger::throwError("AudioManager::createSound::1");
+		Logger::throwError("AudioManager::createSound2D::1");
 	}
 	else if(ID.empty())
 	{
-		Logger::throwError("AudioManager::createSound::2");
+		Logger::throwError("AudioManager::createSound2D::2");
 	}
 
 	// Load data
@@ -49,46 +68,77 @@ void AudioManager::createSound(const string& ID, const string& fileName)
 	// Check if data loading went well
 	if(dataPointer != nullptr)
 	{
-		_soundList.push_back(Sound(ID, fileName, dataPointer));
+		_soundList2D.push_back(Sound2D(ID, fileName, dataPointer));
 	}
 }
 
-void AudioManager::deleteSound(const string& ID)
+void AudioManager::createSound3D(const string& ID, const string& fileName)
 {
-	auto index = _findIndex(ID);
+	if(_findSoundIndex3D(ID) != -1)
+	{
+		Logger::throwError("AudioManager::createSound3D::1");
+	}
+	else if(ID.empty())
+	{
+		Logger::throwError("AudioManager::createSound3D::2");
+	}
+
+	// Load data
+	auto dataPointer = _audioLoader.loadChunk(fileName);
+
+	// Check if data loading went well
+	if(dataPointer != nullptr)
+	{
+		_soundList3D.push_back(Sound3D(ID, fileName, dataPointer));
+	}
+}
+
+void AudioManager::deleteSound2D(const string& ID)
+{
+	auto index = _findSoundIndex2D(ID);
 
 	if(index == -1)
 	{
-		Logger::throwError("AudioManager::deleteSound");
+		Logger::throwError("AudioManager::deleteSound2D");
 	}
 	else
 	{
-		_soundList.erase(_soundList.begin() + index);
+		_soundList2D.erase(_soundList2D.begin() + index);
 	}
 }
 
-const bool AudioManager::isSoundExisting(const string& ID) const
+const bool AudioManager::isSoundExisting2D(const string& ID) const
 {
-	return _findIndex(ID) != -1;
+	return (_findSoundIndex2D(ID) != -1);
 }
 
-Sound& AudioManager::getSound(const string& ID)
+const bool AudioManager::isSoundExisting3D(const string& ID) const
 {
-	auto index = _findIndex(ID);
+	return (_findSoundIndex3D(ID) != -1);
+}
+
+Sound2D& AudioManager::getSound2D(const string& ID)
+{
+	auto index = _findSoundIndex2D(ID);
 
 	if(index == -1)
 	{
-		Logger::throwError("AudioManager::getSound");
+		Logger::throwError("AudioManager::getSound2D");
 	}
 	else
 	{
-		return _soundList[index];
+		return _soundList2D[index];
 	}
 }
 
-vector<Sound>& AudioManager::getSounds()
+vector<Sound2D>& AudioManager::getSounds2D()
 {
-	return _soundList;
+	return _soundList2D;
+}
+
+vector<Sound3D>& AudioManager::getSounds3D()
+{
+	return _soundList3D;
 }
 
 vector<Music>& AudioManager::getMusic()
@@ -96,11 +146,38 @@ vector<Music>& AudioManager::getMusic()
 	return _musicList;
 }
 
-const int AudioManager::_findIndex(const string& ID) const
+Sound3D& AudioManager::getSound3D(const string& ID)
 {
-	for(size_t i = 0; i < _soundList.size(); i++)
+	auto index = _findSoundIndex3D(ID);
+
+	if(index == -1)
 	{
-		if(_soundList[i].getID() == ID)
+		Logger::throwError("AudioManager::getSound3D");
+	}
+	else
+	{
+		return _soundList3D[index];
+	}
+}
+
+const int AudioManager::_findSoundIndex2D(const string& ID) const
+{
+	for(size_t i = 0; i < _soundList2D.size(); i++)
+	{
+		if(_soundList2D[i].getID() == ID)
+		{
+			return static_cast<int>(i);
+		}
+	}
+
+	return -1;
+}
+
+const int AudioManager::_findSoundIndex3D(const string& ID) const
+{
+	for(size_t i = 0; i < _soundList3D.size(); i++)
+	{
+		if(_soundList3D[i].getID() == ID)
 		{
 			return static_cast<int>(i);
 		}

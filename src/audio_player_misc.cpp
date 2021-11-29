@@ -1,13 +1,77 @@
 #include "audio_player.hpp"
 #include "logger.hpp"
-#include "tools.hpp"
 
-using std::max;
 using std::clamp;
+using std::max;
 
 AudioPlayer::AudioPlayer()
 {
 	Mix_AllocateChannels(0);
+}
+
+void AudioPlayer::update(Camera& camera, vector<Music>& musicList, vector<Sound2D>& soundList2D, vector<Sound3D>& soundList3D)
+{
+	// Update channel management
+	for(size_t i = 0; i < _channels.size(); i++)
+	{
+		// Check if audio stopped playing
+		if(!Mix_Playing(static_cast<int>(i)) && !Mix_Paused(static_cast<int>(i)))
+		{
+			// De-allocate channel
+			_channels[i] = "";
+		}
+	}
+
+	// Update 2D sound management
+	for(auto& sound : soundList2D)
+	{
+		// Update playing volume
+		_updateSoundVolume2D(sound);
+	}
+
+	// Update 3D sound management
+	for(auto& sound : soundList3D)
+	{
+		// Check if emitting sound
+		if(isSoundStarted3D(sound))
+		{
+			// Distance
+			auto cameraPosition = camera.getPosition(); // Camera position
+			float xDifference = fabsf(sound.getPosition().x - cameraPosition.x); // Difference between camera X & point X
+			float yDifference = fabsf(sound.getPosition().y - cameraPosition.y); // Difference between camera Y & point Y
+			float zDifference = fabsf(sound.getPosition().z - cameraPosition.z); // Difference between camera Z & point Z
+			float maxDifference = max(xDifference, max(yDifference, zDifference)); // Maximum difference
+			float volume = sound.getMaxVolume() - ((maxDifference / sound.getMaxDistance()) * sound.getMaxVolume()); // Calculate volume
+			volume = clamp(volume, 0.0f, sound.getMaxVolume()); // Clamp to maximum
+			sound.setVolume(volume); // Update sound volume
+
+			// Panning
+			auto cameraDirection = camera.getFrontVector();
+			mat44 rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(90.0f));
+			fvec3 soundDirection = (cameraPosition - sound.getPosition());
+			fvec4 result = (rotationMatrix * fvec4(soundDirection.x, soundDirection.y, soundDirection.z, 1.0f));
+			soundDirection = fvec3(result.x, result.y, result.z);
+			soundDirection = Math::normalize(soundDirection);
+			float dot = Math::calculateDotProduct(soundDirection, cameraDirection);
+			float range = ((dot / 2.0f) + 0.5f);
+			Uint8 leftStrength = Uint8(255.0f * range);
+			Uint8 rightStrength = Uint8(255.0f - leftStrength);
+
+			// For every sound playback
+			for(const auto& channel : _findSoundChannels3D(sound))
+			{
+				// Apply stereo panning
+				Mix_SetPanning(channel, leftStrength, rightStrength);
+			}
+		}
+
+		// Update playing volume
+		_updateSoundVolume3D(sound);
+	}
+
+	// Update music management
+	playMusic(musicList, false);
+	_updateMusicVolume();
 }
 
 void AudioPlayer::allocateChannels(unsigned int count)
@@ -24,94 +88,6 @@ void AudioPlayer::allocateChannels(unsigned int count)
 	{
 		_channels.push_back("");
 	}
-}
-
-void AudioPlayer::update(Camera& camera, vector<Sound>& soundList, vector<Music>& musicList)
-{
-	// Update channel management
-	for(size_t i = 0; i < _channels.size(); i++)
-	{
-		// Check if audio stopped playing
-		if(!Mix_Playing(static_cast<int>(i)) && !Mix_Paused(static_cast<int>(i)))
-		{
-			// De-allocate channel
-			_channels[i] = "";
-		}
-	}
-
-	// Update sound management
-	if(_isSoundsEnabled)
-	{
-		// For every sound
-		for(auto& sound : soundList)
-		{
-			// Check if 3D sound
-			if(sound.is3D())
-			{
-				// Check if emitting sound
-				if(isSoundStarted(sound))
-				{
-					// Distance
-					auto cameraPosition = camera.getPosition(); // Camera position
-					float xDifference = fabsf(sound.getPosition().x - cameraPosition.x); // Difference between camera X & point X
-					float yDifference = fabsf(sound.getPosition().y - cameraPosition.y); // Difference between camera Y & point Y
-					float zDifference = fabsf(sound.getPosition().z - cameraPosition.z); // Difference between camera Z & point Z
-					float maxDifference = max(xDifference, max(yDifference, zDifference)); // Maximum difference
-					float volume = sound.getMaxVolume() - ((maxDifference / sound.getMaxDistance()) * sound.getMaxVolume()); // Calculate volume
-					volume = clamp(volume, 0.0f, sound.getMaxVolume()); // Clamp to maximum
-					sound.setVolume(volume); // Update sound volume
-
-					// Panning
-					auto cameraDirection = camera.getFrontVector();
-					mat44 rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(90.0f));
-					fvec3 soundDirection = (cameraPosition - sound.getPosition());
-					fvec4 result = (rotationMatrix * fvec4(soundDirection.x, soundDirection.y, soundDirection.z, 1.0f));
-					soundDirection = fvec3(result.x, result.y, result.z);
-					soundDirection = Math::normalize(soundDirection);
-					float dot = Math::calculateDotProduct(soundDirection, cameraDirection);
-					float range = ((dot / 2.0f) + 0.5f);
-					Uint8 leftStrength = Uint8(255.0f * range);
-					Uint8 rightStrength = Uint8(255.0f - leftStrength);
-
-					// For every sound playback
-					for(const auto& channel : _findSoundChannels(sound))
-					{
-						Mix_SetPanning(channel, leftStrength, rightStrength); // Apply stereo panning
-					}
-				}
-			}
-
-			// Update playing volume
-			_updateSoundVolume(sound);
-		}
-	}
-
-	// Update music management
-	if(_isMusicEnabled)
-	{
-		playMusic(musicList, false);
-		_updateMusicVolume();
-	}
-}
-
-void AudioPlayer::setSoundsEnabled(bool value)
-{
-	if(!value)
-	{
-		stopAllSounds();
-	}
-
-	_isSoundsEnabled = value;
-}
-
-void AudioPlayer::setMusicEnabled(bool value)
-{
-	if(!value)
-	{
-		stopMusic();
-	}
-
-	_isMusicEnabled = value;
 }
 
 const unsigned int AudioPlayer::getUsedChannelCount() const
@@ -134,53 +110,6 @@ const unsigned int AudioPlayer::getAllocatedChannelCount() const
 	return static_cast<unsigned int>(_channels.size());
 }
 
-void AudioPlayer::_updateSoundVolume(Sound& sound)
-{
-	if(_isSoundsEnabled)
-	{
-		if(isSoundStarted(sound))
-		{
-			auto intVolume = static_cast<int>(sound.getVolume() * 128.0f);
-
-			// For every sound playback
-			for(const auto& channel : _findSoundChannels(sound))
-			{
-				Mix_Volume(channel, intVolume);
-			}
-		}
-	}
-}
-
-void AudioPlayer::_updateMusicVolume()
-{
-	if(_isMusicEnabled)
-	{
-		auto intVolume = static_cast<int>(_musicVolume * 128.0f);
-		Mix_VolumeMusic(intVolume);
-	}
-}
-
-const  vector<int> AudioPlayer::_findSoundChannels(Sound& sound) const
-{
-	vector<int> channels;
-
-	for(size_t i = 0; i < _channels.size(); i++)
-	{
-		if(_channels[i] == sound.getID())
-		{
-			channels.push_back(static_cast<int>(i));
-		}
-	}
-
-	// Find must never fail
-	if(channels.empty())
-	{
-		Logger::throwError("AudioPlayer::_findSoundChannels");
-	}
-
-	return channels;
-}
-
 const  int AudioPlayer::_getFreeChannel() const
 {
 	for(size_t i = 0; i < _channels.size(); i++)
@@ -192,4 +121,17 @@ const  int AudioPlayer::_getFreeChannel() const
 	}
 
 	return -1;
+}
+
+const bool AudioPlayer::isChannelAvailable() const
+{
+	for(size_t i = 0; i < _channels.size(); i++)
+	{
+		if(_channels[i].empty())
+		{
+			return true;
+		}
+	}
+
+	return false;
 }

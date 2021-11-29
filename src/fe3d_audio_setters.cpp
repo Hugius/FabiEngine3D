@@ -35,7 +35,7 @@ void FabiEngine3D::sound_deleteAll()
 	sound_stopAll();
 
 	// Delete sounds
-	_core->_audioManager.deleteAllSounds();
+	_core->_audioManager.deleteSounds();
 }
 
 void FabiEngine3D::sound_play(const string& ID, int loops, int fadeMS, bool mustForcePlay)
@@ -155,7 +155,7 @@ void FabiEngine3D::music_clearPlaylist()
 	}
 
 	// Delete music
-	_core->_audioManager.deleteAllMusic();
+	_core->_audioManager.deleteMusic();
 }
 
 void FabiEngine3D::music_pause()

@@ -1,7 +1,8 @@
 #pragma once
 
-#include "sound.hpp"
 #include "music.hpp"
+#include "sound_2d.hpp"
+#include "sound_3d.hpp"
 #include "audio_loader.hpp"
 
 class AudioManager final
@@ -10,26 +11,34 @@ public:
 	AudioManager(AudioLoader& audioLoader);
 
 	// VOID
-	void createSound(const string& ID, const string& fileName);
 	void createMusic(const string& fileName);
-	void deleteSound(const string& ID);
-	void deleteAllSounds();
-	void deleteAllMusic();
+	void createSound2D(const string& ID, const string& fileName);
+	void createSound3D(const string& ID, const string& fileName);
+	void deleteMusic();
+	void deleteSounds2D();
+	void deleteSounds3D();
+	void deleteSound2D(const string& ID);
+	void deleteSound3D(const string& ID);
 
 	// BOOL
-	const bool isSoundExisting(const string& ID) const;
+	const bool isSoundExisting2D(const string& ID) const;
+	const bool isSoundExisting3D(const string& ID) const;
 
 	// MISCELLANEOUS
-	vector<Sound>& getSounds();
 	vector<Music>& getMusic();
-	Sound& getSound(const string& ID);
+	vector<Sound2D>& getSounds2D();
+	vector<Sound3D>& getSounds3D();
+	Sound2D& getSound2D(const string& ID);
+	Sound3D& getSound3D(const string& ID);
 
 private:
 	// INT
-	const int _findIndex(const string& ID) const;
+	const int _findSoundIndex2D(const string& ID) const;
+	const int _findSoundIndex3D(const string& ID) const;
 
 	// MISCELLANEOUS
-	vector<Sound> _soundList;
 	vector<Music> _musicList;
+	vector<Sound2D> _soundList2D;
+	vector<Sound3D> _soundList3D;
 	AudioLoader& _audioLoader;
 };

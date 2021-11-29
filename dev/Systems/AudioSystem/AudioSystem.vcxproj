@@ -20,16 +20,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\audio_manager.cpp" />
-    <ClCompile Include="..\..\..\src\audio_player_interface.cpp" />
+    <ClCompile Include="..\..\..\src\audio_player_2d.cpp" />
+    <ClCompile Include="..\..\..\src\audio_player_3d.cpp" />
     <ClCompile Include="..\..\..\src\audio_player_misc.cpp" />
+    <ClCompile Include="..\..\..\src\audio_player_music.cpp" />
     <ClCompile Include="..\..\..\src\music.cpp" />
-    <ClCompile Include="..\..\..\src\sound.cpp" />
+    <ClCompile Include="..\..\..\src\sound_2d.cpp" />
+    <ClCompile Include="..\..\..\src\sound_3d.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\audio_manager.hpp" />
     <ClInclude Include="..\..\..\src\audio_player.hpp" />
     <ClInclude Include="..\..\..\src\music.hpp" />
-    <ClInclude Include="..\..\..\src\sound.hpp" />
+    <ClInclude Include="..\..\..\src\sound_2d.hpp" />
+    <ClInclude Include="..\..\..\src\sound_3d.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

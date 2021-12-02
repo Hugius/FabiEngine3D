@@ -105,8 +105,10 @@ private:
 	const bool _executeFe3dImageGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dTextSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dTextGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
-	const bool _executeFe3dSoundSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
-	const bool _executeFe3dSoundGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dSoundSetterFunction2D(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dSoundGetterFunction2D(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dSoundSetterFunction3D(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dSoundGetterFunction3D(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dLightingSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dLightingGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dGraphicsSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
@@ -128,7 +130,8 @@ private:
 	const bool _validateFe3dWater();
 	const bool _validateFe3dModel(const string& ID, bool isPreview);
 	const bool _validateFe3dBillboard(const string& ID, bool isPreview);
-	const bool _validateFe3dSound(const string& ID, bool isPreview);
+	const bool _validateFe3dSound2D(const string& ID, bool isPreview);
+	const bool _validateFe3dSound3D(const string& ID, bool isPreview);
 	const bool _validateFe3dAabb(const string& ID);
 	const bool _validateFe3dPointlight(const string& ID);
 	const bool _validateFe3dSpotlight(const string& ID);

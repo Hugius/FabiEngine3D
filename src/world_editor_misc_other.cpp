@@ -204,10 +204,10 @@ void WorldEditor::clearCurrentWorld()
 	// Delete sounds
 	for(const auto& [ID, previewID] : _loadedSoundIDs)
 	{
-		if(_fe3d.sound_isExisting(ID))
+		if(_fe3d.sound3D_isExisting(ID))
 		{
 			// Delete sound
-			_fe3d.sound_delete(ID);
+			_fe3d.sound3D_delete(ID);
 
 			// Delete corresponding speaker model
 			if(!_currentWorldID.empty())

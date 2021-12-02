@@ -431,41 +431,41 @@ const bool WorldEditor::saveCustomWorldToFile()
 	}
 
 	// Sounds
-	for(const auto& soundID : _fe3d.sound_getAllIDs())
-	{
-		// Check if allowed to save
-		bool isCustomWorldSound =
-			find(_customWorldSoundIDs.begin(), _customWorldSoundIDs.end(), soundID) != _customWorldSoundIDs.end();
-		if((soundID[0] != '@') && isCustomWorldSound && _fe3d.sound_is3D(soundID))
-		{
-			// Data to save
-			auto position = _fe3d.sound_getPosition(soundID);
-			auto maxVolume = _fe3d.sound_getMaxVolume(soundID);
-			auto maxDistance = _fe3d.sound_getMaxDistance(soundID);
+	//for(const auto& soundID : _fe3d.sound3D_getAllIDs())
+	//{
+	//	// Check if allowed to save
+	//	bool isCustomWorldSound =
+	//		find(_customWorldSoundIDs.begin(), _customWorldSoundIDs.end(), soundID) != _customWorldSoundIDs.end();
+	//	if((soundID[0] != '@') && isCustomWorldSound && _fe3d.sound_is3D(soundID))
+	//	{
+	//		// Data to save
+	//		auto position = _fe3d.sound_getPosition(soundID);
+	//		auto maxVolume = _fe3d.sound_getMaxVolume(soundID);
+	//		auto maxDistance = _fe3d.sound_getMaxDistance(soundID);
 
-			// Extract preview ID
-			string previewID;
-			if(_loadedSoundIDs.find(soundID) == _loadedSoundIDs.end())
-			{
-				previewID = _outsideLoadedSoundIDs.at(soundID);
-			}
-			else
-			{
-				previewID = _loadedSoundIDs.at(soundID);
-			}
+	//		// Extract preview ID
+	//		string previewID;
+	//		if(_loadedSoundIDs.find(soundID) == _loadedSoundIDs.end())
+	//		{
+	//			previewID = _outsideLoadedSoundIDs.at(soundID);
+	//		}
+	//		else
+	//		{
+	//			previewID = _loadedSoundIDs.at(soundID);
+	//		}
 
-			// Write data
-			file <<
-				"SOUND " <<
-				soundID << " " <<
-				previewID << " " <<
-				position.x << " " <<
-				position.y << " " <<
-				position.z << " " <<
-				maxVolume << " " <<
-				maxDistance << endl;
-		}
-	}
+	//		// Write data
+	//		file <<
+	//			"SOUND " <<
+	//			soundID << " " <<
+	//			previewID << " " <<
+	//			position.x << " " <<
+	//			position.y << " " <<
+	//			position.z << " " <<
+	//			maxVolume << " " <<
+	//			maxDistance << endl;
+	//	}
+	//}
 
 	// Pointlights
 	for(const auto& pointlightID : _fe3d.pointlight_getAllIDs())

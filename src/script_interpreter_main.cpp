@@ -318,14 +318,6 @@ void ScriptInterpreter::unload()
 	}
 
 	// Reset audio
-	if(!_fe3d.misc_isSoundsEnabled())
-	{
-		_fe3d.misc_enableSounds();
-	}
-	if(!_fe3d.misc_isMusicEnabled())
-	{
-		_fe3d.misc_enableMusic();
-	}
 	_fe3d.music_clearPlaylist();
 
 	// Stop animations
@@ -337,7 +329,8 @@ void ScriptInterpreter::unload()
 	_fe3d.model_deleteAll();
 	_fe3d.billboard_deleteAll();
 	_fe3d.aabb_deleteAll();
-	_fe3d.sound_deleteAll();
+	_fe3d.sound2D_deleteAll();
+	_fe3d.sound3D_deleteAll();
 	_fe3d.pointlight_deleteAll();
 	_fe3d.spotlight_deleteAll();
 	_fe3d.reflection_deleteAll();

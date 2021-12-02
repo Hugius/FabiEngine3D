@@ -35,24 +35,6 @@ const bool ScriptInterpreter::_executeFe3dMusicSetterFunction(const string& func
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:music_enable")
-	{
-		// Validate arguments
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
-		{
-			_fe3d.misc_enableMusic();
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:music_disable")
-	{
-		// Validate arguments
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
-		{
-			_fe3d.misc_disableMusic();
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-		}
-	}
 	else if(functionName == "fe3d:music_set_volume")
 	{
 		auto types = {SVT::DECIMAL};

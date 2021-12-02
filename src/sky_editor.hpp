@@ -13,7 +13,6 @@ public:
 	void load();
 	void update();
 	void unload();
-	void unloadSkyEntities();
 
 	// STRING
 	const vector<array<string, 6>> getAllTexturePathsFromFile() const;

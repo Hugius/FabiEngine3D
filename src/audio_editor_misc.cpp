@@ -21,9 +21,9 @@ const vector<string>& AudioEditor::getLoadedAudioIDs()
 void AudioEditor::_updateMiscellaneous()
 {
 	// Temporary values
-	bool isExisting = _fe3d.sound_isExisting(_currentAudioID);
-	bool isPlaying = isExisting && _fe3d.sound_isPlaying(_currentAudioID);
-	bool isPaused = isExisting && _fe3d.sound_isPaused(_currentAudioID);
+	bool isExisting = _fe3d.sound2D_isExisting(_currentAudioID);
+	bool isPlaying = isExisting && _fe3d.sound2D_isPlaying(_currentAudioID);
+	bool isPaused = isExisting && _fe3d.sound2D_isPaused(_currentAudioID);
 
 	// Update audio status symbol
 	if(isPlaying)

@@ -28,7 +28,7 @@ const bool AudioEditor::saveAudioEntitiesToFile() const
 	for(const auto& audioID : _loadedAudioIDs)
 	{
 		// Retrieve all values
-		auto audioPath = _fe3d.sound_getFilePath(audioID);
+		auto audioPath = _fe3d.sound2D_getFilePath(audioID);
 
 		// Convert to short path
 		audioPath = string(audioPath.empty() ? "" : audioPath.substr(string("projects\\" + _currentProjectID + "\\").size()));

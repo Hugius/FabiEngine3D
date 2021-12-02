@@ -65,28 +65,6 @@ void FabiEngine3D::misc_enableVsync()
 	_core->_window.enableVsync();
 }
 
-void FabiEngine3D::misc_enableSounds()
-{
-	if(_core->_audioPlayer.isSoundsEnabled())
-	{
-		Logger::throwWarning("Tried to enable sounds: already enabled!");
-		return;
-	}
-
-	_core->_audioPlayer.setSoundsEnabled(true);
-}
-
-void FabiEngine3D::misc_enableMusic()
-{
-	if(_core->_audioPlayer.isMusicEnabled())
-	{
-		Logger::throwWarning("Tried to enable music: already enabled!");
-		return;
-	}
-
-	_core->_audioPlayer.setMusicEnabled(true);
-}
-
 void FabiEngine3D::misc_disableWireframeRendering()
 {
 	if(!_core->_renderBus.isWireframeRenderingEnabled())
@@ -140,28 +118,6 @@ void FabiEngine3D::misc_disableVsync()
 	}
 
 	_core->_window.disableVsync();
-}
-
-void FabiEngine3D::misc_disableSounds()
-{
-	if(!_core->_audioPlayer.isSoundsEnabled())
-	{
-		Logger::throwWarning("Tried to disable sounds: not enabled!");
-		return;
-	}
-
-	_core->_audioPlayer.setSoundsEnabled(false);
-}
-
-void FabiEngine3D::misc_disableMusic()
-{
-	if(!_core->_audioPlayer.isMusicEnabled())
-	{
-		Logger::throwWarning("Tried to disable music: not enabled!");
-		return;
-	}
-
-	_core->_audioPlayer.setMusicEnabled(false);
 }
 
 void FabiEngine3D::misc_setCursorVisible(bool isVisible)

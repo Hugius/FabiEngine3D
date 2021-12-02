@@ -923,15 +923,11 @@ public:
 	void misc_enableAabbFrameRendering();
 	void misc_enableDebugRendering();
 	void misc_enableVsync();
-	void misc_enableSounds();
-	void misc_enableMusic();
 	void misc_disableWireframeRendering();
 	void misc_disableShadowFrameRendering();
 	void misc_disableAabbFrameRendering();
 	void misc_disableDebugRendering();
 	void misc_disableVsync();
-	void misc_disableSounds();
-	void misc_disableMusic();
 	void misc_setCursorVisible(bool isVisible);
 	void misc_setCustomCursor(const string& imageID);
 	void misc_centerCursor();

@@ -327,9 +327,9 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			// Create sound
 			if(_copyPreviewSound(soundID, previewID, position, false))
 			{
-				_fe3d.sound_setMaxVolume(soundID, maxVolume);
-				_fe3d.sound_setMaxDistance(soundID, maxDistance);
-				_fe3d.sound_play(soundID, -1, 0, false);
+				_fe3d.sound3D_setMaxVolume(soundID, maxVolume);
+				_fe3d.sound3D_setMaxDistance(soundID, maxDistance);
+				_fe3d.sound3D_play(soundID, -1, 0, false);
 			}
 		}
 		else if(lineType == "POINTLIGHT")

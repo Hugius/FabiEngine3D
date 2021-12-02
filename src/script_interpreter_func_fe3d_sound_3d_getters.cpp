@@ -2,10 +2,10 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dSoundGetterFunction3D(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if(functionName == "fe3d:sound_is_existing")
+	if(functionName == "fe3d:sound_3d_is_existing")
 	{
 		auto types = {SVT::STRING};
 
@@ -20,11 +20,11 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 			}
 
 			// Check if existing
-			auto result = _fe3d.sound_isExisting(arguments[0].getString());
+			auto result = _fe3d.sound3D_isExisting(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
-	else if(functionName == "fe3d:sound_find_ids")
+	else if(functionName == "fe3d:sound_3d_find_ids")
 	{
 		auto types = {SVT::STRING};
 
@@ -39,7 +39,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 			}
 
 			// Find full sound IDs based on part ID
-			for(const auto& ID : _fe3d.sound_getAllIDs())
+			for(const auto& ID : _fe3d.sound3D_getAllIDs())
 			{
 				// If substring matches
 				if(arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -53,12 +53,12 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound_get_all_ids")
+	else if(functionName == "fe3d:sound_3d_get_all_ids")
 	{
 		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			auto result = _fe3d.sound_getAllIDs();
+			auto result = _fe3d.sound3D_getAllIDs();
 
 			// For every sound
 			for(const auto& ID : result)
@@ -71,7 +71,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound_is_started")
+	else if(functionName == "fe3d:sound_3d_is_started")
 	{
 		auto types = {SVT::STRING};
 
@@ -79,14 +79,14 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString(), false))
+			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.sound_isStarted(arguments[0].getString());
+				auto result = _fe3d.sound3D_isStarted(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound_is_playing")
+	else if(functionName == "fe3d:sound_3d_is_playing")
 	{
 		auto types = {SVT::STRING};
 
@@ -94,14 +94,14 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString(), false))
+			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.sound_isPlaying(arguments[0].getString());
+				auto result = _fe3d.sound3D_isPlaying(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound_is_paused")
+	else if(functionName == "fe3d:sound_3d_is_paused")
 	{
 		auto types = {SVT::STRING};
 
@@ -109,14 +109,14 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString(), false))
+			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.sound_isPaused(arguments[0].getString());
+				auto result = _fe3d.sound3D_isPaused(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound_get_volume")
+	else if(functionName == "fe3d:sound_3d_get_volume")
 	{
 		auto types = {SVT::STRING};
 
@@ -124,14 +124,14 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString(), false))
+			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.sound_getVolume(arguments[0].getString());
+				auto result = _fe3d.sound3D_getVolume(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound_get_position_x")
+	else if(functionName == "fe3d:sound_3d_get_position_x")
 	{
 		auto types = {SVT::STRING};
 
@@ -139,21 +139,14 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString(), false))
+			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
-				// Only for 3D sound
-				if(!_fe3d.sound_is3D(arguments[0].getString()))
-				{
-					_throwScriptError("cannot retrieve position of 2D sound with ID \"" + arguments[0].getString() + "\"!");
-					return true;
-				}
-
-				auto result = _fe3d.sound_getPosition(arguments[0].getString()).x;
+				auto result = _fe3d.sound3D_getPosition(arguments[0].getString()).x;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound_get_position_y")
+	else if(functionName == "fe3d:sound_3d_get_position_y")
 	{
 		auto types = {SVT::STRING};
 
@@ -161,21 +154,14 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString(), false))
+			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
-				// Only for 3D sound
-				if(!_fe3d.sound_is3D(arguments[0].getString()))
-				{
-					_throwScriptError("cannot retrieve position of 2D sound with ID \"" + arguments[0].getString() + "\"!");
-					return true;
-				}
-
-				auto result = _fe3d.sound_getPosition(arguments[0].getString()).y;
+				auto result = _fe3d.sound3D_getPosition(arguments[0].getString()).y;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound_get_position_z")
+	else if(functionName == "fe3d:sound_3d_get_position_z")
 	{
 		auto types = {SVT::STRING};
 
@@ -183,21 +169,14 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString(), false))
+			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
-				// Only for 3D sound
-				if(!_fe3d.sound_is3D(arguments[0].getString()))
-				{
-					_throwScriptError("cannot retrieve position of 2D sound with ID \"" + arguments[0].getString() + "\"!");
-					return true;
-				}
-
-				auto result = _fe3d.sound_getPosition(arguments[0].getString()).z;
+				auto result = _fe3d.sound3D_getPosition(arguments[0].getString()).z;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound_get_max_volume")
+	else if(functionName == "fe3d:sound_3d_get_max_volume")
 	{
 		auto types = {SVT::STRING};
 
@@ -205,22 +184,14 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString(), false))
+			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
-				// Only for 3D sound
-				if(!_fe3d.sound_is3D(arguments[0].getString()))
-				{
-					_throwScriptError("cannot retrieve maximum volume of 2D sound with ID \"" + arguments[0].getString() + "\"!");
-					return true;
-				}
-
-				// Execute function
-				auto result = _fe3d.sound_getMaxVolume(arguments[0].getString());
+				auto result = _fe3d.sound3D_getMaxVolume(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound_get_max_distance")
+	else if(functionName == "fe3d:sound_3d_get_max_distance")
 	{
 		auto types = {SVT::STRING};
 
@@ -228,17 +199,9 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dSound(arguments[0].getString(), false))
+			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
-				// Only for 3D sound
-				if(!_fe3d.sound_is3D(arguments[0].getString()))
-				{
-					_throwScriptError("cannot retrieve maximum distance of 2D sound with ID \"" + arguments[0].getString() + "\"!");
-					return true;
-				}
-
-				// Execute function
-				auto result = _fe3d.sound_getMaxDistance(arguments[0].getString());
+				auto result = _fe3d.sound3D_getMaxDistance(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -251,7 +214,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& func
 	// Cannot execute sound functionality when server is running
 	if(_fe3d.server_isRunning())
 	{
-		_throwScriptError("cannot access `fe3d:sound` functionality as networking server!");
+		_throwScriptError("cannot access `fe3d:sound_3d` functionality as networking server!");
 	}
 
 	return true;

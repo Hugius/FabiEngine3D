@@ -140,10 +140,10 @@ void AudioEditor::_updateAudioCreating()
 						// Create audio
 						const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 						_fe3d.misc_clearAudioCache(finalFilePath);
-						_fe3d.sound_create(newAudioID, finalFilePath);
+						_fe3d.sound2D_create(newAudioID, finalFilePath);
 
 						// Check if audio creation went well
-						if(_fe3d.sound_isExisting(newAudioID))
+						if(_fe3d.sound2D_isExisting(newAudioID))
 						{
 							// Go to next screen
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuChoice");
@@ -232,9 +232,9 @@ void AudioEditor::_updateAudioDeleting()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuMain");
 
 			// Delete audio
-			if(_fe3d.sound_isExisting(_currentAudioID))
+			if(_fe3d.sound2D_isExisting(_currentAudioID))
 			{
-				_fe3d.sound_delete(_currentAudioID);
+				_fe3d.sound2D_delete(_currentAudioID);
 			}
 
 			// Miscellaneous

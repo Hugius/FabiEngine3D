@@ -4,7 +4,6 @@
 void FabiEngine3D::music_addToPlaylist(const string& fileName)
 {
 	_core->_audioManager.createMusic(fileName);
-	_core->_audioPlayer.playMusic(_core->_audioManager.getMusic(), true);
 }
 
 void FabiEngine3D::music_clearPlaylist()

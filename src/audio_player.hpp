@@ -21,7 +21,6 @@ public:
 	// VOID
 	void allocateChannels(unsigned int count);
 	void update(Camera& camera, vector<Music>& musicList, vector<Sound2D>& soundList2D, vector<Sound3D>& soundList3D);
-	void playMusic(vector<Music>& musicList, bool mustForcePlay);
 	void pauseMusic();
 	void resumeMusic();
 	void stopMusic();

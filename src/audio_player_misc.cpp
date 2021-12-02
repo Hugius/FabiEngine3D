@@ -11,15 +11,29 @@ AudioPlayer::AudioPlayer()
 
 void AudioPlayer::update(Camera& camera, vector<Music>& musicList, vector<Sound2D>& soundList2D, vector<Sound3D>& soundList3D)
 {
-	// Update channels
-	for(size_t i = 0; i < _channels.size(); i++)
+	// Update music
+	if (!musicList.empty())
 	{
-		// Check if audio stopped playing
-		if(!Mix_Playing(static_cast<int>(i)) && !Mix_Paused(static_cast<int>(i)))
+		// Check if music is not started
+		if (!isMusicStarted())
 		{
-			// De-allocate channel
-			_channels[i] = "";
+			// Select music
+			unsigned int musicIndex;
+			if (musicList.size() == 1)
+			{
+				musicIndex = 0;
+			}
+			else
+			{
+				musicIndex = Math::getRandomInteger(0, static_cast<int>(musicList.size() - 1));
+			}
+
+			// Play music
+			Mix_PlayMusic(musicList[musicIndex].getDataPointer(), 0);
 		}
+
+		// Update volume
+		_updateMusicVolume();
 	}
 
 	// Update 2D sounds
@@ -69,9 +83,16 @@ void AudioPlayer::update(Camera& camera, vector<Music>& musicList, vector<Sound2
 		_updateSoundVolume3D(sound);
 	}
 
-	// Update music
-	//playMusic(musicList, false);
-	_updateMusicVolume();
+	// Update channels
+	for (size_t i = 0; i < _channels.size(); i++)
+	{
+		// Check if audio stopped playing
+		if (!Mix_Playing(static_cast<int>(i)) && !Mix_Paused(static_cast<int>(i)))
+		{
+			// De-allocate channel
+			_channels[i] = "";
+		}
+	}
 }
 
 void AudioPlayer::allocateChannels(unsigned int count)

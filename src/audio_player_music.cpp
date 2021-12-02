@@ -3,38 +3,6 @@
 
 using std::clamp;
 
-void AudioPlayer::playMusic(vector<Music>& musicList, bool mustForcePlay)
-{
-	// Check if music is playing
-	if(isMusicStarted() && !mustForcePlay)
-	{
-		Logger::throwError("AudioPlayer::playMusic::1");
-	}
-
-	// Check if music is not defined
-	if(musicList.empty())
-	{
-		Logger::throwError("AudioPlayer::playMusic::2");
-	}
-
-	// Select next music
-	unsigned int musicIndex;
-	if(musicList.size() == 1)
-	{
-		musicIndex = 0;
-	}
-	else
-	{
-		musicIndex = Math::getRandomInteger(0, static_cast<int>(musicList.size() - 1));
-	}
-
-	// Play music
-	Mix_PlayMusic(musicList[musicIndex].getDataPointer(), 0);
-
-	// Update volume
-	_updateMusicVolume();
-}
-
 void AudioPlayer::_updateMusicVolume()
 {
 	if(isMusicStarted())

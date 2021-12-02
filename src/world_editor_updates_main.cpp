@@ -234,7 +234,7 @@ void WorldEditor::_updateMainMenu()
 			// If world ID not existing yet
 			if(find(worldNames.begin(), worldNames.end(), newWorldName) == worldNames.end())
 			{
-				// Disable engine background
+				// Unselect background
 				_fe3d.sky_selectMainSky("");
 
 				// Create new world
@@ -258,7 +258,7 @@ void WorldEditor::_updateMainMenu()
 				// Load selected world for editing
 				if(_isChoosingWorld)
 				{
-					// Disable engine background
+					// Unselect background
 					_fe3d.sky_selectMainSky("");
 
 					// Try to load world
@@ -269,8 +269,8 @@ void WorldEditor::_updateMainMenu()
 					}
 					else
 					{
-						// Enable engine background
-						_fe3d.sky_selectMainSky("@@engineBackground");
+						// Select background
+						_fe3d.sky_selectMainSky("@@background");
 					}
 				}
 				else if(_isDeletingWorld) // Prepare deleting confirmation
@@ -375,8 +375,8 @@ void WorldEditor::_updateChoiceMenu()
 			// Clear whole world
 			clearCurrentWorld();
 
-			// Enable engine background
-			_fe3d.sky_selectMainSky("@@engineBackground");
+			// Select background
+			_fe3d.sky_selectMainSky("@@background");
 
 			// No selected world
 			_currentWorldID = "";
@@ -401,8 +401,8 @@ void WorldEditor::_updateChoiceMenu()
 			// Clear whole world
 			clearCurrentWorld();
 
-			// Enable engine background
-			_fe3d.sky_selectMainSky("@@engineBackground");
+			// Select background
+			_fe3d.sky_selectMainSky("@@background");
 
 			// No selected world
 			_currentWorldID = "";

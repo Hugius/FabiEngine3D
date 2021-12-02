@@ -41,8 +41,14 @@ void SkyEditor::unload()
 	// Default graphics
 	_fe3d.gfx_disableMotionBlur(true);
 
-	// Delete skies
-	unloadSkyEntities();
+	// Delete all sky entities except the background
+	for (const auto& ID : _fe3d.sky_getAllIDs())
+	{
+		if (ID != "@@background")
+		{
+			_fe3d.sky_delete(ID);
+		}
+	}
 
 	// Reset editor properties
 	_loadedSkyIDs.clear();

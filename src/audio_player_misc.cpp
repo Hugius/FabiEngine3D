@@ -70,7 +70,7 @@ void AudioPlayer::update(Camera& camera, vector<Music>& musicList, vector<Sound2
 	}
 
 	// Update music
-	playMusic(musicList, false);
+	//playMusic(musicList, false);
 	_updateMusicVolume();
 }
 

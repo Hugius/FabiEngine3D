@@ -127,9 +127,9 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		// Default rendering color
 		Tools::setMainRenderingColor(fvec3(0.0f));
 
-		// Default engine background
-		sky_create("@@engineBackground");
-		sky_setCubeMaps("@@engineBackground", texturePaths3D);
+		// Default background
+		sky_create("@@background");
+		sky_setCubeMaps("@@background", texturePaths3D);
 
 		// Custom cursor texture
 		image_create("@@cursor", true);
@@ -174,18 +174,19 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 		string activeScreen = _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID();
 		if(activeScreen == "main" && lastScreen != "main")
 		{
+			std::cout << "HOI";
 			// Restore camera
 			camera_reset();
 
 			// Restore background
-			sky_selectMainSky("@@engineBackground");
+			sky_selectMainSky("@@background");
 			sky_setMixValue(0.0f);
-			sky_setLightness("@@engineBackground", 1.0f);
+			sky_setLightness("@@background", 1.0f);
 		}
 		lastScreen = activeScreen;
 
 		// Update background
-		sky_setRotation("@@engineBackground", sky_getRotation("@@engineBackground") + 0.0025f);
+		sky_setRotation("@@background", sky_getRotation("@@background") + 0.0025f);
 
 		// Update custom cursor
 		image_setPosition("@@cursor", Math::convertToNDC(Tools::convertFromScreenCoords(misc_getCursorPosition())));

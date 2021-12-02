@@ -61,7 +61,7 @@ void ScriptEditor::unload()
 	_unloadGUI();
 
 	// Background
-	_fe3d.sky_selectMainSky("@@engineBackground");
+	_fe3d.sky_selectMainSky("@@background");
 	Tools::setMainRenderingColor(fvec3(0.0f));
 
 	// Default graphics

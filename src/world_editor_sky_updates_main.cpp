@@ -20,7 +20,7 @@ void WorldEditor::_updateSkyMenu()
 			vector<string> skyIDs;
 			for(const auto& ID : _skyEditor.getLoadedSkyIDs())
 			{
-				if((ID[0] == '@') && (ID != "@@engineBackground"))
+				if((ID[0] == '@') && (ID != "@@background"))
 				{
 					skyIDs.push_back(ID.substr(1));
 				}

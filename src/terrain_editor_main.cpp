@@ -67,9 +67,9 @@ void TerrainEditor::unload()
 	_fe3d.gfx_disableMotionBlur(true);
 
 	// Delete terrains
-	unloadTerrainEntities();
+	_fe3d.terrain_deleteAll();
 
-	// Editor models
+	// Delete models
 	_fe3d.model_deleteAll();
 
 	// Reset editor properties

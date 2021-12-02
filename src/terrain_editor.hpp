@@ -13,7 +13,6 @@ public:
 	void load();
 	void update();
 	void unload();
-	void unloadTerrainEntities();
 
 	// STRING
 	const vector<string> getAllTerrainBitmapPathsFromFile() const;

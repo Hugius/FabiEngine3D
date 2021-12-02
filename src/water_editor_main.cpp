@@ -68,9 +68,9 @@ void WaterEditor::unload()
 	_fe3d.gfx_disableMotionBlur(true);
 
 	// Delete waters
-	unloadWaterEntities();
+	_fe3d.water_deleteAll();
 
-	// Editor models
+	// Delete models
 	_fe3d.model_deleteAll();
 
 	// Reset editor properties

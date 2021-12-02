@@ -112,7 +112,7 @@ void SkyEditor::_updateChoiceMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuMain");
 			_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("skyID")->getEntityID(), false);
 			_fe3d.sky_setWireframed(_currentSkyID, false);
-			_fe3d.sky_selectMainSky("@@engineBackground");
+			_fe3d.sky_selectMainSky("@@background");
 			_currentSkyID = "";
 			return;
 		}
@@ -197,7 +197,7 @@ void SkyEditor::_updateSkyChoosing()
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("skyList");
 
 		// Hide last sky
-		_fe3d.sky_selectMainSky("@@engineBackground");
+		_fe3d.sky_selectMainSky("@@background");
 
 		// Check if a sky ID is hovered
 		if(!selectedButtonID.empty())
@@ -254,13 +254,13 @@ void SkyEditor::_updateSkyDeleting()
 			_isDeletingSky = false;
 			_currentSkyID = "";
 
-			// Enable engine background
-			_fe3d.sky_selectMainSky("@@engineBackground");
+			// Select background
+			_fe3d.sky_selectMainSky("@@background");
 		}
 		if(_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 		{
-			// Enable engine background
-			_fe3d.sky_selectMainSky("@@engineBackground");
+			// Select background
+			_fe3d.sky_selectMainSky("@@background");
 
 			// Miscellaneous
 			_isDeletingSky = false;

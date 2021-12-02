@@ -13,7 +13,6 @@ public:
 	void load();
 	void update();
 	void unload();
-	void unloadWaterEntities();
 
 	// STRING
 	const vector<string> getAllWaterTexturePathsFromFile() const;

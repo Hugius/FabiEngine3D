@@ -149,10 +149,18 @@ void WorldEditor::unload()
 	// Clear world
 	clearCurrentWorld();
 
-	// Unload preview entities
-	_skyEditor.unloadSkyEntities();
-	_terrainEditor.unloadTerrainEntities();
-	_waterEditor.unloadWaterEntities();
+	// Delete all sky entities except the background
+	for (const auto& ID : _fe3d.sky_getAllIDs())
+	{
+		if (ID != "@@background")
+		{
+			_fe3d.sky_delete(ID);
+		}
+	}
+
+	// Delete preview entities
+	_fe3d.terrain_deleteAll();
+	_fe3d.water_deleteAll();
 	_fe3d.model_deleteAll();
 	_fe3d.billboard_deleteAll();
 	_fe3d.sound2D_deleteAll();

@@ -8,7 +8,7 @@ using std::ifstream;
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
 	if(functionName == "fe3d:directory_is_existing")

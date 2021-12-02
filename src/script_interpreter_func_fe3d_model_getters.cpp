@@ -14,7 +14,7 @@ static const vector<string> extractModelPartIDs(FabiEngine3D& fe3d, const string
 	}
 }
 
-const bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
 	if(functionName == "fe3d:model_is_existing")

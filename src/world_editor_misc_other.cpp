@@ -124,6 +124,10 @@ void WorldEditor::clearCurrentWorld()
 		}
 	}
 
+	// Reset sky
+	_fe3d.sky_selectMixSky("");
+	_fe3d.sky_setMixValue(0.0f);
+
 	// Delete sky entity
 	if(!_loadedSkyID.empty())
 	{
@@ -132,10 +136,6 @@ void WorldEditor::clearCurrentWorld()
 		{
 			_fe3d.sky_delete(_loadedSkyID);
 		}
-
-		// Miscellaneous
-		_fe3d.sky_selectMixSky("");
-		_fe3d.sky_setMixValue(0.0f);
 	}
 
 	// Delete terrain entity

@@ -300,6 +300,16 @@ void ScriptInterpreter::executeTerminateScripts()
 
 void ScriptInterpreter::unload()
 {
+	// Reset sky
+	_fe3d.sky_selectMixSky("");
+	_fe3d.sky_setMixValue(0.0f);
+
+	// Select background
+	if (!Config::getInst().isApplicationExported())
+	{
+		_fe3d.sky_selectMainSky("@@background");
+	}
+
 	// Delete all sky entities except the background
 	for(const auto& ID : _fe3d.sky_getAllIDs())
 	{
@@ -308,14 +318,6 @@ void ScriptInterpreter::unload()
 			_fe3d.sky_delete(ID);
 		}
 	}
-
-	// Restore background
-	if(!Config::getInst().isApplicationExported())
-	{
-		_fe3d.sky_selectMainSky("@@background");
-	}
-	_fe3d.sky_selectMixSky("");
-	_fe3d.sky_setMixValue(0.0f);
 
 	// Reset audio
 	_fe3d.music_clearPlaylist();

@@ -174,14 +174,11 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 		string activeScreen = _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID();
 		if(activeScreen == "main" && lastScreen != "main")
 		{
-			std::cout << "HOI";
 			// Restore camera
 			camera_reset();
 
 			// Restore background
 			sky_selectMainSky("@@background");
-			sky_setMixValue(0.0f);
-			sky_setLightness("@@background", 1.0f);
 		}
 		lastScreen = activeScreen;
 

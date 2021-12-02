@@ -53,11 +53,12 @@ void AudioManager::createMusic(const string& fileName)
 
 void AudioManager::createSound2D(const string& ID, const string& fileName)
 {
+	// Check for errors
 	if(_findSoundIndex2D(ID) != -1)
 	{
 		Logger::throwError("AudioManager::createSound2D::1");
 	}
-	else if(ID.empty())
+	if(ID.empty())
 	{
 		Logger::throwError("AudioManager::createSound2D::2");
 	}
@@ -74,11 +75,12 @@ void AudioManager::createSound2D(const string& ID, const string& fileName)
 
 void AudioManager::createSound3D(const string& ID, const string& fileName)
 {
+	// Check for errors
 	if(_findSoundIndex3D(ID) != -1)
 	{
 		Logger::throwError("AudioManager::createSound3D::1");
 	}
-	else if(ID.empty())
+	if(ID.empty())
 	{
 		Logger::throwError("AudioManager::createSound3D::2");
 	}

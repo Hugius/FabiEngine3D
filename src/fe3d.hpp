@@ -619,39 +619,6 @@ public:
 	const bool text_isMirroredVertically(const string& ID) const;
 	const bool text_isWireframed(const string& ID) const;
 
-	// SOUND - setters
-	void sound_create(const string& ID, const string& filePath);
-	void sound_make3D(const string& ID, fvec3 position, float maxVolume, float maxDistance);
-	void sound_delete(const string& ID);
-	void sound_deleteAll();
-	void sound_play(const string& ID, int loops, int fadeMS, bool mustForcePlay);
-	void sound_pause(const string& ID);
-	void sound_pauseAll();
-	void sound_resume(const string& ID);
-	void sound_resumeAll();
-	void sound_stop(const string& ID, int fadeMS);
-	void sound_stopAll();
-	void sound_setPosition(const string& ID, fvec3 position);
-	void sound_move(const string& ID, fvec3 change);
-	void sound_setVolume(const string& ID, float volume);
-	void sound_setMaxVolume(const string& ID, float volume);
-	void sound_setMaxDistance(const string& ID, float maxDistance);
-
-	// SOUND - getters
-	const vector<string> sound_getAllIDs() const;
-	const string& sound_getFilePath(const string& ID) const;
-	const fvec3 sound_getPosition(const string& ID) const;
-	const float sound_getMaxDistance(const string& ID) const;
-	const float sound_getVolume(const string& ID) const;
-	const float sound_getMaxVolume(const string& ID) const;
-	const unsigned int sound_getUsedChannelCount() const;
-	const bool sound_isExisting(const string& ID) const;
-	const bool sound_isStarted(const string& ID) const;
-	const bool sound_isPlaying(const string& ID) const;
-	const bool sound_isPaused(const string& ID) const;
-	const bool sound_isLoaded(const string& ID) const;
-	const bool sound_is3D(const string& ID) const;
-
 	// MUSIC - setters
 	void music_addToPlaylist(const string& filePath);
 	void music_clearPlaylist();
@@ -664,6 +631,56 @@ public:
 	const bool music_isStarted() const;
 	const bool music_isPlaying() const;
 	const bool music_isPaused() const;
+
+	// SOUND2D - setters
+	void sound2D_create(const string& ID, const string& filePath);
+	void sound2D_delete(const string& ID);
+	void sound2D_deleteAll();
+	void sound2D_play(const string& ID, int loops, unsigned int fadeMS, bool mustForcePlay);
+	void sound2D_pause(const string& ID);
+	void sound2D_pauseAll();
+	void sound2D_resume(const string& ID);
+	void sound2D_resumeAll();
+	void sound2D_stop(const string& ID, unsigned int fadeMS);
+	void sound2D_stopAll();
+	void sound2D_setVolume(const string& ID, float volume);
+
+	// SOUND2D - getters
+	const vector<string> sound2D_getAllIDs() const;
+	const string& sound2D_getFilePath(const string& ID) const;
+	const float sound2D_getVolume(const string& ID) const;
+	const bool sound2D_isExisting(const string& ID) const;
+	const bool sound2D_isStarted(const string& ID) const;
+	const bool sound2D_isPlaying(const string& ID) const;
+	const bool sound2D_isPaused(const string& ID) const;
+
+	// SOUND3D - setters
+	void sound3D_create(const string& ID, const string& filePath);
+	void sound3D_delete(const string& ID);
+	void sound3D_deleteAll();
+	void sound3D_play(const string& ID, int loops, unsigned int fadeMS, bool mustForcePlay);
+	void sound3D_pause(const string& ID);
+	void sound3D_pauseAll();
+	void sound3D_resume(const string& ID);
+	void sound3D_resumeAll();
+	void sound3D_stop(const string& ID, unsigned int fadeMS);
+	void sound3D_stopAll();
+	void sound3D_setPosition(const string& ID, fvec3 position);
+	void sound3D_move(const string& ID, fvec3 change);
+	void sound3D_setMaxVolume(const string& ID, float volume);
+	void sound3D_setMaxDistance(const string& ID, float maxDistance);
+
+	// SOUND - getters
+	const vector<string> sound3D_getAllIDs() const;
+	const string& sound3D_getFilePath(const string& ID) const;
+	const fvec3 sound3D_getPosition(const string& ID) const;
+	const float sound3D_getMaxDistance(const string& ID) const;
+	const float sound3D_getVolume(const string& ID) const;
+	const float sound3D_getMaxVolume(const string& ID) const;
+	const bool sound3D_isExisting(const string& ID) const;
+	const bool sound3D_isStarted(const string& ID) const;
+	const bool sound3D_isPlaying(const string& ID) const;
+	const bool sound3D_isPaused(const string& ID) const;
 
 	// INPUT - setters
 	void input_setLocked(bool locked);
@@ -950,6 +967,7 @@ public:
 	const float misc_getLevelOfDetailDistance() const;
 	const unsigned int misc_getTriangleCount() const;
 	const unsigned int misc_getMaxAudioChannelCount() const;
+	const unsigned int misc_getUsedAudioChannelCount() const;
 	const bool misc_isCursorVisible() const;
 	const bool misc_isCursorInsideViewport() const;
 	const bool misc_isCursorInsideWindow() const;
@@ -960,8 +978,6 @@ public:
 	const bool misc_isShadowFrameRenderingEnabled() const;
 	const bool misc_isAabbFrameRenderingEnabled() const;
 	const bool misc_isDebugRenderingEnabled() const;
-	const bool misc_isSoundsEnabled() const;
-	const bool misc_isMusicEnabled() const;
 
 protected:
 	virtual void FE3D_CONTROLLER_INIT() = 0;

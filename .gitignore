@@ -1,3 +1,10 @@
+.vs/
+
+app/binaries/*.pdb
+app/binaries/*.iobj
+app/binaries/*.ipdb
+app/projects/*/
+
 dev/.vs/
 dev/Systems/AssetManagementSystem/Temp/
 dev/Systems/AudioSystem/Temp/
@@ -38,7 +45,3 @@ dev/Systems/NetworkingSystem.pdb
 dev/Systems/PhysicsSystem.pdb
 dev/Systems/RenderingSystem.pdb
 dev/Systems/ScriptingSystem.pdb
-app/binaries/*.pdb
-app/binaries/*.iobj
-app/binaries/*.ipdb
-app/projects/*/

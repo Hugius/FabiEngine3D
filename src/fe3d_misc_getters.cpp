@@ -215,17 +215,12 @@ const bool FabiEngine3D::misc_isDebugRenderingEnabled() const
 	return _core->_renderBus.isDebugRenderingEnabled();
 }
 
-const bool FabiEngine3D::misc_isSoundsEnabled() const
-{
-	return _core->_audioPlayer.isSoundsEnabled();
-}
-
-const bool FabiEngine3D::misc_isMusicEnabled() const
-{
-	return _core->_audioPlayer.isMusicEnabled();
-}
-
 const unsigned int FabiEngine3D::misc_getMaxAudioChannelCount() const
 {
 	return _core->_audioPlayer.getAllocatedChannelCount();
+}
+
+const unsigned int FabiEngine3D::misc_getUsedAudioChannelCount() const
+{
+	return _core->_audioPlayer.getUsedChannelCount();
 }

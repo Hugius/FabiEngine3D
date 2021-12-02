@@ -50,11 +50,6 @@ const bool FabiEngine3D::sound_isPaused(const string& ID) const
 	return _core->_audioPlayer.isSoundPaused(_core->_audioManager.getSound(ID));
 }
 
-const bool FabiEngine3D::sound_isLoaded(const string& ID) const
-{
-	return (_core->_audioManager.getSound(ID).getDataPointer() != nullptr);
-}
-
 const bool FabiEngine3D::sound_is3D(const string& ID) const
 {
 	return _core->_audioManager.getSound(ID).is3D();
@@ -89,6 +84,8 @@ const bool FabiEngine3D::music_isPaused() const
 {
 	return _core->_audioPlayer.isMusicPaused();
 }
+
+
 
 const float FabiEngine3D::music_getVolume() const
 {

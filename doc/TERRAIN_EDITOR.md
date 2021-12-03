@@ -17,7 +17,7 @@
 - Press `F` to toggle wireframe
 - Press `ESC` to go back
 
-## 3. Resources
+## 3. Assets
 
 - **Height map**: grayscaled `24bit BMP` format image file from `~\projects\<your_project>\assets\textures\height_maps\`.
 - **Blend map**: colored `24bit PNG` format image file from `~\projects\<your_project>\assets\textures\blend_maps\`.

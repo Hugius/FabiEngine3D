@@ -5,7 +5,7 @@
 - The sky entity is simply a 3D cube, called a [skybox](https://en.wikipedia.org/wiki/Skybox_(video_games)), that is rendered around the camera.
 - A skybox is static and has an infinite size, which creates the illusion of a real sky.
 
-## 1.2 Resources
+## 1.2 Assets
 
 - Cube Map
 

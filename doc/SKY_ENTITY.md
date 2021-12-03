@@ -6,7 +6,7 @@
 - This cube, which called a skybox, is rendered around the camera.
 - A skybox has a static position and has an infinite size, which creates the illusion of a real sky.
 
-## 2. Resources
+## 2. Assets
 
 - Cube Map
 

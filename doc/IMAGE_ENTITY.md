@@ -6,7 +6,7 @@
 - The mesh renders on top of all 3D rendering.
 - Sprite animations can be applied to the diffuse map.
 
-## 2. Resources
+## 2. Assets
 
 - Diffuse Map
 

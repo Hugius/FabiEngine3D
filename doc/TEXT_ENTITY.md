@@ -6,7 +6,7 @@
 - The mesh renders on top of all 3D rendering.
 - A font is used to generate a diffuse map based on the text content.
 
-## 2. Resources
+## 2. Assets
 
 - Font
 

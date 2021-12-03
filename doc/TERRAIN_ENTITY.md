@@ -5,7 +5,7 @@
 - The terrain entity is a 3D object in 3D space.
 - The mesh of a terrain entity is generated with a height map.
 
-## 2. Resources
+## 2. Assets
 
 - Height map
 - Blend map

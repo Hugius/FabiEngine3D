@@ -16,6 +16,6 @@
 - Press `S` to stop the audio
 - Press `ESC` to go back
 
-## 3. Resources
+## 3. Assets
 
 - **Audio**: `WAV` format audio file from `~\projects\<your_project>\assets\audio`.

@@ -3,17 +3,9 @@
 
 using std::clamp;
 
-void AudioPlayer::_updateMusicVolume()
-{
-	if(isMusicStarted())
-	{
-		Mix_VolumeMusic(static_cast<int>(_musicVolume * 128.0f));
-	}
-}
-
 void AudioPlayer::setMusicVolume(float volume)
 {
-	_musicVolume = clamp(volume, 0.0f, 1.0f);
+	Mix_VolumeMusic(static_cast<int>(clamp(volume, 0.0f, 1.0f) * 128.0f));
 }
 
 const float AudioPlayer::getMusicVolume() const

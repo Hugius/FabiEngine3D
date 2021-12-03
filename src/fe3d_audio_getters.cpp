@@ -37,7 +37,7 @@ const vector<string> FabiEngine3D::sound2D_getAllIDs() const
 
 const string& FabiEngine3D::sound2D_getFilePath(const string& ID) const
 {
-	return _core->_audioManager.getSound2D(ID).getFilePath();
+	return _core->_audioManager.getSound2D(ID).getAudioPath();
 }
 
 const bool FabiEngine3D::sound2D_isExisting(const string& ID) const
@@ -79,7 +79,7 @@ const vector<string> FabiEngine3D::sound3D_getAllIDs() const
 
 const string& FabiEngine3D::sound3D_getFilePath(const string& ID) const
 {
-	return _core->_audioManager.getSound3D(ID).getFilePath();
+	return _core->_audioManager.getSound3D(ID).getAudioPath();
 }
 
 const bool FabiEngine3D::sound3D_isExisting(const string& ID) const

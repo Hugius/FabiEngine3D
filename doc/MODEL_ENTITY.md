@@ -6,7 +6,7 @@
 - The entity cannot exist without having a mesh.
 - A model entity uses a variety of textures for a more detailed mesh.
 
-## 2. Resources
+## 2. Assets
 
 - Mesh
 - Diffuse map

@@ -20,7 +20,7 @@
 - Press `SPACE` to move upwards
 - Press `SHIFT` to move downwards
 
-## 3. Resources
+## 3. Assets
 
 - **Mesh**: `OBJ` format mesh file from `~\projects\<your_project>\assets\meshes`.
 - **Diffuse map**: colored `24bit/32bit PNG` format image file from `~\projects\<your_project>\assets\textures\diffuse_maps\`.

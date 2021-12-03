@@ -2,6 +2,8 @@
 
 #include "sound_2d.hpp"
 
+#include "mathematics.hpp"
+
 class Sound3D final : public Sound2D
 {
 public:

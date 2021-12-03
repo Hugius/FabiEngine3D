@@ -15,7 +15,7 @@
 - Press `F` to toggle wireframe
 - Press `ESC` to go back
 
-## 3. Resources
+## 3. Assets
 
 - You can load the images from `~\projects\<your_project>\assets\textures\cube_maps\`.
 - The image format must be a colored `24bit PNG`.

@@ -31,9 +31,6 @@ void AudioPlayer::update(Camera& camera, vector<Music>& musicList, vector<Sound2
 			// Play music
 			Mix_PlayMusic(musicList[musicIndex].getDataPointer(), 0);
 		}
-
-		// Update volume
-		_updateMusicVolume();
 	}
 
 	// Update 2D sounds

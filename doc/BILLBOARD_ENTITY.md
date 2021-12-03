@@ -7,7 +7,7 @@
 - Billboard entities are not affected by shadows or lighting.
 - Sprite animations can be applied to the diffuse/emission map.
 
-## 2. Resources
+## 2. Assets
 
 - Font
 - Diffuse map

@@ -11,9 +11,9 @@ public:
 	AudioManager(AudioLoader& audioLoader);
 
 	// VOID
-	void createMusic(const string& fileName);
-	void createSound2D(const string& ID, const string& fileName);
-	void createSound3D(const string& ID, const string& fileName);
+	void createMusic(const string& audioPath);
+	void createSound2D(const string& ID, const string& audioPath);
+	void createSound3D(const string& ID, const string& audioPath);
 	void deleteMusic();
 	void deleteSounds2D();
 	void deleteSounds3D();

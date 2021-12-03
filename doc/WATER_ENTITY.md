@@ -4,7 +4,7 @@
 
 - The water entity is 2D quad in 3D space.
 
-## 1.2 Resources
+## 1.2 Assets
 
 - DUDV Map
 - Displacement Map

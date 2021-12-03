@@ -39,19 +39,19 @@ void AudioManager::deleteSound3D(const string& ID)
 	}
 }
 
-void AudioManager::createMusic(const string& fileName)
+void AudioManager::createMusic(const string& audioPath)
 {
 	// Load data
-	auto dataPointer = _audioLoader.loadMusic(fileName);
+	auto dataPointer = _audioLoader.loadMusic(audioPath);
 
 	// Check if data loading went well
 	if(dataPointer != nullptr)
 	{
-		_musicList.push_back(Music(dataPointer));
+		_musicList.push_back(Music(audioPath, dataPointer));
 	}
 }
 
-void AudioManager::createSound2D(const string& ID, const string& fileName)
+void AudioManager::createSound2D(const string& ID, const string& audioPath)
 {
 	// Check for errors
 	if(_findSoundIndex2D(ID) != -1)
@@ -64,16 +64,16 @@ void AudioManager::createSound2D(const string& ID, const string& fileName)
 	}
 
 	// Load data
-	auto dataPointer = _audioLoader.loadChunk(fileName);
+	auto dataPointer = _audioLoader.loadChunk(audioPath);
 
 	// Check if data loading went well
 	if(dataPointer != nullptr)
 	{
-		_soundList2D.push_back(Sound2D(ID, fileName, dataPointer));
+		_soundList2D.push_back(Sound2D(ID, audioPath, dataPointer));
 	}
 }
 
-void AudioManager::createSound3D(const string& ID, const string& fileName)
+void AudioManager::createSound3D(const string& ID, const string& audioPath)
 {
 	// Check for errors
 	if(_findSoundIndex3D(ID) != -1)
@@ -86,12 +86,12 @@ void AudioManager::createSound3D(const string& ID, const string& fileName)
 	}
 
 	// Load data
-	auto dataPointer = _audioLoader.loadChunk(fileName);
+	auto dataPointer = _audioLoader.loadChunk(audioPath);
 
 	// Check if data loading went well
 	if(dataPointer != nullptr)
 	{
-		_soundList3D.push_back(Sound3D(ID, fileName, dataPointer));
+		_soundList3D.push_back(Sound3D(ID, audioPath, dataPointer));
 	}
 }
 

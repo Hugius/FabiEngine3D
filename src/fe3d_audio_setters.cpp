@@ -1,9 +1,9 @@
 #include "fe3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::music_addToPlaylist(const string& fileName)
+void FabiEngine3D::music_addToPlaylist(const string& audioPath)
 {
-	_core->_audioManager.createMusic(fileName);
+	_core->_audioManager.createMusic(audioPath);
 }
 
 void FabiEngine3D::music_clearPlaylist()
@@ -50,9 +50,9 @@ void FabiEngine3D::music_setVolume(float volume)
 	_core->_audioPlayer.setMusicVolume(volume);
 }
 
-void FabiEngine3D::sound2D_create(const string& ID, const string& filePath)
+void FabiEngine3D::sound2D_create(const string& ID, const string& audioPath)
 {
-	_core->_audioManager.createSound2D(ID, filePath);
+	_core->_audioManager.createSound2D(ID, audioPath);
 }
 
 void FabiEngine3D::sound2D_delete(const string& ID)
@@ -162,9 +162,9 @@ void FabiEngine3D::sound2D_setVolume(const string& ID, float volume)
 	_core->_audioManager.getSound2D(ID).setVolume(volume);
 }
 
-void FabiEngine3D::sound3D_create(const string& ID, const string& filePath)
+void FabiEngine3D::sound3D_create(const string& ID, const string& audioPath)
 {
-	_core->_audioManager.createSound3D(ID, filePath);
+	_core->_audioManager.createSound3D(ID, audioPath);
 }
 
 void FabiEngine3D::sound3D_delete(const string& ID)

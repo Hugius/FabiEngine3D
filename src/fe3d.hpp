@@ -620,7 +620,7 @@ public:
 	const bool text_isWireframed(const string& ID) const;
 
 	// MUSIC - setters
-	void music_addToPlaylist(const string& filePath);
+	void music_addToPlaylist(const string& audioPath);
 	void music_clearPlaylist();
 	void music_setVolume(float volume);
 	void music_pause();
@@ -633,7 +633,7 @@ public:
 	const bool music_isPaused() const;
 
 	// SOUND2D - setters
-	void sound2D_create(const string& ID, const string& filePath);
+	void sound2D_create(const string& ID, const string& audioPath);
 	void sound2D_delete(const string& ID);
 	void sound2D_deleteAll();
 	void sound2D_play(const string& ID, int loops, unsigned int fadeMS, bool mustForcePlay);
@@ -655,7 +655,7 @@ public:
 	const bool sound2D_isPaused(const string& ID) const;
 
 	// SOUND3D - setters
-	void sound3D_create(const string& ID, const string& filePath);
+	void sound3D_create(const string& ID, const string& audioPath);
 	void sound3D_delete(const string& ID);
 	void sound3D_deleteAll();
 	void sound3D_play(const string& ID, int loops, unsigned int fadeMS, bool mustForcePlay);

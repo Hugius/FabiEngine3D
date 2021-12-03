@@ -21,7 +21,7 @@
 - Press `SPACE` to move upwards
 - Press `SHIFT` to move downwards
 
-## 3. Resources
+## 3. Assets
 
 - **Font**: `TTF` format font file from `~\projects\<your_project>\assets\fonts`.
 - **Diffuse Map**: colored `24bit/32bit PNG` format image file from `~\projects\<your_project>\assets\textures\diffuse_maps`

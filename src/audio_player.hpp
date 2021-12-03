@@ -61,7 +61,6 @@ public:
 
 private:
 	// VOID
-	void _updateMusicVolume();
 	void _updateSoundVolume2D(Sound2D& sound);
 	void _updateSoundVolume3D(Sound3D& sound);
 
@@ -72,7 +71,4 @@ private:
 
 	// STRING
 	vector<string> _channels;
-
-	// FLOAT
-	float _musicVolume = 1.0f;
 };

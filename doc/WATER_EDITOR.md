@@ -17,7 +17,7 @@
 - Press `F` to toggle wireframe
 - Press `ESC` to go back
 
-## 3. Resources
+## 3. Assets
 
 - **DUDV map**: colored `24bit PNG` format image from `~\projects\<your_project>\assets\textures\dudv_maps\`.
 - **Displacement map**: grayscaled `24bit PNG` format image from `~\projects\<your_project>\assets\textures\displacement_maps\`.

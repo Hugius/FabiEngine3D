@@ -31,14 +31,14 @@ const int FabiEngine3D::image_getRemainingSpriteAnimationLoops(const string& ID)
 
 const vector<string> FabiEngine3D::image_getAllIDs() const
 {
-	vector<string> IDs;
+	vector<string> result;
 
 	for(const auto& [keyID, entity] : _core->_imageEntityManager.getEntities())
 	{
-		IDs.push_back(entity->getID());
+		result.push_back(entity->getID());
 	}
 
-	return IDs;
+	return result;
 }
 
 const string& FabiEngine3D::image_getDiffuseMapPath(const string& ID) const

@@ -9,39 +9,39 @@ AudioPlayer::AudioPlayer()
 	Mix_AllocateChannels(0);
 }
 
-void AudioPlayer::update(Camera& camera, vector<Music>& musicList, vector<Sound2D>& soundList2D, vector<Sound3D>& soundList3D)
+void AudioPlayer::update(Camera& camera, vector<Music>& musics, vector<Sound2D>& sounds2D, vector<Sound3D>& sounds3D)
 {
 	// Update music
-	if (!musicList.empty())
+	if (!musics.empty())
 	{
 		// Check if music is not started
 		if (!isMusicStarted())
 		{
 			// Select music
 			unsigned int musicIndex;
-			if (musicList.size() == 1)
+			if (musics.size() == 1)
 			{
 				musicIndex = 0;
 			}
 			else
 			{
-				musicIndex = Math::getRandomInteger(0, static_cast<int>(musicList.size() - 1));
+				musicIndex = Math::getRandomInteger(0, static_cast<int>(musics.size() - 1));
 			}
 
 			// Play music
-			Mix_PlayMusic(musicList[musicIndex].getDataPointer(), 0);
+			Mix_PlayMusic(musics[musicIndex].getDataPointer(), 0);
 		}
 	}
 
 	// Update 2D sounds
-	for(auto& sound : soundList2D)
+	for(auto& sound : sounds2D)
 	{
 		// Update sound volume
 		_updateSoundVolume2D(sound);
 	}
 
 	// Update 3D sounds
-	for(auto& sound : soundList3D)
+	for(auto& sound : sounds3D)
 	{
 		// Check if sound is started
 		if(isSoundStarted3D(sound))

@@ -10,8 +10,10 @@ public:
 	using Sound2D::Sound2D;
 
 	// VOID
+	void updateTransformation();
 	void setPosition(fvec3 value);
 	void move(fvec3 value);
+	void moveTo(fvec3 target, float speed);
 	void setMaxVolume(float value);
 	void setMaxDistance(float value);
 
@@ -25,8 +27,10 @@ public:
 private:
 	// FVEC3
 	fvec3 _position = fvec3(0.0f);
+	fvec3 _positionTarget = fvec3(0.0f);
 
 	// FLOAT
+	float _positionTargetSpeed = 0.0f;
 	float _maxVolume = 0.0f;
 	float _maxDistance = 0.0f;
 };

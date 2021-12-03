@@ -3,14 +3,14 @@
 
 const vector<string> FabiEngine3D::spotlight_getAllIDs() const
 {
-	vector<string> IDs;
+	vector<string> result;
 
 	for(const auto& [keyID, entity] : _core->_spotlightEntityManager.getEntities())
 	{
-		IDs.push_back(entity->getID());
+		result.push_back(entity->getID());
 	}
 
-	return IDs;
+	return result;
 }
 
 const fvec3 FabiEngine3D::spotlight_getPosition(const string& ID) const

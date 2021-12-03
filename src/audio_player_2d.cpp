@@ -31,9 +31,9 @@ void AudioPlayer::playSound2D(Sound2D& sound, int loops, unsigned int fadeMS, bo
 	_updateSoundVolume2D(sound);
 }
 
-void AudioPlayer::pauseAllSounds2D(vector<Sound2D>& soundList)
+void AudioPlayer::pauseAllSounds2D(vector<Sound2D>& sounds)
 {
-	for(const auto& sound : soundList)
+	for(const auto& sound : sounds)
 	{
 		for(size_t i = 0; i < _channels.size(); i++)
 		{
@@ -66,9 +66,9 @@ void AudioPlayer::pauseSound2D(Sound2D& sound)
 	}
 }
 
-void AudioPlayer::resumeAllSounds2D(vector<Sound2D>& soundList)
+void AudioPlayer::resumeAllSounds2D(vector<Sound2D>& sounds)
 {
-	for(const auto& sound : soundList)
+	for(const auto& sound : sounds)
 	{
 		for(size_t i = 0; i < _channels.size(); i++)
 		{
@@ -95,13 +95,13 @@ void AudioPlayer::resumeSound2D(Sound2D& sound)
 	}
 }
 
-void AudioPlayer::stopAllSounds2D(vector<Sound2D>& soundList)
+void AudioPlayer::stopAllSounds2D(vector<Sound2D>& sounds)
 {
 	// Resume before stopping
-	resumeAllSounds2D(soundList);
+	resumeAllSounds2D(sounds);
 
 	// Stop sounds
-	for(const auto& sound : soundList)
+	for(const auto& sound : sounds)
 	{
 		for(size_t i = 0; i < _channels.size(); i++)
 		{

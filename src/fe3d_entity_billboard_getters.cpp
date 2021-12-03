@@ -68,14 +68,14 @@ const fvec3 FabiEngine3D::billboard_getWireframeColor(const string& ID) const
 
 const vector<string> FabiEngine3D::billboard_getAllIDs() const
 {
-	vector<string> IDs;
+	vector<string> result;
 
 	for(const auto& [keyID, entity] : _core->_billboardEntityManager.getEntities())
 	{
-		IDs.push_back(entity->getID());
+		result.push_back(entity->getID());
 	}
 
-	return IDs;
+	return result;
 }
 
 const bool FabiEngine3D::billboard_isFacingCameraX(const string& ID) const

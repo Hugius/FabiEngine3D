@@ -32,14 +32,14 @@ const fvec3 FabiEngine3D::sky_getWireframeColor(const string& ID) const
 
 const vector<string> FabiEngine3D::sky_getAllIDs() const
 {
-	vector<string> IDs;
+	vector<string> result;
 
 	for(const auto& [keyID, entity] : _core->_skyEntityManager.getEntities())
 	{
-		IDs.push_back(entity->getID());
+		result.push_back(entity->getID());
 	}
 
-	return IDs;
+	return result;
 }
 
 const array<string, 6>& FabiEngine3D::sky_getCubeMapPaths(const string& ID) const

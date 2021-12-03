@@ -31,9 +31,9 @@ void AudioPlayer::playSound3D(Sound3D& sound, int loops, unsigned int fadeMS, bo
 	_updateSoundVolume3D(sound);
 }
 
-void AudioPlayer::pauseAllSounds3D(vector<Sound3D>& soundList)
+void AudioPlayer::pauseAllSounds3D(vector<Sound3D>& sounds)
 {
-	for(const auto& sound : soundList)
+	for(const auto& sound : sounds)
 	{
 		for(size_t i = 0; i < _channels.size(); i++)
 		{
@@ -66,9 +66,9 @@ void AudioPlayer::pauseSound3D(Sound3D& sound)
 	}
 }
 
-void AudioPlayer::resumeAllSounds3D(vector<Sound3D>& soundList)
+void AudioPlayer::resumeAllSounds3D(vector<Sound3D>& sounds)
 {
-	for(const auto& sound : soundList)
+	for(const auto& sound : sounds)
 	{
 		for(size_t i = 0; i < _channels.size(); i++)
 		{
@@ -95,13 +95,13 @@ void AudioPlayer::resumeSound3D(Sound3D& sound)
 	}
 }
 
-void AudioPlayer::stopAllSounds3D(vector<Sound3D>& soundList)
+void AudioPlayer::stopAllSounds3D(vector<Sound3D>& sounds)
 {
 	// Resume before stopping
-	resumeAllSounds3D(soundList);
+	resumeAllSounds3D(sounds);
 
 	// Stop sounds
-	for(const auto& sound : soundList)
+	for(const auto& sound : sounds)
 	{
 		for(size_t i = 0; i < _channels.size(); i++)
 		{

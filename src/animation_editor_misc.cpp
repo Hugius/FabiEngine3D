@@ -68,18 +68,18 @@ shared_ptr<Animation> AnimationEditor::_getAnimation(const string& ID) const
 
 const vector<string> AnimationEditor::getAllAnimationIDs() const
 {
-	vector<string> IDs;
+	vector<string> result;
 
 	// Find all IDs
 	for(const auto& animation : _animations)
 	{
-		IDs.push_back(animation->getID());
+		result.push_back(animation->getID());
 	}
 
 	// Sort alphabetically
-	sort(IDs.begin(), IDs.end());
+	sort(result.begin(), result.end());
 
-	return IDs;
+	return result;
 }
 
 const vector<string> AnimationEditor::getStartedAnimationIDs() const

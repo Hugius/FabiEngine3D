@@ -20,7 +20,7 @@ public:
 
 	// VOID
 	void allocateChannels(unsigned int count);
-	void update(Camera& camera, vector<Music>& musicList, vector<Sound2D>& soundList2D, vector<Sound3D>& soundList3D);
+	void update(Camera& camera, vector<Music>& musics, vector<Sound2D>& sounds2D, vector<Sound3D>& sounds3D);
 	void pauseMusic();
 	void resumeMusic();
 	void stopMusic();
@@ -29,16 +29,16 @@ public:
 	void pauseSound2D(Sound2D& sound);
 	void resumeSound2D(Sound2D& sound);
 	void stopSound2D(Sound2D& sound, unsigned int fadeMS);
-	void pauseAllSounds2D(vector<Sound2D>& soundList);
-	void resumeAllSounds2D(vector<Sound2D>& soundList);
-	void stopAllSounds2D(vector<Sound2D>& soundList);
+	void pauseAllSounds2D(vector<Sound2D>& sounds);
+	void resumeAllSounds2D(vector<Sound2D>& sounds);
+	void stopAllSounds2D(vector<Sound2D>& sounds);
 	void playSound3D(Sound3D& sound, int loops, unsigned int fadeMS, bool mustForcePlay);
 	void pauseSound3D(Sound3D& sound);
 	void resumeSound3D(Sound3D& sound);
 	void stopSound3D(Sound3D& sound, unsigned int fadeMS);
-	void pauseAllSounds3D(vector<Sound3D>& soundList);
-	void resumeAllSounds3D(vector<Sound3D>& soundList);
-	void stopAllSounds3D(vector<Sound3D>& soundList);
+	void pauseAllSounds3D(vector<Sound3D>& sounds);
+	void resumeAllSounds3D(vector<Sound3D>& sounds);
+	void stopAllSounds3D(vector<Sound3D>& sounds);
 
 	// FLOAT
 	const float getMusicVolume() const;

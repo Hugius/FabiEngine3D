@@ -265,19 +265,19 @@ const vector<string> FabiEngine3D::model_getPartIDs(const string& ID) const
 
 const vector<string> FabiEngine3D::model_getAllIDs() const
 {
-	vector<string> IDs;
+	vector<string> result;
 
 	for(const auto& [keyID, entity] : _core->_modelEntityManager.getEntities()) // Iterate through model entities
 	{
-		IDs.push_back(entity->getID());
+		result.push_back(entity->getID());
 	}
 
-	return IDs;
+	return result;
 }
 
 const vector<string> FabiEngine3D::model_getGroupIDs(const string& ID) const
 {
-	vector<string> IDs;
+	vector<string> result;
 
 	for(const auto& [keyID, entity] : _core->_modelEntityManager.getEntities()) // Iterate through model entities
 	{
@@ -285,10 +285,10 @@ const vector<string> FabiEngine3D::model_getGroupIDs(const string& ID) const
 		{
 			if(entity->getID().substr(0, ID.size()) == ID) // If entity matches ID
 			{
-				IDs.push_back(entity->getID());
+				result.push_back(entity->getID());
 			}
 		}
 	}
 
-	return IDs;
+	return result;
 }

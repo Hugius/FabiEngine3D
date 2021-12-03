@@ -627,6 +627,7 @@ public:
 	void music_resume();
 
 	// MUSIC - getters
+	const vector<string> music_getAudioPaths() const;
 	const float music_getVolume() const;
 	const bool music_isStarted() const;
 	const bool music_isPlaying() const;
@@ -647,7 +648,7 @@ public:
 
 	// SOUND2D - getters
 	const vector<string> sound2D_getAllIDs() const;
-	const string& sound2D_getFilePath(const string& ID) const;
+	const string& sound2D_getAudioPath(const string& ID) const;
 	const float sound2D_getVolume(const string& ID) const;
 	const bool sound2D_isExisting(const string& ID) const;
 	const bool sound2D_isStarted(const string& ID) const;
@@ -667,12 +668,13 @@ public:
 	void sound3D_stopAll();
 	void sound3D_setPosition(const string& ID, fvec3 position);
 	void sound3D_move(const string& ID, fvec3 change);
+	void sound3D_moveTo(const string& ID, fvec3 target, float speed);
 	void sound3D_setMaxVolume(const string& ID, float volume);
 	void sound3D_setMaxDistance(const string& ID, float maxDistance);
 
 	// SOUND - getters
 	const vector<string> sound3D_getAllIDs() const;
-	const string& sound3D_getFilePath(const string& ID) const;
+	const string& sound3D_getAudioPath(const string& ID) const;
 	const fvec3 sound3D_getPosition(const string& ID) const;
 	const float sound3D_getMaxDistance(const string& ID) const;
 	const float sound3D_getVolume(const string& ID) const;

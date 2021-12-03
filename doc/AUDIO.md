@@ -42,9 +42,13 @@
 
 - **Position**: the XYZ position of the sound
   - Constraints: none
+- **Position Target**: the target XYZ position of the sound
+  - Constraints: none
 
 ### 4.2 `decimal`
 
+- **Position Target Speed**: the speed with which the sound moves to the target position
+  - Constraints: at least `0.0`
 - **Volume**: the volume of the audio
   - Constraints: between `0.0` and `1.0`
 - **Max Volume**: the maximum volume of the audio

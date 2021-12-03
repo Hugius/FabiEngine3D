@@ -18,6 +18,18 @@ const bool FabiEngine3D::music_isPaused() const
 	return _core->_audioPlayer.isMusicPaused();
 }
 
+const vector<string> FabiEngine3D::music_getAudioPaths() const
+{
+	vector<string> result;
+
+	for (const auto& music : _core->_audioManager.getMusics())
+	{
+		result.push_back(music.getAudioPath());
+	}
+
+	return result;
+}
+
 const float FabiEngine3D::music_getVolume() const
 {
 	return _core->_audioPlayer.getMusicVolume();
@@ -25,17 +37,17 @@ const float FabiEngine3D::music_getVolume() const
 
 const vector<string> FabiEngine3D::sound2D_getAllIDs() const
 {
-	vector<string> IDs;
+	vector<string> result;
 
 	for(const auto& chunk : _core->_audioManager.getSounds2D())
 	{
-		IDs.push_back(chunk.getID());
+		result.push_back(chunk.getID());
 	}
 
-	return IDs;
+	return result;
 }
 
-const string& FabiEngine3D::sound2D_getFilePath(const string& ID) const
+const string& FabiEngine3D::sound2D_getAudioPath(const string& ID) const
 {
 	return _core->_audioManager.getSound2D(ID).getAudioPath();
 }
@@ -67,17 +79,17 @@ const float FabiEngine3D::sound2D_getVolume(const string& ID) const
 
 const vector<string> FabiEngine3D::sound3D_getAllIDs() const
 {
-	vector<string> IDs;
+	vector<string> result;
 
 	for (const auto& chunk : _core->_audioManager.getSounds3D())
 	{
-		IDs.push_back(chunk.getID());
+		result.push_back(chunk.getID());
 	}
 
-	return IDs;
+	return result;
 }
 
-const string& FabiEngine3D::sound3D_getFilePath(const string& ID) const
+const string& FabiEngine3D::sound3D_getAudioPath(const string& ID) const
 {
 	return _core->_audioManager.getSound3D(ID).getAudioPath();
 }

@@ -47,7 +47,7 @@ void WorldEditor::_updateSoundPlacing()
 				_fe3d.aabb_setCollisionResponsive(newModelID, false);
 
 				// Create sound
-				_fe3d.sound3D_create(newID, _fe3d.sound3D_getFilePath(_currentPreviewSoundID));
+				_fe3d.sound3D_create(newID, _fe3d.sound3D_getAudioPath(_currentPreviewSoundID));
 				_fe3d.sound3D_setPosition(newID, newPosition);
 				_fe3d.sound3D_setMaxVolume(newID, DEFAULT_SOUND_MAX_VOLUME);
 				_fe3d.sound3D_setMaxDistance(newID, DEFAULT_SOUND_MAX_DISTANCE);
@@ -138,7 +138,7 @@ void WorldEditor::_updateSoundPlacing()
 						_fe3d.aabb_setCollisionResponsive(newModelID, false);
 
 						// Create sound
-						_fe3d.sound3D_create(newID, _fe3d.sound3D_getFilePath(_currentPreviewSoundID));
+						_fe3d.sound3D_create(newID, _fe3d.sound3D_getAudioPath(_currentPreviewSoundID));
 						_fe3d.sound3D_setPosition(newID, newPosition);
 						_fe3d.sound3D_setMaxVolume(newID, DEFAULT_SOUND_MAX_VOLUME);
 						_fe3d.sound3D_setMaxDistance(newID, DEFAULT_SOUND_MAX_DISTANCE);

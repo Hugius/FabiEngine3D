@@ -382,7 +382,7 @@ const bool WorldEditor::_copyPreviewSound(const string& newID, const string& pre
 	}
 
 	// Create sound
-	_fe3d.sound3D_create(newID, _fe3d.sound2D_getFilePath(previewID));
+	_fe3d.sound3D_create(newID, _fe3d.sound2D_getAudioPath(previewID));
 	_fe3d.sound3D_setPosition(newID, position);
 
 	// Save ID

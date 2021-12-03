@@ -65,14 +65,14 @@ const fvec3 FabiEngine3D::water_getWireframeColor(const string& ID) const
 
 const vector<string> FabiEngine3D::water_getAllIDs() const
 {
-	vector<string> IDs;
+	vector<string> result;
 
 	for(const auto& [keyID, entity] : _core->_waterEntityManager.getEntities())
 	{
-		IDs.push_back(entity->getID());
+		result.push_back(entity->getID());
 	}
 
-	return IDs;
+	return result;
 }
 
 const float FabiEngine3D::water_getSize(const string& ID) const

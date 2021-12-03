@@ -38,12 +38,12 @@ const float FabiEngine3D::pointlight_getIntensity(const string& ID) const
 
 const vector<string> FabiEngine3D::pointlight_getAllIDs() const
 {
-	vector<string> IDs;
+	vector<string> result;
 
 	for(const auto& [keyID, entity] : _core->_pointlightEntityManager.getEntities())
 	{
-		IDs.push_back(entity->getID());
+		result.push_back(entity->getID());
 	}
 
-	return IDs;
+	return result;
 }

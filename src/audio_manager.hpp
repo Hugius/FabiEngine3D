@@ -11,6 +11,7 @@ public:
 	AudioManager(AudioLoader& audioLoader);
 
 	// VOID
+	void update();
 	void createMusic(const string& audioPath);
 	void createSound2D(const string& ID, const string& audioPath);
 	void createSound3D(const string& ID, const string& audioPath);
@@ -25,7 +26,7 @@ public:
 	const bool isSoundExisting3D(const string& ID) const;
 
 	// MISCELLANEOUS
-	vector<Music>& getMusic();
+	vector<Music>& getMusics();
 	vector<Sound2D>& getSounds2D();
 	vector<Sound3D>& getSounds3D();
 	Sound2D& getSound2D(const string& ID);
@@ -37,8 +38,8 @@ private:
 	const int _findSoundIndex3D(const string& ID) const;
 
 	// MISCELLANEOUS
-	vector<Music> _musicList;
-	vector<Sound2D> _soundList2D;
-	vector<Sound3D> _soundList3D;
+	vector<Music> _musics;
+	vector<Sound2D> _sounds2D;
+	vector<Sound3D> _sounds3D;
 	AudioLoader& _audioLoader;
 };

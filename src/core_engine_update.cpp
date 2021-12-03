@@ -66,7 +66,8 @@ void CoreEngine::_updateApplication()
 
 			// Audio updates
 			_timer.startDeltaPart("audioUpdate");
-			_audioPlayer.update(_camera, _audioManager.getMusic(), _audioManager.getSounds2D(), _audioManager.getSounds3D());
+			_audioManager.update();
+			_audioPlayer.update(_camera, _audioManager.getMusics(), _audioManager.getSounds2D(), _audioManager.getSounds3D());
 			_timer.stopDeltaPart();
 		}
 

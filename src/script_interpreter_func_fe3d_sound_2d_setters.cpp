@@ -29,7 +29,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter2D(const string& functionNa
 			// Validate preview sound ID
 			if(_validateFe3dSound2D("@" + arguments[1].getString(), true))
 			{
-				auto filePath = _fe3d.sound2D_getFilePath("@" + arguments[1].getString());
+				auto filePath = _fe3d.sound2D_getAudioPath("@" + arguments[1].getString());
 				_fe3d.sound2D_create(arguments[0].getString(), filePath);
 				_fe3d.sound2D_setVolume(arguments[0].getString(), arguments[2].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));

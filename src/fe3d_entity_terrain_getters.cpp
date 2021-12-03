@@ -115,14 +115,14 @@ const string FabiEngine3D::terrain_getSelectedID() const
 
 const vector<string> FabiEngine3D::terrain_getAllIDs() const
 {
-	vector<string> IDs;
+	vector<string> result;
 
 	for(const auto& [keyID, entity] : _core->_terrainEntityManager.getEntities())
 	{
-		IDs.push_back(entity->getID());
+		result.push_back(entity->getID());
 	}
 
-	return IDs;
+	return result;
 }
 
 const string& FabiEngine3D::terrain_getDiffuseMapPath(const string& ID) const

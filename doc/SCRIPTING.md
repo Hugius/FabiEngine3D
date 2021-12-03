@@ -1,4 +1,4 @@
-# FabScript
+# Scripting
 
 ## 1. General
 

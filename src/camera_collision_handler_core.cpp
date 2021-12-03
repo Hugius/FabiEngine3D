@@ -1,7 +1,7 @@
 #include "camera_collision_handler.hpp"
 
 void CameraCollisionHandler::update(const unordered_map<string, shared_ptr<AabbEntity>>& aabbs,
-									TerrainEntityManager& terrainManager, Camera& camera, Raycaster& raycaster)
+									TerrainEntityManager& terrainManager, Camera& camera)
 {
 	// Check if terrain collision is needed in the first place
 	_isCameraUnderTerrain = false;

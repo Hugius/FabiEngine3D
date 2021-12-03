@@ -190,7 +190,7 @@
   - Constraints: `0` to `inf`
 - **Follow Cam**: enable or disable shadows following the camera.
   - Constraints: `ON` or `OFF`
-- **Interval**: the engine execution frame interval between camera follow updates.
+- **Interval**: the engine updates interval between camera follow updates.
   - Constraints: `0` to `inf`
 
 #### 12.2.2 Motion blur

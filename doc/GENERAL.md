@@ -18,36 +18,41 @@
 - **Post Processing**: bloom, DOF, motion blur, anti-aliasing, lens flare
 - **Other**: shadows, cube reflections, planar reflections, fog, sky exposure
 
-### 1.3 Audio
-
-- Custom music playlist
-- 2D audio playback
-- 3D audio playback
-
-### 1.4 Physics
+### 1.3 Physics
 
 - 3D AABB system
 - 3D Collision detection system
 - 3D Collision response system
 - 3D Raycasting system
 - 3D camera system
-- Custom math library
 
-### 1.5 Networking
+### 1.4 Audio
+
+- Custom music playlist
+- 2D audio playback
+- 3D audio playback
+
+### 1.5 Scripting
+
+- Custom scripting language
+- Engine API
+- Math API
+
+### 1.6 Networking
 
 - Central networking server
 - Multiple networking clients
 - TCP messaging
 - UDP messaging
 
-### 1.6 Miscellaneous
+### 1.7 Miscellaneous
 
 - Engine GUI
+- Editors
 - Realtime statistics
 - Realtime logging
 - Keyboard input
 - Mouse input
-- Custom interpreted programming language ("FabScript")
 
 ## 2. Folder Structure
 
@@ -146,6 +151,6 @@
 - **Raycasting**: the process of casting a ray from a position towards a direction
 - **AABB**: Axis Aligned Bounding Box
 - **Collision Detection**: the process of detecting collision between 2 AABBs
-- **Collision Resolving**: the process of resolving collision between 2 AABBs
+- **Collision Response**: the process of responding to collision between 2 AABBs
 - **Reference Angle**: a rotational angle converted between 0&deg; and 90&deg;
 - **Transformation**: the combination of position/rotation/size

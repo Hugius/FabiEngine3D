@@ -39,7 +39,7 @@
   - Constraints: `1` to `inf`
 - **Columns**: the amount of columns in the sprite animation texture.
   - Constraints: `1` to `inf`
-- **Framestep**: the amount of engine execution frames between the sprite animation frame cycles.
+- **Framestep**: the amount of engine updates between the sprite animation frame cycles.
   - Constraints: `0` to `inf`
 - **Color**: the RGB color that will be mixed with the billboard fragments.
   - Constraints: `0` to `255`

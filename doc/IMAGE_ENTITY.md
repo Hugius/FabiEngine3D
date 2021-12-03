@@ -66,7 +66,7 @@
   - Constraints: at least `0.0`
 - **Animation Column Index**: the current column of the sprite animation texture
   - Constraints: at least `0.0`
-- **Animation Framestep**: the amount of engine execution frames between the sprite animation frame cycles
+- **Animation Framestep**: the amount of engine updates between the sprite animation frame cycles
   - Constraints: at least `0.0`
 
 ### 3.6 `boolean`

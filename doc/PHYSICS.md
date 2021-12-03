@@ -1,9 +1,40 @@
 # Physics
 
-## Collision
+## 1. Collision
 
-## Detection
+<img src="images/collision.png" width="50%"/>
 
-## Response
+## 1.1 AABB vs AABB
 
-## Raycasting
+- FabiEngine3D supports collision (only detection) between 2 AABBs
+- Collision response can be scripted
+
+## 1.2 Camera vs AABBs
+
+- FabiEngine3D supports collision (detection + response) between the camera and multiple AABBs
+- The camera has its own custom bounding box
+
+## 1.3 Camera vs Terrain
+
+- FabiEngine3D supports collision (detection + response) between the camera and the terrain
+- The camera has a custom minimum distance to the camera
+
+## 2. Raycasting
+
+<img src="images/raycasting.png" width="75%"/>
+
+## 2.1 Cursor Ray
+
+- The cursor ray is a normalized ray from the cursor to 3D space
+- Every engine update the cursor ray is recalculated
+- The ray is the 3D direction of the cursor
+
+## 2.1 Terrain Pointing
+
+- FabiEngine3D supports 3D cursor picking on the terrain
+- Terrain pointing can be configured for performance
+
+## 2.2 AABB Selection
+
+- FabiEngine3D supports AABB selection with the cursor
+- Intersection between the cursor ray and AABBs is calculated

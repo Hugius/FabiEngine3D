@@ -3,19 +3,19 @@
 ## 1. Audio
 
 - Audio assets must be placed in `~\projects\<your_project>\assets\audio\`.
-- The [file format](https://en.wikipedia.org/wiki/WAV) is `.wav` because the absence of compression delivers high audio quality.
+- The file format is `.wav` because the absence of compression delivers high audio quality.
 - Due to the uncompressed format, note that the files can be very big.
 
 ## 2. Font
 
 - Font assets must be placed in `~\projects\<your_project>\assets\fonts\`.
-- The [file format](https://en.wikipedia.org/wiki/TrueType) is `.ttf` because it is the most used and common format for text fonts.
+- The file format is `.ttf` because it is the most used and common format for text fonts.
 - Fonts are used to process text content into a texture.
 
 ## 3. Mesh
 
 - Mesh assets must be placed in `~\projects\<your_project>\assets\meshes\`.
-- The [file format](https://en.wikipedia.org/wiki/Wavefront_.obj_file) is `.obj` because it is easy, lightweight and commonly used.
+- The file format is `.obj` because it is easy, lightweight and commonly used.
 - Meshes are used to render complex 3D objects on the screen.
 - Make sure that the mesh file contains: `v`, `vt`, `vn`, `f`.
 - Make sure that the center of your mesh is XYZ(0,0,0).
@@ -24,7 +24,7 @@
 - To make a mesh multiparted, you must specify at least 2 parts by writing `FE3D_PART <name>`.
 - Example multiparted `.obj` file:
 
-  ```obj
+  ```text
   FE3D_PART part1
   v ...
   vt ...
@@ -40,7 +40,7 @@
 ## 4. Texture
 
 - Texture assets must be placed in `~\projects\<your_project>\assets\textures\`.
-- The [file format](https://en.wikipedia.org/wiki/Portable_Network_Graphics) is `.png` because the absence of compression delivers high image quality.
+- The file format is `.png` because the absence of compression delivers high image quality.
 - Due to the uncompressed format, note that the files can be very big.
 - Textures are used for a variety of reasons for rendering.
 
@@ -71,7 +71,7 @@
 
 - Cube map assets must be placed in `~\projects\<your_project>\assets\textures\cube_maps\`
 - Bit depth: `8`
-- Cube maps are used to render a [skybox](https://en.wikipedia.org/wiki/Skybox_(video_games)) around the camera.
+- Cube maps are used to render a skybox around the camera.
 - A cube map consists of 6 images: left, right, bottom, top, back, front.
 
 ### 4.3 Diffuse Map
@@ -154,4 +154,4 @@
 
 - Specular map assets must be placed in `~\projects\<your_project>\assets\textures\specular_maps\`
 - Bit depth: `24`
-- Specular maps are used to specify which parts of a mesh are [specular](https://en.wikipedia.org/wiki/Specular_highlight).
+- Specular maps are used to specify which parts of a mesh are specular lighted.

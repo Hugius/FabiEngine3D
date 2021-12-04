@@ -63,8 +63,6 @@ A multiplayer first person shooter game based in a science-fiction setting: a sp
 - [Script Editor](doc/SCRIPT_EDITOR.md)
 - [Settings Editor](doc/SETTINGS_EDITOR.md)
 
-### Graphics
-
 ### Scripting APIs
 
 - [Engine API](doc/SCRIPT_FE3D.md)
@@ -74,4 +72,5 @@ A multiplayer first person shooter game based in a science-fiction setting: a sp
 ### Miscellaneous
 
 - [Runtime](doc/RUNTIME.md)
+- [Performance](doc/PERFORMANCE.md)
 - [Miscellaneous](doc/MISCELLANEOUS.md)

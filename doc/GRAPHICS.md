@@ -73,6 +73,7 @@
 
 - Bloom is an effect that adds realism to the rendering of very bright objects.
 - Emission maps can be used to render this type of effect.
+- Bloomed fragments are not affected by shadows or lighting.
 
 ## 3. Miscellaneous
 

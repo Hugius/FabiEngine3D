@@ -1,0 +1,28 @@
+# Performance
+
+## 1. Statistics
+
+- You can use the performance statistics in the bottom viewport to analyze your application's performance.
+- In the statistics, the amount of entities is the total existing entity amount.
+- In the statistics, the amount of triangles is the realtime triangle amount being rendered every frame.
+- `coreUpdate` includes all function calls and calculations in your update scripts.
+- `physicsUpdate` contains: camera, raycasting, collision.
+- `bufferSwap` means the actual buffering on the output screen.
+
+## 2. Performance Killers
+
+- **Planar reflections**: everything has to be rendered twice
+- **Water reflections**: everything has to be rendered twice
+- **Water refractions**: everything has to be rendered twice
+- **Water waves**: the water plane mesh has much more vertices
+- **Pointlight entities**: heavy lighting calculations
+- **Spotlight entities**: heavy lighting calculations
+
+## 3. Tips
+
+- Make use of LOD models to improve the performance on high-poly meshes.
+- Lower the graphics quality in the project settings to improve your graphics performance if necessary.
+- Clear the messages in the engine logging console if a lot of messages are printed.
+- If your application has text entities of which the content changes a lot, you should enable their property `isDynamic`.
+- Make sure your GPU is giving the maximum computing power to the engine; check your graphics card settings.
+- If you want fast loading times, use as little reflection entities as possible.

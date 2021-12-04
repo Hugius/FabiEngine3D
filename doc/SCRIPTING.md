@@ -279,6 +279,8 @@ Line 2 of every script file must specify its execution state: entry or waiting.
 - You can call functions defined by the engine.
 - There are 3 types of functions: `fe3d` functions, `math` functions, `misc` functions.
 - Functions can return a value, which can be saved in a variable.
+- Functions can have "parameters", which are values expected to be passed to the function.
+- Actual values that are passed to functions are called "arguments".
 
 ### 11.2 Example Code
 

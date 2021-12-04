@@ -173,6 +173,8 @@
 
 #### 12.2.7 Bloom
 
+- Emission maps are used for bloom if the specified bloom type is `PARTS`.
+
 - **Enabled**: enable or disable the bloom effect.
   - Constraints: `ON` or `OFF`
 - **Type**: the type of the bloom effect.

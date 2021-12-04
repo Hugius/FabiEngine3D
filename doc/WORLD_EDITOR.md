@@ -3,7 +3,8 @@
 ## 1. General
 
 - All worlds will be saved in `~\projects\<your_project>\worlds\editor\`.
-- Every entity that you place is based on the version in their editor, only the changes made in the world editor are saved.
+- Every entity that you place is based on the version in their own editor.
+- Only the changes in the entities made in the world editor are saved.
 - Placed entities can be selected if it has 1 or more bound AABBs.
 
 ## 2. Controls
@@ -35,118 +36,44 @@
 
 ## 6. Models
 
-### 6.1 General
-
 - You can place/edit/delete models in the world.
 - If a terrain is selected, you can place the model on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the model.
 - You can attach an (endless) animation to a placed model.
 - You can "freeze" a placed model into local space, which means its position is not affected by camera movement.
 
-### 6.2 Properties
-
-- **Position**: the position of the model in the world.
-  - Constraints: `-inf` to `inf`
-- **Rotation**: the rotation of the model.
-  - Constraints: `0` to `360`
-- **Size**: the size of the model.
-  - Constraints: `0` to `inf`
-
 ## 7. Billboards
-
-### 7.1 General
 
 - You can place/edit/delete billboards in the world.
 - If a terrain is selected, you can place the model on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the sound.
 
-### 7.2 Properties
-
-- **Position**: the position of the billboard in the world.
-  - Constraints: `-inf` to `inf`
-- **Rotation**: the rotation of the billboard.
-  - Constraints: `0` to `360`
-- **Size**: the size of the billboard.
-  - Constraints: `0` to `inf`
-
 ## 8. Sounds
-
-### 8.1 General
 
 - You can place/edit/delete sounds in the world.
 - The sounds you place are in 3D space.
 - If a terrain is selected, you can place the sound on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the model.
 
-### 8.2 Properties
-
-- **Position**: the position of the sound in the world.
-  - Constraints: `-inf` to `inf`
-- **Max Distance**: the maximum distance on which the sound is hearable.
-  - Constraints: `0` to `inf`
-- **Max Volume**: the volume of the sound when 100% hearable.
-  - Constraints: `0` to `inf`
-
 ## 9. Pointlights
-
-### 9.1 General
 
 - You can place/edit/delete pointlights in the world.
 - If a terrain is selected, you can place the pointlight on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the pointlight.
 
-### 9.2 Properties
-
-- **Position**: the position of the pointlight in the world.
-  - Constraints: `-inf` to `inf`
-- **Radius**: the radius of the light emitted by the pointlight emission.
-  - Constraints: `0` to `360`
-- **Color**: the color of the light emitted by the pointlight emission.
-  - Constraints: `0` to `255`
-- **Intensity**: the intensity of the light emitted by the pointlight emission.
-  - Constraints: `0` to `255`
-- **Shape**: the shape of the light emitted by the pointlight.
-  - Constraints: `0` to `255`
-
 ## 10. Spotlights
-
-### 10.1 General
 
 - You can place/edit/delete spotlights in the world.
 - If a terrain is selected, you can place the spotlight on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the spotlight.
 
-### 10.2 Properties
-
-- **Position**: the position of the spotlight in the world.
-  - Constraints: `-inf` to `inf`
-- **Color**: the color of the light emitted by the spotlight.
-  - Constraints: `0` to `255`
-- **Yaw**: the yaw of the spotlight direction.
-  - Constraints: `0` to `360`
-- **Pitch**: the pitch of the spotlight direction.
-  - Constraints: `0` to `360`
-- **Intensity**: the size of the light emitted by the spotlight.
-  - Constraints: `0` to `inf`
-- **Angle**: the angle of the spotlight direction.
-  - Constraints: `0` to `45`
-- **Distance**: the distance of the light emitted by the spotlight.
-  - Constraints: `0` to `inf`
-
 ## 11. Reflections
-
-### 11.1 General
 
 - You can place/edit/delete reflections in the world.
 - Reflections capture their surroundings into a cube map.
 - The resulting cube maps are used for cube reflections.
 - If a terrain is selected, you can place the reflection on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the reflection.
-
-### 11.2 Properties
-
-- **Position**: the position of the reflection in the world.
-  - Constraints: `-inf` to `inf`
 
 ## 12. Settings
 

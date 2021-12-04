@@ -3,9 +3,9 @@
 ## 1. General
 
 - There are 2 types of audio: music (2D) and sound (2D & 3D)
-- Music plays automatically (and randomly) from a playlist
+- Musics play automatically (and randomly) from a playlist
 - Only 1 music can be playing at a time
-- Sound plays only when you start it
+- Sounds play only when you start it
 - Multiple sounds can be playing at the same time
 
 ## 2. Music

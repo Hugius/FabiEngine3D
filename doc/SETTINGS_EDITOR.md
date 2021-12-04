@@ -1,7 +1,7 @@
 # Settings Editor
 
 - **Anti Aliasing**: enable or disable the anti-aliasing effect.
-  - Constraints: `ON` or `OFF`
+  - Constraints: `OFF` or `ON`
 - **Bloom**: the size of the bloom effect blur.
   - Constraints: `1` to `5`
 - **DOF**: the thickness of the DOF effect blur.

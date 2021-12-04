@@ -29,13 +29,18 @@
 
 ## 4. Properties
 
-- **Transformation**: the target transformation.
-  - Constraints: `-inf` to `inf`
+### 4.1 `decimal3`
+
+- **Transformation**: the target transformation
+  - Constraints: none
+- **Speed**: the speed of the transformation change
+  - Constraints: none
+- **Rotation origin**: the local origin which the model is rotated around
+  - Constraints: none
+
+### 4.2 `enumeration`
+
 - **Type**: the type of transformation.
   - Constraints: `MOVE` or `ROTATE` or `SCALE`
-- **Speed**: the speed of the transformation change.
-  - Constraints: `-inf` to `inf`
 - **Type**: the type of speed
   - Constraints: `LINEAR` or `EXPONENT` or `INSTANT`
-- **Rotation origin**: the local origin which the model is rotated around.
-  - Constraints: `-inf` to `inf`

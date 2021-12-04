@@ -3,8 +3,9 @@
 ## 1. General
 
 - The model entity is a (complex) 3D object in 3D space.
-- The entity cannot exist without having a mesh.
+- A model entity cannot exist without having a mesh.
 - A model entity uses a variety of textures for a more detailed mesh.
+- Each model can be the parent of multipe AABBs.
 
 ## 2. Assets
 
@@ -92,7 +93,7 @@
   - Constraints: none
 - **Reflective**: cube/planar reflections are rendered on the mesh
   - Constraints: none
-- **Instanced**: the mesh is rendered using instanced rendering (disables AABBs)
+- **Instanced**: the mesh is rendered using instanced rendering
   - Constraints: none
 - **Face Culled**: the mesh uses the face culling optimization
   - Constraints: none

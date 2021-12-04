@@ -4,8 +4,7 @@
 
 - All audio will be saved in `~\projects\<your_project>\data\audio.fe3d`.
 - You can create/edit/delete audio.
-- Every created audio can be placed in a world.
-- Every created audio can be played with scripting.
+- Each audio can be used in musics or sounds.
 - All audio playback in this editor is at 50% volume.
 
 ## 2. Controls
@@ -15,7 +14,3 @@
 - Press `P` to pause the audio
 - Press `S` to stop the audio
 - Press `ESC` to go back
-
-## 3. Assets
-
-- **Audio**: `WAV` format audio file from `~\projects\<your_project>\assets\audio`.

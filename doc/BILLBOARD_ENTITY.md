@@ -6,6 +6,7 @@
 - Instead of a solid quad, the texture of the billboard entity can be transparent text (based on a font).
 - Billboard entities are not affected by shadows or lighting.
 - Sprite animations can be applied to the diffuse/emission map.
+- Each billboard is the parent of 1 AABB.
 
 ## 2. Assets
 

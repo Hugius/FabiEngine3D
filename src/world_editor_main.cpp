@@ -28,19 +28,6 @@ void WorldEditor::load()
 	// Default graphics
 	_fe3d.gfx_setPlanarReflectionHeight(0.0f);
 
-	// Directional light source
-	const string texturePath = "engine\\assets\\textures\\light_source.png";
-	_fe3d.billboard_create("@@directionalLightSource");
-	_fe3d.billboard_setSize("@@directionalLightSource", fvec2(0.0f));
-	_fe3d.billboard_setDiffuseMap("@@directionalLightSource", texturePath);
-	_fe3d.billboard_setDepthMapIncluded("@@directionalLightSource", false);
-	_fe3d.billboard_setShadowed("@@directionalLightSource", false);
-	_fe3d.billboard_setReflected("@@directionalLightSource", true);
-	_fe3d.billboard_setBright("@@directionalLightSource", true);
-	_fe3d.billboard_setCameraFacingX("@@directionalLightSource", true);
-	_fe3d.billboard_setCameraFacingY("@@directionalLightSource", true);
-	_fe3d.billboard_setVisible("@@directionalLightSource", false);
-
 	// Load preview skies
 	_skyEditor.loadSkyEntitiesFromFile();
 

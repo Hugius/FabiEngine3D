@@ -185,19 +185,19 @@ void RenderBus::setSkyMixValue(float value)
 	_skyMixValue = value;
 }
 
-void RenderBus::setBloomSize(unsigned int value)
+void RenderBus::setBloomQuality(unsigned int value)
 {
-	_bloomSize = clamp(value, Config::MIN_BLOOM_SIZE, Config::MAX_BLOOM_SIZE);
+	_bloomQuality = clamp(value, Config::MIN_BLOOM_QUALITY, Config::MAX_BLOOM_QUALITY);
 }
 
-void RenderBus::setDofSize(unsigned int value)
+void RenderBus::setDofQuality(unsigned int value)
 {
-	_dofSize = clamp(value, Config::MIN_DOF_SIZE, Config::MAX_DOF_SIZE);
+	_dofQuality = clamp(value, Config::MIN_DOF_QUALITY, Config::MAX_DOF_QUALITY);
 }
 
-void RenderBus::setMotionBlurSize(unsigned int value)
+void RenderBus::setMotionBlurQuality(unsigned int value)
 {
-	_motionBlurSize = clamp(value, Config::MIN_MOTION_BLUR_SIZE, Config::MAX_MOTION_BLUR_SIZE);
+	_motionBlurQuality = clamp(value, Config::MIN_MOTION_BLUR_QUALITY, Config::MAX_MOTION_BLUR_QUALITY);
 }
 
 void RenderBus::setAmbientLightingIntensity(float value)

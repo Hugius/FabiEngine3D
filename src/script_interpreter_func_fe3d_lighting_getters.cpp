@@ -104,15 +104,6 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:lighting_get_directional_billboard_size")
-	{
-		// Validate arguments
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
-		{
-			auto result = _fe3d.billboard_getSize("@@directionalLightSource").x;
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
-		}
-	}
 	else
 	{
 		return false;

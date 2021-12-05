@@ -63,9 +63,9 @@ public:
 	void setMotionBlurStrength(float value);
 	void setMotionBlurMixValue(float value);
 	void setSkyMixValue(float value);
-	void setBloomSize(unsigned int value);
-	void setDofSize(unsigned int value);
-	void setMotionBlurSize(unsigned int value);
+	void setBloomQuality(unsigned int value);
+	void setDofQuality(unsigned int value);
+	void setMotionBlurQuality(unsigned int value);
 	void setShadowQuality(unsigned int value);
 	void setCubeReflectionQuality(unsigned int value);
 	void setPlanarReflectionQuality(unsigned int value);
@@ -142,9 +142,9 @@ public:
 	const float getSkyMixValue() const;
 
 	// UNSIGNED INT
-	const unsigned int getBloomSize() const;
-	const unsigned int getDofSize() const;
-	const unsigned int getMotionBlurSize() const;
+	const unsigned int getBloomQuality() const;
+	const unsigned int getDofQuality() const;
+	const unsigned int getMotionBlurQuality() const;
 	const unsigned int getShadowQuality() const;
 	const unsigned int getCubeReflectionQuality() const;
 	const unsigned int getPlanarReflectionQuality() const;
@@ -251,9 +251,9 @@ private:
 	float _skyMixValue = 0.0f;
 
 	// UNSIGNED INT
-	unsigned int _bloomSize = Config::MIN_BLOOM_SIZE;
-	unsigned int _dofSize = Config::MIN_DOF_SIZE;
-	unsigned int _motionBlurSize = Config::MIN_MOTION_BLUR_SIZE;
+	unsigned int _bloomQuality = Config::MIN_BLOOM_QUALITY;
+	unsigned int _dofQuality = Config::MIN_DOF_QUALITY;
+	unsigned int _motionBlurQuality = Config::MIN_MOTION_BLUR_QUALITY;
 	unsigned int _shadowQuality = Config::MIN_SHADOW_QUALITY;
 	unsigned int _cubeReflectionQuality = Config::MIN_REFLECTION_QUALITY;
 	unsigned int _planarReflectionQuality = Config::MIN_REFLECTION_QUALITY;

@@ -125,7 +125,7 @@
 - **Lightness**: the lightness of the shadows
   - Type: `decimal`
   - Constraints: at least `0`
-- **Quality**: the quality of shadow map
+- **Quality**: the quality of the shadow map
   - Type: `integer`
   - Constraints: between `2048` and `16384`
 - **Interval**: the engine updates interval between camera follow updates
@@ -152,7 +152,7 @@
 - **Strength**: the strength of the motion blur movement
   - Type: `decimal`
   - Constraints: at least `0`
-- **Thickness**: the thickness of the motion blur effect blur
+- **Quality**: the quality of the motion blur effect
   - Type: `integer`
   - Constraints: between `1` and `5`
 - **Enabled**: the motion blur effect is enabled
@@ -174,7 +174,7 @@
 - **Blur Distance**: the minimum distance where the blurring starts
   - Type: `decimal`
   - Constraints: at least `0`
-- **Thickness**: the thickness of the DOF effect blur
+- **Quality**: the quality of the DOF effect
   - Type: `integer`
   - Constraints: between `1` and `5`
 - **Enabled**: the DOF effect is enabled
@@ -223,7 +223,7 @@
 - **Intensity**: the intensity of the bloom effect
   - Type: `decimal`
   - Constraints: at least `0`
-- **Thickness**: the thickness of the bloom effect blur
+- **Quality**: the quality of the bloom effect
   - Type: `integer`
   - Constraints: between `1` and `5`
 - **Blurs**: the amount of blurs used for the bloom effect

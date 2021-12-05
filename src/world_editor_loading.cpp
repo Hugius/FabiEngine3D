@@ -546,12 +546,6 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			_fe3d.gfx_setDirectionalLightingPosition(position);
 			_fe3d.gfx_setDirectionalLightingIntensity(intensity);
 			_fe3d.gfx_setDirectionalLightingColor(color);
-
-			// Set lightsource billboard
-			_fe3d.billboard_setPosition("@@directionalLightSource", position);
-			_fe3d.billboard_setSize("@@directionalLightSource", fvec2(billboardSize));
-			_fe3d.billboard_setColor("@@directionalLightSource", color);
-			_fe3d.billboard_setVisible("@@directionalLightSource", (billboardSize != 0.0f));
 		}
 		else if(lineType == "GRAPHICS_SHADOWS")
 		{

@@ -86,7 +86,6 @@ void WorldEditor::_updateDirectionalLightingSettingsMenu()
 		auto color = _fe3d.gfx_getDirectionalLightingColor();
 		auto position = _fe3d.gfx_getDirectionalLightingPosition();
 		auto intensity = _fe3d.gfx_getDirectionalLightingIntensity();
-		auto billboardSize = _fe3d.billboard_getSize("@@directionalLightSource").x;
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -122,62 +121,45 @@ void WorldEditor::_updateDirectionalLightingSettingsMenu()
 		{
 			_gui.getGlobalScreen()->createValueForm("intensity", "Directional Intensity", (intensity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("billboardSize")->isHovered())
-		{
-			_gui.getGlobalScreen()->createValueForm("billboardSize", "Billboard Size", billboardSize, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-		}
 
 		// Update value forms
 		if(_gui.getGlobalScreen()->checkValueForm("positionX", position.x))
 		{
 			_fe3d.gfx_setDirectionalLightingPosition(position);
-			_fe3d.billboard_setPosition("@@directionalLightSource", position);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("positionY", position.y))
 		{
 			_fe3d.gfx_setDirectionalLightingPosition(position);
-			_fe3d.billboard_setPosition("@@directionalLightSource", position);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("positionZ", position.z))
 		{
 			_fe3d.gfx_setDirectionalLightingPosition(position);
-			_fe3d.billboard_setPosition("@@directionalLightSource", position);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("colorR", color.r))
 		{
 			color.r /= 255.0f;
 			_fe3d.gfx_setDirectionalLightingColor(color);
-			_fe3d.billboard_setColor("@@directionalLightSource", color);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("colorG", color.g))
 		{
 			color.g /= 255.0f;
 			_fe3d.gfx_setDirectionalLightingColor(color);
-			_fe3d.billboard_setColor("@@directionalLightSource", color);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("colorB", color.b))
 		{
 			color.b /= 255.0f;
 			_fe3d.gfx_setDirectionalLightingColor(color);
-			_fe3d.billboard_setColor("@@directionalLightSource", color);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
 		{
 			intensity /= 100.0f;
 			_fe3d.gfx_setDirectionalLightingIntensity(intensity);
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("billboardSize", billboardSize))
-		{
-			billboardSize = max(0.0f, billboardSize);
-			_fe3d.billboard_setSize("@@directionalLightSource", fvec2(billboardSize));
-			_fe3d.billboard_setVisible("@@directionalLightSource", (billboardSize != 0.0f));
-		}
 
 		// Update buttons hoverability
 		screen->getButton("color")->setHoverable(isEnabled);
 		screen->getButton("position")->setHoverable(isEnabled);
 		screen->getButton("intensity")->setHoverable(isEnabled);
-		screen->getButton("billboardSize")->setHoverable(isEnabled);
 
 		// Update button text contents
 		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");

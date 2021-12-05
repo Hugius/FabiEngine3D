@@ -63,19 +63,6 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:lighting_set_directional_position")
-	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
-
-		// Validate arguments
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			auto position = fvec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal());
-			_fe3d.gfx_setDirectionalLightingPosition(position);
-			_fe3d.billboard_setPosition("@@directionalLightSource", position);
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-		}
-	}
 	else if(functionName == "fe3d:lighting_set_directional_color")
 	{
 		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
@@ -95,18 +82,6 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.gfx_setDirectionalLightingIntensity(arguments[0].getDecimal());
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:lighting_set_directional_billboard_size")
-	{
-		auto types = {SVT::DECIMAL};
-
-		// Validate arguments
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			_fe3d.billboard_setSize("@@directionalLightSource", fvec2(arguments[0].getDecimal()));
-			_fe3d.billboard_setVisible("@@directionalLightSource", (arguments[0].getDecimal() != 0.0f));
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

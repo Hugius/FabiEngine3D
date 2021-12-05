@@ -21,4 +21,4 @@
 - The maximum amount of messages in the engine logging console is 1000.
 - Transparency in 2D space is based on the order of placed entities.
 - Transparency in 3D space is very complex and can sometimes be incorrect.
-- Low quality rendered reflections/refractions can flicker.
+- Graphical effects that are set to low quality can flicker.

@@ -80,9 +80,9 @@ void SettingsEditor::update()
 	{
 		// Temporary values
 		auto isAntiAliasingEnabled = _fe3d.gfx_isAntiAliasingEnabled();
-		auto bloomSize = _fe3d.gfx_getBloomSize();
-		auto dofSize = _fe3d.gfx_getDofSize();
-		auto motionBlurSize = _fe3d.gfx_getMotionBlurSize();
+		auto bloomQuality = _fe3d.gfx_getBloomQuality();
+		auto dofQuality = _fe3d.gfx_getDofQuality();
+		auto motionBlurQuality = _fe3d.gfx_getMotionBlurQuality();
 		auto anisotropicFilteringQuality = _fe3d.gfx_getAnisotropicFilteringQuality();
 		auto shadowQuality = _fe3d.gfx_getShadowQuality();
 		auto cubeReflectionQuality = _fe3d.gfx_getCubeReflectionQuality();
@@ -99,17 +99,17 @@ void SettingsEditor::update()
 		{
 			_gui.getGlobalScreen()->createAnswerForm("isAntiAliasingEnabled", "Anti Aliasing?", fvec2(0.0f, 0.25f));
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("bloomSize")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("bloomQuality")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("bloomSize", "Bloom Size", bloomSize, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("bloomQuality", "Bloom Size", bloomQuality, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("dofSize")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("dofQuality")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("dofSize", "DOF Size", dofSize, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("dofQuality", "DOF Size", dofQuality, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("motionBlurSize")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("motionBlurQuality")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("motionBlurSize", "Motion Blur Size", motionBlurSize, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("motionBlurQuality", "Motion Blur Size", motionBlurQuality, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("anisotropicFilteringQuality")->isHovered())
 		{
@@ -160,17 +160,17 @@ void SettingsEditor::update()
 		}
 
 		// Update value forms
-		if(_gui.getGlobalScreen()->checkValueForm("bloomSize", bloomSize, {}))
+		if(_gui.getGlobalScreen()->checkValueForm("bloomQuality", bloomQuality, {}))
 		{
-			_fe3d.gfx_setBloomSize(bloomSize);
+			_fe3d.gfx_setBloomQuality(bloomQuality);
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("dofSize", dofSize, {}))
+		if(_gui.getGlobalScreen()->checkValueForm("dofQuality", dofQuality, {}))
 		{
-			_fe3d.gfx_setDofSize(dofSize);
+			_fe3d.gfx_setDofQuality(dofQuality);
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("motionBlurSize", motionBlurSize, {}))
+		if(_gui.getGlobalScreen()->checkValueForm("motionBlurQuality", motionBlurQuality, {}))
 		{
-			_fe3d.gfx_setMotionBlurSize(motionBlurSize);
+			_fe3d.gfx_setMotionBlurQuality(motionBlurQuality);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("anisotropicFilteringQuality", anisotropicFilteringQuality, {}))
 		{
@@ -205,9 +205,9 @@ void SettingsEditor::update()
 void SettingsEditor::loadDefaultSettings()
 {
 	_fe3d.gfx_isAntiAliasingEnabled() ? _fe3d.gfx_disableAntiAliasing(false) : void();
-	_fe3d.gfx_setBloomSize(Config::MIN_BLOOM_SIZE);
-	_fe3d.gfx_setDofSize(Config::MIN_DOF_SIZE);
-	_fe3d.gfx_setMotionBlurSize(Config::MIN_MOTION_BLUR_SIZE);
+	_fe3d.gfx_setBloomQuality(Config::MIN_BLOOM_QUALITY);
+	_fe3d.gfx_setDofQuality(Config::MIN_DOF_QUALITY);
+	_fe3d.gfx_setMotionBlurQuality(Config::MIN_MOTION_BLUR_QUALITY);
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_setShadowQuality(Config::MIN_SHADOW_QUALITY);
 	_fe3d.gfx_setCubeReflectionQuality(Config::MIN_REFLECTION_QUALITY);
@@ -245,13 +245,13 @@ const bool SettingsEditor::loadSettingsFromFile() const
 	istringstream iss(line);
 
 	// Extract values from file
-	unsigned int bloomSize, dofSize, motionBlurSize, anisotropicFilteringQuality, shadowQuality, cubeReflectionQuality, planarReflectionQuality, refractionQuality, audioChannels;
+	unsigned int bloomQuality, dofQuality, motionBlurQuality, anisotropicFilteringQuality, shadowQuality, cubeReflectionQuality, planarReflectionQuality, refractionQuality, audioChannels;
 	bool isAntiAliasingEnabled;
 	iss >>
 		isAntiAliasingEnabled >>
-		bloomSize >>
-		dofSize >>
-		motionBlurSize >>
+		bloomQuality >>
+		dofQuality >>
+		motionBlurQuality >>
 		anisotropicFilteringQuality >>
 		shadowQuality >>
 		cubeReflectionQuality >>
@@ -267,9 +267,9 @@ const bool SettingsEditor::loadSettingsFromFile() const
 
 	// Set values
 	isAntiAliasingEnabled ? _fe3d.gfx_enableAntiAliasing() : void();
-	_fe3d.gfx_setBloomSize(bloomSize);
-	_fe3d.gfx_setDofSize(dofSize);
-	_fe3d.gfx_setMotionBlurSize(motionBlurSize);
+	_fe3d.gfx_setBloomQuality(bloomQuality);
+	_fe3d.gfx_setDofQuality(dofQuality);
+	_fe3d.gfx_setMotionBlurQuality(motionBlurQuality);
 	_fe3d.gfx_setAnisotropicFilteringQuality(anisotropicFilteringQuality);
 	_fe3d.gfx_setShadowQuality(shadowQuality);
 	_fe3d.gfx_setCubeReflectionQuality(cubeReflectionQuality);
@@ -297,9 +297,9 @@ const bool SettingsEditor::saveSettingsToFile() const
 
 	// Get values
 	auto isAntiAliasingEnabled = _fe3d.gfx_isAntiAliasingEnabled();
-	auto bloomSize = _fe3d.gfx_getBloomSize();
-	auto dofSize = _fe3d.gfx_getDofSize();
-	auto motionBlurSize = _fe3d.gfx_getMotionBlurSize();
+	auto bloomQuality = _fe3d.gfx_getBloomQuality();
+	auto dofQuality = _fe3d.gfx_getDofQuality();
+	auto motionBlurQuality = _fe3d.gfx_getMotionBlurQuality();
 	auto anisotropicFilteringQuality = _fe3d.gfx_getAnisotropicFilteringQuality();
 	auto shadowQuality = _fe3d.gfx_getShadowQuality();
 	auto cubeReflectionQuality = _fe3d.gfx_getCubeReflectionQuality();
@@ -310,9 +310,9 @@ const bool SettingsEditor::saveSettingsToFile() const
 	// Write to file
 	file <<
 		isAntiAliasingEnabled << " " <<
-		bloomSize << " " <<
-		dofSize << " " <<
-		motionBlurSize << " " <<
+		bloomQuality << " " <<
+		dofQuality << " " <<
+		motionBlurQuality << " " <<
 		anisotropicFilteringQuality << " " <<
 		shadowQuality << " " <<
 		cubeReflectionQuality << " " <<
@@ -346,9 +346,9 @@ void SettingsEditor::_loadGUI()
 	auto positions = VPC::calculateButtonPositions(11, CH);
 	leftWindow->createScreen("settingsEditorMenuMain");
 	leftWindow->getScreen("settingsEditorMenuMain")->createButton("isAntiAliasingEnabled", fvec2(0.0f, positions[0]), fvec2(TW("Anti Aliasing"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Anti Aliasing", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("settingsEditorMenuMain")->createButton("bloomSize", fvec2(0.0f, positions[1]), fvec2(TW("Bloom"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Bloom", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("settingsEditorMenuMain")->createButton("dofSize", fvec2(0.0f, positions[2]), fvec2(TW("DOF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "DOF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("settingsEditorMenuMain")->createButton("motionBlurSize", fvec2(0.0f, positions[3]), fvec2(TW("Motion Blur"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Motion Blur", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("bloomQuality", fvec2(0.0f, positions[1]), fvec2(TW("Bloom"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Bloom", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("dofQuality", fvec2(0.0f, positions[2]), fvec2(TW("DOF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "DOF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("motionBlurQuality", fvec2(0.0f, positions[3]), fvec2(TW("Motion Blur"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Motion Blur", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("settingsEditorMenuMain")->createButton("anisotropicFilteringQuality", fvec2(0.0f, positions[4]), fvec2(TW("Aniso Filtering"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Aniso Filtering", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("settingsEditorMenuMain")->createButton("shadowQuality", fvec2(0.0f, positions[5]), fvec2(TW("Shadow"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Shadow", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("settingsEditorMenuMain")->createButton("cubeReflectionQuality", fvec2(0.0f, positions[6]), fvec2(TW("Cube Reflection"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Cube Reflection", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);

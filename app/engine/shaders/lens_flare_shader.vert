@@ -49,7 +49,7 @@ float calculateFlareVisibility()
         // Calculate distance to light source
         float flareDistance = distance(u_cameraPosition, u_flareSourcePosition);
         
-        // Check if lightsource is not occluded by an object
+        // Check if light source is not occluded by an object
         if ((flareFragmentDepth * u_farDistance) >= abs(flareDistance))
         {
             return 1.0f;

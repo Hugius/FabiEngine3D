@@ -211,19 +211,19 @@ const float FabiEngine3D::gfx_getMotionBlurStrength() const
 	return _core->_renderBus.getMotionBlurStrength();
 }
 
-const unsigned int FabiEngine3D::gfx_getBloomSize() const
+const unsigned int FabiEngine3D::gfx_getBloomQuality() const
 {
-	return _core->_renderBus.getBloomSize();
+	return _core->_renderBus.getBloomQuality();
 }
 
-const unsigned int FabiEngine3D::gfx_getDofSize() const
+const unsigned int FabiEngine3D::gfx_getDofQuality() const
 {
-	return _core->_renderBus.getDofSize();
+	return _core->_renderBus.getDofQuality();
 }
 
-const unsigned int FabiEngine3D::gfx_getMotionBlurSize() const
+const unsigned int FabiEngine3D::gfx_getMotionBlurQuality() const
 {
-	return _core->_renderBus.getMotionBlurSize();
+	return _core->_renderBus.getMotionBlurQuality();
 }
 
 const BloomType FabiEngine3D::gfx_getBloomType() const

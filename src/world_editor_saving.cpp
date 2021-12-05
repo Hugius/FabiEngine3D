@@ -367,8 +367,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 		auto directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
 		auto directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
 		auto directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
-		auto billboardSize = _fe3d.billboard_getSize("@@directionalLightSource").x;
-		auto billboardLightness = _fe3d.billboard_getLightness("@@directionalLightSource");
 
 		// Write data
 		file <<
@@ -379,9 +377,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 			directionalLightingColor.r << " " <<
 			directionalLightingColor.g << " " <<
 			directionalLightingColor.b << " " <<
-			directionalLightingIntensity << " " <<
-			billboardSize << " " <<
-			billboardLightness << endl;
+			directionalLightingIntensity << endl;
 	}
 
 	// Shadow settings

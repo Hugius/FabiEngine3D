@@ -30,12 +30,12 @@ public:
 	static inline const float MS_PER_UPDATE = (1000.0f / 144.0f);
 
 	// UNSIGNED INT
-	static inline const unsigned int MIN_BLOOM_SIZE = 1;
-	static inline const unsigned int MAX_BLOOM_SIZE = 5;
-	static inline const unsigned int MIN_DOF_SIZE = 1;
-	static inline const unsigned int MAX_DOF_SIZE = 5;
-	static inline const unsigned int MIN_MOTION_BLUR_SIZE = 1;
-	static inline const unsigned int MAX_MOTION_BLUR_SIZE = 5;
+	static inline const unsigned int MIN_BLOOM_QUALITY = 1;
+	static inline const unsigned int MAX_BLOOM_QUALITY = 5;
+	static inline const unsigned int MIN_DOF_QUALITY = 1;
+	static inline const unsigned int MAX_DOF_QUALITY = 5;
+	static inline const unsigned int MIN_MOTION_BLUR_QUALITY = 1;
+	static inline const unsigned int MAX_MOTION_BLUR_QUALITY = 5;
 	static inline const unsigned int MIN_ANISOTROPIC_FILTERING_QUALITY = 1;
 	static inline const unsigned int MAX_ANISOTROPIC_FILTERING_QUALITY = 16;
 	static inline const unsigned int MIN_SHADOW_QUALITY = 2048;

@@ -40,8 +40,8 @@ void ScriptEditor::load()
 	_fe3d.gfx_setBloomBlurCount(2);
 
 	// Save bloom size
-	_initialBloomSize = _fe3d.gfx_getBloomSize();
-	_fe3d.gfx_setBloomSize(BLOOM_SIZE);
+	_initialBloomQuality = _fe3d.gfx_getBloomQuality();
+	_fe3d.gfx_setBloomQuality(BLOOM_QUALITY);
 
 	// Save anti aliasing state
 	_wasAntiAliasingEnabled = _fe3d.gfx_isAntiAliasingEnabled();
@@ -68,7 +68,7 @@ void ScriptEditor::unload()
 	_fe3d.gfx_disableBloom(true);
 
 	// Reset bloom size
-	_fe3d.gfx_setBloomSize(_initialBloomSize);
+	_fe3d.gfx_setBloomQuality(_initialBloomQuality);
 
 	// Reset anti aliasing
 	if(_wasAntiAliasingEnabled)
@@ -93,7 +93,7 @@ void ScriptEditor::unload()
 	_firstSelectedLineIndex = -1;
 	_lastSelectedLineIndex = -1;
 	_passedFrames = 0;
-	_initialBloomSize = 0;
+	_initialBloomQuality = 0;
 	_isEditorLoaded = false;
 	_wasAntiAliasingEnabled = false;
 	_isScriptLoadedFromFile = false;

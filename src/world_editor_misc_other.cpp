@@ -185,12 +185,6 @@ void WorldEditor::clearCurrentWorld()
 		}
 	}
 
-	// Hide lightsource billboard
-	if(_fe3d.billboard_isExisting("@@directionalLightSource"))
-	{
-		_fe3d.billboard_setVisible("@@directionalLightSource", false);
-	}
-
 	// Delete AABB entities
 	for(const auto& ID : _loadedAabbIDs)
 	{

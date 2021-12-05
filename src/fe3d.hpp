@@ -793,9 +793,9 @@ public:
 	void gfx_disableMotionBlur(bool mustResetProperties);
 	void gfx_disableLensFlare(bool mustResetProperties);
 	void gfx_setPlanarReflectionHeight(float height);
-	void gfx_setBloomSize(unsigned int size);
-	void gfx_setDofSize(unsigned int size);
-	void gfx_setMotionBlurSize(unsigned int size);
+	void gfx_setBloomQuality(unsigned int quality);
+	void gfx_setDofQuality(unsigned int quality);
+	void gfx_setMotionBlurQuality(unsigned int quality);
 	void gfx_setAnisotropicFilteringQuality(unsigned int quality);
 	void gfx_setCubeReflectionQuality(unsigned int quality);
 	void gfx_setPlanarReflectionQuality(unsigned int quality);
@@ -855,9 +855,9 @@ public:
 	const float gfx_getLensFlareIntensity() const;
 	const float gfx_getLensFlareSensitivity() const;
 	const float gfx_getMotionBlurStrength() const;
-	const unsigned int gfx_getBloomSize() const;
-	const unsigned int gfx_getDofSize() const;
-	const unsigned int gfx_getMotionBlurSize() const;
+	const unsigned int gfx_getBloomQuality() const;
+	const unsigned int gfx_getDofQuality() const;
+	const unsigned int gfx_getMotionBlurQuality() const;
 	const unsigned int gfx_getAnisotropicFilteringQuality() const;
 	const unsigned int gfx_getShadowQuality() const;
 	const unsigned int gfx_getCubeReflectionQuality() const;

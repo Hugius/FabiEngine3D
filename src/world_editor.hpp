@@ -150,10 +150,10 @@ private:
 	const bool _copyPreviewSound(const string& newID, const string& previewID, fvec3 position, bool isFromOutside);
 
 	// STRING
-	static inline const string PREVIEW_SPEAKER_ID = "@@previewSpeaker";
-	static inline const string PREVIEW_LAMP_ID = "@@previewLamp";
-	static inline const string PREVIEW_TORCH_ID = "@@previewTorch";
-	static inline const string PREVIEW_CAMERA_ID = "@@previewCamera";
+	static inline const string PREVIEW_SPEAKER_ID = "@@preview_speaker";
+	static inline const string PREVIEW_LAMP_ID = "@@preview_lamp";
+	static inline const string PREVIEW_TORCH_ID = "@@preview_torch";
+	static inline const string PREVIEW_CAMERA_ID = "@@preview_camera";
 	static inline const string SPEAKER_MODEL_PATH = "engine\\assets\\meshes\\speaker.obj";
 	static inline const string LAMP_MODEL_PATH = "engine\\assets\\meshes\\lamp.obj";
 	static inline const string TORCH_MODEL_PATH = "engine\\assets\\meshes\\torch.obj";

@@ -86,3 +86,5 @@
 - **Audio**: the amount of allocated audio channels
   - Type: `integer`
   - Constraints: between `64` and `512`
+- **Billboard Size**: ??????????????
+  - Constraints: `-inf` to `inf`

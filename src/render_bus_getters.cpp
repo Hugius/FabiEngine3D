@@ -180,19 +180,19 @@ const float RenderBus::getSkyMixValue() const
 	return _skyMixValue;
 }
 
-const unsigned int RenderBus::getBloomSize() const
+const unsigned int RenderBus::getBloomQuality() const
 {
-	return _bloomSize;
+	return _bloomQuality;
 }
 
-const unsigned int RenderBus::getDofSize() const
+const unsigned int RenderBus::getDofQuality() const
 {
-	return _dofSize;
+	return _dofQuality;
 }
 
-const unsigned int RenderBus::getMotionBlurSize() const
+const unsigned int RenderBus::getMotionBlurQuality() const
 {
-	return _motionBlurSize;
+	return _motionBlurQuality;
 }
 
 const float RenderBus::getAmbientLightingIntensity() const

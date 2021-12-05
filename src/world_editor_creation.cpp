@@ -214,7 +214,7 @@ const bool WorldEditor::_copyPreviewModel(const string& newID, const string& pre
 	_fe3d.model_setBasePosition(newID, position);
 	_fe3d.model_setBaseSize(newID, _fe3d.model_getBaseSize(previewID));
 	_fe3d.model_setLevelOfDetailSize(newID, _fe3d.model_getBaseSize(previewID));
-	_fe3d.model_setStaticToCamera(newID, _fe3d.model_isStaticToCamera(previewID));
+	_fe3d.model_setFrozen(newID, _fe3d.model_isFrozen(previewID));
 	_fe3d.model_setLevelOfDetail(newID, _fe3d.model_getLevelOfDetailID(previewID));
 	_fe3d.model_setFaceCulled(newID, _fe3d.model_isFaceCulled(previewID));
 	_fe3d.model_setRotationOrder(newID, _fe3d.model_getRotationOrder(previewID));

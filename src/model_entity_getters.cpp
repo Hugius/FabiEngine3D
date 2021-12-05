@@ -233,9 +233,9 @@ const bool ModelEntity::hasRenderBuffer(const string& partID) const
 	return (_parts[_getPartIndex(partID)].renderBuffer != nullptr);
 }
 
-const bool ModelEntity::isCameraStatic() const
+const bool ModelEntity::isFrozen() const
 {
-	return _isCameraStatic;
+	return _isFrozen;
 }
 
 const bool ModelEntity::isDepthMapIncluded() const

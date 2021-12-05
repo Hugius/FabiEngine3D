@@ -20,7 +20,7 @@ public:
 	void updateTransformationMatrix();
 	void setShadowed(bool value);
 	void setReflected(bool value);
-	void setCameraStatic(bool value);
+	void setFrozen(bool value);
 	void setDepthMapIncluded(bool value);
 	void setLevelOfDetailed(bool value);
 	void setLevelOfDetailSize(fvec3 value);
@@ -123,7 +123,7 @@ public:
 	// BOOL
 	const bool isShadowed() const;
 	const bool isReflected() const;
-	const bool isCameraStatic() const;
+	const bool isFrozen() const;
 	const bool isDepthMapIncluded() const;
 	const bool isLevelOfDetailed() const;
 	const bool isBright() const;
@@ -240,7 +240,7 @@ private:
 	float _maxHeight = (numeric_limits<float>::max)();
 
 	// BOOL
-	bool _isCameraStatic = false;
+	bool _isFrozen = false;
 	bool _isShadowed = true;
 	bool _isReflected = true;
 	bool _isDepthMapIncluded = true;

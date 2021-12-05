@@ -132,7 +132,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 			auto position = _fe3d.model_getBasePosition(modelID);
 			auto rotation = _fe3d.model_getBaseRotation(modelID);
 			auto size = _fe3d.model_getBaseSize(modelID);
-			auto isFrozen = _fe3d.model_isStaticToCamera(modelID);
+			auto isFrozen = _fe3d.model_isFrozen(modelID);
 			auto animationID = (_animationEditor.getStartedAnimationIDs(modelID).empty()) ? "" :
 				_animationEditor.getStartedAnimationIDs(modelID).front();
 

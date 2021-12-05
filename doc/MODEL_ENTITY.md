@@ -105,6 +105,12 @@
 - **Size Target Speed**: the speed with which the mesh scales to the target size
   - Type: `decimal`
   - Constraints: at least `0.0`
+- **LOD Distance**: the minimum distance by which the LOD entity will appear/disappear
+  - Type: `decimal`
+  - Constraints: at least `0`
+- **Planar Height**: the Y coordinate from which planar reflections are captured
+  - Type: `decimal`
+  - Constraints: none
 - **Specular**: specular lighting is rendered on the mesh
   - Type: `boolean`
   - Constraints: none
@@ -127,6 +133,9 @@
   - Type: `boolean`
   - Constraints: none
 - **Shadowed**: the mesh is captured for shadows
+  - Type: `boolean`
+  - Constraints: none
+- **Frozen**: the XYZ position of the mesh is not affected by camera movement
   - Type: `boolean`
   - Constraints: none
 - **Reflected**: the mesh is captured for reflections

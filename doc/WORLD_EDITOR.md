@@ -32,7 +32,7 @@
 ## 5. Water
 
 - You can select/delete up to 1 water from the water editor.
-- The water can be moved upwards and downwards
+- The water height can be moved upwards and downwards
 
 ## 6. Models
 
@@ -40,7 +40,6 @@
 - If a terrain is selected, you can place the model on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the model.
 - You can attach an (endless) animation to a placed model.
-- You can "freeze" a placed model into local space, which means its position is not affected by camera movement.
 
 ## 7. Billboards
 
@@ -51,7 +50,6 @@
 ## 8. Sounds
 
 - You can place/edit/delete sounds in the world.
-- The sounds you place are in 3D space.
 - If a terrain is selected, you can place the sound on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the model.
 
@@ -70,16 +68,10 @@
 ## 11. Reflections
 
 - You can place/edit/delete reflections in the world.
-- Reflections capture their surroundings into a cube map.
-- The resulting cube maps are used for cube reflections.
 - If a terrain is selected, you can place the reflection on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the reflection.
 
 ## 12. Settings
 
-- **Editor Speed**: the speed of the world editor
+- **Editor Speed**: the speed with which the camera moves and the XYZ fields change
   - Constraints: at least `0`
-- **LOD Distance**: the minimum distance by which LOD models will appear/disappear.
-  - Constraints: `0` to `inf`
-- **Planar Height**: the Y coordinate from where planar reflections are captured.
-  - Constraints: `-inf` to `inf`

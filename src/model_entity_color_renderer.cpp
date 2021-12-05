@@ -145,7 +145,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_isBright", entity->isBright());
 		_shader.uploadUniform("u_cubeReflectionMixValue", entity->getCubeReflectionMixValue());
-		_shader.uploadUniform("u_viewMatrix", (entity->isCameraStatic() ? mat44(mat33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
+		_shader.uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
 		_shader.uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
 		// Enable face culling

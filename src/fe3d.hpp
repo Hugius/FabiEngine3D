@@ -240,7 +240,7 @@ public:
 	void model_setShadowed(const string& ID, bool enabled);
 	void model_setReflected(const string& ID, bool enabled);
 	void model_setDepthMapIncluded(const string& ID, bool enabled);
-	void model_setStaticToCamera(const string& ID, bool enabled);
+	void model_setFrozen(const string& ID, bool enabled);
 	void model_setWireframed(const string& ID, const string& partID, bool enabled);
 	void model_setBasePosition(const string& ID, fvec3 position);
 	void model_setBaseRotation(const string& ID, fvec3 rotation);
@@ -319,7 +319,7 @@ public:
 	const bool model_isSpecular(const string& ID, const string& partID) const;
 	const bool model_isShadowed(const string& ID) const;
 	const bool model_isReflected(const string& ID) const;
-	const bool model_isStaticToCamera(const string& ID) const;
+	const bool model_isFrozen(const string& ID) const;
 	const bool model_isWireframed(const string& ID, const string& partID) const;
 	const bool model_isDepthMapIncluded(const string& ID) const;
 	const bool model_hasPart(const string& ID, const string& partID) const;

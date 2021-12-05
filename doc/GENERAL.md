@@ -137,7 +137,6 @@
 - **Fragment**: every pixel that can possibly end up on your screen
 - **UV Coordinate**: a coordinate (XY) which used for mapping a 2D texture onto a 3D mesh
 - **Normal Vector**: a normalized vector that points in the opposite direction of a surface which is used for lighting calculations
-- **INF**: an infinite value
 - **First Person View**: the world is viewed directly through the "eyes" of the camera
 - **Third Person View**: the world is viewed indirectly from a distance
 - **Global Illumination**: an indirect form of global lighting in the world

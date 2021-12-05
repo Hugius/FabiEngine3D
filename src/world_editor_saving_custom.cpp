@@ -128,7 +128,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 
 			// Data to save
 			auto isVisible = _fe3d.model_isVisible(modelID);
-			auto isFrozen = _fe3d.model_isStaticToCamera(modelID);
+			auto isFrozen = _fe3d.model_isFrozen(modelID);
 			auto isAabbRaycastResponsive = aabbIDs.empty() ? false : _fe3d.aabb_isRaycastResponsive(aabbIDs.front());
 			auto isAabbCollisionResponsive = aabbIDs.empty() ? false : _fe3d.aabb_isCollisionResponsive(aabbIDs.front());
 			auto position = _fe3d.model_getBasePosition(modelID);

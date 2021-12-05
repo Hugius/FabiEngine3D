@@ -49,7 +49,7 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, floa
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_clippingY", clippingY);
 		_shader.uploadUniform("u_isUnderWater", isUnderWater);
-		_shader.uploadUniform("u_viewMatrix", (entity->isCameraStatic() ? mat44(mat33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
+		_shader.uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
 		_shader.uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
 		// Iterate through parts

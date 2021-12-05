@@ -208,7 +208,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				// Set properties
 				_fe3d.model_setBaseRotation(modelID, rotation);
 				_fe3d.model_setBaseSize(modelID, size);
-				_fe3d.model_setStaticToCamera(modelID, isFrozen);
+				_fe3d.model_setFrozen(modelID, isFrozen);
 
 				// Save initial transformation
 				if(_isEditorLoaded)

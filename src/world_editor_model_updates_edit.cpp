@@ -118,7 +118,7 @@ void WorldEditor::_updateModelEditing()
 				}
 				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
 				{
-					_fe3d.model_setStaticToCamera(_activeModelID, !_fe3d.model_isStaticToCamera(_activeModelID));
+					_fe3d.model_setFrozen(_activeModelID, !_fe3d.model_isFrozen(_activeModelID));
 				}
 				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
 				{
@@ -288,7 +288,7 @@ void WorldEditor::_updateModelEditing()
 			}
 
 			// Update button text contents
-			screen->getButton("freeze")->changeTextContent(_fe3d.model_isStaticToCamera(_activeModelID) ? "Unfreeze" : "Freeze");
+			screen->getButton("freeze")->changeTextContent(_fe3d.model_isFrozen(_activeModelID) ? "Unfreeze" : "Freeze");
 		}
 
 		// Check if model is still selected or active

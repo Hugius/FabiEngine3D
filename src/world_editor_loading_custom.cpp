@@ -202,7 +202,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				_fe3d.model_setBaseRotation(modelID, rotation);
 				_fe3d.model_setBaseRotationOrigin(modelID, rotationOrigin);
 				_fe3d.model_setBaseSize(modelID, size);
-				_fe3d.model_setStaticToCamera(modelID, isFrozen);
+				_fe3d.model_setFrozen(modelID, isFrozen);
 				_fe3d.model_setColor(modelID, "", color);
 				_fe3d.model_setMinHeight(modelID, minHeight);
 				_fe3d.model_setMaxHeight(modelID, maxHeight);

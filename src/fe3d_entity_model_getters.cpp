@@ -43,9 +43,9 @@ const bool FabiEngine3D::model_isReflected(const string& ID) const
 	return _core->_modelEntityManager.getEntity(ID)->isReflected();
 }
 
-const bool FabiEngine3D::model_isStaticToCamera(const string& ID) const
+const bool FabiEngine3D::model_isFrozen(const string& ID) const
 {
-	return _core->_modelEntityManager.getEntity(ID)->isCameraStatic();
+	return _core->_modelEntityManager.getEntity(ID)->isFrozen();
 }
 
 const bool FabiEngine3D::model_isWireframed(const string& ID, const string& partID) const

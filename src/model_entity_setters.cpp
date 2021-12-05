@@ -402,9 +402,9 @@ void ModelEntity::setReflected(bool value)
 	_isReflected = value;
 }
 
-void ModelEntity::setCameraStatic(bool value)
+void ModelEntity::setFrozen(bool value)
 {
-	_isCameraStatic = value;
+	_isFrozen = value;
 }
 
 void ModelEntity::setDepthMapIncluded(bool value)

@@ -319,9 +319,9 @@ void FabiEngine3D::model_setRotationOrder(const string& ID, DirectionOrder order
 	_core->_modelEntityManager.getEntity(ID)->setRotationOrder(order);
 }
 
-void FabiEngine3D::model_setStaticToCamera(const string& ID, bool enabled)
+void FabiEngine3D::model_setFrozen(const string& ID, bool enabled)
 {
-	_core->_modelEntityManager.getEntity(ID)->setCameraStatic(enabled);
+	_core->_modelEntityManager.getEntity(ID)->setFrozen(enabled);
 }
 
 void FabiEngine3D::model_setWireframed(const string& ID, const string& partID, bool enabled)

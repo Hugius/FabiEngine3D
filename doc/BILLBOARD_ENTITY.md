@@ -89,15 +89,15 @@
 
 ### 3.6 `boolean`
 
-- **Shadowed**: the mesh is captured for shadow rendering
+- **Shadowed**: the mesh is captured for shadows
   - Constraints: none
-- **Reflected**: the mesh is captured for reflection rendering
+- **Reflected**: the mesh is captured for reflections
   - Constraints: none
 - **Facing X**: the mesh is horizontally facing the camera
   - Constraints: none
 - **Facing Y**: the mesh is vertically facing the camera
   - Constraints: none
-- **Bright**: the mesh is captured for bloom rendering
+- **Bright**: the mesh is captured for bloom
   - Constraints: none
 - **Wireframed**: the mesh is rendered as a wireframe
   - Constraints: none

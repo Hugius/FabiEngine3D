@@ -93,7 +93,7 @@
   - Constraints: none
 - **Reflective**: cube/planar reflections are rendered on the mesh
   - Constraints: none
-- **Instanced**: the mesh is rendered using instanced rendering
+- **Instanced**: the mesh is rendered using instancing
   - Constraints: none
 - **Face Culled**: the mesh uses the face culling optimization
   - Constraints: none
@@ -103,9 +103,9 @@
   - Constraints: none
 - **Camera Static**: the mesh is not being affected by the camera position
   - Constraints: none
-- **Shadowed**: the mesh is captured for shadow rendering
+- **Shadowed**: the mesh is captured for shadows
   - Constraints: none
-- **Reflected**: the mesh is captured for reflection rendering
+- **Reflected**: the mesh is captured for reflections
   - Constraints: none
 
 ### 3.5 `enumeration`

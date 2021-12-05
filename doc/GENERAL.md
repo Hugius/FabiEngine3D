@@ -13,10 +13,10 @@
 
 - **3D Rendering**: sky, terrain, water, model, billboard
 - **2D Rendering**: image, text
-- **Textures**: blend, cube, diffuse, displacement, dudv, emission, flare, height, image, normal, reflection, specular
+- **Textures**: blend, cube, diffuse, displacement, DUDV, emission, flare, height, image, normal, reflection, specular
 - **Lighting**: ambient lighting, directional lighting, specular lighting, point lighting, spot lighting
-- **Post Processing**: bloom, DOF, motion blur, anti-aliasing, lens flare
-- **Other**: shadows, cube reflections, planar reflections, fog, sky exposure
+- **Post Processing**: bloom, DOF, motion blur, anti aliasing, lens flare, gamma correction
+- **Miscellaneous**: shadows, cube reflections, planar reflections, fog, sky exposure, anisotropic filtering
 
 ### 1.3 Physics
 
@@ -145,12 +145,13 @@
 - **RGB**: Red Green Blue
 - **Mouse**: the physical peripheral known as "the mouse"
 - **Cursor**: the pointer within FabiEngine3D that is moved using the mouse
-- **Wireframe**: rendering mode that only draws lines/wires between all vertices
+- **Wireframe**: a rendering mode that only draws lines/wires between all vertices
 - **Face Culling**: an optimization technique where non-visible vertices are not rendered
-- **Instanced Rendering**: an optimization technique that is efficient for rendering a lot of the same meshes
+- **Instancing**: an optimization technique that is efficient for rendering a lot of the same meshes
 - **Raycasting**: the process of casting a ray from a position towards a direction
 - **AABB**: Axis Aligned Bounding Box
 - **Collision Detection**: the process of detecting collision between 2 AABBs
 - **Collision Response**: the process of responding to collision between 2 AABBs
 - **Reference Angle**: a rotational angle converted between 0&deg; and 90&deg;
 - **Transformation**: the combination of position/rotation/size
+- **FXAA**: Fast Approximate Anti Aliasing

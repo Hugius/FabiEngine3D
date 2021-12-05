@@ -61,7 +61,6 @@ A multiplayer first person shooter game based in a science-fiction setting: a sp
 - [Audio Editor](doc/AUDIO_EDITOR.md)
 - [World Editor](doc/WORLD_EDITOR.md)
 - [Script Editor](doc/SCRIPT_EDITOR.md)
-- [Settings Editor](doc/SETTINGS_EDITOR.md)
 
 ### Scripting APIs
 

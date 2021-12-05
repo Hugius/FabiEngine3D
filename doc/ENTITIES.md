@@ -11,14 +11,11 @@
 
 ## 2. Properties
 
-### 2.1 `string`
-
 - **ID**: the identifier of the entity
+  - Type: `string`
   - Constraints: must be unique, cannot be changed
-
-### 2.2 `boolean`
-
 - **Visible**: the visibility of the entity in the world
+  - Type: `boolean`
   - Constraints: none
 
 ## 3. Types

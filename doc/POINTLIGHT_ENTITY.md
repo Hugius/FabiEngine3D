@@ -8,25 +8,24 @@
 
 ## 2. Properties
 
-### 2.1 `decimal3`
-
 - **Position**: the XYZ position of the light
+  - Type: `decimal3`
   - Constraints: none
 - **Position Target**: the target XYZ position of the light
+  - Type: `decimal3`
   - Constraints: none
 - **Radius**: the XYZ radius of the light emission
+  - Type: `decimal3`
   - Constraints: at least `0.0`
 - **Color**: the RGB color multiplier of the fragments
+  - Type: `decimal3`
   - Constraints: between `0.0` to `1.0`
-
-### 2.2 `decimal`
-
 - **Position Target Speed**: the speed with which the light moves to the target position
+  - Type: `decimal`
   - Constraints: at least `0.0`
 - **Intensity**: the intensity of the light emission
+  - Type: `decimal`
   - Constraints: at least `0.0`
-
-### 2.3 `enumeration`
-
 - **Shape**: the shape of the light
+  - Type: `enumeration`
   - Constraints: `CIRCLE` or `SQUARE`

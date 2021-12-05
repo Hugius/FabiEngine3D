@@ -12,36 +12,36 @@
 
 ## 3. Properties
 
-### 3.1 `string`
-
 - **Right Cube Map Path**: the path of the right part of the cube map file
+  - Type: `string`
   - Constraints: none
 - **Left Cube Map Path**: the path of the left part of the cube map file
+  - Type: `string`
   - Constraints: none
 - **Top Cube Map Path**: the path of the top part of the cube map file
+  - Type: `string`
   - Constraints: none
 - **Bottom Cube Map Path**: the path of the bottom part of the cube map file
+  - Type: `string`
   - Constraints: none
 - **Back Cube Map Path**: the path of the back part of the cube map file
+  - Type: `string`
   - Constraints: none
 - **Front Cube Map Path**: the path of the front part of the cube map file
+  - Type: `string`
   - Constraints: none
-
-### 3.2 `decimal3`
-
 - **Color**: the RGB color multiplier of the fragments
+  - Type: `decimal3`
   - Constraints: between `0.0` and `1.0`
 - **Wireframe Color**: the RGB color multiplier of the wireframe
+  - Type: `decimal3`
   - Constraints: between `0.0` and `1.0`
-
-### 3.3 `decimal`
-
 - **Rotation**: the XYZ rotation of the mesh around the Y axis
+  - Type: `decimal`
   - Constraints: between `0.0` and `360.0`
 - **Lightness**: the lightness multiplier of the fragments
+  - Type: `decimal`
   - Constraints: at least `0.0`
-
-### 3.4 `boolean`
-
 - **Wireframed**: the mesh is rendered as a wireframe
+  - Type: `boolean`
   - Constraints: none

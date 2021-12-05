@@ -215,8 +215,7 @@
 #### 2.5.1 General
 
 - Bloom is an effect that adds a glow to very bright objects.
-- Emission maps can be used to render this type of effect.
-- Bloomed fragments are not affected by shadows or lighting.
+- Emission maps can be used to specify bloomed fragments.
 
 #### 2.5.2 Properties
 
@@ -327,4 +326,4 @@
 
 ### 3.7 Water Fresnel Effect
 
-- The water fresnel effect mixes the reflection and refraction colors based on the camera view angles.
+- The water fresnel effect mixes the reflection and refraction colors automatically based on the camera position.

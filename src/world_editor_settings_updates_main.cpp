@@ -11,7 +11,6 @@ void WorldEditor::_updateSettingsMenu()
 	if(screen->getID() == "worldEditorMenuSettings")
 	{
 		// Temporary values
-		auto lodDistance = _fe3d.misc_getLevelOfDetailDistance();
 		auto reflectionHeight = _fe3d.gfx_getPlanarReflectionHeight();
 
 		// Button management
@@ -32,10 +31,6 @@ void WorldEditor::_updateSettingsMenu()
 		{
 			_gui.getGlobalScreen()->createValueForm("editorSpeed", "Editor Speed", _editorSpeed, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lodDistance")->isHovered())
-		{
-			_gui.getGlobalScreen()->createValueForm("lodDistance", "LOD Distance", lodDistance, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("planarHeight")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("planarHeight", "Planar Reflection Height", reflectionHeight, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
@@ -45,10 +40,6 @@ void WorldEditor::_updateSettingsMenu()
 		if(_gui.getGlobalScreen()->checkValueForm("editorSpeed", _editorSpeed, {}))
 		{
 			_editorSpeed = max(0.0f, _editorSpeed);
-		}
-		if(_gui.getGlobalScreen()->checkValueForm("lodDistance", lodDistance, {}))
-		{
-			_fe3d.misc_setLevelOfDetailDistance(lodDistance);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("planarHeight", reflectionHeight, {}))
 		{

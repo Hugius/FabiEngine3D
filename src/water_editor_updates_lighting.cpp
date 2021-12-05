@@ -71,7 +71,6 @@ void WaterEditor::_updateLightingMenu()
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("specularShininess", specularShininess))
 		{
-			specularShininess = min(256.0f, specularShininess);
 			_fe3d.water_setSpecularShininess(_currentWaterID, specularShininess);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))

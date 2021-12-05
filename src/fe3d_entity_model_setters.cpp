@@ -119,9 +119,9 @@ void FabiEngine3D::model_setReflectionMap(const string& ID, const string& partID
 	}
 }
 
-void FabiEngine3D::model_setLevelOfDetail(const string& ID, const string& levelOfDetailID)
+void FabiEngine3D::model_setLevelOfDetailEntityID(const string& ID, const string& levelOfDetailEntityID)
 {
-	_core->_modelEntityManager.getEntity(ID)->setLevelOfDetailEntityID(levelOfDetailID);
+	_core->_modelEntityManager.getEntity(ID)->setLevelOfDetailEntityID(levelOfDetailEntityID);
 }
 
 void FabiEngine3D::model_setFaceCulled(const string& ID, bool enabled)
@@ -262,6 +262,11 @@ void FabiEngine3D::model_setMinHeight(const string& ID, float height)
 void FabiEngine3D::model_setMaxHeight(const string& ID, float height)
 {
 	_core->_modelEntityManager.getEntity(ID)->setMaxHeight(height);
+}
+
+void FabiEngine3D::model_setLevelOfDetailDistance(const string& ID, float distance)
+{
+	_core->_modelEntityManager.getEntity(ID)->setLevelOfDetailDistance(distance);
 }
 
 void FabiEngine3D::model_movePartTo(const string& ID, const string& partID, fvec3 target, float speed)

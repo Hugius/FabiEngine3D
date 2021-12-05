@@ -33,7 +33,8 @@ const bool ModelEditor::saveModelEntitiesToFile() const
 		auto isMultiParted = _fe3d.model_isMultiParted(modelID);
 		auto meshPath = _fe3d.model_getMeshPath(modelID);
 		auto modelSize = _fe3d.model_getBaseSize(modelID);
-		auto levelOfDetailEntityID = _fe3d.model_getLevelOfDetailID(modelID);
+		auto levelOfDetailEntityID = _fe3d.model_getLevelOfDetailEntityID(modelID);
+		auto levelOfDetailDistance = _fe3d.model_getLevelOfDetailDistance(modelID);
 		auto isInstanced = _fe3d.model_isInstanced(modelID);
 		auto isFaceCulled = _fe3d.model_isFaceCulled(modelID);
 		auto rotationOrder = static_cast<unsigned int>(_fe3d.model_getRotationOrder(modelID));
@@ -57,6 +58,7 @@ const bool ModelEditor::saveModelEntitiesToFile() const
 			modelSize.y << " " <<
 			modelSize.z << " " <<
 			levelOfDetailEntityID << " " <<
+			levelOfDetailDistance << " " <<
 			isInstanced << " " <<
 			isFaceCulled << " " <<
 			rotationOrder;

@@ -206,6 +206,11 @@ const float FabiEngine3D::model_getMaxHeight(const string& ID) const
 	return _core->_modelEntityManager.getEntity(ID)->getMaxHeight();
 }
 
+const float FabiEngine3D::model_getLevelOfDetailDistance(const string& ID) const
+{
+	return _core->_modelEntityManager.getEntity(ID)->getLevelOfDetailDistance();
+}
+
 const float FabiEngine3D::model_getTextureRepeat(const string& ID, const string& partID) const
 {
 	return _core->_modelEntityManager.getEntity(ID)->getTextureRepeat(partID);
@@ -246,7 +251,7 @@ const string& FabiEngine3D::model_getNormalMapPath(const string& ID, const strin
 	return _core->_modelEntityManager.getEntity(ID)->getNormalMapPath(partID);
 }
 
-const string& FabiEngine3D::model_getLevelOfDetailID(const string& ID) const
+const string& FabiEngine3D::model_getLevelOfDetailEntityID(const string& ID) const
 {
 	return _core->_modelEntityManager.getEntity(ID)->getLevelOfDetailEntityID();
 }

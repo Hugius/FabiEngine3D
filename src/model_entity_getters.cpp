@@ -273,6 +273,11 @@ const float ModelEntity::getMaxHeight() const
 	return _maxHeight;
 }
 
+const float ModelEntity::getLevelOfDetailDistance() const
+{
+	return _levelOfDetailDistance;
+}
+
 const float ModelEntity::getEmissionIntensity(const string& partID) const
 {
 	return _parts[_getPartIndex(partID)].emissionIntensity;

@@ -6,7 +6,7 @@ using std::numeric_limits;
 const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 {
 	// Temporary values
-	float closestDistance = (numeric_limits<float>::max)();
+	float closestDistance = numeric_limits<float>::max();
 
 	// Iterate through AABB entities
 	for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
@@ -132,7 +132,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(cons
 	else
 	{
 		// Temporary values
-		float closestDistance = (numeric_limits<float>::max)();
+		float closestDistance = numeric_limits<float>::max();
 		string closestBoxID = "";
 
 		// Iterate through AABB entities

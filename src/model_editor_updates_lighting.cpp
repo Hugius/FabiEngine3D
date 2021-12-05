@@ -94,7 +94,6 @@ void ModelEditor::_updateLightingMenu()
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("specularShininess", specularShininess))
 		{
-			specularShininess = min(256.0f, specularShininess);
 			_fe3d.model_setSpecularShininess(_currentModelID, _currentPartID, specularShininess);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))

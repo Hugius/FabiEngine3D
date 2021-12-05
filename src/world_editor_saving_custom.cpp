@@ -44,12 +44,12 @@ const bool WorldEditor::saveCustomWorldToFile()
 		if((modelID[0] != '@') && isCustomWorldModel)
 		{
 			// Check if entity has level of detail entity
-			if(!_fe3d.model_getLevelOfDetailID(modelID).empty())
+			if(!_fe3d.model_getLevelOfDetailEntityID(modelID).empty())
 			{
 				// Check if ID not already added to list
 				if(find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) == levelOfDetailEntityIDs.end())
 				{
-					levelOfDetailEntityIDs.push_back(_fe3d.model_getLevelOfDetailID(modelID));
+					levelOfDetailEntityIDs.push_back(_fe3d.model_getLevelOfDetailEntityID(modelID));
 				}
 			}
 		}
@@ -553,9 +553,6 @@ const bool WorldEditor::saveCustomWorldToFile()
 				position.z << endl;
 		}
 	}
-
-	// LOD distance settings
-	file << "LOD_DISTANCE " << _fe3d.misc_getLevelOfDetailDistance() << endl;
 
 	// Planar reflection height
 	file << "PLANAR_REFLECTION_HEIGHT " << _fe3d.gfx_getPlanarReflectionHeight() << endl;

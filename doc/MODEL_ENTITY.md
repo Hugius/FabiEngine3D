@@ -135,7 +135,7 @@
 - **Shadowed**: the mesh is captured for shadows
   - Type: `boolean`
   - Constraints: none
-- **Frozen**: the XYZ position of the mesh is not affected by camera movement
+- **Frozen**: the XYZ position of the mesh is not affected by the camera position
   - Type: `boolean`
   - Constraints: none
 - **Reflected**: the mesh is captured for reflections

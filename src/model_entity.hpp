@@ -31,6 +31,7 @@ public:
 	void setCubeReflectionMixValue(float value);
 	void setMinHeight(float value);
 	void setMaxHeight(float value);
+	void setLevelOfDetailDistance(float value);
 	void setBright(bool value);
 	void clearParts();
 	void setRenderBuffer(const string& partID, shared_ptr<RenderBuffer> value);
@@ -112,6 +113,7 @@ public:
 	const float getCubeReflectionMixValue() const;
 	const float getMinHeight() const;
 	const float getMaxHeight() const;
+	const float getLevelOfDetailDistance() const;
 	const float getReflectivity(const string& partID) const;
 	const float getLightness(const string& partID) const;
 	const float getSpecularShininess(const string& partID) const;
@@ -236,8 +238,9 @@ private:
 	float _baseRotationTargetSpeed = 0.0f;
 	float _baseSizeTargetSpeed = 0.0f;
 	float _cubeReflectionMixValue = 1.0f;
-	float _minHeight = -(numeric_limits<float>::max)();
-	float _maxHeight = (numeric_limits<float>::max)();
+	float _levelOfDetailDistance = 0.0f;
+	float _minHeight = numeric_limits<float>::lowest();
+	float _maxHeight = numeric_limits<float>::max();
 
 	// BOOL
 	bool _isFrozen = false;

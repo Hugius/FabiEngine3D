@@ -232,7 +232,7 @@ public:
 	void model_setSpecularMap(const string& ID, const string& partID, const string& texturePath);
 	void model_setReflectionMap(const string& ID, const string& partID, const string& texturePath);
 	void model_setNormalMap(const string& ID, const string& partID, const string& texturePath);
-	void model_setLevelOfDetail(const string& ID, const string& levelOfDetailID);
+	void model_setLevelOfDetailEntityID(const string& ID, const string& levelOfDetailEntityID);
 	void model_setFaceCulled(const string& ID, bool enabled);
 	void model_setReflectionType(const string& ID, const string& partID, ReflectionType type);
 	void model_setSpecular(const string& ID, const string& partID, bool enabled);
@@ -273,6 +273,7 @@ public:
 	void model_setWireframeColor(const string& ID, const string& partID, fvec3 color);
 	void model_setMinHeight(const string& ID, float height);
 	void model_setMaxHeight(const string& ID, float height);
+	void model_setLevelOfDetailDistance(const string& ID, float distance);
 	void model_setTextureRepeat(const string& ID, const string& partID, float repeat);
 	void model_enableInstancing(const string& ID, vector<fvec3> offsets);
 	void model_disableInstancing(const string& ID);
@@ -289,7 +290,7 @@ public:
 	const string& model_getSpecularMapPath(const string& ID, const string& partID) const;
 	const string& model_getReflectionMapPath(const string& ID, const string& partID) const;
 	const string& model_getNormalMapPath(const string& ID, const string& partID) const;
-	const string& model_getLevelOfDetailID(const string& ID) const;
+	const string& model_getLevelOfDetailEntityID(const string& ID) const;
 	const vector<fvec3>& model_getInstancedOffsets(const string& ID) const;
 	const fvec3 model_getLevelOfDetailSize(const string& ID) const;
 	const fvec3 model_getBasePosition(const string& ID) const;
@@ -309,6 +310,7 @@ public:
 	const float model_getTransparency(const string& ID, const string& partID) const;
 	const float model_getMinHeight(const string& ID) const;
 	const float model_getMaxHeight(const string& ID) const;
+	const float model_getLevelOfDetailDistance(const string& ID) const;
 	const float model_getTextureRepeat(const string& ID, const string& partID) const;
 	const float model_getEmissionIntensity(const string& ID, const string& partID) const;
 	const bool model_isExisting(const string& ID) const;
@@ -949,7 +951,6 @@ public:
 	void misc_cacheSoundsMultiThreaded(const vector<string>& filePaths);
 	void misc_cacheMusicMultiThreaded(const vector<string>& filePaths);
 	void misc_startMillisecondTimer();
-	void misc_setLevelOfDetailDistance(float distance);
 	void misc_setMaxAudioChannelCount(unsigned int count);
 
 	// MISC - getters
@@ -962,7 +963,6 @@ public:
 	const ivec2 misc_getCursorPositionRelativeToViewport() const;
 	const float misc_getFPS() const;
 	const float misc_stopMillisecondTimer() const;
-	const float misc_getLevelOfDetailDistance() const;
 	const unsigned int misc_getTriangleCount() const;
 	const unsigned int misc_getMaxAudioChannelCount() const;
 	const unsigned int misc_getUsedAudioChannelCount() const;

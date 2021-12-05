@@ -23,11 +23,6 @@ const float FabiEngine3D::misc_stopMillisecondTimer() const
 	return _core->_timer.stop();
 }
 
-const float FabiEngine3D::misc_getLevelOfDetailDistance() const
-{
-	return _core->_modelEntityManager.getLevelOfDetailDistance();
-}
-
 const string FabiEngine3D::misc_getCpuModel() const
 {
 	return _core->_libraryLoader.getCpuModel();

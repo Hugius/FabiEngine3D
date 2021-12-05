@@ -12,10 +12,6 @@ public:
 	void update() override;
 	void update(const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities);
 	void createEntity(const string& ID, const string& meshPath);
-	void setLevelOfDetailDistance(float distance);
-
-	// FLOAT
-	const float getLevelOfDetailDistance() const;
 
 	// MISCELLANEOUS
 	const unordered_map<string, shared_ptr<ModelEntity>>& getEntities();
@@ -24,7 +20,6 @@ public:
 private:
 	// FLOAT
 	static inline const float CUBE_REFLECTION_OVERLAP_SPEED = 0.01f;
-	float _levelOfDetailDistance = 0.0f;
 
 	// MISCELLANEOUS
 	Timer& _timer;

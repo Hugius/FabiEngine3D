@@ -66,7 +66,6 @@ void AnimationEditor::load()
 	_gui.getGlobalScreen()->createTextField("animationID", fvec2(0.0f, -0.45f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 	_gui.getGlobalScreen()->createTextField("animationFrame", fvec2(0.0f, -0.55f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("animationEditorControls");
-	_fe3d.misc_setLevelOfDetailDistance(numeric_limits<float>::max());
 	_isEditorLoaded = true;
 }
 

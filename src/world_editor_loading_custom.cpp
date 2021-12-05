@@ -575,17 +575,6 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 			_fe3d.reflection_capture(reflectionID);
 			_loadedReflectionIDs.push_back(reflectionID);
 		}
-		else if(lineType == "LOD_DISTANCE")
-		{
-			// Data placeholders
-			float distance;
-
-			// Read data from file
-			iss >> distance;
-
-			// Set distance
-			_fe3d.misc_setLevelOfDetailDistance(distance);
-		}
 		else if(lineType == "PLANAR_REFLECTION_HEIGHT")
 		{
 			// Data placeholders

@@ -119,6 +119,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 		{
 			// Data placeholders
 			string modelID, meshPath, levelOfDetailEntityID;
+			float levelOfDetailDistance;
 			unsigned int rotationOrder;
 			bool isInstanced, isFaceCulled;
 			fvec3 size;
@@ -131,6 +132,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 				size.y >>
 				size.z >>
 				levelOfDetailEntityID >>
+				levelOfDetailDistance >>
 				isInstanced >>
 				isFaceCulled >>
 				rotationOrder;
@@ -303,6 +305,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 		{
 			// Data placeholders
 			string modelID, meshPath, levelOfDetailEntityID;
+			float levelOfDetailDistance;
 			unsigned int rotationOrder;
 			bool isInstanced, isFaceCulled;
 			fvec3 size;
@@ -315,6 +318,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 				size.y >>
 				size.z >>
 				levelOfDetailEntityID >>
+				levelOfDetailDistance >>
 				isInstanced >>
 				isFaceCulled >>
 				rotationOrder;
@@ -351,7 +355,8 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 				// Set properties
 				_fe3d.model_setVisible(modelID, false);
 				_fe3d.model_setBaseSize(modelID, size);
-				_fe3d.model_setLevelOfDetail(modelID, levelOfDetailEntityID);
+				_fe3d.model_setLevelOfDetailEntityID(modelID, levelOfDetailEntityID);
+				_fe3d.model_setLevelOfDetailDistance(modelID, levelOfDetailDistance);
 				_fe3d.model_setFaceCulled(modelID, isFaceCulled);
 				_fe3d.model_setRotationOrder(modelID, DirectionOrder(rotationOrder));
 

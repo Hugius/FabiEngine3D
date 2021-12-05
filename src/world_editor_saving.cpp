@@ -33,12 +33,12 @@ const bool WorldEditor::saveEditorWorldToFile()
 		if(modelID[0] != '@')
 		{
 			// Check if entity has level of detail model
-			if(!_fe3d.model_getLevelOfDetailID(modelID).empty())
+			if(!_fe3d.model_getLevelOfDetailEntityID(modelID).empty())
 			{
 				// Check if ID not already added to list
 				if(find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) == levelOfDetailEntityIDs.end())
 				{
-					levelOfDetailEntityIDs.push_back(_fe3d.model_getLevelOfDetailID(modelID));
+					levelOfDetailEntityIDs.push_back(_fe3d.model_getLevelOfDetailEntityID(modelID));
 				}
 			}
 		}
@@ -337,9 +337,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 	// Editor camera speed
 	file << "EDITOR_SPEED " << _editorSpeed << endl;
-
-	// Level of detail distance
-	file << "LOD_DISTANCE " << _fe3d.misc_getLevelOfDetailDistance() << endl;
 
 	// Reflection height
 	file << "PLANAR_REFLECTION_HEIGHT " << _fe3d.gfx_getPlanarReflectionHeight() << endl;

@@ -115,6 +115,9 @@
 - **Wireframed**: the mesh is rendered as a wireframe
   - Type: `boolean`
   - Constraints: none
+- **Frozen**: the XYZ position of the mesh is not affected by the camera position
+  - Type: `boolean`
+  - Constraints: none
 - **Textual**: the diffuse map is textual
   - Type: `boolean`
   - Constraints: none

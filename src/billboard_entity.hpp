@@ -148,8 +148,8 @@ private:
 	float _sizeTargetSpeed = 0.0f;
 	float _lightness = 1.0f;
 	float _transparency = 1.0f;
-	float _minHeight = -(numeric_limits<float>::max)();
-	float _maxHeight = (numeric_limits<float>::max)();
+	float _minHeight = numeric_limits<float>::lowest();
+	float _maxHeight = numeric_limits<float>::max();
 
 	// INT
 	int _maxSpriteAnimationLoops = 0;

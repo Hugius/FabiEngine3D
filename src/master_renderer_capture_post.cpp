@@ -6,7 +6,7 @@ void MasterRenderer::_captureWorldDepth()
 	// Temporary values
 	auto modelEntities = _entityBus->getModelEntities();
 	auto billboardEntities = _entityBus->getBillboardEntities();
-	float clippingY = -(numeric_limits<float>::max)();
+	float clippingY = numeric_limits<float>::lowest();
 	const bool waterDepthNeeded = (_entityBus->getWaterEntity() != nullptr) && (_entityBus->getWaterEntity()->getTransparency() > 0.0f);
 	bool isUnderWater = false;
 

@@ -127,7 +127,7 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 				auto absolsuteDistance = Math::calculateDistance(cameraPosition, entityPosition);
 
 				// Check if entity is farther than level of detail distance
-				bool isFarEnough = (absolsuteDistance > _levelOfDetailDistance) && (!entity->getLevelOfDetailEntityID().empty());
+				bool isFarEnough = (absolsuteDistance > entity->getLevelOfDetailDistance()) && (!entity->getLevelOfDetailEntityID().empty());
 				entity->setLevelOfDetailed(isFarEnough);
 			}
 
@@ -191,14 +191,4 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 			entity->updateTransformationMatrix();
 		}
 	}
-}
-
-void ModelEntityManager::setLevelOfDetailDistance(float distance)
-{
-	_levelOfDetailDistance = max(0.0f, distance);
-}
-
-const float ModelEntityManager::getLevelOfDetailDistance() const
-{
-	return _levelOfDetailDistance;
 }

@@ -10,7 +10,8 @@ void ModelEditor::_updateMiscellaneousMenu()
 	if(screen->getID() == "modelEditorMenuMiscellaneous")
 	{
 		// Temporary values
-		auto levelOfDetailEntityID = _fe3d.model_getLevelOfDetailID(_currentModelID);
+		auto levelOfDetailEntityID = _fe3d.model_getLevelOfDetailEntityID(_currentModelID);
+		auto levelOfDetailDistance = _fe3d.model_getLevelOfDetailDistance(_currentModelID);
 		auto isInstanced = _fe3d.model_isInstanced(_currentModelID);
 		auto isFaceCulled = _fe3d.model_isFaceCulled(_currentModelID);
 		auto rotationOrder = _fe3d.model_getRotationOrder(_currentModelID);
@@ -24,7 +25,11 @@ void ModelEditor::_updateMiscellaneousMenu()
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("levelOfDetailEntityID")->isHovered())
 		{
 			levelOfDetailEntityID = (levelOfDetailEntityID.empty()) ? levelOfDetailEntityID : levelOfDetailEntityID.substr(1, levelOfDetailEntityID.size() - 1);
-			_gui.getGlobalScreen()->createValueForm("levelOfDetailEntityID", "LOD entity ID", levelOfDetailEntityID, fvec2(0.0f, 0.1f), fvec2(0.4f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("levelOfDetailEntityID", "LOD Entity ID", levelOfDetailEntityID, fvec2(0.0f, 0.1f), fvec2(0.4f, 0.1f), fvec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("levelOfDetailDistance")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("levelOfDetailDistance", "Specular LOD Distance", levelOfDetailDistance, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isInstanced")->isHovered())
 		{
@@ -77,16 +82,20 @@ void ModelEditor::_updateMiscellaneousMenu()
 		{
 			if(levelOfDetailEntityID == "@") // No level of detail entity
 			{
-				_fe3d.model_setLevelOfDetail(_currentModelID, "");
+				_fe3d.model_setLevelOfDetailEntityID(_currentModelID, "");
 			}
 			else if(find(_loadedModelIDs.begin(), _loadedModelIDs.end(), ("@" + levelOfDetailEntityID)) == _loadedModelIDs.end()) // Check level of detail entity
 			{
-				Logger::throwWarning("Cannot find level of detail entity with ID \"" + levelOfDetailEntityID + "\"");
+				Logger::throwWarning("Cannot find LOD entity with ID \"" + levelOfDetailEntityID + "\"");
 			}
 			else // Set level of detail entity
 			{
-				_fe3d.model_setLevelOfDetail(_currentModelID, ("@" + levelOfDetailEntityID));
+				_fe3d.model_setLevelOfDetailEntityID(_currentModelID, ("@" + levelOfDetailEntityID));
 			}
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("levelOfDetailDistance", levelOfDetailDistance, {}))
+		{
+			_fe3d.model_setLevelOfDetailDistance(_currentModelID, levelOfDetailDistance);
 		}
 
 		// Update button text contents

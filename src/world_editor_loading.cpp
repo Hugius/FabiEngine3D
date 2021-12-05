@@ -483,17 +483,6 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				iss >> _editorSpeed;
 			}
 		}
-		else if(lineType == "LOD_DISTANCE")
-		{
-			// Data placeholders
-			float distance;
-
-			// Read data from file
-			iss >> distance;
-
-			// Set distance
-			_fe3d.misc_setLevelOfDetailDistance(distance);
-		}
 		else if(lineType == "PLANAR_REFLECTION_HEIGHT")
 		{
 			// Data placeholders

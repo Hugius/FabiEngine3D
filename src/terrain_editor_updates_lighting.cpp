@@ -46,7 +46,6 @@ void TerrainEditor::_updateLightingMenu()
 		// Update value forms
 		if(_gui.getGlobalScreen()->checkValueForm("specularShininess", specularShininess))
 		{
-			specularShininess = min(256.0f, specularShininess);
 			_fe3d.terrain_setSpecularShininess(_currentTerrainID, specularShininess);
 		}
 		if(_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))

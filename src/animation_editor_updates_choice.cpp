@@ -46,7 +46,10 @@ void AnimationEditor::_updateChoiceMenu()
 					}
 
 					// Disable wireframed rendering
-					_fe3d.model_setWireframed(currentAnimation->getPreviewModelID(), partID, false);
+					if (!partID.empty() || (currentAnimation->getPartIDs().size() == 1))
+					{
+						_fe3d.model_setWireframed(currentAnimation->getPreviewModelID(), partID, false);
+					}
 				}
 			}
 

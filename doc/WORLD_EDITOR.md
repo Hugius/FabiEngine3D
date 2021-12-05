@@ -77,14 +77,9 @@
 
 ## 12. Settings
 
-- **Editor Speed**: the speed for camera movement and value changing.
-  - Constraints: `0` to `inf`
+- **Editor Speed**: the speed of the world editor
+  - Constraints: at least `0`
 - **LOD Distance**: the minimum distance by which LOD models will appear/disappear.
   - Constraints: `0` to `inf`
 - **Planar Height**: the Y coordinate from where planar reflections are captured.
-  - Constraints: `-inf` to `inf`
-- **Audio**: the amount of allocated audio channels
-  - Type: `integer`
-  - Constraints: between `64` and `512`
-- **Billboard Size**: ??????????????
   - Constraints: `-inf` to `inf`

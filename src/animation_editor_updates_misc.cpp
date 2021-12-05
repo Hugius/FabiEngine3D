@@ -92,7 +92,7 @@ void AnimationEditor::_updateMiscellaneous()
 				_fe3d.misc_enableDebugRendering();
 			}
 		}
-
+		
 		// Update wireframe model rendering
 		if(!_currentAnimationID.empty())
 		{
@@ -108,13 +108,16 @@ void AnimationEditor::_updateMiscellaneous()
 					// For every part
 					for(const auto& partID : animation->getPartIDs())
 					{
-						if(_fe3d.model_isWireframed(animation->getPreviewModelID(), partID))
+						if (!partID.empty() || (animation->getPartIDs().size() == 1))
 						{
-							_fe3d.model_setWireframed(animation->getPreviewModelID(), partID, false);
-						}
-						else
-						{
-							_fe3d.model_setWireframed(animation->getPreviewModelID(), partID, true);
+							if (_fe3d.model_isWireframed(animation->getPreviewModelID(), partID))
+							{
+								_fe3d.model_setWireframed(animation->getPreviewModelID(), partID, false);
+							}
+							else
+							{
+								_fe3d.model_setWireframed(animation->getPreviewModelID(), partID, true);
+							}
 						}
 					}
 				}

@@ -54,6 +54,28 @@ const bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 		// Create default frame
 		AnimationFrame defaultFrame;
 
+		// Add default part
+		newAnimation->addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
+		defaultFrame.addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
+
+		// Add custom parts
+		auto partIDs = _fe3d.model_getPartIDs(previewModelID);
+		if (partIDs.size() > 1)
+		{
+			// Iterate through parts
+			for (const auto& partID : partIDs)
+			{
+				// Add part to animation
+				newAnimation->addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
+
+				// Add part to frame
+				defaultFrame.addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
+			}
+		}
+
+		// Add default frame to animation
+		newAnimation->addFrame(defaultFrame);
+
 		// Check if there is any more content in line
 		string temp;
 		if(iss >> temp)
@@ -119,9 +141,6 @@ const bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 					break;
 				}
 			}
-
-			// Add default frame to animation
-			newAnimation->addFrame(defaultFrame);
 
 			// Add custom frames to animation
 			for(const auto& customFrame : customFrames)

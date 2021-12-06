@@ -335,7 +335,7 @@ public:
 	const ReflectionType model_getReflectionType(const string& ID, const string& partID) const;
 	const DirectionOrder model_getRotationOrder(const string& ID) const;
 
-	// MODEL - setters
+	// BILLBOARD - setters
 	void billboard_create(const string& ID);
 	void billboard_deleteAll();
 	void billboard_delete(const string& ID);
@@ -380,7 +380,7 @@ public:
 	void billboard_setWireframed(const string& ID, bool value);
 	void billboard_setFrozen(const string& ID, bool value);
 
-	// MODEL - getters
+	// BILLBOARD - getters
 	const vector<string> billboard_getAllIDs() const;
 	const string& billboard_getDiffuseMapPath(const string& ID) const;
 	const string& billboard_getEmissionMapPath(const string& ID) const;
@@ -418,6 +418,7 @@ public:
 	const bool billboard_hasDiffuseMap(const string& ID) const;
 	const bool billboard_hasEmissionMap(const string& ID) const;
 	const bool billboard_isTextual(const string& ID) const;
+	const bool billboard_isFrozen(const string& ID) const;
 
 	// AABB - setters
 	void aabb_create(const string& ID);

@@ -55,7 +55,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 
 const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& ID, bool canBeOccluded)
 {
-	// Check whether the AABB can be raycasted if it's occluded by another AABB
+	// Check whether the AABB can be raycasted if it is occluded by another AABB
 	if(canBeOccluded)
 	{
 		// Check if raycasting needs to be updated
@@ -102,7 +102,7 @@ const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& 
 
 const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(const string& ID, bool canBeOccluded)
 {
-	// Check whether the AABB can be raycasted if it's occluded by another AABB
+	// Check whether the AABB can be raycasted if it is occluded by another AABB
 	if(canBeOccluded)
 	{
 		// Check if raycasting needs to be updated

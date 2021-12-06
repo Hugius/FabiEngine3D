@@ -188,7 +188,7 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 						}
 						else
 						{
-							// Follow parent's visibility
+							// Follow parent visibility
 							if(entity->mustFollowParentEntityVisibility())
 							{
 								entity->setVisible(parentEntity->isVisible());
@@ -268,9 +268,17 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 					}
 
 					// Update visibility
-					if(entity->mustFollowParentEntityVisibility())
+					if (parentEntity->isFrozen())
 					{
-						entity->setVisible(parentEntity->isVisible());
+						entity->setVisible(false);
+					}
+					else
+					{
+						// Follow parent visibility
+						if (entity->mustFollowParentEntityVisibility())
+						{
+							entity->setVisible(parentEntity->isVisible());
+						}
 					}
 				}
 				else

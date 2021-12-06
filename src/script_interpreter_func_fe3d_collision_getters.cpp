@@ -61,7 +61,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 							partID = partID.substr(0, partID.find('@'));
 							reverse(partID.begin(), partID.end());
 
-							// Check if AABB part ID's match
+							// Check if AABB part IDs match
 							if(partID == arguments[1].getString())
 							{
 								result = _fe3d.aabb_getParentID(foundAabbID);
@@ -330,7 +330,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 								partID = partID.substr(0, partID.find('@'));
 								reverse(partID.begin(), partID.end());
 
-								// Check if AABB part ID's match
+								// Check if AABB part IDs match
 								if(partID == arguments[1].getString())
 								{
 									result = foundAabbID;
@@ -375,7 +375,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 							partID = partID.substr(0, partID.find('@'));
 							reverse(partID.begin(), partID.end());
 
-							// Check if AABB part ID's match
+							// Check if AABB part IDs match
 							if(partID == arguments[1].getString())
 							{
 								result = foundAabbID;

@@ -23,7 +23,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 	vector<ScriptConditionStatement> conditionStatements;
 	unsigned int scopeDepth = 0;
 
-	// Prepare current script file's execution
+	// Prepare current script file execution
 	_executionDepth++;
 	_currentScriptIDsStack.push_back(scriptID);
 	_currentLineIndexStack.push_back(0);
@@ -103,7 +103,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				}
 				else // Normal loop
 				{
-					// Go back to current loop's beginning
+					// Go back to current loop beginning
 					lineIndex = loopLineIndices.back();
 					scopeDepth = (loopScopeDepths.back() + 1);
 					loopIterationCounts.back()++;
@@ -119,7 +119,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				}
 				else // Normal loop
 				{
-					isEndOfLoop = true; // Go back to current loop's beginning after executing current scriptline
+					isEndOfLoop = true; // Go back to current loop beginning after executing current scriptline
 				}
 			}
 		}
@@ -241,9 +241,9 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			// Check if "loop" statement ends with colon
 			if(scriptLineText == (LOOP_KEYWORD + ":"))
 			{
-				loopScopeDepths.push_back(scopeDepth); // Save loop's scope depth
-				loopLineIndices.push_back(lineIndex); // Save loop's line index
-				loopIterationCounts.push_back(0); // Save loop's iteration count
+				loopScopeDepths.push_back(scopeDepth); // Save loop scope depth
+				loopLineIndices.push_back(lineIndex); // Save loop line index
+				loopIterationCounts.push_back(0); // Save loop iteration count
 				scopeDepth++; // New depth layer
 				_hasPassedLoopStatement = true;
 			}
@@ -422,7 +422,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			}
 			else // Normal loop
 			{
-				// Go back to current loop's beginning
+				// Go back to current loop beginning
 				lineIndex = loopLineIndices.back();
 				scopeDepth = (loopScopeDepths.back() + 1);
 				loopIterationCounts.back()++;
@@ -465,7 +465,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 	}
 
-	// Finish current script file's execution
+	// Finish current script file execution
 	_currentScriptIDsStack.pop_back();
 	_currentLineIndexStack.pop_back();
 	_localVariables.erase(_executionDepth);

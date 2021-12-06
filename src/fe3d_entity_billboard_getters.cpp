@@ -158,6 +158,11 @@ const bool FabiEngine3D::billboard_isTextual(const string& ID) const
 	return _core->_billboardEntityManager.getEntity(ID)->isTextual();
 }
 
+const bool FabiEngine3D::billboard_isFrozen(const string& ID) const
+{
+	return _core->_billboardEntityManager.getEntity(ID)->isFrozen();
+}
+
 const bool FabiEngine3D::billboard_isWireframed(const string& ID) const
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isWireframed();

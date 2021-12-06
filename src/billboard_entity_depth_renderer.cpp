@@ -58,6 +58,7 @@ void BillboardEntityDepthRenderer::render(const shared_ptr<BillboardEntity> enti
 		}
 
 		// Shader uniforms
+		_shader.uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
 		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());

@@ -7,7 +7,6 @@ void BillboardEntityColorRenderer::bind()
 	_shader.bind();
 
 	// Shader uniforms
-	_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
 	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_clippingPlane", _renderBus.getClippingPlane());
 	_shader.uploadUniform("u_cameraPosition", _renderBus.getCameraPosition());
@@ -78,6 +77,7 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 		}
 
 		// Shader uniforms
+		_shader.uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
 		_shader.uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus.isWireframeRenderingEnabled()));
 		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
 		_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap());

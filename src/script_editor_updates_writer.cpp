@@ -370,7 +370,7 @@ void ScriptEditor::_updateTextWriter()
 								// Check if not trying to remove default line
 								if(cursorLineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
 								{
-									// Save next line's textLove
+									// Save text of next line
 									string textToMerge = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex + 1);
 
 									// Check if lines together is not exceeding the character limit

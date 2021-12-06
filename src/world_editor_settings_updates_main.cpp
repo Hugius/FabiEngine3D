@@ -10,9 +10,6 @@ void WorldEditor::_updateSettingsMenu()
 	// Screen management
 	if(screen->getID() == "worldEditorMenuSettings")
 	{
-		// Temporary values
-		auto reflectionHeight = _fe3d.gfx_getPlanarReflectionHeight();
-
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
@@ -31,19 +28,11 @@ void WorldEditor::_updateSettingsMenu()
 		{
 			_gui.getGlobalScreen()->createValueForm("editorSpeed", "Editor Speed", _editorSpeed, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("planarHeight")->isHovered())
-		{
-			_gui.getGlobalScreen()->createValueForm("planarHeight", "Planar Reflection Height", reflectionHeight, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-		}
 
 		// Update value forms
 		if(_gui.getGlobalScreen()->checkValueForm("editorSpeed", _editorSpeed, {}))
 		{
 			_editorSpeed = max(0.0f, _editorSpeed);
-		}
-		if(_gui.getGlobalScreen()->checkValueForm("planarHeight", reflectionHeight, {}))
-		{
-			_fe3d.gfx_setPlanarReflectionHeight(reflectionHeight);
 		}
 	}
 }

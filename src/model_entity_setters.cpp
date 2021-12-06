@@ -8,7 +8,7 @@ using std::clamp;
 
 void ModelEntity::createPart(const string& ID)
 {
-	_parts.push_back(PartData(ID));
+	_parts.push_back(ModelEntityPart(ID));
 }
 
 void ModelEntity::updateTransformation()

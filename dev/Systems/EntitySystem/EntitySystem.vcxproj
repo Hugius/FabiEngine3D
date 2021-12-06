@@ -59,6 +59,7 @@
     <ClInclude Include="..\..\..\src\entity_bus.hpp" />
     <ClInclude Include="..\..\..\src\image_entity.hpp" />
     <ClInclude Include="..\..\..\src\image_entity_manager.hpp" />
+    <ClInclude Include="..\..\..\src\model_entity_part.hpp" />
     <ClInclude Include="..\..\..\src\pointlight_entity.hpp" />
     <ClInclude Include="..\..\..\src\pointlight_entity_manager.hpp" />
     <ClInclude Include="..\..\..\src\model_entity.hpp" />

@@ -487,18 +487,6 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				iss >> _editorSpeed;
 			}
 		}
-		else if(lineType == "PLANAR_REFLECTION_HEIGHT")
-		{
-			// Data placeholders
-			float height;
-
-			// Read data from file
-			iss >>
-				height;
-
-			// Set height
-			_fe3d.gfx_setPlanarReflectionHeight(height);
-		}
 		else if(lineType == "LIGHTING_AMBIENT")
 		{
 			// Data placeholders

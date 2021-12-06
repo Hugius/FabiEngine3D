@@ -108,9 +108,6 @@
 - **LOD Distance**: the minimum distance by which the LOD entity will appear/disappear
   - Type: `decimal`
   - Constraints: at least `0`
-- **Planar Height**: the Y coordinate from which planar reflections are captured
-  - Type: `decimal`
-  - Constraints: none
 - **Specular**: specular lighting is rendered on the mesh
   - Type: `boolean`
   - Constraints: none

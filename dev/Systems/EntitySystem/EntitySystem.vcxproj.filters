@@ -188,5 +188,8 @@
     <ClInclude Include="..\..\..\src\spotlight_entity_manager.hpp">
       <Filter>Managers\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\model_entity_part.hpp">
+      <Filter>Data Structures\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

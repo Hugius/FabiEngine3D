@@ -554,9 +554,6 @@ const bool WorldEditor::saveCustomWorldToFile()
 		}
 	}
 
-	// Planar reflection height
-	file << "PLANAR_REFLECTION_HEIGHT " << _fe3d.gfx_getPlanarReflectionHeight() << endl;
-
 	// Check if allowed to save
 	if(_hasCustomWorldLighting)
 	{

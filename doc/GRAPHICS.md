@@ -86,6 +86,9 @@
 
 #### 1.7.2 Properties
 
+- **Height**: the Y coordinate from which planar reflections are captured
+  - Type: `decimal`
+  - Constraints: none
 - **Quality**: the quality of planar refractions
   - Type: `integer`
   - Constraints: between `128` and `1024`

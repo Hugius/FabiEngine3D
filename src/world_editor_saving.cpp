@@ -338,9 +338,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 	// Editor camera speed
 	file << "EDITOR_SPEED " << _editorSpeed << endl;
 
-	// Reflection height
-	file << "PLANAR_REFLECTION_HEIGHT " << _fe3d.gfx_getPlanarReflectionHeight() << endl;
-
 	// Ambient lighting
 	if(_fe3d.gfx_isAmbientLightingEnabled())
 	{

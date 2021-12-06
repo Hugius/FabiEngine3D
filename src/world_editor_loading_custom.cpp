@@ -575,18 +575,6 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 			_fe3d.reflection_capture(reflectionID);
 			_loadedReflectionIDs.push_back(reflectionID);
 		}
-		else if(lineType == "PLANAR_REFLECTION_HEIGHT")
-		{
-			// Data placeholders
-			float height;
-
-			// Read data from file
-			iss >>
-				height;
-
-			// Set height
-			_fe3d.gfx_setPlanarReflectionHeight(height);
-		}
 		else if(lineType == "LIGHTING_AMBIENT")
 		{
 			// Data placeholders

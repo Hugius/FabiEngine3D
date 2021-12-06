@@ -30,6 +30,7 @@
     <ClCompile Include="..\..\..\src\dof_renderer.cpp" />
     <ClCompile Include="..\..\..\src\lens_flare_renderer.cpp" />
     <ClCompile Include="..\..\..\src\master_renderer_capture_misc.cpp" />
+    <ClCompile Include="..\..\..\src\master_renderer_capture_capture_planar.cpp" />
     <ClCompile Include="..\..\..\src\master_renderer_capture_reflection_water.cpp" />
     <ClCompile Include="..\..\..\src\model_entity_depth_renderer.cpp" />
     <ClCompile Include="..\..\..\src\motion_blur_renderer.cpp" />

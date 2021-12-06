@@ -144,6 +144,9 @@
     <ClCompile Include="..\..\..\src\master_renderer_capture_reflection_water.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\master_renderer_capture_capture_planar.cpp">
+      <Filter>Master Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\capture_buffer.hpp">

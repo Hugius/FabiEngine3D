@@ -12,7 +12,7 @@ EngineGuiWriteField::EngineGuiWriteField(FabiEngine3D& fe3d, const string& paren
 	_noLetters(noLetters),
 	_minusAllowed(minusAllowed)
 {
-	_fe3d.text_setTextContent(_textField->getEntityID(), "|", CHAR_WIDTH);
+	_fe3d.text_setContent(_textField->getEntityID(), "|", CHAR_WIDTH);
 }
 
 void EngineGuiWriteField::update(bool hoverable)
@@ -216,7 +216,7 @@ void EngineGuiWriteField::_updateTyping()
 		}
 
 		// Update text content with or without bar
-		_fe3d.text_setTextContent(_textField->getEntityID(), _currentTextContent + (barEnabled ? "|" : " "), CHAR_WIDTH);
+		_fe3d.text_setContent(_textField->getEntityID(), _currentTextContent + (barEnabled ? "|" : " "), CHAR_WIDTH);
 
 		// Input confirmation
 		if(_fe3d.input_isKeyPressed(InputType::KEY_ENTER))
@@ -231,7 +231,7 @@ void EngineGuiWriteField::_updateTyping()
 	else
 	{
 		// Update text content
-		_fe3d.text_setTextContent(_textField->getEntityID(), _currentTextContent, CHAR_WIDTH);
+		_fe3d.text_setContent(_textField->getEntityID(), _currentTextContent, CHAR_WIDTH);
 		_confirmedInput = false;
 	}
 }

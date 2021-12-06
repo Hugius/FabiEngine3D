@@ -80,57 +80,57 @@ void FabiEngine3D::camera_move(fvec3 speed)
 	_core->_camera.move(speed);
 }
 
-void FabiEngine3D::camera_setPosition(fvec3 position)
+void FabiEngine3D::camera_setPosition(fvec3 value)
 {
-	_core->_camera.setPosition(position);
+	_core->_camera.setPosition(value);
 }
 
-void FabiEngine3D::camera_setThirdPersonLookat(fvec3 position)
+void FabiEngine3D::camera_setThirdPersonLookat(fvec3 value)
 {
-	_core->_camera.setThirdPersonLookat(position);
+	_core->_camera.setThirdPersonLookat(value);
 }
 
-void FabiEngine3D::camera_setFOV(float angle)
+void FabiEngine3D::camera_setFOV(float value)
 {
-	_core->_camera.setFOV(angle);
+	_core->_camera.setFOV(value);
 }
 
-void FabiEngine3D::camera_setCursorSensitivity(float speed)
+void FabiEngine3D::camera_setCursorSensitivity(float value)
 {
-	_core->_camera.setCursorSensitivity(speed);
+	_core->_camera.setCursorSensitivity(value);
 }
 
-void FabiEngine3D::camera_setYaw(float angle)
+void FabiEngine3D::camera_setYaw(float value)
 {
-	_core->_camera.setYaw(angle);
+	_core->_camera.setYaw(value);
 }
 
-void FabiEngine3D::camera_setPitch(float angle)
+void FabiEngine3D::camera_setPitch(float value)
 {
-	_core->_camera.setPitch(angle);
+	_core->_camera.setPitch(value);
 }
 
-void FabiEngine3D::camera_setMinFirstPersonPitch(float angle)
+void FabiEngine3D::camera_setMinFirstPersonPitch(float value)
 {
-	_core->_camera.setMinFirstPersonPitch(angle);
+	_core->_camera.setMinFirstPersonPitch(value);
 }
 
-void FabiEngine3D::camera_setMaxFirstPersonPitch(float angle)
+void FabiEngine3D::camera_setMaxFirstPersonPitch(float value)
 {
-	_core->_camera.setMaxFirstPersonPitch(angle);
+	_core->_camera.setMaxFirstPersonPitch(value);
 }
 
-void FabiEngine3D::camera_setMinThirdPersonPitch(float angle)
+void FabiEngine3D::camera_setMinThirdPersonPitch(float value)
 {
-	_core->_camera.setMinThirdPersonPitch(angle);
+	_core->_camera.setMinThirdPersonPitch(value);
 }
 
-void FabiEngine3D::camera_setMaxThirdPersonPitch(float angle)
+void FabiEngine3D::camera_setMaxThirdPersonPitch(float value)
 {
-	_core->_camera.setMaxThirdPersonPitch(angle);
+	_core->_camera.setMaxThirdPersonPitch(value);
 }
 
-void FabiEngine3D::camera_setThirdPersonDistance(float distance)
+void FabiEngine3D::camera_setThirdPersonDistance(float value)
 {
-	_core->_camera.setThirdPersonDistance(distance);
+	_core->_camera.setThirdPersonDistance(value);
 }

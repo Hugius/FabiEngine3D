@@ -15,7 +15,7 @@ EngineGuiTextField::EngineGuiTextField(FabiEngine3D& fe3d, const string& parentI
 	_fe3d.text_setSize(_entityID, size);
 	_fe3d.text_setColor(_entityID, color);
 	_fe3d.text_setFont(_entityID, "engine\\assets\\fonts\\font.ttf");
-	_fe3d.text_setTextContent(_entityID, textContent);
+	_fe3d.text_setContent(_entityID, textContent);
 }
 
 EngineGuiTextField::~EngineGuiTextField()
@@ -31,11 +31,11 @@ void EngineGuiTextField::setVisible(bool isVisible)
 void EngineGuiTextField::changeTextContent(const string& content)
 {
 	// Check if text content changed
-	if(content != _fe3d.text_getTextContent(_entityID))
+	if(content != _fe3d.text_getContent(_entityID))
 	{
-		auto charWidth = (_initialSize.x / static_cast<float>(_fe3d.text_getTextContent(_entityID).size()));
+		auto charWidth = (_initialSize.x / static_cast<float>(_fe3d.text_getContent(_entityID).size()));
 		auto charHeight = _initialSize.y;
-		_fe3d.text_setTextContent(_entityID, content, charWidth, charHeight);
+		_fe3d.text_setContent(_entityID, content, charWidth, charHeight);
 		updateInitialSize();
 	}
 }

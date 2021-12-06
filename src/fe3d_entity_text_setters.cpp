@@ -24,22 +24,22 @@ void FabiEngine3D::text_delete(const string& ID)
 	}
 }
 
-void FabiEngine3D::text_setVisible(const string& ID, bool isVisible)
+void FabiEngine3D::text_setVisible(const string& ID, bool value)
 {
-	_core->_textEntityManager.getEntity(ID)->setVisible(isVisible);
+	_core->_textEntityManager.getEntity(ID)->setVisible(value);
 }
 
-void FabiEngine3D::text_setFont(const string& ID, const string& fontPath)
+void FabiEngine3D::text_setFont(const string& ID, const string& value)
 {
 	// Temporary values
 	auto entity = _core->_textEntityManager.getEntity(ID);
 
 	// Set font
-	entity->setFontPath(fontPath);
+	entity->setFontPath(value);
 
 	// Load text
-	auto textContent = entity->getTextContent();
-	if(!textContent.empty())
+	auto content = entity->getContent();
+	if(!content.empty())
 	{
 		if(entity->isDynamic())
 		{
@@ -47,12 +47,12 @@ void FabiEngine3D::text_setFont(const string& ID, const string& fontPath)
 		}
 		else
 		{
-			entity->setDiffuseMap(_core->_textureLoader.loadTexture2D(textContent, fontPath));
+			entity->setDiffuseMap(_core->_textureLoader.loadTexture2D(content, value));
 		}
 	}
 }
 
-void FabiEngine3D::text_setTextContent(const string& ID, const string& textContent, float charWidth, float charHeight)
+void FabiEngine3D::text_setContent(const string& ID, const string& value, float charWidth, float charHeight)
 {
 	// Temporary values
 	auto entity = _core->_textEntityManager.getEntity(ID);
@@ -66,13 +66,13 @@ void FabiEngine3D::text_setTextContent(const string& ID, const string& textConte
 	}
 
 	// Set new text
-	entity->setTextContent(textContent);
+	entity->setContent(value);
 
 	// Calculate new size
 	fvec2 newSize = entity->getSize();
 	if(charWidth >= 0.0f)
 	{
-		newSize.x = (charWidth * static_cast<float>(textContent.size()));
+		newSize.x = (charWidth * static_cast<float>(value.size()));
 	}
 	if(charHeight >= 0.0f)
 	{
@@ -87,33 +87,33 @@ void FabiEngine3D::text_setTextContent(const string& ID, const string& textConte
 	}
 	else
 	{
-		entity->setDiffuseMap(_core->_textureLoader.loadTexture2D(textContent, entity->getFontPath()));
+		entity->setDiffuseMap(_core->_textureLoader.loadTexture2D(value, entity->getFontPath()));
 	}
 }
 
-void FabiEngine3D::text_setColor(const string& ID, fvec3 color)
+void FabiEngine3D::text_setColor(const string& ID, fvec3 value)
 {
-	_core->_textEntityManager.getEntity(ID)->setColor(color);
+	_core->_textEntityManager.getEntity(ID)->setColor(value);
 }
 
-void FabiEngine3D::text_setTransparency(const string& ID, float transparency)
+void FabiEngine3D::text_setTransparency(const string& ID, float value)
 {
-	_core->_textEntityManager.getEntity(ID)->setTransparency(transparency);
+	_core->_textEntityManager.getEntity(ID)->setTransparency(value);
 }
 
-void FabiEngine3D::text_setPosition(const string& ID, fvec2 position)
+void FabiEngine3D::text_setPosition(const string& ID, fvec2 value)
 {
-	_core->_textEntityManager.getEntity(ID)->setPosition(position);
+	_core->_textEntityManager.getEntity(ID)->setPosition(value);
 }
 
-void FabiEngine3D::text_setRotation(const string& ID, float rotation)
+void FabiEngine3D::text_setRotation(const string& ID, float value)
 {
-	_core->_textEntityManager.getEntity(ID)->setRotation(rotation);
+	_core->_textEntityManager.getEntity(ID)->setRotation(value);
 }
 
-void FabiEngine3D::text_setSize(const string& ID, fvec2 size)
+void FabiEngine3D::text_setSize(const string& ID, fvec2 value)
 {
-	_core->_textEntityManager.getEntity(ID)->setSize(size);
+	_core->_textEntityManager.getEntity(ID)->setSize(value);
 }
 
 void FabiEngine3D::text_move(const string& ID, fvec2 position)
@@ -146,32 +146,32 @@ void FabiEngine3D::text_scaleTo(const string& ID, fvec2 target, float speed)
 	_core->_textEntityManager.getEntity(ID)->scaleTo(target, speed);
 }
 
-void FabiEngine3D::text_setMirroredHorizontally(const string& ID, bool mirrored)
+void FabiEngine3D::text_setMirroredHorizontally(const string& ID, bool value)
 {
-	_core->_textEntityManager.getEntity(ID)->setMirroredHorizontally(mirrored);
+	_core->_textEntityManager.getEntity(ID)->setMirroredHorizontally(value);
 }
 
-void FabiEngine3D::text_setMirroredVertically(const string& ID, bool mirrored)
+void FabiEngine3D::text_setMirroredVertically(const string& ID, bool value)
 {
-	_core->_textEntityManager.getEntity(ID)->setMirroredVertically(mirrored);
+	_core->_textEntityManager.getEntity(ID)->setMirroredVertically(value);
 }
 
-void FabiEngine3D::text_setWireframed(const string& ID, bool enabled)
+void FabiEngine3D::text_setWireframed(const string& ID, bool value)
 {
-	_core->_textEntityManager.getEntity(ID)->setWireframed(enabled);
+	_core->_textEntityManager.getEntity(ID)->setWireframed(value);
 }
 
-void FabiEngine3D::text_setWireframeColor(const string& ID, fvec3 color)
+void FabiEngine3D::text_setWireframeColor(const string& ID, fvec3 value)
 {
-	_core->_textEntityManager.getEntity(ID)->setWireframeColor(color);
+	_core->_textEntityManager.getEntity(ID)->setWireframeColor(value);
 }
 
-void FabiEngine3D::text_setMinPosition(const string& ID, fvec2 minPos)
+void FabiEngine3D::text_setMinPosition(const string& ID, fvec2 value)
 {
-	_core->_textEntityManager.getEntity(ID)->setMinPosition(minPos);
+	_core->_textEntityManager.getEntity(ID)->setMinPosition(value);
 }
 
-void FabiEngine3D::text_setMaxPosition(const string& ID, fvec2 maxPos)
+void FabiEngine3D::text_setMaxPosition(const string& ID, fvec2 value)
 {
-	_core->_textEntityManager.getEntity(ID)->setMaxPosition(maxPos);
+	_core->_textEntityManager.getEntity(ID)->setMaxPosition(value);
 }

@@ -23,7 +23,7 @@ void WorldEditor::_selectModel(const string& ID)
 		string rawID = tempID.substr(tempID.find('_') + 1);
 		reverse(rawID.begin(), rawID.end());
 		_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), true);
-		_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), "Selected model: " + rawID, 0.025f);
+		_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), "Selected model: " + rawID, 0.025f);
 	}
 }
 
@@ -47,7 +47,7 @@ void WorldEditor::_selectBillboard(const string& ID)
 		string rawID = tempID.substr(tempID.find('_') + 1);
 		reverse(rawID.begin(), rawID.end());
 		_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), true);
-		_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), "Selected billboard: " + rawID, 0.025f);
+		_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), "Selected billboard: " + rawID, 0.025f);
 	}
 }
 
@@ -68,7 +68,7 @@ void WorldEditor::_selectSound(const string& ID)
 		string rawID = tempID.substr(tempID.find('_') + 1);
 		reverse(rawID.begin(), rawID.end());
 		_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), true);
-		_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), "Selected sound: " + rawID, 0.025f);
+		_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), "Selected sound: " + rawID, 0.025f);
 	}
 }
 

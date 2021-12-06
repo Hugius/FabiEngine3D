@@ -269,7 +269,8 @@ const bool WorldEditor::_copyPreviewModel(const string& newID, const string& pre
 	{
 		const string newAabbID = (newID + "@" + previewAabbID.substr(string(previewID + "_").size()));
 		_fe3d.aabb_create(newAabbID);
-		_fe3d.aabb_setParent(newAabbID, newID, AabbParentEntityType::MODEL);
+		_fe3d.aabb_setParentEntityID(newAabbID, newID);
+		_fe3d.aabb_setParentEntityType(newAabbID, AabbParentEntityType::MODEL);
 		_fe3d.aabb_setLocalPosition(newAabbID, _fe3d.aabb_getPosition(previewAabbID));
 		_fe3d.aabb_setLocalSize(newAabbID, _fe3d.aabb_getSize(previewAabbID));
 	}
@@ -314,7 +315,8 @@ const bool WorldEditor::_copyPreviewBillboard(const string& newID, const string&
 
 	// Bind AABB entity
 	_fe3d.aabb_create(newID);
-	_fe3d.aabb_setParent(newID, newID, AabbParentEntityType::BILLBOARD);
+	_fe3d.aabb_setParentEntityID(newID, newID);
+	_fe3d.aabb_setParentEntityType(newID, AabbParentEntityType::BILLBOARD);
 
 	// Diffuse map
 	if(_fe3d.billboard_hasDiffuseMap(previewID) && !_fe3d.billboard_isTextual(previewID))

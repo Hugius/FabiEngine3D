@@ -40,9 +40,9 @@ void Raycaster::update(ivec2 cursorPosition)
 	}
 }
 
-void Raycaster::setTerrainPointingEnabled(bool enabled)
+void Raycaster::setTerrainPointingEnabled(bool value)
 {
-	_isTerrainPointingEnabled = enabled;
+	_isTerrainPointingEnabled = value;
 }
 
 void Raycaster::setTerrainPointingDistance(float distance)

@@ -98,7 +98,7 @@ void WorldEditor::_updateBillboardPlacingMenu()
 						_fe3d.billboard_setPosition(_currentPreviewBillboardID, fvec3(0.0f));
 						_fe3d.billboard_setVisible(_currentPreviewBillboardID, true);
 						_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), true);
-						_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), "Billboard: " + _currentPreviewBillboardID.substr(1), 0.025f);
+						_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), "Billboard: " + _currentPreviewBillboardID.substr(1), 0.025f);
 						_fe3d.misc_centerCursor();
 
 						// Add position value forms for placing without terrain

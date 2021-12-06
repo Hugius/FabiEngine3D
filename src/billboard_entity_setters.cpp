@@ -370,3 +370,8 @@ void BillboardEntity::setEmissionIntensity(float value)
 {
 	_emissionIntensity = value;
 }
+
+void BillboardEntity::setFrozen(bool value)
+{
+	_isFrozen = value;
+}

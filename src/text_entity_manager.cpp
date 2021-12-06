@@ -42,15 +42,15 @@ void TextEntityManager::loadCharacters(const string& ID)
 	auto entity = getEntity(ID);
 
 	// Check if text content changed
-	if((_textContentMap.find(ID) == _textContentMap.end()) || (entity->getTextContent() != _textContentMap[ID]))
+	if((_contentMap.find(ID) == _contentMap.end()) || (entity->getContent() != _contentMap[ID]))
 	{
 		// Temporary values
 		bool isInvalidFont = false;
-		_textContentMap[ID] = entity->getTextContent();
+		_contentMap[ID] = entity->getContent();
 		entity->deleteCharacterEntities();
 
 		// For every character
-		for(const auto& c : entity->getTextContent())
+		for(const auto& c : entity->getContent())
 		{
 			if(!isInvalidFont)
 			{
@@ -59,15 +59,15 @@ void TextEntityManager::loadCharacters(const string& ID)
 				newCharacter->setRenderBuffer(_nonCenteredRenderBuffer);
 
 				// Load text map
-				string textContent = "";
-				textContent += c;
-				auto texture = _textureLoader.loadTexture2D(textContent, entity->getFontPath());
+				string content = "";
+				content += c;
+				auto texture = _textureLoader.loadTexture2D(content, entity->getFontPath());
 
 				// Check if font loading went well
 				if(texture != 0)
 				{
 					newCharacter->setDiffuseMap(texture);
-					entity->createCharacterEntity(newCharacter);
+					entity->addCharacterEntity(newCharacter);
 				}
 				else
 				{
@@ -83,7 +83,7 @@ void TextEntityManager::loadCharacters(const string& ID)
 
 void TextEntityManager::deleteDynamicTextEntity(const string& ID)
 {
-	_textContentMap.erase(ID);
+	_contentMap.erase(ID);
 	deleteEntity(ID);
 }
 

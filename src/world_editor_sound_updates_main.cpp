@@ -106,7 +106,7 @@ void WorldEditor::_updateSoundPlacingMenu()
 					_fe3d.sound3D_setPosition(_currentPreviewSoundID, fvec3(0.0f));
 					_fe3d.sound3D_play(_currentPreviewSoundID, -1, 0, false);
 					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), true);
-					_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), "Sound: " + _currentPreviewSoundID.substr(1), 0.025f);
+					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), "Sound: " + _currentPreviewSoundID.substr(1), 0.025f);
 					_fe3d.misc_centerCursor();
 
 					// Add position value forms for placing without terrain

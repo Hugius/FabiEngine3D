@@ -14,56 +14,56 @@ void FabiEngine3D::sky_deleteAll()
 	}
 }
 
-void FabiEngine3D::sky_setCubeMaps(const string& ID, const array<string, 6>& texturePaths)
+void FabiEngine3D::sky_setCubeMaps(const string& ID, const array<string, 6>& value)
 {
+	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_textureLoader.loadTexture3D(value));
+	_core->_skyEntityManager.getEntity(ID)->setCubeMapPaths(value);
+}
+
+void FabiEngine3D::sky_setCubeMapRight(const string& ID, const string& value)
+{
+	auto texturePaths = _core->_skyEntityManager.getEntity(ID)->getCubeMapPaths();
+	texturePaths[0] = value;
 	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_textureLoader.loadTexture3D(texturePaths));
 	_core->_skyEntityManager.getEntity(ID)->setCubeMapPaths(texturePaths);
 }
 
-void FabiEngine3D::sky_setCubeMapRight(const string& ID, const string& texturePath)
+void FabiEngine3D::sky_setCubeMapLeft(const string& ID, const string& value)
 {
 	auto texturePaths = _core->_skyEntityManager.getEntity(ID)->getCubeMapPaths();
-	texturePaths[0] = texturePath;
+	texturePaths[1] = value;
 	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_textureLoader.loadTexture3D(texturePaths));
 	_core->_skyEntityManager.getEntity(ID)->setCubeMapPaths(texturePaths);
 }
 
-void FabiEngine3D::sky_setCubeMapLeft(const string& ID, const string& texturePath)
+void FabiEngine3D::sky_setCubeMapTop(const string& ID, const string& value)
 {
 	auto texturePaths = _core->_skyEntityManager.getEntity(ID)->getCubeMapPaths();
-	texturePaths[1] = texturePath;
+	texturePaths[2] = value;
 	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_textureLoader.loadTexture3D(texturePaths));
 	_core->_skyEntityManager.getEntity(ID)->setCubeMapPaths(texturePaths);
 }
 
-void FabiEngine3D::sky_setCubeMapTop(const string& ID, const string& texturePath)
+void FabiEngine3D::sky_setCubeMapBottom(const string& ID, const string& value)
 {
 	auto texturePaths = _core->_skyEntityManager.getEntity(ID)->getCubeMapPaths();
-	texturePaths[2] = texturePath;
+	texturePaths[3] = value;
 	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_textureLoader.loadTexture3D(texturePaths));
 	_core->_skyEntityManager.getEntity(ID)->setCubeMapPaths(texturePaths);
 }
 
-void FabiEngine3D::sky_setCubeMapBottom(const string& ID, const string& texturePath)
+void FabiEngine3D::sky_setCubeMapBack(const string& ID, const string& value)
 {
 	auto texturePaths = _core->_skyEntityManager.getEntity(ID)->getCubeMapPaths();
-	texturePaths[3] = texturePath;
+	texturePaths[4] = value;
 	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_textureLoader.loadTexture3D(texturePaths));
 	_core->_skyEntityManager.getEntity(ID)->setCubeMapPaths(texturePaths);
 }
 
-void FabiEngine3D::sky_setCubeMapBack(const string& ID, const string& texturePath)
+void FabiEngine3D::sky_setCubeMapFront(const string& ID, const string& value)
 {
 	auto texturePaths = _core->_skyEntityManager.getEntity(ID)->getCubeMapPaths();
-	texturePaths[4] = texturePath;
-	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_textureLoader.loadTexture3D(texturePaths));
-	_core->_skyEntityManager.getEntity(ID)->setCubeMapPaths(texturePaths);
-}
-
-void FabiEngine3D::sky_setCubeMapFront(const string& ID, const string& texturePath)
-{
-	auto texturePaths = _core->_skyEntityManager.getEntity(ID)->getCubeMapPaths();
-	texturePaths[5] = texturePath;
+	texturePaths[5] = value;
 	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_textureLoader.loadTexture3D(texturePaths));
 	_core->_skyEntityManager.getEntity(ID)->setCubeMapPaths(texturePaths);
 }
@@ -79,9 +79,9 @@ void FabiEngine3D::sky_delete(const string& ID)
 	_core->_skyEntityManager.deleteEntity(ID);
 }
 
-void FabiEngine3D::sky_setVisible(const string& ID, bool isVisible)
+void FabiEngine3D::sky_setVisible(const string& ID, bool value)
 {
-	_core->_skyEntityManager.getEntity(ID)->setVisible(isVisible);
+	_core->_skyEntityManager.getEntity(ID)->setVisible(value);
 }
 
 void FabiEngine3D::sky_selectMainSky(const string& ID)
@@ -89,35 +89,35 @@ void FabiEngine3D::sky_selectMainSky(const string& ID)
 	_core->_skyEntityManager.selectMainSky(ID);
 }
 
-void FabiEngine3D::sky_setLightness(const string& ID, float lightness)
+void FabiEngine3D::sky_setLightness(const string& ID, float value)
 {
-	_core->_skyEntityManager.getEntity(ID)->setLightness(lightness);
-	_core->_skyEntityManager.getEntity(ID)->setInitialLightness(lightness);
+	_core->_skyEntityManager.getEntity(ID)->setLightness(value);
+	_core->_skyEntityManager.getEntity(ID)->setInitialLightness(value);
 }
 
-void FabiEngine3D::sky_setMixValue(float mixValue)
+void FabiEngine3D::sky_setMixValue(float value)
 {
-	_core->_renderBus.setSkyMixValue(mixValue);
+	_core->_renderBus.setSkyMixValue(value);
 }
 
-void FabiEngine3D::sky_setRotation(const string& ID, float rotation)
+void FabiEngine3D::sky_setRotation(const string& ID, float value)
 {
-	_core->_skyEntityManager.getEntity(ID)->setRotation(rotation);
+	_core->_skyEntityManager.getEntity(ID)->setRotation(value);
 }
 
-void FabiEngine3D::sky_setColor(const string& ID, fvec3 color)
+void FabiEngine3D::sky_setColor(const string& ID, fvec3 value)
 {
-	_core->_skyEntityManager.getEntity(ID)->setColor(color);
+	_core->_skyEntityManager.getEntity(ID)->setColor(value);
 }
 
-void FabiEngine3D::sky_setWireframed(const string& ID, bool enabled)
+void FabiEngine3D::sky_setWireframed(const string& ID, bool value)
 {
-	_core->_skyEntityManager.getEntity(ID)->setWireframed(enabled);
+	_core->_skyEntityManager.getEntity(ID)->setWireframed(value);
 }
 
-void FabiEngine3D::sky_setWireframeColor(const string& ID, fvec3 color)
+void FabiEngine3D::sky_setWireframeColor(const string& ID, fvec3 value)
 {
-	_core->_skyEntityManager.getEntity(ID)->setWireframeColor(color);
+	_core->_skyEntityManager.getEntity(ID)->setWireframeColor(value);
 }
 
 void FabiEngine3D::sky_selectMixSky(const string& ID)

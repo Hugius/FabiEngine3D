@@ -232,7 +232,7 @@ void TerrainEditor::_updateTerrainCreating()
 							_fe3d.terrain_select(newTerrainID);
 
 							// Miscellaneous
-							_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), "Terrain: " + newTerrainID.substr(1), 0.025f);
+							_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), "Terrain: " + newTerrainID.substr(1), 0.025f);
 							_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), true);
 							_isCreatingTerrain = false;
 						}
@@ -281,7 +281,7 @@ void TerrainEditor::_updateTerrainChoosing()
 				if(!_isDeletingTerrain)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
-					_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), "Terrain: " + _currentTerrainID.substr(1), 0.025f);
+					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), "Terrain: " + _currentTerrainID.substr(1), 0.025f);
 					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), true);
 				}
 

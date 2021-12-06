@@ -11,7 +11,7 @@ public:
 
 	// VOID
 	void update(ivec2 cursorPosition);
-	void setTerrainPointingEnabled(bool enabled);
+	void setTerrainPointingEnabled(bool value);
 	void setTerrainPointingDistance(float distance);
 	void setTerrainPointingPrecision(float precision);
 

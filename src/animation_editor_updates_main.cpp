@@ -115,7 +115,7 @@ void AnimationEditor::_updateAnimationCreating()
 					_currentAnimationID = newAnimationID;
 
 					// Miscellaneous
-					_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), "Animation: " + newAnimationID, 0.025f);
+					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), "Animation: " + newAnimationID, 0.025f);
 					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), true);
 					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), true);
 					_isCreatingAnimation = false;
@@ -154,7 +154,7 @@ void AnimationEditor::_updateAnimationChoosing()
 				if(!_isDeletingAnimation)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
-					_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), "Animation: " + selectedButtonID, 0.025f);
+					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), "Animation: " + selectedButtonID, 0.025f);
 					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), true);
 					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), true);
 				}

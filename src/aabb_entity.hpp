@@ -26,9 +26,10 @@ public:
 	void scale(fvec3 value);
 	void moveTo(fvec3 target, float speed);
 	void scaleTo(fvec3 target, float speed);
-	void setParent(const string& parentID, AabbParentEntityType parentEntityType);
-	void setFollowParentEntityTransformation(bool mustFollow);
-	void setFollowParentEntityVisibility(bool mustFollow);
+	void setParentEntityID(const string& value);
+	void setParentEntityType(AabbParentEntityType value);
+	void setFollowParentEntityTransformation(bool value);
+	void setFollowParentEntityVisibility(bool value);
 	void setCollisionDirection(Direction value);
 	void setRaycastResponsive(bool value);
 	void setCollisionResponsive(bool value);

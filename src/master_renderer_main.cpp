@@ -108,7 +108,7 @@ void MasterRenderer::renderWorld(EntityBus* entityBus)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 		_renderGUI();
-		_renderCustomCursor();
+		_renderCursor();
 	}
 	else // Normal rendering
 	{
@@ -192,7 +192,7 @@ void MasterRenderer::renderWorld(EntityBus* entityBus)
 		_renderGUI();
 
 		// Render custom cursor entity
-		_renderCustomCursor();
+		_renderCursor();
 		_renderBus.setTriangleCountingEnabled(false);
 		_timer.stopDeltaPart();
 	}

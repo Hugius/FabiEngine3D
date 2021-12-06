@@ -245,7 +245,7 @@ void MasterRenderer::_renderGUI()
 	}
 }
 
-void MasterRenderer::_renderCustomCursor()
+void MasterRenderer::_renderCursor()
 {
 	for(const auto& [keyID, entity] : _entityBus->getImageEntities())
 	{

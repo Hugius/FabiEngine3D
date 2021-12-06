@@ -187,12 +187,12 @@ void EngineGuiButton::changeTextContent(const string& content)
 	auto textEntityID = getTextField()->getEntityID();
 
 	// Check if text content changed
-	if(content != _fe3d.text_getTextContent(textEntityID))
+	if(content != _fe3d.text_getContent(textEntityID))
 	{
 		// Update TextField
-		auto charWidth = (getTextField()->getInitialSize().x / static_cast<float>(_fe3d.text_getTextContent(textEntityID).size()));
+		auto charWidth = (getTextField()->getInitialSize().x / static_cast<float>(_fe3d.text_getContent(textEntityID).size()));
 		auto charHeight = getTextField()->getInitialSize().y;
-		_fe3d.text_setTextContent(textEntityID, content, charWidth, charHeight);
+		_fe3d.text_setContent(textEntityID, content, charWidth, charHeight);
 		getTextField()->updateInitialSize();
 
 		// Update rectangle

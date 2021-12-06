@@ -64,20 +64,14 @@ void AabbEntity::updateTransformationMatrix()
 	_transformationMatrix = (translationMatrix * scalingMatrix);
 }
 
-void AabbEntity::setParent(const string& parentID, AabbParentEntityType parentEntityType)
+void AabbEntity::setFollowParentEntityTransformation(bool value)
 {
-	_parentEntityID = parentID;
-	_parentEntityType = parentEntityType;
+	_mustFollowParentEntityTransformation = value;
 }
 
-void AabbEntity::setFollowParentEntityTransformation(bool mustFollow)
+void AabbEntity::setFollowParentEntityVisibility(bool value)
 {
-	_mustFollowParentEntityTransformation = mustFollow;
-}
-
-void AabbEntity::setFollowParentEntityVisibility(bool mustFollow)
-{
-	_mustFollowParentEntityVisibility = mustFollow;
+	_mustFollowParentEntityVisibility = value;
 }
 
 void AabbEntity::setCollisionDirection(Direction value)
@@ -141,6 +135,16 @@ void AabbEntity::scaleTo(fvec3 target, float speed)
 {
 	_sizeTarget = fvec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
 	_sizeTargetSpeed = speed;
+}
+
+void AabbEntity::setParentEntityID(const string& value)
+{
+	_parentEntityID = value;
+}
+
+void AabbEntity::setParentEntityType(AabbParentEntityType value)
+{
+	_parentEntityType = value;
 }
 
 void AabbEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)

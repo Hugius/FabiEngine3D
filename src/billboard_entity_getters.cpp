@@ -199,3 +199,8 @@ const bool BillboardEntity::isTextual() const
 {
 	return _isTextual;
 }
+
+const bool BillboardEntity::isFrozen() const
+{
+	return _isFrozen;
+}

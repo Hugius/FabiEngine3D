@@ -59,6 +59,7 @@ public:
 	void setMaxHeight(float value);
 	void setTextureRepeat(float value);
 	void setEmissionIntensity(float value);
+	void setFrozen(bool value);
 
 	// STRING
 	const string& getTextContent() const;
@@ -108,6 +109,7 @@ public:
 	const bool isReflected() const;
 	const bool isBright() const;
 	const bool isTextual() const;
+	const bool isFrozen() const;
 	const bool isWireframed() const;
 	const bool hasRenderBuffer() const;
 	const bool hasDiffuseMap() const;
@@ -174,6 +176,7 @@ private:
 	bool _isBright = false;
 	bool _isWireframed = false;
 	bool _isTextual = false;
+	bool _isFrozen = false;
 
 	// MISCELLANEOUS
 	shared_ptr<RenderBuffer> _renderBuffer = nullptr;

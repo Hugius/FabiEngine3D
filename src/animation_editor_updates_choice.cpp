@@ -196,7 +196,7 @@ void AnimationEditor::_updateChoiceMenu()
 		// Update frame index display
 		if(!isPlaying)
 		{
-			_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), "Frame: " + to_string(_currentFrameIndex + 1), 0.025f);
+			_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), "Frame: " + to_string(_currentFrameIndex + 1), 0.025f);
 		}
 
 		// Update preview model visibility

@@ -216,7 +216,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			// Validate existence
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				auto result = _fe3d.text_getTextContent(arguments[0].getString());
+				auto result = _fe3d.text_getContent(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 			}
 		}

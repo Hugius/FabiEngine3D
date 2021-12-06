@@ -99,7 +99,7 @@ void WorldEditor::_updateModelPlacingMenu()
 						_fe3d.model_setBasePosition(_currentPreviewModelID, fvec3(0.0f));
 						_fe3d.model_setVisible(_currentPreviewModelID, true);
 						_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), true);
-						_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), "Model: " + _currentPreviewModelID.substr(1), 0.025f);
+						_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), "Model: " + _currentPreviewModelID.substr(1), 0.025f);
 						_fe3d.misc_centerCursor();
 
 						// Add position value forms for placing without terrain

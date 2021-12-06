@@ -44,7 +44,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			_fe3d.text_setPosition(ID, _convertGuiPositionToViewport(fvec2(arguments[3].getDecimal(), arguments[4].getDecimal())));
 			_fe3d.text_setRotation(ID, arguments[5].getDecimal());
 			_fe3d.text_setSize(ID, _convertGuiSizeToViewport(fvec2(arguments[6].getDecimal(), arguments[7].getDecimal())));
-			_fe3d.text_setTextContent(ID, arguments[2].getString());
+			_fe3d.text_setContent(ID, arguments[2].getString());
 
 			// In-engine viewport boundaries
 			if(!Config::getInst().isApplicationExported())
@@ -258,7 +258,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			// Validate existence
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				_fe3d.text_setTextContent(arguments[0].getString(), arguments[1].getString());
+				_fe3d.text_setContent(arguments[0].getString(), arguments[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

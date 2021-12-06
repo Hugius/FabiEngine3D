@@ -71,9 +71,9 @@ const fvec3 FabiEngine3D::text_getColor(const string& ID) const
 	return _core->_textEntityManager.getEntity(ID)->getColor();
 }
 
-const string& FabiEngine3D::text_getTextContent(const string& ID) const
+const string& FabiEngine3D::text_getContent(const string& ID) const
 {
-	return _core->_textEntityManager.getEntity(ID)->getTextContent();
+	return _core->_textEntityManager.getEntity(ID)->getContent();
 }
 
 const vector<string> FabiEngine3D::text_getAllIDs() const

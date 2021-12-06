@@ -16,14 +16,14 @@ void FabiEngine3D::reflection_delete(const string& ID)
 	_core->_reflectionEntityManager.deleteEntity(ID);
 }
 
-void FabiEngine3D::reflection_setVisible(const string& ID, bool isVisible)
+void FabiEngine3D::reflection_setVisible(const string& ID, bool value)
 {
-	_core->_reflectionEntityManager.getEntity(ID)->setVisible(isVisible);
+	_core->_reflectionEntityManager.getEntity(ID)->setVisible(value);
 }
 
-void FabiEngine3D::reflection_setPosition(const string& ID, fvec3 position)
+void FabiEngine3D::reflection_setPosition(const string& ID, fvec3 value)
 {
-	_core->_reflectionEntityManager.getEntity(ID)->setPosition(position);
+	_core->_reflectionEntityManager.getEntity(ID)->setPosition(value);
 }
 
 void FabiEngine3D::reflection_move(const string& ID, fvec3 change)

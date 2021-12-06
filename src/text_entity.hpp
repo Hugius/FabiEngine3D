@@ -15,14 +15,14 @@ public:
 	// VOID
 	void setCentered(bool value);
 	void setDynamic(bool value);
-	void createCharacterEntity(shared_ptr<ImageEntity> character);
+	void addCharacterEntity(shared_ptr<ImageEntity> value);
 	void updateCharacterEntities();
 	void deleteCharacterEntities();
-	void setTextContent(const string& text);
-	void setFontPath(const string& fontPath);
+	void setContent(const string& value);
+	void setFontPath(const string& value);
 
 	// STRING
-	const string& getTextContent() const;
+	const string& getContent() const;
 	const string& getFontPath() const;
 
 	// BOOL
@@ -34,7 +34,7 @@ public:
 
 private:
 	// STRING
-	string _textContent = "";
+	string _content = "";
 	string _fontPath = "";
 
 	// BOOL

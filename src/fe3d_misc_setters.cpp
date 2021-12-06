@@ -5,9 +5,9 @@
 #include <chrono>
 #include <filesystem>
 
-void FabiEngine3D::misc_setCustomCursor(const string& imageEntityID)
+void FabiEngine3D::misc_setCursorEntityID(const string& value)
 {
-	_core->_renderBus.setCursorEntityID(imageEntityID);
+	_core->_renderBus.setCursorEntityID(value);
 }
 
 void FabiEngine3D::misc_enableWireframeRendering()
@@ -120,9 +120,9 @@ void FabiEngine3D::misc_disableVsync()
 	_core->_window.disableVsync();
 }
 
-void FabiEngine3D::misc_setCursorVisible(bool isVisible)
+void FabiEngine3D::misc_setCursorVisible(bool value)
 {
-	if(isVisible)
+	if(value)
 	{
 		_core->_window.showCursor();
 	}
@@ -145,14 +145,14 @@ void FabiEngine3D::misc_centerCursor()
 	_core->_camera.notifyCursorCenter();
 }
 
-void FabiEngine3D::misc_setCursorPosition(ivec2 pos)
+void FabiEngine3D::misc_setCursorPosition(ivec2 value)
 {
-	_core->_window.setCursorPosition(pos);
+	_core->_window.setCursorPosition(value);
 }
 
-void FabiEngine3D::misc_setWindowTitle(const string& title)
+void FabiEngine3D::misc_setWindowTitle(const string& value)
 {
-	_core->_window.setTitle(title);
+	_core->_window.setTitle(value);
 }
 
 void FabiEngine3D::misc_clearMeshCache(const string& filePath)
@@ -232,7 +232,7 @@ void FabiEngine3D::misc_startMillisecondTimer()
 	_core->_timer.start();
 }
 
-void FabiEngine3D::misc_setMaxAudioChannelCount(unsigned int count)
+void FabiEngine3D::misc_setMaxAudioChannelCount(unsigned int value)
 {
-	_core->_audioPlayer.allocateChannels(count);
+	_core->_audioPlayer.allocateChannels(value);
 }

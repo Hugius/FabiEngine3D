@@ -66,7 +66,7 @@ private:
 	void _renderAabbEntities();
 	void _renderFinalWorldImage();
 	void _renderGUI();
-	void _renderCustomCursor();
+	void _renderCursor();
 	void _renderDebugScreens();
 
 	// FLOAT

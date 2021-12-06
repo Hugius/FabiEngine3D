@@ -19,7 +19,7 @@ public:
 
 private:
 	// STRING
-	map<string, string> _textContentMap;
+	map<string, string> _contentMap;
 
 	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> _centeredRenderBuffer;

@@ -185,6 +185,11 @@ const vector<pair<string, int>> FabiEngine3D::misc_getRenderProfilingStatistics(
 	return result;
 }
 
+const string FabiEngine3D::misc_getCursorEntityID() const
+{
+	return _core->_renderBus.getCursorEntityID();
+}
+
 const bool FabiEngine3D::misc_isVsyncEnabled() const
 {
 	return _core->_window.isVsyncEnabled();

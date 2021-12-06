@@ -1,9 +1,9 @@
 #include "fe3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::input_setLocked(bool locked)
+void FabiEngine3D::input_setLocked(bool value)
 {
-	return _core->_inputHandler.setLocked(locked);
+	return _core->_inputHandler.setLocked(value);
 }
 
 const bool FabiEngine3D::input_isKeyDown(InputType key) const

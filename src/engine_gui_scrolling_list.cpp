@@ -61,7 +61,7 @@ void EngineGuiScrollingList::deleteButton(const string& ID)
 			for(size_t j = 0; j < _buttons.size(); j++)
 			{
 				buttonIDs.push_back(_buttons[j]->getID());
-				textContents.push_back(_fe3d.text_getTextContent(_buttons[j]->getTextField()->getEntityID()));
+				textContents.push_back(_fe3d.text_getContent(_buttons[j]->getTextField()->getEntityID()));
 			}
 
 			// Delete all buttons

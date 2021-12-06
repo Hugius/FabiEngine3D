@@ -18,7 +18,7 @@ void TextEntity::deleteCharacterEntities()
 void TextEntity::updateCharacterEntities()
 {
 	// Temporary values
-	float xCharSize = (this->getSize().x / static_cast<float>(this->_textContent.size()));
+	float xCharSize = (this->getSize().x / static_cast<float>(this->_content.size()));
 	float yCharSize = this->getSize().y;
 	unsigned int index = 0;
 
@@ -61,19 +61,19 @@ void TextEntity::updateCharacterEntities()
 	}
 }
 
-void TextEntity::createCharacterEntity(shared_ptr<ImageEntity> character)
+void TextEntity::addCharacterEntity(shared_ptr<ImageEntity> value)
 {
-	_characterEntities.push_back(character);
+	_characterEntities.push_back(value);
 }
 
-void TextEntity::setTextContent(const string& text)
+void TextEntity::setContent(const string& value)
 {
-	_textContent = text;
+	_content = value;
 }
 
-void TextEntity::setFontPath(const string& fontPath)
+void TextEntity::setFontPath(const string& value)
 {
-	_fontPath = fontPath;
+	_fontPath = value;
 }
 
 const bool TextEntity::isCentered() const
@@ -91,9 +91,9 @@ const vector<shared_ptr<ImageEntity>>& TextEntity::getCharacterEntities() const
 	return _characterEntities;
 }
 
-const string& TextEntity::getTextContent() const
+const string& TextEntity::getContent() const
 {
-	return _textContent;
+	return _content;
 }
 
 const string& TextEntity::getFontPath() const

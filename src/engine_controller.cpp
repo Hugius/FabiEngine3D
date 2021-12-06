@@ -135,7 +135,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		image_create("@@cursor", true);
 		image_setSize("@@cursor", fvec2(0.075f, 0.075f * Tools::getWindowAspectRatio()));
 		image_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_default.png");
-		misc_setCustomCursor("@@cursor");
+		misc_setCursorEntityID("@@cursor");
 		misc_setCursorVisible(false);
 
 		// Initialize viewport controllers

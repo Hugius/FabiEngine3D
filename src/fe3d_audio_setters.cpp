@@ -45,9 +45,9 @@ void FabiEngine3D::music_resume()
 	_core->_audioPlayer.resumeMusic();
 }
 
-void FabiEngine3D::music_setVolume(float volume)
+void FabiEngine3D::music_setVolume(float value)
 {
-	_core->_audioPlayer.setMusicVolume(volume);
+	_core->_audioPlayer.setMusicVolume(value);
 }
 
 void FabiEngine3D::sound2D_create(const string& ID, const string& audioPath)
@@ -157,9 +157,9 @@ void FabiEngine3D::sound2D_stopAll()
 	_core->_audioPlayer.stopAllSounds2D(_core->_audioManager.getSounds2D());
 }
 
-void FabiEngine3D::sound2D_setVolume(const string& ID, float volume)
+void FabiEngine3D::sound2D_setVolume(const string& ID, float value)
 {
-	_core->_audioManager.getSound2D(ID).setVolume(volume);
+	_core->_audioManager.getSound2D(ID).setVolume(value);
 }
 
 void FabiEngine3D::sound3D_create(const string& ID, const string& audioPath)
@@ -269,9 +269,9 @@ void FabiEngine3D::sound3D_stopAll()
 	_core->_audioPlayer.stopAllSounds3D(_core->_audioManager.getSounds3D());
 }
 
-void FabiEngine3D::sound3D_setPosition(const string& ID, fvec3 position)
+void FabiEngine3D::sound3D_setPosition(const string& ID, fvec3 value)
 {
-	_core->_audioManager.getSound3D(ID).setPosition(position);
+	_core->_audioManager.getSound3D(ID).setPosition(value);
 }
 
 void FabiEngine3D::sound3D_move(const string& ID, fvec3 change)
@@ -284,12 +284,12 @@ void FabiEngine3D::sound3D_moveTo(const string& ID, fvec3 target, float speed)
 	_core->_audioManager.getSound3D(ID).moveTo(target, speed);
 }
 
-void FabiEngine3D::sound3D_setMaxDistance(const string& ID, float maxDistance)
+void FabiEngine3D::sound3D_setMaxDistance(const string& ID, float value)
 {
-	_core->_audioManager.getSound3D(ID).setMaxDistance(maxDistance);
+	_core->_audioManager.getSound3D(ID).setMaxDistance(value);
 }
 
-void FabiEngine3D::sound3D_setMaxVolume(const string& ID, float volume)
+void FabiEngine3D::sound3D_setMaxVolume(const string& ID, float value)
 {
-	_core->_audioManager.getSound3D(ID).setMaxVolume(volume);
+	_core->_audioManager.getSound3D(ID).setMaxVolume(value);
 }

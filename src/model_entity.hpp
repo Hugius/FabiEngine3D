@@ -79,7 +79,7 @@ public:
 	void setReflectionType(const string& partID, ReflectionType value);
 	void setWireframed(const string& partID, bool value);
 	void setFaceCulled(bool value);
-	void setRotationOrder(DirectionOrder order);
+	void setRotationOrder(DirectionOrder value);
 
 	// STRING
 	const vector<string> getPartIDs() const;

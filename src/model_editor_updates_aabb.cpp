@@ -148,11 +148,12 @@ void ModelEditor::_updateAabbCreating()
 
 						// Bind AABB
 						_fe3d.aabb_create(_currentModelID + "@" + _currentAabbID);
-						_fe3d.aabb_setParent((_currentModelID + "@" + _currentAabbID), _currentModelID, AabbParentEntityType::MODEL);
+						_fe3d.aabb_setParentEntityID((_currentModelID + "@" + _currentAabbID), _currentModelID);
+						_fe3d.aabb_setParentEntityType((_currentModelID + "@" + _currentAabbID), AabbParentEntityType::MODEL);
 
 						// Go to next screen
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
-						_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("aabbID")->getEntityID(), ("AABB: " + _currentAabbID), 0.025f);
+						_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("aabbID")->getEntityID(), ("AABB: " + _currentAabbID), 0.025f);
 						_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("aabbID")->getEntityID(), true);
 
 						// Miscellaneous
@@ -207,7 +208,7 @@ void ModelEditor::_updateAabbChoosing()
 				if(!_isDeletingAabb)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
-					_fe3d.text_setTextContent(_gui.getGlobalScreen()->getTextField("aabbID")->getEntityID(), ("AABB: " + _currentAabbID), 0.025f);
+					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("aabbID")->getEntityID(), ("AABB: " + _currentAabbID), 0.025f);
 					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("aabbID")->getEntityID(), true);
 				}
 

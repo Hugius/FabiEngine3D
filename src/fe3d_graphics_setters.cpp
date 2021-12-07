@@ -193,9 +193,9 @@ void FabiEngine3D::gfx_disableShadows(bool mustResetProperties)
 		_core->_shadowGenerator.setAreaSize(0.0f);
 		_core->_shadowGenerator.setAreaReach(0.0f);
 		_core->_shadowGenerator.setLightness(0.0f);
+		_core->_shadowGenerator.setQuality(Config::MIN_SHADOW_QUALITY);
 		_core->_shadowGenerator.setInterval(0);
 		_core->_shadowGenerator.setFollowingCamera(false);
-		_core->_renderBus.setShadowQuality(Config::MIN_SHADOW_QUALITY);
 	}
 }
 
@@ -339,7 +339,7 @@ void FabiEngine3D::gfx_setPlanarRefractionQuality(unsigned int value)
 
 void FabiEngine3D::gfx_setShadowQuality(unsigned int value)
 {
-	_core->_renderBus.setShadowQuality(value);
+	_core->_shadowGenerator.setQuality(value);
 	_core->_masterRenderer.reloadShadowCaptureBuffer();
 }
 

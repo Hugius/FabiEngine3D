@@ -40,10 +40,10 @@ void BillboardEditor::load()
 	_fe3d.gfx_setBloomType(BloomType::PARTS);
 	_fe3d.gfx_setBloomIntensity(1.0f);
 	_fe3d.gfx_setBloomBlurCount(5);
-	_fe3d.gfx_enableMotionBlur();
-	_fe3d.gfx_setMotionBlurStrength(0.1f);
+	_fe3d.gfx_setBloomQuality(Config::MAX_BLOOM_QUALITY);
 	_fe3d.gfx_enableShadows();
 	_fe3d.gfx_setShadowLightness(0.25f);
+	_fe3d.gfx_setShadowQuality(Config::MAX_SHADOW_QUALITY);
 
 	// Editor models
 	_fe3d.model_create("@@cube", "engine\\assets\\meshes\\cube.obj");
@@ -78,7 +78,6 @@ void BillboardEditor::unload()
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);
 	_fe3d.gfx_disableBloom(true);
-	_fe3d.gfx_disableMotionBlur(true);
 	_fe3d.gfx_disableShadows(true);
 
 	// Delete billboards

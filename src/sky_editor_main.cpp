@@ -1,5 +1,6 @@
 #include "sky_editor.hpp"
 #include "left_viewport_controller.hpp"
+#include "configuration.hpp"
 
 using VPC = BaseViewportController;
 using LVPC = LeftViewportController;
@@ -26,6 +27,7 @@ void SkyEditor::load()
 	// Default graphics
 	_fe3d.gfx_enableMotionBlur();
 	_fe3d.gfx_setMotionBlurStrength(0.1f);
+	_fe3d.gfx_setMotionBlurQuality(Config::MAX_MOTION_BLUR_QUALITY);
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->createTextField("skyID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);

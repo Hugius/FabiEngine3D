@@ -10,13 +10,14 @@ public:
 	// VOID
 	void update();
 	void generate();
-	void setInterval(unsigned int value);
-	void setFollowingCamera(bool value);
 	void setEyePosition(fvec3 value);
 	void setCenterPosition(fvec3 value);
 	void setAreaSize(float value);
 	void setAreaReach(float value);
 	void setLightness(float value);
+	void setQuality(unsigned int value);
+	void setInterval(unsigned int value);
+	void setFollowingCamera(bool value);
 
 	// FVEC3
 	const fvec3 getEyePosition() const;
@@ -28,6 +29,7 @@ public:
 	const float getLightness() const;
 
 	// UNSIGNED INT
+	const unsigned int getQuality() const;
 	const unsigned int getInterval() const;
 
 	// BOOL
@@ -48,6 +50,7 @@ private:
 	float _lightness = 0.0f;
 
 	// UNSIGNED INT
+	unsigned int _quality = 0;
 	unsigned int _interval = 0;
 	unsigned int _passedFrames = 0;
 

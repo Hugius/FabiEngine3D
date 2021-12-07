@@ -34,6 +34,7 @@ void SettingsEditor::load()
 	_fe3d.gfx_setBloomType(BloomType::PARTS);
 	_fe3d.gfx_setBloomIntensity(1.0f);
 	_fe3d.gfx_setBloomBlurCount(5);
+	_fe3d.gfx_setBloomQuality(Config::MAX_BLOOM_QUALITY);
 
 	// Camera
 	_fe3d.camera_reset();

@@ -36,8 +36,6 @@ void WaterEditor::load()
 	_fe3d.gfx_setDirectionalLightingColor(fvec3(1.0f));
 	_fe3d.gfx_setDirectionalLightingPosition(fvec3(10000.0f));
 	_fe3d.gfx_setDirectionalLightingIntensity(3.0f);
-	_fe3d.gfx_enableMotionBlur();
-	_fe3d.gfx_setMotionBlurStrength(0.1f);
 
 	// Editor models
 	_fe3d.model_create("@@cube", "engine\\assets\\meshes\\cube.obj");
@@ -65,7 +63,6 @@ void WaterEditor::unload()
 	// Default graphics
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);
-	_fe3d.gfx_disableMotionBlur(true);
 
 	// Delete waters
 	_fe3d.water_deleteAll();

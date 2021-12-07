@@ -6,7 +6,13 @@ using std::max;
 
 ShadowGenerator::ShadowGenerator(RenderBus& renderBus)
 	:
-	_renderBus(renderBus)
+	_renderBus(renderBus),
+	_eyePosition(renderBus.getShadowEyePosition()),
+	_centerPosition(renderBus.getShadowCenterPosition()),
+	_areaSize(renderBus.getShadowAreaSize()),
+	_areaReach(renderBus.getShadowAreaReach()),
+	_lightness(renderBus.getShadowLightness()),
+	_quality(renderBus.getShadowQuality())
 {
 
 }
@@ -36,6 +42,7 @@ void ShadowGenerator::generate()
 	auto newAreaSize = _areaSize;
 	auto newAreaReach = _areaReach;
 	auto newLightness = _lightness;
+	auto newQuality = _quality;
 
 	// Follow camera
 	if(_isFollowingCamera)
@@ -56,6 +63,7 @@ void ShadowGenerator::generate()
 	_renderBus.setShadowAreaSize(newAreaSize);
 	_renderBus.setShadowAreaReach(newAreaReach);
 	_renderBus.setShadowLightness(newLightness);
+	_renderBus.setShadowQuality(newQuality);
 	
 	// Create shadow matrix
 	_renderBus.setShadowMatrix(_createShadowMatrix(newEyePosition, newCenterPosition, newAreaSize, newAreaReach));
@@ -115,6 +123,11 @@ void ShadowGenerator::setLightness(float value)
 	_lightness = value;
 }
 
+void ShadowGenerator::setQuality(unsigned int value)
+{
+	_quality = value;
+}
+
 const fvec3 ShadowGenerator::getEyePosition() const
 {
 	return _eyePosition;
@@ -138,6 +151,11 @@ const float ShadowGenerator::getAreaReach() const
 const float ShadowGenerator::getLightness() const
 {
 	return _lightness;
+}
+
+const unsigned int ShadowGenerator::getQuality() const
+{
+	return _quality;
 }
 
 const unsigned int ShadowGenerator::getInterval() const

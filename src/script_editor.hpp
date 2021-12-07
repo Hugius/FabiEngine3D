@@ -83,7 +83,6 @@ private:
 	static inline const unsigned int MAX_LINE_COUNT = 100;
 	static inline const unsigned int MAX_VISIBLE_LINES = 13;
 	static inline const unsigned int BLOOM_QUALITY = 1;
-	unsigned int _initialBloomQuality = 0;
 	unsigned int _passedFrames = 0;
 
 	// CHAR

@@ -280,9 +280,9 @@ const unsigned int RenderBus::getPlanarReflectionQuality() const
 	return _planarReflectionQuality;
 }
 
-const unsigned int RenderBus::getRefractionQuality() const
+const unsigned int RenderBus::getPlanarRefractionQuality() const
 {
-	return _refractionQuality;
+	return _planarRefractionQuality;
 }
 
 const bool RenderBus::isAntiAliasingEnabled() const

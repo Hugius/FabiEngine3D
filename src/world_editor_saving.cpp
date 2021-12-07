@@ -336,7 +336,11 @@ const bool WorldEditor::saveEditorWorldToFile()
 	}
 
 	// Editor camera speed
-	file << "EDITOR_SPEED " << _editorSpeed << endl;
+	{
+		file <<
+			"EDITOR_SPEED " <<
+			_editorSpeed << endl;
+	}
 
 	// Ambient lighting
 	if(_fe3d.gfx_isAmbientLightingEnabled())
@@ -384,6 +388,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 		auto center = _fe3d.gfx_getShadowCenterPosition();
 		auto isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
 		auto interval = _fe3d.gfx_getShadowInterval();
+		auto quality = _fe3d.gfx_getShadowQuality();
 
 		// Write data
 		file <<
@@ -393,11 +398,29 @@ const bool WorldEditor::saveEditorWorldToFile()
 			Tools::vec2str(position) << " " <<
 			Tools::vec2str(center) << " " <<
 			isFollowingCamera << " " <<
-			interval << endl;
+			interval << " " <<
+			quality << endl;
 	}
 
 	// Reflections settings
-	file << "GRAPHICS_REFLECTIONS " << _fe3d.gfx_getPlanarReflectionHeight() << endl;
+	{
+		auto planarHeight = _fe3d.gfx_getPlanarReflectionHeight();
+		auto cubeQuality = _fe3d.gfx_getCubeReflectionQuality();
+		auto planarQuality = _fe3d.gfx_getPlanarReflectionQuality();
+		file <<
+			"GRAPHICS_REFLECTIONS " <<
+			planarHeight << " " <<
+			cubeQuality << " " <<
+			planarQuality << endl;
+	}
+
+	// Refractions settings
+	{
+		auto planarQuality = _fe3d.gfx_getPlanarReflectionQuality();
+		file <<
+			"GRAPHICS_REFRACTIONS " <<
+			planarQuality << endl;
+	}
 
 	// DOF settings
 	if(_fe3d.gfx_isDofEnabled())
@@ -405,14 +428,16 @@ const bool WorldEditor::saveEditorWorldToFile()
 		// Data to save
 		auto dynamic = _fe3d.gfx_isDofDynamic();
 		auto blurDistance = _fe3d.gfx_getDofBlurDistance();
-		auto maxDistance = _fe3d.gfx_getaMaxDofDistance();
+		auto maxDistance = _fe3d.gfx_getMaxDofDistance();
+		auto quality = _fe3d.gfx_getDofQuality();
 
 		// Write data
 		file <<
 			"GRAPHICS_DOF " <<
 			dynamic << " " <<
 			blurDistance << " " <<
-			maxDistance << endl;
+			maxDistance << " " <<
+			quality << endl;
 	}
 
 	// Fog settings
@@ -461,7 +486,10 @@ const bool WorldEditor::saveEditorWorldToFile()
 	// Sky exposure settings
 	if(_fe3d.gfx_isSkyExposureEnabled())
 	{
-		file << "GRAPHICS_SKY_EXPOSURE " << _fe3d.gfx_getSkyExposureIntensity() << " " << _fe3d.gfx_getSkyExposureSpeed() << endl;
+		file <<
+			"GRAPHICS_SKY_EXPOSURE " <<
+			_fe3d.gfx_getSkyExposureIntensity() << " "
+			<< _fe3d.gfx_getSkyExposureSpeed() << endl;
 	}
 
 	// Bloom settings
@@ -471,13 +499,15 @@ const bool WorldEditor::saveEditorWorldToFile()
 		auto type = static_cast<unsigned int>(_fe3d.gfx_getBloomType());
 		auto intensity = _fe3d.gfx_getBloomIntensity();
 		auto blurCount = _fe3d.gfx_getBloomBlurCount();
+		auto quality = _fe3d.gfx_getBloomQuality();
 
 		// Write data
 		file <<
 			"GRAPHICS_BLOOM " <<
 			type << " " <<
 			intensity << " " <<
-			blurCount << endl;
+			blurCount << " " <<
+			quality << endl;
 	}
 
 	// Close file

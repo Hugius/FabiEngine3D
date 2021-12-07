@@ -239,7 +239,7 @@ void MasterRenderer::reloadWaterReflectionCaptureBuffer()
 void MasterRenderer::reloadWaterRefractionCaptureBuffer()
 {
 	_waterRefractionCaptureBuffer.reset();
-	_waterRefractionCaptureBuffer.createColorTexture(ivec2(0), ivec2(_renderBus.getRefractionQuality()), 1, false);
+	_waterRefractionCaptureBuffer.createColorTexture(ivec2(0), ivec2(_renderBus.getPlanarRefractionQuality()), 1, false);
 }
 
 void MasterRenderer::reloadShadowCaptureBuffer()

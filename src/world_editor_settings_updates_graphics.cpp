@@ -18,6 +18,7 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		auto position = _fe3d.gfx_getShadowEyePosition();
 		auto center = _fe3d.gfx_getShadowCenterPosition();
 		auto interval = _fe3d.gfx_getShadowInterval();
+		auto quality = _fe3d.gfx_getShadowQuality();
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -67,6 +68,10 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		{
 			_gui.getGlobalScreen()->createValueForm("interval", "Frame Interval", interval, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("quality")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("quality", "Quality", quality, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+		}
 
 		// Update value forms
 		if(_gui.getGlobalScreen()->checkValueForm("size", size))
@@ -107,6 +112,10 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		{
 			_fe3d.gfx_setShadowInterval(interval);
 		}
+		if (_gui.getGlobalScreen()->checkValueForm("quality", quality))
+		{
+			_fe3d.gfx_setShadowQuality(quality);
+		}
 
 		// Update buttons hoverability
 		screen->getButton("size")->setHoverable(isEnabled);
@@ -115,6 +124,7 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		screen->getButton("follow")->setHoverable(isEnabled);
 		screen->getButton("lightness")->setHoverable(isEnabled);
 		screen->getButton("interval")->setHoverable(isEnabled);
+		screen->getButton("quality")->setHoverable(isEnabled);
 
 		// Update button text contents
 		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
@@ -132,6 +142,8 @@ void WorldEditor::_updateReflectionsGraphicsSettingsMenu()
 	{
 		// Temporary values
 		auto planarHeight = _fe3d.gfx_getPlanarReflectionHeight();
+		auto cubeQuality = _fe3d.gfx_getCubeReflectionQuality();
+		auto planarQuality = _fe3d.gfx_getPlanarReflectionQuality();
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -143,11 +155,57 @@ void WorldEditor::_updateReflectionsGraphicsSettingsMenu()
 		{
 			_gui.getGlobalScreen()->createValueForm("planarHeight", "Planar Height", planarHeight, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("cubeQuality")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("cubeQuality", "Cube Quality", cubeQuality, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("planarQuality")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("planarQuality", "Planar Quality", planarQuality, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+		}
 
 		// Update value forms
 		if(_gui.getGlobalScreen()->checkValueForm("planarHeight", planarHeight))
 		{
 			_fe3d.gfx_setPlanarReflectionHeight(planarHeight);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("cubeQuality", cubeQuality))
+		{
+			_fe3d.gfx_setCubeReflectionQuality(cubeQuality);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("planarQuality", planarQuality))
+		{
+			_fe3d.gfx_setPlanarReflectionQuality(planarQuality);
+		}
+	}
+}
+
+void WorldEditor::_updateRefractionsGraphicsSettingsMenu()
+{
+	// Temporary values
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+
+	// Screen management
+	if (screen->getID() == "worldEditorMenuSettingsGraphicsRefractions")
+	{
+		// Temporary values
+		auto planarQuality = _fe3d.gfx_getPlanarRefractionQuality();
+
+		// Button management
+		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphics");
+			return;
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("planarQuality")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("planarQuality", "Planar Quality", planarQuality, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+		}
+
+		// Update value forms
+		if (_gui.getGlobalScreen()->checkValueForm("planarQuality", planarQuality))
+		{
+			_fe3d.gfx_setPlanarRefractionQuality(planarQuality);
 		}
 	}
 }
@@ -164,7 +222,8 @@ void WorldEditor::_updateDofGraphicsSettingsMenu()
 		auto isEnabled = _fe3d.gfx_isDofEnabled();
 		auto isDynamic = _fe3d.gfx_isDofDynamic();
 		auto blurDistance = _fe3d.gfx_getDofBlurDistance();
-		auto maxDistance = _fe3d.gfx_getaMaxDofDistance();
+		auto maxDistance = _fe3d.gfx_getMaxDofDistance();
+		auto quality = _fe3d.gfx_getDofQuality();
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -197,6 +256,10 @@ void WorldEditor::_updateDofGraphicsSettingsMenu()
 		{
 			_gui.getGlobalScreen()->createValueForm("blurDistance", "Blur Distance", blurDistance, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("quality")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("quality", "Quality", quality, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+		}
 
 		// Update value forms
 		if(_gui.getGlobalScreen()->checkValueForm("dynamicDistance", maxDistance))
@@ -207,11 +270,16 @@ void WorldEditor::_updateDofGraphicsSettingsMenu()
 		{
 			_fe3d.gfx_setDofBlurDistance(blurDistance);
 		}
+		if (_gui.getGlobalScreen()->checkValueForm("quality", quality))
+		{
+			_fe3d.gfx_setDofQuality(quality);
+		}
 
 		// Update buttons hoverability
 		screen->getButton("isDynamic")->setHoverable(isEnabled);
 		screen->getButton("dynamicDistance")->setHoverable(isEnabled && isDynamic);
 		screen->getButton("blurDistance")->setHoverable(isEnabled);
+		screen->getButton("quality")->setHoverable(isEnabled);
 
 		// Update button text contents
 		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
@@ -479,6 +547,7 @@ void WorldEditor::_updateBloomGraphicsSettingsMenu()
 		auto type = _fe3d.gfx_getBloomType();
 		auto intensity = _fe3d.gfx_getBloomIntensity();
 		auto blurCount = _fe3d.gfx_getBloomBlurCount();
+		auto quality = _fe3d.gfx_getBloomQuality();
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -518,6 +587,10 @@ void WorldEditor::_updateBloomGraphicsSettingsMenu()
 		{
 			_gui.getGlobalScreen()->createValueForm("blurCount", "Amount Of Blurs", blurCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("quality")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("quality", "Quality", quality, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+		}
 
 		// Update value forms
 		if(_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
@@ -529,11 +602,16 @@ void WorldEditor::_updateBloomGraphicsSettingsMenu()
 		{
 			_fe3d.gfx_setBloomBlurCount(blurCount);
 		}
+		if (_gui.getGlobalScreen()->checkValueForm("quality", quality))
+		{
+			_fe3d.gfx_setBloomQuality(quality);
+		}
 
 		// Update buttons hoverability
 		screen->getButton("type")->setHoverable(isEnabled);
 		screen->getButton("intensity")->setHoverable(isEnabled);
 		screen->getButton("blurs")->setHoverable(isEnabled);
+		screen->getButton("quality")->setHoverable(isEnabled);
 
 		// Update button text contents
 		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");

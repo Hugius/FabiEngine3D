@@ -73,5 +73,23 @@
 
 ## 12. Settings
 
+### 12.1 Lighting
+
+- You can configure ambient lighting in the world.
+- You can configure directional lighting in the world.
+
+### 12.2 Graphics
+
+- You can configure shadows in the world.
+- You can configure reflections in the world.
+- You can configure refractions in the world.
+- You can configure DOF in the world.
+- You can configure fog in the world.
+- You can configure lens flare in the world.
+- You can configure sky exposure in the world.
+- You can configure bloom in the world.
+
+### 12.3 Properties
+
 - **Editor Speed**: the speed with which the camera moves and the XYZ fields change
   - Constraints: at least `0`

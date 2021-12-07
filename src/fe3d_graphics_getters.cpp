@@ -71,9 +71,9 @@ const unsigned int FabiEngine3D::gfx_getPlanarReflectionQuality() const
 	return _core->_renderBus.getPlanarReflectionQuality();
 }
 
-const unsigned int FabiEngine3D::gfx_getRefractionQuality() const
+const unsigned int FabiEngine3D::gfx_getPlanarRefractionQuality() const
 {
-	return _core->_renderBus.getRefractionQuality();
+	return _core->_renderBus.getPlanarRefractionQuality();
 }
 
 const fvec3 FabiEngine3D::gfx_getAmbientLightingColor() const
@@ -186,7 +186,7 @@ const float FabiEngine3D::gfx_getSkyExposureSpeed() const
 	return _core->_skyEntityManager.getExposureSpeed();
 }
 
-const float FabiEngine3D::gfx_getaMaxDofDistance() const
+const float FabiEngine3D::gfx_getMaxDofDistance() const
 {
 	return _core->_renderBus.getDofMaxDistance();
 }

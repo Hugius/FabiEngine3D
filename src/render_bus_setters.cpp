@@ -288,9 +288,9 @@ void RenderBus::setPlanarReflectionQuality(unsigned int value)
 	_planarReflectionQuality = clamp(value, Config::MIN_REFLECTION_QUALITY, Config::MAX_REFLECTION_QUALITY);
 }
 
-void RenderBus::setRefractionQuality(unsigned int value)
+void RenderBus::setPlanarRefractionQuality(unsigned int value)
 {
-	_refractionQuality = clamp(value, Config::MIN_REFRACTION_QUALITY, Config::MAX_REFRACTION_QUALITY);
+	_planarRefractionQuality = clamp(value, Config::MIN_REFRACTION_QUALITY, Config::MAX_REFRACTION_QUALITY);
 }
 
 void RenderBus::resetTriangleCount()

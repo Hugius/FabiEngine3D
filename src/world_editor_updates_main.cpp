@@ -161,6 +161,10 @@ void WorldEditor::update()
 	{
 		_updateReflectionsGraphicsSettingsMenu();
 	}
+	if (_isEditorLoaded)
+	{
+		_updateRefractionsGraphicsSettingsMenu();
+	}
 	if(_isEditorLoaded)
 	{
 		_updateDofGraphicsSettingsMenu();

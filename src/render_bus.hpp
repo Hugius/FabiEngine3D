@@ -69,7 +69,7 @@ public:
 	void setShadowQuality(unsigned int value);
 	void setCubeReflectionQuality(unsigned int value);
 	void setPlanarReflectionQuality(unsigned int value);
-	void setRefractionQuality(unsigned int value);
+	void setPlanarRefractionQuality(unsigned int value);
 	void increaseTriangleCount(unsigned int value);
 	void setBloomBlurCount(unsigned int value);
 	void resetTriangleCount();
@@ -148,7 +148,7 @@ public:
 	const unsigned int getShadowQuality() const;
 	const unsigned int getCubeReflectionQuality() const;
 	const unsigned int getPlanarReflectionQuality() const;
-	const unsigned int getRefractionQuality() const;
+	const unsigned int getPlanarRefractionQuality() const;
 	const unsigned int getBloomBlurCount() const;
 	const unsigned int getTriangleCount() const;
 
@@ -257,7 +257,7 @@ private:
 	unsigned int _shadowQuality = Config::MIN_SHADOW_QUALITY;
 	unsigned int _cubeReflectionQuality = Config::MIN_REFLECTION_QUALITY;
 	unsigned int _planarReflectionQuality = Config::MIN_REFLECTION_QUALITY;
-	unsigned int _refractionQuality = Config::MIN_REFRACTION_QUALITY;
+	unsigned int _planarRefractionQuality = Config::MIN_REFRACTION_QUALITY;
 	unsigned int _bloomBlurCount = 0;
 	unsigned int _triangleCount = 0;
 

@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			auto result = _fe3d.gfx_getaMaxDofDistance();
+			auto result = _fe3d.gfx_getMaxDofDistance();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}

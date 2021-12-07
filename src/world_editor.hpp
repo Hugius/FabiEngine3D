@@ -96,6 +96,7 @@ private:
 	void _updateGraphicsSettingsMenu();
 	void _updateShadowsGraphicsSettingsMenu();
 	void _updateReflectionsGraphicsSettingsMenu();
+	void _updateRefractionsGraphicsSettingsMenu();
 	void _updateDofGraphicsSettingsMenu();
 	void _updateFogGraphicsSettingsMenu();
 	void _updateLensFlareGraphicsSettingsMenu();

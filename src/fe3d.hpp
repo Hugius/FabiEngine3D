@@ -804,7 +804,7 @@ public:
 	void gfx_setAnisotropicFilteringQuality(unsigned int value);
 	void gfx_setCubeReflectionQuality(unsigned int value);
 	void gfx_setPlanarReflectionQuality(unsigned int value);
-	void gfx_setRefractionQuality(unsigned int value);
+	void gfx_setPlanarRefractionQuality(unsigned int value);
 	void gfx_setShadowQuality(unsigned int value);
 	void gfx_setAmbientLightingColor(fvec3 value);
 	void gfx_setAmbientLightingIntensity(float value);
@@ -855,7 +855,7 @@ public:
 	const float gfx_getBloomIntensity() const;
 	const float gfx_getSkyExposureIntensity() const;
 	const float gfx_getSkyExposureSpeed() const;
-	const float gfx_getaMaxDofDistance() const;
+	const float gfx_getMaxDofDistance() const;
 	const float gfx_getDofBlurDistance() const;
 	const float gfx_getLensFlareIntensity() const;
 	const float gfx_getLensFlareSensitivity() const;
@@ -867,7 +867,7 @@ public:
 	const unsigned int gfx_getShadowQuality() const;
 	const unsigned int gfx_getCubeReflectionQuality() const;
 	const unsigned int gfx_getPlanarReflectionQuality() const;
-	const unsigned int gfx_getRefractionQuality() const;
+	const unsigned int gfx_getPlanarRefractionQuality() const;
 	const unsigned int gfx_getBloomBlurCount() const;
 	const unsigned int gfx_getShadowInterval() const;
 	const bool gfx_isAntiAliasingEnabled() const;

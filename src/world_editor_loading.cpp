@@ -534,7 +534,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			float size, lightness;
 			fvec3 position, center;
 			bool isFollowingCamera;
-			int interval;
+			unsigned int interval, quality;
 
 			// Read data from file
 			iss >>
@@ -547,7 +547,8 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				center.y >>
 				center.z >>
 				isFollowingCamera >>
-				interval;
+				interval >>
+				quality;
 
 			// Set shadows
 			_fe3d.gfx_enableShadows();
@@ -558,32 +559,57 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			_fe3d.gfx_setShadowLightness(lightness);
 			_fe3d.gfx_setShadowFollowingCamera(isFollowingCamera);
 			_fe3d.gfx_setShadowInterval(interval);
+			_fe3d.gfx_setShadowQuality(quality);
 		}
 		else if(lineType == "GRAPHICS_REFLECTIONS")
 		{
 			// Data placeholders
 			float planarHeight;
+			unsigned int cubeQuality, planarQuality;
 
 			// Read data from file
-			iss >> planarHeight;
+			iss >>
+				planarHeight >>
+				cubeQuality >>
+				planarQuality;
 
 			// Set reflections
 			_fe3d.gfx_setPlanarReflectionHeight(planarHeight);
+			_fe3d.gfx_setCubeReflectionQuality(cubeQuality);
+			_fe3d.gfx_setPlanarReflectionQuality(planarQuality);
+		}
+		else if (lineType == "GRAPHICS_REFRACTIONS")
+		{
+			// Data placeholders
+			unsigned int planarQuality;
+
+			// Read data from file
+			iss >>
+				planarQuality;
+
+			// Set refractions
+			_fe3d.gfx_setPlanarRefractionQuality(planarQuality);
 		}
 		else if(lineType == "GRAPHICS_DOF")
 		{
 			// Data placeholders
 			bool isDynamic;
 			float blurDistance, maxDistance;
+			unsigned int quality;
 
 			// Read data from file
-			iss >> isDynamic >> blurDistance >> maxDistance;
+			iss >>
+				isDynamic >>
+				blurDistance >>
+				maxDistance >>
+				quality;
 
 			// Set DOF
 			_fe3d.gfx_enableDOF();
 			_fe3d.gfx_setDofDynamic(isDynamic);
 			_fe3d.gfx_setDofMaxDistance(maxDistance);
 			_fe3d.gfx_setDofBlurDistance(blurDistance);
+			_fe3d.gfx_setDofQuality(quality);
 		}
 		else if(lineType == "GRAPHICS_FOG")
 		{
@@ -644,17 +670,22 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "GRAPHICS_BLOOM")
 		{
 			// Data placeholders
-			unsigned int type, blurCount;
 			float intensity;
+			unsigned int type, blurCount, quality;
 
 			// Read data from file
-			iss >> type >> intensity >> blurCount;
+			iss >>
+				type >>
+				intensity >>
+				blurCount >>
+				quality;
 
 			// Set bloom
 			_fe3d.gfx_enableBloom();
 			_fe3d.gfx_setBloomType(BloomType(type));
 			_fe3d.gfx_setBloomIntensity(intensity);
 			_fe3d.gfx_setBloomBlurCount(blurCount);
+			_fe3d.gfx_setBloomQuality(quality);
 		}
 		else
 		{

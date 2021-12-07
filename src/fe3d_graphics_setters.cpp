@@ -195,6 +195,7 @@ void FabiEngine3D::gfx_disableShadows(bool mustResetProperties)
 		_core->_shadowGenerator.setLightness(0.0f);
 		_core->_shadowGenerator.setInterval(0);
 		_core->_shadowGenerator.setFollowingCamera(false);
+		_core->_renderBus.setShadowQuality(Config::MIN_SHADOW_QUALITY);
 	}
 }
 
@@ -213,6 +214,7 @@ void FabiEngine3D::gfx_disableBloom(bool mustResetProperties)
 		_core->_renderBus.setBloomType(BloomType());
 		_core->_renderBus.setBloomIntensity(0.0f);
 		_core->_renderBus.setBloomBlurCount(0);
+		_core->_renderBus.setBloomQuality(Config::MIN_BLOOM_QUALITY);
 	}
 }
 
@@ -248,6 +250,7 @@ void FabiEngine3D::gfx_disableDOF(bool mustResetProperties)
 		_core->_renderBus.setDofDynamic(false);
 		_core->_renderBus.setDofMaxDistance(0.0f);
 		_core->_renderBus.setDofBlurDistance(0.0f);
+		_core->_renderBus.setDofQuality(Config::MIN_DOF_QUALITY);
 	}
 }
 
@@ -264,6 +267,7 @@ void FabiEngine3D::gfx_disableMotionBlur(bool mustResetProperties)
 	if(mustResetProperties)
 	{
 		_core->_renderBus.setMotionBlurStrength(0.0f);
+		_core->_renderBus.setMotionBlurQuality(Config::MIN_MOTION_BLUR_QUALITY);
 	}
 }
 
@@ -327,9 +331,9 @@ void FabiEngine3D::gfx_setPlanarReflectionQuality(unsigned int value)
 	_core->_masterRenderer.reloadWaterReflectionCaptureBuffer();
 }
 
-void FabiEngine3D::gfx_setRefractionQuality(unsigned int value)
+void FabiEngine3D::gfx_setPlanarRefractionQuality(unsigned int value)
 {
-	_core->_renderBus.setRefractionQuality(value);
+	_core->_renderBus.setPlanarRefractionQuality(value);
 	_core->_masterRenderer.reloadWaterRefractionCaptureBuffer();
 }
 

@@ -301,21 +301,20 @@
 
 - Anisotropic filtering is the process of keeping the texture quality.
 - Without this effect textures are blurry when viewed from oblique camera angles.
+- Anisotropic filtering is always enabled.
 
 #### 3.3.2 Properties
 
 - **Quality**: the amount of samples used in anisotropic filtering
   - Type: `integer`
   - Constraints: between `1` and `16`
-- **Enabled**: the anisotropic filtering effect is enabled
-  - Type: `boolean`
-  - Constraints: none
 
 ### 3.4 Gamma Correction
 
 - Gamma correction is the reverse process of monitors displaying colors in a non-linear space.
 - Lighting calculations are done in linear space.
 - After gamma correction the lighting looks smoother.
+- Gamma correction is always enabled.
 
 ### 3.5 Normal Mapping
 
@@ -330,3 +329,4 @@
 ### 3.7 Water Fresnel Effect
 
 - The water fresnel effect mixes the reflection and refraction colors automatically based on the camera position.
+- The water fresnel effect is always enabled.

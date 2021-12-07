@@ -31,6 +31,11 @@ void FabiEngine3D::aabb_setVisible(const string& ID, bool value)
 	_core->_aabbEntityManager.getEntity(ID)->setVisible(value);
 }
 
+void FabiEngine3D::aabb_setColor(const string& ID, fvec3 value)
+{
+	_core->_aabbEntityManager.getEntity(ID)->setColor(value);
+}
+
 void FabiEngine3D::aabb_setRaycastResponsive(const string& ID, bool value)
 {
 	_core->_aabbEntityManager.getEntity(ID)->setRaycastResponsive(value);

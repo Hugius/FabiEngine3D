@@ -68,7 +68,7 @@ void AudioPlayer::update(Camera& camera, vector<Music>& musics, vector<Sound2D>&
 			Uint8 leftStrength = Uint8(255.0f * range);
 			Uint8 rightStrength = Uint8(255.0f - leftStrength);
 
-			// For every sound playback
+			// Iterate through channels
 			for(const auto& channel : _findSoundChannels3D(sound))
 			{
 				// Apply stereo panning

@@ -130,7 +130,7 @@ void AudioPlayer::stopSound2D(Sound2D& sound, unsigned int fadeMS)
 	// Stop or fade
 	if(fadeMS == 0)
 	{
-		// For every sound playback
+		// Iterate through channels
 		for(const auto& channel : _findSoundChannels2D(sound))
 		{
 			Mix_HaltChannel(channel);
@@ -138,7 +138,7 @@ void AudioPlayer::stopSound2D(Sound2D& sound, unsigned int fadeMS)
 	}
 	else
 	{
-		// For every sound playback
+		// Iterate through channels
 		for(const auto& channel : _findSoundChannels2D(sound))
 		{
 			Mix_FadeOutChannel(channel, fadeMS);
@@ -172,7 +172,7 @@ const bool AudioPlayer::isSoundPlaying2D(Sound2D& sound) const
 
 const bool AudioPlayer::isSoundPaused2D(Sound2D& sound) const
 {
-	return (isSoundStarted2D(sound) && Mix_Paused(_findSoundChannels2D(sound).front()));
+	return (isSoundStarted2D(sound) && Mix_Paused(_findSoundChannels2D(sound)[0]));
 }
 
 void AudioPlayer::_updateSoundVolume2D(Sound2D& sound)

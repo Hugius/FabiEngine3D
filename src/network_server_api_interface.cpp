@@ -71,7 +71,7 @@ const string NetworkServerAPI::getOldClientIP() const
 	}
 	else
 	{
-		return _oldClientIPs.front();
+		return _oldClientIPs[0];
 	}
 }
 
@@ -90,7 +90,7 @@ const string NetworkServerAPI::getOldClientUsername() const
 	}
 	else
 	{
-		return _oldClientUsernames.front();
+		return _oldClientUsernames[0];
 	}
 }
 

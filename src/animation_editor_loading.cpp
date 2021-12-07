@@ -97,7 +97,7 @@ const bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 					// Create custom frame
 					AnimationFrame customFrame;
 
-					// For every model part
+					// Iterate through model parts
 					for(unsigned int i = 0; i < modelPartCount; i++)
 					{
 						// Temporary values

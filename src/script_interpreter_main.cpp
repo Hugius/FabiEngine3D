@@ -27,7 +27,7 @@ void ScriptInterpreter::load()
 	// Save current amount of logged messages
 	auto lastLoggerMessageCount = Logger::getMessageCount();
 
-	// For every scriptfile
+	// Iterate through script files
 	for(const auto& scriptID : _script.getAllScriptFileIDs())
 	{
 		auto scriptFile = _script.getScriptFile(scriptID);
@@ -328,7 +328,7 @@ void ScriptInterpreter::unload()
 	for(const auto& ID : _fe3d.image_getAllIDs())
 	{
 		// Cannot delete engine image entities
-		if(ID.front() != '@')
+		if(ID[0] != '@')
 		{
 			_fe3d.image_delete(ID);
 		}
@@ -338,7 +338,7 @@ void ScriptInterpreter::unload()
 	for(const auto& ID : _fe3d.text_getAllIDs())
 	{
 		// Cannot delete engine text entities
-		if(ID.front() != '@')
+		if(ID[0] != '@')
 		{
 			_fe3d.text_delete(ID);
 		}

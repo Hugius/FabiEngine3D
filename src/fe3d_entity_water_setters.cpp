@@ -8,7 +8,7 @@ void FabiEngine3D::water_create(const string& ID)
 
 void FabiEngine3D::water_deleteAll()
 {
-	// For every water entity
+	// Iterate through waters
 	for(const auto& [keyID, entity] : _core->_waterEntityManager.getEntities())
 	{
 		water_delete(entity->getID());

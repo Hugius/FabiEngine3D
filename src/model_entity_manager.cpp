@@ -65,7 +65,7 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 		// Temporary values
 		vector<float> bufferData;
 
-		// For every triangle vertex point
+		// Iterate through vertices
 		for(size_t i = 0; i < part->getVertices().size(); i++)
 		{
 			// Vertex coordinate

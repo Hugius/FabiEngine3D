@@ -25,7 +25,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
-			if(arguments[0].getString().front() == '@')
+			if(arguments[0].getString()[0] == '@')
 			{
 				_throwScriptError("ID of requested model with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
 				return true;
@@ -44,7 +44,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
-			if(arguments[0].getString().front() == '@')
+			if(arguments[0].getString()[0] == '@')
 			{
 				_throwScriptError("ID of requested model with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
 				return true;
@@ -57,7 +57,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				if(arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
 				{
 					// @ sign is reserved
-					if(ID.front() != '@')
+					if(ID[0] != '@')
 					{
 						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
 					}
@@ -72,11 +72,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 		{
 			auto result = _fe3d.model_getAllIDs();
 
-			// For every model
+			// Iterate through models
 			for(const auto& ID : result)
 			{
 				// @ sign is reserved
-				if(ID.front() != '@')
+				if(ID[0] != '@')
 				{
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
 				}

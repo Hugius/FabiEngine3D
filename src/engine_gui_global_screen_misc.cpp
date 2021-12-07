@@ -232,9 +232,11 @@ const string EngineGuiGlobalScreen::checkChoiceForm(const string& ID)
 {
 	if(ID == _choiceFormID)
 	{
-		for(const auto& button : getScrollingList(ID)->getButtons()) // For every button
+		// Iterate through buttons
+		for(const auto& button : getScrollingList(ID)->getButtons()) 
 		{
-			if(button->isHovered()) // If button is hovered
+			// Check if button is hovered
+			if(button->isHovered()) 
 			{
 				return button->getID();
 			}

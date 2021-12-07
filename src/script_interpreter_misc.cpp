@@ -24,7 +24,7 @@ const unsigned int ScriptInterpreter::_countLeadingSpaces(const string& scriptLi
 {
 	int countedSpaces = 0;
 
-	// For every character
+	// Iterate through characters
 	for(size_t i = 0; i < scriptLineText.size(); i++)
 	{
 		// Check if current character is a space

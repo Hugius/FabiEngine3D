@@ -1,7 +1,7 @@
 #pragma once
 
-#include "sound_2d.hpp"
-#include "sound_3d.hpp"
+#include "sound2d.hpp"
+#include "sound3d.hpp"
 #include "music.hpp"
 #include "camera.hpp"
 #include "mathematics.hpp"

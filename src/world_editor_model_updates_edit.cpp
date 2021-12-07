@@ -229,7 +229,7 @@ void WorldEditor::_updateModelEditing()
 				if(!animationNames.empty())
 				{
 					// Stop animation
-					_animationEditor.stopAnimation(animationNames.front(), _activeModelID);
+					_animationEditor.stopAnimation(animationNames[0], _activeModelID);
 
 					// Save new initial position
 					if(position != oldPosition)
@@ -269,7 +269,7 @@ void WorldEditor::_updateModelEditing()
 					}
 
 					// Start animation again
-					_animationEditor.startAnimation(animationNames.front(), _activeModelID, -1);
+					_animationEditor.startAnimation(animationNames[0], _activeModelID, -1);
 				}
 				else // No animation playing
 				{

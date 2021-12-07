@@ -25,7 +25,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
-			if(arguments[0].getString().front() == '@')
+			if(arguments[0].getString()[0] == '@')
 			{
 				_throwScriptError("new model ID (\"" + arguments[0].getString() + "\") cannot start with '@'");
 				return true;
@@ -189,18 +189,18 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_move_to")
+	else if (functionName == "fe3d:model_move_to")
 	{
-		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if (_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if (_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_moveBaseTo(arguments[0].getString(),
-											 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
+					fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

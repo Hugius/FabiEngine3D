@@ -5,7 +5,7 @@ using SVT = ScriptValueType;
 const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if(functionName == "fe3d:sound_3d_place")
+	if(functionName == "fe3d:sound3d_place")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 			string previewID = arguments[1].getString();
 
 			// @ sign is reserved
-			if(newID.front() == '@')
+			if(newID[0] == '@')
 			{
 				_throwScriptError("new sound ID (\"" + arguments[0].getString() + "\") cannot start with '@'");
 				return true;
@@ -48,7 +48,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound_3d_delete")
+	else if(functionName == "fe3d:sound3d_delete")
 	{
 		auto types = {SVT::STRING};
 
@@ -63,7 +63,26 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound_3d_play")
+	else if(functionName == "fe3d:sound3d_delete_all")
+	{
+		// Validate arguments
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			// Iterate through sounds
+			for(const auto& ID : _fe3d.sound3D_getAllIDs())
+			{
+				// @ sign is reserved
+				if(ID[0] != '@')
+				{
+					_fe3d.sound3D_delete(ID);
+				}
+			}
+
+			// Return
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:sound3d_play")
 	{
 		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER};
 
@@ -78,7 +97,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound_3d_play_forced")
+	else if(functionName == "fe3d:sound3d_play_forced")
 	{
 		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER};
 
@@ -93,7 +112,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound_3d_pause")
+	else if(functionName == "fe3d:sound3d_pause")
 	{
 		auto types = {SVT::STRING};
 
@@ -108,7 +127,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound_3d_pause_all")
+	else if(functionName == "fe3d:sound3d_pause_all")
 	{
 		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
@@ -117,7 +136,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:sound_3d_resume")
+	else if(functionName == "fe3d:sound3d_resume")
 	{
 		auto types = {SVT::STRING};
 
@@ -132,7 +151,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound_3d_resume_all")
+	else if(functionName == "fe3d:sound3d_resume_all")
 	{
 		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
@@ -141,7 +160,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:sound_3d_stop")
+	else if(functionName == "fe3d:sound3d_stop")
 	{
 		auto types = {SVT::STRING, SVT::INTEGER};
 
@@ -156,7 +175,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound_3d_stop_all")
+	else if(functionName == "fe3d:sound3d_stop_all")
 	{
 		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
@@ -165,7 +184,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:sound_3d_set_position")
+	else if(functionName == "fe3d:sound3d_set_position")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -182,7 +201,42 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound_3d_set_max_volume")
+	else if(functionName == "fe3d:sound3d_move")
+	{
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dSound3D(arguments[0].getString(), false))
+			{
+				_fe3d.sound3D_move(
+					arguments[0].getString(),
+					fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sound3d_move_to")
+	{
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dSound3D(arguments[0].getString(), false))
+			{
+				_fe3d.sound3D_moveTo(
+					arguments[0].getString(),
+					fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()),
+					arguments[4].getDecimal());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sound3d_set_max_volume")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
@@ -197,7 +251,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound_3d_set_max_distance")
+	else if(functionName == "fe3d:sound3d_set_max_distance")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
@@ -220,7 +274,7 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 	// Cannot execute sound functionality when server is running
 	if(_fe3d.server_isRunning())
 	{
-		_throwScriptError("cannot access `fe3d:sound_3d` functionality as networking server!");
+		_throwScriptError("cannot access `fe3d:sound3d` functionality as networking server!");
 	}
 
 	return true;

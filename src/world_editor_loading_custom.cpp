@@ -215,7 +215,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 					_fe3d.aabb_setCollisionResponsive(ID, isAabbCollisionResponsive);
 				}
 
-				// For every part
+				// Iterate through model parts
 				for(unsigned int i = 0; i < partCount; i++)
 				{
 					// Read transformation data from file

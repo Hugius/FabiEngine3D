@@ -328,7 +328,7 @@ vec3 calculatePointlights(vec3 normal)
 {
 	vec3 result = vec3(0.0f);
 		
-	// For every light
+	// Iterate through lights
 	for (int i = 0; i < u_pointlightCount; i++)
 	{
 		// Calculate light strength
@@ -373,7 +373,7 @@ vec3 calculateSpotlights(vec3 normal)
 {
 	vec3 result = vec3(0.0f);
 
-    // For every light
+    // Iterate through lights
 	for (int i = 0; i < u_spotlightCount; i++)
 	{
 		// Calculate light strength

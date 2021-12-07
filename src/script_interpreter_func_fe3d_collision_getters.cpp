@@ -51,7 +51,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 					{
 						if(arguments[1].getString().empty()) // No specific AABB part
 						{
-							result = _fe3d.aabb_getParentID(foundAabbID);
+							result = _fe3d.aabb_getParentEntityID(foundAabbID);
 						}
 						else // Specific AABB part
 						{
@@ -64,7 +64,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 							// Check if AABB part IDs match
 							if(partID == arguments[1].getString())
 							{
-								result = _fe3d.aabb_getParentID(foundAabbID);
+								result = _fe3d.aabb_getParentEntityID(foundAabbID);
 							}
 						}
 					}
@@ -110,7 +110,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 					   (directionZ && arguments[0].getString() == "Z") ||
 					   ((directionX || directionY || directionZ) && arguments[0].getString().empty()))
 					{
-						result = _fe3d.aabb_getParentID(foundAabbID);
+						result = _fe3d.aabb_getParentEntityID(foundAabbID);
 					}
 				}
 			}
@@ -154,7 +154,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 					   (directionZ && arguments[1].getString() == "Z") ||
 					   ((directionX || directionY || directionZ) && arguments[1].getString().empty()))
 					{
-						result = _fe3d.aabb_getParentID(foundAabbID);
+						result = _fe3d.aabb_getParentEntityID(foundAabbID);
 					}
 				}
 			}
@@ -198,7 +198,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 					   (directionZ && arguments[0].getString() == "Z") ||
 					   ((directionX || directionY || directionZ) && arguments[0].getString().empty()))
 					{
-						result = _fe3d.aabb_getParentID(foundAabbID);
+						result = _fe3d.aabb_getParentEntityID(foundAabbID);
 					}
 				}
 			}

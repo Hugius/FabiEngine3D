@@ -105,7 +105,7 @@ void AnimationEditor::_updateMiscellaneous()
 				// Check if F is pressed
 				if(_fe3d.input_isKeyPressed(InputType::KEY_F))
 				{
-					// For every part
+					// Iterate through model parts
 					for(const auto& partID : animation->getPartIDs())
 					{
 						if (!partID.empty() || (animation->getPartIDs().size() == 1))
@@ -140,7 +140,7 @@ void AnimationEditor::_updateMiscellaneous()
 				// Check if animation has a preview model
 				if(_fe3d.model_isExisting(currentAnimation->getPreviewModelID()))
 				{
-					// For every animation part
+					// Iterate through animation parts
 					for(const auto& partID : currentAnimation->getPartIDs())
 					{
 						if(partID.empty()) // Base transformation
@@ -162,13 +162,13 @@ void AnimationEditor::_updateMiscellaneous()
 					// Set transformation of current frame
 					if(_currentFrameIndex > 0)
 					{
-						// For every frame until current frame
+						// Iterate through frames
 						for(unsigned int frameIndex = 1; frameIndex <= _currentFrameIndex; frameIndex++)
 						{
 							// Retrieve frame
 							auto frame = currentAnimation->getFrames()[frameIndex];
 
-							// For every part of frame
+							// Iterate through animation parts
 							for(const auto& partID : currentAnimation->getPartIDs())
 							{
 								// Check if model has part

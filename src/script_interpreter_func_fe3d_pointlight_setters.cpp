@@ -16,7 +16,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 			const auto ID = arguments[0].getString();
 
 			// @ sign is reserved
-			if(ID.front() == '@')
+			if(ID[0] == '@')
 			{
 				_throwScriptError("new pointlight ID (\"" + ID + "\") cannot start with '@'");
 				return true;

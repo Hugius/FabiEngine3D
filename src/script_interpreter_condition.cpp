@@ -154,9 +154,9 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 			if(comparisonValues.size() == 2)
 			{
 				// Check if condition is possible at all
-				if(_validateCondition(comparisonValues.front(), comparisonOperator, comparisonValues.back()))
+				if(_validateCondition(comparisonValues[0], comparisonOperator, comparisonValues.back()))
 				{
-					conditions.push_back(_compareValues(comparisonValues.front(), comparisonOperator, comparisonValues.back()));
+					conditions.push_back(_compareValues(comparisonValues[0], comparisonOperator, comparisonValues.back()));
 					comparisonValues.clear();
 					mustBeValue = false;
 					mustBeLogicOperator = true;
@@ -212,7 +212,7 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 	// Single condition
 	if(conditions.size() == 1)
 	{
-		return conditions.front();
+		return conditions[0];
 	}
 
 	// Multiple conditions

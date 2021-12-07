@@ -23,7 +23,7 @@ void AnimationEditor::_updateAnimationExecution()
 			const auto frameIndex = animation.getFrameIndex();
 			auto frame = animation.getFrames()[frameIndex];
 
-			// For every model part in this frame
+			// Iterate through animation parts
 			unsigned int finishedPartCount = 0;
 			for(const auto& partID : animation.getPartIDs())
 			{

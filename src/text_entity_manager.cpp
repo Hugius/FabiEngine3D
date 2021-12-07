@@ -49,7 +49,7 @@ void TextEntityManager::loadCharacters(const string& ID)
 		_contentMap[ID] = entity->getContent();
 		entity->deleteCharacterEntities();
 
-		// For every character
+		// Iterate through characters
 		for(const auto& c : entity->getContent())
 		{
 			if(!isInvalidFont)

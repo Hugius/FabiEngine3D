@@ -19,13 +19,13 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 	}
 
 	// List string cannot start with a comma
-	if(listString.front() == ',')
+	if(listString[0] == ',')
 	{
 		_throwScriptError("cannot start value with ','!");
 		return {};
 	}
 
-	// For every character in list string
+	// Iterate through characters in list string
 	unsigned int index = 0;
 	for(const auto& c : listString)
 	{

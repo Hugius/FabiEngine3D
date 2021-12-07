@@ -16,7 +16,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 			auto ID = arguments[0].getString();
 
 			// @ sign is reserved
-			if(ID.front() == '@')
+			if(ID[0] == '@')
 			{
 				_throwScriptError("new reflection ID (\"" + ID + "\") cannot start with '@'");
 				return true;

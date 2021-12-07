@@ -13,7 +13,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
-			if(arguments[0].getString().front() == '@')
+			if(arguments[0].getString()[0] == '@')
 			{
 				_throwScriptError("new billboard ID (\"" + arguments[0].getString() + "\") cannot start with '@'");
 				return true;

@@ -25,6 +25,11 @@ const fvec3 FabiEngine3D::aabb_getSize(const string& ID) const
 	}
 }
 
+const fvec3 FabiEngine3D::aabb_getColor(const string& ID) const
+{
+	return _core->_aabbEntityManager.getEntity(ID)->getColor();
+}
+
 const bool FabiEngine3D::aabb_isRaycastResponsive(const string& ID) const
 {
 	return _core->_aabbEntityManager.getEntity(ID)->isRaycastResponsive();
@@ -85,7 +90,7 @@ const vector<string> FabiEngine3D::aabb_getAllIDs() const
 	return result;
 }
 
-const string& FabiEngine3D::aabb_getParentID(const string& ID) const
+const string& FabiEngine3D::aabb_getParentEntityID(const string& ID) const
 {
 	return _core->_aabbEntityManager.getEntity(ID)->getParentEntityID();
 }

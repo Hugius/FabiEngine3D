@@ -155,7 +155,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 				{
 					if(arguments[1].getString().empty()) // No specific AABB part
 					{
-						result = _fe3d.aabb_getParentID(foundAabbID);
+						result = _fe3d.aabb_getParentEntityID(foundAabbID);
 					}
 					else // Specific AABB part
 					{
@@ -168,7 +168,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 						// Check if AABB part IDs match
 						if(partID == arguments[1].getString())
 						{
-							result = _fe3d.aabb_getParentID(foundAabbID);
+							result = _fe3d.aabb_getParentEntityID(foundAabbID);
 						}
 					}
 				}
@@ -239,7 +239,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 				if(_fe3d.aabb_hasParent(foundAabbID) &&
 				   (_fe3d.aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::MODEL))
 				{
-					result = _fe3d.aabb_getParentID(foundAabbID);
+					result = _fe3d.aabb_getParentEntityID(foundAabbID);
 				}
 			}
 
@@ -289,7 +289,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 				if(_fe3d.aabb_hasParent(foundAabbID) &&
 				   (_fe3d.aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::BILLBOARD))
 				{
-					result = _fe3d.aabb_getParentID(foundAabbID);
+					result = _fe3d.aabb_getParentEntityID(foundAabbID);
 				}
 			}
 
@@ -313,7 +313,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 				if(_fe3d.aabb_hasParent(foundAabbID) &&
 				   (_fe3d.aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::BILLBOARD))
 				{
-					result = _fe3d.aabb_getParentID(foundAabbID);
+					result = _fe3d.aabb_getParentEntityID(foundAabbID);
 				}
 			}
 

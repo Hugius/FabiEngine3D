@@ -201,9 +201,9 @@ vec4 calculateWaterColor()
 
 vec3 calculateLights(vec3 normal)
 {
-		vec3 result = vec3(0.0f);
+	vec3 result = vec3(0.0f);
 		
-    // For every light
+    // Iterate through lights
 	for (int i = 0; i < u_lightCount; i++)
 	{
         // Calculate light strength

@@ -4,7 +4,7 @@
 const bool ScriptInterpreter::_validateFe3dAabb(const string& ID)
 {
 	// @ sign is reserved
-	if(ID.front() == '@')
+	if(ID[0] == '@')
 	{
 		_throwScriptError("ID of requested AABB with ID \"" + ID + "\" cannot start with '@'!");
 		return false;
@@ -34,7 +34,7 @@ const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isPr
 	else
 	{
 		// @ sign is reserved
-		if(!isPreview && ID.front() == '@')
+		if(!isPreview && ID[0] == '@')
 		{
 			_throwScriptError("ID of requested billboard with ID \"" + ID + "\" cannot start with '@'!");
 			return false;
@@ -54,7 +54,7 @@ const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isPr
 const bool ScriptInterpreter::_validateFe3dImage(const string& ID)
 {
 	// @ sign is reserved
-	if(ID.front() == '@')
+	if(ID[0] == '@')
 	{
 		_throwScriptError("ID of requested image with ID \"" + ID + "\" cannot start with '@'!");
 		return false;
@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_validateFe3dImage(const string& ID)
 const bool ScriptInterpreter::_validateFe3dPointlight(const string& ID)
 {
 	// @ sign is reserved
-	if(ID.front() == '@')
+	if(ID[0] == '@')
 	{
 		_throwScriptError("ID of requested pointlight with ID \"" + ID + "\" cannot start with '@'!");
 		return false;
@@ -92,7 +92,7 @@ const bool ScriptInterpreter::_validateFe3dPointlight(const string& ID)
 const bool ScriptInterpreter::_validateFe3dSpotlight(const string& ID)
 {
 	// @ sign is reserved
-	if(ID.front() == '@')
+	if(ID[0] == '@')
 	{
 		_throwScriptError("ID of requested spotlight with ID \"" + ID + "\" cannot start with '@'!");
 		return false;
@@ -129,7 +129,7 @@ const bool ScriptInterpreter::_validateFe3dModel(const string& ID, bool isPrevie
 	else
 	{
 		// @ sign is reserved
-		if(ID.front() == '@')
+		if(ID[0] == '@')
 		{
 			_throwScriptError("ID of requested model with ID \"" + ID + "\" cannot start with '@'!");
 			return false;
@@ -150,7 +150,7 @@ const bool ScriptInterpreter::_validateFe3dModel(const string& ID, bool isPrevie
 const bool ScriptInterpreter::_validateFe3dReflection(const string& ID)
 {
 	// @ sign is reserved
-	if(ID.front() == '@')
+	if(ID[0] == '@')
 	{
 		_throwScriptError("ID of requested reflection with ID \"" + ID + "\" cannot start with '@'!");
 		return false;
@@ -193,7 +193,7 @@ const bool ScriptInterpreter::_validateFe3dTerrain()
 const bool ScriptInterpreter::_validateFe3dText(const string& ID)
 {
 	// @ sign is reserved
-	if(ID.front() == '@')
+	if(ID[0] == '@')
 	{
 		_throwScriptError("ID of requested text with ID \"" + ID + "\" cannot start with '@'!");
 		return false;
@@ -235,7 +235,7 @@ const bool ScriptInterpreter::_validateFe3dSound2D(const string& ID, bool isPrev
 	else
 	{
 		// @ sign is reserved
-		if(!isPreview && ID.front() == '@')
+		if(!isPreview && ID[0] == '@')
 		{
 			_throwScriptError("ID of requested 2D sound with ID \"" + ID + "\" cannot start with '@'!");
 			return false;
@@ -266,7 +266,7 @@ const bool ScriptInterpreter::_validateFe3dSound3D(const string& ID, bool isPrev
 	else
 	{
 		// @ sign is reserved
-		if (!isPreview && ID.front() == '@')
+		if (!isPreview && ID[0] == '@')
 		{
 			_throwScriptError("ID of requested 3D sound with ID \"" + ID + "\" cannot start with '@'!");
 			return false;

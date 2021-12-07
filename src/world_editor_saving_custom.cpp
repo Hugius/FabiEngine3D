@@ -129,8 +129,8 @@ const bool WorldEditor::saveCustomWorldToFile()
 			// Data to save
 			auto isVisible = _fe3d.model_isVisible(modelID);
 			auto isFrozen = _fe3d.model_isFrozen(modelID);
-			auto isAabbRaycastResponsive = aabbIDs.empty() ? false : _fe3d.aabb_isRaycastResponsive(aabbIDs.front());
-			auto isAabbCollisionResponsive = aabbIDs.empty() ? false : _fe3d.aabb_isCollisionResponsive(aabbIDs.front());
+			auto isAabbRaycastResponsive = aabbIDs.empty() ? false : _fe3d.aabb_isRaycastResponsive(aabbIDs[0]);
+			auto isAabbCollisionResponsive = aabbIDs.empty() ? false : _fe3d.aabb_isCollisionResponsive(aabbIDs[0]);
 			auto position = _fe3d.model_getBasePosition(modelID);
 			auto rotation = _fe3d.model_getBaseRotation(modelID);
 			auto rotationOrigin = _fe3d.model_getBaseRotationOrigin(modelID);
@@ -331,8 +331,8 @@ const bool WorldEditor::saveCustomWorldToFile()
 
 			// Data to save
 			auto isVisible = _fe3d.billboard_isVisible(billboardID);
-			auto isAabbRaycastResponsive = aabbIDs.empty() ? false : _fe3d.aabb_isRaycastResponsive(aabbIDs.front());
-			auto isAabbCollisionResponsive = aabbIDs.empty() ? false : _fe3d.aabb_isCollisionResponsive(aabbIDs.front());
+			auto isAabbRaycastResponsive = aabbIDs.empty() ? false : _fe3d.aabb_isRaycastResponsive(aabbIDs[0]);
+			auto isAabbCollisionResponsive = aabbIDs.empty() ? false : _fe3d.aabb_isCollisionResponsive(aabbIDs[0]);
 			auto isFacingX = _fe3d.billboard_isFacingCameraX(billboardID);
 			auto isFacingY = _fe3d.billboard_isFacingCameraY(billboardID);
 			auto isAnimationPlaying = _fe3d.billboard_isSpriteAnimationStarted(billboardID);
@@ -405,7 +405,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 		// Check if allowed to save
 		bool isCustomWorldAabb =
 			find(_customWorldAabbIDs.begin(), _customWorldAabbIDs.end(), aabbID) != _customWorldAabbIDs.end();
-		if((aabbID[0] != '@') && isCustomWorldAabb && _fe3d.aabb_getParentID(aabbID).empty())
+		if((aabbID[0] != '@') && isCustomWorldAabb && _fe3d.aabb_getParentEntityID(aabbID).empty())
 		{
 			// Data to save
 			auto isVisible = _fe3d.aabb_isVisible(aabbID);

@@ -109,8 +109,8 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		nameString.substr(0, 5) != "fe3d:" &&
 		nameString.substr(0, 5) != "math:" &&
 		nameString.substr(0, 5) != "misc:" &&
-		!isdigit(nameString.front()) &&
-		(isalnum(nameString.front()) || nameString.front() == '_');
+		!isdigit(nameString[0]) &&
+		(isalnum(nameString[0]) || nameString[0] == '_');
 
 	// Validate name
 	for(const auto& word : forbiddenVariableNames)
@@ -129,14 +129,14 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 	}
 
 	// Check if global variable starts with '_'
-	if(scope == ScriptVariableScope::GLOBAL && nameString.front() != '_')
+	if(scope == ScriptVariableScope::GLOBAL && nameString[0] != '_')
 	{
 		_throwScriptError("global variables must start with '_'!");
 		return;
 	}
 
 	// Check if local variable does not start with '_'
-	if(scope == ScriptVariableScope::LOCAL && nameString.front() == '_')
+	if(scope == ScriptVariableScope::LOCAL && nameString[0] == '_')
 	{
 		_throwScriptError("local variables cannot start with '_'!");
 		return;
@@ -232,7 +232,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		variableList.insert(make_pair(nameString,
 							ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, values)));
 	}
-	else if((typeString == BOOLEAN_KEYWORD) && (valueString.front() == '(' && valueString.back() == ')'))
+	else if((typeString == BOOLEAN_KEYWORD) && (valueString[0] == '(' && valueString.back() == ')'))
 	{
 		// Removing the ()
 		valueString.erase(valueString.begin());

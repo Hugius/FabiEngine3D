@@ -43,13 +43,13 @@ const bool AnimationEditor::saveAnimationsToFile() const
 				// Add space
 				file << " ";
 
-				// For every frame
+				// Iterate through frames
 				for(unsigned int frameIndex = 1; frameIndex < animation->getFrames().size(); frameIndex++)
 				{
 					// Write the amount of model parts
 					file << animation->getPartIDs().size() << " ";
 
-					// For every model part
+					// Iterate through model parts
 					unsigned int partIndex = 0;
 					for(auto partID : animation->getPartIDs())
 					{

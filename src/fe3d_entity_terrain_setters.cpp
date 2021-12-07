@@ -8,7 +8,7 @@ void FabiEngine3D::terrain_create(const string& ID, const string& value)
 
 void FabiEngine3D::terrain_deleteAll()
 {
-	// For every terrain entity
+	// Iterate through terrains
 	for(const auto& [keyID, entity] : _core->_terrainEntityManager.getEntities())
 	{
 		terrain_delete(entity->getID());

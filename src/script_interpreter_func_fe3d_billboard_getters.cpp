@@ -328,7 +328,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
-			if(arguments[0].getString().front() == '@')
+			if(arguments[0].getString()[0] == '@')
 			{
 				_throwScriptError("ID of requested billboard with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
 				return true;
@@ -347,7 +347,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
-			if(arguments[0].getString().front() == '@')
+			if(arguments[0].getString()[0] == '@')
 			{
 				_throwScriptError("ID of requested billboard with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
 				return true;
@@ -360,7 +360,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 				if(arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
 				{
 					// @ sign is reserved
-					if(ID.front() != '@')
+					if(ID[0] != '@')
 					{
 						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
 					}
@@ -375,11 +375,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 		{
 			auto result = _fe3d.billboard_getAllIDs();
 
-			// For every billboard
+			// Iterate through billboards
 			for(const auto& ID : result)
 			{
 				// @ sign is reserved
-				if(ID.front() != '@')
+				if(ID[0] != '@')
 				{
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
 				}

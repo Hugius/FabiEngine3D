@@ -24,7 +24,7 @@ void AnimationEditor::_updateChoiceMenu()
 			// Check if animation has preview model
 			if(_fe3d.model_isExisting(currentAnimation->getPreviewModelID()))
 			{
-				// For every part
+				// Iterate through model parts
 				for(const auto& partID : currentAnimation->getPartIDs())
 				{
 					// Hide preview model

@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_isListValue(const string& valueString) const
 	}
 
 	// Check if value is surrounded by braces
-	if(valueString.front() != '{' || valueString.back() != '}')
+	if(valueString[0] != '{' || valueString.back() != '}')
 	{
 		return false;
 	}
@@ -29,7 +29,7 @@ const bool ScriptInterpreter::_isStringValue(const string& valueString) const
 	}
 
 	// Check if value is a valid string
-	return (valueString.size() >= 2) && (valueString.front() == '"') && (valueString.back() == '"');
+	return (valueString.size() >= 2) && (valueString[0] == '"') && (valueString.back() == '"');
 }
 
 const bool ScriptInterpreter::_isDecimalValue(const string& valueString) const
@@ -42,7 +42,7 @@ const bool ScriptInterpreter::_isDecimalValue(const string& valueString) const
 
 	// Check if value is perhaps negative
 	unsigned int startingIndex = 0;
-	if(valueString.front() == '-')
+	if(valueString[0] == '-')
 	{
 		startingIndex = 1;
 	}
@@ -77,7 +77,7 @@ const bool ScriptInterpreter::_isIntegerValue(const string& valueString) const
 
 	// Check if value is perhaps negative
 	unsigned int startingIndex = 0;
-	if(valueString.front() == '-')
+	if(valueString[0] == '-')
 	{
 		startingIndex = 1;
 	}
@@ -175,7 +175,7 @@ const bool ScriptInterpreter::_validateMouseInputString(const string& inputStrin
 const string ScriptInterpreter::_limitIntegerString(const string& valueString) const
 {
 	// Check if negative value
-	if(valueString.front() == '-')
+	if(valueString[0] == '-')
 	{
 		// Cannot be less than -999999999
 		if(valueString.size() >= 11)
@@ -202,7 +202,7 @@ const string ScriptInterpreter::_limitDecimalString(const string& valueString) c
 	string intString = valueString.substr(0, dotIndex);
 
 	// Check if negative value
-	if(valueString.front() == '-')
+	if(valueString[0] == '-')
 	{
 		// Cannot be less than -999999999
 		if(intString.size() >= 11)

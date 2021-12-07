@@ -8,7 +8,7 @@ void FabiEngine3D::model_create(const string& ID, const string& meshPath)
 
 void FabiEngine3D::model_deleteAll()
 {
-	// For every model entity
+	// Iterate through models
 	for(const auto& [keyID, entity] : _core->_modelEntityManager.getEntities())
 	{
 		model_delete(entity->getID());

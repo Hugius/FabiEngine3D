@@ -16,7 +16,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 			const auto ID = arguments[0].getString();
 
 			// @ sign is reserved
-			if(ID.front() == '@')
+			if(ID[0] == '@')
 			{
 				_throwScriptError("new spotlight ID (\"" + ID + "\") cannot start with '@'");
 				return true;

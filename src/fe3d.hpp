@@ -427,6 +427,7 @@ public:
 	void aabb_deleteAll();
 	void aabb_delete(const string& ID);
 	void aabb_setVisible(const string& ID, bool value);
+	void aabb_setColor(const string& ID, fvec3 value);
 	void aabb_setRaycastResponsive(const string& ID, bool value);
 	void aabb_setCollisionResponsive(const string& ID, bool value);
 	void aabb_setFollowParentTransformation(const string& ID, bool value);
@@ -443,9 +444,10 @@ public:
 	// AABB - getters
 	const vector<string> aabb_getChildIDs(const string& parentID, AabbParentEntityType parentEntityType) const;
 	const vector<string> aabb_getAllIDs() const;
-	const string& aabb_getParentID(const string& ID) const;
+	const string& aabb_getParentEntityID(const string& ID) const;
 	const fvec3 aabb_getPosition(const string& ID) const;
 	const fvec3 aabb_getSize(const string& ID) const;
+	const fvec3 aabb_getColor(const string& ID) const;
 	const bool aabb_isRaycastResponsive(const string& ID) const;
 	const bool aabb_isCollisionResponsive(const string& ID) const;
 	const bool aabb_isExisting(const string& ID) const;

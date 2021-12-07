@@ -21,13 +21,13 @@
     <ClCompile Include="..\..\..\src\audio_player_3d.cpp">
       <Filter>Player</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sound_2d.cpp">
+    <ClCompile Include="..\..\..\src\sound2d.cpp">
       <Filter>Data Structures</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\music.cpp">
       <Filter>Data Structures</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sound_3d.cpp">
+    <ClCompile Include="..\..\..\src\sound3d.cpp">
       <Filter>Data Structures</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\audio_player_2d.cpp">
@@ -44,13 +44,13 @@
     <ClInclude Include="..\..\..\src\audio_player.hpp">
       <Filter>Player</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\sound_2d.hpp">
+    <ClInclude Include="..\..\..\src\sound2d.hpp">
       <Filter>Data Structures</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\music.hpp">
       <Filter>Data Structures</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\sound_3d.hpp">
+    <ClInclude Include="..\..\..\src\sound3d.hpp">
       <Filter>Data Structures</Filter>
     </ClInclude>
   </ItemGroup>

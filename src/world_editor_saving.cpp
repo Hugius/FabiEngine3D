@@ -29,7 +29,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 	vector<string> levelOfDetailEntityIDs;
 	for(const auto& modelID : _fe3d.model_getAllIDs())
 	{
-		// Check if not preview entity
+		// @ sign is reserved
 		if(modelID[0] != '@')
 		{
 			// Check if entity has level of detail model
@@ -134,7 +134,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 			auto size = _fe3d.model_getBaseSize(modelID);
 			auto isFrozen = _fe3d.model_isFrozen(modelID);
 			auto animationID = (_animationEditor.getStartedAnimationIDs(modelID).empty()) ? "" :
-				_animationEditor.getStartedAnimationIDs(modelID).front();
+				_animationEditor.getStartedAnimationIDs(modelID)[0];
 
 			// Convert empty string
 			animationID = (animationID.empty()) ? "?" : animationID;

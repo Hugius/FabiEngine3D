@@ -1,8 +1,8 @@
 #pragma once
 
 #include "music.hpp"
-#include "sound_2d.hpp"
-#include "sound_3d.hpp"
+#include "sound2d.hpp"
+#include "sound3d.hpp"
 #include "audio_loader.hpp"
 
 class AudioManager final

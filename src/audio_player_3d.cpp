@@ -130,7 +130,7 @@ void AudioPlayer::stopSound3D(Sound3D& sound, unsigned int fadeMS)
 	// Stop or fade
 	if(fadeMS == 0)
 	{
-		// For every sound playback
+		// Iterate through channels
 		for(const auto& channel : _findSoundChannels3D(sound))
 		{
 			Mix_HaltChannel(channel);
@@ -138,7 +138,7 @@ void AudioPlayer::stopSound3D(Sound3D& sound, unsigned int fadeMS)
 	}
 	else
 	{
-		// For every sound playback
+		// Iterate through channels
 		for(const auto& channel : _findSoundChannels3D(sound))
 		{
 			Mix_FadeOutChannel(channel, fadeMS);
@@ -172,7 +172,7 @@ const bool AudioPlayer::isSoundPlaying3D(Sound3D& sound) const
 
 const bool AudioPlayer::isSoundPaused3D(Sound3D& sound) const
 {
-	return (isSoundStarted3D(sound) && Mix_Paused(_findSoundChannels3D(sound).front()));
+	return (isSoundStarted3D(sound) && Mix_Paused(_findSoundChannels3D(sound)[0]));
 }
 
 void AudioPlayer::_updateSoundVolume3D(Sound3D& sound)

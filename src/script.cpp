@@ -116,16 +116,16 @@ const vector<pair<string, unsigned int>> Script::findKeyword(const string& keywo
 	// Temporary values
 	vector<pair<string, unsigned int>> result;
 
-	// For every scriptfile
+	// Iterate through script files
 	for(const auto& file : _scriptFiles)
 	{
-		// For every line
+		// Iterate through lines
 		for(unsigned int lineNumber = 0; lineNumber < file->getLines().size(); lineNumber++)
 		{
 			// Temporary values
 			string line = file->getLines()[lineNumber];
 
-			// For every line
+			// Iterate through lines
 			for(size_t i = 0; i < line.size(); i++)
 			{
 				// Check if keyword occurs

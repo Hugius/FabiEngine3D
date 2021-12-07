@@ -33,7 +33,7 @@ const bool FabiEngine3D::gfx_isSkyExposureEnabled() const
 
 const bool FabiEngine3D::gfx_isShadowsEnabled() const
 {
-	return _core->_renderBus.isShadowsEnabled();
+	return _core->_shadowGenerator.isEnabled();
 }
 
 const bool FabiEngine3D::gfx_isDofEnabled() const
@@ -58,7 +58,7 @@ const bool FabiEngine3D::gfx_isLensFlareEnabled() const
 
 const unsigned int FabiEngine3D::gfx_getShadowQuality() const
 {
-	return _core->_renderBus.getShadowQuality();
+	return _core->_shadowGenerator.getQuality();
 }
 
 const unsigned int FabiEngine3D::gfx_getCubeReflectionQuality() const

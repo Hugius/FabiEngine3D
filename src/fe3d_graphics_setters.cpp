@@ -47,13 +47,13 @@ void FabiEngine3D::gfx_enableAntiAliasing()
 
 void FabiEngine3D::gfx_enableShadows()
 {
-	if(_core->_renderBus.isShadowsEnabled())
+	if(_core->_shadowGenerator.isEnabled())
 	{
 		Logger::throwWarning("Tried to enable shadows: already enabled");
 		return;
 	}
 
-	_core->_renderBus.setShadowsEnabled(true);
+	_core->_shadowGenerator.setEnabled(true);
 }
 
 void FabiEngine3D::gfx_enableBloom()
@@ -178,13 +178,13 @@ void FabiEngine3D::gfx_disableAntiAliasing(bool mustResetProperties)
 
 void FabiEngine3D::gfx_disableShadows(bool mustResetProperties)
 {
-	if(!_core->_renderBus.isShadowsEnabled())
+	if(!_core->_shadowGenerator.isEnabled())
 	{
 		Logger::throwWarning("Tried to disable shadows: not enabled");
 		return;
 	}
 
-	_core->_renderBus.setShadowsEnabled(false);
+	_core->_shadowGenerator.setEnabled(false);
 
 	if(mustResetProperties)
 	{

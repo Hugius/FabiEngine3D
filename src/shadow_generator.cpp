@@ -12,14 +12,15 @@ ShadowGenerator::ShadowGenerator(RenderBus& renderBus)
 	_areaSize(renderBus.getShadowAreaSize()),
 	_areaReach(renderBus.getShadowAreaReach()),
 	_lightness(renderBus.getShadowLightness()),
-	_quality(renderBus.getShadowQuality())
+	_quality(renderBus.getShadowQuality()),
+	_isEnabled(renderBus.isShadowsEnabled())
 {
 
 }
 
 void ShadowGenerator::update()
 {
-	if(_renderBus.isShadowsEnabled())
+	if(_isEnabled)
 	{
 		if(_passedFrames >= _interval)
 		{
@@ -43,6 +44,7 @@ void ShadowGenerator::generate()
 	auto newAreaReach = _areaReach;
 	auto newLightness = _lightness;
 	auto newQuality = _quality;
+	auto newEnabled = _isEnabled;
 
 	// Follow camera
 	if(_isFollowingCamera)
@@ -64,6 +66,7 @@ void ShadowGenerator::generate()
 	_renderBus.setShadowAreaReach(newAreaReach);
 	_renderBus.setShadowLightness(newLightness);
 	_renderBus.setShadowQuality(newQuality);
+	_renderBus.setShadowsEnabled(newEnabled);
 	
 	// Create shadow matrix
 	_renderBus.setShadowMatrix(_createShadowMatrix(newEyePosition, newCenterPosition, newAreaSize, newAreaReach));
@@ -91,6 +94,11 @@ void ShadowGenerator::setInterval(unsigned int value)
 {
 	_interval = value;
 	_passedFrames = 0;
+}
+
+void ShadowGenerator::setEnabled(bool value)
+{
+	_isEnabled = value;
 }
 
 void ShadowGenerator::setFollowingCamera(bool value)
@@ -161,6 +169,11 @@ const unsigned int ShadowGenerator::getQuality() const
 const unsigned int ShadowGenerator::getInterval() const
 {
 	return _interval;
+}
+
+const bool ShadowGenerator::isEnabled()
+{
+	return _isEnabled;
 }
 
 const bool ShadowGenerator::isFollowingCamera() const

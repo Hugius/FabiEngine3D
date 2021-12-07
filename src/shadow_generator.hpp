@@ -17,6 +17,7 @@ public:
 	void setLightness(float value);
 	void setQuality(unsigned int value);
 	void setInterval(unsigned int value);
+	void setEnabled(bool value);
 	void setFollowingCamera(bool value);
 
 	// FVEC3
@@ -33,6 +34,7 @@ public:
 	const unsigned int getInterval() const;
 
 	// BOOL
+	const bool isEnabled();
 	const bool isFollowingCamera() const;
 
 private:
@@ -55,6 +57,7 @@ private:
 	unsigned int _passedFrames = 0;
 
 	// BOOL
+	bool _isEnabled = false;
 	bool _isFollowingCamera = false;
 
 	// MISCELLANEOUS

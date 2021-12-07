@@ -110,7 +110,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_width")
+	else if(functionName == "fe3d:billboard_get_size_x")
 	{
 		auto types = {SVT::STRING};
 
@@ -125,7 +125,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_height")
+	else if(functionName == "fe3d:billboard_get_size_y")
 	{
 		auto types = {SVT::STRING};
 
@@ -185,6 +185,51 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
+	else if(functionName == "fe3d:billboard_get_wireframe_color_r")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.billboard_getWireframeColor(arguments[0].getString()).r;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:billboard_get_wireframe_color_g")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.billboard_getWireframeColor(arguments[0].getString()).g;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:billboard_get_wireframe_color_b")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.billboard_getWireframeColor(arguments[0].getString()).b;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:billboard_get_min_height")
 	{
 		auto types = {SVT::STRING};
@@ -226,6 +271,36 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.billboard_getTransparency(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:billboard_get_emission_intensity")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.billboard_getEmissionIntensity(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:billboard_get_texture_repeat")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.billboard_getTextureRepeat(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -320,6 +395,96 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
+	else if(functionName == "fe3d:billboard_is_shadowed")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.billboard_isShadowed(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:billboard_is_reflected")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.billboard_isReflected(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:billboard_is_bright")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.billboard_isBright(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:billboard_is_wireframed")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.billboard_isWireframed(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:billboard_is_frozen")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.billboard_isFrozen(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:billboard_is_textual")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.billboard_isTextual(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:billboard_is_existing")
 	{
 		auto types = {SVT::STRING};
@@ -386,7 +551,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_text")
+	else if(functionName == "fe3d:billboard_get_text_content")
 	{
 		auto types = {SVT::STRING};
 
@@ -402,11 +567,10 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 					_throwScriptError("billboard with ID \"" + arguments[0].getString() + "\" is not of type text!");
 					return true;
 				}
-				else
-				{
-					auto result = _fe3d.billboard_getTextContent(arguments[0].getString());
-					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
-				}
+
+				// Return text content
+				auto result = _fe3d.billboard_getTextContent(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 			}
 		}
 	}

@@ -371,8 +371,8 @@ public:
 	void billboard_setSpriteAnimationColumnIndex(const string& ID, unsigned int value);
 	void billboard_setSpriteAnimationFramestep(const string& ID, unsigned int value);
 	void billboard_setVisible(const string& ID, bool value);
-	void billboard_setCameraFacingX(const string& ID, bool value);
-	void billboard_setCameraFacingY(const string& ID, bool value);
+	void billboard_setFacingCameraX(const string& ID, bool value);
+	void billboard_setFacingCameraY(const string& ID, bool value);
 	void billboard_setDepthMapIncluded(const string& ID, bool value);
 	void billboard_setShadowed(const string& ID, bool value);
 	void billboard_setReflected(const string& ID, bool value);

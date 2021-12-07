@@ -409,8 +409,8 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				// Set properties
 				_fe3d.billboard_setRotation(billboardID, rotation);
 				_fe3d.billboard_setSize(billboardID, size);
-				_fe3d.billboard_setCameraFacingX(billboardID, isFacingX);
-				_fe3d.billboard_setCameraFacingY(billboardID, isFacingY);
+				_fe3d.billboard_setFacingCameraX(billboardID, isFacingX);
+				_fe3d.billboard_setFacingCameraY(billboardID, isFacingY);
 				_fe3d.billboard_setColor(billboardID, color);
 				_fe3d.billboard_setTextContent(billboardID, textContent);
 				_fe3d.billboard_setLightness(billboardID, lightness);

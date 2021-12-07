@@ -319,8 +319,8 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 			_fe3d.billboard_setSize(billboardID, size);
 			_fe3d.billboard_setColor(billboardID, color);
 			_fe3d.billboard_setLightness(billboardID, lightness);
-			_fe3d.billboard_setCameraFacingX(billboardID, isFacingX);
-			_fe3d.billboard_setCameraFacingY(billboardID, isFacingY);
+			_fe3d.billboard_setFacingCameraX(billboardID, isFacingX);
+			_fe3d.billboard_setFacingCameraY(billboardID, isFacingY);
 			_fe3d.billboard_setShadowed(billboardID, isShadowed);
 			_fe3d.billboard_setReflected(billboardID, isReflected);
 			_fe3d.billboard_setTextureRepeat(billboardID, textureRepeat);

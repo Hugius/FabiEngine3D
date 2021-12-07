@@ -22,12 +22,12 @@ void BillboardEditor::_updateMiscellaneousMenu()
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingX")->isHovered())
 		{
 			isFacingX = !isFacingX;
-			_fe3d.billboard_setCameraFacingX(_currentBillboardID, isFacingX);
+			_fe3d.billboard_setFacingCameraX(_currentBillboardID, isFacingX);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFacingY")->isHovered())
 		{
 			isFacingY = !isFacingY;
-			_fe3d.billboard_setCameraFacingY(_currentBillboardID, isFacingY);
+			_fe3d.billboard_setFacingCameraY(_currentBillboardID, isFacingY);
 		}
 
 		// Reset rotations if not facing camera

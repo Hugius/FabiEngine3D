@@ -34,12 +34,6 @@
 - **Rotation**: the XYZ rotation of the mesh
   - Type: `decimal3`
   - Constraints: between `0.0` and `360.0`
-- **Position Target**: the target XYZ position of the mesh
-  - Type: `decimal3`
-  - Constraints: none
-- **Rotation Target**:  the target XYZ rotation of the mesh
-  - Type: `decimal3`
-  - Constraints: between `0.0` and `360.0`
 - **Color**: the RGB color multiplier of the fragments
   - Type: `decimal3`
   - Constraints: between `0.0` to `1.0`
@@ -49,19 +43,7 @@
 - **Size**: the XY size of the mesh
   - Type: `decimal2`
   - Constraints: at least `0.0`
-- **Size Target**: the target XY size of the mesh
-  - Type: `decimal2`
-  - Constraints: at least `0.0`
 - **Emission Intenstiy**: the intensity of the emission map
-  - Type: `decimal`
-  - Constraints: at least `0.0`
-- **Position Target Speed**: the speed with which the mesh moves to the target position
-  - Type: `decimal`
-  - Constraints: at least `0.0`
-- **Rotation Target Speed**: the speed with which the mesh rotates to the target rotation
-  - Type: `decimal`
-  - Constraints: at least `0.0`
-- **Size Target Speed**: the speed with which the mesh scales to the target size
   - Type: `decimal`
   - Constraints: at least `0.0`
 - **Texture Repeat**: the amount of times the textures are repeated
@@ -103,10 +85,10 @@
 - **Reflected**: the mesh is captured for reflections
   - Type: `boolean`
   - Constraints: none
-- **Facing X**: the mesh is horizontally facing the camera
+- **Facing Camera X**: the mesh is horizontally facing the camera
   - Type: `boolean`
   - Constraints: none
-- **Facing Y**: the mesh is vertically facing the camera
+- **Facing Camera Y**: the mesh is vertically facing the camera
   - Type: `boolean`
   - Constraints: none
 - **Bright**: the mesh is captured for bloom
@@ -121,7 +103,7 @@
 - **Textual**: the diffuse map is textual
   - Type: `boolean`
   - Constraints: none
-- **Animation Started**: the sprite animation is started (can still be paused)
+- **Animation Started**: the sprite animation is started (can be paused)
   - Type: `boolean`
   - Constraints: none
 - **Animation Paused**: the sprite animation is paused

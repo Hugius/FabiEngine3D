@@ -232,6 +232,22 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 			}
 		}
 	}
+	else if(functionName == "fe3d:billboard_set_wireframe_color")
+	{
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				_fe3d.billboard_setWireframeColor(arguments[0].getString(),
+					fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:billboard_set_min_height")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
@@ -273,6 +289,36 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
 				_fe3d.billboard_setTransparency(arguments[0].getString(), arguments[1].getDecimal());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:billboard_set_emission_intensity")
+	{
+		auto types = {SVT::STRING, SVT::DECIMAL};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				_fe3d.billboard_setEmissionIntensity(arguments[0].getString(), arguments[1].getDecimal());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:billboard_set_texture_repeat")
+	{
+		auto types = {SVT::STRING, SVT::DECIMAL};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				_fe3d.billboard_setTextureRepeat(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -354,7 +400,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_set_camera_facing_x")
+	else if(functionName == "fe3d:billboard_set_shadowed")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
@@ -364,12 +410,12 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				_fe3d.billboard_setCameraFacingX(arguments[0].getString(), arguments[1].getBoolean());
+				_fe3d.billboard_setShadowed(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_set_camera_facing_y")
+	else if(functionName == "fe3d:billboard_set_bright")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
@@ -379,7 +425,67 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				_fe3d.billboard_setCameraFacingY(arguments[0].getString(), arguments[1].getBoolean());
+				_fe3d.billboard_setBright(arguments[0].getString(), arguments[1].getBoolean());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:billboard_set_wireframed")
+	{
+		auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				_fe3d.billboard_setWireframed(arguments[0].getString(), arguments[1].getBoolean());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:billboard_set_frozen")
+	{
+		auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				_fe3d.billboard_setFrozen(arguments[0].getString(), arguments[1].getBoolean());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:billboard_set_facing_camera_x")
+	{
+		auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				_fe3d.billboard_setFacingCameraX(arguments[0].getString(), arguments[1].getBoolean());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:billboard_set_facing_camera_y")
+	{
+		auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				_fe3d.billboard_setFacingCameraY(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

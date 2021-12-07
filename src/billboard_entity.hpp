@@ -17,8 +17,8 @@ public:
 	void updateTransformation();
 	void updateTransformationMatrix();
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
-	void setCameraFacingX(bool value);
-	void setCameraFacingY(bool value);
+	void setFacingCameraX(bool value);
+	void setFacingCameraY(bool value);
 	void setDepthMapIncluded(bool value);
 	void setShadowed(bool value);
 	void setReflected(bool value);

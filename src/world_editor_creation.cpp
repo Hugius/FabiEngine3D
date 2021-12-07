@@ -349,8 +349,8 @@ const bool WorldEditor::_copyPreviewBillboard(const string& newID, const string&
 	// Set properties
 	_fe3d.billboard_setPosition(newID, position);
 	_fe3d.billboard_setSize(newID, _fe3d.billboard_getSize(previewID));
-	_fe3d.billboard_setCameraFacingX(newID, _fe3d.billboard_isFacingCameraX(previewID));
-	_fe3d.billboard_setCameraFacingY(newID, _fe3d.billboard_isFacingCameraY(previewID));
+	_fe3d.billboard_setFacingCameraX(newID, _fe3d.billboard_isFacingCameraX(previewID));
+	_fe3d.billboard_setFacingCameraY(newID, _fe3d.billboard_isFacingCameraY(previewID));
 	_fe3d.billboard_setColor(newID, _fe3d.billboard_getColor(previewID));
 	_fe3d.billboard_setShadowed(newID, _fe3d.billboard_isShadowed(previewID));
 	_fe3d.billboard_setReflected(newID, _fe3d.billboard_isReflected(previewID));

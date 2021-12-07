@@ -114,12 +114,12 @@ void BillboardEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 	_renderBuffer = value;
 }
 
-void BillboardEntity::setCameraFacingX(bool value)
+void BillboardEntity::setFacingCameraX(bool value)
 {
 	_isFacingCameraX = value;
 }
 
-void BillboardEntity::setCameraFacingY(bool value)
+void BillboardEntity::setFacingCameraY(bool value)
 {
 	_isFacingCameraY = value;
 }

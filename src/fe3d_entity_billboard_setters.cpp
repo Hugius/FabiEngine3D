@@ -141,14 +141,14 @@ void FabiEngine3D::billboard_setFrozen(const string& ID, bool value)
 	_core->_billboardEntityManager.getEntity(ID)->setFrozen(value);
 }
 
-void FabiEngine3D::billboard_setCameraFacingX(const string& ID, bool value)
+void FabiEngine3D::billboard_setFacingCameraX(const string& ID, bool value)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setCameraFacingX(value);
+	_core->_billboardEntityManager.getEntity(ID)->setFacingCameraX(value);
 }
 
-void FabiEngine3D::billboard_setCameraFacingY(const string& ID, bool value)
+void FabiEngine3D::billboard_setFacingCameraY(const string& ID, bool value)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setCameraFacingY(value);
+	_core->_billboardEntityManager.getEntity(ID)->setFacingCameraY(value);
 }
 
 void FabiEngine3D::billboard_setDepthMapIncluded(const string& ID, bool value)

@@ -396,11 +396,8 @@ const bool WorldEditor::saveEditorWorldToFile()
 			interval << endl;
 	}
 
-	// Motion blur settings
-	if(_fe3d.gfx_isMotionBlurEnabled())
-	{
-		file << "GRAPHICS_MOTION_BLUR " << _fe3d.gfx_getMotionBlurStrength() << endl;
-	}
+	// Reflections settings
+	file << "GRAPHICS_REFLECTIONS " << _fe3d.gfx_getPlanarReflectionHeight() << endl;
 
 	// DOF settings
 	if(_fe3d.gfx_isDofEnabled())

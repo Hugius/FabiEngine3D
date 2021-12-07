@@ -110,10 +110,6 @@ void WorldEditor::clearCurrentWorld()
 		{
 			_fe3d.gfx_disableDOF(true);
 		}
-		if(_fe3d.gfx_isMotionBlurEnabled())
-		{
-			_fe3d.gfx_disableMotionBlur(true);
-		}
 		if(_fe3d.gfx_isLensFlareEnabled())
 		{
 			_fe3d.gfx_disableLensFlare(true);

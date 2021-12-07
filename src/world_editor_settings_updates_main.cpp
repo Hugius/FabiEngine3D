@@ -81,9 +81,9 @@ void WorldEditor::_updateGraphicsSettingsMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphicsShadows");
 			_fe3d.misc_enableShadowFrameRendering();
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("motionBlur")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflections")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphicsMotionBlur");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphicsReflections");
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("dof")->isHovered())
 		{

@@ -155,11 +155,11 @@ void WorldEditor::update()
 	}
 	if(_isEditorLoaded)
 	{
-		_updateShadowGraphicsSettingsMenu();
+		_updateShadowsGraphicsSettingsMenu();
 	}
 	if(_isEditorLoaded)
 	{
-		_updateMotionBlurGraphicsSettingsMenu();
+		_updateReflectionsGraphicsSettingsMenu();
 	}
 	if(_isEditorLoaded)
 	{

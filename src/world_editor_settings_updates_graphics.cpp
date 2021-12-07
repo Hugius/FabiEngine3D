@@ -2,7 +2,7 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-void WorldEditor::_updateShadowGraphicsSettingsMenu()
+void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
@@ -122,17 +122,16 @@ void WorldEditor::_updateShadowGraphicsSettingsMenu()
 	}
 }
 
-void WorldEditor::_updateMotionBlurGraphicsSettingsMenu()
+void WorldEditor::_updateReflectionsGraphicsSettingsMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if(screen->getID() == "worldEditorMenuSettingsGraphicsMotionBlur")
+	if(screen->getID() == "worldEditorMenuSettingsGraphicsReflections")
 	{
 		// Temporary values
-		auto isEnabled = _fe3d.gfx_isMotionBlurEnabled();
-		auto sensitivity = _fe3d.gfx_getMotionBlurStrength();
+		auto planarHeight = _fe3d.gfx_getPlanarReflectionHeight();
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -140,35 +139,16 @@ void WorldEditor::_updateMotionBlurGraphicsSettingsMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphics");
 			return;
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("planarHeight")->isHovered())
 		{
-			isEnabled = !isEnabled;
-			if(isEnabled)
-			{
-				_fe3d.gfx_enableMotionBlur();
-			}
-			else
-			{
-				_fe3d.gfx_disableMotionBlur(false);
-			}
-		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("sensitivity")->isHovered())
-		{
-			_gui.getGlobalScreen()->createValueForm("sensitivity", "Sensitivity", (sensitivity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("planarHeight", "Planar Height", planarHeight, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
-		if(_gui.getGlobalScreen()->checkValueForm("sensitivity", sensitivity))
+		if(_gui.getGlobalScreen()->checkValueForm("planarHeight", planarHeight))
 		{
-			sensitivity /= 100.0f;
-			_fe3d.gfx_setMotionBlurStrength(sensitivity);
+			_fe3d.gfx_setPlanarReflectionHeight(planarHeight);
 		}
-
-		// Update buttons hoverability
-		screen->getButton("sensitivity")->setHoverable(isEnabled);
-
-		// Update button text contents
-		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 	}
 }
 

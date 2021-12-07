@@ -94,8 +94,8 @@ private:
 	void _updateAmbientLightingSettingsMenu();
 	void _updateDirectionalLightingSettingsMenu();
 	void _updateGraphicsSettingsMenu();
-	void _updateShadowGraphicsSettingsMenu();
-	void _updateMotionBlurGraphicsSettingsMenu();
+	void _updateShadowsGraphicsSettingsMenu();
+	void _updateReflectionsGraphicsSettingsMenu();
 	void _updateDofGraphicsSettingsMenu();
 	void _updateFogGraphicsSettingsMenu();
 	void _updateLensFlareGraphicsSettingsMenu();

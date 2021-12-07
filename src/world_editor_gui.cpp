@@ -181,7 +181,7 @@ void WorldEditor::_loadGUI()
 	positions = VPC::calculateButtonPositions(8, CH);
 	leftWindow->createScreen("worldEditorMenuSettingsGraphics");
 	leftWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("shadows", fvec2(0.0f, positions[0]), fvec2(TW("Shadows"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Shadows", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("motionBlur", fvec2(0.0f, positions[1]), fvec2(TW("Motion Blur"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Motion Blur", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("reflections", fvec2(0.0f, positions[1]), fvec2(TW("Reflections"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflections", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("dof", fvec2(0.0f, positions[2]), fvec2(TW("Depth Of Field"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Depth Of Field", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("fog", fvec2(0.0f, positions[3]), fvec2(TW("Fog"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Fog", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("worldEditorMenuSettingsGraphics")->createButton("lensFlare", fvec2(0.0f, positions[4]), fvec2(TW("Lens Flare"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Lens Flare", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
@@ -201,12 +201,11 @@ void WorldEditor::_loadGUI()
 	leftWindow->getScreen("worldEditorMenuSettingsGraphicsShadows")->createButton("interval", fvec2(0.0f, positions[6]), fvec2(TW("Interval"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Interval", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("worldEditorMenuSettingsGraphicsShadows")->createButton("back", fvec2(0.0f, positions[7]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 
-	// Left-viewport: worldEditorMenuSettingsGraphicsMotionBlur
-	positions = VPC::calculateButtonPositions(3, CH);
-	leftWindow->createScreen("worldEditorMenuSettingsGraphicsMotionBlur");
-	leftWindow->getScreen("worldEditorMenuSettingsGraphicsMotionBlur")->createButton("isEnabled", fvec2(0.0f, positions[0]), fvec2(TW("Enabled: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("worldEditorMenuSettingsGraphicsMotionBlur")->createButton("sensitivity", fvec2(0.0f, positions[1]), fvec2(TW("Sensitivity"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sensitivity", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("worldEditorMenuSettingsGraphicsMotionBlur")->createButton("back", fvec2(0.0f, positions[2]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	// Left-viewport: worldEditorMenuSettingsGraphicsReflections
+	positions = VPC::calculateButtonPositions(2, CH);
+	leftWindow->createScreen("worldEditorMenuSettingsGraphicsReflections");
+	leftWindow->getScreen("worldEditorMenuSettingsGraphicsReflections")->createButton("planarHeight", fvec2(0.0f, positions[0]), fvec2(TW("Planar Height"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Planar Height", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("worldEditorMenuSettingsGraphicsReflections")->createButton("back", fvec2(0.0f, positions[1]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 
 	// Left-viewport: worldEditorMenuSettingsGraphicsDof
 	positions = VPC::calculateButtonPositions(5, CH);
@@ -432,7 +431,7 @@ void WorldEditor::_unloadGUI()
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSettingsLightingDirectional");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphics");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsShadows");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsMotionBlur");
+	_gui.getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsReflections");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsDof");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsFog");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsLensFlare");

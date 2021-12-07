@@ -500,7 +500,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				color.b >>
 				intensity;
 
-			// Enable ambient lighting
+			// Set ambient lighting
 			_fe3d.gfx_enableAmbientLighting();
 			_fe3d.gfx_setAmbientLightingColor(color);
 			_fe3d.gfx_setAmbientLightingIntensity(intensity);
@@ -522,7 +522,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				intensity >>
 				billboardSize;
 
-			// Enable directional lighting
+			// Set directional lighting
 			_fe3d.gfx_enableDirectionalLighting();
 			_fe3d.gfx_setDirectionalLightingPosition(position);
 			_fe3d.gfx_setDirectionalLightingIntensity(intensity);
@@ -549,7 +549,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				isFollowingCamera >>
 				interval;
 
-			// Enable shadows
+			// Set shadows
 			_fe3d.gfx_enableShadows();
 			_fe3d.gfx_setShadowEyePosition(position);
 			_fe3d.gfx_setShadowCenterPosition(center);
@@ -559,17 +559,16 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			_fe3d.gfx_setShadowFollowingCamera(isFollowingCamera);
 			_fe3d.gfx_setShadowInterval(interval);
 		}
-		else if(lineType == "GRAPHICS_MOTION_BLUR")
+		else if(lineType == "GRAPHICS_REFLECTIONS")
 		{
 			// Data placeholders
-			float strength;
+			float planarHeight;
 
 			// Read data from file
-			iss >> strength;
+			iss >> planarHeight;
 
-			// Enable motion blur
-			_fe3d.gfx_enableMotionBlur();
-			_fe3d.gfx_setMotionBlurStrength(strength);
+			// Set reflections
+			_fe3d.gfx_setPlanarReflectionHeight(planarHeight);
 		}
 		else if(lineType == "GRAPHICS_DOF")
 		{
@@ -580,7 +579,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			// Read data from file
 			iss >> isDynamic >> blurDistance >> maxDistance;
 
-			// Enable DOF
+			// Set DOF
 			_fe3d.gfx_enableDOF();
 			_fe3d.gfx_setDofDynamic(isDynamic);
 			_fe3d.gfx_setDofMaxDistance(maxDistance);
@@ -595,7 +594,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			// Read data from file
 			iss >> minDistance >> maxDistance >> thickness >> color.r >> color.g >> color.b;
 
-			// Enable fog
+			// Set fog
 			_fe3d.gfx_enableFog();
 			_fe3d.gfx_setFogMinDistance(minDistance);
 			_fe3d.gfx_setFogMaxDistance(maxDistance);
@@ -623,7 +622,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				flareMapPath = string("projects\\" + _currentProjectID + "\\" + flareMapPath);
 			}
 
-			// Enable lens flare
+			// Set lens flare
 			_fe3d.gfx_enableLensFlare();
 			_fe3d.gfx_setLensFlareMap(flareMapPath);
 			_fe3d.gfx_setLensFlareIntensity(intensity);
@@ -637,7 +636,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			// Read data from file
 			iss >> intensity >> speed;
 
-			// Enable sky exposure
+			// Set sky exposure
 			_fe3d.gfx_enableSkyExposure();
 			_fe3d.gfx_setSkyExposureIntensity(intensity);
 			_fe3d.gfx_setSkyExposureSpeed(speed);
@@ -651,7 +650,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			// Read data from file
 			iss >> type >> intensity >> blurCount;
 
-			// Enable bloom
+			// Set bloom
 			_fe3d.gfx_enableBloom();
 			_fe3d.gfx_setBloomType(BloomType(type));
 			_fe3d.gfx_setBloomIntensity(intensity);

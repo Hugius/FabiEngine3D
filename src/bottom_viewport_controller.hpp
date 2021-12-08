@@ -15,7 +15,8 @@ public:
 
 private:
 	// VOID
-	void _updateConsoleScrolling();
+	void _updateStatistics();
+	void _updateConsole();
 	void _addConsoleMessage(const string& newMessage);
 	void _deleteConsoleMessage(const string& ID);
 
@@ -40,5 +41,4 @@ private:
 	// MISCELLANEOUS
 	TopViewportController& _topViewportController;
 	ScriptEditor& _scriptEditor;
-	shared_ptr<EngineGuiScreen> _statsScreen = nullptr;
 };

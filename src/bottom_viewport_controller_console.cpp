@@ -1,7 +1,13 @@
 #include "bottom_viewport_controller.hpp"
 
-void BottomViewportController::_updateConsoleScrolling()
+void BottomViewportController::_updateConsole()
 {
+	// Script cannot be running
+	if(_topViewportController.isScriptRunning())
+	{
+		return;
+	}
+
 	// Temporary values
 	const auto window = _gui.getViewport("bottom")->getWindow("console");
 	float scrollingSpeed = static_cast<float>(_fe3d.input_getMouseWheelY()) * static_cast<float>(window->isHovered()) * 0.1f;

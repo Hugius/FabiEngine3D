@@ -25,24 +25,25 @@ void LeftViewportController::initialize()
 {
 	// Window
 	_gui.getViewport("left")->createWindow("main", fvec2(0.0f), fvec2(1.9f, 2.0f), LVPC::FRAME_COLOR);
-	auto leftWindow = _gui.getViewport("left")->getWindow("main");
+	auto window = _gui.getViewport("left")->getWindow("main");
 
 	// Left-viewport: main
-	auto positions = calculateButtonPositions(10, CH);
-	leftWindow->createScreen("main");
-	leftWindow->getScreen("main")->createButton("skyEditor", fvec2(0.0f, positions[0]), fvec2(TW("Sky Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sky Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("main")->createButton("terrainEditor", fvec2(0.0f, positions[1]), fvec2(TW("Terrain Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Terrain Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("main")->createButton("waterEditor", fvec2(0.0f, positions[2]), fvec2(TW("Water Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Water Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("main")->createButton("modelEditor", fvec2(0.0f, positions[3]), fvec2(TW("Model Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Model Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("main")->createButton("animationEditor", fvec2(0.0f, positions[4]), fvec2(TW("Animation Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Animation Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("main")->createButton("billboardEditor", fvec2(0.0f, positions[5]), fvec2(TW("Billboard Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Billboard Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("main")->createButton("audioEditor", fvec2(0.0f, positions[6]), fvec2(TW("Audio Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Audio Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("main")->createButton("worldEditor", fvec2(0.0f, positions[7]), fvec2(TW("World Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "World Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("main")->createButton("scriptEditor", fvec2(0.0f, positions[8]), fvec2(TW("Script Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Script Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("main")->createButton("settingsEditor", fvec2(0.0f, positions[9]), fvec2(TW("Settings"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Settings", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-
+	auto positions = calculateButtonPositions(11, CH);
+	window->createScreen("main");
+	window->getScreen("main")->createButton("settingsEditor", fvec2(0.0f, positions[0]), fvec2(TW("Engine Settings"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Engine Settings", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	window->getScreen("main")->createButton("skyEditor", fvec2(0.0f, positions[1]), fvec2(TW("Sky Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sky Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	window->getScreen("main")->createButton("terrainEditor", fvec2(0.0f, positions[2]), fvec2(TW("Terrain Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Terrain Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	window->getScreen("main")->createButton("waterEditor", fvec2(0.0f, positions[3]), fvec2(TW("Water Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Water Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	window->getScreen("main")->createButton("modelEditor", fvec2(0.0f, positions[4]), fvec2(TW("Model Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Model Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	window->getScreen("main")->createButton("billboardEditor", fvec2(0.0f, positions[5]), fvec2(TW("Billboard Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Billboard Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	window->getScreen("main")->createButton("meshAnimationEditor", fvec2(0.0f, positions[6]), fvec2(TW("3D Animation Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "3D Animation Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	window->getScreen("main")->createButton("spriteAnimationEditor", fvec2(0.0f, positions[7]), fvec2(TW("2D Animation Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "2D Animation Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	window->getScreen("main")->createButton("audioEditor", fvec2(0.0f, positions[8]), fvec2(TW("Audio Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Audio Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	window->getScreen("main")->createButton("worldEditor", fvec2(0.0f, positions[9]), fvec2(TW("World Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "World Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	window->getScreen("main")->createButton("scriptEditor", fvec2(0.0f, positions[10]), fvec2(TW("Script Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Script Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	
 	// Default screen
-	leftWindow->setActiveScreen("main");
+	window->setActiveScreen("main");
 }
 
 void LeftViewportController::update()
@@ -87,7 +88,7 @@ void LeftViewportController::update()
 				window->setActiveScreen("modelEditorMenuMain");
 			}
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animationEditor")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("meshAnimationEditor")->isHovered())
 		{
 			if(_modelEditor.loadModelEntitiesFromFile() && _animationEditor.loadAnimationsFromFile(true))
 			{

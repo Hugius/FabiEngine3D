@@ -32,19 +32,21 @@ const bool TopViewportController::isScriptRunning() const
 
 void TopViewportController::_updateMiscellaneous()
 {
-	bool hoverable = (_currentProjectID.empty()) ? false : !_scriptEditor.getScriptExecutor().isStarted();
+	// Temporary values
+	auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("main");
+	bool isHoverable = (_currentProjectID.empty()) ? false : !_scriptEditor.getScriptExecutor().isStarted();
 
 	// Update buttons hoverability
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("skyEditor")->setHoverable(hoverable);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("terrainEditor")->setHoverable(hoverable);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("waterEditor")->setHoverable(hoverable);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("modelEditor")->setHoverable(hoverable);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("billboardEditor")->setHoverable(hoverable);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("worldEditor")->setHoverable(hoverable);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("animationEditor")->setHoverable(hoverable);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("audioEditor")->setHoverable(hoverable);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("scriptEditor")->setHoverable(hoverable);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("settingsEditor")->setHoverable(hoverable);
+	screen->getButton("skyEditor")->setHoverable(isHoverable);
+	screen->getButton("terrainEditor")->setHoverable(isHoverable);
+	screen->getButton("waterEditor")->setHoverable(isHoverable);
+	screen->getButton("modelEditor")->setHoverable(isHoverable);
+	screen->getButton("billboardEditor")->setHoverable(isHoverable);
+	screen->getButton("worldEditor")->setHoverable(isHoverable);
+	screen->getButton("meshAnimationEditor")->setHoverable(isHoverable);
+	screen->getButton("audioEditor")->setHoverable(isHoverable);
+	screen->getButton("scriptEditor")->setHoverable(isHoverable);
+	screen->getButton("settingsEditor")->setHoverable(isHoverable);
 }
 
 void TopViewportController::_updateProjectCreating()

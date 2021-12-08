@@ -48,8 +48,8 @@ private:
 	static inline const fvec3 FRAME_COLOR = fvec3(0.175f);
 
 	// FLOAT
-	static inline const float CW = 0.115f;
-	static inline const float CH = 0.0875f;
+	static inline const float CW = 0.1f;
+	static inline const float CH = 0.075f;
 
 	// MISCELLANEOUS
 	SkyEditor _skyEditor;

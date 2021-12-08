@@ -173,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\bottom_viewport_controller_console.cpp" />
+    <ClCompile Include="..\..\..\src\bottom_viewport_controller_statistics.cpp" />
     <ClCompile Include="..\..\..\src\engine_controller.cpp" />
     <ClCompile Include="..\..\..\src\bottom_viewport_controller_main.cpp" />
     <ClCompile Include="..\..\..\src\left_viewport_controller.cpp" />

@@ -71,7 +71,4 @@ private:
 	WorldEditor& _worldEditor;
 	ScriptEditor& _scriptEditor;
 	SettingsEditor& _settingsEditor;
-	shared_ptr<EngineGuiWindow> _projectWindow = nullptr;
-	shared_ptr<EngineGuiWindow> _gameWindow = nullptr;
-	shared_ptr<EngineGuiWindow> _miscWindow = nullptr;
 };

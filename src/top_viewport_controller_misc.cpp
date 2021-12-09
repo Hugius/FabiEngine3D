@@ -37,6 +37,7 @@ void TopViewportController::_updateMiscellaneous()
 	bool isHoverable = (_currentProjectID.empty()) ? false : !_scriptEditor.getScriptExecutor().isStarted();
 
 	// Update buttons hoverability
+	screen->getButton("settingsEditor")->setHoverable(isHoverable);
 	screen->getButton("skyEditor")->setHoverable(isHoverable);
 	screen->getButton("terrainEditor")->setHoverable(isHoverable);
 	screen->getButton("waterEditor")->setHoverable(isHoverable);
@@ -44,9 +45,9 @@ void TopViewportController::_updateMiscellaneous()
 	screen->getButton("billboardEditor")->setHoverable(isHoverable);
 	screen->getButton("worldEditor")->setHoverable(isHoverable);
 	screen->getButton("meshAnimationEditor")->setHoverable(isHoverable);
+	screen->getButton("spriteAnimationEditor")->setHoverable(isHoverable);
 	screen->getButton("audioEditor")->setHoverable(isHoverable);
 	screen->getButton("scriptEditor")->setHoverable(isHoverable);
-	screen->getButton("settingsEditor")->setHoverable(isHoverable);
 }
 
 void TopViewportController::_updateProjectCreating()
@@ -116,20 +117,22 @@ void TopViewportController::_updateProjectCreating()
 				Tools::createDirectory(newProjectDirectoryPath + "scripts\\");
 
 				// Create new empty project files
-				auto animationFile = ofstream(newProjectDirectoryPath + "data\\animation.fe3d");
 				auto audioFile = ofstream(newProjectDirectoryPath + "data\\audio.fe3d");
 				auto billboardFile = ofstream(newProjectDirectoryPath + "data\\billboard.fe3d");
+				auto meshAnimationFile = ofstream(newProjectDirectoryPath + "data\\mesh_animation.fe3d");
 				auto modelFile = ofstream(newProjectDirectoryPath + "data\\model.fe3d");
 				auto settingsFile = ofstream(newProjectDirectoryPath + "data\\settings.fe3d");
 				auto skyFile = ofstream(newProjectDirectoryPath + "data\\sky.fe3d");
+				auto spriteAnimationFile = ofstream(newProjectDirectoryPath + "data\\sprite_animation.fe3d");
 				auto terrainFile = ofstream(newProjectDirectoryPath + "data\\terrain.fe3d");
 				auto waterFile = ofstream(newProjectDirectoryPath + "data\\water.fe3d");
-				animationFile.close();
 				audioFile.close();
 				billboardFile.close();
+				meshAnimationFile.close();
 				modelFile.close();
 				settingsFile.close();
 				skyFile.close();
+				spriteAnimationFile.close();
 				terrainFile.close();
 				waterFile.close();
 
@@ -319,6 +322,12 @@ void TopViewportController::_applyProjectChange()
 	// Go back to main menu
 	_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 
+	// Unload settings editor
+	if(_settingsEditor.isLoaded())
+	{
+		_settingsEditor.unload();
+	}
+
 	// Unload sky editor
 	if(_skyEditor.isLoaded())
 	{
@@ -343,16 +352,16 @@ void TopViewportController::_applyProjectChange()
 		_modelEditor.unload();
 	}
 
-	// Unload animation editor
-	if(_animationEditor.isLoaded())
-	{
-		_animationEditor.unload();
-	}
-
 	// Unload billboard editor
 	if(_billboardEditor.isLoaded())
 	{
 		_billboardEditor.unload();
+	}
+
+	// Unload mesh animation editor
+	if(_meshAnimationEditor.isLoaded())
+	{
+		_meshAnimationEditor.unload();
 	}
 
 	// Unload audio editor
@@ -373,23 +382,17 @@ void TopViewportController::_applyProjectChange()
 		_scriptEditor.unload();
 	}
 
-	// Unload settings editor
-	if(_settingsEditor.isLoaded())
-	{
-		_settingsEditor.unload();
-	}
-
 	// Pass loaded project ID
+	_settingsEditor.setCurrentProjectID(_currentProjectID);
 	_skyEditor.setCurrentProjectID(_currentProjectID);
 	_terrainEditor.setCurrentProjectID(_currentProjectID);
 	_waterEditor.setCurrentProjectID(_currentProjectID);
 	_modelEditor.setCurrentProjectID(_currentProjectID);
-	_animationEditor.setCurrentProjectID(_currentProjectID);
 	_billboardEditor.setCurrentProjectID(_currentProjectID);
+	_meshAnimationEditor.setCurrentProjectID(_currentProjectID);
 	_audioEditor.setCurrentProjectID(_currentProjectID);
 	_worldEditor.setCurrentProjectID(_currentProjectID);
 	_scriptEditor.setCurrentProjectID(_currentProjectID);
-	_settingsEditor.setCurrentProjectID(_currentProjectID);
 }
 
 const bool TopViewportController::isProjectCorrupted(const string& projectDirectoryPath) const
@@ -407,12 +410,13 @@ const bool TopViewportController::isProjectCorrupted(const string& projectDirect
 	}
 
 	// Check if all default files are still existing
-	if(!Tools::isFileExisting(projectDirectoryPath + "data\\animation.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "data\\audio.fe3d") ||
+	if(!Tools::isFileExisting(projectDirectoryPath + "data\\audio.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\billboard.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "data\\mesh_animation.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\model.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\settings.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\sky.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "data\\sprite_animation.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\terrain.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\water.fe3d"))
 	{

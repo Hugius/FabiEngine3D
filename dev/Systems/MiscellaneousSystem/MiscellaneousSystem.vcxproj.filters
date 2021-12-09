@@ -15,7 +15,7 @@
     <ClInclude Include="..\..\..\src\aabb_parent_entity_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\animation_speed_type.hpp">
+    <ClInclude Include="..\..\..\src\mesh_animation_speed_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\blur_direction.hpp">

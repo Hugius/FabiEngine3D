@@ -164,10 +164,10 @@ void WorldEditor::clearCurrentWorld()
 		}
 
 		// Stop animation
-		auto animationID = _animationEditor.getStartedAnimationIDs(ID);
+		auto animationID = _meshAnimationEditor.getStartedAnimationIDs(ID);
 		if(!animationID.empty())
 		{
-			_animationEditor.stopAnimation(animationID.back(), ID);
+			_meshAnimationEditor.stopAnimation(animationID.back(), ID);
 		}
 	}
 

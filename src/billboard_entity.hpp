@@ -41,18 +41,6 @@ public:
 	void setFontPath(const string& value);
 	void setDiffuseMapPath(const string& value);
 	void setEmissionMapPath(const string& value);
-	void startSpriteAnimation(int loops);
-	void pauseSpriteAnimation();
-	void resumeSpriteAnimation();
-	void stopSpriteAnimation();
-	void setSpriteAnimationRowIndex(unsigned int value);
-	void setSpriteAnimationColumnIndex(unsigned int value);
-	void setTotalSpriteAnimationRowCount(unsigned int value);
-	void setTotalSpriteAnimationColumnCount(unsigned int value);
-	void setSpriteAnimationFramestep(unsigned int value);
-	void increasePassedSpriteAnimationFrames();
-	void resetPassedSpriteAnimationFrames();
-	void increaseSpriteAnimationLoops();
 	void setLightness(float value);
 	void setTransparency(float value);
 	void setMinHeight(float value);
@@ -87,21 +75,7 @@ public:
 	const float getTextureRepeat() const;
 	const float getEmissionIntensity() const;
 
-	// INT
-	const int getMaxSpriteAnimationLoops() const;
-
-	// UNSIGNED INT
-	const unsigned int getPassedSpriteAnimationFrames() const;
-	const unsigned int getSpriteAnimationFramestep() const;
-	const unsigned int getTotalSpriteAnimationRowCount() const;
-	const unsigned int getTotalSpriteAnimationColumnCount() const;
-	const unsigned int getSpriteAnimationRowIndex() const;
-	const unsigned int getSpriteAnimationColumnIndex() const;
-	const unsigned int getSpriteAnimationLoops() const;
-
 	// BOOL
-	const bool isSpriteAnimationStarted() const;
-	const bool isSpriteAnimationPaused() const;
 	const bool isFacingCameraX() const;
 	const bool isFacingCameraY() const;
 	const bool isDepthMapIncluded() const;
@@ -153,21 +127,7 @@ private:
 	float _minHeight = numeric_limits<float>::lowest();
 	float _maxHeight = numeric_limits<float>::max();
 
-	// INT
-	int _maxSpriteAnimationLoops = 0;
-
-	// UNSIGNED INT
-	unsigned int _spriteAnimationFramestep = 0;
-	unsigned int _passedSpriteAnimationFrames = 0;
-	unsigned int _totalSpriteAnimationRowCount = 0;
-	unsigned int _totalSpriteAnimationColumnCount = 0;
-	unsigned int _spriteAnimationRowIndex = 0;
-	unsigned int _spriteAnimationColumnIndex = 0;
-	unsigned int _spriteAnimationLoops = 0;
-
 	// BOOL
-	bool _isSpriteAnimationStarted = false;
-	bool _isSpriteAnimationPaused = false;
 	bool _isFacingCameraX = false;
 	bool _isFacingCameraY = false;
 	bool _isDepthMapIncluded = true;

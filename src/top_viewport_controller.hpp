@@ -14,10 +14,18 @@
 class TopViewportController final : public BaseViewportController
 {
 public:
-	TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui,
-						  SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor,
-						  AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor,
-						  WorldEditor& worldEditor, ScriptEditor& scriptEditor, SettingsEditor& settingsEditor);
+	TopViewportController(FabiEngine3D& fe3d,
+						  EngineGuiManager& gui,
+						  SettingsEditor& settingsEditor,
+						  SkyEditor& skyEditor,
+						  TerrainEditor& terrainEditor,
+						  WaterEditor& waterEditor,
+						  ModelEditor& modelEditor,
+						  BillboardEditor& billboardEditor,
+						  MeshAnimationEditor& animationEditor,
+						  AudioEditor& audioEditor,
+						  WorldEditor& worldEditor,
+						  ScriptEditor& scriptEditor);
 
 	// VOID
 	void initialize() override;
@@ -61,14 +69,14 @@ private:
 	bool _isDeletingProject = false;
 
 	// MISCELLANEOUS
+	SettingsEditor& _settingsEditor;
 	SkyEditor& _skyEditor;
 	TerrainEditor& _terrainEditor;
 	WaterEditor& _waterEditor;
 	ModelEditor& _modelEditor;
 	BillboardEditor& _billboardEditor;
-	AnimationEditor& _animationEditor;
+	MeshAnimationEditor& _meshAnimationEditor;
 	AudioEditor& _audioEditor;
 	WorldEditor& _worldEditor;
 	ScriptEditor& _scriptEditor;
-	SettingsEditor& _settingsEditor;
 };

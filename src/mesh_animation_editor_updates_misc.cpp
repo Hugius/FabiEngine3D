@@ -1,6 +1,6 @@
-#include "animation_editor.hpp"
+#include "mesh_animation_editor.hpp"
 
-void AnimationEditor::_updateCamera()
+void MeshAnimationEditor::_updateCamera()
 {
 	// Check if third person view is enabled
 	if(_fe3d.camera_isThirdPersonViewEnabled())
@@ -62,7 +62,7 @@ void AnimationEditor::_updateCamera()
 	}
 }
 
-void AnimationEditor::_updateMiscellaneous()
+void MeshAnimationEditor::_updateMiscellaneous()
 {
 	// Check if allowed by GUI
 	if(!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())

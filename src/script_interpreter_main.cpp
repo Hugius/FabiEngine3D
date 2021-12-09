@@ -6,7 +6,7 @@
 
 using std::istringstream;
 
-ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, WorldEditor& worldEditor)
+ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor, MeshAnimationEditor& meshAnimationEditor, AudioEditor& audioEditor, WorldEditor& worldEditor)
 	:
 	_fe3d(fe3d),
 	_script(script),
@@ -14,9 +14,9 @@ ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SkyEdit
 	_terrainEditor(terrainEditor),
 	_waterEditor(waterEditor),
 	_modelEditor(modelEditor),
-	_animationEditor(animationEditor),
 	_billboardEditor(billboardEditor),
 	_audioEditor(audioEditor),
+	_meshAnimationEditor(meshAnimationEditor),
 	_worldEditor(worldEditor)
 {
 
@@ -199,7 +199,7 @@ void ScriptInterpreter::load()
 	_modelEditor.loadModelEntitiesFromFile();
 
 	// Load preview animations
-	_animationEditor.loadAnimationsFromFile(false);
+	_meshAnimationEditor.loadAnimationsFromFile(false);
 
 	// Load preview billboards
 	_billboardEditor.loadBillboardEntitiesFromFile();
@@ -309,8 +309,8 @@ void ScriptInterpreter::unload()
 	// Reset audio
 	_fe3d.music_clearPlaylist();
 
-	// Stop animations
-	_animationEditor.stopAllAnimations();
+	// Stop mesh animations
+	_meshAnimationEditor.stopAllAnimations();
 
 	// Delete all other entities
 	_fe3d.terrain_deleteAll();

@@ -1,4 +1,4 @@
-#include "animation_editor.hpp"
+#include "mesh_animation_editor.hpp"
 #include "left_viewport_controller.hpp"
 #include "configuration.hpp"
 
@@ -9,7 +9,7 @@ using LVPC = LeftViewportController;
 
 #define TW(text) VPC::calculateTextWidth(text, CW)
 
-AnimationEditor::AnimationEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, ModelEditor& modelEditor)
+MeshAnimationEditor::MeshAnimationEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, ModelEditor& modelEditor)
 	:
 	_fe3d(fe3d),
 	_gui(gui),
@@ -18,7 +18,7 @@ AnimationEditor::AnimationEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, Mode
 
 }
 
-void AnimationEditor::load()
+void MeshAnimationEditor::load()
 {
 	// GUI
 	_loadGUI();
@@ -69,7 +69,7 @@ void AnimationEditor::load()
 	_isEditorLoaded = true;
 }
 
-void AnimationEditor::unload()
+void MeshAnimationEditor::unload()
 {
 	// GUI
 	_unloadGUI();
@@ -120,7 +120,7 @@ void AnimationEditor::unload()
 	}
 }
 
-void AnimationEditor::_loadGUI()
+void MeshAnimationEditor::_loadGUI()
 {
 	// Temporary values
 	auto leftWindow = _gui.getViewport("left")->getWindow("main");
@@ -158,7 +158,7 @@ void AnimationEditor::_loadGUI()
 	leftWindow->getScreen("animationEditorMenuFrame")->createButton("back", fvec2(0.0f, positions[6]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 }
 
-void AnimationEditor::_unloadGUI()
+void MeshAnimationEditor::_unloadGUI()
 {
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("animationEditorMenuMain");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("animationEditorMenuChoice");

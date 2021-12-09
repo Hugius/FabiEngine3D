@@ -1,7 +1,7 @@
-#include "animation_editor.hpp"
+#include "mesh_animation_editor.hpp"
 #include "logger.hpp"
 
-void AnimationEditor::_updateChoiceMenu()
+void MeshAnimationEditor::_updateChoiceMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
@@ -137,7 +137,7 @@ void AnimationEditor::_updateChoiceMenu()
 					// Add default data for every model part
 					for(const auto& partID : currentAnimation->getPartIDs())
 					{
-						lastFrameCopy.addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
+						lastFrameCopy.addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), MeshAnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
 					}
 				}
 			}
@@ -249,11 +249,11 @@ void AnimationEditor::_updateChoiceMenu()
 				if(currentAnimation->getFrames().empty())
 				{
 					// Create default frame
-					AnimationFrame defaultFrame;
+					MeshAnimationFrame defaultFrame;
 
 					// Add default part
 					currentAnimation->addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
-					defaultFrame.addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
+					defaultFrame.addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), MeshAnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
 
 					// Add custom parts
 					auto partIDs = _fe3d.model_getPartIDs(_hoveredModelID);
@@ -266,7 +266,7 @@ void AnimationEditor::_updateChoiceMenu()
 							currentAnimation->addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
 
 							// Add part to frame
-							defaultFrame.addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
+							defaultFrame.addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), MeshAnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
 						}
 					}
 

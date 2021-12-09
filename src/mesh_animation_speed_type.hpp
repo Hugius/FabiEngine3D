@@ -1,6 +1,6 @@
 #pragma once
 
-enum class AnimationSpeedType
+enum class MeshAnimationSpeedType
 {
 	LINEAR,
 	EXPONENTIAL,

@@ -2,13 +2,13 @@
 
 #include "fe3d.hpp"
 #include "engine_gui_manager.hpp"
-#include "animation.hpp"
+#include "mesh_animation.hpp"
 #include "model_editor.hpp"
 
-class AnimationEditor final
+class MeshAnimationEditor final
 {
 public:
-	AnimationEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, ModelEditor& modelEditor);
+	MeshAnimationEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, ModelEditor& modelEditor);
 
 	// VOID
 	void setCurrentProjectID(const string& projectID);
@@ -38,7 +38,7 @@ public:
 	const bool saveAnimationsToFile() const;
 
 	// MISCELLANEOUS
-	Animation* getAnimationData(const string& animationID, const string& modelID, string baseErrorMessage);
+	MeshAnimation* getAnimationData(const string& animationID, const string& modelID, string baseErrorMessage);
 
 private:
 	// VOID
@@ -60,7 +60,7 @@ private:
 	const bool _comparePartIDs(vector<string> first, vector<string> second) const;
 
 	// MISCELLANEOUS
-	shared_ptr<Animation> _getAnimation(const string& ID) const;
+	shared_ptr<MeshAnimation> _getAnimation(const string& ID) const;
 
 	// STRING
 	set<pair<string, string>> _animationsToStop;
@@ -105,8 +105,8 @@ private:
 	bool _isEditorLoaded = false;
 
 	// MISCELLANEOUS
-	map<pair<string, string>, Animation> _startedAnimations;
-	vector<shared_ptr<Animation>> _animations;
+	map<pair<string, string>, MeshAnimation> _startedAnimations;
+	vector<shared_ptr<MeshAnimation>> _animations;
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;
 	ModelEditor& _modelEditor;

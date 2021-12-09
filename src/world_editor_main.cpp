@@ -2,7 +2,7 @@
 #include "left_viewport_controller.hpp"
 #include "configuration.hpp"
 
-WorldEditor::WorldEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor)
+WorldEditor::WorldEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor, MeshAnimationEditor& meshAnimationEditor, AudioEditor& audioEditor)
 	:
 	_fe3d(fe3d),
 	_gui(gui),
@@ -10,8 +10,8 @@ WorldEditor::WorldEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& s
 	_terrainEditor(terrainEditor),
 	_waterEditor(waterEditor),
 	_modelEditor(modelEditor),
-	_animationEditor(animationEditor),
 	_billboardEditor(billboardEditor),
+	_meshAnimationEditor(meshAnimationEditor),
 	_audioEditor(audioEditor)
 {
 
@@ -49,9 +49,6 @@ void WorldEditor::load()
 		}
 	}
 
-	// Load preview animations
-	_animationEditor.loadAnimationsFromFile(false);
-
 	// Load preview billboards
 	_billboardEditor.loadBillboardEntitiesFromFile();
 	for(const auto& billboardID : _billboardEditor.getLoadedBillboardIDs())
@@ -63,6 +60,9 @@ void WorldEditor::load()
 				createButton(billboardID, billboardID.substr(1));
 		}
 	}
+
+	// Load preview mesh animations
+	_meshAnimationEditor.loadAnimationsFromFile(false);
 
 	// Load preview sounds
 	_audioEditor.loadAudioEntitiesFromFile();

@@ -11,19 +11,30 @@ using std::ofstream;
 
 using TVPC = TopViewportController;
 
-TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, WorldEditor& worldEditor, ScriptEditor& scriptEditor, SettingsEditor& settingsEditor)
+TopViewportController::TopViewportController(FabiEngine3D& fe3d,
+											 EngineGuiManager& gui,
+											 SettingsEditor& settingsEditor,
+											 SkyEditor& skyEditor,
+											 TerrainEditor& terrainEditor,
+											 WaterEditor& waterEditor,
+											 ModelEditor& modelEditor,
+											 BillboardEditor& billboardEditor,
+											 MeshAnimationEditor& meshAnimationEditor,
+											 AudioEditor& audioEditor,
+											 WorldEditor& worldEditor,
+											 ScriptEditor& scriptEditor)
 	:
 	BaseViewportController(fe3d, gui),
+	_settingsEditor(settingsEditor),
 	_skyEditor(skyEditor),
 	_terrainEditor(terrainEditor),
 	_waterEditor(waterEditor),
 	_modelEditor(modelEditor),
-	_animationEditor(animationEditor),
 	_billboardEditor(billboardEditor),
+	_meshAnimationEditor(meshAnimationEditor),
 	_audioEditor(audioEditor),
 	_worldEditor(worldEditor),
-	_scriptEditor(scriptEditor),
-	_settingsEditor(settingsEditor)
+	_scriptEditor(scriptEditor)
 {
 
 }
@@ -351,16 +362,16 @@ void TopViewportController::_saveCurrentProject()
 	}
 
 	// Save everything
+	_settingsEditor.saveSettingsToFile();
 	_skyEditor.saveSkyEntitiesToFile();
 	_terrainEditor.saveTerrainEntitiesToFile();
 	_waterEditor.saveWaterEntitiesToFile();
 	_modelEditor.saveModelEntitiesToFile();
-	_animationEditor.saveAnimationsToFile();
 	_billboardEditor.saveBillboardEntitiesToFile();
+	_meshAnimationEditor.saveAnimationsToFile();
 	_audioEditor.saveAudioEntitiesToFile();
 	_worldEditor.saveEditorWorldToFile();
 	_scriptEditor.saveScriptFiles();
-	_settingsEditor.saveSettingsToFile();
 
 	// Logging
 	Logger::throwInfo("Project \"" + _currentProjectID + "\" saved!");

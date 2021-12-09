@@ -1,7 +1,7 @@
 #pragma once
 
 #include "mathematics.hpp"
-#include "animation_speed_type.hpp"
+#include "mesh_animation_speed_type.hpp"
 #include "transformation_type.hpp"
 
 #include <map>
@@ -10,16 +10,16 @@
 using std::map;
 using std::string;
 
-class AnimationFrame final
+class MeshAnimationFrame final
 {
 public:
 	// VOID
 	void clearParts();
-	void addPart(const string& partID, fvec3 targetTransformation, fvec3 rotationOrigin, fvec3 speed, AnimationSpeedType animationSpeedType, TransformationType transformationType);
+	void addPart(const string& partID, fvec3 targetTransformation, fvec3 rotationOrigin, fvec3 speed, MeshAnimationSpeedType animationSpeedType, TransformationType transformationType);
 	void setTargetTransformation(const string& partID, fvec3 value);
 	void setRotationOrigin(const string& partID, fvec3 value);
 	void setSpeed(const string& partID, fvec3 value);
-	void setSpeedType(const string& partID, AnimationSpeedType value);
+	void setSpeedType(const string& partID, MeshAnimationSpeedType value);
 	void setTransformationType(const string& partID, TransformationType value);
 
 	// FVEC3
@@ -28,7 +28,7 @@ public:
 	const map<string, fvec3>& getSpeeds() const;
 
 	// MISCELLANEOUS
-	const map<string, AnimationSpeedType>& getSpeedTypes() const;
+	const map<string, MeshAnimationSpeedType>& getSpeedTypes() const;
 	const map<string, TransformationType>& getTransformationTypes() const;
 
 private:
@@ -38,6 +38,6 @@ private:
 	map<string, fvec3> _speeds;
 
 	// MISCELLANEOUS
-	map<string, AnimationSpeedType> _speedTypes;
+	map<string, MeshAnimationSpeedType> _speedTypes;
 	map<string, TransformationType> _transformationTypes;
 };

@@ -1,7 +1,7 @@
-#include "animation_editor.hpp"
+#include "mesh_animation_editor.hpp"
 #include "logger.hpp"
 
-void AnimationEditor::_updateFrameMenu()
+void MeshAnimationEditor::_updateFrameMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
@@ -26,7 +26,7 @@ void AnimationEditor::_updateFrameMenu()
 		screen->getButton("rotationOrigin")->setHoverable(transformationType == TransformationType::ROTATION);
 
 		// Speed is only available if speed type is not instantly
-		screen->getButton("speed")->setHoverable(speedType != AnimationSpeedType::INSTANTLY);
+		screen->getButton("speed")->setHoverable(speedType != MeshAnimationSpeedType::INSTANTLY);
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
@@ -80,17 +80,17 @@ void AnimationEditor::_updateFrameMenu()
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speedType")->isHovered())
 		{
 			// Change speed type
-			if(speedType == AnimationSpeedType::LINEAR)
+			if(speedType == MeshAnimationSpeedType::LINEAR)
 			{
-				speedType = AnimationSpeedType::EXPONENTIAL;
+				speedType = MeshAnimationSpeedType::EXPONENTIAL;
 			}
-			else if(speedType == AnimationSpeedType::EXPONENTIAL)
+			else if(speedType == MeshAnimationSpeedType::EXPONENTIAL)
 			{
-				speedType = AnimationSpeedType::INSTANTLY;
+				speedType = MeshAnimationSpeedType::INSTANTLY;
 			}
 			else
 			{
-				speedType = AnimationSpeedType::LINEAR;
+				speedType = MeshAnimationSpeedType::LINEAR;
 			}
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotationOrigin")->isHovered())
@@ -174,11 +174,11 @@ void AnimationEditor::_updateFrameMenu()
 		{
 			screen->getButton("transformationType")->changeTextContent("Type: SCALE");
 		}
-		if(speedType == AnimationSpeedType::LINEAR)
+		if(speedType == MeshAnimationSpeedType::LINEAR)
 		{
 			screen->getButton("speedType")->changeTextContent("Type: LINEAR");
 		}
-		else if(speedType == AnimationSpeedType::EXPONENTIAL)
+		else if(speedType == MeshAnimationSpeedType::EXPONENTIAL)
 		{
 			screen->getButton("speedType")->changeTextContent("Type: EXPONENT");
 		}

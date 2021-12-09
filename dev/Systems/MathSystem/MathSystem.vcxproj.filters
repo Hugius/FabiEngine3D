@@ -16,12 +16,6 @@
     <Filter Include="Vector\Float">
       <UniqueIdentifier>{0d5f0369-a52b-4abc-b3f6-e46f49d6861f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Matrix\Float">
-      <UniqueIdentifier>{de952230-48be-492c-8a30-95d02d2c4bee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Matrix\Integer">
-      <UniqueIdentifier>{f6102ba7-0988-4984-9acb-af893d055719}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\mathematics.hpp">
@@ -46,13 +40,13 @@
       <Filter>Vector\Integer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\mat22.hpp">
-      <Filter>Matrix\Float</Filter>
+      <Filter>Matrix</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\mat33.hpp">
-      <Filter>Matrix\Float</Filter>
+      <Filter>Matrix</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\mat44.hpp">
-      <Filter>Matrix\Float</Filter>
+      <Filter>Matrix</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -87,13 +81,13 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\mat22.cpp">
-      <Filter>Matrix\Float</Filter>
+      <Filter>Matrix</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\mat33.cpp">
-      <Filter>Matrix\Float</Filter>
+      <Filter>Matrix</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\mat44.cpp">
-      <Filter>Matrix\Float</Filter>
+      <Filter>Matrix</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

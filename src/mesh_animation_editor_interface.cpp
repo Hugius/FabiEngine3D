@@ -1,9 +1,9 @@
-#include "animation_editor.hpp"
+#include "mesh_animation_editor.hpp"
 #include "logger.hpp"
 
 using std::max;
 
-void AnimationEditor::startAnimation(const string& animationID, const string& modelID, int loops)
+void MeshAnimationEditor::startAnimation(const string& animationID, const string& modelID, int loops)
 {
 	// Temporary values
 	string errorMessage = "Tried to start animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -68,7 +68,7 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 	}
 }
 
-const bool AnimationEditor::isAnimationExisting(const string& ID) const
+const bool MeshAnimationEditor::isAnimationExisting(const string& ID) const
 {
 	for(const auto& animation : _animations)
 	{
@@ -81,7 +81,7 @@ const bool AnimationEditor::isAnimationExisting(const string& ID) const
 	return false;
 }
 
-const bool AnimationEditor::isAnimationStarted(const string& animationID, const string& modelID) const
+const bool MeshAnimationEditor::isAnimationStarted(const string& animationID, const string& modelID) const
 {
 	// Temporary values
 	string errorMessage = "Tried to retrieve animation started status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -99,7 +99,7 @@ const bool AnimationEditor::isAnimationStarted(const string& animationID, const 
 	return false;
 }
 
-const bool AnimationEditor::isAnimationPlaying(const string& animationID, const string& modelID) const
+const bool MeshAnimationEditor::isAnimationPlaying(const string& animationID, const string& modelID) const
 {
 	// Temporary values
 	string errorMessage = "Tried to retrieve animation playing status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -121,7 +121,7 @@ const bool AnimationEditor::isAnimationPlaying(const string& animationID, const 
 	return false;
 }
 
-const bool AnimationEditor::isAnimationPaused(const string& animationID, const string& modelID) const
+const bool MeshAnimationEditor::isAnimationPaused(const string& animationID, const string& modelID) const
 {
 	// Temporary values
 	string errorMessage = "Tried to retrieve animation pausing status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -143,7 +143,7 @@ const bool AnimationEditor::isAnimationPaused(const string& animationID, const s
 	return false;
 }
 
-const bool AnimationEditor::isAnimationFading(const string& animationID, const string& modelID) const
+const bool MeshAnimationEditor::isAnimationFading(const string& animationID, const string& modelID) const
 {
 	// Temporary values
 	string errorMessage = "Tried to retrieve animation fading status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -165,7 +165,7 @@ const bool AnimationEditor::isAnimationFading(const string& animationID, const s
 	return false;
 }
 
-void AnimationEditor::pauseAnimation(const string& animationID, const string& modelID)
+void MeshAnimationEditor::pauseAnimation(const string& animationID, const string& modelID)
 {
 	// Temporary values
 	string errorMessage = "Tried to pause animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -197,7 +197,7 @@ void AnimationEditor::pauseAnimation(const string& animationID, const string& mo
 	}
 }
 
-void AnimationEditor::resumeAnimation(const string& animationID, const string& modelID)
+void MeshAnimationEditor::resumeAnimation(const string& animationID, const string& modelID)
 {
 	// Temporary values
 	string errorMessage = "Tried to resume animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -229,7 +229,7 @@ void AnimationEditor::resumeAnimation(const string& animationID, const string& m
 	}
 }
 
-void AnimationEditor::stopAnimation(const string& animationID, const string& modelID)
+void MeshAnimationEditor::stopAnimation(const string& animationID, const string& modelID)
 {
 	// Temporary values
 	string errorMessage = "Tried to stop animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -253,12 +253,12 @@ void AnimationEditor::stopAnimation(const string& animationID, const string& mod
 	}
 }
 
-void AnimationEditor::stopAllAnimations()
+void MeshAnimationEditor::stopAllAnimations()
 {
 	_startedAnimations.clear();
 }
 
-void AnimationEditor::fadeAnimation(const string& animationID, const string& modelID, int framestep)
+void MeshAnimationEditor::fadeAnimation(const string& animationID, const string& modelID, int framestep)
 {
 	// Temporary values
 	string errorMessage = "Tried to fade animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -298,7 +298,7 @@ void AnimationEditor::fadeAnimation(const string& animationID, const string& mod
 	}
 }
 
-Animation* AnimationEditor::getAnimationData(const string& animationID, const string& modelID, string baseErrorMessage)
+MeshAnimation* MeshAnimationEditor::getAnimationData(const string& animationID, const string& modelID, string baseErrorMessage)
 {
 	// Check if animation is able to be retrieved
 	if(!isAnimationExisting(animationID))

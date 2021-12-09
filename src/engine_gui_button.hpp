@@ -53,7 +53,7 @@ protected:
 
 private:
 	// FLOAT
-	static inline const float TOTAL_SIZE_INCREASE = 1.125f;
+	static inline const float TOTAL_SIZE_INCREASE = 1.15f;
 	static inline const float INCREASE_MULTIPLIER = 1.005f;
 	static inline const float DECREASE_MULTIPLIER = 0.995f;
 	static inline const float TEXT_WIDTH_MULTIPLIER = 0.9f;

@@ -19,18 +19,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\animation.cpp" />
-    <ClCompile Include="..\..\..\src\animation_editor_loading.cpp" />
-    <ClCompile Include="..\..\..\src\animation_editor_updates_execution.cpp" />
-    <ClCompile Include="..\..\..\src\animation_editor_interface.cpp" />
-    <ClCompile Include="..\..\..\src\animation_editor_main.cpp" />
-    <ClCompile Include="..\..\..\src\animation_editor_misc.cpp" />
-    <ClCompile Include="..\..\..\src\animation_editor_saving.cpp" />
-    <ClCompile Include="..\..\..\src\animation_editor_updates_main.cpp" />
-    <ClCompile Include="..\..\..\src\animation_editor_updates_frame.cpp" />
-    <ClCompile Include="..\..\..\src\animation_editor_updates_choice.cpp" />
-    <ClCompile Include="..\..\..\src\animation_editor_updates_misc.cpp" />
-    <ClCompile Include="..\..\..\src\animation_frame.cpp" />
+    <ClCompile Include="..\..\..\src\mesh_animation.cpp" />
+    <ClCompile Include="..\..\..\src\mesh_animation_editor_loading.cpp" />
+    <ClCompile Include="..\..\..\src\mesh_animation_editor_updates_execution.cpp" />
+    <ClCompile Include="..\..\..\src\mesh_animation_editor_interface.cpp" />
+    <ClCompile Include="..\..\..\src\mesh_animation_editor_main.cpp" />
+    <ClCompile Include="..\..\..\src\mesh_animation_editor_misc.cpp" />
+    <ClCompile Include="..\..\..\src\mesh_animation_editor_saving.cpp" />
+    <ClCompile Include="..\..\..\src\mesh_animation_editor_updates_main.cpp" />
+    <ClCompile Include="..\..\..\src\mesh_animation_editor_updates_frame.cpp" />
+    <ClCompile Include="..\..\..\src\mesh_animation_editor_updates_choice.cpp" />
+    <ClCompile Include="..\..\..\src\mesh_animation_editor_updates_misc.cpp" />
+    <ClCompile Include="..\..\..\src\mesh_animation_frame.cpp" />
     <ClCompile Include="..\..\..\src\audio_editor_loading.cpp" />
     <ClCompile Include="..\..\..\src\audio_editor_main.cpp" />
     <ClCompile Include="..\..\..\src\audio_editor_misc.cpp" />
@@ -47,6 +47,8 @@
     <ClCompile Include="..\..\..\src\billboard_editor_updates_texturing.cpp" />
     <ClCompile Include="..\..\..\src\billboard_editor_updates_misc.cpp" />
     <ClCompile Include="..\..\..\src\billboard_editor_updates_miscellaneous.cpp" />
+    <ClCompile Include="..\..\..\src\sprite_animation.cpp" />
+    <ClCompile Include="..\..\..\src\sprite_animation_editor_main.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_misc_activation.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_misc_highlighting.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_misc_custom.cpp" />
@@ -132,13 +134,15 @@
     <ClCompile Include="..\..\..\src\water_editor_updates_miscellaneous.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\animation.hpp" />
-    <ClInclude Include="..\..\..\src\animation_editor.hpp" />
-    <ClInclude Include="..\..\..\src\animation_frame.hpp" />
+    <ClInclude Include="..\..\..\src\mesh_animation.hpp" />
+    <ClInclude Include="..\..\..\src\mesh_animation_editor.hpp" />
+    <ClInclude Include="..\..\..\src\mesh_animation_frame.hpp" />
     <ClInclude Include="..\..\..\src\audio_editor.hpp" />
     <ClInclude Include="..\..\..\src\billboard_editor.hpp" />
     <ClInclude Include="..\..\..\src\sky_editor.hpp" />
     <ClInclude Include="..\..\..\src\model_editor.hpp" />
+    <ClInclude Include="..\..\..\src\sprite_animation.hpp" />
+    <ClInclude Include="..\..\..\src\sprite_animation_editor.hpp" />
     <ClInclude Include="..\..\..\src\world_editor.hpp" />
     <ClInclude Include="..\..\..\src\script_editor.hpp" />
     <ClInclude Include="..\..\..\src\settings_editor.hpp" />

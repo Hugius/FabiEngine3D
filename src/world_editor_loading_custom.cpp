@@ -278,7 +278,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				}
 			}
 		}
-		else if(lineType == "ANIMATION")
+		else if(lineType == "MESH_ANIMATION")
 		{
 			// Data placeholders
 			string animationID, modelID;
@@ -319,19 +319,19 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				}
 			}
 
-			// Start animation
-			_animationEditor.startAnimation(animationID, modelID, remainingLoops);
+			// Start mesh animation
+			_meshAnimationEditor.startAnimation(animationID, modelID, remainingLoops);
 
 			// Check if animation exists
-			if(_animationEditor.isAnimationExisting(animationID))
+			if(_meshAnimationEditor.isAnimationExisting(animationID))
 			{
 				// Retrieve raw animation data for editing
 				string errorMessage = "Tried to retrieve animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
-				auto animationData = _animationEditor.getAnimationData(animationID, modelID, errorMessage);
+				auto animationData = _meshAnimationEditor.getAnimationData(animationID, modelID, errorMessage);
 				auto frameData = animationData->getFrames()[frameIndex];
 
 				// Set properties
-				isPaused ? _animationEditor.pauseAnimation(animationID, modelID) : void();
+				isPaused ? _meshAnimationEditor.pauseAnimation(animationID, modelID) : void();
 				animationData->setSpeedMultiplier(speedMultiplier);
 				animationData->setFadeFramestep(fadeFramestep);
 				animationData->setFrameIndex(frameIndex);

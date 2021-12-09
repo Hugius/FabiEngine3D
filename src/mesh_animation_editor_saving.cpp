@@ -1,4 +1,4 @@
-#include "animation_editor.hpp"
+#include "mesh_animation_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 #include "configuration.hpp"
@@ -7,7 +7,7 @@
 
 using std::ofstream;
 
-const bool AnimationEditor::saveAnimationsToFile() const
+const bool MeshAnimationEditor::saveAnimationsToFile() const
 {
 	// Editor must be loaded
 	if(!_isEditorLoaded)
@@ -22,7 +22,7 @@ const bool AnimationEditor::saveAnimationsToFile() const
 	}
 
 	// Create or overwrite file
-	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\animation.fe3d");
+	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\mesh_animation.fe3d");
 
 	// Write animation data
 	for(const auto& animation : _animations)
@@ -107,7 +107,7 @@ const bool AnimationEditor::saveAnimationsToFile() const
 	file.close();
 
 	// Logging
-	Logger::throwInfo("Animation data saved!");
+	Logger::throwInfo("Mesh animation data saved!");
 
 	// Return
 	return true;

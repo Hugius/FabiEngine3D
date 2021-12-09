@@ -9,7 +9,17 @@ EngineController::EngineController()
 	_gui(*this),
 	_leftViewportController(*this, _gui),
 	_rightViewportController(*this, _gui),
-	_topViewportController(*this, _gui, _leftViewportController.getSkyEditor(), _leftViewportController.getTerrainEditor(), _leftViewportController.getWaterEditor(), _leftViewportController.getModelEditor(), _leftViewportController.getAnimationEditor(), _leftViewportController.getBillboardEditor(), _leftViewportController.getAudioEditor(), _leftViewportController.getWorldEditor(), _leftViewportController.getScriptEditor(), _leftViewportController.getSettingsEditor()),
+	_topViewportController(*this, _gui,
+						   _leftViewportController.getSettingsEditor(),
+						   _leftViewportController.getSkyEditor(),
+						   _leftViewportController.getTerrainEditor(),
+						   _leftViewportController.getWaterEditor(),
+						   _leftViewportController.getModelEditor(),
+						   _leftViewportController.getBillboardEditor(),
+						   _leftViewportController.getMeshAnimationEditor(),
+						   _leftViewportController.getAudioEditor(),
+						   _leftViewportController.getWorldEditor(),
+						   _leftViewportController.getScriptEditor()),
 	_bottomViewportController(*this, _gui, _topViewportController, _leftViewportController.getScriptEditor())
 {
 
@@ -156,7 +166,7 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 		if(_leftViewportController.getScriptEditor().getScriptExecutor().isRunning()) // Still running
 		{
 			// Update animation system
-			_leftViewportController.getAnimationEditor().update();
+			_leftViewportController.getMeshAnimationEditor().update();
 
 			// Update script execution
 			_leftViewportController.getScriptEditor().getScriptExecutor().update(false);

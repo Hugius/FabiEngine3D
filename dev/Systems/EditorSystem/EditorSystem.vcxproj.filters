@@ -1,21 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Animation Editor">
-      <UniqueIdentifier>{ce127aed-4053-4bb3-af19-624153f70c1b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Animation Editor\Core">
-      <UniqueIdentifier>{e2011b46-5f88-42c0-9a59-40db66d04e13}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Animation Editor\Miscellaneous">
-      <UniqueIdentifier>{c79d9fa8-72de-43b2-8c68-d93aaa991a7d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Animation Editor\Updates">
-      <UniqueIdentifier>{0b819a6c-bc62-490d-adc2-556478737fbb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Animation Editor\Data Structures">
-      <UniqueIdentifier>{baad863b-7fa3-4249-9d05-0954879e29ae}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Audio Editor">
       <UniqueIdentifier>{8011f7e8-c7ba-4295-b138-3e6e1eb14d63}</UniqueIdentifier>
     </Filter>
@@ -166,31 +151,55 @@
     <Filter Include="Audio Editor\Persistence">
       <UniqueIdentifier>{a017341e-9ace-40d8-8090-f5b3370da817}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Animation Editor\Persistence">
-      <UniqueIdentifier>{f67f8919-3990-4cee-b59b-97e1c29774c0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="World Editor\Pointlight">
       <UniqueIdentifier>{6ec4ef62-8c51-427c-9abf-329dbdc1b9b2}</UniqueIdentifier>
     </Filter>
     <Filter Include="World Editor\Spotlight">
       <UniqueIdentifier>{aea86504-0afd-4aef-8db1-993fe0469761}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sprite Animation Editor">
+      <UniqueIdentifier>{15c1e9e5-2d94-4e16-9b6f-83da55e5b739}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mesh Animation Editor">
+      <UniqueIdentifier>{ce127aed-4053-4bb3-af19-624153f70c1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mesh Animation Editor\Core">
+      <UniqueIdentifier>{e2011b46-5f88-42c0-9a59-40db66d04e13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mesh Animation Editor\Miscellaneous">
+      <UniqueIdentifier>{c79d9fa8-72de-43b2-8c68-d93aaa991a7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mesh Animation Editor\Updates">
+      <UniqueIdentifier>{0b819a6c-bc62-490d-adc2-556478737fbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mesh Animation Editor\Data Structures">
+      <UniqueIdentifier>{baad863b-7fa3-4249-9d05-0954879e29ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mesh Animation Editor\Persistence">
+      <UniqueIdentifier>{f67f8919-3990-4cee-b59b-97e1c29774c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sprite Animation Editor\Core">
+      <UniqueIdentifier>{d08cb6aa-aa91-4d77-9a47-d383c8cae5f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sprite Animation Editor\Data Structures">
+      <UniqueIdentifier>{7c7b847e-e36f-4402-8ae6-8ed4a01b7ad9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\animation_editor_main.cpp">
-      <Filter>Animation Editor\Core</Filter>
+    <ClCompile Include="..\..\..\src\mesh_animation_editor_main.cpp">
+      <Filter>Mesh Animation Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\animation_editor_misc.cpp">
-      <Filter>Animation Editor\Miscellaneous</Filter>
+    <ClCompile Include="..\..\..\src\mesh_animation_editor_misc.cpp">
+      <Filter>Mesh Animation Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\animation_editor_updates_main.cpp">
-      <Filter>Animation Editor\Updates</Filter>
+    <ClCompile Include="..\..\..\src\mesh_animation_editor_updates_main.cpp">
+      <Filter>Mesh Animation Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\animation_editor_updates_frame.cpp">
-      <Filter>Animation Editor\Updates</Filter>
+    <ClCompile Include="..\..\..\src\mesh_animation_editor_updates_frame.cpp">
+      <Filter>Mesh Animation Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\animation_editor_updates_choice.cpp">
-      <Filter>Animation Editor\Updates</Filter>
+    <ClCompile Include="..\..\..\src\mesh_animation_editor_updates_choice.cpp">
+      <Filter>Mesh Animation Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\audio_editor_main.cpp">
       <Filter>Audio Editor\Core</Filter>
@@ -330,8 +339,8 @@
     <ClCompile Include="..\..\..\src\settings_editor.cpp">
       <Filter>Settings Editor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\animation_editor_updates_misc.cpp">
-      <Filter>Animation Editor\Updates</Filter>
+    <ClCompile Include="..\..\..\src\mesh_animation_editor_updates_misc.cpp">
+      <Filter>Mesh Animation Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\billboard_editor_updates_misc.cpp">
       <Filter>Billboard Editor\Updates</Filter>
@@ -429,11 +438,11 @@
     <ClCompile Include="..\..\..\src\world_editor_reflection_updates_edit.cpp">
       <Filter>World Editor\Reflection</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\animation.cpp">
-      <Filter>Animation Editor\Data Structures</Filter>
+    <ClCompile Include="..\..\..\src\mesh_animation.cpp">
+      <Filter>Mesh Animation Editor\Data Structures</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\animation_frame.cpp">
-      <Filter>Animation Editor\Data Structures</Filter>
+    <ClCompile Include="..\..\..\src\mesh_animation_frame.cpp">
+      <Filter>Mesh Animation Editor\Data Structures</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\terrain_editor_updates_normal.cpp">
       <Filter>Terrain Editor\Updates</Filter>
@@ -444,11 +453,11 @@
     <ClCompile Include="..\..\..\src\terrain_editor_updates_miscellaneous.cpp">
       <Filter>Terrain Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\animation_editor_updates_execution.cpp">
-      <Filter>Animation Editor\Updates</Filter>
+    <ClCompile Include="..\..\..\src\mesh_animation_editor_updates_execution.cpp">
+      <Filter>Mesh Animation Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\animation_editor_interface.cpp">
-      <Filter>Animation Editor\Core</Filter>
+    <ClCompile Include="..\..\..\src\mesh_animation_editor_interface.cpp">
+      <Filter>Mesh Animation Editor\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_editor_saving.cpp">
       <Filter>Script Editor\Persistence</Filter>
@@ -468,8 +477,8 @@
     <ClCompile Include="..\..\..\src\audio_editor_saving.cpp">
       <Filter>Audio Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\animation_editor_saving.cpp">
-      <Filter>Animation Editor\Persistence</Filter>
+    <ClCompile Include="..\..\..\src\mesh_animation_editor_saving.cpp">
+      <Filter>Mesh Animation Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_spotlight_updates_edit.cpp">
       <Filter>World Editor\Spotlight</Filter>
@@ -498,8 +507,8 @@
     <ClCompile Include="..\..\..\src\billboard_editor_loading.cpp">
       <Filter>Billboard Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\animation_editor_loading.cpp">
-      <Filter>Animation Editor\Persistence</Filter>
+    <ClCompile Include="..\..\..\src\mesh_animation_editor_loading.cpp">
+      <Filter>Mesh Animation Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\audio_editor_loading.cpp">
       <Filter>Audio Editor\Persistence</Filter>
@@ -510,16 +519,22 @@
     <ClCompile Include="..\..\..\src\world_editor_misc_activation.cpp">
       <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\sprite_animation_editor_main.cpp">
+      <Filter>Sprite Animation Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sprite_animation.cpp">
+      <Filter>Sprite Animation Editor\Data Structures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\animation_editor.hpp">
-      <Filter>Animation Editor\Core</Filter>
+    <ClInclude Include="..\..\..\src\mesh_animation_editor.hpp">
+      <Filter>Mesh Animation Editor\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\animation.hpp">
-      <Filter>Animation Editor\Data Structures</Filter>
+    <ClInclude Include="..\..\..\src\mesh_animation.hpp">
+      <Filter>Mesh Animation Editor\Data Structures</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\animation_frame.hpp">
-      <Filter>Animation Editor\Data Structures</Filter>
+    <ClInclude Include="..\..\..\src\mesh_animation_frame.hpp">
+      <Filter>Mesh Animation Editor\Data Structures</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\audio_editor.hpp">
       <Filter>Audio Editor\Core</Filter>
@@ -547,6 +562,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\terrain_editor.hpp">
       <Filter>Terrain Editor\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sprite_animation_editor.hpp">
+      <Filter>Sprite Animation Editor\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sprite_animation.hpp">
+      <Filter>Sprite Animation Editor\Data Structures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -339,7 +339,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_animationEditor.startAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
+				_meshAnimationEditor.startAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -354,7 +354,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_animationEditor.pauseAnimation(arguments[1].getString(), arguments[0].getString());
+				_meshAnimationEditor.pauseAnimation(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -369,7 +369,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_animationEditor.resumeAnimation(arguments[1].getString(), arguments[0].getString());
+				_meshAnimationEditor.resumeAnimation(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -384,7 +384,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_animationEditor.fadeAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
+				_meshAnimationEditor.fadeAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -399,7 +399,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_animationEditor.stopAnimation(arguments[1].getString(), arguments[0].getString());
+				_meshAnimationEditor.stopAnimation(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -416,7 +416,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			{
 				// Retrieve animation data
 				string errorMessage = "Tried to set animation speed with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
-				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
+				auto animationData = _meshAnimationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
 
 				// Check if animation was found
 				if(animationData != nullptr)
@@ -439,7 +439,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			{
 				// Retrieve animation data
 				string errorMessage = "Tried to set animation autopaused option with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
-				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
+				auto animationData = _meshAnimationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
 
 				// Check if animation was found
 				if(animationData != nullptr)

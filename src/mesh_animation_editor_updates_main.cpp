@@ -1,9 +1,9 @@
-#include "animation_editor.hpp"
+#include "mesh_animation_editor.hpp"
 #include "logger.hpp"
 
 #include <algorithm>
 
-void AnimationEditor::update()
+void MeshAnimationEditor::update()
 {
 	// Animation execution
 	_updateAnimationExecution();
@@ -43,7 +43,7 @@ void AnimationEditor::update()
 	}
 }
 
-void AnimationEditor::_updateMainMenu()
+void MeshAnimationEditor::_updateMainMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
@@ -90,7 +90,7 @@ void AnimationEditor::_updateMainMenu()
 	}
 }
 
-void AnimationEditor::_updateAnimationCreating()
+void MeshAnimationEditor::_updateAnimationCreating()
 {
 	if(_isCreatingAnimation)
 	{
@@ -109,7 +109,7 @@ void AnimationEditor::_updateAnimationCreating()
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
 
 					// Create animation
-					_animations.push_back(make_shared<Animation>(newAnimationID));
+					_animations.push_back(make_shared<MeshAnimation>(newAnimationID));
 
 					// Select animation
 					_currentAnimationID = newAnimationID;
@@ -134,7 +134,7 @@ void AnimationEditor::_updateAnimationCreating()
 	}
 }
 
-void AnimationEditor::_updateAnimationChoosing()
+void MeshAnimationEditor::_updateAnimationChoosing()
 {
 	if(_isChoosingAnimation)
 	{
@@ -177,7 +177,7 @@ void AnimationEditor::_updateAnimationChoosing()
 	}
 }
 
-void AnimationEditor::_updateAnimationDeleting()
+void MeshAnimationEditor::_updateAnimationDeleting()
 {
 	if(_isDeletingAnimation && _currentAnimationID != "")
 	{

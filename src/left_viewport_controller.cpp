@@ -110,7 +110,15 @@ void LeftViewportController::update()
 			if(_modelEditor.loadModelEntitiesFromFile() && _meshAnimationEditor.loadAnimationsFromFile(true))
 			{
 				_meshAnimationEditor.load();
-				window->setActiveScreen("animationEditorMenuMain");
+				window->setActiveScreen("meshAnimationEditorMenuMain");
+			}
+		}
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("spriteAnimationEditor")->isHovered())
+		{
+			if(_spriteAnimationEditor.loadAnimationsFromFile(true))
+			{
+				_spriteAnimationEditor.load();
+				window->setActiveScreen("spriteAnimationEditorMenuMain");
 			}
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("audioEditor")->isHovered())
@@ -144,6 +152,7 @@ void LeftViewportController::update()
 	_modelEditor.update();
 	_billboardEditor.update();
 	_meshAnimationEditor.update();
+	_spriteAnimationEditor.update();
 	_audioEditor.update();
 	_worldEditor.update();
 	_scriptEditor.update();

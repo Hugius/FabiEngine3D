@@ -1,9 +1,7 @@
-#include "mesh_animation_editor.hpp"
+#include "sprite_animation_editor.hpp"
 #include "logger.hpp"
 
-#include <algorithm>
-
-void MeshAnimationEditor::update()
+void SpriteAnimationEditor::update()
 {
 	// Animation execution
 	_updateAnimationExecution();
@@ -19,37 +17,17 @@ void MeshAnimationEditor::update()
 	}
 	if(_isEditorLoaded)
 	{
-		_updateFrameMenu();
-	}
-	if(_isEditorLoaded)
-	{
-		_updateAnimationCreating();
-	}
-	if(_isEditorLoaded)
-	{
-		_updateAnimationChoosing();
-	}
-	if(_isEditorLoaded)
-	{
-		_updateAnimationDeleting();
-	}
-	if(_isEditorLoaded)
-	{
-		_updateCamera();
-	}
-	if(_isEditorLoaded)
-	{
 		_updateMiscellaneous();
 	}
 }
 
-void MeshAnimationEditor::_updateMainMenu()
+void SpriteAnimationEditor::_updateMainMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if(screen->getID() == "meshAnimationEditorMenuMain")
+	if(screen->getID() == "spriteAnimationEditorMenuMain")
 	{
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
@@ -63,12 +41,17 @@ void MeshAnimationEditor::_updateMainMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			_gui.getGlobalScreen()->createChoiceForm("animationList", "Edit Animation", fvec2(0.0f, 0.1f), getAllAnimationIDs());
+			_gui.getGlobalScreen()->createChoiceForm("animationList", "Edit Animation", fvec2(-0.5f, 0.1f), getAllAnimationIDs());
 			_isChoosingAnimation = true;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			_gui.getGlobalScreen()->createChoiceForm("animationList", "Delete Animation", fvec2(0.0f, 0.1f), getAllAnimationIDs());
+			auto IDs = getAllAnimationIDs();
+			for(auto& ID : IDs)
+			{
+				ID = ID.substr(1);
+			}
+			_gui.getGlobalScreen()->createChoiceForm("animationList", "Delete Animation", fvec2(-0.5f, 0.1f), IDs);
 			_isChoosingAnimation = true;
 			_isDeletingAnimation = true;
 		}
@@ -77,7 +60,7 @@ void MeshAnimationEditor::_updateMainMenu()
 		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
-			saveAnimationsToFile();
+			saveAnimationEntitiesToFile();
 			unload();
 			return;
 		}
@@ -90,7 +73,7 @@ void MeshAnimationEditor::_updateMainMenu()
 	}
 }
 
-void MeshAnimationEditor::_updateAnimationCreating()
+void SpriteAnimationEditor::_updateAnimationCreating()
 {
 	if(_isCreatingAnimation)
 	{
@@ -106,10 +89,10 @@ void MeshAnimationEditor::_updateAnimationCreating()
 				if(find(animationIDs.begin(), animationIDs.end(), newAnimationID) == animationIDs.end())
 				{
 					// Go to next screen
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("meshAnimationEditorMenuChoice");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("spriteAnimationEditorMenuChoice");
 
 					// Create animation
-					_animations.push_back(make_shared<MeshAnimation>(newAnimationID));
+					_animations.push_back(make_shared<SpriteAnimation>(newAnimationID));
 
 					// Select animation
 					_currentAnimationID = newAnimationID;
@@ -117,8 +100,8 @@ void MeshAnimationEditor::_updateAnimationCreating()
 					// Miscellaneous
 					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), "Animation: " + newAnimationID, 0.025f);
 					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), true);
-					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), true);
 					_isCreatingAnimation = false;
+
 				}
 				else // ID already exists
 				{
@@ -133,7 +116,7 @@ void MeshAnimationEditor::_updateAnimationCreating()
 	}
 }
 
-void MeshAnimationEditor::_updateAnimationChoosing()
+void SpriteAnimationEditor::_updateAnimationChoosing()
 {
 	if(_isChoosingAnimation)
 	{
@@ -152,17 +135,13 @@ void MeshAnimationEditor::_updateAnimationChoosing()
 				// Go to next screen
 				if(!_isDeletingAnimation)
 				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("meshAnimationEditorMenuChoice");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("spriteAnimationEditorMenuChoice");
 					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), "Animation: " + selectedButtonID, 0.025f);
 					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), true);
-					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), true);
 				}
 
 				// Miscellaneous
-				if(_fe3d.model_isExisting(_getAnimation(selectedButtonID)->getPreviewModelID()))
-				{
-					_fe3d.model_setVisible(_getAnimation(selectedButtonID)->getPreviewModelID(), true);
-				}
+				_fe3d.image_setVisible(PREVIEW_IMAGE_ID, true);
 				_gui.getGlobalScreen()->deleteChoiceForm("animationList");
 				_isChoosingAnimation = false;
 			}
@@ -176,7 +155,7 @@ void MeshAnimationEditor::_updateAnimationChoosing()
 	}
 }
 
-void MeshAnimationEditor::_updateAnimationDeleting()
+void SpriteAnimationEditor::_updateAnimationDeleting()
 {
 	if(_isDeletingAnimation && _currentAnimationID != "")
 	{
@@ -190,13 +169,10 @@ void MeshAnimationEditor::_updateAnimationDeleting()
 		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 		{
 			// Go to main screen
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("meshAnimationEditorMenuMain");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("spriteAnimationEditorMenuMain");
 
 			// Delete animation
-			if(!_getAnimation(_currentAnimationID)->getPreviewModelID().empty())
-			{
-				_fe3d.model_setVisible(_getAnimation(_currentAnimationID)->getPreviewModelID(), false);
-			}
+			_fe3d.image_setVisible(PREVIEW_IMAGE_ID, false);
 			_deleteAnimation(_currentAnimationID);
 			_currentAnimationID = "";
 

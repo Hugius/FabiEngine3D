@@ -13,7 +13,7 @@ const bool MeshAnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewMode
 	// Error checking
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("AnimationEditor::loadAnimationsFromFile");
+		Logger::throwError("MeshAnimationEditor::loadAnimationsFromFile");
 	}
 
 	// Clear animations list from previous loads

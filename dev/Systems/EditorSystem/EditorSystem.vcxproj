@@ -48,7 +48,14 @@
     <ClCompile Include="..\..\..\src\billboard_editor_updates_misc.cpp" />
     <ClCompile Include="..\..\..\src\billboard_editor_updates_miscellaneous.cpp" />
     <ClCompile Include="..\..\..\src\sprite_animation.cpp" />
+    <ClCompile Include="..\..\..\src\sprite_animation_editor_loading.cpp" />
     <ClCompile Include="..\..\..\src\sprite_animation_editor_main.cpp" />
+    <ClCompile Include="..\..\..\src\sprite_animation_editor_misc.cpp" />
+    <ClCompile Include="..\..\..\src\sprite_animation_editor_saving.cpp" />
+    <ClCompile Include="..\..\..\src\sprite_animation_editor_updates_execution.cpp" />
+    <ClCompile Include="..\..\..\src\sprite_animation_editor_updates_main.cpp" />
+    <ClCompile Include="..\..\..\src\sprite_animation_editor_updates_choice.cpp" />
+    <ClCompile Include="..\..\..\src\sprite_animation_editor_updates_misc.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_misc_activation.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_misc_highlighting.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_misc_custom.cpp" />

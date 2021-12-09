@@ -184,6 +184,15 @@
     <Filter Include="Sprite Animation Editor\Data Structures">
       <UniqueIdentifier>{7c7b847e-e36f-4402-8ae6-8ed4a01b7ad9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sprite Animation Editor\Miscellaneous">
+      <UniqueIdentifier>{2d496f78-f3d8-48d8-b73d-5a54ad9ffb9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sprite Animation Editor\Updates">
+      <UniqueIdentifier>{48974e80-2b9e-4c00-902e-59ad675354a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sprite Animation Editor\Persistence">
+      <UniqueIdentifier>{ed0e4429-f505-4c9e-96d6-24f1366e7106}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\mesh_animation_editor_main.cpp">
@@ -524,6 +533,27 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\sprite_animation.cpp">
       <Filter>Sprite Animation Editor\Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sprite_animation_editor_misc.cpp">
+      <Filter>Sprite Animation Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sprite_animation_editor_updates_main.cpp">
+      <Filter>Sprite Animation Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sprite_animation_editor_updates_choice.cpp">
+      <Filter>Sprite Animation Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sprite_animation_editor_updates_execution.cpp">
+      <Filter>Sprite Animation Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sprite_animation_editor_updates_misc.cpp">
+      <Filter>Sprite Animation Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sprite_animation_editor_saving.cpp">
+      <Filter>Sprite Animation Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sprite_animation_editor_loading.cpp">
+      <Filter>Sprite Animation Editor\Persistence</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

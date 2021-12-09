@@ -1,8 +1,6 @@
 #include "mesh_animation_editor.hpp"
 #include "logger.hpp"
 
-#include <algorithm>
-
 void MeshAnimationEditor::setCurrentProjectID(const string& projectID)
 {
 	_currentProjectID = projectID;
@@ -24,7 +22,7 @@ void MeshAnimationEditor::_deleteAnimation(const string& ID)
 		}
 	}
 
-	Logger::throwError("AnimationEditor::_deleteAnimation");
+	Logger::throwError("MeshAnimationEditor::_deleteAnimation");
 }
 
 const bool MeshAnimationEditor::_hasReachedFloat(float first, float second, float speed) const
@@ -63,7 +61,7 @@ shared_ptr<MeshAnimation> MeshAnimationEditor::_getAnimation(const string& ID) c
 		}
 	}
 
-	Logger::throwError("AnimationEditor::_getAnimation");
+	Logger::throwError("MeshAnimationEditor::_getAnimation");
 }
 
 const vector<string> MeshAnimationEditor::getAllAnimationIDs() const

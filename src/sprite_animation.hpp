@@ -1,8 +1,14 @@
 #pragma once
 
+#include <string>
+
+using std::string;
+
 class SpriteAnimation final
 {
 public:
+	SpriteAnimation(const string& ID);
+
 	// VOIDS
 	void startSpriteAnimation(int loops);
 	void pauseSpriteAnimation();
@@ -16,6 +22,9 @@ public:
 	void increasePassedSpriteAnimationFrames();
 	void resetPassedSpriteAnimationFrames();
 	void increaseSpriteAnimationLoops();
+
+	// STRING
+	const string& getID() const;
 
 	// INT
 	const int getMaxLoops() const;
@@ -34,6 +43,9 @@ public:
 	const bool isSpriteAnimationPaused() const;
 
 private:
+	// STRING
+	const string _ID;
+
 	// INT
 	int _maxLoops = 0;
 

@@ -2,6 +2,7 @@
 
 #include "fe3d.hpp"
 #include "engine_gui_manager.hpp"
+#include "sprite_animation.hpp"
 
 class SpriteAnimationEditor final
 {
@@ -15,46 +16,44 @@ public:
 	void update();
 
 	// STRING
-	const vector<string>& getLoadedBillboardIDs();
+	const vector<string> getAllAnimationIDs();
 
 	// BOOL
 	const bool isLoaded() const;
+	const bool loadAnimationsFromFile(bool mustCheckPreviewTexture);
+	const bool saveAnimationsToFile() const;
 
 private:
 	// VOID
 	void _loadGUI();
 	void _unloadGUI();
+	void _updateAnimationExecution();
 	void _updateMainMenu();
 	void _updateChoiceMenu();
+	void _updateAnimationCreating();
+	void _updateAnimationChoosing();
+	void _updateAnimationDeleting();
+	void _updateMiscellaneous();
+	void _deleteAnimation(const string& ID);
 
 	// STRING
-	vector<string> _loadedBillboardIDs;
-	string _hoveredBillboardID = "";
-	string _currentBillboardID = "";
+	static inline const string PREVIEW_IMAGE_ID = "@@preview_image";
+	string _hoveredAnimationID = "";
+	string _currentAnimationID = "";
 	string _currentProjectID = "";
 
 	// FLOAT
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
-	static inline const float CURSOR_SENSITIVITY = 0.025f;
-	static inline const float INITIAL_CAMERA_YAW = 45.0f;
-	static inline const float INITIAL_CAMERA_PITCH = 45.0f;
-	static inline const float INITIAL_CAMERA_DISTANCE = 2.5f;
-	static inline const float MIN_CAMERA_PITCH = 1.0f;
-	static inline const float GRID_Y_OFFSET = 0.001f;
-	static inline const float GRID_SIZE = 30.0f;
-	static inline const float GRID_UV = 3.0f;
-	static inline const float MIN_CAMERA_DISTANCE = 0.5f;
-	static inline const float CAMERA_DISTANCE_SPEED = 0.125f;
-	static inline const float CAMERA_LOOKAT_SPEED = 0.025f;
 
 	// BOOL
-	bool _isCreatingBillboard = false;
-	bool _isChoosingBillboard = false;
-	bool _isDeletingBillboard = false;
+	bool _isCreatingAnimation = false;
+	bool _isChoosingAnimation = false;
+	bool _isDeletingAnimation = false;
 	bool _isEditorLoaded = false;
 
 	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;
+	vector<shared_ptr<SpriteAnimation>> _animations;
 };

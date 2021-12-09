@@ -65,7 +65,7 @@ void TopViewportController::initialize()
 	// Execution screen
 	executionWindow->createScreen("main");
 	executionWindow->setActiveScreen("main");
-	executionWindow->getScreen("main")->createButton("play", fvec2(-0.73f, 0.0f), fvec2(0.2f, 1.75f), "play.png", fvec3(2.0f), true, true, true);
+	executionWindow->getScreen("main")->createButton("start", fvec2(-0.73f, 0.0f), fvec2(0.2f, 1.75f), "start.png", fvec3(2.0f), true, true, true);
 	executionWindow->getScreen("main")->createButton("pause", fvec2(-0.36f, 0.0f), fvec2(0.2f, 1.75f), "pause.png", fvec3(2.0f), true, true, true);
 	executionWindow->getScreen("main")->createButton("restart", fvec2(0.0f, 0.0f), fvec2(0.2f, 1.75f), "restart.png", fvec3(2.0f), true, true, true);
 	executionWindow->getScreen("main")->createButton("stop", fvec2(0.36f, 0.0f), fvec2(0.2f, 1.75f), "stop.png", fvec3(2.0f), true, true, true);
@@ -174,7 +174,7 @@ void TopViewportController::_updateGameScreenManagement()
 	// Check if currently any project loaded
 	if(_currentProjectID.empty())
 	{
-		screen->getButton("play")->setHoverable(false);
+		screen->getButton("start")->setHoverable(false);
 		screen->getButton("pause")->setHoverable(false);
 		screen->getButton("restart")->setHoverable(false);
 		screen->getButton("stop")->setHoverable(false);
@@ -185,7 +185,7 @@ void TopViewportController::_updateGameScreenManagement()
 		// Check if LMB pressed
 		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			if(screen->getButton("play")->isHovered())
+			if(screen->getButton("start")->isHovered())
 			{
 				// Resume game or load game
 				if(_scriptEditor.getScriptExecutor().isStarted())
@@ -223,7 +223,7 @@ void TopViewportController::_updateGameScreenManagement()
 		// Update buttons hoverability
 		static bool wasInMainMenu = false;
 		bool isInMainMenu = (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "main");
-		screen->getButton("play")->setHoverable(isInMainMenu && !_scriptEditor.getScriptExecutor().isScriptEmpty() && !isScriptRunning());
+		screen->getButton("start")->setHoverable(isInMainMenu && !_scriptEditor.getScriptExecutor().isScriptEmpty() && !isScriptRunning());
 		screen->getButton("pause")->setHoverable(isInMainMenu && isScriptRunning() && !_fe3d.server_isRunning());
 		screen->getButton("restart")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isStarted());
 		screen->getButton("stop")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isStarted());

@@ -7,7 +7,7 @@ void MeshAnimationEditor::_updateFrameMenu()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if(screen->getID() == "animationEditorMenuFrame")
+	if(screen->getID() == "meshAnimationEditorMenuFrame")
 	{
 		// Temporary values
 		auto animation = _getAnimation(_currentAnimationID);
@@ -39,7 +39,7 @@ void MeshAnimationEditor::_updateFrameMenu()
 
 			// Miscellaneous
 			_currentPartID = "";
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("meshAnimationEditorMenuChoice");
 			return;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("part")->isHovered())

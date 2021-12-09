@@ -7,7 +7,7 @@ void MeshAnimationEditor::_updateChoiceMenu()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if(screen->getID() == "animationEditorMenuChoice")
+	if(screen->getID() == "meshAnimationEditorMenuChoice")
 	{
 		// Temporary values
 		auto currentAnimation = _getAnimation(_currentAnimationID);
@@ -58,7 +58,7 @@ void MeshAnimationEditor::_updateChoiceMenu()
 			_currentFrameIndex = 0;
 			_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), false);
 			_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), false);
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuMain");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("meshAnimationEditorMenuMain");
 			return;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("preview")->isHovered())
@@ -70,7 +70,7 @@ void MeshAnimationEditor::_updateChoiceMenu()
 			}
 			_gui.getGlobalScreen()->createChoiceForm("modelList", "Select Model", fvec2(-0.5f, 0.1f), modelIDs);
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("play")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("start")->isHovered())
 		{
 			// Reset preview model transformation
 			for(const auto& partID : currentAnimation->getPartIDs())
@@ -157,7 +157,7 @@ void MeshAnimationEditor::_updateChoiceMenu()
 			}
 
 			// Go to next screen
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuFrame");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("meshAnimationEditorMenuFrame");
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -185,7 +185,7 @@ void MeshAnimationEditor::_updateChoiceMenu()
 		bool isPlaying = (isAnimationExisting(_currentAnimationID) && isAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID()));
 		bool hasPreviewModel = _fe3d.model_isExisting(currentAnimation->getPreviewModelID());
 		screen->getButton("preview")->setHoverable(!isPlaying);
-		screen->getButton("play")->setHoverable(!isPlaying && hasPreviewModel && (currentAnimation->getFrames().size() > 1));
+		screen->getButton("start")->setHoverable(!isPlaying && hasPreviewModel && (currentAnimation->getFrames().size() > 1));
 		screen->getButton("stop")->setHoverable(isPlaying && hasPreviewModel);
 		screen->getButton("create")->setHoverable((currentAnimation->getFrames().size() < MAX_FRAME_COUNT) && !isPlaying && hasPreviewModel);
 		screen->getButton("edit")->setHoverable((_currentFrameIndex > 0) && !isPlaying);

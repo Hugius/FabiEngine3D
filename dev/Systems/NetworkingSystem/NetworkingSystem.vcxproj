@@ -26,13 +26,13 @@
     <ClInclude Include="..\..\..\src\network_utils.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\network_client_api_interface.cpp" />
+    <ClCompile Include="..\..\..\src\network_client_api_misc_public.cpp" />
     <ClCompile Include="..\..\..\src\network_client_api_main.cpp" />
-    <ClCompile Include="..\..\..\src\network_client_api_misc.cpp" />
+    <ClCompile Include="..\..\..\src\network_client_api_misc_private.cpp" />
     <ClCompile Include="..\..\..\src\network_client_api_update.cpp" />
     <ClCompile Include="..\..\..\src\network_client_message.cpp" />
-    <ClCompile Include="..\..\..\src\network_server_api_interface.cpp" />
-    <ClCompile Include="..\..\..\src\network_server_api_misc.cpp" />
+    <ClCompile Include="..\..\..\src\network_server_api_misc_public.cpp" />
+    <ClCompile Include="..\..\..\src\network_server_api_misc_private.cpp" />
     <ClCompile Include="..\..\..\src\network_server_api_update.cpp" />
     <ClCompile Include="..\..\..\src\network_server_api_main.cpp" />
     <ClCompile Include="..\..\..\src\network_server_message.cpp" />

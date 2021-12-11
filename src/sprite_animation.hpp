@@ -10,17 +10,14 @@ public:
 	SpriteAnimation(const string& ID);
 
 	// VOIDS
-	void start(int maxLoops);
-	void pause();
-	void resume();
-	void stop();
+	void setTimesToPlay(int value);
+	void setPaused(bool value);
 	void setRowIndex(unsigned int value);
 	void setColumnIndex(unsigned int value);
 	void setRowCount(unsigned int value);
 	void setColumnCount(unsigned int value);
 	void setFramestep(unsigned int value);
 	void setPassedFrames(unsigned int value);
-	void setPassedLoops(unsigned int value);
 	void setPreviewTexturePath(const string& value);
 
 	// STRING
@@ -28,7 +25,7 @@ public:
 	const string& getPreviewTexturePath() const;
 
 	// INT
-	const int getMaxLoops() const;
+	const int getTimesToPlay() const;
 
 	// UNSIGNED INT
 	const unsigned int getPassedFrames() const;
@@ -37,10 +34,8 @@ public:
 	const unsigned int getColumnCount() const;
 	const unsigned int getRowIndex() const;
 	const unsigned int getColumnIndex() const;
-	const unsigned int getPassedLoops() const;
 
 	// BOOL
-	const bool isStarted() const;
 	const bool isPaused() const;
 
 private:
@@ -49,7 +44,7 @@ private:
 	string _previewTexturePath = "";
 
 	// INT
-	int _maxLoops = 0;
+	int _timesToPlay = 0;
 
 	// UNSIGNED INT
 	unsigned int _rowCount = 0;
@@ -58,9 +53,7 @@ private:
 	unsigned int _columnIndex = 0;
 	unsigned int _framestep = 0;
 	unsigned int _passedFrames = 0;
-	unsigned int _passedLoops = 0;
 
 	// BOOL
-	bool _isStarted = false;
 	bool _isPaused = false;
 };

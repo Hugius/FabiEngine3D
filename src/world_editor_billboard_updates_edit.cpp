@@ -69,7 +69,7 @@ void WorldEditor::_updateBillboardEditing()
 					if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedBillboardID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 					{
 						_activeBillboardID = "";
-						rightWindow->setActiveScreen("worldEditorControls");
+						rightWindow->setActiveScreen("main");
 					}
 				}
 			}
@@ -122,7 +122,7 @@ void WorldEditor::_updateBillboardEditing()
 				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
 					_fe3d.billboard_delete(_activeBillboardID);
-					rightWindow->setActiveScreen("worldEditorControls");
+					rightWindow->setActiveScreen("main");
 					_activeBillboardID = "";
 					return;
 				}
@@ -132,7 +132,7 @@ void WorldEditor::_updateBillboardEditing()
 			if(_fe3d.input_isKeyPressed(InputType::KEY_DELETE))
 			{
 				_fe3d.billboard_delete(_activeBillboardID);
-				rightWindow->setActiveScreen("worldEditorControls");
+				rightWindow->setActiveScreen("main");
 				_activeBillboardID = "";
 				return;
 			}

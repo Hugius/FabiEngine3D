@@ -18,9 +18,9 @@ const string& SpriteAnimation::getPreviewTexturePath() const
 	return _previewTexturePath;
 }
 
-const int SpriteAnimation::getMaxLoops() const
+const int SpriteAnimation::getTimesToPlay() const
 {
-	return _maxLoops;
+	return _timesToPlay;
 }
 
 const unsigned int SpriteAnimation::getPassedFrames() const
@@ -53,79 +53,19 @@ const unsigned int SpriteAnimation::getColumnIndex() const
 	return _columnIndex;
 }
 
-const unsigned int SpriteAnimation::getPassedLoops() const
-{
-	return _passedLoops;
-}
-
-const bool SpriteAnimation::isStarted() const
-{
-	return _isStarted;
-}
-
 const bool SpriteAnimation::isPaused() const
 {
 	return _isPaused;
 }
 
-void SpriteAnimation::start(int maxLoops)
+void SpriteAnimation::setTimesToPlay(int value)
 {
-	if(_isStarted)
-	{
-		Logger::throwWarning("SpriteAnimation::start::1");
-	}
-	if(maxLoops < -1)
-	{
-		Logger::throwWarning("SpriteAnimation::start::2");
-	}
-
-	_isStarted = true;
-	_passedFrames = 0;
-	_passedLoops = 0;
-	_maxLoops = maxLoops;
+	_timesToPlay = value;
 }
 
-void SpriteAnimation::pause()
+void SpriteAnimation::setPaused(bool value)
 {
-	if(!_isStarted)
-	{
-		Logger::throwWarning("SpriteAnimation::pause::1");
-	}
-	else if(_isPaused)
-	{
-		Logger::throwWarning("SpriteAnimation::pause::2");
-	}
-
-	_isPaused = true;
-}
-
-void SpriteAnimation::resume()
-{
-	if(!_isPaused)
-	{
-		Logger::throwWarning("SpriteAnimation::resume");
-	}
-
-	_isPaused = false;
-}
-
-void SpriteAnimation::stop()
-{
-	if(!_isStarted)
-	{
-		Logger::throwWarning("SpriteAnimation::stop");
-	}
-
-	_maxLoops = 0;
-	_rowCount = 0;
-	_rowIndex = 0;
-	_columnCount = 0;
-	_columnIndex = 0;
-	_framestep = 0;
-	_passedFrames = 0;
-	_passedLoops = 0;
-	_isStarted = false;
-	_isPaused = false;
+	_isPaused = value;
 }
 
 void SpriteAnimation::setRowIndex(unsigned int value)
@@ -156,11 +96,6 @@ void SpriteAnimation::setFramestep(unsigned int value)
 void SpriteAnimation::setPassedFrames(unsigned int value)
 {
 	_passedFrames = value;
-}
-
-void SpriteAnimation::setPassedLoops(unsigned int value)
-{
-	_passedLoops = value;
 }
 
 void SpriteAnimation::setPreviewTexturePath(const string& value)

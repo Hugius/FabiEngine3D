@@ -22,7 +22,6 @@ void MeshAnimationEditor::startAnimation(const string& animationID, const string
 				{
 					// Retrieve animation
 					auto animation = *_getAnimation(animationID);
-					animation.setAnimatedModelID(modelID);
 					animation.setTimesToPlay((loops == -1) ? -1 : (loops + 1));
 					animation.setInitialSize(_fe3d.model_getBaseSize(modelID));
 

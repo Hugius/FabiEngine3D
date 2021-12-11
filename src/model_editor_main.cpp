@@ -70,7 +70,6 @@ void ModelEditor::load()
 	_gui.getGlobalScreen()->createTextField("modelID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 	_gui.getGlobalScreen()->createTextField("partID", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 	_gui.getGlobalScreen()->createTextField("aabbID", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
-	_gui.getViewport("right")->getWindow("main")->setActiveScreen("modelEditorControls");
 	_isEditorLoaded = true;
 }
 
@@ -122,7 +121,6 @@ void ModelEditor::unload()
 	{
 		_fe3d.misc_disableDebugRendering();
 	}
-	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 }
 
 void ModelEditor::_loadGUI()

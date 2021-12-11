@@ -69,7 +69,7 @@ void WorldEditor::_updateSpotlightEditing()
 					if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedTorchID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 					{
 						_activeTorchID = "";
-						rightWindow->setActiveScreen("worldEditorControls");
+						rightWindow->setActiveScreen("main");
 					}
 				}
 			}
@@ -109,7 +109,7 @@ void WorldEditor::_updateSpotlightEditing()
 				{
 					_fe3d.model_delete(_activeTorchID);
 					_fe3d.spotlight_delete(activeSpotlightID);
-					rightWindow->setActiveScreen("worldEditorControls");
+					rightWindow->setActiveScreen("main");
 					_activeTorchID = "";
 					return;
 				}
@@ -120,7 +120,7 @@ void WorldEditor::_updateSpotlightEditing()
 			{
 				_fe3d.model_delete(_activeTorchID);
 				_fe3d.spotlight_delete(activeSpotlightID);
-				rightWindow->setActiveScreen("worldEditorControls");
+				rightWindow->setActiveScreen("main");
 				_activeTorchID = "";
 				return;
 			}

@@ -84,7 +84,7 @@ void WorldEditor::_updateModelPlacingMenu()
 					if(screen->getScrollingList("modelList")->getButton(modelID)->isHovered())
 					{
 						// Reset right window
-						_gui.getViewport("right")->getWindow("main")->setActiveScreen("worldEditorControls");
+						_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
 
 						// Deactivate everything
 						_deactivateModel();

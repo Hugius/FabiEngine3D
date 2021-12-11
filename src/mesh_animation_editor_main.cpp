@@ -65,7 +65,6 @@ void MeshAnimationEditor::load()
 	_fe3d.reflection_capture("@@reflection");
 	_gui.getGlobalScreen()->createTextField("animationID", fvec2(0.0f, -0.45f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 	_gui.getGlobalScreen()->createTextField("animationFrame", fvec2(0.0f, -0.55f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
-	_gui.getViewport("right")->getWindow("main")->setActiveScreen("animationEditorControls");
 	_isEditorLoaded = true;
 }
 
@@ -113,7 +112,6 @@ void MeshAnimationEditor::unload()
 
 	// Miscellaneous
 	_fe3d.reflection_delete("@@reflection");
-	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 	if(_fe3d.misc_isDebugRenderingEnabled())
 	{
 		_fe3d.misc_disableDebugRendering();

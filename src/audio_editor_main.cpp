@@ -39,7 +39,6 @@ void AudioEditor::load()
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->createTextField("audioID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
-	_gui.getViewport("right")->getWindow("main")->setActiveScreen("audioEditorControls");
 	_isEditorLoaded = true;
 }
 
@@ -66,7 +65,6 @@ void AudioEditor::unload()
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->deleteTextField("audioID");
-	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 }
 
 void AudioEditor::_loadGUI()

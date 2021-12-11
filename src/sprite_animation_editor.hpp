@@ -14,7 +14,7 @@ public:
 	void load();
 	void unload();
 	void update();
-	void startAnimation(const string& animationID, const string& billboardID, int loops);
+	void startAnimation(const string& animationID, const string& billboardID, int maxLoops);
 	void pauseAnimation(const string& animationID, const string& billboardID);
 	void resumeAnimation(const string& animationID, const string& billboardID);
 	void stopAnimation(const string& animationID, const string& billboardID);
@@ -25,6 +25,10 @@ public:
 
 	// BOOL
 	const bool isLoaded() const;
+	const bool isAnimationExisting(const string& ID) const;
+	const bool isAnimationStarted(const string& animationID, const string& modelID) const;
+	const bool isAnimationPlaying(const string& animationID, const string& modelID) const;
+	const bool isAnimationPaused(const string& animationID, const string& modelID) const;
 	const bool loadAnimationsFromFile(bool mustCheckPreviewTexture);
 	const bool saveAnimationsToFile() const;
 
@@ -45,7 +49,9 @@ private:
 	shared_ptr<SpriteAnimation> _getAnimation(const string& ID) const;
 
 	// STRING
-	static inline const string PREVIEW_BILLBOARD_ID = "@@preview_image";
+	static inline const string PREVIEW_BILLBOARD_ID = "@@preview_billboard";
+	set<pair<string, string>> _animationsToStop;
+	set<pair<string, string>> _animationsToStartAgain;
 	string _hoveredAnimationID = "";
 	string _currentAnimationID = "";
 	string _currentProjectID = "";
@@ -64,7 +70,7 @@ private:
 	bool _isEditorLoaded = false;
 
 	// MISCELLANEOUS
-	map<pair<string, string>, shared_ptr<SpriteAnimation>> _startedAnimations;
+	map<pair<string, string>, SpriteAnimation> _startedAnimations;
 	vector<shared_ptr<SpriteAnimation>> _animations;
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;

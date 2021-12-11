@@ -51,7 +51,6 @@ void TerrainEditor::load()
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->createTextField("terrainID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
-	_gui.getViewport("right")->getWindow("main")->setActiveScreen("terrainEditorControls");
 	_isEditorLoaded = true;
 }
 
@@ -80,7 +79,6 @@ void TerrainEditor::unload()
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->deleteTextField("terrainID");
-	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
 		_fe3d.camera_disableThirdPersonView();

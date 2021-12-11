@@ -48,7 +48,6 @@ void ScriptEditor::load()
 	}
 
 	// Miscellaneous
-	_gui.getViewport("right")->getWindow("main")->setActiveScreen("scriptEditorControls");
 	_isEditorLoaded = true;
 }
 
@@ -96,9 +95,6 @@ void ScriptEditor::unload()
 	_wasGuiFocused = false;
 	_hasClickedLMB = false;
 	_activeActionKey = InputType::NONE;
-
-	// Miscellaneous
-	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 }
 
 void ScriptEditor::_loadGUI()

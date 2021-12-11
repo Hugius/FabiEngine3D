@@ -11,7 +11,7 @@ const bool FabiEngine3D::client_isConnecting() const
 {
 	if(!_core->_networkClientAPI.isRunning())
 	{
-		Logger::throwWarning("Networking client tried to retrieve connecting status: not running!");
+		Logger::throwWarning("Networking client tried to get connecting status: not running!");
 		return false;
 	}
 
@@ -22,7 +22,7 @@ const bool FabiEngine3D::client_isConnected() const
 {
 	if(!_core->_networkClientAPI.isRunning())
 	{
-		Logger::throwWarning("Networking client tried to retrieve connection status: not running!");
+		Logger::throwWarning("Networking client tried to get connection status: not running!");
 		return false;
 	}
 
@@ -38,17 +38,17 @@ const unsigned int FabiEngine3D::client_getPingLatency() const
 {
 	if(!_core->_networkClientAPI.isRunning())
 	{
-		Logger::throwWarning("Networking client tried to retrieve ping latency: not running!");
+		Logger::throwWarning("Networking client tried to get ping latency: not running!");
 		return 0;
 	}
 	if(!_core->_networkClientAPI.isConnectedToServer())
 	{
-		Logger::throwWarning("Networking client tried to retrieve ping latency: not connected!");
+		Logger::throwWarning("Networking client tried to get ping latency: not connected!");
 		return 0;
 	}
 	if(!_core->_networkClientAPI.isAcceptedByServer())
 	{
-		Logger::throwWarning("Networking client tried to retrieve ping latency: not accepted!");
+		Logger::throwWarning("Networking client tried to get ping latency: not accepted!");
 		return 0;
 	}
 
@@ -64,7 +64,7 @@ const string FabiEngine3D::client_getUsername() const
 {
 	if(!_core->_networkClientAPI.isRunning())
 	{
-		Logger::throwWarning("Networking client tried to retrieve username: not running!");
+		Logger::throwWarning("Networking client tried to get username: not running!");
 		return "";
 	}
 
@@ -75,17 +75,17 @@ const string FabiEngine3D::client_getServerIP() const
 {
 	if(!_core->_networkClientAPI.isRunning())
 	{
-		Logger::throwWarning("Networking client tried to retrieve server IP: not running!");
+		Logger::throwWarning("Networking client tried to get server IP: not running!");
 		return "";
 	}
 	if(!_core->_networkClientAPI.isConnectedToServer())
 	{
-		Logger::throwWarning("Networking client tried to retrieve server IP: not connected!");
+		Logger::throwWarning("Networking client tried to get server IP: not connected!");
 		return "";
 	}
 	if(!_core->_networkClientAPI.isAcceptedByServer())
 	{
-		Logger::throwWarning("Networking client tried to retrieve server IP: not accepted!");
+		Logger::throwWarning("Networking client tried to get server IP: not accepted!");
 		return "";
 	}
 
@@ -96,7 +96,7 @@ const vector<NetworkServerMessage> FabiEngine3D::client_getPendingMessages() con
 {
 	if(!_core->_networkClientAPI.isRunning())
 	{
-		Logger::throwWarning("Networking client tried to retrieve pending messages: not running!");
+		Logger::throwWarning("Networking client tried to get pending messages: not running!");
 		return {};
 	}
 

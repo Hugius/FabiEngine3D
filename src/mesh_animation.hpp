@@ -18,7 +18,6 @@ public:
 	void addPart(const string& partID, fvec3 totalMovement, fvec3 totalRotation, fvec3 totalScaling);
 	void setPreviewModelID(const string& value);
 	void setOldPreviewModelID(const string& value);
-	void setAnimatedModelID(const string& value);
 	void setTotalMovement(const string& partID, fvec3 value);
 	void setTotalRotation(const string& partID, fvec3 value);
 	void setTotalScaling(const string& partID, fvec3 value);
@@ -36,7 +35,6 @@ public:
 	const vector<string>& getPartIDs() const;
 	const string& getPreviewModelID() const;
 	const string& getOldPreviewModelID() const;
-	const string& getAnimatedModelID() const;
 
 	// FVEC3
 	const map<string, fvec3>& getTotalMovements() const;
@@ -68,7 +66,6 @@ private:
 	vector<string> _partIDs;
 	string _previewModelID = "";
 	string _oldPreviewModelID = "";
-	string _animatedModelID = "";
 
 	// FVEC3
 	map<string, fvec3> _totalMovements;

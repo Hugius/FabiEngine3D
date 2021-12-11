@@ -69,7 +69,7 @@ void WorldEditor::_updateReflectionEditing()
 					if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedCameraID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 					{
 						_activeCameraID = "";
-						rightWindow->setActiveScreen("worldEditorControls");
+						rightWindow->setActiveScreen("main");
 					}
 				}
 			}
@@ -103,7 +103,7 @@ void WorldEditor::_updateReflectionEditing()
 				{
 					_fe3d.model_delete(_activeCameraID);
 					_fe3d.reflection_delete(activeReflectionID);
-					rightWindow->setActiveScreen("worldEditorControls");
+					rightWindow->setActiveScreen("main");
 					_activeCameraID = "";
 					return;
 				}
@@ -114,7 +114,7 @@ void WorldEditor::_updateReflectionEditing()
 			{
 				_fe3d.model_delete(_activeCameraID);
 				_fe3d.reflection_delete(activeReflectionID);
-				rightWindow->setActiveScreen("worldEditorControls");
+				rightWindow->setActiveScreen("main");
 				_activeCameraID = "";
 				return;
 			}

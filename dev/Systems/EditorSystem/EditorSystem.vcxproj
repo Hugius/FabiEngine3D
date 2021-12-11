@@ -47,6 +47,7 @@
     <ClCompile Include="..\..\..\src\billboard_editor_updates_misc.cpp" />
     <ClCompile Include="..\..\..\src\billboard_editor_updates_miscellaneous.cpp" />
     <ClCompile Include="..\..\..\src\sprite_animation.cpp" />
+    <ClCompile Include="..\..\..\src\sprite_animation_editor_interface.cpp" />
     <ClCompile Include="..\..\..\src\sprite_animation_editor_loading.cpp" />
     <ClCompile Include="..\..\..\src\sprite_animation_editor_main.cpp" />
     <ClCompile Include="..\..\..\src\sprite_animation_editor_misc.cpp" />

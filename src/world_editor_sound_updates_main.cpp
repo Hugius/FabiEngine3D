@@ -90,7 +90,7 @@ void WorldEditor::_updateSoundPlacingMenu()
 				if(screen->getScrollingList("sounds")->getButton(audioID)->isHovered())
 				{
 					// Reset right window
-					_gui.getViewport("right")->getWindow("main")->setActiveScreen("worldEditorControls");
+					_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
 
 					// Deactivate everything
 					_deactivateModel();

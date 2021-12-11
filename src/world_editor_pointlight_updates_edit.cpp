@@ -69,7 +69,7 @@ void WorldEditor::_updatePointlightEditing()
 					if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedLampID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 					{
 						_activeLampID = "";
-						rightWindow->setActiveScreen("worldEditorControls");
+						rightWindow->setActiveScreen("main");
 					}
 				}
 			}
@@ -128,7 +128,7 @@ void WorldEditor::_updatePointlightEditing()
 				{
 					_fe3d.model_delete(_activeLampID);
 					_fe3d.pointlight_delete(activePointlightID);
-					rightWindow->setActiveScreen("worldEditorControls");
+					rightWindow->setActiveScreen("main");
 					_activeLampID = "";
 					return;
 				}
@@ -139,7 +139,7 @@ void WorldEditor::_updatePointlightEditing()
 			{
 				_fe3d.model_delete(_activeLampID);
 				_fe3d.pointlight_delete(activePointlightID);
-				rightWindow->setActiveScreen("worldEditorControls");
+				rightWindow->setActiveScreen("main");
 				_activeLampID = "";
 				return;
 			}

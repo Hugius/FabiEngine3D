@@ -275,25 +275,3 @@ void TextureLoader::setAnisotropicFilteringQuality(unsigned int value)
 	_anisotropicFilteringQuality = clamp(value, Config::MIN_ANISOTROPIC_FILTERING_QUALITY, Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
 	_reloadAnisotropicFiltering();
 }
-
-void TextureLoader::_reloadAnisotropicFiltering()
-{
-	for(const auto& [path, texture] : _textureCache2D)
-	{
-		// Bind
-		glBindTexture(GL_TEXTURE_2D, texture);
-
-		// Get current quality
-		int currentQuality;
-		glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &currentQuality);
-
-		// Check if texture must be anisotropically filtered
-		if((currentQuality >= Config::MIN_ANISOTROPIC_FILTERING_QUALITY) && (currentQuality <= Config::MAX_ANISOTROPIC_FILTERING_QUALITY))
-		{
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(_anisotropicFilteringQuality));
-		}
-
-		// Unbind
-		glBindTexture(GL_TEXTURE_2D, 0);
-	}
-}

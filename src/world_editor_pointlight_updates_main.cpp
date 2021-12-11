@@ -28,7 +28,7 @@ void WorldEditor::_updatePointlightMenu()
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("place")->isHovered())
 		{
 			// Reset right window
-			_gui.getViewport("right")->getWindow("main")->setActiveScreen("worldEditorControls");
+			_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
 
 			// Deactivate everything
 			_deactivateModel();

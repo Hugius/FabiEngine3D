@@ -70,7 +70,7 @@ void WorldEditor::_updateModelEditing()
 					if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedModelID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 					{
 						_activeModelID = "";
-						rightWindow->setActiveScreen("worldEditorControls");
+						rightWindow->setActiveScreen("main");
 					}
 				}
 			}
@@ -127,7 +127,7 @@ void WorldEditor::_updateModelEditing()
 				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
 					_fe3d.model_delete(_activeModelID);
-					rightWindow->setActiveScreen("worldEditorControls");
+					rightWindow->setActiveScreen("main");
 					_activeModelID = "";
 					return;
 				}
@@ -179,7 +179,7 @@ void WorldEditor::_updateModelEditing()
 			if(_fe3d.input_isKeyPressed(InputType::KEY_DELETE))
 			{
 				_fe3d.model_delete(_activeModelID);
-				rightWindow->setActiveScreen("worldEditorControls");
+				rightWindow->setActiveScreen("main");
 				_activeModelID = "";
 				return;
 			}

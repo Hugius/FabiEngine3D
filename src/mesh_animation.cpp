@@ -58,11 +58,6 @@ void MeshAnimation::setOldPreviewModelID(const string& value)
 	_oldPreviewModelID = value;
 }
 
-void MeshAnimation::setAnimatedModelID(const string& value)
-{
-	_animatedModelID = value;
-}
-
 void MeshAnimation::setInitialSize(fvec3 value)
 {
 	_initialSize = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
@@ -141,11 +136,6 @@ const string& MeshAnimation::getPreviewModelID() const
 const string& MeshAnimation::getOldPreviewModelID() const
 {
 	return _oldPreviewModelID;
-}
-
-const string& MeshAnimation::getAnimatedModelID() const
-{
-	return _animatedModelID;
 }
 
 const fvec3 MeshAnimation::getInitialSize() const

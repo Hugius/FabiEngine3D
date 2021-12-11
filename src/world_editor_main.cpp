@@ -124,7 +124,7 @@ void WorldEditor::load()
 	// Miscellaneous
 	_fe3d.collision_enableCameraResponse(true, true, true);
 	_fe3d.collision_setCameraBox(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-	_gui.getViewport("right")->getWindow("main")->setActiveScreen("worldEditorControls");
+	_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
 	_isEditorLoaded = true;
 }
 
@@ -255,5 +255,4 @@ void WorldEditor::unload()
 	{
 		_fe3d.raycast_disableTerrainPointing();
 	}
-	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 }

@@ -145,12 +145,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\audio_loader.cpp" />
-    <ClCompile Include="..\..\..\src\mesh_loader_interface.cpp" />
-    <ClCompile Include="..\..\..\src\mesh_loader_main.cpp" />
+    <ClCompile Include="..\..\..\src\mesh_loader_public.cpp" />
+    <ClCompile Include="..\..\..\src\mesh_loader_private.cpp" />
     <ClCompile Include="..\..\..\src\mesh_part.cpp" />
-    <ClCompile Include="..\..\..\src\texture_loader_misc.cpp" />
+    <ClCompile Include="..\..\..\src\texture_loader_public.cpp" />
     <ClCompile Include="..\..\..\src\texture_loader_thread.cpp" />
-    <ClCompile Include="..\..\..\src\texture_loader_main.cpp" />
+    <ClCompile Include="..\..\..\src\texture_loader_private.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\audio_loader.hpp" />

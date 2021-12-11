@@ -55,7 +55,6 @@ void SpriteAnimationEditor::unload()
 	_isEditorLoaded = false;
 
 	// Miscellaneous
-	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 	if(_fe3d.misc_isDebugRenderingEnabled())
 	{
 		_fe3d.misc_disableDebugRendering();

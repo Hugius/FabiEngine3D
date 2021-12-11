@@ -552,6 +552,9 @@
     <ClCompile Include="..\..\..\src\sprite_animation_editor_loading.cpp">
       <Filter>Sprite Animation Editor\Persistence</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\sprite_animation_editor_interface.cpp">
+      <Filter>Sprite Animation Editor\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\mesh_animation_editor.hpp">

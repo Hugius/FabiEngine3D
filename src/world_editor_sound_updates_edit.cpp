@@ -71,7 +71,7 @@ void WorldEditor::_updateSoundEditing()
 					if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedSpeakerID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 					{
 						_activeSpeakerID = "";
-						rightWindow->setActiveScreen("worldEditorControls");
+						rightWindow->setActiveScreen("main");
 					}
 				}
 			}
@@ -101,7 +101,7 @@ void WorldEditor::_updateSoundEditing()
 				{
 					_fe3d.model_delete(_activeSpeakerID);
 					_fe3d.sound3D_delete(activeSoundID);
-					rightWindow->setActiveScreen("worldEditorControls");
+					rightWindow->setActiveScreen("main");
 					_activeSpeakerID = "";
 					return;
 				}
@@ -112,7 +112,7 @@ void WorldEditor::_updateSoundEditing()
 			{
 				_fe3d.model_delete(_activeSpeakerID);
 				_fe3d.sound3D_delete(activeSoundID);
-				rightWindow->setActiveScreen("worldEditorControls");
+				rightWindow->setActiveScreen("main");
 				_activeSpeakerID = "";
 				return;
 			}

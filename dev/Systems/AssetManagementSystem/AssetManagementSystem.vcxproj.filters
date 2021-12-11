@@ -15,19 +15,19 @@
     <ClCompile Include="..\..\..\src\audio_loader.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\mesh_loader_main.cpp">
+    <ClCompile Include="..\..\..\src\mesh_loader_private.cpp">
       <Filter>Mesh</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\mesh_loader_interface.cpp">
+    <ClCompile Include="..\..\..\src\mesh_loader_public.cpp">
       <Filter>Mesh</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\texture_loader_thread.cpp">
       <Filter>Texture</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\texture_loader_main.cpp">
+    <ClCompile Include="..\..\..\src\texture_loader_private.cpp">
       <Filter>Texture</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\texture_loader_misc.cpp">
+    <ClCompile Include="..\..\..\src\texture_loader_public.cpp">
       <Filter>Texture</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\mesh_part.cpp">

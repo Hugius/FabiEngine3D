@@ -360,8 +360,8 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_isSpriteAnimationStarted(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				
+				//returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -375,8 +375,8 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_isSpriteAnimationPlaying(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				
+				//returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -390,8 +390,8 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_isSpriteAnimationPaused(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				
+				//returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}

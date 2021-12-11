@@ -33,12 +33,6 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 				_worldEditor.copyPreviewBillboard(arguments[0].getString(), ("@" + arguments[1].getString()),
 												  fvec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
 
-				// Stop animation if started
-				if(_fe3d.billboard_isSpriteAnimationStarted(arguments[0].getString()))
-				{
-					_fe3d.billboard_stopSpriteAnimation(arguments[0].getString());
-				}
-
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -500,7 +494,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				_fe3d.billboard_startSpriteAnimation(arguments[0].getString(), arguments[1].getInteger());
+				
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -515,7 +509,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				_fe3d.billboard_pauseSpriteAnimation(arguments[0].getString());
+				
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -530,7 +524,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				_fe3d.billboard_resumeSpriteAnimation(arguments[0].getString());
+				
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -545,7 +539,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 			// Validate existence
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				_fe3d.billboard_stopSpriteAnimation(arguments[0].getString());
+				
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

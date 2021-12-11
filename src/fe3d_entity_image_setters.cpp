@@ -100,83 +100,6 @@ void FabiEngine3D::image_setMaxPosition(const string& ID, fvec2 value)
 	_core->_imageEntityManager.getEntity(ID)->setMaxPosition(value);
 }
 
-void FabiEngine3D::image_startSpriteAnimation(const string& ID, int loops)
-{
-	auto entity = _core->_imageEntityManager.getEntity(ID);
-
-	if(entity->isSpriteAnimationStarted())
-	{
-		Logger::throwWarning("Tried to start sprite animation on image with ID \"" + ID + "\": animation already started!");
-		return;
-	}
-	if(loops < -1)
-	{
-		Logger::throwWarning("Tried to start sprite animation on image with ID \"" + ID + "\": invalid loops amount!");
-		return;
-	}
-
-	entity->startSpriteAnimation(loops);
-}
-
-void FabiEngine3D::image_pauseSpriteAnimation(const string& ID)
-{
-	auto entity = _core->_imageEntityManager.getEntity(ID);
-
-	if(!entity->isSpriteAnimationStarted())
-	{
-		Logger::throwWarning("Tried to pause sprite animation on image with ID \"" + ID + "\" animation not started!");
-		return;
-	}
-	else if(entity->isSpriteAnimationPaused())
-	{
-		Logger::throwWarning("Tried to pause sprite animation on image with ID \"" + ID + "\" animation already paused!");
-		return;
-	}
-
-	entity->pauseSpriteAnimation();
-}
-
-void FabiEngine3D::image_resumeSpriteAnimation(const string& ID)
-{
-	auto entity = _core->_imageEntityManager.getEntity(ID);
-
-	if(!entity->isSpriteAnimationPaused())
-	{
-		Logger::throwWarning("Tried to resume sprite animation on image with ID \"" + ID + "\" animation not paused!");
-		return;
-	}
-
-	entity->resumeSpriteAnimation();
-}
-
-void FabiEngine3D::image_stopSpriteAnimation(const string& ID)
-{
-	auto entity = _core->_imageEntityManager.getEntity(ID);
-
-	if(!entity->isSpriteAnimationStarted())
-	{
-		Logger::throwWarning("Tried to stop sprite animation on image with ID \"" + ID + "\" animation not started!");
-		return;
-	}
-
-	entity->stopSpriteAnimationAnimation();
-}
-
-void FabiEngine3D::image_setSpriteAnimationRowCount(const string& ID, int value)
-{
-	_core->_imageEntityManager.getEntity(ID)->setTotalSpriteAnimationRowCount(value);
-}
-
-void FabiEngine3D::image_setSpriteAnimationColumnCount(const string& ID, int value)
-{
-	_core->_imageEntityManager.getEntity(ID)->setTotalSpriteAnimationColumnCount(value);
-}
-
-void FabiEngine3D::image_setSpriteAnimationFramestep(const string& ID, int value)
-{
-	_core->_imageEntityManager.getEntity(ID)->setSpriteAnimationFramestep(value);
-}
-
 void FabiEngine3D::image_setWireframed(const string& ID, bool value)
 {
 	_core->_imageEntityManager.getEntity(ID)->setWireframed(value);
@@ -185,16 +108,6 @@ void FabiEngine3D::image_setWireframed(const string& ID, bool value)
 void FabiEngine3D::image_setWireframeColor(const string& ID, fvec3 value)
 {
 	_core->_imageEntityManager.getEntity(ID)->setWireframeColor(value);
-}
-
-void FabiEngine3D::image_setSpriteAnimationRowIndex(const string& ID, unsigned int value)
-{
-	_core->_imageEntityManager.getEntity(ID)->setSpriteAnimationRowIndex(value);
-}
-
-void FabiEngine3D::image_setSpriteAnimationColumnIndex(const string& ID, unsigned int value)
-{
-	_core->_imageEntityManager.getEntity(ID)->setSpriteAnimationColumnIndex(value);
 }
 
 void FabiEngine3D::image_setMirroredHorizontally(const string& ID, bool value)

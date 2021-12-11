@@ -44,13 +44,13 @@ private:
 	// VOID
 	void _loadGUI();
 	void _unloadGUI();
-	void _updateAnimationExecution();
 	void _updateMainMenu();
 	void _updateChoiceMenu();
 	void _updateFrameMenu();
 	void _updateAnimationCreating();
 	void _updateAnimationChoosing();
 	void _updateAnimationDeleting();
+	void _updateAnimationExecution();
 	void _updateCamera();
 	void _updateMiscellaneous();
 	void _deleteAnimation(const string& ID);

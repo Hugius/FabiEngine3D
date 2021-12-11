@@ -158,7 +158,7 @@ void AudioEditor::_updateAudioCreating()
 							_isCreatingAudio = false;
 						}
 					}
-					else // ID already exists
+					else
 					{
 						Logger::throwWarning("Audio with ID \"" + newAudioID.substr(1) + "\" already exists!");
 					}

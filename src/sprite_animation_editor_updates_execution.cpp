@@ -2,38 +2,57 @@
 
 void SpriteAnimationEditor::_updateAnimationExecution()
 {
-	//// Update sprite animations
-	//if(entity->isSpriteAnimationStarted() && !entity->isSpriteAnimationPaused() &&
-	//   (entity->getSpriteAnimationLoops() != entity->getMaxSpriteAnimationLoops()))
-	//{
-	//	if(entity->getPassedSpriteAnimationFrames() >= entity->getSpriteAnimationFramestep()) // Is allowed to update
-	//	{
-	//		entity->resetPassedSpriteAnimationFrames(); // Reset counter
+	// Update all started animations
+	for(auto& [idPair, animation] : _startedAnimations)
+	{
+		// Check if animation is playing
+		if(animation->isStarted() && !animation->isPaused())
+		{
+			// Check if animation is finished
+			if(animation->getLoops() == animation->getMaxLoops())
+			{
+				animation->stop();
+			}
+			else
+			{
+				// Check if allowed to update
+				if(animation->getPassedFrames() >= animation->getFramestep())
+				{
+					// Reset frames
+					animation->setPassedFrames(0);
 
-	//		if(entity->getSpriteAnimationColumnIndex() >= entity->getTotalSpriteAnimationColumnCount() - 1) // Reached column count
-	//		{
-	//			entity->setSpriteAnimationColumnIndex(0); // Reset column index
+					// Reached if reached column count
+					if(animation->getColumnIndex() >= animation->getColumnCount() - 1)
+					{
+						// Reset column index
+						animation->setColumnIndex(0);
 
-	//			if(entity->getSpriteAnimationRowIndex() >= entity->getTotalSpriteAnimationRowCount() - 1) // Reached row count
-	//			{
-	//				entity->increaseSpriteAnimationLoops();
-	//				entity->setSpriteAnimationRowIndex(0); // Reset row index (animation finished)
-	//			}
-	//			else // Next row
-	//			{
-	//				entity->setSpriteAnimationRowIndex(entity->getSpriteAnimationRowIndex() + 1);
-	//			}
-	//		}
-	//		else // Next column
-	//		{
-	//			entity->setSpriteAnimationColumnIndex(entity->getSpriteAnimationColumnIndex() + 1);
-	//		}
-	//	}
-	//	else // Increase counter
-	//	{
-	//		entity->increasePassedSpriteAnimationFrames();
-	//	}
-	//}
+						// Check if reached row count
+						if(animation->getRowIndex() >= animation->getRowCount() - 1)
+						{
+							// Reset row index
+							animation->setRowIndex(0);
+
+							// Next loop
+							animation->setLoops(animation->getLoops() + 1);
+						}
+						else // Next row
+						{
+							animation->setRowIndex(animation->getRowIndex() + 1);
+						}
+					}
+					else // Next column
+					{
+						animation->setColumnIndex(animation->getColumnIndex() + 1);
+					}
+				}
+				else // Next frame
+				{
+					animation->setPassedFrames(animation->getPassedFrames() + 1);
+				}
+			}
+		}
+	}
 
 	// Sprite animation
 	//fvec2 uvMultiplier = fvec2(1.0f);

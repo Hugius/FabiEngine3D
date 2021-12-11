@@ -35,18 +35,8 @@ public:
 	void rotateTo(float target, float speed);
 	void scaleTo(fvec2 target, float speed);
 	void setDepth(unsigned int value);
-	void startSpriteAnimation(int loops);
-	void pauseSpriteAnimation();
-	void resumeSpriteAnimation();
-	void stopSpriteAnimationAnimation();
-	void setSpriteAnimationRowIndex(unsigned int value);
-	void setSpriteAnimationColumnIndex(unsigned int value);
-	void setTotalSpriteAnimationRowCount(unsigned int value);
-	void setTotalSpriteAnimationColumnCount(unsigned int value);
-	void setSpriteAnimationFramestep(unsigned int value);
-	void increasePassedSpriteAnimationFrames();
-	void resetPassedSpriteAnimationFrames();
-	void increaseSpriteAnimationLoops();
+	void setMultiplierUV(fvec2 value);
+	void setAdderUV(fvec2 value);
 	void setPerspectiveDepthEntity(bool value);
 	void setCentered(bool value);
 	void setWireframed(bool value);
@@ -66,22 +56,14 @@ public:
 	const fvec2 getSize() const;
 	const fvec2 getMinPosition() const;
 	const fvec2 getMaxPosition() const;
+	const fvec2 getMultiplierUV() const;
+	const fvec2 getAdderUV() const;
 
 	// FLOAT
 	const float getTransparency() const;
 	const float getRotation() const;
 
-	// INT
-	const int getMaxSpriteAnimationLoops() const;
-
 	// UNSIGNED INT
-	const unsigned int getPassedSpriteAnimationFrames() const;
-	const unsigned int getSpriteAnimationFramestep() const;
-	const unsigned int getTotalSpriteAnimationRowCount() const;
-	const unsigned int getTotalSpriteAnimationColumnCount() const;
-	const unsigned int getSpriteAnimationRowIndex() const;
-	const unsigned int getSpriteAnimationColumnIndex() const;
-	const unsigned int getSpriteAnimationLoops() const;
 	const unsigned int getDepth() const;
 
 	// BOOL
@@ -89,8 +71,6 @@ public:
 	const bool isCentered() const;
 	const bool isMirroredHorizonally() const;
 	const bool isMirroredVertically() const;
-	const bool isSpriteAnimationStarted() const;
-	const bool isSpriteAnimationPaused() const;
 	const bool isPerspectiveDepthEntity() const;
 	const bool hasRenderBuffer() const;
 	const bool hasDiffuseMap() const;
@@ -117,6 +97,8 @@ private:
 	fvec2 _size = fvec2(1.0f);
 	fvec2 _positionTarget = fvec2(0.0f);
 	fvec2 _sizeTarget = fvec2(1.0f);
+	fvec2 _multiplierUV = fvec2(1.0f);
+	fvec2 _adderUV = fvec2(0.0f);
 
 	// FLOAT
 	float _rotation = 0.0f;
@@ -126,23 +108,11 @@ private:
 	float _sizeTargetSpeed = 0.0f;
 	float _transparency = 1.0f;
 
-	// INT
-	int _maxSpriteAnimationLoops = 0;
-
 	// UNSIGNED INT
-	unsigned int _spriteAnimationFramestep = 0;
-	unsigned int _passedSpriteAnimationFrames = 0;
-	unsigned int _totalSpriteAnimationRowCount = 0;
-	unsigned int _totalSpriteAnimationColumnCount = 0;
-	unsigned int _spriteAnimationRowIndex = 0;
-	unsigned int _spriteAnimationColumnIndex = 0;
-	unsigned int _spriteAnimationLoops = 0;
 	unsigned int _depth = 0;
 
 	// BOOL
 	bool _isCentered = false;
-	bool _isSpriteAnimationStarted = false;
-	bool _isSpriteAnimationPaused = false;
 	bool _isMirroredHorizontally = false;
 	bool _isMirroredVertically = false;
 	bool _isPerspectiveDepthEntity = false;

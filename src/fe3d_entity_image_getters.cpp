@@ -21,14 +21,6 @@ const float FabiEngine3D::image_getTransparency(const string& ID) const
 	return _core->_imageEntityManager.getEntity(ID)->getTransparency();
 }
 
-const int FabiEngine3D::image_getRemainingSpriteAnimationLoops(const string& ID) const
-{
-	auto maxLoops = _core->_imageEntityManager.getEntity(ID)->getMaxSpriteAnimationLoops();
-	auto currentLoops = _core->_imageEntityManager.getEntity(ID)->getSpriteAnimationLoops();
-
-	return (maxLoops - currentLoops);
-}
-
 const vector<string> FabiEngine3D::image_getAllIDs() const
 {
 	vector<string> result;
@@ -81,21 +73,6 @@ const bool FabiEngine3D::image_isCentered(const string& ID) const
 	return _core->_imageEntityManager.getEntity(ID)->isCentered();
 }
 
-const bool FabiEngine3D::image_isSpriteAnimationStarted(const string& ID) const
-{
-	return _core->_imageEntityManager.getEntity(ID)->isSpriteAnimationStarted();
-}
-
-const bool FabiEngine3D::image_isSpriteAnimationPlaying(const string& ID) const
-{
-	return (image_isSpriteAnimationStarted(ID) && !image_isSpriteAnimationPaused(ID));
-}
-
-const bool FabiEngine3D::image_isSpriteAnimationPaused(const string& ID) const
-{
-	return _core->_imageEntityManager.getEntity(ID)->isSpriteAnimationPaused();
-}
-
 const bool FabiEngine3D::image_hasDiffuseMap(const string& ID) const
 {
 	return _core->_imageEntityManager.getEntity(ID)->hasDiffuseMap();
@@ -114,29 +91,4 @@ const bool FabiEngine3D::image_isMirroredHorizontally(const string& ID) const
 const bool FabiEngine3D::image_isMirroredVertically(const string& ID) const
 {
 	return _core->_imageEntityManager.getEntity(ID)->isMirroredVertically();
-}
-
-const unsigned int FabiEngine3D::image_getSpriteAnimationRowCount(const string& ID) const
-{
-	return _core->_imageEntityManager.getEntity(ID)->getTotalSpriteAnimationRowCount();
-}
-
-const unsigned int FabiEngine3D::image_getSpriteAnimationColumnCount(const string& ID) const
-{
-	return _core->_imageEntityManager.getEntity(ID)->getTotalSpriteAnimationColumnCount();
-}
-
-const unsigned int FabiEngine3D::image_getSpriteAnimationFramestep(const string& ID) const
-{
-	return _core->_imageEntityManager.getEntity(ID)->getSpriteAnimationFramestep();
-}
-
-const unsigned int FabiEngine3D::image_getSpriteAnimationRowIndex(const string& ID) const
-{
-	return _core->_imageEntityManager.getEntity(ID)->getSpriteAnimationRowIndex();
-}
-
-const unsigned int FabiEngine3D::image_getSpriteAnimationColumnIndex(const string& ID) const
-{
-	return _core->_imageEntityManager.getEntity(ID)->getSpriteAnimationColumnIndex();
 }

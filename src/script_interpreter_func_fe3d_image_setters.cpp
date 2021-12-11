@@ -273,10 +273,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				_fe3d.image_setSpriteAnimationRowCount(arguments[0].getString(), arguments[1].getInteger());
-				_fe3d.image_setSpriteAnimationColumnCount(arguments[0].getString(), arguments[2].getInteger());
-				_fe3d.image_setSpriteAnimationFramestep(arguments[0].getString(), arguments[3].getInteger());
-				_fe3d.image_startSpriteAnimation(arguments[0].getString(), arguments[4].getInteger());
+
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -291,7 +288,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				_fe3d.image_pauseSpriteAnimation(arguments[0].getString());
+				
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -306,7 +303,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				_fe3d.image_resumeSpriteAnimation(arguments[0].getString());
+				
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -321,7 +318,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				_fe3d.image_stopSpriteAnimation(arguments[0].getString());
+				
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

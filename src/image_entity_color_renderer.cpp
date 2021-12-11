@@ -35,25 +35,9 @@ void ImageEntityColorRenderer::render(const shared_ptr<ImageEntity> entity)
 		// Temporary values
 		const auto buffer = entity->getRenderBuffer();
 
-		// Sprite animation
-		fvec2 uvMultiplier = fvec2(1.0f);
-		fvec2 uvAdder = fvec2(0.0f);
-		if(entity->isSpriteAnimationStarted())
-		{
-			// Retrieve values
-			const auto rowCount = entity->getTotalSpriteAnimationRowCount();
-			const auto columnCount = entity->getTotalSpriteAnimationColumnCount();
-			const auto rowIndex = entity->getSpriteAnimationRowIndex();
-			const auto columnIndex = entity->getSpriteAnimationColumnIndex();
-
-			// Apply values
-			uvMultiplier = fvec2(1.0f / static_cast<float>(columnCount), 1.0f / static_cast<float>(rowCount));
-			uvAdder = fvec2(static_cast<float>(columnIndex) * uvMultiplier.x, static_cast<float>(rowIndex) * uvMultiplier.y);
-		}
-
 		// Shader uniforms
-		_shader.uploadUniform("u_adderUV", uvAdder);
-		_shader.uploadUniform("u_multiplierUV", uvMultiplier);
+		_shader.uploadUniform("u_multiplierUV", entity->getMultiplierUV());
+		_shader.uploadUniform("u_adderUV", entity->getAdderUV());
 		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
 		_shader.uploadUniform("u_isMirroredHorizontally", entity->isMirroredHorizonally());
 		_shader.uploadUniform("u_isMirroredVertically", entity->isMirroredVertically());

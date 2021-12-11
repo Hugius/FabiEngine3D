@@ -185,145 +185,14 @@ void ImageEntity::setDepth(unsigned int value)
 	_depth = value;
 }
 
-void ImageEntity::startSpriteAnimation(int loops)
+void ImageEntity::setMultiplierUV(fvec2 value)
 {
-	if(_isSpriteAnimationStarted)
-	{
-		Logger::throwError("ImageEntity::startSpriteAnimation::1");
-	}
-	if(loops < -1)
-	{
-		Logger::throwError("ImageEntity::startSpriteAnimation::2");
-	}
-
-	_isSpriteAnimationStarted = true;
-	_passedSpriteAnimationFrames = 0;
-	_spriteAnimationLoops = 0;
-	_maxSpriteAnimationLoops = loops;
+	_multiplierUV = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void ImageEntity::pauseSpriteAnimation()
+void ImageEntity::setAdderUV(fvec2 value)
 {
-	if(!_isSpriteAnimationStarted)
-	{
-		Logger::throwError("ImageEntity::pauseSpriteAnimation::1");
-	}
-	else if(_isSpriteAnimationPaused)
-	{
-		Logger::throwError("ImageEntity::pauseSpriteAnimation::2");
-	}
-
-	_isSpriteAnimationPaused = true;
-}
-
-void ImageEntity::resumeSpriteAnimation()
-{
-	if(!_isSpriteAnimationPaused)
-	{
-		Logger::throwError("ImageEntity::resumeSpriteAnimation");
-	}
-
-	_isSpriteAnimationPaused = false;
-}
-
-void ImageEntity::stopSpriteAnimationAnimation()
-{
-	if(!_isSpriteAnimationStarted)
-	{
-		Logger::throwError("ImageEntity::stopSpriteAnimation");
-	}
-
-	_isSpriteAnimationStarted = false;
-}
-
-void ImageEntity::setSpriteAnimationRowIndex(unsigned int value)
-{
-	_spriteAnimationRowIndex = value;
-}
-
-void ImageEntity::setSpriteAnimationColumnIndex(unsigned int value)
-{
-	_spriteAnimationColumnIndex = value;
-}
-
-void ImageEntity::setTotalSpriteAnimationRowCount(unsigned int value)
-{
-	_totalSpriteAnimationRowCount = value;
-}
-
-void ImageEntity::setTotalSpriteAnimationColumnCount(unsigned int value)
-{
-	_totalSpriteAnimationColumnCount = value;
-}
-
-void ImageEntity::setSpriteAnimationFramestep(unsigned int value)
-{
-	_spriteAnimationFramestep = value;
-}
-
-void ImageEntity::increasePassedSpriteAnimationFrames()
-{
-	_passedSpriteAnimationFrames++;
-}
-
-void ImageEntity::resetPassedSpriteAnimationFrames()
-{
-	_passedSpriteAnimationFrames = 0;
-}
-
-void ImageEntity::increaseSpriteAnimationLoops()
-{
-	_spriteAnimationLoops++;
-}
-
-const bool ImageEntity::isSpriteAnimationStarted() const
-{
-	return _isSpriteAnimationStarted;
-}
-
-const bool ImageEntity::isSpriteAnimationPaused() const
-{
-	return _isSpriteAnimationPaused;
-}
-
-const int ImageEntity::getMaxSpriteAnimationLoops() const
-{
-	return _maxSpriteAnimationLoops;
-}
-
-const unsigned int ImageEntity::getPassedSpriteAnimationFrames() const
-{
-	return _passedSpriteAnimationFrames;
-}
-
-const unsigned int ImageEntity::getSpriteAnimationFramestep() const
-{
-	return _spriteAnimationFramestep;
-}
-
-const unsigned int ImageEntity::getTotalSpriteAnimationRowCount() const
-{
-	return _totalSpriteAnimationRowCount;
-}
-
-const unsigned int ImageEntity::getTotalSpriteAnimationColumnCount() const
-{
-	return _totalSpriteAnimationColumnCount;
-}
-
-const unsigned int ImageEntity::getSpriteAnimationRowIndex() const
-{
-	return _spriteAnimationRowIndex;
-}
-
-const unsigned int ImageEntity::getSpriteAnimationColumnIndex() const
-{
-	return _spriteAnimationColumnIndex;
-}
-
-const unsigned int ImageEntity::getSpriteAnimationLoops() const
-{
-	return _spriteAnimationLoops;
+	_adderUV = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
 const bool ImageEntity::hasRenderBuffer() const
@@ -414,6 +283,16 @@ const fvec2 ImageEntity::getMinPosition() const
 const fvec2 ImageEntity::getMaxPosition() const
 {
 	return _maxPosition;
+}
+
+const fvec2 ImageEntity::getMultiplierUV() const
+{
+	return _multiplierUV;
+}
+
+const fvec2 ImageEntity::getAdderUV() const
+{
+	return _adderUV;
 }
 
 const unsigned int ImageEntity::getDepth() const

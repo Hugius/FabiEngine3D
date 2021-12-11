@@ -335,8 +335,8 @@ const bool WorldEditor::saveCustomWorldToFile()
 			auto isAabbCollisionResponsive = aabbIDs.empty() ? false : _fe3d.aabb_isCollisionResponsive(aabbIDs[0]);
 			auto isFacingX = _fe3d.billboard_isFacingCameraX(billboardID);
 			auto isFacingY = _fe3d.billboard_isFacingCameraY(billboardID);
-			auto isAnimationPlaying = _fe3d.billboard_isSpriteAnimationStarted(billboardID);
-			auto isAnimationPaused = _fe3d.billboard_isSpriteAnimationPaused(billboardID);
+			//auto isAnimationPlaying = _fe3d.billboard_isSpriteAnimationStarted(billboardID);
+			//auto isAnimationPaused = _fe3d.billboard_isSpriteAnimationPaused(billboardID);
 			auto position = _fe3d.billboard_getPosition(billboardID);
 			auto rotation = _fe3d.billboard_getRotation(billboardID);
 			auto size = _fe3d.billboard_getSize(billboardID);
@@ -345,9 +345,9 @@ const bool WorldEditor::saveCustomWorldToFile()
 			auto lightness = _fe3d.billboard_getLightness(billboardID);
 			auto minHeight = _fe3d.billboard_getMinHeight(billboardID);
 			auto maxHeight = _fe3d.billboard_getMaxHeight(billboardID);
-			auto remainingAnimationLoops = _fe3d.billboard_getRemainingSpriteAnimationLoops(billboardID);
-			auto animationRowIndex = _fe3d.billboard_getSpriteAnimationRowIndex(billboardID);
-			auto animationColumnIndex = _fe3d.billboard_getSpriteAnimationColumnIndex(billboardID);
+			//auto remainingAnimationLoops = _fe3d.billboard_getRemainingSpriteAnimationLoops(billboardID);
+			//auto animationRowIndex = _fe3d.billboard_getSpriteAnimationRowIndex(billboardID);
+			//auto animationColumnIndex = _fe3d.billboard_getSpriteAnimationColumnIndex(billboardID);
 
 			// Convert empty string
 			textContent = (textContent.empty()) ? "?" : textContent;
@@ -376,8 +376,6 @@ const bool WorldEditor::saveCustomWorldToFile()
 				isAabbCollisionResponsive << " " <<
 				isFacingX << " " <<
 				isFacingY << " " <<
-				isAnimationPlaying << " " <<
-				isAnimationPaused << " " <<
 				position.x << " " <<
 				position.y << " " <<
 				position.z << " " <<
@@ -392,10 +390,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 				textContent << " " <<
 				lightness << " " <<
 				minHeight << " " <<
-				maxHeight << " " <<
-				remainingAnimationLoops << " " <<
-				animationRowIndex << " " <<
-				animationColumnIndex << endl;
+				maxHeight << endl;
 		}
 	}
 

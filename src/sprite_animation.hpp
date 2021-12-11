@@ -10,18 +10,17 @@ public:
 	SpriteAnimation(const string& ID);
 
 	// VOIDS
-	void startSpriteAnimation(int loops);
-	void pauseSpriteAnimation();
-	void resumeSpriteAnimation();
-	void stopSpriteAnimation();
-	void setSpriteAnimationRowIndex(unsigned int value);
-	void setSpriteAnimationColumnIndex(unsigned int value);
-	void setTotalSpriteAnimationRowCount(unsigned int value);
-	void setTotalSpriteAnimationColumnCount(unsigned int value);
-	void setSpriteAnimationFramestep(unsigned int value);
-	void increasePassedSpriteAnimationFrames();
-	void resetPassedSpriteAnimationFrames();
-	void increaseSpriteAnimationLoops();
+	void start(int loops);
+	void pause();
+	void resume();
+	void stop();
+	void setRowIndex(unsigned int value);
+	void setColumnIndex(unsigned int value);
+	void setRowCount(unsigned int value);
+	void setColumnCount(unsigned int value);
+	void setFramestep(unsigned int value);
+	void setPassedFrames(unsigned int value);
+	void setLoops(unsigned int value);
 
 	// STRING
 	const string& getID() const;
@@ -39,8 +38,8 @@ public:
 	const unsigned int getLoops() const;
 
 	// BOOL
-	const bool isSpriteAnimationStarted() const;
-	const bool isSpriteAnimationPaused() const;
+	const bool isStarted() const;
+	const bool isPaused() const;
 
 private:
 	// STRING
@@ -56,9 +55,9 @@ private:
 	unsigned int _columnCount = 0;
 	unsigned int _rowIndex = 0;
 	unsigned int _columnIndex = 0;
-	unsigned int _loops = 0;
+	unsigned int _passedLoops = 0;
 
 	// BOOL
-	bool _isSpriteAnimationStarted = false;
-	bool _isSpriteAnimationPaused = false;
+	bool _isStarted = false;
+	bool _isPaused = false;
 };

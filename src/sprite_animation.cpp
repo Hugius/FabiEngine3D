@@ -1,4 +1,5 @@
 #include "sprite_animation.hpp"
+#include "logger.hpp"
 
 SpriteAnimation::SpriteAnimation(const string& ID)
 	:
@@ -12,111 +13,147 @@ const string& SpriteAnimation::getID() const
 	return _ID;
 }
 
-//void BillboardEntity::startSpriteAnimation(int loops)
-//{
-//	if(_isSpriteAnimationStarted)
-//	{
-//		Logger::throwError("BillboardEntity::startSpriteAnimation::1");
-//	}
-//	if(loops < -1)
-//	{
-//		Logger::throwError("BillboardEntity::startSpriteAnimation::2");
-//	}
-//
-//	_isSpriteAnimationStarted = true;
-//	_passedSpriteAnimationFrames = 0;
-//	_spriteAnimationLoops = 0;
-//	_maxSpriteAnimationLoops = loops;
-//}
-//
-//void BillboardEntity::pauseSpriteAnimation()
-//{
-//	if(!_isSpriteAnimationStarted)
-//	{
-//		Logger::throwError("BillboardEntity::pauseSpriteAnimation::1");
-//	}
-//	else if(_isSpriteAnimationPaused)
-//	{
-//		Logger::throwError("BillboardEntity::pauseSpriteAnimation::2");
-//	}
-//
-//	_isSpriteAnimationPaused = true;
-//}
-//
-//void BillboardEntity::resumeSpriteAnimation()
-//{
-//	if(!_isSpriteAnimationPaused)
-//	{
-//		Logger::throwError("BillboardEntity::resumeSpriteAnimation");
-//	}
-//
-//	_isSpriteAnimationPaused = false;
-//}
-//
-//void BillboardEntity::stopSpriteAnimation()
-//{
-//	if(!_isSpriteAnimationStarted)
-//	{
-//		Logger::throwError("BillboardEntity::stopSpriteAnimation");
-//	}
-//
-//	_isSpriteAnimationStarted = false;
-//	_spriteAnimationRowIndex = 0;
-//	_spriteAnimationColumnIndex = 0;
-//}
-//
-//void BillboardEntity::setSpriteAnimationRowIndex(unsigned int value)
-//{
-//	_spriteAnimationRowIndex = value;
-//}
-//
-//void BillboardEntity::setSpriteAnimationColumnIndex(unsigned int value)
-//{
-//	_spriteAnimationColumnIndex = value;
-//}
-//
-//void BillboardEntity::setTotalSpriteAnimationRowCount(unsigned int value)
-//{
-//	_totalSpriteAnimationRowCount = value;
-//}
-//
-//void BillboardEntity::setTotalSpriteAnimationColumnCount(unsigned int value)
-//{
-//	_totalSpriteAnimationColumnCount = value;
-//}
-//
-//void BillboardEntity::setSpriteAnimationFramestep(unsigned int value)
-//{
-//	_spriteAnimationFramestep = value;
-//}
-//
-//void BillboardEntity::increasePassedSpriteAnimationFrames()
-//{
-//	_passedSpriteAnimationFrames++;
-//}
-//
-//void BillboardEntity::resetPassedSpriteAnimationFrames()
-//{
-//	_passedSpriteAnimationFrames = 0;
-//}
-//
-//void BillboardEntity::increaseSpriteAnimationLoops()
-//{
-//	_spriteAnimationLoops++;
-//}
+const int SpriteAnimation::getMaxLoops() const
+{
+	return _maxLoops;
+}
 
-//const int FabiEngine3D::billboard_getRemainingSpriteAnimationLoops(const string& ID) const
-//{
-//	// Temporary values
-//	auto maxLoops = _core->_billboardEntityManager.getEntity(ID)->getMaxSpriteAnimationLoops();
-//	auto currentLoops = _core->_billboardEntityManager.getEntity(ID)->getSpriteAnimationLoops();
-//
-//	if(maxLoops == -1) // Infinite
-//	{
-//		return -1;
-//	}
-//	else // Finite
-//	{
-//		return (maxLoops - currentLoops);
-//	}
-//}
+const unsigned int SpriteAnimation::getPassedFrames() const
+{
+	return _passedFrames;
+}
+
+const unsigned int SpriteAnimation::getFramestep() const
+{
+	return _framestep;
+}
+
+const unsigned int SpriteAnimation::getRowCount() const
+{
+	return _rowCount;
+}
+
+const unsigned int SpriteAnimation::getColumnCount() const
+{
+	return _columnCount;
+}
+
+const unsigned int SpriteAnimation::getRowIndex() const
+{
+	return _rowIndex;
+}
+
+const unsigned int SpriteAnimation::getColumnIndex() const
+{
+	return _columnIndex;
+}
+
+const unsigned int SpriteAnimation::getLoops() const
+{
+	return _passedLoops;
+}
+
+const bool SpriteAnimation::isStarted() const
+{
+	return _isStarted;
+}
+
+const bool SpriteAnimation::isPaused() const
+{
+	return _isPaused;
+}
+
+void SpriteAnimation::start(int maxLoops)
+{
+	if(_isStarted)
+	{
+		Logger::throwWarning("SpriteAnimation::start::1");
+	}
+	if(maxLoops < -1)
+	{
+		Logger::throwWarning("SpriteAnimation::start::2");
+	}
+
+	_isStarted = true;
+	_passedFrames = 0;
+	_passedLoops = 0;
+	_maxLoops = maxLoops;
+}
+
+void SpriteAnimation::pause()
+{
+	if(!_isStarted)
+	{
+		Logger::throwWarning("SpriteAnimation::pause::1");
+	}
+	else if(_isPaused)
+	{
+		Logger::throwWarning("SpriteAnimation::pause::2");
+	}
+
+	_isPaused = true;
+}
+
+void SpriteAnimation::resume()
+{
+	if(!_isPaused)
+	{
+		Logger::throwWarning("SpriteAnimation::resume");
+	}
+
+	_isPaused = false;
+}
+
+void SpriteAnimation::stop()
+{
+	if(!_isStarted)
+	{
+		Logger::throwWarning("SpriteAnimation::stop");
+	}
+
+	_maxLoops = 0;
+	_framestep = 0;
+	_passedFrames = 0;
+	_rowCount = 0;
+	_columnCount = 0;
+	_rowIndex = 0;
+	_columnIndex = 0;
+	_passedLoops = 0;
+	_isStarted = false;
+	_isPaused = false;
+}
+
+void SpriteAnimation::setRowIndex(unsigned int value)
+{
+	_rowIndex = value;
+}
+
+void SpriteAnimation::setColumnIndex(unsigned int value)
+{
+	_columnIndex = value;
+}
+
+void SpriteAnimation::setRowCount(unsigned int value)
+{
+	_rowCount = value;
+}
+
+void SpriteAnimation::setColumnCount(unsigned int value)
+{
+	_columnCount = value;
+}
+
+void SpriteAnimation::setFramestep(unsigned int value)
+{
+	_framestep = value;
+}
+
+void SpriteAnimation::setPassedFrames(unsigned int value)
+{
+	_passedFrames = value;
+}
+
+void SpriteAnimation::setLoops(unsigned int value)
+{
+	_passedLoops = value;
+}

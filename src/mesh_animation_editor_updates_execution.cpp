@@ -4,7 +4,7 @@ void MeshAnimationEditor::_updateAnimationExecution()
 {
 	if(!_fe3d.application_isPaused())
 	{
-		// Update all playing animations
+		// Update all started animations
 		for(auto& [idPair, animation] : _startedAnimations)
 		{
 			// Skip paused animations
@@ -487,7 +487,7 @@ void MeshAnimationEditor::_updateAnimationExecution()
 		// Remove all animations that ended
 		for(const auto& idPair : _animationsToStop)
 		{
-			// Check if animation is still playing
+			// Check if animation is still started
 			if(isAnimationStarted(idPair.first, idPair.second))
 			{
 				// Stop animation
@@ -499,7 +499,7 @@ void MeshAnimationEditor::_updateAnimationExecution()
 		// Start all endless animations again
 		for(const auto& idPair : _animationsToStartAgain)
 		{
-			// Check if animation is not already playing
+			// Check if animation is not already started
 			if(!isAnimationStarted(idPair.first, idPair.second))
 			{
 				// Start animation

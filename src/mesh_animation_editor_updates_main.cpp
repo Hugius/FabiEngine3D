@@ -98,36 +98,44 @@ void MeshAnimationEditor::_updateAnimationCreating()
 		string newAnimationID = "";
 		if(_gui.getGlobalScreen()->checkValueForm("animationCreate", newAnimationID, {_currentAnimationID}))
 		{
-			// Spaces not allowed
-			if(newAnimationID.find(' ') == string::npos)
+			// @ sign not allowed
+			if(newTerrainID.find('@') == string::npos)
 			{
-				// Check if animation already exists
-				auto animationIDs = getAllAnimationIDs();
-				if(find(animationIDs.begin(), animationIDs.end(), newAnimationID) == animationIDs.end())
+				// Spaces not allowed
+				if(newAnimationID.find(' ') == string::npos)
 				{
-					// Go to next screen
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("meshAnimationEditorMenuChoice");
+					// Check if animation already exists
+					auto animationIDs = getAllAnimationIDs();
+					if(find(animationIDs.begin(), animationIDs.end(), newAnimationID) == animationIDs.end())
+					{
+						// Go to next screen
+						_gui.getViewport("left")->getWindow("main")->setActiveScreen("meshAnimationEditorMenuChoice");
 
-					// Create animation
-					_animations.push_back(make_shared<MeshAnimation>(newAnimationID));
+						// Create animation
+						_animations.push_back(make_shared<MeshAnimation>(newAnimationID));
 
-					// Select animation
-					_currentAnimationID = newAnimationID;
+						// Select animation
+						_currentAnimationID = newAnimationID;
 
-					// Miscellaneous
-					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), "Animation: " + newAnimationID, 0.025f);
-					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), true);
-					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), true);
-					_isCreatingAnimation = false;
+						// Miscellaneous
+						_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), "Animation: " + newAnimationID, 0.025f);
+						_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), true);
+						_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), true);
+						_isCreatingAnimation = false;
+					}
+					else
+					{
+						Logger::throwWarning("Animation ID \"" + newAnimationID + "\" already exists!");
+					}
 				}
-				else // ID already exists
+				else
 				{
-					Logger::throwWarning("Animation ID \"" + newAnimationID + "\" already exists!");
+					Logger::throwWarning("Animation ID cannot contain any spaces!");
 				}
 			}
 			else
 			{
-				Logger::throwWarning("Animation ID cannot contain any spaces!");
+				Logger::throwWarning("Animation ID cannot contain '@'!");
 			}
 		}
 	}

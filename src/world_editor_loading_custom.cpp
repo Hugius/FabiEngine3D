@@ -422,24 +422,6 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 					_fe3d.aabb_setRaycastResponsive(ID, isAabbRaycastResponsive);
 					_fe3d.aabb_setCollisionResponsive(ID, isAabbCollisionResponsive);
 				}
-
-				// Set animation progresss
-				if(isAnimationPlaying)
-				{
-					// Play
-					_fe3d.billboard_stopSpriteAnimation(billboardID);
-					_fe3d.billboard_startSpriteAnimation(billboardID, remainingAnimationLoops);
-
-					// Pause
-					if(isAnimationPaused)
-					{
-						_fe3d.billboard_pauseSpriteAnimation(billboardID);
-					}
-
-					// Progress
-					_fe3d.billboard_setSpriteAnimationRowIndex(billboardID, animationRowIndex);
-					_fe3d.billboard_setSpriteAnimationColumnIndex(billboardID, animationColumnIndex);
-				}
 			}
 		}
 		else if(lineType == "AABB")

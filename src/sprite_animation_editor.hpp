@@ -27,12 +27,12 @@ private:
 	// VOID
 	void _loadGUI();
 	void _unloadGUI();
-	void _updateAnimationExecution();
 	void _updateMainMenu();
 	void _updateChoiceMenu();
 	void _updateAnimationCreating();
 	void _updateAnimationChoosing();
 	void _updateAnimationDeleting();
+	void _updateAnimationExecution();
 	void _updateMiscellaneous();
 	void _deleteAnimation(const string& ID);
 
@@ -53,7 +53,8 @@ private:
 	bool _isEditorLoaded = false;
 
 	// MISCELLANEOUS
+	map<pair<string, string>, shared_ptr<SpriteAnimation>> _startedAnimations;
+	vector<shared_ptr<SpriteAnimation>> _animations;
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;
-	vector<shared_ptr<SpriteAnimation>> _animations;
 };

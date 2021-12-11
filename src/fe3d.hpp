@@ -528,15 +528,6 @@ public:
 	void image_scaleTo(const string& ID, fvec2 target, float speed);
 	void image_setMirroredHorizontally(const string& ID, bool value);
 	void image_setMirroredVertically(const string& ID, bool value);
-	void image_startSpriteAnimation(const string& ID, int loops);
-	void image_pauseSpriteAnimation(const string& ID);
-	void image_resumeSpriteAnimation(const string& ID);
-	void image_stopSpriteAnimation(const string& ID);
-	void image_setSpriteAnimationRowCount(const string& ID, int value);
-	void image_setSpriteAnimationColumnCount(const string& ID, int value);
-	void image_setSpriteAnimationRowIndex(const string& ID, unsigned int value);
-	void image_setSpriteAnimationColumnIndex(const string& ID, unsigned int value);
-	void image_setSpriteAnimationFramestep(const string& ID, int value);
 	void image_setWireframed(const string& ID, bool value);
 	void image_setWireframeColor(const string& ID, fvec3 value);
 
@@ -551,20 +542,11 @@ public:
 	const fvec2 image_getMaxPosition(const string& ID) const;
 	const float image_getRotation(const string& ID) const;
 	const float image_getTransparency(const string& ID) const;
-	const int image_getRemainingSpriteAnimationLoops(const string& ID) const;
-	const unsigned int image_getSpriteAnimationRowCount(const string& ID) const;
-	const unsigned int image_getSpriteAnimationColumnCount(const string& ID) const;
-	const unsigned int image_getSpriteAnimationRowIndex(const string& ID) const;
-	const unsigned int image_getSpriteAnimationColumnIndex(const string& ID) const;
-	const unsigned int image_getSpriteAnimationFramestep(const string& ID) const;
 	const bool image_isExisting(const string& ID) const;
 	const bool image_isVisible(const string& ID) const;
 	const bool image_isCentered(const string& ID) const;
 	const bool image_isMirroredHorizontally(const string& ID) const;
 	const bool image_isMirroredVertically(const string& ID) const;
-	const bool image_isSpriteAnimationStarted(const string& ID) const;
-	const bool image_isSpriteAnimationPlaying(const string& ID) const;
-	const bool image_isSpriteAnimationPaused(const string& ID) const;
 	const bool image_hasDiffuseMap(const string& ID) const;
 	const bool image_isWireframed(const string& ID) const;
 

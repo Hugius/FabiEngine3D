@@ -231,8 +231,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				auto result = _fe3d.image_isSpriteAnimationStarted(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				
+				//returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -246,8 +246,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				auto result = _fe3d.image_isSpriteAnimationPlaying(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				
+				//returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -261,8 +261,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				auto result = _fe3d.image_isSpriteAnimationPaused(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				
+				//returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}

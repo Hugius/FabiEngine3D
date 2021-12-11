@@ -13,6 +13,11 @@ const string& SpriteAnimation::getID() const
 	return _ID;
 }
 
+const string& SpriteAnimation::getPreviewTexturePath() const
+{
+	return _previewTexturePath;
+}
+
 const int SpriteAnimation::getMaxLoops() const
 {
 	return _maxLoops;
@@ -48,7 +53,7 @@ const unsigned int SpriteAnimation::getColumnIndex() const
 	return _columnIndex;
 }
 
-const unsigned int SpriteAnimation::getLoops() const
+const unsigned int SpriteAnimation::getPassedLoops() const
 {
 	return _passedLoops;
 }
@@ -112,12 +117,12 @@ void SpriteAnimation::stop()
 	}
 
 	_maxLoops = 0;
+	_rowCount = 0;
+	_rowIndex = 0;
+	_columnCount = 0;
+	_columnIndex = 0;
 	_framestep = 0;
 	_passedFrames = 0;
-	_rowCount = 0;
-	_columnCount = 0;
-	_rowIndex = 0;
-	_columnIndex = 0;
 	_passedLoops = 0;
 	_isStarted = false;
 	_isPaused = false;
@@ -153,7 +158,12 @@ void SpriteAnimation::setPassedFrames(unsigned int value)
 	_passedFrames = value;
 }
 
-void SpriteAnimation::setLoops(unsigned int value)
+void SpriteAnimation::setPassedLoops(unsigned int value)
 {
 	_passedLoops = value;
+}
+
+void SpriteAnimation::setPreviewTexturePath(const string& value)
+{
+	_previewTexturePath = value;
 }

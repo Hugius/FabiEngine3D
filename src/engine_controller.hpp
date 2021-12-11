@@ -24,6 +24,12 @@ private:
 	// BOOL
 	bool _mustPromptOnExit = false;
 
+	// FVEC3
+	static inline const fvec3 RENDER_COLOR = fvec3(0.0f);
+
+	// FLOAT
+	static inline const float CURSOR_IMAGE_SIZE = 0.075f;
+
 	// MISCELLANEOUS
 	EngineGuiManager _gui;
 	LeftViewportController _leftViewportController;

@@ -129,7 +129,7 @@ void EngineGuiButton::_updateHovering(bool isHoverable)
 			// Set rectangle to default color
 			_fe3d.image_setColor(_rectangle->getEntityID(), _rectangle->getInitialColor());
 
-			// TextField
+			// Check if button has textfield
 			if(_textField != nullptr)
 			{
 				string TextFieldID = _textField->getEntityID();

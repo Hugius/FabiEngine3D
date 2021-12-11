@@ -14,6 +14,11 @@ public:
 	void load();
 	void unload();
 	void update();
+	void startAnimation(const string& animationID, const string& billboardID, int loops);
+	void pauseAnimation(const string& animationID, const string& billboardID);
+	void resumeAnimation(const string& animationID, const string& billboardID);
+	void stopAnimation(const string& animationID, const string& billboardID);
+	void stopAllAnimations();
 
 	// STRING
 	const vector<string> getAllAnimationIDs();
@@ -36,11 +41,17 @@ private:
 	void _updateMiscellaneous();
 	void _deleteAnimation(const string& ID);
 
+	// MISCELLANEOUS
+	shared_ptr<SpriteAnimation> _getAnimation(const string& ID) const;
+
 	// STRING
-	static inline const string PREVIEW_IMAGE_ID = "@@preview_image";
+	static inline const string PREVIEW_BILLBOARD_ID = "@@preview_image";
 	string _hoveredAnimationID = "";
 	string _currentAnimationID = "";
 	string _currentProjectID = "";
+
+	// FVEC3
+	static inline const fvec3 PREVIEW_BILLBOARD_POSITION = fvec3(0.0f, -0.5f, -1.0f);
 
 	// FLOAT
 	static inline const float CW = 0.115f;

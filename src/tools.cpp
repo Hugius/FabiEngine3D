@@ -112,7 +112,7 @@ const string Tools::getRootDirectoryPath()
 
 const float Tools::getWindowAspectRatio()
 {
-	return static_cast<float>(Config::getInst().getWindowSize().x) / static_cast<float>(Config::getInst().getWindowSize().y);
+	return (static_cast<float>(Config::getInst().getWindowSize().x) / static_cast<float>(Config::getInst().getWindowSize().y));
 }
 
 const long long Tools::getTimeSinceEpochMS()
@@ -283,7 +283,7 @@ void Tools::deleteFile(const string& path)
 	remove(path);
 }
 
-void Tools::setMainRenderingColor(fvec3 color)
+void Tools::setRenderColor(fvec3 color)
 {
 	glClearColor(color.r, color.g, color.b, 1.0f);
 }

@@ -38,10 +38,10 @@ void WaterEditor::load()
 	_fe3d.gfx_setDirectionalLightingIntensity(3.0f);
 
 	// Editor models
-	_fe3d.model_create("@@cube", "engine\\assets\\meshes\\cube.obj");
-	_fe3d.model_setBasePosition("@@cube", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
-	_fe3d.model_setDiffuseMap("@@cube", "", "engine\\assets\\textures\\cube.png");
-	_fe3d.model_setFaceCulled("@@cube", true);
+	_fe3d.model_create("@@box", "engine\\assets\\meshes\\box.obj");
+	_fe3d.model_setBasePosition("@@box", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
+	_fe3d.model_setDiffuseMap("@@box", "", "engine\\assets\\textures\\box.png");
+	_fe3d.model_setFaceCulled("@@box", true);
 	_fe3d.model_create("@@grid", "engine\\assets\\meshes\\plane.obj");
 	_fe3d.model_setBasePosition("@@grid", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d.model_setBaseSize("@@grid", fvec3(GRID_SIZE, 1.0f, GRID_SIZE));

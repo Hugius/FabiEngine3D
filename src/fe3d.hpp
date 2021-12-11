@@ -700,7 +700,6 @@ public:
 	const fvec3 camera_getRightVector() const;
 	const fvec3 camera_getThirdPersonLookat() const;
 	const float camera_getFOV() const;
-	const float camera_getAspectRatio() const;
 	const float camera_getCursorSensitivity() const;
 	const float camera_getYaw() const;
 	const float camera_getPitch() const;

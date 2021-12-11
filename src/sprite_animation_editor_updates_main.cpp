@@ -17,6 +17,18 @@ void SpriteAnimationEditor::update()
 	}
 	if(_isEditorLoaded)
 	{
+		_updateAnimationCreating();
+	}
+	if(_isEditorLoaded)
+	{
+		_updateAnimationChoosing();
+	}
+	if(_isEditorLoaded)
+	{
+		_updateAnimationDeleting();
+	}
+	if(_isEditorLoaded)
+	{
 		_updateMiscellaneous();
 	}
 }
@@ -148,7 +160,7 @@ void SpriteAnimationEditor::_updateAnimationChoosing()
 				}
 
 				// Miscellaneous
-				_fe3d.image_setVisible(PREVIEW_IMAGE_ID, true);
+				_fe3d.image_setVisible(PREVIEW_BILLBOARD_ID, true);
 				_gui.getGlobalScreen()->deleteChoiceForm("animationList");
 				_isChoosingAnimation = false;
 			}
@@ -179,7 +191,7 @@ void SpriteAnimationEditor::_updateAnimationDeleting()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("spriteAnimationEditorMenuMain");
 
 			// Delete animation
-			_fe3d.image_setVisible(PREVIEW_IMAGE_ID, false);
+			_fe3d.image_setVisible(PREVIEW_BILLBOARD_ID, false);
 			_deleteAnimation(_currentAnimationID);
 			_currentAnimationID = "";
 

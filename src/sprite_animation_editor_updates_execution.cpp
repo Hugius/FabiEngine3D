@@ -9,7 +9,7 @@ void SpriteAnimationEditor::_updateAnimationExecution()
 		if(animation->isStarted() && !animation->isPaused())
 		{
 			// Check if animation is finished
-			if(animation->getLoops() == animation->getMaxLoops())
+			if(animation->getPassedLoops() == animation->getMaxLoops())
 			{
 				animation->stop();
 			}
@@ -34,7 +34,7 @@ void SpriteAnimationEditor::_updateAnimationExecution()
 							animation->setRowIndex(0);
 
 							// Next loop
-							animation->setLoops(animation->getLoops() + 1);
+							animation->setPassedLoops(animation->getPassedLoops() + 1);
 						}
 						else // Next row
 						{
@@ -52,21 +52,12 @@ void SpriteAnimationEditor::_updateAnimationExecution()
 				}
 			}
 		}
+
+		// Apply sprite animation
+		const float multiplierX = (1.0f / static_cast<float>(animation->getRowCount()));
+		const float multiplierY = (1.0f / static_cast<float>(animation->getColumnCount()));
+		const float adderX = (static_cast<float>(animation->getRowIndex()) * multiplierX);
+		const float adderY = (static_cast<float>(animation->getColumnIndex()) * multiplierY);
+
 	}
-
-	// Sprite animation
-	//fvec2 uvMultiplier = fvec2(1.0f);
-	//fvec2 uvAdder = fvec2(0.0f);
-	//if(entity->isSpriteAnimationStarted())
-	//{
-	//	// Retrieve values
-	//	const auto rowCount = entity->getTotalSpriteAnimationRowCount();
-	//	const auto columnCount = entity->getTotalSpriteAnimationColumnCount();
-	//	const auto rowIndex = entity->getSpriteAnimationRowIndex();
-	//	const auto columnIndex = entity->getSpriteAnimationColumnIndex();
-
-	//	// Apply values
-	//	uvMultiplier = fvec2(1.0f / static_cast<float>(columnCount), 1.0f / static_cast<float>(rowCount));
-	//	uvAdder = fvec2(static_cast<float>(columnIndex) * uvMultiplier.x, static_cast<float>(rowIndex) * uvMultiplier.y);
-	//}
 }

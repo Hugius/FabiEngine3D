@@ -337,15 +337,6 @@ const bool WorldEditor::_copyPreviewBillboard(const string& newID, const string&
 		_fe3d.billboard_setTextContent(newID, _fe3d.billboard_getTextContent(previewID));
 	}
 
-	// Start sprite animation
-	if(_fe3d.billboard_isSpriteAnimationStarted(previewID))
-	{
-		_fe3d.billboard_setSpriteAnimationRowCount(newID, _fe3d.billboard_getSpriteAnimationRowCount(previewID));
-		_fe3d.billboard_setSpriteAnimationColumnCount(newID, _fe3d.billboard_getSpriteAnimationColumnCount(previewID));
-		_fe3d.billboard_setSpriteAnimationFramestep(newID, _fe3d.billboard_getSpriteAnimationFramestep(previewID));
-		_fe3d.billboard_startSpriteAnimation(newID, -1);
-	}
-
 	// Set properties
 	_fe3d.billboard_setPosition(newID, position);
 	_fe3d.billboard_setSize(newID, _fe3d.billboard_getSize(previewID));

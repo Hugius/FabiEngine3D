@@ -230,15 +230,6 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:camera_get_aspect_ratio")
-	{
-		// Validate arguments
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
-		{
-			auto result = _fe3d.camera_getAspectRatio();
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
-		}
-	}
 	else if(functionName == "fe3d:camera_get_cursor_sensitivity")
 	{
 		// Validate arguments

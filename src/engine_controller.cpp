@@ -40,8 +40,8 @@ void EngineController::FE3D_CONTROLLER_INIT()
 			Logger::throwFatalWarning("Cannot load application: missing files/directories!");
 		}
 
-		// Default rendering color
-		Tools::setMainRenderingColor(fvec3(0.0f));
+		// Render color
+		Tools::setRenderColor(RENDER_COLOR);
 
 		// Load application settings
 		_leftViewportController.getSettingsEditor().loadSettingsFromFile();
@@ -62,7 +62,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		// Cache engine meshes
 		vector<string> meshPaths;
 		meshPaths.push_back(meshDirectoryPath + "camera.obj");
-		meshPaths.push_back(meshDirectoryPath + "cube.obj");
+		meshPaths.push_back(meshDirectoryPath + "box.obj");
 		meshPaths.push_back(meshDirectoryPath + "lamp.obj");
 		meshPaths.push_back(meshDirectoryPath + "plane.obj");
 		meshPaths.push_back(meshDirectoryPath + "speaker.obj");
@@ -77,7 +77,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		texturePaths2D.push_back(textureDirectoryPath + "c.png");
 		texturePaths2D.push_back(textureDirectoryPath + "color.png");
 		texturePaths2D.push_back(textureDirectoryPath + "ctrl.png");
-		texturePaths2D.push_back(textureDirectoryPath + "cube.png");
+		texturePaths2D.push_back(textureDirectoryPath + "box.png");
 		texturePaths2D.push_back(textureDirectoryPath + "cursor_default.png");
 		texturePaths2D.push_back(textureDirectoryPath + "cursor_pointing.png");
 		texturePaths2D.push_back(textureDirectoryPath + "cursor_text.png");
@@ -134,8 +134,8 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		fontPaths.push_back(fontDirectoryPath + "font.ttf");
 		misc_cacheFontsMultiThreaded(fontPaths);
 
-		// Default rendering color
-		Tools::setMainRenderingColor(fvec3(0.0f));
+		// Render color
+		Tools::setRenderColor(RENDER_COLOR);
 
 		// Default background
 		sky_create("@@background");
@@ -143,7 +143,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 		// Custom cursor texture
 		image_create("@@cursor", true);
-		image_setSize("@@cursor", fvec2(0.075f, 0.075f * Tools::getWindowAspectRatio()));
+		image_setSize("@@cursor", fvec2(CURSOR_IMAGE_SIZE, (CURSOR_IMAGE_SIZE* Tools::getWindowAspectRatio())));
 		image_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_default.png");
 		misc_setCursorEntityID("@@cursor");
 		misc_setCursorVisible(false);

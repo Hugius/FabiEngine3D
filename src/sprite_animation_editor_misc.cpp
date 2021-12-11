@@ -40,3 +40,16 @@ void SpriteAnimationEditor::_deleteAnimation(const string& ID)
 
 	Logger::throwError("SpriteAnimationEditor::_deleteAnimation");
 }
+
+shared_ptr<SpriteAnimation> SpriteAnimationEditor::_getAnimation(const string& ID) const
+{
+	for(const auto& animation : _animations)
+	{
+		if(animation->getID() == ID)
+		{
+			return animation;
+		}
+	}
+
+	Logger::throwError("SpriteAnimationEditor::_getAnimation");
+}

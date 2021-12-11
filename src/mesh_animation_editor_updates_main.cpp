@@ -99,7 +99,7 @@ void MeshAnimationEditor::_updateAnimationCreating()
 		if(_gui.getGlobalScreen()->checkValueForm("animationCreate", newAnimationID, {_currentAnimationID}))
 		{
 			// @ sign not allowed
-			if(newTerrainID.find('@') == string::npos)
+			if(newAnimationID.find('@') == string::npos)
 			{
 				// Spaces not allowed
 				if(newAnimationID.find(' ') == string::npos)

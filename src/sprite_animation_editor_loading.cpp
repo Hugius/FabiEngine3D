@@ -2,5 +2,5 @@
 
 const bool SpriteAnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewTexture)
 {
-	return false;
+	return true;
 }

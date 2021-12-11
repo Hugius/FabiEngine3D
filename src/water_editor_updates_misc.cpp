@@ -52,13 +52,13 @@ void WaterEditor::_updateMiscellaneous()
 		// Update reference model visibility
 		if(_fe3d.input_isKeyPressed(InputType::KEY_R))
 		{
-			if(_fe3d.model_isVisible("@@cube"))
+			if(_fe3d.model_isVisible("@@box"))
 			{
-				_fe3d.model_setVisible("@@cube", false);
+				_fe3d.model_setVisible("@@box", false);
 			}
 			else
 			{
-				_fe3d.model_setVisible("@@cube", true);
+				_fe3d.model_setVisible("@@box", true);
 			}
 		}
 

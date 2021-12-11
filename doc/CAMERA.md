@@ -102,9 +102,6 @@
 - **Third Person Lookat**: the position where the third person view is looking at
   - Type: `decimal`
   - Constraints: none
-- **Aspect Ratio**: the vertical rotation of the camera direction
-  - Type: `decimal`
-  - Constraints: at least `0.0`
 - **Cursor Sensitivity**: the speed with which the cursor moves the first/third person view
   - Type: `decimal`
   - Constraints: at least `0.0`

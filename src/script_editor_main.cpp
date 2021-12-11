@@ -31,7 +31,7 @@ void ScriptEditor::load()
 
 	// Background
 	_fe3d.sky_selectMainSky("");
-	Tools::setMainRenderingColor(BACKGROUND_COLOR);
+	Tools::setRenderColor(BACKGROUND_COLOR);
 
 	// Default graphics
 	_fe3d.gfx_enableBloom();
@@ -59,7 +59,7 @@ void ScriptEditor::unload()
 
 	// Background
 	_fe3d.sky_selectMainSky("@@background");
-	Tools::setMainRenderingColor(fvec3(0.0f));
+	Tools::setRenderColor(fvec3(0.0f));
 
 	// Default graphics
 	_fe3d.gfx_disableBloom(true);

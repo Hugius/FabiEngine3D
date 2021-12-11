@@ -157,7 +157,7 @@ void CoreEngine::_prepareApplication()
 	if
 		(
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "camera.obj") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "cube.obj") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "box.obj") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "lamp.obj") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "plane.obj") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "speaker.obj") ||
@@ -168,7 +168,7 @@ void CoreEngine::_prepareApplication()
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "c.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "color.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "ctrl.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "cube.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "box.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "cursor_default.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "cursor_pointing.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "cursor_text.png") ||
@@ -190,7 +190,6 @@ void CoreEngine::_prepareApplication()
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "mouse_right.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "p.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "pause.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "play.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "plus.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "position.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "r.png") ||
@@ -205,6 +204,7 @@ void CoreEngine::_prepareApplication()
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "shift.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "size.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "space.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "start.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "stop.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "up.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "v.png") ||

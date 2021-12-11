@@ -150,7 +150,7 @@ void MeshAnimationEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			// First stop animation
+			// Stop animation
 			if(isAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID()))
 			{
 				stopAnimation(_currentAnimationID, currentAnimation->getPreviewModelID());

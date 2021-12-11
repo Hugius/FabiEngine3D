@@ -51,11 +51,6 @@ const float FabiEngine3D::camera_getFOV() const
 	return _core->_camera.getFOV();
 }
 
-const float FabiEngine3D::camera_getAspectRatio() const
-{
-	return _core->_camera.getAspectRatio();
-}
-
 const float FabiEngine3D::camera_getCursorSensitivity() const
 {
 	return _core->_camera.getCursorSensitivity();

@@ -41,7 +41,6 @@
     <ClCompile Include="..\..\..\src\billboard_editor_main.cpp" />
     <ClCompile Include="..\..\..\src\billboard_editor_misc.cpp" />
     <ClCompile Include="..\..\..\src\billboard_editor_saving.cpp" />
-    <ClCompile Include="..\..\..\src\billboard_editor_updates_animation.cpp" />
     <ClCompile Include="..\..\..\src\billboard_editor_updates_lighting.cpp" />
     <ClCompile Include="..\..\..\src\billboard_editor_updates_main.cpp" />
     <ClCompile Include="..\..\..\src\billboard_editor_updates_texturing.cpp" />

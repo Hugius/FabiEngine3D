@@ -32,7 +32,6 @@ private:
 	void _updateChoiceMenu();
 	void _updateTexturingMenu();
 	void _updateLightingMenu();
-	void _updateAnimationMenu();
 	void _updateMiscellaneousMenu();
 	void _updateBillboardCreating();
 	void _updateBillboardChoosing();

@@ -35,7 +35,9 @@ public:
 	void moveTo(fvec3 target, float speed);
 	void rotateTo(fvec3 target, float speed);
 	void scaleTo(fvec2 target, float speed);
-	void setColor(fvec3 color);
+	void setColor(fvec3 value);
+	void setMultiplierUV(fvec2 value);
+	void setAdderUV(fvec2 value);
 	void setWireframeColor(fvec3 value);
 	void setTextContent(const string& value);
 	void setFontPath(const string& value);
@@ -66,6 +68,8 @@ public:
 
 	// FVEC2
 	const fvec2 getSize() const;
+	const fvec2 getMultiplierUV() const;
+	const fvec2 getAdderUV() const;
 
 	// FLOAT
 	const float getLightness() const;
@@ -112,9 +116,11 @@ private:
 	fvec3 _color = fvec3(1.0f);
 	fvec3 _wireframeColor = fvec3(1.0f);
 
-	// FVEC3
+	// FVEC2
 	fvec2 _size = fvec2(1.0f);
 	fvec2 _sizeTarget = fvec2(1.0f);
+	fvec2 _multiplierUV = fvec2(1.0f);
+	fvec2 _adderUV = fvec2(0.0f);
 
 	// FLOAT
 	float _emissionIntensity = 1.0f;

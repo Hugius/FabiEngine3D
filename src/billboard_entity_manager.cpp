@@ -84,39 +84,6 @@ void BillboardEntityManager::update()
 				entity->setRotation(rotation);
 			}
 
-			// Update sprite animations
-			if(entity->isSpriteAnimationStarted() && !entity->isSpriteAnimationPaused() &&
-			   (entity->getSpriteAnimationLoops() != entity->getMaxSpriteAnimationLoops()))
-			{
-				if(entity->getPassedSpriteAnimationFrames() >= entity->getSpriteAnimationFramestep()) // Is allowed to update
-				{
-					entity->resetPassedSpriteAnimationFrames(); // Reset counter
-
-					if(entity->getSpriteAnimationColumnIndex() >= entity->getTotalSpriteAnimationColumnCount() - 1) // Reached column count
-					{
-						entity->setSpriteAnimationColumnIndex(0); // Reset column index
-
-						if(entity->getSpriteAnimationRowIndex() >= entity->getTotalSpriteAnimationRowCount() - 1) // Reached row count
-						{
-							entity->increaseSpriteAnimationLoops();
-							entity->setSpriteAnimationRowIndex(0); // Reset row index (animation finished)
-						}
-						else // Next row
-						{
-							entity->setSpriteAnimationRowIndex(entity->getSpriteAnimationRowIndex() + 1);
-						}
-					}
-					else // Next column
-					{
-						entity->setSpriteAnimationColumnIndex(entity->getSpriteAnimationColumnIndex() + 1);
-					}
-				}
-				else // Increase counter
-				{
-					entity->increasePassedSpriteAnimationFrames();
-				}
-			}
-
 			// Update transformation matrix
 			entity->updateTransformationMatrix();
 		}

@@ -52,8 +52,8 @@ void ImageEntityColorRenderer::render(const shared_ptr<ImageEntity> entity)
 		}
 
 		// Shader uniforms
-		_shader.uploadUniform("u_uvAdder", uvAdder);
-		_shader.uploadUniform("u_uvMultiplier", uvMultiplier);
+		_shader.uploadUniform("u_adderUV", uvAdder);
+		_shader.uploadUniform("u_multiplierUV", uvMultiplier);
 		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
 		_shader.uploadUniform("u_isMirroredHorizontally", entity->isMirroredHorizonally());
 		_shader.uploadUniform("u_isMirroredVertically", entity->isMirroredVertically());

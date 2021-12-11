@@ -53,7 +53,17 @@ const fvec3 FabiEngine3D::billboard_getRotation(const string& ID) const
 
 const fvec2 FabiEngine3D::billboard_getSize(const string& ID) const
 {
-	return fvec2(_core->_billboardEntityManager.getEntity(ID)->getSize().x, _core->_billboardEntityManager.getEntity(ID)->getSize().y);
+	return _core->_billboardEntityManager.getEntity(ID)->getSize().x;
+}
+
+const fvec2 FabiEngine3D::billboard_getMultiplierUV(const string& ID) const
+{
+	return _core->_billboardEntityManager.getEntity(ID)->getMultiplierUV();
+}
+
+const fvec2 FabiEngine3D::billboard_getAdderUV(const string& ID) const
+{
+	return _core->_billboardEntityManager.getEntity(ID)->getAdderUV();
 }
 
 const fvec3 FabiEngine3D::billboard_getColor(const string& ID) const
@@ -128,21 +138,6 @@ const string& FabiEngine3D::billboard_getEmissionMapPath(const string& ID) const
 	return _core->_billboardEntityManager.getEntity(ID)->getEmissionMapPath();
 }
 
-const bool FabiEngine3D::billboard_isSpriteAnimationStarted(const string& ID) const
-{
-	return _core->_billboardEntityManager.getEntity(ID)->isSpriteAnimationStarted();
-}
-
-const bool FabiEngine3D::billboard_isSpriteAnimationPlaying(const string& ID) const
-{
-	return (billboard_isSpriteAnimationStarted(ID) && !billboard_isSpriteAnimationPaused(ID));
-}
-
-const bool FabiEngine3D::billboard_isSpriteAnimationPaused(const string& ID) const
-{
-	return _core->_billboardEntityManager.getEntity(ID)->isSpriteAnimationPaused();
-}
-
 const bool FabiEngine3D::billboard_hasDiffuseMap(const string& ID) const
 {
 	return _core->_billboardEntityManager.getEntity(ID)->hasDiffuseMap();
@@ -166,45 +161,4 @@ const bool FabiEngine3D::billboard_isFrozen(const string& ID) const
 const bool FabiEngine3D::billboard_isWireframed(const string& ID) const
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isWireframed();
-}
-
-const int FabiEngine3D::billboard_getRemainingSpriteAnimationLoops(const string& ID) const
-{
-	// Temporary values
-	auto maxLoops = _core->_billboardEntityManager.getEntity(ID)->getMaxSpriteAnimationLoops();
-	auto currentLoops = _core->_billboardEntityManager.getEntity(ID)->getSpriteAnimationLoops();
-
-	if(maxLoops == -1) // Infinite
-	{
-		return -1;
-	}
-	else // Finite
-	{
-		return (maxLoops - currentLoops);
-	}
-}
-
-const unsigned int FabiEngine3D::billboard_getSpriteAnimationRowCount(const string& ID) const
-{
-	return _core->_billboardEntityManager.getEntity(ID)->getTotalSpriteAnimationRowCount();
-}
-
-const unsigned int FabiEngine3D::billboard_getSpriteAnimationColumnCount(const string& ID) const
-{
-	return _core->_billboardEntityManager.getEntity(ID)->getTotalSpriteAnimationColumnCount();
-}
-
-const unsigned int FabiEngine3D::billboard_getSpriteAnimationFramestep(const string& ID) const
-{
-	return _core->_billboardEntityManager.getEntity(ID)->getSpriteAnimationFramestep();
-}
-
-const unsigned int FabiEngine3D::billboard_getSpriteAnimationRowIndex(const string& ID) const
-{
-	return _core->_billboardEntityManager.getEntity(ID)->getSpriteAnimationRowIndex();
-}
-
-const unsigned int FabiEngine3D::billboard_getSpriteAnimationColumnIndex(const string& ID) const
-{
-	return _core->_billboardEntityManager.getEntity(ID)->getSpriteAnimationColumnIndex();
 }

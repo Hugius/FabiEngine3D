@@ -215,8 +215,7 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 		fvec2 size;
 		fvec3 color;
 		float lightness, textureRepeat;
-		bool isFacingX, isFacingY, isReflected, isShadowed, isAnimationStarted;
-		unsigned int animationRowCount, animationColumnCount, animationFramestep;
+		bool isFacingX, isFacingY, isReflected, isShadowed;
 
 		// For file extraction
 		istringstream iss(line);
@@ -237,10 +236,6 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 			isShadowed >>
 			fontPath >>
 			textContent >>
-			isAnimationStarted >>
-			animationRowCount >>
-			animationColumnCount >>
-			animationFramestep >>
 			lightness >>
 			textureRepeat;
 
@@ -276,15 +271,6 @@ const bool BillboardEditor::loadBillboardEntitiesFromFile()
 
 				// Set path
 				_fe3d.billboard_setDiffuseMap(billboardID, diffuseMapPath);
-
-				// Play sprite animation
-				if(isAnimationStarted)
-				{
-					_fe3d.billboard_setSpriteAnimationFramestep(billboardID, animationFramestep);
-					_fe3d.billboard_setSpriteAnimationRowCount(billboardID, animationRowCount);
-					_fe3d.billboard_setSpriteAnimationColumnCount(billboardID, animationColumnCount);
-					_fe3d.billboard_startSpriteAnimation(billboardID, -1);
-				}
 			}
 
 			// Emission map

@@ -432,9 +432,6 @@
     <ClCompile Include="..\..\..\src\billboard_editor_updates_miscellaneous.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\billboard_editor_updates_animation.cpp">
-      <Filter>Billboard Editor\Updates</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_settings_updates_lighting.cpp">
       <Filter>World Editor\Settings</Filter>
     </ClCompile>

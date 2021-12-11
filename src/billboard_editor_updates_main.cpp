@@ -19,10 +19,6 @@ void BillboardEditor::update()
 	}
 	if(_isEditorLoaded)
 	{
-		_updateAnimationMenu();
-	}
-	if(_isEditorLoaded)
-	{
 		_updateLightingMenu();
 	}
 	if(_isEditorLoaded)
@@ -138,10 +134,6 @@ void BillboardEditor::_updateChoiceMenu()
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuTexturing");
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
-		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuAnimation");
-		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lighting")->isHovered())
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuLighting");
@@ -162,9 +154,6 @@ void BillboardEditor::_updateChoiceMenu()
 			size.y /= 100.0f;
 			_fe3d.billboard_setSize(_currentBillboardID, size);
 		}
-
-		// Update buttons hoverability
-		screen->getButton("animation")->setHoverable(_fe3d.billboard_hasDiffuseMap(_currentBillboardID) && !_fe3d.billboard_isTextual(_currentBillboardID));
 	}
 }
 

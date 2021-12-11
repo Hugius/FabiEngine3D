@@ -60,22 +60,6 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
 
-		// Sprite animation
-		fvec2 uvMultiplier = fvec2(1.0f);
-		fvec2 uvAdder = fvec2(0.0f);
-		if(entity->isSpriteAnimationStarted())
-		{
-			// Retrieve values
-			const auto rowCount = entity->getTotalSpriteAnimationRowCount();
-			const auto columnCount = entity->getTotalSpriteAnimationColumnCount();
-			const auto rowIndex = entity->getSpriteAnimationRowIndex();
-			const auto columnIndex = entity->getSpriteAnimationColumnIndex();
-
-			// Apply values
-			uvMultiplier = fvec2(1.0f / static_cast<float>(columnCount), 1.0f / static_cast<float>(rowCount));
-			uvAdder = fvec2(static_cast<float>(columnIndex) * uvMultiplier.x, static_cast<float>(rowIndex) * uvMultiplier.y);
-		}
-
 		// Shader uniforms
 		_shader.uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
 		_shader.uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus.isWireframeRenderingEnabled()));
@@ -91,8 +75,8 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 		_shader.uploadUniform("u_isBright", entity->isBright());
 		_shader.uploadUniform("u_emissionIntensity", entity->getEmissionIntensity());
 		_shader.uploadUniform("u_textureRepeat", entity->getTextureRepeat());
-		_shader.uploadUniform("u_uvAdder", uvAdder);
-		_shader.uploadUniform("u_uvMultiplier", uvMultiplier);
+		_shader.uploadUniform("u_multiplierUV", entity->getMultiplierUV());
+		_shader.uploadUniform("u_adderUV", entity->getAdderUV());
 		_shader.uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
 		// Bind textures

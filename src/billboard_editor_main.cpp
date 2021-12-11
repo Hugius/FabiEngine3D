@@ -80,11 +80,11 @@ void BillboardEditor::unload()
 	_fe3d.gfx_disableBloom(true);
 	_fe3d.gfx_disableShadows(true);
 
+	// Delete models
+	_fe3d.model_deleteAll();
+
 	// Delete billboards
 	_fe3d.billboard_deleteAll();
-
-	// Editor models
-	_fe3d.model_deleteAll();
 
 	// Delete billboard ID TextField
 	_gui.getGlobalScreen()->deleteTextField("billboardID");
@@ -124,10 +124,9 @@ void BillboardEditor::_loadGUI()
 	leftWindow->createScreen("billboardEditorMenuChoice");
 	leftWindow->getScreen("billboardEditorMenuChoice")->createButton("size", fvec2(0.0f, positions[0]), fvec2(TW("Size"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Size", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("billboardEditorMenuChoice")->createButton("texturing", fvec2(0.0f, positions[1]), fvec2(TW("Texturing"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Texturing", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("billboardEditorMenuChoice")->createButton("animation", fvec2(0.0f, positions[2]), fvec2(TW("Animation"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Animation", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("billboardEditorMenuChoice")->createButton("lighting", fvec2(0.0f, positions[3]), fvec2(TW("Lighting"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Lighting", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("billboardEditorMenuChoice")->createButton("miscellaneous", fvec2(0.0f, positions[4]), fvec2(TW("Miscellaneous"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Miscellaneous", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("billboardEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[5]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("billboardEditorMenuChoice")->createButton("lighting", fvec2(0.0f, positions[2]), fvec2(TW("Lighting"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Lighting", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("billboardEditorMenuChoice")->createButton("miscellaneous", fvec2(0.0f, positions[3]), fvec2(TW("Miscellaneous"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Miscellaneous", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("billboardEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[4]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 
 	// Left-viewport: billboardEditorMenuTexturing
 	positions = VPC::calculateButtonPositions(7, CH);
@@ -139,15 +138,6 @@ void BillboardEditor::_loadGUI()
 	leftWindow->getScreen("billboardEditorMenuTexturing")->createButton("clearMaps", fvec2(0.0f, positions[4]), fvec2(TW("Clear Maps"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Clear Maps", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("billboardEditorMenuTexturing")->createButton("textureRepeat", fvec2(0.0f, positions[5]), fvec2(TW("Texture Repeat"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Texture Repeat", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("billboardEditorMenuTexturing")->createButton("back", fvec2(0.0f, positions[6]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-
-	// Left-viewport: billboardEditorMenuAnimation
-	positions = VPC::calculateButtonPositions(5, CH);
-	leftWindow->createScreen("billboardEditorMenuAnimation");
-	leftWindow->getScreen("billboardEditorMenuAnimation")->createButton("rows", fvec2(0.0f, positions[0]), fvec2(TW("Rows"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Rows", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("billboardEditorMenuAnimation")->createButton("columns", fvec2(0.0f, positions[1]), fvec2(TW("Columns"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Columns", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("billboardEditorMenuAnimation")->createButton("framestep", fvec2(0.0f, positions[2]), fvec2(TW("Framestep"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Framestep", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("billboardEditorMenuAnimation")->createButton("animate", fvec2(0.0f, positions[3]), fvec2(TW("Animate"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Animate", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("billboardEditorMenuAnimation")->createButton("back", fvec2(0.0f, positions[4]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 
 	// Left-viewport: billboardEditorMenuLighting
 	positions = VPC::calculateButtonPositions(5, CH);
@@ -171,7 +161,6 @@ void BillboardEditor::_unloadGUI()
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuMain");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuChoice");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuTexturing");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuAnimation");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuLighting");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuMiscellaneous");
 }

@@ -35,6 +35,16 @@ const fvec2 BillboardEntity::getSize() const
 	return _size;
 }
 
+const fvec2 BillboardEntity::getMultiplierUV() const
+{
+	return _multiplierUV;
+}
+
+const fvec2 BillboardEntity::getAdderUV() const
+{
+	return _adderUV;
+}
+
 const fvec3 BillboardEntity::getColor() const
 {
 	return _color;
@@ -93,56 +103,6 @@ const float BillboardEntity::getTextureRepeat() const
 const float BillboardEntity::getEmissionIntensity() const
 {
 	return _emissionIntensity;
-}
-
-const unsigned int BillboardEntity::getPassedSpriteAnimationFrames() const
-{
-	return _passedSpriteAnimationFrames;
-}
-
-const unsigned int BillboardEntity::getSpriteAnimationFramestep() const
-{
-	return _spriteAnimationFramestep;
-}
-
-const unsigned int BillboardEntity::getTotalSpriteAnimationRowCount() const
-{
-	return _totalSpriteAnimationRowCount;
-}
-
-const unsigned int BillboardEntity::getTotalSpriteAnimationColumnCount() const
-{
-	return _totalSpriteAnimationColumnCount;
-}
-
-const unsigned int BillboardEntity::getSpriteAnimationRowIndex() const
-{
-	return _spriteAnimationRowIndex;
-}
-
-const unsigned int BillboardEntity::getSpriteAnimationColumnIndex() const
-{
-	return _spriteAnimationColumnIndex;
-}
-
-const unsigned int BillboardEntity::getSpriteAnimationLoops() const
-{
-	return _spriteAnimationLoops;
-}
-
-const int BillboardEntity::getMaxSpriteAnimationLoops() const
-{
-	return _maxSpriteAnimationLoops;
-}
-
-const bool BillboardEntity::isSpriteAnimationStarted() const
-{
-	return _isSpriteAnimationStarted;
-}
-
-const bool BillboardEntity::isSpriteAnimationPaused() const
-{
-	return _isSpriteAnimationPaused;
 }
 
 const bool BillboardEntity::isFacingCameraX() const

@@ -60,7 +60,7 @@ void SpriteAnimationEditor::_updateMainMenu()
 		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
-			saveAnimationEntitiesToFile();
+			saveAnimationsToFile();
 			unload();
 			return;
 		}

@@ -198,6 +198,16 @@ void BillboardEntity::setColor(fvec3 value)
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
+void BillboardEntity::setMultiplierUV(fvec2 value)
+{
+	_multiplierUV = fvec2(max(0.0f, value.x), max(0.0f, value.y));
+}
+
+void BillboardEntity::setAdderUV(fvec2 value)
+{
+	_adderUV = fvec2(max(0.0f, value.x), max(0.0f, value.y));
+}
+
 void BillboardEntity::setWireframeColor(fvec3 value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
@@ -246,99 +256,6 @@ void BillboardEntity::setWireframed(bool value)
 void BillboardEntity::setShadowed(bool value)
 {
 	_isShadowed = value;
-}
-
-void BillboardEntity::startSpriteAnimation(int loops)
-{
-	if(_isSpriteAnimationStarted)
-	{
-		Logger::throwError("BillboardEntity::startSpriteAnimation::1");
-	}
-	if(loops < -1)
-	{
-		Logger::throwError("BillboardEntity::startSpriteAnimation::2");
-	}
-
-	_isSpriteAnimationStarted = true;
-	_passedSpriteAnimationFrames = 0;
-	_spriteAnimationLoops = 0;
-	_maxSpriteAnimationLoops = loops;
-}
-
-void BillboardEntity::pauseSpriteAnimation()
-{
-	if(!_isSpriteAnimationStarted)
-	{
-		Logger::throwError("BillboardEntity::pauseSpriteAnimation::1");
-	}
-	else if(_isSpriteAnimationPaused)
-	{
-		Logger::throwError("BillboardEntity::pauseSpriteAnimation::2");
-	}
-
-	_isSpriteAnimationPaused = true;
-}
-
-void BillboardEntity::resumeSpriteAnimation()
-{
-	if(!_isSpriteAnimationPaused)
-	{
-		Logger::throwError("BillboardEntity::resumeSpriteAnimation");
-	}
-
-	_isSpriteAnimationPaused = false;
-}
-
-void BillboardEntity::stopSpriteAnimation()
-{
-	if(!_isSpriteAnimationStarted)
-	{
-		Logger::throwError("BillboardEntity::stopSpriteAnimation");
-	}
-
-	_isSpriteAnimationStarted = false;
-	_spriteAnimationRowIndex = 0;
-	_spriteAnimationColumnIndex = 0;
-}
-
-void BillboardEntity::setSpriteAnimationRowIndex(unsigned int value)
-{
-	_spriteAnimationRowIndex = value;
-}
-
-void BillboardEntity::setSpriteAnimationColumnIndex(unsigned int value)
-{
-	_spriteAnimationColumnIndex = value;
-}
-
-void BillboardEntity::setTotalSpriteAnimationRowCount(unsigned int value)
-{
-	_totalSpriteAnimationRowCount = value;
-}
-
-void BillboardEntity::setTotalSpriteAnimationColumnCount(unsigned int value)
-{
-	_totalSpriteAnimationColumnCount = value;
-}
-
-void BillboardEntity::setSpriteAnimationFramestep(unsigned int value)
-{
-	_spriteAnimationFramestep = value;
-}
-
-void BillboardEntity::increasePassedSpriteAnimationFrames()
-{
-	_passedSpriteAnimationFrames++;
-}
-
-void BillboardEntity::resetPassedSpriteAnimationFrames()
-{
-	_passedSpriteAnimationFrames = 0;
-}
-
-void BillboardEntity::increaseSpriteAnimationLoops()
-{
-	_spriteAnimationLoops++;
 }
 
 void BillboardEntity::setLightness(float value)

@@ -20,6 +20,7 @@ TopViewportController::TopViewportController(FabiEngine3D& fe3d,
 											 ModelEditor& modelEditor,
 											 BillboardEditor& billboardEditor,
 											 MeshAnimationEditor& meshAnimationEditor,
+											 SpriteAnimationEditor& spriteAnimationEditor,
 											 AudioEditor& audioEditor,
 											 WorldEditor& worldEditor,
 											 ScriptEditor& scriptEditor)
@@ -32,6 +33,7 @@ TopViewportController::TopViewportController(FabiEngine3D& fe3d,
 	_modelEditor(modelEditor),
 	_billboardEditor(billboardEditor),
 	_meshAnimationEditor(meshAnimationEditor),
+	_spriteAnimationEditor(spriteAnimationEditor),
 	_audioEditor(audioEditor),
 	_worldEditor(worldEditor),
 	_scriptEditor(scriptEditor)
@@ -369,6 +371,7 @@ void TopViewportController::_saveCurrentProject()
 	_modelEditor.saveModelEntitiesToFile();
 	_billboardEditor.saveBillboardEntitiesToFile();
 	_meshAnimationEditor.saveAnimationsToFile();
+	_spriteAnimationEditor.saveAnimationsToFile();
 	_audioEditor.saveAudioEntitiesToFile();
 	_worldEditor.saveEditorWorldToFile();
 	_scriptEditor.saveScriptFiles();

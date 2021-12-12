@@ -5,6 +5,11 @@ void SpriteAnimationEditor::_updateAnimationExecution()
 	// Update all started animations
 	for(auto& [idPair, animation] : _startedAnimations)
 	{
+		// Temporary values
+		fvec2 multiplierUV = fvec2(1.0f);
+		fvec2 adderUV = fvec2(0.0f);
+		bool animationMustStop = false;
+
 		// Check if animation is playing
 		if(!animation.isPaused())
 		{
@@ -28,6 +33,7 @@ void SpriteAnimationEditor::_updateAnimationExecution()
 						{
 							_animationsToStop.insert(idPair);
 							_animationsToStartAgain.insert(idPair);
+							animationMustStop = true;
 						}
 						else
 						{
@@ -38,6 +44,7 @@ void SpriteAnimationEditor::_updateAnimationExecution()
 							if(animation.getTimesToPlay() == 0)
 							{
 								_animationsToStop.insert(idPair);
+								animationMustStop = true;
 							}
 							else
 							{
@@ -61,13 +68,18 @@ void SpriteAnimationEditor::_updateAnimationExecution()
 			}
 		}
 
-		// Apply sprite animation on entity
-		const float multiplierX = (1.0f / static_cast<float>(animation.getRowCount()));
-		const float multiplierY = (1.0f / static_cast<float>(animation.getColumnCount()));
-		const float adderX = (static_cast<float>(animation.getRowIndex()) * multiplierX);
-		const float adderY = (static_cast<float>(animation.getColumnIndex()) * multiplierY);
-		_fe3d.billboard_setMultiplierUV(idPair.second, fvec2(multiplierX, multiplierY));
-		_fe3d.billboard_setAdderUV(idPair.second, fvec2(adderX, adderY));
+		// Update UV properties
+		if(!animationMustStop)
+		{
+			multiplierUV.x = (1.0f / static_cast<float>(animation.getColumnCount()));
+			multiplierUV.y = (1.0f / static_cast<float>(animation.getRowCount()));
+			adderUV.x = (static_cast<float>(animation.getColumnIndex()) * multiplierUV.x);
+			adderUV.y = (static_cast<float>(animation.getRowIndex()) * multiplierUV.y);
+		}
+
+		// Apply to entity
+		_fe3d.billboard_setMultiplierUV(idPair.second, multiplierUV);
+		_fe3d.billboard_setAdderUV(idPair.second, adderUV);
 	}
 
 	// Remove all animations that ended

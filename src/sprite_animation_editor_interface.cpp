@@ -1,7 +1,7 @@
 #include "sprite_animation_editor.hpp"
 #include "logger.hpp"
 
-void SpriteAnimationEditor::startAnimation(const string& animationID, const string& billboardID, int loops)
+void SpriteAnimationEditor::startAnimation(const string& animationID, const string& billboardID, int timesToPlay)
 {
 	// Temporary values
 	string errorMessage = "Tried to start animation with ID \"" + animationID + "\" on billboard with ID \"" + billboardID + "\": ";
@@ -15,19 +15,19 @@ void SpriteAnimationEditor::startAnimation(const string& animationID, const stri
 			// Check if animation has not already started
 			if(!isAnimationStarted(animationID, billboardID))
 			{
-				// Check if animation count is valid
-				if(loops >= -1)
+				// Check if animation play count is valid
+				if((timesToPlay == -1) || (timesToPlay > 0))
 				{
 					// Retrieve animation
 					auto animation = *_getAnimation(animationID);
-					animation.setTimesToPlay((loops == -1) ? -1 : (loops + 1));
+					animation.setTimesToPlay(timesToPlay);
 
 					// Start animation
 					_startedAnimations.insert(make_pair(make_pair(animationID, billboardID), animation));
 				}
 				else
 				{
-					Logger::throwWarning(errorMessage + "loop count is invalid!");
+					Logger::throwWarning(errorMessage + "play count is invalid!");
 				}
 			}
 			else
@@ -196,6 +196,11 @@ void SpriteAnimationEditor::stopAnimation(const string& animationID, const strin
 		// Check if animation is started
 		if(isAnimationStarted(animationID, billboardID))
 		{
+			// Reset UV properties
+			_fe3d.billboard_setMultiplierUV(billboardID, fvec2(1.0f));
+			_fe3d.billboard_setAdderUV(billboardID, fvec2(0.0f));
+
+			// Stop animation
 			_startedAnimations.erase(make_pair(animationID, billboardID));
 		}
 		else

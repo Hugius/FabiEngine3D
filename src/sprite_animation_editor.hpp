@@ -14,7 +14,7 @@ public:
 	void load();
 	void unload();
 	void update();
-	void startAnimation(const string& animationID, const string& billboardID, int maxLoops);
+	void startAnimation(const string& animationID, const string& billboardID, int timesToPlay);
 	void pauseAnimation(const string& animationID, const string& billboardID);
 	void resumeAnimation(const string& animationID, const string& billboardID);
 	void stopAnimation(const string& animationID, const string& billboardID);
@@ -57,7 +57,7 @@ private:
 	string _currentProjectID = "";
 
 	// FVEC3
-	static inline const fvec3 PREVIEW_BILLBOARD_POSITION = fvec3(0.0f, -0.5f, -1.0f);
+	static inline const fvec3 PREVIEW_BILLBOARD_POSITION = fvec3(0.0f, -0.5f, -0.75f);
 
 	// FLOAT
 	static inline const float CW = 0.115f;

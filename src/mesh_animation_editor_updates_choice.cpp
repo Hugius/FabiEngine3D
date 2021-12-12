@@ -182,7 +182,7 @@ void MeshAnimationEditor::_updateChoiceMenu()
 		}
 
 		// Update buttons hoverability
-		bool isPlaying = (isAnimationExisting(_currentAnimationID) && isAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID()));
+		bool isPlaying = isAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID());
 		bool hasPreviewModel = _fe3d.model_isExisting(currentAnimation->getPreviewModelID());
 		screen->getButton("preview")->setHoverable(!isPlaying);
 		screen->getButton("start")->setHoverable(!isPlaying && hasPreviewModel && (currentAnimation->getFrames().size() > 1));

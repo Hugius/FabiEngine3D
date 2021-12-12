@@ -113,6 +113,8 @@ void SpriteAnimationEditor::_updateAnimationCreating()
 						_currentAnimationID = newAnimationID;
 
 						// Miscellaneous
+						_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
+						_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
 						_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), "Animation: " + newAnimationID, 0.025f);
 						_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), true);
 						_isCreatingAnimation = false;
@@ -160,7 +162,8 @@ void SpriteAnimationEditor::_updateAnimationChoosing()
 				}
 
 				// Miscellaneous
-				_fe3d.image_setVisible(PREVIEW_BILLBOARD_ID, true);
+				_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, _getAnimation(_currentAnimationID)->getPreviewTexturePath());
+				_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
 				_gui.getGlobalScreen()->deleteChoiceForm("animationList");
 				_isChoosingAnimation = false;
 			}
@@ -191,7 +194,8 @@ void SpriteAnimationEditor::_updateAnimationDeleting()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("spriteAnimationEditorMenuMain");
 
 			// Delete animation
-			_fe3d.image_setVisible(PREVIEW_BILLBOARD_ID, false);
+			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
+			_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
 			_deleteAnimation(_currentAnimationID);
 			_currentAnimationID = "";
 

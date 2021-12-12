@@ -10,8 +10,8 @@ void MeshAnimationEditor::_updateFrameMenu()
 	if(screen->getID() == "meshAnimationEditorMenuFrame")
 	{
 		// Temporary values
-		auto animation = _getAnimation(_currentAnimationID);
-		auto frame = animation->getFrames()[_currentFrameIndex];
+		auto currentAnimation = _getAnimation(_currentAnimationID);
+		auto frame = currentAnimation->getFrames()[_currentFrameIndex];
 		auto transformation = frame.getTargetTransformations().at(_currentPartID);
 		auto rotationOrigin = frame.getRotationOrigins().at(_currentPartID);
 		auto speed = frame.getSpeeds().at(_currentPartID);
@@ -32,9 +32,9 @@ void MeshAnimationEditor::_updateFrameMenu()
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 		{
 			// Reset wireframe color
-			for(const auto& partID : _fe3d.model_getPartIDs(animation->getPreviewModelID()))
+			for(const auto& partID : _fe3d.model_getPartIDs(currentAnimation->getPreviewModelID()))
 			{
-				_fe3d.model_setWireframeColor(animation->getPreviewModelID(), partID, 0.0f);
+				_fe3d.model_setWireframeColor(currentAnimation->getPreviewModelID(), partID, 0.0f);
 			}
 
 			// Miscellaneous
@@ -45,7 +45,7 @@ void MeshAnimationEditor::_updateFrameMenu()
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("part")->isHovered())
 		{
 			// Choosing part of preview model
-			auto modelParts = animation->getPartIDs();
+			auto modelParts = currentAnimation->getPartIDs();
 			modelParts.erase(modelParts.begin());
 			_gui.getGlobalScreen()->createChoiceForm("parts", "Select Part", fvec2(-0.5f, 0.1f), modelParts);
 		}
@@ -107,11 +107,11 @@ void MeshAnimationEditor::_updateFrameMenu()
 		{
 			if(_currentPartID.empty()) // Base rotation
 			{
-				_fe3d.model_rotateBase(animation->getPreviewModelID(), frame.getSpeeds().at(_currentPartID));
+				_fe3d.model_rotateBase(currentAnimation->getPreviewModelID(), frame.getSpeeds().at(_currentPartID));
 			}
 			else // Part rotation
 			{
-				_fe3d.model_rotatePart(animation->getPreviewModelID(), _currentPartID, frame.getSpeeds().at(_currentPartID));
+				_fe3d.model_rotatePart(currentAnimation->getPreviewModelID(), _currentPartID, frame.getSpeeds().at(_currentPartID));
 			}
 			_mustUpdateCurrentFramePreview = false;
 		}
@@ -195,7 +195,7 @@ void MeshAnimationEditor::_updateFrameMenu()
 		frame.setRotationOrigin(_currentPartID, rotationOrigin);
 
 		// Update frame
-		animation->setFrame(_currentFrameIndex, frame);
+		currentAnimation->setFrame(_currentFrameIndex, frame);
 
 		// Check if an animation part ID is clicked
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("parts");
@@ -205,7 +205,7 @@ void MeshAnimationEditor::_updateFrameMenu()
 			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Check if selected part exists on preview model
-				if(_fe3d.model_hasPart(animation->getPreviewModelID(), selectedButtonID))
+				if(_fe3d.model_hasPart(currentAnimation->getPreviewModelID(), selectedButtonID))
 				{
 					_currentPartID = selectedButtonID;
 					_hoveredPartID = "";
@@ -222,9 +222,9 @@ void MeshAnimationEditor::_updateFrameMenu()
 				if(_hoveredPartID != selectedButtonID)
 				{
 					// Reset wireframe color
-					for(const auto& partID : _fe3d.model_getPartIDs(animation->getPreviewModelID()))
+					for(const auto& partID : _fe3d.model_getPartIDs(currentAnimation->getPreviewModelID()))
 					{
-						_fe3d.model_setWireframeColor(animation->getPreviewModelID(), partID, 0.0f);
+						_fe3d.model_setWireframeColor(currentAnimation->getPreviewModelID(), partID, 0.0f);
 					}
 				}
 
@@ -235,9 +235,9 @@ void MeshAnimationEditor::_updateFrameMenu()
 		else if(_gui.getGlobalScreen()->isChoiceFormCancelled("parts")) // Cancelled choosing
 		{
 			// Reset wireframe color
-			for(const auto& partID : _fe3d.model_getPartIDs(animation->getPreviewModelID()))
+			for(const auto& partID : _fe3d.model_getPartIDs(currentAnimation->getPreviewModelID()))
 			{
-				_fe3d.model_setWireframeColor(animation->getPreviewModelID(), partID, 0.0f);
+				_fe3d.model_setWireframeColor(currentAnimation->getPreviewModelID(), partID, 0.0f);
 			}
 
 			// Miscellaneous
@@ -250,9 +250,9 @@ void MeshAnimationEditor::_updateFrameMenu()
 			if(!_hoveredPartID.empty())
 			{
 				// Reset wireframe color
-				for(const auto& partID : _fe3d.model_getPartIDs(animation->getPreviewModelID()))
+				for(const auto& partID : _fe3d.model_getPartIDs(currentAnimation->getPreviewModelID()))
 				{
-					_fe3d.model_setWireframeColor(animation->getPreviewModelID(), partID, 0.0f);
+					_fe3d.model_setWireframeColor(currentAnimation->getPreviewModelID(), partID, 0.0f);
 				}
 			}
 

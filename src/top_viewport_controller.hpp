@@ -1,15 +1,17 @@
 #pragma once
 
 #include "base_viewport_controller.hpp"
+#include "settings_editor.hpp"
 #include "sky_editor.hpp"
 #include "terrain_editor.hpp"
 #include "water_editor.hpp"
 #include "model_editor.hpp"
 #include "billboard_editor.hpp"
+#include "mesh_animation_editor.hpp"
+#include "sprite_animation_editor.hpp"
 #include "audio_editor.hpp"
 #include "world_editor.hpp"
 #include "script_editor.hpp"
-#include "settings_editor.hpp"
 
 class TopViewportController final : public BaseViewportController
 {
@@ -22,7 +24,8 @@ public:
 						  WaterEditor& waterEditor,
 						  ModelEditor& modelEditor,
 						  BillboardEditor& billboardEditor,
-						  MeshAnimationEditor& animationEditor,
+						  MeshAnimationEditor& meshAnimationEditor,
+						  SpriteAnimationEditor& spriteAnimationEditor,
 						  AudioEditor& audioEditor,
 						  WorldEditor& worldEditor,
 						  ScriptEditor& scriptEditor);
@@ -76,6 +79,7 @@ private:
 	ModelEditor& _modelEditor;
 	BillboardEditor& _billboardEditor;
 	MeshAnimationEditor& _meshAnimationEditor;
+	SpriteAnimationEditor& _spriteAnimationEditor;
 	AudioEditor& _audioEditor;
 	WorldEditor& _worldEditor;
 	ScriptEditor& _scriptEditor;

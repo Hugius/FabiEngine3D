@@ -27,6 +27,7 @@ void SpriteAnimationEditor::load()
 	// Preview image
 	_fe3d.billboard_create(PREVIEW_BILLBOARD_ID);
 	_fe3d.billboard_setPosition(PREVIEW_BILLBOARD_ID, PREVIEW_BILLBOARD_POSITION);
+	_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->createTextField("animationID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
@@ -47,6 +48,8 @@ void SpriteAnimationEditor::unload()
 	// Reset editor properties
 	_animations.clear();
 	_startedAnimations.clear();
+	_animationsToStop.clear();
+	_animationsToStartAgain.clear();
 	_hoveredAnimationID = "";
 	_currentAnimationID = "";
 	_isCreatingAnimation = false;

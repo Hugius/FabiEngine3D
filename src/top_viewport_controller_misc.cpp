@@ -364,6 +364,12 @@ void TopViewportController::_applyProjectChange()
 		_meshAnimationEditor.unload();
 	}
 
+	// Unload sprite animation editor
+	if(_spriteAnimationEditor.isLoaded())
+	{
+		_spriteAnimationEditor.unload();
+	}
+
 	// Unload audio editor
 	if(_audioEditor.isLoaded())
 	{
@@ -390,6 +396,7 @@ void TopViewportController::_applyProjectChange()
 	_modelEditor.setCurrentProjectID(_currentProjectID);
 	_billboardEditor.setCurrentProjectID(_currentProjectID);
 	_meshAnimationEditor.setCurrentProjectID(_currentProjectID);
+	_spriteAnimationEditor.setCurrentProjectID(_currentProjectID);
 	_audioEditor.setCurrentProjectID(_currentProjectID);
 	_worldEditor.setCurrentProjectID(_currentProjectID);
 	_scriptEditor.setCurrentProjectID(_currentProjectID);

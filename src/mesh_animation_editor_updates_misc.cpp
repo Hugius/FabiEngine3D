@@ -97,26 +97,26 @@ void MeshAnimationEditor::_updateMiscellaneous()
 		if(!_currentAnimationID.empty())
 		{
 			// Temporary values
-			const auto animation = _getAnimation(_currentAnimationID);
+			const auto currentAnimation = _getAnimation(_currentAnimationID);
 
 			// Check if animation has preview model
-			if(_fe3d.model_isExisting(animation->getPreviewModelID()))
+			if(_fe3d.model_isExisting(currentAnimation->getPreviewModelID()))
 			{
 				// Check if F is pressed
 				if(_fe3d.input_isKeyPressed(InputType::KEY_F))
 				{
 					// Iterate through model parts
-					for(const auto& partID : animation->getPartIDs())
+					for(const auto& partID : currentAnimation->getPartIDs())
 					{
-						if (!partID.empty() || (animation->getPartIDs().size() == 1))
+						if (!partID.empty() || (currentAnimation->getPartIDs().size() == 1))
 						{
-							if (_fe3d.model_isWireframed(animation->getPreviewModelID(), partID))
+							if (_fe3d.model_isWireframed(currentAnimation->getPreviewModelID(), partID))
 							{
-								_fe3d.model_setWireframed(animation->getPreviewModelID(), partID, false);
+								_fe3d.model_setWireframed(currentAnimation->getPreviewModelID(), partID, false);
 							}
 							else
 							{
-								_fe3d.model_setWireframed(animation->getPreviewModelID(), partID, true);
+								_fe3d.model_setWireframed(currentAnimation->getPreviewModelID(), partID, true);
 							}
 						}
 					}

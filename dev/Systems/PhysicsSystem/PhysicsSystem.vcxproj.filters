@@ -1,23 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Core">
-      <UniqueIdentifier>{632e61ee-86e3-4760-8424-7e3ab983604a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Data Structures">
       <UniqueIdentifier>{9dd572bc-a971-4c4d-bdc5-bafbeb583d68}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Collision">
+    <Filter Include="Collision">
       <UniqueIdentifier>{ca41db49-1882-4403-97a1-1182e8d0d208}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Raycasting">
-      <UniqueIdentifier>{38c4b353-998f-4065-9e6b-e3620964be85}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Collision\Detection">
+    <Filter Include="Collision\Detection">
       <UniqueIdentifier>{e5a99923-9813-4e5a-a818-3f58048fdabb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Collision\Response">
+    <Filter Include="Collision\Response">
       <UniqueIdentifier>{08df31da-49f1-4652-a099-82c7bef88d22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Raycasting">
+      <UniqueIdentifier>{38c4b353-998f-4065-9e6b-e3620964be85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{e615d742-8e80-49bf-9a91-1f6319243cc6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -25,19 +25,25 @@
       <Filter>Data Structures</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\raycaster.cpp">
-      <Filter>Core\Raycasting</Filter>
+      <Filter>Raycasting</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\ray.cpp">
       <Filter>Data Structures</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\camera_collision_detector.cpp">
-      <Filter>Core\Collision\Detection</Filter>
+      <Filter>Collision\Detection</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\camera_collision_handler_core.cpp">
-      <Filter>Core\Collision\Response</Filter>
+    <ClCompile Include="..\..\..\src\camera_collision_handler_update.cpp">
+      <Filter>Collision\Response</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\camera_collision_handler_misc.cpp">
-      <Filter>Core\Collision\Response</Filter>
+      <Filter>Collision\Response</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\camera_lifecycle.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\camera_misc.cpp">
+      <Filter>Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -45,16 +51,19 @@
       <Filter>Data Structures</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\raycaster.hpp">
-      <Filter>Core\Raycasting</Filter>
+      <Filter>Raycasting</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\ray.hpp">
       <Filter>Data Structures</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\camera_collision_detector.hpp">
-      <Filter>Core\Collision\Detection</Filter>
+      <Filter>Collision\Detection</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\camera_collision_handler.hpp">
-      <Filter>Core\Collision\Response</Filter>
+      <Filter>Collision\Response</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\camera.hpp">
+      <Filter>Camera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -146,8 +146,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\core_engine_main.cpp" />
-    <ClCompile Include="..\..\..\src\core_engine_update.cpp" />
+    <ClCompile Include="..\..\..\src\core_engine_lifecycle.cpp" />
+    <ClCompile Include="..\..\..\src\core_engine_misc.cpp" />
     <ClCompile Include="..\..\..\src\fe3d.cpp" />
     <ClCompile Include="..\..\..\src\fe3d_audio_getters.cpp" />
     <ClCompile Include="..\..\..\src\fe3d_audio_setters.cpp" />

@@ -37,9 +37,6 @@
     <Filter Include="Execution\Interpreter\Variable">
       <UniqueIdentifier>{ec855f5f-cba3-46b4-aac3-ae2109f5bbc1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Execution\Interpreter\List">
-      <UniqueIdentifier>{bfddae24-cac4-4b45-bdce-240a9ee906cc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Execution\Interpreter\Function\Networking">
       <UniqueIdentifier>{847cc0de-5f17-483f-8f9d-0fee2643eea6}</UniqueIdentifier>
     </Filter>
@@ -66,7 +63,7 @@
     <ClCompile Include="..\..\..\src\script_executor.cpp">
       <Filter>Execution\Executor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_main.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_lifecycle.cpp">
       <Filter>Execution\Interpreter\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_execution.cpp">
@@ -119,12 +116,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_variable_edit.cpp">
       <Filter>Execution\Interpreter\Variable</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_list_main.cpp">
-      <Filter>Execution\Interpreter\List</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_list_misc.cpp">
-      <Filter>Execution\Interpreter\List</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_condition.cpp">
       <Filter>Execution\Interpreter\Miscellaneous</Filter>
@@ -260,6 +251,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sound3d_setters.cpp">
       <Filter>Execution\Interpreter\Function\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_list_extraction.cpp">
+      <Filter>Execution\Interpreter\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_list_misc.cpp">
+      <Filter>Execution\Interpreter\Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

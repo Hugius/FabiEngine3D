@@ -73,12 +73,12 @@ void MeshAnimation::setTimesToPlay(int value)
 	_timesToPlay = value;
 }
 
-void MeshAnimation::setFadeFramestep(int value)
+void MeshAnimation::setFadeFramestep(unsigned int value)
 {
 	_fadeFramestep = value;
 }
 
-void MeshAnimation::setFadeFrameIndex(int value)
+void MeshAnimation::setFadeFrameIndex(unsigned int value)
 {
 	_fadeFrameIndex = value;
 }

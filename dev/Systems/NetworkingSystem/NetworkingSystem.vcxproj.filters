@@ -32,7 +32,7 @@
     <ClCompile Include="..\..\..\src\network_utils.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\network_server_api_main.cpp">
+    <ClCompile Include="..\..\..\src\network_server_api_lifecycle.cpp">
       <Filter>Server</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\network_server_api_misc_private.cpp">
@@ -41,7 +41,7 @@
     <ClCompile Include="..\..\..\src\network_server_api_update.cpp">
       <Filter>Server</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\network_client_api_main.cpp">
+    <ClCompile Include="..\..\..\src\network_client_api_lifecycle.cpp">
       <Filter>Client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\network_client_api_misc_private.cpp">

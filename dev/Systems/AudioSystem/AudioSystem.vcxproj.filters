@@ -15,7 +15,7 @@
     <ClCompile Include="..\..\..\src\audio_manager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\audio_player_misc.cpp">
+    <ClCompile Include="..\..\..\src\audio_player_lifecycle.cpp">
       <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\audio_player_3d.cpp">
@@ -34,6 +34,9 @@
       <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\audio_player_music.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\audio_player_misc.cpp">
       <Filter>Player</Filter>
     </ClCompile>
   </ItemGroup>

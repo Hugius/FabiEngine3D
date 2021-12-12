@@ -27,3 +27,22 @@ const BufferID CaptureBuffer::getTexture(unsigned int index) const
 {
 	return _textures[index];
 }
+
+void CaptureBuffer::reset()
+{
+	if(_isInitialized)
+	{
+		// Remove FBO & RBO
+		glDeleteFramebuffers(1, &_fbo);
+		glDeleteBuffers(1, &_rbo);
+
+		// Remove textures
+		for(size_t i = 0; i < _textures.size(); i++)
+		{
+			glDeleteTextures(1, &_textures[i]);
+		}
+
+		// Can recreate FBO texture again
+		_isInitialized = false;
+	}
+}

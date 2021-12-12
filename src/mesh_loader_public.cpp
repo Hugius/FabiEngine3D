@@ -8,6 +8,40 @@ using std::set;
 using std::future;
 using std::launch;
 
+const vector<shared_ptr<MeshPart>>* MeshLoader::loadMesh(const string& filePath)
+{
+	BEGIN:
+	// Search cache
+	auto cacheIterator = _meshCache.find(filePath);
+
+	// Return from cache
+	if(cacheIterator != _meshCache.end())
+	{
+		return &cacheIterator->second;
+	}
+
+	// Load mesh
+	auto returnValue = _loadMesh(filePath);
+
+	// Check mesh status
+	if(returnValue.second.empty())
+	{
+		Logger::throwWarning(returnValue.first);
+		return nullptr;
+	}
+	else
+	{
+		// Cache mesh
+		_meshCache.insert(make_pair(filePath, returnValue.second));
+
+		// Logging
+		Logger::throwInfo("Loaded mesh: \"" + filePath + "\"");
+
+		// Return new model
+		goto BEGIN;
+	}
+}
+
 void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths)
 {
 	// Temporary values
@@ -56,40 +90,6 @@ void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths)
 				Logger::throwInfo("Loaded mesh: \"" + uniqueFilePaths[i] + "\"");
 			}
 		}
-	}
-}
-
-const vector<shared_ptr<MeshPart>>* MeshLoader::loadMesh(const string& filePath)
-{
-	BEGIN:
-	// Search cache
-	auto cacheIterator = _meshCache.find(filePath);
-
-	// Return from cache
-	if(cacheIterator != _meshCache.end())
-	{
-		return &cacheIterator->second;
-	}
-
-	// Load mesh
-	auto returnValue = _loadMesh(filePath);
-
-	// Check mesh status
-	if(returnValue.second.empty())
-	{
-		Logger::throwWarning(returnValue.first);
-		return nullptr;
-	}
-	else
-	{
-		// Cache mesh
-		_meshCache.insert(make_pair(filePath, returnValue.second));
-
-		// Logging
-		Logger::throwInfo("Loaded mesh: \"" + filePath + "\"");
-
-		// Return new model
-		goto BEGIN;
 	}
 }
 

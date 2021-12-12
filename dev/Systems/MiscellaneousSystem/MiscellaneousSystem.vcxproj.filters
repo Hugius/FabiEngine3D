@@ -4,11 +4,8 @@
     <Filter Include="Enums">
       <UniqueIdentifier>{a7511681-4353-4e85-ba1a-e0b7d1d99d01}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Other">
+    <Filter Include="Miscellaneous">
       <UniqueIdentifier>{cb9abead-d725-4fa1-af8f-f916f2d37d4c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Camera">
-      <UniqueIdentifier>{9074a0b9-27be-4ac8-853e-3d01ee7a4fb3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -55,22 +52,22 @@
       <Filter>Enums</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\configuration.hpp">
-      <Filter>Other</Filter>
+      <Filter>Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\input_handler.hpp">
-      <Filter>Other</Filter>
+      <Filter>Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\logger.hpp">
-      <Filter>Other</Filter>
+      <Filter>Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\timer.hpp">
-      <Filter>Other</Filter>
+      <Filter>Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\tools.hpp">
-      <Filter>Other</Filter>
+      <Filter>Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\library_loader.hpp">
-      <Filter>Other</Filter>
+      <Filter>Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\network_protocol.hpp">
       <Filter>Enums</Filter>
@@ -84,9 +81,6 @@
     <ClInclude Include="..\..\..\src\reflection_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\camera.hpp">
-      <Filter>Camera</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\pointlight_shape.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
@@ -96,25 +90,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\configuration.cpp">
-      <Filter>Other</Filter>
+      <Filter>Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\timer.cpp">
-      <Filter>Other</Filter>
+      <Filter>Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\input_handler.cpp">
-      <Filter>Other</Filter>
+      <Filter>Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\tools.cpp">
-      <Filter>Other</Filter>
+      <Filter>Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\library_loader.cpp">
-      <Filter>Other</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\camera_main.cpp">
-      <Filter>Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\camera_misc.cpp">
-      <Filter>Camera</Filter>
+      <Filter>Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -24,7 +24,6 @@
     <ClInclude Include="..\..\..\src\bloom_type.hpp" />
     <ClInclude Include="..\..\..\src\blur_direction.hpp" />
     <ClInclude Include="..\..\..\src\buffer_type.hpp" />
-    <ClInclude Include="..\..\..\src\camera.hpp" />
     <ClInclude Include="..\..\..\src\configuration.hpp" />
     <ClInclude Include="..\..\..\src\direction.hpp" />
     <ClInclude Include="..\..\..\src\direction_order.hpp" />
@@ -48,8 +47,6 @@
     <ClInclude Include="..\..\..\src\water_quality.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\camera_main.cpp" />
-    <ClCompile Include="..\..\..\src\camera_misc.cpp" />
     <ClCompile Include="..\..\..\src\configuration.cpp" />
     <ClCompile Include="..\..\..\src\input_handler.cpp" />
     <ClCompile Include="..\..\..\src\library_loader.cpp" />

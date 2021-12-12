@@ -22,12 +22,15 @@
     <Filter Include="Interface\Graphics">
       <UniqueIdentifier>{802e51d2-5836-4045-9b34-2426f305fae8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Interface\Physics">
+      <UniqueIdentifier>{f5362434-3d67-4be1-9287-05a20e5219da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\core_engine_main.cpp">
+    <ClCompile Include="..\..\..\src\core_engine_lifecycle.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\core_engine_update.cpp">
+    <ClCompile Include="..\..\..\src\core_engine_misc.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d.cpp">
@@ -40,12 +43,6 @@
       <Filter>Interface\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_audio_getters.cpp">
-      <Filter>Interface\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_camera_setters.cpp">
-      <Filter>Interface\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_collision_setters.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_input.cpp">
@@ -62,9 +59,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_client_getters.cpp">
       <Filter>Interface\Networking</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_raycast_getters.cpp">
-      <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_sky_setters.cpp">
       <Filter>Interface\Entities</Filter>
@@ -114,15 +108,6 @@
     <ClCompile Include="..\..\..\src\fe3d_server_setters.cpp">
       <Filter>Interface\Networking</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_camera_getters.cpp">
-      <Filter>Interface\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_collision_getters.cpp">
-      <Filter>Interface\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_raycast_setters.cpp">
-      <Filter>Interface\Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_audio_setters.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
@@ -149,6 +134,24 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_water_setters.cpp">
       <Filter>Interface\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\fe3d_raycast_setters.cpp">
+      <Filter>Interface\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\fe3d_raycast_getters.cpp">
+      <Filter>Interface\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\fe3d_collision_setters.cpp">
+      <Filter>Interface\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\fe3d_collision_getters.cpp">
+      <Filter>Interface\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\fe3d_camera_setters.cpp">
+      <Filter>Interface\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\fe3d_camera_getters.cpp">
+      <Filter>Interface\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

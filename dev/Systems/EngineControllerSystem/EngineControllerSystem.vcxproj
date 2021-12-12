@@ -175,13 +175,14 @@
     <ClCompile Include="..\..\..\src\bottom_viewport_controller_console.cpp" />
     <ClCompile Include="..\..\..\src\bottom_viewport_controller_statistics.cpp" />
     <ClCompile Include="..\..\..\src\engine_controller.cpp" />
-    <ClCompile Include="..\..\..\src\bottom_viewport_controller_main.cpp" />
+    <ClCompile Include="..\..\..\src\bottom_viewport_controller_lifecycle.cpp" />
     <ClCompile Include="..\..\..\src\left_viewport_controller.cpp" />
     <ClCompile Include="..\..\..\src\main.cpp" />
     <ClCompile Include="..\..\..\src\right_viewport_controller.cpp" />
-    <ClCompile Include="..\..\..\src\top_viewport_controller_main.cpp" />
+    <ClCompile Include="..\..\..\src\top_viewport_controller_lifecycle.cpp" />
     <ClCompile Include="..\..\..\src\top_viewport_controller_misc.cpp" />
     <ClCompile Include="..\..\..\src\base_viewport_controller.cpp" />
+    <ClCompile Include="..\..\..\src\top_viewport_controller_screen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Icon\AppIcon.rc" />

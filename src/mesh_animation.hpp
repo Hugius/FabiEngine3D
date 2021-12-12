@@ -24,8 +24,8 @@ public:
 	void setInitialSize(fvec3 value);
 	void setSpeedMultiplier(float value);
 	void setTimesToPlay(int value);
-	void setFadeFramestep(int value);
-	void setFadeFrameIndex(int value);
+	void setFadeFramestep(unsigned int value);
+	void setFadeFrameIndex(unsigned int value);
 	void setFrameIndex(unsigned int value);
 	void setPaused(bool value);
 	void setAutoPaused(bool value);

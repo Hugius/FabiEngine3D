@@ -1,6 +1,67 @@
 #include "script_interpreter.hpp"
 #include "logger.hpp"
 
+void ScriptInterpreter::executeInitializeScripts()
+{
+	if(_initEntryID != "")
+	{
+		_isExecutingInitialization = true;
+
+		_executeScript(_initEntryID, ScriptType::INITIALIZE);
+
+		_isExecutingInitialization = false;
+	}
+}
+
+void ScriptInterpreter::executeUpdateScripts(bool isDebugging)
+{
+	if(_updateEntryID != "")
+	{
+		_isExecutingUpdate = true;
+
+		// Start debugging if specified
+		_isDebugging = isDebugging;
+		_debuggingTimes.clear();
+
+		// Execute update scripting
+		_executeScript(_updateEntryID, ScriptType::UPDATE);
+
+		// Log debugging results
+		if(_isDebugging)
+		{
+			// Calculate total debugging time
+			float totalTime = 0.0f;
+			for(const auto& [scriptID, time] : _debuggingTimes)
+			{
+				totalTime += time;
+			}
+
+			// Print times
+			Logger::throwDebug("Debugging results:");
+			for(const auto& [scriptID, time] : _debuggingTimes)
+			{
+				float percentage = (time / totalTime) * 100.0f;
+				Logger::throwDebug("Script \"" + scriptID + "\" ---> " + to_string(percentage) + "%");
+			}
+			Logger::throwDebug("");
+		}
+
+		_isExecutingUpdate = false;
+	}
+}
+
+void ScriptInterpreter::executeTerminateScripts()
+{
+	if(_terminateEntryID != "")
+	{
+		_isExecutingTerminate = true;
+
+		_executeScript(_terminateEntryID, ScriptType::TERMINATE);
+
+		_isExecutingTerminate = false;
+	}
+}
+
 void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType scriptType)
 {
 	// Start debug timing

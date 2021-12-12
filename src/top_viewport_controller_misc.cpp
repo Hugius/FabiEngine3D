@@ -432,3 +432,28 @@ const bool TopViewportController::isProjectCorrupted(const string& projectDirect
 
 	return false;
 }
+
+void TopViewportController::_saveCurrentProject()
+{
+	// Validate project ID
+	if(_currentProjectID.empty())
+	{
+		Logger::throwError("TopViewportController::_saveCurrentProject");
+	}
+
+	// Save everything
+	_settingsEditor.saveSettingsToFile();
+	_skyEditor.saveSkyEntitiesToFile();
+	_terrainEditor.saveTerrainEntitiesToFile();
+	_waterEditor.saveWaterEntitiesToFile();
+	_modelEditor.saveModelEntitiesToFile();
+	_billboardEditor.saveBillboardEntitiesToFile();
+	_meshAnimationEditor.saveAnimationsToFile();
+	_spriteAnimationEditor.saveAnimationsToFile();
+	_audioEditor.saveAudioEntitiesToFile();
+	_worldEditor.saveEditorWorldToFile();
+	_scriptEditor.saveScriptFiles();
+
+	// Logging
+	Logger::throwInfo("Project \"" + _currentProjectID + "\" saved!");
+}

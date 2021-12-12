@@ -24,10 +24,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\base_entity_manager_misc.cpp">
+    <ClCompile Include="..\..\..\src\base_entity_manager_getters.cpp">
       <Filter>Managers\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\base_entity_manager_main.cpp">
+    <ClCompile Include="..\..\..\src\base_entity_manager_setters.cpp">
       <Filter>Managers\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\entity_bus.cpp">

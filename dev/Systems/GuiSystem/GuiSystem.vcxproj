@@ -20,11 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\engine_gui_button.cpp" />
-    <ClCompile Include="..\..\..\src\engine_gui_global_screen_main.cpp" />
+    <ClCompile Include="..\..\..\src\engine_gui_global_screen_element.cpp" />
+    <ClCompile Include="..\..\..\src\engine_gui_global_screen_form.cpp" />
     <ClCompile Include="..\..\..\src\engine_gui_global_screen_misc.cpp" />
     <ClCompile Include="..\..\..\src\engine_gui_manager.cpp" />
     <ClCompile Include="..\..\..\src\engine_gui_rectangle.cpp" />
-    <ClCompile Include="..\..\..\src\engine_gui_screen_main.cpp" />
+    <ClCompile Include="..\..\..\src\engine_gui_screen_element.cpp" />
     <ClCompile Include="..\..\..\src\engine_gui_screen_misc.cpp" />
     <ClCompile Include="..\..\..\src\engine_gui_scrolling_list.cpp" />
     <ClCompile Include="..\..\..\src\engine_gui_text_field.cpp" />

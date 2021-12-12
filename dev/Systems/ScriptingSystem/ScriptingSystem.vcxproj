@@ -78,9 +78,9 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_water_getters.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_math.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_misc.cpp" />
-    <ClCompile Include="..\..\..\src\script_interpreter_list_main.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_list_extraction.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_list_misc.cpp" />
-    <ClCompile Include="..\..\..\src\script_interpreter_main.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_lifecycle.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_misc.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_string_operations.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_variable_arithmetic.cpp" />

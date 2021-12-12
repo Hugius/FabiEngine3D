@@ -5,7 +5,6 @@
 - The billboard entity is a 2D quad in 3D space.
 - Instead of a solid quad, the texture of the billboard entity can be transparent text (based on a font).
 - Billboard entities are not affected by shadows or lighting.
-- Sprite animations can be applied to the diffuse/emission map.
 - Each billboard is the parent of 1 AABB.
 
 ## 2. Assets
@@ -61,24 +60,6 @@
 - **Max Height**: the maximum world height to which fragments are visible
   - Type: `decimal`
   - Constraints: none
-- **Animation Loops**: the amount of times the sprite animation repeats
-  - Type: `integer`
-  - Constraints: at least `0.0`
-- **Animation Rows**: the amount of rows in the sprite animation texture
-  - Type: `integer`
-  - Constraints: at least `1.0`
-- **Animation Columns**: the amount of columns in the sprite animation texture
-  - Type: `integer`
-  - Constraints: at least `1.0`
-- **Animation Row Index**: the current row of the sprite animation texture
-  - Type: `integer`
-  - Constraints: at least `0.0`
-- **Animation Column Index**: the current column of the sprite animation texture
-  - Type: `integer`
-  - Constraints: at least `0.0`
-- **Animation Framestep**: the amount of engine updates between the sprite animation frame cycles
-  - Type: `integer`
-  - Constraints: at least `0.0`
 - **Shadowed**: the mesh is captured for shadows
   - Type: `boolean`
   - Constraints: none
@@ -101,11 +82,5 @@
   - Type: `boolean`
   - Constraints: none
 - **Textual**: the diffuse map is textual
-  - Type: `boolean`
-  - Constraints: none
-- **Animation Started**: the sprite animation is started (can be paused)
-  - Type: `boolean`
-  - Constraints: none
-- **Animation Paused**: the sprite animation is paused
   - Type: `boolean`
   - Constraints: none

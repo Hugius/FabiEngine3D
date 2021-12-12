@@ -283,8 +283,8 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 			// Data placeholders
 			string animationID, modelID;
 			float speedMultiplier;
-			int remainingLoops, fadeFramestep;
-			unsigned int frameIndex;
+			int remainingLoops;
+			unsigned int frameIndex, fadeFramestep;
 			bool isPaused;
 
 			// Read main data from file

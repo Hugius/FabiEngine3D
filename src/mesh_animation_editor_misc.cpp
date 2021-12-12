@@ -82,29 +82,29 @@ const vector<string> MeshAnimationEditor::getAllAnimationIDs() const
 
 const vector<string> MeshAnimationEditor::getStartedAnimationIDs() const
 {
-	set<string> names;
+	set<string> IDs;
 
 	for(const auto& [idPair, animation] : _startedAnimations)
 	{
-		names.insert(idPair.first);
+		IDs.insert(idPair.first);
 	}
 
-	return vector<string>(names.begin(), names.end());
+	return vector<string>(IDs.begin(), IDs.end());
 }
 
 const vector<string> MeshAnimationEditor::getStartedAnimationIDs(const string& modelID) const
 {
-	set<string> names;
+	set<string> IDs;
 
 	for(const auto& [idPair, animation] : _startedAnimations)
 	{
 		if(modelID == idPair.second)
 		{
-			names.insert(idPair.first);
+			IDs.insert(idPair.first);
 		}
 	}
 
-	return vector<string>(names.begin(), names.end());
+	return vector<string>(IDs.begin(), IDs.end());
 }
 
 MeshAnimation* MeshAnimationEditor::getAnimationData(const string& animationID, const string& modelID, string baseErrorMessage)

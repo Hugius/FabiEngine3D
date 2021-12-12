@@ -15,7 +15,7 @@ const bool ScriptEditor::saveScriptFiles()
 		return false;
 	}
 
-	// Error checking
+	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("ScriptEditor::saveScriptsToFile");

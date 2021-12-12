@@ -10,7 +10,7 @@ using std::istringstream;
 
 const bool MeshAnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 {
-	// Error checking
+	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("MeshAnimationEditor::loadAnimationsFromFile");

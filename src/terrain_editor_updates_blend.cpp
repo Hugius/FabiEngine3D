@@ -21,6 +21,12 @@ void TerrainEditor::_updateBlendMapMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blendMap")->isHovered())
 		{
+			// Validate project ID
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("TerrainEditor::_updateBlendMapMenu");
+			}
+
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\blend_maps\\");
@@ -54,6 +60,12 @@ void TerrainEditor::_updateBlendMapMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("redMap")->isHovered())
 		{
+			// Validate project ID
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("TerrainEditor::_updateBlendMapMenu");
+			}
+
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\diffuse_maps\\");
@@ -87,6 +99,12 @@ void TerrainEditor::_updateBlendMapMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenMap")->isHovered())
 		{
+			// Validate project ID
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("TerrainEditor::_updateBlendMapMenu");
+			}
+
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\diffuse_maps\\");
@@ -120,6 +138,12 @@ void TerrainEditor::_updateBlendMapMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueMap")->isHovered())
 		{
+			// Validate project ID
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("TerrainEditor::_updateBlendMapMenu");
+			}
+
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\diffuse_maps\\");

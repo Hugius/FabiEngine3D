@@ -102,7 +102,7 @@ const bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, c
 
 const bool ScriptInterpreter::_validateSavesDirectory() const
 {
-	// Error checking
+	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("ScriptInterpreter::_validateSavesDirectory");

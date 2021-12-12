@@ -11,7 +11,7 @@ using std::ofstream;
 
 const bool WorldEditor::saveCustomWorldToFile()
 {
-	// Error checking
+	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("WorldEditor::saveCustomWorldToFile::1");

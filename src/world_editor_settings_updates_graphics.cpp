@@ -389,8 +389,6 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 	if(screen->getID() == "worldEditorMenuSettingsGraphicsLensFlare")
 	{
 		// Temporary values
-		const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-		const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\flare_maps\\");
 		auto isEnabled = _fe3d.gfx_isLensFlareEnabled();
 		auto flareMapPath = _fe3d.gfx_getLensFlareMapPath();
 		auto intensity = _fe3d.gfx_getLensFlareIntensity();
@@ -416,6 +414,16 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("flareMap")->isHovered())
 		{
+			// Validate project ID
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("WorldEditor::_updateLensFlareGraphicsSettingsMenu");
+			}
+
+			// Get the chosen file name
+			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\flare_maps\\");
+
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{
@@ -423,7 +431,7 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 				return;
 			}
 
-			// Validate chosen file
+			// Get the chosen file name
 			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
 			if(filePath.empty())
 			{

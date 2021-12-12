@@ -15,7 +15,7 @@ const bool MeshAnimationEditor::saveAnimationsToFile() const
 		return false;
 	}
 
-	// Error checking
+	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("MeshAnimationEditor::saveAnimationsToFile");

@@ -11,7 +11,7 @@ using std::istringstream;
 
 const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile() const
 {
-	// Error checking
+	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("SkyEditor::getAllTexturePathsFromFile");
@@ -83,7 +83,7 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile() const
 
 const bool SkyEditor::loadSkyEntitiesFromFile()
 {
-	// Error checking
+	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("SkyEditor::loadSkyEntitiesFromFile");

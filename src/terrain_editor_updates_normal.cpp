@@ -18,6 +18,12 @@ void TerrainEditor::_updateNormalMapMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
 		{
+			// Validate project ID
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("TerrainEditor::_updateNormalMapMenu");
+			}
+
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\normal_maps\\");
@@ -51,6 +57,12 @@ void TerrainEditor::_updateNormalMapMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("redMap")->isHovered())
 		{
+			// Validate project ID
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("TerrainEditor::_updateNormalMapMenu");
+			}
+
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\normal_maps\\");
@@ -84,6 +96,12 @@ void TerrainEditor::_updateNormalMapMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenMap")->isHovered())
 		{
+			// Validate project ID
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("TerrainEditor::_updateNormalMapMenu");
+			}
+
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\normal_maps\\");
@@ -117,6 +135,12 @@ void TerrainEditor::_updateNormalMapMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueMap")->isHovered())
 		{
+			// Validate project ID
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("TerrainEditor::_updateNormalMapMenu");
+			}
+
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\normal_maps\\");

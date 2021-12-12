@@ -276,7 +276,7 @@ const bool WorldEditor::isLoaded() const
 
 const bool WorldEditor::isWorldExisting(const string& fileName) const
 {
-	// Error checking
+	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("WorldEditor::isWorldExisting");

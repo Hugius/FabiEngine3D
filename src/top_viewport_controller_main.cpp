@@ -269,6 +269,12 @@ void TopViewportController::_updateMiscScreenManagement()
 	// Button management
 	if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("uncache")->isHovered())
 	{
+		// Validate project ID
+		if(_currentProjectID.empty())
+		{
+			Logger::throwError("TopViewportController::_updateMiscScreenManagement");
+		}
+
 		// Get the chosen file name
 		const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 		const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\");
@@ -357,7 +363,7 @@ void TopViewportController::_updateMiscScreenManagement()
 
 void TopViewportController::_saveCurrentProject()
 {
-	// Error checking
+	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("TopViewportController::_saveCurrentProject");

@@ -11,7 +11,7 @@ using std::istringstream;
 
 const vector<string> BillboardEditor::getAllTexturePathsFromFile() const
 {
-	// Error checking
+	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("BillboardEditor::getAllTexturePathsFromFile");
@@ -103,7 +103,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile() const
 
 const vector<string> BillboardEditor::getAllFontPathsFromFile() const
 {
-	// Error checking
+	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("BillboardEditor::getAllFontPathsFromFile");
@@ -182,7 +182,7 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile() const
 
 const bool BillboardEditor::loadBillboardEntitiesFromFile()
 {
-	// Error checking
+	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("BillboardEditor::loadBillboardEntitiesFromFile");

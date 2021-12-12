@@ -149,7 +149,7 @@ void SettingsEditor::loadDefaultSettings()
 
 const bool SettingsEditor::loadSettingsFromFile() const
 {
-	// Error checking
+	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("SettingsEditor::loadSettingsFromFile");
@@ -203,7 +203,7 @@ const bool SettingsEditor::loadSettingsFromFile() const
 
 const bool SettingsEditor::saveSettingsToFile() const
 {
-	// Error checking
+	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("SettingsEditor::saveSettingsToFile");

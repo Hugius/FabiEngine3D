@@ -25,6 +25,12 @@ void ModelEditor::_updateTexturingMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
+			// Validate project ID
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("ModelEditor::_updateTexturingMenu");
+			}
+
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\diffuse_maps\\");
@@ -58,6 +64,12 @@ void ModelEditor::_updateTexturingMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
 		{
+			// Validate project ID
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("ModelEditor::_updateTexturingMenu");
+			}
+
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\emission_maps\\");
@@ -91,6 +103,12 @@ void ModelEditor::_updateTexturingMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularMap")->isHovered())
 		{
+			// Validate project ID
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("ModelEditor::_updateTexturingMenu");
+			}
+
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\specular_maps\\");
@@ -124,6 +142,12 @@ void ModelEditor::_updateTexturingMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectionMap")->isHovered())
 		{
+			// Validate project ID
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("ModelEditor::_updateTexturingMenu");
+			}
+
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\reflection_maps\\");
@@ -157,6 +181,12 @@ void ModelEditor::_updateTexturingMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
 		{
+			// Validate project ID
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("ModelEditor::_updateTexturingMenu");
+			}
+
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\normal_maps\\");

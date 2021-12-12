@@ -1,6 +1,7 @@
 #include "script_interpreter.hpp"
 #include "configuration.hpp"
 #include "tools.hpp"
+#include "logger.hpp"
 
 using SVT = ScriptValueType;
 
@@ -203,6 +204,12 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
+			// Validate project ID
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("ScriptInterpreter::_executeFe3dGraphicsSetter");
+			}
+
 			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();

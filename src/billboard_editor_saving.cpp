@@ -15,7 +15,7 @@ const bool BillboardEditor::saveBillboardEntitiesToFile() const
 		return false;
 	}
 
-	// Error checking
+	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("BillboardEditor::saveBillboardEntitiesToFile");

@@ -26,6 +26,12 @@ void SpriteAnimationEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("preview")->isHovered())
 		{
+			// Validate project ID
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("SpriteAnimationEditor::_updateChoiceMenu");
+			}
+
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\diffuse_maps\\");

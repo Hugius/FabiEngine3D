@@ -13,7 +13,7 @@ using std::istringstream;
 
 const vector<string> ModelEditor::getAllMeshPathsFromFile() const
 {
-	// Error checking
+	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("ModelEditor::getAllMeshPathsFromFile");
@@ -81,7 +81,7 @@ const vector<string> ModelEditor::getAllMeshPathsFromFile() const
 
 const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 {
-	// Error checking
+	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("ModelEditor::getAllTexturePathsFromFile");
@@ -265,7 +265,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 
 const bool ModelEditor::loadModelEntitiesFromFile()
 {
-	// Error checking
+	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("ModelEditor::loadModelEntitiesFromFile::1");

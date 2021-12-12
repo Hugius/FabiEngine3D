@@ -18,6 +18,12 @@ void TerrainEditor::_updateDiffuseMapMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
+			// Validate project ID
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("TerrainEditor::_updateDiffuseMapMenu");
+			}
+
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\diffuse_maps\\");

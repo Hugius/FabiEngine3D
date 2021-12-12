@@ -226,6 +226,12 @@ void ModelEditor::_updateModelCreating()
 					// If model not existing yet
 					if(find(_loadedModelIDs.begin(), _loadedModelIDs.end(), newModelID) == _loadedModelIDs.end())
 					{
+						// Validate project ID
+						if(_currentProjectID.empty())
+						{
+							Logger::throwError("ModelEditor::_updateModelCreating");
+						}
+
 						// Get the chosen file name
 						const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 						const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\meshes\\");

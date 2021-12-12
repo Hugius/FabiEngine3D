@@ -17,7 +17,7 @@ const bool ModelEditor::saveModelEntitiesToFile() const
 		return false;
 	}
 
-	// Error checking
+	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("ModelEditor::saveModelEntitiesToFile");

@@ -16,7 +16,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 		return false;
 	}
 
-	// Error checking
+	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("WorldEditor::saveEditorWorldToFile");

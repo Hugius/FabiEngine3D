@@ -15,7 +15,7 @@ const bool SkyEditor::saveSkyEntitiesToFile() const
 		return false;
 	}
 
-	// Error checking
+	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("SkyEditor::saveSkyEntitiesToFile");

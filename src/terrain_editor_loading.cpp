@@ -11,7 +11,7 @@ using std::istringstream;
 
 const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 {
-	// Error checking
+	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("TerrainEditor::getAllTerrainTexturePathsFromFile");
@@ -215,7 +215,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile() const
 
 const vector<string> TerrainEditor::getAllTerrainBitmapPathsFromFile() const
 {
-	// Error checking
+	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("TerrainEditor::getAllTerrainTexturePathsFromFile");
@@ -281,7 +281,7 @@ const vector<string> TerrainEditor::getAllTerrainBitmapPathsFromFile() const
 
 const bool TerrainEditor::loadTerrainEntitiesFromFile()
 {
-	// Error checking
+	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("TerrainEditor::loadTerrainEntitiesFromFile");

@@ -15,7 +15,7 @@ const bool AudioEditor::saveAudioEntitiesToFile() const
 		return false;
 	}
 
-	// Error checking
+	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("AudioEditor::saveAudioEntitiesToFile");

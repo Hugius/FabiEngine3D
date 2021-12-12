@@ -186,6 +186,12 @@ void TerrainEditor::_updateTerrainCreating()
 					// If terrain not existing yet
 					if(find(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), newTerrainID) == _loadedTerrainIDs.end())
 					{
+						// Validate project ID
+						if(_currentProjectID.empty())
+						{
+							Logger::throwError("TerrainEditor::_updateTerrainCreating");
+						}
+
 						// Get the chosen file name
 						const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 						const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\height_maps\\");

@@ -11,7 +11,7 @@ using std::istringstream;
 
 const vector<string> WaterEditor::getAllWaterTexturePathsFromFile() const
 {
-	// Error checking
+	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("WaterEditor::getAllWaterTexturePathsFromFile");
@@ -109,7 +109,7 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile() const
 
 const bool WaterEditor::loadWaterEntitiesFromFile()
 {
-	// Error checking
+	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("WaterEditor::loadWaterEntitiesFromFile");

@@ -108,6 +108,12 @@ void AudioEditor::_updateAudioCreating()
 					// Check if audio not already exists
 					if(find(_loadedAudioIDs.begin(), _loadedAudioIDs.end(), newAudioID) == _loadedAudioIDs.end())
 					{
+						// Validate project ID
+						if(_currentProjectID.empty())
+						{
+							Logger::throwError("AudioEditor::_updateAudioCreating");
+						}
+
 						// Get the chosen file name
 						const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 						const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\audio\\");

@@ -1,6 +1,7 @@
 #include "script_interpreter.hpp"
 #include "configuration.hpp"
 #include "tools.hpp"
+#include "logger.hpp"
 
 using SVT = ScriptValueType;
 
@@ -33,6 +34,12 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 
 			// Create image
 			_fe3d.image_create(ID, true);
+
+			// Validate project ID
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("ScriptInterpreter::_executeFe3dImageSetter");
+			}
 
 			// Set diffuse map
 			const auto isExported = Config::getInst().isApplicationExported();

@@ -10,7 +10,7 @@ using std::istringstream;
 
 const vector<string> AudioEditor::getAllAudioPathsFromFile() const
 {
-	// Error checking
+	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("AudioEditor::getAllAudioPathsFromFile");
@@ -69,7 +69,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile() const
 
 const bool AudioEditor::loadAudioEntitiesFromFile()
 {
-	// Error checking
+	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("AudioEditor::loadAudioEntitiesFromFile");

@@ -12,7 +12,7 @@ using std::istringstream;
 
 const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 {
-	// Error checking
+	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("WorldEditor::loadEditorWorldFromFile::1");

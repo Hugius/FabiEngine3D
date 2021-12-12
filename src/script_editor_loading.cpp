@@ -12,7 +12,7 @@ using std::istringstream;
 
 const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 {
-	// Error checking
+	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("ScriptEditor::loadScriptsFromFile");

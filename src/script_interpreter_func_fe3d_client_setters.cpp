@@ -8,7 +8,6 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.client_start(arguments[0].getString());
@@ -19,7 +18,6 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.client_connect(arguments[0].getString());
@@ -28,7 +26,6 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 	}
 	else if(functionName == "fe3d:client_disconnect")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.client_disconnect();
@@ -37,7 +34,6 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 	}
 	else if(functionName == "fe3d:client_stop")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.client_stop();
@@ -48,7 +44,6 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.client_sendMessageTCP(arguments[0].getString());
@@ -59,7 +54,6 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.client_sendMessageUDP(arguments[0].getString());

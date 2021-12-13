@@ -8,7 +8,6 @@ const bool ScriptInterpreter::_executeFe3dWorldGetter(const string& functionName
 {
 	if(functionName == "fe3d:world_get_current_id")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _worldEditor.getLoadedWorldID();
@@ -19,7 +18,6 @@ const bool ScriptInterpreter::_executeFe3dWorldGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Compose file path

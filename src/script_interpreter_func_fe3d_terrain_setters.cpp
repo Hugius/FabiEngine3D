@@ -8,10 +8,8 @@ const bool ScriptInterpreter::_executeFe3dTerrainSetter(const string& functionNa
 	{
 		auto types = {SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate terrain existence
 			if(_validateFe3dTerrain())
 			{
 				_fe3d.terrain_setLightness(_fe3d.terrain_getSelectedID(), arguments[0].getDecimal());

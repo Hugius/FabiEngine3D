@@ -8,7 +8,6 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
@@ -41,7 +40,6 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
@@ -67,10 +65,8 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -92,10 +88,8 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -115,10 +109,8 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -138,10 +130,8 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -161,10 +151,8 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -184,10 +172,8 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -207,10 +193,8 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -228,7 +212,6 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 	}
 	else if(functionName == "fe3d:aabb_get_all_ids")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.aabb_getAllIDs();
@@ -252,10 +235,8 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -275,10 +256,8 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -298,10 +277,8 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -321,10 +298,8 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity

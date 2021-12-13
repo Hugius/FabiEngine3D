@@ -42,7 +42,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Temporary values
@@ -94,7 +93,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Temporary values
@@ -124,7 +122,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 2))
 		{
 			// List name must be string
@@ -199,7 +196,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 2))
 		{
 			// List name must be string
@@ -274,7 +270,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Temporary values
@@ -351,7 +346,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Temporary values
@@ -428,7 +422,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Temporary values
@@ -461,7 +454,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, arguments[0].getString() + arguments[1].getString()));
@@ -471,7 +463,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			auto result = arguments[0].getString().size();
@@ -482,7 +473,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			auto result = (arguments[0].getString().find(arguments[1].getString()) != string::npos);
@@ -493,7 +483,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 	{
 		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate index
@@ -513,7 +502,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate splitter
@@ -550,7 +538,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Compose string in reverse
@@ -570,7 +557,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 	{
 		auto types = {SVT::INTEGER, SVT::INTEGER};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			auto result = Math::getRandomNumber(arguments[0].getInteger(), arguments[1].getInteger());
@@ -581,7 +567,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 	{
 		auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			auto result = Math::getRandomNumber(arguments[0].getDecimal(), arguments[1].getDecimal());

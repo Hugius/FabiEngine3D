@@ -8,7 +8,6 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			if(_validateKeyInputString(arguments[0].getString()))
@@ -22,7 +21,6 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			if(_validateKeyInputString(arguments[0].getString()))
@@ -36,7 +34,6 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			if(_validateMouseInputString(arguments[0].getString()))
@@ -50,7 +47,6 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			if(_validateMouseInputString(arguments[0].getString()))
@@ -62,7 +58,6 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:input_get_mousewheel_direction")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.input_getMouseWheelY();

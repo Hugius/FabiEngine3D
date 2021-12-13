@@ -6,7 +6,6 @@ const bool ScriptInterpreter::_executeFe3dMusicGetter(const string& functionName
 {
 	if(functionName == "fe3d:music_get_volume")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.music_getVolume();
@@ -15,7 +14,6 @@ const bool ScriptInterpreter::_executeFe3dMusicGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:music_is_started")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.music_isStarted();
@@ -24,7 +22,6 @@ const bool ScriptInterpreter::_executeFe3dMusicGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:music_is_playing")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.music_isPlaying();
@@ -33,7 +30,6 @@ const bool ScriptInterpreter::_executeFe3dMusicGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:music_is_paused")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.music_isPaused();

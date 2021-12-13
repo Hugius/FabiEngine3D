@@ -8,7 +8,6 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	{
 		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.camera_move(fvec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
@@ -19,7 +18,6 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	{
 		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.camera_setPosition(fvec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
@@ -30,7 +28,6 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	{
 		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.camera_setThirdPersonLookat(fvec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
@@ -41,7 +38,6 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	{
 		auto types = {SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.camera_moveFollowX(arguments[0].getDecimal());
@@ -52,7 +48,6 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	{
 		auto types = {SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.camera_moveFollowZ(arguments[0].getDecimal());
@@ -63,7 +58,6 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	{
 		auto types = {SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.camera_moveFollowZY(arguments[0].getDecimal());
@@ -74,7 +68,6 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	{
 		auto types = {SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.camera_setYaw(arguments[0].getDecimal());
@@ -85,7 +78,6 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	{
 		auto types = {SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.camera_setPitch(arguments[0].getDecimal());
@@ -96,7 +88,6 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	{
 		auto types = {SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.camera_setFOV(arguments[0].getDecimal());
@@ -107,7 +98,6 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	{
 		auto types = {SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.camera_setCursorSensitivity(arguments[0].getDecimal());
@@ -118,7 +108,6 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	{
 		auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.camera_enableFirstPersonView(arguments[0].getDecimal(), arguments[1].getDecimal());
@@ -127,7 +116,6 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	}
 	else if(functionName == "fe3d:camera_disable_first_person_view")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.camera_disableFirstPersonView();
@@ -138,7 +126,6 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	{
 		auto types = {SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.camera_setMinFirstPersonPitch(arguments[0].getDecimal());
@@ -149,7 +136,6 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	{
 		auto types = {SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.camera_setMaxFirstPersonPitch(arguments[0].getDecimal());
@@ -160,7 +146,6 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	{
 		auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.camera_enableThirdPersonView(arguments[0].getDecimal(), arguments[1].getDecimal());
@@ -169,7 +154,6 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	}
 	else if(functionName == "fe3d:camera_disable_third_person_view")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.camera_disableThirdPersonView();
@@ -180,7 +164,6 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	{
 		auto types = {SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.camera_setMinThirdPersonPitch(arguments[0].getDecimal());
@@ -191,7 +174,6 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	{
 		auto types = {SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.camera_setMaxThirdPersonPitch(arguments[0].getDecimal());
@@ -202,7 +184,6 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	{
 		auto types = {SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.camera_setThirdPersonDistance(arguments[0].getDecimal());
@@ -213,7 +194,6 @@ const bool ScriptInterpreter::_executeFe3dCameraSetter(const string& functionNam
 	{
 		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.camera_setThirdPersonLookat(fvec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));

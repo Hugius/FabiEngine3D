@@ -8,7 +8,6 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Temporary values
@@ -46,10 +45,8 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
 				_fe3d.spotlight_delete(arguments[0].getString());
@@ -61,10 +58,8 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
 				_fe3d.spotlight_setVisible(arguments[0].getString(), arguments[1].getBoolean());
@@ -76,14 +71,12 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
 				_fe3d.spotlight_setPosition(arguments[0].getString(),
-												  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+											fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -92,14 +85,12 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
 				_fe3d.spotlight_move(arguments[0].getString(),
-										   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+									 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -108,14 +99,12 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
 				_fe3d.spotlight_moveTo(arguments[0].getString(),
-											 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
+									   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -124,14 +113,12 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
 				_fe3d.spotlight_setColor(arguments[0].getString(),
-											   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+										 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -140,10 +127,8 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
 				_fe3d.spotlight_setYaw(arguments[0].getString(), arguments[1].getDecimal());
@@ -155,10 +140,8 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
 				_fe3d.spotlight_setPitch(arguments[0].getString(), arguments[1].getDecimal());
@@ -170,10 +153,8 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
 				_fe3d.spotlight_setIntensity(arguments[0].getString(), arguments[1].getDecimal());
@@ -185,10 +166,8 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
 				_fe3d.spotlight_setAngle(arguments[0].getString(), arguments[1].getDecimal());
@@ -200,10 +179,8 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSpotlight(arguments[0].getString()))
 			{
 				_fe3d.spotlight_setDistance(arguments[0].getString(), arguments[1].getDecimal());

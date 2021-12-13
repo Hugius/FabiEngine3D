@@ -18,7 +18,6 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose directory path
@@ -45,7 +44,6 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose directory path
@@ -70,7 +68,6 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 2) && _validateSavesDirectory())
 		{
 			// Compose file path
@@ -98,7 +95,6 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path
@@ -123,7 +119,6 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 2) && _validateSavesDirectory())
 		{
 			// Compose file path
@@ -172,7 +167,6 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path
@@ -199,7 +193,6 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path

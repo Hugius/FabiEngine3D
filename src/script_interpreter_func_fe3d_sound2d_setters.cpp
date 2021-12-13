@@ -8,7 +8,6 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter2D(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
@@ -39,10 +38,8 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter2D(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound2D(arguments[0].getString(), false))
 			{
 				_fe3d.sound2D_delete(arguments[0].getString());
@@ -52,7 +49,6 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter2D(const string& functionNa
 	}
 	else if(functionName == "fe3d:sound2d_delete_all")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Iterate through sounds
@@ -73,10 +69,8 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter2D(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound2D(arguments[0].getString(), false))
 			{
 				_fe3d.sound2D_play(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger(), arguments[3].getBoolean());
@@ -88,10 +82,8 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter2D(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound2D(arguments[0].getString(), false))
 			{
 				_fe3d.sound2D_pause(arguments[0].getString());
@@ -101,7 +93,6 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter2D(const string& functionNa
 	}
 	else if(functionName == "fe3d:sound2d_pause_all")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.sound2D_pauseAll();
@@ -112,10 +103,8 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter2D(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound2D(arguments[0].getString(), false))
 			{
 				_fe3d.sound2D_resume(arguments[0].getString());
@@ -125,7 +114,6 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter2D(const string& functionNa
 	}
 	else if(functionName == "fe3d:sound2d_resume_all")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.sound2D_resumeAll();
@@ -136,10 +124,8 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter2D(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::INTEGER};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound2D(arguments[0].getString(), false))
 			{
 				_fe3d.sound2D_stop(arguments[0].getString(), arguments[1].getInteger());
@@ -149,7 +135,6 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter2D(const string& functionNa
 	}
 	else if(functionName == "fe3d:sound2d_stop_all")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.sound2D_stopAll();
@@ -160,10 +145,8 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter2D(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound2D(arguments[0].getString(), false))
 			{
 				_fe3d.sound2D_setVolume(arguments[0].getString(), arguments[1].getDecimal());

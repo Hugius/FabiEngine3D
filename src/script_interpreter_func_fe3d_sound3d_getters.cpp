@@ -8,7 +8,6 @@ const bool ScriptInterpreter::_executeFe3dSoundGetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
@@ -27,7 +26,6 @@ const bool ScriptInterpreter::_executeFe3dSoundGetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
@@ -54,7 +52,6 @@ const bool ScriptInterpreter::_executeFe3dSoundGetter3D(const string& functionNa
 	}
 	else if(functionName == "fe3d:sound3d_get_all_ids")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.sound3D_getAllIDs();
@@ -74,10 +71,8 @@ const bool ScriptInterpreter::_executeFe3dSoundGetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.sound3D_isStarted(arguments[0].getString());
@@ -89,10 +84,8 @@ const bool ScriptInterpreter::_executeFe3dSoundGetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.sound3D_isPlaying(arguments[0].getString());
@@ -104,10 +97,8 @@ const bool ScriptInterpreter::_executeFe3dSoundGetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.sound3D_isPaused(arguments[0].getString());
@@ -119,10 +110,8 @@ const bool ScriptInterpreter::_executeFe3dSoundGetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.sound3D_getVolume(arguments[0].getString());
@@ -134,10 +123,8 @@ const bool ScriptInterpreter::_executeFe3dSoundGetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.sound3D_getPosition(arguments[0].getString()).x;
@@ -149,10 +136,8 @@ const bool ScriptInterpreter::_executeFe3dSoundGetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.sound3D_getPosition(arguments[0].getString()).y;
@@ -164,10 +149,8 @@ const bool ScriptInterpreter::_executeFe3dSoundGetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.sound3D_getPosition(arguments[0].getString()).z;
@@ -179,10 +162,8 @@ const bool ScriptInterpreter::_executeFe3dSoundGetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.sound3D_getMaxVolume(arguments[0].getString());
@@ -194,10 +175,8 @@ const bool ScriptInterpreter::_executeFe3dSoundGetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.sound3D_getMaxDistance(arguments[0].getString());

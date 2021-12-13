@@ -8,10 +8,8 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 	{
 		auto types = {SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate water existence
 			if(_validateFe3dWater())
 			{
 				_fe3d.water_setSpeed(_fe3d.water_getSelectedID(),
@@ -24,10 +22,8 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 	{
 		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate water existence
 			if(_validateFe3dWater())
 			{
 				_fe3d.water_setColor(_fe3d.water_getSelectedID(), fvec3(
@@ -42,10 +38,8 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 	{
 		auto types = {SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate water existence
 			if(_validateFe3dWater())
 			{
 				_fe3d.water_setTransparency(_fe3d.water_getSelectedID(), arguments[0].getDecimal());

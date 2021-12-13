@@ -11,7 +11,6 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Temporary values
@@ -69,10 +68,8 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.image_delete(arguments[0].getString());
@@ -84,10 +81,8 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.image_setVisible(arguments[0].getString(), arguments[1].getBoolean());
@@ -99,10 +94,8 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				auto position = _convertGuiPositionToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
@@ -115,10 +108,8 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				fvec2 change = _convertGuiSizeToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
@@ -131,10 +122,8 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				fvec2 target = _convertGuiSizeToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
@@ -148,10 +137,8 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.image_setRotation(arguments[0].getString(), arguments[1].getDecimal());
@@ -163,10 +150,8 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.image_rotate(arguments[0].getString(), arguments[1].getDecimal());
@@ -178,10 +163,8 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.image_rotateTo(arguments[0].getString(), arguments[1].getDecimal(), arguments[2].getDecimal());
@@ -193,10 +176,8 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				fvec2 size = _convertGuiSizeToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
@@ -209,10 +190,8 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				fvec2 change = _convertGuiSizeToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
@@ -225,10 +204,8 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				fvec2 target = _convertGuiSizeToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
@@ -242,14 +219,12 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.image_setColor(arguments[0].getString(),
-										   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+									 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -258,14 +233,12 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.image_setWireframeColor(arguments[0].getString(),
-									 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+											  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -274,10 +247,8 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.image_setTransparency(arguments[0].getString(), arguments[1].getDecimal());
@@ -289,10 +260,8 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.image_setWireframed(arguments[0].getString(), arguments[1].getBoolean());
@@ -304,10 +273,8 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.image_setMirroredHorizontally(arguments[0].getString(), arguments[1].getBoolean());
@@ -319,10 +286,8 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.image_setMirroredVertically(arguments[0].getString(), arguments[1].getBoolean());

@@ -9,7 +9,6 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Temporary values
@@ -41,10 +40,8 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
 			{
 				_fe3d.reflection_delete(arguments[0].getString());
@@ -56,10 +53,8 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
 			{
 				_fe3d.reflection_setVisible(arguments[0].getString(), arguments[1].getBoolean());
@@ -71,14 +66,12 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
 			{
 				_fe3d.reflection_setPosition(arguments[0].getString(),
-												   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+											 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -87,14 +80,12 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
 			{
 				_fe3d.reflection_move(arguments[0].getString(),
-											fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+									  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -103,14 +94,12 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
 			{
 				_fe3d.reflection_moveTo(arguments[0].getString(),
-											  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
+										fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -119,10 +108,8 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dReflection(arguments[0].getString()))
 			{
 				_fe3d.reflection_capture(arguments[0].getString());

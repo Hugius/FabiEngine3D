@@ -6,7 +6,6 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 {
 	if(functionName == "fe3d:lighting_enable_ambient")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.gfx_enableAmbientLighting();
@@ -15,7 +14,6 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 	}
 	else if(functionName == "fe3d:lighting_disable_ambient")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.gfx_disableAmbientLighting(false);
@@ -26,7 +24,6 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 	{
 		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.gfx_setAmbientLightingColor(fvec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
@@ -37,7 +34,6 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 	{
 		auto types = {SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.gfx_setAmbientLightingIntensity(arguments[0].getDecimal());
@@ -46,7 +42,6 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 	}
 	else if(functionName == "fe3d:lighting_enable_directional")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.gfx_enableDirectionalLighting();
@@ -55,7 +50,6 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 	}
 	else if(functionName == "fe3d:lighting_disable_directional")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.gfx_disableDirectionalLighting(false);
@@ -66,7 +60,6 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 	{
 		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.gfx_setDirectionalLightingColor(fvec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
@@ -77,7 +70,6 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 	{
 		auto types = {SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.gfx_setDirectionalLightingIntensity(arguments[0].getDecimal());

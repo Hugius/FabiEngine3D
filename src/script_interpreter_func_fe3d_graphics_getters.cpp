@@ -6,7 +6,6 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 {
 	if(functionName == "fe3d:graphics_get_min_fog_distance")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getFogMinDistance();
@@ -15,7 +14,6 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_get_max_fog_distance")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getFogMaxDistance();
@@ -24,7 +22,6 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_get_fog_thickness")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getFogThickness();
@@ -33,7 +30,6 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_get_fog_color_r")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getFogColor().r;
@@ -42,7 +38,6 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_get_fog_color_g")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getFogColor().g;
@@ -51,7 +46,6 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_get_fog_color_b")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getFogColor().b;
@@ -60,7 +54,6 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_is_dof_dynamic")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_isDofDynamic();
@@ -69,7 +62,6 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_get_max_dof_distance")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getMaxDofDistance();
@@ -78,7 +70,6 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_get_dof_blur_distance")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getDofBlurDistance();
@@ -87,7 +78,6 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_get_shadow_position_x")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getShadowEyePosition().x;
@@ -96,7 +86,6 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_get_shadow_position_y")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getShadowEyePosition().y;
@@ -105,7 +94,6 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_get_shadow_position_z")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getShadowEyePosition().z;
@@ -114,7 +102,6 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_get_motion_blur_strength")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getMotionBlurStrength();
@@ -123,7 +110,6 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_get_lens_flare_map_path")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getLensFlareMapPath();
@@ -132,7 +118,6 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_get_lens_flare_intensity")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getLensFlareIntensity();
@@ -141,7 +126,6 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_get_lens_flare_size")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getLensFlareSensitivity();

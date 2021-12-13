@@ -6,7 +6,6 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 {
 	if(functionName == "fe3d:collision_is_camera_under_terrain")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			bool result = _fe3d.collision_checkCameraWithTerrain();
@@ -17,7 +16,6 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate direction
@@ -78,7 +76,6 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate direction
@@ -122,7 +119,6 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate direction
@@ -166,7 +162,6 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate direction
@@ -210,20 +205,18 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate direction
-			if(arguments[1].getString() != "X" && arguments[1].getString() != "Y" &&
-			   arguments[1].getString() != "Z" && arguments[1].getString() != "")
-			{
-				_throwScriptError("invalid direction argument!");
-				return true;
-			}
-
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
+				// Validate direction
+				if(arguments[1].getString() != "X" && arguments[1].getString() != "Y" &&
+				   arguments[1].getString() != "Z" && arguments[1].getString() != "")
+				{
+					_throwScriptError("invalid direction argument!");
+					return true;
+				}
+
 				// Temporary values
 				bool result = false;
 
@@ -256,7 +249,6 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Validate direction
@@ -295,7 +287,6 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Temporary values
@@ -392,7 +383,6 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Temporary values
@@ -453,7 +443,6 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Temporary values

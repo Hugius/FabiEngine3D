@@ -8,7 +8,6 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
@@ -27,7 +26,6 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
@@ -54,7 +52,6 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 	}
 	else if(functionName == "fe3d:pointlight_get_all_ids")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.pointlight_getAllIDs();
@@ -74,10 +71,8 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dPointlight(arguments[0].getString()))
 			{
 				auto result = _fe3d.pointlight_isVisible(arguments[0].getString());
@@ -89,10 +84,8 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dPointlight(arguments[0].getString()))
 			{
 				auto result = _fe3d.pointlight_getPosition(arguments[0].getString()).x;
@@ -104,10 +97,8 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dPointlight(arguments[0].getString()))
 			{
 				auto result = _fe3d.pointlight_getPosition(arguments[0].getString()).y;
@@ -119,10 +110,8 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dPointlight(arguments[0].getString()))
 			{
 				auto result = _fe3d.pointlight_getPosition(arguments[0].getString()).z;
@@ -134,10 +123,8 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dPointlight(arguments[0].getString()))
 			{
 				auto result = _fe3d.pointlight_getRadius(arguments[0].getString()).x;
@@ -149,10 +136,8 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dPointlight(arguments[0].getString()))
 			{
 				auto result = _fe3d.pointlight_getRadius(arguments[0].getString()).y;
@@ -164,10 +149,8 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dPointlight(arguments[0].getString()))
 			{
 				auto result = _fe3d.pointlight_getRadius(arguments[0].getString()).z;
@@ -179,10 +162,8 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dPointlight(arguments[0].getString()))
 			{
 				auto result = _fe3d.pointlight_getColor(arguments[0].getString()).r;
@@ -194,10 +175,8 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dPointlight(arguments[0].getString()))
 			{
 				auto result = _fe3d.pointlight_getColor(arguments[0].getString()).g;
@@ -209,10 +188,8 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dPointlight(arguments[0].getString()))
 			{
 				auto result = _fe3d.pointlight_getColor(arguments[0].getString()).b;
@@ -224,10 +201,8 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dPointlight(arguments[0].getString()))
 			{
 				auto result = _fe3d.pointlight_getIntensity(arguments[0].getString());
@@ -239,10 +214,8 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dPointlight(arguments[0].getString()))
 			{
 				auto result = (_fe3d.pointlight_getShape(arguments[0].getString()) == PointlightShape::CIRCLE);
@@ -254,10 +227,8 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dPointlight(arguments[0].getString()))
 			{
 				auto result = (_fe3d.pointlight_getShape(arguments[0].getString()) == PointlightShape::SQUARE);

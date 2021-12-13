@@ -10,7 +10,6 @@ const bool ScriptInterpreter::_executeFe3dMusicSetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Compose file path
@@ -27,7 +26,6 @@ const bool ScriptInterpreter::_executeFe3dMusicSetter(const string& functionName
 	}
 	else if(functionName == "fe3d:music_clear_playlist")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.music_clearPlaylist();
@@ -38,7 +36,6 @@ const bool ScriptInterpreter::_executeFe3dMusicSetter(const string& functionName
 	{
 		auto types = {SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			_fe3d.music_setVolume(arguments[0].getDecimal());
@@ -47,7 +44,6 @@ const bool ScriptInterpreter::_executeFe3dMusicSetter(const string& functionName
 	}
 	else if(functionName == "fe3d:music_pause")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.music_pause();
@@ -56,7 +52,6 @@ const bool ScriptInterpreter::_executeFe3dMusicSetter(const string& functionName
 	}
 	else if(functionName == "fe3d:music_resume")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.music_resume();

@@ -8,7 +8,6 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
@@ -27,7 +26,6 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
@@ -54,7 +52,6 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:image_get_all_ids")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.image_getAllIDs();
@@ -74,10 +71,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				auto result = _fe3d.image_isVisible(arguments[0].getString());
@@ -89,10 +84,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				auto result = _fe3d.image_getPosition(arguments[0].getString());
@@ -104,10 +97,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				auto result = _fe3d.image_getPosition(arguments[0].getString());
@@ -119,10 +110,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				auto result = _fe3d.image_getRotation(arguments[0].getString());
@@ -134,10 +123,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				auto result = _fe3d.image_getSize(arguments[0].getString());
@@ -149,10 +136,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				auto result = _fe3d.image_getSize(arguments[0].getString());
@@ -164,10 +149,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				auto result = _fe3d.image_getColor(arguments[0].getString()).r;
@@ -179,10 +162,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				auto result = _fe3d.image_getColor(arguments[0].getString()).g;
@@ -194,10 +175,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				auto result = _fe3d.image_getColor(arguments[0].getString()).b;
@@ -209,10 +188,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				auto result = _fe3d.image_getTransparency(arguments[0].getString());
@@ -224,10 +201,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				auto result = _fe3d.image_getDiffuseMapPath(arguments[0].getString());
@@ -239,10 +214,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				auto result = _fe3d.image_isMirroredHorizontally(arguments[0].getString());
@@ -254,10 +227,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				auto result = _fe3d.image_isMirroredVertically(arguments[0].getString());
@@ -269,10 +240,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				auto result = _fe3d.image_getWireframeColor(arguments[0].getString()).r;
@@ -284,10 +253,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				auto result = _fe3d.image_getWireframeColor(arguments[0].getString()).g;
@@ -299,10 +266,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				auto result = _fe3d.image_getWireframeColor(arguments[0].getString()).b;
@@ -314,10 +279,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				auto result = _fe3d.image_isWireframed(arguments[0].getString());

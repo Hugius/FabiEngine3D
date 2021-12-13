@@ -8,7 +8,6 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// Temporary values
@@ -51,10 +50,8 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
 				_fe3d.sound3D_delete(arguments[0].getString());
@@ -64,7 +61,6 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 	}
 	else if(functionName == "fe3d:sound3d_delete_all")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Iterate through sounds
@@ -85,10 +81,8 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
 				_fe3d.sound3D_play(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger(), false);
@@ -100,10 +94,8 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
 				_fe3d.sound3D_play(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger(), true);
@@ -115,10 +107,8 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
 				_fe3d.sound3D_pause(arguments[0].getString());
@@ -128,7 +118,6 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 	}
 	else if(functionName == "fe3d:sound3d_pause_all")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.sound3D_pauseAll();
@@ -139,10 +128,8 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
 				_fe3d.sound3D_resume(arguments[0].getString());
@@ -152,7 +139,6 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 	}
 	else if(functionName == "fe3d:sound3d_resume_all")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.sound3D_resumeAll();
@@ -163,10 +149,8 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::INTEGER};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
 				_fe3d.sound3D_stop(arguments[0].getString(), arguments[1].getInteger());
@@ -176,7 +160,6 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 	}
 	else if(functionName == "fe3d:sound3d_stop_all")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.sound3D_stopAll();
@@ -187,10 +170,8 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
 				_fe3d.sound3D_setPosition(
@@ -204,10 +185,8 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
 				_fe3d.sound3D_move(
@@ -221,10 +200,8 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
 				_fe3d.sound3D_moveTo(
@@ -239,10 +216,8 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
 				_fe3d.sound3D_setMaxVolume(arguments[0].getString(), arguments[1].getDecimal());
@@ -254,10 +229,8 @@ const bool ScriptInterpreter::_executeFe3dSoundSetter3D(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dSound3D(arguments[0].getString(), false))
 			{
 				_fe3d.sound3D_setMaxDistance(arguments[0].getString(), arguments[1].getDecimal());

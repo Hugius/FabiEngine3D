@@ -8,7 +8,6 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
@@ -38,10 +37,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_delete(arguments[0].getString());
@@ -53,10 +50,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_setVisible(arguments[0].getString(), arguments[1].getBoolean());
@@ -68,14 +63,12 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_setBasePosition(arguments[0].getString(),
-												  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+											fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -84,14 +77,12 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_setBaseRotation(arguments[0].getString(),
-												  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+											fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -100,14 +91,12 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_setBaseRotationOrigin(arguments[0].getString(),
-														fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+												  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -116,14 +105,12 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_setBaseSize(arguments[0].getString(),
-											  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+										fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -132,14 +119,12 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_moveBase(arguments[0].getString(),
-										   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+									 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -148,14 +133,12 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_rotateBase(arguments[0].getString(),
-											 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+									   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -164,30 +147,26 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_scaleBase(arguments[0].getString(),
-											fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+									  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_move_to")
+	else if(functionName == "fe3d:model_move_to")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
-		if (_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
-			if (_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_moveBaseTo(arguments[0].getString(),
-					fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
+									   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -196,14 +175,12 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_rotateBaseTo(arguments[0].getString(),
-											   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
+										 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -212,14 +189,12 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_scaleBaseTo(arguments[0].getString(),
-											  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
+										fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -228,10 +203,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_setMinHeight(arguments[0].getString(), arguments[1].getDecimal());
@@ -243,10 +216,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_setMaxHeight(arguments[0].getString(), arguments[1].getDecimal());
@@ -258,10 +229,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				// Retrieve all bound AABB IDs
@@ -289,10 +258,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				// Retrieve all bound AABB IDs
@@ -320,10 +287,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -339,16 +304,14 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
 				{
 					_fe3d.model_setWireframeColor(arguments[0].getString(), arguments[1].getString(),
-										 fvec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
+												  fvec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
 					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
 			}
@@ -358,10 +321,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -376,10 +337,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -394,10 +353,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -412,10 +369,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -430,10 +385,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_setLevelOfDetailDistance(arguments[0].getString(), arguments[1].getDecimal());
@@ -445,10 +398,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -463,10 +414,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -481,10 +430,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_setReflected(arguments[0].getString(), arguments[1].getBoolean());
@@ -496,10 +443,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -514,10 +459,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_setShadowed(arguments[0].getString(), arguments[1].getBoolean());
@@ -529,10 +472,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_setFrozen(arguments[0].getString(), arguments[1].getBoolean());
@@ -544,10 +485,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -562,10 +501,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_setFaceCulled(arguments[0].getString(), arguments[1].getBoolean());
@@ -577,10 +514,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_setBright(arguments[0].getString(), arguments[1].getBoolean());
@@ -592,10 +527,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -610,10 +543,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_setLevelOfDetailEntityID(arguments[0].getString(), arguments[1].getString());
@@ -625,10 +556,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_fe3d.model_setLevelOfDetailEntityID(arguments[0].getString(), arguments[1].getString());
@@ -640,10 +569,8 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(arguments[1].getString() == "XYZ")

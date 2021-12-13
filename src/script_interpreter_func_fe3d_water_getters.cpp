@@ -6,10 +6,8 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 {
 	if(functionName == "fe3d:water_get_speed_x")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			// Validate water existence
 			if(_validateFe3dWater())
 			{
 				auto result = _fe3d.water_getSpeed(_fe3d.water_getSelectedID()).x;
@@ -19,10 +17,8 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_speed_z")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			// Validate water existence
 			if(_validateFe3dWater())
 			{
 				auto result = _fe3d.water_getSpeed(_fe3d.water_getSelectedID()).y;
@@ -32,10 +28,8 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_height")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			// Validate water existence
 			if(_validateFe3dWater())
 			{
 				auto result = _fe3d.water_getHeight(_fe3d.water_getSelectedID());
@@ -45,10 +39,8 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_color_r")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			// Validate water existence
 			if(_validateFe3dWater())
 			{
 				auto result = _fe3d.water_getColor(_fe3d.water_getSelectedID()).r;
@@ -58,10 +50,8 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_color_g")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			// Validate water existence
 			if(_validateFe3dWater())
 			{
 				auto result = _fe3d.water_getColor(_fe3d.water_getSelectedID()).g;
@@ -71,10 +61,8 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_color_b")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			// Validate water existence
 			if(_validateFe3dWater())
 			{
 				auto result = _fe3d.water_getColor(_fe3d.water_getSelectedID()).b;
@@ -84,10 +72,8 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_transparency")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			// Validate water existence
 			if(_validateFe3dWater())
 			{
 				auto result = _fe3d.water_getTransparency(_fe3d.water_getSelectedID());

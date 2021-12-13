@@ -8,10 +8,8 @@ const bool ScriptInterpreter::_executeFe3dAnimationSetter3D(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_meshAnimationEditor.startAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
@@ -23,10 +21,8 @@ const bool ScriptInterpreter::_executeFe3dAnimationSetter3D(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_meshAnimationEditor.pauseAnimation(arguments[1].getString(), arguments[0].getString());
@@ -38,10 +34,8 @@ const bool ScriptInterpreter::_executeFe3dAnimationSetter3D(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_meshAnimationEditor.resumeAnimation(arguments[1].getString(), arguments[0].getString());
@@ -53,10 +47,8 @@ const bool ScriptInterpreter::_executeFe3dAnimationSetter3D(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_meshAnimationEditor.fadeAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
@@ -68,10 +60,8 @@ const bool ScriptInterpreter::_executeFe3dAnimationSetter3D(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				_meshAnimationEditor.stopAnimation(arguments[1].getString(), arguments[0].getString());
@@ -83,10 +73,8 @@ const bool ScriptInterpreter::_executeFe3dAnimationSetter3D(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				// Retrieve animation data
@@ -106,10 +94,8 @@ const bool ScriptInterpreter::_executeFe3dAnimationSetter3D(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				// Retrieve animation data

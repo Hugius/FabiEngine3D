@@ -8,7 +8,6 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
@@ -38,10 +37,8 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot delete a bound entity
@@ -61,7 +58,6 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 	}
 	else if(functionName == "fe3d:aabb_delete_all")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Iterate through AABBs
@@ -86,10 +82,8 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -111,10 +105,8 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -126,7 +118,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 
 				// Set position
 				_fe3d.aabb_setBasePosition(arguments[0].getString(),
-												 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+										   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -137,10 +129,8 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -152,7 +142,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 
 				// Set size
 				_fe3d.aabb_setBaseSize(arguments[0].getString(),
-											 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+									   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -163,10 +153,8 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -178,7 +166,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 
 				// Move position
 				_fe3d.aabb_move(arguments[0].getString(),
-									  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+								fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -189,10 +177,8 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -204,7 +190,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 
 				// Scale size
 				_fe3d.aabb_scale(arguments[0].getString(),
-									   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+								 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -215,10 +201,8 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -230,7 +214,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 
 				// Move position
 				_fe3d.aabb_moveTo(arguments[0].getString(),
-										fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
+								  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -241,10 +225,8 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -256,7 +238,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 
 				// Scale size
 				_fe3d.aabb_scaleTo(arguments[0].getString(),
-					fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
+								   fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -267,10 +249,8 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -282,7 +262,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 
 				// Set color
 				_fe3d.aabb_setColor(arguments[0].getString(),
-					fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+									fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -293,10 +273,8 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -318,10 +296,8 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity

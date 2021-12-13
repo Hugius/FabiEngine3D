@@ -6,7 +6,6 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 {
 	if(functionName == "fe3d:lighting_get_ambient_color_r")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getAmbientLightingColor().r;
@@ -15,7 +14,6 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:lighting_get_ambient_color_g")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getAmbientLightingColor().g;
@@ -24,7 +22,6 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:lighting_get_ambient_color_b")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getAmbientLightingColor().b;
@@ -33,7 +30,6 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:lighting_get_ambient_intensity")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getAmbientLightingIntensity();
@@ -42,7 +38,6 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:lighting_get_directional_position_x")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getDirectionalLightingPosition().x;
@@ -51,7 +46,6 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:lighting_get_directional_position_y")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getDirectionalLightingPosition().y;
@@ -60,7 +54,6 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:lighting_get_directional_position_z")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getDirectionalLightingPosition().z;
@@ -69,7 +62,6 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:lighting_get_directional_color_r")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getDirectionalLightingColor().r;
@@ -78,7 +70,6 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:lighting_get_directional_color_g")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getDirectionalLightingColor().g;
@@ -87,7 +78,6 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:lighting_get_directional_color_b")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getDirectionalLightingColor().b;
@@ -96,7 +86,6 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 	}
 	else if(functionName == "fe3d:lighting_get_directional_intensity")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getDirectionalLightingIntensity();

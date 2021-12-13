@@ -2,18 +2,6 @@
 
 using SVT = ScriptValueType;
 
-static const vector<string> extractModelPartIDs(FabiEngine3D& fe3d, const string& modelID, const string& partID)
-{
-	if(partID.empty())
-	{
-		return fe3d.model_getPartIDs(modelID);
-	}
-	else
-	{
-		return {partID};
-	}
-}
-
 const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:model_place")
@@ -328,127 +316,6 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_start_animation")
-	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
-
-		// Validate arguments
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString(), false))
-			{
-				_meshAnimationEditor.startAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-			}
-		}
-	}
-	else if(functionName == "fe3d:model_pause_animation")
-	{
-		auto types = {SVT::STRING, SVT::STRING};
-
-		// Validate arguments
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString(), false))
-			{
-				_meshAnimationEditor.pauseAnimation(arguments[1].getString(), arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-			}
-		}
-	}
-	else if(functionName == "fe3d:model_resume_animation")
-	{
-		auto types = {SVT::STRING, SVT::STRING};
-
-		// Validate arguments
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString(), false))
-			{
-				_meshAnimationEditor.resumeAnimation(arguments[1].getString(), arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-			}
-		}
-	}
-	else if(functionName == "fe3d:model_fade_animation")
-	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
-
-		// Validate arguments
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString(), false))
-			{
-				_meshAnimationEditor.fadeAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-			}
-		}
-	}
-	else if(functionName == "fe3d:model_stop_animation")
-	{
-		auto types = {SVT::STRING, SVT::STRING};
-
-		// Validate arguments
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString(), false))
-			{
-				_meshAnimationEditor.stopAnimation(arguments[1].getString(), arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-			}
-		}
-	}
-	else if(functionName == "fe3d:model_set_animation_speed")
-	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
-
-		// Validate arguments
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString(), false))
-			{
-				// Retrieve animation data
-				string errorMessage = "Tried to set animation speed with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
-				auto animationData = _meshAnimationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
-
-				// Check if animation was found
-				if(animationData != nullptr)
-				{
-					animationData->setSpeedMultiplier(arguments[2].getDecimal());
-					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-				}
-			}
-		}
-	}
-	else if(functionName == "fe3d:model_set_animation_autopaused")
-	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
-
-		// Validate arguments
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			// Validate existence
-			if(_validateFe3dModel(arguments[0].getString(), false))
-			{
-				// Retrieve animation data
-				string errorMessage = "Tried to set animation autopaused option with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
-				auto animationData = _meshAnimationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
-
-				// Check if animation was found
-				if(animationData != nullptr)
-				{
-					animationData->setAutoPaused(arguments[2].getBoolean());
-					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-				}
-			}
-		}
-	}
 	else if(functionName == "fe3d:model_set_color")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
@@ -459,15 +326,31 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				// Set color
-				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
 				{
-					_fe3d.model_setColor(arguments[0].getString(), partID,
-											   fvec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
+					_fe3d.model_setColor(arguments[0].getString(), arguments[1].getString(),
+										 fvec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_wireframe_color")
+	{
+		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-				// Return
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				{
+					_fe3d.model_setWireframeColor(arguments[0].getString(), arguments[1].getString(),
+										 fvec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				}
 			}
 		}
 	}
@@ -481,13 +364,79 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				// Set lightness
-				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
 				{
-					_fe3d.model_setLightness(arguments[0].getString(), partID, arguments[2].getDecimal());
+					_fe3d.model_setLightness(arguments[0].getString(), arguments[1].getString(), arguments[2].getDecimal());
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_specular_shininess")
+	{
+		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
-				// Return
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				{
+					_fe3d.model_setSpecularShininess(arguments[0].getString(), arguments[1].getString(), arguments[2].getDecimal());
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_specular_intensity")
+	{
+		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				{
+					_fe3d.model_setSpecularIntensity(arguments[0].getString(), arguments[1].getString(), arguments[2].getDecimal());
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_reflectivity")
+	{
+		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				{
+					_fe3d.model_setReflectivity(arguments[0].getString(), arguments[1].getString(), arguments[2].getDecimal());
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_lod_distance")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				_fe3d.model_setLevelOfDetailDistance(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -502,13 +451,139 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				// Set transparency
-				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
 				{
-					_fe3d.model_setTransparency(arguments[0].getString(), partID, arguments[2].getDecimal());
+					_fe3d.model_setTransparency(arguments[0].getString(), arguments[1].getString(), arguments[2].getDecimal());
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_specular")
+	{
+		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
-				// Return
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				{
+					_fe3d.model_setSpecular(arguments[0].getString(), arguments[1].getString(), arguments[2].getBoolean());
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_reflected")
+	{
+		auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				_fe3d.model_setReflected(arguments[0].getString(), arguments[1].getBoolean());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_reflective")
+	{
+		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				{
+					_fe3d.model_setReflective(arguments[0].getString(), arguments[1].getString(), arguments[2].getBoolean());
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_shadowed")
+	{
+		auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				_fe3d.model_setShadowed(arguments[0].getString(), arguments[1].getBoolean());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_frozen")
+	{
+		auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				_fe3d.model_setFrozen(arguments[0].getString(), arguments[1].getBoolean());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_wireframed")
+	{
+		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				{
+					_fe3d.model_setWireframed(arguments[0].getString(), arguments[1].getString(), arguments[2].getBoolean());
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_face_culled")
+	{
+		auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				_fe3d.model_setFaceCulled(arguments[0].getString(), arguments[1].getBoolean());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_bright")
+	{
+		auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				_fe3d.model_setBright(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -523,13 +598,78 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				// Set emission intensity
-				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
 				{
-					_fe3d.model_setEmissionIntensity(arguments[0].getString(), partID, arguments[2].getDecimal());
+					_fe3d.model_setEmissionIntensity(arguments[0].getString(), arguments[1].getString(), arguments[2].getDecimal());
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_lod_entity_id")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
 
-				// Return
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				_fe3d.model_setLevelOfDetailEntityID(arguments[0].getString(), arguments[1].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_lod_entity_id")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				_fe3d.model_setLevelOfDetailEntityID(arguments[0].getString(), arguments[1].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_rotation_order")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(arguments[1].getString() == "XYZ")
+				{
+					_fe3d.model_setRotationOrder(arguments[0].getString(), DirectionOrder::XYZ);
+				}
+				if(arguments[1].getString() == "XZY")
+				{
+					_fe3d.model_setRotationOrder(arguments[0].getString(), DirectionOrder::XZY);
+				}
+				if(arguments[1].getString() == "YXZ")
+				{
+					_fe3d.model_setRotationOrder(arguments[0].getString(), DirectionOrder::YXZ);
+				}
+				if(arguments[1].getString() == "YZX")
+				{
+					_fe3d.model_setRotationOrder(arguments[0].getString(), DirectionOrder::YZX);
+				}
+				if(arguments[1].getString() == "ZXY")
+				{
+					_fe3d.model_setRotationOrder(arguments[0].getString(), DirectionOrder::ZXY);
+				}
+				if(arguments[1].getString() == "ZYX")
+				{
+					_fe3d.model_setRotationOrder(arguments[0].getString(), DirectionOrder::ZYX);
+				}
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

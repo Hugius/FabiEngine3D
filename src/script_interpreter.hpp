@@ -105,6 +105,8 @@ private:
 	const bool _executeFe3dImageGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dTextSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dTextGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dAnimationSetter3D(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dAnimationGetter3D(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dSoundSetter2D(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dSoundGetter2D(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dSoundSetter3D(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);

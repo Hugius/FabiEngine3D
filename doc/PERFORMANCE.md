@@ -26,3 +26,5 @@
 - If your application has text entities of which the content changes a lot, you should enable their property `isDynamic`.
 - Make sure your GPU is giving the maximum computing power to the engine; check your graphics card settings.
 - If you want fast loading times, use as little reflection entities as possible.
+- Use the face culling optimization in model entities as much as possible.
+- Make a model entity instanced if you want to render a high amount of that entity.

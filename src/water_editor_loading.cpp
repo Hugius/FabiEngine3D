@@ -107,12 +107,12 @@ const vector<string> WaterEditor::getAllTexturePathsFromFile() const
 	return texturePaths;
 }
 
-const bool WaterEditor::loadWaterEntitiesFromFile()
+const bool WaterEditor::loadFromFile()
 {
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("WaterEditor::loadWaterEntitiesFromFile");
+		Logger::throwError("WaterEditor::loadFromFile");
 	}
 
 	// Clear IDs from previous loads

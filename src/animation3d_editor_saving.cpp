@@ -7,7 +7,7 @@
 
 using std::ofstream;
 
-const bool Animation3dEditor::saveAnimationsToFile() const
+const bool Animation3dEditor::saveToFile() const
 {
 	// Editor must be loaded
 	if(!_isEditorLoaded)
@@ -18,7 +18,7 @@ const bool Animation3dEditor::saveAnimationsToFile() const
 	// Validate project ID
 	if(_currentProjectID.empty())
 	{
-		Logger::throwError("Animation3dEditor::saveAnimationsToFile");
+		Logger::throwError("Animation3dEditor::saveToFile");
 	}
 
 	// Create or overwrite file

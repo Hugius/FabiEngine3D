@@ -263,12 +263,12 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 	return texturePaths;
 }
 
-const bool ModelEditor::loadModelEntitiesFromFile()
+const bool ModelEditor::loadFromFile()
 {
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("ModelEditor::loadModelEntitiesFromFile::1");
+		Logger::throwError("ModelEditor::loadFromFile::1");
 	}
 
 	// Clear IDs from previous loads
@@ -518,7 +518,7 @@ const bool ModelEditor::loadModelEntitiesFromFile()
 		}
 		else
 		{
-			Logger::throwError("ModelEditor::loadModelEntitiesFromFile::2");
+			Logger::throwError("ModelEditor::loadFromFile::2");
 		}
 	}
 

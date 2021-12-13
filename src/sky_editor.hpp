@@ -16,11 +16,11 @@ public:
 
 	// STRING
 	const vector<array<string, 6>> getAllTexturePathsFromFile() const;
-	const vector<string>& getLoadedSkyIDs();
+	const vector<string>& getLoadedIDs();
 
 	// BOOL
-	const bool loadSkyEntitiesFromFile();
-	const bool saveSkyEntitiesToFile() const;
+	const bool loadFromFile();
+	const bool saveToFile() const;
 	const bool isLoaded() const;
 
 private:

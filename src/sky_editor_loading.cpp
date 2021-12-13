@@ -81,12 +81,12 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile() const
 	return texturePaths;
 }
 
-const bool SkyEditor::loadSkyEntitiesFromFile()
+const bool SkyEditor::loadFromFile()
 {
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("SkyEditor::loadSkyEntitiesFromFile");
+		Logger::throwError("SkyEditor::loadFromFile");
 	}
 
 	// Clear IDs from previous loads

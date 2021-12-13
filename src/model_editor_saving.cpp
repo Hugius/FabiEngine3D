@@ -9,7 +9,7 @@
 using std::ifstream;
 using std::ofstream;
 
-const bool ModelEditor::saveModelEntitiesToFile() const
+const bool ModelEditor::saveToFile() const
 {
 	// Editor must be loaded
 	if(!_isEditorLoaded)
@@ -20,7 +20,7 @@ const bool ModelEditor::saveModelEntitiesToFile() const
 	// Validate project ID
 	if(_currentProjectID.empty())
 	{
-		Logger::throwError("ModelEditor::saveModelEntitiesToFile");
+		Logger::throwError("ModelEditor::saveToFile");
 	}
 
 	// Create or overwrite file

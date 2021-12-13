@@ -29,8 +29,8 @@ public:
 	const bool isAnimationStarted(const string& animationID, const string& modelID) const;
 	const bool isAnimationPlaying(const string& animationID, const string& modelID) const;
 	const bool isAnimationPaused(const string& animationID, const string& modelID) const;
-	const bool loadAnimationsFromFile(bool mustCheckPreviewTexture);
-	const bool saveAnimationsToFile() const;
+	const bool loadFromFile(bool mustCheckPreviewTexture);
+	const bool saveToFile() const;
 
 private:
 	// VOID

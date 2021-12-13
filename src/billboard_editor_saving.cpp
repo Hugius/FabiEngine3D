@@ -7,7 +7,7 @@
 
 using std::ofstream;
 
-const bool BillboardEditor::saveBillboardEntitiesToFile() const
+const bool BillboardEditor::saveToFile() const
 {
 	// Editor must be loaded
 	if(!_isEditorLoaded)
@@ -18,7 +18,7 @@ const bool BillboardEditor::saveBillboardEntitiesToFile() const
 	// Validate project ID
 	if(_currentProjectID.empty())
 	{
-		Logger::throwError("BillboardEditor::saveBillboardEntitiesToFile");
+		Logger::throwError("BillboardEditor::saveToFile");
 	}
 
 	// Create or overwrite file

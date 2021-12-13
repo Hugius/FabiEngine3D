@@ -18,7 +18,7 @@ void WorldEditor::_updateSkyMenu()
 		{
 			// Retrieve preview sky IDs
 			vector<string> skyIDs;
-			for(const auto& ID : _skyEditor.getLoadedSkyIDs())
+			for(const auto& ID : _skyEditor.getLoadedIDs())
 			{
 				if((ID[0] == '@') && (ID != "@@background"))
 				{

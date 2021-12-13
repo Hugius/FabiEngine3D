@@ -17,11 +17,11 @@ public:
 	// STRING
 	const vector<string> getAllBitmapPathsFromFile() const;
 	const vector<string> getAllTexturePathsFromFile() const;
-	const vector<string>& getLoadedTerrainIDs();
+	const vector<string>& getLoadedIDs();
 
 	// BOOL
-	const bool loadTerrainEntitiesFromFile();
-	const bool saveTerrainEntitiesToFile() const;
+	const bool loadFromFile();
+	const bool saveToFile() const;
 	const bool isLoaded() const;
 
 private:

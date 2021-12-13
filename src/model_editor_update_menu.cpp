@@ -20,7 +20,7 @@ void ModelEditor::_updateMainMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto IDs = getLoadedModelIDs();
+			auto IDs = getLoadedIDs();
 			for(auto& ID : IDs)
 			{
 				ID = ID.substr(1);
@@ -30,7 +30,7 @@ void ModelEditor::_updateMainMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto IDs = getLoadedModelIDs();
+			auto IDs = getLoadedIDs();
 			for(auto& ID : IDs)
 			{
 				ID = ID.substr(1);
@@ -44,7 +44,7 @@ void ModelEditor::_updateMainMenu()
 		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
-			saveModelEntitiesToFile();
+			saveToFile();
 			unload();
 			return;
 		}

@@ -29,17 +29,17 @@ void WorldEditor::load()
 	_fe3d.gfx_setPlanarReflectionHeight(0.0f);
 
 	// Load preview skies
-	_skyEditor.loadSkyEntitiesFromFile();
+	_skyEditor.loadFromFile();
 
 	// Load preview terrains
-	_terrainEditor.loadTerrainEntitiesFromFile();
+	_terrainEditor.loadFromFile();
 
 	// Load preview waters
-	_waterEditor.loadWaterEntitiesFromFile();
+	_waterEditor.loadFromFile();
 
 	// Load preview models
-	_modelEditor.loadModelEntitiesFromFile();
-	for(const auto& modelID : _modelEditor.getLoadedModelIDs())
+	_modelEditor.loadFromFile();
+	for(const auto& modelID : _modelEditor.getLoadedIDs())
 	{
 		// Check if there is a model entity present
 		if(_fe3d.model_isExisting(modelID))
@@ -50,8 +50,8 @@ void WorldEditor::load()
 	}
 
 	// Load preview billboards
-	_billboardEditor.loadBillboardEntitiesFromFile();
-	for(const auto& billboardID : _billboardEditor.getLoadedBillboardIDs())
+	_billboardEditor.loadFromFile();
+	for(const auto& billboardID : _billboardEditor.getLoadedIDs())
 	{
 		// Check if there is a billboard entity present
 		if(_fe3d.billboard_isExisting(billboardID))
@@ -62,17 +62,17 @@ void WorldEditor::load()
 	}
 
 	// Load preview 3D animations
-	_animation3dEditor.loadAnimationsFromFile(false);
+	_animation3dEditor.loadFromFile(false);
 
 	// Load preview sounds
-	_audioEditor.loadAudioEntitiesFromFile();
+	_audioEditor.loadFromFile();
 	_fe3d.model_create(PREVIEW_SPEAKER_ID, SPEAKER_MODEL_PATH);
 	_fe3d.model_setBaseSize(PREVIEW_SPEAKER_ID, DEFAULT_SPEAKER_SIZE);
 	_fe3d.model_setShadowed(PREVIEW_SPEAKER_ID, false);
 	_fe3d.model_setReflected(PREVIEW_SPEAKER_ID, false);
 	_fe3d.model_setBright(PREVIEW_SPEAKER_ID, true);
 	_fe3d.model_setVisible(PREVIEW_SPEAKER_ID, false);
-	for(const auto& audioID : _audioEditor.getLoadedAudioIDs())
+	for(const auto& audioID : _audioEditor.getLoadedIDs())
 	{
 		_fe3d.sound3d_setMaxVolume(audioID, DEFAULT_SOUND_MAX_VOLUME);
 		_fe3d.sound3d_setMaxDistance(audioID, DEFAULT_SOUND_MAX_DISTANCE);

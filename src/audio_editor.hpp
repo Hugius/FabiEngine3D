@@ -16,11 +16,11 @@ public:
 
 	// STRING
 	const vector<string> getAllAudioPathsFromFile() const;
-	const vector<string>& getLoadedAudioIDs();
+	const vector<string>& getLoadedIDs();
 
 	// BOOL
-	const bool loadAudioEntitiesFromFile();
-	const bool saveAudioEntitiesToFile() const;
+	const bool loadFromFile();
+	const bool saveToFile() const;
 	const bool isLoaded() const;
 
 private:

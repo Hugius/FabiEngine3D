@@ -23,7 +23,7 @@ void WaterEditor::_updateMainMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto IDs = getLoadedWaterIDs();
+			auto IDs = getLoadedIDs();
 			for(auto& ID : IDs)
 			{
 				ID = ID.substr(1);
@@ -33,7 +33,7 @@ void WaterEditor::_updateMainMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto IDs = getLoadedWaterIDs();
+			auto IDs = getLoadedIDs();
 			for(auto& ID : IDs)
 			{
 				ID = ID.substr(1);
@@ -47,7 +47,7 @@ void WaterEditor::_updateMainMenu()
 		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
-			saveWaterEntitiesToFile();
+			saveToFile();
 			unload();
 			return;
 		}

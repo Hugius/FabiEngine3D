@@ -8,12 +8,12 @@
 using std::ifstream;
 using std::istringstream;
 
-const bool Animation3dEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
+const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 {
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("Animation3dEditor::loadAnimationsFromFile");
+		Logger::throwError("Animation3dEditor::loadFromFile");
 	}
 
 	// Clear animations list from previous loads

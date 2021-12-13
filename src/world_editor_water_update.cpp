@@ -18,7 +18,7 @@ void WorldEditor::_updateWaterMenu()
 		{
 			// Retrieve preview water IDs
 			vector<string> waterIDs;
-			for(const auto& ID : _waterEditor.getLoadedWaterIDs())
+			for(const auto& ID : _waterEditor.getLoadedIDs())
 			{
 				if(ID[0] == '@')
 				{

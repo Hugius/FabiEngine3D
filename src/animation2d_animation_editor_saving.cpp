@@ -1,6 +1,6 @@
 #include "animation2d_editor.hpp"
 
-const bool Animation2dEditor::saveAnimationsToFile() const
+const bool Animation2dEditor::saveToFile() const
 {
 	return false;
 }

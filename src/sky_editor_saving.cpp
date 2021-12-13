@@ -7,7 +7,7 @@
 
 using std::ofstream;
 
-const bool SkyEditor::saveSkyEntitiesToFile() const
+const bool SkyEditor::saveToFile() const
 {
 	// Editor must be loaded
 	if(!_isEditorLoaded)
@@ -18,7 +18,7 @@ const bool SkyEditor::saveSkyEntitiesToFile() const
 	// Validate project ID
 	if(_currentProjectID.empty())
 	{
-		Logger::throwError("SkyEditor::saveSkyEntitiesToFile");
+		Logger::throwError("SkyEditor::saveToFile");
 	}
 
 	// Create or overwrite file

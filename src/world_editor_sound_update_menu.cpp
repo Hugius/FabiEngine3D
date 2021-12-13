@@ -84,7 +84,7 @@ void WorldEditor::_updateSoundPlacingMenu()
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			// Iterate through every created sound
-			for(const auto& audioID : _audioEditor.getLoadedAudioIDs())
+			for(const auto& audioID : _audioEditor.getLoadedIDs())
 			{
 				// Check if button is hovered
 				if(screen->getScrollingList("sounds")->getButton(audioID)->isHovered())

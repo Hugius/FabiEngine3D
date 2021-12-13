@@ -67,12 +67,12 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile() const
 	return audioPaths;
 }
 
-const bool AudioEditor::loadAudioEntitiesFromFile()
+const bool AudioEditor::loadFromFile()
 {
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("AudioEditor::loadAudioEntitiesFromFile");
+		Logger::throwError("AudioEditor::loadFromFile");
 	}
 
 	// Clear IDs from previous loads

@@ -17,11 +17,11 @@ public:
 	// STRING
 	const vector<string> getAllTexturePathsFromFile() const;
 	const vector<string> getAllFontPathsFromFile() const;
-	const vector<string>& getLoadedBillboardIDs();
+	const vector<string>& getLoadedIDs();
 
 	// BOOL
-	const bool loadBillboardEntitiesFromFile();
-	const bool saveBillboardEntitiesToFile() const;
+	const bool loadFromFile();
+	const bool saveToFile() const;
 	const bool isLoaded() const;
 
 private:

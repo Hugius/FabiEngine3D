@@ -18,11 +18,11 @@ public:
 	// STRING
 	const vector<string> getAllMeshPathsFromFile() const;
 	const vector<string> getAllTexturePathsFromFile() const;
-	const vector<string>& getLoadedModelIDs();
+	const vector<string>& getLoadedIDs();
 
 	// BOOL
-	const bool loadModelEntitiesFromFile();
-	const bool saveModelEntitiesToFile() const;
+	const bool loadFromFile();
+	const bool saveToFile() const;
 	const bool isLoaded() const;
 
 private:

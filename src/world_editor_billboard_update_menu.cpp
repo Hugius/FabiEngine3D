@@ -75,7 +75,7 @@ void WorldEditor::_updateBillboardPlacingMenu()
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			// Iterate through every created billboard
-			for(const auto& billboardID : _billboardEditor.getLoadedBillboardIDs())
+			for(const auto& billboardID : _billboardEditor.getLoadedIDs())
 			{
 				// Check if billboard has a billboard entity
 				if(_fe3d.billboard_isExisting(billboardID))

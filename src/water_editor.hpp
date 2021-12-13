@@ -16,11 +16,11 @@ public:
 
 	// STRING
 	const vector<string> getAllTexturePathsFromFile() const;
-	const vector<string>& getLoadedWaterIDs();
+	const vector<string>& getLoadedIDs();
 
 	// BOOL
-	const bool loadWaterEntitiesFromFile();
-	const bool saveWaterEntitiesToFile() const;
+	const bool loadFromFile();
+	const bool saveToFile() const;
 	const bool isLoaded() const;
 
 private:

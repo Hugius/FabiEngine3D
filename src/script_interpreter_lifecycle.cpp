@@ -184,25 +184,25 @@ void ScriptInterpreter::load()
 	_fe3d.sky_selectMainSky("");
 
 	// Load preview skies
-	_skyEditor.loadSkyEntitiesFromFile();
+	_skyEditor.loadFromFile();
 
 	// Load preview terrains
-	_terrainEditor.loadTerrainEntitiesFromFile();
+	_terrainEditor.loadFromFile();
 
 	// Load preview waters
-	_waterEditor.loadWaterEntitiesFromFile();
+	_waterEditor.loadFromFile();
 
 	// Load preview models
-	_modelEditor.loadModelEntitiesFromFile();
+	_modelEditor.loadFromFile();
 
 	// Load preview animations
-	_animation3dEditor.loadAnimationsFromFile(false);
+	_animation3dEditor.loadFromFile(false);
 
 	// Load preview billboards
-	_billboardEditor.loadBillboardEntitiesFromFile();
+	_billboardEditor.loadFromFile();
 
 	// Load preview audio
-	_audioEditor.loadAudioEntitiesFromFile();
+	_audioEditor.loadFromFile();
 
 	// Camera
 	_fe3d.camera_reset();

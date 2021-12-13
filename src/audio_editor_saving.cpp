@@ -7,7 +7,7 @@
 
 using std::ofstream;
 
-const bool AudioEditor::saveAudioEntitiesToFile() const
+const bool AudioEditor::saveToFile() const
 {
 	// Editor must be loaded
 	if(!_isEditorLoaded)
@@ -18,7 +18,7 @@ const bool AudioEditor::saveAudioEntitiesToFile() const
 	// Validate project ID
 	if(_currentProjectID.empty())
 	{
-		Logger::throwError("AudioEditor::saveAudioEntitiesToFile");
+		Logger::throwError("AudioEditor::saveToFile");
 	}
 
 	// Create or overwrite file

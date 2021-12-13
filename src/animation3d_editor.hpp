@@ -34,8 +34,8 @@ public:
 	const bool isAnimationPlaying(const string& animationID, const string& modelID) const;
 	const bool isAnimationPaused(const string& animationID, const string& modelID) const;
 	const bool isAnimationFading(const string& animationID, const string& modelID) const;
-	const bool loadAnimationsFromFile(bool mustCheckPreviewModel);
-	const bool saveAnimationsToFile() const;
+	const bool loadFromFile(bool mustCheckPreviewModel);
+	const bool saveToFile() const;
 
 	// MISCELLANEOUS
 	Animation3d* getAnimationData(const string& animationID, const string& modelID, string baseErrorMessage);

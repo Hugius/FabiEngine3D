@@ -440,14 +440,14 @@ void TopViewportController::_saveCurrentProject()
 
 	// Save everything
 	_settingsEditor.saveSettingsToFile();
-	_skyEditor.saveSkyEntitiesToFile();
-	_terrainEditor.saveTerrainEntitiesToFile();
-	_waterEditor.saveWaterEntitiesToFile();
-	_modelEditor.saveModelEntitiesToFile();
-	_billboardEditor.saveBillboardEntitiesToFile();
-	_animation3dEditor.saveAnimationsToFile();
-	_animation2dEditor.saveAnimationsToFile();
-	_audioEditor.saveAudioEntitiesToFile();
+	_skyEditor.saveToFile();
+	_terrainEditor.saveToFile();
+	_waterEditor.saveToFile();
+	_modelEditor.saveToFile();
+	_billboardEditor.saveToFile();
+	_animation3dEditor.saveToFile();
+	_animation2dEditor.saveToFile();
+	_audioEditor.saveToFile();
 	_worldEditor.saveEditorWorldToFile();
 	_scriptEditor.saveScriptFiles();
 

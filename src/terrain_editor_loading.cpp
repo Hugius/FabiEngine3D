@@ -279,12 +279,12 @@ const vector<string> TerrainEditor::getAllBitmapPathsFromFile() const
 	return bitmapPaths;
 }
 
-const bool TerrainEditor::loadTerrainEntitiesFromFile()
+const bool TerrainEditor::loadFromFile()
 {
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("TerrainEditor::loadTerrainEntitiesFromFile");
+		Logger::throwError("TerrainEditor::loadFromFile");
 	}
 
 	// Clear IDs from previous loads

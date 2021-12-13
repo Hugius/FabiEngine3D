@@ -12,7 +12,7 @@ const bool TerrainEditor::isLoaded() const
 	return _isEditorLoaded;
 }
 
-const vector<string>& TerrainEditor::getLoadedTerrainIDs()
+const vector<string>& TerrainEditor::getLoadedIDs()
 {
 	sort(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end());
 	return _loadedTerrainIDs;

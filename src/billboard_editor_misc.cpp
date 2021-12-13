@@ -12,7 +12,7 @@ const bool BillboardEditor::isLoaded() const
 	return _isEditorLoaded;
 }
 
-const vector<string>& BillboardEditor::getLoadedBillboardIDs()
+const vector<string>& BillboardEditor::getLoadedIDs()
 {
 	sort(_loadedBillboardIDs.begin(), _loadedBillboardIDs.end());
 	return _loadedBillboardIDs;

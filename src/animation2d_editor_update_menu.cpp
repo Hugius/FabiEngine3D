@@ -41,7 +41,7 @@ void Animation2dEditor::_updateMainMenu()
 		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
-			saveAnimationsToFile();
+			saveToFile();
 			unload();
 			return;
 		}

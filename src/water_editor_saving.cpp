@@ -7,7 +7,7 @@
 
 using std::ofstream;
 
-const bool WaterEditor::saveWaterEntitiesToFile() const
+const bool WaterEditor::saveToFile() const
 {
 	// Editor must be loaded
 	if(!_isEditorLoaded)
@@ -18,7 +18,7 @@ const bool WaterEditor::saveWaterEntitiesToFile() const
 	// Validate project ID
 	if(_currentProjectID.empty())
 	{
-		Logger::throwError("WaterEditor::saveWaterEntitiesToFile");
+		Logger::throwError("WaterEditor::saveToFile");
 	}
 
 	// Create or overwrite file

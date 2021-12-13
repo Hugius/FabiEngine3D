@@ -75,7 +75,7 @@ void WorldEditor::_updateModelPlacingMenu()
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			// Iterate through every created model
-			for(const auto& modelID : _modelEditor.getLoadedModelIDs())
+			for(const auto& modelID : _modelEditor.getLoadedIDs())
 			{
 				// Check if model has mesh
 				if(_fe3d.model_isExisting(modelID))

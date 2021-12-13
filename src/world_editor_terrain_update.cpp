@@ -18,7 +18,7 @@ void WorldEditor::_updateTerrainMenu()
 		{
 			// Retrieve preview terrain IDs
 			vector<string> terrainIDs;
-			for(const auto& ID : _terrainEditor.getLoadedTerrainIDs())
+			for(const auto& ID : _terrainEditor.getLoadedIDs())
 			{
 				if(ID[0] == '@')
 				{

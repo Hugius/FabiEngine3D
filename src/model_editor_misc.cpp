@@ -28,7 +28,7 @@ const bool ModelEditor::isLoaded() const
 	return _isEditorLoaded;
 }
 
-const vector<string>& ModelEditor::getLoadedModelIDs()
+const vector<string>& ModelEditor::getLoadedIDs()
 {
 	sort(_loadedModelIDs.begin(), _loadedModelIDs.end());
 	return _loadedModelIDs;

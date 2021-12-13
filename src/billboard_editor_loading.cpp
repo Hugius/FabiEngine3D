@@ -180,12 +180,12 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile() const
 	return fontPaths;
 }
 
-const bool BillboardEditor::loadBillboardEntitiesFromFile()
+const bool BillboardEditor::loadFromFile()
 {
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("BillboardEditor::loadBillboardEntitiesFromFile");
+		Logger::throwError("BillboardEditor::loadFromFile");
 	}
 
 	// Clear IDs from previous loads

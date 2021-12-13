@@ -1,15 +1,15 @@
-#include "mesh_animation_editor.hpp"
+#include "animation3d_editor.hpp"
 #include "logger.hpp"
 
 #include <algorithm>
 
-void MeshAnimationEditor::_updateMainMenu()
+void Animation3dEditor::_updateMainMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if(screen->getID() == "meshAnimationEditorMenuMain")
+	if(screen->getID() == "animation3dEditorMenuMain")
 	{
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
@@ -50,13 +50,13 @@ void MeshAnimationEditor::_updateMainMenu()
 	}
 }
 
-void MeshAnimationEditor::_updateChoiceMenu()
+void Animation3dEditor::_updateChoiceMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if(screen->getID() == "meshAnimationEditorMenuChoice")
+	if(screen->getID() == "animation3dEditorMenuChoice")
 	{
 		// Temporary values
 		auto currentAnimation = _getAnimation(_currentAnimationID);
@@ -107,7 +107,7 @@ void MeshAnimationEditor::_updateChoiceMenu()
 			_currentFrameIndex = 0;
 			_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), false);
 			_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), false);
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("meshAnimationEditorMenuMain");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation3dEditorMenuMain");
 			return;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("preview")->isHovered())
@@ -186,7 +186,7 @@ void MeshAnimationEditor::_updateChoiceMenu()
 					// Add default data for every model part
 					for(const auto& partID : currentAnimation->getPartIDs())
 					{
-						lastFrameCopy.addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), MeshAnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
+						lastFrameCopy.addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), Animation3dSpeedType::LINEAR, TransformationType::MOVEMENT);
 					}
 				}
 			}
@@ -206,7 +206,7 @@ void MeshAnimationEditor::_updateChoiceMenu()
 			}
 
 			// Go to next screen
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("meshAnimationEditorMenuFrame");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation3dEditorMenuFrame");
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -298,11 +298,11 @@ void MeshAnimationEditor::_updateChoiceMenu()
 				if(currentAnimation->getFrames().empty())
 				{
 					// Create default frame
-					MeshAnimationFrame defaultFrame;
+					Animation3dFrame defaultFrame;
 
 					// Add default part
 					currentAnimation->addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
-					defaultFrame.addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), MeshAnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
+					defaultFrame.addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), Animation3dSpeedType::LINEAR, TransformationType::MOVEMENT);
 
 					// Add custom parts
 					auto partIDs = _fe3d.model_getPartIDs(_hoveredModelID);
@@ -315,7 +315,7 @@ void MeshAnimationEditor::_updateChoiceMenu()
 							currentAnimation->addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
 
 							// Add part to frame
-							defaultFrame.addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), MeshAnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
+							defaultFrame.addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), Animation3dSpeedType::LINEAR, TransformationType::MOVEMENT);
 						}
 					}
 

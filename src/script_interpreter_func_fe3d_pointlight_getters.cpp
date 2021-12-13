@@ -241,7 +241,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 		return false;
 	}
 
-	// Cannot execute pointlight functionality when server is running
+	// Cannot execute when server is running
 	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:pointlight` functionality as networking server!");

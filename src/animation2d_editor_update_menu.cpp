@@ -1,14 +1,14 @@
-#include "sprite_animation_editor.hpp"
+#include "animation2d_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 
-void SpriteAnimationEditor::_updateMainMenu()
+void Animation2dEditor::_updateMainMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if(screen->getID() == "spriteAnimationEditorMenuMain")
+	if(screen->getID() == "animation2dEditorMenuMain")
 	{
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
@@ -54,13 +54,13 @@ void SpriteAnimationEditor::_updateMainMenu()
 	}
 }
 
-void SpriteAnimationEditor::_updateChoiceMenu()
+void Animation2dEditor::_updateChoiceMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if(screen->getID() == "spriteAnimationEditorMenuChoice")
+	if(screen->getID() == "animation2dEditorMenuChoice")
 	{
 		// Temporary values
 		auto currentAnimation = _getAnimation(_currentAnimationID);
@@ -73,7 +73,7 @@ void SpriteAnimationEditor::_updateChoiceMenu()
 		{
 			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
 			_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("spriteAnimationEditorMenuMain");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation2dEditorMenuMain");
 			return;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("preview")->isHovered())
@@ -81,7 +81,7 @@ void SpriteAnimationEditor::_updateChoiceMenu()
 			// Validate project ID
 			if(_currentProjectID.empty())
 			{
-				Logger::throwError("SpriteAnimationEditor::_updateChoiceMenu");
+				Logger::throwError("Animation2dEditor::_updateChoiceMenu");
 			}
 
 			// Get the chosen file name

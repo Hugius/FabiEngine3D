@@ -189,7 +189,7 @@ const bool ScriptInterpreter::_executeFe3dSoundGetter3D(const string& functionNa
 		return false;
 	}
 
-	// Cannot execute sound functionality when server is running
+	// Cannot execute when server is running
 	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:sound3d` functionality as networking server!");

@@ -63,7 +63,7 @@ const bool ScriptInterpreter::_executeFe3dMusicSetter(const string& functionName
 		return false;
 	}
 
-	// Cannot execute music functionality when server is running
+	// Cannot execute when server is running
 	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:music` functionality as networking server!");

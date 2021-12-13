@@ -13,11 +13,11 @@ LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, EngineGuiMana
 	_waterEditor(fe3d, gui),
 	_modelEditor(fe3d, gui),
 	_billboardEditor(fe3d, gui),
-	_meshAnimationEditor(fe3d, gui, _modelEditor),
-	_spriteAnimationEditor(fe3d, gui),
+	_animation3dEditor(fe3d, gui, _modelEditor),
+	_animation2dEditor(fe3d, gui),
 	_audioEditor(fe3d, gui),
-	_worldEditor(fe3d, gui, _skyEditor, _terrainEditor, _waterEditor, _modelEditor, _billboardEditor, _meshAnimationEditor, _audioEditor),
-	_scriptEditor(fe3d, gui, _skyEditor, _terrainEditor, _waterEditor, _modelEditor, _billboardEditor, _meshAnimationEditor, _audioEditor, _worldEditor)
+	_worldEditor(fe3d, gui, _skyEditor, _terrainEditor, _waterEditor, _modelEditor, _billboardEditor, _animation3dEditor, _audioEditor),
+	_scriptEditor(fe3d, gui, _skyEditor, _terrainEditor, _waterEditor, _modelEditor, _billboardEditor, _animation3dEditor, _audioEditor, _worldEditor)
 {
 
 }
@@ -37,8 +37,8 @@ void LeftViewportController::initialize()
 	window->getScreen("main")->createButton("waterEditor", fvec2(0.0f, positions[3]), fvec2(TW("Water"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Water", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	window->getScreen("main")->createButton("modelEditor", fvec2(0.0f, positions[4]), fvec2(TW("Model"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Model", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	window->getScreen("main")->createButton("billboardEditor", fvec2(0.0f, positions[5]), fvec2(TW("Billboard"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Billboard", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	window->getScreen("main")->createButton("meshAnimationEditor", fvec2(0.0f, positions[6]), fvec2(TW("3D Animation"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "3D Animation", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	window->getScreen("main")->createButton("spriteAnimationEditor", fvec2(0.0f, positions[7]), fvec2(TW("2D Animation"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "2D Animation", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	window->getScreen("main")->createButton("animation3dEditor", fvec2(0.0f, positions[6]), fvec2(TW("3D Animation"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "3D Animation", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	window->getScreen("main")->createButton("animation2dEditor", fvec2(0.0f, positions[7]), fvec2(TW("2D Animation"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "2D Animation", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	window->getScreen("main")->createButton("audioEditor", fvec2(0.0f, positions[8]), fvec2(TW("Audio"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	window->getScreen("main")->createButton("worldEditor", fvec2(0.0f, positions[9]), fvec2(TW("World"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "World", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	window->getScreen("main")->createButton("scriptEditor", fvec2(0.0f, positions[10]), fvec2(TW("Script"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Script", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
@@ -105,20 +105,20 @@ void LeftViewportController::update()
 				window->setActiveScreen("billboardEditorMenuMain");
 			}
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("meshAnimationEditor")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation3dEditor")->isHovered())
 		{
-			if(_modelEditor.loadModelEntitiesFromFile() && _meshAnimationEditor.loadAnimationsFromFile(true))
+			if(_modelEditor.loadModelEntitiesFromFile() && _animation3dEditor.loadAnimationsFromFile(true))
 			{
-				_meshAnimationEditor.load();
-				window->setActiveScreen("meshAnimationEditorMenuMain");
+				_animation3dEditor.load();
+				window->setActiveScreen("animation3dEditorMenuMain");
 			}
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("spriteAnimationEditor")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation2dEditor")->isHovered())
 		{
-			if(_spriteAnimationEditor.loadAnimationsFromFile(true))
+			if(_animation2dEditor.loadAnimationsFromFile(true))
 			{
-				_spriteAnimationEditor.load();
-				window->setActiveScreen("spriteAnimationEditorMenuMain");
+				_animation2dEditor.load();
+				window->setActiveScreen("animation2dEditorMenuMain");
 			}
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("audioEditor")->isHovered())
@@ -151,8 +151,8 @@ void LeftViewportController::update()
 	_waterEditor.update();
 	_modelEditor.update();
 	_billboardEditor.update();
-	_meshAnimationEditor.update();
-	_spriteAnimationEditor.update();
+	_animation3dEditor.update();
+	_animation2dEditor.update();
 	_audioEditor.update();
 	_worldEditor.update();
 	_scriptEditor.update();
@@ -188,14 +188,14 @@ BillboardEditor& LeftViewportController::getBillboardEditor()
 	return _billboardEditor;
 }
 
-MeshAnimationEditor& LeftViewportController::getMeshAnimationEditor()
+Animation3dEditor& LeftViewportController::getAnimation3dEditor()
 {
-	return _meshAnimationEditor;
+	return _animation3dEditor;
 }
 
-SpriteAnimationEditor& LeftViewportController::getSpriteAnimationEditor()
+Animation2dEditor& LeftViewportController::getAnimation2dEditor()
 {
-	return _spriteAnimationEditor;
+	return _animation2dEditor;
 }
 
 AudioEditor& LeftViewportController::getAudioEditor()

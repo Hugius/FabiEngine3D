@@ -1,7 +1,7 @@
-#include "mesh_animation_editor.hpp"
+#include "animation3d_editor.hpp"
 #include "logger.hpp"
 
-void MeshAnimationEditor::startAnimation(const string& animationID, const string& modelID, int timesToPlay)
+void Animation3dEditor::startAnimation(const string& animationID, const string& modelID, int timesToPlay)
 {
 	// Temporary values
 	string errorMessage = "Tried to start animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -65,7 +65,7 @@ void MeshAnimationEditor::startAnimation(const string& animationID, const string
 	}
 }
 
-void MeshAnimationEditor::pauseAnimation(const string& animationID, const string& modelID)
+void Animation3dEditor::pauseAnimation(const string& animationID, const string& modelID)
 {
 	// Temporary values
 	string errorMessage = "Tried to pause animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -97,7 +97,7 @@ void MeshAnimationEditor::pauseAnimation(const string& animationID, const string
 	}
 }
 
-void MeshAnimationEditor::resumeAnimation(const string& animationID, const string& modelID)
+void Animation3dEditor::resumeAnimation(const string& animationID, const string& modelID)
 {
 	// Temporary values
 	string errorMessage = "Tried to resume animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -129,7 +129,7 @@ void MeshAnimationEditor::resumeAnimation(const string& animationID, const strin
 	}
 }
 
-void MeshAnimationEditor::stopAnimation(const string& animationID, const string& modelID)
+void Animation3dEditor::stopAnimation(const string& animationID, const string& modelID)
 {
 	// Temporary values
 	string errorMessage = "Tried to stop animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -153,12 +153,12 @@ void MeshAnimationEditor::stopAnimation(const string& animationID, const string&
 	}
 }
 
-void MeshAnimationEditor::stopAllAnimations()
+void Animation3dEditor::stopAllAnimations()
 {
 	_startedAnimations.clear();
 }
 
-void MeshAnimationEditor::fadeAnimation(const string& animationID, const string& modelID, unsigned int framestep)
+void Animation3dEditor::fadeAnimation(const string& animationID, const string& modelID, unsigned int framestep)
 {
 	// Temporary values
 	string errorMessage = "Tried to fade animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";

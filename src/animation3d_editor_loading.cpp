@@ -1,4 +1,4 @@
-#include "mesh_animation_editor.hpp"
+#include "animation3d_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 #include "configuration.hpp"
@@ -8,12 +8,12 @@
 using std::ifstream;
 using std::istringstream;
 
-const bool MeshAnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
+const bool Animation3dEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 {
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("MeshAnimationEditor::loadAnimationsFromFile");
+		Logger::throwError("Animation3dEditor::loadAnimationsFromFile");
 	}
 
 	// Clear animations list from previous loads
@@ -22,12 +22,12 @@ const bool MeshAnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewMode
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\mesh_animation.fe3d");
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\animation3d.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project corrupted: file `mesh_animation.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `animation3d.fe3d` missing!");
 		return false;
 	}
 
@@ -48,15 +48,15 @@ const bool MeshAnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewMode
 		iss >> animationID >> previewModelID;
 
 		// Create new animation
-		auto newAnimation = make_shared<MeshAnimation>(animationID);
+		auto newAnimation = make_shared<Animation3d>(animationID);
 		newAnimation->setPreviewModelID(previewModelID);
 
 		// Create default frame
-		MeshAnimationFrame defaultFrame;
+		Animation3dFrame defaultFrame;
 
 		// Add default part
 		newAnimation->addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
-		defaultFrame.addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), MeshAnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
+		defaultFrame.addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), Animation3dSpeedType::LINEAR, TransformationType::MOVEMENT);
 
 		// Add custom parts
 		auto partIDs = _fe3d.model_getPartIDs(previewModelID);
@@ -69,7 +69,7 @@ const bool MeshAnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewMode
 				newAnimation->addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
 
 				// Add part to frame
-				defaultFrame.addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), MeshAnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
+				defaultFrame.addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), Animation3dSpeedType::LINEAR, TransformationType::MOVEMENT);
 			}
 		}
 
@@ -87,7 +87,7 @@ const bool MeshAnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewMode
 			iss >> animationID >> previewModelID;
 
 			// Read frame data
-			vector<MeshAnimationFrame> customFrames;
+			vector<Animation3dFrame> customFrames;
 			while(true)
 			{
 				// Check if file has frame data left
@@ -95,7 +95,7 @@ const bool MeshAnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewMode
 				if(iss >> modelPartCount)
 				{
 					// Create custom frame
-					MeshAnimationFrame customFrame;
+					Animation3dFrame customFrame;
 
 					// Iterate through model parts
 					for(unsigned int i = 0; i < modelPartCount; i++)
@@ -126,11 +126,11 @@ const bool MeshAnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewMode
 						// Add part to default frame only once
 						if(customFrames.empty())
 						{
-							defaultFrame.addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), MeshAnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
+							defaultFrame.addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), Animation3dSpeedType::LINEAR, TransformationType::MOVEMENT);
 						}
 
 						// Add part to custom frame
-						customFrame.addPart(partID, targetTransformation, rotationOrigin, speed, MeshAnimationSpeedType(speedType), TransformationType(transformationType));
+						customFrame.addPart(partID, targetTransformation, rotationOrigin, speed, Animation3dSpeedType(speedType), TransformationType(transformationType));
 					}
 
 					// Add custom frame
@@ -194,7 +194,7 @@ const bool MeshAnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewMode
 	file.close();
 
 	// Logging
-	Logger::throwInfo("Mesh animation data loaded!");
+	Logger::throwInfo("3D animation data loaded!");
 
 	// Return
 	return true;

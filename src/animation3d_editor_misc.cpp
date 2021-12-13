@@ -1,17 +1,17 @@
-#include "mesh_animation_editor.hpp"
+#include "animation3d_editor.hpp"
 #include "logger.hpp"
 
-void MeshAnimationEditor::setCurrentProjectID(const string& projectID)
+void Animation3dEditor::setCurrentProjectID(const string& projectID)
 {
 	_currentProjectID = projectID;
 }
 
-const bool MeshAnimationEditor::isLoaded() const
+const bool Animation3dEditor::isLoaded() const
 {
 	return _isEditorLoaded;
 }
 
-void MeshAnimationEditor::_deleteAnimation(const string& ID)
+void Animation3dEditor::_deleteAnimation(const string& ID)
 {
 	for(size_t i = 0; i < _animations.size(); i++)
 	{
@@ -22,15 +22,15 @@ void MeshAnimationEditor::_deleteAnimation(const string& ID)
 		}
 	}
 
-	Logger::throwError("MeshAnimationEditor::_deleteAnimation");
+	Logger::throwError("Animation3dEditor::_deleteAnimation");
 }
 
-const bool MeshAnimationEditor::_hasReachedFloat(float first, float second, float speed) const
+const bool Animation3dEditor::_hasReachedFloat(float first, float second, float speed) const
 {
 	return (first >= (second - fabsf(speed))) && (first <= (second + fabsf(speed)));
 }
 
-const bool MeshAnimationEditor::_comparePartIDs(vector<string> first, vector<string> second) const
+const bool Animation3dEditor::_comparePartIDs(vector<string> first, vector<string> second) const
 {
 	// Check size
 	if(first.size() != second.size())
@@ -51,7 +51,7 @@ const bool MeshAnimationEditor::_comparePartIDs(vector<string> first, vector<str
 	return true;
 }
 
-shared_ptr<MeshAnimation> MeshAnimationEditor::_getAnimation(const string& ID) const
+shared_ptr<Animation3d> Animation3dEditor::_getAnimation(const string& ID) const
 {
 	for(const auto& animation : _animations)
 	{
@@ -61,10 +61,10 @@ shared_ptr<MeshAnimation> MeshAnimationEditor::_getAnimation(const string& ID) c
 		}
 	}
 
-	Logger::throwError("MeshAnimationEditor::_getAnimation");
+	Logger::throwError("Animation3dEditor::_getAnimation");
 }
 
-const vector<string> MeshAnimationEditor::getAllAnimationIDs() const
+const vector<string> Animation3dEditor::getAllAnimationIDs() const
 {
 	vector<string> result;
 
@@ -80,7 +80,7 @@ const vector<string> MeshAnimationEditor::getAllAnimationIDs() const
 	return result;
 }
 
-const vector<string> MeshAnimationEditor::getStartedAnimationIDs() const
+const vector<string> Animation3dEditor::getStartedAnimationIDs() const
 {
 	set<string> IDs;
 
@@ -92,7 +92,7 @@ const vector<string> MeshAnimationEditor::getStartedAnimationIDs() const
 	return vector<string>(IDs.begin(), IDs.end());
 }
 
-const vector<string> MeshAnimationEditor::getStartedAnimationIDs(const string& modelID) const
+const vector<string> Animation3dEditor::getStartedAnimationIDs(const string& modelID) const
 {
 	set<string> IDs;
 
@@ -107,7 +107,7 @@ const vector<string> MeshAnimationEditor::getStartedAnimationIDs(const string& m
 	return vector<string>(IDs.begin(), IDs.end());
 }
 
-MeshAnimation* MeshAnimationEditor::getAnimationData(const string& animationID, const string& modelID, string baseErrorMessage)
+Animation3d* Animation3dEditor::getAnimationData(const string& animationID, const string& modelID, string baseErrorMessage)
 {
 	// Check if animation is able to be retrieved
 	if(!isAnimationExisting(animationID))
@@ -126,7 +126,7 @@ MeshAnimation* MeshAnimationEditor::getAnimationData(const string& animationID, 
 	return nullptr;
 }
 
-const bool MeshAnimationEditor::isAnimationExisting(const string& ID) const
+const bool Animation3dEditor::isAnimationExisting(const string& ID) const
 {
 	for(const auto& animation : _animations)
 	{
@@ -139,7 +139,7 @@ const bool MeshAnimationEditor::isAnimationExisting(const string& ID) const
 	return false;
 }
 
-const bool MeshAnimationEditor::isAnimationStarted(const string& animationID, const string& modelID) const
+const bool Animation3dEditor::isAnimationStarted(const string& animationID, const string& modelID) const
 {
 	// Temporary values
 	string errorMessage = "Tried to retrieve animation started status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -157,7 +157,7 @@ const bool MeshAnimationEditor::isAnimationStarted(const string& animationID, co
 	return false;
 }
 
-const bool MeshAnimationEditor::isAnimationPlaying(const string& animationID, const string& modelID) const
+const bool Animation3dEditor::isAnimationPlaying(const string& animationID, const string& modelID) const
 {
 	// Temporary values
 	string errorMessage = "Tried to retrieve animation playing status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -179,7 +179,7 @@ const bool MeshAnimationEditor::isAnimationPlaying(const string& animationID, co
 	return false;
 }
 
-const bool MeshAnimationEditor::isAnimationPaused(const string& animationID, const string& modelID) const
+const bool Animation3dEditor::isAnimationPaused(const string& animationID, const string& modelID) const
 {
 	// Temporary values
 	string errorMessage = "Tried to retrieve animation pausing status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -201,7 +201,7 @@ const bool MeshAnimationEditor::isAnimationPaused(const string& animationID, con
 	return false;
 }
 
-const bool MeshAnimationEditor::isAnimationFading(const string& animationID, const string& modelID) const
+const bool Animation3dEditor::isAnimationFading(const string& animationID, const string& modelID) const
 {
 	// Temporary values
 	string errorMessage = "Tried to retrieve animation fading status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";

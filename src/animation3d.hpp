@@ -1,20 +1,20 @@
 #pragma once
 
-#include "mesh_animation_frame.hpp"
+#include "animation3d_frame.hpp"
 
 #include <vector>
 
 using std::vector;
 
-class MeshAnimation final
+class Animation3d final
 {
 public:
-	MeshAnimation(const string& ID);
+	Animation3d(const string& ID);
 
 	// VOID
-	void addFrame(const MeshAnimationFrame& value);
-	void setFrame(unsigned int index, const MeshAnimationFrame& value);
-	void setFrames(const vector<MeshAnimationFrame>& value);
+	void addFrame(const Animation3dFrame& value);
+	void setFrame(unsigned int index, const Animation3dFrame& value);
+	void setFrames(const vector<Animation3dFrame>& value);
 	void addPart(const string& partID, fvec3 totalMovement, fvec3 totalRotation, fvec3 totalScaling);
 	void setPreviewModelID(const string& value);
 	void setOldPreviewModelID(const string& value);
@@ -58,7 +58,7 @@ public:
 	const bool isAutoPaused() const;
 
 	// MISCELLANEOUS
-	const vector<MeshAnimationFrame>& getFrames() const;
+	const vector<Animation3dFrame>& getFrames() const;
 
 private:
 	// STRING
@@ -89,5 +89,5 @@ private:
 	bool _isAutoPaused = false;
 
 	// MISCELLANEOUS
-	vector<MeshAnimationFrame> _frames;
+	vector<Animation3dFrame> _frames;
 };

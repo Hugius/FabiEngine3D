@@ -1,6 +1,6 @@
-#include "sprite_animation_editor.hpp"
+#include "animation2d_editor.hpp"
 
-void SpriteAnimationEditor::_updateAnimationExecution()
+void Animation2dEditor::_updateAnimationExecution()
 {
 	// Update all started animations
 	for(auto& [idPair, animation] : _startedAnimations)

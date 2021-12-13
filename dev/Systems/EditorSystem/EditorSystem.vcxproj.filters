@@ -106,39 +106,6 @@
     <Filter Include="Audio Editor\Persistence">
       <UniqueIdentifier>{a017341e-9ace-40d8-8090-f5b3370da817}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sprite Animation Editor">
-      <UniqueIdentifier>{15c1e9e5-2d94-4e16-9b6f-83da55e5b739}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Mesh Animation Editor">
-      <UniqueIdentifier>{ce127aed-4053-4bb3-af19-624153f70c1b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Mesh Animation Editor\Core">
-      <UniqueIdentifier>{e2011b46-5f88-42c0-9a59-40db66d04e13}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Mesh Animation Editor\Miscellaneous">
-      <UniqueIdentifier>{c79d9fa8-72de-43b2-8c68-d93aaa991a7d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Mesh Animation Editor\Data Structures">
-      <UniqueIdentifier>{baad863b-7fa3-4249-9d05-0954879e29ae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Mesh Animation Editor\Persistence">
-      <UniqueIdentifier>{f67f8919-3990-4cee-b59b-97e1c29774c0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sprite Animation Editor\Core">
-      <UniqueIdentifier>{d08cb6aa-aa91-4d77-9a47-d383c8cae5f9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sprite Animation Editor\Data Structures">
-      <UniqueIdentifier>{7c7b847e-e36f-4402-8ae6-8ed4a01b7ad9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sprite Animation Editor\Miscellaneous">
-      <UniqueIdentifier>{2d496f78-f3d8-48d8-b73d-5a54ad9ffb9d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sprite Animation Editor\Persistence">
-      <UniqueIdentifier>{ed0e4429-f505-4c9e-96d6-24f1366e7106}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Mesh Animation Editor\Update">
-      <UniqueIdentifier>{0b819a6c-bc62-490d-adc2-556478737fbb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Audio Editor\Update">
       <UniqueIdentifier>{e2ab1721-0c9c-494a-9bf7-5e9c85a34bef}</UniqueIdentifier>
     </Filter>
@@ -153,9 +120,6 @@
     </Filter>
     <Filter Include="Sky Editor\Update">
       <UniqueIdentifier>{05991820-f6e0-413c-926e-f2bfacffcf61}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sprite Animation Editor\Update">
-      <UniqueIdentifier>{48974e80-2b9e-4c00-902e-59ad675354a7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Terrain Editor\Update">
       <UniqueIdentifier>{bec038ca-373e-40af-b3f5-e8314584e5e3}</UniqueIdentifier>
@@ -199,19 +163,55 @@
     <Filter Include="World Editor\Update\Miscellaneous">
       <UniqueIdentifier>{f6631a60-1ac4-40dd-87c9-b86aba73bf79}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3D Animation Editor">
+      <UniqueIdentifier>{ce127aed-4053-4bb3-af19-624153f70c1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D Animation Editor\Core">
+      <UniqueIdentifier>{e2011b46-5f88-42c0-9a59-40db66d04e13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D Animation Editor\Miscellaneous">
+      <UniqueIdentifier>{c79d9fa8-72de-43b2-8c68-d93aaa991a7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D Animation Editor\Data Structures">
+      <UniqueIdentifier>{baad863b-7fa3-4249-9d05-0954879e29ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D Animation Editor\Persistence">
+      <UniqueIdentifier>{f67f8919-3990-4cee-b59b-97e1c29774c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D Animation Editor\Update">
+      <UniqueIdentifier>{0b819a6c-bc62-490d-adc2-556478737fbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D Animation Editor">
+      <UniqueIdentifier>{15c1e9e5-2d94-4e16-9b6f-83da55e5b739}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D Animation Editor\Core">
+      <UniqueIdentifier>{d08cb6aa-aa91-4d77-9a47-d383c8cae5f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D Animation Editor\Data Structures">
+      <UniqueIdentifier>{7c7b847e-e36f-4402-8ae6-8ed4a01b7ad9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D Animation Editor\Miscellaneous">
+      <UniqueIdentifier>{2d496f78-f3d8-48d8-b73d-5a54ad9ffb9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D Animation Editor\Persistence">
+      <UniqueIdentifier>{ed0e4429-f505-4c9e-96d6-24f1366e7106}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D Animation Editor\Update">
+      <UniqueIdentifier>{48974e80-2b9e-4c00-902e-59ad675354a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\mesh_animation_editor_lifecycle.cpp">
-      <Filter>Mesh Animation Editor\Core</Filter>
+    <ClCompile Include="..\..\..\src\animation3d_editor_lifecycle.cpp">
+      <Filter>3D Animation Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\mesh_animation_editor_misc.cpp">
-      <Filter>Mesh Animation Editor\Miscellaneous</Filter>
+    <ClCompile Include="..\..\..\src\animation3d_editor_misc.cpp">
+      <Filter>3D Animation Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\mesh_animation_editor_update_menu.cpp">
-      <Filter>Mesh Animation Editor\Update</Filter>
+    <ClCompile Include="..\..\..\src\animation3d_editor_update_menu.cpp">
+      <Filter>3D Animation Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\mesh_animation_editor_update_frame.cpp">
-      <Filter>Mesh Animation Editor\Update</Filter>
+    <ClCompile Include="..\..\..\src\animation3d_editor_update_frame.cpp">
+      <Filter>3D Animation Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\audio_editor_lifecycle.cpp">
       <Filter>Audio Editor\Core</Filter>
@@ -348,8 +348,8 @@
     <ClCompile Include="..\..\..\src\settings_editor.cpp">
       <Filter>Settings Editor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\mesh_animation_editor_update_misc.cpp">
-      <Filter>Mesh Animation Editor\Update</Filter>
+    <ClCompile Include="..\..\..\src\animation3d_editor_update_misc.cpp">
+      <Filter>3D Animation Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\billboard_editor_update_misc.cpp">
       <Filter>Billboard Editor\Update</Filter>
@@ -444,11 +444,11 @@
     <ClCompile Include="..\..\..\src\world_editor_reflection_update_edit.cpp">
       <Filter>World Editor\Update\Reflection</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\mesh_animation.cpp">
-      <Filter>Mesh Animation Editor\Data Structures</Filter>
+    <ClCompile Include="..\..\..\src\animation3d.cpp">
+      <Filter>3D Animation Editor\Data Structures</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\mesh_animation_frame.cpp">
-      <Filter>Mesh Animation Editor\Data Structures</Filter>
+    <ClCompile Include="..\..\..\src\animation3d_frame.cpp">
+      <Filter>3D Animation Editor\Data Structures</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\terrain_editor_update_normal.cpp">
       <Filter>Terrain Editor\Update</Filter>
@@ -459,11 +459,11 @@
     <ClCompile Include="..\..\..\src\terrain_editor_update_miscellaneous.cpp">
       <Filter>Terrain Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\mesh_animation_editor_update_execution.cpp">
-      <Filter>Mesh Animation Editor\Update</Filter>
+    <ClCompile Include="..\..\..\src\animation3d_editor_update_execution.cpp">
+      <Filter>3D Animation Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\mesh_animation_editor_control.cpp">
-      <Filter>Mesh Animation Editor\Core</Filter>
+    <ClCompile Include="..\..\..\src\animation3d_editor_control.cpp">
+      <Filter>3D Animation Editor\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_editor_saving.cpp">
       <Filter>Script Editor\Persistence</Filter>
@@ -483,8 +483,8 @@
     <ClCompile Include="..\..\..\src\audio_editor_saving.cpp">
       <Filter>Audio Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\mesh_animation_editor_saving.cpp">
-      <Filter>Mesh Animation Editor\Persistence</Filter>
+    <ClCompile Include="..\..\..\src\animation3d_editor_saving.cpp">
+      <Filter>3D Animation Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_spotlight_update_edit.cpp">
       <Filter>World Editor\Update\Spotlight</Filter>
@@ -513,8 +513,8 @@
     <ClCompile Include="..\..\..\src\billboard_editor_loading.cpp">
       <Filter>Billboard Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\mesh_animation_editor_loading.cpp">
-      <Filter>Mesh Animation Editor\Persistence</Filter>
+    <ClCompile Include="..\..\..\src\animation3d_editor_loading.cpp">
+      <Filter>3D Animation Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\audio_editor_loading.cpp">
       <Filter>Audio Editor\Persistence</Filter>
@@ -525,32 +525,32 @@
     <ClCompile Include="..\..\..\src\world_editor_misc_activation.cpp">
       <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sprite_animation_editor_lifecycle.cpp">
-      <Filter>Sprite Animation Editor\Core</Filter>
+    <ClCompile Include="..\..\..\src\animation2d_editor_lifecycle.cpp">
+      <Filter>2D Animation Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sprite_animation.cpp">
-      <Filter>Sprite Animation Editor\Data Structures</Filter>
+    <ClCompile Include="..\..\..\src\animation2d.cpp">
+      <Filter>2D Animation Editor\Data Structures</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sprite_animation_editor_misc.cpp">
-      <Filter>Sprite Animation Editor\Miscellaneous</Filter>
+    <ClCompile Include="..\..\..\src\animation2d_editor_misc.cpp">
+      <Filter>2D Animation Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sprite_animation_editor_update_menu.cpp">
-      <Filter>Sprite Animation Editor\Update</Filter>
+    <ClCompile Include="..\..\..\src\animation2d_editor_update_menu.cpp">
+      <Filter>2D Animation Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sprite_animation_editor_update_execution.cpp">
-      <Filter>Sprite Animation Editor\Update</Filter>
+    <ClCompile Include="..\..\..\src\animation2d_editor_update_execution.cpp">
+      <Filter>2D Animation Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sprite_animation_editor_update_misc.cpp">
-      <Filter>Sprite Animation Editor\Update</Filter>
+    <ClCompile Include="..\..\..\src\animation2d_editor_update_misc.cpp">
+      <Filter>2D Animation Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sprite_animation_editor_saving.cpp">
-      <Filter>Sprite Animation Editor\Persistence</Filter>
+    <ClCompile Include="..\..\..\src\animation2d_animation_editor_saving.cpp">
+      <Filter>2D Animation Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sprite_animation_editor_loading.cpp">
-      <Filter>Sprite Animation Editor\Persistence</Filter>
+    <ClCompile Include="..\..\..\src\animation2d_animation_editor_loading.cpp">
+      <Filter>2D Animation Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sprite_animation_editor_control.cpp">
-      <Filter>Sprite Animation Editor\Core</Filter>
+    <ClCompile Include="..\..\..\src\animation2d_editor_control.cpp">
+      <Filter>2D Animation Editor\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_update_menu.cpp">
       <Filter>World Editor\Update\Miscellaneous</Filter>
@@ -560,14 +560,14 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\mesh_animation_editor.hpp">
-      <Filter>Mesh Animation Editor\Core</Filter>
+    <ClInclude Include="..\..\..\src\animation3d_editor.hpp">
+      <Filter>3D Animation Editor\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\mesh_animation.hpp">
-      <Filter>Mesh Animation Editor\Data Structures</Filter>
+    <ClInclude Include="..\..\..\src\animation3d.hpp">
+      <Filter>3D Animation Editor\Data Structures</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\mesh_animation_frame.hpp">
-      <Filter>Mesh Animation Editor\Data Structures</Filter>
+    <ClInclude Include="..\..\..\src\animation3d_frame.hpp">
+      <Filter>3D Animation Editor\Data Structures</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\audio_editor.hpp">
       <Filter>Audio Editor\Core</Filter>
@@ -596,11 +596,11 @@
     <ClInclude Include="..\..\..\src\terrain_editor.hpp">
       <Filter>Terrain Editor\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\sprite_animation_editor.hpp">
-      <Filter>Sprite Animation Editor\Core</Filter>
+    <ClInclude Include="..\..\..\src\animation2d_editor.hpp">
+      <Filter>2D Animation Editor\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\sprite_animation.hpp">
-      <Filter>Sprite Animation Editor\Data Structures</Filter>
+    <ClInclude Include="..\..\..\src\animation2d.hpp">
+      <Filter>2D Animation Editor\Data Structures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

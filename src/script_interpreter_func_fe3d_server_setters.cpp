@@ -92,7 +92,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 		return false;
 	}
 
-	// Cannot execute server functionality when client is running
+	// Cannot execute when client is running
 	if(_fe3d.client_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:server` functionality as networking client!");

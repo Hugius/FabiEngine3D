@@ -1,13 +1,13 @@
-#include "mesh_animation_editor.hpp"
+#include "animation3d_editor.hpp"
 #include "logger.hpp"
 
-void MeshAnimationEditor::_updateFrameMenu()
+void Animation3dEditor::_updateFrameMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if(screen->getID() == "meshAnimationEditorMenuFrame")
+	if(screen->getID() == "animation3dEditorMenuFrame")
 	{
 		// Temporary values
 		auto currentAnimation = _getAnimation(_currentAnimationID);
@@ -26,7 +26,7 @@ void MeshAnimationEditor::_updateFrameMenu()
 		screen->getButton("rotationOrigin")->setHoverable(transformationType == TransformationType::ROTATION);
 
 		// Speed is only available if speed type is not instantly
-		screen->getButton("speed")->setHoverable(speedType != MeshAnimationSpeedType::INSTANTLY);
+		screen->getButton("speed")->setHoverable(speedType != Animation3dSpeedType::INSTANTLY);
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
@@ -39,7 +39,7 @@ void MeshAnimationEditor::_updateFrameMenu()
 
 			// Miscellaneous
 			_currentPartID = "";
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("meshAnimationEditorMenuChoice");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
 			return;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("part")->isHovered())
@@ -80,17 +80,17 @@ void MeshAnimationEditor::_updateFrameMenu()
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speedType")->isHovered())
 		{
 			// Change speed type
-			if(speedType == MeshAnimationSpeedType::LINEAR)
+			if(speedType == Animation3dSpeedType::LINEAR)
 			{
-				speedType = MeshAnimationSpeedType::EXPONENTIAL;
+				speedType = Animation3dSpeedType::EXPONENTIAL;
 			}
-			else if(speedType == MeshAnimationSpeedType::EXPONENTIAL)
+			else if(speedType == Animation3dSpeedType::EXPONENTIAL)
 			{
-				speedType = MeshAnimationSpeedType::INSTANTLY;
+				speedType = Animation3dSpeedType::INSTANTLY;
 			}
 			else
 			{
-				speedType = MeshAnimationSpeedType::LINEAR;
+				speedType = Animation3dSpeedType::LINEAR;
 			}
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotationOrigin")->isHovered())
@@ -174,11 +174,11 @@ void MeshAnimationEditor::_updateFrameMenu()
 		{
 			screen->getButton("transformationType")->changeTextContent("Type: SCALE");
 		}
-		if(speedType == MeshAnimationSpeedType::LINEAR)
+		if(speedType == Animation3dSpeedType::LINEAR)
 		{
 			screen->getButton("speedType")->changeTextContent("Type: LINEAR");
 		}
-		else if(speedType == MeshAnimationSpeedType::EXPONENTIAL)
+		else if(speedType == Animation3dSpeedType::EXPONENTIAL)
 		{
 			screen->getButton("speedType")->changeTextContent("Type: EXPONENT");
 		}

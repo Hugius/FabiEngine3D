@@ -4,10 +4,10 @@
 
 using std::string;
 
-class SpriteAnimation final
+class Animation2d final
 {
 public:
-	SpriteAnimation(const string& ID);
+	Animation2d(const string& ID);
 
 	// VOIDS
 	void setTimesToPlay(int value);

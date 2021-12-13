@@ -15,7 +15,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			// Cannot execute pausing functionality when server is running
+			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:application_pause` functionality as a networking server!");
@@ -31,7 +31,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			// Cannot execute pausing functionality when server is running
+			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:application_resume` functionality as a networking server!");
@@ -97,7 +97,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Cannot execute cursor functionality when server is running
+			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:cursor` functionality as networking server!");
@@ -113,7 +113,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			// Cannot execute cursor functionality when server is running
+			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:cursor` functionality as networking server!");
@@ -145,7 +145,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			// Cannot execute wireframe functionality when server is running
+			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:wireframe` functionality as networking server!");
@@ -161,7 +161,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			// Cannot execute wireframe functionality when server is running
+			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:wireframe` functionality as networking server!");
@@ -177,7 +177,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			// Cannot execute AABBs functionality when server is running
+			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:aabbs` functionality as networking server!");
@@ -193,7 +193,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			// Cannot execute AABBs functionality when server is running
+			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:aabbs` functionality as networking server!");
@@ -219,7 +219,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			// Cannot execute Vsync functionality when server is running
+			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:vsync` functionality as networking server!");
@@ -235,7 +235,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			// Cannot execute Vsync functionality when server is running
+			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:vsync` functionality as networking server!");

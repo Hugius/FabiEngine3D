@@ -97,7 +97,7 @@ const bool ScriptInterpreter::_executeFe3dLightingGetter(const string& functionN
 		return false;
 	}
 
-	// Cannot execute lighting functionality when server is running
+	// Cannot execute when server is running
 	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:lighting` functionality as networking server!");

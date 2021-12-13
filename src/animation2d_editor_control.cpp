@@ -1,7 +1,7 @@
-#include "sprite_animation_editor.hpp"
+#include "animation2d_editor.hpp"
 #include "logger.hpp"
 
-void SpriteAnimationEditor::startAnimation(const string& animationID, const string& billboardID, int timesToPlay)
+void Animation2dEditor::startAnimation(const string& animationID, const string& billboardID, int timesToPlay)
 {
 	// Temporary values
 	string errorMessage = "Tried to start animation with ID \"" + animationID + "\" on billboard with ID \"" + billboardID + "\": ";
@@ -46,7 +46,7 @@ void SpriteAnimationEditor::startAnimation(const string& animationID, const stri
 	}
 }
 
-void SpriteAnimationEditor::pauseAnimation(const string& animationID, const string& billboardID)
+void Animation2dEditor::pauseAnimation(const string& animationID, const string& billboardID)
 {
 	// Temporary values
 	string errorMessage = "Tried to pause animation with ID \"" + animationID + "\" on billboard with ID \"" + billboardID + "\": ";
@@ -78,7 +78,7 @@ void SpriteAnimationEditor::pauseAnimation(const string& animationID, const stri
 	}
 }
 
-void SpriteAnimationEditor::resumeAnimation(const string& animationID, const string& billboardID)
+void Animation2dEditor::resumeAnimation(const string& animationID, const string& billboardID)
 {
 	// Temporary values
 	string errorMessage = "Tried to resume animation with ID \"" + animationID + "\" on billboard with ID \"" + billboardID + "\": ";
@@ -110,7 +110,7 @@ void SpriteAnimationEditor::resumeAnimation(const string& animationID, const str
 	}
 }
 
-void SpriteAnimationEditor::stopAnimation(const string& animationID, const string& billboardID)
+void Animation2dEditor::stopAnimation(const string& animationID, const string& billboardID)
 {
 	// Temporary values
 	string errorMessage = "Tried to stop animation with ID \"" + animationID + "\" on billboard with ID \"" + billboardID + "\": ";
@@ -139,7 +139,7 @@ void SpriteAnimationEditor::stopAnimation(const string& animationID, const strin
 	}
 }
 
-void SpriteAnimationEditor::stopAllAnimations()
+void Animation2dEditor::stopAllAnimations()
 {
 	_startedAnimations.clear();
 }

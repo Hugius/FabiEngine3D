@@ -2,12 +2,12 @@
 
 #include "fe3d.hpp"
 #include "engine_gui_manager.hpp"
-#include "sprite_animation.hpp"
+#include "animation2d.hpp"
 
-class SpriteAnimationEditor final
+class Animation2dEditor final
 {
 public:
-	SpriteAnimationEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
+	Animation2dEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 
 	// VOID
 	void setCurrentProjectID(const string& projectID);
@@ -46,7 +46,7 @@ private:
 	void _deleteAnimation(const string& ID);
 
 	// MISCELLANEOUS
-	shared_ptr<SpriteAnimation> _getAnimation(const string& ID) const;
+	shared_ptr<Animation2d> _getAnimation(const string& ID) const;
 
 	// STRING
 	static inline const string PREVIEW_BILLBOARD_ID = "@@preview_billboard";
@@ -70,8 +70,8 @@ private:
 	bool _isEditorLoaded = false;
 
 	// MISCELLANEOUS
-	map<pair<string, string>, SpriteAnimation> _startedAnimations;
-	vector<shared_ptr<SpriteAnimation>> _animations;
+	map<pair<string, string>, Animation2d> _startedAnimations;
+	vector<shared_ptr<Animation2d>> _animations;
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;
 };

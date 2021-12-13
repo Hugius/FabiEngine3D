@@ -1,7 +1,7 @@
-#include "mesh_animation_editor.hpp"
+#include "animation3d_editor.hpp"
 #include "logger.hpp"
 
-void MeshAnimationEditor::_updateCamera()
+void Animation3dEditor::_updateCamera()
 {
 	// Check if third person view is enabled
 	if(_fe3d.camera_isThirdPersonViewEnabled())
@@ -63,7 +63,7 @@ void MeshAnimationEditor::_updateCamera()
 	}
 }
 
-void MeshAnimationEditor::_updateMiscellaneous()
+void Animation3dEditor::_updateMiscellaneous()
 {
 	// Check if allowed by GUI
 	if(!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
@@ -264,7 +264,7 @@ void MeshAnimationEditor::_updateMiscellaneous()
 	}
 }
 
-void MeshAnimationEditor::_updateAnimationCreating()
+void Animation3dEditor::_updateAnimationCreating()
 {
 	if(_isCreatingAnimation)
 	{
@@ -283,10 +283,10 @@ void MeshAnimationEditor::_updateAnimationCreating()
 					if(find(animationIDs.begin(), animationIDs.end(), newAnimationID) == animationIDs.end())
 					{
 						// Go to next screen
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("meshAnimationEditorMenuChoice");
+						_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
 
 						// Create animation
-						_animations.push_back(make_shared<MeshAnimation>(newAnimationID));
+						_animations.push_back(make_shared<Animation3d>(newAnimationID));
 
 						// Select animation
 						_currentAnimationID = newAnimationID;
@@ -315,7 +315,7 @@ void MeshAnimationEditor::_updateAnimationCreating()
 	}
 }
 
-void MeshAnimationEditor::_updateAnimationChoosing()
+void Animation3dEditor::_updateAnimationChoosing()
 {
 	if(_isChoosingAnimation)
 	{
@@ -334,7 +334,7 @@ void MeshAnimationEditor::_updateAnimationChoosing()
 				// Go to next screen
 				if(!_isDeletingAnimation)
 				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("meshAnimationEditorMenuChoice");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
 					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), "Animation: " + selectedButtonID, 0.025f);
 					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), true);
 					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), true);
@@ -358,7 +358,7 @@ void MeshAnimationEditor::_updateAnimationChoosing()
 	}
 }
 
-void MeshAnimationEditor::_updateAnimationDeleting()
+void Animation3dEditor::_updateAnimationDeleting()
 {
 	if(_isDeletingAnimation && _currentAnimationID != "")
 	{
@@ -372,7 +372,7 @@ void MeshAnimationEditor::_updateAnimationDeleting()
 		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 		{
 			// Go to main screen
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("meshAnimationEditorMenuMain");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation3dEditorMenuMain");
 
 			// Delete animation
 			if(!_getAnimation(_currentAnimationID)->getPreviewModelID().empty())

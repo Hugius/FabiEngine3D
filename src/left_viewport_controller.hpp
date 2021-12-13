@@ -7,8 +7,8 @@
 #include "water_editor.hpp"
 #include "model_editor.hpp"
 #include "billboard_editor.hpp"
-#include "mesh_animation_editor.hpp"
-#include "sprite_animation_editor.hpp"
+#include "animation3d_editor.hpp"
+#include "animation2d_editor.hpp"
 #include "audio_editor.hpp"
 #include "world_editor.hpp"
 #include "script_editor.hpp"
@@ -29,8 +29,8 @@ public:
 	WaterEditor& getWaterEditor();
 	ModelEditor& getModelEditor();
 	BillboardEditor& getBillboardEditor();
-	MeshAnimationEditor& getMeshAnimationEditor();
-	SpriteAnimationEditor& getSpriteAnimationEditor();
+	Animation3dEditor& getAnimation3dEditor();
+	Animation2dEditor& getAnimation2dEditor();
 	AudioEditor& getAudioEditor();
 	WorldEditor& getWorldEditor();
 	ScriptEditor& getScriptEditor();
@@ -60,8 +60,8 @@ private:
 	WaterEditor _waterEditor;
 	ModelEditor _modelEditor;
 	BillboardEditor _billboardEditor;
-	MeshAnimationEditor _meshAnimationEditor;
-	SpriteAnimationEditor _spriteAnimationEditor;
+	Animation3dEditor _animation3dEditor;
+	Animation2dEditor _animation2dEditor;
 	AudioEditor _audioEditor;
 	WorldEditor _worldEditor;
 	ScriptEditor _scriptEditor;

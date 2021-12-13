@@ -507,7 +507,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 		return false;
 	}
 
-	// Cannot execute billboard functionality when server is running
+	// Cannot execute when server is running
 	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:billboard` functionality as networking server!");

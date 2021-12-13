@@ -148,7 +148,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "MODEL")
 		{
 			// Data placeholders
-			string modelID, previewID, meshAnimationID;
+			string modelID, previewID, animation3dID;
 			fvec3 position, rotation, size;
 			bool isFrozen;
 
@@ -183,13 +183,13 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				size.y >>
 				size.z >>
 				isFrozen >>
-				meshAnimationID;
+				animation3dID;
 
 			// Convert empty string
-			meshAnimationID = (meshAnimationID == "?") ? "" : meshAnimationID;
+			animation3dID = (animation3dID == "?") ? "" : animation3dID;
 
 			// Convert spaces
-			replace(meshAnimationID.begin(), meshAnimationID.end(), '?', ' ');
+			replace(animation3dID.begin(), animation3dID.end(), '?', ' ');
 
 			// Check if preview model instancing changed
 			if(_fe3d.model_isExisting(previewID))
@@ -218,10 +218,10 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 					_initialModelSize[modelID] = size;
 				}
 
-				// Start mesh animation
-				if(!meshAnimationID.empty())
+				// Start 3D animation
+				if(!animation3dID.empty())
 				{
-					_meshAnimationEditor.startAnimation(meshAnimationID, modelID, -1);
+					_animation3dEditor.startAnimation(animation3dID, modelID, -1);
 				}
 
 				// Check if instanced

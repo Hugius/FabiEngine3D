@@ -59,7 +59,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string& function
 		return false;
 	}
 
-	// Cannot execute collision functionality when server is running
+	// Cannot execute when server is running
 	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:collision` functionality as networking server!");

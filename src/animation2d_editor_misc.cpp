@@ -1,17 +1,17 @@
-#include "sprite_animation_editor.hpp"
+#include "animation2d_editor.hpp"
 #include "logger.hpp"
 
-void SpriteAnimationEditor::setCurrentProjectID(const string& projectID)
+void Animation2dEditor::setCurrentProjectID(const string& projectID)
 {
 	_currentProjectID = projectID;
 }
 
-const bool SpriteAnimationEditor::isLoaded() const
+const bool Animation2dEditor::isLoaded() const
 {
 	return _isEditorLoaded;
 }
 
-const vector<string> SpriteAnimationEditor::getAllAnimationIDs()
+const vector<string> Animation2dEditor::getAllAnimationIDs()
 {
 	vector<string> result;
 
@@ -27,7 +27,7 @@ const vector<string> SpriteAnimationEditor::getAllAnimationIDs()
 	return result;
 }
 
-void SpriteAnimationEditor::_deleteAnimation(const string& ID)
+void Animation2dEditor::_deleteAnimation(const string& ID)
 {
 	for(size_t i = 0; i < _animations.size(); i++)
 	{
@@ -38,10 +38,10 @@ void SpriteAnimationEditor::_deleteAnimation(const string& ID)
 		}
 	}
 
-	Logger::throwError("SpriteAnimationEditor::_deleteAnimation");
+	Logger::throwError("Animation2dEditor::_deleteAnimation");
 }
 
-shared_ptr<SpriteAnimation> SpriteAnimationEditor::_getAnimation(const string& ID) const
+shared_ptr<Animation2d> Animation2dEditor::_getAnimation(const string& ID) const
 {
 	for(const auto& animation : _animations)
 	{
@@ -51,10 +51,10 @@ shared_ptr<SpriteAnimation> SpriteAnimationEditor::_getAnimation(const string& I
 		}
 	}
 
-	Logger::throwError("SpriteAnimationEditor::_getAnimation");
+	Logger::throwError("Animation2dEditor::_getAnimation");
 }
 
-const bool SpriteAnimationEditor::isAnimationExisting(const string& ID) const
+const bool Animation2dEditor::isAnimationExisting(const string& ID) const
 {
 	for(const auto& animation : _animations)
 	{
@@ -67,7 +67,7 @@ const bool SpriteAnimationEditor::isAnimationExisting(const string& ID) const
 	return false;
 }
 
-const bool SpriteAnimationEditor::isAnimationStarted(const string& animationID, const string& billboardID) const
+const bool Animation2dEditor::isAnimationStarted(const string& animationID, const string& billboardID) const
 {
 	// Temporary values
 	string errorMessage = "Tried to retrieve animation started status with ID \"" + animationID + "\" on billboard with ID \"" + billboardID + "\": ";
@@ -85,7 +85,7 @@ const bool SpriteAnimationEditor::isAnimationStarted(const string& animationID, 
 	return false;
 }
 
-const bool SpriteAnimationEditor::isAnimationPlaying(const string& animationID, const string& billboardID) const
+const bool Animation2dEditor::isAnimationPlaying(const string& animationID, const string& billboardID) const
 {
 	// Temporary values
 	string errorMessage = "Tried to retrieve animation playing status with ID \"" + animationID + "\" on billboard with ID \"" + billboardID + "\": ";
@@ -107,7 +107,7 @@ const bool SpriteAnimationEditor::isAnimationPlaying(const string& animationID, 
 	return false;
 }
 
-const bool SpriteAnimationEditor::isAnimationPaused(const string& animationID, const string& billboardID) const
+const bool Animation2dEditor::isAnimationPaused(const string& animationID, const string& billboardID) const
 {
 	// Temporary values
 	string errorMessage = "Tried to retrieve animation pausing status with ID \"" + animationID + "\" on billboard with ID \"" + billboardID + "\": ";

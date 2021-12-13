@@ -183,7 +183,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 		return false;
 	}
 
-	// Cannot execute world functionality when server is running
+	// Cannot execute when server is running
 	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:world` functionality as networking server!");

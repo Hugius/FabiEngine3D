@@ -6,7 +6,7 @@
 #include "terrain_editor.hpp"
 #include "water_editor.hpp"
 #include "model_editor.hpp"
-#include "mesh_animation_editor.hpp"
+#include "animation3d_editor.hpp"
 #include "billboard_editor.hpp"
 #include "audio_editor.hpp"
 #include "transformation_type.hpp"
@@ -19,7 +19,7 @@ using std::numeric_limits;
 class WorldEditor final
 {
 public:
-	WorldEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor, MeshAnimationEditor& meshAnimationEditor, AudioEditor& audioEditor);
+	WorldEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor, Animation3dEditor& animation3dEditor, AudioEditor& audioEditor);
 
 	// VOID
 	void setCurrentProjectID(const string& ID);
@@ -299,6 +299,6 @@ private:
 	WaterEditor& _waterEditor;
 	ModelEditor& _modelEditor;
 	BillboardEditor& _billboardEditor;
-	MeshAnimationEditor& _meshAnimationEditor;
+	Animation3dEditor& _animation3dEditor;
 	AudioEditor& _audioEditor;
 };

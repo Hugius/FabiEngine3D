@@ -122,7 +122,7 @@ void WorldEditor::_updateModelEditing()
 				}
 				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
 				{
-					_gui.getGlobalScreen()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), _meshAnimationEditor.getAllAnimationIDs());
+					_gui.getGlobalScreen()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), _animation3dEditor.getAllAnimationIDs());
 				}
 				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
@@ -134,7 +134,7 @@ void WorldEditor::_updateModelEditing()
 			}
 
 			// Check if an animation ID is clicked
-			auto lastAnimationID = _meshAnimationEditor.getStartedAnimationIDs(_activeModelID);
+			auto lastAnimationID = _animation3dEditor.getStartedAnimationIDs(_activeModelID);
 			string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("animationList");
 			if(selectedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
@@ -142,7 +142,7 @@ void WorldEditor::_updateModelEditing()
 				if(!lastAnimationID.empty())
 				{
 					// Stop animation
-					_meshAnimationEditor.stopAnimation(lastAnimationID.back(), _activeModelID);
+					_animation3dEditor.stopAnimation(lastAnimationID.back(), _activeModelID);
 
 					// Reset main transformation
 					_fe3d.model_setBasePosition(_activeModelID, _initialModelPosition[_activeModelID]);
@@ -165,7 +165,7 @@ void WorldEditor::_updateModelEditing()
 				}
 
 				// Start chosen animation
-				_meshAnimationEditor.startAnimation(selectedButtonID, _activeModelID, -1);
+				_animation3dEditor.startAnimation(selectedButtonID, _activeModelID, -1);
 
 				// Miscellaneous
 				_gui.getGlobalScreen()->deleteChoiceForm("animationList");
@@ -225,11 +225,11 @@ void WorldEditor::_updateModelEditing()
 			if((position != oldPosition) || (rotation != oldRotation) || (size != oldSize))
 			{
 				// Check if animation is playing
-				auto animationIDs = _meshAnimationEditor.getStartedAnimationIDs(_activeModelID);
+				auto animationIDs = _animation3dEditor.getStartedAnimationIDs(_activeModelID);
 				if(!animationIDs.empty())
 				{
 					// Stop animation
-					_meshAnimationEditor.stopAnimation(animationIDs[0], _activeModelID);
+					_animation3dEditor.stopAnimation(animationIDs[0], _activeModelID);
 
 					// Save new initial position
 					if(position != oldPosition)
@@ -269,7 +269,7 @@ void WorldEditor::_updateModelEditing()
 					}
 
 					// Start animation again
-					_meshAnimationEditor.startAnimation(animationIDs[0], _activeModelID, -1);
+					_animation3dEditor.startAnimation(animationIDs[0], _activeModelID, -1);
 				}
 				else // No animation playing
 				{

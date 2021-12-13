@@ -273,11 +273,11 @@ const bool WorldEditor::saveCustomWorldToFile()
 		if(((modelID[0] != '@') || isLodModel) && isCustomWorldModel)
 		{
 			// Every playing animation on every model
-			for(const auto& animationID : _meshAnimationEditor.getStartedAnimationIDs(modelID))
+			for(const auto& animationID : _animation3dEditor.getStartedAnimationIDs(modelID))
 			{
 				// Retrieve raw animation data for retrieving
 				string errorMessage = "Tried to retrieve animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
-				auto animationData = _meshAnimationEditor.getAnimationData(animationID, modelID, errorMessage);
+				auto animationData = _animation3dEditor.getAnimationData(animationID, modelID, errorMessage);
 
 				// Data to save
 				auto isPaused = animationData->isPaused();

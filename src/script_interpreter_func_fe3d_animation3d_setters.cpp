@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dAnimationSetter3D(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_meshAnimationEditor.startAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
+				_animation3dEditor.startAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -25,7 +25,7 @@ const bool ScriptInterpreter::_executeFe3dAnimationSetter3D(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_meshAnimationEditor.pauseAnimation(arguments[1].getString(), arguments[0].getString());
+				_animation3dEditor.pauseAnimation(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -38,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dAnimationSetter3D(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_meshAnimationEditor.resumeAnimation(arguments[1].getString(), arguments[0].getString());
+				_animation3dEditor.resumeAnimation(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -51,7 +51,7 @@ const bool ScriptInterpreter::_executeFe3dAnimationSetter3D(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_meshAnimationEditor.fadeAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
+				_animation3dEditor.fadeAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -64,7 +64,7 @@ const bool ScriptInterpreter::_executeFe3dAnimationSetter3D(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_meshAnimationEditor.stopAnimation(arguments[1].getString(), arguments[0].getString());
+				_animation3dEditor.stopAnimation(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -79,7 +79,7 @@ const bool ScriptInterpreter::_executeFe3dAnimationSetter3D(const string& functi
 			{
 				// Retrieve animation data
 				string errorMessage = "Tried to set animation speed with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
-				auto animationData = _meshAnimationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
+				auto animationData = _animation3dEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
 
 				// Check if animation was found
 				if(animationData != nullptr)
@@ -100,7 +100,7 @@ const bool ScriptInterpreter::_executeFe3dAnimationSetter3D(const string& functi
 			{
 				// Retrieve animation data
 				string errorMessage = "Tried to set animation autopaused option with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
-				auto animationData = _meshAnimationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
+				auto animationData = _animation3dEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
 
 				// Check if animation was found
 				if(animationData != nullptr)
@@ -116,7 +116,7 @@ const bool ScriptInterpreter::_executeFe3dAnimationSetter3D(const string& functi
 		return false;
 	}
 
-	// Cannot execute mesh animation functionality when server is running
+	// Cannot execute when server is running
 	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:animation3d` functionality as networking server!");

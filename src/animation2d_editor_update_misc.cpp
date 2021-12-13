@@ -1,7 +1,7 @@
-#include "sprite_animation_editor.hpp"
+#include "animation2d_editor.hpp"
 #include "logger.hpp"
 
-void SpriteAnimationEditor::_updateMiscellaneous()
+void Animation2dEditor::_updateMiscellaneous()
 {
 	// Check if allowed by GUI
 	if(!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
@@ -21,7 +21,7 @@ void SpriteAnimationEditor::_updateMiscellaneous()
 	}
 }
 
-void SpriteAnimationEditor::_updateAnimationCreating()
+void Animation2dEditor::_updateAnimationCreating()
 {
 	if(_isCreatingAnimation)
 	{
@@ -40,10 +40,10 @@ void SpriteAnimationEditor::_updateAnimationCreating()
 					if(find(animationIDs.begin(), animationIDs.end(), newAnimationID) == animationIDs.end())
 					{
 						// Go to next screen
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("spriteAnimationEditorMenuChoice");
+						_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
 
 						// Create animation
-						_animations.push_back(make_shared<SpriteAnimation>(newAnimationID));
+						_animations.push_back(make_shared<Animation2d>(newAnimationID));
 
 						// Select animation
 						_currentAnimationID = newAnimationID;
@@ -73,7 +73,7 @@ void SpriteAnimationEditor::_updateAnimationCreating()
 	}
 }
 
-void SpriteAnimationEditor::_updateAnimationChoosing()
+void Animation2dEditor::_updateAnimationChoosing()
 {
 	if(_isChoosingAnimation)
 	{
@@ -92,7 +92,7 @@ void SpriteAnimationEditor::_updateAnimationChoosing()
 				// Go to next screen
 				if(!_isDeletingAnimation)
 				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("spriteAnimationEditorMenuChoice");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
 					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), "Animation: " + selectedButtonID, 0.025f);
 					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), true);
 				}
@@ -113,7 +113,7 @@ void SpriteAnimationEditor::_updateAnimationChoosing()
 	}
 }
 
-void SpriteAnimationEditor::_updateAnimationDeleting()
+void Animation2dEditor::_updateAnimationDeleting()
 {
 	if(_isDeletingAnimation && _currentAnimationID != "")
 	{
@@ -127,7 +127,7 @@ void SpriteAnimationEditor::_updateAnimationDeleting()
 		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 		{
 			// Go to main screen
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("spriteAnimationEditorMenuMain");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation2dEditorMenuMain");
 
 			// Delete animation
 			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");

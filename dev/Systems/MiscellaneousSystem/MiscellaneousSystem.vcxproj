@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\aabb_parent_entity_type.hpp" />
-    <ClInclude Include="..\..\..\src\mesh_animation_speed_type.hpp" />
+    <ClInclude Include="..\..\..\src\animation3d_speed_type.hpp" />
     <ClInclude Include="..\..\..\src\bloom_type.hpp" />
     <ClInclude Include="..\..\..\src\blur_direction.hpp" />
     <ClInclude Include="..\..\..\src\buffer_type.hpp" />

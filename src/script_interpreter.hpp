@@ -9,7 +9,7 @@
 #include "terrain_editor.hpp"
 #include "water_editor.hpp"
 #include "model_editor.hpp"
-#include "mesh_animation_editor.hpp"
+#include "animation3d_editor.hpp"
 #include "billboard_editor.hpp"
 #include "audio_editor.hpp"
 #include "world_editor.hpp"
@@ -19,7 +19,7 @@ class ScriptInterpreter final
 public:
 	ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SkyEditor& skyEditor, TerrainEditor& terrainEditor,
 					  WaterEditor& waterEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor,
-					  MeshAnimationEditor& meshAnimationEditor, AudioEditor& audioEditor, WorldEditor& worldEditor);
+					  Animation3dEditor& animation3dEditor, AudioEditor& audioEditor, WorldEditor& worldEditor);
 
 	// VOID
 	void setCurrentProjectID(const string& projectID);
@@ -231,7 +231,7 @@ private:
 	WaterEditor& _waterEditor;
 	ModelEditor& _modelEditor;
 	BillboardEditor& _billboardEditor;
-	MeshAnimationEditor& _meshAnimationEditor;
+	Animation3dEditor& _animation3dEditor;
 	AudioEditor& _audioEditor;
 	WorldEditor& _worldEditor;
 	static inline const map<string, InputType> KEY_INPUT_STRING_MAP =

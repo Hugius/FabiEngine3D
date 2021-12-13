@@ -2,7 +2,7 @@
 #include "left_viewport_controller.hpp"
 #include "configuration.hpp"
 
-WorldEditor::WorldEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor, MeshAnimationEditor& meshAnimationEditor, AudioEditor& audioEditor)
+WorldEditor::WorldEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor, Animation3dEditor& animation3dEditor, AudioEditor& audioEditor)
 	:
 	_fe3d(fe3d),
 	_gui(gui),
@@ -11,7 +11,7 @@ WorldEditor::WorldEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& s
 	_waterEditor(waterEditor),
 	_modelEditor(modelEditor),
 	_billboardEditor(billboardEditor),
-	_meshAnimationEditor(meshAnimationEditor),
+	_animation3dEditor(animation3dEditor),
 	_audioEditor(audioEditor)
 {
 
@@ -61,8 +61,8 @@ void WorldEditor::load()
 		}
 	}
 
-	// Load preview mesh animations
-	_meshAnimationEditor.loadAnimationsFromFile(false);
+	// Load preview 3D animations
+	_animation3dEditor.loadAnimationsFromFile(false);
 
 	// Load preview sounds
 	_audioEditor.loadAudioEntitiesFromFile();

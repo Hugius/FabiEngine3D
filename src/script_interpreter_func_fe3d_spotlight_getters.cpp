@@ -228,7 +228,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 		return false;
 	}
 
-	// Cannot execute spotlight functionality when server is running
+	// Cannot execute when server is running
 	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:spotlight` functionality as networking server!");

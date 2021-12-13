@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dAnimationGetter3D(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _meshAnimationEditor.isAnimationStarted(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation3dEditor.isAnimationStarted(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -25,7 +25,7 @@ const bool ScriptInterpreter::_executeFe3dAnimationGetter3D(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _meshAnimationEditor.isAnimationPlaying(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation3dEditor.isAnimationPlaying(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -38,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dAnimationGetter3D(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _meshAnimationEditor.isAnimationPaused(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation3dEditor.isAnimationPaused(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -51,7 +51,7 @@ const bool ScriptInterpreter::_executeFe3dAnimationGetter3D(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _meshAnimationEditor.isAnimationFading(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation3dEditor.isAnimationFading(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -66,7 +66,7 @@ const bool ScriptInterpreter::_executeFe3dAnimationGetter3D(const string& functi
 			{
 				// Retrieve animation data
 				string errorMessage = "Tried to get animation speed with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
-				auto animationData = _meshAnimationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
+				auto animationData = _animation3dEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
 
 				// Check if animation was found
 				if(animationData != nullptr)
@@ -87,7 +87,7 @@ const bool ScriptInterpreter::_executeFe3dAnimationGetter3D(const string& functi
 			{
 				// Retrieve animation data
 				string errorMessage = "Tried to get animation autopause option with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
-				auto animationData = _meshAnimationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
+				auto animationData = _animation3dEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
 
 				// Check if animation was found
 				if(animationData != nullptr)
@@ -108,7 +108,7 @@ const bool ScriptInterpreter::_executeFe3dAnimationGetter3D(const string& functi
 			{
 				// Retrieve animation data
 				string errorMessage = "Tried to get animation frame index with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
-				auto animationData = _meshAnimationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
+				auto animationData = _animation3dEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
 
 				// Check if animation was found
 				if(animationData != nullptr)
@@ -124,7 +124,7 @@ const bool ScriptInterpreter::_executeFe3dAnimationGetter3D(const string& functi
 		return false;
 	}
 
-	// Cannot execute mesh animation functionality when server is running
+	// Cannot execute when server is running
 	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:animation3d` functionality as networking server!");

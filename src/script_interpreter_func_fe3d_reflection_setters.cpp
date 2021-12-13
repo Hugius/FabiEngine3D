@@ -122,7 +122,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 		return false;
 	}
 
-	// Cannot execute reflection functionality when server is running
+	// Cannot execute when server is running
 	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:reflection` functionality as networking server!");

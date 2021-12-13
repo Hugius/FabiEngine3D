@@ -1,6 +1,6 @@
-#include "mesh_animation_editor.hpp"
+#include "animation3d_editor.hpp"
 
-void MeshAnimationEditor::_updateAnimationExecution()
+void Animation3dEditor::_updateAnimationExecution()
 {
 	if(!_fe3d.application_isPaused())
 	{
@@ -86,7 +86,7 @@ void MeshAnimationEditor::_updateAnimationExecution()
 						if(transformationType == TransformationType::MOVEMENT)
 						{
 							// Instant speed means the whole transformation in one go
-							if(speedType == MeshAnimationSpeedType::INSTANTLY)
+							if(speedType == Animation3dSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.x - totalMovement.x);
 							}
@@ -96,7 +96,7 @@ void MeshAnimationEditor::_updateAnimationExecution()
 						else if(transformationType == TransformationType::ROTATION)
 						{
 							// Instant speed means the whole transformation in one go
-							if(speedType == MeshAnimationSpeedType::INSTANTLY)
+							if(speedType == Animation3dSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.x - totalRotation.x);
 							}
@@ -106,7 +106,7 @@ void MeshAnimationEditor::_updateAnimationExecution()
 						else if(transformationType == TransformationType::SCALING)
 						{
 							// Instant speed means the whole transformation in one go
-							if(speedType == MeshAnimationSpeedType::INSTANTLY)
+							if(speedType == Animation3dSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.x - totalScaling.x);
 							}
@@ -115,7 +115,7 @@ void MeshAnimationEditor::_updateAnimationExecution()
 						}
 
 						// Increase speed if exponential
-						if(speedType == MeshAnimationSpeedType::EXPONENTIAL)
+						if(speedType == Animation3dSpeedType::EXPONENTIAL)
 						{
 							baseSpeed.x += (baseSpeed.x / 100.0f);
 						}
@@ -194,7 +194,7 @@ void MeshAnimationEditor::_updateAnimationExecution()
 						if(transformationType == TransformationType::MOVEMENT)
 						{
 							// Instant speed means the whole transformation in one go
-							if(speedType == MeshAnimationSpeedType::INSTANTLY)
+							if(speedType == Animation3dSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.y - totalMovement.y);
 							}
@@ -204,7 +204,7 @@ void MeshAnimationEditor::_updateAnimationExecution()
 						else if(transformationType == TransformationType::ROTATION)
 						{
 							// Instant speed means the whole transformation in one go
-							if(speedType == MeshAnimationSpeedType::INSTANTLY)
+							if(speedType == Animation3dSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.y - totalRotation.y);
 							}
@@ -214,7 +214,7 @@ void MeshAnimationEditor::_updateAnimationExecution()
 						else if(transformationType == TransformationType::SCALING)
 						{
 							// Instant speed means the whole transformation in one go
-							if(speedType == MeshAnimationSpeedType::INSTANTLY)
+							if(speedType == Animation3dSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.y - totalScaling.y);
 							}
@@ -223,7 +223,7 @@ void MeshAnimationEditor::_updateAnimationExecution()
 						}
 
 						// Increase speed if exponential
-						if(speedType == MeshAnimationSpeedType::EXPONENTIAL)
+						if(speedType == Animation3dSpeedType::EXPONENTIAL)
 						{
 							baseSpeed.y += (baseSpeed.y / 100.0f);
 						}
@@ -302,7 +302,7 @@ void MeshAnimationEditor::_updateAnimationExecution()
 						if(transformationType == TransformationType::MOVEMENT)
 						{
 							// Instant speed means the whole transformation in one go
-							if(speedType == MeshAnimationSpeedType::INSTANTLY)
+							if(speedType == Animation3dSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.z - totalMovement.z);
 							}
@@ -312,7 +312,7 @@ void MeshAnimationEditor::_updateAnimationExecution()
 						else if(transformationType == TransformationType::ROTATION)
 						{
 							// Instant speed means the whole transformation in one go
-							if(speedType == MeshAnimationSpeedType::INSTANTLY)
+							if(speedType == Animation3dSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.z - totalRotation.z);
 							}
@@ -322,7 +322,7 @@ void MeshAnimationEditor::_updateAnimationExecution()
 						else if(transformationType == TransformationType::SCALING)
 						{
 							// Instant speed means the whole transformation in one go
-							if(speedType == MeshAnimationSpeedType::INSTANTLY)
+							if(speedType == Animation3dSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.z - totalScaling.z);
 							}
@@ -331,7 +331,7 @@ void MeshAnimationEditor::_updateAnimationExecution()
 						}
 
 						// Increase speed if exponential
-						if(speedType == MeshAnimationSpeedType::EXPONENTIAL)
+						if(speedType == Animation3dSpeedType::EXPONENTIAL)
 						{
 							baseSpeed.z += (baseSpeed.z / 100.0f);
 						}

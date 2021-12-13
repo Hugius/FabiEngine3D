@@ -21,12 +21,12 @@ public:
 	TextureLoader(RenderBus& renderBus);
 
 	// VOID
-	void cacheTexturesMultiThreaded2D(const vector<string>& filePaths, bool isMipmapped, bool isAnisotropic);
-	void cacheTexturesMultiThreaded3D(const vector<array<string, 6>>& filePathsList);
+	void cache2dTexturesMultiThreaded(const vector<string>& filePaths, bool isMipmapped, bool isAnisotropic);
+	void cache3dTexturesMultiThreaded(const vector<array<string, 6>>& filePathsList);
 	void cacheBitmapsMultiThreaded(const vector<string>& filePaths);
 	void cacheFontsMultiThreaded(const vector<string>& filePaths);
-	void clearTextureCache2D(const string& filePath);
-	void clearTextureCache3D(const array<string, 6>& filePaths);
+	void clearTextureCache(const string& filePath);
+	void clearTextureCache(const array<string, 6>& filePaths);
 	void clearBitmapCache(const string& filePath);
 	void clearFontCache(const string& filePath);
 	void setAnisotropicFilteringQuality(unsigned int value);
@@ -38,9 +38,9 @@ public:
 	const unsigned int getAnisotropicFilteringQuality() const;
 
 	// MISCELLANEOUS
-	const TextureID loadTexture2D(const string& filePath, bool isMipmapped, bool isAnisotropic);
-	const TextureID loadTexture2D(const string& textContent, const string& fontPath);
-	const TextureID loadTexture3D(const array<string, 6>& filePaths);
+	const TextureID load2dTexture(const string& filePath, bool isMipmapped, bool isAnisotropic);
+	const TextureID load2dTexture(const string& textContent, const string& fontPath);
+	const TextureID load3dTexture(const array<string, 6>& filePaths);
 
 private:
 	// VOID
@@ -52,9 +52,9 @@ private:
 	// MISCELLANEOUS
 	SDL_Surface* _loadSurface(const string& filePath);
 	TTF_Font* _loadFont(const string& filePath);
-	TextureID _convertIntoTexture(SDL_Surface* surface, const string& filePath, bool isMipmapped, bool isAnisotropic);
-	TextureID _convertIntoTexture(const array<SDL_Surface*, 6>& surfaces, const array<string, 6>& filePaths);
-	TextureID _convertIntoTexture(TTF_Font* font, const string& textContent);
+	TextureID _convertInto2dTexture(SDL_Surface* surface, const string& filePath, bool isMipmapped, bool isAnisotropic);
+	TextureID _convertInto2dTexture(TTF_Font* font, const string& textContent);
+	TextureID _convertInto3dTexture(const array<SDL_Surface*, 6>& surfaces, const array<string, 6>& filePaths);
 
 	// FLOAT
 	map<string, vector<float>> _bitmapCache;
@@ -64,8 +64,8 @@ private:
 
 	// MISCELLANEOUS
 	RenderBus& _renderBus;
-	map<string, TextureID> _textureCache2D;
-	map<array<string, 6>, TextureID> _textureCache3D;
+	map<string, TextureID> _2dTextureCache;
+	map<array<string, 6>, TextureID> _3dTextureCache;
 	map<pair<string, string>, TextureID> _textCache;
 	map<string, TTF_Font*> _fontCache;
 };

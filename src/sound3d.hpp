@@ -4,10 +4,10 @@
 
 #include "mathematics.hpp"
 
-class Sound3D final : public Sound2D
+class Sound3d final : public Sound2d
 {
 public:
-	using Sound2D::Sound2D;
+	using Sound2d::Sound2d;
 
 	// VOID
 	void updateTransformation();

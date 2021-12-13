@@ -112,7 +112,7 @@ void Animation2dEditor::_updateChoiceMenu()
 
 			// Set diffuse map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache2D(finalFilePath);
+			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, finalFilePath);
 			currentAnimation->setPreviewTexturePath(finalFilePath);
 		}

@@ -13,14 +13,14 @@ TextureLoader::TextureLoader(RenderBus& renderBus)
 
 }
 
-const TextureID TextureLoader::loadTexture2D(const string& filePath, bool isMipmapped, bool isAnisotropic)
+const TextureID TextureLoader::load2dTexture(const string& filePath, bool isMipmapped, bool isAnisotropic)
 {
 BEGIN:
 	// Search cache
-	auto cacheIterator = _textureCache2D.find(filePath);
+	auto cacheIterator = _2dTextureCache.find(filePath);
 
 	// Return from cache
-	if(cacheIterator != _textureCache2D.end())
+	if(cacheIterator != _2dTextureCache.end())
 	{
 		return cacheIterator->second;
 	}
@@ -37,7 +37,7 @@ BEGIN:
 	else
 	{
 		// Load OpenGL texture
-		auto loadedTexture = _convertIntoTexture(loadedSurface, filePath, isMipmapped, isAnisotropic);
+		auto loadedTexture = _convertInto2dTexture(loadedSurface, filePath, isMipmapped, isAnisotropic);
 
 		// Memory management
 		SDL_FreeSurface(loadedSurface);
@@ -50,7 +50,7 @@ BEGIN:
 		else
 		{
 			// Cache texture
-			_textureCache2D.insert(make_pair(filePath, loadedTexture));
+			_2dTextureCache.insert(make_pair(filePath, loadedTexture));
 
 			// Return cached texture
 			goto BEGIN;
@@ -58,14 +58,14 @@ BEGIN:
 	}
 }
 
-const TextureID TextureLoader::loadTexture3D(const array<string, 6>& filePaths)
+const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 {
 BEGIN:
 	// Search cache
-	auto cacheIterator = _textureCache3D.find(filePaths);
+	auto cacheIterator = _3dTextureCache.find(filePaths);
 
 	// Return from cache
-	if(cacheIterator != _textureCache3D.end())
+	if(cacheIterator != _3dTextureCache.end())
 	{
 		return cacheIterator->second;
 	}
@@ -94,7 +94,7 @@ BEGIN:
 	}
 
 	// Load OpenGL texture
-	TextureID loadedTexture = _convertIntoTexture(loadedSurfaces, filePaths);
+	TextureID loadedTexture = _convertInto3dTexture(loadedSurfaces, filePaths);
 
 	// Memory management
 	for(const auto& surface : loadedSurfaces)
@@ -114,7 +114,7 @@ BEGIN:
 	else
 	{
 		// Cache texture
-		_textureCache3D.insert(make_pair(filePaths, loadedTexture));
+		_3dTextureCache.insert(make_pair(filePaths, loadedTexture));
 
 		// Return cached texture
 		goto BEGIN;
@@ -155,7 +155,7 @@ BEGIN:
 	}
 }
 
-const TextureID TextureLoader::loadTexture2D(const string& textContent, const string& fontPath)
+const TextureID TextureLoader::load2dTexture(const string& textContent, const string& fontPath)
 {
 BEGIN:
 	// Temporary values
@@ -200,7 +200,7 @@ BEGIN:
 	}
 
 	// Load OpenGL texture
-	TextureID loadedTexture = _convertIntoTexture(font, textContent);
+	TextureID loadedTexture = _convertInto2dTexture(font, textContent);
 
 	// Check texture status
 	if(loadedTexture == 0)

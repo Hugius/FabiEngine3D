@@ -75,28 +75,28 @@ void ScriptExecutor::pause()
 		}
 
 		// Save 2D sound states
-		for(const auto& soundID : _fe3d.sound2D_getAllIDs())
+		for(const auto& soundID : _fe3d.sound2d_getAllIDs())
 		{
-			if(_fe3d.sound2D_isPaused(soundID))
+			if(_fe3d.sound2d_isPaused(soundID))
 			{
 				_pausedSoundIDs.push_back(soundID);
 			}
 		}
 
 		// Save 3D sound states
-		for (const auto& soundID : _fe3d.sound3D_getAllIDs())
+		for (const auto& soundID : _fe3d.sound3d_getAllIDs())
 		{
-			if (_fe3d.sound3D_isPaused(soundID))
+			if (_fe3d.sound3d_isPaused(soundID))
 			{
 				_pausedSoundIDs.push_back(soundID);
 			}
 		}
 
 		// Pause 2D sounds
-		_fe3d.sound2D_pauseAll();
+		_fe3d.sound2d_pauseAll();
 
 		// Pause 3D sounds
-		_fe3d.sound3D_pauseAll();
+		_fe3d.sound3d_pauseAll();
 
 		// Save music state
 		_wasMusicPaused = _fe3d.music_isPaused();
@@ -134,17 +134,17 @@ void ScriptExecutor::resume()
 		}
 
 		// Reset 2D sounds
-		_fe3d.sound2D_resumeAll();
+		_fe3d.sound2d_resumeAll();
 		for(const auto& soundID : _pausedSoundIDs)
 		{
-			_fe3d.sound2D_pause(soundID);
+			_fe3d.sound2d_pause(soundID);
 		}
 
 		// Reset 3D sounds
-		_fe3d.sound3D_resumeAll();
+		_fe3d.sound3d_resumeAll();
 		for (const auto& soundID : _pausedSoundIDs)
 		{
-			_fe3d.sound3D_pause(soundID);
+			_fe3d.sound3d_pause(soundID);
 		}
 
 		// Reset music

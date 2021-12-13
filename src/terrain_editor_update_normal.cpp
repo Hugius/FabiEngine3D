@@ -52,7 +52,7 @@ void TerrainEditor::_updateNormalMapMenu()
 
 			// Set normal map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache2D(newFilePath);
+			_fe3d.misc_clear2dTextureCache(newFilePath);
 			_fe3d.terrain_setNormalMap(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("redMap")->isHovered())
@@ -91,7 +91,7 @@ void TerrainEditor::_updateNormalMapMenu()
 
 			// Set normal map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache2D(newFilePath);
+			_fe3d.misc_clear2dTextureCache(newFilePath);
 			_fe3d.terrain_setNormalMapR(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenMap")->isHovered())
@@ -130,7 +130,7 @@ void TerrainEditor::_updateNormalMapMenu()
 
 			// Set normal map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache2D(newFilePath);
+			_fe3d.misc_clear2dTextureCache(newFilePath);
 			_fe3d.terrain_setNormalMapG(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueMap")->isHovered())
@@ -169,7 +169,7 @@ void TerrainEditor::_updateNormalMapMenu()
 
 			// Set normal map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache2D(newFilePath);
+			_fe3d.misc_clear2dTextureCache(newFilePath);
 			_fe3d.terrain_setNormalMapB(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())

@@ -74,8 +74,8 @@ void WorldEditor::load()
 	_fe3d.model_setVisible(PREVIEW_SPEAKER_ID, false);
 	for(const auto& audioID : _audioEditor.getLoadedAudioIDs())
 	{
-		_fe3d.sound3D_setMaxVolume(audioID, DEFAULT_SOUND_MAX_VOLUME);
-		_fe3d.sound3D_setMaxDistance(audioID, DEFAULT_SOUND_MAX_DISTANCE);
+		_fe3d.sound3d_setMaxVolume(audioID, DEFAULT_SOUND_MAX_VOLUME);
+		_fe3d.sound3d_setMaxDistance(audioID, DEFAULT_SOUND_MAX_DISTANCE);
 		_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuSoundPlace")->getScrollingList("sounds")->
 			createButton(audioID, audioID.substr(1));
 	}
@@ -150,8 +150,8 @@ void WorldEditor::unload()
 	_fe3d.water_deleteAll();
 	_fe3d.model_deleteAll();
 	_fe3d.billboard_deleteAll();
-	_fe3d.sound2D_deleteAll();
-	_fe3d.sound3D_deleteAll();
+	_fe3d.sound2d_deleteAll();
+	_fe3d.sound3d_deleteAll();
 	_fe3d.pointlight_deleteAll();
 	_fe3d.spotlight_deleteAll();
 	_fe3d.reflection_deleteAll();

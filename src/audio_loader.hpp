@@ -16,7 +16,7 @@ public:
 
 	// VOID
 	void cacheChunksMultiThreaded(const vector<string>& filePaths);
-	void cacheMusicMultiThreaded(const vector<string>& filePaths);
+	void cacheMusicsMultiThreaded(const vector<string>& filePaths);
 	void clearChunkCache(const string& filePath);
 	void clearMusicCache(const string& filePath);
 

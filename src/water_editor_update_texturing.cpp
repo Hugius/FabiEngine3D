@@ -58,7 +58,7 @@ void WaterEditor::_updateTexturingMenu()
 
 			// Set DUDV map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache2D(newFilePath);
+			_fe3d.misc_clear2dTextureCache(newFilePath);
 			_fe3d.water_setDudvMap(_currentWaterID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
@@ -97,7 +97,7 @@ void WaterEditor::_updateTexturingMenu()
 
 			// Set normal map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache2D(newFilePath);
+			_fe3d.misc_clear2dTextureCache(newFilePath);
 			_fe3d.water_setNormalMap(_currentWaterID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("displaceMap")->isHovered())
@@ -136,7 +136,7 @@ void WaterEditor::_updateTexturingMenu()
 
 			// Set displacement map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache2D(newFilePath);
+			_fe3d.misc_clear2dTextureCache(newFilePath);
 			_fe3d.water_setDisplacementMap(_currentWaterID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())

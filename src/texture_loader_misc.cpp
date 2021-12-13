@@ -80,7 +80,7 @@ TTF_Font* TextureLoader::_loadFont(const string& filePath)
 	return font;
 }
 
-TextureID TextureLoader::_convertIntoTexture(SDL_Surface* surface, const string& filePath, bool isMipmapped, bool isAnisotropic)
+TextureID TextureLoader::_convertInto2dTexture(SDL_Surface* surface, const string& filePath, bool isMipmapped, bool isAnisotropic)
 {
 	// Generate OpenGL texture
 	TextureID texture;
@@ -127,7 +127,7 @@ TextureID TextureLoader::_convertIntoTexture(SDL_Surface* surface, const string&
 	return texture;
 }
 
-TextureID TextureLoader::_convertIntoTexture(const array<SDL_Surface*, 6>& surfaces, const array<string, 6>& filePaths)
+TextureID TextureLoader::_convertInto3dTexture(const array<SDL_Surface*, 6>& surfaces, const array<string, 6>& filePaths)
 {
 	// Get application root directory
 	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
@@ -198,7 +198,7 @@ TextureID TextureLoader::_convertIntoTexture(const array<SDL_Surface*, 6>& surfa
 	return texture;
 }
 
-TextureID TextureLoader::_convertIntoTexture(TTF_Font* font, const string& textContent)
+TextureID TextureLoader::_convertInto2dTexture(TTF_Font* font, const string& textContent)
 {
 	// Load color
 	SDL_Color* color = new SDL_Color{255, 255, 255, 255};
@@ -239,7 +239,7 @@ TextureID TextureLoader::_convertIntoTexture(TTF_Font* font, const string& textC
 
 void TextureLoader::_reloadAnisotropicFiltering()
 {
-	for(const auto& [path, texture] : _textureCache2D)
+	for(const auto& [path, texture] : _2dTextureCache)
 	{
 		// Bind
 		glBindTexture(GL_TEXTURE_2D, texture);

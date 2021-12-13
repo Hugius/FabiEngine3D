@@ -15,8 +15,8 @@ public:
 	void unload();
 
 	// STRING
-	const vector<string> getAllTerrainBitmapPathsFromFile() const;
-	const vector<string> getAllTerrainTexturePathsFromFile() const;
+	const vector<string> getAllBitmapPathsFromFile() const;
+	const vector<string> getAllTexturePathsFromFile() const;
 	const vector<string>& getLoadedTerrainIDs();
 
 	// BOOL

@@ -20,25 +20,25 @@ public:
 
 	// VOID
 	void allocateChannels(unsigned int count);
-	void update(Camera& camera, vector<Music>& musics, vector<Sound2D>& sounds2D, vector<Sound3D>& sounds3D);
+	void update(Camera& camera, vector<Music>& mucisList, vector<Sound2d>& sound2dList, vector<Sound3d>& sound3dList);
 	void pauseMusic();
 	void resumeMusic();
 	void stopMusic();
 	void setMusicVolume(float volume);
-	void playSound2D(Sound2D& sound, int loops, unsigned int fadeMS, bool mustForcePlay);
-	void pauseSound2D(Sound2D& sound);
-	void resumeSound2D(Sound2D& sound);
-	void stopSound2D(Sound2D& sound, unsigned int fadeMS);
-	void pauseAllSounds2D(vector<Sound2D>& sounds);
-	void resumeAllSounds2D(vector<Sound2D>& sounds);
-	void stopAllSounds2D(vector<Sound2D>& sounds);
-	void playSound3D(Sound3D& sound, int loops, unsigned int fadeMS, bool mustForcePlay);
-	void pauseSound3D(Sound3D& sound);
-	void resumeSound3D(Sound3D& sound);
-	void stopSound3D(Sound3D& sound, unsigned int fadeMS);
-	void pauseAllSounds3D(vector<Sound3D>& sounds);
-	void resumeAllSounds3D(vector<Sound3D>& sounds);
-	void stopAllSounds3D(vector<Sound3D>& sounds);
+	void playSound2d(Sound2d& sound, int loops, unsigned int fadeMS, bool mustForcePlay);
+	void pauseSound2d(Sound2d& sound);
+	void resumeSound2d(Sound2d& sound);
+	void stopSound2d(Sound2d& sound, unsigned int fadeMS);
+	void pauseAllSound2d(vector<Sound2d>& sounds);
+	void resumeAllSound2d(vector<Sound2d>& sounds);
+	void stopAllSound2d(vector<Sound2d>& sounds);
+	void playSound3d(Sound3d& sound, int loops, unsigned int fadeMS, bool mustForcePlay);
+	void pauseSound3d(Sound3d& sound);
+	void resumeSound3d(Sound3d& sound);
+	void stopSound3d(Sound3d& sound, unsigned int fadeMS);
+	void pauseAllSound3d(vector<Sound3d>& sounds);
+	void resumeAllSound3d(vector<Sound3d>& sounds);
+	void stopAllSound3d(vector<Sound3d>& sounds);
 
 	// FLOAT
 	const float getMusicVolume() const;
@@ -52,21 +52,21 @@ public:
 	const bool isMusicStarted() const;
 	const bool isMusicPlaying() const;
 	const bool isMusicPaused() const;
-	const bool isSoundStarted2D(Sound2D& sound) const;
-	const bool isSoundPlaying2D(Sound2D& sound) const;
-	const bool isSoundPaused2D(Sound2D& sound) const;
-	const bool isSoundStarted3D(Sound3D& sound) const;
-	const bool isSoundPlaying3D(Sound3D& sound) const;
-	const bool isSoundPaused3D(Sound3D& sound) const;
+	const bool isSound2dStarted(Sound2d& sound) const;
+	const bool isSound2dPlaying(Sound2d& sound) const;
+	const bool isSound2dPaused(Sound2d& sound) const;
+	const bool isSound3dStarted(Sound3d& sound) const;
+	const bool isSound3dPlaying(Sound3d& sound) const;
+	const bool isSound3dPaused(Sound3d& sound) const;
 
 private:
 	// VOID
-	void _updateSoundVolume2D(Sound2D& sound);
-	void _updateSoundVolume3D(Sound3D& sound);
+	void _updateSound2dVolume(Sound2d& sound);
+	void _updateSound3dVolume(Sound3d& sound);
 
 	// INT
-	const vector<int> _findSoundChannels2D(Sound2D& sound) const;
-	const vector<int> _findSoundChannels3D(Sound3D& sound) const;
+	const vector<int> _findChannels(Sound2d& sound) const;
+	const vector<int> _findChannels(Sound3d& sound) const;
 	const int _getFreeChannel() const;
 
 	// STRING

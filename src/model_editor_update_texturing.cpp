@@ -59,7 +59,7 @@ void ModelEditor::_updateTexturingMenu()
 
 			// Set diffuse map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache2D(finalFilePath);
+			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.model_setDiffuseMap(_currentModelID, _currentPartID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
@@ -98,7 +98,7 @@ void ModelEditor::_updateTexturingMenu()
 
 			// Set emission map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache2D(finalFilePath);
+			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.model_setEmissionMap(_currentModelID, _currentPartID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularMap")->isHovered())
@@ -137,7 +137,7 @@ void ModelEditor::_updateTexturingMenu()
 
 			// Set specular map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache2D(finalFilePath);
+			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.model_setSpecularMap(_currentModelID, _currentPartID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectionMap")->isHovered())
@@ -176,7 +176,7 @@ void ModelEditor::_updateTexturingMenu()
 
 			// Set reflection map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache2D(finalFilePath);
+			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.model_setReflectionMap(_currentModelID, _currentPartID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
@@ -215,7 +215,7 @@ void ModelEditor::_updateTexturingMenu()
 
 			// Set normal map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache2D(finalFilePath);
+			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.model_setNormalMap(_currentModelID, _currentPartID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())

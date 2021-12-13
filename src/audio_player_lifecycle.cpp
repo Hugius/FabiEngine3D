@@ -9,42 +9,42 @@ AudioPlayer::AudioPlayer()
 	Mix_AllocateChannels(0);
 }
 
-void AudioPlayer::update(Camera& camera, vector<Music>& musics, vector<Sound2D>& sounds2D, vector<Sound3D>& sounds3D)
+void AudioPlayer::update(Camera& camera, vector<Music>& mucisList, vector<Sound2d>& sound2dList, vector<Sound3d>& sound3dList)
 {
 	// Update music
-	if (!musics.empty())
+	if (!mucisList.empty())
 	{
 		// Check if music is not started
 		if (!isMusicStarted())
 		{
 			// Select music
 			unsigned int musicIndex;
-			if (musics.size() == 1)
+			if (mucisList.size() == 1)
 			{
 				musicIndex = 0;
 			}
 			else
 			{
-				musicIndex = Math::getRandomNumber(0, static_cast<int>(musics.size() - 1));
+				musicIndex = Math::getRandomNumber(0, static_cast<int>(mucisList.size() - 1));
 			}
 
 			// Play music
-			Mix_PlayMusic(musics[musicIndex].getDataPointer(), 0);
+			Mix_PlayMusic(mucisList[musicIndex].getDataPointer(), 0);
 		}
 	}
 
 	// Update 2D sounds
-	for(auto& sound : sounds2D)
+	for(auto& sound : sound2dList)
 	{
 		// Update sound volume
-		_updateSoundVolume2D(sound);
+		_updateSound2dVolume(sound);
 	}
 
 	// Update 3D sounds
-	for(auto& sound : sounds3D)
+	for(auto& sound : sound3dList)
 	{
 		// Check if sound is started
-		if(isSoundStarted3D(sound))
+		if(isSound3dStarted(sound))
 		{
 			// Distance
 			auto cameraPosition = camera.getPosition(); // Camera position
@@ -69,7 +69,7 @@ void AudioPlayer::update(Camera& camera, vector<Music>& musics, vector<Sound2D>&
 			Uint8 rightStrength = Uint8(255.0f - leftStrength);
 
 			// Iterate through channels
-			for(const auto& channel : _findSoundChannels3D(sound))
+			for(const auto& channel : _findChannels(sound))
 			{
 				// Apply stereo panning
 				Mix_SetPanning(channel, leftStrength, rightStrength);
@@ -77,7 +77,7 @@ void AudioPlayer::update(Camera& camera, vector<Music>& musics, vector<Sound2D>&
 		}
 
 		// Update sound volume
-		_updateSoundVolume3D(sound);
+		_updateSound3dVolume(sound);
 	}
 
 	// Update channels

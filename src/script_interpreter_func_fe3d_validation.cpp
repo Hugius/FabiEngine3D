@@ -233,12 +233,12 @@ const bool ScriptInterpreter::_validateFe3dWater()
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dSound2D(const string& ID, bool isPreview)
+const bool ScriptInterpreter::_validateFe3dSound2d(const string& ID, bool isPreview)
 {
 	if(isPreview)
 	{
 		// Validate existence
-		if(!_fe3d.sound2D_isExisting(ID))
+		if(!_fe3d.sound2d_isExisting(ID))
 		{
 			_throwScriptError("requested preview sound with ID \"" + ID.substr(1) + "\" does not exist!");
 			return false;
@@ -254,7 +254,7 @@ const bool ScriptInterpreter::_validateFe3dSound2D(const string& ID, bool isPrev
 		}
 
 		// Validate existence
-		if(!_fe3d.sound2D_isExisting(ID))
+		if(!_fe3d.sound2d_isExisting(ID))
 		{
 			_throwScriptError("requested 2D sound with ID \"" + ID + "\" does not exist!");
 			return false;
@@ -264,12 +264,12 @@ const bool ScriptInterpreter::_validateFe3dSound2D(const string& ID, bool isPrev
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dSound3D(const string& ID, bool isPreview)
+const bool ScriptInterpreter::_validateFe3dSound3d(const string& ID, bool isPreview)
 {
 	if (isPreview)
 	{
 		// Validate existence
-		if (!_fe3d.sound3D_isExisting(ID))
+		if (!_fe3d.sound3d_isExisting(ID))
 		{
 			_throwScriptError("requested preview sound with ID \"" + ID.substr(1) + "\" does not exist!");
 			return false;
@@ -285,7 +285,7 @@ const bool ScriptInterpreter::_validateFe3dSound3D(const string& ID, bool isPrev
 		}
 
 		// Validate existence
-		if (!_fe3d.sound3D_isExisting(ID))
+		if (!_fe3d.sound3d_isExisting(ID))
 		{
 			_throwScriptError("requested 3D sound with ID \"" + ID + "\" does not exist!");
 			return false;

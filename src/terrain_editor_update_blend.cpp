@@ -55,7 +55,7 @@ void TerrainEditor::_updateBlendMapMenu()
 
 			// Set blend map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache2D(newFilePath);
+			_fe3d.misc_clear2dTextureCache(newFilePath);
 			_fe3d.terrain_setBlendMap(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("redMap")->isHovered())
@@ -94,7 +94,7 @@ void TerrainEditor::_updateBlendMapMenu()
 
 			// Set diffuse map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache2D(newFilePath);
+			_fe3d.misc_clear2dTextureCache(newFilePath);
 			_fe3d.terrain_setDiffuseMapR(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenMap")->isHovered())
@@ -133,7 +133,7 @@ void TerrainEditor::_updateBlendMapMenu()
 
 			// Set diffuse map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache2D(newFilePath);
+			_fe3d.misc_clear2dTextureCache(newFilePath);
 			_fe3d.terrain_setDiffuseMapG(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueMap")->isHovered())
@@ -172,7 +172,7 @@ void TerrainEditor::_updateBlendMapMenu()
 
 			// Set diffuse map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache2D(newFilePath);
+			_fe3d.misc_clear2dTextureCache(newFilePath);
 			_fe3d.terrain_setDiffuseMapB(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())

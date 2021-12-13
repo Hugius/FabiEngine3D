@@ -18,7 +18,7 @@
     <ClCompile Include="..\..\..\src\audio_player_lifecycle.cpp">
       <Filter>Player</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\audio_player_3d.cpp">
+    <ClCompile Include="..\..\..\src\audio_player_sound3d.cpp">
       <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound2d.cpp">
@@ -30,7 +30,7 @@
     <ClCompile Include="..\..\..\src\sound3d.cpp">
       <Filter>Data Structures</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\audio_player_2d.cpp">
+    <ClCompile Include="..\..\..\src\audio_player_sound2d.cpp">
       <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\audio_player_music.cpp">

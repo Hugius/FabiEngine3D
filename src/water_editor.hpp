@@ -15,7 +15,7 @@ public:
 	void unload();
 
 	// STRING
-	const vector<string> getAllWaterTexturePathsFromFile() const;
+	const vector<string> getAllTexturePathsFromFile() const;
 	const vector<string>& getLoadedWaterIDs();
 
 	// BOOL

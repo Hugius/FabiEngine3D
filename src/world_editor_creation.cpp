@@ -363,20 +363,20 @@ const bool WorldEditor::_copyPreviewBillboard(const string& newID, const string&
 const bool WorldEditor::_copyPreviewSound(const string& newID, const string& previewID, fvec3 position, bool isFromOutside)
 {
 	// Error checking
-	if(_fe3d.sound3D_isExisting(newID))
+	if(_fe3d.sound3d_isExisting(newID))
 	{
 		Logger::throwWarning("3D sound with ID \"" + newID + "\" already exists!");
 		return false;
 	}
-	if(!_fe3d.sound2D_isExisting(previewID))
+	if(!_fe3d.sound2d_isExisting(previewID))
 	{
 		Logger::throwWarning("2D sound with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
 	// Create sound
-	_fe3d.sound3D_create(newID, _fe3d.sound2D_getAudioPath(previewID));
-	_fe3d.sound3D_setPosition(newID, position);
+	_fe3d.sound3d_create(newID, _fe3d.sound2d_getAudioPath(previewID));
+	_fe3d.sound3d_setPosition(newID, position);
 
 	// Save ID
 	if(isFromOutside)

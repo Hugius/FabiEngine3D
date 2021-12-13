@@ -5,10 +5,10 @@
 
 using std::string;
 
-class Sound2D
+class Sound2d
 {
 public:
-	Sound2D(const string& ID, const string& audioPath, Mix_Chunk* dataPointer);
+	Sound2d(const string& ID, const string& audioPath, Mix_Chunk* dataPointer);
 
 	// VOID
 	void setVolume(float value);

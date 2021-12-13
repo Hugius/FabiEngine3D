@@ -22,7 +22,7 @@ const vector<string> FabiEngine3D::music_getAudioPaths() const
 {
 	vector<string> result;
 
-	for (const auto& music : _core->_audioManager.getMusics())
+	for (const auto& music : _core->_audioManager.getAllMusic())
 	{
 		result.push_back(music.getAudioPath());
 	}
@@ -35,11 +35,11 @@ const float FabiEngine3D::music_getVolume() const
 	return _core->_audioPlayer.getMusicVolume();
 }
 
-const vector<string> FabiEngine3D::sound2D_getAllIDs() const
+const vector<string> FabiEngine3D::sound2d_getAllIDs() const
 {
 	vector<string> result;
 
-	for(const auto& chunk : _core->_audioManager.getSounds2D())
+	for(const auto& chunk : _core->_audioManager.getAllSound2d())
 	{
 		result.push_back(chunk.getID());
 	}
@@ -47,41 +47,41 @@ const vector<string> FabiEngine3D::sound2D_getAllIDs() const
 	return result;
 }
 
-const string& FabiEngine3D::sound2D_getAudioPath(const string& ID) const
+const string& FabiEngine3D::sound2d_getAudioPath(const string& ID) const
 {
-	return _core->_audioManager.getSound2D(ID).getAudioPath();
+	return _core->_audioManager.getSound2d(ID).getAudioPath();
 }
 
-const bool FabiEngine3D::sound2D_isExisting(const string& ID) const
+const bool FabiEngine3D::sound2d_isExisting(const string& ID) const
 {
-	return _core->_audioManager.isSoundExisting2D(ID);
+	return _core->_audioManager.isSound2dExisting(ID);
 }
 
-const bool FabiEngine3D::sound2D_isStarted(const string& ID) const
+const bool FabiEngine3D::sound2d_isStarted(const string& ID) const
 {
-	return _core->_audioPlayer.isSoundStarted2D(_core->_audioManager.getSound2D(ID));
+	return _core->_audioPlayer.isSound2dStarted(_core->_audioManager.getSound2d(ID));
 }
 
-const bool FabiEngine3D::sound2D_isPlaying(const string& ID) const
+const bool FabiEngine3D::sound2d_isPlaying(const string& ID) const
 {
-	return _core->_audioPlayer.isSoundPlaying2D(_core->_audioManager.getSound2D(ID));
+	return _core->_audioPlayer.isSound2dPlaying(_core->_audioManager.getSound2d(ID));
 }
 
-const bool FabiEngine3D::sound2D_isPaused(const string& ID) const
+const bool FabiEngine3D::sound2d_isPaused(const string& ID) const
 {
-	return _core->_audioPlayer.isSoundPaused2D(_core->_audioManager.getSound2D(ID));
+	return _core->_audioPlayer.isSound2dPaused(_core->_audioManager.getSound2d(ID));
 }
 
-const float FabiEngine3D::sound2D_getVolume(const string& ID) const
+const float FabiEngine3D::sound2d_getVolume(const string& ID) const
 {
-	return _core->_audioManager.getSound2D(ID).getVolume();
+	return _core->_audioManager.getSound2d(ID).getVolume();
 }
 
-const vector<string> FabiEngine3D::sound3D_getAllIDs() const
+const vector<string> FabiEngine3D::sound3d_getAllIDs() const
 {
 	vector<string> result;
 
-	for (const auto& chunk : _core->_audioManager.getSounds3D())
+	for (const auto& chunk : _core->_audioManager.getAllSound3d())
 	{
 		result.push_back(chunk.getID());
 	}
@@ -89,47 +89,47 @@ const vector<string> FabiEngine3D::sound3D_getAllIDs() const
 	return result;
 }
 
-const string& FabiEngine3D::sound3D_getAudioPath(const string& ID) const
+const string& FabiEngine3D::sound3d_getAudioPath(const string& ID) const
 {
-	return _core->_audioManager.getSound3D(ID).getAudioPath();
+	return _core->_audioManager.getSound3d(ID).getAudioPath();
 }
 
-const bool FabiEngine3D::sound3D_isExisting(const string& ID) const
+const bool FabiEngine3D::sound3d_isExisting(const string& ID) const
 {
-	return _core->_audioManager.isSoundExisting3D(ID);
+	return _core->_audioManager.isSound3dExisting(ID);
 }
 
-const bool FabiEngine3D::sound3D_isStarted(const string& ID) const
+const bool FabiEngine3D::sound3d_isStarted(const string& ID) const
 {
-	return _core->_audioPlayer.isSoundStarted3D(_core->_audioManager.getSound3D(ID));
+	return _core->_audioPlayer.isSound3dStarted(_core->_audioManager.getSound3d(ID));
 }
 
-const bool FabiEngine3D::sound3D_isPlaying(const string& ID) const
+const bool FabiEngine3D::sound3d_isPlaying(const string& ID) const
 {
-	return _core->_audioPlayer.isSoundPlaying3D(_core->_audioManager.getSound3D(ID));
+	return _core->_audioPlayer.isSound3dPlaying(_core->_audioManager.getSound3d(ID));
 }
 
-const bool FabiEngine3D::sound3D_isPaused(const string& ID) const
+const bool FabiEngine3D::sound3d_isPaused(const string& ID) const
 {
-	return _core->_audioPlayer.isSoundPaused3D(_core->_audioManager.getSound3D(ID));
+	return _core->_audioPlayer.isSound3dPaused(_core->_audioManager.getSound3d(ID));
 }
 
-const float FabiEngine3D::sound3D_getVolume(const string& ID) const
+const float FabiEngine3D::sound3d_getVolume(const string& ID) const
 {
-	return _core->_audioManager.getSound3D(ID).getVolume();
+	return _core->_audioManager.getSound3d(ID).getVolume();
 }
 
-const float FabiEngine3D::sound3D_getMaxVolume(const string& ID) const
+const float FabiEngine3D::sound3d_getMaxVolume(const string& ID) const
 {
-	return _core->_audioManager.getSound3D(ID).getMaxVolume();
+	return _core->_audioManager.getSound3d(ID).getMaxVolume();
 }
 
-const fvec3 FabiEngine3D::sound3D_getPosition(const string& ID) const
+const fvec3 FabiEngine3D::sound3d_getPosition(const string& ID) const
 {
-	return _core->_audioManager.getSound3D(ID).getPosition();
+	return _core->_audioManager.getSound3d(ID).getPosition();
 }
 
-const float FabiEngine3D::sound3D_getMaxDistance(const string& ID) const
+const float FabiEngine3D::sound3d_getMaxDistance(const string& ID) const
 {
-	return _core->_audioManager.getSound3D(ID).getMaxDistance();
+	return _core->_audioManager.getSound3d(ID).getMaxDistance();
 }

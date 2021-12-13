@@ -89,7 +89,7 @@ void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 	}
 }
 
-void AudioLoader::cacheMusicMultiThreaded(const vector<string>& filePaths)
+void AudioLoader::cacheMusicsMultiThreaded(const vector<string>& filePaths)
 {
 	// Temporary values
 	vector<future<Mix_Music*>> threads;

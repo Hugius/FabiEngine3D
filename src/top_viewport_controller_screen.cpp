@@ -223,9 +223,10 @@ void TopViewportController::_updateMiscScreenManagement()
 		const string newFilePath = filePath.substr(rootDirectoryPath.size());
 		_fe3d.misc_clearMeshCache(newFilePath);
 		_fe3d.misc_clearFontCache(newFilePath);
-		_fe3d.misc_clearTextureCache2D(newFilePath);
+		_fe3d.misc_clear2dTextureCache(newFilePath);
 		_fe3d.misc_clearBitmapCache(newFilePath);
-		_fe3d.misc_clearAudioCache(newFilePath);
+		_fe3d.misc_clearSoundCache(newFilePath);
+		_fe3d.misc_clearMusicCache(newFilePath);
 	}
 	else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("export")->isHovered())
 	{

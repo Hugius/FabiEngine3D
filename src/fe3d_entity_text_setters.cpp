@@ -47,7 +47,7 @@ void FabiEngine3D::text_setFont(const string& ID, const string& value)
 		}
 		else
 		{
-			entity->setDiffuseMap(_core->_textureLoader.loadTexture2D(content, value));
+			entity->setDiffuseMap(_core->_textureLoader.load2dTexture(content, value));
 		}
 	}
 }
@@ -87,7 +87,7 @@ void FabiEngine3D::text_setContent(const string& ID, const string& value, float 
 	}
 	else
 	{
-		entity->setDiffuseMap(_core->_textureLoader.loadTexture2D(value, entity->getFontPath()));
+		entity->setDiffuseMap(_core->_textureLoader.load2dTexture(value, entity->getFontPath()));
 	}
 }
 

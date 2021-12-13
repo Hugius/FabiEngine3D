@@ -51,7 +51,7 @@ void AudioEditor::unload()
 	_fe3d.gfx_disableBloom(true);
 
 	// Delete created entities
-	_fe3d.sound2D_deleteAll();
+	_fe3d.sound2d_deleteAll();
 	_fe3d.billboard_delete("@@icon");
 
 	// Reset editor properties

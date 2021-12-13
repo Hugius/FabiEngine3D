@@ -67,9 +67,9 @@ void AudioEditor::_updateChoiceMenu()
 	if(screen->getID() == "audioEditorMenuChoice")
 	{
 		// Temporary values
-		bool isExisting = _fe3d.sound2D_isExisting(_currentAudioID);
-		bool isPlaying = isExisting && _fe3d.sound2D_isPlaying(_currentAudioID);
-		bool isPaused = isExisting && _fe3d.sound2D_isPaused(_currentAudioID);
+		bool isExisting = _fe3d.sound2d_isExisting(_currentAudioID);
+		bool isPlaying = isExisting && _fe3d.sound2d_isPlaying(_currentAudioID);
+		bool isPaused = isExisting && _fe3d.sound2d_isPaused(_currentAudioID);
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -77,7 +77,7 @@ void AudioEditor::_updateChoiceMenu()
 			// Stop audio preview
 			if(isPlaying)
 			{
-				_fe3d.sound2D_stop(_currentAudioID, 0);
+				_fe3d.sound2d_stop(_currentAudioID, 0);
 			}
 
 			// Miscellaneous
@@ -88,37 +88,37 @@ void AudioEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("play")->isHovered())
 		{
-			_fe3d.sound2D_play(_currentAudioID, 0, 0, false);
+			_fe3d.sound2d_play(_currentAudioID, 0, 0, false);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("resume")->isHovered())
 		{
-			_fe3d.sound2D_resume(_currentAudioID);
+			_fe3d.sound2d_resume(_currentAudioID);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("pause")->isHovered())
 		{
-			_fe3d.sound2D_pause(_currentAudioID);
+			_fe3d.sound2d_pause(_currentAudioID);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("stop")->isHovered())
 		{
-			_fe3d.sound2D_stop(_currentAudioID, 0);
+			_fe3d.sound2d_stop(_currentAudioID, 0);
 		}
 
 		// Controlling audio playback through keyboard
 		if(_fe3d.input_isKeyPressed(InputType::KEY_SPACE) && !isPlaying && !isPaused)
 		{
-			_fe3d.sound2D_play(_currentAudioID, 0, 0, false);
+			_fe3d.sound2d_play(_currentAudioID, 0, 0, false);
 		}
 		else if(_fe3d.input_isKeyPressed(InputType::KEY_R) && isPaused)
 		{
-			_fe3d.sound2D_resume(_currentAudioID);
+			_fe3d.sound2d_resume(_currentAudioID);
 		}
 		else if(_fe3d.input_isKeyPressed(InputType::KEY_P) && isPlaying)
 		{
-			_fe3d.sound2D_pause(_currentAudioID);
+			_fe3d.sound2d_pause(_currentAudioID);
 		}
 		else if(_fe3d.input_isKeyPressed(InputType::KEY_S) && (isPlaying || isPaused))
 		{
-			_fe3d.sound2D_stop(_currentAudioID, 0);
+			_fe3d.sound2d_stop(_currentAudioID, 0);
 		}
 
 		// Update buttons hoverability

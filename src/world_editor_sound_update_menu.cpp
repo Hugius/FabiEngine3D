@@ -28,7 +28,7 @@ void WorldEditor::_updateSoundMenu()
 			_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("sounds")->deleteButtons();
 
 			// Add the ID of every placed sound
-			auto IDs = _fe3d.sound3D_getAllIDs();
+			auto IDs = _fe3d.sound3d_getAllIDs();
 			sort(IDs.begin(), IDs.end());
 			for(auto& soundID : IDs)
 			{
@@ -67,9 +67,9 @@ void WorldEditor::_updateSoundPlacingMenu()
 				_fe3d.model_setVisible(PREVIEW_SPEAKER_ID, false);
 
 				// Stop preview sound playback
-				if(_fe3d.sound3D_isStarted(_currentPreviewSoundID))
+				if(_fe3d.sound3d_isStarted(_currentPreviewSoundID))
 				{
-					_fe3d.sound3D_stop(_currentPreviewSoundID, 0);
+					_fe3d.sound3d_stop(_currentPreviewSoundID, 0);
 				}
 
 				// Miscellaneous
@@ -103,8 +103,8 @@ void WorldEditor::_updateSoundPlacingMenu()
 					// Set new preview sound
 					_currentPreviewSoundID = audioID;
 					_fe3d.model_setVisible(PREVIEW_SPEAKER_ID, true);
-					_fe3d.sound3D_setPosition(_currentPreviewSoundID, fvec3(0.0f));
-					_fe3d.sound3D_play(_currentPreviewSoundID, -1, 0, false);
+					_fe3d.sound3d_setPosition(_currentPreviewSoundID, fvec3(0.0f));
+					_fe3d.sound3d_play(_currentPreviewSoundID, -1, 0, false);
 					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), true);
 					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), "Sound: " + _currentPreviewSoundID.substr(1), 0.025f);
 					_fe3d.misc_centerCursor();
@@ -137,7 +137,7 @@ void WorldEditor::_updateSoundChoosingMenu()
 		for(const auto& button : screen->getScrollingList("sounds")->getButtons())
 		{
 			// Check if sound is still existing
-			if(!_fe3d.sound3D_isExisting(button->getID()))
+			if(!_fe3d.sound3d_isExisting(button->getID()))
 			{
 				// Delete button
 				screen->getScrollingList("sounds")->deleteButton(button->getID());
@@ -146,7 +146,7 @@ void WorldEditor::_updateSoundChoosingMenu()
 		}
 
 		// Iterate through every placed sound
-		for(const auto& soundID : _fe3d.sound3D_getAllIDs())
+		for(const auto& soundID : _fe3d.sound3d_getAllIDs())
 		{
 			// Check if sound is not a preview
 			if(soundID[0] != '@')

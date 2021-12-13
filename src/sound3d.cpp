@@ -5,7 +5,7 @@
 using std::clamp;
 using std::max;
 
-void Sound3D::updateTransformation()
+void Sound3d::updateTransformation()
 {
 	if (_position != _positionTarget)
 	{
@@ -29,45 +29,45 @@ void Sound3D::updateTransformation()
 	}
 }
 
-void Sound3D::setPosition(fvec3 value)
+void Sound3d::setPosition(fvec3 value)
 {
 	_position = value;
 	_positionTarget = value;
 }
 
-void Sound3D::move(fvec3 value)
+void Sound3d::move(fvec3 value)
 {
 	_position += value;
 	_positionTarget += value;
 }
 
-void Sound3D::moveTo(fvec3 target, float speed)
+void Sound3d::moveTo(fvec3 target, float speed)
 {
 	_positionTarget = target;
 	_positionTargetSpeed = speed;
 }
 
-void Sound3D::setMaxVolume(float value)
+void Sound3d::setMaxVolume(float value)
 {
 	_maxVolume = clamp(value, 0.0f, 1.0f);
 }
 
-void Sound3D::setMaxDistance(float value)
+void Sound3d::setMaxDistance(float value)
 {
 	_maxDistance = max(0.0f, value);
 }
 
-const fvec3 Sound3D::getPosition() const
+const fvec3 Sound3d::getPosition() const
 {
 	return _position;
 }
 
-const float Sound3D::getMaxDistance() const
+const float Sound3d::getMaxDistance() const
 {
 	return _maxDistance;
 }
 
-const float Sound3D::getMaxVolume() const
+const float Sound3d::getMaxVolume() const
 {
 	return _maxVolume;
 }

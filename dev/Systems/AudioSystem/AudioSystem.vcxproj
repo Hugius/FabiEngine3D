@@ -20,8 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\audio_manager.cpp" />
-    <ClCompile Include="..\..\..\src\audio_player_2d.cpp" />
-    <ClCompile Include="..\..\..\src\audio_player_3d.cpp" />
+    <ClCompile Include="..\..\..\src\audio_player_sound2d.cpp" />
+    <ClCompile Include="..\..\..\src\audio_player_sound3d.cpp" />
     <ClCompile Include="..\..\..\src\audio_player_lifecycle.cpp" />
     <ClCompile Include="..\..\..\src\audio_player_misc.cpp" />
     <ClCompile Include="..\..\..\src\audio_player_music.cpp" />

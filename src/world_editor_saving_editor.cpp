@@ -226,15 +226,15 @@ const bool WorldEditor::saveEditorWorldToFile()
 	}
 
 	// Sounds
-	for(const auto& soundID : _fe3d.sound3D_getAllIDs())
+	for(const auto& soundID : _fe3d.sound3d_getAllIDs())
 	{
 		// Check if allowed to save
 		if(soundID[0] != '@')
 		{
 			// Data to save
-			auto position = _fe3d.sound3D_getPosition(soundID);
-			auto maxVolume = _fe3d.sound3D_getMaxVolume(soundID);
-			auto maxDistance = _fe3d.sound3D_getMaxDistance(soundID);
+			auto position = _fe3d.sound3d_getPosition(soundID);
+			auto maxVolume = _fe3d.sound3d_getMaxVolume(soundID);
+			auto maxDistance = _fe3d.sound3d_getMaxDistance(soundID);
 
 			// Extract preview ID
 			string previewID = _loadedSoundIDs.at(soundID);

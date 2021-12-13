@@ -118,7 +118,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		texturePaths2D.push_back(textureDirectoryPath + "up.png");
 		texturePaths2D.push_back(textureDirectoryPath + "v.png");
 		texturePaths2D.push_back(textureDirectoryPath + "w.png");
-		misc_cacheTexturesMultiThreaded2D(texturePaths2D);
+		misc_cache2dTexturesMultiThreaded(texturePaths2D);
 
 		// Cache 3D engine textures
 		array<string, 6> texturePaths3D;
@@ -128,7 +128,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		texturePaths3D[3] = string(textureDirectoryPath + "background_bottom.png");
 		texturePaths3D[4] = string(textureDirectoryPath + "background_back.png");
 		texturePaths3D[5] = string(textureDirectoryPath + "background_front.png");
-		misc_cacheTexturesMultiThreaded3D({texturePaths3D});
+		misc_cache3dTexturesMultiThreaded({texturePaths3D});
 
 		// Cache engine fonts
 		vector<string> fontPaths;

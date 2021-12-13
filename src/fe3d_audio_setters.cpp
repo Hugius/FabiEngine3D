@@ -50,246 +50,246 @@ void FabiEngine3D::music_setVolume(float value)
 	_core->_audioPlayer.setMusicVolume(value);
 }
 
-void FabiEngine3D::sound2D_create(const string& ID, const string& audioPath)
+void FabiEngine3D::sound2d_create(const string& ID, const string& audioPath)
 {
-	_core->_audioManager.createSound2D(ID, audioPath);
+	_core->_audioManager.createSound2d(ID, audioPath);
 }
 
-void FabiEngine3D::sound2D_delete(const string& ID)
+void FabiEngine3D::sound2d_delete(const string& ID)
 {
 	// Check if chunk exists
-	if(_core->_audioManager.isSoundExisting2D(ID))
+	if(_core->_audioManager.isSound2dExisting(ID))
 	{
 		// Stop before deleting
-		if(_core->_audioPlayer.isSoundStarted2D(_core->_audioManager.getSound2D(ID)))
+		if(_core->_audioPlayer.isSound2dStarted(_core->_audioManager.getSound2d(ID)))
 		{
-			_core->_audioPlayer.stopSound2D(_core->_audioManager.getSound2D(ID), 0);
+			_core->_audioPlayer.stopSound2d(_core->_audioManager.getSound2d(ID), 0);
 		}
 	}
 
 	// Delete sound
-	_core->_audioManager.deleteSound2D(ID);
+	_core->_audioManager.deleteSound2d(ID);
 }
 
-void FabiEngine3D::sound2D_deleteAll()
+void FabiEngine3D::sound2d_deleteAll()
 {
 	// Stop before deleting
-	sound2D_stopAll();
+	sound2d_stopAll();
 
 	// Delete sounds
-	_core->_audioManager.deleteSounds2D();
+	_core->_audioManager.deleteAllSound2d();
 }
 
-void FabiEngine3D::sound2D_play(const string& ID, int loops, unsigned int fadeMS, bool mustForcePlay)
+void FabiEngine3D::sound2d_play(const string& ID, int loops, unsigned int fadeMS, bool mustForcePlay)
 {
-	auto sound = _core->_audioManager.getSound2D(ID);
+	auto sound = _core->_audioManager.getSound2d(ID);
 
 	if(!_core->_audioPlayer.isChannelAvailable())
 	{
 		Logger::throwWarning("Tried to play 2D sound with ID \"", ID, "\": no audio channels available!");
 		return;
 	}
-	if(_core->_audioPlayer.isSoundStarted2D(sound) && !mustForcePlay)
+	if(_core->_audioPlayer.isSound2dStarted(sound) && !mustForcePlay)
 	{
 		Logger::throwWarning("Tried to play 2D sound with ID \"", ID, "\": sound is already started!");
 		return;
 	}
 
-	_core->_audioPlayer.playSound2D(sound, loops, fadeMS, mustForcePlay);
+	_core->_audioPlayer.playSound2d(sound, loops, fadeMS, mustForcePlay);
 }
 
-void FabiEngine3D::sound2D_pause(const string& ID)
+void FabiEngine3D::sound2d_pause(const string& ID)
 {
-	auto sound = _core->_audioManager.getSound2D(ID);
+	auto sound = _core->_audioManager.getSound2d(ID);
 
-	if(!_core->_audioPlayer.isSoundPlaying2D(sound))
+	if(!_core->_audioPlayer.isSound2dPlaying(sound))
 	{
 		Logger::throwWarning("Tried to pause 2D sound with ID \"", ID, "\": sound is not playing!");
 		return;
 	}
-	if(_core->_audioPlayer.isSoundPaused2D(sound))
+	if(_core->_audioPlayer.isSound2dPaused(sound))
 	{
 		Logger::throwWarning("Tried to pause 2D sound with ID \"", ID, "\": sound is already paused!");
 		return;
 	}
 
-	_core->_audioPlayer.pauseSound2D(sound);
+	_core->_audioPlayer.pauseSound2d(sound);
 }
 
-void FabiEngine3D::sound2D_pauseAll()
+void FabiEngine3D::sound2d_pauseAll()
 {
-	_core->_audioPlayer.pauseAllSounds2D(_core->_audioManager.getSounds2D());
+	_core->_audioPlayer.pauseAllSound2d(_core->_audioManager.getAllSound2d());
 }
 
-void FabiEngine3D::sound2D_resume(const string& ID)
+void FabiEngine3D::sound2d_resume(const string& ID)
 {
-	auto sound = _core->_audioManager.getSound2D(ID);
+	auto sound = _core->_audioManager.getSound2d(ID);
 
-	if(!_core->_audioPlayer.isSoundPaused2D(sound))
+	if(!_core->_audioPlayer.isSound2dPaused(sound))
 	{
 		Logger::throwWarning("Tried to resume 2D sound with ID \"", sound.getID(), "\": sound is not paused!");
 		return;
 	}
 
-	_core->_audioPlayer.resumeSound2D(sound);
+	_core->_audioPlayer.resumeSound2d(sound);
 }
 
-void FabiEngine3D::sound2D_resumeAll()
+void FabiEngine3D::sound2d_resumeAll()
 {
-	_core->_audioPlayer.resumeAllSounds2D(_core->_audioManager.getSounds2D());
+	_core->_audioPlayer.resumeAllSound2d(_core->_audioManager.getAllSound2d());
 }
 
-void FabiEngine3D::sound2D_stop(const string& ID, unsigned int fadeMS)
+void FabiEngine3D::sound2d_stop(const string& ID, unsigned int fadeMS)
 {
-	auto sound = _core->_audioManager.getSound2D(ID);
+	auto sound = _core->_audioManager.getSound2d(ID);
 
-	if(!_core->_audioPlayer.isSoundStarted2D(sound))
+	if(!_core->_audioPlayer.isSound2dStarted(sound))
 	{
 		Logger::throwWarning("Tried to stop 2D sound with ID \"", ID, "\": sound is not started!");
 		return;
 	}
 
-	_core->_audioPlayer.stopSound2D(sound, fadeMS);
+	_core->_audioPlayer.stopSound2d(sound, fadeMS);
 }
 
-void FabiEngine3D::sound2D_stopAll()
+void FabiEngine3D::sound2d_stopAll()
 {
-	_core->_audioPlayer.stopAllSounds2D(_core->_audioManager.getSounds2D());
+	_core->_audioPlayer.stopAllSound2d(_core->_audioManager.getAllSound2d());
 }
 
-void FabiEngine3D::sound2D_setVolume(const string& ID, float value)
+void FabiEngine3D::sound2d_setVolume(const string& ID, float value)
 {
-	_core->_audioManager.getSound2D(ID).setVolume(value);
+	_core->_audioManager.getSound2d(ID).setVolume(value);
 }
 
-void FabiEngine3D::sound3D_create(const string& ID, const string& audioPath)
+void FabiEngine3D::sound3d_create(const string& ID, const string& audioPath)
 {
-	_core->_audioManager.createSound3D(ID, audioPath);
+	_core->_audioManager.createSound3d(ID, audioPath);
 }
 
-void FabiEngine3D::sound3D_delete(const string& ID)
+void FabiEngine3D::sound3d_delete(const string& ID)
 {
 	// Check if chunk exists
-	if (_core->_audioManager.isSoundExisting3D(ID))
+	if (_core->_audioManager.isSound3dExisting(ID))
 	{
 		// Stop before deleting
-		if (_core->_audioPlayer.isSoundStarted3D(_core->_audioManager.getSound3D(ID)))
+		if (_core->_audioPlayer.isSound3dStarted(_core->_audioManager.getSound3d(ID)))
 		{
-			_core->_audioPlayer.stopSound3D(_core->_audioManager.getSound3D(ID), 0);
+			_core->_audioPlayer.stopSound3d(_core->_audioManager.getSound3d(ID), 0);
 		}
 	}
 
 	// Delete sound
-	_core->_audioManager.deleteSound3D(ID);
+	_core->_audioManager.deleteSound3d(ID);
 }
 
-void FabiEngine3D::sound3D_deleteAll()
+void FabiEngine3D::sound3d_deleteAll()
 {
 	// Stop before deleting
-	sound3D_stopAll();
+	sound3d_stopAll();
 
 	// Delete sounds
-	_core->_audioManager.deleteSounds3D();
+	_core->_audioManager.deleteAllSound3d();
 }
 
-void FabiEngine3D::sound3D_play(const string& ID, int loops, unsigned int fadeMS, bool mustForcePlay)
+void FabiEngine3D::sound3d_play(const string& ID, int loops, unsigned int fadeMS, bool mustForcePlay)
 {
-	auto sound = _core->_audioManager.getSound3D(ID);
+	auto sound = _core->_audioManager.getSound3d(ID);
 
 	if (!_core->_audioPlayer.isChannelAvailable())
 	{
 		Logger::throwWarning("Tried to play 3D sound with ID \"", ID, "\": no audio channels available!");
 		return;
 	}
-	if (_core->_audioPlayer.isSoundStarted3D(sound) && !mustForcePlay)
+	if (_core->_audioPlayer.isSound3dStarted(sound) && !mustForcePlay)
 	{
 		Logger::throwWarning("Tried to play 3D sound with ID \"", ID, "\": sound is already started!");
 		return;
 	}
 
-	_core->_audioPlayer.playSound3D(sound, loops, fadeMS, mustForcePlay);
+	_core->_audioPlayer.playSound3d(sound, loops, fadeMS, mustForcePlay);
 }
 
-void FabiEngine3D::sound3D_pause(const string& ID)
+void FabiEngine3D::sound3d_pause(const string& ID)
 {
-	auto sound = _core->_audioManager.getSound3D(ID);
+	auto sound = _core->_audioManager.getSound3d(ID);
 
-	if (!_core->_audioPlayer.isSoundPlaying3D(sound))
+	if (!_core->_audioPlayer.isSound3dPlaying(sound))
 	{
 		Logger::throwWarning("Tried to pause 3D sound with ID \"", ID, "\": sound is not playing!");
 		return;
 	}
-	if (_core->_audioPlayer.isSoundPaused3D(sound))
+	if (_core->_audioPlayer.isSound3dPaused(sound))
 	{
 		Logger::throwWarning("Tried to pause 3D sound with ID \"", ID, "\": sound is already paused!");
 		return;
 	}
 
-	_core->_audioPlayer.pauseSound3D(sound);
+	_core->_audioPlayer.pauseSound3d(sound);
 }
 
-void FabiEngine3D::sound3D_pauseAll()
+void FabiEngine3D::sound3d_pauseAll()
 {
-	_core->_audioPlayer.pauseAllSounds3D(_core->_audioManager.getSounds3D());
+	_core->_audioPlayer.pauseAllSound3d(_core->_audioManager.getAllSound3d());
 }
 
-void FabiEngine3D::sound3D_resume(const string& ID)
+void FabiEngine3D::sound3d_resume(const string& ID)
 {
-	auto sound = _core->_audioManager.getSound3D(ID);
+	auto sound = _core->_audioManager.getSound3d(ID);
 
-	if (!_core->_audioPlayer.isSoundPaused3D(sound))
+	if (!_core->_audioPlayer.isSound3dPaused(sound))
 	{
 		Logger::throwWarning("Tried to resume 3D sound with ID \"", sound.getID(), "\": sound is not paused!");
 		return;
 	}
 
-	_core->_audioPlayer.resumeSound3D(sound);
+	_core->_audioPlayer.resumeSound3d(sound);
 }
 
-void FabiEngine3D::sound3D_resumeAll()
+void FabiEngine3D::sound3d_resumeAll()
 {
-	_core->_audioPlayer.resumeAllSounds3D(_core->_audioManager.getSounds3D());
+	_core->_audioPlayer.resumeAllSound3d(_core->_audioManager.getAllSound3d());
 }
 
-void FabiEngine3D::sound3D_stop(const string& ID, unsigned int fadeMS)
+void FabiEngine3D::sound3d_stop(const string& ID, unsigned int fadeMS)
 {
-	auto sound = _core->_audioManager.getSound3D(ID);
+	auto sound = _core->_audioManager.getSound3d(ID);
 
-	if (!_core->_audioPlayer.isSoundStarted3D(sound))
+	if (!_core->_audioPlayer.isSound3dStarted(sound))
 	{
 		Logger::throwWarning("Tried to stop 3D sound with ID \"", ID, "\": sound is not started!");
 		return;
 	}
 
-	_core->_audioPlayer.stopSound3D(sound, fadeMS);
+	_core->_audioPlayer.stopSound3d(sound, fadeMS);
 }
 
-void FabiEngine3D::sound3D_stopAll()
+void FabiEngine3D::sound3d_stopAll()
 {
-	_core->_audioPlayer.stopAllSounds3D(_core->_audioManager.getSounds3D());
+	_core->_audioPlayer.stopAllSound3d(_core->_audioManager.getAllSound3d());
 }
 
-void FabiEngine3D::sound3D_setPosition(const string& ID, fvec3 value)
+void FabiEngine3D::sound3d_setPosition(const string& ID, fvec3 value)
 {
-	_core->_audioManager.getSound3D(ID).setPosition(value);
+	_core->_audioManager.getSound3d(ID).setPosition(value);
 }
 
-void FabiEngine3D::sound3D_move(const string& ID, fvec3 change)
+void FabiEngine3D::sound3d_move(const string& ID, fvec3 change)
 {
-	_core->_audioManager.getSound3D(ID).move(change);
+	_core->_audioManager.getSound3d(ID).move(change);
 }
 
-void FabiEngine3D::sound3D_moveTo(const string& ID, fvec3 target, float speed)
+void FabiEngine3D::sound3d_moveTo(const string& ID, fvec3 target, float speed)
 {
-	_core->_audioManager.getSound3D(ID).moveTo(target, speed);
+	_core->_audioManager.getSound3d(ID).moveTo(target, speed);
 }
 
-void FabiEngine3D::sound3D_setMaxDistance(const string& ID, float value)
+void FabiEngine3D::sound3d_setMaxDistance(const string& ID, float value)
 {
-	_core->_audioManager.getSound3D(ID).setMaxDistance(value);
+	_core->_audioManager.getSound3d(ID).setMaxDistance(value);
 }
 
-void FabiEngine3D::sound3D_setMaxVolume(const string& ID, float value)
+void FabiEngine3D::sound3d_setMaxVolume(const string& ID, float value)
 {
-	_core->_audioManager.getSound3D(ID).setMaxVolume(value);
+	_core->_audioManager.getSound3d(ID).setMaxVolume(value);
 }

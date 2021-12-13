@@ -119,10 +119,10 @@ const bool AudioEditor::loadAudioEntitiesFromFile()
 		}
 
 		// Create audio
-		_fe3d.sound2D_create(audioID, audioPath);
+		_fe3d.sound2d_create(audioID, audioPath);
 
 		// Check if audio creation went well
-		if(_fe3d.sound2D_isExisting(audioID))
+		if(_fe3d.sound2d_isExisting(audioID))
 		{
 			// Add audio ID
 			_loadedAudioIDs.push_back(audioID);

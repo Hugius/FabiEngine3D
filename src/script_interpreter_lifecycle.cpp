@@ -148,39 +148,36 @@ void ScriptInterpreter::load()
 	// Load all editor assets of this project if in application preview
 	if(Config::getInst().isApplicationExported())
 	{
-		// Gather all file paths
-		auto skyTexturePaths = _skyEditor.getAllTexturePathsFromFile();
-		auto terrainTexturePaths = _terrainEditor.getAllTerrainTexturePathsFromFile();
-		auto terrainBitmapPaths = _terrainEditor.getAllTerrainBitmapPathsFromFile();
-		auto waterTexturePaths = _waterEditor.getAllWaterTexturePathsFromFile();
-		auto modelMeshPaths = _modelEditor.getAllMeshPathsFromFile();
-		auto modelTexturePaths = _modelEditor.getAllTexturePathsFromFile();
-		auto billboardTexturePaths = _billboardEditor.getAllTexturePathsFromFile();
-		auto billboardFontPaths = _billboardEditor.getAllFontPathsFromFile();
-		auto audioPaths = _audioEditor.getAllAudioPathsFromFile();
-
 		// Cache meshes
-		_fe3d.misc_cacheMeshesMultiThreaded(modelMeshPaths);
+		_fe3d.misc_cacheMeshesMultiThreaded(_modelEditor.getAllMeshPathsFromFile());
 
 		// Cache 2D textures
-		vector<string> texturePaths;
-		texturePaths.insert(texturePaths.end(), terrainTexturePaths.begin(), terrainTexturePaths.end());
-		texturePaths.insert(texturePaths.end(), waterTexturePaths.begin(), waterTexturePaths.end());
-		texturePaths.insert(texturePaths.end(), modelTexturePaths.begin(), modelTexturePaths.end());
-		texturePaths.insert(texturePaths.end(), billboardTexturePaths.begin(), billboardTexturePaths.end());
-		_fe3d.misc_cacheTexturesMultiThreaded2D(texturePaths);
+		vector<string> texturePaths2D;
+		texturePaths2D.insert(texturePaths2D.end(),
+							  _terrainEditor.getAllTexturePathsFromFile().begin(),
+							  _terrainEditor.getAllTexturePathsFromFile().end());
+		texturePaths2D.insert(texturePaths2D.end(),
+							  _waterEditor.getAllTexturePathsFromFile().begin(),
+							  _waterEditor.getAllTexturePathsFromFile().end());
+		texturePaths2D.insert(texturePaths2D.end(),
+							  _modelEditor.getAllTexturePathsFromFile().begin(),
+							  _modelEditor.getAllTexturePathsFromFile().end());
+		texturePaths2D.insert(texturePaths2D.end(),
+							  _billboardEditor.getAllTexturePathsFromFile().begin(),
+							  _billboardEditor.getAllTexturePathsFromFile().end());
+		_fe3d.misc_cache2dTexturesMultiThreaded(texturePaths2D);
 
 		// Cache 3D textures
-		_fe3d.misc_cacheTexturesMultiThreaded3D(skyTexturePaths);
+		_fe3d.misc_cache3dTexturesMultiThreaded(_skyEditor.getAllTexturePathsFromFile());
 
 		// Cache bitmaps
-		_fe3d.misc_cacheBitmapsMultiThreaded(terrainBitmapPaths);
+		_fe3d.misc_cacheBitmapsMultiThreaded(_terrainEditor.getAllBitmapPathsFromFile());
 
 		// Cache fonts
-		_fe3d.misc_cacheFontsMultiThreaded(billboardFontPaths);
+		_fe3d.misc_cacheFontsMultiThreaded(_billboardEditor.getAllFontPathsFromFile());
 
 		// Cache sounds
-		_fe3d.misc_cacheSoundsMultiThreaded(audioPaths);
+		_fe3d.misc_cacheSoundsMultiThreaded(_audioEditor.getAllAudioPathsFromFile());
 	}
 
 	// No sky by default
@@ -257,8 +254,8 @@ void ScriptInterpreter::unload()
 	_fe3d.model_deleteAll();
 	_fe3d.billboard_deleteAll();
 	_fe3d.aabb_deleteAll();
-	_fe3d.sound2D_deleteAll();
-	_fe3d.sound3D_deleteAll();
+	_fe3d.sound2d_deleteAll();
+	_fe3d.sound3d_deleteAll();
 	_fe3d.pointlight_deleteAll();
 	_fe3d.spotlight_deleteAll();
 	_fe3d.reflection_deleteAll();

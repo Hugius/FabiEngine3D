@@ -10,7 +10,7 @@ using std::launch;
 using std::future_status;
 using std::chrono::system_clock;
 
-void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths, bool isMipmapped, bool isAnisotropic)
+void TextureLoader::cache2dTexturesMultiThreaded(const vector<string>& filePaths, bool isMipmapped, bool isAnisotropic)
 {
 	// Temporary values
 	vector<future<SDL_Surface*>> threads;
@@ -26,7 +26,7 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 	for(const auto& filePath : uniqueFilePaths)
 	{
 		// Check if texture is not already cached
-		if(_textureCache2D.find(filePath) == _textureCache2D.end())
+		if(_2dTextureCache.find(filePath) == _2dTextureCache.end())
 		{
 			threads.push_back(async(launch::async, &TextureLoader::_loadSurface, this, filePath));
 			finalFilePaths.push_back(filePath);
@@ -61,7 +61,7 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 					else
 					{
 						// Load OpenGL texture
-						auto loadedTexture = _convertIntoTexture(loadedImage, finalFilePaths[i], isMipmapped, isAnisotropic);
+						auto loadedTexture = _convertInto2dTexture(loadedImage, finalFilePaths[i], isMipmapped, isAnisotropic);
 
 						// Memory management
 						SDL_FreeSurface(loadedImage);
@@ -70,7 +70,7 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 						if(loadedTexture != 0)
 						{
 							// Cache texture
-							_textureCache2D[finalFilePaths[i]] = loadedTexture;
+							_2dTextureCache[finalFilePaths[i]] = loadedTexture;
 						}
 					}
 				}
@@ -79,7 +79,7 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 	}
 }
 
-void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>& filePathsList)
+void TextureLoader::cache3dTexturesMultiThreaded(const vector<array<string, 6>>& filePathsList)
 {
 	// Temporary values
 	vector<vector<future<SDL_Surface*>>> threads;
@@ -91,7 +91,7 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 	for(const auto& filePaths : filePathsList)
 	{
 		// Check if texture is not already cached
-		if(_textureCache3D.find(filePaths) == _textureCache3D.end())
+		if(_3dTextureCache.find(filePaths) == _3dTextureCache.end())
 		{
 			// 6 threads for every 3D texture
 			threads.push_back({});
@@ -146,7 +146,7 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 					}
 
 					// Load OpenGL texture
-					TextureID loadedTexture = _convertIntoTexture(loadedImages, finalFilePathsList[i]);
+					TextureID loadedTexture = _convertInto3dTexture(loadedImages, finalFilePathsList[i]);
 
 					// Memory management
 					for(const auto& image : loadedImages)
@@ -162,7 +162,7 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 					if(loadedTexture != 0)
 					{
 						// Cache texture
-						_textureCache3D[finalFilePathsList[i]] = loadedTexture;
+						_3dTextureCache[finalFilePathsList[i]] = loadedTexture;
 					}
 				}
 			}
@@ -294,21 +294,21 @@ void TextureLoader::cacheFontsMultiThreaded(const vector<string>& filePaths)
 	}
 }
 
-void TextureLoader::clearTextureCache2D(const string& filePath)
+void TextureLoader::clearTextureCache(const string& filePath)
 {
-	if(_textureCache2D.find(filePath) != _textureCache2D.end())
+	if(_2dTextureCache.find(filePath) != _2dTextureCache.end())
 	{
-		glDeleteTextures(1, &_textureCache2D[filePath]);
-		_textureCache2D.erase(filePath);
+		glDeleteTextures(1, &_2dTextureCache[filePath]);
+		_2dTextureCache.erase(filePath);
 	}
 }
 
-void TextureLoader::clearTextureCache3D(const array<string, 6>& filePaths)
+void TextureLoader::clearTextureCache(const array<string, 6>& filePaths)
 {
-	if(_textureCache3D.find(filePaths) != _textureCache3D.end())
+	if(_3dTextureCache.find(filePaths) != _3dTextureCache.end())
 	{
-		glDeleteTextures(1, &_textureCache3D[filePaths]);
-		_textureCache3D.erase(filePaths);
+		glDeleteTextures(1, &_3dTextureCache[filePaths]);
+		_3dTextureCache.erase(filePaths);
 	}
 }
 

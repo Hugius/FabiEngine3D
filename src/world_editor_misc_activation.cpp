@@ -63,9 +63,9 @@ void WorldEditor::_activateSound(const string& ID)
 
 	// Temporary values
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
-	auto position = _fe3d.sound3D_getPosition(_activeSpeakerID.substr(string("@@speaker_").size()));
-	auto maxVolume = _fe3d.sound3D_getMaxVolume(_activeSpeakerID.substr(string("@@speaker_").size()));
-	auto maxDistance = _fe3d.sound3D_getMaxDistance(_activeSpeakerID.substr(string("@@speaker_").size()));
+	auto position = _fe3d.sound3d_getPosition(_activeSpeakerID.substr(string("@@speaker_").size()));
+	auto maxVolume = _fe3d.sound3d_getMaxVolume(_activeSpeakerID.substr(string("@@speaker_").size()));
+	auto maxDistance = _fe3d.sound3d_getMaxDistance(_activeSpeakerID.substr(string("@@speaker_").size()));
 
 	// Filling write fields
 	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));

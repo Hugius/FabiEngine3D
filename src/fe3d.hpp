@@ -609,55 +609,55 @@ public:
 	const bool music_isPaused() const;
 
 	// SOUND2D - setters
-	void sound2D_create(const string& ID, const string& audioPath);
-	void sound2D_delete(const string& ID);
-	void sound2D_deleteAll();
-	void sound2D_play(const string& ID, int loops, unsigned int fadeMS, bool mustForcePlay);
-	void sound2D_pause(const string& ID);
-	void sound2D_pauseAll();
-	void sound2D_resume(const string& ID);
-	void sound2D_resumeAll();
-	void sound2D_stop(const string& ID, unsigned int fadeMS);
-	void sound2D_stopAll();
-	void sound2D_setVolume(const string& ID, float value);
+	void sound2d_create(const string& ID, const string& audioPath);
+	void sound2d_delete(const string& ID);
+	void sound2d_deleteAll();
+	void sound2d_play(const string& ID, int loops, unsigned int fadeMS, bool mustForcePlay);
+	void sound2d_pause(const string& ID);
+	void sound2d_pauseAll();
+	void sound2d_resume(const string& ID);
+	void sound2d_resumeAll();
+	void sound2d_stop(const string& ID, unsigned int fadeMS);
+	void sound2d_stopAll();
+	void sound2d_setVolume(const string& ID, float value);
 
 	// SOUND2D - getters
-	const vector<string> sound2D_getAllIDs() const;
-	const string& sound2D_getAudioPath(const string& ID) const;
-	const float sound2D_getVolume(const string& ID) const;
-	const bool sound2D_isExisting(const string& ID) const;
-	const bool sound2D_isStarted(const string& ID) const;
-	const bool sound2D_isPlaying(const string& ID) const;
-	const bool sound2D_isPaused(const string& ID) const;
+	const vector<string> sound2d_getAllIDs() const;
+	const string& sound2d_getAudioPath(const string& ID) const;
+	const float sound2d_getVolume(const string& ID) const;
+	const bool sound2d_isExisting(const string& ID) const;
+	const bool sound2d_isStarted(const string& ID) const;
+	const bool sound2d_isPlaying(const string& ID) const;
+	const bool sound2d_isPaused(const string& ID) const;
 
 	// SOUND3D - setters
-	void sound3D_create(const string& ID, const string& audioPath);
-	void sound3D_delete(const string& ID);
-	void sound3D_deleteAll();
-	void sound3D_play(const string& ID, int loops, unsigned int fadeMS, bool mustForcePlay);
-	void sound3D_pause(const string& ID);
-	void sound3D_pauseAll();
-	void sound3D_resume(const string& ID);
-	void sound3D_resumeAll();
-	void sound3D_stop(const string& ID, unsigned int fadeMS);
-	void sound3D_stopAll();
-	void sound3D_setPosition(const string& ID, fvec3 value);
-	void sound3D_move(const string& ID, fvec3 change);
-	void sound3D_moveTo(const string& ID, fvec3 target, float speed);
-	void sound3D_setMaxVolume(const string& ID, float value);
-	void sound3D_setMaxDistance(const string& ID, float value);
+	void sound3d_create(const string& ID, const string& audioPath);
+	void sound3d_delete(const string& ID);
+	void sound3d_deleteAll();
+	void sound3d_play(const string& ID, int loops, unsigned int fadeMS, bool mustForcePlay);
+	void sound3d_pause(const string& ID);
+	void sound3d_pauseAll();
+	void sound3d_resume(const string& ID);
+	void sound3d_resumeAll();
+	void sound3d_stop(const string& ID, unsigned int fadeMS);
+	void sound3d_stopAll();
+	void sound3d_setPosition(const string& ID, fvec3 value);
+	void sound3d_move(const string& ID, fvec3 change);
+	void sound3d_moveTo(const string& ID, fvec3 target, float speed);
+	void sound3d_setMaxVolume(const string& ID, float value);
+	void sound3d_setMaxDistance(const string& ID, float value);
 
 	// SOUND - getters
-	const vector<string> sound3D_getAllIDs() const;
-	const string& sound3D_getAudioPath(const string& ID) const;
-	const fvec3 sound3D_getPosition(const string& ID) const;
-	const float sound3D_getMaxDistance(const string& ID) const;
-	const float sound3D_getVolume(const string& ID) const;
-	const float sound3D_getMaxVolume(const string& ID) const;
-	const bool sound3D_isExisting(const string& ID) const;
-	const bool sound3D_isStarted(const string& ID) const;
-	const bool sound3D_isPlaying(const string& ID) const;
-	const bool sound3D_isPaused(const string& ID) const;
+	const vector<string> sound3d_getAllIDs() const;
+	const string& sound3d_getAudioPath(const string& ID) const;
+	const fvec3 sound3d_getPosition(const string& ID) const;
+	const float sound3d_getMaxDistance(const string& ID) const;
+	const float sound3d_getVolume(const string& ID) const;
+	const float sound3d_getMaxVolume(const string& ID) const;
+	const bool sound3d_isExisting(const string& ID) const;
+	const bool sound3d_isStarted(const string& ID) const;
+	const bool sound3d_isPlaying(const string& ID) const;
+	const bool sound3d_isPaused(const string& ID) const;
 
 	// INPUT - setters
 	void input_setLocked(bool locked);
@@ -910,18 +910,19 @@ public:
 	void misc_setCursorPosition(ivec2 value);
 	void misc_setWindowTitle(const string& value);
 	void misc_clearMeshCache(const string& filePath);
-	void misc_clearTextureCache2D(const string& filePath);
-	void misc_clearTextureCache3D(const array<string, 6>& filePaths);
+	void misc_clear2dTextureCache(const string& filePath);
+	void misc_clear3dTextureCache(const array<string, 6>& filePaths);
 	void misc_clearFontCache(const string& filePath);
 	void misc_clearBitmapCache(const string& filePath);
-	void misc_clearAudioCache(const string& filePath);
+	void misc_clearSoundCache(const string& filePath);
+	void misc_clearMusicCache(const string& filePath);
 	void misc_cacheMeshesMultiThreaded(const vector<string>& filePaths);
-	void misc_cacheTexturesMultiThreaded2D(const vector<string>& filePaths);
-	void misc_cacheTexturesMultiThreaded3D(const vector<array<string, 6>>& filePaths);
+	void misc_cache2dTexturesMultiThreaded(const vector<string>& filePaths);
+	void misc_cache3dTexturesMultiThreaded(const vector<array<string, 6>>& filePaths);
 	void misc_cacheBitmapsMultiThreaded(const vector<string>& filePaths);
 	void misc_cacheFontsMultiThreaded(const vector<string>& filePaths);
 	void misc_cacheSoundsMultiThreaded(const vector<string>& filePaths);
-	void misc_cacheMusicMultiThreaded(const vector<string>& filePaths);
+	void misc_cacheMusicsMultiThreaded(const vector<string>& filePaths);
 	void misc_startMillisecondTimer();
 	void misc_setMaxAudioChannelCount(unsigned int value);
 

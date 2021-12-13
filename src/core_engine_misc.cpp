@@ -109,7 +109,7 @@ void CoreEngine::_prepareApplication()
 	// Create engine logo
 	shared_ptr<ImageEntity> logo = make_shared<ImageEntity>("logo");
 	logo->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
-	logo->setDiffuseMap(_textureLoader.loadTexture2D("engine\\assets\\textures\\logo.png", false, false));
+	logo->setDiffuseMap(_textureLoader.load2dTexture("engine\\assets\\textures\\logo.png", false, false));
 
 	// Calculate logo resolution
 	SDL_DisplayMode DM;

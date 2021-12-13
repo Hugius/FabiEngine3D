@@ -108,7 +108,7 @@ void BillboardEditor::_updateTexturingMenu()
 
 			// Set diffuse map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache2D(finalFilePath);
+			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.billboard_setDiffuseMap(_currentBillboardID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
@@ -147,7 +147,7 @@ void BillboardEditor::_updateTexturingMenu()
 
 			// Set emission map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearTextureCache2D(finalFilePath);
+			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.billboard_setEmissionMap(_currentBillboardID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())

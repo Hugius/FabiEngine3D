@@ -108,9 +108,6 @@
 - **Wireframed**: the mesh is rendered as a wireframe
   - Type: `boolean`
   - Constraints: none
-- **Camera Static**: the mesh is not being affected by the camera position
-  - Type: `boolean`
-  - Constraints: none
 - **Shadowed**: the mesh is captured for shadows
   - Type: `boolean`
   - Constraints: none

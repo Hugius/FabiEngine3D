@@ -35,12 +35,12 @@ const vector<string> FabiEngine3D::image_getAllIDs() const
 
 const string& FabiEngine3D::image_getDiffuseMapPath(const string& ID) const
 {
-	_core->_imageEntityManager.getEntity(ID)->getDiffuseMapPath();
+	return _core->_imageEntityManager.getEntity(ID)->getDiffuseMapPath();
 }
 
 const fvec3 FabiEngine3D::image_getWireframeColor(const string& ID) const
 {
-	_core->_imageEntityManager.getEntity(ID)->getWireframeColor();
+	return _core->_imageEntityManager.getEntity(ID)->getWireframeColor();
 }
 
 const fvec2 FabiEngine3D::image_getSize(const string& ID) const

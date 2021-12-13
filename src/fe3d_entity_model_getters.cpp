@@ -168,7 +168,7 @@ const fvec3 FabiEngine3D::model_getWireframeColor(const string& ID, const string
 
 const fvec3 FabiEngine3D::model_getLevelOfDetailSize(const string& ID) const
 {
-	_core->_modelEntityManager.getEntity(ID)->getLevelOfDetailSize();
+	return _core->_modelEntityManager.getEntity(ID)->getLevelOfDetailSize();
 }
 
 const float FabiEngine3D::model_getLightness(const string& ID, const string& partID) const

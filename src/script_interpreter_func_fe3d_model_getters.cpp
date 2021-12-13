@@ -4,12 +4,10 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
-	// Determine type of function
 	if(functionName == "fe3d:model_is_existing")
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
@@ -28,7 +26,6 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
 			// @ sign is reserved
@@ -55,7 +52,6 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:model_get_all_ids")
 	{
-		// Validate arguments
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.model_getAllIDs();
@@ -75,10 +71,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_isVisible(arguments[0].getString());
@@ -90,10 +84,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_getBasePosition(arguments[0].getString()).x;
@@ -105,10 +97,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_getBasePosition(arguments[0].getString()).y;
@@ -120,10 +110,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_getBasePosition(arguments[0].getString()).z;
@@ -135,10 +123,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_getBaseRotation(arguments[0].getString()).x;
@@ -150,10 +136,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_getBaseRotation(arguments[0].getString()).y;
@@ -165,10 +149,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_getBaseRotation(arguments[0].getString()).z;
@@ -180,10 +162,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_getBaseRotationOrigin(arguments[0].getString()).x;
@@ -195,10 +175,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_getBaseRotationOrigin(arguments[0].getString()).y;
@@ -210,10 +188,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_getBaseRotationOrigin(arguments[0].getString()).z;
@@ -225,10 +201,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_getBaseSize(arguments[0].getString()).x;
@@ -240,10 +214,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_getBaseSize(arguments[0].getString()).y;
@@ -255,10 +227,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_getBaseSize(arguments[0].getString()).z;
@@ -270,10 +240,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_getMinHeight(arguments[0].getString());
@@ -285,10 +253,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_getMaxHeight(arguments[0].getString());
@@ -300,10 +266,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _meshAnimationEditor.isAnimationStarted(arguments[1].getString(), arguments[0].getString());
@@ -315,10 +279,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _meshAnimationEditor.isAnimationPlaying(arguments[1].getString(), arguments[0].getString());
@@ -330,10 +292,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _meshAnimationEditor.isAnimationPaused(arguments[1].getString(), arguments[0].getString());
@@ -345,10 +305,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _meshAnimationEditor.isAnimationFading(arguments[1].getString(), arguments[0].getString());
@@ -360,10 +318,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				// Retrieve animation data
@@ -383,10 +339,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				// Retrieve animation data
@@ -406,10 +360,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				// Retrieve animation data
@@ -429,10 +381,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -447,10 +397,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -465,10 +413,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -483,10 +429,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -501,10 +445,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -519,10 +461,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -537,10 +477,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -555,10 +493,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -573,10 +509,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -591,10 +525,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -609,10 +541,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -627,10 +557,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -645,10 +573,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -663,10 +589,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_getLevelOfDetailDistance(arguments[0].getString());
@@ -678,10 +602,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_getLevelOfDetailSize(arguments[0].getString()).x;
@@ -693,10 +615,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_getLevelOfDetailSize(arguments[0].getString()).y;
@@ -708,10 +628,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_getLevelOfDetailSize(arguments[0].getString()).z;
@@ -723,10 +641,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_getLevelOfDetailEntityID(arguments[0].getString());
@@ -738,10 +654,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -756,10 +670,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -774,10 +686,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -792,10 +702,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -810,10 +718,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -828,10 +734,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_isShadowed(arguments[0].getString());
@@ -843,10 +747,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_isFrozen(arguments[0].getString());
@@ -858,10 +760,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_isReflected(arguments[0].getString());
@@ -873,10 +773,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_isBright(arguments[0].getString());
@@ -888,10 +786,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_isFaceCulled(arguments[0].getString());
@@ -903,10 +799,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -921,10 +815,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -939,10 +831,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_isInstanced(arguments[0].getString());
@@ -954,10 +844,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
@@ -972,10 +860,8 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_getRotationOrder(arguments[0].getString());
@@ -1003,7 +889,6 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				{
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "ZYX"));
 				}
-				
 			}
 		}
 	}

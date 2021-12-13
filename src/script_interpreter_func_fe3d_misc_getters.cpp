@@ -11,7 +11,6 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
-	// Determine type of function
 	if(functionName == "fe3d:cursor_is_visible")
 	{
 		// Validate arguments

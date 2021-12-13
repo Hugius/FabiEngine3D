@@ -4,7 +4,6 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
-	// Determine type of function
 	if(functionName == "fe3d:client_start")
 	{
 		auto types = {SVT::STRING};

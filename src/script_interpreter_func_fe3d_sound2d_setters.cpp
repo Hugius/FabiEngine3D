@@ -4,7 +4,6 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dSoundSetter2D(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
-	// Determine type of function
 	if(functionName == "fe3d:sound2d_place")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};

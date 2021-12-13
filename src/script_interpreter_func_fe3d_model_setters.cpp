@@ -16,7 +16,6 @@ static const vector<string> extractModelPartIDs(FabiEngine3D& fe3d, const string
 
 const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
-	// Determine type of function
 	if(functionName == "fe3d:model_place")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};

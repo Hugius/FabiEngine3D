@@ -7,7 +7,6 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
-	// Determine type of function
 	if(functionName == "fe3d:graphics_enable_fog")
 	{
 		// Validate arguments

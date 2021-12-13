@@ -11,7 +11,6 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
-	// Determine type of function
 	if(functionName == "fe3d:application_pause")
 	{
 		// Validate arguments

@@ -2,18 +2,6 @@
 
 using SVT = ScriptValueType;
 
-static const vector<string> extractModelPartIDs(FabiEngine3D& fe3d, const string& modelID, const string& partID)
-{
-	if(partID.empty())
-	{
-		return fe3d.model_getPartIDs(modelID);
-	}
-	else
-	{
-		return {partID};
-	}
-}
-
 const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
@@ -50,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				return true;
 			}
 
-			// Find full entity IDs based on part ID
+			// Find full entity IDs based on sub ID
 			for(const auto& ID : _fe3d.model_getAllIDs())
 			{
 				// If substring matches
@@ -447,15 +435,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				// Calculate average
-				vector<float> total;
-				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
 				{
-					total.push_back(_fe3d.model_getLightness(arguments[0].getString(), partID));
+					auto result = _fe3d.model_getLightness(arguments[0].getString(), arguments[1].getString());
+					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 				}
-
-				// Return
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, Math::calculateAverage(total)));
 			}
 		}
 	}
@@ -469,15 +453,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				// Calculate average
-				vector<fvec3> total;
-				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
 				{
-					total.push_back(_fe3d.model_getColor(arguments[0].getString(), partID));
+					auto result = _fe3d.model_getColor(arguments[0].getString(), arguments[1].getString()).r;
+					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 				}
-
-				// Return
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, Math::calculateAverage(total).r));
 			}
 		}
 	}
@@ -491,15 +471,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				// Calculate average
-				vector<fvec3> total;
-				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
 				{
-					total.push_back(_fe3d.model_getColor(arguments[0].getString(), partID));
+					auto result = _fe3d.model_getColor(arguments[0].getString(), arguments[1].getString()).g;
+					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 				}
-
-				// Return
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, Math::calculateAverage(total).g));
 			}
 		}
 	}
@@ -513,15 +489,65 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				// Calculate average
-				vector<fvec3> total;
-				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
 				{
-					total.push_back(_fe3d.model_getColor(arguments[0].getString(), partID));
+					auto result = _fe3d.model_getColor(arguments[0].getString(), arguments[1].getString()).b;
+					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_wireframe_color_r")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
 
-				// Return
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, Math::calculateAverage(total).b));
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				{
+					auto result = _fe3d.model_getWireframeColor(arguments[0].getString(), arguments[1].getString()).r;
+					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_wireframe_color_g")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				{
+					auto result = _fe3d.model_getWireframeColor(arguments[0].getString(), arguments[1].getString()).g;
+					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_wireframe_color_b")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				{
+					auto result = _fe3d.model_getWireframeColor(arguments[0].getString(), arguments[1].getString()).b;
+					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				}
 			}
 		}
 	}
@@ -535,15 +561,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				// Calculate average
-				vector<float> total;
-				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
 				{
-					total.push_back(_fe3d.model_getTransparency(arguments[0].getString(), partID));
+					auto result = _fe3d.model_getTransparency(arguments[0].getString(), arguments[1].getString());
+					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 				}
-
-				// Return
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, Math::calculateAverage(total)));
 			}
 		}
 	}
@@ -557,15 +579,263 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				// Calculate average
-				vector<float> total;
-				for(const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
 				{
-					total.push_back(_fe3d.model_getEmissionIntensity(arguments[0].getString(), partID));
+					auto result = _fe3d.model_getEmissionIntensity(arguments[0].getString(), arguments[1].getString());
+					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_texture_repeat")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
 
-				// Return
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, Math::calculateAverage(total)));
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				{
+					auto result = _fe3d.model_getTextureRepeat(arguments[0].getString(), arguments[1].getString());
+					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_specular_shininess")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				{
+					auto result = _fe3d.model_getSpecularShininess(arguments[0].getString(), arguments[1].getString());
+					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_specular_intensity")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				{
+					auto result = _fe3d.model_getSpecularIntensity(arguments[0].getString(), arguments[1].getString());
+					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_reflectivity")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				{
+					auto result = _fe3d.model_getReflectivity(arguments[0].getString(), arguments[1].getString());
+					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_lod_distance")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.model_getLevelOfDetailDistance(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_lod_size_x")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.model_getLevelOfDetailSize(arguments[0].getString()).x;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_lod_size_t")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.model_getLevelOfDetailSize(arguments[0].getString()).y;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_lod_size_z")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.model_getLevelOfDetailSize(arguments[0].getString()).z;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_lod_entity_id")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.model_getLevelOfDetailEntityID(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_diffuse_map_path")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				{
+					if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+					{
+						auto result = _fe3d.model_getDiffuseMapPath(arguments[0].getString(), arguments[1].getString());
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+					}
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_emission_map_path")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				{
+					if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+					{
+						auto result = _fe3d.model_getEmissionMapPath(arguments[0].getString(), arguments[1].getString());
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+					}
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_specular_map_path")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				{
+					if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+					{
+						auto result = _fe3d.model_getSpecularMapPath(arguments[0].getString(), arguments[1].getString());
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+					}
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_reflection_map_path")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				{
+					if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+					{
+						auto result = _fe3d.model_getReflectionMapPath(arguments[0].getString(), arguments[1].getString());
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+					}
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_normal_map_path")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				{
+					if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+					{
+						auto result = _fe3d.model_getNormalMapPath(arguments[0].getString(), arguments[1].getString());
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+					}
+				}
 			}
 		}
 	}

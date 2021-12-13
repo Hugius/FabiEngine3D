@@ -25,7 +25,7 @@ void AudioPlayer::update(Camera& camera, vector<Music>& musics, vector<Sound2D>&
 			}
 			else
 			{
-				musicIndex = Math::getRandomInteger(0, static_cast<int>(musics.size() - 1));
+				musicIndex = Math::getRandomNumber(0, static_cast<int>(musics.size() - 1));
 			}
 
 			// Play music

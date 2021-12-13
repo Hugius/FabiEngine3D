@@ -129,6 +129,7 @@ private:
 	const bool _validateFe3dTerrain();
 	const bool _validateFe3dWater();
 	const bool _validateFe3dModel(const string& ID, bool isPreview);
+	const bool _validateFe3dModelPart(const string& modelID, const string& partID);
 	const bool _validateFe3dBillboard(const string& ID, bool isPreview);
 	const bool _validateFe3dSound2D(const string& ID, bool isPreview);
 	const bool _validateFe3dSound3D(const string& ID, bool isPreview);

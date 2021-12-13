@@ -24,7 +24,7 @@ void WorldEditor::_updateSpotlightPlacing()
 			{
 				// Adding a number to make it unique
 			BEGIN1:
-				const string newID = ("spotlight_" + to_string(Math::getRandomInteger(0, INT_MAX)));
+				const string newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 				// Check if spotlight already exists
 				if(_fe3d.spotlight_isExisting(newID))
@@ -106,7 +106,7 @@ void WorldEditor::_updateSpotlightPlacing()
 
 						// Adding a number to make it unique
 					BEGIN2:
-						const string newID = ("spotlight_" + to_string(Math::getRandomInteger(0, INT_MAX)));
+						const string newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 						// Check if spotlight already exists
 						if(_fe3d.spotlight_isExisting(newID))

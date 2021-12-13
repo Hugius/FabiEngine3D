@@ -38,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 				return true;
 			}
 
-			// Find full entity IDs based on part ID
+			// Find full entity IDs based on sub ID
 			for(const auto& ID : _fe3d.image_getAllIDs())
 			{
 				// If substring matches
@@ -131,7 +131,7 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:image_get_width")
+	else if(functionName == "fe3d:image_get_size_x")
 	{
 		auto types = {SVT::STRING};
 
@@ -146,7 +146,7 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:image_get_height")
+	else if(functionName == "fe3d:image_get_size_y")
 	{
 		auto types = {SVT::STRING};
 
@@ -221,7 +221,7 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:image_is_animation_started")
+	else if(functionName == "fe3d:image_get_diffuse_map_path")
 	{
 		auto types = {SVT::STRING};
 
@@ -231,38 +231,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				
-				//returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
-			}
-		}
-	}
-	else if(functionName == "fe3d:image_is_animation_playing")
-	{
-		auto types = {SVT::STRING};
-
-		// Validate arguments
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			// Validate existence
-			if(_validateFe3dImage(arguments[0].getString()))
-			{
-				
-				//returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
-			}
-		}
-	}
-	else if(functionName == "fe3d:image_is_animation_paused")
-	{
-		auto types = {SVT::STRING};
-
-		// Validate arguments
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			// Validate existence
-			if(_validateFe3dImage(arguments[0].getString()))
-			{
-				
-				//returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				auto result = _fe3d.image_getDiffuseMapPath(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -292,6 +262,66 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
 				auto result = _fe3d.image_isMirroredVertically(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:image_get_wireframe_color_r")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dImage(arguments[0].getString()))
+			{
+				auto result = _fe3d.image_getWireframeColor(arguments[0].getString()).r;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:image_get_wireframe_color_g")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dImage(arguments[0].getString()))
+			{
+				auto result = _fe3d.image_getWireframeColor(arguments[0].getString()).g;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:image_get_wireframe_color_b")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dImage(arguments[0].getString()))
+			{
+				auto result = _fe3d.image_getWireframeColor(arguments[0].getString()).b;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:image_is_wireframed")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dImage(arguments[0].getString()))
+			{
+				auto result = _fe3d.image_isWireframed(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}

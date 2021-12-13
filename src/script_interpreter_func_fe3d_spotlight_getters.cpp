@@ -38,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 				return true;
 			}
 
-			// Find full entity IDs based on part ID
+			// Find full entity IDs based on sub ID
 			for(const auto& ID : _fe3d.spotlight_getAllIDs())
 			{
 				// If substring matches

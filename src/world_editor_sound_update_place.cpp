@@ -24,7 +24,7 @@ void WorldEditor::_updateSoundPlacing()
 			{
 				// Adding a number to make it unique
 			BEGIN1:
-				const string newID = (_currentPreviewSoundID.substr(1) + "_" + to_string(Math::getRandomInteger(0, INT_MAX)));
+				const string newID = (_currentPreviewSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 				// Check if sound already exists
 				if(_fe3d.sound3D_isExisting(newID))
@@ -113,7 +113,7 @@ void WorldEditor::_updateSoundPlacing()
 
 						// Adding a number to make it unique
 					BEGIN2:
-						const string newID = (_currentPreviewSoundID.substr(1) + "_" + to_string(Math::getRandomInteger(0, INT_MAX)));
+						const string newID = (_currentPreviewSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 						// Check if model already exists
 						if(_fe3d.sound3D_isExisting(newID))

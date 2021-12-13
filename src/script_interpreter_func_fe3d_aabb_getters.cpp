@@ -19,7 +19,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 				return true;
 			}
 
-			// Find full entity IDs based on part ID
+			// Find full entity IDs based on sub ID
 			for(const auto& ID : _fe3d.aabb_getAllIDs())
 			{
 				// If substring matches

@@ -46,7 +46,7 @@ void WorldEditor::_updateModelPlacing()
 				{
 					// Adding a number to make it unique
 				BEGIN1:
-					const string newID = (rawID + "_" + to_string(Math::getRandomInteger(0, INT_MAX)));
+					const string newID = (rawID + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 					// Check if model already exists
 					if(_fe3d.model_isExisting(newID))
@@ -117,7 +117,7 @@ void WorldEditor::_updateModelPlacing()
 						{
 						BEGIN2:
 							// Adding a number to make it unique
-							const string newID = (rawID + "_" + to_string(Math::getRandomInteger(0, INT_MAX)));
+							const string newID = (rawID + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 							// Check if model already exists
 							if(_fe3d.model_isExisting(newID))

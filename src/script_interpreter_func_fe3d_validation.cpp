@@ -147,6 +147,18 @@ const bool ScriptInterpreter::_validateFe3dModel(const string& ID, bool isPrevie
 	return true;
 }
 
+const bool ScriptInterpreter::_validateFe3dModelPart(const string& modelID, const string& partID)
+{
+	// Check if part exists
+	if(_fe3d.model_hasPart(modelID, partID))
+	{
+		_throwScriptError("requested model with ID \"" + modelID + "\" has no part with ID \"" + partID + "\"!");
+		return false;
+	}
+
+	return true;
+}
+
 const bool ScriptInterpreter::_validateFe3dReflection(const string& ID)
 {
 	// @ sign is reserved

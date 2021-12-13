@@ -1,5 +1,6 @@
 #include "network_client_api.hpp"
 #include "logger.hpp"
+#include "mathematics.hpp"
 
 const bool NetworkClientAPI::isValidServerIP(const string& serverIP) const
 {
@@ -65,15 +66,7 @@ const unsigned int NetworkClientAPI::getPingLatency() const
 	}
 
 	// Calculate average ping
-	unsigned int totalPing = 0;
-	for(const auto& ping : _pingLatencies)
-	{
-		totalPing += ping;
-	}
-	int averagePing = (totalPing / static_cast<int>(_pingLatencies.size()));
-
-	// Return
-	return averagePing;
+	return Math::calculateAverage(_pingLatencies);
 }
 
 const string& NetworkClientAPI::getUsername() const

@@ -518,7 +518,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 				return true;
 			}
 
-			// Find full entity IDs based on part ID
+			// Find full entity IDs based on sub ID
 			for(const auto& ID : _fe3d.billboard_getAllIDs())
 			{
 				// If substring matches
@@ -570,6 +570,51 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 
 				// Return text content
 				auto result = _fe3d.billboard_getTextContent(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:billboard_get_diffuse_map_path")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.billboard_getDiffuseMapPath(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:billboard_get_emission_map_path")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.billboard_getEmissionMapPath(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:billboard_get_font_path")
+	{
+		auto types = {SVT::STRING};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				auto result = _fe3d.billboard_getFontPath(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 			}
 		}

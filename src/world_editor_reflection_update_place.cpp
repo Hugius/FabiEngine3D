@@ -24,7 +24,7 @@ void WorldEditor::_updateReflectionPlacing()
 			{
 				// Adding a number to make it unique
 			BEGIN1:
-				const string newID = ("reflection_" + to_string(Math::getRandomInteger(0, INT_MAX)));
+				const string newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 				// Check if reflection already exists
 				if(_fe3d.reflection_isExisting(newID))
@@ -91,7 +91,7 @@ void WorldEditor::_updateReflectionPlacing()
 
 						// Adding a number to make it unique
 					BEGIN2:
-						const string newID = ("reflection_" + to_string(Math::getRandomInteger(0, INT_MAX)));
+						const string newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 						// Check if reflection already exists
 						if(_fe3d.reflection_isExisting(newID))

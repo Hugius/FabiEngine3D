@@ -101,6 +101,24 @@ const float Math::calculateAverage(const vector<float>& values)
 	return (total / static_cast<float>(values.size()));
 }
 
+const unsigned int Math::calculateAverage(const vector<unsigned int>& values)
+{
+	unsigned int total = 0;
+
+	for(const auto& value : values)
+	{
+		total += value;
+	}
+
+	return static_cast<unsigned int>(total / values.size());
+}
+
+const unsigned int Math::getRandomNumber(unsigned int min, unsigned int max)
+{
+	uniform_int_distribution<unsigned int> dist(min, max);
+	return dist(_generator);
+}
+
 const int Math::calculateAverage(const vector<int>& values)
 {
 	int total = 0;
@@ -128,13 +146,13 @@ const float Math::getPI()
 	return PI;
 }
 
-const float Math::getRandomFloat(float min, float max)
+const float Math::getRandomNumber(float min, float max)
 {
 	uniform_real_distribution<float> dist(min, max);
 	return dist(_generator);
 }
 
-const int Math::getRandomInteger(int min, int max)
+const int Math::getRandomNumber(int min, int max)
 {
 	uniform_int_distribution<int> dist(min, max);
 	return dist(_generator);

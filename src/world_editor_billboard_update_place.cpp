@@ -24,7 +24,7 @@ void WorldEditor::_updateBillboardPlacing()
 			{
 				// Adding a number to make it unique
 			BEGIN1:
-				int randomSerial = Math::getRandomInteger(0, INT_MAX);
+				int randomSerial = Math::getRandomNumber(0, INT_MAX);
 				const string newID = (_currentPreviewBillboardID.substr(1) + "_" + to_string(randomSerial));
 
 				// Check if billboard already exists
@@ -76,7 +76,7 @@ void WorldEditor::_updateBillboardPlacing()
 
 					BEGIN2:
 						// Adding a number to make it unique
-						const string newID = (_currentPreviewBillboardID.substr(1) + "_" + to_string(Math::getRandomInteger(0, INT_MAX)));
+						const string newID = (_currentPreviewBillboardID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 						// Check if billboard already exists
 						if(_fe3d.billboard_isExisting(newID))

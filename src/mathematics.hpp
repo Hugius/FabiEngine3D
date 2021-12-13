@@ -83,11 +83,15 @@ public:
 	static const float convertToRadians(float degrees);
 	static const float convertToDegrees(float radians);
 	static const float getPI();
-	static const float getRandomFloat(float min, float max);
+	static const float getRandomNumber(float min, float max);
+
+	// UNSIGNED INT
+	static const unsigned int calculateAverage(const vector<unsigned int>& values);
+	static const unsigned int getRandomNumber(unsigned int min, unsigned int max);
 
 	// INT
 	static const int calculateAverage(const vector<int>& values);
-	static const int getRandomInteger(int min, int max);
+	static const int getRandomNumber(int min, int max);
 
 	// BOOL
 	static const bool isNormalized(fvec2 vector);

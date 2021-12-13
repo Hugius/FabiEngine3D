@@ -570,7 +570,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 			// Validate arguments
 			if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 			{
-				auto result = Math::getRandomInteger(arguments[0].getInteger(), arguments[1].getInteger());
+				auto result = Math::getRandomNumber(arguments[0].getInteger(), arguments[1].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
 			}
 		}
@@ -581,7 +581,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 			// Validate arguments
 			if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 			{
-				auto result = Math::getRandomFloat(arguments[0].getDecimal(), arguments[1].getDecimal());
+				auto result = Math::getRandomNumber(arguments[0].getDecimal(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}

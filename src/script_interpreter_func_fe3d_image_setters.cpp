@@ -106,7 +106,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				fvec2 position = _convertGuiPositionToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				auto position = _convertGuiPositionToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				_fe3d.image_setPosition(arguments[0].getString(), position);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
@@ -255,6 +255,22 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 			}
 		}
 	}
+	else if(functionName == "fe3d:image_set_wireframe_color")
+	{
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+
+		// Validate arguments
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			// Validate existence
+			if(_validateFe3dImage(arguments[0].getString()))
+			{
+				_fe3d.image_setWireframeColor(arguments[0].getString(),
+									 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:image_set_transparency")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
@@ -270,9 +286,9 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:image_start_animation")
+	else if(functionName == "fe3d:image_set_wireframed")
 	{
-		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER, SVT::INTEGER, SVT::INTEGER};
+		auto types = {SVT::STRING, SVT::BOOLEAN};
 
 		// Validate arguments
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
@@ -280,52 +296,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 			// Validate existence
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-			}
-		}
-	}
-	else if(functionName == "fe3d:image_pause_animation")
-	{
-		auto types = {SVT::STRING};
-
-		// Validate arguments
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			// Validate existence
-			if(_validateFe3dImage(arguments[0].getString()))
-			{
-				
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-			}
-		}
-	}
-	else if(functionName == "fe3d:image_resume_animation")
-	{
-		auto types = {SVT::STRING};
-
-		// Validate arguments
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			// Validate existence
-			if(_validateFe3dImage(arguments[0].getString()))
-			{
-				
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-			}
-		}
-	}
-	else if(functionName == "fe3d:image_stop_animation")
-	{
-		auto types = {SVT::STRING};
-
-		// Validate arguments
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			// Validate existence
-			if(_validateFe3dImage(arguments[0].getString()))
-			{
-				
+				_fe3d.image_setWireframed(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

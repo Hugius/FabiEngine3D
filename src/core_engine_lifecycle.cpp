@@ -213,15 +213,15 @@ void CoreEngine::_updateApplication()
 
 		// Always update 2D entity logic, because of engine GUI interaction
 		_timer.startDeltaPart("guiEntityUpdate");
-		_imageEntityManager.update(_isPaused);
+		_imageEntityManager.update();
 		_textEntityManager.update();
 		_timer.stopDeltaPart();
 	}
 
 	// Always update networking
 	_timer.startDeltaPart("networkUpdate");
-	_networkServerAPI.update();
-	_networkClientAPI.update();
+	_networkingServer.update();
+	_networkingClient.update();
 	_timer.stopDeltaPart();
 
 	// Always update master renderer

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "network_utils.hpp"
-#include "network_server_message.hpp"
+#include "networking_utils.hpp"
+#include "networking_server_message.hpp"
 
 #include <string>
 #include <future>
@@ -17,19 +17,19 @@ using std::future;
 using std::shared_ptr;
 using std::tuple;
 
-class NetworkClientAPI final
+class NetworkingClient final
 {
 public:
-	NetworkClientAPI();
-	~NetworkClientAPI();
+	NetworkingClient();
+	~NetworkingClient();
 
 	// VOID
 	void start(const string& username);
 	void update();
 	void connectToServer(const string& serverIP, const string& serverPort);
 	void disconnectFromServer(bool mustBeAccepted);
-	void sendMessageTCP(const string& content);
-	void sendMessageUDP(const string& content);
+	void sendTcpMessage(const string& content);
+	void sendUdpMessage(const string& content);
 	void stop();
 
 	// STRING
@@ -47,30 +47,30 @@ public:
 	const bool isAcceptedByServer() const;
 
 	// MISCELLANEOUS
-	const vector<NetworkServerMessage>& getPendingMessages() const;
+	const vector<NetworkingServerMessage>& getPendingMessages() const;
 
 private:
 	// VOID
-	void _setupTCP();
-	void _setupUDP();
+	void _setupTcp();
+	void _setupUdp();
 
 	// STRING
-	tuple<int, int, long long, string> _waitForMessageTCP(SOCKET socket) const;
-	tuple<int, int, string, string, string> _receiveMessageUDP(SOCKET socket) const;
+	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET socket) const;
+	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET socket) const;
 
 	// INT
 	int _waitForServerConnection(SOCKET socket, const string& serverIP, const string& serverPort) const;
 
 	// BOOL
-	bool _sendMessageTCP(const string& content, bool isReserved, bool mustBeAccepted);
-	bool _sendMessageUDP(const string& content, bool isReserved, bool mustBeAccepted) const;
+	bool _sendTcpMessage(const string& content, bool isReserved, bool mustBeAccepted);
+	bool _sendUdpMessage(const string& content, bool isReserved, bool mustBeAccepted) const;
 
 	// STRING
-	future<tuple<int, int, long long, string>> _messageThreadTCP;
+	future<tuple<int, int, long long, string>> _tcpMessageThread;
 	string _username = "";
 	string _serverIP = "";
 	string _serverPort = "";
-	string _messageBuildTCP = "";
+	string _tcpMessageBuild = "";
 
 	// LONG LONG
 	long long _lastMilliseconds = 0;
@@ -90,7 +90,7 @@ private:
 	bool _mustDisconnectFromServer = false;
 
 	// MISCELLANEOUS
-	vector<NetworkServerMessage> _pendingMessages;
-	SOCKET _socketTCP;
-	SOCKET _socketUDP;
+	vector<NetworkingServerMessage> _pendingMessages;
+	SOCKET _tcpSocket;
+	SOCKET _udpSocket;
 };

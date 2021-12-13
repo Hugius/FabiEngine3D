@@ -4,8 +4,8 @@
 #include "direction.hpp"
 #include "direction_order.hpp"
 #include "aabb_parent_entity_type.hpp"
-#include "network_client_message.hpp"
-#include "network_server_message.hpp"
+#include "networking_client_message.hpp"
+#include "networking_server_message.hpp"
 #include "mathematics.hpp"
 #include "water_quality.hpp"
 #include "bloom_type.hpp"
@@ -855,16 +855,16 @@ public:
 
 	// SERVER - setters
 	void server_start(unsigned int maxClientCount);
-	void server_sendMessageTCP(const string& username, const string& content);
-	void server_sendMessageUDP(const string& username, const string& content);
-	void server_broadcastMessageTCP(const string& content, const string& exceptionUsername);
-	void server_broadcastMessageUDP(const string& content, const string& exceptionUsername);
+	void server_sendTcpMessage(const string& username, const string& content);
+	void server_sendUdpMessage(const string& username, const string& content);
+	void server_broadcastTcpMessage(const string& content, const string& exceptionUsername);
+	void server_broadcastUdpMessage(const string& content, const string& exceptionUsername);
 	void server_disconnectClient(const string& username);
 	void server_disconnectClients();
 	void server_stop();
 
 	// SERVER - getters
-	const vector<NetworkClientMessage> server_getPendingMessages() const;
+	const vector<NetworkingClientMessage> server_getPendingMessages() const;
 	const vector<string> server_getClientIPs() const;
 	const vector<string> server_getClientUsernames() const;
 	const string server_getNewClientIP() const;
@@ -877,13 +877,13 @@ public:
 	// CLIENT - setters
 	void client_start(const string& username);
 	void client_connect(const string& serverIP);
-	void client_sendMessageTCP(const string& content);
-	void client_sendMessageUDP(const string& content);
+	void client_sendTcpMessage(const string& content);
+	void client_sendUdpMessage(const string& content);
 	void client_disconnect();
 	void client_stop();
 
 	// CLIENT - getters
-	const vector<NetworkServerMessage> client_getPendingMessages() const;
+	const vector<NetworkingServerMessage> client_getPendingMessages() const;
 	const string client_getUsername() const;
 	const string client_getServerIP() const;
 	const unsigned int client_getPingLatency() const;

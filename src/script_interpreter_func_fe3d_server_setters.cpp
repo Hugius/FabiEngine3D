@@ -35,7 +35,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			_fe3d.server_sendMessageTCP(arguments[0].getString(), arguments[1].getString());
+			_fe3d.server_sendTcpMessage(arguments[0].getString(), arguments[1].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -45,7 +45,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			_fe3d.server_sendMessageUDP(arguments[0].getString(), arguments[1].getString());
+			_fe3d.server_sendUdpMessage(arguments[0].getString(), arguments[1].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -55,7 +55,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			_fe3d.server_broadcastMessageTCP(arguments[0].getString(), arguments[1].getString());
+			_fe3d.server_broadcastTcpMessage(arguments[0].getString(), arguments[1].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -65,7 +65,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			_fe3d.server_broadcastMessageUDP(arguments[0].getString(), arguments[1].getString());
+			_fe3d.server_broadcastUdpMessage(arguments[0].getString(), arguments[1].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

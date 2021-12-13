@@ -9,7 +9,6 @@ public:
 
 	// VOID
 	void update() override;
-	void update(bool isEnginePaused);
 	void createEntity(const string& ID, bool isCentered);
 
 	// MISCELLANEOUS

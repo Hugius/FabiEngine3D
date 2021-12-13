@@ -6,13 +6,12 @@
 
 using std::string;
 
-class NetworkClientMessage final
+class NetworkingServerMessage final
 {
 public:
-	NetworkClientMessage(const string& username, const string& content, const NetworkProtocol protocol);
+	NetworkingServerMessage(const string& content, const NetworkProtocol protocol);
 
 	// STRING
-	const string& getUsername() const;
 	const string& getContent() const;
 
 	// MISCELLANEOUS
@@ -20,7 +19,6 @@ public:
 
 private:
 	// STRING
-	string _username;
 	string _content;
 
 	// MISCELLANEOUS

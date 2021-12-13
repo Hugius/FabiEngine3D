@@ -9,10 +9,10 @@ typedef unsigned __int64 SOCKET;
 
 struct sockaddr_in;
 
-class NetworkUtils final
+class NetworkingUtils final
 {
 public:
-	NetworkUtils() = delete;
+	NetworkingUtils() = delete;
 
 	// STRING
 	static const string extractAddressIP(sockaddr_in* address);

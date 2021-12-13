@@ -1,6 +1,6 @@
 #define WIN32_LEAN_AND_MEAN
 
-#include "network_server_api.hpp"
+#include "networking_server.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 
@@ -13,7 +13,7 @@ using std::future_status;
 using std::launch;
 using std::chrono::system_clock;
 
-void NetworkServerAPI::update()
+void NetworkingServer::update()
 {
 	// Must be running
 	if(!_isRunning)
@@ -45,26 +45,26 @@ void NetworkServerAPI::update()
 		auto clientSocketID = _connectionThread.get();
 		if(clientSocketID == INVALID_SOCKET)
 		{
-			Logger::throwError("NetworkServerAPI::update::1 ---> ", WSAGetLastError());
+			Logger::throwError("NetworkingServer::update::1 ---> ", WSAGetLastError());
 		}
 
 		// Extract IP & port
-		auto clientIP = NetworkUtils::extractPeerIP(clientSocketID);
-		auto clientPort = NetworkUtils::extractPeerPort(clientSocketID);
+		auto clientIP = NetworkingUtils::extractPeerIP(clientSocketID);
+		auto clientPort = NetworkingUtils::extractPeerPort(clientSocketID);
 
 		// Save client data
 		_clientSockets.push_back(clientSocketID);
 		_clientIPs.push_back(clientIP);
-		_clientPortsTCP.push_back(clientPort);
-		_clientPortsUDP.push_back("");
+		_tcpClientPorts.push_back(clientPort);
+		_udpClientPorts.push_back("");
 		_clientUsernames.push_back("");
-		_messageBuildsTCP.push_back("");
+		_tcpMessageBuilds.push_back("");
 
 		// Spawn thread for receiving TCP messages
-		_messageThreadsTCP.push_back(async(launch::async, &NetworkServerAPI::_waitForMessageTCP, this, clientSocketID));
+		_tcpMessageThreads.push_back(async(launch::async, &NetworkingServer::_waitForTcpMessage, this, clientSocketID));
 
 		// Spawn connection thread again for next possible client
-		_connectionThread = async(launch::async, &NetworkServerAPI::_waitForClientConnection, this, _socketTCP);
+		_connectionThread = async(launch::async, &NetworkingServer::_waitForClientConnection, this, _tcpSocket);
 	}
 
 	// Receive incoming TCP messages
@@ -76,8 +76,8 @@ BEGIN:
 		const auto& clientUsername = _clientUsernames[i];
 
 		// Mutable client data
-		auto& clientMessageBuild = _messageBuildsTCP[i];
-		auto& messageThread = _messageThreadsTCP[i];
+		auto& clientMessageBuild = _tcpMessageBuilds[i];
+		auto& messageThread = _tcpMessageThreads[i];
 
 		// Check if the client sent any message
 		if(messageThread.wait_until(system_clock::time_point::min()) == future_status::ready)
@@ -98,14 +98,14 @@ BEGIN:
 						if(clientMessageBuild.substr(0, string("REQUEST").size()) == "REQUEST") // Handle REQUEST message
 						{
 							// Temporary values
-							const auto newPortUDP = clientMessageBuild.substr(string("REQUEST").size(), NetworkUtils::PORT_DIGIT_COUNT);
-							const auto newUsername = clientMessageBuild.substr(string("REQUEST").size() + NetworkUtils::PORT_DIGIT_COUNT);
+							const auto newPortUDP = clientMessageBuild.substr(string("REQUEST").size(), NetworkingUtils::PORT_DIGIT_COUNT);
+							const auto newUsername = clientMessageBuild.substr(string("REQUEST").size() + NetworkingUtils::PORT_DIGIT_COUNT);
 
 							// Check if server is full or username is already connected
 							if(_clientIPs.size() > _maxClientCount)
 							{
 								// Reject client
-								if(!_sendMessageTCP(clientSocketID, "SERVER_FULL", true))
+								if(!_sendTcpMessage(clientSocketID, "SERVER_FULL", true))
 								{
 									return;
 								}
@@ -119,7 +119,7 @@ BEGIN:
 							else if(find(_clientUsernames.begin(), _clientUsernames.end(), newUsername) != _clientUsernames.end())
 							{
 								// Reject client
-								if(!_sendMessageTCP(clientSocketID, "ALREADY_CONNECTED", true))
+								if(!_sendTcpMessage(clientSocketID, "ALREADY_CONNECTED", true))
 								{
 									return;
 								}
@@ -133,13 +133,13 @@ BEGIN:
 							else
 							{
 								// Accept client
-								if(!_sendMessageTCP(clientSocketID, "ACCEPT", true))
+								if(!_sendTcpMessage(clientSocketID, "ACCEPT", true))
 								{
 									return;
 								}
 
 								// Save new port
-								_clientPortsUDP[i] = newPortUDP;
+								_udpClientPorts[i] = newPortUDP;
 
 								// Save new username
 								_clientUsernames[i] = newUsername;
@@ -162,7 +162,7 @@ BEGIN:
 							auto pingMessage = ("PING" + to_string(receiveDelay));
 
 							// Send ping message back to client
-							if(!_sendMessageTCP(clientSocketID, pingMessage, true))
+							if(!_sendTcpMessage(clientSocketID, pingMessage, true))
 							{
 								return;
 							}
@@ -172,7 +172,7 @@ BEGIN:
 						}
 						else // Handle other message
 						{
-							_pendingMessages.push_back(NetworkClientMessage(clientUsername, clientMessageBuild, NetworkProtocol::TCP));
+							_pendingMessages.push_back(NetworkingClientMessage(clientUsername, clientMessageBuild, NetworkProtocol::TCP));
 							clientMessageBuild = "";
 						}
 					}
@@ -197,20 +197,20 @@ BEGIN:
 				}
 				else // Something really bad happened
 				{
-					Logger::throwError("NetworkServerAPI::update::2 ---> ", messageErrorCode);
+					Logger::throwError("NetworkingServer::update::2 ---> ", messageErrorCode);
 				}
 			}
 
 			// Spawn new message thread
-			messageThread = async(launch::async, &NetworkServerAPI::_waitForMessageTCP, this, clientSocketID);
+			messageThread = async(launch::async, &NetworkingServer::_waitForTcpMessage, this, clientSocketID);
 		}
 	}
 
 	// Receive incoming UDP messages
-	while(NetworkUtils::isMessageReadyUDP(_socketUDP))
+	while(NetworkingUtils::isMessageReadyUDP(_udpSocket))
 	{
 		// Message data
-		const auto& messageResult = _receiveMessageUDP(_socketUDP);
+		const auto& messageResult = _receiveUdpMessage(_udpSocket);
 		const auto& messageStatusCode = get<0>(messageResult);
 		const auto& messageErrorCode = get<1>(messageResult);
 		const auto& messageContent = get<2>(messageResult);
@@ -221,7 +221,7 @@ BEGIN:
 		{
 			if(find(_clientIPs.begin(), _clientIPs.end(), messageIP) != _clientIPs.end()) // Message must come from a client IP
 			{
-				if(find(_clientPortsUDP.begin(), _clientPortsUDP.end(), messagePort) != _clientPortsUDP.end()) // Message must come from a client port
+				if(find(_udpClientPorts.begin(), _udpClientPorts.end(), messagePort) != _udpClientPorts.end()) // Message must come from a client port
 				{
 					// Temporary values
 					auto username = messageContent.substr(0, messageContent.find(';'));
@@ -233,7 +233,7 @@ BEGIN:
 						// Check if username matches
 						if(username == _clientUsernames[i])
 						{
-							_pendingMessages.push_back(NetworkClientMessage(username, content, NetworkProtocol::UDP));
+							_pendingMessages.push_back(NetworkingClientMessage(username, content, NetworkProtocol::UDP));
 							break;
 						}
 					}
@@ -252,7 +252,7 @@ BEGIN:
 		}
 		else // Something really bad happened
 		{
-			Logger::throwError("NetworkServerAPI::update::3 ---> ", messageErrorCode);
+			Logger::throwError("NetworkingServer::update::3 ---> ", messageErrorCode);
 		}
 	}
 }

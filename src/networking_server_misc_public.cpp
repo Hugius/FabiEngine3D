@@ -1,17 +1,17 @@
-#include "network_server_api.hpp"
+#include "networking_server.hpp"
 #include "logger.hpp"
 
-const bool NetworkServerAPI::isRunning() const
+const bool NetworkingServer::isRunning() const
 {
 	return _isRunning;
 }
 
-const bool NetworkServerAPI::isClientConnected(const string& username) const
+const bool NetworkingServer::isClientConnected(const string& username) const
 {
 	// Must be running
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkServerAPI::isClientConnected");
+		Logger::throwError("NetworkingServer::isClientConnected");
 	}
 
 	// Try to find client
@@ -32,36 +32,36 @@ const bool NetworkServerAPI::isClientConnected(const string& username) const
 	return false;
 }
 
-const string NetworkServerAPI::getNewClientIP() const
+const string NetworkingServer::getNewClientIP() const
 {
 	// Must be running
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkServerAPI::getNewClientIP");
+		Logger::throwError("NetworkingServer::getNewClientIP");
 	}
 
 	// Return
 	return _newClientIP;
 }
 
-const string NetworkServerAPI::getNewClientUsername() const
+const string NetworkingServer::getNewClientUsername() const
 {
 	// Must be running
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkServerAPI::getNewClientUsername");
+		Logger::throwError("NetworkingServer::getNewClientUsername");
 	}
 
 	// Return
 	return _newClientUsername;
 }
 
-const string NetworkServerAPI::getOldClientIP() const
+const string NetworkingServer::getOldClientIP() const
 {
 	// Must be running
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkServerAPI::getOldClientIP");
+		Logger::throwError("NetworkingServer::getOldClientIP");
 	}
 
 	// Return
@@ -75,12 +75,12 @@ const string NetworkServerAPI::getOldClientIP() const
 	}
 }
 
-const string NetworkServerAPI::getOldClientUsername() const
+const string NetworkingServer::getOldClientUsername() const
 {
 	// Must be running
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkServerAPI::getOldClientUsername");
+		Logger::throwError("NetworkingServer::getOldClientUsername");
 	}
 
 	// Return
@@ -94,24 +94,24 @@ const string NetworkServerAPI::getOldClientUsername() const
 	}
 }
 
-const vector<NetworkClientMessage>& NetworkServerAPI::getPendingMessages() const
+const vector<NetworkingClientMessage>& NetworkingServer::getPendingMessages() const
 {
 	// Must be running
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkServerAPI::getPendingMessages");
+		Logger::throwError("NetworkingServer::getPendingMessages");
 	}
 
 	// Return
 	return _pendingMessages;
 }
 
-const vector<string> NetworkServerAPI::getClientIPs() const
+const vector<string> NetworkingServer::getClientIPs() const
 {
 	// Must be running
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkServerAPI::getClientIPs");
+		Logger::throwError("NetworkingServer::getClientIPs");
 	}
 
 	// Client must be fully accepted
@@ -129,7 +129,7 @@ const vector<string> NetworkServerAPI::getClientIPs() const
 	return clientIPs;
 }
 
-const vector<string> NetworkServerAPI::getClientUsernames() const
+const vector<string> NetworkingServer::getClientUsernames() const
 {
 	// Temporary values
 	vector<string> clientUsernames;
@@ -137,7 +137,7 @@ const vector<string> NetworkServerAPI::getClientUsernames() const
 	// Must be running
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkServerAPI::getClientUsernames");
+		Logger::throwError("NetworkingServer::getClientUsernames");
 	}
 
 	// Client must be fully accepted
@@ -153,12 +153,12 @@ const vector<string> NetworkServerAPI::getClientUsernames() const
 	return clientUsernames;
 }
 
-void NetworkServerAPI::sendMessageTCP(const string& username, const string& content)
+void NetworkingServer::sendTcpMessage(const string& username, const string& content)
 {
 	// Must be running
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkServerAPI::sendTcpMessage::1");
+		Logger::throwError("NetworkingServer::sendTcpMessage::1");
 	}
 
 	// Try to find client and send message
@@ -170,22 +170,22 @@ void NetworkServerAPI::sendMessageTCP(const string& username, const string& cont
 			// Check if client is found
 			if(username == _clientUsernames[i])
 			{
-				_sendMessageTCP(_clientSockets[i], content, false);
+				_sendTcpMessage(_clientSockets[i], content, false);
 				return;
 			}
 		}
 	}
 
 	// Client not connected
-	Logger::throwError("NetworkServerAPI::sendTcpMessage::2");
+	Logger::throwError("NetworkingServer::sendTcpMessage::2");
 }
 
-void NetworkServerAPI::sendMessageUDP(const string& username, const string& content)
+void NetworkingServer::sendUdpMessage(const string& username, const string& content)
 {
 	// Must be running
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkServerAPI::sendUdpMessage::1");
+		Logger::throwError("NetworkingServer::sendUdpMessage::1");
 	}
 
 	// Try to find client and send message
@@ -197,22 +197,22 @@ void NetworkServerAPI::sendMessageUDP(const string& username, const string& cont
 			// Check if client is found
 			if(username == _clientUsernames[i])
 			{
-				_sendMessageUDP(_clientIPs[i], _clientPortsUDP[i], content, false);
+				_sendUdpMessage(_clientIPs[i], _udpClientPorts[i], content, false);
 				return;
 			}
 		}
 	}
 
 	// Client not connected
-	Logger::throwError("NetworkServerAPI::sendUdpMessage::2");
+	Logger::throwError("NetworkingServer::sendUdpMessage::2");
 }
 
-void NetworkServerAPI::broadcastMessageTCP(const string& content, const string& exceptionUsername)
+void NetworkingServer::broadcastTcpMessage(const string& content, const string& exceptionUsername)
 {
 	// Must be running
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkServerAPI::broadcastTcpMessage");
+		Logger::throwError("NetworkingServer::broadcastTcpMessage");
 	}
 
 	// Send message to all connected clients
@@ -224,18 +224,18 @@ void NetworkServerAPI::broadcastMessageTCP(const string& content, const string& 
 			// Client must be fully accepted
 			if(!_clientUsernames[i].empty())
 			{
-				_sendMessageTCP(_clientSockets[i], content, false);
+				_sendTcpMessage(_clientSockets[i], content, false);
 			}
 		}
 	}
 }
 
-void NetworkServerAPI::broadcastMessageUDP(const string& content, const string& exceptionUsername)
+void NetworkingServer::broadcastUdpMessage(const string& content, const string& exceptionUsername)
 {
 	// Must be running
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkServerAPI::broadcastUdpMessage");
+		Logger::throwError("NetworkingServer::broadcastUdpMessage");
 	}
 
 	// Try to find client and send message
@@ -247,18 +247,18 @@ void NetworkServerAPI::broadcastMessageUDP(const string& content, const string& 
 			// Client must be fully accepted
 			if(!_clientUsernames[i].empty())
 			{
-				_sendMessageUDP(_clientIPs[i], _clientPortsUDP[i], content, false);
+				_sendUdpMessage(_clientIPs[i], _udpClientPorts[i], content, false);
 			}
 		}
 	}
 }
 
-void NetworkServerAPI::disconnectClient(const string& username)
+void NetworkingServer::disconnectClient(const string& username)
 {
 	// Must be running
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkServerAPI::disconnectClient::1");
+		Logger::throwError("NetworkingServer::disconnectClient::1");
 	}
 
 	// Try to find client and send message
@@ -270,22 +270,22 @@ void NetworkServerAPI::disconnectClient(const string& username)
 			// Check if client is found
 			if(username == _clientUsernames[i])
 			{
-				_sendMessageTCP(_clientSockets[i], "DISCONNECTED", true);
+				_sendTcpMessage(_clientSockets[i], "DISCONNECTED", true);
 				return;
 			}
 		}
 	}
 
 	// Client not connected
-	Logger::throwError("NetworkServerAPI::disconnectClient::2");
+	Logger::throwError("NetworkingServer::disconnectClient::2");
 }
 
-void NetworkServerAPI::disconnectClients()
+void NetworkingServer::disconnectClients()
 {
 	// Must be running
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkServerAPI::disconnectClients::1");
+		Logger::throwError("NetworkingServer::disconnectClients::1");
 	}
 
 	// Send messages
@@ -294,7 +294,7 @@ void NetworkServerAPI::disconnectClients()
 		// Client must be fully accepted
 		if(!_clientUsernames[i].empty())
 		{
-			_sendMessageTCP(_clientSockets[i], "DISCONNECTED", true);
+			_sendTcpMessage(_clientSockets[i], "DISCONNECTED", true);
 			return;
 		}
 	}

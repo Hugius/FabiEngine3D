@@ -3,7 +3,7 @@
 
 void FabiEngine3D::client_start(const string & username)
 {
-	if(_core->_networkClientAPI.isRunning())
+	if(_core->_networkingClient.isRunning())
 	{
 		Logger::throwWarning("Networking client tried to start: already running!");
 		return;
@@ -13,12 +13,12 @@ void FabiEngine3D::client_start(const string & username)
 		Logger::throwWarning("Networking client tried to start: username is empty!");
 		return;
 	}
-	if(username.size() > NetworkUtils::MAX_USERNAME_CHARACTERS)
+	if(username.size() > NetworkingUtils::MAX_USERNAME_CHARACTERS)
 	{
 		Logger::throwWarning("Networking client tried to start: username is too long!");
 		return;
 	}
-	if(NetworkUtils::isMessageReserved(username))
+	if(NetworkingUtils::isMessageReserved(username))
 	{
 		Logger::throwWarning("Networking client tried to start: username is reserved!");
 		return;
@@ -29,48 +29,48 @@ void FabiEngine3D::client_start(const string & username)
 		return;
 	}
 
-	_core->_networkClientAPI.start(username);
+	_core->_networkingClient.start(username);
 }
 
 void FabiEngine3D::client_connect(const string& serverIP)
 {
-	if(!_core->_networkClientAPI.isRunning())
+	if(!_core->_networkingClient.isRunning())
 	{
 		Logger::throwWarning("Networking client tried to connect: not running!");
 		return;
 	}
-	if(_core->_networkClientAPI.isConnectedToServer())
+	if(_core->_networkingClient.isConnectedToServer())
 	{
 		Logger::throwWarning("Networking client tried to connect: already connected!");
 		return;
 	}
-	if(_core->_networkClientAPI.isConnectingToServer())
+	if(_core->_networkingClient.isConnectingToServer())
 	{
 		Logger::throwWarning("Networking client tried to connect: already connecting!");
 		return;
 	}
-	if(!_core->_networkClientAPI.isValidServerIP(serverIP))
+	if(!_core->_networkingClient.isValidServerIP(serverIP))
 	{
 		Logger::throwWarning("Networking client tried to connect: invalid server IP!");
 		return;
 	}
 
-	_core->_networkClientAPI.connectToServer(serverIP, NetworkUtils::SERVER_PORT);
+	_core->_networkingClient.connectToServer(serverIP, NetworkingUtils::SERVER_PORT);
 }
 
-void FabiEngine3D::client_sendMessageTCP(const string& content)
+void FabiEngine3D::client_sendTcpMessage(const string& content)
 {
-	if(!_core->_networkClientAPI.isRunning())
+	if(!_core->_networkingClient.isRunning())
 	{
 		Logger::throwWarning("Networking client tried to send TCP message: not running!");
 		return;
 	}
-	if(!_core->_networkClientAPI.isConnectedToServer())
+	if(!_core->_networkingClient.isConnectedToServer())
 	{
 		Logger::throwWarning("Networking client tried to send TCP message: not connected!");
 		return;
 	}
-	if(!_core->_networkClientAPI.isAcceptedByServer())
+	if(!_core->_networkingClient.isAcceptedByServer())
 	{
 		Logger::throwWarning("Networking client tried to send TCP message: not accepted!");
 		return;
@@ -80,33 +80,33 @@ void FabiEngine3D::client_sendMessageTCP(const string& content)
 		Logger::throwWarning("Networking client tried to send TCP message: cannot contain ':'!");
 		return;
 	}
-	if(NetworkUtils::isMessageReserved(content))
+	if(NetworkingUtils::isMessageReserved(content))
 	{
 		Logger::throwWarning("Networking client tried to send TCP message: \"" + content + "\" is reserved!");
 		return;
 	}
-	if(content.size() > NetworkUtils::MAX_MESSAGE_CHARACTERS)
+	if(content.size() > NetworkingUtils::MAX_MESSAGE_CHARACTERS)
 	{
 		Logger::throwWarning("Networking client tried to send TCP message: maximum character amount exceeded!");
 		return;
 	}
 
-	_core->_networkClientAPI.sendMessageTCP(content);
+	_core->_networkingClient.sendTcpMessage(content);
 }
 
-void FabiEngine3D::client_sendMessageUDP(const string& content)
+void FabiEngine3D::client_sendUdpMessage(const string& content)
 {
-	if(!_core->_networkClientAPI.isRunning())
+	if(!_core->_networkingClient.isRunning())
 	{
 		Logger::throwWarning("Networking client tried to send UDP message: not running!");
 		return;
 	}
-	if(!_core->_networkClientAPI.isConnectedToServer())
+	if(!_core->_networkingClient.isConnectedToServer())
 	{
 		Logger::throwWarning("Networking client tried to send UDP message: not connected!");
 		return;
 	}
-	if(!_core->_networkClientAPI.isAcceptedByServer())
+	if(!_core->_networkingClient.isAcceptedByServer())
 	{
 		Logger::throwWarning("Networking client tried to send UDP message: not accepted!");
 		return;
@@ -116,48 +116,48 @@ void FabiEngine3D::client_sendMessageUDP(const string& content)
 		Logger::throwWarning("Networking client tried to send UDP message: cannot contain ':'!");
 		return;
 	}
-	if(NetworkUtils::isMessageReserved(content))
+	if(NetworkingUtils::isMessageReserved(content))
 	{
 		Logger::throwWarning("Networking client tried to send UDP message: \"" + content + "\" is reserved!");
 		return;
 	}
-	if(content.size() > NetworkUtils::MAX_MESSAGE_CHARACTERS)
+	if(content.size() > NetworkingUtils::MAX_MESSAGE_CHARACTERS)
 	{
 		Logger::throwWarning("Networking client tried to send UDP message: maximum character amount exceeded!");
 		return;
 	}
 
-	_core->_networkClientAPI.sendMessageUDP(content);
+	_core->_networkingClient.sendUdpMessage(content);
 }
 
 void FabiEngine3D::client_disconnect()
 {
-	if(!_core->_networkClientAPI.isRunning())
+	if(!_core->_networkingClient.isRunning())
 	{
 		Logger::throwWarning("Networking client tried to disconnect: not running!");
 		return;
 	}
-	if(!_core->_networkClientAPI.isConnectedToServer())
+	if(!_core->_networkingClient.isConnectedToServer())
 	{
 		Logger::throwWarning("Networking client tried to disconnect: not connected!");
 		return;
 	}
-	if(!_core->_networkClientAPI.isAcceptedByServer())
+	if(!_core->_networkingClient.isAcceptedByServer())
 	{
 		Logger::throwWarning("Networking client tried to disconnect: not accepted!");
 		return;
 	}
 
-	_core->_networkClientAPI.disconnectFromServer(true);
+	_core->_networkingClient.disconnectFromServer(true);
 }
 
 void FabiEngine3D::client_stop()
 {
-	if(!_core->_networkClientAPI.isRunning())
+	if(!_core->_networkingClient.isRunning())
 	{
 		Logger::throwWarning("Networking client tried to stop: not running!");
 		return;
 	}
 
-	_core->_networkClientAPI.stop();
+	_core->_networkingClient.stop();
 }

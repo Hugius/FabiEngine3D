@@ -1,20 +1,20 @@
 #define WIN32_LEAN_AND_MEAN
 
-#include "network_client_api.hpp"
+#include "networking_client.hpp"
 #include "logger.hpp"
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-NetworkClientAPI::NetworkClientAPI()
+NetworkingClient::NetworkingClient()
 	:
-	_socketTCP(INVALID_SOCKET),
-	_socketUDP(INVALID_SOCKET)
+	_tcpSocket(INVALID_SOCKET),
+	_udpSocket(INVALID_SOCKET)
 {
 
 }
 
-NetworkClientAPI::~NetworkClientAPI()
+NetworkingClient::~NetworkingClient()
 {
 	if(_isRunning)
 	{
@@ -22,30 +22,30 @@ NetworkClientAPI::~NetworkClientAPI()
 	}
 }
 
-void NetworkClientAPI::start(const string& username)
+void NetworkingClient::start(const string& username)
 {
 	// Must not be running
 	if(_isRunning)
 	{
-		Logger::throwError("NetworkClientAPI::start::1");
+		Logger::throwError("NetworkingClient::start::1");
 	}
 
 	// Validate username
 	if(username.empty())
 	{
-		Logger::throwError("NetworkClientAPI::start::2");
+		Logger::throwError("NetworkingClient::start::2");
 	}
-	if(username.size() > NetworkUtils::MAX_USERNAME_CHARACTERS)
+	if(username.size() > NetworkingUtils::MAX_USERNAME_CHARACTERS)
 	{
-		Logger::throwError("NetworkClientAPI::start::3");
+		Logger::throwError("NetworkingClient::start::3");
 	}
-	if(NetworkUtils::isMessageReserved(username))
+	if(NetworkingUtils::isMessageReserved(username))
 	{
-		Logger::throwError("NetworkClientAPI::start::4");
+		Logger::throwError("NetworkingClient::start::4");
 	}
 	if(find(username.begin(), username.end(), ';') != username.end())
 	{
-		Logger::throwError("NetworkClientAPI::start::5");
+		Logger::throwError("NetworkingClient::start::5");
 	}
 
 	// Client is now operable
@@ -53,30 +53,30 @@ void NetworkClientAPI::start(const string& username)
 	_isRunning = true;
 }
 
-void NetworkClientAPI::connectToServer(const string& serverIP, const string& serverPort)
+void NetworkingClient::connectToServer(const string& serverIP, const string& serverPort)
 {
 	// Must be running
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkClientAPI::connectToServer::1");
+		Logger::throwError("NetworkingClient::connectToServer::1");
 	}
 
 	// Must not already be connected
 	if(_isConnectedToServer)
 	{
-		Logger::throwError("NetworkClientAPI::connectToServer::2");
+		Logger::throwError("NetworkingClient::connectToServer::2");
 	}
 
 	// Must not already be connecting
 	if(_isConnectingToServer)
 	{
-		Logger::throwError("NetworkClientAPI::connectToServer::3");
+		Logger::throwError("NetworkingClient::connectToServer::3");
 	}
 
 	// Must be a valid IP
 	if(!isValidServerIP(serverIP))
 	{
-		Logger::throwError("NetworkClientAPI::connectToServer::4");
+		Logger::throwError("NetworkingClient::connectToServer::4");
 	}
 
 	// Save server address
@@ -84,48 +84,48 @@ void NetworkClientAPI::connectToServer(const string& serverIP, const string& ser
 	_serverPort = serverPort;
 
 	// Load TCP socket
-	_setupTCP();
+	_setupTcp();
 
 	// Load UDP socket
-	_setupUDP();
+	_setupUdp();
 
 	// Client is now connecting
 	_isConnectingToServer = true;
 }
 
-void NetworkClientAPI::disconnectFromServer(bool mustBeAccepted)
+void NetworkingClient::disconnectFromServer(bool mustBeAccepted)
 {
 	// Must be running
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkClientAPI::disconnectFromServer");
+		Logger::throwError("NetworkingClient::disconnectFromServer");
 	}
 
 	// Must be connected & optionally accepted
 	if(!_isConnectedToServer || (!_isAcceptedByServer && mustBeAccepted))
 	{
-		Logger::throwError("NetworkClientAPI::disconnectFromServer");
+		Logger::throwError("NetworkingClient::disconnectFromServer");
 	}
 
 	// Close connection socket
-	if(_socketTCP != INVALID_SOCKET)
+	if(_tcpSocket != INVALID_SOCKET)
 	{
-		closesocket(_socketTCP);
+		closesocket(_tcpSocket);
 	}
 
 	// Close UDP message socket
-	if(_socketUDP != INVALID_SOCKET)
+	if(_udpSocket != INVALID_SOCKET)
 	{
-		closesocket(_socketUDP);
+		closesocket(_udpSocket);
 	}
 
 	// Reset variables
-	_socketTCP = INVALID_SOCKET;
-	_socketUDP = INVALID_SOCKET;
+	_tcpSocket = INVALID_SOCKET;
+	_udpSocket = INVALID_SOCKET;
 	_pendingMessages.clear();
 	_pingLatencies.clear();
 	_lastMilliseconds = 0;
-	_messageBuildTCP = "";
+	_tcpMessageBuild = "";
 	_serverIP = "";
 	_serverPort = "";
 	_isConnectedToServer = false;
@@ -134,34 +134,34 @@ void NetworkClientAPI::disconnectFromServer(bool mustBeAccepted)
 	_mustDisconnectFromServer = false;
 }
 
-void NetworkClientAPI::stop()
+void NetworkingClient::stop()
 {
 	// Must be running
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkClientAPI::stop");
+		Logger::throwError("NetworkingClient::stop");
 	}
 
 	// Close TCP socket
-	if(_socketTCP != INVALID_SOCKET)
+	if(_tcpSocket != INVALID_SOCKET)
 	{
-		closesocket(_socketTCP);
+		closesocket(_tcpSocket);
 	}
 
 	// Close UDP socket
-	if(_socketUDP != INVALID_SOCKET)
+	if(_udpSocket != INVALID_SOCKET)
 	{
-		closesocket(_socketUDP);
+		closesocket(_udpSocket);
 	}
 
 	// Reset variables
-	_socketTCP = INVALID_SOCKET;
-	_socketUDP = INVALID_SOCKET;
+	_tcpSocket = INVALID_SOCKET;
+	_udpSocket = INVALID_SOCKET;
 	_pendingMessages.clear();
 	_pingLatencies.clear();
 	_lastMilliseconds = 0;
 	_username = "";
-	_messageBuildTCP = "";
+	_tcpMessageBuild = "";
 	_serverIP = "";
 	_serverPort = "";
 	_isConnectedToServer = false;

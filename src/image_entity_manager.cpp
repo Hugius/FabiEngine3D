@@ -38,11 +38,6 @@ void ImageEntityManager::createEntity(const string& ID, bool isCentered)
 
 void ImageEntityManager::update()
 {
-	Logger::throwError("ImageEntityManager::update");
-}
-
-void ImageEntityManager::update(bool isEnginePaused)
-{
 	for(const auto& [keyID, entity] : _getImageEntities())
 	{
 		// Update transformation

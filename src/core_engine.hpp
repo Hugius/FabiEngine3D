@@ -27,8 +27,8 @@
 #include "audio_manager.hpp"
 #include "audio_player.hpp"
 #include "library_loader.hpp"
-#include "network_server_api.hpp"
-#include "network_client_api.hpp"
+#include "networking_server.hpp"
+#include "networking_client.hpp"
 
 class CoreEngine final
 {
@@ -64,8 +64,8 @@ private:
 	Timer _timer;
 	AudioPlayer _audioPlayer;
 	InputHandler _inputHandler;
-	NetworkServerAPI _networkServerAPI;
-	NetworkClientAPI _networkClientAPI;
+	NetworkingServer _networkingServer;
+	NetworkingClient _networkingClient;
 	Window _window;
 	AudioManager _audioManager;
 	ShadowGenerator _shadowGenerator;

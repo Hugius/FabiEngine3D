@@ -1,6 +1,6 @@
 #define WIN32_LEAN_AND_MEAN
 
-#include "network_server_api.hpp"
+#include "networking_server.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 
@@ -9,26 +9,26 @@
 
 using std::launch;
 
-const bool NetworkServerAPI::_sendMessageTCP(SOCKET socket, const string& content, bool isReserved)
+const bool NetworkingServer::_sendTcpMessage(SOCKET socket, const string& content, bool isReserved)
 {
 	// Must be running
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkServerAPI::_sendTcpMessage::1");
+		Logger::throwError("NetworkingServer::_sendTcpMessage::1");
 	}
 
 	// Validate message content
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
-		Logger::throwError("NetworkServerAPI::_sendTcpMessage::2");
+		Logger::throwError("NetworkingServer::_sendTcpMessage::2");
 	}
-	else if(NetworkUtils::isMessageReserved(content) && !isReserved)
+	else if(NetworkingUtils::isMessageReserved(content) && !isReserved)
 	{
-		Logger::throwError("NetworkServerAPI::_sendTcpMessage::3");
+		Logger::throwError("NetworkingServer::_sendTcpMessage::3");
 	}
-	else if(content.size() > NetworkUtils::MAX_MESSAGE_CHARACTERS)
+	else if(content.size() > NetworkingUtils::MAX_MESSAGE_CHARACTERS)
 	{
-		Logger::throwError("NetworkServerAPI::_sendTcpMessage::4");
+		Logger::throwError("NetworkingServer::_sendTcpMessage::4");
 	}
 
 	// Add a semicolon to indicate end of this message
@@ -51,41 +51,41 @@ const bool NetworkServerAPI::_sendMessageTCP(SOCKET socket, const string& conten
 		}
 		else // Something really bad happened
 		{
-			Logger::throwError("NetworkServerAPI::_sendTcpMessage::5 ---> ", WSAGetLastError());
+			Logger::throwError("NetworkingServer::_sendTcpMessage::5 ---> ", WSAGetLastError());
 		}
 	}
 
 	return true;
 }
 
-const bool NetworkServerAPI::_sendMessageUDP(const string& clientIP, const string& clientPort, const string& content, bool isReserved) const
+const bool NetworkingServer::_sendUdpMessage(const string& clientIP, const string& clientPort, const string& content, bool isReserved) const
 {
 	// Must be running
 	if(!_isRunning)
 	{
-		Logger::throwError("NetworkServerAPI::_sendUdpMessage::1");
+		Logger::throwError("NetworkingServer::_sendUdpMessage::1");
 	}
 
 	// Validate message content
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
-		Logger::throwError("NetworkServerAPI::_sendUdpMessage::2");
+		Logger::throwError("NetworkingServer::_sendUdpMessage::2");
 	}
-	else if(NetworkUtils::isMessageReserved(content) && !isReserved)
+	else if(NetworkingUtils::isMessageReserved(content) && !isReserved)
 	{
-		Logger::throwError("NetworkServerAPI::_sendUdpMessage::3");
+		Logger::throwError("NetworkingServer::_sendUdpMessage::3");
 	}
-	else if(content.size() > NetworkUtils::MAX_MESSAGE_CHARACTERS)
+	else if(content.size() > NetworkingUtils::MAX_MESSAGE_CHARACTERS)
 	{
-		Logger::throwError("NetworkServerAPI::_sendUdpMessage::4");
+		Logger::throwError("NetworkingServer::_sendUdpMessage::4");
 	}
 
 	// Compose socket address
-	auto socketAddress = NetworkUtils::composeSocketAddress(clientIP, clientPort);
+	auto socketAddress = NetworkingUtils::composeSocketAddress(clientIP, clientPort);
 
 	// Send message to client
 	auto sendStatusCode = sendto(
-		_socketUDP, // UDP socket
+		_udpSocket, // UDP socket
 		content.c_str(), // Message content
 		static_cast<int>(content.size()), // Message size
 		0, // Flags
@@ -101,14 +101,14 @@ const bool NetworkServerAPI::_sendMessageUDP(const string& clientIP, const strin
 		}
 		else // Something really bad happened
 		{
-			Logger::throwError("NetworkServerAPI::_sendUdpMessage::5 ---> ", WSAGetLastError());
+			Logger::throwError("NetworkingServer::_sendUdpMessage::5 ---> ", WSAGetLastError());
 		}
 	}
 
 	return true;
 }
 
-void NetworkServerAPI::_disconnectClient(SOCKET socket)
+void NetworkingServer::_disconnectClient(SOCKET socket)
 {
 	for(size_t i = 0; i < _clientSockets.size(); i++)
 	{
@@ -128,11 +128,11 @@ void NetworkServerAPI::_disconnectClient(SOCKET socket)
 			// Remove client data
 			_clientSockets.erase(_clientSockets.begin() + i);
 			_clientIPs.erase(_clientIPs.begin() + i);
-			_clientPortsTCP.erase(_clientPortsTCP.begin() + i);
-			_clientPortsUDP.erase(_clientPortsUDP.begin() + i);
+			_tcpClientPorts.erase(_tcpClientPorts.begin() + i);
+			_udpClientPorts.erase(_udpClientPorts.begin() + i);
 			_clientUsernames.erase(_clientUsernames.begin() + i);
-			_messageBuildsTCP.erase(_messageBuildsTCP.begin() + i);
-			_messageThreadsTCP.erase(_messageThreadsTCP.begin() + i);
+			_tcpMessageBuilds.erase(_tcpMessageBuilds.begin() + i);
+			_tcpMessageThreads.erase(_tcpMessageThreads.begin() + i);
 
 			// Logging (if client was fully accepted)
 			if(!clientUsername.empty())
@@ -145,16 +145,16 @@ void NetworkServerAPI::_disconnectClient(SOCKET socket)
 	}
 }
 
-const SOCKET NetworkServerAPI::_waitForClientConnection(SOCKET socket) const
+const SOCKET NetworkingServer::_waitForClientConnection(SOCKET socket) const
 {
 	return accept(socket, nullptr, nullptr);
 }
 
-tuple<int, int, long long, string> NetworkServerAPI::_waitForMessageTCP(SOCKET socket) const
+tuple<int, int, long long, string> NetworkingServer::_waitForTcpMessage(SOCKET socket) const
 {
 	// Retrieve bytes & size
-	char buffer[NetworkUtils::TCP_BUFFER_BYTES];
-	int bufferLength = static_cast<int>(NetworkUtils::TCP_BUFFER_BYTES);
+	char buffer[NetworkingUtils::TCP_BUFFER_BYTES];
+	int bufferLength = static_cast<int>(NetworkingUtils::TCP_BUFFER_BYTES);
 	auto receiveStatusCode = recv(socket, buffer, bufferLength, 0);
 
 	if(receiveStatusCode > 0) // Message received correctly
@@ -171,11 +171,11 @@ tuple<int, int, long long, string> NetworkServerAPI::_waitForMessageTCP(SOCKET s
 	}
 }
 
-tuple<int, int, string, string, string> NetworkServerAPI::_receiveMessageUDP(SOCKET socket) const
+tuple<int, int, string, string, string> NetworkingServer::_receiveUdpMessage(SOCKET socket) const
 {
 	// Data store
-	char buffer[NetworkUtils::UDP_BUFFER_BYTES];
-	int bufferLength = static_cast<int>(NetworkUtils::UDP_BUFFER_BYTES);
+	char buffer[NetworkingUtils::UDP_BUFFER_BYTES];
+	int bufferLength = static_cast<int>(NetworkingUtils::UDP_BUFFER_BYTES);
 	sockaddr_in sourceAddress = sockaddr_in();
 	int sourceAddressLength = sizeof(sourceAddress);
 
@@ -183,8 +183,8 @@ tuple<int, int, string, string, string> NetworkServerAPI::_receiveMessageUDP(SOC
 	auto receiveResult = recvfrom(socket, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
 
 	// Extract address
-	auto IP = NetworkUtils::extractAddressIP(&sourceAddress);
-	auto port = NetworkUtils::extractAddressPort(&sourceAddress);
+	auto IP = NetworkingUtils::extractAddressIP(&sourceAddress);
+	auto port = NetworkingUtils::extractAddressPort(&sourceAddress);
 
 	if(receiveResult > 0) // Message received correctly
 	{

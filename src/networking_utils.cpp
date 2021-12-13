@@ -1,12 +1,12 @@
 #define WIN32_LEAN_AND_MEAN
 
-#include "network_utils.hpp"
+#include "networking_utils.hpp"
 
 #include <ws2tcpip.h>
 
 using std::to_string;
 
-const sockaddr_in NetworkUtils::composeSocketAddress(const string& IP, const string& port)
+const sockaddr_in NetworkingUtils::composeSocketAddress(const string& IP, const string& port)
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	socketAddress.sin_family = AF_INET;
@@ -15,19 +15,19 @@ const sockaddr_in NetworkUtils::composeSocketAddress(const string& IP, const str
 	return socketAddress;
 }
 
-const string NetworkUtils::extractAddressIP(sockaddr_in* address)
+const string NetworkingUtils::extractAddressIP(sockaddr_in* address)
 {
 	char IP[IPV4_ADDRESS_LENGTH];
 	inet_ntop(AF_INET, &(address->sin_addr), IP, sizeof(IP));
 	return string(IP);
 }
 
-const string NetworkUtils::extractAddressPort(sockaddr_in* address)
+const string NetworkingUtils::extractAddressPort(sockaddr_in* address)
 {
 	return to_string(ntohs(address->sin_port));
 }
 
-const string NetworkUtils::extractSocketIP(SOCKET socket)
+const string NetworkingUtils::extractSocketIP(SOCKET socket)
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
@@ -35,7 +35,7 @@ const string NetworkUtils::extractSocketIP(SOCKET socket)
 	return extractAddressIP(&socketAddress);
 }
 
-const string NetworkUtils::extractSocketPort(SOCKET socket)
+const string NetworkingUtils::extractSocketPort(SOCKET socket)
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
@@ -43,7 +43,7 @@ const string NetworkUtils::extractSocketPort(SOCKET socket)
 	return extractAddressPort(&socketAddress);
 }
 
-const string NetworkUtils::extractPeerIP(SOCKET socket)
+const string NetworkingUtils::extractPeerIP(SOCKET socket)
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
@@ -51,7 +51,7 @@ const string NetworkUtils::extractPeerIP(SOCKET socket)
 	return extractAddressIP(&socketAddress);
 }
 
-const string NetworkUtils::extractPeerPort(SOCKET socket)
+const string NetworkingUtils::extractPeerPort(SOCKET socket)
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
@@ -59,7 +59,7 @@ const string NetworkUtils::extractPeerPort(SOCKET socket)
 	return extractAddressPort(&socketAddress);
 }
 
-const bool NetworkUtils::isValidIP(const string& IP)
+const bool NetworkingUtils::isValidIP(const string& IP)
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	socketAddress.sin_family = AF_INET;
@@ -67,7 +67,7 @@ const bool NetworkUtils::isValidIP(const string& IP)
 	return (result > 0);
 }
 
-const bool NetworkUtils::isMessageReadyUDP(SOCKET socket)
+const bool NetworkingUtils::isMessageReadyUDP(SOCKET socket)
 {
 	fd_set socketSet = fd_set();
 	timeval timeInterval = {0 , 1}; // 1 microsecond
@@ -76,7 +76,7 @@ const bool NetworkUtils::isMessageReadyUDP(SOCKET socket)
 	return (select(0, &socketSet, nullptr, nullptr, &timeInterval) > 0);
 }
 
-const bool NetworkUtils::isMessageReserved(const string& message)
+const bool NetworkingUtils::isMessageReserved(const string& message)
 {
 	return
 	(

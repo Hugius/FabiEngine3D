@@ -7,47 +7,47 @@ using std::min;
 
 const float bufferData[] =
 {
-	-1.0f,  1.0f, -1.0f,
+	-1.0f, 1.0f, -1.0f,
 	-1.0f, -1.0f, -1.0f,
-	 1.0f, -1.0f, -1.0f,
-	 1.0f, -1.0f, -1.0f,
-	 1.0f,  1.0f, -1.0f,
-	-1.0f,  1.0f, -1.0f,
+	1.0f, -1.0f, -1.0f,
+	1.0f, -1.0f, -1.0f,
+	1.0f, 1.0f, -1.0f,
+	-1.0f, 1.0f, -1.0f,
 
-	-1.0f, -1.0f,  1.0f,
+	-1.0f, -1.0f, 1.0f,
 	-1.0f, -1.0f, -1.0f,
-	-1.0f,  1.0f, -1.0f,
-	-1.0f,  1.0f, -1.0f,
-	-1.0f,  1.0f,  1.0f,
-	-1.0f, -1.0f,  1.0f,
+	-1.0f, 1.0f, -1.0f,
+	-1.0f, 1.0f, -1.0f,
+	-1.0f, 1.0f, 1.0f,
+	-1.0f, -1.0f, 1.0f,
 
-	 1.0f, -1.0f, -1.0f,
-	 1.0f, -1.0f,  1.0f,
-	 1.0f,  1.0f,  1.0f,
-	 1.0f,  1.0f,  1.0f,
-	 1.0f,  1.0f, -1.0f,
-	 1.0f, -1.0f, -1.0f,
+	1.0f, -1.0f, -1.0f,
+	1.0f, -1.0f, 1.0f,
+	1.0f, 1.0f, 1.0f,
+	1.0f, 1.0f, 1.0f,
+	1.0f, 1.0f, -1.0f,
+	1.0f, -1.0f, -1.0f,
 
-	-1.0f, -1.0f,  1.0f,
-	-1.0f,  1.0f,  1.0f,
-	 1.0f,  1.0f,  1.0f,
-	 1.0f,  1.0f,  1.0f,
-	 1.0f, -1.0f,  1.0f,
-	-1.0f, -1.0f,  1.0f,
+	-1.0f, -1.0f, 1.0f,
+	-1.0f, 1.0f, 1.0f,
+	1.0f, 1.0f, 1.0f,
+	1.0f, 1.0f, 1.0f,
+	1.0f, -1.0f, 1.0f,
+	-1.0f, -1.0f, 1.0f,
 
-	-1.0f,  1.0f, -1.0f,
-	 1.0f,  1.0f, -1.0f,
-	 1.0f,  1.0f,  1.0f,
-	 1.0f,  1.0f,  1.0f,
-	-1.0f,  1.0f,  1.0f,
-	-1.0f,  1.0f, -1.0f,
+	-1.0f, 1.0f, -1.0f,
+	1.0f, 1.0f, -1.0f,
+	1.0f, 1.0f, 1.0f,
+	1.0f, 1.0f, 1.0f,
+	-1.0f, 1.0f, 1.0f,
+	-1.0f, 1.0f, -1.0f,
 
 	-1.0f, -1.0f, -1.0f,
-	-1.0f, -1.0f,  1.0f,
-	 1.0f, -1.0f, -1.0f,
-	 1.0f, -1.0f, -1.0f,
-	-1.0f, -1.0f,  1.0f,
-	 1.0f, -1.0f,  1.0f
+	-1.0f, -1.0f, 1.0f,
+	1.0f, -1.0f, -1.0f,
+	1.0f, -1.0f, -1.0f,
+	-1.0f, -1.0f, 1.0f,
+	1.0f, -1.0f, 1.0f
 };
 
 SkyEntityManager::SkyEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus)
@@ -60,19 +60,21 @@ SkyEntityManager::SkyEntityManager(MeshLoader& meshLoader, TextureLoader& textur
 
 shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string& ID)
 {
-	auto result = _getSkyEntity(ID);
+	auto iterator = _entities.find(ID);
 
-	if(result == nullptr)
+	if(iterator == _entities.end())
 	{
 		Logger::throwError("SkyEntityManager::getEntity");
 	}
-
-	return result;
+	else
+	{
+		return iterator->second;
+	}
 }
 
 shared_ptr<SkyEntity> SkyEntityManager::getSelectedMainSky()
 {
-	if(_getSkyEntities().empty() || _selectedMainID.empty())
+	if(_entities.empty() || _selectedMainID.empty())
 	{
 		return nullptr;
 	}
@@ -84,7 +86,7 @@ shared_ptr<SkyEntity> SkyEntityManager::getSelectedMainSky()
 
 shared_ptr<SkyEntity> SkyEntityManager::getSelectedMixSky()
 {
-	if(_getSkyEntities().empty() || _selectedMixID.empty())
+	if(_entities.empty() || _selectedMixID.empty())
 	{
 		return nullptr;
 	}
@@ -96,7 +98,7 @@ shared_ptr<SkyEntity> SkyEntityManager::getSelectedMixSky()
 
 const unordered_map<string, shared_ptr<SkyEntity>>& SkyEntityManager::getEntities()
 {
-	return _getSkyEntities();
+	return _entities;
 }
 
 void SkyEntityManager::selectMainSky(const string& ID)

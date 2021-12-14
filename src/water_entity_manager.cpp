@@ -13,19 +13,21 @@ WaterEntityManager::WaterEntityManager(MeshLoader& meshLoader, TextureLoader& te
 
 shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string& ID)
 {
-	auto result = _getWaterEntity(ID);
+	auto iterator = _entities.find(ID);
 
-	if(result == nullptr)
+	if(iterator == _entities.end())
 	{
 		Logger::throwError("WaterEntityManager::getEntity");
 	}
-
-	return result;
+	else
+	{
+		return iterator->second;
+	}
 }
 
 shared_ptr<WaterEntity> WaterEntityManager::getSelectedWater()
 {
-	if(_getWaterEntities().empty() || _selectedID.empty())
+	if(_entities.empty() || _selectedID.empty())
 	{
 		return nullptr;
 	}
@@ -37,7 +39,7 @@ shared_ptr<WaterEntity> WaterEntityManager::getSelectedWater()
 
 const unordered_map<string, shared_ptr<WaterEntity>>& WaterEntityManager::getEntities()
 {
-	return _getWaterEntities();
+	return _entities;
 }
 
 void WaterEntityManager::selectWater(const string& ID)
@@ -147,12 +149,12 @@ void WaterEntityManager::loadMesh(const string& ID)
 	// Compose low quality buffer data
 	float lowQualityBufferData[] =
 	{
-		-halfSize,  0.0f,  halfSize, 0.0f, 1.0f,
-		-halfSize,  0.0f, -halfSize, 0.0f, 0.0f,
-		 halfSize,  0.0f, -halfSize, 1.0f, 0.0f,
-		 halfSize,  0.0f, -halfSize, 1.0f, 0.0f,
-		 halfSize,  0.0f,  halfSize, 1.0f, 1.0f,
-		-halfSize,  0.0f,  halfSize, 0.0f, 1.0f
+		-halfSize, 0.0f, halfSize, 0.0f, 1.0f,
+		-halfSize, 0.0f, -halfSize, 0.0f, 0.0f,
+		halfSize, 0.0f, -halfSize, 1.0f, 0.0f,
+		halfSize, 0.0f, -halfSize, 1.0f, 0.0f,
+		halfSize, 0.0f, halfSize, 1.0f, 1.0f,
+		-halfSize, 0.0f, halfSize, 0.0f, 1.0f
 	};
 
 	// Create low quality render buffer
@@ -162,7 +164,7 @@ void WaterEntityManager::loadMesh(const string& ID)
 void WaterEntityManager::update()
 {
 	// Update all water entities
-	for(const auto& [keyID, entity] : _getWaterEntities())
+	for(const auto& [keyID, entity] : _entities)
 	{
 		// Update water if visible
 		if(entity->isVisible())

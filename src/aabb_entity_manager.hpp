@@ -1,16 +1,28 @@
 #pragma once
 
-#include "base_entity_manager.hpp"
+#include "render_buffer.hpp"
+#include "aabb_entity.hpp"
+#include "model_entity.hpp"
+#include "billboard_entity.hpp"
 
-class AabbEntityManager final : public BaseEntityManager
+#include <unordered_map>
+
+using std::unordered_map;
+
+class AabbEntityManager final
 {
 public:
-	AabbEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
+	AabbEntityManager();
 
 	// VOID
-	void update() override;
 	void createEntity(const string& ID);
-	void update(const unordered_map<string, shared_ptr<ModelEntity>>& modelEntities, const unordered_map<string, shared_ptr<BillboardEntity>>& billboardEntities);
+	void update(const unordered_map<string, shared_ptr<ModelEntity>>& modelEntities,
+				const unordered_map<string, shared_ptr<BillboardEntity>>& billboardEntities);
+	void deleteEntity(const string& ID);
+	void deleteEntities();
+
+	// BOOL
+	const bool isEntityExisting(const string& ID);
 
 	// MISCELLANEOUS
 	const unordered_map<string, shared_ptr<AabbEntity>>& getEntities();
@@ -19,4 +31,5 @@ public:
 private:
 	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> _renderBuffer;
+	unordered_map<string, shared_ptr<AabbEntity>> _entities;
 };

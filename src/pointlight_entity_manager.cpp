@@ -10,19 +10,21 @@ PointlightEntityManager::PointlightEntityManager(MeshLoader& meshLoader, Texture
 
 shared_ptr<PointlightEntity> PointlightEntityManager::getEntity(const string& ID)
 {
-	auto result = _getPointlightEntity(ID);
+	auto iterator = _entities.find(ID);
 
-	if(result == nullptr)
+	if(iterator == _entities.end())
 	{
 		Logger::throwError("PointlightEntityManager::getEntity");
 	}
-
-	return result;
+	else
+	{
+		return iterator->second;
+	}
 }
 
 const unordered_map<string, shared_ptr<PointlightEntity>>& PointlightEntityManager::getEntities()
 {
-	return _getPointlightEntities();
+	return _entities;
 }
 
 void PointlightEntityManager::createEntity(const string& ID)
@@ -37,7 +39,7 @@ void PointlightEntityManager::createEntity(const string& ID)
 
 void PointlightEntityManager::update()
 {
-	for(const auto& [keyID, entity] : _getPointlightEntities())
+	for(const auto& [keyID, entity] : _entities)
 	{
 		entity->updateTransformation();
 	}

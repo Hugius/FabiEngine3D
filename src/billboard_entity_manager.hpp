@@ -1,16 +1,26 @@
 #pragma once
 
-#include "base_entity_manager.hpp"
+#include "render_buffer.hpp"
 #include "camera.hpp"
+#include "billboard_entity.hpp"
 
-class BillboardEntityManager final : public BaseEntityManager
+#include <unordered_map>
+
+using std::unordered_map;
+
+class BillboardEntityManager final
 {
 public:
-	BillboardEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus, Camera& camera);
+	BillboardEntityManager(RenderBus& renderBus, Camera& camera);
 
 	// VOID
-	void update() override;
+	void update();
 	void createEntity(const string& ID);
+	void deleteEntity(const string& ID);
+	void deleteEntities();
+
+	// BOOL
+	const bool isEntityExisting(const string& ID);
 
 	// MISCELLANEOUS
 	const unordered_map<string, shared_ptr<BillboardEntity>>& getEntities();
@@ -19,5 +29,7 @@ public:
 private:
 	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> _renderBuffer;
+	unordered_map<string, shared_ptr<BillboardEntity>> _entities;
+	RenderBus& _renderBus;
 	Camera& _camera;
 };

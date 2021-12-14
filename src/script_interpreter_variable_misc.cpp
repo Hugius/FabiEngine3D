@@ -143,24 +143,23 @@ const bool ScriptInterpreter::_isGlobalVariableExisting(const string& variableID
 ScriptVariable& ScriptInterpreter::_getLocalVariable(const string& variableID)
 {
 	auto& variables = _localVariables[_executionDepth];
-	auto it = variables.find(variableID);
+	auto iterator = variables.find(variableID);
 
-	if(it != variables.end())
+	if(iterator != variables.end())
 	{
-		return it->second;
+		return iterator->second;
 	}
-
 
 	Logger::throwError("ScriptInterpreter::_getLocalVariable");
 }
 
 ScriptVariable& ScriptInterpreter::_getGlobalVariable(const string& variableID)
 {
-	auto it = _globalVariables.find(variableID);
+	auto iterator = _globalVariables.find(variableID);
 
-	if(it != _globalVariables.end())
+	if(iterator != _globalVariables.end())
 	{
-		return it->second;
+		return iterator->second;
 	}
 
 	Logger::throwError("ScriptInterpreter::_getGlobalVariable");

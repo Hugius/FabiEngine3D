@@ -113,8 +113,8 @@ void ShaderBuffer::_createProgram(const char* vertexShaderCode, const char* frag
 
 const UniformID ShaderBuffer::_getUniformID(const string& uniformID)
 {
-	auto it = _uniformCache.find(uniformID);
-	if(it == _uniformCache.end())
+	auto iterator = _uniformCache.find(uniformID);
+	if(iterator == _uniformCache.end())
 	{
 		// Retrieve uniform location
 		auto uniform = glGetUniformLocation(_program, uniformID.c_str());
@@ -131,7 +131,7 @@ const UniformID ShaderBuffer::_getUniformID(const string& uniformID)
 	}
 	else
 	{
-		return it->second; // Return existing uniform
+		return iterator->second; // Return existing uniform
 	}
 }
 

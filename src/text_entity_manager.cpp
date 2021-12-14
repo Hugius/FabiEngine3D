@@ -14,19 +14,21 @@ TextEntityManager::TextEntityManager(MeshLoader& meshLoader, TextureLoader& text
 
 shared_ptr<TextEntity> TextEntityManager::getEntity(const string& ID)
 {
-	auto result = _getTextEntity(ID);
+	auto iterator = _entities.find(ID);
 
-	if(result == nullptr)
+	if(iterator == _entities.end())
 	{
 		Logger::throwError("TextEntityManager::getEntity");
 	}
-
-	return result;
+	else
+	{
+		return iterator->second;
+	}
 }
 
 const unordered_map<string, shared_ptr<TextEntity>>& TextEntityManager::getEntities()
 {
-	return _getTextEntities();
+	return _entities;
 }
 
 void TextEntityManager::createEntity(const string& ID, bool isCentered, bool isDynamic)
@@ -89,7 +91,7 @@ void TextEntityManager::deleteDynamicTextEntity(const string& ID)
 
 void TextEntityManager::update()
 {
-	for(const auto& [keyID, entity] : _getTextEntities())
+	for(const auto& [keyID, entity] : _entities)
 	{
 		// Update transformation
 		entity->updateTransformation();

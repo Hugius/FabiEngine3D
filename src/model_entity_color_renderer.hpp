@@ -21,4 +21,8 @@ public:
 	void processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>>& entities);
 	void processSpotlightEntities(const unordered_map<string, shared_ptr<SpotlightEntity>>& entities);
 	void render(const shared_ptr<ModelEntity> entity, const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities);
+
+private:
+	// FLOAT
+	static inline const float MIN_TEXTURE_TRANSPARENCY = 0.25f;
 };

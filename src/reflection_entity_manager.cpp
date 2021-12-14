@@ -10,19 +10,21 @@ ReflectionEntityManager::ReflectionEntityManager(MeshLoader& meshLoader, Texture
 
 shared_ptr<ReflectionEntity> ReflectionEntityManager::getEntity(const string& ID)
 {
-	auto result = _getReflectionEntity(ID);
+	auto iterator = _entities.find(ID);
 
-	if(result == nullptr)
+	if(iterator == _entities.end())
 	{
 		Logger::throwError("ReflectionEntityManager::getEntity");
 	}
-
-	return result;
+	else
+	{
+		return iterator->second;
+	}
 }
 
 const unordered_map<string, shared_ptr<ReflectionEntity>>& ReflectionEntityManager::getEntities()
 {
-	return _getReflectionEntities();
+	return _entities;
 }
 
 void ReflectionEntityManager::createEntity(const string& ID)
@@ -48,7 +50,7 @@ void ReflectionEntityManager::createEntity(const string& ID)
 
 void ReflectionEntityManager::update()
 {
-	for(const auto& [keyID, entity] : _getReflectionEntities())
+	for(const auto& [keyID, entity] : _entities)
 	{
 		entity->updateTransformation();
 	}

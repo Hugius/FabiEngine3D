@@ -1,8 +1,10 @@
 #pragma once
 
-#include "base_entity_manager.hpp"
+#include <unordered_map>
 
-class SpotlightEntityManager final : public BaseEntityManager
+using std::unordered_map;
+
+class SpotlightEntityManager final
 {
 public:
 	SpotlightEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
@@ -10,6 +12,10 @@ public:
 	// VOID
 	void update() override;
 	void createEntity(const string& ID);
+	void deleteEntities();
+
+	// BOOL
+	const bool isEntityExisting(const string& ID);
 
 	// MISCELLANEOUS
 	const unordered_map<string, shared_ptr<SpotlightEntity>>& getEntities();
@@ -17,4 +23,8 @@ public:
 
 	// UNSIGNED INT
 	static inline const unsigned int MAX_LIGHT_COUNT = 64;
+
+private:
+	// MISCELLANEOUS
+	unordered_map<string, shared_ptr<SpotlightEntity>> _entities;
 };

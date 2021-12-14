@@ -1,8 +1,10 @@
 #pragma once
 
-#include "base_entity_manager.hpp"
+#include <unordered_map>
 
-class WaterEntityManager final : public BaseEntityManager
+using std::unordered_map;
+
+class WaterEntityManager final
 {
 public:
 	WaterEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
@@ -12,6 +14,10 @@ public:
 	void createEntity(const string& ID);
 	void loadMesh(const string& ID);
 	void selectWater(const string& ID);
+	void deleteEntities();
+
+	// BOOL
+	const bool isEntityExisting(const string& ID);
 
 	// MISCELLANEOUS
 	const unordered_map<string, shared_ptr<WaterEntity>>& getEntities();
@@ -24,4 +30,7 @@ public:
 private:
 	// STRING
 	string _selectedID = "";
+
+	// MISCELLANEOUS
+	unordered_map<string, shared_ptr<WaterEntity>> _entities;
 };

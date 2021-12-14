@@ -10,19 +10,21 @@ SpotlightEntityManager::SpotlightEntityManager(MeshLoader& meshLoader, TextureLo
 
 shared_ptr<SpotlightEntity> SpotlightEntityManager::getEntity(const string& ID)
 {
-	auto result = _getSpotlightEntity(ID);
+	auto iterator = _entities.find(ID);
 
-	if(result == nullptr)
+	if(iterator == _entities.end())
 	{
 		Logger::throwError("SpotlightEntityManager::getEntity");
 	}
-
-	return result;
+	else
+	{
+		return iterator->second;
+	}
 }
 
 const unordered_map<string, shared_ptr<SpotlightEntity>>& SpotlightEntityManager::getEntities()
 {
-	return _getSpotlightEntities();
+	return _entities;
 }
 
 void SpotlightEntityManager::createEntity(const string& ID)
@@ -37,7 +39,7 @@ void SpotlightEntityManager::createEntity(const string& ID)
 
 void SpotlightEntityManager::update()
 {
-	for(const auto& [keyID, entity] : _getSpotlightEntities())
+	for(const auto& [keyID, entity] : _entities)
 	{
 		// Update transformation
 		entity->updateTransformation();

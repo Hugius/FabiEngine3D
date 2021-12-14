@@ -1,15 +1,19 @@
 #pragma once
 
-#include "base_entity_manager.hpp"
+#include <unordered_map>
 
-class SkyEntityManager final : public BaseEntityManager
+using std::unordered_map;
+
+class SkyEntityManager final
 {
 public:
 	SkyEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
 
 	// VOID
-	void update() override;
+	void update();
 	void createEntity(const string& ID);
+	void deleteEntity(const string& ID);
+	void deleteEntities();
 	void selectMainSky(const string& ID);
 	void selectMixSky(const string& ID);
 	void setExposureIntensity(float value);
@@ -21,6 +25,7 @@ public:
 	const float getExposureSpeed() const;
 
 	// BOOL
+	const bool isEntityExisting(const string& ID);
 	const bool isExposureEnabled() const;
 
 	// MISCELLANEOUS
@@ -43,4 +48,5 @@ private:
 
 	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> _renderBuffer;
+	unordered_map<string, shared_ptr<SkyEntity>> _entities;
 };

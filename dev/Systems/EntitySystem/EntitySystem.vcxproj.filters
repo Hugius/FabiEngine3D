@@ -19,17 +19,8 @@
     <Filter Include="Data\Base">
       <UniqueIdentifier>{44c1a87c-9396-4875-9ad7-6e6e4fa701c0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager\Base">
-      <UniqueIdentifier>{b94796cd-fe18-4114-a8c3-7ec119ac3a09}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\base_entity_manager_getters.cpp">
-      <Filter>Manager\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\base_entity_manager_setters.cpp">
-      <Filter>Manager\Base</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\entity_bus.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
@@ -113,9 +104,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\base_entity_manager.hpp">
-      <Filter>Manager\Base</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\entity_bus.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>

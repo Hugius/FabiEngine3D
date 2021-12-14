@@ -3,9 +3,8 @@
 
 using std::make_shared;
 
-ImageEntityManager::ImageEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus)
+ImageEntityManager::ImageEntityManager()
 	:
-	BaseEntityManager(EntityType::IMAGE, meshLoader, textureLoader, renderBus),
 	_centeredRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true)),
 	_nonCenteredRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
 {
@@ -14,23 +13,27 @@ ImageEntityManager::ImageEntityManager(MeshLoader& meshLoader, TextureLoader& te
 
 shared_ptr<ImageEntity> ImageEntityManager::getEntity(const string& ID)
 {
-	auto result = _getImageEntity(ID);
+	auto iterator = _entities.find(ID);
 
-	if(result == nullptr)
+	if(iterator == _entities.end())
 	{
 		Logger::throwError("ImageEntityManager::getEntity");
 	}
-
-	return result;
+	else
+	{
+		return iterator->second;
+	}
 }
 
 const unordered_map<string, shared_ptr<ImageEntity>>& ImageEntityManager::getEntities()
 {
-	return _getImageEntities();
+	return _entities;
 }
 
 void ImageEntityManager::createEntity(const string& ID, bool isCentered)
 {
+	_getTextEntity(ID)->setDepth(_guiDepth);
+	_guiDepth++;
 	_createEntity(ID);
 	getEntity(ID)->setRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer);
 	getEntity(ID)->setCentered(isCentered);
@@ -38,7 +41,7 @@ void ImageEntityManager::createEntity(const string& ID, bool isCentered)
 
 void ImageEntityManager::update()
 {
-	for(const auto& [keyID, entity] : _getImageEntities())
+	for(const auto& [keyID, entity] : _entities)
 	{
 		// Update transformation
 		entity->updateTransformation();

@@ -30,15 +30,15 @@ private:
 	// UNSIGNED INT
 	inline const unsigned int _getVectorIndex(const vector<InputType>& list, InputType element) const
 	{
-		auto it = find(list.begin(), list.end(), element);
+		auto iterator = find(list.begin(), list.end(), element);
 
-		if(it == list.end()) // Not found
+		if(iterator == list.end()) // Not found
 		{
 			Logger::throwError("InputHandler::_getVectorIndex");
 		}
 		else // Found
 		{
-			return static_cast<unsigned int>(distance(list.begin(), it));
+			return static_cast<unsigned int>(distance(list.begin(), iterator));
 		}
 	}
 

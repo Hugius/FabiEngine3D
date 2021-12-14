@@ -12,19 +12,21 @@ TerrainEntityManager::TerrainEntityManager(MeshLoader& meshLoader, TextureLoader
 
 shared_ptr<TerrainEntity> TerrainEntityManager::getEntity(const string& ID)
 {
-	auto result = _getTerrainEntity(ID);
+	auto iterator = _entities.find(ID);
 
-	if(result == nullptr)
+	if(iterator == _entities.end())
 	{
 		Logger::throwError("TerrainEntityManager::getEntity");
 	}
-
-	return result;
+	else
+	{
+		return iterator->second;
+	}
 }
 
 shared_ptr<TerrainEntity> TerrainEntityManager::getSelectedTerrain()
 {
-	if(_getTerrainEntities().empty() || _selectedID.empty())
+	if(_entities.empty() || _selectedID.empty())
 	{
 		return nullptr;
 	}
@@ -36,7 +38,7 @@ shared_ptr<TerrainEntity> TerrainEntityManager::getSelectedTerrain()
 
 const unordered_map<string, shared_ptr<TerrainEntity>>& TerrainEntityManager::getEntities()
 {
-	return _getTerrainEntities();
+	return _entities;
 }
 
 void TerrainEntityManager::createEntity(const string& ID, const string& heightMapPath)

@@ -6,16 +6,13 @@
 class BaseRenderer
 {
 public:
-	BaseRenderer(const string& vertexFile, const string& fragmentFile, RenderBus& renderBus);
+	BaseRenderer(const string& vertexPath, const string& fragmentPath, RenderBus& renderBus);
 
 	// VOID
 	virtual void bind() = 0;
 	virtual void unbind() = 0;
 
 protected:
-	// FLOAT
-	static inline const float MIN_TEXTURE_TRANSPARENCY = 0.25f;
-
 	// MISCELLANEOUS
 	ShaderBuffer _shader;
 	RenderBus& _renderBus;

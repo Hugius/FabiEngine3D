@@ -4,7 +4,7 @@
 using std::make_shared;
 using std::max;
 
-ModelEntityManager::ModelEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus, Timer& timer)
+ModelEntityManager::ModelEntityManager(MeshLoader& meshLoader, RenderBus& renderBus, Timer& timer)
 	:
 	BaseEntityManager(EntityType::MODEL, meshLoader, textureLoader, renderBus),
 	_timer(timer)
@@ -14,19 +14,21 @@ ModelEntityManager::ModelEntityManager(MeshLoader& meshLoader, TextureLoader& te
 
 shared_ptr<ModelEntity> ModelEntityManager::getEntity(const string& ID)
 {
-	auto result = _getModelEntity(ID);
+	auto iterator = _entities.find(ID);
 
-	if(result == nullptr)
+	if(iterator == _entities.end())
 	{
 		Logger::throwError("ModelEntityManager::getEntity");
 	}
-
-	return result;
+	else
+	{
+		return iterator->second;
+	}
 }
 
 const unordered_map<string, shared_ptr<ModelEntity>>& ModelEntityManager::getEntities()
 {
-	return _getModelEntities();
+	return _entities;
 }
 
 void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
@@ -103,7 +105,7 @@ void ModelEntityManager::update()
 
 void ModelEntityManager::update(const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities)
 {
-	for(const auto& [keyID, entity] : _getModelEntities())
+	for(const auto& [keyID, entity] : _entities)
 	{
 		// Update transformation
 		entity->updateTransformation();

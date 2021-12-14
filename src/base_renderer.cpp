@@ -1,8 +1,8 @@
 #include "base_renderer.hpp"
 
-BaseRenderer::BaseRenderer(const string& vertexFile, const string& fragmentFile, RenderBus& renderBus)
+BaseRenderer::BaseRenderer(const string& vertexPath, const string& fragmentPath, RenderBus& renderBus)
 	:
-	_shader(vertexFile, fragmentFile),
+	_shader(vertexPath, fragmentPath),
 	_renderBus(renderBus)
 {
 

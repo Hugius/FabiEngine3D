@@ -1,15 +1,24 @@
 #pragma once
 
-#include "base_entity_manager.hpp"
+#include "image_entity.hpp"
 
-class ImageEntityManager final : public BaseEntityManager
+#include <unordered_map>
+
+using std::unordered_map;
+
+class ImageEntityManager final
 {
 public:
-	ImageEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
+	ImageEntityManager();
 
 	// VOID
-	void update() override;
+	void update();
 	void createEntity(const string& ID, bool isCentered);
+	void deleteEntity(const string& ID);
+	void deleteEntities();
+
+	// BOOL
+	const bool isEntityExisting(const string& ID);
 
 	// MISCELLANEOUS
 	const unordered_map<string, shared_ptr<ImageEntity>>& getEntities();
@@ -19,4 +28,5 @@ private:
 	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> _centeredRenderBuffer;
 	const shared_ptr<RenderBuffer> _nonCenteredRenderBuffer;
+	unordered_map<string, shared_ptr<ImageEntity>> _entities;
 };

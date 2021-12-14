@@ -22,8 +22,6 @@
     <ClCompile Include="..\..\..\src\aabb_entity.cpp" />
     <ClCompile Include="..\..\..\src\aabb_entity_manager.cpp" />
     <ClCompile Include="..\..\..\src\base_entity.cpp" />
-    <ClCompile Include="..\..\..\src\base_entity_manager_setters.cpp" />
-    <ClCompile Include="..\..\..\src\base_entity_manager_getters.cpp" />
     <ClCompile Include="..\..\..\src\billboard_entity_getters.cpp" />
     <ClCompile Include="..\..\..\src\billboard_entity_manager.cpp" />
     <ClCompile Include="..\..\..\src\billboard_entity_setters.cpp" />
@@ -53,7 +51,6 @@
     <ClInclude Include="..\..\..\src\aabb_entity.hpp" />
     <ClInclude Include="..\..\..\src\aabb_entity_manager.hpp" />
     <ClInclude Include="..\..\..\src\base_entity.hpp" />
-    <ClInclude Include="..\..\..\src\base_entity_manager.hpp" />
     <ClInclude Include="..\..\..\src\billboard_entity.hpp" />
     <ClInclude Include="..\..\..\src\billboard_entity_manager.hpp" />
     <ClInclude Include="..\..\..\src\entity_bus.hpp" />

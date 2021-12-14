@@ -8,27 +8,26 @@ using std::max;
 
 const float bufferData[] =
 {
-	-0.5f,  1.0f, -0.5f,
-	 0.5f,  1.0f, -0.5f,
-	 0.5f,  0.0f, -0.5f,
-	-0.5f,  0.0f, -0.5f,
-	-0.5f,  1.0f, -0.5f,
-	-0.5f,  1.0f,  0.5f,
-	 0.5f,  1.0f,  0.5f,
-	 0.5f,  0.0f,  0.5f,
-	-0.5f,  0.0f,  0.5f,
-	-0.5f,  1.0f,  0.5f,
-	 0.5f,  1.0f,  0.5f,
-	 0.5f,  1.0f, -0.5f,
-	 0.5f,  0.0f, -0.5f,
-	 0.5f,  0.0f,  0.5f,
-	-0.5f,  0.0f,  0.5f,
-	-0.5f,  0.0f, -0.5f
+	-0.5f, 1.0f, -0.5f,
+	0.5f, 1.0f, -0.5f,
+	0.5f, 0.0f, -0.5f,
+	-0.5f, 0.0f, -0.5f,
+	-0.5f, 1.0f, -0.5f,
+	-0.5f, 1.0f, 0.5f,
+	0.5f, 1.0f, 0.5f,
+	0.5f, 0.0f, 0.5f,
+	-0.5f, 0.0f, 0.5f,
+	-0.5f, 1.0f, 0.5f,
+	0.5f, 1.0f, 0.5f,
+	0.5f, 1.0f, -0.5f,
+	0.5f, 0.0f, -0.5f,
+	0.5f, 0.0f, 0.5f,
+	-0.5f, 0.0f, 0.5f,
+	-0.5f, 0.0f, -0.5f
 };
 
-AabbEntityManager::AabbEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus)
+AabbEntityManager::AabbEntityManager()
 	:
-	BaseEntityManager(EntityType::AABB, meshLoader, textureLoader, renderBus),
 	_renderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX, bufferData, static_cast<unsigned int>(sizeof(bufferData) / sizeof(float))))
 {
 
@@ -36,35 +35,32 @@ AabbEntityManager::AabbEntityManager(MeshLoader& meshLoader, TextureLoader& text
 
 shared_ptr<AabbEntity> AabbEntityManager::getEntity(const string& ID)
 {
-	auto result = _getAabbEntity(ID);
+	auto iterator = _entities.find(ID);
 
-	if(result == nullptr)
+	if(iterator == _entities.end())
 	{
 		Logger::throwError("AabbEntityManager::getEntity");
 	}
-
-	return result;
+	else
+	{
+		return iterator->second;
+	}
 }
 
 const unordered_map<string, shared_ptr<AabbEntity>>& AabbEntityManager::getEntities()
 {
-	return _getAabbEntities();
+	return _entities;
 }
 
 void AabbEntityManager::createEntity(const string& ID)
 {
-	_createEntity(ID);
+	_entities.insert(make_pair(ID, make_shared<AabbEntity>(ID)));
 	getEntity(ID)->setRenderBuffer(_renderBuffer);
-}
-
-void AabbEntityManager::update()
-{
-	Logger::throwError("AabbEntityManager::update");
 }
 
 void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntity>>& modelEntities, const unordered_map<string, shared_ptr<BillboardEntity>>& billboardEntities)
 {
-	for(const auto& [keyID, entity] : _getAabbEntities())
+	for(const auto& [keyID, entity] : _entities)
 	{
 		// Update transformation
 		entity->updateTransformation();
@@ -268,14 +264,14 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 					}
 
 					// Update visibility
-					if (parentEntity->isFrozen())
+					if(parentEntity->isFrozen())
 					{
 						entity->setVisible(false);
 					}
 					else
 					{
 						// Follow parent visibility
-						if (entity->mustFollowParentEntityVisibility())
+						if(entity->mustFollowParentEntityVisibility())
 						{
 							entity->setVisible(parentEntity->isVisible());
 						}
@@ -294,4 +290,24 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 			entity->updateTransformationMatrix();
 		}
 	}
+}
+
+void AabbEntityManager::deleteEntity(const string& ID)
+{
+	if(!isEntityExisting(ID))
+	{
+		Logger::throwError("AabbEntityManager::deleteEntity");
+	}
+
+	_entities.erase(ID);
+}
+
+void AabbEntityManager::deleteEntities()
+{
+	_entities.clear();
+}
+
+const bool AabbEntityManager::isEntityExisting(const string& ID)
+{
+	return (_entities.find(ID) != _entities.end());
 }

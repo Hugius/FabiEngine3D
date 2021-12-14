@@ -1,17 +1,28 @@
 #pragma once
 
-#include "base_entity_manager.hpp"
+#include "render_bus.hpp"
+#include "mesh_loader.hpp"
 #include "timer.hpp"
+#include "model_entity.hpp"
+#include "reflection_entity.hpp"
 
-class ModelEntityManager final : public BaseEntityManager
+#include <unordered_map>
+
+using std::unordered_map;
+
+class ModelEntityManager final
 {
 public:
-	ModelEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus, Timer& timer);
+	ModelEntityManager(MeshLoader& meshLoader, RenderBus& renderBus, Timer& timer);
 
 	// VOID
-	void update() override;
 	void update(const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities);
 	void createEntity(const string& ID, const string& meshPath);
+	void deleteEntity(const string& ID);
+	void deleteEntities();
+
+	// BOOL
+	const bool isEntityExisting(const string& ID);
 
 	// MISCELLANEOUS
 	const unordered_map<string, shared_ptr<ModelEntity>>& getEntities();
@@ -22,5 +33,8 @@ private:
 	static inline const float CUBE_REFLECTION_OVERLAP_SPEED = 0.01f;
 
 	// MISCELLANEOUS
+	unordered_map<string, shared_ptr<ModelEntity>> _entities;
+	MeshLoader& _meshLoader;
+	RenderBus& _renderBus;
 	Timer& _timer;
 };

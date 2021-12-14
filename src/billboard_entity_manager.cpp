@@ -8,36 +8,39 @@ const float bufferData[] =
 {
 	-0.5f, 1.0f, 0.0f, 0.0f, 1.0f,
 	-0.5f, 0.0f, 0.0f, 0.0f, 0.0f,
-	 0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
-	 0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
-	 0.5f, 1.0f, 0.0f, 1.0f, 1.0f,
+	0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+	0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+	0.5f, 1.0f, 0.0f, 1.0f, 1.0f,
 	-0.5f, 1.0f, 0.0f, 0.0f, 1.0f
 };
 
-BillboardEntityManager::BillboardEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus, Camera& camera)
+BillboardEntityManager::BillboardEntityManager(RenderBus& renderBus, Camera& camera)
 	:
-	BaseEntityManager(EntityType::BILLBOARD, meshLoader, textureLoader, renderBus),
+	_renderBus(renderBus),
 	_camera(camera),
-	_renderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, bufferData, static_cast<unsigned int>(sizeof(bufferData) / sizeof(float))))
+	_renderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, bufferData,
+				  static_cast<unsigned int>(sizeof(bufferData) / sizeof(float))))
 {
 
 }
 
 shared_ptr<BillboardEntity> BillboardEntityManager::getEntity(const string& ID)
 {
-	auto result = _getBillboardEntity(ID);
+	auto iterator = _entities.find(ID);
 
-	if(result == nullptr)
+	if(iterator == _entities.end())
 	{
 		Logger::throwError("BillboardEntityManager::getEntity");
 	}
-
-	return result;
+	else
+	{
+		return iterator->second;
+	}
 }
 
 const unordered_map<string, shared_ptr<BillboardEntity>>& BillboardEntityManager::getEntities()
 {
-	return _getBillboardEntities();
+	return _entities;
 }
 
 void BillboardEntityManager::createEntity(const string& ID)
@@ -48,7 +51,7 @@ void BillboardEntityManager::createEntity(const string& ID)
 
 void BillboardEntityManager::update()
 {
-	for(const auto& [keyID, entity] : _getBillboardEntities())
+	for(const auto& [keyID, entity] : _entities)
 	{
 		// Update transformation
 		entity->updateTransformation();
@@ -88,4 +91,24 @@ void BillboardEntityManager::update()
 			entity->updateTransformationMatrix();
 		}
 	}
+}
+
+void BillboardEntityManager::deleteEntity(const string& ID)
+{
+	if(!isEntityExisting(ID))
+	{
+		Logger::throwError("BillboardEntityManager::deleteEntity");
+	}
+
+	_entities.erase(ID);
+}
+
+void BillboardEntityManager::deleteEntities()
+{
+	_entities.clear();
+}
+
+const bool BillboardEntityManager::isEntityExisting(const string& ID)
+{
+	return (_entities.find(ID) != _entities.end());
 }

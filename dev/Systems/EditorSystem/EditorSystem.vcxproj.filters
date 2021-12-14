@@ -4,17 +4,11 @@
     <Filter Include="Billboard Editor">
       <UniqueIdentifier>{063d7b87-4367-42d9-9cd8-ec43b6c6859d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Billboard Editor\Core">
-      <UniqueIdentifier>{def1ca50-9deb-4baf-be73-c5b864aeb462}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Billboard Editor\Miscellaneous">
       <UniqueIdentifier>{98e7159a-73c1-46c3-b837-f2fd96b8cf0a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Model Editor">
       <UniqueIdentifier>{d6928243-9010-4c7a-a3c8-82d952906238}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Model Editor\Core">
-      <UniqueIdentifier>{c81a28c3-8641-4386-a44f-2e55a8e40ff8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Model Editor\Miscellaneous">
       <UniqueIdentifier>{222fc625-b3fa-408e-b4c9-e127026eb7bf}</UniqueIdentifier>
@@ -25,17 +19,11 @@
     <Filter Include="World Editor">
       <UniqueIdentifier>{e3af34ba-dd02-4a5a-b056-925d4e711595}</UniqueIdentifier>
     </Filter>
-    <Filter Include="World Editor\Core">
-      <UniqueIdentifier>{d3d88ca1-85ef-42ec-895f-8e025772dd50}</UniqueIdentifier>
-    </Filter>
     <Filter Include="World Editor\Miscellaneous">
       <UniqueIdentifier>{5aa80d36-fbba-4b8a-8a17-87b4ad255715}</UniqueIdentifier>
     </Filter>
     <Filter Include="Script Editor">
       <UniqueIdentifier>{d7b6a7a0-0d31-44c7-a5d5-605afe7eaad4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Script Editor\Core">
-      <UniqueIdentifier>{aa76db5a-a605-480a-9ed6-d9ccb2be4d41}</UniqueIdentifier>
     </Filter>
     <Filter Include="Script Editor\Miscellaneous">
       <UniqueIdentifier>{9c8d43b8-7054-467f-a457-a86edb05b425}</UniqueIdentifier>
@@ -49,20 +37,11 @@
     <Filter Include="Sky Editor\Miscellaneous">
       <UniqueIdentifier>{5226b612-dfeb-4dcd-b9e9-5e1786c92dfd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sky Editor\Core">
-      <UniqueIdentifier>{5700e399-7ef0-4d3f-825d-dac2901b30ee}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Terrain Editor">
       <UniqueIdentifier>{96286cc9-e02d-4c97-822a-87999a4b9f57}</UniqueIdentifier>
     </Filter>
     <Filter Include="Water Editor">
       <UniqueIdentifier>{2a4f9bf0-5aef-4673-b3a5-ecdc7e7a93d5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Water Editor\Core">
-      <UniqueIdentifier>{f926a8c2-362b-4a43-adc8-b51275acb1ea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Terrain Editor\Core">
-      <UniqueIdentifier>{62fb57fb-a4c7-4cef-8f1d-e57904b9070d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Water Editor\Miscellaneous">
       <UniqueIdentifier>{982dba41-f0d1-44ba-a3b1-a71a884e88f6}</UniqueIdentifier>
@@ -148,9 +127,6 @@
     <Filter Include="3D Animation Editor">
       <UniqueIdentifier>{ce127aed-4053-4bb3-af19-624153f70c1b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="3D Animation Editor\Core">
-      <UniqueIdentifier>{e2011b46-5f88-42c0-9a59-40db66d04e13}</UniqueIdentifier>
-    </Filter>
     <Filter Include="3D Animation Editor\Miscellaneous">
       <UniqueIdentifier>{c79d9fa8-72de-43b2-8c68-d93aaa991a7d}</UniqueIdentifier>
     </Filter>
@@ -162,9 +138,6 @@
     </Filter>
     <Filter Include="2D Animation Editor">
       <UniqueIdentifier>{15c1e9e5-2d94-4e16-9b6f-83da55e5b739}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="2D Animation Editor\Core">
-      <UniqueIdentifier>{d08cb6aa-aa91-4d77-9a47-d383c8cae5f9}</UniqueIdentifier>
     </Filter>
     <Filter Include="2D Animation Editor\Miscellaneous">
       <UniqueIdentifier>{2d496f78-f3d8-48d8-b73d-5a54ad9ffb9d}</UniqueIdentifier>
@@ -187,9 +160,6 @@
     <Filter Include="Sound Editor">
       <UniqueIdentifier>{8011f7e8-c7ba-4295-b138-3e6e1eb14d63}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sound Editor\Core">
-      <UniqueIdentifier>{752ab018-d668-4268-a4d1-ffa2772f05b9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sound Editor\Miscellaneous">
       <UniqueIdentifier>{2877187a-dffb-491f-b745-08b7ab97e001}</UniqueIdentifier>
     </Filter>
@@ -199,10 +169,40 @@
     <Filter Include="Sound Editor\Update">
       <UniqueIdentifier>{e2ab1721-0c9c-494a-9bf7-5e9c85a34bef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2D Animation Editor\Base">
+      <UniqueIdentifier>{d08cb6aa-aa91-4d77-9a47-d383c8cae5f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D Animation Editor\Base">
+      <UniqueIdentifier>{e2011b46-5f88-42c0-9a59-40db66d04e13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Billboard Editor\Base">
+      <UniqueIdentifier>{def1ca50-9deb-4baf-be73-c5b864aeb462}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model Editor\Base">
+      <UniqueIdentifier>{c81a28c3-8641-4386-a44f-2e55a8e40ff8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sky Editor\Base">
+      <UniqueIdentifier>{5700e399-7ef0-4d3f-825d-dac2901b30ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script Editor\Base">
+      <UniqueIdentifier>{aa76db5a-a605-480a-9ed6-d9ccb2be4d41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound Editor\Base">
+      <UniqueIdentifier>{752ab018-d668-4268-a4d1-ffa2772f05b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Terrain Editor\Base">
+      <UniqueIdentifier>{62fb57fb-a4c7-4cef-8f1d-e57904b9070d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Water Editor\Base">
+      <UniqueIdentifier>{f926a8c2-362b-4a43-adc8-b51275acb1ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World Editor\Base">
+      <UniqueIdentifier>{d3d88ca1-85ef-42ec-895f-8e025772dd50}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\animation3d_editor_lifecycle.cpp">
-      <Filter>3D Animation Editor\Core</Filter>
+      <Filter>3D Animation Editor\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\animation3d_editor_misc.cpp">
       <Filter>3D Animation Editor\Miscellaneous</Filter>
@@ -214,7 +214,7 @@
       <Filter>3D Animation Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound_editor_lifecycle.cpp">
-      <Filter>Sound Editor\Core</Filter>
+      <Filter>Sound Editor\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound_editor_misc.cpp">
       <Filter>Sound Editor\Miscellaneous</Filter>
@@ -226,7 +226,7 @@
       <Filter>Sound Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\billboard_editor_lifecycle.cpp">
-      <Filter>Billboard Editor\Core</Filter>
+      <Filter>Billboard Editor\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\billboard_editor_misc.cpp">
       <Filter>Billboard Editor\Miscellaneous</Filter>
@@ -241,10 +241,10 @@
       <Filter>Sky Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sky_editor_lifecycle.cpp">
-      <Filter>Sky Editor\Core</Filter>
+      <Filter>Sky Editor\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\model_editor_lifecycle.cpp">
-      <Filter>Model Editor\Core</Filter>
+      <Filter>Model Editor\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\model_editor_misc.cpp">
       <Filter>Model Editor\Miscellaneous</Filter>
@@ -274,7 +274,7 @@
       <Filter>Model Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_lifecycle.cpp">
-      <Filter>World Editor\Core</Filter>
+      <Filter>World Editor\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_pointlight_update_edit.cpp">
       <Filter>World Editor\Update\Pointlight</Filter>
@@ -328,7 +328,7 @@
       <Filter>World Editor\Update\Sound3d</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_editor_lifecycle.cpp">
-      <Filter>Script Editor\Core</Filter>
+      <Filter>Script Editor\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_editor_update_writer.cpp">
       <Filter>Script Editor\Update</Filter>
@@ -391,10 +391,10 @@
       <Filter>Water Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\terrain_editor_lifecycle.cpp">
-      <Filter>Terrain Editor\Core</Filter>
+      <Filter>Terrain Editor\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\water_editor_lifecycle.cpp">
-      <Filter>Water Editor\Core</Filter>
+      <Filter>Water Editor\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\water_editor_update_texturing.cpp">
       <Filter>Water Editor\Update</Filter>
@@ -520,7 +520,7 @@
       <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\animation2d_editor_lifecycle.cpp">
-      <Filter>2D Animation Editor\Core</Filter>
+      <Filter>2D Animation Editor\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\animation2d.cpp">
       <Filter>2D Animation Editor\Data</Filter>
@@ -561,7 +561,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\animation3d_editor.hpp">
-      <Filter>3D Animation Editor\Core</Filter>
+      <Filter>3D Animation Editor\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\animation3d.hpp">
       <Filter>3D Animation Editor\Data</Filter>
@@ -570,34 +570,34 @@
       <Filter>3D Animation Editor\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\sound_editor.hpp">
-      <Filter>Sound Editor\Core</Filter>
+      <Filter>Sound Editor\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\billboard_editor.hpp">
-      <Filter>Billboard Editor\Core</Filter>
+      <Filter>Billboard Editor\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\sky_editor.hpp">
-      <Filter>Sky Editor\Core</Filter>
+      <Filter>Sky Editor\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\model_editor.hpp">
-      <Filter>Model Editor\Core</Filter>
+      <Filter>Model Editor\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\world_editor.hpp">
-      <Filter>World Editor\Core</Filter>
+      <Filter>World Editor\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\script_editor.hpp">
-      <Filter>Script Editor\Core</Filter>
+      <Filter>Script Editor\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\settings_editor.hpp">
       <Filter>Settings Editor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\water_editor.hpp">
-      <Filter>Water Editor\Core</Filter>
+      <Filter>Water Editor\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\terrain_editor.hpp">
-      <Filter>Terrain Editor\Core</Filter>
+      <Filter>Terrain Editor\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\animation2d_editor.hpp">
-      <Filter>2D Animation Editor\Core</Filter>
+      <Filter>2D Animation Editor\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\animation2d.hpp">
       <Filter>2D Animation Editor\Data</Filter>

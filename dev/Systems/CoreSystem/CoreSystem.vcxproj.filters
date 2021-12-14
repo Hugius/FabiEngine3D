@@ -7,9 +7,6 @@
     <Filter Include="Interface">
       <UniqueIdentifier>{15138853-8c37-4c22-a1b4-cc362a51184e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interface\Core">
-      <UniqueIdentifier>{ec2d2619-8458-42b3-b623-d20f669e26ae}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Interface\Networking">
       <UniqueIdentifier>{263730c8-b5dc-4e3f-ad8e-954f2a808a65}</UniqueIdentifier>
     </Filter>
@@ -25,13 +22,16 @@
     <Filter Include="Interface\Entity">
       <UniqueIdentifier>{58eff109-7a52-4f2b-b047-1ed6d6a63f68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Interface\Base">
+      <UniqueIdentifier>{ec2d2619-8458-42b3-b623-d20f669e26ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\core_lifecycle.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d.cpp">
-      <Filter>Interface\Core</Filter>
+      <Filter>Interface\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_graphics_setters.cpp">
       <Filter>Interface\Graphics</Filter>
@@ -159,7 +159,7 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\fe3d.hpp">
-      <Filter>Interface\Core</Filter>
+      <Filter>Interface\Base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

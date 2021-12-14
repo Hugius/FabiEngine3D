@@ -18,46 +18,11 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\src\aabb_parent_entity_type.hpp" />
-    <ClInclude Include="..\..\..\src\animation3d_speed_type.hpp" />
-    <ClInclude Include="..\..\..\src\bloom_type.hpp" />
-    <ClInclude Include="..\..\..\src\blur_direction.hpp" />
-    <ClInclude Include="..\..\..\src\buffer_type.hpp" />
-    <ClInclude Include="..\..\..\src\configuration.hpp" />
-    <ClInclude Include="..\..\..\src\direction.hpp" />
-    <ClInclude Include="..\..\..\src\direction_order.hpp" />
-    <ClInclude Include="..\..\..\src\entity_type.hpp" />
-    <ClInclude Include="..\..\..\src\input_handler.hpp" />
-    <ClInclude Include="..\..\..\src\input_type.hpp" />
-    <ClInclude Include="..\..\..\src\library_loader.hpp" />
-    <ClInclude Include="..\..\..\src\pointlight_shape.hpp" />
-    <ClInclude Include="..\..\..\src\logger.hpp" />
-    <ClInclude Include="..\..\..\src\message_type.hpp" />
-    <ClInclude Include="..\..\..\src\network_protocol.hpp" />
-    <ClInclude Include="..\..\..\src\reflection_type.hpp" />
-    <ClInclude Include="..\..\..\src\script_condition_type.hpp" />
-    <ClInclude Include="..\..\..\src\script_type.hpp" />
-    <ClInclude Include="..\..\..\src\script_value_type.hpp" />
-    <ClInclude Include="..\..\..\src\script_variable_scope.hpp" />
-    <ClInclude Include="..\..\..\src\script_variable_type.hpp" />
-    <ClInclude Include="..\..\..\src\timer.hpp" />
-    <ClInclude Include="..\..\..\src\tools.hpp" />
-    <ClInclude Include="..\..\..\src\transformation_type.hpp" />
-    <ClInclude Include="..\..\..\src\water_quality.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\src\configuration.cpp" />
-    <ClCompile Include="..\..\..\src\input_handler.cpp" />
-    <ClCompile Include="..\..\..\src\library_loader.cpp" />
-    <ClCompile Include="..\..\..\src\timer.cpp" />
-    <ClCompile Include="..\..\..\src\tools.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{08C1E06F-7054-49F7-9206-F97C492919E1}</ProjectGuid>
-    <RootNamespace>MiscellaneousSystem</RootNamespace>
+    <ProjectGuid>{f419df52-dff6-4875-93d2-13c2ef25947b}</ProjectGuid>
+    <RootNamespace>AssetSystem</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -116,10 +81,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)Systems\</OutDir>
     <IncludePath>$(SolutionDir)Libraries\;$(IncludePath)</IncludePath>
-    <LibraryPath>
-    </LibraryPath>
+    <OutDir>$(SolutionDir)Systems\</OutDir>
     <IntDir>$(ProjectDir)Temp\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -180,6 +143,21 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\audio_loader.cpp" />
+    <ClCompile Include="..\..\..\src\mesh_loader_public.cpp" />
+    <ClCompile Include="..\..\..\src\mesh_loader_private.cpp" />
+    <ClCompile Include="..\..\..\src\mesh_part.cpp" />
+    <ClCompile Include="..\..\..\src\texture_loader_load.cpp" />
+    <ClCompile Include="..\..\..\src\texture_loader_cache.cpp" />
+    <ClCompile Include="..\..\..\src\texture_loader_misc.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\audio_loader.hpp" />
+    <ClInclude Include="..\..\..\src\mesh_loader.hpp" />
+    <ClInclude Include="..\..\..\src\mesh_part.hpp" />
+    <ClInclude Include="..\..\..\src\texture_loader.hpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

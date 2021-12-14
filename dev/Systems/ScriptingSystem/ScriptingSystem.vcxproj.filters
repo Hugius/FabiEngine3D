@@ -10,9 +10,6 @@
     <Filter Include="Execution\Interpreter">
       <UniqueIdentifier>{992e8f17-069a-47a9-8d87-7d83424dc77f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Execution\Interpreter\Core">
-      <UniqueIdentifier>{541da134-77a6-4ba7-a9ea-e1c174278bff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Execution\Interpreter\Miscellaneous">
       <UniqueIdentifier>{a9fa97de-3c20-4d0b-86ee-83c7c11c0ede}</UniqueIdentifier>
     </Filter>
@@ -43,7 +40,10 @@
     <Filter Include="Execution\Interpreter\Function\Sound">
       <UniqueIdentifier>{f0265524-b264-47ea-9dfc-72cb593e78c8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Execution\Interpreter\Function\Core">
+    <Filter Include="Execution\Interpreter\Base">
+      <UniqueIdentifier>{541da134-77a6-4ba7-a9ea-e1c174278bff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Execution\Interpreter\Function\Base">
       <UniqueIdentifier>{d76c7765-65c5-436a-a627-fdd98d31e78f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -58,10 +58,7 @@
       <Filter>Execution\Executor</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_lifecycle.cpp">
-      <Filter>Execution\Interpreter\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_execution.cpp">
-      <Filter>Execution\Interpreter\Core</Filter>
+      <Filter>Execution\Interpreter\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_misc.cpp">
       <Filter>Execution\Interpreter\Miscellaneous</Filter>
@@ -91,13 +88,13 @@
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_math.cpp">
-      <Filter>Execution\Interpreter\Function\Core</Filter>
+      <Filter>Execution\Interpreter\Function\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_misc.cpp">
-      <Filter>Execution\Interpreter\Function\Core</Filter>
+      <Filter>Execution\Interpreter\Function\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d.cpp">
-      <Filter>Execution\Interpreter\Function\Core</Filter>
+      <Filter>Execution\Interpreter\Function\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_variable_arithmetic.cpp">
       <Filter>Execution\Interpreter\Variable</Filter>
@@ -258,6 +255,9 @@
     <ClCompile Include="..\..\..\src\script_file.cpp">
       <Filter>Data</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_execution.cpp">
+      <Filter>Execution\Interpreter\Miscellaneous</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\script_variable.hpp">
@@ -270,7 +270,7 @@
       <Filter>Execution\Executor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\script_interpreter.hpp">
-      <Filter>Execution\Interpreter\Core</Filter>
+      <Filter>Execution\Interpreter\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\script_condition_statement.hpp">
       <Filter>Data</Filter>

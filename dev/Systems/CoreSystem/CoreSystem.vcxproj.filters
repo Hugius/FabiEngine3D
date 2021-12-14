@@ -27,10 +27,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\core_engine_lifecycle.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\core_engine_misc.cpp">
+    <ClCompile Include="..\..\..\src\core_lifecycle.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d.cpp">
@@ -153,9 +150,12 @@
     <ClCompile Include="..\..\..\src\fe3d_camera_getters.cpp">
       <Filter>Interface\Physics</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\core_misc.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\core_engine.hpp">
+    <ClInclude Include="..\..\..\src\core.hpp">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\fe3d.hpp">

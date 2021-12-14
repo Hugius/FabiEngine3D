@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Core">
-      <UniqueIdentifier>{9dfc9e9f-7ab2-4238-9f11-4e13e91cf600}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Execution">
       <UniqueIdentifier>{65b42125-b9a3-4e09-8f7c-779c9f646114}</UniqueIdentifier>
     </Filter>
@@ -24,9 +21,6 @@
     </Filter>
     <Filter Include="Execution\Interpreter\Function\Miscellaneous">
       <UniqueIdentifier>{c23fe641-24b8-4dea-9b85-cfffcb26d4e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Execution\Interpreter\Function\Core">
-      <UniqueIdentifier>{d76c7765-65c5-436a-a627-fdd98d31e78f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Execution\Interpreter\Variable">
       <UniqueIdentifier>{ec855f5f-cba3-46b4-aac3-ae2109f5bbc1}</UniqueIdentifier>
@@ -49,14 +43,11 @@
     <Filter Include="Execution\Interpreter\Function\Sound">
       <UniqueIdentifier>{f0265524-b264-47ea-9dfc-72cb593e78c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Execution\Interpreter\Function\Core">
+      <UniqueIdentifier>{d76c7765-65c5-436a-a627-fdd98d31e78f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\script.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_file.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\script_value.cpp">
       <Filter>Data</Filter>
     </ClCompile>
@@ -261,14 +252,14 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_animation3d_getters.cpp">
       <Filter>Execution\Interpreter\Function\Animation</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\script.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_file.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\script.hpp">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\script_file.hpp">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\script_variable.hpp">
       <Filter>Data</Filter>
     </ClInclude>
@@ -282,6 +273,12 @@
       <Filter>Execution\Interpreter\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\script_condition_statement.hpp">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\script_file.hpp">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\script.hpp">
       <Filter>Data</Filter>
     </ClInclude>
   </ItemGroup>

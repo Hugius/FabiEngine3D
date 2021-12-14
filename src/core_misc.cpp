@@ -1,9 +1,9 @@
-#include "core_engine.hpp"
+#include "core.hpp"
 #include "configuration.hpp"
 #include "render_bus.hpp"
 #include "tools.hpp"
 
-void CoreEngine::_renderApplication()
+void Core::_renderApplication()
 {
 	// Reset triangle count
 	_renderBus.resetTriangleCount();
@@ -32,7 +32,7 @@ void CoreEngine::_renderApplication()
 	_timer.stopDeltaPart();
 }
 
-void CoreEngine::_prepareApplication()
+void Core::_prepareApplication()
 {
 	// Temporary values
 	const string meshDirectoryPath = "engine\\assets\\mesh\\";

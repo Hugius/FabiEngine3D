@@ -1,5 +1,5 @@
 #include "fe3d.hpp"
-#include "core_engine.hpp"
+#include "core.hpp"
 
 const vector<string> FabiEngine3D::spotlight_getAllIDs() const
 {

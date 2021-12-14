@@ -1,5 +1,5 @@
 #include "fe3d.hpp"
-#include "core_engine.hpp"
+#include "core.hpp"
 #include "configuration.hpp"
 
 const unsigned int FabiEngine3D::misc_getTriangleCount() const

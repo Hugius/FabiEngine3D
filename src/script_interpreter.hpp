@@ -154,7 +154,7 @@ private:
 	// MISCELLANEOUS
 	const vector<ScriptValue> _extractValuesFromListString(const string& listString);
 	const vector<ScriptValue> _processEngineFunctionCall(const string& scriptLine);
-	const vector<ScriptValue> _processMathematicalFunctionCall(const string& scriptLine);
+	const vector<ScriptValue> _processMathematicsFunctionCall(const string& scriptLine);
 	const vector<ScriptValue> _processMiscellaneousFunctionCall(const string& scriptLine);
 	ScriptVariable& _getLocalVariable(const string& variableID);
 	ScriptVariable& _getGlobalVariable(const string& variableID);

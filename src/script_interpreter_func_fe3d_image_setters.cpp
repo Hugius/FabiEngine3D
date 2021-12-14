@@ -42,7 +42,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 			// Set diffuse map
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\texture\\image_map\\");
+			const string targetDirectoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\texture\\diffuse_map\\");
 			const string filePath = (targetDirectoryPath + arguments[1].getString());
 			_fe3d.image_setDiffuseMap(ID, filePath);
 

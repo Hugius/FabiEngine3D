@@ -16,9 +16,6 @@
     <Filter Include="Master Renderer">
       <UniqueIdentifier>{7d8c27fd-0dde-4b64-a4e8-c60d3a9fb95f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Renderers\Core">
-      <UniqueIdentifier>{db74bef5-67e7-47ba-9bf8-024bd20dc2dc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shaders\Entity Shader">
       <UniqueIdentifier>{6c8e990a-18ba-41ce-bc62-1af0d6f53558}</UniqueIdentifier>
     </Filter>
@@ -42,6 +39,9 @@
     </Filter>
     <Filter Include="Renderers\Post Renderer">
       <UniqueIdentifier>{7fb7ca30-ed1c-4742-80f3-75199997d0c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderers\Base">
+      <UniqueIdentifier>{db74bef5-67e7-47ba-9bf8-024bd20dc2dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -82,7 +82,7 @@
       <Filter>Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\base_renderer.cpp">
-      <Filter>Renderers\Core</Filter>
+      <Filter>Renderers\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\blur_renderer.cpp">
       <Filter>Renderers\Post Renderer</Filter>
@@ -171,7 +171,7 @@
       <Filter>Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\base_renderer.hpp">
-      <Filter>Renderers\Core</Filter>
+      <Filter>Renderers\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\blur_renderer.hpp">
       <Filter>Renderers\Post Renderer</Filter>

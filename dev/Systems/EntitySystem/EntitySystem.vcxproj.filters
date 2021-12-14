@@ -7,14 +7,8 @@
     <Filter Include="Data">
       <UniqueIdentifier>{4a262432-7b7a-4f49-a907-3159bfc896a9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Data\Core">
-      <UniqueIdentifier>{44c1a87c-9396-4875-9ad7-6e6e4fa701c0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Manager">
       <UniqueIdentifier>{1d8410ea-3c56-4706-adbd-dcbc42bbbe01}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Manager\Core">
-      <UniqueIdentifier>{b94796cd-fe18-4114-a8c3-7ec119ac3a09}</UniqueIdentifier>
     </Filter>
     <Filter Include="Manager\Entity">
       <UniqueIdentifier>{6fcda699-73f8-4fd4-bd9c-fa2122c2b49b}</UniqueIdentifier>
@@ -22,13 +16,19 @@
     <Filter Include="Data\Entity">
       <UniqueIdentifier>{332b0064-ad65-4529-b83a-245b343dade3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data\Base">
+      <UniqueIdentifier>{44c1a87c-9396-4875-9ad7-6e6e4fa701c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Base">
+      <UniqueIdentifier>{b94796cd-fe18-4114-a8c3-7ec119ac3a09}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\base_entity_manager_getters.cpp">
-      <Filter>Manager\Core</Filter>
+      <Filter>Manager\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\base_entity_manager_setters.cpp">
-      <Filter>Manager\Core</Filter>
+      <Filter>Manager\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\entity_bus.cpp">
       <Filter>Miscellaneous</Filter>
@@ -61,7 +61,7 @@
       <Filter>Manager\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\base_entity.cpp">
-      <Filter>Data\Core</Filter>
+      <Filter>Data\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\aabb_entity.cpp">
       <Filter>Data\Entity</Filter>
@@ -114,7 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\base_entity_manager.hpp">
-      <Filter>Manager\Core</Filter>
+      <Filter>Manager\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\entity_bus.hpp">
       <Filter>Miscellaneous</Filter>
@@ -147,7 +147,7 @@
       <Filter>Manager\Entity</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\base_entity.hpp">
-      <Filter>Data\Core</Filter>
+      <Filter>Data\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\aabb_entity.hpp">
       <Filter>Data\Entity</Filter>

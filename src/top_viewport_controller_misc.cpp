@@ -105,7 +105,6 @@ void TopViewportController::_updateProjectCreating()
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\emission_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\flare_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\height_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\image_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\normal_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\reflection_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\specular_map\\");

@@ -1,10 +1,10 @@
 #include "fe3d.hpp"
-#include "core_engine.hpp"
+#include "core.hpp"
 #include "configuration.hpp"
 
 FabiEngine3D::FabiEngine3D()
 {
-	_core = new CoreEngine(*this);
+	_core = new Core(*this);
 }
 
 FabiEngine3D::~FabiEngine3D()

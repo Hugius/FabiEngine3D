@@ -276,9 +276,6 @@
     <ClCompile Include="..\..\..\src\world_editor_lifecycle.cpp">
       <Filter>World Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_gui.cpp">
-      <Filter>World Editor\Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_pointlight_update_edit.cpp">
       <Filter>World Editor\Update\Pointlight</Filter>
     </ClCompile>
@@ -462,9 +459,6 @@
     <ClCompile Include="..\..\..\src\animation3d_editor_update_execution.cpp">
       <Filter>3D Animation Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\animation3d_editor_control.cpp">
-      <Filter>3D Animation Editor\Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\script_editor_saving.cpp">
       <Filter>Script Editor\Persistence</Filter>
     </ClCompile>
@@ -549,14 +543,20 @@
     <ClCompile Include="..\..\..\src\animation2d_animation_editor_loading.cpp">
       <Filter>2D Animation Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\animation2d_editor_control.cpp">
-      <Filter>2D Animation Editor\Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_update_menu.cpp">
       <Filter>World Editor\Update\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_update_misc.cpp">
       <Filter>World Editor\Update\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\animation2d_editor_control.cpp">
+      <Filter>2D Animation Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\animation3d_editor_control.cpp">
+      <Filter>3D Animation Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\world_editor_gui.cpp">
+      <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
-#include "core_engine.hpp"
+#include "core.hpp"
 
 #include <chrono>
 
@@ -6,7 +6,7 @@ using std::chrono::high_resolution_clock;
 using std::chrono::duration_cast;
 using std::chrono::nanoseconds;
 
-CoreEngine::CoreEngine(FabiEngine3D& fe3d)
+Core::Core(FabiEngine3D& fe3d)
 	:
 	_fe3d(fe3d),
 	_window(_libraryLoader),
@@ -31,7 +31,7 @@ CoreEngine::CoreEngine(FabiEngine3D& fe3d)
 
 }
 
-void CoreEngine::_start()
+void Core::_start()
 {
 	// Error
 	if(_isRunning)
@@ -112,7 +112,7 @@ void CoreEngine::_start()
 	_fe3d.FE3D_CONTROLLER_TERMINATE();
 }
 
-void CoreEngine::_pause()
+void Core::_pause()
 {
 	if(_isPaused)
 	{
@@ -122,7 +122,7 @@ void CoreEngine::_pause()
 	_isPaused = true;
 }
 
-void CoreEngine::_resume()
+void Core::_resume()
 {
 	if(!_isPaused)
 	{
@@ -132,7 +132,7 @@ void CoreEngine::_resume()
 	_isPaused = false;
 }
 
-void CoreEngine::_stop()
+void Core::_stop()
 {
 	if(!_isRunning)
 	{
@@ -142,7 +142,7 @@ void CoreEngine::_stop()
 	_isRunning = false;
 }
 
-void CoreEngine::_updateApplication()
+void Core::_updateApplication()
 {
 	// Temporary values
 	static ivec2 lastCursorPosition = _window.getCursorPosition();
@@ -234,7 +234,7 @@ void CoreEngine::_updateApplication()
 	lastCursorPosition = _window.getCursorPosition();
 }
 
-void CoreEngine::_updateWindowFading()
+void Core::_updateWindowFading()
 {
 	// Only if in engine preview
 	if(!Config::getInst().isApplicationExported())

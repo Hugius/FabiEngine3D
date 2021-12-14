@@ -1,5 +1,5 @@
 #include "fe3d.hpp"
-#include "core_engine.hpp"
+#include "core.hpp"
 
 void FabiEngine3D::image_deleteAll()
 {

@@ -1,5 +1,5 @@
 #include "fe3d.hpp"
-#include "core_engine.hpp"
+#include "core.hpp"
 
 void FabiEngine3D::collision_setCameraBox(float left, float right, float bottom, float top, float back, float front)
 {

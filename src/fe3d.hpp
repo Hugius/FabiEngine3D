@@ -36,11 +36,11 @@ using std::pair;
 using std::string;
 using std::shared_ptr;
 
-class CoreEngine;
+class Core;
 
 class FabiEngine3D
 {
-	friend class CoreEngine;
+	friend class Core;
 
 public:
 	FabiEngine3D();
@@ -951,5 +951,5 @@ private:
 	bool _isRaycastUpdated = false;
 
 	// MISCELLANEOUS
-	CoreEngine* _core = nullptr;
+	Core* _core = nullptr;
 };

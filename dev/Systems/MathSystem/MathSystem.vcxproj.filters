@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Core">
-      <UniqueIdentifier>{c38cb861-2702-4948-b602-a7e9835def5f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Matrix">
       <UniqueIdentifier>{e5629230-2b10-47b9-9aea-0d0ac3fe6bd6}</UniqueIdentifier>
     </Filter>
@@ -16,10 +13,13 @@
     <Filter Include="Vector\Float">
       <UniqueIdentifier>{0d5f0369-a52b-4abc-b3f6-e46f49d6861f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mathematics">
+      <UniqueIdentifier>{c38cb861-2702-4948-b602-a7e9835def5f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\mathematics.hpp">
-      <Filter>Core</Filter>
+      <Filter>Mathematics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\fvec4.hpp">
       <Filter>Vector\Float</Filter>
@@ -51,13 +51,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\mathematics_misc.cpp">
-      <Filter>Core</Filter>
+      <Filter>Mathematics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\mathematics_matrix_creation.cpp">
-      <Filter>Core</Filter>
+      <Filter>Mathematics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\mathematics_vector.cpp">
-      <Filter>Core</Filter>
+      <Filter>Mathematics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fvec2.cpp">
       <Filter>Vector\Float</Filter>
@@ -78,7 +78,7 @@
       <Filter>Vector\Integer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\mathematics_matrix_misc.cpp">
-      <Filter>Core</Filter>
+      <Filter>Mathematics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\mat22.cpp">
       <Filter>Matrix</Filter>

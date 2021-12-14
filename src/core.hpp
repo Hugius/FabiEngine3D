@@ -30,12 +30,12 @@
 #include "networking_server.hpp"
 #include "networking_client.hpp"
 
-class CoreEngine final
+class Core final
 {
 	friend class FabiEngine3D;
 
 private:
-	CoreEngine(FabiEngine3D& fe3d);
+	Core(FabiEngine3D& fe3d);
 
 	// VOID
 	void _start();

@@ -236,7 +236,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 		else if(scriptLineText.substr(0, 5) == "math:")
 		{
-			_processMathematicalFunctionCall(scriptLineText);
+			_processMathematicsFunctionCall(scriptLineText);
 		}
 		else if(scriptLineText.substr(0, 5) == "misc:")
 		{

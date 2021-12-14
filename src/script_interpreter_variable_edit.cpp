@@ -158,7 +158,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		// Call function
 		auto returnValues =
 			(valueString.substr(0, 5) == "fe3d:") ? _processEngineFunctionCall(valueString) :
-			(valueString.substr(0, 5) == "math:") ? _processMathematicalFunctionCall(valueString) :
+			(valueString.substr(0, 5) == "math:") ? _processMathematicsFunctionCall(valueString) :
 			_processMiscellaneousFunctionCall(valueString);
 
 		// Check if any error was thrown

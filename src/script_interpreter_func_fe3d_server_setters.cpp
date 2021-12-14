@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dServerSetter(const string& functionNam
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// CoreEngine must know if application is a networking server, so server can only be started in initialization phase
+			// Server can only be started in initialization phase
 			if(!_isExecutingInitialization)
 			{
 				_throwScriptError("networking server can only be started in initialization script!");

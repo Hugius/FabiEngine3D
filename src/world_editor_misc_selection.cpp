@@ -6,7 +6,7 @@ void WorldEditor::_selectModel(const string& ID)
 	_selectedModelID = ID;
 
 	// Change cursor
-	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_pointing.png");
+	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_pointing.png");
 
 	// Enable wireframed rendering
 	for(const auto& partID : _fe3d.model_getPartIDs(_selectedModelID))
@@ -33,7 +33,7 @@ void WorldEditor::_selectBillboard(const string& ID)
 	_selectedBillboardID = ID;
 
 	// Change cursor
-	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_pointing.png");
+	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_pointing.png");
 
 	// Enable wireframed rendering
 	_fe3d.billboard_setWireframed(_selectedBillboardID, true);
@@ -57,7 +57,7 @@ void WorldEditor::_selectSound(const string& ID)
 	_selectedSpeakerID = ("@@speaker_" + ID);
 
 	// Change cursor
-	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_pointing.png");
+	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_pointing.png");
 
 	// Check if nothing is active
 	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
@@ -78,7 +78,7 @@ void WorldEditor::_selectPointlight(const string& ID)
 	_selectedLampID = ("@@lamp_" + ID);
 
 	// Change cursor
-	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_pointing.png");
+	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_pointing.png");
 }
 
 void WorldEditor::_selectSpotlight(const string& ID)
@@ -87,7 +87,7 @@ void WorldEditor::_selectSpotlight(const string& ID)
 	_selectedTorchID = ("@@torch_" + ID);
 
 	// Change cursor
-	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_pointing.png");
+	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_pointing.png");
 }
 
 void WorldEditor::_selectReflection(const string& ID)
@@ -96,7 +96,7 @@ void WorldEditor::_selectReflection(const string& ID)
 	_selectedCameraID = ("@@camera_" + ID);
 
 	// Change cursor
-	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_pointing.png");
+	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_pointing.png");
 }
 
 void WorldEditor::_unselectModel(const string& ID)

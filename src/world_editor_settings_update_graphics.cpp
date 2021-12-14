@@ -422,7 +422,7 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\flare_maps\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\flare_map\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))

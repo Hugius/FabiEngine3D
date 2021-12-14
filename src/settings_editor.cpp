@@ -43,7 +43,7 @@ void SettingsEditor::load()
 	// Editor billboards
 	_fe3d.billboard_create("@@icon");
 	_fe3d.billboard_setPosition("@@icon", fvec3(0.0f, -0.5f, -1.5f));
-	_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\textures\\settings.png");
+	_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\texture\\settings.png");
 	_fe3d.billboard_setBright("@@icon", true);
 
 	// Miscellaneous

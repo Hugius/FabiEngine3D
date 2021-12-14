@@ -34,7 +34,7 @@ void WorldEditor::_updateReflectionPlacing()
 
 				// Create model
 				const string newModelID = ("@@camera_" + newID);
-				_fe3d.model_create(newModelID, "engine\\assets\\meshes\\camera.obj");
+				_fe3d.model_create(newModelID, "engine\\assets\\mesh\\camera.obj");
 				_fe3d.model_setBaseSize(newModelID, DEFAULT_CAMERA_SIZE);
 				_fe3d.model_setShadowed(newModelID, false);
 				_fe3d.model_setReflected(newModelID, false);
@@ -107,7 +107,7 @@ void WorldEditor::_updateReflectionPlacing()
 						{
 							// Create model
 							const string newModelID = ("@@camera_" + newID);
-							_fe3d.model_create(newModelID, "engine\\assets\\meshes\\camera.obj");
+							_fe3d.model_create(newModelID, "engine\\assets\\mesh\\camera.obj");
 							_fe3d.model_setBaseSize(newModelID, DEFAULT_CAMERA_SIZE);
 							_fe3d.model_setShadowed(newModelID, false);
 							_fe3d.model_setReflected(newModelID, false);

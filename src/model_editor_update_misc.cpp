@@ -147,7 +147,7 @@ void ModelEditor::_updateModelCreating()
 
 						// Get the chosen file name
 						const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-						const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\meshes\\");
+						const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\mesh\\");
 
 						// Validate target directory
 						if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))

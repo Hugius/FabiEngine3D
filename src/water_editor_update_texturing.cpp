@@ -32,7 +32,7 @@ void WaterEditor::_updateTexturingMenu()
 
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\dudv_maps\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\dudv_map\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
@@ -71,7 +71,7 @@ void WaterEditor::_updateTexturingMenu()
 
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\normal_maps\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\normal_map\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
@@ -110,7 +110,7 @@ void WaterEditor::_updateTexturingMenu()
 
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\displacement_maps\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\displacement_map\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))

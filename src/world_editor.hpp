@@ -163,10 +163,10 @@ private:
 	static inline const string PREVIEW_LAMP_ID = "@@preview_lamp";
 	static inline const string PREVIEW_TORCH_ID = "@@preview_torch";
 	static inline const string PREVIEW_CAMERA_ID = "@@preview_camera";
-	static inline const string SPEAKER_MODEL_PATH = "engine\\assets\\meshes\\speaker.obj";
-	static inline const string LAMP_MODEL_PATH = "engine\\assets\\meshes\\lamp.obj";
-	static inline const string TORCH_MODEL_PATH = "engine\\assets\\meshes\\torch.obj";
-	static inline const string CAMERA_MODEL_PATH = "engine\\assets\\meshes\\camera.obj";
+	static inline const string SPEAKER_MODEL_PATH = "engine\\assets\\mesh\\speaker.obj";
+	static inline const string LAMP_MODEL_PATH = "engine\\assets\\mesh\\lamp.obj";
+	static inline const string TORCH_MODEL_PATH = "engine\\assets\\mesh\\torch.obj";
+	static inline const string CAMERA_MODEL_PATH = "engine\\assets\\mesh\\camera.obj";
 	map<string, string> _loadedModelIDs;
 	map<string, string> _outsideLoadedModelIDs;
 	map<string, string> _loadedBillboardIDs;

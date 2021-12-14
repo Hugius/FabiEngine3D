@@ -192,7 +192,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\textures\\flare_maps\\");
+			const string targetDirectoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\texture\\flare_map\\");
 			const string filePath = (targetDirectoryPath + arguments[0].getString());
 
 			// Set flare map

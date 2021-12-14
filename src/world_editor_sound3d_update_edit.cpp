@@ -35,7 +35,7 @@ void WorldEditor::_updateSoundEditing()
 					_selectSound(ID.substr(string("@@speaker_").size()));
 
 					// Change cursor
-					_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_pointing.png");
+					_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_pointing.png");
 
 					// Check if user clicked speaker
 					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))

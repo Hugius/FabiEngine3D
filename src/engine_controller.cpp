@@ -29,9 +29,9 @@ EngineController::EngineController()
 void EngineController::FE3D_CONTROLLER_INIT()
 {
 	// Temporary values
-	const string meshDirectoryPath = "engine\\assets\\meshes\\";
-	const string textureDirectoryPath = "engine\\assets\\textures\\";
-	const string fontDirectoryPath = "engine\\assets\\fonts\\";
+	const string meshDirectoryPath = "engine\\assets\\mesh\\";
+	const string textureDirectoryPath = "engine\\assets\\texture\\";
+	const string fontDirectoryPath = "engine\\assets\\font\\";
 
 	if(Config::getInst().isApplicationExported()) // Application preview
 	{
@@ -145,7 +145,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		// Custom cursor texture
 		image_create("@@cursor", true);
 		image_setSize("@@cursor", fvec2(CURSOR_IMAGE_SIZE, (CURSOR_IMAGE_SIZE* Tools::getWindowAspectRatio())));
-		image_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_default.png");
+		image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_default.png");
 		misc_setCursorEntityID("@@cursor");
 		misc_setCursorVisible(false);
 
@@ -198,7 +198,7 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 
 		// Update custom cursor
 		image_setPosition("@@cursor", Math::convertToNDC(Tools::convertFromScreenCoords(misc_getCursorPosition())));
-		image_setDiffuseMap("@@cursor", "engine\\assets\\textures\\cursor_default.png");
+		image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_default.png");
 		image_setVisible("@@cursor", misc_isCursorInsideWindow());
 
 		// Update GUI manager

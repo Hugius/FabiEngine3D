@@ -310,7 +310,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			{
 				// Create model
 				const string newModelID = ("@@speaker_" + soundID);
-				_fe3d.model_create(newModelID, "engine\\assets\\meshes\\speaker.obj");
+				_fe3d.model_create(newModelID, "engine\\assets\\mesh\\speaker.obj");
 				_fe3d.model_setBasePosition(newModelID, position);
 				_fe3d.model_setBaseSize(newModelID, DEFAULT_SPEAKER_SIZE);
 				_fe3d.model_setShadowed(newModelID, false);
@@ -361,7 +361,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			{
 				// Create model
 				const string newModelID = ("@@lamp_" + pointlightID);
-				_fe3d.model_create(newModelID, "engine\\assets\\meshes\\lamp.obj");
+				_fe3d.model_create(newModelID, "engine\\assets\\mesh\\lamp.obj");
 				_fe3d.model_setBasePosition(newModelID, position);
 				_fe3d.model_setBaseSize(newModelID, DEFAULT_LAMP_SIZE);
 				_fe3d.model_setColor(newModelID, "", color);
@@ -413,7 +413,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			{
 				// Create model
 				const string newModelID = ("@@torch_" + spotlightID);
-				_fe3d.model_create(newModelID, "engine\\assets\\meshes\\torch.obj");
+				_fe3d.model_create(newModelID, "engine\\assets\\mesh\\torch.obj");
 				_fe3d.model_setBasePosition(newModelID, position);
 				_fe3d.model_setBaseRotation(newModelID, fvec3(0.0f, -yaw, pitch));
 				_fe3d.model_setBaseSize(newModelID, DEFAULT_TORCH_SIZE);
@@ -459,7 +459,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			{
 				// Create model
 				const string newModelID = ("@@camera_" + reflectionID);
-				_fe3d.model_create(newModelID, "engine\\assets\\meshes\\camera.obj");
+				_fe3d.model_create(newModelID, "engine\\assets\\mesh\\camera.obj");
 				_fe3d.model_setBasePosition(newModelID, position);
 				_fe3d.model_setBaseSize(newModelID, DEFAULT_CAMERA_SIZE);
 				_fe3d.model_setShadowed(newModelID, false);

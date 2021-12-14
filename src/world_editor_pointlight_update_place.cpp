@@ -40,7 +40,7 @@ void WorldEditor::_updatePointlightPlacing()
 				{
 					// Create model
 					const string newModelID = ("@@lamp_" + newID);
-					_fe3d.model_create(newModelID, "engine\\assets\\meshes\\lamp.obj");
+					_fe3d.model_create(newModelID, "engine\\assets\\mesh\\lamp.obj");
 					_fe3d.model_setBaseSize(newModelID, DEFAULT_LAMP_SIZE);
 					_fe3d.model_setShadowed(newModelID, false);
 					_fe3d.model_setReflected(newModelID, false);
@@ -120,7 +120,7 @@ void WorldEditor::_updatePointlightPlacing()
 						{
 							// Create model
 							const string newModelID = ("@@lamp_" + newID);
-							_fe3d.model_create(newModelID, "engine\\assets\\meshes\\lamp.obj");
+							_fe3d.model_create(newModelID, "engine\\assets\\mesh\\lamp.obj");
 							_fe3d.model_setBaseSize(newModelID, DEFAULT_LAMP_SIZE);
 							_fe3d.model_setShadowed(newModelID, false);
 							_fe3d.model_setReflected(newModelID, false);

@@ -35,7 +35,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			// Set font
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\fonts\\" + arguments[1].getString());
+			const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\font\\" + arguments[1].getString());
 			_fe3d.text_setFont(ID, filePath);
 
 			// Set properties

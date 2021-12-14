@@ -33,7 +33,7 @@ void ModelEditor::_updateTexturingMenu()
 
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\diffuse_maps\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\diffuse_map\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
@@ -72,7 +72,7 @@ void ModelEditor::_updateTexturingMenu()
 
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\emission_maps\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\emission_map\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
@@ -111,7 +111,7 @@ void ModelEditor::_updateTexturingMenu()
 
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\specular_maps\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\specular_map\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
@@ -150,7 +150,7 @@ void ModelEditor::_updateTexturingMenu()
 
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\reflection_maps\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\reflection_map\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
@@ -189,7 +189,7 @@ void ModelEditor::_updateTexturingMenu()
 
 			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\textures\\normal_maps\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\normal_map\\");
 
 			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))

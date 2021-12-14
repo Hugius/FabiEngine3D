@@ -35,9 +35,9 @@ void CoreEngine::_renderApplication()
 void CoreEngine::_prepareApplication()
 {
 	// Temporary values
-	const string meshDirectoryPath = "engine\\assets\\meshes\\";
-	const string textureDirectoryPath = "engine\\assets\\textures\\";
-	const string fontDirectoryPath = "engine\\assets\\fonts\\";
+	const string meshDirectoryPath = "engine\\assets\\mesh\\";
+	const string textureDirectoryPath = "engine\\assets\\texture\\";
+	const string fontDirectoryPath = "engine\\assets\\font\\";
 
 	// Validate engine assets directory
 	if
@@ -109,7 +109,7 @@ void CoreEngine::_prepareApplication()
 	// Create engine logo
 	shared_ptr<ImageEntity> logo = make_shared<ImageEntity>("logo");
 	logo->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
-	logo->setDiffuseMap(_textureLoader.load2dTexture("engine\\assets\\textures\\logo.png", false, false));
+	logo->setDiffuseMap(_textureLoader.load2dTexture("engine\\assets\\texture\\logo.png", false, false));
 
 	// Calculate logo resolution
 	SDL_DisplayMode DM;

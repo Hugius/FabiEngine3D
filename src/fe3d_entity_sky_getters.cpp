@@ -104,7 +104,7 @@ const fvec3 FabiEngine3D::sky_getColor(const string& ID) const
 
 const bool FabiEngine3D::sky_isExisting(const string& ID) const
 {
-	return _core->_skyEntityManager.isExisting(ID);
+	return _core->_skyEntityManager.isEntityExisting(ID);
 }
 
 const bool FabiEngine3D::sky_isVisible(const string& ID) const

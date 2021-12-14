@@ -42,7 +42,7 @@ const unordered_map<string, shared_ptr<WaterEntity>>& WaterEntityManager::getEnt
 
 void WaterEntityManager::selectWater(const string& ID)
 {
-	if(isExisting(ID) || ID.empty())
+	if(isEntityExisting(ID) || ID.empty())
 	{
 		_selectedID = ID;
 	}

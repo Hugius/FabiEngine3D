@@ -3,7 +3,7 @@
 
 const bool FabiEngine3D::model_isExisting(const string& ID) const
 {
-	return _core->_modelEntityManager.isExisting(ID);
+	return _core->_modelEntityManager.isEntityExisting(ID);
 }
 
 const bool FabiEngine3D::model_isVisible(const string& ID) const

@@ -50,7 +50,7 @@ const float FabiEngine3D::spotlight_getDistance(const string& ID) const
 
 const bool FabiEngine3D::spotlight_isExisting(const string& ID) const
 {
-	return _core->_spotlightEntityManager.isExisting(ID);
+	return _core->_spotlightEntityManager.isEntityExisting(ID);
 }
 
 const bool FabiEngine3D::spotlight_isVisible(const string& ID) const

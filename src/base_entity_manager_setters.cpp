@@ -297,7 +297,7 @@ void BaseEntityManager::deleteEntity(const string& ID)
 	Logger::throwError("BaseEntityManager::deleteEntity");
 }
 
-void BaseEntityManager::deleteAllEntities()
+void BaseEntityManager::deleteEntities()
 {
 	_skyEntities.clear();
 	_terrainEntities.clear();

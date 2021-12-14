@@ -14,7 +14,7 @@ void FabiEngine3D::pointlight_create(const string& ID)
 
 void FabiEngine3D::pointlight_deleteAll()
 {
-	_core->_pointlightEntityManager.deleteAllEntities();
+	_core->_pointlightEntityManager.deleteEntities();
 }
 
 void FabiEngine3D::pointlight_delete(const string& ID)

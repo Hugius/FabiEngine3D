@@ -14,7 +14,7 @@ void FabiEngine3D::spotlight_create(const string& ID)
 
 void FabiEngine3D::spotlight_deleteAll()
 {
-	_core->_spotlightEntityManager.deleteAllEntities();
+	_core->_spotlightEntityManager.deleteEntities();
 }
 
 void FabiEngine3D::spotlight_delete(const string& ID)

@@ -57,8 +57,8 @@ public:
 
 	// SKY - setters
 	void sky_create(const string& ID);
-	void sky_deleteAll();
 	void sky_delete(const string& ID);
+	void sky_deleteAll();
 	void sky_setVisible(const string& ID, bool value);
 	void sky_selectMainSky(const string& ID);
 	void sky_selectMixSky(const string& ID);
@@ -105,8 +105,8 @@ public:
 
 	// TERRAIN - setters
 	void terrain_create(const string& ID, const string& value);
-	void terrain_deleteAll();
 	void terrain_delete(const string& ID);
+	void terrain_deleteAll();
 	void terrain_setVisible(const string& ID, bool value);
 	void terrain_select(const string& ID);
 	void terrain_setBlendMap(const string& ID, const string& value);
@@ -171,8 +171,8 @@ public:
 
 	// WATER - setters
 	void water_create(const string& ID);
-	void water_deleteAll();
 	void water_delete(const string& ID);
+	void water_deleteAll();
 	void water_setVisible(const string& ID, bool value);
 	void water_select(const string& ID);
 	void water_setSpeed(const string& ID, fvec2 value);
@@ -223,8 +223,8 @@ public:
 
 	// MODEL - setters
 	void model_create(const string& ID, const string& value);
-	void model_deleteAll();
 	void model_delete(const string& ID);
+	void model_deleteAll();
 	void model_deleteGroup(const string& ID);
 	void model_setVisible(const string& ID, bool value);
 	void model_setDiffuseMap(const string& ID, const string& partID, const string& value);
@@ -337,8 +337,8 @@ public:
 
 	// BILLBOARD - setters
 	void billboard_create(const string& ID);
-	void billboard_deleteAll();
 	void billboard_delete(const string& ID);
+	void billboard_deleteAll();
 	void billboard_deleteGroup(const string& ID);
 	void billboard_setDiffuseMap(const string& ID, const string& value);
 	void billboard_setEmissionMap(const string& ID, const string& value);
@@ -408,10 +408,10 @@ public:
 
 	// AABB - setters
 	void aabb_create(const string& ID);
+	void aabb_delete(const string& ID);
+	void aabb_deleteAll();
 	void aabb_setParentEntityID(const string& ID, const string& value);
 	void aabb_setParentEntityType(const string& ID, AabbParentEntityType value);
-	void aabb_deleteAll();
-	void aabb_delete(const string& ID);
 	void aabb_setVisible(const string& ID, bool value);
 	void aabb_setColor(const string& ID, fvec3 value);
 	void aabb_setRaycastResponsive(const string& ID, bool value);
@@ -443,8 +443,8 @@ public:
 
 	// POINTLIGHT - setters
 	void pointlight_create(const string& ID);
-	void pointlight_deleteAll();
 	void pointlight_delete(const string& ID);
+	void pointlight_deleteAll();
 	void pointlight_setVisible(const string& ID, bool value);
 	void pointlight_setPosition(const string& ID, fvec3 value);
 	void pointlight_move(const string& ID, fvec3 change);
@@ -466,8 +466,8 @@ public:
 
 	// SPOTLIGHT - setters
 	void spotlight_create(const string& ID);
-	void spotlight_deleteAll();
 	void spotlight_delete(const string& ID);
+	void spotlight_deleteAll();
 	void spotlight_setVisible(const string& ID, bool value);
 	void spotlight_setPosition(const string& ID, fvec3 value);
 	void spotlight_move(const string& ID, fvec3 change);
@@ -493,8 +493,8 @@ public:
 
 	// REFLECTION - setters
 	void reflection_create(const string& ID);
-	void reflection_deleteAll();
 	void reflection_delete(const string& ID);
+	void reflection_deleteAll();
 	void reflection_setVisible(const string& ID, bool value);
 	void reflection_setPosition(const string& ID, fvec3 value);
 	void reflection_move(const string& ID, fvec3 change);
@@ -509,8 +509,8 @@ public:
 
 	// IMAGE - setters
 	void image_create(const string& ID, bool isCentered);
-	void image_deleteAll();
 	void image_delete(const string& ID);
+	void image_deleteAll();
 	void image_setVisible(const string& ID, bool value);
 	void image_setDiffuseMap(const string& ID, const string& value);
 	void image_setColor(const string& ID, fvec3 value);
@@ -552,8 +552,8 @@ public:
 
 	// TEXT - setters
 	void text_create(const string& ID, bool isCentered, bool isDynamic);
-	void text_deleteAll();
 	void text_delete(const string& ID);
+	void text_deleteAll();
 	void text_setVisible(const string& ID, bool value);
 	void text_setFont(const string& ID, const string& value);
 	void text_setContent(const string& ID, const string& value, float charWidth = -1.0f, float charHeight = -1.0f);

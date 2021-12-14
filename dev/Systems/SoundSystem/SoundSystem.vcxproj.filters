@@ -12,13 +12,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\sound_manager.cpp">
+    <ClCompile Include="..\..\..\src\sound3d_manager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sound_player_lifecycle.cpp">
+    <ClCompile Include="..\..\..\src\sound3d_player_misc.cpp">
       <Filter>Player</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sound_player_sound3d.cpp">
+    <ClCompile Include="..\..\..\src\sound3d_player_control.cpp">
       <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sound2d.cpp">
@@ -27,18 +27,21 @@
     <ClCompile Include="..\..\..\src\sound3d.cpp">
       <Filter>Data</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sound_player_sound2d.cpp">
+    <ClCompile Include="..\..\..\src\sound2d_player_control.cpp">
       <Filter>Player</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\sound_player_misc.cpp">
+    <ClCompile Include="..\..\..\src\sound2d_player_misc.cpp">
       <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound2d_manager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\sound_manager.hpp">
+    <ClInclude Include="..\..\..\src\sound3d_manager.hpp">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\sound_player.hpp">
+    <ClInclude Include="..\..\..\src\sound2d_player.hpp">
       <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\sound2d.hpp">
@@ -46,6 +49,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\sound3d.hpp">
       <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sound2d_manager.hpp">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sound3d_player.hpp">
+      <Filter>Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

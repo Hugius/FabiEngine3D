@@ -20,7 +20,7 @@ const fvec3 FabiEngine3D::reflection_getPosition(const string& ID) const
 
 const bool FabiEngine3D::reflection_isExisting(const string& ID) const
 {
-	return _core->_reflectionEntityManager.isExisting(ID);
+	return _core->_reflectionEntityManager.isEntityExisting(ID);
 }
 
 const bool FabiEngine3D::reflection_isVisible(const string& ID) const

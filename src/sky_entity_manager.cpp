@@ -101,7 +101,7 @@ const unordered_map<string, shared_ptr<SkyEntity>>& SkyEntityManager::getEntitie
 
 void SkyEntityManager::selectMainSky(const string& ID)
 {
-	if(isExisting(ID) || ID.empty())
+	if(isEntityExisting(ID) || ID.empty())
 	{
 		_selectedMainID = ID;
 	}
@@ -113,7 +113,7 @@ void SkyEntityManager::selectMainSky(const string& ID)
 
 void SkyEntityManager::selectMixSky(const string& ID)
 {
-	if(isExisting(ID) || ID.empty())
+	if(isEntityExisting(ID) || ID.empty())
 	{
 		_selectedMixID = ID;
 	}

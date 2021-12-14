@@ -3,7 +3,7 @@
 
 const bool FabiEngine3D::text_isExisting(const string& ID) const
 {
-	return _core->_textEntityManager.isExisting(ID);
+	return _core->_textEntityManager.isEntityExisting(ID);
 }
 
 const bool FabiEngine3D::text_isVisible(const string& ID) const

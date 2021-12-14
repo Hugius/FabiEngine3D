@@ -32,10 +32,10 @@ public:
 	// VOID
 	virtual void update() = 0;
 	void deleteEntity(const string& ID);
-	void deleteAllEntities();
+	void deleteEntities();
 
 	// BOOL
-	const bool isExisting(const string& ID);
+	const bool isEntityExisting(const string& ID);
 
 protected:
 	// VOID

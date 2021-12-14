@@ -42,7 +42,7 @@ const bool FabiEngine3D::aabb_isCollisionResponsive(const string& ID) const
 
 const bool FabiEngine3D::aabb_isExisting(const string& ID) const
 {
-	return _core->_aabbEntityManager.isExisting(ID);
+	return _core->_aabbEntityManager.isEntityExisting(ID);
 }
 
 const bool FabiEngine3D::aabb_isVisible(const string& ID) const

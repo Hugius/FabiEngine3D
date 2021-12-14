@@ -3,7 +3,7 @@
 
 const bool FabiEngine3D::pointlight_isExisting(const string& ID) const
 {
-	return _core->_pointlightEntityManager.isExisting(ID);
+	return _core->_pointlightEntityManager.isEntityExisting(ID);
 }
 
 const  bool FabiEngine3D::pointlight_isVisible(const string& ID) const

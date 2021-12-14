@@ -3,7 +3,7 @@
 
 const bool FabiEngine3D::terrain_isExisting(const string& ID) const
 {
-	return _core->_terrainEntityManager.isExisting(ID);
+	return _core->_terrainEntityManager.isEntityExisting(ID);
 }
 
 const bool FabiEngine3D::terrain_isVisible(const string& ID) const

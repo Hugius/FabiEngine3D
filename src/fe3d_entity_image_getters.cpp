@@ -3,7 +3,7 @@
 
 const bool FabiEngine3D::image_isExisting(const string& ID) const
 {
-	return _core->_imageEntityManager.isExisting(ID);
+	return _core->_imageEntityManager.isEntityExisting(ID);
 }
 
 const fvec2 FabiEngine3D::image_getPosition(const string& ID) const

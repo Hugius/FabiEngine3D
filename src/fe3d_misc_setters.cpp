@@ -228,5 +228,5 @@ void FabiEngine3D::misc_startMillisecondTimer()
 
 void FabiEngine3D::misc_setMaxSoundChannelCount(unsigned int value)
 {
-	_core->_soundPlayer.allocateChannels(value);
+	//_core->_soundPlayer.allocateChannels(value);
 }

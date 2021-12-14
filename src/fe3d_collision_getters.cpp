@@ -28,7 +28,7 @@ const bool FabiEngine3D::collision_checkCameraWithEntity(const string& ID) const
 const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfID, const string& otherID) const
 {
 	// Check if self entity does not exist
-	if(!_core->_aabbEntityManager.isExisting(selfID))
+	if(!_core->_aabbEntityManager.isEntityExisting(selfID))
 	{
 		return "";
 	}

@@ -78,7 +78,7 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 
 void TerrainEntityManager::selectTerrain(const string& ID)
 {
-	if(isExisting(ID) || ID.empty())
+	if(isEntityExisting(ID) || ID.empty())
 	{
 		_selectedID = ID;
 	}

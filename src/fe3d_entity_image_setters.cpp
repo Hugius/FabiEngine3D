@@ -3,7 +3,7 @@
 
 void FabiEngine3D::image_deleteAll()
 {
-	_core->_imageEntityManager.deleteAllEntities();
+	_core->_imageEntityManager.deleteEntities();
 }
 
 void FabiEngine3D::image_create(const string& ID, bool isCentered)

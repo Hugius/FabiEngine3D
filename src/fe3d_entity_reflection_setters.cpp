@@ -8,7 +8,7 @@ void FabiEngine3D::reflection_create(const string& ID)
 
 void FabiEngine3D::reflection_deleteAll()
 {
-	_core->_reflectionEntityManager.deleteAllEntities();
+	_core->_reflectionEntityManager.deleteEntities();
 }
 
 void FabiEngine3D::reflection_delete(const string& ID)

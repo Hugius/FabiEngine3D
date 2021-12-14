@@ -217,10 +217,10 @@ const bool FabiEngine3D::misc_isDebugRenderingEnabled() const
 
 const unsigned int FabiEngine3D::misc_getMaxSoundChannelCount() const
 {
-	return _core->_soundPlayer.getAllocatedChannelCount();
+	//return _core->_soundPlayer.getAllocatedChannelCount();
 }
 
 const unsigned int FabiEngine3D::misc_getUsedSoundChannelCount() const
 {
-	return _core->_soundPlayer.getUsedChannelCount();
+	//return _core->_soundPlayer.getUsedChannelCount();
 }

@@ -42,7 +42,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 	}
 
 	// Update hovered AABB status
-	if(!_core->_aabbEntityManager.isExisting(_hoveredAabbID) || _hoveredAabbID.empty())
+	if(!_core->_aabbEntityManager.isEntityExisting(_hoveredAabbID) || _hoveredAabbID.empty())
 	{
 		_hoveredAabbID = "";
 		_hoveredAabbDistance = -1.0f;
@@ -65,7 +65,7 @@ const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& 
 		}
 
 		// Check if hovered AABB still exists
-		if(_core->_aabbEntityManager.isExisting(_hoveredAabbID))
+		if(_core->_aabbEntityManager.isEntityExisting(_hoveredAabbID))
 		{
 			auto result = (ID == _hoveredAabbID);
 			return make_pair(result, _hoveredAabbDistance);
@@ -112,7 +112,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(cons
 		}
 
 		// Check if hovered AABB is empty or non-existing
-		if(_hoveredAabbID.empty() || !_core->_aabbEntityManager.isExisting(_hoveredAabbID))
+		if(_hoveredAabbID.empty() || !_core->_aabbEntityManager.isEntityExisting(_hoveredAabbID))
 		{
 			return make_pair("", -1.0f);
 		}

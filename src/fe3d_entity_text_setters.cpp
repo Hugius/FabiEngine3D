@@ -3,7 +3,7 @@
 
 void FabiEngine3D::text_deleteAll()
 {
-	_core->_textEntityManager.deleteAllEntities();
+	_core->_textEntityManager.deleteEntities();
 }
 
 void FabiEngine3D::text_create(const string& ID, bool isCentered, bool isDynamic)
@@ -14,7 +14,7 @@ void FabiEngine3D::text_create(const string& ID, bool isCentered, bool isDynamic
 void FabiEngine3D::text_delete(const string& ID)
 {
 	// Check if text if dynamic
-	if(_core->_textEntityManager.isExisting(ID) && _core->_textEntityManager.getEntity(ID)->isDynamic())
+	if(_core->_textEntityManager.isEntityExisting(ID) && _core->_textEntityManager.getEntity(ID)->isDynamic())
 	{
 		_core->_textEntityManager.deleteDynamicTextEntity(ID);
 	}

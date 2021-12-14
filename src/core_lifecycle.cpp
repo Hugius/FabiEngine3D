@@ -10,7 +10,8 @@ Core::Core(FabiEngine3D& fe3d)
 	:
 	_fe3d(fe3d),
 	_window(_libraryLoader),
-	_soundManager(_audioLoader),
+	_sound2dManager(_audioLoader),
+	_sound3dManager(_audioLoader),
 	_shadowGenerator(_renderBus),
 	_textureLoader(_renderBus),
 	_camera(_renderBus, _window),
@@ -206,8 +207,10 @@ void Core::_updateApplication()
 
 			// Sound updates
 			_timer.startDeltaPart("soundUpdate");
-			_soundManager.update();
-			_soundPlayer.update(_camera, _soundManager.getAllSound2ds(), _soundManager.getAllSound3ds());
+			_sound2dManager.update();
+			_sound3dManager.update();
+			_sound2dPlayer.update(_sound2dManager.getSounds());
+			_sound3dPlayer.update(_sound3dManager.getSounds(), _camera);
 			_timer.stopDeltaPart();
 		}
 

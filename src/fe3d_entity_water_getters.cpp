@@ -3,7 +3,7 @@
 
 const bool FabiEngine3D::water_isExisting(const string& ID) const
 {
-	return _core->_waterEntityManager.isExisting(ID);
+	return _core->_waterEntityManager.isEntityExisting(ID);
 }
 
 const bool FabiEngine3D::water_isVisible(const string& ID) const

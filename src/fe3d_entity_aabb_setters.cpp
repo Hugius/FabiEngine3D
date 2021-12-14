@@ -18,7 +18,7 @@ void FabiEngine3D::aabb_setParentEntityType(const string& ID, AabbParentEntityTy
 
 void FabiEngine3D::aabb_deleteAll()
 {
-	_core->_aabbEntityManager.deleteAllEntities();
+	_core->_aabbEntityManager.deleteEntities();
 }
 
 void FabiEngine3D::aabb_delete(const string& ID)

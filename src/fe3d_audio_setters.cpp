@@ -1,55 +1,6 @@
 #include "fe3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::music_addToPlaylist(const string& audioPath)
-{
-	_core->_audioManager.createMusic(audioPath);
-}
-
-void FabiEngine3D::music_clearPlaylist()
-{
-	// Stop before deleting
-	if (_core->_audioPlayer.isMusicStarted())
-	{
-		_core->_audioPlayer.stopMusic();
-	}
-
-	// Delete music
-	_core->_audioManager.deleteMusic();
-}
-
-void FabiEngine3D::music_pause()
-{
-	if (!_core->_audioPlayer.isMusicPlaying())
-	{
-		Logger::throwWarning("Tried to pause music playlist: music is not playing!");
-		return;
-	}
-	if (_core->_audioPlayer.isMusicPaused())
-	{
-		Logger::throwWarning("Tried to pause music playlist: music is already paused!");
-		return;
-	}
-
-	_core->_audioPlayer.pauseMusic();
-}
-
-void FabiEngine3D::music_resume()
-{
-	if (!_core->_audioPlayer.isMusicPaused())
-	{
-		Logger::throwWarning("Tried to resume music playlist: music is not paused!");
-		return;
-	}
-
-	_core->_audioPlayer.resumeMusic();
-}
-
-void FabiEngine3D::music_setVolume(float value)
-{
-	_core->_audioPlayer.setMusicVolume(value);
-}
-
 void FabiEngine3D::sound2d_create(const string& ID, const string& audioPath)
 {
 	_core->_audioManager.createSound2d(ID, audioPath);

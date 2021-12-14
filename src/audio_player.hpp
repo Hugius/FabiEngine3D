@@ -2,7 +2,6 @@
 
 #include "sound2d.hpp"
 #include "sound3d.hpp"
-#include "music.hpp"
 #include "camera.hpp"
 #include "mathematics.hpp"
 
@@ -13,18 +12,14 @@
 using std::string;
 using std::vector;
 
-class AudioPlayer final
+class SoundPlayer final
 {
 public:
-	AudioPlayer();
+	SoundPlayer();
 
 	// VOID
 	void allocateChannels(unsigned int count);
-	void update(Camera& camera, vector<Music>& mucisList, vector<Sound2d>& sound2dList, vector<Sound3d>& sound3dList);
-	void pauseMusic();
-	void resumeMusic();
-	void stopMusic();
-	void setMusicVolume(float volume);
+	void update(Camera& camera, vector<Sound2d>& sound2dList, vector<Sound3d>& sound3dList);
 	void playSound2d(Sound2d& sound, int loops, unsigned int fadeMS, bool mustForcePlay);
 	void pauseSound2d(Sound2d& sound);
 	void resumeSound2d(Sound2d& sound);
@@ -40,18 +35,12 @@ public:
 	void resumeAllSound3d(vector<Sound3d>& sounds);
 	void stopAllSound3d(vector<Sound3d>& sounds);
 
-	// FLOAT
-	const float getMusicVolume() const;
-
 	// UNSIGNED INT
 	const unsigned int getUsedChannelCount() const;
 	const unsigned int getAllocatedChannelCount() const;
 
 	// BOOL
 	const bool isChannelAvailable() const;
-	const bool isMusicStarted() const;
-	const bool isMusicPlaying() const;
-	const bool isMusicPaused() const;
 	const bool isSound2dStarted(Sound2d& sound) const;
 	const bool isSound2dPlaying(Sound2d& sound) const;
 	const bool isSound2dPaused(Sound2d& sound) const;

@@ -1,40 +1,6 @@
 #include "fe3d.hpp"
 #include "core_engine.hpp"
 
-#include <algorithm>
-
-const bool FabiEngine3D::music_isStarted() const
-{
-	return _core->_audioPlayer.isMusicStarted();
-}
-
-const bool FabiEngine3D::music_isPlaying() const
-{
-	return _core->_audioPlayer.isMusicPlaying();
-}
-
-const bool FabiEngine3D::music_isPaused() const
-{
-	return _core->_audioPlayer.isMusicPaused();
-}
-
-const vector<string> FabiEngine3D::music_getAudioPaths() const
-{
-	vector<string> result;
-
-	for (const auto& music : _core->_audioManager.getAllMusic())
-	{
-		result.push_back(music.getAudioPath());
-	}
-
-	return result;
-}
-
-const float FabiEngine3D::music_getVolume() const
-{
-	return _core->_audioPlayer.getMusicVolume();
-}
-
 const vector<string> FabiEngine3D::sound2d_getAllIDs() const
 {
 	vector<string> result;

@@ -98,15 +98,6 @@ void ScriptExecutor::pause()
 		// Pause 3D sounds
 		_fe3d.sound3d_pauseAll();
 
-		// Save music state
-		_wasMusicPaused = _fe3d.music_isPaused();
-
-		// Pause music
-		if(_fe3d.music_isPlaying())
-		{
-			_fe3d.music_pause();
-		}
-
 		// Pause engine updates & script execution
 		_fe3d.application_pause();
 		_isRunning = false;
@@ -147,12 +138,6 @@ void ScriptExecutor::resume()
 			_fe3d.sound3d_pause(soundID);
 		}
 
-		// Reset music
-		if(_fe3d.music_isPaused() && !_wasMusicPaused)
-		{
-			_fe3d.music_resume();
-		}
-
 		// Resume game logic
 		_fe3d.application_resume();
 		_isRunning = true;
@@ -182,7 +167,6 @@ void ScriptExecutor::unload()
 		_wasCursorVisible = false;
 		_wasVsyncEnabled = false;
 		_wasTimerStarted = false;
-		_wasMusicPaused = false;
 		_mustSkipUpdate = false;
 		_pausedSoundIDs.clear();
 	}
@@ -218,7 +202,6 @@ void ScriptExecutor::_validateExecution()
 		_wasCursorVisible = false;
 		_wasVsyncEnabled = false;
 		_wasTimerStarted = false;
-		_wasMusicPaused = false;
 		_mustSkipUpdate = false;
 		_pausedSoundIDs.clear();
 	}

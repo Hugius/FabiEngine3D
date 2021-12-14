@@ -594,20 +594,6 @@ public:
 	const bool text_isMirroredVertically(const string& ID) const;
 	const bool text_isWireframed(const string& ID) const;
 
-	// MUSIC - setters
-	void music_addToPlaylist(const string& audioPath);
-	void music_clearPlaylist();
-	void music_setVolume(float value);
-	void music_pause();
-	void music_resume();
-
-	// MUSIC - getters
-	const vector<string> music_getAudioPaths() const;
-	const float music_getVolume() const;
-	const bool music_isStarted() const;
-	const bool music_isPlaying() const;
-	const bool music_isPaused() const;
-
 	// SOUND2D - setters
 	void sound2d_create(const string& ID, const string& audioPath);
 	void sound2d_delete(const string& ID);
@@ -915,14 +901,12 @@ public:
 	void misc_clearFontCache(const string& filePath);
 	void misc_clearBitmapCache(const string& filePath);
 	void misc_clearSoundCache(const string& filePath);
-	void misc_clearMusicCache(const string& filePath);
 	void misc_cacheMeshesMultiThreaded(const vector<string>& filePaths);
 	void misc_cache2dTexturesMultiThreaded(const vector<string>& filePaths);
 	void misc_cache3dTexturesMultiThreaded(const vector<array<string, 6>>& filePaths);
 	void misc_cacheBitmapsMultiThreaded(const vector<string>& filePaths);
 	void misc_cacheFontsMultiThreaded(const vector<string>& filePaths);
 	void misc_cacheSoundsMultiThreaded(const vector<string>& filePaths);
-	void misc_cacheMusicsMultiThreaded(const vector<string>& filePaths);
 	void misc_startMillisecondTimer();
 	void misc_setMaxAudioChannelCount(unsigned int value);
 

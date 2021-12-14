@@ -53,8 +53,6 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_misc_getters.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_model_setters.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_model_getters.cpp" />
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_music_setters.cpp" />
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_music_getters.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_raycast_getters.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_reflection_setters.cpp" />
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_reflection_getters.cpp" />

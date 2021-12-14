@@ -16,13 +16,10 @@ public:
 
 	// VOID
 	void cacheChunksMultiThreaded(const vector<string>& filePaths);
-	void cacheMusicsMultiThreaded(const vector<string>& filePaths);
 	void clearChunkCache(const string& filePath);
-	void clearMusicCache(const string& filePath);
 
 	// MISCELLANEOUS
 	Mix_Chunk* loadChunk(const string& filePath);
-	Mix_Music* loadMusic(const string& filePath);
 
 private:
 	// VOID
@@ -33,9 +30,7 @@ private:
 
 	// MISCELLANEOUS
 	Mix_Chunk* _loadChunk(const string& filePath, unsigned char* data) const;
-	Mix_Music* _loadMusic(const string& filePath) const;
 
 	// MISCELLANEOUS
 	map<string, Mix_Chunk*> _chunkCache;
-	map<string, Mix_Music*> _musicCache;
 };

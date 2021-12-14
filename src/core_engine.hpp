@@ -24,7 +24,7 @@
 #include "raycaster.hpp"
 #include "camera_collision_handler.hpp"
 #include "timer.hpp"
-#include "audio_manager.hpp"
+#include "sound_manager.hpp"
 #include "audio_player.hpp"
 #include "library_loader.hpp"
 #include "networking_server.hpp"
@@ -62,12 +62,12 @@ private:
 	RenderBus _renderBus;
 	CameraCollisionHandler _cameraCollisionHandler;
 	Timer _timer;
-	AudioPlayer _audioPlayer;
+	SoundPlayer _audioPlayer;
 	InputHandler _inputHandler;
 	NetworkingServer _networkingServer;
 	NetworkingClient _networkingClient;
 	Window _window;
-	AudioManager _audioManager;
+	SoundManager _audioManager;
 	ShadowGenerator _shadowGenerator;
 	TextureLoader _textureLoader;
 	Camera _camera;

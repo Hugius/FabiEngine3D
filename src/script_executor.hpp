@@ -35,7 +35,6 @@ private:
 	bool _wasCursorVisible = false;
 	bool _wasVsyncEnabled = false;
 	bool _wasTimerStarted = false;
-	bool _wasMusicPaused = false;
 	bool _mustSkipUpdate = false;
 
 	// MISCELLANEOUS

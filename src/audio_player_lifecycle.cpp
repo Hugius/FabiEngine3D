@@ -4,35 +4,13 @@
 using std::clamp;
 using std::max;
 
-AudioPlayer::AudioPlayer()
+SoundPlayer::SoundPlayer()
 {
 	Mix_AllocateChannels(0);
 }
 
-void AudioPlayer::update(Camera& camera, vector<Music>& mucisList, vector<Sound2d>& sound2dList, vector<Sound3d>& sound3dList)
+void SoundPlayer::update(Camera& camera, vector<Sound2d>& sound2dList, vector<Sound3d>& sound3dList)
 {
-	// Update music
-	if (!mucisList.empty())
-	{
-		// Check if music is not started
-		if (!isMusicStarted())
-		{
-			// Select music
-			unsigned int musicIndex;
-			if (mucisList.size() == 1)
-			{
-				musicIndex = 0;
-			}
-			else
-			{
-				musicIndex = Math::getRandomNumber(0, static_cast<int>(mucisList.size() - 1));
-			}
-
-			// Play music
-			Mix_PlayMusic(mucisList[musicIndex].getDataPointer(), 0);
-		}
-	}
-
 	// Update 2D sounds
 	for(auto& sound : sound2dList)
 	{

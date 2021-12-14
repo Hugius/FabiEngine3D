@@ -162,9 +162,6 @@
     <ClCompile Include="..\..\..\src\script_condition_statement.cpp">
       <Filter>Data Structures</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_music_setters.cpp">
-      <Filter>Execution\Interpreter\Function\Audio</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sound2d_setters.cpp">
       <Filter>Execution\Interpreter\Function\Audio</Filter>
     </ClCompile>
@@ -212,9 +209,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_misc_getters.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_music_getters.cpp">
-      <Filter>Execution\Interpreter\Function\Audio</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sound2d_getters.cpp">
       <Filter>Execution\Interpreter\Function\Audio</Filter>

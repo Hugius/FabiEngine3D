@@ -23,12 +23,6 @@ AudioLoader::~AudioLoader()
 	{
 		Mix_FreeChunk(element.second);
 	}
-
-	// Delete music
-	for(const auto& element : _musicCache)
-	{
-		Mix_FreeMusic(element.second);
-	}
 }
 
 void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
@@ -89,57 +83,6 @@ void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 	}
 }
 
-void AudioLoader::cacheMusicsMultiThreaded(const vector<string>& filePaths)
-{
-	// Temporary values
-	vector<future<Mix_Music*>> threads;
-	vector<bool> threadStatuses;
-
-	// Remove duplicates
-	auto tempFilePaths = set<string>(filePaths.begin(), filePaths.end());
-	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
-
-	// Start all loading threads
-	for(const auto& filePath : uniqueFilePaths)
-	{
-		// Check if music is not already cached
-		if(_musicCache.find(filePath) == _musicCache.end())
-		{
-			threads.push_back(async(launch::async, &AudioLoader::_loadMusic, this, filePath));
-			threadStatuses.push_back(false);
-		}
-		else
-		{
-			threadStatuses.push_back(true);
-		}
-	}
-
-	// Wait for all threads to finish
-	for(size_t i = 0; i < threads.size(); i++)
-	{
-		// Check if music is not processed yet
-		if(!threadStatuses[i])
-		{
-			// Retrieve return value
-			auto loadedMusic = threads[i].get();
-
-			// Check if music loading failed
-			if(loadedMusic == nullptr)
-			{
-				Logger::throwWarning("Cannot load audio file \"", uniqueFilePaths[i], "\"!");
-			}
-			else
-			{
-				// Cache music
-				_musicCache[uniqueFilePaths[i]] = loadedMusic;
-
-				// Logging
-				_throwLoadedMessage(uniqueFilePaths[i]);
-			}
-		}
-	}
-}
-
 Mix_Chunk* AudioLoader::loadChunk(const string& filePath)
 {
 BEGIN:
@@ -185,52 +128,11 @@ BEGIN:
 	}
 }
 
-Mix_Music* AudioLoader::loadMusic(const string& filePath)
-{
-BEGIN:
-	// Search cache
-	auto cacheIterator = _musicCache.find(filePath);
-
-	// Return from cache
-	if(cacheIterator != _musicCache.end())
-	{
-		return cacheIterator->second;
-	}
-
-	// Load music file
-	auto music = _loadMusic(filePath);
-
-	// Check if music loading failed
-	if(music == nullptr)
-	{
-		return nullptr;
-	}
-	else
-	{
-		// Logging
-		_throwLoadedMessage(filePath);
-
-		// Cache music
-		_musicCache.insert(make_pair(filePath, music));
-
-		// Return cached music
-		goto BEGIN;
-	}
-}
-
 void AudioLoader::clearChunkCache(const string& filePath)
 {
 	if(_chunkCache.find(filePath) != _chunkCache.end())
 	{
 		_chunkCache.erase(filePath);
-	}
-}
-
-void AudioLoader::clearMusicCache(const string& filePath)
-{
-	if(_musicCache.find(filePath) != _musicCache.end())
-	{
-		_musicCache.erase(filePath);
 	}
 }
 
@@ -246,23 +148,6 @@ Mix_Chunk* AudioLoader::_loadChunk(const string& filePath, unsigned char* data) 
 	}
 
 	return chunk;
-}
-
-Mix_Music* AudioLoader::_loadMusic(const string& filePath) const
-{
-	// Get application root directory
-	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-
-	// Load SDL music
-	Mix_Music* music = Mix_LoadMUS((rootDirectoryPath + filePath).c_str());
-
-	// Check if music loading failed
-	if(music == nullptr)
-	{
-		Logger::throwWarning("Cannot load audio file \"", filePath, "\"!");
-	}
-
-	return music;
 }
 
 void AudioLoader::_throwLoadedMessage(const string& filePath)

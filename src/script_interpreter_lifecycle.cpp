@@ -242,9 +242,6 @@ void ScriptInterpreter::unload()
 		}
 	}
 
-	// Reset audio
-	_fe3d.music_clearPlaylist();
-
 	// Stop 3D animations
 	_animation3dEditor.stopAllAnimations();
 

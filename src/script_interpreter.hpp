@@ -115,8 +115,6 @@ private:
 	const bool _executeFe3dLightingGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dGraphicsSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dGraphicsGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
-	const bool _executeFe3dMusicSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
-	const bool _executeFe3dMusicGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dFilesystemSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dFilesystemGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dWorldSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);

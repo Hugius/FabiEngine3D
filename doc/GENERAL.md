@@ -2,12 +2,12 @@
 
 ## 1. Features
 
-### 1.1 Asset Loading
+### 1.1 Assets
 
 - Multithreaded OBJ mesh file loading
 - Multithreaded PNG texture file loading
 - Multithreaded WAV audio file loading
-- Efficient (pre-)caching system
+- Efficient cache management
 
 ### 1.2 Rendering
 
@@ -21,16 +21,15 @@
 ### 1.3 Physics
 
 - 3D AABB system
-- 3D Collision detection system
-- 3D Collision response system
-- 3D Raycasting system
+- 3D collision detection system
+- 3D collision response system
+- 3D raycasting system
 - 3D camera system
 
 ### 1.4 Audio
 
-- Custom music playlist
-- 2D audio playback
-- 3D audio playback
+- 2D sound
+- 3D sound
 
 ### 1.5 Scripting
 
@@ -64,26 +63,25 @@
 ~
 └── app
   └── binaries (do NOT touch)
-  └── engine (do NOT touch)
+  └── engine (do NOT touch)
   └── projects
     └── <your_project>
       └── assets
         └── audio
-        └── fonts
-        └── meshes
-        └── textures
-          └── blend_maps
-          └── cube_maps
-          └── diffuse_maps
-          └── displacement_maps
-          └── dudv_maps
-          └── emission_maps
-          └── flare_maps
-          └── height_maps
-          └── image_maps
-          └── normal_maps
-          └── reflection_maps
-          └── specular_maps
+        └── font
+        └── mesh
+        └── texture
+          └── blend_map
+          └── cube_map
+          └── diffuse_map
+          └── displacement_map
+          └── dudv_map
+          └── emission_map
+          └── flare_map
+          └── height_map
+          └── normal_map
+          └── reflection_map
+          └── specular_map
       └── data (do NOT touch)
       └── saves (do NOT touch)
       └── scripts (do NOT touch)
@@ -101,9 +99,9 @@
   - `projects\`: contains all your projects
     - `assets\`: contains all project assets
       - `audio\`: contains all project audio files
-      - `fonts\`: contains all project font files
-      - `meshes\`: contains all project mesh files
-      - `textures\`: contains all project texture files
+      - `font\`: contains all project font files
+      - `mesh\`: contains all project mesh files
+      - `texture\`: contains all project texture files
     - `data\`: contains all project editor data
     - `saves\`: contains all project save files
     - `worlds\`: contains all project world files

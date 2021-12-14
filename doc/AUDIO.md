@@ -1,24 +1,16 @@
-# Audio
+# Sound
 
 ## 1. General
 
-- There are 2 types of audio: music (2D) and sound (2D & 3D)
-- Musics play automatically (and randomly) from a playlist
-- Only 1 music can be playing at a time
-- Sounds play only when you start it
-- Multiple sounds can be playing at the same time
+- There are 2 types of audio: sound2D & sound3D.
+- Sounds play on unique sound channels.
+- Multiple sounds can be playing at the same time.
 
-- **Audio Channels**: the amount of allocated audio channels
+- **Sound Channels**: the amount of allocated audio channels
   - Type: `integer`
   - Constraints: between `64` and `512`
 
-## 2. Music Properties
-
-- **Audio Path**: the path of the audio file
-  - Type: `string`
-  - Constraints: none
-
-## 3. Sound 2D Properties
+## 2. Sound2D Properties
 
 - **ID**: the identifier of the sound
   - Type: `string`
@@ -30,7 +22,7 @@
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
 
-## 4. Sound 3D Properties
+## 3. Sound3D Properties
 
 - **ID**: the identifier of the sound
   - Type: `string`

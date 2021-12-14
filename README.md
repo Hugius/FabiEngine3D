@@ -2,7 +2,7 @@
 
 ## Introduction
 
-FabiEngine3D is a game engine, created for simple 3D video games on PC. It contains various features such as: multithreaded asset loading, 2D & 3D rendering, keyboard & mouse input, 3D physics, 2D & 3D audio, networking, custom scripting and an engine GUI to work with. The engine only uses 2 libraries: OpenGL 4.6 & SDL 2. It is written in C++20 and works only on Microsoft Windows. Why is it called FabiEngine you might ask? I named my game engine after my lovely wife Fabienne!
+FabiEngine3D is a game engine, created for simple 3D video games on PC. It contains various features such as: multithreaded asset loading, 2D/3D rendering, keyboard/mouse input, 3D physics, 2D/3D audio, networking, custom scripting and an engine GUI to work with. The engine only uses 2 libraries: OpenGL 4.6 & SDL 2. It is written in C++20 and works only on Microsoft Windows. Why is it called FabiEngine you might ask? I named my game engine after my lovely wife Fabienne!
 
 `Development started on April 7, 2020.`
 
@@ -56,9 +56,9 @@ A multiplayer first person shooter game based in a science-fiction setting: a sp
 - [Terrain Editor](doc/TERRAIN_EDITOR.md)
 - [Water Editor](doc/WATER_EDITOR.md)
 - [Model Editor](doc/MODEL_EDITOR.md)
-- [Animation Editor](doc/ANIMATION_EDITOR.md)
 - [Billboard Editor](doc/BILLBOARD_EDITOR.md)
-- [Audio Editor](doc/AUDIO_EDITOR.md)
+- [Animation Editor](doc/ANIMATION_EDITOR.md)
+- [Sound Editor](doc/SOUND_EDITOR.md)
 - [World Editor](doc/WORLD_EDITOR.md)
 - [Script Editor](doc/SCRIPT_EDITOR.md)
 

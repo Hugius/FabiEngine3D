@@ -331,20 +331,25 @@ void Animation3dEditor::_updateAnimationChoosing()
 				// Select animation
 				_currentAnimationID = selectedButtonID;
 
-				// Go to next screen
+				// Check if not deleting
 				if(!_isDeletingAnimation)
 				{
+					// Go to next screen
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
+
+					// Show preview model
+					if(_fe3d.model_isExisting(_getAnimation(selectedButtonID)->getPreviewModelID()))
+					{
+						_fe3d.model_setVisible(_getAnimation(selectedButtonID)->getPreviewModelID(), true);
+					}
+
+					// Miscellaneous
 					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), "Animation: " + selectedButtonID, 0.025f);
 					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), true);
 					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), true);
 				}
 
 				// Miscellaneous
-				if(_fe3d.model_isExisting(_getAnimation(selectedButtonID)->getPreviewModelID()))
-				{
-					_fe3d.model_setVisible(_getAnimation(selectedButtonID)->getPreviewModelID(), true);
-				}
 				_gui.getGlobalScreen()->deleteChoiceForm("animationList");
 				_isChoosingAnimation = false;
 			}

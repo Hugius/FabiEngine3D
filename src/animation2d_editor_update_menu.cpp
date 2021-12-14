@@ -22,17 +22,12 @@ void Animation2dEditor::_updateMainMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			_gui.getGlobalScreen()->createChoiceForm("animationList", "Edit Animation", fvec2(-0.5f, 0.1f), getAllAnimationIDs());
+			_gui.getGlobalScreen()->createChoiceForm("animationList", "Edit Animation", fvec2(0.0f, 0.1f), getAllAnimationIDs());
 			_isChoosingAnimation = true;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			auto IDs = getAllAnimationIDs();
-			for(auto& ID : IDs)
-			{
-				ID = ID.substr(1);
-			}
-			_gui.getGlobalScreen()->createChoiceForm("animationList", "Delete Animation", fvec2(-0.5f, 0.1f), IDs);
+			_gui.getGlobalScreen()->createChoiceForm("animationList", "Delete Animation", fvec2(0.0f, 0.1f), getAllAnimationIDs());
 			_isChoosingAnimation = true;
 			_isDeletingAnimation = true;
 		}
@@ -71,8 +66,19 @@ void Animation2dEditor::_updateChoiceMenu()
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
+			// Stop animation if playing
+			if(isAnimationStarted(_currentAnimationID, PREVIEW_BILLBOARD_ID))
+			{
+				stopAnimation(_currentAnimationID, PREVIEW_BILLBOARD_ID);
+			}
+
+			// Hide preview billboard
 			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
 			_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
+
+			// Miscellaneous
+			_currentAnimationID = "";
+			_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), false);
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation2dEditorMenuMain");
 			return;
 		}

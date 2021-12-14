@@ -102,7 +102,7 @@ void Animation3dEditor::_updateChoiceMenu()
 				}
 			}
 
-			// Reset some values
+			// Miscellaneous
 			_currentAnimationID = "";
 			_currentFrameIndex = 0;
 			_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), false);

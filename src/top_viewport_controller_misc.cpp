@@ -6,6 +6,86 @@
 
 using std::ofstream;
 
+using TVPC = TopViewportController;
+
+TopViewportController::TopViewportController(FabiEngine3D& fe3d,
+											 EngineGuiManager& gui,
+											 SettingsEditor& settingsEditor,
+											 SkyEditor& skyEditor,
+											 TerrainEditor& terrainEditor,
+											 WaterEditor& waterEditor,
+											 ModelEditor& modelEditor,
+											 BillboardEditor& billboardEditor,
+											 Animation3dEditor& animation3dEditor,
+											 Animation2dEditor& animation2dEditor,
+											 SoundEditor& soundEditor,
+											 WorldEditor& worldEditor,
+											 ScriptEditor& scriptEditor)
+	:
+	BaseViewportController(fe3d, gui),
+	_settingsEditor(settingsEditor),
+	_skyEditor(skyEditor),
+	_terrainEditor(terrainEditor),
+	_waterEditor(waterEditor),
+	_modelEditor(modelEditor),
+	_billboardEditor(billboardEditor),
+	_animation3dEditor(animation3dEditor),
+	_animation2dEditor(animation2dEditor),
+	_soundEditor(soundEditor),
+	_worldEditor(worldEditor),
+	_scriptEditor(scriptEditor)
+{
+
+}
+
+void TopViewportController::initialize()
+{
+	// Project window
+	_gui.getViewport("top")->createWindow("projectWindow", fvec2(-0.25f, 0.0f), fvec2(0.9875f, 1.5f), TVPC::FRAME_COLOR);
+	auto projectWindow = _gui.getViewport("top")->getWindow("projectWindow");
+
+	// Execution window
+	_gui.getViewport("top")->createWindow("executionWindow", fvec2(0.125f, 0.0f), fvec2(0.4875f, 1.5f), TVPC::FRAME_COLOR);
+	auto executionWindow = _gui.getViewport("top")->getWindow("executionWindow");
+
+	// Miscellaneous window
+	_gui.getViewport("top")->createWindow("miscellaneousWindow", fvec2(0.375f, 0.0f), fvec2(0.4875f, 1.5f), TVPC::FRAME_COLOR);
+	auto miscellaneousWindow = _gui.getViewport("top")->getWindow("miscellaneousWindow");
+
+	// Project screen
+	projectWindow->createScreen("main");
+	projectWindow->setActiveScreen("main");
+	projectWindow->getScreen("main")->createButton("newProject", fvec2(-0.767f, 0.0f), fvec2(0.15f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "NEW", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
+	projectWindow->getScreen("main")->createButton("loadProject", fvec2(-0.384f, 0.0f), fvec2(0.2f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "LOAD", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
+	projectWindow->getScreen("main")->createButton("saveProject", fvec2(0.0f, 0.0f), fvec2(0.2f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "SAVE", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
+	projectWindow->getScreen("main")->createButton("deleteProject", fvec2(0.384f, 0.0f), fvec2(0.3f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "DELETE", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
+	projectWindow->getScreen("main")->createButton("quitEngine", fvec2(0.767f, 0.0f), fvec2(0.2f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "QUIT", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
+
+	// Execution screen
+	executionWindow->createScreen("main");
+	executionWindow->setActiveScreen("main");
+	executionWindow->getScreen("main")->createButton("start", fvec2(-0.73f, 0.0f), fvec2(0.2f, 1.75f), "start.png", fvec3(2.0f), true, true, true);
+	executionWindow->getScreen("main")->createButton("pause", fvec2(-0.36f, 0.0f), fvec2(0.2f, 1.75f), "pause.png", fvec3(2.0f), true, true, true);
+	executionWindow->getScreen("main")->createButton("restart", fvec2(0.0f, 0.0f), fvec2(0.2f, 1.75f), "restart.png", fvec3(2.0f), true, true, true);
+	executionWindow->getScreen("main")->createButton("stop", fvec2(0.36f, 0.0f), fvec2(0.2f, 1.75f), "stop.png", fvec3(2.0f), true, true, true);
+	executionWindow->getScreen("main")->createButton("debug", fvec2(0.73f, 0.0f), fvec2(0.2f, 1.75f), "debug.png", fvec3(2.0f), true, true, true);
+
+	// Miscellaneous screen
+	miscellaneousWindow->createScreen("main");
+	miscellaneousWindow->setActiveScreen("main");
+	miscellaneousWindow->getScreen("main")->createButton("uncache", fvec2(-0.5875f, 0.0f), fvec2(0.55f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "UNCACHE", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
+	miscellaneousWindow->getScreen("main")->createButton("export", fvec2(0.075f, 0.0f), fvec2(0.5f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "EXPORT", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
+	miscellaneousWindow->getScreen("main")->createButton("docs", fvec2(0.6625f, 0.0f), fvec2(0.4f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "DOCS", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
+}
+
+void TopViewportController::update()
+{
+	_updateProjectScreenManagement();
+	_updateGameScreenManagement();
+	_updateMiscScreenManagement();
+	_updateMiscellaneous();
+}
+
 const bool TopViewportController::isScriptStarted() const
 {
 	if(_currentProjectID.empty())
@@ -50,109 +130,6 @@ void TopViewportController::_updateMiscellaneous()
 	screen->getButton("scriptEditor")->setHoverable(isHoverable);
 }
 
-void TopViewportController::_updateProjectCreating()
-{
-	if(_isCreatingProject)
-	{
-		// Temporary values
-		string newProjectID;
-
-		// Check if user filled in a new ID
-		if(_gui.getGlobalScreen()->checkValueForm("newProjectID", newProjectID))
-		{
-			// Temporary values
-			const string projectDirectoryPath = (Tools::getRootDirectoryPath() + "projects\\");
-			const string newProjectDirectoryPath = (projectDirectoryPath + newProjectID + "\\");
-
-			// Check if game directory exists
-			if(!Tools::isDirectoryExisting(projectDirectoryPath))
-			{
-				Logger::throwWarning("Directory `projects\\` is missing!");
-				return;
-			}
-
-			if(newProjectID.find(' ') != string::npos) // ID contains spaces
-			{
-				Logger::throwWarning("New project name cannot contain any spaces!");
-				return;
-			}
-			else if(Tools::isDirectoryExisting(newProjectDirectoryPath)) // Project already exists
-			{
-				Logger::throwWarning("Project \"" + newProjectID + "\"" + " already exists!");
-				return;
-			}
-			else if(std::any_of(newProjectID.begin(), newProjectID.end(), isupper)) // ID contains capitals
-			{
-				Logger::throwWarning("New project name cannot contain any capitals!");
-				return;
-			}
-			else // Project not existing
-			{
-				// Generate new project directory
-				Tools::createDirectory(newProjectDirectoryPath);
-
-				// Generate project subdirectories
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\audio\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\font\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\mesh\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\blend_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\cube_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\diffuse_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\displacement_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\dudv_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\emission_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\flare_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\height_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\normal_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\reflection_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\specular_map\\");
-				Tools::createDirectory(newProjectDirectoryPath + "data\\");
-				Tools::createDirectory(newProjectDirectoryPath + "saves\\");
-				Tools::createDirectory(newProjectDirectoryPath + "worlds\\");
-				Tools::createDirectory(newProjectDirectoryPath + "worlds\\custom\\");
-				Tools::createDirectory(newProjectDirectoryPath + "worlds\\editor\\");
-				Tools::createDirectory(newProjectDirectoryPath + "scripts\\");
-
-				// Create new empty project files
-				auto animation3dFile = ofstream(newProjectDirectoryPath + "data\\animation3d.fe3d");
-				auto animation2dFile = ofstream(newProjectDirectoryPath + "data\\animation2d.fe3d");
-				auto billboardFile = ofstream(newProjectDirectoryPath + "data\\billboard.fe3d");
-				auto modelFile = ofstream(newProjectDirectoryPath + "data\\model.fe3d");
-				auto settingsFile = ofstream(newProjectDirectoryPath + "data\\settings.fe3d");
-				auto skyFile = ofstream(newProjectDirectoryPath + "data\\sky.fe3d");
-				auto soundFile = ofstream(newProjectDirectoryPath + "data\\sound.fe3d");
-				auto terrainFile = ofstream(newProjectDirectoryPath + "data\\terrain.fe3d");
-				auto waterFile = ofstream(newProjectDirectoryPath + "data\\water.fe3d");
-				animation3dFile.close();
-				animation2dFile.close();
-				billboardFile.close();
-				modelFile.close();
-				settingsFile.close();
-				skyFile.close();
-				soundFile.close();
-				terrainFile.close();
-				waterFile.close();
-
-				// Load current project
-				_currentProjectID = newProjectID;
-				_applyProjectChange();
-
-				// Create default settings
-				_settingsEditor.loadDefaultSettings();
-				_settingsEditor.saveSettingsToFile();
-
-				// Logging
-				Logger::throwInfo("New project \"" + _currentProjectID + "\" created!");
-
-				// Miscellaneous
-				_isCreatingProject = false;
-			}
-		}
-	}
-}
-
 const bool TopViewportController::_prepareProjectChoosing(const string& title) const
 {
 	// Temporary values
@@ -172,135 +149,6 @@ const bool TopViewportController::_prepareProjectChoosing(const string& title) c
 	_gui.getGlobalScreen()->createChoiceForm("projectList", title, fvec2(0.0f, 0.1f), projectIDs);
 
 	return true;
-}
-
-void TopViewportController::_updateProjectLoading()
-{
-	if(_isLoadingProject)
-	{
-		// Temporary values
-		const string clickedButtonID = _gui.getGlobalScreen()->checkChoiceForm("projectList");
-		const string projectDirectoryPath = string(Tools::getRootDirectoryPath() + "projects\\" + clickedButtonID + "\\");
-
-		// Check if user clicked a project ID
-		if(clickedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-		{
-			// Check if project corrupted
-			if(isProjectCorrupted(projectDirectoryPath))
-			{
-				Logger::throwWarning("Cannot load project: missing files/directories!");
-				return;
-			}
-
-			// Load current project
-			_currentProjectID = clickedButtonID;
-			_applyProjectChange();
-
-			// Load settings for this project
-			_settingsEditor.loadSettingsFromFile();
-
-			// Cache meshes
-			_fe3d.misc_cacheMeshesMultiThreaded(_modelEditor.getAllMeshPathsFromFile());
-
-			// Cache 2D textures
-			vector<string> texturePaths2D;
-			texturePaths2D.insert(texturePaths2D.end(),
-								_terrainEditor.getAllTexturePathsFromFile().begin(),
-								_terrainEditor.getAllTexturePathsFromFile().end());
-			texturePaths2D.insert(texturePaths2D.end(),
-								_waterEditor.getAllTexturePathsFromFile().begin(),
-								_waterEditor.getAllTexturePathsFromFile().end());
-			texturePaths2D.insert(texturePaths2D.end(),
-								_modelEditor.getAllTexturePathsFromFile().begin(),
-								_modelEditor.getAllTexturePathsFromFile().end());
-			texturePaths2D.insert(texturePaths2D.end(),
-								_billboardEditor.getAllTexturePathsFromFile().begin(),
-								_billboardEditor.getAllTexturePathsFromFile().end());
-			_fe3d.misc_cache2dTexturesMultiThreaded(texturePaths2D);
-
-			// Cache 3D textures
-			_fe3d.misc_cache3dTexturesMultiThreaded(_skyEditor.getAllTexturePathsFromFile());
-
-			// Cache bitmaps
-			_fe3d.misc_cacheBitmapsMultiThreaded(_terrainEditor.getAllBitmapPathsFromFile());
-
-			// Cache fonts
-			_fe3d.misc_cacheFontsMultiThreaded(_billboardEditor.getAllFontPathsFromFile());
-
-			// Cache sounds
-			_fe3d.misc_cacheSoundsMultiThreaded(_soundEditor.getAllAudioPathsFromFile());
-
-			// Logging
-			Logger::throwInfo("Existing project \"" + _currentProjectID + "\" loaded!");
-
-			// Miscellaneous
-			_isLoadingProject = false;
-			_gui.getGlobalScreen()->deleteChoiceForm("projectList");
-		}
-		else if(_gui.getGlobalScreen()->isChoiceFormCancelled("projectList"))
-		{
-			_isLoadingProject = false;
-			_gui.getGlobalScreen()->deleteChoiceForm("projectList");
-		}
-	}
-}
-
-void TopViewportController::_updateProjectDeleting()
-{
-	if(_isDeletingProject)
-	{
-		// Temporary values
-		static string chosenButtonID = "";
-		string clickedButtonID = _gui.getGlobalScreen()->checkChoiceForm("projectList");
-
-		// Check if user clicked a project ID
-		if(clickedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-		{
-			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
-			chosenButtonID = clickedButtonID;
-			_gui.getGlobalScreen()->deleteChoiceForm("projectList");
-		}
-		else if(_gui.getGlobalScreen()->isChoiceFormCancelled("projectList"))
-		{
-			_isDeletingProject = false;
-			_gui.getGlobalScreen()->deleteChoiceForm("projectList");
-		}
-
-		// Update answer forms
-		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
-		{
-			// Check if deleting currently opened project
-			if(chosenButtonID == _currentProjectID)
-			{
-				// Unload current project
-				_currentProjectID = "";
-				_applyProjectChange();
-			}
-
-			// Check if project directory is still existing
-			const string directoryPath = (Tools::getRootDirectoryPath() + "projects\\" + chosenButtonID);
-			if(!Tools::isDirectoryExisting(directoryPath))
-			{
-				Logger::throwWarning("Cannot delete project: missing directory!");
-				return;
-			}
-
-			// Delete project directory
-			Tools::deleteDirectory(directoryPath);
-
-			// Logging
-			Logger::throwInfo("Existing project \"" + chosenButtonID + "\" deleted!");
-
-			// Miscellaneous
-			_isDeletingProject = false;
-			chosenButtonID = "";
-		}
-		if(_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
-		{
-			_isDeletingProject = false;
-			chosenButtonID = "";
-		}
-	}
 }
 
 void TopViewportController::_applyProjectChange()

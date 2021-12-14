@@ -10,13 +10,13 @@
     <ClCompile Include="..\..\..\src\right_viewport_controller.cpp">
       <Filter>Viewport Controller\Right</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\top_viewport_controller_lifecycle.cpp">
+    <ClCompile Include="..\..\..\src\top_viewport_controller_project.cpp">
       <Filter>Viewport Controller\Top</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\top_viewport_controller_misc.cpp">
       <Filter>Viewport Controller\Top</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\bottom_viewport_controller_lifecycle.cpp">
+    <ClCompile Include="..\..\..\src\bottom_viewport_controller_misc.cpp">
       <Filter>Viewport Controller\Bottom</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\bottom_viewport_controller_console.cpp">

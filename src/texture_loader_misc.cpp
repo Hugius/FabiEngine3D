@@ -6,6 +6,13 @@
 
 using std::clamp;
 
+TextureLoader::TextureLoader(RenderBus& renderBus)
+	:
+	_renderBus(renderBus)
+{
+
+}
+
 // http://stackoverflow.com/questions/1968561/getting-the-pixel-value-of-bmp-file
 vector<float> TextureLoader::_loadBitmap(const string& filePath)
 {

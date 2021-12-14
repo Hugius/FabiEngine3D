@@ -41,13 +41,12 @@ private:
 
 	// VOID
 	void _start();
+	void _prepare();
+	void _update();
+	void _render();
 	void _pause();
 	void _resume();
 	void _stop();
-	void _prepareApplication();
-	void _updateApplication();
-	void _renderApplication();
-	void _updateWindowFading();
 
 	// FLOAT
 	float _deltaTimeMS = 0.0f;

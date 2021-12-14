@@ -3,8 +3,8 @@
 #include <chrono>
 
 using std::chrono::high_resolution_clock;
-using std::chrono::duration_cast;
 using std::chrono::nanoseconds;
+using std::chrono::duration_cast;
 
 Core::Core(FabiEngine3D& fe3d)
 	:
@@ -44,7 +44,7 @@ void Core::_start()
 	_isRunning = true;
 
 	// Prepare application
-	_prepareApplication();
+	_prepare();
 
 	// Variables
 	float renderLag = 0.0f;
@@ -64,13 +64,13 @@ void Core::_start()
 			}
 
 			// Update application
-			_updateApplication();
+			_update();
 			_timer.increasePassedFrameCount();
 
 			// Render application if not exported
 			if(!Config::getInst().isApplicationExported())
 			{
-				_renderApplication();
+				_render();
 			}
 		}
 		else // Process application at fixed speed
@@ -91,7 +91,7 @@ void Core::_start()
 				_inputHandler.update();
 
 				// Update application
-				_updateApplication();
+				_update();
 
 				// Update render lag
 				renderLag -= Config::MS_PER_UPDATE;
@@ -100,7 +100,7 @@ void Core::_start()
 			}
 
 			// Render application
-			_renderApplication();
+			_render();
 		}
 
 		// Calculate delta time
@@ -143,7 +143,7 @@ void Core::_stop()
 	_isRunning = false;
 }
 
-void Core::_updateApplication()
+void Core::_update()
 {
 	// Temporary values
 	static ivec2 lastCursorPosition = _window.getCursorPosition();
@@ -230,29 +230,22 @@ void Core::_updateApplication()
 	// Always update master renderer
 	_masterRenderer.update();
 
-	// Miscellaneous
-	_updateWindowFading();
-
-	// Save last cursor position
-	lastCursorPosition = _window.getCursorPosition();
-}
-
-void Core::_updateWindowFading()
-{
-	// Only if in engine preview
+	// Update window fade effect
 	if(!Config::getInst().isApplicationExported())
 	{
 		static float opacity = 0.0f;
-
-		if(opacity < 1.0f) // Stop if window is 100% visible
+		if(opacity < 1.0f) // Increase opacity
 		{
 			_window.setOpacity(opacity);
 			opacity += 0.01f;
 		}
-		if(opacity >= 1.0f) // Opacity must be exactly 100% after fading
+		if(opacity > 1.0f) // Opacity must be exactly 100%
 		{
 			opacity = 1.0f;
 			_window.setOpacity(opacity);
 		}
 	}
+
+	// Save last cursor position
+	lastCursorPosition = _window.getCursorPosition();
 }

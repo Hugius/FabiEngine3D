@@ -3,7 +3,7 @@
 #include "render_bus.hpp"
 #include "tools.hpp"
 
-void Core::_renderApplication()
+void Core::_render()
 {
 	// Reset triangle count
 	_renderBus.resetTriangleCount();
@@ -32,7 +32,7 @@ void Core::_renderApplication()
 	_timer.stopDeltaPart();
 }
 
-void Core::_prepareApplication()
+void Core::_prepare()
 {
 	// Temporary values
 	const string meshDirectoryPath = "engine\\assets\\mesh\\";

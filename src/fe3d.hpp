@@ -908,7 +908,8 @@ public:
 	void misc_cacheFontsMultiThreaded(const vector<string>& filePaths);
 	void misc_cacheSoundsMultiThreaded(const vector<string>& filePaths);
 	void misc_startMillisecondTimer();
-	void misc_setMaxSoundChannelCount(unsigned int value);
+	void misc_allocateSound2dChannels(unsigned int count);
+	void misc_allocateSound3dChannels(unsigned int count);
 
 	// MISC - getters
 	const vector<pair<string, int>> misc_getUpdateProfilingStatistics() const;
@@ -922,8 +923,10 @@ public:
 	const float misc_getFPS() const;
 	const float misc_stopMillisecondTimer() const;
 	const unsigned int misc_getTriangleCount() const;
-	const unsigned int misc_getMaxSoundChannelCount() const;
-	const unsigned int misc_getUsedSoundChannelCount() const;
+	const unsigned int misc_getAllocatedSound2dChannelCount() const;
+	const unsigned int misc_getAllocatedSound3dChannelCount() const;
+	const unsigned int misc_getUsedSound2dChannelCount() const;
+	const unsigned int misc_getUsedSound3dChannelCount() const;
 	const bool misc_isCursorVisible() const;
 	const bool misc_isCursorInsideViewport() const;
 	const bool misc_isCursorInsideWindow() const;

@@ -6,16 +6,9 @@
 using std::future;
 using std::launch;
 
-TextureLoader::TextureLoader(RenderBus& renderBus)
-	:
-	_renderBus(renderBus)
-{
-
-}
-
 const TextureID TextureLoader::load2dTexture(const string& filePath, bool isMipmapped, bool isAnisotropic)
 {
-BEGIN:
+	BEGIN:
 	// Search cache
 	auto cacheIterator = _2dTextureCache.find(filePath);
 
@@ -60,7 +53,7 @@ BEGIN:
 
 const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 {
-BEGIN:
+	BEGIN:
 	// Search cache
 	auto cacheIterator = _3dTextureCache.find(filePaths);
 
@@ -123,7 +116,7 @@ BEGIN:
 
 const vector<float>* TextureLoader::loadBitmap(const string& filePath)
 {
-BEGIN:
+	BEGIN:
 	// Search cache
 	auto cacheIterator = _bitmapCache.find(filePath);
 
@@ -157,7 +150,7 @@ BEGIN:
 
 const TextureID TextureLoader::load2dTexture(const string& textContent, const string& fontPath)
 {
-BEGIN:
+	BEGIN:
 	// Temporary values
 	TTF_Font* font = nullptr;
 

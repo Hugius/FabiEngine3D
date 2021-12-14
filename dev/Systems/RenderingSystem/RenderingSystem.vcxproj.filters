@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Buffers">
-      <UniqueIdentifier>{b34fa46f-cff4-4862-a24b-caed3757d4ed}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Miscellaneous">
       <UniqueIdentifier>{a7dae08a-f191-465d-9f2e-17f2f3d08e4b}</UniqueIdentifier>
     </Filter>
@@ -13,49 +10,52 @@
     <Filter Include="Master Renderer">
       <UniqueIdentifier>{7d8c27fd-0dde-4b64-a4e8-c60d3a9fb95f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shaders\Entity Shader">
-      <UniqueIdentifier>{6c8e990a-18ba-41ce-bc62-1af0d6f53558}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Shaders\Entity Shader\Color">
-      <UniqueIdentifier>{978ac806-3ab4-4635-b088-96d301382937}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Shaders\Entity Shader\Depth">
-      <UniqueIdentifier>{c94bac82-9f6a-4c5c-87a0-da11f83b4fcd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Shaders\Post Shader">
-      <UniqueIdentifier>{16f78e2a-5f05-4057-a0e0-4b959ade0823}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Renderer">
       <UniqueIdentifier>{87058a7c-3a74-44c3-a64f-cf4399802d7f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Renderer\Entity Renderer">
-      <UniqueIdentifier>{08f97625-e1f1-41db-8c32-2cdbbc1a8c33}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Renderer\Entity Renderer\Color">
-      <UniqueIdentifier>{38d8a85c-95df-4d68-94a6-e808b088c6bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Renderer\Entity Renderer\Depth">
-      <UniqueIdentifier>{36c32f45-1f3c-454e-a0c7-a92cac134a66}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Renderer\Post Renderer">
-      <UniqueIdentifier>{7fb7ca30-ed1c-4742-80f3-75199997d0c0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Renderer\Base">
       <UniqueIdentifier>{db74bef5-67e7-47ba-9bf8-024bd20dc2dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Buffer">
+      <UniqueIdentifier>{b34fa46f-cff4-4862-a24b-caed3757d4ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Entity">
+      <UniqueIdentifier>{08f97625-e1f1-41db-8c32-2cdbbc1a8c33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Entity\Color">
+      <UniqueIdentifier>{38d8a85c-95df-4d68-94a6-e808b088c6bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Entity\Depth">
+      <UniqueIdentifier>{36c32f45-1f3c-454e-a0c7-a92cac134a66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Post">
+      <UniqueIdentifier>{7fb7ca30-ed1c-4742-80f3-75199997d0c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Entity">
+      <UniqueIdentifier>{6c8e990a-18ba-41ce-bc62-1af0d6f53558}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Entity\Color">
+      <UniqueIdentifier>{978ac806-3ab4-4635-b088-96d301382937}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Entity\Depth">
+      <UniqueIdentifier>{c94bac82-9f6a-4c5c-87a0-da11f83b4fcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Post">
+      <UniqueIdentifier>{16f78e2a-5f05-4057-a0e0-4b959ade0823}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\capture_buffer_texture.cpp">
-      <Filter>Buffers</Filter>
+      <Filter>Buffer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\capture_buffer_misc.cpp">
-      <Filter>Buffers</Filter>
+      <Filter>Buffer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\render_buffer.cpp">
-      <Filter>Buffers</Filter>
+      <Filter>Buffer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\shader_buffer.cpp">
-      <Filter>Buffers</Filter>
+      <Filter>Buffer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\master_renderer_capture_reflection_cube.cpp">
       <Filter>Master Renderer</Filter>
@@ -85,58 +85,58 @@
       <Filter>Renderer\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\blur_renderer.cpp">
-      <Filter>Renderer\Post Renderer</Filter>
+      <Filter>Renderer\Post</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\anti_aliasing_renderer.cpp">
-      <Filter>Renderer\Post Renderer</Filter>
+      <Filter>Renderer\Post</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\aabb_entity_color_renderer.cpp">
-      <Filter>Renderer\Entity Renderer\Color</Filter>
+      <Filter>Renderer\Entity\Color</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\billboard_entity_color_renderer.cpp">
-      <Filter>Renderer\Entity Renderer\Color</Filter>
+      <Filter>Renderer\Entity\Color</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\image_entity_color_renderer.cpp">
-      <Filter>Renderer\Entity Renderer\Color</Filter>
+      <Filter>Renderer\Entity\Color</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\model_entity_color_renderer.cpp">
-      <Filter>Renderer\Entity Renderer\Color</Filter>
+      <Filter>Renderer\Entity\Color</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sky_entity_color_renderer.cpp">
-      <Filter>Renderer\Entity Renderer\Color</Filter>
+      <Filter>Renderer\Entity\Color</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\terrain_entity_color_renderer.cpp">
-      <Filter>Renderer\Entity Renderer\Color</Filter>
+      <Filter>Renderer\Entity\Color</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\water_entity_color_renderer.cpp">
-      <Filter>Renderer\Entity Renderer\Color</Filter>
+      <Filter>Renderer\Entity\Color</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\terrain_entity_depth_renderer.cpp">
-      <Filter>Renderer\Entity Renderer\Depth</Filter>
+      <Filter>Renderer\Entity\Depth</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\model_entity_depth_renderer.cpp">
-      <Filter>Renderer\Entity Renderer\Depth</Filter>
+      <Filter>Renderer\Entity\Depth</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\billboard_entity_depth_renderer.cpp">
-      <Filter>Renderer\Entity Renderer\Depth</Filter>
+      <Filter>Renderer\Entity\Depth</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\model_entity_shadow_renderer.cpp">
-      <Filter>Renderer\Entity Renderer\Depth</Filter>
+      <Filter>Renderer\Entity\Depth</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\billboard_entity_shadow_renderer.cpp">
-      <Filter>Renderer\Entity Renderer\Depth</Filter>
+      <Filter>Renderer\Entity\Depth</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\bloom_renderer.cpp">
-      <Filter>Renderer\Post Renderer</Filter>
+      <Filter>Renderer\Post</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\dof_renderer.cpp">
-      <Filter>Renderer\Post Renderer</Filter>
+      <Filter>Renderer\Post</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\lens_flare_renderer.cpp">
-      <Filter>Renderer\Post Renderer</Filter>
+      <Filter>Renderer\Post</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\motion_blur_renderer.cpp">
-      <Filter>Renderer\Post Renderer</Filter>
+      <Filter>Renderer\Post</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\master_renderer_capture_misc.cpp">
       <Filter>Master Renderer</Filter>
@@ -150,13 +150,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\capture_buffer.hpp">
-      <Filter>Buffers</Filter>
+      <Filter>Buffer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\render_buffer.hpp">
-      <Filter>Buffers</Filter>
+      <Filter>Buffer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\shader_buffer.hpp">
-      <Filter>Buffers</Filter>
+      <Filter>Buffer</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\master_renderer.hpp">
       <Filter>Master Renderer</Filter>
@@ -174,58 +174,58 @@
       <Filter>Renderer\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\blur_renderer.hpp">
-      <Filter>Renderer\Post Renderer</Filter>
+      <Filter>Renderer\Post</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\anti_aliasing_renderer.hpp">
-      <Filter>Renderer\Post Renderer</Filter>
+      <Filter>Renderer\Post</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\aabb_entity_color_renderer.hpp">
-      <Filter>Renderer\Entity Renderer\Color</Filter>
+      <Filter>Renderer\Entity\Color</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\billboard_entity_color_renderer.hpp">
-      <Filter>Renderer\Entity Renderer\Color</Filter>
+      <Filter>Renderer\Entity\Color</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\image_entity_color_renderer.hpp">
-      <Filter>Renderer\Entity Renderer\Color</Filter>
+      <Filter>Renderer\Entity\Color</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\model_entity_color_renderer.hpp">
-      <Filter>Renderer\Entity Renderer\Color</Filter>
+      <Filter>Renderer\Entity\Color</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\sky_entity_color_renderer.hpp">
-      <Filter>Renderer\Entity Renderer\Color</Filter>
+      <Filter>Renderer\Entity\Color</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\terrain_entity_color_renderer.hpp">
-      <Filter>Renderer\Entity Renderer\Color</Filter>
+      <Filter>Renderer\Entity\Color</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\water_entity_color_renderer.hpp">
-      <Filter>Renderer\Entity Renderer\Color</Filter>
+      <Filter>Renderer\Entity\Color</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\terrain_entity_depth_renderer.hpp">
-      <Filter>Renderer\Entity Renderer\Depth</Filter>
+      <Filter>Renderer\Entity\Depth</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\model_entity_depth_renderer.hpp">
-      <Filter>Renderer\Entity Renderer\Depth</Filter>
+      <Filter>Renderer\Entity\Depth</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\billboard_entity_depth_renderer.hpp">
-      <Filter>Renderer\Entity Renderer\Depth</Filter>
+      <Filter>Renderer\Entity\Depth</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\model_entity_shadow_renderer.hpp">
-      <Filter>Renderer\Entity Renderer\Depth</Filter>
+      <Filter>Renderer\Entity\Depth</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\billboard_entity_shadow_renderer.hpp">
-      <Filter>Renderer\Entity Renderer\Depth</Filter>
+      <Filter>Renderer\Entity\Depth</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\bloom_renderer.hpp">
-      <Filter>Renderer\Post Renderer</Filter>
+      <Filter>Renderer\Post</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\dof_renderer.hpp">
-      <Filter>Renderer\Post Renderer</Filter>
+      <Filter>Renderer\Post</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\lens_flare_renderer.hpp">
-      <Filter>Renderer\Post Renderer</Filter>
+      <Filter>Renderer\Post</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\motion_blur_renderer.hpp">
-      <Filter>Renderer\Post Renderer</Filter>
+      <Filter>Renderer\Post</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\render_utils.hpp">
       <Filter>Miscellaneous</Filter>
@@ -233,112 +233,112 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\app\engine\shaders\motion_blur_shader.frag">
-      <Filter>Shaders\Post Shader</Filter>
+      <Filter>Shaders\Post</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\motion_blur_shader.vert">
-      <Filter>Shaders\Post Shader</Filter>
+      <Filter>Shaders\Post</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\anti_aliasing_shader.frag">
-      <Filter>Shaders\Post Shader</Filter>
+      <Filter>Shaders\Post</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\anti_aliasing_shader.vert">
-      <Filter>Shaders\Post Shader</Filter>
+      <Filter>Shaders\Post</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\bloom_shader.frag">
-      <Filter>Shaders\Post Shader</Filter>
+      <Filter>Shaders\Post</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\bloom_shader.vert">
-      <Filter>Shaders\Post Shader</Filter>
+      <Filter>Shaders\Post</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\blur_shader.frag">
-      <Filter>Shaders\Post Shader</Filter>
+      <Filter>Shaders\Post</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\blur_shader.vert">
-      <Filter>Shaders\Post Shader</Filter>
+      <Filter>Shaders\Post</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\dof_shader.frag">
-      <Filter>Shaders\Post Shader</Filter>
+      <Filter>Shaders\Post</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\dof_shader.vert">
-      <Filter>Shaders\Post Shader</Filter>
+      <Filter>Shaders\Post</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\lens_flare_shader.frag">
-      <Filter>Shaders\Post Shader</Filter>
+      <Filter>Shaders\Post</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\lens_flare_shader.vert">
-      <Filter>Shaders\Post Shader</Filter>
+      <Filter>Shaders\Post</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\aabb_entity_color_shader.frag">
-      <Filter>Shaders\Entity Shader\Color</Filter>
+      <Filter>Shaders\Entity\Color</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\aabb_entity_color_shader.vert">
-      <Filter>Shaders\Entity Shader\Color</Filter>
+      <Filter>Shaders\Entity\Color</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\billboard_entity_color_shader.frag">
-      <Filter>Shaders\Entity Shader\Color</Filter>
+      <Filter>Shaders\Entity\Color</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\billboard_entity_color_shader.vert">
-      <Filter>Shaders\Entity Shader\Color</Filter>
+      <Filter>Shaders\Entity\Color</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\image_entity_color_shader.frag">
-      <Filter>Shaders\Entity Shader\Color</Filter>
+      <Filter>Shaders\Entity\Color</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\image_entity_color_shader.vert">
-      <Filter>Shaders\Entity Shader\Color</Filter>
+      <Filter>Shaders\Entity\Color</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\model_entity_color_shader.frag">
-      <Filter>Shaders\Entity Shader\Color</Filter>
+      <Filter>Shaders\Entity\Color</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\model_entity_color_shader.vert">
-      <Filter>Shaders\Entity Shader\Color</Filter>
+      <Filter>Shaders\Entity\Color</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\sky_entity_color_shader.frag">
-      <Filter>Shaders\Entity Shader\Color</Filter>
+      <Filter>Shaders\Entity\Color</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\sky_entity_color_shader.vert">
-      <Filter>Shaders\Entity Shader\Color</Filter>
+      <Filter>Shaders\Entity\Color</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\terrain_entity_color_shader.frag">
-      <Filter>Shaders\Entity Shader\Color</Filter>
+      <Filter>Shaders\Entity\Color</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\terrain_entity_color_shader.vert">
-      <Filter>Shaders\Entity Shader\Color</Filter>
+      <Filter>Shaders\Entity\Color</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\water_entity_color_shader.frag">
-      <Filter>Shaders\Entity Shader\Color</Filter>
+      <Filter>Shaders\Entity\Color</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\water_entity_color_shader.vert">
-      <Filter>Shaders\Entity Shader\Color</Filter>
+      <Filter>Shaders\Entity\Color</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\terrain_entity_depth_shader.vert">
-      <Filter>Shaders\Entity Shader\Depth</Filter>
+      <Filter>Shaders\Entity\Depth</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\terrain_entity_depth_shader.frag">
-      <Filter>Shaders\Entity Shader\Depth</Filter>
+      <Filter>Shaders\Entity\Depth</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\model_entity_depth_shader.vert">
-      <Filter>Shaders\Entity Shader\Depth</Filter>
+      <Filter>Shaders\Entity\Depth</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\model_entity_depth_shader.frag">
-      <Filter>Shaders\Entity Shader\Depth</Filter>
+      <Filter>Shaders\Entity\Depth</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\billboard_entity_depth_shader.vert">
-      <Filter>Shaders\Entity Shader\Depth</Filter>
+      <Filter>Shaders\Entity\Depth</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\billboard_entity_depth_shader.frag">
-      <Filter>Shaders\Entity Shader\Depth</Filter>
+      <Filter>Shaders\Entity\Depth</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\billboard_entity_shadow_shader.vert">
-      <Filter>Shaders\Entity Shader\Depth</Filter>
+      <Filter>Shaders\Entity\Depth</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\billboard_entity_shadow_shader.frag">
-      <Filter>Shaders\Entity Shader\Depth</Filter>
+      <Filter>Shaders\Entity\Depth</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\model_entity_shadow_shader.vert">
-      <Filter>Shaders\Entity Shader\Depth</Filter>
+      <Filter>Shaders\Entity\Depth</Filter>
     </None>
     <None Include="..\..\..\app\engine\shaders\model_entity_shadow_shader.frag">
-      <Filter>Shaders\Entity Shader\Depth</Filter>
+      <Filter>Shaders\Entity\Depth</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -2,31 +2,31 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-void SoundEditor::_updateAudioCreating()
+void SoundEditor::_updateSoundCreating()
 {
-	if(_isCreatingAudio)
+	if(_isCreatingSound)
 	{
-		string newAudioID = "";
+		string newSoundID = "";
 
 		// Check if user filled in a new ID
-		if(_gui.getGlobalScreen()->checkValueForm("audioCreate", newAudioID, {_currentAudioID}))
+		if(_gui.getGlobalScreen()->checkValueForm("soundCreate", newSoundID, {_currentSoundID}))
 		{
 			// Check if ID starts with @ sign
-			if(newAudioID[0] != '@')
+			if(newSoundID[0] != '@')
 			{
 				// Check if ID contains spaces
-				if(newAudioID.find(' ') == string::npos)
+				if(newSoundID.find(' ') == string::npos)
 				{
 					// Add @ sign to new ID
-					newAudioID = ("@" + newAudioID);
+					newSoundID = ("@" + newSoundID);
 
-					// Check if audio not already exists
-					if(find(_loadedAudioIDs.begin(), _loadedAudioIDs.end(), newAudioID) == _loadedAudioIDs.end())
+					// Check if sound not already exists
+					if(find(_loadedSoundIDs.begin(), _loadedSoundIDs.end(), newSoundID) == _loadedSoundIDs.end())
 					{
 						// Validate project ID
 						if(_currentProjectID.empty())
 						{
-							Logger::throwError("SoundEditor::_updateAudioCreating");
+							Logger::throwError("SoundEditor::_updateSoundCreating");
 						}
 
 						// Get the chosen file name
@@ -37,7 +37,7 @@ void SoundEditor::_updateAudioCreating()
 						if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 						{
 							Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
-							_isCreatingAudio = false;
+							_isCreatingSound = false;
 							return;
 						}
 
@@ -45,7 +45,7 @@ void SoundEditor::_updateAudioCreating()
 						const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "WAV");
 						if(filePath.empty())
 						{
-							_isCreatingAudio = false;
+							_isCreatingSound = false;
 							return;
 						}
 
@@ -54,90 +54,90 @@ void SoundEditor::_updateAudioCreating()
 						   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 						{
 							Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
-							_isCreatingAudio = false;
+							_isCreatingSound = false;
 							return;
 						}
 
-						// Create audio
+						// Create sound
 						const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 						_fe3d.misc_clearSoundCache(finalFilePath);
-						_fe3d.sound2d_create(newAudioID, finalFilePath);
+						_fe3d.sound2d_create(newSoundID, finalFilePath);
 
-						// Check if audio creation went well
-						if(_fe3d.sound2d_isExisting(newAudioID))
+						// Check if sound creation went well
+						if(_fe3d.sound2d_isExisting(newSoundID))
 						{
 							// Go to next screen
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
 
-							// Select audio
-							_currentAudioID = newAudioID;
-							_loadedAudioIDs.push_back(newAudioID);
+							// Select sound
+							_currentSoundID = newSoundID;
+							_loadedSoundIDs.push_back(newSoundID);
 
 							// Miscellaneous
-							_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("audioID")->getEntityID(), "Audio: " + newAudioID.substr(1), 0.025f);
-							_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("audioID")->getEntityID(), true);
-							_isCreatingAudio = false;
+							_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), "Sound: " + newSoundID.substr(1), 0.025f);
+							_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), true);
+							_isCreatingSound = false;
 						}
 					}
 					else
 					{
-						Logger::throwWarning("Audio with ID \"" + newAudioID.substr(1) + "\" already exists!");
+						Logger::throwWarning("Sound with ID \"" + newSoundID.substr(1) + "\" already exists!");
 					}
 				}
 				else
 				{
-					Logger::throwWarning("Audio ID cannot contain any spaces!");
+					Logger::throwWarning("Sound ID cannot contain any spaces!");
 				}
 			}
 			else
 			{
-				Logger::throwWarning("Audio ID cannot begin with '@'!");
+				Logger::throwWarning("Sound ID cannot begin with '@'!");
 			}
 		}
 	}
 }
 
-void SoundEditor::_updateAudioChoosing()
+void SoundEditor::_updateSoundChoosing()
 {
-	if(_isChoosingAudio)
+	if(_isChoosingSound)
 	{
 		// Get selected button ID
-		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("audioList");
+		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("soundList");
 
-		// Check if a audio ID is hovered
+		// Check if a sound ID is hovered
 		if(!selectedButtonID.empty())
 		{
 			// Check if LMB is pressed
 			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				// Select audio
-				_currentAudioID = ("@" + selectedButtonID);
+				// Select sound
+				_currentSoundID = ("@" + selectedButtonID);
 
 				// Go to next screen
-				if(!_isDeletingAudio)
+				if(!_isDeletingSound)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
-					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("audioID")->getEntityID(), "Audio: " + selectedButtonID.substr(1), 0.025f);
-					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("audioID")->getEntityID(), true);
+					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), "Sound: " + selectedButtonID.substr(1), 0.025f);
+					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), true);
 				}
 
 				// Miscellaneous
-				_gui.getGlobalScreen()->deleteChoiceForm("audioList");
-				_isChoosingAudio = false;
+				_gui.getGlobalScreen()->deleteChoiceForm("soundList");
+				_isChoosingSound = false;
 			}
 		}
-		else if(_gui.getGlobalScreen()->isChoiceFormCancelled("audioList")) // Cancelled choosing
+		else if(_gui.getGlobalScreen()->isChoiceFormCancelled("soundList")) // Cancelled choosing
 		{
-			_isChoosingAudio = false;
-			_isDeletingAudio = false;
-			_gui.getGlobalScreen()->deleteChoiceForm("audioList");
+			_isChoosingSound = false;
+			_isDeletingSound = false;
+			_gui.getGlobalScreen()->deleteChoiceForm("soundList");
 		}
 	}
 }
 
-void SoundEditor::_updateAudioDeleting()
+void SoundEditor::_updateSoundDeleting()
 {
-	if(_isDeletingAudio && _currentAudioID != "")
+	if(_isDeletingSound && _currentSoundID != "")
 	{
 		// Add answer form
 		if(!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
@@ -151,21 +151,21 @@ void SoundEditor::_updateAudioDeleting()
 			// Go to main screen
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuMain");
 
-			// Delete audio
-			if(_fe3d.sound2d_isExisting(_currentAudioID))
+			// Delete sound
+			if(_fe3d.sound2d_isExisting(_currentSoundID))
 			{
-				_fe3d.sound2d_delete(_currentAudioID);
+				_fe3d.sound2d_delete(_currentSoundID);
 			}
 
 			// Miscellaneous
-			_loadedAudioIDs.erase(remove(_loadedAudioIDs.begin(), _loadedAudioIDs.end(), _currentAudioID), _loadedAudioIDs.end());
-			_currentAudioID = "";
-			_isDeletingAudio = false;
+			_loadedSoundIDs.erase(remove(_loadedSoundIDs.begin(), _loadedSoundIDs.end(), _currentSoundID), _loadedSoundIDs.end());
+			_currentSoundID = "";
+			_isDeletingSound = false;
 		}
 		if(_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 		{
-			_isChoosingAudio = true;
-			_currentAudioID = "";
+			_isChoosingSound = true;
+			_currentSoundID = "";
 		}
 	}
 }

@@ -7,7 +7,6 @@ app/projects/*/
 
 dev/.vs/
 dev/Systems/AssetManagementSystem/Temp/
-dev/Systems/AudioSystem/Temp/
 dev/Systems/CoreSystem/Temp/
 dev/Systems/EditorSystem/Temp/
 dev/Systems/EngineControllerSystem/Temp/
@@ -19,8 +18,8 @@ dev/Systems/NetworkingSystem/Temp/
 dev/Systems/PhysicsSystem/Temp/
 dev/Systems/RenderingSystem/Temp/
 dev/Systems/ScriptingSystem/Temp/
+dev/Systems/SoundSystem/Temp/
 dev/Systems/AssetManagementSystem.lib
-dev/Systems/AudioSystem.lib
 dev/Systems/CoreSystem.lib
 dev/Systems/EditorSystem.lib
 dev/Systems/EngineControllerSystem.lib
@@ -32,8 +31,8 @@ dev/Systems/NetworkingSystem.lib
 dev/Systems/PhysicsSystem.lib
 dev/Systems/RenderingSystem.lib
 dev/Systems/ScriptingSystem.lib
+dev/Systems/SoundSystem.lib
 dev/Systems/AssetManagementSystem.pdb
-dev/Systems/AudioSystem.pdb
 dev/Systems/CoreSystem.pdb
 dev/Systems/EditorSystem.pdb
 dev/Systems/EngineControllerSystem.pdb
@@ -45,3 +44,4 @@ dev/Systems/NetworkingSystem.pdb
 dev/Systems/PhysicsSystem.pdb
 dev/Systems/RenderingSystem.pdb
 dev/Systems/ScriptingSystem.pdb
+dev/Systems/SoundSystem.pdb

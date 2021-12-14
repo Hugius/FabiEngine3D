@@ -38,7 +38,7 @@ void SoundEditor::load()
 	_fe3d.billboard_setBright("@@icon", true);
 
 	// Miscellaneous
-	_gui.getGlobalScreen()->createTextField("audioID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
+	_gui.getGlobalScreen()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 	_isEditorLoaded = true;
 }
 
@@ -55,16 +55,16 @@ void SoundEditor::unload()
 	_fe3d.billboard_delete("@@icon");
 
 	// Reset editor properties
-	_loadedAudioIDs.clear();
-	_currentAudioID = "";
-	_hoveredAudioID = "";
+	_loadedSoundIDs.clear();
+	_currentSoundID = "";
+	_hoveredSoundID = "";
 	_isEditorLoaded = false;
-	_isCreatingAudio = false;
-	_isChoosingAudio = false;
-	_isDeletingAudio = false;
+	_isCreatingSound = false;
+	_isChoosingSound = false;
+	_isDeletingSound = false;
 
 	// Miscellaneous
-	_gui.getGlobalScreen()->deleteTextField("audioID");
+	_gui.getGlobalScreen()->deleteTextField("soundID");
 }
 
 void SoundEditor::_loadGUI()
@@ -75,9 +75,9 @@ void SoundEditor::_loadGUI()
 	// Left-viewport: soundEditorMenuMain
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("soundEditorMenuMain");
-	leftWindow->getScreen("soundEditorMenuMain")->createButton("create", fvec2(0.0f, positions[0]), fvec2(TW("Create Audio"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Create Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("soundEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[1]), fvec2(TW("Edit Audio"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Edit Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("soundEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), fvec2(TW("Delete Audio"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("soundEditorMenuMain")->createButton("create", fvec2(0.0f, positions[0]), fvec2(TW("Create Sound"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Create Sound", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("soundEditorMenuMain")->createButton("edit", fvec2(0.0f, positions[1]), fvec2(TW("Edit Sound"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Edit Sound", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("soundEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), fvec2(TW("Delete Sound"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete Sound", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("soundEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 
 	// Left-viewport: soundEditorMenuChoice
@@ -108,15 +108,15 @@ void SoundEditor::update()
 	}
 	if(_isEditorLoaded)
 	{
-		_updateAudioCreating();
+		_updateSoundCreating();
 	}
 	if(_isEditorLoaded)
 	{
-		_updateAudioChoosing();
+		_updateSoundChoosing();
 	}
 	if(_isEditorLoaded)
 	{
-		_updateAudioDeleting();
+		_updateSoundDeleting();
 	}
 	if(_isEditorLoaded)
 	{

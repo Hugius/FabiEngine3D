@@ -37,7 +37,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{88A854DA-83A8-403A-811F-616602E8B837}</ProjectGuid>
-    <RootNamespace>AudioSystem</RootNamespace>
+    <RootNamespace>SoundSystem</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>SoundSystem</ProjectName>
   </PropertyGroup>

@@ -149,7 +149,7 @@ void FabiEngine3D::sound3d_play(const string& ID, int loops, unsigned int fadeMS
 
 	if (!_core->_soundPlayer.isChannelAvailable())
 	{
-		Logger::throwWarning("Tried to play 3D sound with ID \"", ID, "\": no audio channels available!");
+		Logger::throwWarning("Tried to play 3D sound with ID \"", ID, "\": no sound channels available!");
 		return;
 	}
 	if (_core->_soundPlayer.isSound3dStarted(sound) && !mustForcePlay)

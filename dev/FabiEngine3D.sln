@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30413.136
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AssetManagementSystem", "Systems\AssetManagementSystem\AssetManagementSystem.vcxproj", "{F419DF52-DFF6-4875-93D2-13C2EF25947B}"
 EndProject
@@ -23,8 +23,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineControllerSystem", "S
 		{D173F0FC-6C36-4E80-B441-7EB1648490CD} = {D173F0FC-6C36-4E80-B441-7EB1648490CD}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AudioSystem", "Systems\AudioSystem\AudioSystem.vcxproj", "{88A854DA-83A8-403A-811F-616602E8B837}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EditorSystem", "Systems\EditorSystem\EditorSystem.vcxproj", "{D4B85157-590E-4E08-A446-C81B4E632AC7}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EntitySystem", "Systems\EntitySystem\EntitySystem.vcxproj", "{03CAF36B-F2BB-4DAB-B622-E8C3F2E45942}"
@@ -42,6 +40,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetworkingSystem", "Systems\NetworkingSystem\NetworkingSystem.vcxproj", "{33206921-CE81-4709-A9FF-648BE4783B6A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RenderingSystem", "Systems\RenderingSystem\RenderingSystem.vcxproj", "{1D4D6DA1-0A53-4DB4-93FF-F0755DFE1DBD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SoundSystem", "Systems\SoundSystem\SoundSystem.vcxproj", "{88A854DA-83A8-403A-811F-616602E8B837}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,14 +75,6 @@ Global
 		{4D9DDEC9-4F25-4E65-8889-ADAB914560DF}.Release|x64.Build.0 = Release|x64
 		{4D9DDEC9-4F25-4E65-8889-ADAB914560DF}.Release|x86.ActiveCfg = Release|Win32
 		{4D9DDEC9-4F25-4E65-8889-ADAB914560DF}.Release|x86.Build.0 = Release|Win32
-		{88A854DA-83A8-403A-811F-616602E8B837}.Debug|x64.ActiveCfg = Debug|x64
-		{88A854DA-83A8-403A-811F-616602E8B837}.Debug|x64.Build.0 = Debug|x64
-		{88A854DA-83A8-403A-811F-616602E8B837}.Debug|x86.ActiveCfg = Debug|Win32
-		{88A854DA-83A8-403A-811F-616602E8B837}.Debug|x86.Build.0 = Debug|Win32
-		{88A854DA-83A8-403A-811F-616602E8B837}.Release|x64.ActiveCfg = Release|x64
-		{88A854DA-83A8-403A-811F-616602E8B837}.Release|x64.Build.0 = Release|x64
-		{88A854DA-83A8-403A-811F-616602E8B837}.Release|x86.ActiveCfg = Release|Win32
-		{88A854DA-83A8-403A-811F-616602E8B837}.Release|x86.Build.0 = Release|Win32
 		{D4B85157-590E-4E08-A446-C81B4E632AC7}.Debug|x64.ActiveCfg = Debug|x64
 		{D4B85157-590E-4E08-A446-C81B4E632AC7}.Debug|x64.Build.0 = Debug|x64
 		{D4B85157-590E-4E08-A446-C81B4E632AC7}.Debug|x86.ActiveCfg = Debug|Win32
@@ -155,6 +147,14 @@ Global
 		{1D4D6DA1-0A53-4DB4-93FF-F0755DFE1DBD}.Release|x64.Build.0 = Release|x64
 		{1D4D6DA1-0A53-4DB4-93FF-F0755DFE1DBD}.Release|x86.ActiveCfg = Release|Win32
 		{1D4D6DA1-0A53-4DB4-93FF-F0755DFE1DBD}.Release|x86.Build.0 = Release|Win32
+		{88A854DA-83A8-403A-811F-616602E8B837}.Debug|x64.ActiveCfg = Debug|x64
+		{88A854DA-83A8-403A-811F-616602E8B837}.Debug|x64.Build.0 = Debug|x64
+		{88A854DA-83A8-403A-811F-616602E8B837}.Debug|x86.ActiveCfg = Debug|Win32
+		{88A854DA-83A8-403A-811F-616602E8B837}.Debug|x86.Build.0 = Debug|Win32
+		{88A854DA-83A8-403A-811F-616602E8B837}.Release|x64.ActiveCfg = Release|x64
+		{88A854DA-83A8-403A-811F-616602E8B837}.Release|x64.Build.0 = Release|x64
+		{88A854DA-83A8-403A-811F-616602E8B837}.Release|x86.ActiveCfg = Release|Win32
+		{88A854DA-83A8-403A-811F-616602E8B837}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

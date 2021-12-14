@@ -84,10 +84,10 @@ void WorldEditor::_updateSoundPlacingMenu()
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			// Iterate through every created sound
-			for(const auto& audioID : _soundEditor.getLoadedIDs())
+			for(const auto& soundID : _soundEditor.getLoadedIDs())
 			{
 				// Check if button is hovered
-				if(screen->getScrollingList("sounds")->getButton(audioID)->isHovered())
+				if(screen->getScrollingList("sounds")->getButton(soundID)->isHovered())
 				{
 					// Reset right window
 					_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
@@ -101,7 +101,7 @@ void WorldEditor::_updateSoundPlacingMenu()
 					_deactivateReflection();
 
 					// Set new preview sound
-					_currentPreviewSoundID = audioID;
+					_currentPreviewSoundID = soundID;
 					_fe3d.model_setVisible(PREVIEW_SPEAKER_ID, true);
 					_fe3d.sound3d_setPosition(_currentPreviewSoundID, fvec3(0.0f));
 					_fe3d.sound3d_play(_currentPreviewSoundID, -1, 0, false);

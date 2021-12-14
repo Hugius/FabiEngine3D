@@ -37,13 +37,13 @@ const vector<string> SoundEditor::getAllAudioPathsFromFile() const
 	while(getline(file, line))
 	{
 		// Data placeholders
-		string audioID, audioPath;
+		string soundID, audioPath;
 
 		// For file extraction
 		istringstream iss(line);
 
 		// Read from file
-		iss >> audioID >> audioPath;
+		iss >> soundID >> audioPath;
 
 		// Convert empty string
 		audioPath = (audioPath == "?") ? "" : audioPath;
@@ -76,7 +76,7 @@ const bool SoundEditor::loadFromFile()
 	}
 
 	// Clear IDs from previous loads
-	_loadedAudioIDs.clear();
+	_loadedSoundIDs.clear();
 
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
@@ -90,21 +90,21 @@ const bool SoundEditor::loadFromFile()
 		return false;
 	}
 
-	// Load audio file
+	// Load sound file
 	ifstream file(filePath);
 
-	// Read audio file
+	// Read sound file
 	string line;
 	while(getline(file, line))
 	{
 		// Data placeholders
-		string audioID, audioPath;
+		string soundID, audioPath;
 
 		// For file extraction
 		istringstream iss(line);
 
 		// Read from file
-		iss >> audioID >> audioPath;
+		iss >> soundID >> audioPath;
 
 		// Convert empty string
 		audioPath = (audioPath == "?") ? "" : audioPath;
@@ -118,14 +118,14 @@ const bool SoundEditor::loadFromFile()
 			audioPath = string("projects\\" + _currentProjectID + "\\" + audioPath);
 		}
 
-		// Create audio
-		_fe3d.sound2d_create(audioID, audioPath);
+		// Create sound
+		_fe3d.sound2d_create(soundID, audioPath);
 
-		// Check if audio creation went well
-		if(_fe3d.sound2d_isExisting(audioID))
+		// Check if sound creation went well
+		if(_fe3d.sound2d_isExisting(soundID))
 		{
-			// Add audio ID
-			_loadedAudioIDs.push_back(audioID);
+			// Add sound ID
+			_loadedSoundIDs.push_back(soundID);
 		}
 	}
 
@@ -133,7 +133,7 @@ const bool SoundEditor::loadFromFile()
 	file.close();
 
 	// Logging
-	Logger::throwInfo("Audio data loaded!");
+	Logger::throwInfo("Sound data loaded!");
 
 	// Return
 	return true;

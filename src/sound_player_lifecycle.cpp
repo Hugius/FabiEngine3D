@@ -61,7 +61,7 @@ void SoundPlayer::update(Camera& camera, vector<Sound2d>& sound2ds, vector<Sound
 	// Update channels
 	for (size_t i = 0; i < _channels.size(); i++)
 	{
-		// Check if audio stopped playing
+		// Check if sound stopped playing
 		if (!Mix_Playing(static_cast<int>(i)) && !Mix_Paused(static_cast<int>(i)))
 		{
 			// De-allocate channel

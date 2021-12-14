@@ -29,15 +29,15 @@ private:
 	void _unloadGUI();
 	void _updateMainMenu();
 	void _updateChoiceMenu();
-	void _updateAudioCreating();
-	void _updateAudioChoosing();
-	void _updateAudioDeleting();
+	void _updateSoundCreating();
+	void _updateSoundChoosing();
+	void _updateSoundDeleting();
 	void _updateMiscellaneous();
 
 	// STRING
-	vector<string> _loadedAudioIDs;
-	string _currentAudioID = "";
-	string _hoveredAudioID = "";
+	vector<string> _loadedSoundIDs;
+	string _currentSoundID = "";
+	string _hoveredSoundID = "";
 	string _currentProjectID = "";
 
 	// FLOAT
@@ -45,9 +45,9 @@ private:
 	static inline const float CH = 0.0875f;
 
 	// BOOL
-	bool _isCreatingAudio = false;
-	bool _isChoosingAudio = false;
-	bool _isDeletingAudio = false;
+	bool _isCreatingSound = false;
+	bool _isChoosingSound = false;
+	bool _isDeletingSound = false;
 	bool _isEditorLoaded = false;
 
 	// MISCELLANEOUS

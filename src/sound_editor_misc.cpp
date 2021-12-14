@@ -14,18 +14,18 @@ const bool SoundEditor::isLoaded() const
 
 const vector<string>& SoundEditor::getLoadedIDs()
 {
-	sort(_loadedAudioIDs.begin(), _loadedAudioIDs.end());
-	return _loadedAudioIDs;
+	sort(_loadedSoundIDs.begin(), _loadedSoundIDs.end());
+	return _loadedSoundIDs;
 }
 
 void SoundEditor::_updateMiscellaneous()
 {
 	// Temporary values
-	bool isExisting = _fe3d.sound2d_isExisting(_currentAudioID);
-	bool isPlaying = isExisting && _fe3d.sound2d_isPlaying(_currentAudioID);
-	bool isPaused = isExisting && _fe3d.sound2d_isPaused(_currentAudioID);
+	bool isExisting = _fe3d.sound2d_isExisting(_currentSoundID);
+	bool isPlaying = isExisting && _fe3d.sound2d_isPlaying(_currentSoundID);
+	bool isPaused = isExisting && _fe3d.sound2d_isPaused(_currentSoundID);
 
-	// Update audio status symbol
+	// Update status symbol
 	if(isPlaying)
 	{
 		_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\textures\\play.png");

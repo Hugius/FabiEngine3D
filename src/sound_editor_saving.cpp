@@ -24,11 +24,11 @@ const bool SoundEditor::saveToFile() const
 	// Create or overwrite file
 	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\sound.fe3d");
 
-	// Write audio data
-	for(const auto& audioID : _loadedAudioIDs)
+	// Write sound data
+	for(const auto& soundID : _loadedSoundIDs)
 	{
 		// Retrieve all values
-		auto audioPath = _fe3d.sound2d_getAudioPath(audioID);
+		auto audioPath = _fe3d.sound2d_getAudioPath(soundID);
 
 		// Convert to short path
 		audioPath = string(audioPath.empty() ? "" : audioPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
@@ -40,14 +40,14 @@ const bool SoundEditor::saveToFile() const
 		replace(audioPath.begin(), audioPath.end(), ' ', '?');
 
 		// Write data to file
-		file << audioID << " " << audioPath << endl;
+		file << soundID << " " << audioPath << endl;
 	}
 
 	// Close file
 	file.close();
 
 	// Logging
-	Logger::throwInfo("Audio data saved!");
+	Logger::throwInfo("Sound data saved!");
 
 	// Return
 	return true;

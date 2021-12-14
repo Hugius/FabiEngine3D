@@ -7,10 +7,10 @@ void SoundPlayer::allocateChannels(unsigned int count)
 	// Limit count
 	count = clamp(count, Config::MIN_SOUND_CHANNELS, Config::MAX_SOUND_CHANNELS);
 
-	// Allocate audio channels
+	// Allocate sound channels
 	Mix_AllocateChannels(count);
 
-	// Initialize audio channels to none
+	// Initialize sound channels to none
 	_channels.clear();
 	for(unsigned int i = 0; i < count; i++)
 	{

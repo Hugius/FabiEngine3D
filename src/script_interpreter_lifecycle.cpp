@@ -6,7 +6,16 @@
 
 using std::istringstream;
 
-ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor, Animation3dEditor& animation3dEditor, AudioEditor& audioEditor, WorldEditor& worldEditor)
+ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d,
+									 Script& script,
+									 SkyEditor& skyEditor,
+									 TerrainEditor& terrainEditor,
+									 WaterEditor& waterEditor,
+									 ModelEditor& modelEditor,
+									 BillboardEditor& billboardEditor,
+									 Animation3dEditor& animation3dEditor,
+									 SoundEditor& soundEditor,
+									 WorldEditor& worldEditor)
 	:
 	_fe3d(fe3d),
 	_script(script),
@@ -15,7 +24,7 @@ ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SkyEdit
 	_waterEditor(waterEditor),
 	_modelEditor(modelEditor),
 	_billboardEditor(billboardEditor),
-	_audioEditor(audioEditor),
+	_soundEditor(soundEditor),
 	_animation3dEditor(animation3dEditor),
 	_worldEditor(worldEditor)
 {
@@ -177,7 +186,7 @@ void ScriptInterpreter::load()
 		_fe3d.misc_cacheFontsMultiThreaded(_billboardEditor.getAllFontPathsFromFile());
 
 		// Cache sounds
-		_fe3d.misc_cacheSoundsMultiThreaded(_audioEditor.getAllAudioPathsFromFile());
+		_fe3d.misc_cacheSoundsMultiThreaded(_soundEditor.getAllAudioPathsFromFile());
 	}
 
 	// No sky by default
@@ -202,7 +211,7 @@ void ScriptInterpreter::load()
 	_billboardEditor.loadFromFile();
 
 	// Load preview audio
-	_audioEditor.loadFromFile();
+	_soundEditor.loadFromFile();
 
 	// Camera
 	_fe3d.camera_reset();

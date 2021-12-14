@@ -1,111 +1,114 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Elements">
-      <UniqueIdentifier>{e7fc78d7-01d3-4b6d-a332-2134aef4f325}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Manager">
       <UniqueIdentifier>{049dc451-b853-4ded-b5e2-0197fb9509a0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Elements\Button">
-      <UniqueIdentifier>{f7cb3b4a-50ee-424a-87c9-d85523a4310b}</UniqueIdentifier>
+    <Filter Include="Element">
+      <UniqueIdentifier>{88bbef55-fccf-476a-ae9c-e0178d570227}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Elements\Rectangle">
-      <UniqueIdentifier>{f25dce86-74f9-4824-a64a-076658e03b1e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Elements\Screen">
-      <UniqueIdentifier>{f8490761-21d5-44db-8125-51cc83bb9f8c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Elements\Scrolling List">
-      <UniqueIdentifier>{b7c73be1-deec-40a6-a466-462d9a83c5fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Elements\Text Field">
-      <UniqueIdentifier>{34eb465e-4780-47f5-92ef-a5d024324407}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Elements\Viewport">
-      <UniqueIdentifier>{285d0f00-052f-4110-983a-864c20d385dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Elements\Window">
-      <UniqueIdentifier>{742b949a-a9ed-4d62-b0fc-51f05c573b56}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Elements\Write Field">
+    <Filter Include="Element\Write Field">
       <UniqueIdentifier>{e8139af9-336f-41bb-98fb-ee253efd10f5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Elements\Global Screen">
-      <UniqueIdentifier>{1b037f40-fcf1-49d4-ac38-edb11b6e80a9}</UniqueIdentifier>
+    <Filter Include="Element\Rectangle">
+      <UniqueIdentifier>{f25dce86-74f9-4824-a64a-076658e03b1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Element\Screen">
+      <UniqueIdentifier>{f8490761-21d5-44db-8125-51cc83bb9f8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Element\Scrolling List">
+      <UniqueIdentifier>{b7c73be1-deec-40a6-a466-462d9a83c5fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Element\Text Field">
+      <UniqueIdentifier>{34eb465e-4780-47f5-92ef-a5d024324407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Element\Viewport">
+      <UniqueIdentifier>{285d0f00-052f-4110-983a-864c20d385dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Element\Window">
+      <UniqueIdentifier>{742b949a-a9ed-4d62-b0fc-51f05c573b56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Element\Button">
+      <UniqueIdentifier>{f7cb3b4a-50ee-424a-87c9-d85523a4310b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Element\Screen\Global">
+      <UniqueIdentifier>{87f416a3-7e26-4614-a512-db5ffb377f30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Element\Screen\Local">
+      <UniqueIdentifier>{4925ec21-ecad-4ca8-a4d6-174725b42d0f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\engine_gui_manager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_gui_global_screen_element.cpp">
-      <Filter>Elements\Global Screen</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_gui_global_screen_form.cpp">
-      <Filter>Elements\Global Screen</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_gui_global_screen_misc.cpp">
-      <Filter>Elements\Global Screen</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\engine_gui_button.cpp">
-      <Filter>Elements\Button</Filter>
+      <Filter>Element\Button</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\engine_gui_rectangle.cpp">
-      <Filter>Elements\Rectangle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_gui_screen_element.cpp">
-      <Filter>Elements\Screen</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_gui_screen_misc.cpp">
-      <Filter>Elements\Screen</Filter>
+      <Filter>Element\Rectangle</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\engine_gui_scrolling_list.cpp">
-      <Filter>Elements\Scrolling List</Filter>
+      <Filter>Element\Scrolling List</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\engine_gui_text_field.cpp">
-      <Filter>Elements\Text Field</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_gui_write_field.cpp">
-      <Filter>Elements\Write Field</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_gui_window.cpp">
-      <Filter>Elements\Window</Filter>
+      <Filter>Element\Text Field</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\engine_gui_viewport.cpp">
-      <Filter>Elements\Viewport</Filter>
+      <Filter>Element\Viewport</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\engine_gui_window.cpp">
+      <Filter>Element\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\engine_gui_write_field.cpp">
+      <Filter>Element\Write Field</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\engine_gui_global_screen_element.cpp">
+      <Filter>Element\Screen\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\engine_gui_global_screen_form.cpp">
+      <Filter>Element\Screen\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\engine_gui_global_screen_misc.cpp">
+      <Filter>Element\Screen\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\engine_gui_screen_element.cpp">
+      <Filter>Element\Screen\Local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\engine_gui_screen_misc.cpp">
+      <Filter>Element\Screen\Local</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\engine_gui_manager.hpp">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\engine_gui_global_screen.hpp">
-      <Filter>Elements\Global Screen</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\engine_gui_button.hpp">
-      <Filter>Elements\Button</Filter>
+      <Filter>Element\Button</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\engine_gui_rectangle.hpp">
-      <Filter>Elements\Rectangle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\engine_gui_screen.hpp">
-      <Filter>Elements\Screen</Filter>
+      <Filter>Element\Rectangle</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\engine_gui_scrolling_list.hpp">
-      <Filter>Elements\Scrolling List</Filter>
+      <Filter>Element\Scrolling List</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\engine_gui_text_field.hpp">
-      <Filter>Elements\Text Field</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\engine_gui_write_field.hpp">
-      <Filter>Elements\Write Field</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\engine_gui_window.hpp">
-      <Filter>Elements\Window</Filter>
+      <Filter>Element\Text Field</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\engine_gui_viewport.hpp">
-      <Filter>Elements\Viewport</Filter>
+      <Filter>Element\Viewport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\engine_gui_window.hpp">
+      <Filter>Element\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\engine_gui_write_field.hpp">
+      <Filter>Element\Write Field</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\engine_gui_global_screen.hpp">
+      <Filter>Element\Screen\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\engine_gui_screen.hpp">
+      <Filter>Element\Screen\Local</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

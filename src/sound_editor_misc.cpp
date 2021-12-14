@@ -1,24 +1,24 @@
-#include "audio_editor.hpp"
+#include "sound_editor.hpp"
 
 #include <algorithm>
 
-void AudioEditor::setCurrentProjectID(const string& projectID)
+void SoundEditor::setCurrentProjectID(const string& projectID)
 {
 	_currentProjectID = projectID;
 }
 
-const bool AudioEditor::isLoaded() const
+const bool SoundEditor::isLoaded() const
 {
 	return _isEditorLoaded;
 }
 
-const vector<string>& AudioEditor::getLoadedIDs()
+const vector<string>& SoundEditor::getLoadedIDs()
 {
 	sort(_loadedAudioIDs.begin(), _loadedAudioIDs.end());
 	return _loadedAudioIDs;
 }
 
-void AudioEditor::_updateMiscellaneous()
+void SoundEditor::_updateMiscellaneous()
 {
 	// Temporary values
 	bool isExisting = _fe3d.sound2d_isExisting(_currentAudioID);

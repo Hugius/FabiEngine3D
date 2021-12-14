@@ -1,11 +1,11 @@
-#include "audio_player.hpp"
+#include "sound_player.hpp"
 
 using std::clamp;
 
-void AudioPlayer::allocateChannels(unsigned int count)
+void SoundPlayer::allocateChannels(unsigned int count)
 {
 	// Limit count
-	count = clamp(count, Config::MIN_AUDIO_CHANNELS, Config::MAX_AUDIO_CHANNELS);
+	count = clamp(count, Config::MIN_SOUND_CHANNELS, Config::MAX_SOUND_CHANNELS);
 
 	// Allocate audio channels
 	Mix_AllocateChannels(count);
@@ -18,7 +18,7 @@ void AudioPlayer::allocateChannels(unsigned int count)
 	}
 }
 
-const unsigned int AudioPlayer::getUsedChannelCount() const
+const unsigned int SoundPlayer::getUsedChannelCount() const
 {
 	int count = 0;
 
@@ -33,12 +33,12 @@ const unsigned int AudioPlayer::getUsedChannelCount() const
 	return count;
 }
 
-const unsigned int AudioPlayer::getAllocatedChannelCount() const
+const unsigned int SoundPlayer::getAllocatedChannelCount() const
 {
 	return static_cast<unsigned int>(_channels.size());
 }
 
-const  int AudioPlayer::_getFreeChannel() const
+const  int SoundPlayer::_getFreeChannel() const
 {
 	for(size_t i = 0; i < _channels.size(); i++)
 	{
@@ -51,7 +51,7 @@ const  int AudioPlayer::_getFreeChannel() const
 	return -1;
 }
 
-const bool AudioPlayer::isChannelAvailable() const
+const bool SoundPlayer::isChannelAvailable() const
 {
 	for(size_t i = 0; i < _channels.size(); i++)
 	{

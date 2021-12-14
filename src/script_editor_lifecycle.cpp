@@ -7,12 +7,30 @@ using LVPC = LeftViewportController;
 
 #define TW(text) VPC::calculateTextWidth(text, CW)
 
-ScriptEditor::ScriptEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor, Animation3dEditor& animation3dEditor, AudioEditor& audioEditor, WorldEditor& worldEditor)
+ScriptEditor::ScriptEditor(FabiEngine3D& fe3d,
+						   EngineGuiManager& gui,
+						   SkyEditor& skyEditor,
+						   TerrainEditor& terrainEditor,
+						   WaterEditor& waterEditor,
+						   ModelEditor& modelEditor,
+						   BillboardEditor& billboardEditor,
+						   Animation3dEditor& animation3dEditor,
+						   SoundEditor& soundEditor,
+						   WorldEditor& worldEditor)
 	:
 	_fe3d(fe3d),
 	_gui(gui),
 	_script(fe3d),
-	_scriptExecutor(fe3d, _script, skyEditor, terrainEditor, waterEditor, modelEditor, billboardEditor, animation3dEditor, audioEditor, worldEditor)
+	_scriptExecutor(fe3d,
+					_script,
+					skyEditor,
+					terrainEditor,
+					waterEditor,
+					modelEditor,
+					billboardEditor,
+					animation3dEditor,
+					soundEditor,
+					worldEditor)
 {
 
 }

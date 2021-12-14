@@ -19,7 +19,7 @@ public:
 
 	// VOID
 	void allocateChannels(unsigned int count);
-	void update(Camera& camera, vector<Sound2d>& sound2dList, vector<Sound3d>& sound3dList);
+	void update(Camera& camera, vector<Sound2d>& sound2ds, vector<Sound3d>& sound3ds);
 	void playSound2d(Sound2d& sound, int loops, unsigned int fadeMS, bool mustForcePlay);
 	void pauseSound2d(Sound2d& sound);
 	void resumeSound2d(Sound2d& sound);

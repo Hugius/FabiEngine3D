@@ -1,4 +1,4 @@
-#include "audio_player.hpp"
+#include "sound_player.hpp"
 #include "logger.hpp"
 
 using std::clamp;
@@ -9,17 +9,17 @@ SoundPlayer::SoundPlayer()
 	Mix_AllocateChannels(0);
 }
 
-void SoundPlayer::update(Camera& camera, vector<Sound2d>& sound2dList, vector<Sound3d>& sound3dList)
+void SoundPlayer::update(Camera& camera, vector<Sound2d>& sound2ds, vector<Sound3d>& sound3ds)
 {
 	// Update 2D sounds
-	for(auto& sound : sound2dList)
+	for(auto& sound : sound2ds)
 	{
 		// Update sound volume
 		_updateSound2dVolume(sound);
 	}
 
 	// Update 3D sounds
-	for(auto& sound : sound3dList)
+	for(auto& sound : sound3ds)
 	{
 		// Check if sound is started
 		if(isSound3dStarted(sound))

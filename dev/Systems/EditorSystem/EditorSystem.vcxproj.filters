@@ -1,15 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Audio Editor">
-      <UniqueIdentifier>{8011f7e8-c7ba-4295-b138-3e6e1eb14d63}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Audio Editor\Core">
-      <UniqueIdentifier>{752ab018-d668-4268-a4d1-ffa2772f05b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Audio Editor\Miscellaneous">
-      <UniqueIdentifier>{2877187a-dffb-491f-b745-08b7ab97e001}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Billboard Editor">
       <UniqueIdentifier>{063d7b87-4367-42d9-9cd8-ec43b6c6859d}</UniqueIdentifier>
     </Filter>
@@ -103,12 +94,6 @@
     <Filter Include="Billboard Editor\Persistence">
       <UniqueIdentifier>{56c13b35-dfec-489b-8bb5-898cc76156f2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Audio Editor\Persistence">
-      <UniqueIdentifier>{a017341e-9ace-40d8-8090-f5b3370da817}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Audio Editor\Update">
-      <UniqueIdentifier>{e2ab1721-0c9c-494a-9bf7-5e9c85a34bef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Billboard Editor\Update">
       <UniqueIdentifier>{4ff3dc37-6430-4a6e-b964-a56600422763}</UniqueIdentifier>
     </Filter>
@@ -145,9 +130,6 @@
     <Filter Include="World Editor\Update\Sky">
       <UniqueIdentifier>{3316dca3-322a-4803-a69a-feeebefa98f2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="World Editor\Update\Sound">
-      <UniqueIdentifier>{a79fe924-4760-4e94-b817-3591b6e1133b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="World Editor\Update\Spotlight">
       <UniqueIdentifier>{aea86504-0afd-4aef-8db1-993fe0469761}</UniqueIdentifier>
     </Filter>
@@ -172,9 +154,6 @@
     <Filter Include="3D Animation Editor\Miscellaneous">
       <UniqueIdentifier>{c79d9fa8-72de-43b2-8c68-d93aaa991a7d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="3D Animation Editor\Data Structures">
-      <UniqueIdentifier>{baad863b-7fa3-4249-9d05-0954879e29ae}</UniqueIdentifier>
-    </Filter>
     <Filter Include="3D Animation Editor\Persistence">
       <UniqueIdentifier>{f67f8919-3990-4cee-b59b-97e1c29774c0}</UniqueIdentifier>
     </Filter>
@@ -187,9 +166,6 @@
     <Filter Include="2D Animation Editor\Core">
       <UniqueIdentifier>{d08cb6aa-aa91-4d77-9a47-d383c8cae5f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2D Animation Editor\Data Structures">
-      <UniqueIdentifier>{7c7b847e-e36f-4402-8ae6-8ed4a01b7ad9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2D Animation Editor\Miscellaneous">
       <UniqueIdentifier>{2d496f78-f3d8-48d8-b73d-5a54ad9ffb9d}</UniqueIdentifier>
     </Filter>
@@ -198,6 +174,30 @@
     </Filter>
     <Filter Include="2D Animation Editor\Update">
       <UniqueIdentifier>{48974e80-2b9e-4c00-902e-59ad675354a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2D Animation Editor\Data">
+      <UniqueIdentifier>{7c7b847e-e36f-4402-8ae6-8ed4a01b7ad9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D Animation Editor\Data">
+      <UniqueIdentifier>{baad863b-7fa3-4249-9d05-0954879e29ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World Editor\Update\Sound3d">
+      <UniqueIdentifier>{a79fe924-4760-4e94-b817-3591b6e1133b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound Editor">
+      <UniqueIdentifier>{8011f7e8-c7ba-4295-b138-3e6e1eb14d63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound Editor\Core">
+      <UniqueIdentifier>{752ab018-d668-4268-a4d1-ffa2772f05b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound Editor\Miscellaneous">
+      <UniqueIdentifier>{2877187a-dffb-491f-b745-08b7ab97e001}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound Editor\Persistence">
+      <UniqueIdentifier>{a017341e-9ace-40d8-8090-f5b3370da817}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound Editor\Update">
+      <UniqueIdentifier>{e2ab1721-0c9c-494a-9bf7-5e9c85a34bef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -213,17 +213,17 @@
     <ClCompile Include="..\..\..\src\animation3d_editor_update_frame.cpp">
       <Filter>3D Animation Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\audio_editor_lifecycle.cpp">
-      <Filter>Audio Editor\Core</Filter>
+    <ClCompile Include="..\..\..\src\sound_editor_lifecycle.cpp">
+      <Filter>Sound Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\audio_editor_misc.cpp">
-      <Filter>Audio Editor\Miscellaneous</Filter>
+    <ClCompile Include="..\..\..\src\sound_editor_misc.cpp">
+      <Filter>Sound Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\audio_editor_update_misc.cpp">
-      <Filter>Audio Editor\Update</Filter>
+    <ClCompile Include="..\..\..\src\sound_editor_update_misc.cpp">
+      <Filter>Sound Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\audio_editor_update_menu.cpp">
-      <Filter>Audio Editor\Update</Filter>
+    <ClCompile Include="..\..\..\src\sound_editor_update_menu.cpp">
+      <Filter>Sound Editor\Update</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\billboard_editor_lifecycle.cpp">
       <Filter>Billboard Editor\Core</Filter>
@@ -321,14 +321,14 @@
     <ClCompile Include="..\..\..\src\world_editor_model_update_menu.cpp">
       <Filter>World Editor\Update\Model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_sound_update_edit.cpp">
-      <Filter>World Editor\Update\Sound</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_sound3d_update_edit.cpp">
+      <Filter>World Editor\Update\Sound3d</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_sound_update_place.cpp">
-      <Filter>World Editor\Update\Sound</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_sound3d_update_place.cpp">
+      <Filter>World Editor\Update\Sound3d</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor_sound_update_menu.cpp">
-      <Filter>World Editor\Update\Sound</Filter>
+    <ClCompile Include="..\..\..\src\world_editor_sound3d_update_menu.cpp">
+      <Filter>World Editor\Update\Sound3d</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_editor_lifecycle.cpp">
       <Filter>Script Editor\Core</Filter>
@@ -445,10 +445,10 @@
       <Filter>World Editor\Update\Reflection</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\animation3d.cpp">
-      <Filter>3D Animation Editor\Data Structures</Filter>
+      <Filter>3D Animation Editor\Data</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\animation3d_frame.cpp">
-      <Filter>3D Animation Editor\Data Structures</Filter>
+      <Filter>3D Animation Editor\Data</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\terrain_editor_update_normal.cpp">
       <Filter>Terrain Editor\Update</Filter>
@@ -480,8 +480,8 @@
     <ClCompile Include="..\..\..\src\billboard_editor_saving.cpp">
       <Filter>Billboard Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\audio_editor_saving.cpp">
-      <Filter>Audio Editor\Persistence</Filter>
+    <ClCompile Include="..\..\..\src\sound_editor_saving.cpp">
+      <Filter>Sound Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\animation3d_editor_saving.cpp">
       <Filter>3D Animation Editor\Persistence</Filter>
@@ -516,8 +516,8 @@
     <ClCompile Include="..\..\..\src\animation3d_editor_loading.cpp">
       <Filter>3D Animation Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\audio_editor_loading.cpp">
-      <Filter>Audio Editor\Persistence</Filter>
+    <ClCompile Include="..\..\..\src\sound_editor_loading.cpp">
+      <Filter>Sound Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_editor_loading.cpp">
       <Filter>Script Editor\Persistence</Filter>
@@ -529,7 +529,7 @@
       <Filter>2D Animation Editor\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\animation2d.cpp">
-      <Filter>2D Animation Editor\Data Structures</Filter>
+      <Filter>2D Animation Editor\Data</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\animation2d_editor_misc.cpp">
       <Filter>2D Animation Editor\Miscellaneous</Filter>
@@ -564,13 +564,13 @@
       <Filter>3D Animation Editor\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\animation3d.hpp">
-      <Filter>3D Animation Editor\Data Structures</Filter>
+      <Filter>3D Animation Editor\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\animation3d_frame.hpp">
-      <Filter>3D Animation Editor\Data Structures</Filter>
+      <Filter>3D Animation Editor\Data</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\audio_editor.hpp">
-      <Filter>Audio Editor\Core</Filter>
+    <ClInclude Include="..\..\..\src\sound_editor.hpp">
+      <Filter>Sound Editor\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\billboard_editor.hpp">
       <Filter>Billboard Editor\Core</Filter>
@@ -600,7 +600,7 @@
       <Filter>2D Animation Editor\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\animation2d.hpp">
-      <Filter>2D Animation Editor\Data Structures</Filter>
+      <Filter>2D Animation Editor\Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

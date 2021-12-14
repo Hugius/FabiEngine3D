@@ -9,7 +9,7 @@
 #include "billboard_editor.hpp"
 #include "animation3d_editor.hpp"
 #include "animation2d_editor.hpp"
-#include "audio_editor.hpp"
+#include "sound_editor.hpp"
 #include "world_editor.hpp"
 #include "script_editor.hpp"
 
@@ -26,7 +26,7 @@ public:
 						  BillboardEditor& billboardEditor,
 						  Animation3dEditor& animation3dEditor,
 						  Animation2dEditor& animation2dEditor,
-						  AudioEditor& audioEditor,
+						  SoundEditor& soundEditor,
 						  WorldEditor& worldEditor,
 						  ScriptEditor& scriptEditor);
 
@@ -80,7 +80,7 @@ private:
 	BillboardEditor& _billboardEditor;
 	Animation3dEditor& _animation3dEditor;
 	Animation2dEditor& _animation2dEditor;
-	AudioEditor& _audioEditor;
+	SoundEditor& _soundEditor;
 	WorldEditor& _worldEditor;
 	ScriptEditor& _scriptEditor;
 };

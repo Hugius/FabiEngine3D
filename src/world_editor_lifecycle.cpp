@@ -2,7 +2,15 @@
 #include "left_viewport_controller.hpp"
 #include "configuration.hpp"
 
-WorldEditor::WorldEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor, Animation3dEditor& animation3dEditor, AudioEditor& audioEditor)
+WorldEditor::WorldEditor(FabiEngine3D& fe3d,
+						 EngineGuiManager& gui,
+						 SkyEditor& skyEditor,
+						 TerrainEditor& terrainEditor,
+						 WaterEditor& waterEditor,
+						 ModelEditor& modelEditor,
+						 BillboardEditor& billboardEditor,
+						 Animation3dEditor& animation3dEditor,
+						 SoundEditor& soundEditor)
 	:
 	_fe3d(fe3d),
 	_gui(gui),
@@ -12,7 +20,7 @@ WorldEditor::WorldEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& s
 	_modelEditor(modelEditor),
 	_billboardEditor(billboardEditor),
 	_animation3dEditor(animation3dEditor),
-	_audioEditor(audioEditor)
+	_soundEditor(soundEditor)
 {
 
 }
@@ -65,19 +73,19 @@ void WorldEditor::load()
 	_animation3dEditor.loadFromFile(false);
 
 	// Load preview sounds
-	_audioEditor.loadFromFile();
+	_soundEditor.loadFromFile();
 	_fe3d.model_create(PREVIEW_SPEAKER_ID, SPEAKER_MODEL_PATH);
 	_fe3d.model_setBaseSize(PREVIEW_SPEAKER_ID, DEFAULT_SPEAKER_SIZE);
 	_fe3d.model_setShadowed(PREVIEW_SPEAKER_ID, false);
 	_fe3d.model_setReflected(PREVIEW_SPEAKER_ID, false);
 	_fe3d.model_setBright(PREVIEW_SPEAKER_ID, true);
 	_fe3d.model_setVisible(PREVIEW_SPEAKER_ID, false);
-	for(const auto& audioID : _audioEditor.getLoadedIDs())
+	for(const auto& soundID : _soundEditor.getLoadedIDs())
 	{
-		_fe3d.sound3d_setMaxVolume(audioID, DEFAULT_SOUND_MAX_VOLUME);
-		_fe3d.sound3d_setMaxDistance(audioID, DEFAULT_SOUND_MAX_DISTANCE);
+		_fe3d.sound3d_setMaxVolume(soundID, DEFAULT_SOUND_MAX_VOLUME);
+		_fe3d.sound3d_setMaxDistance(soundID, DEFAULT_SOUND_MAX_DISTANCE);
 		_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuSoundPlace")->getScrollingList("sounds")->
-			createButton(audioID, audioID.substr(1));
+			createButton(soundID, soundID.substr(1));
 	}
 
 	// Load preview pointlight

@@ -5,34 +5,34 @@
       <Filter>Core Controller</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\left_viewport_controller.cpp">
-      <Filter>Viewport Controllers\Left</Filter>
+      <Filter>Viewport Controller\Left</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\right_viewport_controller.cpp">
-      <Filter>Viewport Controllers\Right</Filter>
+      <Filter>Viewport Controller\Right</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\top_viewport_controller_lifecycle.cpp">
-      <Filter>Viewport Controllers\Top</Filter>
+      <Filter>Viewport Controller\Top</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\top_viewport_controller_misc.cpp">
-      <Filter>Viewport Controllers\Top</Filter>
+      <Filter>Viewport Controller\Top</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\bottom_viewport_controller_lifecycle.cpp">
-      <Filter>Viewport Controllers\Bottom</Filter>
+      <Filter>Viewport Controller\Bottom</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\bottom_viewport_controller_console.cpp">
-      <Filter>Viewport Controllers\Bottom</Filter>
+      <Filter>Viewport Controller\Bottom</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\base_viewport_controller.cpp">
-      <Filter>Viewport Controllers\Base</Filter>
+      <Filter>Viewport Controller\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\bottom_viewport_controller_statistics.cpp">
-      <Filter>Viewport Controllers\Bottom</Filter>
+      <Filter>Viewport Controller\Bottom</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\top_viewport_controller_screen.cpp">
-      <Filter>Viewport Controllers\Top</Filter>
+      <Filter>Viewport Controller\Top</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -40,19 +40,19 @@
       <Filter>Core Controller</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\left_viewport_controller.hpp">
-      <Filter>Viewport Controllers\Left</Filter>
+      <Filter>Viewport Controller\Left</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\right_viewport_controller.hpp">
-      <Filter>Viewport Controllers\Right</Filter>
+      <Filter>Viewport Controller\Right</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\top_viewport_controller.hpp">
-      <Filter>Viewport Controllers\Top</Filter>
+      <Filter>Viewport Controller\Top</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\bottom_viewport_controller.hpp">
-      <Filter>Viewport Controllers\Bottom</Filter>
+      <Filter>Viewport Controller\Bottom</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\base_viewport_controller.hpp">
-      <Filter>Viewport Controllers\Base</Filter>
+      <Filter>Viewport Controller\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -62,25 +62,25 @@
     <Filter Include="Core Controller">
       <UniqueIdentifier>{316b82ce-ffae-4d2e-9166-6b85edc366b2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Viewport Controllers">
-      <UniqueIdentifier>{e6006a3f-d7a8-4aac-96ff-43147e3b6520}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Viewport Controllers\Left">
-      <UniqueIdentifier>{e015ce04-192d-421b-bab5-4f26de7ccfdf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Viewport Controllers\Right">
-      <UniqueIdentifier>{806366d6-d72c-41d4-a43b-ed34ec72dcd6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Viewport Controllers\Top">
-      <UniqueIdentifier>{63bca393-cb2f-44ba-bba1-584e454128a5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Viewport Controllers\Bottom">
-      <UniqueIdentifier>{1e20aeb9-ae11-49ad-86f5-fd56358d2ca4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Main">
       <UniqueIdentifier>{abd85b1f-6eba-43ca-8ab9-4770f0468c4f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Viewport Controllers\Base">
+    <Filter Include="Viewport Controller">
+      <UniqueIdentifier>{e6006a3f-d7a8-4aac-96ff-43147e3b6520}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Viewport Controller\Left">
+      <UniqueIdentifier>{e015ce04-192d-421b-bab5-4f26de7ccfdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Viewport Controller\Right">
+      <UniqueIdentifier>{806366d6-d72c-41d4-a43b-ed34ec72dcd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Viewport Controller\Top">
+      <UniqueIdentifier>{63bca393-cb2f-44ba-bba1-584e454128a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Viewport Controller\Bottom">
+      <UniqueIdentifier>{1e20aeb9-ae11-49ad-86f5-fd56358d2ca4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Viewport Controller\Base">
       <UniqueIdentifier>{1bae5270-bca5-41e5-80d2-e72a7743b26f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

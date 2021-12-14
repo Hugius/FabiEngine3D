@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Data Structures">
-      <UniqueIdentifier>{9dd572bc-a971-4c4d-bdc5-bafbeb583d68}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Collision">
       <UniqueIdentifier>{ca41db49-1882-4403-97a1-1182e8d0d208}</UniqueIdentifier>
     </Filter>
@@ -19,16 +16,19 @@
     <Filter Include="Camera">
       <UniqueIdentifier>{e615d742-8e80-49bf-9a91-1f6319243cc6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{9dd572bc-a971-4c4d-bdc5-bafbeb583d68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\box.cpp">
-      <Filter>Data Structures</Filter>
+      <Filter>Data</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\raycaster.cpp">
       <Filter>Raycasting</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\ray.cpp">
-      <Filter>Data Structures</Filter>
+      <Filter>Data</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\camera_collision_detector.cpp">
       <Filter>Collision\Detection</Filter>
@@ -48,13 +48,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\box.hpp">
-      <Filter>Data Structures</Filter>
+      <Filter>Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\raycaster.hpp">
       <Filter>Raycasting</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\ray.hpp">
-      <Filter>Data Structures</Filter>
+      <Filter>Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\camera_collision_detector.hpp">
       <Filter>Collision\Detection</Filter>

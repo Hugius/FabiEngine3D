@@ -1,4 +1,4 @@
-#include "audio_editor.hpp"
+#include "sound_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 #include "configuration.hpp"
@@ -7,7 +7,7 @@
 
 using std::ofstream;
 
-const bool AudioEditor::saveToFile() const
+const bool SoundEditor::saveToFile() const
 {
 	// Editor must be loaded
 	if(!_isEditorLoaded)
@@ -18,11 +18,11 @@ const bool AudioEditor::saveToFile() const
 	// Validate project ID
 	if(_currentProjectID.empty())
 	{
-		Logger::throwError("AudioEditor::saveToFile");
+		Logger::throwError("SoundEditor::saveToFile");
 	}
 
 	// Create or overwrite file
-	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\audio.fe3d");
+	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\sound.fe3d");
 
 	// Write audio data
 	for(const auto& audioID : _loadedAudioIDs)

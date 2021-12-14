@@ -18,7 +18,7 @@ EngineController::EngineController()
 						   _leftViewportController.getBillboardEditor(),
 						   _leftViewportController.getAnimation3dEditor(),
 						   _leftViewportController.getAnimation2dEditor(),
-						   _leftViewportController.getAudioEditor(),
+						   _leftViewportController.getSoundEditor(),
 						   _leftViewportController.getWorldEditor(),
 						   _leftViewportController.getScriptEditor()),
 	_bottomViewportController(*this, _gui, _topViewportController, _leftViewportController.getScriptEditor())

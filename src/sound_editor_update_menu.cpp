@@ -1,13 +1,13 @@
-#include "audio_editor.hpp"
+#include "sound_editor.hpp"
 #include "logger.hpp"
 
-void AudioEditor::_updateMainMenu()
+void SoundEditor::_updateMainMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if(screen->getID() == "audioEditorMenuMain")
+	if(screen->getID() == "soundEditorMenuMain")
 	{
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
@@ -58,13 +58,13 @@ void AudioEditor::_updateMainMenu()
 	}
 }
 
-void AudioEditor::_updateChoiceMenu()
+void SoundEditor::_updateChoiceMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if(screen->getID() == "audioEditorMenuChoice")
+	if(screen->getID() == "soundEditorMenuChoice")
 	{
 		// Temporary values
 		bool isExisting = _fe3d.sound2d_isExisting(_currentAudioID);
@@ -83,7 +83,7 @@ void AudioEditor::_updateChoiceMenu()
 			// Miscellaneous
 			_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("audioID")->getEntityID(), false);
 			_currentAudioID = "";
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuMain");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuMain");
 			return;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("play")->isHovered())

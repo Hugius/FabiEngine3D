@@ -20,16 +20,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\sound_manager.cpp" />
-    <ClCompile Include="..\..\..\src\audio_player_sound2d.cpp" />
-    <ClCompile Include="..\..\..\src\audio_player_sound3d.cpp" />
-    <ClCompile Include="..\..\..\src\audio_player_lifecycle.cpp" />
-    <ClCompile Include="..\..\..\src\audio_player_misc.cpp" />
+    <ClCompile Include="..\..\..\src\sound_player_sound2d.cpp" />
+    <ClCompile Include="..\..\..\src\sound_player_sound3d.cpp" />
+    <ClCompile Include="..\..\..\src\sound_player_lifecycle.cpp" />
+    <ClCompile Include="..\..\..\src\sound_player_misc.cpp" />
     <ClCompile Include="..\..\..\src\sound2d.cpp" />
     <ClCompile Include="..\..\..\src\sound3d.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\sound_manager.hpp" />
-    <ClInclude Include="..\..\..\src\audio_player.hpp" />
+    <ClInclude Include="..\..\..\src\sound_player.hpp" />
     <ClInclude Include="..\..\..\src\sound2d.hpp" />
     <ClInclude Include="..\..\..\src\sound3d.hpp" />
   </ItemGroup>

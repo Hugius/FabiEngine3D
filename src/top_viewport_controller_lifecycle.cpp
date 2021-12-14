@@ -21,7 +21,7 @@ TopViewportController::TopViewportController(FabiEngine3D& fe3d,
 											 BillboardEditor& billboardEditor,
 											 Animation3dEditor& animation3dEditor,
 											 Animation2dEditor& animation2dEditor,
-											 AudioEditor& audioEditor,
+											 SoundEditor& soundEditor,
 											 WorldEditor& worldEditor,
 											 ScriptEditor& scriptEditor)
 	:
@@ -34,7 +34,7 @@ TopViewportController::TopViewportController(FabiEngine3D& fe3d,
 	_billboardEditor(billboardEditor),
 	_animation3dEditor(animation3dEditor),
 	_animation2dEditor(animation2dEditor),
-	_audioEditor(audioEditor),
+	_soundEditor(soundEditor),
 	_worldEditor(worldEditor),
 	_scriptEditor(scriptEditor)
 {

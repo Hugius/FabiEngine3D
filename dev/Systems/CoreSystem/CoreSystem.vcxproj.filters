@@ -7,9 +7,6 @@
     <Filter Include="Interface">
       <UniqueIdentifier>{15138853-8c37-4c22-a1b4-cc362a51184e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interface\Entities">
-      <UniqueIdentifier>{58eff109-7a52-4f2b-b047-1ed6d6a63f68}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Interface\Core">
       <UniqueIdentifier>{ec2d2619-8458-42b3-b623-d20f669e26ae}</UniqueIdentifier>
     </Filter>
@@ -24,6 +21,9 @@
     </Filter>
     <Filter Include="Interface\Physics">
       <UniqueIdentifier>{f5362434-3d67-4be1-9287-05a20e5219da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface\Entity">
+      <UniqueIdentifier>{58eff109-7a52-4f2b-b047-1ed6d6a63f68}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -42,7 +42,7 @@
     <ClCompile Include="..\..\..\src\fe3d_graphics_getters.cpp">
       <Filter>Interface\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_audio_getters.cpp">
+    <ClCompile Include="..\..\..\src\fe3d_sound_getters.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_input.cpp">
@@ -61,46 +61,46 @@
       <Filter>Interface\Networking</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_sky_setters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_terrain_setters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_water_getters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_aabb_setters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_billboard_getters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_image_getters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_pointlight_getters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_model_getters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_text_getters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_reflection_getters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_spotlight_setters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_billboard_setters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_model_setters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_terrain_getters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_client_setters.cpp">
       <Filter>Interface\Networking</Filter>
@@ -108,32 +108,32 @@
     <ClCompile Include="..\..\..\src\fe3d_server_setters.cpp">
       <Filter>Interface\Networking</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_audio_setters.cpp">
+    <ClCompile Include="..\..\..\src\fe3d_sound_setters.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_aabb_getters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_image_setters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_pointlight_setters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_reflection_setters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_sky_getters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_spotlight_getters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_text_setters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_entity_water_setters.cpp">
-      <Filter>Interface\Entities</Filter>
+      <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_raycast_setters.cpp">
       <Filter>Interface\Physics</Filter>

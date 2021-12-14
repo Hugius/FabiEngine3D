@@ -3,10 +3,10 @@
 #include "fe3d.hpp"
 #include "engine_gui_manager.hpp"
 
-class AudioEditor final
+class SoundEditor final
 {
 public:
-	AudioEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
+	SoundEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 
 	// VOID
 	void setCurrentProjectID(const string& projectID);

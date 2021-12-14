@@ -1,19 +1,19 @@
-#include "audio_player.hpp"
+#include "sound_player.hpp"
 #include "logger.hpp"
 
-void AudioPlayer::playSound3d(Sound3d& sound, int loops, unsigned int fadeMS, bool mustForcePlay)
+void SoundPlayer::playSound3d(Sound3d& sound, int loops, unsigned int fadeMS, bool mustForcePlay)
 {
 	// Check if sound is started
 	if(isSound3dStarted(sound) && !mustForcePlay)
 	{
-		Logger::throwError("AudioPlayer::playSound3d::1");
+		Logger::throwError("SoundPlayer::playSound3d::1");
 	}
 
 	// Try to find free channel
 	auto channel = _getFreeChannel();
 	if(channel == -1)
 	{
-		Logger::throwError("AudioPlayer::playSound3d::2");
+		Logger::throwError("SoundPlayer::playSound3d::2");
 	}
 	_channels[channel] = sound.getID();
 
@@ -31,7 +31,7 @@ void AudioPlayer::playSound3d(Sound3d& sound, int loops, unsigned int fadeMS, bo
 	_updateSound3dVolume(sound);
 }
 
-void AudioPlayer::pauseAllSound3d(vector<Sound3d>& sounds)
+void SoundPlayer::pauseAllSound3d(vector<Sound3d>& sounds)
 {
 	for(const auto& sound : sounds)
 	{
@@ -45,18 +45,18 @@ void AudioPlayer::pauseAllSound3d(vector<Sound3d>& sounds)
 	}
 }
 
-void AudioPlayer::pauseSound3d(Sound3d& sound)
+void SoundPlayer::pauseSound3d(Sound3d& sound)
 {
 	// Check if sound is playing
 	if(!isSound3dPlaying(sound))
 	{
-		Logger::throwError("AudioPlayer::pauseSound3d::1");
+		Logger::throwError("SoundPlayer::pauseSound3d::1");
 	}
 
 	// Check if sound paused
 	if(isSound3dPaused(sound))
 	{
-		Logger::throwError("AudioPlayer::pauseSound3d::2");
+		Logger::throwError("SoundPlayer::pauseSound3d::2");
 	}
 
 	// Pause sound
@@ -66,7 +66,7 @@ void AudioPlayer::pauseSound3d(Sound3d& sound)
 	}
 }
 
-void AudioPlayer::resumeAllSound3d(vector<Sound3d>& sounds)
+void SoundPlayer::resumeAllSound3d(vector<Sound3d>& sounds)
 {
 	for(const auto& sound : sounds)
 	{
@@ -80,12 +80,12 @@ void AudioPlayer::resumeAllSound3d(vector<Sound3d>& sounds)
 	}
 }
 
-void AudioPlayer::resumeSound3d(Sound3d& sound)
+void SoundPlayer::resumeSound3d(Sound3d& sound)
 {
 	// Check if sound is not paused
 	if(!isSound3dPaused(sound))
 	{
-		Logger::throwError("AudioPlayer::resumeSound3d");
+		Logger::throwError("SoundPlayer::resumeSound3d");
 	}
 
 	// Resume sound
@@ -95,7 +95,7 @@ void AudioPlayer::resumeSound3d(Sound3d& sound)
 	}
 }
 
-void AudioPlayer::stopAllSound3d(vector<Sound3d>& sounds)
+void SoundPlayer::stopAllSound3d(vector<Sound3d>& sounds)
 {
 	// Resume before stopping
 	resumeAllSound3d(sounds);
@@ -113,12 +113,12 @@ void AudioPlayer::stopAllSound3d(vector<Sound3d>& sounds)
 	}
 }
 
-void AudioPlayer::stopSound3d(Sound3d& sound, unsigned int fadeMS)
+void SoundPlayer::stopSound3d(Sound3d& sound, unsigned int fadeMS)
 {
 	// Check if sound is not started
 	if(!isSound3dStarted(sound))
 	{
-		Logger::throwError("AudioPlayer::stopSound3d");
+		Logger::throwError("SoundPlayer::stopSound3d");
 	}
 
 	// Resume before stopping
@@ -152,7 +152,7 @@ void AudioPlayer::stopSound3d(Sound3d& sound, unsigned int fadeMS)
 	}
 }
 
-const bool AudioPlayer::isSound3dStarted(Sound3d& sound) const
+const bool SoundPlayer::isSound3dStarted(Sound3d& sound) const
 {
 	for(const auto& soundID : _channels)
 	{
@@ -165,17 +165,17 @@ const bool AudioPlayer::isSound3dStarted(Sound3d& sound) const
 	return false;
 }
 
-const bool AudioPlayer::isSound3dPlaying(Sound3d& sound) const
+const bool SoundPlayer::isSound3dPlaying(Sound3d& sound) const
 {
 	return (isSound3dStarted(sound) && !isSound3dPaused(sound));
 }
 
-const bool AudioPlayer::isSound3dPaused(Sound3d& sound) const
+const bool SoundPlayer::isSound3dPaused(Sound3d& sound) const
 {
 	return (isSound3dStarted(sound) && Mix_Paused(_findChannels(sound)[0]));
 }
 
-void AudioPlayer::_updateSound3dVolume(Sound3d& sound)
+void SoundPlayer::_updateSound3dVolume(Sound3d& sound)
 {
 	if(isSound3dStarted(sound))
 	{
@@ -186,7 +186,7 @@ void AudioPlayer::_updateSound3dVolume(Sound3d& sound)
 	}
 }
 
-const vector<int> AudioPlayer::_findChannels(Sound3d& sound) const
+const vector<int> SoundPlayer::_findChannels(Sound3d& sound) const
 {
 	// Temporary values
 	vector<int> channels;
@@ -203,7 +203,7 @@ const vector<int> AudioPlayer::_findChannels(Sound3d& sound) const
 	// Find must never fail
 	if(channels.empty())
 	{
-		Logger::throwError("AudioPlayer::_findChannels");
+		Logger::throwError("SoundPlayer::_findChannels");
 	}
 
 	// Return

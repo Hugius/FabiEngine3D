@@ -1,55 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Enums">
-      <UniqueIdentifier>{a7511681-4353-4e85-ba1a-e0b7d1d99d01}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Miscellaneous">
       <UniqueIdentifier>{cb9abead-d725-4fa1-af8f-f916f2d37d4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enumeration">
+      <UniqueIdentifier>{a7511681-4353-4e85-ba1a-e0b7d1d99d01}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\aabb_parent_entity_type.hpp">
-      <Filter>Enums</Filter>
+      <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\animation3d_speed_type.hpp">
-      <Filter>Enums</Filter>
+      <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\blur_direction.hpp">
-      <Filter>Enums</Filter>
+      <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\buffer_type.hpp">
-      <Filter>Enums</Filter>
+      <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\direction.hpp">
-      <Filter>Enums</Filter>
+      <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\entity_type.hpp">
-      <Filter>Enums</Filter>
+      <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\message_type.hpp">
-      <Filter>Enums</Filter>
+      <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\script_condition_type.hpp">
-      <Filter>Enums</Filter>
+      <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\script_type.hpp">
-      <Filter>Enums</Filter>
+      <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\script_value_type.hpp">
-      <Filter>Enums</Filter>
+      <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\script_variable_scope.hpp">
-      <Filter>Enums</Filter>
+      <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\script_variable_type.hpp">
-      <Filter>Enums</Filter>
+      <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\input_type.hpp">
-      <Filter>Enums</Filter>
+      <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\transformation_type.hpp">
-      <Filter>Enums</Filter>
+      <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\configuration.hpp">
       <Filter>Miscellaneous</Filter>
@@ -70,22 +70,22 @@
       <Filter>Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\network_protocol.hpp">
-      <Filter>Enums</Filter>
+      <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\water_quality.hpp">
-      <Filter>Enums</Filter>
+      <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\bloom_type.hpp">
-      <Filter>Enums</Filter>
+      <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\reflection_type.hpp">
-      <Filter>Enums</Filter>
+      <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\pointlight_shape.hpp">
-      <Filter>Enums</Filter>
+      <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\direction_order.hpp">
-      <Filter>Enums</Filter>
+      <Filter>Enumeration</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -82,7 +82,7 @@ void SettingsEditor::update()
 		// Temporary values
 		auto isAntiAliasingEnabled = _fe3d.gfx_isAntiAliasingEnabled();
 		auto anisotropicFilteringQuality = _fe3d.gfx_getAnisotropicFilteringQuality();
-		auto maxAudioChannels = _fe3d.misc_getMaxAudioChannelCount();
+		auto maxSoundChannelCount = _fe3d.misc_getMaxSoundChannelCount();
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -97,9 +97,9 @@ void SettingsEditor::update()
 		{
 			_gui.getGlobalScreen()->createValueForm("anisotropicFilteringQuality", "Anisotropic Filtering Quality", anisotropicFilteringQuality, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("maxAudioChannels")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("maxSoundChannelCount")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("maxAudioChannels", "Max Audio Channels", maxAudioChannels, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("maxSoundChannelCount", "Max Sound Channels", maxSoundChannelCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
 		// Update answer forms
@@ -130,9 +130,9 @@ void SettingsEditor::update()
 		{
 			_fe3d.gfx_setAnisotropicFilteringQuality(anisotropicFilteringQuality);
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("maxAudioChannels", maxAudioChannels, {}))
+		if(_gui.getGlobalScreen()->checkValueForm("maxSoundChannelCount", maxSoundChannelCount, {}))
 		{
-			_fe3d.misc_setMaxAudioChannelCount(maxAudioChannels);
+			_fe3d.misc_setMaxSoundChannelCount(maxSoundChannelCount);
 		}
 
 		// Miscellaneous
@@ -144,7 +144,7 @@ void SettingsEditor::loadDefaultSettings()
 {
 	_fe3d.gfx_isAntiAliasingEnabled() ? _fe3d.gfx_disableAntiAliasing(false) : void();
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
-	_fe3d.misc_setMaxAudioChannelCount(Config::MIN_AUDIO_CHANNELS);
+	_fe3d.misc_setMaxSoundChannelCount(Config::MIN_SOUND_CHANNELS);
 }
 
 const bool SettingsEditor::loadSettingsFromFile() const
@@ -176,12 +176,12 @@ const bool SettingsEditor::loadSettingsFromFile() const
 	istringstream iss(line);
 
 	// Extract values from file
-	unsigned int anisotropicFilteringQuality, audioChannels;
+	unsigned int anisotropicFilteringQuality, maxSoundChannelCount;
 	bool isAntiAliasingEnabled;
 	iss >>
 		isAntiAliasingEnabled >>
 		anisotropicFilteringQuality >>
-		audioChannels;
+		maxSoundChannelCount;
 
 	// Disable anti aliasing
 	if(_fe3d.gfx_isAntiAliasingEnabled())
@@ -192,7 +192,7 @@ const bool SettingsEditor::loadSettingsFromFile() const
 	// Set values
 	isAntiAliasingEnabled ? _fe3d.gfx_enableAntiAliasing() : void();
 	_fe3d.gfx_setAnisotropicFilteringQuality(anisotropicFilteringQuality);
-	_fe3d.misc_setMaxAudioChannelCount(audioChannels);
+	_fe3d.misc_setMaxSoundChannelCount(maxSoundChannelCount);
 
 	// Close file
 	file.close();
@@ -215,13 +215,13 @@ const bool SettingsEditor::saveSettingsToFile() const
 	// Get values
 	auto isAntiAliasingEnabled = _fe3d.gfx_isAntiAliasingEnabled();
 	auto anisotropicFilteringQuality = _fe3d.gfx_getAnisotropicFilteringQuality();
-	auto audioChannels = _fe3d.misc_getMaxAudioChannelCount();
+	auto maxSoundChannelCount = _fe3d.misc_getMaxSoundChannelCount();
 
 	// Write to file
 	file <<
 		isAntiAliasingEnabled << " " <<
 		anisotropicFilteringQuality << " " <<
-		audioChannels;
+		maxSoundChannelCount;
 
 	// Close file
 	file.close();
@@ -250,7 +250,7 @@ void SettingsEditor::_loadGUI()
 	leftWindow->createScreen("settingsEditorMenuMain");
 	leftWindow->getScreen("settingsEditorMenuMain")->createButton("isAntiAliasingEnabled", fvec2(0.0f, positions[0]), fvec2(TW("Anti Aliasing"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Anti Aliasing", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("settingsEditorMenuMain")->createButton("anisotropicFilteringQuality", fvec2(0.0f, positions[1]), fvec2(TW("Aniso Filtering"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Aniso Filtering", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("settingsEditorMenuMain")->createButton("maxAudioChannels", fvec2(0.0f, positions[2]), fvec2(TW("Audio"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("maxSoundChannelCount", fvec2(0.0f, positions[2]), fvec2(TW("Sound Channels"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sound Channels", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("settingsEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 }
 

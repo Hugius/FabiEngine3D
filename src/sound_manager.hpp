@@ -23,8 +23,8 @@ public:
 	const bool isSound3dExisting(const string& ID) const;
 
 	// MISCELLANEOUS
-	vector<Sound2d>& getAllSound2d();
-	vector<Sound3d>& getAllSound3d();
+	vector<Sound2d>& getAllSound2ds();
+	vector<Sound3d>& getAllSound3ds();
 	Sound2d& getSound2d(const string& ID);
 	Sound3d& getSound3d(const string& ID);
 
@@ -34,7 +34,7 @@ private:
 	const int _findSound3dIndex(const string& ID) const;
 
 	// MISCELLANEOUS
-	vector<Sound2d> _sound2dList;
-	vector<Sound3d> _sound3dList;
+	vector<Sound2d> _sound2ds;
+	vector<Sound3d> _sound3ds;
 	AudioLoader& _audioLoader;
 };

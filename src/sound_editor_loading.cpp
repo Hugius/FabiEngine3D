@@ -1,4 +1,4 @@
-#include "audio_editor.hpp"
+#include "sound_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 #include "configuration.hpp"
@@ -8,23 +8,23 @@
 using std::ifstream;
 using std::istringstream;
 
-const vector<string> AudioEditor::getAllAudioPathsFromFile() const
+const vector<string> SoundEditor::getAllAudioPathsFromFile() const
 {
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("AudioEditor::getAllAudioPathsFromFile");
+		Logger::throwError("SoundEditor::getAllAudioPathsFromFile");
 	}
 
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\audio.fe3d");
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\sound.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project corrupted: file `audio.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `sound.fe3d` missing!");
 		return {};
 	}
 
@@ -67,12 +67,12 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile() const
 	return audioPaths;
 }
 
-const bool AudioEditor::loadFromFile()
+const bool SoundEditor::loadFromFile()
 {
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("AudioEditor::loadFromFile");
+		Logger::throwError("SoundEditor::loadFromFile");
 	}
 
 	// Clear IDs from previous loads
@@ -81,12 +81,12 @@ const bool AudioEditor::loadFromFile()
 	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\audio.fe3d");
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\sound.fe3d");
 
 	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project corrupted: file `audio.fe3d` missing!");
+		Logger::throwWarning("Project corrupted: file `sound.fe3d` missing!");
 		return false;
 	}
 

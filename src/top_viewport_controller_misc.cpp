@@ -46,7 +46,7 @@ void TopViewportController::_updateMiscellaneous()
 	screen->getButton("worldEditor")->setHoverable(isHoverable);
 	screen->getButton("animation3dEditor")->setHoverable(isHoverable);
 	screen->getButton("animation2dEditor")->setHoverable(isHoverable);
-	screen->getButton("audioEditor")->setHoverable(isHoverable);
+	screen->getButton("soundEditor")->setHoverable(isHoverable);
 	screen->getButton("scriptEditor")->setHoverable(isHoverable);
 }
 
@@ -119,20 +119,20 @@ void TopViewportController::_updateProjectCreating()
 				// Create new empty project files
 				auto animation3dFile = ofstream(newProjectDirectoryPath + "data\\animation3d.fe3d");
 				auto animation2dFile = ofstream(newProjectDirectoryPath + "data\\animation2d.fe3d");
-				auto audioFile = ofstream(newProjectDirectoryPath + "data\\audio.fe3d");
 				auto billboardFile = ofstream(newProjectDirectoryPath + "data\\billboard.fe3d");
 				auto modelFile = ofstream(newProjectDirectoryPath + "data\\model.fe3d");
 				auto settingsFile = ofstream(newProjectDirectoryPath + "data\\settings.fe3d");
 				auto skyFile = ofstream(newProjectDirectoryPath + "data\\sky.fe3d");
+				auto soundFile = ofstream(newProjectDirectoryPath + "data\\sound.fe3d");
 				auto terrainFile = ofstream(newProjectDirectoryPath + "data\\terrain.fe3d");
 				auto waterFile = ofstream(newProjectDirectoryPath + "data\\water.fe3d");
 				animation3dFile.close();
 				animation2dFile.close();
-				audioFile.close();
 				billboardFile.close();
 				modelFile.close();
 				settingsFile.close();
 				skyFile.close();
+				soundFile.close();
 				terrainFile.close();
 				waterFile.close();
 
@@ -229,7 +229,7 @@ void TopViewportController::_updateProjectLoading()
 			_fe3d.misc_cacheFontsMultiThreaded(_billboardEditor.getAllFontPathsFromFile());
 
 			// Cache sounds
-			_fe3d.misc_cacheSoundsMultiThreaded(_audioEditor.getAllAudioPathsFromFile());
+			_fe3d.misc_cacheSoundsMultiThreaded(_soundEditor.getAllAudioPathsFromFile());
 
 			// Logging
 			Logger::throwInfo("Existing project \"" + _currentProjectID + "\" loaded!");
@@ -368,9 +368,9 @@ void TopViewportController::_applyProjectChange()
 	}
 
 	// Unload audio editor
-	if(_audioEditor.isLoaded())
+	if(_soundEditor.isLoaded())
 	{
-		_audioEditor.unload();
+		_soundEditor.unload();
 	}
 
 	// Unload world editor
@@ -394,7 +394,7 @@ void TopViewportController::_applyProjectChange()
 	_billboardEditor.setCurrentProjectID(_currentProjectID);
 	_animation3dEditor.setCurrentProjectID(_currentProjectID);
 	_animation2dEditor.setCurrentProjectID(_currentProjectID);
-	_audioEditor.setCurrentProjectID(_currentProjectID);
+	_soundEditor.setCurrentProjectID(_currentProjectID);
 	_worldEditor.setCurrentProjectID(_currentProjectID);
 	_scriptEditor.setCurrentProjectID(_currentProjectID);
 }
@@ -416,7 +416,7 @@ const bool TopViewportController::isProjectCorrupted(const string& projectDirect
 	// Check if all default files are still existing
 	if(!Tools::isFileExisting(projectDirectoryPath + "data\\animation3d.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\animation2d.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "data\\audio.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "data\\sound.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\billboard.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\model.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\settings.fe3d") ||
@@ -447,7 +447,7 @@ void TopViewportController::_saveCurrentProject()
 	_billboardEditor.saveToFile();
 	_animation3dEditor.saveToFile();
 	_animation2dEditor.saveToFile();
-	_audioEditor.saveToFile();
+	_soundEditor.saveToFile();
 	_worldEditor.saveEditorWorldToFile();
 	_scriptEditor.saveScriptFiles();
 

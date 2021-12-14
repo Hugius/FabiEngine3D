@@ -141,7 +141,7 @@ const vector<pair<string, int>> FabiEngine3D::misc_getUpdateProfilingStatistics(
 		pair<string, int>("reflectionEntityUpdate", 0),
 		pair<string, int>("guiEntityUpdate", 0),
 		pair<string, int>("shadowUpdate", 0),
-		pair<string, int>("audioUpdate", 0),
+		pair<string, int>("soundUpdate", 0),
 		pair<string, int>("networkUpdate", 0)
 	};
 
@@ -215,12 +215,12 @@ const bool FabiEngine3D::misc_isDebugRenderingEnabled() const
 	return _core->_renderBus.isDebugRenderingEnabled();
 }
 
-const unsigned int FabiEngine3D::misc_getMaxAudioChannelCount() const
+const unsigned int FabiEngine3D::misc_getMaxSoundChannelCount() const
 {
-	return _core->_audioPlayer.getAllocatedChannelCount();
+	return _core->_soundPlayer.getAllocatedChannelCount();
 }
 
-const unsigned int FabiEngine3D::misc_getUsedAudioChannelCount() const
+const unsigned int FabiEngine3D::misc_getUsedSoundChannelCount() const
 {
-	return _core->_audioPlayer.getUsedChannelCount();
+	return _core->_soundPlayer.getUsedChannelCount();
 }

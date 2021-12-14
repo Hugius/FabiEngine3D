@@ -1,8 +1,8 @@
-#include "audio_editor.hpp"
+#include "sound_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 
-void AudioEditor::_updateAudioCreating()
+void SoundEditor::_updateAudioCreating()
 {
 	if(_isCreatingAudio)
 	{
@@ -26,7 +26,7 @@ void AudioEditor::_updateAudioCreating()
 						// Validate project ID
 						if(_currentProjectID.empty())
 						{
-							Logger::throwError("AudioEditor::_updateAudioCreating");
+							Logger::throwError("SoundEditor::_updateAudioCreating");
 						}
 
 						// Get the chosen file name
@@ -67,7 +67,7 @@ void AudioEditor::_updateAudioCreating()
 						if(_fe3d.sound2d_isExisting(newAudioID))
 						{
 							// Go to next screen
-							_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuChoice");
+							_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
 
 							// Select audio
 							_currentAudioID = newAudioID;
@@ -97,7 +97,7 @@ void AudioEditor::_updateAudioCreating()
 	}
 }
 
-void AudioEditor::_updateAudioChoosing()
+void SoundEditor::_updateAudioChoosing()
 {
 	if(_isChoosingAudio)
 	{
@@ -116,7 +116,7 @@ void AudioEditor::_updateAudioChoosing()
 				// Go to next screen
 				if(!_isDeletingAudio)
 				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuChoice");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
 					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("audioID")->getEntityID(), "Audio: " + selectedButtonID.substr(1), 0.025f);
 					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("audioID")->getEntityID(), true);
 				}
@@ -135,7 +135,7 @@ void AudioEditor::_updateAudioChoosing()
 	}
 }
 
-void AudioEditor::_updateAudioDeleting()
+void SoundEditor::_updateAudioDeleting()
 {
 	if(_isDeletingAudio && _currentAudioID != "")
 	{
@@ -149,7 +149,7 @@ void AudioEditor::_updateAudioDeleting()
 		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 		{
 			// Go to main screen
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuMain");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuMain");
 
 			// Delete audio
 			if(_fe3d.sound2d_isExisting(_currentAudioID))

@@ -50,9 +50,9 @@ const float bufferData[] =
 	1.0f, -1.0f, 1.0f
 };
 
-SkyEntityManager::SkyEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus)
+SkyEntityManager::SkyEntityManager(RenderBus& renderBus)
 	:
-	BaseEntityManager(EntityType::SKY, meshLoader, textureLoader, renderBus),
+	_renderBus(renderBus),
 	_renderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX, bufferData, static_cast<unsigned int>(sizeof(bufferData) / sizeof(float))))
 {
 
@@ -127,7 +127,7 @@ void SkyEntityManager::selectMixSky(const string& ID)
 
 void SkyEntityManager::createEntity(const string& ID)
 {
-	_createEntity(ID);
+	_entities.insert(make_pair(ID, make_shared<SkyEntity>(ID)));
 	getEntity(ID)->setRenderBuffer(_renderBuffer);
 }
 
@@ -199,4 +199,24 @@ const float SkyEntityManager::getExposureSpeed() const
 const bool SkyEntityManager::isExposureEnabled() const
 {
 	return _isExposureEnabled;
+}
+
+void SkyEntityManager::deleteEntity(const string& ID)
+{
+	if(!isEntityExisting(ID))
+	{
+		Logger::throwError("SkyEntityManager::deleteEntity");
+	}
+
+	_entities.erase(ID);
+}
+
+void SkyEntityManager::deleteEntities()
+{
+	_entities.clear();
+}
+
+const bool SkyEntityManager::isEntityExisting(const string& ID)
+{
+	return (_entities.find(ID) != _entities.end());
 }

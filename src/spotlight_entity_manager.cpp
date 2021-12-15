@@ -1,12 +1,7 @@
 #include "spotlight_entity_manager.hpp"
 #include "logger.hpp"
 
-SpotlightEntityManager::SpotlightEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus)
-	:
-	BaseEntityManager(EntityType::SPOTLIGHT, meshLoader, textureLoader, renderBus)
-{
-
-}
+using std::make_shared;
 
 shared_ptr<SpotlightEntity> SpotlightEntityManager::getEntity(const string& ID)
 {
@@ -34,7 +29,7 @@ void SpotlightEntityManager::createEntity(const string& ID)
 		Logger::throwError("SpotlightEntityManager::createEntity");
 	}
 
-	_createEntity(ID);
+	_entities.insert(make_pair(ID, make_shared<SpotlightEntity>(ID)));
 }
 
 void SpotlightEntityManager::update()
@@ -50,4 +45,24 @@ void SpotlightEntityManager::update()
 			entity->updateFrontVector();
 		}
 	}
+}
+
+void SpotlightEntityManager::deleteEntity(const string& ID)
+{
+	if(!isEntityExisting(ID))
+	{
+		Logger::throwError("SpotlightEntityManager::deleteEntity");
+	}
+
+	_entities.erase(ID);
+}
+
+void SpotlightEntityManager::deleteEntities()
+{
+	_entities.clear();
+}
+
+const bool SpotlightEntityManager::isEntityExisting(const string& ID)
+{
+	return (_entities.find(ID) != _entities.end());
 }

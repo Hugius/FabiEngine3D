@@ -3,9 +3,9 @@
 
 using std::make_shared;
 
-TextEntityManager::TextEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus)
+TextEntityManager::TextEntityManager(TextureLoader& textureLoader)
 	:
-	BaseEntityManager(EntityType::TEXT, meshLoader, textureLoader, renderBus),
+	_textureLoader(textureLoader),
 	_centeredRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true)),
 	_nonCenteredRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
 {
@@ -33,60 +33,74 @@ const unordered_map<string, shared_ptr<TextEntity>>& TextEntityManager::getEntit
 
 void TextEntityManager::createEntity(const string& ID, bool isCentered, bool isDynamic)
 {
-	_createEntity(ID);
+	_entities.insert(make_pair(ID, make_shared<TextEntity>(ID)));
 	getEntity(ID)->setCentered(isCentered);
 	getEntity(ID)->setDynamic(isDynamic);
 	getEntity(ID)->setRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer);
+}
+
+void TextEntityManager::deleteEntity(const string& ID)
+{
+	if(!isEntityExisting(ID))
+	{
+		Logger::throwError("TextEntityManager::deleteEntity");
+	}
+
+	_entities.erase(ID);
+	_contentMap.erase(ID);
+}
+
+void TextEntityManager::deleteEntities()
+{
+	_entities.clear();
+}
+
+const bool TextEntityManager::isEntityExisting(const string& ID)
+{
+	return (_entities.find(ID) != _entities.end());
 }
 
 void TextEntityManager::loadCharacters(const string& ID)
 {
 	auto entity = getEntity(ID);
 
-	// Check if text content changed
-	if((_contentMap.find(ID) == _contentMap.end()) || (entity->getContent() != _contentMap[ID]))
+	// Check if text content needs to be refreshed
+	if((_contentMap.find(ID) == _contentMap.end()) || (_contentMap[ID] != entity->getContent()))
 	{
-		// Temporary values
-		bool isInvalidFont = false;
+		// Save text content
 		_contentMap[ID] = entity->getContent();
+
+		// Delete characters
 		entity->deleteCharacterEntities();
 
 		// Iterate through characters
 		for(const auto& c : entity->getContent())
 		{
-			if(!isInvalidFont)
+			// Create new character
+			auto newCharacter = make_shared<ImageEntity>("dummy");
+			newCharacter->setRenderBuffer(_nonCenteredRenderBuffer);
+
+			// Load texture
+			string content = "";
+			content += c;
+			auto texture = _textureLoader.load2dTexture(content, entity->getFontPath());
+
+			// Check if font loading went wrong
+			if(texture == 0)
 			{
-				// Create new character entity
-				auto newCharacter = make_shared<ImageEntity>("uselessID");
-				newCharacter->setRenderBuffer(_nonCenteredRenderBuffer);
-
-				// Load text map
-				string content = "";
-				content += c;
-				auto texture = _textureLoader.load2dTexture(content, entity->getFontPath());
-
-				// Check if font loading went well
-				if(texture != 0)
-				{
-					newCharacter->setDiffuseMap(texture);
-					entity->addCharacterEntity(newCharacter);
-				}
-				else
-				{
-					isInvalidFont = true;
-				}
+				break;
 			}
+
+			// Set texture
+			newCharacter->setDiffuseMap(texture);
+
+			// Add new character
+			entity->addCharacterEntity(newCharacter);
 		}
 
-		// Synchronize
+		// Update characters
 		entity->updateCharacterEntities();
 	}
-}
-
-void TextEntityManager::deleteDynamicTextEntity(const string& ID)
-{
-	_contentMap.erase(ID);
-	deleteEntity(ID);
 }
 
 void TextEntityManager::update()

@@ -1,5 +1,8 @@
 #pragma once
 
+#include "render_bus.hpp"
+#include "sky_entity.hpp"
+
 #include <unordered_map>
 
 using std::unordered_map;
@@ -7,7 +10,7 @@ using std::unordered_map;
 class SkyEntityManager final
 {
 public:
-	SkyEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
+	SkyEntityManager(RenderBus& renderBus);
 
 	// VOID
 	void update();
@@ -49,4 +52,5 @@ private:
 	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> _renderBuffer;
 	unordered_map<string, shared_ptr<SkyEntity>> _entities;
+	RenderBus& _renderBus;
 };

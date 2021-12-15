@@ -32,11 +32,31 @@ const unordered_map<string, shared_ptr<ImageEntity>>& ImageEntityManager::getEnt
 
 void ImageEntityManager::createEntity(const string& ID, bool isCentered)
 {
-	_getTextEntity(ID)->setDepth(_guiDepth);
-	_guiDepth++;
-	_createEntity(ID);
+	//_guiDepth++;
+	//getEntity(ID)->setDepth(_guiDepth);
+	_entities.insert(make_pair(ID, make_shared<ImageEntity>(ID)));
 	getEntity(ID)->setRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer);
 	getEntity(ID)->setCentered(isCentered);
+}
+
+void ImageEntityManager::deleteEntity(const string& ID)
+{
+	if(!isEntityExisting(ID))
+	{
+		Logger::throwError("ImageEntityManager::deleteEntity");
+	}
+
+	_entities.erase(ID);
+}
+
+void ImageEntityManager::deleteEntities()
+{
+	_entities.clear();
+}
+
+const bool ImageEntityManager::isEntityExisting(const string& ID)
+{
+	return (_entities.find(ID) != _entities.end());
 }
 
 void ImageEntityManager::update()

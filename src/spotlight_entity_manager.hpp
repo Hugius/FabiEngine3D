@@ -1,17 +1,20 @@
 #pragma once
 
+#include "spotlight_entity.hpp"
+
 #include <unordered_map>
+#include <memory>
 
 using std::unordered_map;
+using std::shared_ptr;
 
 class SpotlightEntityManager final
 {
 public:
-	SpotlightEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
-
 	// VOID
-	void update() override;
+	void update();
 	void createEntity(const string& ID);
+	void deleteEntity(const string& ID);
 	void deleteEntities();
 
 	// BOOL

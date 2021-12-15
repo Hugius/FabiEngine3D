@@ -1,5 +1,8 @@
 #pragma once
 
+#include "texture_loader.hpp"
+#include "terrain_entity.hpp"
+
 #include <unordered_map>
 
 using std::unordered_map;
@@ -7,14 +10,14 @@ using std::unordered_map;
 class TerrainEntityManager final
 {
 public:
-	TerrainEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
+	TerrainEntityManager(TextureLoader& textureLoader);
 
 	// VOID
-	void update() override;
 	void createEntity(const string& ID, const string& heightMapPath);
+	void deleteEntity(const string& ID);
+	void deleteEntities();
 	void loadMesh(const string& ID);
 	void selectTerrain(const string& ID);
-	void deleteEntities();
 
 	// FLOAT
 	const float getPixelHeight(const string& ID, float x, float z);
@@ -40,4 +43,5 @@ private:
 
 	// MISCELLANEOUS
 	unordered_map<string, shared_ptr<TerrainEntity>> _entities;
+	TextureLoader& _textureLoader;
 };

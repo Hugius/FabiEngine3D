@@ -6,7 +6,8 @@ using std::max;
 
 ModelEntityManager::ModelEntityManager(MeshLoader& meshLoader, RenderBus& renderBus, Timer& timer)
 	:
-	BaseEntityManager(EntityType::MODEL, meshLoader, textureLoader, renderBus),
+	_meshLoader(meshLoader),
+	_renderBus(renderBus),
 	_timer(timer)
 {
 
@@ -34,7 +35,7 @@ const unordered_map<string, shared_ptr<ModelEntity>>& ModelEntityManager::getEnt
 void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 {
 	// Create entity
-	_createEntity(ID);
+	_entities.insert(make_pair(ID, make_shared<ModelEntity>(ID)));
 
 	// Load mesh file
 	auto partsPointer = _meshLoader.loadMesh(meshPath);
@@ -98,9 +99,24 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 	}
 }
 
-void ModelEntityManager::update()
+void ModelEntityManager::deleteEntity(const string& ID)
 {
-	Logger::throwError("ModelEntityManager::update");
+	if(!isEntityExisting(ID))
+	{
+		Logger::throwError("ModelEntityManager::deleteEntity");
+	}
+
+	_entities.erase(ID);
+}
+
+void ModelEntityManager::deleteEntities()
+{
+	_entities.clear();
+}
+
+const bool ModelEntityManager::isEntityExisting(const string& ID)
+{
+	return (_entities.find(ID) != _entities.end());
 }
 
 void ModelEntityManager::update(const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities)

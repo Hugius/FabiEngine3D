@@ -1,5 +1,8 @@
 #pragma once
 
+#include "texture_loader.hpp"
+#include "text_entity.hpp"
+
 #include <unordered_map>
 
 using std::unordered_map;
@@ -7,14 +10,14 @@ using std::unordered_map;
 class TextEntityManager final
 {
 public:
-	TextEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
+	TextEntityManager(TextureLoader& textureLoader);
 
 	// VOID
-	void update() override;
+	void update();
 	void createEntity(const string& ID, bool isCentered, bool isDynamic);
-	void loadCharacters(const string& ID);
-	void deleteDynamicTextEntity(const string& ID);
+	void deleteEntity(const string& ID);
 	void deleteEntities();
+	void loadCharacters(const string& ID);
 
 	// BOOL
 	const bool isEntityExisting(const string& ID);
@@ -31,4 +34,5 @@ private:
 	const shared_ptr<RenderBuffer> _centeredRenderBuffer;
 	const shared_ptr<RenderBuffer> _nonCenteredRenderBuffer;
 	unordered_map<string, shared_ptr<TextEntity>> _entities;
+	TextureLoader& _textureLoader;
 };

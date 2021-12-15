@@ -45,7 +45,7 @@ const unordered_map<string, shared_ptr<BillboardEntity>>& BillboardEntityManager
 
 void BillboardEntityManager::createEntity(const string& ID)
 {
-	_createEntity(ID);
+	_entities.insert(make_pair(ID, make_shared<BillboardEntity>(ID)));
 	getEntity(ID)->setRenderBuffer(_renderBuffer);
 }
 

@@ -1,12 +1,7 @@
 #include "pointlight_entity_manager.hpp"
 #include "logger.hpp"
 
-PointlightEntityManager::PointlightEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus)
-	:
-	BaseEntityManager(EntityType::POINTLIGHT, meshLoader, textureLoader, renderBus)
-{
-
-}
+using std::make_shared;
 
 shared_ptr<PointlightEntity> PointlightEntityManager::getEntity(const string& ID)
 {
@@ -34,7 +29,27 @@ void PointlightEntityManager::createEntity(const string& ID)
 		Logger::throwError("PointlightEntityManager::createEntity");
 	}
 
-	_createEntity(ID);
+	_entities.insert(make_pair(ID, make_shared<PointlightEntity>(ID)));
+}
+
+void PointlightEntityManager::deleteEntity(const string& ID)
+{
+	if(!isEntityExisting(ID))
+	{
+		Logger::throwError("PointlightEntityManager::deleteEntity");
+	}
+
+	_entities.erase(ID);
+}
+
+void PointlightEntityManager::deleteEntities()
+{
+	_entities.clear();
+}
+
+const bool PointlightEntityManager::isEntityExisting(const string& ID)
+{
+	return (_entities.find(ID) != _entities.end());
 }
 
 void PointlightEntityManager::update()

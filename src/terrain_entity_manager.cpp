@@ -3,9 +3,9 @@
 
 using std::make_shared;
 
-TerrainEntityManager::TerrainEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus)
+TerrainEntityManager::TerrainEntityManager(TextureLoader& textureLoader)
 	:
-	BaseEntityManager(EntityType::TERRAIN, meshLoader, textureLoader, renderBus)
+	_textureLoader(textureLoader)
 {
 
 }
@@ -44,7 +44,7 @@ const unordered_map<string, shared_ptr<TerrainEntity>>& TerrainEntityManager::ge
 void TerrainEntityManager::createEntity(const string& ID, const string& heightMapPath)
 {
 	// Create entity
-	_createEntity(ID);
+	_entities.insert(make_pair(ID, make_shared<TerrainEntity>(ID)));
 
 	// Load height map
 	auto pixelsPointer = _textureLoader.loadBitmap(heightMapPath);
@@ -90,9 +90,24 @@ void TerrainEntityManager::selectTerrain(const string& ID)
 	}
 }
 
-void TerrainEntityManager::update()
+void TerrainEntityManager::deleteEntity(const string& ID)
 {
-	Logger::throwError("TerrainEntityManager::update");
+	if(!isEntityExisting(ID))
+	{
+		Logger::throwError("TerrainEntityManager::deleteEntity");
+	}
+
+	_entities.erase(ID);
+}
+
+void TerrainEntityManager::deleteEntities()
+{
+	_entities.clear();
+}
+
+const bool TerrainEntityManager::isEntityExisting(const string& ID)
+{
+	return (_entities.find(ID) != _entities.end());
 }
 
 void TerrainEntityManager::loadMesh(const string& ID)

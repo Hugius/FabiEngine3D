@@ -1,16 +1,18 @@
 #pragma once
 
+#include "reflection_entity.hpp"
+
 #include <unordered_map>
+#include <memory>
 
 using std::unordered_map;
+using std::shared_ptr;
 
 class ReflectionEntityManager final
 {
 public:
-	ReflectionEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
-
 	// VOID
-	void update() override;
+	void update();
 	void createEntity(const string& ID);
 	void deleteEntity(const string& ID);
 	void deleteEntities();

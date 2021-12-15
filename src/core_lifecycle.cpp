@@ -16,17 +16,11 @@ Core::Core(FabiEngine3D& fe3d)
 	_textureLoader(_renderBus),
 	_camera(_renderBus, _window),
 	_masterRenderer(_renderBus, _timer, _textureLoader, _camera, _shadowGenerator),
-	_skyEntityManager(_meshLoader, _textureLoader, _renderBus),
-	_terrainEntityManager(_meshLoader, _textureLoader, _renderBus),
-	_waterEntityManager(_meshLoader, _textureLoader, _renderBus),
-	_modelEntityManager(_meshLoader, _textureLoader, _renderBus, _timer),
-	_billboardEntityManager(_meshLoader, _textureLoader, _renderBus, _camera),
-	_aabbEntityManager(_meshLoader, _textureLoader, _renderBus),
-	_pointlightEntityManager(_meshLoader, _textureLoader, _renderBus),
-	_spotlightEntityManager(_meshLoader, _textureLoader, _renderBus),
-	_reflectionEntityManager(_meshLoader, _textureLoader, _renderBus),
-	_imageEntityManager(_meshLoader, _textureLoader, _renderBus),
-	_textEntityManager(_meshLoader, _textureLoader, _renderBus),
+	_skyEntityManager(_renderBus),
+	_terrainEntityManager(_textureLoader),
+	_modelEntityManager(_meshLoader, _renderBus, _timer),
+	_billboardEntityManager(_renderBus, _camera),
+	_textEntityManager(_textureLoader),
 	_raycaster(_renderBus, _terrainEntityManager)
 {
 

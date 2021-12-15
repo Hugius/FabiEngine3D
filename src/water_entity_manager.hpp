@@ -1,5 +1,7 @@
 #pragma once
 
+#include "water_entity.hpp"
+
 #include <unordered_map>
 
 using std::unordered_map;
@@ -7,14 +9,13 @@ using std::unordered_map;
 class WaterEntityManager final
 {
 public:
-	WaterEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
-
 	// VOID
-	void update() override;
+	void update();
 	void createEntity(const string& ID);
+	void deleteEntity(const string& ID);
+	void deleteEntities();
 	void loadMesh(const string& ID);
 	void selectWater(const string& ID);
-	void deleteEntities();
 
 	// BOOL
 	const bool isEntityExisting(const string& ID);

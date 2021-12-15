@@ -1,12 +1,7 @@
 #include "reflection_entity_manager.hpp"
 #include "logger.hpp"
 
-ReflectionEntityManager::ReflectionEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus)
-	:
-	BaseEntityManager(EntityType::REFLECTION, meshLoader, textureLoader, renderBus)
-{
-
-}
+using std::make_shared;
 
 shared_ptr<ReflectionEntity> ReflectionEntityManager::getEntity(const string& ID)
 {
@@ -30,7 +25,7 @@ const unordered_map<string, shared_ptr<ReflectionEntity>>& ReflectionEntityManag
 void ReflectionEntityManager::createEntity(const string& ID)
 {
 	// Create entity
-	_createEntity(ID);
+	_entities.insert(make_pair(ID, make_shared<ReflectionEntity>(ID)));
 
 	// Temporary values
 	auto entity = getEntity(ID);
@@ -54,4 +49,24 @@ void ReflectionEntityManager::update()
 	{
 		entity->updateTransformation();
 	}
+}
+
+void ReflectionEntityManager::deleteEntity(const string& ID)
+{
+	if(!isEntityExisting(ID))
+	{
+		Logger::throwError("ReflectionEntityManager::deleteEntity");
+	}
+
+	_entities.erase(ID);
+}
+
+void ReflectionEntityManager::deleteEntities()
+{
+	_entities.clear();
+}
+
+const bool ReflectionEntityManager::isEntityExisting(const string& ID)
+{
+	return (_entities.find(ID) != _entities.end());
 }

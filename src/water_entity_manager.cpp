@@ -4,13 +4,6 @@
 
 using std::make_shared;
 
-WaterEntityManager::WaterEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus)
-	:
-	BaseEntityManager(EntityType::WATER, meshLoader, textureLoader, renderBus)
-{
-
-}
-
 shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string& ID)
 {
 	auto iterator = _entities.find(ID);
@@ -56,8 +49,28 @@ void WaterEntityManager::selectWater(const string& ID)
 
 void WaterEntityManager::createEntity(const string& ID)
 {
-	_createEntity(ID);
+	_entities.insert(make_pair(ID, make_shared<WaterEntity>(ID)));
 	loadMesh(ID);
+}
+
+void WaterEntityManager::deleteEntity(const string& ID)
+{
+	if(!isEntityExisting(ID))
+	{
+		Logger::throwError("WaterEntityManager::deleteEntity");
+	}
+
+	_entities.erase(ID);
+}
+
+void WaterEntityManager::deleteEntities()
+{
+	_entities.clear();
+}
+
+const bool WaterEntityManager::isEntityExisting(const string& ID)
+{
+	return (_entities.find(ID) != _entities.end());
 }
 
 void WaterEntityManager::loadMesh(const string& ID)

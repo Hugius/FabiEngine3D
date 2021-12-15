@@ -29,7 +29,7 @@ const bool ModelEditor::saveToFile() const
 	// Write model data
 	for(const auto& modelID : _loadedModelIDs)
 	{
-		// Retrieve all values
+		// Data to save
 		auto isMultiParted = _fe3d.model_isMultiParted(modelID);
 		auto meshPath = _fe3d.model_getMeshPath(modelID);
 		auto modelSize = _fe3d.model_getBaseSize(modelID);
@@ -70,7 +70,7 @@ const bool ModelEditor::saveToFile() const
 		auto partIDs = _fe3d.model_getPartIDs(modelID);
 		for(size_t i = 0; i < partIDs.size(); i++)
 		{
-			// Retrieve all values
+			// Data to save
 			auto partID = partIDs[i];
 			auto diffuseMapPath = _fe3d.model_getDiffuseMapPath(modelID, partID);
 			auto emissionMapPath = _fe3d.model_getEmissionMapPath(modelID, partID);
@@ -145,7 +145,7 @@ const bool ModelEditor::saveToFile() const
 			// Write AABB data
 			for(const auto& aabbID : _fe3d.aabb_getChildIDs(modelID, AabbParentEntityType::MODEL))
 			{
-				// Retrieve all values
+				// Data to save
 				auto position = _fe3d.aabb_getPosition(aabbID);
 				auto size = _fe3d.aabb_getSize(aabbID);
 

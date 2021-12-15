@@ -53,11 +53,6 @@ void Animation3d::setPreviewModelID(const string& value)
 	_previewModelID = value;
 }
 
-void Animation3d::setOldPreviewModelID(const string& value)
-{
-	_oldPreviewModelID = value;
-}
-
 void Animation3d::setInitialSize(fvec3 value)
 {
 	_initialSize = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
@@ -131,11 +126,6 @@ const vector<string>& Animation3d::getPartIDs() const
 const string& Animation3d::getPreviewModelID() const
 {
 	return _previewModelID;
-}
-
-const string& Animation3d::getOldPreviewModelID() const
-{
-	return _oldPreviewModelID;
 }
 
 const fvec3 Animation3d::getInitialSize() const

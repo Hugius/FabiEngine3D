@@ -319,7 +319,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				}
 			}
 
-			// Start 3D animation
+			// Start animation3D
 			_animation3dEditor.startAnimation(animationID, modelID, remainingLoops);
 
 			// Check if animation exists

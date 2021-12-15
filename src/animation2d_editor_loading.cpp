@@ -1,0 +1,101 @@
+#include "animation2d_editor.hpp"
+#include "configuration.hpp"
+#include "logger.hpp"
+#include "tools.hpp"
+
+#include <sstream>
+
+using std::istringstream;
+
+const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
+{
+	// Validate project ID
+	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
+	{
+		Logger::throwError("Animation2dEditor::loadFromFile");
+	}
+
+	// Clear animations from previous loads
+	_animations.clear();
+
+	// Compose file path
+	const auto isExported = Config::getInst().isApplicationExported();
+	const auto rootPath = Tools::getRootDirectoryPath();
+	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\animation2d.fe3d");
+
+	// Warning checking
+	if(!Tools::isFileExisting(filePath))
+	{
+		Logger::throwWarning("Project corrupted: file `animation2d.fe3d` missing!");
+		return false;
+	}
+
+	// Load animation file
+	ifstream file(filePath);
+
+	// Read animation data
+	string line;
+	while(getline(file, line))
+	{
+		// Data placeholders
+		string animationID, previewTexturePath;
+		unsigned int rowCount, columnCount, framestep;
+
+		// For file extraction
+		istringstream iss(line);
+
+		// Read from file
+		iss >>
+			animationID >>
+			previewTexturePath >>
+			rowCount >>
+			columnCount >>
+			framestep;
+
+		// Convert empty string
+		previewTexturePath = (previewTexturePath == "?") ? "" : previewTexturePath;
+
+		// Convert spaces
+		replace(previewTexturePath.begin(), previewTexturePath.end(), '?', ' ');
+
+		// Create animation
+		auto newAnimation = make_shared<Animation2d>(animationID);
+
+		// Convert to long path
+		if(!Config::getInst().isApplicationExported())
+		{
+			previewTexturePath = string("projects\\" + _currentProjectID + "\\" + previewTexturePath);
+		}
+
+		// Set path
+		newAnimation->setPreviewTexturePath(previewTexturePath);
+
+		// Set properties
+		newAnimation->setRowCount(rowCount);
+		newAnimation->setColumnCount(columnCount);
+		newAnimation->setFramestep(framestep);
+
+		// Only if loading animations in editor
+		if(mustCheckPreviewTexture)
+		{
+			// Check if preview texture not existing anymore
+			if(Tools::isFileExisting)
+			{
+				Logger::throwWarning("Preview texture of animation with ID \"" + newAnimation->getID() + "\" not existing anymore!");
+				continue;
+			}
+		}
+
+		// Add new animation
+		_animations.push_back(newAnimation);
+	}
+
+	// Close file
+	file.close();
+
+	// Logging
+	Logger::throwInfo("Animation2D data loaded!");
+
+	// Return
+	return true;
+}

@@ -47,10 +47,10 @@
     <ClCompile Include="..\..\..\src\billboard_editor_update_miscellaneous.cpp" />
     <ClCompile Include="..\..\..\src\animation2d.cpp" />
     <ClCompile Include="..\..\..\src\animation2d_editor_control.cpp" />
-    <ClCompile Include="..\..\..\src\animation2d_animation_editor_loading.cpp" />
+    <ClCompile Include="..\..\..\src\animation2d_editor_loading.cpp" />
     <ClCompile Include="..\..\..\src\animation2d_editor_lifecycle.cpp" />
     <ClCompile Include="..\..\..\src\animation2d_editor_misc.cpp" />
-    <ClCompile Include="..\..\..\src\animation2d_animation_editor_saving.cpp" />
+    <ClCompile Include="..\..\..\src\animation2d_editor_saving.cpp" />
     <ClCompile Include="..\..\..\src\animation2d_editor_update_execution.cpp" />
     <ClCompile Include="..\..\..\src\animation2d_editor_update_menu.cpp" />
     <ClCompile Include="..\..\..\src\animation2d_editor_update_misc.cpp" />

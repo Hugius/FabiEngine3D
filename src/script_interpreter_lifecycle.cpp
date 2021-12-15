@@ -237,7 +237,7 @@ void ScriptInterpreter::unload()
 	_fe3d.sky_setMixValue(0.0f);
 
 	// Select background
-	if (!Config::getInst().isApplicationExported())
+	if(!Config::getInst().isApplicationExported())
 	{
 		_fe3d.sky_selectMainSky("@@background");
 	}
@@ -251,7 +251,7 @@ void ScriptInterpreter::unload()
 		}
 	}
 
-	// Stop 3D animations
+	// Stop animations
 	_animation3dEditor.stopAllAnimations();
 
 	// Delete all other entities

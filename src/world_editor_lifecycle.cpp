@@ -69,7 +69,7 @@ void WorldEditor::load()
 		}
 	}
 
-	// Load preview 3D animations
+	// Load preview animations
 	_animation3dEditor.loadFromFile(false);
 
 	// Load preview sounds
@@ -145,9 +145,9 @@ void WorldEditor::unload()
 	clearCurrentWorld();
 
 	// Delete all sky entities except the background
-	for (const auto& ID : _fe3d.sky_getAllIDs())
+	for(const auto& ID : _fe3d.sky_getAllIDs())
 	{
-		if (ID != "@@background")
+		if(ID != "@@background")
 		{
 			_fe3d.sky_delete(ID);
 		}

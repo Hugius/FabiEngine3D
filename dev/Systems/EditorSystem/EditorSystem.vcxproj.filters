@@ -537,10 +537,10 @@
     <ClCompile Include="..\..\..\src\animation2d_editor_update_misc.cpp">
       <Filter>Animation2D Editor\Update</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\animation2d_animation_editor_saving.cpp">
+    <ClCompile Include="..\..\..\src\animation2d_editor_saving.cpp">
       <Filter>Animation2D Editor\Persistence</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\animation2d_animation_editor_loading.cpp">
+    <ClCompile Include="..\..\..\src\animation2d_editor_loading.cpp">
       <Filter>Animation2D Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\world_editor_update_menu.cpp">

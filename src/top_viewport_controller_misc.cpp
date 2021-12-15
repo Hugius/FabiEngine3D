@@ -202,13 +202,13 @@ void TopViewportController::_applyProjectChange()
 		_billboardEditor.unload();
 	}
 
-	// Unload 3d animation editor
+	// Unload animation3D editor
 	if(_animation3dEditor.isLoaded())
 	{
 		_animation3dEditor.unload();
 	}
 
-	// Unload 2D animation editor
+	// Unload animation2D editor
 	if(_animation2dEditor.isLoaded())
 	{
 		_animation2dEditor.unload();

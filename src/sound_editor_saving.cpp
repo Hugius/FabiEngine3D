@@ -27,7 +27,7 @@ const bool SoundEditor::saveToFile() const
 	// Write sound data
 	for(const auto& soundID : _loadedSoundIDs)
 	{
-		// Retrieve all values
+		// Data to save
 		auto audioPath = _fe3d.sound2d_getAudioPath(soundID);
 
 		// Convert to short path

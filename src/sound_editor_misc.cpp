@@ -28,7 +28,7 @@ void SoundEditor::_updateMiscellaneous()
 	// Update status symbol
 	if(isPlaying)
 	{
-		_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\texture\\play.png");
+		_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\texture\\start.png");
 	}
 	else if(isPaused)
 	{

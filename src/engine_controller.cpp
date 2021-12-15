@@ -99,7 +99,6 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		texturePaths2D.push_back(textureDirectoryPath + "mouse_right.png");
 		texturePaths2D.push_back(textureDirectoryPath + "p.png");
 		texturePaths2D.push_back(textureDirectoryPath + "pause.png");
-		texturePaths2D.push_back(textureDirectoryPath + "play.png");
 		texturePaths2D.push_back(textureDirectoryPath + "plus.png");
 		texturePaths2D.push_back(textureDirectoryPath + "position.png");
 		texturePaths2D.push_back(textureDirectoryPath + "r.png");
@@ -114,6 +113,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		texturePaths2D.push_back(textureDirectoryPath + "shift.png");
 		texturePaths2D.push_back(textureDirectoryPath + "size.png");
 		texturePaths2D.push_back(textureDirectoryPath + "space.png");
+		texturePaths2D.push_back(textureDirectoryPath + "start.png");
 		texturePaths2D.push_back(textureDirectoryPath + "stop.png");
 		texturePaths2D.push_back(textureDirectoryPath + "up.png");
 		texturePaths2D.push_back(textureDirectoryPath + "v.png");
@@ -144,7 +144,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 		// Custom cursor texture
 		image_create("@@cursor", true);
-		image_setSize("@@cursor", fvec2(CURSOR_IMAGE_SIZE, (CURSOR_IMAGE_SIZE* Tools::getWindowAspectRatio())));
+		image_setSize("@@cursor", fvec2(CURSOR_IMAGE_SIZE, (CURSOR_IMAGE_SIZE * Tools::getWindowAspectRatio())));
 		image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_default.png");
 		misc_setCursorEntityID("@@cursor");
 		misc_setCursorVisible(false);

@@ -16,7 +16,7 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 		Logger::throwError("Animation3dEditor::loadFromFile");
 	}
 
-	// Clear animations list from previous loads
+	// Clear animations from previous loads
 	_animations.clear();
 
 	// Compose file path
@@ -60,10 +60,10 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 
 		// Add custom parts
 		auto partIDs = _fe3d.model_getPartIDs(previewModelID);
-		if (partIDs.size() > 1)
+		if(partIDs.size() > 1)
 		{
 			// Iterate through parts
-			for (const auto& partID : partIDs)
+			for(const auto& partID : partIDs)
 			{
 				// Add part to animation
 				newAnimation->addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
@@ -171,18 +171,16 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 				{
 					newAnimation->setInitialSize(_fe3d.model_getBaseSize(newAnimation->getPreviewModelID()));
 				}
-				else // Clear preview model
+				else
 				{
-					newAnimation->setOldPreviewModelID(newAnimation->getPreviewModelID());
-					newAnimation->setPreviewModelID("");
 					Logger::throwWarning("Preview model of animation with ID \"" + newAnimation->getID() + "\" does not have required animation parts anymore!");
+					continue;
 				}
 			}
-			else // Clear preview model
+			else
 			{
-				newAnimation->setOldPreviewModelID(newAnimation->getPreviewModelID());
-				newAnimation->setPreviewModelID("");
 				Logger::throwWarning("Preview model of animation with ID \"" + newAnimation->getID() + "\" not existing anymore!");
+				continue;
 			}
 		}
 
@@ -194,7 +192,7 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 	file.close();
 
 	// Logging
-	Logger::throwInfo("3D animation data loaded!");
+	Logger::throwInfo("Animation3D data loaded!");
 
 	// Return
 	return true;

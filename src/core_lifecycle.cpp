@@ -15,14 +15,14 @@ Core::Core(FabiEngine3D& fe3d)
 	_shadowGenerator(_renderBus),
 	_textureLoader(_renderBus),
 	_camera(_renderBus, _window),
-	_masterRenderer(_renderBus, _timer, _textureLoader, _camera, _shadowGenerator),
 	_skyEntityManager(_renderBus),
 	_terrainEntityManager(_textureLoader),
 	_modelEntityManager(_meshLoader, _renderBus, _timer),
 	_billboardEntityManager(_renderBus, _camera),
+	_imageEntityManager(_renderBus),
 	_textEntityManager(_textureLoader, _renderBus),
 	_raycaster(_renderBus, _terrainEntityManager),
-	_imageEntityManager(_renderBus)
+	_masterRenderer(_renderBus, _timer, _textureLoader, _camera, _shadowGenerator)
 {
 
 }

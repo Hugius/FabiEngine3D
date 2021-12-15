@@ -218,7 +218,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 					_initialModelSize[modelID] = size;
 				}
 
-				// Start 3D animation
+				// Start animation3D
 				if(!animation3dID.empty())
 				{
 					_animation3dEditor.startAnimation(animation3dID, modelID, -1);
@@ -578,7 +578,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			_fe3d.gfx_setCubeReflectionQuality(cubeQuality);
 			_fe3d.gfx_setPlanarReflectionQuality(planarQuality);
 		}
-		else if (lineType == "GRAPHICS_REFRACTIONS")
+		else if(lineType == "GRAPHICS_REFRACTIONS")
 		{
 			// Data placeholders
 			unsigned int planarQuality;

@@ -27,13 +27,13 @@ const bool Animation3dEditor::saveToFile() const
 	// Write animation data
 	for(const auto& animation : _animations)
 	{
-		// Only if animation has data
-		if(!animation->getPreviewModelID().empty() || !animation->getOldPreviewModelID().empty())
-		{
-			// Retrieve all values
-			auto animationID = animation->getID();
-			auto previewModelID = animation->getPreviewModelID().empty() ? animation->getOldPreviewModelID() : animation->getPreviewModelID();
+		// Data to save
+		auto animationID = animation->getID();
+		auto previewModelID = animation->getPreviewModelID();
 
+		// Only if animation has preview model
+		if(!previewModelID.empty())
+		{
 			// Write data to file
 			file << animationID << " " << previewModelID;
 
@@ -53,7 +53,7 @@ const bool Animation3dEditor::saveToFile() const
 					unsigned int partIndex = 0;
 					for(auto partID : animation->getPartIDs())
 					{
-						// Retrieve data
+						// Data to save
 						auto frame = animation->getFrames()[frameIndex];
 						auto targetTransformation = frame.getTargetTransformations().at(partID);
 						auto rotationOrigin = frame.getRotationOrigins().at(partID);
@@ -107,7 +107,7 @@ const bool Animation3dEditor::saveToFile() const
 	file.close();
 
 	// Logging
-	Logger::throwInfo("3D animation data saved!");
+	Logger::throwInfo("Animation3D data saved!");
 
 	// Return
 	return true;

@@ -27,7 +27,7 @@ const bool BillboardEditor::saveToFile() const
 	// Write billboard data
 	for(const auto& billboardID : _loadedBillboardIDs)
 	{
-		// Retrieve all values
+		// Data to save
 		auto size = _fe3d.billboard_getSize(billboardID);
 		auto color = _fe3d.billboard_getColor(billboardID);
 		auto diffuseMapPath = _fe3d.billboard_getDiffuseMapPath(billboardID);

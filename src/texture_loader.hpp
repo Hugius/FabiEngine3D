@@ -21,14 +21,22 @@ public:
 	TextureLoader(RenderBus& renderBus);
 
 	// VOID
-	void cache2dTexturesMultiThreaded(const vector<string>& filePaths, bool isMipmapped, bool isAnisotropic);
-	void cache3dTexturesMultiThreaded(const vector<array<string, 6>>& filePathsList);
-	void cacheBitmapsMultiThreaded(const vector<string>& filePaths);
-	void cacheFontsMultiThreaded(const vector<string>& filePaths);
-	void clearTextureCache(const string& filePath);
-	void clearTextureCache(const array<string, 6>& filePaths);
+	void cache2dTexture(const string& filePath, bool isMipmapped, bool isAnisotropic);
+	void cache3dTexture(const array<string, 6>& filePaths);
+	void cacheBitmap(const string& filePath);
+	void cacheFont(const string& filePath);
+	void cache2dTextures(const vector<string>& filePaths, bool isMipmapped, bool isAnisotropic);
+	void cache3dTextures(const vector<array<string, 6>>& filePathsList);
+	void cacheBitmaps(const vector<string>& filePaths);
+	void cacheFonts(const vector<string>& filePaths);
+	void clear2dTextureCache(const string& filePath);
+	void clear3dTextureCache(const array<string, 6>& filePaths);
 	void clearBitmapCache(const string& filePath);
 	void clearFontCache(const string& filePath);
+	void clear2dTexturesCache();
+	void clear3dTexturesCache();
+	void clearBitmapsCache();
+	void clearFontsCache();
 	void setAnisotropicFilteringQuality(unsigned int value);
 
 	// FLOAT

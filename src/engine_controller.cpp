@@ -68,7 +68,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		meshPaths.push_back(meshDirectoryPath + "plane.obj");
 		meshPaths.push_back(meshDirectoryPath + "speaker.obj");
 		meshPaths.push_back(meshDirectoryPath + "torch.obj");
-		misc_cacheMeshesMultiThreaded(meshPaths);
+		misc_cacheMeshes(meshPaths);
 
 		// Cache 2D engine textures
 		vector<string> texturePaths2D;
@@ -118,7 +118,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		texturePaths2D.push_back(textureDirectoryPath + "up.png");
 		texturePaths2D.push_back(textureDirectoryPath + "v.png");
 		texturePaths2D.push_back(textureDirectoryPath + "w.png");
-		misc_cache2dTexturesMultiThreaded(texturePaths2D);
+		misc_cache2dTextures(texturePaths2D);
 
 		// Cache 3D engine textures
 		array<string, 6> texturePaths3D;
@@ -128,12 +128,12 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		texturePaths3D[3] = string(textureDirectoryPath + "background_bottom.png");
 		texturePaths3D[4] = string(textureDirectoryPath + "background_back.png");
 		texturePaths3D[5] = string(textureDirectoryPath + "background_front.png");
-		misc_cache3dTexturesMultiThreaded({texturePaths3D});
+		misc_cache3dTextures({texturePaths3D});
 
 		// Cache engine fonts
 		vector<string> fontPaths;
 		fontPaths.push_back(fontDirectoryPath + "font.ttf");
-		misc_cacheFontsMultiThreaded(fontPaths);
+		misc_cacheFonts(fontPaths);
 
 		// Render color
 		Tools::setRenderColor(RENDER_COLOR);

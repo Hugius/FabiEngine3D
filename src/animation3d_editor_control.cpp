@@ -18,7 +18,7 @@ void Animation3dEditor::startAnimation(const string& animationID, const string& 
 				// Check if animation count is valid
 				if(timesToPlay == -1 || timesToPlay > 0)
 				{
-					// Retrieve animation
+					// Copy animation
 					auto animation = *_getAnimation(animationID);
 					animation.setTimesToPlay(timesToPlay);
 					animation.setInitialSize(_fe3d.model_getBaseSize(modelID));
@@ -70,7 +70,7 @@ void Animation3dEditor::pauseAnimation(const string& animationID, const string& 
 	// Temporary values
 	string errorMessage = "Tried to pause animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
-	// Check if animation is existing
+	// Check if animation existing
 	if(isAnimationExisting(animationID))
 	{
 		// Check if animation is started
@@ -102,7 +102,7 @@ void Animation3dEditor::resumeAnimation(const string& animationID, const string&
 	// Temporary values
 	string errorMessage = "Tried to resume animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
-	// Check if animation is existing
+	// Check if animation existing
 	if(isAnimationExisting(animationID))
 	{
 		// Check if animation is started
@@ -134,7 +134,7 @@ void Animation3dEditor::stopAnimation(const string& animationID, const string& m
 	// Temporary values
 	string errorMessage = "Tried to stop animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
-	// Check if animation is existing
+	// Check if animation existing
 	if(isAnimationExisting(animationID))
 	{
 		// Check if animation is started
@@ -163,7 +163,7 @@ void Animation3dEditor::fadeAnimation(const string& animationID, const string& m
 	// Temporary values
 	string errorMessage = "Tried to fade animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
-	// Check if animation is existing
+	// Check if animation existing
 	if(isAnimationExisting(animationID))
 	{
 		// Check if animation is started

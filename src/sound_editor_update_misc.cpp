@@ -60,7 +60,7 @@ void SoundEditor::_updateSoundCreating()
 
 						// Create sound
 						const string finalFilePath = filePath.substr(rootDirectoryPath.size());
-						_fe3d.misc_clearSoundCache(finalFilePath);
+						_fe3d.misc_clearAudioCache(finalFilePath);
 						_fe3d.sound2d_create(newSoundID, finalFilePath);
 
 						// Check if sound creation went well

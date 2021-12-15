@@ -17,7 +17,7 @@ public:
 	// VOID
 	void allocateChannels(unsigned int count);
 	void update(vector<Sound3d>& sounds, Camera& camera);
-	void playSound(Sound3d& sound, int loops, unsigned int fadeMS, bool mustForcePlay);
+	void playSound(Sound3d& sound, int timesToPlay, unsigned int fadeMS, bool mustForcePlay);
 	void pauseSound(Sound3d& sound);
 	void resumeSound(Sound3d& sound);
 	void stopSound(Sound3d& sound, unsigned int fadeMS);

@@ -1,4 +1,6 @@
 #include "mesh_loader.hpp"
+#include "mesh_loader.hpp"
+#include "mesh_loader.hpp"
 #include "logger.hpp"
 
 #include <future>
@@ -42,7 +44,12 @@ const vector<shared_ptr<MeshPart>>* MeshLoader::loadMesh(const string& filePath)
 	}
 }
 
-void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths)
+void MeshLoader::cacheMesh(const string& filePath)
+{
+	loadMesh(filePath);
+}
+
+void MeshLoader::cacheMeshes(const vector<string>& meshPaths)
 {
 	// Temporary values
 	vector<future<pair<string, vector<shared_ptr<MeshPart>>>>> threads;
@@ -99,4 +106,9 @@ void MeshLoader::clearMeshCache(const string& filePath)
 	{
 		_meshCache.erase(filePath);
 	}
+}
+
+void MeshLoader::clearMeshesCache()
+{
+	_meshCache.clear();
 }

@@ -1,30 +1,36 @@
 #include "sound2d_player.hpp"
 #include "logger.hpp"
 
-void Sound2dPlayer::playSound(Sound2d& sound, int loops, unsigned int fadeMS, bool mustForcePlay)
+void Sound2dPlayer::playSound(Sound2d& sound, int timesToPlay, unsigned int fadeMS, bool mustForcePlay)
 {
+	// Validate play count
+	if((timesToPlay < -1) || (timesToPlay == 0))
+	{
+		Logger::throwError("Sound2dPlayer::playSound3d::1");
+	}
+
 	// Check if sound is started
 	if(isSoundStarted(sound) && !mustForcePlay)
 	{
-		Logger::throwError("Sound2dPlayer::playSound::1");
+		Logger::throwError("Sound2dPlayer::playSound::2");
 	}
 
 	// Try to find free channel
 	auto channel = _getFreeChannel();
 	if(channel == -1)
 	{
-		Logger::throwError("Sound2dPlayer::playSound::2");
+		Logger::throwError("Sound2dPlayer::playSound::3");
 	}
 	_channels[channel] = sound.getID();
 
 	// Play or fade
 	if(fadeMS == 0)
 	{
-		Mix_PlayChannel(channel, sound.getDataPointer(), loops);
+		Mix_PlayChannel(channel, sound.getDataPointer(), (timesToPlay - 1));
 	}
 	else
 	{
-		Mix_FadeInChannel(channel, sound.getDataPointer(), loops, fadeMS);
+		Mix_FadeInChannel(channel, sound.getDataPointer(), (timesToPlay - 1), fadeMS);
 	}
 
 	// Update volume

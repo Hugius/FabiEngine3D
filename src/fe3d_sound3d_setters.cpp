@@ -31,34 +31,34 @@ void FabiEngine3D::sound3d_deleteAll()
 	_core->_sound3dManager.deleteSounds();
 }
 
-void FabiEngine3D::sound3d_play(const string& ID, int loops, unsigned int fadeMS, bool mustForcePlay)
+void FabiEngine3D::sound3d_play(const string& ID, int timesToPlay, unsigned int fadeMS, bool mustForcePlay)
 {
 	auto sound = _core->_sound3dManager.getSound(ID);
 
-	if (!_core->_sound3dPlayer.isChannelAvailable())
+	if(!_core->_sound3dPlayer.isChannelAvailable())
 	{
 		Logger::throwWarning("Tried to play 3D sound with ID \"", ID, "\": no sound channels available!");
 		return;
 	}
-	if (_core->_sound3dPlayer.isSoundStarted(sound) && !mustForcePlay)
+	if(_core->_sound3dPlayer.isSoundStarted(sound) && !mustForcePlay)
 	{
 		Logger::throwWarning("Tried to play 3D sound with ID \"", ID, "\": sound is already started!");
 		return;
 	}
 
-	_core->_sound3dPlayer.playSound(sound, loops, fadeMS, mustForcePlay);
+	_core->_sound3dPlayer.playSound(sound, timesToPlay, fadeMS, mustForcePlay);
 }
 
 void FabiEngine3D::sound3d_pause(const string& ID)
 {
 	auto sound = _core->_sound3dManager.getSound(ID);
 
-	if (!_core->_sound3dPlayer.isSoundPlaying(sound))
+	if(!_core->_sound3dPlayer.isSoundPlaying(sound))
 	{
 		Logger::throwWarning("Tried to pause 3D sound with ID \"", ID, "\": sound is not playing!");
 		return;
 	}
-	if (_core->_sound3dPlayer.isSoundPaused(sound))
+	if(_core->_sound3dPlayer.isSoundPaused(sound))
 	{
 		Logger::throwWarning("Tried to pause 3D sound with ID \"", ID, "\": sound is already paused!");
 		return;
@@ -76,7 +76,7 @@ void FabiEngine3D::sound3d_resume(const string& ID)
 {
 	auto sound = _core->_sound3dManager.getSound(ID);
 
-	if (!_core->_sound3dPlayer.isSoundPaused(sound))
+	if(!_core->_sound3dPlayer.isSoundPaused(sound))
 	{
 		Logger::throwWarning("Tried to resume 3D sound with ID \"", sound.getID(), "\": sound is not paused!");
 		return;
@@ -94,7 +94,7 @@ void FabiEngine3D::sound3d_stop(const string& ID, unsigned int fadeMS)
 {
 	auto sound = _core->_sound3dManager.getSound(ID);
 
-	if (!_core->_sound3dPlayer.isSoundStarted(sound))
+	if(!_core->_sound3dPlayer.isSoundStarted(sound))
 	{
 		Logger::throwWarning("Tried to stop 3D sound with ID \"", ID, "\": sound is not started!");
 		return;

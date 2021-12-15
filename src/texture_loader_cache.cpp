@@ -1,4 +1,8 @@
 #include "texture_loader.hpp"
+#include "texture_loader.hpp"
+#include "texture_loader.hpp"
+#include "texture_loader.hpp"
+#include "texture_loader.hpp"
 #include "logger.hpp"
 
 #include <future>
@@ -10,7 +14,7 @@ using std::launch;
 using std::future_status;
 using std::chrono::system_clock;
 
-void TextureLoader::cache2dTexturesMultiThreaded(const vector<string>& filePaths, bool isMipmapped, bool isAnisotropic)
+void TextureLoader::cache2dTextures(const vector<string>& filePaths, bool isMipmapped, bool isAnisotropic)
 {
 	// Temporary values
 	vector<future<SDL_Surface*>> threads;
@@ -79,7 +83,7 @@ void TextureLoader::cache2dTexturesMultiThreaded(const vector<string>& filePaths
 	}
 }
 
-void TextureLoader::cache3dTexturesMultiThreaded(const vector<array<string, 6>>& filePathsList)
+void TextureLoader::cache3dTextures(const vector<array<string, 6>>& filePathsList)
 {
 	// Temporary values
 	vector<vector<future<SDL_Surface*>>> threads;
@@ -170,7 +174,7 @@ void TextureLoader::cache3dTexturesMultiThreaded(const vector<array<string, 6>>&
 	}
 }
 
-void TextureLoader::cacheBitmapsMultiThreaded(const vector<string>& filePaths)
+void TextureLoader::cacheBitmaps(const vector<string>& filePaths)
 {
 	// Temporary values
 	vector<future<vector<float>>> threads;
@@ -232,7 +236,7 @@ void TextureLoader::cacheBitmapsMultiThreaded(const vector<string>& filePaths)
 	}
 }
 
-void TextureLoader::cacheFontsMultiThreaded(const vector<string>& filePaths)
+void TextureLoader::cacheFonts(const vector<string>& filePaths)
 {
 	// Temporary values
 	vector<future<TTF_Font*>> threads;
@@ -294,7 +298,7 @@ void TextureLoader::cacheFontsMultiThreaded(const vector<string>& filePaths)
 	}
 }
 
-void TextureLoader::clearTextureCache(const string& filePath)
+void TextureLoader::clear2dTextureCache(const string& filePath)
 {
 	if(_2dTextureCache.find(filePath) != _2dTextureCache.end())
 	{
@@ -303,7 +307,7 @@ void TextureLoader::clearTextureCache(const string& filePath)
 	}
 }
 
-void TextureLoader::clearTextureCache(const array<string, 6>& filePaths)
+void TextureLoader::clear3dTextureCache(const array<string, 6>& filePaths)
 {
 	if(_3dTextureCache.find(filePaths) != _3dTextureCache.end())
 	{
@@ -339,4 +343,25 @@ void TextureLoader::clearFontCache(const string& filePath)
 			_textCache.erase(key);
 		}
 	}
+}
+
+void TextureLoader::clear2dTexturesCache()
+{
+	_2dTextureCache.clear();
+}
+
+void TextureLoader::clear3dTexturesCache()
+{
+	_3dTextureCache.clear();
+}
+
+void TextureLoader::clearBitmapsCache()
+{
+	_bitmapCache.clear();
+}
+
+void TextureLoader::clearFontsCache()
+{
+	_fontCache.clear();
+	_textCache.clear();
 }

@@ -517,7 +517,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			return;
 		}
 
-		// Go back to current loops beginning
+		// Go back to current loop beginning
 		if(isEndOfLoop)
 		{
 			lineIndex = loopLineIndices.back();

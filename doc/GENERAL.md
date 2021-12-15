@@ -4,9 +4,10 @@
 
 ### 1.1 Assets
 
-- Multithreaded OBJ mesh file loading
-- Multithreaded PNG texture file loading
-- Multithreaded WAV audio file loading
+- Multithreaded OBJ file loading
+- Multithreaded PNG file loading
+- Multithreaded BMP file loading
+- Multithreaded WAV file loading
 - Efficient cache management
 
 ### 1.2 Rendering

@@ -71,8 +71,8 @@ void TopViewportController::_updateProjectCreating()
 				Tools::createDirectory(newProjectDirectoryPath + "scripts\\");
 
 				// Create new empty project files
-				auto animation3dFile = ofstream(newProjectDirectoryPath + "data\\animation3d.fe3d");
 				auto animation2dFile = ofstream(newProjectDirectoryPath + "data\\animation2d.fe3d");
+				auto animation3dFile = ofstream(newProjectDirectoryPath + "data\\animation3d.fe3d");
 				auto billboardFile = ofstream(newProjectDirectoryPath + "data\\billboard.fe3d");
 				auto modelFile = ofstream(newProjectDirectoryPath + "data\\model.fe3d");
 				auto settingsFile = ofstream(newProjectDirectoryPath + "data\\settings.fe3d");
@@ -80,8 +80,8 @@ void TopViewportController::_updateProjectCreating()
 				auto soundFile = ofstream(newProjectDirectoryPath + "data\\sound.fe3d");
 				auto terrainFile = ofstream(newProjectDirectoryPath + "data\\terrain.fe3d");
 				auto waterFile = ofstream(newProjectDirectoryPath + "data\\water.fe3d");
-				animation3dFile.close();
 				animation2dFile.close();
+				animation3dFile.close();
 				billboardFile.close();
 				modelFile.close();
 				settingsFile.close();
@@ -134,7 +134,7 @@ void TopViewportController::_updateProjectLoading()
 			_settingsEditor.loadSettingsFromFile();
 
 			// Cache meshes
-			_fe3d.misc_cacheMeshesMultiThreaded(_modelEditor.getAllMeshPathsFromFile());
+			_fe3d.misc_cacheMeshes(_modelEditor.getAllMeshPathsFromFile());
 
 			// Cache 2D textures
 			vector<string> texturePaths2D;
@@ -150,19 +150,19 @@ void TopViewportController::_updateProjectLoading()
 			texturePaths2D.insert(texturePaths2D.end(),
 								  _billboardEditor.getAllTexturePathsFromFile().begin(),
 								  _billboardEditor.getAllTexturePathsFromFile().end());
-			_fe3d.misc_cache2dTexturesMultiThreaded(texturePaths2D);
+			_fe3d.misc_cache2dTextures(texturePaths2D);
 
 			// Cache 3D textures
-			_fe3d.misc_cache3dTexturesMultiThreaded(_skyEditor.getAllTexturePathsFromFile());
+			_fe3d.misc_cache3dTextures(_skyEditor.getAllTexturePathsFromFile());
 
 			// Cache bitmaps
-			_fe3d.misc_cacheBitmapsMultiThreaded(_terrainEditor.getAllBitmapPathsFromFile());
+			_fe3d.misc_cacheBitmaps(_terrainEditor.getAllBitmapPathsFromFile());
 
 			// Cache fonts
-			_fe3d.misc_cacheFontsMultiThreaded(_billboardEditor.getAllFontPathsFromFile());
+			_fe3d.misc_cacheFonts(_billboardEditor.getAllFontPathsFromFile());
 
-			// Cache sounds
-			_fe3d.misc_cacheSoundsMultiThreaded(_soundEditor.getAllAudioPathsFromFile());
+			// Cache audios
+			_fe3d.misc_cacheAudios(_soundEditor.getAllAudioPathsFromFile());
 
 			// Logging
 			Logger::throwInfo("Existing project \"" + _currentProjectID + "\" loaded!");

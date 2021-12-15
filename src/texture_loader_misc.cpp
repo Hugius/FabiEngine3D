@@ -1,4 +1,8 @@
 #include "texture_loader.hpp"
+#include "texture_loader.hpp"
+#include "texture_loader.hpp"
+#include "texture_loader.hpp"
+#include "texture_loader.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 
@@ -11,6 +15,26 @@ TextureLoader::TextureLoader(RenderBus& renderBus)
 	_renderBus(renderBus)
 {
 
+}
+
+void TextureLoader::cache2dTexture(const string& filePath, bool isMipmapped, bool isAnisotropic)
+{
+	load2dTexture(filePath, isMipmapped, isAnisotropic);
+}
+
+void TextureLoader::cache3dTexture(const array<string, 6>& filePaths)
+{
+	load3dTexture(filePaths);
+}
+
+void TextureLoader::cacheBitmap(const string& filePath)
+{
+	loadBitmap(filePath);
+}
+
+void TextureLoader::cacheFont(const string& filePath)
+{
+	_loadFont(filePath);
 }
 
 // http://stackoverflow.com/questions/1968561/getting-the-pixel-value-of-bmp-file

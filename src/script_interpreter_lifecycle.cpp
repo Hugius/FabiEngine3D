@@ -158,7 +158,7 @@ void ScriptInterpreter::load()
 	if(Config::getInst().isApplicationExported())
 	{
 		// Cache meshes
-		_fe3d.misc_cacheMeshesMultiThreaded(_modelEditor.getAllMeshPathsFromFile());
+		_fe3d.misc_cacheMeshes(_modelEditor.getAllMeshPathsFromFile());
 
 		// Cache 2D textures
 		vector<string> texturePaths2D;
@@ -174,19 +174,19 @@ void ScriptInterpreter::load()
 		texturePaths2D.insert(texturePaths2D.end(),
 							  _billboardEditor.getAllTexturePathsFromFile().begin(),
 							  _billboardEditor.getAllTexturePathsFromFile().end());
-		_fe3d.misc_cache2dTexturesMultiThreaded(texturePaths2D);
+		_fe3d.misc_cache2dTextures(texturePaths2D);
 
 		// Cache 3D textures
-		_fe3d.misc_cache3dTexturesMultiThreaded(_skyEditor.getAllTexturePathsFromFile());
+		_fe3d.misc_cache3dTextures(_skyEditor.getAllTexturePathsFromFile());
 
 		// Cache bitmaps
-		_fe3d.misc_cacheBitmapsMultiThreaded(_terrainEditor.getAllBitmapPathsFromFile());
+		_fe3d.misc_cacheBitmaps(_terrainEditor.getAllBitmapPathsFromFile());
 
 		// Cache fonts
-		_fe3d.misc_cacheFontsMultiThreaded(_billboardEditor.getAllFontPathsFromFile());
+		_fe3d.misc_cacheFonts(_billboardEditor.getAllFontPathsFromFile());
 
-		// Cache sounds
-		_fe3d.misc_cacheSoundsMultiThreaded(_soundEditor.getAllAudioPathsFromFile());
+		// Cache audios
+		_fe3d.misc_cacheAudios(_soundEditor.getAllAudioPathsFromFile());
 	}
 
 	// No sky by default

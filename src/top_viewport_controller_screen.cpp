@@ -225,7 +225,7 @@ void TopViewportController::_updateMiscScreenManagement()
 		_fe3d.misc_clearFontCache(newFilePath);
 		_fe3d.misc_clear2dTextureCache(newFilePath);
 		_fe3d.misc_clearBitmapCache(newFilePath);
-		_fe3d.misc_clearSoundCache(newFilePath);
+		_fe3d.misc_clearAudioCache(newFilePath);
 	}
 	else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("export")->isHovered())
 	{

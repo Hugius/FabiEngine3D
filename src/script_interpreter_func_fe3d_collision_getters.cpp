@@ -220,7 +220,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				// Temporary values
 				bool result = false;
 
-				// Check if requested aabbEntity is existing
+				// Check if requested aabbEntity existing
 				if(_fe3d.aabb_isExisting(arguments[0].getString()))
 				{
 					// Check if requested aabbEntity does not have a parent

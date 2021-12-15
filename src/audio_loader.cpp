@@ -1,4 +1,6 @@
 #include "audio_loader.hpp"
+#include "audio_loader.hpp"
+#include "audio_loader.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 
@@ -25,7 +27,12 @@ AudioLoader::~AudioLoader()
 	}
 }
 
-void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
+void AudioLoader::cacheChunk(const string& filePath)
+{
+	loadChunk(filePath);
+}
+
+void AudioLoader::cacheChunks(const vector<string>& filePaths)
 {
 	// Temporary values
 	vector<future<const char*>> threads;
@@ -85,7 +92,7 @@ void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 
 Mix_Chunk* AudioLoader::loadChunk(const string& filePath)
 {
-BEGIN:
+	BEGIN:
 	// Search cache
 	auto cacheIterator = _chunkCache.find(filePath);
 
@@ -134,6 +141,11 @@ void AudioLoader::clearChunkCache(const string& filePath)
 	{
 		_chunkCache.erase(filePath);
 	}
+}
+
+void AudioLoader::clearChunksCache()
+{
+	_chunkCache.clear();
 }
 
 Mix_Chunk* AudioLoader::_loadChunk(const string& filePath, unsigned char* data) const

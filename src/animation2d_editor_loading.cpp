@@ -58,16 +58,14 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 		// Convert spaces
 		replace(previewTexturePath.begin(), previewTexturePath.end(), '?', ' ');
 
-		// Create animation
-		auto newAnimation = make_shared<Animation2d>(animationID);
-
 		// Convert to long path
 		if(!Config::getInst().isApplicationExported())
 		{
 			previewTexturePath = string("projects\\" + _currentProjectID + "\\" + previewTexturePath);
 		}
 
-		// Set path
+		// Create animation
+		auto newAnimation = make_shared<Animation2d>(animationID);
 		newAnimation->setPreviewTexturePath(previewTexturePath);
 
 		// Set properties
@@ -78,8 +76,12 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 		// Only if loading animations in editor
 		if(mustCheckPreviewTexture)
 		{
-			// Check if preview texture not existing anymore
-			if(Tools::isFileExisting)
+			// Check if preview texture still existing
+			if(Tools::isFileExisting(rootPath + previewTexturePath))
+			{
+				_fe3d.misc_cache2dTexture(previewTexturePath);
+			}
+			else
 			{
 				Logger::throwWarning("Preview texture of animation with ID \"" + newAnimation->getID() + "\" not existing anymore!");
 				continue;

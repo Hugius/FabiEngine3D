@@ -15,8 +15,10 @@ public:
 	~AudioLoader();
 
 	// VOID
-	void cacheChunksMultiThreaded(const vector<string>& filePaths);
+	void cacheChunk(const string& filePath);
+	void cacheChunks(const vector<string>& filePaths);
 	void clearChunkCache(const string& filePath);
+	void clearChunksCache();
 
 	// MISCELLANEOUS
 	Mix_Chunk* loadChunk(const string& filePath);

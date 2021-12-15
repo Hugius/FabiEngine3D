@@ -1,14 +1,14 @@
 #pragma once
 
 #include "fe3d.hpp"
-#include "engine_gui_rectangle.hpp"
-#include "engine_gui_button.hpp"
+#include "gui_rectangle.hpp"
+#include "gui_button.hpp"
 
-class EngineGuiScrollingList final : public EngineGuiRectangle
+class GuiScrollingList final : public GuiRectangle
 {
 public:
-	EngineGuiScrollingList(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color,
-						   fvec3 buttonColor, fvec3 buttonHoverColor, fvec3 textColor, fvec3 textHoverColor, fvec2 charSize, bool isCentered);
+	GuiScrollingList(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color,
+					 fvec3 buttonColor, fvec3 buttonHoverColor, fvec3 textColor, fvec3 textHoverColor, fvec2 charSize, bool isCentered);
 
 	// VOID
 	void update(bool isHoverable);
@@ -21,8 +21,8 @@ public:
 	const bool isHovered() const;
 
 	// MISCELLANEOUS
-	const vector<shared_ptr<EngineGuiButton>>& getButtons() const;
-	shared_ptr<EngineGuiButton> getButton(const string& ID) const;
+	const vector<shared_ptr<GuiButton>>& getButtons() const;
+	shared_ptr<GuiButton> getButton(const string& ID) const;
 
 private:
 	// VOID
@@ -52,5 +52,5 @@ private:
 	bool _isHovered = false;
 
 	// MISCELLANEOUS
-	vector<shared_ptr<EngineGuiButton>> _buttons;
+	vector<shared_ptr<GuiButton>> _buttons;
 };

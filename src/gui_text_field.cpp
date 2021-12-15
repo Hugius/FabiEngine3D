@@ -1,6 +1,6 @@
-#include "engine_gui_text_field.hpp"
+#include "gui_text_field.hpp"
 
-EngineGuiTextField::EngineGuiTextField(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, string textContent, fvec3 color, bool isCentered, bool isDynamic)
+GuiTextField::GuiTextField(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, string textContent, fvec3 color, bool isCentered, bool isDynamic)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -18,17 +18,17 @@ EngineGuiTextField::EngineGuiTextField(FabiEngine3D& fe3d, const string& parentI
 	_fe3d.text_setContent(_entityID, textContent);
 }
 
-EngineGuiTextField::~EngineGuiTextField()
+GuiTextField::~GuiTextField()
 {
 	_fe3d.text_delete(_entityID);
 }
 
-void EngineGuiTextField::setVisible(bool isVisible)
+void GuiTextField::setVisible(bool isVisible)
 {
 	_fe3d.text_setVisible(_entityID, isVisible);
 }
 
-void EngineGuiTextField::changeTextContent(const string& content)
+void GuiTextField::changeTextContent(const string& content)
 {
 	// Check if text content changed
 	if(content != _fe3d.text_getContent(_entityID))
@@ -40,47 +40,47 @@ void EngineGuiTextField::changeTextContent(const string& content)
 	}
 }
 
-void EngineGuiTextField::updateInitialPosition()
+void GuiTextField::updateInitialPosition()
 {
 	_initialPosition = _fe3d.text_getPosition(_entityID);
 }
 
-void EngineGuiTextField::updateInitialSize()
+void GuiTextField::updateInitialSize()
 {
 	_initialSize = _fe3d.text_getSize(_entityID);
 }
 
-void EngineGuiTextField::updateInitialColor()
+void GuiTextField::updateInitialColor()
 {
 	_initialColor = _fe3d.text_getColor(_entityID);
 }
 
-const fvec2 EngineGuiTextField::getInitialPosition() const
+const fvec2 GuiTextField::getInitialPosition() const
 {
 	return _initialPosition;
 }
 
-const fvec2 EngineGuiTextField::getInitialSize() const
+const fvec2 GuiTextField::getInitialSize() const
 {
 	return _initialSize;
 }
 
-const fvec3 EngineGuiTextField::getInitialColor() const
+const fvec3 GuiTextField::getInitialColor() const
 {
 	return _initialColor;
 }
 
-const string& EngineGuiTextField::getID() const
+const string& GuiTextField::getID() const
 {
 	return _ID;
 }
 
-const string& EngineGuiTextField::getEntityID() const
+const string& GuiTextField::getEntityID() const
 {
 	return _entityID;
 }
 
-const string& EngineGuiTextField::getParentID() const
+const string& GuiTextField::getParentID() const
 {
 	return _parentID;
 }

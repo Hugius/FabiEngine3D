@@ -1,13 +1,13 @@
 #pragma once
 
 #include "fe3d.hpp"
-#include "engine_gui_screen.hpp"
+#include "gui_screen.hpp"
 
-class EngineGuiWindow final
+class GuiWindow final
 {
 public:
-	EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color);
-	~EngineGuiWindow();
+	GuiWindow(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color);
+	~GuiWindow();
 
 	// VOID
 	void createScreen(const string& ID);
@@ -28,9 +28,9 @@ public:
 	const bool isHovered() const;
 
 	// MISCELLANEOUS
-	const vector<shared_ptr<EngineGuiScreen>>& getScreens() const;
-	shared_ptr<EngineGuiScreen> getScreen(const string& ID) const;
-	shared_ptr<EngineGuiScreen> getActiveScreen() const;
+	const vector<shared_ptr<GuiScreen>>& getScreens() const;
+	shared_ptr<GuiScreen> getScreen(const string& ID) const;
+	shared_ptr<GuiScreen> getActiveScreen() const;
 
 private:
 	// STRING
@@ -44,6 +44,6 @@ private:
 	const fvec2 _initialSize;
 
 	// MISCELLANEOUS
-	vector<shared_ptr<EngineGuiScreen>> _screens;
+	vector<shared_ptr<GuiScreen>> _screens;
 	FabiEngine3D& _fe3d;
 };

@@ -2,7 +2,7 @@
 
 using BVPC = BottomViewportController;
 
-BottomViewportController::BottomViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui,
+BottomViewportController::BottomViewportController(FabiEngine3D& fe3d, GuiManager& gui,
 												   TopViewportController& topViewportController, ScriptEditor& scriptEditor)
 	:
 	BaseViewportController(fe3d, gui),

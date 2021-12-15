@@ -2,12 +2,12 @@
 
 #include "fe3d.hpp"
 
-class EngineGuiRectangle
+class GuiRectangle
 {
 public:
-	EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, bool isCentered);
-	EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, const string& texturePath, bool isCentered);
-	~EngineGuiRectangle();
+	GuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, bool isCentered);
+	GuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, const string& texturePath, bool isCentered);
+	~GuiRectangle();
 
 	// VOID
 	virtual void setVisible(bool isVisible);

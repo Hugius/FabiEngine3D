@@ -9,7 +9,7 @@ using std::ofstream;
 using TVPC = TopViewportController;
 
 TopViewportController::TopViewportController(FabiEngine3D& fe3d,
-											 EngineGuiManager& gui,
+											 GuiManager& gui,
 											 SettingsEditor& settingsEditor,
 											 SkyEditor& skyEditor,
 											 TerrainEditor& terrainEditor,

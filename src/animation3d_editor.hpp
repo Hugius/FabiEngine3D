@@ -1,14 +1,14 @@
 #pragma once
 
 #include "fe3d.hpp"
-#include "engine_gui_manager.hpp"
+#include "gui_manager.hpp"
 #include "animation3d.hpp"
 #include "model_editor.hpp"
 
 class Animation3dEditor final
 {
 public:
-	Animation3dEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, ModelEditor& modelEditor);
+	Animation3dEditor(FabiEngine3D& fe3d, GuiManager& gui, ModelEditor& modelEditor);
 
 	// VOID
 	void setCurrentProjectID(const string& projectID);
@@ -108,6 +108,6 @@ private:
 	map<pair<string, string>, Animation3d> _startedModelAnimations;
 	vector<shared_ptr<Animation3d>> _animations;
 	FabiEngine3D& _fe3d;
-	EngineGuiManager& _gui;
+	GuiManager& _gui;
 	ModelEditor& _modelEditor;
 };

@@ -1,7 +1,7 @@
-#include "engine_gui_screen.hpp"
+#include "gui_screen.hpp"
 #include "logger.hpp"
 
-EngineGuiScreen::EngineGuiScreen(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size)
+GuiScreen::GuiScreen(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -12,7 +12,7 @@ EngineGuiScreen::EngineGuiScreen(FabiEngine3D& fe3d, const string& parentID, con
 
 }
 
-void EngineGuiScreen::update(bool hoverable)
+void GuiScreen::update(bool hoverable)
 {
 	// Update scrolling lists
 	for(const auto& scrollingList : _scrollingLists)
@@ -48,27 +48,27 @@ void EngineGuiScreen::update(bool hoverable)
 	}
 }
 
-void EngineGuiScreen::show()
+void GuiScreen::show()
 {
 	_isActive = true;
 }
 
-void EngineGuiScreen::hide()
+void GuiScreen::hide()
 {
 	_isActive = false;
 }
 
-const string& EngineGuiScreen::getID() const
+const string& GuiScreen::getID() const
 {
 	return _ID;
 }
 
-const string& EngineGuiScreen::getParentID() const
+const string& GuiScreen::getParentID() const
 {
 	return _parentID;
 }
 
-const fvec2 EngineGuiScreen::convertPosition(fvec2 position) const
+const fvec2 GuiScreen::convertPosition(fvec2 position) const
 {
 	fvec2 screenPosition = _parentPosition;
 	fvec2 screenSize = _parentSize;
@@ -77,7 +77,7 @@ const fvec2 EngineGuiScreen::convertPosition(fvec2 position) const
 	return buttonPosition;
 }
 
-const fvec2 EngineGuiScreen::convertSize(fvec2 size) const
+const fvec2 GuiScreen::convertSize(fvec2 size) const
 {
 	fvec2 screenPosition = _parentPosition;
 	fvec2 screenSize = _parentSize;
@@ -86,7 +86,7 @@ const fvec2 EngineGuiScreen::convertSize(fvec2 size) const
 	return buttonSize;
 }
 
-const fvec4 EngineGuiScreen::_convertDimensions(fvec2 position, fvec2 size) const
+const fvec4 GuiScreen::_convertDimensions(fvec2 position, fvec2 size) const
 {
 	fvec2 screenPosition = _parentPosition;
 	fvec2 screenSize = _parentSize;

@@ -1,11 +1,11 @@
-#include "engine_gui_write_field.hpp"
+#include "gui_write_field.hpp"
 
 #include <map>
 #include <windows.h>
 
-EngineGuiWriteField::EngineGuiWriteField(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor, fvec3 textColor, fvec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
+GuiWriteField::GuiWriteField(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor, fvec3 textColor, fvec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
 	:
-	EngineGuiButton(fe3d, parentID, ID, position, size, color, hoverColor, "", textColor, textHoverColor, false, true, isCentered),
+	GuiButton(fe3d, parentID, ID, position, size, color, hoverColor, "", textColor, textHoverColor, false, true, isCentered),
 	_noNumbers(noNumbers),
 	_noCaps(noCaps),
 	_noSpecials(noSpecials),
@@ -15,14 +15,14 @@ EngineGuiWriteField::EngineGuiWriteField(FabiEngine3D& fe3d, const string& paren
 	_fe3d.text_setContent(_textField->getEntityID(), "|", CHAR_WIDTH);
 }
 
-void EngineGuiWriteField::update(bool hoverable)
+void GuiWriteField::update(bool hoverable)
 {
 	_updateHovering(hoverable && !_isActive);
 	_updateActivation();
 	_updateTyping();
 }
 
-void EngineGuiWriteField::_updateActivation()
+void GuiWriteField::_updateActivation()
 {
 	if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 	{
@@ -40,7 +40,7 @@ void EngineGuiWriteField::_updateActivation()
 	}
 }
 
-void EngineGuiWriteField::_updateTyping()
+void GuiWriteField::_updateTyping()
 {
 	if(_isActive)
 	{
@@ -236,35 +236,35 @@ void EngineGuiWriteField::_updateTyping()
 	}
 }
 
-void EngineGuiWriteField::setActive(bool active)
+void GuiWriteField::setActive(bool active)
 {
 	_isActive = active;
 }
 
-void EngineGuiWriteField::setPermActive(bool active)
+void GuiWriteField::setPermActive(bool active)
 {
 	_isActive = active;
 	_mustBeActive = active;
 }
 
-const bool EngineGuiWriteField::confirmedInput() const
+const bool GuiWriteField::confirmedInput() const
 {
 	return _confirmedInput;
 }
 
-const bool EngineGuiWriteField::isActive() const
+const bool GuiWriteField::isActive() const
 {
 	return _isActive;
 }
 
-const bool EngineGuiWriteField::hasTextContentChanged()
+const bool GuiWriteField::hasTextContentChanged()
 {
 	bool result = (_lastTextContent != _currentTextContent);
 	_lastTextContent = _currentTextContent;
 	return result;
 }
 
-const string EngineGuiWriteField::getTextContent() const
+const string GuiWriteField::getTextContent() const
 {
 	// Check if user filled in a minus without a number
 	if(_currentTextContent == "-" && _noSpecials && _minusAllowed)
@@ -277,7 +277,7 @@ const string EngineGuiWriteField::getTextContent() const
 	}
 }
 
-void EngineGuiWriteField::changeTextContent(const string& content)
+void GuiWriteField::changeTextContent(const string& content)
 {
 	_currentTextContent = content;
 }

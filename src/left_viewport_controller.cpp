@@ -4,7 +4,7 @@
 
 using LVPC = LeftViewportController;
 
-LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui)
+LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, GuiManager& gui)
 	:
 	BaseViewportController(fe3d, gui),
 	_settingsEditor(fe3d, gui),
@@ -17,7 +17,7 @@ LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, EngineGuiMana
 	_animation2dEditor(fe3d, gui),
 	_soundEditor(fe3d, gui),
 	_worldEditor(fe3d, gui, _skyEditor, _terrainEditor, _waterEditor, _modelEditor, _billboardEditor, _animation3dEditor, _soundEditor),
-	_scriptEditor(fe3d, gui, _skyEditor, _terrainEditor, _waterEditor, _modelEditor, _billboardEditor, _animation3dEditor, _soundEditor, _worldEditor)
+	_scriptEditor(fe3d, gui, _skyEditor, _terrainEditor, _waterEditor, _modelEditor, _billboardEditor, _animation3dEditor, _animation2dEditor, _soundEditor, _worldEditor)
 {
 
 }
@@ -42,7 +42,7 @@ void LeftViewportController::initialize()
 	window->getScreen("main")->createButton("soundEditor", fvec2(0.0f, positions[8]), fvec2(TW("Sound"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sound", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	window->getScreen("main")->createButton("worldEditor", fvec2(0.0f, positions[9]), fvec2(TW("World"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "World", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	window->getScreen("main")->createButton("scriptEditor", fvec2(0.0f, positions[10]), fvec2(TW("Script"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Script", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	
+
 	// Default screen
 	window->setActiveScreen("main");
 }

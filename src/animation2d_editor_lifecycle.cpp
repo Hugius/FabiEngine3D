@@ -8,7 +8,7 @@ using LVPC = LeftViewportController;
 
 #define TW(text) VPC::calculateTextWidth(text, CW)
 
-Animation2dEditor::Animation2dEditor(FabiEngine3D& fe3d, EngineGuiManager& gui)
+Animation2dEditor::Animation2dEditor(FabiEngine3D& fe3d, GuiManager& gui)
 	:
 	_fe3d(fe3d),
 	_gui(gui)

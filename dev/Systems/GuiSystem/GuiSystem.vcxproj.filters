@@ -39,75 +39,75 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\engine_gui_manager.cpp">
+    <ClCompile Include="..\..\..\src\gui_manager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_gui_button.cpp">
+    <ClCompile Include="..\..\..\src\gui_button.cpp">
       <Filter>Element\Button</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_gui_rectangle.cpp">
+    <ClCompile Include="..\..\..\src\gui_rectangle.cpp">
       <Filter>Element\Rectangle</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_gui_scrolling_list.cpp">
+    <ClCompile Include="..\..\..\src\gui_scrolling_list.cpp">
       <Filter>Element\Scrolling List</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_gui_text_field.cpp">
+    <ClCompile Include="..\..\..\src\gui_text_field.cpp">
       <Filter>Element\Text Field</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_gui_viewport.cpp">
+    <ClCompile Include="..\..\..\src\gui_viewport.cpp">
       <Filter>Element\Viewport</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_gui_window.cpp">
+    <ClCompile Include="..\..\..\src\gui_window.cpp">
       <Filter>Element\Window</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_gui_write_field.cpp">
+    <ClCompile Include="..\..\..\src\gui_write_field.cpp">
       <Filter>Element\Write Field</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_gui_global_screen_element.cpp">
+    <ClCompile Include="..\..\..\src\gui_global_screen_element.cpp">
       <Filter>Element\Screen\Global</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_gui_global_screen_form.cpp">
+    <ClCompile Include="..\..\..\src\gui_global_screen_form.cpp">
       <Filter>Element\Screen\Global</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_gui_global_screen_misc.cpp">
+    <ClCompile Include="..\..\..\src\gui_global_screen_misc.cpp">
       <Filter>Element\Screen\Global</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_gui_screen_element.cpp">
+    <ClCompile Include="..\..\..\src\gui_screen_element.cpp">
       <Filter>Element\Screen\Local</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\engine_gui_screen_misc.cpp">
+    <ClCompile Include="..\..\..\src\gui_screen_misc.cpp">
       <Filter>Element\Screen\Local</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\engine_gui_manager.hpp">
+    <ClInclude Include="..\..\..\src\gui_manager.hpp">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\engine_gui_button.hpp">
+    <ClInclude Include="..\..\..\src\gui_button.hpp">
       <Filter>Element\Button</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\engine_gui_rectangle.hpp">
+    <ClInclude Include="..\..\..\src\gui_rectangle.hpp">
       <Filter>Element\Rectangle</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\engine_gui_scrolling_list.hpp">
+    <ClInclude Include="..\..\..\src\gui_scrolling_list.hpp">
       <Filter>Element\Scrolling List</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\engine_gui_text_field.hpp">
+    <ClInclude Include="..\..\..\src\gui_text_field.hpp">
       <Filter>Element\Text Field</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\engine_gui_viewport.hpp">
+    <ClInclude Include="..\..\..\src\gui_viewport.hpp">
       <Filter>Element\Viewport</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\engine_gui_window.hpp">
+    <ClInclude Include="..\..\..\src\gui_window.hpp">
       <Filter>Element\Window</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\engine_gui_write_field.hpp">
+    <ClInclude Include="..\..\..\src\gui_write_field.hpp">
       <Filter>Element\Write Field</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\engine_gui_global_screen.hpp">
+    <ClInclude Include="..\..\..\src\gui_global_screen.hpp">
       <Filter>Element\Screen\Global</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\engine_gui_screen.hpp">
+    <ClInclude Include="..\..\..\src\gui_screen.hpp">
       <Filter>Element\Screen\Local</Filter>
     </ClInclude>
   </ItemGroup>

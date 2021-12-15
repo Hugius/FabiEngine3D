@@ -1,7 +1,7 @@
 #pragma once
 
 #include "fe3d.hpp"
-#include "engine_gui_manager.hpp"
+#include "gui_manager.hpp"
 #include "script.hpp"
 #include "script_executor.hpp"
 
@@ -9,13 +9,14 @@ class ScriptEditor final
 {
 public:
 	ScriptEditor(FabiEngine3D& fe3d,
-				 EngineGuiManager& gui,
+				 GuiManager& gui,
 				 SkyEditor& skyEditor,
 				 TerrainEditor& terrainEditor,
 				 WaterEditor& waterEditor,
 				 ModelEditor& modelEditor,
 				 BillboardEditor& billboardEditor,
 				 Animation3dEditor& animation3dEditor,
+				 Animation2dEditor& animation2dEditor,
 				 SoundEditor& soundEditor,
 				 WorldEditor& worldEditor);
 
@@ -134,7 +135,7 @@ private:
 
 	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
-	EngineGuiManager& _gui;
+	GuiManager& _gui;
 	Script _script;
 	ScriptExecutor _scriptExecutor;
 	InputType _activeActionKey = InputType::NONE;

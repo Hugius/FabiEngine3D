@@ -1,13 +1,13 @@
 #pragma once
 
 #include "fe3d.hpp"
-#include "engine_gui_window.hpp"
+#include "gui_window.hpp"
 
-class EngineGuiViewport final
+class GuiViewport final
 {
 public:
-	EngineGuiViewport(FabiEngine3D& fe3d, const string& ID, fvec2 position, fvec2 size, fvec3 color);
-	~EngineGuiViewport();
+	GuiViewport(FabiEngine3D& fe3d, const string& ID, fvec2 position, fvec2 size, fvec3 color);
+	~GuiViewport();
 
 	// VOID
 	void update(bool hoverable);
@@ -22,8 +22,8 @@ public:
 	const bool isHovered() const;
 
 	// MISCELLANEOUS
-	const vector<shared_ptr<EngineGuiWindow>>& getWindows() const;
-	shared_ptr<EngineGuiWindow> getWindow(const string& ID) const;
+	const vector<shared_ptr<GuiWindow>>& getWindows() const;
+	shared_ptr<GuiWindow> getWindow(const string& ID) const;
 
 private:
 	// STRING
@@ -31,6 +31,6 @@ private:
 	const string _entityID;
 
 	// MISCELLANEOUS
-	vector<shared_ptr<EngineGuiWindow>> _windows;
+	vector<shared_ptr<GuiWindow>> _windows;
 	FabiEngine3D& _fe3d;
 };

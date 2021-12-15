@@ -1,12 +1,12 @@
 #pragma once
 
 #include "fe3d.hpp"
-#include "engine_gui_manager.hpp"
+#include "gui_manager.hpp"
 
 class SkyEditor final
 {
 public:
-	SkyEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
+	SkyEditor(FabiEngine3D& fe3d, GuiManager& gui);
 
 	// VOID
 	void setCurrentProjectID(const string& projectID);
@@ -55,5 +55,5 @@ private:
 
 	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
-	EngineGuiManager& _gui;
+	GuiManager& _gui;
 };

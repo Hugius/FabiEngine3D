@@ -1,13 +1,13 @@
 #pragma once
 
 #include "fe3d.hpp"
-#include "engine_gui_button.hpp"
+#include "gui_button.hpp"
 
-class EngineGuiWriteField final : public EngineGuiButton
+class GuiWriteField final : public GuiButton
 {
 public:
-	EngineGuiWriteField(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor,
-						fvec3 textColor, fvec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered);
+	GuiWriteField(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor,
+				  fvec3 textColor, fvec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered);
 
 	// VOID
 	void update(bool hoverable) override;
@@ -17,7 +17,7 @@ public:
 
 	// STRING
 	const string getTextContent() const;
-	
+
 	// BOOL
 	const bool confirmedInput() const;
 	const bool isActive() const;

@@ -13,6 +13,7 @@ public:
 				   ModelEditor& modelEditor,
 				   BillboardEditor& billboardEditor,
 				   Animation3dEditor& animation3dEditor,
+				   Animation2dEditor& animation2dEditor,
 				   SoundEditor& soundEditor,
 				   WorldEditor& worldEditor);
 
@@ -35,7 +36,7 @@ private:
 
 	// STRING
 	vector<string> _pausedSoundIDs;
-	
+
 	// BOOL
 	bool _isStarted = false;
 	bool _isRunning = false;

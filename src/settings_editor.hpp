@@ -1,12 +1,12 @@
 #pragma once
 
 #include "fe3d.hpp"
-#include "engine_gui_manager.hpp"
+#include "gui_manager.hpp"
 
 class SettingsEditor final
 {
 public:
-	SettingsEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
+	SettingsEditor(FabiEngine3D& fe3d, GuiManager& gui);
 
 	// VOID
 	void setCurrentProjectID(const string& projectID);
@@ -37,5 +37,5 @@ private:
 
 	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
-	EngineGuiManager& _gui;
+	GuiManager& _gui;
 };

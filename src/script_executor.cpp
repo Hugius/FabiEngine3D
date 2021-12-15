@@ -9,6 +9,7 @@ ScriptExecutor::ScriptExecutor(FabiEngine3D& fe3d,
 							   ModelEditor& modelEditor,
 							   BillboardEditor& billboardEditor,
 							   Animation3dEditor& animation3dEditor,
+							   Animation2dEditor& animation2dEditor,
 							   SoundEditor& soundEditor,
 							   WorldEditor& worldEditor)
 	:
@@ -22,6 +23,7 @@ ScriptExecutor::ScriptExecutor(FabiEngine3D& fe3d,
 					   modelEditor,
 					   billboardEditor,
 					   animation3dEditor,
+					   animation2dEditor,
 					   soundEditor,
 					   worldEditor)
 {

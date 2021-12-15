@@ -1,13 +1,13 @@
-#include "engine_gui_global_screen.hpp"
+#include "gui_global_screen.hpp"
 
-EngineGuiGlobalScreen::EngineGuiGlobalScreen(FabiEngine3D& fe3d)
+GuiGlobalScreen::GuiGlobalScreen(FabiEngine3D& fe3d)
 	:
 	_fe3d(fe3d)
 {
 
 }
 
-void EngineGuiGlobalScreen::update()
+void GuiGlobalScreen::update()
 {
 	// Update scrolling lists
 	for(const auto& scrollingList : _scrollingLists)
@@ -31,12 +31,12 @@ void EngineGuiGlobalScreen::update()
 	_updateValueFormDeleting();
 }
 
-void EngineGuiGlobalScreen::setFocus(bool focused)
+void GuiGlobalScreen::setFocus(bool focused)
 {
 	_isFocused = focused;
 }
 
-const bool EngineGuiGlobalScreen::isFocused() const
+const bool GuiGlobalScreen::isFocused() const
 {
 	return _isFocused;
 }

@@ -1,12 +1,12 @@
 #pragma once
 
 #include "fe3d.hpp"
-#include "engine_gui_manager.hpp"
+#include "gui_manager.hpp"
 
 class BaseViewportController
 {
 public:
-	BaseViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui);
+	BaseViewportController(FabiEngine3D& fe3d, GuiManager& gui);
 
 	// VOID
 	virtual void initialize() = 0;
@@ -21,5 +21,5 @@ public:
 protected:
 	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
-	EngineGuiManager& _gui;
+	GuiManager& _gui;
 };

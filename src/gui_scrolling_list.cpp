@@ -1,12 +1,12 @@
-#include "engine_gui_scrolling_list.hpp"
+#include "gui_scrolling_list.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 
 #include <algorithm>
 
-EngineGuiScrollingList::EngineGuiScrollingList(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 buttonColor, fvec3 buttonHoverColor, fvec3 textColor, fvec3 textHoverColor, fvec2 charSize, bool isCentered)
+GuiScrollingList::GuiScrollingList(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 buttonColor, fvec3 buttonHoverColor, fvec3 textColor, fvec3 textHoverColor, fvec2 charSize, bool isCentered)
 	:
-	EngineGuiRectangle(fe3d, parentID + "_scrollingList", ID, position, size, color, isCentered),
+	GuiRectangle(fe3d, parentID + "_scrollingList", ID, position, size, color, isCentered),
 	_buttonColor(buttonColor),
 	_buttonHoverColor(buttonHoverColor),
 	_textColor(textColor),
@@ -16,14 +16,14 @@ EngineGuiScrollingList::EngineGuiScrollingList(FabiEngine3D& fe3d, const string&
 
 }
 
-void EngineGuiScrollingList::update(bool isHoverable)
+void GuiScrollingList::update(bool isHoverable)
 {
 	_updateHovering();
 	_updateScolling();
 	_updateButtons(isHoverable);
 }
 
-void EngineGuiScrollingList::createButton(const string& ID, string textContent)
+void GuiScrollingList::createButton(const string& ID, string textContent)
 {
 	// Calculate dimensions
 	float x = 0.0f;
@@ -34,7 +34,7 @@ void EngineGuiScrollingList::createButton(const string& ID, string textContent)
 	// Add button
 	fvec2 position = _convertPosition(fvec2(x, y));
 	fvec2 size = _convertSize(fvec2(w, h));
-	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _parentID, ID, fvec2(position.x, position.y), fvec2(size.x, size.y),
+	_buttons.push_back(make_shared<GuiButton>(_fe3d, _parentID, ID, fvec2(position.x, position.y), fvec2(size.x, size.y),
 					   _buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor, true, true, _fe3d.image_isCentered(_entityID)));
 
 	// Define list boundaries
@@ -46,7 +46,7 @@ void EngineGuiScrollingList::createButton(const string& ID, string textContent)
 	_fe3d.text_setMaxPosition(textID, fvec2(1.0f, _initialPosition.y + (_initialSize.y / 2.0f)));
 }
 
-void EngineGuiScrollingList::deleteButton(const string& ID)
+void GuiScrollingList::deleteButton(const string& ID)
 {
 	// Delete button
 	for(size_t i = 0; i < _buttons.size(); i++)
@@ -79,19 +79,19 @@ void EngineGuiScrollingList::deleteButton(const string& ID)
 	}
 
 	// Error
-	Logger::throwError("EngineGuiScrollingList::deleteButton");
+	Logger::throwError("GuiScrollingList::deleteButton");
 }
 
-void EngineGuiScrollingList::deleteButtons()
+void GuiScrollingList::deleteButtons()
 {
 	_buttons.clear();
 	_scrollingOffset = 0.0f;
 	_scrollingSpeed = 0.0f;
 }
 
-void EngineGuiScrollingList::setVisible(bool isVisible)
+void GuiScrollingList::setVisible(bool isVisible)
 {
-	EngineGuiRectangle::setVisible(isVisible);
+	GuiRectangle::setVisible(isVisible);
 
 	// Show all buttons
 	for(const auto& button : _buttons)
@@ -100,7 +100,7 @@ void EngineGuiScrollingList::setVisible(bool isVisible)
 	}
 }
 
-void EngineGuiScrollingList::_updateHovering()
+void GuiScrollingList::_updateHovering()
 {
 	_isHovered = false;
 
@@ -119,7 +119,7 @@ void EngineGuiScrollingList::_updateHovering()
 	}
 }
 
-void EngineGuiScrollingList::_updateScolling()
+void GuiScrollingList::_updateScolling()
 {
 	if(!_buttons.empty())
 	{
@@ -193,7 +193,7 @@ void EngineGuiScrollingList::_updateScolling()
 	}
 }
 
-void EngineGuiScrollingList::_updateButtons(bool hoverable)
+void GuiScrollingList::_updateButtons(bool hoverable)
 {
 	// Update buttons
 	for(const auto& button : _buttons)
@@ -202,7 +202,7 @@ void EngineGuiScrollingList::_updateButtons(bool hoverable)
 	}
 }
 
-const fvec2 EngineGuiScrollingList::_convertPosition(fvec2 position) const
+const fvec2 GuiScrollingList::_convertPosition(fvec2 position) const
 {
 	fvec2 listPosition = _fe3d.image_getPosition(_entityID);
 	fvec2 listSize = _fe3d.image_getSize(_entityID);
@@ -211,7 +211,7 @@ const fvec2 EngineGuiScrollingList::_convertPosition(fvec2 position) const
 	return buttonPosition;
 }
 
-const fvec2 EngineGuiScrollingList::_convertSize(fvec2 size) const
+const fvec2 GuiScrollingList::_convertSize(fvec2 size) const
 {
 	fvec2 listPosition = _fe3d.image_getPosition(_entityID);
 	fvec2 listSize = _fe3d.image_getSize(_entityID);
@@ -220,12 +220,12 @@ const fvec2 EngineGuiScrollingList::_convertSize(fvec2 size) const
 	return buttonSize;
 }
 
-const bool EngineGuiScrollingList::isHovered() const
+const bool GuiScrollingList::isHovered() const
 {
 	return _isHovered;
 }
 
-shared_ptr<EngineGuiButton> EngineGuiScrollingList::getButton(const string& ID) const
+shared_ptr<GuiButton> GuiScrollingList::getButton(const string& ID) const
 {
 	for(const auto& button : _buttons)
 	{
@@ -238,7 +238,7 @@ shared_ptr<EngineGuiButton> EngineGuiScrollingList::getButton(const string& ID) 
 	return nullptr;
 }
 
-const vector<shared_ptr<EngineGuiButton>>& EngineGuiScrollingList::getButtons() const
+const vector<shared_ptr<GuiButton>>& GuiScrollingList::getButtons() const
 {
 	return _buttons;
 }

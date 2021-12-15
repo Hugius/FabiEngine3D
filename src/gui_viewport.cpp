@@ -1,8 +1,8 @@
-#include "engine_gui_viewport.hpp"
+#include "gui_viewport.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 
-EngineGuiViewport::EngineGuiViewport(FabiEngine3D& fe3d, const string& ID, fvec2 position, fvec2 size, fvec3 color)
+GuiViewport::GuiViewport(FabiEngine3D& fe3d, const string& ID, fvec2 position, fvec2 size, fvec3 color)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -14,12 +14,12 @@ EngineGuiViewport::EngineGuiViewport(FabiEngine3D& fe3d, const string& ID, fvec2
 	_fe3d.image_setColor(_entityID, color);
 }
 
-EngineGuiViewport::~EngineGuiViewport()
+GuiViewport::~GuiViewport()
 {
 	_fe3d.image_delete(_entityID);
 }
 
-void EngineGuiViewport::update(bool hoverable)
+void GuiViewport::update(bool hoverable)
 {
 	for(const auto& window : _windows)
 	{
@@ -27,7 +27,7 @@ void EngineGuiViewport::update(bool hoverable)
 	}
 }
 
-const bool EngineGuiViewport::isHovered() const
+const bool GuiViewport::isHovered() const
 {
 	// Check if entity is visible anyway
 	if(_fe3d.image_isVisible(_entityID))
@@ -50,27 +50,27 @@ const bool EngineGuiViewport::isHovered() const
 	return false;
 }
 
-const string& EngineGuiViewport::getID()
+const string& GuiViewport::getID()
 {
 	return _ID;
 }
 
-const string& EngineGuiViewport::getEntityID()
+const string& GuiViewport::getEntityID()
 {
 	return _entityID;
 }
 
-void EngineGuiViewport::createWindow(const string& ID, fvec2 position, fvec2 size, fvec3 color)
+void GuiViewport::createWindow(const string& ID, fvec2 position, fvec2 size, fvec3 color)
 {
 	fvec2 viewportPosition = _fe3d.image_getPosition(_entityID);
 	fvec2 viewportSize = _fe3d.image_getSize(_entityID);
 	fvec2 windowPosition = viewportPosition + (position * viewportSize);
 	fvec2 windowSize = (size / 2.0f) * viewportSize;
 
-	_windows.push_back(make_shared<EngineGuiWindow>(_fe3d, _ID, ID, windowPosition, windowSize, color));
+	_windows.push_back(make_shared<GuiWindow>(_fe3d, _ID, ID, windowPosition, windowSize, color));
 }
 
-void EngineGuiViewport::deleteWindow(const string& ID)
+void GuiViewport::deleteWindow(const string& ID)
 {
 	// Delete window
 	for(size_t i = 0; i < _windows.size(); i++)
@@ -83,15 +83,15 @@ void EngineGuiViewport::deleteWindow(const string& ID)
 	}
 
 	// Error
-	Logger::throwError("EngineGuiViewport::deleteWindow");
+	Logger::throwError("GuiViewport::deleteWindow");
 }
 
-const vector<shared_ptr<EngineGuiWindow>>& EngineGuiViewport::getWindows() const
+const vector<shared_ptr<GuiWindow>>& GuiViewport::getWindows() const
 {
 	return _windows;
 }
 
-shared_ptr<EngineGuiWindow> EngineGuiViewport::getWindow(const string& ID) const
+shared_ptr<GuiWindow> GuiViewport::getWindow(const string& ID) const
 {
 	// Retrieve window
 	for(const auto& window : _windows)
@@ -103,5 +103,5 @@ shared_ptr<EngineGuiWindow> EngineGuiViewport::getWindow(const string& ID) const
 	}
 
 	// Error
-	Logger::throwError("EngineGuiViewport::getWindow");
+	Logger::throwError("GuiViewport::getWindow");
 }

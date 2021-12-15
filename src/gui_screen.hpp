@@ -1,17 +1,16 @@
 #pragma once
 
 #include "fe3d.hpp"
-#include "engine_gui_scrolling_list.hpp"
-#include "engine_gui_write_field.hpp"
-#include "engine_gui_button.hpp"
-#include "engine_gui_rectangle.hpp"
-#include "engine_gui_text_field.hpp"
+#include "gui_scrolling_list.hpp"
+#include "gui_write_field.hpp"
+#include "gui_button.hpp"
+#include "gui_rectangle.hpp"
+#include "gui_text_field.hpp"
 
-class EngineGuiScreen final
+class GuiScreen final
 {
 public:
-	// Constructors
-	EngineGuiScreen(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size);
+	GuiScreen(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size);
 
 	// VOID
 	void update(bool hoverable);
@@ -46,16 +45,16 @@ public:
 	const bool isTextFieldExisting(const string& ID) const;
 
 	// MISCELLANEOUS
-	shared_ptr<EngineGuiScrollingList> getScrollingList(const string& ID) const;
-	shared_ptr<EngineGuiWriteField> getWriteField(const string& ID) const;
-	shared_ptr<EngineGuiButton> getButton(const string& ID) const;
-	shared_ptr<EngineGuiRectangle> getRectangle(const string& ID) const;
-	shared_ptr<EngineGuiTextField> getTextField(const string& ID) const;
-	const vector<shared_ptr<EngineGuiScrollingList>>& getScrollingLists() const;
-	const vector<shared_ptr<EngineGuiWriteField>>& getWriteFields() const;
-	const vector<shared_ptr<EngineGuiButton>>& getButtons() const;
-	const vector<shared_ptr<EngineGuiRectangle>>& getRectangles() const;
-	const vector<shared_ptr<EngineGuiTextField>>& getTextFields() const;
+	shared_ptr<GuiScrollingList> getScrollingList(const string& ID) const;
+	shared_ptr<GuiWriteField> getWriteField(const string& ID) const;
+	shared_ptr<GuiButton> getButton(const string& ID) const;
+	shared_ptr<GuiRectangle> getRectangle(const string& ID) const;
+	shared_ptr<GuiTextField> getTextField(const string& ID) const;
+	const vector<shared_ptr<GuiScrollingList>>& getScrollingLists() const;
+	const vector<shared_ptr<GuiWriteField>>& getWriteFields() const;
+	const vector<shared_ptr<GuiButton>>& getButtons() const;
+	const vector<shared_ptr<GuiRectangle>>& getRectangles() const;
+	const vector<shared_ptr<GuiTextField>>& getTextFields() const;
 
 private:
 	// FVEC4
@@ -73,10 +72,10 @@ private:
 	bool _isActive = false;
 
 	// MISCELLANEOUS
-	vector<shared_ptr<EngineGuiScrollingList>> _scrollingLists;
-	vector<shared_ptr<EngineGuiWriteField>> _writeFields;
-	vector<shared_ptr<EngineGuiButton>> _buttons;
-	vector<shared_ptr<EngineGuiRectangle>> _rectangles;
-	vector<shared_ptr<EngineGuiTextField>> _textFields;
+	vector<shared_ptr<GuiScrollingList>> _scrollingLists;
+	vector<shared_ptr<GuiWriteField>> _writeFields;
+	vector<shared_ptr<GuiButton>> _buttons;
+	vector<shared_ptr<GuiRectangle>> _rectangles;
+	vector<shared_ptr<GuiTextField>> _textFields;
 	FabiEngine3D& _fe3d;
 };

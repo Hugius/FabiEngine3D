@@ -1,16 +1,16 @@
 #pragma once
 
 #include "fe3d.hpp"
-#include "engine_gui_rectangle.hpp"
-#include "engine_gui_text_field.hpp"
+#include "gui_rectangle.hpp"
+#include "gui_text_field.hpp"
 
-class EngineGuiButton
+class GuiButton
 {
 public:
-	EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor,
-					string textContent, fvec3 textColor, fvec3 textHoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered);
-	EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size,
-					const string& texturePath, fvec3 hoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered);
+	GuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor,
+			  string textContent, fvec3 textColor, fvec3 textHoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered);
+	GuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size,
+			  const string& texturePath, fvec3 hoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered);
 
 	// VOID
 	virtual void update(bool isHoverable);
@@ -27,8 +27,8 @@ public:
 	const bool isHovered() const;
 
 	// MISCELLANEOUS
-	shared_ptr<EngineGuiRectangle> getRectangle() const;
-	shared_ptr<EngineGuiTextField> getTextField() const;
+	shared_ptr<GuiRectangle> getRectangle() const;
+	shared_ptr<GuiTextField> getTextField() const;
 
 protected:
 	// VOID
@@ -48,8 +48,8 @@ protected:
 
 	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
-	shared_ptr<EngineGuiRectangle> _rectangle = nullptr;
-	shared_ptr<EngineGuiTextField> _textField = nullptr;
+	shared_ptr<GuiRectangle> _rectangle = nullptr;
+	shared_ptr<GuiTextField> _textField = nullptr;
 
 private:
 	// FLOAT

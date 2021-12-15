@@ -7,7 +7,7 @@ using LVPC = LeftViewportController;
 
 #define TW(text) VPC::calculateTextWidth(text, CW)
 
-TerrainEditor::TerrainEditor(FabiEngine3D& fe3d, EngineGuiManager& gui)
+TerrainEditor::TerrainEditor(FabiEngine3D& fe3d, GuiManager& gui)
 	:
 	_fe3d(fe3d),
 	_gui(gui)

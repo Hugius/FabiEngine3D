@@ -16,7 +16,7 @@
 class LeftViewportController final : public BaseViewportController
 {
 public:
-	LeftViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui);
+	LeftViewportController(FabiEngine3D& fe3d, GuiManager& gui);
 
 	// VOID
 	void initialize() override;

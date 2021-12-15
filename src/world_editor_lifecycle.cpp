@@ -3,7 +3,7 @@
 #include "configuration.hpp"
 
 WorldEditor::WorldEditor(FabiEngine3D& fe3d,
-						 EngineGuiManager& gui,
+						 GuiManager& gui,
 						 SkyEditor& skyEditor,
 						 TerrainEditor& terrainEditor,
 						 WaterEditor& waterEditor,

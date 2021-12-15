@@ -1,6 +1,6 @@
-#include "engine_gui_rectangle.hpp"
+#include "gui_rectangle.hpp"
 
-EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, bool isCentered)
+GuiRectangle::GuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -16,7 +16,7 @@ EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentI
 	_fe3d.image_setColor(_entityID, color);
 }
 
-EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, const string& texturePath, bool isCentered)
+GuiRectangle::GuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, const string& texturePath, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -32,57 +32,57 @@ EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentI
 	_fe3d.image_setDiffuseMap(_entityID, ("engine\\assets\\texture\\" + texturePath));
 }
 
-EngineGuiRectangle::~EngineGuiRectangle()
+GuiRectangle::~GuiRectangle()
 {
 	_fe3d.image_delete(_entityID);
 }
 
-void EngineGuiRectangle::setVisible(bool isVisible)
+void GuiRectangle::setVisible(bool isVisible)
 {
 	_fe3d.image_setVisible(_entityID, isVisible);
 }
 
-void EngineGuiRectangle::updateInitialPosition()
+void GuiRectangle::updateInitialPosition()
 {
 	_initialPosition = _fe3d.image_getPosition(_entityID);
 }
 
-void EngineGuiRectangle::updateInitialSize()
+void GuiRectangle::updateInitialSize()
 {
 	_initialSize = _fe3d.image_getSize(_entityID);
 }
 
-void EngineGuiRectangle::updateInitialColor()
+void GuiRectangle::updateInitialColor()
 {
 	_initialColor = _fe3d.image_getColor(_entityID);
 }
 
-const fvec2 EngineGuiRectangle::getInitialPosition() const
+const fvec2 GuiRectangle::getInitialPosition() const
 {
 	return _initialPosition;
 }
 
-const fvec2 EngineGuiRectangle::getInitialSize() const
+const fvec2 GuiRectangle::getInitialSize() const
 {
 	return _initialSize;
 }
 
-const fvec3 EngineGuiRectangle::getInitialColor() const
+const fvec3 GuiRectangle::getInitialColor() const
 {
 	return _initialColor;
 }
 
-const string& EngineGuiRectangle::getID() const
+const string& GuiRectangle::getID() const
 {
 	return _ID;
 }
 
-const string& EngineGuiRectangle::getEntityID() const
+const string& GuiRectangle::getEntityID() const
 {
 	return _entityID;
 }
 
-const string& EngineGuiRectangle::getParentID() const
+const string& GuiRectangle::getParentID() const
 {
 	return _parentID;
 }

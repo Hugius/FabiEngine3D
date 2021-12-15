@@ -1,13 +1,13 @@
-#include "engine_gui_button.hpp"
+#include "gui_button.hpp"
 #include "tools.hpp"
 
-EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor, string textContent, fvec3 textColor, fvec3 textHoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered)
+GuiButton::GuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor, string textContent, fvec3 textColor, fvec3 textHoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
 	_parentID(parentID),
-	_rectangle(make_shared<EngineGuiRectangle>(fe3d, parentID + "_button", ID, position, size, color, isCentered)),
-	_textField(make_shared<EngineGuiTextField>(fe3d, parentID + "_button", ID, position,
+	_rectangle(make_shared<GuiRectangle>(fe3d, parentID + "_button", ID, position, size, color, isCentered)),
+	_textField(make_shared<GuiTextField>(fe3d, parentID + "_button", ID, position,
 			   fvec2(size.x* TEXT_WIDTH_MULTIPLIER, size.y* TEXT_HEIGHT_MULTIPLIER), textContent, textColor, isCentered, false)),
 	_hoverColor(hoverColor),
 	_textHoverColor(textHoverColor),
@@ -17,12 +17,12 @@ EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, con
 
 }
 
-EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, const string& texturePath, fvec3 hoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered)
+GuiButton::GuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, const string& texturePath, fvec3 hoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
 	_parentID(parentID),
-	_rectangle(make_shared<EngineGuiRectangle>(fe3d, parentID + "_button", ID, position, size, texturePath, isCentered)),
+	_rectangle(make_shared<GuiRectangle>(fe3d, parentID + "_button", ID, position, size, texturePath, isCentered)),
 	_hoverColor(hoverColor),
 	_isSizeChangeEnabled(isSizeIncreaseEnabled),
 	_isColorChangeEnabled(isColorChangeEnabled)
@@ -30,12 +30,12 @@ EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, con
 
 }
 
-void EngineGuiButton::update(bool isHoverable)
+void GuiButton::update(bool isHoverable)
 {
 	_updateHovering(isHoverable);
 }
 
-void EngineGuiButton::setVisible(bool isVisible)
+void GuiButton::setVisible(bool isVisible)
 {
 	// Rectangle
 	_rectangle->setVisible(isVisible);
@@ -47,7 +47,7 @@ void EngineGuiButton::setVisible(bool isVisible)
 	}
 }
 
-void EngineGuiButton::_updateHovering(bool isHoverable)
+void GuiButton::_updateHovering(bool isHoverable)
 {
 	_isHovered = false;
 
@@ -154,7 +154,7 @@ void EngineGuiButton::_updateHovering(bool isHoverable)
 	}
 }
 
-void EngineGuiButton::setHoverable(bool isHoverable)
+void GuiButton::setHoverable(bool isHoverable)
 {
 	_isHoverable = isHoverable;
 
@@ -182,7 +182,7 @@ void EngineGuiButton::setHoverable(bool isHoverable)
 	}
 }
 
-void EngineGuiButton::changeTextContent(const string& content)
+void GuiButton::changeTextContent(const string& content)
 {
 	auto textEntityID = getTextField()->getEntityID();
 
@@ -202,32 +202,32 @@ void EngineGuiButton::changeTextContent(const string& content)
 	}
 }
 
-const bool EngineGuiButton::isHoverable() const
+const bool GuiButton::isHoverable() const
 {
 	return _isHoverable;
 }
 
-const bool EngineGuiButton::isHovered() const
+const bool GuiButton::isHovered() const
 {
 	return _isHovered;
 }
 
-const string& EngineGuiButton::getID() const
+const string& GuiButton::getID() const
 {
 	return _ID;
 }
 
-const string& EngineGuiButton::getParentID() const
+const string& GuiButton::getParentID() const
 {
 	return _parentID;
 }
 
-shared_ptr<EngineGuiRectangle> EngineGuiButton::getRectangle() const
+shared_ptr<GuiRectangle> GuiButton::getRectangle() const
 {
 	return _rectangle;
 }
 
-shared_ptr<EngineGuiTextField> EngineGuiButton::getTextField() const
+shared_ptr<GuiTextField> GuiButton::getTextField() const
 {
 	return _textField;
 }

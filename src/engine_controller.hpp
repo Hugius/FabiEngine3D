@@ -1,7 +1,7 @@
 #pragma once
 
 #include "fe3d.hpp"
-#include "engine_gui_manager.hpp"
+#include "gui_manager.hpp"
 #include "top_viewport_controller.hpp"
 #include "left_viewport_controller.hpp"
 #include "right_viewport_controller.hpp"
@@ -31,7 +31,7 @@ private:
 	static inline const float CURSOR_IMAGE_SIZE = 0.075f;
 
 	// MISCELLANEOUS
-	EngineGuiManager _gui;
+	GuiManager _gui;
 	LeftViewportController _leftViewportController;
 	RightViewportController _rightViewportController;
 	TopViewportController _topViewportController;

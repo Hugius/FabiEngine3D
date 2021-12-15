@@ -17,7 +17,7 @@ class TopViewportController final : public BaseViewportController
 {
 public:
 	TopViewportController(FabiEngine3D& fe3d,
-						  EngineGuiManager& gui,
+						  GuiManager& gui,
 						  SettingsEditor& settingsEditor,
 						  SkyEditor& skyEditor,
 						  TerrainEditor& terrainEditor,

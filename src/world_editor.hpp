@@ -1,7 +1,7 @@
 #pragma once
 
 #include "fe3d.hpp"
-#include "engine_gui_manager.hpp"
+#include "gui_manager.hpp"
 #include "sky_editor.hpp"
 #include "terrain_editor.hpp"
 #include "water_editor.hpp"
@@ -20,7 +20,7 @@ class WorldEditor final
 {
 public:
 	WorldEditor(FabiEngine3D& fe3d,
-				EngineGuiManager& gui,
+				GuiManager& gui,
 				SkyEditor& skyEditor,
 				TerrainEditor& terrainEditor,
 				WaterEditor& waterEditor,
@@ -301,7 +301,7 @@ private:
 
 	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
-	EngineGuiManager& _gui;
+	GuiManager& _gui;
 	SkyEditor& _skyEditor;
 	TerrainEditor& _terrainEditor;
 	WaterEditor& _waterEditor;

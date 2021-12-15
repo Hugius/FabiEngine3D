@@ -1,8 +1,8 @@
-#include "engine_gui_window.hpp"
+#include "gui_window.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 
-EngineGuiWindow::EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color)
+GuiWindow::GuiWindow(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -17,12 +17,12 @@ EngineGuiWindow::EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, con
 	_fe3d.image_setColor(_entityID, color);
 }
 
-EngineGuiWindow::~EngineGuiWindow()
+GuiWindow::~GuiWindow()
 {
 	_fe3d.image_delete(_entityID);
 }
 
-void EngineGuiWindow::update(bool hoverable)
+void GuiWindow::update(bool hoverable)
 {
 	for(const auto& screen : _screens)
 	{
@@ -30,7 +30,7 @@ void EngineGuiWindow::update(bool hoverable)
 	}
 }
 
-const bool EngineGuiWindow::isHovered() const
+const bool GuiWindow::isHovered() const
 {
 	// Check if entity is visible anyway
 	if(_fe3d.image_isVisible(_entityID))
@@ -53,50 +53,50 @@ const bool EngineGuiWindow::isHovered() const
 	return false;
 }
 
-const string& EngineGuiWindow::getID() const
+const string& GuiWindow::getID() const
 {
 	return _ID;
 }
 
-const string& EngineGuiWindow::getEntityID() const
+const string& GuiWindow::getEntityID() const
 {
 	return _entityID;
 }
 
-const string& EngineGuiWindow::getParentID() const
+const string& GuiWindow::getParentID() const
 {
 	return _parentID;
 }
 
-const fvec2 EngineGuiWindow::getInitialPosition() const
+const fvec2 GuiWindow::getInitialPosition() const
 {
 	return _initialPosition;
 }
 
-const fvec2 EngineGuiWindow::getInitialSize() const
+const fvec2 GuiWindow::getInitialSize() const
 {
 	return _initialSize;
 }
 
-void EngineGuiWindow::createScreen(const string& ID)
+void GuiWindow::createScreen(const string& ID)
 {
 	// Check if already exists
 	for(const auto& screen : _screens)
 	{
 		if(screen->getID() == ID)
 		{
-			Logger::throwError("EngineGuiWindow::createScreen");
+			Logger::throwError("GuiWindow::createScreen");
 		}
 	}
 
 	// Add new screen
 	fvec2 windowPosition = _fe3d.image_getPosition(_entityID);
 	fvec2 windowSize = _fe3d.image_getSize(_entityID);
-	_screens.push_back(make_shared<EngineGuiScreen>(_fe3d, _parentID + "_" + _ID, ID, windowPosition, windowSize));
+	_screens.push_back(make_shared<GuiScreen>(_fe3d, _parentID + "_" + _ID, ID, windowPosition, windowSize));
 	getScreen(ID)->hide();
 }
 
-void EngineGuiWindow::deleteScreen(const string& ID)
+void GuiWindow::deleteScreen(const string& ID)
 {
 	// Find screen
 	bool isFound = false;
@@ -118,11 +118,11 @@ void EngineGuiWindow::deleteScreen(const string& ID)
 	// Error
 	if(!isFound)
 	{
-		Logger::throwError("EngineGuiWindow::deleteScreen");
+		Logger::throwError("GuiWindow::deleteScreen");
 	}
 }
 
-void EngineGuiWindow::setActiveScreen(const string& ID)
+void GuiWindow::setActiveScreen(const string& ID)
 {
 	// Hide old active screen if possible
 	if(!_activeScreenID.empty())
@@ -135,17 +135,17 @@ void EngineGuiWindow::setActiveScreen(const string& ID)
 	getActiveScreen()->show();
 }
 
-const vector<shared_ptr<EngineGuiScreen>>& EngineGuiWindow::getScreens()const
+const vector<shared_ptr<GuiScreen>>& GuiWindow::getScreens()const
 {
 	return _screens;
 }
 
-shared_ptr<EngineGuiScreen> EngineGuiWindow::getActiveScreen() const
+shared_ptr<GuiScreen> GuiWindow::getActiveScreen() const
 {
 	return getScreen(_activeScreenID);
 }
 
-shared_ptr<EngineGuiScreen> EngineGuiWindow::getScreen(const string& ID) const
+shared_ptr<GuiScreen> GuiWindow::getScreen(const string& ID) const
 {
 	// Retrieve screen
 	for(const auto& screen : _screens)
@@ -157,5 +157,5 @@ shared_ptr<EngineGuiScreen> EngineGuiWindow::getScreen(const string& ID) const
 	}
 
 	// Error
-	Logger::throwError("EngineGuiWindow::getScreen");
+	Logger::throwError("GuiWindow::getScreen");
 }

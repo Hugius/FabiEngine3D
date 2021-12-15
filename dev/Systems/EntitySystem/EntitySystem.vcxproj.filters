@@ -57,10 +57,10 @@
     <ClCompile Include="..\..\..\src\aabb_entity.cpp">
       <Filter>Data\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\billboard_entity_getters.cpp">
+    <ClCompile Include="..\..\..\src\billboard_entity_get.cpp">
       <Filter>Data\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\billboard_entity_setters.cpp">
+    <ClCompile Include="..\..\..\src\billboard_entity_set.cpp">
       <Filter>Data\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\image_entity.cpp">
@@ -69,19 +69,19 @@
     <ClCompile Include="..\..\..\src\pointlight_entity.cpp">
       <Filter>Data\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\model_entity_getters.cpp">
+    <ClCompile Include="..\..\..\src\model_entity_get.cpp">
       <Filter>Data\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\model_entity_setters.cpp">
+    <ClCompile Include="..\..\..\src\model_entity_set.cpp">
       <Filter>Data\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\sky_entity.cpp">
       <Filter>Data\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\terrain_entity_getters.cpp">
+    <ClCompile Include="..\..\..\src\terrain_entity_get.cpp">
       <Filter>Data\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\terrain_entity_setters.cpp">
+    <ClCompile Include="..\..\..\src\terrain_entity_set.cpp">
       <Filter>Data\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\text_entity.cpp">

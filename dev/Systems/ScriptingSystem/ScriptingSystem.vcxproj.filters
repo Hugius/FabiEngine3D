@@ -66,25 +66,25 @@
     <ClCompile Include="..\..\..\src\script_interpreter_string_operations.cpp">
       <Filter>Execution\Interpreter\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_filesystem_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_filesystem_set.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_lighting_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_lighting_set.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_world_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_world_set.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_graphics_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_graphics_set.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_camera_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_camera_set.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_input_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_input_get.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_misc_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_misc_set.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_math.cpp">
@@ -111,130 +111,130 @@
     <ClCompile Include="..\..\..\src\script_interpreter_condition.cpp">
       <Filter>Execution\Interpreter\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_client_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_client_set.cpp">
       <Filter>Execution\Interpreter\Function\Networking</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_server_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_server_set.cpp">
       <Filter>Execution\Interpreter\Function\Networking</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sky_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sky_set.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_terrain_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_terrain_get.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_water_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_water_set.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_aabb_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_aabb_get.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_billboard_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_billboard_set.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_image_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_image_set.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_pointlight_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_pointlight_set.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_model_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_model_set.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text_set.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_reflection_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_reflection_set.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_condition_statement.cpp">
       <Filter>Data</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sound2d_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sound2d_set.cpp">
       <Filter>Execution\Interpreter\Function\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_aabb_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_aabb_set.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_validation.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_billboard_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_billboard_get.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_model_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_model_get.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_reflection_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_reflection_get.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_image_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_image_get.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_pointlight_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_pointlight_get.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text_get.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sky_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sky_get.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_water_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_water_get.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_camera_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_camera_get.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_filesystem_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_filesystem_get.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_graphics_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_graphics_get.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_lighting_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_lighting_get.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_misc_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_misc_get.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sound2d_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sound2d_get.cpp">
       <Filter>Execution\Interpreter\Function\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_world_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_world_get.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_server_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_server_get.cpp">
       <Filter>Execution\Interpreter\Function\Networking</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_client_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_client_get.cpp">
       <Filter>Execution\Interpreter\Function\Networking</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_terrain_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_terrain_set.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_spotlight_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_spotlight_get.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_spotlight_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_spotlight_set.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_raycast_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_raycast_set.cpp">
       <Filter>Execution\Interpreter\Function\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_raycast_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_raycast_get.cpp">
       <Filter>Execution\Interpreter\Function\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_collision_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_collision_get.cpp">
       <Filter>Execution\Interpreter\Function\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_collision_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_collision_set.cpp">
       <Filter>Execution\Interpreter\Function\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sound3d_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sound3d_get.cpp">
       <Filter>Execution\Interpreter\Function\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sound3d_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sound3d_set.cpp">
       <Filter>Execution\Interpreter\Function\Sound</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_list_extraction.cpp">
@@ -243,10 +243,10 @@
     <ClCompile Include="..\..\..\src\script_interpreter_list_misc.cpp">
       <Filter>Execution\Interpreter\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_animation3d_setters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_animation3d_set.cpp">
       <Filter>Execution\Interpreter\Function\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_animation3d_getters.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_animation3d_get.cpp">
       <Filter>Execution\Interpreter\Function\Animation</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script.cpp">
@@ -257,6 +257,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_execution.cpp">
       <Filter>Execution\Interpreter\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_animation2d_set.cpp">
+      <Filter>Execution\Interpreter\Function\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_animation2d_get.cpp">
+      <Filter>Execution\Interpreter\Function\Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

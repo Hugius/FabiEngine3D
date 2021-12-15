@@ -3,7 +3,7 @@
 
 void ScriptInterpreter::executeInitializeScripts()
 {
-	if(_initEntryID != "")
+	if(!_initEntryID.empty())
 	{
 		_isExecutingInitialization = true;
 
@@ -15,7 +15,7 @@ void ScriptInterpreter::executeInitializeScripts()
 
 void ScriptInterpreter::executeUpdateScripts(bool isDebugging)
 {
-	if(_updateEntryID != "")
+	if(!_updateEntryID.empty())
 	{
 		_isExecutingUpdate = true;
 
@@ -52,7 +52,7 @@ void ScriptInterpreter::executeUpdateScripts(bool isDebugging)
 
 void ScriptInterpreter::executeTerminateScripts()
 {
-	if(_terminateEntryID != "")
+	if(!_terminateEntryID.empty())
 	{
 		_isExecutingTerminate = true;
 

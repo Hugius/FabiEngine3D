@@ -59,7 +59,7 @@ void WorldEditor::_updateSkyMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("delete")->setHoverable(_currentSkyID != "");
+		screen->getButton("delete")->setHoverable(!_currentSkyID.empty());
 
 		// Update sky selection
 		_fe3d.sky_selectMainSky(_currentSkyID);

@@ -36,7 +36,7 @@ void TopViewportController::_updateProjectCreating()
 				Logger::throwWarning("Project \"" + newProjectID + "\"" + " already exists!");
 				return;
 			}
-			else if(std::any_of(newProjectID.begin(), newProjectID.end(), isupper)) // ID contains capitals
+			else if(any_of(newProjectID.begin(), newProjectID.end(), isupper)) // ID contains capitals
 			{
 				Logger::throwWarning("New project name cannot contain any capitals!");
 				return;
@@ -117,7 +117,7 @@ void TopViewportController::_updateProjectLoading()
 		const string projectDirectoryPath = string(Tools::getRootDirectoryPath() + "projects\\" + clickedButtonID + "\\");
 
 		// Check if user clicked a project ID
-		if(clickedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(!clickedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			// Check if project corrupted
 			if(isProjectCorrupted(projectDirectoryPath))
@@ -188,7 +188,7 @@ void TopViewportController::_updateProjectDeleting()
 		string clickedButtonID = _gui.getGlobalScreen()->checkChoiceForm("projectList");
 
 		// Check if user clicked a project ID
-		if(clickedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(!clickedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 			chosenButtonID = clickedButtonID;

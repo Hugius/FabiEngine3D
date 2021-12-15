@@ -238,7 +238,7 @@ void TerrainEditor::_updateTerrainChoosing()
 
 void TerrainEditor::_updateTerrainDeleting()
 {
-	if(_isDeletingTerrain && _currentTerrainID != "")
+	if(_isDeletingTerrain && !_currentTerrainID.empty())
 	{
 		// Add answer form
 		if(!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))

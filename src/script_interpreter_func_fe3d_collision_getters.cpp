@@ -20,7 +20,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 		{
 			// Validate direction
 			if(arguments[2].getString() != "X" && arguments[2].getString() != "Y" &&
-			   arguments[2].getString() != "Z" && arguments[2].getString() != "")
+			   arguments[2].getString() != "Z" && !arguments[2].getString().empty())
 			{
 				_throwScriptError("invalid direction argument!");
 				return true;
@@ -80,7 +80,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 		{
 			// Validate direction
 			if(arguments[0].getString() != "X" && arguments[0].getString() != "Y" &&
-			   arguments[0].getString() != "Z" && arguments[0].getString() != "")
+			   arguments[0].getString() != "Z" && !arguments[0].getString().empty())
 			{
 				_throwScriptError("invalid direction argument!");
 				return true;
@@ -123,7 +123,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 		{
 			// Validate direction
 			if(arguments[1].getString() != "X" && arguments[1].getString() != "Y" &&
-			   arguments[1].getString() != "Z" && arguments[1].getString() != "")
+			   arguments[1].getString() != "Z" && !arguments[1].getString().empty())
 			{
 				_throwScriptError("invalid direction argument!");
 				return true;
@@ -166,7 +166,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 		{
 			// Validate direction
 			if(arguments[0].getString() != "X" && arguments[0].getString() != "Y" &&
-			   arguments[0].getString() != "Z" && arguments[0].getString() != "")
+			   arguments[0].getString() != "Z" && !arguments[0].getString().empty())
 			{
 				_throwScriptError("invalid direction argument!");
 				return true;
@@ -211,7 +211,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			{
 				// Validate direction
 				if(arguments[1].getString() != "X" && arguments[1].getString() != "Y" &&
-				   arguments[1].getString() != "Z" && arguments[1].getString() != "")
+				   arguments[1].getString() != "Z" && !arguments[1].getString().empty())
 				{
 					_throwScriptError("invalid direction argument!");
 					return true;
@@ -253,7 +253,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 		{
 			// Validate direction
 			if(arguments[0].getString() != "X" && arguments[0].getString() != "Y" &&
-			   arguments[0].getString() != "Z" && arguments[0].getString() != "")
+			   arguments[0].getString() != "Z" && !arguments[0].getString().empty())
 			{
 				_throwScriptError("invalid direction argument!");
 				return true;

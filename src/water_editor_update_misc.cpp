@@ -198,7 +198,7 @@ void WaterEditor::_updateWaterChoosing()
 
 void WaterEditor::_updateWaterDeleting()
 {
-	if(_isDeletingWater && _currentWaterID != "")
+	if(_isDeletingWater && !_currentWaterID.empty())
 	{
 		// Add answer form
 		if(!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))

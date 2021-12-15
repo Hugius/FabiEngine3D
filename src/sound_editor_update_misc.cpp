@@ -137,7 +137,7 @@ void SoundEditor::_updateSoundChoosing()
 
 void SoundEditor::_updateSoundDeleting()
 {
-	if(_isDeletingSound && _currentSoundID != "")
+	if(_isDeletingSound && !_currentSoundID.empty())
 	{
 		// Add answer form
 		if(!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))

@@ -2,7 +2,7 @@
 
 void WorldEditor::_updateCamera()
 {
-	if(_currentWorldID != "")
+	if(!_currentWorldID.empty())
 	{
 		// Camera looking
 		if(_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())

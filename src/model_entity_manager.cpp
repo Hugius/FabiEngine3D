@@ -159,7 +159,7 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 					if(reflectionEntity->isVisible())
 					{
 						auto absoluteDistance = Math::calculateDistance(entity->getBasePosition(), reflectionEntity->getPosition());
-						reflectionDistanceMap.insert(std::make_pair(absoluteDistance, reflectionEntity));
+						reflectionDistanceMap.insert(make_pair(absoluteDistance, reflectionEntity));
 					}
 				}
 

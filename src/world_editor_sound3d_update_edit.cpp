@@ -65,7 +65,7 @@ void WorldEditor::_updateSoundEditing()
 			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// Check if speaker is active
-				if(_activeSpeakerID != "")
+				if(!_activeSpeakerID.empty())
 				{
 					// Check if active speaker cancelled
 					if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedSpeakerID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
@@ -85,7 +85,7 @@ void WorldEditor::_updateSoundEditing()
 		_updateSpeakerHighlighting(_activeSpeakerID, _activeSpeakerHighlightDirection);
 
 		// Update properties screen
-		if(_activeSpeakerID != "")
+		if(!_activeSpeakerID.empty())
 		{
 			// Temporary values
 			const string activeSoundID = _activeSpeakerID.substr(string("@@speaker_").size());

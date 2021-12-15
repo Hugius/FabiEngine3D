@@ -63,7 +63,7 @@ void WorldEditor::_updateSpotlightEditing()
 			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// Check if spotlight is active
-				if(_activeTorchID != "")
+				if(!_activeTorchID.empty())
 				{
 					// Check if active spotlight cancelled
 					if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedTorchID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))

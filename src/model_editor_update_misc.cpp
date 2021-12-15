@@ -221,7 +221,7 @@ void ModelEditor::_updateModelChoosing()
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("modelList");
 
 		// Hide last model
-		if(_hoveredModelID != "")
+		if(!_hoveredModelID.empty())
 		{
 			_fe3d.model_setVisible(_hoveredModelID, false);
 		}
@@ -265,7 +265,7 @@ void ModelEditor::_updateModelChoosing()
 		}
 
 		// Show hovered model
-		if(_hoveredModelID != "")
+		if(!_hoveredModelID.empty())
 		{
 			_fe3d.model_setVisible(_hoveredModelID, true);
 		}
@@ -274,7 +274,7 @@ void ModelEditor::_updateModelChoosing()
 
 void ModelEditor::_updateModelDeleting()
 {
-	if(_isDeletingModel && _currentModelID != "")
+	if(_isDeletingModel && !_currentModelID.empty())
 	{
 		// Add answer form
 		if(!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))

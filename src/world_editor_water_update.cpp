@@ -67,9 +67,9 @@ void WorldEditor::_updateWaterMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("up")->setHoverable(_currentWaterID != "");
-		screen->getButton("down")->setHoverable(_currentWaterID != "");
-		screen->getButton("delete")->setHoverable(_currentWaterID != "");
+		screen->getButton("up")->setHoverable(!_currentWaterID.empty());
+		screen->getButton("down")->setHoverable(!_currentWaterID.empty());
+		screen->getButton("delete")->setHoverable(!_currentWaterID.empty());
 
 		// Update water selection
 		_fe3d.water_select(_currentWaterID);

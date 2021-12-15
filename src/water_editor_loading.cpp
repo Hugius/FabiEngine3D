@@ -191,7 +191,7 @@ const bool WaterEditor::loadFromFile()
 			_loadedWaterIDs.push_back(waterID);
 
 			// DUDV map
-			if(dudvMapPath != "")
+			if(!dudvMapPath.empty())
 			{
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
@@ -204,7 +204,7 @@ const bool WaterEditor::loadFromFile()
 			}
 
 			// Normal map
-			if(normalMapPath != "")
+			if(!normalMapPath.empty())
 			{
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
@@ -217,7 +217,7 @@ const bool WaterEditor::loadFromFile()
 			}
 
 			// Displacement map
-			if(displacementMapPath != "")
+			if(!displacementMapPath.empty())
 			{
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())

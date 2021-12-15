@@ -93,7 +93,7 @@ void Animation3dEditor::_updateMiscellaneous()
 				_fe3d.misc_enableDebugRendering();
 			}
 		}
-		
+
 		// Update wireframe model rendering
 		if(!_currentAnimationID.empty())
 		{
@@ -109,9 +109,9 @@ void Animation3dEditor::_updateMiscellaneous()
 					// Iterate through model parts
 					for(const auto& partID : currentAnimation->getPartIDs())
 					{
-						if (!partID.empty() || (currentAnimation->getPartIDs().size() == 1))
+						if(!partID.empty() || (currentAnimation->getPartIDs().size() == 1))
 						{
-							if (_fe3d.model_isWireframed(currentAnimation->getPreviewModelID(), partID))
+							if(_fe3d.model_isWireframed(currentAnimation->getPreviewModelID(), partID))
 							{
 								_fe3d.model_setWireframed(currentAnimation->getPreviewModelID(), partID, false);
 							}
@@ -365,7 +365,7 @@ void Animation3dEditor::_updateAnimationChoosing()
 
 void Animation3dEditor::_updateAnimationDeleting()
 {
-	if(_isDeletingAnimation && _currentAnimationID != "")
+	if(_isDeletingAnimation && !_currentAnimationID.empty())
 	{
 		// Add answer form
 		if(!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))

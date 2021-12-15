@@ -179,7 +179,7 @@ void SkyEditor::_updateSkyChoosing()
 
 void SkyEditor::_updateSkyDeleting()
 {
-	if(_isDeletingSky && _currentSkyID != "")
+	if(_isDeletingSky && !_currentSkyID.empty())
 	{
 		// Add answer form
 		if(!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))

@@ -63,7 +63,7 @@ void WorldEditor::_updatePointlightEditing()
 			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// Check if pointlight is active
-				if(_activeLampID != "")
+				if(!_activeLampID.empty())
 				{
 					// Check if active pointlight cancelled
 					if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedLampID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))

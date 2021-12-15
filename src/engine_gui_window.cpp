@@ -125,7 +125,7 @@ void EngineGuiWindow::deleteScreen(const string& ID)
 void EngineGuiWindow::setActiveScreen(const string& ID)
 {
 	// Hide old active screen if possible
-	if(_activeScreenID != "")
+	if(!_activeScreenID.empty())
 	{
 		getActiveScreen()->hide();
 	}

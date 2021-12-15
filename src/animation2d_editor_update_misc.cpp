@@ -122,7 +122,7 @@ void Animation2dEditor::_updateAnimationChoosing()
 
 void Animation2dEditor::_updateAnimationDeleting()
 {
-	if(_isDeletingAnimation && _currentAnimationID != "")
+	if(_isDeletingAnimation && !_currentAnimationID.empty())
 	{
 		// Add answer form
 		if(!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
@@ -139,7 +139,7 @@ void Animation2dEditor::_updateAnimationDeleting()
 			// Hide preview billboard
 			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
 			_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
-			
+
 			// Delete animation
 			_deleteAnimation(_currentAnimationID);
 			_currentAnimationID = "";

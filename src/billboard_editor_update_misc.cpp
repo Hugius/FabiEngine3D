@@ -181,7 +181,7 @@ void BillboardEditor::_updateBillboardChoosing()
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("billboardList");
 
 		// Hide last billboard
-		if(_hoveredBillboardID != "")
+		if(!_hoveredBillboardID.empty())
 		{
 			_fe3d.billboard_setVisible(_hoveredBillboardID, false);
 		}
@@ -230,7 +230,7 @@ void BillboardEditor::_updateBillboardChoosing()
 		}
 
 		// Show hovered billboard
-		if(_hoveredBillboardID != "")
+		if(!_hoveredBillboardID.empty())
 		{
 			_fe3d.billboard_setVisible(_hoveredBillboardID, true);
 		}
@@ -239,7 +239,7 @@ void BillboardEditor::_updateBillboardChoosing()
 
 void BillboardEditor::_updateBillboardDeleting()
 {
-	if(_isDeletingBillboard && _currentBillboardID != "")
+	if(_isDeletingBillboard && !_currentBillboardID.empty())
 	{
 		// Add answer form
 		if(!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))

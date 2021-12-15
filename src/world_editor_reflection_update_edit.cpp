@@ -63,7 +63,7 @@ void WorldEditor::_updateReflectionEditing()
 			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// Check if camera is active
-				if(_activeCameraID != "")
+				if(!_activeCameraID.empty())
 				{
 					// Check if active camera cancelled
 					if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedCameraID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))

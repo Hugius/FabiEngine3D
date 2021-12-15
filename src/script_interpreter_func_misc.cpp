@@ -319,7 +319,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				}
 
 				// Return
-				auto result = *std::min_element(std::begin(rawValues), std::end(rawValues));
+				auto result = *min_element(begin(rawValues), end(rawValues));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
 			}
 			else if(type == ScriptValueType::DECIMAL)
@@ -332,7 +332,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				}
 
 				// Return
-				auto result = *std::min_element(std::begin(rawValues), std::end(rawValues));
+				auto result = *min_element(begin(rawValues), end(rawValues));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 			else
@@ -395,7 +395,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				}
 
 				// Return
-				auto result = *std::max_element(std::begin(rawValues), std::end(rawValues));
+				auto result = *max_element(begin(rawValues), end(rawValues));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
 			}
 			else if(type == ScriptValueType::DECIMAL)
@@ -408,7 +408,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(c
 				}
 
 				// Return
-				auto result = *std::max_element(std::begin(rawValues), std::end(rawValues));
+				auto result = *max_element(begin(rawValues), end(rawValues));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 			else

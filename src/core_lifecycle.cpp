@@ -90,7 +90,7 @@ void Core::_start()
 
 				// Update render lag
 				renderLag -= Config::MS_PER_UPDATE;
-				renderLag = std::max(renderLag, 0.0f);
+				renderLag = max(renderLag, 0.0f);
 				_timer.increasePassedFrameCount();
 			}
 

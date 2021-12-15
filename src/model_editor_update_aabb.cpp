@@ -236,7 +236,7 @@ void ModelEditor::_updateAabbChoosing()
 
 void ModelEditor::_updateAabbDeleting()
 {
-	if(_isDeletingAabb && _currentAabbID != "")
+	if(_isDeletingAabb && !_currentAabbID.empty())
 	{
 		// Add answer form
 		if(!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))

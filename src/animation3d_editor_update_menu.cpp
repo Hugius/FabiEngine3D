@@ -258,7 +258,7 @@ void Animation3dEditor::_updateChoiceMenu()
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("modelList");
 
 		// Hide last model
-		if(_hoveredModelID != "")
+		if(!_hoveredModelID.empty())
 		{
 			_fe3d.model_setVisible(_hoveredModelID, false);
 		}
@@ -338,7 +338,7 @@ void Animation3dEditor::_updateChoiceMenu()
 		}
 
 		// Show hovered model
-		if(_hoveredModelID != "")
+		if(!_hoveredModelID.empty())
 		{
 			_fe3d.model_setVisible(_hoveredModelID, true);
 		}

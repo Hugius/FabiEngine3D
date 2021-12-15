@@ -64,7 +64,7 @@ void WorldEditor::_updateModelEditing()
 			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// Check if model is active
-				if(_activeModelID != "")
+				if(!_activeModelID.empty())
 				{
 					// Check if active model cancelled
 					if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedModelID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
@@ -84,7 +84,7 @@ void WorldEditor::_updateModelEditing()
 		_updateModelHighlighting(_activeModelID, _activeModelHighlightDirection);
 
 		// Update properties screen
-		if(_activeModelID != "")
+		if(!_activeModelID.empty())
 		{
 			// Temporary values
 			auto screen = rightWindow->getScreen("modelPropertiesMenu");
@@ -136,7 +136,7 @@ void WorldEditor::_updateModelEditing()
 			// Check if an animation ID is clicked
 			auto lastAnimationID = _animation3dEditor.getStartedAnimationIDs(_activeModelID);
 			string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("animationList");
-			if(selectedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(!selectedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Stop last playing animation
 				if(!lastAnimationID.empty())

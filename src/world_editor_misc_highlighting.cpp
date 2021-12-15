@@ -44,7 +44,7 @@ void WorldEditor::_updateBillboardHighlighting(const string& ID, int& direction)
 	}
 
 	// Update billboard highlighting
-	if(ID != "")
+	if(!ID.empty())
 	{
 		// Check if wireframe color reached minimum
 		if(_fe3d.billboard_getWireframeColor(ID) == 0.0f)
@@ -74,7 +74,7 @@ void WorldEditor::_updateSpeakerHighlighting(const string& ID, int& direction)
 	}
 
 	// Update speaker highlighting
-	if(ID != "")
+	if(!ID.empty())
 	{
 		// Check if wireframe color reached minimum
 		if(_fe3d.model_getBaseSize(ID).y < DEFAULT_SPEAKER_SIZE.y)
@@ -107,7 +107,7 @@ void WorldEditor::_updateLampHighlighting(const string& ID, int& direction)
 	}
 
 	// Update lamp highlighting
-	if(ID != "")
+	if(!ID.empty())
 	{
 		// Check if wireframe color reached minimum
 		if(_fe3d.model_getBaseSize(ID).y < DEFAULT_LAMP_SIZE.y)
@@ -140,7 +140,7 @@ void WorldEditor::_updateTorchHighlighting(const string& ID, int& direction)
 	}
 
 	// Update torch highlighting
-	if(ID != "")
+	if(!ID.empty())
 	{
 		// Check if wireframe color reached minimum
 		if(_fe3d.model_getBaseSize(ID).y < DEFAULT_TORCH_SIZE.y)
@@ -173,7 +173,7 @@ void WorldEditor::_updateCameraHighlighting(const string& ID, int& direction)
 	}
 
 	// Update reflection highlighting
-	if(ID != "")
+	if(!ID.empty())
 	{
 		// Check if wireframe color reached minimum
 		if(_fe3d.model_getBaseSize(ID).y < DEFAULT_CAMERA_SIZE.y)

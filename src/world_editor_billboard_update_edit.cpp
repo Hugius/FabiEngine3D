@@ -63,7 +63,7 @@ void WorldEditor::_updateBillboardEditing()
 			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// Check if billboard is active
-				if(_activeBillboardID != "")
+				if(!_activeBillboardID.empty())
 				{
 					// Check if active billboard cancelled
 					if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedBillboardID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
@@ -83,7 +83,7 @@ void WorldEditor::_updateBillboardEditing()
 		_updateBillboardHighlighting(_activeBillboardID, _activeBillboardHighlightDirection);
 
 		// Update properties screen
-		if(_activeBillboardID != "")
+		if(!_activeBillboardID.empty())
 		{
 			// Temporary values
 			auto screen = rightWindow->getScreen("billboardPropertiesMenu");
@@ -115,7 +115,7 @@ void WorldEditor::_updateBillboardEditing()
 					screen->getButton("rotation")->setHoverable(true);
 					screen->getButton("size")->setHoverable(false);
 				}
-				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
+				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
 				{
 					_fe3d.billboard_setFrozen(_activeBillboardID, !_fe3d.billboard_isFrozen(_activeBillboardID));
 				}

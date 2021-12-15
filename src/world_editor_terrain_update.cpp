@@ -62,6 +62,6 @@ void WorldEditor::_updateTerrainMenu()
 		_fe3d.terrain_select(_currentTerrainID);
 
 		// Update buttons hoverability
-		screen->getButton("delete")->setHoverable(_currentTerrainID != "");
+		screen->getButton("delete")->setHoverable(!_currentTerrainID.empty());
 	}
 }

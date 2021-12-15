@@ -221,7 +221,7 @@ void EngineGuiWriteField::_updateTyping()
 		// Input confirmation
 		if(_fe3d.input_isKeyPressed(InputType::KEY_ENTER))
 		{
-			if(_currentTextContent != "")
+			if(!_currentTextContent.empty())
 			{
 				_confirmedInput = true;
 				_isActive = false;

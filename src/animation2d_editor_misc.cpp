@@ -11,7 +11,7 @@ const bool Animation2dEditor::isLoaded() const
 	return _isEditorLoaded;
 }
 
-const vector<string> Animation2dEditor::getAllAnimationIDs()
+const vector<string> Animation2dEditor::getAnimationIDs()
 {
 	vector<string> result;
 

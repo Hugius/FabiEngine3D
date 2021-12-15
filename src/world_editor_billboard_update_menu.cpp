@@ -28,7 +28,7 @@ void WorldEditor::_updateBillboardMenu()
 			_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuBillboardChoice")->getScrollingList("billboardList")->deleteButtons();
 
 			// Add the ID of every placed billboard
-			auto IDs = _fe3d.billboard_getAllIDs();
+			auto IDs = _fe3d.billboard_getIDs();
 			sort(IDs.begin(), IDs.end());
 			for(auto& billboardID : IDs)
 			{
@@ -139,7 +139,7 @@ void WorldEditor::_updateBillboardChoosingMenu()
 		}
 
 		// Iterate through every placed billboard
-		for(const auto& billboardID : _fe3d.billboard_getAllIDs())
+		for(const auto& billboardID : _fe3d.billboard_getIDs())
 		{
 			// Check if billboard is not a preview billboard
 			if(billboardID[0] != '@')

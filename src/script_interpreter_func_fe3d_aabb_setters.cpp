@@ -61,7 +61,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Iterate through AABBs
-			for(const auto& ID : _fe3d.aabb_getAllIDs())
+			for(const auto& ID : _fe3d.aabb_getIDs())
 			{
 				// @ sign is reserved
 				if(ID[0] != '@')

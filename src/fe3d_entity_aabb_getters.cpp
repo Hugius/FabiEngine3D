@@ -78,7 +78,7 @@ const vector<string> FabiEngine3D::aabb_getChildIDs(const string& parentID, Aabb
 	return result;
 }
 
-const vector<string> FabiEngine3D::aabb_getAllIDs() const
+const vector<string> FabiEngine3D::aabb_getIDs() const
 {
 	vector<string> result;
 

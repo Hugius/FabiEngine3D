@@ -76,7 +76,7 @@ const fvec3 FabiEngine3D::billboard_getWireframeColor(const string& ID) const
 	return _core->_billboardEntityManager.getEntity(ID)->getWireframeColor();
 }
 
-const vector<string> FabiEngine3D::billboard_getAllIDs() const
+const vector<string> FabiEngine3D::billboard_getIDs() const
 {
 	vector<string> result;
 

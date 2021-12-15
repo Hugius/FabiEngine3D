@@ -15,7 +15,7 @@ public:
 	void unload();
 
 	// STRING
-	const vector<string> getAllAudioPathsFromFile() const;
+	const vector<string> getAudioPathsFromFile() const;
 	const vector<string>& getLoadedIDs();
 
 	// BOOL

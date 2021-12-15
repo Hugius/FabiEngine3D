@@ -64,7 +64,7 @@ shared_ptr<Animation3d> Animation3dEditor::_getAnimation(const string& ID) const
 	Logger::throwError("Animation3dEditor::_getAnimation");
 }
 
-const vector<string> Animation3dEditor::getAllAnimationIDs() const
+const vector<string> Animation3dEditor::getAnimationIDs() const
 {
 	vector<string> result;
 

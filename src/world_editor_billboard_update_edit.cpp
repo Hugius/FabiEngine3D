@@ -19,7 +19,7 @@ void WorldEditor::_updateBillboardEditing()
 	if(_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingPointlight && !_isPlacingReflection)
 	{
 		// Check if user selected a billboard
-		for(const auto& ID : _fe3d.billboard_getAllIDs())
+		for(const auto& ID : _fe3d.billboard_getIDs())
 		{
 			// Must not be preview entity
 			if(ID[0] != '@')

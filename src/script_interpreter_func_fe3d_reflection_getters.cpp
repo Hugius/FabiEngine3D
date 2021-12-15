@@ -36,7 +36,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 			}
 
 			// Find full entity IDs based on sub ID
-			for(const auto& ID : _fe3d.reflection_getAllIDs())
+			for(const auto& ID : _fe3d.reflection_getIDs())
 			{
 				// If substring matches
 				if(arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -50,11 +50,11 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 			}
 		}
 	}
-	else if(functionName == "fe3d:reflection_get_all_ids")
+	else if(functionName == "fe3d:reflection_get_ids")
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			auto result = _fe3d.reflection_getAllIDs();
+			auto result = _fe3d.reflection_getIDs();
 
 			// Iterate through reflections
 			for(const auto& ID : result)

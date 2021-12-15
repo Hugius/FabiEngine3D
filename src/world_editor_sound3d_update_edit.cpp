@@ -22,7 +22,7 @@ void WorldEditor::_updateSoundEditing()
 		auto hoveredAabbID = _fe3d.raycast_checkCursorInAny().first;
 
 		// Check if user selected a speaker model
-		for(const auto& ID : _fe3d.model_getAllIDs())
+		for(const auto& ID : _fe3d.model_getIDs())
 		{
 			// Must be sound preview entity
 			if(ID.substr(0, string("@@speaker").size()) == "@@speaker")

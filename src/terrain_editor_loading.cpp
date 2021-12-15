@@ -9,7 +9,7 @@
 using std::ifstream;
 using std::istringstream;
 
-const vector<string> TerrainEditor::getAllTexturePathsFromFile() const
+const vector<string> TerrainEditor::getTexturePathsFromFile() const
 {
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
@@ -213,7 +213,7 @@ const vector<string> TerrainEditor::getAllTexturePathsFromFile() const
 	return texturePaths;
 }
 
-const vector<string> TerrainEditor::getAllBitmapPathsFromFile() const
+const vector<string> TerrainEditor::getBitmapPathsFromFile() const
 {
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
@@ -266,7 +266,7 @@ const vector<string> TerrainEditor::getAllBitmapPathsFromFile() const
 			{
 				heightMapPath = string("projects\\" + _currentProjectID + "\\" + heightMapPath);
 			}
-			
+
 			// Save path
 			bitmapPaths.push_back(heightMapPath);
 		}

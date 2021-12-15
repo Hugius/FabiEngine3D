@@ -37,7 +37,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 
 	// Save model level of detail IDs
 	vector<string> levelOfDetailEntityIDs;
-	for(const auto& modelID : _fe3d.model_getAllIDs())
+	for(const auto& modelID : _fe3d.model_getIDs())
 	{
 		// Check if allowed to save
 		bool isCustomWorldModel = find(_customWorldModelIDs.begin(), _customWorldModelIDs.end(), modelID) != _customWorldModelIDs.end();
@@ -115,7 +115,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	}
 
 	// Models
-	for(const auto& modelID : _fe3d.model_getAllIDs())
+	for(const auto& modelID : _fe3d.model_getIDs())
 	{
 		// Check if allowed to save
 		bool isLevelOfDetailEntity = find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) != levelOfDetailEntityIDs.end();
@@ -264,7 +264,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	}
 
 	// Animations
-	for(const auto& modelID : _fe3d.model_getAllIDs())
+	for(const auto& modelID : _fe3d.model_getIDs())
 	{
 		// Check if allowed to save
 		bool isLodModel = find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) != levelOfDetailEntityIDs.end();
@@ -319,7 +319,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	}
 
 	// Billboards
-	for(const auto& billboardID : _fe3d.billboard_getAllIDs())
+	for(const auto& billboardID : _fe3d.billboard_getIDs())
 	{
 		// Check if allowed to save
 		bool isCustomWorldBillboard =
@@ -395,7 +395,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	}
 
 	// AABBs
-	for(const auto& aabbID : _fe3d.aabb_getAllIDs())
+	for(const auto& aabbID : _fe3d.aabb_getIDs())
 	{
 		// Check if allowed to save
 		bool isCustomWorldAabb =
@@ -426,7 +426,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	}
 
 	// Sounds
-	//for(const auto& soundID : _fe3d.sound3d_getAllIDs())
+	//for(const auto& soundID : _fe3d.sound3d_getIDs())
 	//{
 	//	// Check if allowed to save
 	//	bool isCustomWorldSound =
@@ -463,7 +463,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//}
 
 	// Pointlights
-	for(const auto& pointlightID : _fe3d.pointlight_getAllIDs())
+	for(const auto& pointlightID : _fe3d.pointlight_getIDs())
 	{
 		// Check if allowed to save
 		bool isCustomWorldPointlight =
@@ -494,7 +494,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	}
 
 	// Spotlights
-	for(const auto& spotlightID : _fe3d.spotlight_getAllIDs())
+	for(const auto& spotlightID : _fe3d.spotlight_getIDs())
 	{
 		// Check if allowed to save
 		bool isCustomWorldSpotlight =
@@ -529,7 +529,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	}
 
 	// Reflections
-	for(const auto& reflectionID : _fe3d.reflection_getAllIDs())
+	for(const auto& reflectionID : _fe3d.reflection_getIDs())
 	{
 		// Check if allowed to save
 		bool isCustomWorldReflection =

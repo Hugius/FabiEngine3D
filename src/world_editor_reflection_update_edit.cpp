@@ -23,7 +23,7 @@ void WorldEditor::_updateReflectionEditing()
 		auto hoveredAabbID = _fe3d.raycast_checkCursorInAny().first;
 
 		// Check if user selected a camera model
-		for(const auto& ID : _fe3d.model_getAllIDs())
+		for(const auto& ID : _fe3d.model_getIDs())
 		{
 			// Must be reflection preview entity
 			if(ID.substr(0, string("@@camera").size()) == "@@camera")

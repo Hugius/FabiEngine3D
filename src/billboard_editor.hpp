@@ -15,8 +15,8 @@ public:
 	void update();
 
 	// STRING
-	const vector<string> getAllTexturePathsFromFile() const;
-	const vector<string> getAllFontPathsFromFile() const;
+	const vector<string> getTexturePathsFromFile() const;
+	const vector<string> getFontPathsFromFile() const;
 	const vector<string>& getLoadedIDs();
 
 	// BOOL

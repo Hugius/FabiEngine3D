@@ -11,12 +11,12 @@ using std::ifstream;
 using std::ofstream;
 using std::istringstream;
 
-const vector<string> ModelEditor::getAllMeshPathsFromFile() const
+const vector<string> ModelEditor::getMeshPathsFromFile() const
 {
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("ModelEditor::getAllMeshPathsFromFile");
+		Logger::throwError("ModelEditor::getMeshPathsFromFile");
 	}
 
 	// Compose file path
@@ -79,12 +79,12 @@ const vector<string> ModelEditor::getAllMeshPathsFromFile() const
 	return meshPaths;
 }
 
-const vector<string> ModelEditor::getAllTexturePathsFromFile() const
+const vector<string> ModelEditor::getTexturePathsFromFile() const
 {
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("ModelEditor::getAllTexturePathsFromFile");
+		Logger::throwError("ModelEditor::getTexturePathsFromFile");
 	}
 
 	// Compose file path
@@ -222,7 +222,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile() const
 					{
 						specularMapPath = string("projects\\" + _currentProjectID + "\\" + specularMapPath);
 					}
-					
+
 					// Save path
 					texturePaths.push_back(specularMapPath);
 				}

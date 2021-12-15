@@ -89,7 +89,7 @@ void BottomViewportController::_updateStatistics()
 	{
 		// Count visible models
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d.model_getAllIDs())
+		for(const auto& entityID : _fe3d.model_getIDs())
 		{
 			if(_fe3d.model_isVisible(entityID))
 			{
@@ -108,7 +108,7 @@ void BottomViewportController::_updateStatistics()
 	{
 		// Count visible entities
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d.billboard_getAllIDs())
+		for(const auto& entityID : _fe3d.billboard_getIDs())
 		{
 			if(_fe3d.billboard_isVisible(entityID))
 			{
@@ -127,7 +127,7 @@ void BottomViewportController::_updateStatistics()
 	{
 		// Count visible entities
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d.aabb_getAllIDs())
+		for(const auto& entityID : _fe3d.aabb_getIDs())
 		{
 			if(_fe3d.aabb_isVisible(entityID))
 			{
@@ -146,14 +146,14 @@ void BottomViewportController::_updateStatistics()
 	{
 		// Count visible entities
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d.pointlight_getAllIDs())
+		for(const auto& entityID : _fe3d.pointlight_getIDs())
 		{
 			if(_fe3d.pointlight_isVisible(entityID))
 			{
 				entityCount++;
 			}
 		}
-		for(const auto& entityID : _fe3d.spotlight_getAllIDs())
+		for(const auto& entityID : _fe3d.spotlight_getIDs())
 		{
 			if(_fe3d.spotlight_isVisible(entityID))
 			{
@@ -172,7 +172,7 @@ void BottomViewportController::_updateStatistics()
 	{
 		// Count visible entities
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d.reflection_getAllIDs())
+		for(const auto& entityID : _fe3d.reflection_getIDs())
 		{
 			if(_fe3d.reflection_isVisible(entityID))
 			{
@@ -191,14 +191,14 @@ void BottomViewportController::_updateStatistics()
 	{
 		// Count visible entities
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d.image_getAllIDs())
+		for(const auto& entityID : _fe3d.image_getIDs())
 		{
 			if(_fe3d.image_isVisible(entityID))
 			{
 				entityCount++;
 			}
 		}
-		for(const auto& entityID : _fe3d.text_getAllIDs())
+		for(const auto& entityID : _fe3d.text_getIDs())
 		{
 			if(_fe3d.text_isVisible(entityID))
 			{

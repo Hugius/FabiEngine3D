@@ -16,8 +16,8 @@ public:
 	void update();
 
 	// STRING
-	const vector<string> getAllMeshPathsFromFile() const;
-	const vector<string> getAllTexturePathsFromFile() const;
+	const vector<string> getMeshPathsFromFile() const;
+	const vector<string> getTexturePathsFromFile() const;
 	const vector<string>& getLoadedIDs();
 
 	// BOOL

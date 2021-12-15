@@ -63,7 +63,7 @@ const fvec3 FabiEngine3D::water_getWireframeColor(const string& ID) const
 	return _core->_waterEntityManager.getEntity(ID)->getWireframeColor();
 }
 
-const vector<string> FabiEngine3D::water_getAllIDs() const
+const vector<string> FabiEngine3D::water_getIDs() const
 {
 	vector<string> result;
 

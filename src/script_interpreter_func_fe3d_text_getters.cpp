@@ -36,7 +36,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			}
 
 			// Find full entity IDs based on sub ID
-			for(const auto& ID : _fe3d.text_getAllIDs())
+			for(const auto& ID : _fe3d.text_getIDs())
 			{
 				// If substring matches
 				if(arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -50,11 +50,11 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_get_all_ids")
+	else if(functionName == "fe3d:text_get_ids")
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			auto result = _fe3d.text_getAllIDs();
+			auto result = _fe3d.text_getIDs();
 
 			// Iterate through texts
 			for(const auto& ID : result)

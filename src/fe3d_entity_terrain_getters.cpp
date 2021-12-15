@@ -113,7 +113,7 @@ const string FabiEngine3D::terrain_getSelectedID() const
 	}
 }
 
-const vector<string> FabiEngine3D::terrain_getAllIDs() const
+const vector<string> FabiEngine3D::terrain_getIDs() const
 {
 	vector<string> result;
 

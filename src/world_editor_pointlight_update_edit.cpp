@@ -23,7 +23,7 @@ void WorldEditor::_updatePointlightEditing()
 		auto hoveredAabbID = _fe3d.raycast_checkCursorInAny().first;
 
 		// Check if user selected a lamp model
-		for(const auto& ID : _fe3d.model_getAllIDs())
+		for(const auto& ID : _fe3d.model_getIDs())
 		{
 			// Must be pointlight preview entity
 			if(ID.substr(0, string("@@lamp").size()) == "@@lamp")

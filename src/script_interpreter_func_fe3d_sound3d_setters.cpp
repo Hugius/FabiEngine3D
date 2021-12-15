@@ -64,7 +64,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			// Iterate through sounds
-			for(const auto& ID : _fe3d.sound3d_getAllIDs())
+			for(const auto& ID : _fe3d.sound3d_getIDs())
 			{
 				// @ sign is reserved
 				if(ID[0] != '@')

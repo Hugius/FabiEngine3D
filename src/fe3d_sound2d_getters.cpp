@@ -1,7 +1,7 @@
 #include "fe3d.hpp"
 #include "core.hpp"
 
-const vector<string> FabiEngine3D::sound2d_getAllIDs() const
+const vector<string> FabiEngine3D::sound2d_getIDs() const
 {
 	vector<string> result;
 

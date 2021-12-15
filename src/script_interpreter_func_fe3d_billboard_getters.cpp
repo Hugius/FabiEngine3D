@@ -452,7 +452,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 
 			// Find full entity IDs based on sub ID
-			for(const auto& ID : _fe3d.billboard_getAllIDs())
+			for(const auto& ID : _fe3d.billboard_getIDs())
 			{
 				// If substring matches
 				if(arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -466,11 +466,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_all_ids")
+	else if(functionName == "fe3d:billboard_get_ids")
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			auto result = _fe3d.billboard_getAllIDs();
+			auto result = _fe3d.billboard_getIDs();
 
 			// Iterate through billboards
 			for(const auto& ID : result)

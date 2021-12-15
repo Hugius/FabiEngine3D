@@ -14,14 +14,14 @@ public:
 	void load();
 	void unload();
 	void update();
-	void startAnimation(const string& animationID, const string& billboardID, int timesToPlay);
-	void pauseAnimation(const string& animationID, const string& billboardID);
-	void resumeAnimation(const string& animationID, const string& billboardID);
-	void stopAnimation(const string& animationID, const string& billboardID);
-	void stopAllAnimations();
+	void startBillboardAnimation(const string& animationID, const string& billboardID, int timesToPlay);
+	void pauseBillboardAnimation(const string& animationID, const string& billboardID);
+	void resumeBillboardAnimation(const string& animationID, const string& billboardID);
+	void stopBillboardAnimation(const string& animationID, const string& billboardID);
+	void stopBillboardAnimations();
 
 	// STRING
-	const vector<string> getAllAnimationIDs();
+	const vector<string> getAnimationIDs();
 
 	// BOOL
 	const bool isLoaded() const;

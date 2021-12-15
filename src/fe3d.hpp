@@ -77,7 +77,7 @@ public:
 	void sky_setWireframeColor(const string& ID, fvec3 value);
 
 	// SKY - getters
-	const vector<string> sky_getAllIDs() const;
+	const vector<string> sky_getIDs() const;
 	const array<string, 6>& sky_getCubeMapPaths(const string& ID) const;
 	const string& sky_getCubeMapRight(const string& ID) const;
 	const string& sky_getCubeMapLeft(const string& ID) const;
@@ -131,7 +131,7 @@ public:
 	void terrain_setWireframeColor(const string& ID, fvec3 value);
 
 	// TERRAIN - getters
-	const vector<string> terrain_getAllIDs() const;
+	const vector<string> terrain_getIDs() const;
 	const string terrain_getSelectedID() const;
 	const string& terrain_getHeightMapPath(const string& ID) const;
 	const string& terrain_getBlendMapPath(const string& ID) const;
@@ -195,7 +195,7 @@ public:
 	void water_setQuality(const string& ID, WaterQuality value);
 
 	// WATER - getters
-	const vector<string> water_getAllIDs() const;
+	const vector<string> water_getIDs() const;
 	const string& water_getDudvMapPath(const string& ID) const;
 	const string& water_getNormalMapPath(const string& ID) const;
 	const string& water_getDisplacementMapPath(const string& ID) const;
@@ -282,7 +282,7 @@ public:
 
 	// MODEL - getters
 	const vector<string> model_getPartIDs(const string& ID) const;
-	const vector<string> model_getAllIDs() const;
+	const vector<string> model_getIDs() const;
 	const vector<string> model_getGroupIDs(const string& ID) const;
 	const string& model_getMeshPath(const string& ID) const;
 	const string& model_getDiffuseMapPath(const string& ID, const string& partID) const;
@@ -374,7 +374,7 @@ public:
 	void billboard_setFrozen(const string& ID, bool value);
 
 	// BILLBOARD - getters
-	const vector<string> billboard_getAllIDs() const;
+	const vector<string> billboard_getIDs() const;
 	const string& billboard_getDiffuseMapPath(const string& ID) const;
 	const string& billboard_getEmissionMapPath(const string& ID) const;
 	const string& billboard_getFontPath(const string& ID) const;
@@ -429,7 +429,7 @@ public:
 
 	// AABB - getters
 	const vector<string> aabb_getChildIDs(const string& parentID, AabbParentEntityType parentEntityType) const;
-	const vector<string> aabb_getAllIDs() const;
+	const vector<string> aabb_getIDs() const;
 	const string& aabb_getParentEntityID(const string& ID) const;
 	const fvec3 aabb_getPosition(const string& ID) const;
 	const fvec3 aabb_getSize(const string& ID) const;
@@ -455,7 +455,7 @@ public:
 	void pointlight_setShape(const string& ID, PointlightShape value);
 
 	// POINTLIGHT - getters
-	const vector<string> pointlight_getAllIDs() const;
+	const vector<string> pointlight_getIDs() const;
 	const fvec3 pointlight_getPosition(const string& ID) const;
 	const fvec3 pointlight_getRadius(const string& ID) const;
 	const fvec3 pointlight_getColor(const string& ID) const;
@@ -480,7 +480,7 @@ public:
 	void spotlight_setDistance(const string& ID, float value);
 
 	// SPOTLIGHT - getters
-	const vector<string> spotlight_getAllIDs() const;
+	const vector<string> spotlight_getIDs() const;
 	const fvec3 spotlight_getPosition(const string& ID) const;
 	const fvec3 spotlight_getColor(const string& ID) const;
 	const float spotlight_getYaw(const string& ID) const;
@@ -502,7 +502,7 @@ public:
 	void reflection_capture(const string& ID);
 
 	// REFLECTION - getters
-	const vector<string> reflection_getAllIDs() const;
+	const vector<string> reflection_getIDs() const;
 	const fvec3 reflection_getPosition(const string& ID) const;
 	const bool reflection_isExisting(const string& ID) const;
 	const bool reflection_isVisible(const string& ID) const;
@@ -532,7 +532,7 @@ public:
 	void image_setWireframeColor(const string& ID, fvec3 value);
 
 	// IMAGE - getters
-	const vector<string> image_getAllIDs() const;
+	const vector<string> image_getIDs() const;
 	const string& image_getDiffuseMapPath(const string& ID) const;
 	const fvec3 image_getWireframeColor(const string& ID) const;
 	const fvec3 image_getColor(const string& ID) const;
@@ -576,7 +576,7 @@ public:
 	void text_setWireframeColor(const string& ID, fvec3 value);
 
 	// TEXT - getters
-	const vector<string> text_getAllIDs() const;
+	const vector<string> text_getIDs() const;
 	const string& text_getFontPath(const string& ID) const;
 	const string& text_getContent(const string& ID) const;
 	const fvec3 text_getColor(const string& ID) const;
@@ -608,7 +608,7 @@ public:
 	void sound2d_setVolume(const string& ID, float value);
 
 	// SOUND2D - getters
-	const vector<string> sound2d_getAllIDs() const;
+	const vector<string> sound2d_getIDs() const;
 	const string& sound2d_getAudioPath(const string& ID) const;
 	const float sound2d_getVolume(const string& ID) const;
 	const bool sound2d_isExisting(const string& ID) const;
@@ -634,7 +634,7 @@ public:
 	void sound3d_setMaxDistance(const string& ID, float value);
 
 	// SOUND - getters
-	const vector<string> sound3d_getAllIDs() const;
+	const vector<string> sound3d_getIDs() const;
 	const string& sound3d_getAudioPath(const string& ID) const;
 	const fvec3 sound3d_getPosition(const string& ID) const;
 	const float sound3d_getMaxDistance(const string& ID) const;

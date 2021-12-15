@@ -61,7 +61,7 @@ void WorldEditor::_updateSpotlightMenu()
 			_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlights")->deleteButtons();
 
 			// Add the ID of every placed spotlight
-			auto IDs = _fe3d.spotlight_getAllIDs();
+			auto IDs = _fe3d.spotlight_getIDs();
 			sort(IDs.begin(), IDs.end());
 			for(auto& spotlightID : IDs)
 			{
@@ -103,7 +103,7 @@ void WorldEditor::_updateSpotlightChoosingMenu()
 		}
 
 		// Iterate through every placed spotlight
-		for(const auto& spotlightID : _fe3d.spotlight_getAllIDs())
+		for(const auto& spotlightID : _fe3d.spotlight_getIDs())
 		{
 			// Check if spotlight is not a preview
 			if(spotlightID[0] != '@')

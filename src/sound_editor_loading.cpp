@@ -8,12 +8,12 @@
 using std::ifstream;
 using std::istringstream;
 
-const vector<string> SoundEditor::getAllAudioPathsFromFile() const
+const vector<string> SoundEditor::getAudioPathsFromFile() const
 {
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("SoundEditor::getAllAudioPathsFromFile");
+		Logger::throwError("SoundEditor::getAudioPathsFromFile");
 	}
 
 	// Compose file path

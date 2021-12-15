@@ -28,7 +28,7 @@ void WorldEditor::_updateModelMenu()
 			_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->deleteButtons();
 
 			// Add the ID of every placed model
-			auto IDs = _fe3d.model_getAllIDs();
+			auto IDs = _fe3d.model_getIDs();
 			sort(IDs.begin(), IDs.end());
 			for(auto& modelID : IDs)
 			{
@@ -140,7 +140,7 @@ void WorldEditor::_updateModelChoosingMenu()
 		}
 
 		// Iterate through every placed model
-		for(const auto& modelID : _fe3d.model_getAllIDs())
+		for(const auto& modelID : _fe3d.model_getIDs())
 		{
 			// Check if model is not a preview model
 			if(modelID[0] != '@')

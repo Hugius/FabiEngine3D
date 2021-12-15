@@ -43,9 +43,9 @@ void SkyEditor::unload()
 	_fe3d.gfx_disableMotionBlur(true);
 
 	// Delete all sky entities except the background
-	for (const auto& ID : _fe3d.sky_getAllIDs())
+	for(const auto& ID : _fe3d.sky_getIDs())
 	{
-		if (ID != "@@background")
+		if(ID != "@@background")
 		{
 			_fe3d.sky_delete(ID);
 		}

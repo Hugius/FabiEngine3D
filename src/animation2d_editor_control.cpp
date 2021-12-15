@@ -1,30 +1,30 @@
 #include "animation2d_editor.hpp"
 #include "logger.hpp"
 
-void Animation2dEditor::startAnimation(const string& animationID, const string& billboardID, int timesToPlay)
+void Animation2dEditor::startBillboardAnimation(const string& animationID, const string& billboardID, int timesToPlay)
 {
 	// Temporary values
 	string errorMessage = "Tried to start animation with ID \"" + animationID + "\" on billboard with ID \"" + billboardID + "\": ";
 
-	// Check if animation exists
+	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
 	{
 		Logger::throwWarning(errorMessage + "animation not existing!");
 	}
 
-	// Check if billboard trying to animate exists
+	// Check if billboard not existing
 	if(!_fe3d.billboard_isExisting(billboardID))
 	{
 		Logger::throwWarning(errorMessage + "billboard not existing!");
 	}
 
-	// Check if animation has not already started
+	// Check if animation already started
 	if(isAnimationStarted(animationID, billboardID))
 	{
-		Logger::throwWarning(errorMessage + "animation already playing!");
+		Logger::throwWarning(errorMessage + "animation already started!");
 	}
 
-	// Check if animation play count is valid
+	// Check if play count invalid
 	if((timesToPlay < -1) || (timesToPlay == 0))
 	{
 		Logger::throwWarning(errorMessage + "play count is invalid!");
@@ -38,12 +38,12 @@ void Animation2dEditor::startAnimation(const string& animationID, const string& 
 	_startedAnimations.insert(make_pair(make_pair(animationID, billboardID), animation));
 }
 
-void Animation2dEditor::pauseAnimation(const string& animationID, const string& billboardID)
+void Animation2dEditor::pauseBillboardAnimation(const string& animationID, const string& billboardID)
 {
 	// Temporary values
 	string errorMessage = "Tried to pause animation with ID \"" + animationID + "\" on billboard with ID \"" + billboardID + "\": ";
 
-	// Check if animation existing
+	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
 	{
 		Logger::throwWarning(errorMessage + "animation not existing!");
@@ -61,11 +61,12 @@ void Animation2dEditor::pauseAnimation(const string& animationID, const string& 
 	{
 		Logger::throwWarning(errorMessage + "animation already paused!");
 	}
-		
+
+	// Pause animation
 	_startedAnimations.at(make_pair(animationID, billboardID)).setPaused(true);
 }
 
-void Animation2dEditor::resumeAnimation(const string& animationID, const string& billboardID)
+void Animation2dEditor::resumeBillboardAnimation(const string& animationID, const string& billboardID)
 {
 	// Temporary values
 	string errorMessage = "Tried to resume animation with ID \"" + animationID + "\" on billboard with ID \"" + billboardID + "\": ";
@@ -97,7 +98,7 @@ void Animation2dEditor::resumeAnimation(const string& animationID, const string&
 	}
 }
 
-void Animation2dEditor::stopAnimation(const string& animationID, const string& billboardID)
+void Animation2dEditor::stopBillboardAnimation(const string& animationID, const string& billboardID)
 {
 	// Temporary values
 	string errorMessage = "Tried to stop animation with ID \"" + animationID + "\" on billboard with ID \"" + billboardID + "\": ";
@@ -126,7 +127,7 @@ void Animation2dEditor::stopAnimation(const string& animationID, const string& b
 	}
 }
 
-void Animation2dEditor::stopAllAnimations()
+void Animation2dEditor::stopBillboardAnimations()
 {
 	_startedAnimations.clear();
 }

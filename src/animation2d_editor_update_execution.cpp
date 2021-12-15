@@ -89,7 +89,7 @@ void Animation2dEditor::_updateAnimationExecution()
 		if(isAnimationStarted(idPair.first, idPair.second))
 		{
 			// Stop animation
-			stopAnimation(idPair.first, idPair.second);
+			stopBillboardAnimation(idPair.first, idPair.second);
 		}
 	}
 	_animationsToStop.clear();
@@ -101,7 +101,7 @@ void Animation2dEditor::_updateAnimationExecution()
 		if(!isAnimationStarted(idPair.first, idPair.second))
 		{
 			// Start animation
-			startAnimation(idPair.first, idPair.second, -1);
+			startBillboardAnimation(idPair.first, idPair.second, -1);
 		}
 	}
 	_animationsToStartAgain.clear();

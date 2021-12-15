@@ -36,7 +36,7 @@ void Animation2dEditor::_updateAnimationCreating()
 				if(newAnimationID.find(' ') == string::npos)
 				{
 					// Check if animation already exists
-					auto animationIDs = getAllAnimationIDs();
+					auto animationIDs = getAnimationIDs();
 					if(find(animationIDs.begin(), animationIDs.end(), newAnimationID) == animationIDs.end())
 					{
 						// Go to next screen

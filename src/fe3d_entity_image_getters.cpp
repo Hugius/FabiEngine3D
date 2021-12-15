@@ -21,7 +21,7 @@ const float FabiEngine3D::image_getTransparency(const string& ID) const
 	return _core->_imageEntityManager.getEntity(ID)->getTransparency();
 }
 
-const vector<string> FabiEngine3D::image_getAllIDs() const
+const vector<string> FabiEngine3D::image_getIDs() const
 {
 	vector<string> result;
 

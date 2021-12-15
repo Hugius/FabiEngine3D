@@ -18,7 +18,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 			}
 
 			// Find full entity IDs based on sub ID
-			for(const auto& ID : _fe3d.aabb_getAllIDs())
+			for(const auto& ID : _fe3d.aabb_getIDs())
 			{
 				// If substring matches
 				if(arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -210,11 +210,11 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 			}
 		}
 	}
-	else if(functionName == "fe3d:aabb_get_all_ids")
+	else if(functionName == "fe3d:aabb_get_ids")
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			auto result = _fe3d.aabb_getAllIDs();
+			auto result = _fe3d.aabb_getIDs();
 
 			// Iterate through AABBs
 			for(const auto& ID : result)

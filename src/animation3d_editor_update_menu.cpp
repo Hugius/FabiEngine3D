@@ -23,12 +23,12 @@ void Animation3dEditor::_updateMainMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			_gui.getGlobalScreen()->createChoiceForm("animationList", "Edit Animation", fvec2(0.0f, 0.1f), getAllAnimationIDs());
+			_gui.getGlobalScreen()->createChoiceForm("animationList", "Edit Animation", fvec2(0.0f, 0.1f), getAnimationIDs());
 			_isChoosingAnimation = true;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			_gui.getGlobalScreen()->createChoiceForm("animationList", "Delete Animation", fvec2(0.0f, 0.1f), getAllAnimationIDs());
+			_gui.getGlobalScreen()->createChoiceForm("animationList", "Delete Animation", fvec2(0.0f, 0.1f), getAnimationIDs());
 			_isChoosingAnimation = true;
 			_isDeletingAnimation = true;
 		}

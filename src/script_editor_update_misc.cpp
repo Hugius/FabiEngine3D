@@ -28,7 +28,7 @@ void ScriptEditor::_updateGUI()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto IDs = _script.getAllScriptFileIDs();
+			auto IDs = _script.getScriptFileIDs();
 			sort(IDs.begin(), IDs.end());
 			_gui.getGlobalScreen()->createChoiceForm("scriptFileList", "Edit Script", fvec2(0.0f, 0.1f), IDs);
 		}
@@ -179,7 +179,7 @@ void ScriptEditor::_updateMiscellaneous()
 		if(newScriptFileID.find(' ') == string::npos)
 		{
 			// Check if script already exists
-			auto existingScriptFileIDs = _script.getAllScriptFileIDs();
+			auto existingScriptFileIDs = _script.getScriptFileIDs();
 			if(find(existingScriptFileIDs.begin(), existingScriptFileIDs.end(), newScriptFileID) == existingScriptFileIDs.end())
 			{
 				_currentScriptFileID = newScriptFileID;
@@ -223,7 +223,7 @@ void ScriptEditor::_updateMiscellaneous()
 	// Check if user filled in a new ID
 	if(_gui.getGlobalScreen()->checkValueForm("scriptRename", newScriptFileID))
 	{
-		auto existingScriptFileIDs = _script.getAllScriptFileIDs();
+		auto existingScriptFileIDs = _script.getScriptFileIDs();
 		if(find(existingScriptFileIDs.begin(), existingScriptFileIDs.end(), newScriptFileID) == existingScriptFileIDs.end())
 		{
 			_scriptFileNamesToDelete.push_back(_currentScriptFileID);

@@ -76,7 +76,7 @@ const string& FabiEngine3D::text_getContent(const string& ID) const
 	return _core->_textEntityManager.getEntity(ID)->getContent();
 }
 
-const vector<string> FabiEngine3D::text_getAllIDs() const
+const vector<string> FabiEngine3D::text_getIDs() const
 {
 	vector<string> result;
 

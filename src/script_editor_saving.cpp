@@ -36,7 +36,7 @@ const bool ScriptEditor::saveScriptFiles()
 	_scriptFileNamesToDelete.clear();
 
 	// Write every script to a text file
-	for(const auto& scriptID : _script.getAllScriptFileIDs())
+	for(const auto& scriptID : _script.getScriptFileIDs())
 	{
 		// Create or overwrite file
 		ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\scripts\\" + scriptID + ".fe3d");

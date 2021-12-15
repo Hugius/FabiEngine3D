@@ -23,7 +23,7 @@ public:
 	void stopAllAnimations();
 
 	// STRING
-	const vector<string> getAllAnimationIDs() const;
+	const vector<string> getAnimationIDs() const;
 	const vector<string> getStartedAnimationIDs() const;
 	const vector<string> getStartedAnimationIDs(const string& modelID) const;
 

@@ -21,7 +21,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 		   (isControlKeyDown && _fe3d.input_isKeyPressed(InputType::KEY_X))) // CTRL + X
 		{
 			// Delete selection billboards
-			for(const auto& ID : _fe3d.billboard_getAllIDs())
+			for(const auto& ID : _fe3d.billboard_getIDs())
 			{
 				if(ID.substr(0, string("selection_").size()) == "selection_")
 				{

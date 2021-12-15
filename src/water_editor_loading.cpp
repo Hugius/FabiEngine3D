@@ -9,7 +9,7 @@
 using std::ifstream;
 using std::istringstream;
 
-const vector<string> WaterEditor::getAllTexturePathsFromFile() const
+const vector<string> WaterEditor::getTexturePathsFromFile() const
 {
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())

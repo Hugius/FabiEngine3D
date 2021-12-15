@@ -23,7 +23,7 @@ void WorldEditor::_updatePointlightPlacing()
 			if(_gui.getGlobalScreen()->isValueFormConfirmed())
 			{
 				// Adding a number to make it unique
-			BEGIN1:
+				BEGIN1:
 				const string newID = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 				// Check if pointlight already exists
@@ -103,7 +103,7 @@ void WorldEditor::_updatePointlightPlacing()
 						auto newPosition = _fe3d.pointlight_getPosition(PREVIEW_LAMP_ID);
 
 						// Adding a number to make it unique
-					BEGIN2:
+						BEGIN2:
 						const string newID = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 						// Check if pointlight already exists
@@ -172,7 +172,7 @@ void WorldEditor::_updatePointlightPlacing()
 	}
 
 	// Update lamp positions
-	for(const auto& entityID : _fe3d.model_getAllIDs())
+	for(const auto& entityID : _fe3d.model_getIDs())
 	{
 		if(entityID.substr(0, string("@@lamp").size()) == "@@lamp")
 		{

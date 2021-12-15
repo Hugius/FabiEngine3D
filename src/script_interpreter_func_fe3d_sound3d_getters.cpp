@@ -36,7 +36,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 			}
 
 			// Find full sound IDs based on sub ID
-			for(const auto& ID : _fe3d.sound3d_getAllIDs())
+			for(const auto& ID : _fe3d.sound3d_getIDs())
 			{
 				// If substring matches
 				if(arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -50,11 +50,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 			}
 		}
 	}
-	else if(functionName == "fe3d:sound3d_get_all_ids")
+	else if(functionName == "fe3d:sound3d_get_ids")
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			auto result = _fe3d.sound3d_getAllIDs();
+			auto result = _fe3d.sound3d_getIDs();
 
 			// Iterate through sounds
 			for(const auto& ID : result)

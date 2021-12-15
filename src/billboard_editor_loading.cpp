@@ -9,12 +9,12 @@
 using std::ifstream;
 using std::istringstream;
 
-const vector<string> BillboardEditor::getAllTexturePathsFromFile() const
+const vector<string> BillboardEditor::getTexturePathsFromFile() const
 {
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("BillboardEditor::getAllTexturePathsFromFile");
+		Logger::throwError("BillboardEditor::getTexturePathsFromFile");
 	}
 
 	// Compose file path
@@ -101,12 +101,12 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile() const
 	return texturePaths;
 }
 
-const vector<string> BillboardEditor::getAllFontPathsFromFile() const
+const vector<string> BillboardEditor::getFontPathsFromFile() const
 {
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("BillboardEditor::getAllFontPathsFromFile");
+		Logger::throwError("BillboardEditor::getFontPathsFromFile");
 	}
 
 	// Compose file path

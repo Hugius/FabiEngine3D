@@ -22,7 +22,7 @@ void WorldEditor::_updateModelEditing()
 		auto hoveredID = _fe3d.raycast_checkCursorInAny().first;
 
 		// Check if user selected a model
-		for(const auto& ID : _fe3d.model_getAllIDs())
+		for(const auto& ID : _fe3d.model_getIDs())
 		{
 			// Must not be preview entity
 			if(ID[0] != '@')
@@ -122,7 +122,7 @@ void WorldEditor::_updateModelEditing()
 				}
 				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
 				{
-					_gui.getGlobalScreen()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), _animation3dEditor.getAllAnimationIDs());
+					_gui.getGlobalScreen()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), _animation3dEditor.getAnimationIDs());
 				}
 				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{

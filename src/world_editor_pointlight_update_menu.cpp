@@ -61,7 +61,7 @@ void WorldEditor::_updatePointlightMenu()
 			_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlights")->deleteButtons();
 
 			// Add the ID of every placed pointlight
-			auto IDs = _fe3d.pointlight_getAllIDs();
+			auto IDs = _fe3d.pointlight_getIDs();
 			sort(IDs.begin(), IDs.end());
 			for(auto& pointlightID : IDs)
 			{
@@ -103,7 +103,7 @@ void WorldEditor::_updatePointlightChoosingMenu()
 		}
 
 		// Iterate through every placed pointlight
-		for(const auto& pointlightID : _fe3d.pointlight_getAllIDs())
+		for(const auto& pointlightID : _fe3d.pointlight_getIDs())
 		{
 			// Check if pointlight is not a preview
 			if(pointlightID[0] != '@')

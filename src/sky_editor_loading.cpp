@@ -9,12 +9,12 @@
 using std::ifstream;
 using std::istringstream;
 
-const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile() const
+const vector<array<string, 6>> SkyEditor::getTexturePathsFromFile() const
 {
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("SkyEditor::getAllTexturePathsFromFile");
+		Logger::throwError("SkyEditor::getTexturePathsFromFile");
 	}
 
 	// Compose file path

@@ -37,7 +37,7 @@ void ScriptInterpreter::load()
 	auto lastLoggerMessageCount = Logger::getMessageCount();
 
 	// Iterate through script files
-	for(const auto& scriptID : _script.getAllScriptFileIDs())
+	for(const auto& scriptID : _script.getScriptFileIDs())
 	{
 		auto scriptFile = _script.getScriptFile(scriptID);
 
@@ -121,7 +121,7 @@ void ScriptInterpreter::load()
 	}
 
 	// Comment optimization for runtime execution
-	for(const auto& scriptID : _script.getAllScriptFileIDs())
+	for(const auto& scriptID : _script.getScriptFileIDs())
 	{
 		// Retrieve script file
 		auto scriptFile = _script.getScriptFile(scriptID);
@@ -158,35 +158,35 @@ void ScriptInterpreter::load()
 	if(Config::getInst().isApplicationExported())
 	{
 		// Cache meshes
-		_fe3d.misc_cacheMeshes(_modelEditor.getAllMeshPathsFromFile());
+		_fe3d.misc_cacheMeshes(_modelEditor.getMeshPathsFromFile());
 
 		// Cache 2D textures
 		vector<string> texturePaths2D;
 		texturePaths2D.insert(texturePaths2D.end(),
-							  _terrainEditor.getAllTexturePathsFromFile().begin(),
-							  _terrainEditor.getAllTexturePathsFromFile().end());
+							  _terrainEditor.getTexturePathsFromFile().begin(),
+							  _terrainEditor.getTexturePathsFromFile().end());
 		texturePaths2D.insert(texturePaths2D.end(),
-							  _waterEditor.getAllTexturePathsFromFile().begin(),
-							  _waterEditor.getAllTexturePathsFromFile().end());
+							  _waterEditor.getTexturePathsFromFile().begin(),
+							  _waterEditor.getTexturePathsFromFile().end());
 		texturePaths2D.insert(texturePaths2D.end(),
-							  _modelEditor.getAllTexturePathsFromFile().begin(),
-							  _modelEditor.getAllTexturePathsFromFile().end());
+							  _modelEditor.getTexturePathsFromFile().begin(),
+							  _modelEditor.getTexturePathsFromFile().end());
 		texturePaths2D.insert(texturePaths2D.end(),
-							  _billboardEditor.getAllTexturePathsFromFile().begin(),
-							  _billboardEditor.getAllTexturePathsFromFile().end());
+							  _billboardEditor.getTexturePathsFromFile().begin(),
+							  _billboardEditor.getTexturePathsFromFile().end());
 		_fe3d.misc_cache2dTextures(texturePaths2D);
 
 		// Cache 3D textures
-		_fe3d.misc_cache3dTextures(_skyEditor.getAllTexturePathsFromFile());
+		_fe3d.misc_cache3dTextures(_skyEditor.getTexturePathsFromFile());
 
 		// Cache bitmaps
-		_fe3d.misc_cacheBitmaps(_terrainEditor.getAllBitmapPathsFromFile());
+		_fe3d.misc_cacheBitmaps(_terrainEditor.getBitmapPathsFromFile());
 
 		// Cache fonts
-		_fe3d.misc_cacheFonts(_billboardEditor.getAllFontPathsFromFile());
+		_fe3d.misc_cacheFonts(_billboardEditor.getFontPathsFromFile());
 
 		// Cache audios
-		_fe3d.misc_cacheAudios(_soundEditor.getAllAudioPathsFromFile());
+		_fe3d.misc_cacheAudios(_soundEditor.getAudioPathsFromFile());
 	}
 
 	// No sky by default
@@ -243,7 +243,7 @@ void ScriptInterpreter::unload()
 	}
 
 	// Delete all sky entities except the background
-	for(const auto& ID : _fe3d.sky_getAllIDs())
+	for(const auto& ID : _fe3d.sky_getIDs())
 	{
 		if(ID != "@@background")
 		{
@@ -267,7 +267,7 @@ void ScriptInterpreter::unload()
 	_fe3d.reflection_deleteAll();
 
 	// Delete game image entities
-	for(const auto& ID : _fe3d.image_getAllIDs())
+	for(const auto& ID : _fe3d.image_getIDs())
 	{
 		// Cannot delete engine image entities
 		if(ID[0] != '@')
@@ -277,7 +277,7 @@ void ScriptInterpreter::unload()
 	}
 
 	// Delete game text entities
-	for(const auto& ID : _fe3d.text_getAllIDs())
+	for(const auto& ID : _fe3d.text_getIDs())
 	{
 		// Cannot delete engine text entities
 		if(ID[0] != '@')

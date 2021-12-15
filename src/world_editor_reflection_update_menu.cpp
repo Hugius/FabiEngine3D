@@ -59,7 +59,7 @@ void WorldEditor::_updateReflectionMenu()
 			_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflections")->deleteButtons();
 
 			// Add the ID of every placed reflection
-			auto IDs = _fe3d.reflection_getAllIDs();
+			auto IDs = _fe3d.reflection_getIDs();
 			sort(IDs.begin(), IDs.end());
 			for(auto& reflectionID : IDs)
 			{
@@ -101,7 +101,7 @@ void WorldEditor::_updateReflectionChoosingMenu()
 		}
 
 		// Iterate through every placed reflection
-		for(const auto& reflectionID : _fe3d.reflection_getAllIDs())
+		for(const auto& reflectionID : _fe3d.reflection_getIDs())
 		{
 			// Check if reflection is not a preview
 			if(reflectionID[0] != '@')

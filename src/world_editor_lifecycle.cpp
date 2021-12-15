@@ -145,7 +145,7 @@ void WorldEditor::unload()
 	clearCurrentWorld();
 
 	// Delete all sky entities except the background
-	for(const auto& ID : _fe3d.sky_getAllIDs())
+	for(const auto& ID : _fe3d.sky_getIDs())
 	{
 		if(ID != "@@background")
 		{

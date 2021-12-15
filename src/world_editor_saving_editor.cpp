@@ -27,7 +27,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 	// Save all level of detail entity IDs
 	vector<string> levelOfDetailEntityIDs;
-	for(const auto& modelID : _fe3d.model_getAllIDs())
+	for(const auto& modelID : _fe3d.model_getIDs())
 	{
 		// @ sign is reserved
 		if(modelID[0] != '@')
@@ -99,7 +99,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 	}
 
 	// Models
-	for(const auto& modelID : _fe3d.model_getAllIDs())
+	for(const auto& modelID : _fe3d.model_getIDs())
 	{
 		// Check if allowed to save
 		bool isLevelOfDetailEntity = find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) != levelOfDetailEntityIDs.end();
@@ -196,7 +196,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 	}
 
 	// Billboards
-	for(const auto& billboardID : _fe3d.billboard_getAllIDs())
+	for(const auto& billboardID : _fe3d.billboard_getIDs())
 	{
 		// Check if allowed to save
 		if(billboardID[0] != '@')
@@ -226,7 +226,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 	}
 
 	// Sounds
-	for(const auto& soundID : _fe3d.sound3d_getAllIDs())
+	for(const auto& soundID : _fe3d.sound3d_getIDs())
 	{
 		// Check if allowed to save
 		if(soundID[0] != '@')
@@ -253,7 +253,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 	}
 
 	// Pointlights
-	for(const auto& pointlightID : _fe3d.pointlight_getAllIDs())
+	for(const auto& pointlightID : _fe3d.pointlight_getIDs())
 	{
 		// Check if allowed to save
 		if(pointlightID[0] != '@')
@@ -284,7 +284,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 	}
 
 	// Spotlights
-	for(const auto& spotlightID : _fe3d.spotlight_getAllIDs())
+	for(const auto& spotlightID : _fe3d.spotlight_getIDs())
 	{
 		// Check if allowed to save
 		if(spotlightID[0] != '@')
@@ -317,7 +317,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 	}
 
 	// Reflections
-	for(const auto& reflectionID : _fe3d.reflection_getAllIDs())
+	for(const auto& reflectionID : _fe3d.reflection_getIDs())
 	{
 		// Check if allowed to save
 		if(reflectionID[0] != '@')

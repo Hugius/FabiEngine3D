@@ -15,7 +15,7 @@ public:
 	void unload();
 
 	// STRING
-	const vector<array<string, 6>> getAllTexturePathsFromFile() const;
+	const vector<array<string, 6>> getTexturePathsFromFile() const;
 	const vector<string>& getLoadedIDs();
 
 	// BOOL

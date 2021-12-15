@@ -15,8 +15,8 @@ public:
 	void unload();
 
 	// STRING
-	const vector<string> getAllBitmapPathsFromFile() const;
-	const vector<string> getAllTexturePathsFromFile() const;
+	const vector<string> getBitmapPathsFromFile() const;
+	const vector<string> getTexturePathsFromFile() const;
 	const vector<string>& getLoadedIDs();
 
 	// BOOL

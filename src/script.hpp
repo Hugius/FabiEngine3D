@@ -14,7 +14,7 @@ public:
 	void reset();
 
 	// STRING
-	const vector<string> getAllScriptFileIDs() const;
+	const vector<string> getScriptFileIDs() const;
 
 	// UNSIGNED INT
 	const vector<pair<string, unsigned int>> findKeyword(const string& keyword) const;

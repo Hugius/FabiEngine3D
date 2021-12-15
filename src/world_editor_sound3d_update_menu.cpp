@@ -28,7 +28,7 @@ void WorldEditor::_updateSoundMenu()
 			_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuSoundChoice")->getScrollingList("sounds")->deleteButtons();
 
 			// Add the ID of every placed sound
-			auto IDs = _fe3d.sound3d_getAllIDs();
+			auto IDs = _fe3d.sound3d_getIDs();
 			sort(IDs.begin(), IDs.end());
 			for(auto& soundID : IDs)
 			{
@@ -146,7 +146,7 @@ void WorldEditor::_updateSoundChoosingMenu()
 		}
 
 		// Iterate through every placed sound
-		for(const auto& soundID : _fe3d.sound3d_getAllIDs())
+		for(const auto& soundID : _fe3d.sound3d_getIDs())
 		{
 			// Check if sound is not a preview
 			if(soundID[0] != '@')

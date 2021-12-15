@@ -27,6 +27,60 @@ const vector<string> Animation2dEditor::getAnimationIDs()
 	return result;
 }
 
+const vector<string> Animation2dEditor::getStartedBillboardAnimationIDs() const
+{
+	set<string> IDs;
+
+	for(const auto& [idPair, animation] : _startedBillboardAnimations)
+	{
+		IDs.insert(idPair.first);
+	}
+
+	return vector<string>(IDs.begin(), IDs.end());
+}
+
+const vector<string> Animation2dEditor::getStartedImageAnimationIDs() const
+{
+	set<string> IDs;
+
+	for(const auto& [idPair, animation] : _startedImageAnimations)
+	{
+		IDs.insert(idPair.first);
+	}
+
+	return vector<string>(IDs.begin(), IDs.end());
+}
+
+const vector<string> Animation2dEditor::getStartedBillboardAnimationIDs(const string& billboardID) const
+{
+	set<string> IDs;
+
+	for(const auto& [idPair, animation] : _startedBillboardAnimations)
+	{
+		if(billboardID == idPair.second)
+		{
+			IDs.insert(idPair.first);
+		}
+	}
+
+	return vector<string>(IDs.begin(), IDs.end());
+}
+
+const vector<string> Animation2dEditor::getStartedImageAnimationIDs(const string& imageID) const
+{
+	set<string> IDs;
+
+	for(const auto& [idPair, animation] : _startedImageAnimations)
+	{
+		if(imageID == idPair.second)
+		{
+			IDs.insert(idPair.first);
+		}
+	}
+
+	return vector<string>(IDs.begin(), IDs.end());
+}
+
 void Animation2dEditor::_deleteAnimation(const string& ID)
 {
 	for(size_t i = 0; i < _animations.size(); i++)
@@ -67,64 +121,118 @@ const bool Animation2dEditor::isAnimationExisting(const string& ID) const
 	return false;
 }
 
-const bool Animation2dEditor::isAnimationStarted(const string& animationID, const string& billboardID) const
+const bool Animation2dEditor::isBillboardAnimationStarted(const string& animationID, const string& billboardID) const
 {
 	// Temporary values
 	string errorMessage = "Tried to retrieve animation started status with ID \"" + animationID + "\" on billboard with ID \"" + billboardID + "\": ";
 
-	// Check if animation does not exist
+	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
 	{
 		Logger::throwWarning(errorMessage + "animation not existing!");
 	}
-	else
-	{
-		return _startedAnimations.find(make_pair(animationID, billboardID)) != _startedAnimations.end();
-	}
 
-	return false;
+	// Return
+	return (_startedBillboardAnimations.find(make_pair(animationID, billboardID)) != _startedBillboardAnimations.end());
 }
 
-const bool Animation2dEditor::isAnimationPlaying(const string& animationID, const string& billboardID) const
+const bool Animation2dEditor::isBillboardAnimationPlaying(const string& animationID, const string& billboardID) const
 {
 	// Temporary values
 	string errorMessage = "Tried to retrieve animation playing status with ID \"" + animationID + "\" on billboard with ID \"" + billboardID + "\": ";
 
-	// Check if animation is able to be retrieved
+	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
 	{
 		Logger::throwWarning(errorMessage + "animation not existing!");
 	}
-	else if(!isAnimationStarted(animationID, billboardID))
+
+	// Check if animation not started
+	if(!isBillboardAnimationStarted(animationID, billboardID))
 	{
-		Logger::throwWarning(errorMessage + "animation not started!");
-	}
-	else
-	{
-		return !_startedAnimations.at(make_pair(animationID, billboardID)).isPaused();
+		return false;
 	}
 
-	return false;
+	// Return
+	return !isBillboardAnimationPaused(animationID, billboardID);
 }
 
-const bool Animation2dEditor::isAnimationPaused(const string& animationID, const string& billboardID) const
+const bool Animation2dEditor::isBillboardAnimationPaused(const string& animationID, const string& billboardID) const
 {
 	// Temporary values
 	string errorMessage = "Tried to retrieve animation pausing status with ID \"" + animationID + "\" on billboard with ID \"" + billboardID + "\": ";
 
-	// Check if animation is able to be retrieved
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning(errorMessage + "animation not existing!");
+		return false;
+	}
+
+	// Check if animation not started
+	if(!isBillboardAnimationStarted(animationID, billboardID))
+	{
+		return false;
+	}
+
+	// Return
+	return _startedBillboardAnimations.at(make_pair(animationID, billboardID)).isPaused();
+}
+
+const bool Animation2dEditor::isImageAnimationStarted(const string& animationID, const string& imageID) const
+{
+	// Temporary values
+	string errorMessage = "Tried to retrieve animation started status with ID \"" + animationID + "\" on image with ID \"" + imageID + "\": ";
+
+	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
 	{
 		Logger::throwWarning(errorMessage + "animation not existing!");
 	}
-	else if(!isAnimationStarted(animationID, billboardID))
+
+	// Return
+	return (_startedImageAnimations.find(make_pair(animationID, imageID)) != _startedImageAnimations.end());
+}
+
+const bool Animation2dEditor::isImageAnimationPlaying(const string& animationID, const string& imageID) const
+{
+	// Temporary values
+	string errorMessage = "Tried to retrieve animation playing status with ID \"" + animationID + "\" on image with ID \"" + imageID + "\": ";
+
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
 	{
-		Logger::throwWarning(errorMessage + "animation not started!");
-	}
-	else
-	{
-		return _startedAnimations.at(make_pair(animationID, billboardID)).isPaused();
+		Logger::throwWarning(errorMessage + "animation not existing!");
 	}
 
-	return false;
+	// Check if animation not started
+	if(!isImageAnimationStarted(animationID, imageID))
+	{
+		return false;
+	}
+
+	// Return
+	return !isImageAnimationPaused(animationID, imageID);
+}
+
+const bool Animation2dEditor::isImageAnimationPaused(const string& animationID, const string& imageID) const
+{
+	// Temporary values
+	string errorMessage = "Tried to retrieve animation pausing status with ID \"" + animationID + "\" on image with ID \"" + imageID + "\": ";
+
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning(errorMessage + "animation not existing!");
+		return false;
+	}
+
+	// Check if animation not started
+	if(!isImageAnimationStarted(animationID, imageID))
+	{
+		return false;
+	}
+
+	// Return
+	return _startedImageAnimations.at(make_pair(animationID, imageID)).isPaused();
 }

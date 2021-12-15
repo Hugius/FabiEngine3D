@@ -15,20 +15,32 @@ public:
 	void unload();
 	void update();
 	void startBillboardAnimation(const string& animationID, const string& billboardID, int timesToPlay);
+	void startImageAnimation(const string& animationID, const string& imageID, int timesToPlay);
 	void pauseBillboardAnimation(const string& animationID, const string& billboardID);
+	void pauseImageAnimation(const string& animationID, const string& imageID);
 	void resumeBillboardAnimation(const string& animationID, const string& billboardID);
+	void resumeImageAnimation(const string& animationID, const string& imageID);
 	void stopBillboardAnimation(const string& animationID, const string& billboardID);
+	void stopImageAnimation(const string& animationID, const string& imageID);
 	void stopBillboardAnimations();
+	void stopImageAnimations();
 
 	// STRING
 	const vector<string> getAnimationIDs();
+	const vector<string> getStartedBillboardAnimationIDs() const;
+	const vector<string> getStartedImageAnimationIDs() const;
+	const vector<string> getStartedBillboardAnimationIDs(const string& billboardID) const;
+	const vector<string> getStartedImageAnimationIDs(const string& billboardID) const;
 
 	// BOOL
 	const bool isLoaded() const;
 	const bool isAnimationExisting(const string& ID) const;
-	const bool isAnimationStarted(const string& animationID, const string& modelID) const;
-	const bool isAnimationPlaying(const string& animationID, const string& modelID) const;
-	const bool isAnimationPaused(const string& animationID, const string& modelID) const;
+	const bool isBillboardAnimationStarted(const string& animationID, const string& billboardID) const;
+	const bool isBillboardAnimationPlaying(const string& animationID, const string& billboardID) const;
+	const bool isBillboardAnimationPaused(const string& animationID, const string& billboardID) const;
+	const bool isImageAnimationStarted(const string& animationID, const string& imageID) const;
+	const bool isImageAnimationPlaying(const string& animationID, const string& imageID) const;
+	const bool isImageAnimationPaused(const string& animationID, const string& imageID) const;
 	const bool loadFromFile(bool mustCheckPreviewTexture);
 	const bool saveToFile() const;
 
@@ -41,7 +53,8 @@ private:
 	void _updateAnimationCreating();
 	void _updateAnimationChoosing();
 	void _updateAnimationDeleting();
-	void _updateAnimationExecution();
+	void _updateBillboardAnimationExecution();
+	void _updateImageAnimationExecution();
 	void _updateMiscellaneous();
 	void _deleteAnimation(const string& ID);
 
@@ -50,8 +63,10 @@ private:
 
 	// STRING
 	static inline const string PREVIEW_BILLBOARD_ID = "@@preview_billboard";
-	set<pair<string, string>> _animationsToStop;
-	set<pair<string, string>> _animationsToStartAgain;
+	set<pair<string, string>> _billboardAnimationsToStop;
+	set<pair<string, string>> _billboardAnimationsToStart;
+	set<pair<string, string>> _imageAnimationsToStop;
+	set<pair<string, string>> _imageAnimationsToStart;
 	string _hoveredAnimationID = "";
 	string _currentAnimationID = "";
 	string _currentProjectID = "";
@@ -70,7 +85,8 @@ private:
 	bool _isEditorLoaded = false;
 
 	// MISCELLANEOUS
-	map<pair<string, string>, Animation2d> _startedAnimations;
+	map<pair<string, string>, Animation2d> _startedBillboardAnimations;
+	map<pair<string, string>, Animation2d> _startedImageAnimations;
 	vector<shared_ptr<Animation2d>> _animations;
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;

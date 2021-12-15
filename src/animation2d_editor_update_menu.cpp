@@ -67,7 +67,7 @@ void Animation2dEditor::_updateChoiceMenu()
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			// Stop animation if playing
-			if(isAnimationStarted(_currentAnimationID, PREVIEW_BILLBOARD_ID))
+			if(isBillboardAnimationStarted(_currentAnimationID, PREVIEW_BILLBOARD_ID))
 			{
 				stopBillboardAnimation(_currentAnimationID, PREVIEW_BILLBOARD_ID);
 			}
@@ -159,7 +159,7 @@ void Animation2dEditor::_updateChoiceMenu()
 
 		// Update buttons hoverability
 		auto hasPreviewTexture = !currentAnimation->getPreviewTexturePath().empty();
-		auto isPlaying = isAnimationStarted(_currentAnimationID, PREVIEW_BILLBOARD_ID);
+		auto isPlaying = isBillboardAnimationStarted(_currentAnimationID, PREVIEW_BILLBOARD_ID);
 		screen->getButton("preview")->setHoverable(!isPlaying);
 		screen->getButton("rows")->setHoverable(hasPreviewTexture && !isPlaying);
 		screen->getButton("columns")->setHoverable(hasPreviewTexture && !isPlaying);

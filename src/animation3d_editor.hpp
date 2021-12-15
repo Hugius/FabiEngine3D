@@ -2,8 +2,8 @@
 
 #include "fe3d.hpp"
 #include "engine_gui_manager.hpp"
-#include "model_editor.hpp"
 #include "animation3d.hpp"
+#include "model_editor.hpp"
 
 class Animation3dEditor final
 {
@@ -20,7 +20,7 @@ public:
 	void resumeAnimation(const string& animationID, const string& modelID);
 	void fadeAnimation(const string& animationID, const string& modelID, unsigned int framestep);
 	void stopAnimation(const string& animationID, const string& modelID);
-	void stopAllAnimations();
+	void stopAnimations();
 
 	// STRING
 	const vector<string> getAnimationIDs() const;

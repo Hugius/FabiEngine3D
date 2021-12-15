@@ -14,7 +14,7 @@ const vector<string> TerrainEditor::getTexturePathsFromFile() const
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("TerrainEditor::getAllTerrainTexturePathsFromFile");
+		Logger::throwError("TerrainEditor::getTexturePathsFromFile");
 	}
 
 	// Compose file path
@@ -218,7 +218,7 @@ const vector<string> TerrainEditor::getBitmapPathsFromFile() const
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("TerrainEditor::getAllTerrainTexturePathsFromFile");
+		Logger::throwError("TerrainEditor::getBitmapPathsFromFile");
 	}
 
 	// Compose file path

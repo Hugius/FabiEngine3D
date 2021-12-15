@@ -14,7 +14,7 @@ const vector<string> WaterEditor::getTexturePathsFromFile() const
 	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("WaterEditor::getAllWaterTexturePathsFromFile");
+		Logger::throwError("WaterEditor::getTexturePathsFromFile");
 	}
 
 	// Compose file path

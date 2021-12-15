@@ -530,6 +530,8 @@ public:
 	void image_setMirroredVertically(const string& ID, bool value);
 	void image_setWireframed(const string& ID, bool value);
 	void image_setWireframeColor(const string& ID, fvec3 value);
+	void image_setMultiplierUV(const string& ID, fvec2 value);
+	void image_setAdderUV(const string& ID, fvec2 value);
 
 	// IMAGE - getters
 	const vector<string> image_getIDs() const;
@@ -540,6 +542,8 @@ public:
 	const fvec2 image_getSize(const string& ID) const;
 	const fvec2 image_getMinPosition(const string& ID) const;
 	const fvec2 image_getMaxPosition(const string& ID) const;
+	const fvec2 image_getMultiplierUV(const string& ID) const;
+	const fvec2 image_getAdderUV(const string& ID) const;
 	const float image_getRotation(const string& ID) const;
 	const float image_getTransparency(const string& ID) const;
 	const bool image_isExisting(const string& ID) const;

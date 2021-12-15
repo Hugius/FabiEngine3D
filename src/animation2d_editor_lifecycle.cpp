@@ -47,9 +47,10 @@ void Animation2dEditor::unload()
 
 	// Reset editor properties
 	_animations.clear();
-	_startedAnimations.clear();
-	_animationsToStop.clear();
-	_animationsToStartAgain.clear();
+	_startedBillboardAnimations.clear();
+	_startedImageAnimations.clear();
+	_billboardAnimationsToStop.clear();
+	_billboardAnimationsToStart.clear();
 	_hoveredAnimationID = "";
 	_currentAnimationID = "";
 	_isCreatingAnimation = false;
@@ -98,7 +99,8 @@ void Animation2dEditor::_unloadGUI()
 void Animation2dEditor::update()
 {
 	// Animation execution
-	_updateAnimationExecution();
+	_updateBillboardAnimationExecution();
+	_updateImageAnimationExecution();
 
 	// Editor updates
 	if(_isEditorLoaded)

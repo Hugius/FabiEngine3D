@@ -110,6 +110,16 @@ void FabiEngine3D::image_setWireframeColor(const string& ID, fvec3 value)
 	_core->_imageEntityManager.getEntity(ID)->setWireframeColor(value);
 }
 
+void FabiEngine3D::image_setMultiplierUV(const string& ID, fvec2 value)
+{
+	_core->_imageEntityManager.getEntity(ID)->setMultiplierUV(value);
+}
+
+void FabiEngine3D::image_setAdderUV(const string& ID, fvec2 value)
+{
+	_core->_imageEntityManager.getEntity(ID)->setAdderUV(value);
+}
+
 void FabiEngine3D::image_setMirroredHorizontally(const string& ID, bool value)
 {
 	_core->_imageEntityManager.getEntity(ID)->setMirroredHorizontally(value);

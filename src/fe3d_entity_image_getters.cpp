@@ -58,6 +58,16 @@ const fvec2 FabiEngine3D::image_getMaxPosition(const string& ID) const
 	return _core->_imageEntityManager.getEntity(ID)->getMaxPosition();
 }
 
+const fvec2 FabiEngine3D::image_getMultiplierUV(const string& ID) const
+{
+	return _core->_imageEntityManager.getEntity(ID)->getMultiplierUV();
+}
+
+const fvec2 FabiEngine3D::image_getAdderUV(const string& ID) const
+{
+	return _core->_imageEntityManager.getEntity(ID)->getAdderUV();
+}
+
 const fvec3 FabiEngine3D::image_getColor(const string& ID) const
 {
 	return _core->_imageEntityManager.getEntity(ID)->getColor();

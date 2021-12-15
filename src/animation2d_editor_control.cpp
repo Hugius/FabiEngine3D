@@ -19,7 +19,7 @@ void Animation2dEditor::startBillboardAnimation(const string& animationID, const
 	}
 
 	// Check if animation already started
-	if(isAnimationStarted(animationID, billboardID))
+	if(isBillboardAnimationStarted(animationID, billboardID))
 	{
 		Logger::throwWarning(errorMessage + "animation already started!");
 	}
@@ -35,7 +35,7 @@ void Animation2dEditor::startBillboardAnimation(const string& animationID, const
 	animation.setTimesToPlay(timesToPlay);
 
 	// Start animation
-	_startedAnimations.insert(make_pair(make_pair(animationID, billboardID), animation));
+	_startedBillboardAnimations.insert(make_pair(make_pair(animationID, billboardID), animation));
 }
 
 void Animation2dEditor::pauseBillboardAnimation(const string& animationID, const string& billboardID)
@@ -50,20 +50,20 @@ void Animation2dEditor::pauseBillboardAnimation(const string& animationID, const
 	}
 
 	// Check if animation not started
-	if(!isAnimationStarted(animationID, billboardID))
+	if(!isBillboardAnimationStarted(animationID, billboardID))
 	{
 		Logger::throwWarning(errorMessage + "animation not started!");
 
 	}
 
 	// Check if animation is paused
-	if(isAnimationPaused(animationID, billboardID))
+	if(isBillboardAnimationPaused(animationID, billboardID))
 	{
 		Logger::throwWarning(errorMessage + "animation already paused!");
 	}
 
 	// Pause animation
-	_startedAnimations.at(make_pair(animationID, billboardID)).setPaused(true);
+	_startedBillboardAnimations.at(make_pair(animationID, billboardID)).setPaused(true);
 }
 
 void Animation2dEditor::resumeBillboardAnimation(const string& animationID, const string& billboardID)
@@ -71,31 +71,26 @@ void Animation2dEditor::resumeBillboardAnimation(const string& animationID, cons
 	// Temporary values
 	string errorMessage = "Tried to resume animation with ID \"" + animationID + "\" on billboard with ID \"" + billboardID + "\": ";
 
-	// Check if animation existing
-	if(isAnimationExisting(animationID))
-	{
-		// Check if animation is started
-		if(isAnimationStarted(animationID, billboardID))
-		{
-			// Check if animation is paused
-			if(isAnimationPaused(animationID, billboardID))
-			{
-				_startedAnimations.at(make_pair(animationID, billboardID)).setPaused(false);
-			}
-			else
-			{
-				Logger::throwWarning(errorMessage + "animation already playing!");
-			}
-		}
-		else
-		{
-			Logger::throwWarning(errorMessage + "animation not started!");
-		}
-	}
-	else
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
 	{
 		Logger::throwWarning(errorMessage + "animation not existing!");
 	}
+
+	// Check if animation not started
+	if(!isBillboardAnimationStarted(animationID, billboardID))
+	{
+		Logger::throwWarning(errorMessage + "animation not started!");
+	}
+
+	// Check if animation not paused
+	if(!isBillboardAnimationPaused(animationID, billboardID))
+	{
+		Logger::throwWarning(errorMessage + "animation already playing!");
+	}
+
+	// Resume animation
+	_startedBillboardAnimations.at(make_pair(animationID, billboardID)).setPaused(false);
 }
 
 void Animation2dEditor::stopBillboardAnimation(const string& animationID, const string& billboardID)
@@ -103,31 +98,149 @@ void Animation2dEditor::stopBillboardAnimation(const string& animationID, const 
 	// Temporary values
 	string errorMessage = "Tried to stop animation with ID \"" + animationID + "\" on billboard with ID \"" + billboardID + "\": ";
 
-	// Check if animation existing
-	if(isAnimationExisting(animationID))
-	{
-		// Check if animation is started
-		if(isAnimationStarted(animationID, billboardID))
-		{
-			// Reset UV properties
-			_fe3d.billboard_setMultiplierUV(billboardID, fvec2(1.0f));
-			_fe3d.billboard_setAdderUV(billboardID, fvec2(0.0f));
-
-			// Stop animation
-			_startedAnimations.erase(make_pair(animationID, billboardID));
-		}
-		else
-		{
-			Logger::throwWarning(errorMessage + "animation not started!");
-		}
-	}
-	else
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
 	{
 		Logger::throwWarning(errorMessage + "animation not existing!");
 	}
+
+	// Check if animation not started
+	if(!isBillboardAnimationStarted(animationID, billboardID))
+	{
+		Logger::throwWarning(errorMessage + "animation not started!");
+	}
+
+	// Reset UV properties
+	_fe3d.billboard_setMultiplierUV(billboardID, fvec2(1.0f));
+	_fe3d.billboard_setAdderUV(billboardID, fvec2(0.0f));
+
+	// Stop animation
+	_startedBillboardAnimations.erase(make_pair(animationID, billboardID));
 }
 
 void Animation2dEditor::stopBillboardAnimations()
 {
-	_startedAnimations.clear();
+	_startedBillboardAnimations.clear();
+}
+
+void Animation2dEditor::startImageAnimation(const string& animationID, const string& imageID, int timesToPlay)
+{
+	// Temporary values
+	string errorMessage = "Tried to start animation with ID \"" + animationID + "\" on image with ID \"" + imageID + "\": ";
+
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning(errorMessage + "animation not existing!");
+	}
+
+	// Check if image not existing
+	if(!_fe3d.image_isExisting(imageID))
+	{
+		Logger::throwWarning(errorMessage + "image not existing!");
+	}
+
+	// Check if animation already started
+	if(isImageAnimationStarted(animationID, imageID))
+	{
+		Logger::throwWarning(errorMessage + "animation already started!");
+	}
+
+	// Check if play count invalid
+	if((timesToPlay < -1) || (timesToPlay == 0))
+	{
+		Logger::throwWarning(errorMessage + "play count is invalid!");
+	}
+
+	// Copy animation
+	auto animation = *_getAnimation(animationID);
+	animation.setTimesToPlay(timesToPlay);
+
+	// Start animation
+	_startedImageAnimations.insert(make_pair(make_pair(animationID, imageID), animation));
+}
+
+void Animation2dEditor::pauseImageAnimation(const string& animationID, const string& imageID)
+{
+	// Temporary values
+	string errorMessage = "Tried to pause animation with ID \"" + animationID + "\" on image with ID \"" + imageID + "\": ";
+
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning(errorMessage + "animation not existing!");
+	}
+
+	// Check if animation not started
+	if(!isImageAnimationStarted(animationID, imageID))
+	{
+		Logger::throwWarning(errorMessage + "animation not started!");
+
+	}
+
+	// Check if animation is paused
+	if(isImageAnimationPaused(animationID, imageID))
+	{
+		Logger::throwWarning(errorMessage + "animation already paused!");
+	}
+
+	// Pause animation
+	_startedImageAnimations.at(make_pair(animationID, imageID)).setPaused(true);
+}
+
+void Animation2dEditor::resumeImageAnimation(const string& animationID, const string& imageID)
+{
+	// Temporary values
+	string errorMessage = "Tried to resume animation with ID \"" + animationID + "\" on image with ID \"" + imageID + "\": ";
+
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning(errorMessage + "animation not existing!");
+	}
+
+	// Check if animation not started
+	if(!isImageAnimationStarted(animationID, imageID))
+	{
+		Logger::throwWarning(errorMessage + "animation not started!");
+	}
+
+	// Check if animation not paused
+	if(!isImageAnimationPaused(animationID, imageID))
+	{
+		Logger::throwWarning(errorMessage + "animation already playing!");
+	}
+
+	// Resume animation
+	_startedImageAnimations.at(make_pair(animationID, imageID)).setPaused(false);
+}
+
+void Animation2dEditor::stopImageAnimation(const string& animationID, const string& imageID)
+{
+	// Temporary values
+	string errorMessage = "Tried to stop animation with ID \"" + animationID + "\" on image with ID \"" + imageID + "\": ";
+
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning(errorMessage + "animation not existing!");
+	}
+
+	// Check if animation not started
+	if(!isImageAnimationStarted(animationID, imageID))
+	{
+		Logger::throwWarning(errorMessage + "animation not started!");
+	}
+
+	// Reset UV properties
+	_fe3d.image_setMultiplierUV(imageID, fvec2(1.0f));
+	_fe3d.image_setAdderUV(imageID, fvec2(0.0f));
+
+	// Stop animation
+	_startedImageAnimations.erase(make_pair(animationID, imageID));
+}
+
+void Animation2dEditor::stopImageAnimations()
+{
+	_startedImageAnimations.clear();
 }

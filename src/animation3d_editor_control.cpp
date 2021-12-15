@@ -153,7 +153,7 @@ void Animation3dEditor::stopAnimation(const string& animationID, const string& m
 	}
 }
 
-void Animation3dEditor::stopAllAnimations()
+void Animation3dEditor::stopAnimations()
 {
 	_startedAnimations.clear();
 }

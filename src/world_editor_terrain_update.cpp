@@ -16,7 +16,7 @@ void WorldEditor::_updateTerrainMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
 		{
-			// Retrieve preview terrain IDs
+			// Retrieve template terrain IDs
 			vector<string> terrainIDs;
 			for(const auto& ID : _terrainEditor.getLoadedIDs())
 			{
@@ -49,7 +49,7 @@ void WorldEditor::_updateTerrainMenu()
 
 				// Create new
 				_currentTerrainID = selectedButtonID;
-				_copyPreviewTerrain(_currentTerrainID, ("@" + selectedButtonID));
+				_copyTemplateTerrain(_currentTerrainID, ("@" + selectedButtonID));
 				_gui.getGlobalScreen()->deleteChoiceForm("terrainList");
 			}
 			else if(_gui.getGlobalScreen()->isChoiceFormCancelled("terrainList"))

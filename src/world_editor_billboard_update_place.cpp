@@ -4,12 +4,12 @@
 void WorldEditor::_updateBillboardPlacing()
 {
 	// Only if user is in placement mode
-	if(!_currentPreviewBillboardID.empty())
+	if(!_currentTemplateBillboardID.empty())
 	{
 		if(_fe3d.terrain_getSelectedID().empty()) // Placing without terrain
 		{
 			// Retrieve current position
-			auto newPosition = _fe3d.billboard_getPosition(_currentPreviewBillboardID);
+			auto newPosition = _fe3d.billboard_getPosition(_currentTemplateBillboardID);
 
 			// Update value forms
 			_gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, {});
@@ -17,15 +17,15 @@ void WorldEditor::_updateBillboardPlacing()
 			_gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, {});
 
 			// Update position
-			_fe3d.billboard_setPosition(_currentPreviewBillboardID, newPosition);
+			_fe3d.billboard_setPosition(_currentTemplateBillboardID, newPosition);
 
 			// Check if billboard must be placed
 			if(_gui.getGlobalScreen()->isValueFormConfirmed())
 			{
 				// Adding a number to make it unique
-			BEGIN1:
+				BEGIN1:
 				int randomSerial = Math::getRandomNumber(0, INT_MAX);
-				const string newID = (_currentPreviewBillboardID.substr(1) + "_" + to_string(randomSerial));
+				const string newID = (_currentTemplateBillboardID.substr(1) + "_" + to_string(randomSerial));
 
 				// Check if billboard already exists
 				if(_fe3d.billboard_isExisting(newID))
@@ -34,15 +34,15 @@ void WorldEditor::_updateBillboardPlacing()
 				}
 
 				// Create billboard
-				_copyPreviewBillboard(newID, _currentPreviewBillboardID, newPosition, false);
+				_copyTemplateBillboard(newID, _currentTemplateBillboardID, newPosition, false);
 			}
 
 			// Check if placement mode must be disabled
 			if(_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
 			{
-				_fe3d.billboard_setVisible(_currentPreviewBillboardID, false);
+				_fe3d.billboard_setVisible(_currentTemplateBillboardID, false);
 				_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
-				_currentPreviewBillboardID = "";
+				_currentTemplateBillboardID = "";
 			}
 		}
 		else // Placing on terrain
@@ -56,27 +56,27 @@ void WorldEditor::_updateBillboardPlacing()
 					// Check if a terrain is loaded
 					if(_fe3d.raycast_isPointOnTerrainValid())
 					{
-						// Show preview billboard
-						_fe3d.billboard_setVisible(_currentPreviewBillboardID, true);
+						// Show template billboard
+						_fe3d.billboard_setVisible(_currentTemplateBillboardID, true);
 
 						// Update position
-						_fe3d.billboard_setPosition(_currentPreviewBillboardID, (_fe3d.raycast_getPointOnTerrain() + BILLBOARD_TERRAIN_OFFSET));
+						_fe3d.billboard_setPosition(_currentTemplateBillboardID, (_fe3d.raycast_getPointOnTerrain() + BILLBOARD_TERRAIN_OFFSET));
 					}
 					else
 					{
-						// Hide preview billboard
-						_fe3d.billboard_setVisible(_currentPreviewBillboardID, false);
+						// Hide template billboard
+						_fe3d.billboard_setVisible(_currentTemplateBillboardID, false);
 					}
 
 					// Check if billboard must be placed
 					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Temporary values
-						const auto newPosition = _fe3d.billboard_getPosition(_currentPreviewBillboardID);
+						const auto newPosition = _fe3d.billboard_getPosition(_currentTemplateBillboardID);
 
-					BEGIN2:
+						BEGIN2:
 						// Adding a number to make it unique
-						const string newID = (_currentPreviewBillboardID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+						const string newID = (_currentTemplateBillboardID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 						// Check if billboard already exists
 						if(_fe3d.billboard_isExisting(newID))
@@ -85,23 +85,23 @@ void WorldEditor::_updateBillboardPlacing()
 						}
 
 						// Create billboard
-						_copyPreviewBillboard(newID, _currentPreviewBillboardID, newPosition, false);
+						_copyTemplateBillboard(newID, _currentTemplateBillboardID, newPosition, false);
 					}
 					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
 					{
-						_fe3d.billboard_setVisible(_currentPreviewBillboardID, false);
+						_fe3d.billboard_setVisible(_currentTemplateBillboardID, false);
 						_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
-						_currentPreviewBillboardID = "";
+						_currentTemplateBillboardID = "";
 					}
 				}
 				else
 				{
-					_fe3d.billboard_setVisible(_currentPreviewBillboardID, false);
+					_fe3d.billboard_setVisible(_currentTemplateBillboardID, false);
 				}
 			}
 			else
 			{
-				_fe3d.billboard_setVisible(_currentPreviewBillboardID, false);
+				_fe3d.billboard_setVisible(_currentTemplateBillboardID, false);
 			}
 		}
 	}

@@ -4,12 +4,12 @@
 void WorldEditor::_updateSoundPlacing()
 {
 	// Only if user is in placement mode
-	if(!_currentPreviewSoundID.empty())
+	if(!_currentTemplateSoundID.empty())
 	{
 		if(_fe3d.terrain_getSelectedID().empty()) // Placing without terrain
 		{
 			// Retrieve current position
-			auto newPosition = _fe3d.sound3d_getPosition(_currentPreviewSoundID);
+			auto newPosition = _fe3d.sound3d_getPosition(_currentTemplateSoundID);
 
 			// Update value forms
 			_gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, {});
@@ -17,14 +17,14 @@ void WorldEditor::_updateSoundPlacing()
 			_gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, {});
 
 			// Update position
-			_fe3d.sound3d_setPosition(_currentPreviewSoundID, newPosition);
+			_fe3d.sound3d_setPosition(_currentTemplateSoundID, newPosition);
 
 			// Check if sound must be placed
 			if(_gui.getGlobalScreen()->isValueFormConfirmed())
 			{
 				// Adding a number to make it unique
 				BEGIN1:
-				const string newID = (_currentPreviewSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				const string newID = (_currentTemplateSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 				// Check if sound already exists
 				if(_fe3d.sound3d_isExisting(newID))
@@ -34,7 +34,7 @@ void WorldEditor::_updateSoundPlacing()
 
 				// Create model
 				const string newModelID = ("@@speaker_" + newID);
-				_fe3d.model_create(newModelID, _fe3d.model_getMeshPath(PREVIEW_SPEAKER_ID));
+				_fe3d.model_create(newModelID, _fe3d.model_getMeshPath(TEMPLATE_SPEAKER_ID));
 				_fe3d.model_setBaseSize(newModelID, DEFAULT_SPEAKER_SIZE);
 				_fe3d.model_setShadowed(newModelID, false);
 				_fe3d.model_setReflected(newModelID, false);
@@ -48,26 +48,26 @@ void WorldEditor::_updateSoundPlacing()
 				_fe3d.aabb_setCollisionResponsive(newModelID, false);
 
 				// Create sound
-				_fe3d.sound3d_create(newID, _fe3d.sound3d_getAudioPath(_currentPreviewSoundID));
+				_fe3d.sound3d_create(newID, _fe3d.sound3d_getAudioPath(_currentTemplateSoundID));
 				_fe3d.sound3d_setPosition(newID, newPosition);
 				_fe3d.sound3d_setMaxVolume(newID, DEFAULT_SOUND_MAX_VOLUME);
 				_fe3d.sound3d_setMaxDistance(newID, DEFAULT_SOUND_MAX_DISTANCE);
 				_fe3d.sound3d_play(newID, -1, 0, false);
-				_loadedSoundIDs.insert(make_pair(newID, _currentPreviewSoundID));
+				_loadedSoundIDs.insert(make_pair(newID, _currentTemplateSoundID));
 			}
 
 			// Check if placement mode must be disabled
 			if(_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
 			{
-				// Hide preview speaker
-				_fe3d.model_setVisible(PREVIEW_SPEAKER_ID, false);
+				// Hide template speaker
+				_fe3d.model_setVisible(TEMPLATE_SPEAKER_ID, false);
 
-				// Stop preview sound playback
-				_fe3d.sound3d_stop(_currentPreviewSoundID, 0);
+				// Stop template sound playback
+				_fe3d.sound3d_stop(_currentTemplateSoundID, 0);
 
 				// Miscellaneous
 				_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), false);
-				_currentPreviewSoundID = "";
+				_currentTemplateSoundID = "";
 			}
 		}
 		else // Placing on terrain
@@ -81,27 +81,27 @@ void WorldEditor::_updateSoundPlacing()
 					// Check if a terrain is loaded
 					if(_fe3d.raycast_isPointOnTerrainValid())
 					{
-						// Play preview sound
-						if(!_fe3d.sound3d_isStarted(_currentPreviewSoundID))
+						// Play template sound
+						if(!_fe3d.sound3d_isStarted(_currentTemplateSoundID))
 						{
-							_fe3d.sound3d_play(_currentPreviewSoundID, -1, 0, false);
+							_fe3d.sound3d_play(_currentTemplateSoundID, -1, 0, false);
 						}
 
-						// Show preview speaker
-						_fe3d.model_setVisible(PREVIEW_SPEAKER_ID, true);
+						// Show template speaker
+						_fe3d.model_setVisible(TEMPLATE_SPEAKER_ID, true);
 
 						// Update position
-						_fe3d.sound3d_setPosition(_currentPreviewSoundID, (_fe3d.raycast_getPointOnTerrain() + SOUND_TERRAIN_OFFSET));
+						_fe3d.sound3d_setPosition(_currentTemplateSoundID, (_fe3d.raycast_getPointOnTerrain() + SOUND_TERRAIN_OFFSET));
 					}
 					else
 					{
-						// Hide preview speaker
-						_fe3d.model_setVisible(PREVIEW_SPEAKER_ID, false);
+						// Hide template speaker
+						_fe3d.model_setVisible(TEMPLATE_SPEAKER_ID, false);
 
-						// Stop preview sound playback
-						if(_fe3d.sound3d_isStarted(_currentPreviewSoundID))
+						// Stop template sound playback
+						if(_fe3d.sound3d_isStarted(_currentTemplateSoundID))
 						{
-							_fe3d.sound3d_stop(_currentPreviewSoundID, 0);
+							_fe3d.sound3d_stop(_currentTemplateSoundID, 0);
 						}
 					}
 
@@ -109,11 +109,11 @@ void WorldEditor::_updateSoundPlacing()
 					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Temporary values
-						const auto newPosition = _fe3d.sound3d_getPosition(_currentPreviewSoundID);
+						const auto newPosition = _fe3d.sound3d_getPosition(_currentTemplateSoundID);
 
 						// Adding a number to make it unique
 						BEGIN2:
-						const string newID = (_currentPreviewSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+						const string newID = (_currentTemplateSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 						// Check if model already exists
 						if(_fe3d.sound3d_isExisting(newID))
@@ -121,12 +121,12 @@ void WorldEditor::_updateSoundPlacing()
 							goto BEGIN2;
 						}
 
-						// Stop preview sound playback
-						_fe3d.sound3d_stop(_currentPreviewSoundID, 0);
+						// Stop template sound playback
+						_fe3d.sound3d_stop(_currentTemplateSoundID, 0);
 
 						// Create model
 						const string newModelID = ("@@speaker_" + newID);
-						_fe3d.model_create(newModelID, _fe3d.model_getMeshPath(PREVIEW_SPEAKER_ID));
+						_fe3d.model_create(newModelID, _fe3d.model_getMeshPath(TEMPLATE_SPEAKER_ID));
 						_fe3d.model_setBaseSize(newModelID, DEFAULT_SPEAKER_SIZE);
 						_fe3d.model_setShadowed(newModelID, false);
 						_fe3d.model_setReflected(newModelID, false);
@@ -140,57 +140,57 @@ void WorldEditor::_updateSoundPlacing()
 						_fe3d.aabb_setCollisionResponsive(newModelID, false);
 
 						// Create sound
-						_fe3d.sound3d_create(newID, _fe3d.sound3d_getAudioPath(_currentPreviewSoundID));
+						_fe3d.sound3d_create(newID, _fe3d.sound3d_getAudioPath(_currentTemplateSoundID));
 						_fe3d.sound3d_setPosition(newID, newPosition);
 						_fe3d.sound3d_setMaxVolume(newID, DEFAULT_SOUND_MAX_VOLUME);
 						_fe3d.sound3d_setMaxDistance(newID, DEFAULT_SOUND_MAX_DISTANCE);
 						_fe3d.sound3d_play(newID, -1, 0, false);
-						_loadedSoundIDs.insert(make_pair(newID, _currentPreviewSoundID));
+						_loadedSoundIDs.insert(make_pair(newID, _currentTemplateSoundID));
 					}
 					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
 					{
-						// Hide preview speaker
-						_fe3d.model_setVisible(PREVIEW_SPEAKER_ID, false);
+						// Hide template speaker
+						_fe3d.model_setVisible(TEMPLATE_SPEAKER_ID, false);
 
-						// Stop preview sound playback
-						_fe3d.sound3d_stop(_currentPreviewSoundID, 0);
+						// Stop template sound playback
+						_fe3d.sound3d_stop(_currentTemplateSoundID, 0);
 
 						// Miscellaneous
 						_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), false);
-						_currentPreviewSoundID = "";
+						_currentTemplateSoundID = "";
 					}
 				}
 				else
 				{
-					// Hide preview speaker
-					_fe3d.model_setVisible(PREVIEW_SPEAKER_ID, false);
+					// Hide template speaker
+					_fe3d.model_setVisible(TEMPLATE_SPEAKER_ID, false);
 
-					// Stop preview sound playback
-					if(_fe3d.sound3d_isStarted(_currentPreviewSoundID))
+					// Stop template sound playback
+					if(_fe3d.sound3d_isStarted(_currentTemplateSoundID))
 					{
-						_fe3d.sound3d_stop(_currentPreviewSoundID, 0);
+						_fe3d.sound3d_stop(_currentTemplateSoundID, 0);
 					}
 				}
 			}
 			else
 			{
-				// Hide preview speaker
-				_fe3d.model_setVisible(PREVIEW_SPEAKER_ID, false);
+				// Hide template speaker
+				_fe3d.model_setVisible(TEMPLATE_SPEAKER_ID, false);
 
-				// Stop preview sound playback
-				if(_fe3d.sound3d_isStarted(_currentPreviewSoundID))
+				// Stop template sound playback
+				if(_fe3d.sound3d_isStarted(_currentTemplateSoundID))
 				{
-					_fe3d.sound3d_stop(_currentPreviewSoundID, 0);
+					_fe3d.sound3d_stop(_currentTemplateSoundID, 0);
 				}
 			}
 		}
 
-		// Update preview speaker position
-		if(!_currentPreviewSoundID.empty())
+		// Update template speaker position
+		if(!_currentTemplateSoundID.empty())
 		{
-			auto soundPosition = _fe3d.sound3d_getPosition(_currentPreviewSoundID);
+			auto soundPosition = _fe3d.sound3d_getPosition(_currentTemplateSoundID);
 			soundPosition -= SPEAKER_OFFSET;
-			_fe3d.model_setBasePosition(PREVIEW_SPEAKER_ID, soundPosition);
+			_fe3d.model_setBasePosition(TEMPLATE_SPEAKER_ID, soundPosition);
 		}
 	}
 

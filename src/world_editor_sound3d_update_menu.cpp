@@ -32,7 +32,7 @@ void WorldEditor::_updateSoundMenu()
 			sort(IDs.begin(), IDs.end());
 			for(auto& soundID : IDs)
 			{
-				// Check if sound is not a preview
+				// Must not be template entity
 				if(soundID[0] != '@')
 				{
 					// Removing the unique number from the ID
@@ -61,20 +61,20 @@ void WorldEditor::_updateSoundPlacingMenu()
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			// Reset placing
-			if(!_currentPreviewSoundID.empty())
+			if(!_currentTemplateSoundID.empty())
 			{
-				// Hide preview speaker
-				_fe3d.model_setVisible(PREVIEW_SPEAKER_ID, false);
+				// Hide template speaker
+				_fe3d.model_setVisible(TEMPLATE_SPEAKER_ID, false);
 
-				// Stop preview sound playback
-				if(_fe3d.sound3d_isStarted(_currentPreviewSoundID))
+				// Stop template sound playback
+				if(_fe3d.sound3d_isStarted(_currentTemplateSoundID))
 				{
-					_fe3d.sound3d_stop(_currentPreviewSoundID, 0);
+					_fe3d.sound3d_stop(_currentTemplateSoundID, 0);
 				}
 
 				// Miscellaneous
 				_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), false);
-				_currentPreviewSoundID = "";
+				_currentTemplateSoundID = "";
 			}
 
 			// Miscellaneous
@@ -100,13 +100,13 @@ void WorldEditor::_updateSoundPlacingMenu()
 					_deactivateSpotlight();
 					_deactivateReflection();
 
-					// Set new preview sound
-					_currentPreviewSoundID = soundID;
-					_fe3d.model_setVisible(PREVIEW_SPEAKER_ID, true);
-					_fe3d.sound3d_setPosition(_currentPreviewSoundID, fvec3(0.0f));
-					_fe3d.sound3d_play(_currentPreviewSoundID, -1, 0, false);
+					// Set new template sound
+					_currentTemplateSoundID = soundID;
+					_fe3d.model_setVisible(TEMPLATE_SPEAKER_ID, true);
+					_fe3d.sound3d_setPosition(_currentTemplateSoundID, fvec3(0.0f));
+					_fe3d.sound3d_play(_currentTemplateSoundID, -1, 0, false);
 					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), true);
-					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), "Sound: " + _currentPreviewSoundID.substr(1), 0.025f);
+					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), "Sound: " + _currentTemplateSoundID.substr(1), 0.025f);
 					_fe3d.misc_centerCursor();
 
 					// Add position value forms for placing without terrain
@@ -148,7 +148,7 @@ void WorldEditor::_updateSoundChoosingMenu()
 		// Iterate through every placed sound
 		for(const auto& soundID : _fe3d.sound3d_getIDs())
 		{
-			// Check if sound is not a preview
+			// Must not be template entity
 			if(soundID[0] != '@')
 			{
 				// Check if button is hovered

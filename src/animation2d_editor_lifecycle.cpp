@@ -25,9 +25,9 @@ void Animation2dEditor::load()
 	_fe3d.camera_setYaw(270.0f);
 
 	// Preview image
-	_fe3d.billboard_create(PREVIEW_BILLBOARD_ID);
-	_fe3d.billboard_setPosition(PREVIEW_BILLBOARD_ID, PREVIEW_BILLBOARD_POSITION);
-	_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
+	_fe3d.billboard_create(TEMPLATE_BILLBOARD_ID);
+	_fe3d.billboard_setPosition(TEMPLATE_BILLBOARD_ID, TEMPLATE_BILLBOARD_POSITION);
+	_fe3d.billboard_setVisible(TEMPLATE_BILLBOARD_ID, false);
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->createTextField("animationID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);

@@ -62,7 +62,7 @@ private:
 	shared_ptr<Animation2d> _getAnimation(const string& ID) const;
 
 	// STRING
-	static inline const string PREVIEW_BILLBOARD_ID = "@@preview_billboard";
+	static inline const string TEMPLATE_BILLBOARD_ID = "@@template_billboard";
 	set<pair<string, string>> _billboardAnimationsToStop;
 	set<pair<string, string>> _billboardAnimationsToStart;
 	set<pair<string, string>> _imageAnimationsToStop;
@@ -72,7 +72,7 @@ private:
 	string _currentProjectID = "";
 
 	// FVEC3
-	static inline const fvec3 PREVIEW_BILLBOARD_POSITION = fvec3(0.0f, -0.5f, -0.75f);
+	static inline const fvec3 TEMPLATE_BILLBOARD_POSITION = fvec3(0.0f, -0.5f, -0.75f);
 
 	// FLOAT
 	static inline const float CW = 0.115f;

@@ -32,7 +32,7 @@ void WorldEditor::_updateBillboardMenu()
 			sort(IDs.begin(), IDs.end());
 			for(auto& billboardID : IDs)
 			{
-				// Check if billboard is not a preview
+				// Check if billboard is not a template entity
 				if(billboardID[0] != '@')
 				{
 					// Removing the unique number from the ID
@@ -61,11 +61,11 @@ void WorldEditor::_updateBillboardPlacingMenu()
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			// Reset placing
-			if(!_currentPreviewBillboardID.empty())
+			if(!_currentTemplateBillboardID.empty())
 			{
 				_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
-				_fe3d.billboard_setVisible(_currentPreviewBillboardID, false);
-				_currentPreviewBillboardID = "";
+				_fe3d.billboard_setVisible(_currentTemplateBillboardID, false);
+				_currentTemplateBillboardID = "";
 			}
 
 			// Miscellaneous
@@ -93,12 +93,12 @@ void WorldEditor::_updateBillboardPlacingMenu()
 						_deactivatePointlight();
 						_deactivateReflection();
 
-						// Set new preview billboard
-						_currentPreviewBillboardID = billboardID;
-						_fe3d.billboard_setPosition(_currentPreviewBillboardID, fvec3(0.0f));
-						_fe3d.billboard_setVisible(_currentPreviewBillboardID, true);
+						// Set new template billboard
+						_currentTemplateBillboardID = billboardID;
+						_fe3d.billboard_setPosition(_currentTemplateBillboardID, fvec3(0.0f));
+						_fe3d.billboard_setVisible(_currentTemplateBillboardID, true);
 						_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), true);
-						_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), "Billboard: " + _currentPreviewBillboardID.substr(1), 0.025f);
+						_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), "Billboard: " + _currentTemplateBillboardID.substr(1), 0.025f);
 						_fe3d.misc_centerCursor();
 
 						// Add position value forms for placing without terrain
@@ -141,7 +141,7 @@ void WorldEditor::_updateBillboardChoosingMenu()
 		// Iterate through every placed billboard
 		for(const auto& billboardID : _fe3d.billboard_getIDs())
 		{
-			// Check if billboard is not a preview billboard
+			// Check if billboard is not a template billboard
 			if(billboardID[0] != '@')
 			{
 				// Check if button is hovered

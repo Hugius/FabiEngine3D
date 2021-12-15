@@ -24,7 +24,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 				return true;
 			}
 
-			// Validate preview sound ID
+			// Validate template sound ID
 			if(_validateFe3dSound2d("@" + arguments[1].getString(), true))
 			{
 				auto filePath = _fe3d.sound2d_getAudioPath("@" + arguments[1].getString());

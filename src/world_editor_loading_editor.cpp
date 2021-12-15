@@ -90,13 +90,13 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "SKY")
 		{
 			// Data placeholders
-			string skyID, previewID;
+			string skyID, templateID;
 
 			// Read data from file
-			iss >> skyID >> previewID;
+			iss >> skyID >> templateID;
 
 			// Create sky
-			if(_copyPreviewSky(skyID, previewID))
+			if(_copyTemplateSky(skyID, templateID))
 			{
 				// Set ID
 				if(_isEditorLoaded)
@@ -108,13 +108,13 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "TERRAIN")
 		{
 			// Data placeholders
-			string terrainID, previewID;
+			string terrainID, templateID;
 
 			// Read data from file
-			iss >> terrainID >> previewID;
+			iss >> terrainID >> templateID;
 
 			// Create terrain
-			if(_copyPreviewTerrain(terrainID, previewID))
+			if(_copyTemplateTerrain(terrainID, templateID))
 			{
 				// Set ID
 				if(_isEditorLoaded)
@@ -126,14 +126,14 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "WATER")
 		{
 			// Data placeholders
-			string waterID, previewID;
+			string waterID, templateID;
 			float height;
 
 			// Read data from file
-			iss >> waterID >> previewID >> height;
+			iss >> waterID >> templateID >> height;
 
 			// Create water
-			if(_copyPreviewWater(waterID, previewID))
+			if(_copyTemplateWater(waterID, templateID))
 			{
 				// Set ID
 				if(_isEditorLoaded)
@@ -148,7 +148,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "MODEL")
 		{
 			// Data placeholders
-			string modelID, previewID, animation3dID;
+			string modelID, templateID, animation3dID;
 			fvec3 position, rotation, size;
 			bool isFrozen;
 
@@ -172,7 +172,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 			// Read data from file
 			iss >>
-				previewID >>
+				templateID >>
 				position.x >>
 				position.y >>
 				position.z >>
@@ -191,11 +191,11 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			// Convert spaces
 			replace(animation3dID.begin(), animation3dID.end(), '?', ' ');
 
-			// Check if preview model instancing changed
-			if(_fe3d.model_isExisting(previewID))
+			// Check if template model instancing changed
+			if(_fe3d.model_isExisting(templateID))
 			{
-				if(_fe3d.model_isInstanced(previewID) && (modelID != previewID.substr(1)) ||
-				   !_fe3d.model_isInstanced(previewID) && (modelID == previewID.substr(1)))
+				if(_fe3d.model_isInstanced(templateID) && (modelID != templateID.substr(1)) ||
+				   !_fe3d.model_isInstanced(templateID) && (modelID == templateID.substr(1)))
 				{
 					Logger::throwWarning("Model instancing with ID \"" + modelID + "\" differs from base model!");
 					continue;
@@ -203,7 +203,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			}
 
 			// Create model
-			if(_copyPreviewModel(modelID, previewID, position, false))
+			if(_copyTemplateModel(modelID, templateID, position, false))
 			{
 				// Set properties
 				_fe3d.model_setBaseRotation(modelID, rotation);
@@ -264,14 +264,14 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "BILLBOARD")
 		{
 			// Data placeholders
-			string billboardID, previewID;
+			string billboardID, templateID;
 			fvec3 position, rotation;
 			fvec2 size;
 
 			// Read data from file
 			iss >>
 				billboardID >>
-				previewID >>
+				templateID >>
 				position.x >>
 				position.y >>
 				position.z >>
@@ -282,7 +282,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				size.y;
 
 			// Create billboard
-			if(_copyPreviewBillboard(billboardID, previewID, position, false))
+			if(_copyTemplateBillboard(billboardID, templateID, position, false))
 			{
 				_fe3d.billboard_setRotation(billboardID, rotation);
 				_fe3d.billboard_setSize(billboardID, size);
@@ -291,14 +291,14 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "SOUND")
 		{
 			// Data placeholders
-			string soundID, previewID;
+			string soundID, templateID;
 			fvec3 position;
 			float maxVolume, maxDistance;
 
 			// Read data from file
 			iss >>
 				soundID >>
-				previewID >>
+				templateID >>
 				position.x >>
 				position.y >>
 				position.z >>
@@ -326,7 +326,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			}
 
 			// Create sound
-			if(_copyPreviewSound(soundID, previewID, position, false))
+			if(_copyTemplateSound(soundID, templateID, position, false))
 			{
 				_fe3d.sound3d_setMaxVolume(soundID, maxVolume);
 				_fe3d.sound3d_setMaxDistance(soundID, maxDistance);

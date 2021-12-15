@@ -174,9 +174,9 @@ void WorldEditor::_updateChoiceMenu()
 		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
 		{
 			// Stop placing
-			_currentPreviewModelID = "";
-			_currentPreviewBillboardID = "";
-			_currentPreviewSoundID = "";
+			_currentTemplateModelID = "";
+			_currentTemplateBillboardID = "";
+			_currentTemplateSoundID = "";
 			_isPlacingPointlight = false;
 			_isPlacingSpotlight = false;
 			_isPlacingReflection = false;
@@ -203,9 +203,9 @@ void WorldEditor::_updateChoiceMenu()
 		if(_gui.getGlobalScreen()->isAnswerFormDenied("back"))
 		{
 			// Stop placing
-			_currentPreviewModelID = "";
-			_currentPreviewBillboardID = "";
-			_currentPreviewSoundID = "";
+			_currentTemplateModelID = "";
+			_currentTemplateBillboardID = "";
+			_currentTemplateSoundID = "";
 			_isPlacingPointlight = false;
 			_isPlacingSpotlight = false;
 			_isPlacingReflection = false;

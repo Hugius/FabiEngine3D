@@ -74,7 +74,7 @@ void SoundEditor::_updateChoiceMenu()
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			// Stop sound preview
+			// Stop sound
 			if(isPlaying)
 			{
 				_fe3d.sound2d_stop(_currentSoundID, 0);

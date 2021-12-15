@@ -24,11 +24,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 				return true;
 			}
 
-			// Validate preview model ID
+			// Validate template model ID
 			if(_validateFe3dModel("@" + arguments[1].getString(), true))
 			{
-				_worldEditor.copyPreviewModel(arguments[0].getString(), ("@" + arguments[1].getString()),
-											  fvec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
+				_worldEditor.copyTemplateModel(arguments[0].getString(), ("@" + arguments[1].getString()),
+											   fvec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

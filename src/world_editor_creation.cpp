@@ -1,7 +1,22 @@
 #include "world_editor.hpp"
 #include "logger.hpp"
 
-const bool WorldEditor::_copyPreviewSky(const string& newID, const string& previewID)
+void WorldEditor::copyTemplateModel(const string& newID, const string& templateID, fvec3 position)
+{
+	_copyTemplateModel(newID, templateID, position, true);
+}
+
+void WorldEditor::copyTemplateBillboard(const string& newID, const string& templateID, fvec3 position)
+{
+	_copyTemplateBillboard(newID, templateID, position, true);
+}
+
+void WorldEditor::copyTemplateSound(const string& newID, const string& templateID, fvec3 position)
+{
+	_copyTemplateSound(newID, templateID, position, true);
+}
+
+const bool WorldEditor::_copyTemplateSky(const string& newID, const string& templateID)
 {
 	// Error checking
 	if(_fe3d.sky_isExisting(newID))
@@ -9,7 +24,7 @@ const bool WorldEditor::_copyPreviewSky(const string& newID, const string& previ
 		Logger::throwWarning("World sky with ID \"" + newID + "\" already exists!");
 		return false;
 	}
-	if(!_fe3d.sky_isExisting(previewID))
+	if(!_fe3d.sky_isExisting(templateID))
 	{
 		Logger::throwWarning("Editor sky of world sky with ID \"" + newID + "\" not existing anymore!");
 		return false;
@@ -17,10 +32,10 @@ const bool WorldEditor::_copyPreviewSky(const string& newID, const string& previ
 
 	// Create new sky
 	_fe3d.sky_create(newID);
-	_fe3d.sky_setCubeMaps(newID, _fe3d.sky_getCubeMapPaths(previewID));
-	_fe3d.sky_setLightness(newID, _fe3d.sky_getLightness(previewID));
-	_fe3d.sky_setRotation(newID, _fe3d.sky_getRotation(previewID));
-	_fe3d.sky_setColor(newID, _fe3d.sky_getColor(previewID));
+	_fe3d.sky_setCubeMaps(newID, _fe3d.sky_getCubeMapPaths(templateID));
+	_fe3d.sky_setLightness(newID, _fe3d.sky_getLightness(templateID));
+	_fe3d.sky_setRotation(newID, _fe3d.sky_getRotation(templateID));
+	_fe3d.sky_setColor(newID, _fe3d.sky_getColor(templateID));
 	_fe3d.sky_selectMainSky(newID);
 
 	// Save ID
@@ -29,7 +44,7 @@ const bool WorldEditor::_copyPreviewSky(const string& newID, const string& previ
 	return true;
 }
 
-const bool WorldEditor::_copyPreviewTerrain(const string& newID, const string& previewID)
+const bool WorldEditor::_copyTemplateTerrain(const string& newID, const string& templateID)
 {
 	// Error checking
 	if(_fe3d.terrain_isExisting(newID))
@@ -37,7 +52,7 @@ const bool WorldEditor::_copyPreviewTerrain(const string& newID, const string& p
 		Logger::throwWarning("World terrain with ID \"" + newID + "\" already exists!");
 		return false;
 	}
-	if(!_fe3d.terrain_isExisting(previewID))
+	if(!_fe3d.terrain_isExisting(templateID))
 	{
 		Logger::throwWarning("Editor terrain of world terrain with ID \"" + newID + "\" not existing anymore!");
 		return false;
@@ -50,72 +65,72 @@ const bool WorldEditor::_copyPreviewTerrain(const string& newID, const string& p
 	}
 
 	// Create terrain entity
-	_fe3d.terrain_create(newID, _fe3d.terrain_getHeightMapPath(previewID));
+	_fe3d.terrain_create(newID, _fe3d.terrain_getHeightMapPath(templateID));
 	_fe3d.terrain_select(newID);
 
 	// Fill terrain entity
-	_fe3d.terrain_setMaxHeight(newID, _fe3d.terrain_getMaxHeight(previewID));
-	_fe3d.terrain_setTextureRepeat(newID, _fe3d.terrain_getTextureRepeat(previewID));
-	_fe3d.terrain_setLightness(newID, _fe3d.terrain_getLightness(previewID));
-	_fe3d.terrain_setRedRepeat(newID, _fe3d.terrain_getRedRepeat(previewID));
-	_fe3d.terrain_setGreenRepeat(newID, _fe3d.terrain_getGreenRepeat(previewID));
-	_fe3d.terrain_setBlueRepeat(newID, _fe3d.terrain_getBlueRepeat(previewID));
-	_fe3d.terrain_setSpecular(newID, _fe3d.terrain_isSpecular(previewID));
-	_fe3d.terrain_setSpecularShininess(newID, _fe3d.terrain_getSpecularShininess(previewID));
-	_fe3d.terrain_setSpecularIntensity(newID, _fe3d.terrain_getSpecularIntensity(previewID));
+	_fe3d.terrain_setMaxHeight(newID, _fe3d.terrain_getMaxHeight(templateID));
+	_fe3d.terrain_setTextureRepeat(newID, _fe3d.terrain_getTextureRepeat(templateID));
+	_fe3d.terrain_setLightness(newID, _fe3d.terrain_getLightness(templateID));
+	_fe3d.terrain_setRedRepeat(newID, _fe3d.terrain_getRedRepeat(templateID));
+	_fe3d.terrain_setGreenRepeat(newID, _fe3d.terrain_getGreenRepeat(templateID));
+	_fe3d.terrain_setBlueRepeat(newID, _fe3d.terrain_getBlueRepeat(templateID));
+	_fe3d.terrain_setSpecular(newID, _fe3d.terrain_isSpecular(templateID));
+	_fe3d.terrain_setSpecularShininess(newID, _fe3d.terrain_getSpecularShininess(templateID));
+	_fe3d.terrain_setSpecularIntensity(newID, _fe3d.terrain_getSpecularIntensity(templateID));
 
 	// Diffuse map
-	if(_fe3d.terrain_hasDiffuseMap(previewID))
+	if(_fe3d.terrain_hasDiffuseMap(templateID))
 	{
-		_fe3d.terrain_setDiffuseMap(newID, _fe3d.terrain_getDiffuseMapPath(previewID));
+		_fe3d.terrain_setDiffuseMap(newID, _fe3d.terrain_getDiffuseMapPath(templateID));
 	}
 
 	// Normal map
-	if(_fe3d.terrain_hasNormalMap(previewID))
+	if(_fe3d.terrain_hasNormalMap(templateID))
 	{
-		_fe3d.terrain_setNormalMap(newID, _fe3d.terrain_getNormalMapPath(previewID));
+		_fe3d.terrain_setNormalMap(newID, _fe3d.terrain_getNormalMapPath(templateID));
 	}
 
 	// Normal map R
-	if(_fe3d.terrain_hasNormalMapR(previewID))
+	if(_fe3d.terrain_hasNormalMapR(templateID))
 	{
-		_fe3d.terrain_setNormalMapR(newID, _fe3d.terrain_getNormalMapPathR(previewID));
+		_fe3d.terrain_setNormalMapR(newID, _fe3d.terrain_getNormalMapPathR(templateID));
 	}
 
 	// Normal map G
-	if(_fe3d.terrain_hasNormalMapG(previewID))
+	if(_fe3d.terrain_hasNormalMapG(templateID))
 	{
-		_fe3d.terrain_setNormalMapG(newID, _fe3d.terrain_getNormalMapPathG(previewID));
+		_fe3d.terrain_setNormalMapG(newID, _fe3d.terrain_getNormalMapPathG(templateID));
 	}
 
 	// Normal map B
-	if(_fe3d.terrain_hasNormalMapB(previewID))
+	if(_fe3d.terrain_hasNormalMapB(templateID))
 	{
-		_fe3d.terrain_setNormalMapB(newID, _fe3d.terrain_getNormalMapPathB(previewID));
+		_fe3d.terrain_setNormalMapB(newID, _fe3d.terrain_getNormalMapPathB(templateID));
 	}
 
 	// Blend map
-	if(_fe3d.terrain_hasBlendMap(previewID))
+	if(_fe3d.terrain_hasBlendMap(templateID))
 	{
-		_fe3d.terrain_setBlendMap(newID, _fe3d.terrain_getBlendMapPath(previewID));
+		_fe3d.terrain_setBlendMap(newID, _fe3d.terrain_getBlendMapPath(templateID));
 	}
 
 	// Blend map red
-	if(_fe3d.terrain_hasDiffuseMapR(previewID))
+	if(_fe3d.terrain_hasDiffuseMapR(templateID))
 	{
-		_fe3d.terrain_setDiffuseMapR(newID, _fe3d.terrain_getDiffuseMapPathR(previewID));
+		_fe3d.terrain_setDiffuseMapR(newID, _fe3d.terrain_getDiffuseMapPathR(templateID));
 	}
 
 	// Blend map green
-	if(_fe3d.terrain_hasDiffuseMapG(previewID))
+	if(_fe3d.terrain_hasDiffuseMapG(templateID))
 	{
-		_fe3d.terrain_setDiffuseMapG(newID, _fe3d.terrain_getDiffuseMapPathG(previewID));
+		_fe3d.terrain_setDiffuseMapG(newID, _fe3d.terrain_getDiffuseMapPathG(templateID));
 	}
 
 	// Blend map blue
-	if(_fe3d.terrain_hasDiffuseMapB(previewID))
+	if(_fe3d.terrain_hasDiffuseMapB(templateID))
 	{
-		_fe3d.terrain_setDiffuseMapB(newID, _fe3d.terrain_getDiffuseMapPathB(previewID));
+		_fe3d.terrain_setDiffuseMapB(newID, _fe3d.terrain_getDiffuseMapPathB(templateID));
 	}
 
 	// Save ID
@@ -124,7 +139,7 @@ const bool WorldEditor::_copyPreviewTerrain(const string& newID, const string& p
 	return true;
 }
 
-const bool WorldEditor::_copyPreviewWater(const string& newID, const string& previewID)
+const bool WorldEditor::_copyTemplateWater(const string& newID, const string& templateID)
 {
 	// Error checking
 	if(_fe3d.water_isExisting(newID))
@@ -132,7 +147,7 @@ const bool WorldEditor::_copyPreviewWater(const string& newID, const string& pre
 		Logger::throwWarning("World water with ID \"" + newID + "\" already exists!");
 		return false;
 	}
-	if(!_fe3d.water_isExisting(previewID))
+	if(!_fe3d.water_isExisting(templateID))
 	{
 		Logger::throwWarning("Editor water of world water with ID \"" + newID + "\" not existing anymore!");
 		return false;
@@ -149,36 +164,36 @@ const bool WorldEditor::_copyPreviewWater(const string& newID, const string& pre
 	_fe3d.water_select(newID);
 
 	// Fill water entity
-	_fe3d.water_setHeight(newID, _fe3d.water_getHeight(previewID));
-	_fe3d.water_setSize(newID, _fe3d.water_getSize(previewID));
-	_fe3d.water_setSpecular(newID, _fe3d.water_isSpecular(previewID));
-	_fe3d.water_setReflective(newID, _fe3d.water_isReflective(previewID));
-	_fe3d.water_setRefractive(newID, _fe3d.water_isRefractive(previewID));
-	_fe3d.water_setWaveHeight(newID, _fe3d.water_getWaveHeight(previewID));
-	_fe3d.water_setQuality(newID, _fe3d.water_getQuality(previewID));
-	_fe3d.water_setSpecularShininess(newID, _fe3d.water_getSpecularShininess(previewID));
-	_fe3d.water_setSpecularIntensity(newID, _fe3d.water_getSpecularIntensity(previewID));
-	_fe3d.water_setTransparency(newID, _fe3d.water_getTransparency(previewID));
-	_fe3d.water_setColor(newID, _fe3d.water_getColor(previewID));
-	_fe3d.water_setTextureRepeat(newID, _fe3d.water_getTextureRepeat(previewID));
-	_fe3d.water_setSpeed(newID, _fe3d.water_getSpeed(previewID));
+	_fe3d.water_setHeight(newID, _fe3d.water_getHeight(templateID));
+	_fe3d.water_setSize(newID, _fe3d.water_getSize(templateID));
+	_fe3d.water_setSpecular(newID, _fe3d.water_isSpecular(templateID));
+	_fe3d.water_setReflective(newID, _fe3d.water_isReflective(templateID));
+	_fe3d.water_setRefractive(newID, _fe3d.water_isRefractive(templateID));
+	_fe3d.water_setWaveHeight(newID, _fe3d.water_getWaveHeight(templateID));
+	_fe3d.water_setQuality(newID, _fe3d.water_getQuality(templateID));
+	_fe3d.water_setSpecularShininess(newID, _fe3d.water_getSpecularShininess(templateID));
+	_fe3d.water_setSpecularIntensity(newID, _fe3d.water_getSpecularIntensity(templateID));
+	_fe3d.water_setTransparency(newID, _fe3d.water_getTransparency(templateID));
+	_fe3d.water_setColor(newID, _fe3d.water_getColor(templateID));
+	_fe3d.water_setTextureRepeat(newID, _fe3d.water_getTextureRepeat(templateID));
+	_fe3d.water_setSpeed(newID, _fe3d.water_getSpeed(templateID));
 
 	// DUDV map
-	if(_fe3d.water_hasDudvMap(previewID))
+	if(_fe3d.water_hasDudvMap(templateID))
 	{
-		_fe3d.water_setDudvMap(newID, _fe3d.water_getDudvMapPath(previewID));
+		_fe3d.water_setDudvMap(newID, _fe3d.water_getDudvMapPath(templateID));
 	}
 
 	// Normal map
-	if(_fe3d.water_hasNormalMap(previewID))
+	if(_fe3d.water_hasNormalMap(templateID))
 	{
-		_fe3d.water_setNormalMap(newID, _fe3d.water_getNormalMapPath(previewID));
+		_fe3d.water_setNormalMap(newID, _fe3d.water_getNormalMapPath(templateID));
 	}
 
 	// Displacement map
-	if(_fe3d.water_hasDisplacementMap(previewID))
+	if(_fe3d.water_hasDisplacementMap(templateID))
 	{
-		_fe3d.water_setDisplacementMap(newID, _fe3d.water_getDisplacementMapPath(previewID));
+		_fe3d.water_setDisplacementMap(newID, _fe3d.water_getDisplacementMapPath(templateID));
 	}
 
 	// Save ID
@@ -187,116 +202,116 @@ const bool WorldEditor::_copyPreviewWater(const string& newID, const string& pre
 	return true;
 }
 
-const bool WorldEditor::_copyPreviewModel(const string& newID, const string& previewID, fvec3 position, bool isFromOutside)
+const bool WorldEditor::_copyTemplateModel(const string& newID, const string& templateID, fvec3 position, bool isFromOutside)
 {
 	// Error checking
-	if(_fe3d.model_isExisting(newID) && !_fe3d.model_isInstanced(previewID))
+	if(_fe3d.model_isExisting(newID) && !_fe3d.model_isInstanced(templateID))
 	{
 		Logger::throwWarning("Model with ID \"" + newID + "\" already exists!");
 		return false;
 	}
-	if(!_fe3d.model_isExisting(previewID))
+	if(!_fe3d.model_isExisting(templateID))
 	{
 		Logger::throwWarning("Editor model of model with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
 	// Create model entity
-	_fe3d.model_create(newID, _fe3d.model_getMeshPath(previewID));
+	_fe3d.model_create(newID, _fe3d.model_getMeshPath(templateID));
 
 	// Set instancing
-	if(_fe3d.model_isInstanced(previewID))
+	if(_fe3d.model_isInstanced(templateID))
 	{
 		_fe3d.model_enableInstancing(newID, {fvec3(0.0f)});
 	}
 
 	// Set properties
 	_fe3d.model_setBasePosition(newID, position);
-	_fe3d.model_setBaseSize(newID, _fe3d.model_getBaseSize(previewID));
-	_fe3d.model_setLevelOfDetailSize(newID, _fe3d.model_getBaseSize(previewID));
-	_fe3d.model_setFrozen(newID, _fe3d.model_isFrozen(previewID));
-	_fe3d.model_setLevelOfDetailEntityID(newID, _fe3d.model_getLevelOfDetailEntityID(previewID));
-	_fe3d.model_setFaceCulled(newID, _fe3d.model_isFaceCulled(previewID));
-	_fe3d.model_setRotationOrder(newID, _fe3d.model_getRotationOrder(previewID));
+	_fe3d.model_setBaseSize(newID, _fe3d.model_getBaseSize(templateID));
+	_fe3d.model_setLevelOfDetailSize(newID, _fe3d.model_getBaseSize(templateID));
+	_fe3d.model_setFrozen(newID, _fe3d.model_isFrozen(templateID));
+	_fe3d.model_setLevelOfDetailEntityID(newID, _fe3d.model_getLevelOfDetailEntityID(templateID));
+	_fe3d.model_setFaceCulled(newID, _fe3d.model_isFaceCulled(templateID));
+	_fe3d.model_setRotationOrder(newID, _fe3d.model_getRotationOrder(templateID));
 
 	// Set parts
-	for(const auto& partID : _fe3d.model_getPartIDs(previewID))
+	for(const auto& partID : _fe3d.model_getPartIDs(templateID))
 	{
 		// Set diffuse map
-		if(_fe3d.model_hasDiffuseMap(previewID, partID))
+		if(_fe3d.model_hasDiffuseMap(templateID, partID))
 		{
-			_fe3d.model_setDiffuseMap(newID, partID, _fe3d.model_getDiffuseMapPath(previewID, partID));
+			_fe3d.model_setDiffuseMap(newID, partID, _fe3d.model_getDiffuseMapPath(templateID, partID));
 		}
 
 		// Set emission map
-		if(_fe3d.model_hasEmissionMap(previewID, partID))
+		if(_fe3d.model_hasEmissionMap(templateID, partID))
 		{
-			_fe3d.model_setEmissionMap(newID, partID, _fe3d.model_getEmissionMapPath(previewID, partID));
+			_fe3d.model_setEmissionMap(newID, partID, _fe3d.model_getEmissionMapPath(templateID, partID));
 		}
 
 		// Set specular map
-		if(_fe3d.model_hasSpecularMap(previewID, partID))
+		if(_fe3d.model_hasSpecularMap(templateID, partID))
 		{
-			_fe3d.model_setSpecularMap(newID, partID, _fe3d.model_getSpecularMapPath(previewID, partID));
+			_fe3d.model_setSpecularMap(newID, partID, _fe3d.model_getSpecularMapPath(templateID, partID));
 		}
 
 		// Set reflection map
-		if(_fe3d.model_hasReflectionMap(previewID, partID))
+		if(_fe3d.model_hasReflectionMap(templateID, partID))
 		{
-			_fe3d.model_setReflectionMap(newID, partID, _fe3d.model_getReflectionMapPath(previewID, partID));
+			_fe3d.model_setReflectionMap(newID, partID, _fe3d.model_getReflectionMapPath(templateID, partID));
 		}
 
 		// Set normal map
-		if(_fe3d.model_hasNormalMap(previewID, partID))
+		if(_fe3d.model_hasNormalMap(templateID, partID))
 		{
-			_fe3d.model_setNormalMap(newID, partID, _fe3d.model_getNormalMapPath(previewID, partID));
+			_fe3d.model_setNormalMap(newID, partID, _fe3d.model_getNormalMapPath(templateID, partID));
 		}
 
 		// Set properties
-		_fe3d.model_setLightness(newID, partID, _fe3d.model_getLightness(previewID, partID));
-		_fe3d.model_setSpecular(newID, partID, _fe3d.model_isSpecular(previewID, partID));
-		_fe3d.model_setSpecularShininess(newID, partID, _fe3d.model_getSpecularShininess(previewID, partID));
-		_fe3d.model_setSpecularIntensity(newID, partID, _fe3d.model_getSpecularIntensity(previewID, partID));
-		_fe3d.model_setReflective(newID, partID, _fe3d.model_isReflective(previewID, partID));
-		_fe3d.model_setReflectionType(newID, partID, _fe3d.model_getReflectionType(previewID, partID));
-		_fe3d.model_setReflectivity(newID, partID, _fe3d.model_getReflectivity(previewID, partID));
-		_fe3d.model_setColor(newID, partID, _fe3d.model_getColor(previewID, partID));
-		_fe3d.model_setTextureRepeat(newID, partID, _fe3d.model_getTextureRepeat(previewID, partID));
+		_fe3d.model_setLightness(newID, partID, _fe3d.model_getLightness(templateID, partID));
+		_fe3d.model_setSpecular(newID, partID, _fe3d.model_isSpecular(templateID, partID));
+		_fe3d.model_setSpecularShininess(newID, partID, _fe3d.model_getSpecularShininess(templateID, partID));
+		_fe3d.model_setSpecularIntensity(newID, partID, _fe3d.model_getSpecularIntensity(templateID, partID));
+		_fe3d.model_setReflective(newID, partID, _fe3d.model_isReflective(templateID, partID));
+		_fe3d.model_setReflectionType(newID, partID, _fe3d.model_getReflectionType(templateID, partID));
+		_fe3d.model_setReflectivity(newID, partID, _fe3d.model_getReflectivity(templateID, partID));
+		_fe3d.model_setColor(newID, partID, _fe3d.model_getColor(templateID, partID));
+		_fe3d.model_setTextureRepeat(newID, partID, _fe3d.model_getTextureRepeat(templateID, partID));
 	}
 
 	// Bind AABB entities to model entity
-	for(const auto& previewAabbID : _fe3d.aabb_getChildIDs(previewID, AabbParentEntityType::MODEL))
+	for(const auto& templateAabbID : _fe3d.aabb_getChildIDs(templateID, AabbParentEntityType::MODEL))
 	{
-		const string newAabbID = (newID + "@" + previewAabbID.substr(string(previewID + "_").size()));
+		const string newAabbID = (newID + "@" + templateAabbID.substr(string(templateID + "_").size()));
 		_fe3d.aabb_create(newAabbID);
 		_fe3d.aabb_setParentEntityID(newAabbID, newID);
 		_fe3d.aabb_setParentEntityType(newAabbID, AabbParentEntityType::MODEL);
-		_fe3d.aabb_setLocalPosition(newAabbID, _fe3d.aabb_getPosition(previewAabbID));
-		_fe3d.aabb_setLocalSize(newAabbID, _fe3d.aabb_getSize(previewAabbID));
+		_fe3d.aabb_setLocalPosition(newAabbID, _fe3d.aabb_getPosition(templateAabbID));
+		_fe3d.aabb_setLocalSize(newAabbID, _fe3d.aabb_getSize(templateAabbID));
 	}
 
 	// Save initial transformation
 	if(_isEditorLoaded)
 	{
-		_initialModelPosition[newID] = _fe3d.model_getBasePosition(previewID);
-		_initialModelRotation[newID] = _fe3d.model_getBaseRotation(previewID);
-		_initialModelSize[newID] = _fe3d.model_getBaseSize(previewID);
+		_initialModelPosition[newID] = _fe3d.model_getBasePosition(templateID);
+		_initialModelRotation[newID] = _fe3d.model_getBaseRotation(templateID);
+		_initialModelSize[newID] = _fe3d.model_getBaseSize(templateID);
 	}
 
 	// Save ID
 	if(isFromOutside)
 	{
-		_outsideLoadedModelIDs[newID] = previewID;
+		_outsideLoadedModelIDs[newID] = templateID;
 	}
 	else
 	{
-		_loadedModelIDs[newID] = previewID;
+		_loadedModelIDs[newID] = templateID;
 	}
 
 	return true;
 }
 
-const bool WorldEditor::_copyPreviewBillboard(const string& newID, const string& previewID, fvec3 position, bool isFromOutside)
+const bool WorldEditor::_copyTemplateBillboard(const string& newID, const string& templateID, fvec3 position, bool isFromOutside)
 {
 	// Error checking
 	if(_fe3d.billboard_isExisting(newID))
@@ -304,7 +319,7 @@ const bool WorldEditor::_copyPreviewBillboard(const string& newID, const string&
 		Logger::throwWarning("Billboard with ID \"" + newID + "\" already exists!");
 		return false;
 	}
-	if(!_fe3d.billboard_isExisting(previewID))
+	if(!_fe3d.billboard_isExisting(templateID))
 	{
 		Logger::throwWarning("Editor billboard of billboard with ID \"" + newID + "\" not existing anymore!");
 		return false;
@@ -319,48 +334,48 @@ const bool WorldEditor::_copyPreviewBillboard(const string& newID, const string&
 	_fe3d.aabb_setParentEntityType(newID, AabbParentEntityType::BILLBOARD);
 
 	// Diffuse map
-	if(_fe3d.billboard_hasDiffuseMap(previewID) && !_fe3d.billboard_isTextual(previewID))
+	if(_fe3d.billboard_hasDiffuseMap(templateID) && !_fe3d.billboard_isTextual(templateID))
 	{
-		_fe3d.billboard_setDiffuseMap(newID, _fe3d.billboard_getDiffuseMapPath(previewID));
+		_fe3d.billboard_setDiffuseMap(newID, _fe3d.billboard_getDiffuseMapPath(templateID));
 	}
 
 	// Emission map
-	if(_fe3d.billboard_hasEmissionMap(previewID))
+	if(_fe3d.billboard_hasEmissionMap(templateID))
 	{
-		_fe3d.billboard_setEmissionMap(newID, _fe3d.billboard_getEmissionMapPath(previewID));
+		_fe3d.billboard_setEmissionMap(newID, _fe3d.billboard_getEmissionMapPath(templateID));
 	}
 
 	// Text
-	if(_fe3d.billboard_isTextual(previewID))
+	if(_fe3d.billboard_isTextual(templateID))
 	{
-		_fe3d.billboard_setFont(newID, _fe3d.billboard_getFontPath(previewID));
-		_fe3d.billboard_setTextContent(newID, _fe3d.billboard_getTextContent(previewID));
+		_fe3d.billboard_setFont(newID, _fe3d.billboard_getFontPath(templateID));
+		_fe3d.billboard_setTextContent(newID, _fe3d.billboard_getTextContent(templateID));
 	}
 
 	// Set properties
 	_fe3d.billboard_setPosition(newID, position);
-	_fe3d.billboard_setSize(newID, _fe3d.billboard_getSize(previewID));
-	_fe3d.billboard_setFacingCameraX(newID, _fe3d.billboard_isFacingCameraX(previewID));
-	_fe3d.billboard_setFacingCameraY(newID, _fe3d.billboard_isFacingCameraY(previewID));
-	_fe3d.billboard_setColor(newID, _fe3d.billboard_getColor(previewID));
-	_fe3d.billboard_setShadowed(newID, _fe3d.billboard_isShadowed(previewID));
-	_fe3d.billboard_setReflected(newID, _fe3d.billboard_isReflected(previewID));
-	_fe3d.billboard_setLightness(newID, _fe3d.billboard_getLightness(previewID));
+	_fe3d.billboard_setSize(newID, _fe3d.billboard_getSize(templateID));
+	_fe3d.billboard_setFacingCameraX(newID, _fe3d.billboard_isFacingCameraX(templateID));
+	_fe3d.billboard_setFacingCameraY(newID, _fe3d.billboard_isFacingCameraY(templateID));
+	_fe3d.billboard_setColor(newID, _fe3d.billboard_getColor(templateID));
+	_fe3d.billboard_setShadowed(newID, _fe3d.billboard_isShadowed(templateID));
+	_fe3d.billboard_setReflected(newID, _fe3d.billboard_isReflected(templateID));
+	_fe3d.billboard_setLightness(newID, _fe3d.billboard_getLightness(templateID));
 
 	// Save ID
 	if(isFromOutside)
 	{
-		_outsideLoadedBillboardIDs[newID] = previewID;
+		_outsideLoadedBillboardIDs[newID] = templateID;
 	}
 	else
 	{
-		_loadedBillboardIDs[newID] = previewID;
+		_loadedBillboardIDs[newID] = templateID;
 	}
 
 	return true;
 }
 
-const bool WorldEditor::_copyPreviewSound(const string& newID, const string& previewID, fvec3 position, bool isFromOutside)
+const bool WorldEditor::_copyTemplateSound(const string& newID, const string& templateID, fvec3 position, bool isFromOutside)
 {
 	// Error checking
 	if(_fe3d.sound3d_isExisting(newID))
@@ -368,24 +383,24 @@ const bool WorldEditor::_copyPreviewSound(const string& newID, const string& pre
 		Logger::throwWarning("3D sound with ID \"" + newID + "\" already exists!");
 		return false;
 	}
-	if(!_fe3d.sound2d_isExisting(previewID))
+	if(!_fe3d.sound2d_isExisting(templateID))
 	{
 		Logger::throwWarning("2D sound with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
 	// Create sound
-	_fe3d.sound3d_create(newID, _fe3d.sound2d_getAudioPath(previewID));
+	_fe3d.sound3d_create(newID, _fe3d.sound2d_getAudioPath(templateID));
 	_fe3d.sound3d_setPosition(newID, position);
 
 	// Save ID
 	if(isFromOutside)
 	{
-		_outsideLoadedSoundIDs[newID] = previewID;
+		_outsideLoadedSoundIDs[newID] = templateID;
 	}
 	else
 	{
-		_loadedSoundIDs[newID] = previewID;
+		_loadedSoundIDs[newID] = templateID;
 	}
 
 	return true;

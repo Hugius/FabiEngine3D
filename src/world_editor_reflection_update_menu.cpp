@@ -16,7 +16,7 @@ void WorldEditor::_updateReflectionMenu()
 			// Reset placing
 			if(_isPlacingReflection)
 			{
-				_fe3d.model_setVisible(PREVIEW_CAMERA_ID, false);
+				_fe3d.model_setVisible(TEMPLATE_CAMERA_ID, false);
 				_isPlacingReflection = false;
 			}
 
@@ -37,10 +37,10 @@ void WorldEditor::_updateReflectionMenu()
 			_deactivateSpotlight();
 			_deactivateReflection();
 
-			// Set new preview reflection
+			// Set new template reflection
 			_isPlacingReflection = true;
-			_fe3d.model_setVisible(PREVIEW_CAMERA_ID, true);
-			_fe3d.reflection_setPosition(PREVIEW_CAMERA_ID, fvec3(0.0f));
+			_fe3d.model_setVisible(TEMPLATE_CAMERA_ID, true);
+			_fe3d.reflection_setPosition(TEMPLATE_CAMERA_ID, fvec3(0.0f));
 			_fe3d.misc_centerCursor();
 
 			// Add position value forms for placing without terrain
@@ -63,7 +63,7 @@ void WorldEditor::_updateReflectionMenu()
 			sort(IDs.begin(), IDs.end());
 			for(auto& reflectionID : IDs)
 			{
-				// Check if reflection is not a preview
+				// Must not be template entity
 				if(reflectionID[0] != '@')
 				{
 					// Removing the unique number from the ID
@@ -103,7 +103,7 @@ void WorldEditor::_updateReflectionChoosingMenu()
 		// Iterate through every placed reflection
 		for(const auto& reflectionID : _fe3d.reflection_getIDs())
 		{
-			// Check if reflection is not a preview
+			// Must not be template entity
 			if(reflectionID[0] != '@')
 			{
 				// Check if button is hovered

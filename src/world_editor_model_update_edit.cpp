@@ -6,7 +6,7 @@ void WorldEditor::_updateModelEditing()
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
 	// User must not be placing anything
-	if(_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
+	if(_currentTemplateModelID.empty() && _currentTemplateBillboardID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
 		// Reset selected model from last frame
 		if(!_dontResetSelectedModel)
@@ -24,7 +24,7 @@ void WorldEditor::_updateModelEditing()
 		// Check if user selected a model
 		for(const auto& ID : _fe3d.model_getIDs())
 		{
-			// Must not be preview entity
+			// Must not be template entity
 			if(ID[0] != '@')
 			{
 				bool hovered = (hoveredID.size() >= ID.size()) && (hoveredID.substr(0, ID.size()) == ID);

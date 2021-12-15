@@ -49,8 +49,8 @@ void Animation2dEditor::_updateAnimationCreating()
 						_currentAnimationID = newAnimationID;
 
 						// Show preview billboard
-						_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
-						_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
+						_fe3d.billboard_setDiffuseMap(TEMPLATE_BILLBOARD_ID, "");
+						_fe3d.billboard_setVisible(TEMPLATE_BILLBOARD_ID, true);
 
 						// Miscellaneous
 						_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), "Animation: " + newAnimationID, 0.025f);
@@ -98,8 +98,8 @@ void Animation2dEditor::_updateAnimationChoosing()
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
 
 					// Show preview billboard
-					_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, _getAnimation(_currentAnimationID)->getPreviewTexturePath());
-					_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
+					_fe3d.billboard_setDiffuseMap(TEMPLATE_BILLBOARD_ID, _getAnimation(_currentAnimationID)->getPreviewTexturePath());
+					_fe3d.billboard_setVisible(TEMPLATE_BILLBOARD_ID, true);
 
 					// Miscellaneous
 					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), "Animation: " + selectedButtonID, 0.025f);
@@ -137,8 +137,8 @@ void Animation2dEditor::_updateAnimationDeleting()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation2dEditorMenuMain");
 
 			// Hide preview billboard
-			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
-			_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
+			_fe3d.billboard_setDiffuseMap(TEMPLATE_BILLBOARD_ID, "");
+			_fe3d.billboard_setVisible(TEMPLATE_BILLBOARD_ID, false);
 
 			// Delete animation
 			_deleteAnimation(_currentAnimationID);

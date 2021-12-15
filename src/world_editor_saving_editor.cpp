@@ -59,13 +59,13 @@ const bool WorldEditor::saveEditorWorldToFile()
 	if(!skyID.empty())
 	{
 		// Data to save
-		string previewID = ("@" + skyID);
+		string templateID = ("@" + skyID);
 
 		// Write data
 		file <<
 			"SKY " <<
 			skyID << " " <<
-			previewID << endl;
+			templateID << endl;
 	}
 
 	// Terrain
@@ -73,13 +73,13 @@ const bool WorldEditor::saveEditorWorldToFile()
 	if(!terrainID.empty())
 	{
 		// Data to save
-		string previewID = ("@" + terrainID);
+		string templateID = ("@" + terrainID);
 
 		// Write data
 		file <<
 			"TERRAIN " <<
 			terrainID << " " <<
-			previewID << endl;
+			templateID << endl;
 	}
 
 	// Water
@@ -87,14 +87,14 @@ const bool WorldEditor::saveEditorWorldToFile()
 	if(!waterID.empty())
 	{
 		// Data to save
-		string previewID = ("@" + waterID);
+		string templateID = ("@" + waterID);
 		auto height = _fe3d.water_getHeight(waterID);
 
 		// Write data
 		file <<
 			"WATER " <<
 			waterID << " " <<
-			previewID << " " <<
+			templateID << " " <<
 			height << endl;
 	}
 
@@ -142,14 +142,14 @@ const bool WorldEditor::saveEditorWorldToFile()
 			// Convert spaces
 			replace(animationID.begin(), animationID.end(), ' ', '?');
 
-			// Extract preview ID
-			string previewID = _loadedModelIDs.at(modelID);
+			// Extract template ID
+			string templateID = _loadedModelIDs.at(modelID);
 
 			// Write main data
 			file <<
 				"MODEL " <<
 				modelID << " " <<
-				previewID << " " <<
+				templateID << " " <<
 				position.x << " " <<
 				position.y << " " <<
 				position.z << " " <<
@@ -206,14 +206,14 @@ const bool WorldEditor::saveEditorWorldToFile()
 			auto rotation = _fe3d.billboard_getRotation(billboardID);
 			auto size = _fe3d.billboard_getSize(billboardID);
 
-			// Extract preview ID
-			string previewID = _loadedBillboardIDs.at(billboardID);
+			// Extract template ID
+			string templateID = _loadedBillboardIDs.at(billboardID);
 
 			// Write data
 			file <<
 				"BILLBOARD " <<
 				billboardID << " " <<
-				previewID << " " <<
+				templateID << " " <<
 				position.x << " " <<
 				position.y << " " <<
 				position.z << " " <<
@@ -236,14 +236,14 @@ const bool WorldEditor::saveEditorWorldToFile()
 			auto maxVolume = _fe3d.sound3d_getMaxVolume(soundID);
 			auto maxDistance = _fe3d.sound3d_getMaxDistance(soundID);
 
-			// Extract preview ID
-			string previewID = _loadedSoundIDs.at(soundID);
+			// Extract template ID
+			string templateID = _loadedSoundIDs.at(soundID);
 
 			// Write data
 			file <<
 				"SOUND " <<
 				soundID << " " <<
-				previewID << " " <<
+				templateID << " " <<
 				position.x << " " <<
 				position.y << " " <<
 				position.z << " " <<

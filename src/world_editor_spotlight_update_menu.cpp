@@ -16,8 +16,8 @@ void WorldEditor::_updateSpotlightMenu()
 			// Reset placing
 			if(_isPlacingSpotlight)
 			{
-				_fe3d.model_setVisible(PREVIEW_TORCH_ID, false);
-				_fe3d.spotlight_setVisible(PREVIEW_TORCH_ID, false);
+				_fe3d.model_setVisible(TEMPLATE_TORCH_ID, false);
+				_fe3d.spotlight_setVisible(TEMPLATE_TORCH_ID, false);
 				_isPlacingSpotlight = false;
 			}
 
@@ -38,11 +38,11 @@ void WorldEditor::_updateSpotlightMenu()
 			_deactivateSpotlight();
 			_deactivateReflection();
 
-			// Set new preview spotlight
+			// Set new template spotlight
 			_isPlacingSpotlight = true;
-			_fe3d.model_setVisible(PREVIEW_TORCH_ID, true);
-			_fe3d.spotlight_setVisible(PREVIEW_TORCH_ID, true);
-			_fe3d.spotlight_setPosition(PREVIEW_TORCH_ID, fvec3(0.0f));
+			_fe3d.model_setVisible(TEMPLATE_TORCH_ID, true);
+			_fe3d.spotlight_setVisible(TEMPLATE_TORCH_ID, true);
+			_fe3d.spotlight_setPosition(TEMPLATE_TORCH_ID, fvec3(0.0f));
 			_fe3d.misc_centerCursor();
 
 			// Add position value forms for placing without terrain
@@ -65,7 +65,7 @@ void WorldEditor::_updateSpotlightMenu()
 			sort(IDs.begin(), IDs.end());
 			for(auto& spotlightID : IDs)
 			{
-				// Check if spotlight is not a preview
+				// Must not be template entity
 				if(spotlightID[0] != '@')
 				{
 					// Removing the unique number from the ID
@@ -105,7 +105,7 @@ void WorldEditor::_updateSpotlightChoosingMenu()
 		// Iterate through every placed spotlight
 		for(const auto& spotlightID : _fe3d.spotlight_getIDs())
 		{
-			// Check if spotlight is not a preview
+			// Must not be template entity
 			if(spotlightID[0] != '@')
 			{
 				// Check if button is hovered

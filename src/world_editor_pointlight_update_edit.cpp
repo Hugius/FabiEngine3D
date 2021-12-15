@@ -7,7 +7,7 @@ void WorldEditor::_updatePointlightEditing()
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
 	// User must not be placing anything
-	if(_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
+	if(_currentTemplateModelID.empty() && _currentTemplateBillboardID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
 		// Reset selected lamp from last frame
 		if(!_dontResetSelectedLamp)
@@ -25,7 +25,7 @@ void WorldEditor::_updatePointlightEditing()
 		// Check if user selected a lamp model
 		for(const auto& ID : _fe3d.model_getIDs())
 		{
-			// Must be pointlight preview entity
+			// Must be pointlight template entity
 			if(ID.substr(0, string("@@lamp").size()) == "@@lamp")
 			{
 				// Cursor must be in 3D space, no GUI interruptions, no RMB holding down

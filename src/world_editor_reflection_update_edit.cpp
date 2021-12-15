@@ -7,7 +7,7 @@ void WorldEditor::_updateReflectionEditing()
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
 	// User must not be placing anything
-	if(_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
+	if(_currentTemplateModelID.empty() && _currentTemplateBillboardID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
 		// Reset selected camera from last frame
 		if(!_dontResetSelectedCamera)
@@ -25,7 +25,7 @@ void WorldEditor::_updateReflectionEditing()
 		// Check if user selected a camera model
 		for(const auto& ID : _fe3d.model_getIDs())
 		{
-			// Must be reflection preview entity
+			// Must be reflection template entity
 			if(ID.substr(0, string("@@camera").size()) == "@@camera")
 			{
 				// Cursor must be in 3D space, no GUI interruptions, no RMB holding down

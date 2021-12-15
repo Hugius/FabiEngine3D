@@ -20,21 +20,21 @@ const bool ScriptInterpreter::_validateFe3dAabb(const string& ID)
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isPreview)
+const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isTemplate)
 {
-	if(isPreview)
+	if(isTemplate)
 	{
 		// Validate existence
 		if(!_fe3d.billboard_isExisting(ID))
 		{
-			_throwScriptError("requested preview billboard with ID \"" + ID.substr(1) + "\" does not exist!");
+			_throwScriptError("requested template billboard with ID \"" + ID.substr(1) + "\" does not exist!");
 			return false;
 		}
 	}
 	else
 	{
 		// @ sign is reserved
-		if(!isPreview && ID[0] == '@')
+		if(!isTemplate && ID[0] == '@')
 		{
 			_throwScriptError("ID of requested billboard with ID \"" + ID + "\" cannot start with '@'!");
 			return false;
@@ -108,21 +108,21 @@ const bool ScriptInterpreter::_validateFe3dSpotlight(const string& ID)
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dModel(const string& ID, bool isPreview)
+const bool ScriptInterpreter::_validateFe3dModel(const string& ID, bool isTemplate)
 {
-	if(isPreview)
+	if(isTemplate)
 	{
 		// Validate existence
 		if(!_fe3d.model_isExisting(ID))
 		{
-			_throwScriptError("requested preview model with ID \"" + ID.substr(1) + "\" does not exist!");
+			_throwScriptError("requested template model with ID \"" + ID.substr(1) + "\" does not exist!");
 			return false;
 		}
 
 		// Cannot access an instanced model
 		if(_fe3d.model_isInstanced(ID))
 		{
-			_throwScriptError("requested preview model with ID \"" + ID.substr(1) + "\" cannot be instanced!");
+			_throwScriptError("requested template model with ID \"" + ID.substr(1) + "\" cannot be instanced!");
 			return false;
 		}
 	}
@@ -233,21 +233,21 @@ const bool ScriptInterpreter::_validateFe3dWater()
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dSound2d(const string& ID, bool isPreview)
+const bool ScriptInterpreter::_validateFe3dSound2d(const string& ID, bool isTemplate)
 {
-	if(isPreview)
+	if(isTemplate)
 	{
 		// Validate existence
 		if(!_fe3d.sound2d_isExisting(ID))
 		{
-			_throwScriptError("requested preview sound with ID \"" + ID.substr(1) + "\" does not exist!");
+			_throwScriptError("requested template sound with ID \"" + ID.substr(1) + "\" does not exist!");
 			return false;
 		}
 	}
 	else
 	{
 		// @ sign is reserved
-		if(!isPreview && ID[0] == '@')
+		if(!isTemplate && ID[0] == '@')
 		{
 			_throwScriptError("ID of requested 2D sound with ID \"" + ID + "\" cannot start with '@'!");
 			return false;
@@ -264,28 +264,28 @@ const bool ScriptInterpreter::_validateFe3dSound2d(const string& ID, bool isPrev
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dSound3d(const string& ID, bool isPreview)
+const bool ScriptInterpreter::_validateFe3dSound3d(const string& ID, bool isTemplate)
 {
-	if (isPreview)
+	if(isTemplate)
 	{
 		// Validate existence
-		if (!_fe3d.sound3d_isExisting(ID))
+		if(!_fe3d.sound3d_isExisting(ID))
 		{
-			_throwScriptError("requested preview sound with ID \"" + ID.substr(1) + "\" does not exist!");
+			_throwScriptError("requested template sound with ID \"" + ID.substr(1) + "\" does not exist!");
 			return false;
 		}
 	}
 	else
 	{
 		// @ sign is reserved
-		if (!isPreview && ID[0] == '@')
+		if(!isTemplate && ID[0] == '@')
 		{
 			_throwScriptError("ID of requested 3D sound with ID \"" + ID + "\" cannot start with '@'!");
 			return false;
 		}
 
 		// Validate existence
-		if (!_fe3d.sound3d_isExisting(ID))
+		if(!_fe3d.sound3d_isExisting(ID))
 		{
 			_throwScriptError("requested 3D sound with ID \"" + ID + "\" does not exist!");
 			return false;

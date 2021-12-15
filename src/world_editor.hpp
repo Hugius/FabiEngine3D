@@ -47,9 +47,9 @@ public:
 	void addPointlightToCustomWorld(const string& ID);
 	void addSpotlightToCustomWorld(const string& ID);
 	void addReflectionToCustomWorld(const string& ID);
-	void copyPreviewModel(const string& newID, const string& previewID, fvec3 position);
-	void copyPreviewBillboard(const string& newID, const string& previewID, fvec3 position);
-	void copyPreviewSound(const string& newID, const string& previewID, fvec3 position);
+	void copyTemplateModel(const string& newID, const string& templateID, fvec3 position);
+	void copyTemplateBillboard(const string& newID, const string& templateID, fvec3 position);
+	void copyTemplateSound(const string& newID, const string& templateID, fvec3 position);
 	void clearCurrentWorld();
 
 	// STRING
@@ -151,18 +151,18 @@ private:
 	const vector<string> _getWorldIDs() const;
 
 	// BOOL
-	const bool _copyPreviewSky(const string& newID, const string& previewID);
-	const bool _copyPreviewTerrain(const string& newID, const string& previewID);
-	const bool _copyPreviewWater(const string& newID, const string& previewID);
-	const bool _copyPreviewModel(const string& newID, const string& previewID, fvec3 position, bool isFromOutside);
-	const bool _copyPreviewBillboard(const string& newID, const string& previewID, fvec3 position, bool isFromOutside);
-	const bool _copyPreviewSound(const string& newID, const string& previewID, fvec3 position, bool isFromOutside);
+	const bool _copyTemplateSky(const string& newID, const string& templateID);
+	const bool _copyTemplateTerrain(const string& newID, const string& templateID);
+	const bool _copyTemplateWater(const string& newID, const string& templateID);
+	const bool _copyTemplateModel(const string& newID, const string& templateID, fvec3 position, bool isFromOutside);
+	const bool _copyTemplateBillboard(const string& newID, const string& templateID, fvec3 position, bool isFromOutside);
+	const bool _copyTemplateSound(const string& newID, const string& templateID, fvec3 position, bool isFromOutside);
 
 	// STRING
-	static inline const string PREVIEW_SPEAKER_ID = "@@preview_speaker";
-	static inline const string PREVIEW_LAMP_ID = "@@preview_lamp";
-	static inline const string PREVIEW_TORCH_ID = "@@preview_torch";
-	static inline const string PREVIEW_CAMERA_ID = "@@preview_camera";
+	static inline const string TEMPLATE_SPEAKER_ID = "@@template_speaker";
+	static inline const string TEMPLATE_LAMP_ID = "@@template_lamp";
+	static inline const string TEMPLATE_TORCH_ID = "@@template_torch";
+	static inline const string TEMPLATE_CAMERA_ID = "@@template_camera";
 	static inline const string SPEAKER_MODEL_PATH = "engine\\assets\\mesh\\speaker.obj";
 	static inline const string LAMP_MODEL_PATH = "engine\\assets\\mesh\\lamp.obj";
 	static inline const string TORCH_MODEL_PATH = "engine\\assets\\mesh\\torch.obj";
@@ -194,13 +194,13 @@ private:
 	string _currentSkyID = "";
 	string _currentTerrainID = "";
 	string _currentWaterID = "";
-	string _currentPreviewModelID = "";
+	string _currentTemplateModelID = "";
 	string _selectedModelID = "";
 	string _activeModelID = "";
-	string _currentPreviewBillboardID = "";
+	string _currentTemplateBillboardID = "";
 	string _selectedBillboardID = "";
 	string _activeBillboardID = "";
-	string _currentPreviewSoundID = "";
+	string _currentTemplateSoundID = "";
 	string _selectedSpeakerID = "";
 	string _activeSpeakerID = "";
 	string _selectedLampID = "";

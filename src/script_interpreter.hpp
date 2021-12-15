@@ -9,8 +9,9 @@
 #include "terrain_editor.hpp"
 #include "water_editor.hpp"
 #include "model_editor.hpp"
-#include "animation3d_editor.hpp"
 #include "billboard_editor.hpp"
+#include "animation3d_editor.hpp"
+#include "animation2d_editor.hpp"
 #include "sound_editor.hpp"
 #include "world_editor.hpp"
 
@@ -25,6 +26,7 @@ public:
 					  ModelEditor& modelEditor,
 					  BillboardEditor& billboardEditor,
 					  Animation3dEditor& animation3dEditor,
+					  Animation2dEditor& animation2dEditor,
 					  SoundEditor& soundEditor,
 					  WorldEditor& worldEditor);
 
@@ -114,6 +116,8 @@ private:
 	const bool _executeFe3dTextGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dAnimation3dSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dAnimation3dGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dAnimation2dSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dAnimation2dGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dSound2dSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dSound2dGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dSound3dSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
@@ -135,11 +139,11 @@ private:
 	const bool _validateFe3dSky();
 	const bool _validateFe3dTerrain();
 	const bool _validateFe3dWater();
-	const bool _validateFe3dModel(const string& ID, bool isPreview);
+	const bool _validateFe3dModel(const string& ID, bool isTemplate);
 	const bool _validateFe3dModelPart(const string& modelID, const string& partID);
-	const bool _validateFe3dBillboard(const string& ID, bool isPreview);
-	const bool _validateFe3dSound2d(const string& ID, bool isPreview);
-	const bool _validateFe3dSound3d(const string& ID, bool isPreview);
+	const bool _validateFe3dBillboard(const string& ID, bool isTemplate);
+	const bool _validateFe3dSound3d(const string& ID, bool isTemplate);
+	const bool _validateFe3dSound2d(const string& ID, bool isTemplate);
 	const bool _validateFe3dAabb(const string& ID);
 	const bool _validateFe3dPointlight(const string& ID);
 	const bool _validateFe3dSpotlight(const string& ID);
@@ -237,6 +241,7 @@ private:
 	ModelEditor& _modelEditor;
 	BillboardEditor& _billboardEditor;
 	Animation3dEditor& _animation3dEditor;
+	Animation2dEditor& _animation2dEditor;
 	SoundEditor& _soundEditor;
 	WorldEditor& _worldEditor;
 	static inline const map<string, InputType> KEY_INPUT_STRING_MAP =

@@ -16,7 +16,7 @@ void WorldEditor::_updateSkyMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
 		{
-			// Retrieve preview sky IDs
+			// Retrieve template sky IDs
 			vector<string> skyIDs;
 			for(const auto& ID : _skyEditor.getLoadedIDs())
 			{
@@ -49,7 +49,7 @@ void WorldEditor::_updateSkyMenu()
 
 				// Create new
 				_currentSkyID = selectedButtonID;
-				_copyPreviewSky(_currentSkyID, ("@" + selectedButtonID));
+				_copyTemplateSky(_currentSkyID, ("@" + selectedButtonID));
 				_gui.getGlobalScreen()->deleteChoiceForm("skyList");
 			}
 			else if(_gui.getGlobalScreen()->isChoiceFormCancelled("skyList"))

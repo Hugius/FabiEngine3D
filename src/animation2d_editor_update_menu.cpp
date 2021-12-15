@@ -67,14 +67,14 @@ void Animation2dEditor::_updateChoiceMenu()
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			// Stop animation if playing
-			if(isBillboardAnimationStarted(_currentAnimationID, PREVIEW_BILLBOARD_ID))
+			if(isBillboardAnimationStarted(_currentAnimationID, TEMPLATE_BILLBOARD_ID))
 			{
-				stopBillboardAnimation(_currentAnimationID, PREVIEW_BILLBOARD_ID);
+				stopBillboardAnimation(_currentAnimationID, TEMPLATE_BILLBOARD_ID);
 			}
 
 			// Hide preview billboard
-			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
-			_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
+			_fe3d.billboard_setDiffuseMap(TEMPLATE_BILLBOARD_ID, "");
+			_fe3d.billboard_setVisible(TEMPLATE_BILLBOARD_ID, false);
 
 			// Miscellaneous
 			_currentAnimationID = "";
@@ -119,7 +119,7 @@ void Animation2dEditor::_updateChoiceMenu()
 			// Set diffuse map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clear2dTextureCache(finalFilePath);
-			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, finalFilePath);
+			_fe3d.billboard_setDiffuseMap(TEMPLATE_BILLBOARD_ID, finalFilePath);
 			currentAnimation->setPreviewTexturePath(finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rows")->isHovered())
@@ -136,11 +136,11 @@ void Animation2dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("start")->isHovered())
 		{
-			startBillboardAnimation(_currentAnimationID, PREVIEW_BILLBOARD_ID, 1);
+			startBillboardAnimation(_currentAnimationID, TEMPLATE_BILLBOARD_ID, 1);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("stop")->isHovered())
 		{
-			stopBillboardAnimation(_currentAnimationID, PREVIEW_BILLBOARD_ID);
+			stopBillboardAnimation(_currentAnimationID, TEMPLATE_BILLBOARD_ID);
 		}
 
 		// Update value forms
@@ -159,7 +159,7 @@ void Animation2dEditor::_updateChoiceMenu()
 
 		// Update buttons hoverability
 		auto hasPreviewTexture = !currentAnimation->getPreviewTexturePath().empty();
-		auto isPlaying = isBillboardAnimationStarted(_currentAnimationID, PREVIEW_BILLBOARD_ID);
+		auto isPlaying = isBillboardAnimationStarted(_currentAnimationID, TEMPLATE_BILLBOARD_ID);
 		screen->getButton("preview")->setHoverable(!isPlaying);
 		screen->getButton("rows")->setHoverable(hasPreviewTexture && !isPlaying);
 		screen->getButton("columns")->setHoverable(hasPreviewTexture && !isPlaying);

@@ -66,21 +66,6 @@ void WorldEditor::_updateMiscellaneous()
 	}
 }
 
-void WorldEditor::copyPreviewModel(const string& newID, const string& previewID, fvec3 position)
-{
-	_copyPreviewModel(newID, previewID, position, true);
-}
-
-void WorldEditor::copyPreviewBillboard(const string& newID, const string& previewID, fvec3 position)
-{
-	_copyPreviewBillboard(newID, previewID, position, true);
-}
-
-void WorldEditor::copyPreviewSound(const string& newID, const string& previewID, fvec3 position)
-{
-	_copyPreviewSound(newID, previewID, position, true);
-}
-
 void WorldEditor::clearCurrentWorld()
 {
 	// Disable world graphics
@@ -155,7 +140,7 @@ void WorldEditor::clearCurrentWorld()
 	}
 
 	// Delete model entities
-	for(const auto& [ID, previewID] : _loadedModelIDs)
+	for(const auto& [ID, templateID] : _loadedModelIDs)
 	{
 		// Delete model
 		if(_fe3d.model_isExisting(ID))
@@ -172,7 +157,7 @@ void WorldEditor::clearCurrentWorld()
 	}
 
 	// Delete billboard entities
-	for(const auto& [ID, previewID] : _loadedBillboardIDs)
+	for(const auto& [ID, templateID] : _loadedBillboardIDs)
 	{
 		// Delete billboard
 		if(_fe3d.billboard_isExisting(ID))
@@ -192,7 +177,7 @@ void WorldEditor::clearCurrentWorld()
 	}
 
 	// Delete sounds
-	for(const auto& [ID, previewID] : _loadedSoundIDs)
+	for(const auto& [ID, templateID] : _loadedSoundIDs)
 	{
 		if(_fe3d.sound3d_isExisting(ID))
 		{

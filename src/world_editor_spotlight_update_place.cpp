@@ -9,7 +9,7 @@ void WorldEditor::_updateSpotlightPlacing()
 		if(_fe3d.terrain_getSelectedID().empty()) // Placing without terrain
 		{
 			// Retrieve current position
-			auto newPosition = _fe3d.spotlight_getPosition(PREVIEW_TORCH_ID);
+			auto newPosition = _fe3d.spotlight_getPosition(TEMPLATE_TORCH_ID);
 
 			// Update value forms
 			_gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, {});
@@ -17,7 +17,7 @@ void WorldEditor::_updateSpotlightPlacing()
 			_gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, {});
 
 			// Update position
-			_fe3d.spotlight_setPosition(PREVIEW_TORCH_ID, newPosition);
+			_fe3d.spotlight_setPosition(TEMPLATE_TORCH_ID, newPosition);
 
 			// Check if spotlight must be placed
 			if(_gui.getGlobalScreen()->isValueFormConfirmed())
@@ -68,8 +68,8 @@ void WorldEditor::_updateSpotlightPlacing()
 			// Check if placement mode must be disabled
 			if(_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
 			{
-				_fe3d.model_setVisible(PREVIEW_TORCH_ID, false);
-				_fe3d.spotlight_setVisible(PREVIEW_TORCH_ID, false);
+				_fe3d.model_setVisible(TEMPLATE_TORCH_ID, false);
+				_fe3d.spotlight_setVisible(TEMPLATE_TORCH_ID, false);
 				_isPlacingSpotlight = false;
 			}
 		}
@@ -84,25 +84,25 @@ void WorldEditor::_updateSpotlightPlacing()
 					// Check if a terrain is loaded
 					if(_fe3d.raycast_isPointOnTerrainValid())
 					{
-						// Show preview spotlight
-						_fe3d.spotlight_setVisible(PREVIEW_TORCH_ID, true);
-						_fe3d.model_setVisible(PREVIEW_TORCH_ID, true);
+						// Show template spotlight
+						_fe3d.spotlight_setVisible(TEMPLATE_TORCH_ID, true);
+						_fe3d.model_setVisible(TEMPLATE_TORCH_ID, true);
 
 						// Update position
-						_fe3d.spotlight_setPosition(PREVIEW_TORCH_ID, (_fe3d.raycast_getPointOnTerrain() + SPOTLIGHT_TERRAIN_OFFSET));
+						_fe3d.spotlight_setPosition(TEMPLATE_TORCH_ID, (_fe3d.raycast_getPointOnTerrain() + SPOTLIGHT_TERRAIN_OFFSET));
 					}
 					else
 					{
-						// Hide preview spotlight
-						_fe3d.model_setVisible(PREVIEW_TORCH_ID, false);
-						_fe3d.spotlight_setVisible(PREVIEW_TORCH_ID, false);
+						// Hide template spotlight
+						_fe3d.model_setVisible(TEMPLATE_TORCH_ID, false);
+						_fe3d.spotlight_setVisible(TEMPLATE_TORCH_ID, false);
 					}
 
 					// Check if spotlight must be placed
 					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Temporary values
-						auto newPosition = _fe3d.spotlight_getPosition(PREVIEW_TORCH_ID);
+						auto newPosition = _fe3d.spotlight_getPosition(TEMPLATE_TORCH_ID);
 
 						// Adding a number to make it unique
 						BEGIN2:
@@ -148,30 +148,30 @@ void WorldEditor::_updateSpotlightPlacing()
 					}
 					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
 					{
-						_fe3d.model_setVisible(PREVIEW_TORCH_ID, false);
-						_fe3d.spotlight_setVisible(PREVIEW_TORCH_ID, false);
+						_fe3d.model_setVisible(TEMPLATE_TORCH_ID, false);
+						_fe3d.spotlight_setVisible(TEMPLATE_TORCH_ID, false);
 						_isPlacingSpotlight = false;
 					}
 				}
 				else
 				{
-					_fe3d.model_setVisible(PREVIEW_TORCH_ID, false);
-					_fe3d.spotlight_setVisible(PREVIEW_TORCH_ID, false);
+					_fe3d.model_setVisible(TEMPLATE_TORCH_ID, false);
+					_fe3d.spotlight_setVisible(TEMPLATE_TORCH_ID, false);
 				}
 			}
 			else
 			{
-				_fe3d.model_setVisible(PREVIEW_TORCH_ID, false);
-				_fe3d.spotlight_setVisible(PREVIEW_TORCH_ID, false);
+				_fe3d.model_setVisible(TEMPLATE_TORCH_ID, false);
+				_fe3d.spotlight_setVisible(TEMPLATE_TORCH_ID, false);
 			}
 		}
 
-		// Update preview torch position
+		// Update template torch position
 		if(_isPlacingSpotlight)
 		{
-			auto spotlightPosition = _fe3d.spotlight_getPosition(PREVIEW_TORCH_ID);
+			auto spotlightPosition = _fe3d.spotlight_getPosition(TEMPLATE_TORCH_ID);
 			spotlightPosition -= TORCH_OFFSET;
-			_fe3d.model_setBasePosition(PREVIEW_TORCH_ID, spotlightPosition);
+			_fe3d.model_setBasePosition(TEMPLATE_TORCH_ID, spotlightPosition);
 		}
 	}
 

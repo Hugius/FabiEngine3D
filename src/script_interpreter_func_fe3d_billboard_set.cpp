@@ -24,12 +24,12 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 				return true;
 			}
 
-			// Validate preview billboard ID
+			// Validate template billboard ID
 			if(_validateFe3dBillboard("@" + arguments[1].getString(), true))
 			{
-				// Copy preview billboard
-				_worldEditor.copyPreviewBillboard(arguments[0].getString(), ("@" + arguments[1].getString()),
-												  fvec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
+				// Copy template billboard
+				_worldEditor.copyTemplateBillboard(arguments[0].getString(), ("@" + arguments[1].getString()),
+												   fvec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));

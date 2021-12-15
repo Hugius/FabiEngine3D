@@ -9,7 +9,7 @@ void WorldEditor::_updateReflectionPlacing()
 		if(_fe3d.terrain_getSelectedID().empty()) // Placing without terrain
 		{
 			// Retrieve current position
-			auto newPosition = _fe3d.reflection_getPosition(PREVIEW_CAMERA_ID);
+			auto newPosition = _fe3d.reflection_getPosition(TEMPLATE_CAMERA_ID);
 
 			// Update value forms
 			_gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, {});
@@ -17,7 +17,7 @@ void WorldEditor::_updateReflectionPlacing()
 			_gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, {});
 
 			// Update position
-			_fe3d.reflection_setPosition(PREVIEW_CAMERA_ID, newPosition);
+			_fe3d.reflection_setPosition(TEMPLATE_CAMERA_ID, newPosition);
 
 			// Check if reflection must be placed
 			if(_gui.getGlobalScreen()->isValueFormConfirmed())
@@ -56,7 +56,7 @@ void WorldEditor::_updateReflectionPlacing()
 			// Check if placement mode must be disabled
 			if(_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
 			{
-				_fe3d.model_setVisible(PREVIEW_CAMERA_ID, false);
+				_fe3d.model_setVisible(TEMPLATE_CAMERA_ID, false);
 				_isPlacingReflection = false;
 			}
 		}
@@ -71,23 +71,23 @@ void WorldEditor::_updateReflectionPlacing()
 					// Check if a terrain is loaded
 					if(_fe3d.raycast_isPointOnTerrainValid())
 					{
-						// Show preview reflection
-						_fe3d.model_setVisible(PREVIEW_CAMERA_ID, true);
+						// Show template reflection
+						_fe3d.model_setVisible(TEMPLATE_CAMERA_ID, true);
 
 						// Update position
-						_fe3d.reflection_setPosition(PREVIEW_CAMERA_ID, (_fe3d.raycast_getPointOnTerrain() + REFLECTION_TERRAIN_OFFSET));
+						_fe3d.reflection_setPosition(TEMPLATE_CAMERA_ID, (_fe3d.raycast_getPointOnTerrain() + REFLECTION_TERRAIN_OFFSET));
 					}
 					else
 					{
-						// Hide preview reflection
-						_fe3d.model_setVisible(PREVIEW_CAMERA_ID, false);
+						// Hide template reflection
+						_fe3d.model_setVisible(TEMPLATE_CAMERA_ID, false);
 					}
 
 					// Check if reflection must be placed
 					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Temporary values
-						auto newPosition = _fe3d.reflection_getPosition(PREVIEW_CAMERA_ID);
+						auto newPosition = _fe3d.reflection_getPosition(TEMPLATE_CAMERA_ID);
 
 						// Adding a number to make it unique
 						BEGIN2:
@@ -129,27 +129,27 @@ void WorldEditor::_updateReflectionPlacing()
 					}
 					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
 					{
-						_fe3d.model_setVisible(PREVIEW_CAMERA_ID, false);
+						_fe3d.model_setVisible(TEMPLATE_CAMERA_ID, false);
 						_isPlacingReflection = false;
 					}
 				}
 				else
 				{
-					_fe3d.model_setVisible(PREVIEW_CAMERA_ID, false);
+					_fe3d.model_setVisible(TEMPLATE_CAMERA_ID, false);
 				}
 			}
 			else
 			{
-				_fe3d.model_setVisible(PREVIEW_CAMERA_ID, false);
+				_fe3d.model_setVisible(TEMPLATE_CAMERA_ID, false);
 			}
 		}
 
-		// Update preview camera position
+		// Update template camera position
 		if(_isPlacingReflection)
 		{
-			auto reflectionPosition = _fe3d.reflection_getPosition(PREVIEW_CAMERA_ID);
+			auto reflectionPosition = _fe3d.reflection_getPosition(TEMPLATE_CAMERA_ID);
 			reflectionPosition -= CAMERA_OFFSET;
-			_fe3d.model_setBasePosition(PREVIEW_CAMERA_ID, reflectionPosition);
+			_fe3d.model_setBasePosition(TEMPLATE_CAMERA_ID, reflectionPosition);
 		}
 	}
 

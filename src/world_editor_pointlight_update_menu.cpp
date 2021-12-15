@@ -16,8 +16,8 @@ void WorldEditor::_updatePointlightMenu()
 			// Reset placing
 			if(_isPlacingPointlight)
 			{
-				_fe3d.model_setVisible(PREVIEW_LAMP_ID, false);
-				_fe3d.pointlight_setVisible(PREVIEW_LAMP_ID, false);
+				_fe3d.model_setVisible(TEMPLATE_LAMP_ID, false);
+				_fe3d.pointlight_setVisible(TEMPLATE_LAMP_ID, false);
 				_isPlacingPointlight = false;
 			}
 
@@ -38,11 +38,11 @@ void WorldEditor::_updatePointlightMenu()
 			_deactivateSpotlight();
 			_deactivateReflection();
 
-			// Set new preview pointlight
+			// Set new template pointlight
 			_isPlacingPointlight = true;
-			_fe3d.model_setVisible(PREVIEW_LAMP_ID, true);
-			_fe3d.pointlight_setVisible(PREVIEW_LAMP_ID, true);
-			_fe3d.pointlight_setPosition(PREVIEW_LAMP_ID, fvec3(0.0f));
+			_fe3d.model_setVisible(TEMPLATE_LAMP_ID, true);
+			_fe3d.pointlight_setVisible(TEMPLATE_LAMP_ID, true);
+			_fe3d.pointlight_setPosition(TEMPLATE_LAMP_ID, fvec3(0.0f));
 			_fe3d.misc_centerCursor();
 
 			// Add position value forms for placing without terrain
@@ -65,7 +65,7 @@ void WorldEditor::_updatePointlightMenu()
 			sort(IDs.begin(), IDs.end());
 			for(auto& pointlightID : IDs)
 			{
-				// Check if pointlight is not a preview
+				// Must not be template entity
 				if(pointlightID[0] != '@')
 				{
 					// Removing the unique number from the ID
@@ -105,7 +105,7 @@ void WorldEditor::_updatePointlightChoosingMenu()
 		// Iterate through every placed pointlight
 		for(const auto& pointlightID : _fe3d.pointlight_getIDs())
 		{
-			// Check if pointlight is not a preview
+			// Must not be template entity
 			if(pointlightID[0] != '@')
 			{
 				// Check if button is hovered

@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 		{
 			// Temporary values
 			string newID = arguments[0].getString();
-			string previewID = arguments[1].getString();
+			string templateID = arguments[1].getString();
 
 			// @ sign is reserved
 			if(newID[0] == '@')
@@ -28,8 +28,8 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 				return true;
 			}
 
-			// Validate preview sound ID
-			if(_validateFe3dSound3d("@" + previewID, true))
+			// Validate template sound ID
+			if(_validateFe3dSound3d("@" + templateID, true))
 			{
 				// Temporary values
 				auto position = fvec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal());
@@ -37,7 +37,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 				auto maxDistance = arguments[6].getDecimal();
 
 				// Add sound
-				_worldEditor.copyPreviewSound(newID, ("@" + previewID), position);
+				_worldEditor.copyTemplateSound(newID, ("@" + templateID), position);
 				_fe3d.sound3d_setMaxVolume(newID, maxVolume);
 				_fe3d.sound3d_setMaxDistance(newID, maxDistance);
 

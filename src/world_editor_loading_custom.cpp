@@ -51,14 +51,14 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		if(lineType == "SKY")
 		{
 			// Data placeholders
-			string skyID, previewID;
+			string skyID, templateID;
 			fvec3 color;
 			float rotation, lightness;
 
 			// Read data from file
 			iss >>
 				skyID >>
-				previewID >>
+				templateID >>
 				rotation >>
 				lightness >>
 				color.r >>
@@ -66,7 +66,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				color.b;
 
 			// Create sky
-			if(_copyPreviewSky(skyID, previewID))
+			if(_copyTemplateSky(skyID, templateID))
 			{
 				_fe3d.sky_setRotation(skyID, rotation);
 				_fe3d.sky_setLightness(skyID, lightness);
@@ -76,18 +76,18 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		else if(lineType == "TERRAIN")
 		{
 			// Data placeholders
-			string terrainID, previewID;
+			string terrainID, templateID;
 
 			// Read data from file
-			iss >> terrainID >> previewID;
+			iss >> terrainID >> templateID;
 
 			// Create terrain
-			_copyPreviewTerrain(terrainID, previewID);
+			_copyTemplateTerrain(terrainID, templateID);
 		}
 		else if(lineType == "WATER")
 		{
 			// Data placeholders
-			string waterID, previewID;
+			string waterID, templateID;
 			fvec3 color;
 			fvec2 speed;
 			float transparency;
@@ -95,7 +95,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 			// Read data from file
 			iss >>
 				waterID >>
-				previewID >>
+				templateID >>
 				color.r >>
 				color.g >>
 				color.b >>
@@ -104,7 +104,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				transparency;
 
 			// Create water
-			if(_copyPreviewWater(waterID, previewID))
+			if(_copyTemplateWater(waterID, templateID))
 			{
 				_fe3d.water_setColor(waterID, color);
 				_fe3d.water_setSpeed(waterID, speed);
@@ -114,7 +114,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		else if(lineType == "MODEL")
 		{
 			// Data placeholders
-			string modelID, previewID;
+			string modelID, templateID;
 			fvec3 position, rotation, rotationOrigin, size, color;
 			float minHeight, maxHeight, transparency, lightness;
 			unsigned partCount;
@@ -128,7 +128,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 			// Read main data from file
 			iss >>
-				previewID >>
+				templateID >>
 				isVisible >>
 				isFrozen >>
 				isAabbRaycastResponsive >>
@@ -166,17 +166,17 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 					partIDs.push_back(partID);
 				}
 
-				// Check if preview model parts count
-				if(partIDs.size() != _fe3d.model_getPartIDs(previewID).size())
+				// Check if template model parts changed
+				if(partIDs.size() != _fe3d.model_getPartIDs(templateID).size())
 				{
 					Logger::throwWarning("World model parts with ID \"" + modelID + "\" differ from base model!");
 					continue;
 				}
 
-				// Check if preview model parts changed
+				// Check if template model parts changed
 				for(size_t i = 0; i < partIDs.size(); i++)
 				{
-					if(partIDs[i] != _fe3d.model_getPartIDs(previewID)[i])
+					if(partIDs[i] != _fe3d.model_getPartIDs(templateID)[i])
 					{
 						Logger::throwWarning("World model parts with ID \"" + modelID + "\" differ from base model!");
 						continue;
@@ -185,12 +185,12 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 			}
 
 			// Create model
-			if(_copyPreviewModel(modelID, previewID, position, false))
+			if(_copyTemplateModel(modelID, templateID, position, false))
 			{
-				// Check if preview model instancing changed
-				if(_fe3d.model_isExisting(previewID))
+				// Check if template model instancing changed
+				if(_fe3d.model_isExisting(templateID))
 				{
-					if(_fe3d.model_isInstanced(modelID) != _fe3d.model_isInstanced(previewID))
+					if(_fe3d.model_isInstanced(modelID) != _fe3d.model_isInstanced(templateID))
 					{
 						Logger::throwWarning("Model instancing with ID \"" + modelID + "\" differs from base model!");
 						_fe3d.model_delete(modelID);
@@ -359,7 +359,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		else if(lineType == "BILLBOARD")
 		{
 			// Data placeholders
-			string billboardID, previewID, textContent;
+			string billboardID, templateID, textContent;
 			fvec3 position, rotation, color;
 			fvec2 size;
 			float lightness, minHeight, maxHeight;
@@ -370,7 +370,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 			// Read data from file
 			iss >>
 				billboardID >>
-				previewID >>
+				templateID >>
 				isVisible >>
 				isAabbRaycastResponsive >>
 				isAabbCollisionResponsive >>
@@ -404,7 +404,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 			replace(textContent.begin(), textContent.end(), '?', ' ');
 
 			// Create billboard
-			if(_copyPreviewBillboard(billboardID, previewID, position, false))
+			if(_copyTemplateBillboard(billboardID, templateID, position, false))
 			{
 				// Set properties
 				_fe3d.billboard_setRotation(billboardID, rotation);
@@ -456,14 +456,14 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		else if(lineType == "SOUND")
 		{
 			// Data placeholders
-			string soundID, previewID;
+			string soundID, templateID;
 			fvec3 position;
 			float maxVolume, maxDistance;
 
 			// Read data from file
 			iss >>
 				soundID >>
-				previewID >>
+				templateID >>
 				position.x >>
 				position.y >>
 				position.z >>
@@ -471,7 +471,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				maxDistance;
 
 			// Create sound
-			if(_copyPreviewSound(soundID, previewID, position, false))
+			if(_copyTemplateSound(soundID, templateID, position, false))
 			{
 				_fe3d.sound3d_setMaxVolume(soundID, maxVolume);
 				_fe3d.sound3d_setMaxDistance(soundID, maxDistance);

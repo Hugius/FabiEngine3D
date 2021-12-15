@@ -7,7 +7,7 @@ void WorldEditor::_updateSpotlightEditing()
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
 	// User must not be placing anything
-	if(_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
+	if(_currentTemplateModelID.empty() && _currentTemplateBillboardID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
 		// Reset selected torch from last frame
 		if(!_dontResetSelectedTorch)
@@ -25,7 +25,7 @@ void WorldEditor::_updateSpotlightEditing()
 		// Check if user selected a torch model
 		for(const auto& ID : _fe3d.model_getIDs())
 		{
-			// Must be spotlight preview entity
+			// Must be spotlight template entity
 			if(ID.substr(0, string("@@torch").size()) == "@@torch")
 			{
 				// Cursor must be in 3D space, no GUI interruptions, no RMB holding down

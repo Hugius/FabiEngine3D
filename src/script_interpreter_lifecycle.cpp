@@ -14,6 +14,7 @@ ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d,
 									 ModelEditor& modelEditor,
 									 BillboardEditor& billboardEditor,
 									 Animation3dEditor& animation3dEditor,
+									 Animation2dEditor& animation2dEditor,
 									 SoundEditor& soundEditor,
 									 WorldEditor& worldEditor)
 	:
@@ -26,6 +27,7 @@ ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d,
 	_billboardEditor(billboardEditor),
 	_soundEditor(soundEditor),
 	_animation3dEditor(animation3dEditor),
+	_animation2dEditor(animation2dEditor),
 	_worldEditor(worldEditor)
 {
 
@@ -192,25 +194,26 @@ void ScriptInterpreter::load()
 	// No sky by default
 	_fe3d.sky_selectMainSky("");
 
-	// Load preview skies
+	// Load template skies
 	_skyEditor.loadFromFile();
 
-	// Load preview terrains
+	// Load template terrains
 	_terrainEditor.loadFromFile();
 
-	// Load preview waters
+	// Load template waters
 	_waterEditor.loadFromFile();
 
-	// Load preview models
+	// Load template models
 	_modelEditor.loadFromFile();
 
-	// Load preview animations
-	_animation3dEditor.loadFromFile(false);
-
-	// Load preview billboards
+	// Load template billboards
 	_billboardEditor.loadFromFile();
 
-	// Load preview audio
+	// Load template animations
+	_animation3dEditor.loadFromFile(false);
+	_animation2dEditor.loadFromFile(false);
+
+	// Load template sounds
 	_soundEditor.loadFromFile();
 
 	// Camera
@@ -253,6 +256,8 @@ void ScriptInterpreter::unload()
 
 	// Stop animations
 	_animation3dEditor.stopModelAnimations();
+	_animation2dEditor.stopBillboardAnimations();
+	_animation2dEditor.stopImageAnimations();
 
 	// Delete all other entities
 	_fe3d.terrain_deleteAll();

@@ -9,7 +9,7 @@ void WorldEditor::_updatePointlightPlacing()
 		if(_fe3d.terrain_getSelectedID().empty()) // Placing without terrain
 		{
 			// Retrieve current position
-			auto newPosition = _fe3d.pointlight_getPosition(PREVIEW_LAMP_ID);
+			auto newPosition = _fe3d.pointlight_getPosition(TEMPLATE_LAMP_ID);
 
 			// Update value forms
 			_gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, {});
@@ -17,7 +17,7 @@ void WorldEditor::_updatePointlightPlacing()
 			_gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, {});
 
 			// Update position
-			_fe3d.pointlight_setPosition(PREVIEW_LAMP_ID, newPosition);
+			_fe3d.pointlight_setPosition(TEMPLATE_LAMP_ID, newPosition);
 
 			// Check if pointlight must be placed
 			if(_gui.getGlobalScreen()->isValueFormConfirmed())
@@ -66,8 +66,8 @@ void WorldEditor::_updatePointlightPlacing()
 			// Check if placement mode must be disabled
 			if(_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
 			{
-				_fe3d.model_setVisible(PREVIEW_LAMP_ID, false);
-				_fe3d.pointlight_setVisible(PREVIEW_LAMP_ID, false);
+				_fe3d.model_setVisible(TEMPLATE_LAMP_ID, false);
+				_fe3d.pointlight_setVisible(TEMPLATE_LAMP_ID, false);
 				_isPlacingPointlight = false;
 			}
 		}
@@ -82,25 +82,25 @@ void WorldEditor::_updatePointlightPlacing()
 					// Check if a terrain is loaded
 					if(_fe3d.raycast_isPointOnTerrainValid())
 					{
-						// Show preview pointlight
-						_fe3d.pointlight_setVisible(PREVIEW_LAMP_ID, true);
-						_fe3d.model_setVisible(PREVIEW_LAMP_ID, true);
+						// Show template pointlight
+						_fe3d.pointlight_setVisible(TEMPLATE_LAMP_ID, true);
+						_fe3d.model_setVisible(TEMPLATE_LAMP_ID, true);
 
 						// Update position
-						_fe3d.pointlight_setPosition(PREVIEW_LAMP_ID, (_fe3d.raycast_getPointOnTerrain() + POINTLIGHT_TERRAIN_OFFSET));
+						_fe3d.pointlight_setPosition(TEMPLATE_LAMP_ID, (_fe3d.raycast_getPointOnTerrain() + POINTLIGHT_TERRAIN_OFFSET));
 					}
 					else
 					{
-						// Hide preview pointlight
-						_fe3d.model_setVisible(PREVIEW_LAMP_ID, false);
-						_fe3d.pointlight_setVisible(PREVIEW_LAMP_ID, false);
+						// Hide template pointlight
+						_fe3d.model_setVisible(TEMPLATE_LAMP_ID, false);
+						_fe3d.pointlight_setVisible(TEMPLATE_LAMP_ID, false);
 					}
 
 					// Check if pointlight must be placed
 					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Temporary values
-						auto newPosition = _fe3d.pointlight_getPosition(PREVIEW_LAMP_ID);
+						auto newPosition = _fe3d.pointlight_getPosition(TEMPLATE_LAMP_ID);
 
 						// Adding a number to make it unique
 						BEGIN2:
@@ -144,30 +144,30 @@ void WorldEditor::_updatePointlightPlacing()
 					}
 					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
 					{
-						_fe3d.model_setVisible(PREVIEW_LAMP_ID, false);
-						_fe3d.pointlight_setVisible(PREVIEW_LAMP_ID, false);
+						_fe3d.model_setVisible(TEMPLATE_LAMP_ID, false);
+						_fe3d.pointlight_setVisible(TEMPLATE_LAMP_ID, false);
 						_isPlacingPointlight = false;
 					}
 				}
 				else
 				{
-					_fe3d.model_setVisible(PREVIEW_LAMP_ID, false);
-					_fe3d.pointlight_setVisible(PREVIEW_LAMP_ID, false);
+					_fe3d.model_setVisible(TEMPLATE_LAMP_ID, false);
+					_fe3d.pointlight_setVisible(TEMPLATE_LAMP_ID, false);
 				}
 			}
 			else
 			{
-				_fe3d.model_setVisible(PREVIEW_LAMP_ID, false);
-				_fe3d.pointlight_setVisible(PREVIEW_LAMP_ID, false);
+				_fe3d.model_setVisible(TEMPLATE_LAMP_ID, false);
+				_fe3d.pointlight_setVisible(TEMPLATE_LAMP_ID, false);
 			}
 		}
 
-		// Update preview lamp position
+		// Update template lamp position
 		if(_isPlacingPointlight)
 		{
-			auto pointlightPosition = _fe3d.pointlight_getPosition(PREVIEW_LAMP_ID);
+			auto pointlightPosition = _fe3d.pointlight_getPosition(TEMPLATE_LAMP_ID);
 			pointlightPosition -= LAMP_OFFSET;
-			_fe3d.model_setBasePosition(PREVIEW_LAMP_ID, pointlightPosition);
+			_fe3d.model_setBasePosition(TEMPLATE_LAMP_ID, pointlightPosition);
 		}
 	}
 

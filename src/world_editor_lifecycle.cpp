@@ -36,16 +36,16 @@ void WorldEditor::load()
 	// Default graphics
 	_fe3d.gfx_setPlanarReflectionHeight(0.0f);
 
-	// Load preview skies
+	// Load template skies
 	_skyEditor.loadFromFile();
 
-	// Load preview terrains
+	// Load template terrains
 	_terrainEditor.loadFromFile();
 
-	// Load preview waters
+	// Load template waters
 	_waterEditor.loadFromFile();
 
-	// Load preview models
+	// Load template models
 	_modelEditor.loadFromFile();
 	for(const auto& modelID : _modelEditor.getLoadedIDs())
 	{
@@ -57,7 +57,7 @@ void WorldEditor::load()
 		}
 	}
 
-	// Load preview billboards
+	// Load template billboards
 	_billboardEditor.loadFromFile();
 	for(const auto& billboardID : _billboardEditor.getLoadedIDs())
 	{
@@ -69,17 +69,17 @@ void WorldEditor::load()
 		}
 	}
 
-	// Load preview animations
+	// Load template animations
 	_animation3dEditor.loadFromFile(false);
 
-	// Load preview sounds
+	// Load template sounds
 	_soundEditor.loadFromFile();
-	_fe3d.model_create(PREVIEW_SPEAKER_ID, SPEAKER_MODEL_PATH);
-	_fe3d.model_setBaseSize(PREVIEW_SPEAKER_ID, DEFAULT_SPEAKER_SIZE);
-	_fe3d.model_setShadowed(PREVIEW_SPEAKER_ID, false);
-	_fe3d.model_setReflected(PREVIEW_SPEAKER_ID, false);
-	_fe3d.model_setBright(PREVIEW_SPEAKER_ID, true);
-	_fe3d.model_setVisible(PREVIEW_SPEAKER_ID, false);
+	_fe3d.model_create(TEMPLATE_SPEAKER_ID, SPEAKER_MODEL_PATH);
+	_fe3d.model_setBaseSize(TEMPLATE_SPEAKER_ID, DEFAULT_SPEAKER_SIZE);
+	_fe3d.model_setShadowed(TEMPLATE_SPEAKER_ID, false);
+	_fe3d.model_setReflected(TEMPLATE_SPEAKER_ID, false);
+	_fe3d.model_setBright(TEMPLATE_SPEAKER_ID, true);
+	_fe3d.model_setVisible(TEMPLATE_SPEAKER_ID, false);
 	for(const auto& soundID : _soundEditor.getLoadedIDs())
 	{
 		_fe3d.sound3d_setMaxVolume(soundID, DEFAULT_SOUND_MAX_VOLUME);
@@ -88,43 +88,43 @@ void WorldEditor::load()
 			createButton(soundID, soundID.substr(1));
 	}
 
-	// Load preview pointlight
-	_fe3d.model_create(PREVIEW_LAMP_ID, LAMP_MODEL_PATH);
-	_fe3d.model_setBaseSize(PREVIEW_LAMP_ID, DEFAULT_LAMP_SIZE);
-	_fe3d.model_setShadowed(PREVIEW_LAMP_ID, false);
-	_fe3d.model_setReflected(PREVIEW_LAMP_ID, false);
-	_fe3d.model_setBright(PREVIEW_LAMP_ID, true);
-	_fe3d.model_setVisible(PREVIEW_LAMP_ID, false);
-	_fe3d.pointlight_create(PREVIEW_LAMP_ID);
-	_fe3d.pointlight_setRadius(PREVIEW_LAMP_ID, fvec3(DEFAULT_POINTLIGHT_RADIUS));
-	_fe3d.pointlight_setIntensity(PREVIEW_LAMP_ID, DEFAULT_POINTLIGHT_INTENSITY);
-	_fe3d.pointlight_setVisible(PREVIEW_LAMP_ID, false);
+	// Load template pointlight
+	_fe3d.model_create(TEMPLATE_LAMP_ID, LAMP_MODEL_PATH);
+	_fe3d.model_setBaseSize(TEMPLATE_LAMP_ID, DEFAULT_LAMP_SIZE);
+	_fe3d.model_setShadowed(TEMPLATE_LAMP_ID, false);
+	_fe3d.model_setReflected(TEMPLATE_LAMP_ID, false);
+	_fe3d.model_setBright(TEMPLATE_LAMP_ID, true);
+	_fe3d.model_setVisible(TEMPLATE_LAMP_ID, false);
+	_fe3d.pointlight_create(TEMPLATE_LAMP_ID);
+	_fe3d.pointlight_setRadius(TEMPLATE_LAMP_ID, fvec3(DEFAULT_POINTLIGHT_RADIUS));
+	_fe3d.pointlight_setIntensity(TEMPLATE_LAMP_ID, DEFAULT_POINTLIGHT_INTENSITY);
+	_fe3d.pointlight_setVisible(TEMPLATE_LAMP_ID, false);
 
-	// Load preview spotlight
-	_fe3d.model_create(PREVIEW_TORCH_ID, TORCH_MODEL_PATH);
-	_fe3d.model_setBaseSize(PREVIEW_TORCH_ID, DEFAULT_TORCH_SIZE);
-	_fe3d.model_setShadowed(PREVIEW_TORCH_ID, false);
-	_fe3d.model_setReflected(PREVIEW_TORCH_ID, false);
-	_fe3d.model_setBright(PREVIEW_TORCH_ID, true);
-	_fe3d.model_setVisible(PREVIEW_TORCH_ID, false);
-	_fe3d.spotlight_create(PREVIEW_TORCH_ID);
-	_fe3d.spotlight_setPitch(PREVIEW_TORCH_ID, DEFAULT_SPOTLIGHT_PITCH);
-	_fe3d.spotlight_setIntensity(PREVIEW_TORCH_ID, DEFAULT_SPOTLIGHT_INTENSITY);
-	_fe3d.spotlight_setAngle(PREVIEW_TORCH_ID, DEFAULT_SPOTLIGHT_ANGLE);
-	_fe3d.spotlight_setDistance(PREVIEW_TORCH_ID, DEFAULT_SPOTLIGHT_DISTANCE);
-	_fe3d.spotlight_setVisible(PREVIEW_TORCH_ID, false);
+	// Load template spotlight
+	_fe3d.model_create(TEMPLATE_TORCH_ID, TORCH_MODEL_PATH);
+	_fe3d.model_setBaseSize(TEMPLATE_TORCH_ID, DEFAULT_TORCH_SIZE);
+	_fe3d.model_setShadowed(TEMPLATE_TORCH_ID, false);
+	_fe3d.model_setReflected(TEMPLATE_TORCH_ID, false);
+	_fe3d.model_setBright(TEMPLATE_TORCH_ID, true);
+	_fe3d.model_setVisible(TEMPLATE_TORCH_ID, false);
+	_fe3d.spotlight_create(TEMPLATE_TORCH_ID);
+	_fe3d.spotlight_setPitch(TEMPLATE_TORCH_ID, DEFAULT_SPOTLIGHT_PITCH);
+	_fe3d.spotlight_setIntensity(TEMPLATE_TORCH_ID, DEFAULT_SPOTLIGHT_INTENSITY);
+	_fe3d.spotlight_setAngle(TEMPLATE_TORCH_ID, DEFAULT_SPOTLIGHT_ANGLE);
+	_fe3d.spotlight_setDistance(TEMPLATE_TORCH_ID, DEFAULT_SPOTLIGHT_DISTANCE);
+	_fe3d.spotlight_setVisible(TEMPLATE_TORCH_ID, false);
 
-	// Load preview reflection
-	_fe3d.model_create(PREVIEW_CAMERA_ID, CAMERA_MODEL_PATH);
-	_fe3d.model_setBaseSize(PREVIEW_CAMERA_ID, DEFAULT_CAMERA_SIZE);
-	_fe3d.model_setShadowed(PREVIEW_CAMERA_ID, false);
-	_fe3d.model_setReflected(PREVIEW_CAMERA_ID, false);
-	_fe3d.model_setBright(PREVIEW_CAMERA_ID, true);
-	_fe3d.model_setVisible(PREVIEW_CAMERA_ID, false);
-	_fe3d.reflection_create(PREVIEW_CAMERA_ID);
-	_fe3d.reflection_setVisible(PREVIEW_CAMERA_ID, false);
+	// Load template reflection
+	_fe3d.model_create(TEMPLATE_CAMERA_ID, CAMERA_MODEL_PATH);
+	_fe3d.model_setBaseSize(TEMPLATE_CAMERA_ID, DEFAULT_CAMERA_SIZE);
+	_fe3d.model_setShadowed(TEMPLATE_CAMERA_ID, false);
+	_fe3d.model_setReflected(TEMPLATE_CAMERA_ID, false);
+	_fe3d.model_setBright(TEMPLATE_CAMERA_ID, true);
+	_fe3d.model_setVisible(TEMPLATE_CAMERA_ID, false);
+	_fe3d.reflection_create(TEMPLATE_CAMERA_ID);
+	_fe3d.reflection_setVisible(TEMPLATE_CAMERA_ID, false);
 
-	// Create ID textFields
+	// Create ID text fields
 	_gui.getGlobalScreen()->createTextField("modelID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 	_gui.getGlobalScreen()->createTextField("billboardID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 	_gui.getGlobalScreen()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
@@ -153,7 +153,7 @@ void WorldEditor::unload()
 		}
 	}
 
-	// Delete preview entities
+	// Delete template entities
 	_fe3d.terrain_deleteAll();
 	_fe3d.water_deleteAll();
 	_fe3d.model_deleteAll();
@@ -192,13 +192,13 @@ void WorldEditor::unload()
 	_currentSkyID = "";
 	_currentTerrainID = "";
 	_currentWaterID = "";
-	_currentPreviewModelID = "";
+	_currentTemplateModelID = "";
 	_selectedModelID = "";
 	_activeModelID = "";
-	_currentPreviewBillboardID = "";
+	_currentTemplateBillboardID = "";
 	_selectedBillboardID = "";
 	_activeBillboardID = "";
-	_currentPreviewSoundID = "";
+	_currentTemplateSoundID = "";
 	_selectedSpeakerID = "";
 	_activeSpeakerID = "";
 	_selectedLampID = "";

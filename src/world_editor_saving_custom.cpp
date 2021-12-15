@@ -60,7 +60,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	if(!skyID.empty() && _hasCustomWorldSky)
 	{
 		// Data to save
-		auto previewID = ("@" + skyID);
+		auto templateID = ("@" + skyID);
 		auto color = _fe3d.sky_getColor(skyID);
 		auto rotation = _fe3d.sky_getRotation(skyID);
 		auto lightness = _fe3d.sky_getInitialLightness(skyID);
@@ -69,7 +69,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 		file <<
 			"SKY " <<
 			skyID << " " <<
-			previewID << " " <<
+			templateID << " " <<
 			rotation << " " <<
 			lightness << " " <<
 			color.r << " " <<
@@ -82,13 +82,13 @@ const bool WorldEditor::saveCustomWorldToFile()
 	if(!terrainID.empty() && _hasCustomWorldTerrain)
 	{
 		// Data to save
-		string previewID = ("@" + terrainID);
+		string templateID = ("@" + terrainID);
 
 		// Write data
 		file <<
 			"TERRAIN " <<
 			terrainID << " " <<
-			previewID << endl;
+			templateID << endl;
 	}
 
 	// Water
@@ -96,7 +96,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 	if(!waterID.empty() && _hasCustomWorldWater)
 	{
 		// Data to save
-		string previewID = ("@" + waterID);
+		string templateID = ("@" + waterID);
 		auto color = _fe3d.water_getColor(waterID);
 		auto speed = _fe3d.water_getSpeed(waterID);
 		auto transparency = _fe3d.water_getTransparency(waterID);
@@ -105,7 +105,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 		file <<
 			"WATER " <<
 			waterID << " " <<
-			previewID << " " <<
+			templateID << " " <<
 			color.r << " " <<
 			color.g << " " <<
 			color.b << " " <<
@@ -141,22 +141,22 @@ const bool WorldEditor::saveCustomWorldToFile()
 			auto transparency = _fe3d.model_getTransparency(modelID, "");
 			auto lightness = _fe3d.model_getLightness(modelID, "");
 
-			// Extract preview ID
-			string previewID;
+			// Extract template ID
+			string templateID;
 			if(_loadedModelIDs.find(modelID) == _loadedModelIDs.end())
 			{
-				previewID = _outsideLoadedModelIDs.at(modelID);
+				templateID = _outsideLoadedModelIDs.at(modelID);
 			}
 			else
 			{
-				previewID = _loadedModelIDs.at(modelID);
+				templateID = _loadedModelIDs.at(modelID);
 			}
 
 			// Write data
 			file <<
 				"MODEL " <<
 				modelID << " " <<
-				previewID << " " <<
+				templateID << " " <<
 				isVisible << " " <<
 				isFrozen << " " <<
 				isAabbRaycastResponsive << " " <<
@@ -355,22 +355,22 @@ const bool WorldEditor::saveCustomWorldToFile()
 			// Convert spaces
 			replace(textContent.begin(), textContent.end(), ' ', '?');
 
-			// Extract preview ID
-			string previewID;
+			// Extract template ID
+			string templateID;
 			if(_loadedBillboardIDs.find(billboardID) == _loadedBillboardIDs.end())
 			{
-				previewID = _outsideLoadedBillboardIDs.at(billboardID);
+				templateID = _outsideLoadedBillboardIDs.at(billboardID);
 			}
 			else
 			{
-				previewID = _loadedBillboardIDs.at(billboardID);
+				templateID = _loadedBillboardIDs.at(billboardID);
 			}
 
 			// Write data
 			file <<
 				"BILLBOARD " <<
 				billboardID << " " <<
-				previewID << " " <<
+				templateID << " " <<
 				isVisible << " " <<
 				isAabbRaycastResponsive << " " <<
 				isAabbCollisionResponsive << " " <<
@@ -438,22 +438,22 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//		auto maxVolume = _fe3d.sound_getMaxVolume(soundID);
 	//		auto maxDistance = _fe3d.sound_getMaxDistance(soundID);
 
-	//		// Extract preview ID
-	//		string previewID;
+	//		// Extract template ID
+	//		string templateID;
 	//		if(_loadedSoundIDs.find(soundID) == _loadedSoundIDs.end())
 	//		{
-	//			previewID = _outsideLoadedSoundIDs.at(soundID);
+	//			templateID = _outsideLoadedSoundIDs.at(soundID);
 	//		}
 	//		else
 	//		{
-	//			previewID = _loadedSoundIDs.at(soundID);
+	//			templateID = _loadedSoundIDs.at(soundID);
 	//		}
 
 	//		// Write data
 	//		file <<
 	//			"SOUND " <<
 	//			soundID << " " <<
-	//			previewID << " " <<
+	//			templateID << " " <<
 	//			position.x << " " <<
 	//			position.y << " " <<
 	//			position.z << " " <<

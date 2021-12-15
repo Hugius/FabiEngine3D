@@ -6,7 +6,7 @@ void WorldEditor::_updateSoundEditing()
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
 	// User must not be placing anything
-	if(_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
+	if(_currentTemplateModelID.empty() && _currentTemplateBillboardID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
 		// Reset selected speaker from last frame
 		if(!_dontResetSelectedSpeaker)
@@ -24,7 +24,7 @@ void WorldEditor::_updateSoundEditing()
 		// Check if user selected a speaker model
 		for(const auto& ID : _fe3d.model_getIDs())
 		{
-			// Must be sound preview entity
+			// Must be sound template entity
 			if(ID.substr(0, string("@@speaker").size()) == "@@speaker")
 			{
 				// Cursor must be in 3D space, no GUI interruptions, no RMB holding down

@@ -15,25 +15,25 @@ public:
 	void load();
 	void unload();
 	void update();
-	void startAnimation(const string& animationID, const string& modelID, int timesToPlay);
-	void pauseAnimation(const string& animationID, const string& modelID);
-	void resumeAnimation(const string& animationID, const string& modelID);
-	void fadeAnimation(const string& animationID, const string& modelID, unsigned int framestep);
-	void stopAnimation(const string& animationID, const string& modelID);
-	void stopAnimations();
+	void startModelAnimation(const string& animationID, const string& modelID, int timesToPlay);
+	void pauseModelAnimation(const string& animationID, const string& modelID);
+	void resumeModelAnimation(const string& animationID, const string& modelID);
+	void fadeModelAnimation(const string& animationID, const string& modelID, unsigned int framestep);
+	void stopModelAnimation(const string& animationID, const string& modelID);
+	void stopModelAnimations();
 
 	// STRING
 	const vector<string> getAnimationIDs() const;
-	const vector<string> getStartedAnimationIDs() const;
-	const vector<string> getStartedAnimationIDs(const string& modelID) const;
+	const vector<string> getStartedModelAnimationIDs() const;
+	const vector<string> getStartedModelAnimationIDs(const string& modelID) const;
 
 	// BOOL
 	const bool isLoaded() const;
 	const bool isAnimationExisting(const string& ID) const;
-	const bool isAnimationStarted(const string& animationID, const string& modelID) const;
-	const bool isAnimationPlaying(const string& animationID, const string& modelID) const;
-	const bool isAnimationPaused(const string& animationID, const string& modelID) const;
-	const bool isAnimationFading(const string& animationID, const string& modelID) const;
+	const bool isModelAnimationStarted(const string& animationID, const string& modelID) const;
+	const bool isModelAnimationPlaying(const string& animationID, const string& modelID) const;
+	const bool isModelAnimationPaused(const string& animationID, const string& modelID) const;
+	const bool isModelAnimationFading(const string& animationID, const string& modelID) const;
 	const bool loadFromFile(bool mustCheckPreviewModel);
 	const bool saveToFile() const;
 
@@ -50,7 +50,7 @@ private:
 	void _updateAnimationCreating();
 	void _updateAnimationChoosing();
 	void _updateAnimationDeleting();
-	void _updateAnimationExecution();
+	void _updateModelAnimationExecution();
 	void _updateCamera();
 	void _updateMiscellaneous();
 	void _deleteAnimation(const string& ID);
@@ -63,8 +63,8 @@ private:
 	shared_ptr<Animation3d> _getAnimation(const string& ID) const;
 
 	// STRING
-	set<pair<string, string>> _animationsToStop;
-	set<pair<string, string>> _animationsToStartAgain;
+	set<pair<string, string>> _modelAnimationsToStop;
+	set<pair<string, string>> _modelAnimationsToStart;
 	string _currentProjectID = "";
 	string _currentAnimationID = "";
 	string _currentPartID = "";
@@ -105,7 +105,7 @@ private:
 	bool _isEditorLoaded = false;
 
 	// MISCELLANEOUS
-	map<pair<string, string>, Animation3d> _startedAnimations;
+	map<pair<string, string>, Animation3d> _startedModelAnimations;
 	vector<shared_ptr<Animation3d>> _animations;
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;

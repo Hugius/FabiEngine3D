@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _animation3dEditor.isAnimationStarted(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation3dEditor.isModelAnimationStarted(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -25,7 +25,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _animation3dEditor.isAnimationPlaying(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation3dEditor.isModelAnimationPlaying(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -38,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _animation3dEditor.isAnimationPaused(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation3dEditor.isModelAnimationPaused(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -51,7 +51,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _animation3dEditor.isAnimationFading(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation3dEditor.isModelAnimationFading(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}

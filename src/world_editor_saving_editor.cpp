@@ -106,7 +106,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 		if((modelID[0] != '@') || isLevelOfDetailEntity)
 		{
 			// Check if model has bound animation
-			if(!_animation3dEditor.getStartedAnimationIDs(modelID).empty())
+			if(!_animation3dEditor.getStartedModelAnimationIDs(modelID).empty())
 			{
 				// Reset main transformation
 				_fe3d.model_setBasePosition(modelID, _initialModelPosition[modelID]);
@@ -133,8 +133,8 @@ const bool WorldEditor::saveEditorWorldToFile()
 			auto rotation = _fe3d.model_getBaseRotation(modelID);
 			auto size = _fe3d.model_getBaseSize(modelID);
 			auto isFrozen = _fe3d.model_isFrozen(modelID);
-			auto animationID = (_animation3dEditor.getStartedAnimationIDs(modelID).empty()) ? "" :
-				_animation3dEditor.getStartedAnimationIDs(modelID)[0];
+			auto animationID = (_animation3dEditor.getStartedModelAnimationIDs(modelID).empty()) ? "" :
+				_animation3dEditor.getStartedModelAnimationIDs(modelID)[0];
 
 			// Convert empty string
 			animationID = (animationID.empty()) ? "?" : animationID;

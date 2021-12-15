@@ -136,7 +136,7 @@ void Animation3dEditor::_updateMiscellaneous()
 		if(_mustUpdateCurrentFramePreview)
 		{
 			// Check if animation is not started
-			if(!isAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID()))
+			if(!isModelAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID()))
 			{
 				// Check if animation has a preview model
 				if(_fe3d.model_isExisting(currentAnimation->getPreviewModelID()))

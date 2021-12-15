@@ -134,7 +134,7 @@ void WorldEditor::_updateModelEditing()
 			}
 
 			// Check if an animation ID is clicked
-			auto lastAnimationID = _animation3dEditor.getStartedAnimationIDs(_activeModelID);
+			auto lastAnimationID = _animation3dEditor.getStartedModelAnimationIDs(_activeModelID);
 			string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("animationList");
 			if(!selectedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
@@ -142,7 +142,7 @@ void WorldEditor::_updateModelEditing()
 				if(!lastAnimationID.empty())
 				{
 					// Stop animation
-					_animation3dEditor.stopAnimation(lastAnimationID.back(), _activeModelID);
+					_animation3dEditor.stopModelAnimation(lastAnimationID.back(), _activeModelID);
 
 					// Reset main transformation
 					_fe3d.model_setBasePosition(_activeModelID, _initialModelPosition[_activeModelID]);
@@ -165,7 +165,7 @@ void WorldEditor::_updateModelEditing()
 				}
 
 				// Start chosen animation
-				_animation3dEditor.startAnimation(selectedButtonID, _activeModelID, -1);
+				_animation3dEditor.startModelAnimation(selectedButtonID, _activeModelID, -1);
 
 				// Miscellaneous
 				_gui.getGlobalScreen()->deleteChoiceForm("animationList");
@@ -225,11 +225,11 @@ void WorldEditor::_updateModelEditing()
 			if((position != oldPosition) || (rotation != oldRotation) || (size != oldSize))
 			{
 				// Check if animation is playing
-				auto animationIDs = _animation3dEditor.getStartedAnimationIDs(_activeModelID);
+				auto animationIDs = _animation3dEditor.getStartedModelAnimationIDs(_activeModelID);
 				if(!animationIDs.empty())
 				{
 					// Stop animation
-					_animation3dEditor.stopAnimation(animationIDs[0], _activeModelID);
+					_animation3dEditor.stopModelAnimation(animationIDs[0], _activeModelID);
 
 					// Save new initial position
 					if(position != oldPosition)
@@ -269,7 +269,7 @@ void WorldEditor::_updateModelEditing()
 					}
 
 					// Start animation again
-					_animation3dEditor.startAnimation(animationIDs[0], _activeModelID, -1);
+					_animation3dEditor.startModelAnimation(animationIDs[0], _activeModelID, -1);
 				}
 				else // No animation playing
 				{

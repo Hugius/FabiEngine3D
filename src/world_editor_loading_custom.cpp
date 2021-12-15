@@ -320,7 +320,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 			}
 
 			// Start animation3D
-			_animation3dEditor.startAnimation(animationID, modelID, remainingLoops);
+			_animation3dEditor.startModelAnimation(animationID, modelID, remainingLoops);
 
 			// Check if animation exists
 			if(_animation3dEditor.isAnimationExisting(animationID))
@@ -331,7 +331,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				auto frameData = animationData->getFrames()[frameIndex];
 
 				// Set properties
-				isPaused ? _animation3dEditor.pauseAnimation(animationID, modelID) : void();
+				isPaused ? _animation3dEditor.pauseModelAnimation(animationID, modelID) : void();
 				animationData->setSpeedMultiplier(speedMultiplier);
 				animationData->setFadeFramestep(fadeFramestep);
 				animationData->setFrameIndex(frameIndex);

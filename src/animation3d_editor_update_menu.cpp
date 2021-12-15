@@ -65,9 +65,9 @@ void Animation3dEditor::_updateChoiceMenu()
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 		{
 			// Stop animation if playing
-			if(isAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID()))
+			if(isModelAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID()))
 			{
-				stopAnimation(_currentAnimationID, currentAnimation->getPreviewModelID());
+				stopModelAnimation(_currentAnimationID, currentAnimation->getPreviewModelID());
 			}
 
 			// Check if animation has preview model
@@ -141,12 +141,12 @@ void Animation3dEditor::_updateChoiceMenu()
 			}
 
 			// Start animation
-			startAnimation(_currentAnimationID, currentAnimation->getPreviewModelID(), 0);
+			startModelAnimation(_currentAnimationID, currentAnimation->getPreviewModelID(), 0);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("stop")->isHovered())
 		{
 			// Stop animation
-			stopAnimation(_currentAnimationID, currentAnimation->getPreviewModelID());
+			stopModelAnimation(_currentAnimationID, currentAnimation->getPreviewModelID());
 
 			// Reset preview model transformation
 			_fe3d.model_setBaseSize(currentAnimation->getPreviewModelID(), currentAnimation->getInitialSize());
@@ -200,9 +200,9 @@ void Animation3dEditor::_updateChoiceMenu()
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			// Stop animation
-			if(isAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID()))
+			if(isModelAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID()))
 			{
-				stopAnimation(_currentAnimationID, currentAnimation->getPreviewModelID());
+				stopModelAnimation(_currentAnimationID, currentAnimation->getPreviewModelID());
 			}
 
 			// Go to next screen
@@ -231,7 +231,7 @@ void Animation3dEditor::_updateChoiceMenu()
 		}
 
 		// Update buttons hoverability
-		bool isPlaying = isAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID());
+		bool isPlaying = isModelAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID());
 		bool hasPreviewModel = _fe3d.model_isExisting(currentAnimation->getPreviewModelID());
 		screen->getButton("preview")->setHoverable(!isPlaying);
 		screen->getButton("start")->setHoverable(!isPlaying && hasPreviewModel && (currentAnimation->getFrames().size() > 1));

@@ -1,11 +1,11 @@
 #include "animation3d_editor.hpp"
 
-void Animation3dEditor::_updateAnimationExecution()
+void Animation3dEditor::_updateModelAnimationExecution()
 {
 	if(!_fe3d.application_isPaused())
 	{
 		// Update all started animations
-		for(auto& [idPair, animation] : _startedAnimations)
+		for(auto& [idPair, animation] : _startedModelAnimations)
 		{
 			// Skip paused animations
 			if(animation.isPaused())
@@ -444,15 +444,15 @@ void Animation3dEditor::_updateAnimationExecution()
 			{
 				if(animation.getFrameIndex() == animation.getFadeFrameIndex()) // Animation faded to its end
 				{
-					_animationsToStop.insert(idPair);
+					_modelAnimationsToStop.insert(idPair);
 				}
 				else if(animation.getFrameIndex() == (static_cast<unsigned int>(animation.getFrames().size()) - 1)) // Animation finished
 				{
 					// Check if animation is endless
 					if(animation.getTimesToPlay() == -1)
 					{
-						_animationsToStop.insert(idPair);
-						_animationsToStartAgain.insert(idPair);
+						_modelAnimationsToStop.insert(idPair);
+						_modelAnimationsToStart.insert(idPair);
 					}
 					else
 					{
@@ -462,7 +462,7 @@ void Animation3dEditor::_updateAnimationExecution()
 						// Check if animation must stop
 						if(animation.getTimesToPlay() == 0)
 						{
-							_animationsToStop.insert(idPair);
+							_modelAnimationsToStop.insert(idPair);
 						}
 						else
 						{
@@ -485,27 +485,27 @@ void Animation3dEditor::_updateAnimationExecution()
 		}
 
 		// Remove all animations that ended
-		for(const auto& idPair : _animationsToStop)
+		for(const auto& idPair : _modelAnimationsToStop)
 		{
 			// Check if animation is still started
-			if(isAnimationStarted(idPair.first, idPair.second))
+			if(isModelAnimationStarted(idPair.first, idPair.second))
 			{
 				// Stop animation
-				stopAnimation(idPair.first, idPair.second);
+				stopModelAnimation(idPair.first, idPair.second);
 			}
 		}
-		_animationsToStop.clear();
+		_modelAnimationsToStop.clear();
 
 		// Start all endless animations again
-		for(const auto& idPair : _animationsToStartAgain)
+		for(const auto& idPair : _modelAnimationsToStart)
 		{
 			// Check if animation is not already started
-			if(!isAnimationStarted(idPair.first, idPair.second))
+			if(!isModelAnimationStarted(idPair.first, idPair.second))
 			{
 				// Start animation
-				startAnimation(idPair.first, idPair.second, -1);
+				startModelAnimation(idPair.first, idPair.second, -1);
 			}
 		}
-		_animationsToStartAgain.clear();
+		_modelAnimationsToStart.clear();
 	}
 }

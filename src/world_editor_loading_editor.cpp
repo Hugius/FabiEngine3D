@@ -221,7 +221,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				// Start animation3D
 				if(!animation3dID.empty())
 				{
-					_animation3dEditor.startAnimation(animation3dID, modelID, -1);
+					_animation3dEditor.startModelAnimation(animation3dID, modelID, -1);
 				}
 
 				// Check if instanced

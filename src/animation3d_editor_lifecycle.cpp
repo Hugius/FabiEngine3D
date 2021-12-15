@@ -94,9 +94,9 @@ void Animation3dEditor::unload()
 
 	// Reset editor properties
 	_animations.clear();
-	_animationsToStop.clear();
-	_animationsToStartAgain.clear();
-	_startedAnimations.clear();
+	_modelAnimationsToStop.clear();
+	_modelAnimationsToStart.clear();
+	_startedModelAnimations.clear();
 	_currentAnimationID = "";
 	_currentPartID = "";
 	_hoveredModelID = "";
@@ -118,7 +118,8 @@ void Animation3dEditor::unload()
 	}
 }
 
-void Animation3dEditor::_loadGUI(){
+void Animation3dEditor::_loadGUI()
+{
 	// Temporary values
 	auto leftWindow = _gui.getViewport("left")->getWindow("main");
 
@@ -165,7 +166,7 @@ void Animation3dEditor::_unloadGUI()
 void Animation3dEditor::update()
 {
 	// Animation execution
-	_updateAnimationExecution();
+	_updateModelAnimationExecution();
 
 	// Editor updates
 	if(_isEditorLoaded)

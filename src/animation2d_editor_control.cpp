@@ -56,10 +56,10 @@ void Animation2dEditor::pauseBillboardAnimation(const string& animationID, const
 
 	}
 
-	// Check if animation is paused
+	// Check if animation paused
 	if(isBillboardAnimationPaused(animationID, billboardID))
 	{
-		Logger::throwWarning(errorMessage + "animation already paused!");
+		Logger::throwWarning(errorMessage + "animation not playing!");
 	}
 
 	// Pause animation
@@ -86,7 +86,7 @@ void Animation2dEditor::resumeBillboardAnimation(const string& animationID, cons
 	// Check if animation not paused
 	if(!isBillboardAnimationPaused(animationID, billboardID))
 	{
-		Logger::throwWarning(errorMessage + "animation already playing!");
+		Logger::throwWarning(errorMessage + "animation not paused!");
 	}
 
 	// Resume animation
@@ -178,10 +178,10 @@ void Animation2dEditor::pauseImageAnimation(const string& animationID, const str
 
 	}
 
-	// Check if animation is paused
+	// Check if animation paused
 	if(isImageAnimationPaused(animationID, imageID))
 	{
-		Logger::throwWarning(errorMessage + "animation already paused!");
+		Logger::throwWarning(errorMessage + "animation not playing!");
 	}
 
 	// Pause animation
@@ -208,7 +208,7 @@ void Animation2dEditor::resumeImageAnimation(const string& animationID, const st
 	// Check if animation not paused
 	if(!isImageAnimationPaused(animationID, imageID))
 	{
-		Logger::throwWarning(errorMessage + "animation already playing!");
+		Logger::throwWarning(errorMessage + "animation not paused!");
 	}
 
 	// Resume animation

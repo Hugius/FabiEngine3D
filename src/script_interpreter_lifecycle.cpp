@@ -252,7 +252,7 @@ void ScriptInterpreter::unload()
 	}
 
 	// Stop animations
-	_animation3dEditor.stopAnimations();
+	_animation3dEditor.stopModelAnimations();
 
 	// Delete all other entities
 	_fe3d.terrain_deleteAll();

@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_animation3dEditor.startAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
+				_animation3dEditor.startModelAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -25,7 +25,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_animation3dEditor.pauseAnimation(arguments[1].getString(), arguments[0].getString());
+				_animation3dEditor.pauseModelAnimation(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -38,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_animation3dEditor.resumeAnimation(arguments[1].getString(), arguments[0].getString());
+				_animation3dEditor.resumeModelAnimation(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -51,7 +51,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_animation3dEditor.fadeAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
+				_animation3dEditor.fadeModelAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -64,7 +64,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				_animation3dEditor.stopAnimation(arguments[1].getString(), arguments[0].getString());
+				_animation3dEditor.stopModelAnimation(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

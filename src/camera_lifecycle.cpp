@@ -6,7 +6,7 @@
 using std::max;
 using std::clamp;
 
-Camera::Camera(RenderBus& renderBus, Window& window)
+Camera::Camera(RenderBus& renderBus, RenderWindow& window)
 	:
 	_renderBus(renderBus),
 	_window(window)

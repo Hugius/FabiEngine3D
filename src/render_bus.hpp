@@ -90,6 +90,7 @@ public:
 	void setTriangleCountingEnabled(bool value);
 	void setDofDynamic(bool value);
 	void setBloomType(BloomType value);
+	void setGuiDepth(unsigned int value);
 
 	// STRING
 	const string& getCursorEntityID() const;
@@ -151,6 +152,7 @@ public:
 	const unsigned int getPlanarRefractionQuality() const;
 	const unsigned int getBloomBlurCount() const;
 	const unsigned int getTriangleCount() const;
+	const unsigned int getGuiDepth() const;
 
 	// BOOL
 	const bool isReflectionsEnabled() const;
@@ -260,6 +262,7 @@ private:
 	unsigned int _planarRefractionQuality = Config::MIN_REFRACTION_QUALITY;
 	unsigned int _bloomBlurCount = 0;
 	unsigned int _triangleCount = 0;
+	unsigned int _guiDepth = 0;
 
 	// BOOL
 	bool _isReflectionsEnabled = true;

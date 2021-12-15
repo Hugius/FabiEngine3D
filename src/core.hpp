@@ -6,7 +6,7 @@
 #include "audio_loader.hpp"
 #include "input_handler.hpp"
 #include "render_bus.hpp"
-#include "window.hpp"
+#include "render_window.hpp"
 #include "camera.hpp"
 #include "master_renderer.hpp"
 #include "sky_entity_manager.hpp"
@@ -68,7 +68,7 @@ private:
 	InputHandler _inputHandler;
 	NetworkingServer _networkingServer;
 	NetworkingClient _networkingClient;
-	Window _window;
+	RenderWindow _window;
 	Sound2dManager _sound2dManager;
 	Sound3dManager _sound3dManager;
 	ShadowGenerator _shadowGenerator;

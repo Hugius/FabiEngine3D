@@ -20,8 +20,9 @@ Core::Core(FabiEngine3D& fe3d)
 	_terrainEntityManager(_textureLoader),
 	_modelEntityManager(_meshLoader, _renderBus, _timer),
 	_billboardEntityManager(_renderBus, _camera),
-	_textEntityManager(_textureLoader),
-	_raycaster(_renderBus, _terrainEntityManager)
+	_textEntityManager(_textureLoader, _renderBus),
+	_raycaster(_renderBus, _terrainEntityManager),
+	_imageEntityManager(_renderBus)
 {
 
 }

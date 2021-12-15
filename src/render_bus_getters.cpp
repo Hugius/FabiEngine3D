@@ -265,6 +265,11 @@ const unsigned int RenderBus::getTriangleCount() const
 	return _triangleCount;
 }
 
+const unsigned int RenderBus::getGuiDepth() const
+{
+	return _guiDepth;
+}
+
 const unsigned int RenderBus::getShadowQuality() const
 {
 	return _shadowQuality;

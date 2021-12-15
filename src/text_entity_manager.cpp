@@ -3,9 +3,10 @@
 
 using std::make_shared;
 
-TextEntityManager::TextEntityManager(TextureLoader& textureLoader)
+TextEntityManager::TextEntityManager(TextureLoader& textureLoader, RenderBus& renderBus)
 	:
 	_textureLoader(textureLoader),
+	_renderBus(renderBus),
 	_centeredRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true)),
 	_nonCenteredRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
 {
@@ -37,6 +38,8 @@ void TextEntityManager::createEntity(const string& ID, bool isCentered, bool isD
 	getEntity(ID)->setCentered(isCentered);
 	getEntity(ID)->setDynamic(isDynamic);
 	getEntity(ID)->setRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer);
+	getEntity(ID)->setDepth(_renderBus.getGuiDepth());
+	_renderBus.setGuiDepth(_renderBus.getGuiDepth() + 1);
 }
 
 void TextEntityManager::deleteEntity(const string& ID)

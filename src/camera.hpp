@@ -1,14 +1,14 @@
 #pragma once
 
 #include "render_bus.hpp"
-#include "window.hpp"
+#include "render_window.hpp"
 
 using std::numeric_limits;
 
 class Camera final
 {
 public:
-	Camera(RenderBus& renderBus, Window& window);
+	Camera(RenderBus& renderBus, RenderWindow& window);
 
 	// VOID
 	void reset();
@@ -118,5 +118,5 @@ private:
 
 	// MISCELLANEOUS
 	RenderBus& _renderBus;
-	Window& _window;
+	RenderWindow& _window;
 };

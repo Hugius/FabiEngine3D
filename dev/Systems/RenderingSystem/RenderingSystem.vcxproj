@@ -52,7 +52,7 @@
     <ClCompile Include="..\..\..\src\sky_entity_color_renderer.cpp" />
     <ClCompile Include="..\..\..\src\terrain_entity_color_renderer.cpp" />
     <ClCompile Include="..\..\..\src\water_entity_color_renderer.cpp" />
-    <ClCompile Include="..\..\..\src\window.cpp" />
+    <ClCompile Include="..\..\..\src\render_window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\aabb_entity_color_renderer.hpp" />
@@ -81,7 +81,7 @@
     <ClInclude Include="..\..\..\src\sky_entity_color_renderer.hpp" />
     <ClInclude Include="..\..\..\src\terrain_entity_color_renderer.hpp" />
     <ClInclude Include="..\..\..\src\water_entity_color_renderer.hpp" />
-    <ClInclude Include="..\..\..\src\window.hpp" />
+    <ClInclude Include="..\..\..\src\render_window.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\app\engine\shaders\aabb_entity_color_shader.frag" />

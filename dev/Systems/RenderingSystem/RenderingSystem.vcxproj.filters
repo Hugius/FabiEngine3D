@@ -78,7 +78,7 @@
     <ClCompile Include="..\..\..\src\shadow_generator.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\window.cpp">
+    <ClCompile Include="..\..\..\src\render_window.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\base_renderer.cpp">
@@ -167,7 +167,7 @@
     <ClInclude Include="..\..\..\src\shadow_generator.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\window.hpp">
+    <ClInclude Include="..\..\..\src\render_window.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\base_renderer.hpp">

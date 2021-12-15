@@ -10,7 +10,7 @@ using std::unordered_map;
 class TextEntityManager final
 {
 public:
-	TextEntityManager(TextureLoader& textureLoader);
+	TextEntityManager(TextureLoader& textureLoader, RenderBus& renderBus);
 
 	// VOID
 	void update();
@@ -35,4 +35,5 @@ private:
 	const shared_ptr<RenderBuffer> _nonCenteredRenderBuffer;
 	unordered_map<string, shared_ptr<TextEntity>> _entities;
 	TextureLoader& _textureLoader;
+	RenderBus& _renderBus;
 };

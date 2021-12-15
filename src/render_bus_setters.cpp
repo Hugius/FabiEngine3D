@@ -383,6 +383,11 @@ void RenderBus::setBloomType(BloomType value)
 	_bloomType = value;
 }
 
+void RenderBus::setGuiDepth(unsigned int value)
+{
+	_guiDepth = value;
+}
+
 void RenderBus::setCursorEntityID(const string& value)
 {
 	_cursorEntityID = value;

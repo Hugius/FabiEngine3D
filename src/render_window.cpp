@@ -1,10 +1,10 @@
-#include "window.hpp"
+#include "render_window.hpp"
 #include "logger.hpp"
 #include "configuration.hpp"
 
 #include <SDL\\SDL_syswm.h>
 
-Window::Window(LibraryLoader& libraryLoader)
+RenderWindow::RenderWindow(LibraryLoader& libraryLoader)
 	:
 	_windowPointer(libraryLoader.getWindowPointer())
 {
@@ -12,33 +12,33 @@ Window::Window(LibraryLoader& libraryLoader)
 	disableVsync();
 }
 
-Window::~Window()
+RenderWindow::~RenderWindow()
 {
 	SDL_DestroyWindow(_windowPointer);
 }
 
-void Window::setTitle(const string& title)
+void RenderWindow::setTitle(const string& title)
 {
 	SDL_SetWindowTitle(_windowPointer, title.c_str());
 }
 
-void Window::setSize(ivec2 size)
+void RenderWindow::setSize(ivec2 size)
 {
 	SDL_SetWindowSize(_windowPointer, size.x, size.y);
 	center();
 }
 
-void Window::center()
+void RenderWindow::center()
 {
 	SDL_SetWindowPosition(_windowPointer, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 }
 
-void Window::setOpacity(float value)
+void RenderWindow::setOpacity(float value)
 {
 	SDL_SetWindowOpacity(_windowPointer, value);
 }
 
-void Window::enableColorKeying(fvec3 color)
+void RenderWindow::enableColorKeying(fvec3 color)
 {
 	// Get window handle
 	SDL_SysWMinfo wmInfo;
@@ -51,7 +51,7 @@ void Window::enableColorKeying(fvec3 color)
 	SetLayeredWindowAttributes(hwnd, RGB(static_cast<int>(color.r * 255.0f), static_cast<int>(color.g * 255), static_cast<int>(color.b * 255)), 0, LWA_COLORKEY);
 }
 
-void Window::disableColorKeying(fvec3 color)
+void RenderWindow::disableColorKeying(fvec3 color)
 {
 	// Get window handle
 	SDL_SysWMinfo wmInfo;
@@ -64,79 +64,79 @@ void Window::disableColorKeying(fvec3 color)
 	SetLayeredWindowAttributes(hwnd, RGB(static_cast<int>(color.r * 255.0f), static_cast<int>(color.g * 255), static_cast<int>(color.b * 255)), 0, LWA_ALPHA);
 }
 
-void Window::showBorder()
+void RenderWindow::showBorder()
 {
 	SDL_SetWindowBordered(_windowPointer, SDL_TRUE);
 }
 
-void Window::hideBorder()
+void RenderWindow::hideBorder()
 {
 	SDL_SetWindowBordered(_windowPointer, SDL_FALSE);
 }
 
-void Window::enableFullscreen()
+void RenderWindow::enableFullscreen()
 {
 	SDL_SetWindowFullscreen(_windowPointer, SDL_TRUE);
 }
 
-void Window::disableFullscreen()
+void RenderWindow::disableFullscreen()
 {
 	SDL_SetWindowFullscreen(_windowPointer, SDL_FALSE);
 }
 
-void Window::enableVsync()
+void RenderWindow::enableVsync()
 {
 	SDL_GL_SetSwapInterval(1);
 }
 
-void Window::disableVsync()
+void RenderWindow::disableVsync()
 {
 	SDL_GL_SetSwapInterval(0);
 }
 
-void Window::swapBackBuffer()
+void RenderWindow::swapBackBuffer()
 {
 	SDL_GL_SwapWindow(_windowPointer);
 }
 
-void Window::showWindow()
+void RenderWindow::showWindow()
 {
 	SDL_ShowWindow(_windowPointer);
 }
 
-void Window::hideWindow()
+void RenderWindow::hideWindow()
 {
 	SDL_HideWindow(_windowPointer);
 }
 
-void Window::showCursor()
+void RenderWindow::showCursor()
 {
 	SDL_ShowCursor(SDL_ENABLE);
 }
 
-void Window::hideCursor()
+void RenderWindow::hideCursor()
 {
 	SDL_ShowCursor(SDL_DISABLE);
 }
 
-void Window::setCursorPosition(ivec2 pos)
+void RenderWindow::setCursorPosition(ivec2 pos)
 {
 	SDL_WarpMouseInWindow(_windowPointer, pos.x, pos.y);
 }
 
-const ivec2 Window::getCursorPosition() const
+const ivec2 RenderWindow::getCursorPosition() const
 {
 	int x, y;
 	SDL_GetMouseState(&x, &y);
 	return ivec2(x, y);
 }
 
-const bool Window::isCursorVisible() const
+const bool RenderWindow::isCursorVisible() const
 {
 	return static_cast<bool>(SDL_ShowCursor(SDL_QUERY));
 }
 
-const bool Window::isVsyncEnabled() const
+const bool RenderWindow::isVsyncEnabled() const
 {
 	return SDL_GL_GetSwapInterval();
 }

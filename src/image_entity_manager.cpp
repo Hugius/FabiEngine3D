@@ -3,8 +3,9 @@
 
 using std::make_shared;
 
-ImageEntityManager::ImageEntityManager()
+ImageEntityManager::ImageEntityManager(RenderBus& renderBus)
 	:
+	_renderBus(renderBus),
 	_centeredRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true)),
 	_nonCenteredRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
 {
@@ -32,11 +33,11 @@ const unordered_map<string, shared_ptr<ImageEntity>>& ImageEntityManager::getEnt
 
 void ImageEntityManager::createEntity(const string& ID, bool isCentered)
 {
-	//_guiDepth++;
-	//getEntity(ID)->setDepth(_guiDepth);
 	_entities.insert(make_pair(ID, make_shared<ImageEntity>(ID)));
 	getEntity(ID)->setRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer);
 	getEntity(ID)->setCentered(isCentered);
+	getEntity(ID)->setDepth(_renderBus.getGuiDepth());
+	_renderBus.setGuiDepth(_renderBus.getGuiDepth() + 1);
 }
 
 void ImageEntityManager::deleteEntity(const string& ID)

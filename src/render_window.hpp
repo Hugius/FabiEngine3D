@@ -8,11 +8,11 @@
 
 using std::string;
 
-class Window final
+class RenderWindow final
 {
 public:
-	Window(LibraryLoader& libraryLoader);
-	~Window();
+	RenderWindow(LibraryLoader& libraryLoader);
+	~RenderWindow();
 
 	// VOID
 	void setTitle(const string& title);

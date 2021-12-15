@@ -63,8 +63,8 @@ void Animation3dEditor::load()
 	// Miscellaneous
 	_fe3d.reflection_create("@@reflection");
 	_fe3d.reflection_capture("@@reflection");
-	_gui.getGlobalScreen()->createTextField("animationID", fvec2(0.0f, -0.45f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
-	_gui.getGlobalScreen()->createTextField("animationFrame", fvec2(0.0f, -0.55f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
+	_gui.getOverlay()->createTextField("animationID", fvec2(0.0f, -0.45f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
+	_gui.getOverlay()->createTextField("animationFrame", fvec2(0.0f, -0.55f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 	_isEditorLoaded = true;
 }
 
@@ -89,8 +89,8 @@ void Animation3dEditor::unload()
 	_fe3d.model_deleteAll();
 
 	// Delete textfields
-	_gui.getGlobalScreen()->deleteTextField("animationID");
-	_gui.getGlobalScreen()->deleteTextField("animationFrame");
+	_gui.getOverlay()->deleteTextField("animationID");
+	_gui.getOverlay()->deleteTextField("animationFrame");
 
 	// Reset editor properties
 	_animations.clear();

@@ -1,13 +1,13 @@
-#include "gui_global_screen.hpp"
+#include "gui_overlay.hpp"
 
-GuiGlobalScreen::GuiGlobalScreen(FabiEngine3D& fe3d)
+GuiOverlay::GuiOverlay(FabiEngine3D& fe3d)
 	:
 	_fe3d(fe3d)
 {
 
 }
 
-void GuiGlobalScreen::update()
+void GuiOverlay::update()
 {
 	// Update scrolling lists
 	for(const auto& scrollingList : _scrollingLists)
@@ -31,12 +31,12 @@ void GuiGlobalScreen::update()
 	_updateValueFormDeleting();
 }
 
-void GuiGlobalScreen::setFocus(bool focused)
+void GuiOverlay::setFocused(bool value)
 {
-	_isFocused = focused;
+	_isFocused = value;
 }
 
-const bool GuiGlobalScreen::isFocused() const
+const bool GuiOverlay::isFocused() const
 {
 	return _isFocused;
 }

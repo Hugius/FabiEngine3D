@@ -18,7 +18,7 @@ void TopViewportController::_updateProjectScreenManagement()
 	{
 		if(topScreen->getButton("newProject")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("newProjectID", "Create Project", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("newProjectID", "Create Project", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isCreatingProject = true;
 		}
 		else if(topScreen->getButton("loadProject")->isHovered())
@@ -44,7 +44,7 @@ void TopViewportController::_updateProjectScreenManagement()
 			// Check if currently in editor (except for world editor)
 			if((!_currentProjectID.empty()) && (leftScreen->getID() != "main") && (leftScreen->getID() != "worldEditorMenuMain"))
 			{
-				_gui.getGlobalScreen()->createAnswerForm("quit", "Save Changes?", fvec2(0.0f, 0.25f));
+				_gui.getOverlay()->createAnswerForm("quit", "Save Changes?", fvec2(0.0f, 0.25f));
 			}
 			else
 			{
@@ -59,7 +59,7 @@ void TopViewportController::_updateProjectScreenManagement()
 	_updateProjectDeleting();
 
 	// Quitting with ESCAPE
-	if(_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && (leftScreen->getID() == "main") && !_gui.getGlobalScreen()->isFocused())
+	if(_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && (leftScreen->getID() == "main") && !_gui.getOverlay()->isFocused())
 	{
 		// Check if script execution not started
 		if(!_scriptEditor.getScriptExecutor().isStarted())
@@ -69,12 +69,12 @@ void TopViewportController::_updateProjectScreenManagement()
 	}
 
 	// Update answer forms
-	if(_gui.getGlobalScreen()->isAnswerFormConfirmed("quit"))
+	if(_gui.getOverlay()->isAnswerFormConfirmed("quit"))
 	{
 		_saveCurrentProject();
 		_fe3d.application_stop();
 	}
-	if(_gui.getGlobalScreen()->isAnswerFormDenied("quit"))
+	if(_gui.getOverlay()->isAnswerFormDenied("quit"))
 	{
 		_fe3d.application_stop();
 	}

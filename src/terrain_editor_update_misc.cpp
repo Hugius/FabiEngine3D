@@ -20,7 +20,7 @@ void TerrainEditor::_updateCamera()
 	}
 
 	// Check if allowed by GUI
-	if(!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Check if RMB pressed
 		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
@@ -40,7 +40,7 @@ void TerrainEditor::_updateCamera()
 	// Disable third person view if necessary
 	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
-		if(_gui.getGlobalScreen()->isFocused())
+		if(_gui.getOverlay()->isFocused())
 		{
 			_fe3d.camera_disableThirdPersonView();
 		}
@@ -50,7 +50,7 @@ void TerrainEditor::_updateCamera()
 void TerrainEditor::_updateMiscellaneous()
 {
 	// Check if allowed by GUI
-	if(!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Update reference model visibility
 		if(_fe3d.input_isKeyPressed(InputType::KEY_R))
@@ -103,7 +103,7 @@ void TerrainEditor::_updateTerrainCreating()
 		string newTerrainID;
 
 		// Check if user filled in a new ID
-		if(_gui.getGlobalScreen()->checkValueForm("terrainCreate", newTerrainID, {}))
+		if(_gui.getOverlay()->checkValueForm("terrainCreate", newTerrainID, {}))
 		{
 			// @ sign not allowed
 			if(newTerrainID.find('@') == string::npos)
@@ -169,8 +169,8 @@ void TerrainEditor::_updateTerrainCreating()
 							_fe3d.terrain_select(newTerrainID);
 
 							// Miscellaneous
-							_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), "Terrain: " + newTerrainID.substr(1), 0.025f);
-							_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), true);
+							_fe3d.text_setContent(_gui.getOverlay()->getTextField("terrainID")->getEntityID(), "Terrain: " + newTerrainID.substr(1), 0.025f);
+							_fe3d.text_setVisible(_gui.getOverlay()->getTextField("terrainID")->getEntityID(), true);
 							_isCreatingTerrain = false;
 						}
 					}
@@ -197,7 +197,7 @@ void TerrainEditor::_updateTerrainChoosing()
 	if(_isChoosingTerrain)
 	{
 		// Get selected button ID
-		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("terrainList");
+		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("terrainList");
 
 		// Hide last terrain
 		_fe3d.terrain_select("");
@@ -218,20 +218,20 @@ void TerrainEditor::_updateTerrainChoosing()
 				if(!_isDeletingTerrain)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
-					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), "Terrain: " + _currentTerrainID.substr(1), 0.025f);
-					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), true);
+					_fe3d.text_setContent(_gui.getOverlay()->getTextField("terrainID")->getEntityID(), "Terrain: " + _currentTerrainID.substr(1), 0.025f);
+					_fe3d.text_setVisible(_gui.getOverlay()->getTextField("terrainID")->getEntityID(), true);
 				}
 
 				// Miscellaneous
-				_gui.getGlobalScreen()->deleteChoiceForm("terrainList");
+				_gui.getOverlay()->deleteChoiceForm("terrainList");
 				_isChoosingTerrain = false;
 			}
 		}
-		else if(_gui.getGlobalScreen()->isChoiceFormCancelled("terrainList")) // Cancelled choosing
+		else if(_gui.getOverlay()->isChoiceFormCancelled("terrainList")) // Cancelled choosing
 		{
 			_isChoosingTerrain = false;
 			_isDeletingTerrain = false;
-			_gui.getGlobalScreen()->deleteChoiceForm("terrainList");
+			_gui.getOverlay()->deleteChoiceForm("terrainList");
 		}
 	}
 }
@@ -241,13 +241,13 @@ void TerrainEditor::_updateTerrainDeleting()
 	if(_isDeletingTerrain && !_currentTerrainID.empty())
 	{
 		// Add answer form
-		if(!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
+		if(!_gui.getOverlay()->isAnswerFormExisting("delete"))
 		{
-			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui.getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
 		// Update answer form
-		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
+		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
 			// Delete entity
 			_fe3d.terrain_delete(_currentTerrainID);
@@ -257,7 +257,7 @@ void TerrainEditor::_updateTerrainDeleting()
 			_isDeletingTerrain = false;
 			_currentTerrainID = "";
 		}
-		if(_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
+		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
 		{
 			_fe3d.terrain_select("");
 			_isDeletingTerrain = false;

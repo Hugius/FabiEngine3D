@@ -20,9 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\gui_button.cpp" />
-    <ClCompile Include="..\..\..\src\gui_global_screen_element.cpp" />
-    <ClCompile Include="..\..\..\src\gui_global_screen_form.cpp" />
-    <ClCompile Include="..\..\..\src\gui_global_screen_misc.cpp" />
+    <ClCompile Include="..\..\..\src\gui_overlay_element.cpp" />
+    <ClCompile Include="..\..\..\src\gui_overlay_form.cpp" />
+    <ClCompile Include="..\..\..\src\gui_overlay_misc.cpp" />
     <ClCompile Include="..\..\..\src\gui_manager.cpp" />
     <ClCompile Include="..\..\..\src\gui_rectangle.cpp" />
     <ClCompile Include="..\..\..\src\gui_screen_element.cpp" />
@@ -35,7 +35,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\gui_button.hpp" />
-    <ClInclude Include="..\..\..\src\gui_global_screen.hpp" />
+    <ClInclude Include="..\..\..\src\gui_overlay.hpp" />
     <ClInclude Include="..\..\..\src\gui_manager.hpp" />
     <ClInclude Include="..\..\..\src\gui_rectangle.hpp" />
     <ClInclude Include="..\..\..\src\gui_screen.hpp" />

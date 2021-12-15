@@ -9,7 +9,7 @@ void WorldEditor::_updateSkyMenu()
 	if(screen->getID() == "worldEditorMenuSky")
 	{
 		// Button management
-		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 			return;
@@ -27,7 +27,7 @@ void WorldEditor::_updateSkyMenu()
 			}
 
 			// Add choice list
-			_gui.getGlobalScreen()->createChoiceForm("skyList", "Select Sky", fvec2(0.0f, 0.1f), skyIDs);
+			_gui.getOverlay()->createChoiceForm("skyList", "Select Sky", fvec2(0.0f, 0.1f), skyIDs);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -38,7 +38,7 @@ void WorldEditor::_updateSkyMenu()
 		// Update sky choosing
 		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("skyList");
+			string selectedButtonID = _gui.getOverlay()->checkChoiceForm("skyList");
 			if(!selectedButtonID.empty())
 			{
 				// Delete old
@@ -50,11 +50,11 @@ void WorldEditor::_updateSkyMenu()
 				// Create new
 				_currentSkyID = selectedButtonID;
 				_copyTemplateSky(_currentSkyID, ("@" + selectedButtonID));
-				_gui.getGlobalScreen()->deleteChoiceForm("skyList");
+				_gui.getOverlay()->deleteChoiceForm("skyList");
 			}
-			else if(_gui.getGlobalScreen()->isChoiceFormCancelled("skyList"))
+			else if(_gui.getOverlay()->isChoiceFormCancelled("skyList"))
 			{
-				_gui.getGlobalScreen()->deleteChoiceForm("skyList");
+				_gui.getOverlay()->deleteChoiceForm("skyList");
 			}
 		}
 

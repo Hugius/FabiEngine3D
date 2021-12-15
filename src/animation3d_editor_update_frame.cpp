@@ -29,7 +29,7 @@ void Animation3dEditor::_updateFrameMenu()
 		screen->getButton("speed")->setHoverable(speedType != Animation3dSpeedType::INSTANTLY);
 
 		// Button management
-		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused())) // Back button
 		{
 			// Reset wireframe color
 			for(const auto& partID : _fe3d.model_getPartIDs(currentAnimation->getPreviewModelID()))
@@ -47,13 +47,13 @@ void Animation3dEditor::_updateFrameMenu()
 			// Choosing part of preview model
 			auto modelParts = currentAnimation->getPartIDs();
 			modelParts.erase(modelParts.begin());
-			_gui.getGlobalScreen()->createChoiceForm("parts", "Select Part", fvec2(-0.5f, 0.1f), modelParts);
+			_gui.getOverlay()->createChoiceForm("parts", "Select Part", fvec2(-0.5f, 0.1f), modelParts);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("transformation")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("transformationX", "X", transformation.x * multiplier, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui.getGlobalScreen()->createValueForm("transformationY", "Y", transformation.y * multiplier, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui.getGlobalScreen()->createValueForm("transformationZ", "Z", transformation.z * multiplier, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("transformationX", "X", transformation.x * multiplier, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("transformationY", "Y", transformation.y * multiplier, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("transformationZ", "Z", transformation.z * multiplier, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("transformationType")->isHovered())
 		{
@@ -73,9 +73,9 @@ void Animation3dEditor::_updateFrameMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speed")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("transformationSpeedX", "X", speed.x * 1000.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui.getGlobalScreen()->createValueForm("transformationSpeedY", "Y", speed.y * 1000.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui.getGlobalScreen()->createValueForm("transformationSpeedZ", "Z", speed.z * 1000.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("transformationSpeedX", "X", speed.x * 1000.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("transformationSpeedY", "Y", speed.y * 1000.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("transformationSpeedZ", "Z", speed.z * 1000.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speedType")->isHovered())
 		{
@@ -95,15 +95,15 @@ void Animation3dEditor::_updateFrameMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotationOrigin")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("rotationOriginX", "X", rotationOrigin.x * 1000.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui.getGlobalScreen()->createValueForm("rotationOriginY", "Y", rotationOrigin.y * 1000.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui.getGlobalScreen()->createValueForm("rotationOriginZ", "Z", rotationOrigin.z * 1000.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("rotationOriginX", "X", rotationOrigin.x * 1000.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("rotationOriginY", "Y", rotationOrigin.y * 1000.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("rotationOriginZ", "Z", rotationOrigin.z * 1000.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
 		// Update rotation origin visualization
-		if(_gui.getGlobalScreen()->isValueFormExisting("rotationOriginX") &&
-		   _gui.getGlobalScreen()->isValueFormExisting("rotationOriginY") &&
-		   _gui.getGlobalScreen()->isValueFormExisting("rotationOriginZ"))
+		if(_gui.getOverlay()->isValueFormExisting("rotationOriginX") &&
+		   _gui.getOverlay()->isValueFormExisting("rotationOriginY") &&
+		   _gui.getOverlay()->isValueFormExisting("rotationOriginZ"))
 		{
 			if(_currentPartID.empty()) // Base rotation
 			{
@@ -121,41 +121,41 @@ void Animation3dEditor::_updateFrameMenu()
 		}
 
 		// Update value forms
-		if(_gui.getGlobalScreen()->checkValueForm("transformationX", transformation.x, {}))
+		if(_gui.getOverlay()->checkValueForm("transformationX", transformation.x, {}))
 		{
 			transformation.x /= multiplier;
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("transformationY", transformation.y, {}))
+		if(_gui.getOverlay()->checkValueForm("transformationY", transformation.y, {}))
 		{
 			transformation.y /= multiplier;
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("transformationZ", transformation.z, {}))
+		if(_gui.getOverlay()->checkValueForm("transformationZ", transformation.z, {}))
 		{
 			transformation.z /= multiplier;
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("transformationSpeedX", speed.x, {}))
+		if(_gui.getOverlay()->checkValueForm("transformationSpeedX", speed.x, {}))
 		{
 			speed.x /= 1000.0f;
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("transformationSpeedY", speed.y, {}))
+		if(_gui.getOverlay()->checkValueForm("transformationSpeedY", speed.y, {}))
 		{
 			speed.y /= 1000.0f;
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("transformationSpeedZ", speed.z, {}))
+		if(_gui.getOverlay()->checkValueForm("transformationSpeedZ", speed.z, {}))
 		{
 			speed.z /= 1000.0f;
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("rotationOriginX", rotationOrigin.x, {}))
+		if(_gui.getOverlay()->checkValueForm("rotationOriginX", rotationOrigin.x, {}))
 		{
 			rotationOrigin.x /= 1000.0f;
 			_mustUpdateCurrentFramePreview = true;
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("rotationOriginY", rotationOrigin.y, {}))
+		if(_gui.getOverlay()->checkValueForm("rotationOriginY", rotationOrigin.y, {}))
 		{
 			rotationOrigin.y /= 1000.0f;
 			_mustUpdateCurrentFramePreview = true;
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("rotationOriginZ", rotationOrigin.z, {}))
+		if(_gui.getOverlay()->checkValueForm("rotationOriginZ", rotationOrigin.z, {}))
 		{
 			rotationOrigin.z /= 1000.0f;
 			_mustUpdateCurrentFramePreview = true;
@@ -198,7 +198,7 @@ void Animation3dEditor::_updateFrameMenu()
 		currentAnimation->setFrame(_currentFrameIndex, frame);
 
 		// Check if an animation part ID is clicked
-		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("parts");
+		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("parts");
 		if(!selectedButtonID.empty())
 		{
 			// Check if LMB pressed
@@ -209,7 +209,7 @@ void Animation3dEditor::_updateFrameMenu()
 				{
 					_currentPartID = selectedButtonID;
 					_hoveredPartID = "";
-					_gui.getGlobalScreen()->deleteChoiceForm("parts");
+					_gui.getOverlay()->deleteChoiceForm("parts");
 				}
 				else
 				{
@@ -232,7 +232,7 @@ void Animation3dEditor::_updateFrameMenu()
 				_hoveredPartID = selectedButtonID;
 			}
 		}
-		else if(_gui.getGlobalScreen()->isChoiceFormCancelled("parts")) // Cancelled choosing
+		else if(_gui.getOverlay()->isChoiceFormCancelled("parts")) // Cancelled choosing
 		{
 			// Reset wireframe color
 			for(const auto& partID : _fe3d.model_getPartIDs(currentAnimation->getPreviewModelID()))
@@ -241,7 +241,7 @@ void Animation3dEditor::_updateFrameMenu()
 			}
 
 			// Miscellaneous
-			_gui.getGlobalScreen()->deleteChoiceForm("parts");
+			_gui.getOverlay()->deleteChoiceForm("parts");
 			_hoveredPartID = "";
 		}
 		else

@@ -11,7 +11,7 @@ void WorldEditor::_updateSettingsMenu()
 	if(screen->getID() == "worldEditorMenuSettings")
 	{
 		// Button management
-		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 			return;
@@ -26,11 +26,11 @@ void WorldEditor::_updateSettingsMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("editorSpeed")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("editorSpeed", "Editor Speed", _editorSpeed, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("editorSpeed", "Editor Speed", _editorSpeed, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
-		if(_gui.getGlobalScreen()->checkValueForm("editorSpeed", _editorSpeed, {}))
+		if(_gui.getOverlay()->checkValueForm("editorSpeed", _editorSpeed, {}))
 		{
 			_editorSpeed = max(0.0f, _editorSpeed);
 		}
@@ -46,7 +46,7 @@ void WorldEditor::_updateLightingSettingsMenu()
 	if(screen->getID() == "worldEditorMenuSettingsLighting")
 	{
 		// Button management
-		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused())) // Back button
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettings");
 			return;
@@ -71,7 +71,7 @@ void WorldEditor::_updateGraphicsSettingsMenu()
 	if(screen->getID() == "worldEditorMenuSettingsGraphics")
 	{
 		// Button management
-		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettings");
 			return;

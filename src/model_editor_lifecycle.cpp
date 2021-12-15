@@ -67,9 +67,9 @@ void ModelEditor::load()
 	// Miscellaneous
 	_fe3d.reflection_create("@@reflection");
 	_fe3d.reflection_capture("@@reflection");
-	_gui.getGlobalScreen()->createTextField("modelID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
-	_gui.getGlobalScreen()->createTextField("partID", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
-	_gui.getGlobalScreen()->createTextField("aabbID", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
+	_gui.getOverlay()->createTextField("modelID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
+	_gui.getOverlay()->createTextField("partID", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
+	_gui.getOverlay()->createTextField("aabbID", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 	_isEditorLoaded = true;
 }
 
@@ -110,9 +110,9 @@ void ModelEditor::unload()
 
 	// Miscellaneous
 	_fe3d.reflection_delete("@@reflection");
-	_gui.getGlobalScreen()->deleteTextField("modelID");
-	_gui.getGlobalScreen()->deleteTextField("partID");
-	_gui.getGlobalScreen()->deleteTextField("aabbID");
+	_gui.getOverlay()->deleteTextField("modelID");
+	_gui.getOverlay()->deleteTextField("partID");
+	_gui.getOverlay()->deleteTextField("aabbID");
 	if(_fe3d.misc_isAabbFrameRenderingEnabled())
 	{
 		_fe3d.misc_disableAabbFrameRendering();

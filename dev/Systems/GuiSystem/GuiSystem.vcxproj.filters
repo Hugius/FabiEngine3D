@@ -31,11 +31,8 @@
     <Filter Include="Element\Button">
       <UniqueIdentifier>{f7cb3b4a-50ee-424a-87c9-d85523a4310b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Element\Screen\Global">
+    <Filter Include="Element\Overlay">
       <UniqueIdentifier>{87f416a3-7e26-4614-a512-db5ffb377f30}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Element\Screen\Local">
-      <UniqueIdentifier>{4925ec21-ecad-4ca8-a4d6-174725b42d0f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,20 +60,20 @@
     <ClCompile Include="..\..\..\src\gui_write_field.cpp">
       <Filter>Element\Write Field</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\gui_global_screen_element.cpp">
-      <Filter>Element\Screen\Global</Filter>
+    <ClCompile Include="..\..\..\src\gui_overlay_element.cpp">
+      <Filter>Element\Overlay</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\gui_global_screen_form.cpp">
-      <Filter>Element\Screen\Global</Filter>
+    <ClCompile Include="..\..\..\src\gui_overlay_form.cpp">
+      <Filter>Element\Overlay</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\gui_global_screen_misc.cpp">
-      <Filter>Element\Screen\Global</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\gui_screen_element.cpp">
-      <Filter>Element\Screen\Local</Filter>
+    <ClCompile Include="..\..\..\src\gui_overlay_misc.cpp">
+      <Filter>Element\Overlay</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\gui_screen_misc.cpp">
-      <Filter>Element\Screen\Local</Filter>
+      <Filter>Element\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\gui_screen_element.cpp">
+      <Filter>Element\Screen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,11 +101,11 @@
     <ClInclude Include="..\..\..\src\gui_write_field.hpp">
       <Filter>Element\Write Field</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\gui_global_screen.hpp">
-      <Filter>Element\Screen\Global</Filter>
+    <ClInclude Include="..\..\..\src\gui_overlay.hpp">
+      <Filter>Element\Overlay</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\gui_screen.hpp">
-      <Filter>Element\Screen\Local</Filter>
+      <Filter>Element\Screen</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

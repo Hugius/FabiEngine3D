@@ -1,32 +1,32 @@
-#include "gui_global_screen.hpp"
+#include "gui_overlay.hpp"
 #include "logger.hpp"
 
-void GuiGlobalScreen::createValueForm(const string& ID, string title, unsigned int value, fvec2 position, fvec2 size, fvec2 buttonsPosition)
+void GuiOverlay::createValueForm(const string& ID, string title, unsigned int value, fvec2 position, fvec2 size, fvec2 buttonsPosition)
 {
 	_createValueForm(ID, title, to_string(static_cast<int>(value)), position, size, buttonsPosition, true, false);
 }
 
-void GuiGlobalScreen::createValueForm(const string& ID, string title, int value, fvec2 position, fvec2 size, fvec2 buttonsPosition)
+void GuiOverlay::createValueForm(const string& ID, string title, int value, fvec2 position, fvec2 size, fvec2 buttonsPosition)
 {
 	_createValueForm(ID, title, to_string(value), position, size, buttonsPosition, true, true);
 }
 
-void GuiGlobalScreen::createValueForm(const string& ID, string title, float value, fvec2 position, fvec2 size, fvec2 buttonsPosition)
+void GuiOverlay::createValueForm(const string& ID, string title, float value, fvec2 position, fvec2 size, fvec2 buttonsPosition)
 {
 	_createValueForm(ID, title, to_string(static_cast<int>(value)), position, size, buttonsPosition, true, true);
 }
 
-void GuiGlobalScreen::createValueForm(const string& ID, string title, double value, fvec2 position, fvec2 size, fvec2 buttonsPosition)
+void GuiOverlay::createValueForm(const string& ID, string title, double value, fvec2 position, fvec2 size, fvec2 buttonsPosition)
 {
 	_createValueForm(ID, title, to_string(static_cast<int>(value)), position, size, buttonsPosition, true, true);
 }
 
-void GuiGlobalScreen::createValueForm(const string& ID, string title, string value, fvec2 position, fvec2 size, fvec2 buttonsPosition)
+void GuiOverlay::createValueForm(const string& ID, string title, string value, fvec2 position, fvec2 size, fvec2 buttonsPosition)
 {
 	_createValueForm(ID, title, value, position, size, buttonsPosition, false, false);
 }
 
-const bool GuiGlobalScreen::checkValueForm(const string& ID, unsigned int& value, const vector<unsigned int>& forbiddenValues)
+const bool GuiOverlay::checkValueForm(const string& ID, unsigned int& value, const vector<unsigned int>& forbiddenValues)
 {
 	// Convert from unsigned integer to string
 	vector<string> forbiddenValueStrings;
@@ -42,7 +42,7 @@ const bool GuiGlobalScreen::checkValueForm(const string& ID, unsigned int& value
 	return result; // Return
 }
 
-const bool GuiGlobalScreen::checkValueForm(const string& ID, int& value, const vector<int>& forbiddenValues)
+const bool GuiOverlay::checkValueForm(const string& ID, int& value, const vector<int>& forbiddenValues)
 {
 	// Convert from integer to string
 	vector<string> forbiddenValueStrings;
@@ -58,7 +58,7 @@ const bool GuiGlobalScreen::checkValueForm(const string& ID, int& value, const v
 	return result; // Return
 }
 
-const bool GuiGlobalScreen::checkValueForm(const string& ID, float& value, const vector<float>& forbiddenValues)
+const bool GuiOverlay::checkValueForm(const string& ID, float& value, const vector<float>& forbiddenValues)
 {
 	// Convert from float to integer to string
 	vector<string> forbiddenValueStrings;
@@ -74,7 +74,7 @@ const bool GuiGlobalScreen::checkValueForm(const string& ID, float& value, const
 	return result; // Return
 }
 
-const bool GuiGlobalScreen::checkValueForm(const string& ID, double& value, const vector<double>& forbiddenValues)
+const bool GuiOverlay::checkValueForm(const string& ID, double& value, const vector<double>& forbiddenValues)
 {
 	// Convert from double to integer to string
 	vector<string> forbiddenValueStrings;
@@ -90,32 +90,32 @@ const bool GuiGlobalScreen::checkValueForm(const string& ID, double& value, cons
 	return result; // Return
 }
 
-const bool GuiGlobalScreen::checkValueForm(const string& ID, string& value, const vector<string>& forbiddenValues)
+const bool GuiOverlay::checkValueForm(const string& ID, string& value, const vector<string>& forbiddenValues)
 {
 	return _checkValueForm(ID, value, forbiddenValues);
 }
 
-const bool GuiGlobalScreen::isValueFormConfirmed() const
+const bool GuiOverlay::isValueFormConfirmed() const
 {
 	return (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_done")->isHovered());
 }
 
-const bool GuiGlobalScreen::isValueFormCancelled() const
+const bool GuiOverlay::isValueFormCancelled() const
 {
 	return (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_cancel")->isHovered());
 }
 
-const bool GuiGlobalScreen::isValueFormExisting(const string& ID) const
+const bool GuiOverlay::isValueFormExisting(const string& ID) const
 {
 	return find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) != _valueFormIDs.end();
 }
 
-void GuiGlobalScreen::_createValueForm(const string& ID, string title, string valueString, fvec2 position, fvec2 size, fvec2 buttonsPosition, bool onlyNumbers, bool minusAllowed)
+void GuiOverlay::_createValueForm(const string& ID, string title, string valueString, fvec2 position, fvec2 size, fvec2 buttonsPosition, bool onlyNumbers, bool minusAllowed)
 {
 	// Validate existence
 	if(isValueFormExisting(ID))
 	{
-		Logger::throwError("GuiGlobalScreen::_createValueForm");
+		Logger::throwError("GuiOverlay::_createValueForm");
 	}
 
 	// Create value form
@@ -140,7 +140,7 @@ void GuiGlobalScreen::_createValueForm(const string& ID, string title, string va
 	}
 }
 
-const bool GuiGlobalScreen::_checkValueForm(const string& ID, string& valueString, const vector<string>& forbiddenValueStrings)
+const bool GuiOverlay::_checkValueForm(const string& ID, string& valueString, const vector<string>& forbiddenValueStrings)
 {
 	bool changed = false;
 
@@ -196,12 +196,12 @@ const bool GuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 	return changed;
 }
 
-void GuiGlobalScreen::createChoiceForm(const string& ID, string title, fvec2 position, const vector<string>& buttonTitles)
+void GuiOverlay::createChoiceForm(const string& ID, string title, fvec2 position, const vector<string>& buttonTitles)
 {
 	// Validate existence
 	if(!_choiceFormID.empty())
 	{
-		Logger::throwError("GuiGlobalScreen::createChoiceForm::1");
+		Logger::throwError("GuiOverlay::createChoiceForm::1");
 	}
 
 	// Create choice form
@@ -216,7 +216,7 @@ void GuiGlobalScreen::createChoiceForm(const string& ID, string title, fvec2 pos
 		// Validate button title
 		if(buttonTitle.empty())
 		{
-			Logger::throwError("GuiGlobalScreen::createChoiceForm::2");
+			Logger::throwError("GuiOverlay::createChoiceForm::2");
 		}
 
 		// Add button
@@ -228,7 +228,7 @@ void GuiGlobalScreen::createChoiceForm(const string& ID, string title, fvec2 pos
 	_choiceFormID = ID;
 }
 
-const string GuiGlobalScreen::checkChoiceForm(const string& ID)
+const string GuiOverlay::checkChoiceForm(const string& ID)
 {
 	if(ID == _choiceFormID)
 	{
@@ -246,7 +246,7 @@ const string GuiGlobalScreen::checkChoiceForm(const string& ID)
 	return "";
 }
 
-const bool GuiGlobalScreen::isChoiceFormCancelled(const string& ID) const
+const bool GuiOverlay::isChoiceFormCancelled(const string& ID) const
 {
 	if(ID == _choiceFormID)
 	{
@@ -258,12 +258,12 @@ const bool GuiGlobalScreen::isChoiceFormCancelled(const string& ID) const
 	}
 }
 
-void GuiGlobalScreen::deleteChoiceForm(const string& ID)
+void GuiOverlay::deleteChoiceForm(const string& ID)
 {
 	// Validate existence
 	if(ID != _choiceFormID)
 	{
-		Logger::throwError("GuiGlobalScreen::deleteChoiceForm");
+		Logger::throwError("GuiOverlay::deleteChoiceForm");
 	}
 
 	// Delete choice form
@@ -277,17 +277,17 @@ void GuiGlobalScreen::deleteChoiceForm(const string& ID)
 	_choiceFormID = "";
 }
 
-const bool GuiGlobalScreen::isChoiceFormExisting(const string& ID) const
+const bool GuiOverlay::isChoiceFormExisting(const string& ID) const
 {
 	return (ID == _choiceFormID);
 }
 
-void GuiGlobalScreen::createAnswerForm(const string& ID, string title, fvec2 position)
+void GuiOverlay::createAnswerForm(const string& ID, string title, fvec2 position)
 {
 	// Validate existence
 	if(!_answerFormID.empty())
 	{
-		Logger::throwError("GuiGlobalScreen::createAnswerForm");
+		Logger::throwError("GuiOverlay::createAnswerForm");
 	}
 
 	// Create answer form
@@ -301,7 +301,7 @@ void GuiGlobalScreen::createAnswerForm(const string& ID, string title, fvec2 pos
 	_answerFormID = ID;
 }
 
-const bool GuiGlobalScreen::isAnswerFormConfirmed(const string& ID)
+const bool GuiOverlay::isAnswerFormConfirmed(const string& ID)
 {
 	if(ID == _answerFormID)
 	{
@@ -317,7 +317,7 @@ const bool GuiGlobalScreen::isAnswerFormConfirmed(const string& ID)
 	return false;
 }
 
-const bool GuiGlobalScreen::isAnswerFormDenied(const string& ID)
+const bool GuiOverlay::isAnswerFormDenied(const string& ID)
 {
 	if(isButtonExisting("answer_form_no") && (ID == _answerFormID))
 	{
@@ -333,12 +333,12 @@ const bool GuiGlobalScreen::isAnswerFormDenied(const string& ID)
 	return false;
 }
 
-void GuiGlobalScreen::_deleteAnswerForm(const string& ID)
+void GuiOverlay::_deleteAnswerForm(const string& ID)
 {
 	// Validate existence
 	if(ID != _answerFormID)
 	{
-		Logger::throwError("GuiGlobalScreen::_deleteAnswerForm");
+		Logger::throwError("GuiOverlay::_deleteAnswerForm");
 	}
 
 	// Delete answer form
@@ -352,12 +352,12 @@ void GuiGlobalScreen::_deleteAnswerForm(const string& ID)
 	_answerFormID = "";
 }
 
-const bool GuiGlobalScreen::isAnswerFormExisting(const string& ID) const
+const bool GuiOverlay::isAnswerFormExisting(const string& ID) const
 {
 	return (ID == _answerFormID);
 }
 
-void GuiGlobalScreen::_updateValueFormDeleting()
+void GuiOverlay::_updateValueFormDeleting()
 {
 	if(_mustDeleteValueForms)
 	{

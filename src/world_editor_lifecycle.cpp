@@ -10,6 +10,7 @@ WorldEditor::WorldEditor(FabiEngine3D& fe3d,
 						 ModelEditor& modelEditor,
 						 BillboardEditor& billboardEditor,
 						 Animation3dEditor& animation3dEditor,
+						 Animation2dEditor& animation2dEditor,
 						 SoundEditor& soundEditor)
 	:
 	_fe3d(fe3d),
@@ -20,6 +21,7 @@ WorldEditor::WorldEditor(FabiEngine3D& fe3d,
 	_modelEditor(modelEditor),
 	_billboardEditor(billboardEditor),
 	_animation3dEditor(animation3dEditor),
+	_animation2dEditor(animation2dEditor),
 	_soundEditor(soundEditor)
 {
 
@@ -71,6 +73,7 @@ void WorldEditor::load()
 
 	// Load template animations
 	_animation3dEditor.loadFromFile(false);
+	_animation2dEditor.loadFromFile(false);
 
 	// Load template sounds
 	_soundEditor.loadFromFile();
@@ -125,9 +128,9 @@ void WorldEditor::load()
 	_fe3d.reflection_setVisible(TEMPLATE_CAMERA_ID, false);
 
 	// Create ID text fields
-	_gui.getGlobalScreen()->createTextField("modelID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
-	_gui.getGlobalScreen()->createTextField("billboardID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
-	_gui.getGlobalScreen()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
+	_gui.getOverlay()->createTextField("modelID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
+	_gui.getOverlay()->createTextField("billboardID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
+	_gui.getOverlay()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 
 	// Miscellaneous
 	_fe3d.collision_enableCameraResponse(true, true, true);
@@ -241,9 +244,9 @@ void WorldEditor::unload()
 	_isDeletingWorld = false;
 
 	// Delete ID textFields
-	_gui.getGlobalScreen()->deleteTextField("modelID");
-	_gui.getGlobalScreen()->deleteTextField("billboardID");
-	_gui.getGlobalScreen()->deleteTextField("soundID");
+	_gui.getOverlay()->deleteTextField("modelID");
+	_gui.getOverlay()->deleteTextField("billboardID");
+	_gui.getOverlay()->deleteTextField("soundID");
 
 	// Miscellaneous
 	_fe3d.collision_disableCameraResponse();

@@ -146,7 +146,7 @@ const bool TopViewportController::_prepareProjectChoosing(const string& title) c
 	auto projectIDs = Tools::getDirectoriesFromDirectory(projectDirectoryPath);
 
 	// Add buttons
-	_gui.getGlobalScreen()->createChoiceForm("projectList", title, fvec2(0.0f, 0.1f), projectIDs);
+	_gui.getOverlay()->createChoiceForm("projectList", title, fvec2(0.0f, 0.1f), projectIDs);
 
 	return true;
 }

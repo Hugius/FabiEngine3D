@@ -12,15 +12,15 @@ void WorldEditor::_updateReflectionPlacing()
 			auto newPosition = _fe3d.reflection_getPosition(TEMPLATE_CAMERA_ID);
 
 			// Update value forms
-			_gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, {});
-			_gui.getGlobalScreen()->checkValueForm("positionY", newPosition.y, {});
-			_gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, {});
+			_gui.getOverlay()->checkValueForm("positionX", newPosition.x, {});
+			_gui.getOverlay()->checkValueForm("positionY", newPosition.y, {});
+			_gui.getOverlay()->checkValueForm("positionZ", newPosition.z, {});
 
 			// Update position
 			_fe3d.reflection_setPosition(TEMPLATE_CAMERA_ID, newPosition);
 
 			// Check if reflection must be placed
-			if(_gui.getGlobalScreen()->isValueFormConfirmed())
+			if(_gui.getOverlay()->isValueFormConfirmed())
 			{
 				// Adding a number to make it unique
 				BEGIN1:
@@ -54,7 +54,7 @@ void WorldEditor::_updateReflectionPlacing()
 			}
 
 			// Check if placement mode must be disabled
-			if(_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
+			if(_gui.getOverlay()->isValueFormConfirmed() || _gui.getOverlay()->isValueFormCancelled())
 			{
 				_fe3d.model_setVisible(TEMPLATE_CAMERA_ID, false);
 				_isPlacingReflection = false;
@@ -63,7 +63,7 @@ void WorldEditor::_updateReflectionPlacing()
 		else
 		{
 			// Check if allowed by GUI
-			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
 			{
 				// Check if allowed by mouse
 				if(!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))

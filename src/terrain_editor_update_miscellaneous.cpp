@@ -24,42 +24,42 @@ void TerrainEditor::_updateMiscellaneousMenu()
 		auto hasNormalMapB = _fe3d.terrain_hasNormalMapB(_currentTerrainID);
 
 		// Button management
-		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 			return;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("redRepeat")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("redRepeat", "Red Repeat", redRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("redRepeat", "Red Repeat", redRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenRepeat")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("greenRepeat", "Green Repeat", greenRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("greenRepeat", "Green Repeat", greenRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueRepeat")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("blueRepeat", "Blue Repeat", blueRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("blueRepeat", "Blue Repeat", blueRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
-		if(_gui.getGlobalScreen()->checkValueForm("textureRepeat", textureRepeat))
+		if(_gui.getOverlay()->checkValueForm("textureRepeat", textureRepeat))
 		{
 			_fe3d.terrain_setTextureRepeat(_currentTerrainID, textureRepeat);
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("redRepeat", redRepeat))
+		if(_gui.getOverlay()->checkValueForm("redRepeat", redRepeat))
 		{
 			_fe3d.terrain_setRedRepeat(_currentTerrainID, redRepeat);
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("greenRepeat", greenRepeat))
+		if(_gui.getOverlay()->checkValueForm("greenRepeat", greenRepeat))
 		{
 			_fe3d.terrain_setGreenRepeat(_currentTerrainID, greenRepeat);
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("blueRepeat", blueRepeat))
+		if(_gui.getOverlay()->checkValueForm("blueRepeat", blueRepeat))
 		{
 			_fe3d.terrain_setBlueRepeat(_currentTerrainID, blueRepeat);
 		}

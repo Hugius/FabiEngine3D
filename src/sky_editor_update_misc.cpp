@@ -11,7 +11,7 @@ void SkyEditor::_updateCamera()
 	}
 
 	// Check if allowed by GUI
-	if(!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Check if RMB pressed
 		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
@@ -31,7 +31,7 @@ void SkyEditor::_updateCamera()
 	// Disable first person view if necessary
 	if(_fe3d.camera_isFirstPersonViewEnabled())
 	{
-		if(_gui.getGlobalScreen()->isFocused())
+		if(_gui.getOverlay()->isFocused())
 		{
 			_fe3d.camera_disableFirstPersonView();
 		}
@@ -41,7 +41,7 @@ void SkyEditor::_updateCamera()
 void SkyEditor::_updateMiscellaneous()
 {
 	// Check if allowed by GUI
-	if(!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Update wireframe rendering
 		if(_fe3d.sky_isExisting(_currentSkyID))
@@ -81,7 +81,7 @@ void SkyEditor::_updateSkyCreating()
 		string newSkyID;
 
 		// Check if user filled in a new ID
-		if(_gui.getGlobalScreen()->checkValueForm("skyCreate", newSkyID, {}))
+		if(_gui.getOverlay()->checkValueForm("skyCreate", newSkyID, {}))
 		{
 			// @ sign not allowed
 			if(newSkyID.find('@') == string::npos)
@@ -110,8 +110,8 @@ void SkyEditor::_updateSkyCreating()
 							_fe3d.sky_selectMainSky(newSkyID);
 
 							// Miscellaneous
-							_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("skyID")->getEntityID(), "Sky: " + newSkyID.substr(1), 0.025f);
-							_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("skyID")->getEntityID(), true);
+							_fe3d.text_setContent(_gui.getOverlay()->getTextField("skyID")->getEntityID(), "Sky: " + newSkyID.substr(1), 0.025f);
+							_fe3d.text_setVisible(_gui.getOverlay()->getTextField("skyID")->getEntityID(), true);
 							_isCreatingSky = false;
 						}
 					}
@@ -138,7 +138,7 @@ void SkyEditor::_updateSkyChoosing()
 	if(_isChoosingSky)
 	{
 		// Get selected button ID
-		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("skyList");
+		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("skyList");
 
 		// Hide last sky
 		_fe3d.sky_selectMainSky("@@background");
@@ -159,20 +159,20 @@ void SkyEditor::_updateSkyChoosing()
 				if(!_isDeletingSky)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
-					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("skyID")->getEntityID(), "Sky: " + _currentSkyID.substr(1), 0.025f);
-					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("skyID")->getEntityID(), true);
+					_fe3d.text_setContent(_gui.getOverlay()->getTextField("skyID")->getEntityID(), "Sky: " + _currentSkyID.substr(1), 0.025f);
+					_fe3d.text_setVisible(_gui.getOverlay()->getTextField("skyID")->getEntityID(), true);
 				}
 
 				// Miscellaneous
-				_gui.getGlobalScreen()->deleteChoiceForm("skyList");
+				_gui.getOverlay()->deleteChoiceForm("skyList");
 				_isChoosingSky = false;
 			}
 		}
-		else if(_gui.getGlobalScreen()->isChoiceFormCancelled("skyList")) // Cancelled choosing
+		else if(_gui.getOverlay()->isChoiceFormCancelled("skyList")) // Cancelled choosing
 		{
 			_isChoosingSky = false;
 			_isDeletingSky = false;
-			_gui.getGlobalScreen()->deleteChoiceForm("skyList");
+			_gui.getOverlay()->deleteChoiceForm("skyList");
 		}
 	}
 }
@@ -182,13 +182,13 @@ void SkyEditor::_updateSkyDeleting()
 	if(_isDeletingSky && !_currentSkyID.empty())
 	{
 		// Add answer form
-		if(!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
+		if(!_gui.getOverlay()->isAnswerFormExisting("delete"))
 		{
-			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui.getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
 		// Update answer form
-		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
+		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
 			// Delete entity
 			_fe3d.sky_delete(_currentSkyID);
@@ -201,7 +201,7 @@ void SkyEditor::_updateSkyDeleting()
 			// Select background
 			_fe3d.sky_selectMainSky("@@background");
 		}
-		if(_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
+		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
 		{
 			// Select background
 			_fe3d.sky_selectMainSky("@@background");

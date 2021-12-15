@@ -13,7 +13,7 @@ void TopViewportController::_updateProjectCreating()
 		string newProjectID;
 
 		// Check if user filled in a new ID
-		if(_gui.getGlobalScreen()->checkValueForm("newProjectID", newProjectID))
+		if(_gui.getOverlay()->checkValueForm("newProjectID", newProjectID))
 		{
 			// Temporary values
 			const string projectDirectoryPath = (Tools::getRootDirectoryPath() + "projects\\");
@@ -113,7 +113,7 @@ void TopViewportController::_updateProjectLoading()
 	if(_isLoadingProject)
 	{
 		// Temporary values
-		const string clickedButtonID = _gui.getGlobalScreen()->checkChoiceForm("projectList");
+		const string clickedButtonID = _gui.getOverlay()->checkChoiceForm("projectList");
 		const string projectDirectoryPath = string(Tools::getRootDirectoryPath() + "projects\\" + clickedButtonID + "\\");
 
 		// Check if user clicked a project ID
@@ -169,12 +169,12 @@ void TopViewportController::_updateProjectLoading()
 
 			// Miscellaneous
 			_isLoadingProject = false;
-			_gui.getGlobalScreen()->deleteChoiceForm("projectList");
+			_gui.getOverlay()->deleteChoiceForm("projectList");
 		}
-		else if(_gui.getGlobalScreen()->isChoiceFormCancelled("projectList"))
+		else if(_gui.getOverlay()->isChoiceFormCancelled("projectList"))
 		{
 			_isLoadingProject = false;
-			_gui.getGlobalScreen()->deleteChoiceForm("projectList");
+			_gui.getOverlay()->deleteChoiceForm("projectList");
 		}
 	}
 }
@@ -185,23 +185,23 @@ void TopViewportController::_updateProjectDeleting()
 	{
 		// Temporary values
 		static string chosenButtonID = "";
-		string clickedButtonID = _gui.getGlobalScreen()->checkChoiceForm("projectList");
+		string clickedButtonID = _gui.getOverlay()->checkChoiceForm("projectList");
 
 		// Check if user clicked a project ID
 		if(!clickedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui.getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 			chosenButtonID = clickedButtonID;
-			_gui.getGlobalScreen()->deleteChoiceForm("projectList");
+			_gui.getOverlay()->deleteChoiceForm("projectList");
 		}
-		else if(_gui.getGlobalScreen()->isChoiceFormCancelled("projectList"))
+		else if(_gui.getOverlay()->isChoiceFormCancelled("projectList"))
 		{
 			_isDeletingProject = false;
-			_gui.getGlobalScreen()->deleteChoiceForm("projectList");
+			_gui.getOverlay()->deleteChoiceForm("projectList");
 		}
 
 		// Update answer forms
-		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
+		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
 			// Check if deleting currently opened project
 			if(chosenButtonID == _currentProjectID)
@@ -229,7 +229,7 @@ void TopViewportController::_updateProjectDeleting()
 			_isDeletingProject = false;
 			chosenButtonID = "";
 		}
-		if(_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
+		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
 		{
 			_isDeletingProject = false;
 			chosenButtonID = "";

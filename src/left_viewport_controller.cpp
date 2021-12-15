@@ -16,7 +16,7 @@ LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, GuiManager& g
 	_animation3dEditor(fe3d, gui, _modelEditor),
 	_animation2dEditor(fe3d, gui),
 	_soundEditor(fe3d, gui),
-	_worldEditor(fe3d, gui, _skyEditor, _terrainEditor, _waterEditor, _modelEditor, _billboardEditor, _animation3dEditor, _soundEditor),
+	_worldEditor(fe3d, gui, _skyEditor, _terrainEditor, _waterEditor, _modelEditor, _billboardEditor, _animation3dEditor, _animation2dEditor, _soundEditor),
 	_scriptEditor(fe3d, gui, _skyEditor, _terrainEditor, _waterEditor, _modelEditor, _billboardEditor, _animation3dEditor, _animation2dEditor, _soundEditor, _worldEditor)
 {
 

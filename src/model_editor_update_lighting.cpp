@@ -19,22 +19,22 @@ void ModelEditor::_updateLightingMenu()
 		auto color = _fe3d.model_getColor(_currentModelID, _currentPartID);
 
 		// Button management
-		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_currentPartID = "";
-			_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("partID")->getEntityID(), false);
+			_fe3d.text_setVisible(_gui.getOverlay()->getTextField("partID")->getEntityID(), false);
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			return;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("colorR", "R", color.r * 255.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui.getGlobalScreen()->createValueForm("colorG", "G", color.g * 255.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui.getGlobalScreen()->createValueForm("colorB", "B", color.b * 255.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("colorR", "R", color.r * 255.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("colorG", "G", color.g * 255.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("colorB", "B", color.b * 255.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("lightness", "Lightness", (lightness * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("lightness", "Lightness", (lightness * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isSpecular")->isHovered())
 		{
@@ -43,11 +43,11 @@ void ModelEditor::_updateLightingMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularShininess")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("specularShininess", "Specular Shininess", specularShininess, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("specularShininess", "Specular Shininess", specularShininess, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularIntensity")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("specularIntensity", "Specular Intensity", (specularIntensity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("specularIntensity", "Specular Intensity", (specularIntensity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isReflective")->isHovered())
 		{
@@ -68,40 +68,40 @@ void ModelEditor::_updateLightingMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectivity")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("reflectivity", "Reflectivity", (reflectivity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("reflectivity", "Reflectivity", (reflectivity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
-		if(_gui.getGlobalScreen()->checkValueForm("colorR", color.r, {}))
+		if(_gui.getOverlay()->checkValueForm("colorR", color.r, {}))
 		{
 			color.r /= 255.0f;
 			_fe3d.model_setColor(_currentModelID, _currentPartID, color);
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("colorG", color.g, {}))
+		if(_gui.getOverlay()->checkValueForm("colorG", color.g, {}))
 		{
 			color.g /= 255.0f;
 			_fe3d.model_setColor(_currentModelID, _currentPartID, color);
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("colorB", color.b, {}))
+		if(_gui.getOverlay()->checkValueForm("colorB", color.b, {}))
 		{
 			color.b /= 255.0f;
 			_fe3d.model_setColor(_currentModelID, _currentPartID, color);
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
+		if(_gui.getOverlay()->checkValueForm("lightness", lightness))
 		{
 			lightness /= 100.0f;
 			_fe3d.model_setLightness(_currentModelID, _currentPartID, lightness);
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("specularShininess", specularShininess))
+		if(_gui.getOverlay()->checkValueForm("specularShininess", specularShininess))
 		{
 			_fe3d.model_setSpecularShininess(_currentModelID, _currentPartID, specularShininess);
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
+		if(_gui.getOverlay()->checkValueForm("specularIntensity", specularIntensity))
 		{
 			specularIntensity /= 100.0f;
 			_fe3d.model_setSpecularIntensity(_currentModelID, _currentPartID, specularIntensity);
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("reflectivity", reflectivity))
+		if(_gui.getOverlay()->checkValueForm("reflectivity", reflectivity))
 		{
 			reflectivity /= 100.0f;
 			_fe3d.model_setReflectivity(_currentModelID, _currentPartID, reflectivity);

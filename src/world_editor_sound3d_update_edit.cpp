@@ -29,7 +29,7 @@ void WorldEditor::_updateSoundEditing()
 			{
 				// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
 				if(hoveredAabbID == ID && _fe3d.misc_isCursorInsideViewport() &&
-				   !_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				   !_gui.getOverlay()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Select hovered speaker
 					_selectSound(ID.substr(string("@@speaker_").size()));
@@ -62,7 +62,7 @@ void WorldEditor::_updateSoundEditing()
 		if(!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 		{
 			// Check if allowed by GUI
-			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
 			{
 				// Check if speaker is active
 				if(!_activeSpeakerID.empty())
@@ -145,7 +145,7 @@ void WorldEditor::_updateSoundEditing()
 		// Check if sound is still selected or active
 		if(_selectedSpeakerID.empty() && _activeSpeakerID.empty())
 		{
-			_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), false);
+			_fe3d.text_setVisible(_gui.getOverlay()->getTextField("soundID")->getEntityID(), false);
 		}
 	}
 }

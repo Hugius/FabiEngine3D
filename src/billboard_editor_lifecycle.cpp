@@ -58,7 +58,7 @@ void BillboardEditor::load()
 	_fe3d.model_setShadowed("@@grid", false);
 
 	// Miscellaneous
-	_gui.getGlobalScreen()->createTextField("billboardID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
+	_gui.getOverlay()->createTextField("billboardID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 	_isEditorLoaded = true;
 }
 
@@ -86,7 +86,7 @@ void BillboardEditor::unload()
 	_fe3d.billboard_deleteAll();
 
 	// Delete billboard ID TextField
-	_gui.getGlobalScreen()->deleteTextField("billboardID");
+	_gui.getOverlay()->deleteTextField("billboardID");
 
 	// Reset editor properties
 	_loadedBillboardIDs.clear();

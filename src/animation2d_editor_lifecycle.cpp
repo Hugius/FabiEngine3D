@@ -30,7 +30,7 @@ void Animation2dEditor::load()
 	_fe3d.billboard_setVisible(TEMPLATE_BILLBOARD_ID, false);
 
 	// Miscellaneous
-	_gui.getGlobalScreen()->createTextField("animationID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
+	_gui.getOverlay()->createTextField("animationID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 	_isEditorLoaded = true;
 }
 
@@ -43,7 +43,7 @@ void Animation2dEditor::unload()
 	_fe3d.billboard_deleteAll();
 
 	// Delete textfields
-	_gui.getGlobalScreen()->deleteTextField("animationID");
+	_gui.getOverlay()->deleteTextField("animationID");
 
 	// Reset editor properties
 	_animations.clear();

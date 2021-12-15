@@ -30,7 +30,7 @@ void WorldEditor::_updatePointlightEditing()
 			{
 				// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
 				if(hoveredAabbID == ID && _fe3d.misc_isCursorInsideViewport() &&
-				   !_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				   !_gui.getOverlay()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Select hovered lamp
 					_selectPointlight(ID.substr(string("@@lamp_").size()));
@@ -60,7 +60,7 @@ void WorldEditor::_updatePointlightEditing()
 		if(!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 		{
 			// Check if allowed by GUI
-			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
 			{
 				// Check if pointlight is active
 				if(!_activeLampID.empty())

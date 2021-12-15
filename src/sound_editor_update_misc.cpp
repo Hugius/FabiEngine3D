@@ -9,7 +9,7 @@ void SoundEditor::_updateSoundCreating()
 		string newSoundID = "";
 
 		// Check if user filled in a new ID
-		if(_gui.getGlobalScreen()->checkValueForm("soundCreate", newSoundID, {_currentSoundID}))
+		if(_gui.getOverlay()->checkValueForm("soundCreate", newSoundID, {_currentSoundID}))
 		{
 			// Check if ID starts with @ sign
 			if(newSoundID[0] != '@')
@@ -74,8 +74,8 @@ void SoundEditor::_updateSoundCreating()
 							_loadedSoundIDs.push_back(newSoundID);
 
 							// Miscellaneous
-							_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), "Sound: " + newSoundID.substr(1), 0.025f);
-							_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), true);
+							_fe3d.text_setContent(_gui.getOverlay()->getTextField("soundID")->getEntityID(), "Sound: " + newSoundID.substr(1), 0.025f);
+							_fe3d.text_setVisible(_gui.getOverlay()->getTextField("soundID")->getEntityID(), true);
 							_isCreatingSound = false;
 						}
 					}
@@ -102,7 +102,7 @@ void SoundEditor::_updateSoundChoosing()
 	if(_isChoosingSound)
 	{
 		// Get selected button ID
-		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("soundList");
+		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("soundList");
 
 		// Check if a sound ID is hovered
 		if(!selectedButtonID.empty())
@@ -117,20 +117,20 @@ void SoundEditor::_updateSoundChoosing()
 				if(!_isDeletingSound)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
-					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), "Sound: " + selectedButtonID.substr(1), 0.025f);
-					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), true);
+					_fe3d.text_setContent(_gui.getOverlay()->getTextField("soundID")->getEntityID(), "Sound: " + selectedButtonID.substr(1), 0.025f);
+					_fe3d.text_setVisible(_gui.getOverlay()->getTextField("soundID")->getEntityID(), true);
 				}
 
 				// Miscellaneous
-				_gui.getGlobalScreen()->deleteChoiceForm("soundList");
+				_gui.getOverlay()->deleteChoiceForm("soundList");
 				_isChoosingSound = false;
 			}
 		}
-		else if(_gui.getGlobalScreen()->isChoiceFormCancelled("soundList")) // Cancelled choosing
+		else if(_gui.getOverlay()->isChoiceFormCancelled("soundList")) // Cancelled choosing
 		{
 			_isChoosingSound = false;
 			_isDeletingSound = false;
-			_gui.getGlobalScreen()->deleteChoiceForm("soundList");
+			_gui.getOverlay()->deleteChoiceForm("soundList");
 		}
 	}
 }
@@ -140,13 +140,13 @@ void SoundEditor::_updateSoundDeleting()
 	if(_isDeletingSound && !_currentSoundID.empty())
 	{
 		// Add answer form
-		if(!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
+		if(!_gui.getOverlay()->isAnswerFormExisting("delete"))
 		{
-			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui.getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
 		// Update answer form
-		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
+		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
 			// Go to main screen
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuMain");
@@ -162,7 +162,7 @@ void SoundEditor::_updateSoundDeleting()
 			_currentSoundID = "";
 			_isDeletingSound = false;
 		}
-		if(_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
+		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
 		{
 			_isChoosingSound = true;
 			_currentSoundID = "";

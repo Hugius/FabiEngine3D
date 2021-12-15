@@ -86,60 +86,60 @@ void SettingsEditor::update()
 		auto allocatedSound3dChannelCount = _fe3d.misc_getAllocatedSound3dChannelCount();
 
 		// Button management
-		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
-			_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
+			_gui.getOverlay()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("antiAliasing")->isHovered())
 		{
-			_gui.getGlobalScreen()->createAnswerForm("antiAliasing", "Anti Aliasing?", fvec2(0.0f, 0.25f));
+			_gui.getOverlay()->createAnswerForm("antiAliasing", "Anti Aliasing?", fvec2(0.0f, 0.25f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("anisotropicFilteringQuality")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("anisotropicFilteringQuality", "Anisotropic Filtering Quality", anisotropicFilteringQuality, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("anisotropicFilteringQuality", "Anisotropic Filtering Quality", anisotropicFilteringQuality, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("allocatedSound2dChannelCount")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("allocatedSound2dChannelCount", "Allocated Sound2D Channels", allocatedSound2dChannelCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("allocatedSound2dChannelCount", "Allocated Sound2D Channels", allocatedSound2dChannelCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("allocatedSound3dChannelCount")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("allocatedSound3dChannelCount", "Allocated Sound3D Channels", allocatedSound3dChannelCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("allocatedSound3dChannelCount", "Allocated Sound3D Channels", allocatedSound3dChannelCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
 		// Update answer forms
-		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
+		if(_gui.getOverlay()->isAnswerFormConfirmed("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			saveSettingsToFile();
 			unload();
 			return;
 		}
-		if(_gui.getGlobalScreen()->isAnswerFormDenied("back"))
+		if(_gui.getOverlay()->isAnswerFormDenied("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			unload();
 			return;
 		}
-		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("antiAliasing") && !_fe3d.gfx_isAntiAliasingEnabled())
+		if(_gui.getOverlay()->isAnswerFormConfirmed("antiAliasing") && !_fe3d.gfx_isAntiAliasingEnabled())
 		{
 			_fe3d.gfx_enableAntiAliasing();
 		}
-		if(_gui.getGlobalScreen()->isAnswerFormDenied("antiAliasing") && _fe3d.gfx_isAntiAliasingEnabled())
+		if(_gui.getOverlay()->isAnswerFormDenied("antiAliasing") && _fe3d.gfx_isAntiAliasingEnabled())
 		{
 			_fe3d.gfx_disableAntiAliasing(false);
 		}
 
 		// Update value forms
-		if(_gui.getGlobalScreen()->checkValueForm("anisotropicFilteringQuality", anisotropicFilteringQuality, {}))
+		if(_gui.getOverlay()->checkValueForm("anisotropicFilteringQuality", anisotropicFilteringQuality, {}))
 		{
 			_fe3d.gfx_setAnisotropicFilteringQuality(anisotropicFilteringQuality);
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("allocatedSound2dChannelCount", allocatedSound2dChannelCount, {}))
+		if(_gui.getOverlay()->checkValueForm("allocatedSound2dChannelCount", allocatedSound2dChannelCount, {}))
 		{
 			_fe3d.misc_allocateSound2dChannels(allocatedSound2dChannelCount);
 		}
-		if(_gui.getGlobalScreen()->checkValueForm("allocatedSound3dChannelCount", allocatedSound3dChannelCount, {}))
+		if(_gui.getOverlay()->checkValueForm("allocatedSound3dChannelCount", allocatedSound3dChannelCount, {}))
 		{
 			_fe3d.misc_allocateSound3dChannels(allocatedSound2dChannelCount);
 		}

@@ -9,7 +9,7 @@ void WorldEditor::_updateWaterMenu()
 	if(screen->getID() == "worldEditorMenuWater")
 	{
 		// Button management
-		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 			return;
@@ -27,7 +27,7 @@ void WorldEditor::_updateWaterMenu()
 			}
 
 			// Add choice list
-			_gui.getGlobalScreen()->createChoiceForm("waterList", "Select Water", fvec2(0.0f, 0.1f), waterIDs);
+			_gui.getOverlay()->createChoiceForm("waterList", "Select Water", fvec2(0.0f, 0.1f), waterIDs);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -46,7 +46,7 @@ void WorldEditor::_updateWaterMenu()
 		// Update water choosing
 		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("waterList");
+			string selectedButtonID = _gui.getOverlay()->checkChoiceForm("waterList");
 			if(!selectedButtonID.empty())
 			{
 				// Delete old
@@ -58,11 +58,11 @@ void WorldEditor::_updateWaterMenu()
 				// Create new
 				_currentWaterID = selectedButtonID;
 				_copyTemplateWater(_currentWaterID, ("@" + selectedButtonID));
-				_gui.getGlobalScreen()->deleteChoiceForm("waterList");
+				_gui.getOverlay()->deleteChoiceForm("waterList");
 			}
-			else if(_gui.getGlobalScreen()->isChoiceFormCancelled("waterList"))
+			else if(_gui.getOverlay()->isChoiceFormCancelled("waterList"))
 			{
-				_gui.getGlobalScreen()->deleteChoiceForm("waterList");
+				_gui.getOverlay()->deleteChoiceForm("waterList");
 			}
 		}
 

@@ -168,6 +168,7 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 		{
 			// Update animation system
 			_leftViewportController.getAnimation3dEditor().update();
+			_leftViewportController.getAnimation2dEditor().update();
 
 			// Update script execution
 			_leftViewportController.getScriptEditor().getScriptExecutor().update(false);

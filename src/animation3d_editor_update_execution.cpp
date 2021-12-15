@@ -16,7 +16,7 @@ void Animation3dEditor::_updateModelAnimationExecution()
 			// Showing frame index
 			if(_isEditorLoaded)
 			{
-				_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), "Frame: " + to_string(animation.getFrameIndex() + 1), 0.025f);
+				_fe3d.text_setContent(_gui.getOverlay()->getTextField("animationFrame")->getEntityID(), "Frame: " + to_string(animation.getFrameIndex() + 1), 0.025f);
 			}
 
 			// Retrieve current frame

@@ -12,15 +12,15 @@ void WorldEditor::_updateBillboardPlacing()
 			auto newPosition = _fe3d.billboard_getPosition(_currentTemplateBillboardID);
 
 			// Update value forms
-			_gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, {});
-			_gui.getGlobalScreen()->checkValueForm("positionY", newPosition.y, {});
-			_gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, {});
+			_gui.getOverlay()->checkValueForm("positionX", newPosition.x, {});
+			_gui.getOverlay()->checkValueForm("positionY", newPosition.y, {});
+			_gui.getOverlay()->checkValueForm("positionZ", newPosition.z, {});
 
 			// Update position
 			_fe3d.billboard_setPosition(_currentTemplateBillboardID, newPosition);
 
 			// Check if billboard must be placed
-			if(_gui.getGlobalScreen()->isValueFormConfirmed())
+			if(_gui.getOverlay()->isValueFormConfirmed())
 			{
 				// Adding a number to make it unique
 				BEGIN1:
@@ -38,17 +38,17 @@ void WorldEditor::_updateBillboardPlacing()
 			}
 
 			// Check if placement mode must be disabled
-			if(_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
+			if(_gui.getOverlay()->isValueFormConfirmed() || _gui.getOverlay()->isValueFormCancelled())
 			{
 				_fe3d.billboard_setVisible(_currentTemplateBillboardID, false);
-				_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
+				_fe3d.text_setVisible(_gui.getOverlay()->getTextField("billboardID")->getEntityID(), false);
 				_currentTemplateBillboardID = "";
 			}
 		}
 		else // Placing on terrain
 		{
 			// Check if allowed by GUI
-			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
 			{
 				// Check if allowed by mouse
 				if(!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
@@ -90,7 +90,7 @@ void WorldEditor::_updateBillboardPlacing()
 					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
 					{
 						_fe3d.billboard_setVisible(_currentTemplateBillboardID, false);
-						_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
+						_fe3d.text_setVisible(_gui.getOverlay()->getTextField("billboardID")->getEntityID(), false);
 						_currentTemplateBillboardID = "";
 					}
 				}

@@ -10,7 +10,7 @@ using std::clamp;
 void WorldEditor::_updateMiscellaneous()
 {
 	// Check if allowed by GUI
-	if(!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Update AABB frame rendering
 		if(_fe3d.input_isKeyPressed(InputType::KEY_B))

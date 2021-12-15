@@ -38,7 +38,7 @@ void ModelEditor::_updateCamera()
 	}
 
 	// Check if allowed by GUI
-	if(!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Check if RMB pressed
 		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
@@ -58,7 +58,7 @@ void ModelEditor::_updateCamera()
 	// Disable third person view if necessary
 	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
-		if(_gui.getGlobalScreen()->isFocused())
+		if(_gui.getOverlay()->isFocused())
 		{
 			_fe3d.camera_disableThirdPersonView();
 		}
@@ -68,7 +68,7 @@ void ModelEditor::_updateCamera()
 void ModelEditor::_updateMiscellaneous()
 {
 	// Check if allowed by GUI
-	if(!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Update reference model visibility
 		if(_fe3d.input_isKeyPressed(InputType::KEY_R))
@@ -125,7 +125,7 @@ void ModelEditor::_updateModelCreating()
 		string newModelID;
 
 		// Check if user filled in a new ID
-		if(_gui.getGlobalScreen()->checkValueForm("modelCreate", newModelID, {}))
+		if(_gui.getOverlay()->checkValueForm("modelCreate", newModelID, {}))
 		{
 			// @ sign not allowed
 			if(newModelID.find('@') == string::npos)
@@ -190,8 +190,8 @@ void ModelEditor::_updateModelCreating()
 							_loadedModelIDs.push_back(newModelID);
 
 							// Miscellaneous
-							_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), "Model: " + newModelID.substr(1), 0.025f);
-							_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), true);
+							_fe3d.text_setContent(_gui.getOverlay()->getTextField("modelID")->getEntityID(), "Model: " + newModelID.substr(1), 0.025f);
+							_fe3d.text_setVisible(_gui.getOverlay()->getTextField("modelID")->getEntityID(), true);
 							_isCreatingModel = false;
 						}
 					}
@@ -218,7 +218,7 @@ void ModelEditor::_updateModelChoosing()
 	if(_isChoosingModel)
 	{
 		// Get selected button ID
-		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("modelList");
+		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("modelList");
 
 		// Hide last model
 		if(!_hoveredModelID.empty())
@@ -243,21 +243,21 @@ void ModelEditor::_updateModelChoosing()
 				if(!_isDeletingModel)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), "Model: " + _currentModelID.substr(1), 0.025f);
-					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), true);
+					_fe3d.text_setContent(_gui.getOverlay()->getTextField("modelID")->getEntityID(), "Model: " + _currentModelID.substr(1), 0.025f);
+					_fe3d.text_setVisible(_gui.getOverlay()->getTextField("modelID")->getEntityID(), true);
 				}
 
 				// Miscellaneous
 				_fe3d.model_setVisible(_currentModelID, true);
-				_gui.getGlobalScreen()->deleteChoiceForm("modelList");
+				_gui.getOverlay()->deleteChoiceForm("modelList");
 				_isChoosingModel = false;
 			}
 		}
-		else if(_gui.getGlobalScreen()->isChoiceFormCancelled("modelList")) // Cancelled choosing
+		else if(_gui.getOverlay()->isChoiceFormCancelled("modelList")) // Cancelled choosing
 		{
 			_isChoosingModel = false;
 			_isDeletingModel = false;
-			_gui.getGlobalScreen()->deleteChoiceForm("modelList");
+			_gui.getOverlay()->deleteChoiceForm("modelList");
 		}
 		else // Nothing hovered
 		{
@@ -277,20 +277,20 @@ void ModelEditor::_updateModelDeleting()
 	if(_isDeletingModel && !_currentModelID.empty())
 	{
 		// Add answer form
-		if(!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
+		if(!_gui.getOverlay()->isAnswerFormExisting("delete"))
 		{
-			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui.getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
 		// Update answer form
-		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
+		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
 			_fe3d.model_delete(_currentModelID);
 			_loadedModelIDs.erase(remove(_loadedModelIDs.begin(), _loadedModelIDs.end(), _currentModelID), _loadedModelIDs.end());
 			_isDeletingModel = false;
 			_currentModelID = "";
 		}
-		if(_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
+		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
 		{
 			_fe3d.model_setVisible(_currentModelID, false);
 			_isDeletingModel = false;
@@ -304,7 +304,7 @@ void ModelEditor::_updatePartChoosing()
 	if(_isChoosingPart)
 	{
 		// Get selected button ID
-		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("partList");
+		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("partList");
 
 		// Check if a part ID is hovered
 		if(!selectedButtonID.empty())
@@ -317,19 +317,19 @@ void ModelEditor::_updatePartChoosing()
 
 				// Go to next screen
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen(_nextActiveScreenID);
-				_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("partID")->getEntityID(), ("Part: " + _currentPartID), 0.025f);
-				_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("partID")->getEntityID(), true);
+				_fe3d.text_setContent(_gui.getOverlay()->getTextField("partID")->getEntityID(), ("Part: " + _currentPartID), 0.025f);
+				_fe3d.text_setVisible(_gui.getOverlay()->getTextField("partID")->getEntityID(), true);
 
 				// Miscellaneous
-				_gui.getGlobalScreen()->deleteChoiceForm("partList");
+				_gui.getOverlay()->deleteChoiceForm("partList");
 				_nextActiveScreenID = "";
 				_isChoosingPart = false;
 			}
 		}
-		else if(_gui.getGlobalScreen()->isChoiceFormCancelled("partList")) // Cancelled choosing
+		else if(_gui.getOverlay()->isChoiceFormCancelled("partList")) // Cancelled choosing
 		{
 			_isChoosingPart = false;
-			_gui.getGlobalScreen()->deleteChoiceForm("partList");
+			_gui.getOverlay()->deleteChoiceForm("partList");
 		}
 	}
 }

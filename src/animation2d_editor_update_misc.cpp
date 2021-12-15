@@ -4,7 +4,7 @@
 void Animation2dEditor::_updateMiscellaneous()
 {
 	// Check if allowed by GUI
-	if(!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Update debug rendering
 		if(_fe3d.input_isKeyPressed(InputType::KEY_H))
@@ -27,7 +27,7 @@ void Animation2dEditor::_updateAnimationCreating()
 	{
 		// Check if user filled in a new ID
 		string newAnimationID = "";
-		if(_gui.getGlobalScreen()->checkValueForm("animationCreate", newAnimationID, {_currentAnimationID}))
+		if(_gui.getOverlay()->checkValueForm("animationCreate", newAnimationID, {_currentAnimationID}))
 		{
 			// @ sign not allowed
 			if(newAnimationID.find('@') == string::npos)
@@ -53,8 +53,8 @@ void Animation2dEditor::_updateAnimationCreating()
 						_fe3d.billboard_setVisible(TEMPLATE_BILLBOARD_ID, true);
 
 						// Miscellaneous
-						_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), "Animation: " + newAnimationID, 0.025f);
-						_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), true);
+						_fe3d.text_setContent(_gui.getOverlay()->getTextField("animationID")->getEntityID(), "Animation: " + newAnimationID, 0.025f);
+						_fe3d.text_setVisible(_gui.getOverlay()->getTextField("animationID")->getEntityID(), true);
 						_isCreatingAnimation = false;
 					}
 					else
@@ -80,7 +80,7 @@ void Animation2dEditor::_updateAnimationChoosing()
 	if(_isChoosingAnimation)
 	{
 		// Get selected button ID
-		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("animationList");
+		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("animationList");
 
 		// Check if a animation ID is hovered
 		if(!selectedButtonID.empty())
@@ -102,20 +102,20 @@ void Animation2dEditor::_updateAnimationChoosing()
 					_fe3d.billboard_setVisible(TEMPLATE_BILLBOARD_ID, true);
 
 					// Miscellaneous
-					_fe3d.text_setContent(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), "Animation: " + selectedButtonID, 0.025f);
-					_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), true);
+					_fe3d.text_setContent(_gui.getOverlay()->getTextField("animationID")->getEntityID(), "Animation: " + selectedButtonID, 0.025f);
+					_fe3d.text_setVisible(_gui.getOverlay()->getTextField("animationID")->getEntityID(), true);
 				}
 
 				// Miscellaneous
-				_gui.getGlobalScreen()->deleteChoiceForm("animationList");
+				_gui.getOverlay()->deleteChoiceForm("animationList");
 				_isChoosingAnimation = false;
 			}
 		}
-		else if(_gui.getGlobalScreen()->isChoiceFormCancelled("animationList")) // Cancelled choosing
+		else if(_gui.getOverlay()->isChoiceFormCancelled("animationList")) // Cancelled choosing
 		{
 			_isChoosingAnimation = false;
 			_isDeletingAnimation = false;
-			_gui.getGlobalScreen()->deleteChoiceForm("animationList");
+			_gui.getOverlay()->deleteChoiceForm("animationList");
 		}
 	}
 }
@@ -125,13 +125,13 @@ void Animation2dEditor::_updateAnimationDeleting()
 	if(_isDeletingAnimation && !_currentAnimationID.empty())
 	{
 		// Add answer form
-		if(!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
+		if(!_gui.getOverlay()->isAnswerFormExisting("delete"))
 		{
-			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui.getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
 		// Update answer form
-		if(_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
+		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
 			// Go to main screen
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation2dEditorMenuMain");
@@ -147,7 +147,7 @@ void Animation2dEditor::_updateAnimationDeleting()
 			// Miscellaneous
 			_isDeletingAnimation = false;
 		}
-		if(_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
+		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
 		{
 			_isDeletingAnimation = false;
 			_currentAnimationID = "";

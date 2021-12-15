@@ -6,8 +6,9 @@
 #include "terrain_editor.hpp"
 #include "water_editor.hpp"
 #include "model_editor.hpp"
-#include "animation3d_editor.hpp"
 #include "billboard_editor.hpp"
+#include "animation3d_editor.hpp"
+#include "animation2d_editor.hpp"
 #include "sound_editor.hpp"
 #include "transformation_type.hpp"
 
@@ -27,6 +28,7 @@ public:
 				ModelEditor& modelEditor,
 				BillboardEditor& billboardEditor,
 				Animation3dEditor& animation3dEditor,
+				Animation2dEditor& animation2dEditor,
 				SoundEditor& soundEditor);
 
 	// VOID
@@ -308,5 +310,6 @@ private:
 	ModelEditor& _modelEditor;
 	BillboardEditor& _billboardEditor;
 	Animation3dEditor& _animation3dEditor;
+	Animation2dEditor& _animation2dEditor;
 	SoundEditor& _soundEditor;
 };

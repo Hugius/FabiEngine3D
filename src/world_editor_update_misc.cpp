@@ -5,7 +5,7 @@ void WorldEditor::_updateCamera()
 	if(!_currentWorldID.empty())
 	{
 		// Camera looking
-		if(_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())
+		if(_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getOverlay()->isFocused())
 		{
 			// Enable first person view
 			if(_fe3d.misc_isCursorInsideViewport() && !_fe3d.camera_isFirstPersonViewEnabled())
@@ -35,7 +35,7 @@ void WorldEditor::_updateCamera()
 		}
 
 		// Camera movement
-		if(!_gui.getGlobalScreen()->isFocused())
+		if(!_gui.getOverlay()->isFocused())
 		{
 			// X movement
 			if(_fe3d.input_isKeyDown(InputType::KEY_A))

@@ -31,7 +31,7 @@ void WorldEditor::_updateModelEditing()
 
 				// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
 				if(hovered && _fe3d.misc_isCursorInsideViewport() &&
-				   !_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				   !_gui.getOverlay()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Select hovered model
 					_selectModel(ID);
@@ -61,7 +61,7 @@ void WorldEditor::_updateModelEditing()
 		if(!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 		{
 			// Check if allowed by GUI
-			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
 			{
 				// Check if model is active
 				if(!_activeModelID.empty())
@@ -122,7 +122,7 @@ void WorldEditor::_updateModelEditing()
 				}
 				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
 				{
-					_gui.getGlobalScreen()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), _animation3dEditor.getAnimationIDs());
+					_gui.getOverlay()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), _animation3dEditor.getAnimationIDs());
 				}
 				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
@@ -135,7 +135,7 @@ void WorldEditor::_updateModelEditing()
 
 			// Check if an animation ID is clicked
 			auto lastAnimationID = _animation3dEditor.getStartedModelAnimationIDs(_activeModelID);
-			string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("animationList");
+			string selectedButtonID = _gui.getOverlay()->checkChoiceForm("animationList");
 			if(!selectedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Stop last playing animation
@@ -168,11 +168,11 @@ void WorldEditor::_updateModelEditing()
 				_animation3dEditor.startModelAnimation(selectedButtonID, _activeModelID, -1);
 
 				// Miscellaneous
-				_gui.getGlobalScreen()->deleteChoiceForm("animationList");
+				_gui.getOverlay()->deleteChoiceForm("animationList");
 			}
-			else if(_gui.getGlobalScreen()->isChoiceFormCancelled("animationList")) // Cancelled choosing
+			else if(_gui.getOverlay()->isChoiceFormCancelled("animationList")) // Cancelled choosing
 			{
-				_gui.getGlobalScreen()->deleteChoiceForm("animationList");
+				_gui.getOverlay()->deleteChoiceForm("animationList");
 			}
 
 			// Alternative way of deleting
@@ -294,7 +294,7 @@ void WorldEditor::_updateModelEditing()
 		// Check if model is still selected or active
 		if(_selectedModelID.empty() && _activeModelID.empty())
 		{
-			_fe3d.text_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
+			_fe3d.text_setVisible(_gui.getOverlay()->getTextField("modelID")->getEntityID(), false);
 		}
 	}
 }

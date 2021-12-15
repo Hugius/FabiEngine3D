@@ -57,6 +57,8 @@ const vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const st
 		isExecuted = (isExecuted || _executeFe3dTextGetter(functionName, arguments, returnValues));
 		isExecuted = (isExecuted || _executeFe3dAnimation3dSetter(functionName, arguments, returnValues));
 		isExecuted = (isExecuted || _executeFe3dAnimation3dGetter(functionName, arguments, returnValues));
+		isExecuted = (isExecuted || _executeFe3dAnimation2dSetter(functionName, arguments, returnValues));
+		isExecuted = (isExecuted || _executeFe3dAnimation2dGetter(functionName, arguments, returnValues));
 		isExecuted = (isExecuted || _executeFe3dSound2dSetter(functionName, arguments, returnValues));
 		isExecuted = (isExecuted || _executeFe3dSound2dGetter(functionName, arguments, returnValues));
 		isExecuted = (isExecuted || _executeFe3dSound3dSetter(functionName, arguments, returnValues));

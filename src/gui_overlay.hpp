@@ -7,14 +7,14 @@
 #include "gui_rectangle.hpp"
 #include "gui_text_field.hpp"
 
-class GuiGlobalScreen final
+class GuiOverlay final
 {
 public:
-	GuiGlobalScreen(FabiEngine3D& fe3d);
+	GuiOverlay(FabiEngine3D& fe3d);
 
 	// VOID
 	void update();
-	void setFocus(bool focused);
+	void setFocused(bool value);
 	void createScrollingList(const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 buttonColor, fvec3 buttonHoverColor, fvec3 textColor, fvec3 textHoverColor, fvec2 charSize, bool isCentered);
 	void createWriteField(const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor, fvec3 textColor, fvec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered);
 	void createButton(const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor, string textContent, fvec3 textColor, fvec3 textHoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered);

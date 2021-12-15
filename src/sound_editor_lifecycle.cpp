@@ -38,7 +38,7 @@ void SoundEditor::load()
 	_fe3d.billboard_setBright("@@icon", true);
 
 	// Miscellaneous
-	_gui.getGlobalScreen()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
+	_gui.getOverlay()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 	_isEditorLoaded = true;
 }
 
@@ -64,7 +64,7 @@ void SoundEditor::unload()
 	_isDeletingSound = false;
 
 	// Miscellaneous
-	_gui.getGlobalScreen()->deleteTextField("soundID");
+	_gui.getOverlay()->deleteTextField("soundID");
 }
 
 void SoundEditor::_loadGUI()

@@ -119,6 +119,10 @@ void WorldEditor::_updateBillboardEditing()
 				{
 					_fe3d.billboard_setFrozen(_activeBillboardID, !_fe3d.billboard_isFrozen(_activeBillboardID));
 				}
+				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
+				{
+					_gui.getOverlay()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), _animation2dEditor.getAnimationIDs());
+				}
 				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
 					_fe3d.billboard_delete(_activeBillboardID);
@@ -126,6 +130,29 @@ void WorldEditor::_updateBillboardEditing()
 					_activeBillboardID = "";
 					return;
 				}
+			}
+
+			// Check if an animation ID is clicked
+			auto lastAnimationID = _animation2dEditor.getStartedBillboardAnimationIDs(_activeBillboardID);
+			string selectedButtonID = _gui.getOverlay()->checkChoiceForm("animationList");
+			if(!selectedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			{
+				// Stop playing animation
+				if(!lastAnimationID.empty())
+				{
+					// Stop animation
+					_animation2dEditor.stopBillboardAnimation(lastAnimationID.back(), _activeBillboardID);
+				}
+
+				// Start chosen animation
+				_animation2dEditor.startBillboardAnimation(selectedButtonID, _activeBillboardID, -1);
+
+				// Miscellaneous
+				_gui.getOverlay()->deleteChoiceForm("animationList");
+			}
+			else if(_gui.getOverlay()->isChoiceFormCancelled("animationList")) // Cancelled choosing
+			{
+				_gui.getOverlay()->deleteChoiceForm("animationList");
 			}
 
 			// Alternative way of deleting

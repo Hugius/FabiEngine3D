@@ -138,7 +138,7 @@ void WorldEditor::_updateModelEditing()
 			string selectedButtonID = _gui.getOverlay()->checkChoiceForm("animationList");
 			if(!selectedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				// Stop last playing animation
+				// Stop playing animation
 				if(!lastAnimationID.empty())
 				{
 					// Stop animation

@@ -105,8 +105,11 @@ const bool WorldEditor::saveEditorWorldToFile()
 		bool isLevelOfDetailEntity = find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) != levelOfDetailEntityIDs.end();
 		if((modelID[0] != '@') || isLevelOfDetailEntity)
 		{
+			// Temporary values
+			auto startedAnimations = _animation3dEditor.getStartedModelAnimationIDs(modelID);
+
 			// Check if model has bound animation
-			if(!_animation3dEditor.getStartedModelAnimationIDs(modelID).empty())
+			if(!startedAnimations.empty())
 			{
 				// Reset main transformation
 				_fe3d.model_setBasePosition(modelID, _initialModelPosition[modelID]);
@@ -133,8 +136,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 			auto rotation = _fe3d.model_getBaseRotation(modelID);
 			auto size = _fe3d.model_getBaseSize(modelID);
 			auto isFrozen = _fe3d.model_isFrozen(modelID);
-			auto animationID = (_animation3dEditor.getStartedModelAnimationIDs(modelID).empty()) ? "" :
-				_animation3dEditor.getStartedModelAnimationIDs(modelID)[0];
+			auto animationID = (startedAnimations.empty()) ? "" : startedAnimations[0];
 
 			// Convert empty string
 			animationID = (animationID.empty()) ? "?" : animationID;
@@ -201,10 +203,20 @@ const bool WorldEditor::saveEditorWorldToFile()
 		// Check if allowed to save
 		if(billboardID[0] != '@')
 		{
+			// Temporary values
+			auto startedAnimations = _animation3dEditor.getStartedModelAnimationIDs(billboardID);
+
 			// Data to save
 			auto position = _fe3d.billboard_getPosition(billboardID);
 			auto rotation = _fe3d.billboard_getRotation(billboardID);
 			auto size = _fe3d.billboard_getSize(billboardID);
+			auto animationID = (startedAnimations.empty()) ? "" : startedAnimations[0];
+
+			// Convert empty string
+			animationID = (animationID.empty()) ? "?" : animationID;
+
+			// Convert spaces
+			replace(animationID.begin(), animationID.end(), ' ', '?');
 
 			// Extract template ID
 			string templateID = _loadedBillboardIDs.at(billboardID);
@@ -221,7 +233,8 @@ const bool WorldEditor::saveEditorWorldToFile()
 				rotation.y << " " <<
 				rotation.z << " " <<
 				size.x << " " <<
-				size.y << endl;
+				size.y << " " <<
+				animationID << endl;
 		}
 	}
 

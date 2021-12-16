@@ -304,8 +304,9 @@ void WorldEditor::_loadGUI()
 	rightWindow->getScreen("billboardPropertiesMenu")->createWriteField("x", fvec2(0.0f, 0.025f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 0, 1, 1, 1, 1, true);
 	rightWindow->getScreen("billboardPropertiesMenu")->createWriteField("y", fvec2(0.0f, -0.225f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 0, 1, 1, 1, 1, true);
 	rightWindow->getScreen("billboardPropertiesMenu")->createWriteField("z", fvec2(0.0f, -0.475f), fvec2(1.0f, 0.1f), fvec3(0.25f), fvec3(0.75f), fvec3(1.0f), fvec3(0.0f), 0, 1, 1, 1, 1, true);
-	rightWindow->getScreen("billboardPropertiesMenu")->createButton("freeze", fvec2(0.0f, -0.625f), fvec2(1.0f, 0.1f), fvec3(0.0f, 0.0f, 0.75f), fvec3(0.25f, 0.25f, 1.0f), "Freeze", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	rightWindow->getScreen("billboardPropertiesMenu")->createButton("delete", fvec2(0.0f, -0.775f), fvec2(1.0f, 0.1f), fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	rightWindow->getScreen("billboardPropertiesMenu")->createButton("animation", fvec2(0.0f, -0.625f), fvec2(1.5f, 0.1f), fvec3(0.0f, 0.0f, 0.75f), fvec3(0.25f, 0.25f, 1.0f), "Animation", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	rightWindow->getScreen("billboardPropertiesMenu")->createButton("freeze", fvec2(0.0f, -0.775f), fvec2(1.0f, 0.1f), fvec3(0.0f, 0.0f, 0.75f), fvec3(0.25f, 0.25f, 1.0f), "Freeze", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	rightWindow->getScreen("billboardPropertiesMenu")->createButton("delete", fvec2(0.0f, -0.925f), fvec2(1.0f, 0.1f), fvec3(0.75f, 0.0f, 0.0f), fvec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 
 	// Right-viewport: soundPropertiesMenu
 	rightWindow->createScreen("soundPropertiesMenu");

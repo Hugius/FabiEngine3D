@@ -164,6 +164,13 @@ void WorldEditor::clearCurrentWorld()
 		{
 			_fe3d.billboard_delete(ID);
 		}
+
+		// Stop animation
+		auto animationID = _animation2dEditor.getStartedBillboardAnimationIDs(ID);
+		if(!animationID.empty())
+		{
+			_animation2dEditor.stopBillboardAnimation(animationID.back(), ID);
+		}
 	}
 
 	// Delete AABB entities

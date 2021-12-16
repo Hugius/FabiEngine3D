@@ -148,7 +148,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "MODEL")
 		{
 			// Data placeholders
-			string modelID, templateID, animation3dID;
+			string modelID, templateID, animationID;
 			fvec3 position, rotation, size;
 			bool isFrozen;
 
@@ -183,13 +183,13 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				size.y >>
 				size.z >>
 				isFrozen >>
-				animation3dID;
+				animationID;
 
 			// Convert empty string
-			animation3dID = (animation3dID == "?") ? "" : animation3dID;
+			animationID = (animationID == "?") ? "" : animationID;
 
 			// Convert spaces
-			replace(animation3dID.begin(), animation3dID.end(), '?', ' ');
+			replace(animationID.begin(), animationID.end(), '?', ' ');
 
 			// Check if template model instancing changed
 			if(_fe3d.model_isExisting(templateID))
@@ -219,9 +219,9 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				}
 
 				// Start animation3D
-				if(!animation3dID.empty())
+				if(!animationID.empty())
 				{
-					_animation3dEditor.startModelAnimation(animation3dID, modelID, -1);
+					_animation3dEditor.startModelAnimation(animationID, modelID, -1);
 				}
 
 				// Check if instanced
@@ -264,7 +264,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		else if(lineType == "BILLBOARD")
 		{
 			// Data placeholders
-			string billboardID, templateID;
+			string billboardID, templateID, animationID;
 			fvec3 position, rotation;
 			fvec2 size;
 
@@ -279,13 +279,27 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				rotation.y >>
 				rotation.z >>
 				size.x >>
-				size.y;
+				size.y >>
+				animationID;
+
+			// Convert empty string
+			animationID = (animationID == "?") ? "" : animationID;
+
+			// Convert spaces
+			replace(animationID.begin(), animationID.end(), '?', ' ');
 
 			// Create billboard
 			if(_copyTemplateBillboard(billboardID, templateID, position, false))
 			{
+				// Set properties
 				_fe3d.billboard_setRotation(billboardID, rotation);
 				_fe3d.billboard_setSize(billboardID, size);
+
+				// Start animation3D
+				if(!animationID.empty())
+				{
+					_animation2dEditor.startBillboardAnimation(animationID, billboardID, -1);
+				}
 			}
 		}
 		else if(lineType == "SOUND")

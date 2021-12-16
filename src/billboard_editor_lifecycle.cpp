@@ -118,7 +118,7 @@ void BillboardEditor::_loadGUI()
 	leftWindow->getScreen("billboardEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 
 	// Left-viewport: billboardEditorMenuChoice
-	positions = VPC::calculateButtonPositions(6, CH);
+	positions = VPC::calculateButtonPositions(5, CH);
 	leftWindow->createScreen("billboardEditorMenuChoice");
 	leftWindow->getScreen("billboardEditorMenuChoice")->createButton("size", fvec2(0.0f, positions[0]), fvec2(TW("Size"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Size", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("billboardEditorMenuChoice")->createButton("texturing", fvec2(0.0f, positions[1]), fvec2(TW("Texturing"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Texturing", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);

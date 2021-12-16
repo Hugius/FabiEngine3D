@@ -81,20 +81,7 @@ void Animation3dEditor::_updateMiscellaneous()
 			}
 		}
 
-		// Update debug rendering
-		if(_fe3d.input_isKeyPressed(InputType::KEY_H))
-		{
-			if(_fe3d.misc_isDebugRenderingEnabled())
-			{
-				_fe3d.misc_disableDebugRendering();
-			}
-			else
-			{
-				_fe3d.misc_enableDebugRendering();
-			}
-		}
-
-		// Update wireframe model rendering
+		// Update wireframe rendering
 		if(!_currentAnimationID.empty())
 		{
 			// Temporary values
@@ -122,6 +109,19 @@ void Animation3dEditor::_updateMiscellaneous()
 						}
 					}
 				}
+			}
+		}
+
+		// Update debug rendering
+		if(_fe3d.input_isKeyPressed(InputType::KEY_H))
+		{
+			if(_fe3d.misc_isDebugRenderingEnabled())
+			{
+				_fe3d.misc_disableDebugRendering();
+			}
+			else
+			{
+				_fe3d.misc_enableDebugRendering();
 			}
 		}
 	}

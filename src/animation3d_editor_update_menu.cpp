@@ -231,19 +231,19 @@ void Animation3dEditor::_updateChoiceMenu()
 		}
 
 		// Update buttons hoverability
-		bool isPlaying = isModelAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID());
-		bool hasPreviewModel = _fe3d.model_isExisting(currentAnimation->getPreviewModelID());
-		screen->getButton("preview")->setHoverable(!isPlaying);
-		screen->getButton("start")->setHoverable(!isPlaying && hasPreviewModel && (currentAnimation->getFrames().size() > 1));
-		screen->getButton("stop")->setHoverable(isPlaying && hasPreviewModel);
-		screen->getButton("create")->setHoverable((currentAnimation->getFrames().size() < MAX_FRAME_COUNT) && !isPlaying && hasPreviewModel);
-		screen->getButton("edit")->setHoverable((_currentFrameIndex > 0) && !isPlaying);
-		screen->getButton("delete")->setHoverable((currentAnimation->getFrames().size() > 1) && (_currentFrameIndex > 0) && !isPlaying && hasPreviewModel);
-		screen->getButton("prev")->setHoverable((_currentFrameIndex > 0) && !isPlaying);
-		screen->getButton("next")->setHoverable((_currentFrameIndex < (currentAnimation->getFrames().size() - 1)) && !isPlaying && hasPreviewModel);
+		auto hasPreviewModel = _fe3d.model_isExisting(currentAnimation->getPreviewModelID());
+		auto isStarted = isModelAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID());
+		screen->getButton("preview")->setHoverable(!isStarted);
+		screen->getButton("start")->setHoverable(!isStarted && hasPreviewModel && (currentAnimation->getFrames().size() > 1));
+		screen->getButton("stop")->setHoverable(isStarted && hasPreviewModel);
+		screen->getButton("create")->setHoverable((currentAnimation->getFrames().size() < MAX_FRAME_COUNT) && !isStarted && hasPreviewModel);
+		screen->getButton("edit")->setHoverable((_currentFrameIndex > 0) && !isStarted);
+		screen->getButton("delete")->setHoverable((currentAnimation->getFrames().size() > 1) && (_currentFrameIndex > 0) && !isStarted && hasPreviewModel);
+		screen->getButton("prev")->setHoverable((_currentFrameIndex > 0) && !isStarted);
+		screen->getButton("next")->setHoverable((_currentFrameIndex < (currentAnimation->getFrames().size() - 1)) && !isStarted && hasPreviewModel);
 
 		// Update frame index display
-		if(!isPlaying)
+		if(!isStarted)
 		{
 			_fe3d.text_setContent(_gui.getOverlay()->getTextField("animationFrame")->getEntityID(), "Frame: " + to_string(_currentFrameIndex + 1), 0.025f);
 		}

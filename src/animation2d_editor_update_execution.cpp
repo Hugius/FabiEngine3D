@@ -5,35 +5,29 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 	// Update all started animations
 	for(auto& [idPair, animation] : _startedBillboardAnimations)
 	{
-		// Temporary values
-		fvec2 multiplierUV = fvec2(1.0f);
-		fvec2 adderUV = fvec2(0.0f);
-		bool animationMustStop = false;
-
 		// Check if animation is playing
 		if(!animation.isPaused())
 		{
 			// Check if animation is allowed to update
-			if(animation.getPassedFrames() >= animation.getFramestep())
+			if(animation.getPassedFrames() == animation.getFramestep())
 			{
 				// Reset frames
 				animation.setPassedFrames(0);
 
 				// Reached if animation reached column count
-				if(animation.getColumnIndex() >= animation.getColumnCount() - 1)
+				if(animation.getColumnIndex() == (animation.getColumnCount() - 1))
 				{
 					// Reset column index
 					animation.setColumnIndex(0);
 
 					// Check if animation reached row count
-					if(animation.getRowIndex() >= animation.getRowCount() - 1)
+					if(animation.getRowIndex() == (animation.getRowCount() - 1))
 					{
 						// Check if animation is endless
 						if(animation.getTimesToPlay() == -1)
 						{
 							_billboardAnimationsToStop.insert(idPair);
 							_billboardAnimationsToStart.insert(idPair);
-							animationMustStop = true;
 						}
 						else
 						{
@@ -44,7 +38,6 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 							if(animation.getTimesToPlay() == 0)
 							{
 								_billboardAnimationsToStop.insert(idPair);
-								animationMustStop = true;
 							}
 							else
 							{
@@ -69,13 +62,10 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 		}
 
 		// Update UV properties
-		if(!animationMustStop)
-		{
-			multiplierUV.x = (1.0f / static_cast<float>(animation.getColumnCount()));
-			multiplierUV.y = (1.0f / static_cast<float>(animation.getRowCount()));
-			adderUV.x = (static_cast<float>(animation.getColumnIndex()) * multiplierUV.x);
-			adderUV.y = (static_cast<float>(animation.getRowIndex()) * multiplierUV.y);
-		}
+		fvec2 multiplierUV = fvec2((1.0f / static_cast<float>(animation.getColumnCount())),
+								   (1.0f / static_cast<float>(animation.getRowCount())));
+		fvec2 adderUV = fvec2((static_cast<float>(animation.getColumnIndex()) * multiplierUV.x),
+							  (static_cast<float>(animation.getRowIndex()) * multiplierUV.y));
 
 		// Apply to entity
 		_fe3d.billboard_setMultiplierUV(idPair.second, multiplierUV);
@@ -88,7 +78,6 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 		// Check if animation is still started
 		if(isBillboardAnimationStarted(idPair.first, idPair.second))
 		{
-			// Stop animation
 			stopBillboardAnimation(idPair.first, idPair.second);
 		}
 	}
@@ -112,35 +101,29 @@ void Animation2dEditor::_updateImageAnimationExecution()
 	// Update all started animations
 	for(auto& [idPair, animation] : _startedImageAnimations)
 	{
-		// Temporary values
-		fvec2 multiplierUV = fvec2(1.0f);
-		fvec2 adderUV = fvec2(0.0f);
-		bool animationMustStop = false;
-
 		// Check if animation is playing
 		if(!animation.isPaused())
 		{
 			// Check if animation is allowed to update
-			if(animation.getPassedFrames() >= animation.getFramestep())
+			if(animation.getPassedFrames() == animation.getFramestep())
 			{
 				// Reset frames
 				animation.setPassedFrames(0);
 
 				// Reached if animation reached column count
-				if(animation.getColumnIndex() >= animation.getColumnCount() - 1)
+				if(animation.getColumnIndex() == (animation.getColumnCount() - 1))
 				{
 					// Reset column index
 					animation.setColumnIndex(0);
 
 					// Check if animation reached row count
-					if(animation.getRowIndex() >= animation.getRowCount() - 1)
+					if(animation.getRowIndex() == (animation.getRowCount() - 1))
 					{
 						// Check if animation is endless
 						if(animation.getTimesToPlay() == -1)
 						{
 							_imageAnimationsToStop.insert(idPair);
 							_imageAnimationsToStart.insert(idPair);
-							animationMustStop = true;
 						}
 						else
 						{
@@ -151,7 +134,6 @@ void Animation2dEditor::_updateImageAnimationExecution()
 							if(animation.getTimesToPlay() == 0)
 							{
 								_imageAnimationsToStop.insert(idPair);
-								animationMustStop = true;
 							}
 							else
 							{
@@ -176,13 +158,10 @@ void Animation2dEditor::_updateImageAnimationExecution()
 		}
 
 		// Update UV properties
-		if(!animationMustStop)
-		{
-			multiplierUV.x = (1.0f / static_cast<float>(animation.getColumnCount()));
-			multiplierUV.y = (1.0f / static_cast<float>(animation.getRowCount()));
-			adderUV.x = (static_cast<float>(animation.getColumnIndex()) * multiplierUV.x);
-			adderUV.y = (static_cast<float>(animation.getRowIndex()) * multiplierUV.y);
-		}
+		fvec2 multiplierUV = fvec2((1.0f / static_cast<float>(animation.getColumnCount())),
+								   (1.0f / static_cast<float>(animation.getRowCount())));
+		fvec2 adderUV = fvec2((static_cast<float>(animation.getColumnIndex()) * multiplierUV.x),
+							  (static_cast<float>(animation.getRowIndex()) * multiplierUV.y));
 
 		// Apply to entity
 		_fe3d.image_setMultiplierUV(idPair.second, multiplierUV);
@@ -195,7 +174,6 @@ void Animation2dEditor::_updateImageAnimationExecution()
 		// Check if animation is still started
 		if(isImageAnimationStarted(idPair.first, idPair.second))
 		{
-			// Stop animation
 			stopImageAnimation(idPair.first, idPair.second);
 		}
 	}

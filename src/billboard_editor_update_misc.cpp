@@ -85,7 +85,7 @@ void BillboardEditor::_updateMiscellaneous()
 		}
 
 		// Update wireframe rendering
-		if(_fe3d.billboard_isExisting(_currentBillboardID))
+		if(!_currentBillboardID.empty())
 		{
 			if(_fe3d.input_isKeyPressed(InputType::KEY_F))
 			{

@@ -83,8 +83,8 @@ void ModelEditor::_updateMiscellaneous()
 			}
 		}
 
-		// Update wireframe model rendering
-		if(_fe3d.model_isExisting(_currentModelID))
+		// Update wireframe rendering
+		if(!_currentModelID.empty())
 		{
 			if(_fe3d.input_isKeyPressed(InputType::KEY_F))
 			{

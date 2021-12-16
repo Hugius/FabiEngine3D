@@ -6,6 +6,22 @@ void Animation2dEditor::_updateMiscellaneous()
 	// Check if allowed by GUI
 	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
+		// Update wireframe rendering
+		if(!_currentAnimationID.empty())
+		{
+			if(_fe3d.input_isKeyPressed(InputType::KEY_F))
+			{
+				if(_fe3d.billboard_isWireframed(PREVIEW_BILLBOARD_ID))
+				{
+					_fe3d.billboard_setWireframed(PREVIEW_BILLBOARD_ID, false);
+				}
+				else
+				{
+					_fe3d.billboard_setWireframed(PREVIEW_BILLBOARD_ID, true);
+				}
+			}
+		}
+
 		// Update debug rendering
 		if(_fe3d.input_isKeyPressed(InputType::KEY_H))
 		{
@@ -16,6 +32,21 @@ void Animation2dEditor::_updateMiscellaneous()
 			else
 			{
 				_fe3d.misc_enableDebugRendering();
+			}
+		}
+	}
+
+	// Check if there is a current animation
+	if(!_currentAnimationID.empty())
+	{
+		// Check if animation not started
+		if(!isBillboardAnimationStarted(_currentAnimationID, PREVIEW_BILLBOARD_ID))
+		{
+			// Reset UV properties
+			if(_isEditorLoaded)
+			{
+				_fe3d.billboard_setMultiplierUV(PREVIEW_BILLBOARD_ID, fvec2(1.0f));
+				_fe3d.billboard_setAdderUV(PREVIEW_BILLBOARD_ID, fvec2(0.0f));
 			}
 		}
 	}
@@ -49,8 +80,8 @@ void Animation2dEditor::_updateAnimationCreating()
 						_currentAnimationID = newAnimationID;
 
 						// Show preview billboard
-						_fe3d.billboard_setDiffuseMap(TEMPLATE_BILLBOARD_ID, "");
-						_fe3d.billboard_setVisible(TEMPLATE_BILLBOARD_ID, true);
+						_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
+						_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
 
 						// Miscellaneous
 						_fe3d.text_setContent(_gui.getOverlay()->getTextField("animationID")->getEntityID(), "Animation: " + newAnimationID, 0.025f);
@@ -98,8 +129,8 @@ void Animation2dEditor::_updateAnimationChoosing()
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
 
 					// Show preview billboard
-					_fe3d.billboard_setDiffuseMap(TEMPLATE_BILLBOARD_ID, _getAnimation(_currentAnimationID)->getPreviewTexturePath());
-					_fe3d.billboard_setVisible(TEMPLATE_BILLBOARD_ID, true);
+					_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, _getAnimation(_currentAnimationID)->getPreviewTexturePath());
+					_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
 
 					// Miscellaneous
 					_fe3d.text_setContent(_gui.getOverlay()->getTextField("animationID")->getEntityID(), "Animation: " + selectedButtonID, 0.025f);
@@ -137,8 +168,8 @@ void Animation2dEditor::_updateAnimationDeleting()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation2dEditorMenuMain");
 
 			// Hide preview billboard
-			_fe3d.billboard_setDiffuseMap(TEMPLATE_BILLBOARD_ID, "");
-			_fe3d.billboard_setVisible(TEMPLATE_BILLBOARD_ID, false);
+			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
+			_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
 
 			// Delete animation
 			_deleteAnimation(_currentAnimationID);

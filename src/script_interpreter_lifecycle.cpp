@@ -159,36 +159,39 @@ void ScriptInterpreter::load()
 	// Load all editor assets of this project if in application preview
 	if(Config::getInst().isApplicationExported())
 	{
+		// Gather file paths
+		auto skyTexturePaths = _skyEditor.getTexturePathsFromFile();
+		auto terrainTexturePaths = _terrainEditor.getTexturePathsFromFile();
+		auto terrainBitmapPaths = _terrainEditor.getBitmapPathsFromFile();
+		auto waterTexturePaths = _waterEditor.getTexturePathsFromFile();
+		auto modelMeshPaths = _modelEditor.getMeshPathsFromFile();
+		auto modelTexturePaths = _modelEditor.getTexturePathsFromFile();
+		auto billboardTexturePaths = _billboardEditor.getTexturePathsFromFile();
+		auto billboardFontPaths = _billboardEditor.getFontPathsFromFile();
+		auto audioPaths = _soundEditor.getAudioPathsFromFile();
+
 		// Cache meshes
-		_fe3d.misc_cacheMeshes(_modelEditor.getMeshPathsFromFile());
+		_fe3d.misc_cacheMeshes(modelMeshPaths);
 
 		// Cache 2D textures
 		vector<string> texturePaths2D;
-		texturePaths2D.insert(texturePaths2D.end(),
-							  _terrainEditor.getTexturePathsFromFile().begin(),
-							  _terrainEditor.getTexturePathsFromFile().end());
-		texturePaths2D.insert(texturePaths2D.end(),
-							  _waterEditor.getTexturePathsFromFile().begin(),
-							  _waterEditor.getTexturePathsFromFile().end());
-		texturePaths2D.insert(texturePaths2D.end(),
-							  _modelEditor.getTexturePathsFromFile().begin(),
-							  _modelEditor.getTexturePathsFromFile().end());
-		texturePaths2D.insert(texturePaths2D.end(),
-							  _billboardEditor.getTexturePathsFromFile().begin(),
-							  _billboardEditor.getTexturePathsFromFile().end());
+		texturePaths2D.insert(texturePaths2D.end(), terrainTexturePaths.begin(), terrainTexturePaths.end());
+		texturePaths2D.insert(texturePaths2D.end(), waterTexturePaths.begin(), waterTexturePaths.end());
+		texturePaths2D.insert(texturePaths2D.end(), modelTexturePaths.begin(), modelTexturePaths.end());
+		texturePaths2D.insert(texturePaths2D.end(), billboardTexturePaths.begin(), billboardTexturePaths.end());
 		_fe3d.misc_cache2dTextures(texturePaths2D);
 
 		// Cache 3D textures
-		_fe3d.misc_cache3dTextures(_skyEditor.getTexturePathsFromFile());
+		_fe3d.misc_cache3dTextures(skyTexturePaths);
 
 		// Cache bitmaps
-		_fe3d.misc_cacheBitmaps(_terrainEditor.getBitmapPathsFromFile());
+		_fe3d.misc_cacheBitmaps(terrainBitmapPaths);
 
 		// Cache fonts
-		_fe3d.misc_cacheFonts(_billboardEditor.getFontPathsFromFile());
+		_fe3d.misc_cacheFonts(billboardFontPaths);
 
 		// Cache audios
-		_fe3d.misc_cacheAudios(_soundEditor.getAudioPathsFromFile());
+		_fe3d.misc_cacheAudios(audioPaths);
 	}
 
 	// No sky by default

@@ -66,7 +66,7 @@ void TerrainEditor::_updateMiscellaneous()
 		}
 
 		// Update wireframe rendering
-		if(_fe3d.terrain_isExisting(_currentTerrainID))
+		if(!_currentTerrainID.empty())
 		{
 			if(_fe3d.input_isKeyPressed(InputType::KEY_F))
 			{

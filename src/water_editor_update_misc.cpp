@@ -63,7 +63,7 @@ void WaterEditor::_updateMiscellaneous()
 		}
 
 		// Update wireframe rendering
-		if(_fe3d.water_isExisting(_currentWaterID))
+		if(!_currentWaterID.empty())
 		{
 			if(_fe3d.input_isKeyPressed(InputType::KEY_F))
 			{

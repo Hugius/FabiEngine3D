@@ -110,10 +110,6 @@ void Animation2dEditor::stopBillboardAnimation(const string& animationID, const 
 		Logger::throwWarning(errorMessage + "animation not started!");
 	}
 
-	// Reset UV properties
-	_fe3d.billboard_setMultiplierUV(billboardID, fvec2(1.0f));
-	_fe3d.billboard_setAdderUV(billboardID, fvec2(0.0f));
-
 	// Stop animation
 	_startedBillboardAnimations.erase(make_pair(animationID, billboardID));
 }
@@ -231,10 +227,6 @@ void Animation2dEditor::stopImageAnimation(const string& animationID, const stri
 	{
 		Logger::throwWarning(errorMessage + "animation not started!");
 	}
-
-	// Reset UV properties
-	_fe3d.image_setMultiplierUV(imageID, fvec2(1.0f));
-	_fe3d.image_setAdderUV(imageID, fvec2(0.0f));
 
 	// Stop animation
 	_startedImageAnimations.erase(make_pair(animationID, imageID));

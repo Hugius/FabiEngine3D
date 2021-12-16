@@ -48,58 +48,34 @@ void Core::_prepare()
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "plane.obj") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "speaker.obj") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "torch.obj") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "a.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "b.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "backspace.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "c.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "color.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "ctrl.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "background_back.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "background_bottom.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "background_front.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "background_left.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "background_right.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "background_top.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "box.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "color.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "cursor_default.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "cursor_pointing.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "cursor_text.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "d.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "debug.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "down.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "enter.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "esc.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "f.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "grid.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "h.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "left.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "light_source.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "logo.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "minus.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "mouse.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "mouse_left.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "mouse_middle.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "mouse_right.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "p.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "pause.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "plus.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "position.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "r.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "radius.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "restart.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "right.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "rotation.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "s.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "settings.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "shape_circle.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "shape_square.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "shift.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "size.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "space.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "start.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "stop.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "up.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "v.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "background_right.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "background_left.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "background_top.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "background_bottom.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "background_back.png") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "background_front.png") ||
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + fontDirectoryPath + "font.ttf")
 		)
 	{

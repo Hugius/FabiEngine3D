@@ -44,7 +44,7 @@ void SkyEditor::_updateMiscellaneous()
 	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Update wireframe rendering
-		if(_fe3d.sky_isExisting(_currentSkyID))
+		if(!_currentSkyID.empty())
 		{
 			if(_fe3d.input_isKeyPressed(InputType::KEY_F))
 			{

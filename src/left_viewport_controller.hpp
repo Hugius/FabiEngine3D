@@ -29,8 +29,8 @@ public:
 	WaterEditor& getWaterEditor();
 	ModelEditor& getModelEditor();
 	BillboardEditor& getBillboardEditor();
-	Animation3dEditor& getAnimation3dEditor();
 	Animation2dEditor& getAnimation2dEditor();
+	Animation3dEditor& getAnimation3dEditor();
 	SoundEditor& getSoundEditor();
 	WorldEditor& getWorldEditor();
 	ScriptEditor& getScriptEditor();
@@ -60,8 +60,8 @@ private:
 	WaterEditor _waterEditor;
 	ModelEditor _modelEditor;
 	BillboardEditor _billboardEditor;
-	Animation3dEditor _animation3dEditor;
 	Animation2dEditor _animation2dEditor;
+	Animation3dEditor _animation3dEditor;
 	SoundEditor _soundEditor;
 	WorldEditor _worldEditor;
 	ScriptEditor _scriptEditor;

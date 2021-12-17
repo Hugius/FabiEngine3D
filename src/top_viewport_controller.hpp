@@ -24,8 +24,8 @@ public:
 						  WaterEditor& waterEditor,
 						  ModelEditor& modelEditor,
 						  BillboardEditor& billboardEditor,
-						  Animation3dEditor& animation3dEditor,
 						  Animation2dEditor& animation2dEditor,
+						  Animation3dEditor& animation3dEditor,
 						  SoundEditor& soundEditor,
 						  WorldEditor& worldEditor,
 						  ScriptEditor& scriptEditor);
@@ -78,8 +78,8 @@ private:
 	WaterEditor& _waterEditor;
 	ModelEditor& _modelEditor;
 	BillboardEditor& _billboardEditor;
-	Animation3dEditor& _animation3dEditor;
 	Animation2dEditor& _animation2dEditor;
+	Animation3dEditor& _animation3dEditor;
 	SoundEditor& _soundEditor;
 	WorldEditor& _worldEditor;
 	ScriptEditor& _scriptEditor;

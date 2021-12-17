@@ -32,7 +32,8 @@ A multiplayer first person shooter game based in a science-fiction setting: a sp
 - [Graphics](doc/GRAPHICS.md)
 - [Camera](doc/CAMERA.md)
 - [Physics](doc/PHYSICS.md)
-- [Audio](doc/AUDIO.md)
+- [Animations](doc/ANIMATIONS.md)
+- [Sounds](doc/SOUNDS.md)
 - [Scripting](doc/SCRIPTING.md)
 - [Networking](doc/NETWORKING.md)
 

@@ -131,7 +131,7 @@
 - **Quality**: the quality of the shadow map
   - Type: `integer`
   - Constraints: between `2048` and `16384`
-- **Interval**: the engine updates interval between camera follow updates
+- **Interval**: the amount of engine updates between camera follow updates
   - Type: `integer`
   - Constraints: at least `0`
 - **Enabled**: shadows are enabled in the world

@@ -264,8 +264,8 @@ void SettingsEditor::_loadGUI()
 	leftWindow->createScreen("settingsEditorMenuMain");
 	leftWindow->getScreen("settingsEditorMenuMain")->createButton("antiAliasing", fvec2(0.0f, positions[0]), fvec2(TW("Anti Aliasing"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Anti Aliasing", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("settingsEditorMenuMain")->createButton("anisotropicFilteringQuality", fvec2(0.0f, positions[1]), fvec2(TW("Aniso Filtering"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Aniso Filtering", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("settingsEditorMenuMain")->createButton("allocatedSound2dChannelCount", fvec2(0.0f, positions[2]), fvec2(TW("Sound2D Channels"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sound Channels", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("settingsEditorMenuMain")->createButton("allocatedSound3dChannelCount", fvec2(0.0f, positions[3]), fvec2(TW("Sound3D Channels"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sound Channels", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("allocatedSound2dChannelCount", fvec2(0.0f, positions[2]), fvec2(TW("Sound2D Channels"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sound2D Channels", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("allocatedSound3dChannelCount", fvec2(0.0f, positions[3]), fvec2(TW("Sound3D Channels"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sound3D Channels", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("settingsEditorMenuMain")->createButton("back", fvec2(0.0f, positions[4]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 }
 

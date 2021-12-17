@@ -9,8 +9,8 @@ WorldEditor::WorldEditor(FabiEngine3D& fe3d,
 						 WaterEditor& waterEditor,
 						 ModelEditor& modelEditor,
 						 BillboardEditor& billboardEditor,
-						 Animation3dEditor& animation3dEditor,
 						 Animation2dEditor& animation2dEditor,
+						 Animation3dEditor& animation3dEditor,
 						 SoundEditor& soundEditor)
 	:
 	_fe3d(fe3d),
@@ -20,8 +20,8 @@ WorldEditor::WorldEditor(FabiEngine3D& fe3d,
 	_waterEditor(waterEditor),
 	_modelEditor(modelEditor),
 	_billboardEditor(billboardEditor),
-	_animation3dEditor(animation3dEditor),
 	_animation2dEditor(animation2dEditor),
+	_animation3dEditor(animation3dEditor),
 	_soundEditor(soundEditor)
 {
 
@@ -72,8 +72,8 @@ void WorldEditor::load()
 	}
 
 	// Load template animations
-	_animation3dEditor.loadFromFile(false);
 	_animation2dEditor.loadFromFile(false);
+	_animation3dEditor.loadFromFile(false);
 
 	// Load template sounds
 	_soundEditor.loadFromFile();

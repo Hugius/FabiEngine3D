@@ -27,25 +27,30 @@
 - 3D raycasting system
 - 3D camera system
 
-### 1.4 Audio
+### 1.4 Animations
 
-- 2D sound
-- 3D sound
+- 2D sprite animations
+- 3D mesh animations
 
-### 1.5 Scripting
+### 1.5 Audio
+
+- 2D sounds
+- 3D sounds
+
+### 1.6 Scripting
 
 - Custom scripting language
 - Engine API
 - Math API
 
-### 1.6 Networking
+### 1.7 Networking
 
 - Central networking server
 - Multiple networking clients
 - TCP messaging
 - UDP messaging
 
-### 1.7 Miscellaneous
+### 1.8 Miscellaneous
 
 - Engine GUI
 - Editors

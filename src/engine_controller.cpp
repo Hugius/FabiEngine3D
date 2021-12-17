@@ -16,8 +16,8 @@ EngineController::EngineController()
 						   _leftViewportController.getWaterEditor(),
 						   _leftViewportController.getModelEditor(),
 						   _leftViewportController.getBillboardEditor(),
-						   _leftViewportController.getAnimation3dEditor(),
 						   _leftViewportController.getAnimation2dEditor(),
+						   _leftViewportController.getAnimation3dEditor(),
 						   _leftViewportController.getSoundEditor(),
 						   _leftViewportController.getWorldEditor(),
 						   _leftViewportController.getScriptEditor()),
@@ -143,8 +143,8 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 		if(_leftViewportController.getScriptEditor().getScriptExecutor().isRunning()) // Still running
 		{
 			// Update animation system
-			_leftViewportController.getAnimation3dEditor().update();
 			_leftViewportController.getAnimation2dEditor().update();
+			_leftViewportController.getAnimation3dEditor().update();
 
 			// Update script execution
 			_leftViewportController.getScriptEditor().getScriptExecutor().update(false);

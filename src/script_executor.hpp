@@ -12,8 +12,8 @@ public:
 				   WaterEditor& waterEditor,
 				   ModelEditor& modelEditor,
 				   BillboardEditor& billboardEditor,
-				   Animation3dEditor& animation3dEditor,
 				   Animation2dEditor& animation2dEditor,
+				   Animation3dEditor& animation3dEditor,
 				   SoundEditor& soundEditor,
 				   WorldEditor& worldEditor);
 

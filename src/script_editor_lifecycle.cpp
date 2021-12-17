@@ -14,8 +14,8 @@ ScriptEditor::ScriptEditor(FabiEngine3D& fe3d,
 						   WaterEditor& waterEditor,
 						   ModelEditor& modelEditor,
 						   BillboardEditor& billboardEditor,
-						   Animation3dEditor& animation3dEditor,
 						   Animation2dEditor& animation2dEditor,
+						   Animation3dEditor& animation3dEditor,
 						   SoundEditor& soundEditor,
 						   WorldEditor& worldEditor)
 	:
@@ -29,8 +29,8 @@ ScriptEditor::ScriptEditor(FabiEngine3D& fe3d,
 					waterEditor,
 					modelEditor,
 					billboardEditor,
-					animation3dEditor,
 					animation2dEditor,
+					animation3dEditor,
 					soundEditor,
 					worldEditor)
 {

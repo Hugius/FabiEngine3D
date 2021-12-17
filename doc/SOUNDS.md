@@ -1,16 +1,23 @@
-# Sound
+# Sounds
 
 ## 1. General
 
-- There are 2 types of audio: sound2D & sound3D.
-- Sounds play on unique sound channels.
+### 1.1 General
+
+- There are 2 types of sounds: sound2D & sound3D.
+- Each sound plays on a unique sound channel.
 - Multiple sounds can be playing at the same time.
 
-- **Sound Channels**: the amount of allocated audio channels
+### 1.2 Properties
+
+- **Sound2D Channels**: the amount of allocated audio channels for 2D sounds
+  - Type: `integer`
+  - Constraints: between `64` and `512`
+- **Sound3D Channels**: the amount of allocated audio channels for 3D sounds
   - Type: `integer`
   - Constraints: between `64` and `512`
 
-## 2. Sound2D Properties
+## 3. Sound2D Properties
 
 - **ID**: the identifier of the sound
   - Type: `string`
@@ -22,7 +29,7 @@
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
 
-## 3. Sound3D Properties
+## 4. Sound3D Properties
 
 - **ID**: the identifier of the sound
   - Type: `string`

@@ -16,8 +16,8 @@ TopViewportController::TopViewportController(FabiEngine3D& fe3d,
 											 WaterEditor& waterEditor,
 											 ModelEditor& modelEditor,
 											 BillboardEditor& billboardEditor,
-											 Animation3dEditor& animation3dEditor,
 											 Animation2dEditor& animation2dEditor,
+											 Animation3dEditor& animation3dEditor,
 											 SoundEditor& soundEditor,
 											 WorldEditor& worldEditor,
 											 ScriptEditor& scriptEditor)
@@ -29,8 +29,8 @@ TopViewportController::TopViewportController(FabiEngine3D& fe3d,
 	_waterEditor(waterEditor),
 	_modelEditor(modelEditor),
 	_billboardEditor(billboardEditor),
-	_animation3dEditor(animation3dEditor),
 	_animation2dEditor(animation2dEditor),
+	_animation3dEditor(animation3dEditor),
 	_soundEditor(soundEditor),
 	_worldEditor(worldEditor),
 	_scriptEditor(scriptEditor)
@@ -124,8 +124,8 @@ void TopViewportController::_updateMiscellaneous()
 	screen->getButton("modelEditor")->setHoverable(isHoverable);
 	screen->getButton("billboardEditor")->setHoverable(isHoverable);
 	screen->getButton("worldEditor")->setHoverable(isHoverable);
-	screen->getButton("animation3dEditor")->setHoverable(isHoverable);
 	screen->getButton("animation2dEditor")->setHoverable(isHoverable);
+	screen->getButton("animation3dEditor")->setHoverable(isHoverable);
 	screen->getButton("soundEditor")->setHoverable(isHoverable);
 	screen->getButton("scriptEditor")->setHoverable(isHoverable);
 }
@@ -202,16 +202,16 @@ void TopViewportController::_applyProjectChange()
 		_billboardEditor.unload();
 	}
 
-	// Unload animation3D editor
-	if(_animation3dEditor.isLoaded())
-	{
-		_animation3dEditor.unload();
-	}
-
 	// Unload animation2D editor
 	if(_animation2dEditor.isLoaded())
 	{
 		_animation2dEditor.unload();
+	}
+
+	// Unload animation3D editor
+	if(_animation3dEditor.isLoaded())
+	{
+		_animation3dEditor.unload();
 	}
 
 	// Unload audio editor
@@ -239,8 +239,8 @@ void TopViewportController::_applyProjectChange()
 	_waterEditor.setCurrentProjectID(_currentProjectID);
 	_modelEditor.setCurrentProjectID(_currentProjectID);
 	_billboardEditor.setCurrentProjectID(_currentProjectID);
-	_animation3dEditor.setCurrentProjectID(_currentProjectID);
 	_animation2dEditor.setCurrentProjectID(_currentProjectID);
+	_animation3dEditor.setCurrentProjectID(_currentProjectID);
 	_soundEditor.setCurrentProjectID(_currentProjectID);
 	_worldEditor.setCurrentProjectID(_currentProjectID);
 	_scriptEditor.setCurrentProjectID(_currentProjectID);
@@ -292,8 +292,8 @@ void TopViewportController::_saveCurrentProject()
 	_waterEditor.saveToFile();
 	_modelEditor.saveToFile();
 	_billboardEditor.saveToFile();
-	_animation3dEditor.saveToFile();
 	_animation2dEditor.saveToFile();
+	_animation3dEditor.saveToFile();
 	_soundEditor.saveToFile();
 	_worldEditor.saveEditorWorldToFile();
 	_scriptEditor.saveScriptFiles();

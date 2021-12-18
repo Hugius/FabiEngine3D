@@ -496,7 +496,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_lod_size_t")
+	else if(functionName == "fe3d:model_get_lod_size_y")
 	{
 		auto types = {SVT::STRING};
 
@@ -705,6 +705,29 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 				{
 					auto result = _fe3d.model_isReflective(arguments[0].getString(), arguments[1].getString());
 					returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_reflection_type")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				{
+					auto result = _fe3d.model_getReflectionType(arguments[0].getString(), arguments[1].getString());
+					if(result == ReflectionType::CUBE)
+					{
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "CUBE"));
+					}
+					if(result == ReflectionType::PLANAR)
+					{
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "PLANAR"));
+					}
 				}
 			}
 		}

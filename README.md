@@ -29,11 +29,11 @@ A multiplayer first person shooter game based in a science-fiction setting: a sp
 - [General](doc/GENERAL.md)
 - [Assets](doc/ASSETS.md)
 - [Entities](doc/ENTITIES.md)
+- [Animations](doc/ANIMATIONS.md)
+- [Sounds](doc/SOUNDS.md)
 - [Graphics](doc/GRAPHICS.md)
 - [Camera](doc/CAMERA.md)
 - [Physics](doc/PHYSICS.md)
-- [Animations](doc/ANIMATIONS.md)
-- [Sounds](doc/SOUNDS.md)
 - [Scripting](doc/SCRIPTING.md)
 - [Networking](doc/NETWORKING.md)
 
@@ -51,6 +51,16 @@ A multiplayer first person shooter game based in a science-fiction setting: a sp
 - [Image Entity](doc/IMAGE_ENTITY.md)
 - [Text Entity](doc/TEXT_ENTITY.md)
 
+### Animations
+
+- [Animation2D](doc/ANIMATION2D.md)
+- [Animation3D](doc/ANIMATION3D.md)
+
+### Sounds
+
+- [Sound2D](doc/SOUND2D.md)
+- [Sound3D](doc/SOUND3D.md)
+
 ### Editors
 
 - [Sky Editor](doc/SKY_EDITOR.md)
@@ -58,7 +68,8 @@ A multiplayer first person shooter game based in a science-fiction setting: a sp
 - [Water Editor](doc/WATER_EDITOR.md)
 - [Model Editor](doc/MODEL_EDITOR.md)
 - [Billboard Editor](doc/BILLBOARD_EDITOR.md)
-- [Animation Editor](doc/ANIMATION_EDITOR.md)
+- [Animation2D Editor](doc/ANIMATION2D_EDITOR.md)
+- [Animation3D Editor](doc/ANIMATION3D_EDITOR.md)
 - [Sound Editor](doc/SOUND_EDITOR.md)
 - [World Editor](doc/WORLD_EDITOR.md)
 - [Script Editor](doc/SCRIPT_EDITOR.md)

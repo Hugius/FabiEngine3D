@@ -539,32 +539,6 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_set_lod_entity_id")
-	{
-		auto types = {SVT::STRING, SVT::STRING};
-
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
-			{
-				_fe3d.model_setLevelOfDetailEntityID(arguments[0].getString(), arguments[1].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-			}
-		}
-	}
-	else if(functionName == "fe3d:model_set_lod_entity_id")
-	{
-		auto types = {SVT::STRING, SVT::STRING};
-
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
-			{
-				_fe3d.model_setLevelOfDetailEntityID(arguments[0].getString(), arguments[1].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-			}
-		}
-	}
 	else if(functionName == "fe3d:model_set_rotation_order")
 	{
 		auto types = {SVT::STRING, SVT::STRING};

@@ -4,7 +4,7 @@
 
 ### 1.1 General
 
-- There are 2 types of sounds: sound2D & sound3D.
+- There are 2 types of audio: sound2D & sound3D.
 - Each sound plays on a unique sound channel.
 - Multiple sounds can be playing at the same time.
 

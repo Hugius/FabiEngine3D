@@ -1,6 +1,11 @@
 # Animation2D
 
-## 1. Properties
+## 1. General
+
+- Animation2D is used for creating 2D texture animations.
+- These animations can be applied to billboard/image entities.
+
+## 2. Properties
 
 - **ID**: the identifier of the sound
   - Type: `string`

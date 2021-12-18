@@ -29,13 +29,7 @@ A multiplayer first person shooter game based in a science-fiction setting: a sp
 - [General](doc/GENERAL.md)
 - [Assets](doc/ASSETS.md)
 - [Entities](doc/ENTITIES.md)
-- [Animations](doc/ANIMATIONS.md)
-- [Sounds](doc/SOUNDS.md)
-- [Graphics](doc/GRAPHICS.md)
-- [Camera](doc/CAMERA.md)
-- [Physics](doc/PHYSICS.md)
-- [Scripting](doc/SCRIPTING.md)
-- [Networking](doc/NETWORKING.md)
+
 
 ### Entities
 
@@ -73,6 +67,14 @@ A multiplayer first person shooter game based in a science-fiction setting: a sp
 - [Sound Editor](doc/SOUND_EDITOR.md)
 - [World Editor](doc/WORLD_EDITOR.md)
 - [Script Editor](doc/SCRIPT_EDITOR.md)
+
+### Editors
+
+- [Graphics](doc/GRAPHICS.md)
+- [Camera](doc/CAMERA.md)
+- [Physics](doc/PHYSICS.md)
+- [Scripting](doc/SCRIPTING.md)
+- [Networking](doc/NETWORKING.md)
 
 ### Scripting APIs
 

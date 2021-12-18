@@ -4,118 +4,81 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
-	if(functionName == "fe3d:animation3d_is_started")
+	if(functionName == "fe3d:animation2d_is_billboard_started")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _animation3dEditor.isModelAnimationStarted(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation2dEditor.isBillboardAnimationStarted(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation3d_is_playing")
+	else if(functionName == "fe3d:animation2d_is_billboard_playing")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _animation3dEditor.isModelAnimationPlaying(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation2dEditor.isBillboardAnimationPlaying(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation3d_is_paused")
+	else if(functionName == "fe3d:animation2d_is_billboard_paused")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _animation3dEditor.isModelAnimationPaused(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation2dEditor.isBillboardAnimationPaused(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation3d_is_fading")
+	else if(functionName == "fe3d:animation2d_is_image_started")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				auto result = _animation3dEditor.isModelAnimationFading(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation2dEditor.isImageAnimationStarted(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation3d_get_speed")
+	else if(functionName == "fe3d:animation2d_is_image_playing")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				// Retrieve animation data
-				string errorMessage = "Tried to get animation speed with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
-				auto animationData = _animation3dEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
-
-				// Check if animation was found
-				if(animationData != nullptr)
-				{
-					auto result = animationData->getSpeedMultiplier();
-					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
-				}
+				auto result = _animation2dEditor.isImageAnimationPlaying(arguments[1].getString(), arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation3d_is_autopaused")
+	else if(functionName == "fe3d:animation2d_is_image_paused")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				// Retrieve animation data
-				string errorMessage = "Tried to get animation autopause option with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
-				auto animationData = _animation3dEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
-
-				// Check if animation was found
-				if(animationData != nullptr)
-				{
-					auto result = animationData->isAutoPaused();
-					returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
-				}
-			}
-		}
-	}
-	else if(functionName == "fe3d:animation3d_get_frame_index")
-	{
-		auto types = {SVT::STRING, SVT::STRING};
-
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
-			{
-				// Retrieve animation data
-				string errorMessage = "Tried to get animation frame index with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
-				auto animationData = _animation3dEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
-
-				// Check if animation was found
-				if(animationData != nullptr)
-				{
-					auto result = animationData->getFrameIndex();
-					returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
-				}
+				auto result = _animation2dEditor.isImageAnimationPaused(arguments[1].getString(), arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -127,7 +90,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 	// Cannot execute when server is running
 	if(_fe3d.server_isRunning())
 	{
-		_throwScriptError("cannot access `fe3d:animation3d` functionality as networking server!");
+		_throwScriptError("cannot access `fe3d:animation2d` functionality as networking server!");
 	}
 
 	// Return

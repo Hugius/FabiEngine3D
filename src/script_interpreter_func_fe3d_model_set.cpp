@@ -497,19 +497,6 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_set_face_culled")
-	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
-
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
-			{
-				_fe3d.model_setFaceCulled(arguments[0].getString(), arguments[1].getBoolean());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-			}
-		}
-	}
 	else if(functionName == "fe3d:model_set_bright")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};

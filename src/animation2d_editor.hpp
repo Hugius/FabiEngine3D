@@ -15,15 +15,17 @@ public:
 	void unload();
 	void update();
 	void startBillboardAnimation(const string& animationID, const string& billboardID, int timesToPlay);
-	void startImageAnimation(const string& animationID, const string& imageID, int timesToPlay);
 	void pauseBillboardAnimation(const string& animationID, const string& billboardID);
-	void pauseImageAnimation(const string& animationID, const string& imageID);
 	void resumeBillboardAnimation(const string& animationID, const string& billboardID);
-	void resumeImageAnimation(const string& animationID, const string& imageID);
 	void stopBillboardAnimation(const string& animationID, const string& billboardID);
-	void stopImageAnimation(const string& animationID, const string& imageID);
 	void stopBillboardAnimations();
+	void setBillboardAnimationFramestep(const string& animationID, const string& billboardID, unsigned int framestep);
+	void startImageAnimation(const string& animationID, const string& imageID, int timesToPlay);
+	void pauseImageAnimation(const string& animationID, const string& imageID);
+	void resumeImageAnimation(const string& animationID, const string& imageID);
+	void stopImageAnimation(const string& animationID, const string& imageID);
 	void stopImageAnimations();
+	void setImageAnimationFramestep(const string& animationID, const string& imageID, unsigned int framestep);
 
 	// STRING
 	const vector<string> getAnimationIDs();
@@ -31,6 +33,14 @@ public:
 	const vector<string> getStartedImageAnimationIDs() const;
 	const vector<string> getStartedBillboardAnimationIDs(const string& billboardID) const;
 	const vector<string> getStartedImageAnimationIDs(const string& billboardID) const;
+
+	// UNSIGNED INT
+	const unsigned int getBillboardAnimationRowCount(const string& animationID, const string& billboardID) const;
+	const unsigned int getBillboardAnimationColumnCount(const string& animationID, const string& billboardID) const;
+	const unsigned int getBillboardAnimationFramestep(const string& animationID, const string& billboardID) const;
+	const unsigned int getImageAnimationRowCount(const string& animationID, const string& imageID) const;
+	const unsigned int getImageAnimationColumnCount(const string& animationID, const string& imageID) const;
+	const unsigned int getImageAnimationFramestep(const string& animationID, const string& imageID) const;
 
 	// BOOL
 	const bool isLoaded() const;

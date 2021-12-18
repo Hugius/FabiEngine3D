@@ -75,9 +75,3 @@
 - **Wireframed**: the mesh is rendered as a wireframe
   - Type: `boolean`
   - Constraints: none
-- **Animation Started**: the sprite animation is started (can still be paused)
-  - Type: `boolean`
-  - Constraints: none
-- **Animation Paused**: the sprite animation is paused
-  - Type: `boolean`
-  - Constraints: none

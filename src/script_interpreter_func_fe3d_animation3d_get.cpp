@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _animation3dEditor.isModelAnimationStarted(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation3dEditor.isModelAnimationStarted(arguments[0].getString(), arguments[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -25,7 +25,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _animation3dEditor.isModelAnimationPlaying(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation3dEditor.isModelAnimationPlaying(arguments[0].getString(), arguments[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -38,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _animation3dEditor.isModelAnimationPaused(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation3dEditor.isModelAnimationPaused(arguments[0].getString(), arguments[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -51,7 +51,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _animation3dEditor.isModelAnimationFading(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation3dEditor.isModelAnimationFading(arguments[0].getString(), arguments[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -66,7 +66,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 			{
 				// Retrieve animation data
 				string errorMessage = "Tried to get animation speed with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
-				auto animationData = _animation3dEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
+				auto animationData = _animation3dEditor.getAnimationData(arguments[0].getString(), arguments[1].getString(), errorMessage);
 
 				// Check if animation was found
 				if(animationData != nullptr)
@@ -87,7 +87,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 			{
 				// Retrieve animation data
 				string errorMessage = "Tried to get animation autopause option with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
-				auto animationData = _animation3dEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
+				auto animationData = _animation3dEditor.getAnimationData(arguments[0].getString(), arguments[1].getString(), errorMessage);
 
 				// Check if animation was found
 				if(animationData != nullptr)
@@ -108,7 +108,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 			{
 				// Retrieve animation data
 				string errorMessage = "Tried to get animation frame index with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
-				auto animationData = _animation3dEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
+				auto animationData = _animation3dEditor.getAnimationData(arguments[0].getString(), arguments[1].getString(), errorMessage);
 
 				// Check if animation was found
 				if(animationData != nullptr)

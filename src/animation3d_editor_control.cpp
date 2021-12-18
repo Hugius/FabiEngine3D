@@ -3,31 +3,28 @@
 
 void Animation3dEditor::startModelAnimation(const string& animationID, const string& modelID, int timesToPlay)
 {
-	// Temporary values
-	string errorMessage = "Tried to start animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
-
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
 	{
-		Logger::throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning("animation not existing!");
 	}
 
 	// Check if model not existing
 	if(!_fe3d.model_isExisting(modelID))
 	{
-		Logger::throwWarning(errorMessage + "model not existing!");
+		Logger::throwWarning("model not existing!");
 	}
 
 	// Check if animation already started
 	if(isModelAnimationStarted(animationID, modelID))
 	{
-		Logger::throwWarning(errorMessage + "animation already started!");
+		Logger::throwWarning("animation already started!");
 	}
 
 	// Check if count invalid
 	if((timesToPlay < -1) || (timesToPlay == 0))
 	{
-		Logger::throwWarning(errorMessage + "play count is invalid!");
+		Logger::throwWarning("play count is invalid!");
 	}
 
 	// Copy animation
@@ -44,7 +41,7 @@ void Animation3dEditor::startModelAnimation(const string& animationID, const str
 		{
 			if(!_fe3d.model_hasPart(modelID, partID))
 			{
-				Logger::throwWarning(errorMessage + "model does not have required animation parts!");
+				Logger::throwWarning("model does not have required animation parts!");
 			}
 		}
 	}
@@ -55,25 +52,22 @@ void Animation3dEditor::startModelAnimation(const string& animationID, const str
 
 void Animation3dEditor::pauseModelAnimation(const string& animationID, const string& modelID)
 {
-	// Temporary values
-	string errorMessage = "Tried to pause animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
-
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
 	{
-		Logger::throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning("animation not existing!");
 	}
 
 	// Check if animation not started
 	if(!isModelAnimationStarted(animationID, modelID))
 	{
-		Logger::throwWarning(errorMessage + "animation not started!");
+		Logger::throwWarning("animation not started!");
 	}
 
 	// Check if animation paused
 	if(isModelAnimationPaused(animationID, modelID))
 	{
-		Logger::throwWarning(errorMessage + "animation not playing!");
+		Logger::throwWarning("animation not playing!");
 	}
 
 	// Pause animation
@@ -82,25 +76,22 @@ void Animation3dEditor::pauseModelAnimation(const string& animationID, const str
 
 void Animation3dEditor::resumeModelAnimation(const string& animationID, const string& modelID)
 {
-	// Temporary values
-	string errorMessage = "Tried to resume animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
-
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
 	{
-		Logger::throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning("animation not existing!");
 	}
 
 	// Check if animation not started
 	if(!isModelAnimationStarted(animationID, modelID))
 	{
-		Logger::throwWarning(errorMessage + "animation not started!");
+		Logger::throwWarning("animation not started!");
 	}
 
 	// Check if animation not paused
 	if(!isModelAnimationPaused(animationID, modelID))
 	{
-		Logger::throwWarning(errorMessage + "animation not paused!");
+		Logger::throwWarning("animation not paused!");
 	}
 
 	// Resume animation
@@ -109,31 +100,28 @@ void Animation3dEditor::resumeModelAnimation(const string& animationID, const st
 
 void Animation3dEditor::fadeModelAnimation(const string& animationID, const string& modelID, unsigned int framestep)
 {
-	// Temporary values
-	string errorMessage = "Tried to fade animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
-
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
 	{
-		Logger::throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning("animation not existing!");
 	}
 
 	// Check if animation not started
 	if(!isModelAnimationStarted(animationID, modelID))
 	{
-		Logger::throwWarning(errorMessage + "animation not started!");
+		Logger::throwWarning("animation not started!");
 	}
 
 	// Check if animation not playing
 	if(!isModelAnimationPlaying(animationID, modelID))
 	{
-		Logger::throwWarning(errorMessage + "animation not playing!");
+		Logger::throwWarning("animation not playing!");
 	}
 
 	// Check if animation is fading
 	if(isModelAnimationFading(animationID, modelID))
 	{
-		Logger::throwWarning(errorMessage + "animation already fading!");
+		Logger::throwWarning("animation already fading!");
 	}
 
 	// Fade animation
@@ -142,19 +130,16 @@ void Animation3dEditor::fadeModelAnimation(const string& animationID, const stri
 
 void Animation3dEditor::stopModelAnimation(const string& animationID, const string& modelID)
 {
-	// Temporary values
-	string errorMessage = "Tried to stop animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
-
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
 	{
-		Logger::throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning("animation not existing!");
 	}
 
 	// Check if animation not started
 	if(!isModelAnimationStarted(animationID, modelID))
 	{
-		Logger::throwWarning(errorMessage + "animation not started!");
+		Logger::throwWarning("animation not started!");
 	}
 
 	// Stop animation

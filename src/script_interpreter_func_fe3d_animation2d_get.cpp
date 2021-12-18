@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 		{
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _animation2dEditor.isBillboardAnimationStarted(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation2dEditor.isBillboardAnimationStarted(arguments[0].getString(), arguments[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -25,7 +25,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 		{
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _animation2dEditor.isBillboardAnimationPlaying(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation2dEditor.isBillboardAnimationPlaying(arguments[0].getString(), arguments[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -38,8 +38,47 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 		{
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _animation2dEditor.isBillboardAnimationPaused(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation2dEditor.isBillboardAnimationPaused(arguments[0].getString(), arguments[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:animation2d_get_billboard_row_count")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				auto result = _animation2dEditor.getBillboardAnimationRowCount(arguments[0].getString(), arguments[1].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
+			}
+		}
+	}
+	else if(functionName == "fe3d:animation2d_get_billboard_column_count")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				auto result = _animation2dEditor.getBillboardAnimationColumnCount(arguments[0].getString(), arguments[1].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
+			}
+		}
+	}
+	else if(functionName == "fe3d:animation2d_get_billboard_framestep")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			{
+				auto result = _animation2dEditor.getBillboardAnimationFramestep(arguments[0].getString(), arguments[1].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
 	}
@@ -51,7 +90,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 		{
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				auto result = _animation2dEditor.isImageAnimationStarted(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation2dEditor.isImageAnimationStarted(arguments[0].getString(), arguments[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -64,7 +103,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 		{
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				auto result = _animation2dEditor.isImageAnimationPlaying(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation2dEditor.isImageAnimationPlaying(arguments[0].getString(), arguments[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -77,8 +116,47 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 		{
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				auto result = _animation2dEditor.isImageAnimationPaused(arguments[1].getString(), arguments[0].getString());
+				auto result = _animation2dEditor.isImageAnimationPaused(arguments[0].getString(), arguments[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:animation2d_get_image_row_count")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dImage(arguments[0].getString()))
+			{
+				auto result = _animation2dEditor.getImageAnimationRowCount(arguments[0].getString(), arguments[1].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
+			}
+		}
+	}
+	else if(functionName == "fe3d:animation2d_get_image_column_count")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dImage(arguments[0].getString()))
+			{
+				auto result = _animation2dEditor.getImageAnimationColumnCount(arguments[0].getString(), arguments[1].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
+			}
+		}
+	}
+	else if(functionName == "fe3d:animation2d_get_image_framestep")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dImage(arguments[0].getString()))
+			{
+				auto result = _animation2dEditor.getImageAnimationFramestep(arguments[0].getString(), arguments[1].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
 	}

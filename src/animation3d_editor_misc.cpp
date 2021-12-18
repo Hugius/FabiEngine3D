@@ -112,11 +112,11 @@ Animation3d* Animation3dEditor::getAnimationData(const string& animationID, cons
 	// Check if animation is able to be retrieved
 	if(!isAnimationExisting(animationID))
 	{
-		Logger::throwWarning(baseErrorMessage + "animation not existing!");
+		Logger::throwWarning("animation not existing!");
 	}
 	else if(!isModelAnimationStarted(animationID, modelID))
 	{
-		Logger::throwWarning(baseErrorMessage + "animation not started!");
+		Logger::throwWarning("animation not started!");
 	}
 	else
 	{
@@ -141,13 +141,10 @@ const bool Animation3dEditor::isAnimationExisting(const string& ID) const
 
 const bool Animation3dEditor::isModelAnimationStarted(const string& animationID, const string& modelID) const
 {
-	// Temporary values
-	string errorMessage = "Tried to retrieve animation started status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
-
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
 	{
-		Logger::throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning("animation not existing!");
 	}
 
 	// Return
@@ -156,13 +153,10 @@ const bool Animation3dEditor::isModelAnimationStarted(const string& animationID,
 
 const bool Animation3dEditor::isModelAnimationPlaying(const string& animationID, const string& modelID) const
 {
-	// Temporary values
-	string errorMessage = "Tried to retrieve animation playing status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
-
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
 	{
-		Logger::throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning("animation not existing!");
 	}
 
 	// Check if animation not started
@@ -177,13 +171,10 @@ const bool Animation3dEditor::isModelAnimationPlaying(const string& animationID,
 
 const bool Animation3dEditor::isModelAnimationPaused(const string& animationID, const string& modelID) const
 {
-	// Temporary values
-	string errorMessage = "Tried to retrieve animation pausing status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
-
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
 	{
-		Logger::throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning("animation not existing!");
 		return false;
 	}
 
@@ -199,13 +190,10 @@ const bool Animation3dEditor::isModelAnimationPaused(const string& animationID, 
 
 const bool Animation3dEditor::isModelAnimationFading(const string& animationID, const string& modelID) const
 {
-	// Temporary values
-	string errorMessage = "Tried to retrieve animation fading status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
-
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
 	{
-		Logger::throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning("animation not existing!");
 		return false;
 	}
 

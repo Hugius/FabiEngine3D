@@ -81,6 +81,114 @@ const vector<string> Animation2dEditor::getStartedImageAnimationIDs(const string
 	return vector<string>(IDs.begin(), IDs.end());
 }
 
+const unsigned int Animation2dEditor::getBillboardAnimationRowCount(const string& animationID, const string& billboardID) const
+{
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning("animation not existing!");
+	}
+
+	// Check if animation not started
+	if(!isBillboardAnimationStarted(animationID, billboardID))
+	{
+		Logger::throwWarning("animation not started!");
+	}
+
+	// Return row count
+	return _startedBillboardAnimations.at(make_pair(animationID, billboardID)).getRowCount();
+}
+
+const unsigned int Animation2dEditor::getBillboardAnimationColumnCount(const string& animationID, const string& billboardID) const
+{
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning("animation not existing!");
+	}
+
+	// Check if animation not started
+	if(!isBillboardAnimationStarted(animationID, billboardID))
+	{
+		Logger::throwWarning("animation not started!");
+	}
+
+	// Return column count
+	return _startedBillboardAnimations.at(make_pair(animationID, billboardID)).getColumnCount();
+}
+
+const unsigned int Animation2dEditor::getBillboardAnimationFramestep(const string& animationID, const string& billboardID) const
+{
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning("animation not existing!");
+	}
+
+	// Check if animation not started
+	if(!isBillboardAnimationStarted(animationID, billboardID))
+	{
+		Logger::throwWarning("animation not started!");
+	}
+
+	// Return framestep
+	return _startedBillboardAnimations.at(make_pair(animationID, billboardID)).getFramestep();
+}
+
+const unsigned int Animation2dEditor::getImageAnimationRowCount(const string& animationID, const string& imageID) const
+{
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning("animation not existing!");
+	}
+
+	// Check if animation not started
+	if(!isImageAnimationStarted(animationID, imageID))
+	{
+		Logger::throwWarning("animation not started!");
+	}
+
+	// Return row count
+	return _startedImageAnimations.at(make_pair(animationID, imageID)).getRowCount();
+}
+
+const unsigned int Animation2dEditor::getImageAnimationColumnCount(const string& animationID, const string& imageID) const
+{
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning("animation not existing!");
+	}
+
+	// Check if animation not started
+	if(!isImageAnimationStarted(animationID, imageID))
+	{
+		Logger::throwWarning("animation not started!");
+	}
+
+	// Return column count
+	return _startedImageAnimations.at(make_pair(animationID, imageID)).getColumnCount();
+}
+
+const unsigned int Animation2dEditor::getImageAnimationFramestep(const string& animationID, const string& imageID) const
+{
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning("animation not existing!");
+	}
+
+	// Check if animation not started
+	if(!isImageAnimationStarted(animationID, imageID))
+	{
+		Logger::throwWarning("animation not started!");
+	}
+
+	// Return framestep
+	return _startedImageAnimations.at(make_pair(animationID, imageID)).getFramestep();
+}
+
 void Animation2dEditor::_deleteAnimation(const string& ID)
 {
 	for(size_t i = 0; i < _animations.size(); i++)
@@ -123,13 +231,10 @@ const bool Animation2dEditor::isAnimationExisting(const string& ID) const
 
 const bool Animation2dEditor::isBillboardAnimationStarted(const string& animationID, const string& billboardID) const
 {
-	// Temporary values
-	string errorMessage = "Tried to retrieve animation started status with ID \"" + animationID + "\" on billboard with ID \"" + billboardID + "\": ";
-
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
 	{
-		Logger::throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning("animation not existing!");
 	}
 
 	// Return
@@ -138,13 +243,10 @@ const bool Animation2dEditor::isBillboardAnimationStarted(const string& animatio
 
 const bool Animation2dEditor::isBillboardAnimationPlaying(const string& animationID, const string& billboardID) const
 {
-	// Temporary values
-	string errorMessage = "Tried to retrieve animation playing status with ID \"" + animationID + "\" on billboard with ID \"" + billboardID + "\": ";
-
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
 	{
-		Logger::throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning("animation not existing!");
 	}
 
 	// Check if animation not started
@@ -159,13 +261,10 @@ const bool Animation2dEditor::isBillboardAnimationPlaying(const string& animatio
 
 const bool Animation2dEditor::isBillboardAnimationPaused(const string& animationID, const string& billboardID) const
 {
-	// Temporary values
-	string errorMessage = "Tried to retrieve animation pausing status with ID \"" + animationID + "\" on billboard with ID \"" + billboardID + "\": ";
-
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
 	{
-		Logger::throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning("animation not existing!");
 		return false;
 	}
 
@@ -181,13 +280,10 @@ const bool Animation2dEditor::isBillboardAnimationPaused(const string& animation
 
 const bool Animation2dEditor::isImageAnimationStarted(const string& animationID, const string& imageID) const
 {
-	// Temporary values
-	string errorMessage = "Tried to retrieve animation started status with ID \"" + animationID + "\" on image with ID \"" + imageID + "\": ";
-
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
 	{
-		Logger::throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning("animation not existing!");
 	}
 
 	// Return
@@ -196,13 +292,10 @@ const bool Animation2dEditor::isImageAnimationStarted(const string& animationID,
 
 const bool Animation2dEditor::isImageAnimationPlaying(const string& animationID, const string& imageID) const
 {
-	// Temporary values
-	string errorMessage = "Tried to retrieve animation playing status with ID \"" + animationID + "\" on image with ID \"" + imageID + "\": ";
-
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
 	{
-		Logger::throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning("animation not existing!");
 	}
 
 	// Check if animation not started
@@ -217,13 +310,10 @@ const bool Animation2dEditor::isImageAnimationPlaying(const string& animationID,
 
 const bool Animation2dEditor::isImageAnimationPaused(const string& animationID, const string& imageID) const
 {
-	// Temporary values
-	string errorMessage = "Tried to retrieve animation pausing status with ID \"" + animationID + "\" on image with ID \"" + imageID + "\": ";
-
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
 	{
-		Logger::throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning("animation not existing!");
 		return false;
 	}
 

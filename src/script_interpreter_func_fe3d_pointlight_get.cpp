@@ -210,7 +210,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 			}
 		}
 	}
-	else if(functionName == "fe3d:pointlight_is_circle_shape")
+	else if(functionName == "fe3d:pointlight_get_shape")
 	{
 		auto types = {SVT::STRING};
 
@@ -218,21 +218,20 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 		{
 			if(_validateFe3dPointlight(arguments[0].getString()))
 			{
-				auto result = (_fe3d.pointlight_getShape(arguments[0].getString()) == PointlightShape::CIRCLE);
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
-			}
-		}
-	}
-	else if(functionName == "fe3d:pointlight_is_square_shape")
-	{
-		auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			if(_validateFe3dPointlight(arguments[0].getString()))
-			{
-				auto result = (_fe3d.pointlight_getShape(arguments[0].getString()) == PointlightShape::SQUARE);
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				auto result = _fe3d.pointlight_getShape(arguments[0].getString());
+				switch(result)
+				{
+					case PointlightShape::CIRCLE:
+					{
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "CIRCLE"));
+						break;
+					}
+					case PointlightShape::SQUARE:
+					{
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "SQUARE"));
+						break;
+					}
+				}
 			}
 		}
 	}

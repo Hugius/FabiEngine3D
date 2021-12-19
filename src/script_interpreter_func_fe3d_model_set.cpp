@@ -1,4 +1,5 @@
 #include "script_interpreter.hpp"
+#include "logger.hpp"
 
 using SVT = ScriptValueType;
 
@@ -537,28 +538,37 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 				if(arguments[1].getString() == "XYZ")
 				{
 					_fe3d.model_setRotationOrder(arguments[0].getString(), DirectionOrder::XYZ);
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
-				if(arguments[1].getString() == "XZY")
+				else if(arguments[1].getString() == "XZY")
 				{
 					_fe3d.model_setRotationOrder(arguments[0].getString(), DirectionOrder::XZY);
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
-				if(arguments[1].getString() == "YXZ")
+				else if(arguments[1].getString() == "YXZ")
 				{
 					_fe3d.model_setRotationOrder(arguments[0].getString(), DirectionOrder::YXZ);
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
-				if(arguments[1].getString() == "YZX")
+				else if(arguments[1].getString() == "YZX")
 				{
 					_fe3d.model_setRotationOrder(arguments[0].getString(), DirectionOrder::YZX);
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
-				if(arguments[1].getString() == "ZXY")
+				else if(arguments[1].getString() == "ZXY")
 				{
 					_fe3d.model_setRotationOrder(arguments[0].getString(), DirectionOrder::ZXY);
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
-				if(arguments[1].getString() == "ZYX")
+				else if(arguments[1].getString() == "ZYX")
 				{
 					_fe3d.model_setRotationOrder(arguments[0].getString(), DirectionOrder::ZYX);
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				else
+				{
+					Logger::throwWarning("invalid rotation order!");
+				}
 			}
 		}
 	}

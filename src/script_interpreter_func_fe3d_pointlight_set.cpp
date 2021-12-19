@@ -1,4 +1,5 @@
 #include "script_interpreter.hpp"
+#include "logger.hpp"
 
 using SVT = ScriptValueType;
 
@@ -143,6 +144,31 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 			{
 				_fe3d.pointlight_setIntensity(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:pointlight_set_shape")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dPointlight(arguments[0].getString()))
+			{
+				if(arguments[1].getString() == "CIRCLE")
+				{
+					_fe3d.pointlight_setShape(arguments[0].getString(), PointlightShape::CIRCLE);
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				}
+				else if(arguments[1].getString() == "SQUARE")
+				{
+					_fe3d.pointlight_setShape(arguments[0].getString(), PointlightShape::SQUARE);
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				}
+				else
+				{
+					Logger::throwWarning("invalid shape!");
+				}
 			}
 		}
 	}

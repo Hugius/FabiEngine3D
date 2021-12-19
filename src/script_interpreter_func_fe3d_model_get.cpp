@@ -786,29 +786,38 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
 				auto result = _fe3d.model_getRotationOrder(arguments[0].getString());
-				if(result == DirectionOrder::XYZ)
+				switch(result)
 				{
-					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "XYZ"));
-				}
-				if(result == DirectionOrder::XZY)
-				{
-					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "XZY"));
-				}
-				if(result == DirectionOrder::YXZ)
-				{
-					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "YXZ"));
-				}
-				if(result == DirectionOrder::YZX)
-				{
-					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "YZX"));
-				}
-				if(result == DirectionOrder::ZXY)
-				{
-					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "ZXY"));
-				}
-				if(result == DirectionOrder::ZYX)
-				{
-					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "ZYX"));
+					case DirectionOrder::XYZ:
+					{
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "XYZ"));
+						break;
+					}
+					case DirectionOrder::XZY:
+					{
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "XYZ"));
+						break;
+					}
+					case DirectionOrder::YXZ:
+					{
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "XYZ"));
+						break;
+					}
+					case DirectionOrder::YZX:
+					{
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "XYZ"));
+						break;
+					}
+					case DirectionOrder::ZXY:
+					{
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "XYZ"));
+						break;
+					}
+					case DirectionOrder::ZYX:
+					{
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "XYZ"));
+						break;
+					}
 				}
 			}
 		}

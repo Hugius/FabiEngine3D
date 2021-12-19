@@ -27,13 +27,13 @@
 - **Position**: the XY position of the mesh
   - Type: `decimal2`
   - Constraints: none
-- **Size**: the XY size multiplier of the mesh
+- **Size**: the XY size of the mesh
   - Type: `decimal2`
   - Constraints: at least `0.0`
 - **Position Target**: the target XY position of the mesh
   - Type: `decimal2`
   - Constraints: none
-- **Size Target**: the target XY size multiplier of the mesh
+- **Size Target**: the target XY size of the mesh
   - Type: `decimal2`
   - Constraints: at least `0.0`
 - **Min Position**: the XY position of the mesh

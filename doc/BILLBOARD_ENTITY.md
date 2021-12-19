@@ -33,6 +33,12 @@
 - **Rotation**: the XYZ rotation of the mesh
   - Type: `decimal3`
   - Constraints: between `0.0` and `360.0`
+- **Position Target**: the target XYZ position of the mesh
+  - Type: `decimal3`
+  - Constraints: none
+- **Rotation Target**: the target XYZ rotation of the mesh
+  - Type: `decimal3`
+  - Constraints: between `0.0` and `360.0`
 - **Color**: the RGB color multiplier of the fragments
   - Type: `decimal3`
   - Constraints: between `0.0` to `1.0`
@@ -41,6 +47,18 @@
   - Constraints: between `0.0` and `1.0`
 - **Size**: the XY size of the mesh
   - Type: `decimal2`
+  - Constraints: at least `0.0`
+- **Size Target**: the target XY size of the mesh
+  - Type: `decimal2`
+  - Constraints: at least `0.0`
+- **Position Target Speed**: the speed with which the mesh moves to the target position
+  - Type: `decimal`
+  - Constraints: at least `0.0`
+- **Rotation Target Speed**: the speed with which the mesh rotates to the target rotation
+  - Type: `decimal`
+  - Constraints: at least `0.0`
+- **Size Target Speed**: the speed with which the mesh scales to the target size
+  - Type: `decimal`
   - Constraints: at least `0.0`
 - **Emission Intenstiy**: the intensity of the emission map
   - Type: `decimal`

@@ -51,6 +51,15 @@
 - **Size**: the XYZ size multiplier of the mesh
   - Type: `decimal3`
   - Constraints: at least `0.0`
+- **Position Target**: the target XYZ position of the mesh
+  - Type: `decimal3`
+  - Constraints: none
+- **Rotation Target**: the target XYZ rotation of the mesh
+  - Type: `decimal3`
+  - Constraints: between `0.0` and `360.0`
+- **Size Target**: the target XYZ size multiplier of the mesh
+  - Type: `decimal3`
+  - Constraints: at least `0.0`
 - **LOD Size**: the XYZ size multiplier of the LOD entity mesh
   - Type: `decimal3`
   - Constraints: at least `0.0`
@@ -60,6 +69,15 @@
 - **Wireframe Color**: the RGB color multiplier of the wireframe
   - Type: `decimal3`
   - Constraints: between `0.0` and `1.0`
+- **Position Target Speed**: the speed with which the mesh moves to the target position
+  - Type: `decimal`
+  - Constraints: at least `0.0`
+- **Rotation Target Speed**: the speed with which the mesh rotates to the target rotation
+  - Type: `decimal`
+  - Constraints: at least `0.0`
+- **Size Target Speed**: the speed with which the mesh scales to the target size
+  - Type: `decimal`
+  - Constraints: at least `0.0`
 - **Texture Repeat**: the amount of times the textures are repeated
   - Type: `decimal`
   - Constraints: at least `0.0`

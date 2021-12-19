@@ -24,7 +24,7 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 					if(animation.getRowIndex() == (animation.getRowCount() - 1))
 					{
 						// Check if animation is endless
-						if(animation.getTimesToPlay() == -1)
+						if(animation.getPlayCount() == -1)
 						{
 							_billboardAnimationsToStop.insert(idPair);
 							_billboardAnimationsToStart.insert(idPair);
@@ -32,10 +32,10 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 						else
 						{
 							// Animation finished current play
-							animation.setTimesToPlay(animation.getTimesToPlay() - 1);
+							animation.setPlayCount(animation.getPlayCount() - 1);
 
 							// Check if animation must stop
-							if(animation.getTimesToPlay() == 0)
+							if(animation.getPlayCount() == 0)
 							{
 								_billboardAnimationsToStop.insert(idPair);
 							}
@@ -120,7 +120,7 @@ void Animation2dEditor::_updateImageAnimationExecution()
 					if(animation.getRowIndex() == (animation.getRowCount() - 1))
 					{
 						// Check if animation is endless
-						if(animation.getTimesToPlay() == -1)
+						if(animation.getPlayCount() == -1)
 						{
 							_imageAnimationsToStop.insert(idPair);
 							_imageAnimationsToStart.insert(idPair);
@@ -128,10 +128,10 @@ void Animation2dEditor::_updateImageAnimationExecution()
 						else
 						{
 							// Animation finished current play
-							animation.setTimesToPlay(animation.getTimesToPlay() - 1);
+							animation.setPlayCount(animation.getPlayCount() - 1);
 
 							// Check if animation must stop
-							if(animation.getTimesToPlay() == 0)
+							if(animation.getPlayCount() == 0)
 							{
 								_imageAnimationsToStop.insert(idPair);
 							}

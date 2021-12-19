@@ -15,7 +15,7 @@ public:
 	void load();
 	void unload();
 	void update();
-	void startModelAnimation(const string& animationID, const string& modelID, int timesToPlay);
+	void startModelAnimation(const string& animationID, const string& modelID, int playCount);
 	void autopauseModelAnimation(const string& animationID, const string& modelID);
 	void pauseModelAnimation(const string& animationID, const string& modelID);
 	void resumeModelAnimation(const string& animationID, const string& modelID);
@@ -33,7 +33,7 @@ public:
 	const float getModelAnimationSpeed(const string& animationID, const string& modelID) const;
 
 	// INT
-	const int getModelAnimationTimesToPlay(const string& animationID, const string& modelID) const;
+	const int getModelAnimationPlayCount(const string& animationID, const string& modelID) const;
 
 	// UNSIGNED INT
 	const unsigned int getModelAnimationFrameIndex(const string& animationID, const string& modelID) const;

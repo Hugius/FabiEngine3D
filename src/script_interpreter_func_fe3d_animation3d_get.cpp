@@ -82,7 +82,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation3d_get_model_times_to_play")
+	else if(functionName == "fe3d:animation3d_get_model_play_count")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -90,7 +90,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				auto result = _animation3dEditor.getModelAnimationTimesToPlay(arguments[0].getString(), arguments[1].getString());
+				auto result = _animation3dEditor.getModelAnimationPlayCount(arguments[0].getString(), arguments[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
 			}
 		}

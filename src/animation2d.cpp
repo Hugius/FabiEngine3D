@@ -18,9 +18,9 @@ const string& Animation2d::getPreviewTexturePath() const
 	return _previewTexturePath;
 }
 
-const int Animation2d::getTimesToPlay() const
+const int Animation2d::getPlayCount() const
 {
-	return _timesToPlay;
+	return _playCount;
 }
 
 const unsigned int Animation2d::getPassedFrames() const
@@ -58,9 +58,9 @@ const bool Animation2d::isPaused() const
 	return _isPaused;
 }
 
-void Animation2d::setTimesToPlay(int value)
+void Animation2d::setPlayCount(int value)
 {
-	_timesToPlay = value;
+	_playCount = value;
 }
 
 void Animation2d::setPaused(bool value)

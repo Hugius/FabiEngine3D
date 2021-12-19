@@ -22,7 +22,7 @@ public:
 	void setTotalScaling(const string& partID, fvec3 value);
 	void setInitialSize(fvec3 value);
 	void setSpeed(float value);
-	void setTimesToPlay(int value);
+	void setPlayCount(int value);
 	void setFadeFramestep(unsigned int value);
 	void setFadeFrameIndex(unsigned int value);
 	void setFrameIndex(unsigned int value);
@@ -44,7 +44,7 @@ public:
 	const float getSpeed() const;
 
 	// INT
-	const int getTimesToPlay() const;
+	const int getPlayCount() const;
 	const int getFadeFramestep() const;
 	const int getFadeFrameIndex() const;
 
@@ -74,7 +74,7 @@ private:
 	float _speed = 1.0f;
 
 	// INT
-	int _timesToPlay = 0;
+	int _playCount = 0;
 	int _fadeFramestep = -1;
 	int _fadeFrameIndex = -1;
 

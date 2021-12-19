@@ -449,7 +449,7 @@ void Animation3dEditor::_updateModelAnimationExecution()
 				else if(animation.getFrameIndex() == (static_cast<unsigned int>(animation.getFrames().size()) - 1)) // Animation finished
 				{
 					// Check if animation is endless
-					if(animation.getTimesToPlay() == -1)
+					if(animation.getPlayCount() == -1)
 					{
 						_modelAnimationsToStop.insert(idPair);
 						_modelAnimationsToStart.insert(idPair);
@@ -457,10 +457,10 @@ void Animation3dEditor::_updateModelAnimationExecution()
 					else
 					{
 						// Animation finished current play
-						animation.setTimesToPlay(animation.getTimesToPlay() - 1);
+						animation.setPlayCount(animation.getPlayCount() - 1);
 
 						// Check if animation must stop
-						if(animation.getTimesToPlay() == 0)
+						if(animation.getPlayCount() == 0)
 						{
 							_modelAnimationsToStop.insert(idPair);
 						}

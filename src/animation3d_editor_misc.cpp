@@ -127,7 +127,7 @@ const float Animation3dEditor::getModelAnimationSpeed(const string& animationID,
 	return _startedModelAnimations.at(make_pair(animationID, modelID)).getSpeed();
 }
 
-const int Animation3dEditor::getModelAnimationTimesToPlay(const string& animationID, const string& modelID) const
+const int Animation3dEditor::getModelAnimationPlayCount(const string& animationID, const string& modelID) const
 {
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
@@ -144,7 +144,7 @@ const int Animation3dEditor::getModelAnimationTimesToPlay(const string& animatio
 	}
 
 	// Return
-	return _startedModelAnimations.at(make_pair(animationID, modelID)).getTimesToPlay();
+	return _startedModelAnimations.at(make_pair(animationID, modelID)).getPlayCount();
 }
 
 const unsigned int Animation3dEditor::getModelAnimationFrameIndex(const string& animationID, const string& modelID) const

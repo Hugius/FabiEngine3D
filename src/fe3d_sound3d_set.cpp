@@ -31,7 +31,7 @@ void FabiEngine3D::sound3d_deleteAll()
 	_core->_sound3dManager.deleteSounds();
 }
 
-void FabiEngine3D::sound3d_play(const string& ID, int timesToPlay, unsigned int fadeMS, bool mustForcePlay)
+void FabiEngine3D::sound3d_play(const string& ID, int playCount, unsigned int fadeMS, bool mustForcePlay)
 {
 	auto sound = _core->_sound3dManager.getSound(ID);
 
@@ -46,7 +46,7 @@ void FabiEngine3D::sound3d_play(const string& ID, int timesToPlay, unsigned int 
 		return;
 	}
 
-	_core->_sound3dPlayer.playSound(sound, timesToPlay, fadeMS, mustForcePlay);
+	_core->_sound3dPlayer.playSound(sound, playCount, fadeMS, mustForcePlay);
 }
 
 void FabiEngine3D::sound3d_pause(const string& ID)

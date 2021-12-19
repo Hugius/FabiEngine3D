@@ -23,12 +23,12 @@
 - **Column Index**: the column index of the current animated texture frame
   - Type: `integer`
   - Constraints: at least `0`
-- **Framestep**: the amount of engine updates between frame cycles
-  - Type: `integer`
-  - Constraints: between `64` and `512`
-- **Times To Play**: the amount of times the animation is playing
+- **Play Count**: the amount of (remaining) times the animation must play
   - Type: `integer`
   - Constraints: `-1` or at least `0`
+- **Framestep**: the amount of engine updates between frame cycles
+  - Type: `integer`
+  - Constraints: at least `0`
 - **Paused**: the animation is paused
   - Type: `boolean`
   - Constraints: none

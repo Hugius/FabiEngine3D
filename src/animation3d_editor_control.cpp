@@ -1,7 +1,7 @@
 #include "animation3d_editor.hpp"
 #include "logger.hpp"
 
-void Animation3dEditor::startModelAnimation(const string& animationID, const string& modelID, int timesToPlay)
+void Animation3dEditor::startModelAnimation(const string& animationID, const string& modelID, int playCount)
 {
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
@@ -22,14 +22,14 @@ void Animation3dEditor::startModelAnimation(const string& animationID, const str
 	}
 
 	// Check if count invalid
-	if((timesToPlay < -1) || (timesToPlay == 0))
+	if((playCount < -1) || (playCount == 0))
 	{
 		Logger::throwWarning("play count is invalid!");
 	}
 
 	// Copy animation
 	auto animation = *_getAnimation(animationID);
-	animation.setTimesToPlay(timesToPlay);
+	animation.setPlayCount(playCount);
 	animation.setInitialSize(_fe3d.model_getBaseSize(modelID));
 
 	// Check if model invalid

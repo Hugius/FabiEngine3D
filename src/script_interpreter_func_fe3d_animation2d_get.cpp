@@ -95,7 +95,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_get_billboard_times_to_play")
+	else if(functionName == "fe3d:animation2d_get_billboard_play_count")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -103,7 +103,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 		{
 			if(_validateFe3dBillboard(arguments[0].getString(), false))
 			{
-				auto result = _animation2dEditor.getBillboardAnimationTimesToPlay(arguments[0].getString(), arguments[1].getString());
+				auto result = _animation2dEditor.getBillboardAnimationPlayCount(arguments[0].getString(), arguments[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
 			}
 		}
@@ -212,7 +212,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_get_image_times_to_play")
+	else if(functionName == "fe3d:animation2d_get_image_play_count")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -220,7 +220,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 		{
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				auto result = _animation2dEditor.getImageAnimationTimesToPlay(arguments[0].getString(), arguments[1].getString());
+				auto result = _animation2dEditor.getImageAnimationPlayCount(arguments[0].getString(), arguments[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
 			}
 		}

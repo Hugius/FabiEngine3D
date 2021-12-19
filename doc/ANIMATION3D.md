@@ -17,7 +17,7 @@
 - **Speed**: the speed multiplier of the animation
   - Type: `decimal`
   - Constraints: at least `0`
-- **Times To Play**: the amount of times the animation is playing
+- **Play Count**: the amount of (remaining) times the animation must play
   - Type: `integer`
   - Constraints: `-1` or at least `0`
 - **Frame Index**: the index of the current animation frame

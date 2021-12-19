@@ -63,9 +63,9 @@ void Animation3d::setSpeed(float value)
 	_speed = max(0.0f, value);
 }
 
-void Animation3d::setTimesToPlay(int value)
+void Animation3d::setPlayCount(int value)
 {
-	_timesToPlay = value;
+	_playCount = value;
 }
 
 void Animation3d::setFadeFramestep(unsigned int value)
@@ -138,9 +138,9 @@ const float Animation3d::getSpeed() const
 	return _speed;
 }
 
-const int Animation3d::getTimesToPlay() const
+const int Animation3d::getPlayCount() const
 {
-	return _timesToPlay;
+	return _playCount;
 }
 
 const int Animation3d::getFadeFramestep() const

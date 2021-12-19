@@ -602,7 +602,7 @@ public:
 	void sound2d_create(const string& ID, const string& audioPath);
 	void sound2d_delete(const string& ID);
 	void sound2d_deleteAll();
-	void sound2d_play(const string& ID, int timesToPlay, unsigned int fadeMS, bool mustForcePlay);
+	void sound2d_play(const string& ID, int playCount, unsigned int fadeMS, bool mustForcePlay);
 	void sound2d_pause(const string& ID);
 	void sound2d_pauseAll();
 	void sound2d_resume(const string& ID);
@@ -624,7 +624,7 @@ public:
 	void sound3d_create(const string& ID, const string& audioPath);
 	void sound3d_delete(const string& ID);
 	void sound3d_deleteAll();
-	void sound3d_play(const string& ID, int timesToPlay, unsigned int fadeMS, bool mustForcePlay);
+	void sound3d_play(const string& ID, int playCount, unsigned int fadeMS, bool mustForcePlay);
 	void sound3d_pause(const string& ID);
 	void sound3d_pauseAll();
 	void sound3d_resume(const string& ID);

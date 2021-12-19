@@ -14,13 +14,13 @@ public:
 	void load();
 	void unload();
 	void update();
-	void startBillboardAnimation(const string& animationID, const string& billboardID, int timesToPlay);
+	void startBillboardAnimation(const string& animationID, const string& billboardID, int playCount);
 	void pauseBillboardAnimation(const string& animationID, const string& billboardID);
 	void resumeBillboardAnimation(const string& animationID, const string& billboardID);
 	void stopBillboardAnimation(const string& animationID, const string& billboardID);
 	void stopBillboardAnimations();
 	void setBillboardAnimationFramestep(const string& animationID, const string& billboardID, unsigned int value);
-	void startImageAnimation(const string& animationID, const string& imageID, int timesToPlay);
+	void startImageAnimation(const string& animationID, const string& imageID, int playCount);
 	void pauseImageAnimation(const string& animationID, const string& imageID);
 	void resumeImageAnimation(const string& animationID, const string& imageID);
 	void stopImageAnimation(const string& animationID, const string& imageID);
@@ -35,8 +35,8 @@ public:
 	const vector<string> getStartedImageAnimationIDs(const string& billboardID) const;
 
 	// INT
-	const int getBillboardAnimationTimesToPlay(const string& animationID, const string& billboardID) const;
-	const int getImageAnimationTimesToPlay(const string& animationID, const string& imageID) const;
+	const int getBillboardAnimationPlayCount(const string& animationID, const string& billboardID) const;
+	const int getImageAnimationPlayCount(const string& animationID, const string& imageID) const;
 
 	// UNSIGNED INT
 	const unsigned int getBillboardAnimationRowCount(const string& animationID, const string& billboardID) const;

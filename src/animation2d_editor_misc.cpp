@@ -153,7 +153,7 @@ const unsigned int Animation2dEditor::getBillboardAnimationColumnIndex(const str
 	return _startedBillboardAnimations.at(make_pair(animationID, billboardID)).getColumnIndex();
 }
 
-const int Animation2dEditor::getBillboardAnimationTimesToPlay(const string& animationID, const string& billboardID) const
+const int Animation2dEditor::getBillboardAnimationPlayCount(const string& animationID, const string& billboardID) const
 {
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
@@ -168,7 +168,7 @@ const int Animation2dEditor::getBillboardAnimationTimesToPlay(const string& anim
 	}
 
 	// Return
-	return _startedBillboardAnimations.at(make_pair(animationID, billboardID)).getTimesToPlay();
+	return _startedBillboardAnimations.at(make_pair(animationID, billboardID)).getPlayCount();
 }
 
 const unsigned int Animation2dEditor::getBillboardAnimationFramestep(const string& animationID, const string& billboardID) const
@@ -261,7 +261,7 @@ const unsigned int Animation2dEditor::getImageAnimationColumnIndex(const string&
 	return _startedImageAnimations.at(make_pair(animationID, imageID)).getColumnIndex();
 }
 
-const int Animation2dEditor::getImageAnimationTimesToPlay(const string& animationID, const string& imageID) const
+const int Animation2dEditor::getImageAnimationPlayCount(const string& animationID, const string& imageID) const
 {
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
@@ -276,7 +276,7 @@ const int Animation2dEditor::getImageAnimationTimesToPlay(const string& animatio
 	}
 
 	// Return
-	return _startedImageAnimations.at(make_pair(animationID, imageID)).getTimesToPlay();
+	return _startedImageAnimations.at(make_pair(animationID, imageID)).getPlayCount();
 }
 
 const unsigned int Animation2dEditor::getImageAnimationFramestep(const string& animationID, const string& imageID) const

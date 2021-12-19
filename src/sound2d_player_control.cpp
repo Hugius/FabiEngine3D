@@ -1,10 +1,10 @@
 #include "sound2d_player.hpp"
 #include "logger.hpp"
 
-void Sound2dPlayer::playSound(Sound2d& sound, int timesToPlay, unsigned int fadeMS, bool mustForcePlay)
+void Sound2dPlayer::playSound(Sound2d& sound, int playCount, unsigned int fadeMS, bool mustForcePlay)
 {
 	// Validate play count
-	if((timesToPlay < -1) || (timesToPlay == 0))
+	if((playCount < -1) || (playCount == 0))
 	{
 		Logger::throwError("Sound2dPlayer::playSound3d::1");
 	}
@@ -26,11 +26,11 @@ void Sound2dPlayer::playSound(Sound2d& sound, int timesToPlay, unsigned int fade
 	// Play or fade
 	if(fadeMS == 0)
 	{
-		Mix_PlayChannel(channel, sound.getDataPointer(), (timesToPlay - 1));
+		Mix_PlayChannel(channel, sound.getDataPointer(), (playCount - 1));
 	}
 	else
 	{
-		Mix_FadeInChannel(channel, sound.getDataPointer(), (timesToPlay - 1), fadeMS);
+		Mix_FadeInChannel(channel, sound.getDataPointer(), (playCount - 1), fadeMS);
 	}
 
 	// Update volume

@@ -1,7 +1,7 @@
 #include "animation2d_editor.hpp"
 #include "logger.hpp"
 
-void Animation2dEditor::startBillboardAnimation(const string& animationID, const string& billboardID, int timesToPlay)
+void Animation2dEditor::startBillboardAnimation(const string& animationID, const string& billboardID, int playCount)
 {
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
@@ -22,14 +22,14 @@ void Animation2dEditor::startBillboardAnimation(const string& animationID, const
 	}
 
 	// Check if play count invalid
-	if((timesToPlay < -1) || (timesToPlay == 0))
+	if((playCount < -1) || (playCount == 0))
 	{
 		Logger::throwWarning("invalid play count!");
 	}
 
 	// Copy animation
 	auto animation = *_getAnimation(animationID);
-	animation.setTimesToPlay(timesToPlay);
+	animation.setPlayCount(playCount);
 
 	// Start animation
 	_startedBillboardAnimations.insert(make_pair(make_pair(animationID, billboardID), animation));
@@ -107,7 +107,7 @@ void Animation2dEditor::stopBillboardAnimations()
 	_startedBillboardAnimations.clear();
 }
 
-void Animation2dEditor::startImageAnimation(const string& animationID, const string& imageID, int timesToPlay)
+void Animation2dEditor::startImageAnimation(const string& animationID, const string& imageID, int playCount)
 {
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
@@ -128,14 +128,14 @@ void Animation2dEditor::startImageAnimation(const string& animationID, const str
 	}
 
 	// Check if play count invalid
-	if((timesToPlay < -1) || (timesToPlay == 0))
+	if((playCount < -1) || (playCount == 0))
 	{
 		Logger::throwWarning("play count is invalid!");
 	}
 
 	// Copy animation
 	auto animation = *_getAnimation(animationID);
-	animation.setTimesToPlay(timesToPlay);
+	animation.setPlayCount(playCount);
 
 	// Start animation
 	_startedImageAnimations.insert(make_pair(make_pair(animationID, imageID), animation));

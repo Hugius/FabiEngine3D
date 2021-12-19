@@ -10,7 +10,7 @@ public:
 	Animation2d(const string& ID);
 
 	// VOIDS
-	void setTimesToPlay(int value);
+	void setPlayCount(int value);
 	void setPaused(bool value);
 	void setRowIndex(unsigned int value);
 	void setColumnIndex(unsigned int value);
@@ -25,7 +25,7 @@ public:
 	const string& getPreviewTexturePath() const;
 
 	// INT
-	const int getTimesToPlay() const;
+	const int getPlayCount() const;
 
 	// UNSIGNED INT
 	const unsigned int getPassedFrames() const;
@@ -44,7 +44,7 @@ private:
 	string _previewTexturePath = "";
 
 	// INT
-	int _timesToPlay = 0;
+	int _playCount = 0;
 
 	// UNSIGNED INT
 	unsigned int _rowCount = 0;

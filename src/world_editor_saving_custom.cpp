@@ -283,7 +283,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 			//	auto isPaused = animationData->isPaused();
 			//	auto frameIndex = animationData->getFrameIndex();
 			//	auto speedMultiplier = animationData->getSpeedMultiplier();
-			//	auto remainingLoops = (animationData->getTimesToPlay() == -1) ? -1 : (animationData->getTimesToPlay() - 1);
+			//	auto remainingLoops = (animationData->getPlayCount() == -1) ? -1 : (animationData->getPlayCount() - 1);
 			//	auto fadeFramestep = animationData->getFadeFramestep();
 
 			//	// Write main data

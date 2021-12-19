@@ -16,29 +16,38 @@ public:
 	void unload();
 	void update();
 	void startModelAnimation(const string& animationID, const string& modelID, int timesToPlay);
+	void autopauseModelAnimation(const string& animationID, const string& modelID);
 	void pauseModelAnimation(const string& animationID, const string& modelID);
 	void resumeModelAnimation(const string& animationID, const string& modelID);
 	void fadeModelAnimation(const string& animationID, const string& modelID, unsigned int framestep);
 	void stopModelAnimation(const string& animationID, const string& modelID);
 	void stopModelAnimations();
+	void setModelAnimationSpeed(const string& animationID, const string& modelID, float value);
 
 	// STRING
 	const vector<string> getAnimationIDs() const;
 	const vector<string> getStartedModelAnimationIDs() const;
 	const vector<string> getStartedModelAnimationIDs(const string& modelID) const;
 
+	// FLOAT
+	const float getModelAnimationSpeed(const string& animationID, const string& modelID) const;
+
+	// INT
+	const int getModelAnimationTimesToPlay(const string& animationID, const string& modelID) const;
+
+	// UNSIGNED INT
+	const unsigned int getModelAnimationFrameIndex(const string& animationID, const string& modelID) const;
+
 	// BOOL
 	const bool isLoaded() const;
 	const bool isAnimationExisting(const string& ID) const;
 	const bool isModelAnimationStarted(const string& animationID, const string& modelID) const;
 	const bool isModelAnimationPlaying(const string& animationID, const string& modelID) const;
+	const bool isModelAnimationAutopaused(const string& animationID, const string& modelID) const;
 	const bool isModelAnimationPaused(const string& animationID, const string& modelID) const;
 	const bool isModelAnimationFading(const string& animationID, const string& modelID) const;
 	const bool loadFromFile(bool mustCheckPreviewModel);
 	const bool saveToFile() const;
-
-	// MISCELLANEOUS
-	Animation3d* getAnimationData(const string& animationID, const string& modelID, string baseErrorMessage);
 
 private:
 	// VOID

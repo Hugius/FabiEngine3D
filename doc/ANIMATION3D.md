@@ -14,16 +14,19 @@
 - **ID**: the identifier of the sound
   - Type: `string`
   - Constraints: must be unique, cannot be changed
-- **Speed Multiplier**: the speed of the animation
+- **Speed**: the speed multiplier of the animation
   - Type: `decimal`
   - Constraints: at least `0`
 - **Times To Play**: the amount of times the animation is playing
   - Type: `integer`
   - Constraints: `-1` or at least `0`
-- **Paused**: the animation is paused
+- **Frame Index**: the index of the current animation frame
+  - Type: `integer`
+  - Constraints: at least `0`
+- **Autopaused**: the animation is automatically paused after the current frame
   - Type: `boolean`
   - Constraints: none
-- **Auto Paused**: the animation is automatically paused
+- **Paused**: the animation is paused immediately
   - Type: `boolean`
   - Constraints: none
 

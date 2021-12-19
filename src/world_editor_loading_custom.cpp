@@ -282,7 +282,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		{
 			// Data placeholders
 			string animationID, modelID;
-			float speedMultiplier;
+			float speed;
 			int remainingLoops;
 			unsigned int frameIndex, fadeFramestep;
 			bool isPaused;
@@ -293,7 +293,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				modelID >>
 				isPaused >>
 				frameIndex >>
-				speedMultiplier >>
+				speed >>
 				remainingLoops >>
 				fadeFramestep;
 
@@ -323,38 +323,38 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 			_animation3dEditor.startModelAnimation(animationID, modelID, remainingLoops);
 
 			// Check if animation exists
-			if(_animation3dEditor.isAnimationExisting(animationID))
-			{
-				// Retrieve raw animation data for editing
-				string errorMessage = "Tried to retrieve animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
-				auto animationData = _animation3dEditor.getAnimationData(animationID, modelID, errorMessage);
-				auto frameData = animationData->getFrames()[frameIndex];
+			//if(_animation3dEditor.isAnimationExisting(animationID))
+			//{
+			//	// Retrieve raw animation data for editing
+			//	string errorMessage = "Tried to retrieve animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+			//	auto animationData = _animation3dEditor.getAnimationData(animationID, modelID, errorMessage);
+			//	auto frameData = animationData->getFrames()[frameIndex];
 
-				// Set properties
-				isPaused ? _animation3dEditor.pauseModelAnimation(animationID, modelID) : void();
-				animationData->setSpeedMultiplier(speedMultiplier);
-				animationData->setFadeFramestep(fadeFramestep);
-				animationData->setFrameIndex(frameIndex);
-				for(const auto& [partID, speed] : speeds)
-				{
-					frameData.setSpeed(partID, speed);
-				}
+			//	// Set properties
+			//	isPaused ? _animation3dEditor.pauseModelAnimation(animationID, modelID) : void();
+			//	animationData->setSpeedMultiplier(speedMultiplier);
+			//	animationData->setFadeFramestep(fadeFramestep);
+			//	animationData->setFrameIndex(frameIndex);
+			//	for(const auto& [partID, speed] : speeds)
+			//	{
+			//		frameData.setSpeed(partID, speed);
+			//	}
 
-				// Retrieve parts
-				auto partIDs = _fe3d.model_getPartIDs(modelID);
-				for(const auto& partID : partIDs)
-				{
-					// Retrieve part transformation
-					auto position = _fe3d.model_getPartPosition(modelID, partID);
-					auto rotation = _fe3d.model_getPartRotation(modelID, partID);
-					auto size = _fe3d.model_getPartSize(modelID, partID);
+			//	// Retrieve parts
+			//	auto partIDs = _fe3d.model_getPartIDs(modelID);
+			//	for(const auto& partID : partIDs)
+			//	{
+			//		// Retrieve part transformation
+			//		auto position = _fe3d.model_getPartPosition(modelID, partID);
+			//		auto rotation = _fe3d.model_getPartRotation(modelID, partID);
+			//		auto size = _fe3d.model_getPartSize(modelID, partID);
 
-					// Set properties
-					animationData->setTotalMovement(partID, position);
-					animationData->setTotalRotation(partID, rotation);
-					animationData->setTotalScaling(partID, size);
-				}
-			}
+			//		// Set properties
+			//		animationData->setTotalMovement(partID, position);
+			//		animationData->setTotalRotation(partID, rotation);
+			//		animationData->setTotalScaling(partID, size);
+			//	}
+			//}
 		}
 		else if(lineType == "BILLBOARD")
 		{

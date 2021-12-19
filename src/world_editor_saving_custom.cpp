@@ -273,48 +273,48 @@ const bool WorldEditor::saveCustomWorldToFile()
 		if(((modelID[0] != '@') || isLodModel) && isCustomWorldModel)
 		{
 			// Every playing animation on every model
-			for(const auto& animationID : _animation3dEditor.getStartedModelAnimationIDs(modelID))
-			{
-				// Retrieve raw animation data for retrieving
-				string errorMessage = "Tried to retrieve animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
-				auto animationData = _animation3dEditor.getAnimationData(animationID, modelID, errorMessage);
+			//for(const auto& animationID : _animation3dEditor.getStartedModelAnimationIDs(modelID))
+			//{
+			//	// Retrieve raw animation data for retrieving
+			//	string errorMessage = "Tried to retrieve animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+			//	auto animationData = _animation3dEditor.getAnimationData(animationID, modelID, errorMessage);
 
-				// Data to save
-				auto isPaused = animationData->isPaused();
-				auto frameIndex = animationData->getFrameIndex();
-				auto speedMultiplier = animationData->getSpeedMultiplier();
-				auto remainingLoops = (animationData->getTimesToPlay() == -1) ? -1 : (animationData->getTimesToPlay() - 1);
-				auto fadeFramestep = animationData->getFadeFramestep();
+			//	// Data to save
+			//	auto isPaused = animationData->isPaused();
+			//	auto frameIndex = animationData->getFrameIndex();
+			//	auto speedMultiplier = animationData->getSpeedMultiplier();
+			//	auto remainingLoops = (animationData->getTimesToPlay() == -1) ? -1 : (animationData->getTimesToPlay() - 1);
+			//	auto fadeFramestep = animationData->getFadeFramestep();
 
-				// Write main data
-				file <<
-					"ANIMATION " <<
-					animationID << " " <<
-					modelID << " " <<
-					isPaused << " " <<
-					frameIndex << " " <<
-					speedMultiplier << " " <<
-					remainingLoops << " " <<
-					fadeFramestep << " ";
+			//	// Write main data
+			//	file <<
+			//		"ANIMATION " <<
+			//		animationID << " " <<
+			//		modelID << " " <<
+			//		isPaused << " " <<
+			//		frameIndex << " " <<
+			//		speedMultiplier << " " <<
+			//		remainingLoops << " " <<
+			//		fadeFramestep << " ";
 
-				// Write speeds
-				unsigned int index = 0;
-				auto frame = animationData->getFrames().at(animationData->getFrameIndex());
-				for(const auto& [partID, speed] : frame.getSpeeds())
-				{
-					// Write speed
-					file << (partID.empty() ? "?" : partID) << " " << speed.x << " " << speed.y << " " << speed.z;
+			//	// Write speeds
+			//	unsigned int index = 0;
+			//	auto frame = animationData->getFrames().at(animationData->getFrameIndex());
+			//	for(const auto& [partID, speed] : frame.getSpeeds())
+			//	{
+			//		// Write speed
+			//		file << (partID.empty() ? "?" : partID) << " " << speed.x << " " << speed.y << " " << speed.z;
 
-					// Write space
-					if(index != (frame.getSpeeds().size() - 1))
-					{
-						file << " ";
-					}
-					index++;
-				}
+			//		// Write space
+			//		if(index != (frame.getSpeeds().size() - 1))
+			//		{
+			//			file << " ";
+			//		}
+			//		index++;
+			//	}
 
-				file << endl;
-			}
+			//	file << endl;
+			//}
 		}
 	}
 

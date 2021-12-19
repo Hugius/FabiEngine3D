@@ -30,6 +30,19 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 			}
 		}
 	}
+	else if(functionName == "fe3d:animation3d_is_model_autopaused")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				auto result = _animation3dEditor.isModelAnimationAutopaused(arguments[0].getString(), arguments[1].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:animation3d_is_model_paused")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
@@ -64,20 +77,12 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				// Retrieve animation data
-				string errorMessage = "Tried to get animation speed with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
-				auto animationData = _animation3dEditor.getAnimationData(arguments[0].getString(), arguments[1].getString(), errorMessage);
-
-				// Check if animation was found
-				if(animationData != nullptr)
-				{
-					auto result = animationData->getSpeedMultiplier();
-					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
-				}
+				auto result = _animation3dEditor.getModelAnimationSpeed(arguments[0].getString(), arguments[1].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation3d_is_model_autopaused")
+	else if(functionName == "fe3d:animation3d_get_model_times_to_play")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -85,16 +90,8 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				// Retrieve animation data
-				string errorMessage = "Tried to get animation autopause option with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
-				auto animationData = _animation3dEditor.getAnimationData(arguments[0].getString(), arguments[1].getString(), errorMessage);
-
-				// Check if animation was found
-				if(animationData != nullptr)
-				{
-					auto result = animationData->isAutoPaused();
-					returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
-				}
+				auto result = _animation3dEditor.getModelAnimationTimesToPlay(arguments[0].getString(), arguments[1].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
 			}
 		}
 	}
@@ -106,16 +103,8 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 		{
 			if(_validateFe3dModel(arguments[0].getString(), false))
 			{
-				// Retrieve animation data
-				string errorMessage = "Tried to get animation frame index with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
-				auto animationData = _animation3dEditor.getAnimationData(arguments[0].getString(), arguments[1].getString(), errorMessage);
-
-				// Check if animation was found
-				if(animationData != nullptr)
-				{
-					auto result = animationData->getFrameIndex();
-					returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
-				}
+				auto result = _animation3dEditor.getModelAnimationFrameIndex(arguments[0].getString(), arguments[1].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
 	}

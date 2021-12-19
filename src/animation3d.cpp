@@ -58,9 +58,9 @@ void Animation3d::setInitialSize(fvec3 value)
 	_initialSize = fvec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
 
-void Animation3d::setSpeedMultiplier(float value)
+void Animation3d::setSpeed(float value)
 {
-	_speedMultiplier = max(0.0f, value);
+	_speed = max(0.0f, value);
 }
 
 void Animation3d::setTimesToPlay(int value)
@@ -88,9 +88,9 @@ void Animation3d::setPaused(bool value)
 	_isPaused = value;
 }
 
-void Animation3d::setAutoPaused(bool value)
+void Animation3d::setAutopaused(bool value)
 {
-	_isAutoPaused = value;
+	_isAutopaused = value;
 }
 
 const vector<Animation3dFrame>& Animation3d::getFrames() const
@@ -133,9 +133,9 @@ const fvec3 Animation3d::getInitialSize() const
 	return _initialSize;
 }
 
-const float Animation3d::getSpeedMultiplier() const
+const float Animation3d::getSpeed() const
 {
-	return _speedMultiplier;
+	return _speed;
 }
 
 const int Animation3d::getTimesToPlay() const
@@ -163,7 +163,7 @@ const bool Animation3d::isPaused() const
 	return _isPaused;
 }
 
-const bool Animation3d::isAutoPaused() const
+const bool Animation3d::isAutopaused() const
 {
-	return _isAutoPaused;
+	return _isAutopaused;
 }

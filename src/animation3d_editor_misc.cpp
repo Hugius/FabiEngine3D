@@ -107,23 +107,64 @@ const vector<string> Animation3dEditor::getStartedModelAnimationIDs(const string
 	return vector<string>(IDs.begin(), IDs.end());
 }
 
-Animation3d* Animation3dEditor::getAnimationData(const string& animationID, const string& modelID, string baseErrorMessage)
+const float Animation3dEditor::getModelAnimationSpeed(const string& animationID, const string& modelID) const
 {
-	// Check if animation is able to be retrieved
+	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
 	{
 		Logger::throwWarning("animation not existing!");
-	}
-	else if(!isModelAnimationStarted(animationID, modelID))
-	{
-		Logger::throwWarning("animation not started!");
-	}
-	else
-	{
-		return &_startedModelAnimations.at(make_pair(animationID, modelID));
+		return false;
 	}
 
-	return nullptr;
+	// Check if animation not started
+	if(!isModelAnimationStarted(animationID, modelID))
+	{
+		Logger::throwWarning("animation not started!");
+		return false;
+	}
+
+	// Return
+	return _startedModelAnimations.at(make_pair(animationID, modelID)).getSpeed();
+}
+
+const int Animation3dEditor::getModelAnimationTimesToPlay(const string& animationID, const string& modelID) const
+{
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning("animation not existing!");
+		return false;
+	}
+
+	// Check if animation not started
+	if(!isModelAnimationStarted(animationID, modelID))
+	{
+		Logger::throwWarning("animation not started!");
+		return false;
+	}
+
+	// Return
+	return _startedModelAnimations.at(make_pair(animationID, modelID)).getTimesToPlay();
+}
+
+const unsigned int Animation3dEditor::getModelAnimationFrameIndex(const string& animationID, const string& modelID) const
+{
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning("animation not existing!");
+		return false;
+	}
+
+	// Check if animation not started
+	if(!isModelAnimationStarted(animationID, modelID))
+	{
+		Logger::throwWarning("animation not started!");
+		return false;
+	}
+
+	// Return
+	return _startedModelAnimations.at(make_pair(animationID, modelID)).getFrameIndex();
 }
 
 const bool Animation3dEditor::isAnimationExisting(const string& ID) const
@@ -157,16 +198,38 @@ const bool Animation3dEditor::isModelAnimationPlaying(const string& animationID,
 	if(!isAnimationExisting(animationID))
 	{
 		Logger::throwWarning("animation not existing!");
+		return false;
 	}
 
 	// Check if animation not started
 	if(!isModelAnimationStarted(animationID, modelID))
 	{
+		Logger::throwWarning("animation not started!");
 		return false;
 	}
 
 	// Return
 	return !isModelAnimationPaused(animationID, modelID);
+}
+
+const bool Animation3dEditor::isModelAnimationAutopaused(const string& animationID, const string& modelID) const
+{
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning("animation not existing!");
+		return false;
+	}
+
+	// Check if animation not started
+	if(!isModelAnimationStarted(animationID, modelID))
+	{
+		Logger::throwWarning("animation not started!");
+		return false;
+	}
+
+	// Return
+	return _startedModelAnimations.at(make_pair(animationID, modelID)).isAutopaused();
 }
 
 const bool Animation3dEditor::isModelAnimationPaused(const string& animationID, const string& modelID) const
@@ -181,6 +244,7 @@ const bool Animation3dEditor::isModelAnimationPaused(const string& animationID, 
 	// Check if animation not started
 	if(!isModelAnimationStarted(animationID, modelID))
 	{
+		Logger::throwWarning("animation not started!");
 		return false;
 	}
 
@@ -200,6 +264,7 @@ const bool Animation3dEditor::isModelAnimationFading(const string& animationID, 
 	// Check if animation not started
 	if(!isModelAnimationStarted(animationID, modelID))
 	{
+		Logger::throwWarning("animation not started!");
 		return false;
 	}
 

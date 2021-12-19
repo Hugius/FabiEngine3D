@@ -50,6 +50,30 @@ void Animation3dEditor::startModelAnimation(const string& animationID, const str
 	_startedModelAnimations.insert(make_pair(make_pair(animationID, modelID), animation));
 }
 
+void Animation3dEditor::autopauseModelAnimation(const string& animationID, const string& modelID)
+{
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning("animation not existing!");
+	}
+
+	// Check if animation not started
+	if(!isModelAnimationStarted(animationID, modelID))
+	{
+		Logger::throwWarning("animation not started!");
+	}
+
+	// Check if animation paused
+	if(isModelAnimationPaused(animationID, modelID))
+	{
+		Logger::throwWarning("animation not playing!");
+	}
+
+	// Autopause animation
+	_startedModelAnimations.at(make_pair(animationID, modelID)).setAutopaused(true);
+}
+
 void Animation3dEditor::pauseModelAnimation(const string& animationID, const string& modelID)
 {
 	// Check if animation not existing
@@ -149,4 +173,22 @@ void Animation3dEditor::stopModelAnimation(const string& animationID, const stri
 void Animation3dEditor::stopModelAnimations()
 {
 	_startedModelAnimations.clear();
+}
+
+void Animation3dEditor::setModelAnimationSpeed(const string& animationID, const string& modelID, float value)
+{
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning("animation not existing!");
+	}
+
+	// Check if animation not started
+	if(!isModelAnimationStarted(animationID, modelID))
+	{
+		Logger::throwWarning("animation not started!");
+	}
+
+	// Set speed
+	_startedModelAnimations.at(make_pair(animationID, modelID)).setSpeed(value);
 }

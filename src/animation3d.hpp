@@ -21,13 +21,13 @@ public:
 	void setTotalRotation(const string& partID, fvec3 value);
 	void setTotalScaling(const string& partID, fvec3 value);
 	void setInitialSize(fvec3 value);
-	void setSpeedMultiplier(float value);
+	void setSpeed(float value);
 	void setTimesToPlay(int value);
 	void setFadeFramestep(unsigned int value);
 	void setFadeFrameIndex(unsigned int value);
 	void setFrameIndex(unsigned int value);
 	void setPaused(bool value);
-	void setAutoPaused(bool value);
+	void setAutopaused(bool value);
 
 	// STRING
 	const string& getID() const;
@@ -41,7 +41,7 @@ public:
 	const fvec3 getInitialSize() const;
 
 	// FLOAT
-	const float getSpeedMultiplier() const;
+	const float getSpeed() const;
 
 	// INT
 	const int getTimesToPlay() const;
@@ -53,7 +53,7 @@ public:
 
 	// BOOL
 	const bool isPaused() const;
-	const bool isAutoPaused() const;
+	const bool isAutopaused() const;
 
 	// MISCELLANEOUS
 	const vector<Animation3dFrame>& getFrames() const;
@@ -71,7 +71,7 @@ private:
 	fvec3 _initialSize = fvec3(0.0f);
 
 	// FLOAT
-	float _speedMultiplier = 1.0f;
+	float _speed = 1.0f;
 
 	// INT
 	int _timesToPlay = 0;
@@ -83,7 +83,7 @@ private:
 
 	// BOOL
 	bool _isPaused = false;
-	bool _isAutoPaused = false;
+	bool _isAutopaused = false;
 
 	// MISCELLANEOUS
 	vector<Animation3dFrame> _frames;

@@ -167,7 +167,7 @@ const int Animation2dEditor::getBillboardAnimationTimesToPlay(const string& anim
 		Logger::throwWarning("animation not started!");
 	}
 
-	// Return times to play
+	// Return
 	return _startedBillboardAnimations.at(make_pair(animationID, billboardID)).getTimesToPlay();
 }
 
@@ -185,7 +185,7 @@ const unsigned int Animation2dEditor::getBillboardAnimationFramestep(const strin
 		Logger::throwWarning("animation not started!");
 	}
 
-	// Return framestep
+	// Return
 	return _startedBillboardAnimations.at(make_pair(animationID, billboardID)).getFramestep();
 }
 
@@ -203,7 +203,7 @@ const unsigned int Animation2dEditor::getImageAnimationRowCount(const string& an
 		Logger::throwWarning("animation not started!");
 	}
 
-	// Return row count
+	// Return
 	return _startedImageAnimations.at(make_pair(animationID, imageID)).getRowCount();
 }
 
@@ -221,7 +221,7 @@ const unsigned int Animation2dEditor::getImageAnimationColumnCount(const string&
 		Logger::throwWarning("animation not started!");
 	}
 
-	// Return column count
+	// Return
 	return _startedImageAnimations.at(make_pair(animationID, imageID)).getColumnCount();
 }
 
@@ -239,7 +239,7 @@ const unsigned int Animation2dEditor::getImageAnimationRowIndex(const string& an
 		Logger::throwWarning("animation not started!");
 	}
 
-	// Return row index
+	// Return
 	return _startedImageAnimations.at(make_pair(animationID, imageID)).getRowIndex();
 }
 
@@ -257,7 +257,7 @@ const unsigned int Animation2dEditor::getImageAnimationColumnIndex(const string&
 		Logger::throwWarning("animation not started!");
 	}
 
-	// Return column index
+	// Return
 	return _startedImageAnimations.at(make_pair(animationID, imageID)).getColumnIndex();
 }
 
@@ -275,7 +275,7 @@ const int Animation2dEditor::getImageAnimationTimesToPlay(const string& animatio
 		Logger::throwWarning("animation not started!");
 	}
 
-	// Return times to play
+	// Return
 	return _startedImageAnimations.at(make_pair(animationID, imageID)).getTimesToPlay();
 }
 
@@ -293,7 +293,7 @@ const unsigned int Animation2dEditor::getImageAnimationFramestep(const string& a
 		Logger::throwWarning("animation not started!");
 	}
 
-	// Return framestep
+	// Return
 	return _startedImageAnimations.at(make_pair(animationID, imageID)).getFramestep();
 }
 

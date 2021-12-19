@@ -48,7 +48,7 @@ void Animation3dEditor::_updateModelAnimationExecution()
 				const auto speedMultiplier = (partID.empty() || (isMovement || isScaling)) ? animation.getInitialSize() : fvec3(1.0f);
 				const auto speedType = frame.getSpeedTypes().at(partID);
 				const auto rotationOrigin = frame.getRotationOrigins().at(partID);
-				const auto currentSpeed = (frame.getSpeeds().at(partID) * animation.getSpeedMultiplier());
+				const auto currentSpeed = (frame.getSpeeds().at(partID) * animation.getSpeed());
 				const auto xSpeed = (!isRotation ? (speedMultiplier.x * currentSpeed.x) : currentSpeed.x);
 				const auto ySpeed = (!isRotation ? (speedMultiplier.y * currentSpeed.y) : currentSpeed.y);
 				const auto zSpeed = (!isRotation ? (speedMultiplier.z * currentSpeed.z) : currentSpeed.z);
@@ -473,7 +473,7 @@ void Animation3dEditor::_updateModelAnimationExecution()
 				else // Animation not finished yet
 				{
 					// Auto-pause if allowed (skip default frame)
-					if(animation.isAutoPaused() && animation.getFrameIndex() != 0)
+					if(animation.isAutopaused() && animation.getFrameIndex() != 0)
 					{
 						animation.setPaused(true);
 					}

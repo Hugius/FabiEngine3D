@@ -11,30 +11,24 @@
 - **ID**: the identifier of the sound
   - Type: `string`
   - Constraints: must be unique, cannot be changed
-  - Write Access: editor
-  - Read Access: editor + script
 - **Row Count**: the amount of rows in the animated texture
   - Type: `integer`
   - Constraints: at least `0`
-  - Write Access: editor
-  - Read Access: editor + script
 - **Column Count**: the amount of columns in the animated texture
   - Type: `integer`
   - Constraints: at least `0`
-  - Write Access: editor
-  - Read Access: editor + script
+- **Row Index**: the row index of the current animated texture frame
+  - Type: `integer`
+  - Constraints: at least `0`
+- **Column Index**: the column index of the current animated texture frame
+  - Type: `integer`
+  - Constraints: at least `0`
 - **Framestep**: the amount of engine updates between frame cycles
   - Type: `integer`
   - Constraints: between `64` and `512`
-  - Write Access: editor + script
-  - Read Access: editor + script
 - **Times To Play**: the amount of times the animation is playing
   - Type: `integer`
   - Constraints: `-1` or at least `0`
-  - Write Access: script
-  - Read Access: script
 - **Paused**: the animation is paused
   - Type: `boolean`
   - Constraints: none
-  - Write Access: script
-  - Read Access: script

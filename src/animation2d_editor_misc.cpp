@@ -117,6 +117,42 @@ const unsigned int Animation2dEditor::getBillboardAnimationColumnCount(const str
 	return _startedBillboardAnimations.at(make_pair(animationID, billboardID)).getColumnCount();
 }
 
+const unsigned int Animation2dEditor::getBillboardAnimationRowIndex(const string& animationID, const string& billboardID) const
+{
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning("animation not existing!");
+	}
+
+	// Check if animation not started
+	if(!isBillboardAnimationStarted(animationID, billboardID))
+	{
+		Logger::throwWarning("animation not started!");
+	}
+
+	// Return row index
+	return _startedBillboardAnimations.at(make_pair(animationID, billboardID)).getRowIndex();
+}
+
+const unsigned int Animation2dEditor::getBillboardAnimationColumnIndex(const string& animationID, const string& billboardID) const
+{
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning("animation not existing!");
+	}
+
+	// Check if animation not started
+	if(!isBillboardAnimationStarted(animationID, billboardID))
+	{
+		Logger::throwWarning("animation not started!");
+	}
+
+	// Return column index
+	return _startedBillboardAnimations.at(make_pair(animationID, billboardID)).getColumnIndex();
+}
+
 const unsigned int Animation2dEditor::getBillboardAnimationFramestep(const string& animationID, const string& billboardID) const
 {
 	// Check if animation not existing
@@ -169,6 +205,42 @@ const unsigned int Animation2dEditor::getImageAnimationColumnCount(const string&
 
 	// Return column count
 	return _startedImageAnimations.at(make_pair(animationID, imageID)).getColumnCount();
+}
+
+const unsigned int Animation2dEditor::getImageAnimationRowIndex(const string& animationID, const string& imageID) const
+{
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning("animation not existing!");
+	}
+
+	// Check if animation not started
+	if(!isImageAnimationStarted(animationID, imageID))
+	{
+		Logger::throwWarning("animation not started!");
+	}
+
+	// Return row index
+	return _startedImageAnimations.at(make_pair(animationID, imageID)).getRowIndex();
+}
+
+const unsigned int Animation2dEditor::getImageAnimationColumnIndex(const string& animationID, const string& imageID) const
+{
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning("animation not existing!");
+	}
+
+	// Check if animation not started
+	if(!isImageAnimationStarted(animationID, imageID))
+	{
+		Logger::throwWarning("animation not started!");
+	}
+
+	// Return column index
+	return _startedImageAnimations.at(make_pair(animationID, imageID)).getColumnIndex();
 }
 
 const unsigned int Animation2dEditor::getImageAnimationFramestep(const string& animationID, const string& imageID) const

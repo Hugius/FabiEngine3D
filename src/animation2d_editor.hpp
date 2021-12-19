@@ -19,13 +19,13 @@ public:
 	void resumeBillboardAnimation(const string& animationID, const string& billboardID);
 	void stopBillboardAnimation(const string& animationID, const string& billboardID);
 	void stopBillboardAnimations();
-	void setBillboardAnimationFramestep(const string& animationID, const string& billboardID, unsigned int framestep);
+	void setBillboardAnimationFramestep(const string& animationID, const string& billboardID, unsigned int value);
 	void startImageAnimation(const string& animationID, const string& imageID, int timesToPlay);
 	void pauseImageAnimation(const string& animationID, const string& imageID);
 	void resumeImageAnimation(const string& animationID, const string& imageID);
 	void stopImageAnimation(const string& animationID, const string& imageID);
 	void stopImageAnimations();
-	void setImageAnimationFramestep(const string& animationID, const string& imageID, unsigned int framestep);
+	void setImageAnimationFramestep(const string& animationID, const string& imageID, unsigned int value);
 
 	// STRING
 	const vector<string> getAnimationIDs();
@@ -37,9 +37,13 @@ public:
 	// UNSIGNED INT
 	const unsigned int getBillboardAnimationRowCount(const string& animationID, const string& billboardID) const;
 	const unsigned int getBillboardAnimationColumnCount(const string& animationID, const string& billboardID) const;
+	const unsigned int getBillboardAnimationRowIndex(const string& animationID, const string& billboardID) const;
+	const unsigned int getBillboardAnimationColumnIndex(const string& animationID, const string& billboardID) const;
 	const unsigned int getBillboardAnimationFramestep(const string& animationID, const string& billboardID) const;
 	const unsigned int getImageAnimationRowCount(const string& animationID, const string& imageID) const;
 	const unsigned int getImageAnimationColumnCount(const string& animationID, const string& imageID) const;
+	const unsigned int getImageAnimationRowIndex(const string& animationID, const string& imageID) const;
+	const unsigned int getImageAnimationColumnIndex(const string& animationID, const string& imageID) const;
 	const unsigned int getImageAnimationFramestep(const string& animationID, const string& imageID) const;
 
 	// BOOL

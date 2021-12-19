@@ -36,8 +36,7 @@ LibraryLoader::LibraryLoader()
 
 	// GLEW (OpenGL Extension Wrangler)
 	Logger::throwInfo("Initializing OpenGL...");
-	glewExperimental = GL_TRUE;
-	GLenum initGlew = glewInit();
+	auto initGlew = glewInit();
 	if(initGlew != GLEW_OK)
 	{
 		Logger::throwFatalWarning("GLEW could not be initialized: ", reinterpret_cast<char const*>(glewGetErrorString(initGlew)));

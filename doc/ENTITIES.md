@@ -14,13 +14,9 @@
 - **ID**: the identifier of the entity
   - Type: `string`
   - Constraints: must be unique, cannot be changed
-  - Write Access: editor
-  - Read Access: editor + script
 - **Visible**: the visibility of the entity in the world
   - Type: `boolean`
   - Constraints: none
-  - Write Access: script
-  - Read Access: editor + script
 
 ## 3. Types
 

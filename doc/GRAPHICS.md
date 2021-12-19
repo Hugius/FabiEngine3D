@@ -137,7 +137,7 @@
 - **Enabled**: shadows are enabled in the world
   - Type: `boolean`
   - Constraints: none
-- **Follow Cam**: shadows are following the camera position
+- **Following Camera**: shadows are following the camera position
   - Type: `boolean`
   - Constraints: none
 

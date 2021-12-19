@@ -213,7 +213,7 @@ void Animation2dEditor::stopImageAnimations()
 	_startedImageAnimations.clear();
 }
 
-void Animation2dEditor::setBillboardAnimationFramestep(const string& animationID, const string& billboardID, unsigned int framestep)
+void Animation2dEditor::setBillboardAnimationFramestep(const string& animationID, const string& billboardID, unsigned int value)
 {
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
@@ -228,10 +228,10 @@ void Animation2dEditor::setBillboardAnimationFramestep(const string& animationID
 	}
 
 	// Set framestep
-	_startedBillboardAnimations.at(make_pair(animationID, billboardID)).setFramestep(framestep);
+	_startedBillboardAnimations.at(make_pair(animationID, billboardID)).setFramestep(value);
 }
 
-void Animation2dEditor::setImageAnimationFramestep(const string& animationID, const string& imageID, unsigned int framestep)
+void Animation2dEditor::setImageAnimationFramestep(const string& animationID, const string& imageID, unsigned int value)
 {
 	// Check if animation not existing
 	if(!isAnimationExisting(animationID))
@@ -246,5 +246,5 @@ void Animation2dEditor::setImageAnimationFramestep(const string& animationID, co
 	}
 
 	// Set framestep
-	_startedImageAnimations.at(make_pair(animationID, imageID)).setFramestep(framestep);
+	_startedImageAnimations.at(make_pair(animationID, imageID)).setFramestep(value);
 }

@@ -54,6 +54,24 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 			}
 		}
 	}
+	else if(functionName == "fe3d:spotlight_delete_all")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			// Iterate through spotlights
+			for(const auto& ID : _fe3d.spotlight_getIDs())
+			{
+				// @ sign is reserved
+				if(ID[0] != '@')
+				{
+					_fe3d.spotlight_delete(ID);
+				}
+			}
+
+			// Return
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
 	else if(functionName == "fe3d:spotlight_set_visible")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};

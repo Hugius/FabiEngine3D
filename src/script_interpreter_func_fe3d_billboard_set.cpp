@@ -49,6 +49,24 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 			}
 		}
 	}
+	else if(functionName == "fe3d:billboard_delete_all")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			// Iterate through billboards
+			for(const auto& ID : _fe3d.billboard_getIDs())
+			{
+				// @ sign is reserved
+				if(ID[0] != '@')
+				{
+					_fe3d.billboard_delete(ID);
+				}
+			}
+
+			// Return
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
 	else if(functionName == "fe3d:billboard_set_visible")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};

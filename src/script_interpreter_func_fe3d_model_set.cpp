@@ -47,6 +47,24 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
+	else if(functionName == "fe3d:model_delete_all")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			// Iterate through models
+			for(const auto& ID : _fe3d.model_getIDs())
+			{
+				// @ sign is reserved
+				if(ID[0] != '@')
+				{
+					_fe3d.model_delete(ID);
+				}
+			}
+
+			// Return
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
 	else if(functionName == "fe3d:model_set_visible")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};

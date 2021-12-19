@@ -49,6 +49,24 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 			}
 		}
 	}
+	else if(functionName == "fe3d:reflection_delete_all")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			// Iterate through reflections
+			for(const auto& ID : _fe3d.reflection_getIDs())
+			{
+				// @ sign is reserved
+				if(ID[0] != '@')
+				{
+					_fe3d.reflection_delete(ID);
+				}
+			}
+
+			// Return
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
 	else if(functionName == "fe3d:reflection_set_visible")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};

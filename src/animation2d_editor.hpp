@@ -18,12 +18,16 @@ public:
 	void pauseBillboardAnimation(const string& animationID, const string& billboardID);
 	void resumeBillboardAnimation(const string& animationID, const string& billboardID);
 	void stopBillboardAnimation(const string& animationID, const string& billboardID);
+	void pauseBillboardAnimations();
+	void resumeBillboardAnimations();
 	void stopBillboardAnimations();
 	void setBillboardAnimationFramestep(const string& animationID, const string& billboardID, unsigned int value);
 	void startImageAnimation(const string& animationID, const string& imageID, int playCount);
 	void pauseImageAnimation(const string& animationID, const string& imageID);
 	void resumeImageAnimation(const string& animationID, const string& imageID);
 	void stopImageAnimation(const string& animationID, const string& imageID);
+	void pauseImageAnimations();
+	void resumeImageAnimations();
 	void stopImageAnimations();
 	void setImageAnimationFramestep(const string& animationID, const string& imageID, unsigned int value);
 

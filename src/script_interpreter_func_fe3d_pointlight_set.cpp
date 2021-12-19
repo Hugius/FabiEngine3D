@@ -52,6 +52,24 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 			}
 		}
 	}
+	else if(functionName == "fe3d:pointlight_delete_all")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			// Iterate through pointlights
+			for(const auto& ID : _fe3d.pointlight_getIDs())
+			{
+				// @ sign is reserved
+				if(ID[0] != '@')
+				{
+					_fe3d.pointlight_delete(ID);
+				}
+			}
+
+			// Return
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
 	else if(functionName == "fe3d:pointlight_set_visible")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};

@@ -102,6 +102,22 @@ void Animation2dEditor::stopBillboardAnimation(const string& animationID, const 
 	_startedBillboardAnimations.erase(make_pair(animationID, billboardID));
 }
 
+void Animation2dEditor::pauseBillboardAnimations()
+{
+	for(auto& [idPair, animation] : _startedBillboardAnimations)
+	{
+		animation.setPaused(true);
+	}
+}
+
+void Animation2dEditor::resumeBillboardAnimations()
+{
+	for(auto& [idPair, animation] : _startedBillboardAnimations)
+	{
+		animation.setPaused(false);
+	}
+}
+
 void Animation2dEditor::stopBillboardAnimations()
 {
 	_startedBillboardAnimations.clear();
@@ -206,6 +222,22 @@ void Animation2dEditor::stopImageAnimation(const string& animationID, const stri
 
 	// Stop animation
 	_startedImageAnimations.erase(make_pair(animationID, imageID));
+}
+
+void Animation2dEditor::pauseImageAnimations()
+{
+	for(auto& [idPair, animation] : _startedImageAnimations)
+	{
+		animation.setPaused(true);
+	}
+}
+
+void Animation2dEditor::resumeImageAnimations()
+{
+	for(auto& [idPair, animation] : _startedImageAnimations)
+	{
+		animation.setPaused(false);
+	}
 }
 
 void Animation2dEditor::stopImageAnimations()

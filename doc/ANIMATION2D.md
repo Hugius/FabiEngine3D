@@ -28,3 +28,13 @@
   - Constraints: between `64` and `512`
   - Write Access: editor + script
   - Read Access: editor + script
+- **Times To Play**: the amount of times the animation is playing
+  - Type: `integer`
+  - Constraints: `-1` or at least `0`
+  - Write Access: script
+  - Read Access: script
+- **Paused**: the animation is paused
+  - Type: `boolean`
+  - Constraints: none
+  - Write Access: script
+  - Read Access: script

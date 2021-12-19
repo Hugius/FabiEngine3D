@@ -4,7 +4,7 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
-	if(functionName == "fe3d:animation3d_is_started")
+	if(functionName == "fe3d:animation3d_is_model_started")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation3d_is_playing")
+	else if(functionName == "fe3d:animation3d_is_model_playing")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -30,7 +30,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation3d_is_paused")
+	else if(functionName == "fe3d:animation3d_is_model_paused")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -43,7 +43,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation3d_is_fading")
+	else if(functionName == "fe3d:animation3d_is_model_fading")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -56,7 +56,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation3d_get_speed")
+	else if(functionName == "fe3d:animation3d_get_model_speed")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -77,7 +77,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation3d_is_autopaused")
+	else if(functionName == "fe3d:animation3d_is_model_autopaused")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -98,7 +98,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation3d_get_frame_index")
+	else if(functionName == "fe3d:animation3d_get_model_frame_index")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 

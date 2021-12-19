@@ -1,7 +1,4 @@
 # Animations
 
-## 1. General
-
-- There are 2 types of animations: animation2D & animation3D.
-
-- Animation3D = mesh animation for models
+- [Animation2D](ANIMATION2D.md)
+- [Animation3D](ANIMATION3D.md)

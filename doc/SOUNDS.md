@@ -1,57 +1,19 @@
 # Sounds
 
-## 1. General
+## 1. Types
 
-### 1.1 General
+- [Sound2D](SOUND2D.md)
+- [Sound3D](SOUND3D.md)
 
-- There are 2 types of audio: sound2D & sound3D.
-- Each sound plays on a unique sound channel.
-- Multiple sounds can be playing at the same time.
-
-### 1.2 Properties
+## 2. Properties
 
 - **Sound2D Channels**: the amount of allocated audio channels for 2D sounds
   - Type: `integer`
   - Constraints: between `64` and `512`
+  - Write Access: settings
+  - Read Access: settings
 - **Sound3D Channels**: the amount of allocated audio channels for 3D sounds
   - Type: `integer`
   - Constraints: between `64` and `512`
-
-## 3. Sound2D Properties
-
-- **ID**: the identifier of the sound
-  - Type: `string`
-  - Constraints: must be unique, cannot be changed
-- **Audio Path**: the path of the audio file
-  - Type: `string`
-  - Constraints: none
-- **Volume**: the volume of the audio
-  - Type: `decimal`
-  - Constraints: between `0.0` and `1.0`
-
-## 4. Sound3D Properties
-
-- **ID**: the identifier of the sound
-  - Type: `string`
-  - Constraints: must be unique, cannot be changed
-- **Audio Path**: the path of the audio file
-  - Type: `string`
-  - Constraints: none
-- **Position**: the XYZ position of the sound
-  - Type: `decimal3`
-  - Constraints: none
-- **Position Target**: the target XYZ position of the sound
-  - Type: `decimal3`
-  - Constraints: none
-- **Position Target Speed**: the speed with which the sound moves to the target position
-  - Type: `decimal`
-  - Constraints: at least `0.0`
-- **Volume**: the volume of the audio
-  - Type: `decimal`
-  - Constraints: between `0.0` and `1.0`
-- **Max Volume**: the maximum volume of the audio
-  - Type: `decimal`
-  - Constraints: between `0.0` and `1.0`
-- **Max Distance**: the maximum distance from which the audio is audible
-  - Type: `decimal`
-  - Constraints: at least `0.0`
+  - Write Access: settings
+  - Read Access: settings

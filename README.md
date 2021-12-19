@@ -24,66 +24,17 @@ A multiplayer first person shooter game based in a science-fiction setting: a sp
 
 ## Documentation
 
-### Basics
-
 - [General](doc/GENERAL.md)
 - [Assets](doc/ASSETS.md)
 - [Entities](doc/ENTITIES.md)
-
-
-### Entities
-
-- [Sky Entity](doc/SKY_ENTITY.md)
-- [Terrain Entity](doc/TERRAIN_ENTITY.md)
-- [Water Entity](doc/WATER_ENTITY.md)
-- [Model Entity](doc/MODEL_ENTITY.md)
-- [Billboard Entity](doc/BILLBOARD_ENTITY.md)
-- [AABB Entity](doc/AABB_ENTITY.md)
-- [Pointlight Entity](doc/POINTLIGHT_ENTITY.md)
-- [Spotlight Entity](doc/SPOTLIGHT_ENTITY.md)
-- [Reflection Entity](doc/REFLECTION_ENTITY.md)
-- [Image Entity](doc/IMAGE_ENTITY.md)
-- [Text Entity](doc/TEXT_ENTITY.md)
-
-### Animations
-
-- [Animation2D](doc/ANIMATION2D.md)
-- [Animation3D](doc/ANIMATION3D.md)
-
-### Sounds
-
-- [Sound2D](doc/SOUND2D.md)
-- [Sound3D](doc/SOUND3D.md)
-
-### Editors
-
-- [Sky Editor](doc/SKY_EDITOR.md)
-- [Terrain Editor](doc/TERRAIN_EDITOR.md)
-- [Water Editor](doc/WATER_EDITOR.md)
-- [Model Editor](doc/MODEL_EDITOR.md)
-- [Billboard Editor](doc/BILLBOARD_EDITOR.md)
-- [Animation2D Editor](doc/ANIMATION2D_EDITOR.md)
-- [Animation3D Editor](doc/ANIMATION3D_EDITOR.md)
-- [Sound Editor](doc/SOUND_EDITOR.md)
-- [World Editor](doc/WORLD_EDITOR.md)
-- [Script Editor](doc/SCRIPT_EDITOR.md)
-
-### Editors
-
+- [Animations](doc/ANIMATIONS.md)
+- [Sounds](doc/SOUNDS.md)
 - [Graphics](doc/GRAPHICS.md)
 - [Camera](doc/CAMERA.md)
 - [Physics](doc/PHYSICS.md)
-- [Scripting](doc/SCRIPTING.md)
+- [Editors](doc/EDITORS.md)
 - [Networking](doc/NETWORKING.md)
-
-### Scripting APIs
-
-- [Engine API](doc/SCRIPT_FE3D.md)
-- [Mathematical API](doc/SCRIPT_MATH.md)
-- [Miscellaneous API](doc/SCRIPT_MISC.md)
-
-### Miscellaneous
-
+- [Scripting](doc/SCRIPTING.md)
 - [Runtime](doc/RUNTIME.md)
 - [Performance](doc/PERFORMANCE.md)
 - [Miscellaneous](doc/MISCELLANEOUS.md)

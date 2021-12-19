@@ -294,6 +294,12 @@ Line 2 of every script file must specify its execution state: entry or waiting.
 6. /// > 3.0
 ```
 
+### 11.3 Types
+
+- [Engine Functions](doc/SCRIPT_FE3D.md)
+- [Mathematical Functions](doc/SCRIPT_MATH.md)
+- [Miscellaneous Functions](doc/SCRIPT_MISC.md)
+
 ## 12. Tips & Tricks
 
 - You can use the `PASS` statement as an empty placeholder for condition statements or loops.

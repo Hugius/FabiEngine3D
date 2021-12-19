@@ -4,7 +4,7 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
-	if(functionName == "fe3d:animation3d_start")
+	if(functionName == "fe3d:animation3d_start_model")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation3d_pause")
+	else if(functionName == "fe3d:animation3d_pause_model")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -30,7 +30,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation3d_resume")
+	else if(functionName == "fe3d:animation3d_resume_model")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -43,7 +43,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation3d_fade")
+	else if(functionName == "fe3d:animation3d_fade_model")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
@@ -56,7 +56,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation3d_stop")
+	else if(functionName == "fe3d:animation3d_stop_model")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
@@ -69,7 +69,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation3d_set_speed")
+	else if(functionName == "fe3d:animation3d_set_model_speed")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
@@ -90,7 +90,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation3d_set_autopaused")
+	else if(functionName == "fe3d:animation3d_set_model_autopaused")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 

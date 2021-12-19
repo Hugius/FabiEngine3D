@@ -122,36 +122,6 @@ void Animation3dEditor::resumeModelAnimation(const string& animationID, const st
 	_startedModelAnimations.at(make_pair(animationID, modelID)).setPaused(false);
 }
 
-void Animation3dEditor::fadeModelAnimation(const string& animationID, const string& modelID, unsigned int framestep)
-{
-	// Check if animation not existing
-	if(!isAnimationExisting(animationID))
-	{
-		Logger::throwWarning("animation not existing!");
-	}
-
-	// Check if animation not started
-	if(!isModelAnimationStarted(animationID, modelID))
-	{
-		Logger::throwWarning("animation not started!");
-	}
-
-	// Check if animation not playing
-	if(!isModelAnimationPlaying(animationID, modelID))
-	{
-		Logger::throwWarning("animation not playing!");
-	}
-
-	// Check if animation is fading
-	if(isModelAnimationFading(animationID, modelID))
-	{
-		Logger::throwWarning("animation already fading!");
-	}
-
-	// Fade animation
-	_startedModelAnimations.at(make_pair(animationID, modelID)).setFadeFramestep(framestep);
-}
-
 void Animation3dEditor::stopModelAnimation(const string& animationID, const string& modelID)
 {
 	// Check if animation not existing

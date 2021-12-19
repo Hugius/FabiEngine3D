@@ -68,16 +68,6 @@ void Animation3d::setPlayCount(int value)
 	_playCount = value;
 }
 
-void Animation3d::setFadeFramestep(unsigned int value)
-{
-	_fadeFramestep = value;
-}
-
-void Animation3d::setFadeFrameIndex(unsigned int value)
-{
-	_fadeFrameIndex = value;
-}
-
 void Animation3d::setFrameIndex(unsigned int value)
 {
 	_frameIndex = value;
@@ -141,16 +131,6 @@ const float Animation3d::getSpeed() const
 const int Animation3d::getPlayCount() const
 {
 	return _playCount;
-}
-
-const int Animation3d::getFadeFramestep() const
-{
-	return _fadeFramestep;
-}
-
-const int Animation3d::getFadeFrameIndex() const
-{
-	return _fadeFrameIndex;
 }
 
 const unsigned int Animation3d::getFrameIndex() const

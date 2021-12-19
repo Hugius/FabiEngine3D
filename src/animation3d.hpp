@@ -23,8 +23,6 @@ public:
 	void setInitialSize(fvec3 value);
 	void setSpeed(float value);
 	void setPlayCount(int value);
-	void setFadeFramestep(unsigned int value);
-	void setFadeFrameIndex(unsigned int value);
 	void setFrameIndex(unsigned int value);
 	void setPaused(bool value);
 	void setAutopaused(bool value);
@@ -45,8 +43,6 @@ public:
 
 	// INT
 	const int getPlayCount() const;
-	const int getFadeFramestep() const;
-	const int getFadeFrameIndex() const;
 
 	// UNSIGNED INT
 	const unsigned int getFrameIndex() const;
@@ -75,8 +71,6 @@ private:
 
 	// INT
 	int _playCount = 0;
-	int _fadeFramestep = -1;
-	int _fadeFrameIndex = -1;
 
 	// UNSIGNED INT
 	unsigned int _frameIndex = 0;

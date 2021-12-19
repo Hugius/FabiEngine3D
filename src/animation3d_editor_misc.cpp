@@ -251,23 +251,3 @@ const bool Animation3dEditor::isModelAnimationPaused(const string& animationID, 
 	// Return
 	return _startedModelAnimations.at(make_pair(animationID, modelID)).isPaused();
 }
-
-const bool Animation3dEditor::isModelAnimationFading(const string& animationID, const string& modelID) const
-{
-	// Check if animation not existing
-	if(!isAnimationExisting(animationID))
-	{
-		Logger::throwWarning("animation not existing!");
-		return false;
-	}
-
-	// Check if animation not started
-	if(!isModelAnimationStarted(animationID, modelID))
-	{
-		Logger::throwWarning("animation not started!");
-		return false;
-	}
-
-	// Return
-	return (_startedModelAnimations.at(make_pair(animationID, modelID)).getFadeFramestep() != -1);
-}

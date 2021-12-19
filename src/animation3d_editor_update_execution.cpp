@@ -412,41 +412,10 @@ void Animation3dEditor::_updateModelAnimationExecution()
 			// Update frame
 			animation.setFrame(frameIndex, frame);
 
-			// Check if animation needs to be faded
-			if(animation.getFadeFramestep() != -1 && animation.getFadeFrameIndex() == -1)
-			{
-				if(animation.getFadeFramestep() == 1)
-				{
-					if((animation.getFrameIndex() % 2) != 0)
-					{
-						animation.setFadeFrameIndex(animation.getFrameIndex() + 1);
-					}
-					else
-					{
-						animation.setFadeFrameIndex(animation.getFrameIndex());
-					}
-				}
-				else
-				{
-					if((animation.getFrameIndex() % animation.getFadeFramestep()) == 0)
-					{
-						animation.setFadeFrameIndex(animation.getFrameIndex() + 1);
-					}
-					else
-					{
-						animation.setFadeFrameIndex(animation.getFrameIndex());
-					}
-				}
-			}
-
 			// Check if current frame is finished
 			if(finishedPartCount == animation.getPartIDs().size())
 			{
-				if(animation.getFrameIndex() == animation.getFadeFrameIndex()) // Animation faded to its end
-				{
-					_modelAnimationsToStop.insert(idPair);
-				}
-				else if(animation.getFrameIndex() == (static_cast<unsigned int>(animation.getFrames().size()) - 1)) // Animation finished
+				if(animation.getFrameIndex() == (static_cast<unsigned int>(animation.getFrames().size()) - 1)) // Animation finished
 				{
 					// Check if animation is endless
 					if(animation.getPlayCount() == -1)

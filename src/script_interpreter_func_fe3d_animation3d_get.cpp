@@ -56,19 +56,6 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dGetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation3d_is_model_fading")
-	{
-		auto types = {SVT::STRING, SVT::STRING};
-
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
-			{
-				auto result = _animation3dEditor.isModelAnimationFading(arguments[0].getString(), arguments[1].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
-			}
-		}
-	}
 	else if(functionName == "fe3d:animation3d_get_model_speed")
 	{
 		auto types = {SVT::STRING, SVT::STRING};

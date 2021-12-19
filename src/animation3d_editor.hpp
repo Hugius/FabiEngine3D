@@ -19,7 +19,6 @@ public:
 	void autopauseModelAnimation(const string& animationID, const string& modelID);
 	void pauseModelAnimation(const string& animationID, const string& modelID);
 	void resumeModelAnimation(const string& animationID, const string& modelID);
-	void fadeModelAnimation(const string& animationID, const string& modelID, unsigned int framestep);
 	void stopModelAnimation(const string& animationID, const string& modelID);
 	void stopModelAnimations();
 	void setModelAnimationSpeed(const string& animationID, const string& modelID, float value);
@@ -45,7 +44,6 @@ public:
 	const bool isModelAnimationPlaying(const string& animationID, const string& modelID) const;
 	const bool isModelAnimationAutopaused(const string& animationID, const string& modelID) const;
 	const bool isModelAnimationPaused(const string& animationID, const string& modelID) const;
-	const bool isModelAnimationFading(const string& animationID, const string& modelID) const;
 	const bool loadFromFile(bool mustCheckPreviewModel);
 	const bool saveToFile() const;
 

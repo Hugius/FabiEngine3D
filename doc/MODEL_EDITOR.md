@@ -2,9 +2,9 @@
 
 ## 1. General
 
-- All models will be saved in `~\projects\<your_project>\data\model.fe3d`.
-- You can create/edit/delete models.
-- You can create/edit/delete AABBs for the models.
+- All model entities will be saved in `~\projects\<your_project>\data\model.fe3d`.
+- You can create/edit/delete model entities.
+- You can create/edit/delete AABB entities for the model entities.
 - Every created model can be placed in a world.
 - Every created AABB is bound its parent model.
 
@@ -15,7 +15,7 @@
 - Scroll `MMB` to zoom camera
 - Press `H` to toggle debug rendering
 - Press `R` to toggle reference box
-- Press `F` to toggle wireframe
+- Press `F` to toggle wireframe rendering
 - Press `ESC` to go back
 - Press `SPACE` to move upwards
 - Press `SHIFT` to move downwards

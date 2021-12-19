@@ -5,7 +5,7 @@
 - All worlds will be saved in `~\projects\<your_project>\worlds\editor\`.
 - Every entity that you place is based on the version in their own editor.
 - Only the changes in the entities made in the world editor are saved.
-- Placed entities can be selected if it has 1 or more bound AABBs.
+- Placed entities can be selected if it has 1 or more bound AABB entities.
 
 ## 2. Controls
 
@@ -14,8 +14,8 @@
 - Press `RMB` to toggle camera
 - Press `MMB` to cancel entity placement
 - Press `H` to toggle debug rendering
-- Press `F` to toggle wireframe
-- Press `B` to toggle AABBs
+- Press `F` to toggle wireframe rendering
+- Press `B` to toggle AABB entity rendering
 - Use `WASD` to move around
 - Press `SPACE` to move upwards
 - Press `SHIFT` to move downwards
@@ -23,27 +23,27 @@
 
 ## 3. Sky
 
-- You can select/delete up to 1 sky from the sky editor.
+- You can select/delete up to 1 sky entity from the sky editor.
 
 ## 4. Terrain
 
-- You can select/delete up to 1 terrain from the terrain editor.
+- You can select/delete up to 1 terrain entity from the terrain editor.
 
 ## 5. Water
 
-- You can select/delete up to 1 water from the water editor.
+- You can select/delete up to 1 water entity from the water editor.
 - The water height can be moved upwards and downwards
 
 ## 6. Models
 
-- You can place/edit/delete models in the world.
+- You can place/edit/delete model entities in the world.
 - If a terrain is selected, you can place the model on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the model.
 - You can attach an (endless) animation to a placed model.
 
 ## 7. Billboards
 
-- You can place/edit/delete billboards in the world.
+- You can place/edit/delete billboard entities in the world.
 - If a terrain is selected, you can place the model on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the sound.
 
@@ -55,19 +55,19 @@
 
 ## 9. Pointlights
 
-- You can place/edit/delete pointlights in the world.
+- You can place/edit/delete pointlight entities in the world.
 - If a terrain is selected, you can place the pointlight on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the pointlight.
 
 ## 10. Spotlights
 
-- You can place/edit/delete spotlights in the world.
+- You can place/edit/delete spotlight entities in the world.
 - If a terrain is selected, you can place the spotlight on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the spotlight.
 
 ## 11. Reflections
 
-- You can place/edit/delete reflections in the world.
+- You can place/edit/delete reflection entities in the world.
 - If a terrain is selected, you can place the reflection on top of the terrain with your mouse.
 - If no terrain is selected, you must specify the position of the reflection.
 
@@ -92,4 +92,5 @@
 ### 12.3 Properties
 
 - **Editor Speed**: the speed with which the camera moves and the XYZ fields change
+  - Type: `decimal`
   - Constraints: at least `0`

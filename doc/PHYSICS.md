@@ -4,20 +4,20 @@
 
 <img src="images/collision.png" width="50%"/>
 
-## 1.1 AABB vs AABB
+## 1.1 AABB Entity vs AABB Entity
 
-- FabiEngine3D supports collision (only detection) between 2 AABBs
-- Collision response can be scripted
+- FabiEngine3D supports collision (only detection) between 2 AABB entities.
+- Collision response can be scripted.
 
-## 1.2 Camera vs AABBs
+## 1.2 Camera vs AABB entities
 
-- FabiEngine3D supports collision (detection + response) between the camera and multiple AABBs
-- The camera has its own custom bounding box
+- FabiEngine3D supports collision (detection + response) between the camera and multiple AABB entities.
+- The camera has its own custom bounding box.
 
-## 1.3 Camera vs Terrain
+## 1.3 Camera vs Terrain Entity
 
-- FabiEngine3D supports collision (detection + response) between the camera and the terrain
-- The camera has a custom minimum distance to the camera
+- FabiEngine3D supports collision (detection + response) between the camera and the terrain.
+- The camera has a custom minimum distance to the camera.
 
 ## 2. Raycasting
 
@@ -25,16 +25,16 @@
 
 ## 2.1 Cursor Ray
 
-- The cursor ray is a normalized ray from the cursor to 3D space
-- Every engine update the cursor ray is recalculated
-- The ray is the 3D direction of the cursor
+- The cursor ray is a normalized ray from the cursor to 3D space.
+- Every engine update the cursor ray is recalculated.
+- The ray is the 3D direction of the cursor.
 
 ## 2.1 Terrain Pointing
 
-- FabiEngine3D supports 3D cursor picking on the terrain
-- Terrain pointing can be configured for performance
+- FabiEngine3D supports 3D cursor picking on the terrain.
+- Terrain pointing can be configured for performance.
 
-## 2.2 AABB Selection
+## 2.2 AABB Entity Selection
 
-- FabiEngine3D supports AABB selection with the cursor
-- Intersection between the cursor ray and AABBs is calculated
+- FabiEngine3D supports AABB entity selection with the cursor.
+- Intersection between the cursor ray and AABB entities is calculated.

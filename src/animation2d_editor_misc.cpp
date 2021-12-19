@@ -153,6 +153,24 @@ const unsigned int Animation2dEditor::getBillboardAnimationColumnIndex(const str
 	return _startedBillboardAnimations.at(make_pair(animationID, billboardID)).getColumnIndex();
 }
 
+const int Animation2dEditor::getBillboardAnimationTimesToPlay(const string& animationID, const string& billboardID) const
+{
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning("animation not existing!");
+	}
+
+	// Check if animation not started
+	if(!isBillboardAnimationStarted(animationID, billboardID))
+	{
+		Logger::throwWarning("animation not started!");
+	}
+
+	// Return times to play
+	return _startedBillboardAnimations.at(make_pair(animationID, billboardID)).getTimesToPlay();
+}
+
 const unsigned int Animation2dEditor::getBillboardAnimationFramestep(const string& animationID, const string& billboardID) const
 {
 	// Check if animation not existing
@@ -241,6 +259,24 @@ const unsigned int Animation2dEditor::getImageAnimationColumnIndex(const string&
 
 	// Return column index
 	return _startedImageAnimations.at(make_pair(animationID, imageID)).getColumnIndex();
+}
+
+const int Animation2dEditor::getImageAnimationTimesToPlay(const string& animationID, const string& imageID) const
+{
+	// Check if animation not existing
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning("animation not existing!");
+	}
+
+	// Check if animation not started
+	if(!isImageAnimationStarted(animationID, imageID))
+	{
+		Logger::throwWarning("animation not started!");
+	}
+
+	// Return times to play
+	return _startedImageAnimations.at(make_pair(animationID, imageID)).getTimesToPlay();
 }
 
 const unsigned int Animation2dEditor::getImageAnimationFramestep(const string& animationID, const string& imageID) const

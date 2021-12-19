@@ -20,7 +20,7 @@
 
 ## 3. Tips
 
-- Make use of LOD models to improve the performance on high-poly meshes.
+- Make use of LOD model entities to improve the performance on high-poly meshes.
 - Lower the graphics quality in the project settings to improve your graphics performance if necessary.
 - Clear the messages in the engine logging console if a lot of messages are printed.
 - If your application has text entities of which the content changes a lot, you should enable their property `isDynamic`.

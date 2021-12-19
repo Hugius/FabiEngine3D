@@ -34,6 +34,10 @@ public:
 	const vector<string> getStartedBillboardAnimationIDs(const string& billboardID) const;
 	const vector<string> getStartedImageAnimationIDs(const string& billboardID) const;
 
+	// INT
+	const int getBillboardAnimationTimesToPlay(const string& animationID, const string& billboardID) const;
+	const int getImageAnimationTimesToPlay(const string& animationID, const string& imageID) const;
+
 	// UNSIGNED INT
 	const unsigned int getBillboardAnimationRowCount(const string& animationID, const string& billboardID) const;
 	const unsigned int getBillboardAnimationColumnCount(const string& animationID, const string& billboardID) const;

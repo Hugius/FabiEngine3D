@@ -8,18 +8,19 @@
 
 - A FabiEngine3D server is a separate application that runs on its own.
 - Its only purpose is processing incoming/outgoing messages from/to clients.
-- You can only start a server in an initialization script before any other FE3D scripting functions are called.
-- Before you can call any other server scripting functions, the server must be started.
 - If you export a server project there will be no window display, only the logging console.
 - A server is hosted on the IPV4 address of your computer (write `ipconfig` in your Windows command prompt to look it up).
 - You can portforward the server in your router settings on port `61205` for both TCP & UDP protocols.
 - There can be only 1 server running on the same machine.
 - You can set a maximum amount of clients that can connect to the server.
 - A server runs at the maximum update speed possible (it overrides the 144 ticks/second engine default).
-- Be careful with performance heavy operations in the server scripts.
 
 ### 1.2 Scripting
 
+- Read the [scripting documentation](SCRIPTING.md) first!
+- You can only start a server in an initialization script before any other FE3D scripting functions are called.
+- Before you can call any other server scripting functions, the server must be started.
+- Be careful with performance heavy operations in the server scripts.
 - The scripts of a server have limited access to `fe3d` functions:
   - `fe3d:server_*`
   - `fe3d:directory_*`
@@ -35,12 +36,16 @@
 
 - A FabiEngine3D client exists within a FabiEngine3D application.
 - Its only purpose is sending/receiving messages to/from the server.
-- Before you can call any other client scripting functions, the client must be started & connected to a server.
 - The client can only be connected to 1 server at a time.
 - You can always retrieve pending messages, because of error messages sent by the server if the connection attempt went wrong.
 - When you start a client, you must specify username that cannot be longer than 16 characters.
 
-### 2.2 Errors
+### 2.2 Scripting
+
+- Read the [scripting documentation](SCRIPTING.md) first!
+- Before you can call any other client scripting functions, the client must be started & connected to a server.
+
+### 2.3 Errors
 
 - When connecting to a server fails, the server will send error messages.
 - `SERVER_FULL`: the server is currently at maximum client capacity.

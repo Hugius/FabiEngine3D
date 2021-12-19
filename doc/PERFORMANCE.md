@@ -14,7 +14,7 @@
 - **Planar reflections**: everything has to be rendered twice
 - **Water reflections**: everything has to be rendered twice
 - **Water refractions**: everything has to be rendered twice
-- **Water waves**: the water plane mesh has much more vertices
+- **Water waves**: the water entity plane mesh has much more vertices
 - **Pointlight entities**: heavy lighting calculations
 - **Spotlight entities**: heavy lighting calculations
 

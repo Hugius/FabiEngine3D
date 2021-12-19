@@ -16,7 +16,7 @@
 
 ## 1.3 Camera vs Terrain Entity
 
-- FabiEngine3D supports collision (detection + response) between the camera and the terrain.
+- FabiEngine3D supports collision (detection + response) between the camera and the terrain entity.
 - The camera has a custom minimum distance to the camera.
 
 ## 2. Raycasting
@@ -29,10 +29,10 @@
 - Every engine update the cursor ray is recalculated.
 - The ray is the 3D direction of the cursor.
 
-## 2.1 Terrain Pointing
+## 2.1 Terrain Entity Pointing
 
-- FabiEngine3D supports 3D cursor picking on the terrain.
-- Terrain pointing can be configured for performance.
+- FabiEngine3D supports 3D cursor picking on the terrain entity.
+- Terrain entity pointing can be configured for performance.
 
 ## 2.2 AABB Entity Selection
 

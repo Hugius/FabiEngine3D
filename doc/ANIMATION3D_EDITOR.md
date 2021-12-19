@@ -5,7 +5,7 @@
 - All animations will be saved in `~\projects\<your_project>\data\animation3d.fe3d`.
 - You can create/edit/delete animations.
 - Every created animation can be applied to model entities.
-- You can select a preview model for the animation playback.
+- You can select a preview model entity for the animation playback.
 
 ## 2. Controls
 

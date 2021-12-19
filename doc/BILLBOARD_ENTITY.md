@@ -5,7 +5,7 @@
 - The billboard entity is a 2D quad in 3D space.
 - Instead of a solid quad, the texture of the billboard entity can be transparent text (based on a font).
 - Billboard entities are not affected by shadows or lighting.
-- Each billboard is the parent of 1 AABB.
+- Each billboard entity is the parent of 1 AABB entity.
 
 ## 2. Assets
 

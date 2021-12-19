@@ -32,44 +32,44 @@
 ## 5. Water
 
 - You can select/delete up to 1 water entity from the water editor.
-- The water height can be moved upwards and downwards
+- The water entity height can be moved upwards and downwards
 
 ## 6. Models
 
 - You can place/edit/delete model entities in the world.
-- If a terrain is selected, you can place the model on top of the terrain with your mouse.
-- If no terrain is selected, you must specify the position of the model.
-- You can attach an (endless) animation to a placed model.
+- If a terrain entity is selected, you can place the model entity on top of the terrain entity with your mouse.
+- If no terrain entity is selected, you must specify the position of the model entity.
+- You can attach an (endless) animation to a placed model entity.
 
 ## 7. Billboards
 
 - You can place/edit/delete billboard entities in the world.
-- If a terrain is selected, you can place the model on top of the terrain with your mouse.
-- If no terrain is selected, you must specify the position of the sound.
+- If a terrain entity is selected, you can place the model entity on top of the terrain entity with your mouse.
+- If no terrain entity is selected, you must specify the position of the sound.
 
 ## 8. Sounds
 
 - You can place/edit/delete sounds in the world.
-- If a terrain is selected, you can place the sound on top of the terrain with your mouse.
-- If no terrain is selected, you must specify the position of the model.
+- If a terrain entity is selected, you can place the sound on top of the terrain entity with your mouse.
+- If no terrain entity is selected, you must specify the position of the model entity.
 
 ## 9. Pointlights
 
 - You can place/edit/delete pointlight entities in the world.
-- If a terrain is selected, you can place the pointlight on top of the terrain with your mouse.
-- If no terrain is selected, you must specify the position of the pointlight.
+- If a terrain entity is selected, you can place the pointlight entity on top of the terrain entity with your mouse.
+- If no terrain entity is selected, you must specify the position of the pointlight entity.
 
 ## 10. Spotlights
 
 - You can place/edit/delete spotlight entities in the world.
-- If a terrain is selected, you can place the spotlight on top of the terrain with your mouse.
-- If no terrain is selected, you must specify the position of the spotlight.
+- If a terrain entity is selected, you can place the spotlight entity on top of the terrain entity with your mouse.
+- If no terrain entity is selected, you must specify the position of the spotlight entity.
 
 ## 11. Reflections
 
 - You can place/edit/delete reflection entities in the world.
-- If a terrain is selected, you can place the reflection on top of the terrain with your mouse.
-- If no terrain is selected, you must specify the position of the reflection.
+- If a terrain entity is selected, you can place the reflection entity on top of the terrain entity with your mouse.
+- If no terrain entity is selected, you must specify the position of the reflection entity.
 
 ## 12. Settings
 

@@ -65,7 +65,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:sound2d_play")
+	else if(functionName == "fe3d:sound2d_start")
 	{
 		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER, SVT::BOOLEAN};
 
@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 		{
 			if(_validateFe3dSound2d(arguments[0].getString(), false))
 			{
-				_fe3d.sound2d_play(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger(), arguments[3].getBoolean());
+				_fe3d.sound2d_start(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger(), arguments[3].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

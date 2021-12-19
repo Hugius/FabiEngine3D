@@ -77,7 +77,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:sound3d_play")
+	else if(functionName == "fe3d:sound3d_start")
 	{
 		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER};
 
@@ -85,7 +85,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 		{
 			if(_validateFe3dSound3d(arguments[0].getString(), false))
 			{
-				_fe3d.sound3d_play(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger(), false);
+				_fe3d.sound3d_start(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger(), false);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -98,7 +98,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 		{
 			if(_validateFe3dSound3d(arguments[0].getString(), false))
 			{
-				_fe3d.sound3d_play(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger(), true);
+				_fe3d.sound3d_start(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger(), true);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

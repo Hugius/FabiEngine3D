@@ -52,7 +52,7 @@ void WorldEditor::_updateSoundPlacing()
 				_fe3d.sound3d_setPosition(newID, newPosition);
 				_fe3d.sound3d_setMaxVolume(newID, DEFAULT_SOUND_MAX_VOLUME);
 				_fe3d.sound3d_setMaxDistance(newID, DEFAULT_SOUND_MAX_DISTANCE);
-				_fe3d.sound3d_play(newID, -1, 0, false);
+				_fe3d.sound3d_start(newID, -1, 0, false);
 				_loadedSoundIDs.insert(make_pair(newID, _currentTemplateSoundID));
 			}
 
@@ -84,7 +84,7 @@ void WorldEditor::_updateSoundPlacing()
 						// Play template sound
 						if(!_fe3d.sound3d_isStarted(_currentTemplateSoundID))
 						{
-							_fe3d.sound3d_play(_currentTemplateSoundID, -1, 0, false);
+							_fe3d.sound3d_start(_currentTemplateSoundID, -1, 0, false);
 						}
 
 						// Show template speaker
@@ -144,7 +144,7 @@ void WorldEditor::_updateSoundPlacing()
 						_fe3d.sound3d_setPosition(newID, newPosition);
 						_fe3d.sound3d_setMaxVolume(newID, DEFAULT_SOUND_MAX_VOLUME);
 						_fe3d.sound3d_setMaxDistance(newID, DEFAULT_SOUND_MAX_DISTANCE);
-						_fe3d.sound3d_play(newID, -1, 0, false);
+						_fe3d.sound3d_start(newID, -1, 0, false);
 						_loadedSoundIDs.insert(make_pair(newID, _currentTemplateSoundID));
 					}
 					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode

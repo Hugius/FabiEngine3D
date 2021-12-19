@@ -344,7 +344,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			{
 				_fe3d.sound3d_setMaxVolume(soundID, maxVolume);
 				_fe3d.sound3d_setMaxDistance(soundID, maxDistance);
-				_fe3d.sound3d_play(soundID, -1, 0, false);
+				_fe3d.sound3d_start(soundID, -1, 0, false);
 			}
 		}
 		else if(lineType == "POINTLIGHT")

@@ -31,7 +31,7 @@ void FabiEngine3D::sound2d_deleteAll()
 	_core->_sound2dManager.deleteSounds();
 }
 
-void FabiEngine3D::sound2d_play(const string& ID, int playCount, unsigned int fadeMS, bool mustForcePlay)
+void FabiEngine3D::sound2d_start(const string& ID, int playCount, unsigned int fadeMS, bool mustForce)
 {
 	auto sound = _core->_sound2dManager.getSound(ID);
 
@@ -40,13 +40,13 @@ void FabiEngine3D::sound2d_play(const string& ID, int playCount, unsigned int fa
 		Logger::throwWarning("Tried to play 2D sound with ID \"", ID, "\": no audio channels available!");
 		return;
 	}
-	if(_core->_sound2dPlayer.isSoundStarted(sound) && !mustForcePlay)
+	if(_core->_sound2dPlayer.isSoundStarted(sound) && !mustForce)
 	{
 		Logger::throwWarning("Tried to play 2D sound with ID \"", ID, "\": sound is already started!");
 		return;
 	}
 
-	_core->_sound2dPlayer.playSound(sound, playCount, fadeMS, mustForcePlay);
+	_core->_sound2dPlayer.startSound(sound, playCount, fadeMS, mustForce);
 }
 
 void FabiEngine3D::sound2d_pause(const string& ID)

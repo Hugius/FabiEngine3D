@@ -1,25 +1,25 @@
 #include "sound3d_player.hpp"
 #include "logger.hpp"
 
-void Sound3dPlayer::playSound(Sound3d& sound, int playCount, unsigned int fadeMS, bool mustForcePlay)
+void Sound3dPlayer::startSound(Sound3d& sound, int playCount, unsigned int fadeMS, bool mustForce)
 {
 	// Validate play count
 	if((playCount < -1) || (playCount == 0))
 	{
-		Logger::throwError("Sound3dPlayer::playSound3d::1");
+		Logger::throwError("Sound3dPlayer::startSound::1");
 	}
 
 	// Check if sound is started
-	if(isSoundStarted(sound) && !mustForcePlay)
+	if(isSoundStarted(sound) && !mustForce)
 	{
-		Logger::throwError("Sound3dPlayer::playSound3d::2");
+		Logger::throwError("Sound3dPlayer::startSound::2");
 	}
 
 	// Try to find free channel
 	auto channel = _getFreeChannel();
 	if(channel == -1)
 	{
-		Logger::throwError("Sound3dPlayer::playSound3d::3");
+		Logger::throwError("Sound3dPlayer::startSound::3");
 	}
 	_channels[channel] = sound.getID();
 

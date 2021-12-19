@@ -104,7 +104,7 @@ void WorldEditor::_updateSoundPlacingMenu()
 					_currentTemplateSoundID = soundID;
 					_fe3d.model_setVisible(TEMPLATE_SPEAKER_ID, true);
 					_fe3d.sound3d_setPosition(_currentTemplateSoundID, fvec3(0.0f));
-					_fe3d.sound3d_play(_currentTemplateSoundID, -1, 0, false);
+					_fe3d.sound3d_start(_currentTemplateSoundID, -1, 0, false);
 					_fe3d.text_setVisible(_gui.getOverlay()->getTextField("soundID")->getEntityID(), true);
 					_fe3d.text_setContent(_gui.getOverlay()->getTextField("soundID")->getEntityID(), "Sound: " + _currentTemplateSoundID.substr(1), 0.025f);
 					_fe3d.misc_centerCursor();

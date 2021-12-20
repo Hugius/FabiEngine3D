@@ -48,9 +48,6 @@
 - **Rotation Target**: the target XYZ rotation of the mesh
   - Type: `decimal`
   - Constraints: between `0.0` and `360.0`
-- **Transparency**: the transparency of the fragments
-  - Type: `decimal`
-  - Constraints: between `0.0` and `1.0`
 - **Position Target Speed**: the speed with which the mesh moves to the target position
   - Type: `decimal`
   - Constraints: at least `0.0`
@@ -60,6 +57,9 @@
 - **Size Target Speed**: the speed with which the mesh scales to the target size
   - Type: `decimal`
   - Constraints: at least `0.0`
+- **Transparency**: the transparency of the fragments
+  - Type: `decimal`
+  - Constraints: between `0.0` and `1.0`
 - **Centered**: the mesh is centered around XY(0,0)
   - Type: `boolean`
   - Constraints: none

@@ -18,6 +18,11 @@ const fvec3 FabiEngine3D::spotlight_getPosition(const string& ID) const
 	return _core->_spotlightEntityManager.getEntity(ID)->getPosition();
 }
 
+const fvec3 FabiEngine3D::spotlight_getFrontVector(const string& ID) const
+{
+	return _core->_spotlightEntityManager.getEntity(ID)->getFrontVector();
+}
+
 const fvec3 FabiEngine3D::spotlight_getColor(const string& ID) const
 {
 	return _core->_spotlightEntityManager.getEntity(ID)->getColor();

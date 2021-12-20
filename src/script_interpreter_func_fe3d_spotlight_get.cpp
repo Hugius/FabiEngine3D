@@ -119,6 +119,45 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 			}
 		}
 	}
+	else if(functionName == "fe3d:spotlight_get_front_vector_x")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dSpotlight(arguments[0].getString()))
+			{
+				auto result = _fe3d.spotlight_getFrontVector(arguments[0].getString()).x;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:spotlight_get_front_vector_y")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dSpotlight(arguments[0].getString()))
+			{
+				auto result = _fe3d.spotlight_getFrontVector(arguments[0].getString()).y;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:spotlight_get_front_vector_z")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dSpotlight(arguments[0].getString()))
+			{
+				auto result = _fe3d.spotlight_getFrontVector(arguments[0].getString()).z;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:spotlight_get_color_r")
 	{
 		auto types = {SVT::STRING};

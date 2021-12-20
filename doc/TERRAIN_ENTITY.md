@@ -17,13 +17,31 @@
 - **Height Map Path**: the path of the height map file
   - Type: `string`
   - Constraints: none
-- **Blend Map Path**: the path of the blend map file
-  - Type: `string`
-  - Constraints: none
 - **Diffuse Map Path**: the path of the diffuse map file
   - Type: `string`
   - Constraints: none
 - **Normal Map Path**: the path of the normal map file
+  - Type: `string`
+  - Constraints: none
+- **Blend Map Path**: the path of the blend map file
+  - Type: `string`
+  - Constraints: none
+- **Red Diffuse Map Path**: the path of the red diffuse map file
+  - Type: `string`
+  - Constraints: none
+- **Green Diffuse Map Path**: the path of the green diffuse map file
+  - Type: `string`
+  - Constraints: none
+- **Blue Diffuse Map Path**: the path of the blue diffuse map file
+  - Type: `string`
+  - Constraints: none
+- **Red Normal Map Path**: the path of the red normal map file
+  - Type: `string`
+  - Constraints: none
+- **Green Normal Map Path**: the path of the green normal map file
+  - Type: `string`
+  - Constraints: none
+- **Blue Normal Map Path**: the path of the blue normal map file
   - Type: `string`
   - Constraints: none
 - **Wireframe Color**: the RGB color multiplier of the wireframe

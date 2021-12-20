@@ -482,6 +482,7 @@ public:
 	// SPOTLIGHT - getters
 	const vector<string> spotlight_getIDs() const;
 	const fvec3 spotlight_getPosition(const string& ID) const;
+	const fvec3 spotlight_getFrontVector(const string& ID) const;
 	const fvec3 spotlight_getColor(const string& ID) const;
 	const float spotlight_getYaw(const string& ID) const;
 	const float spotlight_getPitch(const string& ID) const;

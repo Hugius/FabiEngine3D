@@ -37,9 +37,9 @@ const bool TerrainEditor::saveToFile() const
 		auto lightness = _fe3d.terrain_getLightness(terrainID);
 		auto specularShininess = _fe3d.terrain_getSpecularShininess(terrainID);
 		auto specularIntensity = _fe3d.terrain_getSpecularIntensity(terrainID);
-		auto redRepeat = _fe3d.terrain_getRedRepeat(terrainID);
-		auto greenRepeat = _fe3d.terrain_getGreenRepeat(terrainID);
-		auto blueRepeat = _fe3d.terrain_getBlueRepeat(terrainID);
+		auto redTextureRepeat = _fe3d.terrain_getRedTextureRepeat(terrainID);
+		auto greenTextureRepeat = _fe3d.terrain_getGreenTextureRepeat(terrainID);
+		auto blueTextureRepeat = _fe3d.terrain_getBlueTextureRepeat(terrainID);
 		auto isSpecular = _fe3d.terrain_isSpecular(terrainID);
 
 		// Convert to short path
@@ -90,9 +90,9 @@ const bool TerrainEditor::saveToFile() const
 			redDiffuseMapPath << " " <<
 			greenDiffuseMapPath << " " <<
 			blueDiffuseMapPath << " " <<
-			redRepeat << " " <<
-			greenRepeat << " " <<
-			blueRepeat << " " <<
+			redTextureRepeat << " " <<
+			greenTextureRepeat << " " <<
+			blueTextureRepeat << " " <<
 			normalMapPath << " " <<
 			redNormalMapPath << " " <<
 			greenNormalMapPath << " " <<

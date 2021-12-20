@@ -120,19 +120,19 @@ const float TerrainEntity::getTextureRepeat() const
 	return _textureRepeat;
 }
 
-const float TerrainEntity::getRedRepeat() const
+const float TerrainEntity::getRedTextureRepeat() const
 {
-	return _redRepeat;
+	return _redTextureRepeat;
 }
 
-const float TerrainEntity::getGreenRepeat() const
+const float TerrainEntity::getGreenTextureRepeat() const
 {
-	return _greenRepeat;
+	return _greenTextureRepeat;
 }
 
-const float TerrainEntity::getBlueRepeat() const
+const float TerrainEntity::getBlueTextureRepeat() const
 {
-	return _blueRepeat;
+	return _blueTextureRepeat;
 }
 
 const float TerrainEntity::getSize() const

@@ -72,9 +72,9 @@ const bool WorldEditor::_copyTemplateTerrain(const string& newID, const string& 
 	_fe3d.terrain_setMaxHeight(newID, _fe3d.terrain_getMaxHeight(templateID));
 	_fe3d.terrain_setTextureRepeat(newID, _fe3d.terrain_getTextureRepeat(templateID));
 	_fe3d.terrain_setLightness(newID, _fe3d.terrain_getLightness(templateID));
-	_fe3d.terrain_setRedRepeat(newID, _fe3d.terrain_getRedRepeat(templateID));
-	_fe3d.terrain_setGreenRepeat(newID, _fe3d.terrain_getGreenRepeat(templateID));
-	_fe3d.terrain_setBlueRepeat(newID, _fe3d.terrain_getBlueRepeat(templateID));
+	_fe3d.terrain_setRedTextureRepeat(newID, _fe3d.terrain_getRedTextureRepeat(templateID));
+	_fe3d.terrain_setGreenTextureRepeat(newID, _fe3d.terrain_getGreenTextureRepeat(templateID));
+	_fe3d.terrain_setBlueTextureRepeat(newID, _fe3d.terrain_getBlueTextureRepeat(templateID));
 	_fe3d.terrain_setSpecular(newID, _fe3d.terrain_isSpecular(templateID));
 	_fe3d.terrain_setSpecularShininess(newID, _fe3d.terrain_getSpecularShininess(templateID));
 	_fe3d.terrain_setSpecularIntensity(newID, _fe3d.terrain_getSpecularIntensity(templateID));

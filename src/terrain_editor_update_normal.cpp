@@ -55,7 +55,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			_fe3d.misc_clear2dTextureCache(newFilePath);
 			_fe3d.terrain_setNormalMap(_currentTerrainID, newFilePath);
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("redMap")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("redNormalMap")->isHovered())
 		{
 			// Validate project ID
 			if(_currentProjectID.empty())
@@ -94,7 +94,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			_fe3d.misc_clear2dTextureCache(newFilePath);
 			_fe3d.terrain_setRedNormalMap(_currentTerrainID, newFilePath);
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenMap")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenNormalMap")->isHovered())
 		{
 			// Validate project ID
 			if(_currentProjectID.empty())
@@ -133,7 +133,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			_fe3d.misc_clear2dTextureCache(newFilePath);
 			_fe3d.terrain_setGreenNormalMap(_currentTerrainID, newFilePath);
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueMap")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueNormalMap")->isHovered())
 		{
 			// Validate project ID
 			if(_currentProjectID.empty())
@@ -181,9 +181,9 @@ void TerrainEditor::_updateNormalMapMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("redMap")->setHoverable(_fe3d.terrain_hasBlendMap(_currentTerrainID));
-		screen->getButton("greenMap")->setHoverable(_fe3d.terrain_hasBlendMap(_currentTerrainID));
-		screen->getButton("blueMap")->setHoverable(_fe3d.terrain_hasBlendMap(_currentTerrainID));
+		screen->getButton("redNormalMap")->setHoverable(_fe3d.terrain_hasBlendMap(_currentTerrainID));
+		screen->getButton("greenNormalMap")->setHoverable(_fe3d.terrain_hasBlendMap(_currentTerrainID));
+		screen->getButton("blueNormalMap")->setHoverable(_fe3d.terrain_hasBlendMap(_currentTerrainID));
 		screen->getButton("clearMaps")->setHoverable(
 			_fe3d.terrain_hasNormalMap(_currentTerrainID) ||
 			_fe3d.terrain_hasRedNormalMap(_currentTerrainID) ||

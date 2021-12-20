@@ -118,9 +118,9 @@ public:
 	void terrain_setRedNormalMap(const string& ID, const string& value);
 	void terrain_setGreenNormalMap(const string& ID, const string& value);
 	void terrain_setBlueNormalMap(const string& ID, const string& value);
-	void terrain_setRedRepeat(const string& ID, float value);
-	void terrain_setGreenRepeat(const string& ID, float value);
-	void terrain_setBlueRepeat(const string& ID, float value);
+	void terrain_setRedTextureRepeat(const string& ID, float value);
+	void terrain_setGreenTextureRepeat(const string& ID, float value);
+	void terrain_setBlueTextureRepeat(const string& ID, float value);
 	void terrain_setMaxHeight(const string& ID, float value);
 	void terrain_setTextureRepeat(const string& ID, float value);
 	void terrain_setLightness(const string& ID, float value);
@@ -147,9 +147,9 @@ public:
 	const float terrain_getMaxHeight(const string& ID) const;
 	const float terrain_getTextureRepeat(const string& ID) const;
 	const float terrain_getLightness(const string& ID) const;
-	const float terrain_getRedRepeat(const string& ID) const;
-	const float terrain_getGreenRepeat(const string& ID) const;
-	const float terrain_getBlueRepeat(const string& ID) const;
+	const float terrain_getRedTextureRepeat(const string& ID) const;
+	const float terrain_getGreenTextureRepeat(const string& ID) const;
+	const float terrain_getBlueTextureRepeat(const string& ID) const;
 	const float terrain_getSize(const string& ID) const;
 	const float terrain_getPixelHeight(const string& ID, float x, float z) const;
 	const float terrain_getSpecularShininess(const string& ID) const;

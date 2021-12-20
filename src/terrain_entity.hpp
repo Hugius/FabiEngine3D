@@ -38,9 +38,9 @@ public:
 	void setBlueNormalMap(TextureID value);
 	void setBlueNormalMapPath(const string& value);
 	void setTextureRepeat(float value);
-	void setRedRepeat(float value);
-	void setGreenRepeat(float value);
-	void setBlueRepeat(float value);
+	void setRedTextureRepeat(float value);
+	void setGreenTextureRepeat(float value);
+	void setBlueTextureRepeat(float value);
 	void setSize(float value);
 	void setMaxHeight(float value);
 	void setLightness(float value);
@@ -73,9 +73,9 @@ public:
 	// FLOAT
 	const vector<float>& getPixels() const;
 	const float getTextureRepeat() const;
-	const float getRedRepeat() const;
-	const float getGreenRepeat() const;
-	const float getBlueRepeat() const;
+	const float getRedTextureRepeat() const;
+	const float getGreenTextureRepeat() const;
+	const float getBlueTextureRepeat() const;
 	const float getSize() const;
 	const float getMaxHeight() const;
 	const float getLightness() const;
@@ -132,9 +132,9 @@ private:
 
 	// FLOAT
 	vector<float> _pixels;
-	float _redRepeat = 1.0f;
-	float _greenRepeat = 1.0f;
-	float _blueRepeat = 1.0f;
+	float _redTextureRepeat = 1.0f;
+	float _greenTextureRepeat = 1.0f;
+	float _blueTextureRepeat = 1.0f;
 	float _textureRepeat = 1.0f;
 	float _maxHeight = 1.0f;
 	float _size = 0.0f;

@@ -235,7 +235,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 		{
 			if(_validateFe3dTerrain())
 			{
-				auto result = _fe3d.terrain_getRedRepeat(_fe3d.terrain_getSelectedID());
+				auto result = _fe3d.terrain_getRedTextureRepeat(_fe3d.terrain_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -246,7 +246,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 		{
 			if(_validateFe3dTerrain())
 			{
-				auto result = _fe3d.terrain_getGreenRepeat(_fe3d.terrain_getSelectedID());
+				auto result = _fe3d.terrain_getGreenTextureRepeat(_fe3d.terrain_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -257,7 +257,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 		{
 			if(_validateFe3dTerrain())
 			{
-				auto result = _fe3d.terrain_getBlueRepeat(_fe3d.terrain_getSelectedID());
+				auto result = _fe3d.terrain_getBlueTextureRepeat(_fe3d.terrain_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}

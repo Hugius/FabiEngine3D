@@ -41,7 +41,7 @@ const vector<string> TerrainEditor::getTexturePathsFromFile() const
 		string terrainID, heightMapPath, diffuseMapPath, normalMapPath,
 			redNormalMapPath, greenNormalMapPath, blueNormalMapPath,
 			blendMapPath, redDiffuseMapPath, greenDiffuseMapPath, blueDiffuseMapPath;
-		float maxHeight, textureRepeat, lightness, redRepeat, greenRepeat, blueRepeat;
+		float maxHeight, textureRepeat, lightness, redTextureRepeat, greenTextureRepeat, blueTextureRepeat;
 
 		// For file extraction
 		istringstream iss(line);
@@ -58,9 +58,9 @@ const vector<string> TerrainEditor::getTexturePathsFromFile() const
 			redDiffuseMapPath >>
 			greenDiffuseMapPath >>
 			blueDiffuseMapPath >>
-			redRepeat >>
-			greenRepeat >>
-			blueRepeat >>
+			redTextureRepeat >>
+			greenTextureRepeat >>
+			blueTextureRepeat >>
 			normalMapPath >>
 			redNormalMapPath >>
 			greenNormalMapPath >>
@@ -313,7 +313,7 @@ const bool TerrainEditor::loadFromFile()
 		string terrainID, heightMapPath, diffuseMapPath, normalMapPath,
 			redNormalMapPath, greenNormalMapPath, blueNormalMapPath,
 			blendMapPath, redDiffuseMapPath, greenDiffuseMapPath, blueDiffuseMapPath;
-		float maxHeight, textureRepeat, lightness, redRepeat, greenRepeat, blueRepeat, specularShininess, specularIntensity;
+		float maxHeight, textureRepeat, lightness, redTextureRepeat, greenTextureRepeat, blueTextureRepeat, specularShininess, specularIntensity;
 		bool isSpecular;
 
 		// For file extraction
@@ -331,9 +331,9 @@ const bool TerrainEditor::loadFromFile()
 			redDiffuseMapPath >>
 			greenDiffuseMapPath >>
 			blueDiffuseMapPath >>
-			redRepeat >>
-			greenRepeat >>
-			blueRepeat >>
+			redTextureRepeat >>
+			greenTextureRepeat >>
+			blueTextureRepeat >>
 			normalMapPath >>
 			redNormalMapPath >>
 			greenNormalMapPath >>
@@ -502,9 +502,9 @@ const bool TerrainEditor::loadFromFile()
 			_fe3d.terrain_setMaxHeight(terrainID, maxHeight);
 			_fe3d.terrain_setTextureRepeat(terrainID, textureRepeat);
 			_fe3d.terrain_setLightness(terrainID, lightness);
-			_fe3d.terrain_setRedRepeat(terrainID, redRepeat);
-			_fe3d.terrain_setGreenRepeat(terrainID, greenRepeat);
-			_fe3d.terrain_setBlueRepeat(terrainID, blueRepeat);
+			_fe3d.terrain_setRedTextureRepeat(terrainID, redTextureRepeat);
+			_fe3d.terrain_setGreenTextureRepeat(terrainID, greenTextureRepeat);
+			_fe3d.terrain_setBlueTextureRepeat(terrainID, blueTextureRepeat);
 			_fe3d.terrain_setSpecular(terrainID, isSpecular);
 			_fe3d.terrain_setSpecularShininess(terrainID, specularShininess);
 			_fe3d.terrain_setSpecularIntensity(terrainID, specularIntensity);

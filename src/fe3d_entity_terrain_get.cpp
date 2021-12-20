@@ -175,19 +175,19 @@ const fvec3 FabiEngine3D::terrain_getWireframeColor(const string& ID) const
 	return _core->_terrainEntityManager.getEntity(ID)->getWireframeColor();
 }
 
-const float FabiEngine3D::terrain_getRedRepeat(const string& ID) const
+const float FabiEngine3D::terrain_getRedTextureRepeat(const string& ID) const
 {
-	return _core->_terrainEntityManager.getEntity(ID)->getRedRepeat();
+	return _core->_terrainEntityManager.getEntity(ID)->getRedTextureRepeat();
 }
 
-const float FabiEngine3D::terrain_getGreenRepeat(const string& ID) const
+const float FabiEngine3D::terrain_getGreenTextureRepeat(const string& ID) const
 {
-	return _core->_terrainEntityManager.getEntity(ID)->getGreenRepeat();
+	return _core->_terrainEntityManager.getEntity(ID)->getGreenTextureRepeat();
 }
 
-const float FabiEngine3D::terrain_getBlueRepeat(const string& ID) const
+const float FabiEngine3D::terrain_getBlueTextureRepeat(const string& ID) const
 {
-	return _core->_terrainEntityManager.getEntity(ID)->getBlueRepeat();
+	return _core->_terrainEntityManager.getEntity(ID)->getBlueTextureRepeat();
 }
 
 const float FabiEngine3D::terrain_getLightness(const string& ID) const

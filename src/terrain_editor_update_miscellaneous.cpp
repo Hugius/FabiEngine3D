@@ -10,9 +10,9 @@ void TerrainEditor::_updateMiscellaneousMenu()
 	{
 		// Temporary values
 		auto textureRepeat = _fe3d.terrain_getTextureRepeat(_currentTerrainID);
-		auto redRepeat = _fe3d.terrain_getRedRepeat(_currentTerrainID);
-		auto greenRepeat = _fe3d.terrain_getGreenRepeat(_currentTerrainID);
-		auto blueRepeat = _fe3d.terrain_getBlueRepeat(_currentTerrainID);
+		auto redTextureRepeat = _fe3d.terrain_getRedTextureRepeat(_currentTerrainID);
+		auto greenTextureRepeat = _fe3d.terrain_getGreenTextureRepeat(_currentTerrainID);
+		auto blueTextureRepeat = _fe3d.terrain_getBlueTextureRepeat(_currentTerrainID);
 		auto hasBlendMap = _fe3d.terrain_hasBlendMap(_currentTerrainID);
 		auto hasDiffuseMap = _fe3d.terrain_hasDiffuseMap(_currentTerrainID);
 		auto hasNormalMap = _fe3d.terrain_hasNormalMap(_currentTerrainID);
@@ -33,17 +33,17 @@ void TerrainEditor::_updateMiscellaneousMenu()
 		{
 			_gui.getOverlay()->createValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("redRepeat")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("redTextureRepeat")->isHovered())
 		{
-			_gui.getOverlay()->createValueForm("redRepeat", "Red Repeat", redRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("redTextureRepeat", "Red Repeat", redTextureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenRepeat")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenTextureRepeat")->isHovered())
 		{
-			_gui.getOverlay()->createValueForm("greenRepeat", "Green Repeat", greenRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("greenTextureRepeat", "Green Repeat", greenTextureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueRepeat")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueTextureRepeat")->isHovered())
 		{
-			_gui.getOverlay()->createValueForm("blueRepeat", "Blue Repeat", blueRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("blueTextureRepeat", "Blue Repeat", blueTextureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
@@ -51,23 +51,23 @@ void TerrainEditor::_updateMiscellaneousMenu()
 		{
 			_fe3d.terrain_setTextureRepeat(_currentTerrainID, textureRepeat);
 		}
-		if(_gui.getOverlay()->checkValueForm("redRepeat", redRepeat))
+		if(_gui.getOverlay()->checkValueForm("redTextureRepeat", redTextureRepeat))
 		{
-			_fe3d.terrain_setRedRepeat(_currentTerrainID, redRepeat);
+			_fe3d.terrain_setRedTextureRepeat(_currentTerrainID, redTextureRepeat);
 		}
-		if(_gui.getOverlay()->checkValueForm("greenRepeat", greenRepeat))
+		if(_gui.getOverlay()->checkValueForm("greenTextureRepeat", greenTextureRepeat))
 		{
-			_fe3d.terrain_setGreenRepeat(_currentTerrainID, greenRepeat);
+			_fe3d.terrain_setGreenTextureRepeat(_currentTerrainID, greenTextureRepeat);
 		}
-		if(_gui.getOverlay()->checkValueForm("blueRepeat", blueRepeat))
+		if(_gui.getOverlay()->checkValueForm("blueTextureRepeat", blueTextureRepeat))
 		{
-			_fe3d.terrain_setBlueRepeat(_currentTerrainID, blueRepeat);
+			_fe3d.terrain_setBlueTextureRepeat(_currentTerrainID, blueTextureRepeat);
 		}
 
 		// Update buttons hoverability
 		screen->getButton("textureRepeat")->setHoverable(hasDiffuseMap || hasNormalMap);
-		screen->getButton("redRepeat")->setHoverable(hasRedDiffuseMap || hasRedNormalMap);
-		screen->getButton("greenRepeat")->setHoverable(hasGreenDiffuseMap || hasGreenNormalMap);
-		screen->getButton("blueRepeat")->setHoverable(hasBlueDiffuseMap || hasBlueNormalMap);
+		screen->getButton("redTextureRepeat")->setHoverable(hasRedDiffuseMap || hasRedNormalMap);
+		screen->getButton("greenTextureRepeat")->setHoverable(hasGreenDiffuseMap || hasGreenNormalMap);
+		screen->getButton("blueTextureRepeat")->setHoverable(hasBlueDiffuseMap || hasBlueNormalMap);
 	}
 }

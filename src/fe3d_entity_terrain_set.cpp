@@ -176,19 +176,19 @@ void FabiEngine3D::terrain_setBlueNormalMap(const string& ID, const string& valu
 	}
 }
 
-void FabiEngine3D::terrain_setRedRepeat(const string& ID, float value)
+void FabiEngine3D::terrain_setRedTextureRepeat(const string& ID, float value)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setRedRepeat(value);
+	_core->_terrainEntityManager.getEntity(ID)->setRedTextureRepeat(value);
 }
 
-void FabiEngine3D::terrain_setGreenRepeat(const string& ID, float value)
+void FabiEngine3D::terrain_setGreenTextureRepeat(const string& ID, float value)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setGreenRepeat(value);
+	_core->_terrainEntityManager.getEntity(ID)->setGreenTextureRepeat(value);
 }
 
-void FabiEngine3D::terrain_setBlueRepeat(const string& ID, float value)
+void FabiEngine3D::terrain_setBlueTextureRepeat(const string& ID, float value)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setBlueRepeat(value);
+	_core->_terrainEntityManager.getEntity(ID)->setBlueTextureRepeat(value);
 }
 
 void FabiEngine3D::terrain_setSpecularShininess(const string& ID, float value)

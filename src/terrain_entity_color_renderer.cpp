@@ -135,9 +135,9 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 		_shader.uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus.isWireframeRenderingEnabled()));
 		_shader.uploadUniform("u_isSpecular", entity->isSpecular());
 		_shader.uploadUniform("u_textureRepeat", entity->getTextureRepeat());
-		_shader.uploadUniform("u_redRepeat", entity->getRedRepeat());
-		_shader.uploadUniform("u_greenRepeat", entity->getGreenRepeat());
-		_shader.uploadUniform("u_blueRepeat", entity->getBlueRepeat());
+		_shader.uploadUniform("u_redTextureRepeat", entity->getRedTextureRepeat());
+		_shader.uploadUniform("u_greenTextureRepeat", entity->getGreenTextureRepeat());
+		_shader.uploadUniform("u_blueTextureRepeat", entity->getBlueTextureRepeat());
 		_shader.uploadUniform("u_lightness", entity->getLightness());
 		_shader.uploadUniform("u_specularShininess", entity->getSpecularShininess());
 		_shader.uploadUniform("u_specularIntensity", entity->getSpecularIntensity());

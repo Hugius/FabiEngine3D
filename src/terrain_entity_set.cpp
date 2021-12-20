@@ -128,19 +128,19 @@ void TerrainEntity::setTextureRepeat(float value)
 	_textureRepeat = max(0.0f, value);
 }
 
-void TerrainEntity::setRedRepeat(float value)
+void TerrainEntity::setRedTextureRepeat(float value)
 {
-	_redRepeat = max(0.0f, value);
+	_redTextureRepeat = max(0.0f, value);
 }
 
-void TerrainEntity::setGreenRepeat(float value)
+void TerrainEntity::setGreenTextureRepeat(float value)
 {
-	_greenRepeat = max(0.0f, value);
+	_greenTextureRepeat = max(0.0f, value);
 }
 
-void TerrainEntity::setBlueRepeat(float value)
+void TerrainEntity::setBlueTextureRepeat(float value)
 {
-	_blueRepeat = max(0.0f, value);
+	_blueTextureRepeat = max(0.0f, value);
 }
 
 void TerrainEntity::setSize(float value)

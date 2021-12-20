@@ -42,7 +42,13 @@
 - **Position**: the XYZ position of the mesh
   - Type: `decimal3`
   - Constraints: none
+- **Position Target**: the target XYZ position of the mesh
+  - Type: `decimal3`
+  - Constraints: none
 - **Rotation**: the XYZ rotation of the mesh
+  - Type: `decimal3`
+  - Constraints: between `0.0` and `360.0`
+- **Rotation Target**: the target XYZ rotation of the mesh
   - Type: `decimal3`
   - Constraints: between `0.0` and `360.0`
 - **Rotation Origin**: the XYZ position that the mesh rotates around
@@ -51,12 +57,6 @@
 - **Size**: the XYZ size multiplier of the mesh
   - Type: `decimal3`
   - Constraints: at least `0.0`
-- **Position Target**: the target XYZ position of the mesh
-  - Type: `decimal3`
-  - Constraints: none
-- **Rotation Target**: the target XYZ rotation of the mesh
-  - Type: `decimal3`
-  - Constraints: between `0.0` and `360.0`
 - **Size Target**: the target XYZ size multiplier of the mesh
   - Type: `decimal3`
   - Constraints: at least `0.0`

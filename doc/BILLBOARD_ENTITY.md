@@ -30,12 +30,12 @@
 - **Position**: the XYZ position of the mesh
   - Type: `decimal3`
   - Constraints: none
-- **Rotation**: the XYZ rotation of the mesh
-  - Type: `decimal3`
-  - Constraints: between `0.0` and `360.0`
 - **Position Target**: the target XYZ position of the mesh
   - Type: `decimal3`
   - Constraints: none
+- **Rotation**: the XYZ rotation of the mesh
+  - Type: `decimal3`
+  - Constraints: between `0.0` and `360.0`
 - **Rotation Target**: the target XYZ rotation of the mesh
   - Type: `decimal3`
   - Constraints: between `0.0` and `360.0`

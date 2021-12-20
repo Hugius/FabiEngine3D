@@ -15,12 +15,12 @@
 - **Position**: the XYZ position of the mesh
   - Type: `decimal3`
   - Constraints: none
-- **Size**: the XYZ size of the mesh
-  - Type: `decimal3`
-  - Constraints: at least `0.0`
  **Position Target**: the target XYZ position of the mesh
   - Type: `decimal3`
   - Constraints: none
+- **Size**: the XYZ size of the mesh
+  - Type: `decimal3`
+  - Constraints: at least `0.0`
 - **Size Target**: the target XYZ size of the mesh
   - Type: `decimal3`
   - Constraints: at least `0.0`

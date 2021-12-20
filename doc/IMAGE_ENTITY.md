@@ -24,12 +24,12 @@
 - **Position**: the XY position of the mesh
   - Type: `decimal2`
   - Constraints: none
-- **Size**: the XY size of the mesh
-  - Type: `decimal2`
-  - Constraints: at least `0.0`
 - **Position Target**: the target XY position of the mesh
   - Type: `decimal2`
   - Constraints: none
+- **Size**: the XY size of the mesh
+  - Type: `decimal2`
+  - Constraints: at least `0.0`
 - **Size Target**: the target XY size of the mesh
   - Type: `decimal2`
   - Constraints: at least `0.0`
@@ -39,6 +39,9 @@
 - **Rotation Target**: the target XYZ rotation of the mesh
   - Type: `decimal`
   - Constraints: between `0.0` and `360.0`
+- **Transparency**: the transparency of the fragments
+  - Type: `decimal`
+  - Constraints: between `0.0` and `1.0`
 - **Position Target Speed**: the speed with which the mesh moves to the target position
   - Type: `decimal`
   - Constraints: at least `0.0`
@@ -48,9 +51,6 @@
 - **Size Target Speed**: the speed with which the mesh scales to the target size
   - Type: `decimal`
   - Constraints: at least `0.0`
-- **Transparency**: the transparency of the fragments
-  - Type: `decimal`
-  - Constraints: between `0.0` and `1.0`
 - **Mirrored Horizontally**: the diffuse map is mirrored horizontally
   - Type: `boolean`
   - Constraints: none

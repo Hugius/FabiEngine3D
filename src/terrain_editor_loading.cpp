@@ -39,8 +39,8 @@ const vector<string> TerrainEditor::getTexturePathsFromFile() const
 	{
 		// Values
 		string terrainID, heightMapPath, diffuseMapPath, normalMapPath,
-			normalMapPathR, normalMapPathG, normalMapPathB,
-			blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
+			redNormalMapPath, greenNormalMapPath, blueNormalMapPath,
+			blendMapPath, redDiffuseMapPath, greenDiffuseMapPath, blueDiffuseMapPath;
 		float maxHeight, textureRepeat, lightness, redRepeat, greenRepeat, blueRepeat;
 
 		// For file extraction
@@ -55,38 +55,38 @@ const vector<string> TerrainEditor::getTexturePathsFromFile() const
 			textureRepeat >>
 			lightness >>
 			blendMapPath >>
-			blendMapPathR >>
-			blendMapPathG >>
-			blendMapPathB >>
+			redDiffuseMapPath >>
+			greenDiffuseMapPath >>
+			blueDiffuseMapPath >>
 			redRepeat >>
 			greenRepeat >>
 			blueRepeat >>
 			normalMapPath >>
-			normalMapPathR >>
-			normalMapPathG >>
-			normalMapPathB;
+			redNormalMapPath >>
+			greenNormalMapPath >>
+			blueNormalMapPath;
 
 		// Convert empty string
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 		normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
-		normalMapPathR = (normalMapPathR == "?") ? "" : normalMapPathR;
-		normalMapPathG = (normalMapPathG == "?") ? "" : normalMapPathG;
-		normalMapPathB = (normalMapPathB == "?") ? "" : normalMapPathB;
+		redNormalMapPath = (redNormalMapPath == "?") ? "" : redNormalMapPath;
+		greenNormalMapPath = (greenNormalMapPath == "?") ? "" : greenNormalMapPath;
+		blueNormalMapPath = (blueNormalMapPath == "?") ? "" : blueNormalMapPath;
 		blendMapPath = (blendMapPath == "?") ? "" : blendMapPath;
-		blendMapPathR = (blendMapPathR == "?") ? "" : blendMapPathR;
-		blendMapPathG = (blendMapPathG == "?") ? "" : blendMapPathG;
-		blendMapPathB = (blendMapPathB == "?") ? "" : blendMapPathB;
+		redDiffuseMapPath = (redDiffuseMapPath == "?") ? "" : redDiffuseMapPath;
+		greenDiffuseMapPath = (greenDiffuseMapPath == "?") ? "" : greenDiffuseMapPath;
+		blueDiffuseMapPath = (blueDiffuseMapPath == "?") ? "" : blueDiffuseMapPath;
 
 		// Convert spaces
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
-		replace(normalMapPathR.begin(), normalMapPathR.end(), '?', ' ');
-		replace(normalMapPathG.begin(), normalMapPathG.end(), '?', ' ');
-		replace(normalMapPathB.begin(), normalMapPathB.end(), '?', ' ');
+		replace(redNormalMapPath.begin(), redNormalMapPath.end(), '?', ' ');
+		replace(greenNormalMapPath.begin(), greenNormalMapPath.end(), '?', ' ');
+		replace(blueNormalMapPath.begin(), blueNormalMapPath.end(), '?', ' ');
 		replace(blendMapPath.begin(), blendMapPath.end(), '?', ' ');
-		replace(blendMapPathR.begin(), blendMapPathR.end(), '?', ' ');
-		replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
-		replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
+		replace(redDiffuseMapPath.begin(), redDiffuseMapPath.end(), '?', ' ');
+		replace(greenDiffuseMapPath.begin(), greenDiffuseMapPath.end(), '?', ' ');
+		replace(blueDiffuseMapPath.begin(), blueDiffuseMapPath.end(), '?', ' ');
 
 		// Diffuse map
 		if(!diffuseMapPath.empty())
@@ -115,42 +115,42 @@ const vector<string> TerrainEditor::getTexturePathsFromFile() const
 		}
 
 		// Normal map R
-		if(!normalMapPathR.empty())
+		if(!redNormalMapPath.empty())
 		{
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				normalMapPathR = string("projects\\" + _currentProjectID + "\\" + normalMapPathR);
+				redNormalMapPath = string("projects\\" + _currentProjectID + "\\" + redNormalMapPath);
 			}
 
 			// Save path
-			texturePaths.push_back(normalMapPathR);
+			texturePaths.push_back(redNormalMapPath);
 		}
 
 		// Normal map G
-		if(!normalMapPathG.empty())
+		if(!greenNormalMapPath.empty())
 		{
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				normalMapPathG = string("projects\\" + _currentProjectID + "\\" + normalMapPathG);
+				greenNormalMapPath = string("projects\\" + _currentProjectID + "\\" + greenNormalMapPath);
 			}
 
 			// Save path
-			texturePaths.push_back(normalMapPathG);
+			texturePaths.push_back(greenNormalMapPath);
 		}
 
 		// Normal map B
-		if(!normalMapPathB.empty())
+		if(!blueNormalMapPath.empty())
 		{
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				normalMapPathB = string("projects\\" + _currentProjectID + "\\" + normalMapPathB);
+				blueNormalMapPath = string("projects\\" + _currentProjectID + "\\" + blueNormalMapPath);
 			}
 
 			// Save path
-			texturePaths.push_back(normalMapPathB);
+			texturePaths.push_back(blueNormalMapPath);
 		}
 
 		// Blend map
@@ -167,42 +167,42 @@ const vector<string> TerrainEditor::getTexturePathsFromFile() const
 		}
 
 		// Blend map R
-		if(!blendMapPathR.empty())
+		if(!redDiffuseMapPath.empty())
 		{
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				blendMapPathR = string("projects\\" + _currentProjectID + "\\" + blendMapPathR);
+				redDiffuseMapPath = string("projects\\" + _currentProjectID + "\\" + redDiffuseMapPath);
 			}
 
 			// Save path
-			texturePaths.push_back(blendMapPathR);
+			texturePaths.push_back(redDiffuseMapPath);
 		}
 
 		// Blend map G
-		if(!blendMapPathG.empty())
+		if(!greenDiffuseMapPath.empty())
 		{
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				blendMapPathG = string("projects\\" + _currentProjectID + "\\" + blendMapPathG);
+				greenDiffuseMapPath = string("projects\\" + _currentProjectID + "\\" + greenDiffuseMapPath);
 			}
 
 			// Save path
-			texturePaths.push_back(blendMapPathG);
+			texturePaths.push_back(greenDiffuseMapPath);
 		}
 
 		// Blend map B
-		if(!blendMapPathB.empty())
+		if(!blueDiffuseMapPath.empty())
 		{
 			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
-				blendMapPathB = string("projects\\" + _currentProjectID + "\\" + blendMapPathB);
+				blueDiffuseMapPath = string("projects\\" + _currentProjectID + "\\" + blueDiffuseMapPath);
 			}
 
 			// Save path
-			texturePaths.push_back(blendMapPathB);
+			texturePaths.push_back(blueDiffuseMapPath);
 		}
 	}
 
@@ -311,8 +311,8 @@ const bool TerrainEditor::loadFromFile()
 	{
 		// Values
 		string terrainID, heightMapPath, diffuseMapPath, normalMapPath,
-			normalMapPathR, normalMapPathG, normalMapPathB,
-			blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
+			redNormalMapPath, greenNormalMapPath, blueNormalMapPath,
+			blendMapPath, redDiffuseMapPath, greenDiffuseMapPath, blueDiffuseMapPath;
 		float maxHeight, textureRepeat, lightness, redRepeat, greenRepeat, blueRepeat, specularShininess, specularIntensity;
 		bool isSpecular;
 
@@ -328,16 +328,16 @@ const bool TerrainEditor::loadFromFile()
 			textureRepeat >>
 			lightness >>
 			blendMapPath >>
-			blendMapPathR >>
-			blendMapPathG >>
-			blendMapPathB >>
+			redDiffuseMapPath >>
+			greenDiffuseMapPath >>
+			blueDiffuseMapPath >>
 			redRepeat >>
 			greenRepeat >>
 			blueRepeat >>
 			normalMapPath >>
-			normalMapPathR >>
-			normalMapPathG >>
-			normalMapPathB >>
+			redNormalMapPath >>
+			greenNormalMapPath >>
+			blueNormalMapPath >>
 			isSpecular >>
 			specularShininess >>
 			specularIntensity;
@@ -346,25 +346,25 @@ const bool TerrainEditor::loadFromFile()
 		heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 		normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
-		normalMapPathR = (normalMapPathR == "?") ? "" : normalMapPathR;
-		normalMapPathG = (normalMapPathG == "?") ? "" : normalMapPathG;
-		normalMapPathB = (normalMapPathB == "?") ? "" : normalMapPathB;
+		redNormalMapPath = (redNormalMapPath == "?") ? "" : redNormalMapPath;
+		greenNormalMapPath = (greenNormalMapPath == "?") ? "" : greenNormalMapPath;
+		blueNormalMapPath = (blueNormalMapPath == "?") ? "" : blueNormalMapPath;
 		blendMapPath = (blendMapPath == "?") ? "" : blendMapPath;
-		blendMapPathR = (blendMapPathR == "?") ? "" : blendMapPathR;
-		blendMapPathG = (blendMapPathG == "?") ? "" : blendMapPathG;
-		blendMapPathB = (blendMapPathB == "?") ? "" : blendMapPathB;
+		redDiffuseMapPath = (redDiffuseMapPath == "?") ? "" : redDiffuseMapPath;
+		greenDiffuseMapPath = (greenDiffuseMapPath == "?") ? "" : greenDiffuseMapPath;
+		blueDiffuseMapPath = (blueDiffuseMapPath == "?") ? "" : blueDiffuseMapPath;
 
 		// Convert spaces
 		replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
-		replace(normalMapPathR.begin(), normalMapPathR.end(), '?', ' ');
-		replace(normalMapPathG.begin(), normalMapPathG.end(), '?', ' ');
-		replace(normalMapPathB.begin(), normalMapPathB.end(), '?', ' ');
+		replace(redNormalMapPath.begin(), redNormalMapPath.end(), '?', ' ');
+		replace(greenNormalMapPath.begin(), greenNormalMapPath.end(), '?', ' ');
+		replace(blueNormalMapPath.begin(), blueNormalMapPath.end(), '?', ' ');
 		replace(blendMapPath.begin(), blendMapPath.end(), '?', ' ');
-		replace(blendMapPathR.begin(), blendMapPathR.end(), '?', ' ');
-		replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
-		replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
+		replace(redDiffuseMapPath.begin(), redDiffuseMapPath.end(), '?', ' ');
+		replace(greenDiffuseMapPath.begin(), greenDiffuseMapPath.end(), '?', ' ');
+		replace(blueDiffuseMapPath.begin(), blueDiffuseMapPath.end(), '?', ' ');
 
 		// Convert to long path
 		if(!Config::getInst().isApplicationExported())
@@ -408,42 +408,42 @@ const bool TerrainEditor::loadFromFile()
 			}
 
 			// Normal map R
-			if(!normalMapPathR.empty())
+			if(!redNormalMapPath.empty())
 			{
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
-					normalMapPathR = string("projects\\" + _currentProjectID + "\\" + normalMapPathR);
+					redNormalMapPath = string("projects\\" + _currentProjectID + "\\" + redNormalMapPath);
 				}
 
 				// Set path
-				_fe3d.terrain_setNormalMapR(terrainID, normalMapPathR);
+				_fe3d.terrain_setRedNormalMap(terrainID, redNormalMapPath);
 			}
 
 			// Normal map G
-			if(!normalMapPathG.empty())
+			if(!greenNormalMapPath.empty())
 			{
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
-					normalMapPathG = string("projects\\" + _currentProjectID + "\\" + normalMapPathG);
+					greenNormalMapPath = string("projects\\" + _currentProjectID + "\\" + greenNormalMapPath);
 				}
 
 				// Set path
-				_fe3d.terrain_setNormalMapG(terrainID, normalMapPathG);
+				_fe3d.terrain_setGreenNormalMap(terrainID, greenNormalMapPath);
 			}
 
 			// Normal map B
-			if(!normalMapPathB.empty())
+			if(!blueNormalMapPath.empty())
 			{
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
-					normalMapPathB = string("projects\\" + _currentProjectID + "\\" + normalMapPathB);
+					blueNormalMapPath = string("projects\\" + _currentProjectID + "\\" + blueNormalMapPath);
 				}
 
 				// Set path
-				_fe3d.terrain_setNormalMapB(terrainID, normalMapPathB);
+				_fe3d.terrain_setBlueNormalMap(terrainID, blueNormalMapPath);
 			}
 
 			// Blend map
@@ -460,42 +460,42 @@ const bool TerrainEditor::loadFromFile()
 			}
 
 			// Blend map R
-			if(!blendMapPathR.empty())
+			if(!redDiffuseMapPath.empty())
 			{
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
-					blendMapPathR = string("projects\\" + _currentProjectID + "\\" + blendMapPathR);
+					redDiffuseMapPath = string("projects\\" + _currentProjectID + "\\" + redDiffuseMapPath);
 				}
 
 				// Set path
-				_fe3d.terrain_setDiffuseMapR(terrainID, blendMapPathR);
+				_fe3d.terrain_setRedDiffuseMap(terrainID, redDiffuseMapPath);
 			}
 
 			// Blend map G
-			if(!blendMapPathG.empty())
+			if(!greenDiffuseMapPath.empty())
 			{
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
-					blendMapPathG = string("projects\\" + _currentProjectID + "\\" + blendMapPathG);
+					greenDiffuseMapPath = string("projects\\" + _currentProjectID + "\\" + greenDiffuseMapPath);
 				}
 
 				// Set path
-				_fe3d.terrain_setDiffuseMapG(terrainID, blendMapPathG);
+				_fe3d.terrain_setGreenDiffuseMap(terrainID, greenDiffuseMapPath);
 			}
 
 			// Blend map B
-			if(!blendMapPathB.empty())
+			if(!blueDiffuseMapPath.empty())
 			{
 				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
-					blendMapPathB = string("projects\\" + _currentProjectID + "\\" + blendMapPathB);
+					blueDiffuseMapPath = string("projects\\" + _currentProjectID + "\\" + blueDiffuseMapPath);
 				}
 
 				// Set path
-				_fe3d.terrain_setDiffuseMapB(terrainID, blendMapPathB);
+				_fe3d.terrain_setBlueDiffuseMap(terrainID, blueDiffuseMapPath);
 			}
 
 			// Set properties

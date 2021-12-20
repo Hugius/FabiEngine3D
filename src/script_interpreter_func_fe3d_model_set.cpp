@@ -336,6 +336,19 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
+	else if(functionName == "fe3d:model_set_lod_entity_id")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				_fe3d.model_setLevelOfDetailEntityID(arguments[0].getString(), arguments[1].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:model_set_lightness")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
@@ -541,6 +554,34 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 				{
 					_fe3d.model_setEmissionIntensity(arguments[0].getString(), arguments[1].getString(), arguments[2].getDecimal());
 					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_reflection_type")
+	{
+		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dModel(arguments[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				{
+					if(arguments[2].getString() == "CUBE")
+					{
+						_fe3d.model_setReflectionType(arguments[0].getString(), arguments[1].getString(), ReflectionType::CUBE);
+						returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+					}
+					else if(arguments[2].getString() == "PLANAR")
+					{
+						_fe3d.model_setReflectionType(arguments[0].getString(), arguments[1].getString(), ReflectionType::PLANAR);
+						returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+					}
+					else
+					{
+						Logger::throwWarning("invalid reflection type!");
+					}
 				}
 			}
 		}

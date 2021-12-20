@@ -25,18 +25,18 @@ public:
 	void setNormalMapPath(const string& value);
 	void setBlendMap(TextureID value);
 	void setBlendMapPath(const string& value);
-	void setDiffuseMapR(TextureID value);
-	void setDiffuseMapPathR(const string& value);
-	void setDiffuseMapG(TextureID value);
-	void setDiffuseMapPathG(const string& value);
-	void setDiffuseMapB(TextureID value);
-	void setDiffuseMapPathB(const string& value);
-	void setNormalMapR(TextureID value);
-	void setNormalMapPathR(const string& value);
-	void setNormalMapG(TextureID value);
-	void setNormalMapPathG(const string& value);
-	void setNormalMapB(TextureID value);
-	void setNormalMapPathB(const string& value);
+	void setRedDiffuseMap(TextureID value);
+	void setRedDiffuseMapPath(const string& value);
+	void setGreenDiffuseMap(TextureID value);
+	void setGreenDiffuseMapPath(const string& value);
+	void setBlueDiffuseMap(TextureID value);
+	void setBlueDiffuseMapPath(const string& value);
+	void setRedNormalMap(TextureID value);
+	void setRedNormalMapPath(const string& value);
+	void setGreenNormalMap(TextureID value);
+	void setGreenNormalMapPath(const string& value);
+	void setBlueNormalMap(TextureID value);
+	void setBlueNormalMapPath(const string& value);
 	void setTextureRepeat(float value);
 	void setRedRepeat(float value);
 	void setGreenRepeat(float value);
@@ -55,12 +55,12 @@ public:
 	const string& getDiffuseMapPath() const;
 	const string& getNormalMapPath() const;
 	const string& getBlendMapPath() const;
-	const string& getDiffuseMapPathR() const;
-	const string& getDiffuseMapPathG() const;
-	const string& getDiffuseMapPathB() const;
-	const string& getNormalMapPathR() const;
-	const string& getNormalMapPathG() const;
-	const string& getNormalMapPathB() const;
+	const string& getRedDiffuseMapPath() const;
+	const string& getGreenDiffuseMapPath() const;
+	const string& getBlueDiffuseMapPath() const;
+	const string& getRedNormalMapPath() const;
+	const string& getGreenNormalMapPath() const;
+	const string& getBlueNormalMapPath() const;
 
 	// FVEC3
 	const vector<fvec3>& getVertices() const;
@@ -89,24 +89,24 @@ public:
 	const bool hasDiffuseMap() const;
 	const bool hasNormalMap() const;
 	const bool hasBlendMap() const;
-	const bool hasDiffuseMapR() const;
-	const bool hasDiffuseMapG() const;
-	const bool hasDiffuseMapB() const;
-	const bool hasNormalMapR() const;
-	const bool hasNormalMapG() const;
-	const bool hasNormalMapB() const;
+	const bool hasRedDiffuseMap() const;
+	const bool hasGreenDiffuseMap() const;
+	const bool hasBlueDiffuseMap() const;
+	const bool hasRedNormalMap() const;
+	const bool hasGreenNormalMap() const;
+	const bool hasBlueNormalMap() const;
 
 	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> getRenderBuffer() const;
 	const TextureID getDiffuseMap() const;
 	const TextureID getNormalMap() const;
 	const TextureID getBlendMap() const;
-	const TextureID getDiffuseMapR() const;
-	const TextureID getDiffuseMapG() const;
-	const TextureID getDiffuseMapB() const;
-	const TextureID getNormalMapR() const;
-	const TextureID getNormalMapG() const;
-	const TextureID getNormalMapB() const;
+	const TextureID getRedDiffuseMap() const;
+	const TextureID getGreenDiffuseMap() const;
+	const TextureID getBlueDiffuseMap() const;
+	const TextureID getRedNormalMap() const;
+	const TextureID getGreenNormalMap() const;
+	const TextureID getBlueNormalMap() const;
 
 private:
 	// STRING
@@ -114,12 +114,12 @@ private:
 	string _diffuseMapPath = "";
 	string _normalMapPath = "";
 	string _blendMapPath = "";
-	string _diffuseMapPathR = "";
-	string _diffuseMapPathG = "";
-	string _diffuseMapPathB = "";
-	string _normalMapPathR = "";
-	string _normalMapPathG = "";
-	string _normalMapPathB = "";
+	string _redDiffuseMapPath = "";
+	string _greenDiffuseMapPath = "";
+	string _blueDiffuseMapPath = "";
+	string _redNormalMapPath = "";
+	string _greenNormalMapPath = "";
+	string _blueNormalMapPath = "";
 
 	// FVEC3
 	vector<fvec3> _vertices;
@@ -151,10 +151,10 @@ private:
 	TextureID _diffuseMap = 0;
 	TextureID _normalMap = 0;
 	TextureID _blendMap = 0;
-	TextureID _diffuseMapR = 0;
-	TextureID _diffuseMapG = 0;
-	TextureID _diffuseMapB = 0;
-	TextureID _normalMapR = 0;
-	TextureID _normalMapG = 0;
-	TextureID _normalMapB = 0;
+	TextureID _redDiffuseMap = 0;
+	TextureID _greenDiffuseMap = 0;
+	TextureID _blueDiffuseMap = 0;
+	TextureID _redNormalMap = 0;
+	TextureID _greenNormalMap = 0;
+	TextureID _blueNormalMap = 0;
 };

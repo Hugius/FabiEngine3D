@@ -92,21 +92,21 @@ const bool WorldEditor::_copyTemplateTerrain(const string& newID, const string& 
 	}
 
 	// Normal map R
-	if(_fe3d.terrain_hasNormalMapR(templateID))
+	if(_fe3d.terrain_hasRedNormalMap(templateID))
 	{
-		_fe3d.terrain_setNormalMapR(newID, _fe3d.terrain_getNormalMapPathR(templateID));
+		_fe3d.terrain_setRedNormalMap(newID, _fe3d.terrain_getRedNormalMapPath(templateID));
 	}
 
 	// Normal map G
-	if(_fe3d.terrain_hasNormalMapG(templateID))
+	if(_fe3d.terrain_hasGreenNormalMap(templateID))
 	{
-		_fe3d.terrain_setNormalMapG(newID, _fe3d.terrain_getNormalMapPathG(templateID));
+		_fe3d.terrain_setGreenNormalMap(newID, _fe3d.terrain_getGreenNormalMapPath(templateID));
 	}
 
 	// Normal map B
-	if(_fe3d.terrain_hasNormalMapB(templateID))
+	if(_fe3d.terrain_hasBlueNormalMap(templateID))
 	{
-		_fe3d.terrain_setNormalMapB(newID, _fe3d.terrain_getNormalMapPathB(templateID));
+		_fe3d.terrain_setBlueNormalMap(newID, _fe3d.terrain_getBlueNormalMapPath(templateID));
 	}
 
 	// Blend map
@@ -116,21 +116,21 @@ const bool WorldEditor::_copyTemplateTerrain(const string& newID, const string& 
 	}
 
 	// Blend map red
-	if(_fe3d.terrain_hasDiffuseMapR(templateID))
+	if(_fe3d.terrain_hasRedDiffuseMap(templateID))
 	{
-		_fe3d.terrain_setDiffuseMapR(newID, _fe3d.terrain_getDiffuseMapPathR(templateID));
+		_fe3d.terrain_setRedDiffuseMap(newID, _fe3d.terrain_getRedDiffuseMapPath(templateID));
 	}
 
 	// Blend map green
-	if(_fe3d.terrain_hasDiffuseMapG(templateID))
+	if(_fe3d.terrain_hasGreenDiffuseMap(templateID))
 	{
-		_fe3d.terrain_setDiffuseMapG(newID, _fe3d.terrain_getDiffuseMapPathG(templateID));
+		_fe3d.terrain_setGreenDiffuseMap(newID, _fe3d.terrain_getGreenDiffuseMapPath(templateID));
 	}
 
 	// Blend map blue
-	if(_fe3d.terrain_hasDiffuseMapB(templateID))
+	if(_fe3d.terrain_hasBlueDiffuseMap(templateID))
 	{
-		_fe3d.terrain_setDiffuseMapB(newID, _fe3d.terrain_getDiffuseMapPathB(templateID));
+		_fe3d.terrain_setBlueDiffuseMap(newID, _fe3d.terrain_getBlueDiffuseMapPath(templateID));
 	}
 
 	// Save ID

@@ -63,64 +63,64 @@ void TerrainEntity::setBlendMapPath(const string& value)
 	_blendMapPath = value;
 }
 
-void TerrainEntity::setDiffuseMapR(TextureID value)
+void TerrainEntity::setRedDiffuseMap(TextureID value)
 {
-	_diffuseMapR = value;
+	_redDiffuseMap = value;
 }
 
-void TerrainEntity::setDiffuseMapPathR(const string& value)
+void TerrainEntity::setRedDiffuseMapPath(const string& value)
 {
-	_diffuseMapPathR = value;
+	_redDiffuseMapPath = value;
 }
 
-void TerrainEntity::setDiffuseMapG(TextureID value)
+void TerrainEntity::setGreenDiffuseMap(TextureID value)
 {
-	_diffuseMapG = value;
+	_greenDiffuseMap = value;
 }
 
-void TerrainEntity::setDiffuseMapPathG(const string& value)
+void TerrainEntity::setGreenDiffuseMapPath(const string& value)
 {
-	_diffuseMapPathG = value;
+	_greenDiffuseMapPath = value;
 }
 
-void TerrainEntity::setDiffuseMapB(TextureID value)
+void TerrainEntity::setBlueDiffuseMap(TextureID value)
 {
-	_diffuseMapB = value;
+	_blueDiffuseMap = value;
 }
 
-void TerrainEntity::setDiffuseMapPathB(const string& value)
+void TerrainEntity::setBlueDiffuseMapPath(const string& value)
 {
-	_diffuseMapPathB = value;
+	_blueDiffuseMapPath = value;
 }
 
-void TerrainEntity::setNormalMapR(TextureID value)
+void TerrainEntity::setRedNormalMap(TextureID value)
 {
-	_normalMapR = value;
+	_redNormalMap = value;
 }
 
-void TerrainEntity::setNormalMapPathR(const string& value)
+void TerrainEntity::setRedNormalMapPath(const string& value)
 {
-	_normalMapPathR = value;
+	_redNormalMapPath = value;
 }
 
-void TerrainEntity::setNormalMapG(TextureID value)
+void TerrainEntity::setGreenNormalMap(TextureID value)
 {
-	_normalMapG = value;
+	_greenNormalMap = value;
 }
 
-void TerrainEntity::setNormalMapPathG(const string& value)
+void TerrainEntity::setGreenNormalMapPath(const string& value)
 {
-	_normalMapPathG = value;
+	_greenNormalMapPath = value;
 }
 
-void TerrainEntity::setNormalMapB(TextureID value)
+void TerrainEntity::setBlueNormalMap(TextureID value)
 {
-	_normalMapB = value;
+	_blueNormalMap = value;
 }
 
-void TerrainEntity::setNormalMapPathB(const string& filePath)
+void TerrainEntity::setBlueNormalMapPath(const string& filePath)
 {
-	_normalMapPathB = filePath;
+	_blueNormalMapPath = filePath;
 }
 
 void TerrainEntity::setTextureRepeat(float value)

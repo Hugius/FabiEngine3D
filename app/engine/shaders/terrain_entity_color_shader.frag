@@ -18,12 +18,12 @@ layout (location = 0) uniform sampler2D u_shadowMap;
 layout (location = 1) uniform sampler2D u_diffuseMap;
 layout (location = 2) uniform sampler2D u_normalMap;
 layout (location = 3) uniform sampler2D u_blendMap;
-layout (location = 4) uniform sampler2D u_diffuseMapR;
-layout (location = 5) uniform sampler2D u_diffuseMapG;
-layout (location = 6) uniform sampler2D u_diffuseMapB;
-layout (location = 7) uniform sampler2D u_normalMapR;
-layout (location = 8) uniform sampler2D u_normalMapG;
-layout (location = 9) uniform sampler2D u_normalMapB;
+layout (location = 4) uniform sampler2D u_redDiffuseMap;
+layout (location = 5) uniform sampler2D u_greenDiffuseMap;
+layout (location = 6) uniform sampler2D u_blueDiffuseMap;
+layout (location = 7) uniform sampler2D u_redNormalMap;
+layout (location = 8) uniform sampler2D u_greenNormalMap;
+layout (location = 9) uniform sampler2D u_blueNormalMap;
 
 // Vector uniforms
 uniform vec3 u_pointlightPositions[MAX_POINTLIGHT_COUNT];
@@ -76,12 +76,12 @@ uniform bool u_isShadowFrameRenderEnabled;
 uniform bool u_hasDiffuseMap;
 uniform bool u_hasNormalMap;
 uniform bool u_hasBlendMap;
-uniform bool u_hasDiffuseMapR;
-uniform bool u_hasDiffuseMapG;
-uniform bool u_hasDiffuseMapB;
-uniform bool u_hasNormalMapR;
-uniform bool u_hasNormalMapG;
-uniform bool u_hasNormalMapB;
+uniform bool u_hasRedDiffuseMap;
+uniform bool u_hasGreenDiffuseMap;
+uniform bool u_hasBlueDiffuseMap;
+uniform bool u_hasRedNormalMap;
+uniform bool u_hasGreenNormalMap;
+uniform bool u_hasBlueNormalMap;
 
 // Out variables
 layout (location = 0) out vec4 o_primaryColor;
@@ -162,9 +162,9 @@ vec3 calculateDiffuseMapping()
 		}
 
 		// Calculate blending color for every channel
-		vec3 rColor = (u_hasDiffuseMapR ? (texture(u_diffuseMapR, (blendUV * u_redRepeat)).rgb * blendMapColor.r) : vec3(0.0f));
-		vec3 gColor = (u_hasDiffuseMapG ? (texture(u_diffuseMapG, (blendUV * u_greenRepeat)).rgb * blendMapColor.g) : vec3(0.0f));
-		vec3 bColor = (u_hasDiffuseMapB ? (texture(u_diffuseMapB, (blendUV * u_blueRepeat)).rgb * blendMapColor.b) : vec3(0.0f));
+		vec3 rColor = (u_hasRedDiffuseMap ? (texture(u_redDiffuseMap, (blendUV * u_redRepeat)).rgb * blendMapColor.r) : vec3(0.0f));
+		vec3 gColor = (u_hasGreenDiffuseMap ? (texture(u_greenDiffuseMap, (blendUV * u_greenRepeat)).rgb * blendMapColor.g) : vec3(0.0f));
+		vec3 bColor = (u_hasBlueDiffuseMap ? (texture(u_blueDiffuseMap, (blendUV * u_blueRepeat)).rgb * blendMapColor.b) : vec3(0.0f));
 		rColor = pow(rColor, vec3(2.2f));
 		gColor = pow(gColor, vec3(2.2f));
 		bColor = pow(bColor, vec3(2.2f));
@@ -192,7 +192,7 @@ vec3 calculateDiffuseMapping()
 
 vec3 calculateNormalMapping()
 {
-    if (u_hasNormalMap || u_hasNormalMapR || u_hasNormalMapG || u_hasNormalMapB)
+    if (u_hasNormalMap || u_hasRedNormalMap || u_hasGreenNormalMap || u_hasBlueNormalMap)
     {
 		if (u_hasBlendMap) // Blendmapped mixed normal
 		{
@@ -221,9 +221,9 @@ vec3 calculateNormalMapping()
 			}
 			
 			// BlendR normal map
-			if (u_hasNormalMapR)
+			if (u_hasRedNormalMap)
 			{
-				vec3 normal = texture(u_normalMapR, (blendUV * u_redRepeat)).rgb;
+				vec3 normal = texture(u_redNormalMap, (blendUV * u_redRepeat)).rgb;
 				normal *= 2.0f;
 				normal -= 1.0f;
 				totalNormal += (normalize(f_tbnMatrix * normal) * rStrength);
@@ -234,9 +234,9 @@ vec3 calculateNormalMapping()
 			}
 
 			// BlendG normal map
-			if (u_hasNormalMapG)
+			if (u_hasGreenNormalMap)
 			{
-				vec3 normal = texture(u_normalMapG, (blendUV * u_greenRepeat)).rgb;
+				vec3 normal = texture(u_greenNormalMap, (blendUV * u_greenRepeat)).rgb;
 				normal *= 2.0f;
 				normal -= 1.0f;
 				totalNormal += (normalize(f_tbnMatrix * normal) * gStrength);
@@ -247,9 +247,9 @@ vec3 calculateNormalMapping()
 			}
 
 			// BlendB normal map
-			if (u_hasNormalMapB)
+			if (u_hasBlueNormalMap)
 			{
-				vec3 normal = texture(u_normalMapB, (blendUV * u_blueRepeat)).rgb;
+				vec3 normal = texture(u_blueNormalMap, (blendUV * u_blueRepeat)).rgb;
 				normal *= 2.0f;
 				normal -= 1.0f;
 				totalNormal += (normalize(f_tbnMatrix * normal) * bStrength);

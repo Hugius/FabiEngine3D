@@ -16,12 +16,12 @@ void TerrainEditor::_updateMiscellaneousMenu()
 		auto hasBlendMap = _fe3d.terrain_hasBlendMap(_currentTerrainID);
 		auto hasDiffuseMap = _fe3d.terrain_hasDiffuseMap(_currentTerrainID);
 		auto hasNormalMap = _fe3d.terrain_hasNormalMap(_currentTerrainID);
-		auto hasDiffuseMapR = _fe3d.terrain_hasDiffuseMapR(_currentTerrainID);
-		auto hasDiffuseMapG = _fe3d.terrain_hasDiffuseMapG(_currentTerrainID);
-		auto hasDiffuseMapB = _fe3d.terrain_hasDiffuseMapB(_currentTerrainID);
-		auto hasNormalMapR = _fe3d.terrain_hasNormalMapR(_currentTerrainID);
-		auto hasNormalMapG = _fe3d.terrain_hasNormalMapG(_currentTerrainID);
-		auto hasNormalMapB = _fe3d.terrain_hasNormalMapB(_currentTerrainID);
+		auto hasRedDiffuseMap = _fe3d.terrain_hasRedDiffuseMap(_currentTerrainID);
+		auto hasGreenDiffuseMap = _fe3d.terrain_hasGreenDiffuseMap(_currentTerrainID);
+		auto hasBlueDiffuseMap = _fe3d.terrain_hasBlueDiffuseMap(_currentTerrainID);
+		auto hasRedNormalMap = _fe3d.terrain_hasRedNormalMap(_currentTerrainID);
+		auto hasGreenNormalMap = _fe3d.terrain_hasGreenNormalMap(_currentTerrainID);
+		auto hasBlueNormalMap = _fe3d.terrain_hasBlueNormalMap(_currentTerrainID);
 
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
@@ -66,8 +66,8 @@ void TerrainEditor::_updateMiscellaneousMenu()
 
 		// Update buttons hoverability
 		screen->getButton("textureRepeat")->setHoverable(hasDiffuseMap || hasNormalMap);
-		screen->getButton("redRepeat")->setHoverable(hasDiffuseMapR || hasNormalMapR);
-		screen->getButton("greenRepeat")->setHoverable(hasDiffuseMapG || hasNormalMapG);
-		screen->getButton("blueRepeat")->setHoverable(hasDiffuseMapB || hasNormalMapB);
+		screen->getButton("redRepeat")->setHoverable(hasRedDiffuseMap || hasRedNormalMap);
+		screen->getButton("greenRepeat")->setHoverable(hasGreenDiffuseMap || hasGreenNormalMap);
+		screen->getButton("blueRepeat")->setHoverable(hasBlueDiffuseMap || hasBlueNormalMap);
 	}
 }

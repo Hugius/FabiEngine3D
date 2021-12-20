@@ -92,7 +92,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			// Set normal map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clear2dTextureCache(newFilePath);
-			_fe3d.terrain_setNormalMapR(_currentTerrainID, newFilePath);
+			_fe3d.terrain_setRedNormalMap(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenMap")->isHovered())
 		{
@@ -131,7 +131,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			// Set normal map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clear2dTextureCache(newFilePath);
-			_fe3d.terrain_setNormalMapG(_currentTerrainID, newFilePath);
+			_fe3d.terrain_setGreenNormalMap(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueMap")->isHovered())
 		{
@@ -170,14 +170,14 @@ void TerrainEditor::_updateNormalMapMenu()
 			// Set normal map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clear2dTextureCache(newFilePath);
-			_fe3d.terrain_setNormalMapB(_currentTerrainID, newFilePath);
+			_fe3d.terrain_setBlueNormalMap(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
 			_fe3d.terrain_setNormalMap(_currentTerrainID, "");
-			_fe3d.terrain_setNormalMapR(_currentTerrainID, "");
-			_fe3d.terrain_setNormalMapG(_currentTerrainID, "");
-			_fe3d.terrain_setNormalMapB(_currentTerrainID, "");
+			_fe3d.terrain_setRedNormalMap(_currentTerrainID, "");
+			_fe3d.terrain_setGreenNormalMap(_currentTerrainID, "");
+			_fe3d.terrain_setBlueNormalMap(_currentTerrainID, "");
 		}
 
 		// Update buttons hoverability
@@ -186,8 +186,8 @@ void TerrainEditor::_updateNormalMapMenu()
 		screen->getButton("blueMap")->setHoverable(_fe3d.terrain_hasBlendMap(_currentTerrainID));
 		screen->getButton("clearMaps")->setHoverable(
 			_fe3d.terrain_hasNormalMap(_currentTerrainID) ||
-			_fe3d.terrain_hasNormalMapR(_currentTerrainID) ||
-			_fe3d.terrain_hasNormalMapG(_currentTerrainID) ||
-			_fe3d.terrain_hasNormalMapB(_currentTerrainID));
+			_fe3d.terrain_hasRedNormalMap(_currentTerrainID) ||
+			_fe3d.terrain_hasGreenNormalMap(_currentTerrainID) ||
+			_fe3d.terrain_hasBlueNormalMap(_currentTerrainID));
 	}
 }

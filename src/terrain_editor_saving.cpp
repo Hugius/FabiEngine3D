@@ -26,12 +26,12 @@ const bool TerrainEditor::saveToFile() const
 		auto diffuseMapPath = _fe3d.terrain_getDiffuseMapPath(terrainID);
 		auto normalMapPath = _fe3d.terrain_getNormalMapPath(terrainID);
 		auto blendMapPath = _fe3d.terrain_getBlendMapPath(terrainID);
-		auto blendMapPathR = _fe3d.terrain_getDiffuseMapPathR(terrainID);
-		auto blendMapPathG = _fe3d.terrain_getDiffuseMapPathG(terrainID);
-		auto blendMapPathB = _fe3d.terrain_getDiffuseMapPathB(terrainID);
-		auto normalMapPathR = _fe3d.terrain_getNormalMapPathR(terrainID);
-		auto normalMapPathG = _fe3d.terrain_getNormalMapPathG(terrainID);
-		auto normalMapPathB = _fe3d.terrain_getNormalMapPathB(terrainID);
+		auto redDiffuseMapPath = _fe3d.terrain_getRedDiffuseMapPath(terrainID);
+		auto greenDiffuseMapPath = _fe3d.terrain_getGreenDiffuseMapPath(terrainID);
+		auto blueDiffuseMapPath = _fe3d.terrain_getBlueDiffuseMapPath(terrainID);
+		auto redNormalMapPath = _fe3d.terrain_getRedNormalMapPath(terrainID);
+		auto greenNormalMapPath = _fe3d.terrain_getGreenNormalMapPath(terrainID);
+		auto blueNormalMapPath = _fe3d.terrain_getBlueNormalMapPath(terrainID);
 		auto maxHeight = _fe3d.terrain_getMaxHeight(terrainID);
 		auto textureRepeat = _fe3d.terrain_getTextureRepeat(terrainID);
 		auto lightness = _fe3d.terrain_getLightness(terrainID);
@@ -47,36 +47,36 @@ const bool TerrainEditor::saveToFile() const
 		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 		normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 		blendMapPath = string(blendMapPath.empty() ? "" : blendMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
-		blendMapPathR = string(blendMapPathR.empty() ? "" : blendMapPathR.substr(string("projects\\" + _currentProjectID + "\\").size()));
-		blendMapPathG = string(blendMapPathG.empty() ? "" : blendMapPathG.substr(string("projects\\" + _currentProjectID + "\\").size()));
-		blendMapPathB = string(blendMapPathB.empty() ? "" : blendMapPathB.substr(string("projects\\" + _currentProjectID + "\\").size()));
-		normalMapPathR = string(normalMapPathR.empty() ? "" : normalMapPathR.substr(string("projects\\" + _currentProjectID + "\\").size()));
-		normalMapPathG = string(normalMapPathG.empty() ? "" : normalMapPathG.substr(string("projects\\" + _currentProjectID + "\\").size()));
-		normalMapPathB = string(normalMapPathB.empty() ? "" : normalMapPathB.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		redDiffuseMapPath = string(redDiffuseMapPath.empty() ? "" : redDiffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		greenDiffuseMapPath = string(greenDiffuseMapPath.empty() ? "" : greenDiffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		blueDiffuseMapPath = string(blueDiffuseMapPath.empty() ? "" : blueDiffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		redNormalMapPath = string(redNormalMapPath.empty() ? "" : redNormalMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		greenNormalMapPath = string(greenNormalMapPath.empty() ? "" : greenNormalMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
+		blueNormalMapPath = string(blueNormalMapPath.empty() ? "" : blueNormalMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
 		// Convert empty string
 		heightMapPath = (heightMapPath.empty()) ? "?" : heightMapPath;
 		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 		normalMapPath = (normalMapPath.empty()) ? "?" : normalMapPath;
 		blendMapPath = (blendMapPath.empty()) ? "?" : blendMapPath;
-		blendMapPathR = (blendMapPathR.empty()) ? "?" : blendMapPathR;
-		blendMapPathG = (blendMapPathG.empty()) ? "?" : blendMapPathG;
-		blendMapPathB = (blendMapPathB.empty()) ? "?" : blendMapPathB;
-		normalMapPathR = (normalMapPathR.empty()) ? "?" : normalMapPathR;
-		normalMapPathG = (normalMapPathG.empty()) ? "?" : normalMapPathG;
-		normalMapPathB = (normalMapPathB.empty()) ? "?" : normalMapPathB;
+		redDiffuseMapPath = (redDiffuseMapPath.empty()) ? "?" : redDiffuseMapPath;
+		greenDiffuseMapPath = (greenDiffuseMapPath.empty()) ? "?" : greenDiffuseMapPath;
+		blueDiffuseMapPath = (blueDiffuseMapPath.empty()) ? "?" : blueDiffuseMapPath;
+		redNormalMapPath = (redNormalMapPath.empty()) ? "?" : redNormalMapPath;
+		greenNormalMapPath = (greenNormalMapPath.empty()) ? "?" : greenNormalMapPath;
+		blueNormalMapPath = (blueNormalMapPath.empty()) ? "?" : blueNormalMapPath;
 
 		// Convert spaces
 		replace(heightMapPath.begin(), heightMapPath.end(), ' ', '?');
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 		replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
 		replace(blendMapPath.begin(), blendMapPath.end(), ' ', '?');
-		replace(blendMapPathR.begin(), blendMapPathR.end(), ' ', '?');
-		replace(blendMapPathG.begin(), blendMapPathG.end(), ' ', '?');
-		replace(blendMapPathB.begin(), blendMapPathB.end(), ' ', '?');
-		replace(normalMapPathR.begin(), normalMapPathR.end(), ' ', '?');
-		replace(normalMapPathG.begin(), normalMapPathG.end(), ' ', '?');
-		replace(normalMapPathB.begin(), normalMapPathB.end(), ' ', '?');
+		replace(redDiffuseMapPath.begin(), redDiffuseMapPath.end(), ' ', '?');
+		replace(greenDiffuseMapPath.begin(), greenDiffuseMapPath.end(), ' ', '?');
+		replace(blueDiffuseMapPath.begin(), blueDiffuseMapPath.end(), ' ', '?');
+		replace(redNormalMapPath.begin(), redNormalMapPath.end(), ' ', '?');
+		replace(greenNormalMapPath.begin(), greenNormalMapPath.end(), ' ', '?');
+		replace(blueNormalMapPath.begin(), blueNormalMapPath.end(), ' ', '?');
 
 		// Write terrain data to file
 		file <<
@@ -87,16 +87,16 @@ const bool TerrainEditor::saveToFile() const
 			textureRepeat << " " <<
 			lightness << " " <<
 			blendMapPath << " " <<
-			blendMapPathR << " " <<
-			blendMapPathG << " " <<
-			blendMapPathB << " " <<
+			redDiffuseMapPath << " " <<
+			greenDiffuseMapPath << " " <<
+			blueDiffuseMapPath << " " <<
 			redRepeat << " " <<
 			greenRepeat << " " <<
 			blueRepeat << " " <<
 			normalMapPath << " " <<
-			normalMapPathR << " " <<
-			normalMapPathG << " " <<
-			normalMapPathB << " " <<
+			redNormalMapPath << " " <<
+			greenNormalMapPath << " " <<
+			blueNormalMapPath << " " <<
 			isSpecular << " " <<
 			specularShininess << " " <<
 			specularIntensity << endl;

@@ -51,19 +51,19 @@ const bool FabiEngine3D::terrain_hasDiffuseMap(const string& ID) const
 	return _core->_terrainEntityManager.getEntity(ID)->hasDiffuseMap();
 }
 
-const bool FabiEngine3D::terrain_hasDiffuseMapR(const string& ID) const
+const bool FabiEngine3D::terrain_hasRedDiffuseMap(const string& ID) const
 {
-	return _core->_terrainEntityManager.getEntity(ID)->hasDiffuseMapR();
+	return _core->_terrainEntityManager.getEntity(ID)->hasRedDiffuseMap();
 }
 
-const bool FabiEngine3D::terrain_hasDiffuseMapG(const string& ID) const
+const bool FabiEngine3D::terrain_hasGreenDiffuseMap(const string& ID) const
 {
-	return _core->_terrainEntityManager.getEntity(ID)->hasDiffuseMapG();
+	return _core->_terrainEntityManager.getEntity(ID)->hasGreenDiffuseMap();
 }
 
-const bool FabiEngine3D::terrain_hasDiffuseMapB(const string& ID) const
+const bool FabiEngine3D::terrain_hasBlueDiffuseMap(const string& ID) const
 {
-	return _core->_terrainEntityManager.getEntity(ID)->hasDiffuseMapB();
+	return _core->_terrainEntityManager.getEntity(ID)->hasBlueDiffuseMap();
 }
 
 const bool FabiEngine3D::terrain_hasNormalMap(const string& ID) const
@@ -71,19 +71,19 @@ const bool FabiEngine3D::terrain_hasNormalMap(const string& ID) const
 	return _core->_terrainEntityManager.getEntity(ID)->hasNormalMap();
 }
 
-const bool FabiEngine3D::terrain_hasNormalMapR(const string& ID) const
+const bool FabiEngine3D::terrain_hasRedNormalMap(const string& ID) const
 {
-	return _core->_terrainEntityManager.getEntity(ID)->hasNormalMapR();
+	return _core->_terrainEntityManager.getEntity(ID)->hasRedNormalMap();
 }
 
-const bool FabiEngine3D::terrain_hasNormalMapG(const string& ID) const
+const bool FabiEngine3D::terrain_hasGreenNormalMap(const string& ID) const
 {
-	return _core->_terrainEntityManager.getEntity(ID)->hasNormalMapG();
+	return _core->_terrainEntityManager.getEntity(ID)->hasGreenNormalMap();
 }
 
-const bool FabiEngine3D::terrain_hasNormalMapB(const string& ID) const
+const bool FabiEngine3D::terrain_hasBlueNormalMap(const string& ID) const
 {
-	return _core->_terrainEntityManager.getEntity(ID)->hasNormalMapB();
+	return _core->_terrainEntityManager.getEntity(ID)->hasBlueNormalMap();
 }
 
 const float FabiEngine3D::terrain_getPixelHeight(const string& ID, float x, float z) const
@@ -140,34 +140,34 @@ const string& FabiEngine3D::terrain_getBlendMapPath(const string& ID) const
 	return _core->_terrainEntityManager.getEntity(ID)->getBlendMapPath();
 }
 
-const string& FabiEngine3D::terrain_getDiffuseMapPathR(const string& ID) const
+const string& FabiEngine3D::terrain_getRedDiffuseMapPath(const string& ID) const
 {
-	return _core->_terrainEntityManager.getEntity(ID)->getDiffuseMapPathR();
+	return _core->_terrainEntityManager.getEntity(ID)->getRedDiffuseMapPath();
 }
 
-const string& FabiEngine3D::terrain_getDiffuseMapPathG(const string& ID) const
+const string& FabiEngine3D::terrain_getGreenDiffuseMapPath(const string& ID) const
 {
-	return _core->_terrainEntityManager.getEntity(ID)->getDiffuseMapPathG();
+	return _core->_terrainEntityManager.getEntity(ID)->getGreenDiffuseMapPath();
 }
 
-const string& FabiEngine3D::terrain_getDiffuseMapPathB(const string& ID) const
+const string& FabiEngine3D::terrain_getBlueDiffuseMapPath(const string& ID) const
 {
-	return _core->_terrainEntityManager.getEntity(ID)->getDiffuseMapPathB();
+	return _core->_terrainEntityManager.getEntity(ID)->getBlueDiffuseMapPath();
 }
 
-const string& FabiEngine3D::terrain_getNormalMapPathR(const string& ID) const
+const string& FabiEngine3D::terrain_getRedNormalMapPath(const string& ID) const
 {
-	return _core->_terrainEntityManager.getEntity(ID)->getNormalMapPathR();
+	return _core->_terrainEntityManager.getEntity(ID)->getRedNormalMapPath();
 }
 
-const string& FabiEngine3D::terrain_getNormalMapPathG(const string& ID) const
+const string& FabiEngine3D::terrain_getGreenNormalMapPath(const string& ID) const
 {
-	return _core->_terrainEntityManager.getEntity(ID)->getNormalMapPathG();
+	return _core->_terrainEntityManager.getEntity(ID)->getGreenNormalMapPath();
 }
 
-const string& FabiEngine3D::terrain_getNormalMapPathB(const string& ID) const
+const string& FabiEngine3D::terrain_getBlueNormalMapPath(const string& ID) const
 {
-	return _core->_terrainEntityManager.getEntity(ID)->getNormalMapPathB();
+	return _core->_terrainEntityManager.getEntity(ID)->getBlueNormalMapPath();
 }
 
 const fvec3 FabiEngine3D::terrain_getWireframeColor(const string& ID) const

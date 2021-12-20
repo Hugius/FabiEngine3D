@@ -15,34 +15,34 @@ const TextureID TerrainEntity::getBlendMap() const
 	return _blendMap;
 }
 
-const TextureID TerrainEntity::getDiffuseMapR() const
+const TextureID TerrainEntity::getRedDiffuseMap() const
 {
-	return _diffuseMapR;
+	return _redDiffuseMap;
 }
 
-const TextureID TerrainEntity::getDiffuseMapG() const
+const TextureID TerrainEntity::getGreenDiffuseMap() const
 {
-	return _diffuseMapG;
+	return _greenDiffuseMap;
 }
 
-const TextureID TerrainEntity::getDiffuseMapB() const
+const TextureID TerrainEntity::getBlueDiffuseMap() const
 {
-	return _diffuseMapB;
+	return _blueDiffuseMap;
 }
 
-const TextureID TerrainEntity::getNormalMapR() const
+const TextureID TerrainEntity::getRedNormalMap() const
 {
-	return _normalMapR;
+	return _redNormalMap;
 }
 
-const TextureID TerrainEntity::getNormalMapG() const
+const TextureID TerrainEntity::getGreenNormalMap() const
 {
-	return _normalMapG;
+	return _greenNormalMap;
 }
 
-const TextureID TerrainEntity::getNormalMapB() const
+const TextureID TerrainEntity::getBlueNormalMap() const
 {
-	return _normalMapB;
+	return _blueNormalMap;
 }
 
 const string& TerrainEntity::getHeightMapPath() const
@@ -65,34 +65,34 @@ const string& TerrainEntity::getBlendMapPath() const
 	return _blendMapPath;
 }
 
-const string& TerrainEntity::getDiffuseMapPathR() const
+const string& TerrainEntity::getRedDiffuseMapPath() const
 {
-	return _diffuseMapPathR;
+	return _redDiffuseMapPath;
 }
 
-const string& TerrainEntity::getDiffuseMapPathG() const
+const string& TerrainEntity::getGreenDiffuseMapPath() const
 {
-	return _diffuseMapPathG;
+	return _greenDiffuseMapPath;
 }
 
-const string& TerrainEntity::getDiffuseMapPathB() const
+const string& TerrainEntity::getBlueDiffuseMapPath() const
 {
-	return _diffuseMapPathB;
+	return _blueDiffuseMapPath;
 }
 
-const string& TerrainEntity::getNormalMapPathR() const
+const string& TerrainEntity::getRedNormalMapPath() const
 {
-	return _normalMapPathR;
+	return _redNormalMapPath;
 }
 
-const string& TerrainEntity::getNormalMapPathG() const
+const string& TerrainEntity::getGreenNormalMapPath() const
 {
-	return _normalMapPathG;
+	return _greenNormalMapPath;
 }
 
-const string& TerrainEntity::getNormalMapPathB() const
+const string& TerrainEntity::getBlueNormalMapPath() const
 {
-	return _normalMapPathB;
+	return _blueNormalMapPath;
 }
 
 const vector<fvec3>& TerrainEntity::getVertices() const
@@ -200,32 +200,32 @@ const bool TerrainEntity::hasBlendMap() const
 	return (_blendMap != 0);
 }
 
-const bool TerrainEntity::hasDiffuseMapR() const
+const bool TerrainEntity::hasRedDiffuseMap() const
 {
-	return (_diffuseMapR != 0);
+	return (_redDiffuseMap != 0);
 }
 
-const bool TerrainEntity::hasDiffuseMapG() const
+const bool TerrainEntity::hasGreenDiffuseMap() const
 {
-	return (_diffuseMapG != 0);
+	return (_greenDiffuseMap != 0);
 }
 
-const bool TerrainEntity::hasDiffuseMapB() const
+const bool TerrainEntity::hasBlueDiffuseMap() const
 {
-	return (_diffuseMapB != 0);
+	return (_blueDiffuseMap != 0);
 }
 
-const bool TerrainEntity::hasNormalMapR() const
+const bool TerrainEntity::hasRedNormalMap() const
 {
-	return (_normalMapR != 0);
+	return (_redNormalMap != 0);
 }
 
-const bool TerrainEntity::hasNormalMapG() const
+const bool TerrainEntity::hasGreenNormalMap() const
 {
-	return (_normalMapG != 0);
+	return (_greenNormalMap != 0);
 }
 
-const bool TerrainEntity::hasNormalMapB() const
+const bool TerrainEntity::hasBlueNormalMap() const
 {
-	return (_normalMapB != 0);
+	return (_blueNormalMap != 0);
 }

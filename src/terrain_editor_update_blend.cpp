@@ -95,7 +95,7 @@ void TerrainEditor::_updateBlendMapMenu()
 			// Set diffuse map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clear2dTextureCache(newFilePath);
-			_fe3d.terrain_setDiffuseMapR(_currentTerrainID, newFilePath);
+			_fe3d.terrain_setRedDiffuseMap(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenMap")->isHovered())
 		{
@@ -134,7 +134,7 @@ void TerrainEditor::_updateBlendMapMenu()
 			// Set diffuse map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clear2dTextureCache(newFilePath);
-			_fe3d.terrain_setDiffuseMapG(_currentTerrainID, newFilePath);
+			_fe3d.terrain_setGreenDiffuseMap(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueMap")->isHovered())
 		{
@@ -173,14 +173,14 @@ void TerrainEditor::_updateBlendMapMenu()
 			// Set diffuse map
 			const string newFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clear2dTextureCache(newFilePath);
-			_fe3d.terrain_setDiffuseMapB(_currentTerrainID, newFilePath);
+			_fe3d.terrain_setBlueDiffuseMap(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
 			_fe3d.terrain_setBlendMap(_currentTerrainID, "");
-			_fe3d.terrain_setDiffuseMapR(_currentTerrainID, "");
-			_fe3d.terrain_setDiffuseMapG(_currentTerrainID, "");
-			_fe3d.terrain_setDiffuseMapB(_currentTerrainID, "");
+			_fe3d.terrain_setRedDiffuseMap(_currentTerrainID, "");
+			_fe3d.terrain_setGreenDiffuseMap(_currentTerrainID, "");
+			_fe3d.terrain_setBlueDiffuseMap(_currentTerrainID, "");
 		}
 
 		// Update buttons hoverability
@@ -189,8 +189,8 @@ void TerrainEditor::_updateBlendMapMenu()
 		screen->getButton("blueMap")->setHoverable(hasBlendMap);
 		screen->getButton("clearMaps")->setHoverable(
 			_fe3d.terrain_hasBlendMap(_currentTerrainID) ||
-			_fe3d.terrain_hasDiffuseMapR(_currentTerrainID) ||
-			_fe3d.terrain_hasDiffuseMapG(_currentTerrainID) ||
-			_fe3d.terrain_hasDiffuseMapB(_currentTerrainID));
+			_fe3d.terrain_hasRedDiffuseMap(_currentTerrainID) ||
+			_fe3d.terrain_hasGreenDiffuseMap(_currentTerrainID) ||
+			_fe3d.terrain_hasBlueDiffuseMap(_currentTerrainID));
 	}
 }

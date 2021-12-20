@@ -23,8 +23,8 @@
 - Make use of LOD model entities to improve the performance on high-poly meshes.
 - Lower the graphics quality in the project settings to improve your graphics performance if necessary.
 - Clear the messages in the engine logging console if a lot of messages are printed.
-- If your application has text entities of which the content changes a lot, you should enable the property **Dynamic**.
+- Make a text entity dynamic if you want to change its content a lot.
 - Make sure your GPU is giving the maximum computing power to the engine; check your graphics card settings.
-- If you want fast loading times, use as little reflection entities as possible.
+- If you want fast scene loading times, use as little reflection entities as possible.
 - Use the face culling optimization in model entities as much as possible.
-- Make a model entity instanced if you want to render a high amount of that entity.
+- Make a model entity instanced if you want to render a high amounts.

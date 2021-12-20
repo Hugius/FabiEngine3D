@@ -6,6 +6,7 @@
 - You can create/edit/delete animations.
 - Every created animation can be applied to billboard/image entities.
 - You can select a preview texture for the animation playback.
+- The ID of a new animation cannot contain spaces or `@` signs.
 
 ## 2. Controls
 

@@ -5,6 +5,7 @@
 - All billboard entities will be saved in `~\projects\<your_project>\data\billboard.fe3d`.
 - You can create/edit/delete billboard entities.
 - Every created billboard entity can be placed in a world.
+- The ID of a new billboard entity cannot contain spaces or `@` signs.
 
 ## 2. Controls
 

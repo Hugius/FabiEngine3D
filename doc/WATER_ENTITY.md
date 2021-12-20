@@ -15,10 +15,10 @@
 - **DUDV Map Path**: the path of the DUDV map file
   - Type: `string`
   - Constraints: none
-- **Displacement Map Path**: the path of the displacement map file
+- **Normal Map Path**: the path of the normal map file
   - Type: `string`
   - Constraints: none
-- **Normal Map Path**: the path of the normal map file
+- **Displacement Map Path**: the path of the displacement map file
   - Type: `string`
   - Constraints: none
 - **Color**: the RGB color multiplier
@@ -63,6 +63,6 @@
 - **Wireframed**: the mesh is rendered as a wireframe
   - Type: `boolean`
   - Constraints: none
-- **Quality**: determines everything that is captured by reflections/refractions
+- **Quality**: determines what is captured by reflections/refractions
   - Type: `enumeration`
   - Constraints: `SKY` or `SKY_TERRAIN` or `SKY_TERRAIN_MODELS` or `SKY_TERRAIN_MODELS_BILLBOARDS`

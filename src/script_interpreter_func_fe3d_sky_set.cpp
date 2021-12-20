@@ -59,6 +59,22 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string& functionName, 
 			}
 		}
 	}
+	else if(functionName == "fe3d:sky_set_wireframe_color")
+	{
+		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dSky())
+			{
+				_fe3d.sky_setWireframeColor(_fe3d.sky_getSelectedID(), fvec3(
+					arguments[0].getDecimal(),
+					arguments[1].getDecimal(),
+					arguments[2].getDecimal()));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:sky_set_rotation")
 	{
 		auto types = {SVT::DECIMAL};
@@ -68,6 +84,19 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string& functionName, 
 			if(_validateFe3dSky())
 			{
 				_fe3d.sky_setRotation(_fe3d.sky_getSelectedID(), arguments[0].getDecimal());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_set_wireframed")
+	{
+		auto types = {SVT::BOOLEAN};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dSky())
+			{
+				_fe3d.sky_setWireframed(_fe3d.sky_getSelectedID(), arguments[0].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

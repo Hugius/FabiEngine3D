@@ -62,13 +62,13 @@
 - **Texture Repeat**: the amount of times the base textures are repeated
   - Type: `decimal`
   - Constraints: at least `0.0`
-- **Red Repeat**: the amount of times the textures of the red blend map channel are repeated
+- **Red Texture Repeat**: the amount of times the textures of the red blend map channel are repeated
   - Type: `decimal`
   - Constraints: at least `0.0`
-- **Green Repeat**: the amount of times the textures of the green blend map channel are repeated
+- **Green Texture Repeat**: the amount of times the textures of the green blend map channel are repeated
   - Type: `decimal`
   - Constraints: at least `0.0`
-- **Blue Repeat**: the amount of times the textures of the blue blend map channel are repeated
+- **Blue Texture Repeat**: the amount of times the textures of the blue blend map channel are repeated
   - Type: `decimal`
   - Constraints: at least `0.0`
 - **Specular**: specular lighting is rendered on the mesh

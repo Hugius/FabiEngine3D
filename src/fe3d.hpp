@@ -64,12 +64,12 @@ public:
 	void sky_selectMixSky(const string& ID);
 	void sky_setMixValue(float mixValue);
 	void sky_setCubeMaps(const string& ID, const array<string, 6>& value);
-	void sky_setCubeMapRight(const string& ID, const string& value);
-	void sky_setCubeMapLeft(const string& ID, const string& value);
-	void sky_setCubeMapTop(const string& ID, const string& value);
-	void sky_setCubeMapBottom(const string& ID, const string& value);
-	void sky_setCubeMapBack(const string& ID, const string& value);
-	void sky_setCubeMapFront(const string& ID, const string& value);
+	void sky_setRightCubeMap(const string& ID, const string& value);
+	void sky_setLeftCubeMap(const string& ID, const string& value);
+	void sky_setTopCubeMap(const string& ID, const string& value);
+	void sky_setBottomCubeMap(const string& ID, const string& value);
+	void sky_setBackCubeMap(const string& ID, const string& value);
+	void sky_setFrontCubeMap(const string& ID, const string& value);
 	void sky_setLightness(const string& ID, float value);
 	void sky_setRotation(const string& ID, float value);
 	void sky_setColor(const string& ID, fvec3 value);
@@ -79,12 +79,12 @@ public:
 	// SKY - getters
 	const vector<string> sky_getIDs() const;
 	const array<string, 6>& sky_getCubeMapPaths(const string& ID) const;
-	const string& sky_getCubeMapRight(const string& ID) const;
-	const string& sky_getCubeMapLeft(const string& ID) const;
-	const string& sky_getCubeMapTop(const string& ID) const;
-	const string& sky_getCubeMapBottom(const string& ID) const;
-	const string& sky_getCubeMapBack(const string& ID) const;
-	const string& sky_getCubeMapFront(const string& ID) const;
+	const string& sky_getRightCubeMap(const string& ID) const;
+	const string& sky_getLeftCubeMap(const string& ID) const;
+	const string& sky_getTopCubeMap(const string& ID) const;
+	const string& sky_getBottomCubeMap(const string& ID) const;
+	const string& sky_getBackCubeMap(const string& ID) const;
+	const string& sky_getFrontCubeMap(const string& ID) const;
 	const string sky_getSelectedID() const;
 	const string sky_getMixID() const;
 	const fvec3 sky_getWireframeColor(const string& ID) const;
@@ -96,12 +96,12 @@ public:
 	const bool sky_isExisting(const string& ID) const;
 	const bool sky_isVisible(const string& ID) const;
 	const bool sky_isWireframed(const string& ID) const;
-	const bool sky_hasCubeMapRight(const string& ID) const;
-	const bool sky_hasCubeMapLeft(const string& ID) const;
-	const bool sky_hasCubeMapTop(const string& ID) const;
-	const bool sky_hasCubeMapBottom(const string& ID) const;
-	const bool sky_hasCubeMapBack(const string& ID) const;
-	const bool sky_hasCubeMapFront(const string& ID) const;
+	const bool sky_hasRightCubeMap(const string& ID) const;
+	const bool sky_hasLeftCubeMap(const string& ID) const;
+	const bool sky_hasTopCubeMap(const string& ID) const;
+	const bool sky_hasBottomCubeMap(const string& ID) const;
+	const bool sky_hasBackCubeMap(const string& ID) const;
+	const bool sky_hasFrontCubeMap(const string& ID) const;
 
 	// TERRAIN - setters
 	void terrain_create(const string& ID, const string& value);

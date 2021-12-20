@@ -88,8 +88,8 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 		{
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				auto result = _fe3d.text_getPosition(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, _convertGuiPositionFromViewport(result).x));
+				auto result = _convertGuiPositionFromViewport(_fe3d.text_getPosition(arguments[0].getString())).x;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -101,8 +101,8 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 		{
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				auto result = _fe3d.text_getPosition(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, _convertGuiPositionFromViewport(result).y));
+				auto result = _convertGuiPositionFromViewport(_fe3d.text_getPosition(arguments[0].getString())).y;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -119,7 +119,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_get_width")
+	else if(functionName == "fe3d:text_get_size_x")
 	{
 		auto types = {SVT::STRING};
 
@@ -127,12 +127,12 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 		{
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				auto result = _fe3d.text_getSize(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, _convertGuiSizeFromViewport(result).x));
+				auto result = _convertGuiSizeFromViewport(_fe3d.text_getSize(arguments[0].getString())).x;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_get_height")
+	else if(functionName == "fe3d:text_get_size_y")
 	{
 		auto types = {SVT::STRING};
 
@@ -140,8 +140,8 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 		{
 			if(_validateFe3dText(arguments[0].getString()))
 			{
-				auto result = _fe3d.text_getSize(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, _convertGuiSizeFromViewport(result).y));
+				auto result = _convertGuiSizeFromViewport(_fe3d.text_getSize(arguments[0].getString())).y;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -184,6 +184,45 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			}
 		}
 	}
+	else if(functionName == "fe3d:text_get_wireframe_color_r")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dText(arguments[0].getString()))
+			{
+				auto result = _fe3d.text_getColor(arguments[0].getString()).r;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:text_get_wireframe_color_g")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dText(arguments[0].getString()))
+			{
+				auto result = _fe3d.text_getColor(arguments[0].getString()).g;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:text_get_wireframe_color_b")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dText(arguments[0].getString()))
+			{
+				auto result = _fe3d.text_getColor(arguments[0].getString()).b;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:text_get_content")
 	{
 		auto types = {SVT::STRING};
@@ -207,6 +246,45 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			{
 				auto result = _fe3d.text_getTransparency(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:text_is_wireframed")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dText(arguments[0].getString()))
+			{
+				auto result = _fe3d.text_isWireframed(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:text_is_dynamic")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dText(arguments[0].getString()))
+			{
+				auto result = _fe3d.text_isDynamic(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:text_get_font_path")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			if(_validateFe3dText(arguments[0].getString()))
+			{
+				auto result = _fe3d.text_getFontPath(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 			}
 		}
 	}

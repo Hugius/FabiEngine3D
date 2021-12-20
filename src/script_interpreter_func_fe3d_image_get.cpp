@@ -88,8 +88,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 		{
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				auto result = _fe3d.image_getPosition(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, _convertGuiPositionFromViewport(result).x));
+				auto result = _convertGuiPositionFromViewport(_fe3d.image_getPosition(arguments[0].getString())).x;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -101,8 +101,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 		{
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				auto result = _fe3d.image_getPosition(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, _convertGuiPositionFromViewport(result).y));
+				auto result = _convertGuiPositionFromViewport(_fe3d.image_getPosition(arguments[0].getString())).y;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -127,8 +127,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 		{
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				auto result = _fe3d.image_getSize(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, _convertGuiSizeFromViewport(result).x));
+				auto result = _convertGuiSizeFromViewport(_fe3d.image_getSize(arguments[0].getString())).x;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -140,8 +140,8 @@ const bool ScriptInterpreter::_executeFe3dImageGetter(const string& functionName
 		{
 			if(_validateFe3dImage(arguments[0].getString()))
 			{
-				auto result = _fe3d.image_getSize(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, _convertGuiSizeFromViewport(result).y));
+				auto result = _convertGuiSizeFromViewport(_fe3d.image_getSize(arguments[0].getString())).y;
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}

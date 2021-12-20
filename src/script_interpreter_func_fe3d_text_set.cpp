@@ -8,7 +8,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 {
 	if(functionName == "fe3d:text_place")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		auto types = {SVT::STRING, SVT::STRING, SVT::STRING, SVT::BOOLEAN, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
@@ -30,7 +30,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			}
 
 			// Create text
-			_fe3d.text_create(ID, true, true);
+			_fe3d.text_create(ID, true, arguments[3].getBoolean());
 
 			// Set font
 			const auto isExported = Config::getInst().isApplicationExported();
@@ -39,8 +39,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			_fe3d.text_setFont(ID, filePath);
 
 			// Set properties
-			_fe3d.text_setPosition(ID, _convertGuiPositionToViewport(fvec2(arguments[3].getDecimal(), arguments[4].getDecimal())));
-			_fe3d.text_setRotation(ID, arguments[5].getDecimal());
+			_fe3d.text_setPosition(ID, _convertGuiPositionToViewport(fvec2(arguments[4].getDecimal(), arguments[5].getDecimal())));
 			_fe3d.text_setSize(ID, _convertGuiSizeToViewport(fvec2(arguments[6].getDecimal(), arguments[7].getDecimal())));
 			_fe3d.text_setContent(ID, arguments[2].getString());
 

@@ -148,6 +148,22 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
+	else if(functionName == "fe3d:camera_get_min_first_person_pitch")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			auto result = _fe3d.camera_getMinFirstPersonPitch();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+		}
+	}
+	else if(functionName == "fe3d:camera_get_max_first_person_pitch")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			auto result = _fe3d.camera_getMaxFirstPersonPitch();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+		}
+	}
 	else if(functionName == "fe3d:camera_is_third_person_view_enabled")
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
@@ -169,6 +185,22 @@ const bool ScriptInterpreter::_executeFe3dCameraGetter(const string& functionNam
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getThirdPersonPitch();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+		}
+	}
+	else if(functionName == "fe3d:camera_get_min_third_person_pitch")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			auto result = _fe3d.camera_getMinThirdPersonPitch();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+		}
+	}
+	else if(functionName == "fe3d:camera_get_max_third_person_pitch")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			auto result = _fe3d.camera_getMaxThirdPersonPitch();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}

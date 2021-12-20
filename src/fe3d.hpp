@@ -696,8 +696,12 @@ public:
 	const float camera_getPitch() const;
 	const float camera_getFirstPersonYaw() const;
 	const float camera_getFirstPersonPitch() const;
+	const float camera_getMinFirstPersonPitch() const;
+	const float camera_getMaxFirstPersonPitch() const;
 	const float camera_getThirdPersonYaw() const;
 	const float camera_getThirdPersonPitch() const;
+	const float camera_getMinThirdPersonPitch() const;
+	const float camera_getMaxThirdPersonPitch() const;
 	const float camera_getThirdPersonDistance() const;
 	const float camera_getNearDistance() const;
 	const float camera_getFarDistance() const;

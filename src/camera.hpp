@@ -55,8 +55,12 @@ public:
 	const float getPitch() const;
 	const float getFirstPersonYaw() const;
 	const float getFirstPersonPitch() const;
+	const float getMinFirstPersonPitch() const;
+	const float getMaxFirstPersonPitch() const;
 	const float getThirdPersonYaw() const;
 	const float getThirdPersonPitch() const;
+	const float getMinThirdPersonPitch() const;
+	const float getMaxThirdPersonPitch() const;
 	const float getThirdPersonDistance() const;
 	const float getNearDistance() const;
 	const float getFarDistance() const;

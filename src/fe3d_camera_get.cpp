@@ -21,6 +21,16 @@ const float FabiEngine3D::camera_getFirstPersonPitch() const
 	return _core->_camera.getFirstPersonPitch();
 }
 
+const float FabiEngine3D::camera_getMinFirstPersonPitch() const
+{
+	return _core->_camera.getMinFirstPersonPitch();
+}
+
+const float FabiEngine3D::camera_getMaxFirstPersonPitch() const
+{
+	return _core->_camera.getMaxFirstPersonPitch();
+}
+
 const float FabiEngine3D::camera_getThirdPersonYaw() const
 {
 	return _core->_camera.getThirdPersonYaw();
@@ -29,6 +39,16 @@ const float FabiEngine3D::camera_getThirdPersonYaw() const
 const float FabiEngine3D::camera_getThirdPersonPitch() const
 {
 	return _core->_camera.getThirdPersonPitch();
+}
+
+const float FabiEngine3D::camera_getMinThirdPersonPitch() const
+{
+	return _core->_camera.getMinThirdPersonPitch();
+}
+
+const float FabiEngine3D::camera_getMaxThirdPersonPitch() const
+{
+	return _core->_camera.getMaxFirstPersonPitch();
 }
 
 const float FabiEngine3D::camera_getThirdPersonDistance() const

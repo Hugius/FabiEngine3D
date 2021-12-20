@@ -162,6 +162,16 @@ const float Camera::getFirstPersonPitch() const
 	return _pitch;
 }
 
+const float Camera::getMinFirstPersonPitch() const
+{
+	return _minFirstPersonPitch;
+}
+
+const float Camera::getMaxFirstPersonPitch() const
+{
+	return _maxFirstPersonPitch;
+}
+
 const float Camera::getNearDistance() const
 {
 	return _nearDistance;
@@ -185,6 +195,16 @@ const float Camera::getThirdPersonYaw() const
 const float Camera::getThirdPersonPitch() const
 {
 	return _thirdPersonPitch;
+}
+
+const float Camera::getMinThirdPersonPitch() const
+{
+	return _minThirdPersonPitch;
+}
+
+const float Camera::getMaxThirdPersonPitch() const
+{
+	return _maxThirdPersonPitch;
 }
 
 const float Camera::getThirdPersonDistance() const

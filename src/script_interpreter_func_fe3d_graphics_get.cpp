@@ -76,30 +76,6 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:graphics_get_shadow_position_x")
-	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
-		{
-			auto result = _fe3d.gfx_getShadowEyePosition().x;
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
-		}
-	}
-	else if(functionName == "fe3d:graphics_get_shadow_position_y")
-	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
-		{
-			auto result = _fe3d.gfx_getShadowEyePosition().y;
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
-		}
-	}
-	else if(functionName == "fe3d:graphics_get_shadow_position_z")
-	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
-		{
-			auto result = _fe3d.gfx_getShadowEyePosition().z;
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
-		}
-	}
 	else if(functionName == "fe3d:graphics_get_motion_blur_strength")
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))

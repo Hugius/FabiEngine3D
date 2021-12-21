@@ -135,14 +135,14 @@ const float RenderBus::getPlanarReflectionHeight() const
 	return _planarReflectionHeight;
 }
 
-const float RenderBus::getShadowAreaSize() const
+const float RenderBus::getShadowSize() const
 {
-	return _shadowAreaSize;
+	return _shadowSize;
 }
 
-const float RenderBus::getShadowAreaReach() const
+const float RenderBus::getShadowReach() const
 {
-	return _shadowAreaReach;
+	return _shadowReach;
 }
 
 const float RenderBus::getShadowLightness() const

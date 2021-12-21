@@ -598,7 +598,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 			// Data to save
 			auto size = _fe3d.gfx_getShadowSize();
 			auto lightness = _fe3d.gfx_getShadowLightness();
-			auto position = _fe3d.gfx_getShadowEyePosition();
+			auto eye = _fe3d.gfx_getShadowEyePosition();
 			auto center = _fe3d.gfx_getShadowCenterPosition();
 			auto isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
 			auto interval = _fe3d.gfx_getShadowInterval();
@@ -608,7 +608,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 				"GRAPHICS_SHADOWS " <<
 				size << " " <<
 				lightness << " " <<
-				Tools::vec2str(position) << " " <<
+				Tools::vec2str(eye) << " " <<
 				Tools::vec2str(center) << " " <<
 				isFollowingCamera << " " <<
 				interval << endl;

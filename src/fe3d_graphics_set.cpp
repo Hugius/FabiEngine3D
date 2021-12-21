@@ -190,8 +190,8 @@ void FabiEngine3D::gfx_disableShadows(bool mustResetProperties)
 	{
 		_core->_shadowGenerator.setEyePosition(fvec3(0.0f));
 		_core->_shadowGenerator.setCenterPosition(fvec3(0.0f));
-		_core->_shadowGenerator.setAreaSize(0.0f);
-		_core->_shadowGenerator.setAreaReach(0.0f);
+		_core->_shadowGenerator.setSize(0.0f);
+		_core->_shadowGenerator.setReach(0.0f);
 		_core->_shadowGenerator.setLightness(0.0f);
 		_core->_shadowGenerator.setQuality(Config::MIN_SHADOW_QUALITY);
 		_core->_shadowGenerator.setInterval(0);
@@ -398,14 +398,14 @@ void FabiEngine3D::gfx_setShadowCenterPosition(fvec3 value)
 	_core->_shadowGenerator.setCenterPosition(value);
 }
 
-void FabiEngine3D::gfx_setShadowAreaSize(float value)
+void FabiEngine3D::gfx_setShadowSize(float value)
 {
-	_core->_shadowGenerator.setAreaSize(value);
+	_core->_shadowGenerator.setSize(value);
 }
 
-void FabiEngine3D::gfx_setShadowAreaReach(float value)
+void FabiEngine3D::gfx_setShadowReach(float value)
 {
-	_core->_shadowGenerator.setAreaReach(value);
+	_core->_shadowGenerator.setReach(value);
 }
 
 void FabiEngine3D::gfx_setShadowLightness(float value)

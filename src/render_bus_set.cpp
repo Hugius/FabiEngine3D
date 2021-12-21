@@ -140,14 +140,14 @@ void RenderBus::setPlanarReflectionHeight(float value)
 	_planarReflectionHeight = value;
 }
 
-void RenderBus::setShadowAreaSize(float value)
+void RenderBus::setShadowSize(float value)
 {
-	_shadowAreaSize = max(0.0f, value);
+	_shadowSize = max(0.0f, value);
 }
 
-void RenderBus::setShadowAreaReach(float value)
+void RenderBus::setShadowReach(float value)
 {
-	_shadowAreaReach = max(0.0f, value);
+	_shadowReach = max(0.0f, value);
 }
 
 void RenderBus::setShadowLightness(float value)

@@ -18,7 +18,7 @@
 - **Intensity**: the intensity of the light emitted by the ambient lighting
   - Type: `decimal`
   - Constraints: at least `0.0`
-- **Enabled**: ambient lighting is enabled in the world
+- **Enabled**: ambient lighting is enabled
   - Type: `boolean`
   - Constraints: none
 
@@ -41,7 +41,7 @@
 - **Intensity**: the intensity of the light emitted by the directional lighting
   - Type: `decimal`
   - Constraints: at least `0`
-- **Enabled**: directional lighting is enabled in the world
+- **Enabled**: directional lighting is enabled
   - Type: `boolean`
   - Constraints: none
 
@@ -116,14 +116,14 @@
 
 #### 1.9.2 Properties
 
-- **Position**: the position of the shadow source
+- **Eye**: the position of the shadow source
   - Type: `decimal3`
   - Constraints: none
-- **Center**: the point where the shadow source is looking at
+- **Center**: the position to where the shadow source is looking at
   - Type: `decimal3`
   - Constraints: none
 - **Size**: the size of the shadowed area
-  - Type: `decimal3`
+  - Type: `decimal`
   - Constraints: at least `0`
 - **Lightness**: the lightness of the shadows
   - Type: `decimal`
@@ -134,7 +134,7 @@
 - **Interval**: the amount of engine updates between camera follow updates
   - Type: `integer`
   - Constraints: at least `0`
-- **Enabled**: shadows are enabled in the world
+- **Enabled**: shadows are enabled
   - Type: `boolean`
   - Constraints: none
 - **Following Camera**: shadows are following the camera position
@@ -273,7 +273,7 @@
 - **Color**: the color of the fog
   - Type: `decimal3`
   - Constraints: between `0.0` and `1.0`
-- **Enabled**: fog is enabled in the world
+- **Enabled**: fog is enabled
   - Type: `boolean`
   - Constraints: none
 

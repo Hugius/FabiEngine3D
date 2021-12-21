@@ -54,8 +54,8 @@ public:
 	void setDofMaxDistance(float value);
 	void setDofBlurDistance(float value);
 	void setPlanarReflectionHeight(float value);
-	void setShadowAreaSize(float value);
-	void setShadowAreaReach(float value);
+	void setShadowSize(float value);
+	void setShadowReach(float value);
 	void setShadowLightness(float value);
 	void setLensFlareTransparency(float value);
 	void setLensFlareIntensity(float value);
@@ -132,8 +132,8 @@ public:
 	const float getDofMaxDistance() const;
 	const float getDofBlurDistance() const;
 	const float getPlanarReflectionHeight() const;
-	const float getShadowAreaSize() const;
-	const float getShadowAreaReach() const;
+	const float getShadowSize() const;
+	const float getShadowReach() const;
 	const float getShadowLightness() const;
 	const float getLensFlareTransparency() const;
 	const float getLensFlareIntensity() const;
@@ -242,8 +242,8 @@ private:
 	float _dofMaxDistance = 0.0f;
 	float _dofBlurDistance = 0.0f;
 	float _planarReflectionHeight = 0.0f;
-	float _shadowAreaSize = 0.0f;
-	float _shadowAreaReach = 0.0f;
+	float _shadowSize = 0.0f;
+	float _shadowReach = 0.0f;
 	float _shadowLightness = 0.0f;
 	float _lensFlareTransparency = 0.0f;
 	float _lensFlareSensitivity = 1.0f;

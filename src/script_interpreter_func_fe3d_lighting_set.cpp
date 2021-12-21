@@ -76,6 +76,132 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
+	else if(functionName == "fe3d:lighting_set_cube_reflection_quality")
+	{
+		auto types = {SVT::INTEGER};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			_fe3d.gfx_setCubeReflectionQuality(arguments[0].getInteger());
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:lighting_set_planar_reflection_quality")
+	{
+		auto types = {SVT::INTEGER};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			_fe3d.gfx_setPlanarReflectionQuality(arguments[0].getInteger());
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:lighting_set_planar_refraction_quality")
+	{
+		auto types = {SVT::INTEGER};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			_fe3d.gfx_setPlanarRefractionQuality(arguments[0].getInteger());
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:lighting_set_planar_reflection_height")
+	{
+		auto types = {SVT::DECIMAL};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			_fe3d.gfx_setPlanarReflectionHeight(arguments[0].getDecimal());
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:lighting_enable_shadows")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			_fe3d.gfx_enableShadows();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:lighting_disable_shadows")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			_fe3d.gfx_disableShadows(false);
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:lighting_set_shadow_eye")
+	{
+		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			_fe3d.gfx_setShadowEyePosition(fvec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:lighting_set_shadow_center")
+	{
+		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			_fe3d.gfx_setShadowCenterPosition(fvec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:lighting_set_shadow_size")
+	{
+		auto types = {SVT::DECIMAL};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			_fe3d.gfx_setShadowSize(arguments[0].getDecimal());
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:lighting_set_shadow_lightness")
+	{
+		auto types = {SVT::DECIMAL};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			_fe3d.gfx_setShadowLightness(arguments[0].getDecimal());
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:lighting_set_shadow_quality")
+	{
+		auto types = {SVT::INTEGER};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			_fe3d.gfx_setShadowQuality(arguments[0].getInteger());
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:lighting_set_shadow_interval")
+	{
+		auto types = {SVT::INTEGER};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			_fe3d.gfx_setShadowInterval(arguments[0].getInteger());
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:lighting_set_shadow_following_camera")
+	{
+		auto types = {SVT::BOOLEAN};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			_fe3d.gfx_setShadowFollowingCamera(arguments[0].getBoolean());
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
 	else
 	{
 		return false;

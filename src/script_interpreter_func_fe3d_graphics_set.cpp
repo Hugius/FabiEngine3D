@@ -109,32 +109,6 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:graphics_enable_shadows")
-	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
-		{
-			_fe3d.gfx_enableShadows();
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:graphics_disable_shadows")
-	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
-		{
-			_fe3d.gfx_disableShadows(false);
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-		}
-	}
-	else if(functionName == "fe3d:graphics_set_shadow_position")
-	{
-		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
-
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			_fe3d.gfx_setShadowEyePosition(fvec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-		}
-	}
 	else if(functionName == "fe3d:graphics_enable_motion_blur")
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))

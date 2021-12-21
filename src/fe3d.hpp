@@ -777,8 +777,8 @@ public:
 	void gfx_setFogMaxDistance(float value);
 	void gfx_setShadowEyePosition(fvec3 value);
 	void gfx_setShadowCenterPosition(fvec3 value);
-	void gfx_setShadowAreaSize(float value);
-	void gfx_setShadowAreaReach(float value);
+	void gfx_setShadowSize(float value);
+	void gfx_setShadowReach(float value);
 	void gfx_setShadowLightness(float value);
 	void gfx_setShadowQuality(unsigned int value);
 	void gfx_setShadowInterval(unsigned int value);

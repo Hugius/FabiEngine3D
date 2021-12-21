@@ -194,7 +194,7 @@ void WorldEditor::_loadGUI()
 	positions = VPC::calculateButtonPositions(9, CH);
 	leftWindow->createScreen("worldEditorMenuSettingsGraphicsShadows");
 	leftWindow->getScreen("worldEditorMenuSettingsGraphicsShadows")->createButton("isEnabled", fvec2(0.0f, positions[0]), fvec2(TW("Enabled: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
-	leftWindow->getScreen("worldEditorMenuSettingsGraphicsShadows")->createButton("position", fvec2(0.0f, positions[1]), fvec2(TW("Position"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Position", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
+	leftWindow->getScreen("worldEditorMenuSettingsGraphicsShadows")->createButton("eye", fvec2(0.0f, positions[1]), fvec2(TW("Eye"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Eye", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("worldEditorMenuSettingsGraphicsShadows")->createButton("center", fvec2(0.0f, positions[2]), fvec2(TW("Center"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Center", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("worldEditorMenuSettingsGraphicsShadows")->createButton("size", fvec2(0.0f, positions[3]), fvec2(TW("Size"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Size", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("worldEditorMenuSettingsGraphicsShadows")->createButton("lightness", fvec2(0.0f, positions[4]), fvec2(TW("Lightness"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Lightness", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);

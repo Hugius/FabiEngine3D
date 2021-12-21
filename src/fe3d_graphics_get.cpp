@@ -143,12 +143,12 @@ const string& FabiEngine3D::gfx_getLensFlareMapPath() const
 
 const float FabiEngine3D::gfx_getShadowSize() const
 {
-	return _core->_shadowGenerator.getAreaSize();
+	return _core->_shadowGenerator.getSize();
 }
 
 const float FabiEngine3D::gfx_getShadowReach() const
 {
-	return _core->_shadowGenerator.getAreaReach();
+	return _core->_shadowGenerator.getReach();
 }
 
 const float FabiEngine3D::gfx_getShadowLightness() const

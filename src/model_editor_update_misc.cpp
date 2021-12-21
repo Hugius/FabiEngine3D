@@ -33,8 +33,8 @@ void ModelEditor::_updateCamera()
 		const auto distance = _fe3d.camera_getThirdPersonDistance();
 		_fe3d.gfx_setShadowEyePosition(fvec3(cameraLookat + fvec3(distance * 2.0f)));
 		_fe3d.gfx_setShadowCenterPosition(cameraLookat);
-		_fe3d.gfx_setShadowAreaSize(distance * 4.0f);
-		_fe3d.gfx_setShadowAreaReach(distance * 8.0f);
+		_fe3d.gfx_setShadowSize(distance * 4.0f);
+		_fe3d.gfx_setShadowReach(distance * 8.0f);
 	}
 
 	// Check if allowed by GUI

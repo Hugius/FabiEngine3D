@@ -15,7 +15,7 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		auto isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
 		auto size = _fe3d.gfx_getShadowSize();
 		auto lightness = _fe3d.gfx_getShadowLightness();
-		auto position = _fe3d.gfx_getShadowEyePosition();
+		auto eye = _fe3d.gfx_getShadowEyePosition();
 		auto center = _fe3d.gfx_getShadowCenterPosition();
 		auto interval = _fe3d.gfx_getShadowInterval();
 		auto quality = _fe3d.gfx_getShadowQuality();
@@ -43,11 +43,11 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		{
 			_gui.getOverlay()->createValueForm("size", "Size", size, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("eye")->isHovered())
 		{
-			_gui.getOverlay()->createValueForm("positionX", "X", position.x, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui.getOverlay()->createValueForm("positionY", "Y", position.y, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui.getOverlay()->createValueForm("positionZ", "Z", position.z, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("eyeX", "X", eye.x, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("eyeY", "Y", eye.y, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui.getOverlay()->createValueForm("eyeZ", "Z", eye.z, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("center")->isHovered())
 		{
@@ -76,20 +76,20 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 		// Update value forms
 		if(_gui.getOverlay()->checkValueForm("size", size))
 		{
-			_fe3d.gfx_setShadowAreaSize(size);
-			_fe3d.gfx_setShadowAreaReach(size * 2.0f);
+			_fe3d.gfx_setShadowSize(size);
+			_fe3d.gfx_setShadowReach(size * 2.0f);
 		}
-		if(_gui.getOverlay()->checkValueForm("positionX", position.x))
+		if(_gui.getOverlay()->checkValueForm("eyeX", eye.x))
 		{
-			_fe3d.gfx_setShadowEyePosition(position);
+			_fe3d.gfx_setShadowEyePosition(eye);
 		}
-		if(_gui.getOverlay()->checkValueForm("positionY", position.y))
+		if(_gui.getOverlay()->checkValueForm("eyeY", eye.y))
 		{
-			_fe3d.gfx_setShadowEyePosition(position);
+			_fe3d.gfx_setShadowEyePosition(eye);
 		}
-		if(_gui.getOverlay()->checkValueForm("positionZ", position.z))
+		if(_gui.getOverlay()->checkValueForm("eyeZ", eye.z))
 		{
-			_fe3d.gfx_setShadowEyePosition(position);
+			_fe3d.gfx_setShadowEyePosition(eye);
 		}
 		if(_gui.getOverlay()->checkValueForm("centerX", center.x))
 		{
@@ -119,7 +119,7 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 
 		// Update buttons hoverability
 		screen->getButton("size")->setHoverable(isEnabled);
-		screen->getButton("position")->setHoverable(isEnabled);
+		screen->getButton("eye")->setHoverable(isEnabled);
 		screen->getButton("center")->setHoverable(isEnabled);
 		screen->getButton("follow")->setHoverable(isEnabled);
 		screen->getButton("lightness")->setHoverable(isEnabled);

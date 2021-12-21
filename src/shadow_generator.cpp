@@ -9,8 +9,8 @@ ShadowGenerator::ShadowGenerator(RenderBus& renderBus)
 	_renderBus(renderBus),
 	_eyePosition(renderBus.getShadowEyePosition()),
 	_centerPosition(renderBus.getShadowCenterPosition()),
-	_areaSize(renderBus.getShadowAreaSize()),
-	_areaReach(renderBus.getShadowAreaReach()),
+	_size(renderBus.getShadowSize()),
+	_reach(renderBus.getShadowReach()),
 	_lightness(renderBus.getShadowLightness()),
 	_quality(renderBus.getShadowQuality()),
 	_isEnabled(renderBus.isShadowsEnabled())
@@ -40,8 +40,8 @@ void ShadowGenerator::generate()
 	// Temporary values
 	auto newEyePosition = _eyePosition;
 	auto newCenterPosition = _centerPosition;
-	auto newAreaSize = _areaSize;
-	auto newAreaReach = _areaReach;
+	auto newSize = _size;
+	auto newReach = _reach;
 	auto newLightness = _lightness;
 	auto newQuality = _quality;
 	auto newEnabled = _isEnabled;
@@ -62,25 +62,25 @@ void ShadowGenerator::generate()
 	// Update render bus
 	_renderBus.setShadowEyePosition(newEyePosition);
 	_renderBus.setShadowCenterPosition(newCenterPosition);
-	_renderBus.setShadowAreaSize(newAreaSize);
-	_renderBus.setShadowAreaReach(newAreaReach);
+	_renderBus.setShadowSize(newSize);
+	_renderBus.setShadowReach(newReach);
 	_renderBus.setShadowLightness(newLightness);
 	_renderBus.setShadowQuality(newQuality);
 	_renderBus.setShadowsEnabled(newEnabled);
-	
+
 	// Create shadow matrix
-	_renderBus.setShadowMatrix(_createShadowMatrix(newEyePosition, newCenterPosition, newAreaSize, newAreaReach));
+	_renderBus.setShadowMatrix(_createShadowMatrix(newEyePosition, newCenterPosition, newSize, newReach));
 }
 
-const mat44 ShadowGenerator::_createShadowMatrix(fvec3 eyePosition, fvec3 centerPosition, float areaSize, float areaReach) const
+const mat44 ShadowGenerator::_createShadowMatrix(fvec3 eyePosition, fvec3 centerPosition, float size, float reach) const
 {
 	// Temporary values
-	float left = -(areaSize / 2.0f);
-	float right = (areaSize / 2.0f);
-	float bottom = -(areaSize / 2.0f);
-	float top = (areaSize / 2.0f);
+	float left = -(size / 2.0f);
+	float right = (size / 2.0f);
+	float bottom = -(size / 2.0f);
+	float top = (size / 2.0f);
 	float near = NEAR_DISTANCE;
-	float far = areaReach;
+	float far = reach;
 
 	// Matrix generation
 	mat44 viewMatrix = Math::createViewMatrix(eyePosition, centerPosition, fvec3(0.0f, 1.0f, 0.0f));
@@ -116,14 +116,14 @@ void ShadowGenerator::setCenterPosition(fvec3 value)
 	_centerPosition = value;
 }
 
-void ShadowGenerator::setAreaSize(float value)
+void ShadowGenerator::setSize(float value)
 {
-	_areaSize = value;
+	_size = value;
 }
 
-void ShadowGenerator::setAreaReach(float value)
+void ShadowGenerator::setReach(float value)
 {
-	_areaReach = value;
+	_reach = value;
 }
 
 void ShadowGenerator::setLightness(float value)
@@ -146,14 +146,14 @@ const fvec3 ShadowGenerator::getCenterPosition() const
 	return _centerPosition;
 }
 
-const float ShadowGenerator::getAreaSize() const
+const float ShadowGenerator::getSize() const
 {
-	return _areaSize;
+	return _size;
 }
 
-const float ShadowGenerator::getAreaReach() const
+const float ShadowGenerator::getReach() const
 {
-	return _areaReach;
+	return _reach;
 }
 
 const float ShadowGenerator::getLightness() const

@@ -22,20 +22,6 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string& function
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
-	else if(functionName == "fe3d:collision_set_camera_box")
-	{
-		// Bottom top left right front back
-		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
-
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
-		{
-			_fe3d.collision_setCameraBox(
-				arguments[0].getDecimal(), arguments[1].getDecimal(),
-				arguments[2].getDecimal(), arguments[3].getDecimal(),
-				arguments[4].getDecimal(), arguments[5].getDecimal());
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-		}
-	}
 	else if(functionName == "fe3d:collision_enable_camera_response")
 	{
 		auto types = {SVT::BOOLEAN, SVT::BOOLEAN, SVT::BOOLEAN};
@@ -51,6 +37,20 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string& function
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			_fe3d.collision_disableCameraResponse();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
+	else if(functionName == "fe3d:collision_set_camera_box")
+	{
+		// Bottom top left right front back
+		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+
+		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		{
+			_fe3d.collision_setCameraBox(
+				arguments[0].getDecimal(), arguments[1].getDecimal(),
+				arguments[2].getDecimal(), arguments[3].getDecimal(),
+				arguments[4].getDecimal(), arguments[5].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

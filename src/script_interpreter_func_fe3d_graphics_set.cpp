@@ -287,11 +287,11 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_set_sky_exposure_speed")
 	{
-		auto types = {SVT::INTEGER};
+		auto types = {SVT::DECIMAL};
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			_fe3d.gfx_setSkyExposureSpeed(arguments[0].getInteger());
+			_fe3d.gfx_setSkyExposureSpeed(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -301,7 +301,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			_fe3d.gfx_setSkyExposureIntensity(arguments[0].getInteger());
+			_fe3d.gfx_setSkyExposureIntensity(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -317,7 +317,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
-			_fe3d.gfx_disableSkyExposure();
+			_fe3d.gfx_disableSkyExposure(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

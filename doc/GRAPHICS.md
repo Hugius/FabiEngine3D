@@ -228,7 +228,7 @@
 - **Quality**: the quality of the bloom effect
   - Type: `integer`
   - Constraints: between `1` and `5`
-- **Blurs**: the amount of blurs used for the bloom effect
+- **Blur Count**: the amount of blurs used for the bloom effect
   - Type: `integer`
   - Constraints: at least `1`
 - **Enabled**: the bloom effect is enabled

@@ -4,7 +4,15 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
-	if(functionName == "fe3d:graphics_get_min_fog_distance")
+	if(functionName == "fe3d:graphics_is_fog_enabled")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			auto result = _fe3d.gfx_isFogEnabled();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:graphics_get_min_fog_distance")
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
@@ -52,6 +60,22 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
+	else if(functionName == "fe3d:graphics_get_dof_quality")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			auto result = _fe3d.gfx_getDofQuality();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
+		}
+	}
+	else if(functionName == "fe3d:graphics_is_dof_enabled")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			auto result = _fe3d.gfx_isDofEnabled();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+		}
+	}
 	else if(functionName == "fe3d:graphics_is_dof_dynamic")
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
@@ -60,7 +84,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
-	else if(functionName == "fe3d:graphics_get_max_dof_distance")
+	else if(functionName == "fe3d:graphics_get_dof_dynamic_distance")
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
@@ -84,6 +108,30 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
+	else if(functionName == "fe3d:graphics_get_motion_blur_quality")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			auto result = _fe3d.gfx_getMotionBlurQuality();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
+		}
+	}
+	else if(functionName == "fe3d:graphics_is_motion_blur_enabled")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			auto result = _fe3d.gfx_isMotionBlurEnabled();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:graphics_is_lens_flare_enabled")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			auto result = _fe3d.gfx_isLensFlareEnabled();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+		}
+	}
 	else if(functionName == "fe3d:graphics_get_lens_flare_map_path")
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
@@ -100,11 +148,82 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
-	else if(functionName == "fe3d:graphics_get_lens_flare_size")
+	else if(functionName == "fe3d:graphics_get_lens_flare_sensitivity")
 	{
 		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.gfx_getLensFlareSensitivity();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+		}
+	}
+	else if(functionName == "fe3d:graphics_get_bloom_intensity")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			auto result = _fe3d.gfx_getBloomIntensity();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+		}
+	}
+	else if(functionName == "fe3d:graphics_get_bloom_quality")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			auto result = _fe3d.gfx_getBloomQuality();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
+		}
+	}
+	else if(functionName == "fe3d:graphics_get_bloom_blur_count")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			auto result = _fe3d.gfx_getBloomBlurCount();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
+		}
+	}
+	else if(functionName == "fe3d:graphics_is_bloom_enabled")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			auto result = _fe3d.gfx_isBloomEnabled();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:graphics_get_bloom_type")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			auto result = _fe3d.gfx_getBloomType();
+			if(result == BloomType::EVERYTHING)
+			{
+				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "EVERYTHING"));
+			}
+			if(result == BloomType::PARTS)
+			{
+				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "PARTS"));
+			}
+		}
+	}
+	else if(functionName == "fe3d:graphics_is_sky_exposure_enabled")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			auto result = _fe3d.gfx_isSkyExposureEnabled();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+		}
+	}
+	else if(functionName == "fe3d:graphics_get_sky_exposure_speed")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			auto result = _fe3d.gfx_getSkyExposureSpeed();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+		}
+	}
+	else if(functionName == "fe3d:graphics_get_sky_exposure_intensity")
+	{
+		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			auto result = _fe3d.gfx_getSkyExposureIntensity();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}

@@ -591,7 +591,7 @@ void WorldEditor::_updateBloomGraphicsSettingsMenu()
 		{
 			_gui.getOverlay()->createValueForm("intensity", "Bloom Intensity", (intensity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blurs")->isHovered())
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blurCount")->isHovered())
 		{
 			_gui.getOverlay()->createValueForm("blurCount", "Amount Of Blurs", blurCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
@@ -618,7 +618,7 @@ void WorldEditor::_updateBloomGraphicsSettingsMenu()
 		// Update buttons hoverability
 		screen->getButton("type")->setHoverable(isEnabled);
 		screen->getButton("intensity")->setHoverable(isEnabled);
-		screen->getButton("blurs")->setHoverable(isEnabled);
+		screen->getButton("blurCount")->setHoverable(isEnabled);
 		screen->getButton("quality")->setHoverable(isEnabled);
 
 		// Update button text contents

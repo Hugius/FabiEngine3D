@@ -8,7 +8,7 @@
 
 - Ambient lighting is a form of global illumination.
 - The lighting is not casted from a light source.
-- Real world light scattering is mimicked.
+- Real life light scattering is mimicked.
 
 #### 1.1.2 Properties
 
@@ -257,7 +257,7 @@
 
 #### 3.1.1 General
 
-- Fog is a graphical effect that mimics real world fog.
+- Fog is a graphical effect that mimics real life fog.
 
 #### 3.1.2 Properties
 

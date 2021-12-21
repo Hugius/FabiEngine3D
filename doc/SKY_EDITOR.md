@@ -4,7 +4,7 @@
 
 - All sky entities will be saved in `~\projects\<your_project>\data\sky.fe3d`.
 - You can create/edit/delete sky entities will.
-- Every created sky entity can be placed in a world.
+- Every created sky entity can be placed using the world editor or scripting.
 - The ID of a new sky entity cannot contain spaces or `@` signs.
 
 ## 2. Controls

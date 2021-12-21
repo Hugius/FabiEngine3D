@@ -93,10 +93,10 @@
 - **Reflectivity**: the percentage of how reflective the mesh is
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
-- **Min Height**: the minimum world height from which fragments are visible
+- **Min Height**: the minimum Y position from which fragments are visible
   - Type: `decimal`
   - Constraints: none
-- **Max Height**: the maximum world height to which fragments are visible
+- **Max Height**: the maximum Y position to which fragments are visible
   - Type: `decimal`
   - Constraints: none
 - **Transparency**: the transparency of the fragments

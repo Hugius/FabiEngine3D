@@ -139,9 +139,9 @@
 - **Fragment**: every pixel that can possibly end up on your screen
 - **UV Coordinate**: a coordinate (XY) which used for mapping a 2D texture onto a 3D mesh
 - **Normal Vector**: a normalized vector that points in the opposite direction of a surface which is used for lighting calculations
-- **First Person View**: the world is viewed directly through the "eyes" of the camera
-- **Third Person View**: the world is viewed indirectly from a distance
-- **Global Illumination**: an indirect form of global lighting in the world
+- **First Person View**: everything is viewed directly through the "eyes" of the camera
+- **Third Person View**: everything is viewed indirectly from a distance
+- **Global Illumination**: an indirect form of global lighting
 - **Gimbal Lock**: incorrect rotation as a result of 2 parallel rotation axes
 - **RGB**: Red Green Blue
 - **Mouse**: the physical peripheral known as "the mouse"

@@ -5,7 +5,7 @@
 - All model entities will be saved in `~\projects\<your_project>\data\model.fe3d`.
 - You can create/edit/delete model entities.
 - You can create/edit/delete AABB entities for the model entities.
-- Every created model entity can be placed in a world.
+- Every created model entity can be placed using the world editor or scripting.
 - Every created AABB entity is bound its parent model entity.
 - The ID of a new model entity cannot contain spaces or `@` signs.
 - The ID of a new AABB entity cannot contain spaces or `@` signs.

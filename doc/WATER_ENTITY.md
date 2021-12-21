@@ -30,10 +30,10 @@
 - **Speed**: the speed of  the rippling/waving movement
   - Type: `decimal2`
   - Constraints: none
-- **Height**: the Y position of the mesh in world space
+- **Height**: the Y position of the mesh
   - Type: `decimal`
   - Constraints: at least `0.0`
-- **Size**: the XZ size of the mesh in world space
+- **Size**: the XZ size of the mesh
   - Type: `decimal`
   - Constraints: at least `0.0`
 - **Wave Height**: the height of the waves

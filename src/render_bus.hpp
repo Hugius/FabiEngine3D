@@ -51,7 +51,7 @@ public:
 	void setCameraPitch(float value);
 	void setNearDistance(float value);
 	void setFarDistance(float value);
-	void setDofMaxDistance(float value);
+	void setDofDynamicDistance(float value);
 	void setDofBlurDistance(float value);
 	void setPlanarReflectionHeight(float value);
 	void setShadowSize(float value);
@@ -129,7 +129,7 @@ public:
 	const float getCameraPitch() const;
 	const float getNearDistance() const;
 	const float getFarDistance() const;
-	const float getDofMaxDistance() const;
+	const float getDofDynamicDistance() const;
 	const float getDofBlurDistance() const;
 	const float getPlanarReflectionHeight() const;
 	const float getShadowSize() const;
@@ -239,7 +239,7 @@ private:
 	float _cameraPitch = 0.0f;
 	float _nearDistance = 0.0f;
 	float _farDistance = 0.0f;
-	float _dofMaxDistance = 0.0f;
+	float _dofDynamicDistance = 0.0f;
 	float _dofBlurDistance = 0.0f;
 	float _planarReflectionHeight = 0.0f;
 	float _shadowSize = 0.0f;

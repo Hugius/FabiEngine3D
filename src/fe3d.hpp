@@ -789,7 +789,7 @@ public:
 	void gfx_setBloomQuality(unsigned int value);
 	void gfx_setSkyExposureIntensity(float value);
 	void gfx_setSkyExposureSpeed(float value);
-	void gfx_setDofMaxDistance(float value);
+	void gfx_setDofDynamicDistance(float value);
 	void gfx_setDofBlurDistance(float value);
 	void gfx_setDofDynamic(bool value);
 	void gfx_setDofQuality(unsigned int value);
@@ -819,7 +819,7 @@ public:
 	const float gfx_getBloomIntensity() const;
 	const float gfx_getSkyExposureIntensity() const;
 	const float gfx_getSkyExposureSpeed() const;
-	const float gfx_getMaxDofDistance() const;
+	const float gfx_getDofDynamicDistance() const;
 	const float gfx_getDofBlurDistance() const;
 	const float gfx_getLensFlareIntensity() const;
 	const float gfx_getLensFlareSensitivity() const;

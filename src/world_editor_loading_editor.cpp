@@ -621,7 +621,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			// Set DOF
 			_fe3d.gfx_enableDOF();
 			_fe3d.gfx_setDofDynamic(isDynamic);
-			_fe3d.gfx_setDofMaxDistance(maxDistance);
+			_fe3d.gfx_setDofDynamicDistance(maxDistance);
 			_fe3d.gfx_setDofBlurDistance(blurDistance);
 			_fe3d.gfx_setDofQuality(quality);
 		}

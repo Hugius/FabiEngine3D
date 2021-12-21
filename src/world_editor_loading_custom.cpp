@@ -653,7 +653,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 			// Enable DOF
 			_fe3d.gfx_enableDOF();
 			_fe3d.gfx_setDofDynamic(isDynamic);
-			_fe3d.gfx_setDofMaxDistance(maxDistance);
+			_fe3d.gfx_setDofDynamicDistance(maxDistance);
 			_fe3d.gfx_setDofBlurDistance(blurDistance);
 		}
 		else if(lineType == "GRAPHICS_FOG")

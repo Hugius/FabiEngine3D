@@ -186,9 +186,9 @@ const float FabiEngine3D::gfx_getSkyExposureSpeed() const
 	return _core->_skyEntityManager.getExposureSpeed();
 }
 
-const float FabiEngine3D::gfx_getMaxDofDistance() const
+const float FabiEngine3D::gfx_getDofDynamicDistance() const
 {
-	return _core->_renderBus.getDofMaxDistance();
+	return _core->_renderBus.getDofDynamicDistance();
 }
 
 const float FabiEngine3D::gfx_getDofBlurDistance() const

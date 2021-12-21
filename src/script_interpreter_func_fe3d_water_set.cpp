@@ -208,6 +208,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 				else
 				{
 					Logger::throwWarning("invalid quality!");
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
 			}
 		}

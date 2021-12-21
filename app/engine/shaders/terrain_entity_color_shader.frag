@@ -36,7 +36,7 @@ uniform vec3 u_cameraPosition;
 uniform vec3 u_ambientLightingColor;
 uniform vec3 u_directionalLightingColor;
 uniform vec3 u_directionalLightPosition;
-uniform vec3 u_shadowAreaCenter;
+uniform vec3 u_shadowCenter;
 uniform vec3 u_fogColor;
 uniform vec3 u_wireframeColor;
 
@@ -52,7 +52,7 @@ uniform float u_textureRepeat;
 uniform float u_redTextureRepeat;
 uniform float u_greenTextureRepeat;
 uniform float u_blueTextureRepeat;
-uniform float u_shadowAreaSize;
+uniform float u_shadowSize;
 uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
 uniform float u_fogThickness;
@@ -455,10 +455,10 @@ float calculateShadows()
 	if (u_isShadowsEnabled)
 	{
 		// Temporary values
-		float halfSize = (u_shadowAreaSize / 2.0f);
-		float fragmentDistance = distance(f_position.xz, u_shadowAreaCenter.xz);
+		float halfSize = (u_shadowSize / 2.0f);
+		float fragmentDistance = distance(f_position.xz, u_shadowCenter.xz);
 
-		// Check if fragment is within shadow area
+		// Check if fragment must be shadowed
 		if (fragmentDistance <= halfSize)
 		{
 			// Variables
@@ -493,11 +493,11 @@ float calculateShadows()
 			}
 
 			// Long-distance shadows fading
-			float transparency = (fragmentDistance - (halfSize * 0.9f)); // Only for the outer 10% of the shadowed area
+			float transparency = (fragmentDistance - (halfSize * 0.9f)); // Only for the outer 10%
 			transparency = clamp(transparency, 0.0f, halfSize * 0.1f); // Cannot be negative
 			transparency /= (halfSize * 0.1f); // Convert value to 0.0 - 1.0 range
 
-			// Debug area frame rendering
+			// Debug frame rendering
 			if (u_isShadowFrameRenderEnabled)
 			{
 				if ((fragmentDistance - (halfSize * 0.99f)) > 0.0f)

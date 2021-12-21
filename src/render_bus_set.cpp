@@ -250,9 +250,9 @@ void RenderBus::setFarDistance(float value)
 	_farDistance = value;
 }
 
-void RenderBus::setDofMaxDistance(float value)
+void RenderBus::setDofDynamicDistance(float value)
 {
-	_dofMaxDistance = max(0.0f, value);
+	_dofDynamicDistance = max(0.0f, value);
 }
 
 void RenderBus::setDofBlurDistance(float value)

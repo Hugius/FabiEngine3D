@@ -245,9 +245,9 @@ const float RenderBus::getFarDistance() const
 	return _farDistance;
 }
 
-const float RenderBus::getDofMaxDistance() const
+const float RenderBus::getDofDynamicDistance() const
 {
-	return _dofMaxDistance;
+	return _dofDynamicDistance;
 }
 
 const float RenderBus::getDofBlurDistance() const

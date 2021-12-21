@@ -16,7 +16,7 @@ layout (location = 2) uniform sampler2D u_dofMap;
 // Float uniforms
 uniform float u_nearDistance;
 uniform float u_farDistance;
-uniform float u_dofMaxDistance;
+uniform float u_dofDynamicDistance;
 uniform float u_dofBlurDistance;
 
 // Boolean uniforms
@@ -50,11 +50,11 @@ void main()
     float middleFragmentDistance = convertDepthToPerspective(middleDepth);
 
     // Calculate smoothing distances
-    float middleSmoothingDistance = (u_dofMaxDistance * MIDDLE_SMOOTHING_MULTIPLIER);
+    float middleSmoothingDistance = (u_dofDynamicDistance * MIDDLE_SMOOTHING_MULTIPLIER);
     float fragmentSmoothingDistance = (u_dofBlurDistance * FRAGMENT_SMOOTHING_MULTIPLIER);
 
     // Calculate distance from camera to direct object
-    bool isCloseToFragment = (middleFragmentDistance < (u_dofMaxDistance + middleSmoothingDistance));
+    bool isCloseToFragment = (middleFragmentDistance < (u_dofDynamicDistance + middleSmoothingDistance));
 
     // Check if DOF blur is needed
     if (isCloseToFragment || !u_isDofDynamic)
@@ -63,7 +63,7 @@ void main()
         float blurMixValue = (currentFragmentDistance - (u_dofBlurDistance - fragmentSmoothingDistance)) / fragmentSmoothingDistance;
 
         // Calculate DOF blur strength based on middle distance
-        float distanceMixValue = ((u_dofMaxDistance + middleSmoothingDistance) - middleFragmentDistance) / middleSmoothingDistance;
+        float distanceMixValue = ((u_dofDynamicDistance + middleSmoothingDistance) - middleFragmentDistance) / middleSmoothingDistance;
 
         // Clamp mix values
         blurMixValue = clamp(blurMixValue, 0.0f, 1.0f); 

@@ -222,7 +222,7 @@ void WorldEditor::_updateDofGraphicsSettingsMenu()
 		auto isEnabled = _fe3d.gfx_isDofEnabled();
 		auto isDynamic = _fe3d.gfx_isDofDynamic();
 		auto blurDistance = _fe3d.gfx_getDofBlurDistance();
-		auto maxDistance = _fe3d.gfx_getMaxDofDistance();
+		auto maxDistance = _fe3d.gfx_getDofDynamicDistance();
 		auto quality = _fe3d.gfx_getDofQuality();
 
 		// Button management
@@ -264,7 +264,7 @@ void WorldEditor::_updateDofGraphicsSettingsMenu()
 		// Update value forms
 		if(_gui.getOverlay()->checkValueForm("dynamicDistance", maxDistance))
 		{
-			_fe3d.gfx_setDofMaxDistance(maxDistance);
+			_fe3d.gfx_setDofDynamicDistance(maxDistance);
 		}
 		if(_gui.getOverlay()->checkValueForm("blurDistance", blurDistance))
 		{

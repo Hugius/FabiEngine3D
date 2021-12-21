@@ -186,6 +186,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 				else
 				{
 					Logger::throwWarning("invalid shape!");
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
 			}
 		}

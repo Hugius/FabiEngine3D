@@ -12,7 +12,7 @@ void DofRenderer::bind()
 	_shader.uploadUniform("u_dofMap", 2);
 	_shader.uploadUniform("u_nearDistance", _renderBus.getNearDistance());
 	_shader.uploadUniform("u_farDistance", _renderBus.getFarDistance());
-	_shader.uploadUniform("u_dofMaxDistance", _renderBus.getDofMaxDistance());
+	_shader.uploadUniform("u_dofDynamicDistance", _renderBus.getDofDynamicDistance());
 	_shader.uploadUniform("u_dofBlurDistance", _renderBus.getDofBlurDistance());
 	_shader.uploadUniform("u_isDofEnabled", _renderBus.isDofEnabled());
 	_shader.uploadUniform("u_isDofDynamic", _renderBus.isDofDynamic());

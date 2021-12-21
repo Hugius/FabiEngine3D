@@ -248,7 +248,7 @@ void FabiEngine3D::gfx_disableDOF(bool mustResetProperties)
 	if(mustResetProperties)
 	{
 		_core->_renderBus.setDofDynamic(false);
-		_core->_renderBus.setDofMaxDistance(0.0f);
+		_core->_renderBus.setDofDynamicDistance(0.0f);
 		_core->_renderBus.setDofBlurDistance(0.0f);
 		_core->_renderBus.setDofQuality(Config::MIN_DOF_QUALITY);
 	}
@@ -448,9 +448,9 @@ void FabiEngine3D::gfx_setSkyExposureSpeed(float value)
 	_core->_skyEntityManager.setExposureSpeed(value);
 }
 
-void FabiEngine3D::gfx_setDofMaxDistance(float value)
+void FabiEngine3D::gfx_setDofDynamicDistance(float value)
 {
-	_core->_renderBus.setDofMaxDistance(value);
+	_core->_renderBus.setDofDynamicDistance(value);
 }
 
 void FabiEngine3D::gfx_setDofBlurDistance(float value)

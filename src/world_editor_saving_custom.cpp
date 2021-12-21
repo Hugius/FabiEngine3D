@@ -626,7 +626,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 			// Data to save
 			auto dynamic = _fe3d.gfx_isDofDynamic();
 			auto blurDistance = _fe3d.gfx_getDofBlurDistance();
-			auto maxDistance = _fe3d.gfx_getMaxDofDistance();
+			auto maxDistance = _fe3d.gfx_getDofDynamicDistance();
 
 			// Write data
 			file <<

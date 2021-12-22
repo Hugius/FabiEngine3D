@@ -100,93 +100,91 @@ void TerrainEditor::_updateTerrainCreating()
 {
 	if(_isCreatingTerrain)
 	{
+		// Temporary values
 		string newTerrainID;
 
 		// Check if user filled in a new ID
 		if(_gui.getOverlay()->checkValueForm("terrainCreate", newTerrainID, {}))
 		{
 			// @ sign not allowed
-			if(newTerrainID.find('@') == string::npos)
-			{
-				// Spaces not allowed
-				if(newTerrainID.find(' ') == string::npos)
-				{
-					// Add @ sign to new ID
-					newTerrainID = ("@" + newTerrainID);
-
-					// If terrain not existing yet
-					if(find(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), newTerrainID) == _loadedTerrainIDs.end())
-					{
-						// Validate project ID
-						if(_currentProjectID.empty())
-						{
-							Logger::throwError("TerrainEditor::_updateTerrainCreating");
-						}
-
-						// Get the chosen file name
-						const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-						const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\height_map\\");
-
-						// Validate target directory
-						if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
-						{
-							Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
-							_isCreatingTerrain = false;
-							return;
-						}
-
-						// Validate chosen file
-						const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "BMP");
-						if(filePath.empty())
-						{
-							_isCreatingTerrain = false;
-							return;
-						}
-
-						// Validate directory of file
-						if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
-						   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
-						{
-							Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
-							_isCreatingTerrain = false;
-							return;
-						}
-
-						// Create terrain
-						const string newFilePath = filePath.substr(rootDirectoryPath.size());
-						_fe3d.misc_clearBitmapCache(newFilePath);
-						_fe3d.terrain_create(newTerrainID, newFilePath);
-
-						// Check if terrain creation went well
-						if(_fe3d.terrain_isExisting(newTerrainID))
-						{
-							// Go to next screen
-							_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
-
-							// Select terrain
-							_currentTerrainID = newTerrainID;
-							_loadedTerrainIDs.push_back(newTerrainID);
-							_fe3d.terrain_select(newTerrainID);
-
-							// Miscellaneous
-							_fe3d.text_setContent(_gui.getOverlay()->getTextField("terrainID")->getEntityID(), "Terrain: " + newTerrainID.substr(1), 0.025f);
-							_fe3d.text_setVisible(_gui.getOverlay()->getTextField("terrainID")->getEntityID(), true);
-							_isCreatingTerrain = false;
-						}
-					}
-					else
-					{
-						Logger::throwWarning("Terrain with ID \"" + newTerrainID.substr(1) + "\" already exists!");
-					}
-				}
-				else
-				{
-					Logger::throwWarning("Terrain ID cannot contain any spaces!");
-				}
-			}
-			else
+			if(newTerrainID.find('@') != string::npos)
 			{
 				Logger::throwWarning("Terrain ID cannot contain '@'!");
+				return;
+			}
+
+			// Spaces not allowed
+			if(newTerrainID.find(' ') != string::npos)
+			{
+				Logger::throwWarning("Terrain ID cannot contain any spaces!");
+				return;
+			}
+
+			// Add @ sign to new ID
+			newTerrainID = ("@" + newTerrainID);
+
+			// Check if terrain already exists
+			if(find(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), newTerrainID) != _loadedTerrainIDs.end())
+			{
+				Logger::throwWarning("Terrain with ID \"" + newTerrainID.substr(1) + "\" already exists!");
+				return;
+			}
+
+			// Validate project ID
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("TerrainEditor::_updateTerrainCreating");
+			}
+
+			// Get the chosen file name
+			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\height_map\\");
+
+			// Validate target directory
+			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
+			{
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
+				_isCreatingTerrain = false;
+				return;
+			}
+
+			// Validate chosen file
+			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "BMP");
+			if(filePath.empty())
+			{
+				_isCreatingTerrain = false;
+				return;
+			}
+
+			// Validate directory of file
+			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
+			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
+			{
+				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
+				_isCreatingTerrain = false;
+				return;
+			}
+
+			// Create terrain
+			const string newFilePath = filePath.substr(rootDirectoryPath.size());
+			_fe3d.misc_clearBitmapCache(newFilePath);
+			_fe3d.terrain_create(newTerrainID, newFilePath);
+
+			// Check if terrain creation went well
+			if(_fe3d.terrain_isExisting(newTerrainID))
+			{
+				// Go to next screen
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
+
+				// Select terrain
+				_currentTerrainID = newTerrainID;
+				_loadedTerrainIDs.push_back(newTerrainID);
+				_fe3d.terrain_select(newTerrainID);
+
+				// Miscellaneous
+				_fe3d.text_setContent(_gui.getOverlay()->getTextField("terrainID")->getEntityID(), "Terrain: " + newTerrainID.substr(1), 0.025f);
+				_fe3d.text_setVisible(_gui.getOverlay()->getTextField("terrainID")->getEntityID(), true);
+				_isCreatingTerrain = false;
 			}
 		}
 	}

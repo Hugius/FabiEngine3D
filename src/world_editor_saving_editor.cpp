@@ -29,7 +29,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 	vector<string> levelOfDetailEntityIDs;
 	for(const auto& modelID : _fe3d.model_getIDs())
 	{
-		// @ sign is reserved
+		// @ sign not allowed
 		if(modelID[0] != '@')
 		{
 			// Check if entity has level of detail model

@@ -15,10 +15,10 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			// Temporary values 
 			const auto ID = arguments[0].getString();
 
-			// @ sign is reserved
+			// @ sign not allowed
 			if(ID[0] == '@')
 			{
-				_throwScriptError("new text ID \"" + ID + "\" cannot start with '@'");
+				_throwScriptError("new text ID \"" + ID + "\" cannot contain '@'");
 				return true;
 			}
 
@@ -76,7 +76,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			// Iterate through texts
 			for(const auto& ID : _fe3d.text_getIDs())
 			{
-				// @ sign is reserved
+				// @ sign not allowed
 				if(ID[0] != '@')
 				{
 					_fe3d.text_delete(ID);

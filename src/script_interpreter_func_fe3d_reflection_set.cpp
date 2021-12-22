@@ -14,10 +14,10 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 			// Temporary values
 			auto ID = arguments[0].getString();
 
-			// @ sign is reserved
+			// @ sign not allowed
 			if(ID[0] == '@')
 			{
-				_throwScriptError("new reflection ID (\"" + ID + "\") cannot start with '@'");
+				_throwScriptError("new reflection ID (\"" + ID + "\") cannot contain '@'");
 				return true;
 			}
 
@@ -56,7 +56,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 			// Iterate through reflections
 			for(const auto& ID : _fe3d.reflection_getIDs())
 			{
-				// @ sign is reserved
+				// @ sign not allowed
 				if(ID[0] != '@')
 				{
 					_fe3d.reflection_delete(ID);

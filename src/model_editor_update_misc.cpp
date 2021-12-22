@@ -128,86 +128,83 @@ void ModelEditor::_updateModelCreating()
 		if(_gui.getOverlay()->checkValueForm("modelCreate", newModelID, {}))
 		{
 			// @ sign not allowed
-			if(newModelID.find('@') == string::npos)
-			{
-				// Spaces not allowed
-				if(newModelID.find(' ') == string::npos)
-				{
-					// Add @ sign to new ID
-					newModelID = ("@" + newModelID);
-
-					// If model not existing yet
-					if(find(_loadedModelIDs.begin(), _loadedModelIDs.end(), newModelID) == _loadedModelIDs.end())
-					{
-						// Validate project ID
-						if(_currentProjectID.empty())
-						{
-							Logger::throwError("ModelEditor::_updateModelCreating");
-						}
-
-						// Get the chosen file name
-						const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-						const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\mesh\\");
-
-						// Validate target directory
-						if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
-						{
-							Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
-							_isCreatingModel = false;
-							return;
-						}
-
-						// Validate chosen file
-						const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "OBJ");
-						if(filePath.empty())
-						{
-							_isCreatingModel = false;
-							return;
-						}
-
-						// Validate directory of file
-						if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
-						   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
-						{
-							Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
-							_isCreatingModel = false;
-							return;
-						}
-
-						// Create model
-						const string finalFilePath = filePath.substr(rootDirectoryPath.size());
-						_fe3d.misc_clearMeshCache(finalFilePath);
-						_fe3d.model_create(newModelID, finalFilePath);
-
-						// Check if model creation went well
-						if(_fe3d.model_isExisting(newModelID))
-						{
-							// Go to next screen
-							_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-
-							// Select model
-							_currentModelID = newModelID;
-							_loadedModelIDs.push_back(newModelID);
-
-							// Miscellaneous
-							_fe3d.text_setContent(_gui.getOverlay()->getTextField("modelID")->getEntityID(), "Model: " + newModelID.substr(1), 0.025f);
-							_fe3d.text_setVisible(_gui.getOverlay()->getTextField("modelID")->getEntityID(), true);
-							_isCreatingModel = false;
-						}
-					}
-					else
-					{
-						Logger::throwWarning("Model with ID \"" + newModelID.substr(1) + "\" already exists!");
-					}
-				}
-				else
-				{
-					Logger::throwWarning("Model ID cannot contain any spaces!");
-				}
-			}
-			else
+			if(newModelID.find('@') != string::npos)
 			{
 				Logger::throwWarning("Model ID cannot contain '@'!");
+				return;
+			}
+
+			// Spaces not allowed
+			if(newModelID.find(' ') != string::npos)
+			{
+				Logger::throwWarning("Model ID cannot contain any spaces!");
+				return;
+			}
+
+			// Add @ sign to new ID
+			newModelID = ("@" + newModelID);
+
+			// Check if model already exists
+			if(find(_loadedModelIDs.begin(), _loadedModelIDs.end(), newModelID) != _loadedModelIDs.end())
+			{
+				Logger::throwWarning("Model with ID \"" + newModelID.substr(1) + "\" already exists!");
+				return;
+			}
+
+			// Validate project ID
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("ModelEditor::_updateModelCreating");
+			}
+
+			// Get the chosen file name
+			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\mesh\\");
+
+			// Validate target directory
+			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
+			{
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
+				_isCreatingModel = false;
+				return;
+			}
+
+			// Validate chosen file
+			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "OBJ");
+			if(filePath.empty())
+			{
+				_isCreatingModel = false;
+				return;
+			}
+
+			// Validate directory of file
+			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
+			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
+			{
+				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
+				_isCreatingModel = false;
+				return;
+			}
+
+			// Create model
+			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
+			_fe3d.misc_clearMeshCache(finalFilePath);
+			_fe3d.model_create(newModelID, finalFilePath);
+
+			// Check if model creation went well
+			if(_fe3d.model_isExisting(newModelID))
+			{
+				// Go to next screen
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+
+				// Select model
+				_currentModelID = newModelID;
+				_loadedModelIDs.push_back(newModelID);
+
+				// Miscellaneous
+				_fe3d.text_setContent(_gui.getOverlay()->getTextField("modelID")->getEntityID(), "Model: " + newModelID.substr(1), 0.025f);
+				_fe3d.text_setVisible(_gui.getOverlay()->getTextField("modelID")->getEntityID(), true);
+				_isCreatingModel = false;
 			}
 		}
 	}

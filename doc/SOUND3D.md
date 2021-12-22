@@ -5,6 +5,7 @@
 - Sound3D is stereo audio in 3D space.
 - Each sound plays on a unique sound channel.
 - Multiple sounds can be playing at the same time.
+- Only a maximum of 1024 sounds can exist.
 
 ## 2. Properties
 

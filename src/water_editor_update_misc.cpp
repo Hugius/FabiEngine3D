@@ -97,56 +97,54 @@ void WaterEditor::_updateWaterCreating()
 {
 	if(_isCreatingWater)
 	{
+		// Temporary values
 		string newWaterID;
 
 		// Create if user filled in a new ID
 		if(_gui.getOverlay()->checkValueForm("waterCreate", newWaterID, {}))
 		{
 			// @ sign not allowed
-			if(newWaterID.find('@') == string::npos)
-			{
-				// Spaces not allowed
-				if(newWaterID.find(' ') == string::npos)
-				{
-					// Add @ sign to new ID
-					newWaterID = ("@" + newWaterID);
-
-					// If water not existing yet
-					if(find(_loadedWaterIDs.begin(), _loadedWaterIDs.end(), newWaterID) == _loadedWaterIDs.end())
-					{
-						// Create water
-						_fe3d.water_create(newWaterID);
-
-						// Check if water creation went well
-						if(_fe3d.water_isExisting(newWaterID))
-						{
-							// Go to next screen
-							_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
-
-							// Select water
-							_currentWaterID = newWaterID;
-							_loadedWaterIDs.push_back(newWaterID);
-							_fe3d.water_select(newWaterID);
-
-							// Miscellaneous
-							_fe3d.text_setContent(_gui.getOverlay()->getTextField("waterID")->getEntityID(), "Water: " + newWaterID.substr(1), 0.025f);
-							_fe3d.text_setVisible(_gui.getOverlay()->getTextField("waterID")->getEntityID(), true);
-							_isCreatingWater = false;
-						}
-					}
-					else
-					{
-						Logger::throwWarning("Water with ID \"" + newWaterID.substr(1) + "\" already exists!");
-					}
-				}
-				else
-				{
-					Logger::throwWarning("Water ID cannot contain any spaces!");
-				}
-			}
-			else
+			if(newWaterID.find('@') != string::npos)
 			{
 				Logger::throwWarning("Water ID cannot contain '@'!");
+				return;
+			}
+
+			// Spaces not allowed
+			if(newWaterID.find(' ') != string::npos)
+			{
+				Logger::throwWarning("Water ID cannot contain any spaces!");
+				return;
+			}
+
+			// Add @ sign to new ID
+			newWaterID = ("@" + newWaterID);
+
+			// Check if water already exists
+			if(find(_loadedWaterIDs.begin(), _loadedWaterIDs.end(), newWaterID) != _loadedWaterIDs.end())
+			{
+				Logger::throwWarning("Water with ID \"" + newWaterID.substr(1) + "\" already exists!");
+				return;
+			}
+
+			// Create water
+			_fe3d.water_create(newWaterID);
+
+			// Check if water creation went well
+			if(_fe3d.water_isExisting(newWaterID))
+			{
+				// Go to next screen
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
+
+				// Select water
+				_currentWaterID = newWaterID;
+				_loadedWaterIDs.push_back(newWaterID);
+				_fe3d.water_select(newWaterID);
+
+				// Miscellaneous
+				_fe3d.text_setContent(_gui.getOverlay()->getTextField("waterID")->getEntityID(), "Water: " + newWaterID.substr(1), 0.025f);
+				_fe3d.text_setVisible(_gui.getOverlay()->getTextField("waterID")->getEntityID(), true);
+				_isCreatingWater = false;
 			}
 		}
 	}

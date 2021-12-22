@@ -3,10 +3,10 @@
 
 const bool ScriptInterpreter::_validateFe3dAabb(const string& ID)
 {
-	// @ sign is reserved
+	// @ sign not allowed
 	if(ID[0] == '@')
 	{
-		_throwScriptError("ID of requested AABB with ID \"" + ID + "\" cannot start with '@'!");
+		_throwScriptError("ID of requested AABB with ID \"" + ID + "\" cannot contain '@'!");
 		return false;
 	}
 
@@ -33,10 +33,10 @@ const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isTe
 	}
 	else
 	{
-		// @ sign is reserved
+		// @ sign not allowed
 		if(!isTemplate && ID[0] == '@')
 		{
-			_throwScriptError("ID of requested billboard with ID \"" + ID + "\" cannot start with '@'!");
+			_throwScriptError("ID of requested billboard with ID \"" + ID + "\" cannot contain '@'!");
 			return false;
 		}
 
@@ -53,10 +53,10 @@ const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isTe
 
 const bool ScriptInterpreter::_validateFe3dImage(const string& ID)
 {
-	// @ sign is reserved
+	// @ sign not allowed
 	if(ID[0] == '@')
 	{
-		_throwScriptError("ID of requested image with ID \"" + ID + "\" cannot start with '@'!");
+		_throwScriptError("ID of requested image with ID \"" + ID + "\" cannot contain '@'!");
 		return false;
 	}
 
@@ -72,10 +72,10 @@ const bool ScriptInterpreter::_validateFe3dImage(const string& ID)
 
 const bool ScriptInterpreter::_validateFe3dPointlight(const string& ID)
 {
-	// @ sign is reserved
+	// @ sign not allowed
 	if(ID[0] == '@')
 	{
-		_throwScriptError("ID of requested pointlight with ID \"" + ID + "\" cannot start with '@'!");
+		_throwScriptError("ID of requested pointlight with ID \"" + ID + "\" cannot contain '@'!");
 		return false;
 	}
 
@@ -91,10 +91,10 @@ const bool ScriptInterpreter::_validateFe3dPointlight(const string& ID)
 
 const bool ScriptInterpreter::_validateFe3dSpotlight(const string& ID)
 {
-	// @ sign is reserved
+	// @ sign not allowed
 	if(ID[0] == '@')
 	{
-		_throwScriptError("ID of requested spotlight with ID \"" + ID + "\" cannot start with '@'!");
+		_throwScriptError("ID of requested spotlight with ID \"" + ID + "\" cannot contain '@'!");
 		return false;
 	}
 
@@ -128,10 +128,10 @@ const bool ScriptInterpreter::_validateFe3dModel(const string& ID, bool isTempla
 	}
 	else
 	{
-		// @ sign is reserved
+		// @ sign not allowed
 		if(ID[0] == '@')
 		{
-			_throwScriptError("ID of requested model with ID \"" + ID + "\" cannot start with '@'!");
+			_throwScriptError("ID of requested model with ID \"" + ID + "\" cannot contain '@'!");
 			return false;
 		}
 
@@ -161,10 +161,10 @@ const bool ScriptInterpreter::_validateFe3dModelPart(const string& modelID, cons
 
 const bool ScriptInterpreter::_validateFe3dReflection(const string& ID)
 {
-	// @ sign is reserved
+	// @ sign not allowed
 	if(ID[0] == '@')
 	{
-		_throwScriptError("ID of requested reflection with ID \"" + ID + "\" cannot start with '@'!");
+		_throwScriptError("ID of requested reflection with ID \"" + ID + "\" cannot contain '@'!");
 		return false;
 	}
 
@@ -204,10 +204,10 @@ const bool ScriptInterpreter::_validateFe3dTerrain()
 
 const bool ScriptInterpreter::_validateFe3dText(const string& ID)
 {
-	// @ sign is reserved
+	// @ sign not allowed
 	if(ID[0] == '@')
 	{
-		_throwScriptError("ID of requested text with ID \"" + ID + "\" cannot start with '@'!");
+		_throwScriptError("ID of requested text with ID \"" + ID + "\" cannot contain '@'!");
 		return false;
 	}
 
@@ -246,10 +246,10 @@ const bool ScriptInterpreter::_validateFe3dSound2d(const string& ID, bool isTemp
 	}
 	else
 	{
-		// @ sign is reserved
+		// @ sign not allowed
 		if(!isTemplate && ID[0] == '@')
 		{
-			_throwScriptError("ID of requested 2D sound with ID \"" + ID + "\" cannot start with '@'!");
+			_throwScriptError("ID of requested 2D sound with ID \"" + ID + "\" cannot contain '@'!");
 			return false;
 		}
 
@@ -277,10 +277,10 @@ const bool ScriptInterpreter::_validateFe3dSound3d(const string& ID, bool isTemp
 	}
 	else
 	{
-		// @ sign is reserved
+		// @ sign not allowed
 		if(!isTemplate && ID[0] == '@')
 		{
-			_throwScriptError("ID of requested 3D sound with ID \"" + ID + "\" cannot start with '@'!");
+			_throwScriptError("ID of requested 3D sound with ID \"" + ID + "\" cannot contain '@'!");
 			return false;
 		}
 

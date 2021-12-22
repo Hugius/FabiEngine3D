@@ -56,52 +56,51 @@ void Animation2dEditor::_updateAnimationCreating()
 {
 	if(_isCreatingAnimation)
 	{
-		// Check if user filled in a new ID
+		// Temporary values
 		string newAnimationID = "";
+
+		// Check if user filled in a new ID
 		if(_gui.getOverlay()->checkValueForm("animationCreate", newAnimationID, {_currentAnimationID}))
 		{
 			// @ sign not allowed
-			if(newAnimationID.find('@') == string::npos)
-			{
-				// Spaces not allowed
-				if(newAnimationID.find(' ') == string::npos)
-				{
-					// Check if animation already exists
-					auto animationIDs = getAnimationIDs();
-					if(find(animationIDs.begin(), animationIDs.end(), newAnimationID) == animationIDs.end())
-					{
-						// Go to next screen
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
-
-						// Create animation
-						_animations.push_back(make_shared<Animation2d>(newAnimationID));
-
-						// Select animation
-						_currentAnimationID = newAnimationID;
-
-						// Show preview billboard
-						_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
-						_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
-
-						// Miscellaneous
-						_fe3d.text_setContent(_gui.getOverlay()->getTextField("animationID")->getEntityID(), "Animation: " + newAnimationID, 0.025f);
-						_fe3d.text_setVisible(_gui.getOverlay()->getTextField("animationID")->getEntityID(), true);
-						_isCreatingAnimation = false;
-					}
-					else
-					{
-						Logger::throwWarning("Animation ID \"" + newAnimationID + "\" already exists!");
-					}
-				}
-				else
-				{
-					Logger::throwWarning("Animation ID cannot contain any spaces!");
-				}
-			}
-			else
+			if(newAnimationID.find('@') != string::npos)
 			{
 				Logger::throwWarning("Animation ID cannot contain '@'!");
+				return;
 			}
+
+			// Spaces not allowed
+			if(newAnimationID.find(' ') != string::npos)
+			{
+				Logger::throwWarning("Animation ID cannot contain any spaces!");
+				return;
+			}
+
+			// Check if animation already exists
+			auto animationIDs = getAnimationIDs();
+			if(find(animationIDs.begin(), animationIDs.end(), newAnimationID) != animationIDs.end())
+			{
+				Logger::throwWarning("Animation ID \"" + newAnimationID + "\" already exists!");
+				return;
+			}
+
+			// Go to next screen
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
+
+			// Create animation
+			_animations.push_back(make_shared<Animation2d>(newAnimationID));
+
+			// Select animation
+			_currentAnimationID = newAnimationID;
+
+			// Show preview billboard
+			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
+			_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
+
+			// Miscellaneous
+			_fe3d.text_setContent(_gui.getOverlay()->getTextField("animationID")->getEntityID(), "Animation: " + newAnimationID, 0.025f);
+			_fe3d.text_setVisible(_gui.getOverlay()->getTextField("animationID")->getEntityID(), true);
+			_isCreatingAnimation = false;
 		}
 	}
 }

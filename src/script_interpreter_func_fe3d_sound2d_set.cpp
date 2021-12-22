@@ -10,10 +10,10 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// @ sign is reserved
-			if(arguments[0].getString()[0] == '@')
+			// @ sign not allowed
+			if(arguments[0].getString().find('@') != string::npos)
 			{
-				_throwScriptError("new sound ID (\"" + arguments[0].getString() + "\") cannot start with '@'");
+				_throwScriptError("new sound ID (\"" + arguments[0].getString() + "\") cannot contain '@'");
 				return true;
 			}
 
@@ -54,7 +54,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 			// Iterate through sounds
 			for(const auto& ID : _fe3d.sound2d_getIDs())
 			{
-				// @ sign is reserved
+				// @ sign not allowed
 				if(ID[0] != '@')
 				{
 					_fe3d.sound2d_delete(ID);

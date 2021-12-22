@@ -119,55 +119,53 @@ void BillboardEditor::_updateBillboardCreating()
 {
 	if(_isCreatingBillboard)
 	{
-		string newBillboardID = "";
+		// Temporary values
+		string newBillboardID;
 
 		// Check if user filled in a new ID
 		if(_gui.getOverlay()->checkValueForm("billboardCreate", newBillboardID, {_currentBillboardID}))
 		{
 			// @ sign not allowed
-			if(newBillboardID.find('@') == string::npos)
-			{
-				// Spaces not allowed
-				if(newBillboardID.find(' ') == string::npos)
-				{
-					// Add @ sign to new ID
-					newBillboardID = ("@" + newBillboardID);
-
-					// If billboard not existing yet
-					if(find(_loadedBillboardIDs.begin(), _loadedBillboardIDs.end(), newBillboardID) == _loadedBillboardIDs.end())
-					{
-						// Create billboard
-						_fe3d.billboard_create(newBillboardID);
-
-						// Check if billboard creation went well
-						if(_fe3d.billboard_isExisting(newBillboardID))
-						{
-							// Go to next screen
-							_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
-
-							// Select billboard
-							_currentBillboardID = newBillboardID;
-							_loadedBillboardIDs.push_back(newBillboardID);
-
-							// Miscellaneous
-							_fe3d.text_setContent(_gui.getOverlay()->getTextField("billboardID")->getEntityID(), "Billboard: " + newBillboardID.substr(1), 0.025f);
-							_fe3d.text_setVisible(_gui.getOverlay()->getTextField("billboardID")->getEntityID(), true);
-							_isCreatingBillboard = false;
-						}
-					}
-					else
-					{
-						Logger::throwWarning("Billboard with ID \"" + newBillboardID.substr(1) + "\" already exists!");
-					}
-				}
-				else
-				{
-					Logger::throwWarning("Billboard ID cannot contain any spaces!");
-				}
-			}
-			else
+			if(newBillboardID.find('@') != string::npos)
 			{
 				Logger::throwWarning("Billboard ID cannot contain '@'!");
+				return;
+			}
+
+			// Spaces not allowed
+			if(newBillboardID.find(' ') != string::npos)
+			{
+				Logger::throwWarning("Billboard ID cannot contain any spaces!");
+				return;
+			}
+
+			// Add @ sign to new ID
+			newBillboardID = ("@" + newBillboardID);
+
+			// Check if billboard already exists
+			if(find(_loadedBillboardIDs.begin(), _loadedBillboardIDs.end(), newBillboardID) != _loadedBillboardIDs.end())
+			{
+				Logger::throwWarning("Billboard with ID \"" + newBillboardID.substr(1) + "\" already exists!");
+				return;
+			}
+
+			// Create billboard
+			_fe3d.billboard_create(newBillboardID);
+
+			// Check if billboard creation went well
+			if(_fe3d.billboard_isExisting(newBillboardID))
+			{
+				// Go to next screen
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
+
+				// Select billboard
+				_currentBillboardID = newBillboardID;
+				_loadedBillboardIDs.push_back(newBillboardID);
+
+				// Miscellaneous
+				_fe3d.text_setContent(_gui.getOverlay()->getTextField("billboardID")->getEntityID(), "Billboard: " + newBillboardID.substr(1), 0.025f);
+				_fe3d.text_setVisible(_gui.getOverlay()->getTextField("billboardID")->getEntityID(), true);
+				_isCreatingBillboard = false;
 			}
 		}
 	}

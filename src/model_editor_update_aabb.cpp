@@ -135,44 +135,41 @@ void ModelEditor::_updateAabbCreating()
 		if(_gui.getOverlay()->checkValueForm("aabbCreate", newAabbID, {}))
 		{
 			// @ sign not allowed
-			if(newAabbID.find('@') == string::npos)
-			{
-				// Spaces not allowed
-				if(newAabbID.find(' ') == string::npos)
-				{
-					// If AABB not existing yet
-					if(!_fe3d.aabb_isExisting(_currentModelID + "@" + newAabbID))
-					{
-						// Select AABB
-						_currentAabbID = newAabbID;
-
-						// Bind AABB
-						_fe3d.aabb_create(_currentModelID + "@" + _currentAabbID);
-						_fe3d.aabb_setParentEntityID((_currentModelID + "@" + _currentAabbID), _currentModelID);
-						_fe3d.aabb_setParentEntityType((_currentModelID + "@" + _currentAabbID), AabbParentEntityType::MODEL);
-
-						// Go to next screen
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
-						_fe3d.text_setContent(_gui.getOverlay()->getTextField("aabbID")->getEntityID(), ("AABB: " + _currentAabbID), 0.025f);
-						_fe3d.text_setVisible(_gui.getOverlay()->getTextField("aabbID")->getEntityID(), true);
-
-						// Miscellaneous
-						_isCreatingAabb = false;
-					}
-					else
-					{
-						Logger::throwWarning("AABB with ID \"" + newAabbID + "\" already exists!");
-					}
-				}
-				else
-				{
-					Logger::throwWarning("AABB ID cannot contain any spaces!");
-				}
-			}
-			else
+			if(newAabbID.find('@') != string::npos)
 			{
 				Logger::throwWarning("AABB ID cannot contain '@'!");
+				return;
 			}
+
+			// Spaces not allowed
+			if(newAabbID.find(' ') != string::npos)
+			{
+				Logger::throwWarning("AABB ID cannot contain any spaces!");
+				return;
+			}
+
+			// Check if AABB already exists
+			if(_fe3d.aabb_isExisting(_currentModelID + "@" + newAabbID))
+			{
+				Logger::throwWarning("AABB with ID \"" + newAabbID + "\" already exists!");
+				return;
+			}
+
+			// Select AABB
+			_currentAabbID = newAabbID;
+
+			// Bind AABB
+			_fe3d.aabb_create(_currentModelID + "@" + _currentAabbID);
+			_fe3d.aabb_setParentEntityID((_currentModelID + "@" + _currentAabbID), _currentModelID);
+			_fe3d.aabb_setParentEntityType((_currentModelID + "@" + _currentAabbID), AabbParentEntityType::MODEL);
+
+			// Go to next screen
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
+			_fe3d.text_setContent(_gui.getOverlay()->getTextField("aabbID")->getEntityID(), ("AABB: " + _currentAabbID), 0.025f);
+			_fe3d.text_setVisible(_gui.getOverlay()->getTextField("aabbID")->getEntityID(), true);
+
+			// Miscellaneous
+			_isCreatingAabb = false;
 		}
 	}
 }

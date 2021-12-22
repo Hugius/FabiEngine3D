@@ -10,10 +10,10 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// @ sign is reserved
-			if(arguments[0].getString()[0] == '@')
+			// @ sign not allowed
+			if(arguments[0].getString().find('@') != string::npos)
 			{
-				_throwScriptError("new billboard ID (\"" + arguments[0].getString() + "\") cannot start with '@'");
+				_throwScriptError("new billboard ID (\"" + arguments[0].getString() + "\") cannot contain '@'");
 				return true;
 			}
 
@@ -56,7 +56,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 			// Iterate through billboards
 			for(const auto& ID : _fe3d.billboard_getIDs())
 			{
-				// @ sign is reserved
+				// @ sign not allowed
 				if(ID[0] != '@')
 				{
 					_fe3d.billboard_delete(ID);

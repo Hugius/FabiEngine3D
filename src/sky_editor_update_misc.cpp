@@ -78,59 +78,58 @@ void SkyEditor::_updateSkyCreating()
 {
 	if(_isCreatingSky)
 	{
+		// Temporary values
 		string newSkyID;
 
 		// Check if user filled in a new ID
 		if(_gui.getOverlay()->checkValueForm("skyCreate", newSkyID, {}))
 		{
 			// @ sign not allowed
-			if(newSkyID.find('@') == string::npos)
-			{
-				// Spaces not allowed
-				if(newSkyID.find(' ') == string::npos)
-				{
-					// Add @ sign to new ID
-					newSkyID = ("@" + newSkyID);
-
-					// If sky not existing yet
-					if(find(_loadedSkyIDs.begin(), _loadedSkyIDs.end(), newSkyID) == _loadedSkyIDs.end())
-					{
-						// Create sky
-						_fe3d.sky_create(newSkyID);
-
-						// Check if sky creation went well
-						if(_fe3d.sky_isExisting(newSkyID))
-						{
-							// Go to next screen
-							_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
-
-							// Select sky
-							_currentSkyID = newSkyID;
-							_loadedSkyIDs.push_back(newSkyID);
-							_fe3d.sky_selectMainSky(newSkyID);
-
-							// Miscellaneous
-							_fe3d.text_setContent(_gui.getOverlay()->getTextField("skyID")->getEntityID(), "Sky: " + newSkyID.substr(1), 0.025f);
-							_fe3d.text_setVisible(_gui.getOverlay()->getTextField("skyID")->getEntityID(), true);
-							_isCreatingSky = false;
-						}
-					}
-					else
-					{
-						Logger::throwWarning("Sky with ID \"" + newSkyID.substr(1) + "\" already exists!");
-					}
-				}
-				else
-				{
-					Logger::throwWarning("Sky ID cannot contain any spaces!");
-				}
-			}
-			else
+			if(newSkyID.find('@') != string::npos)
 			{
 				Logger::throwWarning("Sky ID cannot contain '@'!");
+				return;
+			}
+
+			// Spaces not allowed
+			if(newSkyID.find(' ') != string::npos)
+			{
+				Logger::throwWarning("Sky ID cannot contain any spaces!");
+				return;
+			}
+
+			// Add @ sign to new ID
+			newSkyID = ("@" + newSkyID);
+
+			// Check if sky already exists
+			if(find(_loadedSkyIDs.begin(), _loadedSkyIDs.end(), newSkyID) != _loadedSkyIDs.end())
+			{
+				Logger::throwWarning("Sky with ID \"" + newSkyID.substr(1) + "\" already exists!");
+				return;
+			}
+
+			// Create sky
+			_fe3d.sky_create(newSkyID);
+
+			// Check if sky creation went well
+			if(_fe3d.sky_isExisting(newSkyID))
+			{
+				// Go to next screen
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
+
+				// Select sky
+				_currentSkyID = newSkyID;
+				_loadedSkyIDs.push_back(newSkyID);
+				_fe3d.sky_selectMainSky(newSkyID);
+
+				// Miscellaneous
+				_fe3d.text_setContent(_gui.getOverlay()->getTextField("skyID")->getEntityID(), "Sky: " + newSkyID.substr(1), 0.025f);
+				_fe3d.text_setVisible(_gui.getOverlay()->getTextField("skyID")->getEntityID(), true);
+				_isCreatingSky = false;
 			}
 		}
 	}
+}
 }
 
 void SkyEditor::_updateSkyChoosing()

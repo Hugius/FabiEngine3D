@@ -16,10 +16,10 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 			// Temporary values
 			auto ID = arguments[0].getString();
 
-			// @ sign is reserved
+			// @ sign not allowed
 			if(ID[0] == '@')
 			{
-				_throwScriptError("new image ID (\"" + ID + "\") cannot start with '@'");
+				_throwScriptError("new image ID (\"" + ID + "\") cannot contain '@'");
 				return true;
 			}
 
@@ -84,7 +84,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 			// Iterate through images
 			for(const auto& ID : _fe3d.image_getIDs())
 			{
-				// @ sign is reserved
+				// @ sign not allowed
 				if(ID[0] != '@')
 				{
 					_fe3d.image_delete(ID);

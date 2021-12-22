@@ -10,10 +10,10 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// @ sign is reserved
-			if(arguments[0].getString()[0] == '@')
+			// @ sign not allowed
+			if(arguments[0].getString().find('@') != string::npos)
 			{
-				_throwScriptError("ID of requested AABB with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
+				_throwScriptError("ID of requested AABB with ID \"" + arguments[0].getString() + "\" cannot contain '@'");
 				return true;
 			}
 
@@ -23,7 +23,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 				// If substring matches
 				if(arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
 				{
-					// @ sign is reserved
+					// @ sign not allowed
 					if(ID[0] != '@')
 					{
 						// Only non-bound AABBs
@@ -42,10 +42,10 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// @ sign is reserved
-			if(arguments[0].getString()[0] == '@')
+			// @ sign not allowed
+			if(arguments[0].getString().find('@') != string::npos)
 			{
-				_throwScriptError("ID of requested billboard with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
+				_throwScriptError("ID of requested billboard with ID \"" + arguments[0].getString() + "\" cannot contain '@'");
 				return true;
 			}
 
@@ -219,7 +219,7 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 			// Iterate through AABBs
 			for(const auto& ID : result)
 			{
-				// @ sign is reserved
+				// @ sign not allowed
 				if(ID[0] != '@')
 				{
 					// Only non-bound AABBs

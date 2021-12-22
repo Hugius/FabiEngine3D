@@ -204,13 +204,13 @@ const bool WorldEditor::saveEditorWorldToFile()
 		if(billboardID[0] != '@')
 		{
 			// Temporary values
-			auto startedAnimations = _animation3dEditor.getStartedModelAnimationIDs(billboardID);
+			auto startedAnimations = _animation2dEditor.getStartedBillboardAnimationIDs(billboardID);
 
 			// Data to save
 			auto position = _fe3d.billboard_getPosition(billboardID);
 			auto rotation = _fe3d.billboard_getRotation(billboardID);
 			auto size = _fe3d.billboard_getSize(billboardID);
-			auto animationID = (startedAnimations.empty()) ? "" : startedAnimations[0];
+			auto animationID = (startedAnimations.empty() ? "" : startedAnimations[0]);
 
 			// Convert empty string
 			animationID = (animationID.empty()) ? "?" : animationID;

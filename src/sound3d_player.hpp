@@ -15,7 +15,6 @@ public:
 	Sound3dPlayer();
 
 	// VOID
-	void allocateChannels(unsigned int count);
 	void update(vector<Sound3d>& sounds, Camera& camera);
 	void startSound(Sound3d& sound, int playCount, unsigned int fadeMS, bool mustForce);
 	void pauseSound(Sound3d& sound);
@@ -45,4 +44,7 @@ private:
 
 	// STRING
 	vector<string> _channels;
+
+	// UNSIGNED INT
+	static inline const unsigned int MAX_CHANNEL_COUNT = 1024;
 };

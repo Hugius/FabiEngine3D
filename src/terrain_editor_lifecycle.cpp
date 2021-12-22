@@ -28,7 +28,7 @@ void TerrainEditor::load()
 	_fe3d.camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 	_fe3d.camera_setThirdPersonLookat(fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 
-	// Default graphics
+	// Graphics
 	_fe3d.gfx_enableAntiAliasing();
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_enableAmbientLighting();
@@ -61,19 +61,19 @@ void TerrainEditor::unload()
 	// GUI
 	_unloadGUI();
 
-	// Default graphics
+	// Graphics
 	_fe3d.gfx_disableAntiAliasing(true);
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);
 
-	// Delete terrains
+	// Terrains
 	_fe3d.terrain_deleteAll();
 
-	// Delete models
+	// Models
 	_fe3d.model_deleteAll();
 
-	// Reset editor properties
+	// Editor properties
 	_loadedTerrainIDs.clear();
 	_currentTerrainID = "";
 	_isEditorLoaded = false;

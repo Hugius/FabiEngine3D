@@ -88,7 +88,7 @@ void SoundEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("play")->isHovered())
 		{
-			_fe3d.sound2d_start(_currentSoundID, 0, 0, false);
+			_fe3d.sound2d_start(_currentSoundID, 1, 0, false);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("resume")->isHovered())
 		{
@@ -99,24 +99,6 @@ void SoundEditor::_updateChoiceMenu()
 			_fe3d.sound2d_pause(_currentSoundID);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("stop")->isHovered())
-		{
-			_fe3d.sound2d_stop(_currentSoundID, 0);
-		}
-
-		// Controlling sound playback through keyboard
-		if(_fe3d.input_isKeyPressed(InputType::KEY_SPACE) && !isPlaying && !isPaused)
-		{
-			_fe3d.sound2d_start(_currentSoundID, 0, 0, false);
-		}
-		else if(_fe3d.input_isKeyPressed(InputType::KEY_R) && isPaused)
-		{
-			_fe3d.sound2d_resume(_currentSoundID);
-		}
-		else if(_fe3d.input_isKeyPressed(InputType::KEY_P) && isPlaying)
-		{
-			_fe3d.sound2d_pause(_currentSoundID);
-		}
-		else if(_fe3d.input_isKeyPressed(InputType::KEY_S) && (isPlaying || isPaused))
 		{
 			_fe3d.sound2d_stop(_currentSoundID, 0);
 		}

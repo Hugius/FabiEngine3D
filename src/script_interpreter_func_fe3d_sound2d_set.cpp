@@ -154,6 +154,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 			}
 		}
 	}
+
 	else
 	{
 		return false;

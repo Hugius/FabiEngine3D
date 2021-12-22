@@ -7,26 +7,6 @@ const unsigned int FabiEngine3D::misc_getTriangleCount() const
 	return _core->_renderBus.getTriangleCount();
 }
 
-const unsigned int FabiEngine3D::misc_getAllocatedSound2dChannelCount() const
-{
-	return _core->_sound2dPlayer.getAllocatedChannelCount();
-}
-
-const unsigned int FabiEngine3D::misc_getAllocatedSound3dChannelCount() const
-{
-	return _core->_sound3dPlayer.getAllocatedChannelCount();
-}
-
-const unsigned int FabiEngine3D::misc_getUsedSound2dChannelCount() const
-{
-	return _core->_sound2dPlayer.getUsedChannelCount();
-}
-
-const unsigned int FabiEngine3D::misc_getUsedSound3dChannelCount() const
-{
-	return _core->_sound3dPlayer.getUsedChannelCount();
-}
-
 const float FabiEngine3D::misc_getFPS() const
 {
 	return (1000.0f / _core->_deltaTimeMS);

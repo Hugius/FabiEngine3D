@@ -129,9 +129,10 @@ void GuiButton::_updateHovering(bool isHoverable)
 			// Set rectangle to default color
 			_fe3d.image_setColor(_rectangle->getEntityID(), _rectangle->getInitialColor());
 
-			// Check if button has textfield
+			// Check if button has text field
 			if(_textField != nullptr)
 			{
+				// Temporary values
 				string TextFieldID = _textField->getEntityID();
 
 				// Slowly decrease to default size

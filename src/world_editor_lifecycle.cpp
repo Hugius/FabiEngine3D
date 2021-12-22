@@ -35,7 +35,7 @@ void WorldEditor::load()
 	// Camera
 	_fe3d.camera_reset();
 
-	// Default graphics
+	// Graphics
 	_fe3d.gfx_enableAntiAliasing();
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
 
@@ -50,25 +50,25 @@ void WorldEditor::load()
 
 	// Load template models
 	_modelEditor.loadFromFile();
-	for(const auto& modelID : _modelEditor.getLoadedIDs())
+	for(const auto& ID : _modelEditor.getLoadedIDs())
 	{
 		// Check if there is a model entity present
-		if(_fe3d.model_isExisting(modelID))
+		if(_fe3d.model_isExisting(ID))
 		{
 			_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuModelPlace")->getScrollingList("modelList")->
-				createButton(modelID, modelID.substr(1));
+				createButton(ID, ID.substr(1));
 		}
 	}
 
 	// Load template billboards
 	_billboardEditor.loadFromFile();
-	for(const auto& billboardID : _billboardEditor.getLoadedIDs())
+	for(const auto& ID : _billboardEditor.getLoadedIDs())
 	{
 		// Check if there is a billboard entity present
-		if(_fe3d.billboard_isExisting(billboardID))
+		if(_fe3d.billboard_isExisting(ID))
 		{
 			_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuBillboardPlace")->getScrollingList("billboardList")->
-				createButton(billboardID, billboardID.substr(1));
+				createButton(ID, ID.substr(1));
 		}
 	}
 
@@ -84,12 +84,13 @@ void WorldEditor::load()
 	_fe3d.model_setReflected(TEMPLATE_SPEAKER_ID, false);
 	_fe3d.model_setBright(TEMPLATE_SPEAKER_ID, true);
 	_fe3d.model_setVisible(TEMPLATE_SPEAKER_ID, false);
-	for(const auto& soundID : _soundEditor.getLoadedIDs())
+	for(const auto& ID : _soundEditor.getLoadedIDs())
 	{
-		_fe3d.sound3d_setMaxVolume(soundID, DEFAULT_SOUND_MAX_VOLUME);
-		_fe3d.sound3d_setMaxDistance(soundID, DEFAULT_SOUND_MAX_DISTANCE);
+		_fe3d.sound3d_create(ID, _fe3d.sound2d_getAudioPath(ID));
+		_fe3d.sound3d_setMaxVolume(ID, DEFAULT_SOUND_MAX_VOLUME);
+		_fe3d.sound3d_setMaxDistance(ID, DEFAULT_SOUND_MAX_DISTANCE);
 		_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuSoundPlace")->getScrollingList("sounds")->
-			createButton(soundID, soundID.substr(1));
+			createButton(ID, ID.substr(1));
 	}
 
 	// Load template pointlight
@@ -145,10 +146,9 @@ void WorldEditor::unload()
 	// GUI
 	_unloadGUI();
 
-	// Default graphics
+	// Graphics
 	_fe3d.gfx_disableAntiAliasing(true);
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
-	_fe3d.gfx_setPlanarReflectionHeight(0.0f);
 
 	// Clear world
 	clearCurrentWorld();
@@ -173,7 +173,7 @@ void WorldEditor::unload()
 	_fe3d.spotlight_deleteAll();
 	_fe3d.reflection_deleteAll();
 
-	// Reset editor properties
+	// Editor properties
 	_loadedModelIDs.clear();
 	_outsideLoadedModelIDs.clear();
 	_loadedBillboardIDs.clear();

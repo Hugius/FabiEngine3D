@@ -30,7 +30,7 @@ void Animation3dEditor::load()
 	_fe3d.camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 	_fe3d.camera_setThirdPersonLookat(fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 
-	// Default graphics
+	// Graphics
 	_fe3d.gfx_enableAntiAliasing();
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_enableAmbientLighting();
@@ -40,7 +40,6 @@ void Animation3dEditor::load()
 	_fe3d.gfx_setDirectionalLightingColor(fvec3(1.0f));
 	_fe3d.gfx_setDirectionalLightingPosition(fvec3(10000.0f));
 	_fe3d.gfx_setDirectionalLightingIntensity(3.0f);
-	_fe3d.gfx_setPlanarReflectionHeight(0.0f);
 	_fe3d.gfx_enableBloom();
 	_fe3d.gfx_setBloomType(BloomType::PARTS);
 	_fe3d.gfx_setBloomIntensity(1.0f);
@@ -81,7 +80,7 @@ void Animation3dEditor::unload()
 		_fe3d.camera_disableThirdPersonView();
 	}
 
-	// Default graphics
+	/// Graphics
 	_fe3d.gfx_disableAntiAliasing(true);
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_disableAmbientLighting(true);
@@ -89,14 +88,14 @@ void Animation3dEditor::unload()
 	_fe3d.gfx_disableBloom(true);
 	_fe3d.gfx_disableShadows(true);
 
-	// Delete models
+	// Models
 	_fe3d.model_deleteAll();
 
-	// Delete textfields
+	// Text fields
 	_gui.getOverlay()->deleteTextField("animationID");
 	_gui.getOverlay()->deleteTextField("animationFrame");
 
-	// Reset editor properties
+	// Editor properties
 	_animations.clear();
 	_modelAnimationsToStop.clear();
 	_modelAnimationsToStart.clear();

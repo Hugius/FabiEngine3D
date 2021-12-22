@@ -53,7 +53,7 @@ void ScriptEditor::load()
 	_fe3d.sky_selectMainSky("");
 	Tools::setRenderColor(BACKGROUND_COLOR);
 
-	// Default graphics
+	// Graphics
 	_fe3d.gfx_enableBloom();
 	_fe3d.gfx_setBloomType(BloomType::PARTS);
 	_fe3d.gfx_setBloomIntensity(0.95f);
@@ -73,7 +73,7 @@ void ScriptEditor::unload()
 	_fe3d.sky_selectMainSky("@@background");
 	Tools::setRenderColor(fvec3(0.0f));
 
-	// Default graphics
+	// Graphics
 	_fe3d.gfx_disableBloom(true);
 
 	// Delete created entities
@@ -85,7 +85,7 @@ void ScriptEditor::unload()
 	// Unload script
 	_script.reset();
 
-	// Reset editor properties
+	// Editor properties
 	_scriptFileNamesToDelete.clear();
 	_copyClipboard.clear();
 	_currentScriptFileID = "";

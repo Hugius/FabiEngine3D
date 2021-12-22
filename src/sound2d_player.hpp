@@ -3,10 +3,10 @@
 #include "sound2d.hpp"
 
 #include <string>
-#include <vector>
+#include <array>
 
 using std::string;
-using std::vector;
+using std::array;
 
 class Sound2dPlayer final
 {
@@ -14,7 +14,6 @@ public:
 	Sound2dPlayer();
 
 	// VOID
-	void allocateChannels(unsigned int count);
 	void update(vector<Sound2d>& sounds);
 	void startSound(Sound2d& sound, int playCount, unsigned int fadeMS, bool mustForce);
 	void pauseSound(Sound2d& sound);
@@ -43,5 +42,8 @@ private:
 	const int _getFreeChannel() const;
 
 	// STRING
-	vector<string> _channels;
+	array<string, 1024> _channels;
+
+	// UNSIGNED INT
+	static inline const unsigned int MAX_CHANNEL_COUNT = 1024;
 };

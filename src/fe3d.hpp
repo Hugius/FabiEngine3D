@@ -762,7 +762,6 @@ public:
 	void gfx_disableMotionBlur(bool mustResetProperties);
 	void gfx_disableLensFlare(bool mustResetProperties);
 	void gfx_setCubeReflectionQuality(unsigned int value);
-	void gfx_setPlanarReflectionHeight(float value);
 	void gfx_setPlanarReflectionQuality(unsigned int value);
 	void gfx_setPlanarRefractionQuality(unsigned int value);
 	void gfx_setAnisotropicFilteringQuality(unsigned int value);
@@ -798,6 +797,7 @@ public:
 	void gfx_setLensFlareMap(const string& value);
 	void gfx_setLensFlareIntensity(float value);
 	void gfx_setLensFlareSensitivity(float value);
+	void gfx_setPlanarReflectionHeight(float value);
 
 	// GRAPHICS - getters
 	const string& gfx_getLensFlareMapPath() const;
@@ -929,8 +929,6 @@ public:
 	void misc_clearFontsCache();
 	void misc_clearAudiosCache();
 	void misc_startMillisecondTimer();
-	void misc_allocateSound2dChannels(unsigned int count);
-	void misc_allocateSound3dChannels(unsigned int count);
 
 	// MISC - getters
 	const vector<pair<string, int>> misc_getUpdateProfilingStatistics() const;
@@ -944,10 +942,6 @@ public:
 	const float misc_getFPS() const;
 	const float misc_stopMillisecondTimer() const;
 	const unsigned int misc_getTriangleCount() const;
-	const unsigned int misc_getAllocatedSound2dChannelCount() const;
-	const unsigned int misc_getAllocatedSound3dChannelCount() const;
-	const unsigned int misc_getUsedSound2dChannelCount() const;
-	const unsigned int misc_getUsedSound3dChannelCount() const;
 	const bool misc_isCursorVisible() const;
 	const bool misc_isCursorInsideViewport() const;
 	const bool misc_isCursorInsideWindow() const;

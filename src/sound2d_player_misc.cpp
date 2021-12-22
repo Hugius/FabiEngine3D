@@ -6,7 +6,7 @@ using std::clamp;
 
 Sound2dPlayer::Sound2dPlayer()
 {
-	Mix_AllocateChannels(0);
+	Mix_AllocateChannels(MAX_CHANNEL_COUNT);
 }
 
 void Sound2dPlayer::update(vector<Sound2d>& sounds)
@@ -26,22 +26,6 @@ void Sound2dPlayer::update(vector<Sound2d>& sounds)
 			// De-allocate channel
 			_channels[i] = "";
 		}
-	}
-}
-
-void Sound2dPlayer::allocateChannels(unsigned int count)
-{
-	// Limit count
-	count = clamp(count, Config::MIN_SOUND_CHANNELS, Config::MAX_SOUND_CHANNELS);
-
-	// Allocate sound channels
-	Mix_AllocateChannels(count);
-
-	// Initialize sound channels
-	_channels.clear();
-	for(unsigned int i = 0; i < count; i++)
-	{
-		_channels.push_back("");
 	}
 }
 

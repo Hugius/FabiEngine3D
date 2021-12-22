@@ -77,10 +77,8 @@ Sound3d& Sound3dManager::getSound(const string& ID)
 	{
 		Logger::throwError("Sound3dManager::getSound");
 	}
-	else
-	{
-		return _sounds[index];
-	}
+
+	return _sounds[index];
 }
 
 const int Sound3dManager::_findSoundIndex(const string& ID) const

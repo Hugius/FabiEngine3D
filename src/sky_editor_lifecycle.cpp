@@ -24,7 +24,7 @@ void SkyEditor::load()
 	_fe3d.camera_reset();
 	_fe3d.camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 
-	// Default graphics
+	// Graphics
 	_fe3d.gfx_enableMotionBlur();
 	_fe3d.gfx_setMotionBlurStrength(0.1f);
 	_fe3d.gfx_setMotionBlurQuality(Config::MAX_MOTION_BLUR_QUALITY);
@@ -39,7 +39,7 @@ void SkyEditor::unload()
 	// GUI
 	_unloadGUI();
 
-	// Default graphics
+	// Graphics
 	_fe3d.gfx_disableMotionBlur(true);
 
 	// Delete all sky entities except the background
@@ -51,7 +51,7 @@ void SkyEditor::unload()
 		}
 	}
 
-	// Reset editor properties
+	// Editor properties
 	_loadedSkyIDs.clear();
 	_currentSkyID = "";
 	_isEditorLoaded = false;

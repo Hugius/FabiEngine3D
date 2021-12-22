@@ -34,7 +34,7 @@ void ModelEditor::load()
 	_fe3d.camera_setThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 	_fe3d.camera_setThirdPersonLookat(fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 
-	// Default graphics
+	// Graphics
 	_fe3d.gfx_enableAntiAliasing();
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_enableAmbientLighting();
@@ -85,7 +85,7 @@ void ModelEditor::unload()
 		_fe3d.camera_disableThirdPersonView();
 	}
 
-	// Default graphics
+	// Graphics
 	_fe3d.gfx_disableAntiAliasing(true);
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_disableAmbientLighting(true);
@@ -93,7 +93,7 @@ void ModelEditor::unload()
 	_fe3d.gfx_disableBloom(true);
 	_fe3d.gfx_disableShadows(true);
 
-	// Delete models
+	// Models
 	_fe3d.model_deleteAll();
 
 	// Properties

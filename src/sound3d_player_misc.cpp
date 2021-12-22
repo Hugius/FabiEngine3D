@@ -6,7 +6,7 @@ using std::clamp;
 
 Sound3dPlayer::Sound3dPlayer()
 {
-	Mix_AllocateChannels(0);
+	Mix_AllocateChannels(MAX_CHANNEL_COUNT);
 }
 
 void Sound3dPlayer::update(vector<Sound3d>& sounds, Camera& camera)
@@ -60,22 +60,6 @@ void Sound3dPlayer::update(vector<Sound3d>& sounds, Camera& camera)
 			// De-allocate channel
 			_channels[i] = "";
 		}
-	}
-}
-
-void Sound3dPlayer::allocateChannels(unsigned int count)
-{
-	// Limit count
-	count = clamp(count, Config::MIN_SOUND_CHANNELS, Config::MAX_SOUND_CHANNELS);
-
-	// Allocate sound channels
-	Mix_AllocateChannels(count);
-
-	// Initialize sound channels to none
-	_channels.clear();
-	for(unsigned int i = 0; i < count; i++)
-	{
-		_channels.push_back("");
 	}
 }
 

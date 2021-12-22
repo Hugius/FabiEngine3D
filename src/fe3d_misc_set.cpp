@@ -285,13 +285,3 @@ void FabiEngine3D::misc_startMillisecondTimer()
 
 	_core->_timer.start();
 }
-
-void FabiEngine3D::misc_allocateSound2dChannels(unsigned int count)
-{
-	_core->_sound2dPlayer.allocateChannels(count);
-}
-
-void FabiEngine3D::misc_allocateSound3dChannels(unsigned int count)
-{
-	_core->_sound3dPlayer.allocateChannels(count);
-}

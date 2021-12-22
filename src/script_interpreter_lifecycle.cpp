@@ -312,6 +312,10 @@ void ScriptInterpreter::unload()
 	}
 
 	// Reset graphics
+	if(_fe3d.gfx_isAntiAliasingEnabled())
+	{
+		_fe3d.gfx_disableAntiAliasing(true);
+	}
 	if(_fe3d.gfx_isAmbientLightingEnabled())
 	{
 		_fe3d.gfx_disableAmbientLighting(true);
@@ -348,6 +352,10 @@ void ScriptInterpreter::unload()
 	{
 		_fe3d.gfx_disableBloom(true);
 	}
+	_fe3d.gfx_setCubeReflectionQuality(Config::MIN_REFLECTION_QUALITY);
+	_fe3d.gfx_setPlanarReflectionQuality(Config::MIN_REFLECTION_QUALITY);
+	_fe3d.gfx_setPlanarRefractionQuality(Config::MIN_REFRACTION_QUALITY);
+	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_setPlanarReflectionHeight(0.0f);
 
 	// Reset networking server

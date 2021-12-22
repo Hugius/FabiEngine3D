@@ -295,7 +295,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				_fe3d.billboard_setRotation(billboardID, rotation);
 				_fe3d.billboard_setSize(billboardID, size);
 
-				// Start animation3D
+				// Start animation2D
 				if(!animationID.empty())
 				{
 					_animation2dEditor.startBillboardAnimation(animationID, billboardID, -1);

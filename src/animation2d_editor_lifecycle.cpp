@@ -25,7 +25,7 @@ void Animation2dEditor::load()
 	_fe3d.camera_reset();
 	_fe3d.camera_setYaw(270.0f);
 
-	// Default graphics
+	// Graphics
 	_fe3d.gfx_enableAntiAliasing();
 
 	// Preview image
@@ -43,16 +43,16 @@ void Animation2dEditor::unload()
 	// GUI
 	_unloadGUI();
 
-	// Default graphics
+	// Graphics
 	_fe3d.gfx_disableAntiAliasing(true);
 
-	// Delete billboards
+	// Billboards
 	_fe3d.billboard_deleteAll();
 
-	// Delete textfields
+	// Text fields
 	_gui.getOverlay()->deleteTextField("animationID");
 
-	// Reset editor properties
+	// Editor properties
 	_animations.clear();
 	_startedBillboardAnimations.clear();
 	_startedImageAnimations.clear();

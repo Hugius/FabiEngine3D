@@ -103,6 +103,11 @@ void WorldEditor::clearCurrentWorld()
 		{
 			_fe3d.gfx_disableBloom(true);
 		}
+		_fe3d.gfx_setPlanarReflectionHeight(0.0f);
+		_fe3d.gfx_setCubeReflectionQuality(Config::MIN_REFLECTION_QUALITY);
+		_fe3d.gfx_setPlanarReflectionQuality(Config::MIN_REFLECTION_QUALITY);
+		_fe3d.gfx_setPlanarRefractionQuality(Config::MIN_REFRACTION_QUALITY);
+		_fe3d.gfx_setPlanarReflectionHeight(0.0);
 	}
 
 	// Reset sky

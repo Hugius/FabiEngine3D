@@ -20,7 +20,7 @@ void SoundEditor::load()
 	// GUI
 	_loadGUI();
 
-	// Default graphics
+	// Graphics
 	_fe3d.gfx_enableAntiAliasing();
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_enableBloom();
@@ -49,16 +49,18 @@ void SoundEditor::unload()
 	// GUI
 	_unloadGUI();
 
-	// Default graphics
+	// Graphics
 	_fe3d.gfx_disableAntiAliasing(true);
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_disableBloom(true);
 
-	// Delete created entities
-	_fe3d.sound2d_deleteAll();
+	// Billboards
 	_fe3d.billboard_delete("@@icon");
 
-	// Reset editor properties
+	// Sounds
+	_fe3d.sound2d_deleteAll();
+
+	// Editor properties
 	_loadedSoundIDs.clear();
 	_currentSoundID = "";
 	_hoveredSoundID = "";

@@ -44,8 +44,6 @@ public:
 	static inline const unsigned int MAX_REFLECTION_QUALITY = 1024;
 	static inline const unsigned int MIN_REFRACTION_QUALITY = 128;
 	static inline const unsigned int MAX_REFRACTION_QUALITY = 1024;
-	static inline const unsigned int MIN_SOUND_CHANNELS = 64;
-	static inline const unsigned int MAX_SOUND_CHANNELS = 512;
 	static inline const unsigned int UPDATES_PER_SECOND = 144;
 
 	// BOOL

@@ -4,9 +4,11 @@
 
 #include <string>
 #include <array>
+#include <vector>
 
 using std::string;
 using std::array;
+using std::vector;
 
 class Sound2dPlayer final
 {
@@ -33,17 +35,17 @@ public:
 	const bool isSoundPlaying(Sound2d& sound) const;
 	const bool isSoundPaused(Sound2d& sound) const;
 
+	// UNSIGNED INT
+	static inline const unsigned int MAX_CHANNEL_COUNT = 1024;
+
 private:
 	// VOID
 	void _updateSoundVolume(Sound2d& sound);
 
 	// INT
-	const vector<int> _findChannels(Sound2d& sound) const;
+	const vector<unsigned int> _findChannels(Sound2d& sound) const;
 	const int _getFreeChannel() const;
 
 	// STRING
 	array<string, 1024> _channels;
-
-	// UNSIGNED INT
-	static inline const unsigned int MAX_CHANNEL_COUNT = 1024;
 };

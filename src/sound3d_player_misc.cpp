@@ -120,17 +120,17 @@ void Sound3dPlayer::_updateSoundVolume(Sound3d& sound)
 	}
 }
 
-const vector<int> Sound3dPlayer::_findChannels(Sound3d& sound) const
+const vector<unsigned int> Sound3dPlayer::_findChannels(Sound3d& sound) const
 {
 	// Temporary values
-	vector<int> channels;
+	vector<unsigned int> channels;
 
 	// Find sound channels
 	for(size_t i = 0; i < _channels.size(); i++)
 	{
 		if(_channels[i] == sound.getID())
 		{
-			channels.push_back(static_cast<int>(i));
+			channels.push_back(static_cast<unsigned int>(i));
 		}
 	}
 

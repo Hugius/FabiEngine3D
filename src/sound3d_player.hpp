@@ -4,9 +4,11 @@
 #include "camera.hpp"
 
 #include <string>
+#include <array>
 #include <vector>
 
 using std::string;
+using std::array;
 using std::vector;
 
 class Sound3dPlayer final
@@ -34,17 +36,17 @@ public:
 	const bool isSoundPlaying(Sound3d& sound) const;
 	const bool isSoundPaused(Sound3d& sound) const;
 
+	// UNSIGNED INT
+	static inline const unsigned int MAX_CHANNEL_COUNT = 1024;
+
 private:
 	// VOID
 	void _updateSoundVolume(Sound3d& sound);
 
 	// INT
-	const vector<int> _findChannels(Sound3d& sound) const;
+	const vector<unsigned int> _findChannels(Sound3d& sound) const;
 	const int _getFreeChannel() const;
 
 	// STRING
-	vector<string> _channels;
-
-	// UNSIGNED INT
-	static inline const unsigned int MAX_CHANNEL_COUNT = 1024;
+	array<string, 1024> _channels;
 };

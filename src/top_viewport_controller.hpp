@@ -1,7 +1,6 @@
 #pragma once
 
 #include "base_viewport_controller.hpp"
-#include "settings_editor.hpp"
 #include "sky_editor.hpp"
 #include "terrain_editor.hpp"
 #include "water_editor.hpp"
@@ -18,7 +17,6 @@ class TopViewportController final : public BaseViewportController
 public:
 	TopViewportController(FabiEngine3D& fe3d,
 						  GuiManager& gui,
-						  SettingsEditor& settingsEditor,
 						  SkyEditor& skyEditor,
 						  TerrainEditor& terrainEditor,
 						  WaterEditor& waterEditor,
@@ -72,7 +70,6 @@ private:
 	bool _isDeletingProject = false;
 
 	// MISCELLANEOUS
-	SettingsEditor& _settingsEditor;
 	SkyEditor& _skyEditor;
 	TerrainEditor& _terrainEditor;
 	WaterEditor& _waterEditor;

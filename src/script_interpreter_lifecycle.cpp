@@ -222,9 +222,6 @@ void ScriptInterpreter::load()
 	// Camera
 	_fe3d.camera_reset();
 
-	// Default graphics
-	_fe3d.gfx_setPlanarReflectionHeight(0.0f);
-
 	// Miscellaneous
 	if(_fe3d.misc_isVsyncEnabled())
 	{
@@ -351,6 +348,7 @@ void ScriptInterpreter::unload()
 	{
 		_fe3d.gfx_disableBloom(true);
 	}
+	_fe3d.gfx_setPlanarReflectionHeight(0.0f);
 
 	// Reset networking server
 	if(_fe3d.server_isRunning())

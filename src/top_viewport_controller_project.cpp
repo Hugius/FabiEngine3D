@@ -94,10 +94,6 @@ void TopViewportController::_updateProjectCreating()
 				_currentProjectID = newProjectID;
 				_applyProjectChange();
 
-				// Create default settings
-				_settingsEditor.loadDefaultSettings();
-				_settingsEditor.saveSettingsToFile();
-
 				// Logging
 				Logger::throwInfo("New project \"" + _currentProjectID + "\" created!");
 
@@ -129,9 +125,6 @@ void TopViewportController::_updateProjectLoading()
 			// Load current project
 			_currentProjectID = clickedButtonID;
 			_applyProjectChange();
-
-			// Load settings for this project
-			_settingsEditor.loadSettingsFromFile();
 
 			// Gather file paths
 			auto skyTexturePaths = _skyEditor.getTexturePathsFromFile();

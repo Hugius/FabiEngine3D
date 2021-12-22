@@ -21,6 +21,8 @@ void SoundEditor::load()
 	_loadGUI();
 
 	// Default graphics
+	_fe3d.gfx_enableAntiAliasing();
+	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_enableBloom();
 	_fe3d.gfx_setBloomType(BloomType::PARTS);
 	_fe3d.gfx_setBloomIntensity(1.0f);
@@ -48,6 +50,8 @@ void SoundEditor::unload()
 	_unloadGUI();
 
 	// Default graphics
+	_fe3d.gfx_disableAntiAliasing(true);
+	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_disableBloom(true);
 
 	// Delete created entities

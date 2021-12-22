@@ -60,13 +60,6 @@ void ScriptEditor::load()
 	_fe3d.gfx_setBloomBlurCount(2);
 	_fe3d.gfx_setBloomQuality(BLOOM_QUALITY);
 
-	// Save anti aliasing state
-	_wasAntiAliasingEnabled = _fe3d.gfx_isAntiAliasingEnabled();
-	if(_wasAntiAliasingEnabled)
-	{
-		_fe3d.gfx_disableAntiAliasing(true);
-	}
-
 	// Miscellaneous
 	_isEditorLoaded = true;
 }
@@ -82,12 +75,6 @@ void ScriptEditor::unload()
 
 	// Default graphics
 	_fe3d.gfx_disableBloom(true);
-
-	// Reset anti aliasing
-	if(_wasAntiAliasingEnabled)
-	{
-		_fe3d.gfx_enableAntiAliasing();
-	}
 
 	// Delete created entities
 	_fe3d.model_deleteAll();
@@ -107,7 +94,6 @@ void ScriptEditor::unload()
 	_lastSelectedLineIndex = -1;
 	_passedFrames = 0;
 	_isEditorLoaded = false;
-	_wasAntiAliasingEnabled = false;
 	_isScriptLoadedFromFile = false;
 	_isWritingScript = false;
 	_isSingleActionAllowed = true;

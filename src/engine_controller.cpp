@@ -10,7 +10,6 @@ EngineController::EngineController()
 	_leftViewportController(*this, _gui),
 	_rightViewportController(*this, _gui),
 	_topViewportController(*this, _gui,
-						   _leftViewportController.getSettingsEditor(),
 						   _leftViewportController.getSkyEditor(),
 						   _leftViewportController.getTerrainEditor(),
 						   _leftViewportController.getWaterEditor(),
@@ -43,9 +42,6 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 		// Render color
 		Tools::setRenderColor(RENDER_COLOR);
-
-		// Load application settings
-		_leftViewportController.getSettingsEditor().loadSettingsFromFile();
 
 		// Initialize script execution
 		_leftViewportController.getScriptEditor().loadScriptFiles(true);

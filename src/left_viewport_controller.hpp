@@ -1,7 +1,6 @@
 #pragma once
 
 #include "base_viewport_controller.hpp"
-#include "settings_editor.hpp"
 #include "sky_editor.hpp"
 #include "terrain_editor.hpp"
 #include "water_editor.hpp"
@@ -23,7 +22,6 @@ public:
 	void update() override;
 
 	// MISCELLANEOUS
-	SettingsEditor& getSettingsEditor();
 	SkyEditor& getSkyEditor();
 	TerrainEditor& getTerrainEditor();
 	WaterEditor& getWaterEditor();
@@ -54,7 +52,6 @@ private:
 	static inline const float CH = 0.0875f;
 
 	// MISCELLANEOUS
-	SettingsEditor _settingsEditor;
 	SkyEditor _skyEditor;
 	TerrainEditor _terrainEditor;
 	WaterEditor _waterEditor;

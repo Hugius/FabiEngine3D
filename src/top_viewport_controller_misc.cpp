@@ -10,7 +10,6 @@ using TVPC = TopViewportController;
 
 TopViewportController::TopViewportController(FabiEngine3D& fe3d,
 											 GuiManager& gui,
-											 SettingsEditor& settingsEditor,
 											 SkyEditor& skyEditor,
 											 TerrainEditor& terrainEditor,
 											 WaterEditor& waterEditor,
@@ -23,7 +22,6 @@ TopViewportController::TopViewportController(FabiEngine3D& fe3d,
 											 ScriptEditor& scriptEditor)
 	:
 	BaseViewportController(fe3d, gui),
-	_settingsEditor(settingsEditor),
 	_skyEditor(skyEditor),
 	_terrainEditor(terrainEditor),
 	_waterEditor(waterEditor),
@@ -117,7 +115,6 @@ void TopViewportController::_updateMiscellaneous()
 	bool isHoverable = (_currentProjectID.empty()) ? false : !_scriptEditor.getScriptExecutor().isStarted();
 
 	// Update buttons hoverability
-	screen->getButton("settingsEditor")->setHoverable(isHoverable);
 	screen->getButton("skyEditor")->setHoverable(isHoverable);
 	screen->getButton("terrainEditor")->setHoverable(isHoverable);
 	screen->getButton("waterEditor")->setHoverable(isHoverable);
@@ -165,12 +162,6 @@ void TopViewportController::_applyProjectChange()
 
 	// Go back to main menu
 	_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
-
-	// Unload settings editor
-	if(_settingsEditor.isLoaded())
-	{
-		_settingsEditor.unload();
-	}
 
 	// Unload sky editor
 	if(_skyEditor.isLoaded())
@@ -233,7 +224,6 @@ void TopViewportController::_applyProjectChange()
 	}
 
 	// Pass loaded project ID
-	_settingsEditor.setCurrentProjectID(_currentProjectID);
 	_skyEditor.setCurrentProjectID(_currentProjectID);
 	_terrainEditor.setCurrentProjectID(_currentProjectID);
 	_waterEditor.setCurrentProjectID(_currentProjectID);
@@ -286,7 +276,6 @@ void TopViewportController::_saveCurrentProject()
 	}
 
 	// Save everything
-	_settingsEditor.saveSettingsToFile();
 	_skyEditor.saveToFile();
 	_terrainEditor.saveToFile();
 	_waterEditor.saveToFile();

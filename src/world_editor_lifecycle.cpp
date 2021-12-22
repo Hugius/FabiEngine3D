@@ -36,7 +36,8 @@ void WorldEditor::load()
 	_fe3d.camera_reset();
 
 	// Default graphics
-	_fe3d.gfx_setPlanarReflectionHeight(0.0f);
+	_fe3d.gfx_enableAntiAliasing();
+	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
 
 	// Load template skies
 	_skyEditor.loadFromFile();
@@ -143,6 +144,11 @@ void WorldEditor::unload()
 {
 	// GUI
 	_unloadGUI();
+
+	// Default graphics
+	_fe3d.gfx_disableAntiAliasing(true);
+	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
+	_fe3d.gfx_setPlanarReflectionHeight(0.0f);
 
 	// Clear world
 	clearCurrentWorld();

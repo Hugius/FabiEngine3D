@@ -124,7 +124,6 @@ private:
 	};
 
 	// BOOL
-	bool _wasAntiAliasingEnabled = false;
 	bool _isScriptLoadedFromFile = false;
 	bool _isWritingScript = false;
 	bool _isSingleActionAllowed = true;

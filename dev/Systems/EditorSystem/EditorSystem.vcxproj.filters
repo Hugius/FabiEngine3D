@@ -28,9 +28,6 @@
     <Filter Include="Script Editor\Miscellaneous">
       <UniqueIdentifier>{9c8d43b8-7054-467f-a457-a86edb05b425}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Settings Editor">
-      <UniqueIdentifier>{126ada8c-b400-4922-ab90-b00ad353589a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sky Editor">
       <UniqueIdentifier>{bc63cee9-72b3-4934-a47f-6afda369118e}</UniqueIdentifier>
     </Filter>
@@ -342,9 +339,6 @@
     <ClCompile Include="..\..\..\src\script_editor_misc.cpp">
       <Filter>Script Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\settings_editor.cpp">
-      <Filter>Settings Editor</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\animation3d_editor_update_misc.cpp">
       <Filter>Animation3D Editor\Update</Filter>
     </ClCompile>
@@ -586,9 +580,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\script_editor.hpp">
       <Filter>Script Editor\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\settings_editor.hpp">
-      <Filter>Settings Editor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\water_editor.hpp">
       <Filter>Water Editor\Base</Filter>

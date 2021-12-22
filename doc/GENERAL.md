@@ -118,7 +118,7 @@
 
 ## 3. Engine Interface
 
-- **Left Viewport**: editors & settings
+- **Left Viewport**: editors
 - **Top Viewport**: project management & preview management
 - **Right Viewport**: controls & properties
 - **Bottom Viewport**: statistics & logging

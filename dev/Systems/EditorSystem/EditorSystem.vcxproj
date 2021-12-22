@@ -136,7 +136,6 @@
     <ClCompile Include="..\..\..\src\script_editor_update_selector.cpp" />
     <ClCompile Include="..\..\..\src\script_editor_update_misc.cpp" />
     <ClCompile Include="..\..\..\src\script_editor_update_writer.cpp" />
-    <ClCompile Include="..\..\..\src\settings_editor.cpp" />
     <ClCompile Include="..\..\..\src\water_editor_update_miscellaneous.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,7 +150,6 @@
     <ClInclude Include="..\..\..\src\animation2d_editor.hpp" />
     <ClInclude Include="..\..\..\src\world_editor.hpp" />
     <ClInclude Include="..\..\..\src\script_editor.hpp" />
-    <ClInclude Include="..\..\..\src\settings_editor.hpp" />
     <ClInclude Include="..\..\..\src\terrain_editor.hpp" />
     <ClInclude Include="..\..\..\src\water_editor.hpp" />
   </ItemGroup>

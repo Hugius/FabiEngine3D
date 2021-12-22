@@ -29,6 +29,8 @@ void TerrainEditor::load()
 	_fe3d.camera_setThirdPersonLookat(fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 
 	// Default graphics
+	_fe3d.gfx_enableAntiAliasing();
+	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_enableAmbientLighting();
 	_fe3d.gfx_setAmbientLightingColor(fvec3(1.0f));
 	_fe3d.gfx_setAmbientLightingIntensity(1.0f);
@@ -60,6 +62,8 @@ void TerrainEditor::unload()
 	_unloadGUI();
 
 	// Default graphics
+	_fe3d.gfx_disableAntiAliasing(true);
+	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);
 

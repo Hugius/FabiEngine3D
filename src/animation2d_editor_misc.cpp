@@ -15,13 +15,11 @@ const vector<string> Animation2dEditor::getAnimationIDs()
 {
 	vector<string> result;
 
-	// Find all IDs
 	for(const auto& animation : _animations)
 	{
 		result.push_back(animation->getID());
 	}
 
-	// Sort alphabetically
 	sort(result.begin(), result.end());
 
 	return result;

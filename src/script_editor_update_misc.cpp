@@ -21,20 +21,22 @@ void ScriptEditor::_updateGUI()
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("search")->isHovered())
 		{
 			_gui.getOverlay()->createValueForm("search", "Search Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			_isSearchingScriptFile = true;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
 			_gui.getOverlay()->createValueForm("scriptCreate", "Create Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			_isCreatingScriptFile = true;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			auto IDs = _script.getScriptFileIDs();
-			sort(IDs.begin(), IDs.end());
-			_gui.getOverlay()->createChoiceForm("scriptFileList", "Edit Script", fvec2(0.0f, 0.1f), IDs);
+			_gui.getOverlay()->createChoiceForm("scriptFileList", "Edit Script", fvec2(0.0f, 0.1f), _script.getScriptFileIDs());
+			_isChoosingScriptFile = true;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rename")->isHovered())
 		{
 			_gui.getOverlay()->createValueForm("scriptRename", "Rename Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			_isRenamingScriptFile = true;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -76,6 +78,161 @@ void ScriptEditor::_updateGUI()
 
 		// Update button text contents
 		screen->getTextField("lineCount")->changeTextContent("Lines: " + to_string(_script.getTotalLineCount()));
+	}
+}
+
+void ScriptEditor::_updateScriptFileCreating()
+{
+	if(_isCreatingScriptFile)
+	{
+		// Temporary values
+		string newScriptFileID;
+
+		// Check if user filled in a new ID
+		if(_gui.getOverlay()->checkValueForm("scriptCreate", newScriptFileID))
+		{
+			// Spaces not allowed
+			if(newScriptFileID.find(' ') != string::npos)
+			{
+				Logger::throwWarning("Script ID cannot contain any spaces!");
+				return;
+			}
+
+			// @ sign not allowed
+			if(newScriptFileID.find('@') != string::npos)
+			{
+				Logger::throwWarning("Script ID cannot contain '@'!");
+				return;
+			}
+
+			// Check if script file already exists
+			auto existingScriptFileIDs = _script.getScriptFileIDs();
+			if(find(existingScriptFileIDs.begin(), existingScriptFileIDs.end(), newScriptFileID) != existingScriptFileIDs.end())
+			{
+				Logger::throwWarning("Script with ID \"" + newScriptFileID + "\" already exists!");
+				return;
+			}
+
+			// Create script file
+			_currentScriptFileID = newScriptFileID;
+			_isWritingScript = true;
+			_firstSelectedLineIndex = -1;
+			_lastSelectedLineIndex = -1;
+			_script.createScriptFile(_currentScriptFileID);
+			_script.getScriptFile(_currentScriptFileID)->insertNewLine(0, "");
+			_reloadScriptTextDisplay(true);
+
+			// Miscellaneous
+			_isCreatingScriptFile = false;
+		}
+	}
+}
+
+void ScriptEditor::_updateScriptFileChoosing()
+{
+	if(_isChoosingScriptFile)
+	{
+		// Get selected button ID
+		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("scriptFileList");
+
+		// Check if script file ID is hovered
+		if(!selectedButtonID.empty())
+		{
+			// Check if LMB is pressed
+			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			{
+				// Select script file
+				_currentScriptFileID = selectedButtonID;
+				_isWritingScript = true;
+				_firstSelectedLineIndex = -1;
+				_lastSelectedLineIndex = -1;
+				_reloadScriptTextDisplay(true);
+
+				// Miscellaneous
+				_gui.getOverlay()->deleteChoiceForm("scriptFileList");
+				_isChoosingScriptFile = false;
+			}
+		}
+		else if(_gui.getOverlay()->isChoiceFormCancelled("scriptFileList"))
+		{
+			_isChoosingScriptFile = false;
+			_gui.getOverlay()->deleteChoiceForm("scriptFileList");
+		}
+	}
+}
+
+void ScriptEditor::_updateScriptFileRenaming()
+{
+	if(_isRenamingScriptFile)
+	{
+		// Temporary values
+		string newScriptFileID;
+
+		// Check if user filled in a new ID
+		if(_gui.getOverlay()->checkValueForm("scriptRename", newScriptFileID))
+		{
+			// Spaces not allowed
+			if(newScriptFileID.find(' ') != string::npos)
+			{
+				Logger::throwWarning("Script ID cannot contain any spaces!");
+				return;
+			}
+
+			// @ sign not allowed
+			if(newScriptFileID.find('@') != string::npos)
+			{
+				Logger::throwWarning("Script ID cannot contain '@'!");
+				return;
+			}
+
+			// Check if script file already exists
+			auto existingScriptFileIDs = _script.getScriptFileIDs();
+			if(find(existingScriptFileIDs.begin(), existingScriptFileIDs.end(), newScriptFileID) == existingScriptFileIDs.end())
+			{
+				Logger::throwWarning("Script with ID \"" + newScriptFileID + "\" already exists!");
+			}
+
+			// Rename script file
+			_scriptFileNamesToDelete.push_back(_currentScriptFileID);
+			_script.renameScriptFile(_currentScriptFileID, newScriptFileID);
+			_currentScriptFileID = newScriptFileID;
+
+			// Miscellaneous
+			_isRenamingScriptFile = false;
+		}
+	}
+}
+
+void ScriptEditor::_updateScriptSearching()
+{
+	if(_isSearchingScriptFile)
+	{
+		// Temporary values
+		string keyword;
+
+		// Check if user filled in a keyword
+		if(_gui.getOverlay()->checkValueForm("search", keyword))
+		{
+			auto result = _script.findKeyword(keyword);
+
+			// Check if keyword found nowhere
+			if(result.empty())
+			{
+				Logger::throwInfo("Keyword \"" + keyword + "\" not found in scripts!");
+				Logger::throwInfo("");
+				return;
+			}
+
+			// Print all lines in which the keyword occurred 
+			for(const auto& [fileID, lineNumber] : result)
+			{
+				Logger::throwInfo("Keyword \"" + keyword + "\" found in script \"" + fileID + "\" @ line " + to_string(lineNumber));
+			}
+			Logger::throwInfo("");
+
+			// Miscellaneous
+			_isSearchingScriptFile = false;
+		}
 	}
 }
 
@@ -147,92 +304,4 @@ void ScriptEditor::_updateMiscellaneous()
 	_scrollingAcceleration = clamp(_scrollingAcceleration, -MAX_SCROLLING_ACCELERATION, MAX_SCROLLING_ACCELERATION);
 	_scrollingAcceleration *= 0.95f;
 	_fe3d.camera_move(fvec3(0.0f, _scrollingAcceleration, 0.0f));
-
-	// Check if user filled in a keyword
-	string keyword;
-	if(_gui.getOverlay()->checkValueForm("search", keyword))
-	{
-		auto result = _script.findKeyword(keyword);
-
-		// Check if keyword found nowhere
-		if(result.empty())
-		{
-			Logger::throwInfo("Keyword \"" + keyword + "\" not found in scripts!");
-			Logger::throwInfo("");
-		}
-		else
-		{
-			// Print all lines in which the keyword occurred 
-			for(const auto& [fileID, lineNumber] : result)
-			{
-				Logger::throwInfo("Keyword \"" + keyword + "\" found in script \"" + fileID + "\" @ line " + to_string(lineNumber));
-			}
-			Logger::throwInfo("");
-		}
-	}
-
-	// Check if user filled in a new ID
-	string newScriptFileID;
-	if(_gui.getOverlay()->checkValueForm("scriptCreate", newScriptFileID))
-	{
-		// Spaces not allowed
-		if(newScriptFileID.find(' ') == string::npos)
-		{
-			// Check if script already exists
-			auto existingScriptFileIDs = _script.getScriptFileIDs();
-			if(find(existingScriptFileIDs.begin(), existingScriptFileIDs.end(), newScriptFileID) == existingScriptFileIDs.end())
-			{
-				_currentScriptFileID = newScriptFileID;
-				_isWritingScript = true;
-				_firstSelectedLineIndex = -1;
-				_lastSelectedLineIndex = -1;
-				_script.createScriptFile(_currentScriptFileID);
-				_script.getScriptFile(_currentScriptFileID)->insertNewLine(0, "");
-				_reloadScriptTextDisplay(true);
-			}
-			else
-			{
-				Logger::throwWarning("Script with ID \"" + newScriptFileID + "\" already exists!");
-			}
-		}
-		else
-		{
-			Logger::throwWarning("Script ID cannot contain any spaces!");
-		}
-	}
-
-	// Check if existing script file chosen for viewing
-	string selectedButtonID = _gui.getOverlay()->checkChoiceForm("scriptFileList");
-	if(!selectedButtonID.empty())
-	{
-		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
-		{
-			_gui.getOverlay()->deleteChoiceForm("scriptFileList");
-			_currentScriptFileID = selectedButtonID;
-			_isWritingScript = true;
-			_firstSelectedLineIndex = -1;
-			_lastSelectedLineIndex = -1;
-			_reloadScriptTextDisplay(true);
-		}
-	}
-	else if(_gui.getOverlay()->isChoiceFormCancelled("scriptFileList"))
-	{
-		_gui.getOverlay()->deleteChoiceForm("scriptFileList");
-	}
-
-	// Check if user filled in a new ID
-	if(_gui.getOverlay()->checkValueForm("scriptRename", newScriptFileID))
-	{
-		auto existingScriptFileIDs = _script.getScriptFileIDs();
-		if(find(existingScriptFileIDs.begin(), existingScriptFileIDs.end(), newScriptFileID) == existingScriptFileIDs.end())
-		{
-			_scriptFileNamesToDelete.push_back(_currentScriptFileID);
-			_script.renameScriptFile(_currentScriptFileID, newScriptFileID);
-			_currentScriptFileID = newScriptFileID;
-		}
-		else
-		{
-			Logger::throwWarning("Script with ID \"" + newScriptFileID + "\" already exists!");
-		}
-	}
 }

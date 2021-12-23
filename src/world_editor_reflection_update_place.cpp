@@ -68,7 +68,7 @@ void WorldEditor::_updateReflectionPlacing()
 				// Check if allowed by mouse
 				if(!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
-					// Check if a terrain is loaded
+					// Check if terrain is loaded
 					if(_fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Show template reflection

@@ -112,7 +112,7 @@ void Animation2dEditor::_updateAnimationChoosing()
 		// Get selected button ID
 		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("animationList");
 
-		// Check if a animation ID is hovered
+		// Check if animation ID is hovered
 		if(!selectedButtonID.empty())
 		{
 			// Check if LMB is pressed

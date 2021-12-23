@@ -184,7 +184,7 @@ void BillboardEditor::_updateBillboardChoosing()
 			_fe3d.billboard_setVisible(_hoveredBillboardID, false);
 		}
 
-		// Check if a billboard ID is hovered
+		// Check if billboard ID is hovered
 		if(!selectedButtonID.empty())
 		{
 			// Set new hovered model

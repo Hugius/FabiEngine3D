@@ -200,7 +200,7 @@ void TerrainEditor::_updateTerrainChoosing()
 		// Hide last terrain
 		_fe3d.terrain_select("");
 
-		// Check if a terrain ID is hovered
+		// Check if terrain ID is hovered
 		if(!selectedButtonID.empty())
 		{
 			// Show terrain

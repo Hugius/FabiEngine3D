@@ -42,6 +42,10 @@ private:
 	void _updateGUI();
 	void _updateTextWriter();
 	void _updateTextSelector(string& newCharacters, unsigned int& cursorLineIndex, unsigned int& cursorCharIndex, int& hoveredLineIndex, bool& textHasChanged);
+	void _updateScriptFileCreating();
+	void _updateScriptFileChoosing();
+	void _updateScriptFileRenaming();
+	void _updateScriptSearching();
 	void _updateMiscellaneous();
 	void _reloadScriptTextDisplay(bool reloadAabbs);
 	void _copySelectedText();
@@ -131,6 +135,10 @@ private:
 	bool _wasGuiFocused = false;
 	bool _hasClickedLMB = false;
 	bool _isEditorLoaded = false;
+	bool _isCreatingScriptFile = false;
+	bool _isChoosingScriptFile = false;
+	bool _isRenamingScriptFile = false;
+	bool _isSearchingScriptFile = false;
 
 	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;

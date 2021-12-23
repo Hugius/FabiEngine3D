@@ -141,7 +141,7 @@ void SkyEditor::_updateSkyChoosing()
 		// Hide last sky
 		_fe3d.sky_selectMainSky("@@background");
 
-		// Check if a sky ID is hovered
+		// Check if sky ID is hovered
 		if(!selectedButtonID.empty())
 		{
 			// Show sky

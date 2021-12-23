@@ -188,7 +188,7 @@ void ModelEditor::_updateAabbChoosing()
 			_fe3d.aabb_setFollowParentVisibility(aabbID, false);
 		}
 
-		// Check if a AABB ID is hovered
+		// Check if AABB ID is hovered
 		if(!selectedButtonID.empty())
 		{
 			// Show hovered AABB

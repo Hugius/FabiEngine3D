@@ -102,7 +102,7 @@ void SoundEditor::_updateSoundChoosing()
 		// Get selected button ID
 		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("soundList");
 
-		// Check if a sound ID is hovered
+		// Check if sound ID is hovered
 		if(!selectedButtonID.empty())
 		{
 			// Check if LMB is pressed

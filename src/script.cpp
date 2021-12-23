@@ -108,6 +108,8 @@ const vector<string> Script::getScriptFileIDs() const
 		result.push_back(file->getID());
 	}
 
+	sort(result.begin(), result.end());
+
 	return result;
 }
 

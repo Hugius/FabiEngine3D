@@ -218,7 +218,7 @@ void Animation3dEditor::_updateFrameMenu()
 			}
 			else
 			{
-				// Check if new part hovered
+				// Check if new part is hovered
 				if(_hoveredPartID != selectedButtonID)
 				{
 					// Reset wireframe color
@@ -246,7 +246,7 @@ void Animation3dEditor::_updateFrameMenu()
 		}
 		else
 		{
-			// Check if a part was hovered
+			// Check if part was hovered
 			if(!_hoveredPartID.empty())
 			{
 				// Reset wireframe color

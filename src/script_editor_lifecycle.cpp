@@ -100,6 +100,10 @@ void ScriptEditor::unload()
 	_isContinuousActionAllowed = false;
 	_wasGuiFocused = false;
 	_hasClickedLMB = false;
+	_isCreatingScriptFile = false;
+	_isChoosingScriptFile = false;
+	_isRenamingScriptFile = false;
+	_isSearchingScriptFile = false;
 	_activeActionKey = InputType::NONE;
 }
 
@@ -127,9 +131,26 @@ void ScriptEditor::_unloadGUI()
 
 void ScriptEditor::update()
 {
+
 	if(_isEditorLoaded)
 	{
 		_updateGUI();
+	}
+	if(_isEditorLoaded)
+	{
+		_updateScriptFileCreating();
+	}
+	if(_isEditorLoaded)
+	{
+		_updateScriptFileChoosing();
+	}
+	if(_isEditorLoaded)
+	{
+		_updateScriptFileRenaming();
+	}
+	if(_isEditorLoaded)
+	{
+		_updateScriptSearching();
 	}
 	if(_isEditorLoaded)
 	{

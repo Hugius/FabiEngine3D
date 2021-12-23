@@ -7,7 +7,7 @@ void CameraCollisionHandler::update(const unordered_map<string, shared_ptr<AabbE
 	_isCameraUnderTerrain = false;
 	if(_isCameraTerrainResponseEnabled)
 	{
-		// Check if a terrain is selected
+		// Check if terrain is selected
 		if(terrainManager.getSelectedTerrain() != nullptr)
 		{
 			// Retrieve height of terrain point at camera position

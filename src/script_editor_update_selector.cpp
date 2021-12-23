@@ -102,7 +102,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 	// Update text selection
 	if(_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && _fe3d.misc_isCursorInsideViewport())
 	{
-		// Check if a line is hovered
+		// Check if line is hovered
 		if(hoveredLineIndex != -1)
 		{
 			string selectionID = ("selection_" + to_string(hoveredLineIndex));

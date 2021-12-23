@@ -223,7 +223,7 @@ void ModelEditor::_updateModelChoosing()
 			_fe3d.model_setVisible(_hoveredModelID, false);
 		}
 
-		// Check if a model ID is hovered
+		// Check if model ID is hovered
 		if(!selectedButtonID.empty())
 		{
 			// Set new hovered model
@@ -303,7 +303,7 @@ void ModelEditor::_updatePartChoosing()
 		// Get selected button ID
 		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("partList");
 
-		// Check if a part ID is hovered
+		// Check if part ID is hovered
 		if(!selectedButtonID.empty())
 		{
 			// Check if LMB is pressed

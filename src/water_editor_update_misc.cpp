@@ -160,7 +160,7 @@ void WaterEditor::_updateWaterChoosing()
 		// Hide last water
 		_fe3d.water_select("");
 
-		// Check if a water ID is hovered
+		// Check if water ID is hovered
 		if(!selectedButtonID.empty())
 		{
 			// Show water

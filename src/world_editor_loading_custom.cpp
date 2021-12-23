@@ -187,17 +187,6 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 			// Create model
 			if(_copyTemplateModel(modelID, templateID, position, false))
 			{
-				// Check if template model instancing changed
-				if(_fe3d.model_isExisting(templateID))
-				{
-					if(_fe3d.model_isInstanced(modelID) != _fe3d.model_isInstanced(templateID))
-					{
-						Logger::throwWarning("Model instancing with ID \"" + modelID + "\" differs from base model!");
-						_fe3d.model_delete(modelID);
-						continue;
-					}
-				}
-
 				// Set properties
 				_fe3d.model_setBaseRotation(modelID, rotation);
 				_fe3d.model_setBaseRotationOrigin(modelID, rotationOrigin);
@@ -240,35 +229,6 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 					_fe3d.model_setPartRotation(modelID, partID, rotation);
 					_fe3d.model_setPartRotationOrigin(modelID, partID, rotationOrigin);
 					_fe3d.model_setPartSize(modelID, partID, size);
-				}
-
-				// Read offset data from file
-				if(_fe3d.model_isInstanced(modelID))
-				{
-					vector<fvec3> instancedOffsets;
-					while(true)
-					{
-						// Check if file has offset data left
-						string nextElement;
-						iss >> nextElement;
-
-						// Check for end of line
-						if(nextElement.empty())
-						{
-							break;
-						}
-						else // Add offset
-						{
-							fvec3 offset;
-							offset.x = stof(nextElement);
-							iss >> offset.y >> offset.z;
-							instancedOffsets.push_back(offset);
-						}
-					}
-
-					// Add offsets
-					_fe3d.model_disableInstancing(modelID);
-					_fe3d.model_enableInstancing(modelID, instancedOffsets);
 				}
 
 				// Make invisible

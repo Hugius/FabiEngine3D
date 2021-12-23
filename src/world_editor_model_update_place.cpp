@@ -26,37 +26,18 @@ void WorldEditor::_updateModelPlacing()
 				// Remove the '@'
 				const string rawID = _currentTemplateModelID.substr(1);
 
-				if(_fe3d.model_isInstanced(_currentTemplateModelID)) // Instanced model
-				{
-					if(_fe3d.model_isExisting(rawID)) // Add to existing offsets
-					{
-						auto offsets = _fe3d.model_getInstancedOffsets(rawID);
-						offsets.push_back(newPosition);
-						_fe3d.model_disableInstancing(rawID);
-						_fe3d.model_enableInstancing(rawID, offsets);
-					}
-					else // Create new model
-					{
-						_copyTemplateModel(rawID, _currentTemplateModelID, fvec3(0.0f), false);
-						_fe3d.model_disableInstancing(rawID);
-						_fe3d.model_enableInstancing(rawID, {newPosition});
-					}
-				}
-				else // Non-instanced model
-				{
-					// Adding a number to make it unique
-					BEGIN1:
-					const string newID = (rawID + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				// Adding a number to make it unique
+				BEGIN1:
+				const string newID = (rawID + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
-					// Check if model already exists
-					if(_fe3d.model_isExisting(newID))
-					{
-						goto BEGIN1;
-					}
-
-					// Create model
-					_copyTemplateModel(newID, _currentTemplateModelID, newPosition, false);
+				// Check if model already exists
+				if(_fe3d.model_isExisting(newID))
+				{
+					goto BEGIN1;
 				}
+
+				// Create model
+				_copyTemplateModel(newID, _currentTemplateModelID, newPosition, false);
 			}
 
 			// Check if placement mode must be disabled
@@ -97,37 +78,18 @@ void WorldEditor::_updateModelPlacing()
 						const string rawID = _currentTemplateModelID.substr(1);
 						const auto newPosition = _fe3d.model_getBasePosition(_currentTemplateModelID);
 
-						if(_fe3d.model_isInstanced(_currentTemplateModelID)) // Instanced model
-						{
-							if(_fe3d.model_isExisting(rawID)) // Add to existing offsets
-							{
-								auto offsets = _fe3d.model_getInstancedOffsets(rawID);
-								offsets.push_back(newPosition);
-								_fe3d.model_disableInstancing(rawID);
-								_fe3d.model_enableInstancing(rawID, offsets);
-							}
-							else // Create new model
-							{
-								_copyTemplateModel(rawID, _currentTemplateModelID, fvec3(0.0f), false);
-								_fe3d.model_disableInstancing(rawID);
-								_fe3d.model_enableInstancing(rawID, {newPosition});
-							}
-						}
-						else // Non-instanced model
-						{
-							BEGIN2:
-							// Adding a number to make it unique
-							const string newID = (rawID + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+						// Adding a number to make it unique
+						BEGIN2:
+						const string newID = (rawID + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
-							// Check if model already exists
-							if(_fe3d.model_isExisting(newID))
-							{
-								goto BEGIN2;
-							}
-
-							// Create model
-							_copyTemplateModel(newID, _currentTemplateModelID, newPosition, false);
+						// Check if model already exists
+						if(_fe3d.model_isExisting(newID))
+						{
+							goto BEGIN2;
 						}
+
+						// Create model
+						_copyTemplateModel(newID, _currentTemplateModelID, newPosition, false);
 					}
 					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
 					{

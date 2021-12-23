@@ -1,5 +1,4 @@
 #include "script_interpreter.hpp"
-#include "logger.hpp"
 
 const bool ScriptInterpreter::_validateFe3dAabb(const string& ID)
 {
@@ -114,16 +113,9 @@ const bool ScriptInterpreter::_validateFe3dModel(const string& ID, bool isTempla
 	if(isTemplate)
 	{
 		// Validate existence
-		if(!_fe3d.model_isExisting(ID))
+		if(!_fe3d.model_isExisting("@" + ID))
 		{
 			_throwScriptError("template model entity does not exist!");
-			return false;
-		}
-
-		// Cannot access an instanced model
-		if(_fe3d.model_isInstanced(ID))
-		{
-			_throwScriptError("template model entity cannot be instanced!");
 			return false;
 		}
 	}
@@ -272,7 +264,7 @@ const bool ScriptInterpreter::_validateFe3dSound2d(const string& ID, bool isTemp
 	if(isTemplate)
 	{
 		// Validate existence
-		if(!_fe3d.sound2d_isExisting(ID))
+		if(!_fe3d.sound2d_isExisting("@" + ID))
 		{
 			_throwScriptError("template sound does not exist!");
 			return false;
@@ -302,7 +294,7 @@ const bool ScriptInterpreter::_validateFe3dSound3d(const string& ID, bool isTemp
 	if(isTemplate)
 	{
 		// Validate existence
-		if(!_fe3d.sound3d_isExisting(ID))
+		if(!_fe3d.sound3d_isExisting("@" + ID))
 		{
 			_throwScriptError("template sound does not exist!");
 			return false;

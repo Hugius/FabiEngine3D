@@ -191,17 +191,6 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 			// Convert spaces
 			replace(animationID.begin(), animationID.end(), '?', ' ');
 
-			// Check if template model instancing changed
-			if(_fe3d.model_isExisting(templateID))
-			{
-				if(_fe3d.model_isInstanced(templateID) && (modelID != templateID.substr(1)) ||
-				   !_fe3d.model_isInstanced(templateID) && (modelID == templateID.substr(1)))
-				{
-					Logger::throwWarning("Model instancing with ID \"" + modelID + "\" differs from base model!");
-					continue;
-				}
-			}
-
 			// Create model
 			if(_copyTemplateModel(modelID, templateID, position, false))
 			{
@@ -222,36 +211,6 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				if(!animationID.empty())
 				{
 					_animation3dEditor.startModelAnimation(animationID, modelID, -1);
-				}
-
-				// Check if instanced
-				if(_fe3d.model_isInstanced(modelID))
-				{
-					// Read offset data from file
-					vector<fvec3> instancedOffsets;
-					while(true)
-					{
-						// Check if file has offset data left
-						string nextElement;
-						iss >> nextElement;
-
-						// Check for end of line
-						if(nextElement.empty())
-						{
-							break;
-						}
-						else // Add offset
-						{
-							fvec3 offset;
-							offset.x = stof(nextElement);
-							iss >> offset.y >> offset.z;
-							instancedOffsets.push_back(offset);
-						}
-					}
-
-					// Add offsets
-					_fe3d.model_disableInstancing(modelID);
-					_fe3d.model_enableInstancing(modelID, instancedOffsets);
 				}
 
 				// Make invisible

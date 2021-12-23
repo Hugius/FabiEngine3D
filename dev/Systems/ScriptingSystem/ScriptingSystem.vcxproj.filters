@@ -156,9 +156,6 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_aabb_set.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_validation.cpp">
-      <Filter>Execution\Interpreter\Function\Entity</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_billboard_get.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
@@ -263,6 +260,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_animation2d_get.cpp">
       <Filter>Execution\Interpreter\Function\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_validation.cpp">
+      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

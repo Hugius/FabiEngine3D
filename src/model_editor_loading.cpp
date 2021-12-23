@@ -121,7 +121,7 @@ const vector<string> ModelEditor::getTexturePathsFromFile() const
 			string modelID, meshPath, levelOfDetailEntityID;
 			float levelOfDetailDistance;
 			unsigned int rotationOrder;
-			bool isInstanced, isFaceCulled;
+			bool isFaceCulled;
 			fvec3 size;
 
 			// Read data from file
@@ -133,7 +133,6 @@ const vector<string> ModelEditor::getTexturePathsFromFile() const
 				size.z >>
 				levelOfDetailEntityID >>
 				levelOfDetailDistance >>
-				isInstanced >>
 				isFaceCulled >>
 				rotationOrder;
 
@@ -307,7 +306,7 @@ const bool ModelEditor::loadFromFile()
 			string modelID, meshPath, levelOfDetailEntityID;
 			float levelOfDetailDistance;
 			unsigned int rotationOrder;
-			bool isInstanced, isFaceCulled;
+			bool isFaceCulled;
 			fvec3 size;
 
 			// Read data from file
@@ -319,7 +318,6 @@ const bool ModelEditor::loadFromFile()
 				size.z >>
 				levelOfDetailEntityID >>
 				levelOfDetailDistance >>
-				isInstanced >>
 				isFaceCulled >>
 				rotationOrder;
 
@@ -345,12 +343,6 @@ const bool ModelEditor::loadFromFile()
 			{
 				// Add model ID
 				_loadedModelIDs.push_back(modelID);
-
-				// Set instancing
-				if(isInstanced)
-				{
-					_fe3d.model_enableInstancing(modelID, {fvec3(0.0f)});
-				}
 
 				// Set properties
 				_fe3d.model_setVisible(modelID, false);

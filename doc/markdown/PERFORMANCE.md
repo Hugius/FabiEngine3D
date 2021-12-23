@@ -9,22 +9,26 @@
 - `physicsUpdate` contains: camera, raycasting, collision.
 - `bufferSwap` means the actual buffering on the output screen.
 
-## 2. Performance Killers
+## 3. Performance Killers
 
-- **Planar reflections**: everything has to be rendered twice
-- **Water reflections**: everything has to be rendered twice
-- **Water refractions**: everything has to be rendered twice
-- **Water waves**: the water entity plane mesh has much more vertices
-- **Pointlight entities**: heavy lighting calculations
-- **Spotlight entities**: heavy lighting calculations
+- Rendering planar reflections
+- Rendering water reflections
+- Rendering water refractions
+- Rendering water waves
+- Rendering pointlight entities
+- Rendering spotlight entities
+- Rendering complex meshes
+- Rendering high quality shadows
+- Capturing reflection entities
+- Loading high resolution textures
+- Loading complex meshes
 
-## 3. Tips
+## 4. Tips
 
 - Make use of LOD model entities to improve the performance on high-poly meshes.
 - Lower the graphics/lighting quality to improve performance if necessary.
 - Clear the messages in the engine logging console if a lot of messages are printed.
-- Make a text entity dynamic if you want to change its content a lot.
+- Make a text entity dynamic if its content changes a lot.
 - Make sure your GPU is giving the maximum computing power to the engine, so check your graphics card settings.
-- If you want fast scene loading times, use as little reflection entities as possible.
+- Capture reflection entities as little as possible.
 - Use the face culling optimization in model entities as much as possible.
-- Make a model entity instanced if you want to render a high amounts.

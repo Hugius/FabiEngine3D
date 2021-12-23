@@ -41,7 +41,7 @@ void Core::_start()
 	// Prepare application
 	_prepare();
 
-	// Variables
+	// Temporary values
 	float renderLag = 0.0f;
 
 	// Main game-loop

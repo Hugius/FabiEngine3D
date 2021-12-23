@@ -60,7 +60,6 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, floa
 
 			// Shader uniforms
 			_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partID));
-			_shader.uploadUniform("u_isInstanced", buffer->isInstanced());
 
 			// Bind textures
 			if(entity->hasDiffuseMap(partID))
@@ -73,15 +72,7 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, floa
 			glBindVertexArray(buffer->getVAO());
 
 			// Render
-			if(buffer->isInstanced())
-			{
-				const auto offsetCount = static_cast<unsigned int>(buffer->getInstancedOffsets().size());
-				glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), offsetCount);
-			}
-			else
-			{
-				glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
-			}
+			glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 
 			// Unbind buffer
 			glBindVertexArray(0);

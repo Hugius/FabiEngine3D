@@ -205,7 +205,7 @@ const bool WorldEditor::_copyTemplateWater(const string& newID, const string& te
 const bool WorldEditor::_copyTemplateModel(const string& newID, const string& templateID, fvec3 position, bool isFromOutside)
 {
 	// Error checking
-	if(_fe3d.model_isExisting(newID) && !_fe3d.model_isInstanced(templateID))
+	if(_fe3d.model_isExisting(newID))
 	{
 		Logger::throwWarning("Model with ID \"" + newID + "\" already exists!");
 		return false;
@@ -218,12 +218,6 @@ const bool WorldEditor::_copyTemplateModel(const string& newID, const string& te
 
 	// Create model entity
 	_fe3d.model_create(newID, _fe3d.model_getMeshPath(templateID));
-
-	// Set instancing
-	if(_fe3d.model_isInstanced(templateID))
-	{
-		_fe3d.model_enableInstancing(newID, {fvec3(0.0f)});
-	}
 
 	// Set properties
 	_fe3d.model_setBasePosition(newID, position);

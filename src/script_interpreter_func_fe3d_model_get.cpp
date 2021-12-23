@@ -746,19 +746,6 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_is_instanced")
-	{
-		auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dModel(args[0].getString(), false))
-			{
-				auto result = _fe3d.model_isInstanced(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
-			}
-		}
-	}
 	else if(functionName == "fe3d:model_is_wireframed")
 	{
 		auto types = {SVT::STRING};

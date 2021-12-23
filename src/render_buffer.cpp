@@ -80,26 +80,26 @@ RenderBuffer::RenderBuffer(float x, float y, float w, float h, bool isCentered)
 	{
 		data = new float[24]
 		{
-			x - (w / 2.0f) , y - (h / 2.0f) , 0.0f, 0.0f,
-			x + (w / 2.0f) , y - (h / 2.0f) , 1.0f, 0.0f,
-			x + (w / 2.0f) , y + (h / 2.0f) , 1.0f, 1.0f,
+			x - (w / 2.0f), y - (h / 2.0f), 0.0f, 0.0f,
+			x + (w / 2.0f), y - (h / 2.0f), 1.0f, 0.0f,
+			x + (w / 2.0f), y + (h / 2.0f), 1.0f, 1.0f,
 
-			x + (w / 2.0f) , y + (h / 2.0f) , 1.0f, 1.0f,
-			x - (w / 2.0f) , y + (h / 2.0f) , 0.0f, 1.0f,
-			x - (w / 2.0f) , y - (h / 2.0f) , 0.0f, 0.0f
+			x + (w / 2.0f), y + (h / 2.0f), 1.0f, 1.0f,
+			x - (w / 2.0f), y + (h / 2.0f), 0.0f, 1.0f,
+			x - (w / 2.0f), y - (h / 2.0f), 0.0f, 0.0f
 		};
 	}
 	else
 	{
 		data = new float[24]
 		{
-			x,     y,     0.0f, 0.0f,
-			x + w, y,     1.0f, 0.0f,
+			x, y, 0.0f, 0.0f,
+			x + w, y, 1.0f, 0.0f,
 			x + w, y + h, 1.0f, 1.0f,
 
 			x + w, y + h, 1.0f, 1.0f,
-			x,     y + h, 0.0f, 1.0f,
-			x,     y,     0.0f, 0.0f
+			x, y + h, 0.0f, 1.0f,
+			x, y, 0.0f, 0.0f
 		};
 	}
 
@@ -131,60 +131,6 @@ RenderBuffer::~RenderBuffer()
 {
 	glDeleteVertexArrays(1, &_vao);
 	glDeleteBuffers(1, &_vbo);
-	glDeleteBuffers(1, &_vbo_instanced);
-}
-
-void RenderBuffer::enableInstancing(const vector<fvec3>& offsets)
-{
-	if(_isInstanced)
-	{
-		Logger::throwError("RenderBuffer::enableInstancing::1");
-	}
-	else
-	{
-		// Validate offsets
-		if(offsets.empty())
-		{
-			Logger::throwError("RenderBuffer::enableInstancing::2");
-		}
-
-		// Create buffers
-		glGenBuffers(1, &_vbo_instanced);
-
-		// Bind buffers
-		glBindVertexArray(_vao);
-		glBindBuffer(GL_ARRAY_BUFFER, _vbo_instanced);
-
-		// Allocate buffer data
-		glBufferData(GL_ARRAY_BUFFER, (offsets.size() * sizeof(fvec3)), &offsets[0], GL_STATIC_DRAW);
-
-		// Store buffer data
-		glEnableVertexAttribArray(4);
-		glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
-		glVertexAttribDivisor(4, 1);
-
-		// Unbind buffers
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glBindVertexArray(0);
-
-		// Miscellaneous
-		_isInstanced = true;
-		_instancedOffsets = offsets;
-	}
-}
-
-void RenderBuffer::disableInstancing()
-{
-	if(_isInstanced)
-	{
-		glDeleteBuffers(1, &_vbo_instanced);
-		_isInstanced = false;
-		_instancedOffsets.clear();
-	}
-	else
-	{
-		Logger::throwError("RenderBuffer::disableInstancing");
-	}
 }
 
 const BufferID RenderBuffer::getVAO() const
@@ -197,17 +143,7 @@ const unsigned int RenderBuffer::getVertexCount() const
 	return _vertexCount;
 }
 
-const bool RenderBuffer::isInstanced() const
-{
-	return _isInstanced;
-}
-
 const RenderBufferType RenderBuffer::getBufferType() const
 {
 	return _bufferType;
-}
-
-const vector<fvec3>& RenderBuffer::getInstancedOffsets() const
-{
-	return _instancedOffsets;
 }

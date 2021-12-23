@@ -126,8 +126,5 @@ void ModelEditor::_updateChoiceMenu()
 			size.z /= 100.0f;
 			_fe3d.model_setBaseSize(_currentModelID, size);
 		}
-
-		// Update buttons hoverability
-		screen->getButton("aabb")->setHoverable(!_fe3d.model_isInstanced(_currentModelID));
 	}
 }

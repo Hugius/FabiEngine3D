@@ -148,7 +148,6 @@
 - **Cursor**: the pointer within FabiEngine3D that is moved using the mouse
 - **Wireframe**: a rendering mode that only draws lines/wires between all vertices
 - **Face Culling**: an optimization technique where non-visible vertices are not rendered
-- **Instancing**: an optimization technique that is efficient for rendering a lot of the same meshes
 - **Raycasting**: the process of casting a ray from a position towards a direction
 - **AABB**: Axis Aligned Bounding Box
 - **Collision Detection**: the process of detecting collision between 2 AABBs

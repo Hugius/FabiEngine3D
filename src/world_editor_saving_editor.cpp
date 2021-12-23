@@ -164,34 +164,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 				isFrozen << " " <<
 				animationID;
 
-			// Write instanced offset
-			if(_fe3d.model_isInstanced(modelID))
-			{
-				// Check if model has any offsets
-				auto instancedOffsets = _fe3d.model_getInstancedOffsets(modelID);
-				if(!instancedOffsets.empty())
-				{
-					// Write space
-					file << " ";
-
-					// Write offsets
-					for(size_t i = 0; i < instancedOffsets.size(); i++)
-					{
-						// Write offset
-						file <<
-							instancedOffsets[i].x << " " <<
-							instancedOffsets[i].y << " " <<
-							instancedOffsets[i].z;
-
-						// Write space
-						if(i != (instancedOffsets.size() - 1))
-						{
-							file << " ";
-						}
-					}
-				}
-			}
-
 			// New line
 			file << endl;
 		}

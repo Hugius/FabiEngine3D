@@ -11,13 +11,6 @@ const bool FabiEngine3D::model_isVisible(const string& ID) const
 	return _core->_modelEntityManager.getEntity(ID)->isVisible();
 }
 
-const bool FabiEngine3D::model_isInstanced(const string& ID) const
-{
-	auto entity = _core->_modelEntityManager.getEntity(ID);
-
-	return entity->getRenderBuffer(entity->getPartIDs()[0])->isInstanced();
-}
-
 const bool FabiEngine3D::model_isMultiParted(const string& ID) const
 {
 	return (_core->_modelEntityManager.getEntity(ID)->getPartIDs().size() > 1);
@@ -254,13 +247,6 @@ const string& FabiEngine3D::model_getNormalMapPath(const string& ID, const strin
 const string& FabiEngine3D::model_getLevelOfDetailEntityID(const string& ID) const
 {
 	return _core->_modelEntityManager.getEntity(ID)->getLevelOfDetailEntityID();
-}
-
-const vector<fvec3>& FabiEngine3D::model_getInstancedOffsets(const string& ID) const
-{
-	auto entity = _core->_modelEntityManager.getEntity(ID);
-
-	return entity->getRenderBuffer(entity->getPartIDs()[0])->getInstancedOffsets();
 }
 
 const vector<string> FabiEngine3D::model_getPartIDs(const string& ID) const

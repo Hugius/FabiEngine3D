@@ -275,8 +275,6 @@ public:
 	void model_setMaxHeight(const string& ID, float value);
 	void model_setLevelOfDetailDistance(const string& ID, float value);
 	void model_setTextureRepeat(const string& ID, const string& partID, float value);
-	void model_enableInstancing(const string& ID, vector<fvec3> offsets);
-	void model_disableInstancing(const string& ID);
 	void model_setBright(const string& ID, bool value);
 	void model_setRotationOrder(const string& ID, DirectionOrder value);
 
@@ -291,7 +289,6 @@ public:
 	const string& model_getReflectionMapPath(const string& ID, const string& partID) const;
 	const string& model_getNormalMapPath(const string& ID, const string& partID) const;
 	const string& model_getLevelOfDetailEntityID(const string& ID) const;
-	const vector<fvec3>& model_getInstancedOffsets(const string& ID) const;
 	const fvec3 model_getLevelOfDetailSize(const string& ID) const;
 	const fvec3 model_getBasePosition(const string& ID) const;
 	const fvec3 model_getBaseRotation(const string& ID) const;
@@ -315,7 +312,6 @@ public:
 	const float model_getEmissionIntensity(const string& ID, const string& partID) const;
 	const bool model_isExisting(const string& ID) const;
 	const bool model_isVisible(const string& ID) const;
-	const bool model_isInstanced(const string& ID) const;
 	const bool model_isMultiParted(const string& ID) const;
 	const bool model_isFaceCulled(const string& ID) const;
 	const bool model_isSpecular(const string& ID, const string& partID) const;

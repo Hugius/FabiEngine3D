@@ -98,7 +98,7 @@ void main()
 
 vec4 calculateWaterColor()
 {
-	// Variables to be used
+	// Temporary values
 	vec2 mapUV = f_uv;
 	vec3 normal = vec3(0.0f, 1.0f, 0.0f);
 	vec3 directionalLighting = vec3(0.0f);

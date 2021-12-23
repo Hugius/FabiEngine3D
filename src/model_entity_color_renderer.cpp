@@ -195,7 +195,6 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			_shader.uploadUniform("u_hasNormalMap", entity->hasNormalMap(partID));
 			_shader.uploadUniform("u_transformationMatrix", transformationMatrix);
 			_shader.uploadUniform("u_normalTransformationMatrix", normalTransformationMatrix);
-			_shader.uploadUniform("u_isInstanced", buffer->isInstanced());
 			_shader.uploadUniform("u_reflectionType", static_cast<int>(entity->getReflectionType(partID)));
 			_shader.uploadUniform("u_isWireframed", (entity->isWireframed(partID) || _renderBus.isWireframeRenderingEnabled()));
 
@@ -236,17 +235,8 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			glBindVertexArray(buffer->getVAO());
 
 			// Render
-			if(buffer->isInstanced())
-			{
-				const auto offsetCount = static_cast<unsigned int>(buffer->getInstancedOffsets().size());
-				glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), offsetCount);
-				_renderBus.increaseTriangleCount((offsetCount * buffer->getVertexCount()) / 3);
-			}
-			else
-			{
-				glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
-				_renderBus.increaseTriangleCount(buffer->getVertexCount() / 3);
-			}
+			glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
+			_renderBus.increaseTriangleCount(buffer->getVertexCount() / 3);
 
 			// Unbind buffer
 			glBindVertexArray(0);

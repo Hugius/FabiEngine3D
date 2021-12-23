@@ -19,7 +19,7 @@ GuiScrollingList::GuiScrollingList(FabiEngine3D& fe3d, const string& parentID, c
 void GuiScrollingList::update(bool isHoverable)
 {
 	_updateHovering();
-	_updateScolling();
+	_updateScrolling();
 	_updateButtons(isHoverable);
 }
 
@@ -119,11 +119,11 @@ void GuiScrollingList::_updateHovering()
 	}
 }
 
-void GuiScrollingList::_updateScolling()
+void GuiScrollingList::_updateScrolling()
 {
 	if(!_buttons.empty())
 	{
-		// Variables
+		// Temporary
 		bool mustReset = false;
 
 		// Checking if cursor is inside scrolling list
@@ -172,7 +172,7 @@ void GuiScrollingList::_updateScolling()
 			}
 		}
 
-		// Update
+		// Update buttons
 		for(const auto& button : _buttons)
 		{
 			string rectangleID = button->getRectangle()->getEntityID();
@@ -195,7 +195,6 @@ void GuiScrollingList::_updateScolling()
 
 void GuiScrollingList::_updateButtons(bool hoverable)
 {
-	// Update buttons
 	for(const auto& button : _buttons)
 	{
 		button->update(hoverable && _isHovered);

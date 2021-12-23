@@ -28,7 +28,7 @@ private:
 	// VOID
 	void _updateHovering();
 	void _updateButtons(bool hoverable);
-	void _updateScolling();
+	void _updateScrolling();
 
 	// FVEC3
 	const fvec3 _buttonColor;

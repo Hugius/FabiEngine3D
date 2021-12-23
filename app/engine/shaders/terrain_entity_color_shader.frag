@@ -461,11 +461,11 @@ float calculateShadows()
 		// Check if fragment must be shadowed
 		if (fragmentDistance <= halfSize)
 		{
-			// Variables
-			float shadow       = 0.0f;
-			vec3 projCoords    = (f_shadowPosition.xyz / f_shadowPosition.w) * 0.5f + 0.5f;
+			// Temporary values
+			float shadow = 0.0f;
+			vec3 projCoords = (((f_shadowPosition.xyz / f_shadowPosition.w) * 0.5f) + 0.5f);
 			float currentDepth = projCoords.z;
-			vec2 texelSize     = (vec2(1.0f) / textureSize(u_shadowMap, 0));
+			vec2 texelSize = (vec2(1.0f) / textureSize(u_shadowMap, 0));
 
 			// Skip fragments outside of the depth map
 			if (projCoords.z > 1.0f)

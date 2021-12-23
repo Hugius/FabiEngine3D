@@ -12,7 +12,6 @@ void ModelEditor::_updateMiscellaneousMenu()
 		// Temporary values
 		auto levelOfDetailEntityID = _fe3d.model_getLevelOfDetailEntityID(_currentModelID);
 		auto levelOfDetailDistance = _fe3d.model_getLevelOfDetailDistance(_currentModelID);
-		auto isInstanced = _fe3d.model_isInstanced(_currentModelID);
 		auto isFaceCulled = _fe3d.model_isFaceCulled(_currentModelID);
 		auto rotationOrder = _fe3d.model_getRotationOrder(_currentModelID);
 
@@ -30,18 +29,6 @@ void ModelEditor::_updateMiscellaneousMenu()
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("levelOfDetailDistance")->isHovered())
 		{
 			_gui.getOverlay()->createValueForm("levelOfDetailDistance", "Specular LOD Distance", levelOfDetailDistance, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isInstanced")->isHovered())
-		{
-			isInstanced = !isInstanced;
-			if(isInstanced)
-			{
-				_fe3d.model_enableInstancing(_currentModelID, {fvec3(0.0f)});
-			}
-			else
-			{
-				_fe3d.model_disableInstancing(_currentModelID);
-			}
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFaceCulled")->isHovered())
 		{
@@ -100,7 +87,6 @@ void ModelEditor::_updateMiscellaneousMenu()
 
 		// Update button text contents
 		screen->getButton("isFaceCulled")->changeTextContent(isFaceCulled ? "Culling: ON" : "Culling: OFF");
-		screen->getButton("isInstanced")->changeTextContent(isInstanced ? "Instanced: ON" : "Instanced: OFF");
 		if(rotationOrder == DirectionOrder::XYZ)
 		{
 			screen->getButton("rotationOrder")->changeTextContent("Rotation: X Y Z");

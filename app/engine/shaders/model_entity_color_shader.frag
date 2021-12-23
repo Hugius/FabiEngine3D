@@ -482,7 +482,7 @@ float calculateShadows()
         // Check if fragment must be shadowed
 		if (fragmentDistance <= halfSize)
 		{
-			// Variables
+			// Temporary values
 			vec2 texelSize = (vec2(1.0f) / textureSize(u_shadowMap, 0));
 			float shadow = 0.0f;
 			vec3 projCoords = (((f_shadowPosition.xyz / f_shadowPosition.w) * 0.5f) + 0.5f);

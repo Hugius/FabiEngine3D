@@ -1,7 +1,5 @@
 # Model
 ### Setters
-- `fe3d:model_place`(`STR` newID, `STR` previewID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
-  Places a new model with **newID** (cannot start with @) based on model with **previewID** at position as **xyz**. If the preview model is instanced, the position will be added to the offsets. There can only be 1 instanced model placed in the world, which has the ID of the first time it is placed (either by world editor or through this function).
 - `fe3d:model_delete`(`STR` ID) ---> `NONE`  
   Deletes model with **ID** if existing.
 - `fe3d:model_set_visible`(`STR` ID, `BOOL` visible) ---> `NONE`  

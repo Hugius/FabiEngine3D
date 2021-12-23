@@ -294,26 +294,6 @@ void FabiEngine3D::model_setTextureRepeat(const string& ID, const string& partID
 	_core->_modelEntityManager.getEntity(ID)->setTextureRepeat(partID, value);
 }
 
-void FabiEngine3D::model_enableInstancing(const string& ID, vector<fvec3> offsets)
-{
-	auto entity = _core->_modelEntityManager.getEntity(ID);
-
-	for(const auto& partID : entity->getPartIDs())
-	{
-		entity->getRenderBuffer(partID)->enableInstancing(offsets);
-	}
-}
-
-void FabiEngine3D::model_disableInstancing(const string& ID)
-{
-	auto entity = _core->_modelEntityManager.getEntity(ID);
-
-	for(const auto& partID : entity->getPartIDs())
-	{
-		entity->getRenderBuffer(partID)->disableInstancing();
-	}
-}
-
 void FabiEngine3D::model_setBright(const string& ID, bool value)
 {
 	_core->_modelEntityManager.getEntity(ID)->setBright(value);

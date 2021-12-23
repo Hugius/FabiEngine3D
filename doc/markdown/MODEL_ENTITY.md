@@ -114,9 +114,6 @@
 - **Reflective**: cube/planar reflections are rendered on the mesh
   - Type: `boolean`
   - Constraints: none
-- **Instanced**: the mesh is rendered using instancing
-  - Type: `boolean`
-  - Constraints: none
 - **Face Culled**: the mesh uses the face culling optimization
   - Type: `boolean`
   - Constraints: none

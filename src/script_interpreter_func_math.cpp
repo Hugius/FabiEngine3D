@@ -6,7 +6,7 @@ using std::clamp;
 
 using SVT = ScriptValueType;
 
-const vector<ScriptValue> ScriptInterpreter::_processMathematicsFunctionCall(const string& scriptLine)
+const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const string& scriptLine)
 {
 	// Temporary values
 	vector<ScriptValue> returnValues;

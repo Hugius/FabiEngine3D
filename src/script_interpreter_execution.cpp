@@ -232,15 +232,15 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 		else if(scriptLineText.substr(0, 5) == "fe3d:")
 		{
-			_processEngineFunctionCall(scriptLineText);
+			_processFe3dFunctionCall(scriptLineText);
 		}
 		else if(scriptLineText.substr(0, 5) == "math:")
 		{
-			_processMathematicsFunctionCall(scriptLineText);
+			_processMathFunctionCall(scriptLineText);
 		}
 		else if(scriptLineText.substr(0, 5) == "misc:")
 		{
-			_processMiscellaneousFunctionCall(scriptLineText);
+			_processMiscFunctionCall(scriptLineText);
 		}
 		else if(scriptLineText.substr(0, EXECUTE_KEYWORD.size() + 1) == EXECUTE_KEYWORD + " ")
 		{

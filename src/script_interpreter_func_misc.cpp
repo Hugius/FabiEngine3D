@@ -3,7 +3,7 @@
 
 using SVT = ScriptValueType;
 
-const vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const string& scriptLine)
+const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const string& scriptLine)
 {
 	// Temporary values
 	vector<ScriptValue> returnValues;

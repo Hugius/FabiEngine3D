@@ -252,9 +252,9 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 
 		// Call function
 		auto returnValues =
-			(valueString.substr(0, 5) == "fe3d:") ? _processEngineFunctionCall(valueString) :
-			(valueString.substr(0, 5) == "math:") ? _processMathematicsFunctionCall(valueString) :
-			_processMiscellaneousFunctionCall(valueString);
+			(valueString.substr(0, 5) == "fe3d:") ? _processFe3dFunctionCall(valueString) :
+			(valueString.substr(0, 5) == "math:") ? _processMathFunctionCall(valueString) :
+			_processMiscFunctionCall(valueString);
 
 		// Check if any error was thrown
 		_checkEngineWarnings(loggerMessageCount);

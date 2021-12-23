@@ -213,6 +213,42 @@ const bool ScriptInterpreter::_validateFe3dText(const string& ID)
 	return true;
 }
 
+const bool ScriptInterpreter::_validateFe3dAnimation2d(const string& ID)
+{
+	// Validate ID
+	if(!_validateFe3dID(ID))
+	{
+		return false;
+	}
+
+	// Validate existence
+	if(!_animation2dEditor.isAnimationExisting(ID))
+	{
+		_throwScriptError("animation2D does not exist!");
+		return false;
+	}
+
+	return true;
+}
+
+const bool ScriptInterpreter::_validateFe3dAnimation3d(const string& ID)
+{
+	// Validate ID
+	if(!_validateFe3dID(ID))
+	{
+		return false;
+	}
+
+	// Validate existence
+	if(!_animation3dEditor.isAnimationExisting(ID))
+	{
+		_throwScriptError("animation3D does not exist!");
+		return false;
+	}
+
+	return true;
+}
+
 const bool ScriptInterpreter::_validateFe3dWater()
 {
 	// Validate existence

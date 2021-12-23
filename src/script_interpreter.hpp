@@ -150,6 +150,8 @@ private:
 	const bool _validateFe3dReflection(const string& ID);
 	const bool _validateFe3dImage(const string& ID);
 	const bool _validateFe3dText(const string& ID);
+	const bool _validateFe3dAnimation2d(const string& ID);
+	const bool _validateFe3dAnimation3d(const string& ID);
 	const bool _validateFe3dID(const string& ID);
 	const bool _validateScopeChange(unsigned int countedSpaces, const string& scriptLineText, unsigned int& scopeDepth);
 	const bool _validateKeyInputString(const string& inputString);
@@ -158,9 +160,9 @@ private:
 
 	// MISCELLANEOUS
 	const vector<ScriptValue> _extractValuesFromListString(const string& listString);
-	const vector<ScriptValue> _processEngineFunctionCall(const string& scriptLine);
-	const vector<ScriptValue> _processMathematicsFunctionCall(const string& scriptLine);
-	const vector<ScriptValue> _processMiscellaneousFunctionCall(const string& scriptLine);
+	const vector<ScriptValue> _processFe3dFunctionCall(const string& scriptLine);
+	const vector<ScriptValue> _processMathFunctionCall(const string& scriptLine);
+	const vector<ScriptValue> _processMiscFunctionCall(const string& scriptLine);
 	ScriptVariable& _getLocalVariable(const string& variableID);
 	ScriptVariable& _getGlobalVariable(const string& variableID);
 	ScriptConditionStatement* _getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth) const;

@@ -28,10 +28,10 @@ const vector<string> SoundEditor::getAudioPathsFromFile() const
 		return {};
 	}
 
-	// Load audio file
+	// Load sound file
 	ifstream file(filePath);
 
-	// Read model data
+	// Read sound data
 	vector<string> audioPaths;
 	string line;
 	while(getline(file, line))
@@ -93,7 +93,7 @@ const bool SoundEditor::loadFromFile()
 	// Load sound file
 	ifstream file(filePath);
 
-	// Read sound file
+	// Read sound data
 	string line;
 	while(getline(file, line))
 	{

@@ -7,65 +7,6 @@
 
 using std::clamp;
 
-void WorldEditor::_updateMiscellaneous()
-{
-	// Check if allowed by GUI
-	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
-	{
-		// Update AABB frame rendering
-		if(_fe3d.input_isKeyPressed(InputType::KEY_B))
-		{
-			if(_fe3d.misc_isAabbFrameRenderingEnabled())
-			{
-				_fe3d.misc_disableAabbFrameRendering();
-			}
-			else
-			{
-				_fe3d.misc_enableAabbFrameRendering();
-			}
-
-		}
-
-		// Update wireframe rendering
-		if(_fe3d.input_isKeyPressed(InputType::KEY_F))
-		{
-			if(_fe3d.misc_isWireframeRenderingEnabled())
-			{
-				_fe3d.misc_disableWireframeRendering();
-			}
-			else
-			{
-				_fe3d.misc_enableWireframeRendering();
-			}
-		}
-
-		// Update debug rendering
-		if(_fe3d.input_isKeyPressed(InputType::KEY_H))
-		{
-			if(_fe3d.misc_isDebugRenderingEnabled())
-			{
-				_fe3d.misc_disableDebugRendering();
-			}
-			else
-			{
-				_fe3d.misc_enableDebugRendering();
-			}
-		}
-	}
-
-	// Disable terrain raycast pointing
-	if(_fe3d.raycast_isTerrainPointingEnabled())
-	{
-		_fe3d.raycast_disableTerrainPointing();
-	}
-
-	// Enable terrain raycast pointing
-	if(!_fe3d.terrain_getSelectedID().empty())
-	{
-		_fe3d.raycast_enableTerrainPointing(_fe3d.terrain_getSize(_fe3d.terrain_getSelectedID()), 0.1f);
-	}
-}
-
 void WorldEditor::clearCurrentWorld()
 {
 	// Disable world graphics

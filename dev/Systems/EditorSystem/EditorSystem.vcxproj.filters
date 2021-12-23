@@ -196,6 +196,21 @@
     <Filter Include="Animation3D Editor\Base">
       <UniqueIdentifier>{e2011b46-5f88-42c0-9a59-40db66d04e13}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Image Editor">
+      <UniqueIdentifier>{cf5d8c21-2c15-4c9b-8562-61f1520e05ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image Editor\Base">
+      <UniqueIdentifier>{b4a13230-0910-4df3-bf23-455149a99feb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image Editor\Miscellaneous">
+      <UniqueIdentifier>{7866e10d-8438-4b1b-a551-903bad71e8e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image Editor\Update">
+      <UniqueIdentifier>{eab4366f-6527-4205-8b0c-f19839736203}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image Editor\Persistence">
+      <UniqueIdentifier>{1a8f2de0-976d-4e2e-961a-fa167895339c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\animation3d_editor_lifecycle.cpp">
@@ -552,6 +567,24 @@
     <ClCompile Include="..\..\..\src\world_editor_gui.cpp">
       <Filter>World Editor\Miscellaneous</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\image_editor_lifecycle.cpp">
+      <Filter>Image Editor\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\image_editor_loading.cpp">
+      <Filter>Image Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\image_editor_saving.cpp">
+      <Filter>Image Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\image_editor_misc.cpp">
+      <Filter>Image Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\image_editor_update_misc.cpp">
+      <Filter>Image Editor\Update</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\image_editor_update_menu.cpp">
+      <Filter>Image Editor\Update</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\animation3d_editor.hpp">
@@ -592,6 +625,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\animation2d.hpp">
       <Filter>Animation2D Editor\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\image_editor.hpp">
+      <Filter>Image Editor\Base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

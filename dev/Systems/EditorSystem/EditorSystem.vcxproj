@@ -30,6 +30,12 @@
     <ClCompile Include="..\..\..\src\animation3d_editor_update_frame.cpp" />
     <ClCompile Include="..\..\..\src\animation3d_editor_update_misc.cpp" />
     <ClCompile Include="..\..\..\src\animation3d_frame.cpp" />
+    <ClCompile Include="..\..\..\src\image_editor_lifecycle.cpp" />
+    <ClCompile Include="..\..\..\src\image_editor_loading.cpp" />
+    <ClCompile Include="..\..\..\src\image_editor_misc.cpp" />
+    <ClCompile Include="..\..\..\src\image_editor_saving.cpp" />
+    <ClCompile Include="..\..\..\src\image_editor_update_menu.cpp" />
+    <ClCompile Include="..\..\..\src\image_editor_update_misc.cpp" />
     <ClCompile Include="..\..\..\src\sound_editor_loading.cpp" />
     <ClCompile Include="..\..\..\src\sound_editor_lifecycle.cpp" />
     <ClCompile Include="..\..\..\src\sound_editor_misc.cpp" />
@@ -142,6 +148,7 @@
     <ClInclude Include="..\..\..\src\animation3d.hpp" />
     <ClInclude Include="..\..\..\src\animation3d_editor.hpp" />
     <ClInclude Include="..\..\..\src\animation3d_frame.hpp" />
+    <ClInclude Include="..\..\..\src\image_editor.hpp" />
     <ClInclude Include="..\..\..\src\sound_editor.hpp" />
     <ClInclude Include="..\..\..\src\billboard_editor.hpp" />
     <ClInclude Include="..\..\..\src\sky_editor.hpp" />

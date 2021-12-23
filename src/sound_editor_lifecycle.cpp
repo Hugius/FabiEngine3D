@@ -55,7 +55,7 @@ void SoundEditor::unload()
 	_fe3d.gfx_disableBloom(true);
 
 	// Billboards
-	_fe3d.billboard_delete("@@icon");
+	_fe3d.billboard_deleteAll();
 
 	// Sounds
 	_fe3d.sound2d_deleteAll();

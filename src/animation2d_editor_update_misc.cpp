@@ -69,7 +69,7 @@ void Animation2dEditor::_updateAnimationCreating()
 				return;
 			}
 
-			// @ signs not allowed
+			// @ sign not allowed
 			if(newAnimationID.find('@') != string::npos)
 			{
 				Logger::throwWarning("Animation ID cannot contain '@'!");

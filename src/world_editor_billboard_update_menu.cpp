@@ -32,7 +32,7 @@ void WorldEditor::_updateBillboardMenu()
 			sort(IDs.begin(), IDs.end());
 			for(auto& billboardID : IDs)
 			{
-				// Check if billboard is not a template entity
+				// Cannot be template
 				if(billboardID[0] != '@')
 				{
 					// Removing the unique number from the ID
@@ -141,7 +141,7 @@ void WorldEditor::_updateBillboardChoosingMenu()
 		// Iterate through every placed billboard
 		for(const auto& billboardID : _fe3d.billboard_getIDs())
 		{
-			// Check if billboard is not a template billboard
+			// Cannot be template
 			if(billboardID[0] != '@')
 			{
 				// Check if button is hovered

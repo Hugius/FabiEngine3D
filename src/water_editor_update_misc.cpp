@@ -110,7 +110,7 @@ void WaterEditor::_updateWaterCreating()
 				return;
 			}
 
-			// @ signs not allowed
+			// @ sign not allowed
 			if(newWaterID.find('@') != string::npos)
 			{
 				Logger::throwWarning("Water ID cannot contain '@'!");

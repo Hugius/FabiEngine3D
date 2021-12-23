@@ -3,17 +3,16 @@
 
 const bool ScriptInterpreter::_validateFe3dAabb(const string& ID)
 {
-	// @ signs not allowed
-	if(ID[0] == '@')
+	// Validate ID
+	if(!_validateFe3dID(ID))
 	{
-		_throwScriptError("ID of requested AABB with ID \"" + ID + "\" cannot contain '@'!");
 		return false;
 	}
 
-	// Check if entity exists
+	// Validate existence
 	if(!_fe3d.aabb_isExisting(ID))
 	{
-		_throwScriptError("requested AABB with ID \"" + ID + "\" does not exist!");
+		_throwScriptError("AABB entity does not exist!");
 		return false;
 	}
 
@@ -22,28 +21,27 @@ const bool ScriptInterpreter::_validateFe3dAabb(const string& ID)
 
 const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isTemplate)
 {
+	// Validate ID
+	if(!_validateFe3dID(ID))
+	{
+		return false;
+	}
+
 	if(isTemplate)
 	{
 		// Validate existence
-		if(!_fe3d.billboard_isExisting(ID))
+		if(!_fe3d.billboard_isExisting("@" + ID))
 		{
-			_throwScriptError("requested template billboard with ID \"" + ID.substr(1) + "\" does not exist!");
+			_throwScriptError("template billboard entity does not exist!");
 			return false;
 		}
 	}
 	else
 	{
-		// @ signs not allowed
-		if(!isTemplate && ID[0] == '@')
-		{
-			_throwScriptError("ID of requested billboard with ID \"" + ID + "\" cannot contain '@'!");
-			return false;
-		}
-
 		// Validate existence
 		if(!_fe3d.billboard_isExisting(ID))
 		{
-			_throwScriptError("requested billboard with ID \"" + ID + "\" does not exist!");
+			_throwScriptError("billboard entity does not exist!");
 			return false;
 		}
 	}
@@ -53,17 +51,16 @@ const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isTe
 
 const bool ScriptInterpreter::_validateFe3dImage(const string& ID)
 {
-	// @ signs not allowed
-	if(ID[0] == '@')
+	// Validate ID
+	if(!_validateFe3dID(ID))
 	{
-		_throwScriptError("ID of requested image with ID \"" + ID + "\" cannot contain '@'!");
 		return false;
 	}
 
-	// Check if entity exists
+	// Validate existence
 	if(!_fe3d.image_isExisting(ID))
 	{
-		_throwScriptError("requested image with ID \"" + ID + "\" does not exist!");
+		_throwScriptError("image entity does not exist!");
 		return false;
 	}
 
@@ -72,17 +69,16 @@ const bool ScriptInterpreter::_validateFe3dImage(const string& ID)
 
 const bool ScriptInterpreter::_validateFe3dPointlight(const string& ID)
 {
-	// @ signs not allowed
-	if(ID[0] == '@')
+	// Validate ID
+	if(!_validateFe3dID(ID))
 	{
-		_throwScriptError("ID of requested pointlight with ID \"" + ID + "\" cannot contain '@'!");
 		return false;
 	}
 
-	// Check if entity exists
+	// Validate existence
 	if(!_fe3d.pointlight_isExisting(ID))
 	{
-		_throwScriptError("requested pointlight with ID \"" + ID + "\" does not exist!");
+		_throwScriptError("pointlight entity does not exist!");
 		return false;
 	}
 
@@ -91,17 +87,16 @@ const bool ScriptInterpreter::_validateFe3dPointlight(const string& ID)
 
 const bool ScriptInterpreter::_validateFe3dSpotlight(const string& ID)
 {
-	// @ signs not allowed
-	if(ID[0] == '@')
+	// Validate ID
+	if(!_validateFe3dID(ID))
 	{
-		_throwScriptError("ID of requested spotlight with ID \"" + ID + "\" cannot contain '@'!");
 		return false;
 	}
 
-	// Check if entity exists
+	// Validate existence
 	if(!_fe3d.spotlight_isExisting(ID))
 	{
-		_throwScriptError("requested spotlight with ID \"" + ID + "\" does not exist!");
+		_throwScriptError("spotlight entity does not exist!");
 		return false;
 	}
 
@@ -110,35 +105,34 @@ const bool ScriptInterpreter::_validateFe3dSpotlight(const string& ID)
 
 const bool ScriptInterpreter::_validateFe3dModel(const string& ID, bool isTemplate)
 {
+	// Validate ID
+	if(!_validateFe3dID(ID))
+	{
+		return false;
+	}
+
 	if(isTemplate)
 	{
 		// Validate existence
 		if(!_fe3d.model_isExisting(ID))
 		{
-			_throwScriptError("requested template model with ID \"" + ID.substr(1) + "\" does not exist!");
+			_throwScriptError("template model entity does not exist!");
 			return false;
 		}
 
 		// Cannot access an instanced model
 		if(_fe3d.model_isInstanced(ID))
 		{
-			_throwScriptError("requested template model with ID \"" + ID.substr(1) + "\" cannot be instanced!");
+			_throwScriptError("template model entity cannot be instanced!");
 			return false;
 		}
 	}
 	else
 	{
-		// @ signs not allowed
-		if(ID[0] == '@')
-		{
-			_throwScriptError("ID of requested model with ID \"" + ID + "\" cannot contain '@'!");
-			return false;
-		}
-
 		// Validate existence
 		if(!_fe3d.model_isExisting(ID))
 		{
-			_throwScriptError("requested model with ID \"" + ID + "\" does not exist!");
+			_throwScriptError("model entity does not exist!");
 			return false;
 		}
 
@@ -152,7 +146,7 @@ const bool ScriptInterpreter::_validateFe3dModelPart(const string& modelID, cons
 	// Check if part exists
 	if(_fe3d.model_hasPart(modelID, partID))
 	{
-		_throwScriptError("requested model with ID \"" + modelID + "\" has no part with ID \"" + partID + "\"!");
+		_throwScriptError("model entity part does not exist!");
 		return false;
 	}
 
@@ -161,17 +155,16 @@ const bool ScriptInterpreter::_validateFe3dModelPart(const string& modelID, cons
 
 const bool ScriptInterpreter::_validateFe3dReflection(const string& ID)
 {
-	// @ signs not allowed
-	if(ID[0] == '@')
+	// Validate ID
+	if(!_validateFe3dID(ID))
 	{
-		_throwScriptError("ID of requested reflection with ID \"" + ID + "\" cannot contain '@'!");
 		return false;
 	}
 
-	// Check if entity exists
+	// Validate existence
 	if(!_fe3d.reflection_isExisting(ID))
 	{
-		_throwScriptError("requested reflection with ID \"" + ID + "\" does not exist!");
+		_throwScriptError("reflection entity does not exist!");
 		return false;
 	}
 
@@ -180,10 +173,10 @@ const bool ScriptInterpreter::_validateFe3dReflection(const string& ID)
 
 const bool ScriptInterpreter::_validateFe3dSky()
 {
-	// Check if entity exists
+	// Validate existence
 	if(_fe3d.sky_getSelectedID().empty())
 	{
-		_throwScriptError("current world has no sky entity!");
+		_throwScriptError("sky entity not selected!");
 		return false;
 	}
 
@@ -192,10 +185,10 @@ const bool ScriptInterpreter::_validateFe3dSky()
 
 const bool ScriptInterpreter::_validateFe3dTerrain()
 {
-	// Check if entity exists
+	// Validate existence
 	if(_fe3d.terrain_getSelectedID().empty())
 	{
-		_throwScriptError("current world has no terrain entity!");
+		_throwScriptError("terrain entity not selected!");
 		return false;
 	}
 
@@ -204,17 +197,16 @@ const bool ScriptInterpreter::_validateFe3dTerrain()
 
 const bool ScriptInterpreter::_validateFe3dText(const string& ID)
 {
-	// @ signs not allowed
-	if(ID[0] == '@')
+	// Validate ID
+	if(!_validateFe3dID(ID))
 	{
-		_throwScriptError("ID of requested text with ID \"" + ID + "\" cannot contain '@'!");
 		return false;
 	}
 
-	// Check if entity exists
+	// Validate existence
 	if(!_fe3d.text_isExisting(ID))
 	{
-		_throwScriptError("requested text with ID \"" + ID + "\" does not exist!");
+		_throwScriptError("text entity does not exist!");
 		return false;
 	}
 
@@ -223,10 +215,10 @@ const bool ScriptInterpreter::_validateFe3dText(const string& ID)
 
 const bool ScriptInterpreter::_validateFe3dWater()
 {
-	// Check if entity exists
+	// Validate existence
 	if(_fe3d.water_getSelectedID().empty())
 	{
-		_throwScriptError("current world has no water entity!");
+		_throwScriptError("water entity not selected!");
 		return false;
 	}
 
@@ -235,28 +227,27 @@ const bool ScriptInterpreter::_validateFe3dWater()
 
 const bool ScriptInterpreter::_validateFe3dSound2d(const string& ID, bool isTemplate)
 {
+	// Validate ID
+	if(!_validateFe3dID(ID))
+	{
+		return false;
+	}
+
 	if(isTemplate)
 	{
 		// Validate existence
 		if(!_fe3d.sound2d_isExisting(ID))
 		{
-			_throwScriptError("requested template sound with ID \"" + ID.substr(1) + "\" does not exist!");
+			_throwScriptError("template sound does not exist!");
 			return false;
 		}
 	}
 	else
 	{
-		// @ signs not allowed
-		if(!isTemplate && ID[0] == '@')
-		{
-			_throwScriptError("ID of requested 2D sound with ID \"" + ID + "\" cannot contain '@'!");
-			return false;
-		}
-
 		// Validate existence
 		if(!_fe3d.sound2d_isExisting(ID))
 		{
-			_throwScriptError("requested 2D sound with ID \"" + ID + "\" does not exist!");
+			_throwScriptError("sound2D does not exist!");
 			return false;
 		}
 	}
@@ -266,30 +257,48 @@ const bool ScriptInterpreter::_validateFe3dSound2d(const string& ID, bool isTemp
 
 const bool ScriptInterpreter::_validateFe3dSound3d(const string& ID, bool isTemplate)
 {
+	// Validate ID
+	if(!_validateFe3dID(ID))
+	{
+		return false;
+	}
+
 	if(isTemplate)
 	{
 		// Validate existence
 		if(!_fe3d.sound3d_isExisting(ID))
 		{
-			_throwScriptError("requested template sound with ID \"" + ID.substr(1) + "\" does not exist!");
+			_throwScriptError("template sound does not exist!");
 			return false;
 		}
 	}
 	else
 	{
-		// @ signs not allowed
-		if(!isTemplate && ID[0] == '@')
-		{
-			_throwScriptError("ID of requested 3D sound with ID \"" + ID + "\" cannot contain '@'!");
-			return false;
-		}
-
 		// Validate existence
 		if(!_fe3d.sound3d_isExisting(ID))
 		{
-			_throwScriptError("requested 3D sound with ID \"" + ID + "\" does not exist!");
+			_throwScriptError("sound3D does not exist!");
 			return false;
 		}
+	}
+
+	return true;
+}
+
+const bool ScriptInterpreter::_validateFe3dID(const string& ID)
+{
+	// Spaces not allowed
+	if(ID.find(' ') != string::npos)
+	{
+		_throwScriptError("ID cannot contain spaces!");
+		return false;
+	}
+
+	// @ sign not allowed
+	if(ID.find('@') != string::npos)
+	{
+		_throwScriptError("ID cannot contain '@'!");
+		return false;
 	}
 
 	return true;

@@ -10,28 +10,24 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// @ signs not allowed
-			if(arguments[0].getString().find('@') != string::npos)
+			// Validate ID
+			if(!_validateFe3dID(arguments[0].getString()))
 			{
-				_throwScriptError("new billboard ID (\"" + arguments[0].getString() + "\") cannot contain '@'");
 				return true;
 			}
 
-			// Check if billboard entity already exists
+			// Validate existence
 			if(_fe3d.billboard_isExisting(arguments[0].getString()))
 			{
-				_throwScriptError("billboard with ID \"" + arguments[0].getString() + "\" already exists!");
+				_throwScriptError("billboard already exists!");
 				return true;
 			}
 
-			// Validate template billboard ID
-			if(_validateFe3dBillboard("@" + arguments[1].getString(), true))
+			// Validate template
+			if(_validateFe3dBillboard(arguments[1].getString(), true))
 			{
-				// Copy template billboard
 				_worldEditor.copyTemplateBillboard(arguments[0].getString(), ("@" + arguments[1].getString()),
 												   fvec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
-
-				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -56,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 			// Iterate through billboards
 			for(const auto& ID : _fe3d.billboard_getIDs())
 			{
-				// @ signs not allowed
+				// Cannot be template
 				if(ID[0] != '@')
 				{
 					_fe3d.billboard_delete(ID);

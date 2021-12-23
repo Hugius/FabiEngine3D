@@ -19,7 +19,7 @@ void SoundEditor::_updateSoundCreating()
 				return;
 			}
 
-			// @ signs not allowed
+			// @ sign not allowed
 			if(newSoundID.find('@') != string::npos)
 			{
 				Logger::throwWarning("Sound ID cannot contain '@'!");

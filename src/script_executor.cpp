@@ -94,7 +94,7 @@ void ScriptExecutor::pause()
 			_fe3d.misc_disableVsync();
 		}
 
-		// Save 2D sound states
+		// Save sound2D states
 		for(const auto& soundID : _fe3d.sound2d_getIDs())
 		{
 			if(_fe3d.sound2d_isPaused(soundID))
@@ -103,7 +103,7 @@ void ScriptExecutor::pause()
 			}
 		}
 
-		// Save 3D sound states
+		// Save sound3D states
 		for(const auto& soundID : _fe3d.sound3d_getIDs())
 		{
 			if(_fe3d.sound3d_isPaused(soundID))

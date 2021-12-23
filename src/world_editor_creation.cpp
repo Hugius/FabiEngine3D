@@ -380,12 +380,12 @@ const bool WorldEditor::_copyTemplateSound(const string& newID, const string& te
 	// Error checking
 	if(_fe3d.sound3d_isExisting(newID))
 	{
-		Logger::throwWarning("3D sound with ID \"" + newID + "\" already exists!");
+		Logger::throwWarning("sound3D with ID \"" + newID + "\" already exists!");
 		return false;
 	}
 	if(!_fe3d.sound2d_isExisting(templateID))
 	{
-		Logger::throwWarning("2D sound with ID \"" + newID + "\" not existing anymore!");
+		Logger::throwWarning("sound2D with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 

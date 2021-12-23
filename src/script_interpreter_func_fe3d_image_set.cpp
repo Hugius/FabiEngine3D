@@ -13,25 +13,21 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Temporary values
-			auto ID = arguments[0].getString();
-
-			// @ signs not allowed
-			if(ID[0] == '@')
+			// Validate ID
+			if(!_validateFe3dID(arguments[0].getString()))
 			{
-				_throwScriptError("new image ID (\"" + ID + "\") cannot contain '@'");
 				return true;
 			}
 
-			// Check if imageEntity already exists
-			if(_fe3d.image_isExisting(ID))
+			// Validate existence
+			if(_fe3d.image_isExisting(arguments[0].getString()))
 			{
-				_throwScriptError("image with ID \"" + ID + "\" already exists!");
+				_throwScriptError("image already exists!");
 				return true;
 			}
 
 			// Create image
-			_fe3d.image_create(ID, true);
+			_fe3d.image_create(arguments[0].getString(), true);
 
 			// Validate project ID
 			if(_currentProjectID.empty())
@@ -44,20 +40,20 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\texture\\diffuse_map\\");
 			const string filePath = (targetDirectoryPath + arguments[1].getString());
-			_fe3d.image_setDiffuseMap(ID, filePath);
+			_fe3d.image_setDiffuseMap(arguments[0].getString(), filePath);
 
 			// Set properties
-			_fe3d.image_setPosition(ID, _convertGuiPositionToViewport(fvec2(arguments[2].getDecimal(), arguments[3].getDecimal())));
-			_fe3d.image_setRotation(ID, arguments[4].getDecimal());
-			_fe3d.image_setSize(ID, _convertGuiSizeToViewport(fvec2(arguments[5].getDecimal(), arguments[6].getDecimal())));
+			_fe3d.image_setPosition(arguments[0].getString(), _convertGuiPositionToViewport(fvec2(arguments[2].getDecimal(), arguments[3].getDecimal())));
+			_fe3d.image_setRotation(arguments[0].getString(), arguments[4].getDecimal());
+			_fe3d.image_setSize(arguments[0].getString(), _convertGuiSizeToViewport(fvec2(arguments[5].getDecimal(), arguments[6].getDecimal())));
 
 			// In-engine viewport boundaries
 			if(!Config::getInst().isApplicationExported())
 			{
 				auto minPosition = Math::convertToNDC(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition()));
 				auto maxPosition = Math::convertToNDC(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition() + Config::getInst().getViewportSize()));
-				_fe3d.image_setMinPosition(ID, minPosition);
-				_fe3d.image_setMaxPosition(ID, maxPosition);
+				_fe3d.image_setMinPosition(arguments[0].getString(), minPosition);
+				_fe3d.image_setMaxPosition(arguments[0].getString(), maxPosition);
 			}
 
 			// Return
@@ -84,7 +80,7 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 			// Iterate through images
 			for(const auto& ID : _fe3d.image_getIDs())
 			{
-				// @ signs not allowed
+				// Cannot be template
 				if(ID[0] != '@')
 				{
 					_fe3d.image_delete(ID);

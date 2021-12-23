@@ -113,7 +113,7 @@ void TerrainEditor::_updateTerrainCreating()
 				return;
 			}
 
-			// @ signs not allowed
+			// @ sign not allowed
 			if(newTerrainID.find('@') != string::npos)
 			{
 				Logger::throwWarning("Terrain ID cannot contain '@'!");

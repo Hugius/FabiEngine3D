@@ -11,22 +11,21 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// @ signs not allowed
-			if(arguments[0].getString().find('@') != string::npos)
+			// Validate ID
+			if(!_validateFe3dID(arguments[0].getString()))
 			{
-				_throwScriptError("new model ID (\"" + arguments[0].getString() + "\") cannot contain '@'");
 				return true;
 			}
 
-			// Check if modelEntity already exists
+			// Validate existence
 			if(_fe3d.model_isExisting(arguments[0].getString()))
 			{
-				_throwScriptError("model with ID \"" + arguments[0].getString() + "\" already exists!");
+				_throwScriptError("model already exists!");
 				return true;
 			}
 
-			// Validate template model ID
-			if(_validateFe3dModel("@" + arguments[1].getString(), true))
+			// Validate template
+			if(_validateFe3dModel(arguments[1].getString(), true))
 			{
 				_worldEditor.copyTemplateModel(arguments[0].getString(), ("@" + arguments[1].getString()),
 											   fvec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
@@ -54,7 +53,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			// Iterate through models
 			for(const auto& ID : _fe3d.model_getIDs())
 			{
-				// @ signs not allowed
+				// Cannot be template
 				if(ID[0] != '@')
 				{
 					_fe3d.model_delete(ID);

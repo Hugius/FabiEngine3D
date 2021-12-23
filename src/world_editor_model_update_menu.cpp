@@ -32,7 +32,7 @@ void WorldEditor::_updateModelMenu()
 			sort(IDs.begin(), IDs.end());
 			for(auto& modelID : IDs)
 			{
-				// Must not be template entity
+				// Cannot be template
 				if(modelID[0] != '@')
 				{
 					// Removing the unique number from the ID
@@ -142,7 +142,7 @@ void WorldEditor::_updateModelChoosingMenu()
 		// Iterate through every placed model
 		for(const auto& modelID : _fe3d.model_getIDs())
 		{
-			// Must not be template entity
+			// Cannot be template
 			if(modelID[0] != '@')
 			{
 				// Check if button is hovered

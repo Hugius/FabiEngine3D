@@ -37,12 +37,12 @@ void FabiEngine3D::sound3d_start(const string& ID, int playCount, unsigned int f
 
 	if(!_core->_sound3dPlayer.isChannelAvailable())
 	{
-		Logger::throwWarning("Tried to play 3D sound with ID \"", ID, "\": no sound channels available!");
+		Logger::throwWarning("Tried to play sound3D with ID \"", ID, "\": no sound channels available!");
 		return;
 	}
 	if(_core->_sound3dPlayer.isSoundStarted(sound) && !mustForce)
 	{
-		Logger::throwWarning("Tried to play 3D sound with ID \"", ID, "\": sound is already started!");
+		Logger::throwWarning("Tried to play sound3D with ID \"", ID, "\": sound is already started!");
 		return;
 	}
 
@@ -55,12 +55,12 @@ void FabiEngine3D::sound3d_pause(const string& ID)
 
 	if(!_core->_sound3dPlayer.isSoundPlaying(sound))
 	{
-		Logger::throwWarning("Tried to pause 3D sound with ID \"", ID, "\": sound is not playing!");
+		Logger::throwWarning("Tried to pause sound3D with ID \"", ID, "\": sound is not playing!");
 		return;
 	}
 	if(_core->_sound3dPlayer.isSoundPaused(sound))
 	{
-		Logger::throwWarning("Tried to pause 3D sound with ID \"", ID, "\": sound is already paused!");
+		Logger::throwWarning("Tried to pause sound3D with ID \"", ID, "\": sound is already paused!");
 		return;
 	}
 
@@ -78,7 +78,7 @@ void FabiEngine3D::sound3d_resume(const string& ID)
 
 	if(!_core->_sound3dPlayer.isSoundPaused(sound))
 	{
-		Logger::throwWarning("Tried to resume 3D sound with ID \"", sound.getID(), "\": sound is not paused!");
+		Logger::throwWarning("Tried to resume sound3D with ID \"", sound.getID(), "\": sound is not paused!");
 		return;
 	}
 
@@ -96,7 +96,7 @@ void FabiEngine3D::sound3d_stop(const string& ID, unsigned int fadeMS)
 
 	if(!_core->_sound3dPlayer.isSoundStarted(sound))
 	{
-		Logger::throwWarning("Tried to stop 3D sound with ID \"", ID, "\": sound is not started!");
+		Logger::throwWarning("Tried to stop sound3D with ID \"", ID, "\": sound is not started!");
 		return;
 	}
 

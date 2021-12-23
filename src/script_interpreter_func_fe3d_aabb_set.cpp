@@ -10,17 +10,16 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// @ signs not allowed
-			if(arguments[0].getString().find('@') != string::npos)
+			// Validate ID
+			if(!_validateFe3dID(arguments[0].getString()))
 			{
-				_throwScriptError("new AABB ID (\"" + arguments[0].getString() + "\") cannot contain '@'");
 				return true;
 			}
 
-			// Check if AABB entity already exists
+			// Validate existence
 			if(_fe3d.aabb_isExisting(arguments[0].getString()))
 			{
-				_throwScriptError("AABB with ID \"" + arguments[0].getString() + "\" already exists!");
+				_throwScriptError("AABB already exists!");
 				return true;
 			}
 
@@ -63,7 +62,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 			// Iterate through AABBs
 			for(const auto& ID : _fe3d.aabb_getIDs())
 			{
-				// @ signs not allowed
+				// Cannot be template
 				if(ID[0] != '@')
 				{
 					// Only non-bound AABBs

@@ -65,7 +65,7 @@ void WorldEditor::_updatePointlightMenu()
 			sort(IDs.begin(), IDs.end());
 			for(auto& pointlightID : IDs)
 			{
-				// Must not be template entity
+				// Cannot be template
 				if(pointlightID[0] != '@')
 				{
 					// Removing the unique number from the ID
@@ -105,7 +105,7 @@ void WorldEditor::_updatePointlightChoosingMenu()
 		// Iterate through every placed pointlight
 		for(const auto& pointlightID : _fe3d.pointlight_getIDs())
 		{
-			// Must not be template entity
+			// Cannot be template
 			if(pointlightID[0] != '@')
 			{
 				// Check if button is hovered

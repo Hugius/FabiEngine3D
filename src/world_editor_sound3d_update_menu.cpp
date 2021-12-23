@@ -32,7 +32,7 @@ void WorldEditor::_updateSoundMenu()
 			sort(IDs.begin(), IDs.end());
 			for(auto& soundID : IDs)
 			{
-				// Must not be template entity
+				// Cannot be template
 				if(soundID[0] != '@')
 				{
 					// Removing the unique number from the ID
@@ -148,7 +148,7 @@ void WorldEditor::_updateSoundChoosingMenu()
 		// Iterate through every placed sound
 		for(const auto& soundID : _fe3d.sound3d_getIDs())
 		{
-			// Must not be template entity
+			// Cannot be template
 			if(soundID[0] != '@')
 			{
 				// Check if button is hovered

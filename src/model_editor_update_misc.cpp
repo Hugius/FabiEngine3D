@@ -134,7 +134,7 @@ void ModelEditor::_updateModelCreating()
 				return;
 			}
 
-			// @ signs not allowed
+			// @ sign not allowed
 			if(newModelID.find('@') != string::npos)
 			{
 				Logger::throwWarning("Model ID cannot contain '@'!");

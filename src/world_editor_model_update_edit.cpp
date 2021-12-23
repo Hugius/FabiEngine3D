@@ -24,7 +24,7 @@ void WorldEditor::_updateModelEditing()
 		// Check if user selected a model
 		for(const auto& ID : _fe3d.model_getIDs())
 		{
-			// Must not be template entity
+			// Cannot be template
 			if(ID[0] != '@')
 			{
 				bool hovered = (hoveredID.size() >= ID.size()) && (hoveredID.substr(0, ID.size()) == ID);

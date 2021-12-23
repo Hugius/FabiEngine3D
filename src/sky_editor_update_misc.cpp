@@ -91,7 +91,7 @@ void SkyEditor::_updateSkyCreating()
 				return;
 			}
 
-			// @ signs not allowed
+			// @ sign not allowed
 			if(newSkyID.find('@') != string::npos)
 			{
 				Logger::throwWarning("Sky ID cannot contain '@'!");

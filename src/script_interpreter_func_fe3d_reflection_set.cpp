@@ -11,26 +11,22 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Temporary values
-			auto ID = arguments[0].getString();
-
-			// @ signs not allowed
-			if(ID[0] == '@')
+			// Validate ID
+			if(!_validateFe3dID(arguments[0].getString()))
 			{
-				_throwScriptError("new reflection ID (\"" + ID + "\") cannot contain '@'");
 				return true;
 			}
 
-			// Check if reflection already exists
-			if(_fe3d.reflection_isExisting(ID))
+			// Validate existence
+			if(_fe3d.reflection_isExisting(arguments[0].getString()))
 			{
-				_throwScriptError("reflection with ID \"" + ID + "\" already exists!");
+				_throwScriptError("reflection already exists!");
 				return true;
 			}
 
 			// Create reflection
-			_fe3d.reflection_create(ID);
-			_fe3d.reflection_setPosition(ID, fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+			_fe3d.reflection_create(arguments[0].getString());
+			_fe3d.reflection_setPosition(arguments[0].getString(), fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 
 			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -56,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 			// Iterate through reflections
 			for(const auto& ID : _fe3d.reflection_getIDs())
 			{
-				// @ signs not allowed
+				// Cannot be template
 				if(ID[0] != '@')
 				{
 					_fe3d.reflection_delete(ID);

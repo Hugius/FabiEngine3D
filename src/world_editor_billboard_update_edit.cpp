@@ -21,7 +21,7 @@ void WorldEditor::_updateBillboardEditing()
 		// Check if user selected a billboard
 		for(const auto& ID : _fe3d.billboard_getIDs())
 		{
-			// Must not be template entity
+			// Cannot be template
 			if(ID[0] != '@')
 			{
 				// Check which entity is selected

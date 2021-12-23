@@ -11,29 +11,25 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Temporary values
-			const auto ID = arguments[0].getString();
-
-			// @ signs not allowed
-			if(ID[0] == '@')
+			// Validate ID
+			if(!_validateFe3dID(arguments[0].getString()))
 			{
-				_throwScriptError("new pointlight ID (\"" + ID + "\") cannot contain '@'");
 				return true;
 			}
 
-			// Check if pointlight entity already exists
-			if(_fe3d.pointlight_isExisting(ID))
+			// Validate existence
+			if(_fe3d.pointlight_isExisting(arguments[0].getString()))
 			{
-				_throwScriptError("pointlight with ID \"" + ID + "\" already exists!");
+				_throwScriptError("pointlight already exists!");
 				return true;
 			}
 
 			// Create pointlight
-			_fe3d.pointlight_create(ID);
-			_fe3d.pointlight_setPosition(ID, fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-			_fe3d.pointlight_setRadius(ID, fvec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()));
-			_fe3d.pointlight_setColor(ID, fvec3(arguments[7].getDecimal(), arguments[8].getDecimal(), arguments[9].getDecimal()));
-			_fe3d.pointlight_setIntensity(ID, arguments[10].getDecimal());
+			_fe3d.pointlight_create(arguments[0].getString());
+			_fe3d.pointlight_setPosition(arguments[0].getString(), fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+			_fe3d.pointlight_setRadius(arguments[0].getString(), fvec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()));
+			_fe3d.pointlight_setColor(arguments[0].getString(), fvec3(arguments[7].getDecimal(), arguments[8].getDecimal(), arguments[9].getDecimal()));
+			_fe3d.pointlight_setIntensity(arguments[0].getString(), arguments[10].getDecimal());
 
 			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -59,7 +55,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 			// Iterate through pointlights
 			for(const auto& ID : _fe3d.pointlight_getIDs())
 			{
-				// @ signs not allowed
+				// Cannot be template
 				if(ID[0] != '@')
 				{
 					_fe3d.pointlight_delete(ID);

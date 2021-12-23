@@ -10,32 +10,28 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Temporary values
-			const auto ID = arguments[0].getString();
-
-			// @ signs not allowed
-			if(ID[0] == '@')
+			// Validate ID
+			if(!_validateFe3dID(arguments[0].getString()))
 			{
-				_throwScriptError("new spotlight ID (\"" + ID + "\") cannot contain '@'");
 				return true;
 			}
 
-			// Check if spotlight entity already exists
-			if(_fe3d.spotlight_isExisting(ID))
+			// Validate existence
+			if(_fe3d.spotlight_isExisting(arguments[0].getString()))
 			{
-				_throwScriptError("spotlight with ID \"" + ID + "\" already exists!");
+				_throwScriptError("spotlight already exists!");
 				return true;
 			}
 
 			// Create spotlight
-			_fe3d.spotlight_create(ID);
-			_fe3d.spotlight_setPosition(ID, fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-			_fe3d.spotlight_setColor(ID, fvec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()));
-			_fe3d.spotlight_setYaw(ID, arguments[7].getDecimal());
-			_fe3d.spotlight_setPitch(ID, arguments[8].getDecimal());
-			_fe3d.spotlight_setIntensity(ID, arguments[9].getDecimal());
-			_fe3d.spotlight_setAngle(ID, arguments[10].getDecimal());
-			_fe3d.spotlight_setDistance(ID, arguments[11].getDecimal());
+			_fe3d.spotlight_create(arguments[0].getString());
+			_fe3d.spotlight_setPosition(arguments[0].getString(), fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+			_fe3d.spotlight_setColor(arguments[0].getString(), fvec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()));
+			_fe3d.spotlight_setYaw(arguments[0].getString(), arguments[7].getDecimal());
+			_fe3d.spotlight_setPitch(arguments[0].getString(), arguments[8].getDecimal());
+			_fe3d.spotlight_setIntensity(arguments[0].getString(), arguments[9].getDecimal());
+			_fe3d.spotlight_setAngle(arguments[0].getString(), arguments[10].getDecimal());
+			_fe3d.spotlight_setDistance(arguments[0].getString(), arguments[11].getDecimal());
 
 			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -61,7 +57,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 			// Iterate through spotlights
 			for(const auto& ID : _fe3d.spotlight_getIDs())
 			{
-				// @ signs not allowed
+				// Cannot be template
 				if(ID[0] != '@')
 				{
 					_fe3d.spotlight_delete(ID);

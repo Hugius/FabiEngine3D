@@ -426,7 +426,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// @ signs not allowed
+			// @ sign not allowed
 			if(arguments[0].getString().find('@') != string::npos)
 			{
 				_throwScriptError("ID of requested billboard with ID \"" + arguments[0].getString() + "\" cannot contain '@'");
@@ -444,7 +444,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// @ signs not allowed
+			// @ sign not allowed
 			if(arguments[0].getString().find('@') != string::npos)
 			{
 				_throwScriptError("ID of requested billboard with ID \"" + arguments[0].getString() + "\" cannot contain '@'");
@@ -457,7 +457,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 				// If substring matches
 				if(arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
 				{
-					// @ signs not allowed
+					// Cannot be template
 					if(ID[0] != '@')
 					{
 						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
@@ -475,7 +475,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			// Iterate through billboards
 			for(const auto& ID : result)
 			{
-				// @ signs not allowed
+				// Cannot be template
 				if(ID[0] != '@')
 				{
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));

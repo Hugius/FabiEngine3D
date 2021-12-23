@@ -132,7 +132,7 @@ void BillboardEditor::_updateBillboardCreating()
 				return;
 			}
 
-			// @ signs not allowed
+			// @ sign not allowed
 			if(newBillboardID.find('@') != string::npos)
 			{
 				Logger::throwWarning("Billboard ID cannot contain '@'!");

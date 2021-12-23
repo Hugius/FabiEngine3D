@@ -14,22 +14,21 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 			string newID = arguments[0].getString();
 			string templateID = arguments[1].getString();
 
-			// @ signs not allowed
-			if(newID[0] == '@')
+			// Validate ID
+			if(!_validateFe3dID(newID))
 			{
-				_throwScriptError("new sound ID (\"" + arguments[0].getString() + "\") cannot contain '@'");
 				return true;
 			}
 
-			// Check if sound already exists
+			// Validate existence
 			if(_fe3d.sound3d_isExisting(newID))
 			{
-				_throwScriptError("sound with ID \"" + newID + "\" already exists!");
+				_throwScriptError("sound already exists!");
 				return true;
 			}
 
 			// Validate template sound ID
-			if(_validateFe3dSound3d("@" + templateID, true))
+			if(_validateFe3dSound3d(templateID, true))
 			{
 				// Temporary values
 				auto position = fvec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal());
@@ -66,7 +65,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 			// Iterate through sounds
 			for(const auto& ID : _fe3d.sound3d_getIDs())
 			{
-				// @ signs not allowed
+				// Cannot be template
 				if(ID[0] != '@')
 				{
 					_fe3d.sound3d_delete(ID);

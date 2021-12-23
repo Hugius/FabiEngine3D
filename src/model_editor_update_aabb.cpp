@@ -141,7 +141,7 @@ void ModelEditor::_updateAabbCreating()
 				return;
 			}
 
-			// @ signs not allowed
+			// @ sign not allowed
 			if(newAabbID.find('@') != string::npos)
 			{
 				Logger::throwWarning("AABB ID cannot contain '@'!");

@@ -63,7 +63,7 @@ void WorldEditor::_updateReflectionMenu()
 			sort(IDs.begin(), IDs.end());
 			for(auto& reflectionID : IDs)
 			{
-				// Must not be template entity
+				// Cannot be template
 				if(reflectionID[0] != '@')
 				{
 					// Removing the unique number from the ID
@@ -103,7 +103,7 @@ void WorldEditor::_updateReflectionChoosingMenu()
 		// Iterate through every placed reflection
 		for(const auto& reflectionID : _fe3d.reflection_getIDs())
 		{
-			// Must not be template entity
+			// Cannot be template
 			if(reflectionID[0] != '@')
 			{
 				// Check if button is hovered

@@ -12,36 +12,32 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// Temporary values 
-			const auto ID = arguments[0].getString();
-
-			// @ signs not allowed
-			if(ID[0] == '@')
+			// Validate ID
+			if(!_validateFe3dID(arguments[0].getString()))
 			{
-				_throwScriptError("new text ID \"" + ID + "\" cannot contain '@'");
 				return true;
 			}
 
-			// Check if text entity already exists
-			if(_fe3d.text_isExisting(ID))
+			// Validate existence
+			if(_fe3d.text_isExisting(arguments[0].getString()))
 			{
-				_throwScriptError("text with ID \"" + ID + "\" already exists!");
+				_throwScriptError("text already exists!");
 				return true;
 			}
 
 			// Create text
-			_fe3d.text_create(ID, true, arguments[3].getBoolean());
+			_fe3d.text_create(arguments[0].getString(), true, arguments[3].getBoolean());
 
 			// Set font
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\font\\" + arguments[1].getString());
-			_fe3d.text_setFont(ID, filePath);
+			_fe3d.text_setFont(arguments[0].getString(), filePath);
 
 			// Set properties
-			_fe3d.text_setPosition(ID, _convertGuiPositionToViewport(fvec2(arguments[4].getDecimal(), arguments[5].getDecimal())));
-			_fe3d.text_setSize(ID, _convertGuiSizeToViewport(fvec2(arguments[6].getDecimal(), arguments[7].getDecimal())));
-			_fe3d.text_setContent(ID, arguments[2].getString());
+			_fe3d.text_setPosition(arguments[0].getString(), _convertGuiPositionToViewport(fvec2(arguments[4].getDecimal(), arguments[5].getDecimal())));
+			_fe3d.text_setSize(arguments[0].getString(), _convertGuiSizeToViewport(fvec2(arguments[6].getDecimal(), arguments[7].getDecimal())));
+			_fe3d.text_setContent(arguments[0].getString(), arguments[2].getString());
 
 			// In-engine viewport boundaries
 			if(!Config::getInst().isApplicationExported())
@@ -76,7 +72,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			// Iterate through texts
 			for(const auto& ID : _fe3d.text_getIDs())
 			{
-				// @ signs not allowed
+				// Cannot be template
 				if(ID[0] != '@')
 				{
 					_fe3d.text_delete(ID);

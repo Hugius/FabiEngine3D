@@ -150,6 +150,7 @@ private:
 	const bool _validateFe3dReflection(const string& ID);
 	const bool _validateFe3dImage(const string& ID);
 	const bool _validateFe3dText(const string& ID);
+	const bool _validateFe3dID(const string& ID);
 	const bool _validateScopeChange(unsigned int countedSpaces, const string& scriptLineText, unsigned int& scopeDepth);
 	const bool _validateKeyInputString(const string& inputString);
 	const bool _validateMouseInputString(const string& inputString);

@@ -65,7 +65,7 @@ void WorldEditor::_updateSpotlightMenu()
 			sort(IDs.begin(), IDs.end());
 			for(auto& spotlightID : IDs)
 			{
-				// Must not be template entity
+				// Cannot be template
 				if(spotlightID[0] != '@')
 				{
 					// Removing the unique number from the ID
@@ -105,7 +105,7 @@ void WorldEditor::_updateSpotlightChoosingMenu()
 		// Iterate through every placed spotlight
 		for(const auto& spotlightID : _fe3d.spotlight_getIDs())
 		{
-			// Must not be template entity
+			// Cannot be template
 			if(spotlightID[0] != '@')
 			{
 				// Check if button is hovered

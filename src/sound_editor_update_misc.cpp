@@ -12,17 +12,17 @@ void SoundEditor::_updateSoundCreating()
 		// Check if user filled in a new ID
 		if(_gui.getOverlay()->checkValueForm("soundCreate", newSoundID, {_currentSoundID}))
 		{
-			// @ sign not allowed
-			if(newSoundID.find('@') != string::npos)
-			{
-				Logger::throwWarning("Sound ID cannot begin with '@'!");
-				return;
-			}
-
 			// Spaces not allowed
 			if(newSoundID.find(' ') != string::npos)
 			{
 				Logger::throwWarning("Sound ID cannot contain any spaces!");
+				return;
+			}
+
+			// @ signs not allowed
+			if(newSoundID.find('@') != string::npos)
+			{
+				Logger::throwWarning("Sound ID cannot contain '@'!");
 				return;
 			}
 

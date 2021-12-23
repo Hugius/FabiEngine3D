@@ -14,7 +14,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 			// Temporary values
 			const auto ID = arguments[0].getString();
 
-			// @ sign not allowed
+			// @ signs not allowed
 			if(ID[0] == '@')
 			{
 				_throwScriptError("new pointlight ID (\"" + ID + "\") cannot contain '@'");
@@ -59,7 +59,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 			// Iterate through pointlights
 			for(const auto& ID : _fe3d.pointlight_getIDs())
 			{
-				// @ sign not allowed
+				// @ signs not allowed
 				if(ID[0] != '@')
 				{
 					_fe3d.pointlight_delete(ID);

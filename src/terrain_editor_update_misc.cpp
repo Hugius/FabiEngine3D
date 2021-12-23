@@ -106,17 +106,17 @@ void TerrainEditor::_updateTerrainCreating()
 		// Check if user filled in a new ID
 		if(_gui.getOverlay()->checkValueForm("terrainCreate", newTerrainID, {}))
 		{
-			// @ sign not allowed
-			if(newTerrainID.find('@') != string::npos)
-			{
-				Logger::throwWarning("Terrain ID cannot contain '@'!");
-				return;
-			}
-
 			// Spaces not allowed
 			if(newTerrainID.find(' ') != string::npos)
 			{
 				Logger::throwWarning("Terrain ID cannot contain any spaces!");
+				return;
+			}
+
+			// @ signs not allowed
+			if(newTerrainID.find('@') != string::npos)
+			{
+				Logger::throwWarning("Terrain ID cannot contain '@'!");
 				return;
 			}
 

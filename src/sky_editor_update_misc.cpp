@@ -84,17 +84,17 @@ void SkyEditor::_updateSkyCreating()
 		// Check if user filled in a new ID
 		if(_gui.getOverlay()->checkValueForm("skyCreate", newSkyID, {}))
 		{
-			// @ sign not allowed
-			if(newSkyID.find('@') != string::npos)
-			{
-				Logger::throwWarning("Sky ID cannot contain '@'!");
-				return;
-			}
-
 			// Spaces not allowed
 			if(newSkyID.find(' ') != string::npos)
 			{
 				Logger::throwWarning("Sky ID cannot contain any spaces!");
+				return;
+			}
+
+			// @ signs not allowed
+			if(newSkyID.find('@') != string::npos)
+			{
+				Logger::throwWarning("Sky ID cannot contain '@'!");
 				return;
 			}
 
@@ -129,7 +129,6 @@ void SkyEditor::_updateSkyCreating()
 			}
 		}
 	}
-}
 }
 
 void SkyEditor::_updateSkyChoosing()

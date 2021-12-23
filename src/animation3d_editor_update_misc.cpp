@@ -274,17 +274,17 @@ void Animation3dEditor::_updateAnimationCreating()
 		// Check if user filled in a new ID
 		if(_gui.getOverlay()->checkValueForm("animationCreate", newAnimationID, {_currentAnimationID}))
 		{
-			// @ sign not allowed
-			if(newAnimationID.find('@') != string::npos)
-			{
-				Logger::throwWarning("Animation ID cannot contain '@'!");
-				return;
-			}
-
 			// Spaces not allowed
 			if(newAnimationID.find(' ') != string::npos)
 			{
 				Logger::throwWarning("Animation ID cannot contain any spaces!");
+				return;
+			}
+
+			// @ signs not allowed
+			if(newAnimationID.find('@') != string::npos)
+			{
+				Logger::throwWarning("Animation ID cannot contain '@'!");
 				return;
 			}
 

@@ -1,6 +1,6 @@
 # Networking
 
-<img src="images/client_server.png" width="100%"/>
+<img src="../image/client_server.png" width="100%"/>
 
 ## 1. Server
 

@@ -14,7 +14,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 			string newID = arguments[0].getString();
 			string templateID = arguments[1].getString();
 
-			// @ sign not allowed
+			// @ signs not allowed
 			if(newID[0] == '@')
 			{
 				_throwScriptError("new sound ID (\"" + arguments[0].getString() + "\") cannot contain '@'");
@@ -66,7 +66,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 			// Iterate through sounds
 			for(const auto& ID : _fe3d.sound3d_getIDs())
 			{
-				// @ sign not allowed
+				// @ signs not allowed
 				if(ID[0] != '@')
 				{
 					_fe3d.sound3d_delete(ID);

@@ -127,17 +127,17 @@ void ModelEditor::_updateModelCreating()
 		// Check if user filled in a new ID
 		if(_gui.getOverlay()->checkValueForm("modelCreate", newModelID, {}))
 		{
-			// @ sign not allowed
-			if(newModelID.find('@') != string::npos)
-			{
-				Logger::throwWarning("Model ID cannot contain '@'!");
-				return;
-			}
-
 			// Spaces not allowed
 			if(newModelID.find(' ') != string::npos)
 			{
 				Logger::throwWarning("Model ID cannot contain any spaces!");
+				return;
+			}
+
+			// @ signs not allowed
+			if(newModelID.find('@') != string::npos)
+			{
+				Logger::throwWarning("Model ID cannot contain '@'!");
 				return;
 			}
 

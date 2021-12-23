@@ -13,7 +13,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 			// Temporary values
 			const auto ID = arguments[0].getString();
 
-			// @ sign not allowed
+			// @ signs not allowed
 			if(ID[0] == '@')
 			{
 				_throwScriptError("new spotlight ID (\"" + ID + "\") cannot contain '@'");
@@ -61,7 +61,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 			// Iterate through spotlights
 			for(const auto& ID : _fe3d.spotlight_getIDs())
 			{
-				// @ sign not allowed
+				// @ signs not allowed
 				if(ID[0] != '@')
 				{
 					_fe3d.spotlight_delete(ID);

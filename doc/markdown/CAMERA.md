@@ -2,7 +2,7 @@
 
 ## 1. Coordinate system
 
-<img src="images/coordinate_system.png" width="50%"/>
+<img src="../image/coordinate_system.png" width="50%"/>
 
 - The X axis is horizontal (left & right).
 - The Y axis is vertical (bottom & top).
@@ -14,7 +14,7 @@
 
 ## 2. Rotation system
 
-<img src="images/rotation_system.png" width="40%"/>
+<img src="../image/rotation_system.png" width="40%"/>
 
 - X rotations go around the X axis.
 - Y rotations go around the Y axis.
@@ -24,7 +24,7 @@
 
 ## 3. Camera angles
 
-<img src="images/camera_angles.png" width="100%"/>
+<img src="../image/camera_angles.png" width="100%"/>
 
 - **Pitch**: around the X axis (supported)
 - **Yaw**: around the Y axis (supported)
@@ -37,7 +37,7 @@
 
 ## 3. Camera Vectors
 
-<img src="images/camera_vectors.png" width="50%"/>
+<img src="../image/camera_vectors.png" width="50%"/>
 
 - When the camera is looking in a certain direction, there are 3 vectors as a result.
 - The resulting vectors are normalized.

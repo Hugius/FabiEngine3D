@@ -2,7 +2,7 @@
 
 ## 1. Collision
 
-<img src="images/collision.png" width="50%"/>
+<img src="../image/collision.png" width="50%"/>
 
 ## 1.1 AABB Entity vs AABB Entity
 
@@ -21,7 +21,7 @@
 
 ## 2. Raycasting
 
-<img src="images/raycasting.png" width="75%"/>
+<img src="../image/raycasting.png" width="75%"/>
 
 ## 2.1 Cursor Ray
 

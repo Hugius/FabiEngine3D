@@ -46,7 +46,7 @@
 
 ### 4.1 Blend Map
 
-<img src="images/blend_map.png" width="25%"/>
+<img src="../image/blend_map.png" width="25%"/>
 
 - Blend map assets must be placed in `~\projects\<your_project>\assets\texture\blend_map\`.
 - Bit depth: `24`
@@ -62,12 +62,12 @@
 
 ### 4.2 Cube Map
 
-<img src="images/skybox_left.png" width="25%"/>
-<img src="images/skybox_right.png" width="25%"/>
-<img src="images/skybox_bottom.png" width="25%"/>
-<img src="images/skybox_top.png" width="25%"/>
-<img src="images/skybox_back.png" width="25%"/>
-<img src="images/skybox_front.png" width="25%"/>
+<img src="../image/skybox_left.png" width="25%"/>
+<img src="../image/skybox_right.png" width="25%"/>
+<img src="../image/skybox_bottom.png" width="25%"/>
+<img src="../image/skybox_top.png" width="25%"/>
+<img src="../image/skybox_back.png" width="25%"/>
+<img src="../image/skybox_front.png" width="25%"/>
 
 - Cube map assets must be placed in `~\projects\<your_project>\assets\texture\cube_map\`
 - Bit depth: `8`
@@ -76,7 +76,7 @@
 
 ### 4.3 Diffuse Map
 
-<img src="images/diffuse_map.png" width="25%"/>
+<img src="../image/diffuse_map.png" width="25%"/>
 
 - Diffuse map assets must be placed in `~\projects\<your_project>\assets\texture\diffuse_map\`
 - Bit depth: `24/32`
@@ -84,7 +84,7 @@
 
 ### 4.4 Displacement Map
 
-<img src="images/displacement_map.png" width="25%"/>
+<img src="../image/displacement_map.png" width="25%"/>
 
 - Displacement map assets must be placed in `~\projects\<your_project>\assets\texture\displacement_map\`
 - Bit depth: `24`
@@ -92,7 +92,7 @@
 
 ### 4.5 DUDV Map
 
-<img src="images/dudv_map.png" width="25%"/>
+<img src="../image/dudv_map.png" width="25%"/>
 
 - DUDV map assets must be placed in `~\projects\<your_project>\assets\texture\dudv_map\`
 - Bit depth: `24`
@@ -100,7 +100,7 @@
 
 ### 4.6 Emission Map
 
-<img src="images/emission_map.png" width="25%"/>
+<img src="../image/emission_map.png" width="25%"/>
 
 - Emission map assets must be placed in `~\projects\<your_project>\assets\texture\emission_map\`
 - Bit depth: `24`
@@ -108,7 +108,7 @@
 
 ### 4.7 Flare Map
 
-<img src="images/flare_map.png" width="25%"/>
+<img src="../image/flare_map.png" width="25%"/>
 
 - Flare map assets must be placed in `~\projects\<your_project>\assets\texture\flare_map\`
 - Bit depth: `24`
@@ -117,7 +117,7 @@
 
 ### 4.8 Height Map
 
-<img src="images/height_map.png" width="25%"/>
+<img src="../image/height_map.png" width="25%"/>
 
 - Height map assets must be placed in `~\projects\<your_project>\assets\texture\height_map\`.
 - Bit depth: `8`
@@ -126,7 +126,7 @@
 
 ### 4.10 Normal Map
 
-<img src="images/normal_map.png" width="25%"/>
+<img src="../image/normal_map.png" width="25%"/>
 
 - Normal map assets must be placed in `~\projects\<your_project>\assets\texture\normal_map\`
 - Bit depth: `24`
@@ -134,7 +134,7 @@
 
 ### 4.11 Reflection Map
 
-<img src="images/reflection_map.png" width="25%"/>
+<img src="../image/reflection_map.png" width="25%"/>
 
 - Reflection map assets must be placed in `~\projects\<your_project>\assets\texture\reflection_map\`
 - Bit depth: `24`
@@ -142,7 +142,7 @@
 
 ### 4.12 Specular Map
 
-<img src="images/specular_map.png" width="25%"/>
+<img src="../image/specular_map.png" width="25%"/>
 
 - Specular map assets must be placed in `~\projects\<your_project>\assets\texture\specular_map\`
 - Bit depth: `24`

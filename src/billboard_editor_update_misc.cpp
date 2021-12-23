@@ -125,17 +125,17 @@ void BillboardEditor::_updateBillboardCreating()
 		// Check if user filled in a new ID
 		if(_gui.getOverlay()->checkValueForm("billboardCreate", newBillboardID, {_currentBillboardID}))
 		{
-			// @ sign not allowed
-			if(newBillboardID.find('@') != string::npos)
-			{
-				Logger::throwWarning("Billboard ID cannot contain '@'!");
-				return;
-			}
-
 			// Spaces not allowed
 			if(newBillboardID.find(' ') != string::npos)
 			{
 				Logger::throwWarning("Billboard ID cannot contain any spaces!");
+				return;
+			}
+
+			// @ signs not allowed
+			if(newBillboardID.find('@') != string::npos)
+			{
+				Logger::throwWarning("Billboard ID cannot contain '@'!");
 				return;
 			}
 

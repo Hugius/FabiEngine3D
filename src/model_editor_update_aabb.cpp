@@ -134,17 +134,17 @@ void ModelEditor::_updateAabbCreating()
 		// Check if user filled in a new ID
 		if(_gui.getOverlay()->checkValueForm("aabbCreate", newAabbID, {}))
 		{
-			// @ sign not allowed
-			if(newAabbID.find('@') != string::npos)
-			{
-				Logger::throwWarning("AABB ID cannot contain '@'!");
-				return;
-			}
-
 			// Spaces not allowed
 			if(newAabbID.find(' ') != string::npos)
 			{
 				Logger::throwWarning("AABB ID cannot contain any spaces!");
+				return;
+			}
+
+			// @ signs not allowed
+			if(newAabbID.find('@') != string::npos)
+			{
+				Logger::throwWarning("AABB ID cannot contain '@'!");
 				return;
 			}
 

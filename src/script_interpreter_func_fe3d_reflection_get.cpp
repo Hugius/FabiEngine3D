@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// @ sign not allowed
+			// @ signs not allowed
 			if(arguments[0].getString().find('@') != string::npos)
 			{
 				_throwScriptError("ID of requested reflection with ID \"" + arguments[0].getString() + "\" cannot contain '@'");
@@ -28,7 +28,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 
 		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
 		{
-			// @ sign not allowed
+			// @ signs not allowed
 			if(arguments[0].getString().find('@') != string::npos)
 			{
 				_throwScriptError("ID of requested reflection with ID \"" + arguments[0].getString() + "\" cannot contain '@'");
@@ -41,7 +41,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 				// If substring matches
 				if(arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
 				{
-					// @ sign not allowed
+					// @ signs not allowed
 					if(ID[0] != '@')
 					{
 						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
@@ -59,7 +59,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 			// Iterate through reflections
 			for(const auto& ID : result)
 			{
-				// @ sign not allowed
+				// @ signs not allowed
 				if(ID[0] != '@')
 				{
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));

@@ -103,17 +103,17 @@ void WaterEditor::_updateWaterCreating()
 		// Create if user filled in a new ID
 		if(_gui.getOverlay()->checkValueForm("waterCreate", newWaterID, {}))
 		{
-			// @ sign not allowed
-			if(newWaterID.find('@') != string::npos)
-			{
-				Logger::throwWarning("Water ID cannot contain '@'!");
-				return;
-			}
-
 			// Spaces not allowed
 			if(newWaterID.find(' ') != string::npos)
 			{
 				Logger::throwWarning("Water ID cannot contain any spaces!");
+				return;
+			}
+
+			// @ signs not allowed
+			if(newWaterID.find('@') != string::npos)
+			{
+				Logger::throwWarning("Water ID cannot contain '@'!");
 				return;
 			}
 

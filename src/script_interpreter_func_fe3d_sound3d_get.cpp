@@ -2,23 +2,23 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:sound3d_is_existing")
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			// @ sign not allowed
-			if(arguments[0].getString().find('@') != string::npos)
+			if(args[0].getString().find('@') != string::npos)
 			{
-				_throwScriptError("ID of requested sound with ID \"" + arguments[0].getString() + "\" cannot contain '@'");
+				_throwScriptError("ID of requested sound with ID \"" + args[0].getString() + "\" cannot contain '@'");
 				return true;
 			}
 
 			// Check if existing
-			auto result = _fe3d.sound3d_isExisting(arguments[0].getString());
+			auto result = _fe3d.sound3d_isExisting(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
@@ -26,12 +26,12 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			// @ sign not allowed
-			if(arguments[0].getString().find('@') != string::npos)
+			if(args[0].getString().find('@') != string::npos)
 			{
-				_throwScriptError("ID of requested sound with ID \"" + arguments[0].getString() + "\" cannot contain '@'");
+				_throwScriptError("ID of requested sound with ID \"" + args[0].getString() + "\" cannot contain '@'");
 				return true;
 			}
 
@@ -39,7 +39,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 			for(const auto& ID : _fe3d.sound3d_getIDs())
 			{
 				// If substring matches
-				if(arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
+				if(args[0].getString() == ID.substr(0, args[0].getString().size()))
 				{
 					// Cannot be template
 					if(ID[0] != '@')
@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:sound3d_get_ids")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto result = _fe3d.sound3d_getIDs();
 
@@ -71,11 +71,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(arguments[0].getString(), false))
+			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				auto result = _fe3d.sound3d_isStarted(arguments[0].getString());
+				auto result = _fe3d.sound3d_isStarted(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -84,11 +84,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(arguments[0].getString(), false))
+			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				auto result = _fe3d.sound3d_isPlaying(arguments[0].getString());
+				auto result = _fe3d.sound3d_isPlaying(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -97,11 +97,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(arguments[0].getString(), false))
+			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				auto result = _fe3d.sound3d_isPaused(arguments[0].getString());
+				auto result = _fe3d.sound3d_isPaused(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -110,11 +110,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(arguments[0].getString(), false))
+			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				auto result = _fe3d.sound3d_getVolume(arguments[0].getString());
+				auto result = _fe3d.sound3d_getVolume(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -123,11 +123,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(arguments[0].getString(), false))
+			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				auto result = _fe3d.sound3d_getPosition(arguments[0].getString()).x;
+				auto result = _fe3d.sound3d_getPosition(args[0].getString()).x;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -136,11 +136,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(arguments[0].getString(), false))
+			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				auto result = _fe3d.sound3d_getPosition(arguments[0].getString()).y;
+				auto result = _fe3d.sound3d_getPosition(args[0].getString()).y;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -149,11 +149,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(arguments[0].getString(), false))
+			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				auto result = _fe3d.sound3d_getPosition(arguments[0].getString()).z;
+				auto result = _fe3d.sound3d_getPosition(args[0].getString()).z;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -162,11 +162,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(arguments[0].getString(), false))
+			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				auto result = _fe3d.sound3d_getMaxVolume(arguments[0].getString());
+				auto result = _fe3d.sound3d_getMaxVolume(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -175,11 +175,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(arguments[0].getString(), false))
+			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				auto result = _fe3d.sound3d_getMaxDistance(arguments[0].getString());
+				auto result = _fe3d.sound3d_getMaxDistance(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}

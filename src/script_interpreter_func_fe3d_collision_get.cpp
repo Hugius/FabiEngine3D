@@ -2,11 +2,11 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:collision_is_camera_under_terrain")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			bool result = _fe3d.collision_checkCameraWithTerrain();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -16,11 +16,11 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			// Validate direction
-			if(arguments[2].getString() != "X" && arguments[2].getString() != "Y" &&
-			   arguments[2].getString() != "Z" && !arguments[2].getString().empty())
+			if(args[2].getString() != "X" && args[2].getString() != "Y" &&
+			   args[2].getString() != "Z" && !args[2].getString().empty())
 			{
 				_throwScriptError("invalid direction argument!");
 				return true;
@@ -28,7 +28,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 
 			// Find aabbEntity
 			string result = "";
-			auto foundAabbID = _fe3d.collision_checkCameraWithEntities(arguments[0].getString());
+			auto foundAabbID = _fe3d.collision_checkCameraWithEntities(args[0].getString());
 
 			// Check if AABB found
 			if(!foundAabbID.empty())
@@ -41,12 +41,12 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 					auto directionX = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID, Direction::X);
 					auto directionY = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID, Direction::Y);
 					auto directionZ = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID, Direction::Z);
-					if((directionX && arguments[2].getString() == "X") ||
-					   (directionY && arguments[2].getString() == "Y") ||
-					   (directionZ && arguments[2].getString() == "Z") ||
-					   ((directionX || directionY || directionZ) && arguments[2].getString().empty()))
+					if((directionX && args[2].getString() == "X") ||
+					   (directionY && args[2].getString() == "Y") ||
+					   (directionZ && args[2].getString() == "Z") ||
+					   ((directionX || directionY || directionZ) && args[2].getString().empty()))
 					{
-						if(arguments[1].getString().empty()) // No specific AABB part
+						if(args[1].getString().empty()) // No specific AABB part
 						{
 							result = _fe3d.aabb_getParentEntityID(foundAabbID);
 						}
@@ -59,7 +59,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 							reverse(partID.begin(), partID.end());
 
 							// Check if AABB part IDs match
-							if(partID == arguments[1].getString())
+							if(partID == args[1].getString())
 							{
 								result = _fe3d.aabb_getParentEntityID(foundAabbID);
 							}
@@ -76,11 +76,11 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			// Validate direction
-			if(arguments[0].getString() != "X" && arguments[0].getString() != "Y" &&
-			   arguments[0].getString() != "Z" && !arguments[0].getString().empty())
+			if(args[0].getString() != "X" && args[0].getString() != "Y" &&
+			   args[0].getString() != "Z" && !args[0].getString().empty())
 			{
 				_throwScriptError("invalid direction argument!");
 				return true;
@@ -101,10 +101,10 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 					auto directionX = _fe3d.collision_checkCameraWithAnyDirection(Direction::X);
 					auto directionY = _fe3d.collision_checkCameraWithAnyDirection(Direction::Y);
 					auto directionZ = _fe3d.collision_checkCameraWithAnyDirection(Direction::Z);
-					if((directionX && arguments[0].getString() == "X") ||
-					   (directionY && arguments[0].getString() == "Y") ||
-					   (directionZ && arguments[0].getString() == "Z") ||
-					   ((directionX || directionY || directionZ) && arguments[0].getString().empty()))
+					if((directionX && args[0].getString() == "X") ||
+					   (directionY && args[0].getString() == "Y") ||
+					   (directionZ && args[0].getString() == "Z") ||
+					   ((directionX || directionY || directionZ) && args[0].getString().empty()))
 					{
 						result = _fe3d.aabb_getParentEntityID(foundAabbID);
 					}
@@ -119,11 +119,11 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			// Validate direction
-			if(arguments[1].getString() != "X" && arguments[1].getString() != "Y" &&
-			   arguments[1].getString() != "Z" && !arguments[1].getString().empty())
+			if(args[1].getString() != "X" && args[1].getString() != "Y" &&
+			   args[1].getString() != "Z" && !args[1].getString().empty())
 			{
 				_throwScriptError("invalid direction argument!");
 				return true;
@@ -131,7 +131,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 
 			// Find aabbEntity
 			string result = "";
-			auto foundAabbID = _fe3d.collision_checkCameraWithEntities(arguments[0].getString());
+			auto foundAabbID = _fe3d.collision_checkCameraWithEntities(args[0].getString());
 
 			// Check if AABB found
 			if(!foundAabbID.empty())
@@ -144,10 +144,10 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 					auto directionX = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID, Direction::X);
 					auto directionY = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID, Direction::Y);
 					auto directionZ = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID, Direction::Z);
-					if((directionX && arguments[1].getString() == "X") ||
-					   (directionY && arguments[1].getString() == "Y") ||
-					   (directionZ && arguments[1].getString() == "Z") ||
-					   ((directionX || directionY || directionZ) && arguments[1].getString().empty()))
+					if((directionX && args[1].getString() == "X") ||
+					   (directionY && args[1].getString() == "Y") ||
+					   (directionZ && args[1].getString() == "Z") ||
+					   ((directionX || directionY || directionZ) && args[1].getString().empty()))
 					{
 						result = _fe3d.aabb_getParentEntityID(foundAabbID);
 					}
@@ -162,11 +162,11 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			// Validate direction
-			if(arguments[0].getString() != "X" && arguments[0].getString() != "Y" &&
-			   arguments[0].getString() != "Z" && !arguments[0].getString().empty())
+			if(args[0].getString() != "X" && args[0].getString() != "Y" &&
+			   args[0].getString() != "Z" && !args[0].getString().empty())
 			{
 				_throwScriptError("invalid direction argument!");
 				return true;
@@ -187,10 +187,10 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 					auto directionX = _fe3d.collision_checkCameraWithAnyDirection(Direction::X);
 					auto directionY = _fe3d.collision_checkCameraWithAnyDirection(Direction::Y);
 					auto directionZ = _fe3d.collision_checkCameraWithAnyDirection(Direction::Z);
-					if((directionX && arguments[0].getString() == "X") ||
-					   (directionY && arguments[0].getString() == "Y") ||
-					   (directionZ && arguments[0].getString() == "Z") ||
-					   ((directionX || directionY || directionZ) && arguments[0].getString().empty()))
+					if((directionX && args[0].getString() == "X") ||
+					   (directionY && args[0].getString() == "Y") ||
+					   (directionZ && args[0].getString() == "Z") ||
+					   ((directionX || directionY || directionZ) && args[0].getString().empty()))
 					{
 						result = _fe3d.aabb_getParentEntityID(foundAabbID);
 					}
@@ -205,13 +205,13 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAabb(arguments[0].getString()))
+			if(_validateFe3dAabb(args[0].getString()))
 			{
 				// Validate direction
-				if(arguments[1].getString() != "X" && arguments[1].getString() != "Y" &&
-				   arguments[1].getString() != "Z" && !arguments[1].getString().empty())
+				if(args[1].getString() != "X" && args[1].getString() != "Y" &&
+				   args[1].getString() != "Z" && !args[1].getString().empty())
 				{
 					_throwScriptError("invalid direction argument!");
 					return true;
@@ -221,19 +221,19 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				bool result = false;
 
 				// Check if requested aabbEntity existing
-				if(_fe3d.aabb_isExisting(arguments[0].getString()))
+				if(_fe3d.aabb_isExisting(args[0].getString()))
 				{
 					// Check if requested aabbEntity does not have a parent
-					if(!_fe3d.aabb_hasParent(arguments[0].getString()))
+					if(!_fe3d.aabb_hasParent(args[0].getString()))
 					{
 						// Check direction
-						auto directionX = _fe3d.collision_checkCameraWithEntityDirection(arguments[0].getString(), Direction::X);
-						auto directionY = _fe3d.collision_checkCameraWithEntityDirection(arguments[0].getString(), Direction::Y);
-						auto directionZ = _fe3d.collision_checkCameraWithEntityDirection(arguments[0].getString(), Direction::Z);
-						if((directionX && arguments[1].getString() == "X") ||
-						   (directionY && arguments[1].getString() == "Y") ||
-						   (directionZ && arguments[1].getString() == "Z") ||
-						   ((directionX || directionY || directionZ) && arguments[1].getString().empty()))
+						auto directionX = _fe3d.collision_checkCameraWithEntityDirection(args[0].getString(), Direction::X);
+						auto directionY = _fe3d.collision_checkCameraWithEntityDirection(args[0].getString(), Direction::Y);
+						auto directionZ = _fe3d.collision_checkCameraWithEntityDirection(args[0].getString(), Direction::Z);
+						if((directionX && args[1].getString() == "X") ||
+						   (directionY && args[1].getString() == "Y") ||
+						   (directionZ && args[1].getString() == "Z") ||
+						   ((directionX || directionY || directionZ) && args[1].getString().empty()))
 						{
 							result = true;
 						}
@@ -249,11 +249,11 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			// Validate direction
-			if(arguments[0].getString() != "X" && arguments[0].getString() != "Y" &&
-			   arguments[0].getString() != "Z" && !arguments[0].getString().empty())
+			if(args[0].getString() != "X" && args[0].getString() != "Y" &&
+			   args[0].getString() != "Z" && !args[0].getString().empty())
 			{
 				_throwScriptError("invalid direction argument!");
 				return true;
@@ -270,10 +270,10 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				auto directionX = _fe3d.collision_checkCameraWithAnyDirection(Direction::X);
 				auto directionY = _fe3d.collision_checkCameraWithAnyDirection(Direction::Y);
 				auto directionZ = _fe3d.collision_checkCameraWithAnyDirection(Direction::Z);
-				if((directionX && arguments[0].getString() == "X") ||
-				   (directionY && arguments[0].getString() == "Y") ||
-				   (directionZ && arguments[0].getString() == "Z") ||
-				   ((directionX || directionY || directionZ) && arguments[0].getString().empty()))
+				if((directionX && args[0].getString() == "X") ||
+				   (directionY && args[0].getString() == "Y") ||
+				   (directionZ && args[0].getString() == "Z") ||
+				   ((directionX || directionY || directionZ) && args[0].getString().empty()))
 				{
 					result = true;
 				}
@@ -287,18 +287,18 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			// Temporary values
 			string result = "";
 
-			if(arguments[1].getString().empty()) // Check all AABB parts of self entity
+			if(args[1].getString().empty()) // Check all AABB parts of self entity
 			{
 				// Get part IDs
-				for(const auto& selfSearchID : _fe3d.aabb_getChildIDs(arguments[0].getString(), AabbParentEntityType::MODEL))
+				for(const auto& selfSearchID : _fe3d.aabb_getChildIDs(args[0].getString(), AabbParentEntityType::MODEL))
 				{
 					// Find aabbEntity ID
-					string otherSearchID = arguments[2].getString();
+					string otherSearchID = args[2].getString();
 					auto foundAabbID = _fe3d.collision_checkEntityWithEntities(selfSearchID, otherSearchID);
 
 					// Check if AABB found
@@ -308,7 +308,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 						if(_fe3d.aabb_hasParent(foundAabbID) &&
 						   (_fe3d.aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::MODEL))
 						{
-							if(arguments[1].getString().empty()) // No specific AABB part
+							if(args[1].getString().empty()) // No specific AABB part
 							{
 								result = foundAabbID;
 							}
@@ -321,7 +321,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 								reverse(partID.begin(), partID.end());
 
 								// Check if AABB part IDs match
-								if(partID == arguments[1].getString())
+								if(partID == args[1].getString())
 								{
 									result = foundAabbID;
 								}
@@ -335,7 +335,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			else // Check specific AABB part of self entity
 			{
 				// Check if self aabbEntity entity exists
-				string selfSearchID = arguments[0].getString() + (!arguments[1].getString().empty() ? ("_" + arguments[1].getString()) : "");
+				string selfSearchID = args[0].getString() + (!args[1].getString().empty() ? ("_" + args[1].getString()) : "");
 				if(!_fe3d.aabb_isExisting(selfSearchID))
 				{
 					_throwScriptError("requested model AABB with ID \"" + selfSearchID + "\" does not exist!");
@@ -343,7 +343,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				}
 
 				// Find aabbEntity ID
-				string otherSearchID = arguments[2].getString();
+				string otherSearchID = args[2].getString();
 				auto foundAabbID = _fe3d.collision_checkEntityWithEntities(selfSearchID, otherSearchID);
 
 				// Check if AABB found
@@ -353,7 +353,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 					if(_fe3d.aabb_hasParent(foundAabbID) &&
 					   (_fe3d.aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::MODEL))
 					{
-						if(arguments[1].getString().empty()) // No specific AABB part
+						if(args[1].getString().empty()) // No specific AABB part
 						{
 							result = foundAabbID;
 						}
@@ -366,7 +366,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 							reverse(partID.begin(), partID.end());
 
 							// Check if AABB part IDs match
-							if(partID == arguments[1].getString())
+							if(partID == args[1].getString())
 							{
 								result = foundAabbID;
 							}
@@ -383,19 +383,19 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			// Temporary values
 			string result = "";
 
 			// Check if no aabbEntity part is specified
-			if(arguments[1].getString().empty())
+			if(args[1].getString().empty())
 			{
 				// Get part IDs
-				for(const auto& selfSearchID : _fe3d.aabb_getChildIDs(arguments[0].getString(), AabbParentEntityType::BILLBOARD))
+				for(const auto& selfSearchID : _fe3d.aabb_getChildIDs(args[0].getString(), AabbParentEntityType::BILLBOARD))
 				{
 					// Find aabbEntity ID
-					auto foundAabbID = _fe3d.collision_checkEntityWithEntities(selfSearchID, arguments[2].getString());
+					auto foundAabbID = _fe3d.collision_checkEntityWithEntities(selfSearchID, args[2].getString());
 
 					// Check if AABB found
 					if(!foundAabbID.empty())
@@ -413,7 +413,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			else
 			{
 				// Check if self aabbEntity entity exists
-				string selfSearchID = arguments[0].getString() + (!arguments[1].getString().empty() ? ("_" + arguments[1].getString()) : "");
+				string selfSearchID = args[0].getString() + (!args[1].getString().empty() ? ("_" + args[1].getString()) : "");
 				if(!_fe3d.aabb_isExisting(selfSearchID))
 				{
 					_throwScriptError("requested model AABB with ID \"" + selfSearchID + "\" does not exist!");
@@ -421,7 +421,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				}
 
 				// Find aabbEntity ID
-				auto foundAabbID = _fe3d.collision_checkEntityWithEntities(selfSearchID, arguments[2].getString());
+				auto foundAabbID = _fe3d.collision_checkEntityWithEntities(selfSearchID, args[2].getString());
 
 				// Check if AABB found
 				if(!foundAabbID.empty())
@@ -443,19 +443,19 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			// Temporary values
 			string result = "";
 
 			// Check if no aabbEntity part is specified
-			if(arguments[1].getString().empty())
+			if(args[1].getString().empty())
 			{
 				// Get part IDs
-				for(const auto& selfSearchID : _fe3d.aabb_getChildIDs(arguments[0].getString(), AabbParentEntityType::MODEL))
+				for(const auto& selfSearchID : _fe3d.aabb_getChildIDs(args[0].getString(), AabbParentEntityType::MODEL))
 				{
 					// Find aabbEntity ID
-					auto foundAabbID = _fe3d.collision_checkEntityWithEntities(selfSearchID, arguments[2].getString());
+					auto foundAabbID = _fe3d.collision_checkEntityWithEntities(selfSearchID, args[2].getString());
 
 					// Check if AABB found
 					if(!foundAabbID.empty())
@@ -472,7 +472,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 			else
 			{
 				// Check if self aabbEntity entity exists
-				string selfSearchID = arguments[0].getString() + (!arguments[1].getString().empty() ? ("_" + arguments[1].getString()) : "");
+				string selfSearchID = args[0].getString() + (!args[1].getString().empty() ? ("_" + args[1].getString()) : "");
 				if(!_fe3d.aabb_isExisting(selfSearchID))
 				{
 					_throwScriptError("requested model AABB with ID \"" + selfSearchID + "\" does not exist!");
@@ -480,7 +480,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				}
 
 				// Find aabbEntity ID
-				auto foundAabbID = _fe3d.collision_checkEntityWithEntities(selfSearchID, arguments[2].getString());
+				auto foundAabbID = _fe3d.collision_checkEntityWithEntities(selfSearchID, args[2].getString());
 
 				// Check if AABB found
 				if(!foundAabbID.empty())

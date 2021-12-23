@@ -2,17 +2,17 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:sound2d_place")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			// Temporary values
-			string newID = arguments[0].getString();
-			string templateID = arguments[1].getString();
+			string newID = args[0].getString();
+			string templateID = args[1].getString();
 
 			// Validate ID
 			if(!_validateFe3dID(newID))
@@ -30,9 +30,9 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 			// Validate template sound
 			if(_validateFe3dSound2d(templateID, true))
 			{
-				auto filePath = _fe3d.sound2d_getAudioPath("@" + arguments[1].getString());
-				_fe3d.sound2d_create(arguments[0].getString(), filePath);
-				_fe3d.sound2d_setVolume(arguments[0].getString(), arguments[2].getDecimal());
+				auto filePath = _fe3d.sound2d_getAudioPath("@" + args[1].getString());
+				_fe3d.sound2d_create(args[0].getString(), filePath);
+				_fe3d.sound2d_setVolume(args[0].getString(), args[2].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -41,18 +41,18 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound2d(arguments[0].getString(), false))
+			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
-				_fe3d.sound2d_delete(arguments[0].getString());
+				_fe3d.sound2d_delete(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if(functionName == "fe3d:sound2d_delete_all")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Iterate through sounds
 			for(const auto& ID : _fe3d.sound2d_getIDs())
@@ -72,11 +72,11 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER, SVT::BOOLEAN};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound2d(arguments[0].getString(), false))
+			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
-				_fe3d.sound2d_start(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger(), arguments[3].getBoolean());
+				_fe3d.sound2d_start(args[0].getString(), args[1].getInteger(), args[2].getInteger(), args[3].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -85,18 +85,18 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound2d(arguments[0].getString(), false))
+			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
-				_fe3d.sound2d_pause(arguments[0].getString());
+				_fe3d.sound2d_pause(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if(functionName == "fe3d:sound2d_pause_all")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d.sound2d_pauseAll();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -106,18 +106,18 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound2d(arguments[0].getString(), false))
+			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
-				_fe3d.sound2d_resume(arguments[0].getString());
+				_fe3d.sound2d_resume(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if(functionName == "fe3d:sound2d_resume_all")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d.sound2d_resumeAll();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -127,18 +127,18 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::INTEGER};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound2d(arguments[0].getString(), false))
+			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
-				_fe3d.sound2d_stop(arguments[0].getString(), arguments[1].getInteger());
+				_fe3d.sound2d_stop(args[0].getString(), args[1].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if(functionName == "fe3d:sound2d_stop_all")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d.sound2d_stopAll();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -148,11 +148,11 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound2d(arguments[0].getString(), false))
+			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
-				_fe3d.sound2d_setVolume(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.sound2d_setVolume(args[0].getString(), args[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

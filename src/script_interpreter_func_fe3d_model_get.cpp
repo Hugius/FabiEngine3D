@@ -2,23 +2,22 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:model_is_existing")
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// @ sign not allowed
-			if(arguments[0].getString().find('@') != string::npos)
+			// Validate ID
+			if(!_validateFe3dID(args[0].getString()))
 			{
-				_throwScriptError("ID of requested model with ID \"" + arguments[0].getString() + "\" cannot contain '@'");
 				return true;
 			}
 
 			// Check if existing
-			auto result = _fe3d.model_isExisting(arguments[0].getString());
+			auto result = _fe3d.model_isExisting(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
@@ -26,12 +25,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// @ sign not allowed
-			if(arguments[0].getString().find('@') != string::npos)
+			// Validate ID
+			if(!_validateFe3dID(args[0].getString()))
 			{
-				_throwScriptError("ID of requested model with ID \"" + arguments[0].getString() + "\" cannot contain '@'");
 				return true;
 			}
 
@@ -39,7 +37,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			for(const auto& ID : _fe3d.model_getIDs())
 			{
 				// If substring matches
-				if(arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
+				if(args[0].getString() == ID.substr(0, args[0].getString().size()))
 				{
 					// Cannot be template
 					if(ID[0] != '@')
@@ -52,7 +50,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:model_get_ids")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto result = _fe3d.model_getIDs();
 
@@ -71,11 +69,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_isVisible(arguments[0].getString());
+				auto result = _fe3d.model_isVisible(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -84,11 +82,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_getBasePosition(arguments[0].getString()).x;
+				auto result = _fe3d.model_getBasePosition(args[0].getString()).x;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -97,11 +95,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_getBasePosition(arguments[0].getString()).y;
+				auto result = _fe3d.model_getBasePosition(args[0].getString()).y;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -110,11 +108,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_getBasePosition(arguments[0].getString()).z;
+				auto result = _fe3d.model_getBasePosition(args[0].getString()).z;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -123,11 +121,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_getBaseRotation(arguments[0].getString()).x;
+				auto result = _fe3d.model_getBaseRotation(args[0].getString()).x;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -136,11 +134,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_getBaseRotation(arguments[0].getString()).y;
+				auto result = _fe3d.model_getBaseRotation(args[0].getString()).y;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -149,11 +147,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_getBaseRotation(arguments[0].getString()).z;
+				auto result = _fe3d.model_getBaseRotation(args[0].getString()).z;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -162,11 +160,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_getBaseRotationOrigin(arguments[0].getString()).x;
+				auto result = _fe3d.model_getBaseRotationOrigin(args[0].getString()).x;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -175,11 +173,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_getBaseRotationOrigin(arguments[0].getString()).y;
+				auto result = _fe3d.model_getBaseRotationOrigin(args[0].getString()).y;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -188,11 +186,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_getBaseRotationOrigin(arguments[0].getString()).z;
+				auto result = _fe3d.model_getBaseRotationOrigin(args[0].getString()).z;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -201,11 +199,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_getBaseSize(arguments[0].getString()).x;
+				auto result = _fe3d.model_getBaseSize(args[0].getString()).x;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -214,11 +212,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_getBaseSize(arguments[0].getString()).y;
+				auto result = _fe3d.model_getBaseSize(args[0].getString()).y;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -227,11 +225,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_getBaseSize(arguments[0].getString()).z;
+				auto result = _fe3d.model_getBaseSize(args[0].getString()).z;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -240,11 +238,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_getMinHeight(arguments[0].getString());
+				auto result = _fe3d.model_getMinHeight(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -253,11 +251,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_getMaxHeight(arguments[0].getString());
+				auto result = _fe3d.model_getMaxHeight(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -266,13 +264,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_getLightness(arguments[0].getString(), arguments[1].getString());
+					auto result = _fe3d.model_getLightness(args[0].getString(), args[1].getString());
 					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 				}
 			}
@@ -282,13 +280,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_getColor(arguments[0].getString(), arguments[1].getString()).r;
+					auto result = _fe3d.model_getColor(args[0].getString(), args[1].getString()).r;
 					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 				}
 			}
@@ -298,13 +296,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_getColor(arguments[0].getString(), arguments[1].getString()).g;
+					auto result = _fe3d.model_getColor(args[0].getString(), args[1].getString()).g;
 					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 				}
 			}
@@ -314,13 +312,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_getColor(arguments[0].getString(), arguments[1].getString()).b;
+					auto result = _fe3d.model_getColor(args[0].getString(), args[1].getString()).b;
 					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 				}
 			}
@@ -330,13 +328,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_getWireframeColor(arguments[0].getString(), arguments[1].getString()).r;
+					auto result = _fe3d.model_getWireframeColor(args[0].getString(), args[1].getString()).r;
 					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 				}
 			}
@@ -346,13 +344,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_getWireframeColor(arguments[0].getString(), arguments[1].getString()).g;
+					auto result = _fe3d.model_getWireframeColor(args[0].getString(), args[1].getString()).g;
 					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 				}
 			}
@@ -362,13 +360,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_getWireframeColor(arguments[0].getString(), arguments[1].getString()).b;
+					auto result = _fe3d.model_getWireframeColor(args[0].getString(), args[1].getString()).b;
 					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 				}
 			}
@@ -378,13 +376,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_getTransparency(arguments[0].getString(), arguments[1].getString());
+					auto result = _fe3d.model_getTransparency(args[0].getString(), args[1].getString());
 					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 				}
 			}
@@ -394,13 +392,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_getEmissionIntensity(arguments[0].getString(), arguments[1].getString());
+					auto result = _fe3d.model_getEmissionIntensity(args[0].getString(), args[1].getString());
 					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 				}
 			}
@@ -410,13 +408,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_getTextureRepeat(arguments[0].getString(), arguments[1].getString());
+					auto result = _fe3d.model_getTextureRepeat(args[0].getString(), args[1].getString());
 					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 				}
 			}
@@ -426,13 +424,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_getSpecularShininess(arguments[0].getString(), arguments[1].getString());
+					auto result = _fe3d.model_getSpecularShininess(args[0].getString(), args[1].getString());
 					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 				}
 			}
@@ -442,13 +440,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_getSpecularIntensity(arguments[0].getString(), arguments[1].getString());
+					auto result = _fe3d.model_getSpecularIntensity(args[0].getString(), args[1].getString());
 					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 				}
 			}
@@ -458,13 +456,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_getReflectivity(arguments[0].getString(), arguments[1].getString());
+					auto result = _fe3d.model_getReflectivity(args[0].getString(), args[1].getString());
 					returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 				}
 			}
@@ -474,11 +472,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_getLevelOfDetailDistance(arguments[0].getString());
+				auto result = _fe3d.model_getLevelOfDetailDistance(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -487,11 +485,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_getLevelOfDetailSize(arguments[0].getString()).x;
+				auto result = _fe3d.model_getLevelOfDetailSize(args[0].getString()).x;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -500,11 +498,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_getLevelOfDetailSize(arguments[0].getString()).y;
+				auto result = _fe3d.model_getLevelOfDetailSize(args[0].getString()).y;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -513,11 +511,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_getLevelOfDetailSize(arguments[0].getString()).z;
+				auto result = _fe3d.model_getLevelOfDetailSize(args[0].getString()).z;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -526,11 +524,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_getLevelOfDetailEntityID(arguments[0].getString());
+				auto result = _fe3d.model_getLevelOfDetailEntityID(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 			}
 		}
@@ -539,11 +537,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_getMeshPath(arguments[0].getString());
+				auto result = _fe3d.model_getMeshPath(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 			}
 		}
@@ -552,13 +550,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_getDiffuseMapPath(arguments[0].getString(), arguments[1].getString());
+					auto result = _fe3d.model_getDiffuseMapPath(args[0].getString(), args[1].getString());
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 				}
 			}
@@ -568,13 +566,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_getEmissionMapPath(arguments[0].getString(), arguments[1].getString());
+					auto result = _fe3d.model_getEmissionMapPath(args[0].getString(), args[1].getString());
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 				}
 			}
@@ -584,13 +582,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_getSpecularMapPath(arguments[0].getString(), arguments[1].getString());
+					auto result = _fe3d.model_getSpecularMapPath(args[0].getString(), args[1].getString());
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 				}
 			}
@@ -600,13 +598,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_getReflectionMapPath(arguments[0].getString(), arguments[1].getString());
+					auto result = _fe3d.model_getReflectionMapPath(args[0].getString(), args[1].getString());
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 				}
 			}
@@ -616,13 +614,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_getNormalMapPath(arguments[0].getString(), arguments[1].getString());
+					auto result = _fe3d.model_getNormalMapPath(args[0].getString(), args[1].getString());
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 				}
 			}
@@ -632,11 +630,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_isShadowed(arguments[0].getString());
+				auto result = _fe3d.model_isShadowed(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -645,11 +643,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_isFrozen(arguments[0].getString());
+				auto result = _fe3d.model_isFrozen(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -658,11 +656,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_isReflected(arguments[0].getString());
+				auto result = _fe3d.model_isReflected(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -671,11 +669,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_isBright(arguments[0].getString());
+				auto result = _fe3d.model_isBright(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -684,11 +682,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_isFaceCulled(arguments[0].getString());
+				auto result = _fe3d.model_isFaceCulled(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -697,13 +695,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_isReflective(arguments[0].getString(), arguments[1].getString());
+					auto result = _fe3d.model_isReflective(args[0].getString(), args[1].getString());
 					returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 				}
 			}
@@ -713,13 +711,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_getReflectionType(arguments[0].getString(), arguments[1].getString());
+					auto result = _fe3d.model_getReflectionType(args[0].getString(), args[1].getString());
 					if(result == ReflectionType::CUBE)
 					{
 						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "CUBE"));
@@ -736,13 +734,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_isSpecular(arguments[0].getString(), arguments[1].getString());
+					auto result = _fe3d.model_isSpecular(args[0].getString(), args[1].getString());
 					returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 				}
 			}
@@ -752,11 +750,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_isInstanced(arguments[0].getString());
+				auto result = _fe3d.model_isInstanced(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -765,13 +763,13 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(arguments[0].getString(), arguments[1].getString()))
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
 				{
-					auto result = _fe3d.model_isWireframed(arguments[0].getString(), arguments[1].getString());
+					auto result = _fe3d.model_isWireframed(args[0].getString(), args[1].getString());
 					returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 				}
 			}
@@ -781,11 +779,11 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d.model_getRotationOrder(arguments[0].getString());
+				auto result = _fe3d.model_getRotationOrder(args[0].getString());
 				switch(result)
 				{
 					case DirectionOrder::XYZ:

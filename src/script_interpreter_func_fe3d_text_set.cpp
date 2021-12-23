@@ -4,48 +4,48 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:text_place")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::STRING, SVT::BOOLEAN, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			// Validate ID
-			if(!_validateFe3dID(arguments[0].getString()))
+			if(!_validateFe3dID(args[0].getString()))
 			{
 				return true;
 			}
 
 			// Validate existence
-			if(_fe3d.text_isExisting(arguments[0].getString()))
+			if(_fe3d.text_isExisting(args[0].getString()))
 			{
 				_throwScriptError("text already exists!");
 				return true;
 			}
 
 			// Create text
-			_fe3d.text_create(arguments[0].getString(), true, arguments[3].getBoolean());
+			_fe3d.text_create(args[0].getString(), true, args[3].getBoolean());
 
 			// Set font
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\font\\" + arguments[1].getString());
-			_fe3d.text_setFont(arguments[0].getString(), filePath);
+			const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\font\\" + args[1].getString());
+			_fe3d.text_setFont(args[0].getString(), filePath);
 
 			// Set properties
-			_fe3d.text_setPosition(arguments[0].getString(), _convertGuiPositionToViewport(fvec2(arguments[4].getDecimal(), arguments[5].getDecimal())));
-			_fe3d.text_setSize(arguments[0].getString(), _convertGuiSizeToViewport(fvec2(arguments[6].getDecimal(), arguments[7].getDecimal())));
-			_fe3d.text_setContent(arguments[0].getString(), arguments[2].getString());
+			_fe3d.text_setPosition(args[0].getString(), _convertGuiPositionToViewport(fvec2(args[4].getDecimal(), args[5].getDecimal())));
+			_fe3d.text_setSize(args[0].getString(), _convertGuiSizeToViewport(fvec2(args[6].getDecimal(), args[7].getDecimal())));
+			_fe3d.text_setContent(args[0].getString(), args[2].getString());
 
 			// In-engine viewport boundaries
 			if(!Config::getInst().isApplicationExported())
 			{
 				auto minPosition = Math::convertToNDC(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition()));
 				auto maxPosition = Math::convertToNDC(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition() + Config::getInst().getViewportSize()));
-				_fe3d.text_setMinPosition(arguments[0].getString(), minPosition);
-				_fe3d.text_setMaxPosition(arguments[0].getString(), maxPosition);
+				_fe3d.text_setMinPosition(args[0].getString(), minPosition);
+				_fe3d.text_setMaxPosition(args[0].getString(), maxPosition);
 			}
 
 			// Return
@@ -56,18 +56,18 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(arguments[0].getString()))
+			if(_validateFe3dText(args[0].getString()))
 			{
-				_fe3d.text_delete(arguments[0].getString());
+				_fe3d.text_delete(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if(functionName == "fe3d:text_delete_all")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Iterate through texts
 			for(const auto& ID : _fe3d.text_getIDs())
@@ -87,11 +87,11 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(arguments[0].getString()))
+			if(_validateFe3dText(args[0].getString()))
 			{
-				_fe3d.text_setVisible(arguments[0].getString(), arguments[1].getBoolean());
+				_fe3d.text_setVisible(args[0].getString(), args[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -100,12 +100,12 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(arguments[0].getString()))
+			if(_validateFe3dText(args[0].getString()))
 			{
-				fvec2 position = _convertGuiPositionToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				_fe3d.text_setPosition(arguments[0].getString(), position);
+				fvec2 position = _convertGuiPositionToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				_fe3d.text_setPosition(args[0].getString(), position);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -114,12 +114,12 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(arguments[0].getString()))
+			if(_validateFe3dText(args[0].getString()))
 			{
-				fvec2 change = _convertGuiSizeToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				_fe3d.text_move(arguments[0].getString(), change);
+				fvec2 change = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				_fe3d.text_move(args[0].getString(), change);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -128,13 +128,13 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(arguments[0].getString()))
+			if(_validateFe3dText(args[0].getString()))
 			{
-				fvec2 target = _convertGuiSizeToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				fvec2 speed = _convertGuiSizeToViewport(fvec2(arguments[3].getDecimal(), arguments[3].getDecimal()));
-				_fe3d.text_moveTo(arguments[0].getString(), target, speed.x);
+				fvec2 target = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				fvec2 speed = _convertGuiSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
+				_fe3d.text_moveTo(args[0].getString(), target, speed.x);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -143,11 +143,11 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(arguments[0].getString()))
+			if(_validateFe3dText(args[0].getString()))
 			{
-				_fe3d.text_rotateTo(arguments[0].getString(), arguments[1].getDecimal(), arguments[2].getDecimal());
+				_fe3d.text_rotateTo(args[0].getString(), args[1].getDecimal(), args[2].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -156,13 +156,13 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(arguments[0].getString()))
+			if(_validateFe3dText(args[0].getString()))
 			{
-				fvec2 target = _convertGuiSizeToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				fvec2 speed = _convertGuiSizeToViewport(fvec2(arguments[3].getDecimal(), arguments[3].getDecimal()));
-				_fe3d.text_scaleTo(arguments[0].getString(), target, speed.x);
+				fvec2 target = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				fvec2 speed = _convertGuiSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
+				_fe3d.text_scaleTo(args[0].getString(), target, speed.x);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -171,11 +171,11 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(arguments[0].getString()))
+			if(_validateFe3dText(args[0].getString()))
 			{
-				_fe3d.text_setRotation(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.text_setRotation(args[0].getString(), args[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -184,11 +184,11 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(arguments[0].getString()))
+			if(_validateFe3dText(args[0].getString()))
 			{
-				_fe3d.text_rotate(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.text_rotate(args[0].getString(), args[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -197,12 +197,12 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(arguments[0].getString()))
+			if(_validateFe3dText(args[0].getString()))
 			{
-				fvec2 size = _convertGuiSizeToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				_fe3d.text_setSize(arguments[0].getString(), size);
+				fvec2 size = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				_fe3d.text_setSize(args[0].getString(), size);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -211,12 +211,12 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(arguments[0].getString()))
+			if(_validateFe3dText(args[0].getString()))
 			{
-				fvec2 change = _convertGuiSizeToViewport(fvec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				_fe3d.text_scale(arguments[0].getString(), change);
+				fvec2 change = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				_fe3d.text_scale(args[0].getString(), change);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -225,12 +225,12 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(arguments[0].getString()))
+			if(_validateFe3dText(args[0].getString()))
 			{
-				_fe3d.text_setColor(arguments[0].getString(),
-									fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+				_fe3d.text_setColor(args[0].getString(),
+									fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -239,11 +239,11 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(arguments[0].getString()))
+			if(_validateFe3dText(args[0].getString()))
 			{
-				_fe3d.text_setContent(arguments[0].getString(), arguments[1].getString());
+				_fe3d.text_setContent(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -252,11 +252,11 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(arguments[0].getString()))
+			if(_validateFe3dText(args[0].getString()))
 			{
-				_fe3d.text_setTransparency(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.text_setTransparency(args[0].getString(), args[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

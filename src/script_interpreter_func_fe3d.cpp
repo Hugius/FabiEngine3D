@@ -19,11 +19,11 @@ const vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const st
 		_throwScriptError("function call must end with ')'!");
 	}
 
-	// Extract arguments from argument string
+	// Extract arguments
 	auto parenthesisIndex = static_cast<unsigned int>(distance(scriptLine.begin(), openingParanthesisFound));
 	string argumentString = scriptLine.substr(static_cast<size_t>(parenthesisIndex + 1));
 	argumentString.pop_back();
-	auto arguments = _extractValuesFromListString(argumentString);
+	auto args = _extractValuesFromListString(argumentString);
 
 	// Check if argument extraction went well
 	if(!_hasThrownError)
@@ -33,57 +33,57 @@ const vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const st
 		bool isExecuted = false;
 
 		// Possibly execute FE3D function
-		isExecuted = (isExecuted || _executeFe3dSkySetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dSkyGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dTerrainSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dTerrainGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dWaterSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dWaterGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dModelSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dModelGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dBillboardSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dBillboardGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dAabbSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dAabbGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dPointlightSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dPointlightGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dSpotlightSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dSpotlightGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dReflectionSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dReflectionGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dImageSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dImageGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dTextSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dTextGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dAnimation3dSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dAnimation3dGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dAnimation2dSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dAnimation2dGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dSound2dSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dSound2dGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dSound3dSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dSound3dGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dInputGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dCameraSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dCameraGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dCollisionSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dCollisionGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dRaycastSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dRaycastGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dGraphicsSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dGraphicsGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dLightingSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dLightingGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dServerSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dServerGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dClientSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dClientGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dFilesystemSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dFilesystemGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dWorldSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dWorldGetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dMiscSetter(functionName, arguments, returnValues));
-		isExecuted = (isExecuted || _executeFe3dMiscGetter(functionName, arguments, returnValues));
+		isExecuted = (isExecuted || _executeFe3dSkySetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dSkyGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dTerrainSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dTerrainGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dWaterSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dWaterGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dModelSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dModelGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dBillboardSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dBillboardGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dAabbSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dAabbGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dPointlightSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dPointlightGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dSpotlightSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dSpotlightGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dReflectionSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dReflectionGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dImageSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dImageGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dTextSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dTextGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dAnimation3dSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dAnimation3dGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dAnimation2dSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dAnimation2dGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dSound2dSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dSound2dGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dSound3dSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dSound3dGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dInputGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dCameraSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dCameraGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dCollisionSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dCollisionGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dRaycastSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dRaycastGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dGraphicsSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dGraphicsGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dLightingSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dLightingGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dServerSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dServerGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dClientSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dClientGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dFilesystemSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dFilesystemGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dWorldSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dWorldGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dMiscSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dMiscGetter(functionName, args, returnValues));
 
 		// Check if function call not existing
 		if(!isExecuted)

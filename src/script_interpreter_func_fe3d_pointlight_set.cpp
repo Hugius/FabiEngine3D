@@ -3,33 +3,33 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:pointlight_place")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			// Validate ID
-			if(!_validateFe3dID(arguments[0].getString()))
+			if(!_validateFe3dID(args[0].getString()))
 			{
 				return true;
 			}
 
 			// Validate existence
-			if(_fe3d.pointlight_isExisting(arguments[0].getString()))
+			if(_fe3d.pointlight_isExisting(args[0].getString()))
 			{
 				_throwScriptError("pointlight already exists!");
 				return true;
 			}
 
 			// Create pointlight
-			_fe3d.pointlight_create(arguments[0].getString());
-			_fe3d.pointlight_setPosition(arguments[0].getString(), fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-			_fe3d.pointlight_setRadius(arguments[0].getString(), fvec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()));
-			_fe3d.pointlight_setColor(arguments[0].getString(), fvec3(arguments[7].getDecimal(), arguments[8].getDecimal(), arguments[9].getDecimal()));
-			_fe3d.pointlight_setIntensity(arguments[0].getString(), arguments[10].getDecimal());
+			_fe3d.pointlight_create(args[0].getString());
+			_fe3d.pointlight_setPosition(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+			_fe3d.pointlight_setRadius(args[0].getString(), fvec3(args[4].getDecimal(), args[5].getDecimal(), args[6].getDecimal()));
+			_fe3d.pointlight_setColor(args[0].getString(), fvec3(args[7].getDecimal(), args[8].getDecimal(), args[9].getDecimal()));
+			_fe3d.pointlight_setIntensity(args[0].getString(), args[10].getDecimal());
 
 			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -39,18 +39,18 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(arguments[0].getString()))
+			if(_validateFe3dPointlight(args[0].getString()))
 			{
-				_fe3d.pointlight_delete(arguments[0].getString());
+				_fe3d.pointlight_delete(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if(functionName == "fe3d:pointlight_delete_all")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Iterate through pointlights
 			for(const auto& ID : _fe3d.pointlight_getIDs())
@@ -70,11 +70,11 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(arguments[0].getString()))
+			if(_validateFe3dPointlight(args[0].getString()))
 			{
-				_fe3d.pointlight_setVisible(arguments[0].getString(), arguments[1].getBoolean());
+				_fe3d.pointlight_setVisible(args[0].getString(), args[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -83,12 +83,12 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(arguments[0].getString()))
+			if(_validateFe3dPointlight(args[0].getString()))
 			{
-				_fe3d.pointlight_setPosition(arguments[0].getString(),
-											 fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+				_fe3d.pointlight_setPosition(args[0].getString(),
+											 fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -97,12 +97,12 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(arguments[0].getString()))
+			if(_validateFe3dPointlight(args[0].getString()))
 			{
-				_fe3d.pointlight_move(arguments[0].getString(),
-									  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+				_fe3d.pointlight_move(args[0].getString(),
+									  fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -111,12 +111,12 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(arguments[0].getString()))
+			if(_validateFe3dPointlight(args[0].getString()))
 			{
-				_fe3d.pointlight_moveTo(arguments[0].getString(),
-										fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
+				_fe3d.pointlight_moveTo(args[0].getString(),
+										fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()), args[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -125,11 +125,11 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(arguments[0].getString()))
+			if(_validateFe3dPointlight(args[0].getString()))
 			{
-				_fe3d.pointlight_setRadius(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.pointlight_setRadius(args[0].getString(), args[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -138,12 +138,12 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(arguments[0].getString()))
+			if(_validateFe3dPointlight(args[0].getString()))
 			{
-				_fe3d.pointlight_setColor(arguments[0].getString(),
-										  fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+				_fe3d.pointlight_setColor(args[0].getString(),
+										  fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -152,11 +152,11 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(arguments[0].getString()))
+			if(_validateFe3dPointlight(args[0].getString()))
 			{
-				_fe3d.pointlight_setIntensity(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.pointlight_setIntensity(args[0].getString(), args[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -165,18 +165,18 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dPointlight(arguments[0].getString()))
+			if(_validateFe3dPointlight(args[0].getString()))
 			{
-				if(arguments[1].getString() == "CIRCLE")
+				if(args[1].getString() == "CIRCLE")
 				{
-					_fe3d.pointlight_setShape(arguments[0].getString(), PointlightShape::CIRCLE);
+					_fe3d.pointlight_setShape(args[0].getString(), PointlightShape::CIRCLE);
 					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
-				else if(arguments[1].getString() == "SQUARE")
+				else if(args[1].getString() == "SQUARE")
 				{
-					_fe3d.pointlight_setShape(arguments[0].getString(), PointlightShape::SQUARE);
+					_fe3d.pointlight_setShape(args[0].getString(), PointlightShape::SQUARE);
 					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
 				else

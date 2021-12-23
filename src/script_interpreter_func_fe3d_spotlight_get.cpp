@@ -2,23 +2,22 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:spotlight_is_existing")
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// @ sign not allowed
-			if(arguments[0].getString().find('@') != string::npos)
+			// Validate ID
+			if(!_validateFe3dID(args[0].getString()))
 			{
-				_throwScriptError("ID of requested spotlight with ID \"" + arguments[0].getString() + "\" cannot contain '@'");
 				return true;
 			}
 
 			// Check if existing
-			auto result = _fe3d.spotlight_isExisting(arguments[0].getString());
+			auto result = _fe3d.spotlight_isExisting(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
@@ -26,12 +25,11 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// @ sign not allowed
-			if(arguments[0].getString().find('@') != string::npos)
+			// Validate ID
+			if(!_validateFe3dID(args[0].getString()))
 			{
-				_throwScriptError("ID of requested spotlight with ID \"" + arguments[0].getString() + "\" cannot contain '@'");
 				return true;
 			}
 
@@ -39,7 +37,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 			for(const auto& ID : _fe3d.spotlight_getIDs())
 			{
 				// If substring matches
-				if(arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
+				if(args[0].getString() == ID.substr(0, args[0].getString().size()))
 				{
 					// Cannot be template
 					if(ID[0] != '@')
@@ -52,7 +50,7 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 	}
 	else if(functionName == "fe3d:spotlight_get_ids")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto result = _fe3d.spotlight_getIDs();
 
@@ -71,11 +69,11 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSpotlight(arguments[0].getString()))
+			if(_validateFe3dSpotlight(args[0].getString()))
 			{
-				auto result = _fe3d.spotlight_isVisible(arguments[0].getString());
+				auto result = _fe3d.spotlight_isVisible(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -84,11 +82,11 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSpotlight(arguments[0].getString()))
+			if(_validateFe3dSpotlight(args[0].getString()))
 			{
-				auto result = _fe3d.spotlight_getPosition(arguments[0].getString()).x;
+				auto result = _fe3d.spotlight_getPosition(args[0].getString()).x;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -97,11 +95,11 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSpotlight(arguments[0].getString()))
+			if(_validateFe3dSpotlight(args[0].getString()))
 			{
-				auto result = _fe3d.spotlight_getPosition(arguments[0].getString()).y;
+				auto result = _fe3d.spotlight_getPosition(args[0].getString()).y;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -110,11 +108,11 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSpotlight(arguments[0].getString()))
+			if(_validateFe3dSpotlight(args[0].getString()))
 			{
-				auto result = _fe3d.spotlight_getPosition(arguments[0].getString()).z;
+				auto result = _fe3d.spotlight_getPosition(args[0].getString()).z;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -123,11 +121,11 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSpotlight(arguments[0].getString()))
+			if(_validateFe3dSpotlight(args[0].getString()))
 			{
-				auto result = _fe3d.spotlight_getFrontVector(arguments[0].getString()).x;
+				auto result = _fe3d.spotlight_getFrontVector(args[0].getString()).x;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -136,11 +134,11 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSpotlight(arguments[0].getString()))
+			if(_validateFe3dSpotlight(args[0].getString()))
 			{
-				auto result = _fe3d.spotlight_getFrontVector(arguments[0].getString()).y;
+				auto result = _fe3d.spotlight_getFrontVector(args[0].getString()).y;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -149,11 +147,11 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSpotlight(arguments[0].getString()))
+			if(_validateFe3dSpotlight(args[0].getString()))
 			{
-				auto result = _fe3d.spotlight_getFrontVector(arguments[0].getString()).z;
+				auto result = _fe3d.spotlight_getFrontVector(args[0].getString()).z;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -162,11 +160,11 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSpotlight(arguments[0].getString()))
+			if(_validateFe3dSpotlight(args[0].getString()))
 			{
-				auto result = _fe3d.spotlight_getColor(arguments[0].getString()).r;
+				auto result = _fe3d.spotlight_getColor(args[0].getString()).r;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -175,11 +173,11 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSpotlight(arguments[0].getString()))
+			if(_validateFe3dSpotlight(args[0].getString()))
 			{
-				auto result = _fe3d.spotlight_getColor(arguments[0].getString()).g;
+				auto result = _fe3d.spotlight_getColor(args[0].getString()).g;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -188,11 +186,11 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSpotlight(arguments[0].getString()))
+			if(_validateFe3dSpotlight(args[0].getString()))
 			{
-				auto result = _fe3d.spotlight_getColor(arguments[0].getString()).b;
+				auto result = _fe3d.spotlight_getColor(args[0].getString()).b;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -201,11 +199,11 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSpotlight(arguments[0].getString()))
+			if(_validateFe3dSpotlight(args[0].getString()))
 			{
-				auto result = _fe3d.spotlight_getYaw(arguments[0].getString());
+				auto result = _fe3d.spotlight_getYaw(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -214,11 +212,11 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSpotlight(arguments[0].getString()))
+			if(_validateFe3dSpotlight(args[0].getString()))
 			{
-				auto result = _fe3d.spotlight_getPitch(arguments[0].getString());
+				auto result = _fe3d.spotlight_getPitch(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -227,11 +225,11 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSpotlight(arguments[0].getString()))
+			if(_validateFe3dSpotlight(args[0].getString()))
 			{
-				auto result = _fe3d.spotlight_getIntensity(arguments[0].getString());
+				auto result = _fe3d.spotlight_getIntensity(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -240,11 +238,11 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSpotlight(arguments[0].getString()))
+			if(_validateFe3dSpotlight(args[0].getString()))
 			{
-				auto result = _fe3d.spotlight_getAngle(arguments[0].getString());
+				auto result = _fe3d.spotlight_getAngle(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -253,11 +251,11 @@ const bool ScriptInterpreter::_executeFe3dSpotlightGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSpotlight(arguments[0].getString()))
+			if(_validateFe3dSpotlight(args[0].getString()))
 			{
-				auto result = _fe3d.spotlight_getDistance(arguments[0].getString());
+				auto result = _fe3d.spotlight_getDistance(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}

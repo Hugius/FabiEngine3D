@@ -5,11 +5,11 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:graphics_enable_fog")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d.gfx_enableFog();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_disable_fog")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d.gfx_disableFog(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -27,9 +27,9 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	{
 		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setFogColor(fvec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
+			_fe3d.gfx_setFogColor(fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -37,9 +37,9 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setFogThickness(arguments[0].getDecimal());
+			_fe3d.gfx_setFogThickness(args[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -47,9 +47,9 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setFogMinDistance(arguments[0].getDecimal());
+			_fe3d.gfx_setFogMinDistance(args[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -57,15 +57,15 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setFogMaxDistance(arguments[0].getDecimal());
+			_fe3d.gfx_setFogMaxDistance(args[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:graphics_enable_dof")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d.gfx_enableDOF();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -73,7 +73,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_disable_dof")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d.gfx_disableDOF(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -83,9 +83,9 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setDofDynamicDistance(arguments[0].getDecimal());
+			_fe3d.gfx_setDofDynamicDistance(args[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -93,9 +93,9 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setDofBlurDistance(arguments[0].getDecimal());
+			_fe3d.gfx_setDofBlurDistance(args[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -103,9 +103,9 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	{
 		auto types = {SVT::BOOLEAN};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setDofDynamic(arguments[0].getBoolean());
+			_fe3d.gfx_setDofDynamic(args[0].getBoolean());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -113,15 +113,15 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	{
 		auto types = {SVT::INTEGER};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setDofQuality(arguments[0].getInteger());
+			_fe3d.gfx_setDofQuality(args[0].getInteger());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:graphics_enable_motion_blur")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d.gfx_enableMotionBlur();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -129,7 +129,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_disable_motion_blur")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d.gfx_disableMotionBlur(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -139,9 +139,9 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setMotionBlurStrength(arguments[0].getDecimal());
+			_fe3d.gfx_setMotionBlurStrength(args[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -149,15 +149,15 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	{
 		auto types = {SVT::INTEGER};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setMotionBlurQuality(arguments[0].getInteger());
+			_fe3d.gfx_setMotionBlurQuality(args[0].getInteger());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:graphics_enable_lens_flare")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d.gfx_enableLensFlare();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -165,7 +165,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_disable_lens_flare")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d.gfx_disableLensFlare(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -175,7 +175,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			// Validate project ID
 			if(_currentProjectID.empty())
@@ -187,7 +187,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\texture\\flare_map\\");
-			const string filePath = (targetDirectoryPath + arguments[0].getString());
+			const string filePath = (targetDirectoryPath + args[0].getString());
 
 			// Set flare map
 			_fe3d.gfx_setLensFlareMap(filePath);
@@ -200,9 +200,9 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setLensFlareIntensity(arguments[0].getDecimal());
+			_fe3d.gfx_setLensFlareIntensity(args[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -210,9 +210,9 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setLensFlareSensitivity(arguments[0].getDecimal());
+			_fe3d.gfx_setLensFlareSensitivity(args[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -220,9 +220,9 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setBloomIntensity(arguments[0].getDecimal());
+			_fe3d.gfx_setBloomIntensity(args[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -230,9 +230,9 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	{
 		auto types = {SVT::INTEGER};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setBloomQuality(arguments[0].getInteger());
+			_fe3d.gfx_setBloomQuality(args[0].getInteger());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -240,9 +240,9 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	{
 		auto types = {SVT::INTEGER};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setBloomBlurCount(arguments[0].getInteger());
+			_fe3d.gfx_setBloomBlurCount(args[0].getInteger());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -250,14 +250,14 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(arguments[0].getString() == "EVERYTHING")
+			if(args[0].getString() == "EVERYTHING")
 			{
 				_fe3d.gfx_setBloomType(BloomType::EVERYTHING);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
-			else if(arguments[0].getString() == "PARTS")
+			else if(args[0].getString() == "PARTS")
 			{
 				_fe3d.gfx_setBloomType(BloomType::PARTS);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -271,7 +271,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_set_enable_bloom")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d.gfx_enableBloom();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -279,7 +279,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_set_disable_bloom")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d.gfx_disableBloom(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -289,9 +289,9 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setSkyExposureSpeed(arguments[0].getDecimal());
+			_fe3d.gfx_setSkyExposureSpeed(args[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -299,15 +299,15 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	{
 		auto types = {SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setSkyExposureIntensity(arguments[0].getDecimal());
+			_fe3d.gfx_setSkyExposureIntensity(args[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:graphics_enable_sky_exposure")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d.gfx_enableSkyExposure();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -315,7 +315,7 @@ const bool ScriptInterpreter::_executeFe3dGraphicsSetter(const string& functionN
 	}
 	else if(functionName == "fe3d:graphics_disable_sky_exposure")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d.gfx_disableSkyExposure(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));

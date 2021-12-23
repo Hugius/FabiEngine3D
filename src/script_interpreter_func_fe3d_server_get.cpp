@@ -2,11 +2,11 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:server_is_running")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto result = _fe3d.server_isRunning();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -16,15 +16,15 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			auto result = _fe3d.server_isClientConnected(arguments[0].getString());
+			auto result = _fe3d.server_isClientConnected(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:server_get_new_ip")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto IP = _fe3d.server_getNewClientIP();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, IP));
@@ -32,7 +32,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	}
 	else if(functionName == "fe3d:server_get_new_username")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto username = _fe3d.server_getNewClientUsername();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, username));
@@ -40,7 +40,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	}
 	else if(functionName == "fe3d:server_get_old_ip")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto IP = _fe3d.server_getOldClientIP();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, IP));
@@ -48,7 +48,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	}
 	else if(functionName == "fe3d:server_get_old_username")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto username = _fe3d.server_getOldClientUsername();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, username));
@@ -56,7 +56,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	}
 	else if(functionName == "fe3d:server_get_connected_ips")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto IPs = _fe3d.server_getClientIPs();
 			for(const auto& IP : IPs)
@@ -67,7 +67,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	}
 	else if(functionName == "fe3d:server_get_connected_usernames")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto usernames = _fe3d.server_getClientUsernames();
 			for(const auto& username : usernames)
@@ -78,7 +78,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	}
 	else if(functionName == "fe3d:server_get_pending_protocols")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto& messages = _fe3d.server_getPendingMessages();
 			for(const auto& message : messages)
@@ -89,7 +89,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	}
 	else if(functionName == "fe3d:server_get_pending_usernames")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto& messages = _fe3d.server_getPendingMessages();
 			for(const auto& message : messages)
@@ -100,7 +100,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 	}
 	else if(functionName == "fe3d:server_get_pending_contents")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			const auto& messages = _fe3d.server_getPendingMessages();
 			for(const auto& message : messages)

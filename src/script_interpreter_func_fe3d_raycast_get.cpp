@@ -2,11 +2,11 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:raycast_get_cursor_ray_position_x")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto result = _fe3d.raycast_getCursorRay().getPosition().x;
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -14,7 +14,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:raycast_get_cursor_ray_position_y")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto result = _fe3d.raycast_getCursorRay().getPosition().y;
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -22,7 +22,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:raycast_get_cursor_ray_position_z")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto result = _fe3d.raycast_getCursorRay().getPosition().z;
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -30,7 +30,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:raycast_get_cursor_ray_direction_x")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto result = _fe3d.raycast_getCursorRay().getDirection().x;
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -38,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:raycast_get_cursor_ray_direction_y")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto result = _fe3d.raycast_getCursorRay().getDirection().y;
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -46,7 +46,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:raycast_get_cursor_ray_direction_z")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto result = _fe3d.raycast_getCursorRay().getDirection().z;
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -54,7 +54,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:raycast_get_point_on_terrain_x")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dTerrain())
 			{
@@ -65,7 +65,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:raycast_get_point_on_terrain_y")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dTerrain())
 			{
@@ -76,7 +76,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:raycast_get_point_on_terrain_z")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dTerrain())
 			{
@@ -87,7 +87,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:raycast_is_point_on_terrain_valid")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dTerrain())
 			{
@@ -100,11 +100,11 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			// Find aabbEntity ID
 			string result = "";
-			auto foundAabbID = _fe3d.raycast_checkCursorInEntities(arguments[0].getString(), arguments[2].getBoolean()).first;
+			auto foundAabbID = _fe3d.raycast_checkCursorInEntities(args[0].getString(), args[2].getBoolean()).first;
 
 			// Check if AABB found
 			if(!foundAabbID.empty())
@@ -113,7 +113,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 				if(_fe3d.aabb_hasParent(foundAabbID) &&
 				   (_fe3d.aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::MODEL))
 				{
-					if(arguments[1].getString().empty()) // No specific AABB part
+					if(args[1].getString().empty()) // No specific AABB part
 					{
 						result = _fe3d.aabb_getParentEntityID(foundAabbID);
 					}
@@ -126,7 +126,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 						reverse(partID.begin(), partID.end());
 
 						// Check if AABB part IDs match
-						if(partID == arguments[1].getString())
+						if(partID == args[1].getString())
 						{
 							result = _fe3d.aabb_getParentEntityID(foundAabbID);
 						}
@@ -142,11 +142,11 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			// Find aabbEntity ID
 			float result = -1.0f;
-			auto intersection = _fe3d.raycast_checkCursorInEntities(arguments[0].getString(), arguments[2].getBoolean());
+			auto intersection = _fe3d.raycast_checkCursorInEntities(args[0].getString(), args[2].getBoolean());
 			string foundAabbID = intersection.first;
 			float foundDistance = intersection.second;
 
@@ -157,7 +157,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 				if(_fe3d.aabb_hasParent(foundAabbID) &&
 				   (_fe3d.aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::MODEL))
 				{
-					if(arguments[1].getString().empty()) // No specific AABB part
+					if(args[1].getString().empty()) // No specific AABB part
 					{
 						result = foundDistance;
 					}
@@ -170,7 +170,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 						reverse(partID.begin(), partID.end());
 
 						// Check if AABB part IDs match
-						if(partID == arguments[1].getString())
+						if(partID == args[1].getString())
 						{
 							result = foundDistance;
 						}
@@ -184,7 +184,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:raycast_into_models")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Find aabbEntity ID
 			string result = "";
@@ -207,7 +207,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:raycast_into_models_distance")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Find aabbEntity ID
 			float result = -1.0f;
@@ -232,11 +232,11 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			// Find aabbEntity ID
 			string result = "";
-			auto foundAabbID = _fe3d.raycast_checkCursorInEntities(arguments[0].getString(), arguments[1].getBoolean()).first;
+			auto foundAabbID = _fe3d.raycast_checkCursorInEntities(args[0].getString(), args[1].getBoolean()).first;
 
 			// Check if AABB found
 			if(!foundAabbID.empty())
@@ -255,7 +255,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:raycast_into_billboards")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Find aabbEntity ID
 			string result = "";
@@ -280,11 +280,11 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			// Find aabbEntity ID
 			float result = -1.0f;
-			auto intersection = _fe3d.raycast_checkCursorInEntities(arguments[0].getString(), arguments[1].getBoolean());
+			auto intersection = _fe3d.raycast_checkCursorInEntities(args[0].getString(), args[1].getBoolean());
 
 			// Check if AABB found
 			if(!intersection.first.empty())
@@ -303,7 +303,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 	}
 	else if(functionName == "fe3d:raycast_into_billboards_distance")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Find aabbEntity ID
 			float result = -1.0f;

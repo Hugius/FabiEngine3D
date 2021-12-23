@@ -9,11 +9,11 @@ using std::clamp;
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:application_pause")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
@@ -29,7 +29,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	}
 	else if(functionName == "fe3d:application_resume")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
@@ -45,7 +45,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	}
 	else if(functionName == "fe3d:application_stop")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(Config::getInst().isApplicationExported()) // Application preview
 			{
@@ -62,25 +62,25 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	}
 	else if(functionName == "fe3d:print")
 	{
-		if(_validateArgumentCount(arguments, 1))
+		if(_validateArgumentCount(args, 1))
 		{
 			// Determine which type of value to print
-			if(arguments[0].getType() == SVT::STRING)
+			if(args[0].getType() == SVT::STRING)
 			{
-				Logger::throwInfo(arguments[0].getString());
+				Logger::throwInfo(args[0].getString());
 			}
-			else if(arguments[0].getType() == SVT::DECIMAL)
+			else if(args[0].getType() == SVT::DECIMAL)
 			{
-				string decimalString = to_string(arguments[0].getDecimal());
+				string decimalString = to_string(args[0].getDecimal());
 				Logger::throwInfo(decimalString.substr(0, decimalString.size() - 1));
 			}
-			else if(arguments[0].getType() == SVT::INTEGER)
+			else if(args[0].getType() == SVT::INTEGER)
 			{
-				Logger::throwInfo(to_string(arguments[0].getInteger()));
+				Logger::throwInfo(to_string(args[0].getInteger()));
 			}
-			else if(arguments[0].getType() == SVT::BOOLEAN)
+			else if(args[0].getType() == SVT::BOOLEAN)
 			{
-				Logger::throwInfo(arguments[0].getBoolean() ? "true" : "false");
+				Logger::throwInfo(args[0].getBoolean() ? "true" : "false");
 			}
 			else
 			{
@@ -95,7 +95,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		auto types = {SVT::BOOLEAN};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
@@ -105,13 +105,13 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 			}
 
 			// Set cursor visibility
-			_fe3d.misc_setCursorVisible(arguments[0].getBoolean());
+			_fe3d.misc_setCursorVisible(args[0].getBoolean());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:cursor_center")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
@@ -127,7 +127,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	}
 	else if(functionName == "fe3d:timer_start")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d.misc_startMillisecondTimer();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -135,7 +135,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	}
 	else if(functionName == "fe3d:timer_stop")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto result = _fe3d.misc_stopMillisecondTimer();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -143,7 +143,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	}
 	else if(functionName == "fe3d:wireframe_enable_rendering")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
@@ -159,7 +159,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	}
 	else if(functionName == "fe3d:wireframe_disable_rendering")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
@@ -175,7 +175,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	}
 	else if(functionName == "fe3d:aabbs_enable_rendering")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
@@ -191,7 +191,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	}
 	else if(functionName == "fe3d:aabbs_disable_rendering")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
@@ -209,15 +209,15 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		auto types = {SVT::INTEGER};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			auto result = _fe3d.misc_checkInterval(arguments[0].getInteger());
+			auto result = _fe3d.misc_checkInterval(args[0].getInteger());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:vsync_enable")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
@@ -233,7 +233,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	}
 	else if(functionName == "fe3d:vsync_disable")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())

@@ -2,11 +2,11 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:water_get_dudv_map_path")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_displacement_map_path")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -28,7 +28,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_normal_map_path")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -39,7 +39,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_speed_x")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -50,7 +50,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_speed_z")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -61,7 +61,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_height")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -72,7 +72,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_color_r")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -83,7 +83,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_color_g")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -94,7 +94,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_color_b")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -105,7 +105,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_wireframe_color_r")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -116,7 +116,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_wireframe_color_g")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -127,7 +127,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_wireframe_color_b")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -138,7 +138,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_transparency")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -149,7 +149,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_size")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -160,7 +160,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_texture_repeat")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -171,7 +171,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_wave_height")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -182,7 +182,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_specular_shininess")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -193,7 +193,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_specular_intensity")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -204,7 +204,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_is_reflective")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -215,7 +215,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_is_refractive")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -226,7 +226,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_is_specular")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -237,7 +237,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_is_wireframed")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{
@@ -248,7 +248,7 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:water_get_quality")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dWater())
 			{

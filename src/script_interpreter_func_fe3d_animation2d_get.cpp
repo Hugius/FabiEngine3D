@@ -2,17 +2,17 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:animation2d_is_billboard_started")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _animation2dEditor.isBillboardAnimationStarted(arguments[0].getString(), arguments[1].getString());
+				auto result = _animation2dEditor.isBillboardAnimationStarted(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -21,11 +21,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _animation2dEditor.isBillboardAnimationPlaying(arguments[0].getString(), arguments[1].getString());
+				auto result = _animation2dEditor.isBillboardAnimationPlaying(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -34,11 +34,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _animation2dEditor.isBillboardAnimationPaused(arguments[0].getString(), arguments[1].getString());
+				auto result = _animation2dEditor.isBillboardAnimationPaused(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -47,11 +47,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _animation2dEditor.getBillboardAnimationRowCount(arguments[0].getString(), arguments[1].getString());
+				auto result = _animation2dEditor.getBillboardAnimationRowCount(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
@@ -60,11 +60,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _animation2dEditor.getBillboardAnimationColumnCount(arguments[0].getString(), arguments[1].getString());
+				auto result = _animation2dEditor.getBillboardAnimationColumnCount(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
@@ -73,11 +73,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _animation2dEditor.getBillboardAnimationRowIndex(arguments[0].getString(), arguments[1].getString());
+				auto result = _animation2dEditor.getBillboardAnimationRowIndex(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
@@ -86,11 +86,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _animation2dEditor.getBillboardAnimationColumnIndex(arguments[0].getString(), arguments[1].getString());
+				auto result = _animation2dEditor.getBillboardAnimationColumnIndex(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
@@ -99,11 +99,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _animation2dEditor.getBillboardAnimationPlayCount(arguments[0].getString(), arguments[1].getString());
+				auto result = _animation2dEditor.getBillboardAnimationPlayCount(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
 			}
 		}
@@ -112,11 +112,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _animation2dEditor.getBillboardAnimationFramestep(arguments[0].getString(), arguments[1].getString());
+				auto result = _animation2dEditor.getBillboardAnimationFramestep(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
@@ -125,11 +125,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dImage(arguments[0].getString()))
+			if(_validateFe3dImage(args[0].getString()))
 			{
-				auto result = _animation2dEditor.isImageAnimationStarted(arguments[0].getString(), arguments[1].getString());
+				auto result = _animation2dEditor.isImageAnimationStarted(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -138,11 +138,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dImage(arguments[0].getString()))
+			if(_validateFe3dImage(args[0].getString()))
 			{
-				auto result = _animation2dEditor.isImageAnimationPlaying(arguments[0].getString(), arguments[1].getString());
+				auto result = _animation2dEditor.isImageAnimationPlaying(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -151,11 +151,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dImage(arguments[0].getString()))
+			if(_validateFe3dImage(args[0].getString()))
 			{
-				auto result = _animation2dEditor.isImageAnimationPaused(arguments[0].getString(), arguments[1].getString());
+				auto result = _animation2dEditor.isImageAnimationPaused(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -164,11 +164,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dImage(arguments[0].getString()))
+			if(_validateFe3dImage(args[0].getString()))
 			{
-				auto result = _animation2dEditor.getImageAnimationRowCount(arguments[0].getString(), arguments[1].getString());
+				auto result = _animation2dEditor.getImageAnimationRowCount(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
@@ -177,11 +177,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dImage(arguments[0].getString()))
+			if(_validateFe3dImage(args[0].getString()))
 			{
-				auto result = _animation2dEditor.getImageAnimationColumnCount(arguments[0].getString(), arguments[1].getString());
+				auto result = _animation2dEditor.getImageAnimationColumnCount(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
@@ -190,11 +190,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dImage(arguments[0].getString()))
+			if(_validateFe3dImage(args[0].getString()))
 			{
-				auto result = _animation2dEditor.getImageAnimationRowIndex(arguments[0].getString(), arguments[1].getString());
+				auto result = _animation2dEditor.getImageAnimationRowIndex(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
@@ -203,11 +203,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dImage(arguments[0].getString()))
+			if(_validateFe3dImage(args[0].getString()))
 			{
-				auto result = _animation2dEditor.getImageAnimationColumnIndex(arguments[0].getString(), arguments[1].getString());
+				auto result = _animation2dEditor.getImageAnimationColumnIndex(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
@@ -216,11 +216,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dImage(arguments[0].getString()))
+			if(_validateFe3dImage(args[0].getString()))
 			{
-				auto result = _animation2dEditor.getImageAnimationPlayCount(arguments[0].getString(), arguments[1].getString());
+				auto result = _animation2dEditor.getImageAnimationPlayCount(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
 			}
 		}
@@ -229,11 +229,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dImage(arguments[0].getString()))
+			if(_validateFe3dImage(args[0].getString()))
 			{
-				auto result = _animation2dEditor.getImageAnimationFramestep(arguments[0].getString(), arguments[1].getString());
+				auto result = _animation2dEditor.getImageAnimationFramestep(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 			}
 		}

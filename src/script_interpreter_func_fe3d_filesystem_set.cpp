@@ -12,24 +12,24 @@ using std::ofstream;
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:directory_create")
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types) && _validateSavesDirectory())
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
 		{
 			// Compose directory path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
-			const string newDirectoryPath = string(directoryPath + arguments[0].getString());
+			const string newDirectoryPath = string(directoryPath + args[0].getString());
 
 			// Check if directory exists
 			if(Tools::isDirectoryExisting(newDirectoryPath))
 			{
-				_throwScriptError("cannot create directory \"" + arguments[0].getString() + "\"!");
+				_throwScriptError("cannot create directory \"" + args[0].getString() + "\"!");
 			}
 			else
 			{
@@ -44,13 +44,13 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types) && _validateSavesDirectory())
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
 		{
 			// Compose directory path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
-			const string newDirectoryPath = string(directoryPath + arguments[0].getString());
+			const string newDirectoryPath = string(directoryPath + args[0].getString());
 
 			// Check if directory exists
 			if(Tools::isDirectoryExisting(newDirectoryPath))
@@ -60,7 +60,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			}
 			else
 			{
-				_throwScriptError("cannot delete directory \"" + arguments[0].getString() + "\"!");
+				_throwScriptError("cannot delete directory \"" + args[0].getString() + "\"!");
 			}
 		}
 	}
@@ -68,18 +68,18 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, 2) && _validateSavesDirectory())
+		if(_validateArgumentCount(args, 2) && _validateSavesDirectory())
 		{
 			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
-			const string filePath = string(directoryPath + arguments[0].getString());
+			const string filePath = string(directoryPath + args[0].getString());
 
 			// Check if file exists
 			if(Tools::isFileExisting(filePath))
 			{
-				_throwScriptError("cannot create file \"" + arguments[0].getString() + "\"!");
+				_throwScriptError("cannot create file \"" + args[0].getString() + "\"!");
 			}
 			else
 			{
@@ -95,13 +95,13 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types) && _validateSavesDirectory())
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
 		{
 			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
-			const string filePath = string(directoryPath + arguments[0].getString());
+			const string filePath = string(directoryPath + args[0].getString());
 
 			// Check if file exists
 			if(Tools::isFileExisting(filePath))
@@ -111,7 +111,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			}
 			else
 			{
-				_throwScriptError("cannot delete file \"" + arguments[0].getString() + "\"!");
+				_throwScriptError("cannot delete file \"" + args[0].getString() + "\"!");
 			}
 		}
 	}
@@ -119,13 +119,13 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, 2) && _validateSavesDirectory())
+		if(_validateArgumentCount(args, 2) && _validateSavesDirectory())
 		{
 			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
-			const string filePath = string(directoryPath + arguments[0].getString());
+			const string filePath = string(directoryPath + args[0].getString());
 
 			// Check if file exists
 			if(Tools::isFileExisting(filePath))
@@ -134,21 +134,21 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 				ofstream file(filePath, ios::app);
 
 				// Determine which type of value to print
-				if(arguments[1].getType() == SVT::STRING)
+				if(args[1].getType() == SVT::STRING)
 				{
-					file << arguments[1].getString();
+					file << args[1].getString();
 				}
-				else if(arguments[1].getType() == SVT::DECIMAL)
+				else if(args[1].getType() == SVT::DECIMAL)
 				{
-					file << to_string(arguments[1].getDecimal());
+					file << to_string(args[1].getDecimal());
 				}
-				else if(arguments[1].getType() == SVT::INTEGER)
+				else if(args[1].getType() == SVT::INTEGER)
 				{
-					file << to_string(arguments[1].getInteger());
+					file << to_string(args[1].getInteger());
 				}
-				else if(arguments[1].getType() == SVT::BOOLEAN)
+				else if(args[1].getType() == SVT::BOOLEAN)
 				{
-					file << (arguments[1].getBoolean() ? "<true>" : "<false>");
+					file << (args[1].getBoolean() ? "<true>" : "<false>");
 				}
 
 				// Close file
@@ -156,7 +156,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			}
 			else
 			{
-				_throwScriptError("cannot write to file \"" + arguments[0].getString() + "\"!");
+				_throwScriptError("cannot write to file \"" + args[0].getString() + "\"!");
 			}
 
 			// Return
@@ -167,13 +167,13 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types) && _validateSavesDirectory())
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
 		{
 			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
-			const string filePath = string(directoryPath + arguments[0].getString());
+			const string filePath = string(directoryPath + args[0].getString());
 
 			// Check if file exists
 			if(Tools::isFileExisting(filePath))
@@ -185,7 +185,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			}
 			else
 			{
-				_throwScriptError("cannot add new line to file \"" + arguments[0].getString() + "\"!");
+				_throwScriptError("cannot add new line to file \"" + args[0].getString() + "\"!");
 			}
 		}
 	}
@@ -193,13 +193,13 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types) && _validateSavesDirectory())
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
 		{
 			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
-			const string filePath = string(directoryPath + arguments[0].getString());
+			const string filePath = string(directoryPath + args[0].getString());
 
 			// Check if file exists
 			if(Tools::isFileExisting(filePath))
@@ -210,7 +210,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			}
 			else
 			{
-				_throwScriptError("cannot clear file \"" + arguments[0].getString() + "\"!");
+				_throwScriptError("cannot clear file \"" + args[0].getString() + "\"!");
 			}
 		}
 	}

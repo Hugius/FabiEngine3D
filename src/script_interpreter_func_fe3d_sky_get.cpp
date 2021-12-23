@@ -2,11 +2,11 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:sky_get_mix_id")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dSky())
 			{
@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 	}
 	else if(functionName == "fe3d:sky_get_mix_value")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dSky())
 			{
@@ -28,7 +28,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 	}
 	else if(functionName == "fe3d:sky_get_lightness")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dSky())
 			{
@@ -39,7 +39,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 	}
 	else if(functionName == "fe3d:sky_get_color_r")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dSky())
 			{
@@ -50,7 +50,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 	}
 	else if(functionName == "fe3d:sky_get_color_g")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dSky())
 			{
@@ -61,7 +61,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 	}
 	else if(functionName == "fe3d:sky_get_color_b")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dSky())
 			{
@@ -72,7 +72,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 	}
 	else if(functionName == "fe3d:sky_get_wireframe_color_r")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dSky())
 			{
@@ -83,7 +83,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 	}
 	else if(functionName == "fe3d:sky_get_wireframe_color_g")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dSky())
 			{
@@ -94,7 +94,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 	}
 	else if(functionName == "fe3d:sky_get_wireframe_color_b")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dSky())
 			{
@@ -105,7 +105,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 	}
 	else if(functionName == "fe3d:sky_get_rotation")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dSky())
 			{
@@ -116,7 +116,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 	}
 	else if(functionName == "fe3d:sky_is_wireframed")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dSky())
 			{

@@ -9,11 +9,11 @@ using std::clamp;
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:cursor_is_visible")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
@@ -29,7 +29,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 	}
 	else if(functionName == "fe3d:cursor_get_position_x")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
@@ -45,7 +45,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 	}
 	else if(functionName == "fe3d:cursor_get_position_y")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
@@ -61,7 +61,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 	}
 	else if(functionName == "fe3d:window_get_width")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
@@ -77,7 +77,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 	}
 	else if(functionName == "fe3d:window_get_height")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
@@ -93,7 +93,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 	}
 	else if(functionName == "fe3d:timer_is_started")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto result = _fe3d.misc_isMillisecondTimerStarted();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -101,7 +101,7 @@ const bool ScriptInterpreter::_executeFe3dMiscGetter(const string& functionName,
 	}
 	else if(functionName == "fe3d:vynsc_is_enabled")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())

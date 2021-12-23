@@ -2,17 +2,17 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:animation3d_start_model")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				_animation3dEditor.startModelAnimation(arguments[0].getString(), arguments[1].getString(), arguments[2].getInteger());
+				_animation3dEditor.startModelAnimation(args[0].getString(), args[1].getString(), args[2].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -21,11 +21,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				_animation3dEditor.autopauseModelAnimation(arguments[0].getString(), arguments[1].getString());
+				_animation3dEditor.autopauseModelAnimation(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -34,11 +34,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				_animation3dEditor.pauseModelAnimation(arguments[0].getString(), arguments[1].getString());
+				_animation3dEditor.pauseModelAnimation(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -47,11 +47,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				_animation3dEditor.resumeModelAnimation(arguments[0].getString(), arguments[1].getString());
+				_animation3dEditor.resumeModelAnimation(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -60,11 +60,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				_animation3dEditor.stopModelAnimation(arguments[0].getString(), arguments[1].getString());
+				_animation3dEditor.stopModelAnimation(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -73,11 +73,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dModel(arguments[0].getString(), false))
+			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				_animation3dEditor.setModelAnimationSpeed(arguments[0].getString(), arguments[1].getString(), arguments[2].getDecimal());
+				_animation3dEditor.setModelAnimationSpeed(args[0].getString(), args[1].getString(), args[2].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

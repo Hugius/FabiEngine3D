@@ -2,15 +2,15 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:client_start")
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.client_start(arguments[0].getString());
+			_fe3d.client_start(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -18,15 +18,15 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.client_connect(arguments[0].getString());
+			_fe3d.client_connect(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:client_disconnect")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d.client_disconnect();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -34,7 +34,7 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 	}
 	else if(functionName == "fe3d:client_stop")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d.client_stop();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -44,9 +44,9 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.client_sendTcpMessage(arguments[0].getString());
+			_fe3d.client_sendTcpMessage(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -54,9 +54,9 @@ const bool ScriptInterpreter::_executeFe3dClientSetter(const string& functionNam
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.client_sendUdpMessage(arguments[0].getString());
+			_fe3d.client_sendUdpMessage(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

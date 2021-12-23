@@ -8,19 +8,19 @@ using std::ifstream;
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:directory_is_existing")
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types) && _validateSavesDirectory())
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
 		{
 			// Compose directory paths
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
-			const string newDirectoryPath = string(directoryPath + arguments[0].getString());
+			const string newDirectoryPath = string(directoryPath + args[0].getString());
 
 			// Return
 			auto result = Tools::isDirectoryExisting(newDirectoryPath);
@@ -31,13 +31,13 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types) && _validateSavesDirectory())
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
 		{
 			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
-			const string filePath = (directoryPath + arguments[0].getString());
+			const string filePath = (directoryPath + args[0].getString());
 
 			// Return
 			auto result = Tools::isFileExisting(filePath);
@@ -48,13 +48,13 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functio
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types) && _validateSavesDirectory())
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
 		{
 			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
-			const string filePath = (directoryPath + arguments[0].getString());
+			const string filePath = (directoryPath + args[0].getString());
 
 			// Check if file exists
 			if(Tools::isFileExisting(filePath))
@@ -75,7 +75,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functio
 			}
 			else
 			{
-				_throwScriptError("cannot read from file \"" + arguments[0].getString() + "\"!");
+				_throwScriptError("cannot read from file \"" + args[0].getString() + "\"!");
 			}
 		}
 	}

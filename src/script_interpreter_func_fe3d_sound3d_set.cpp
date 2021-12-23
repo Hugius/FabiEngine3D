@@ -2,17 +2,17 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:sound3d_place")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			// Temporary values
-			string newID = arguments[0].getString();
-			string templateID = arguments[1].getString();
+			string newID = args[0].getString();
+			string templateID = args[1].getString();
 
 			// Validate ID
 			if(!_validateFe3dID(newID))
@@ -31,9 +31,9 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 			if(_validateFe3dSound3d(templateID, true))
 			{
 				// Temporary values
-				auto position = fvec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal());
-				auto maxVolume = arguments[5].getDecimal();
-				auto maxDistance = arguments[6].getDecimal();
+				auto position = fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal());
+				auto maxVolume = args[5].getDecimal();
+				auto maxDistance = args[6].getDecimal();
 
 				// Add sound
 				_worldEditor.copyTemplateSound(newID, ("@" + templateID), position);
@@ -49,18 +49,18 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(arguments[0].getString(), false))
+			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				_fe3d.sound3d_delete(arguments[0].getString());
+				_fe3d.sound3d_delete(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if(functionName == "fe3d:sound3d_delete_all")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			// Iterate through sounds
 			for(const auto& ID : _fe3d.sound3d_getIDs())
@@ -80,11 +80,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(arguments[0].getString(), false))
+			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				_fe3d.sound3d_start(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger(), false);
+				_fe3d.sound3d_start(args[0].getString(), args[1].getInteger(), args[2].getInteger(), false);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -93,11 +93,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::INTEGER, SVT::INTEGER};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(arguments[0].getString(), false))
+			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				_fe3d.sound3d_start(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger(), true);
+				_fe3d.sound3d_start(args[0].getString(), args[1].getInteger(), args[2].getInteger(), true);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -106,18 +106,18 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(arguments[0].getString(), false))
+			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				_fe3d.sound3d_pause(arguments[0].getString());
+				_fe3d.sound3d_pause(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if(functionName == "fe3d:sound3d_pause_all")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d.sound3d_pauseAll();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -127,18 +127,18 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(arguments[0].getString(), false))
+			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				_fe3d.sound3d_resume(arguments[0].getString());
+				_fe3d.sound3d_resume(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if(functionName == "fe3d:sound3d_resume_all")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d.sound3d_resumeAll();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -148,18 +148,18 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::INTEGER};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(arguments[0].getString(), false))
+			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				_fe3d.sound3d_stop(arguments[0].getString(), arguments[1].getInteger());
+				_fe3d.sound3d_stop(args[0].getString(), args[1].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if(functionName == "fe3d:sound3d_stop_all")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			_fe3d.sound3d_stopAll();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -169,13 +169,13 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(arguments[0].getString(), false))
+			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
 				_fe3d.sound3d_setPosition(
-					arguments[0].getString(),
-					fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+					args[0].getString(),
+					fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -184,13 +184,13 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(arguments[0].getString(), false))
+			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
 				_fe3d.sound3d_move(
-					arguments[0].getString(),
-					fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+					args[0].getString(),
+					fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -199,14 +199,14 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(arguments[0].getString(), false))
+			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
 				_fe3d.sound3d_moveTo(
-					arguments[0].getString(),
-					fvec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()),
-					arguments[4].getDecimal());
+					args[0].getString(),
+					fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()),
+					args[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -215,11 +215,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(arguments[0].getString(), false))
+			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				_fe3d.sound3d_setMaxVolume(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.sound3d_setMaxVolume(args[0].getString(), args[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -228,11 +228,11 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dSound3d(arguments[0].getString(), false))
+			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				_fe3d.sound3d_setMaxDistance(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.sound3d_setMaxDistance(args[0].getString(), args[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

@@ -2,17 +2,17 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:animation2d_start_billboard")
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				_animation2dEditor.startBillboardAnimation(arguments[0].getString(), arguments[1].getString(), arguments[2].getInteger());
+				_animation2dEditor.startBillboardAnimation(args[0].getString(), args[1].getString(), args[2].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -21,11 +21,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				_animation2dEditor.pauseBillboardAnimation(arguments[0].getString(), arguments[1].getString());
+				_animation2dEditor.pauseBillboardAnimation(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -34,11 +34,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				_animation2dEditor.resumeBillboardAnimation(arguments[0].getString(), arguments[1].getString());
+				_animation2dEditor.resumeBillboardAnimation(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -47,11 +47,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				_animation2dEditor.stopBillboardAnimation(arguments[0].getString(), arguments[1].getString());
+				_animation2dEditor.stopBillboardAnimation(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -60,11 +60,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				_animation2dEditor.setBillboardAnimationFramestep(arguments[0].getString(), arguments[1].getString(), arguments[1].getInteger());
+				_animation2dEditor.setBillboardAnimationFramestep(args[0].getString(), args[1].getString(), args[1].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -73,11 +73,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dImage(arguments[0].getString()))
+			if(_validateFe3dImage(args[0].getString()))
 			{
-				_animation2dEditor.startImageAnimation(arguments[0].getString(), arguments[1].getString(), arguments[2].getInteger());
+				_animation2dEditor.startImageAnimation(args[0].getString(), args[1].getString(), args[2].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -86,11 +86,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dImage(arguments[0].getString()))
+			if(_validateFe3dImage(args[0].getString()))
 			{
-				_animation2dEditor.pauseImageAnimation(arguments[0].getString(), arguments[1].getString());
+				_animation2dEditor.pauseImageAnimation(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -99,11 +99,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dImage(arguments[0].getString()))
+			if(_validateFe3dImage(args[0].getString()))
 			{
-				_animation2dEditor.resumeImageAnimation(arguments[0].getString(), arguments[1].getString());
+				_animation2dEditor.resumeImageAnimation(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -112,11 +112,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dImage(arguments[0].getString()))
+			if(_validateFe3dImage(args[0].getString()))
 			{
-				_animation2dEditor.stopImageAnimation(arguments[0].getString(), arguments[1].getString());
+				_animation2dEditor.stopImageAnimation(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -125,11 +125,11 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 	{
 		auto types = {SVT::STRING, SVT::STRING, SVT::INTEGER};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dImage(arguments[0].getString()))
+			if(_validateFe3dImage(args[0].getString()))
 			{
-				_animation2dEditor.setImageAnimationFramestep(arguments[0].getString(), arguments[1].getString(), arguments[1].getInteger());
+				_animation2dEditor.setImageAnimationFramestep(args[0].getString(), args[1].getString(), args[1].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

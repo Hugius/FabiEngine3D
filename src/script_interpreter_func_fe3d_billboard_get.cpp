@@ -2,17 +2,17 @@
 
 using SVT = ScriptValueType;
 
-const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
 	if(functionName == "fe3d:billboard_is_visible")
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_isVisible(arguments[0].getString());
+				auto result = _fe3d.billboard_isVisible(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -21,11 +21,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getPosition(arguments[0].getString()).x;
+				auto result = _fe3d.billboard_getPosition(args[0].getString()).x;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -34,11 +34,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getPosition(arguments[0].getString()).y;
+				auto result = _fe3d.billboard_getPosition(args[0].getString()).y;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -47,11 +47,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getPosition(arguments[0].getString()).z;
+				auto result = _fe3d.billboard_getPosition(args[0].getString()).z;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -60,11 +60,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getRotation(arguments[0].getString()).x;
+				auto result = _fe3d.billboard_getRotation(args[0].getString()).x;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -73,11 +73,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getRotation(arguments[0].getString()).y;
+				auto result = _fe3d.billboard_getRotation(args[0].getString()).y;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -86,11 +86,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getRotation(arguments[0].getString()).z;
+				auto result = _fe3d.billboard_getRotation(args[0].getString()).z;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -99,11 +99,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getSize(arguments[0].getString()).x;
+				auto result = _fe3d.billboard_getSize(args[0].getString()).x;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -112,11 +112,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getSize(arguments[0].getString()).y;
+				auto result = _fe3d.billboard_getSize(args[0].getString()).y;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -125,11 +125,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getColor(arguments[0].getString()).r;
+				auto result = _fe3d.billboard_getColor(args[0].getString()).r;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -138,11 +138,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getColor(arguments[0].getString()).g;
+				auto result = _fe3d.billboard_getColor(args[0].getString()).g;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -151,11 +151,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getColor(arguments[0].getString()).b;
+				auto result = _fe3d.billboard_getColor(args[0].getString()).b;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -164,11 +164,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getWireframeColor(arguments[0].getString()).r;
+				auto result = _fe3d.billboard_getWireframeColor(args[0].getString()).r;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -177,11 +177,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getWireframeColor(arguments[0].getString()).g;
+				auto result = _fe3d.billboard_getWireframeColor(args[0].getString()).g;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -190,11 +190,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getWireframeColor(arguments[0].getString()).b;
+				auto result = _fe3d.billboard_getWireframeColor(args[0].getString()).b;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -203,11 +203,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getMinHeight(arguments[0].getString());
+				auto result = _fe3d.billboard_getMinHeight(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -216,11 +216,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getMaxHeight(arguments[0].getString());
+				auto result = _fe3d.billboard_getMaxHeight(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -229,11 +229,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getTransparency(arguments[0].getString());
+				auto result = _fe3d.billboard_getTransparency(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -242,11 +242,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getEmissionIntensity(arguments[0].getString());
+				auto result = _fe3d.billboard_getEmissionIntensity(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -255,11 +255,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getTextureRepeat(arguments[0].getString());
+				auto result = _fe3d.billboard_getTextureRepeat(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -268,11 +268,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getLightness(arguments[0].getString());
+				auto result = _fe3d.billboard_getLightness(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -281,11 +281,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_isFacingCameraX(arguments[0].getString());
+				auto result = _fe3d.billboard_isFacingCameraX(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -294,11 +294,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_isFacingCameraY(arguments[0].getString());
+				auto result = _fe3d.billboard_isFacingCameraY(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -307,9 +307,9 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 
 				//returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -320,9 +320,9 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 
 				//returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -333,9 +333,9 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 
 				//returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -346,11 +346,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_isShadowed(arguments[0].getString());
+				auto result = _fe3d.billboard_isShadowed(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -359,11 +359,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_isReflected(arguments[0].getString());
+				auto result = _fe3d.billboard_isReflected(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -372,11 +372,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_isBright(arguments[0].getString());
+				auto result = _fe3d.billboard_isBright(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -385,11 +385,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_isWireframed(arguments[0].getString());
+				auto result = _fe3d.billboard_isWireframed(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -398,11 +398,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_isFrozen(arguments[0].getString());
+				auto result = _fe3d.billboard_isFrozen(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -411,11 +411,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_isTextual(arguments[0].getString());
+				auto result = _fe3d.billboard_isTextual(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -424,17 +424,16 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// @ sign not allowed
-			if(arguments[0].getString().find('@') != string::npos)
+			// Validate ID
+			if(!_validateFe3dID(args[0].getString()))
 			{
-				_throwScriptError("ID of requested billboard with ID \"" + arguments[0].getString() + "\" cannot contain '@'");
 				return true;
 			}
 
 			// Check if existing
-			auto result = _fe3d.billboard_isExisting(arguments[0].getString());
+			auto result = _fe3d.billboard_isExisting(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
@@ -442,12 +441,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// @ sign not allowed
-			if(arguments[0].getString().find('@') != string::npos)
+			// Validate ID
+			if(!_validateFe3dID(args[0].getString()))
 			{
-				_throwScriptError("ID of requested billboard with ID \"" + arguments[0].getString() + "\" cannot contain '@'");
 				return true;
 			}
 
@@ -455,7 +453,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			for(const auto& ID : _fe3d.billboard_getIDs())
 			{
 				// If substring matches
-				if(arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
+				if(args[0].getString() == ID.substr(0, args[0].getString().size()))
 				{
 					// Cannot be template
 					if(ID[0] != '@')
@@ -468,7 +466,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	}
 	else if(functionName == "fe3d:billboard_get_ids")
 	{
-		if(_validateArgumentCount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto result = _fe3d.billboard_getIDs();
 
@@ -487,19 +485,19 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				// Check if billboard is not of type text
-				if(!_fe3d.billboard_isTextual(arguments[0].getString()))
+				if(!_fe3d.billboard_isTextual(args[0].getString()))
 				{
-					_throwScriptError("billboard with ID \"" + arguments[0].getString() + "\" is not of type text!");
+					_throwScriptError("billboard with ID \"" + args[0].getString() + "\" is not of type text!");
 					return true;
 				}
 
 				// Return text content
-				auto result = _fe3d.billboard_getTextContent(arguments[0].getString());
+				auto result = _fe3d.billboard_getTextContent(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 			}
 		}
@@ -508,11 +506,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getDiffuseMapPath(arguments[0].getString());
+				auto result = _fe3d.billboard_getDiffuseMapPath(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 			}
 		}
@@ -521,11 +519,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getEmissionMapPath(arguments[0].getString());
+				auto result = _fe3d.billboard_getEmissionMapPath(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 			}
 		}
@@ -534,11 +532,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 	{
 		auto types = {SVT::STRING};
 
-		if(_validateArgumentCount(arguments, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(arguments, types))
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dBillboard(arguments[0].getString(), false))
+			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d.billboard_getFontPath(arguments[0].getString());
+				auto result = _fe3d.billboard_getFontPath(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 			}
 		}

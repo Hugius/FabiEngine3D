@@ -2,42 +2,6 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-void ImageEditor::_updateMiscellaneous()
-{
-	// Check if allowed by GUI
-	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
-	{
-		// Update wireframe rendering
-		if(!_currentImageID.empty())
-		{
-			if(_fe3d.input_isKeyPressed(InputType::KEY_F))
-			{
-				if(_fe3d.billboard_isWireframed(PREVIEW_BILLBOARD_ID))
-				{
-					_fe3d.billboard_setWireframed(PREVIEW_BILLBOARD_ID, false);
-				}
-				else
-				{
-					_fe3d.billboard_setWireframed(PREVIEW_BILLBOARD_ID, true);
-				}
-			}
-		}
-
-		// Update debug rendering
-		if(_fe3d.input_isKeyPressed(InputType::KEY_H))
-		{
-			if(_fe3d.misc_isDebugRenderingEnabled())
-			{
-				_fe3d.misc_disableDebugRendering();
-			}
-			else
-			{
-				_fe3d.misc_enableDebugRendering();
-			}
-		}
-	}
-}
-
 void ImageEditor::_updateImageCreating()
 {
 	if(_isCreatingImage)

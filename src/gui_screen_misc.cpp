@@ -41,7 +41,7 @@ void GuiScreen::update(bool hoverable)
 		rectangle->setVisible(_isActive);
 	}
 
-	// Update textFields
+	// Update text fields
 	for(const auto& textField : _textFields)
 	{
 		textField->setVisible(_isActive);

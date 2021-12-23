@@ -66,12 +66,6 @@ void Animation2dEditor::unload()
 	_isChoosingAnimation = false;
 	_isDeletingAnimation = false;
 	_isEditorLoaded = false;
-
-	// Miscellaneous
-	if(_fe3d.misc_isDebugRenderingEnabled())
-	{
-		_fe3d.misc_disableDebugRendering();
-	}
 }
 
 void Animation2dEditor::_loadGUI()

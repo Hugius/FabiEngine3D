@@ -33,7 +33,7 @@ void SoundEditor::load()
 	_fe3d.camera_reset();
 	_fe3d.camera_setYaw(270.0f);
 
-	// Editor billboards
+	// Billboards
 	_fe3d.billboard_create("@@icon");
 	_fe3d.billboard_setPosition("@@icon", fvec3(0.0f, -0.5f, -1.5f));
 	_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\texture\\stop.png");
@@ -60,6 +60,9 @@ void SoundEditor::unload()
 	// Sounds
 	_fe3d.sound2d_deleteAll();
 
+	// Text fields
+	_gui.getOverlay()->deleteTextField("soundID");
+
 	// Editor properties
 	_loadedSoundIDs.clear();
 	_currentSoundID = "";
@@ -68,9 +71,6 @@ void SoundEditor::unload()
 	_isCreatingSound = false;
 	_isChoosingSound = false;
 	_isDeletingSound = false;
-
-	// Miscellaneous
-	_gui.getOverlay()->deleteTextField("soundID");
 }
 
 void SoundEditor::_loadGUI()

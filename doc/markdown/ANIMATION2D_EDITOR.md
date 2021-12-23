@@ -10,6 +10,5 @@
 
 ## 2. Controls
 
-- Press `H` to toggle debug rendering
 - Press `F` to toggle wireframe rendering
 - Press `ESC` to go back

@@ -39,7 +39,7 @@ void TerrainEditor::load()
 	_fe3d.gfx_setDirectionalLightingPosition(fvec3(10000.0f));
 	_fe3d.gfx_setDirectionalLightingIntensity(3.0f);
 
-	// Editor models
+	// Models
 	_fe3d.model_create("@@box", "engine\\assets\\mesh\\box.obj");
 	_fe3d.model_setBasePosition("@@box", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d.model_setDiffuseMap("@@box", "", "engine\\assets\\texture\\box.png");
@@ -73,6 +73,9 @@ void TerrainEditor::unload()
 	// Models
 	_fe3d.model_deleteAll();
 
+	// Text fields
+	_gui.getOverlay()->deleteTextField("terrainID");
+
 	// Editor properties
 	_loadedTerrainIDs.clear();
 	_currentTerrainID = "";
@@ -82,14 +85,9 @@ void TerrainEditor::unload()
 	_isDeletingTerrain = false;
 
 	// Miscellaneous
-	_gui.getOverlay()->deleteTextField("terrainID");
 	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
 		_fe3d.camera_disableThirdPersonView();
-	}
-	if(_fe3d.misc_isDebugRenderingEnabled())
-	{
-		_fe3d.misc_disableDebugRendering();
 	}
 }
 

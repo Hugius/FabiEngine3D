@@ -13,12 +13,12 @@
 - Press `LMB` to place entity
 - Press `RMB` to toggle camera
 - Press `MMB` to cancel entity placement
-- Press `H` to toggle debug rendering
-- Press `F` to toggle wireframe rendering
 - Press `B` to toggle AABB entity rendering
-- Use `WASD` to move around
+- Press `F` to toggle wireframe rendering
+- Press `R` to toggle debug rendering
 - Press `SPACE` to move upwards
 - Press `SHIFT` to move downwards
+- Use `WASD` to move around
 - Press `ESC` to go back
 
 ## 3. Sky

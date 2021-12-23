@@ -5,6 +5,7 @@
 - [Water Editor](WATER_EDITOR.md)
 - [Model Editor](MODEL_EDITOR.md)
 - [Billboard Editor](BILLBOARD_EDITOR.md)
+- [Image Editor](IMAGE_EDITOR.md)
 - [Animation2D Editor](ANIMATION2D_EDITOR.md)
 - [Animation3D Editor](ANIMATION3D_EDITOR.md)
 - [Sound Editor](SOUND_EDITOR.md)

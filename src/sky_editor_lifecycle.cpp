@@ -51,6 +51,9 @@ void SkyEditor::unload()
 		}
 	}
 
+	// Text fields
+	_gui.getOverlay()->deleteTextField("skyID");
+
 	// Editor properties
 	_loadedSkyIDs.clear();
 	_currentSkyID = "";
@@ -60,14 +63,9 @@ void SkyEditor::unload()
 	_isDeletingSky = false;
 
 	// Miscellaneous
-	_gui.getOverlay()->deleteTextField("skyID");
 	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
 		_fe3d.camera_disableThirdPersonView();
-	}
-	if(_fe3d.misc_isDebugRenderingEnabled())
-	{
-		_fe3d.misc_disableDebugRendering();
 	}
 }
 

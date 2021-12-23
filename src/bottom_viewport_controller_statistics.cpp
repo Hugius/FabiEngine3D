@@ -234,12 +234,13 @@ void BottomViewportController::_updateStatistics()
 		}
 	}
 
-	// Clear console messages if user wants to
+	// Check if user wants to clear console messages
 	if(_fe3d.input_isKeyPressed(InputType::KEY_C) && _gui.getViewport("bottom")->getWindow("console")->isHovered())
 	{
 		// Validate
 		if(!_topViewportController.isScriptRunning() && !_gui.getOverlay()->isFocused() && !_scriptEditor.isWritingScript())
 		{
+			// Clear messages
 			Logger::clearMessageQueue();
 			for(const auto& [ID, message] : _consoleMessageQueue)
 			{

@@ -47,7 +47,7 @@ void BillboardEditor::load()
 	_fe3d.gfx_setShadowLightness(0.25f);
 	_fe3d.gfx_setShadowQuality(Config::MAX_SHADOW_QUALITY);
 
-	// Editor models
+	// Models
 	_fe3d.model_create("@@box", "engine\\assets\\mesh\\box.obj");
 	_fe3d.model_setBasePosition("@@box", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d.model_setDiffuseMap("@@box", "", "engine\\assets\\texture\\box.png");
@@ -100,12 +100,6 @@ void BillboardEditor::unload()
 	_isChoosingBillboard = false;
 	_isDeletingBillboard = false;
 	_isEditorLoaded = false;
-
-	// Miscellaneous
-	if(_fe3d.misc_isDebugRenderingEnabled())
-	{
-		_fe3d.misc_disableDebugRendering();
-	}
 }
 
 void BillboardEditor::_loadGUI()

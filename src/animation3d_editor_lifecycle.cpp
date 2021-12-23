@@ -49,7 +49,7 @@ void Animation3dEditor::load()
 	_fe3d.gfx_setShadowLightness(0.25f);
 	_fe3d.gfx_setShadowQuality(Config::MAX_SHADOW_QUALITY);
 
-	// Editor models
+	// Models
 	_fe3d.model_create("@@box", "engine\\assets\\mesh\\box.obj");
 	_fe3d.model_setBasePosition("@@box", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d.model_setDiffuseMap("@@box", "", "engine\\assets\\texture\\box.png");
@@ -91,6 +91,9 @@ void Animation3dEditor::unload()
 	// Models
 	_fe3d.model_deleteAll();
 
+	// Reflections
+	_fe3d.reflection_deleteAll();
+
 	// Text fields
 	_gui.getOverlay()->deleteTextField("animationID");
 	_gui.getOverlay()->deleteTextField("animationFrame");
@@ -112,13 +115,6 @@ void Animation3dEditor::unload()
 	_isChoosingAnimation = false;
 	_isDeletingAnimation = false;
 	_isEditorLoaded = false;
-
-	// Miscellaneous
-	_fe3d.reflection_delete("@@reflection");
-	if(_fe3d.misc_isDebugRenderingEnabled())
-	{
-		_fe3d.misc_disableDebugRendering();
-	}
 }
 
 void Animation3dEditor::_loadGUI()

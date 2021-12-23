@@ -9,8 +9,4 @@
 
 ## 2. Controls
 
-- Press `SPACE` to play the sound
-- Press `R` to resume the sound
-- Press `P` to pause the sound
-- Press `S` to stop the sound
 - Press `ESC` to go back

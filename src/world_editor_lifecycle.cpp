@@ -249,7 +249,7 @@ void WorldEditor::unload()
 	_isChoosingWorld = false;
 	_isDeletingWorld = false;
 
-	// Delete ID textFields
+	// Text fields
 	_gui.getOverlay()->deleteTextField("modelID");
 	_gui.getOverlay()->deleteTextField("billboardID");
 	_gui.getOverlay()->deleteTextField("soundID");

@@ -45,6 +45,9 @@ void ImageEditor::unload()
 	// Images
 	_fe3d.image_deleteAll();
 
+	// Text fields
+	_gui.getOverlay()->deleteTextField("imageID");
+
 	// Editor properties
 	_loadedImageIDs.clear();
 	_currentImageID = "";
@@ -53,9 +56,6 @@ void ImageEditor::unload()
 	_isCreatingImage = false;
 	_isChoosingImage = false;
 	_isDeletingImage = false;
-
-	// Miscellaneous
-	_gui.getOverlay()->deleteTextField("imageID");
 }
 
 void ImageEditor::_loadGUI()
@@ -104,9 +104,5 @@ void ImageEditor::update()
 	if(_isEditorLoaded)
 	{
 		_updateImageDeleting();
-	}
-	if(_isEditorLoaded)
-	{
-		_updateMiscellaneous();
 	}
 }

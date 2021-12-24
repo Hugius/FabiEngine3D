@@ -65,8 +65,7 @@ void MasterRenderer::_captureWorldDepth()
 				// Check if entity must be included in depth map
 				if(modelEntity->isDepthMapIncluded())
 				{
-					// Check if level of detail entity needs to be rendered
-					if(modelEntity->isLevelOfDetailed())
+					if(modelEntity->isLevelOfDetailed()) // Low quality
 					{
 						// Try to find level of detail entity
 						auto foundPair = modelEntities.find(modelEntity->getLevelOfDetailEntityID());
@@ -102,7 +101,7 @@ void MasterRenderer::_captureWorldDepth()
 							Logger::throwError("MasterRenderer::_captureWorldDepth");
 						}
 					}
-					else // Render high-quality entity
+					else // High quality
 					{
 						_modelEntityDepthRenderer.render(modelEntity, clippingY, isUnderWater);
 					}

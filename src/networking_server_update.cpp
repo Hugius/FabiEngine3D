@@ -68,7 +68,7 @@ void NetworkingServer::update()
 	}
 
 	// Receive incoming TCP messages
-BEGIN:
+	BEGIN:;
 	for(size_t i = 0; i < _clientSockets.size(); i++)
 	{
 		// Immutable client data

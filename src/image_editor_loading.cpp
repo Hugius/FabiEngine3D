@@ -137,6 +137,9 @@ const bool ImageEditor::loadFromFile()
 				// Set path
 				_fe3d.image_setDiffuseMap(imageID, diffuseMapPath);
 			}
+
+			// Set properties
+			_fe3d.image_setVisible(imageID, false);
 		}
 	}
 

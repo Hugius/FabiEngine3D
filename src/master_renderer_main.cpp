@@ -143,14 +143,14 @@ void MasterRenderer::renderWorld(EntityBus* entityBus)
 		_timer.startDeltaPart("waterEntityRender");
 		_renderWaterEntity();
 		_timer.stopDeltaPart();
-		_timer.startDeltaPart("modelEntityRender");
-		_renderModelEntities();
-		_timer.stopDeltaPart();
 		_timer.startDeltaPart("billboardEntityRender");
 		_renderBillboardEntities();
 		_timer.stopDeltaPart();
 		_timer.startDeltaPart("aabbEntityRender");
 		_renderAabbEntities();
+		_timer.stopDeltaPart();
+		_timer.startDeltaPart("modelEntityRender");
+		_renderModelEntities();
 		_timer.stopDeltaPart();
 		_renderBus.setTriangleCountingEnabled(false);
 

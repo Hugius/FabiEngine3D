@@ -84,11 +84,19 @@ void MasterRenderer::_renderModelEntities()
 		// Process spotlight entities
 		_modelEntityColorRenderer.processSpotlightEntities(_entityBus->getSpotlightEntities());
 
-		// Render model entities
+		// Render solid model entities
 		for(const auto& [keyID, modelEntity] : modelEntities)
 		{
-			// Check if level of detail entity needs to be rendered
-			if(modelEntity->isLevelOfDetailed())
+			// Skip transparent entities
+			for(const auto& partID : modelEntity->getPartIDs())
+			{
+				if(modelEntity->getTransparency(partID) != 1.0f)
+				{
+					goto CONTINUE;
+				}
+			}
+
+			if(modelEntity->isLevelOfDetailed()) // Low quality
 			{
 				// Try to find level of detail entity
 				auto levelOfDetailEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityID())->second;
@@ -116,7 +124,61 @@ void MasterRenderer::_renderModelEntities()
 				levelOfDetailEntity->setVisible(initialVisibility);
 				levelOfDetailEntity->updateTransformationMatrix();
 			}
-			else // Render high-quality entity
+			else // High quality
+			{
+				_modelEntityColorRenderer.render(modelEntity, _entityBus->getReflectionEntities());
+			}
+
+			CONTINUE:;
+		}
+
+		// Render transparent model entities
+		for(const auto& [keyID, modelEntity] : modelEntities)
+		{
+			// Skip solid entities
+			bool isSolid = true;
+			for(const auto& partID : modelEntity->getPartIDs())
+			{
+				if(modelEntity->getTransparency(partID) != 1.0f)
+				{
+					isSolid = false;
+					break;
+				}
+			}
+			if(isSolid)
+			{
+				continue;
+			}
+
+			if(modelEntity->isLevelOfDetailed()) // Low quality
+			{
+				// Try to find level of detail entity
+				auto levelOfDetailEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityID())->second;
+
+				// Save initial transformation
+				fvec3 initialPosition = levelOfDetailEntity->getBasePosition();
+				fvec3 initialRotation = levelOfDetailEntity->getBaseRotation();
+				fvec3 initialSize = levelOfDetailEntity->getBaseSize();
+				bool initialVisibility = levelOfDetailEntity->isVisible();
+
+				// Change transformation
+				levelOfDetailEntity->setBasePosition(modelEntity->getBasePosition());
+				levelOfDetailEntity->setBaseRotation(modelEntity->getBaseRotation());
+				levelOfDetailEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * initialSize);
+				levelOfDetailEntity->setVisible(modelEntity->isVisible());
+				levelOfDetailEntity->updateTransformationMatrix();
+
+				// Render level of detail entity
+				_modelEntityColorRenderer.render(levelOfDetailEntity, _entityBus->getReflectionEntities());
+
+				// Revert to initial transformation
+				levelOfDetailEntity->setBasePosition(initialPosition);
+				levelOfDetailEntity->setBaseRotation(initialRotation);
+				levelOfDetailEntity->setBaseSize(initialSize);
+				levelOfDetailEntity->setVisible(initialVisibility);
+				levelOfDetailEntity->updateTransformationMatrix();
+			}
+			else // High quality
 			{
 				_modelEntityColorRenderer.render(modelEntity, _entityBus->getReflectionEntities());
 			}

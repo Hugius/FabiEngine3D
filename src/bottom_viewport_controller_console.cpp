@@ -128,7 +128,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 
 		// Check if message part takes multiple lines
 		vector<string> messageParts;
-	BEGIN:
+		BEGIN:;
 		for(size_t i = 0; i < messagePartText.size(); i++)
 		{
 			// Check if message length is bigger than window size
@@ -153,9 +153,9 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 			if(alreadyExisting) // Previous message
 			{
 				_fe3d.text_setPosition(screen->getTextField(ID + "_time")->getEntityID(),
-											 screen->convertPosition(fvec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
+									   screen->convertPosition(fvec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
 				_fe3d.text_setPosition(screen->getTextField(ID + "_separator")->getEntityID(),
-											 screen->convertPosition(fvec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
+									   screen->convertPosition(fvec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
 			}
 			else // New message
 			{
@@ -191,7 +191,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 			if(alreadyExisting) // Previous message
 			{
 				_fe3d.text_setPosition(screen->getTextField(TextFieldID)->getEntityID(),
-											 screen->convertPosition(fvec2(-1.0f + timePartOffset + separatorPartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
+									   screen->convertPosition(fvec2(-1.0f + timePartOffset + separatorPartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
 			}
 			else // New message
 			{
@@ -211,9 +211,9 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 				if(alreadyExisting) // Previous message
 				{
 					_fe3d.text_setPosition(screen->getTextField(ID + "_time")->getEntityID(),
-												 screen->convertPosition(fvec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
+										   screen->convertPosition(fvec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
 					_fe3d.text_setPosition(screen->getTextField(ID + "_separator")->getEntityID(),
-												 screen->convertPosition(fvec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
+										   screen->convertPosition(fvec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
 				}
 				else // New message
 				{

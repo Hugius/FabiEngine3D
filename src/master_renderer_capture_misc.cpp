@@ -121,8 +121,7 @@ void MasterRenderer::_captureShadows()
 			// Render model entities
 			for(const auto& [keyID, modelEntity] : modelEntities)
 			{
-				// Check if level of detail entity needs to be rendered
-				if(modelEntity->isLevelOfDetailed())
+				if(modelEntity->isLevelOfDetailed()) // Low quality
 				{
 					// Try to find level of detail entity
 					auto foundPair = modelEntities.find(modelEntity->getLevelOfDetailEntityID());
@@ -158,7 +157,7 @@ void MasterRenderer::_captureShadows()
 						Logger::throwError("MasterRenderer::_captureShadows");
 					}
 				}
-				else // Render high-quality entity
+				else // High quality
 				{
 					_modelEntityShadowRenderer.render(modelEntity);
 				}

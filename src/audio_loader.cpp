@@ -92,7 +92,7 @@ void AudioLoader::cacheChunks(const vector<string>& filePaths)
 
 Mix_Chunk* AudioLoader::loadChunk(const string& filePath)
 {
-	BEGIN:
+	BEGIN:;
 	// Search cache
 	auto cacheIterator = _chunkCache.find(filePath);
 

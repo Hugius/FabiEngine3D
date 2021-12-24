@@ -71,7 +71,7 @@ void ModelEditor::_updateChoiceMenu()
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
-			// Disable wireframed rendering
+			// Reset parts
 			for(const auto& partID : _fe3d.model_getPartIDs(_currentModelID))
 			{
 				_fe3d.model_setWireframed(_currentModelID, partID, false);
@@ -80,7 +80,7 @@ void ModelEditor::_updateChoiceMenu()
 			// Hide model
 			_fe3d.model_setVisible(_currentModelID, false);
 
-			// Go back to main screen
+			// Miscellaneous
 			_currentModelID = "";
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuMain");
 			_fe3d.text_setVisible(_gui.getOverlay()->getTextField("modelID")->getEntityID(), false);

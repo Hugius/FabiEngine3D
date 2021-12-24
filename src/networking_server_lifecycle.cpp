@@ -162,7 +162,7 @@ void NetworkingServer::stop()
 	closesocket(_udpSocket);
 
 	// Delete all connected clients
-BEGIN:
+	BEGIN:;
 	for(const auto& socketID : _clientSockets)
 	{
 		_disconnectClient(socketID);

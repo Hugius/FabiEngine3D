@@ -23,7 +23,7 @@ void WorldEditor::_updateSpotlightPlacing()
 			if(_gui.getOverlay()->isValueFormConfirmed())
 			{
 				// Adding a number to make it unique
-				BEGIN1:
+				BEGIN1:;
 				const string newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 				// Check if spotlight already exists
@@ -105,7 +105,7 @@ void WorldEditor::_updateSpotlightPlacing()
 						auto newPosition = _fe3d.spotlight_getPosition(TEMPLATE_TORCH_ID);
 
 						// Adding a number to make it unique
-						BEGIN2:
+						BEGIN2:;
 						const string newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 						// Check if spotlight already exists

@@ -23,7 +23,7 @@ void WorldEditor::_updateBillboardPlacing()
 			if(_gui.getOverlay()->isValueFormConfirmed())
 			{
 				// Adding a number to make it unique
-				BEGIN1:
+				BEGIN1:;
 				int randomSerial = Math::getRandomNumber(0, INT_MAX);
 				const string newID = (_currentTemplateBillboardID.substr(1) + "_" + to_string(randomSerial));
 
@@ -74,7 +74,7 @@ void WorldEditor::_updateBillboardPlacing()
 						// Temporary values
 						const auto newPosition = _fe3d.billboard_getPosition(_currentTemplateBillboardID);
 
-						BEGIN2:
+						BEGIN2:;
 						// Adding a number to make it unique
 						const string newID = (_currentTemplateBillboardID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 

@@ -12,7 +12,7 @@ using std::launch;
 
 const vector<shared_ptr<MeshPart>>* MeshLoader::loadMesh(const string& filePath)
 {
-	BEGIN:
+	BEGIN:;
 	// Search cache
 	auto cacheIterator = _meshCache.find(filePath);
 

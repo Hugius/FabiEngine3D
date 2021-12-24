@@ -104,30 +104,31 @@ void ModelEditor::_updateMiscellaneous()
 	}
 
 	// Update model part highlighting
-	if(_hoveredPartID.empty())
+	auto partID = (_hoveredPartID.empty() ? _currentPartID : _hoveredPartID);
+	if(partID.empty())
 	{
 		_selectedPartHighlightDirection = 1; // Reset direction
 	}
 	else
 	{
 		// Temporary values
-		const auto color = _fe3d.model_getColor(_currentModelID, _hoveredPartID);
+		const auto transparency = _fe3d.model_getTransparency(_currentModelID, partID);
 
 		// Check if color reached minimum
-		if(color == 0.0f)
+		if(transparency == 0.0f)
 		{
 			_selectedPartHighlightDirection *= -1;
 		}
 
 		// Check if color reached maximum
-		if(color == 1.0f)
+		if(transparency == 1.0f)
 		{
 			_selectedPartHighlightDirection *= -1;
 		}
 
 		// Set color
 		const float speed = (PART_HIGHLIGHT_SPEED * static_cast<float>(_selectedPartHighlightDirection));
-		_fe3d.model_setColor(_currentModelID, _hoveredPartID, (color + speed));
+		_fe3d.model_setTransparency(_currentModelID, partID, (transparency + speed));
 	}
 }
 
@@ -326,15 +327,10 @@ void ModelEditor::_updatePartChoosing()
 			// Check if LMB is pressed
 			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				// Select part
 				_currentPartID = selectedButtonID;
-
-				// Go to next screen
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen(_nextActiveScreenID);
 				_fe3d.text_setContent(_gui.getOverlay()->getTextField("partID")->getEntityID(), ("Part: " + _currentPartID), 0.025f);
 				_fe3d.text_setVisible(_gui.getOverlay()->getTextField("partID")->getEntityID(), true);
-
-				// Miscellaneous
 				_gui.getOverlay()->deleteChoiceForm("partList");
 				_hoveredPartID = "";
 				_nextActiveScreenID = "";
@@ -349,6 +345,10 @@ void ModelEditor::_updatePartChoosing()
 		else
 		{
 			_hoveredPartID = "";
+			for(const auto& partID : _fe3d.model_getPartIDs(_currentModelID))
+			{
+				_fe3d.model_setTransparency(_currentModelID, partID, 1.0f);
+			}
 		}
 	}
 }

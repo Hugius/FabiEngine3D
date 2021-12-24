@@ -115,7 +115,7 @@ void ModelEditor::unload()
 	_gui.getOverlay()->deleteTextField("partID");
 	_gui.getOverlay()->deleteTextField("aabbID");
 
-	// Properties
+	// Editor properties
 	_loadedModelIDs.clear();
 	_currentModelID = "";
 	_currentPartID = "";

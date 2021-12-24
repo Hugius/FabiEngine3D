@@ -23,7 +23,7 @@ void WorldEditor::_updateReflectionPlacing()
 			if(_gui.getOverlay()->isValueFormConfirmed())
 			{
 				// Adding a number to make it unique
-				BEGIN1:
+				BEGIN1:;
 				const string newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 				// Check if reflection already exists
@@ -90,7 +90,7 @@ void WorldEditor::_updateReflectionPlacing()
 						auto newPosition = _fe3d.reflection_getPosition(TEMPLATE_CAMERA_ID);
 
 						// Adding a number to make it unique
-						BEGIN2:
+						BEGIN2:;
 						const string newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 						// Check if reflection already exists

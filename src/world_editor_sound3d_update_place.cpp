@@ -23,7 +23,7 @@ void WorldEditor::_updateSoundPlacing()
 			if(_gui.getOverlay()->isValueFormConfirmed())
 			{
 				// Adding a number to make it unique
-				BEGIN1:
+				BEGIN1:;
 				const string newID = (_currentTemplateSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 				// Check if sound already exists
@@ -112,7 +112,7 @@ void WorldEditor::_updateSoundPlacing()
 						const auto newPosition = _fe3d.sound3d_getPosition(_currentTemplateSoundID);
 
 						// Adding a number to make it unique
-						BEGIN2:
+						BEGIN2:;
 						const string newID = (_currentTemplateSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 						// Check if model already exists

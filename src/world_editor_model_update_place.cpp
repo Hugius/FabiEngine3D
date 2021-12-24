@@ -27,7 +27,7 @@ void WorldEditor::_updateModelPlacing()
 				const string rawID = _currentTemplateModelID.substr(1);
 
 				// Adding a number to make it unique
-				BEGIN1:
+				BEGIN1:;
 				const string newID = (rawID + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 				// Check if model already exists
@@ -79,7 +79,7 @@ void WorldEditor::_updateModelPlacing()
 						const auto newPosition = _fe3d.model_getBasePosition(_currentTemplateModelID);
 
 						// Adding a number to make it unique
-						BEGIN2:
+						BEGIN2:;
 						const string newID = (rawID + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 						// Check if model already exists

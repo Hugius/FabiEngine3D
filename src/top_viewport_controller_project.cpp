@@ -74,6 +74,7 @@ void TopViewportController::_updateProjectCreating()
 				auto animation2dFile = ofstream(newProjectDirectoryPath + "data\\animation2d.fe3d");
 				auto animation3dFile = ofstream(newProjectDirectoryPath + "data\\animation3d.fe3d");
 				auto billboardFile = ofstream(newProjectDirectoryPath + "data\\billboard.fe3d");
+				auto imageFile = ofstream(newProjectDirectoryPath + "data\\image.fe3d");
 				auto modelFile = ofstream(newProjectDirectoryPath + "data\\model.fe3d");
 				auto settingsFile = ofstream(newProjectDirectoryPath + "data\\settings.fe3d");
 				auto skyFile = ofstream(newProjectDirectoryPath + "data\\sky.fe3d");
@@ -83,6 +84,7 @@ void TopViewportController::_updateProjectCreating()
 				animation2dFile.close();
 				animation3dFile.close();
 				billboardFile.close();
+				imageFile.close();
 				modelFile.close();
 				settingsFile.close();
 				skyFile.close();
@@ -135,6 +137,7 @@ void TopViewportController::_updateProjectLoading()
 			auto modelTexturePaths = _modelEditor.getTexturePathsFromFile();
 			auto billboardTexturePaths = _billboardEditor.getTexturePathsFromFile();
 			auto billboardFontPaths = _billboardEditor.getFontPathsFromFile();
+			auto imageTexturePaths = _imageEditor.getTexturePathsFromFile();
 			auto audioPaths = _soundEditor.getAudioPathsFromFile();
 
 			// Cache meshes
@@ -146,6 +149,7 @@ void TopViewportController::_updateProjectLoading()
 			texturePaths2D.insert(texturePaths2D.end(), waterTexturePaths.begin(), waterTexturePaths.end());
 			texturePaths2D.insert(texturePaths2D.end(), modelTexturePaths.begin(), modelTexturePaths.end());
 			texturePaths2D.insert(texturePaths2D.end(), billboardTexturePaths.begin(), billboardTexturePaths.end());
+			texturePaths2D.insert(texturePaths2D.end(), imageTexturePaths.begin(), imageTexturePaths.end());
 			_fe3d.misc_cache2dTextures(texturePaths2D);
 
 			// Cache 3D textures

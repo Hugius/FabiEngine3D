@@ -6,6 +6,7 @@
 #include "water_editor.hpp"
 #include "model_editor.hpp"
 #include "billboard_editor.hpp"
+#include "image_editor.hpp"
 #include "animation3d_editor.hpp"
 #include "animation2d_editor.hpp"
 #include "sound_editor.hpp"
@@ -22,6 +23,7 @@ public:
 						  WaterEditor& waterEditor,
 						  ModelEditor& modelEditor,
 						  BillboardEditor& billboardEditor,
+						  ImageEditor& imageEditor,
 						  Animation2dEditor& animation2dEditor,
 						  Animation3dEditor& animation3dEditor,
 						  SoundEditor& soundEditor,
@@ -75,6 +77,7 @@ private:
 	WaterEditor& _waterEditor;
 	ModelEditor& _modelEditor;
 	BillboardEditor& _billboardEditor;
+	ImageEditor& _imageEditor;
 	Animation2dEditor& _animation2dEditor;
 	Animation3dEditor& _animation3dEditor;
 	SoundEditor& _soundEditor;

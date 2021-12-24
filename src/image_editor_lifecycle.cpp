@@ -42,8 +42,11 @@ void ImageEditor::unload()
 	// Billboards
 	_fe3d.billboard_deleteAll();
 
-	// Images
-	_fe3d.image_deleteAll();
+	// Delete image entities
+	for(const auto& ID : _loadedImageIDs)
+	{
+		_fe3d.image_delete(ID);
+	}
 
 	// Text fields
 	_gui.getOverlay()->deleteTextField("imageID");
@@ -73,6 +76,7 @@ void ImageEditor::_loadGUI()
 
 	// Left-viewport: imageEditorMenuChoice
 	positions = VPC::calculateButtonPositions(2, CH);
+	leftWindow->createScreen("imageEditorMenuChoice");
 	leftWindow->getScreen("imageEditorMenuChoice")->createButton("diffuseMap", fvec2(0.0f, positions[0]), fvec2(TW("Diffuse Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Diffuse Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("imageEditorMenuChoice")->createButton("back", fvec2(0.0f, positions[1]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 }

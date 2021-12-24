@@ -13,6 +13,7 @@ ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d,
 									 WaterEditor& waterEditor,
 									 ModelEditor& modelEditor,
 									 BillboardEditor& billboardEditor,
+									 ImageEditor& imageEditor,
 									 Animation2dEditor& animation2dEditor,
 									 Animation3dEditor& animation3dEditor,
 									 SoundEditor& soundEditor,
@@ -25,6 +26,7 @@ ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d,
 	_waterEditor(waterEditor),
 	_modelEditor(modelEditor),
 	_billboardEditor(billboardEditor),
+	_imageEditor(imageEditor),
 	_soundEditor(soundEditor),
 	_animation2dEditor(animation2dEditor),
 	_animation3dEditor(animation3dEditor),
@@ -168,6 +170,7 @@ void ScriptInterpreter::load()
 		auto modelTexturePaths = _modelEditor.getTexturePathsFromFile();
 		auto billboardTexturePaths = _billboardEditor.getTexturePathsFromFile();
 		auto billboardFontPaths = _billboardEditor.getFontPathsFromFile();
+		auto imageTexturePaths = _imageEditor.getTexturePathsFromFile();
 		auto audioPaths = _soundEditor.getAudioPathsFromFile();
 
 		// Cache meshes
@@ -179,6 +182,7 @@ void ScriptInterpreter::load()
 		texturePaths2D.insert(texturePaths2D.end(), waterTexturePaths.begin(), waterTexturePaths.end());
 		texturePaths2D.insert(texturePaths2D.end(), modelTexturePaths.begin(), modelTexturePaths.end());
 		texturePaths2D.insert(texturePaths2D.end(), billboardTexturePaths.begin(), billboardTexturePaths.end());
+		texturePaths2D.insert(texturePaths2D.end(), imageTexturePaths.begin(), imageTexturePaths.end());
 		_fe3d.misc_cache2dTextures(texturePaths2D);
 
 		// Cache 3D textures
@@ -211,6 +215,9 @@ void ScriptInterpreter::load()
 
 	// Load template billboards
 	_billboardEditor.loadFromFile();
+
+	// Load template images
+	_imageEditor.loadFromFile();
 
 	// Load template animations
 	_animation2dEditor.loadFromFile(false);

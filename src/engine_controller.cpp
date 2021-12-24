@@ -15,6 +15,7 @@ EngineController::EngineController()
 						   _leftViewportController.getWaterEditor(),
 						   _leftViewportController.getModelEditor(),
 						   _leftViewportController.getBillboardEditor(),
+						   _leftViewportController.getImageEditor(),
 						   _leftViewportController.getAnimation2dEditor(),
 						   _leftViewportController.getAnimation3dEditor(),
 						   _leftViewportController.getSoundEditor(),

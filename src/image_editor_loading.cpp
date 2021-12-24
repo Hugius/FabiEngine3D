@@ -37,28 +37,32 @@ const vector<string> ImageEditor::getTexturePathsFromFile() const
 	while(getline(file, line))
 	{
 		// Data placeholders
-		string imageID, texturePath;
+		string imageID, diffuseMapPath;
 
 		// For file extraction
 		istringstream iss(line);
 
 		// Read from file
-		iss >> imageID >> texturePath;
+		iss >> imageID >> diffuseMapPath;
 
 		// Convert empty string
-		texturePath = (texturePath == "?") ? "" : texturePath;
+		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 
 		// Convert spaces
-		replace(texturePath.begin(), texturePath.end(), '?', ' ');
+		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 
-		// Convert to long path
-		if(!Config::getInst().isApplicationExported())
+		// Diffuse map
+		if(!diffuseMapPath.empty())
 		{
-			texturePath = string("projects\\" + _currentProjectID + "\\" + texturePath);
-		}
+			// Convert to long path
+			if(!Config::getInst().isApplicationExported())
+			{
+				diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
+			}
 
-		// Save path
-		texturePaths.push_back(texturePath);
+			// Save path
+			texturePaths.push_back(diffuseMapPath);
+		}
 	}
 
 	// Close file
@@ -98,35 +102,41 @@ const bool ImageEditor::loadFromFile()
 	while(getline(file, line))
 	{
 		// Data placeholders
-		string imageID, texturePath;
+		string imageID, diffuseMapPath;
 
 		// For file extraction
 		istringstream iss(line);
 
 		// Read from file
-		iss >> imageID >> texturePath;
+		iss >> imageID >> diffuseMapPath;
 
 		// Convert empty string
-		texturePath = (texturePath == "?") ? "" : texturePath;
+		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 
 		// Convert spaces
-		replace(texturePath.begin(), texturePath.end(), '?', ' ');
-
-		// Convert to long path
-		if(!Config::getInst().isApplicationExported())
-		{
-			texturePath = string("projects\\" + _currentProjectID + "\\" + texturePath);
-		}
+		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 
 		// Create image
 		_fe3d.image_create(imageID, true);
-		_fe3d.image_setDiffuseMap(imageID, texturePath);
 
 		// Check if image creation went well
 		if(_fe3d.image_isExisting(imageID))
 		{
 			// Add image ID
 			_loadedImageIDs.push_back(imageID);
+
+			// Diffuse map
+			if(!diffuseMapPath.empty())
+			{
+				// Convert to long path
+				if(!Config::getInst().isApplicationExported())
+				{
+					diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
+				}
+
+				// Set path
+				_fe3d.image_setDiffuseMap(imageID, diffuseMapPath);
+			}
 		}
 	}
 

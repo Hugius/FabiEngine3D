@@ -23,7 +23,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 	FILE* file = fopen(path.c_str(), "r");
 	if(!Tools::isFileExisting(path) || filePath.empty())
 	{
-		string warningMessage = string("Cannot load mesh file: \"" + filePath + "\"!");
+		string warningMessage = string("Cannot load mesh: \"" + filePath + "\"!");
 		return make_pair(warningMessage, meshParts);
 	}
 

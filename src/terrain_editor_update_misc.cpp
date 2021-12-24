@@ -212,7 +212,7 @@ void TerrainEditor::_updateTerrainChoosing()
 				_isChoosingTerrain = false;
 			}
 		}
-		else if(_gui.getOverlay()->isChoiceFormCancelled("terrainList")) // Cancelled choosing
+		else if(_gui.getOverlay()->isChoiceFormCancelled("terrainList"))
 		{
 			_isChoosingTerrain = false;
 			_isDeletingTerrain = false;

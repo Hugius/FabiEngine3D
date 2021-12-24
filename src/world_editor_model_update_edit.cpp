@@ -170,7 +170,7 @@ void WorldEditor::_updateModelEditing()
 				// Miscellaneous
 				_gui.getOverlay()->deleteChoiceForm("animationList");
 			}
-			else if(_gui.getOverlay()->isChoiceFormCancelled("animationList")) // Cancelled choosing
+			else if(_gui.getOverlay()->isChoiceFormCancelled("animationList"))
 			{
 				_gui.getOverlay()->deleteChoiceForm("animationList");
 			}

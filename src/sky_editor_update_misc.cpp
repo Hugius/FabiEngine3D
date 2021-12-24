@@ -122,11 +122,11 @@ void SkyEditor::_updateSkyChoosing()
 {
 	if(_isChoosingSky)
 	{
-		// Get selected button ID
-		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("skyList");
-
 		// Hide last sky
 		_fe3d.sky_selectMainSky("@@background");
+
+		// Get selected button ID
+		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("skyList");
 
 		// Check if sky ID is hovered
 		if(!selectedButtonID.empty())
@@ -153,7 +153,7 @@ void SkyEditor::_updateSkyChoosing()
 				_isChoosingSky = false;
 			}
 		}
-		else if(_gui.getOverlay()->isChoiceFormCancelled("skyList")) // Cancelled choosing
+		else if(_gui.getOverlay()->isChoiceFormCancelled("skyList"))
 		{
 			_isChoosingSky = false;
 			_isDeletingSky = false;

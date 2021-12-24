@@ -214,7 +214,7 @@ void ModelEditor::_updateAabbChoosing()
 				_isChoosingAabb = false;
 			}
 		}
-		else if(_gui.getOverlay()->isChoiceFormCancelled("aabbList")) // Cancelled choosing
+		else if(_gui.getOverlay()->isChoiceFormCancelled("aabbList"))
 		{
 			// Show all AABBs again
 			for(const auto& aabbID : _fe3d.aabb_getChildIDs(_currentModelID, AabbParentEntityType::MODEL))

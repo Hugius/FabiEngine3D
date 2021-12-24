@@ -24,7 +24,7 @@ const TextureID TextureLoader::load2dTexture(const string& filePath, bool isMipm
 	// Check surface status
 	if(loadedSurface == nullptr)
 	{
-		Logger::throwWarning("Cannot load image file: \"" + filePath + "\"!");
+		Logger::throwWarning("Cannot load image: \"" + filePath + "\"!");
 		return 0;
 	}
 	else
@@ -82,7 +82,7 @@ const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 		// Error logging
 		if((loadedSurfaces[i] == nullptr) && !filePaths[i].empty())
 		{
-			Logger::throwWarning("Cannot load image file: \"" + filePaths[i] + "\"!");
+			Logger::throwWarning("Cannot load image: \"" + filePaths[i] + "\"!");
 		}
 	}
 
@@ -132,7 +132,7 @@ const vector<float>* TextureLoader::loadBitmap(const string& filePath)
 	// Check bitmap status
 	if(loadedBitmap.empty())
 	{
-		Logger::throwWarning("Cannot load image file: \"" + filePath + "\"!");
+		Logger::throwWarning("Cannot load bitmap: \"" + filePath + "\"!");
 		return nullptr;
 	}
 	else
@@ -175,7 +175,7 @@ const TextureID TextureLoader::load2dTexture(const string& textContent, const st
 		// Check font status
 		if(font == nullptr)
 		{
-			Logger::throwWarning("Cannot load font file: \"" + fontPath + "\"!");
+			Logger::throwWarning("Cannot load font: \"" + fontPath + "\"!");
 			return 0;
 		}
 		else

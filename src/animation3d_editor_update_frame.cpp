@@ -48,7 +48,7 @@ void Animation3dEditor::_updateFrameMenu()
 			// Choosing part of preview model
 			auto modelParts = currentAnimation->getPartIDs();
 			modelParts.erase(modelParts.begin());
-			_gui.getOverlay()->createChoiceForm("parts", "Select Part", fvec2(-0.5f, 0.1f), modelParts);
+			_gui.getOverlay()->createChoiceForm("partList", "Select Part", fvec2(-0.5f, 0.1f), modelParts);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("transformation")->isHovered())
 		{
@@ -198,8 +198,10 @@ void Animation3dEditor::_updateFrameMenu()
 		// Update frame
 		currentAnimation->setFrame(_currentFrameIndex, frame);
 
-		// Check if part ID hovered
-		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("parts");
+		// Get selected button ID
+		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("partList");
+
+		// Check if part ID is hovered
 		if(!selectedButtonID.empty())
 		{
 			// Check if LMB pressed
@@ -207,20 +209,17 @@ void Animation3dEditor::_updateFrameMenu()
 			{
 				_currentPartID = selectedButtonID;
 				_hoveredPartID = "";
-				_gui.getOverlay()->deleteChoiceForm("parts");
+				_gui.getOverlay()->deleteChoiceForm("partList");
 			}
 			else
 			{
-				// Set hovered ID
 				_hoveredPartID = selectedButtonID;
-
-				// Set wireframed
 				_fe3d.model_setWireframed(currentAnimation->getPreviewModelID(), _hoveredPartID, true);
 			}
 		}
-		else if(_gui.getOverlay()->isChoiceFormCancelled("parts")) // Cancelled choosing
+		else if(_gui.getOverlay()->isChoiceFormCancelled("partList"))
 		{
-			_gui.getOverlay()->deleteChoiceForm("parts");
+			_gui.getOverlay()->deleteChoiceForm("partList");
 		}
 		else
 		{
@@ -235,7 +234,7 @@ void Animation3dEditor::_updateFrameMenu()
 				}
 			}
 
-			// Reset hovered ID
+			// Miscellaneous
 			_hoveredPartID = "";
 		}
 	}

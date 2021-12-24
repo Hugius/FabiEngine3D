@@ -102,6 +102,33 @@ void ModelEditor::_updateMiscellaneous()
 			}
 		}
 	}
+
+	// Update model part highlighting
+	if(_hoveredPartID.empty())
+	{
+		_selectedPartHighlightDirection = 1; // Reset direction
+	}
+	else
+	{
+		// Temporary values
+		const auto color = _fe3d.model_getColor(_currentModelID, _hoveredPartID);
+
+		// Check if color reached minimum
+		if(color == 0.0f)
+		{
+			_selectedPartHighlightDirection *= -1;
+		}
+
+		// Check if color reached maximum
+		if(color == 1.0f)
+		{
+			_selectedPartHighlightDirection *= -1;
+		}
+
+		// Set color
+		const float speed = (PART_HIGHLIGHT_SPEED * static_cast<float>(_selectedPartHighlightDirection));
+		_fe3d.model_setColor(_currentModelID, _hoveredPartID, (color + speed));
+	}
 }
 
 void ModelEditor::_updateModelCreating()
@@ -201,14 +228,14 @@ void ModelEditor::_updateModelChoosing()
 {
 	if(_isChoosingModel)
 	{
-		// Get selected button ID
-		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("modelList");
-
 		// Hide last model
 		if(!_hoveredModelID.empty())
 		{
 			_fe3d.model_setVisible(_hoveredModelID, false);
 		}
+
+		// Get selected button ID
+		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("modelList");
 
 		// Check if model ID is hovered
 		if(!selectedButtonID.empty())
@@ -237,7 +264,7 @@ void ModelEditor::_updateModelChoosing()
 				_isChoosingModel = false;
 			}
 		}
-		else if(_gui.getOverlay()->isChoiceFormCancelled("modelList")) // Cancelled choosing
+		else if(_gui.getOverlay()->isChoiceFormCancelled("modelList"))
 		{
 			_isChoosingModel = false;
 			_isDeletingModel = false;
@@ -293,6 +320,9 @@ void ModelEditor::_updatePartChoosing()
 		// Check if part ID is hovered
 		if(!selectedButtonID.empty())
 		{
+			// Set new hovered part
+			_hoveredPartID = selectedButtonID;
+
 			// Check if LMB is pressed
 			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
@@ -306,14 +336,19 @@ void ModelEditor::_updatePartChoosing()
 
 				// Miscellaneous
 				_gui.getOverlay()->deleteChoiceForm("partList");
+				_hoveredPartID = "";
 				_nextActiveScreenID = "";
 				_isChoosingPart = false;
 			}
 		}
-		else if(_gui.getOverlay()->isChoiceFormCancelled("partList")) // Cancelled choosing
+		else if(_gui.getOverlay()->isChoiceFormCancelled("partList"))
 		{
 			_isChoosingPart = false;
 			_gui.getOverlay()->deleteChoiceForm("partList");
+		}
+		else
+		{
+			_hoveredPartID = "";
 		}
 	}
 }

@@ -150,7 +150,7 @@ void SoundEditor::_updateSoundChoosing()
 				_isChoosingSound = false;
 			}
 		}
-		else if(_gui.getOverlay()->isChoiceFormCancelled("soundList")) // Cancelled choosing
+		else if(_gui.getOverlay()->isChoiceFormCancelled("soundList"))
 		{
 			_isChoosingSound = false;
 			_isDeletingSound = false;

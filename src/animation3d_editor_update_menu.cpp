@@ -248,14 +248,14 @@ void Animation3dEditor::_updateChoiceMenu()
 			_fe3d.model_setVisible(currentAnimation->getPreviewModelID(), !_gui.getOverlay()->isChoiceFormExisting("modelList"));
 		}
 
-		// Get selected button ID
-		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("modelList");
-
 		// Hide last model
 		if(!_hoveredModelID.empty())
 		{
 			_fe3d.model_setVisible(_hoveredModelID, false);
 		}
+
+		// Get selected button ID
+		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("modelList");
 
 		// Check if model ID is hovered
 		if(!selectedButtonID.empty())
@@ -322,7 +322,7 @@ void Animation3dEditor::_updateChoiceMenu()
 				_hoveredModelID = "";
 			}
 		}
-		else if(_gui.getOverlay()->isChoiceFormCancelled("modelList")) // Cancelled choosing
+		else if(_gui.getOverlay()->isChoiceFormCancelled("modelList"))
 		{
 			_gui.getOverlay()->deleteChoiceForm("modelList");
 		}

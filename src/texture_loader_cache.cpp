@@ -60,7 +60,7 @@ void TextureLoader::cache2dTextures(const vector<string>& filePaths, bool isMipm
 					// Check image status
 					if(loadedImage == nullptr)
 					{
-						Logger::throwWarning("Cannot load image file: \"" + finalFilePaths[i] + "\"!");
+						Logger::throwWarning("Cannot load image: \"" + finalFilePaths[i] + "\"!");
 					}
 					else
 					{
@@ -145,7 +145,7 @@ void TextureLoader::cache3dTextures(const vector<array<string, 6>>& filePathsLis
 						// Error logging
 						if((loadedImages[j] == nullptr) && !finalFilePathsList[i][j].empty())
 						{
-							Logger::throwWarning("Cannot load image file: \"" + finalFilePathsList[i][j] + "\"!");
+							Logger::throwWarning("Cannot load image: \"" + finalFilePathsList[i][j] + "\"!");
 						}
 					}
 
@@ -220,7 +220,7 @@ void TextureLoader::cacheBitmaps(const vector<string>& filePaths)
 					// Check bitmap status
 					if(loadedBitmap.empty())
 					{
-						Logger::throwWarning("Cannot load image file: \"" + finalFilePaths[i] + "\"!");
+						Logger::throwWarning("Cannot load bitmap: \"" + finalFilePaths[i] + "\"!");
 					}
 					else
 					{
@@ -282,7 +282,7 @@ void TextureLoader::cacheFonts(const vector<string>& filePaths)
 					// Check font status
 					if(loadedFont == nullptr)
 					{
-						Logger::throwWarning("Cannot load font file: \"" + finalFilePaths[i] + "\"!");
+						Logger::throwWarning("Cannot load font: \"" + finalFilePaths[i] + "\"!");
 					}
 					else
 					{

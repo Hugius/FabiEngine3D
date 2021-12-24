@@ -121,7 +121,9 @@ void ModelEditor::unload()
 	_currentPartID = "";
 	_currentAabbID = "";
 	_hoveredModelID = "";
+	_hoveredPartID = "";
 	_nextActiveScreenID = "";
+	_selectedPartHighlightDirection = 1;
 	_isCreatingModel = false;
 	_isChoosingModel = false;
 	_isDeletingModel = false;

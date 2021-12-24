@@ -162,14 +162,14 @@ void BillboardEditor::_updateBillboardChoosing()
 {
 	if(_isChoosingBillboard)
 	{
-		// Get selected button ID
-		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("billboardList");
-
 		// Hide last billboard
 		if(!_hoveredBillboardID.empty())
 		{
 			_fe3d.billboard_setVisible(_hoveredBillboardID, false);
 		}
+
+		// Get selected button ID
+		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("billboardList");
 
 		// Check if billboard ID is hovered
 		if(!selectedButtonID.empty())
@@ -203,7 +203,7 @@ void BillboardEditor::_updateBillboardChoosing()
 				_hoveredBillboardID = ("@" + selectedButtonID);
 			}
 		}
-		else if(_gui.getOverlay()->isChoiceFormCancelled("billboardList")) // Cancelled choosing
+		else if(_gui.getOverlay()->isChoiceFormCancelled("billboardList"))
 		{
 			_isChoosingBillboard = false;
 			_isDeletingBillboard = false;

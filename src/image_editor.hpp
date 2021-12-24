@@ -32,6 +32,7 @@ private:
 	void _updateImageCreating();
 	void _updateImageChoosing();
 	void _updateImageDeleting();
+	void _updateMiscellaneous();
 
 	// STRING
 	static inline const string PREVIEW_BILLBOARD_ID = "@@preview_billboard";

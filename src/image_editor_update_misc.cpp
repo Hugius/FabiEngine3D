@@ -2,6 +2,27 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
+void ImageEditor::_updateMiscellaneous()
+{
+	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+	{
+		if(!_currentImageID.empty())
+		{
+			if(_fe3d.input_isKeyPressed(InputType::KEY_F))
+			{
+				if(_fe3d.image_isWireframed(_currentImageID))
+				{
+					_fe3d.image_setWireframed(_currentImageID, false);
+				}
+				else
+				{
+					_fe3d.image_setWireframed(_currentImageID, true);
+				}
+			}
+		}
+	}
+}
+
 void ImageEditor::_updateImageCreating()
 {
 	if(_isCreatingImage)
@@ -104,7 +125,7 @@ void ImageEditor::_updateImageChoosing()
 				_isChoosingImage = false;
 			}
 		}
-		else if(_gui.getOverlay()->isChoiceFormCancelled("imageList")) // Cancelled choosing
+		else if(_gui.getOverlay()->isChoiceFormCancelled("imageList"))
 		{
 			_isChoosingImage = false;
 			_isDeletingImage = false;

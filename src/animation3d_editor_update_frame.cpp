@@ -31,10 +31,11 @@ void Animation3dEditor::_updateFrameMenu()
 		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused())) // Back button
 		{
-			// Reset wireframe color
+			// Reset wireframe
 			for(const auto& partID : _fe3d.model_getPartIDs(currentAnimation->getPreviewModelID()))
 			{
 				_fe3d.model_setWireframeColor(currentAnimation->getPreviewModelID(), partID, 0.0f);
+				_fe3d.model_setWireframed(currentAnimation->getPreviewModelID(), partID, false);
 			}
 
 			// Miscellaneous
@@ -197,62 +198,40 @@ void Animation3dEditor::_updateFrameMenu()
 		// Update frame
 		currentAnimation->setFrame(_currentFrameIndex, frame);
 
-		// Check if an animation part ID is clicked
+		// Check if part ID hovered
 		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("parts");
 		if(!selectedButtonID.empty())
 		{
 			// Check if LMB pressed
 			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				// Check if selected part exists on preview model
-				if(_fe3d.model_hasPart(currentAnimation->getPreviewModelID(), selectedButtonID))
-				{
-					_currentPartID = selectedButtonID;
-					_hoveredPartID = "";
-					_gui.getOverlay()->deleteChoiceForm("parts");
-				}
-				else
-				{
-					Logger::throwWarning("Part does not exist on current preview model!");
-				}
+				_currentPartID = selectedButtonID;
+				_hoveredPartID = "";
+				_gui.getOverlay()->deleteChoiceForm("parts");
 			}
 			else
 			{
-				// Check if new part is hovered
-				if(_hoveredPartID != selectedButtonID)
-				{
-					// Reset wireframe color
-					for(const auto& partID : _fe3d.model_getPartIDs(currentAnimation->getPreviewModelID()))
-					{
-						_fe3d.model_setWireframeColor(currentAnimation->getPreviewModelID(), partID, 0.0f);
-					}
-				}
-
 				// Set hovered ID
 				_hoveredPartID = selectedButtonID;
+
+				// Set wireframed
+				_fe3d.model_setWireframed(currentAnimation->getPreviewModelID(), _hoveredPartID, true);
 			}
 		}
 		else if(_gui.getOverlay()->isChoiceFormCancelled("parts")) // Cancelled choosing
 		{
-			// Reset wireframe color
-			for(const auto& partID : _fe3d.model_getPartIDs(currentAnimation->getPreviewModelID()))
-			{
-				_fe3d.model_setWireframeColor(currentAnimation->getPreviewModelID(), partID, 0.0f);
-			}
-
-			// Miscellaneous
 			_gui.getOverlay()->deleteChoiceForm("parts");
-			_hoveredPartID = "";
 		}
 		else
 		{
 			// Check if part was hovered
 			if(!_hoveredPartID.empty())
 			{
-				// Reset wireframe color
+				// Reset wireframe
 				for(const auto& partID : _fe3d.model_getPartIDs(currentAnimation->getPreviewModelID()))
 				{
 					_fe3d.model_setWireframeColor(currentAnimation->getPreviewModelID(), partID, 0.0f);
+					_fe3d.model_setWireframed(currentAnimation->getPreviewModelID(), partID, false);
 				}
 			}
 

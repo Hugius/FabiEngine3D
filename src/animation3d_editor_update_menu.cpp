@@ -93,12 +93,6 @@ void Animation3dEditor::_updateChoiceMenu()
 						_fe3d.model_setPartRotation(currentAnimation->getPreviewModelID(), partID, fvec3(0.0f));
 						_fe3d.model_setPartSize(currentAnimation->getPreviewModelID(), partID, fvec3(1.0f));
 					}
-
-					// Disable wireframed rendering
-					if(!partID.empty() || (currentAnimation->getPartIDs().size() == 1))
-					{
-						_fe3d.model_setWireframed(currentAnimation->getPreviewModelID(), partID, false);
-					}
 				}
 			}
 

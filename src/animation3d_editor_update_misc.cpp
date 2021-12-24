@@ -80,37 +80,6 @@ void Animation3dEditor::_updateMiscellaneous()
 				_fe3d.model_setVisible("@@box", true);
 			}
 		}
-
-		// Update wireframe rendering
-		if(!_currentAnimationID.empty())
-		{
-			// Temporary values
-			const auto currentAnimation = _getAnimation(_currentAnimationID);
-
-			// Check if animation has preview model
-			if(_fe3d.model_isExisting(currentAnimation->getPreviewModelID()))
-			{
-				// Check if F is pressed
-				if(_fe3d.input_isKeyPressed(InputType::KEY_F))
-				{
-					// Iterate through model parts
-					for(const auto& partID : currentAnimation->getPartIDs())
-					{
-						if(!partID.empty() || (currentAnimation->getPartIDs().size() == 1))
-						{
-							if(_fe3d.model_isWireframed(currentAnimation->getPreviewModelID(), partID))
-							{
-								_fe3d.model_setWireframed(currentAnimation->getPreviewModelID(), partID, false);
-							}
-							else
-							{
-								_fe3d.model_setWireframed(currentAnimation->getPreviewModelID(), partID, true);
-							}
-						}
-					}
-				}
-			}
-		}
 	}
 
 	// Check if current animation active

@@ -164,11 +164,7 @@ Mix_Chunk* AudioLoader::_loadChunk(const string& filePath, unsigned char* data) 
 
 void AudioLoader::_throwLoadedMessage(const string& filePath)
 {
-	auto reversed(filePath); // Copy
-	reverse(reversed.begin(), reversed.end()); // Reverse, because . must be last in path
-	auto extension = filePath.substr(filePath.size() - reversed.find("."), reversed.find(".")); // Substring file extension
-	transform(extension.begin(), extension.end(), extension.begin(), ::toupper); // Convert to uppercase
-	Logger::throwInfo("Loaded ", extension, " audio file: \"" + filePath + "\""); // Log message
+	Logger::throwInfo("Loaded audio: \"" + filePath + "\"");
 }
 
 const char* AudioLoader::_loadWaveFile(const string& filePath) const

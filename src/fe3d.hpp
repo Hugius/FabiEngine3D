@@ -222,7 +222,7 @@ public:
 	const WaterQuality water_getQuality(const string& ID) const;
 
 	// MODEL - setters
-	void model_create(const string& ID, const string& value);
+	void model_create(const string& ID, const string& meshPath);
 	void model_delete(const string& ID);
 	void model_deleteAll();
 	void model_deleteGroup(const string& ID);

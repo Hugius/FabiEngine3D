@@ -81,8 +81,8 @@ void SoundEditor::_updateChoiceMenu()
 			}
 
 			// Miscellaneous
-			_fe3d.text_setVisible(_gui.getOverlay()->getTextField("soundID")->getEntityID(), false);
 			_currentSoundID = "";
+			_fe3d.text_setVisible(_gui.getOverlay()->getTextField("soundID")->getEntityID(), false);
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuMain");
 			return;
 		}

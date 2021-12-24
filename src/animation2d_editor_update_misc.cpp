@@ -81,7 +81,6 @@ void Animation2dEditor::_updateAnimationCreating()
 			_currentAnimationID = newAnimationID;
 
 			// Show preview billboard
-			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
 			_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
 
 			// Miscellaneous

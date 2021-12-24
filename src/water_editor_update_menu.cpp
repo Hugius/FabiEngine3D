@@ -28,7 +28,7 @@ void WaterEditor::_updateMainMenu()
 			{
 				ID = ID.substr(1);
 			}
-			_gui.getOverlay()->createChoiceForm("waterList", "Edit Water", fvec2(0.0f, 0.1f), IDs);
+			_gui.getOverlay()->createChoiceForm("waterList", "Edit Water", fvec2(-0.5f, 0.1f), IDs);
 			_isChoosingWater = true;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
@@ -38,7 +38,7 @@ void WaterEditor::_updateMainMenu()
 			{
 				ID = ID.substr(1);
 			}
-			_gui.getOverlay()->createChoiceForm("waterList", "Delete Water", fvec2(0.0f, 0.1f), IDs);
+			_gui.getOverlay()->createChoiceForm("waterList", "Delete Water", fvec2(-0.5f, 0.1f), IDs);
 			_isChoosingWater = true;
 			_isDeletingWater = true;
 		}

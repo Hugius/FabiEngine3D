@@ -262,7 +262,7 @@ void TopViewportController::_updateMiscScreenManagement()
 
 			// Create configuration file
 			auto file = ofstream(exportDirectoryPath + "config.fe3d");
-			file << "window_size = 0.75" << endl;
+			file << "window_size			= 0.75" << endl;
 			file << "window_fullscreen      = false" << endl;
 			file << "window_borderless      = false" << endl;
 			file << "window_title           = MyGame";

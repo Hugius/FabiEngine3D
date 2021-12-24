@@ -152,7 +152,7 @@ TextureID TextureLoader::_convertInto2dTexture(SDL_Surface* surface, const strin
 	}
 
 	// Logging
-	Logger::throwInfo("Loaded 2D texture: \"" + filePath + "\"");
+	Logger::throwInfo("Loaded texture: \"" + filePath + "\"");
 
 	// Return new texture
 	return texture;
@@ -213,7 +213,7 @@ TextureID TextureLoader::_convertInto3dTexture(const array<SDL_Surface*, 6>& sur
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, surfaceSize, surfaceSize, 0, GL_RGB, GL_UNSIGNED_BYTE, surfaces[i]->pixels);
 
 			// Logging
-			Logger::throwInfo("Loaded 3D texture part: \"" + filePaths[i] + "\"");
+			Logger::throwInfo("Loaded texture: \"" + filePaths[i] + "\"");
 		}
 	}
 

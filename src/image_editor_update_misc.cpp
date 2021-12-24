@@ -55,6 +55,9 @@ void ImageEditor::_updateImageCreating()
 				_currentImageID = newImageID;
 				_loadedImageIDs.push_back(newImageID);
 
+				// Show preview billboard
+				_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
+
 				// Miscellaneous
 				_fe3d.image_setVisible(newImageID, false);
 				_fe3d.text_setContent(_gui.getOverlay()->getTextField("imageID")->getEntityID(), "Image: " + newImageID.substr(1), 0.025f);
@@ -81,10 +84,17 @@ void ImageEditor::_updateImageChoosing()
 				// Select image
 				_currentImageID = ("@" + selectedButtonID);
 
-				// Go to next screen
+				// Check if not deleting
 				if(!_isDeletingImage)
 				{
+					// Go to next screen
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("imageEditorMenuChoice");
+
+					// Show preview billboard
+					_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, _fe3d.image_getDiffuseMapPath(_currentImageID));
+					_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
+
+					// Miscellaneous
 					_fe3d.text_setContent(_gui.getOverlay()->getTextField("imageID")->getEntityID(), "Image: " + selectedButtonID.substr(1), 0.025f);
 					_fe3d.text_setVisible(_gui.getOverlay()->getTextField("imageID")->getEntityID(), true);
 				}
@@ -119,15 +129,16 @@ void ImageEditor::_updateImageDeleting()
 			// Go to main screen
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("imageEditorMenuMain");
 
+			// Hide preview billboard
+			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
+			_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
+
 			// Delete image
-			if(_fe3d.image_isExisting(_currentImageID))
-			{
-				_fe3d.image_delete(_currentImageID);
-			}
+			_fe3d.image_delete(_currentImageID);
+			_currentImageID = "";
 
 			// Miscellaneous
 			_loadedImageIDs.erase(remove(_loadedImageIDs.begin(), _loadedImageIDs.end(), _currentImageID), _loadedImageIDs.end());
-			_currentImageID = "";
 			_isDeletingImage = false;
 		}
 		if(_gui.getOverlay()->isAnswerFormDenied("delete"))

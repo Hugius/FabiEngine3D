@@ -26,7 +26,7 @@ void SkyEditor::_updateMainMenu()
 			{
 				ID = ID.substr(1);
 			}
-			_gui.getOverlay()->createChoiceForm("skyList", "Edit Sky", fvec2(0.0f, 0.1f), IDs);
+			_gui.getOverlay()->createChoiceForm("skyList", "Edit Sky", fvec2(-0.5f, 0.1f), IDs);
 			_isChoosingSky = true;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
@@ -36,7 +36,7 @@ void SkyEditor::_updateMainMenu()
 			{
 				ID = ID.substr(1);
 			}
-			_gui.getOverlay()->createChoiceForm("skyList", "Delete Sky", fvec2(0.0f, 0.1f), IDs);
+			_gui.getOverlay()->createChoiceForm("skyList", "Delete Sky", fvec2(-0.5f, 0.1f), IDs);
 			_isChoosingSky = true;
 			_isDeletingSky = true;
 		}

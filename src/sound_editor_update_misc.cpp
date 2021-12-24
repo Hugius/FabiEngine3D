@@ -9,7 +9,7 @@ void SoundEditor::_updateMiscellaneous()
 	bool isPlaying = isExisting && _fe3d.sound2d_isPlaying(_currentSoundID);
 	bool isPaused = isExisting && _fe3d.sound2d_isPaused(_currentSoundID);
 
-	// Update status symbol
+	// Update status billboard
 	if(isPlaying)
 	{
 		_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\texture\\start.png");
@@ -134,10 +134,13 @@ void SoundEditor::_updateSoundChoosing()
 				// Select sound
 				_currentSoundID = ("@" + selectedButtonID);
 
-				// Go to next screen
+				// Check if not deleting
 				if(!_isDeletingSound)
 				{
+					// Go to next screen
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
+
+					// Miscellaneous
 					_fe3d.text_setContent(_gui.getOverlay()->getTextField("soundID")->getEntityID(), "Sound: " + selectedButtonID.substr(1), 0.025f);
 					_fe3d.text_setVisible(_gui.getOverlay()->getTextField("soundID")->getEntityID(), true);
 				}
@@ -173,14 +176,11 @@ void SoundEditor::_updateSoundDeleting()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuMain");
 
 			// Delete sound
-			if(_fe3d.sound2d_isExisting(_currentSoundID))
-			{
-				_fe3d.sound2d_delete(_currentSoundID);
-			}
+			_fe3d.sound2d_delete(_currentSoundID);
+			_currentSoundID = "";
 
 			// Miscellaneous
 			_loadedSoundIDs.erase(remove(_loadedSoundIDs.begin(), _loadedSoundIDs.end(), _currentSoundID), _loadedSoundIDs.end());
-			_currentSoundID = "";
 			_isDeletingSound = false;
 		}
 		if(_gui.getOverlay()->isAnswerFormDenied("delete"))

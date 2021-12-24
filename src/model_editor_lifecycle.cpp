@@ -53,7 +53,7 @@ void ModelEditor::load()
 	_fe3d.gfx_setShadowLightness(0.25f);
 	_fe3d.gfx_setShadowQuality(Config::MAX_SHADOW_QUALITY);
 
-	// Models
+	// Editor models
 	_fe3d.model_create("@@box", "engine\\assets\\mesh\\box.obj");
 	_fe3d.model_setBasePosition("@@box", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d.model_setDiffuseMap("@@box", "", "engine\\assets\\texture\\box.png");
@@ -65,17 +65,27 @@ void ModelEditor::load()
 	_fe3d.model_setTextureRepeat("@@grid", "", GRID_UV);
 	_fe3d.model_setShadowed("@@grid", false);
 
-	// Miscellaneous
+	// Editor reflections
 	_fe3d.reflection_create("@@reflection");
 	_fe3d.reflection_capture("@@reflection");
-	_gui.getOverlay()->createTextField("modelID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
-	_gui.getOverlay()->createTextField("partID", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
-	_gui.getOverlay()->createTextField("aabbID", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
+
+	// Editor text fields
+	_gui.getOverlay()->createTextField("modelID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true, false);
+	_gui.getOverlay()->createTextField("partID", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true, false);
+	_gui.getOverlay()->createTextField("aabbID", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true, false);
+
+	// Miscellaneous
 	_isEditorLoaded = true;
 }
 
 void ModelEditor::unload()
 {
+	// Models
+	for(const auto& ID : _loadedModelIDs)
+	{
+		_fe3d.model_delete(ID);
+	}
+
 	// GUI
 	_unloadGUI();
 
@@ -93,13 +103,14 @@ void ModelEditor::unload()
 	_fe3d.gfx_disableBloom(true);
 	_fe3d.gfx_disableShadows(true);
 
-	// Models
-	_fe3d.model_deleteAll();
+	// Editor models
+	_fe3d.model_delete("@@box");
+	_fe3d.model_delete("@@grid");
 
-	// Reflections
-	_fe3d.reflection_deleteAll();
+	// Editor reflections
+	_fe3d.reflection_delete("@@reflection");
 
-	// Text fields
+	// Editor text fields
 	_gui.getOverlay()->deleteTextField("modelID");
 	_gui.getOverlay()->deleteTextField("partID");
 	_gui.getOverlay()->deleteTextField("aabbID");

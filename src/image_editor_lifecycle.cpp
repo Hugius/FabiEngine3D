@@ -29,26 +29,28 @@ void ImageEditor::load()
 	_fe3d.billboard_setPosition(PREVIEW_BILLBOARD_ID, PREVIEW_BILLBOARD_POSITION);
 	_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
 
+	// Editor text fields
+	_gui.getOverlay()->createTextField("imageID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true, false);
+
 	// Miscellaneous
-	_gui.getOverlay()->createTextField("imageID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 	_isEditorLoaded = true;
 }
 
 void ImageEditor::unload()
 {
-	// GUI
-	_unloadGUI();
-
-	// Billboards
-	_fe3d.billboard_deleteAll();
-
-	// Delete image entities
+	// Images
 	for(const auto& ID : _loadedImageIDs)
 	{
 		_fe3d.image_delete(ID);
 	}
 
-	// Text fields
+	// GUI
+	_unloadGUI();
+
+	// Preview billboard
+	_fe3d.billboard_delete(PREVIEW_BILLBOARD_ID);
+
+	// Editor text fields
 	_gui.getOverlay()->deleteTextField("imageID");
 
 	// Editor properties

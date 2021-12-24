@@ -181,11 +181,11 @@ void WorldEditor::_updateChoiceMenu()
 			_isPlacingSpotlight = false;
 			_isPlacingReflection = false;
 
-			// Save before closing
+			// Save world
 			saveEditorWorldToFile();
 
-			// Clear whole world
-			clearCurrentWorld();
+			// Clear world
+			clearEditorWorld();
 
 			// Select background
 			_fe3d.sky_selectMainSky("@@background");
@@ -210,8 +210,8 @@ void WorldEditor::_updateChoiceMenu()
 			_isPlacingSpotlight = false;
 			_isPlacingReflection = false;
 
-			// Clear whole world
-			clearCurrentWorld();
+			// Clear world
+			clearEditorWorld();
 
 			// Select background
 			_fe3d.sky_selectMainSky("@@background");

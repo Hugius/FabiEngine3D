@@ -39,7 +39,7 @@ void TerrainEditor::load()
 	_fe3d.gfx_setDirectionalLightingPosition(fvec3(10000.0f));
 	_fe3d.gfx_setDirectionalLightingIntensity(3.0f);
 
-	// Models
+	// Editor models
 	_fe3d.model_create("@@box", "engine\\assets\\mesh\\box.obj");
 	_fe3d.model_setBasePosition("@@box", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d.model_setDiffuseMap("@@box", "", "engine\\assets\\texture\\box.png");
@@ -51,13 +51,21 @@ void TerrainEditor::load()
 	_fe3d.model_setTextureRepeat("@@grid", "", GRID_UV);
 	_fe3d.model_setShadowed("@@grid", false);
 
+	// Editor text fields
+	_gui.getOverlay()->createTextField("terrainID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true, false);
+
 	// Miscellaneous
-	_gui.getOverlay()->createTextField("terrainID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 	_isEditorLoaded = true;
 }
 
 void TerrainEditor::unload()
 {
+	// Terrains
+	for(const auto& ID : _loadedTerrainIDs)
+	{
+		_fe3d.terrain_delete(ID);
+	}
+
 	// GUI
 	_unloadGUI();
 
@@ -67,13 +75,11 @@ void TerrainEditor::unload()
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);
 
-	// Terrains
-	_fe3d.terrain_deleteAll();
+	// Editor models
+	_fe3d.model_delete("@@box");
+	_fe3d.model_delete("@@grid");
 
-	// Models
-	_fe3d.model_deleteAll();
-
-	// Text fields
+	// Editor text fields
 	_gui.getOverlay()->deleteTextField("terrainID");
 
 	// Editor properties

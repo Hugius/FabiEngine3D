@@ -33,19 +33,27 @@ void SoundEditor::load()
 	_fe3d.camera_reset();
 	_fe3d.camera_setYaw(270.0f);
 
-	// Billboards
+	// Editor billboards
 	_fe3d.billboard_create("@@icon");
 	_fe3d.billboard_setPosition("@@icon", fvec3(0.0f, -0.5f, -1.5f));
 	_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\texture\\stop.png");
 	_fe3d.billboard_setBright("@@icon", true);
 
+	// Editor text fields
+	_gui.getOverlay()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true, false);
+
 	// Miscellaneous
-	_gui.getOverlay()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 	_isEditorLoaded = true;
 }
 
 void SoundEditor::unload()
 {
+	// Sounds
+	for(const auto& ID : _loadedSoundIDs)
+	{
+		_fe3d.sound2d_delete(ID);
+	}
+
 	// GUI
 	_unloadGUI();
 
@@ -54,13 +62,10 @@ void SoundEditor::unload()
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_disableBloom(true);
 
-	// Billboards
-	_fe3d.billboard_deleteAll();
+	// Editor billboards
+	_fe3d.billboard_delete("@@icon");
 
-	// Sounds
-	_fe3d.sound2d_deleteAll();
-
-	// Text fields
+	// Editor text fields
 	_gui.getOverlay()->deleteTextField("soundID");
 
 	// Editor properties

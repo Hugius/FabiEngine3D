@@ -51,16 +51,16 @@ void ScriptEditor::load()
 	_fe3d.camera_setYaw(270.0f);
 	_fe3d.camera_setPitch(0.0f);
 
-	// Background
-	_fe3d.sky_selectMainSky("");
-	Tools::setRenderColor(BACKGROUND_COLOR);
-
 	// Graphics
 	_fe3d.gfx_enableBloom();
 	_fe3d.gfx_setBloomType(BloomType::PARTS);
 	_fe3d.gfx_setBloomIntensity(0.95f);
 	_fe3d.gfx_setBloomBlurCount(2);
 	_fe3d.gfx_setBloomQuality(BLOOM_QUALITY);
+
+	// Background
+	_fe3d.sky_selectMainSky("");
+	Tools::setRenderColor(BACKGROUND_COLOR);
 
 	// Miscellaneous
 	_isEditorLoaded = true;
@@ -71,20 +71,16 @@ void ScriptEditor::unload()
 	// GUI
 	_unloadGUI();
 
-	// Background
-	_fe3d.sky_selectMainSky("@@background");
-	Tools::setRenderColor(fvec3(0.0f));
-
 	// Graphics
 	_fe3d.gfx_disableBloom(true);
 
-	// Delete created entities
-	_fe3d.model_deleteAll();
+	// Editor billboards
 	_fe3d.billboard_deleteAll();
-	_fe3d.aabb_deleteAll();
-	_fe3d.pointlight_deleteAll();
 
-	// Unload script
+	// Editor AABBs
+	_fe3d.aabb_deleteAll();
+
+	// Reset script
 	_script.reset();
 
 	// Editor properties

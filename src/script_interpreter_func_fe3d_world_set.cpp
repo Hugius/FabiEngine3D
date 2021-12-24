@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_worldEditor.clearCurrentWorld();
+			_worldEditor.clearEditorWorld();
 			_worldEditor.loadEditorWorldFromFile(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
@@ -21,7 +21,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_worldEditor.clearCurrentWorld();
+			_worldEditor.clearEditorWorld();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -149,7 +149,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_worldEditor.clearCurrentWorld();
+			_worldEditor.clearEditorWorld();
 			_worldEditor.loadCustomWorldFromFile(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}

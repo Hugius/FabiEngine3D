@@ -33,8 +33,10 @@ void Animation2dEditor::load()
 	_fe3d.billboard_setPosition(PREVIEW_BILLBOARD_ID, PREVIEW_BILLBOARD_POSITION);
 	_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
 
+	// Editor text fields
+	_gui.getOverlay()->createTextField("animationID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true, false);
+
 	// Miscellaneous
-	_gui.getOverlay()->createTextField("animationID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 	_isEditorLoaded = true;
 }
 
@@ -46,10 +48,10 @@ void Animation2dEditor::unload()
 	// Graphics
 	_fe3d.gfx_disableAntiAliasing(true);
 
-	// Billboards
-	_fe3d.billboard_deleteAll();
+	// Preview billboard
+	_fe3d.billboard_delete(PREVIEW_BILLBOARD_ID);
 
-	// Text fields
+	// Editor text fields
 	_gui.getOverlay()->deleteTextField("animationID");
 
 	// Editor properties

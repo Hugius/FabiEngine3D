@@ -159,11 +159,14 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 		string activeScreen = _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID();
 		if(activeScreen == "main" && lastScreen != "main")
 		{
-			// Restore camera
-			camera_reset();
+			// Restore render color
+			Tools::setRenderColor(RENDER_COLOR);
 
 			// Restore background
 			sky_selectMainSky("@@background");
+
+			// Restore camera
+			camera_reset();
 		}
 		lastScreen = activeScreen;
 

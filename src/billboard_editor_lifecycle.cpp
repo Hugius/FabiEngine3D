@@ -47,7 +47,7 @@ void BillboardEditor::load()
 	_fe3d.gfx_setShadowLightness(0.25f);
 	_fe3d.gfx_setShadowQuality(Config::MAX_SHADOW_QUALITY);
 
-	// Models
+	// Editor models
 	_fe3d.model_create("@@box", "engine\\assets\\mesh\\box.obj");
 	_fe3d.model_setBasePosition("@@box", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d.model_setDiffuseMap("@@box", "", "engine\\assets\\texture\\box.png");
@@ -59,13 +59,21 @@ void BillboardEditor::load()
 	_fe3d.model_setTextureRepeat("@@grid", "", GRID_UV);
 	_fe3d.model_setShadowed("@@grid", false);
 
+	// Editor text fields
+	_gui.getOverlay()->createTextField("billboardID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true, false);
+
 	// Miscellaneous
-	_gui.getOverlay()->createTextField("billboardID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 	_isEditorLoaded = true;
 }
 
 void BillboardEditor::unload()
 {
+	// Billboards
+	for(const auto& ID : _loadedBillboardIDs)
+	{
+		_fe3d.billboard_delete(ID);
+	}
+
 	// GUI
 	_unloadGUI();
 
@@ -83,13 +91,11 @@ void BillboardEditor::unload()
 	_fe3d.gfx_disableBloom(true);
 	_fe3d.gfx_disableShadows(true);
 
-	// Models
-	_fe3d.model_deleteAll();
+	// Editor models
+	_fe3d.model_delete("@@box");
+	_fe3d.model_delete("@@grid");
 
-	// Billboards
-	_fe3d.billboard_deleteAll();
-
-	// Text fields
+	// Editor text fields
 	_gui.getOverlay()->deleteTextField("billboardID");
 
 	// Editor properties

@@ -39,44 +39,36 @@ void WorldEditor::load()
 	_fe3d.gfx_enableAntiAliasing();
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
 
-	// Load template skies
+	// Template skies
 	_skyEditor.loadFromFile();
 
-	// Load template terrains
+	// Template terrains
 	_terrainEditor.loadFromFile();
 
-	// Load template waters
+	// Template waters
 	_waterEditor.loadFromFile();
 
-	// Load template models
+	// Template models
 	_modelEditor.loadFromFile();
 	for(const auto& ID : _modelEditor.getLoadedIDs())
 	{
-		// Check if there is a model entity present
-		if(_fe3d.model_isExisting(ID))
-		{
-			_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuModelPlace")->getScrollingList("modelList")->
-				createButton(ID, ID.substr(1));
-		}
+		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuModelPlace");
+		screen->getScrollingList("modelList")->createButton(ID, ID.substr(1));
 	}
 
-	// Load template billboards
+	// Template billboards
 	_billboardEditor.loadFromFile();
 	for(const auto& ID : _billboardEditor.getLoadedIDs())
 	{
-		// Check if there is a billboard entity present
-		if(_fe3d.billboard_isExisting(ID))
-		{
-			_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuBillboardPlace")->getScrollingList("billboardList")->
-				createButton(ID, ID.substr(1));
-		}
+		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuBillboardPlace");
+		screen->getScrollingList("billboardList")->createButton(ID, ID.substr(1));
 	}
 
-	// Load template animations
+	// Template animations
 	_animation2dEditor.loadFromFile(false);
 	_animation3dEditor.loadFromFile(false);
 
-	// Load template sounds
+	// Template sounds
 	_soundEditor.loadFromFile();
 	_fe3d.model_create(TEMPLATE_SPEAKER_ID, SPEAKER_MODEL_PATH);
 	_fe3d.model_setBaseSize(TEMPLATE_SPEAKER_ID, DEFAULT_SPEAKER_SIZE);
@@ -93,7 +85,7 @@ void WorldEditor::load()
 			createButton(ID, ID.substr(1));
 	}
 
-	// Load template pointlight
+	// Template pointlights
 	_fe3d.model_create(TEMPLATE_LAMP_ID, LAMP_MODEL_PATH);
 	_fe3d.model_setBaseSize(TEMPLATE_LAMP_ID, DEFAULT_LAMP_SIZE);
 	_fe3d.model_setShadowed(TEMPLATE_LAMP_ID, false);
@@ -105,7 +97,7 @@ void WorldEditor::load()
 	_fe3d.pointlight_setIntensity(TEMPLATE_LAMP_ID, DEFAULT_POINTLIGHT_INTENSITY);
 	_fe3d.pointlight_setVisible(TEMPLATE_LAMP_ID, false);
 
-	// Load template spotlight
+	// Template spotlights
 	_fe3d.model_create(TEMPLATE_TORCH_ID, TORCH_MODEL_PATH);
 	_fe3d.model_setBaseSize(TEMPLATE_TORCH_ID, DEFAULT_TORCH_SIZE);
 	_fe3d.model_setShadowed(TEMPLATE_TORCH_ID, false);
@@ -119,7 +111,7 @@ void WorldEditor::load()
 	_fe3d.spotlight_setDistance(TEMPLATE_TORCH_ID, DEFAULT_SPOTLIGHT_DISTANCE);
 	_fe3d.spotlight_setVisible(TEMPLATE_TORCH_ID, false);
 
-	// Load template reflection
+	// Template reflections
 	_fe3d.model_create(TEMPLATE_CAMERA_ID, CAMERA_MODEL_PATH);
 	_fe3d.model_setBaseSize(TEMPLATE_CAMERA_ID, DEFAULT_CAMERA_SIZE);
 	_fe3d.model_setShadowed(TEMPLATE_CAMERA_ID, false);
@@ -129,7 +121,7 @@ void WorldEditor::load()
 	_fe3d.reflection_create(TEMPLATE_CAMERA_ID);
 	_fe3d.reflection_setVisible(TEMPLATE_CAMERA_ID, false);
 
-	// Create ID text fields
+	// Editor text fields
 	_gui.getOverlay()->createTextField("modelID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 	_gui.getOverlay()->createTextField("billboardID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 	_gui.getOverlay()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
@@ -151,27 +143,57 @@ void WorldEditor::unload()
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
 
 	// Clear world
-	clearCurrentWorld();
+	clearEditorWorld();
 
-	// Delete all sky entities except the background
-	for(const auto& ID : _fe3d.sky_getIDs())
+	// Template skies
+	for(const auto& ID : _skyEditor.getLoadedIDs())
 	{
-		if(ID != "@@background")
-		{
-			_fe3d.sky_delete(ID);
-		}
+		_fe3d.sky_delete(ID);
 	}
 
-	// Delete template entities
-	_fe3d.terrain_deleteAll();
-	_fe3d.water_deleteAll();
-	_fe3d.model_deleteAll();
-	_fe3d.billboard_deleteAll();
-	_fe3d.sound2d_deleteAll();
-	_fe3d.sound3d_deleteAll();
-	_fe3d.pointlight_deleteAll();
-	_fe3d.spotlight_deleteAll();
-	_fe3d.reflection_deleteAll();
+	// Template terrains
+	for(const auto& ID : _terrainEditor.getLoadedIDs())
+	{
+		_fe3d.terrain_delete(ID);
+	}
+
+	// Template waters
+	for(const auto& ID : _waterEditor.getLoadedIDs())
+	{
+		_fe3d.water_delete(ID);
+	}
+
+	// Template models
+	for(const auto& ID : _modelEditor.getLoadedIDs())
+	{
+		_fe3d.model_delete(ID);
+	}
+
+	// Template billboards
+	for(const auto& ID : _billboardEditor.getLoadedIDs())
+	{
+		_fe3d.billboard_delete(ID);
+	}
+
+	// Template sounds
+	_fe3d.model_delete(TEMPLATE_SPEAKER_ID);
+	for(const auto& ID : _soundEditor.getLoadedIDs())
+	{
+		_fe3d.sound2d_delete(ID);
+		_fe3d.sound3d_delete(ID);
+	}
+
+	// Template pointlights
+	_fe3d.model_delete(TEMPLATE_LAMP_ID);
+	_fe3d.pointlight_delete(TEMPLATE_LAMP_ID);
+
+	// Template spotlights
+	_fe3d.model_delete(TEMPLATE_TORCH_ID);
+	_fe3d.spotlight_delete(TEMPLATE_TORCH_ID);
+
+	// Template reflections
+	_fe3d.model_delete(TEMPLATE_CAMERA_ID);
+	_fe3d.reflection_delete(TEMPLATE_CAMERA_ID);
 
 	// Editor properties
 	_loadedModelIDs.clear();
@@ -249,7 +271,7 @@ void WorldEditor::unload()
 	_isChoosingWorld = false;
 	_isDeletingWorld = false;
 
-	// Text fields
+	// Editor text fields
 	_gui.getOverlay()->deleteTextField("modelID");
 	_gui.getOverlay()->deleteTextField("billboardID");
 	_gui.getOverlay()->deleteTextField("soundID");

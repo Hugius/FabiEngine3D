@@ -52,14 +52,14 @@ public:
 	void copyTemplateModel(const string& newID, const string& templateID, fvec3 position);
 	void copyTemplateBillboard(const string& newID, const string& templateID, fvec3 position);
 	void copyTemplateSound(const string& newID, const string& templateID, fvec3 position);
-	void clearCurrentWorld();
+	void clearEditorWorld();
+	void clearCustomWorld();
 
 	// STRING
 	const string& getLoadedWorldID() const;
 
 	// BOOL
 	const bool isLoaded() const;
-	const bool isWorldExisting(const string& fileName) const;
 	const bool loadEditorWorldFromFile(const string& fileName);
 	const bool saveEditorWorldToFile();
 	const bool loadCustomWorldFromFile(const string& fileName);

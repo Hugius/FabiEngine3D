@@ -7,50 +7,160 @@
 
 using std::clamp;
 
-void WorldEditor::clearCurrentWorld()
+void WorldEditor::clearEditorWorld()
 {
-	// Disable world graphics
-	if(_isEditorLoaded)
+	// Graphics
+	if(_fe3d.gfx_isAmbientLightingEnabled())
 	{
-		if(_fe3d.gfx_isAmbientLightingEnabled())
-		{
-			_fe3d.gfx_disableAmbientLighting(true);
-		}
-		if(_fe3d.gfx_isDirectionalLightingEnabled())
-		{
-			_fe3d.gfx_disableDirectionalLighting(true);
-		}
-		if(_fe3d.gfx_isFogEnabled())
-		{
-			_fe3d.gfx_disableFog(true);
-		}
-		if(_fe3d.gfx_isShadowsEnabled())
-		{
-			_fe3d.gfx_disableShadows(true);
-		}
-		if(_fe3d.gfx_isSkyExposureEnabled())
-		{
-			_fe3d.gfx_disableSkyExposure(true);
-		}
-		if(_fe3d.gfx_isDofEnabled())
-		{
-			_fe3d.gfx_disableDOF(true);
-		}
-		if(_fe3d.gfx_isLensFlareEnabled())
-		{
-			_fe3d.gfx_disableLensFlare(true);
-		}
-		if(_fe3d.gfx_isBloomEnabled())
-		{
-			_fe3d.gfx_disableBloom(true);
-		}
-		_fe3d.gfx_setPlanarReflectionHeight(0.0f);
-		_fe3d.gfx_setCubeReflectionQuality(Config::MIN_REFLECTION_QUALITY);
-		_fe3d.gfx_setPlanarReflectionQuality(Config::MIN_REFLECTION_QUALITY);
-		_fe3d.gfx_setPlanarRefractionQuality(Config::MIN_REFRACTION_QUALITY);
-		_fe3d.gfx_setPlanarReflectionHeight(0.0);
+		_fe3d.gfx_disableAmbientLighting(true);
+	}
+	if(_fe3d.gfx_isDirectionalLightingEnabled())
+	{
+		_fe3d.gfx_disableDirectionalLighting(true);
+	}
+	if(_fe3d.gfx_isFogEnabled())
+	{
+		_fe3d.gfx_disableFog(true);
+	}
+	if(_fe3d.gfx_isShadowsEnabled())
+	{
+		_fe3d.gfx_disableShadows(true);
+	}
+	if(_fe3d.gfx_isSkyExposureEnabled())
+	{
+		_fe3d.gfx_disableSkyExposure(true);
+	}
+	if(_fe3d.gfx_isDofEnabled())
+	{
+		_fe3d.gfx_disableDOF(true);
+	}
+	if(_fe3d.gfx_isLensFlareEnabled())
+	{
+		_fe3d.gfx_disableLensFlare(true);
+	}
+	if(_fe3d.gfx_isBloomEnabled())
+	{
+		_fe3d.gfx_disableBloom(true);
+	}
+	_fe3d.gfx_setPlanarReflectionHeight(0.0f);
+	_fe3d.gfx_setCubeReflectionQuality(Config::MIN_REFLECTION_QUALITY);
+	_fe3d.gfx_setPlanarReflectionQuality(Config::MIN_REFLECTION_QUALITY);
+	_fe3d.gfx_setPlanarRefractionQuality(Config::MIN_REFRACTION_QUALITY);
+	_fe3d.gfx_setPlanarReflectionHeight(0.0);
+
+	// Sky entity
+	if(!_loadedSkyID.empty())
+	{
+		_fe3d.sky_delete(_loadedSkyID);
 	}
 
+	// Terrain entity
+	if(!_loadedTerrainID.empty())
+	{
+		_fe3d.terrain_delete(_loadedTerrainID);
+	}
+
+	// Water entity
+	if(!_loadedWaterID.empty())
+	{
+		_fe3d.water_delete(_loadedWaterID);
+	}
+
+	// Model entities
+	for(const auto& [ID, templateID] : _loadedModelIDs)
+	{
+		// Delete model
+		_fe3d.model_delete(ID);
+
+		// Stop animation
+		auto animationID = _animation3dEditor.getStartedModelAnimationIDs(ID);
+		if(!animationID.empty())
+		{
+			_animation3dEditor.stopModelAnimation(animationID.back(), ID);
+		}
+	}
+
+	// Billboard entities
+	for(const auto& [ID, templateID] : _loadedBillboardIDs)
+	{
+		// Delete billboard
+		_fe3d.billboard_delete(ID);
+
+		// Stop animation
+		auto animationID = _animation2dEditor.getStartedBillboardAnimationIDs(ID);
+		if(!animationID.empty())
+		{
+			_animation2dEditor.stopBillboardAnimation(animationID.back(), ID);
+		}
+	}
+
+	// Sounds
+	for(const auto& [ID, templateID] : _loadedSoundIDs)
+	{
+		// Delete sound
+		_fe3d.sound3d_delete(ID);
+
+		// Delete corresponding speaker model
+		if(!_currentWorldID.empty())
+		{
+			_fe3d.model_delete("@@speaker_" + ID);
+		}
+	}
+
+	// Pointlight entities
+	for(const auto& ID : _loadedPointlightIDs)
+	{
+		// Delete pointlight
+		_fe3d.pointlight_delete(ID);
+
+		// Delete corresponding lamp model
+		if(!_currentWorldID.empty())
+		{
+			_fe3d.model_delete("@@lamp_" + ID);
+		}
+	}
+
+	// Spotlight entities
+	for(const auto& ID : _loadedSpotlightIDs)
+	{
+		// Delete spotlight
+		_fe3d.spotlight_delete(ID);
+
+		// Delete corresponding torch model
+		if(!_currentWorldID.empty())
+		{
+			_fe3d.model_delete("@@torch_" + ID);
+		}
+	}
+
+	// Reflection entities
+	for(const auto& ID : _loadedReflectionIDs)
+	{
+		// Delete reflection
+		_fe3d.reflection_delete(ID);
+
+		// Delete corresponding camera model
+		if(!_currentWorldID.empty())
+		{
+			_fe3d.model_delete("@@camera_" + ID);
+		}
+	}
+
+	// Miscellaneous
+	_loadedWorldID = "";
+	_loadedSkyID = "";
+	_loadedTerrainID = "";
+	_loadedWaterID = "";
+	_loadedModelIDs.clear();
+	_loadedBillboardIDs.clear();
+	_loadedSoundIDs.clear();
+	_loadedPointlightIDs.clear();
+	_loadedSpotlightIDs.clear();
+	_loadedReflectionIDs.clear();
+}
+
+void WorldEditor::clearCustomWorld()
+{
 	// Reset sky
 	_fe3d.sky_selectMixSky("");
 	_fe3d.sky_setMixValue(0.0f);
@@ -58,7 +168,7 @@ void WorldEditor::clearCurrentWorld()
 	// Delete sky entity
 	if(!_loadedSkyID.empty())
 	{
-		// Delete sky
+		// Check if sky existing
 		if(_fe3d.sky_isExisting(_loadedSkyID))
 		{
 			_fe3d.sky_delete(_loadedSkyID);
@@ -68,7 +178,7 @@ void WorldEditor::clearCurrentWorld()
 	// Delete terrain entity
 	if(!_loadedTerrainID.empty())
 	{
-		// Delete terrain
+		// Check if terrain existing
 		if(_fe3d.terrain_isExisting(_loadedTerrainID))
 		{
 			_fe3d.terrain_delete(_loadedTerrainID);
@@ -78,7 +188,7 @@ void WorldEditor::clearCurrentWorld()
 	// Delete water entity
 	if(!_loadedWaterID.empty())
 	{
-		// Delete water
+		// Check if water existing
 		if(_fe3d.water_isExisting(_loadedWaterID))
 		{
 			_fe3d.water_delete(_loadedWaterID);
@@ -88,7 +198,7 @@ void WorldEditor::clearCurrentWorld()
 	// Delete model entities
 	for(const auto& [ID, templateID] : _loadedModelIDs)
 	{
-		// Delete model
+		// Check if model existing
 		if(_fe3d.model_isExisting(ID))
 		{
 			_fe3d.model_delete(ID);
@@ -105,7 +215,7 @@ void WorldEditor::clearCurrentWorld()
 	// Delete billboard entities
 	for(const auto& [ID, templateID] : _loadedBillboardIDs)
 	{
-		// Delete billboard
+		// Check if billboard existing
 		if(_fe3d.billboard_isExisting(ID))
 		{
 			_fe3d.billboard_delete(ID);
@@ -122,7 +232,7 @@ void WorldEditor::clearCurrentWorld()
 	// Delete AABB entities
 	for(const auto& ID : _loadedAabbIDs)
 	{
-		// Delete AABB
+		// Check if AABB existing
 		if(_fe3d.aabb_isExisting(ID))
 		{
 			_fe3d.aabb_delete(ID);
@@ -132,6 +242,7 @@ void WorldEditor::clearCurrentWorld()
 	// Delete sounds
 	for(const auto& [ID, templateID] : _loadedSoundIDs)
 	{
+		// Check if sound existing
 		if(_fe3d.sound3d_isExisting(ID))
 		{
 			// Delete sound
@@ -148,6 +259,7 @@ void WorldEditor::clearCurrentWorld()
 	// Delete pointlight entities
 	for(const auto& ID : _loadedPointlightIDs)
 	{
+		// Check if reflection existing
 		if(_fe3d.pointlight_isExisting(ID))
 		{
 			// Delete pointlight
@@ -164,6 +276,7 @@ void WorldEditor::clearCurrentWorld()
 	// Delete spotlight entities
 	for(const auto& ID : _loadedSpotlightIDs)
 	{
+		// Check if reflection existing
 		if(_fe3d.spotlight_isExisting(ID))
 		{
 			// Delete spotlight
@@ -180,6 +293,7 @@ void WorldEditor::clearCurrentWorld()
 	// Delete reflection entities
 	for(const auto& ID : _loadedReflectionIDs)
 	{
+		// Check if reflection existing
 		if(_fe3d.reflection_isExisting(ID))
 		{
 			// Delete reflection
@@ -193,40 +307,23 @@ void WorldEditor::clearCurrentWorld()
 		}
 	}
 
-	// Reset saved IDs
+	// Miscellaneous
 	_loadedWorldID = "";
 	_loadedSkyID = "";
 	_loadedTerrainID = "";
 	_loadedWaterID = "";
 	_loadedModelIDs.clear();
 	_loadedBillboardIDs.clear();
+	_loadedAabbIDs.clear();
 	_loadedSoundIDs.clear();
 	_loadedPointlightIDs.clear();
 	_loadedSpotlightIDs.clear();
 	_loadedReflectionIDs.clear();
 }
 
-
 const bool WorldEditor::isLoaded() const
 {
 	return _isEditorLoaded;
-}
-
-const bool WorldEditor::isWorldExisting(const string& fileName) const
-{
-	// Validate project ID
-	if(_currentProjectID.empty())
-	{
-		Logger::throwError("WorldEditor::isWorldExisting");
-	}
-
-	// Compose file path
-	const auto isExported = Config::getInst().isApplicationExported();
-	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "worlds\\editor\\" + fileName + ".fe3d");
-
-	// Check if world file exists
-	return Tools::isFileExisting(filePath);
 }
 
 const string& WorldEditor::getLoadedWorldID() const

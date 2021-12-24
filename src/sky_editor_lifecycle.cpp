@@ -29,29 +29,28 @@ void SkyEditor::load()
 	_fe3d.gfx_setMotionBlurStrength(0.1f);
 	_fe3d.gfx_setMotionBlurQuality(Config::MAX_MOTION_BLUR_QUALITY);
 
+	// Editor text fields
+	_gui.getOverlay()->createTextField("skyID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true, false);
+
 	// Miscellaneous
-	_gui.getOverlay()->createTextField("skyID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
 	_isEditorLoaded = true;
 }
 
 void SkyEditor::unload()
 {
+	// Skies
+	for(const auto& ID : _loadedSkyIDs)
+	{
+		_fe3d.sky_delete(ID);
+	}
+
 	// GUI
 	_unloadGUI();
 
 	// Graphics
 	_fe3d.gfx_disableMotionBlur(true);
 
-	// Delete all sky entities except the background
-	for(const auto& ID : _fe3d.sky_getIDs())
-	{
-		if(ID != "@@background")
-		{
-			_fe3d.sky_delete(ID);
-		}
-	}
-
-	// Text fields
+	// Editor text fields
 	_gui.getOverlay()->deleteTextField("skyID");
 
 	// Editor properties

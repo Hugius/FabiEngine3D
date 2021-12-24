@@ -94,19 +94,6 @@ void WorldEditor::clearEditorWorld()
 		}
 	}
 
-	// Sounds
-	for(const auto& [ID, templateID] : _loadedSoundIDs)
-	{
-		// Delete sound
-		_fe3d.sound3d_delete(ID);
-
-		// Delete corresponding speaker model
-		if(!_currentWorldID.empty())
-		{
-			_fe3d.model_delete("@@speaker_" + ID);
-		}
-	}
-
 	// Pointlight entities
 	for(const auto& ID : _loadedPointlightIDs)
 	{
@@ -146,6 +133,19 @@ void WorldEditor::clearEditorWorld()
 		}
 	}
 
+	// Sounds
+	for(const auto& [ID, templateID] : _loadedSoundIDs)
+	{
+		// Delete sound
+		_fe3d.sound3d_delete(ID);
+
+		// Delete corresponding speaker model
+		if(!_currentWorldID.empty())
+		{
+			_fe3d.model_delete("@@speaker_" + ID);
+		}
+	}
+
 	// Miscellaneous
 	_loadedWorldID = "";
 	_loadedSkyID = "";
@@ -161,164 +161,7 @@ void WorldEditor::clearEditorWorld()
 
 void WorldEditor::clearCustomWorld()
 {
-	// Reset sky
-	_fe3d.sky_selectMixSky("");
-	_fe3d.sky_setMixValue(0.0f);
 
-	// Delete sky entity
-	if(!_loadedSkyID.empty())
-	{
-		// Check if sky existing
-		if(_fe3d.sky_isExisting(_loadedSkyID))
-		{
-			_fe3d.sky_delete(_loadedSkyID);
-		}
-	}
-
-	// Delete terrain entity
-	if(!_loadedTerrainID.empty())
-	{
-		// Check if terrain existing
-		if(_fe3d.terrain_isExisting(_loadedTerrainID))
-		{
-			_fe3d.terrain_delete(_loadedTerrainID);
-		}
-	}
-
-	// Delete water entity
-	if(!_loadedWaterID.empty())
-	{
-		// Check if water existing
-		if(_fe3d.water_isExisting(_loadedWaterID))
-		{
-			_fe3d.water_delete(_loadedWaterID);
-		}
-	}
-
-	// Delete model entities
-	for(const auto& [ID, templateID] : _loadedModelIDs)
-	{
-		// Check if model existing
-		if(_fe3d.model_isExisting(ID))
-		{
-			_fe3d.model_delete(ID);
-		}
-
-		// Stop animation
-		auto animationID = _animation3dEditor.getStartedModelAnimationIDs(ID);
-		if(!animationID.empty())
-		{
-			_animation3dEditor.stopModelAnimation(animationID.back(), ID);
-		}
-	}
-
-	// Delete billboard entities
-	for(const auto& [ID, templateID] : _loadedBillboardIDs)
-	{
-		// Check if billboard existing
-		if(_fe3d.billboard_isExisting(ID))
-		{
-			_fe3d.billboard_delete(ID);
-		}
-
-		// Stop animation
-		auto animationID = _animation2dEditor.getStartedBillboardAnimationIDs(ID);
-		if(!animationID.empty())
-		{
-			_animation2dEditor.stopBillboardAnimation(animationID.back(), ID);
-		}
-	}
-
-	// Delete AABB entities
-	for(const auto& ID : _loadedAabbIDs)
-	{
-		// Check if AABB existing
-		if(_fe3d.aabb_isExisting(ID))
-		{
-			_fe3d.aabb_delete(ID);
-		}
-	}
-
-	// Delete sounds
-	for(const auto& [ID, templateID] : _loadedSoundIDs)
-	{
-		// Check if sound existing
-		if(_fe3d.sound3d_isExisting(ID))
-		{
-			// Delete sound
-			_fe3d.sound3d_delete(ID);
-
-			// Delete corresponding speaker model
-			if(!_currentWorldID.empty())
-			{
-				_fe3d.model_delete("@@speaker_" + ID);
-			}
-		}
-	}
-
-	// Delete pointlight entities
-	for(const auto& ID : _loadedPointlightIDs)
-	{
-		// Check if reflection existing
-		if(_fe3d.pointlight_isExisting(ID))
-		{
-			// Delete pointlight
-			_fe3d.pointlight_delete(ID);
-
-			// Delete corresponding lamp model
-			if(!_currentWorldID.empty())
-			{
-				_fe3d.model_delete("@@lamp_" + ID);
-			}
-		}
-	}
-
-	// Delete spotlight entities
-	for(const auto& ID : _loadedSpotlightIDs)
-	{
-		// Check if reflection existing
-		if(_fe3d.spotlight_isExisting(ID))
-		{
-			// Delete spotlight
-			_fe3d.spotlight_delete(ID);
-
-			// Delete corresponding torch model
-			if(!_currentWorldID.empty())
-			{
-				_fe3d.model_delete("@@torch_" + ID);
-			}
-		}
-	}
-
-	// Delete reflection entities
-	for(const auto& ID : _loadedReflectionIDs)
-	{
-		// Check if reflection existing
-		if(_fe3d.reflection_isExisting(ID))
-		{
-			// Delete reflection
-			_fe3d.reflection_delete(ID);
-
-			// Delete corresponding camera model
-			if(!_currentWorldID.empty())
-			{
-				_fe3d.model_delete("@@camera_" + ID);
-			}
-		}
-	}
-
-	// Miscellaneous
-	_loadedWorldID = "";
-	_loadedSkyID = "";
-	_loadedTerrainID = "";
-	_loadedWaterID = "";
-	_loadedModelIDs.clear();
-	_loadedBillboardIDs.clear();
-	_loadedAabbIDs.clear();
-	_loadedSoundIDs.clear();
-	_loadedPointlightIDs.clear();
-	_loadedSpotlightIDs.clear();
-	_loadedReflectionIDs.clear();
 }
 
 const bool WorldEditor::isLoaded() const

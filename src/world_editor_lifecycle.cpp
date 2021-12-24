@@ -52,6 +52,7 @@ void WorldEditor::load()
 	_modelEditor.loadFromFile();
 	for(const auto& ID : _modelEditor.getLoadedIDs())
 	{
+		// Add button
 		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuModelPlace");
 		screen->getScrollingList("modelList")->createButton(ID, ID.substr(1));
 	}
@@ -60,6 +61,7 @@ void WorldEditor::load()
 	_billboardEditor.loadFromFile();
 	for(const auto& ID : _billboardEditor.getLoadedIDs())
 	{
+		// Add button
 		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuBillboardPlace");
 		screen->getScrollingList("billboardList")->createButton(ID, ID.substr(1));
 	}
@@ -67,23 +69,6 @@ void WorldEditor::load()
 	// Template animations
 	_animation2dEditor.loadFromFile(false);
 	_animation3dEditor.loadFromFile(false);
-
-	// Template sounds
-	_soundEditor.loadFromFile();
-	_fe3d.model_create(TEMPLATE_SPEAKER_ID, SPEAKER_MODEL_PATH);
-	_fe3d.model_setBaseSize(TEMPLATE_SPEAKER_ID, DEFAULT_SPEAKER_SIZE);
-	_fe3d.model_setShadowed(TEMPLATE_SPEAKER_ID, false);
-	_fe3d.model_setReflected(TEMPLATE_SPEAKER_ID, false);
-	_fe3d.model_setBright(TEMPLATE_SPEAKER_ID, true);
-	_fe3d.model_setVisible(TEMPLATE_SPEAKER_ID, false);
-	for(const auto& ID : _soundEditor.getLoadedIDs())
-	{
-		_fe3d.sound3d_create(ID, _fe3d.sound2d_getAudioPath(ID));
-		_fe3d.sound3d_setMaxVolume(ID, DEFAULT_SOUND_MAX_VOLUME);
-		_fe3d.sound3d_setMaxDistance(ID, DEFAULT_SOUND_MAX_DISTANCE);
-		_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuSoundPlace")->getScrollingList("sounds")->
-			createButton(ID, ID.substr(1));
-	}
 
 	// Template pointlights
 	_fe3d.model_create(TEMPLATE_LAMP_ID, LAMP_MODEL_PATH);
@@ -120,6 +105,26 @@ void WorldEditor::load()
 	_fe3d.model_setVisible(TEMPLATE_CAMERA_ID, false);
 	_fe3d.reflection_create(TEMPLATE_CAMERA_ID);
 	_fe3d.reflection_setVisible(TEMPLATE_CAMERA_ID, false);
+
+	// Template sounds
+	_soundEditor.loadFromFile();
+	_fe3d.model_create(TEMPLATE_SPEAKER_ID, SPEAKER_MODEL_PATH);
+	_fe3d.model_setBaseSize(TEMPLATE_SPEAKER_ID, DEFAULT_SPEAKER_SIZE);
+	_fe3d.model_setShadowed(TEMPLATE_SPEAKER_ID, false);
+	_fe3d.model_setReflected(TEMPLATE_SPEAKER_ID, false);
+	_fe3d.model_setBright(TEMPLATE_SPEAKER_ID, true);
+	_fe3d.model_setVisible(TEMPLATE_SPEAKER_ID, false);
+	for(const auto& ID : _soundEditor.getLoadedIDs())
+	{
+		// Create sound3D
+		_fe3d.sound3d_create(ID, _fe3d.sound2d_getAudioPath(ID));
+		_fe3d.sound3d_setMaxVolume(ID, DEFAULT_SOUND_MAX_VOLUME);
+		_fe3d.sound3d_setMaxDistance(ID, DEFAULT_SOUND_MAX_DISTANCE);
+
+		// Add button
+		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuSoundPlace");
+		screen->getScrollingList("sounds")->createButton(ID, ID.substr(1));
+	}
 
 	// Editor text fields
 	_gui.getOverlay()->createTextField("modelID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true, false);
@@ -175,14 +180,6 @@ void WorldEditor::unload()
 		_fe3d.billboard_delete(ID);
 	}
 
-	// Template sounds
-	_fe3d.model_delete(TEMPLATE_SPEAKER_ID);
-	for(const auto& ID : _soundEditor.getLoadedIDs())
-	{
-		_fe3d.sound2d_delete(ID);
-		_fe3d.sound3d_delete(ID);
-	}
-
 	// Template pointlights
 	_fe3d.model_delete(TEMPLATE_LAMP_ID);
 	_fe3d.pointlight_delete(TEMPLATE_LAMP_ID);
@@ -194,6 +191,14 @@ void WorldEditor::unload()
 	// Template reflections
 	_fe3d.model_delete(TEMPLATE_CAMERA_ID);
 	_fe3d.reflection_delete(TEMPLATE_CAMERA_ID);
+
+	// Template sounds
+	_fe3d.model_delete(TEMPLATE_SPEAKER_ID);
+	for(const auto& ID : _soundEditor.getLoadedIDs())
+	{
+		_fe3d.sound2d_delete(ID);
+		_fe3d.sound3d_delete(ID);
+	}
 
 	// Editor properties
 	_loadedModelIDs.clear();
@@ -360,26 +365,6 @@ void WorldEditor::update()
 	}
 	if(_isEditorLoaded)
 	{
-		_updateSoundMenu();
-	}
-	if(_isEditorLoaded)
-	{
-		_updateSoundPlacingMenu();
-	}
-	if(_isEditorLoaded)
-	{
-		_updateSoundChoosingMenu();
-	}
-	if(_isEditorLoaded)
-	{
-		_updateSoundPlacing();
-	}
-	if(_isEditorLoaded)
-	{
-		_updateSoundEditing();
-	}
-	if(_isEditorLoaded)
-	{
 		_updatePointlightMenu();
 	}
 	if(_isEditorLoaded)
@@ -425,6 +410,26 @@ void WorldEditor::update()
 	if(_isEditorLoaded)
 	{
 		_updateReflectionEditing();
+	}
+	if(_isEditorLoaded)
+	{
+		_updateSoundMenu();
+	}
+	if(_isEditorLoaded)
+	{
+		_updateSoundPlacingMenu();
+	}
+	if(_isEditorLoaded)
+	{
+		_updateSoundChoosingMenu();
+	}
+	if(_isEditorLoaded)
+	{
+		_updateSoundPlacing();
+	}
+	if(_isEditorLoaded)
+	{
+		_updateSoundEditing();
 	}
 	if(_isEditorLoaded)
 	{

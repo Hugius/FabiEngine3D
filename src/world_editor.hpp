@@ -224,7 +224,6 @@ private:
 	static inline const fvec3 REFLECTION_TERRAIN_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
 	static inline const fvec3 SOUND_TERRAIN_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
 	static inline const fvec3 LAMP_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
-	static inline const fvec3 TORCH_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
 	static inline const fvec3 CAMERA_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
 	static inline const fvec3 SPEAKER_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
 

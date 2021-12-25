@@ -126,6 +126,7 @@ void WorldEditor::_updateSpotlightEditing()
 				_handleValueChanging("spotlightPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / 100.0f));
 
 				_fe3d.spotlight_setPosition(activeSpotlightID, position);
+				_fe3d.model_setBasePosition(_activeTorchID, position);
 			}
 			else if(!screen->getButton("color")->isHoverable())
 			{
@@ -140,19 +141,19 @@ void WorldEditor::_updateSpotlightEditing()
 				_handleValueChanging("spotlightPropertiesMenu", "zPlus", "z", color.b, SPOTLIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
 				_handleValueChanging("spotlightPropertiesMenu", "zMinus", "z", color.b, -SPOTLIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
 
-				_fe3d.model_setColor(_activeTorchID, "", color);
 				_fe3d.spotlight_setColor(activeSpotlightID, color);
+				_fe3d.model_setColor(_activeTorchID, "", color);
 			}
 
 			_handleValueChanging("spotlightPropertiesMenu", "yawPlus", "yaw", yaw, SPOTLIGHT_YAW_CHANGING_SPEED);
 			_handleValueChanging("spotlightPropertiesMenu", "yawMinus", "yaw", yaw, -SPOTLIGHT_YAW_CHANGING_SPEED);
-			_fe3d.model_setBaseRotation(_activeTorchID, fvec3(0.0f, -yaw, _fe3d.model_getBaseRotation(_activeTorchID).z));
 			_fe3d.spotlight_setYaw(activeSpotlightID, yaw);
+			_fe3d.model_setBaseRotation(_activeTorchID, fvec3(0.0f, -yaw, _fe3d.model_getBaseRotation(_activeTorchID).z));
 
 			_handleValueChanging("spotlightPropertiesMenu", "pitchPlus", "pitch", pitch, SPOTLIGHT_PITCH_CHANGING_SPEED);
 			_handleValueChanging("spotlightPropertiesMenu", "pitchMinus", "pitch", pitch, -SPOTLIGHT_PITCH_CHANGING_SPEED);
-			_fe3d.model_setBaseRotation(_activeTorchID, fvec3(0.0f, _fe3d.model_getBaseRotation(_activeTorchID).y, pitch));
 			_fe3d.spotlight_setPitch(activeSpotlightID, pitch);
+			_fe3d.model_setBaseRotation(_activeTorchID, fvec3(0.0f, _fe3d.model_getBaseRotation(_activeTorchID).y, pitch));
 
 			_handleValueChanging("spotlightPropertiesMenu", "intensityPlus", "intensity", intensity, SPOTLIGHT_INTENSITY_CHANGING_SPEED, 10.0f, 0.0f);
 			_handleValueChanging("spotlightPropertiesMenu", "intensityMinus", "intensity", intensity, -SPOTLIGHT_INTENSITY_CHANGING_SPEED, 10.0f, 0.0f);

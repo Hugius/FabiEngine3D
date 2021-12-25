@@ -3,7 +3,6 @@
 
 void Animation3dEditor::_updateCamera()
 {
-	// Check if third person view is enabled
 	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
 		// Update distance scrolling
@@ -35,7 +34,6 @@ void Animation3dEditor::_updateCamera()
 		_fe3d.gfx_setShadowReach(distance * 8.0f);
 	}
 
-	// Check if allowed by GUI
 	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Check if RMB pressed
@@ -53,7 +51,6 @@ void Animation3dEditor::_updateCamera()
 		}
 	}
 
-	// Disable third person view if necessary
 	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
 		if(_gui.getOverlay()->isFocused())
@@ -65,7 +62,6 @@ void Animation3dEditor::_updateCamera()
 
 void Animation3dEditor::_updateMiscellaneous()
 {
-	// Check if allowed by GUI
 	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Update reference model visibility
@@ -82,7 +78,6 @@ void Animation3dEditor::_updateMiscellaneous()
 		}
 	}
 
-	// Check if current animation active
 	if(!_currentAnimationID.empty())
 	{
 		// Retrieve current animation

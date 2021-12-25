@@ -3,7 +3,6 @@
 
 void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 {
-	// Extract variable name & equal sign
 	string words[2] = {"", ""};
 	unsigned int wordIndex = 0;
 	for(const auto& c : scriptLine.substr(EDIT_KEYWORD.size() + 1))
@@ -27,21 +26,18 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	string nameString = words[0];
 	string equalSignString = words[1];
 
-	// Check if variable name is missing
 	if(nameString.empty())
 	{
 		_throwScriptError("variable name missing!");
 		return;
 	}
 
-	// Check if equal string is missing
 	if(equalSignString != "=")
 	{
 		_throwScriptError("equal sign missing!");
 		return;
 	}
 
-	// Check if value is missing
 	auto minLineSize = (scriptLine.find('=') + 3);
 	if(scriptLine.size() < minLineSize)
 	{
@@ -49,20 +45,16 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		return;
 	}
 
-	// Extract value
 	string valueString = scriptLine.substr(minLineSize - 1);
 
-	// Prepare list access
 	bool isAccessingLeftList = false;
 	auto leftListIndex = _extractListIndexFromString(nameString, isAccessingLeftList);
 
-	// Check if any error was thrown
 	if(_hasThrownError)
 	{
 		return;
 	}
 
-	// Remove list accessing characters
 	if(isAccessingLeftList)
 	{
 		auto isOpeningBracketFound = find(nameString.begin(), nameString.end(), '[');
@@ -70,24 +62,20 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		nameString = nameString.substr(0, bracketIndex);
 	}
 
-	// Check if left variable existing
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
 		_throwScriptError("variable \"" + nameString + "\" not existing!");
 		return;
 	}
 
-	// Retrieve left variable
 	auto& leftVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
-	// Check if left variable is constant
 	if(leftVariable.isConstant())
 	{
 		_throwScriptError("CONST variables cannot be changed!");
 		return;
 	}
 
-	// Validate list access
 	unsigned int leftValueIndex = 0;
 	if(isAccessingLeftList)
 	{
@@ -102,14 +90,12 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		}
 	}
 
-	// Temporary values
 	bool isSingleVariable = (leftVariable.getType() == ScriptVariableType::SINGLE || isAccessingLeftList);
 	bool isStringVariable = (leftVariable.getValue(leftValueIndex).getType() == ScriptValueType::STRING);
 	bool isDecimalVariable = (leftVariable.getValue(leftValueIndex).getType() == ScriptValueType::DECIMAL);
 	bool isIntegerVariable = (leftVariable.getValue(leftValueIndex).getType() == ScriptValueType::INTEGER);
 	bool isBooleanVariable = (leftVariable.getValue(leftValueIndex).getType() == ScriptValueType::BOOLEAN);
 
-	// Determine value type
 	if(leftVariable.getType() == ScriptVariableType::MULTIPLE && _isListValue(valueString))
 	{
 		// Remove the ""

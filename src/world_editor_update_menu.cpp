@@ -5,10 +5,8 @@
 
 void WorldEditor::_updateMainMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuMain")
 	{
 		// Button management
@@ -117,10 +115,8 @@ void WorldEditor::_updateMainMenu()
 
 void WorldEditor::_updateChoiceMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuChoice")
 	{
 		// Button management

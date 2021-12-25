@@ -11,7 +11,6 @@ Sound3dPlayer::Sound3dPlayer()
 
 void Sound3dPlayer::update(vector<Sound3d>& sounds, Camera& camera)
 {
-	// Update sounds
 	for(auto& sound : sounds)
 	{
 		// Check if sound is started
@@ -51,7 +50,6 @@ void Sound3dPlayer::update(vector<Sound3d>& sounds, Camera& camera)
 		_updateSoundVolume(sound);
 	}
 
-	// Update channels
 	for(size_t i = 0; i < _channels.size(); i++)
 	{
 		// Check if sound stopped playing
@@ -122,10 +120,8 @@ void Sound3dPlayer::_updateSoundVolume(Sound3d& sound)
 
 const vector<unsigned int> Sound3dPlayer::_findChannels(Sound3d& sound) const
 {
-	// Temporary values
 	vector<unsigned int> channels;
 
-	// Find sound channels
 	for(size_t i = 0; i < _channels.size(); i++)
 	{
 		if(_channels[i] == sound.getID())
@@ -134,12 +130,10 @@ const vector<unsigned int> Sound3dPlayer::_findChannels(Sound3d& sound) const
 		}
 	}
 
-	// Find must never fail
 	if(channels.empty())
 	{
 		Logger::throwError("SoundPlayer::_findChannels");
 	}
 
-	// Return
 	return channels;
 }

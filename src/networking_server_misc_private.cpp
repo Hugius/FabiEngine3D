@@ -11,13 +11,11 @@ using std::launch;
 
 const bool NetworkingServer::_sendTcpMessage(SOCKET socket, const string& content, bool isReserved)
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingServer::_sendTcpMessage::1");
 	}
 
-	// Validate message content
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
 		Logger::throwError("NetworkingServer::_sendTcpMessage::2");
@@ -31,13 +29,10 @@ const bool NetworkingServer::_sendTcpMessage(SOCKET socket, const string& conten
 		Logger::throwError("NetworkingServer::_sendTcpMessage::4");
 	}
 
-	// Add a semicolon to indicate end of this message
 	string message = (content + ';');
 
-	// Send message to client
 	auto sendStatusCode = send(socket, message.c_str(), static_cast<int>(message.size()), 0);
 
-	// Check if sending went wrong
 	if(sendStatusCode == SOCKET_ERROR)
 	{
 		if(WSAGetLastError() == WSAECONNRESET || WSAGetLastError() == WSAECONNABORTED) // Client lost socket connection
@@ -60,13 +55,11 @@ const bool NetworkingServer::_sendTcpMessage(SOCKET socket, const string& conten
 
 const bool NetworkingServer::_sendUdpMessage(const string& clientIP, const string& clientPort, const string& content, bool isReserved) const
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingServer::_sendUdpMessage::1");
 	}
 
-	// Validate message content
 	if(find(content.begin(), content.end(), ';') != content.end())
 	{
 		Logger::throwError("NetworkingServer::_sendUdpMessage::2");
@@ -80,10 +73,8 @@ const bool NetworkingServer::_sendUdpMessage(const string& clientIP, const strin
 		Logger::throwError("NetworkingServer::_sendUdpMessage::4");
 	}
 
-	// Compose socket address
 	auto socketAddress = NetworkingUtils::composeSocketAddress(clientIP, clientPort);
 
-	// Send message to client
 	auto sendStatusCode = sendto(
 		_udpSocket, // UDP socket
 		content.c_str(), // Message content
@@ -92,7 +83,6 @@ const bool NetworkingServer::_sendUdpMessage(const string& clientIP, const strin
 		reinterpret_cast<sockaddr*>(&socketAddress), // Client address
 		sizeof(socketAddress)); // Client address length
 
-	// Check if sending went wrong
 	if(sendStatusCode == SOCKET_ERROR)
 	{
 		if(WSAGetLastError() == WSAENOBUFS) // Buffer full
@@ -152,7 +142,6 @@ const SOCKET NetworkingServer::_waitForClientConnection(SOCKET socket) const
 
 tuple<int, int, long long, string> NetworkingServer::_waitForTcpMessage(SOCKET socket) const
 {
-	// Retrieve bytes & size
 	char buffer[NetworkingUtils::TCP_BUFFER_BYTES];
 	int bufferLength = static_cast<int>(NetworkingUtils::TCP_BUFFER_BYTES);
 	auto receiveStatusCode = recv(socket, buffer, bufferLength, 0);
@@ -173,16 +162,13 @@ tuple<int, int, long long, string> NetworkingServer::_waitForTcpMessage(SOCKET s
 
 tuple<int, int, string, string, string> NetworkingServer::_receiveUdpMessage(SOCKET socket) const
 {
-	// Data store
 	char buffer[NetworkingUtils::UDP_BUFFER_BYTES];
 	int bufferLength = static_cast<int>(NetworkingUtils::UDP_BUFFER_BYTES);
 	sockaddr_in sourceAddress = sockaddr_in();
 	int sourceAddressLength = sizeof(sourceAddress);
 
-	// Receive data
 	auto receiveResult = recvfrom(socket, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
 
-	// Extract address
 	auto IP = NetworkingUtils::extractAddressIP(&sourceAddress);
 	auto port = NetworkingUtils::extractAddressPort(&sourceAddress);
 

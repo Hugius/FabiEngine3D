@@ -14,25 +14,20 @@ void BlurRenderer::resetCaptureBuffer()
 
 void BlurRenderer::bind()
 {
-	// Bind shader
 	_shader.bind();
 
-	// Shader uniforms
 	_shader.uploadUniform("u_diffuseMap", 0);
 }
 
 void BlurRenderer::unbind()
 {
-	// Unbind shader
 	_shader.unbind();
 }
 
 const TextureID BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, TextureID texture, unsigned int blurCount, float intensity, BlurDirection direction)
 {
-	// Shader uniforms
 	_shader.uploadUniform("u_intensity", intensity);
 
-	// Blur the texture horizontally
 	if((direction == BlurDirection::HORIZONTAL) || (direction == BlurDirection::BOTH))
 	{
 		// Shader uniforms
@@ -48,7 +43,6 @@ const TextureID BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, 
 		}
 	}
 
-	// Blur the texture vertically
 	if((direction == BlurDirection::VERTICAL) || (direction == BlurDirection::BOTH))
 	{
 		// Shader uniforms
@@ -69,23 +63,17 @@ const TextureID BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, 
 
 void BlurRenderer::_render(const shared_ptr<ImageEntity> entity, TextureID texture)
 {
-	// Temporary values
 	const auto buffer = entity->getRenderBuffer();
 
-	// Bind textures
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	// Bind buffer
 	glBindVertexArray(buffer->getVAO());
 
-	// Render
 	glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 
-	// Unbind buffer
 	glBindVertexArray(0);
 
-	// Unbind textures
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }

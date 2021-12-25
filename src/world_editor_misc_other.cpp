@@ -9,7 +9,6 @@ using std::clamp;
 
 void WorldEditor::clearEditorWorld()
 {
-	// Graphics
 	if(_fe3d.gfx_isAmbientLightingEnabled())
 	{
 		_fe3d.gfx_disableAmbientLighting(true);
@@ -48,25 +47,21 @@ void WorldEditor::clearEditorWorld()
 	_fe3d.gfx_setPlanarRefractionQuality(Config::MIN_REFRACTION_QUALITY);
 	_fe3d.gfx_setPlanarReflectionHeight(0.0);
 
-	// Sky entity
 	if(!_loadedSkyID.empty())
 	{
 		_fe3d.sky_delete(_loadedSkyID);
 	}
 
-	// Terrain entity
 	if(!_loadedTerrainID.empty())
 	{
 		_fe3d.terrain_delete(_loadedTerrainID);
 	}
 
-	// Water entity
 	if(!_loadedWaterID.empty())
 	{
 		_fe3d.water_delete(_loadedWaterID);
 	}
 
-	// Model entities
 	for(const auto& [ID, templateID] : _loadedModelIDs)
 	{
 		// Delete model
@@ -80,7 +75,6 @@ void WorldEditor::clearEditorWorld()
 		}
 	}
 
-	// Billboard entities
 	for(const auto& [ID, templateID] : _loadedBillboardIDs)
 	{
 		// Delete billboard
@@ -94,7 +88,6 @@ void WorldEditor::clearEditorWorld()
 		}
 	}
 
-	// Pointlight entities
 	for(const auto& ID : _loadedPointlightIDs)
 	{
 		// Delete pointlight
@@ -107,7 +100,6 @@ void WorldEditor::clearEditorWorld()
 		}
 	}
 
-	// Spotlight entities
 	for(const auto& ID : _loadedSpotlightIDs)
 	{
 		// Delete spotlight
@@ -120,7 +112,6 @@ void WorldEditor::clearEditorWorld()
 		}
 	}
 
-	// Reflection entities
 	for(const auto& ID : _loadedReflectionIDs)
 	{
 		// Delete reflection
@@ -133,7 +124,6 @@ void WorldEditor::clearEditorWorld()
 		}
 	}
 
-	// Sounds
 	for(const auto& [ID, templateID] : _loadedSoundIDs)
 	{
 		// Delete sound
@@ -146,7 +136,6 @@ void WorldEditor::clearEditorWorld()
 		}
 	}
 
-	// Miscellaneous
 	_loadedWorldID = "";
 	_loadedSkyID = "";
 	_loadedTerrainID = "";
@@ -181,15 +170,12 @@ void WorldEditor::setCurrentProjectID(const string& ID)
 
 const vector<string> WorldEditor::_getWorldIDs() const
 {
-	// Temporary values
 	vector<string> worldIDs;
 
-	// Compose directory path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "worlds\\editor\\");
 
-	// Check if worlds directory exists
 	if(Tools::isDirectoryExisting(directoryPath))
 	{
 		// Get all world IDs
@@ -209,12 +195,10 @@ const vector<string> WorldEditor::_getWorldIDs() const
 
 void WorldEditor::_deleteWorldFile(const string& ID)
 {
-	// Compose full file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "worlds\\editor\\" + ID + ".fe3d");
 
-	// Check if world file is still existing
 	if(Tools::isFileExisting(filePath))
 	{
 		Tools::deleteFile(filePath);
@@ -228,10 +212,8 @@ void WorldEditor::_deleteWorldFile(const string& ID)
 void WorldEditor::_handleValueChanging(const string& screenID, string buttonID, string writeFieldID, float& value, float adder,
 									   float multiplier, float minimum, float maximum)
 {
-	// Temporary values
 	auto writeField = _gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWriteField(writeFieldID);
 
-	// Plus & minus button handling
 	if(_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
 	{
 		if(_gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getButton(buttonID)->isHovered())
@@ -240,13 +222,11 @@ void WorldEditor::_handleValueChanging(const string& screenID, string buttonID, 
 		}
 	}
 
-	// WriteField pre-update
 	if(!writeField->isActive())
 	{
 		writeField->changeTextContent(to_string(static_cast<int>(value * multiplier)));
 	}
 
-	// WriteField handling
 	if(writeField->getTextContent().empty())
 	{
 		value = 0.0f; // Reset value to default
@@ -260,10 +240,8 @@ void WorldEditor::_handleValueChanging(const string& screenID, string buttonID, 
 		}
 	}
 
-	// Clamp value range
 	value = clamp(value, minimum, maximum);
 
-	// WriteField post-update
 	if(!writeField->isActive())
 	{
 		writeField->changeTextContent(to_string(static_cast<int>(value * multiplier)));

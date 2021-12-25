@@ -5,13 +5,11 @@
 
 const bool ScriptInterpreter::_isListValue(const string& valueString) const
 {
-	// Check if value has enough characters
 	if(valueString.empty())
 	{
 		return false;
 	}
 
-	// Check if value is surrounded by braces
 	if(valueString[0] != '{' || valueString.back() != '}')
 	{
 		return false;
@@ -22,32 +20,27 @@ const bool ScriptInterpreter::_isListValue(const string& valueString) const
 
 const bool ScriptInterpreter::_isStringValue(const string& valueString) const
 {
-	// Check if value is empty
 	if(valueString.empty())
 	{
 		return false;
 	}
 
-	// Check if value is a valid string
 	return (valueString.size() >= 2) && (valueString[0] == '"') && (valueString.back() == '"');
 }
 
 const bool ScriptInterpreter::_isDecimalValue(const string& valueString) const
 {
-	// Check if value has characters at all
 	if(valueString.empty())
 	{
 		return false;
 	}
 
-	// Check if value is perhaps negative
 	unsigned int startingIndex = 0;
 	if(valueString[0] == '-')
 	{
 		startingIndex = 1;
 	}
 
-	// Validate every character
 	unsigned dots = 0;
 	for(size_t i = startingIndex; i < valueString.size(); i++)
 	{
@@ -63,26 +56,22 @@ const bool ScriptInterpreter::_isDecimalValue(const string& valueString) const
 		}
 	}
 
-	// Check if value is a valid decimal
 	return (valueString.size() >= 3) && (isdigit(valueString[startingIndex]) && isdigit(valueString.back())) && (dots == 1);
 }
 
 const bool ScriptInterpreter::_isIntegerValue(const string& valueString) const
 {
-	// Check if value has characters at all
 	if(valueString.empty())
 	{
 		return false;
 	}
 
-	// Check if value is perhaps negative
 	unsigned int startingIndex = 0;
 	if(valueString[0] == '-')
 	{
 		startingIndex = 1;
 	}
 
-	// Check if every character is a digit
 	for(size_t i = startingIndex; i < valueString.size(); i++)
 	{
 		if(!isdigit(valueString[i]))
@@ -101,7 +90,6 @@ const bool ScriptInterpreter::_isBooleanValue(const string& valueString) const
 
 const int ScriptInterpreter::_extractListIndexFromString(const string& valueString, bool& isAccessingList)
 {
-	// Check if brackets are present
 	auto isOpeningBracketFound = find(valueString.begin(), valueString.end(), '[');
 	auto closingBracketFound = find(valueString.begin(), valueString.end(), ']');
 	if(isOpeningBracketFound == valueString.end() || closingBracketFound == valueString.end())
@@ -109,7 +97,6 @@ const int ScriptInterpreter::_extractListIndexFromString(const string& valueStri
 		return -1;
 	}
 
-	// Check if brackets are in the right place
 	auto openingBracketIndex = static_cast<unsigned int>(distance(valueString.begin(), isOpeningBracketFound));
 	auto closingBracketIndex = static_cast<unsigned int>(distance(valueString.begin(), isOpeningBracketFound));
 	if((openingBracketIndex == 0) || (closingBracketIndex == 0) || (openingBracketIndex > closingBracketIndex))
@@ -117,7 +104,6 @@ const int ScriptInterpreter::_extractListIndexFromString(const string& valueStri
 		return -1;
 	}
 
-	// Validate list index
 	string indexString = valueString.substr(static_cast<size_t>(openingBracketIndex + 1));
 	indexString.pop_back();
 	if(_isIntegerValue(indexString))
@@ -174,7 +160,6 @@ const bool ScriptInterpreter::_validateMouseInputString(const string& inputStrin
 
 const string ScriptInterpreter::_limitIntegerString(const string& valueString) const
 {
-	// Check if negative value
 	if(valueString[0] == '-')
 	{
 		// Cannot be less than -999999999
@@ -197,11 +182,9 @@ const string ScriptInterpreter::_limitIntegerString(const string& valueString) c
 
 const string ScriptInterpreter::_limitDecimalString(const string& valueString) const
 {
-	// Cut everything after the dot
 	auto dotIndex = static_cast<unsigned int>(valueString.find('.'));
 	string intString = valueString.substr(0, dotIndex);
 
-	// Check if negative value
 	if(valueString[0] == '-')
 	{
 		// Cannot be less than -999999999

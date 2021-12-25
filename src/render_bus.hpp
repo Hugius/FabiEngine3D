@@ -12,7 +12,6 @@ using std::string;
 class RenderBus final
 {
 public:
-	// VOID
 	void setPrimaryWorldMap(TextureID value);
 	void setSecondaryWorldMap(TextureID value);
 	void setPlanarReflectionMap(TextureID value);
@@ -92,19 +91,15 @@ public:
 	void setBloomType(BloomType value);
 	void setGuiDepth(unsigned int value);
 
-	// STRING
 	const string& getCursorEntityID() const;
 	const string& getLensFlareMapPath() const;
 
-	// MAT44
 	const mat44 getViewMatrix() const;
 	const mat44 getProjectionMatrix() const;
 	const mat44 getShadowMatrix() const;
 
-	// FVEC4
 	const fvec4 getClippingPlane() const;
 
-	// FVEC3
 	const fvec3 getCameraPosition() const;
 	const fvec3 getCameraFront() const;
 	const fvec3 getAmbientLightingColor() const;
@@ -115,10 +110,8 @@ public:
 	const fvec3 getFogColor() const;
 	const fvec3 getFlareSourcePosition() const;
 
-	// FVEC2
 	const fvec2 getFlareSourceUV() const;
 
-	// FLOAT
 	const float getAmbientLightingIntensity() const;
 	const float getDirectionalLightingIntensity() const;
 	const float getFogMinDistance() const;
@@ -142,7 +135,6 @@ public:
 	const float getMotionBlurMixValue() const;
 	const float getSkyMixValue() const;
 
-	// UNSIGNED INT
 	const unsigned int getBloomQuality() const;
 	const unsigned int getDofQuality() const;
 	const unsigned int getMotionBlurQuality() const;
@@ -154,7 +146,6 @@ public:
 	const unsigned int getTriangleCount() const;
 	const unsigned int getGuiDepth() const;
 
-	// BOOL
 	const bool isReflectionsEnabled() const;
 	const bool isAntiAliasingEnabled() const;
 	const bool isAmbientLightingEnabled() const;
@@ -172,7 +163,6 @@ public:
 	const bool isTriangleCountingEnabled() const;
 	const bool isDofDynamic() const;
 
-	// MISCELLANEOUS
 	const TextureID getPrimaryWorldMap() const;
 	const TextureID getSecondaryWorldMap() const;
 	const TextureID getPlanarReflectionMap() const;
@@ -188,7 +178,6 @@ public:
 	const BloomType getBloomType() const;
 
 private:
-	// Textures
 	TextureID _primaryWorldMap = 0;
 	TextureID _secondaryWorldMap = 0;
 	TextureID _planarReflectionMap = 0;
@@ -202,19 +191,15 @@ private:
 	TextureID _finalWorldMap = 0;
 	TextureID _motionBlurMap = 0;
 
-	// STRING
 	string _cursorEntityID = "";
 	string _lensFlareMapPath = "";
 
-	// MAT44
 	mat44 _viewMatrix = mat44(1.0f);
 	mat44 _projectionMatrix = mat44(1.0f);
 	mat44 _shadowMatrix = mat44(1.0f);
 
-	// FVEC4
 	fvec4 _clippingPlane = fvec4(0.0f);
 
-	// FVEC3
 	fvec3 _cameraPosition = fvec3(0.0f);
 	fvec3 _cameraFront = fvec3(0.0f);
 	fvec3 _directionalLightPosition = fvec3(0.0f);
@@ -225,10 +210,8 @@ private:
 	fvec3 _directionalLightColor = fvec3(1.0f);
 	fvec3 _fogColor = fvec3(1.0f);
 
-	// FVEC2
 	fvec2 _flareSourceUV = fvec2(0.0f);
 
-	// FLOAT
 	float _ambientLightIntensity = 1.0f;
 	float _directionalLightIntensity = 1.0f;
 	float _bloomIntensity = 1.0f;
@@ -252,7 +235,6 @@ private:
 	float _motionBlurMixValue = 0.0f;
 	float _skyMixValue = 0.0f;
 
-	// UNSIGNED INT
 	unsigned int _bloomQuality = Config::MIN_BLOOM_QUALITY;
 	unsigned int _dofQuality = Config::MIN_DOF_QUALITY;
 	unsigned int _motionBlurQuality = Config::MIN_MOTION_BLUR_QUALITY;
@@ -264,7 +246,6 @@ private:
 	unsigned int _triangleCount = 0;
 	unsigned int _guiDepth = 0;
 
-	// BOOL
 	bool _isReflectionsEnabled = true;
 	bool _isAntiAliasingEnabled = false;
 	bool _isAmbientLightingEnabled = false;
@@ -282,6 +263,5 @@ private:
 	bool _isTriangleCountingEnabled = false;
 	bool _isDofDynamic = false;
 
-	// MISCELLANEOUS
 	BloomType _bloomType = BloomType::EVERYTHING;
 };

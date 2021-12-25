@@ -10,7 +10,6 @@ class Animation3dEditor final
 public:
 	Animation3dEditor(FabiEngine3D& fe3d, GuiManager& gui, ModelEditor& modelEditor);
 
-	// VOID
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
@@ -23,21 +22,16 @@ public:
 	void stopModelAnimations();
 	void setModelAnimationSpeed(const string& animationID, const string& modelID, float value);
 
-	// STRING
 	const vector<string> getAnimationIDs() const;
 	const vector<string> getStartedModelAnimationIDs() const;
 	const vector<string> getStartedModelAnimationIDs(const string& modelID) const;
 
-	// FLOAT
 	const float getModelAnimationSpeed(const string& animationID, const string& modelID) const;
 
-	// INT
 	const int getModelAnimationPlayCount(const string& animationID, const string& modelID) const;
 
-	// UNSIGNED INT
 	const unsigned int getModelAnimationFrameIndex(const string& animationID, const string& modelID) const;
 
-	// BOOL
 	const bool isLoaded() const;
 	const bool isAnimationExisting(const string& ID) const;
 	const bool isModelAnimationStarted(const string& animationID, const string& modelID) const;
@@ -48,7 +42,6 @@ public:
 	const bool saveToFile() const;
 
 private:
-	// VOID
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateMainMenu();
@@ -62,14 +55,11 @@ private:
 	void _updateMiscellaneous();
 	void _deleteAnimation(const string& ID);
 
-	// BOOL
 	const bool _hasReachedFloat(float first, float second, float speed) const;
 	const bool _comparePartIDs(vector<string> first, vector<string> second) const;
 
-	// MISCELLANEOUS
 	shared_ptr<Animation3d> _getAnimation(const string& ID) const;
 
-	// STRING
 	set<pair<string, string>> _modelAnimationsToStop;
 	set<pair<string, string>> _modelAnimationsToStart;
 	string _currentProjectID = "";
@@ -78,10 +68,8 @@ private:
 	string _hoveredModelID = "";
 	string _hoveredPartID = "";
 
-	// FVEC3
 	fvec3 _cameraLookatPosition = fvec3(0.0f);
 
-	// FLOAT
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 	static inline const float CURSOR_SENSITIVITY = 0.025f;
@@ -97,21 +85,17 @@ private:
 	static inline const float CAMERA_LOOKAT_SPEED = 0.025f;
 	static inline const float PART_HIGHLIGHT_SPEED = 0.025f;
 
-	// INT
 	int _selectedPartHighlightDirection = 1;
 
-	// UNSIGNED INT
 	static inline const unsigned int MAX_FRAME_COUNT = 100;
 	unsigned int _currentFrameIndex = 0;
 
-	// BOOL
 	bool _mustUpdateCurrentFramePreview = true;
 	bool _isCreatingAnimation = false;
 	bool _isChoosingAnimation = false;
 	bool _isDeletingAnimation = false;
 	bool _isEditorLoaded = false;
 
-	// MISCELLANEOUS
 	map<pair<string, string>, Animation3d> _startedModelAnimations;
 	vector<shared_ptr<Animation3d>> _animations;
 	FabiEngine3D& _fe3d;

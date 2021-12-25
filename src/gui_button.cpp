@@ -37,10 +37,8 @@ void GuiButton::update(bool isHoverable)
 
 void GuiButton::setVisible(bool isVisible)
 {
-	// Rectangle
 	_rectangle->setVisible(isVisible);
 
-	// Text
 	if(_textField != nullptr)
 	{
 		_textField->setVisible(isVisible);
@@ -51,7 +49,6 @@ void GuiButton::_updateHovering(bool isHoverable)
 {
 	_isHovered = false;
 
-	// Check if button is visible anyway
 	if(_fe3d.image_isVisible(_rectangle->getEntityID()))
 	{
 		// Convert dimensions to same space
@@ -148,7 +145,6 @@ void GuiButton::_updateHovering(bool isHoverable)
 		}
 	}
 
-	// Set cursor texture to pointing
 	if(_isHovered)
 	{
 		_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_pointing.png");
@@ -187,7 +183,6 @@ void GuiButton::changeTextContent(const string& content)
 {
 	auto textEntityID = getTextField()->getEntityID();
 
-	// Check if text content changed
 	if(content != _fe3d.text_getContent(textEntityID))
 	{
 		// Update TextField

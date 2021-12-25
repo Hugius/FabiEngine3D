@@ -2,19 +2,15 @@
 
 void WorldEditor::_selectModel(const string& ID)
 {
-	// Set ID
 	_selectedModelID = ID;
 
-	// Change cursor
 	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_pointing.png");
 
-	// Enable wireframed rendering
 	for(const auto& partID : _fe3d.model_getPartIDs(_selectedModelID))
 	{
 		_fe3d.model_setWireframed(_selectedModelID, partID, true);
 	}
 
-	// Check if nothing is active
 	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		// Removing the unique number from the modelID and updating the text content
@@ -29,16 +25,12 @@ void WorldEditor::_selectModel(const string& ID)
 
 void WorldEditor::_selectBillboard(const string& ID)
 {
-	// Set ID
 	_selectedBillboardID = ID;
 
-	// Change cursor
 	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_pointing.png");
 
-	// Enable wireframed rendering
 	_fe3d.billboard_setWireframed(_selectedBillboardID, true);
 
-	// Check if nothing is active
 	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		// Removing the unique number from the billboardID and updating the text content
@@ -53,13 +45,10 @@ void WorldEditor::_selectBillboard(const string& ID)
 
 void WorldEditor::_selectSound(const string& ID)
 {
-	// Set ID
 	_selectedSpeakerID = ("@@speaker_" + ID);
 
-	// Change cursor
 	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_pointing.png");
 
-	// Check if nothing is active
 	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		// Removing the unique number from the soundID and updating the text content
@@ -74,28 +63,22 @@ void WorldEditor::_selectSound(const string& ID)
 
 void WorldEditor::_selectPointlight(const string& ID)
 {
-	// Set ID
 	_selectedLampID = ("@@lamp_" + ID);
 
-	// Change cursor
 	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_pointing.png");
 }
 
 void WorldEditor::_selectSpotlight(const string& ID)
 {
-	// Set ID
 	_selectedTorchID = ("@@torch_" + ID);
 
-	// Change cursor
 	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_pointing.png");
 }
 
 void WorldEditor::_selectReflection(const string& ID)
 {
-	// Set ID
 	_selectedCameraID = ("@@camera_" + ID);
 
-	// Change cursor
 	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_pointing.png");
 }
 

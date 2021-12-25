@@ -24,7 +24,6 @@ const unsigned int ScriptInterpreter::_countLeadingSpaces(const string& scriptLi
 {
 	int countedSpaces = 0;
 
-	// Iterate through characters
 	for(size_t i = 0; i < scriptLineText.size(); i++)
 	{
 		// Check if current character is a space
@@ -52,7 +51,6 @@ const unsigned int ScriptInterpreter::_countLeadingSpaces(const string& scriptLi
 
 const bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const string& scriptLineText, unsigned int& scopeDepth)
 {
-	// Temporary values
 	const unsigned int currentLineScopeDepth = (countedSpaces / SPACES_PER_INDENT);
 	const bool isScopeDepthInvalid = (currentLineScopeDepth != (scopeDepth + static_cast<int>(_mustIgnoreDeeperScope)));
 
@@ -102,18 +100,15 @@ const bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, c
 
 const bool ScriptInterpreter::_validateSavesDirectory() const
 {
-	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("ScriptInterpreter::_validateSavesDirectory");
 	}
 
-	// Compose directory path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 
-	// Check if saves directory still exists
 	if(!Tools::isDirectoryExisting(directoryPath))
 	{
 		Logger::throwWarning("Project corrupted: directory `saves\\` missing!");
@@ -132,7 +127,6 @@ void ScriptInterpreter::_throwScriptError(const string& message)
 
 void ScriptInterpreter::_checkEngineWarnings(unsigned int lastLoggerMessageCount)
 {
-	// Check if any new messages were logged
 	auto messageCount = Logger::getMessageCount();
 	if(messageCount > lastLoggerMessageCount)
 	{

@@ -284,23 +284,18 @@ const fvec3 Camera::getUpVector() const
 
 void Camera::updateMatrices()
 {
-	// Lookat front vector
 	_frontVector.x = (cos(Math::convertToRadians(_yaw)) * cos(Math::convertToRadians(_pitch)));
 	_frontVector.y = sin(Math::convertToRadians(_pitch));
 	_frontVector.z = (sin(Math::convertToRadians(_yaw)) * cos(Math::convertToRadians(_pitch)));
 	_frontVector = Math::normalize(_frontVector);
 
-	// Calculate the view matrix input
 	_rightVector = Math::calculateCrossProduct(_frontVector, _upVector);
 	_rightVector = Math::normalize(_rightVector);
 
-	// View matrix
 	_viewMatrix = Math::createViewMatrix(_position, (_position + _frontVector), _upVector);
 
-	// Projection matrix
 	_projectionMatrix = Math::createPerspectiveProjectionMatrix(Math::convertToRadians(_fov), _aspectRatio, _nearDistance, _farDistance);
 
-	// Update render bus
 	_renderBus.setCameraYaw(_yaw);
 	_renderBus.setCameraPitch(_pitch);
 	_renderBus.setCameraFront(_frontVector);

@@ -4,10 +4,8 @@
 
 void TerrainEditor::_updateMainMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "terrainEditorMenuMain")
 	{
 		// Button management
@@ -61,10 +59,8 @@ void TerrainEditor::_updateMainMenu()
 
 void TerrainEditor::_updateChoiceMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "terrainEditorMenuChoice")
 	{
 		// Temporary values

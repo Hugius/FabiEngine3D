@@ -8,17 +8,14 @@ using std::make_shared;
 
 pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& filePath)
 {
-	// Declare variables
 	vector<shared_ptr<MeshPart>> meshParts;
 	vector<fvec3> temp_positions;
 	vector<fvec2> temp_uvs;
 	vector<fvec3> temp_normals;
 	string selectedPartID = "";
 
-	// Get application root directory
 	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 
-	// Load .obj file
 	string path = rootDirectoryPath + filePath;
 	FILE* file = fopen(path.c_str(), "r");
 	if(!Tools::isFileExisting(path) || filePath.empty())
@@ -27,7 +24,6 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 		return make_pair(warningMessage, meshParts);
 	}
 
-	// Fill the vector with the data from the file
 	while(true)
 	{
 		// Scan line to string
@@ -143,7 +139,6 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 		}
 	}
 
-	// Calculate tangents for normal mapping
 	for(const auto& meshPart : meshParts)
 	{
 		for(size_t i = 0; i < meshPart->getVertices().size(); i += 3)
@@ -177,13 +172,11 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 		}
 	}
 
-	// Validate mesh parts
 	if(meshParts.empty())
 	{
 		string warningMessage = string("Incorrect or too little content in mesh file: \"" + filePath + "\"");
 		return make_pair(warningMessage, meshParts);
 	}
 
-	// Return new mesh parts
 	return make_pair("", meshParts);
 }

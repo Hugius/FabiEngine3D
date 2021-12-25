@@ -5,10 +5,8 @@
 
 void ModelEditor::_updateMainAabbMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "modelEditorMenuAabbMain")
 	{
 		// Button management
@@ -51,10 +49,8 @@ void ModelEditor::_updateMainAabbMenu()
 
 void ModelEditor::_updateChoiceAabbMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "modelEditorMenuAabbChoice")
 	{
 		// Temporary values

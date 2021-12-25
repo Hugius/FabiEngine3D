@@ -19,10 +19,8 @@ const float Math::calculateAngleDifference(float firstAngle, float secondAngle)
 
 const float Math::limitAngle(float angle)
 {
-	// 360 degrees max
 	angle = fmodf(angle, 360.0f);
 
-	// Make the angle non-negative
 	if(angle < 0.0f)
 	{
 		return (360.0f - fabsf(angle));

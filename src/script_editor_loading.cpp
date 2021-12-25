@@ -12,21 +12,17 @@ using std::istringstream;
 
 const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 {
-	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("ScriptEditor::loadScriptsFromFile");
 	}
 
-	// Clear last script
 	_script.reset();
 
-	// Compose directory path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "scripts\\");
 
-	// Warning checking
 	if(!Tools::isDirectoryExisting(directoryPath))
 	{
 		if(isLoggingEnabled)
@@ -36,7 +32,6 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 		return false;
 	}
 
-	// Retrieve all fileNames in the scripts directory
 	for(const auto& fileName : Tools::getFilesFromDirectory(directoryPath))
 	{
 		// Extract extension
@@ -75,15 +70,12 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 		}
 	}
 
-	// Logging
 	if(isLoggingEnabled)
 	{
 		Logger::throwInfo("Script data loaded!");
 	}
 
-	// Miscellaneous
 	_isScriptLoadedFromFile = true;
 
-	// Return
 	return true;
 }

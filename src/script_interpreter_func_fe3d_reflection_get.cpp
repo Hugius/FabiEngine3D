@@ -122,12 +122,10 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 		return false;
 	}
 
-	// Cannot execute when server is running
 	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:reflection` functionality as networking server!");
 	}
 
-	// Return
 	return true;
 }

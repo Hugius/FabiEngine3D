@@ -34,14 +34,12 @@ ScriptExecutor::ScriptExecutor(FabiEngine3D& fe3d,
 
 void ScriptExecutor::load()
 {
-	// Start script execution & run initialization scripts
 	_scriptInterpreter.load();
 	_scriptInterpreter.executeInitializeScripts();
 	_isStarted = true;
 	_isRunning = true;
 	_mustSkipUpdate = true;
 
-	// Check for errors
 	_validateExecution();
 }
 

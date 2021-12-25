@@ -15,7 +15,6 @@ struct ModelEntityPart final
 
 	}
 
-	// STRING
 	const string ID;
 	string diffuseMapPath = "";
 	string emissionMapPath = "";
@@ -23,10 +22,8 @@ struct ModelEntityPart final
 	string reflectionMapPath = "";
 	string normalMapPath = "";
 
-	// MAT44
 	mat44 transformationMatrix = mat44(1.0f);
 
-	// FVEC3
 	fvec3 position = fvec3(0.0f);
 	fvec3 rotation = fvec3(0.0f);
 	fvec3 rotationOrigin = fvec3(0.0f);
@@ -37,7 +34,6 @@ struct ModelEntityPart final
 	fvec3 color = fvec3(1.0f);
 	fvec3 wireframeColor = fvec3(1.0f);
 
-	// FLOAT
 	float positionTargetSpeed = 0.0f;
 	float rotationTargetSpeed = 0.0f;
 	float sizeTargetSpeed = 0.0f;
@@ -49,12 +45,10 @@ struct ModelEntityPart final
 	float emissionIntensity = 1.0f;
 	float textureRepeat = 1.0f;
 
-	// BOOL
 	bool isSpecular = false;
 	bool isReflective = false;
 	bool isWireframed = false;
 
-	// MISCELLANEOUS
 	shared_ptr<RenderBuffer> renderBuffer = nullptr;
 	TextureID diffuseMap = 0;
 	TextureID emissionMap = 0;

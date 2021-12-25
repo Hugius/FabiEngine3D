@@ -8,7 +8,6 @@ using std::clamp;
 
 void ImageEntity::updateTransformation()
 {
-	// Position target
 	if(_position != _positionTarget)
 	{
 		// Update position
@@ -26,7 +25,6 @@ void ImageEntity::updateTransformation()
 		}
 	}
 
-	// Rotation target
 	if(_rotation != _rotationTarget)
 	{
 		// Update rotation
@@ -43,7 +41,6 @@ void ImageEntity::updateTransformation()
 		}
 	}
 
-	// Size target
 	if(_size != _sizeTarget)
 	{
 		// Update size

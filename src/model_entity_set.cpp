@@ -13,7 +13,6 @@ void ModelEntity::createPart(const string& ID)
 
 void ModelEntity::updateTransformation()
 {
-	// Base position target
 	if(_basePosition != _basePositionTarget)
 	{
 		auto speedMultiplier = Math::normalize(_basePositionTarget - _basePosition);
@@ -21,7 +20,6 @@ void ModelEntity::updateTransformation()
 		_correctPositionTarget(_basePosition, _basePositionTarget, _basePositionTargetSpeed);
 	}
 
-	// Base rotation target
 	if(_baseRotation != _baseRotationTarget)
 	{
 		auto difference = Math::calculateDifference(_baseRotation, _baseRotationTarget);
@@ -36,7 +34,6 @@ void ModelEntity::updateTransformation()
 		_correctRotationTarget(_baseRotation, _baseRotationTarget, _baseRotationTargetSpeed);
 	}
 
-	// Base size target
 	if(_baseSize != _baseSizeTarget)
 	{
 		auto speedMultiplier = Math::normalize(_baseSizeTarget - _baseSize);
@@ -44,7 +41,6 @@ void ModelEntity::updateTransformation()
 		_correctSizeTarget(_baseSize, _baseSizeTarget, _baseSizeTargetSpeed);
 	}
 
-	// Iterate through parts
 	for(auto& part : _parts)
 	{
 		// Part position target
@@ -479,19 +475,16 @@ void ModelEntity::setEmissionIntensity(const string& partID, float value)
 
 void ModelEntity::_correctPositionTarget(fvec3& current, fvec3 target, float speed)
 {
-	// Correct X
 	if(fabsf(target.x - current.x) <= speed)
 	{
 		current.x = target.x;
 	}
 
-	// Correct Y
 	if(fabsf(target.y - current.y) <= speed)
 	{
 		current.y = target.y;
 	}
 
-	// Correct Z
 	if(fabsf(target.z - current.z) <= speed)
 	{
 		current.z = target.z;
@@ -500,22 +493,18 @@ void ModelEntity::_correctPositionTarget(fvec3& current, fvec3 target, float spe
 
 void ModelEntity::_correctRotationTarget(fvec3& current, fvec3 target, float speed)
 {
-	// Correct current
 	current = fvec3(Math::limitAngle(current.x), Math::limitAngle(current.y), Math::limitAngle(current.z));
 
-	// Correct X
 	if(Math::calculateAngleDifference(current.x, target.x) <= speed)
 	{
 		current.x = target.x;
 	}
 
-	// Correct Y
 	if(Math::calculateAngleDifference(current.y, target.y) <= speed)
 	{
 		current.y = target.y;
 	}
 
-	// Correct Z
 	if(Math::calculateAngleDifference(current.z, target.z) <= speed)
 	{
 		current.z = target.z;
@@ -524,22 +513,18 @@ void ModelEntity::_correctRotationTarget(fvec3& current, fvec3 target, float spe
 
 void ModelEntity::_correctSizeTarget(fvec3& current, fvec3 target, float speed)
 {
-	// Correct current
 	current = fvec3(max(0.0f, current.x), max(0.0f, current.y), max(0.0f, current.z));
 
-	// Correct X
 	if(fabsf(target.x - current.x) <= speed)
 	{
 		current.x = target.x;
 	}
 
-	// Correct Y
 	if(fabsf(target.y - current.y) <= speed)
 	{
 		current.y = target.y;
 	}
 
-	// Correct Z
 	if(fabsf(target.z - current.z) <= speed)
 	{
 		current.z = target.z;

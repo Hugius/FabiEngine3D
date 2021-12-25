@@ -6,10 +6,8 @@ using std::to_string;
 
 void TerrainEntityColorRenderer::bind()
 {
-	// Bind shader
 	_shader.bind();
 
-	// Shader uniforms
 	_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
 	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_shadowMatrix", _renderBus.getShadowMatrix());
@@ -43,31 +41,25 @@ void TerrainEntityColorRenderer::bind()
 	_shader.uploadUniform("u_greenNormalMap", 8);
 	_shader.uploadUniform("u_blueNormalMap", 9);
 
-	// Bind textures
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _renderBus.getShadowMap());
 
-	// Enable depth
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 }
 
 void TerrainEntityColorRenderer::unbind()
 {
-	// Unbind textures
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	// Disable depth
 	glDisable(GL_DEPTH_TEST);
 
-	// Unbind shader
 	_shader.unbind();
 }
 
 void TerrainEntityColorRenderer::processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>>& entities)
 {
-	// Save visible lights
 	vector<shared_ptr<PointlightEntity>> visibleEntities;
 	for(const auto& [keyID, entity] : entities)
 	{
@@ -77,7 +69,6 @@ void TerrainEntityColorRenderer::processPointlightEntities(const unordered_map<s
 		}
 	}
 
-	// Upload lights
 	for(size_t i = 0; i < visibleEntities.size(); i++)
 	{
 		_shader.uploadUniform("u_pointlightPositions[" + to_string(i) + "]", visibleEntities[i]->getPosition());
@@ -87,13 +78,11 @@ void TerrainEntityColorRenderer::processPointlightEntities(const unordered_map<s
 		_shader.uploadUniform("u_pointlightShapes[" + to_string(i) + "]", static_cast<int>(visibleEntities[i]->getShape()));
 	}
 
-	// Upload pointlight count
 	_shader.uploadUniform("u_pointlightCount", static_cast<int>(visibleEntities.size()));
 }
 
 void TerrainEntityColorRenderer::processSpotlightEntities(const unordered_map<string, shared_ptr<SpotlightEntity>>& entities)
 {
-	// Save visible lights
 	vector<shared_ptr<SpotlightEntity>> visibleEntities;
 	for(const auto& [keyID, entity] : entities)
 	{
@@ -103,7 +92,6 @@ void TerrainEntityColorRenderer::processSpotlightEntities(const unordered_map<st
 		}
 	}
 
-	// Upload lights
 	for(size_t i = 0; i < visibleEntities.size(); i++)
 	{
 		_shader.uploadUniform("u_spotlightPositions[" + to_string(i) + "]", visibleEntities[i]->getPosition());
@@ -114,7 +102,6 @@ void TerrainEntityColorRenderer::processSpotlightEntities(const unordered_map<st
 		_shader.uploadUniform("u_spotlightDistances[" + to_string(i) + "]", visibleEntities[i]->getDistance());
 	}
 
-	// Upload spotlight count
 	_shader.uploadUniform("u_spotlightCount", static_cast<int>(visibleEntities.size()));
 }
 

@@ -295,7 +295,6 @@ const float ModelEntity::getTextureRepeat(const string& partID) const
 
 const unsigned int ModelEntity::_getPartIndex(const string& partID) const
 {
-	// Validate parts amount
 	if(partID.empty())
 	{
 		if(_parts.size() > 1)
@@ -308,7 +307,6 @@ const unsigned int ModelEntity::_getPartIndex(const string& partID) const
 		}
 	}
 
-	// Try to find index
 	for(size_t i = 0; i < _parts.size(); i++)
 	{
 		if(partID == _parts[i].ID)
@@ -317,6 +315,5 @@ const unsigned int ModelEntity::_getPartIndex(const string& partID) const
 		}
 	}
 
-	// Part is not found
 	Logger::throwError("ModelEntity::_getPartIndex::2");
 }

@@ -3,7 +3,6 @@
 
 void WorldEditor::_updateSpotlightPlacing()
 {
-	// Only if user is in placement mode
 	if(_isPlacingSpotlight)
 	{
 		if(_fe3d.terrain_getSelectedID().empty()) // Placing without terrain
@@ -175,7 +174,6 @@ void WorldEditor::_updateSpotlightPlacing()
 		}
 	}
 
-	// Update torch positions
 	for(const auto& entityID : _fe3d.model_getIDs())
 	{
 		if(entityID.substr(0, string("@@torch").size()) == "@@torch")

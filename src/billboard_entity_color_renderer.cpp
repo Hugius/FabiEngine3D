@@ -3,10 +3,8 @@
 
 void BillboardEntityColorRenderer::bind()
 {
-	// Bind shader
 	_shader.bind();
 
-	// Shader uniforms
 	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_clippingPlane", _renderBus.getClippingPlane());
 	_shader.uploadUniform("u_cameraPosition", _renderBus.getCameraPosition());
@@ -18,32 +16,25 @@ void BillboardEntityColorRenderer::bind()
 	_shader.uploadUniform("u_diffuseMap", 0);
 	_shader.uploadUniform("u_emissionMap", 1);
 
-	// Enable clipping
 	glEnable(GL_CLIP_DISTANCE0);
 	glEnable(GL_CLIP_DISTANCE1);
 
-	// Enable depth
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 
-	// Enable transparency
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void BillboardEntityColorRenderer::unbind()
 {
-	// Disable transparency
 	glDisable(GL_BLEND);
 
-	// Disable depth
 	glDisable(GL_DEPTH_TEST);
 
-	// Disable clipping
 	glDisable(GL_CLIP_DISTANCE0);
 	glDisable(GL_CLIP_DISTANCE1);
 
-	// Unbind shader
 	_shader.unbind();
 }
 

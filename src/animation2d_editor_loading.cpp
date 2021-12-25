@@ -9,31 +9,25 @@ using std::istringstream;
 
 const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 {
-	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("Animation2dEditor::loadFromFile");
 	}
 
-	// Clear animations from previous loads
 	_animations.clear();
 
-	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\animation2d.fe3d");
 
-	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project corrupted: file `animation2d.fe3d` missing!");
 		return false;
 	}
 
-	// Load animation file
 	ifstream file(filePath);
 
-	// Read animation data
 	string line;
 	while(getline(file, line))
 	{
@@ -92,12 +86,9 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 		_animations.push_back(newAnimation);
 	}
 
-	// Close file
 	file.close();
 
-	// Logging
 	Logger::throwInfo("Animation2D data loaded!");
 
-	// Return
 	return true;
 }

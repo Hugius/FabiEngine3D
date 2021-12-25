@@ -36,7 +36,6 @@ void Sound2dManager::update()
 
 void Sound2dManager::createSound(const string& ID, const string& audioPath)
 {
-	// Check for errors
 	if(_findSoundIndex(ID) != -1)
 	{
 		Logger::throwError("Sound2dManager::createSound::1");
@@ -46,10 +45,8 @@ void Sound2dManager::createSound(const string& ID, const string& audioPath)
 		Logger::throwError("Sound2dManager::createSound::2");
 	}
 
-	// Load data
 	auto dataPointer = _audioLoader.loadChunk(audioPath);
 
-	// Check if data loading went well
 	if(dataPointer != nullptr)
 	{
 		_sounds.push_back(Sound2d(ID, audioPath, dataPointer));

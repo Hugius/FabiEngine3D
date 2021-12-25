@@ -10,31 +10,25 @@ using std::istringstream;
 
 const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 {
-	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("Animation3dEditor::loadFromFile");
 	}
 
-	// Clear animations from previous loads
 	_animations.clear();
 
-	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\animation3d.fe3d");
 
-	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project corrupted: file `animation3d.fe3d` missing!");
 		return false;
 	}
 
-	// Load animation file
 	ifstream file(filePath);
 
-	// Read animation data
 	string line;
 	while(getline(file, line))
 	{
@@ -188,12 +182,9 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 		_animations.push_back(newAnimation);
 	}
 
-	// Close file
 	file.close();
 
-	// Logging
 	Logger::throwInfo("Animation3D data loaded!");
 
-	// Return
 	return true;
 }

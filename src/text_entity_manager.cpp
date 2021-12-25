@@ -67,7 +67,6 @@ void TextEntityManager::loadCharacters(const string& ID)
 {
 	auto entity = getEntity(ID);
 
-	// Check if text content needs to be refreshed
 	if((_contentMap.find(ID) == _contentMap.end()) || (_contentMap[ID] != entity->getContent()))
 	{
 		// Save text content

@@ -4,10 +4,8 @@
 
 void WorldEditor::_updateSpotlightMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuSpotlight")
 	{
 		// Button management
@@ -84,10 +82,8 @@ void WorldEditor::_updateSpotlightMenu()
 
 void WorldEditor::_updateSpotlightChoosingMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuSpotlightChoice")
 	{
 		// Remove deleted spotlights from the scrollingList buttons

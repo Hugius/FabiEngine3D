@@ -133,11 +133,9 @@ void SkyEntityManager::createEntity(const string& ID)
 
 void SkyEntityManager::update()
 {
-	// Temporary values
 	auto mainSky = getSelectedMainSky();
 	auto mixSky = getSelectedMixSky();
 
-	// Check if main sky exists
 	if(mainSky != nullptr)
 	{
 		// Update sky exposure

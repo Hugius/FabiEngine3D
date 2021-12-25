@@ -5,7 +5,6 @@ GuiManager::GuiManager(FabiEngine3D& fe3d)
 	:
 	_fe3d(fe3d)
 {
-	// Check if loading engine preview
 	if(!Config::getInst().isApplicationExported())
 	{
 		// Viewports
@@ -21,13 +20,11 @@ GuiManager::GuiManager(FabiEngine3D& fe3d)
 
 void GuiManager::update()
 {
-	// Update viewports
 	for(const auto& viewport : _viewports)
 	{
 		viewport->update(!_overlay->isFocused());
 	}
 
-	// Update overlay
 	_overlay->update();
 }
 

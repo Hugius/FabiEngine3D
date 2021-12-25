@@ -15,18 +15,14 @@ public:
 	RenderBuffer(float x, float y, float w, float h, bool isCentered); // 2D
 	~RenderBuffer();
 
-	// UNSIGNED INT
 	const unsigned int getVertexCount() const;
 
-	// MISCELLANEOUS
 	const BufferID getVAO() const;
 	const RenderBufferType getBufferType() const;
 
 private:
-	// UNSIGNED INT
 	unsigned int _vertexCount = 0;
 
-	// MISCELLANEOUS
 	RenderBufferType _bufferType;
 	BufferID _vao = 0;
 	BufferID _vbo = 0;

@@ -23,7 +23,6 @@ class Math final
 public:
 	Math() = delete;
 
-	// MAT44
 	static const mat22 invertMatrix(mat22 matrix);
 	static const mat33 invertMatrix(mat33 matrix);
 	static const mat44 invertMatrix(mat44 matrix);
@@ -45,25 +44,21 @@ public:
 	static const mat44 createOrthographicProjectionMatrix(float left, float right, float bottom, float top, float near, float far);
 	static const mat44 createPerspectiveProjectionMatrix(float fov, float aspect, float near, float far);
 
-	// FVEC4
 	static const fvec4 calculateAverage(const vector<fvec4>& values);
 	static const fvec4 calculateDifference(fvec4 firstPosition, fvec4 secondPosition);
 	static const fvec4 normalize(fvec4 vector);
 
-	// FVEC3
 	static const fvec3 calculateAverage(const vector<fvec3>& values);
 	static const fvec3 calculateCrossProduct(fvec3 firstVector, fvec3 secondVector);
 	static const fvec3 calculateDifference(fvec3 firstPosition, fvec3 secondPosition);
 	static const fvec3 normalize(fvec3 vector);
 
-	// FVEC2
 	static const fvec2 calculateAverage(const vector<fvec2>& values);
 	static const fvec2 calculateDifference(fvec2 firstPosition, fvec2 secondPosition);
 	static const fvec2 normalize(fvec2 vector);
 	static const fvec2 convertFromNDC(fvec2 position);
 	static const fvec2 convertToNDC(fvec2 position);
 
-	// FLOAT
 	static const float calculateDeterminant(mat22 matrix);
 	static const float calculateDeterminant(mat33 matrix);
 	static const float calculateDeterminant(mat44 matrix);
@@ -85,25 +80,20 @@ public:
 	static const float getPI();
 	static const float getRandomNumber(float min, float max);
 
-	// UNSIGNED INT
 	static const unsigned int calculateAverage(const vector<unsigned int>& values);
 	static const unsigned int getRandomNumber(unsigned int min, unsigned int max);
 
-	// INT
 	static const int calculateAverage(const vector<int>& values);
 	static const int getRandomNumber(int min, int max);
 
-	// BOOL
 	static const bool isNormalized(fvec2 vector);
 	static const bool isNormalized(fvec3 vector);
 	static const bool isNormalized(fvec4 vector);
 
 private:
-	// FLOAT
 	static inline const float PI = 3.14159265358979323846264338327f;
 	static inline const float DEG2RAD = 0.01745329251994329576923690768489f;
 	static inline const float RAD2DEG = 57.295779513082320876798154814278f;
 
-	// MISCELLANEOUS
 	static inline mt19937 _generator = mt19937(static_cast<unsigned int>(time(nullptr)));
 };

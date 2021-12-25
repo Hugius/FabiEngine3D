@@ -134,14 +134,12 @@ void FabiEngine3D::misc_setCursorVisible(bool value)
 
 void FabiEngine3D::misc_centerCursor()
 {
-	// Center the cursor
 	const int left = Config::getInst().getViewportPosition().x;
 	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getViewportPosition().y + Config::getInst().getViewportSize().y);
 	const int xMiddle = left + (Config::getInst().getViewportSize().x / 2);
 	const int yMiddle = bottom + (Config::getInst().getViewportSize().y / 2);
 	_core->_window.setCursorPosition({xMiddle, yMiddle});
 
-	// Notify camera of centering
 	_core->_camera.notifyCursorCenter();
 }
 

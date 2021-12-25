@@ -8,19 +8,16 @@ void FabiEngine3D::terrain_create(const string& ID, const string& value)
 
 void FabiEngine3D::terrain_deleteAll()
 {
-	// Iterate through terrains
 	for(const auto& [keyID, entity] : _core->_terrainEntityManager.getEntities())
 	{
 		terrain_delete(entity->getID());
 	}
 
-	// Unselect terrain
 	_core->_terrainEntityManager.selectTerrain("");
 }
 
 void FabiEngine3D::terrain_delete(const string& ID)
 {
-	// Unselect terrain if selected
 	if(ID == terrain_getSelectedID())
 	{
 		_core->_terrainEntityManager.selectTerrain("");

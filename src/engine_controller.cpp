@@ -28,7 +28,6 @@ EngineController::EngineController()
 
 void EngineController::FE3D_CONTROLLER_INIT()
 {
-	// Temporary values
 	const string meshDirectoryPath = "engine\\assets\\mesh\\";
 	const string textureDirectoryPath = "engine\\assets\\texture\\";
 	const string fontDirectoryPath = "engine\\assets\\font\\";

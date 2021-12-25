@@ -23,13 +23,10 @@ void FabiEngine3D::text_setVisible(const string& ID, bool value)
 
 void FabiEngine3D::text_setFont(const string& ID, const string& value)
 {
-	// Temporary values
 	auto entity = _core->_textEntityManager.getEntity(ID);
 
-	// Set font
 	entity->setFontPath(value);
 
-	// Load text
 	auto content = entity->getContent();
 	if(!content.empty())
 	{
@@ -46,10 +43,8 @@ void FabiEngine3D::text_setFont(const string& ID, const string& value)
 
 void FabiEngine3D::text_setContent(const string& ID, const string& value, float charWidth, float charHeight)
 {
-	// Temporary values
 	auto entity = _core->_textEntityManager.getEntity(ID);
 
-	// Font must be loaded
 	auto fontPath = entity->getFontPath();
 	if(fontPath.empty())
 	{
@@ -57,10 +52,8 @@ void FabiEngine3D::text_setContent(const string& ID, const string& value, float 
 		return;
 	}
 
-	// Set new text
 	entity->setContent(value);
 
-	// Calculate new size
 	fvec2 newSize = entity->getSize();
 	if(charWidth >= 0.0f)
 	{
@@ -72,7 +65,6 @@ void FabiEngine3D::text_setContent(const string& ID, const string& value, float 
 	}
 	entity->setSize(newSize);
 
-	// Reload text
 	if(entity->isDynamic())
 	{
 		_core->_textEntityManager.loadCharacters(ID);

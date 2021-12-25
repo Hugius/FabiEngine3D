@@ -5,10 +5,8 @@ using std::numeric_limits;
 
 const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 {
-	// Temporary values
 	float closestDistance = numeric_limits<float>::max();
 
-	// Iterate through AABB entities
 	for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
 		// Check if parent entity is not level of detailed
@@ -41,21 +39,18 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 		}
 	}
 
-	// Update hovered AABB status
 	if(!_core->_aabbEntityManager.isEntityExisting(_hoveredAabbID) || _hoveredAabbID.empty())
 	{
 		_hoveredAabbID = "";
 		_hoveredAabbDistance = -1.0f;
 	}
 
-	// Return
 	_isRaycastUpdated = true;
 	return make_pair(_hoveredAabbID, _hoveredAabbDistance);
 }
 
 const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& ID, bool canBeOccluded)
 {
-	// Check whether the AABB can be raycasted if it is occluded by another AABB
 	if(canBeOccluded)
 	{
 		// Check if raycasting needs to be updated
@@ -102,7 +97,6 @@ const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& 
 
 const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(const string& ID, bool canBeOccluded)
 {
-	// Check whether the AABB can be raycasted if it is occluded by another AABB
 	if(canBeOccluded)
 	{
 		// Check if raycasting needs to be updated

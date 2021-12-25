@@ -13,7 +13,6 @@ class BillboardEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	// VOID
 	void updateTransformation();
 	void updateTransformationMatrix();
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
@@ -51,27 +50,22 @@ public:
 	void setEmissionIntensity(float value);
 	void setFrozen(bool value);
 
-	// STRING
 	const string& getTextContent() const;
 	const string& getFontPath() const;
 	const string& getDiffuseMapPath() const;
 	const string& getEmissionMapPath() const;
 
-	// MAT44
 	const mat44& getTransformationMatrix() const;
 
-	// FVEC3
 	const fvec3 getPosition() const;
 	const fvec3 getRotation() const;
 	const fvec3 getColor() const;
 	const fvec3 getWireframeColor() const;
 
-	// FVEC2
 	const fvec2 getSize() const;
 	const fvec2 getMultiplierUV() const;
 	const fvec2 getAdderUV() const;
 
-	// FLOAT
 	const float getLightness() const;
 	const float getTransparency() const;
 	const float getMinHeight() const;
@@ -79,7 +73,6 @@ public:
 	const float getTextureRepeat() const;
 	const float getEmissionIntensity() const;
 
-	// BOOL
 	const bool isFacingCameraX() const;
 	const bool isFacingCameraY() const;
 	const bool isDepthMapIncluded() const;
@@ -93,22 +86,18 @@ public:
 	const bool hasDiffuseMap() const;
 	const bool hasEmissionMap() const;
 
-	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> getRenderBuffer() const;
 	const TextureID getDiffuseMap() const;
 	const TextureID getEmissionMap() const;
 
 private:
-	// STRING
 	string _textContent = "";
 	string _diffuseMapPath = "";
 	string _emissionMapPath = "";
 	string _fontPath = "";
 
-	// MAT44
 	mat44 _transformationMatrix = mat44(1.0f);
 
-	// FVEC3
 	fvec3 _position = fvec3(0.0f);
 	fvec3 _rotation = fvec3(0.0f);
 	fvec3 _positionTarget = fvec3(0.0f);
@@ -116,13 +105,11 @@ private:
 	fvec3 _color = fvec3(1.0f);
 	fvec3 _wireframeColor = fvec3(1.0f);
 
-	// FVEC2
 	fvec2 _size = fvec2(1.0f);
 	fvec2 _sizeTarget = fvec2(1.0f);
 	fvec2 _multiplierUV = fvec2(1.0f);
 	fvec2 _adderUV = fvec2(0.0f);
 
-	// FLOAT
 	float _emissionIntensity = 1.0f;
 	float _textureRepeat = 1.0f;
 	float _positionTargetSpeed = 0.0f;
@@ -133,7 +120,6 @@ private:
 	float _minHeight = numeric_limits<float>::lowest();
 	float _maxHeight = numeric_limits<float>::max();
 
-	// BOOL
 	bool _isFacingCameraX = false;
 	bool _isFacingCameraY = false;
 	bool _isDepthMapIncluded = true;
@@ -144,7 +130,6 @@ private:
 	bool _isTextual = false;
 	bool _isFrozen = false;
 
-	// MISCELLANEOUS
 	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
 	TextureID _diffuseMap = 0;
 	TextureID _emissionMap = 0;

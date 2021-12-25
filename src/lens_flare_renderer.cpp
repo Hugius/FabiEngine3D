@@ -3,10 +3,8 @@
 
 void LensFlareRenderer::bind()
 {
-	// Bind shader
 	_shader.bind();
 
-	// Shader uniforms
 	_shader.uploadUniform("u_depthMap", 0);
 	_shader.uploadUniform("u_worldMap", 1);
 	_shader.uploadUniform("u_flareMap", 2);
@@ -19,7 +17,6 @@ void LensFlareRenderer::bind()
 	_shader.uploadUniform("u_flareSourceUV", _renderBus.getFlareSourceUV());
 	_shader.uploadUniform("u_isLensFlareEnabled", _renderBus.isLensFlareEnabled());
 
-	// Bind textures
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _renderBus.getDepthMap());
 	glActiveTexture(GL_TEXTURE1);
@@ -30,7 +27,6 @@ void LensFlareRenderer::bind()
 
 void LensFlareRenderer::unbind()
 {
-	// Unbind textures
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glActiveTexture(GL_TEXTURE1);
@@ -38,21 +34,16 @@ void LensFlareRenderer::unbind()
 	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	// Unbind shader
 	_shader.unbind();
 }
 
 void LensFlareRenderer::render(const shared_ptr<ImageEntity> entity)
 {
-	// Temporary values
 	const auto buffer = entity->getRenderBuffer();
 
-	// Bind buffer
 	glBindVertexArray(buffer->getVAO());
 
-	// Render
 	glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 
-	// Unbind buffer
 	glBindVertexArray(0);
 }

@@ -2,12 +2,10 @@
 
 const bool CameraCollisionDetector::checkX(fvec3 aabbPosition, fvec3 aabbSize, fvec3 boxMiddle, fvec3 boxMiddleChange, Box box) const
 {
-	// Temporary values
 	const auto left = box.getLeft();
 	const auto right = box.getRight();
 	const fvec3 halfAabbSize = (aabbSize / 2.0f);
 
-	// Check if box is inside AABB
 	if(_isInside(aabbPosition, halfAabbSize, boxMiddle, box))
 	{
 		// Calculate side differences
@@ -36,12 +34,10 @@ const bool CameraCollisionDetector::checkX(fvec3 aabbPosition, fvec3 aabbSize, f
 
 const bool CameraCollisionDetector::checkY(fvec3 aabbPosition, fvec3 aabbSize, fvec3 boxMiddle, fvec3 boxMiddleChange, Box box) const
 {
-	// Temporary values
 	const auto bottom = box.getBottom();
 	const auto top = box.getTop();
 	const fvec3 halfAabbSize = (aabbSize / 2.0f);
 
-	// Check if box is inside AABB
 	if(_isInside(aabbPosition, halfAabbSize, boxMiddle, box))
 	{
 		// Calculate side differences
@@ -70,12 +66,10 @@ const bool CameraCollisionDetector::checkY(fvec3 aabbPosition, fvec3 aabbSize, f
 
 const bool CameraCollisionDetector::checkZ(fvec3 aabbPosition, fvec3 aabbSize, fvec3 boxMiddle, fvec3 boxMiddleChange, Box box) const
 {
-	// Temporary values
 	const auto back = box.getBack();
 	const auto front = box.getFront();
 	const fvec3 halfAabbSize = (aabbSize / 2.0f);
 
-	// Check if box is inside AABB
 	if(_isInside(aabbPosition, halfAabbSize, boxMiddle, box))
 	{
 		// Calculate side differences
@@ -104,7 +98,6 @@ const bool CameraCollisionDetector::checkZ(fvec3 aabbPosition, fvec3 aabbSize, f
 
 const bool CameraCollisionDetector::_isInside(fvec3 aabbPosition, fvec3 aabbHalfSize, fvec3 boxMiddle, Box box) const
 {
-	// Temporary values
 	const auto left = box.getLeft();
 	const auto right = box.getRight();
 	const auto bottom = box.getBottom();
@@ -115,14 +108,12 @@ const bool CameraCollisionDetector::_isInside(fvec3 aabbPosition, fvec3 aabbHalf
 	bool yInsideBox = false;
 	bool zInsideBox = false;
 
-	// X collision detection
 	if(((boxMiddle.x + right) > (aabbPosition.x - aabbHalfSize.x) && (boxMiddle.x + right) < (aabbPosition.x + aabbHalfSize.x)) ||
 	   ((boxMiddle.x - left) < (aabbPosition.x + aabbHalfSize.x) && (boxMiddle.x - left) > (aabbPosition.x - aabbHalfSize.x)))
 	{
 		xInsideBox = true;
 	}
 
-	// Y collision detection
 	if(((boxMiddle.y + top) > (aabbPosition.y) && (boxMiddle.y + top) < (aabbPosition.y + (aabbHalfSize.y * 2.0f))) ||
 	   ((boxMiddle.y - bottom) < (aabbPosition.y + (aabbHalfSize.y * 2.0f)) && (boxMiddle.y - bottom) > (aabbPosition.y)))
 	{
@@ -130,19 +121,16 @@ const bool CameraCollisionDetector::_isInside(fvec3 aabbPosition, fvec3 aabbHalf
 
 	}
 
-	// Z collision detection
 	if(((boxMiddle.z + front) > (aabbPosition.z - aabbHalfSize.z) && (boxMiddle.z + front) < (aabbPosition.z + aabbHalfSize.z)) ||
 	   ((boxMiddle.z - back) < (aabbPosition.z + aabbHalfSize.z) && (boxMiddle.z - back) > (aabbPosition.z - aabbHalfSize.z)))
 	{
 		zInsideBox = true;
 	}
 
-	// Check if AABB is smaller than the camera box
 	bool xTooSmall = ((boxMiddle.x + right) >= (aabbPosition.x + aabbHalfSize.x)) && ((boxMiddle.x - left) <= (aabbPosition.x - aabbHalfSize.x));
 	bool yTooSmall = ((boxMiddle.y + top) >= (aabbPosition.y + (aabbHalfSize.y * 2.0f))) && ((boxMiddle.y - bottom) <= aabbPosition.y);
 	bool zTooSmall = ((boxMiddle.z + front) >= (aabbPosition.z + aabbHalfSize.z)) && ((boxMiddle.z - back) <= (aabbPosition.z - aabbHalfSize.z));
 
-	// Check if any collision happened
 	if((xInsideBox || xTooSmall) && (yInsideBox || yTooSmall) && (zInsideBox || zTooSmall))
 	{
 		return true;

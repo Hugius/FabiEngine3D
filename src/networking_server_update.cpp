@@ -15,17 +15,14 @@ using std::chrono::system_clock;
 
 void NetworkingServer::update()
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		return;
 	}
 
-	// Clear new client data from last tick
 	_newClientIP = "";
 	_newClientUsername = "";
 
-	// Clear old client data from last tick
 	if(!_oldClientIPs.empty())
 	{
 		_oldClientIPs.erase(_oldClientIPs.begin());
@@ -35,10 +32,8 @@ void NetworkingServer::update()
 		_oldClientUsernames.erase(_oldClientUsernames.begin());
 	}
 
-	// Clear all received messages from last tick
 	_pendingMessages.clear();
 
-	// Handle new client connections
 	if(_connectionThread.wait_until(system_clock::time_point::min()) == future_status::ready)
 	{
 		// Retrieve new client socket ID
@@ -67,7 +62,6 @@ void NetworkingServer::update()
 		_connectionThread = async(launch::async, &NetworkingServer::_waitForClientConnection, this, _tcpSocket);
 	}
 
-	// Receive incoming TCP messages
 	BEGIN:;
 	for(size_t i = 0; i < _clientSockets.size(); i++)
 	{
@@ -206,7 +200,6 @@ void NetworkingServer::update()
 		}
 	}
 
-	// Receive incoming UDP messages
 	while(NetworkingUtils::isMessageReadyUDP(_udpSocket))
 	{
 		// Message data

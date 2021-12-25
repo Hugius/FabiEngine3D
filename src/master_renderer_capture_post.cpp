@@ -3,14 +3,12 @@
 
 void MasterRenderer::_captureWorldDepth()
 {
-	// Temporary values
 	auto modelEntities = _entityBus->getModelEntities();
 	auto billboardEntities = _entityBus->getBillboardEntities();
 	float clippingY = numeric_limits<float>::lowest();
 	const bool waterDepthNeeded = (_entityBus->getWaterEntity() != nullptr) && (_entityBus->getWaterEntity()->getTransparency() > 0.0f);
 	bool isUnderWater = false;
 
-	// Prepare water depth
 	if(waterDepthNeeded)
 	{
 		// Check if camera is underwater
@@ -33,7 +31,6 @@ void MasterRenderer::_captureWorldDepth()
 		}
 	}
 
-	// Determine if world depth rendering is needed or not
 	if(_renderBus.isDofEnabled() || _renderBus.isLensFlareEnabled() || waterDepthNeeded)
 	{
 		// Bind
@@ -183,7 +180,6 @@ void MasterRenderer::_captureLensFlare()
 
 void MasterRenderer::_captureMotionBlur()
 {
-	// Check if motion blur is enabled
 	if(_renderBus.isMotionBlurEnabled())
 	{
 		// Camera speed and blur direction variables

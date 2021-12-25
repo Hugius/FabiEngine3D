@@ -3,7 +3,6 @@
 
 void WaterEditor::_updateCamera()
 {
-	// Check if third person view is enabled
 	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
 		// Update distance scrolling
@@ -16,7 +15,6 @@ void WaterEditor::_updateCamera()
 		_fe3d.image_setVisible("@@cursor", false);
 	}
 
-	// Check if allowed by GUI
 	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Check if RMB pressed
@@ -34,7 +32,6 @@ void WaterEditor::_updateCamera()
 		}
 	}
 
-	// Disable third person view if necessary
 	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
 		if(_gui.getOverlay()->isFocused())
@@ -46,7 +43,6 @@ void WaterEditor::_updateCamera()
 
 void WaterEditor::_updateMiscellaneous()
 {
-	// Check if allowed by GUI
 	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Update reference model visibility

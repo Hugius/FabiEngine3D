@@ -91,7 +91,6 @@ float calculateShadows();
 
 void main()
 {
-	// Wireframe color
 	if(u_isWireframed)
 	{
 		o_primaryColor = vec4(u_wireframeColor, 1.0f);
@@ -99,10 +98,8 @@ void main()
 		return;
 	}
 
-	// Calculate normal mapping
     vec3 normal = calculateNormalMapping();
 
-	// Calculate lighting
     float shadowLighting	 = calculateShadows();
 	float shadowOcclusion	 = ((shadowLighting - u_shadowLightness) / (1.0f - u_shadowLightness));
 	vec3 ambientLighting	 = (calculateAmbientLighting() * shadowLighting);
@@ -110,13 +107,11 @@ void main()
 	vec3 pointlights	     = calculatePointlights(normal);
 	vec3 spotlights		     = calculateSpotlights(normal);
 
-	// Calculate base color
 	vec3 primaryColor = vec3(0.0f);
 	primaryColor += calculateDiffuseMapping();
 	primaryColor *= u_lightness;
 	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 
-	// Apply lighting
 	vec3 lighting = vec3(0.0f);
 	lighting += ambientLighting;
 	lighting += directionalLighting;
@@ -124,13 +119,10 @@ void main()
 	lighting += spotlights;
 	primaryColor *= lighting;
 
-	// Apply fog
 	primaryColor = calculateFog(primaryColor);
 
-	// Apply gamma correction
 	primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
 
-	// Set final colors
 	o_primaryColor = vec4(primaryColor, 1.0f);
 	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 }
@@ -321,7 +313,6 @@ vec3 calculatePointlights(vec3 normal)
 {
 	vec3 result = vec3(0.0f);
 		
-	// Iterate through lights
 	for (int i = 0; i < u_pointlightCount; i++)
 	{
 		// Calculate light strength
@@ -358,7 +349,6 @@ vec3 calculatePointlights(vec3 normal)
 		result += current;
 	}
 
-	// Return
 	return result;
 }
 
@@ -395,7 +385,6 @@ vec3 calculateSpotlights(vec3 normal)
 		result += current;
 	}
 
-	// Return
 	return result;
 }
 

@@ -4,10 +4,8 @@
 
 void WorldEditor::_updatePointlightMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuPointlight")
 	{
 		// Button management
@@ -84,10 +82,8 @@ void WorldEditor::_updatePointlightMenu()
 
 void WorldEditor::_updatePointlightChoosingMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuPointlightChoice")
 	{
 		// Remove deleted pointlights from the scrollingList buttons

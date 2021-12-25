@@ -2,30 +2,25 @@
 
 const vector<ScriptValue> ScriptInterpreter::_processFe3dFunctionCall(const string& scriptLine)
 {
-	// Temporary values
 	vector<ScriptValue> returnValues;
 	auto openingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), '(');
 	auto closingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), ')');
 
-	// Check if function call has no opening & closing parentheses
 	if((openingParanthesisFound == scriptLine.end()) && (closingParanthesisFound == scriptLine.end()))
 	{
 		_throwScriptError("invalid '()' syntax!");
 	}
 
-	// Check if function call does not end with a paranthesis
 	if(scriptLine.back() != ')')
 	{
 		_throwScriptError("function call must end with ')'!");
 	}
 
-	// Extract arguments
 	auto parenthesisIndex = static_cast<unsigned int>(distance(scriptLine.begin(), openingParanthesisFound));
 	string argumentString = scriptLine.substr(static_cast<size_t>(parenthesisIndex + 1));
 	argumentString.pop_back();
 	auto args = _extractValuesFromListString(argumentString);
 
-	// Check if argument extraction went well
 	if(!_hasThrownError)
 	{
 		// Temporary values

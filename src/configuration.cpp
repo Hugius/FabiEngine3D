@@ -8,10 +8,8 @@ using std::istringstream;
 
 Config::Config()
 {
-	// Temporary values
 	const string filePath = string(Tools::getRootDirectoryPath() + "config.fe3d");
 
-	// Check if config file exists
 	if(Tools::isFileExisting(filePath))
 	{
 		// Open config file
@@ -72,7 +70,6 @@ Config::Config()
 
 void Config::_processOption(ifstream& file, string& option, string criteria)
 {
-	// Temporary values
 	string line;
 	string field;
 	string equals;
@@ -80,7 +77,6 @@ void Config::_processOption(ifstream& file, string& option, string criteria)
 	istringstream iss(line);
 	iss >> field >> equals;
 
-	// Check criteria
 	if(field == criteria)
 	{
 		iss >> option;
@@ -93,7 +89,6 @@ void Config::_processOption(ifstream& file, string& option, string criteria)
 
 void Config::_processOption(ifstream& file, float& option, string criteria)
 {
-	// Temporary values
 	string line;
 	string field;
 	string equals;
@@ -101,7 +96,6 @@ void Config::_processOption(ifstream& file, float& option, string criteria)
 	istringstream iss(line);
 	iss >> field >> equals;
 
-	// Check criteria
 	if(field == criteria)
 	{
 		iss >> option;
@@ -114,7 +108,6 @@ void Config::_processOption(ifstream& file, float& option, string criteria)
 
 void Config::_processOption(ifstream& file, int& option, string criteria)
 {
-	// Temporary values
 	string line;
 	string field;
 	string equals;
@@ -122,7 +115,6 @@ void Config::_processOption(ifstream& file, int& option, string criteria)
 	istringstream iss(line);
 	iss >> field >> equals;
 
-	// Check criteria
 	if(field == criteria)
 	{
 		iss >> option;
@@ -135,18 +127,15 @@ void Config::_processOption(ifstream& file, int& option, string criteria)
 
 void Config::_processOption(ifstream& file, bool& option, string criteria)
 {
-	// Temporary values
 	string line;
 	string field;
 	string equals;
 	string value;
 
-	// Read line
 	getline(file, line);
 	istringstream iss(line);
 	iss >> field >> equals >> value;
 
-	// Check criteria
 	if(field == criteria)
 	{
 		// Parsing to boolean value

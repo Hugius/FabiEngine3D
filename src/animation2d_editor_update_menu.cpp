@@ -4,10 +4,8 @@
 
 void Animation2dEditor::_updateMainMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "animation2dEditorMenuMain")
 	{
 		// Button management
@@ -51,10 +49,8 @@ void Animation2dEditor::_updateMainMenu()
 
 void Animation2dEditor::_updateChoiceMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "animation2dEditorMenuChoice")
 	{
 		// Temporary values

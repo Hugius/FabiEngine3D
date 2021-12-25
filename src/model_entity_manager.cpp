@@ -34,20 +34,16 @@ const unordered_map<string, shared_ptr<ModelEntity>>& ModelEntityManager::getEnt
 
 void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 {
-	// Create entity
 	_entities.insert(make_pair(ID, make_shared<ModelEntity>(ID)));
 
-	// Load mesh file
 	auto partsPointer = _meshLoader.loadMesh(meshPath);
 
-	// Check if model loading failed
 	if(partsPointer == nullptr)
 	{
 		deleteEntity(ID);
 		return;
 	}
 
-	// Check if multiparted model only has 1 part
 	auto& parts = *partsPointer;
 	if((parts.size() == 1) && !parts[0]->getID().empty())
 	{
@@ -56,13 +52,10 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 		return;
 	}
 
-	// Temporary values
 	auto entity = getEntity(ID);
 
-	// Set mesh path
 	entity->setMeshPath(meshPath);
 
-	// Process parts
 	for(const auto& part : parts)
 	{
 		// Temporary values

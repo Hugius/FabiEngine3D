@@ -2,10 +2,8 @@
 
 void WorldEditor::_updateAmbientLightingSettingsMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuSettingsLightingAmbient")
 	{
 		// Temporary values
@@ -75,10 +73,8 @@ void WorldEditor::_updateAmbientLightingSettingsMenu()
 
 void WorldEditor::_updateDirectionalLightingSettingsMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuSettingsLightingDirectional")
 	{
 		// Temporary values

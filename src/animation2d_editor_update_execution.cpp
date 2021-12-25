@@ -2,7 +2,6 @@
 
 void Animation2dEditor::_updateBillboardAnimationExecution()
 {
-	// Update all started animations
 	for(auto& [idPair, animation] : _startedBillboardAnimations)
 	{
 		// Check if animation is playing
@@ -72,7 +71,6 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 		_fe3d.billboard_setAdderUV(idPair.second, adderUV);
 	}
 
-	// Remove all animations that ended
 	for(const auto& idPair : _billboardAnimationsToStop)
 	{
 		// Check if animation is still started
@@ -83,7 +81,6 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 	}
 	_billboardAnimationsToStop.clear();
 
-	// Start all endless animations again
 	for(const auto& idPair : _billboardAnimationsToStart)
 	{
 		// Check if animation is not already started
@@ -98,7 +95,6 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 
 void Animation2dEditor::_updateImageAnimationExecution()
 {
-	// Update all started animations
 	for(auto& [idPair, animation] : _startedImageAnimations)
 	{
 		// Check if animation is playing
@@ -168,7 +164,6 @@ void Animation2dEditor::_updateImageAnimationExecution()
 		_fe3d.image_setAdderUV(idPair.second, adderUV);
 	}
 
-	// Remove all animations that ended
 	for(const auto& idPair : _imageAnimationsToStop)
 	{
 		// Check if animation is still started
@@ -179,7 +174,6 @@ void Animation2dEditor::_updateImageAnimationExecution()
 	}
 	_imageAnimationsToStop.clear();
 
-	// Start all endless animations again
 	for(const auto& idPair : _imageAnimationsToStart)
 	{
 		// Check if animation is not already started

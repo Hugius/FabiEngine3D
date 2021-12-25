@@ -75,19 +75,16 @@ const bool WaterEntityManager::isEntityExisting(const string& ID)
 
 void WaterEntityManager::loadMesh(const string& ID)
 {
-	// Temporary values
 	auto entity = getEntity(ID);
 	float size = entity->getSize();
 	float halfSize = (size / 2.0f);
 	vector<float> highQualityBufferData;
 
-	// Check if size is too large
 	if(size > 1024)
 	{
 		Logger::throwError("WaterEntityManager::loadMesh");
 	}
 
-	// Reserving memory for the vertices
 	highQualityBufferData.reserve(size_t(size) * size_t(size) * 30);
 
 	for(float x = -halfSize; x < halfSize; x++) // X direction
@@ -156,10 +153,8 @@ void WaterEntityManager::loadMesh(const string& ID)
 		}
 	}
 
-	// Create high quality render buffer
 	entity->setHighQualityRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, &highQualityBufferData[0], static_cast<unsigned int>(highQualityBufferData.size())));
 
-	// Compose low quality buffer data
 	float lowQualityBufferData[] =
 	{
 		-halfSize, 0.0f, halfSize, 0.0f, 1.0f,
@@ -170,13 +165,11 @@ void WaterEntityManager::loadMesh(const string& ID)
 		-halfSize, 0.0f, halfSize, 0.0f, 1.0f
 	};
 
-	// Create low quality render buffer
 	entity->setLowQualityRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, lowQualityBufferData, static_cast<unsigned int>(sizeof(lowQualityBufferData) / sizeof(float))));
 }
 
 void WaterEntityManager::update()
 {
-	// Update all water entities
 	for(const auto& [keyID, entity] : _entities)
 	{
 		// Update water if visible

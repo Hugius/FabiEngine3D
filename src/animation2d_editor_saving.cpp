@@ -8,22 +8,18 @@ using std::ofstream;
 
 const bool Animation2dEditor::saveToFile() const
 {
-	// Editor must be loaded
 	if(!_isEditorLoaded)
 	{
 		return false;
 	}
 
-	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("Animation2dEditor::saveToFile");
 	}
 
-	// Create or overwrite file
 	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\animation2d.fe3d");
 
-	// Write animation data
 	for(const auto& animation : _animations)
 	{
 		// Data to save
@@ -55,12 +51,9 @@ const bool Animation2dEditor::saveToFile() const
 		}
 	}
 
-	// Close file
 	file.close();
 
-	// Logging
 	Logger::throwInfo("Animation2D data saved!");
 
-	// Return
 	return true;
 }

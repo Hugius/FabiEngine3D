@@ -35,7 +35,6 @@ vec3 calculateFog(vec3 color);
 
 void main()
 {
-	// Wireframe color
 	if(u_isWireframed)
 	{
 		o_primaryColor = vec4(u_wireframeColor, 1.0f);
@@ -43,13 +42,10 @@ void main()
 		return;
 	}
 
-	// Calculate diffuse mapping
 	vec3 diffuseMapping = calculateDiffuseMapping();
 
-	// Calculate emission mapping
 	vec3 emissionMapping = calculateEmissionMapping();
 
-	// Calculate base color
 	vec3 primaryColor = vec3(0.0f);
 	primaryColor += diffuseMapping;
 	primaryColor += emissionMapping;
@@ -57,13 +53,10 @@ void main()
 	primaryColor *= u_lightness;
 	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 
-	// Apply fog
 	primaryColor = calculateFog(primaryColor);
 
-	// Apply gamma correction
 	primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
 
-	// Set final colors
 	o_primaryColor = vec4(primaryColor, u_transparency);
 	o_secondaryColor = vec4((((emissionMapping != vec3(0.0f)) || u_isBright) ? primaryColor : vec3(0.0f)), 1.0f);
 }

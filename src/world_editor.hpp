@@ -31,7 +31,6 @@ public:
 				Animation3dEditor& animation3dEditor,
 				SoundEditor& soundEditor);
 
-	// VOID
 	void setCurrentProjectID(const string& ID);
 	void load();
 	void unload();
@@ -55,10 +54,8 @@ public:
 	void clearEditorWorld();
 	void clearCustomWorld();
 
-	// STRING
 	const string& getLoadedWorldID() const;
 
-	// BOOL
 	const bool isLoaded() const;
 	const bool loadEditorWorldFromFile(const string& fileName);
 	const bool saveEditorWorldToFile();
@@ -66,7 +63,6 @@ public:
 	const bool saveCustomWorldToFile();
 
 private:
-	// VOID
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateSkyMenu();
@@ -149,10 +145,8 @@ private:
 	void _deactivateSound();
 	void _handleValueChanging(const string& screenID, string buttonID, string writeFieldID, float& value, float adder, float multiplier = 1.0f, float minimum = numeric_limits<float>::lowest(), float maximum = numeric_limits<float>::max());
 
-	// STRING
 	const vector<string> _getWorldIDs() const;
 
-	// BOOL
 	const bool _copyTemplateSky(const string& newID, const string& templateID);
 	const bool _copyTemplateTerrain(const string& newID, const string& templateID);
 	const bool _copyTemplateWater(const string& newID, const string& templateID);
@@ -160,7 +154,6 @@ private:
 	const bool _copyTemplateBillboard(const string& newID, const string& templateID, fvec3 position, bool isFromOutside);
 	const bool _copyTemplateSound(const string& newID, const string& templateID, fvec3 position, bool isFromOutside);
 
-	// STRING
 	static inline const string TEMPLATE_LAMP_ID = "@@template_lamp";
 	static inline const string TEMPLATE_TORCH_ID = "@@template_torch";
 	static inline const string TEMPLATE_CAMERA_ID = "@@template_camera";
@@ -215,7 +208,6 @@ private:
 	string _currentProjectID = "";
 	string _currentWorldID = "";
 
-	// FVEC3
 	static inline const fvec3 DEFAULT_LAMP_SIZE = fvec3(1.0f, 1.0f, 1.0f);
 	static inline const fvec3 DEFAULT_LAMP_AABB_SIZE = fvec3(0.6f, 1.0f, 0.6f);
 	static inline const fvec3 DEFAULT_TORCH_SIZE = fvec3(1.0f, 1.0f, 1.0f);
@@ -235,7 +227,6 @@ private:
 	static inline const fvec3 CAMERA_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
 	static inline const fvec3 SPEAKER_OFFSET = fvec3(0.0f, 0.5f, 0.0f);
 
-	// FLOAT
 	static inline const float DEFAULT_POINTLIGHT_RADIUS = 5.0f;
 	static inline const float DEFAULT_POINTLIGHT_INTENSITY = 10.0f;
 	static inline const float DEFAULT_SPOTLIGHT_PITCH = -90.0f;
@@ -268,7 +259,6 @@ private:
 	static inline const float CH = 0.0875f;
 	float _editorSpeed = 1.0f;
 
-	// INT
 	int _selectedModelHighlightDirection = 1;
 	int _activeModelHighlightDirection = 1;
 	int _selectedBillboardHighlightDirection = 1;
@@ -282,7 +272,6 @@ private:
 	int _selectedSpeakerHighlightDirection = 1;
 	int _activeSpeakerHighlightDirection = 1;
 
-	// BOOL
 	bool _hasCustomWorldLighting = false;
 	bool _hasCustomWorldGraphics = false;
 	bool _hasCustomWorldSky = false;
@@ -301,7 +290,6 @@ private:
 	bool _isDeletingWorld = false;
 	bool _isEditorLoaded = false;
 
-	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
 	GuiManager& _gui;
 	SkyEditor& _skyEditor;

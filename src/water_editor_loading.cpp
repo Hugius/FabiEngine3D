@@ -11,28 +11,23 @@ using std::istringstream;
 
 const vector<string> WaterEditor::getTexturePathsFromFile() const
 {
-	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("WaterEditor::getTexturePathsFromFile");
 	}
 
-	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\water.fe3d");
 
-	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project corrupted: file `water.fe3d` missing!");
 		return {};
 	}
 
-	// Load water file
 	ifstream file(filePath);
 
-	// Read water data
 	vector<string> texturePaths;
 	string line;
 	while(getline(file, line))
@@ -100,40 +95,32 @@ const vector<string> WaterEditor::getTexturePathsFromFile() const
 		}
 	}
 
-	// Close file
 	file.close();
 
-	// Return
 	return texturePaths;
 }
 
 const bool WaterEditor::loadFromFile()
 {
-	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("WaterEditor::loadFromFile");
 	}
 
-	// Clear IDs from previous loads
 	_loadedWaterIDs.clear();
 
-	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\water.fe3d");
 
-	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project corrupted: file `water.fe3d` missing!");
 		return false;
 	}
 
-	// Load water file
 	ifstream file(filePath);
 
-	// Read water data
 	string line;
 	while(getline(file, line))
 	{
@@ -246,12 +233,9 @@ const bool WaterEditor::loadFromFile()
 		}
 	}
 
-	// Close file
 	file.close();
 
-	// Logging
 	Logger::throwInfo("Water data loaded!");
 
-	// Return
 	return true;
 }

@@ -29,7 +29,6 @@ void GuiViewport::update(bool hoverable)
 
 const bool GuiViewport::isHovered() const
 {
-	// Check if entity is visible anyway
 	if(_fe3d.image_isVisible(_entityID))
 	{
 		// Convert dimensions to same space
@@ -72,7 +71,6 @@ void GuiViewport::createWindow(const string& ID, fvec2 position, fvec2 size, fve
 
 void GuiViewport::deleteWindow(const string& ID)
 {
-	// Delete window
 	for(size_t i = 0; i < _windows.size(); i++)
 	{
 		if(_windows[i]->getID() == ID)
@@ -82,7 +80,6 @@ void GuiViewport::deleteWindow(const string& ID)
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiViewport::deleteWindow");
 }
 
@@ -93,7 +90,6 @@ const vector<shared_ptr<GuiWindow>>& GuiViewport::getWindows() const
 
 shared_ptr<GuiWindow> GuiViewport::getWindow(const string& ID) const
 {
-	// Retrieve window
 	for(const auto& window : _windows)
 	{
 		if(ID == window->getID())
@@ -102,6 +98,5 @@ shared_ptr<GuiWindow> GuiViewport::getWindow(const string& ID) const
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiViewport::getWindow");
 }

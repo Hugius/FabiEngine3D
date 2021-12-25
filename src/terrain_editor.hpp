@@ -8,24 +8,20 @@ class TerrainEditor final
 public:
 	TerrainEditor(FabiEngine3D& fe3d, GuiManager& gui);
 
-	// VOID
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void update();
 	void unload();
 
-	// STRING
 	const vector<string> getBitmapPathsFromFile() const;
 	const vector<string> getTexturePathsFromFile() const;
 	const vector<string>& getLoadedIDs();
 
-	// BOOL
 	const bool loadFromFile();
 	const bool saveToFile() const;
 	const bool isLoaded() const;
 
 private:
-	// VOID
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateMainMenu();
@@ -41,12 +37,10 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	// STRING
 	vector <string> _loadedTerrainIDs;
 	string _currentProjectID = "";
 	string _currentTerrainID = "";
 
-	// FLOAT
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 	static inline const float CURSOR_SENSITIVITY = 0.025f;
@@ -60,13 +54,11 @@ private:
 	static inline const float CAMERA_DISTANCE_SPEED = 5.0f;
 	static inline const float MIN_CAMERA_DISTANCE = 0.5f;
 
-	// BOOL
 	bool _isCreatingTerrain = false;
 	bool _isChoosingTerrain = false;
 	bool _isDeletingTerrain = false;
 	bool _isEditorLoaded = false;
 
-	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
 	GuiManager& _gui;
 };

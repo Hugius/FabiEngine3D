@@ -2,17 +2,14 @@
 
 void BottomViewportController::_updateConsole()
 {
-	// Script cannot be running
 	if(_topViewportController.isScriptRunning())
 	{
 		return;
 	}
 
-	// Temporary values
 	const auto window = _gui.getViewport("bottom")->getWindow("console");
 	float scrollingSpeed = static_cast<float>(_fe3d.input_getMouseWheelY()) * static_cast<float>(window->isHovered()) * 0.1f;
 
-	// No scrolling for empty console
 	if(!_consoleMessageQueue.empty() && scrollingSpeed != 0.0f)
 	{
 		// Temporary values
@@ -79,7 +76,6 @@ void BottomViewportController::_updateConsole()
 
 void BottomViewportController::_addConsoleMessage(const string& newMessage)
 {
-	// Temporary values
 	auto window = _gui.getViewport("bottom")->getWindow("console");
 	auto screen = window->getScreen("main");
 	const float timePartOffset = CHAR_SIZE.x * static_cast<float>(TIME_PART_LENGTH) * 2.0f; // Offset from time part
@@ -87,11 +83,9 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 	const fvec2 minPosition = fvec2(-1.0f, window->getInitialPosition().y - (window->getInitialSize().y / 2.0f));
 	const fvec2 maxPosition = fvec2(0.995f, window->getInitialPosition().y + (window->getInitialSize().y / 2.0f));
 
-	// Add to stack for synchronization
 	string newID = to_string(_consoleMessageQueue.size());
 	_consoleMessageQueue.push_back(make_pair(newID, newMessage));
 
-	// Reposition previous messages & add new message
 	reverse(_consoleMessageQueue.begin(), _consoleMessageQueue.end()); // Console prints reversed
 	unsigned int index = 0;
 	for(const auto& [ID, message] : _consoleMessageQueue)
@@ -245,13 +239,10 @@ void BottomViewportController::_deleteConsoleMessage(const string& ID)
 	auto window = _gui.getViewport("bottom")->getWindow("console");
 	auto screen = window->getScreen("main");
 
-	// Delete time part
 	screen->deleteTextField(ID + "_time");
 
-	// Delete separator part
 	screen->deleteTextField(ID + "_separator");
 
-	// Delete all message parts
 	unsigned int index = 0;
 	while(screen->isTextFieldExisting(ID + "_msg_" + to_string(index)))
 	{

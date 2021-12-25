@@ -16,18 +16,15 @@ Camera::Camera(RenderBus& renderBus, RenderWindow& window)
 
 void Camera::reset()
 {
-	// MAT44
 	_viewMatrix = mat44(1.0f);
 	_projectionMatrix = mat44(1.0f);
 
-	// FVEC3
 	_upVector = DEFAULT_UP_VECTOR;
 	_frontVector = fvec3(0.0f);
 	_rightVector = fvec3(0.0f);
 	_position = fvec3(0.0f);
 	_thirdPersonLookat = fvec3(0.0f);
 
-	// FLOAT
 	_aspectRatio = static_cast<float>(Config::getInst().getWindowSize().x) / static_cast<float>(Config::getInst().getWindowSize().y);
 	_fov = DEFAULT_FOV_ANGLE;
 	_nearDistance = NEAR_DISTANCE;
@@ -49,7 +46,6 @@ void Camera::reset()
 	_thirdPersonPitchAcceleration = 0.0f;
 	_thirdPersonDistance = 0.0f;
 
-	// BOOL
 	_isFirstPersonViewEnabled = false;
 	_isThirdPersonViewEnabled = false;
 	_mustCenterCursor = false;
@@ -58,14 +54,12 @@ void Camera::reset()
 
 void Camera::update(ivec2 lastCursorPosition)
 {
-	// Temporary values
 	ivec2 currenCursorPosition = _window.getCursorPosition();
 	const int left = Config::getInst().getViewportPosition().x;
 	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getViewportPosition().y + Config::getInst().getViewportSize().y);
 	const int xMiddle = left + (Config::getInst().getViewportSize().x / 2);
 	const int yMiddle = bottom + (Config::getInst().getViewportSize().y / 2);
 
-	// Update cursor centering
 	if(_mustCenterCursor)
 	{
 		_window.setCursorPosition({xMiddle, yMiddle});
@@ -73,7 +67,6 @@ void Camera::update(ivec2 lastCursorPosition)
 		_cursorIsBeingCentered = true;
 	}
 
-	// Check if cursor reached center or cursor moved
 	if(_cursorIsBeingCentered)
 	{
 		if(currenCursorPosition == ivec2(xMiddle, yMiddle) || currenCursorPosition != lastCursorPosition)
@@ -82,7 +75,6 @@ void Camera::update(ivec2 lastCursorPosition)
 		}
 	}
 
-	// Update first person camera
 	if(_isFirstPersonViewEnabled && !_cursorIsBeingCentered)
 	{
 		// Offset between current cursor position & middle of the screen
@@ -123,7 +115,6 @@ void Camera::update(ivec2 lastCursorPosition)
 		_firstPersonPitchAcceleration = 0.0f;
 	}
 
-	// Update third person camera
 	if(_isThirdPersonViewEnabled && !_cursorIsBeingCentered)
 	{
 		// Offset between current cursor position & middle of the screen
@@ -178,10 +169,8 @@ void Camera::update(ivec2 lastCursorPosition)
 		_thirdPersonPitchAcceleration = 0.0f;
 	}
 
-	// Limit view angles
 	_yaw = Math::limitAngle(_yaw);
 	_pitch = clamp(_pitch, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
 
-	// Update matrices
 	updateMatrices();
 }

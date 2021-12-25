@@ -12,41 +12,30 @@ public:
 	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, int value);
 	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, bool value);
 
-	// VOID
 	void setString(const string& value);
 	void setDecimal(float value);
 	void setInteger(int value);
 	void setBoolean(bool value);
 
-	// STRING
 	const string& getString() const;
 
-	// FLOAT
 	const float getDecimal() const;
 
-	// INT
 	const int getInteger() const;
 
-	// BOOL
 	const bool getBoolean() const;
 
-	// MISCELLANEOUS
 	const ScriptValueType& getType() const;
 
 private:
-	// STRING
 	string _string = "";
 
-	// FLOAT
 	float _decimal = 0.0f;
 
-	// INT
 	int _integer = 0;
 
-	// BOOL
 	bool _boolean = false;
 
-	// MISCELLANEOUS
 	ScriptValueType _type;
 	FabiEngine3D& _fe3d;
 };

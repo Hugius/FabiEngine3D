@@ -3,10 +3,8 @@
 
 void SoundEditor::_updateMainMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "soundEditorMenuMain")
 	{
 		// Button management
@@ -60,10 +58,8 @@ void SoundEditor::_updateMainMenu()
 
 void SoundEditor::_updateChoiceMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "soundEditorMenuChoice")
 	{
 		// Temporary values

@@ -9,19 +9,15 @@ using std::launch;
 const TextureID TextureLoader::load2dTexture(const string& filePath, bool isMipmapped, bool isAnisotropic)
 {
 	BEGIN:;
-	// Search cache
 	auto cacheIterator = _2dTextureCache.find(filePath);
 
-	// Return from cache
 	if(cacheIterator != _2dTextureCache.end())
 	{
 		return cacheIterator->second;
 	}
 
-	// Load SDL surface
 	auto loadedSurface = _loadSurface(filePath);
 
-	// Check surface status
 	if(loadedSurface == nullptr)
 	{
 		Logger::throwWarning("Cannot load image: \"" + filePath + "\"!");
@@ -54,26 +50,21 @@ const TextureID TextureLoader::load2dTexture(const string& filePath, bool isMipm
 const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 {
 	BEGIN:;
-	// Search cache
 	auto cacheIterator = _3dTextureCache.find(filePaths);
 
-	// Return from cache
 	if(cacheIterator != _3dTextureCache.end())
 	{
 		return cacheIterator->second;
 	}
 
-	// Temporary values
 	vector<future<SDL_Surface*>> threads;
 	array<SDL_Surface*, 6> loadedSurfaces = {};
 
-	// Start all loading threads
 	for(size_t i = 0; i < filePaths.size(); i++)
 	{
 		threads.push_back(async(launch::async, &TextureLoader::_loadSurface, this, filePaths[i]));
 	}
 
-	// Wait for all threads to finish
 	for(size_t i = 0; i < threads.size(); i++)
 	{
 		// Save loaded surface
@@ -86,10 +77,8 @@ const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 		}
 	}
 
-	// Load OpenGL texture
 	TextureID loadedTexture = _convertInto3dTexture(loadedSurfaces, filePaths);
 
-	// Memory management
 	for(const auto& surface : loadedSurfaces)
 	{
 		// Only if memory is present
@@ -99,7 +88,6 @@ const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 		}
 	}
 
-	// Check texture status
 	if(loadedTexture == 0)
 	{
 		return 0;
@@ -117,19 +105,15 @@ const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 const vector<float>* TextureLoader::loadBitmap(const string& filePath)
 {
 	BEGIN:;
-	// Search cache
 	auto cacheIterator = _bitmapCache.find(filePath);
 
-	// Return from cache
 	if(cacheIterator != _bitmapCache.end())
 	{
 		return &cacheIterator->second;
 	}
 
-	// Load bitmap
 	auto loadedBitmap = _loadBitmap(filePath);
 
-	// Check bitmap status
 	if(loadedBitmap.empty())
 	{
 		Logger::throwWarning("Cannot load bitmap: \"" + filePath + "\"!");
@@ -151,22 +135,17 @@ const vector<float>* TextureLoader::loadBitmap(const string& filePath)
 const TextureID TextureLoader::load2dTexture(const string& textContent, const string& fontPath)
 {
 	BEGIN:;
-	// Temporary values
 	TTF_Font* font = nullptr;
 
-	// Search text cache
 	auto textCacheIterator = _textCache.find(make_pair(textContent, fontPath));
 
-	// Return from text cache
 	if(textCacheIterator != _textCache.end())
 	{
 		return textCacheIterator->second;
 	}
 
-	// Search font cache
 	auto fontCacheIterator = _fontCache.find(fontPath);
 
-	// Check font status
 	if(fontCacheIterator == _fontCache.end())
 	{
 		// Load font
@@ -192,10 +171,8 @@ const TextureID TextureLoader::load2dTexture(const string& textContent, const st
 		font = fontCacheIterator->second;
 	}
 
-	// Load OpenGL texture
 	TextureID loadedTexture = _convertInto2dTexture(font, textContent);
 
-	// Check texture status
 	if(loadedTexture == 0)
 	{
 		return 0;

@@ -2,10 +2,8 @@
 
 void WorldEditor::_updateBillboardEditing()
 {
-	// Temporary values
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
-	// Reset selected billboard from last frame
 	if(!_dontResetSelectedBillboard)
 	{
 		_selectedBillboardID = "";
@@ -15,7 +13,6 @@ void WorldEditor::_updateBillboardEditing()
 		_dontResetSelectedBillboard = false;
 	}
 
-	// User must not be placing anything
 	if(_currentTemplateModelID.empty() && _currentTemplateBillboardID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingReflection)
 	{
 		// Check if user selected a billboard

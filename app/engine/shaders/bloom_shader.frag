@@ -20,11 +20,9 @@ void main()
 		return;
     }
 
-	// Texture mapping
 	vec3 worldColor = texture(u_worldMap, f_uv).rgb;
 	vec3 bloomColor = texture(u_bloomMap, f_uv).rgb;
 
-	// Final color
     o_finalColor.rgb = (worldColor + bloomColor);
 	o_finalColor.a = 1.0f;
 }

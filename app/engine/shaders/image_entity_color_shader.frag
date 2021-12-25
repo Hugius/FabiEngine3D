@@ -25,18 +25,15 @@ float convertDepthToPerspective(float depth);
 
 void main()
 {
-	// Wireframe color
 	if(u_isWireframed)
 	{
 		o_finalColor = vec4(u_wireframeColor, 1.0f);
 		return;
 	}
 
-	// Calculate fragment position and convert to NDC
 	vec2 normalizedPosition = (gl_FragCoord.xy / u_windowSize);
 	vec2 ndcPosition = ((normalizedPosition * 2.0f) - vec2(1.0f));
 
-	// Determine if fragment is outside of maximum bounds
 	if ((ndcPosition.x > u_maxPosition.x) || (ndcPosition.y > u_maxPosition.y) || (ndcPosition.x < u_minPosition.x) || (ndcPosition.y < u_minPosition.y))
 	{
 		discard;

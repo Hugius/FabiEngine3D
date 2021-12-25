@@ -30,7 +30,6 @@ void GuiTextField::setVisible(bool isVisible)
 
 void GuiTextField::changeTextContent(const string& content)
 {
-	// Check if text content changed
 	if(content != _fe3d.text_getContent(_entityID))
 	{
 		auto charWidth = (_initialSize.x / static_cast<float>(_fe3d.text_getContent(_entityID).size()));

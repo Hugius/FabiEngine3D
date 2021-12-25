@@ -16,13 +16,11 @@ void FabiEngine3D::billboard_deleteAll()
 
 void FabiEngine3D::billboard_delete(const string& ID)
 {
-	// Delete all bound AABB entities if existing
 	for(const auto& aabbID : aabb_getChildIDs(ID, AabbParentEntityType::BILLBOARD))
 	{
 		_core->_aabbEntityManager.deleteEntity(aabbID);
 	}
 
-	// Delete billboard entity
 	_core->_billboardEntityManager.deleteEntity(ID);
 }
 
@@ -213,13 +211,10 @@ void FabiEngine3D::billboard_setEmissionIntensity(const string& ID, float value)
 
 void FabiEngine3D::billboard_setFont(const string& ID, const string& value)
 {
-	// Temporary values
 	auto entity = _core->_billboardEntityManager.getEntity(ID);
 
-	// Set font path
 	entity->setFontPath(value);
 
-	// Load text
 	auto textContent = entity->getTextContent();
 	if(!textContent.empty())
 	{
@@ -229,10 +224,8 @@ void FabiEngine3D::billboard_setFont(const string& ID, const string& value)
 
 void FabiEngine3D::billboard_setTextContent(const string& ID, const string& value)
 {
-	// Temporary values
 	auto entity = _core->_billboardEntityManager.getEntity(ID);
 
-	// Font must be loaded
 	auto fontPath = entity->getFontPath();
 	if(fontPath.empty())
 	{
@@ -240,7 +233,6 @@ void FabiEngine3D::billboard_setTextContent(const string& ID, const string& valu
 		return;
 	}
 
-	// Check if new text content is not the same as the current one
 	if(entity->getTextContent() != value)
 	{
 		// Set text content

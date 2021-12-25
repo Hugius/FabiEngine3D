@@ -3,10 +3,8 @@
 
 void MasterRenderer::_captureWaterRefractions()
 {
-	// Temporary values
 	const auto waterEntity = _entityBus->getWaterEntity();
 
-	// Check if water refractions needed
 	if((waterEntity != nullptr) && waterEntity->isRefractive())
 	{
 		// Start capturing refractions

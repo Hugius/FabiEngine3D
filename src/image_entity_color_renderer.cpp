@@ -4,25 +4,20 @@
 
 void ImageEntityColorRenderer::bind()
 {
-	// Bind shader
 	_shader.bind();
 
-	// Shader uniforms
 	_shader.uploadUniform("u_nearDistance", _renderBus.getNearDistance());
 	_shader.uploadUniform("u_farDistance", _renderBus.getFarDistance());
 	_shader.uploadUniform("u_diffuseMap", 0);
 
-	// Enable transparency
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void ImageEntityColorRenderer::unbind()
 {
-	// Disable transparency
 	glDisable(GL_BLEND);
 
-	// Unbind shader
 	_shader.unbind();
 }
 

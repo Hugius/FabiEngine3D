@@ -41,49 +41,38 @@ ScriptEditor::ScriptEditor(FabiEngine3D& fe3d,
 
 void ScriptEditor::load()
 {
-	// GUI
 	_loadGUI();
 
-	// Camera
 	_fe3d.camera_reset();
 	_fe3d.camera_setPosition(CAMERA_POSITION);
 	_fe3d.camera_setFOV(CAMERA_FOV);
 	_fe3d.camera_setYaw(270.0f);
 	_fe3d.camera_setPitch(0.0f);
 
-	// Graphics
 	_fe3d.gfx_enableBloom();
 	_fe3d.gfx_setBloomType(BloomType::PARTS);
 	_fe3d.gfx_setBloomIntensity(0.95f);
 	_fe3d.gfx_setBloomBlurCount(2);
 	_fe3d.gfx_setBloomQuality(BLOOM_QUALITY);
 
-	// Background
 	_fe3d.sky_selectMainSky("");
 	Tools::setRenderColor(BACKGROUND_COLOR);
 
-	// Miscellaneous
 	_isEditorLoaded = true;
 }
 
 void ScriptEditor::unload()
 {
-	// GUI
 	_unloadGUI();
 
-	// Graphics
 	_fe3d.gfx_disableBloom(true);
 
-	// Editor billboards
 	_fe3d.billboard_deleteAll();
 
-	// Editor AABBs
 	_fe3d.aabb_deleteAll();
 
-	// Reset script
 	_script.reset();
 
-	// Editor properties
 	_scriptFileNamesToDelete.clear();
 	_copyClipboard.clear();
 	_currentScriptFileID = "";
@@ -107,10 +96,8 @@ void ScriptEditor::unload()
 
 void ScriptEditor::_loadGUI()
 {
-	// Temporary values
 	auto leftWindow = _gui.getViewport("left")->getWindow("main");
 
-	// Left-viewport: scriptEditorMenuMain
 	auto positions = VPC::calculateButtonPositions(7, CH);
 	leftWindow->createScreen("scriptEditorMenuMain");
 	leftWindow->getScreen("scriptEditorMenuMain")->createTextField("lineCount", fvec2(0.0f, positions[0]), fvec2(TW("Lines: 0"), CH), "Lines: 0", fvec3(1.0f), true, false);

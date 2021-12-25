@@ -3,11 +3,9 @@
 
 void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 {
-	// Temporary values
 	string nameString = "";
 	string typeString = "";
 
-	// Extract variable name
 	for(const auto& c : scriptLine.substr(CASTING_KEYWORD.size() + 1))
 	{
 		if(c == ' ')
@@ -20,41 +18,34 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 		}
 	}
 
-	// Check if variable not existing
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
 		_throwScriptError("variable \"" + nameString + "\" not existing!");
 		return;
 	}
 
-	// Check if type is missing
 	if(scriptLine.size() < (CASTING_KEYWORD.size() + nameString.size() + 3))
 	{
 		_throwScriptError("type missing!");
 		return;
 	}
 
-	// Extract new variable type
 	typeString = scriptLine.substr(CASTING_KEYWORD.size() + nameString.size() + 2);
 
-	// Retrieve variable
 	auto& variable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
-	// Check if variable is a list
 	if(variable.getType() == ScriptVariableType::MULTIPLE)
 	{
 		_throwScriptError("LIST variables cannot be typecasted!");
 		return;
 	}
 
-	// Check if variable is constant
 	if(variable.isConstant())
 	{
 		_throwScriptError("CONST variables cannot be typecasted!");
 		return;
 	}
 
-	// Determine new type
 	if((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == BOOLEAN_KEYWORD)) // From INT to BOOL
 	{
 		variable.setValue(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, static_cast<bool>(variable.getValue().getInteger())));

@@ -5,7 +5,6 @@ using std::max;
 
 void BillboardEditor::_updateCamera()
 {
-	// Check if third person view is enabled
 	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
 		// Update distance scrolling
@@ -38,7 +37,6 @@ void BillboardEditor::_updateCamera()
 		_fe3d.gfx_setShadowReach(distance * 8.0f);
 	}
 
-	// Check if allowed by GUI
 	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Check if RMB pressed
@@ -56,7 +54,6 @@ void BillboardEditor::_updateCamera()
 		}
 	}
 
-	// Disable third person view if necessary
 	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
 		if(_gui.getOverlay()->isFocused())
@@ -68,7 +65,6 @@ void BillboardEditor::_updateCamera()
 
 void BillboardEditor::_updateMiscellaneous()
 {
-	// Check if allowed by GUI
 	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Update reference model visibility

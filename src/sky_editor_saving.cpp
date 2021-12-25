@@ -9,22 +9,18 @@ using std::ofstream;
 
 const bool SkyEditor::saveToFile() const
 {
-	// Editor must be loaded
 	if(!_isEditorLoaded)
 	{
 		return false;
 	}
 
-	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("SkyEditor::saveToFile");
 	}
 
-	// Create or overwrite file
 	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\sky.fe3d");
 
-	// Write sky data
 	for(const auto& skyID : _loadedSkyIDs)
 	{
 		// Values
@@ -64,12 +60,9 @@ const bool SkyEditor::saveToFile() const
 			color.b << endl;
 	}
 
-	// Close file
 	file.close();
 
-	// Logging
 	Logger::throwInfo("Sky data saved!");
 
-	// Return
 	return true;
 }

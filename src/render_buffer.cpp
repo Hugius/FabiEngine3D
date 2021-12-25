@@ -3,21 +3,16 @@
 
 RenderBuffer::RenderBuffer(RenderBufferType type, const float data[], unsigned int dataCount)
 {
-	// Set buffer type
 	_bufferType = type;
 
-	// Create buffers
 	glGenVertexArrays(1, &_vao);
 	glGenBuffers(1, &_vbo);
 
-	// Bind buffers
 	glBindVertexArray(_vao);
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 
-	// Allocate buffer data
 	glBufferData(GL_ARRAY_BUFFER, (dataCount * sizeof(float)), &data[0], GL_STATIC_DRAW);
 
-	// Store buffer data
 	switch(type)
 	{
 		case RenderBufferType::VERTEX:
@@ -62,20 +57,16 @@ RenderBuffer::RenderBuffer(RenderBufferType type, const float data[], unsigned i
 		}
 	}
 
-	// Unbind buffers
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 }
 
 RenderBuffer::RenderBuffer(float x, float y, float w, float h, bool isCentered)
 {
-	// Temporary values
 	float* data = nullptr;
 
-	// Set buffer type
 	_bufferType = RenderBufferType::VERTEX_UV;
 
-	// Determine center point of the quad
 	if(isCentered)
 	{
 		data = new float[24]
@@ -103,24 +94,19 @@ RenderBuffer::RenderBuffer(float x, float y, float w, float h, bool isCentered)
 		};
 	}
 
-	// Create buffers
 	glGenVertexArrays(1, &_vao);
 	glGenBuffers(1, &_vbo);
 
-	// Bind buffers
 	glBindVertexArray(_vao);
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 
-	// Allocate buffer data
 	glBufferData(GL_ARRAY_BUFFER, 24 * sizeof(float), &data[0], GL_STATIC_DRAW);
 
-	// Store buffer data
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (GLvoid*)(2 * sizeof(float)));
 
-	// Unbind buffers
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 

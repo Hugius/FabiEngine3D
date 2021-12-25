@@ -21,23 +21,19 @@ public:
 				 SoundEditor& soundEditor,
 				 WorldEditor& worldEditor);
 
-	// VOID
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
 	void update();
 
-	// BOOL
 	const bool loadScriptFiles(bool isLoggingEnabled);
 	const bool saveScriptFiles();
 	const bool isLoaded() const;
 	const bool isWritingScript() const;
 
-	// MISCELLANEOUS
 	ScriptExecutor& getScriptExecutor();
 
 private:
-	// VOID
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateGUI();
@@ -51,7 +47,6 @@ private:
 	void _reloadScriptTextDisplay(bool reloadAabbs);
 	void _copySelectedText();
 
-	// STRING
 	static inline const string FONT_PATH = "engine\\assets\\font\\font.ttf";
 	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
 	vector<string> _scriptFileNamesToDelete;
@@ -59,7 +54,6 @@ private:
 	string _currentProjectID = "";
 	string _currentScriptFileID = "";
 
-	// FVEC3
 	static inline const fvec3 CAMERA_POSITION = fvec3(0.0f, 0.0f, 10.0f);
 	static inline const fvec3 SCRIPT_TEXT_STARTING_POSITION = fvec3(-11.0f, 6.0f, 0.5f);
 	static inline const fvec3 BACKGROUND_COLOR = fvec3(0.05f);
@@ -69,10 +63,8 @@ private:
 	static inline const fvec3 DEFAULT_TEXT_COLOR = fvec3(1.0f);
 	static inline const fvec3 COMMENT_TEXT_COLOR = fvec3(0.0f, 0.75f, 0.0f);
 
-	// FVEC2
 	static inline const fvec2 TEXT_CHARACTER_SIZE = fvec2(0.25f, 0.75f);
 
-	// FLOAT
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 	static inline const float SCROLLING_SPEED = 0.1f;
@@ -86,11 +78,9 @@ private:
 	static inline const float AABB_DEPTH = 0.01f;
 	float _scrollingAcceleration = 0.0f;
 
-	// INT
 	int _firstSelectedLineIndex = -1;
 	int _lastSelectedLineIndex = -1;
 
-	// UNSIGNED INT
 	static inline const unsigned int CONTINUOUS_TEXT_ACTION_FRAME_MINIMUM = 75;
 	static inline const unsigned int CONTINUOUS_TEXT_ACTION_INTERVAL = 5;
 	static inline const unsigned int MAX_PASSED_BAR_FRAMES = 50;
@@ -100,7 +90,6 @@ private:
 	static inline const unsigned int BLOOM_QUALITY = 1;
 	unsigned int _passedFrames = 0;
 
-	// CHAR
 	static inline const vector<pair<char, char>> NUMBER_CHARACTERS =
 	{
 		{'0', ')'},
@@ -128,7 +117,6 @@ private:
 		{'=', '+'}
 	};
 
-	// BOOL
 	bool _isScriptLoadedFromFile = false;
 	bool _isWritingScript = false;
 	bool _isSingleActionAllowed = true;
@@ -141,7 +129,6 @@ private:
 	bool _isRenamingScriptFile = false;
 	bool _isSearchingScriptFile = false;
 
-	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
 	GuiManager& _gui;
 	Script _script;

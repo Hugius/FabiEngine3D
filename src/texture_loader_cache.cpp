@@ -16,17 +16,14 @@ using std::chrono::system_clock;
 
 void TextureLoader::cache2dTextures(const vector<string>& filePaths, bool isMipmapped, bool isAnisotropic)
 {
-	// Temporary values
 	vector<future<SDL_Surface*>> threads;
 	vector<string> finalFilePaths;
 	vector<bool> threadStatuses;
 	unsigned int finishedThreadCount = 0;
 
-	// Remove duplicates
 	auto tempFilePaths = set<string>(filePaths.begin(), filePaths.end());
 	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
 
-	// Start all loading threads
 	for(const auto& filePath : uniqueFilePaths)
 	{
 		// Check if texture is not already cached
@@ -38,7 +35,6 @@ void TextureLoader::cache2dTextures(const vector<string>& filePaths, bool isMipm
 		}
 	}
 
-	// Wait for all threads to finish
 	while(finishedThreadCount != threadStatuses.size())
 	{
 		// For all threads
@@ -85,13 +81,11 @@ void TextureLoader::cache2dTextures(const vector<string>& filePaths, bool isMipm
 
 void TextureLoader::cache3dTextures(const vector<array<string, 6>>& filePathsList)
 {
-	// Temporary values
 	vector<vector<future<SDL_Surface*>>> threads;
 	vector<array<string, 6>> finalFilePathsList;
 	vector<bool> threadStatuses;
 	unsigned int finishedThreadCount = 0;
 
-	// Start all loading threads
 	for(const auto& filePaths : filePathsList)
 	{
 		// Check if texture is not already cached
@@ -108,7 +102,6 @@ void TextureLoader::cache3dTextures(const vector<array<string, 6>>& filePathsLis
 		}
 	}
 
-	// Wait for all threads to finish
 	while(finishedThreadCount != threadStatuses.size())
 	{
 		// For all threads
@@ -176,17 +169,14 @@ void TextureLoader::cache3dTextures(const vector<array<string, 6>>& filePathsLis
 
 void TextureLoader::cacheBitmaps(const vector<string>& filePaths)
 {
-	// Temporary values
 	vector<future<vector<float>>> threads;
 	vector<string> finalFilePaths;
 	vector<bool> threadStatuses;
 	unsigned int finishedThreadCount = 0;
 
-	// Remove duplicates
 	auto tempFilePaths = set<string>(filePaths.begin(), filePaths.end());
 	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
 
-	// Start all loading threads
 	for(const auto& filePath : uniqueFilePaths)
 	{
 		// Check if bitmap is not already cached
@@ -198,7 +188,6 @@ void TextureLoader::cacheBitmaps(const vector<string>& filePaths)
 		}
 	}
 
-	// Wait for all threads to finish
 	while(finishedThreadCount != threadStatuses.size())
 	{
 		// For all threads
@@ -238,17 +227,14 @@ void TextureLoader::cacheBitmaps(const vector<string>& filePaths)
 
 void TextureLoader::cacheFonts(const vector<string>& filePaths)
 {
-	// Temporary values
 	vector<future<TTF_Font*>> threads;
 	vector<string> finalFilePaths;
 	vector<bool> threadStatuses;
 	unsigned int finishedThreadCount = 0;
 
-	// Remove duplicates
 	auto tempFilePaths = set<string>(filePaths.begin(), filePaths.end());
 	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
 
-	// Start all loading threads
 	for(const auto& filePath : uniqueFilePaths)
 	{
 		// Check if font is not already cached
@@ -260,7 +246,6 @@ void TextureLoader::cacheFonts(const vector<string>& filePaths)
 		}
 	}
 
-	// Wait for all threads to finish
 	while(finishedThreadCount != threadStatuses.size())
 	{
 		// For all threads
@@ -326,14 +311,12 @@ void TextureLoader::clearBitmapCache(const string& filePath)
 
 void TextureLoader::clearFontCache(const string& filePath)
 {
-	// Clear font cache
 	if(_fontCache.find(filePath) != _fontCache.end())
 	{
 		TTF_CloseFont(_fontCache[filePath]);
 		_fontCache.erase(filePath);
 	}
 
-	// Clear text cache
 	for(const auto& [key, textureID] : _textCache)
 	{
 		// Check if font corresponds

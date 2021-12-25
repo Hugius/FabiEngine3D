@@ -4,10 +4,8 @@
 
 void WorldEditor::_updateSettingsMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuSettings")
 	{
 		// Button management
@@ -39,10 +37,8 @@ void WorldEditor::_updateSettingsMenu()
 
 void WorldEditor::_updateLightingSettingsMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuSettingsLighting")
 	{
 		// Button management
@@ -64,10 +60,8 @@ void WorldEditor::_updateLightingSettingsMenu()
 
 void WorldEditor::_updateGraphicsSettingsMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuSettingsGraphics")
 	{
 		// Button management

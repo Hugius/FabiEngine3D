@@ -9,19 +9,16 @@ using std::ofstream;
 
 const bool ScriptEditor::saveScriptFiles()
 {
-	// Editor must be loaded
 	if(!_isEditorLoaded)
 	{
 		return false;
 	}
 
-	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("ScriptEditor::saveScriptsToFile");
 	}
 
-	// Delete all text files containing deleted scripts
 	for(const auto& fileName : _scriptFileNamesToDelete)
 	{
 		// Compose file path
@@ -35,7 +32,6 @@ const bool ScriptEditor::saveScriptFiles()
 	}
 	_scriptFileNamesToDelete.clear();
 
-	// Write every script to a text file
 	for(const auto& scriptID : _script.getScriptFileIDs())
 	{
 		// Create or overwrite file
@@ -54,9 +50,7 @@ const bool ScriptEditor::saveScriptFiles()
 		file.close();
 	}
 
-	// Logging
 	Logger::throwInfo("Script data saved!");
 
-	// Return
 	return true;
 }

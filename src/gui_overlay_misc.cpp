@@ -9,25 +9,21 @@ GuiOverlay::GuiOverlay(FabiEngine3D& fe3d)
 
 void GuiOverlay::update()
 {
-	// Update scrolling lists
 	for(const auto& scrollingList : _scrollingLists)
 	{
 		scrollingList->update(true);
 	}
 
-	// Update writeFields
 	for(const auto& writeField : _writeFields)
 	{
 		writeField->update(true);
 	}
 
-	// Update buttons
 	for(const auto& button : _buttons)
 	{
 		button->update(true);
 	}
 
-	// Miscellaneous
 	_updateValueFormDeleting();
 }
 

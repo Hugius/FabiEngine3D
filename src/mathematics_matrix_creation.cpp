@@ -2,110 +2,84 @@
 
 const mat44 Math::createTranslationMatrixX(float value)
 {
-	// Result
 	mat44 newMatrix;
 
-	// Create
 	newMatrix.m[3][0] = value;
 
-	// Return
 	return newMatrix;
 }
 
 const mat44 Math::createTranslationMatrixY(float value)
 {
-	// Result
 	mat44 newMatrix;
 
-	// Create
 	newMatrix.m[3][1] = value;
 
-	// Return
 	return newMatrix;
 }
 
 const mat44 Math::createTranslationMatrixZ(float value)
 {
-	// Result
 	mat44 newMatrix;
 
-	// Create
 	newMatrix.m[3][2] = value;
 
-	// Return
 	return newMatrix;
 }
 
 const mat44 Math::createTranslationMatrix(float x, float y, float z)
 {
-	// Result
 	mat44 newMatrix;
 
-	// Create
 	newMatrix.m[3][0] = x;
 	newMatrix.m[3][1] = y;
 	newMatrix.m[3][2] = z;
 
-	// Return
 	return newMatrix;
 }
 
 const mat44 Math::createScalingMatrix(float x, float y, float z)
 {
-	// Result
 	mat44 newMatrix;
 
-	// Create
 	newMatrix.m[0][0] = x;
 	newMatrix.m[1][1] = y;
 	newMatrix.m[2][2] = z;
 
-	// Return
 	return newMatrix;
 }
 
 const mat44 Math::createScalingMatrixX(float value)
 {
-	// Result
 	mat44 newMatrix;
 
-	// Create
 	newMatrix.m[0][0] = value;
 
-	// Return
 	return newMatrix;
 }
 
 const mat44 Math::createScalingMatrixY(float value)
 {
-	// Result
 	mat44 newMatrix;
 
-	// Create
 	newMatrix.m[1][1] = value;
 
-	// Return
 	return newMatrix;
 }
 
 const mat44 Math::createScalingMatrixZ(float value)
 {
-	// Result
 	mat44 newMatrix;
 
-	// Create
 	newMatrix.m[2][2] = value;
 
-	// Return
 	return newMatrix;
 }
 
 const mat44 Math::createRotationMatrix(float x, float y, float z, DirectionOrder order)
 {
-	// Result
 	mat44 newMatrix;
 
-	// Create
 	if(order == DirectionOrder::XYZ)
 	{
 		newMatrix = (newMatrix * createRotationMatrixX(x));
@@ -143,61 +117,49 @@ const mat44 Math::createRotationMatrix(float x, float y, float z, DirectionOrder
 		newMatrix = (newMatrix * createRotationMatrixX(x));
 	}
 
-	// Return
 	return newMatrix;
 }
 
 const mat44 Math::createRotationMatrixX(float angle)
 {
-	// Result
 	mat44 newMatrix;
 
-	// Create
 	newMatrix.m[1][1] = cos(angle);
 	newMatrix.m[1][2] = sin(angle);
 	newMatrix.m[2][1] = -sin(angle);
 	newMatrix.m[2][2] = cos(angle);
 
-	// Return
 	return newMatrix;
 }
 
 const mat44 Math::createRotationMatrixY(float angle)
 {
-	// Result
 	mat44 newMatrix;
 
-	// Create
 	newMatrix.m[0][0] = cos(angle);
 	newMatrix.m[0][2] = -sin(angle);
 	newMatrix.m[2][0] = sin(angle);
 	newMatrix.m[2][2] = cos(angle);
 
-	// Return
 	return newMatrix;
 }
 
 const mat44 Math::createRotationMatrixZ(float angle)
 {
-	// Result
 	mat44 newMatrix;
 
-	// Create
 	newMatrix.m[0][0] = cos(angle);
 	newMatrix.m[1][0] = -sin(angle);
 	newMatrix.m[0][1] = sin(angle);
 	newMatrix.m[1][1] = cos(angle);
 
-	// Return
 	return newMatrix;
 }
 
 const mat44 Math::createOrthographicProjectionMatrix(float left, float right, float bottom, float top, float near, float far)
 {
-	// Result
 	mat44 newMatrix;
 
-	// Create
 	newMatrix.m[0][0] = 2.0f / (right - left);
 	newMatrix.m[1][1] = 2.0f / (top - bottom);
 	newMatrix.m[2][2] = -2.0f / (far - near);
@@ -205,21 +167,17 @@ const mat44 Math::createOrthographicProjectionMatrix(float left, float right, fl
 	newMatrix.m[3][1] = -((top + bottom) / (top - bottom));
 	newMatrix.m[3][2] = -((far + near) / (far - near));
 
-	// Return
 	return newMatrix;
 };
 
 const mat44 Math::createViewMatrix(fvec3 eye, fvec3 center, fvec3 up)
 {
-	// Temporary values
 	fvec3 frontVector = normalize(center - eye);
 	fvec3 rightVector = normalize(calculateCrossProduct(frontVector, up));
 	fvec3 upVector = calculateCrossProduct(rightVector, frontVector);
 
-	// Result
 	mat44 newMatrix(1.0f);
 
-	// Create
 	newMatrix.m[0][0] = rightVector.x;
 	newMatrix.m[1][0] = rightVector.y;
 	newMatrix.m[2][0] = rightVector.z;
@@ -233,16 +191,13 @@ const mat44 Math::createViewMatrix(fvec3 eye, fvec3 center, fvec3 up)
 	newMatrix.m[3][1] = -(calculateDotProduct(upVector, eye));
 	newMatrix.m[3][2] = calculateDotProduct(frontVector, eye);
 
-	// Return
 	return newMatrix;
 }
 
 const mat44 Math::createPerspectiveProjectionMatrix(float fov, float aspect, float near, float far)
 {
-	// Temporary values
 	const float tanHalfFovY = tan(fov / 2.0f);
 
-	// Create
 	mat44 newMatrix(0.0f);
 	newMatrix.m[0][0] = 1.0f / (aspect * tanHalfFovY);
 	newMatrix.m[1][1] = 1.0f / tanHalfFovY;
@@ -250,6 +205,5 @@ const mat44 Math::createPerspectiveProjectionMatrix(float fov, float aspect, flo
 	newMatrix.m[2][3] = -1.0f;
 	newMatrix.m[3][2] = -((2.0f * far * near) / (far - near));
 
-	// Return
 	return newMatrix;
 }

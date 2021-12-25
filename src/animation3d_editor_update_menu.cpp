@@ -5,10 +5,8 @@
 
 void Animation3dEditor::_updateMainMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "animation3dEditorMenuMain")
 	{
 		// Button management
@@ -52,10 +50,8 @@ void Animation3dEditor::_updateMainMenu()
 
 void Animation3dEditor::_updateChoiceMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "animation3dEditorMenuChoice")
 	{
 		// Temporary values

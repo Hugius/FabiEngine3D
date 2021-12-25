@@ -9,7 +9,6 @@ class Animation2d final
 public:
 	Animation2d(const string& ID);
 
-	// VOIDS
 	void setPlayCount(int value);
 	void setPaused(bool value);
 	void setRowIndex(unsigned int value);
@@ -20,14 +19,11 @@ public:
 	void setPassedFrames(unsigned int value);
 	void setPreviewTexturePath(const string& value);
 
-	// STRING
 	const string& getID() const;
 	const string& getPreviewTexturePath() const;
 
-	// INT
 	const int getPlayCount() const;
 
-	// UNSIGNED INT
 	const unsigned int getPassedFrames() const;
 	const unsigned int getFramestep() const;
 	const unsigned int getRowCount() const;
@@ -35,18 +31,14 @@ public:
 	const unsigned int getRowIndex() const;
 	const unsigned int getColumnIndex() const;
 
-	// BOOL
 	const bool isPaused() const;
 
 private:
-	// STRING
 	const string _ID;
 	string _previewTexturePath = "";
 
-	// INT
 	int _playCount = 0;
 
-	// UNSIGNED INT
 	unsigned int _rowCount = 0;
 	unsigned int _rowIndex = 0;
 	unsigned int _columnCount = 0;
@@ -54,6 +46,5 @@ private:
 	unsigned int _framestep = 0;
 	unsigned int _passedFrames = 0;
 
-	// BOOL
 	bool _isPaused = false;
 };

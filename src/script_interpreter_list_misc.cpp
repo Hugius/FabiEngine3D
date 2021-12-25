@@ -2,21 +2,18 @@
 
 const bool ScriptInterpreter::_validateListIndex(const ScriptVariable& list, unsigned int index)
 {
-	// Check if variable is not a list
 	if(list.getType() == ScriptVariableType::SINGLE)
 	{
 		_throwScriptError("variable \"" + list.getID() + "\" not of type LIST!");
 		return false;
 	}
 
-	// Check if list index is negative
 	if(index < 0)
 	{
 		_throwScriptError("LIST index negative!");
 		return false;
 	}
 
-	// Check if list index is out of range
 	if(index >= list.getValueCount())
 	{
 		_throwScriptError("LIST index out of range!");
@@ -46,7 +43,6 @@ const bool ScriptInterpreter::_validateArgumentCount(const vector<ScriptValue>& 
 
 const bool ScriptInterpreter::_validateArgumentTypes(const vector<ScriptValue>& values, const vector<ScriptValueType>& types)
 {
-	// Iterate through values
 	for(size_t i = 0; i < values.size(); i++)
 	{
 		// Compare value types
@@ -62,7 +58,6 @@ const bool ScriptInterpreter::_validateArgumentTypes(const vector<ScriptValue>& 
 
 void ScriptInterpreter::_processListPush(const string& scriptLine)
 {
-	// Extract list name
 	string nameString = "";
 	for(const auto& c : scriptLine.substr(PUSHING_KEYWORD.size() + 1))
 	{
@@ -76,14 +71,12 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 		}
 	}
 
-	// Check if list name is missing
 	if(nameString.empty())
 	{
 		_throwScriptError("LIST name missing!");
 		return;
 	}
 
-	// Check if value is missing
 	auto minLineSize = (PUSHING_KEYWORD.size() + nameString.size() + 3);
 	if(scriptLine.size() < minLineSize)
 	{
@@ -91,27 +84,22 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 		return;
 	}
 
-	// Extract value
 	string valueString = scriptLine.substr(minLineSize - 1);
 
-	// Check if list exists
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
 		_throwScriptError("LIST not existing!");
 		return;
 	}
 
-	// Retrieve list variable
 	auto& listVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
-	// Check if list is constant
 	if(listVariable.isConstant())
 	{
 		_throwScriptError("cannot push to constant LIST!");
 		return;
 	}
 
-	// Determine value type
 	if(_isListValue(valueString))
 	{
 		_throwScriptError("cannot push LIST to LIST!");
@@ -164,8 +152,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 
 void ScriptInterpreter::_processListPull(const string& scriptLine)
 {
-	// Extract list name
-	 string nameString = "";
+	string nameString = "";
 	for(const auto& c : scriptLine.substr(PULLING_KEYWORD.size() + 1))
 	{
 		if(c == ' ')
@@ -178,48 +165,40 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 		}
 	}
 
-	// Check if list name is missing
 	if(nameString.empty())
 	{
 		_throwScriptError("LIST name missing!");
 		return;
 	}
 
-	// Check if list index is missing
 	if(scriptLine.size() < (PULLING_KEYWORD.size() + nameString.size() + 3))
 	{
 		_throwScriptError("LIST index missing!");
 		return;
 	}
 
-	// Extract list index
 	string indexString = scriptLine.substr(PULLING_KEYWORD.size() + nameString.size() + 2);
 
-	// Check if list index is invalid
 	if(!_isIntegerValue(indexString) && !_isLocalVariableExisting(indexString) && !_isGlobalVariableExisting(indexString))
 	{
 		_throwScriptError("invalid LIST index!");
 		return;
 	}
 
-	// Check if list is not existing
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
 		_throwScriptError("LIST not existing!");
 		return;
 	}
 
-	// Retrieve list variable
 	auto& listVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
-	// Check if list is constant
 	if(listVariable.isConstant())
 	{
 		_throwScriptError("cannot push to constant LIST!");
 		return;
 	}
 
-	// Convert list index
 	unsigned int index = -1;
 	if(_isIntegerValue(indexString)) // Integer index
 	{
@@ -241,12 +220,10 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 		index = indexVariable.getValue().getInteger();
 	}
 
-	// Validate list index
 	if(!_validateListIndex(listVariable, index))
 	{
 		return;
 	}
 
-	// Remove value
 	listVariable.removeValue(index);
 }

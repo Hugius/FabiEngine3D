@@ -31,18 +31,15 @@ mat3 calculateTbnMatrix();
 
 void main()
 {
-	// In variables
 	vec4 worldSpacePosition = (u_transformationMatrix * vec4(v_pos, 1.0f));
 	vec4 viewSpacePosition = (u_viewMatrix * worldSpacePosition);
 	vec4 clipSpacePosition = (u_projectionMatrix * viewSpacePosition);
 
-	// GLSL variables
 	gl_Position = clipSpacePosition;
 	gl_ClipDistance[0] = dot(worldSpacePosition, vec4(0.0f,  1.0f, 0.0f, -u_minHeight));
 	gl_ClipDistance[1] = dot(worldSpacePosition, vec4(0.0f, -1.0f, 0.0f,  u_maxHeight));
 	gl_ClipDistance[2] = dot(worldSpacePosition, u_clippingPlane);
 	
-	// Out variables
 	f_position = worldSpacePosition.xyz;
 	f_uv = (vec2(v_uv.x, -v_uv.y) * u_textureRepeat);
 	f_normal = normalize(u_normalTransformationMatrix * v_normal);

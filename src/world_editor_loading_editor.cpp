@@ -12,28 +12,23 @@ using std::istringstream;
 
 const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 {
-	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("WorldEditor::loadEditorWorldFromFile::1");
 	}
 
-	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "worlds\\editor\\" + fileName + ".fe3d");
 
-	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Cannot load world with ID \"" + fileName + "\"!");
 		return false;
 	}
 
-	// Load world file
 	ifstream file(filePath);
 
-	// Read world data
 	string line;
 	while(getline(file, line))
 	{
@@ -666,15 +661,11 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 		}
 	}
 
-	// Close file
 	file.close();
 
-	// Set new world ID
 	_loadedWorldID = fileName;
 
-	// Logging
 	Logger::throwInfo("World data loaded!");
 
-	// Return
 	return true;
 }

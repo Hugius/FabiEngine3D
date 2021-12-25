@@ -3,7 +3,6 @@
 
 void Animation2dEditor::_updateMiscellaneous()
 {
-	// Check if allowed by GUI
 	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Update wireframe rendering
@@ -23,7 +22,6 @@ void Animation2dEditor::_updateMiscellaneous()
 		}
 	}
 
-	// Check if there is a current animation
 	if(!_currentAnimationID.empty())
 	{
 		// Check if animation not started

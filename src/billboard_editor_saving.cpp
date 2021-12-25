@@ -9,22 +9,18 @@ using std::ofstream;
 
 const bool BillboardEditor::saveToFile() const
 {
-	// Editor must be loaded
 	if(!_isEditorLoaded)
 	{
 		return false;
 	}
 
-	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("BillboardEditor::saveToFile");
 	}
 
-	// Create or overwrite file
 	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\billboard.fe3d");
 
-	// Write billboard data
 	for(const auto& billboardID : _loadedBillboardIDs)
 	{
 		// Data to save
@@ -78,12 +74,9 @@ const bool BillboardEditor::saveToFile() const
 			textureRepeat << endl;
 	}
 
-	// Close file
 	file.close();
 
-	// Logging
 	Logger::throwInfo("Billboard data saved!");
 
-	// Return
 	return true;
 }

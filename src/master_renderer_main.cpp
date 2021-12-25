@@ -37,7 +37,6 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_dofBlurRenderer("blur_shader.vert", "blur_shader.frag", renderBus),
 	_motionBlurBlurRenderer("blur_shader.vert", "blur_shader.frag", renderBus)
 {
-	// Post-processing capture buffers
 	_worldDepthCaptureBuffer.createDepthTexture(ivec2(0), Config::getInst().getViewportSize());
 	_worldColorCaptureBuffer.createColorTexture(ivec2(0), Config::getInst().getViewportSize(), 2, false);
 	_antiAliasingCaptureBuffer.createColorTexture(ivec2(0), Config::getInst().getViewportSize(), 1, false);
@@ -50,14 +49,12 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_dofBlurRenderer.loadCaptureBuffer(Config::getInst().getViewportSize() / Config::MIN_DOF_QUALITY);
 	_motionBlurBlurRenderer.loadCaptureBuffer(Config::getInst().getViewportSize() / Config::MIN_MOTION_BLUR_QUALITY);
 
-	// Miscellaneous capture buffers
 	_cubeReflectionCaptureBuffer.createColorTexture(ivec2(0), ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
 	_planarReflectionCaptureBuffer.createColorTexture(ivec2(0), ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
 	_waterReflectionCaptureBuffer.createColorTexture(ivec2(0), ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
 	_waterRefractionCaptureBuffer.createColorTexture(ivec2(0), ivec2(Config::MIN_REFRACTION_QUALITY), 1, false);
 	_shadowCaptureBuffer.createDepthTexture(ivec2(0), ivec2(Config::MIN_SHADOW_QUALITY));
 
-	// Render surface
 	_renderSurface = make_shared<ImageEntity>("renderSurface");
 	_renderSurface->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
 }
@@ -70,29 +67,23 @@ void MasterRenderer::update()
 
 void MasterRenderer::renderEngineLogo(shared_ptr<ImageEntity> logo, shared_ptr<TextEntity> text, ivec2 viewport)
 {
-	// Prepare
 	glViewport(0, 0, viewport.x, viewport.y);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	// Bind
 	_imageEntityColorRenderer.bind();
 
-	// Render logo
 	_imageEntityColorRenderer.render(logo);
 
-	// Render text
 	if(text != nullptr)
 	{
 		_imageEntityColorRenderer.render(text);
 	}
 
-	// Unbind
 	_imageEntityColorRenderer.unbind();
 }
 
 void MasterRenderer::renderWorld(EntityBus* entityBus)
 {
-	// General stuff
 	_entityBus = entityBus;
 
 	if(_renderBus.isWireframeRenderingEnabled()) // Wireframe rendering

@@ -32,7 +32,6 @@ public:
 					  SoundEditor& soundEditor,
 					  WorldEditor& worldEditor);
 
-	// VOID
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void executeInitializeScripts();
@@ -40,12 +39,10 @@ public:
 	void executeTerminateScripts();
 	void unload();
 
-	// BOOL
 	const bool hasThrownError() const;
 	const bool gameMustStop() const;
 
 private:
-	// VOID
 	void _executeScript(const string& scriptID, ScriptType scriptType);
 	void _processVariableCreation(const string& scriptLine, ScriptVariableScope scope);
 	void _processVariableAlteration(const string& scriptLine);
@@ -57,23 +54,18 @@ private:
 	void _checkEngineWarnings(unsigned int lastLoggerMessageCount);
 	void _performArithmeticOperation(ScriptValue& leftValue, const string& operatorString, ScriptValue& rightValue);
 
-	// STRING
 	const string _limitIntegerString(const string& valueString) const;
 	const string _limitDecimalString(const string& valueString) const;
 
-	// FVEC2
 	const fvec2 _convertGuiPositionToViewport(fvec2 position) const;
 	const fvec2 _convertGuiPositionFromViewport(fvec2 position) const;
 	const fvec2 _convertGuiSizeToViewport(fvec2 size) const;
 	const fvec2 _convertGuiSizeFromViewport(fvec2 size) const;
 
-	// INT
 	const int _extractListIndexFromString(const string& valueString, bool& isAccessingList);
 
-	// UNSIGNED INT
 	const unsigned int _countLeadingSpaces(const string& scriptLineText);
 
-	// BOOL
 	const bool _isListValue(const string& valueString) const;
 	const bool _isStringValue(const string& valueString) const;
 	const bool _isDecimalValue(const string& valueString) const;
@@ -160,7 +152,6 @@ private:
 	const bool _validateMouseInputString(const string& inputString);
 	const bool _validateSavesDirectory() const;
 
-	// MISCELLANEOUS
 	const vector<ScriptValue> _extractValuesFromListString(const string& listString);
 	const vector<ScriptValue> _processFe3dFunctionCall(const string& scriptLine);
 	const vector<ScriptValue> _processMathFunctionCall(const string& scriptLine);
@@ -169,7 +160,6 @@ private:
 	ScriptVariable& _getGlobalVariable(const string& variableID);
 	ScriptConditionStatement* _getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth) const;
 
-	// STRING
 	static inline const string META_KEYWORD = "META";
 	static inline const string EXECUTE_KEYWORD = "EXECUTE";
 	static inline const string LOOP_KEYWORD = "LOOP";
@@ -211,10 +201,8 @@ private:
 	string _updateEntryID = "";
 	string _terminateEntryID = "";
 
-	// FLOAT
 	map<string, float> _debuggingTimes;
 
-	// UNSIGNED INT
 	static inline const unsigned int SPACES_PER_INDENT = 4;
 	static inline const unsigned int MAX_ITERATIONS_PER_LOOP = 1000;
 	static inline const unsigned int MAX_EXECUTION_DEPTH = 10;
@@ -222,7 +210,6 @@ private:
 	unsigned int _engineFunctionCallCount = 0;
 	unsigned int _executionDepth = 0;
 
-	// BOOL
 	bool _hasThrownError = false;
 	bool _mustStopApplication = false;
 	bool _hasPassedLoopStatement = false;
@@ -235,7 +222,6 @@ private:
 	bool _isExecutingUpdate = false;
 	bool _isExecutingTerminate = false;
 
-	// MISCELLANEOUS
 	unordered_map<unsigned int, unordered_map<string, ScriptVariable>> _localVariables;
 	unordered_map<string, ScriptVariable> _globalVariables;
 	FabiEngine3D& _fe3d;

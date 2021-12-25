@@ -64,7 +64,6 @@ void ScriptInterpreter::executeTerminateScripts()
 
 void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType scriptType)
 {
-	// Start debug timing
 	if(_isDebugging)
 	{
 		// First time
@@ -77,36 +76,30 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		_fe3d.misc_startMillisecondTimer();
 	}
 
-	// Temporary local values for this script run
 	vector<unsigned int> loopScopeDepths;
 	vector<unsigned int> loopLineIndices;
 	vector<unsigned int> loopIterationCounts;
 	vector<ScriptConditionStatement> conditionStatements;
 	unsigned int scopeDepth = 0;
 
-	// Prepare current script file execution
 	_executionDepth++;
 	_currentScriptIDsStack.push_back(scriptID);
 	_currentLineIndexStack.push_back(0);
 	_localVariables[_executionDepth] = {};
 
-	// Detect infinite recursion
 	if(_executionDepth >= MAX_EXECUTION_DEPTH)
 	{
 		_throwScriptError("maximum amount of execution layers reached, perhaps infinite recursion?");
 		return;
 	}
 
-	// Skip the following lines of code if necessary
 	if(_hasThrownError || _mustStopApplication)
 	{
 		return;
 	}
 
-	// Retrieve script file
 	auto scriptFile = _script.getScriptFile(scriptID);
 
-	// Interpret every line from top to bottom in script
 	for(unsigned int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
 	{
 		// Save current amount of logged messages
@@ -526,13 +519,11 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 	}
 
-	// Finish current script file execution
 	_currentScriptIDsStack.pop_back();
 	_currentLineIndexStack.pop_back();
 	_localVariables.erase(_executionDepth);
 	_executionDepth--;
 
-	// Stop timer
 	if(_isDebugging)
 	{
 		_debuggingTimes[scriptID] += _fe3d.misc_stopMillisecondTimer();

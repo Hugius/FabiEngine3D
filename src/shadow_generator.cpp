@@ -37,7 +37,6 @@ void ShadowGenerator::update()
 
 void ShadowGenerator::generate()
 {
-	// Temporary values
 	auto newEyePosition = _eyePosition;
 	auto newCenterPosition = _centerPosition;
 	auto newSize = _size;
@@ -46,7 +45,6 @@ void ShadowGenerator::generate()
 	auto newQuality = _quality;
 	auto newEnabled = _isEnabled;
 
-	// Follow camera
 	if(_isFollowingCamera)
 	{
 		// Temporary values
@@ -59,7 +57,6 @@ void ShadowGenerator::generate()
 		newCenterPosition.z += cameraPosition.z;
 	}
 
-	// Update render bus
 	_renderBus.setShadowEyePosition(newEyePosition);
 	_renderBus.setShadowCenterPosition(newCenterPosition);
 	_renderBus.setShadowSize(newSize);
@@ -68,13 +65,11 @@ void ShadowGenerator::generate()
 	_renderBus.setShadowQuality(newQuality);
 	_renderBus.setShadowsEnabled(newEnabled);
 
-	// Create shadow matrix
 	_renderBus.setShadowMatrix(_createShadowMatrix(newEyePosition, newCenterPosition, newSize, newReach));
 }
 
 const mat44 ShadowGenerator::_createShadowMatrix(fvec3 eyePosition, fvec3 centerPosition, float size, float reach) const
 {
-	// Temporary values
 	float left = -(size / 2.0f);
 	float right = (size / 2.0f);
 	float bottom = -(size / 2.0f);
@@ -82,11 +77,9 @@ const mat44 ShadowGenerator::_createShadowMatrix(fvec3 eyePosition, fvec3 center
 	float near = NEAR_DISTANCE;
 	float far = reach;
 
-	// Matrix generation
 	mat44 viewMatrix = Math::createViewMatrix(eyePosition, centerPosition, fvec3(0.0f, 1.0f, 0.0f));
 	mat44 projectionMatrix = Math::createOrthographicProjectionMatrix(left, right, bottom, top, near, far);
 
-	// Return
 	return (projectionMatrix * viewMatrix);
 }
 

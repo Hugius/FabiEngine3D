@@ -9,7 +9,6 @@ class Animation2dEditor final
 public:
 	Animation2dEditor(FabiEngine3D& fe3d, GuiManager& gui);
 
-	// VOID
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
@@ -31,18 +30,15 @@ public:
 	void stopImageAnimations();
 	void setImageAnimationFramestep(const string& animationID, const string& imageID, unsigned int value);
 
-	// STRING
 	const vector<string> getAnimationIDs();
 	const vector<string> getStartedBillboardAnimationIDs() const;
 	const vector<string> getStartedImageAnimationIDs() const;
 	const vector<string> getStartedBillboardAnimationIDs(const string& billboardID) const;
 	const vector<string> getStartedImageAnimationIDs(const string& billboardID) const;
 
-	// INT
 	const int getBillboardAnimationPlayCount(const string& animationID, const string& billboardID) const;
 	const int getImageAnimationPlayCount(const string& animationID, const string& imageID) const;
 
-	// UNSIGNED INT
 	const unsigned int getBillboardAnimationRowCount(const string& animationID, const string& billboardID) const;
 	const unsigned int getBillboardAnimationColumnCount(const string& animationID, const string& billboardID) const;
 	const unsigned int getBillboardAnimationRowIndex(const string& animationID, const string& billboardID) const;
@@ -54,7 +50,6 @@ public:
 	const unsigned int getImageAnimationColumnIndex(const string& animationID, const string& imageID) const;
 	const unsigned int getImageAnimationFramestep(const string& animationID, const string& imageID) const;
 
-	// BOOL
 	const bool isLoaded() const;
 	const bool isAnimationExisting(const string& ID) const;
 	const bool isBillboardAnimationStarted(const string& animationID, const string& billboardID) const;
@@ -67,7 +62,6 @@ public:
 	const bool saveToFile() const;
 
 private:
-	// VOID
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateMainMenu();
@@ -80,10 +74,8 @@ private:
 	void _updateMiscellaneous();
 	void _deleteAnimation(const string& ID);
 
-	// MISCELLANEOUS
 	shared_ptr<Animation2d> _getAnimation(const string& ID) const;
 
-	// STRING
 	static inline const string PREVIEW_BILLBOARD_ID = "@@preview_billboard";
 	set<pair<string, string>> _billboardAnimationsToStop;
 	set<pair<string, string>> _billboardAnimationsToStart;
@@ -93,20 +85,16 @@ private:
 	string _currentAnimationID = "";
 	string _currentProjectID = "";
 
-	// FVEC3
 	static inline const fvec3 PREVIEW_BILLBOARD_POSITION = fvec3(0.0f, -0.5f, -0.75f);
 
-	// FLOAT
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 
-	// BOOL
 	bool _isCreatingAnimation = false;
 	bool _isChoosingAnimation = false;
 	bool _isDeletingAnimation = false;
 	bool _isEditorLoaded = false;
 
-	// MISCELLANEOUS
 	map<pair<string, string>, Animation2d> _startedBillboardAnimations;
 	map<pair<string, string>, Animation2d> _startedImageAnimations;
 	vector<shared_ptr<Animation2d>> _animations;

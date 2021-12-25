@@ -14,23 +14,19 @@ using std::get;
 
 void NetworkingClient::update()
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		return;
 	}
 
-	// Check if client must disconnect
 	if(_mustDisconnectFromServer)
 	{
 		disconnectFromServer(false);
 		return;
 	}
 
-	// Clear all received messages from last tick
 	_pendingMessages.clear();
 
-	// Handle server connection
 	if(_isConnectingToServer)
 	{
 		// Check if connection thread is finished
@@ -69,13 +65,11 @@ void NetworkingClient::update()
 		}
 	}
 
-	// Must be connected
 	if(!_isConnectedToServer)
 	{
 		return;
 	}
 
-	// Update server pinging
 	if(_isAcceptedByServer && !_isWaitingForPing)
 	{
 		// Send ping
@@ -89,7 +83,6 @@ void NetworkingClient::update()
 		_lastMilliseconds = Tools::getTimeSinceEpochMS();
 	}
 
-	// Receive incoming TCP messages
 	if(_tcpMessageThread.wait_until(system_clock::time_point::min()) == future_status::ready)
 	{
 		// Temporary values
@@ -195,7 +188,6 @@ void NetworkingClient::update()
 		_tcpMessageThread = async(launch::async, &NetworkingClient::_waitForTcpMessage, this, _tcpSocket);
 	}
 
-	// Receive incoming UDP messages
 	while(NetworkingUtils::isMessageReadyUDP(_udpSocket))
 	{
 		// Message data

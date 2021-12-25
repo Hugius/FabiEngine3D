@@ -25,19 +25,16 @@ void GuiScrollingList::update(bool isHoverable)
 
 void GuiScrollingList::createButton(const string& ID, string textContent)
 {
-	// Calculate dimensions
 	float x = 0.0f;
 	float y = (1.0f - _charSize.y - (_buttons.size() * (_charSize.y * 1.5f)));
 	float w = (_charSize.x * textContent.size());
 	float h = _charSize.y;
 
-	// Add button
 	fvec2 position = _convertPosition(fvec2(x, y));
 	fvec2 size = _convertSize(fvec2(w, h));
 	_buttons.push_back(make_shared<GuiButton>(_fe3d, _parentID, ID, fvec2(position.x, position.y), fvec2(size.x, size.y),
 					   _buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor, true, true, _fe3d.image_isCentered(_entityID)));
 
-	// Define list boundaries
 	string rectangleID = _buttons.back()->getRectangle()->getEntityID();
 	string textID = _buttons.back()->getTextField()->getEntityID();
 	_fe3d.image_setMinPosition(rectangleID, fvec2(-1.0f, _initialPosition.y - (_initialSize.y / 2.0f)));
@@ -48,7 +45,6 @@ void GuiScrollingList::createButton(const string& ID, string textContent)
 
 void GuiScrollingList::deleteButton(const string& ID)
 {
-	// Delete button
 	for(size_t i = 0; i < _buttons.size(); i++)
 	{
 		if(ID == _buttons[i]->getID())
@@ -78,7 +74,6 @@ void GuiScrollingList::deleteButton(const string& ID)
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiScrollingList::deleteButton");
 }
 
@@ -93,7 +88,6 @@ void GuiScrollingList::setVisible(bool isVisible)
 {
 	GuiRectangle::setVisible(isVisible);
 
-	// Show all buttons
 	for(const auto& button : _buttons)
 	{
 		button->setVisible(isVisible);
@@ -104,12 +98,10 @@ void GuiScrollingList::_updateHovering()
 {
 	_isHovered = false;
 
-	// Convert dimensions to same space
 	fvec2 cursorPosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
 	fvec2 listPosition = _fe3d.image_getPosition(_entityID);
 	fvec2 listSize = _fe3d.image_getSize(_entityID);
 
-	// Check if cursor inside button
 	if(cursorPosition.x > listPosition.x - (listSize.x / 2.0f) && cursorPosition.x < listPosition.x + (listSize.x / 2.0f)) // X axis
 	{
 		if(cursorPosition.y > listPosition.y - (listSize.y / 2.0f) && cursorPosition.y < listPosition.y + (listSize.y / 2.0f)) // Y axis

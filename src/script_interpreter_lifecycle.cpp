@@ -37,10 +37,8 @@ ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d,
 
 void ScriptInterpreter::load()
 {
-	// Save current amount of logged messages
 	auto lastLoggerMessageCount = Logger::getMessageCount();
 
-	// Iterate through script files
 	for(const auto& scriptID : _script.getScriptFileIDs())
 	{
 		auto scriptFile = _script.getScriptFile(scriptID);
@@ -104,7 +102,6 @@ void ScriptInterpreter::load()
 		}
 	}
 
-	// No entry point errors
 	if(_initEntryID.empty() && !_initializeScriptIDs.empty())
 	{
 		Logger::throwWarning("No script_execution_entry META defined for INITIALIZE script(s)!");
@@ -124,7 +121,6 @@ void ScriptInterpreter::load()
 		return;
 	}
 
-	// Comment optimization for runtime execution
 	for(const auto& scriptID : _script.getScriptFileIDs())
 	{
 		// Retrieve script file
@@ -158,7 +154,6 @@ void ScriptInterpreter::load()
 		}
 	}
 
-	// Load all editor assets of this project if in application preview
 	if(Config::getInst().isApplicationExported())
 	{
 		// Gather file paths
@@ -198,61 +193,46 @@ void ScriptInterpreter::load()
 		_fe3d.misc_cacheAudios(audioPaths);
 	}
 
-	// No sky by default
 	_fe3d.sky_selectMainSky("");
 
-	// Load template skies
 	_skyEditor.loadFromFile();
 
-	// Load template terrains
 	_terrainEditor.loadFromFile();
 
-	// Load template waters
 	_waterEditor.loadFromFile();
 
-	// Load template models
 	_modelEditor.loadFromFile();
 
-	// Load template billboards
 	_billboardEditor.loadFromFile();
 
-	// Load template images
 	_imageEditor.loadFromFile();
 
-	// Load template animations
 	_animation2dEditor.loadFromFile(false);
 	_animation3dEditor.loadFromFile(false);
 
-	// Load template sounds
 	_soundEditor.loadFromFile();
 
-	// Camera
 	_fe3d.camera_reset();
 
-	// Miscellaneous
 	if(_fe3d.misc_isVsyncEnabled())
 	{
 		_fe3d.misc_disableVsync();
 	}
 	_fe3d.misc_setCursorVisible(true);
 
-	// Check if any engine warnings were thrown
 	_checkEngineWarnings(lastLoggerMessageCount);
 }
 
 void ScriptInterpreter::unload()
 {
-	// Reset sky
 	_fe3d.sky_selectMixSky("");
 	_fe3d.sky_setMixValue(0.0f);
 
-	// Select background
 	if(!Config::getInst().isApplicationExported())
 	{
 		_fe3d.sky_selectMainSky("@@background");
 	}
 
-	// Delete all sky entities except the background
 	for(const auto& ID : _fe3d.sky_getIDs())
 	{
 		if(ID != "@@background")
@@ -261,12 +241,10 @@ void ScriptInterpreter::unload()
 		}
 	}
 
-	// Stop animations
 	_animation2dEditor.stopBillboardAnimations();
 	_animation2dEditor.stopImageAnimations();
 	_animation3dEditor.stopModelAnimations();
 
-	// Delete all other entities
 	_fe3d.terrain_deleteAll();
 	_fe3d.water_deleteAll();
 	_fe3d.model_deleteAll();
@@ -278,7 +256,6 @@ void ScriptInterpreter::unload()
 	_fe3d.spotlight_deleteAll();
 	_fe3d.reflection_deleteAll();
 
-	// Delete game image entities
 	for(const auto& ID : _fe3d.image_getIDs())
 	{
 		// Cannot delete engine image entities
@@ -288,7 +265,6 @@ void ScriptInterpreter::unload()
 		}
 	}
 
-	// Delete game text entities
 	for(const auto& ID : _fe3d.text_getIDs())
 	{
 		// Cannot delete engine text entities
@@ -298,10 +274,8 @@ void ScriptInterpreter::unload()
 		}
 	}
 
-	// Reset camera
 	_fe3d.camera_reset();
 
-	// Reset collision
 	_fe3d.collision_setCameraBox(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 	if(_fe3d.collision_isCameraResponseEnabled())
 	{
@@ -312,13 +286,11 @@ void ScriptInterpreter::unload()
 		_fe3d.collision_disableTerrainResponse();
 	}
 
-	// Reset raycasting
 	if(_fe3d.raycast_isTerrainPointingEnabled())
 	{
 		_fe3d.raycast_disableTerrainPointing();
 	}
 
-	// Reset graphics
 	if(_fe3d.gfx_isAntiAliasingEnabled())
 	{
 		_fe3d.gfx_disableAntiAliasing(true);
@@ -365,19 +337,16 @@ void ScriptInterpreter::unload()
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_setPlanarReflectionHeight(0.0f);
 
-	// Reset networking server
 	if(_fe3d.server_isRunning())
 	{
 		_fe3d.server_stop();
 	}
 
-	// Reset networking client
 	if(_fe3d.client_isRunning())
 	{
 		_fe3d.client_stop();
 	}
 
-	// Miscellaneous
 	if(_fe3d.misc_isAabbFrameRenderingEnabled())
 	{
 		_fe3d.misc_disableAabbFrameRendering();
@@ -396,7 +365,6 @@ void ScriptInterpreter::unload()
 	}
 	_fe3d.misc_setCursorVisible(false);
 
-	// Reset all variables
 	_debuggingTimes.clear();
 	_localVariables.clear();
 	_currentScriptIDsStack.clear();

@@ -7,10 +7,8 @@ using std::clamp;
 
 void ScriptEditor::_updateGUI()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "scriptEditorMenuMain")
 	{
 		// Button management
@@ -300,7 +298,6 @@ void ScriptEditor::_updateMiscellaneous()
 		lastLineIndex = currentLineIndex;
 	}
 
-	// Smooth camera movement
 	_scrollingAcceleration = clamp(_scrollingAcceleration, -MAX_SCROLLING_ACCELERATION, MAX_SCROLLING_ACCELERATION);
 	_scrollingAcceleration *= 0.95f;
 	_fe3d.camera_move(fvec3(0.0f, _scrollingAcceleration, 0.0f));

@@ -10,28 +10,23 @@ using std::istringstream;
 
 const vector<string> SoundEditor::getAudioPathsFromFile() const
 {
-	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("SoundEditor::getAudioPathsFromFile");
 	}
 
-	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\sound.fe3d");
 
-	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project corrupted: file `sound.fe3d` missing!");
 		return {};
 	}
 
-	// Load sound file
 	ifstream file(filePath);
 
-	// Read sound data
 	vector<string> audioPaths;
 	string line;
 	while(getline(file, line))
@@ -61,7 +56,6 @@ const vector<string> SoundEditor::getAudioPathsFromFile() const
 		audioPaths.push_back(audioPath);
 	}
 
-	// Close file
 	file.close();
 
 	return audioPaths;
@@ -69,31 +63,25 @@ const vector<string> SoundEditor::getAudioPathsFromFile() const
 
 const bool SoundEditor::loadFromFile()
 {
-	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("SoundEditor::loadFromFile");
 	}
 
-	// Clear IDs from previous loads
 	_loadedSoundIDs.clear();
 
-	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\sound.fe3d");
 
-	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project corrupted: file `sound.fe3d` missing!");
 		return false;
 	}
 
-	// Load sound file
 	ifstream file(filePath);
 
-	// Read sound data
 	string line;
 	while(getline(file, line))
 	{
@@ -129,12 +117,9 @@ const bool SoundEditor::loadFromFile()
 		}
 	}
 
-	// Close file
 	file.close();
 
-	// Logging
 	Logger::throwInfo("Sound data loaded!");
 
-	// Return
 	return true;
 }

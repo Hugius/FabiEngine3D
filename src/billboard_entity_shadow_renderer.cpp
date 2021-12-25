@@ -2,32 +2,25 @@
 
 void BillboardEntityShadowRenderer::bind()
 {
-	// Bind shader
 	_shader.bind();
 
-	// Shader uniforms
 	_shader.uploadUniform("u_lightSpaceMatrix", _renderBus.getShadowMatrix());
 	_shader.uploadUniform("u_diffuseMap", 0);
 
-	// Enable clipping
 	glEnable(GL_CLIP_DISTANCE0);
 	glEnable(GL_CLIP_DISTANCE1);
 
-	// Enable depth
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 }
 
 void BillboardEntityShadowRenderer::unbind()
 {
-	// Disable depth
 	glDisable(GL_DEPTH_TEST);
 
-	// Disable clipping
 	glDisable(GL_CLIP_DISTANCE0);
 	glDisable(GL_CLIP_DISTANCE1);
 
-	// Unbind shader
 	_shader.unbind();
 }
 

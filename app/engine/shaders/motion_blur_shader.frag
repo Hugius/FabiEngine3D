@@ -22,11 +22,9 @@ void main()
 		return;
     }
 
-	// Texture mapping
 	vec3 world = texture(u_worldMap, f_uv).rgb;
 	vec3 motion = texture(u_motionBlurMap, f_uv).rgb;
 
-	// Final color
 	o_finalColor.rgb = mix(world, motion, clamp(u_mixValue, 0.0f, 1.0f));
 	o_finalColor.a = 1.0f;
 }

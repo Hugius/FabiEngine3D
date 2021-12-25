@@ -2,10 +2,8 @@
 
 void BillboardEditor::_updateMainMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "billboardEditorMenuMain")
 	{
 		// Button management
@@ -59,10 +57,8 @@ void BillboardEditor::_updateMainMenu()
 
 void BillboardEditor::_updateChoiceMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "billboardEditorMenuChoice")
 	{
 		// Temporary values

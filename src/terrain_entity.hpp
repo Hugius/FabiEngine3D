@@ -12,7 +12,6 @@ class TerrainEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	// VOID
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setPixels(const vector<float>& value);
 	void setVertices(const vector<fvec3> value);
@@ -50,7 +49,6 @@ public:
 	void setWireframed(bool value);
 	void setWireframeColor(fvec3 value);
 
-	// STRING
 	const string& getHeightMapPath() const;
 	const string& getDiffuseMapPath() const;
 	const string& getNormalMapPath() const;
@@ -62,15 +60,12 @@ public:
 	const string& getGreenNormalMapPath() const;
 	const string& getBlueNormalMapPath() const;
 
-	// FVEC3
 	const vector<fvec3>& getVertices() const;
 	const vector<fvec3>& getNormals() const;
 	const fvec3 getWireframeColor() const;
 
-	// FVEC2
 	const vector<fvec2>& getUvCoords() const;
 
-	// FLOAT
 	const vector<float>& getPixels() const;
 	const float getTextureRepeat() const;
 	const float getRedTextureRepeat() const;
@@ -82,7 +77,6 @@ public:
 	const float getSpecularShininess() const;
 	const float getSpecularIntensity() const;
 
-	// BOOL
 	const bool isSpecular() const;
 	const bool isWireframed() const;
 	const bool hasRenderBuffer() const;
@@ -96,7 +90,6 @@ public:
 	const bool hasGreenNormalMap() const;
 	const bool hasBlueNormalMap() const;
 
-	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> getRenderBuffer() const;
 	const TextureID getDiffuseMap() const;
 	const TextureID getNormalMap() const;
@@ -109,7 +102,6 @@ public:
 	const TextureID getBlueNormalMap() const;
 
 private:
-	// STRING
 	string _heightMapPath = "";
 	string _diffuseMapPath = "";
 	string _normalMapPath = "";
@@ -121,16 +113,13 @@ private:
 	string _greenNormalMapPath = "";
 	string _blueNormalMapPath = "";
 
-	// FVEC3
 	vector<fvec3> _vertices;
 	vector<fvec3> _normals;
 	fvec3 _color = fvec3(1.0f);
 	fvec3 _wireframeColor = fvec3(1.0f);
 
-	// FVEC2
 	vector<fvec2> _uvCoords;
 
-	// FLOAT
 	vector<float> _pixels;
 	float _redTextureRepeat = 1.0f;
 	float _greenTextureRepeat = 1.0f;
@@ -142,11 +131,9 @@ private:
 	float _specularShininess = 1.0f;
 	float _specularIntensity = 1.0f;
 
-	// BOOL
 	bool _isSpecular = false;
 	bool _isWireframed = false;
 
-	// MISCELLANEOUS
 	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
 	TextureID _diffuseMap = 0;
 	TextureID _normalMap = 0;

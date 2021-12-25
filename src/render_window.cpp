@@ -40,26 +40,22 @@ void RenderWindow::setOpacity(float value)
 
 void RenderWindow::enableColorKeying(fvec3 color)
 {
-	// Get window handle
 	SDL_SysWMinfo wmInfo;
 	SDL_VERSION(&wmInfo.version);
 	SDL_GetWindowWMInfo(_windowPointer, &wmInfo);
 	HWND hwnd = wmInfo.info.win.window;
 
-	// Set transparency color
 	SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED);
 	SetLayeredWindowAttributes(hwnd, RGB(static_cast<int>(color.r * 255.0f), static_cast<int>(color.g * 255), static_cast<int>(color.b * 255)), 0, LWA_COLORKEY);
 }
 
 void RenderWindow::disableColorKeying(fvec3 color)
 {
-	// Get window handle
 	SDL_SysWMinfo wmInfo;
 	SDL_VERSION(&wmInfo.version);
 	SDL_GetWindowWMInfo(_windowPointer, &wmInfo);
 	HWND hwnd = wmInfo.info.win.window;
 
-	// Remove opaqueness property
 	SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED);
 	SetLayeredWindowAttributes(hwnd, RGB(static_cast<int>(color.r * 255.0f), static_cast<int>(color.g * 255), static_cast<int>(color.b * 255)), 0, LWA_ALPHA);
 }

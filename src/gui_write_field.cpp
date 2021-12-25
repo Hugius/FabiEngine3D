@@ -266,7 +266,6 @@ const bool GuiWriteField::hasTextContentChanged()
 
 const string GuiWriteField::getTextContent() const
 {
-	// Check if user filled in a minus without a number
 	if(_currentTextContent == "-" && _noSpecials && _minusAllowed)
 	{
 		return "";

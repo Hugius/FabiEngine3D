@@ -43,20 +43,16 @@ const unordered_map<string, shared_ptr<TerrainEntity>>& TerrainEntityManager::ge
 
 void TerrainEntityManager::createEntity(const string& ID, const string& heightMapPath)
 {
-	// Create entity
 	_entities.insert(make_pair(ID, make_shared<TerrainEntity>(ID)));
 
-	// Load height map
 	auto pixelsPointer = _textureLoader.loadBitmap(heightMapPath);
 
-	// Check if height map loading failed
 	if(pixelsPointer == nullptr)
 	{
 		deleteEntity(ID);
 		return;
 	}
 
-	// Check if height map resolution is too high
 	auto& pixels = *pixelsPointer;
 	auto heightMapSize = static_cast<unsigned int>(sqrt(static_cast<double>(pixels.size())));
 	if(heightMapSize > MAX_SIZE)
@@ -66,15 +62,12 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 		return;
 	}
 
-	// Temporary values
 	auto entity = getEntity(ID);
 
-	// Set properties
 	entity->setHeightMapPath(heightMapPath);
 	entity->setPixels(pixels);
 	entity->setSize(static_cast<float>(heightMapSize));
 
-	// Load mesh
 	loadMesh(ID);
 }
 
@@ -112,7 +105,6 @@ const bool TerrainEntityManager::isEntityExisting(const string& ID)
 
 void TerrainEntityManager::loadMesh(const string& ID)
 {
-	// Temporary values
 	auto entity = getEntity(ID);
 	const auto& pixels = entity->getPixels();
 	const float size = entity->getSize();
@@ -151,7 +143,6 @@ void TerrainEntityManager::loadMesh(const string& ID)
 		}
 	}
 
-	// Compose vertices, UV coordinates, normals
 	vector<fvec3> vertices;
 	vector<fvec2> uvCoords;
 	vector<fvec3> normals;
@@ -197,7 +188,6 @@ void TerrainEntityManager::loadMesh(const string& ID)
 		}
 	}
 
-	// Calculate tangents
 	vector<fvec3> tangents;
 	for(size_t i = 0; i < vertices.size(); i += 3)
 	{
@@ -229,7 +219,6 @@ void TerrainEntityManager::loadMesh(const string& ID)
 		tangents.push_back(tangent);
 	}
 
-	// Compose buffer data
 	vector<float> bufferData;
 	for(size_t i = 0; i < vertices.size(); i++)
 	{
@@ -253,10 +242,8 @@ void TerrainEntityManager::loadMesh(const string& ID)
 		bufferData.push_back(tangents[i].z);
 	}
 
-	// Create render buffer
 	entity->setRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
 
-	// Set properties
 	entity->setVertices(vertices);
 	entity->setUvCoords(uvCoords);
 	entity->setNormals(normals);
@@ -269,7 +256,6 @@ const float TerrainEntityManager::getPixelHeight(const string& ID, float x, floa
 
 const bool TerrainEntityManager::isInside(const string& ID, float x, float z)
 {
-	// Return true if point is within terrain bounds
 	if(x > 0 && x < getEntity(ID)->getSize() && z > 0 && z < getEntity(ID)->getSize())
 	{
 		return true;
@@ -282,25 +268,21 @@ const bool TerrainEntityManager::isInside(const string& ID, float x, float z)
 
 float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixels)
 {
-	// If reached end of terrain X
 	if(x == size)
 	{
 		x--;
 	}
 
-	// If reached end of terrain Z
 	if(z == size)
 	{
 		z--;
 	}
 
-	// Checking if coordinate inside bounds
 	if(x < 0 || x > size || z < 0 || z > size)
 	{
 		return 0.0f;
 	}
 
-	// Returning the corresponding height
 	int index = (static_cast<int>(x) * static_cast<int>(size)) + static_cast<int>(z);
 	return ((pixels[index]) / 255.0f) * maxHeight;
 }

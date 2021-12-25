@@ -4,10 +4,8 @@
 
 void WorldEditor::_updateBillboardMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuBillboard")
 	{
 		// Button management
@@ -51,10 +49,8 @@ void WorldEditor::_updateBillboardMenu()
 
 void WorldEditor::_updateBillboardPlacingMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuBillboardPlace")
 	{
 		// Button management
@@ -120,10 +116,8 @@ void WorldEditor::_updateBillboardPlacingMenu()
 
 void WorldEditor::_updateBillboardChoosingMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuBillboardChoice")
 	{
 		// Remove deleted billboards from the scrollingList buttons

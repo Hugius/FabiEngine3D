@@ -14,34 +14,29 @@ GuiScreen::GuiScreen(FabiEngine3D& fe3d, const string& parentID, const string& I
 
 void GuiScreen::update(bool hoverable)
 {
-	// Update scrolling lists
 	for(const auto& scrollingList : _scrollingLists)
 	{
 		scrollingList->update(hoverable);
 		scrollingList->setVisible(_isActive);
 	}
 
-	// Update writeFields
 	for(const auto& writeField : _writeFields)
 	{
 		writeField->update(hoverable);
 		writeField->setVisible(_isActive);
 	}
 
-	// Update buttons
 	for(const auto& button : _buttons)
 	{
 		button->update(hoverable);
 		button->setVisible(_isActive);
 	}
 
-	// Update rectangles
 	for(const auto& rectangle : _rectangles)
 	{
 		rectangle->setVisible(_isActive);
 	}
 
-	// Update text fields
 	for(const auto& textField : _textFields)
 	{
 		textField->setVisible(_isActive);

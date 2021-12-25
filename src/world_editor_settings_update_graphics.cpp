@@ -4,10 +4,8 @@
 
 void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuSettingsGraphicsShadows")
 	{
 		// Temporary values
@@ -134,10 +132,8 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 
 void WorldEditor::_updateReflectionsGraphicsSettingsMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuSettingsGraphicsReflections")
 	{
 		// Temporary values
@@ -182,10 +178,8 @@ void WorldEditor::_updateReflectionsGraphicsSettingsMenu()
 
 void WorldEditor::_updateRefractionsGraphicsSettingsMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuSettingsGraphicsRefractions")
 	{
 		// Temporary values
@@ -212,10 +206,8 @@ void WorldEditor::_updateRefractionsGraphicsSettingsMenu()
 
 void WorldEditor::_updateDofGraphicsSettingsMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuSettingsGraphicsDof")
 	{
 		// Temporary values
@@ -289,10 +281,8 @@ void WorldEditor::_updateDofGraphicsSettingsMenu()
 
 void WorldEditor::_updateFogGraphicsSettingsMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuSettingsGraphicsFog")
 	{
 		// Temporary values
@@ -382,10 +372,8 @@ void WorldEditor::_updateFogGraphicsSettingsMenu()
 
 void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuSettingsGraphicsLensFlare")
 	{
 		// Temporary values
@@ -483,10 +471,8 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 
 void WorldEditor::_updateSkyExposureGraphicsSettingsMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuSettingsGraphicsSkyExposure")
 	{
 		// Temporary values
@@ -544,10 +530,8 @@ void WorldEditor::_updateSkyExposureGraphicsSettingsMenu()
 
 void WorldEditor::_updateBloomGraphicsSettingsMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuSettingsGraphicsBloom")
 	{
 		// Temporary values

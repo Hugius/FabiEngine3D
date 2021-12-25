@@ -4,10 +4,8 @@
 
 void WorldEditor::_updateSoundMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuSound")
 	{
 		// Button management
@@ -51,10 +49,8 @@ void WorldEditor::_updateSoundMenu()
 
 void WorldEditor::_updateSoundPlacingMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuSoundPlace")
 	{
 		// Button management
@@ -127,10 +123,8 @@ void WorldEditor::_updateSoundPlacingMenu()
 
 void WorldEditor::_updateSoundChoosingMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuSoundChoice")
 	{
 		// Remove deleted sounds from the scrollingList buttons

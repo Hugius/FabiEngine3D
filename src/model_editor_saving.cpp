@@ -11,22 +11,18 @@ using std::ofstream;
 
 const bool ModelEditor::saveToFile() const
 {
-	// Editor must be loaded
 	if(!_isEditorLoaded)
 	{
 		return false;
 	}
 
-	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("ModelEditor::saveToFile");
 	}
 
-	// Create or overwrite file
 	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\model.fe3d");
 
-	// Write model data
 	for(const auto& modelID : _loadedModelIDs)
 	{
 		// Data to save
@@ -157,12 +153,9 @@ const bool ModelEditor::saveToFile() const
 		}
 	}
 
-	// Close file
 	file.close();
 
-	// Logging
 	Logger::throwInfo("Model data saved!");
 
-	// Return
 	return true;
 }

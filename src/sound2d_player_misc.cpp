@@ -11,13 +11,11 @@ Sound2dPlayer::Sound2dPlayer()
 
 void Sound2dPlayer::update(vector<Sound2d>& sounds)
 {
-	// Update sounds
 	for(auto& sound : sounds)
 	{
 		_updateSoundVolume(sound);
 	}
 
-	// Update channels
 	for(size_t i = 0; i < _channels.size(); i++)
 	{
 		// Check if sound stopped playing
@@ -88,10 +86,8 @@ void Sound2dPlayer::_updateSoundVolume(Sound2d& sound)
 
 const vector<unsigned int> Sound2dPlayer::_findChannels(Sound2d& sound) const
 {
-	// Temporary values
 	vector<unsigned int> channels;
 
-	// Find sound channels
 	for(size_t i = 0; i < _channels.size(); i++)
 	{
 		if(_channels[i] == sound.getID())
@@ -100,12 +96,10 @@ const vector<unsigned int> Sound2dPlayer::_findChannels(Sound2d& sound) const
 		}
 	}
 
-	// Find must never fail
 	if(channels.empty())
 	{
 		Logger::throwError("Sound2dPlayer::_findChannels");
 	}
 
-	// Return
 	return channels;
 }

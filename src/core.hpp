@@ -39,7 +39,6 @@ class Core final
 private:
 	Core(FabiEngine3D& fe3d);
 
-	// VOID
 	void _start();
 	void _prepare();
 	void _update();
@@ -48,14 +47,11 @@ private:
 	void _resume();
 	void _stop();
 
-	// FLOAT
 	float _deltaTimeMS = 0.0f;
 
-	// BOOL
 	bool _isPaused = false;
 	bool _isRunning = false;
 
-	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
 	LibraryLoader _libraryLoader;
 	MeshLoader _meshLoader;

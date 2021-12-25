@@ -4,7 +4,6 @@
 
 void WorldEditor::_updateModelPlacing()
 {
-	// Only if user is in placement mode
 	if(!_currentTemplateModelID.empty())
 	{
 		if(_fe3d.terrain_getSelectedID().empty()) // Placing without terrain

@@ -4,7 +4,6 @@
 
 void ScriptEditor::_updateTextWriter()
 {
-	// User must be editing script file & no active GUI overlays
 	if(_isEditorLoaded && _isWritingScript && !_gui.getOverlay()->isFocused() && !_wasGuiFocused)
 	{
 		// Change cursor texture
@@ -492,7 +491,6 @@ void ScriptEditor::_updateTextWriter()
 		_script.getScriptFile(_currentScriptFileID)->setCursorCharIndex(cursorCharIndex);
 	}
 
-	// Miscellaneous
 	_wasGuiFocused = _gui.getOverlay()->isFocused();
 	_hasClickedLMB = false;
 }

@@ -21,7 +21,6 @@ layout (location = 1) out vec4 o_secondaryColor;
 
 void main()
 {
-	// Wireframe color
 	if(u_isWireframed)
 	{
 		o_primaryColor = vec4(u_wireframeColor, 1.0f);
@@ -29,7 +28,6 @@ void main()
 		return;
 	}
 
-	// Sky colors
 	vec3 mainColor = texture(u_mainCubeMap, f_uv).rgb;
 	vec3 mixColor  = texture(u_mixCubeMap, f_uv).rgb;
 	mainColor = pow(mainColor, vec3(2.2f));
@@ -37,20 +35,16 @@ void main()
 	mainColor *= u_mainColor;
 	mixColor *= u_mixColor;
 
-	// Apply mixing & lightness
 	float mixValue  = clamp(u_mixValue, 0.0, 1.0f);
 	float lightness = mix(u_mainLightness, u_mixLightness, mixValue);
 
-	// Calculate base color
 	vec3 primaryColor;
 	primaryColor  = mix(mainColor, mixColor, mixValue);
 	primaryColor *= lightness;
 	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 
-	// Apply gamma correction
 	primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
 
-	// Set final colors
 	o_primaryColor   = vec4(primaryColor, 1.0f);
 	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 }

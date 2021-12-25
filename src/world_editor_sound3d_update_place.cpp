@@ -3,7 +3,6 @@
 
 void WorldEditor::_updateSoundPlacing()
 {
-	// Only if user is in placement mode
 	if(!_currentTemplateSoundID.empty())
 	{
 		if(_fe3d.terrain_getSelectedID().empty()) // Placing without terrain
@@ -194,7 +193,6 @@ void WorldEditor::_updateSoundPlacing()
 		}
 	}
 
-	// Update speaker positions
 	for(const auto& entityID : _fe3d.model_getIDs())
 	{
 		if(entityID.substr(0, string("@@speaker").size()) == "@@speaker")

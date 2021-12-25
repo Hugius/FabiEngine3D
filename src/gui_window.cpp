@@ -32,7 +32,6 @@ void GuiWindow::update(bool hoverable)
 
 const bool GuiWindow::isHovered() const
 {
-	// Check if entity is visible anyway
 	if(_fe3d.image_isVisible(_entityID))
 	{
 		// Convert dimensions to same space
@@ -80,7 +79,6 @@ const fvec2 GuiWindow::getInitialSize() const
 
 void GuiWindow::createScreen(const string& ID)
 {
-	// Check if already exists
 	for(const auto& screen : _screens)
 	{
 		if(screen->getID() == ID)
@@ -89,7 +87,6 @@ void GuiWindow::createScreen(const string& ID)
 		}
 	}
 
-	// Add new screen
 	fvec2 windowPosition = _fe3d.image_getPosition(_entityID);
 	fvec2 windowSize = _fe3d.image_getSize(_entityID);
 	_screens.push_back(make_shared<GuiScreen>(_fe3d, _parentID + "_" + _ID, ID, windowPosition, windowSize));
@@ -98,7 +95,6 @@ void GuiWindow::createScreen(const string& ID)
 
 void GuiWindow::deleteScreen(const string& ID)
 {
-	// Find screen
 	bool isFound = false;
 	for(size_t i = 0; i < _screens.size(); i++)
 	{
@@ -109,13 +105,11 @@ void GuiWindow::deleteScreen(const string& ID)
 		}
 	}
 
-	// No active screen
 	if(ID == _activeScreenID)
 	{
 		_activeScreenID = "";
 	}
 
-	// Error
 	if(!isFound)
 	{
 		Logger::throwError("GuiWindow::deleteScreen");
@@ -124,13 +118,11 @@ void GuiWindow::deleteScreen(const string& ID)
 
 void GuiWindow::setActiveScreen(const string& ID)
 {
-	// Hide old active screen if possible
 	if(!_activeScreenID.empty())
 	{
 		getActiveScreen()->hide();
 	}
 
-	// Show new active screen
 	_activeScreenID = ID;
 	getActiveScreen()->show();
 }
@@ -147,7 +139,6 @@ shared_ptr<GuiScreen> GuiWindow::getActiveScreen() const
 
 shared_ptr<GuiScreen> GuiWindow::getScreen(const string& ID) const
 {
-	// Retrieve screen
 	for(const auto& screen : _screens)
 	{
 		if(ID == screen->getID())
@@ -156,6 +147,5 @@ shared_ptr<GuiScreen> GuiWindow::getScreen(const string& ID) const
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiWindow::getScreen");
 }

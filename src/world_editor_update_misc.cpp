@@ -78,7 +78,6 @@ void WorldEditor::_updateCamera()
 
 void WorldEditor::_updateMiscellaneous()
 {
-	// Check if allowed by GUI
 	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Update AABB frame rendering
@@ -122,13 +121,11 @@ void WorldEditor::_updateMiscellaneous()
 		}
 	}
 
-	// Disable terrain raycast pointing
 	if(_fe3d.raycast_isTerrainPointingEnabled())
 	{
 		_fe3d.raycast_disableTerrainPointing();
 	}
 
-	// Enable terrain raycast pointing
 	if(!_fe3d.terrain_getSelectedID().empty())
 	{
 		_fe3d.raycast_enableTerrainPointing(_fe3d.terrain_getSize(_fe3d.terrain_getSelectedID()), 0.1f);

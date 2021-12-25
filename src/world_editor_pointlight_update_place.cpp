@@ -3,7 +3,6 @@
 
 void WorldEditor::_updatePointlightPlacing()
 {
-	// Only if user is in placement mode
 	if(_isPlacingPointlight)
 	{
 		if(_fe3d.terrain_getSelectedID().empty()) // Placing without terrain
@@ -171,7 +170,6 @@ void WorldEditor::_updatePointlightPlacing()
 		}
 	}
 
-	// Update lamp positions
 	for(const auto& entityID : _fe3d.model_getIDs())
 	{
 		if(entityID.substr(0, string("@@lamp").size()) == "@@lamp")

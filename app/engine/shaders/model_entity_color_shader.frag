@@ -98,7 +98,6 @@ float calculateShadows();
 
 void main()
 {
-	// Wireframe color
 	if(u_isWireframed)
 	{
 		o_primaryColor = vec4(u_wireframeColor, 1.0f);
@@ -106,22 +105,17 @@ void main()
 		return;
 	}
 
-	// Calculate diffuse mapping
 	vec3 diffuseMapping = calculateDiffuseMapping();
 
-	// Calculate emission mapping
 	vec3 emissionMapping = calculateEmissionMapping();
 
-	// Calculate specular mapping
     vec3 specularMapping = calculateSpecularMapping();
 
-	// Calculate reflection mapping
     vec3 reflectionMapping = calculateReflectionMapping();
 
     // Calculate normal mapping
     vec3 normalMapping = calculateNormalMapping();
 
-	// Calculate lighting
 	float shadowLighting	 = calculateShadows();
 	float shadowOcclusion	 = ((shadowLighting - u_shadowLightness) / (1.0f - u_shadowLightness));
 	vec3 ambientLighting	 = (calculateAmbientLighting() * shadowLighting);
@@ -129,7 +123,6 @@ void main()
 	vec3 pointlights		 = calculatePointlights(specularMapping, normalMapping);
 	vec3 spotlights		     = calculateSpotlights(specularMapping, normalMapping);
 
-	// Calculate base color
 	vec3 primaryColor = vec3(0.0f);
 	primaryColor += diffuseMapping;
 	primaryColor += emissionMapping;
@@ -139,7 +132,6 @@ void main()
 	primaryColor *= u_lightness;
 	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 	
-	// Apply lighting
 	bool isBright = ((emissionMapping != vec3(0.0f)) || u_isBright);
 	if (!isBright)
 	{
@@ -151,13 +143,10 @@ void main()
 		primaryColor *= lighting;
 	}
 
-	// Apply fog
 	primaryColor = calculateFog(primaryColor);
 
-	// Apply gamma correction
     primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
 
-	// Set final colors
 	o_primaryColor = vec4(primaryColor, u_transparency);
 	o_secondaryColor = vec4((isBright ? primaryColor : vec3(0.0f)), 1.0f);
 }
@@ -310,7 +299,6 @@ vec3 calculatePointlights(vec3 specularMapColor, vec3 normal)
 {
 	vec3 result = vec3(0.0f);
 
-	// Iterate through lights
 	for (int i = 0; i < u_pointlightCount; i++)
 	{
 		// Calculate light strength
@@ -347,7 +335,6 @@ vec3 calculatePointlights(vec3 specularMapColor, vec3 normal)
 		result += current;
 	}
 
-	// Return
 	return result;
 }
 
@@ -355,7 +342,6 @@ vec3 calculateSpotlights(vec3 specularMapColor, vec3 normal)
 {
 	vec3 result = vec3(0.0f);
 
-	// Iterate through lights
 	for (int i = 0; i < u_spotlightCount; i++)
 	{
 		// Calculate light strength
@@ -384,7 +370,6 @@ vec3 calculateSpotlights(vec3 specularMapColor, vec3 normal)
 		result += current;
 	}
 
-	// Return
 	return result;
 }
 

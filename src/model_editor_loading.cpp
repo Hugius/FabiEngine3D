@@ -13,28 +13,23 @@ using std::istringstream;
 
 const vector<string> ModelEditor::getMeshPathsFromFile() const
 {
-	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("ModelEditor::getMeshPathsFromFile");
 	}
 
-	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\model.fe3d");
 
-	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project corrupted: file `model.fe3d` missing!");
 		return {};
 	}
 
-	// Load model file
 	ifstream file(filePath);
 
-	// Read model data
 	vector<string> meshPaths;
 	string line;
 	while(getline(file, line))
@@ -72,37 +67,30 @@ const vector<string> ModelEditor::getMeshPathsFromFile() const
 		}
 	}
 
-	// Close file
 	file.close();
 
-	// Return
 	return meshPaths;
 }
 
 const vector<string> ModelEditor::getTexturePathsFromFile() const
 {
-	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("ModelEditor::getTexturePathsFromFile");
 	}
 
-	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\model.fe3d");
 
-	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project corrupted: file `model.fe3d` missing!");
 		return {};
 	}
 
-	// Load model file
 	ifstream file(filePath);
 
-	// Read model data
 	vector<string> texturePaths;
 	string line;
 	while(getline(file, line))
@@ -255,40 +243,32 @@ const vector<string> ModelEditor::getTexturePathsFromFile() const
 		}
 	}
 
-	// Close file
 	file.close();
 
-	// Return
 	return texturePaths;
 }
 
 const bool ModelEditor::loadFromFile()
 {
-	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("ModelEditor::loadFromFile::1");
 	}
 
-	// Clear IDs from previous loads
 	_loadedModelIDs.clear();
 
-	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\model.fe3d");
 
-	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project corrupted: file `model.fe3d` missing!");
 		return false;
 	}
 
-	// Load model file
 	ifstream file(filePath);
 
-	// Read model data
 	string line;
 	while(getline(file, line))
 	{
@@ -514,12 +494,9 @@ const bool ModelEditor::loadFromFile()
 		}
 	}
 
-	// Close file
 	file.close();
 
-	// Logging
 	Logger::throwInfo("Model data loaded!");
 
-	// Return
 	return true;
 }

@@ -18,7 +18,6 @@ public:
 				   SoundEditor& soundEditor,
 				   WorldEditor& worldEditor);
 
-	// VOID
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void update(bool debug);
@@ -26,19 +25,15 @@ public:
 	void resume();
 	void unload();
 
-	// BOOL
 	const bool isScriptEmpty() const;
 	const bool isStarted() const;
 	const bool isRunning() const;
 
 private:
-	// VOID
 	void _validateExecution();
 
-	// STRING
 	vector<string> _pausedSoundIDs;
 
-	// BOOL
 	bool _isStarted = false;
 	bool _isRunning = false;
 	bool _wasCursorVisible = false;
@@ -46,7 +41,6 @@ private:
 	bool _wasTimerStarted = false;
 	bool _mustSkipUpdate = false;
 
-	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
 	Script& _script;
 	ScriptInterpreter _scriptInterpreter;

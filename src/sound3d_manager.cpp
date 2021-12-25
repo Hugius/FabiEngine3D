@@ -31,7 +31,7 @@ void Sound3dManager::deleteSound(const string& ID)
 
 void Sound3dManager::update()
 {
-	for (auto& sound : _sounds)
+	for(auto& sound : _sounds)
 	{
 		sound.updateTransformation();
 	}
@@ -39,7 +39,6 @@ void Sound3dManager::update()
 
 void Sound3dManager::createSound(const string& ID, const string& audioPath)
 {
-	// Check for errors
 	if(_findSoundIndex(ID) != -1)
 	{
 		Logger::throwError("Sound3dManager::createSound::1");
@@ -49,10 +48,8 @@ void Sound3dManager::createSound(const string& ID, const string& audioPath)
 		Logger::throwError("Sound3dManager::createSound::2");
 	}
 
-	// Load data
 	auto dataPointer = _audioLoader.loadChunk(audioPath);
 
-	// Check if data loading went well
 	if(dataPointer != nullptr)
 	{
 		_sounds.push_back(Sound3d(ID, audioPath, dataPointer));

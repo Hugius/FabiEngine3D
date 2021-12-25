@@ -59,7 +59,6 @@ const vector<string> FabiEngine3D::aabb_getChildIDs(const string& parentID, Aabb
 {
 	vector<string> result;
 
-	// Iterate through AABB entities
 	for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
 		// Check if AABB has parent

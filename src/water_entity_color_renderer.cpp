@@ -5,10 +5,8 @@ using std::to_string;
 
 void WaterEntityColorRenderer::bind()
 {
-	// Bind shader
 	_shader.bind();
 
-	// Shader uniforms
 	_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
 	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_directionalLightingColor", _renderBus.getDirectionalLightingColor());
@@ -30,7 +28,6 @@ void WaterEntityColorRenderer::bind()
 	_shader.uploadUniform("u_normalMap", 4);
 	_shader.uploadUniform("u_displacementMap", 5);
 
-	// Bind textures
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _renderBus.getWaterReflectionMap());
 	glActiveTexture(GL_TEXTURE1);
@@ -38,24 +35,19 @@ void WaterEntityColorRenderer::bind()
 	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, _renderBus.getDepthMap());
 
-	// Enable depth
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 
-	// Enable transparency
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void WaterEntityColorRenderer::unbind()
 {
-	// Disable transparency
 	glDisable(GL_BLEND);
 
-	// Disable depth
 	glDisable(GL_DEPTH_TEST);
 
-	// Unbind textures
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glActiveTexture(GL_TEXTURE1);
@@ -63,13 +55,11 @@ void WaterEntityColorRenderer::unbind()
 	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	// Unbind shader
 	_shader.unbind();
 }
 
 void WaterEntityColorRenderer::processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>>& entities)
 {
-	// Save visible lights
 	vector<shared_ptr<PointlightEntity>> visibleEntities;
 	for(const auto& [keyID, entity] : entities)
 	{
@@ -79,7 +69,6 @@ void WaterEntityColorRenderer::processPointlightEntities(const unordered_map<str
 		}
 	}
 
-	// Upload lights
 	unsigned int index = 0;
 	for(size_t i = 0; i < visibleEntities.size(); i++)
 	{
@@ -90,13 +79,11 @@ void WaterEntityColorRenderer::processPointlightEntities(const unordered_map<str
 		//_shader.uploadUniform("u_pointlightShapes[" + to_string(i) + "]", static_cast<int>(visibleEntities[i]->getShape()));
 	}
 
-	// Upload pointlight count
 	//_shader.uploadUniform("u_pointlightCount", static_cast<int>(visibleEntities.size()));
 }
 
 void WaterEntityColorRenderer::processSpotlightEntities(const unordered_map<string, shared_ptr<SpotlightEntity>>& entities)
 {
-	// Save visible lights
 	vector<shared_ptr<SpotlightEntity>> visibleEntities;
 	for(const auto& [keyID, entity] : entities)
 	{
@@ -106,7 +93,6 @@ void WaterEntityColorRenderer::processSpotlightEntities(const unordered_map<stri
 		}
 	}
 
-	// Upload lights
 	for(size_t i = 0; i < visibleEntities.size(); i++)
 	{
 		//_shader.uploadUniform("u_spotlightPositions[" + to_string(i) + "]", visibleEntities[i]->getPosition());
@@ -117,7 +103,6 @@ void WaterEntityColorRenderer::processSpotlightEntities(const unordered_map<stri
 		//_shader.uploadUniform("u_spotlightDistances[" + to_string(i) + "]", visibleEntities[i]->getDistance());
 	}
 
-	// Upload spotlight count
 	//_shader.uploadUniform("u_spotlightCount", static_cast<int>(visibleEntities.size()));
 }
 

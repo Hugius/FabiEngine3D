@@ -3,10 +3,8 @@
 
 void WorldEditor::_updatePointlightEditing()
 {
-	// Temporary values
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
-	// User must not be placing anything
 	if(_currentTemplateModelID.empty() && _currentTemplateBillboardID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
 		// Reset selected lamp from last frame

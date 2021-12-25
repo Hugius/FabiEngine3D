@@ -9,16 +9,13 @@ using std::ofstream;
 
 const bool TerrainEditor::saveToFile() const
 {
-	// Editor must be loaded
 	if(!_isEditorLoaded)
 	{
 		return false;
 	}
 
-	// Create or overwrite file
 	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\terrain.fe3d");
 
-	// Write terrain data
 	for(const auto& terrainID : _loadedTerrainIDs)
 	{
 		// Values
@@ -102,12 +99,9 @@ const bool TerrainEditor::saveToFile() const
 			specularIntensity << endl;
 	}
 
-	// Close file
 	file.close();
 
-	// Logging
 	Logger::throwInfo("Terrain data saved!");
 
-	// Return
 	return true;
 }

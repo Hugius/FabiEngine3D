@@ -61,7 +61,6 @@ float convertDepthToPerspective(float depth);
 
 void main()
 {
-	// Wireframe color
 	if(u_isWireframed)
 	{
 		o_primaryColor = vec4(u_wireframeColor, 1.0f);
@@ -69,37 +68,30 @@ void main()
 		return;
 	}
 
-	// Main water color
 	vec4 waterColor = calculateWaterColor();
 
-	// Calculate base color
 	vec3 primaryColor = waterColor.rgb;
 	primaryColor = calculateFog(primaryColor);
 	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 
-	// Apply gamma correction
 	primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
 
-	// Set final colors
 	o_primaryColor   = vec4(primaryColor, waterColor.a);
 	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
 vec4 calculateWaterColor()
 {
-	// Temporary values
 	vec2 mapUV = f_uv;
 	vec3 normal = vec3(0.0f, 1.0f, 0.0f);
 	vec3 directionalLighting = vec3(0.0f);
 
-	// Projective texture mapping
 	vec2 ndc = (f_clip.xy / f_clip.w);
 	ndc /= 2.0f;
 	ndc += 0.5f;
 	vec2 reflectionUV = vec2(ndc.x, -ndc.y);
 	vec2 refractionUV = vec2(ndc.x, ndc.y);
 
-	// Depth map
 	float transparency = 1.0f;
 	if (u_transparency < 1.0f)
 	{
@@ -110,7 +102,6 @@ vec4 calculateWaterColor()
 		transparency = clamp(waterDepth / ((1.0f - u_transparency) * 10.0f), 0.0f, 1.0f);
 	}
 
-	// DUDV mapping
 	if (u_hasDudvMap)
 	{
 		// Distort map UV coordinates
@@ -139,7 +130,6 @@ vec4 calculateWaterColor()
 		refractionUV.y = clamp(refractionUV.y, 0.001f, 0.999f);
 	}
 
-	// Normal mapping
 	if (u_hasNormalMap)
 	{
 		vec3 normalMapColor = texture(u_normalMap, mapUV).rgb;
@@ -147,16 +137,13 @@ vec4 calculateWaterColor()
 		normal = normalize(normal);
 	}
 
-	// Fresnel effect
 	vec3 viewDirection = normalize(u_cameraPosition - f_position);
 	float fresnelMixValue = dot(viewDirection, normal);
 
-	// Finalizing fragment color
 	vec3 finalColor;
 	vec3 reflectionColor = texture(u_reflectionMap, reflectionUV).rgb;
 	vec3 refractionColor = texture(u_refractionMap, refractionUV).rgb;
 
-	// Calculate final color
 	if (u_isReflective && u_isRefractive && !u_isUnderWater) // Refraction & reflection
 	{
 		finalColor = mix(reflectionColor, refractionColor, fresnelMixValue); // Refraction fresnel effect
@@ -177,14 +164,12 @@ vec4 calculateWaterColor()
 		finalColor = u_color;
 	}
 
-	// Specular lighting
 	if (u_isSpecular)
 	{
 		finalColor += calculateDirectionalLighting(normal);
 		finalColor += calculateLights(normal);
 	}
 
-	// Return final color
 	return vec4(finalColor, transparency);
 }
 

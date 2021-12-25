@@ -2,10 +2,8 @@
 
 void MasterRenderer::_captureWaterReflections()
 {
-	// Temporary values
 	const auto waterEntity = _entityBus->getWaterEntity();
 
-	// Check if water reflections needed
 	if((waterEntity != nullptr) && waterEntity->isReflective())
 	{
 		// Calculate distance between camera and reflection surface

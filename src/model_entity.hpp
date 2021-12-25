@@ -9,7 +9,6 @@ class ModelEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	// VOID
 	void createPart(const string& ID);
 	void updateTransformation();
 	void updateTransformationMatrix();
@@ -76,7 +75,6 @@ public:
 	void setFaceCulled(bool value);
 	void setRotationOrder(DirectionOrder value);
 
-	// STRING
 	const vector<string> getPartIDs() const;
 	const string& getMeshPath() const;
 	const string& getLevelOfDetailEntityID() const;
@@ -88,10 +86,8 @@ public:
 	const string& getReflectionMapPath(const string& partID) const;
 	const string& getNormalMapPath(const string& partID) const;
 
-	// MAT44
 	const mat44& getTransformationMatrix(const string& partID) const;
 
-	// FVEC3
 	const fvec3 getColor(const string& partID) const;
 	const fvec3 getWireframeColor(const string& partID) const;
 	const fvec3 getLevelOfDetailSize() const;
@@ -104,7 +100,6 @@ public:
 	const fvec3 getPartRotationOrigin(const string& partID) const;
 	const fvec3 getPartSize(const string& partID) const;
 
-	// FLOAT
 	const float getCubeReflectionMixValue() const;
 	const float getMinHeight() const;
 	const float getMaxHeight() const;
@@ -117,7 +112,6 @@ public:
 	const float getTextureRepeat(const string& partID) const;
 	const float getEmissionIntensity(const string& partID) const;
 
-	// BOOL
 	const bool isShadowed() const;
 	const bool isReflected() const;
 	const bool isFrozen() const;
@@ -135,7 +129,6 @@ public:
 	const bool hasReflectionMap(const string& partID) const;
 	const bool hasNormalMap(const string& partID) const;
 
-	// MISCELLANEOUS
 	const shared_ptr<RenderBuffer> getRenderBuffer(const string& partID) const;
 	const TextureID getDiffuseMap(const string& partID) const;
 	const TextureID getEmissionMap(const string& partID) const;
@@ -146,21 +139,17 @@ public:
 	const DirectionOrder getRotationOrder() const;
 
 private:
-	// VOID
 	void _correctPositionTarget(fvec3& current, fvec3 target, float speed);
 	void _correctRotationTarget(fvec3& current, fvec3 target, float speed);
 	void _correctSizeTarget(fvec3& current, fvec3 target, float speed);
 
-	// UNSIGNED INT
 	const unsigned int _getPartIndex(const string& partID) const;
 
-	// STRING
 	string _meshPath = "";
 	string _levelOfDetailEntityID = "";
 	string _previousReflectionEntityID = "";
 	string _currentReflectionEntityID = "";
 
-	// FVEC3
 	fvec3 _basePosition = fvec3(0.0f);
 	fvec3 _baseRotation = fvec3(0.0f);
 	fvec3 _baseRotationOrigin = fvec3(0.0f);
@@ -170,7 +159,6 @@ private:
 	fvec3 _baseSizeTarget = fvec3(1.0f);
 	fvec3 _levelOfDetailSize = fvec3(1.0f);
 
-	// FLOAT
 	float _basePositionTargetSpeed = 0.0f;
 	float _baseRotationTargetSpeed = 0.0f;
 	float _baseSizeTargetSpeed = 0.0f;
@@ -179,7 +167,6 @@ private:
 	float _minHeight = numeric_limits<float>::lowest();
 	float _maxHeight = numeric_limits<float>::max();
 
-	// BOOL
 	bool _isFrozen = false;
 	bool _isShadowed = true;
 	bool _isReflected = true;
@@ -188,7 +175,6 @@ private:
 	bool _isBright = false;
 	bool _isFaceCulled = false;
 
-	// MISCELLANEOUS
 	vector<ModelEntityPart> _parts;
 	DirectionOrder _rotationOrder = DirectionOrder::YXZ;
 };

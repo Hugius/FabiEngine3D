@@ -2,7 +2,6 @@
 
 void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 {
-	// Extract arithmetic operator & variable name
 	string words[2] = {"", ""};
 	unsigned int wordIndex = 0;
 	for(const auto& c : scriptLine)
@@ -24,7 +23,6 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		}
 	}
 
-	// Check if invalid arithmetic operator
 	string operatorString = words[0];
 	if(operatorString != ADDITION_KEYWORD &&
 	   operatorString != SUBTRACTION_KEYWORD &&
@@ -36,7 +34,6 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		return;
 	}
 
-	// Check if variable name is missing
 	string nameString = words[1];
 	if(nameString.empty())
 	{
@@ -44,17 +41,14 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		return;
 	}
 
-	// Prepare list access
 	bool isAccessingLeftList = false;
 	auto leftListIndex = _extractListIndexFromString(nameString, isAccessingLeftList);
 
-	// Check if any error was thrown
 	if(_hasThrownError)
 	{
 		return;
 	}
 
-	// Remove list accessing characters
 	if(isAccessingLeftList)
 	{
 		auto isOpeningBracketFound = find(nameString.begin(), nameString.end(), '[');
@@ -62,17 +56,14 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		nameString = nameString.substr(0, bracketIndex);
 	}
 
-	// Check if left variable is not existing
 	if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
 		_throwScriptError("variable \"" + nameString + "\" not existing!");
 		return;
 	}
 
-	// Retrieve left variable
 	auto& leftVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
-	// Validate list access
 	unsigned int leftValueIndex = 0;
 	if(isAccessingLeftList)
 	{
@@ -86,14 +77,12 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		leftValueIndex = leftListIndex;
 	}
 
-	// Check if left variable is constant
 	if(leftVariable.isConstant())
 	{
 		_throwScriptError("CONST variables cannot be changed!");
 		return;
 	}
 
-	// Validate left variable
 	if(!isAccessingLeftList && (leftVariable.getType() == ScriptVariableType::MULTIPLE))
 	{
 		_throwScriptError("arithmetic not allowed on LIST values!");
@@ -110,7 +99,6 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		return;
 	}
 
-	// Negation arithmetic
 	if(operatorString == NEGATION_KEYWORD)
 	{
 		if(leftVariable.getValue(leftValueIndex).getType() == ScriptValueType::INTEGER)
@@ -129,7 +117,6 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		}
 	}
 
-	// Check if value is missing
 	auto minLineSize = (operatorString.size() + nameString.size() + (isAccessingLeftList ? (to_string(leftListIndex).size() + 2) : 0) + 3);
 	if(scriptLine.size() < minLineSize)
 	{
@@ -137,10 +124,8 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		return;
 	}
 
-	// Extract value
 	string valueString = scriptLine.substr(minLineSize - 1);
 
-	// Determine value type
 	if(_isListValue(valueString))
 	{
 		_throwScriptError("arithmetic not allowed on LIST values!");

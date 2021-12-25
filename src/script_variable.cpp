@@ -48,13 +48,11 @@ void ScriptVariable::setValues(vector<ScriptValue> values)
 
 void ScriptVariable::setValue(ScriptValue value, unsigned int index)
 {
-	// Check if variable is immutable
 	if(_isConstant)
 	{
 		Logger::throwError("ScriptVariable::changeValue");
 	}
 
-	// Delete old value
 	_values.erase(_values.begin() + index);
 	_values.insert(_values.begin() + index, make_shared<ScriptValue>(value));
 }
@@ -76,7 +74,6 @@ void ScriptVariable::clearValues()
 
 ScriptValue& ScriptVariable::getValue(unsigned int index) const
 {
-	// Validate index
 	if(index >= _values.size())
 	{
 		Logger::throwError("ScriptVariable::getValue");

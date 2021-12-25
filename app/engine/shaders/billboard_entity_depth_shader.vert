@@ -22,17 +22,14 @@ out vec2 f_uv;
 
 void main()
 {
-	// In variables
 	vec4 worldSpacePosition = (u_transformationMatrix * vec4(v_pos, 1.0f));
 	vec4 viewSpacePosition  = (u_viewMatrix * worldSpacePosition);
 	vec4 clipSpacePosition  = (u_projectionMatrix * viewSpacePosition);
 
-	// GLSL variables
 	gl_Position = clipSpacePosition;
 	gl_ClipDistance[0] = dot(worldSpacePosition, vec4(0.0f,  1.0f, 0.0f, -u_minHeight));
 	gl_ClipDistance[1] = dot(worldSpacePosition, vec4(0.0f, -1.0f, 0.0f,  u_maxHeight));
 	gl_ClipDistance[2] = dot(worldSpacePosition, vec4(0.0f, u_isUnderWater ? -1.0f : 1.0f, 0.0f, u_isUnderWater ? u_clippingY : -u_clippingY));
 
-	// Out variables
     f_uv = (vec2(u_adderUV.x + (v_uv.x * u_multiplierUV.x), u_adderUV.y + (-v_uv.y * u_multiplierUV.y)) * u_textureRepeat);
 }

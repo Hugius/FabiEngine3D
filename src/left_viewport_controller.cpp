@@ -24,11 +24,9 @@ LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, GuiManager& g
 
 void LeftViewportController::initialize()
 {
-	// Window
 	_gui.getViewport("left")->createWindow("main", fvec2(0.0f), fvec2(1.9f, 2.0f), LVPC::FRAME_COLOR);
 	auto window = _gui.getViewport("left")->getWindow("main");
 
-	// Left-viewport: main
 	auto positions = calculateButtonPositions(11, CH);
 	window->createScreen("main");
 	window->getScreen("main")->createButton("skyEditor", fvec2(0.0f, positions[0]), fvec2(TW("Sky"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sky", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
@@ -43,17 +41,14 @@ void LeftViewportController::initialize()
 	window->getScreen("main")->createButton("worldEditor", fvec2(0.0f, positions[9]), fvec2(TW("World"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "World", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	window->getScreen("main")->createButton("scriptEditor", fvec2(0.0f, positions[10]), fvec2(TW("Script"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Script", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 
-	// Default screen
 	window->setActiveScreen("main");
 }
 
 void LeftViewportController::update()
 {
-	// Temporary values
 	auto window = _gui.getViewport("left")->getWindow("main");
 	auto screen = window->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "main")
 	{
 		// Button management
@@ -144,7 +139,6 @@ void LeftViewportController::update()
 		}
 	}
 
-	// Update all editors
 	_skyEditor.update();
 	_terrainEditor.update();
 	_waterEditor.update();

@@ -10,28 +10,23 @@ using std::istringstream;
 
 const vector<string> ImageEditor::getTexturePathsFromFile() const
 {
-	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("ImageEditor::getTexturePathsFromFile");
 	}
 
-	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\image.fe3d");
 
-	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project corrupted: file `image.fe3d` missing!");
 		return {};
 	}
 
-	// Load image file
 	ifstream file(filePath);
 
-	// Read image data
 	vector<string> texturePaths;
 	string line;
 	while(getline(file, line))
@@ -65,7 +60,6 @@ const vector<string> ImageEditor::getTexturePathsFromFile() const
 		}
 	}
 
-	// Close file
 	file.close();
 
 	return texturePaths;
@@ -73,31 +67,25 @@ const vector<string> ImageEditor::getTexturePathsFromFile() const
 
 const bool ImageEditor::loadFromFile()
 {
-	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("ImageEditor::loadFromFile");
 	}
 
-	// Clear IDs from previous loads
 	_loadedImageIDs.clear();
 
-	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\image.fe3d");
 
-	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project corrupted: file `image.fe3d` missing!");
 		return false;
 	}
 
-	// Load image file
 	ifstream file(filePath);
 
-	// Read image data
 	string line;
 	while(getline(file, line))
 	{
@@ -143,12 +131,9 @@ const bool ImageEditor::loadFromFile()
 		}
 	}
 
-	// Close file
 	file.close();
 
-	// Logging
 	Logger::throwInfo("Image data loaded!");
 
-	// Return
 	return true;
 }

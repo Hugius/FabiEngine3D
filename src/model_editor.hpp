@@ -9,24 +9,20 @@ class ModelEditor final
 public:
 	ModelEditor(FabiEngine3D& fe3d, GuiManager& gui);
 
-	// VOID
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
 	void update();
 
-	// STRING
 	const vector<string> getMeshPathsFromFile() const;
 	const vector<string> getTexturePathsFromFile() const;
 	const vector<string>& getLoadedIDs();
 
-	// BOOL
 	const bool loadFromFile();
 	const bool saveToFile() const;
 	const bool isLoaded() const;
 
 private:
-	// VOID
 	void _loadGUI();
 	void _unloadGUI();
 	void _tryPartChoosing(const string& nextActiveScreenID);
@@ -47,7 +43,6 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	// STRING
 	vector<string> _loadedModelIDs;
 	string _currentProjectID = "";
 	string _currentModelID = "";
@@ -57,7 +52,6 @@ private:
 	string _hoveredPartID = "";
 	string _nextActiveScreenID = "";
 
-	// FLOAT
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 	static inline const float CURSOR_SENSITIVITY = 0.025f;
@@ -73,10 +67,8 @@ private:
 	static inline const float CAMERA_LOOKAT_SPEED = 0.025f;
 	static inline const float PART_HIGHLIGHT_SPEED = 0.025f;
 
-	// INT
 	int _selectedPartHighlightDirection = 1;
 
-	// BOOL
 	bool _isCreatingModel = false;
 	bool _isChoosingModel = false;
 	bool _isDeletingModel = false;
@@ -86,7 +78,6 @@ private:
 	bool _isDeletingAabb = false;
 	bool _isEditorLoaded = false;
 
-	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
 	GuiManager& _gui;
 };

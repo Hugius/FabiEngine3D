@@ -4,10 +4,8 @@
 
 void WorldEditor::_updateModelMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuModel")
 	{
 		// Button management
@@ -51,10 +49,8 @@ void WorldEditor::_updateModelMenu()
 
 void WorldEditor::_updateModelPlacingMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuModelPlace")
 	{
 		// Button management
@@ -121,10 +117,8 @@ void WorldEditor::_updateModelPlacingMenu()
 
 void WorldEditor::_updateModelChoosingMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuModelChoice")
 	{
 		// Remove deleted models from the scrollingList buttons

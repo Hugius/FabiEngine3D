@@ -4,7 +4,6 @@
 
 void ModelEditor::_updateCamera()
 {
-	// Check if third person view is enabled
 	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
 		// Update distance scrolling
@@ -37,7 +36,6 @@ void ModelEditor::_updateCamera()
 		_fe3d.gfx_setShadowReach(distance * 8.0f);
 	}
 
-	// Check if allowed by GUI
 	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Check if RMB pressed
@@ -55,7 +53,6 @@ void ModelEditor::_updateCamera()
 		}
 	}
 
-	// Disable third person view if necessary
 	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
 		if(_gui.getOverlay()->isFocused())
@@ -67,7 +64,6 @@ void ModelEditor::_updateCamera()
 
 void ModelEditor::_updateMiscellaneous()
 {
-	// Check if allowed by GUI
 	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Update reference model visibility
@@ -103,7 +99,6 @@ void ModelEditor::_updateMiscellaneous()
 		}
 	}
 
-	// Update model part highlighting
 	auto partID = (_hoveredPartID.empty() ? _currentPartID : _hoveredPartID);
 	if(partID.empty())
 	{

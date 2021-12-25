@@ -3,7 +3,6 @@
 
 void WorldEditor::_updateReflectionPlacing()
 {
-	// Only if user is in placement mode
 	if(_isPlacingReflection)
 	{
 		if(_fe3d.terrain_getSelectedID().empty()) // Placing without terrain
@@ -153,7 +152,6 @@ void WorldEditor::_updateReflectionPlacing()
 		}
 	}
 
-	// Update camera positions
 	for(const auto& entityID : _fe3d.model_getIDs())
 	{
 		if(entityID.substr(0, string("@@camera").size()) == "@@camera")

@@ -19,7 +19,6 @@ struct ivec3 final
 	ivec3(const int& value);
 	ivec3(const int& x, const int& y, const int& z);
 
-	// VOID
 	void operator+=(const ivec3& other);
 	void operator-=(const ivec3& other);
 	void operator*=(const ivec3& other);
@@ -29,7 +28,6 @@ struct ivec3 final
 	void operator/=(const int& other);
 	void operator*=(const int& other);
 
-	// IVEC3
 	const ivec3 operator-() const;
 	const ivec3 operator+(const ivec3& other) const;
 	const ivec3 operator-(const ivec3& other) const;
@@ -40,11 +38,9 @@ struct ivec3 final
 	const ivec3 operator*(const int& other) const;
 	const ivec3 operator/(const int& other) const;
 
-	// BOOL
 	const bool operator==(const ivec3& other) const;
 	const bool operator!=(const ivec3& other) const;
 
-	// MISCELLANEOUS
 	union
 	{
 		int f[3];

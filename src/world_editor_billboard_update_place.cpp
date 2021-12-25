@@ -3,7 +3,6 @@
 
 void WorldEditor::_updateBillboardPlacing()
 {
-	// Only if user is in placement mode
 	if(!_currentTemplateBillboardID.empty())
 	{
 		if(_fe3d.terrain_getSelectedID().empty()) // Placing without terrain

@@ -8,22 +8,18 @@ using std::ofstream;
 
 const bool ImageEditor::saveToFile() const
 {
-	// Editor must be loaded
 	if(!_isEditorLoaded)
 	{
 		return false;
 	}
 
-	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("ImageEditor::saveToFile");
 	}
 
-	// Create or overwrite file
 	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\image.fe3d");
 
-	// Write image data
 	for(const auto& imageID : _loadedImageIDs)
 	{
 		// Data to save
@@ -42,12 +38,9 @@ const bool ImageEditor::saveToFile() const
 		file << imageID << " " << diffuseMapPath << endl;
 	}
 
-	// Close file
 	file.close();
 
-	// Logging
 	Logger::throwInfo("Image data saved!");
 
-	// Return
 	return true;
 }

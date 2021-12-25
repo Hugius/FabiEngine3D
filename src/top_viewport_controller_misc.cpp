@@ -40,19 +40,15 @@ TopViewportController::TopViewportController(FabiEngine3D& fe3d,
 
 void TopViewportController::initialize()
 {
-	// Project window
 	_gui.getViewport("top")->createWindow("projectWindow", fvec2(-0.25f, 0.0f), fvec2(0.9875f, 1.5f), TVPC::FRAME_COLOR);
 	auto projectWindow = _gui.getViewport("top")->getWindow("projectWindow");
 
-	// Execution window
 	_gui.getViewport("top")->createWindow("executionWindow", fvec2(0.125f, 0.0f), fvec2(0.4875f, 1.5f), TVPC::FRAME_COLOR);
 	auto executionWindow = _gui.getViewport("top")->getWindow("executionWindow");
 
-	// Miscellaneous window
 	_gui.getViewport("top")->createWindow("miscellaneousWindow", fvec2(0.375f, 0.0f), fvec2(0.4875f, 1.5f), TVPC::FRAME_COLOR);
 	auto miscellaneousWindow = _gui.getViewport("top")->getWindow("miscellaneousWindow");
 
-	// Project screen
 	projectWindow->createScreen("main");
 	projectWindow->setActiveScreen("main");
 	projectWindow->getScreen("main")->createButton("newProject", fvec2(-0.767f, 0.0f), fvec2(0.15f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "NEW", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
@@ -61,7 +57,6 @@ void TopViewportController::initialize()
 	projectWindow->getScreen("main")->createButton("deleteProject", fvec2(0.384f, 0.0f), fvec2(0.3f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "DELETE", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
 	projectWindow->getScreen("main")->createButton("quitEngine", fvec2(0.767f, 0.0f), fvec2(0.2f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "QUIT", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
 
-	// Execution screen
 	executionWindow->createScreen("main");
 	executionWindow->setActiveScreen("main");
 	executionWindow->getScreen("main")->createButton("start", fvec2(-0.73f, 0.0f), fvec2(0.2f, 1.75f), "start.png", fvec3(2.0f), true, true, true);
@@ -70,7 +65,6 @@ void TopViewportController::initialize()
 	executionWindow->getScreen("main")->createButton("stop", fvec2(0.36f, 0.0f), fvec2(0.2f, 1.75f), "stop.png", fvec3(2.0f), true, true, true);
 	executionWindow->getScreen("main")->createButton("debug", fvec2(0.73f, 0.0f), fvec2(0.2f, 1.75f), "debug.png", fvec3(2.0f), true, true, true);
 
-	// Miscellaneous screen
 	miscellaneousWindow->createScreen("main");
 	miscellaneousWindow->setActiveScreen("main");
 	miscellaneousWindow->getScreen("main")->createButton("uncache", fvec2(-0.5875f, 0.0f), fvec2(0.55f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "UNCACHE", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR, true, true, true);
@@ -112,11 +106,9 @@ const bool TopViewportController::isScriptRunning() const
 
 void TopViewportController::_updateMiscellaneous()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("main");
 	bool isHoverable = (_currentProjectID.empty()) ? false : !_scriptEditor.getScriptExecutor().isStarted();
 
-	// Update buttons hoverability
 	screen->getButton("skyEditor")->setHoverable(isHoverable);
 	screen->getButton("terrainEditor")->setHoverable(isHoverable);
 	screen->getButton("waterEditor")->setHoverable(isHoverable);
@@ -132,20 +124,16 @@ void TopViewportController::_updateMiscellaneous()
 
 const bool TopViewportController::_prepareProjectChoosing(const string& title) const
 {
-	// Temporary values
 	const string projectDirectoryPath = (Tools::getRootDirectoryPath() + "projects\\");
 
-	// Check if game directory exists
 	if(!Tools::isDirectoryExisting(projectDirectoryPath))
 	{
 		Logger::throwWarning("Directory `projects\\` is missing!");
 		return false;
 	}
 
-	// Get all project names
 	auto projectIDs = Tools::getDirectoriesFromDirectory(projectDirectoryPath);
 
-	// Add buttons
 	_gui.getOverlay()->createChoiceForm("projectList", title, fvec2(0.0f, 0.1f), projectIDs);
 
 	return true;
@@ -153,7 +141,6 @@ const bool TopViewportController::_prepareProjectChoosing(const string& title) c
 
 void TopViewportController::_applyProjectChange()
 {
-	// Change window title
 	if(_currentProjectID.empty())
 	{
 		_fe3d.misc_setWindowTitle("FabiEngine3D");
@@ -163,76 +150,63 @@ void TopViewportController::_applyProjectChange()
 		_fe3d.misc_setWindowTitle("FabiEngine3D - " + _currentProjectID);
 	}
 
-	// Go back to main menu
 	_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 
-	// Unload sky editor
 	if(_skyEditor.isLoaded())
 	{
 		_skyEditor.unload();
 	}
 
-	// Unload terrain editor
 	if(_terrainEditor.isLoaded())
 	{
 		_terrainEditor.unload();
 	}
 
-	// Unload water editor
 	if(_waterEditor.isLoaded())
 	{
 		_waterEditor.unload();
 	}
 
-	// Unload model editor
 	if(_modelEditor.isLoaded())
 	{
 		_modelEditor.unload();
 	}
 
-	// Unload billboard editor
 	if(_billboardEditor.isLoaded())
 	{
 		_billboardEditor.unload();
 	}
 
-	// Unload image editor
 	if(_imageEditor.isLoaded())
 	{
 		_imageEditor.unload();
 	}
 
-	// Unload animation2D editor
 	if(_animation2dEditor.isLoaded())
 	{
 		_animation2dEditor.unload();
 	}
 
-	// Unload animation3D editor
 	if(_animation3dEditor.isLoaded())
 	{
 		_animation3dEditor.unload();
 	}
 
-	// Unload sound editor
 	if(_soundEditor.isLoaded())
 	{
 		_soundEditor.unload();
 	}
 
-	// Unload world editor
 	if(_worldEditor.isLoaded())
 	{
 		_worldEditor.unload();
 	}
 
-	// Unload script editor
 	if(_scriptEditor.isLoaded())
 	{
 		_scriptEditor.unload();
 	}
 
-	// Pass loaded project ID
 	_skyEditor.setCurrentProjectID(_currentProjectID);
 	_terrainEditor.setCurrentProjectID(_currentProjectID);
 	_waterEditor.setCurrentProjectID(_currentProjectID);
@@ -248,7 +222,6 @@ void TopViewportController::_applyProjectChange()
 
 const bool TopViewportController::isProjectCorrupted(const string& projectDirectoryPath) const
 {
-	// Check if all default directories are still existing
 	if(!Tools::isDirectoryExisting(projectDirectoryPath) ||
 	   !Tools::isDirectoryExisting(projectDirectoryPath + "data") ||
 	   !Tools::isDirectoryExisting(projectDirectoryPath + "saves") ||
@@ -260,7 +233,6 @@ const bool TopViewportController::isProjectCorrupted(const string& projectDirect
 		return true;
 	}
 
-	// Check if all default files are still existing
 	if(!Tools::isFileExisting(projectDirectoryPath + "data\\animation3d.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\animation2d.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\billboard.fe3d") ||
@@ -280,13 +252,11 @@ const bool TopViewportController::isProjectCorrupted(const string& projectDirect
 
 void TopViewportController::_saveCurrentProject()
 {
-	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("TopViewportController::_saveCurrentProject");
 	}
 
-	// Save everything
 	_skyEditor.saveToFile();
 	_terrainEditor.saveToFile();
 	_waterEditor.saveToFile();
@@ -299,6 +269,5 @@ void TopViewportController::_saveCurrentProject()
 	_worldEditor.saveEditorWorldToFile();
 	_scriptEditor.saveScriptFiles();
 
-	// Logging
 	Logger::throwInfo("Project \"" + _currentProjectID + "\" saved!");
 }

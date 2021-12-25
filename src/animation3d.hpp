@@ -11,7 +11,6 @@ class Animation3d final
 public:
 	Animation3d(const string& ID);
 
-	// VOID
 	void addFrame(const Animation3dFrame& value);
 	void setFrame(unsigned int index, const Animation3dFrame& value);
 	void setFrames(const vector<Animation3dFrame>& value);
@@ -27,58 +26,44 @@ public:
 	void setPaused(bool value);
 	void setAutopaused(bool value);
 
-	// STRING
 	const string& getID() const;
 	const vector<string>& getPartIDs() const;
 	const string& getPreviewModelID() const;
 
-	// FVEC3
 	const map<string, fvec3>& getTotalMovements() const;
 	const map<string, fvec3>& getTotalRotations() const;
 	const map<string, fvec3>& getTotalScalings() const;
 	const fvec3 getInitialSize() const;
 
-	// FLOAT
 	const float getSpeed() const;
 
-	// INT
 	const int getPlayCount() const;
 
-	// UNSIGNED INT
 	const unsigned int getFrameIndex() const;
 
-	// BOOL
 	const bool isPaused() const;
 	const bool isAutopaused() const;
 
-	// MISCELLANEOUS
 	const vector<Animation3dFrame>& getFrames() const;
 
 private:
-	// STRING
 	const string _ID;
 	vector<string> _partIDs;
 	string _previewModelID = "";
 
-	// FVEC3
 	map<string, fvec3> _totalMovements;
 	map<string, fvec3> _totalRotations;
 	map<string, fvec3> _totalScalings;
 	fvec3 _initialSize = fvec3(0.0f);
 
-	// FLOAT
 	float _speed = 1.0f;
 
-	// INT
 	int _playCount = 0;
 
-	// UNSIGNED INT
 	unsigned int _frameIndex = 0;
 
-	// BOOL
 	bool _isPaused = false;
 	bool _isAutopaused = false;
 
-	// MISCELLANEOUS
 	vector<Animation3dFrame> _frames;
 };

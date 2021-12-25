@@ -11,7 +11,6 @@ using std::ofstream;
 
 const bool WorldEditor::saveCustomWorldToFile()
 {
-	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("WorldEditor::saveCustomWorldToFile::1");
@@ -21,21 +20,17 @@ const bool WorldEditor::saveCustomWorldToFile()
 		Logger::throwError("WorldEditor::saveCustomWorldToFile::2");
 	}
 
-	// Warning checking
 	if(_customWorldID.empty())
 	{
 		Logger::throwWarning("Cannot save custom world!");
 		return false;
 	}
 
-	// Compose file path
 	const string filePath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
 							 ("projects\\" + _currentProjectID + "\\")) + "worlds\\custom\\" + _customWorldID + ".fe3d");
 
-	// Create or overwrite file
 	ofstream file(filePath);
 
-	// Save model level of detail IDs
 	vector<string> levelOfDetailEntityIDs;
 	for(const auto& modelID : _fe3d.model_getIDs())
 	{
@@ -55,7 +50,6 @@ const bool WorldEditor::saveCustomWorldToFile()
 		}
 	}
 
-	// Sky
 	string skyID = _fe3d.sky_getSelectedID();
 	if(!skyID.empty() && _hasCustomWorldSky)
 	{
@@ -77,7 +71,6 @@ const bool WorldEditor::saveCustomWorldToFile()
 			color.b << endl;
 	}
 
-	// Terrain
 	string terrainID = _fe3d.terrain_getSelectedID();
 	if(!terrainID.empty() && _hasCustomWorldTerrain)
 	{
@@ -91,7 +84,6 @@ const bool WorldEditor::saveCustomWorldToFile()
 			templateID << endl;
 	}
 
-	// Water
 	string waterID = _fe3d.water_getSelectedID();
 	if(!waterID.empty() && _hasCustomWorldWater)
 	{
@@ -114,7 +106,6 @@ const bool WorldEditor::saveCustomWorldToFile()
 			transparency << endl;
 	}
 
-	// Models
 	for(const auto& modelID : _fe3d.model_getIDs())
 	{
 		// Check if allowed to save
@@ -235,7 +226,6 @@ const bool WorldEditor::saveCustomWorldToFile()
 		}
 	}
 
-	// Animations
 	for(const auto& modelID : _fe3d.model_getIDs())
 	{
 		// Check if allowed to save
@@ -290,7 +280,6 @@ const bool WorldEditor::saveCustomWorldToFile()
 		}
 	}
 
-	// Billboards
 	for(const auto& billboardID : _fe3d.billboard_getIDs())
 	{
 		// Check if allowed to save
@@ -366,7 +355,6 @@ const bool WorldEditor::saveCustomWorldToFile()
 		}
 	}
 
-	// AABBs
 	for(const auto& aabbID : _fe3d.aabb_getIDs())
 	{
 		// Check if allowed to save
@@ -397,7 +385,6 @@ const bool WorldEditor::saveCustomWorldToFile()
 		}
 	}
 
-	// Sounds
 	//for(const auto& soundID : _fe3d.sound3d_getIDs())
 	//{
 	//	// Check if allowed to save
@@ -434,7 +421,6 @@ const bool WorldEditor::saveCustomWorldToFile()
 	//	}
 	//}
 
-	// Pointlights
 	for(const auto& pointlightID : _fe3d.pointlight_getIDs())
 	{
 		// Check if allowed to save
@@ -465,7 +451,6 @@ const bool WorldEditor::saveCustomWorldToFile()
 		}
 	}
 
-	// Spotlights
 	for(const auto& spotlightID : _fe3d.spotlight_getIDs())
 	{
 		// Check if allowed to save
@@ -500,7 +485,6 @@ const bool WorldEditor::saveCustomWorldToFile()
 		}
 	}
 
-	// Reflections
 	for(const auto& reflectionID : _fe3d.reflection_getIDs())
 	{
 		// Check if allowed to save
@@ -521,7 +505,6 @@ const bool WorldEditor::saveCustomWorldToFile()
 		}
 	}
 
-	// Check if allowed to save
 	if(_hasCustomWorldLighting)
 	{
 		// Ambient lighting
@@ -561,7 +544,6 @@ const bool WorldEditor::saveCustomWorldToFile()
 		}
 	}
 
-	// Check if allowed to save
 	if(_hasCustomWorldGraphics)
 	{
 		// Shadow settings
@@ -671,10 +653,8 @@ const bool WorldEditor::saveCustomWorldToFile()
 		}
 	}
 
-	// Close file
 	file.close();
 
-	// Reset custom world builder values
 	_customWorldID = "";
 	_hasCustomWorldLighting = false;
 	_hasCustomWorldGraphics = false;
@@ -688,6 +668,5 @@ const bool WorldEditor::saveCustomWorldToFile()
 	_customWorldPointlightIDs.clear();
 	_customWorldSpotlightIDs.clear();
 
-	// Return
 	return true;
 }

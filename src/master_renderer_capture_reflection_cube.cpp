@@ -2,23 +2,19 @@
 
 void MasterRenderer::_captureCubeReflections()
 {
-	// Check if no cube reflections needed
 	if(_entityBus->getReflectionEntities().empty())
 	{
 		return;
 	}
 
-	// Temporary values
 	const auto reflectionQuality = _renderBus.getCubeReflectionQuality();
 
-	// Save initial camera status
 	const auto initialCameraAspectRatio = _camera.getAspectRatio();
 	const auto initialCameraFOV = _camera.getFOV();
 	const auto initialCameraYaw = _camera.getYaw();
 	const auto initialCameraPitch = _camera.getPitch();
 	const auto initialCameraPosition = _camera.getPosition();
 
-	// Iterate through all model entities
 	vector<string> savedModelEntityIDs;
 	for(const auto& [keyID, entity] : _entityBus->getModelEntities())
 	{
@@ -30,7 +26,6 @@ void MasterRenderer::_captureCubeReflections()
 		}
 	}
 
-	// Iterate through all billboard entities
 	vector<string> savedBillboardEntityIDs;
 	for(const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 	{
@@ -42,10 +37,8 @@ void MasterRenderer::_captureCubeReflections()
 		}
 	}
 
-	// Disable reflections
 	_renderBus.setReflectionsEnabled(false);
 
-	// Sky exposure must not appear in reflections
 	float oldLightness = 0.0f;
 	auto skyEntity = _entityBus->getMainSkyEntity();
 	if(skyEntity != nullptr)
@@ -54,12 +47,10 @@ void MasterRenderer::_captureCubeReflections()
 		skyEntity->setLightness(skyEntity->getInitialLightness());
 	}
 
-	// Prepare camera
 	_camera.invertUpVector();
 	_camera.setAspectRatio(1.0f);
 	_camera.setFOV(90.0f);
 
-	// Iterate through all reflection entities
 	for(const auto& [keyID, entity] : _entityBus->getReflectionEntities())
 	{
 		// Check if reflection must capture
@@ -149,7 +140,6 @@ void MasterRenderer::_captureCubeReflections()
 		}
 	}
 
-	// Iterate through all model entities
 	for(const auto& [keyID, entity] : _entityBus->getModelEntities())
 	{
 		// Iterate through all saved model entities
@@ -164,7 +154,6 @@ void MasterRenderer::_captureCubeReflections()
 		}
 	}
 
-	// Iterate through all saved billboard entities
 	for(const auto& savedID : savedBillboardEntityIDs)
 	{
 		// Iterate through all billboard entities
@@ -179,16 +168,13 @@ void MasterRenderer::_captureCubeReflections()
 		}
 	}
 
-	// Revert reflections
 	_renderBus.setReflectionsEnabled(true);
 
-	// Revert sky lightness
 	if(skyEntity != nullptr)
 	{
 		skyEntity->setLightness(oldLightness);
 	}
 
-	// Revert camera
 	_camera.invertUpVector();
 	_camera.setAspectRatio(initialCameraAspectRatio);
 	_camera.setFOV(initialCameraFOV);
@@ -197,6 +183,5 @@ void MasterRenderer::_captureCubeReflections()
 	_camera.setPosition(initialCameraPosition);
 	_camera.updateMatrices();
 
-	// Revert shadows
 	_shadowGenerator.generate();
 }

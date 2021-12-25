@@ -9,11 +9,9 @@ using std::ofstream;
 
 void TopViewportController::_updateProjectScreenManagement()
 {
-	// Temporary values
 	auto topScreen = _gui.getViewport("top")->getWindow("projectWindow")->getActiveScreen();
 	auto leftScreen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 	{
 		if(topScreen->getButton("newProject")->isHovered())
@@ -53,12 +51,10 @@ void TopViewportController::_updateProjectScreenManagement()
 		}
 	}
 
-	// Update specific processes
 	_updateProjectCreating();
 	_updateProjectLoading();
 	_updateProjectDeleting();
 
-	// Quitting with ESCAPE
 	if(_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && (leftScreen->getID() == "main") && !_gui.getOverlay()->isFocused())
 	{
 		// Check if script execution not started
@@ -68,7 +64,6 @@ void TopViewportController::_updateProjectScreenManagement()
 		}
 	}
 
-	// Update answer forms
 	if(_gui.getOverlay()->isAnswerFormConfirmed("quit"))
 	{
 		_saveCurrentProject();
@@ -79,7 +74,6 @@ void TopViewportController::_updateProjectScreenManagement()
 		_fe3d.application_stop();
 	}
 
-	// Update buttons hoverability
 	topScreen->getButton("newProject")->setHoverable(!_scriptEditor.getScriptExecutor().isStarted());
 	topScreen->getButton("loadProject")->setHoverable(!_scriptEditor.getScriptExecutor().isStarted());
 	topScreen->getButton("saveProject")->setHoverable(!_currentProjectID.empty() && !_scriptEditor.getScriptExecutor().isStarted());
@@ -88,10 +82,8 @@ void TopViewportController::_updateProjectScreenManagement()
 
 void TopViewportController::_updateGameScreenManagement()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("top")->getWindow("executionWindow")->getActiveScreen();
 
-	// Check if currently any project loaded
 	if(_currentProjectID.empty())
 	{
 		screen->getButton("start")->setHoverable(false);
@@ -181,10 +173,8 @@ void TopViewportController::_updateGameScreenManagement()
 
 void TopViewportController::_updateMiscScreenManagement()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("top")->getWindow("miscellaneousWindow")->getActiveScreen();
 
-	// Button management
 	if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("uncache")->isHovered())
 	{
 		// Validate project ID
@@ -274,7 +264,6 @@ void TopViewportController::_updateMiscScreenManagement()
 		ShellExecute(0, 0, "https://github.com/ConsolePeasant92/FabiEngine3D/blob/master/README.md", 0, 0, SW_SHOW);
 	}
 
-	// Update buttons hoverability
 	screen->getButton("uncache")->setHoverable(!_currentProjectID.empty() && !_scriptEditor.getScriptExecutor().isStarted());
 	screen->getButton("export")->setHoverable(!_currentProjectID.empty());
 }

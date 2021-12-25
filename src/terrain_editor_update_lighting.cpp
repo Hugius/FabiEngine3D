@@ -7,10 +7,8 @@ using std::clamp;
 
 void TerrainEditor::_updateLightingMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "terrainEditorMenuLighting")
 	{
 		// Temporary values

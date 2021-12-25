@@ -11,28 +11,23 @@ using std::istringstream;
 
 const vector<array<string, 6>> SkyEditor::getTexturePathsFromFile() const
 {
-	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("SkyEditor::getTexturePathsFromFile");
 	}
 
-	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\sky.fe3d");
 
-	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project corrupted: file `sky.fe3d` missing!");
 		return {};
 	}
 
-	// Load sky file
 	ifstream file(filePath);
 
-	// Read sky data
 	vector<array<string, 6>> texturePaths;
 	string line;
 	while(getline(file, line))
@@ -74,40 +69,32 @@ const vector<array<string, 6>> SkyEditor::getTexturePathsFromFile() const
 		texturePaths.push_back(cubeMapPaths);
 	}
 
-	// Close file
 	file.close();
 
-	// Return
 	return texturePaths;
 }
 
 const bool SkyEditor::loadFromFile()
 {
-	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("SkyEditor::loadFromFile");
 	}
 
-	// Clear IDs from previous loads
 	_loadedSkyIDs.clear();
 
-	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\sky.fe3d");
 
-	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project corrupted: file `sky.fe3d` missing!");
 		return false;
 	}
 
-	// Load sky file
 	ifstream file(filePath);
 
-	// Read sky data
 	string line;
 	while(getline(file, line))
 	{
@@ -168,12 +155,9 @@ const bool SkyEditor::loadFromFile()
 		}
 	}
 
-	// Close file
 	file.close();
 
-	// Logging
 	Logger::throwInfo("Sky data loaded!");
 
-	// Return
 	return true;
 }

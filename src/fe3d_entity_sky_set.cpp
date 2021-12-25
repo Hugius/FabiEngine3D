@@ -70,7 +70,6 @@ void FabiEngine3D::sky_setFrontCubeMap(const string& ID, const string& value)
 
 void FabiEngine3D::sky_delete(const string& ID)
 {
-	// Unselect sky if selected
 	if(ID == sky_getSelectedID())
 	{
 		_core->_skyEntityManager.selectMainSky("");

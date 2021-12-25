@@ -3,7 +3,6 @@
 
 void ScriptInterpreter::_processVariableCreation(const string& scriptLine, ScriptVariableScope scope)
 {
-	// Temporary values
 	auto forbiddenVariableNames = {
 		META_KEYWORD,
 		EXECUTE_KEYWORD,
@@ -38,7 +37,6 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		PASS_KEYWORD
 	};
 
-	// Extract optional CONST keyword
 	bool isConstant = false;
 	if(scope == ScriptVariableScope::GLOBAL)
 	{
@@ -51,7 +49,6 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		isConstant = (possibleConstKeyword == (CONST_KEYWORD + " "));
 	}
 
-	// Extract type, name, equal sign
 	string words[3] = {"", "", ""};
 	unsigned int typeIndex = 0;
 	unsigned int wordIndex = 0;
@@ -79,21 +76,18 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 	string nameString = words[1];
 	string equalSignString = words[2];
 
-	// Check if variable type is missing
 	if(typeString.empty())
 	{
 		_throwScriptError("variable type missing!");
 		return;
 	}
 
-	// Check if variable name is missing
 	if(nameString.empty())
 	{
 		_throwScriptError("variable name missing!");
 		return;
 	}
 
-	// Check if variable type is invalid
 	if(typeString != LIST_KEYWORD &&
 	   typeString != STRING_KEYWORD &&
 	   typeString != DECIMAL_KEYWORD &&
@@ -104,7 +98,6 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		return;
 	}
 
-	// Validate variable name
 	bool isValidName = !nameString.empty() &&
 		nameString.substr(0, 5) != "fe3d:" &&
 		nameString.substr(0, 5) != "math:" &&
@@ -112,13 +105,11 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		!isdigit(nameString[0]) &&
 		(isalnum(nameString[0]) || nameString[0] == '_');
 
-	// Validate name
 	for(const auto& word : forbiddenVariableNames)
 	{
 		isValidName = (isValidName && (nameString != word));
 	}
 
-	// Validate variable individual characters
 	for(const auto& c : nameString)
 	{
 		// Only non-alphanumeric character '_'
@@ -128,31 +119,26 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		}
 	}
 
-	// Check if global variable starts with '_'
 	if(scope == ScriptVariableScope::GLOBAL && nameString[0] != '_')
 	{
 		_throwScriptError("global variables must start with '_'!");
 		return;
 	}
 
-	// Check if local variable does not start with '_'
 	if(scope == ScriptVariableScope::LOCAL && nameString[0] == '_')
 	{
 		_throwScriptError("local variables cannot start with '_'!");
 		return;
 	}
 
-	// Check if variable name is valid
 	if(!isValidName)
 	{
 		_throwScriptError("forbidden variable name!");
 		return;
 	}
 
-	// Retrieve the repsective list of variables
 	auto& variableList = ((scope == ScriptVariableScope::LOCAL) ? _localVariables[_executionDepth] : _globalVariables);
 
-	// Check if variable is already defined
 	if((scope == ScriptVariableScope::LOCAL && _isLocalVariableExisting(nameString)) ||
 	   (scope == ScriptVariableScope::GLOBAL && _isGlobalVariableExisting(nameString)))
 	{
@@ -160,14 +146,12 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		return;
 	}
 
-	// Check if equal sign is missing
 	if(equalSignString != "=")
 	{
 		_throwScriptError("equal sign missing!");
 		return;
 	}
 
-	// Check if value is missing
 	auto minLineSize = (scriptLine.find('=') + 3);
 	if(scriptLine.size() < minLineSize)
 	{
@@ -175,10 +159,8 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		return;
 	}
 
-	// Extract value
 	string valueString = scriptLine.substr(minLineSize - 1);
 
-	// Determine value type
 	if((typeString == LIST_KEYWORD) && _isListValue(valueString))
 	{
 		// Remove the []

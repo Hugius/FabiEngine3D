@@ -106,12 +106,10 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string& functionName, 
 		return false;
 	}
 
-	// Cannot execute when server is running
 	if(_fe3d.server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:sky` functionality as networking server!");
 	}
 
-	// Return
 	return true;
 }

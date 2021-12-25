@@ -85,12 +85,10 @@ const bool FabiEngine3D::misc_isCursorVisible() const
 
 const bool FabiEngine3D::misc_isCursorInsideViewport() const
 {
-	// Temporary values
 	auto cursorPosition = misc_getCursorPosition();
 	auto viewportPosition = Config::getInst().getViewportPosition();
 	auto viewportSize = Config::getInst().getViewportSize();
 
-	// Checking if cursor is inside viewport
 	if((cursorPosition.x > viewportPosition.x) && (cursorPosition.x < (viewportPosition.x + viewportSize.x)))
 	{
 		if((cursorPosition.y > viewportPosition.y) && (cursorPosition.y < (viewportPosition.y + viewportSize.y)))
@@ -104,11 +102,9 @@ const bool FabiEngine3D::misc_isCursorInsideViewport() const
 
 const bool FabiEngine3D::misc_isCursorInsideWindow() const
 {
-	// Temporary values
 	auto cursorPosition = misc_getCursorPosition();
 	auto windowSize = Config::getInst().getWindowSize();
 
-	// Checking if cursor is inside viewport
 	if((cursorPosition.x > 1) && (cursorPosition.x < (windowSize.x - 1)))
 	{
 		if((cursorPosition.y > 1) && (cursorPosition.y < (windowSize.y - 1)))
@@ -127,7 +123,6 @@ const bool FabiEngine3D::misc_checkInterval(unsigned int ticks) const
 
 const vector<pair<string, int>> FabiEngine3D::misc_getUpdateProfilingStatistics() const
 {
-	// Final list of timer IDs
 	vector<pair<string, int>> result =
 	{
 		pair<string, int>("coreUpdate", 0),
@@ -145,7 +140,6 @@ const vector<pair<string, int>> FabiEngine3D::misc_getUpdateProfilingStatistics(
 		pair<string, int>("networkUpdate", 0)
 	};
 
-	// Calculate percentages
 	for(auto& [ID, percentage] : result)
 	{
 		int newPercentage = static_cast<int>((_core->_timer.getDeltaPart(ID) / _core->_timer.getDeltaPartSum()) * 100.0f);
@@ -157,7 +151,6 @@ const vector<pair<string, int>> FabiEngine3D::misc_getUpdateProfilingStatistics(
 
 const vector<pair<string, int>> FabiEngine3D::misc_getRenderProfilingStatistics() const
 {
-	// Final list of timer IDs
 	vector<pair<string, int>> result =
 	{
 		pair<string, int>("reflectionPreRender", 0),
@@ -175,7 +168,6 @@ const vector<pair<string, int>> FabiEngine3D::misc_getRenderProfilingStatistics(
 		pair<string, int>("bufferSwap", 0)
 	};
 
-	// Calculate percentages
 	for(auto& [ID, percentage] : result)
 	{
 		int newPercentage = static_cast<int>((_core->_timer.getDeltaPart(ID) / _core->_timer.getDeltaPartSum()) * 100.0f);

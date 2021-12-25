@@ -24,13 +24,10 @@ const unordered_map<string, shared_ptr<ReflectionEntity>>& ReflectionEntityManag
 
 void ReflectionEntityManager::createEntity(const string& ID)
 {
-	// Create entity
 	_entities.insert(make_pair(ID, make_shared<ReflectionEntity>(ID)));
 
-	// Temporary values
 	auto entity = getEntity(ID);
 
-	// Create cube map
 	TextureID cubeMap;
 	glGenTextures(1, &cubeMap);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMap);

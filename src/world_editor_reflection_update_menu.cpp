@@ -4,10 +4,8 @@
 
 void WorldEditor::_updateReflectionMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuReflection")
 	{
 		// Button management
@@ -82,10 +80,8 @@ void WorldEditor::_updateReflectionMenu()
 
 void WorldEditor::_updateReflectionChoosingMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "worldEditorMenuReflectionChoice")
 	{
 		// Remove deleted reflections from the scrollingList buttons

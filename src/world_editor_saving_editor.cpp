@@ -10,22 +10,18 @@ using std::ofstream;
 
 const bool WorldEditor::saveEditorWorldToFile()
 {
-	// Must be editing a world
 	if(_currentWorldID.empty())
 	{
 		return false;
 	}
 
-	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("WorldEditor::saveEditorWorldToFile");
 	}
 
-	// Create or overwrite file
 	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\worlds\\editor\\" + _currentWorldID + ".fe3d");
 
-	// Save all level of detail entity IDs
 	vector<string> levelOfDetailEntityIDs;
 	for(const auto& modelID : _fe3d.model_getIDs())
 	{
@@ -44,17 +40,13 @@ const bool WorldEditor::saveEditorWorldToFile()
 		}
 	}
 
-	// Camera position
 	const auto cameraPosition = _fe3d.camera_getPosition();
 	file << "CAMERA_POSITION " << cameraPosition.x << " " << cameraPosition.y << " " << cameraPosition.z << endl;
 
-	// Camera yaw
 	file << "CAMERA_YAW " << _fe3d.camera_getYaw() << endl;
 
-	// Camera pitch
 	file << "CAMERA_PITCH " << _fe3d.camera_getPitch() << endl;
 
-	// Sky
 	string skyID = _fe3d.sky_getSelectedID();
 	if(!skyID.empty())
 	{
@@ -68,7 +60,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 			templateID << endl;
 	}
 
-	// Terrain
 	string terrainID = _fe3d.terrain_getSelectedID();
 	if(!terrainID.empty())
 	{
@@ -82,7 +73,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 			templateID << endl;
 	}
 
-	// Water
 	string waterID = _fe3d.water_getSelectedID();
 	if(!waterID.empty())
 	{
@@ -98,7 +88,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 			height << endl;
 	}
 
-	// Models
 	for(const auto& modelID : _fe3d.model_getIDs())
 	{
 		// Check if allowed to save
@@ -169,7 +158,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 		}
 	}
 
-	// Billboards
 	for(const auto& billboardID : _fe3d.billboard_getIDs())
 	{
 		// Check if allowed to save
@@ -210,7 +198,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 		}
 	}
 
-	// Sounds
 	for(const auto& soundID : _fe3d.sound3d_getIDs())
 	{
 		// Check if allowed to save
@@ -237,7 +224,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 		}
 	}
 
-	// Pointlights
 	for(const auto& pointlightID : _fe3d.pointlight_getIDs())
 	{
 		// Check if allowed to save
@@ -268,7 +254,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 		}
 	}
 
-	// Spotlights
 	for(const auto& spotlightID : _fe3d.spotlight_getIDs())
 	{
 		// Check if allowed to save
@@ -301,7 +286,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 		}
 	}
 
-	// Reflections
 	for(const auto& reflectionID : _fe3d.reflection_getIDs())
 	{
 		// Check if allowed to save
@@ -320,14 +304,12 @@ const bool WorldEditor::saveEditorWorldToFile()
 		}
 	}
 
-	// Editor camera speed
 	{
 		file <<
 			"EDITOR_SPEED " <<
 			_editorSpeed << endl;
 	}
 
-	// Ambient lighting
 	if(_fe3d.gfx_isAmbientLightingEnabled())
 	{
 		// Data to save
@@ -343,7 +325,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 			ambientLightingIntensity << endl;
 	}
 
-	// Directional lighting
 	if(_fe3d.gfx_isDirectionalLightingEnabled())
 	{
 		// Data to save
@@ -363,7 +344,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 			directionalLightingIntensity << endl;
 	}
 
-	// Shadow settings
 	if(_fe3d.gfx_isShadowsEnabled())
 	{
 		// Data to save
@@ -387,7 +367,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 			quality << endl;
 	}
 
-	// Reflections settings
 	{
 		auto planarHeight = _fe3d.gfx_getPlanarReflectionHeight();
 		auto cubeQuality = _fe3d.gfx_getCubeReflectionQuality();
@@ -399,7 +378,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 			planarQuality << endl;
 	}
 
-	// Refractions settings
 	{
 		auto planarQuality = _fe3d.gfx_getPlanarReflectionQuality();
 		file <<
@@ -407,7 +385,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 			planarQuality << endl;
 	}
 
-	// DOF settings
 	if(_fe3d.gfx_isDofEnabled())
 	{
 		// Data to save
@@ -425,7 +402,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 			quality << endl;
 	}
 
-	// Fog settings
 	if(_fe3d.gfx_isFogEnabled())
 	{
 		// Data to save
@@ -443,7 +419,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 			Tools::vec2str(color) << endl;
 	}
 
-	// Lens flare settings
 	if(_fe3d.gfx_isLensFlareEnabled())
 	{
 		// Data to save
@@ -468,7 +443,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 			sensitivity << endl;
 	}
 
-	// Sky exposure settings
 	if(_fe3d.gfx_isSkyExposureEnabled())
 	{
 		file <<
@@ -477,7 +451,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 			<< _fe3d.gfx_getSkyExposureSpeed() << endl;
 	}
 
-	// Bloom settings
 	if(_fe3d.gfx_isBloomEnabled())
 	{
 		// Data to save
@@ -495,12 +468,9 @@ const bool WorldEditor::saveEditorWorldToFile()
 			quality << endl;
 	}
 
-	// Close file
 	file.close();
 
-	// Logging
 	Logger::throwInfo("World data saved!");
 
-	// Return
 	return true;
 }

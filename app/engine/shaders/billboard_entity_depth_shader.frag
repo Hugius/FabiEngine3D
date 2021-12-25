@@ -10,15 +10,12 @@ uniform float u_minTextureTransparency;
 
 void main()
 {
-	// Calculate diffuse map color
 	vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 
-	// Check if transparent
 	if (diffuseMapColor.a < u_minTextureTransparency)
 	{
 		discard;
 	}
 
-	// Set final depth
 	gl_FragDepth = gl_FragCoord.z;
 }

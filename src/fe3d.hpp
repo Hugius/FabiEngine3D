@@ -46,16 +46,13 @@ public:
 	FabiEngine3D();
 	virtual ~FabiEngine3D();
 
-	// APPLICATION - setters
 	void application_start();
 	void application_pause();
 	void application_resume();
 	void application_stop();
 
-	// APPLICATION - getters
 	const bool application_isPaused() const;
 
-	// SKY - setters
 	void sky_create(const string& ID);
 	void sky_delete(const string& ID);
 	void sky_deleteAll();
@@ -76,7 +73,6 @@ public:
 	void sky_setWireframed(const string& ID, bool value);
 	void sky_setWireframeColor(const string& ID, fvec3 value);
 
-	// SKY - getters
 	const vector<string> sky_getIDs() const;
 	const array<string, 6>& sky_getCubeMapPaths(const string& ID) const;
 	const string& sky_getRightCubeMap(const string& ID) const;
@@ -103,7 +99,6 @@ public:
 	const bool sky_hasBackCubeMap(const string& ID) const;
 	const bool sky_hasFrontCubeMap(const string& ID) const;
 
-	// TERRAIN - setters
 	void terrain_create(const string& ID, const string& value);
 	void terrain_delete(const string& ID);
 	void terrain_deleteAll();
@@ -130,7 +125,6 @@ public:
 	void terrain_setWireframed(const string& ID, bool value);
 	void terrain_setWireframeColor(const string& ID, fvec3 value);
 
-	// TERRAIN - getters
 	const vector<string> terrain_getIDs() const;
 	const string terrain_getSelectedID() const;
 	const string& terrain_getHeightMapPath(const string& ID) const;
@@ -169,7 +163,6 @@ public:
 	const bool terrain_hasGreenNormalMap(const string& ID) const;
 	const bool terrain_hasBlueNormalMap(const string& ID) const;
 
-	// WATER - setters
 	void water_create(const string& ID);
 	void water_delete(const string& ID);
 	void water_deleteAll();
@@ -194,7 +187,6 @@ public:
 	void water_setTextureRepeat(const string& ID, float value);
 	void water_setQuality(const string& ID, WaterQuality value);
 
-	// WATER - getters
 	const vector<string> water_getIDs() const;
 	const string& water_getDudvMapPath(const string& ID) const;
 	const string& water_getNormalMapPath(const string& ID) const;
@@ -221,7 +213,6 @@ public:
 	const bool water_hasDisplacementMap(const string& ID) const;
 	const WaterQuality water_getQuality(const string& ID) const;
 
-	// MODEL - setters
 	void model_create(const string& ID, const string& meshPath);
 	void model_delete(const string& ID);
 	void model_deleteAll();
@@ -278,7 +269,6 @@ public:
 	void model_setBright(const string& ID, bool value);
 	void model_setRotationOrder(const string& ID, DirectionOrder value);
 
-	// MODEL - getters
 	const vector<string> model_getPartIDs(const string& ID) const;
 	const vector<string> model_getIDs() const;
 	const vector<string> model_getGroupIDs(const string& ID) const;
@@ -331,7 +321,6 @@ public:
 	const ReflectionType model_getReflectionType(const string& ID, const string& partID) const;
 	const DirectionOrder model_getRotationOrder(const string& ID) const;
 
-	// BILLBOARD - setters
 	void billboard_create(const string& ID);
 	void billboard_delete(const string& ID);
 	void billboard_deleteAll();
@@ -369,7 +358,6 @@ public:
 	void billboard_setWireframed(const string& ID, bool value);
 	void billboard_setFrozen(const string& ID, bool value);
 
-	// BILLBOARD - getters
 	const vector<string> billboard_getIDs() const;
 	const string& billboard_getDiffuseMapPath(const string& ID) const;
 	const string& billboard_getEmissionMapPath(const string& ID) const;
@@ -402,7 +390,6 @@ public:
 	const bool billboard_isTextual(const string& ID) const;
 	const bool billboard_isFrozen(const string& ID) const;
 
-	// AABB - setters
 	void aabb_create(const string& ID);
 	void aabb_delete(const string& ID);
 	void aabb_deleteAll();
@@ -423,7 +410,6 @@ public:
 	void aabb_moveTo(const string& ID, fvec3 target, float speed);
 	void aabb_scaleTo(const string& ID, fvec3 target, float speed);
 
-	// AABB - getters
 	const vector<string> aabb_getChildIDs(const string& parentID, AabbParentEntityType parentEntityType) const;
 	const vector<string> aabb_getIDs() const;
 	const string& aabb_getParentEntityID(const string& ID) const;
@@ -437,7 +423,6 @@ public:
 	const bool aabb_hasParent(const string& ID) const;
 	const AabbParentEntityType aabb_getParentEntityType(const string& ID) const;
 
-	// POINTLIGHT - setters
 	void pointlight_create(const string& ID);
 	void pointlight_delete(const string& ID);
 	void pointlight_deleteAll();
@@ -450,7 +435,6 @@ public:
 	void pointlight_setIntensity(const string& ID, float value);
 	void pointlight_setShape(const string& ID, PointlightShape value);
 
-	// POINTLIGHT - getters
 	const vector<string> pointlight_getIDs() const;
 	const fvec3 pointlight_getPosition(const string& ID) const;
 	const fvec3 pointlight_getRadius(const string& ID) const;
@@ -460,7 +444,6 @@ public:
 	const bool pointlight_isVisible(const string& ID) const;
 	const PointlightShape pointlight_getShape(const string& ID) const;
 
-	// SPOTLIGHT - setters
 	void spotlight_create(const string& ID);
 	void spotlight_delete(const string& ID);
 	void spotlight_deleteAll();
@@ -475,7 +458,6 @@ public:
 	void spotlight_setAngle(const string& ID, float value);
 	void spotlight_setDistance(const string& ID, float value);
 
-	// SPOTLIGHT - getters
 	const vector<string> spotlight_getIDs() const;
 	const fvec3 spotlight_getPosition(const string& ID) const;
 	const fvec3 spotlight_getFrontVector(const string& ID) const;
@@ -488,7 +470,6 @@ public:
 	const bool spotlight_isExisting(const string& ID) const;
 	const bool spotlight_isVisible(const string& ID) const;
 
-	// REFLECTION - setters
 	void reflection_create(const string& ID);
 	void reflection_delete(const string& ID);
 	void reflection_deleteAll();
@@ -498,13 +479,11 @@ public:
 	void reflection_moveTo(const string& ID, fvec3 target, float speed);
 	void reflection_capture(const string& ID);
 
-	// REFLECTION - getters
 	const vector<string> reflection_getIDs() const;
 	const fvec3 reflection_getPosition(const string& ID) const;
 	const bool reflection_isExisting(const string& ID) const;
 	const bool reflection_isVisible(const string& ID) const;
 
-	// IMAGE - setters
 	void image_create(const string& ID, bool isCentered);
 	void image_delete(const string& ID);
 	void image_deleteAll();
@@ -530,7 +509,6 @@ public:
 	void image_setMultiplierUV(const string& ID, fvec2 value);
 	void image_setAdderUV(const string& ID, fvec2 value);
 
-	// IMAGE - getters
 	const vector<string> image_getIDs() const;
 	const string& image_getDiffuseMapPath(const string& ID) const;
 	const fvec3 image_getWireframeColor(const string& ID) const;
@@ -551,7 +529,6 @@ public:
 	const bool image_hasDiffuseMap(const string& ID) const;
 	const bool image_isWireframed(const string& ID) const;
 
-	// TEXT - setters
 	void text_create(const string& ID, bool isCentered, bool isDynamic);
 	void text_delete(const string& ID);
 	void text_deleteAll();
@@ -576,7 +553,6 @@ public:
 	void text_setWireframed(const string& ID, bool value);
 	void text_setWireframeColor(const string& ID, fvec3 value);
 
-	// TEXT - getters
 	const vector<string> text_getIDs() const;
 	const string& text_getFontPath(const string& ID) const;
 	const string& text_getContent(const string& ID) const;
@@ -595,7 +571,6 @@ public:
 	const bool text_isMirroredVertically(const string& ID) const;
 	const bool text_isWireframed(const string& ID) const;
 
-	// SOUND2D - setters
 	void sound2d_create(const string& ID, const string& audioPath);
 	void sound2d_delete(const string& ID);
 	void sound2d_deleteAll();
@@ -608,7 +583,6 @@ public:
 	void sound2d_stopAll();
 	void sound2d_setVolume(const string& ID, float value);
 
-	// SOUND2D - getters
 	const vector<string> sound2d_getIDs() const;
 	const string& sound2d_getAudioPath(const string& ID) const;
 	const float sound2d_getVolume(const string& ID) const;
@@ -617,7 +591,6 @@ public:
 	const bool sound2d_isPlaying(const string& ID) const;
 	const bool sound2d_isPaused(const string& ID) const;
 
-	// SOUND3D - setters
 	void sound3d_create(const string& ID, const string& audioPath);
 	void sound3d_delete(const string& ID);
 	void sound3d_deleteAll();
@@ -634,7 +607,6 @@ public:
 	void sound3d_setMaxVolume(const string& ID, float value);
 	void sound3d_setMaxDistance(const string& ID, float value);
 
-	// SOUND - getters
 	const vector<string> sound3d_getIDs() const;
 	const string& sound3d_getAudioPath(const string& ID) const;
 	const fvec3 sound3d_getPosition(const string& ID) const;
@@ -646,10 +618,8 @@ public:
 	const bool sound3d_isPlaying(const string& ID) const;
 	const bool sound3d_isPaused(const string& ID) const;
 
-	// INPUT - setters
 	void input_setLocked(bool locked);
 
-	// INPUT - getters
 	const int input_getMouseWheelX() const;
 	const int input_getMouseWheelY() const;
 	const bool input_isLocked() const;
@@ -658,7 +628,6 @@ public:
 	const bool input_isMouseDown(InputType button) const;
 	const bool input_isMousePressed(InputType button) const;
 
-	// CAMERA - setters
 	void camera_reset();
 	void camera_enableFirstPersonView(float initialYaw, float initialPitch);
 	void camera_enableThirdPersonView(float initialYaw, float initialPitch);
@@ -680,7 +649,6 @@ public:
 	void camera_setMaxThirdPersonPitch(float value);
 	void camera_setCursorSensitivity(float value);
 
-	// CAMERA - getters
 	const fvec3 camera_getPosition() const;
 	const fvec3 camera_getUpVector() const;
 	const fvec3 camera_getFrontVector() const;
@@ -704,14 +672,12 @@ public:
 	const bool camera_isThirdPersonViewEnabled() const;
 	const bool camera_isFirstPersonViewEnabled() const;
 
-	// COLLISION - setters
 	void collision_setCameraBox(float left, float right, float bottom, float top, float back, float front);
 	void collision_enableCameraResponse(bool x, bool y, bool z);
 	void collision_enableTerrainResponse(float cameraHeight, float cameraSpeed);
 	void collision_disableCameraResponse();
 	void collision_disableTerrainResponse();
 
-	// COLLISION - getters
 	const string collision_checkCameraWithAny() const;
 	const string collision_checkCameraWithEntities(const string& ID) const;
 	const string collision_checkEntityWithEntities(const string& selfID, const string& otherID) const;
@@ -723,11 +689,9 @@ public:
 	const bool collision_isCameraResponseEnabled() const;
 	const bool collision_isTerrainResponseEnabled() const;
 
-	// RAYCAST - setters
 	void raycast_enableTerrainPointing(float distance, float precision);
 	void raycast_disableTerrainPointing();
 
-	// RAYCAST - getters
 	const pair<const string, float> raycast_checkCursorInAny();
 	const pair<const string, float> raycast_checkCursorInEntities(const string& ID, bool canBeOccluded);
 	const pair<bool, float> raycast_checkCursorInEntity(const string& ID, bool canBeOccluded);
@@ -736,7 +700,6 @@ public:
 	const bool raycast_isTerrainPointingEnabled() const;
 	const Ray raycast_getCursorRay() const;
 
-	// GRAPHICS - setters
 	void gfx_enableAmbientLighting();
 	void gfx_enableDirectionalLighting();
 	void gfx_enableFog();
@@ -795,7 +758,6 @@ public:
 	void gfx_setLensFlareSensitivity(float value);
 	void gfx_setPlanarReflectionHeight(float value);
 
-	// GRAPHICS - getters
 	const string& gfx_getLensFlareMapPath() const;
 	const fvec3 gfx_getDirectionalLightingPosition() const;
 	const fvec3 gfx_getAmbientLightingColor() const;
@@ -844,7 +806,6 @@ public:
 	const bool gfx_isShadowFollowingCamera() const;
 	const BloomType gfx_getBloomType() const;
 
-	// SERVER - setters
 	void server_start(unsigned int maxClientCount);
 	void server_sendTcpMessage(const string& username, const string& content);
 	void server_sendUdpMessage(const string& username, const string& content);
@@ -854,7 +815,6 @@ public:
 	void server_disconnectClients();
 	void server_stop();
 
-	// SERVER - getters
 	const vector<NetworkingClientMessage> server_getPendingMessages() const;
 	const vector<string> server_getClientIPs() const;
 	const vector<string> server_getClientUsernames() const;
@@ -865,7 +825,6 @@ public:
 	const bool server_isRunning() const;
 	const bool server_isClientConnected(const string& username) const;
 
-	// CLIENT - setters
 	void client_start(const string& username);
 	void client_connect(const string& serverIP);
 	void client_sendTcpMessage(const string& content);
@@ -873,7 +832,6 @@ public:
 	void client_disconnect();
 	void client_stop();
 
-	// CLIENT - getters
 	const vector<NetworkingServerMessage> client_getPendingMessages() const;
 	const string client_getUsername() const;
 	const string client_getServerIP() const;
@@ -884,7 +842,6 @@ public:
 	const bool client_isConnected() const;
 	const bool client_isAccepted() const;
 
-	// MISC - setters
 	void misc_enableWireframeRendering();
 	void misc_enableShadowFrameRendering();
 	void misc_enableAabbFrameRendering();
@@ -926,7 +883,6 @@ public:
 	void misc_clearAudiosCache();
 	void misc_startMillisecondTimer();
 
-	// MISC - getters
 	const vector<pair<string, int>> misc_getUpdateProfilingStatistics() const;
 	const vector<pair<string, int>> misc_getRenderProfilingStatistics() const;
 	const string misc_getCursorEntityID() const;
@@ -955,15 +911,11 @@ protected:
 	virtual void FE3D_CONTROLLER_TERMINATE() = 0;
 
 private:
-	// STRING
 	string _hoveredAabbID = "";
 
-	// FLOAT
 	float _hoveredAabbDistance = -1.0f;
 
-	// BOOL
 	bool _isRaycastUpdated = false;
 
-	// MISCELLANEOUS
 	Core* _core = nullptr;
 };

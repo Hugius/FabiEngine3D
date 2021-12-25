@@ -24,13 +24,11 @@ NetworkingClient::~NetworkingClient()
 
 void NetworkingClient::start(const string& username)
 {
-	// Must not be running
 	if(_isRunning)
 	{
 		Logger::throwError("NetworkingClient::start::1");
 	}
 
-	// Validate username
 	if(username.empty())
 	{
 		Logger::throwError("NetworkingClient::start::2");
@@ -48,78 +46,64 @@ void NetworkingClient::start(const string& username)
 		Logger::throwError("NetworkingClient::start::5");
 	}
 
-	// Client is now operable
 	_username = username;
 	_isRunning = true;
 }
 
 void NetworkingClient::connectToServer(const string& serverIP, const string& serverPort)
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingClient::connectToServer::1");
 	}
 
-	// Must not already be connected
 	if(_isConnectedToServer)
 	{
 		Logger::throwError("NetworkingClient::connectToServer::2");
 	}
 
-	// Must not already be connecting
 	if(_isConnectingToServer)
 	{
 		Logger::throwError("NetworkingClient::connectToServer::3");
 	}
 
-	// Must be a valid IP
 	if(!isValidServerIP(serverIP))
 	{
 		Logger::throwError("NetworkingClient::connectToServer::4");
 	}
 
-	// Save server address
 	_serverIP = serverIP;
 	_serverPort = serverPort;
 
-	// Load TCP socket
 	_setupTcp();
 
-	// Load UDP socket
 	_setupUdp();
 
-	// Client is now connecting
 	_isConnectingToServer = true;
 }
 
 void NetworkingClient::disconnectFromServer(bool mustBeAccepted)
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingClient::disconnectFromServer");
 	}
 
-	// Must be connected & optionally accepted
 	if(!_isConnectedToServer || (!_isAcceptedByServer && mustBeAccepted))
 	{
 		Logger::throwError("NetworkingClient::disconnectFromServer");
 	}
 
-	// Close connection socket
 	if(_tcpSocket != INVALID_SOCKET)
 	{
 		closesocket(_tcpSocket);
 	}
 
-	// Close UDP message socket
 	if(_udpSocket != INVALID_SOCKET)
 	{
 		closesocket(_udpSocket);
 	}
 
-	// Reset variables
 	_tcpSocket = INVALID_SOCKET;
 	_udpSocket = INVALID_SOCKET;
 	_pendingMessages.clear();
@@ -136,25 +120,21 @@ void NetworkingClient::disconnectFromServer(bool mustBeAccepted)
 
 void NetworkingClient::stop()
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingClient::stop");
 	}
 
-	// Close TCP socket
 	if(_tcpSocket != INVALID_SOCKET)
 	{
 		closesocket(_tcpSocket);
 	}
 
-	// Close UDP socket
 	if(_udpSocket != INVALID_SOCKET)
 	{
 		closesocket(_udpSocket);
 	}
 
-	// Reset variables
 	_tcpSocket = INVALID_SOCKET;
 	_udpSocket = INVALID_SOCKET;
 	_pendingMessages.clear();

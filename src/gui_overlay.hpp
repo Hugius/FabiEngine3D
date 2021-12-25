@@ -12,7 +12,6 @@ class GuiOverlay final
 public:
 	GuiOverlay(FabiEngine3D& fe3d);
 
-	// VOID
 	void update();
 	void setFocused(bool value);
 	void createScrollingList(const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 buttonColor, fvec3 buttonHoverColor, fvec3 textColor, fvec3 textHoverColor, fvec2 charSize, bool isCentered);
@@ -36,10 +35,8 @@ public:
 	void deleteChoiceForm(const string& ID);
 	void createAnswerForm(const string& ID, string title, fvec2 position);
 
-	// STRING
 	const string checkChoiceForm(const string& ID);
 
-	// BOOL
 	const bool isFocused() const;
 	const bool isScrollingListExisting(const string& ID) const;
 	const bool isWriteFieldExisting(const string& ID) const;
@@ -60,7 +57,6 @@ public:
 	const bool isAnswerFormDenied(const string& ID);
 	const bool isAnswerFormExisting(const string& ID) const;
 
-	// GUI elements
 	const vector<shared_ptr<GuiScrollingList>>& getScrollingLists() const;
 	const vector<shared_ptr<GuiWriteField>>& getWriteFields() const;
 	const vector<shared_ptr<GuiButton>>& getButtons() const;
@@ -73,30 +69,24 @@ public:
 	shared_ptr<GuiTextField> getTextField(const string& ID) const;
 
 private:
-	// VOID
 	void _createValueForm(const string& ID, string title, string valueString, fvec2 position, fvec2 size, fvec2 buttonsPosition, bool onlyNumbers, bool minusAllowed);
 	void _updateValueFormDeleting();
 	void _deleteAnswerForm(const string& ID);
 
-	// BOOL
 	const bool _checkValueForm(const string& ID, string& valueString, const vector<string>& forbiddenValueStrings);
 
-	// GUI elements
 	vector<shared_ptr<GuiScrollingList>> _scrollingLists;
 	vector<shared_ptr<GuiWriteField>> _writeFields;
 	vector<shared_ptr<GuiButton>> _buttons;
 	vector<shared_ptr<GuiRectangle>> _rectangles;
 	vector<shared_ptr<GuiTextField>> _textFields;
 
-	// STRING
 	vector<string> _valueFormIDs;
 	string _choiceFormID = "";
 	string _answerFormID = "";
 
-	// BOOL
 	bool _isFocused = false;
 	bool _mustDeleteValueForms = false;
 
-	// MISCELLANEOUS
 	FabiEngine3D& _fe3d;
 };

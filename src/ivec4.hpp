@@ -19,7 +19,6 @@ struct ivec4 final
 	ivec4(const int& value);
 	ivec4(const int& x, const int& y, const int& z, const int& w);
 
-	// VOID
 	void operator+=(const ivec4& other);
 	void operator-=(const ivec4& other);
 	void operator*=(const ivec4& other);
@@ -29,7 +28,6 @@ struct ivec4 final
 	void operator/=(const int& other);
 	void operator*=(const int& other);
 
-	// IVEC4
 	const ivec4 operator-() const;
 	const ivec4 operator+(const ivec4& other) const;
 	const ivec4 operator-(const ivec4& other) const;
@@ -40,11 +38,9 @@ struct ivec4 final
 	const ivec4 operator*(const int& other) const;
 	const ivec4 operator/(const int& other) const;
 
-	// BOOL
 	const bool operator==(const ivec4& other) const;
 	const bool operator!=(const ivec4& other) const;
 
-	// MISCELLANEOUS
 	union
 	{
 		int f[4];

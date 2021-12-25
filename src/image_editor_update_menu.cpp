@@ -4,10 +4,8 @@
 
 void ImageEditor::_updateMainMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "imageEditorMenuMain")
 	{
 		// Button management
@@ -61,10 +59,8 @@ void ImageEditor::_updateMainMenu()
 
 void ImageEditor::_updateChoiceMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "imageEditorMenuChoice")
 	{
 		// Button management

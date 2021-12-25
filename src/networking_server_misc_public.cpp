@@ -8,13 +8,11 @@ const bool NetworkingServer::isRunning() const
 
 const bool NetworkingServer::isClientConnected(const string& username) const
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingServer::isClientConnected");
 	}
 
-	// Try to find client
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
 	{
 		// Client must be fully accepted
@@ -28,43 +26,36 @@ const bool NetworkingServer::isClientConnected(const string& username) const
 		}
 	}
 
-	// Return
 	return false;
 }
 
 const string NetworkingServer::getNewClientIP() const
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingServer::getNewClientIP");
 	}
 
-	// Return
 	return _newClientIP;
 }
 
 const string NetworkingServer::getNewClientUsername() const
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingServer::getNewClientUsername");
 	}
 
-	// Return
 	return _newClientUsername;
 }
 
 const string NetworkingServer::getOldClientIP() const
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingServer::getOldClientIP");
 	}
 
-	// Return
 	if(_oldClientIPs.empty())
 	{
 		return "";
@@ -77,13 +68,11 @@ const string NetworkingServer::getOldClientIP() const
 
 const string NetworkingServer::getOldClientUsername() const
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingServer::getOldClientUsername");
 	}
 
-	// Return
 	if(_oldClientUsernames.empty())
 	{
 		return "";
@@ -96,25 +85,21 @@ const string NetworkingServer::getOldClientUsername() const
 
 const vector<NetworkingClientMessage>& NetworkingServer::getPendingMessages() const
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingServer::getPendingMessages");
 	}
 
-	// Return
 	return _pendingMessages;
 }
 
 const vector<string> NetworkingServer::getClientIPs() const
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingServer::getClientIPs");
 	}
 
-	// Client must be fully accepted
 	vector<string> clientIPs;
 	for(size_t i = 0; i < _clientIPs.size(); i++)
 	{
@@ -125,22 +110,18 @@ const vector<string> NetworkingServer::getClientIPs() const
 		}
 	}
 
-	// Return
 	return clientIPs;
 }
 
 const vector<string> NetworkingServer::getClientUsernames() const
 {
-	// Temporary values
 	vector<string> clientUsernames;
 
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingServer::getClientUsernames");
 	}
 
-	// Client must be fully accepted
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
 	{
 		if(!_clientUsernames[i].empty())
@@ -149,19 +130,16 @@ const vector<string> NetworkingServer::getClientUsernames() const
 		}
 	}
 
-	// Return
 	return clientUsernames;
 }
 
 void NetworkingServer::sendTcpMessage(const string& username, const string& content)
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingServer::sendTcpMessage::1");
 	}
 
-	// Try to find client and send message
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
 	{
 		// Client must be fully accepted
@@ -176,19 +154,16 @@ void NetworkingServer::sendTcpMessage(const string& username, const string& cont
 		}
 	}
 
-	// Client not connected
 	Logger::throwError("NetworkingServer::sendTcpMessage::2");
 }
 
 void NetworkingServer::sendUdpMessage(const string& username, const string& content)
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingServer::sendUdpMessage::1");
 	}
 
-	// Try to find client and send message
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
 	{
 		// Client must be fully accepted
@@ -203,19 +178,16 @@ void NetworkingServer::sendUdpMessage(const string& username, const string& cont
 		}
 	}
 
-	// Client not connected
 	Logger::throwError("NetworkingServer::sendUdpMessage::2");
 }
 
 void NetworkingServer::broadcastTcpMessage(const string& content, const string& exceptionUsername)
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingServer::broadcastTcpMessage");
 	}
 
-	// Send message to all connected clients
 	for(size_t i = 0; i < _clientSockets.size(); i++)
 	{
 		// Check exception
@@ -232,13 +204,11 @@ void NetworkingServer::broadcastTcpMessage(const string& content, const string& 
 
 void NetworkingServer::broadcastUdpMessage(const string& content, const string& exceptionUsername)
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingServer::broadcastUdpMessage");
 	}
 
-	// Try to find client and send message
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
 	{
 		// Check exception
@@ -255,13 +225,11 @@ void NetworkingServer::broadcastUdpMessage(const string& content, const string& 
 
 void NetworkingServer::disconnectClient(const string& username)
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingServer::disconnectClient::1");
 	}
 
-	// Try to find client and send message
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
 	{
 		// Client must be fully accepted
@@ -276,19 +244,16 @@ void NetworkingServer::disconnectClient(const string& username)
 		}
 	}
 
-	// Client not connected
 	Logger::throwError("NetworkingServer::disconnectClient::2");
 }
 
 void NetworkingServer::disconnectClients()
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingServer::disconnectClients::1");
 	}
 
-	// Send messages
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
 	{
 		// Client must be fully accepted

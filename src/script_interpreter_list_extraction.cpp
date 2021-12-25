@@ -2,7 +2,6 @@
 
 const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string& listString)
 {
-	// Temporary variables
 	vector<ScriptValue> valueList;
 	bool isBuildingString = false;
 	bool isBuildingNumber = false;
@@ -12,20 +11,17 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 	bool hasFinishedValue = false;
 	string currentValueString = "";
 
-	// List string cannot be empty
 	if(listString.empty())
 	{
 		return {};
 	}
 
-	// List string cannot start with a comma
 	if(listString[0] == ',')
 	{
 		_throwScriptError("cannot start value with ','!");
 		return {};
 	}
 
-	// Iterate through characters in list string
 	unsigned int index = 0;
 	for(const auto& c : listString)
 	{
@@ -264,13 +260,11 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 		index++;
 	}
 
-	// Check if still building any values
 	if(isBuildingString || isBuildingNumber || isBuildingBoolean || isBuildingVariable)
 	{
 		_throwScriptError("invalid syntax!");
 		return {};
 	}
 
-	// Return values
 	return valueList;
 }

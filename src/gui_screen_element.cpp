@@ -45,7 +45,6 @@ void GuiScreen::createTextField(const string& ID, fvec2 position, fvec2 size, st
 
 void GuiScreen::deleteScrollingList(const string& ID)
 {
-	// Delete scrolling list
 	for(size_t i = 0; i < _scrollingLists.size(); i++)
 	{
 		if(ID == _scrollingLists[i]->getID())
@@ -55,13 +54,11 @@ void GuiScreen::deleteScrollingList(const string& ID)
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiScreen::deleteScrollingList");
 }
 
 void GuiScreen::deleteWriteField(const string& ID)
 {
-	// Delete write field
 	for(size_t i = 0; i < _writeFields.size(); i++)
 	{
 		if(ID == _writeFields[i]->getID())
@@ -71,13 +68,11 @@ void GuiScreen::deleteWriteField(const string& ID)
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiScreen::deleteWriteField");
 }
 
 void GuiScreen::deleteButton(const string& ID)
 {
-	// Delete button
 	for(size_t i = 0; i < _buttons.size(); i++)
 	{
 		if(ID == _buttons[i]->getID())
@@ -87,13 +82,11 @@ void GuiScreen::deleteButton(const string& ID)
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiScreen::deleteButton");
 }
 
 void GuiScreen::deleteRectangle(const string& ID)
 {
-	// Delete rectangle
 	for(size_t i = 0; i < _rectangles.size(); i++)
 	{
 		if(ID == _rectangles[i]->getID())
@@ -103,13 +96,11 @@ void GuiScreen::deleteRectangle(const string& ID)
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiScreen::deleteRectangle");
 }
 
 void GuiScreen::deleteTextField(const string& ID)
 {
-	// Delete TextField
 	for(size_t i = 0; i < _textFields.size(); i++)
 	{
 		if(ID == _textFields[i]->getID())
@@ -119,7 +110,6 @@ void GuiScreen::deleteTextField(const string& ID)
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiScreen::deleteTextField");
 }
 
@@ -190,7 +180,6 @@ const bool GuiScreen::isTextFieldExisting(const string& ID) const
 
 shared_ptr<GuiScrollingList> GuiScreen::getScrollingList(const string& ID) const
 {
-	// Retrieve scrolling list
 	for(const auto& scrollingList : _scrollingLists)
 	{
 		if(ID == scrollingList->getID())
@@ -199,13 +188,11 @@ shared_ptr<GuiScrollingList> GuiScreen::getScrollingList(const string& ID) const
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiScreen::getScrollingList");
 }
 
 shared_ptr<GuiWriteField> GuiScreen::getWriteField(const string& ID) const
 {
-	// Retrieve write field
 	for(const auto& writeField : _writeFields)
 	{
 		if(ID == writeField->getID())
@@ -214,13 +201,11 @@ shared_ptr<GuiWriteField> GuiScreen::getWriteField(const string& ID) const
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiScreen::getWriteField");
 }
 
 shared_ptr<GuiButton> GuiScreen::getButton(const string& ID) const
 {
-	// Retrieve button
 	for(const auto& button : _buttons)
 	{
 		if(ID == button->getID())
@@ -229,13 +214,11 @@ shared_ptr<GuiButton> GuiScreen::getButton(const string& ID) const
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiScreen::getButton");
 }
 
 shared_ptr<GuiRectangle> GuiScreen::getRectangle(const string& ID) const
 {
-	// Retrieve rectangle
 	for(const auto& rectangle : _rectangles)
 	{
 		if(ID == rectangle->getID())
@@ -244,13 +227,11 @@ shared_ptr<GuiRectangle> GuiScreen::getRectangle(const string& ID) const
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiScreen::getRectangle");
 }
 
 shared_ptr<GuiTextField> GuiScreen::getTextField(const string& ID) const
 {
-	// Retrieve text field
 	for(const auto& textField : _textFields)
 	{
 		if(ID == textField->getID())
@@ -259,7 +240,6 @@ shared_ptr<GuiTextField> GuiScreen::getTextField(const string& ID) const
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiScreen::getTextField");
 }
 

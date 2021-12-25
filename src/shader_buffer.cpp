@@ -10,7 +10,6 @@ using std::ofstream;
 
 ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentFileName)
 {
-	// Temporary values
 	_name = vertexFileName.substr(0, vertexFileName.size() - 5);
 	_vertexFileName = vertexFileName;
 	_fragmentFileName = fragmentFileName;
@@ -19,28 +18,23 @@ ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentF
 	ifstream vertexFile;
 	ifstream fragmentFile;
 
-	// Compose file paths
 	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 	const auto vertexPath = ("engine\\shaders\\" + _vertexFileName);
 	const auto fragmentPath = ("engine\\shaders\\" + _fragmentFileName);
 
-	// Check if vertex shader file exists
 	if(!Tools::isFileExisting(rootDirectoryPath + vertexPath))
 	{
 		Logger::throwFatalWarning("Directory `engine\\` is missing or corrupted!");
 	}
 
-	// Check if fragment shader file exists
 	if(!Tools::isFileExisting(rootDirectoryPath + fragmentPath))
 	{
 		Logger::throwFatalWarning("Directory `engine\\` is missing or corrupted!");
 	}
 
-	// Open the shader text files
 	vertexFile.open(rootDirectoryPath + vertexPath);
 	fragmentFile.open(rootDirectoryPath + fragmentPath);
 
-	// Extract shader code
 	ostringstream vShaderStream, fShaderStream;
 	vShaderStream << vertexFile.rdbuf();
 	fShaderStream << fragmentFile.rdbuf();
@@ -51,23 +45,19 @@ ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentF
 	const char* vShaderCode = vertexCode.c_str();
 	const char* fShaderCode = fragmentCode.c_str();
 
-	// Create shader program
 	_createProgram(vShaderCode, fShaderCode);
 }
 
 void ShaderBuffer::_createProgram(const char* vertexShaderCode, const char* fragmentShaderCode)
 {
-	// Compile the shaders
 	unsigned int vertex, fragment;
 	int success;
 	char infoLog[512]; // For errors
 
-	// Vertex shader
 	vertex = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertex, 1, &vertexShaderCode, nullptr);
 	glCompileShader(vertex);
 
-	// Errors vertex shader
 	glGetShaderiv(vertex, GL_COMPILE_STATUS, &success);
 	if(!success)
 	{
@@ -75,12 +65,10 @@ void ShaderBuffer::_createProgram(const char* vertexShaderCode, const char* frag
 		Logger::throwError("ShaderBuffer::_createProgram::1 ---> ", _name, " ", infoLog);
 	}
 
-	// Fragment shader
 	fragment = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragment, 1, &fragmentShaderCode, nullptr);
 	glCompileShader(fragment);
 
-	// Errors fragment shader
 	glGetShaderiv(fragment, GL_COMPILE_STATUS, &success);
 	if(!success)
 	{
@@ -88,13 +76,11 @@ void ShaderBuffer::_createProgram(const char* vertexShaderCode, const char* frag
 		Logger::throwError("ShaderBuffer::_createProgram::2 ---> ", _name, " ", infoLog);
 	}
 
-	// Shader program
 	_program = glCreateProgram();
 	glAttachShader(_program, vertex);
 	glAttachShader(_program, fragment);
 	glLinkProgram(_program);
 
-	// Linking errors 
 	glGetProgramiv(_program, GL_LINK_STATUS, &success);
 	if(!success)
 	{
@@ -102,11 +88,9 @@ void ShaderBuffer::_createProgram(const char* vertexShaderCode, const char* frag
 		Logger::throwError("ShaderBuffer::_createProgram::3 ---> ", _name, " ", infoLog);
 	}
 
-	// Delete the no longer needed shaders
 	glDeleteShader(vertex);
 	glDeleteShader(fragment);
 
-	// Logging
 	Logger::throwInfo("Loaded vertex shader: \"engine\\shaders\\" + _vertexFileName + "\"");
 	Logger::throwInfo("Loaded fragment shader: \"engine\\shaders\\" + _fragmentFileName + "\"");
 }

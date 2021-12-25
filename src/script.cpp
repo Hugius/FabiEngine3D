@@ -10,7 +10,6 @@ Script::Script(FabiEngine3D& fe3d)
 
 void Script::createScriptFile(const string& ID)
 {
-	// Check if non-existent
 	for(const auto& file : _scriptFiles)
 	{
 		if(file->getID() == ID)
@@ -19,7 +18,6 @@ void Script::createScriptFile(const string& ID)
 		}
 	}
 
-	// Add new script file
 	_scriptFiles.push_back(make_shared<ScriptFile>(_fe3d, ID));
 }
 
@@ -115,10 +113,8 @@ const vector<string> Script::getScriptFileIDs() const
 
 const vector<pair<string, unsigned int>> Script::findKeyword(const string& keyword) const
 {
-	// Temporary values
 	vector<pair<string, unsigned int>> result;
 
-	// Iterate through script files
 	for(const auto& file : _scriptFiles)
 	{
 		// Iterate through lines
@@ -140,6 +136,5 @@ const vector<pair<string, unsigned int>> Script::findKeyword(const string& keywo
 		}
 	}
 
-	// Return
 	return result;
 }

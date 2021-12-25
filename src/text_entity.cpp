@@ -17,12 +17,10 @@ void TextEntity::deleteCharacterEntities()
 
 void TextEntity::updateCharacterEntities()
 {
-	// Temporary values
 	float xCharSize = (this->getSize().x / static_cast<float>(this->_content.size()));
 	float yCharSize = this->getSize().y;
 	unsigned int index = 0;
 
-	// Update every character
 	for(const auto& character : _characterEntities)
 	{
 		// Temporary values

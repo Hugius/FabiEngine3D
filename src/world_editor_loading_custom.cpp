@@ -12,7 +12,6 @@ using std::istringstream;
 
 const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 {
-	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("WorldEditor::loadCustomWorldFromFile::1");
@@ -22,21 +21,17 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		Logger::throwError("WorldEditor::loadCustomWorldFromFile::2");
 	}
 
-	// Compose file path
 	const string filePath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
 							 ("projects\\" + _currentProjectID + "\\")) + "worlds\\custom\\" + fileName + ".fe3d");
 
-	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Cannot load world with ID \"" + fileName + "\"!");
 		return false;
 	}
 
-	// Load world file
 	ifstream file(filePath);
 
-	// Read world data
 	string line;
 	while(getline(file, line))
 	{
@@ -687,15 +682,11 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		}
 	}
 
-	// Close file
 	file.close();
 
-	// Set new world ID
 	_loadedWorldID = fileName;
 
-	// Logging
 	Logger::throwInfo("World data loaded!");
 
-	// Return
 	return true;
 }

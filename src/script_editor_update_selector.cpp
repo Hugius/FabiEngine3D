@@ -7,10 +7,8 @@ using std::min;
 void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& cursorLineIndex,
 									   unsigned int& cursorCharIndex, int& hoveredLineIndex, bool& textHasChanged)
 {
-	// Temporary values
 	bool isControlKeyDown = (_fe3d.input_isKeyDown(InputType::KEY_LCTRL) || _fe3d.input_isKeyDown(InputType::KEY_RCTRL));
 
-	// Check if any text selected
 	if(_firstSelectedLineIndex != -1)
 	{
 		// Check if user cancels or edits any selected text
@@ -99,7 +97,6 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 		}
 	}
 
-	// Update text selection
 	if(_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Check if line is hovered

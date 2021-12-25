@@ -6,11 +6,9 @@ using std::istringstream;
 
 void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 {
-	// Remove all existing BILLBOARD & AABB entities
 	_fe3d.billboard_deleteAll();
 	_fe3d.aabb_deleteAll();
 
-	// Create line separator BILLBOARD
 	float lineCount = static_cast<float>(_script.getScriptFile(_currentScriptFileID)->getLineCount());
 	fvec2 separatorSize = fvec2((TEXT_CHARACTER_SIZE.x / 4.0f), (lineCount * VERTICAL_LINE_OFFSET));
 	fvec3 separatorPosition = SCRIPT_TEXT_STARTING_POSITION + fvec3(HORIZONTAL_LINE_OFFSET / 2.0f, -(((lineCount - 1) / 2.0f) * VERTICAL_LINE_OFFSET), 0.0f);
@@ -20,7 +18,6 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 	_fe3d.billboard_setColor("separator", SEPARATOR_COLOR);
 	_fe3d.billboard_setBright("separator", true);
 
-	// Create visible billboards for display and invisible billboards for logic
 	for(unsigned int lineIndex = 0; lineIndex < lineCount; lineIndex++)
 	{
 		// Generation values

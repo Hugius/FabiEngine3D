@@ -8,7 +8,6 @@ void FabiEngine3D::model_create(const string& ID, const string& meshPath)
 
 void FabiEngine3D::model_deleteAll()
 {
-	// Iterate through models
 	for(const auto& [keyID, entity] : _core->_modelEntityManager.getEntities())
 	{
 		model_delete(entity->getID());
@@ -17,13 +16,11 @@ void FabiEngine3D::model_deleteAll()
 
 void FabiEngine3D::model_delete(const string& ID)
 {
-	// Delete all bound AABB entities if existing
 	for(const auto& aabbID : aabb_getChildIDs(ID, AabbParentEntityType::MODEL))
 	{
 		_core->_aabbEntityManager.deleteEntity(aabbID);
 	}
 
-	// Delete model entity
 	_core->_modelEntityManager.deleteEntity(ID);
 }
 

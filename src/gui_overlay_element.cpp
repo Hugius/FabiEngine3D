@@ -105,7 +105,6 @@ const bool GuiOverlay::isTextFieldExisting(const string& ID) const
 
 shared_ptr<GuiScrollingList> GuiOverlay::getScrollingList(const string& ID) const
 {
-	// Retrieve scrolling list
 	for(const auto& scrollingList : _scrollingLists)
 	{
 		if(ID == scrollingList->getID())
@@ -114,13 +113,11 @@ shared_ptr<GuiScrollingList> GuiOverlay::getScrollingList(const string& ID) cons
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiOverlay::getScrollingList");
 }
 
 shared_ptr<GuiWriteField> GuiOverlay::getWriteField(const string& ID) const
 {
-	// Retrieve write field
 	for(const auto& writeField : _writeFields)
 	{
 		if(ID == writeField->getID())
@@ -129,13 +126,11 @@ shared_ptr<GuiWriteField> GuiOverlay::getWriteField(const string& ID) const
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiOverlay::getWriteField");
 }
 
 shared_ptr<GuiButton> GuiOverlay::getButton(const string& ID) const
 {
-	// Retrieve button
 	for(const auto& button : _buttons)
 	{
 		if(ID == button->getID())
@@ -144,13 +139,11 @@ shared_ptr<GuiButton> GuiOverlay::getButton(const string& ID) const
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiOverlay::getButton");
 }
 
 shared_ptr<GuiRectangle> GuiOverlay::getRectangle(const string& ID) const
 {
-	// Retrieve rectangle
 	for(const auto& rectangle : _rectangles)
 	{
 		if(ID == rectangle->getID())
@@ -159,13 +152,11 @@ shared_ptr<GuiRectangle> GuiOverlay::getRectangle(const string& ID) const
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiOverlay::getRectangle");
 }
 
 shared_ptr<GuiTextField> GuiOverlay::getTextField(const string& ID) const
 {
-	// Retrieve text field
 	for(const auto& textField : _textFields)
 	{
 		if(ID == textField->getID())
@@ -174,7 +165,6 @@ shared_ptr<GuiTextField> GuiOverlay::getTextField(const string& ID) const
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiOverlay::getTextField");
 }
 
@@ -205,7 +195,6 @@ const vector<shared_ptr<GuiTextField>>& GuiOverlay::getTextFields() const
 
 void GuiOverlay::deleteScrollingList(const string& ID)
 {
-	// Delete scrolling list
 	for(size_t i = 0; i < _scrollingLists.size(); i++)
 	{
 		if(ID == _scrollingLists[i]->getID())
@@ -215,13 +204,11 @@ void GuiOverlay::deleteScrollingList(const string& ID)
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiOverlay::deleteScrollingList");
 }
 
 void GuiOverlay::deleteWriteField(const string& ID)
 {
-	// Delete write field
 	for(size_t i = 0; i < _writeFields.size(); i++)
 	{
 		if(ID == _writeFields[i]->getID())
@@ -231,13 +218,11 @@ void GuiOverlay::deleteWriteField(const string& ID)
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiOverlay::deleteWriteField");
 }
 
 void GuiOverlay::deleteButton(const string& ID)
 {
-	// Delete button
 	for(size_t i = 0; i < _buttons.size(); i++)
 	{
 		if(ID == _buttons[i]->getID())
@@ -247,13 +232,11 @@ void GuiOverlay::deleteButton(const string& ID)
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiOverlay::deleteButton");
 }
 
 void GuiOverlay::deleteRectangle(const string& ID)
 {
-	// Delete rectangle
 	for(size_t i = 0; i < _rectangles.size(); i++)
 	{
 		if(ID == _rectangles[i]->getID())
@@ -263,13 +246,11 @@ void GuiOverlay::deleteRectangle(const string& ID)
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiOverlay::deleteRectangle");
 }
 
 void GuiOverlay::deleteTextField(const string& ID)
 {
-	// Delete text field
 	for(size_t i = 0; i < _textFields.size(); i++)
 	{
 		if(ID == _textFields[i]->getID())
@@ -279,6 +260,5 @@ void GuiOverlay::deleteTextField(const string& ID)
 		}
 	}
 
-	// Error
 	Logger::throwError("GuiOverlay::deleteTextField");
 }

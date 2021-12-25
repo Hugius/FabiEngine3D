@@ -11,28 +11,23 @@ using std::istringstream;
 
 const vector<string> BillboardEditor::getTexturePathsFromFile() const
 {
-	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("BillboardEditor::getTexturePathsFromFile");
 	}
 
-	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\billboard.fe3d");
 
-	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project corrupted: file `billboard.fe3d` missing!");
 		return {};
 	}
 
-	// Load billboard file
 	ifstream file(filePath);
 
-	// Read billboard data
 	vector<string> texturePaths;
 	string line;
 	while(getline(file, line))
@@ -94,37 +89,30 @@ const vector<string> BillboardEditor::getTexturePathsFromFile() const
 		}
 	}
 
-	// Close file
 	file.close();
 
-	// Return
 	return texturePaths;
 }
 
 const vector<string> BillboardEditor::getFontPathsFromFile() const
 {
-	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("BillboardEditor::getFontPathsFromFile");
 	}
 
-	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\billboard.fe3d");
 
-	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project corrupted: file `billboard.fe3d` missing!");
 		return {};
 	}
 
-	// Load billboard file
 	ifstream file(filePath);
 
-	// Read billboard data
 	vector<string> fontPaths;
 	string line;
 	while(getline(file, line))
@@ -173,40 +161,32 @@ const vector<string> BillboardEditor::getFontPathsFromFile() const
 		}
 	}
 
-	// Close file
 	file.close();
 
-	// Return
 	return fontPaths;
 }
 
 const bool BillboardEditor::loadFromFile()
 {
-	// Validate project ID
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("BillboardEditor::loadFromFile");
 	}
 
-	// Clear IDs from previous loads
 	_loadedBillboardIDs.clear();
 
-	// Compose file path
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\billboard.fe3d");
 
-	// Warning checking
 	if(!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project corrupted: file `billboard.fe3d` missing!");
 		return false;
 	}
 
-	// Load billboard file
 	ifstream file(filePath);
 
-	// Read billboard data
 	string line;
 	while(getline(file, line))
 	{
@@ -313,12 +293,9 @@ const bool BillboardEditor::loadFromFile()
 		}
 	}
 
-	// Close file
 	file.close();
 
-	// Logging
 	Logger::throwInfo("Billboard data loaded!");
 
-	// Return
 	return true;
 }

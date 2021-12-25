@@ -3,14 +3,12 @@
 
 void SkyEditor::_updateCamera()
 {
-	// Check if first person view is enabled
 	if(_fe3d.camera_isFirstPersonViewEnabled())
 	{
 		// Hide cursor
 		_fe3d.image_setVisible("@@cursor", false);
 	}
 
-	// Check if allowed by GUI
 	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Check if RMB pressed
@@ -28,7 +26,6 @@ void SkyEditor::_updateCamera()
 		}
 	}
 
-	// Disable first person view if necessary
 	if(_fe3d.camera_isFirstPersonViewEnabled())
 	{
 		if(_gui.getOverlay()->isFocused())
@@ -40,7 +37,6 @@ void SkyEditor::_updateCamera()
 
 void SkyEditor::_updateMiscellaneous()
 {
-	// Check if allowed by GUI
 	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Update wireframe rendering

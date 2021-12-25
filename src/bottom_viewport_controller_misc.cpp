@@ -14,25 +14,20 @@ BottomViewportController::BottomViewportController(FabiEngine3D& fe3d, GuiManage
 
 void BottomViewportController::initialize()
 {
-	// Statistics window
 	_gui.getViewport("bottom")->createWindow("statistics", fvec2(-0.25f, 0.0f), fvec2(0.9875f, 1.875f), BVPC::FRAME_COLOR);
 	auto statisticsWindow = _gui.getViewport("bottom")->getWindow("statistics");
 
-	// Statistics screen
 	statisticsWindow->createScreen("main");
 	statisticsWindow->setActiveScreen("main");
 	auto statisticsScreen = statisticsWindow->getScreen("main");
 
-	// Console window
 	_gui.getViewport("bottom")->createWindow("console", fvec2(0.25f, 0.0f), fvec2(0.9875f, 1.875f), BVPC::FRAME_COLOR);
 	auto consoleWindow = _gui.getViewport("bottom")->getWindow("console");
 
-	// Console screen
 	consoleWindow->createScreen("main");
 	consoleWindow->setActiveScreen("main");
 	auto consoleScreen = consoleWindow->getScreen("main");
 
-	// General statistics
 	statisticsScreen->createTextField("fps", fvec2(-1.0f, 0.85f), fvec2(0.0f), "", fvec3(1.0f), false, true);
 	statisticsScreen->createTextField("cpuModel", fvec2(-1.0f, 0.7f), fvec2(0.0f), "", fvec3(1.0f), false, false);
 	statisticsScreen->createTextField("gpuModel", fvec2(-1.0f, 0.55f), fvec2(0.0f), "", fvec3(1.0f), false, false);
@@ -47,7 +42,6 @@ void BottomViewportController::initialize()
 	statisticsScreen->createTextField("reflectionEntityCount", fvec2(-1.0f, -0.8f), fvec2(0.0f), "", fvec3(1.0f), false, true);
 	statisticsScreen->createTextField("imageEntityCount", fvec2(-1.0f, -0.95f), fvec2(0.0f), "", fvec3(1.0f), false, true);
 
-	// Update-profiling statistics
 	auto updateStatistics = _fe3d.misc_getUpdateProfilingStatistics();
 	int uCounter = 1;
 	for(const auto& [key, value] : updateStatistics)
@@ -56,7 +50,6 @@ void BottomViewportController::initialize()
 		uCounter++;
 	}
 
-	// Render-profiling statistics
 	auto renderStatistics = _fe3d.misc_getRenderProfilingStatistics();
 	int rCounter = 1;
 	for(const auto& [key, value] : renderStatistics)
@@ -68,9 +61,7 @@ void BottomViewportController::initialize()
 
 void BottomViewportController::update()
 {
-	// Update statistics
 	_updateStatistics();
 
-	// Update console
 	_updateConsole();
 }

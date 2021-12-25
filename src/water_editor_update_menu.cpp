@@ -5,10 +5,8 @@
 
 void WaterEditor::_updateMainMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "waterEditorMenuMain")
 	{
 		// Button management
@@ -62,10 +60,8 @@ void WaterEditor::_updateMainMenu()
 
 void WaterEditor::_updateChoiceMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "waterEditorMenuChoice")
 	{
 		// Temporary values

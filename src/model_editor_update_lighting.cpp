@@ -2,10 +2,8 @@
 
 void ModelEditor::_updateLightingMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "modelEditorMenuLighting")
 	{
 		// Temporary values

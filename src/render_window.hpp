@@ -14,7 +14,6 @@ public:
 	RenderWindow(LibraryLoader& libraryLoader);
 	~RenderWindow();
 
-	// VOID
 	void setTitle(const string& title);
 	void setSize(ivec2 size);
 	void center();
@@ -34,14 +33,11 @@ public:
 	void hideCursor();
 	void setCursorPosition(ivec2 pos);
 
-	// FVEC2
 	const ivec2 getCursorPosition() const;
 
-	// BOOL
 	const bool isCursorVisible() const;
 	const bool isVsyncEnabled() const;
 
 private:
-	// MISCELLANEOUS
 	SDL_Window* _windowPointer = nullptr;
 };

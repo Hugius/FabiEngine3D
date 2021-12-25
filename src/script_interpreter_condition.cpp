@@ -3,7 +3,6 @@
 
 const bool ScriptInterpreter::_checkConditionString(const string& conditionString)
 {
-	// Temporary values
 	vector<ScriptValue> comparisonValues;
 	vector<string> elements;
 	vector<string> logicOperators;
@@ -16,14 +15,12 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 	bool mustBeComparisonOperator = false;
 	bool mustBeLogicOperator = false;
 
-	// Check if condition is empty
 	if(conditionString.empty())
 	{
 		_throwScriptError("no condition found!");
 		return false;
 	}
 
-	// Extract all invidual elements of the if statement
 	for(const auto& c : conditionString)
 	{
 		if(c == ' ' && elementBuild.empty() && !isBuildingString) // Check for useless whitespace
@@ -60,14 +57,12 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 		index++;
 	}
 
-	// Check if not enough elements
 	if(elements.size() < 3)
 	{
 		_throwScriptError("not enough elements in condition!");
 		return false;
 	}
 
-	// Process every element
 	for(auto& elementString : elements)
 	{
 		if(mustBeValue)
@@ -202,20 +197,17 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 		}
 	}
 
-	// Check if condition did not end with a logic operator
 	if(mustBeValue || mustBeComparisonOperator)
 	{
 		_throwScriptError("condition incomplete!");
 		return false;
 	}
 
-	// Single condition
 	if(conditions.size() == 1)
 	{
 		return conditions[0];
 	}
 
-	// Multiple conditions
 	bool finalCondition = conditions[0];
 	string currentLogicOperator = "";
 	for(size_t i = 1; i < conditions.size(); i++)
@@ -245,28 +237,24 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 
 const bool ScriptInterpreter::_validateCondition(ScriptValue& firstValue, const string& comparisonOperator, ScriptValue& secondValue)
 {
-	// Check if comparison values are not of the same type
 	if(firstValue.getType() != secondValue.getType())
 	{
 		_throwScriptError("compared values not of the same type!");
 		return false;
 	}
 
-	// Check if trying to compare string values with the wrong operator
 	if((comparisonOperator == MORE_KEYWORD || comparisonOperator == LESS_KEYWORD) && firstValue.getType() == ScriptValueType::STRING)
 	{
 		_throwScriptError("invalid comparison operator for STR values!");
 		return false;
 	}
 
-	// Check if trying to compare boolean values with the wrong operator
 	if((comparisonOperator == MORE_KEYWORD || comparisonOperator == LESS_KEYWORD) && firstValue.getType() == ScriptValueType::BOOLEAN)
 	{
 		_throwScriptError("invalid comparison operator for BOOL values!");
 		return false;
 	}
 
-	// Condition is valid
 	return true;
 }
 
@@ -342,10 +330,8 @@ const bool ScriptInterpreter::_compareValues(ScriptValue& firstValue, const stri
 
 ScriptConditionStatement* ScriptInterpreter::_getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth) const
 {
-	// Temporary values
 	unsigned int index = static_cast<unsigned int>(statements.size());
 
-	// Iterate through conditions backwards
 	while(index--)
 	{
 		// Check if scope depth matches
@@ -355,6 +341,5 @@ ScriptConditionStatement* ScriptInterpreter::_getLastConditionStatement(vector<S
 		}
 	}
 
-	// No condition statement
 	return nullptr;
 }

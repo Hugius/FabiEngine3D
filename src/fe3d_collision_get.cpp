@@ -27,24 +27,20 @@ const bool FabiEngine3D::collision_checkCameraWithEntity(const string& ID) const
 
 const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfID, const string& otherID) const
 {
-	// Check if self entity does not exist
 	if(!_core->_aabbEntityManager.isEntityExisting(selfID))
 	{
 		return "";
 	}
 
-	// Temporary values
 	auto self = _core->_aabbEntityManager.getEntity(selfID);
 	fvec3 selfPosition = self->getPosition();
 	fvec3 selfSize = self->getSize() / 2.0f;
 
-	// Check if self entity is responsive and visible
 	if(!self->isCollisionResponsive() || !self->isVisible())
 	{
 		return "";
 	}
 
-	// Iterate through AABB entities
 	for(const auto& [keyID, other] : _core->_aabbEntityManager.getEntities())
 	{
 		if(other->getID().size() >= otherID.size()) // Check if entity ID is at least the size of group ID
@@ -115,7 +111,6 @@ const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfI
 
 const string FabiEngine3D::collision_checkCameraWithEntities(const string& ID) const
 {
-	// Iterate through AABB entities
 	for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
 		// Check if collided
@@ -133,13 +128,11 @@ const string FabiEngine3D::collision_checkCameraWithEntities(const string& ID) c
 		}
 	}
 
-	// No collision
 	return "";
 }
 
 const bool FabiEngine3D::collision_checkCameraWithEntityDirection(const string& ID, Direction direction) const
 {
-	// Check if collided
 	if(_core->_aabbEntityManager.getEntity(ID)->hasCollided())
 	{
 		// Check if direction is the same
@@ -154,7 +147,6 @@ const bool FabiEngine3D::collision_checkCameraWithEntityDirection(const string& 
 
 const bool FabiEngine3D::collision_checkCameraWithAnyDirection(Direction direction) const
 {
-	// Iterate through AABB entities
 	for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
 		// Check if collided
@@ -173,7 +165,6 @@ const bool FabiEngine3D::collision_checkCameraWithAnyDirection(Direction directi
 
 const bool FabiEngine3D::collision_checkCameraWithEntitiesDirection(const string& ID, Direction direction) const
 {
-	// Iterate through AABB entities
 	for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
 		// Check if collided
@@ -195,7 +186,6 @@ const bool FabiEngine3D::collision_checkCameraWithEntitiesDirection(const string
 		}
 	}
 
-	// No collision
 	return false;
 }
 

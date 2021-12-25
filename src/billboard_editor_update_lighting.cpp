@@ -3,10 +3,8 @@
 
 void BillboardEditor::_updateLightingMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "billboardEditorMenuLighting")
 	{
 		// Temporary values

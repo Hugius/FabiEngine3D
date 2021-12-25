@@ -2,49 +2,39 @@
 
 const mat22 Math::invertMatrix(mat22 matrix)
 {
-	// Calculate determinant
 	auto determinant = calculateDeterminant(matrix);
 
-	// Check if determinant is invalid
 	if(determinant == 0.0f)
 	{
 		return mat22(0.0f);
 	}
 
-	// Result
 	mat22 tempMatrix;
 
-	// Calculate
 	tempMatrix.f[0] = matrix.f[3];
 	tempMatrix.f[1] = -matrix.f[1];
 	tempMatrix.f[2] = -matrix.f[2];
 	tempMatrix.f[3] = matrix.f[0];
 
-	// Multiply
 	for(unsigned int i = 0; i < 4; i++)
 	{
 		matrix.f[i] = (tempMatrix.f[i] * (1.0f / determinant));
 	}
 
-	// Return
 	return matrix;
 }
 
 const mat33 Math::invertMatrix(mat33 matrix)
 {
-	// Calculate determinant
 	auto determinant = calculateDeterminant(matrix);
 
-	// Check if determinant is invalid
 	if(determinant == 0.0f)
 	{
 		return mat33(0.0f);
 	}
 
-	// Result
 	mat33 tempMatrix;
 
-	// Calculate
 	tempMatrix.f[0] = ((matrix.m[1][1] * matrix.m[2][2]) - (matrix.m[2][1] * matrix.m[1][2]));
 	tempMatrix.f[1] = ((matrix.m[0][2] * matrix.m[2][1]) - (matrix.m[0][1] * matrix.m[2][2]));
 	tempMatrix.f[2] = ((matrix.m[0][1] * matrix.m[1][2]) - (matrix.m[0][2] * matrix.m[1][1]));
@@ -55,31 +45,25 @@ const mat33 Math::invertMatrix(mat33 matrix)
 	tempMatrix.f[7] = ((matrix.m[2][0] * matrix.m[0][1]) - (matrix.m[0][0] * matrix.m[2][1]));
 	tempMatrix.f[8] = ((matrix.m[0][0] * matrix.m[1][1]) - (matrix.m[1][0] * matrix.m[0][1]));
 
-	// Multiply
 	for(unsigned int i = 0; i < 9; i++)
 	{
 		matrix.f[i] = (tempMatrix.f[i] * (1.0f / determinant));
 	}
 
-	// Return
 	return matrix;
 }
 
 const mat44 Math::invertMatrix(mat44 matrix)
 {
-	// Calculate determinant
 	auto determinant = calculateDeterminant(matrix);
 
-	// Check if determinant is invalid
 	if(determinant == 0.0f)
 	{
 		return mat44(0.0f);
 	}
 
-	// Result
 	mat44 tempMatrix;
 
-	// Calculate
 	tempMatrix.f[0] =
 		matrix.f[5] * matrix.f[10] * matrix.f[15] -
 		matrix.f[5] * matrix.f[11] * matrix.f[14] -
@@ -193,26 +177,22 @@ const mat44 Math::invertMatrix(mat44 matrix)
 		matrix.f[8] * matrix.f[1] * matrix.f[6] -
 		matrix.f[8] * matrix.f[2] * matrix.f[5];
 
-	// Multiply
 	for(unsigned int i = 0; i < 16; i++)
 	{
 		matrix.f[i] = (tempMatrix.f[i] * (1.0f / determinant));
 	}
 
-	// Return
 	return matrix;
 }
 
 const mat33 Math::transposeMatrix(mat33 matrix)
 {
-	// Copy current matrix to temporary matrix
 	mat33 tempMatrix;
 	for(unsigned int i = 0; i < 9; i++)
 	{
 		tempMatrix.f[i] = matrix.f[i];
 	}
 
-	// Swap rows and columns
 	for(unsigned int r = 0; r < 3; r++)
 	{
 		for(unsigned c = 0; c < 3; c++)
@@ -221,20 +201,17 @@ const mat33 Math::transposeMatrix(mat33 matrix)
 		}
 	}
 
-	// Return
 	return matrix;
 }
 
 const mat44 Math::transposeMatrix(mat44 matrix)
 {
-	// Copy current matrix to temporary matrix
 	mat44 tempMatrix;
 	for(int i = 0; i < 16; i++)
 	{
 		tempMatrix.f[i] = matrix.f[i];
 	}
 
-	// Swap rows and columns
 	for(unsigned int r = 0; r < 4; r++)
 	{
 		for(unsigned int c = 0; c < 4; c++)
@@ -243,48 +220,38 @@ const mat44 Math::transposeMatrix(mat44 matrix)
 		}
 	}
 
-	// Return
 	return matrix;
 }
 
 const float Math::calculateDeterminant(mat22 matrix)
 {
-	// Result
 	float values[2] = {};
 
-	// Calculate
 	values[0] = (matrix.m[0][0] * matrix.m[1][1]);
 	values[1] = (matrix.m[1][0] * matrix.m[0][1]);
 
-	// Return
 	return (values[0] - values[1]);
 }
 
 const float Math::calculateDeterminant(mat33 matrix)
 {
-	// Result
 	float values[3] = {};
 
-	// Calculate
 	values[0] = (matrix.m[0][0] * ((matrix.m[1][1] * matrix.m[2][2]) - (matrix.m[2][1] * matrix.m[1][2])));
 	values[1] = (matrix.m[1][0] * ((matrix.m[0][1] * matrix.m[2][2]) - (matrix.m[2][1] * matrix.m[0][2])));
 	values[2] = (matrix.m[2][0] * ((matrix.m[0][1] * matrix.m[1][2]) - (matrix.m[1][1] * matrix.m[0][2])));
 
-	// Return
 	return (values[0] - values[1] + values[2]);
 }
 
 const float Math::calculateDeterminant(mat44 matrix)
 {
-	// Result
 	float values[4] = {};
 
-	// Calculate
 	values[0] = matrix.m[0][0] * ((matrix.m[1][1] * ((matrix.m[2][2] * matrix.m[3][3]) - (matrix.m[2][3] * matrix.m[3][2]))) - (matrix.m[1][2] * ((matrix.m[2][1] * matrix.m[3][3]) - (matrix.m[2][3] * matrix.m[3][1]))) + (matrix.m[1][3] * ((matrix.m[2][1] * matrix.m[3][2]) - (matrix.m[2][2] * matrix.m[3][1]))));
 	values[1] = matrix.m[0][1] * ((matrix.m[1][0] * ((matrix.m[2][2] * matrix.m[3][3]) - (matrix.m[2][3] * matrix.m[3][2]))) - (matrix.m[1][2] * ((matrix.m[2][0] * matrix.m[3][3]) - (matrix.m[2][3] * matrix.m[3][0]))) + (matrix.m[1][3] * ((matrix.m[2][0] * matrix.m[3][2]) - (matrix.m[2][2] * matrix.m[3][0]))));
 	values[2] = matrix.m[0][2] * ((matrix.m[1][0] * ((matrix.m[2][1] * matrix.m[3][3]) - (matrix.m[2][3] * matrix.m[3][1]))) - (matrix.m[1][1] * ((matrix.m[2][0] * matrix.m[3][3]) - (matrix.m[2][3] * matrix.m[3][0]))) + (matrix.m[1][3] * ((matrix.m[2][0] * matrix.m[3][1]) - (matrix.m[2][1] * matrix.m[3][0]))));
 	values[3] = matrix.m[0][3] * ((matrix.m[1][0] * ((matrix.m[2][1] * matrix.m[3][2]) - (matrix.m[2][2] * matrix.m[3][1]))) - (matrix.m[1][1] * ((matrix.m[2][0] * matrix.m[3][2]) - (matrix.m[2][2] * matrix.m[3][0]))) + (matrix.m[1][2] * ((matrix.m[2][0] * matrix.m[3][1]) - (matrix.m[2][1] * matrix.m[3][0]))));
 
-	// Return
 	return (values[0] - values[1] + values[2] - values[3]);
 }

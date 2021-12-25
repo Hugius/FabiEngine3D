@@ -17,10 +17,8 @@ SoundEditor::SoundEditor(FabiEngine3D& fe3d, GuiManager& gui)
 
 void SoundEditor::load()
 {
-	// GUI
 	_loadGUI();
 
-	// Graphics
 	_fe3d.gfx_enableAntiAliasing();
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_enableBloom();
@@ -29,46 +27,36 @@ void SoundEditor::load()
 	_fe3d.gfx_setBloomBlurCount(5);
 	_fe3d.gfx_setBloomQuality(Config::MAX_BLOOM_QUALITY);
 
-	// Camera
 	_fe3d.camera_reset();
 	_fe3d.camera_setYaw(270.0f);
 
-	// Editor billboards
 	_fe3d.billboard_create("@@icon");
 	_fe3d.billboard_setPosition("@@icon", fvec3(0.0f, -0.5f, -1.5f));
 	_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\texture\\stop.png");
 	_fe3d.billboard_setBright("@@icon", true);
 
-	// Editor text fields
 	_gui.getOverlay()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true, false);
 
-	// Miscellaneous
 	_isEditorLoaded = true;
 }
 
 void SoundEditor::unload()
 {
-	// Sounds
 	for(const auto& ID : _loadedSoundIDs)
 	{
 		_fe3d.sound2d_delete(ID);
 	}
 
-	// GUI
 	_unloadGUI();
 
-	// Graphics
 	_fe3d.gfx_disableAntiAliasing(true);
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_disableBloom(true);
 
-	// Editor billboards
 	_fe3d.billboard_delete("@@icon");
 
-	// Editor text fields
 	_gui.getOverlay()->deleteTextField("soundID");
 
-	// Editor properties
 	_loadedSoundIDs.clear();
 	_currentSoundID = "";
 	_hoveredSoundID = "";
@@ -80,10 +68,8 @@ void SoundEditor::unload()
 
 void SoundEditor::_loadGUI()
 {
-	// Temporary values
 	auto leftWindow = _gui.getViewport("left")->getWindow("main");
 
-	// Left-viewport: soundEditorMenuMain
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("soundEditorMenuMain");
 	leftWindow->getScreen("soundEditorMenuMain")->createButton("create", fvec2(0.0f, positions[0]), fvec2(TW("Create Sound"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Create Sound", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
@@ -91,7 +77,6 @@ void SoundEditor::_loadGUI()
 	leftWindow->getScreen("soundEditorMenuMain")->createButton("delete", fvec2(0.0f, positions[2]), fvec2(TW("Delete Sound"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete Sound", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 	leftWindow->getScreen("soundEditorMenuMain")->createButton("back", fvec2(0.0f, positions[3]), fvec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);
 
-	// Left-viewport: soundEditorMenuChoice
 	positions = VPC::calculateButtonPositions(5, CH);
 	leftWindow->createScreen("soundEditorMenuChoice");
 	leftWindow->getScreen("soundEditorMenuChoice")->createButton("play", fvec2(0.0f, positions[0]), fvec2(TW("Play"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Play", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, true, true, true);

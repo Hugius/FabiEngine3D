@@ -5,10 +5,8 @@
 
 void Core::_render()
 {
-	// Reset triangle count
 	_renderBus.resetTriangleCount();
 
-	// Create bus with all entities
 	const auto mainSky = _skyEntityManager.getSelectedMainSky();
 	const auto mixSky = _skyEntityManager.getSelectedMixSky();
 	const auto terrain = _terrainEntityManager.getSelectedTerrain();
@@ -23,10 +21,8 @@ void Core::_render()
 	const auto texts = _textEntityManager.getEntities();
 	EntityBus entityBus(mainSky, mixSky, terrain, water, models, billboards, AABBs, pointlights, spotlights, reflections, images, texts);
 
-	// Render entities
 	_masterRenderer.renderWorld(&entityBus);
 
-	// Swap GPU buffer
 	_timer.startDeltaPart("bufferSwap");
 	_window.swapBackBuffer();
 	_timer.stopDeltaPart();
@@ -34,12 +30,10 @@ void Core::_render()
 
 void Core::_prepare()
 {
-	// Temporary values
 	const string meshDirectoryPath = "engine\\assets\\mesh\\";
 	const string textureDirectoryPath = "engine\\assets\\texture\\";
 	const string fontDirectoryPath = "engine\\assets\\font\\";
 
-	// Validate engine assets directory
 	if
 		(
 		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "camera.obj") ||
@@ -82,19 +76,16 @@ void Core::_prepare()
 		Logger::throwFatalWarning("Directory `engine\\` is missing or corrupted!");
 	}
 
-	// Create engine logo
 	shared_ptr<ImageEntity> logo = make_shared<ImageEntity>("logo");
 	logo->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
 	logo->setDiffuseMap(_textureLoader.load2dTexture("engine\\assets\\texture\\logo.png", false, false));
 
-	// Calculate logo resolution
 	SDL_DisplayMode DM;
 	SDL_GetDesktopDisplayMode(0, &DM);
 	float width = static_cast<float>(DM.w);
 	float height = static_cast<float>(DM.h);
 	ivec2 logoResolution = ivec2(static_cast<int>(width * 0.4f), static_cast<int>(height * 0.2f));
 
-	// Render logo
 	fvec3 keyingColor = fvec3(0.2f);
 	if(Config::getInst().isApplicationExported())
 	{
@@ -110,10 +101,8 @@ void Core::_prepare()
 		_window.swapBackBuffer();
 	}
 
-	// Initialize engine controller
 	_fe3d.FE3D_CONTROLLER_INIT();
 
-	// Check if engine is still running
 	if(_isRunning)
 	{
 		// Hide logo

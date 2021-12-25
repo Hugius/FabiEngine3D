@@ -14,7 +14,6 @@ const bool NetworkingClient::isRunning() const
 
 const bool NetworkingClient::isConnectingToServer() const
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingClient::isConnectingToServer");
@@ -25,7 +24,6 @@ const bool NetworkingClient::isConnectingToServer() const
 
 const bool NetworkingClient::isConnectedToServer() const
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingClient::isConnectedToServer");
@@ -36,7 +34,6 @@ const bool NetworkingClient::isConnectedToServer() const
 
 const bool NetworkingClient::isAcceptedByServer() const
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingClient::isAcceptedByServer");
@@ -47,31 +44,26 @@ const bool NetworkingClient::isAcceptedByServer() const
 
 const unsigned int NetworkingClient::getPingLatency() const
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingClient::getPingLatency::1");
 	}
 
-	// Must be connected & accepted
 	if(!_isConnectedToServer || !_isAcceptedByServer)
 	{
 		Logger::throwError("NetworkingClient::getPingLatency::2");
 	}
 
-	// Check if no ping latency is measured yet
 	if(_pingLatencies.empty())
 	{
 		return 0;
 	}
 
-	// Calculate average ping
 	return Math::calculateAverage(_pingLatencies);
 }
 
 const string& NetworkingClient::getUsername() const
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingClient::getUsername::1");
@@ -82,13 +74,11 @@ const string& NetworkingClient::getUsername() const
 
 const string& NetworkingClient::getServerIP() const
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingClient::getServerIP::1");
 	}
 
-	// Must be connected & accepted
 	if(!_isConnectedToServer || !_isAcceptedByServer)
 	{
 		Logger::throwError("NetworkingClient::getServerIP::2");
@@ -99,7 +89,6 @@ const string& NetworkingClient::getServerIP() const
 
 const vector<NetworkingServerMessage>& NetworkingClient::getPendingMessages() const
 {
-	// Must be running
 	if(!_isRunning)
 	{
 		Logger::throwError("NetworkingClient::getPendingMessages");

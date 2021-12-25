@@ -5,11 +5,9 @@ using BVPC = BottomViewportController;
 
 void BottomViewportController::_updateStatistics()
 {
-	// Temporary values
 	auto statisticsScreen = _gui.getViewport("bottom")->getWindow("statistics")->getScreen("main");
 	auto consoleScreen = _gui.getViewport("bottom")->getWindow("statistics")->getScreen("main");
 
-	// Update fps display
 	static vector<float> fpsList;
 	if(_fe3d.misc_checkInterval(100))
 	{
@@ -28,7 +26,6 @@ void BottomViewportController::_updateStatistics()
 		fpsList.push_back(_fe3d.misc_getFPS());
 	}
 
-	// Update CPU stats
 	if(_fe3d.misc_checkInterval(100))
 	{
 		string textID = statisticsScreen->getTextField("cpuModel")->getEntityID();
@@ -36,7 +33,6 @@ void BottomViewportController::_updateStatistics()
 		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	// Update GPU stats
 	if(_fe3d.misc_checkInterval(100))
 	{
 		string textID = statisticsScreen->getTextField("gpuModel")->getEntityID();
@@ -44,7 +40,6 @@ void BottomViewportController::_updateStatistics()
 		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	// Update OpenGL version
 	if(_fe3d.misc_checkInterval(100))
 	{
 		string textID = statisticsScreen->getTextField("openglVersion")->getEntityID();
@@ -52,7 +47,6 @@ void BottomViewportController::_updateStatistics()
 		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	// Update camera position/yaw/pitch
 	if(_fe3d.misc_checkInterval(1))
 	{
 		string textID = statisticsScreen->getTextField("cameraPositionYawPitch")->getEntityID();
@@ -65,7 +59,6 @@ void BottomViewportController::_updateStatistics()
 		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	// Update cursor position
 	if(_fe3d.misc_checkInterval(1))
 	{
 		string textID = statisticsScreen->getTextField("cursorPosition")->getEntityID();
@@ -76,7 +69,6 @@ void BottomViewportController::_updateStatistics()
 		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	// Update triangle count
 	if(_fe3d.misc_checkInterval(10))
 	{
 		string textID = statisticsScreen->getTextField("triangleCount")->getEntityID();
@@ -84,7 +76,6 @@ void BottomViewportController::_updateStatistics()
 		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	// Update model entity count
 	if(_fe3d.misc_checkInterval(10))
 	{
 		// Count visible models
@@ -103,7 +94,6 @@ void BottomViewportController::_updateStatistics()
 		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	// Update billboard entity count
 	if(_fe3d.misc_checkInterval(10))
 	{
 		// Count visible entities
@@ -122,7 +112,6 @@ void BottomViewportController::_updateStatistics()
 		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	// Update AABB entity count
 	if(_fe3d.misc_checkInterval(10))
 	{
 		// Count visible entities
@@ -141,7 +130,6 @@ void BottomViewportController::_updateStatistics()
 		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	// Update light entity count
 	if(_fe3d.misc_checkInterval(10))
 	{
 		// Count visible entities
@@ -167,7 +155,6 @@ void BottomViewportController::_updateStatistics()
 		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	// Update reflection entity count
 	if(_fe3d.misc_checkInterval(10))
 	{
 		// Count visible entities
@@ -186,7 +173,6 @@ void BottomViewportController::_updateStatistics()
 		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	// Update GUI entity count
 	if(_fe3d.misc_checkInterval(10))
 	{
 		// Count visible entities
@@ -212,7 +198,6 @@ void BottomViewportController::_updateStatistics()
 		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	// Update update-profiling
 	if(_fe3d.misc_checkInterval(50))
 	{
 		auto updateStatistics = _fe3d.misc_getUpdateProfilingStatistics();
@@ -223,7 +208,6 @@ void BottomViewportController::_updateStatistics()
 		}
 	}
 
-	// Update render-profiling
 	if(_fe3d.misc_checkInterval(50))
 	{
 		auto renderStatistics = _fe3d.misc_getRenderProfilingStatistics();
@@ -234,7 +218,6 @@ void BottomViewportController::_updateStatistics()
 		}
 	}
 
-	// Check if user wants to clear console messages
 	if(_fe3d.input_isKeyPressed(InputType::KEY_C) && _gui.getViewport("bottom")->getWindow("console")->isHovered())
 	{
 		// Validate
@@ -250,7 +233,6 @@ void BottomViewportController::_updateStatistics()
 		}
 	}
 
-	// Clear console messages if it overflows
 	auto loggerMessages = Logger::getMessageQueue();
 	if(loggerMessages.size() > MAX_CONSOLE_MESSAGES)
 	{
@@ -275,7 +257,6 @@ void BottomViewportController::_updateStatistics()
 		Logger::setCustomMessageQueue(newMessages);
 	}
 
-	// Synchronize console text with core logger
 	loggerMessages = Logger::getMessageQueue();
 	if(_consoleMessageQueue.size() != loggerMessages.size())
 	{

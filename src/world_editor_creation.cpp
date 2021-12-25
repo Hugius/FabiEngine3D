@@ -18,7 +18,6 @@ void WorldEditor::copyTemplateSound(const string& newID, const string& templateI
 
 const bool WorldEditor::_copyTemplateSky(const string& newID, const string& templateID)
 {
-	// Error checking
 	if(_fe3d.sky_isExisting(newID))
 	{
 		Logger::throwWarning("World sky with ID \"" + newID + "\" already exists!");
@@ -30,7 +29,6 @@ const bool WorldEditor::_copyTemplateSky(const string& newID, const string& temp
 		return false;
 	}
 
-	// Create new sky
 	_fe3d.sky_create(newID);
 	_fe3d.sky_setCubeMaps(newID, _fe3d.sky_getCubeMapPaths(templateID));
 	_fe3d.sky_setLightness(newID, _fe3d.sky_getLightness(templateID));
@@ -38,7 +36,6 @@ const bool WorldEditor::_copyTemplateSky(const string& newID, const string& temp
 	_fe3d.sky_setColor(newID, _fe3d.sky_getColor(templateID));
 	_fe3d.sky_selectMainSky(newID);
 
-	// Save ID
 	_loadedSkyID = newID;
 
 	return true;
@@ -46,7 +43,6 @@ const bool WorldEditor::_copyTemplateSky(const string& newID, const string& temp
 
 const bool WorldEditor::_copyTemplateTerrain(const string& newID, const string& templateID)
 {
-	// Error checking
 	if(_fe3d.terrain_isExisting(newID))
 	{
 		Logger::throwWarning("World terrain with ID \"" + newID + "\" already exists!");
@@ -58,17 +54,14 @@ const bool WorldEditor::_copyTemplateTerrain(const string& newID, const string& 
 		return false;
 	}
 
-	// Delete old
 	if(_fe3d.terrain_isExisting(newID))
 	{
 		_fe3d.terrain_delete(newID);
 	}
 
-	// Create terrain entity
 	_fe3d.terrain_create(newID, _fe3d.terrain_getHeightMapPath(templateID));
 	_fe3d.terrain_select(newID);
 
-	// Fill terrain entity
 	_fe3d.terrain_setMaxHeight(newID, _fe3d.terrain_getMaxHeight(templateID));
 	_fe3d.terrain_setTextureRepeat(newID, _fe3d.terrain_getTextureRepeat(templateID));
 	_fe3d.terrain_setLightness(newID, _fe3d.terrain_getLightness(templateID));
@@ -79,61 +72,51 @@ const bool WorldEditor::_copyTemplateTerrain(const string& newID, const string& 
 	_fe3d.terrain_setSpecularShininess(newID, _fe3d.terrain_getSpecularShininess(templateID));
 	_fe3d.terrain_setSpecularIntensity(newID, _fe3d.terrain_getSpecularIntensity(templateID));
 
-	// Diffuse map
 	if(_fe3d.terrain_hasDiffuseMap(templateID))
 	{
 		_fe3d.terrain_setDiffuseMap(newID, _fe3d.terrain_getDiffuseMapPath(templateID));
 	}
 
-	// Normal map
 	if(_fe3d.terrain_hasNormalMap(templateID))
 	{
 		_fe3d.terrain_setNormalMap(newID, _fe3d.terrain_getNormalMapPath(templateID));
 	}
 
-	// Normal map R
 	if(_fe3d.terrain_hasRedNormalMap(templateID))
 	{
 		_fe3d.terrain_setRedNormalMap(newID, _fe3d.terrain_getRedNormalMapPath(templateID));
 	}
 
-	// Normal map G
 	if(_fe3d.terrain_hasGreenNormalMap(templateID))
 	{
 		_fe3d.terrain_setGreenNormalMap(newID, _fe3d.terrain_getGreenNormalMapPath(templateID));
 	}
 
-	// Normal map B
 	if(_fe3d.terrain_hasBlueNormalMap(templateID))
 	{
 		_fe3d.terrain_setBlueNormalMap(newID, _fe3d.terrain_getBlueNormalMapPath(templateID));
 	}
 
-	// Blend map
 	if(_fe3d.terrain_hasBlendMap(templateID))
 	{
 		_fe3d.terrain_setBlendMap(newID, _fe3d.terrain_getBlendMapPath(templateID));
 	}
 
-	// Blend map red
 	if(_fe3d.terrain_hasRedDiffuseMap(templateID))
 	{
 		_fe3d.terrain_setRedDiffuseMap(newID, _fe3d.terrain_getRedDiffuseMapPath(templateID));
 	}
 
-	// Blend map green
 	if(_fe3d.terrain_hasGreenDiffuseMap(templateID))
 	{
 		_fe3d.terrain_setGreenDiffuseMap(newID, _fe3d.terrain_getGreenDiffuseMapPath(templateID));
 	}
 
-	// Blend map blue
 	if(_fe3d.terrain_hasBlueDiffuseMap(templateID))
 	{
 		_fe3d.terrain_setBlueDiffuseMap(newID, _fe3d.terrain_getBlueDiffuseMapPath(templateID));
 	}
 
-	// Save ID
 	_loadedTerrainID = newID;
 
 	return true;
@@ -141,7 +124,6 @@ const bool WorldEditor::_copyTemplateTerrain(const string& newID, const string& 
 
 const bool WorldEditor::_copyTemplateWater(const string& newID, const string& templateID)
 {
-	// Error checking
 	if(_fe3d.water_isExisting(newID))
 	{
 		Logger::throwWarning("World water with ID \"" + newID + "\" already exists!");
@@ -153,17 +135,14 @@ const bool WorldEditor::_copyTemplateWater(const string& newID, const string& te
 		return false;
 	}
 
-	// Delete old
 	if(_fe3d.water_isExisting(newID))
 	{
 		_fe3d.water_delete(newID);
 	}
 
-	// Create water entity
 	_fe3d.water_create(newID);
 	_fe3d.water_select(newID);
 
-	// Fill water entity
 	_fe3d.water_setHeight(newID, _fe3d.water_getHeight(templateID));
 	_fe3d.water_setSize(newID, _fe3d.water_getSize(templateID));
 	_fe3d.water_setSpecular(newID, _fe3d.water_isSpecular(templateID));
@@ -178,25 +157,21 @@ const bool WorldEditor::_copyTemplateWater(const string& newID, const string& te
 	_fe3d.water_setTextureRepeat(newID, _fe3d.water_getTextureRepeat(templateID));
 	_fe3d.water_setSpeed(newID, _fe3d.water_getSpeed(templateID));
 
-	// DUDV map
 	if(_fe3d.water_hasDudvMap(templateID))
 	{
 		_fe3d.water_setDudvMap(newID, _fe3d.water_getDudvMapPath(templateID));
 	}
 
-	// Normal map
 	if(_fe3d.water_hasNormalMap(templateID))
 	{
 		_fe3d.water_setNormalMap(newID, _fe3d.water_getNormalMapPath(templateID));
 	}
 
-	// Displacement map
 	if(_fe3d.water_hasDisplacementMap(templateID))
 	{
 		_fe3d.water_setDisplacementMap(newID, _fe3d.water_getDisplacementMapPath(templateID));
 	}
 
-	// Save ID
 	_loadedWaterID = newID;
 
 	return true;
@@ -204,7 +179,6 @@ const bool WorldEditor::_copyTemplateWater(const string& newID, const string& te
 
 const bool WorldEditor::_copyTemplateModel(const string& newID, const string& templateID, fvec3 position, bool isFromOutside)
 {
-	// Error checking
 	if(_fe3d.model_isExisting(newID))
 	{
 		Logger::throwWarning("Model with ID \"" + newID + "\" already exists!");
@@ -216,10 +190,8 @@ const bool WorldEditor::_copyTemplateModel(const string& newID, const string& te
 		return false;
 	}
 
-	// Create model entity
 	_fe3d.model_create(newID, _fe3d.model_getMeshPath(templateID));
 
-	// Set properties
 	_fe3d.model_setBasePosition(newID, position);
 	_fe3d.model_setBaseSize(newID, _fe3d.model_getBaseSize(templateID));
 	_fe3d.model_setLevelOfDetailSize(newID, _fe3d.model_getBaseSize(templateID));
@@ -228,7 +200,6 @@ const bool WorldEditor::_copyTemplateModel(const string& newID, const string& te
 	_fe3d.model_setFaceCulled(newID, _fe3d.model_isFaceCulled(templateID));
 	_fe3d.model_setRotationOrder(newID, _fe3d.model_getRotationOrder(templateID));
 
-	// Set parts
 	for(const auto& partID : _fe3d.model_getPartIDs(templateID))
 	{
 		// Set diffuse map
@@ -273,7 +244,6 @@ const bool WorldEditor::_copyTemplateModel(const string& newID, const string& te
 		_fe3d.model_setTextureRepeat(newID, partID, _fe3d.model_getTextureRepeat(templateID, partID));
 	}
 
-	// Bind AABB entities to model entity
 	for(const auto& templateAabbID : _fe3d.aabb_getChildIDs(templateID, AabbParentEntityType::MODEL))
 	{
 		const string newAabbID = (newID + "@" + templateAabbID.substr(string(templateID + "_").size()));
@@ -284,7 +254,6 @@ const bool WorldEditor::_copyTemplateModel(const string& newID, const string& te
 		_fe3d.aabb_setLocalSize(newAabbID, _fe3d.aabb_getSize(templateAabbID));
 	}
 
-	// Save initial transformation
 	if(_isEditorLoaded)
 	{
 		_initialModelPosition[newID] = _fe3d.model_getBasePosition(templateID);
@@ -292,7 +261,6 @@ const bool WorldEditor::_copyTemplateModel(const string& newID, const string& te
 		_initialModelSize[newID] = _fe3d.model_getBaseSize(templateID);
 	}
 
-	// Save ID
 	if(isFromOutside)
 	{
 		_outsideLoadedModelIDs[newID] = templateID;
@@ -307,7 +275,6 @@ const bool WorldEditor::_copyTemplateModel(const string& newID, const string& te
 
 const bool WorldEditor::_copyTemplateBillboard(const string& newID, const string& templateID, fvec3 position, bool isFromOutside)
 {
-	// Error checking
 	if(_fe3d.billboard_isExisting(newID))
 	{
 		Logger::throwWarning("Billboard with ID \"" + newID + "\" already exists!");
@@ -319,34 +286,28 @@ const bool WorldEditor::_copyTemplateBillboard(const string& newID, const string
 		return false;
 	}
 
-	// Create billboard entity
 	_fe3d.billboard_create(newID);
 
-	// Bind AABB entity
 	_fe3d.aabb_create(newID);
 	_fe3d.aabb_setParentEntityID(newID, newID);
 	_fe3d.aabb_setParentEntityType(newID, AabbParentEntityType::BILLBOARD);
 
-	// Diffuse map
 	if(_fe3d.billboard_hasDiffuseMap(templateID) && !_fe3d.billboard_isTextual(templateID))
 	{
 		_fe3d.billboard_setDiffuseMap(newID, _fe3d.billboard_getDiffuseMapPath(templateID));
 	}
 
-	// Emission map
 	if(_fe3d.billboard_hasEmissionMap(templateID))
 	{
 		_fe3d.billboard_setEmissionMap(newID, _fe3d.billboard_getEmissionMapPath(templateID));
 	}
 
-	// Text
 	if(_fe3d.billboard_isTextual(templateID))
 	{
 		_fe3d.billboard_setFont(newID, _fe3d.billboard_getFontPath(templateID));
 		_fe3d.billboard_setTextContent(newID, _fe3d.billboard_getTextContent(templateID));
 	}
 
-	// Set properties
 	_fe3d.billboard_setPosition(newID, position);
 	_fe3d.billboard_setSize(newID, _fe3d.billboard_getSize(templateID));
 	_fe3d.billboard_setFacingCameraX(newID, _fe3d.billboard_isFacingCameraX(templateID));
@@ -356,7 +317,6 @@ const bool WorldEditor::_copyTemplateBillboard(const string& newID, const string
 	_fe3d.billboard_setReflected(newID, _fe3d.billboard_isReflected(templateID));
 	_fe3d.billboard_setLightness(newID, _fe3d.billboard_getLightness(templateID));
 
-	// Save ID
 	if(isFromOutside)
 	{
 		_outsideLoadedBillboardIDs[newID] = templateID;
@@ -371,7 +331,6 @@ const bool WorldEditor::_copyTemplateBillboard(const string& newID, const string
 
 const bool WorldEditor::_copyTemplateSound(const string& newID, const string& templateID, fvec3 position, bool isFromOutside)
 {
-	// Error checking
 	if(_fe3d.sound3d_isExisting(newID))
 	{
 		Logger::throwWarning("sound3D with ID \"" + newID + "\" already exists!");
@@ -383,11 +342,9 @@ const bool WorldEditor::_copyTemplateSound(const string& newID, const string& te
 		return false;
 	}
 
-	// Create sound
 	_fe3d.sound3d_create(newID, _fe3d.sound2d_getAudioPath(templateID));
 	_fe3d.sound3d_setPosition(newID, position);
 
-	// Save ID
 	if(isFromOutside)
 	{
 		_outsideLoadedSoundIDs[newID] = templateID;

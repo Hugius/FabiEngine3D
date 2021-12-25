@@ -10,7 +10,6 @@ CaptureBuffer::~CaptureBuffer()
 
 void CaptureBuffer::createColorTexture(ivec2 position, ivec2 size, unsigned int count, bool isTextureClamped)
 {
-	// Check if already loaded
 	if(!_isInitialized)
 	{
 		// Dimensions
@@ -89,7 +88,6 @@ void CaptureBuffer::createColorTexture(ivec2 position, ivec2 size, unsigned int 
 
 void CaptureBuffer::createDepthTexture(ivec2 position, ivec2 size)
 {
-	// Check if already loaded
 	if(!_isInitialized)
 	{
 		// Dimensions

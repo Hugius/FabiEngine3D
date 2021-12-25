@@ -6,10 +6,8 @@ using std::to_string;
 
 void ModelEntityColorRenderer::bind()
 {
-	// Bind shader
 	_shader.bind();
 
-	// Shader uniforms
 	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_shadowMatrix", _renderBus.getShadowMatrix());
 	_shader.uploadUniform("u_clippingPlane", _renderBus.getClippingPlane());
@@ -42,19 +40,15 @@ void ModelEntityColorRenderer::bind()
 	_shader.uploadUniform("u_reflectionMap", 7);
 	_shader.uploadUniform("u_normalMap", 8);
 
-	// Enable clipping
 	glEnable(GL_CLIP_DISTANCE0);
 	glEnable(GL_CLIP_DISTANCE1);
 
-	// Enable depth
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 
-	// Enable transparency
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	// Bind textures
 	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, _renderBus.getPlanarReflectionMap());
 	glActiveTexture(GL_TEXTURE3);
@@ -63,29 +57,23 @@ void ModelEntityColorRenderer::bind()
 
 void ModelEntityColorRenderer::unbind()
 {
-	// Unbind textures
 	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glActiveTexture(GL_TEXTURE3);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	// Disable transparency
 	glDisable(GL_BLEND);
 
-	// Disable depth
 	glDisable(GL_DEPTH_TEST);
 
-	// Disable clipping
 	glDisable(GL_CLIP_DISTANCE0);
 	glDisable(GL_CLIP_DISTANCE1);
 
-	// Unbind shader
 	_shader.unbind();
 }
 
 void ModelEntityColorRenderer::processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>>& entities)
 {
-	// Save visible lights
 	vector<shared_ptr<PointlightEntity>> visibleEntities;
 	for(const auto& [keyID, entity] : entities)
 	{
@@ -95,7 +83,6 @@ void ModelEntityColorRenderer::processPointlightEntities(const unordered_map<str
 		}
 	}
 
-	// Upload lights
 	for(size_t i = 0; i < visibleEntities.size(); i++)
 	{
 		_shader.uploadUniform("u_pointlightPositions[" + to_string(i) + "]", visibleEntities[i]->getPosition());
@@ -105,13 +92,11 @@ void ModelEntityColorRenderer::processPointlightEntities(const unordered_map<str
 		_shader.uploadUniform("u_pointlightShapes[" + to_string(i) + "]", static_cast<int>(visibleEntities[i]->getShape()));
 	}
 
-	// Upload pointlight count
 	_shader.uploadUniform("u_pointlightCount", static_cast<int>(visibleEntities.size()));
 }
 
 void ModelEntityColorRenderer::processSpotlightEntities(const unordered_map<string, shared_ptr<SpotlightEntity>>& entities)
 {
-	// Save visible lights
 	vector<shared_ptr<SpotlightEntity>> visibleEntities;
 	for(const auto& [keyID, entity] : entities)
 	{
@@ -121,7 +106,6 @@ void ModelEntityColorRenderer::processSpotlightEntities(const unordered_map<stri
 		}
 	}
 
-	// Upload lights
 	for(size_t i = 0; i < visibleEntities.size(); i++)
 	{
 		_shader.uploadUniform("u_spotlightPositions[" + to_string(i) + "]", visibleEntities[i]->getPosition());
@@ -132,7 +116,6 @@ void ModelEntityColorRenderer::processSpotlightEntities(const unordered_map<stri
 		_shader.uploadUniform("u_spotlightDistances[" + to_string(i) + "]", visibleEntities[i]->getDistance());
 	}
 
-	// Upload spotlight count
 	_shader.uploadUniform("u_spotlightCount", static_cast<int>(visibleEntities.size()));
 }
 

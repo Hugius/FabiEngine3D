@@ -12,7 +12,6 @@ class GuiScreen final
 public:
 	GuiScreen(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size);
 
-	// VOID
 	void update(bool hoverable);
 	void show();
 	void hide();
@@ -29,22 +28,18 @@ public:
 	void deleteRectangle(const string& ID);
 	void deleteTextField(const string& ID);
 
-	// STRING
 	const string& getID() const;
 	const string& getParentID() const;
 
-	// FVEC2
 	const fvec2 convertPosition(fvec2 position) const;
 	const fvec2 convertSize(fvec2 size) const;
 
-	// BOOL
 	const bool isScrollingListExisting(const string& ID) const;
 	const bool isWriteFieldExisting(const string& ID) const;
 	const bool isButtonExisting(const string& ID) const;
 	const bool isRectangleExisting(const string& ID) const;
 	const bool isTextFieldExisting(const string& ID) const;
 
-	// MISCELLANEOUS
 	shared_ptr<GuiScrollingList> getScrollingList(const string& ID) const;
 	shared_ptr<GuiWriteField> getWriteField(const string& ID) const;
 	shared_ptr<GuiButton> getButton(const string& ID) const;
@@ -57,21 +52,16 @@ public:
 	const vector<shared_ptr<GuiTextField>>& getTextFields() const;
 
 private:
-	// FVEC4
 	const fvec4 _convertDimensions(fvec2 position, fvec2 size) const;
 
-	// FVEC2
 	fvec2 _parentPosition;
 	fvec2 _parentSize;
 
-	// STRING
 	const string _ID;
 	const string _parentID;
 
-	// BOOL
 	bool _isActive = false;
 
-	// MISCELLANEOUS
 	vector<shared_ptr<GuiScrollingList>> _scrollingLists;
 	vector<shared_ptr<GuiWriteField>> _writeFields;
 	vector<shared_ptr<GuiButton>> _buttons;

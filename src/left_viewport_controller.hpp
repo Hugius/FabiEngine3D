@@ -18,11 +18,9 @@ class LeftViewportController final : public BaseViewportController
 public:
 	LeftViewportController(FabiEngine3D& fe3d, GuiManager& gui);
 
-	// VOID
 	void initialize() override;
 	void update() override;
 
-	// MISCELLANEOUS
 	SkyEditor& getSkyEditor();
 	TerrainEditor& getTerrainEditor();
 	WaterEditor& getWaterEditor();
@@ -35,7 +33,6 @@ public:
 	WorldEditor& getWorldEditor();
 	ScriptEditor& getScriptEditor();
 
-	// FVEC3
 	static inline const fvec3 SCROLLING_LIST_COLOR = fvec3(0.25f);
 	static inline const fvec3 BUTTON_COLOR = fvec3(0.1f, 0.1f, 1.0f);
 	static inline const fvec3 BUTTON_HOVER_COLOR = fvec3(0.5f, 0.5f, 1.0f);
@@ -43,17 +40,13 @@ public:
 	static inline const fvec3 TEXT_HOVER_COLOR = fvec3(0.0f);
 
 private:
-	// STRING
 	string _lastActiveEditorScreen = "";
 
-	// FVEC3
 	static inline const fvec3 FRAME_COLOR = fvec3(0.175f);
 
-	// FLOAT
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 
-	// MISCELLANEOUS
 	SkyEditor _skyEditor;
 	TerrainEditor _terrainEditor;
 	WaterEditor _waterEditor;

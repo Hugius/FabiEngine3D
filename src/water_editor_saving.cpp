@@ -9,22 +9,18 @@ using std::ofstream;
 
 const bool WaterEditor::saveToFile() const
 {
-	// Editor must be loaded
 	if(!_isEditorLoaded)
 	{
 		return false;
 	}
 
-	// Validate project ID
 	if(_currentProjectID.empty())
 	{
 		Logger::throwError("WaterEditor::saveToFile");
 	}
 
-	// Create or overwrite file
 	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\water.fe3d");
 
-	// Write water data
 	for(const auto& waterID : _loadedWaterIDs)
 	{
 		// Values
@@ -84,12 +80,9 @@ const bool WaterEditor::saveToFile() const
 			specularIntensity << endl;
 	}
 
-	// Close file
 	file.close();
 
-	// Logging
 	Logger::throwInfo("Water data saved!");
 
-	// Return
 	return true;
 }

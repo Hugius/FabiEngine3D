@@ -40,13 +40,10 @@ void TextureLoader::cacheFont(const string& filePath)
 /* http://stackoverflow.com/questions/1968561/getting-the-pixel-value-of-bmp-file */
 vector<float> TextureLoader::_loadBitmap(const string& filePath)
 {
-	// Get application root directory
 	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 
-	// Temporary values
 	vector<float> pixelIntensities;
 
-	// Open file
 	FILE* streamIn;
 	fopen_s(&streamIn, (rootDirectoryPath + filePath).c_str(), "rb");
 	if(streamIn == (FILE*)0)
@@ -54,7 +51,6 @@ vector<float> TextureLoader::_loadBitmap(const string& filePath)
 		return {};
 	}
 
-	// File header
 	uint8_t header[54];
 	uint32_t width, height = 5;
 	for(int i = 0; i < 54; i++)
@@ -62,11 +58,9 @@ vector<float> TextureLoader::_loadBitmap(const string& filePath)
 		header[i] = getc(streamIn);
 	}
 
-	// Extract resolution
 	width = (header[21] << 24) | (header[20] << 16) | (header[19] << 8) | header[18];
 	height = (header[25] << 24) | (header[24] << 16) | (header[23] << 8) | header[22];
 
-	// Read pixels
 	auto size = static_cast<size_t>(width) * static_cast<size_t>(height);
 	for(size_t i = 0; i < size; i++)
 	{
@@ -77,48 +71,37 @@ vector<float> TextureLoader::_loadBitmap(const string& filePath)
 		pixelIntensities.push_back((value));
 	}
 
-	// Close file
 	fclose(streamIn);
 
-	// Return new texture
 	return pixelIntensities;
 }
 
 SDL_Surface* TextureLoader::_loadSurface(const string& filePath)
 {
-	// Disable libpng warnings
 	auto temp = freopen("NUL:", "w", stderr);
 
-	// Get application root directory
 	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 
-	// Load SDL surface
 	SDL_Surface* surface = IMG_Load(string(rootDirectoryPath + filePath).c_str());
 
-	// Return
 	return surface;
 }
 
 TTF_Font* TextureLoader::_loadFont(const string& filePath)
 {
-	// Get application root directory
 	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 
-	// Load TTF font
 	TTF_Font* font = TTF_OpenFont((rootDirectoryPath + filePath).c_str(), 32);
 
-	// Return
 	return font;
 }
 
 TextureID TextureLoader::_convertInto2dTexture(SDL_Surface* surface, const string& filePath, bool isMipmapped, bool isAnisotropic)
 {
-	// Generate OpenGL texture
 	TextureID texture;
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	// Determing the pixel format
 	if(surface->format->BytesPerPixel == 4)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surface->w, surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, surface->pixels);
@@ -145,30 +128,24 @@ TextureID TextureLoader::_convertInto2dTexture(SDL_Surface* surface, const strin
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	}
 
-	// Anisotropic filtering
 	if(isAnisotropic)
 	{
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(_anisotropicFilteringQuality));
 	}
 
-	// Logging
 	Logger::throwInfo("Loaded texture: \"" + filePath + "\"");
 
-	// Return new texture
 	return texture;
 }
 
 TextureID TextureLoader::_convertInto3dTexture(const array<SDL_Surface*, 6>& surfaces, const array<string, 6>& filePaths)
 {
-	// Get application root directory
 	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 
-	// Temporary values
 	TextureID texture;
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
 
-	// Validate surface sizes
 	int surfaceSize = -1;
 	for(size_t i = 0; i < surfaces.size(); i++)
 	{
@@ -198,7 +175,6 @@ TextureID TextureLoader::_convertInto3dTexture(const array<SDL_Surface*, 6>& sur
 		}
 	}
 
-	// Add the face surfaces to the texture buffer
 	for(size_t i = 0; i < surfaces.size(); i++)
 	{
 		// Check surface status
@@ -217,7 +193,6 @@ TextureID TextureLoader::_convertInto3dTexture(const array<SDL_Surface*, 6>& sur
 		}
 	}
 
-	// OpenGL magic
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -225,29 +200,23 @@ TextureID TextureLoader::_convertInto3dTexture(const array<SDL_Surface*, 6>& sur
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
-	// Return new texture
 	return texture;
 }
 
 TextureID TextureLoader::_convertInto2dTexture(TTF_Font* font, const string& textContent)
 {
-	// Load color
 	SDL_Color* color = new SDL_Color{255, 255, 255, 255};
 
-	// No empty text
 	string finalTextContent = (textContent.empty() ? " " : textContent);
 
-	// Texture data of text
 	SDL_Surface* surface = TTF_RenderText_Blended(font, finalTextContent.c_str(), *color);
 
-	// OpenGL Texture
 	TextureID texture;
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	// Determine pixel format
 	if(surface->format->BytesPerPixel == 4)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surface->w, surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, surface->pixels);
@@ -261,10 +230,8 @@ TextureID TextureLoader::_convertInto2dTexture(TTF_Font* font, const string& tex
 		Logger::throwError("TextureLoader::_loadText");
 	}
 
-	// Memory management
 	SDL_FreeSurface(surface);
 
-	// Return
 	return texture;
 }
 

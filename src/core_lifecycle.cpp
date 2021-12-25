@@ -29,22 +29,17 @@ Core::Core(FabiEngine3D& fe3d)
 
 void Core::_start()
 {
-	// Error
 	if(_isRunning)
 	{
 		Logger::throwError("Tried to start engine: already running!");
 	}
 
-	// Start running
 	_isRunning = true;
 
-	// Prepare application
 	_prepare();
 
-	// Temporary values
 	float renderLag = 0.0f;
 
-	// Main game-loop
 	while(_isRunning)
 	{
 		// Start measuring time
@@ -104,7 +99,6 @@ void Core::_start()
 		_deltaTimeMS = static_cast<float>(timeDifference.count()) / 1000000.0f;
 	}
 
-	// Finish engine controller
 	_fe3d.FE3D_CONTROLLER_TERMINATE();
 }
 
@@ -140,24 +134,20 @@ void Core::_stop()
 
 void Core::_update()
 {
-	// Temporary values
 	static ivec2 lastCursorPosition = _window.getCursorPosition();
 
-	// Exit application
 	if(_inputHandler.isKeyDown(InputType::WINDOW_X_BUTTON))
 	{
 		_stop();
 		return;
 	}
 
-	// User updates
 	_timer.startDeltaPart("coreUpdate");
 	_fe3d._isRaycastUpdated = false;
 	_fe3d._hoveredAabbID = "";
 	_fe3d.FE3D_CONTROLLER_UPDATE();
 	_timer.stopDeltaPart();
 
-	// An exported server application does not have engine updates
 	if(!(Config::getInst().isApplicationExported() && _fe3d.server_isRunning()))
 	{
 		// Only update 3D if engine not paused
@@ -216,16 +206,13 @@ void Core::_update()
 		_timer.stopDeltaPart();
 	}
 
-	// Always update networking
 	_timer.startDeltaPart("networkUpdate");
 	_networkingServer.update();
 	_networkingClient.update();
 	_timer.stopDeltaPart();
 
-	// Always update master renderer
 	_masterRenderer.update();
 
-	// Update window fade effect
 	if(!Config::getInst().isApplicationExported())
 	{
 		static float opacity = 0.0f;
@@ -241,6 +228,5 @@ void Core::_update()
 		}
 	}
 
-	// Save last cursor position
 	lastCursorPosition = _window.getCursorPosition();
 }

@@ -2,13 +2,11 @@
 
 void WorldEditor::_updateModelHighlighting(const string& ID, int& direction)
 {
-	// Reset multiplier if nothing active/selected
 	if(ID.empty())
 	{
 		direction = 1;
 	}
 
-	// Update model highlighting
 	if(!ID.empty())
 	{
 		// Update all parts
@@ -37,13 +35,11 @@ void WorldEditor::_updateModelHighlighting(const string& ID, int& direction)
 
 void WorldEditor::_updateBillboardHighlighting(const string& ID, int& direction)
 {
-	// Reset direction if nothing active/selected
 	if(ID.empty())
 	{
 		direction = 1;
 	}
 
-	// Update billboard highlighting
 	if(!ID.empty())
 	{
 		// Check if wireframe color reached minimum
@@ -67,13 +63,11 @@ void WorldEditor::_updateBillboardHighlighting(const string& ID, int& direction)
 
 void WorldEditor::_updateSpeakerHighlighting(const string& ID, int& direction)
 {
-	// Reset direction if nothing active/selected
 	if(ID.empty())
 	{
 		direction = 1;
 	}
 
-	// Update speaker highlighting
 	if(!ID.empty())
 	{
 		// Check if wireframe color reached minimum
@@ -100,13 +94,11 @@ void WorldEditor::_updateSpeakerHighlighting(const string& ID, int& direction)
 
 void WorldEditor::_updateLampHighlighting(const string& ID, int& direction)
 {
-	// Reset direction if nothing active/selected
 	if(ID.empty())
 	{
 		direction = 1;
 	}
 
-	// Update lamp highlighting
 	if(!ID.empty())
 	{
 		// Check if wireframe color reached minimum
@@ -133,13 +125,11 @@ void WorldEditor::_updateLampHighlighting(const string& ID, int& direction)
 
 void WorldEditor::_updateTorchHighlighting(const string& ID, int& direction)
 {
-	// Reset direction if nothing active/selected
 	if(ID.empty())
 	{
 		direction = 1;
 	}
 
-	// Update torch highlighting
 	if(!ID.empty())
 	{
 		// Check if wireframe color reached minimum
@@ -166,13 +156,11 @@ void WorldEditor::_updateTorchHighlighting(const string& ID, int& direction)
 
 void WorldEditor::_updateCameraHighlighting(const string& ID, int& direction)
 {
-	// Reset direction if nothing active/selected
 	if(ID.empty())
 	{
 		direction = 1;
 	}
 
-	// Update reflection highlighting
 	if(!ID.empty())
 	{
 		// Check if wireframe color reached minimum

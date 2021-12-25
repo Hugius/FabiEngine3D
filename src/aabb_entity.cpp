@@ -6,7 +6,6 @@ using std::max;
 
 void AabbEntity::updateTransformation()
 {
-	// Position target
 	if(_position != _positionTarget)
 	{
 		// Update position
@@ -28,7 +27,6 @@ void AabbEntity::updateTransformation()
 		}
 	}
 
-	// Size target
 	if(_size != _sizeTarget)
 	{
 		// Update size
@@ -54,13 +52,10 @@ void AabbEntity::updateTransformation()
 
 void AabbEntity::updateTransformationMatrix()
 {
-	// Translation
 	mat44 translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, _position.z);
 
-	// Scaling
 	mat44 scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, _size.z);
 
-	// Final matrix
 	_transformationMatrix = (translationMatrix * scalingMatrix);
 }
 
@@ -201,7 +196,7 @@ const string& AabbEntity::getParentEntityID() const
 {
 	return _parentEntityID;
 }
- 
+
 const AabbParentEntityType AabbEntity::getParentEntityType() const
 {
 	return _parentEntityType;

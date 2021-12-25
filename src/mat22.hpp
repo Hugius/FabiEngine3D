@@ -14,15 +14,12 @@ struct mat22 final
 	mat22(const float& value);
 	mat22(const float& m00, const float& m01, const float& m10, const float& m11);
 
-	// MAT44
 	const mat22 operator+(const mat22& other) const;
 	const mat22 operator-(const mat22& other) const;
 	const mat22 operator*(const mat22& other) const;
 
-	// FVEC2
 	const fvec2 operator*(const fvec2& other) const;
 
-	// MISCELLANEOUS
 	union
 	{
 		float m[2][2];

@@ -8,7 +8,6 @@ void FabiEngine3D::sound3d_create(const string& ID, const string& audioPath)
 
 void FabiEngine3D::sound3d_delete(const string& ID)
 {
-	// Check if chunk exists
 	if(_core->_sound3dManager.isSoundExisting(ID))
 	{
 		// Stop before deleting
@@ -18,16 +17,13 @@ void FabiEngine3D::sound3d_delete(const string& ID)
 		}
 	}
 
-	// Delete sound
 	_core->_sound3dManager.deleteSound(ID);
 }
 
 void FabiEngine3D::sound3d_deleteAll()
 {
-	// Stop before deleting
 	sound3d_stopAll();
 
-	// Delete sounds
 	_core->_sound3dManager.deleteSounds();
 }
 

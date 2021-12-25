@@ -23,16 +23,12 @@ out vec3 f_position;
 
 void main()
 {
-	// Variable for position altering
 	vec3 newPosition = v_pos;
 
-	// Set height
 	newPosition.y = u_height;
 
-	// Pre-calculate UV out variable
 	f_uv = (v_uv * u_textureRepeat);
 
-	// Vertex water waves
 	if (u_hasDisplacementMap)
 	{
 		// Get size of 1 displacement map texel
@@ -45,14 +41,11 @@ void main()
 		newPosition.y += (heightPercentage * u_waveHeight);
 	}
 
-	// Camera spaces
 	vec4 worldSpacePosition = vec4(newPosition, 1.0f);
 	vec4 clipSpacePosition  = u_projectionMatrix * u_viewMatrix * vec4(newPosition, 1.0f);
 
-	// GLSL variables
 	gl_Position = clipSpacePosition;
 
-	// Out variables
 	f_position  = worldSpacePosition.xyz;
 	f_clip = clipSpacePosition;
 }

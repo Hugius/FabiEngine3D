@@ -3,10 +3,8 @@
 
 void SkyEditor::_updateMainMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "skyEditorMenuMain")
 	{
 		// Button management
@@ -60,10 +58,8 @@ void SkyEditor::_updateMainMenu()
 
 void SkyEditor::_updateChoiceMenu()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// Screen management
 	if(screen->getID() == "skyEditorMenuChoice")
 	{
 		// Button management

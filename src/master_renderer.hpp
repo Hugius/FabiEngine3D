@@ -30,7 +30,6 @@ class MasterRenderer final
 public:
 	MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader, Camera& camera, ShadowGenerator& shadowGenerator);
 
-	// VOID
 	void update();
 	void renderEngineLogo(shared_ptr<ImageEntity> entity, shared_ptr<TextEntity> text, ivec2 viewport);
 	void renderWorld(EntityBus* entityBus);
@@ -44,7 +43,6 @@ public:
 	void reloadShadowCaptureBuffer();
 
 private:
-	// VOID
 	void _updateMotionBlur();
 	void _updateLensFlare();
 	void _captureCubeReflections();
@@ -69,11 +67,9 @@ private:
 	void _renderCursor();
 	void _renderDebugScreens();
 
-	// FLOAT
 	float _cameraYawDifference = 0.0f;
 	float _cameraPitchDifference = 0.0f;
 
-	// MISCELLANEOUS
 	Camera& _camera;
 	Timer& _timer;
 	RenderBus& _renderBus;

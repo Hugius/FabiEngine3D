@@ -8,7 +8,6 @@ using std::max;
 
 void BillboardEntity::updateTransformation()
 {
-	// Position target
 	if(_position != _positionTarget)
 	{
 		// Update position
@@ -30,7 +29,6 @@ void BillboardEntity::updateTransformation()
 		}
 	}
 
-	// Rotation target
 	if(_rotation != _rotationTarget)
 	{
 		// Update rotation
@@ -60,7 +58,6 @@ void BillboardEntity::updateTransformation()
 		}
 	}
 
-	// Size target
 	if(_size != _sizeTarget)
 	{
 		// Update size
@@ -82,29 +79,23 @@ void BillboardEntity::updateTransformation()
 
 void BillboardEntity::updateTransformationMatrix()
 {
-	// Identity matrix
 	_transformationMatrix = mat44(1.0f);
 
-	// Translation matrix
 	mat44 translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, _position.z);
 	_transformationMatrix = (_transformationMatrix * translationMatrix);
 
-	// Rotation origin matrix - translate
 	mat44 rotationOriginMatrix = Math::createTranslationMatrix(0.0f, (_size.y / 2.0f), 0.0f);
 	_transformationMatrix = (_transformationMatrix * rotationOriginMatrix);
 
-	// Rotation matrix
 	mat44 rotationMatrix = Math::createRotationMatrix(
 		Math::convertToRadians(_rotation.x),
 		Math::convertToRadians(_rotation.y),
 		Math::convertToRadians(_rotation.z), DirectionOrder::YXZ);
 	_transformationMatrix = (_transformationMatrix * rotationMatrix);
 
-	// Rotation origin matrix - translate back
 	rotationOriginMatrix = Math::createTranslationMatrix(0.0f, -(_size.y / 2.0f), 0.0f);
 	_transformationMatrix = (_transformationMatrix * rotationOriginMatrix);
 
-	// Scaling matrix
 	mat44 scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, 1.0f);
 	_transformationMatrix = (_transformationMatrix * scalingMatrix);
 }

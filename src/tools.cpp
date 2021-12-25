@@ -24,14 +24,12 @@ using std::chrono::system_clock;
 
 const vector<string> Tools::getFilesFromDirectory(const string& path)
 {
-	// Error checking
 	if(!isDirectoryExisting(path))
 	{
 		Logger::throwError("Tools::getFilesFromDirectory");
 		return {};
 	}
 
-	// Retrieve files
 	vector<string> fileNames;
 	for(const auto& entry : directory_iterator(path))
 	{
@@ -44,14 +42,12 @@ const vector<string> Tools::getFilesFromDirectory(const string& path)
 
 const vector<string> Tools::getDirectoriesFromDirectory(const string& path)
 {
-	// Error checking
 	if(!isDirectoryExisting(path))
 	{
 		Logger::throwError("Tools::getDirectoriesFromDirectory");
 		return {};
 	}
 
-	// Retrieve directories
 	vector<string> directoryNames;
 	for(const auto& entry : directory_iterator(path))
 	{
@@ -90,23 +86,17 @@ const string Tools::vec2str(fvec4 vec)
 
 const string Tools::getRootDirectoryPath()
 {
-	// Temporary values
 	char buffer[256];
 	size_t len = sizeof(buffer);
 
-	// Get executable path
 	GetModuleFileName(nullptr, buffer, static_cast<DWORD>(len));
 
-	// Create final string
 	string rootDirectoryPath = buffer;
 
-	// Convert to absolute path if path is relative
 	rootDirectoryPath = absolute(rootDirectoryPath).string();
 
-	// Cut to engine root directory
 	rootDirectoryPath = rootDirectoryPath.substr(0, (rootDirectoryPath.size() - string("binaries\\fe3d.exe").size()));
 
-	// Return
 	return rootDirectoryPath;
 }
 
@@ -122,12 +112,10 @@ const long long Tools::getTimeSinceEpochMS()
 
 const string Tools::chooseExplorerFile(const string& startingDirectory, const string& fileType)
 {
-	// Temporary values
 	string filter = fileType;
 	filter.push_back('\0');
 	filter += "*." + fileType + '\0';
 
-	// Open file explorer
 	OPENFILENAME ofn;
 	char pathBuffer[256] = {};
 	char titleBuffer[100] = {};
@@ -146,22 +134,18 @@ const string Tools::chooseExplorerFile(const string& startingDirectory, const st
 	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 	GetOpenFileName(&ofn);
 
-	// Return chosen file
 	return ofn.lpstrFile;
 }
 
 const string Tools::chooseExplorerDirectory(const string& startingDirectory)
 {
-	// Compose brose info
 	BROWSEINFO browseInfo = {};
 	browseInfo.ulFlags = (BIF_RETURNONLYFSDIRS | BIF_NEWDIALOGSTYLE);
 	browseInfo.lpfn = nullptr;
 	browseInfo.lParam = LPARAM(startingDirectory.c_str());
 
-	// Open file explorer
 	LPITEMIDLIST pidl = SHBrowseForFolder(&browseInfo);
 
-	// Check if user selected a directory
 	if(pidl != 0)
 	{
 		// Extract directory path
@@ -180,7 +164,6 @@ const string Tools::chooseExplorerDirectory(const string& startingDirectory)
 		return directoryPath;
 	}
 
-	// No directory chosen
 	return "";
 }
 
@@ -201,7 +184,6 @@ void Tools::createDirectory(const string& path)
 
 void Tools::copyDirectory(const string& fromPath, const string& toPath)
 {
-	// Error checking
 	if(!isDirectoryExisting(fromPath))
 	{
 		Logger::throwError("Tools::copyDirectory");
@@ -214,7 +196,6 @@ void Tools::copyDirectory(const string& fromPath, const string& toPath)
 
 void Tools::copyFile(const string& fromPath, const string& toPath)
 {
-	// Error checking
 	if(!isFileExisting(fromPath))
 	{
 		Logger::throwError("Tools::copyFile");
@@ -227,7 +208,6 @@ void Tools::copyFile(const string& fromPath, const string& toPath)
 
 void Tools::renameDirectory(const string& oldPath, const string& newPath)
 {
-	// Error checking
 	if(!isDirectoryExisting(oldPath))
 	{
 		Logger::throwError("Tools::renameDirectory");
@@ -239,7 +219,6 @@ void Tools::renameDirectory(const string& oldPath, const string& newPath)
 
 void Tools::renameFile(const string& oldPath, const string& newPath)
 {
-	// Error checking
 	if(!isFileExisting(oldPath))
 	{
 		Logger::throwError("Tools::renameFile");
@@ -251,7 +230,6 @@ void Tools::renameFile(const string& oldPath, const string& newPath)
 
 void Tools::deleteDirectory(const string& path)
 {
-	// Error checking
 	if(!isDirectoryExisting(path))
 	{
 		Logger::throwError("Tools::deleteDirectory");
@@ -263,7 +241,6 @@ void Tools::deleteDirectory(const string& path)
 
 void Tools::deleteFile(const string& path)
 {
-	// Error checking
 	if(!isFileExisting(path))
 	{
 		Logger::throwError("Tools::deleteFile");

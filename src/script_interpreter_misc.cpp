@@ -52,37 +52,37 @@ const bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, c
 	const unsigned int currentLineScopeDepth = (countedSpaces / SPACES_PER_INDENT);
 	const bool isScopeDepthInvalid = (currentLineScopeDepth != (scopeDepth + static_cast<int>(_mustIgnoreDeeperScope)));
 
-	if(_hasPassedLoopStatement && isScopeDepthInvalid) // Passed LOOP statement
+	if(_hasPassedLoopStatement && isScopeDepthInvalid)
 	{
 		_throwScriptError("incorrect indentation after LOOP statement!");
 		return false;
 	}
-	else if(_hasPassedIfStatement && isScopeDepthInvalid) // Passed IF statement
+	else if(_hasPassedIfStatement && isScopeDepthInvalid)
 	{
 		_throwScriptError("incorrect indentation after IF statement!");
 		return false;
 	}
-	else if(_hasPassedElifStatement && isScopeDepthInvalid) // Passed ELIF statement
+	else if(_hasPassedElifStatement && isScopeDepthInvalid)
 	{
 		_throwScriptError("incorrect indentation after ELIF statement!");
 		return false;
 	}
-	else if(_hasPassedElseStatement && isScopeDepthInvalid) // Passed ELSE statement
+	else if(_hasPassedElseStatement && isScopeDepthInvalid)
 	{
 		_throwScriptError("incorrect indentation after ELSE statement!");
 		return false;
 	}
-	else if(currentLineScopeDepth < scopeDepth) // End of current scope
+	else if(currentLineScopeDepth < scopeDepth)
 	{
 		scopeDepth = currentLineScopeDepth;
 	}
-	else if(currentLineScopeDepth > scopeDepth) // Outside of current scope
+	else if(currentLineScopeDepth > scopeDepth)
 	{
-		if(_mustIgnoreDeeperScope) // Skip current line
+		if(_mustIgnoreDeeperScope)
 		{
 			return false;
 		}
-		else // Unnecessary indentation
+		else
 		{
 			_throwScriptError("unnecessary indentation before statement!");
 			return false;

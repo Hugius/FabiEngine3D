@@ -34,11 +34,11 @@ const bool GuiOverlay::checkValueForm(const string& ID, unsigned int& value, con
 		forbiddenValueStrings.push_back(to_string(forbiddenValue));
 	}
 
-	int tempValue = static_cast<int>(value); // Dereference
-	string valueString = to_string(tempValue); // Convert to string
-	bool result = _checkValueForm(ID, valueString, forbiddenValueStrings); // Execute function
-	value = result ? static_cast<unsigned int>(stoi(valueString)) : value; // Apply to value
-	return result; // Return
+	int tempValue = static_cast<int>(value);
+	string valueString = to_string(tempValue);
+	bool result = _checkValueForm(ID, valueString, forbiddenValueStrings);
+	value = result ? static_cast<unsigned int>(stoi(valueString)) : value;
+	return result;
 }
 
 const bool GuiOverlay::checkValueForm(const string& ID, int& value, const vector<int>& forbiddenValues)
@@ -49,11 +49,11 @@ const bool GuiOverlay::checkValueForm(const string& ID, int& value, const vector
 		forbiddenValueStrings.push_back(to_string(forbiddenValue));
 	}
 
-	int tempValue = value; // Dereference
-	string valueString = to_string(tempValue); // Convert to string
-	bool result = _checkValueForm(ID, valueString, forbiddenValueStrings); // Execute function
-	value = result ? stoi(valueString) : value; // Apply to value
-	return result; // Return
+	int tempValue = value;
+	string valueString = to_string(tempValue);
+	bool result = _checkValueForm(ID, valueString, forbiddenValueStrings);
+	value = result ? stoi(valueString) : value;
+	return result;
 }
 
 const bool GuiOverlay::checkValueForm(const string& ID, float& value, const vector<float>& forbiddenValues)
@@ -64,11 +64,11 @@ const bool GuiOverlay::checkValueForm(const string& ID, float& value, const vect
 		forbiddenValueStrings.push_back(to_string(static_cast<int>(forbiddenValue)));
 	}
 
-	int tempValue = static_cast<int>(value); // Dereference
-	string valueString = to_string(tempValue); // Convert to string
-	bool result = _checkValueForm(ID, valueString, forbiddenValueStrings); // Execute function
-	value = result ? static_cast<float>(stoi(valueString)) : value; // Apply to value
-	return result; // Return
+	int tempValue = static_cast<int>(value);
+	string valueString = to_string(tempValue);
+	bool result = _checkValueForm(ID, valueString, forbiddenValueStrings);
+	value = result ? static_cast<float>(stoi(valueString)) : value;
+	return result;
 }
 
 const bool GuiOverlay::checkValueForm(const string& ID, double& value, const vector<double>& forbiddenValues)
@@ -79,11 +79,11 @@ const bool GuiOverlay::checkValueForm(const string& ID, double& value, const vec
 		forbiddenValueStrings.push_back(to_string(static_cast<int>(forbiddenValue)));
 	}
 
-	int tempValue = static_cast<int>(value); // Dereference
-	string valueString = to_string(tempValue); // Convert to string
-	bool result = _checkValueForm(ID, valueString, forbiddenValueStrings); // Execute function
-	value = result ? static_cast<double>(stoi(valueString)) : value; // Apply to value
-	return result; // Return
+	int tempValue = static_cast<int>(value);
+	string valueString = to_string(tempValue);
+	bool result = _checkValueForm(ID, valueString, forbiddenValueStrings);
+	value = result ? static_cast<double>(stoi(valueString)) : value;
+	return result;
 }
 
 const bool GuiOverlay::checkValueForm(const string& ID, string& value, const vector<string>& forbiddenValues)
@@ -144,7 +144,7 @@ const bool GuiOverlay::_checkValueForm(const string& ID, string& valueString, co
 
 		if(done || entered || cancelled)
 		{
-			if(done || entered) // Pressed done or ENTER
+			if(done || entered)
 			{
 				auto content = getWriteField(ID)->getTextContent();
 

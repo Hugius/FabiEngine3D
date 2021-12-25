@@ -177,7 +177,7 @@ void BillboardEditor::_updateBillboardChoosing()
 			_isDeletingBillboard = false;
 			_gui.getOverlay()->deleteChoiceForm("billboardList");
 		}
-		else // Nothing hovered
+		else
 		{
 			_hoveredBillboardID = "";
 		}

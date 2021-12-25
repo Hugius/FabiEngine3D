@@ -58,9 +58,9 @@ void ScriptEditor::_updateTextWriter()
 
 		if(_activeActionKey == InputType::NONE)
 		{
-			for(InputType actionKey : ACTION_KEYS) // Check all possible action keys
+			for(InputType actionKey : ACTION_KEYS)
 			{
-				if(_fe3d.input_isKeyPressed(actionKey)) // Check if action key is pressed
+				if(_fe3d.input_isKeyPressed(actionKey))
 				{
 					_activeActionKey = actionKey;
 					break;
@@ -74,7 +74,7 @@ void ScriptEditor::_updateTextWriter()
 				_isContinuousActionAllowed = true;
 				_passedFrames = 0;
 			}
-			else // Keep waiting
+			else
 			{
 				_passedFrames++;
 			}
@@ -100,11 +100,11 @@ void ScriptEditor::_updateTextWriter()
 				}
 				else
 				{
-					cursorCharIndex = hoveredCharacterIndex; // Place cursor at clicked position
+					cursorCharIndex = hoveredCharacterIndex;
 				}
 			}
 		}
-		else if(_activeActionKey == InputType::KEY_ENTER) // Add new line
+		else if(_activeActionKey == InputType::KEY_ENTER)
 		{
 			if(_firstSelectedLineIndex == -1)
 			{
@@ -132,7 +132,7 @@ void ScriptEditor::_updateTextWriter()
 				}
 			}
 		}
-		else if(_activeActionKey == InputType::KEY_LEFT) // Left arrow key
+		else if(_activeActionKey == InputType::KEY_LEFT)
 		{
 			if(_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
@@ -140,13 +140,13 @@ void ScriptEditor::_updateTextWriter()
 				{
 					_isSingleActionAllowed = false;
 
-					if(cursorCharIndex > 0) // If cursor somewhere on the line
+					if(cursorCharIndex > 0)
 					{
 						cursorCharIndex--;
 					}
-					else // If cursor is at the beginning of the line
+					else
 					{
-						if(cursorLineIndex > 0) // Check if trying to move cursor out of screen
+						if(cursorLineIndex > 0)
 						{
 							cursorLineIndex--;
 							cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
@@ -155,7 +155,7 @@ void ScriptEditor::_updateTextWriter()
 				}
 			}
 		}
-		else if(_activeActionKey == InputType::KEY_RIGHT) // Right arrow key
+		else if(_activeActionKey == InputType::KEY_RIGHT)
 		{
 			if(_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
@@ -167,7 +167,7 @@ void ScriptEditor::_updateTextWriter()
 					{
 						cursorCharIndex++;
 					}
-					else // If cursor is at the end of the line
+					else
 					{
 						if(cursorLineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
 						{
@@ -178,7 +178,7 @@ void ScriptEditor::_updateTextWriter()
 				}
 			}
 		}
-		else if(_activeActionKey == InputType::KEY_UP) // Up arrow key
+		else if(_activeActionKey == InputType::KEY_UP)
 		{
 			if(_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
@@ -186,7 +186,7 @@ void ScriptEditor::_updateTextWriter()
 				{
 					_isSingleActionAllowed = false;
 
-					if(cursorLineIndex > 0) // Check if trying to move cursor out of screen
+					if(cursorLineIndex > 0)
 					{
 						cursorLineIndex--;
 
@@ -198,7 +198,7 @@ void ScriptEditor::_updateTextWriter()
 				}
 			}
 		}
-		else if(_activeActionKey == InputType::KEY_DOWN) // Down arrow key
+		else if(_activeActionKey == InputType::KEY_DOWN)
 		{
 			if(_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
@@ -218,7 +218,7 @@ void ScriptEditor::_updateTextWriter()
 				}
 			}
 		}
-		else // Other keypresses
+		else
 		{
 			string currentLineText = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex);
 
@@ -232,17 +232,17 @@ void ScriptEditor::_updateTextWriter()
 						{
 							newCharacters += c;
 						}
-						else // Non-spacebar
+						else
 						{
 							if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 							{
 								newCharacters += (c - 32);
 							}
-							else if((GetKeyState(VK_CAPITAL) & 0x0001) != 0) // CAPSLOCK
+							else if((GetKeyState(VK_CAPITAL) & 0x0001) != 0)
 							{
 								newCharacters += (c - 32);
 							}
-							else // Lowercase character
+							else
 							{
 								newCharacters += c;
 							}
@@ -326,18 +326,18 @@ void ScriptEditor::_updateTextWriter()
 									}
 								}
 							}
-							else if(cursorCharIndex > 0 && _fe3d.input_isKeyDown(InputType::KEY_BACKSPACE)) // Remove previous character from current line
+							else if(cursorCharIndex > 0 && _fe3d.input_isKeyDown(InputType::KEY_BACKSPACE))
 							{
 								cursorCharIndex--;
 								currentLineText.erase(currentLineText.begin() + cursorCharIndex);
 								textHasChanged = true;
-								_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, currentLineText); // Save new line text
+								_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, currentLineText);
 							}
-							else if(_fe3d.input_isKeyDown(InputType::KEY_DELETE)) // Remove next character from current line
+							else if(_fe3d.input_isKeyDown(InputType::KEY_DELETE))
 							{
 								currentLineText.erase(currentLineText.begin() + cursorCharIndex);
 								textHasChanged = true;
-								_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, currentLineText); // Save new line text
+								_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, currentLineText);
 							}
 						}
 					}
@@ -350,7 +350,7 @@ void ScriptEditor::_updateTextWriter()
 				{
 					if(!newCharacters.empty())
 					{
-						if(currentLineText.empty() || cursorCharIndex == currentLineText.size()) // First or last character in line
+						if(currentLineText.empty() || cursorCharIndex == currentLineText.size())
 						{
 							for(const auto& character : newCharacters)
 							{
@@ -358,7 +358,7 @@ void ScriptEditor::_updateTextWriter()
 								cursorCharIndex++;
 							}
 						}
-						else // Inbetween character in line
+						else
 						{
 							for(const auto& character : newCharacters)
 							{
@@ -403,12 +403,12 @@ void ScriptEditor::_updateTextWriter()
 		}
 
 		fvec3 position;
-		if(cursorCharIndex == 0) // Default line position
+		if(cursorCharIndex == 0)
 		{
 			fvec3 linePosition = _fe3d.billboard_getPosition(to_string(cursorLineIndex));
 			position = fvec3(SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET - HORIZONTAL_CHARACTER_OFFSET, linePosition.y, linePosition.z);
 		}
-		else // Mid-text position
+		else
 		{
 			position = _fe3d.billboard_getPosition(to_string(cursorLineIndex) + "_" + to_string(cursorCharIndex - 1));
 		}

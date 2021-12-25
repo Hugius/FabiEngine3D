@@ -83,14 +83,14 @@ void Animation3dEditor::_updateMiscellaneous()
 				{
 					for(const auto& partID : currentAnimation->getPartIDs())
 					{
-						if(partID.empty()) // Base transformation
+						if(partID.empty())
 						{
 							_fe3d.model_setBasePosition(currentAnimation->getPreviewModelID(), fvec3(0.0f));
 							_fe3d.model_setBaseRotationOrigin(currentAnimation->getPreviewModelID(), fvec3(0.0f));
 							_fe3d.model_setBaseRotation(currentAnimation->getPreviewModelID(), fvec3(0.0f));
 							_fe3d.model_setBaseSize(currentAnimation->getPreviewModelID(), currentAnimation->getInitialSize());
 						}
-						else // Part transformation
+						else
 						{
 							_fe3d.model_setPartPosition(currentAnimation->getPreviewModelID(), partID, fvec3(0.0f));
 							_fe3d.model_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, fvec3(0.0f));
@@ -168,7 +168,7 @@ void Animation3dEditor::_updateMiscellaneous()
 		auto partID = (_hoveredPartID.empty() ? _currentPartID : _hoveredPartID);
 		if(partID.empty())
 		{
-			_selectedPartHighlightDirection = 1; // Reset direction
+			_selectedPartHighlightDirection = 1;
 		}
 		else
 		{

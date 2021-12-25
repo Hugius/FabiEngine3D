@@ -98,9 +98,9 @@ void GuiScrollingList::_updateHovering()
 	fvec2 listPosition = _fe3d.image_getPosition(_entityID);
 	fvec2 listSize = _fe3d.image_getSize(_entityID);
 
-	if(cursorPosition.x > listPosition.x - (listSize.x / 2.0f) && cursorPosition.x < listPosition.x + (listSize.x / 2.0f)) // X axis
+	if(cursorPosition.x > listPosition.x - (listSize.x / 2.0f) && cursorPosition.x < listPosition.x + (listSize.x / 2.0f))
 	{
-		if(cursorPosition.y > listPosition.y - (listSize.y / 2.0f) && cursorPosition.y < listPosition.y + (listSize.y / 2.0f)) // Y axis
+		if(cursorPosition.y > listPosition.y - (listSize.y / 2.0f) && cursorPosition.y < listPosition.y + (listSize.y / 2.0f))
 		{
 			_isHovered = true;
 		}
@@ -140,7 +140,7 @@ void GuiScrollingList::_updateScrolling()
 		float edgeOffset = (_fe3d.image_getSize(_entityID).y / 2.0f);
 		if(lastButtonHeight >= listHeight - edgeOffset + (_charSize.y / 3.0f))
 		{
-			if(_scrollingSpeed > 0.0f) // Only if trying to scroll DOWN
+			if(_scrollingSpeed > 0.0f)
 			{
 				_scrollingSpeed = 0.0f;
 			}
@@ -148,7 +148,7 @@ void GuiScrollingList::_updateScrolling()
 
 		if(firstButtonHeight <= listHeight + edgeOffset - (_charSize.y / 3.0f))
 		{
-			if(_scrollingSpeed < 0.0f) // Only if trying to scroll UP
+			if(_scrollingSpeed < 0.0f)
 			{
 				_scrollingSpeed = 0.0f;
 			}

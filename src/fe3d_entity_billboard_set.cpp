@@ -26,9 +26,9 @@ void FabiEngine3D::billboard_delete(const string& ID)
 
 void FabiEngine3D::billboard_deleteGroup(const string& ID)
 {
-	for(const auto& [keyID, entity] : _core->_billboardEntityManager.getEntities()) // Iterate through billboard entities
+	for(const auto& [keyID, entity] : _core->_billboardEntityManager.getEntities())
 	{
-		if(entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
+		if(entity->getID().size() >= ID.size())
 		{
 			auto subString = entity->getID().substr(0, ID.size());
 

@@ -68,15 +68,15 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 {
 	auto window = _gui.getViewport("bottom")->getWindow("console");
 	auto screen = window->getScreen("main");
-	const float timePartOffset = CHAR_SIZE.x * static_cast<float>(TIME_PART_LENGTH) * 2.0f; // Offset from time part
-	const float separatorPartOffset = CHAR_SIZE.x * static_cast<float>(SEPARATOR_PART_LENGTH) * 2.0f; // Offset from separator part
+	const float timePartOffset = CHAR_SIZE.x * static_cast<float>(TIME_PART_LENGTH) * 2.0f;
+	const float separatorPartOffset = CHAR_SIZE.x * static_cast<float>(SEPARATOR_PART_LENGTH) * 2.0f;
 	const fvec2 minPosition = fvec2(-1.0f, window->getInitialPosition().y - (window->getInitialSize().y / 2.0f));
 	const fvec2 maxPosition = fvec2(0.995f, window->getInitialPosition().y + (window->getInitialSize().y / 2.0f));
 
 	string newID = to_string(_consoleMessageQueue.size());
 	_consoleMessageQueue.push_back(make_pair(newID, newMessage));
 
-	reverse(_consoleMessageQueue.begin(), _consoleMessageQueue.end()); // Console prints reversed
+	reverse(_consoleMessageQueue.begin(), _consoleMessageQueue.end());
 	unsigned int index = 0;
 	for(const auto& [ID, message] : _consoleMessageQueue)
 	{
@@ -100,9 +100,9 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 
 		const fvec3 messagePartColor = ((typeString == "[Warn]") ? fvec3(1.0f, 0.0f, 0.0f) : (typeString == "[Debug]") ? fvec3(1.0f, 0.25f, 0.0f) : fvec3(1.0f));
 
-		const string timePartText = message.substr(typePartLength, TIME_PART_LENGTH); // Time text" [HH:MM::SS]
-		const string separatorPartText = message.substr((typePartLength + TIME_PART_LENGTH), SEPARATOR_PART_LENGTH); // Seperator part
-		string messagePartText = message.substr((typePartLength + TIME_PART_LENGTH) + SEPARATOR_PART_LENGTH); // Message part
+		const string timePartText = message.substr(typePartLength, TIME_PART_LENGTH);
+		const string separatorPartText = message.substr((typePartLength + TIME_PART_LENGTH), SEPARATOR_PART_LENGTH);
+		string messagePartText = message.substr((typePartLength + TIME_PART_LENGTH) + SEPARATOR_PART_LENGTH);
 
 		vector<string> messageParts;
 		BEGIN:;
@@ -122,14 +122,14 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 
 		if(messageParts.size() == 1)
 		{
-			if(alreadyExisting) // Previous message
+			if(alreadyExisting)
 			{
 				_fe3d.text_setPosition(screen->getTextField(ID + "_time")->getEntityID(),
 									   screen->convertPosition(fvec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
 				_fe3d.text_setPosition(screen->getTextField(ID + "_separator")->getEntityID(),
 									   screen->convertPosition(fvec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
 			}
-			else // New message
+			else
 			{
 				screen->createTextField(ID + "_time", fvec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)), fvec2(0.0f), "", timePartColor, false, false);
 				string timeID = screen->getTextField(ID + "_time")->getEntityID();
@@ -144,7 +144,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 				_fe3d.text_setMaxPosition(separatorID, maxPosition);
 			}
 		}
-		else // Console prints multiple lines reversed
+		else
 		{
 			reverse(messageParts.begin(), messageParts.end());
 		}
@@ -155,12 +155,12 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 
 			string TextFieldID = ID + "_msg_" + to_string(i);
 
-			if(alreadyExisting) // Previous message
+			if(alreadyExisting)
 			{
 				_fe3d.text_setPosition(screen->getTextField(TextFieldID)->getEntityID(),
 									   screen->convertPosition(fvec2(-1.0f + timePartOffset + separatorPartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
 			}
-			else // New message
+			else
 			{
 				screen->createTextField(TextFieldID, fvec2(-1.0f + timePartOffset + separatorPartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)),
 										fvec2(0.0f), "", messagePartColor, false, false);
@@ -172,14 +172,14 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 
 			if((messageParts.size() > 1) && i == (messageParts.size() - 1))
 			{
-				if(alreadyExisting) // Previous message
+				if(alreadyExisting)
 				{
 					_fe3d.text_setPosition(screen->getTextField(ID + "_time")->getEntityID(),
 										   screen->convertPosition(fvec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
 					_fe3d.text_setPosition(screen->getTextField(ID + "_separator")->getEntityID(),
 										   screen->convertPosition(fvec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
 				}
-				else // New message
+				else
 				{
 					screen->createTextField(ID + "_time", fvec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)), fvec2(0.0f), "", timePartColor, false, false);
 					string timeID = screen->getTextField(ID + "_time")->getEntityID();
@@ -198,7 +198,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 			index++;
 		}
 	}
-	reverse(_consoleMessageQueue.begin(), _consoleMessageQueue.end()); // Set order back to normal
+	reverse(_consoleMessageQueue.begin(), _consoleMessageQueue.end());
 }
 
 void BottomViewportController::_deleteConsoleMessage(const string& ID)

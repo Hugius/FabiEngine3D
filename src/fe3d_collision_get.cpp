@@ -3,7 +3,7 @@
 
 const string FabiEngine3D::collision_checkCameraWithAny() const
 {
-	for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities()) // Iterate through AABB entities
+	for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
 		if(entity->hasCollided())
 		{
@@ -42,7 +42,7 @@ const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfI
 
 	for(const auto& [keyID, other] : _core->_aabbEntityManager.getEntities())
 	{
-		if(other->getID().size() >= otherID.size()) // Check if entity ID is at least the size of group ID
+		if(other->getID().size() >= otherID.size())
 		{
 			if(other->getID().substr(0, otherID.size()) != otherID)
 			{

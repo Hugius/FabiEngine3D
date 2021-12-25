@@ -6,7 +6,7 @@ void WorldEditor::_updateModelPlacing()
 {
 	if(!_currentTemplateModelID.empty())
 	{
-		if(_fe3d.terrain_getSelectedID().empty()) // Placing without terrain
+		if(_fe3d.terrain_getSelectedID().empty())
 		{
 			auto newPosition = _fe3d.model_getBasePosition(_currentTemplateModelID);
 
@@ -38,7 +38,7 @@ void WorldEditor::_updateModelPlacing()
 				_currentTemplateModelID = "";
 			}
 		}
-		else // Placing on terrain
+		else
 		{
 			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
 			{
@@ -70,7 +70,7 @@ void WorldEditor::_updateModelPlacing()
 
 						_copyTemplateModel(newID, _currentTemplateModelID, newPosition, false);
 					}
-					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
+					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE))
 					{
 						_fe3d.model_setVisible(_currentTemplateModelID, false);
 						_fe3d.text_setVisible(_gui.getOverlay()->getTextField("modelID")->getEntityID(), false);

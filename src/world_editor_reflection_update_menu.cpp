@@ -91,7 +91,7 @@ void WorldEditor::_updateReflectionChoosingMenu()
 					{
 						_activateReflection(reflectionID);
 					}
-					else // Hovering (selection)
+					else
 					{
 						_dontResetSelectedCamera = true;
 						_selectReflection(reflectionID);

@@ -258,7 +258,7 @@ const vector<string> FabiEngine3D::model_getIDs() const
 {
 	vector<string> result;
 
-	for(const auto& [keyID, entity] : _core->_modelEntityManager.getEntities()) // Iterate through model entities
+	for(const auto& [keyID, entity] : _core->_modelEntityManager.getEntities())
 	{
 		result.push_back(entity->getID());
 	}
@@ -270,11 +270,11 @@ const vector<string> FabiEngine3D::model_getGroupIDs(const string& ID) const
 {
 	vector<string> result;
 
-	for(const auto& [keyID, entity] : _core->_modelEntityManager.getEntities()) // Iterate through model entities
+	for(const auto& [keyID, entity] : _core->_modelEntityManager.getEntities())
 	{
-		if(entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
+		if(entity->getID().size() >= ID.size())
 		{
-			if(entity->getID().substr(0, ID.size()) == ID) // If entity matches ID
+			if(entity->getID().substr(0, ID.size()) == ID)
 			{
 				result.push_back(entity->getID());
 			}

@@ -127,7 +127,7 @@ void WorldEditor::_updateSoundChoosingMenu()
 					{
 						_activateSound(soundID);
 					}
-					else // Hovering (selection)
+					else
 					{
 						_dontResetSelectedSpeaker = true;
 						_selectSound(soundID);

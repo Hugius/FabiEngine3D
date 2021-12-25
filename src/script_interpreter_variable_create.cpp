@@ -56,7 +56,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 	typeIndex += static_cast<unsigned int>(isConstant ? (CONST_KEYWORD.size() + 1) : 0);
 	for(const auto& c : scriptLine.substr(typeIndex))
 	{
-		if(c == ' ') // Current word ended
+		if(c == ' ')
 		{
 			wordIndex++;
 
@@ -65,7 +65,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 				break;
 			}
 		}
-		else // Add to word
+		else
 		{
 			words[wordIndex] += c;
 		}

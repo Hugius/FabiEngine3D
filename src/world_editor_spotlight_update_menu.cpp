@@ -93,7 +93,7 @@ void WorldEditor::_updateSpotlightChoosingMenu()
 					{
 						_activateSpotlight(spotlightID);
 					}
-					else // Hovering (selection)
+					else
 					{
 						_dontResetSelectedTorch = true;
 						_selectSpotlight(spotlightID);

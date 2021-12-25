@@ -87,27 +87,27 @@ public:
 private:
 	inline static void _printPrefix(MessageType type)
 	{
-		HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE); // Console access
-		ostringstream oss; // For message queue
+		HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+		ostringstream oss;
 
 		char timeBuffer[64];
 		auto t = time(nullptr);
 		auto foo = *localtime(&t);
 		strftime(timeBuffer, 64, "%H:%M:%S", &foo);
 
-		SetConsoleTextAttribute(console, 6); // White
+		SetConsoleTextAttribute(console, 6);
 		cout << "[" + _level_string[static_cast<int>(type)] + "]";
 		oss << "[" + _level_string[static_cast<int>(type)] + "]";
-		SetConsoleTextAttribute(console, 12); // Red
+		SetConsoleTextAttribute(console, 12);
 		cout << "[" << timeBuffer << "]";
 		oss << "[" << timeBuffer << "]";
-		SetConsoleTextAttribute(console, 7); // Yellow
+		SetConsoleTextAttribute(console, 7);
 
-		if(type == MessageType::DEBUG || type == MessageType::ERR) // 5 chars
+		if(type == MessageType::DEBUG || type == MessageType::ERR)
 		{
 			cout << "> ";
 		}
-		else // 4 chars
+		else
 		{
 			cout << " > ";
 		}

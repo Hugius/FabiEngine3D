@@ -46,36 +46,36 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 		return;
 	}
 
-	if((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == BOOLEAN_KEYWORD)) // From INT to BOOL
+	if((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == BOOLEAN_KEYWORD))
 	{
 		variable.setValue(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, static_cast<bool>(variable.getValue().getInteger())));
 	}
-	else if((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == DECIMAL_KEYWORD)) // From INT to DEC
+	else if((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == DECIMAL_KEYWORD))
 	{
 		variable.setValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, static_cast<float>(variable.getValue().getInteger())));
 	}
-	else if((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == STRING_KEYWORD)) // From INT to STR
+	else if((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == STRING_KEYWORD))
 	{
 		variable.setValue(ScriptValue(_fe3d, ScriptValueType::STRING, to_string(variable.getValue().getInteger())));
 	}
-	else if((variable.getValue().getType() == ScriptValueType::DECIMAL) && (typeString == INTEGER_KEYWORD)) // From DEC to INT
+	else if((variable.getValue().getType() == ScriptValueType::DECIMAL) && (typeString == INTEGER_KEYWORD))
 	{
 		variable.setValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(variable.getValue().getDecimal())));
 	}
-	else if((variable.getValue().getType() == ScriptValueType::DECIMAL) && (typeString == STRING_KEYWORD)) // From DEC to STR
+	else if((variable.getValue().getType() == ScriptValueType::DECIMAL) && (typeString == STRING_KEYWORD))
 	{
 		variable.setValue(ScriptValue(_fe3d, ScriptValueType::STRING, to_string(variable.getValue().getDecimal())));
 	}
-	else if((variable.getValue().getType() == ScriptValueType::BOOLEAN) && (typeString == INTEGER_KEYWORD)) // From BOOL to INT
+	else if((variable.getValue().getType() == ScriptValueType::BOOLEAN) && (typeString == INTEGER_KEYWORD))
 	{
 		variable.setValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(variable.getValue().getBoolean())));
 	}
-	else if((variable.getValue().getType() == ScriptValueType::BOOLEAN) && (typeString == STRING_KEYWORD)) // From BOOL to STR
+	else if((variable.getValue().getType() == ScriptValueType::BOOLEAN) && (typeString == STRING_KEYWORD))
 	{
 		string newValue = variable.getValue().getBoolean() ? "<true>" : "<false>";
 		variable.setValue(ScriptValue(_fe3d, ScriptValueType::STRING, newValue));
 	}
-	else if((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == BOOLEAN_KEYWORD)) // From STR to BOOL
+	else if((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == BOOLEAN_KEYWORD))
 	{
 		if(!_isBooleanValue(variable.getValue().getString()))
 		{
@@ -86,7 +86,7 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 		bool newValue = (variable.getValue().getString() == "<true>") ? true : false;
 		variable.setValue(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, newValue));
 	}
-	else if((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == INTEGER_KEYWORD)) // From STR to INT
+	else if((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == INTEGER_KEYWORD))
 	{
 		if(!_isIntegerValue(variable.getValue().getString()))
 		{
@@ -96,7 +96,7 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 
 		variable.setValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(variable.getValue().getString()))));
 	}
-	else if((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == DECIMAL_KEYWORD)) // From STR to DEC
+	else if((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == DECIMAL_KEYWORD))
 	{
 		if(!_isDecimalValue(variable.getValue().getString()))
 		{

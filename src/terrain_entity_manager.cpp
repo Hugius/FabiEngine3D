@@ -115,9 +115,9 @@ void TerrainEntityManager::loadMesh(const string& ID)
 	vector<fvec2> tempUvCoords;
 	vector<fvec3> tempNormals;
 
-	for(float x = -halfSize; x < halfSize; x++) // X direction
+	for(float x = -halfSize; x < halfSize; x++)
 	{
-		for(float z = -halfSize; z < halfSize; z++) // Z direction
+		for(float z = -halfSize; z < halfSize; z++)
 		{
 			float vertexX = x;
 			float vertexY = _getPixelHeight(x + halfSize, z + halfSize, size, maxHeight, pixels);

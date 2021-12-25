@@ -22,22 +22,22 @@ void TopViewportController::_updateProjectCreating()
 				return;
 			}
 
-			if(newProjectID.find(' ') != string::npos) // ID contains spaces
+			if(newProjectID.find(' ') != string::npos)
 			{
 				Logger::throwWarning("New project name cannot contain any spaces!");
 				return;
 			}
-			else if(Tools::isDirectoryExisting(newProjectDirectoryPath)) // Project already exists
+			else if(Tools::isDirectoryExisting(newProjectDirectoryPath))
 			{
 				Logger::throwWarning("Project \"" + newProjectID + "\"" + " already exists!");
 				return;
 			}
-			else if(any_of(newProjectID.begin(), newProjectID.end(), isupper)) // ID contains capitals
+			else if(any_of(newProjectID.begin(), newProjectID.end(), isupper))
 			{
 				Logger::throwWarning("New project name cannot contain any capitals!");
 				return;
 			}
-			else // Project not existing
+			else
 			{
 				Tools::createDirectory(newProjectDirectoryPath);
 

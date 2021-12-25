@@ -25,16 +25,16 @@ const bool ScriptInterpreter::_validateListIndex(const ScriptVariable& list, uns
 
 const bool ScriptInterpreter::_validateArgumentCount(const vector<ScriptValue>& values, unsigned int count)
 {
-	if(values.size() == count) // Correct amount of arguments
+	if(values.size() == count)
 	{
 		return true;
 	}
-	else if(values.size() < count) // Not enough arguments
+	else if(values.size() < count)
 	{
 		_throwScriptError("not enough arguments!");
 		return false;
 	}
-	else // Too many arguments
+	else
 	{
 		_throwScriptError("too many arguments!");
 		return false;
@@ -193,11 +193,11 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 	}
 
 	unsigned int index = -1;
-	if(_isIntegerValue(indexString)) // Integer index
+	if(_isIntegerValue(indexString))
 	{
 		index = stoi(_limitIntegerString(indexString));
 	}
-	else // Variable index
+	else
 	{
 		auto indexVariable = (_isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString));
 

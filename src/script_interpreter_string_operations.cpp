@@ -162,7 +162,7 @@ const string ScriptInterpreter::_limitIntegerString(const string& valueString) c
 			return "-1000000000";
 		}
 	}
-	else // Positive value
+	else
 	{
 		if(valueString.size() >= 10)
 		{
@@ -185,7 +185,7 @@ const string ScriptInterpreter::_limitDecimalString(const string& valueString) c
 			return "-1000000000.0";
 		}
 	}
-	else // Positive value
+	else
 	{
 		if(intString.size() >= 10)
 		{

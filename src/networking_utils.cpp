@@ -70,7 +70,7 @@ const bool NetworkingUtils::isValidIP(const string& IP)
 const bool NetworkingUtils::isMessageReadyUDP(SOCKET socket)
 {
 	fd_set socketSet = fd_set();
-	timeval timeInterval = {0 , 1}; // 1 microsecond
+	timeval timeInterval = {0, 1};
 	FD_ZERO(&socketSet);
 	FD_SET(socket, &socketSet);
 	return (select(0, &socketSet, nullptr, nullptr, &timeInterval) > 0);
@@ -79,12 +79,12 @@ const bool NetworkingUtils::isMessageReadyUDP(SOCKET socket)
 const bool NetworkingUtils::isMessageReserved(const string& message)
 {
 	return
-	(
+		(
 		(message.substr(0, string("REQUEST").size()) == "REQUEST") ||
 		(message.substr(0, string("ACCEPT").size()) == "ACCEPT") ||
 		(message.substr(0, string("PING").size()) == "PING") ||
 		(message.substr(0, string("SERVER_FULL").size()) == "SERVER_FULL") ||
 		(message.substr(0, string("ALREADY_CONNECTED").size()) == "ALREADY_CONNECTED") ||
 		(message.substr(0, string("DISCONNECTED").size()) == "DISCONNECTED")
-	);
+		);
 }

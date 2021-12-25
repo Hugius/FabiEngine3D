@@ -94,7 +94,7 @@ void ModelEditor::_updateMiscellaneous()
 	auto partID = (_hoveredPartID.empty() ? _currentPartID : _hoveredPartID);
 	if(partID.empty())
 	{
-		_selectedPartHighlightDirection = 1; // Reset direction
+		_selectedPartHighlightDirection = 1;
 	}
 	else
 	{
@@ -230,7 +230,7 @@ void ModelEditor::_updateModelChoosing()
 			_isDeletingModel = false;
 			_gui.getOverlay()->deleteChoiceForm("modelList");
 		}
-		else // Nothing hovered
+		else
 		{
 			_hoveredModelID = "";
 		}

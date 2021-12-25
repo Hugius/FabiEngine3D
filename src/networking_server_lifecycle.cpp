@@ -38,15 +38,15 @@ void NetworkingServer::start(unsigned int maxClientCount)
 
 	addrinfo tcpHints = addrinfo();
 	ZeroMemory(&tcpHints, sizeof(tcpHints));
-	tcpHints.ai_family = AF_INET; // Ipv4 address
-	tcpHints.ai_socktype = SOCK_STREAM; // Streaming socket
-	tcpHints.ai_protocol = IPPROTO_TCP; // TCP protocol
+	tcpHints.ai_family = AF_INET;
+	tcpHints.ai_socktype = SOCK_STREAM;
+	tcpHints.ai_protocol = IPPROTO_TCP;
 
 	addrinfo udpHints = addrinfo();
 	ZeroMemory(&udpHints, sizeof(udpHints));
-	udpHints.ai_family = AF_INET; // Ipv4 address
-	udpHints.ai_socktype = SOCK_DGRAM; // Datagram socket
-	udpHints.ai_protocol = IPPROTO_UDP; // UDP protocol
+	udpHints.ai_family = AF_INET;
+	udpHints.ai_socktype = SOCK_DGRAM;
+	udpHints.ai_protocol = IPPROTO_UDP;
 
 	addrinfo* tcpAddressInfo = nullptr;
 	auto tcpInfoStatusCode = getaddrinfo("0.0.0.0", NetworkingUtils::SERVER_PORT.c_str(), &tcpHints, &tcpAddressInfo);
@@ -85,14 +85,14 @@ void NetworkingServer::start(unsigned int maxClientCount)
 	auto tcpBindStatusCode = bind(_tcpSocket, tcpAddressInfo->ai_addr, static_cast<int>(tcpAddressInfo->ai_addrlen));
 	if(tcpBindStatusCode == SOCKET_ERROR)
 	{
-		if(WSAGetLastError() == WSAEADDRINUSE) // Server already running on current machine
+		if(WSAGetLastError() == WSAEADDRINUSE)
 		{
 			Logger::throwWarning("Networking server tried to start: current machine already hosting a server!");
 			freeaddrinfo(tcpAddressInfo);
 			freeaddrinfo(udpAddressInfo);
 			return;
 		}
-		else // Something really bad happened
+		else
 		{
 			Logger::throwError("NetworkingServer::start::7 ---> ", WSAGetLastError());
 		}
@@ -101,14 +101,14 @@ void NetworkingServer::start(unsigned int maxClientCount)
 	auto udpBindStatusCode = bind(_udpSocket, udpAddressInfo->ai_addr, static_cast<int>(udpAddressInfo->ai_addrlen));
 	if(udpBindStatusCode == SOCKET_ERROR)
 	{
-		if(WSAGetLastError() == WSAEADDRINUSE) // Server already running on current machine
+		if(WSAGetLastError() == WSAEADDRINUSE)
 		{
 			Logger::throwWarning("Networking server tried to start: current machine already hosting a server!");
 			freeaddrinfo(tcpAddressInfo);
 			freeaddrinfo(udpAddressInfo);
 			return;
 		}
-		else // Something really bad happened
+		else
 		{
 			Logger::throwError("NetworkingServer::start::8 ---> ", WSAGetLastError());
 		}

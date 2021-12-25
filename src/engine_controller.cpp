@@ -32,7 +32,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 	const string textureDirectoryPath = "engine\\assets\\texture\\";
 	const string fontDirectoryPath = "engine\\assets\\font\\";
 
-	if(Config::getInst().isApplicationExported()) // Application preview
+	if(Config::getInst().isApplicationExported())
 	{
 		if(_topViewportController.isProjectCorrupted(Tools::getRootDirectoryPath()))
 		{
@@ -50,7 +50,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 			_mustPromptOnExit = true;
 		}
 	}
-	else // Engine preview
+	else
 	{
 		vector<string> meshPaths;
 		meshPaths.push_back(meshDirectoryPath + "camera.obj");
@@ -121,22 +121,22 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 void EngineController::FE3D_CONTROLLER_UPDATE()
 {
-	if(Config::getInst().isApplicationExported()) // Application preview
+	if(Config::getInst().isApplicationExported())
 	{
-		if(_leftViewportController.getScriptEditor().getScriptExecutor().isRunning()) // Still running
+		if(_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
 		{
 			_leftViewportController.getAnimation2dEditor().update();
 			_leftViewportController.getAnimation3dEditor().update();
 
 			_leftViewportController.getScriptEditor().getScriptExecutor().update(false);
 		}
-		else // Scripting error has been thrown
+		else
 		{
 			application_stop();
 			_mustPromptOnExit = true;
 		}
 	}
-	else // Engine preview
+	else
 	{
 		static string lastScreen = "";
 		string activeScreen = _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID();
@@ -167,14 +167,14 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 
 void EngineController::FE3D_CONTROLLER_TERMINATE()
 {
-	if(Config::getInst().isApplicationExported()) // Application preview
+	if(Config::getInst().isApplicationExported())
 	{
 		if(_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
 		{
 			_leftViewportController.getScriptEditor().getScriptExecutor().unload();
 		}
 	}
-	else // Engine preview
+	else
 	{
 
 	}

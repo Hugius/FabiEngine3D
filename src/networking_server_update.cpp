@@ -74,13 +74,13 @@ void NetworkingServer::update()
 			const auto& messageTimestamp = get<2>(messageResult);
 			const auto& messageContent = get<3>(messageResult);
 
-			if(messageStatusCode > 0) // Message is received correctly
+			if(messageStatusCode > 0)
 			{
-				for(const auto& character : messageContent) // Iterate through received messages
+				for(const auto& character : messageContent)
 				{
-					if(character == ';') // End of current message
+					if(character == ';')
 					{
-						if(clientMessageBuild.substr(0, string("REQUEST").size()) == "REQUEST") // Handle REQUEST message
+						if(clientMessageBuild.substr(0, string("REQUEST").size()) == "REQUEST")
 						{
 							const auto newPortUDP = clientMessageBuild.substr(string("REQUEST").size(), NetworkingUtils::PORT_DIGIT_COUNT);
 							const auto newUsername = clientMessageBuild.substr(string("REQUEST").size() + NetworkingUtils::PORT_DIGIT_COUNT);
@@ -125,7 +125,7 @@ void NetworkingServer::update()
 								Logger::throwInfo("Networking client \"" + newUsername + "\" connected to the server!");
 							}
 						}
-						else if(clientMessageBuild == "PING") // Handle PING message
+						else if(clientMessageBuild == "PING")
 						{
 							auto receiveDelay = (Tools::getTimeSinceEpochMS() - messageTimestamp);
 
@@ -138,32 +138,32 @@ void NetworkingServer::update()
 
 							clientMessageBuild = "";
 						}
-						else // Handle other message
+						else
 						{
 							_pendingMessages.push_back(NetworkingClientMessage(clientUsername, clientMessageBuild, NetworkProtocol::TCP));
 							clientMessageBuild = "";
 						}
 					}
-					else // Add to current message build
+					else
 					{
 						clientMessageBuild += character;
 					}
 				}
 			}
-			else if(messageStatusCode == 0) // Client closed socket connection
+			else if(messageStatusCode == 0)
 			{
 				_disconnectClient(clientSocketID);
 				goto BEGIN;
 			}
-			else // Receive failed
+			else
 			{
 				auto code = messageErrorCode;
-				if((code == WSAECONNRESET) || (code == WSAECONNABORTED) || (code == WSAETIMEDOUT)) // Client lost socket connection
+				if((code == WSAECONNRESET) || (code == WSAECONNABORTED) || (code == WSAETIMEDOUT))
 				{
 					_disconnectClient(clientSocketID);
 					goto BEGIN;
 				}
-				else // Something really bad happened
+				else
 				{
 					Logger::throwError("NetworkingServer::update::2 ---> ", messageErrorCode);
 				}
@@ -182,11 +182,11 @@ void NetworkingServer::update()
 		const auto& messageIP = get<3>(messageResult);
 		const auto& messagePort = get<4>(messageResult);
 
-		if(messageStatusCode > 0) // Message is received correctly
+		if(messageStatusCode > 0)
 		{
-			if(find(_clientIPs.begin(), _clientIPs.end(), messageIP) != _clientIPs.end()) // Message must come from a client IP
+			if(find(_clientIPs.begin(), _clientIPs.end(), messageIP) != _clientIPs.end())
 			{
-				if(find(_udpClientPorts.begin(), _udpClientPorts.end(), messagePort) != _udpClientPorts.end()) // Message must come from a client port
+				if(find(_udpClientPorts.begin(), _udpClientPorts.end(), messagePort) != _udpClientPorts.end())
 				{
 					auto username = messageContent.substr(0, messageContent.find(';'));
 					auto content = messageContent.substr(messageContent.find(';') + 1);
@@ -211,7 +211,7 @@ void NetworkingServer::update()
 			)
 		{
 		}
-		else // Something really bad happened
+		else
 		{
 			Logger::throwError("NetworkingServer::update::3 ---> ", messageErrorCode);
 		}

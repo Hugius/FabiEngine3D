@@ -138,22 +138,22 @@ vec4 calculateWaterColor()
 	vec3 reflectionColor = texture(u_reflectionMap, reflectionUV).rgb;
 	vec3 refractionColor = texture(u_refractionMap, refractionUV).rgb;
 
-	if (u_isReflective && u_isRefractive && !u_isUnderWater) // Refraction & reflection
+	if (u_isReflective && u_isRefractive && !u_isUnderWater)
 	{
-		finalColor = mix(reflectionColor, refractionColor, fresnelMixValue); // Refraction fresnel effect
+		finalColor = mix(reflectionColor, refractionColor, fresnelMixValue);
 		finalColor *= u_color;
 	}
-	else if (u_isRefractive) // Only refraction
+	else if (u_isRefractive)
 	{
-		finalColor = refractionColor; // No fresnel effect
+		finalColor = refractionColor;
 		finalColor *= u_color;
 	}
-	else if (u_isReflective) // Only reflection
+	else if (u_isReflective)
 	{
-		finalColor = mix(reflectionColor, (reflectionColor * 0.1f), fresnelMixValue); // Dark fresnel effect
+		finalColor = mix(reflectionColor, (reflectionColor * 0.1f), fresnelMixValue);
 		finalColor *= u_color;
 	}
-	else // Only color
+	else
 	{
 		finalColor = u_color;
 	}
@@ -194,11 +194,11 @@ vec3 calculateLights(vec3 normal)
 		}
 
         vec3 current = vec3(0.0f);
-		current += vec3(diffuse); // Diffuse
-        current += vec3(specular); // Specular
-        current *= u_pointlightColors[i]; // Color
-        current *= (attenuation * attenuation); // Distance
-        current *= u_pointlightIntensities[i]; // Intensity
+		current += vec3(diffuse);
+        current += vec3(specular);
+        current *= u_pointlightColors[i];
+        current *= (attenuation * attenuation);
+        current *= u_pointlightIntensities[i];
 
         result += current;
 	}
@@ -210,15 +210,15 @@ vec3 calculateDirectionalLighting(vec3 normal)
 {
 	if (u_isDirectionalLightingEnabled)
 	{
-		vec3 lightDirection = normalize(u_directionalLightPosition - f_position); // Light ray
-		vec3 viewDirection = normalize(f_position - u_cameraPosition); // View ray
-		vec3 reflectDirection = reflect(normalize(lightDirection), normal); // Reflect ray
-		float specular = pow(clamp(dot(reflectDirection, viewDirection), 0.0f, 1.0f), u_specularShininess); // Calculate if perpendicular
-		specular *= u_directionalLightingIntensity; // Directional intensity
-		specular *= u_specularIntensity; // Specular intensity
-		vec3 result = vec3(specular); // Add to lighting
-		result *= u_directionalLightingColor; // Directional color
-		return result; // Return
+		vec3 lightDirection = normalize(u_directionalLightPosition - f_position);
+		vec3 viewDirection = normalize(f_position - u_cameraPosition);
+		vec3 reflectDirection = reflect(normalize(lightDirection), normal);
+		float specular = pow(clamp(dot(reflectDirection, viewDirection), 0.0f, 1.0f), u_specularShininess);
+		specular *= u_directionalLightingIntensity;
+		specular *= u_specularIntensity;
+		vec3 result = vec3(specular);
+		result *= u_directionalLightingColor;
+		return result;
 	}
 	else
 	{

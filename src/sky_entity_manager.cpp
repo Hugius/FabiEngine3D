@@ -140,22 +140,22 @@ void SkyEntityManager::update()
 	{
 		if(_isExposureEnabled)
 		{
-			float lightness = mainSky->getLightness(); // Current lightness
-			float pitch = min(_renderBus.getCameraPitch() + 30.0f, 90.0f); // Full conversion at 60 degrees pitch
+			float lightness = mainSky->getLightness();
+			float pitch = min(_renderBus.getCameraPitch() + 30.0f, 90.0f);
 			float targetLightness = mainSky->getInitialLightness() + (((90.0f - pitch) / 90.0f) * _exposureIntensity);
 
-			if(lightness > targetLightness) // Decrease lightness
+			if(lightness > targetLightness)
 			{
 				mainSky->setLightness(lightness - (_exposureSpeed * 3.5f));
 			}
-			else if(mainSky->getLightness() < targetLightness) // Increase lightness
+			else if(mainSky->getLightness() < targetLightness)
 			{
 				mainSky->setLightness(lightness + _exposureSpeed);
 			}
 		}
 		else
 		{
-			mainSky->setLightness(mainSky->getInitialLightness()); // Revert lightness
+			mainSky->setLightness(mainSky->getInitialLightness());
 		}
 
 		if(mainSky->isVisible())

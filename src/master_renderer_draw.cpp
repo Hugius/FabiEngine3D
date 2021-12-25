@@ -73,7 +73,7 @@ void MasterRenderer::_renderModelEntities()
 				}
 			}
 
-			if(modelEntity->isLevelOfDetailed()) // Low quality
+			if(modelEntity->isLevelOfDetailed())
 			{
 				auto levelOfDetailEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityID())->second;
 
@@ -96,7 +96,7 @@ void MasterRenderer::_renderModelEntities()
 				levelOfDetailEntity->setVisible(initialVisibility);
 				levelOfDetailEntity->updateTransformationMatrix();
 			}
-			else // High quality
+			else
 			{
 				_modelEntityColorRenderer.render(modelEntity, _entityBus->getReflectionEntities());
 			}
@@ -120,7 +120,7 @@ void MasterRenderer::_renderModelEntities()
 				continue;
 			}
 
-			if(modelEntity->isLevelOfDetailed()) // Low quality
+			if(modelEntity->isLevelOfDetailed())
 			{
 				auto levelOfDetailEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityID())->second;
 
@@ -143,7 +143,7 @@ void MasterRenderer::_renderModelEntities()
 				levelOfDetailEntity->setVisible(initialVisibility);
 				levelOfDetailEntity->updateTransformationMatrix();
 			}
-			else // High quality
+			else
 			{
 				_modelEntityColorRenderer.render(modelEntity, _entityBus->getReflectionEntities());
 			}
@@ -226,20 +226,20 @@ void MasterRenderer::_renderGUI()
 		{
 			auto castedTextEntity = dynamic_pointer_cast<TextEntity>(entity);
 
-			if(castedTextEntity == nullptr) // Image entity
+			if(castedTextEntity == nullptr)
 			{
 				_imageEntityColorRenderer.render(entity);
 			}
-			else // Text entity
+			else
 			{
-				if(castedTextEntity->isDynamic()) // Dynamic text rendering
+				if(castedTextEntity->isDynamic())
 				{
 					for(const auto& characterEntity : castedTextEntity->getCharacterEntities())
 					{
 						_imageEntityColorRenderer.render(characterEntity);
 					}
 				}
-				else // Static text rendering
+				else
 				{
 					_imageEntityColorRenderer.render(castedTextEntity);
 				}

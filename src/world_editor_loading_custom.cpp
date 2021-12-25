@@ -234,7 +234,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				{
 					break;
 				}
-				else // Create speed
+				else
 				{
 					string partID = (nextElement == "?") ? "" : nextElement;
 					fvec3 speed;

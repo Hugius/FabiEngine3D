@@ -33,19 +33,19 @@ const float Math::limitAngle(float angle)
 
 const float Math::calculateReferenceAngle(float angle)
 {
-	if(angle >= 0.0f && angle <= 90.0f) // 1st quadrant
+	if(angle >= 0.0f && angle <= 90.0f)
 	{
 		return angle;
 	}
-	else if(angle > 90.0f && angle <= 180.0f) // 2nd quadrant
+	else if(angle > 90.0f && angle <= 180.0f)
 	{
 		return (180.0f - angle);
 	}
-	else if(angle > 180.0f && angle <= 270.0f) // 3rd quadrant
+	else if(angle > 180.0f && angle <= 270.0f)
 	{
 		return (angle - 180.0f);
 	}
-	else // 4th quadrant
+	else
 	{
 		return (360.0f - angle);
 	}

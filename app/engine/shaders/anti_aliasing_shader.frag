@@ -46,11 +46,11 @@ void main()
 
 	float blurLuminosity = dot(LUMINOSITY_VECTOR, farBlur);
 	
-	if ((blurLuminosity < minLuminosity) || (blurLuminosity > maxLuminosity)) // Blur is outside of range
+	if ((blurLuminosity < minLuminosity) || (blurLuminosity > maxLuminosity))
 	{
 		o_finalColor = vec4(closeBlur, 1.0);
 	}
-	else // Blur is within range
+	else
 	{
 		o_finalColor = vec4(farBlur, 1.0);
 	}

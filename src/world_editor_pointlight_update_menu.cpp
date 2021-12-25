@@ -93,7 +93,7 @@ void WorldEditor::_updatePointlightChoosingMenu()
 					{
 						_activatePointlight(pointlightID);
 					}
-					else // Hovering (selection)
+					else
 					{
 						_dontResetSelectedLamp = true;
 						_selectPointlight(pointlightID);

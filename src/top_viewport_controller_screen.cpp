@@ -147,11 +147,11 @@ void TopViewportController::_updateGameScreenManagement()
 		{
 			if(_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if(_fe3d.server_isRunning()) // Server application cannot be paused, only on or off
+				if(_fe3d.server_isRunning())
 				{
 					_scriptEditor.getScriptExecutor().unload();
 				}
-				else // Non-server application can be paused
+				else
 				{
 					_scriptEditor.getScriptExecutor().pause();
 				}

@@ -72,7 +72,7 @@ void WorldEditor::_updateMainMenu()
 						_fe3d.sky_selectMainSky("@@background");
 					}
 				}
-				else if(_isDeletingWorld) // Prepare deleting confirmation
+				else if(_isDeletingWorld)
 				{
 					_gui.getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 				}

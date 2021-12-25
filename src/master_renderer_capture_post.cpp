@@ -51,7 +51,7 @@ void MasterRenderer::_captureWorldDepth()
 			{
 				if(modelEntity->isDepthMapIncluded())
 				{
-					if(modelEntity->isLevelOfDetailed()) // Low quality
+					if(modelEntity->isLevelOfDetailed())
 					{
 						auto foundPair = modelEntities.find(modelEntity->getLevelOfDetailEntityID());
 						if(foundPair != modelEntities.end())
@@ -82,7 +82,7 @@ void MasterRenderer::_captureWorldDepth()
 							Logger::throwError("MasterRenderer::_captureWorldDepth");
 						}
 					}
-					else // High quality
+					else
 					{
 						_modelEntityDepthRenderer.render(modelEntity, clippingY, isUnderWater);
 					}
@@ -196,7 +196,7 @@ void MasterRenderer::_captureMotionBlur()
 		_motionBlurCaptureBuffer.unbind();
 		_renderBus.setFinalWorldMap(_motionBlurCaptureBuffer.getTexture(0));
 	}
-	else // No motion blur
+	else
 	{
 		_renderBus.setMotionBlurMap(0);
 	}
@@ -224,7 +224,7 @@ void MasterRenderer::_captureBloom()
 		{
 			textureToBlur = _renderBus.getPrimaryWorldMap();
 		}
-		else // Blur secondary world map
+		else
 		{
 			textureToBlur = _renderBus.getSecondaryWorldMap();
 		}

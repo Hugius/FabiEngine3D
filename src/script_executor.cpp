@@ -192,7 +192,7 @@ const bool ScriptExecutor::isRunning() const
 
 void ScriptExecutor::_validateExecution()
 {
-	if(_scriptInterpreter.hasThrownError()) // Script threw an error
+	if(_scriptInterpreter.hasThrownError())
 	{
 		_scriptInterpreter.unload();
 		_isStarted = false;
@@ -203,7 +203,7 @@ void ScriptExecutor::_validateExecution()
 		_mustSkipUpdate = false;
 		_pausedSoundIDs.clear();
 	}
-	else if(_scriptInterpreter.gameMustStop()) // Script must stop
+	else if(_scriptInterpreter.gameMustStop())
 	{
 		this->unload();
 	}

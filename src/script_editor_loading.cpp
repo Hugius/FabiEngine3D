@@ -41,7 +41,7 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 			ifstream file(directoryPath + fileName);
 			string line;
 
-			string scriptFileID = fileName.substr(0, fileName.size() - 5); // No file extension
+			string scriptFileID = fileName.substr(0, fileName.size() - 5);
 			_script.createScriptFile(scriptFileID);
 
 			unsigned int cursorLineIndex, cursorCharIndex;

@@ -5,7 +5,7 @@ void WorldEditor::_updatePointlightPlacing()
 {
 	if(_isPlacingPointlight)
 	{
-		if(_fe3d.terrain_getSelectedID().empty()) // Placing without terrain
+		if(_fe3d.terrain_getSelectedID().empty())
 		{
 			auto newPosition = _fe3d.pointlight_getPosition(TEMPLATE_LAMP_ID);
 
@@ -114,7 +114,7 @@ void WorldEditor::_updatePointlightPlacing()
 							_loadedPointlightIDs.push_back(newID);
 						}
 					}
-					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
+					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE))
 					{
 						_fe3d.model_setVisible(TEMPLATE_LAMP_ID, false);
 						_fe3d.pointlight_setVisible(TEMPLATE_LAMP_ID, false);

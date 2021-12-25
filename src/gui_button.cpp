@@ -55,9 +55,9 @@ void GuiButton::_updateHovering(bool isHoverable)
 		fvec2 buttonPosition = _fe3d.image_getPosition(_rectangle->getEntityID());
 		fvec2 buttonSize = _fe3d.image_getSize(_rectangle->getEntityID());
 
-		if(cursorPosition.x > buttonPosition.x - (buttonSize.x / 2.0f) && cursorPosition.x < buttonPosition.x + (buttonSize.x / 2.0f)) // X axis
+		if(cursorPosition.x > buttonPosition.x - (buttonSize.x / 2.0f) && cursorPosition.x < buttonPosition.x + (buttonSize.x / 2.0f))
 		{
-			if(cursorPosition.y > buttonPosition.y - (buttonSize.y / 2.0f) && cursorPosition.y < buttonPosition.y + (buttonSize.y / 2.0f)) // Y axis
+			if(cursorPosition.y > buttonPosition.y - (buttonSize.y / 2.0f) && cursorPosition.y < buttonPosition.y + (buttonSize.y / 2.0f))
 			{
 				if(isHoverable && _isHoverable)
 				{

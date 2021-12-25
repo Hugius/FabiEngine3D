@@ -28,11 +28,11 @@ private:
 	{
 		auto iterator = find(list.begin(), list.end(), element);
 
-		if(iterator == list.end()) // Not found
+		if(iterator == list.end())
 		{
 			Logger::throwError("InputHandler::_getVectorIndex");
 		}
-		else // Found
+		else
 		{
 			return static_cast<unsigned int>(distance(list.begin(), iterator));
 		}

@@ -101,7 +101,7 @@ void MasterRenderer::_captureShadows()
 
 			for(const auto& [keyID, modelEntity] : modelEntities)
 			{
-				if(modelEntity->isLevelOfDetailed()) // Low quality
+				if(modelEntity->isLevelOfDetailed())
 				{
 					auto foundPair = modelEntities.find(modelEntity->getLevelOfDetailEntityID());
 					if(foundPair != modelEntities.end())
@@ -132,7 +132,7 @@ void MasterRenderer::_captureShadows()
 						Logger::throwError("MasterRenderer::_captureShadows");
 					}
 				}
-				else // High quality
+				else
 				{
 					_modelEntityShadowRenderer.render(modelEntity);
 				}

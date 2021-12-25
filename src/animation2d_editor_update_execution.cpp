@@ -35,17 +35,17 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 							}
 						}
 					}
-					else // Next row
+					else
 					{
 						animation.setRowIndex(animation.getRowIndex() + 1);
 					}
 				}
-				else // Next column
+				else
 				{
 					animation.setColumnIndex(animation.getColumnIndex() + 1);
 				}
 			}
-			else // Next frame
+			else
 			{
 				animation.setPassedFrames(animation.getPassedFrames() + 1);
 			}
@@ -114,17 +114,17 @@ void Animation2dEditor::_updateImageAnimationExecution()
 							}
 						}
 					}
-					else // Next row
+					else
 					{
 						animation.setRowIndex(animation.getRowIndex() + 1);
 					}
 				}
-				else // Next column
+				else
 				{
 					animation.setColumnIndex(animation.getColumnIndex() + 1);
 				}
 			}
-			else // Next frame
+			else
 			{
 				animation.setPassedFrames(animation.getPassedFrames() + 1);
 			}

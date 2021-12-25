@@ -13,11 +13,11 @@ void InputHandler::update()
 
 	if(!_isLocked)
 	{
-		while(SDL_PollEvent(&event)) // Check for any input
+		while(SDL_PollEvent(&event))
 		{
 			switch(event.type)
 			{
-				case SDL_QUIT: // X symbol in SDL window
+				case SDL_QUIT:
 				{
 					_keysDown.push_back(static_cast<InputType>(SDL_QUIT));
 					break;
@@ -34,12 +34,12 @@ void InputHandler::update()
 				{
 					auto button = static_cast<InputType>(event.button.button);
 
-					if(!_isInVector(_mouseDown, button)) // If not in vector yet, add it
+					if(!_isInVector(_mouseDown, button))
 					{
 						_mouseDown.push_back(button);
 					}
 
-					if(!_isInVector(_mousePressed_mayNotPress, button)) // Mouse may be pressed
+					if(!_isInVector(_mousePressed_mayNotPress, button))
 					{
 						_mousePressed.push_back(button);
 						_mousePressed_mayNotPress.push_back(button);
@@ -71,7 +71,7 @@ void InputHandler::update()
 						_keysDown.push_back(key);
 					}
 
-					if(!_isInVector(_keysPressed_mayNotPress, key)) // Key may be pressed
+					if(!_isInVector(_keysPressed_mayNotPress, key))
 					{
 						_keysPressed.push_back(key);
 						_keysPressed_mayNotPress.push_back(key);

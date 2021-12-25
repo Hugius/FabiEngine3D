@@ -35,16 +35,16 @@ const bool NetworkingServer::_sendTcpMessage(SOCKET socket, const string& conten
 
 	if(sendStatusCode == SOCKET_ERROR)
 	{
-		if(WSAGetLastError() == WSAECONNRESET || WSAGetLastError() == WSAECONNABORTED) // Client lost socket connection
+		if(WSAGetLastError() == WSAECONNRESET || WSAGetLastError() == WSAECONNABORTED)
 		{
 			_disconnectClient(socket);
 			return false;
 		}
-		else if(WSAGetLastError() == WSAENOBUFS) // Buffer full
+		else if(WSAGetLastError() == WSAENOBUFS)
 		{
 			Logger::throwWarning("Networking server is sending too many TCP messages!");
 		}
-		else // Something really bad happened
+		else
 		{
 			Logger::throwError("NetworkingServer::_sendTcpMessage::5 ---> ", WSAGetLastError());
 		}
@@ -76,20 +76,20 @@ const bool NetworkingServer::_sendUdpMessage(const string& clientIP, const strin
 	auto socketAddress = NetworkingUtils::composeSocketAddress(clientIP, clientPort);
 
 	auto sendStatusCode = sendto(
-		_udpSocket, // UDP socket
-		content.c_str(), // Message content
-		static_cast<int>(content.size()), // Message size
-		0, // Flags
-		reinterpret_cast<sockaddr*>(&socketAddress), // Client address
-		sizeof(socketAddress)); // Client address length
+		_udpSocket,
+		content.c_str(),
+		static_cast<int>(content.size()),
+		0,
+		reinterpret_cast<sockaddr*>(&socketAddress),
+		sizeof(socketAddress));
 
 	if(sendStatusCode == SOCKET_ERROR)
 	{
-		if(WSAGetLastError() == WSAENOBUFS) // Buffer full
+		if(WSAGetLastError() == WSAENOBUFS)
 		{
 			Logger::throwWarning("Networking server is sending too many UDP messages!");
 		}
-		else // Something really bad happened
+		else
 		{
 			Logger::throwError("NetworkingServer::_sendUdpMessage::5 ---> ", WSAGetLastError());
 		}
@@ -140,15 +140,15 @@ tuple<int, int, long long, string> NetworkingServer::_waitForTcpMessage(SOCKET s
 	int bufferLength = static_cast<int>(NetworkingUtils::TCP_BUFFER_BYTES);
 	auto receiveStatusCode = recv(socket, buffer, bufferLength, 0);
 
-	if(receiveStatusCode > 0) // Message received correctly
+	if(receiveStatusCode > 0)
 	{
 		return make_tuple(receiveStatusCode, 0, Tools::getTimeSinceEpochMS(), string(buffer, receiveStatusCode));
 	}
-	else if(receiveStatusCode == 0) // Client closed connection
+	else if(receiveStatusCode == 0)
 	{
 		return make_tuple(receiveStatusCode, 0, Tools::getTimeSinceEpochMS(), "");
 	}
-	else // Something else happened
+	else
 	{
 		return make_tuple(receiveStatusCode, WSAGetLastError(), Tools::getTimeSinceEpochMS(), "");
 	}
@@ -166,11 +166,11 @@ tuple<int, int, string, string, string> NetworkingServer::_receiveUdpMessage(SOC
 	auto IP = NetworkingUtils::extractAddressIP(&sourceAddress);
 	auto port = NetworkingUtils::extractAddressPort(&sourceAddress);
 
-	if(receiveResult > 0) // Message received correctly
+	if(receiveResult > 0)
 	{
 		return make_tuple(receiveResult, WSAGetLastError(), string(buffer, receiveResult), IP, port);
 	}
-	else // Something else happened
+	else
 	{
 		return make_tuple(receiveResult, WSAGetLastError(), "", IP, port);
 	}

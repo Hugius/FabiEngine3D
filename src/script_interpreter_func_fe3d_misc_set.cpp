@@ -43,11 +43,11 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(Config::getInst().isApplicationExported()) // Application preview
+			if(Config::getInst().isApplicationExported())
 			{
 				_fe3d.application_stop();
 			}
-			else // Engine preview
+			else
 			{
 				_mustStopApplication = true;
 			}

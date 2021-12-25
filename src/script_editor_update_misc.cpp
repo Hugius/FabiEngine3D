@@ -229,24 +229,24 @@ void ScriptEditor::_updateMiscellaneous()
 			_scrollingAcceleration = 0.0f;
 			_fe3d.camera_setPosition(CAMERA_POSITION);
 		}
-		else if(_fe3d.camera_getPosition().y == CAMERA_POSITION.y && _scrollingAcceleration > 0.0f) // Tried to scroll up
+		else if(_fe3d.camera_getPosition().y == CAMERA_POSITION.y && _scrollingAcceleration > 0.0f)
 		{
 			_scrollingAcceleration = 0.0f;
 		}
 
 		if(lineCount > (MAX_VISIBLE_LINES - 1))
 		{
-			if(_fe3d.camera_getPosition().y < (lastLineHeight + CAMERA_OFFSET)) // Camera must not go out of screen
+			if(_fe3d.camera_getPosition().y < (lastLineHeight + CAMERA_OFFSET))
 			{
 				_scrollingAcceleration = 0.0f;
 				_fe3d.camera_setPosition(fvec3(CAMERA_POSITION.x, lastLineHeight + CAMERA_OFFSET, CAMERA_POSITION.z));
 			}
-			else if(_fe3d.camera_getPosition().y == (lastLineHeight + CAMERA_OFFSET) && _scrollingAcceleration < 0.0f) // Tried to scroll down
+			else if(_fe3d.camera_getPosition().y == (lastLineHeight + CAMERA_OFFSET) && _scrollingAcceleration < 0.0f)
 			{
 				_scrollingAcceleration = 0.0f;
 			}
 		}
-		else // Reset camera position if too little amount of lines
+		else
 		{
 			_scrollingAcceleration = 0.0f;
 			_fe3d.camera_setPosition(CAMERA_POSITION);

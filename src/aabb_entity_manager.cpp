@@ -119,10 +119,10 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 
 							fvec3 localPosition = (entity->getLocalPosition() * parentEntity->getBaseSize());
 							float roundedRotation =
-								(rotation > 45.0f && rotation < 135.0f) ? 90.0f : // 90 degrees rounded
-								(rotation >= 135.0f && rotation <= 225.0f) ? 180.0f : // 180 degrees rounded
-								(rotation > 225.0f && rotation < 315.0f) ? 270.0f : // 270 degrees rounded
-								0.0f; // No rotation
+								(rotation > 45.0f && rotation < 135.0f) ? 90.0f :
+								(rotation >= 135.0f && rotation <= 225.0f) ? 180.0f :
+								(rotation > 225.0f && rotation < 315.0f) ? 270.0f :
+								0.0f;
 							if(roundedRotation != 0.0f)
 							{
 								/*
@@ -157,7 +157,7 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 								fvec4 result = rotationMatrix * fvec4(localPosition.x, localPosition.y, localPosition.z, 1.0f);
 								entity->setPosition(parentEntity->getBasePosition() + fvec3(result.x, result.y + yOffset, result.z));
 							}
-							else // No rotation
+							else
 							{
 								entity->setPosition(parentEntity->getBasePosition() + localPosition);
 							}

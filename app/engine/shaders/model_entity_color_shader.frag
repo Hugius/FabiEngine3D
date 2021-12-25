@@ -264,10 +264,10 @@ vec3 calculateDirectionalLighting(vec3 specularMapColor, vec3 normal)
 		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
 		float specular = calculateSpecularLighting(specularMapColor, u_directionalLightPosition, normal);
 
-        result += vec3(diffuse); // Diffuse
-        result += vec3(specular); // Specular
-        result *= u_directionalLightingColor; // Color
-        result *= u_directionalLightingIntensity; // Intensity
+        result += vec3(diffuse);
+        result += vec3(specular);
+        result *= u_directionalLightingColor;
+        result *= u_directionalLightingIntensity;
 
         return result;
 	}
@@ -304,11 +304,11 @@ vec3 calculatePointlights(vec3 specularMapColor, vec3 normal)
 		}
 
 		vec3 current = vec3(0.0f);
-		current += vec3(diffuse); // Diffuse
-		current += vec3(specular); // Specular
-		current *= u_pointlightColors[i]; // Color
-		current *= (attenuation * attenuation); // Distance
-		current *= u_pointlightIntensities[i]; // Intensity
+		current += vec3(diffuse);
+		current += vec3(specular);
+		current *= u_pointlightColors[i];
+		current *= (attenuation * attenuation);
+		current *= u_pointlightIntensities[i];
 
 		result += current;
 	}
@@ -335,11 +335,11 @@ vec3 calculateSpotlights(vec3 specularMapColor, vec3 normal)
 		distanceMultiplier = (1.0f - distanceMultiplier);
 
 		vec3 current = vec3(0.0f);
-		current += vec3(diffuse * intensity); // Diffuse
-		current += vec3(specular * intensity); // Specular
-		current *= u_spotlightColors[i]; // Color
-		current *= u_spotlightIntensities[i]; // Intensity
-		current *= distanceMultiplier; // Distance
+		current += vec3(diffuse * intensity);
+		current += vec3(specular * intensity);
+		current *= u_spotlightColors[i];
+		current *= u_spotlightIntensities[i];
+		current *= distanceMultiplier;
 
 		result += current;
 	}
@@ -447,10 +447,10 @@ float calculateShadows()
 				shadow = 1.0f;
 			}
 
-			float transparency = (fragmentDistance - (halfSize * 0.9f)); // Only for the outer 10%
-			transparency = clamp(transparency, 0.0f, halfSize * 0.1f); // Cannot be negative
-			transparency = clamp(transparency, 0.0f, halfSize * 0.1f); // Cannot be negative
-			transparency /= (halfSize * 0.1f); // Convert value to 0.0 - 1.0 range
+			float transparency = (fragmentDistance - (halfSize * 0.9f));
+			transparency = clamp(transparency, 0.0f, halfSize * 0.1f);
+			transparency = clamp(transparency, 0.0f, halfSize * 0.1f);
+			transparency /= (halfSize * 0.1f);
 
 			if (u_isShadowFrameRenderEnabled)
 			{

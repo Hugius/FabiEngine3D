@@ -6,7 +6,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	unsigned int wordIndex = 0;
 	for(const auto& c : scriptLine)
 	{
-		if(c == ' ') // Current word ended
+		if(c == ' ')
 		{
 			wordIndex++;
 
@@ -15,7 +15,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 				break;
 			}
 		}
-		else // Add to word
+		else
 		{
 			words[wordIndex] += c;
 		}

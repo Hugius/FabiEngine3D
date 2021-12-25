@@ -5,7 +5,7 @@ void WorldEditor::_updateReflectionPlacing()
 {
 	if(_isPlacingReflection)
 	{
-		if(_fe3d.terrain_getSelectedID().empty()) // Placing without terrain
+		if(_fe3d.terrain_getSelectedID().empty())
 		{
 			auto newPosition = _fe3d.reflection_getPosition(TEMPLATE_CAMERA_ID);
 
@@ -101,7 +101,7 @@ void WorldEditor::_updateReflectionPlacing()
 							_loadedReflectionIDs.push_back(newID);
 						}
 					}
-					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
+					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE))
 					{
 						_fe3d.model_setVisible(TEMPLATE_CAMERA_ID, false);
 						_isPlacingReflection = false;

@@ -118,9 +118,9 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(cons
 		{
 			if(entity->isRaycastResponsive() && entity->isVisible())
 			{
-				if(entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
+				if(entity->getID().size() >= ID.size())
 				{
-					if(entity->getID().substr(0, ID.size()) == ID) // If entity matches ID
+					if(entity->getID().substr(0, ID.size()) == ID)
 					{
 						auto position = entity->getPosition();
 						float left = (entity->getSize().x / 2.0f);

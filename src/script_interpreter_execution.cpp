@@ -119,7 +119,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 
 		if((countedSpaces % SPACES_PER_INDENT) == 0)
 		{
-			scriptLineText.erase(0, countedSpaces); // Remove front spaces
+			scriptLineText.erase(0, countedSpaces);
 		}
 		else
 		{
@@ -132,14 +132,14 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		bool isEndOfLoop = false;
 		if(!loopLineIndices.empty())
 		{
-			if(currentLineScopeDepth <= loopScopeDepths.back()) // End of current loop scope
+			if(currentLineScopeDepth <= loopScopeDepths.back())
 			{
-				if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP) // Infinite loop
+				if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP)
 				{
 					_throwScriptError("maximum amount of LOOP iterations reached, perhaps infinite looping?");
 					return;
 				}
-				else // Normal loop
+				else
 				{
 					lineIndex = loopLineIndices.back();
 					scopeDepth = (loopScopeDepths.back() + 1);
@@ -147,16 +147,16 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 					continue;
 				}
 			}
-			else if(lineIndex == scriptFile->getLineCount() - 1) // End of script
+			else if(lineIndex == scriptFile->getLineCount() - 1)
 			{
-				if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP) // Infinite loop
+				if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP)
 				{
 					_throwScriptError("maximum amount of LOOP iterations reached, perhaps infinite looping?");
 					return;
 				}
-				else // Normal loop
+				else
 				{
-					isEndOfLoop = true; // Go back to current loop beginning after executing current scriptline
+					isEndOfLoop = true;
 				}
 			}
 		}
@@ -263,10 +263,10 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		{
 			if(scriptLineText == (LOOP_KEYWORD + ":"))
 			{
-				loopScopeDepths.push_back(scopeDepth); // Save loop scope depth
-				loopLineIndices.push_back(lineIndex); // Save loop line index
-				loopIterationCounts.push_back(0); // Save loop iteration count
-				scopeDepth++; // New depth layer
+				loopScopeDepths.push_back(scopeDepth);
+				loopLineIndices.push_back(lineIndex);
+				loopIterationCounts.push_back(0);
+				scopeDepth++;
 				_hasPassedLoopStatement = true;
 			}
 			else
@@ -379,7 +379,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				return;
 			}
 		}
-		else if // Create local variable
+		else if
 			(
 			scriptLineText.substr(0, CONST_KEYWORD.size() + 1) == CONST_KEYWORD + " " ||
 			scriptLineText.substr(0, LIST_KEYWORD.size() + 1) == LIST_KEYWORD + " " ||
@@ -399,7 +399,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		{
 			_processVariableAlteration(scriptLineText);
 		}
-		else if // Variable arithmetic
+		else if
 			(
 			scriptLineText.substr(0, ADDITION_KEYWORD.size() + 1) == ADDITION_KEYWORD + " " ||
 			scriptLineText.substr(0, SUBTRACTION_KEYWORD.size() + 1) == SUBTRACTION_KEYWORD + " " ||
@@ -424,12 +424,12 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 		else if(scriptLineText == CONTINUE_KEYWORD)
 		{
-			if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP) // Infinite loop
+			if(loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP)
 			{
 				_throwScriptError("maximum amount of LOOP iterations reached, perhaps infinite looping?");
 				return;
 			}
-			else // Normal loop
+			else
 			{
 				lineIndex = loopLineIndices.back();
 				scopeDepth = (loopScopeDepths.back() + 1);
@@ -448,7 +448,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		else if(scriptLineText == PASS_KEYWORD)
 		{
 		}
-		else // Invalid keyword
+		else
 		{
 			_throwScriptError("invalid statement!");
 			return;

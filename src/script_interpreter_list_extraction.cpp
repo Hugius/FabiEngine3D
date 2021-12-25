@@ -25,13 +25,13 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 	unsigned int index = 0;
 	for(const auto& c : listString)
 	{
-		if(hasFinishedValue) // First character after a value has been extracted
+		if(hasFinishedValue)
 		{
-			if(c == ',') // Ready for next value extraction
+			if(c == ',')
 			{
 				hasFinishedValue = false;
 			}
-			else if(c != ' ') // After a value has been extracted, a comma must ALWAYS follow
+			else if(c != ' ')
 			{
 				_throwScriptError("values must be separated by ','!");
 				return {};
@@ -41,61 +41,61 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 		{
 			if(!isBuildingString && !isBuildingNumber && !isBuildingBoolean && !isBuildingVariable)
 			{
-				if(c == '"') // String
+				if(c == '"')
 				{
 					currentValueString = "";
 					isBuildingString = true;
 				}
-				else if(isdigit(c) || c == '-') // Number
+				else if(isdigit(c) || c == '-')
 				{
 					currentValueString = "";
 					currentValueString.push_back(c);
 					isBuildingNumber = true;
 				}
-				else if(c == '<') // Boolean
+				else if(c == '<')
 				{
 					currentValueString = "";
 					currentValueString.push_back(c);
 					isBuildingBoolean = true;
 				}
-				else if(c == ' ') // Space
+				else if(c == ' ')
 				{
 					currentValueString = "";
 				}
-				else // Possible variable
+				else
 				{
 					currentValueString = "";
 					currentValueString.push_back(c);
 					isBuildingVariable = true;
 				}
 
-				if(index != (listString.size() - 1) || (isBuildingString || isBuildingBoolean)) // Skip to next character
+				if(index != (listString.size() - 1) || (isBuildingString || isBuildingBoolean))
 				{
 					index++;
 					continue;
 				}
-				else // This is the last character, handle the building
+				else
 				{
 					currentValueString = "";
 				}
 			}
 
-			if(isBuildingString) // Processing string value
+			if(isBuildingString)
 			{
-				if(c == '"') // Add new string value
+				if(c == '"')
 				{
 					valueList.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, currentValueString));
 					isBuildingString = false;
 					hasFinishedValue = true;
 				}
-				else // Keep building string
+				else
 				{
 					currentValueString += c;
 				}
 			}
-			else if(isBuildingNumber) // Processing number value
+			else if(isBuildingNumber)
 			{
-				if(c == '-') // Negative number
+				if(c == '-')
 				{
 					if(!currentValueString.empty())
 					{
@@ -105,16 +105,16 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 
 					currentValueString += c;
 				}
-				else if(isdigit(c)) // Keep building number
+				else if(isdigit(c))
 				{
 					currentValueString += c;
 				}
-				else if(c == '.' && !isBuildingDecimal) // Start building decimal
+				else if(c == '.' && !isBuildingDecimal)
 				{
 					currentValueString += c;
 					isBuildingDecimal = true;
 				}
-				else if(c != ',' && c != ' ') // Invalid character
+				else if(c != ',' && c != ' ')
 				{
 					_throwScriptError("invalid INT or DEC syntax!");
 					return {};
@@ -122,7 +122,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 
 				if(c == ',' || (index == listString.size() - 1) || c == ' ')
 				{
-					if(isBuildingDecimal) // Convert to decimal
+					if(isBuildingDecimal)
 					{
 						if(currentValueString.back() == '.')
 						{
@@ -139,7 +139,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 							hasFinishedValue = true;
 						}
 					}
-					else // Convert to integer
+					else
 					{
 						valueList.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(currentValueString))));
 						isBuildingNumber = false;
@@ -151,7 +151,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 					}
 				}
 			}
-			else if(isBuildingBoolean) // Processing boolean value
+			else if(isBuildingBoolean)
 			{
 				currentValueString += c;
 
@@ -173,7 +173,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 					return {};
 				}
 			}
-			else if(isBuildingVariable) // Processing variable value
+			else if(isBuildingVariable)
 			{
 				if(c != ',' && c != ' ')
 				{

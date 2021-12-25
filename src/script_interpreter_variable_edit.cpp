@@ -7,7 +7,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	unsigned int wordIndex = 0;
 	for(const auto& c : scriptLine.substr(EDIT_KEYWORD.size() + 1))
 	{
-		if(c == ' ') // Current word ended
+		if(c == ' ')
 		{
 			wordIndex++;
 
@@ -16,7 +16,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 				break;
 			}
 		}
-		else // Add to word
+		else
 		{
 			words[wordIndex] += c;
 		}
@@ -81,7 +81,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		{
 			leftValueIndex = leftListIndex;
 		}
-		else // Error
+		else
 		{
 			return;
 		}

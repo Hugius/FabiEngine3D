@@ -87,9 +87,9 @@ void WaterEntityManager::loadMesh(const string& ID)
 
 	highQualityBufferData.reserve(size_t(size) * size_t(size) * 30);
 
-	for(float x = -halfSize; x < halfSize; x++) // X direction
+	for(float x = -halfSize; x < halfSize; x++)
 	{
-		for(float z = -halfSize; z < halfSize; z++) // Z direction
+		for(float z = -halfSize; z < halfSize; z++)
 		{
 			float firstVertexX = x;
 			float firstVertexY = 0.0f;

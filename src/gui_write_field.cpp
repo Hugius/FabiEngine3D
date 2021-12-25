@@ -97,22 +97,22 @@ void GuiWriteField::_updateTyping()
 						{
 							_currentTextContent += c;
 						}
-						else // Non-spacebar
+						else
 						{
-							if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT)) // Uppercase or special character
+							if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 							{
 								{
 									_currentTextContent += (c - 32);
 								}
 							}
-							else if((GetKeyState(VK_CAPITAL) & 0x0001) != 0) // Uppercase character
+							else if((GetKeyState(VK_CAPITAL) & 0x0001) != 0)
 							{
-								if(!_noCaps) // A - Z
+								if(!_noCaps)
 								{
 									_currentTextContent += (c - 32);
 								}
 							}
-							else // Lowercase character
+							else
 							{
 								_currentTextContent += c;
 							}
@@ -156,13 +156,13 @@ void GuiWriteField::_updateTyping()
 					}
 				}
 			}
-			else if(_minusAllowed && !_noNumbers) // Minus character (for numbers)
+			else if(_minusAllowed && !_noNumbers)
 			{
 				if(_fe3d.input_isKeyPressed(InputType('-')))
 				{
 					if(!_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) && !_fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 					{
-						if(_currentTextContent.empty()) // Minus can only before any number
+						if(_currentTextContent.empty())
 						{
 							_currentTextContent += '-';
 						}
@@ -183,7 +183,7 @@ void GuiWriteField::_updateTyping()
 				}
 				else
 				{
-					_currentTextContent = _currentTextContent.substr(0, _currentTextContent.size() - 1); // Remove last character
+					_currentTextContent = _currentTextContent.substr(0, _currentTextContent.size() - 1);
 				}
 			}
 			else

@@ -5,7 +5,7 @@ void WorldEditor::_updateSpotlightPlacing()
 {
 	if(_isPlacingSpotlight)
 	{
-		if(_fe3d.terrain_getSelectedID().empty()) // Placing without terrain
+		if(_fe3d.terrain_getSelectedID().empty())
 		{
 			auto newPosition = _fe3d.spotlight_getPosition(TEMPLATE_TORCH_ID);
 
@@ -118,7 +118,7 @@ void WorldEditor::_updateSpotlightPlacing()
 							_loadedSpotlightIDs.push_back(newID);
 						}
 					}
-					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
+					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE))
 					{
 						_fe3d.model_setVisible(TEMPLATE_TORCH_ID, false);
 						_fe3d.spotlight_setVisible(TEMPLATE_TORCH_ID, false);

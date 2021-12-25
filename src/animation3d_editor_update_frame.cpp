@@ -22,7 +22,7 @@ void Animation3dEditor::_updateFrameMenu()
 
 		screen->getButton("speed")->setHoverable(speedType != Animation3dSpeedType::INSTANTLY);
 
-		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused())) // Back button
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			for(const auto& partID : _fe3d.model_getPartIDs(currentAnimation->getPreviewModelID()))
 			{
@@ -93,11 +93,11 @@ void Animation3dEditor::_updateFrameMenu()
 		   _gui.getOverlay()->isValueFormExisting("rotationOriginY") &&
 		   _gui.getOverlay()->isValueFormExisting("rotationOriginZ"))
 		{
-			if(_currentPartID.empty()) // Base rotation
+			if(_currentPartID.empty())
 			{
 				_fe3d.model_rotateBase(currentAnimation->getPreviewModelID(), frame.getSpeeds().at(_currentPartID));
 			}
-			else // Part rotation
+			else
 			{
 				_fe3d.model_rotatePart(currentAnimation->getPreviewModelID(), _currentPartID, frame.getSpeeds().at(_currentPartID));
 			}

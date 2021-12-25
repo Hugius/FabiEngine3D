@@ -216,13 +216,13 @@ void WorldEditor::_handleValueChanging(const string& screenID, string buttonID, 
 
 	if(writeField->getTextContent().empty())
 	{
-		value = 0.0f; // Reset value to default
+		value = 0.0f;
 	}
 	else
 	{
 		if(writeField->isActive())
 		{
-			value = (static_cast<float>(stoi(writeField->getTextContent())) / multiplier); // Update value in realtime
+			value = (static_cast<float>(stoi(writeField->getTextContent())) / multiplier);
 		}
 	}
 

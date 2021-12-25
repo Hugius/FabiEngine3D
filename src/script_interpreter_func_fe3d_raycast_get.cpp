@@ -110,11 +110,11 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 				if(_fe3d.aabb_hasParent(foundAabbID) &&
 				   (_fe3d.aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::MODEL))
 				{
-					if(args[1].getString().empty()) // No specific AABB part
+					if(args[1].getString().empty())
 					{
 						result = _fe3d.aabb_getParentEntityID(foundAabbID);
 					}
-					else // Specific AABB part
+					else
 					{
 						string partID = foundAabbID;
 						reverse(partID.begin(), partID.end());
@@ -148,11 +148,11 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 				if(_fe3d.aabb_hasParent(foundAabbID) &&
 				   (_fe3d.aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::MODEL))
 				{
-					if(args[1].getString().empty()) // No specific AABB part
+					if(args[1].getString().empty())
 					{
 						result = foundDistance;
 					}
-					else // Specific AABB part
+					else
 					{
 						string partID = foundAabbID;
 						reverse(partID.begin(), partID.end());

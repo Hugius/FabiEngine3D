@@ -130,7 +130,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				{
 					continue;
 				}
-				else // Loading for script execution
+				else
 				{
 					makeInvisible = true;
 				}

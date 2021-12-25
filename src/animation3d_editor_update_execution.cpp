@@ -128,23 +128,23 @@ void Animation3dEditor::_updateModelAnimationExecution()
 
 						if(transformationType == TransformationType::MOVEMENT)
 						{
-							if(partID.empty()) // Base position
+							if(partID.empty())
 							{
 								_fe3d.model_moveBase(idPair.second, fvec3((finalSpeed - difference), 0.0f, 0.0f));
 							}
-							else // Part position
+							else
 							{
 								_fe3d.model_movePart(idPair.second, partID, fvec3((finalSpeed - difference), 0.0f, 0.0f));
 							}
 						}
 						else if(transformationType == TransformationType::ROTATION)
 						{
-							if(partID.empty()) // Base rotation
+							if(partID.empty())
 							{
 								_fe3d.model_setBaseRotationOrigin(idPair.second, (currentModelSize * rotationOrigin));
 								_fe3d.model_rotateBase(idPair.second, fvec3((finalSpeed - difference), 0.0f, 0.0f));
 							}
-							else // Part rotation
+							else
 							{
 								_fe3d.model_setPartRotationOrigin(idPair.second, partID, (currentModelSize * rotationOrigin));
 								_fe3d.model_rotatePart(idPair.second, partID, fvec3((finalSpeed - difference), 0.0f, 0.0f));
@@ -152,11 +152,11 @@ void Animation3dEditor::_updateModelAnimationExecution()
 						}
 						else if(transformationType == TransformationType::SCALING)
 						{
-							if(partID.empty()) // Base size
+							if(partID.empty())
 							{
 								_fe3d.model_scaleBase(idPair.second, fvec3((finalSpeed - difference), 0.0f, 0.0f));
 							}
-							else // Part size
+							else
 							{
 								_fe3d.model_scalePart(idPair.second, partID, fvec3((finalSpeed - difference), 0.0f, 0.0f));
 							}
@@ -226,23 +226,23 @@ void Animation3dEditor::_updateModelAnimationExecution()
 
 						if(transformationType == TransformationType::MOVEMENT)
 						{
-							if(partID.empty()) // Base position
+							if(partID.empty())
 							{
 								_fe3d.model_moveBase(idPair.second, fvec3(0.0f, (finalSpeed - difference), 0.0f));
 							}
-							else // Part position
+							else
 							{
 								_fe3d.model_movePart(idPair.second, partID, fvec3(0.0f, (finalSpeed - difference), 0.0f));
 							}
 						}
 						else if(transformationType == TransformationType::ROTATION)
 						{
-							if(partID.empty()) // Base rotation
+							if(partID.empty())
 							{
 								_fe3d.model_setBaseRotationOrigin(idPair.second, (currentModelSize * rotationOrigin));
 								_fe3d.model_rotateBase(idPair.second, fvec3(0.0f, (finalSpeed - difference), 0.0f));
 							}
-							else // Part rotation
+							else
 							{
 								_fe3d.model_setPartRotationOrigin(idPair.second, partID, (currentModelSize * rotationOrigin));
 								_fe3d.model_rotatePart(idPair.second, partID, fvec3(0.0f, (finalSpeed - difference), 0.0f));
@@ -250,11 +250,11 @@ void Animation3dEditor::_updateModelAnimationExecution()
 						}
 						else if(transformationType == TransformationType::SCALING)
 						{
-							if(partID.empty()) // Base size
+							if(partID.empty())
 							{
 								_fe3d.model_scaleBase(idPair.second, fvec3(0.0f, (finalSpeed - difference), 0.0f));
 							}
-							else // Part size
+							else
 							{
 								_fe3d.model_scalePart(idPair.second, partID, fvec3(0.0f, (finalSpeed - difference), 0.0f));
 							}
@@ -324,23 +324,23 @@ void Animation3dEditor::_updateModelAnimationExecution()
 
 						if(transformationType == TransformationType::MOVEMENT)
 						{
-							if(partID.empty()) // Base position
+							if(partID.empty())
 							{
 								_fe3d.model_moveBase(idPair.second, fvec3(0.0f, 0.0f, (finalSpeed - difference)));
 							}
-							else // Part position
+							else
 							{
 								_fe3d.model_movePart(idPair.second, partID, fvec3(0.0f, 0.0f, (finalSpeed - difference)));
 							}
 						}
 						else if(transformationType == TransformationType::ROTATION)
 						{
-							if(partID.empty()) // Base rotation
+							if(partID.empty())
 							{
 								_fe3d.model_setBaseRotationOrigin(idPair.second, (currentModelSize * rotationOrigin));
 								_fe3d.model_rotateBase(idPair.second, fvec3(0.0f, 0.0f, (finalSpeed - difference)));
 							}
-							else // Part rotation
+							else
 							{
 								_fe3d.model_setPartRotationOrigin(idPair.second, partID, (currentModelSize * rotationOrigin));
 								_fe3d.model_rotatePart(idPair.second, partID, fvec3(0.0f, 0.0f, (finalSpeed - difference)));
@@ -348,11 +348,11 @@ void Animation3dEditor::_updateModelAnimationExecution()
 						}
 						else if(transformationType == TransformationType::SCALING)
 						{
-							if(partID.empty()) // Base size
+							if(partID.empty())
 							{
 								_fe3d.model_scaleBase(idPair.second, fvec3(0.0f, 0.0f, (finalSpeed - difference)));
 							}
-							else // Part size
+							else
 							{
 								_fe3d.model_scalePart(idPair.second, partID, fvec3(0.0f, 0.0f, (finalSpeed - difference)));
 							}
@@ -372,7 +372,7 @@ void Animation3dEditor::_updateModelAnimationExecution()
 
 			if(finishedPartCount == animation.getPartIDs().size())
 			{
-				if(animation.getFrameIndex() == (static_cast<unsigned int>(animation.getFrames().size()) - 1)) // Animation finished
+				if(animation.getFrameIndex() == (static_cast<unsigned int>(animation.getFrames().size()) - 1))
 				{
 					if(animation.getPlayCount() == -1)
 					{
@@ -393,7 +393,7 @@ void Animation3dEditor::_updateModelAnimationExecution()
 						}
 					}
 				}
-				else // Animation not finished yet
+				else
 				{
 					if(animation.isAutopaused() && animation.getFrameIndex() != 0)
 					{

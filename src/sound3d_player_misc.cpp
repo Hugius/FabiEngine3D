@@ -15,14 +15,14 @@ void Sound3dPlayer::update(vector<Sound3d>& sounds, Camera& camera)
 	{
 		if(isSoundStarted(sound))
 		{
-			auto cameraPosition = camera.getPosition(); // Camera position
-			float xDifference = fabsf(sound.getPosition().x - cameraPosition.x); // Difference between camera X & point X
-			float yDifference = fabsf(sound.getPosition().y - cameraPosition.y); // Difference between camera Y & point Y
-			float zDifference = fabsf(sound.getPosition().z - cameraPosition.z); // Difference between camera Z & point Z
-			float maxDifference = max(xDifference, max(yDifference, zDifference)); // Maximum difference
-			float volume = sound.getMaxVolume() - ((maxDifference / sound.getMaxDistance()) * sound.getMaxVolume()); // Calculate volume
-			volume = clamp(volume, 0.0f, sound.getMaxVolume()); // Clamp to maximum
-			sound.setVolume(volume); // Update sound volume
+			auto cameraPosition = camera.getPosition();
+			float xDifference = fabsf(sound.getPosition().x - cameraPosition.x);
+			float yDifference = fabsf(sound.getPosition().y - cameraPosition.y);
+			float zDifference = fabsf(sound.getPosition().z - cameraPosition.z);
+			float maxDifference = max(xDifference, max(yDifference, zDifference));
+			float volume = sound.getMaxVolume() - ((maxDifference / sound.getMaxDistance()) * sound.getMaxVolume());
+			volume = clamp(volume, 0.0f, sound.getMaxVolume());
+			sound.setVolume(volume);
 
 			auto cameraDirection = camera.getFrontVector();
 			mat44 rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(90.0f));

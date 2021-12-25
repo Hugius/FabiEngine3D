@@ -9,7 +9,7 @@ void Animation3dEditor::_updateMainMenu()
 
 	if(screen->getID() == "animation3dEditorMenuMain")
 	{
-		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused())) // Back button
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getOverlay()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
 		}
@@ -54,7 +54,7 @@ void Animation3dEditor::_updateChoiceMenu()
 	{
 		auto currentAnimation = _getAnimation(_currentAnimationID);
 
-		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused())) // Back button
+		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			if(isModelAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID()))
 			{
@@ -67,14 +67,14 @@ void Animation3dEditor::_updateChoiceMenu()
 				{
 					_fe3d.model_setVisible(currentAnimation->getPreviewModelID(), false);
 
-					if(partID.empty()) // Base transformation
+					if(partID.empty())
 					{
 						_fe3d.model_setBasePosition(currentAnimation->getPreviewModelID(), fvec3(0.0f));
 						_fe3d.model_setBaseRotationOrigin(currentAnimation->getPreviewModelID(), fvec3(0.0f));
 						_fe3d.model_setBaseRotation(currentAnimation->getPreviewModelID(), fvec3(0.0f));
 						_fe3d.model_setBaseSize(currentAnimation->getPreviewModelID(), currentAnimation->getInitialSize());
 					}
-					else // Part transformation
+					else
 					{
 						_fe3d.model_setPartPosition(currentAnimation->getPreviewModelID(), partID, fvec3(0.0f));
 						_fe3d.model_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, fvec3(0.0f));
@@ -104,14 +104,14 @@ void Animation3dEditor::_updateChoiceMenu()
 		{
 			for(const auto& partID : currentAnimation->getPartIDs())
 			{
-				if(partID.empty()) // Base transformation
+				if(partID.empty())
 				{
 					_fe3d.model_setBasePosition(currentAnimation->getPreviewModelID(), fvec3(0.0f));
 					_fe3d.model_setBaseRotationOrigin(currentAnimation->getPreviewModelID(), fvec3(0.0f));
 					_fe3d.model_setBaseRotation(currentAnimation->getPreviewModelID(), fvec3(0.0f));
 					_fe3d.model_setBaseSize(currentAnimation->getPreviewModelID(), currentAnimation->getInitialSize());
 				}
-				else // Part transformation
+				else
 				{
 					_fe3d.model_setPartPosition(currentAnimation->getPreviewModelID(), partID, fvec3(0.0f));
 					_fe3d.model_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, fvec3(0.0f));
@@ -129,14 +129,14 @@ void Animation3dEditor::_updateChoiceMenu()
 			_fe3d.model_setBaseSize(currentAnimation->getPreviewModelID(), currentAnimation->getInitialSize());
 			for(const auto& partID : currentAnimation->getPartIDs())
 			{
-				if(partID.empty()) // Base transformation
+				if(partID.empty())
 				{
 					_fe3d.model_setBasePosition(currentAnimation->getPreviewModelID(), fvec3(0.0f));
 					_fe3d.model_setBaseRotationOrigin(currentAnimation->getPreviewModelID(), fvec3(0.0f));
 					_fe3d.model_setBaseRotation(currentAnimation->getPreviewModelID(), fvec3(0.0f));
 					_fe3d.model_setBaseSize(currentAnimation->getPreviewModelID(), currentAnimation->getInitialSize());
 				}
-				else // Part transformation
+				else
 				{
 					_fe3d.model_setPartPosition(currentAnimation->getPreviewModelID(), partID, fvec3(0.0f));
 					_fe3d.model_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, fvec3(0.0f));

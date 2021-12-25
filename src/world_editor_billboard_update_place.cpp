@@ -5,7 +5,7 @@ void WorldEditor::_updateBillboardPlacing()
 {
 	if(!_currentTemplateBillboardID.empty())
 	{
-		if(_fe3d.terrain_getSelectedID().empty()) // Placing without terrain
+		if(_fe3d.terrain_getSelectedID().empty())
 		{
 			auto newPosition = _fe3d.billboard_getPosition(_currentTemplateBillboardID);
 
@@ -36,7 +36,7 @@ void WorldEditor::_updateBillboardPlacing()
 				_currentTemplateBillboardID = "";
 			}
 		}
-		else // Placing on terrain
+		else
 		{
 			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
 			{
@@ -67,7 +67,7 @@ void WorldEditor::_updateBillboardPlacing()
 
 						_copyTemplateBillboard(newID, _currentTemplateBillboardID, newPosition, false);
 					}
-					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
+					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE))
 					{
 						_fe3d.billboard_setVisible(_currentTemplateBillboardID, false);
 						_fe3d.text_setVisible(_gui.getOverlay()->getTextField("billboardID")->getEntityID(), false);

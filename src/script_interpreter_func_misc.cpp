@@ -455,17 +455,17 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 			string stringPart = "";
 			for(size_t i = 0; i < fullString.size(); i++)
 			{
-				if(fullString[i] == splitter.back()) // Found splitter
+				if(fullString[i] == splitter.back())
 				{
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, stringPart));
 					stringPart = "";
 				}
-				else if(i == (fullString.size() - 1)) // End of string
+				else if(i == (fullString.size() - 1))
 				{
 					stringPart += fullString[i];
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, stringPart));
 				}
-				else // Add to string part
+				else
 				{
 					stringPart += fullString[i];
 				}

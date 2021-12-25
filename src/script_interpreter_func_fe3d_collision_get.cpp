@@ -41,11 +41,11 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 					   (directionZ && args[2].getString() == "Z") ||
 					   ((directionX || directionY || directionZ) && args[2].getString().empty()))
 					{
-						if(args[1].getString().empty()) // No specific AABB part
+						if(args[1].getString().empty())
 						{
 							result = _fe3d.aabb_getParentEntityID(foundAabbID);
 						}
-						else // Specific AABB part
+						else
 						{
 							string partID = foundAabbID;
 							reverse(partID.begin(), partID.end());
@@ -254,7 +254,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 		{
 			string result = "";
 
-			if(args[1].getString().empty()) // Check all AABB parts of self entity
+			if(args[1].getString().empty())
 			{
 				for(const auto& selfSearchID : _fe3d.aabb_getChildIDs(args[0].getString(), AabbParentEntityType::MODEL))
 				{
@@ -266,11 +266,11 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 						if(_fe3d.aabb_hasParent(foundAabbID) &&
 						   (_fe3d.aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::MODEL))
 						{
-							if(args[1].getString().empty()) // No specific AABB part
+							if(args[1].getString().empty())
 							{
 								result = foundAabbID;
 							}
-							else // Specific AABB part
+							else
 							{
 								string partID = foundAabbID;
 								reverse(partID.begin(), partID.end());
@@ -288,7 +288,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 					}
 				}
 			}
-			else // Check specific AABB part of self entity
+			else
 			{
 				string selfSearchID = args[0].getString() + (!args[1].getString().empty() ? ("_" + args[1].getString()) : "");
 				if(!_fe3d.aabb_isExisting(selfSearchID))
@@ -305,11 +305,11 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 					if(_fe3d.aabb_hasParent(foundAabbID) &&
 					   (_fe3d.aabb_getParentEntityType(foundAabbID) == AabbParentEntityType::MODEL))
 					{
-						if(args[1].getString().empty()) // No specific AABB part
+						if(args[1].getString().empty())
 						{
 							result = foundAabbID;
 						}
-						else // Specific AABB part
+						else
 						{
 							string partID = foundAabbID;
 							reverse(partID.begin(), partID.end());

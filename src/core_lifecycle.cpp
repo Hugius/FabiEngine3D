@@ -44,7 +44,7 @@ void Core::_start()
 	{
 		auto previousTime = high_resolution_clock::now();
 
-		if(_fe3d.server_isRunning()) // Process application at full speed
+		if(_fe3d.server_isRunning())
 		{
 			if(!Config::getInst().isApplicationExported())
 			{
@@ -59,7 +59,7 @@ void Core::_start()
 				_render();
 			}
 		}
-		else // Process application at fixed speed
+		else
 		{
 			renderLag += _deltaTimeMS;
 
@@ -198,12 +198,12 @@ void Core::_update()
 	if(!Config::getInst().isApplicationExported())
 	{
 		static float opacity = 0.0f;
-		if(opacity < 1.0f) // Increase opacity
+		if(opacity < 1.0f)
 		{
 			_window.setOpacity(opacity);
 			opacity += 0.01f;
 		}
-		if(opacity > 1.0f) // Opacity must be exactly 100%
+		if(opacity > 1.0f)
 		{
 			opacity = 1.0f;
 			_window.setOpacity(opacity);

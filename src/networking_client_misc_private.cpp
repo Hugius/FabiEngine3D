@@ -40,16 +40,16 @@ bool NetworkingClient::_sendTcpMessage(const string& content, bool isReserved, b
 
 	if(sendStatusCode == SOCKET_ERROR)
 	{
-		if((WSAGetLastError() == WSAECONNRESET) || (WSAGetLastError() == WSAECONNABORTED)) // Lost connection with host
+		if((WSAGetLastError() == WSAECONNRESET) || (WSAGetLastError() == WSAECONNABORTED))
 		{
 			disconnectFromServer(mustBeAccepted);
 			return false;
 		}
-		else if(WSAGetLastError() == WSAENOBUFS) // Buffer full
+		else if(WSAGetLastError() == WSAENOBUFS)
 		{
 			Logger::throwWarning("Networking client is sending too many TCP messages!");
 		}
-		else // Something really bad happened
+		else
 		{
 			Logger::throwError("NetworkingClient::_sendTcpMessage::6 ---> ", WSAGetLastError());
 		}
@@ -88,20 +88,20 @@ bool NetworkingClient::_sendUdpMessage(const string& content, bool isReserved, b
 	string message = (_username + ';' + content);
 
 	auto sendStatusCode = sendto(
-		_udpSocket, // UDP socket
-		message.c_str(), // Message content
-		static_cast<int>(message.size()), // Message size
-		0, // Flags
-		reinterpret_cast<sockaddr*>(&socketAddress), // Server address
-		sizeof(socketAddress)); // Server address length
+		_udpSocket,
+		message.c_str(),
+		static_cast<int>(message.size()),
+		0,
+		reinterpret_cast<sockaddr*>(&socketAddress),
+		sizeof(socketAddress));
 
 	if(sendStatusCode == SOCKET_ERROR)
 	{
-		if(WSAGetLastError() == WSAENOBUFS) // Buffer full
+		if(WSAGetLastError() == WSAENOBUFS)
 		{
 			Logger::throwWarning("Networking client is sending too many UDP messages!");
 		}
-		else // Something really bad happened
+		else
 		{
 			Logger::throwError("NetworkingClient::_sendUdpMessage::6 ---> ", WSAGetLastError());
 		}
@@ -133,9 +133,9 @@ void NetworkingClient::_setupTcp()
 {
 	addrinfo hints;
 	ZeroMemory(&hints, sizeof(hints));
-	hints.ai_family = AF_INET; // Ipv4 address
-	hints.ai_socktype = SOCK_STREAM; // Streaming socket
-	hints.ai_protocol = IPPROTO_TCP; // TCP protocol
+	hints.ai_family = AF_INET;
+	hints.ai_socktype = SOCK_STREAM;
+	hints.ai_protocol = IPPROTO_TCP;
 
 	addrinfo* addressInfo = nullptr;
 	auto tcpInfoStatusCode = getaddrinfo("0.0.0.0", "0", &hints, &addressInfo);
@@ -164,9 +164,9 @@ void NetworkingClient::_setupUdp()
 {
 	addrinfo hints;
 	ZeroMemory(&hints, sizeof(hints));
-	hints.ai_family = AF_INET; // Ipv4 address
-	hints.ai_socktype = SOCK_DGRAM; // Datagram socket
-	hints.ai_protocol = IPPROTO_UDP; // UDP protocol
+	hints.ai_family = AF_INET;
+	hints.ai_socktype = SOCK_DGRAM;
+	hints.ai_protocol = IPPROTO_UDP;
 
 	addrinfo* addressInfo = nullptr;
 	auto udpInfoStatusCode = getaddrinfo("0.0.0.0", "0", &hints, &addressInfo);
@@ -197,11 +197,11 @@ tuple<int, int, long long, string> NetworkingClient::_waitForTcpMessage(SOCKET s
 	int bufferLength = static_cast<int>(NetworkingUtils::TCP_BUFFER_BYTES);
 	auto receiveResult = recv(socket, buffer, bufferLength, 0);
 
-	if(receiveResult > 0) // Message received correctly
+	if(receiveResult > 0)
 	{
 		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), string(buffer, receiveResult));
 	}
-	else // Something else happened
+	else
 	{
 		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), "");
 	}
@@ -219,11 +219,11 @@ tuple<int, int, string, string, string> NetworkingClient::_receiveUdpMessage(SOC
 	auto IP = NetworkingUtils::extractAddressIP(&sourceAddress);
 	auto port = NetworkingUtils::extractAddressPort(&sourceAddress);
 
-	if(receiveResult > 0) // Message received correctly
+	if(receiveResult > 0)
 	{
 		return make_tuple(receiveResult, WSAGetLastError(), string(buffer, receiveResult), IP, port);
 	}
-	else // Something else happened
+	else
 	{
 		return make_tuple(receiveResult, WSAGetLastError(), "", IP, port);
 	}

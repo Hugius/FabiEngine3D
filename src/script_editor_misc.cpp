@@ -82,20 +82,20 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 
 void ScriptEditor::_copySelectedText()
 {
-	if(_firstSelectedLineIndex != -1) // Check if anything is selected at all
+	if(_firstSelectedLineIndex != -1)
 	{
-		_copyClipboard.clear(); // Clear last copy
+		_copyClipboard.clear();
 
-		if(_lastSelectedLineIndex == -1) // Check if only 1 line selected
+		if(_lastSelectedLineIndex == -1)
 		{
 			_copyClipboard.push_back(_script.getScriptFile(_currentScriptFileID)->getLineText(_firstSelectedLineIndex));
 		}
-		else // If multiple selected lines
+		else
 		{
 			for(int i = ((_firstSelectedLineIndex > _lastSelectedLineIndex) ? _lastSelectedLineIndex : _firstSelectedLineIndex);
 				i <= ((_firstSelectedLineIndex > _lastSelectedLineIndex) ? _firstSelectedLineIndex : _lastSelectedLineIndex); i++)
 			{
-				_copyClipboard.push_back(_script.getScriptFile(_currentScriptFileID)->getLineText(i)); // Copy text lines
+				_copyClipboard.push_back(_script.getScriptFile(_currentScriptFileID)->getLineText(i));
 			}
 		}
 	}

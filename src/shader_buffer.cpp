@@ -52,7 +52,7 @@ void ShaderBuffer::_createProgram(const char* vertexShaderCode, const char* frag
 {
 	unsigned int vertex, fragment;
 	int success;
-	char infoLog[512]; // For errors
+	char infoLog[512];
 
 	vertex = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertex, 1, &vertexShaderCode, nullptr);
@@ -112,7 +112,7 @@ const UniformID ShaderBuffer::_getUniformID(const string& uniformID)
 	}
 	else
 	{
-		return iterator->second; // Return existing uniform
+		return iterator->second;
 	}
 }
 

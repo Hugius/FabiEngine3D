@@ -227,7 +227,7 @@ void WorldEditor::_updateModelEditing()
 
 					_animation3dEditor.startModelAnimation(animationIDs[0], _activeModelID, -1);
 				}
-				else // No animation playing
+				else
 				{
 					_initialModelPosition[_activeModelID] = position;
 					_fe3d.model_setBasePosition(_activeModelID, position);

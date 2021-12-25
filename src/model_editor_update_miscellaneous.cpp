@@ -62,15 +62,15 @@ void ModelEditor::_updateMiscellaneousMenu()
 
 		if(_gui.getOverlay()->checkValueForm("levelOfDetailEntityID", levelOfDetailEntityID, {}))
 		{
-			if(levelOfDetailEntityID == "@") // No level of detail entity
+			if(levelOfDetailEntityID == "@")
 			{
 				_fe3d.model_setLevelOfDetailEntityID(_currentModelID, "");
 			}
-			else if(find(_loadedModelIDs.begin(), _loadedModelIDs.end(), ("@" + levelOfDetailEntityID)) == _loadedModelIDs.end()) // Check level of detail entity
+			else if(find(_loadedModelIDs.begin(), _loadedModelIDs.end(), ("@" + levelOfDetailEntityID)) == _loadedModelIDs.end())
 			{
 				Logger::throwWarning("Cannot find LOD entity with ID \"" + levelOfDetailEntityID + "\"");
 			}
-			else // Set level of detail entity
+			else
 			{
 				_fe3d.model_setLevelOfDetailEntityID(_currentModelID, ("@" + levelOfDetailEntityID));
 			}

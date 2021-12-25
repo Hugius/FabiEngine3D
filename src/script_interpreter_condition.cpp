@@ -23,22 +23,22 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 
 	for(const auto& c : conditionString)
 	{
-		if(c == ' ' && elementBuild.empty() && !isBuildingString) // Check for useless whitespace
+		if(c == ' ' && elementBuild.empty() && !isBuildingString)
 		{
 			index++;
 			continue;
 		}
-		else if(index == conditionString.size() - 1) // Check if last character
+		else if(index == conditionString.size() - 1)
 		{
 			elementBuild += c;
 			elements.push_back(elementBuild);
 		}
-		else if(c == ' ' && !isBuildingString) // Check for whitespace
+		else if(c == ' ' && !isBuildingString)
 		{
 			elements.push_back(elementBuild);
 			elementBuild.clear();
 		}
-		else // Keep building element string
+		else
 		{
 			if(c == '"' && !isBuildingString)
 			{
@@ -198,21 +198,21 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 	string currentLogicOperator = "";
 	for(size_t i = 1; i < conditions.size(); i++)
 	{
-		if(currentLogicOperator.empty()) // Save logic operator
+		if(currentLogicOperator.empty())
 		{
 			currentLogicOperator = logicOperators[i - 1];
 		}
-		else if(currentLogicOperator != logicOperators[i - 1]) // Check logic operator
+		else if(currentLogicOperator != logicOperators[i - 1])
 		{
 			_throwScriptError("cannot use different logic operators!");
 			return false;
 		}
 
-		if(logicOperators[i - 1] == AND_KEYWORD) // AND
+		if(logicOperators[i - 1] == AND_KEYWORD)
 		{
 			finalCondition = finalCondition && conditions[i];
 		}
-		else if(logicOperators[i - 1] == OR_KEYWORD) // OR
+		else if(logicOperators[i - 1] == OR_KEYWORD)
 		{
 			finalCondition = finalCondition || conditions[i];
 		}

@@ -86,7 +86,7 @@ void MasterRenderer::renderWorld(EntityBus* entityBus)
 {
 	_entityBus = entityBus;
 
-	if(_renderBus.isWireframeRenderingEnabled()) // Wireframe rendering
+	if(_renderBus.isWireframeRenderingEnabled())
 	{
 		glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -101,7 +101,7 @@ void MasterRenderer::renderWorld(EntityBus* entityBus)
 		_renderGUI();
 		_renderCursor();
 	}
-	else // Normal rendering
+	else
 	{
 		_timer.startDeltaPart("reflectionPreRender");
 		_captureCubeReflections();
@@ -157,13 +157,13 @@ void MasterRenderer::renderWorld(EntityBus* entityBus)
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		if(_renderBus.isDebugRenderingEnabled()) // Render debug screens
+		if(_renderBus.isDebugRenderingEnabled())
 		{
 			glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y + 1);
 			_renderDebugScreens();
 			glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 		}
-		else // Render final world texture
+		else
 		{
 			glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y + 0);
 			_renderFinalWorldImage();

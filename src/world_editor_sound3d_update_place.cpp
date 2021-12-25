@@ -5,7 +5,7 @@ void WorldEditor::_updateSoundPlacing()
 {
 	if(!_currentTemplateSoundID.empty())
 	{
-		if(_fe3d.terrain_getSelectedID().empty()) // Placing without terrain
+		if(_fe3d.terrain_getSelectedID().empty())
 		{
 			auto newPosition = _fe3d.sound3d_getPosition(_currentTemplateSoundID);
 
@@ -56,7 +56,7 @@ void WorldEditor::_updateSoundPlacing()
 				_currentTemplateSoundID = "";
 			}
 		}
-		else // Placing on terrain
+		else
 		{
 			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
 			{
@@ -117,7 +117,7 @@ void WorldEditor::_updateSoundPlacing()
 						_fe3d.sound3d_start(newID, -1, 0, false);
 						_loadedSoundIDs.insert(make_pair(newID, _currentTemplateSoundID));
 					}
-					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
+					else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE))
 					{
 						_fe3d.model_setVisible(TEMPLATE_SPEAKER_ID, false);
 

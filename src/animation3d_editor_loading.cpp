@@ -32,102 +32,77 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 	string line;
 	while(getline(file, line))
 	{
-		// Data placeholders
 		string animationID, previewModelID;
 
-		// For file extraction
 		istringstream iss(line);
 
-		// Read data from file
 		iss >> animationID >> previewModelID;
 
-		// Create new animation
 		auto newAnimation = make_shared<Animation3d>(animationID);
 		newAnimation->setPreviewModelID(previewModelID);
 
-		// Create default frame
 		Animation3dFrame defaultFrame;
 
-		// Add default part
 		newAnimation->addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
 		defaultFrame.addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), Animation3dSpeedType::LINEAR, TransformationType::MOVEMENT);
 
-		// Add custom parts
 		auto partIDs = _fe3d.model_getPartIDs(previewModelID);
 		if(partIDs.size() > 1)
 		{
-			// Iterate through parts
 			for(const auto& partID : partIDs)
 			{
-				// Add part to animation
 				newAnimation->addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
 
-				// Add part to frame
 				defaultFrame.addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), Animation3dSpeedType::LINEAR, TransformationType::MOVEMENT);
 			}
 		}
 
-		// Add default frame to animation
 		newAnimation->addFrame(defaultFrame);
 
-		// Check if there is any more content in line
 		string temp;
 		if(iss >> temp)
 		{
-			// For file extraction
 			iss = istringstream(line);
 
-			// Read data from file
 			iss >> animationID >> previewModelID;
 
-			// Read frame data
 			vector<Animation3dFrame> customFrames;
 			while(true)
 			{
-				// Check if file has frame data left
 				unsigned int modelPartCount;
 				if(iss >> modelPartCount)
 				{
-					// Create custom frame
 					Animation3dFrame customFrame;
 
-					// Iterate through model parts
 					for(unsigned int i = 0; i < modelPartCount; i++)
 					{
-						// Temporary values
 						string partID;
 						fvec3 targetTransformation, rotationOrigin, speed;
 						int speedType, transformationType;
 
-						// Read data from file
 						iss >> partID >> targetTransformation.x >> targetTransformation.y >> targetTransformation.z >>
 							rotationOrigin.x >> rotationOrigin.y >> rotationOrigin.z >>
 							speed.x >> speed.y >> speed.z >>
 							speedType >> transformationType;
 
-						// Questionmark means empty partID
 						if(partID == "?")
 						{
 							partID = "";
 						}
 
-						// Add part to animation only once
 						if(customFrames.empty())
 						{
 							newAnimation->addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
 						}
 
-						// Add part to default frame only once
 						if(customFrames.empty())
 						{
 							defaultFrame.addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), Animation3dSpeedType::LINEAR, TransformationType::MOVEMENT);
 						}
 
-						// Add part to custom frame
 						customFrame.addPart(partID, targetTransformation, rotationOrigin, speed, Animation3dSpeedType(speedType), TransformationType(transformationType));
 					}
 
-					// Add custom frame
 					customFrames.push_back(customFrame);
 				}
 				else
@@ -136,31 +111,25 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 				}
 			}
 
-			// Add custom frames to animation
 			for(const auto& customFrame : customFrames)
 			{
 				newAnimation->addFrame(customFrame);
 			}
 		}
 
-		// Only if loading animations in editor
 		if(mustCheckPreviewModel)
 		{
-			// Check if preview model is still existing
 			if(_fe3d.model_isExisting(newAnimation->getPreviewModelID()))
 			{
-				// Check if parts are present
 				bool hasAllParts = true;
 				for(const auto& partID : newAnimation->getPartIDs())
 				{
-					// Part cannot be empty
 					if(!partID.empty())
 					{
 						hasAllParts = hasAllParts && _fe3d.model_hasPart(newAnimation->getPreviewModelID(), partID);
 					}
 				}
 
-				// Check if preview model still has all the parts
 				if(hasAllParts)
 				{
 					newAnimation->setInitialSize(_fe3d.model_getBaseSize(newAnimation->getPreviewModelID()));
@@ -178,7 +147,6 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 			}
 		}
 
-		// Add new animation
 		_animations.push_back(newAnimation);
 	}
 

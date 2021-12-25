@@ -104,28 +104,22 @@ vec4 calculateWaterColor()
 
 	if (u_hasDudvMap)
 	{
-		// Distort map UV coordinates
 		vec2 distortedMapUV = texture(u_dudvMap, (mapUV + u_rippleOffset)).rg;
 		distortedMapUV *= 0.1f;
 		mapUV += distortedMapUV;
 
-		// Distort NDC UV coordinates
 		vec2 distortedNdcUV = texture(u_dudvMap, mapUV).rg;
 		distortedNdcUV *= 2.0f;
 		distortedNdcUV -= 1.0f;
 		distortedNdcUV *= 0.025f;
 
-		// Add to refraction UV coordinates
 		reflectionUV += distortedNdcUV;
 
-		// Add to reflection UV coordinates
 		refractionUV += distortedNdcUV;
 
-		// Limit reflection UV coordinates
 		reflectionUV.x = clamp(reflectionUV.x, 0.001f, 0.999f);
 		reflectionUV.y = clamp(reflectionUV.y, -0.999f, -0.001f);
 
-		// Limit refraction UV coordinates
 		refractionUV.x = clamp(refractionUV.x, 0.001f, 0.999f);
 		refractionUV.y = clamp(refractionUV.y, 0.001f, 0.999f);
 	}
@@ -177,15 +171,12 @@ vec3 calculateLights(vec3 normal)
 {
 	vec3 result = vec3(0.0f);
 		
-    // Iterate through lights
 	for (int i = 0; i < u_lightCount; i++)
 	{
-        // Calculate light strength
 		vec3 lightDirection = normalize(u_pointlightPositions[i] - f_position);
 		float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
 		float specular = calculateSpecularLighting(u_pointlightPositions[i], normal);
 
-		// Calculate light attenuation
 		float attenuation;
 		if (u_pointlightShapes[i] == 0)
 		{
@@ -202,7 +193,6 @@ vec3 calculateLights(vec3 normal)
 			attenuation = min(xAttenuation, min(yAttenuation, zAttenuation));
 		}
 
-        // Apply
         vec3 current = vec3(0.0f);
 		current += vec3(diffuse); // Diffuse
         current += vec3(specular); // Specular
@@ -210,11 +200,9 @@ vec3 calculateLights(vec3 normal)
         current *= (attenuation * attenuation); // Distance
         current *= u_pointlightIntensities[i]; // Intensity
 
-        // Add to total lighting value
         result += current;
 	}
 
-    // Return
 	return result;
 }
 
@@ -242,13 +230,11 @@ float calculateSpecularLighting(vec3 position, vec3 normal)
 {
     if (u_isSpecular)
     {
-    	// Calculate
         vec3 lightDirection   = normalize(position - f_position);
         vec3 viewDirection    = normalize(u_cameraPosition - f_position);
         vec3 halfWayDirection = normalize(lightDirection + viewDirection);
         float result          = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
 
-        // Return
         return (result * u_specularIntensity);
     }
     else
@@ -261,16 +247,13 @@ vec3 calculateFog(vec3 color)
 {
 	if (u_isFogEnabled)
 	{
-		// Calculate distance to fragment in world space
 		float fragmentDistance = distance(f_position.xyz, u_cameraPosition);
 
-        // Calculate fog intensity
 		float distanceDifference = (u_fogMaxDistance - u_fogMinDistance);
 		float distancePart = clamp(((fragmentDistance - u_fogMinDistance) / distanceDifference), 0.0f, 1.0f);
 		float thickness = clamp(u_fogThickness, 0.0f, 1.0f);
 		float mixValue = (distancePart * thickness);
 
-		// Return
 		return mix(color, u_fogColor, mixValue);
 	}
 	else

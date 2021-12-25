@@ -69,38 +69,29 @@ void TextEntityManager::loadCharacters(const string& ID)
 
 	if((_contentMap.find(ID) == _contentMap.end()) || (_contentMap[ID] != entity->getContent()))
 	{
-		// Save text content
 		_contentMap[ID] = entity->getContent();
 
-		// Delete characters
 		entity->deleteCharacterEntities();
 
-		// Iterate through characters
 		for(const auto& c : entity->getContent())
 		{
-			// Create new character
 			auto newCharacter = make_shared<ImageEntity>("dummy");
 			newCharacter->setRenderBuffer(_nonCenteredRenderBuffer);
 
-			// Load texture
 			string content = "";
 			content += c;
 			auto texture = _textureLoader.load2dTexture(content, entity->getFontPath());
 
-			// Check if font loading went wrong
 			if(texture == 0)
 			{
 				break;
 			}
 
-			// Set texture
 			newCharacter->setDiffuseMap(texture);
 
-			// Add new character
 			entity->addCharacterEntity(newCharacter);
 		}
 
-		// Update characters
 		entity->updateCharacterEntities();
 	}
 }
@@ -109,17 +100,14 @@ void TextEntityManager::update()
 {
 	for(const auto& [keyID, entity] : _entities)
 	{
-		// Update transformation
 		entity->updateTransformation();
 
-		// Update characters
 		if(entity->isDynamic())
 		{
 			entity->updateCharacterEntities();
 		}
 		else
 		{
-			// Update transformation matrix
 			if(entity->isVisible())
 			{
 				entity->updateTransformationMatrix();

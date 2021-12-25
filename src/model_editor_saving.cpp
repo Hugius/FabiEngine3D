@@ -25,7 +25,6 @@ const bool ModelEditor::saveToFile() const
 
 	for(const auto& modelID : _loadedModelIDs)
 	{
-		// Data to save
 		auto isMultiParted = _fe3d.model_isMultiParted(modelID);
 		auto meshPath = _fe3d.model_getMeshPath(modelID);
 		auto modelSize = _fe3d.model_getBaseSize(modelID);
@@ -34,18 +33,14 @@ const bool ModelEditor::saveToFile() const
 		auto isFaceCulled = _fe3d.model_isFaceCulled(modelID);
 		auto rotationOrder = static_cast<unsigned int>(_fe3d.model_getRotationOrder(modelID));
 
-		// Convert to short path
 		meshPath = string(meshPath.empty() ? "" : meshPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
-		// Convert empty string
 		meshPath = (meshPath.empty()) ? "?" : meshPath;
 		levelOfDetailEntityID = (levelOfDetailEntityID.empty()) ? "?" : levelOfDetailEntityID;
 
-		// Convert spaces
 		replace(meshPath.begin(), meshPath.end(), ' ', '?');
 		replace(levelOfDetailEntityID.begin(), levelOfDetailEntityID.end(), ' ', '?');
 
-		// Write data to file
 		file << "MODEL " <<
 			modelID << " " <<
 			meshPath << " " <<
@@ -57,14 +52,11 @@ const bool ModelEditor::saveToFile() const
 			isFaceCulled << " " <<
 			rotationOrder;
 
-		// Write space to file
 		file << " ";
 
-		// Write part data
 		auto partIDs = _fe3d.model_getPartIDs(modelID);
 		for(size_t i = 0; i < partIDs.size(); i++)
 		{
-			// Data to save
 			auto partID = partIDs[i];
 			auto diffuseMapPath = _fe3d.model_getDiffuseMapPath(modelID, partID);
 			auto emissionMapPath = _fe3d.model_getEmissionMapPath(modelID, partID);
@@ -81,14 +73,12 @@ const bool ModelEditor::saveToFile() const
 			auto isReflective = _fe3d.model_isReflective(modelID, partID);
 			auto reflectionType = static_cast<unsigned int>(_fe3d.model_getReflectionType(modelID, partID));
 
-			// Convert to short path
 			diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 			emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 			specularMapPath = string(specularMapPath.empty() ? "" : specularMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 			reflectionMapPath = string(reflectionMapPath.empty() ? "" : reflectionMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 			normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
-			// Convert empty string
 			partID = (partID.empty()) ? "?" : partID;
 			diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 			emissionMapPath = (emissionMapPath.empty()) ? "?" : emissionMapPath;
@@ -96,14 +86,12 @@ const bool ModelEditor::saveToFile() const
 			reflectionMapPath = (reflectionMapPath.empty()) ? "?" : reflectionMapPath;
 			normalMapPath = (normalMapPath.empty()) ? "?" : normalMapPath;
 
-			// Convert spaces
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 			replace(emissionMapPath.begin(), emissionMapPath.end(), ' ', '?');
 			replace(specularMapPath.begin(), specularMapPath.end(), ' ', '?');
 			replace(reflectionMapPath.begin(), reflectionMapPath.end(), ' ', '?');
 			replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
 
-			// Write data to file
 			file <<
 				partID << " " <<
 				diffuseMapPath << " " <<
@@ -123,24 +111,19 @@ const bool ModelEditor::saveToFile() const
 				color.b << " " <<
 				textureRepeat;
 
-			// Write space to file
 			if(i < (partIDs.size() - 1))
 			{
 				file << " ";
 			}
 		}
 
-		// Write newline to file
 		file << endl;
 
-		// Write AABB data
 		for(const auto& aabbID : _fe3d.aabb_getChildIDs(modelID, AabbParentEntityType::MODEL))
 		{
-			// Data to save
 			auto position = _fe3d.aabb_getPosition(aabbID);
 			auto size = _fe3d.aabb_getSize(aabbID);
 
-			// Write data to file
 			file << "AABB " <<
 				aabbID << " " <<
 				modelID << " " <<

@@ -23,33 +23,24 @@ const bool Animation3dEditor::saveToFile() const
 
 	for(const auto& animation : _animations)
 	{
-		// Data to save
 		auto animationID = animation->getID();
 		auto previewModelID = animation->getPreviewModelID();
 
-		// Only if animation has preview model
 		if(!previewModelID.empty())
 		{
-			// Write data to file
 			file << animationID << " " << previewModelID;
 
-			// Check if animation has custom frames
 			if(animation->getFrames().size() > 1)
 			{
-				// Add space
 				file << " ";
 
-				// Iterate through frames
 				for(unsigned int frameIndex = 1; frameIndex < animation->getFrames().size(); frameIndex++)
 				{
-					// Write the amount of model parts
 					file << animation->getPartIDs().size() << " ";
 
-					// Iterate through model parts
 					unsigned int partIndex = 0;
 					for(auto partID : animation->getPartIDs())
 					{
-						// Data to save
 						auto frame = animation->getFrames()[frameIndex];
 						auto targetTransformation = frame.getTargetTransformations().at(partID);
 						auto rotationOrigin = frame.getRotationOrigins().at(partID);
@@ -57,13 +48,11 @@ const bool Animation3dEditor::saveToFile() const
 						auto speedType = static_cast<int>(frame.getSpeedTypes().at(partID));
 						auto transformationType = static_cast<int>(frame.getTransformationTypes().at(partID));
 
-						// Questionmark means empty partID
 						if(partID.empty())
 						{
 							partID = "?";
 						}
 
-						// Write data to file
 						file <<
 							partID << " " <<
 							targetTransformation.x << " " <<
@@ -78,7 +67,6 @@ const bool Animation3dEditor::saveToFile() const
 							speedType << " " <<
 							transformationType;
 
-						// Add space
 						if(partIndex != (animation->getPartIDs().size() - 1))
 						{
 							file << " ";
@@ -86,7 +74,6 @@ const bool Animation3dEditor::saveToFile() const
 						partIndex++;
 					}
 
-					// Add space
 					if(frameIndex != (animation->getFrames().size() - 1))
 					{
 						file << " ";
@@ -94,7 +81,6 @@ const bool Animation3dEditor::saveToFile() const
 				}
 			}
 
-			// Add newline
 			file << endl;
 		}
 	}

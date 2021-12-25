@@ -9,17 +9,13 @@ void TopViewportController::_updateProjectCreating()
 {
 	if(_isCreatingProject)
 	{
-		// Temporary values
 		string newProjectID;
 
-		// Check if user filled in a new ID
 		if(_gui.getOverlay()->checkValueForm("newProjectID", newProjectID))
 		{
-			// Temporary values
 			const string projectDirectoryPath = (Tools::getRootDirectoryPath() + "projects\\");
 			const string newProjectDirectoryPath = (projectDirectoryPath + newProjectID + "\\");
 
-			// Check if game directory exists
 			if(!Tools::isDirectoryExisting(projectDirectoryPath))
 			{
 				Logger::throwWarning("Directory `projects\\` is missing!");
@@ -43,10 +39,8 @@ void TopViewportController::_updateProjectCreating()
 			}
 			else // Project not existing
 			{
-				// Generate new project directory
 				Tools::createDirectory(newProjectDirectoryPath);
 
-				// Generate project subdirectories
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\audio\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\font\\");
@@ -70,7 +64,6 @@ void TopViewportController::_updateProjectCreating()
 				Tools::createDirectory(newProjectDirectoryPath + "worlds\\editor\\");
 				Tools::createDirectory(newProjectDirectoryPath + "scripts\\");
 
-				// Create new empty project files
 				auto animation2dFile = ofstream(newProjectDirectoryPath + "data\\animation2d.fe3d");
 				auto animation3dFile = ofstream(newProjectDirectoryPath + "data\\animation3d.fe3d");
 				auto billboardFile = ofstream(newProjectDirectoryPath + "data\\billboard.fe3d");
@@ -92,14 +85,11 @@ void TopViewportController::_updateProjectCreating()
 				terrainFile.close();
 				waterFile.close();
 
-				// Load current project
 				_currentProjectID = newProjectID;
 				_applyProjectChange();
 
-				// Logging
 				Logger::throwInfo("New project \"" + _currentProjectID + "\" created!");
 
-				// Miscellaneous
 				_isCreatingProject = false;
 			}
 		}
@@ -110,25 +100,20 @@ void TopViewportController::_updateProjectLoading()
 {
 	if(_isLoadingProject)
 	{
-		// Temporary values
 		const string clickedButtonID = _gui.getOverlay()->checkChoiceForm("projectList");
 		const string projectDirectoryPath = string(Tools::getRootDirectoryPath() + "projects\\" + clickedButtonID + "\\");
 
-		// Check if user clicked a project ID
 		if(!clickedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			// Check if project corrupted
 			if(isProjectCorrupted(projectDirectoryPath))
 			{
 				Logger::throwWarning("Cannot load project: missing files/directories!");
 				return;
 			}
 
-			// Load current project
 			_currentProjectID = clickedButtonID;
 			_applyProjectChange();
 
-			// Gather file paths
 			auto skyTexturePaths = _skyEditor.getTexturePathsFromFile();
 			auto terrainTexturePaths = _terrainEditor.getTexturePathsFromFile();
 			auto terrainBitmapPaths = _terrainEditor.getBitmapPathsFromFile();
@@ -140,10 +125,8 @@ void TopViewportController::_updateProjectLoading()
 			auto imageTexturePaths = _imageEditor.getTexturePathsFromFile();
 			auto audioPaths = _soundEditor.getAudioPathsFromFile();
 
-			// Cache meshes
 			_fe3d.misc_cacheMeshes(modelMeshPaths);
 
-			// Cache 2D textures
 			vector<string> texturePaths2D;
 			texturePaths2D.insert(texturePaths2D.end(), terrainTexturePaths.begin(), terrainTexturePaths.end());
 			texturePaths2D.insert(texturePaths2D.end(), waterTexturePaths.begin(), waterTexturePaths.end());
@@ -152,22 +135,16 @@ void TopViewportController::_updateProjectLoading()
 			texturePaths2D.insert(texturePaths2D.end(), imageTexturePaths.begin(), imageTexturePaths.end());
 			_fe3d.misc_cache2dTextures(texturePaths2D);
 
-			// Cache 3D textures
 			_fe3d.misc_cache3dTextures(skyTexturePaths);
 
-			// Cache bitmaps
 			_fe3d.misc_cacheBitmaps(terrainBitmapPaths);
 
-			// Cache fonts
 			_fe3d.misc_cacheFonts(billboardFontPaths);
 
-			// Cache audios
 			_fe3d.misc_cacheAudios(audioPaths);
 
-			// Logging
 			Logger::throwInfo("Existing project \"" + _currentProjectID + "\" loaded!");
 
-			// Miscellaneous
 			_isLoadingProject = false;
 			_gui.getOverlay()->deleteChoiceForm("projectList");
 		}
@@ -183,11 +160,9 @@ void TopViewportController::_updateProjectDeleting()
 {
 	if(_isDeletingProject)
 	{
-		// Temporary values
 		static string chosenButtonID = "";
 		string clickedButtonID = _gui.getOverlay()->checkChoiceForm("projectList");
 
-		// Check if user clicked a project ID
 		if(!clickedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			_gui.getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
@@ -200,18 +175,14 @@ void TopViewportController::_updateProjectDeleting()
 			_gui.getOverlay()->deleteChoiceForm("projectList");
 		}
 
-		// Update answer forms
 		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			// Check if deleting currently opened project
 			if(chosenButtonID == _currentProjectID)
 			{
-				// Unload current project
 				_currentProjectID = "";
 				_applyProjectChange();
 			}
 
-			// Check if project directory is still existing
 			const string directoryPath = (Tools::getRootDirectoryPath() + "projects\\" + chosenButtonID);
 			if(!Tools::isDirectoryExisting(directoryPath))
 			{
@@ -219,13 +190,10 @@ void TopViewportController::_updateProjectDeleting()
 				return;
 			}
 
-			// Delete project directory
 			Tools::deleteDirectory(directoryPath);
 
-			// Logging
 			Logger::throwInfo("Existing project \"" + chosenButtonID + "\" deleted!");
 
-			// Miscellaneous
 			_isDeletingProject = false;
 			chosenButtonID = "";
 		}

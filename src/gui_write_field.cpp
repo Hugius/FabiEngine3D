@@ -48,12 +48,10 @@ void GuiWriteField::_updateTyping()
 		static int passedBackspaceFrames = MAX_PASSED_BACKSPACE_FRAMES;
 		static bool barEnabled = true;
 
-		// Update bar animation time
 		if(passedBarFrames >= MAX_PASSED_BAR_FRAMES)
 		{
 			passedBarFrames = 0;
 
-			// Toggle bar animation
 			barEnabled = !barEnabled;
 		}
 		else
@@ -61,13 +59,10 @@ void GuiWriteField::_updateTyping()
 			passedBarFrames++;
 		}
 
-		// Check if not writing out of border
 		if((static_cast<float>(_currentTextContent.size() + 1) * CHAR_WIDTH) < _textField->getInitialSize().x)
 		{
-			// Letter characters
 			string letterCharacters = " abcdefghijklmnopqrstuvwxyz";
 
-			// Number characters
 			map<char, char> numberCharacterMap;
 			numberCharacterMap['0'] = ')';
 			numberCharacterMap['1'] = '!';
@@ -80,7 +75,6 @@ void GuiWriteField::_updateTyping()
 			numberCharacterMap['8'] = '*';
 			numberCharacterMap['9'] = '(';
 
-			// Special characters
 			map<char, char> specialCharacterMap;
 			specialCharacterMap['.'] = '>';
 			specialCharacterMap[','] = '<';
@@ -93,15 +87,12 @@ void GuiWriteField::_updateTyping()
 			specialCharacterMap['-'] = '_';
 			specialCharacterMap['='] = '+';
 
-			// Letter characters
 			if(!_noLetters)
 			{
 				for(const auto& c : letterCharacters)
 				{
-					// Check if character is pressed on keyboard
 					if(_fe3d.input_isKeyPressed(InputType(c)))
 					{
-						// Spacebar
 						if(c == ' ')
 						{
 							_currentTextContent += c;
@@ -110,7 +101,6 @@ void GuiWriteField::_updateTyping()
 						{
 							if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT)) // Uppercase or special character
 							{
-								// Convert to uppercase
 								{
 									_currentTextContent += (c - 32);
 								}
@@ -119,7 +109,6 @@ void GuiWriteField::_updateTyping()
 							{
 								if(!_noCaps) // A - Z
 								{
-									// Convert to uppercase
 									_currentTextContent += (c - 32);
 								}
 							}
@@ -132,15 +121,12 @@ void GuiWriteField::_updateTyping()
 				}
 			}
 
-			// Number characters
 			if(!_noNumbers)
 			{
 				for(const auto& element : numberCharacterMap)
 				{
-					// Check if character is pressed on keyboard
 					if(_fe3d.input_isKeyPressed(InputType(element.first)))
 					{
-						// Check if shift was pressed
 						if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 						{
 							_currentTextContent += element.second;
@@ -153,15 +139,12 @@ void GuiWriteField::_updateTyping()
 				}
 			}
 
-			// Special characters
 			if(!_noSpecials)
 			{
 				for(const auto& element : specialCharacterMap)
 				{
-					// Check if character is pressed on keyboard
 					if(_fe3d.input_isKeyPressed(InputType(element.first)))
 					{
-						// Check if shift was pressed
 						if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 						{
 							_currentTextContent += element.second;
@@ -188,10 +171,8 @@ void GuiWriteField::_updateTyping()
 			}
 		}
 
-		// Remove character
 		if(_fe3d.input_isKeyDown(InputType::KEY_BACKSPACE))
 		{
-			// Check if enough time passed
 			if(passedBackspaceFrames >= MAX_PASSED_BACKSPACE_FRAMES)
 			{
 				passedBackspaceFrames = 0;
@@ -215,10 +196,8 @@ void GuiWriteField::_updateTyping()
 			passedBackspaceFrames = MAX_PASSED_BACKSPACE_FRAMES;
 		}
 
-		// Update text content with or without bar
 		_fe3d.text_setContent(_textField->getEntityID(), _currentTextContent + (barEnabled ? "|" : " "), CHAR_WIDTH);
 
-		// Input confirmation
 		if(_fe3d.input_isKeyPressed(InputType::KEY_ENTER))
 		{
 			if(!_currentTextContent.empty())
@@ -230,7 +209,6 @@ void GuiWriteField::_updateTyping()
 	}
 	else
 	{
-		// Update text content
 		_fe3d.text_setContent(_textField->getEntityID(), _currentTextContent, CHAR_WIDTH);
 		_confirmedInput = false;
 	}

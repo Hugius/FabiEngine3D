@@ -121,7 +121,6 @@ void Sound2dPlayer::stopSound(Sound2d& sound, unsigned int fadeMS)
 
 	if(fadeMS == 0)
 	{
-		// Iterate through channels
 		for(const auto& channel : _findChannels(sound))
 		{
 			Mix_HaltChannel(channel);
@@ -129,7 +128,6 @@ void Sound2dPlayer::stopSound(Sound2d& sound, unsigned int fadeMS)
 	}
 	else
 	{
-		// Iterate through channels
 		for(const auto& channel : _findChannels(sound))
 		{
 			Mix_FadeOutChannel(channel, fadeMS);

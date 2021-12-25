@@ -9,7 +9,6 @@ void Animation3dEditor::_updateMainMenu()
 
 	if(screen->getID() == "animation3dEditorMenuMain")
 	{
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused())) // Back button
 		{
 			_gui.getOverlay()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
@@ -31,7 +30,6 @@ void Animation3dEditor::_updateMainMenu()
 			_isDeletingAnimation = true;
 		}
 
-		// Update answer forms
 		if(_gui.getOverlay()->isAnswerFormConfirmed("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
@@ -54,25 +52,19 @@ void Animation3dEditor::_updateChoiceMenu()
 
 	if(screen->getID() == "animation3dEditorMenuChoice")
 	{
-		// Temporary values
 		auto currentAnimation = _getAnimation(_currentAnimationID);
 
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused())) // Back button
 		{
-			// Stop animation if playing
 			if(isModelAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID()))
 			{
 				stopModelAnimation(_currentAnimationID, currentAnimation->getPreviewModelID());
 			}
 
-			// Check if animation has preview model
 			if(_fe3d.model_isExisting(currentAnimation->getPreviewModelID()))
 			{
-				// Iterate through model parts
 				for(const auto& partID : currentAnimation->getPartIDs())
 				{
-					// Hide preview model
 					_fe3d.model_setVisible(currentAnimation->getPreviewModelID(), false);
 
 					if(partID.empty()) // Base transformation
@@ -92,7 +84,6 @@ void Animation3dEditor::_updateChoiceMenu()
 				}
 			}
 
-			// Miscellaneous
 			_currentAnimationID = "";
 			_currentFrameIndex = 0;
 			_fe3d.text_setVisible(_gui.getOverlay()->getTextField("animationID")->getEntityID(), false);
@@ -111,7 +102,6 @@ void Animation3dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("start")->isHovered())
 		{
-			// Reset preview model transformation
 			for(const auto& partID : currentAnimation->getPartIDs())
 			{
 				if(partID.empty()) // Base transformation
@@ -130,15 +120,12 @@ void Animation3dEditor::_updateChoiceMenu()
 				}
 			}
 
-			// Start animation
 			startModelAnimation(_currentAnimationID, currentAnimation->getPreviewModelID(), 0);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("stop")->isHovered())
 		{
-			// Stop animation
 			stopModelAnimation(_currentAnimationID, currentAnimation->getPreviewModelID());
 
-			// Reset preview model transformation
 			_fe3d.model_setBaseSize(currentAnimation->getPreviewModelID(), currentAnimation->getInitialSize());
 			for(const auto& partID : currentAnimation->getPartIDs())
 			{
@@ -160,20 +147,15 @@ void Animation3dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			// Copy current frame
 			auto lastFrameCopy = currentAnimation->getFrames()[_currentFrameIndex];
 
-			// Check if model has multiple parts
 			if(_fe3d.model_isExisting(currentAnimation->getPreviewModelID()) &&
 			   _fe3d.model_isMultiParted(currentAnimation->getPreviewModelID()))
 			{
-				// Check if only default frame exists
 				if(currentAnimation->getFrames().size() == 1)
 				{
-					// Clear frame
 					lastFrameCopy.clearParts();
 
-					// Add default data for every model part
 					for(const auto& partID : currentAnimation->getPartIDs())
 					{
 						lastFrameCopy.addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), Animation3dSpeedType::LINEAR, TransformationType::MOVEMENT);
@@ -181,7 +163,6 @@ void Animation3dEditor::_updateChoiceMenu()
 				}
 			}
 
-			// Add copied frame
 			auto frames = currentAnimation->getFrames();
 			frames.insert((frames.begin() + _currentFrameIndex), lastFrameCopy);
 			currentAnimation->setFrames(frames);
@@ -189,23 +170,19 @@ void Animation3dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			// Stop animation
 			if(isModelAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID()))
 			{
 				stopModelAnimation(_currentAnimationID, currentAnimation->getPreviewModelID());
 			}
 
-			// Go to next screen
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation3dEditorMenuFrame");
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			// Delete frame
 			auto frames = currentAnimation->getFrames();
 			frames.erase(frames.begin() + _currentFrameIndex);
 			currentAnimation->setFrames(frames);
 
-			// Correct index
 			if(_currentFrameIndex == currentAnimation->getFrames().size())
 			{
 				_currentFrameIndex--;
@@ -220,7 +197,6 @@ void Animation3dEditor::_updateChoiceMenu()
 			_currentFrameIndex++;
 		}
 
-		// Update buttons hoverability
 		auto hasPreviewModel = _fe3d.model_isExisting(currentAnimation->getPreviewModelID());
 		auto isStarted = isModelAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID());
 		screen->getButton("preview")->setHoverable(!isStarted);
@@ -232,88 +208,68 @@ void Animation3dEditor::_updateChoiceMenu()
 		screen->getButton("prev")->setHoverable((_currentFrameIndex > 0) && !isStarted);
 		screen->getButton("next")->setHoverable((_currentFrameIndex < (currentAnimation->getFrames().size() - 1)) && !isStarted && hasPreviewModel);
 
-		// Update frame index display
 		if(!isStarted)
 		{
 			_fe3d.text_setContent(_gui.getOverlay()->getTextField("animationFrame")->getEntityID(), "Frame: " + to_string(_currentFrameIndex + 1), 0.025f);
 		}
 
-		// Update preview model visibility
 		if(_fe3d.model_isExisting(currentAnimation->getPreviewModelID()))
 		{
 			_fe3d.model_setVisible(currentAnimation->getPreviewModelID(), !_gui.getOverlay()->isChoiceFormExisting("modelList"));
 		}
 
-		// Hide last model
 		if(!_hoveredModelID.empty())
 		{
 			_fe3d.model_setVisible(_hoveredModelID, false);
 		}
 
-		// Get selected button ID
 		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("modelList");
 
-		// Check if model ID is hovered
 		if(!selectedButtonID.empty())
 		{
-			// Set new hovered model
 			_hoveredModelID = ("@" + selectedButtonID);
 
-			// Check if LMB is pressed
 			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				// Check if parts are present
 				bool hasAllParts = true;
 				for(const auto& partID : currentAnimation->getPartIDs())
 				{
-					// Part cannot be empty
 					if(!partID.empty())
 					{
 						hasAllParts = hasAllParts && _fe3d.model_hasPart(_hoveredModelID, partID);
 					}
 				}
 
-				// Throw warning if necessary
 				if(!hasAllParts)
 				{
 					Logger::throwWarning("Preview model does not have required animation parts!");
 					return;
 				}
 
-				// Change values
 				currentAnimation->setPreviewModelID(_hoveredModelID);
 				currentAnimation->setInitialSize(_fe3d.model_getBaseSize(_hoveredModelID));
 
-				// Check if first time choosing preview model
 				if(currentAnimation->getFrames().empty())
 				{
-					// Create default frame
 					Animation3dFrame defaultFrame;
 
-					// Add default part
 					currentAnimation->addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
 					defaultFrame.addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), Animation3dSpeedType::LINEAR, TransformationType::MOVEMENT);
 
-					// Add custom parts
 					auto partIDs = _fe3d.model_getPartIDs(_hoveredModelID);
 					if(partIDs.size() > 1)
 					{
-						// Iterate through parts
 						for(const auto& partID : partIDs)
 						{
-							// Add part to animation
 							currentAnimation->addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
 
-							// Add part to frame
 							defaultFrame.addPart(partID, fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), Animation3dSpeedType::LINEAR, TransformationType::MOVEMENT);
 						}
 					}
 
-					// Add default frame to animation
 					currentAnimation->addFrame(defaultFrame);
 				}
 
-				// Miscellaneous
 				_gui.getOverlay()->deleteChoiceForm("modelList");
 				_hoveredModelID = "";
 			}
@@ -327,7 +283,6 @@ void Animation3dEditor::_updateChoiceMenu()
 			_hoveredModelID = "";
 		}
 
-		// Show hovered model
 		if(!_hoveredModelID.empty())
 		{
 			_fe3d.model_setVisible(_hoveredModelID, true);

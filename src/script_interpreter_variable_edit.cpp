@@ -9,10 +9,8 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	{
 		if(c == ' ') // Current word ended
 		{
-			// Next word
 			wordIndex++;
 
-			// Check if words extracted
 			if(wordIndex == 2)
 			{
 				break;
@@ -79,7 +77,6 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	unsigned int leftValueIndex = 0;
 	if(isAccessingLeftList)
 	{
-		// Check if list index is valid
 		if(_validateListIndex(leftVariable, leftListIndex))
 		{
 			leftValueIndex = leftListIndex;
@@ -98,21 +95,17 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 
 	if(leftVariable.getType() == ScriptVariableType::MULTIPLE && _isListValue(valueString))
 	{
-		// Remove the ""
 		string listString = valueString.substr(1);
 		listString.pop_back();
 
-		// Extract the values
 		auto values = _extractValuesFromListString(listString);
 		leftVariable.setValues(values);
 	}
 	else if(isSingleVariable && isStringVariable && _isStringValue(valueString))
 	{
-		// Remove the ""
 		valueString.erase(valueString.begin());
 		valueString.pop_back();
 
-		// Set value
 		leftVariable.getValue(leftValueIndex).setString(valueString);
 	}
 	else if(isSingleVariable && isDecimalVariable && _isDecimalValue(valueString))
@@ -129,32 +122,26 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	}
 	else if(isSingleVariable && isBooleanVariable && ((valueString[0] == '(') && (valueString.back() == ')')))
 	{
-		// Remove the ()
 		valueString.erase(valueString.begin());
 		valueString.pop_back();
 
-		// Set value
 		leftVariable.getValue(leftValueIndex).setBoolean(_checkConditionString(valueString));
 	}
 	else if(valueString.substr(0, 5) == "fe3d:" || valueString.substr(0, 5) == "math:" || valueString.substr(0, 5) == "misc:")
 	{
-		// Save current logger message count
 		auto loggerMessageCount = Logger::getMessageCount();
 
-		// Call function
 		auto returnValues =
 			(valueString.substr(0, 5) == "fe3d:") ? _processFe3dFunctionCall(valueString) :
 			(valueString.substr(0, 5) == "math:") ? _processMathFunctionCall(valueString) :
 			_processMiscFunctionCall(valueString);
 
-		// Check if any error was thrown
 		_checkEngineWarnings(loggerMessageCount);
 		if(_hasThrownError)
 		{
 			return;
 		}
 
-		// Check if function returned any empty values
 		for(const auto& value : returnValues)
 		{
 			if(value.getType() == ScriptValueType::EMPTY)
@@ -164,7 +151,6 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 			}
 		}
 
-		// Process return values
 		if(leftVariable.getType() == ScriptVariableType::MULTIPLE)
 		{
 			leftVariable.setValues(returnValues);
@@ -208,17 +194,14 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	}
 	else
 	{
-		// Prepare list access
 		bool isAccessingRightList = false;
 		auto rightListIndex = _extractListIndexFromString(valueString, isAccessingRightList);
 
-		// Check if any error was thrown
 		if(_hasThrownError)
 		{
 			return;
 		}
 
-		// Remove list accessing characters
 		if(isAccessingRightList)
 		{
 			auto isOpeningBracketFound = find(valueString.begin(), valueString.end(), '[');
@@ -226,41 +209,33 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 			valueString = valueString.substr(0, bracketIndex);
 		}
 
-		// Check if right variable is not existing
 		if(!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))
 		{
 			_throwScriptError("variable \"" + valueString + "\" not existing!");
 			return;
 		}
 
-		// Retrieve other value
 		const auto& rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
-		// Validate list access
 		unsigned int rightValueIndex = 0;
 		if(isAccessingRightList)
 		{
-			// Check if list index is invalid
 			if(!_validateListIndex(rightVariable, rightListIndex))
 			{
 				return;
 			}
 
-			// Copy list index
 			rightValueIndex = rightListIndex;
 		}
 
-		// Determine right variable type
 		if((leftVariable.getType() == ScriptVariableType::MULTIPLE) && (rightVariable.getType() == ScriptVariableType::MULTIPLE))
 		{
-			// Extract values
 			vector<ScriptValue> values = {};
 			for(unsigned int i = 0; i < rightVariable.getValueCount(); i++)
 			{
 				values.push_back(rightVariable.getValue(i));
 			}
 
-			// Set values
 			leftVariable.setValues(values);
 		}
 		else if(leftVariable.getValue(leftValueIndex).getType() == rightVariable.getValue(rightValueIndex).getType())

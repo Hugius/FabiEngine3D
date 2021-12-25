@@ -31,12 +31,10 @@ const bool GuiViewport::isHovered() const
 {
 	if(_fe3d.image_isVisible(_entityID))
 	{
-		// Convert dimensions to same space
 		fvec2 cursorPosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
 		fvec2 buttonPosition = _fe3d.image_getPosition(_entityID);
 		fvec2 buttonSize = _fe3d.image_getSize(_entityID);
 
-		// Check if cursor inside entity
 		if(cursorPosition.x > buttonPosition.x - (buttonSize.x / 2.0f) && cursorPosition.x < buttonPosition.x + (buttonSize.x / 2.0f)) // X axis
 		{
 			if(cursorPosition.y > buttonPosition.y - (buttonSize.y / 2.0f) && cursorPosition.y < buttonPosition.y + (buttonSize.y / 2.0f)) // Y axis

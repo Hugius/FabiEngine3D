@@ -7,7 +7,6 @@ void SkyEditor::_updateMainMenu()
 
 	if(screen->getID() == "skyEditorMenuMain")
 	{
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getOverlay()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
@@ -39,7 +38,6 @@ void SkyEditor::_updateMainMenu()
 			_isDeletingSky = true;
 		}
 
-		// Update answer forms
 		if(_gui.getOverlay()->isAnswerFormConfirmed("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
@@ -62,7 +60,6 @@ void SkyEditor::_updateChoiceMenu()
 
 	if(screen->getID() == "skyEditorMenuChoice")
 	{
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuMain");
@@ -81,7 +78,6 @@ void SkyEditor::_updateChoiceMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuMiscellaneous");
 		}
 
-		// Update buttons hoverability
 		screen->getButton("miscellaneous")->setHoverable(_fe3d.sky_isExisting(_currentSkyID));
 	}
 }

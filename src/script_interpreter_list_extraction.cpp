@@ -39,7 +39,6 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 		}
 		else
 		{
-			// Starting build of new value
 			if(!isBuildingString && !isBuildingNumber && !isBuildingBoolean && !isBuildingVariable)
 			{
 				if(c == '"') // String
@@ -104,7 +103,6 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 						return {};
 					}
 
-					// Add character
 					currentValueString += c;
 				}
 				else if(isdigit(c)) // Keep building number
@@ -122,24 +120,20 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 					return {};
 				}
 
-				// Check if number building finished
 				if(c == ',' || (index == listString.size() - 1) || c == ' ')
 				{
 					if(isBuildingDecimal) // Convert to decimal
 					{
-						// Check if decimal value is valid
 						if(currentValueString.back() == '.')
 						{
 							_throwScriptError("invalid DEC syntax!");
 							return {};
 						}
 
-						// Add value
 						valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitDecimalString(currentValueString))));
 						isBuildingNumber = false;
 						isBuildingDecimal = false;
 
-						// Check if next comma still needs to be found
 						if(c != ',')
 						{
 							hasFinishedValue = true;
@@ -147,11 +141,9 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 					}
 					else // Convert to integer
 					{
-						// Add value
 						valueList.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(currentValueString))));
 						isBuildingNumber = false;
 
-						// Check if next comma still needs to be found
 						if(c != ',')
 						{
 							hasFinishedValue = true;
@@ -161,10 +153,8 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 			}
 			else if(isBuildingBoolean) // Processing boolean value
 			{
-				// Add character
 				currentValueString += c;
 
-				// Check if value is true/false/invalid
 				if(currentValueString == "<true>")
 				{
 					valueList.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, true));
@@ -185,26 +175,21 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 			}
 			else if(isBuildingVariable) // Processing variable value
 			{
-				// Add character
 				if(c != ',' && c != ' ')
 				{
 					currentValueString += c;
 				}
 
-				// Check if variable building finished
 				if(c == ',' || (index == listString.size() - 1) || c == ' ')
 				{
-					// Prepare list access
 					bool isAccessingList = false;
 					auto listIndex = _extractListIndexFromString(currentValueString, isAccessingList);
 
-					// Check if any error was thrown
 					if(_hasThrownError)
 					{
 						return {};
 					}
 
-					// Remove list accessing characters
 					if(isAccessingList)
 					{
 						auto isOpeningBracketFound = find(currentValueString.begin(), currentValueString.end(), '[');
@@ -212,42 +197,34 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 						currentValueString = currentValueString.substr(0, bracketIndex);
 					}
 
-					// Check if variable is not existing
 					if(!_isLocalVariableExisting(currentValueString) && !_isGlobalVariableExisting(currentValueString))
 					{
 						_throwScriptError("variable \"" + currentValueString + "\" not existing!");
 						return {};
 					}
 
-					// Retrieve variable
 					const auto& variable = (_isLocalVariableExisting(currentValueString) ? _getLocalVariable(currentValueString) : _getGlobalVariable(currentValueString));
 
-					// Validate list access
 					unsigned int valueIndex = 0;
 					if(isAccessingList)
 					{
-						// Check if list index is invalid
 						if(!_validateListIndex(variable, listIndex))
 						{
 							return {};
 						}
 
-						// Copy list index
 						valueIndex = listIndex;
 					}
 
-					// Check if variable is a list
 					if(!isAccessingList && variable.getType() == ScriptVariableType::MULTIPLE)
 					{
 						_throwScriptError("LIST cannot be used inside LIST!");
 						return {};
 					}
 
-					// Add value
 					valueList.push_back(variable.getValue(valueIndex));
 					isBuildingVariable = false;
 
-					// Check if needs to be found yet
 					if(c != ',')
 					{
 						hasFinishedValue = true;
@@ -256,7 +233,6 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 			}
 		}
 
-		// Increment index
 		index++;
 	}
 

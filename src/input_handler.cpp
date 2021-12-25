@@ -34,13 +34,11 @@ void InputHandler::update()
 				{
 					auto button = static_cast<InputType>(event.button.button);
 
-					// Continuing mouse press
 					if(!_isInVector(_mouseDown, button)) // If not in vector yet, add it
 					{
 						_mouseDown.push_back(button);
 					}
 
-					// Single short mouse press
 					if(!_isInVector(_mousePressed_mayNotPress, button)) // Mouse may be pressed
 					{
 						_mousePressed.push_back(button);
@@ -54,13 +52,11 @@ void InputHandler::update()
 				{
 					auto button = static_cast<InputType>(event.button.button);
 
-					// Continuing mouse press
 					if(!_mouseDown.empty())
 					{
 						_mouseDown.erase(_mouseDown.begin() + _getVectorIndex(_mouseDown, button));
 					}
 
-					// Single short mouse press
 					_mousePressed_mayNotPress.clear();
 
 					break;
@@ -70,13 +66,11 @@ void InputHandler::update()
 				{
 					auto key = static_cast<InputType>(event.key.keysym.sym);
 
-					// Continuing key press
 					if(!_isInVector(_keysDown, key))
 					{
 						_keysDown.push_back(key);
 					}
 
-					// Single short key press
 					if(!_isInVector(_keysPressed_mayNotPress, key)) // Key may be pressed
 					{
 						_keysPressed.push_back(key);
@@ -90,13 +84,11 @@ void InputHandler::update()
 				{
 					auto key = static_cast<InputType>(event.key.keysym.sym);
 
-					// Continuing key press
 					if(!_keysDown.empty())
 					{
 						_keysDown.erase(_keysDown.begin() + _getVectorIndex(_keysDown, key));
 					}
 
-					// Single short key press
 					_keysPressed_mayNotPress.clear();
 
 					break;

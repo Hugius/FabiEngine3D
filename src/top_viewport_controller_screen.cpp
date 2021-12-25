@@ -39,7 +39,6 @@ void TopViewportController::_updateProjectScreenManagement()
 		}
 		else if(topScreen->getButton("quitEngine")->isHovered())
 		{
-			// Check if currently in editor (except for world editor)
 			if((!_currentProjectID.empty()) && (leftScreen->getID() != "main") && (leftScreen->getID() != "worldEditorMenuMain"))
 			{
 				_gui.getOverlay()->createAnswerForm("quit", "Save Changes?", fvec2(0.0f, 0.25f));
@@ -57,7 +56,6 @@ void TopViewportController::_updateProjectScreenManagement()
 
 	if(_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && (leftScreen->getID() == "main") && !_gui.getOverlay()->isFocused())
 	{
-		// Check if script execution not started
 		if(!_scriptEditor.getScriptExecutor().isStarted())
 		{
 			_fe3d.application_stop();
@@ -94,12 +92,10 @@ void TopViewportController::_updateGameScreenManagement()
 	}
 	else
 	{
-		// Check if LMB pressed
 		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if(screen->getButton("start")->isHovered())
 			{
-				// Resume game or load game
 				if(_scriptEditor.getScriptExecutor().isStarted())
 				{
 					_scriptEditor.getScriptExecutor().resume();
@@ -132,7 +128,6 @@ void TopViewportController::_updateGameScreenManagement()
 			}
 		}
 
-		// Update buttons hoverability
 		static bool wasInMainMenu = false;
 		bool isInMainMenu = (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "main");
 		screen->getButton("start")->setHoverable(isInMainMenu && !_scriptEditor.getScriptExecutor().isScriptEmpty() && !isScriptRunning());
@@ -141,7 +136,6 @@ void TopViewportController::_updateGameScreenManagement()
 		screen->getButton("stop")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isStarted());
 		screen->getButton("debug")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isStarted());
 
-		// Reload script files every second or if user came into menu
 		bool cameIntoMenu = (!wasInMainMenu && isInMainMenu);
 		if(cameIntoMenu || (isInMainMenu && !isScriptStarted() && _fe3d.misc_checkInterval(Config::UPDATES_PER_SECOND)))
 		{
@@ -149,10 +143,8 @@ void TopViewportController::_updateGameScreenManagement()
 		}
 		wasInMainMenu = isInMainMenu;
 
-		// Check if user wants to pause the running game
 		if(_scriptEditor.getScriptExecutor().isRunning())
 		{
-			// Check if ESCAPE pressed
 			if(_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if(_fe3d.server_isRunning()) // Server application cannot be paused, only on or off
@@ -166,7 +158,6 @@ void TopViewportController::_updateGameScreenManagement()
 			}
 		}
 
-		// Executing game script (if possible)
 		_scriptEditor.getScriptExecutor().update(false);
 	}
 }
@@ -177,31 +168,26 @@ void TopViewportController::_updateMiscScreenManagement()
 
 	if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("uncache")->isHovered())
 	{
-		// Validate project ID
 		if(_currentProjectID.empty())
 		{
 			Logger::throwError("TopViewportController::_updateMiscScreenManagement");
 		}
 
-		// Get the chosen file name
 		const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 		const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\");
 
-		// Validate target directory
 		if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 		{
 			Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 			return;
 		}
 
-		// Validate chosen file
 		const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "");
 		if(filePath.empty())
 		{
 			return;
 		}
 
-		// Validate directory of file
 		if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
 		   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 		{
@@ -209,7 +195,6 @@ void TopViewportController::_updateMiscScreenManagement()
 			return;
 		}
 
-		// Clear the cache of selected file
 		const string newFilePath = filePath.substr(rootDirectoryPath.size());
 		_fe3d.misc_clearMeshCache(newFilePath);
 		_fe3d.misc_clearFontCache(newFilePath);
@@ -219,38 +204,31 @@ void TopViewportController::_updateMiscScreenManagement()
 	}
 	else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("export")->isHovered())
 	{
-		// Validate chosen directory
 		const string chosenDirectoryPath = Tools::chooseExplorerDirectory("");
 		if(chosenDirectoryPath.empty())
 		{
 			return;
 		}
 
-		// Compose important paths
 		const string rootDirectoryPath = Tools::getRootDirectoryPath();
 		const string exportDirectoryPath = string(chosenDirectoryPath + "\\" + _currentProjectID + "\\");
 
-		// Check if project already exported
 		if(Tools::isDirectoryExisting(exportDirectoryPath))
 		{
 			Logger::throwWarning("Project already exported to that location!");
 		}
 		else
 		{
-			// Create application directory
 			Tools::createDirectory(exportDirectoryPath);
 
-			// Copy directories
 			Tools::copyDirectory(string(rootDirectoryPath + "binaries"), string(exportDirectoryPath + "binaries"));
 			Tools::copyDirectory(string(rootDirectoryPath + "engine"), string(exportDirectoryPath + "engine"));
 			Tools::copyDirectory(string(rootDirectoryPath + "projects\\" + _currentProjectID), exportDirectoryPath);
 
-			// Rename executable
 			auto oldPath = string(exportDirectoryPath + "binaries\\fe3d.exe");
 			auto newPath = string(exportDirectoryPath + "binaries\\" + _currentProjectID + ".exe");
 			Tools::renameFile(oldPath, newPath);
 
-			// Create configuration file
 			auto file = ofstream(exportDirectoryPath + "config.fe3d");
 			file << "window_size			= 0.75" << endl;
 			file << "window_fullscreen      = false" << endl;

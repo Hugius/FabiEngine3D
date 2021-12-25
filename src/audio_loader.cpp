@@ -41,7 +41,6 @@ void AudioLoader::cacheChunks(const vector<string>& filePaths)
 
 	for(const auto& filePath : uniqueFilePaths)
 	{
-		// Check if chunk is not already cached
 		if(_chunkCache.find(filePath) == _chunkCache.end())
 		{
 			threads.push_back(async(launch::async, &AudioLoader::_loadWaveFile, this, filePath));
@@ -55,29 +54,22 @@ void AudioLoader::cacheChunks(const vector<string>& filePaths)
 
 	for(size_t i = 0; i < threads.size(); i++)
 	{
-		// Check if chunk is not processed yet
 		if(!threadStatuses[i])
 		{
-			// Retrieve return value
 			auto loadedData = threads[i].get();
 
-			// Check if data loading failed
 			if(loadedData == nullptr)
 			{
 				Logger::throwWarning("Cannot load audio: \"", uniqueFilePaths[i], "\"!");
 			}
 			else
 			{
-				// Load chunk file
 				auto loadedChunk = _loadChunk(uniqueFilePaths[i], (unsigned char*)loadedData);
 
-				// Check if chunk loading went well
 				if(loadedChunk != nullptr)
 				{
-					// Logging
 					_throwLoadedMessage(uniqueFilePaths[i]);
 
-					// Cache chunk
 					_chunkCache[uniqueFilePaths[i]] = loadedChunk;
 				}
 			}
@@ -104,23 +96,18 @@ Mix_Chunk* AudioLoader::loadChunk(const string& filePath)
 	}
 	else
 	{
-		// Load chunk file
 		auto chunk = _loadChunk(filePath, (unsigned char*)data);
 
-		// Check if chunk loading failed
 		if(chunk == nullptr)
 		{
 			return nullptr;
 		}
 		else
 		{
-			// Logging
 			_throwLoadedMessage(filePath);
 
-			// Cache chunk
 			_chunkCache.insert(make_pair(filePath, chunk));
 
-			// Return cached chunk
 			goto BEGIN;
 		}
 	}

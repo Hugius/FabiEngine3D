@@ -10,11 +10,9 @@ void BillboardEntity::updateTransformation()
 {
 	if(_position != _positionTarget)
 	{
-		// Update position
 		auto speedMultiplier = Math::normalize(_positionTarget - _position);
 		_position += (speedMultiplier * _positionTargetSpeed);
 
-		// Correct position
 		if(fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)
 		{
 			_position.x = _positionTarget.x;
@@ -31,7 +29,6 @@ void BillboardEntity::updateTransformation()
 
 	if(_rotation != _rotationTarget)
 	{
-		// Update rotation
 		auto difference = Math::calculateDifference(_rotation, _rotationTarget);
 		fvec3 multiplier = fvec3(
 			((difference.x < 180.0f) ? 1.0f : -1.0f),
@@ -42,7 +39,6 @@ void BillboardEntity::updateTransformation()
 		_rotation.y += ((_rotation.y < _rotationTarget.y) ? speed.y : (_rotation.y > _rotationTarget.y) ? -speed.y : 0.0f);
 		_rotation.z += ((_rotation.z < _rotationTarget.z) ? speed.z : (_rotation.z > _rotationTarget.z) ? -speed.z : 0.0f);
 
-		// Correct rotation
 		_rotation = fvec3(Math::limitAngle(_rotation.x), Math::limitAngle(_rotation.y), Math::limitAngle(_rotation.z));
 		if(Math::calculateAngleDifference(_rotation.x, _rotationTarget.x) <= _rotationTargetSpeed)
 		{
@@ -60,11 +56,9 @@ void BillboardEntity::updateTransformation()
 
 	if(_size != _sizeTarget)
 	{
-		// Update size
 		auto speedMultiplier = Math::normalize(_sizeTarget - _size);
 		_size += (speedMultiplier * _sizeTargetSpeed);
 
-		// Correct size
 		_size = fvec2(max(0.0f, _size.x), max(0.0f, _size.y));
 		if(fabsf(_sizeTarget.x - _size.x) <= _sizeTargetSpeed)
 		{

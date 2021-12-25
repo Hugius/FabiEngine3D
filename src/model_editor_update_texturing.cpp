@@ -10,10 +10,8 @@ void ModelEditor::_updateTexturingMenu()
 
 	if(screen->getID() == "modelEditorMenuTexturing")
 	{
-		// Temporary values
 		auto textureRepeat = _fe3d.model_getTextureRepeat(_currentModelID, _currentPartID);
 
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			for(const auto& partID : _fe3d.model_getPartIDs(_currentModelID))
@@ -27,31 +25,26 @@ void ModelEditor::_updateTexturingMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
-			// Validate project ID
 			if(_currentProjectID.empty())
 			{
 				Logger::throwError("ModelEditor::_updateTexturingMenu");
 			}
 
-			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\diffuse_map\\");
 
-			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
-			// Validate chosen file
 			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
 			if(filePath.empty())
 			{
 				return;
 			}
 
-			// Validate directory of file
 			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
 			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
@@ -59,38 +52,32 @@ void ModelEditor::_updateTexturingMenu()
 				return;
 			}
 
-			// Set diffuse map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.model_setDiffuseMap(_currentModelID, _currentPartID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
 		{
-			// Validate project ID
 			if(_currentProjectID.empty())
 			{
 				Logger::throwError("ModelEditor::_updateTexturingMenu");
 			}
 
-			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\emission_map\\");
 
-			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
-			// Validate chosen file
 			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
 			if(filePath.empty())
 			{
 				return;
 			}
 
-			// Validate directory of file
 			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
 			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
@@ -98,38 +85,32 @@ void ModelEditor::_updateTexturingMenu()
 				return;
 			}
 
-			// Set emission map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.model_setEmissionMap(_currentModelID, _currentPartID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularMap")->isHovered())
 		{
-			// Validate project ID
 			if(_currentProjectID.empty())
 			{
 				Logger::throwError("ModelEditor::_updateTexturingMenu");
 			}
 
-			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\specular_map\\");
 
-			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
-			// Validate chosen file
 			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
 			if(filePath.empty())
 			{
 				return;
 			}
 
-			// Validate directory of file
 			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
 			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
@@ -137,38 +118,32 @@ void ModelEditor::_updateTexturingMenu()
 				return;
 			}
 
-			// Set specular map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.model_setSpecularMap(_currentModelID, _currentPartID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectionMap")->isHovered())
 		{
-			// Validate project ID
 			if(_currentProjectID.empty())
 			{
 				Logger::throwError("ModelEditor::_updateTexturingMenu");
 			}
 
-			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\reflection_map\\");
 
-			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
-			// Validate chosen file
 			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
 			if(filePath.empty())
 			{
 				return;
 			}
 
-			// Validate directory of file
 			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
 			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
@@ -176,38 +151,32 @@ void ModelEditor::_updateTexturingMenu()
 				return;
 			}
 
-			// Set reflection map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.model_setReflectionMap(_currentModelID, _currentPartID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
 		{
-			// Validate project ID
 			if(_currentProjectID.empty())
 			{
 				Logger::throwError("ModelEditor::_updateTexturingMenu");
 			}
 
-			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\normal_map\\");
 
-			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
-			// Validate chosen file
 			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
 			if(filePath.empty())
 			{
 				return;
 			}
 
-			// Validate directory of file
 			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
 			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
@@ -215,7 +184,6 @@ void ModelEditor::_updateTexturingMenu()
 				return;
 			}
 
-			// Set normal map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.model_setNormalMap(_currentModelID, _currentPartID, finalFilePath);
@@ -233,7 +201,6 @@ void ModelEditor::_updateTexturingMenu()
 			_gui.getOverlay()->createValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
-		// Update value forms
 		if(_gui.getOverlay()->checkValueForm("textureRepeat", textureRepeat, {}))
 		{
 			_fe3d.model_setTextureRepeat(_currentModelID, _currentPartID, textureRepeat);

@@ -117,16 +117,12 @@ const vector<pair<string, unsigned int>> Script::findKeyword(const string& keywo
 
 	for(const auto& file : _scriptFiles)
 	{
-		// Iterate through lines
 		for(unsigned int lineNumber = 0; lineNumber < file->getLines().size(); lineNumber++)
 		{
-			// Temporary values
 			string line = file->getLines()[lineNumber];
 
-			// Iterate through lines
 			for(size_t i = 0; i < line.size(); i++)
 			{
-				// Check if keyword occurs
 				if(line.substr(i, keyword.size()) == keyword)
 				{
 					result.push_back(make_pair(file->getID(), lineNumber + 1));

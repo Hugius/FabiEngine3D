@@ -11,27 +11,23 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Validate ID
 			if(!_validateFe3dID(args[0].getString()))
 			{
 				return true;
 			}
 
-			// Validate existence
 			if(_fe3d.pointlight_isExisting(args[0].getString()))
 			{
 				_throwScriptError("pointlight already exists!");
 				return true;
 			}
 
-			// Create pointlight
 			_fe3d.pointlight_create(args[0].getString());
 			_fe3d.pointlight_setPosition(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 			_fe3d.pointlight_setRadius(args[0].getString(), fvec3(args[4].getDecimal(), args[5].getDecimal(), args[6].getDecimal()));
 			_fe3d.pointlight_setColor(args[0].getString(), fvec3(args[7].getDecimal(), args[8].getDecimal(), args[9].getDecimal()));
 			_fe3d.pointlight_setIntensity(args[0].getString(), args[10].getDecimal());
 
-			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -52,17 +48,14 @@ const bool ScriptInterpreter::_executeFe3dPointlightSetter(const string& functio
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			// Iterate through pointlights
 			for(const auto& ID : _fe3d.pointlight_getIDs())
 			{
-				// Cannot be template
 				if(ID[0] != '@')
 				{
 					_fe3d.pointlight_delete(ID);
 				}
 			}
 
-			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

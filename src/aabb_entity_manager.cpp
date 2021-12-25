@@ -62,29 +62,21 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 {
 	for(const auto& [keyID, entity] : _entities)
 	{
-		// Update transformation
 		entity->updateTransformation();
 
-		// Check if AABB has parent
 		if(entity->hasParent())
 		{
-			// Determine parent type
 			if(entity->getParentEntityType() == AabbParentEntityType::MODEL)
 			{
-				// Try to find the parent entity
 				auto foundPair = modelEntities.find(entity->getParentEntityID());
 				if(foundPair != modelEntities.end())
 				{
-					// Temporary values
 					auto parentEntity = foundPair->second;
 
-					// Model must not be level of detailed
 					if(!parentEntity->isLevelOfDetailed())
 					{
-						// AABB must be allowed to follow parent
 						if(entity->mustFollowParentEntityTransformation())
 						{
-							// Retrieve maximum rotation & direction (based on parent rotation)
 							Direction rotationDirection;
 							fvec3 parentRotation = parentEntity->getBaseRotation();
 							float rotation = 0.0f;
@@ -104,11 +96,9 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 								rotation = parentRotation.z;
 							}
 
-							// Update size (based on parent size & AABB rotation)
 							const fvec3 newAabbSize = (entity->getLocalSize() * parentEntity->getBaseSize());
 							if(((rotation > 45.0f) && (rotation < 135.0f)) || ((rotation > 225.0f) && (rotation < 315.0f)))
 							{
-								// Determine rotation direction
 								if(rotationDirection == Direction::X)
 								{
 									entity->setSize(fvec3(newAabbSize.x, newAabbSize.z, newAabbSize.y));
@@ -127,7 +117,6 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 								entity->setSize(newAabbSize);
 							}
 
-							// Update position (based on parent position + rotation + size)
 							fvec3 localPosition = (entity->getLocalPosition() * parentEntity->getBaseSize());
 							float roundedRotation =
 								(rotation > 45.0f && rotation < 135.0f) ? 90.0f : // 90 degrees rounded
@@ -142,7 +131,6 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 								The AABB is ALSO standing on Y 0.0f (local), so it needs a negative Y offset after the rotation.
 								*/
 
-								// Temporary values
 								mat44 rotationMatrix = mat44(1.0f);
 								fvec3 localOffset = fvec3(0.0f, (entity->getLocalSize().y / 2.0f), 0.0f);
 								bool isMirrored = (roundedRotation == 180.0f);
@@ -150,7 +138,6 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 									(entity->getLocalPosition() + localOffset) * parentEntity->getBaseSize();
 								float yOffset;
 
-								// Determine rotation direction
 								if(rotationDirection == Direction::X)
 								{
 									rotationMatrix = Math::createRotationMatrixX(Math::convertToRadians(roundedRotation));
@@ -167,7 +154,6 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 									yOffset = -((isMirrored ? newAabbSize.y : newAabbSize.x) / 2.0f);
 								}
 
-								// Apply rotation
 								fvec4 result = rotationMatrix * fvec4(localPosition.x, localPosition.y, localPosition.z, 1.0f);
 								entity->setPosition(parentEntity->getBasePosition() + fvec3(result.x, result.y + yOffset, result.z));
 							}
@@ -177,14 +163,12 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 							}
 						}
 
-						// Update visibility
 						if(parentEntity->isFrozen())
 						{
 							entity->setVisible(false);
 						}
 						else
 						{
-							// Follow parent visibility
 							if(entity->mustFollowParentEntityVisibility())
 							{
 								entity->setVisible(parentEntity->isVisible());
@@ -199,25 +183,20 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 			}
 			else
 			{
-				// Try to find the parent entity
 				auto foundPair = billboardEntities.find(entity->getParentEntityID());
 				if(foundPair != billboardEntities.end())
 				{
-					// Temporary values
 					auto parentEntity = foundPair->second;
 
-					// AABB must be allowed to follow parent
 					if(entity->mustFollowParentEntityTransformation())
 					{
 						const auto parentSize = parentEntity->getSize();
 						auto newAabbSize = fvec3(parentSize.x, parentSize.y, 0.0f);
 
-						// Retrieve absolute rotations
 						const float rotationX = parentEntity->getRotation().x;
 						const float rotationY = parentEntity->getRotation().y;
 						const float rotationZ = parentEntity->getRotation().z;
 
-						// Calculate reference rotation & convert it to 0-45 range
 						float refRotationX = Math::calculateReferenceAngle(rotationX);
 						float refRotationY = Math::calculateReferenceAngle(rotationY);
 						float refRotationZ = Math::calculateReferenceAngle(rotationZ);
@@ -225,7 +204,6 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 						refRotationY = ((refRotationY <= 45.0f) ? refRotationY : (refRotationY == 90.0f) ? 90.0f : (90.0f - refRotationY));
 						refRotationZ = ((refRotationZ <= 45.0f) ? refRotationZ : (refRotationZ == 90.0f) ? 90.0f : (90.0f - refRotationZ));
 
-						// Determine direction to use
 						if(refRotationX > refRotationY && refRotationX > refRotationZ)
 						{
 							const auto xSinRotation = fabsf(sinf(Math::convertToRadians(rotationX)));
@@ -248,29 +226,23 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 							newAabbSize.y = ((zSinRotation * parentSize.x) + (zCosRotation * parentSize.y));
 						}
 
-						// AABB must still be a box (cannot be flat)
 						newAabbSize.x = max(0.1f, newAabbSize.x);
 						newAabbSize.y = max(0.1f, newAabbSize.y);
 						newAabbSize.z = max(0.1f, newAabbSize.z);
 
-						// Calculate Y offset, because rotation is around center while billboard is not centered
 						float yOffset = -((newAabbSize.y - parentSize.y) / 2.0f);
 
-						// Update size (based on parent rotation)
 						entity->setSize(newAabbSize);
 
-						// Update position (based on parent position + size)
 						entity->setPosition(parentEntity->getPosition() + entity->getLocalPosition() + fvec3(0.0f, yOffset, 0.0f));
 					}
 
-					// Update visibility
 					if(parentEntity->isFrozen())
 					{
 						entity->setVisible(false);
 					}
 					else
 					{
-						// Follow parent visibility
 						if(entity->mustFollowParentEntityVisibility())
 						{
 							entity->setVisible(parentEntity->isVisible());
@@ -284,7 +256,6 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 			}
 		}
 
-		// Update transformation matrix
 		if(entity->isVisible())
 		{
 			entity->updateTransformationMatrix();

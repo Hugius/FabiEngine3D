@@ -90,7 +90,6 @@ private:
 		HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE); // Console access
 		ostringstream oss; // For message queue
 
-		// Current time
 		char timeBuffer[64];
 		auto t = time(nullptr);
 		auto foo = *localtime(&t);
@@ -104,7 +103,6 @@ private:
 		oss << "[" << timeBuffer << "]";
 		SetConsoleTextAttribute(console, 7); // Yellow
 
-		// Proper indentation
 		if(type == MessageType::DEBUG || type == MessageType::ERR) // 5 chars
 		{
 			cout << "> ";
@@ -114,25 +112,20 @@ private:
 			cout << " > ";
 		}
 
-		// Add to message queue
 		oss << " > ";
 		_messageQueue.push_back(oss.str());
 	}
 	template<typename T, typename...Rest> inline static void _printMessage(T first, Rest&&...rest)
 	{
-		// For message queue
 		ostringstream oss;
 
-		// Write onto console output
 		cout << first;
 		(cout << ... << rest);
 		cout << endl;
 
-		// Write into stream
 		oss << first;
 		(oss << ... << rest);
 
-		// Add to message queue
 		_messageQueue.back() += oss.str();
 		_messageCount++;
 	}

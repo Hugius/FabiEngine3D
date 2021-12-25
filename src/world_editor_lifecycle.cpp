@@ -45,7 +45,6 @@ void WorldEditor::load()
 	_modelEditor.loadFromFile();
 	for(const auto& ID : _modelEditor.getLoadedIDs())
 	{
-		// Add button
 		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuModelPlace");
 		screen->getScrollingList("modelList")->createButton(ID, ID.substr(1));
 	}
@@ -53,7 +52,6 @@ void WorldEditor::load()
 	_billboardEditor.loadFromFile();
 	for(const auto& ID : _billboardEditor.getLoadedIDs())
 	{
-		// Add button
 		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuBillboardPlace");
 		screen->getScrollingList("billboardList")->createButton(ID, ID.substr(1));
 	}
@@ -103,12 +101,10 @@ void WorldEditor::load()
 	_fe3d.model_setVisible(TEMPLATE_SPEAKER_ID, false);
 	for(const auto& ID : _soundEditor.getLoadedIDs())
 	{
-		// Create sound3D
 		_fe3d.sound3d_create(ID, _fe3d.sound2d_getAudioPath(ID));
 		_fe3d.sound3d_setMaxVolume(ID, DEFAULT_SOUND_MAX_VOLUME);
 		_fe3d.sound3d_setMaxDistance(ID, DEFAULT_SOUND_MAX_DISTANCE);
 
-		// Add button
 		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuSoundPlace");
 		screen->getScrollingList("sounds")->createButton(ID, ID.substr(1));
 	}

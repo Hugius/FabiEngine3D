@@ -9,7 +9,6 @@ void ModelEditor::_updateMainAabbMenu()
 
 	if(screen->getID() == "modelEditorMenuAabbMain")
 	{
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
@@ -53,21 +52,17 @@ void ModelEditor::_updateChoiceAabbMenu()
 
 	if(screen->getID() == "modelEditorMenuAabbChoice")
 	{
-		// Temporary values
 		auto position = _fe3d.aabb_getPosition(_currentModelID + "@" + _currentAabbID);
 		auto size = _fe3d.aabb_getSize(_currentModelID + "@" + _currentAabbID);
 
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
-			// Show all AABBs
 			for(const auto& aabbID : _fe3d.aabb_getChildIDs(_currentModelID, AabbParentEntityType::MODEL))
 			{
 				_fe3d.aabb_setVisible(aabbID, true);
 				_fe3d.aabb_setFollowParentVisibility(aabbID, true);
 			}
 
-			// Miscellaneous
 			_currentAabbID = "";
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabbMain");
 			_fe3d.text_setVisible(_gui.getOverlay()->getTextField("aabbID")->getEntityID(), false);
@@ -86,7 +81,6 @@ void ModelEditor::_updateChoiceAabbMenu()
 			_gui.getOverlay()->createValueForm("sizeZ", "Z", (size.z * 100.0f), fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
-		// Update value forms
 		if(_gui.getOverlay()->checkValueForm("positionX", position.x))
 		{
 			position.x /= 100.0f;
@@ -124,47 +118,38 @@ void ModelEditor::_updateAabbCreating()
 {
 	if(_isCreatingAabb)
 	{
-		// Temporary values
 		string newAabbID;
 
-		// Check if user filled in a new ID
 		if(_gui.getOverlay()->checkValueForm("aabbCreate", newAabbID, {}))
 		{
-			// Spaces not allowed
 			if(newAabbID.find(' ') != string::npos)
 			{
 				Logger::throwWarning("AABB ID cannot contain any spaces!");
 				return;
 			}
 
-			// @ sign not allowed
 			if(newAabbID.find('@') != string::npos)
 			{
 				Logger::throwWarning("AABB ID cannot contain '@'!");
 				return;
 			}
 
-			// Check if AABB already exists
 			if(_fe3d.aabb_isExisting(_currentModelID + "@" + newAabbID))
 			{
 				Logger::throwWarning("AABB with ID \"" + newAabbID + "\" already exists!");
 				return;
 			}
 
-			// Select AABB
 			_currentAabbID = newAabbID;
 
-			// Bind AABB
 			_fe3d.aabb_create(_currentModelID + "@" + _currentAabbID);
 			_fe3d.aabb_setParentEntityID((_currentModelID + "@" + _currentAabbID), _currentModelID);
 			_fe3d.aabb_setParentEntityType((_currentModelID + "@" + _currentAabbID), AabbParentEntityType::MODEL);
 
-			// Go to next screen
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
 			_fe3d.text_setContent(_gui.getOverlay()->getTextField("aabbID")->getEntityID(), ("AABB: " + _currentAabbID), 0.025f);
 			_fe3d.text_setVisible(_gui.getOverlay()->getTextField("aabbID")->getEntityID(), true);
 
-			// Miscellaneous
 			_isCreatingAabb = false;
 		}
 	}
@@ -174,30 +159,23 @@ void ModelEditor::_updateAabbChoosing()
 {
 	if(_isChoosingAabb)
 	{
-		// Temporary values
 		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("aabbList");
 
-		// Hide all AABBs
 		for(const auto& aabbID : _fe3d.aabb_getChildIDs(_currentModelID, AabbParentEntityType::MODEL))
 		{
 			_fe3d.aabb_setVisible(aabbID, false);
 			_fe3d.aabb_setFollowParentVisibility(aabbID, false);
 		}
 
-		// Check if AABB ID is hovered
 		if(!selectedButtonID.empty())
 		{
-			// Show hovered AABB
 			_fe3d.aabb_setVisible((_currentModelID + "@" + selectedButtonID), true);
 			_fe3d.aabb_setFollowParentVisibility((_currentModelID + "@" + selectedButtonID), true);
 
-			// Check if LMB pressed
 			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				// Select AABB
 				_currentAabbID = selectedButtonID;
 
-				// Go to next screen
 				if(!_isDeletingAabb)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
@@ -205,21 +183,18 @@ void ModelEditor::_updateAabbChoosing()
 					_fe3d.text_setVisible(_gui.getOverlay()->getTextField("aabbID")->getEntityID(), true);
 				}
 
-				// Miscellaneous
 				_gui.getOverlay()->deleteChoiceForm("aabbList");
 				_isChoosingAabb = false;
 			}
 		}
 		else if(_gui.getOverlay()->isChoiceFormCancelled("aabbList"))
 		{
-			// Show all AABBs again
 			for(const auto& aabbID : _fe3d.aabb_getChildIDs(_currentModelID, AabbParentEntityType::MODEL))
 			{
 				_fe3d.aabb_setVisible(aabbID, true);
 				_fe3d.aabb_setFollowParentVisibility(aabbID, true);
 			}
 
-			// Miscellaneous
 			_isChoosingAabb = false;
 			_isDeletingAabb = false;
 			_gui.getOverlay()->deleteChoiceForm("aabbList");
@@ -231,13 +206,11 @@ void ModelEditor::_updateAabbDeleting()
 {
 	if(_isDeletingAabb && !_currentAabbID.empty())
 	{
-		// Add answer form
 		if(!_gui.getOverlay()->isAnswerFormExisting("delete"))
 		{
 			_gui.getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
-		// Update answer form
 		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
 			_fe3d.aabb_delete(_currentModelID + "@" + _currentAabbID);

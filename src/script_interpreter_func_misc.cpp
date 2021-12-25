@@ -37,25 +37,21 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Temporary values
 			auto firstName = args[0].getString();
 			auto secondName = args[1].getString();
 
-			// Check if first variable not existing
 			if(!_isLocalVariableExisting(firstName) && !_isGlobalVariableExisting(firstName))
 			{
 				_throwScriptError("variable \"" + firstName + "\" not existing!");
 				return returnValues;
 			}
 
-			// Check if second variable not existing
 			if(!_isLocalVariableExisting(secondName) && !_isGlobalVariableExisting(secondName))
 			{
 				_throwScriptError("variable \"" + secondName + "\" not existing!");
 				return returnValues;
 			}
 
-			// Check if first variable is a list
 			auto firstListVariable = (_isLocalVariableExisting(firstName) ? _getLocalVariable(firstName) : _getGlobalVariable(firstName));
 			if(firstListVariable.getType() == ScriptVariableType::SINGLE)
 			{
@@ -63,7 +59,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				return returnValues;
 			}
 
-			// Check if second variable is a list
 			auto secondListVariable = (_isLocalVariableExisting(secondName) ? _getLocalVariable(secondName) : _getGlobalVariable(secondName));
 			if(secondListVariable.getType() == ScriptVariableType::SINGLE)
 			{
@@ -71,7 +66,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				return returnValues;
 			}
 
-			// Return concatenated lists
 			for(unsigned int i = 0; i < firstListVariable.getValueCount(); i++)
 			{
 				returnValues.push_back(firstListVariable.getValue(i));
@@ -88,17 +82,14 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Temporary values
 			auto listName = args[0].getString();
 
-			// Check if variable not existing
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
 				_throwScriptError("variable \"" + listName + "\" not existing!");
 				return returnValues;
 			}
 
-			// Check if variable is not a list
 			auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
 			if(listVariable.getType() == ScriptVariableType::SINGLE)
 			{
@@ -106,7 +97,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				return returnValues;
 			}
 
-			// Return list size
 			auto result = listVariable.getValueCount();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 		}
@@ -117,14 +107,12 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 
 		if(_validateArgumentCount(args, 2))
 		{
-			// List name must be string
 			if(args[0].getType() != SVT::STRING)
 			{
 				_throwScriptError("incorrect argument type!");
 				return returnValues;
 			}
 
-			// Check if variable does not exist
 			auto listName = args[0].getString();
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
@@ -132,7 +120,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				return returnValues;
 			}
 
-			// Check if variable is not a list
 			auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
 			if(listVariable.getType() == ScriptVariableType::SINGLE)
 			{
@@ -140,11 +127,9 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				return returnValues;
 			}
 
-			// Try to find value
 			bool hasFoundValue = false;
 			for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
 			{
-				// String
 				if((listVariable.getValue(i).getType() == SVT::STRING) &&
 				   (args[1].getType() == SVT::STRING) &&
 				   (listVariable.getValue(i).getString() == args[1].getString()))
@@ -153,7 +138,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 					break;
 				}
 
-				// Decimal
 				if((listVariable.getValue(i).getType() == SVT::DECIMAL) &&
 				   (args[1].getType() == SVT::DECIMAL) &&
 				   (listVariable.getValue(i).getDecimal() == args[1].getDecimal()))
@@ -162,7 +146,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 					break;
 				}
 
-				// Integer
 				if((listVariable.getValue(i).getType() == SVT::INTEGER) &&
 				   (args[1].getType() == SVT::INTEGER) &&
 				   (listVariable.getValue(i).getInteger() == args[1].getInteger()))
@@ -171,7 +154,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 					break;
 				}
 
-				// Boolean
 				if((listVariable.getValue(i).getType() == SVT::BOOLEAN) &&
 				   (args[1].getType() == SVT::BOOLEAN) &&
 				   (listVariable.getValue(i).getBoolean() == args[1].getBoolean()))
@@ -181,7 +163,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				}
 			}
 
-			// Return find result
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, hasFoundValue));
 		}
 	}
@@ -191,14 +172,12 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 
 		if(_validateArgumentCount(args, 2))
 		{
-			// List name must be string
 			if(args[0].getType() != SVT::STRING)
 			{
 				_throwScriptError("incorrect argument type!");
 				return returnValues;
 			}
 
-			// Check if variable does not exist
 			auto listName = args[0].getString();
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
@@ -206,7 +185,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				return returnValues;
 			}
 
-			// Check if variable is not a list
 			auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
 			if(listVariable.getType() == ScriptVariableType::SINGLE)
 			{
@@ -214,11 +192,9 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				return returnValues;
 			}
 
-			// Try to find value index
 			int foundIndex = -1;
 			for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
 			{
-				// String
 				if((listVariable.getValue(i).getType() == SVT::STRING) &&
 				   (args[1].getType() == SVT::STRING) &&
 				   (listVariable.getValue(i).getString() == args[1].getString()))
@@ -227,7 +203,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 					break;
 				}
 
-				// Decimal
 				if((listVariable.getValue(i).getType() == SVT::DECIMAL) &&
 				   (args[1].getType() == SVT::DECIMAL) &&
 				   (listVariable.getValue(i).getDecimal() == args[1].getDecimal()))
@@ -236,7 +211,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 					break;
 				}
 
-				// Integer
 				if((listVariable.getValue(i).getType() == SVT::INTEGER) &&
 				   (args[1].getType() == SVT::INTEGER) &&
 				   (listVariable.getValue(i).getInteger() == args[1].getInteger()))
@@ -245,7 +219,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 					break;
 				}
 
-				// Boolean
 				if((listVariable.getValue(i).getType() == SVT::BOOLEAN) &&
 				   (args[1].getType() == SVT::BOOLEAN) &&
 				   (listVariable.getValue(i).getBoolean() == args[1].getBoolean()))
@@ -255,7 +228,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				}
 			}
 
-			// Return find result
 			returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, foundIndex));
 		}
 	}
@@ -265,17 +237,14 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Temporary values
 			auto listName = args[0].getString();
 
-			// Check if variable not existing
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
 				_throwScriptError("variable \"" + listName + "\" not existing!");
 				return returnValues;
 			}
 
-			// Check if variable is not a list
 			auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
 			if(listVariable.getType() == ScriptVariableType::SINGLE)
 			{
@@ -283,14 +252,12 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				return returnValues;
 			}
 
-			// Check if list is empty
 			if(listVariable.getValueCount() == 0)
 			{
 				_throwScriptError("LIST \"" + listName + "\" is empty!");
 				return returnValues;
 			}
 
-			// Check if list values are of different types
 			auto type = listVariable.getValue(0).getType();
 			for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
 			{
@@ -301,30 +268,25 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				}
 			}
 
-			// Determine type of list values
 			if(type == ScriptValueType::INTEGER)
 			{
-				// Compose raw values
 				vector<int> rawValues;
 				for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
 				{
 					rawValues.push_back(listVariable.getValue(i).getInteger());
 				}
 
-				// Return
 				auto result = *min_element(begin(rawValues), end(rawValues));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
 			}
 			else if(type == ScriptValueType::DECIMAL)
 			{
-				// Compose raw values
 				vector<float> rawValues;
 				for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
 				{
 					rawValues.push_back(listVariable.getValue(i).getDecimal());
 				}
 
-				// Return
 				auto result = *min_element(begin(rawValues), end(rawValues));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
@@ -341,17 +303,14 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Temporary values
 			auto listName = args[0].getString();
 
-			// Check if variable not existing
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
 				_throwScriptError("variable \"" + listName + "\" not existing!");
 				return returnValues;
 			}
 
-			// Check if variable is not a list
 			auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
 			if(listVariable.getType() == ScriptVariableType::SINGLE)
 			{
@@ -359,14 +318,12 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				return returnValues;
 			}
 
-			// Check if list is empty
 			if(listVariable.getValueCount() == 0)
 			{
 				_throwScriptError("LIST \"" + listName + "\" is empty!");
 				return returnValues;
 			}
 
-			// Check if list values are of different types
 			auto type = listVariable.getValue(0).getType();
 			for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
 			{
@@ -377,30 +334,25 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				}
 			}
 
-			// Determine type of list values
 			if(type == ScriptValueType::INTEGER)
 			{
-				// Compose raw values
 				vector<int> rawValues;
 				for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
 				{
 					rawValues.push_back(listVariable.getValue(i).getInteger());
 				}
 
-				// Return
 				auto result = *max_element(begin(rawValues), end(rawValues));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
 			}
 			else if(type == ScriptValueType::DECIMAL)
 			{
-				// Compose raw values
 				vector<float> rawValues;
 				for(unsigned int i = 0; i < listVariable.getValueCount(); i++)
 				{
 					rawValues.push_back(listVariable.getValue(i).getDecimal());
 				}
 
-				// Return
 				auto result = *max_element(begin(rawValues), end(rawValues));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
@@ -417,17 +369,14 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Temporary values
 			auto listName = args[0].getString();
 
-			// Check if variable not existing
 			if(!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 			{
 				_throwScriptError("variable \"" + listName + "\" not existing!");
 				return returnValues;
 			}
 
-			// Check if variable is not a list
 			auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
 			if(listVariable.getType() == ScriptVariableType::SINGLE)
 			{
@@ -435,7 +384,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				return returnValues;
 			}
 
-			// Return values in reversed order
 			vector<ScriptValue> values = {};
 			for(int i = (static_cast<int>(listVariable.getValueCount()) - 1); i > -1; i--)
 			{
@@ -478,7 +426,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Validate index
 			if((args[1].getInteger() < 0) ||
 			   (args[1].getInteger() > static_cast<int>(args[0].getString().size())) ||
 			   (args[2].getInteger() < 0))
@@ -497,14 +444,12 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Validate splitter
 			if((args[1].getString().size() > 1) || (args[0].getString().find(args[1].getString()) == string::npos))
 			{
 				_throwScriptError("string splitter not found!");
 				return returnValues;
 			}
 
-			// Return all split string parts
 			string fullString = args[0].getString();
 			string splitter = args[1].getString();
 			string stringPart = "";
@@ -533,7 +478,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Compose string in reverse
 			string result = "";
 			string content = args[0].getString();
 			reverse(content.begin(), content.end());
@@ -542,7 +486,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				result += character;
 			}
 
-			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}

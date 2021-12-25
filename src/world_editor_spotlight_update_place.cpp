@@ -7,37 +7,28 @@ void WorldEditor::_updateSpotlightPlacing()
 	{
 		if(_fe3d.terrain_getSelectedID().empty()) // Placing without terrain
 		{
-			// Retrieve current position
 			auto newPosition = _fe3d.spotlight_getPosition(TEMPLATE_TORCH_ID);
 
-			// Update value forms
 			_gui.getOverlay()->checkValueForm("positionX", newPosition.x, {});
 			_gui.getOverlay()->checkValueForm("positionY", newPosition.y, {});
 			_gui.getOverlay()->checkValueForm("positionZ", newPosition.z, {});
 
-			// Update position
 			_fe3d.spotlight_setPosition(TEMPLATE_TORCH_ID, newPosition);
 
-			// Check if spotlight must be placed
 			if(_gui.getOverlay()->isValueFormConfirmed())
 			{
-				// Adding a number to make it unique
 				BEGIN1:;
 				const string newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
-				// Check if spotlight already exists
 				if(_fe3d.spotlight_isExisting(newID))
 				{
 					goto BEGIN1;
 				}
 
-				// Try to create spotlight
 				_fe3d.spotlight_create(newID);
 
-				// Check if spotlight creation went well
 				if(_fe3d.spotlight_isExisting(newID))
 				{
-					// Create model
 					const string newModelID = ("@@torch_" + newID);
 					_fe3d.model_create(newModelID, "engine\\assets\\mesh\\torch.obj");
 					_fe3d.model_setBaseSize(newModelID, DEFAULT_TORCH_SIZE);
@@ -45,14 +36,12 @@ void WorldEditor::_updateSpotlightPlacing()
 					_fe3d.model_setReflected(newModelID, false);
 					_fe3d.model_setBright(newModelID, true);
 
-					// Bind AABB
 					_fe3d.aabb_create(newModelID);
 					_fe3d.aabb_setParentEntityID(newModelID, newModelID);
 					_fe3d.aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
 					_fe3d.aabb_setLocalSize(newModelID, DEFAULT_TORCH_AABB_SIZE);
 					_fe3d.aabb_setCollisionResponsive(newModelID, false);
 
-					// Create spotlight
 					_fe3d.spotlight_delete(newID);
 					_fe3d.spotlight_create(newID);
 					_fe3d.spotlight_setPosition(newID, newPosition);
@@ -64,7 +53,6 @@ void WorldEditor::_updateSpotlightPlacing()
 				}
 			}
 
-			// Check if placement mode must be disabled
 			if(_gui.getOverlay()->isValueFormConfirmed() || _gui.getOverlay()->isValueFormCancelled())
 			{
 				_fe3d.model_setVisible(TEMPLATE_TORCH_ID, false);
@@ -74,52 +62,39 @@ void WorldEditor::_updateSpotlightPlacing()
 		}
 		else
 		{
-			// Check if allowed by GUI
 			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
 			{
-				// Check if allowed by mouse
 				if(!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
-					// Check if terrain is loaded
 					if(_fe3d.raycast_isPointOnTerrainValid())
 					{
-						// Show template spotlight
 						_fe3d.spotlight_setVisible(TEMPLATE_TORCH_ID, true);
 						_fe3d.model_setVisible(TEMPLATE_TORCH_ID, true);
 
-						// Update position
 						_fe3d.spotlight_setPosition(TEMPLATE_TORCH_ID, (_fe3d.raycast_getPointOnTerrain() + SPOTLIGHT_TERRAIN_OFFSET));
 					}
 					else
 					{
-						// Hide template spotlight
 						_fe3d.model_setVisible(TEMPLATE_TORCH_ID, false);
 						_fe3d.spotlight_setVisible(TEMPLATE_TORCH_ID, false);
 					}
 
-					// Check if spotlight must be placed
 					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.raycast_isPointOnTerrainValid())
 					{
-						// Temporary values
 						auto newPosition = _fe3d.spotlight_getPosition(TEMPLATE_TORCH_ID);
 
-						// Adding a number to make it unique
 						BEGIN2:;
 						const string newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
-						// Check if spotlight already exists
 						if(_fe3d.spotlight_isExisting(newID))
 						{
 							goto BEGIN2;
 						}
 
-						// Try to create spotlight
 						_fe3d.spotlight_create(newID);
 
-						// Check if spotlight creation went well
 						if(_fe3d.spotlight_isExisting(newID))
 						{
-							// Create model
 							const string newModelID = ("@@torch_" + newID);
 							_fe3d.model_create(newModelID, "engine\\assets\\mesh\\torch.obj");
 							_fe3d.model_setBaseSize(newModelID, DEFAULT_TORCH_SIZE);
@@ -127,14 +102,12 @@ void WorldEditor::_updateSpotlightPlacing()
 							_fe3d.model_setReflected(newModelID, false);
 							_fe3d.model_setBright(newModelID, true);
 
-							// Bind AABB
 							_fe3d.aabb_create(newModelID);
 							_fe3d.aabb_setParentEntityID(newModelID, newModelID);
 							_fe3d.aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
 							_fe3d.aabb_setLocalSize(newModelID, DEFAULT_TORCH_AABB_SIZE);
 							_fe3d.aabb_setCollisionResponsive(newModelID, false);
 
-							// Create spotlight
 							_fe3d.spotlight_delete(newID);
 							_fe3d.spotlight_create(newID);
 							_fe3d.spotlight_setPosition(newID, newPosition);
@@ -165,7 +138,6 @@ void WorldEditor::_updateSpotlightPlacing()
 			}
 		}
 
-		// Update template torch position
 		if(_isPlacingSpotlight)
 		{
 			auto spotlightPosition = _fe3d.spotlight_getPosition(TEMPLATE_TORCH_ID);

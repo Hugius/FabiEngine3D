@@ -58,36 +58,28 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 
 	for(const auto& part : parts)
 	{
-		// Temporary values
 		vector<float> bufferData;
 
-		// Iterate through vertices
 		for(size_t i = 0; i < part->getVertices().size(); i++)
 		{
-			// Vertex coordinate
 			bufferData.push_back(part->getVertices()[i].x);
 			bufferData.push_back(part->getVertices()[i].y);
 			bufferData.push_back(part->getVertices()[i].z);
 
-			// UV coordinate
 			bufferData.push_back(part->getUVs()[i].x);
 			bufferData.push_back(part->getUVs()[i].y);
 
-			// Normal vector
 			bufferData.push_back(part->getNormals()[i].x);
 			bufferData.push_back(part->getNormals()[i].y);
 			bufferData.push_back(part->getNormals()[i].z);
 
-			// Tangent vector
 			bufferData.push_back(part->getTangents()[i].x);
 			bufferData.push_back(part->getTangents()[i].y);
 			bufferData.push_back(part->getTangents()[i].z);
 		}
 
-		// New model part
 		entity->createPart(part->getID());
 
-		// Render buffer
 		entity->setRenderBuffer(part->getID(), make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
 	}
 }
@@ -116,36 +108,28 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 {
 	for(const auto& [keyID, entity] : _entities)
 	{
-		// Update transformation
 		entity->updateTransformation();
 
-		// Update model if visible
 		if(entity->isVisible())
 		{
-			// Check if model has level of detail entity
 			if(!entity->getLevelOfDetailEntityID().empty())
 			{
-				// Check if level of detail entity still exists
 				auto levelOfDetailEntityPair = getEntities().find(entity->getID());
 				if(levelOfDetailEntityPair == getEntities().end())
 				{
 					Logger::throwError("ModelEntityManager::update");
 				}
 
-				// Calculate absolute distance between camera and entity
 				auto cameraPosition = _renderBus.getCameraPosition();
 				auto entityPosition = entity->getBasePosition();
 				auto absolsuteDistance = Math::calculateDistance(cameraPosition, entityPosition);
 
-				// Check if entity is farther than level of detail distance
 				bool isFarEnough = (absolsuteDistance > entity->getLevelOfDetailDistance()) && (!entity->getLevelOfDetailEntityID().empty());
 				entity->setLevelOfDetailed(isFarEnough);
 			}
 
-			// Update cube reflections every second
 			if((_timer.getPassedTickCount() % Config::UPDATES_PER_SECOND) == 0)
 			{
-				// Sort reflection entities based on distance
 				map<float, shared_ptr<ReflectionEntity>> reflectionDistanceMap;
 				for(const auto& [keyID, reflectionEntity] : reflectionEntities)
 				{
@@ -156,7 +140,6 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 					}
 				}
 
-				// Validate reflection IDs
 				if(reflectionEntities.find(entity->getPreviousReflectionEntityID()) == reflectionEntities.end())
 				{
 					entity->setPreviousReflectionEntityID("");
@@ -173,20 +156,15 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 					entity->setCubeReflectionMixValue(1.0f);
 				}
 
-				// Check if any reflection entity is found
 				if(!reflectionDistanceMap.empty())
 				{
-					// Temporary values
 					auto& closestReflectionEntityID = reflectionDistanceMap.begin()->second->getID();
 
-					// Check if current reflection changed
 					if(entity->getCurrentReflectionEntityID() != closestReflectionEntityID)
 					{
-						// Set IDs
 						entity->setPreviousReflectionEntityID(entity->getCurrentReflectionEntityID());
 						entity->setCurrentReflectionEntityID(closestReflectionEntityID);
 
-						// Reset overlapping
 						if(!entity->getPreviousReflectionEntityID().empty())
 						{
 							entity->setCubeReflectionMixValue(0.0f);
@@ -194,11 +172,9 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 					}
 				}
 
-				// Update cube reflection overlapping
 				entity->setCubeReflectionMixValue(entity->getCubeReflectionMixValue() + CUBE_REFLECTION_OVERLAP_SPEED);
 			}
 
-			// Update transformation matrix
 			entity->updateTransformationMatrix();
 		}
 	}

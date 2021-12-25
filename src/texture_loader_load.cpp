@@ -25,23 +25,18 @@ const TextureID TextureLoader::load2dTexture(const string& filePath, bool isMipm
 	}
 	else
 	{
-		// Load OpenGL texture
 		auto loadedTexture = _convertInto2dTexture(loadedSurface, filePath, isMipmapped, isAnisotropic);
 
-		// Memory management
 		SDL_FreeSurface(loadedSurface);
 
-		// Check texture status
 		if(loadedTexture == 0)
 		{
 			return 0;
 		}
 		else
 		{
-			// Cache texture
 			_2dTextureCache.insert(make_pair(filePath, loadedTexture));
 
-			// Return cached texture
 			goto BEGIN;
 		}
 	}
@@ -67,10 +62,8 @@ const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 
 	for(size_t i = 0; i < threads.size(); i++)
 	{
-		// Save loaded surface
 		loadedSurfaces[i] = threads[i].get();
 
-		// Error logging
 		if((loadedSurfaces[i] == nullptr) && !filePaths[i].empty())
 		{
 			Logger::throwWarning("Cannot load image: \"" + filePaths[i] + "\"!");
@@ -81,7 +74,6 @@ const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 
 	for(const auto& surface : loadedSurfaces)
 	{
-		// Only if memory is present
 		if(surface != nullptr)
 		{
 			SDL_FreeSurface(surface);
@@ -94,10 +86,8 @@ const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 	}
 	else
 	{
-		// Cache texture
 		_3dTextureCache.insert(make_pair(filePaths, loadedTexture));
 
-		// Return cached texture
 		goto BEGIN;
 	}
 }
@@ -121,13 +111,10 @@ const vector<float>* TextureLoader::loadBitmap(const string& filePath)
 	}
 	else
 	{
-		// Cache bitmap
 		_bitmapCache.insert(make_pair(filePath, loadedBitmap));
 
-		// Logging
 		Logger::throwInfo("Loaded bitmap: \"" + filePath + "\"");
 
-		// Return cached bitmap
 		goto BEGIN;
 	}
 }
@@ -148,10 +135,8 @@ const TextureID TextureLoader::load2dTexture(const string& textContent, const st
 
 	if(fontCacheIterator == _fontCache.end())
 	{
-		// Load font
 		font = _loadFont(fontPath);
 
-		// Check font status
 		if(font == nullptr)
 		{
 			Logger::throwWarning("Cannot load font: \"" + fontPath + "\"!");
@@ -159,10 +144,8 @@ const TextureID TextureLoader::load2dTexture(const string& textContent, const st
 		}
 		else
 		{
-			// Cache font
 			_fontCache.insert(make_pair(fontPath, font));
 
-			// Logging
 			Logger::throwInfo("Loaded font: \"" + fontPath + "\"");
 		}
 	}
@@ -179,10 +162,8 @@ const TextureID TextureLoader::load2dTexture(const string& textContent, const st
 	}
 	else
 	{
-		// Cache texture
 		_textCache.insert(make_pair(make_pair(textContent, fontPath), loadedTexture));
 
-		// Return cached texture
 		goto BEGIN;
 	}
 }

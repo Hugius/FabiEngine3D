@@ -11,7 +11,6 @@ void ScriptEditor::_updateGUI()
 
 	if(screen->getID() == "scriptEditorMenuMain")
 	{
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getOverlay()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
@@ -45,17 +44,14 @@ void ScriptEditor::_updateGUI()
 			_currentScriptFileID = "";
 		}
 
-		// Control key combinations
 		if(_fe3d.input_isKeyDown(InputType::KEY_LCTRL) || _fe3d.input_isKeyDown(InputType::KEY_RCTRL))
 		{
-			// Search hotkey
 			if(_fe3d.input_isKeyPressed(InputType::KEY_F) && !_gui.getOverlay()->isFocused())
 			{
 				_gui.getOverlay()->createValueForm("search", "Search Keyword", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			}
 		}
 
-		// Update answer forms
 		if(_gui.getOverlay()->isAnswerFormConfirmed("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
@@ -70,11 +66,9 @@ void ScriptEditor::_updateGUI()
 			return;
 		}
 
-		// Update buttons hoverability
 		screen->getButton("rename")->setHoverable(!_currentScriptFileID.empty());
 		screen->getButton("delete")->setHoverable(!_currentScriptFileID.empty());
 
-		// Update button text contents
 		screen->getTextField("lineCount")->changeTextContent("Lines: " + to_string(_script.getTotalLineCount()));
 	}
 }
@@ -83,27 +77,22 @@ void ScriptEditor::_updateScriptFileCreating()
 {
 	if(_isCreatingScriptFile)
 	{
-		// Temporary values
 		string newScriptFileID;
 
-		// Check if user filled in a new ID
 		if(_gui.getOverlay()->checkValueForm("scriptCreate", newScriptFileID))
 		{
-			// Spaces not allowed
 			if(newScriptFileID.find(' ') != string::npos)
 			{
 				Logger::throwWarning("Script ID cannot contain any spaces!");
 				return;
 			}
 
-			// @ sign not allowed
 			if(newScriptFileID.find('@') != string::npos)
 			{
 				Logger::throwWarning("Script ID cannot contain '@'!");
 				return;
 			}
 
-			// Check if script file already exists
 			auto existingScriptFileIDs = _script.getScriptFileIDs();
 			if(find(existingScriptFileIDs.begin(), existingScriptFileIDs.end(), newScriptFileID) != existingScriptFileIDs.end())
 			{
@@ -111,7 +100,6 @@ void ScriptEditor::_updateScriptFileCreating()
 				return;
 			}
 
-			// Create script file
 			_currentScriptFileID = newScriptFileID;
 			_isWritingScript = true;
 			_firstSelectedLineIndex = -1;
@@ -120,7 +108,6 @@ void ScriptEditor::_updateScriptFileCreating()
 			_script.getScriptFile(_currentScriptFileID)->insertNewLine(0, "");
 			_reloadScriptTextDisplay(true);
 
-			// Miscellaneous
 			_isCreatingScriptFile = false;
 		}
 	}
@@ -130,23 +117,18 @@ void ScriptEditor::_updateScriptFileChoosing()
 {
 	if(_isChoosingScriptFile)
 	{
-		// Get selected button ID
 		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("scriptFileList");
 
-		// Check if script file ID is hovered
 		if(!selectedButtonID.empty())
 		{
-			// Check if LMB is pressed
 			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				// Select script file
 				_currentScriptFileID = selectedButtonID;
 				_isWritingScript = true;
 				_firstSelectedLineIndex = -1;
 				_lastSelectedLineIndex = -1;
 				_reloadScriptTextDisplay(true);
 
-				// Miscellaneous
 				_gui.getOverlay()->deleteChoiceForm("scriptFileList");
 				_isChoosingScriptFile = false;
 			}
@@ -163,39 +145,32 @@ void ScriptEditor::_updateScriptFileRenaming()
 {
 	if(_isRenamingScriptFile)
 	{
-		// Temporary values
 		string newScriptFileID;
 
-		// Check if user filled in a new ID
 		if(_gui.getOverlay()->checkValueForm("scriptRename", newScriptFileID))
 		{
-			// Spaces not allowed
 			if(newScriptFileID.find(' ') != string::npos)
 			{
 				Logger::throwWarning("Script ID cannot contain any spaces!");
 				return;
 			}
 
-			// @ sign not allowed
 			if(newScriptFileID.find('@') != string::npos)
 			{
 				Logger::throwWarning("Script ID cannot contain '@'!");
 				return;
 			}
 
-			// Check if script file already exists
 			auto existingScriptFileIDs = _script.getScriptFileIDs();
 			if(find(existingScriptFileIDs.begin(), existingScriptFileIDs.end(), newScriptFileID) == existingScriptFileIDs.end())
 			{
 				Logger::throwWarning("Script with ID \"" + newScriptFileID + "\" already exists!");
 			}
 
-			// Rename script file
 			_scriptFileNamesToDelete.push_back(_currentScriptFileID);
 			_script.renameScriptFile(_currentScriptFileID, newScriptFileID);
 			_currentScriptFileID = newScriptFileID;
 
-			// Miscellaneous
 			_isRenamingScriptFile = false;
 		}
 	}
@@ -205,15 +180,12 @@ void ScriptEditor::_updateScriptSearching()
 {
 	if(_isSearchingScriptFile)
 	{
-		// Temporary values
 		string keyword;
 
-		// Check if user filled in a keyword
 		if(_gui.getOverlay()->checkValueForm("search", keyword))
 		{
 			auto result = _script.findKeyword(keyword);
 
-			// Check if keyword found nowhere
 			if(result.empty())
 			{
 				Logger::throwInfo("Keyword \"" + keyword + "\" not found in scripts!");
@@ -221,14 +193,12 @@ void ScriptEditor::_updateScriptSearching()
 				return;
 			}
 
-			// Print all lines in which the keyword occurred 
 			for(const auto& [fileID, lineNumber] : result)
 			{
 				Logger::throwInfo("Keyword \"" + keyword + "\" found in script \"" + fileID + "\" @ line " + to_string(lineNumber));
 			}
 			Logger::throwInfo("");
 
-			// Miscellaneous
 			_isSearchingScriptFile = false;
 		}
 	}
@@ -238,15 +208,12 @@ void ScriptEditor::_updateMiscellaneous()
 {
 	if(_isWritingScript)
 	{
-		// Temporary values
 		const unsigned int currentLineIndex = _script.getScriptFile(_currentScriptFileID)->getCursorLineIndex();
 		const unsigned int lineCount = _script.getScriptFile(_currentScriptFileID)->getLineCount();
 		const float lastLineHeight = _fe3d.billboard_getPosition(to_string(lineCount - 1)).y;
 
-		//  Check if camera allowed to move
 		if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 		{
-			// Camera movement input
 			if(_fe3d.input_getMouseWheelY() == -1 && lineCount > (MAX_VISIBLE_LINES - 1))
 			{
 				_scrollingAcceleration -= SCROLLING_SPEED;
@@ -257,7 +224,6 @@ void ScriptEditor::_updateMiscellaneous()
 			}
 		}
 
-		// Camera must not go out of screen (upwards)
 		if(_fe3d.camera_getPosition().y > CAMERA_POSITION.y)
 		{
 			_scrollingAcceleration = 0.0f;
@@ -268,7 +234,6 @@ void ScriptEditor::_updateMiscellaneous()
 			_scrollingAcceleration = 0.0f;
 		}
 
-		// Check if code is out of screen
 		if(lineCount > (MAX_VISIBLE_LINES - 1))
 		{
 			if(_fe3d.camera_getPosition().y < (lastLineHeight + CAMERA_OFFSET)) // Camera must not go out of screen
@@ -287,7 +252,6 @@ void ScriptEditor::_updateMiscellaneous()
 			_fe3d.camera_setPosition(CAMERA_POSITION);
 		}
 
-		// Synchronize camera position whenever writers adds or removes a line
 		static unsigned int lastLineIndex = currentLineIndex;
 		if((currentLineIndex > (MAX_VISIBLE_LINES - 1)) && (currentLineIndex != lastLineIndex) && (currentLineIndex == lineCount - 1))
 		{

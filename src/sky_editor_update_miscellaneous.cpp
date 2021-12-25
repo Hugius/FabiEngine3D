@@ -6,12 +6,10 @@ void SkyEditor::_updateMiscellaneousMenu()
 
 	if(screen->getID() == "skyEditorMenuMiscellaneous")
 	{
-		// Temporary values
 		float rotation = _fe3d.sky_getRotation(_currentSkyID);
 		float lightness = _fe3d.sky_getLightness(_currentSkyID);
 		fvec3 color = _fe3d.sky_getColor(_currentSkyID);
 
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
@@ -32,7 +30,6 @@ void SkyEditor::_updateMiscellaneousMenu()
 			_gui.getOverlay()->createValueForm("colorB", "B", color.b * 255.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
-		// Update value forms
 		if(_gui.getOverlay()->checkValueForm("rotation", rotation))
 		{
 			_fe3d.sky_setRotation(_currentSkyID, rotation);

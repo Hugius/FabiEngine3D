@@ -11,14 +11,12 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 
 	if(_firstSelectedLineIndex != -1)
 	{
-		// Check if user cancels or edits any selected text
 		if(_hasClickedLMB || _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT) || // LMB or RMB
 		   _activeActionKey != InputType::NONE || // Action keys such as arrow keys, enter, etc...
 		   !newCharacters.empty() || // Typed characters
 		   (isControlKeyDown && _fe3d.input_isKeyPressed(InputType::KEY_V)) || // CTRL + V
 		   (isControlKeyDown && _fe3d.input_isKeyPressed(InputType::KEY_X))) // CTRL + X
 		{
-			// Delete selection billboards
 			for(const auto& ID : _fe3d.billboard_getIDs())
 			{
 				if(ID.substr(0, string("selection_").size()) == "selection_")
@@ -27,13 +25,11 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				}
 			}
 
-			// Copy before removing text
 			if(isControlKeyDown && _fe3d.input_isKeyPressed(InputType::KEY_X))
 			{
 				_copySelectedText();
 			}
 
-			// Check if text content has been changed
 			if(!newCharacters.empty() ||
 			   _fe3d.input_isKeyPressed(InputType::KEY_BACKSPACE) ||
 			   _fe3d.input_isKeyPressed(InputType::KEY_DELETE) ||
@@ -47,7 +43,6 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				}
 				else
 				{
-					// Remove selected lines
 					int lineIndexToRemove = (_firstSelectedLineIndex > _lastSelectedLineIndex) ? _lastSelectedLineIndex : _firstSelectedLineIndex;
 					for(int i = 0; i <= abs(_firstSelectedLineIndex - _lastSelectedLineIndex); i++)
 					{
@@ -55,28 +50,22 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 					}
 				}
 
-				// Correct hover position
 				if(hoveredLineIndex > static_cast<int>(_script.getScriptFile(_currentScriptFileID)->getLineCount() - 1))
 				{
 					hoveredLineIndex = static_cast<int>(_script.getScriptFile(_currentScriptFileID)->getLineCount());
 				}
 
-				// Correct cursor position
 				if(cursorLineIndex > _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
 				{
 					cursorLineIndex = _script.getScriptFile(_currentScriptFileID)->getLineCount();
 				}
 
-				// Index based on amount of newly added characters
 				cursorCharIndex = newCharacters.empty() ? 0 : static_cast<unsigned int>(newCharacters.size());
 
-				// Add new line
 				_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex, newCharacters);
 
-				// Add extra line for entering
 				if(_fe3d.input_isKeyPressed(InputType::KEY_ENTER))
 				{
-					// Check if not exceeding the line limit
 					if(_script.getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_COUNT)
 					{
 						_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex, "");
@@ -84,14 +73,11 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 					}
 				}
 
-				// Make sure the script gets re-rendered
 				textHasChanged = true;
 
-				// Make sure only the selected text is removed
 				_activeActionKey = InputType::NONE;
 			}
 
-			// Reset selection values
 			_firstSelectedLineIndex = -1;
 			_lastSelectedLineIndex = -1;
 		}
@@ -99,16 +85,13 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 
 	if(_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && _fe3d.misc_isCursorInsideViewport())
 	{
-		// Check if line is hovered
 		if(hoveredLineIndex != -1)
 		{
 			string selectionID = ("selection_" + to_string(hoveredLineIndex));
 			string textID = ("text_" + to_string(hoveredLineIndex));
 
-			// Check if line has text to be selected
 			if(!_fe3d.billboard_isExisting(selectionID) && _fe3d.billboard_isExisting(textID))
 			{
-				// Check if line text is empty
 				if(_fe3d.billboard_getTextContent(textID).empty())
 				{
 					fvec3 lineTextPosition = (_fe3d.billboard_getPosition(textID));
@@ -130,14 +113,12 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				}
 			}
 
-			// Remember first selected line
 			if(_firstSelectedLineIndex == -1)
 			{
 				_firstSelectedLineIndex = hoveredLineIndex;
 			}
 			else
 			{
-				// Make sure user can only select in 1 direction
 				if(_lastSelectedLineIndex != -1)
 				{
 					int lastDirection = _firstSelectedLineIndex - _lastSelectedLineIndex;
@@ -150,7 +131,6 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 					}
 				}
 
-				// Remember last selected line
 				_lastSelectedLineIndex = hoveredLineIndex;
 			}
 		}
@@ -165,15 +145,12 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 			}
 			else // Multiple lines selected
 			{
-				// Most upper selected line must be the cursor position
 				cursorLineIndex = min(_firstSelectedLineIndex, _lastSelectedLineIndex);
 			}
 
-			// Place cursor at the end of current line
 			cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
 		}
 
-		// Control key combinations
 		if(isControlKeyDown)
 		{
 			if(_fe3d.input_isKeyPressed(InputType::KEY_C)) // Copy selected text to clipboard
@@ -182,18 +159,14 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 			}
 			else if(_fe3d.input_isKeyPressed(InputType::KEY_V)) // Paste copied text
 			{
-				// Check if clipboard is not empty
 				if(!_copyClipboard.empty())
 				{
-					// Paste as much copied text as possible
 					unsigned int pastedCount = 0;
 					bool firstLineEmpty = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).empty();
 					for(size_t i = 0; i < _copyClipboard.size(); i++)
 					{
-						// Check if next line exists
 						if((cursorLineIndex + i) < _script.getScriptFile(_currentScriptFileID)->getLineCount())
 						{
-							// Check if text can be placed on current line
 							if(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex + static_cast<unsigned int>(i)).empty())
 							{
 								_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex + static_cast<unsigned int>(i), _copyClipboard[i]);
@@ -202,7 +175,6 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 							}
 						}
 
-						// Try to create new line
 						if(_script.getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_COUNT)
 						{
 							_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex + static_cast<unsigned int>(i), _copyClipboard[i]);
@@ -214,15 +186,12 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 						}
 					}
 
-					// Check if anything has been successfully pasted
 					if(pastedCount > 0)
 					{
-						// Change cursor position
 						cursorLineIndex += (pastedCount - static_cast<int>(firstLineEmpty));
 						cursorLineIndex = min(cursorLineIndex, (MAX_LINE_COUNT - 1));
 						cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
 
-						// Make sure the script gets re-rendered
 						textHasChanged = true;
 					}
 				}

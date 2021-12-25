@@ -31,14 +31,11 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 	string line;
 	while(getline(file, line))
 	{
-		// Data placeholders
 		string animationID, previewTexturePath;
 		unsigned int rowCount, columnCount, framestep;
 
-		// For file extraction
 		istringstream iss(line);
 
-		// Read from file
 		iss >>
 			animationID >>
 			previewTexturePath >>
@@ -46,31 +43,24 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 			columnCount >>
 			framestep;
 
-		// Convert empty string
 		previewTexturePath = (previewTexturePath == "?") ? "" : previewTexturePath;
 
-		// Convert spaces
 		replace(previewTexturePath.begin(), previewTexturePath.end(), '?', ' ');
 
-		// Convert to long path
 		if(!Config::getInst().isApplicationExported())
 		{
 			previewTexturePath = string("projects\\" + _currentProjectID + "\\" + previewTexturePath);
 		}
 
-		// Create animation
 		auto newAnimation = make_shared<Animation2d>(animationID);
 		newAnimation->setPreviewTexturePath(previewTexturePath);
 
-		// Set properties
 		newAnimation->setRowCount(rowCount);
 		newAnimation->setColumnCount(columnCount);
 		newAnimation->setFramestep(framestep);
 
-		// Only if loading animations in editor
 		if(mustCheckPreviewTexture)
 		{
-			// Check if preview texture still existing
 			if(Tools::isFileExisting(rootPath + previewTexturePath))
 			{
 				_fe3d.misc_cache2dTexture(previewTexturePath);
@@ -82,7 +72,6 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 			}
 		}
 
-		// Add new animation
 		_animations.push_back(newAnimation);
 	}
 

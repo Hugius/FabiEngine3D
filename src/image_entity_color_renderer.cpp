@@ -27,10 +27,8 @@ void ImageEntityColorRenderer::render(const shared_ptr<ImageEntity> entity)
 	   ((entity->getPosition().y - entity->getSize().y) < entity->getMaxPosition().y) &&
 	   ((entity->getPosition().y + entity->getSize().y) > entity->getMinPosition().y))
 	{
-		// Temporary values
 		const auto buffer = entity->getRenderBuffer();
 
-		// Shader uniforms
 		_shader.uploadUniform("u_multiplierUV", entity->getMultiplierUV());
 		_shader.uploadUniform("u_adderUV", entity->getAdderUV());
 		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
@@ -46,24 +44,19 @@ void ImageEntityColorRenderer::render(const shared_ptr<ImageEntity> entity)
 		_shader.uploadUniform("u_wireframeColor", entity->getWireframeColor());
 		_shader.uploadUniform("u_isWireframed", entity->isWireframed());
 
-		// Bind textures
 		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
 		}
 
-		// Bind buffer
 		glBindVertexArray(buffer->getVAO());
 
-		// Render
 		glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 		_renderBus.increaseTriangleCount(buffer->getVertexCount() / 3);
 
-		// Unbind buffer
 		glBindVertexArray(0);
 
-		// Unbind textures
 		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);

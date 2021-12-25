@@ -8,26 +8,21 @@ void WorldEditor::_updateReflectionMenu()
 
 	if(screen->getID() == "worldEditorMenuReflection")
 	{
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
-			// Reset placing
 			if(_isPlacingReflection)
 			{
 				_fe3d.model_setVisible(TEMPLATE_CAMERA_ID, false);
 				_isPlacingReflection = false;
 			}
 
-			// Miscellaneous
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 			return;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("place")->isHovered())
 		{
-			// Reset right window
 			_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
 
-			// Deactivate everything
 			_deactivateModel();
 			_deactivateBillboard();
 			_deactivateSound();
@@ -35,13 +30,11 @@ void WorldEditor::_updateReflectionMenu()
 			_deactivateSpotlight();
 			_deactivateReflection();
 
-			// Set new template reflection
 			_isPlacingReflection = true;
 			_fe3d.model_setVisible(TEMPLATE_CAMERA_ID, true);
 			_fe3d.reflection_setPosition(TEMPLATE_CAMERA_ID, fvec3(0.0f));
 			_fe3d.misc_centerCursor();
 
-			// Add position value forms for placing without terrain
 			if(_fe3d.terrain_getSelectedID().empty())
 			{
 				_gui.getOverlay()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
@@ -53,24 +46,19 @@ void WorldEditor::_updateReflectionMenu()
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuReflectionChoice");
 
-			// Clear all buttons from scrolling list
 			_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflections")->deleteButtons();
 
-			// Add the ID of every placed reflection
 			auto IDs = _fe3d.reflection_getIDs();
 			sort(IDs.begin(), IDs.end());
 			for(auto& reflectionID : IDs)
 			{
-				// Cannot be template
 				if(reflectionID[0] != '@')
 				{
-					// Removing the unique number from the ID
 					reverse(reflectionID.begin(), reflectionID.end());
 					string rawID = reflectionID.substr(reflectionID.find('_') + 1);
 					reverse(rawID.begin(), rawID.end());
 					reverse(reflectionID.begin(), reflectionID.end());
 
-					// Add new button
 					_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflections")->createButton(reflectionID, rawID);
 				}
 			}
@@ -84,28 +72,21 @@ void WorldEditor::_updateReflectionChoosingMenu()
 
 	if(screen->getID() == "worldEditorMenuReflectionChoice")
 	{
-		// Remove deleted reflections from the scrollingList buttons
 		for(const auto& button : screen->getScrollingList("reflections")->getButtons())
 		{
-			// Check if reflection is still existing
 			if(!_fe3d.reflection_isExisting(button->getID()))
 			{
-				// Delete button
 				screen->getScrollingList("reflections")->deleteButton(button->getID());
 				break;
 			}
 		}
 
-		// Iterate through every placed reflection
 		for(const auto& reflectionID : _fe3d.reflection_getIDs())
 		{
-			// Cannot be template
 			if(reflectionID[0] != '@')
 			{
-				// Check if button is hovered
 				if(screen->getScrollingList("reflections")->getButton(reflectionID)->isHovered())
 				{
-					// Check if LMB pressed (activation)
 					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
 						_activateReflection(reflectionID);
@@ -121,7 +102,6 @@ void WorldEditor::_updateReflectionChoosingMenu()
 			}
 		}
 
-		// Back button
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuReflection");

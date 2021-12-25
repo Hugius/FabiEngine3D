@@ -142,21 +142,17 @@ const bool GuiOverlay::_checkValueForm(const string& ID, string& valueString, co
 		bool cancelled = _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_cancel")->isHovered();
 		bool entered = getWriteField(ID)->confirmedInput();
 
-		// Check if user confirmed or cancelled
 		if(done || entered || cancelled)
 		{
 			if(done || entered) // Pressed done or ENTER
 			{
-				// Retrieve content
 				auto content = getWriteField(ID)->getTextContent();
 
-				// Check if writeField is not empty
 				if(content.empty())
 				{
 					return false;
 				}
 
-				// Check if written content is not forbidden
 				for(const auto& forbiddenValue : forbiddenValueStrings)
 				{
 					if(content == forbiddenValue)
@@ -165,12 +161,10 @@ const bool GuiOverlay::_checkValueForm(const string& ID, string& valueString, co
 					}
 				}
 
-				// Apply to value
 				valueString = content;
 				changed = getWriteField(ID)->hasTextContentChanged();
 			}
 
-			// Remove valueform(s)
 			if(_valueFormIDs.size() == 1)
 			{
 				_mustDeleteValueForms = true;
@@ -202,13 +196,11 @@ void GuiOverlay::createChoiceForm(const string& ID, string title, fvec2 position
 
 	for(const auto& buttonTitle : buttonTitles)
 	{
-		// Validate button title
 		if(buttonTitle.empty())
 		{
 			Logger::throwError("GuiOverlay::createChoiceForm::2");
 		}
 
-		// Add button
 		getScrollingList(ID)->createButton(buttonTitle, buttonTitle);
 	}
 
@@ -220,10 +212,8 @@ const string GuiOverlay::checkChoiceForm(const string& ID)
 {
 	if(ID == _choiceFormID)
 	{
-		// Iterate through buttons
 		for(const auto& button : getScrollingList(ID)->getButtons())
 		{
-			// Check if button is hovered
 			if(button->isHovered())
 			{
 				return button->getID();
@@ -340,7 +330,6 @@ void GuiOverlay::_updateValueFormDeleting()
 {
 	if(_mustDeleteValueForms)
 	{
-		// Remove valueforms
 		for(const auto& tempID : _valueFormIDs)
 		{
 			deleteRectangle(tempID);
@@ -349,11 +338,9 @@ void GuiOverlay::_updateValueFormDeleting()
 		}
 		_valueFormIDs.clear();
 
-		// Remove confirmation and cancellation buttons
 		deleteButton("value_form_done");
 		deleteButton("value_form_cancel");
 
-		// Miscellaneous
 		_mustDeleteValueForms = false;
 		_isFocused = false;
 	}

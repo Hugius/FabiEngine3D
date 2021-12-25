@@ -47,10 +47,8 @@ void ShadowGenerator::generate()
 
 	if(_isFollowingCamera)
 	{
-		// Temporary values
 		auto cameraPosition = _renderBus.getCameraPosition();
 
-		// Update eye & center
 		newEyePosition.x += cameraPosition.x;
 		newEyePosition.z += cameraPosition.z;
 		newCenterPosition.x += cameraPosition.x;

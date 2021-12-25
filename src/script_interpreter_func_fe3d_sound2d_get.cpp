@@ -10,14 +10,12 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// @ sign not allowed
 			if(args[0].getString().find('@') != string::npos)
 			{
 				_throwScriptError("ID of requested sound with ID \"" + args[0].getString() + "\" cannot contain '@'");
 				return true;
 			}
 
-			// Check if existing
 			auto result = _fe3d.sound2d_isExisting(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
@@ -28,20 +26,16 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// @ sign not allowed
 			if(args[0].getString().find('@') != string::npos)
 			{
 				_throwScriptError("ID of requested sound with ID \"" + args[0].getString() + "\" cannot contain '@'");
 				return true;
 			}
 
-			// Find full sound IDs based on sub ID
 			for(const auto& ID : _fe3d.sound2d_getIDs())
 			{
-				// If substring matches
 				if(args[0].getString() == ID.substr(0, args[0].getString().size()))
 				{
-					// Cannot be template
 					if(ID[0] != '@')
 					{
 						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
@@ -56,10 +50,8 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 		{
 			auto result = _fe3d.sound2d_getIDs();
 
-			// Iterate through sounds
 			for(const auto& ID : result)
 			{
-				// Cannot be template
 				if(ID[0] != '@')
 				{
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));

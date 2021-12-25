@@ -23,22 +23,16 @@ void TerrainEntityDepthRenderer::render(const shared_ptr<TerrainEntity> entity)
 {
 	if(entity->isVisible())
 	{
-		// Temporary values
 		const auto buffer = entity->getRenderBuffer();
 
-		// Enable face culling
 		glEnable(GL_CULL_FACE);
 
-		// Bind buffer
 		glBindVertexArray(buffer->getVAO());
 
-		// Render
 		glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 
-		// Unbind buffer
 		glBindVertexArray(0);
 
-		// Disable face culling
 		glDisable(GL_CULL_FACE);
 	}
 }

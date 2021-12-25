@@ -7,7 +7,6 @@ void SoundEditor::_updateMainMenu()
 
 	if(screen->getID() == "soundEditorMenuMain")
 	{
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused())) // Back button
 		{
 			_gui.getOverlay()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
@@ -39,7 +38,6 @@ void SoundEditor::_updateMainMenu()
 			_isDeletingSound = true;
 		}
 
-		// Update answer forms
 		if(_gui.getOverlay()->isAnswerFormConfirmed("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
@@ -62,21 +60,17 @@ void SoundEditor::_updateChoiceMenu()
 
 	if(screen->getID() == "soundEditorMenuChoice")
 	{
-		// Temporary values
 		bool isExisting = _fe3d.sound2d_isExisting(_currentSoundID);
 		bool isPlaying = isExisting && _fe3d.sound2d_isPlaying(_currentSoundID);
 		bool isPaused = isExisting && _fe3d.sound2d_isPaused(_currentSoundID);
 
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
-			// Stop sound
 			if(isPlaying)
 			{
 				_fe3d.sound2d_stop(_currentSoundID, 0);
 			}
 
-			// Miscellaneous
 			_currentSoundID = "";
 			_fe3d.text_setVisible(_gui.getOverlay()->getTextField("soundID")->getEntityID(), false);
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuMain");
@@ -99,7 +93,6 @@ void SoundEditor::_updateChoiceMenu()
 			_fe3d.sound2d_stop(_currentSoundID, 0);
 		}
 
-		// Update buttons hoverability
 		screen->getButton("play")->setHoverable(!isPlaying && !isPaused);
 		screen->getButton("resume")->setHoverable(isPaused);
 		screen->getButton("pause")->setHoverable(isPlaying);

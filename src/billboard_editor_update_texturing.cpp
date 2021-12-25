@@ -8,14 +8,12 @@ void BillboardEditor::_updateTexturingMenu()
 
 	if(screen->getID() == "billboardEditorMenuTexturing")
 	{
-		// Temporary values
 		auto textContent = _fe3d.billboard_getTextContent(_currentBillboardID);
 		auto isTextual = _fe3d.billboard_isTextual(_currentBillboardID);
 		auto hasDiffuseMap = _fe3d.billboard_hasDiffuseMap(_currentBillboardID);
 		auto hasEmissionMap = _fe3d.billboard_hasEmissionMap(_currentBillboardID);
 		auto textureRepeat = _fe3d.billboard_getTextureRepeat(_currentBillboardID);
 
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
@@ -23,31 +21,26 @@ void BillboardEditor::_updateTexturingMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("font")->isHovered())
 		{
-			// Validate project ID
 			if(_currentProjectID.empty())
 			{
 				Logger::throwError("BillboardEditor::_updateTexturingMenu");
 			}
 
-			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\font\\");
 
-			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
-			// Validate chosen file
 			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "TTF");
 			if(filePath.empty())
 			{
 				return;
 			}
 
-			// Validate directory of file
 			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
 			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
@@ -55,12 +48,10 @@ void BillboardEditor::_updateTexturingMenu()
 				return;
 			}
 
-			// Set font
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clearFontCache(finalFilePath);
 			_fe3d.billboard_setFont(_currentBillboardID, finalFilePath);
 
-			// Set default text
 			if(textContent.empty())
 			{
 				_fe3d.billboard_setTextContent(_currentBillboardID, "text");
@@ -72,31 +63,26 @@ void BillboardEditor::_updateTexturingMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
-			// Validate project ID
 			if(_currentProjectID.empty())
 			{
 				Logger::throwError("BillboardEditor::_updateTexturingMenu");
 			}
 
-			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\diffuse_map\\");
 
-			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
-			// Validate chosen file
 			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
 			if(filePath.empty())
 			{
 				return;
 			}
 
-			// Validate directory of file
 			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
 			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
@@ -104,38 +90,32 @@ void BillboardEditor::_updateTexturingMenu()
 				return;
 			}
 
-			// Set diffuse map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.billboard_setDiffuseMap(_currentBillboardID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
 		{
-			// Validate project ID
 			if(_currentProjectID.empty())
 			{
 				Logger::throwError("BillboardEditor::_updateTexturingMenu");
 			}
 
-			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\emission_map\\");
 
-			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
-			// Validate chosen file
 			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
 			if(filePath.empty())
 			{
 				return;
 			}
 
-			// Validate directory of file
 			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
 			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
@@ -143,7 +123,6 @@ void BillboardEditor::_updateTexturingMenu()
 				return;
 			}
 
-			// Set emission map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.billboard_setEmissionMap(_currentBillboardID, finalFilePath);
@@ -158,7 +137,6 @@ void BillboardEditor::_updateTexturingMenu()
 			_gui.getOverlay()->createValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
-		// Update value forms
 		if(_gui.getOverlay()->checkValueForm("textContent", textContent, {}))
 		{
 			_fe3d.billboard_setTextContent(_currentBillboardID, textContent);
@@ -168,7 +146,6 @@ void BillboardEditor::_updateTexturingMenu()
 			_fe3d.billboard_setTextureRepeat(_currentBillboardID, textureRepeat);
 		}
 
-		// Update buttons hoverability
 		screen->getButton("font")->setHoverable(!hasDiffuseMap || isTextual);
 		screen->getButton("textContent")->setHoverable(isTextual);
 		screen->getButton("diffuseMap")->setHoverable(!isTextual);

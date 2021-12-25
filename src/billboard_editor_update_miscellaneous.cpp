@@ -7,11 +7,9 @@ void BillboardEditor::_updateMiscellaneousMenu()
 
 	if(screen->getID() == "billboardEditorMenuMiscellaneous")
 	{
-		// Temporary values
 		auto isFacingX = _fe3d.billboard_isFacingCameraX(_currentBillboardID);
 		auto isFacingY = _fe3d.billboard_isFacingCameraY(_currentBillboardID);
 
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
@@ -28,7 +26,6 @@ void BillboardEditor::_updateMiscellaneousMenu()
 			_fe3d.billboard_setFacingCameraY(_currentBillboardID, isFacingY);
 		}
 
-		// Reset rotations if not facing camera
 		fvec3 rotation = _fe3d.billboard_getRotation(_currentBillboardID);
 		if(!isFacingX)
 		{
@@ -41,7 +38,6 @@ void BillboardEditor::_updateMiscellaneousMenu()
 		}
 		_fe3d.billboard_setRotation(_currentBillboardID, rotation);
 
-		// Update button text contents
 		screen->getButton("isFacingX")->changeTextContent(isFacingX ? "Facing X: ON" : "Facing X: OFF");
 		screen->getButton("isFacingY")->changeTextContent(isFacingY ? "Facing Y: ON" : "Facing Y: OFF");
 	}

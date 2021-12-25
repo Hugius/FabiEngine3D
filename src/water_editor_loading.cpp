@@ -32,65 +32,51 @@ const vector<string> WaterEditor::getTexturePathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		// Values
 		string waterID, dudvMapPath, normalMapPath, displacementMapPath;
 
-		// For file extraction
 		istringstream iss(line);
 
-		// Load base data
 		iss >>
 			waterID >>
 			dudvMapPath >>
 			normalMapPath >>
 			displacementMapPath;
 
-		// Convert empty string
 		dudvMapPath = (dudvMapPath == "?" ? "" : dudvMapPath);
 		normalMapPath = (normalMapPath == "?" ? "" : normalMapPath);
 		displacementMapPath = (displacementMapPath == "?" ? "" : displacementMapPath);
 
-		// Convert spaces
 		replace(dudvMapPath.begin(), dudvMapPath.end(), '?', ' ');
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 		replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
 
-		// DUDV map
 		if(!dudvMapPath.empty())
 		{
-			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				dudvMapPath = string("projects\\" + _currentProjectID + "\\" + dudvMapPath);
 			}
 
-			// Save path
 			texturePaths.push_back(dudvMapPath);
 		}
 
-		// Normal map
 		if(!normalMapPath.empty())
 		{
-			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				normalMapPath = string("projects\\" + _currentProjectID + "\\" + normalMapPath);
 			}
 
-			// Save path
 			texturePaths.push_back(normalMapPath);
 		}
 
-		// Displacement map
 		if(!displacementMapPath.empty())
 		{
-			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				displacementMapPath = string("projects\\" + _currentProjectID + "\\" + displacementMapPath);
 			}
 
-			// Save path
 			texturePaths.push_back(displacementMapPath);
 		}
 	}
@@ -124,7 +110,6 @@ const bool WaterEditor::loadFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		// Values
 		string waterID, dudvMapPath, normalMapPath, displacementMapPath;
 		fvec3 color;
 		fvec2 speed;
@@ -132,10 +117,8 @@ const bool WaterEditor::loadFromFile()
 		unsigned int quality;
 		bool isSpecular, isReflective, isRefractive;
 
-		// For file extraction
 		istringstream iss(line);
 
-		// Load base data
 		iss >>
 			waterID >>
 			dudvMapPath >>
@@ -158,65 +141,50 @@ const bool WaterEditor::loadFromFile()
 			specularShininess >>
 			specularIntensity;
 
-		// Convert empty string
 		dudvMapPath = (dudvMapPath == "?" ? "" : dudvMapPath);
 		normalMapPath = (normalMapPath == "?" ? "" : normalMapPath);
 		displacementMapPath = (displacementMapPath == "?" ? "" : displacementMapPath);
 
-		// Convert spaces
 		replace(dudvMapPath.begin(), dudvMapPath.end(), '?', ' ');
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 		replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
 
-		// Create water
 		_fe3d.water_create(waterID);
 
-		// Check if water creation went well
 		if(_fe3d.water_isExisting(waterID))
 		{
-			// Add water ID
 			_loadedWaterIDs.push_back(waterID);
 
-			// DUDV map
 			if(!dudvMapPath.empty())
 			{
-				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
 					dudvMapPath = string("projects\\" + _currentProjectID + "\\" + dudvMapPath);
 				}
 
-				// Set path
 				_fe3d.water_setDudvMap(waterID, dudvMapPath);
 			}
 
-			// Normal map
 			if(!normalMapPath.empty())
 			{
-				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
 					normalMapPath = string("projects\\" + _currentProjectID + "\\" + normalMapPath);
 				}
 
-				// Set path
 				_fe3d.water_setNormalMap(waterID, normalMapPath);
 			}
 
-			// Displacement map
 			if(!displacementMapPath.empty())
 			{
-				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
 					displacementMapPath = string("projects\\" + _currentProjectID + "\\" + displacementMapPath);
 				}
 
-				// Set path
 				_fe3d.water_setDisplacementMap(waterID, displacementMapPath);
 			}
 
-			// Set properties
 			_fe3d.water_setHeight(waterID, height);
 			_fe3d.water_setSize(waterID, size);
 			_fe3d.water_setSpecular(waterID, isSpecular);

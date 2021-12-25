@@ -42,22 +42,18 @@ void Core::_start()
 
 	while(_isRunning)
 	{
-		// Start measuring time
 		auto previousTime = high_resolution_clock::now();
 
 		if(_fe3d.server_isRunning()) // Process application at full speed
 		{
-			// Retrieve user input if not exported
 			if(!Config::getInst().isApplicationExported())
 			{
 				_inputHandler.update();
 			}
 
-			// Update application
 			_update();
 			_timer.increasePassedFrameCount();
 
-			// Render application if not exported
 			if(!Config::getInst().isApplicationExported())
 			{
 				_render();
@@ -65,35 +61,27 @@ void Core::_start()
 		}
 		else // Process application at fixed speed
 		{
-			// Update render lag
 			renderLag += _deltaTimeMS;
 
-			// Check if render lag is getting too much
 			if(renderLag > (Config::MS_PER_UPDATE * 10.0f))
 			{
 				renderLag = Config::MS_PER_UPDATE;
 			}
 
-			// Process (roughly) 144 times per second
 			while(renderLag >= Config::MS_PER_UPDATE)
 			{
-				// Retrieve user input
 				_inputHandler.update();
 
-				// Update application
 				_update();
 
-				// Update render lag
 				renderLag -= Config::MS_PER_UPDATE;
 				renderLag = max(renderLag, 0.0f);
 				_timer.increasePassedFrameCount();
 			}
 
-			// Render application
 			_render();
 		}
 
-		// Calculate delta time
 		auto currentTime = high_resolution_clock::now();
 		auto timeDifference = duration_cast<nanoseconds>(currentTime - previousTime);
 		_deltaTimeMS = static_cast<float>(timeDifference.count()) / 1000000.0f;
@@ -150,10 +138,8 @@ void Core::_update()
 
 	if(!(Config::getInst().isApplicationExported() && _fe3d.server_isRunning()))
 	{
-		// Only update 3D if engine not paused
 		if(!_isPaused)
 		{
-			// Physics updates
 			_timer.startDeltaPart("physicsUpdate");
 			_camera.update(lastCursorPosition);
 			_raycaster.update(_fe3d.misc_getCursorPositionRelativeToViewport());
@@ -161,7 +147,6 @@ void Core::_update()
 			_camera.updateMatrices();
 			_timer.stopDeltaPart();
 
-			// 3D entity updates
 			_timer.startDeltaPart("skyEntityUpdate");
 			_skyEntityManager.update();
 			_timer.stopDeltaPart();
@@ -185,12 +170,10 @@ void Core::_update()
 			_reflectionEntityManager.update();
 			_timer.stopDeltaPart();
 
-			// Shadow updates
 			_timer.startDeltaPart("shadowUpdate");
 			_shadowGenerator.update();
 			_timer.stopDeltaPart();
 
-			// Sound updates
 			_timer.startDeltaPart("soundUpdate");
 			_sound2dManager.update();
 			_sound3dManager.update();
@@ -199,7 +182,6 @@ void Core::_update()
 			_timer.stopDeltaPart();
 		}
 
-		// Always update 2D entity logic, because of engine GUI interaction
 		_timer.startDeltaPart("guiEntityUpdate");
 		_imageEntityManager.update();
 		_textEntityManager.update();

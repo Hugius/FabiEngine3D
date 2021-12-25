@@ -31,31 +31,23 @@ const vector<string> ImageEditor::getTexturePathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		// Data placeholders
 		string imageID, diffuseMapPath;
 
-		// For file extraction
 		istringstream iss(line);
 
-		// Read from file
 		iss >> imageID >> diffuseMapPath;
 
-		// Convert empty string
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 
-		// Convert spaces
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 
-		// Diffuse map
 		if(!diffuseMapPath.empty())
 		{
-			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 			}
 
-			// Save path
 			texturePaths.push_back(diffuseMapPath);
 		}
 	}
@@ -89,44 +81,32 @@ const bool ImageEditor::loadFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		// Data placeholders
 		string imageID, diffuseMapPath;
 
-		// For file extraction
 		istringstream iss(line);
 
-		// Read from file
 		iss >> imageID >> diffuseMapPath;
 
-		// Convert empty string
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 
-		// Convert spaces
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 
-		// Create image
 		_fe3d.image_create(imageID, true);
 
-		// Check if image creation went well
 		if(_fe3d.image_isExisting(imageID))
 		{
-			// Add image ID
 			_loadedImageIDs.push_back(imageID);
 
-			// Diffuse map
 			if(!diffuseMapPath.empty())
 			{
-				// Convert to long path
 				if(!Config::getInst().isApplicationExported())
 				{
 					diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 				}
 
-				// Set path
 				_fe3d.image_setDiffuseMap(imageID, diffuseMapPath);
 			}
 
-			// Set properties
 			_fe3d.image_setVisible(imageID, false);
 		}
 	}

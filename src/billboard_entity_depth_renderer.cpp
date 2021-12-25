@@ -31,10 +31,8 @@ void BillboardEntityDepthRenderer::render(const shared_ptr<BillboardEntity> enti
 {
 	if(entity->isVisible())
 	{
-		// Temporary values
 		const auto buffer = entity->getRenderBuffer();
 
-		// Shader uniforms
 		_shader.uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
 		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
@@ -46,23 +44,18 @@ void BillboardEntityDepthRenderer::render(const shared_ptr<BillboardEntity> enti
 		_shader.uploadUniform("u_adderUV", entity->getAdderUV());
 		_shader.uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
-		// Bind textures
 		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
 		}
 
-		// Bind buffer
 		glBindVertexArray(buffer->getVAO());
 
-		// Render
 		glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 
-		// Unbind buffer
 		glBindVertexArray(0);
 
-		// Unbind textures
 		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);

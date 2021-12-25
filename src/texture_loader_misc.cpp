@@ -149,17 +149,14 @@ TextureID TextureLoader::_convertInto3dTexture(const array<SDL_Surface*, 6>& sur
 	int surfaceSize = -1;
 	for(size_t i = 0; i < surfaces.size(); i++)
 	{
-		// Check surface status
 		if(surfaces[i] != nullptr)
 		{
-			// Check if resolution dimensions are the same
 			if(surfaces[i]->w != surfaces[i]->h)
 			{
 				Logger::throwWarning("3D texture width must be same as height: \"" + filePaths[i] + "\"");
 				return 0;
 			}
 
-			// Check if resolution dimensions are the same as all others
 			if(surfaceSize == -1)
 			{
 				surfaceSize = surfaces[i]->w;
@@ -177,18 +174,14 @@ TextureID TextureLoader::_convertInto3dTexture(const array<SDL_Surface*, 6>& sur
 
 	for(size_t i = 0; i < surfaces.size(); i++)
 	{
-		// Check surface status
 		if(surfaces[i] == nullptr)
 		{
-			// Black surface
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, surfaceSize, surfaceSize, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
 		}
 		else
 		{
-			// Loaded surface
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, surfaceSize, surfaceSize, 0, GL_RGB, GL_UNSIGNED_BYTE, surfaces[i]->pixels);
 
-			// Logging
 			Logger::throwInfo("Loaded texture: \"" + filePaths[i] + "\"");
 		}
 	}
@@ -239,20 +232,16 @@ void TextureLoader::_reloadAnisotropicFiltering()
 {
 	for(const auto& [path, texture] : _2dTextureCache)
 	{
-		// Bind
 		glBindTexture(GL_TEXTURE_2D, texture);
 
-		// Get current quality
 		int currentQuality;
 		glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &currentQuality);
 
-		// Check if texture must be anisotropically filtered
 		if((currentQuality >= Config::MIN_ANISOTROPIC_FILTERING_QUALITY) && (currentQuality <= Config::MAX_ANISOTROPIC_FILTERING_QUALITY))
 		{
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(_anisotropicFilteringQuality));
 		}
 
-		// Unbind
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }

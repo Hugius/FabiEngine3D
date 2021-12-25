@@ -28,10 +28,8 @@ void BillboardEntityShadowRenderer::render(const shared_ptr<BillboardEntity> ent
 {
 	if(entity->isVisible() && entity->isShadowed())
 	{
-		// Temporary values
 		const auto buffer = entity->getRenderBuffer();
 
-		// Shader uniforms
 		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
@@ -40,23 +38,18 @@ void BillboardEntityShadowRenderer::render(const shared_ptr<BillboardEntity> ent
 		_shader.uploadUniform("u_adderUV", entity->getAdderUV());
 		_shader.uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
-		// Bind textures
 		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
 		}
 
-		// Bind buffer
 		glBindVertexArray(buffer->getVAO());
 
-		// Render
 		glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 
-		// Unbind buffer
 		glBindVertexArray(0);
 
-		// Unbind textures
 		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);

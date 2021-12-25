@@ -426,13 +426,11 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Validate ID
 			if(!_validateFe3dID(args[0].getString()))
 			{
 				return true;
 			}
 
-			// Check if existing
 			auto result = _fe3d.billboard_isExisting(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
@@ -443,19 +441,15 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Validate ID
 			if(!_validateFe3dID(args[0].getString()))
 			{
 				return true;
 			}
 
-			// Find full entity IDs based on sub ID
 			for(const auto& ID : _fe3d.billboard_getIDs())
 			{
-				// If substring matches
 				if(args[0].getString() == ID.substr(0, args[0].getString().size()))
 				{
-					// Cannot be template
 					if(ID[0] != '@')
 					{
 						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
@@ -470,10 +464,8 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 		{
 			auto result = _fe3d.billboard_getIDs();
 
-			// Iterate through billboards
 			for(const auto& ID : result)
 			{
-				// Cannot be template
 				if(ID[0] != '@')
 				{
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
@@ -489,14 +481,12 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 		{
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				// Check if billboard is not of type text
 				if(!_fe3d.billboard_isTextual(args[0].getString()))
 				{
 					_throwScriptError("billboard with ID \"" + args[0].getString() + "\" is not of type text!");
 					return true;
 				}
 
-				// Return text content
 				auto result = _fe3d.billboard_getTextContent(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 			}

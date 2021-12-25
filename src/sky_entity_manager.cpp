@@ -138,15 +138,12 @@ void SkyEntityManager::update()
 
 	if(mainSky != nullptr)
 	{
-		// Update sky exposure
 		if(_isExposureEnabled)
 		{
-			// Values
 			float lightness = mainSky->getLightness(); // Current lightness
 			float pitch = min(_renderBus.getCameraPitch() + 30.0f, 90.0f); // Full conversion at 60 degrees pitch
 			float targetLightness = mainSky->getInitialLightness() + (((90.0f - pitch) / 90.0f) * _exposureIntensity);
 
-			// Based on verticle angle
 			if(lightness > targetLightness) // Decrease lightness
 			{
 				mainSky->setLightness(lightness - (_exposureSpeed * 3.5f));
@@ -161,7 +158,6 @@ void SkyEntityManager::update()
 			mainSky->setLightness(mainSky->getInitialLightness()); // Revert lightness
 		}
 
-		// Update rotation matrix
 		if(mainSky->isVisible())
 		{
 			mainSky->updateRotationMatrix();

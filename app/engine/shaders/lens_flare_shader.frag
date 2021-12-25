@@ -16,7 +16,6 @@ layout (location = 0) out vec4 o_finalColor;
 
 void main()
 {
-    // Validate
 	if (!u_isLensFlareEnabled)
 	{
         o_finalColor.rgb = texture(u_worldMap, f_uv).rgb;
@@ -24,11 +23,9 @@ void main()
 		return;
     }
 
-    // Texture mapping
     vec3 worldColor = texture(u_worldMap, f_uv).rgb;
     vec3 flareColor = texture(u_flareMap, vec2(f_uv.x, -f_uv.y)).rgb;
 
-    // Final color
     o_finalColor.rgb = worldColor;
     o_finalColor.rgb += (flareColor * u_lensFlareTransparency * u_lensFlareIntensity * f_flareVisibility);
 	o_finalColor.a = 1.0f;

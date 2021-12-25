@@ -7,37 +7,28 @@ void WorldEditor::_updatePointlightPlacing()
 	{
 		if(_fe3d.terrain_getSelectedID().empty()) // Placing without terrain
 		{
-			// Retrieve current position
 			auto newPosition = _fe3d.pointlight_getPosition(TEMPLATE_LAMP_ID);
 
-			// Update value forms
 			_gui.getOverlay()->checkValueForm("positionX", newPosition.x, {});
 			_gui.getOverlay()->checkValueForm("positionY", newPosition.y, {});
 			_gui.getOverlay()->checkValueForm("positionZ", newPosition.z, {});
 
-			// Update position
 			_fe3d.pointlight_setPosition(TEMPLATE_LAMP_ID, newPosition);
 
-			// Check if pointlight must be placed
 			if(_gui.getOverlay()->isValueFormConfirmed())
 			{
-				// Adding a number to make it unique
 				BEGIN1:;
 				const string newID = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
-				// Check if pointlight already exists
 				if(_fe3d.pointlight_isExisting(newID))
 				{
 					goto BEGIN1;
 				}
 
-				// Try to create pointlight
 				_fe3d.pointlight_create(newID);
 
-				// Check if pointlight creation went well
 				if(_fe3d.pointlight_isExisting(newID))
 				{
-					// Create model
 					const string newModelID = ("@@lamp_" + newID);
 					_fe3d.model_create(newModelID, "engine\\assets\\mesh\\lamp.obj");
 					_fe3d.model_setBaseSize(newModelID, DEFAULT_LAMP_SIZE);
@@ -45,14 +36,12 @@ void WorldEditor::_updatePointlightPlacing()
 					_fe3d.model_setReflected(newModelID, false);
 					_fe3d.model_setBright(newModelID, true);
 
-					// Bind AABB
 					_fe3d.aabb_create(newModelID);
 					_fe3d.aabb_setParentEntityID(newModelID, newModelID);
 					_fe3d.aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
 					_fe3d.aabb_setLocalSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
 					_fe3d.aabb_setCollisionResponsive(newModelID, false);
 
-					// Create pointlight
 					_fe3d.pointlight_delete(newID);
 					_fe3d.pointlight_create(newID);
 					_fe3d.pointlight_setPosition(newID, newPosition);
@@ -62,7 +51,6 @@ void WorldEditor::_updatePointlightPlacing()
 				}
 			}
 
-			// Check if placement mode must be disabled
 			if(_gui.getOverlay()->isValueFormConfirmed() || _gui.getOverlay()->isValueFormCancelled())
 			{
 				_fe3d.model_setVisible(TEMPLATE_LAMP_ID, false);
@@ -72,52 +60,39 @@ void WorldEditor::_updatePointlightPlacing()
 		}
 		else
 		{
-			// Check if allowed by GUI
 			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
 			{
-				// Check if allowed by mouse
 				if(!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
-					// Check if terrain is loaded
 					if(_fe3d.raycast_isPointOnTerrainValid())
 					{
-						// Show template pointlight
 						_fe3d.pointlight_setVisible(TEMPLATE_LAMP_ID, true);
 						_fe3d.model_setVisible(TEMPLATE_LAMP_ID, true);
 
-						// Update position
 						_fe3d.pointlight_setPosition(TEMPLATE_LAMP_ID, (_fe3d.raycast_getPointOnTerrain() + POINTLIGHT_TERRAIN_OFFSET));
 					}
 					else
 					{
-						// Hide template pointlight
 						_fe3d.model_setVisible(TEMPLATE_LAMP_ID, false);
 						_fe3d.pointlight_setVisible(TEMPLATE_LAMP_ID, false);
 					}
 
-					// Check if pointlight must be placed
 					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.raycast_isPointOnTerrainValid())
 					{
-						// Temporary values
 						auto newPosition = _fe3d.pointlight_getPosition(TEMPLATE_LAMP_ID);
 
-						// Adding a number to make it unique
 						BEGIN2:;
 						const string newID = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
-						// Check if pointlight already exists
 						if(_fe3d.pointlight_isExisting(newID))
 						{
 							goto BEGIN2;
 						}
 
-						// Try to create pointlight
 						_fe3d.pointlight_create(newID);
 
-						// Check if pointlight creation went well
 						if(_fe3d.pointlight_isExisting(newID))
 						{
-							// Create model
 							const string newModelID = ("@@lamp_" + newID);
 							_fe3d.model_create(newModelID, "engine\\assets\\mesh\\lamp.obj");
 							_fe3d.model_setBaseSize(newModelID, DEFAULT_LAMP_SIZE);
@@ -125,14 +100,12 @@ void WorldEditor::_updatePointlightPlacing()
 							_fe3d.model_setReflected(newModelID, false);
 							_fe3d.model_setBright(newModelID, true);
 
-							// Bind AABB
 							_fe3d.aabb_create(newModelID);
 							_fe3d.aabb_setParentEntityID(newModelID, newModelID);
 							_fe3d.aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
 							_fe3d.aabb_setLocalSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
 							_fe3d.aabb_setCollisionResponsive(newModelID, false);
 
-							// Create pointlight
 							_fe3d.pointlight_delete(newID);
 							_fe3d.pointlight_create(newID);
 							_fe3d.pointlight_setPosition(newID, newPosition);
@@ -161,7 +134,6 @@ void WorldEditor::_updatePointlightPlacing()
 			}
 		}
 
-		// Update template lamp position
 		if(_isPlacingPointlight)
 		{
 			auto pointlightPosition = _fe3d.pointlight_getPosition(TEMPLATE_LAMP_ID);

@@ -77,36 +77,29 @@ void Camera::update(ivec2 lastCursorPosition)
 
 	if(_isFirstPersonViewEnabled && !_cursorIsBeingCentered)
 	{
-		// Offset between current cursor position & middle of the screen
 		float xOffset = static_cast<float>(currenCursorPosition.x - xMiddle);
 		float yOffset = static_cast<float>(yMiddle - currenCursorPosition.y);
 
-		// Applying cursor sensitivity
 		xOffset *= _cursorSensitivity;
 		yOffset *= _cursorSensitivity;
 
-		// Update yaw
 		_firstPersonYawAcceleration += xOffset;
 		_firstPersonYawAcceleration = clamp(_firstPersonYawAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
 		_firstPersonYaw += _firstPersonYawAcceleration;
 		_firstPersonYawAcceleration *= 0.75f;
 
-		// Update pitch
 		_firstPersonPitchAcceleration += yOffset;
 		_firstPersonPitchAcceleration = clamp(_firstPersonPitchAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
 		_firstPersonPitch += _firstPersonPitchAcceleration;
 		_firstPersonPitch = clamp(_firstPersonPitch, _minFirstPersonPitch, _maxFirstPersonPitch);
 		_firstPersonPitchAcceleration *= 0.75f;
 
-		// Limit view angles
 		_firstPersonYaw = Math::limitAngle(_firstPersonYaw);
 		_firstPersonPitch = clamp(_firstPersonPitch, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
 
-		// Set view angles
 		_yaw = _firstPersonYaw;
 		_pitch = _firstPersonPitch;
 
-		// Spawn cursor in middle of screen
 		_window.setCursorPosition({xMiddle, yMiddle});
 	}
 	else
@@ -117,22 +110,18 @@ void Camera::update(ivec2 lastCursorPosition)
 
 	if(_isThirdPersonViewEnabled && !_cursorIsBeingCentered)
 	{
-		// Offset between current cursor position & middle of the screen
 		float xOffset = static_cast<float>(currenCursorPosition.x - xMiddle);
 		float yOffset = static_cast<float>(yMiddle - currenCursorPosition.y);
 
-		// Applying cursor sensitivity
 		xOffset *= _cursorSensitivity;
 		yOffset *= _cursorSensitivity;
 
-		// Update yaw
 		_thirdPersonYawAcceleration += xOffset;
 		_thirdPersonYawAcceleration = clamp(_thirdPersonYawAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
 		_thirdPersonYaw -= _thirdPersonYawAcceleration;
 		_thirdPersonYaw = Math::limitAngle(_thirdPersonYaw);
 		_thirdPersonYawAcceleration *= 0.75f;
 
-		// Update pitch
 		_thirdPersonPitchAcceleration += yOffset;
 		_thirdPersonPitchAcceleration = clamp(_thirdPersonPitchAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
 		_thirdPersonPitch -= _thirdPersonPitchAcceleration;
@@ -140,27 +129,21 @@ void Camera::update(ivec2 lastCursorPosition)
 		_thirdPersonPitch = clamp(_thirdPersonPitch, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
 		_thirdPersonPitchAcceleration *= 0.75f;
 
-		// Update distance
 		_thirdPersonDistance = max(MIN_THIRD_PERSON_DISTANCE, _thirdPersonDistance);
 
-		// Calculate position multipliers
 		float xMultiplier = cos(Math::convertToRadians(_thirdPersonPitch)) * sin(Math::convertToRadians(_thirdPersonYaw));
 		float yMultiplier = sin(Math::convertToRadians(_thirdPersonPitch));
 		float zMultiplier = cos(Math::convertToRadians(_thirdPersonPitch)) * cos(Math::convertToRadians(_thirdPersonYaw));
 
-		// Limit view distance
 		_thirdPersonDistance = max(0.0f, _thirdPersonDistance);
 
-		// Calculate camera position
 		_position.x = _thirdPersonLookat.x + (_thirdPersonDistance * xMultiplier);
 		_position.y = _thirdPersonLookat.y + (_thirdPersonDistance * yMultiplier);
 		_position.z = _thirdPersonLookat.z + (_thirdPersonDistance * zMultiplier);
 
-		// Set view angles
 		_yaw = Math::convertToDegrees(atan2f(_position.z - _thirdPersonLookat.z, _position.x - _thirdPersonLookat.x)) + 180.0f;
 		_pitch = -(_thirdPersonPitch);
 
-		// Spawn cursor in middle of screen
 		_window.setCursorPosition({xMiddle, yMiddle});
 	}
 	else

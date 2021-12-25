@@ -42,16 +42,13 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 {
 	if(entity->isVisible())
 	{
-		// Temporary values
 		const auto buffer = entity->getRenderBuffer();
 
-		// Enable wireframe
 		if(entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
 
-		// Shader uniforms
 		_shader.uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
 		_shader.uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus.isWireframeRenderingEnabled()));
 		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
@@ -70,7 +67,6 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 		_shader.uploadUniform("u_adderUV", entity->getAdderUV());
 		_shader.uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
-		// Bind textures
 		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
@@ -82,17 +78,13 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 			glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap());
 		}
 
-		// Bind buffer
 		glBindVertexArray(buffer->getVAO());
 
-		// Render
 		glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 		_renderBus.increaseTriangleCount(buffer->getVertexCount() / 3);
 
-		// Unbind buffer
 		glBindVertexArray(0);
 
-		// Unbind textures
 		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
@@ -104,7 +96,6 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 
-		// Disable wireframe
 		if(entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

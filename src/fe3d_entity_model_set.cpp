@@ -32,7 +32,6 @@ void FabiEngine3D::model_deleteGroup(const string& ID)
 		{
 			auto subString = entity->getID().substr(0, ID.size());
 
-			// If entity matches ID
 			if(subString == ID)
 			{
 				model_delete(entity->getID());

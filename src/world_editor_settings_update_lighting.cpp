@@ -6,12 +6,10 @@ void WorldEditor::_updateAmbientLightingSettingsMenu()
 
 	if(screen->getID() == "worldEditorMenuSettingsLightingAmbient")
 	{
-		// Temporary values
 		bool isEnabled = _fe3d.gfx_isAmbientLightingEnabled();
 		fvec3 color = _fe3d.gfx_getAmbientLightingColor();
 		float intensity = _fe3d.gfx_getAmbientLightingIntensity();
 
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettingsLighting");
@@ -40,7 +38,6 @@ void WorldEditor::_updateAmbientLightingSettingsMenu()
 			_gui.getOverlay()->createValueForm("intensity", "Ambient Intensity", (intensity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
-		// Update value forms
 		if(_gui.getOverlay()->checkValueForm("colorR", color.r))
 		{
 			color.r /= 255.0f;
@@ -62,11 +59,9 @@ void WorldEditor::_updateAmbientLightingSettingsMenu()
 			_fe3d.gfx_setAmbientLightingIntensity(intensity);
 		}
 
-		// Update buttons hoverability
 		screen->getButton("color")->setHoverable(isEnabled);
 		screen->getButton("intensity")->setHoverable(isEnabled);
 
-		// Update button text contents
 		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 	}
 }
@@ -77,13 +72,11 @@ void WorldEditor::_updateDirectionalLightingSettingsMenu()
 
 	if(screen->getID() == "worldEditorMenuSettingsLightingDirectional")
 	{
-		// Temporary values
 		auto isEnabled = _fe3d.gfx_isDirectionalLightingEnabled();
 		auto color = _fe3d.gfx_getDirectionalLightingColor();
 		auto position = _fe3d.gfx_getDirectionalLightingPosition();
 		auto intensity = _fe3d.gfx_getDirectionalLightingIntensity();
 
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettingsLighting");
@@ -118,7 +111,6 @@ void WorldEditor::_updateDirectionalLightingSettingsMenu()
 			_gui.getOverlay()->createValueForm("intensity", "Directional Intensity", (intensity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
-		// Update value forms
 		if(_gui.getOverlay()->checkValueForm("positionX", position.x))
 		{
 			_fe3d.gfx_setDirectionalLightingPosition(position);
@@ -152,12 +144,10 @@ void WorldEditor::_updateDirectionalLightingSettingsMenu()
 			_fe3d.gfx_setDirectionalLightingIntensity(intensity);
 		}
 
-		// Update buttons hoverability
 		screen->getButton("color")->setHoverable(isEnabled);
 		screen->getButton("position")->setHoverable(isEnabled);
 		screen->getButton("intensity")->setHoverable(isEnabled);
 
-		// Update button text contents
 		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: ON" : "Enabled: OFF");
 	}
 }

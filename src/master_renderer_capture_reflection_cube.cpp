@@ -18,7 +18,6 @@ void MasterRenderer::_captureCubeReflections()
 	vector<string> savedModelEntityIDs;
 	for(const auto& [keyID, entity] : _entityBus->getModelEntities())
 	{
-		// Hide non-reflected model entity
 		if(!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
@@ -29,7 +28,6 @@ void MasterRenderer::_captureCubeReflections()
 	vector<string> savedBillboardEntityIDs;
 	for(const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 	{
-		// Hide non-reflected billboard entity
 		if(!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
@@ -53,16 +51,12 @@ void MasterRenderer::_captureCubeReflections()
 
 	for(const auto& [keyID, entity] : _entityBus->getReflectionEntities())
 	{
-		// Check if reflection must capture
 		if(entity->mustCapture())
 		{
-			// Capture environment around entity
 			for(unsigned int i = 0; i < 6; i++)
 			{
-				// Set camera position
 				_camera.setPosition(entity->getPosition());
 
-				// Set camera view
 				switch(i)
 				{
 					case 0:
@@ -103,52 +97,41 @@ void MasterRenderer::_captureCubeReflections()
 					}
 				}
 
-				// Update camera
 				_camera.updateMatrices();
 
-				// Update shadows
 				_shadowGenerator.generate();
 				_captureShadows();
 
-				// Start capturing reflections
 				_cubeReflectionCaptureBuffer.bind();
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-				// Render entities
 				_renderSkyEntity();
 				_renderTerrainEntity();
 				_renderModelEntities();
 
-				// Stop capturing reflections
 				_cubeReflectionCaptureBuffer.unbind();
 
-				// Retrieve capture buffer texture data
 				glBindTexture(GL_TEXTURE_2D, _cubeReflectionCaptureBuffer.getTexture(0));
 				int dataSize = (static_cast<int>(reflectionQuality) * static_cast<int>(reflectionQuality) * 3);
 				unsigned char* data = new unsigned char[dataSize];
 				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
-				// Update cube map
 				glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getCubeMap());
 				glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, reflectionQuality, reflectionQuality, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 			}
 
-			// Miscellaneous
 			entity->setCaptured();
 		}
 	}
 
 	for(const auto& [keyID, entity] : _entityBus->getModelEntities())
 	{
-		// Iterate through all saved model entities
 		for(const auto& savedID : savedModelEntityIDs)
 		{
-			// Check if IDs match
 			if(entity->getID() == savedID)
 			{
-				// Show model entity again
 				entity->setVisible(true);
 			}
 		}
@@ -156,13 +139,10 @@ void MasterRenderer::_captureCubeReflections()
 
 	for(const auto& savedID : savedBillboardEntityIDs)
 	{
-		// Iterate through all billboard entities
 		for(const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 		{
-			// Check if IDs match
 			if(entity->getID() == savedID)
 			{
-				// Show billboard entity again
 				entity->setVisible(true);
 			}
 		}

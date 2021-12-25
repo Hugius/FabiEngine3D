@@ -7,7 +7,6 @@ void WaterEditor::_updateLightingMenu()
 
 	if(screen->getID() == "waterEditorMenuLighting")
 	{
-		// Temporary values
 		auto color = _fe3d.water_getColor(_currentWaterID);
 		bool isReflective = _fe3d.water_isReflective(_currentWaterID);
 		bool isRefractive = _fe3d.water_isRefractive(_currentWaterID);
@@ -15,7 +14,6 @@ void WaterEditor::_updateLightingMenu()
 		auto specularShininess = _fe3d.water_getSpecularShininess(_currentWaterID);
 		auto specularIntensity = _fe3d.water_getSpecularIntensity(_currentWaterID);
 
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
@@ -51,7 +49,6 @@ void WaterEditor::_updateLightingMenu()
 			_gui.getOverlay()->createValueForm("specularIntensity", "Specular Intensity", (specularIntensity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
-		// Update value forms
 		if(_gui.getOverlay()->checkValueForm("colorR", color.r))
 		{
 			color.r /= 255.0f;
@@ -77,11 +74,9 @@ void WaterEditor::_updateLightingMenu()
 			_fe3d.water_setSpecularIntensity(_currentWaterID, specularIntensity);
 		}
 
-		// Update buttons hoverability
 		screen->getButton("specularShininess")->setHoverable(isSpecular);
 		screen->getButton("specularIntensity")->setHoverable(isSpecular);
 
-		// Update button text contents
 		screen->getButton("isReflective")->changeTextContent(isReflective ? "Reflective: ON" : "Reflective: OFF");
 		screen->getButton("isRefractive")->changeTextContent(isRefractive ? "Refractive: ON" : "Refractive: OFF");
 		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");

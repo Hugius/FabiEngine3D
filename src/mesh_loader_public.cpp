@@ -29,13 +29,10 @@ const vector<shared_ptr<MeshPart>>* MeshLoader::loadMesh(const string& filePath)
 	}
 	else
 	{
-		// Cache mesh
 		_meshCache.insert(make_pair(filePath, returnValue.second));
 
-		// Logging
 		Logger::throwInfo("Loaded mesh: \"" + filePath + "\"");
 
-		// Return new model
 		goto BEGIN;
 	}
 }
@@ -55,7 +52,6 @@ void MeshLoader::cacheMeshes(const vector<string>& meshPaths)
 
 	for(const auto& filePath : uniqueFilePaths)
 	{
-		// Check if mesh is not already cached
 		if(_meshCache.find(filePath) == _meshCache.end())
 		{
 			threads.push_back(async(launch::async, &MeshLoader::_loadMesh, this, filePath));
@@ -69,23 +65,18 @@ void MeshLoader::cacheMeshes(const vector<string>& meshPaths)
 
 	for(size_t i = 0; i < threadStatuses.size(); i++)
 	{
-		// Check if mesh is not processed yet
 		if(!threadStatuses[i])
 		{
-			// Retrieve return value
 			auto returnValue = threads[i].get();
 
-			// Check mesh status
 			if(returnValue.second.empty())
 			{
 				Logger::throwWarning(returnValue.first);
 			}
 			else
 			{
-				// Cache mesh
 				_meshCache[uniqueFilePaths[i]] = returnValue.second;
 
-				// Logging
 				Logger::throwInfo("Loaded mesh: \"" + uniqueFilePaths[i] + "\"");
 			}
 		}

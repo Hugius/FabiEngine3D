@@ -26,10 +26,8 @@ const unsigned int ScriptInterpreter::_countLeadingSpaces(const string& scriptLi
 
 	for(size_t i = 0; i < scriptLineText.size(); i++)
 	{
-		// Check if current character is a space
 		if(scriptLineText[i] == ' ')
 		{
-			// Check if any text comes after the last space character
 			if(i == (scriptLineText.size() - 1))
 			{
 				_throwScriptError("unnecessary indentation!");
@@ -130,13 +128,10 @@ void ScriptInterpreter::_checkEngineWarnings(unsigned int lastLoggerMessageCount
 	auto messageCount = Logger::getMessageCount();
 	if(messageCount > lastLoggerMessageCount)
 	{
-		// Retrieve all logged messages
 		const auto& messageQueue = Logger::getMessageQueue();
 
-		// Iterate through all new messages
 		for(unsigned int i = lastLoggerMessageCount - 1; i < messageCount; i++)
 		{
-			// Check if logged message is a warning
 			if(messageQueue[i].substr(0, string("[Warn]").size()) == "[Warn]")
 			{
 				_hasThrownError = true;

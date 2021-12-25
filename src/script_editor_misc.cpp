@@ -20,7 +20,6 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 
 	for(unsigned int lineIndex = 0; lineIndex < lineCount; lineIndex++)
 	{
-		// Generation values
 		const string lineNumberID = to_string(lineIndex);
 		const string lineTextID = "text_" + lineNumberID;
 		const string lineNumberString = to_string(lineIndex + 1);
@@ -33,7 +32,6 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			fvec3((lineTextString.size() - 1) * (TEXT_CHARACTER_SIZE.x / 2.0f), -VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex), 0.0f) +
 			fvec3(HORIZONTAL_LINE_OFFSET, 0.0f, 0.0f);
 
-		// Create line number BILLBOARD
 		_fe3d.billboard_create(lineNumberID);
 		_fe3d.billboard_setFont(lineNumberID, FONT_PATH);
 		_fe3d.billboard_setTextContent(lineNumberID, lineNumberString);
@@ -42,14 +40,12 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 		_fe3d.billboard_setColor(lineNumberID, LINE_NUMBER_COLOR);
 		_fe3d.billboard_setBright(lineNumberID, true);
 
-		// Create line number AABB
 		const fvec3 lineAabbPosition = (lineNumberPosition - fvec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, AABB_DEPTH));
 		const fvec3 lineAabbSize = fvec3(TEXT_CHARACTER_SIZE.x * static_cast<float>(MAX_CHARACTERS_PER_LINE * 2) * 1.1f, TEXT_CHARACTER_SIZE.y, AABB_DEPTH);
 		_fe3d.aabb_create(lineNumberID);
 		_fe3d.aabb_setBasePosition(lineNumberID, lineAabbPosition);
 		_fe3d.aabb_setBaseSize(lineNumberID, lineAabbSize);
 
-		// Create line text display BILLBOARD
 		istringstream iss(lineTextString);
 		string noWhiteSpace;
 		iss >> noWhiteSpace;
@@ -62,10 +58,8 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 		_fe3d.billboard_setColor(lineTextID, (isComment ? COMMENT_TEXT_COLOR : DEFAULT_TEXT_COLOR));
 		_fe3d.billboard_setBright(lineTextID, true);
 
-		// Iterate through every character
 		for(unsigned int charIndex = 0; charIndex < lineTextString.size(); charIndex++)
 		{
-			// Create new character BILLBOARD for logic
 			const string characterID = (lineNumberID + "_" + to_string(charIndex));
 			const float characterX = (HORIZONTAL_LINE_OFFSET + (HORIZONTAL_CHARACTER_OFFSET * static_cast<float>(charIndex)));
 			const fvec3 characterPosition = (SCRIPT_TEXT_STARTING_POSITION + fvec3(characterX, -VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex), 0.0f));
@@ -74,7 +68,6 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			_fe3d.billboard_setSize(characterID, TEXT_CHARACTER_SIZE);
 			_fe3d.billboard_setVisible(characterID, false);
 
-			// Create new character AABB for logic
 			if(reloadAabbs)
 			{
 				const fvec3 characterAabbPosition = (characterPosition - fvec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, 0.0f));
@@ -99,7 +92,6 @@ void ScriptEditor::_copySelectedText()
 		}
 		else // If multiple selected lines
 		{
-			// Determine selection direction
 			for(int i = ((_firstSelectedLineIndex > _lastSelectedLineIndex) ? _lastSelectedLineIndex : _firstSelectedLineIndex);
 				i <= ((_firstSelectedLineIndex > _lastSelectedLineIndex) ? _firstSelectedLineIndex : _lastSelectedLineIndex); i++)
 			{

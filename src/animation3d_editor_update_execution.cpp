@@ -4,42 +4,34 @@ void Animation3dEditor::_updateModelAnimationExecution()
 {
 	if(!_fe3d.application_isPaused())
 	{
-		// Update all started animations
 		for(auto& [idPair, animation] : _startedModelAnimations)
 		{
-			// Skip paused animations
 			if(animation.isPaused())
 			{
 				continue;
 			}
 
-			// Showing frame index
 			if(_isEditorLoaded)
 			{
 				_fe3d.text_setContent(_gui.getOverlay()->getTextField("animationFrame")->getEntityID(), "Frame: " + to_string(animation.getFrameIndex() + 1), 0.025f);
 			}
 
-			// Retrieve current frame
 			const auto frameIndex = animation.getFrameIndex();
 			auto frame = animation.getFrames()[frameIndex];
 
-			// Iterate through animation parts
 			unsigned int finishedPartCount = 0;
 			for(const auto& partID : animation.getPartIDs())
 			{
-				// Check if model still exists
 				if(!_fe3d.model_isExisting(idPair.second))
 				{
 					break;
 				}
 
-				// Mutable values
 				auto totalMovement = animation.getTotalMovements().at(partID);
 				auto totalRotation = animation.getTotalRotations().at(partID);
 				auto totalScaling = animation.getTotalScalings().at(partID);
 				auto baseSpeed = frame.getSpeeds().at(partID);
 
-				// Immutable values
 				const auto currentModelSize = _fe3d.model_getBaseSize(idPair.second);
 				const auto transformationType = frame.getTransformationTypes().at(partID);
 				const auto isMovement = (transformationType == TransformationType::MOVEMENT);
@@ -57,7 +49,6 @@ void Animation3dEditor::_updateModelAnimationExecution()
 				const auto targetScaling = ((partID.empty() ? animation.getInitialSize() : fvec3(1.0f)) * frame.getTargetTransformations().at(partID));
 				const auto targetTransformation = (isMovement ? targetMovement : isRotation ? targetRotation : targetScaling);
 
-				// Check if reached transformation of current frame
 				if(((isMovement && _hasReachedFloat(totalMovement.x, targetTransformation.x, xSpeed)) &&
 				   (isMovement && _hasReachedFloat(totalMovement.y, targetTransformation.y, xSpeed)) &&
 				   (isMovement && _hasReachedFloat(totalMovement.z, targetTransformation.z, xSpeed)))
@@ -74,18 +65,14 @@ void Animation3dEditor::_updateModelAnimationExecution()
 				}
 				else
 				{
-					// X transformation
 					if((isMovement && !_hasReachedFloat(totalMovement.x, targetTransformation.x, xSpeed)) ||
 					   (isRotation && !_hasReachedFloat(totalRotation.x, targetTransformation.x, xSpeed)) ||
 					   (isScaling && !_hasReachedFloat(totalScaling.x, targetTransformation.x, xSpeed)))
 					{
-						// Final transformation speed
 						float finalSpeed = xSpeed;
 
-						// Determine transformation type
 						if(transformationType == TransformationType::MOVEMENT)
 						{
-							// Instant speed means the whole transformation in one go
 							if(speedType == Animation3dSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.x - totalMovement.x);
@@ -95,7 +82,6 @@ void Animation3dEditor::_updateModelAnimationExecution()
 						}
 						else if(transformationType == TransformationType::ROTATION)
 						{
-							// Instant speed means the whole transformation in one go
 							if(speedType == Animation3dSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.x - totalRotation.x);
@@ -105,7 +91,6 @@ void Animation3dEditor::_updateModelAnimationExecution()
 						}
 						else if(transformationType == TransformationType::SCALING)
 						{
-							// Instant speed means the whole transformation in one go
 							if(speedType == Animation3dSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.x - totalScaling.x);
@@ -114,19 +99,16 @@ void Animation3dEditor::_updateModelAnimationExecution()
 							totalScaling.x += finalSpeed;
 						}
 
-						// Increase speed if exponential
 						if(speedType == Animation3dSpeedType::EXPONENTIAL)
 						{
 							baseSpeed.x += (baseSpeed.x / 100.0f);
 						}
 
-						// Check if animation reached transformation now
 						float difference = 0.0f;
 						if((isMovement && _hasReachedFloat(totalMovement.x, targetTransformation.x, xSpeed)) ||
 						   (isRotation && _hasReachedFloat(totalRotation.x, targetTransformation.x, xSpeed)) ||
 						   (isScaling && _hasReachedFloat(totalScaling.x, targetTransformation.x, xSpeed)))
 						{
-							// Determine transformation type
 							if(transformationType == TransformationType::MOVEMENT)
 							{
 								difference = (totalMovement.x - targetTransformation.x);
@@ -144,7 +126,6 @@ void Animation3dEditor::_updateModelAnimationExecution()
 							}
 						}
 
-						// Transform the model
 						if(transformationType == TransformationType::MOVEMENT)
 						{
 							if(partID.empty()) // Base position
@@ -182,18 +163,14 @@ void Animation3dEditor::_updateModelAnimationExecution()
 						}
 					}
 
-					// Y transformation
 					if((isMovement && !_hasReachedFloat(totalMovement.y, targetTransformation.y, ySpeed)) ||
 					   (isRotation && !_hasReachedFloat(totalRotation.y, targetTransformation.y, ySpeed)) ||
 					   (isScaling && !_hasReachedFloat(totalScaling.y, targetTransformation.y, ySpeed)))
 					{
-						// Final transformation speed
 						float finalSpeed = ySpeed;
 
-						// Determine transformation type
 						if(transformationType == TransformationType::MOVEMENT)
 						{
-							// Instant speed means the whole transformation in one go
 							if(speedType == Animation3dSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.y - totalMovement.y);
@@ -203,7 +180,6 @@ void Animation3dEditor::_updateModelAnimationExecution()
 						}
 						else if(transformationType == TransformationType::ROTATION)
 						{
-							// Instant speed means the whole transformation in one go
 							if(speedType == Animation3dSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.y - totalRotation.y);
@@ -213,7 +189,6 @@ void Animation3dEditor::_updateModelAnimationExecution()
 						}
 						else if(transformationType == TransformationType::SCALING)
 						{
-							// Instant speed means the whole transformation in one go
 							if(speedType == Animation3dSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.y - totalScaling.y);
@@ -222,19 +197,16 @@ void Animation3dEditor::_updateModelAnimationExecution()
 							totalScaling.y += finalSpeed;
 						}
 
-						// Increase speed if exponential
 						if(speedType == Animation3dSpeedType::EXPONENTIAL)
 						{
 							baseSpeed.y += (baseSpeed.y / 100.0f);
 						}
 
-						// Check if animation reached transformation now
 						float difference = 0.0f;
 						if((isMovement && _hasReachedFloat(totalMovement.y, targetTransformation.y, ySpeed)) ||
 						   (isRotation && _hasReachedFloat(totalRotation.y, targetTransformation.y, ySpeed)) ||
 						   (isScaling && _hasReachedFloat(totalScaling.y, targetTransformation.y, ySpeed)))
 						{
-							// Determine transformation type
 							if(transformationType == TransformationType::MOVEMENT)
 							{
 								difference = (totalMovement.y - targetTransformation.y);
@@ -252,7 +224,6 @@ void Animation3dEditor::_updateModelAnimationExecution()
 							}
 						}
 
-						// Transform the model
 						if(transformationType == TransformationType::MOVEMENT)
 						{
 							if(partID.empty()) // Base position
@@ -290,18 +261,14 @@ void Animation3dEditor::_updateModelAnimationExecution()
 						}
 					}
 
-					// Z transformation
 					if((isMovement && !_hasReachedFloat(totalMovement.z, targetTransformation.z, zSpeed)) ||
 					   (isRotation && !_hasReachedFloat(totalRotation.z, targetTransformation.z, zSpeed)) ||
 					   (isScaling && !_hasReachedFloat(totalScaling.z, targetTransformation.z, zSpeed)))
 					{
-						// Final transformation speed
 						float finalSpeed = zSpeed;
 
-						// Determine transformation type
 						if(transformationType == TransformationType::MOVEMENT)
 						{
-							// Instant speed means the whole transformation in one go
 							if(speedType == Animation3dSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.z - totalMovement.z);
@@ -311,7 +278,6 @@ void Animation3dEditor::_updateModelAnimationExecution()
 						}
 						else if(transformationType == TransformationType::ROTATION)
 						{
-							// Instant speed means the whole transformation in one go
 							if(speedType == Animation3dSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.z - totalRotation.z);
@@ -321,7 +287,6 @@ void Animation3dEditor::_updateModelAnimationExecution()
 						}
 						else if(transformationType == TransformationType::SCALING)
 						{
-							// Instant speed means the whole transformation in one go
 							if(speedType == Animation3dSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.z - totalScaling.z);
@@ -330,19 +295,16 @@ void Animation3dEditor::_updateModelAnimationExecution()
 							totalScaling.z += finalSpeed;
 						}
 
-						// Increase speed if exponential
 						if(speedType == Animation3dSpeedType::EXPONENTIAL)
 						{
 							baseSpeed.z += (baseSpeed.z / 100.0f);
 						}
 
-						// Check if animation reached transformation now
 						float difference = 0.0f;
 						if((isMovement && _hasReachedFloat(totalMovement.z, targetTransformation.z, finalSpeed)) ||
 						   (isRotation && _hasReachedFloat(totalRotation.z, targetTransformation.z, finalSpeed)) ||
 						   (isScaling && _hasReachedFloat(totalScaling.z, targetTransformation.z, finalSpeed)))
 						{
-							// Determine transformation type
 							if(transformationType == TransformationType::MOVEMENT)
 							{
 								difference = (totalMovement.z - targetTransformation.z);
@@ -360,7 +322,6 @@ void Animation3dEditor::_updateModelAnimationExecution()
 							}
 						}
 
-						// Transform the model
 						if(transformationType == TransformationType::MOVEMENT)
 						{
 							if(partID.empty()) // Base position
@@ -400,24 +361,19 @@ void Animation3dEditor::_updateModelAnimationExecution()
 					}
 				}
 
-				// Update animation values
 				animation.setTotalMovement(partID, totalMovement);
 				animation.setTotalRotation(partID, totalRotation);
 				animation.setTotalScaling(partID, totalScaling);
 
-				// Update frame values
 				frame.setSpeed(partID, baseSpeed);
 			}
 
-			// Update frame
 			animation.setFrame(frameIndex, frame);
 
-			// Check if current frame is finished
 			if(finishedPartCount == animation.getPartIDs().size())
 			{
 				if(animation.getFrameIndex() == (static_cast<unsigned int>(animation.getFrames().size()) - 1)) // Animation finished
 				{
-					// Check if animation is endless
 					if(animation.getPlayCount() == -1)
 					{
 						_modelAnimationsToStop.insert(idPair);
@@ -425,10 +381,8 @@ void Animation3dEditor::_updateModelAnimationExecution()
 					}
 					else
 					{
-						// Animation finished current play
 						animation.setPlayCount(animation.getPlayCount() - 1);
 
-						// Check if animation must stop
 						if(animation.getPlayCount() == 0)
 						{
 							_modelAnimationsToStop.insert(idPair);
@@ -441,37 +395,29 @@ void Animation3dEditor::_updateModelAnimationExecution()
 				}
 				else // Animation not finished yet
 				{
-					// Auto-pause if allowed (skip default frame)
 					if(animation.isAutopaused() && animation.getFrameIndex() != 0)
 					{
 						animation.setPaused(true);
 					}
 
-					// Next frame
 					animation.setFrameIndex(animation.getFrameIndex() + 1);
 				}
 			}
 		}
 
-		// Remove all animations that ended
 		for(const auto& idPair : _modelAnimationsToStop)
 		{
-			// Check if animation is still started
 			if(isModelAnimationStarted(idPair.first, idPair.second))
 			{
-				// Stop animation
 				stopModelAnimation(idPair.first, idPair.second);
 			}
 		}
 		_modelAnimationsToStop.clear();
 
-		// Start all endless animations again
 		for(const auto& idPair : _modelAnimationsToStart)
 		{
-			// Check if animation is not already started
 			if(!isModelAnimationStarted(idPair.first, idPair.second))
 			{
-				// Start animation
 				startModelAnimation(idPair.first, idPair.second, -1);
 			}
 		}

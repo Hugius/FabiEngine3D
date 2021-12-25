@@ -202,37 +202,31 @@ const bool WorldEditor::_copyTemplateModel(const string& newID, const string& te
 
 	for(const auto& partID : _fe3d.model_getPartIDs(templateID))
 	{
-		// Set diffuse map
 		if(_fe3d.model_hasDiffuseMap(templateID, partID))
 		{
 			_fe3d.model_setDiffuseMap(newID, partID, _fe3d.model_getDiffuseMapPath(templateID, partID));
 		}
 
-		// Set emission map
 		if(_fe3d.model_hasEmissionMap(templateID, partID))
 		{
 			_fe3d.model_setEmissionMap(newID, partID, _fe3d.model_getEmissionMapPath(templateID, partID));
 		}
 
-		// Set specular map
 		if(_fe3d.model_hasSpecularMap(templateID, partID))
 		{
 			_fe3d.model_setSpecularMap(newID, partID, _fe3d.model_getSpecularMapPath(templateID, partID));
 		}
 
-		// Set reflection map
 		if(_fe3d.model_hasReflectionMap(templateID, partID))
 		{
 			_fe3d.model_setReflectionMap(newID, partID, _fe3d.model_getReflectionMapPath(templateID, partID));
 		}
 
-		// Set normal map
 		if(_fe3d.model_hasNormalMap(templateID, partID))
 		{
 			_fe3d.model_setNormalMap(newID, partID, _fe3d.model_getNormalMapPath(templateID, partID));
 		}
 
-		// Set properties
 		_fe3d.model_setLightness(newID, partID, _fe3d.model_getLightness(templateID, partID));
 		_fe3d.model_setSpecular(newID, partID, _fe3d.model_isSpecular(templateID, partID));
 		_fe3d.model_setSpecularShininess(newID, partID, _fe3d.model_getSpecularShininess(templateID, partID));

@@ -10,22 +10,17 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Validate ID
 			if(!_validateFe3dID(args[0].getString()))
 			{
 				return true;
 			}
 
-			// Find full entity IDs based on sub ID
 			for(const auto& ID : _fe3d.aabb_getIDs())
 			{
-				// If substring matches
 				if(args[0].getString() == ID.substr(0, args[0].getString().size()))
 				{
-					// Cannot be template
 					if(ID[0] != '@')
 					{
-						// Only non-bound AABBs
 						if(!_fe3d.aabb_hasParent(ID))
 						{
 							returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
@@ -41,20 +36,17 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Validate ID
 			if(!_validateFe3dID(args[0].getString()))
 			{
 				return true;
 			}
 
-			// Cannot access a bound entity
 			if(!_fe3d.aabb_getParentEntityID(args[0].getString()).empty())
 			{
 				_throwScriptError("cannot access AABB with ID \"" + args[0].getString() + "\": bound to model or billboard!");
 				return true;
 			}
 
-			// Check if existing
 			auto result = _fe3d.aabb_isExisting(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
@@ -67,17 +59,14 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				// Cannot access a bound entity
 				if(!_fe3d.aabb_getParentEntityID(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + args[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
-				// Get visibility
 				auto result = _fe3d.aabb_isVisible(args[0].getString());
 
-				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -90,14 +79,12 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				// Cannot access a bound entity
 				if(!_fe3d.aabb_getParentEntityID(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + args[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
-				// Return
 				auto result = _fe3d.aabb_getPosition(args[0].getString()).x;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
@@ -111,14 +98,12 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				// Cannot access a bound entity
 				if(!_fe3d.aabb_getParentEntityID(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + args[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
-				// Return
 				auto result = _fe3d.aabb_getPosition(args[0].getString()).y;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
@@ -132,14 +117,12 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				// Cannot access a bound entity
 				if(!_fe3d.aabb_getParentEntityID(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + args[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
-				// Return
 				auto result = _fe3d.aabb_getPosition(args[0].getString()).z;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
@@ -153,14 +136,12 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				// Cannot access a bound entity
 				if(!_fe3d.aabb_getParentEntityID(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + args[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
-				// Return
 				auto result = _fe3d.aabb_getSize(args[0].getString()).x;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
@@ -174,14 +155,12 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				// Cannot access a bound entity
 				if(!_fe3d.aabb_getParentEntityID(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + args[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
-				// Return
 				auto result = _fe3d.aabb_getSize(args[0].getString()).y;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
@@ -195,14 +174,12 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				// Cannot access a bound entity
 				if(!_fe3d.aabb_getParentEntityID(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + args[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
-				// Return
 				auto result = _fe3d.aabb_getSize(args[0].getString()).z;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
@@ -214,13 +191,10 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			auto result = _fe3d.aabb_getIDs();
 
-			// Iterate through AABBs
 			for(const auto& ID : result)
 			{
-				// Cannot be template
 				if(ID[0] != '@')
 				{
-					// Only non-bound AABBs
 					if(!_fe3d.aabb_hasParent(ID))
 					{
 						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
@@ -237,14 +211,12 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				// Cannot access a bound entity
 				if(!_fe3d.aabb_getParentEntityID(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + args[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
-				// Return
 				auto result = _fe3d.aabb_getSize(args[0].getString()).z;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
@@ -258,14 +230,12 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				// Cannot access a bound entity
 				if(!_fe3d.aabb_getParentEntityID(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + args[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
-				// Return
 				auto result = _fe3d.aabb_getColor(args[0].getString()).r;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
@@ -279,14 +249,12 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				// Cannot access a bound entity
 				if(!_fe3d.aabb_getParentEntityID(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + args[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
-				// Return
 				auto result = _fe3d.aabb_getColor(args[0].getString()).g;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
@@ -300,14 +268,12 @@ const bool ScriptInterpreter::_executeFe3dAabbGetter(const string& functionName,
 		{
 			if(_validateFe3dAabb(args[0].getString()))
 			{
-				// Cannot access a bound entity
 				if(!_fe3d.aabb_getParentEntityID(args[0].getString()).empty())
 				{
 					_throwScriptError("cannot access AABB with ID \"" + args[0].getString() + "\": bound to model or billboard!");
 					return true;
 				}
 
-				// Return
 				auto result = _fe3d.aabb_getColor(args[0].getString()).b;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}

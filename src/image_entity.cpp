@@ -10,11 +10,9 @@ void ImageEntity::updateTransformation()
 {
 	if(_position != _positionTarget)
 	{
-		// Update position
 		auto speedMultiplier = Math::normalize(_positionTarget - _position);
 		_position += (speedMultiplier * _positionTargetSpeed);
 
-		// Correct position
 		if(fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)
 		{
 			_position.x = _positionTarget.x;
@@ -27,13 +25,11 @@ void ImageEntity::updateTransformation()
 
 	if(_rotation != _rotationTarget)
 	{
-		// Update rotation
 		auto difference = fabsf(_rotation - _rotationTarget);
 		float multiplier = ((difference < 180.0f) ? 1.0f : -1.0f);
 		float speed = (_rotationTargetSpeed * multiplier);
 		_rotation += ((_rotation < _rotationTarget) ? speed : (_rotation > _rotationTarget) ? -speed : 0.0f);
 
-		// Correct rotation
 		_rotation = Math::limitAngle(_rotation);
 		if(Math::calculateAngleDifference(_rotation, _rotationTarget) <= _rotationTargetSpeed)
 		{
@@ -43,11 +39,9 @@ void ImageEntity::updateTransformation()
 
 	if(_size != _sizeTarget)
 	{
-		// Update size
 		auto speedMultiplier = Math::normalize(_sizeTarget - _size);
 		_size += (speedMultiplier * _sizeTargetSpeed);
 
-		// Correct size
 		_size = fvec2(max(0.0f, _size.x), max(0.0f, _size.y));
 		if(fabsf(_sizeTarget.x - _size.x) <= _sizeTargetSpeed)
 		{

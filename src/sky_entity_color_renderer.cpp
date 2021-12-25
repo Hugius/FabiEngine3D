@@ -25,34 +25,29 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, cons
 {
 	if(mainEntity->isVisible())
 	{
-		// Enable wireframe
 		if(mainEntity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
 
-		// Main entity shader uniforms
 		_shader.uploadUniform("u_isWireframed", (mainEntity->isWireframed() || _renderBus.isWireframeRenderingEnabled()));
 		_shader.uploadUniform("u_rotationMatrix", mainEntity->getRotationMatrix());
 		_shader.uploadUniform("u_mainLightness", mainEntity->getLightness());
 		_shader.uploadUniform("u_mainColor", mainEntity->getColor());
 		_shader.uploadUniform("u_wireframeColor", mainEntity->getWireframeColor());
 
-		// Mix entity shader uniforms
 		if(mixEntity != nullptr)
 		{
 			_shader.uploadUniform("u_mixLightness", mixEntity->getLightness());
 			_shader.uploadUniform("u_mixColor", mixEntity->getColor());
 		}
 
-		// Bind main entity textures
 		if(mainEntity->hasCubeMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, mainEntity->getCubeMap());
 		}
 
-		// Bind mix entity textures
 		if(mixEntity != nullptr)
 		{
 			if(mixEntity->hasCubeMap())
@@ -62,24 +57,19 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, cons
 			}
 		}
 
-		// Bind buffer
 		glBindVertexArray(mainEntity->getRenderBuffer()->getVAO());
 
-		// Render buffer
 		glDrawArrays(GL_TRIANGLES, 0, mainEntity->getRenderBuffer()->getVertexCount());
 		_renderBus.increaseTriangleCount(mainEntity->getRenderBuffer()->getVertexCount() / 3);
 
-		// Unbind buffer
 		glBindVertexArray(0);
 
-		// Unbind main entity textures
 		if(mainEntity->hasCubeMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 		}
 
-		// Bind mix entity textures
 		if(mixEntity != nullptr)
 		{
 			if(mixEntity->hasCubeMap())
@@ -89,7 +79,6 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, cons
 			}
 		}
 
-		// Disable wireframe
 		if(mainEntity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

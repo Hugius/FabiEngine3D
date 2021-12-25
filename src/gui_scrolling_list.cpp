@@ -51,7 +51,6 @@ void GuiScrollingList::deleteButton(const string& ID)
 		{
 			_buttons.erase(_buttons.begin() + i);
 
-			// Retrieve info of all remaining buttons
 			vector<string> buttonIDs;
 			vector<string> textContents;
 			for(size_t j = 0; j < _buttons.size(); j++)
@@ -60,16 +59,13 @@ void GuiScrollingList::deleteButton(const string& ID)
 				textContents.push_back(_fe3d.text_getContent(_buttons[j]->getTextField()->getEntityID()));
 			}
 
-			// Delete all buttons
 			deleteButtons();
 
-			// Create newly positioned buttons
 			for(size_t j = 0; j < buttonIDs.size(); j++)
 			{
 				createButton(buttonIDs[j], textContents[j]);
 			}
 
-			// Return
 			return;
 		}
 	}
@@ -115,10 +111,8 @@ void GuiScrollingList::_updateScrolling()
 {
 	if(!_buttons.empty())
 	{
-		// Temporary
 		bool mustReset = false;
 
-		// Checking if cursor is inside scrolling list
 		fvec2 cursorPosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
 		if(cursorPosition.x > _initialPosition.x - (_initialSize.x / 2.0f) && cursorPosition.x < _initialPosition.x + (_initialSize.x / 2.0f))
 		{
@@ -129,13 +123,10 @@ void GuiScrollingList::_updateScrolling()
 			}
 		}
 
-		// Slowing down the scrolling speed
 		_scrollingSpeed *= 0.95f;
 
-		// Update the total offset
 		_scrollingOffset += _scrollingSpeed;
 
-		// Reset if below zero
 		if(_scrollingOffset < 0.0f)
 		{
 			_scrollingOffset = 0.0f;
@@ -143,7 +134,6 @@ void GuiScrollingList::_updateScrolling()
 			mustReset = true;
 		}
 
-		// Reset if maximum scrolling offset reached
 		float firstButtonHeight = _fe3d.image_getPosition(_buttons[0]->getRectangle()->getEntityID()).y;
 		float lastButtonHeight = _fe3d.image_getPosition(_buttons[_buttons.size() - 1]->getRectangle()->getEntityID()).y;
 		float listHeight = _fe3d.image_getPosition(_entityID).y;
@@ -164,13 +154,11 @@ void GuiScrollingList::_updateScrolling()
 			}
 		}
 
-		// Update buttons
 		for(const auto& button : _buttons)
 		{
 			string rectangleID = button->getRectangle()->getEntityID();
 			string textID = button->getTextField()->getEntityID();
 
-			// Determine whether moving or resetting the positions
 			if(mustReset)
 			{
 				_fe3d.image_setPosition(rectangleID, button->getRectangle()->getInitialPosition());

@@ -9,7 +9,6 @@ void WorldEditor::_updateMainMenu()
 
 	if(screen->getID() == "worldEditorMenuMain")
 	{
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			unload();
@@ -35,19 +34,15 @@ void WorldEditor::_updateMainMenu()
 			_gui.getOverlay()->createChoiceForm("worldList", "Delete World", fvec2(0.0f, 0.1f), IDs);
 		}
 
-		// Check if user filled in a new ID
 		string newWorldName;
 		if(_gui.getOverlay()->checkValueForm("worldCreate", newWorldName, {}))
 		{
 			auto worldNames = _getWorldIDs();
 
-			// If world ID not existing yet
 			if(find(worldNames.begin(), worldNames.end(), newWorldName) == worldNames.end())
 			{
-				// Unselect background
 				_fe3d.sky_selectMainSky("");
 
-				// Create new world
 				_currentWorldID = newWorldName;
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 			}
@@ -57,7 +52,6 @@ void WorldEditor::_updateMainMenu()
 			}
 		}
 
-		// Update world choice
 		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			string selectedButtonID = _gui.getOverlay()->checkChoiceForm("worldList");
@@ -65,21 +59,16 @@ void WorldEditor::_updateMainMenu()
 			{
 				_currentWorldID = selectedButtonID;
 
-				// Load selected world for editing
 				if(_isChoosingWorld)
 				{
-					// Unselect background
 					_fe3d.sky_selectMainSky("");
 
-					// Try to load world
 					if(loadEditorWorldFromFile(_currentWorldID))
 					{
-						// Change GUI
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 					}
 					else
 					{
-						// Select background
 						_fe3d.sky_selectMainSky("@@background");
 					}
 				}
@@ -88,7 +77,6 @@ void WorldEditor::_updateMainMenu()
 					_gui.getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 				}
 
-				// Miscellaneous
 				_gui.getOverlay()->deleteChoiceForm("worldList");
 				_isChoosingWorld = false;
 			}
@@ -98,7 +86,6 @@ void WorldEditor::_updateMainMenu()
 			}
 		}
 
-		// Update answer forms
 		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
 			_deleteWorldFile(_currentWorldID);
@@ -119,7 +106,6 @@ void WorldEditor::_updateChoiceMenu()
 
 	if(screen->getID() == "worldEditorMenuChoice")
 	{
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getOverlay()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
@@ -166,10 +152,8 @@ void WorldEditor::_updateChoiceMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettings");
 		}
 
-		// Update answer forms
 		if(_gui.getOverlay()->isAnswerFormConfirmed("back"))
 		{
-			// Stop placing
 			_currentTemplateModelID = "";
 			_currentTemplateBillboardID = "";
 			_currentTemplateSoundID = "";
@@ -177,28 +161,22 @@ void WorldEditor::_updateChoiceMenu()
 			_isPlacingSpotlight = false;
 			_isPlacingReflection = false;
 
-			// Save world
 			saveEditorWorldToFile();
 
-			// Clear world
 			clearEditorWorld();
 
-			// Select background
 			_fe3d.sky_selectMainSky("@@background");
 
-			// No selected world
 			_currentWorldID = "";
 			_currentSkyID = "";
 			_currentTerrainID = "";
 			_currentWaterID = "";
 
-			// Go to main menu
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuMain");
 			return;
 		}
 		if(_gui.getOverlay()->isAnswerFormDenied("back"))
 		{
-			// Stop placing
 			_currentTemplateModelID = "";
 			_currentTemplateBillboardID = "";
 			_currentTemplateSoundID = "";
@@ -206,19 +184,15 @@ void WorldEditor::_updateChoiceMenu()
 			_isPlacingSpotlight = false;
 			_isPlacingReflection = false;
 
-			// Clear world
 			clearEditorWorld();
 
-			// Select background
 			_fe3d.sky_selectMainSky("@@background");
 
-			// No selected world
 			_currentWorldID = "";
 			_currentSkyID = "";
 			_currentTerrainID = "";
 			_currentWaterID = "";
 
-			// Go to main menu
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuMain");
 			return;
 		}

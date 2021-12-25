@@ -10,7 +10,6 @@ void FabiEngine3D::sound3d_delete(const string& ID)
 {
 	if(_core->_sound3dManager.isSoundExisting(ID))
 	{
-		// Stop before deleting
 		if(_core->_sound3dPlayer.isSoundStarted(_core->_sound3dManager.getSound(ID)))
 		{
 			_core->_sound3dPlayer.stopSound(_core->_sound3dManager.getSound(ID), 0);

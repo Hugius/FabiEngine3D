@@ -25,7 +25,6 @@ const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isTe
 
 	if(isTemplate)
 	{
-		// Validate existence
 		if(!_fe3d.billboard_isExisting("@" + ID))
 		{
 			_throwScriptError("template billboard entity does not exist!");
@@ -34,7 +33,6 @@ const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isTe
 	}
 	else
 	{
-		// Validate existence
 		if(!_fe3d.billboard_isExisting(ID))
 		{
 			_throwScriptError("billboard entity does not exist!");
@@ -102,7 +100,6 @@ const bool ScriptInterpreter::_validateFe3dModel(const string& ID, bool isTempla
 
 	if(isTemplate)
 	{
-		// Validate existence
 		if(!_fe3d.model_isExisting("@" + ID))
 		{
 			_throwScriptError("template model entity does not exist!");
@@ -111,7 +108,6 @@ const bool ScriptInterpreter::_validateFe3dModel(const string& ID, bool isTempla
 	}
 	else
 	{
-		// Validate existence
 		if(!_fe3d.model_isExisting(ID))
 		{
 			_throwScriptError("model entity does not exist!");
@@ -240,7 +236,6 @@ const bool ScriptInterpreter::_validateFe3dSound2d(const string& ID, bool isTemp
 
 	if(isTemplate)
 	{
-		// Validate existence
 		if(!_fe3d.sound2d_isExisting("@" + ID))
 		{
 			_throwScriptError("template sound does not exist!");
@@ -249,7 +244,6 @@ const bool ScriptInterpreter::_validateFe3dSound2d(const string& ID, bool isTemp
 	}
 	else
 	{
-		// Validate existence
 		if(!_fe3d.sound2d_isExisting(ID))
 		{
 			_throwScriptError("sound2D does not exist!");
@@ -269,7 +263,6 @@ const bool ScriptInterpreter::_validateFe3dSound3d(const string& ID, bool isTemp
 
 	if(isTemplate)
 	{
-		// Validate existence
 		if(!_fe3d.sound3d_isExisting("@" + ID))
 		{
 			_throwScriptError("template sound does not exist!");
@@ -278,7 +271,6 @@ const bool ScriptInterpreter::_validateFe3dSound3d(const string& ID, bool isTemp
 	}
 	else
 	{
-		// Validate existence
 		if(!_fe3d.sound3d_isExisting(ID))
 		{
 			_throwScriptError("sound3D does not exist!");

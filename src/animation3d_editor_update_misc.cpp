@@ -5,13 +5,11 @@ void Animation3dEditor::_updateCamera()
 {
 	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
-		// Update distance scrolling
 		auto scrollOffset = _fe3d.input_getMouseWheelY();
 		auto cameraDistance = _fe3d.camera_getThirdPersonDistance();
 		cameraDistance = max(MIN_CAMERA_DISTANCE, cameraDistance - (static_cast<float>(scrollOffset) * CAMERA_DISTANCE_SPEED));
 		_fe3d.camera_setThirdPersonDistance(cameraDistance);
 
-		// Update lookat position
 		auto cameraLookat = _fe3d.camera_getThirdPersonLookat();
 		if(_fe3d.input_isKeyDown(InputType::KEY_SPACE))
 		{
@@ -23,10 +21,8 @@ void Animation3dEditor::_updateCamera()
 		}
 		_fe3d.camera_setThirdPersonLookat(cameraLookat);
 
-		// Hide cursor
 		_fe3d.image_setVisible("@@cursor", false);
 
-		// Update shadows
 		const auto distance = _fe3d.camera_getThirdPersonDistance();
 		_fe3d.gfx_setShadowEyePosition(fvec3(cameraLookat + fvec3(distance * 2.0f)));
 		_fe3d.gfx_setShadowCenterPosition(cameraLookat);
@@ -36,10 +32,8 @@ void Animation3dEditor::_updateCamera()
 
 	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
-		// Check if RMB pressed
 		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			// Check third person view status
 			if(_fe3d.camera_isThirdPersonViewEnabled())
 			{
 				_fe3d.camera_disableThirdPersonView();
@@ -64,7 +58,6 @@ void Animation3dEditor::_updateMiscellaneous()
 {
 	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
-		// Update reference model visibility
 		if(_fe3d.input_isKeyPressed(InputType::KEY_R))
 		{
 			if(_fe3d.model_isVisible("@@box"))
@@ -80,19 +73,14 @@ void Animation3dEditor::_updateMiscellaneous()
 
 	if(!_currentAnimationID.empty())
 	{
-		// Retrieve current animation
 		auto currentAnimation = _getAnimation(_currentAnimationID);
 
-		// Check if allowed to set frame transformation
 		if(_mustUpdateCurrentFramePreview)
 		{
-			// Check if animation is not started
 			if(!isModelAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID()))
 			{
-				// Check if animation has a preview model
 				if(_fe3d.model_isExisting(currentAnimation->getPreviewModelID()))
 				{
-					// Iterate through animation parts
 					for(const auto& partID : currentAnimation->getPartIDs())
 					{
 						if(partID.empty()) // Base transformation
@@ -111,25 +99,18 @@ void Animation3dEditor::_updateMiscellaneous()
 						}
 					}
 
-					// Set transformation of current frame
 					if(_currentFrameIndex > 0)
 					{
-						// Iterate through frames
 						for(unsigned int frameIndex = 1; frameIndex <= _currentFrameIndex; frameIndex++)
 						{
-							// Retrieve frame
 							auto frame = currentAnimation->getFrames()[frameIndex];
 
-							// Iterate through animation parts
 							for(const auto& partID : currentAnimation->getPartIDs())
 							{
-								// Check if model has part
 								if(_fe3d.model_hasPart(currentAnimation->getPreviewModelID(), partID) || partID.empty())
 								{
-									// Determine type of transformation
 									if(frame.getTransformationTypes().at(partID) == TransformationType::MOVEMENT)
 									{
-										// Position
 										auto newPosition = (currentAnimation->getInitialSize() * frame.getTargetTransformations().at(partID));
 										if(partID.empty())
 										{
@@ -142,7 +123,6 @@ void Animation3dEditor::_updateMiscellaneous()
 									}
 									else if(frame.getTransformationTypes().at(partID) == TransformationType::ROTATION)
 									{
-										// Origin
 										auto currentModelSize = _fe3d.model_getBaseSize(currentAnimation->getPreviewModelID());
 										auto newOrigin = (currentModelSize * frame.getRotationOrigins().at(partID));
 										if(partID.empty())
@@ -154,7 +134,6 @@ void Animation3dEditor::_updateMiscellaneous()
 											_fe3d.model_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, newOrigin);
 										}
 
-										// Rotation
 										auto newRotation = frame.getTargetTransformations().at(partID);
 										if(partID.empty())
 										{
@@ -167,7 +146,6 @@ void Animation3dEditor::_updateMiscellaneous()
 									}
 									else if(frame.getTransformationTypes().at(partID) == TransformationType::SCALING)
 									{
-										// Size
 										auto modelSize = (partID.empty() ? currentAnimation->getInitialSize() : fvec3(1.0f));
 										auto newSize = (modelSize + (modelSize * frame.getTargetTransformations().at(partID)));
 										if(partID.empty())
@@ -187,7 +165,6 @@ void Animation3dEditor::_updateMiscellaneous()
 			}
 		}
 
-		// Update model part highlighting
 		auto partID = (_hoveredPartID.empty() ? _currentPartID : _hoveredPartID);
 		if(partID.empty())
 		{
@@ -195,19 +172,16 @@ void Animation3dEditor::_updateMiscellaneous()
 		}
 		else
 		{
-			// Check if wireframe color reached minimum
 			if(_fe3d.model_getWireframeColor(currentAnimation->getPreviewModelID(), partID) == 0.0f)
 			{
 				_selectedPartHighlightDirection *= -1;
 			}
 
-			// Check if wireframe color reached maximum
 			if(_fe3d.model_getWireframeColor(currentAnimation->getPreviewModelID(), partID) == 1.0f)
 			{
 				_selectedPartHighlightDirection *= -1;
 			}
 
-			// Set wireframe color
 			const auto color = _fe3d.model_getWireframeColor(currentAnimation->getPreviewModelID(), partID);
 			const float speed = (PART_HIGHLIGHT_SPEED * static_cast<float>(_selectedPartHighlightDirection));
 			_fe3d.model_setWireframeColor(currentAnimation->getPreviewModelID(), partID, (color + speed));
@@ -219,27 +193,22 @@ void Animation3dEditor::_updateAnimationCreating()
 {
 	if(_isCreatingAnimation)
 	{
-		// Temporary values
 		string newAnimationID;
 
-		// Check if user filled in a new ID
 		if(_gui.getOverlay()->checkValueForm("animationCreate", newAnimationID, {_currentAnimationID}))
 		{
-			// Spaces not allowed
 			if(newAnimationID.find(' ') != string::npos)
 			{
 				Logger::throwWarning("Animation ID cannot contain any spaces!");
 				return;
 			}
 
-			// @ sign not allowed
 			if(newAnimationID.find('@') != string::npos)
 			{
 				Logger::throwWarning("Animation ID cannot contain '@'!");
 				return;
 			}
 
-			// Check if animation already exists
 			auto animationIDs = getAnimationIDs();
 			if(find(animationIDs.begin(), animationIDs.end(), newAnimationID) != animationIDs.end())
 			{
@@ -247,16 +216,12 @@ void Animation3dEditor::_updateAnimationCreating()
 				return;
 			}
 
-			// Go to next screen
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
 
-			// Create animation
 			_animations.push_back(make_shared<Animation3d>(newAnimationID));
 
-			// Select animation
 			_currentAnimationID = newAnimationID;
 
-			// Miscellaneous
 			_fe3d.text_setContent(_gui.getOverlay()->getTextField("animationID")->getEntityID(), "Animation: " + newAnimationID, 0.025f);
 			_fe3d.text_setVisible(_gui.getOverlay()->getTextField("animationID")->getEntityID(), true);
 			_fe3d.text_setVisible(_gui.getOverlay()->getTextField("animationFrame")->getEntityID(), true);
@@ -269,37 +234,28 @@ void Animation3dEditor::_updateAnimationChoosing()
 {
 	if(_isChoosingAnimation)
 	{
-		// Get selected button ID
 		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("animationList");
 
-		// Check if animation ID is hovered
 		if(!selectedButtonID.empty())
 		{
-			// Check if LMB is pressed
 			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				// Select animation
 				_currentAnimationID = selectedButtonID;
 
-				// Check if not deleting
 				if(!_isDeletingAnimation)
 				{
-					// Go to next screen
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
 
-					// Show preview model
 					if(_fe3d.model_isExisting(_getAnimation(selectedButtonID)->getPreviewModelID()))
 					{
 						_fe3d.model_setVisible(_getAnimation(selectedButtonID)->getPreviewModelID(), true);
 					}
 
-					// Miscellaneous
 					_fe3d.text_setContent(_gui.getOverlay()->getTextField("animationID")->getEntityID(), "Animation: " + selectedButtonID, 0.025f);
 					_fe3d.text_setVisible(_gui.getOverlay()->getTextField("animationID")->getEntityID(), true);
 					_fe3d.text_setVisible(_gui.getOverlay()->getTextField("animationFrame")->getEntityID(), true);
 				}
 
-				// Miscellaneous
 				_gui.getOverlay()->deleteChoiceForm("animationList");
 				_isChoosingAnimation = false;
 			}
@@ -317,19 +273,15 @@ void Animation3dEditor::_updateAnimationDeleting()
 {
 	if(_isDeletingAnimation && !_currentAnimationID.empty())
 	{
-		// Add answer form
 		if(!_gui.getOverlay()->isAnswerFormExisting("delete"))
 		{
 			_gui.getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
-		// Update answer form
 		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			// Go to main screen
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation3dEditorMenuMain");
 
-			// Delete animation
 			if(!_getAnimation(_currentAnimationID)->getPreviewModelID().empty())
 			{
 				_fe3d.model_setVisible(_getAnimation(_currentAnimationID)->getPreviewModelID(), false);
@@ -337,7 +289,6 @@ void Animation3dEditor::_updateAnimationDeleting()
 			_deleteAnimation(_currentAnimationID);
 			_currentAnimationID = "";
 
-			// Miscellaneous
 			_isDeletingAnimation = false;
 		}
 		if(_gui.getOverlay()->isAnswerFormDenied("delete"))

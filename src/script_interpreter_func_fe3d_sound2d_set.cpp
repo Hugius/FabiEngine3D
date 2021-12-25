@@ -10,24 +10,20 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Temporary values
 			string newID = args[0].getString();
 			string templateID = args[1].getString();
 
-			// Validate ID
 			if(!_validateFe3dID(newID))
 			{
 				return true;
 			}
 
-			// Validate existence
 			if(_fe3d.sound2d_isExisting(newID))
 			{
 				_throwScriptError("sound already exists!");
 				return true;
 			}
 
-			// Validate template sound
 			if(_validateFe3dSound2d(templateID, true))
 			{
 				auto filePath = _fe3d.sound2d_getAudioPath("@" + args[1].getString());
@@ -54,17 +50,14 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			// Iterate through sounds
 			for(const auto& ID : _fe3d.sound2d_getIDs())
 			{
-				// Cannot be template
 				if(ID[0] != '@')
 				{
 					_fe3d.sound2d_delete(ID);
 				}
 			}
 
-			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

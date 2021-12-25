@@ -7,13 +7,11 @@ void ModelEditor::_updateMiscellaneousMenu()
 
 	if(screen->getID() == "modelEditorMenuMiscellaneous")
 	{
-		// Temporary values
 		auto levelOfDetailEntityID = _fe3d.model_getLevelOfDetailEntityID(_currentModelID);
 		auto levelOfDetailDistance = _fe3d.model_getLevelOfDetailDistance(_currentModelID);
 		auto isFaceCulled = _fe3d.model_isFaceCulled(_currentModelID);
 		auto rotationOrder = _fe3d.model_getRotationOrder(_currentModelID);
 
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
@@ -62,7 +60,6 @@ void ModelEditor::_updateMiscellaneousMenu()
 			_fe3d.model_setRotationOrder(_currentModelID, rotationOrder);
 		}
 
-		// Update value forms
 		if(_gui.getOverlay()->checkValueForm("levelOfDetailEntityID", levelOfDetailEntityID, {}))
 		{
 			if(levelOfDetailEntityID == "@") // No level of detail entity
@@ -83,7 +80,6 @@ void ModelEditor::_updateMiscellaneousMenu()
 			_fe3d.model_setLevelOfDetailDistance(_currentModelID, levelOfDetailDistance);
 		}
 
-		// Update button text contents
 		screen->getButton("isFaceCulled")->changeTextContent(isFaceCulled ? "Culling: ON" : "Culling: OFF");
 		if(rotationOrder == DirectionOrder::XYZ)
 		{

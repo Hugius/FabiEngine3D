@@ -9,7 +9,6 @@ void WaterEditor::_updateMainMenu()
 
 	if(screen->getID() == "waterEditorMenuMain")
 	{
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getOverlay()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
@@ -41,7 +40,6 @@ void WaterEditor::_updateMainMenu()
 			_isDeletingWater = true;
 		}
 
-		// Update answer forms
 		if(_gui.getOverlay()->isAnswerFormConfirmed("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
@@ -64,10 +62,8 @@ void WaterEditor::_updateChoiceMenu()
 
 	if(screen->getID() == "waterEditorMenuChoice")
 	{
-		// Temporary values
 		float size = _fe3d.water_getSize(_currentWaterID);
 
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMain");
@@ -94,13 +90,11 @@ void WaterEditor::_updateChoiceMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMiscellaneous");
 		}
 
-		// Update value forms
 		if(_gui.getOverlay()->checkValueForm("size", size, {0.0f}))
 		{
 			_fe3d.water_setSize(_currentWaterID, size);
 		}
 
-		// Update buttons hoverability
 		screen->getButton("lighting")->setHoverable(_fe3d.water_isExisting(_currentWaterID));
 		screen->getButton("miscellaneous")->setHoverable(_fe3d.water_isExisting(_currentWaterID));
 	}

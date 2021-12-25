@@ -50,7 +50,6 @@ void main()
 
 mat3 calculateTbnMatrix()
 {
-    // Normal mapping matrix
     if (u_hasNormalMap)
     {
         vec3 tangent = normalize(mat3(u_normalTransformationMatrix) * v_tangent);

@@ -11,13 +11,10 @@ void MasterRenderer::_renderSkyEntity()
 {
 	if(_entityBus->getMainSkyEntity() != nullptr)
 	{
-		// Bind
 		_skyEntityColorRenderer.bind();
 
-		// Render sky entity
 		_skyEntityColorRenderer.render(_entityBus->getMainSkyEntity(), _entityBus->getMixSkyEntity());
 
-		// Unbind
 		_skyEntityColorRenderer.unbind();
 	}
 }
@@ -26,19 +23,14 @@ void MasterRenderer::_renderTerrainEntity()
 {
 	if(_entityBus->getTerrainEntity() != nullptr)
 	{
-		// Bind
 		_terrainEntityColorRenderer.bind();
 
-		// Process pointlight entities
 		_terrainEntityColorRenderer.processPointlightEntities(_entityBus->getPointLightEntities());
 
-		// Process spotlight entities
 		_terrainEntityColorRenderer.processSpotlightEntities(_entityBus->getSpotlightEntities());
 
-		// Render terrain entity
 		_terrainEntityColorRenderer.render(_entityBus->getTerrainEntity());
 
-		// Unbind
 		_terrainEntityColorRenderer.unbind();
 	}
 }
@@ -47,19 +39,14 @@ void MasterRenderer::_renderWaterEntity()
 {
 	if(_entityBus->getWaterEntity() != nullptr)
 	{
-		// Bind
 		_waterEntityColorRenderer.bind();
 
-		// Process pointlight entities
 		_waterEntityColorRenderer.processPointlightEntities(_entityBus->getPointLightEntities());
 
-		// Process spotlight entities
 		_waterEntityColorRenderer.processSpotlightEntities(_entityBus->getSpotlightEntities());
 
-		// Render water entity
 		_waterEntityColorRenderer.render(_entityBus->getWaterEntity());
 
-		// Unbind
 		_waterEntityColorRenderer.unbind();
 	}
 }
@@ -70,19 +57,14 @@ void MasterRenderer::_renderModelEntities()
 
 	if(!modelEntities.empty())
 	{
-		// Bind
 		_modelEntityColorRenderer.bind();
 
-		// Process pointlight entities
 		_modelEntityColorRenderer.processPointlightEntities(_entityBus->getPointLightEntities());
 
-		// Process spotlight entities
 		_modelEntityColorRenderer.processSpotlightEntities(_entityBus->getSpotlightEntities());
 
-		// Render solid model entities
 		for(const auto& [keyID, modelEntity] : modelEntities)
 		{
-			// Skip transparent entities
 			for(const auto& partID : modelEntity->getPartIDs())
 			{
 				if(modelEntity->getTransparency(partID) != 1.0f)
@@ -93,26 +75,21 @@ void MasterRenderer::_renderModelEntities()
 
 			if(modelEntity->isLevelOfDetailed()) // Low quality
 			{
-				// Try to find level of detail entity
 				auto levelOfDetailEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityID())->second;
 
-				// Save initial transformation
 				fvec3 initialPosition = levelOfDetailEntity->getBasePosition();
 				fvec3 initialRotation = levelOfDetailEntity->getBaseRotation();
 				fvec3 initialSize = levelOfDetailEntity->getBaseSize();
 				bool initialVisibility = levelOfDetailEntity->isVisible();
 
-				// Change transformation
 				levelOfDetailEntity->setBasePosition(modelEntity->getBasePosition());
 				levelOfDetailEntity->setBaseRotation(modelEntity->getBaseRotation());
 				levelOfDetailEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * initialSize);
 				levelOfDetailEntity->setVisible(modelEntity->isVisible());
 				levelOfDetailEntity->updateTransformationMatrix();
 
-				// Render level of detail entity
 				_modelEntityColorRenderer.render(levelOfDetailEntity, _entityBus->getReflectionEntities());
 
-				// Revert to initial transformation
 				levelOfDetailEntity->setBasePosition(initialPosition);
 				levelOfDetailEntity->setBaseRotation(initialRotation);
 				levelOfDetailEntity->setBaseSize(initialSize);
@@ -127,10 +104,8 @@ void MasterRenderer::_renderModelEntities()
 			CONTINUE:;
 		}
 
-		// Render transparent model entities
 		for(const auto& [keyID, modelEntity] : modelEntities)
 		{
-			// Skip solid entities
 			bool isSolid = true;
 			for(const auto& partID : modelEntity->getPartIDs())
 			{
@@ -147,26 +122,21 @@ void MasterRenderer::_renderModelEntities()
 
 			if(modelEntity->isLevelOfDetailed()) // Low quality
 			{
-				// Try to find level of detail entity
 				auto levelOfDetailEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityID())->second;
 
-				// Save initial transformation
 				fvec3 initialPosition = levelOfDetailEntity->getBasePosition();
 				fvec3 initialRotation = levelOfDetailEntity->getBaseRotation();
 				fvec3 initialSize = levelOfDetailEntity->getBaseSize();
 				bool initialVisibility = levelOfDetailEntity->isVisible();
 
-				// Change transformation
 				levelOfDetailEntity->setBasePosition(modelEntity->getBasePosition());
 				levelOfDetailEntity->setBaseRotation(modelEntity->getBaseRotation());
 				levelOfDetailEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * initialSize);
 				levelOfDetailEntity->setVisible(modelEntity->isVisible());
 				levelOfDetailEntity->updateTransformationMatrix();
 
-				// Render level of detail entity
 				_modelEntityColorRenderer.render(levelOfDetailEntity, _entityBus->getReflectionEntities());
 
-				// Revert to initial transformation
 				levelOfDetailEntity->setBasePosition(initialPosition);
 				levelOfDetailEntity->setBaseRotation(initialRotation);
 				levelOfDetailEntity->setBaseSize(initialSize);
@@ -179,7 +149,6 @@ void MasterRenderer::_renderModelEntities()
 			}
 		}
 
-		// Unbind
 		_modelEntityColorRenderer.unbind();
 	}
 }
@@ -190,16 +159,13 @@ void MasterRenderer::_renderBillboardEntities()
 
 	if(!billboardEntities.empty())
 	{
-		// Bind
 		_billboardEntityColorRenderer.bind();
 
-		// Render billboard entities
 		for(const auto& [keyID, entity] : billboardEntities)
 		{
 			_billboardEntityColorRenderer.render(entity);
 		}
 
-		// Unbind
 		_billboardEntityColorRenderer.unbind();
 	}
 }
@@ -208,22 +174,17 @@ void MasterRenderer::_renderAabbEntities()
 {
 	if(_renderBus.isAabbFrameRenderingEnabled())
 	{
-		// Temporary values
 		auto aabbEntities = _entityBus->getAabbEntities();
 
-		// Validate existence
 		if(!aabbEntities.empty())
 		{
-			// Bind
 			_aabbEntityColorRenderer.bind();
 
-			// Render AABB entities
 			for(const auto& [keyID, entity] : aabbEntities)
 			{
 				_aabbEntityColorRenderer.render(entity);
 			}
 
-			// Unbind
 			_aabbEntityColorRenderer.unbind();
 		}
 	}
@@ -246,14 +207,11 @@ void MasterRenderer::_renderGUI()
 {
 	if(!_entityBus->getImageEntities().empty() || !_entityBus->getTextEntities().empty())
 	{
-		// Bind
 		_imageEntityColorRenderer.bind();
 
-		// Sort rendering order
 		map<unsigned int, shared_ptr<ImageEntity>> orderedEntityMap;
 		for(const auto& [keyID, entity] : _entityBus->getImageEntities())
 		{
-			// Custom cursor entity must be rendered last
 			if(entity->getID() != _renderBus.getCursorEntityID())
 			{
 				orderedEntityMap.insert(make_pair(entity->getDepth(), entity));
@@ -264,10 +222,8 @@ void MasterRenderer::_renderGUI()
 			orderedEntityMap.insert(make_pair(entity->getDepth(), entity));
 		}
 
-		// Render entities
 		for(const auto& [keyID, entity] : orderedEntityMap)
 		{
-			// Check if entity is a text entity
 			auto castedTextEntity = dynamic_pointer_cast<TextEntity>(entity);
 
 			if(castedTextEntity == nullptr) // Image entity
@@ -278,7 +234,6 @@ void MasterRenderer::_renderGUI()
 			{
 				if(castedTextEntity->isDynamic()) // Dynamic text rendering
 				{
-					// Render every character individually
 					for(const auto& characterEntity : castedTextEntity->getCharacterEntities())
 					{
 						_imageEntityColorRenderer.render(characterEntity);
@@ -291,7 +246,6 @@ void MasterRenderer::_renderGUI()
 			}
 		}
 
-		// Unbind
 		_imageEntityColorRenderer.unbind();
 	}
 }

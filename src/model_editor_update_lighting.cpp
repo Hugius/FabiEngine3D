@@ -6,7 +6,6 @@ void ModelEditor::_updateLightingMenu()
 
 	if(screen->getID() == "modelEditorMenuLighting")
 	{
-		// Temporary values
 		auto isSpecular = _fe3d.model_isSpecular(_currentModelID, _currentPartID);
 		auto isReflective = _fe3d.model_isReflective(_currentModelID, _currentPartID);
 		auto reflectionType = _fe3d.model_getReflectionType(_currentModelID, _currentPartID);
@@ -16,7 +15,6 @@ void ModelEditor::_updateLightingMenu()
 		auto lightness = _fe3d.model_getLightness(_currentModelID, _currentPartID);
 		auto color = _fe3d.model_getColor(_currentModelID, _currentPartID);
 
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			for(const auto& partID : _fe3d.model_getPartIDs(_currentModelID))
@@ -73,7 +71,6 @@ void ModelEditor::_updateLightingMenu()
 			_gui.getOverlay()->createValueForm("reflectivity", "Reflectivity", (reflectivity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
-		// Update value forms
 		if(_gui.getOverlay()->checkValueForm("colorR", color.r, {}))
 		{
 			color.r /= 255.0f;
@@ -109,13 +106,11 @@ void ModelEditor::_updateLightingMenu()
 			_fe3d.model_setReflectivity(_currentModelID, _currentPartID, reflectivity);
 		}
 
-		// Update buttons hoverability
 		screen->getButton("specularShininess")->setHoverable(isSpecular);
 		screen->getButton("specularIntensity")->setHoverable(isSpecular);
 		screen->getButton("reflectionType")->setHoverable(isReflective);
 		screen->getButton("reflectivity")->setHoverable(isReflective);
 
-		// Update button text contents
 		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
 		screen->getButton("isReflective")->changeTextContent(isReflective ? "Reflective: ON" : "Reflective: OFF");
 		if(isReflective)

@@ -35,22 +35,17 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	string line;
 	while(getline(file, line))
 	{
-		// For file extraction
 		istringstream iss(line);
 
-		// Read type from file
 		string lineType;
 		iss >> lineType;
 
-		// Determine line type
 		if(lineType == "SKY")
 		{
-			// Data placeholders
 			string skyID, templateID;
 			fvec3 color;
 			float rotation, lightness;
 
-			// Read data from file
 			iss >>
 				skyID >>
 				templateID >>
@@ -60,7 +55,6 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				color.g >>
 				color.b;
 
-			// Create sky
 			if(_copyTemplateSky(skyID, templateID))
 			{
 				_fe3d.sky_setRotation(skyID, rotation);
@@ -70,24 +64,19 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "TERRAIN")
 		{
-			// Data placeholders
 			string terrainID, templateID;
 
-			// Read data from file
 			iss >> terrainID >> templateID;
 
-			// Create terrain
 			_copyTemplateTerrain(terrainID, templateID);
 		}
 		else if(lineType == "WATER")
 		{
-			// Data placeholders
 			string waterID, templateID;
 			fvec3 color;
 			fvec2 speed;
 			float transparency;
 
-			// Read data from file
 			iss >>
 				waterID >>
 				templateID >>
@@ -98,7 +87,6 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				speed.y >>
 				transparency;
 
-			// Create water
 			if(_copyTemplateWater(waterID, templateID))
 			{
 				_fe3d.water_setColor(waterID, color);
@@ -108,20 +96,16 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "MODEL")
 		{
-			// Data placeholders
 			string modelID, templateID;
 			fvec3 position, rotation, rotationOrigin, size, color;
 			float minHeight, maxHeight, transparency, lightness;
 			unsigned partCount;
 			bool isVisible, isFrozen, isAabbRaycastResponsive, isAabbCollisionResponsive;
 
-			// Read ID from file
 			iss >> modelID;
 
-			// Check if level of detail entitty
 			bool makeInvisible = (modelID[0] == '@');
 
-			// Read main data from file
 			iss >>
 				templateID >>
 				isVisible >>
@@ -149,10 +133,8 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				lightness >>
 				partCount;
 
-			// Perform part checks
 			if(partCount > 1)
 			{
-				// Read model part IDs
 				vector<string> partIDs;
 				for(unsigned int i = 0; i < partCount; i++)
 				{
@@ -161,14 +143,12 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 					partIDs.push_back(partID);
 				}
 
-				// Check if template model parts changed
 				if(partIDs.size() != _fe3d.model_getPartIDs(templateID).size())
 				{
 					Logger::throwWarning("World model parts with ID \"" + modelID + "\" differ from base model!");
 					continue;
 				}
 
-				// Check if template model parts changed
 				for(size_t i = 0; i < partIDs.size(); i++)
 				{
 					if(partIDs[i] != _fe3d.model_getPartIDs(templateID)[i])
@@ -179,10 +159,8 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				}
 			}
 
-			// Create model
 			if(_copyTemplateModel(modelID, templateID, position, false))
 			{
-				// Set properties
 				_fe3d.model_setBaseRotation(modelID, rotation);
 				_fe3d.model_setBaseRotationOrigin(modelID, rotationOrigin);
 				_fe3d.model_setBaseSize(modelID, size);
@@ -199,10 +177,8 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 					_fe3d.aabb_setCollisionResponsive(ID, isAabbCollisionResponsive);
 				}
 
-				// Iterate through model parts
 				for(unsigned int i = 0; i < partCount; i++)
 				{
-					// Read transformation data from file
 					string partID;
 					iss >>
 						partID >>
@@ -219,14 +195,12 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 						size.y >>
 						size.z;
 
-					// Set part transformation
 					_fe3d.model_setPartPosition(modelID, partID, position);
 					_fe3d.model_setPartRotation(modelID, partID, rotation);
 					_fe3d.model_setPartRotationOrigin(modelID, partID, rotationOrigin);
 					_fe3d.model_setPartSize(modelID, partID, size);
 				}
 
-				// Make invisible
 				if(makeInvisible)
 				{
 					_fe3d.model_setVisible(modelID, false);
@@ -235,14 +209,12 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "ANIMATION3D")
 		{
-			// Data placeholders
 			string animationID, modelID;
 			float speed;
 			int remainingLoops;
 			unsigned int frameIndex, fadeFramestep;
 			bool isPaused;
 
-			// Read main data from file
 			iss >>
 				animationID >>
 				modelID >>
@@ -252,15 +224,12 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				remainingLoops >>
 				fadeFramestep;
 
-			// Read speed data from file
 			map<string, fvec3> speeds;
 			while(true)
 			{
-				// Check if file has speed data left
 				string nextElement;
 				iss >> nextElement;
 
-				// Check for end of line
 				if(nextElement.empty())
 				{
 					break;
@@ -274,10 +243,8 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				}
 			}
 
-			// Start animation3D
 			_animation3dEditor.startModelAnimation(animationID, modelID, remainingLoops);
 
-			// Check if animation exists
 			//if(_animation3dEditor.isAnimationExisting(animationID))
 			//{
 			//	// Retrieve raw animation data for editing
@@ -313,7 +280,6 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "BILLBOARD")
 		{
-			// Data placeholders
 			string billboardID, templateID, textContent;
 			fvec3 position, rotation, color;
 			fvec2 size;
@@ -322,7 +288,6 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 			unsigned int animationRowIndex, animationColumnIndex;
 			bool isVisible, isAabbRaycastResponsive, isAabbCollisionResponsive, isFacingX, isFacingY, isAnimationPlaying, isAnimationPaused;
 
-			// Read data from file
 			iss >>
 				billboardID >>
 				templateID >>
@@ -352,16 +317,12 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				animationRowIndex >>
 				animationColumnIndex;
 
-			// Convert empty string
 			textContent = (textContent == "?") ? "" : textContent;
 
-			// Convert spaces
 			replace(textContent.begin(), textContent.end(), '?', ' ');
 
-			// Create billboard
 			if(_copyTemplateBillboard(billboardID, templateID, position, false))
 			{
-				// Set properties
 				_fe3d.billboard_setRotation(billboardID, rotation);
 				_fe3d.billboard_setSize(billboardID, size);
 				_fe3d.billboard_setFacingCameraX(billboardID, isFacingX);
@@ -381,12 +342,10 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "AABB")
 		{
-			// Data placeholders
 			string aabbID;
 			fvec3 position, size;
 			bool isVisible, isRaycastResponsive, isCollisionResponsive;
 
-			// Read data from file
 			iss >>
 				aabbID >>
 				isVisible >>
@@ -399,7 +358,6 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				size.y >>
 				size.z;
 
-			// Create AABB
 			_fe3d.aabb_create(aabbID);
 			_fe3d.aabb_setBasePosition(aabbID, position);
 			_fe3d.aabb_setBaseSize(aabbID, size);
@@ -410,12 +368,10 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "SOUND")
 		{
-			// Data placeholders
 			string soundID, templateID;
 			fvec3 position;
 			float maxVolume, maxDistance;
 
-			// Read data from file
 			iss >>
 				soundID >>
 				templateID >>
@@ -425,7 +381,6 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				maxVolume >>
 				maxDistance;
 
-			// Create sound
 			if(_copyTemplateSound(soundID, templateID, position, false))
 			{
 				_fe3d.sound3d_setMaxVolume(soundID, maxVolume);
@@ -435,12 +390,10 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "POINTLIGHT")
 		{
-			// Data placeholders
 			string pointlightID;
 			fvec3 position, radius, color;
 			float intensity;
 
-			// Read data from file
 			iss >>
 				pointlightID >>
 				position.x >>
@@ -454,7 +407,6 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				color.b >>
 				intensity;
 
-			// Create pointlight
 			_fe3d.pointlight_setPosition(pointlightID, position);
 			_fe3d.pointlight_setRadius(pointlightID, radius);
 			_fe3d.pointlight_setColor(pointlightID, color);
@@ -463,12 +415,10 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "SPOTLIGHT")
 		{
-			// Data placeholders
 			string spotlightID;
 			fvec3 position, color;
 			float yaw, pitch, intensity, angle, distance;
 
-			// Read data from file
 			iss >>
 				spotlightID >>
 				position.x >>
@@ -483,7 +433,6 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				angle >>
 				distance;
 
-			// Create spotlight
 			_fe3d.spotlight_setPosition(spotlightID, position);
 			_fe3d.spotlight_setColor(spotlightID, color);
 			_fe3d.spotlight_setYaw(spotlightID, yaw);
@@ -495,18 +444,15 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "REFLECTION")
 		{
-			// Data placeholders
 			string reflectionID;
 			fvec3 position;
 
-			// Read data from file
 			iss >>
 				reflectionID >>
 				position.x >>
 				position.y >>
 				position.z;
 
-			// Create reflection
 			_fe3d.reflection_create(reflectionID);
 			_fe3d.reflection_setPosition(reflectionID, position);
 			_fe3d.reflection_capture(reflectionID);
@@ -514,29 +460,24 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "LIGHTING_AMBIENT")
 		{
-			// Data placeholders
 			fvec3 color;
 			float intensity;
 
-			// Read data from file
 			iss >>
 				color.r >>
 				color.g >>
 				color.b >>
 				intensity;
 
-			// Enable ambient lighting
 			_fe3d.gfx_enableAmbientLighting();
 			_fe3d.gfx_setAmbientLightingColor(color);
 			_fe3d.gfx_setAmbientLightingIntensity(intensity);
 		}
 		else if(lineType == "LIGHTING_DIRECTIONAL")
 		{
-			// Data placeholders
 			fvec3 position, color;
 			float intensity, billboardSize;
 
-			// Read data from file
 			iss >>
 				position.x >>
 				position.y >>
@@ -547,7 +488,6 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				intensity >>
 				billboardSize;
 
-			// Enable directional lighting
 			_fe3d.gfx_enableDirectionalLighting();
 			_fe3d.gfx_setDirectionalLightingPosition(position);
 			_fe3d.gfx_setDirectionalLightingIntensity(intensity);
@@ -555,13 +495,11 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "GRAPHICS_SHADOWS")
 		{
-			// Data placeholders
 			float size, lightness;
 			fvec3 position, center;
 			bool isFollowingCamera;
 			int interval;
 
-			// Read data from file
 			iss >>
 				size >>
 				lightness >>
@@ -574,7 +512,6 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				isFollowingCamera >>
 				interval;
 
-			// Enable shadows
 			_fe3d.gfx_enableShadows();
 			_fe3d.gfx_setShadowEyePosition(position);
 			_fe3d.gfx_setShadowCenterPosition(center);
@@ -586,26 +523,20 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "GRAPHICS_MOTION_BLUR")
 		{
-			// Data placeholders
 			float strength;
 
-			// Read data from file
 			iss >> strength;
 
-			// Enable motion blur
 			_fe3d.gfx_enableMotionBlur();
 			_fe3d.gfx_setMotionBlurStrength(strength);
 		}
 		else if(lineType == "GRAPHICS_DOF")
 		{
-			// Data placeholders
 			bool isDynamic;
 			float blurDistance, maxDistance;
 
-			// Read data from file
 			iss >> isDynamic >> blurDistance >> maxDistance;
 
-			// Enable DOF
 			_fe3d.gfx_enableDOF();
 			_fe3d.gfx_setDofDynamic(isDynamic);
 			_fe3d.gfx_setDofDynamicDistance(maxDistance);
@@ -613,14 +544,11 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "GRAPHICS_FOG")
 		{
-			// Data placeholders
 			float minDistance, maxDistance, thickness;
 			fvec3 color;
 
-			// Read data from file
 			iss >> minDistance >> maxDistance >> thickness >> color.r >> color.g >> color.b;
 
-			// Enable fog
 			_fe3d.gfx_enableFog();
 			_fe3d.gfx_setFogMinDistance(minDistance);
 			_fe3d.gfx_setFogMaxDistance(maxDistance);
@@ -629,20 +557,15 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "GRAPHICS_LENS_FLARE")
 		{
-			// Data placeholders
 			string flareMapPath;
 			float intensity, sensitivity;
 
-			// Read data from file
 			iss >> flareMapPath >> intensity >> sensitivity;
 
-			// Convert empty string
 			flareMapPath = (flareMapPath == "?") ? "" : flareMapPath;
 
-			// Convert spaces
 			replace(flareMapPath.begin(), flareMapPath.end(), '?', ' ');
 
-			// Enable lens flare
 			_fe3d.gfx_enableLensFlare();
 			_fe3d.gfx_setLensFlareMap(flareMapPath);
 			_fe3d.gfx_setLensFlareIntensity(intensity);
@@ -650,27 +573,21 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		}
 		else if(lineType == "GRAPHICS_SKY_EXPOSURE")
 		{
-			// Data placeholders
 			float intensity, speed;
 
-			// Read data from file
 			iss >> intensity >> speed;
 
-			// Enable sky exposure
 			_fe3d.gfx_enableSkyExposure();
 			_fe3d.gfx_setSkyExposureIntensity(intensity);
 			_fe3d.gfx_setSkyExposureSpeed(speed);
 		}
 		else if(lineType == "GRAPHICS_BLOOM")
 		{
-			// Data placeholders
 			unsigned int type, blurCount;
 			float intensity;
 
-			// Read data from file
 			iss >> type >> intensity >> blurCount;
 
-			// Enable bloom
 			_fe3d.gfx_enableBloom();
 			_fe3d.gfx_setBloomType(BloomType(type));
 			_fe3d.gfx_setBloomIntensity(intensity);

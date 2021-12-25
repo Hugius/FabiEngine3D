@@ -123,7 +123,6 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 {
 	if(entity->isVisible())
 	{
-		// Shader uniforms
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_isBright", entity->isBright());
@@ -131,13 +130,11 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		_shader.uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
 		_shader.uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
-		// Enable face culling
 		if(entity->isFaceCulled())
 		{
 			glEnable(GL_CULL_FACE);
 		}
 
-		// Bind textures
 		if(!entity->getPreviousReflectionEntityID().empty())
 		{
 			glActiveTexture(GL_TEXTURE0);
@@ -149,17 +146,13 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntities.at(entity->getCurrentReflectionEntityID())->getCubeMap());
 		}
 
-		// Iterate through parts
 		for(const auto& partID : entity->getPartIDs())
 		{
-			// Temporary values
 			const auto buffer = entity->getRenderBuffer(partID);
 
-			// Model matrices
 			const auto& transformationMatrix = entity->getTransformationMatrix(partID);
 			mat33 normalTransformationMatrix = Math::transposeMatrix(Math::invertMatrix(mat33(transformationMatrix)));
 
-			// Shader uniforms
 			_shader.uploadUniform("u_isReflective", entity->isReflective(partID));
 			_shader.uploadUniform("u_emissionIntensity", entity->getEmissionIntensity(partID));
 			_shader.uploadUniform("u_textureRepeat", entity->getTextureRepeat(partID));
@@ -181,13 +174,11 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			_shader.uploadUniform("u_reflectionType", static_cast<int>(entity->getReflectionType(partID)));
 			_shader.uploadUniform("u_isWireframed", (entity->isWireframed(partID) || _renderBus.isWireframeRenderingEnabled()));
 
-			// Enable wireframe
 			if(entity->isWireframed(partID))
 			{
 				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 			}
 
-			// Bind textures
 			if(entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE4);
@@ -214,17 +205,13 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 				glBindTexture(GL_TEXTURE_2D, entity->getNormalMap(partID));
 			}
 
-			// Bind buffer
 			glBindVertexArray(buffer->getVAO());
 
-			// Render
 			glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 			_renderBus.increaseTriangleCount(buffer->getVertexCount() / 3);
 
-			// Unbind buffer
 			glBindVertexArray(0);
 
-			// Unbind textures
 			if(entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE4);
@@ -251,14 +238,12 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 
-			// Disable wireframe
 			if(entity->isWireframed(partID))
 			{
 				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 			}
 		}
 
-		// Unbind textures
 		if(entity->getPreviousReflectionEntityID().empty())
 		{
 			glActiveTexture(GL_TEXTURE0);
@@ -270,7 +255,6 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 		}
 
-		// Disable face culling
 		if(entity->isFaceCulled())
 		{
 			glDisable(GL_CULL_FACE);

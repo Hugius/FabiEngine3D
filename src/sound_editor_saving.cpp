@@ -22,19 +22,14 @@ const bool SoundEditor::saveToFile() const
 
 	for(const auto& soundID : _loadedSoundIDs)
 	{
-		// Data to save
 		auto audioPath = _fe3d.sound2d_getAudioPath(soundID);
 
-		// Convert to short path
 		audioPath = string(audioPath.empty() ? "" : audioPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
-		// Convert empty string
 		audioPath = (audioPath.empty()) ? "?" : audioPath;
 
-		// Convert spaces
 		replace(audioPath.begin(), audioPath.end(), ' ', '?');
 
-		// Write data to file
 		file << soundID << " " << audioPath << endl;
 	}
 

@@ -65,17 +65,14 @@ vec3 calculateDiffuseMapping()
 {
 	if (u_hasDiffuseMap)
 	{
-		// Calculate diffuse map color
 		vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
 
-		// Check if transparent
 		if (diffuseMapColor.a < u_minTextureTransparency)
 		{
 			discard;
 		}
 
-		// Return
 		return diffuseMapColor.rgb;
 	}
 	else
@@ -88,16 +85,13 @@ vec3 calculateEmissionMapping()
 {
 	if (u_hasEmissionMap)
 	{
-		// Calculate emission map color
 		vec4 emissionMapColor = texture(u_emissionMap, f_uv);
 
-		// Check if transparent
 		if (emissionMapColor.a < u_minTextureTransparency)
 		{
 			return vec3(0.0f);
 		}
 
-		// Return
 		return (emissionMapColor.rgb * u_emissionIntensity);
 	}
 	else
@@ -110,15 +104,12 @@ vec3 calculateFog(vec3 color)
 {
 	if (u_isFogEnabled)
 	{
-        // Calculate distance in world space
         float fragmentDistance = distance(f_position.xyz, u_cameraPosition);
 
-        // Calculate fog intensity
 		float distanceDifference = (u_fogMaxDistance - u_fogMinDistance);
 		float distancePart = clamp(((fragmentDistance - u_fogMinDistance) / distanceDifference), 0.0f, 1.0f);
 		float mixValue = (distancePart * u_fogThickness);
 
-		// Return
 		return mix(color, u_fogColor, mixValue);
 	}
 	else

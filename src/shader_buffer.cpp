@@ -100,17 +100,14 @@ const UniformID ShaderBuffer::_getUniformID(const string& uniformID)
 	auto iterator = _uniformCache.find(uniformID);
 	if(iterator == _uniformCache.end())
 	{
-		// Retrieve uniform location
 		auto uniform = glGetUniformLocation(_program, uniformID.c_str());
 		if(uniform == -1)
 		{
 			Logger::throwError("ShaderBuffer::_getUniformID ---> ", uniformID);
 		}
 
-		// Cache uniform
 		_uniformCache.insert(make_pair(uniformID, uniform));
 
-		// Return new uniform
 		return uniform;
 	}
 	else

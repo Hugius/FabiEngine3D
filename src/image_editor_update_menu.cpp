@@ -8,7 +8,6 @@ void ImageEditor::_updateMainMenu()
 
 	if(screen->getID() == "imageEditorMenuMain")
 	{
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused())) // Back button
 		{
 			_gui.getOverlay()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
@@ -40,7 +39,6 @@ void ImageEditor::_updateMainMenu()
 			_isDeletingImage = true;
 		}
 
-		// Update answer forms
 		if(_gui.getOverlay()->isAnswerFormConfirmed("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
@@ -63,15 +61,12 @@ void ImageEditor::_updateChoiceMenu()
 
 	if(screen->getID() == "imageEditorMenuChoice")
 	{
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
-			// Hide preview billboard
 			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
 			_fe3d.billboard_setWireframed(PREVIEW_BILLBOARD_ID, false);
 			_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
 
-			// Miscellaneous
 			_currentImageID = "";
 			_fe3d.text_setVisible(_gui.getOverlay()->getTextField("imageID")->getEntityID(), false);
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("imageEditorMenuMain");
@@ -79,31 +74,26 @@ void ImageEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
-			// Validate project ID
 			if(_currentProjectID.empty())
 			{
 				Logger::throwError("ImageEditor::_updateChoiceMenu");
 			}
 
-			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\diffuse_map\\");
 
-			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
-			// Validate chosen file
 			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
 			if(filePath.empty())
 			{
 				return;
 			}
 
-			// Validate directory of file
 			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
 			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
@@ -111,7 +101,6 @@ void ImageEditor::_updateChoiceMenu()
 				return;
 			}
 
-			// Set diffuse map
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.image_setDiffuseMap(_currentImageID, finalFilePath);

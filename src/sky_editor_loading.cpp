@@ -32,14 +32,11 @@ const vector<array<string, 6>> SkyEditor::getTexturePathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		// Values
 		string skyID;
 		array<string, 6> cubeMapPaths = {};
 
-		// For file extraction
 		istringstream iss(line);
 
-		// Load base data
 		iss >>
 			skyID >>
 			cubeMapPaths[0] >>
@@ -49,23 +46,18 @@ const vector<array<string, 6>> SkyEditor::getTexturePathsFromFile() const
 			cubeMapPaths[4] >>
 			cubeMapPaths[5];
 
-		// Iterate through paths
 		for(auto& diffuseMapPath : cubeMapPaths)
 		{
-			// Convert empty string
 			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 
-			// Convert spaces
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 
-			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 			}
 		}
 
-		// Save paths
 		texturePaths.push_back(cubeMapPaths);
 	}
 
@@ -98,16 +90,13 @@ const bool SkyEditor::loadFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		// For file extraction
 		istringstream iss(line);
 
-		// Values
 		string skyID;
 		array<string, 6> cubeMapPaths{};
 		float rotation, lightness;
 		fvec3 color;
 
-		// Load base data
 		iss >>
 			skyID >>
 			cubeMapPaths[0] >>
@@ -122,32 +111,24 @@ const bool SkyEditor::loadFromFile()
 			color.g >>
 			color.b;
 
-		// Iterate through paths
 		for(auto& cubeMapPath : cubeMapPaths)
 		{
-			// Convert empty string
 			cubeMapPath = (cubeMapPath == "?") ? "" : cubeMapPath;
 
-			// Convert spaces
 			replace(cubeMapPath.begin(), cubeMapPath.end(), '?', ' ');
 
-			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				cubeMapPath = string("projects\\" + _currentProjectID + "\\" + cubeMapPath);
 			}
 		}
 
-		// Create sky
 		_fe3d.sky_create(skyID);
 
-		// Check if sky creation went well
 		if(_fe3d.sky_isExisting(skyID))
 		{
-			// Add sky ID
 			_loadedSkyIDs.push_back(skyID);
 
-			// Set properties
 			_fe3d.sky_setCubeMaps(skyID, cubeMapPaths);
 			_fe3d.sky_setLightness(skyID, lightness);
 			_fe3d.sky_setRotation(skyID, rotation);

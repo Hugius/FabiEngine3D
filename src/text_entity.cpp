@@ -23,23 +23,19 @@ void TextEntity::updateCharacterEntities()
 
 	for(const auto& character : _characterEntities)
 	{
-		// Temporary values
 		float xCharOffset = static_cast<float>(index) * xCharSize;
 		float yCharOffset = 0.0f;
 
-		// Check if text is isCentered
 		if(_isCentered)
 		{
 			xCharOffset -= (this->getSize().x / 2.0f);
 			yCharOffset -= (yCharSize / 2.0f);
 		}
 
-		// Set new transformation
 		character->setPosition(this->getPosition() + fvec2(xCharOffset, yCharOffset));
 		character->setRotation(this->getRotation());
 		character->setSize(fvec2(xCharSize, yCharSize));
 
-		// Copy all properties
 		character->setColor(this->getColor());
 		character->setMirroredHorizontally(this->isMirroredHorizonally());
 		character->setMirroredVertically(this->isMirroredVertically());
@@ -48,13 +44,11 @@ void TextEntity::updateCharacterEntities()
 		character->setMaxPosition(this->getMaxPosition());
 		character->setVisible(this->isVisible());
 
-		// Update transformation matrix
 		if(this->isVisible())
 		{
 			character->updateTransformationMatrix();
 		}
 
-		// Miscellaneous
 		index++;
 	}
 }

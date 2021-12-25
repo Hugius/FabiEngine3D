@@ -23,7 +23,6 @@ const bool BillboardEditor::saveToFile() const
 
 	for(const auto& billboardID : _loadedBillboardIDs)
 	{
-		// Data to save
 		auto size = _fe3d.billboard_getSize(billboardID);
 		auto color = _fe3d.billboard_getColor(billboardID);
 		auto diffuseMapPath = _fe3d.billboard_getDiffuseMapPath(billboardID);
@@ -37,24 +36,20 @@ const bool BillboardEditor::saveToFile() const
 		auto lightness = _fe3d.billboard_getLightness(billboardID);
 		auto textureRepeat = _fe3d.billboard_getTextureRepeat(billboardID);
 
-		// Convert to short path
 		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 		emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 		fontPath = string(fontPath.empty() ? "" : fontPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
-		// Convert empty string
 		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 		emissionMapPath = (emissionMapPath.empty()) ? "?" : emissionMapPath;
 		fontPath = (fontPath.empty()) ? "?" : fontPath;
 		textContent = (textContent.empty()) ? "?" : textContent;
 
-		// Convert spaces
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 		replace(emissionMapPath.begin(), emissionMapPath.end(), ' ', '?');
 		replace(fontPath.begin(), fontPath.end(), ' ', '?');
 		replace(textContent.begin(), textContent.end(), ' ', '?');
 
-		// Write data to file
 		file <<
 			billboardID << " " <<
 			size.x << " " <<

@@ -64,10 +64,8 @@ void WorldEditor::clearEditorWorld()
 
 	for(const auto& [ID, templateID] : _loadedModelIDs)
 	{
-		// Delete model
 		_fe3d.model_delete(ID);
 
-		// Stop animation
 		auto animationID = _animation3dEditor.getStartedModelAnimationIDs(ID);
 		if(!animationID.empty())
 		{
@@ -77,10 +75,8 @@ void WorldEditor::clearEditorWorld()
 
 	for(const auto& [ID, templateID] : _loadedBillboardIDs)
 	{
-		// Delete billboard
 		_fe3d.billboard_delete(ID);
 
-		// Stop animation
 		auto animationID = _animation2dEditor.getStartedBillboardAnimationIDs(ID);
 		if(!animationID.empty())
 		{
@@ -90,10 +86,8 @@ void WorldEditor::clearEditorWorld()
 
 	for(const auto& ID : _loadedPointlightIDs)
 	{
-		// Delete pointlight
 		_fe3d.pointlight_delete(ID);
 
-		// Delete corresponding lamp model
 		if(!_currentWorldID.empty())
 		{
 			_fe3d.model_delete("@@lamp_" + ID);
@@ -102,10 +96,8 @@ void WorldEditor::clearEditorWorld()
 
 	for(const auto& ID : _loadedSpotlightIDs)
 	{
-		// Delete spotlight
 		_fe3d.spotlight_delete(ID);
 
-		// Delete corresponding torch model
 		if(!_currentWorldID.empty())
 		{
 			_fe3d.model_delete("@@torch_" + ID);
@@ -114,10 +106,8 @@ void WorldEditor::clearEditorWorld()
 
 	for(const auto& ID : _loadedReflectionIDs)
 	{
-		// Delete reflection
 		_fe3d.reflection_delete(ID);
 
-		// Delete corresponding camera model
 		if(!_currentWorldID.empty())
 		{
 			_fe3d.model_delete("@@camera_" + ID);
@@ -126,10 +116,8 @@ void WorldEditor::clearEditorWorld()
 
 	for(const auto& [ID, templateID] : _loadedSoundIDs)
 	{
-		// Delete sound
 		_fe3d.sound3d_delete(ID);
 
-		// Delete corresponding speaker model
 		if(!_currentWorldID.empty())
 		{
 			_fe3d.model_delete("@@speaker_" + ID);
@@ -178,7 +166,6 @@ const vector<string> WorldEditor::_getWorldIDs() const
 
 	if(Tools::isDirectoryExisting(directoryPath))
 	{
-		// Get all world IDs
 		for(const auto& fileName : Tools::getFilesFromDirectory(directoryPath))
 		{
 			auto nameSize = (fileName.size() - string(".fe3d").size());
@@ -233,7 +220,6 @@ void WorldEditor::_handleValueChanging(const string& screenID, string buttonID, 
 	}
 	else
 	{
-		// Check if something is filled in
 		if(writeField->isActive())
 		{
 			value = (static_cast<float>(stoi(writeField->getTextContent())) / multiplier); // Update value in realtime

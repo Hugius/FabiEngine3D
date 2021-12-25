@@ -23,11 +23,9 @@ const vector<ScriptValue> ScriptInterpreter::_processFe3dFunctionCall(const stri
 
 	if(!_hasThrownError)
 	{
-		// Temporary values
 		auto functionName = scriptLine.substr(0, parenthesisIndex);
 		bool isExecuted = false;
 
-		// Possibly execute FE3D function
 		isExecuted = (isExecuted || _executeFe3dSkySetter(functionName, args, returnValues));
 		isExecuted = (isExecuted || _executeFe3dSkyGetter(functionName, args, returnValues));
 		isExecuted = (isExecuted || _executeFe3dTerrainSetter(functionName, args, returnValues));
@@ -80,14 +78,12 @@ const vector<ScriptValue> ScriptInterpreter::_processFe3dFunctionCall(const stri
 		isExecuted = (isExecuted || _executeFe3dMiscSetter(functionName, args, returnValues));
 		isExecuted = (isExecuted || _executeFe3dMiscGetter(functionName, args, returnValues));
 
-		// Check if function call not existing
 		if(!isExecuted)
 		{
 			_throwScriptError("fe3d function not existing!");
 
 		}
 
-		// Increase function calls
 		_engineFunctionCallCount++;
 	}
 

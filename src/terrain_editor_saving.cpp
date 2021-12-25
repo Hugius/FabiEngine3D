@@ -18,7 +18,6 @@ const bool TerrainEditor::saveToFile() const
 
 	for(const auto& terrainID : _loadedTerrainIDs)
 	{
-		// Values
 		auto heightMapPath = _fe3d.terrain_getHeightMapPath(terrainID);
 		auto diffuseMapPath = _fe3d.terrain_getDiffuseMapPath(terrainID);
 		auto normalMapPath = _fe3d.terrain_getNormalMapPath(terrainID);
@@ -39,7 +38,6 @@ const bool TerrainEditor::saveToFile() const
 		auto blueTextureRepeat = _fe3d.terrain_getBlueTextureRepeat(terrainID);
 		auto isSpecular = _fe3d.terrain_isSpecular(terrainID);
 
-		// Convert to short path
 		heightMapPath = string(heightMapPath.empty() ? "" : heightMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 		normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
@@ -51,7 +49,6 @@ const bool TerrainEditor::saveToFile() const
 		greenNormalMapPath = string(greenNormalMapPath.empty() ? "" : greenNormalMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 		blueNormalMapPath = string(blueNormalMapPath.empty() ? "" : blueNormalMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
-		// Convert empty string
 		heightMapPath = (heightMapPath.empty()) ? "?" : heightMapPath;
 		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 		normalMapPath = (normalMapPath.empty()) ? "?" : normalMapPath;
@@ -63,7 +60,6 @@ const bool TerrainEditor::saveToFile() const
 		greenNormalMapPath = (greenNormalMapPath.empty()) ? "?" : greenNormalMapPath;
 		blueNormalMapPath = (blueNormalMapPath.empty()) ? "?" : blueNormalMapPath;
 
-		// Convert spaces
 		replace(heightMapPath.begin(), heightMapPath.end(), ' ', '?');
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 		replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
@@ -75,7 +71,6 @@ const bool TerrainEditor::saveToFile() const
 		replace(greenNormalMapPath.begin(), greenNormalMapPath.end(), ' ', '?');
 		replace(blueNormalMapPath.begin(), blueNormalMapPath.end(), ' ', '?');
 
-		// Write terrain data to file
 		file <<
 			terrainID << " " <<
 			heightMapPath << " " <<

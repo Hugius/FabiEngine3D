@@ -8,11 +8,9 @@ void AabbEntity::updateTransformation()
 {
 	if(_position != _positionTarget)
 	{
-		// Update position
 		auto speedMultiplier = Math::normalize(_positionTarget - _position);
 		_position += (speedMultiplier * _positionTargetSpeed);
 
-		// Correct position
 		if(fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)
 		{
 			_position.x = _positionTarget.x;
@@ -29,11 +27,9 @@ void AabbEntity::updateTransformation()
 
 	if(_size != _sizeTarget)
 	{
-		// Update size
 		auto speedMultiplier = Math::normalize(_sizeTarget - _size);
 		_size += (speedMultiplier * _sizeTargetSpeed);
 
-		// Correct size
 		_size = fvec3(max(0.0f, _size.x), max(0.0f, _size.y), max(0.0f, _size.z));
 		if(fabsf(_sizeTarget.x - _size.x) <= _sizeTargetSpeed)
 		{

@@ -30,7 +30,6 @@ void Animation3dEditor::startModelAnimation(const string& animationID, const str
 	bool hasAllParts = true;
 	for(const auto& partID : animation.getPartIDs())
 	{
-		// Part cannot be empty
 		if(!partID.empty())
 		{
 			if(!_fe3d.model_hasPart(modelID, partID))

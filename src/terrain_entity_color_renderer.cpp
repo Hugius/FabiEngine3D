@@ -109,16 +109,13 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 {
 	if(entity->isVisible())
 	{
-		// Enable wireframe
 		if(entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
 
-		// Enable face culling
 		glEnable(GL_CULL_FACE);
 
-		// Shader uniforms
 		_shader.uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus.isWireframeRenderingEnabled()));
 		_shader.uploadUniform("u_isSpecular", entity->isSpecular());
 		_shader.uploadUniform("u_textureRepeat", entity->getTextureRepeat());
@@ -139,7 +136,6 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 		_shader.uploadUniform("u_hasBlueNormalMap", entity->hasBlueNormalMap());
 		_shader.uploadUniform("u_wireframeColor", entity->getWireframeColor());
 
-		// Bind textures
 		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE1);
@@ -186,17 +182,13 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 			glBindTexture(GL_TEXTURE_2D, entity->getBlueNormalMap());
 		}
 
-		// Bind buffer
 		glBindVertexArray(entity->getRenderBuffer()->getVAO());
 
-		// Render
 		glDrawArrays(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount());
 		_renderBus.increaseTriangleCount(entity->getRenderBuffer()->getVertexCount() / 3);
 
-		// Unbind buffer
 		glBindVertexArray(0);
 
-		// Unbind textures
 		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE1);
@@ -243,10 +235,8 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 
-		// Disable face culling
 		glDisable(GL_CULL_FACE);
 
-		// Disable wireframe
 		if(entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

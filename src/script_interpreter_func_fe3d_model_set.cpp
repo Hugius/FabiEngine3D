@@ -11,20 +11,17 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Validate ID
 			if(!_validateFe3dID(args[0].getString()))
 			{
 				return true;
 			}
 
-			// Validate existence
 			if(_fe3d.model_isExisting(args[0].getString()))
 			{
 				_throwScriptError("model already exists!");
 				return true;
 			}
 
-			// Validate template
 			if(_validateFe3dModel(args[1].getString(), true))
 			{
 				_worldEditor.copyTemplateModel(args[0].getString(), ("@" + args[1].getString()),
@@ -50,17 +47,14 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			// Iterate through models
 			for(const auto& ID : _fe3d.model_getIDs())
 			{
-				// Cannot be template
 				if(ID[0] != '@')
 				{
 					_fe3d.model_delete(ID);
 				}
 			}
 
-			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -251,23 +245,19 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				// Retrieve all bound AABB IDs
 				auto aabbIDs = _fe3d.aabb_getChildIDs(args[0].getString(), AabbParentEntityType::MODEL);
 
-				// Check if modelEntity has no AABBs
 				if(aabbIDs.empty())
 				{
 					_throwScriptError("model with ID \"" + args[0].getString() + "\" has no bound AABBs!");
 					return true;
 				}
 
-				// Set responsiveness
 				for(const auto& ID : aabbIDs)
 				{
 					_fe3d.aabb_setRaycastResponsive(ID, args[1].getBoolean());
 				}
 
-				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -280,23 +270,19 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				// Retrieve all bound AABB IDs
 				auto aabbIDs = _fe3d.aabb_getChildIDs(args[0].getString(), AabbParentEntityType::MODEL);
 
-				// Check if modelEntity has no AABBs
 				if(aabbIDs.empty())
 				{
 					_throwScriptError("model with ID \"" + args[0].getString() + "\" has no bound AABBs!");
 					return true;
 				}
 
-				// Set responsiveness
 				for(const auto& ID : aabbIDs)
 				{
 					_fe3d.aabb_setCollisionResponsive(ID, args[1].getBoolean());
 				}
 
-				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

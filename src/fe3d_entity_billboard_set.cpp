@@ -32,7 +32,6 @@ void FabiEngine3D::billboard_deleteGroup(const string& ID)
 		{
 			auto subString = entity->getID().substr(0, ID.size());
 
-			// If entity matches ID
 			if(subString == ID)
 			{
 				billboard_delete(entity->getID());
@@ -235,10 +234,8 @@ void FabiEngine3D::billboard_setTextContent(const string& ID, const string& valu
 
 	if(entity->getTextContent() != value)
 	{
-		// Set text content
 		entity->setTextContent(value);
 
-		// Load diffuse map
 		entity->setDiffuseMap(_core->_textureLoader.load2dTexture(value, fontPath), true);
 	}
 }

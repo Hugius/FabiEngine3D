@@ -102,7 +102,6 @@ const string LibraryLoader::getCpuModel() const
 	reverse(nameString.begin(), nameString.end());
 	for(size_t i = 0; i < nameString.size(); i++)
 	{
-		// Check if end of whitespace found
 		if(nameString[i] != 0)
 		{
 			result = nameString.substr(i);

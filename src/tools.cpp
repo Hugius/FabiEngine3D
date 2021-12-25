@@ -51,10 +51,8 @@ const vector<string> Tools::getDirectoriesFromDirectory(const string& path)
 	vector<string> directoryNames;
 	for(const auto& entry : directory_iterator(path))
 	{
-		// Extract path
 		string directoryPath = entry.path().string();
 
-		// Check if path is directory
 		if(isDirectoryExisting(directoryPath))
 		{
 			directoryPath.erase(0, path.size());
@@ -148,11 +146,9 @@ const string Tools::chooseExplorerDirectory(const string& startingDirectory)
 
 	if(pidl != 0)
 	{
-		// Extract directory path
 		char directoryPath[MAX_PATH];
 		SHGetPathFromIDList(pidl, directoryPath);
 
-		// Free memory
 		IMalloc* imalloc = 0;
 		if(SUCCEEDED(SHGetMalloc(&imalloc)))
 		{
@@ -160,7 +156,6 @@ const string Tools::chooseExplorerDirectory(const string& startingDirectory)
 			imalloc->Release();
 		}
 
-		// Return chosen directory
 		return directoryPath;
 	}
 

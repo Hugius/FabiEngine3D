@@ -8,7 +8,6 @@ void WorldEditor::_updateModelMenu()
 
 	if(screen->getID() == "worldEditorMenuModel")
 	{
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused())) // Back button
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
@@ -22,24 +21,19 @@ void WorldEditor::_updateModelMenu()
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuModelChoice");
 
-			// Clear all buttons from scrolling list
 			_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->deleteButtons();
 
-			// Add the ID of every placed model
 			auto IDs = _fe3d.model_getIDs();
 			sort(IDs.begin(), IDs.end());
 			for(auto& modelID : IDs)
 			{
-				// Cannot be template
 				if(modelID[0] != '@')
 				{
-					// Removing the unique number from the ID
 					reverse(modelID.begin(), modelID.end());
 					string rawID = modelID.substr(modelID.find('_') + 1);
 					reverse(rawID.begin(), rawID.end());
 					reverse(modelID.begin(), modelID.end());
 
-					// Add new button
 					_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->createButton(modelID, rawID);
 				}
 			}
@@ -53,10 +47,8 @@ void WorldEditor::_updateModelPlacingMenu()
 
 	if(screen->getID() == "worldEditorMenuModelPlace")
 	{
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
-			// Reset placing
 			if(!_currentTemplateModelID.empty())
 			{
 				_fe3d.text_setVisible(_gui.getOverlay()->getTextField("modelID")->getEntityID(), false);
@@ -64,25 +56,19 @@ void WorldEditor::_updateModelPlacingMenu()
 				_currentTemplateModelID = "";
 			}
 
-			// Miscellaneous
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuModel");
 			return;
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			// Iterate through every created model
 			for(const auto& modelID : _modelEditor.getLoadedIDs())
 			{
-				// Check if model has mesh
 				if(_fe3d.model_isExisting(modelID))
 				{
-					// Check if button is hovered
 					if(screen->getScrollingList("modelList")->getButton(modelID)->isHovered())
 					{
-						// Reset right window
 						_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
 
-						// Deactivate everything
 						_deactivateModel();
 						_deactivateBillboard();
 						_deactivateSound();
@@ -90,7 +76,6 @@ void WorldEditor::_updateModelPlacingMenu()
 						_deactivateSpotlight();
 						_deactivateReflection();
 
-						// Set new template model
 						_currentTemplateModelID = modelID;
 						_fe3d.model_setBasePosition(_currentTemplateModelID, fvec3(0.0f));
 						_fe3d.model_setVisible(_currentTemplateModelID, true);
@@ -98,7 +83,6 @@ void WorldEditor::_updateModelPlacingMenu()
 						_fe3d.text_setContent(_gui.getOverlay()->getTextField("modelID")->getEntityID(), "Model: " + _currentTemplateModelID.substr(1), 0.025f);
 						_fe3d.misc_centerCursor();
 
-						// Add position value forms for placing without terrain
 						if(_fe3d.terrain_getSelectedID().empty())
 						{
 							_gui.getOverlay()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
@@ -106,7 +90,6 @@ void WorldEditor::_updateModelPlacingMenu()
 							_gui.getOverlay()->createValueForm("positionZ", "Z", 0.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 						}
 
-						// Disable model choosing
 						break;
 					}
 				}
@@ -121,28 +104,21 @@ void WorldEditor::_updateModelChoosingMenu()
 
 	if(screen->getID() == "worldEditorMenuModelChoice")
 	{
-		// Remove deleted models from the scrollingList buttons
 		for(const auto& button : _gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->getButtons())
 		{
-			// Check if model is still existing
 			if(!_fe3d.model_isExisting(button->getID()))
 			{
-				// Delete button
 				_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuModelChoice")->getScrollingList("modelList")->deleteButton(button->getID());
 				break;
 			}
 		}
 
-		// Iterate through every placed model
 		for(const auto& modelID : _fe3d.model_getIDs())
 		{
-			// Cannot be template
 			if(modelID[0] != '@')
 			{
-				// Check if button is hovered
 				if(screen->getScrollingList("modelList")->getButton(modelID)->isHovered())
 				{
-					// Check if LMB pressed (activation)
 					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
 						_activateModel(modelID);
@@ -158,7 +134,6 @@ void WorldEditor::_updateModelChoosingMenu()
 			}
 		}
 
-		// Back button
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuModel");

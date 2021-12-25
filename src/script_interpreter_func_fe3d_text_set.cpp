@@ -12,34 +12,28 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Validate ID
 			if(!_validateFe3dID(args[0].getString()))
 			{
 				return true;
 			}
 
-			// Validate existence
 			if(_fe3d.text_isExisting(args[0].getString()))
 			{
 				_throwScriptError("text already exists!");
 				return true;
 			}
 
-			// Create text
 			_fe3d.text_create(args[0].getString(), true, args[3].getBoolean());
 
-			// Set font
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\font\\" + args[1].getString());
 			_fe3d.text_setFont(args[0].getString(), filePath);
 
-			// Set properties
 			_fe3d.text_setPosition(args[0].getString(), _convertGuiPositionToViewport(fvec2(args[4].getDecimal(), args[5].getDecimal())));
 			_fe3d.text_setSize(args[0].getString(), _convertGuiSizeToViewport(fvec2(args[6].getDecimal(), args[7].getDecimal())));
 			_fe3d.text_setContent(args[0].getString(), args[2].getString());
 
-			// In-engine viewport boundaries
 			if(!Config::getInst().isApplicationExported())
 			{
 				auto minPosition = Math::convertToNDC(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition()));
@@ -48,7 +42,6 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 				_fe3d.text_setMaxPosition(args[0].getString(), maxPosition);
 			}
 
-			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -69,17 +62,14 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			// Iterate through texts
 			for(const auto& ID : _fe3d.text_getIDs())
 			{
-				// Cannot be template
 				if(ID[0] != '@')
 				{
 					_fe3d.text_delete(ID);
 				}
 			}
 
-			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

@@ -228,7 +228,6 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 	{
 		if(_validateArgumentCount(args, 1))
 		{
-			// Determine type of value
 			if(args[0].getType() == SVT::INTEGER)
 			{
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, abs(args[0].getInteger())));

@@ -15,14 +15,12 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:application_pause` functionality as a networking server!");
 				return true;
 			}
 
-			// Pause engine
 			_fe3d.application_pause();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
@@ -31,14 +29,12 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:application_resume` functionality as a networking server!");
 				return true;
 			}
 
-			// Resume engine
 			_fe3d.application_resume();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
@@ -56,7 +52,6 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 				_mustStopApplication = true;
 			}
 
-			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -64,7 +59,6 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 1))
 		{
-			// Determine which type of value to print
 			if(args[0].getType() == SVT::STRING)
 			{
 				Logger::throwInfo(args[0].getString());
@@ -87,7 +81,6 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 				Logger::throwError("ScriptInterpreter::_executeFe3dMiscFunction");
 			}
 
-			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -97,14 +90,12 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:cursor` functionality as networking server!");
 				return true;
 			}
 
-			// Set cursor visibility
 			_fe3d.misc_setCursorVisible(args[0].getBoolean());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
@@ -113,14 +104,12 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:cursor` functionality as networking server!");
 				return true;
 			}
 
-			// Center cursor
 			_fe3d.misc_centerCursor();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
@@ -145,14 +134,12 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:wireframe` functionality as networking server!");
 				return true;
 			}
 
-			// Enable wireframe rendering
 			_fe3d.misc_enableWireframeRendering();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
@@ -161,14 +148,12 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:wireframe` functionality as networking server!");
 				return true;
 			}
 
-			// Disable wireframe rendering
 			_fe3d.misc_disableWireframeRendering();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
@@ -177,14 +162,12 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:aabbs` functionality as networking server!");
 				return true;
 			}
 
-			// Enable AABB rendering
 			_fe3d.misc_enableAabbFrameRendering();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
@@ -193,14 +176,12 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:aabbs` functionality as networking server!");
 				return true;
 			}
 
-			// Disable AABB rendering
 			_fe3d.misc_disableAabbFrameRendering();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
@@ -219,14 +200,12 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:vsync` functionality as networking server!");
 				return true;
 			}
 
-			// Enable Vsync
 			_fe3d.misc_enableVsync();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
@@ -235,14 +214,12 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			// Cannot execute when server is running
 			if(_fe3d.server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:vsync` functionality as networking server!");
 				return true;
 			}
 
-			// Disable Vsync
 			_fe3d.misc_disableVsync();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}

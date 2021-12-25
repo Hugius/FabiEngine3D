@@ -24,7 +24,6 @@ float convertDepthToPerspective(float depth);
 
 void main()
 {
-    // Validate
 	if (!u_isDofEnabled)
 	{
         o_finalColor.rgb = texture(u_worldMap, f_uv).rgb;
@@ -32,39 +31,29 @@ void main()
 		return;
     }
 
-    // Texture mapping
 	float currentDepth = texture(u_depthMap, f_uv).r;
     float middleDepth = texture(u_depthMap, vec2(0.5f)).r;
     vec3 blurColor = texture(u_dofMap, f_uv).rgb;
 
-    // Calculate fragment depths
     float currentFragmentDistance = convertDepthToPerspective(currentDepth);
     float middleFragmentDistance = convertDepthToPerspective(middleDepth);
 
-    // Calculate smoothing distances
     float middleSmoothingDistance = (u_dofDynamicDistance * MIDDLE_SMOOTHING_MULTIPLIER);
     float fragmentSmoothingDistance = (u_dofBlurDistance * FRAGMENT_SMOOTHING_MULTIPLIER);
 
-    // Calculate distance from camera to direct object
     bool isCloseToFragment = (middleFragmentDistance < (u_dofDynamicDistance + middleSmoothingDistance));
 
-    // Check if DOF blur is needed
     if (isCloseToFragment || !u_isDofDynamic)
     {
-        // Calculate DOF blur strength based on fragment distance
         float blurMixValue = (currentFragmentDistance - (u_dofBlurDistance - fragmentSmoothingDistance)) / fragmentSmoothingDistance;
 
-        // Calculate DOF blur strength based on middle distance
         float distanceMixValue = ((u_dofDynamicDistance + middleSmoothingDistance) - middleFragmentDistance) / middleSmoothingDistance;
 
-        // Clamp mix values
         blurMixValue = clamp(blurMixValue, 0.0f, 1.0f); 
         distanceMixValue = clamp(distanceMixValue, 0.0f, 1.0f);
 
-        // Calculate final mix value (distant blur or dynamic DOF)
         float finalMixValue = mix(0.0f, blurMixValue, (u_isDofDynamic ? distanceMixValue : 1.0f));
 
-        // Mix with blur color accordingly
         vec3 worldColor = texture(u_worldMap, f_uv).rgb;
         o_finalColor.rgb = mix(worldColor, blurColor, finalMixValue);
         o_finalColor.a = 1.0f;

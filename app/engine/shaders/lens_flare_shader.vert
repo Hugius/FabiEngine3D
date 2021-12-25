@@ -34,14 +34,11 @@ float calculateFlareVisibility()
 {
     if (u_isLensFlareEnabled && (u_lensFlareIntensity > 0.0f) && (u_lensFlareTransparency > 0.0f))
     {
-        // Calculate world depth
         float flareDepth = texture(u_depthMap, u_flareSourceUV).r;
         float flareFragmentDepth = (convertDepthToPerspective(flareDepth) / u_farDistance);
 
-        // Calculate distance to light source
         float flareDistance = distance(u_cameraPosition, u_flareSourcePosition);
         
-        // Check if light source is not occluded by an object
         if ((flareFragmentDepth * u_farDistance) >= abs(flareDistance))
         {
             return 1.0f;

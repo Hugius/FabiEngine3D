@@ -8,7 +8,6 @@ void TerrainEditor::_updateMainMenu()
 
 	if(screen->getID() == "terrainEditorMenuMain")
 	{
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getOverlay()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
@@ -40,7 +39,6 @@ void TerrainEditor::_updateMainMenu()
 			_isDeletingTerrain = true;
 		}
 
-		// Update answer forms
 		if(_gui.getOverlay()->isAnswerFormConfirmed("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
@@ -63,10 +61,8 @@ void TerrainEditor::_updateChoiceMenu()
 
 	if(screen->getID() == "terrainEditorMenuChoice")
 	{
-		// Temporary values
 		float maxHeight = _fe3d.terrain_getMaxHeight(_currentTerrainID);
 
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMain");
@@ -101,7 +97,6 @@ void TerrainEditor::_updateChoiceMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMiscellaneous");
 		}
 
-		// Update value forms
 		if(_gui.getOverlay()->checkValueForm("maxHeight", maxHeight))
 		{
 			_fe3d.terrain_setMaxHeight(_currentTerrainID, maxHeight);

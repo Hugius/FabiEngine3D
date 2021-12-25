@@ -172,17 +172,14 @@ void WaterEntityManager::update()
 {
 	for(const auto& [keyID, entity] : _entities)
 	{
-		// Update water if visible
 		if(entity->isVisible())
 		{
-			// Update ripple offset
 			fvec2 newOffset = entity->getRippleOffset();
 			newOffset.x += entity->getSpeed().x;
 			newOffset.y -= entity->getSpeed().y;
 			newOffset = fvec2(fmodf(newOffset.x, 1.0f), fmodf(newOffset.y, 1.0f));
 			entity->setRippleOffset(newOffset);
 
-			// Update wave offset
 			entity->setWaveOffset(entity->getWaveOffset() + (entity->getSpeed() * 500.0f));
 		}
 	}

@@ -175,14 +175,11 @@ const fvec3 Raycaster::_calculateTerrainPoint() const
 
 	while(distance < _terrainPointingDistance)
 	{
-		// Intersected with terrain
 		if(_isUnderTerrain(distance))
 		{
-			// Calculate point on terrain
 			distance -= (_terrainPointingPrecision / 2.0f);
 			fvec3 endPoint = getPointOnRay(_cursorRay, distance);
 
-			// Check if selected point is inside the terrain size
 			auto selectedTerrain = _terrainManager.getSelectedTerrain();
 			if(_terrainManager.isInside(
 				selectedTerrain->getID(),

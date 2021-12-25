@@ -34,20 +34,16 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 	if(Config::getInst().isApplicationExported()) // Application preview
 	{
-		// Validate project files & directories
 		if(_topViewportController.isProjectCorrupted(Tools::getRootDirectoryPath()))
 		{
 			Logger::throwFatalWarning("Cannot load application: missing files/directories!");
 		}
 
-		// Render color
 		Tools::setRenderColor(RENDER_COLOR);
 
-		// Initialize script execution
 		_leftViewportController.getScriptEditor().loadScriptFiles(true);
 		_leftViewportController.getScriptEditor().getScriptExecutor().load();
 
-		// Scripting error has been thrown
 		if(!_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
 		{
 			application_stop();
@@ -56,7 +52,6 @@ void EngineController::FE3D_CONTROLLER_INIT()
 	}
 	else // Engine preview
 	{
-		// Cache engine meshes
 		vector<string> meshPaths;
 		meshPaths.push_back(meshDirectoryPath + "camera.obj");
 		meshPaths.push_back(meshDirectoryPath + "box.obj");
@@ -66,7 +61,6 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		meshPaths.push_back(meshDirectoryPath + "torch.obj");
 		misc_cacheMeshes(meshPaths);
 
-		// Cache 2D engine textures
 		vector<string> texturePaths2D;
 		texturePaths2D.push_back(textureDirectoryPath + "box.png");
 		texturePaths2D.push_back(textureDirectoryPath + "color.png");
@@ -92,7 +86,6 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		texturePaths2D.push_back(textureDirectoryPath + "stop.png");
 		misc_cache2dTextures(texturePaths2D);
 
-		// Cache 3D engine textures
 		array<string, 6> texturePaths3D;
 		texturePaths3D[0] = string(textureDirectoryPath + "background_right.png");
 		texturePaths3D[1] = string(textureDirectoryPath + "background_left.png");
@@ -102,32 +95,26 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		texturePaths3D[5] = string(textureDirectoryPath + "background_front.png");
 		misc_cache3dTextures({texturePaths3D});
 
-		// Cache engine fonts
 		vector<string> fontPaths;
 		fontPaths.push_back(fontDirectoryPath + "font.ttf");
 		misc_cacheFonts(fontPaths);
 
-		// Render color
 		Tools::setRenderColor(RENDER_COLOR);
 
-		// Default background
 		sky_create("@@background");
 		sky_setCubeMaps("@@background", texturePaths3D);
 
-		// Custom cursor texture
 		image_create("@@cursor", true);
 		image_setSize("@@cursor", fvec2(CURSOR_IMAGE_SIZE, (CURSOR_IMAGE_SIZE * Tools::getWindowAspectRatio())));
 		image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_default.png");
 		misc_setCursorEntityID("@@cursor");
 		misc_setCursorVisible(false);
 
-		// Initialize viewport controllers
 		_rightViewportController.initialize();
 		_bottomViewportController.initialize();
 		_topViewportController.initialize();
 		_leftViewportController.initialize();
 
-		// Enable Vsync
 		misc_enableVsync();
 	}
 }
@@ -138,11 +125,9 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 	{
 		if(_leftViewportController.getScriptEditor().getScriptExecutor().isRunning()) // Still running
 		{
-			// Update animation system
 			_leftViewportController.getAnimation2dEditor().update();
 			_leftViewportController.getAnimation3dEditor().update();
 
-			// Update script execution
 			_leftViewportController.getScriptEditor().getScriptExecutor().update(false);
 		}
 		else // Scripting error has been thrown
@@ -153,34 +138,26 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 	}
 	else // Engine preview
 	{
-		// Initialize main menu again if user came from another menu
 		static string lastScreen = "";
 		string activeScreen = _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID();
 		if(activeScreen == "main" && lastScreen != "main")
 		{
-			// Restore render color
 			Tools::setRenderColor(RENDER_COLOR);
 
-			// Restore background
 			sky_selectMainSky("@@background");
 
-			// Restore camera
 			camera_reset();
 		}
 		lastScreen = activeScreen;
 
-		// Update background
 		sky_setRotation("@@background", sky_getRotation("@@background") + 0.0025f);
 
-		// Update custom cursor
 		image_setPosition("@@cursor", Math::convertToNDC(Tools::convertFromScreenCoords(misc_getCursorPosition())));
 		image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_default.png");
 		image_setVisible("@@cursor", misc_isCursorInsideWindow());
 
-		// Update GUI manager
 		_gui.update();
 
-		// Update viewport controllers
 		_topViewportController.update();
 		_leftViewportController.update();
 		_rightViewportController.update();
@@ -192,7 +169,6 @@ void EngineController::FE3D_CONTROLLER_TERMINATE()
 {
 	if(Config::getInst().isApplicationExported()) // Application preview
 	{
-		// Check if script was running
 		if(_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
 		{
 			_leftViewportController.getScriptEditor().getScriptExecutor().unload();

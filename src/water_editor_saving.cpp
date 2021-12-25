@@ -23,7 +23,6 @@ const bool WaterEditor::saveToFile() const
 
 	for(const auto& waterID : _loadedWaterIDs)
 	{
-		// Values
 		auto dudvMapPath = _fe3d.water_getDudvMapPath(waterID);
 		auto normalMapPath = _fe3d.water_getNormalMapPath(waterID);
 		auto displacementMapPath = _fe3d.water_getDisplacementMapPath(waterID);
@@ -41,22 +40,18 @@ const bool WaterEditor::saveToFile() const
 		auto isReflective = _fe3d.water_isReflective(waterID);
 		auto isRefractive = _fe3d.water_isRefractive(waterID);
 
-		// Convert to short path
 		dudvMapPath = string(dudvMapPath.empty() ? "" : dudvMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 		normalMapPath = string(normalMapPath.empty() ? "" : normalMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 		displacementMapPath = string(displacementMapPath.empty() ? "" : displacementMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
-		// Convert empty string
 		dudvMapPath = (dudvMapPath.empty() ? "?" : dudvMapPath);
 		normalMapPath = (normalMapPath.empty() ? "?" : normalMapPath);
 		displacementMapPath = (displacementMapPath.empty() ? "?" : displacementMapPath);
 
-		// Convert spaces
 		replace(dudvMapPath.begin(), dudvMapPath.end(), ' ', '?');
 		replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
 		replace(displacementMapPath.begin(), displacementMapPath.end(), ' ', '?');
 
-		// Write data to file
 		file <<
 			waterID << " " <<
 			dudvMapPath << " " <<

@@ -15,10 +15,8 @@ const bool NetworkingServer::isClientConnected(const string& username) const
 
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
 	{
-		// Client must be fully accepted
 		if(!_clientUsernames[i].empty())
 		{
-			// Check if client is found
 			if(username == _clientUsernames[i])
 			{
 				return true;
@@ -103,7 +101,6 @@ const vector<string> NetworkingServer::getClientIPs() const
 	vector<string> clientIPs;
 	for(size_t i = 0; i < _clientIPs.size(); i++)
 	{
-		// Check if client is found
 		if(!_clientUsernames[i].empty())
 		{
 			clientIPs.push_back(_clientIPs[i]);
@@ -142,10 +139,8 @@ void NetworkingServer::sendTcpMessage(const string& username, const string& cont
 
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
 	{
-		// Client must be fully accepted
 		if(!_clientUsernames[i].empty())
 		{
-			// Check if client is found
 			if(username == _clientUsernames[i])
 			{
 				_sendTcpMessage(_clientSockets[i], content, false);
@@ -166,10 +161,8 @@ void NetworkingServer::sendUdpMessage(const string& username, const string& cont
 
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
 	{
-		// Client must be fully accepted
 		if(!_clientUsernames[i].empty())
 		{
-			// Check if client is found
 			if(username == _clientUsernames[i])
 			{
 				_sendUdpMessage(_clientIPs[i], _udpClientPorts[i], content, false);
@@ -190,10 +183,8 @@ void NetworkingServer::broadcastTcpMessage(const string& content, const string& 
 
 	for(size_t i = 0; i < _clientSockets.size(); i++)
 	{
-		// Check exception
 		if(_clientUsernames[i] != exceptionUsername)
 		{
-			// Client must be fully accepted
 			if(!_clientUsernames[i].empty())
 			{
 				_sendTcpMessage(_clientSockets[i], content, false);
@@ -211,10 +202,8 @@ void NetworkingServer::broadcastUdpMessage(const string& content, const string& 
 
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
 	{
-		// Check exception
 		if(_clientUsernames[i] != exceptionUsername)
 		{
-			// Client must be fully accepted
 			if(!_clientUsernames[i].empty())
 			{
 				_sendUdpMessage(_clientIPs[i], _udpClientPorts[i], content, false);
@@ -232,10 +221,8 @@ void NetworkingServer::disconnectClient(const string& username)
 
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
 	{
-		// Client must be fully accepted
 		if(!_clientUsernames[i].empty())
 		{
-			// Check if client is found
 			if(username == _clientUsernames[i])
 			{
 				_sendTcpMessage(_clientSockets[i], "DISCONNECTED", true);
@@ -256,7 +243,6 @@ void NetworkingServer::disconnectClients()
 
 	for(size_t i = 0; i < _clientUsernames.size(); i++)
 	{
-		// Client must be fully accepted
 		if(!_clientUsernames[i].empty())
 		{
 			_sendTcpMessage(_clientSockets[i], "DISCONNECTED", true);

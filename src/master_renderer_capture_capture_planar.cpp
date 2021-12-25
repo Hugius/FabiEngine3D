@@ -30,7 +30,6 @@ void MasterRenderer::_capturePlanarReflections()
 	vector<string> savedModelEntityIDs;
 	for(const auto& [keyID, entity] : _entityBus->getModelEntities())
 	{
-		// Hide non-reflected model entity
 		if(!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
@@ -38,7 +37,6 @@ void MasterRenderer::_capturePlanarReflections()
 			continue;
 		}
 
-		// Hide reflective model entity
 		for(const auto& partID : entity->getPartIDs())
 		{
 			if(entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR) && entity->isVisible())
@@ -53,7 +51,6 @@ void MasterRenderer::_capturePlanarReflections()
 	vector<string> savedBillboardEntityIDs;
 	for(const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 	{
-		// Hide non-reflected billboard entity
 		if(!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
@@ -103,13 +100,10 @@ void MasterRenderer::_capturePlanarReflections()
 
 	for(const auto& [keyID, entity] : _entityBus->getModelEntities())
 	{
-		// Iterate through all saved model entities
 		for(const auto& savedID : savedModelEntityIDs)
 		{
-			// Check if IDs match
 			if(entity->getID() == savedID)
 			{
-				// Show model entity again
 				entity->setVisible(true);
 			}
 		}
@@ -117,13 +111,10 @@ void MasterRenderer::_capturePlanarReflections()
 
 	for(const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 	{
-		// Iterate through all saved billboard entities
 		for(const auto& savedID : savedBillboardEntityIDs)
 		{
-			// Check if IDs match
 			if(entity->getID() == savedID)
 			{
-				// Show billboard entity again
 				entity->setVisible(true);
 			}
 		}

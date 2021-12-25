@@ -23,35 +23,27 @@ const bool SkyEditor::saveToFile() const
 
 	for(const auto& skyID : _loadedSkyIDs)
 	{
-		// Values
 		auto cubeMapPaths = _fe3d.sky_getCubeMapPaths(skyID);
 		auto rotation = _fe3d.sky_getRotation(skyID);
 		auto lightness = _fe3d.sky_getLightness(skyID);
 		auto color = _fe3d.sky_getColor(skyID);
 
-		// Iterate through paths
 		for(auto& cubeMapPath : cubeMapPaths)
 		{
-			// Convert to short path
 			cubeMapPath = string(cubeMapPath.empty() ? "" : cubeMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
-			// Convert empty string
 			cubeMapPath = (cubeMapPath.empty()) ? "?" : cubeMapPath;
 
-			// Convert spaces
 			replace(cubeMapPath.begin(), cubeMapPath.end(), ' ', '?');
 		}
 
-		// Write ID to file
 		file << skyID << " ";
 
-		// Write paths to file
 		for(const auto& cubeMapPath : cubeMapPaths)
 		{
 			file << cubeMapPath << " ";
 		}
 
-		// Write data to file
 		file <<
 			rotation << " " <<
 			lightness << " " <<

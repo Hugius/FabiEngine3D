@@ -25,13 +25,10 @@ const bool WorldEditor::saveEditorWorldToFile()
 	vector<string> levelOfDetailEntityIDs;
 	for(const auto& modelID : _fe3d.model_getIDs())
 	{
-		// Cannot be template
 		if(modelID[0] != '@')
 		{
-			// Check if entity has level of detail model
 			if(!_fe3d.model_getLevelOfDetailEntityID(modelID).empty())
 			{
-				// Check if ID not already added to list
 				if(find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) == levelOfDetailEntityIDs.end())
 				{
 					levelOfDetailEntityIDs.push_back(_fe3d.model_getLevelOfDetailEntityID(modelID));
@@ -50,10 +47,8 @@ const bool WorldEditor::saveEditorWorldToFile()
 	string skyID = _fe3d.sky_getSelectedID();
 	if(!skyID.empty())
 	{
-		// Data to save
 		string templateID = ("@" + skyID);
 
-		// Write data
 		file <<
 			"SKY " <<
 			skyID << " " <<
@@ -63,10 +58,8 @@ const bool WorldEditor::saveEditorWorldToFile()
 	string terrainID = _fe3d.terrain_getSelectedID();
 	if(!terrainID.empty())
 	{
-		// Data to save
 		string templateID = ("@" + terrainID);
 
-		// Write data
 		file <<
 			"TERRAIN " <<
 			terrainID << " " <<
@@ -76,11 +69,9 @@ const bool WorldEditor::saveEditorWorldToFile()
 	string waterID = _fe3d.water_getSelectedID();
 	if(!waterID.empty())
 	{
-		// Data to save
 		string templateID = ("@" + waterID);
 		auto height = _fe3d.water_getHeight(waterID);
 
-		// Write data
 		file <<
 			"WATER " <<
 			waterID << " " <<
@@ -90,26 +81,20 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 	for(const auto& modelID : _fe3d.model_getIDs())
 	{
-		// Check if allowed to save
 		bool isLevelOfDetailEntity = find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) != levelOfDetailEntityIDs.end();
 		if((modelID[0] != '@') || isLevelOfDetailEntity)
 		{
-			// Temporary values
 			auto startedAnimations = _animation3dEditor.getStartedModelAnimationIDs(modelID);
 
-			// Check if model has bound animation
 			if(!startedAnimations.empty())
 			{
-				// Reset main transformation
 				_fe3d.model_setBasePosition(modelID, _initialModelPosition[modelID]);
 				_fe3d.model_setBaseRotationOrigin(modelID, fvec3(0.0f));
 				_fe3d.model_setBaseRotation(modelID, _initialModelRotation[modelID]);
 				_fe3d.model_setBaseSize(modelID, _initialModelSize[modelID]);
 
-				// Reset part transformations
 				for(const auto& partID : _fe3d.model_getPartIDs(modelID))
 				{
-					// Only named parts
 					if(!partID.empty())
 					{
 						_fe3d.model_setPartPosition(modelID, partID, fvec3(0.0f));
@@ -120,23 +105,18 @@ const bool WorldEditor::saveEditorWorldToFile()
 				}
 			}
 
-			// Data to save
 			auto position = _fe3d.model_getBasePosition(modelID);
 			auto rotation = _fe3d.model_getBaseRotation(modelID);
 			auto size = _fe3d.model_getBaseSize(modelID);
 			auto isFrozen = _fe3d.model_isFrozen(modelID);
 			auto animationID = (startedAnimations.empty()) ? "" : startedAnimations[0];
 
-			// Convert empty string
 			animationID = (animationID.empty()) ? "?" : animationID;
 
-			// Convert spaces
 			replace(animationID.begin(), animationID.end(), ' ', '?');
 
-			// Extract template ID
 			string templateID = _loadedModelIDs.at(modelID);
 
-			// Write main data
 			file <<
 				"MODEL " <<
 				modelID << " " <<
@@ -153,35 +133,27 @@ const bool WorldEditor::saveEditorWorldToFile()
 				isFrozen << " " <<
 				animationID;
 
-			// New line
 			file << endl;
 		}
 	}
 
 	for(const auto& billboardID : _fe3d.billboard_getIDs())
 	{
-		// Check if allowed to save
 		if(billboardID[0] != '@')
 		{
-			// Temporary values
 			auto startedAnimations = _animation2dEditor.getStartedBillboardAnimationIDs(billboardID);
 
-			// Data to save
 			auto position = _fe3d.billboard_getPosition(billboardID);
 			auto rotation = _fe3d.billboard_getRotation(billboardID);
 			auto size = _fe3d.billboard_getSize(billboardID);
 			auto animationID = (startedAnimations.empty() ? "" : startedAnimations[0]);
 
-			// Convert empty string
 			animationID = (animationID.empty()) ? "?" : animationID;
 
-			// Convert spaces
 			replace(animationID.begin(), animationID.end(), ' ', '?');
 
-			// Extract template ID
 			string templateID = _loadedBillboardIDs.at(billboardID);
 
-			// Write data
 			file <<
 				"BILLBOARD " <<
 				billboardID << " " <<
@@ -200,18 +172,14 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 	for(const auto& soundID : _fe3d.sound3d_getIDs())
 	{
-		// Check if allowed to save
 		if(soundID[0] != '@')
 		{
-			// Data to save
 			auto position = _fe3d.sound3d_getPosition(soundID);
 			auto maxVolume = _fe3d.sound3d_getMaxVolume(soundID);
 			auto maxDistance = _fe3d.sound3d_getMaxDistance(soundID);
 
-			// Extract template ID
 			string templateID = _loadedSoundIDs.at(soundID);
 
-			// Write data
 			file <<
 				"SOUND " <<
 				soundID << " " <<
@@ -226,17 +194,14 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 	for(const auto& pointlightID : _fe3d.pointlight_getIDs())
 	{
-		// Check if allowed to save
 		if(pointlightID[0] != '@')
 		{
-			// Data to save
 			auto position = _fe3d.pointlight_getPosition(pointlightID);
 			auto radius = _fe3d.pointlight_getRadius(pointlightID);
 			auto color = _fe3d.pointlight_getColor(pointlightID);
 			auto intensity = _fe3d.pointlight_getIntensity(pointlightID);
 			auto shape = static_cast<unsigned int>(_fe3d.pointlight_getShape(pointlightID));
 
-			// Write data
 			file <<
 				"POINTLIGHT " <<
 				pointlightID << " " <<
@@ -256,10 +221,8 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 	for(const auto& spotlightID : _fe3d.spotlight_getIDs())
 	{
-		// Check if allowed to save
 		if(spotlightID[0] != '@')
 		{
-			// Data to save
 			auto position = _fe3d.spotlight_getPosition(spotlightID);
 			auto color = _fe3d.spotlight_getColor(spotlightID);
 			auto yaw = _fe3d.spotlight_getYaw(spotlightID);
@@ -268,7 +231,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 			auto angle = _fe3d.spotlight_getAngle(spotlightID);
 			auto distance = _fe3d.spotlight_getDistance(spotlightID);
 
-			// Write data
 			file <<
 				"SPOTLIGHT " <<
 				spotlightID << " " <<
@@ -288,13 +250,10 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 	for(const auto& reflectionID : _fe3d.reflection_getIDs())
 	{
-		// Check if allowed to save
 		if(reflectionID[0] != '@')
 		{
-			// Data to save
 			auto position = _fe3d.reflection_getPosition(reflectionID);
 
-			// Write data
 			file <<
 				"REFLECTION " <<
 				reflectionID << " " <<
@@ -312,11 +271,9 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 	if(_fe3d.gfx_isAmbientLightingEnabled())
 	{
-		// Data to save
 		auto ambientLightingColor = _fe3d.gfx_getAmbientLightingColor();
 		auto ambientLightingIntensity = _fe3d.gfx_getAmbientLightingIntensity();
 
-		// Write data
 		file <<
 			"LIGHTING_AMBIENT " <<
 			ambientLightingColor.r << " " <<
@@ -327,12 +284,10 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 	if(_fe3d.gfx_isDirectionalLightingEnabled())
 	{
-		// Data to save
 		auto directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
 		auto directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
 		auto directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
 
-		// Write data
 		file <<
 			"LIGHTING_DIRECTIONAL " <<
 			directionalLightingPosition.x << " " <<
@@ -346,7 +301,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 	if(_fe3d.gfx_isShadowsEnabled())
 	{
-		// Data to save
 		auto size = _fe3d.gfx_getShadowSize();
 		auto lightness = _fe3d.gfx_getShadowLightness();
 		auto eye = _fe3d.gfx_getShadowEyePosition();
@@ -355,7 +309,6 @@ const bool WorldEditor::saveEditorWorldToFile()
 		auto interval = _fe3d.gfx_getShadowInterval();
 		auto quality = _fe3d.gfx_getShadowQuality();
 
-		// Write data
 		file <<
 			"GRAPHICS_SHADOWS " <<
 			size << " " <<
@@ -387,13 +340,11 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 	if(_fe3d.gfx_isDofEnabled())
 	{
-		// Data to save
 		auto dynamic = _fe3d.gfx_isDofDynamic();
 		auto blurDistance = _fe3d.gfx_getDofBlurDistance();
 		auto maxDistance = _fe3d.gfx_getDofDynamicDistance();
 		auto quality = _fe3d.gfx_getDofQuality();
 
-		// Write data
 		file <<
 			"GRAPHICS_DOF " <<
 			dynamic << " " <<
@@ -404,13 +355,11 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 	if(_fe3d.gfx_isFogEnabled())
 	{
-		// Data to save
 		auto minDistance = _fe3d.gfx_getFogMinDistance();
 		auto maxDistance = _fe3d.gfx_getFogMaxDistance();
 		auto thickness = _fe3d.gfx_getFogThickness();
 		auto color = _fe3d.gfx_getFogColor();
 
-		// Write data
 		file <<
 			"GRAPHICS_FOG " <<
 			minDistance << " " <<
@@ -421,21 +370,16 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 	if(_fe3d.gfx_isLensFlareEnabled())
 	{
-		// Data to save
 		auto flareMapPath = _fe3d.gfx_getLensFlareMapPath();
 		auto intensity = _fe3d.gfx_getLensFlareIntensity();
 		auto sensitivity = _fe3d.gfx_getLensFlareSensitivity();
 
-		// Convert to short path
 		flareMapPath = string(flareMapPath.empty() ? "" : flareMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
-		// Convert empty string
 		flareMapPath = (flareMapPath.empty()) ? "?" : flareMapPath;
 
-		// Convert spaces
 		replace(flareMapPath.begin(), flareMapPath.end(), ' ', '?');
 
-		// Write data
 		file <<
 			"GRAPHICS_LENS_FLARE " <<
 			flareMapPath << " " <<
@@ -453,13 +397,11 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 	if(_fe3d.gfx_isBloomEnabled())
 	{
-		// Data to save
 		auto type = static_cast<unsigned int>(_fe3d.gfx_getBloomType());
 		auto intensity = _fe3d.gfx_getBloomIntensity();
 		auto blurCount = _fe3d.gfx_getBloomBlurCount();
 		auto quality = _fe3d.gfx_getBloomQuality();
 
-		// Write data
 		file <<
 			"GRAPHICS_BLOOM " <<
 			type << " " <<

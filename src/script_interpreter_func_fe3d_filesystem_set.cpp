@@ -20,13 +20,11 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
 		{
-			// Compose directory path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const string newDirectoryPath = string(directoryPath + args[0].getString());
 
-			// Check if directory exists
 			if(Tools::isDirectoryExisting(newDirectoryPath))
 			{
 				_throwScriptError("cannot create directory \"" + args[0].getString() + "\"!");
@@ -36,7 +34,6 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 				Tools::createDirectory(newDirectoryPath);
 			}
 
-			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -46,13 +43,11 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
 		{
-			// Compose directory path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const string newDirectoryPath = string(directoryPath + args[0].getString());
 
-			// Check if directory exists
 			if(Tools::isDirectoryExisting(newDirectoryPath))
 			{
 				Tools::deleteDirectory(newDirectoryPath);
@@ -70,13 +65,11 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 
 		if(_validateArgumentCount(args, 2) && _validateSavesDirectory())
 		{
-			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const string filePath = string(directoryPath + args[0].getString());
 
-			// Check if file exists
 			if(Tools::isFileExisting(filePath))
 			{
 				_throwScriptError("cannot create file \"" + args[0].getString() + "\"!");
@@ -87,7 +80,6 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 				file.close();
 			}
 
-			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -97,13 +89,11 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
 		{
-			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const string filePath = string(directoryPath + args[0].getString());
 
-			// Check if file exists
 			if(Tools::isFileExisting(filePath))
 			{
 				auto status = remove(filePath.c_str());
@@ -121,19 +111,15 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 
 		if(_validateArgumentCount(args, 2) && _validateSavesDirectory())
 		{
-			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const string filePath = string(directoryPath + args[0].getString());
 
-			// Check if file exists
 			if(Tools::isFileExisting(filePath))
 			{
-				// Open file
 				ofstream file(filePath, ios::app);
 
-				// Determine which type of value to print
 				if(args[1].getType() == SVT::STRING)
 				{
 					file << args[1].getString();
@@ -151,7 +137,6 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 					file << (args[1].getBoolean() ? "<true>" : "<false>");
 				}
 
-				// Close file
 				file.close();
 			}
 			else
@@ -159,7 +144,6 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 				_throwScriptError("cannot write to file \"" + args[0].getString() + "\"!");
 			}
 
-			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -169,13 +153,11 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
 		{
-			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const string filePath = string(directoryPath + args[0].getString());
 
-			// Check if file exists
 			if(Tools::isFileExisting(filePath))
 			{
 				ofstream file(filePath, ios::app);
@@ -195,13 +177,11 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types) && _validateSavesDirectory())
 		{
-			// Compose file path
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const string filePath = string(directoryPath + args[0].getString());
 
-			// Check if file exists
 			if(Tools::isFileExisting(filePath))
 			{
 				ofstream file(filePath, ios::trunc);

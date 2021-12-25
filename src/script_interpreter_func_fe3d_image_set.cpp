@@ -13,41 +13,34 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Validate ID
 			if(!_validateFe3dID(args[0].getString()))
 			{
 				return true;
 			}
 
-			// Validate existence
 			if(_fe3d.image_isExisting(args[0].getString()))
 			{
 				_throwScriptError("image already exists!");
 				return true;
 			}
 
-			// Create image
 			_fe3d.image_create(args[0].getString(), true);
 
-			// Validate project ID
 			if(_currentProjectID.empty())
 			{
 				Logger::throwError("ScriptInterpreter::_executeFe3dImageSetter");
 			}
 
-			// Set diffuse map
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\texture\\diffuse_map\\");
 			const string filePath = (targetDirectoryPath + args[1].getString());
 			_fe3d.image_setDiffuseMap(args[0].getString(), filePath);
 
-			// Set properties
 			_fe3d.image_setPosition(args[0].getString(), _convertGuiPositionToViewport(fvec2(args[2].getDecimal(), args[3].getDecimal())));
 			_fe3d.image_setRotation(args[0].getString(), args[4].getDecimal());
 			_fe3d.image_setSize(args[0].getString(), _convertGuiSizeToViewport(fvec2(args[5].getDecimal(), args[6].getDecimal())));
 
-			// In-engine viewport boundaries
 			if(!Config::getInst().isApplicationExported())
 			{
 				auto minPosition = Math::convertToNDC(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition()));
@@ -56,7 +49,6 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 				_fe3d.image_setMaxPosition(args[0].getString(), maxPosition);
 			}
 
-			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -77,17 +69,14 @@ const bool ScriptInterpreter::_executeFe3dImageSetter(const string& functionName
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			// Iterate through images
 			for(const auto& ID : _fe3d.image_getIDs())
 			{
-				// Cannot be template
 				if(ID[0] != '@')
 				{
 					_fe3d.image_delete(ID);
 				}
 			}
 
-			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

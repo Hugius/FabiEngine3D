@@ -6,7 +6,6 @@ void WorldEditor::_updateTerrainMenu()
 
 	if(screen->getID() == "worldEditorMenuTerrain")
 	{
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
@@ -14,7 +13,6 @@ void WorldEditor::_updateTerrainMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
 		{
-			// Retrieve template terrain IDs
 			vector<string> terrainIDs;
 			for(const auto& ID : _terrainEditor.getLoadedIDs())
 			{
@@ -24,7 +22,6 @@ void WorldEditor::_updateTerrainMenu()
 				}
 			}
 
-			// Add choice list
 			_gui.getOverlay()->createChoiceForm("terrainList", "Select Terrain", fvec2(0.0f, 0.1f), terrainIDs);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
@@ -33,19 +30,16 @@ void WorldEditor::_updateTerrainMenu()
 			_currentTerrainID = "";
 		}
 
-		// Update terrain choosing
 		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			string selectedButtonID = _gui.getOverlay()->checkChoiceForm("terrainList");
 			if(!selectedButtonID.empty())
 			{
-				// Delete old
 				if(_fe3d.terrain_isExisting(selectedButtonID))
 				{
 					_fe3d.terrain_delete(selectedButtonID);
 				}
 
-				// Create new
 				_currentTerrainID = selectedButtonID;
 				_copyTemplateTerrain(_currentTerrainID, ("@" + selectedButtonID));
 				_gui.getOverlay()->deleteChoiceForm("terrainList");
@@ -56,10 +50,8 @@ void WorldEditor::_updateTerrainMenu()
 			}
 		}
 
-		// Update terrain selection
 		_fe3d.terrain_select(_currentTerrainID);
 
-		// Update buttons hoverability
 		screen->getButton("delete")->setHoverable(!_currentTerrainID.empty());
 	}
 }

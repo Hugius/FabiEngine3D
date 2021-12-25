@@ -6,7 +6,6 @@ void ModelEditor::_updateMainMenu()
 
 	if(screen->getID() == "modelEditorMenuMain")
 	{
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused())) // Back button
 		{
 			_gui.getOverlay()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
@@ -38,7 +37,6 @@ void ModelEditor::_updateMainMenu()
 			_isDeletingModel = true;
 		}
 
-		// Update answer forms
 		if(_gui.getOverlay()->isAnswerFormConfirmed("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
@@ -61,22 +59,17 @@ void ModelEditor::_updateChoiceMenu()
 
 	if(screen->getID() == "modelEditorMenuChoice")
 	{
-		// Temporary values
 		auto size = _fe3d.model_getBaseSize(_currentModelID);
 
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
-			// Reset parts
 			for(const auto& partID : _fe3d.model_getPartIDs(_currentModelID))
 			{
 				_fe3d.model_setWireframed(_currentModelID, partID, false);
 			}
 
-			// Hide model
 			_fe3d.model_setVisible(_currentModelID, false);
 
-			// Miscellaneous
 			_currentModelID = "";
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuMain");
 			_fe3d.text_setVisible(_gui.getOverlay()->getTextField("modelID")->getEntityID(), false);
@@ -106,7 +99,6 @@ void ModelEditor::_updateChoiceMenu()
 			_fe3d.misc_enableAabbFrameRendering();
 		}
 
-		// Update value forms
 		if(_gui.getOverlay()->checkValueForm("sizeX", size.x))
 		{
 			size.x /= 100.0f;

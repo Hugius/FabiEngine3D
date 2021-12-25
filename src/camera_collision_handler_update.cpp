@@ -6,26 +6,20 @@ void CameraCollisionHandler::update(const unordered_map<string, shared_ptr<AabbE
 	_isCameraUnderTerrain = false;
 	if(_isCameraTerrainResponseEnabled)
 	{
-		// Check if terrain is selected
 		if(terrainManager.getSelectedTerrain() != nullptr)
 		{
-			// Retrieve height of terrain point at camera position
 			fvec3 cameraPosition = camera.getPosition();
 			const float terrainX = (cameraPosition.x + (terrainManager.getSelectedTerrain()->getSize() / 2.0f));
 			const float terrainZ = (cameraPosition.z + (terrainManager.getSelectedTerrain()->getSize() / 2.0f));
 			const float terrainY = (terrainManager.getPixelHeight(terrainManager.getSelectedTerrain()->getID(), terrainX, terrainZ) + _cameraTerrainHeight);
 
-			// If camera goes underground
 			if(cameraPosition.y < terrainY)
 			{
-				// Camera is now under terrain
 				_isCameraUnderTerrain = true;
 
-				// Move camera upwards
 				camera.move(fvec3(0.0f, fabsf(cameraPosition.y - terrainY) * _cameraTerrainSpeed, 0.0f));
 				cameraPosition.y = camera.getPosition().y;
 
-				// Correct moved distance
 				if(cameraPosition.y > terrainY)
 				{
 					camera.setPosition(fvec3(cameraPosition.x, terrainY, cameraPosition.z));
@@ -36,18 +30,15 @@ void CameraCollisionHandler::update(const unordered_map<string, shared_ptr<AabbE
 
 	if(_isCameraAabbResponseEnabled)
 	{
-		// Temporary values
 		unsigned int xPriority = 0;
 		unsigned int yPriority = 0;
 		unsigned int zPriority = 0;
 
-		// Reset collision
 		for(const auto& [keyID, aabb] : aabbs)
 		{
 			aabb->setCollided(false);
 		}
 
-		// Handle collision
 		switch(_responseDirectionOrder)
 		{
 			case DirectionOrder::XYZ:
@@ -100,7 +91,6 @@ void CameraCollisionHandler::update(const unordered_map<string, shared_ptr<AabbE
 			}
 		}
 
-		// Rearrange collision order
 		if((xPriority > yPriority) && (xPriority > zPriority) && (yPriority >= zPriority))
 		{
 			_responseDirectionOrder = DirectionOrder::XYZ;
@@ -126,7 +116,6 @@ void CameraCollisionHandler::update(const unordered_map<string, shared_ptr<AabbE
 			_responseDirectionOrder = DirectionOrder::ZXY;
 		}
 
-		// Store last camera position
 		_lastCameraPosition = camera.getPosition();
 	}
 }

@@ -105,16 +105,13 @@ void Core::_prepare()
 
 	if(_isRunning)
 	{
-		// Hide logo
 		if(!Config::getInst().isApplicationExported())
 		{
 			_window.disableColorKeying(keyingColor);
 		}
 
-		// Create window if necessary
 		if(!Config::getInst().isApplicationExported() || (Config::getInst().isApplicationExported() && !_fe3d.server_isRunning()))
 		{
-			// Set window properties
 			_window.showWindow();
 			_window.setSize(Config::getInst().getWindowSize());
 			if(Config::getInst().isWindowFullscreen())
@@ -130,15 +127,12 @@ void Core::_prepare()
 				_window.setTitle(Config::getInst().getWindowTitle());
 			}
 
-			// Only if in engine preview
 			if(Config::getInst().isApplicationExported())
 			{
-				// No fade in
 				_window.setOpacity(1.0f);
 			}
 			else
 			{
-				// Start smooth window fade in
 				_window.setOpacity(0.0f);
 			}
 		}

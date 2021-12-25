@@ -31,13 +31,10 @@ void main()
 
 	if (u_hasDisplacementMap)
 	{
-		// Get size of 1 displacement map texel
 		vec2 texelSize = (vec2(1.0f) / textureSize(u_displacementMap, 0));
 
-		// Calculate height percentage
 		float heightPercentage = texture(u_displacementMap, (f_uv + (u_waveOffset * texelSize))).r;
 
-		// Add height to vertex Y
 		newPosition.y += (heightPercentage * u_waveHeight);
 	}
 

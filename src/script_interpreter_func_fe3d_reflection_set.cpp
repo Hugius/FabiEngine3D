@@ -11,24 +11,20 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Validate ID
 			if(!_validateFe3dID(args[0].getString()))
 			{
 				return true;
 			}
 
-			// Validate existence
 			if(_fe3d.reflection_isExisting(args[0].getString()))
 			{
 				_throwScriptError("reflection already exists!");
 				return true;
 			}
 
-			// Create reflection
 			_fe3d.reflection_create(args[0].getString());
 			_fe3d.reflection_setPosition(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 
-			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -49,17 +45,14 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			// Iterate through reflections
 			for(const auto& ID : _fe3d.reflection_getIDs())
 			{
-				// Cannot be template
 				if(ID[0] != '@')
 				{
 					_fe3d.reflection_delete(ID);
 				}
 			}
 
-			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

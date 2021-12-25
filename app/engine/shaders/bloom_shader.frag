@@ -12,7 +12,6 @@ layout (location = 0) out vec4 o_finalColor;
 
 void main()
 {
-    // Validate
 	if (!u_isBloomEnabled)
 	{
         o_finalColor.rgb = texture(u_worldMap, f_uv).rgb;

@@ -36,18 +36,15 @@ void NetworkingServer::update()
 
 	if(_connectionThread.wait_until(system_clock::time_point::min()) == future_status::ready)
 	{
-		// Retrieve new client socket ID
 		auto clientSocketID = _connectionThread.get();
 		if(clientSocketID == INVALID_SOCKET)
 		{
 			Logger::throwError("NetworkingServer::update::1 ---> ", WSAGetLastError());
 		}
 
-		// Extract IP & port
 		auto clientIP = NetworkingUtils::extractPeerIP(clientSocketID);
 		auto clientPort = NetworkingUtils::extractPeerPort(clientSocketID);
 
-		// Save client data
 		_clientSockets.push_back(clientSocketID);
 		_clientIPs.push_back(clientIP);
 		_tcpClientPorts.push_back(clientPort);
@@ -55,28 +52,22 @@ void NetworkingServer::update()
 		_clientUsernames.push_back("");
 		_tcpMessageBuilds.push_back("");
 
-		// Spawn thread for receiving TCP messages
 		_tcpMessageThreads.push_back(async(launch::async, &NetworkingServer::_waitForTcpMessage, this, clientSocketID));
 
-		// Spawn connection thread again for next possible client
 		_connectionThread = async(launch::async, &NetworkingServer::_waitForClientConnection, this, _tcpSocket);
 	}
 
 	BEGIN:;
 	for(size_t i = 0; i < _clientSockets.size(); i++)
 	{
-		// Immutable client data
 		const auto& clientSocketID = _clientSockets[i];
 		const auto& clientUsername = _clientUsernames[i];
 
-		// Mutable client data
 		auto& clientMessageBuild = _tcpMessageBuilds[i];
 		auto& messageThread = _tcpMessageThreads[i];
 
-		// Check if the client sent any message
 		if(messageThread.wait_until(system_clock::time_point::min()) == future_status::ready)
 		{
-			// Message data
 			const auto& messageResult = messageThread.get();
 			const auto& messageStatusCode = get<0>(messageResult);
 			const auto& messageErrorCode = get<1>(messageResult);
@@ -91,77 +82,60 @@ void NetworkingServer::update()
 					{
 						if(clientMessageBuild.substr(0, string("REQUEST").size()) == "REQUEST") // Handle REQUEST message
 						{
-							// Temporary values
 							const auto newPortUDP = clientMessageBuild.substr(string("REQUEST").size(), NetworkingUtils::PORT_DIGIT_COUNT);
 							const auto newUsername = clientMessageBuild.substr(string("REQUEST").size() + NetworkingUtils::PORT_DIGIT_COUNT);
 
-							// Check if server is full or username is already connected
 							if(_clientIPs.size() > _maxClientCount)
 							{
-								// Reject client
 								if(!_sendTcpMessage(clientSocketID, "SERVER_FULL", true))
 								{
 									return;
 								}
 
-								// Miscellaneous
 								clientMessageBuild = "";
 
-								// Prevent processing more messages
 								break;
 							}
 							else if(find(_clientUsernames.begin(), _clientUsernames.end(), newUsername) != _clientUsernames.end())
 							{
-								// Reject client
 								if(!_sendTcpMessage(clientSocketID, "ALREADY_CONNECTED", true))
 								{
 									return;
 								}
 
-								// Miscellaneous
 								clientMessageBuild = "";
 
-								// Prevent processing more messages
 								break;
 							}
 							else
 							{
-								// Accept client
 								if(!_sendTcpMessage(clientSocketID, "ACCEPT", true))
 								{
 									return;
 								}
 
-								// Save new port
 								_udpClientPorts[i] = newPortUDP;
 
-								// Save new username
 								_clientUsernames[i] = newUsername;
 
-								// Miscellaneous
 								_newClientIP = _clientIPs[i];
 								_newClientUsername = _clientUsernames[i];
 								clientMessageBuild = "";
 
-								// Logging
 								Logger::throwInfo("Networking client \"" + newUsername + "\" connected to the server!");
 							}
 						}
 						else if(clientMessageBuild == "PING") // Handle PING message
 						{
-							// Calculate delay between receiving the message and processing the receive
 							auto receiveDelay = (Tools::getTimeSinceEpochMS() - messageTimestamp);
 
-							// Compose ping message
 							auto pingMessage = ("PING" + to_string(receiveDelay));
 
-							// Send ping message back to client
 							if(!_sendTcpMessage(clientSocketID, pingMessage, true))
 							{
 								return;
 							}
 
-							// Miscellaneous
 							clientMessageBuild = "";
 						}
 						else // Handle other message
@@ -195,14 +169,12 @@ void NetworkingServer::update()
 				}
 			}
 
-			// Spawn new message thread
 			messageThread = async(launch::async, &NetworkingServer::_waitForTcpMessage, this, clientSocketID);
 		}
 	}
 
 	while(NetworkingUtils::isMessageReadyUDP(_udpSocket))
 	{
-		// Message data
 		const auto& messageResult = _receiveUdpMessage(_udpSocket);
 		const auto& messageStatusCode = get<0>(messageResult);
 		const auto& messageErrorCode = get<1>(messageResult);
@@ -216,14 +188,11 @@ void NetworkingServer::update()
 			{
 				if(find(_udpClientPorts.begin(), _udpClientPorts.end(), messagePort) != _udpClientPorts.end()) // Message must come from a client port
 				{
-					// Temporary values
 					auto username = messageContent.substr(0, messageContent.find(';'));
 					auto content = messageContent.substr(messageContent.find(';') + 1);
 
-					// Try to find client
 					for(size_t i = 0; i < _clientUsernames.size(); i++)
 					{
-						// Check if username matches
 						if(username == _clientUsernames[i])
 						{
 							_pendingMessages.push_back(NetworkingClientMessage(username, content, NetworkProtocol::UDP));
@@ -241,7 +210,6 @@ void NetworkingServer::update()
 			(messageErrorCode == WSAEMSGSIZE)
 			)
 		{
-			// Wrong packet, do nothing
 		}
 		else // Something really bad happened
 		{

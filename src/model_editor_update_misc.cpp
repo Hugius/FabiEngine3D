@@ -6,13 +6,11 @@ void ModelEditor::_updateCamera()
 {
 	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
-		// Update distance scrolling
 		auto scrollOffset = _fe3d.input_getMouseWheelY();
 		auto cameraDistance = _fe3d.camera_getThirdPersonDistance();
 		cameraDistance = max(MIN_CAMERA_DISTANCE, cameraDistance - (static_cast<float>(scrollOffset) * CAMERA_DISTANCE_SPEED));
 		_fe3d.camera_setThirdPersonDistance(cameraDistance);
 
-		// Update lookat position
 		auto cameraLookat = _fe3d.camera_getThirdPersonLookat();
 		if(_fe3d.input_isKeyDown(InputType::KEY_SPACE))
 		{
@@ -25,10 +23,8 @@ void ModelEditor::_updateCamera()
 		cameraLookat.y = max(-GRID_Y_OFFSET, cameraLookat.y);
 		_fe3d.camera_setThirdPersonLookat(cameraLookat);
 
-		// Hide cursor
 		_fe3d.image_setVisible("@@cursor", false);
 
-		// Update shadows
 		const auto distance = _fe3d.camera_getThirdPersonDistance();
 		_fe3d.gfx_setShadowEyePosition(fvec3(cameraLookat + fvec3(distance * 2.0f)));
 		_fe3d.gfx_setShadowCenterPosition(cameraLookat);
@@ -38,10 +34,8 @@ void ModelEditor::_updateCamera()
 
 	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
-		// Check if RMB pressed
 		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			// Check third person view status
 			if(_fe3d.camera_isThirdPersonViewEnabled())
 			{
 				_fe3d.camera_disableThirdPersonView();
@@ -66,7 +60,6 @@ void ModelEditor::_updateMiscellaneous()
 {
 	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
-		// Update reference model visibility
 		if(_fe3d.input_isKeyPressed(InputType::KEY_R))
 		{
 			if(_fe3d.model_isVisible("@@box"))
@@ -79,7 +72,6 @@ void ModelEditor::_updateMiscellaneous()
 			}
 		}
 
-		// Update wireframe rendering
 		if(!_currentModelID.empty())
 		{
 			if(_fe3d.input_isKeyPressed(InputType::KEY_F))
@@ -106,22 +98,18 @@ void ModelEditor::_updateMiscellaneous()
 	}
 	else
 	{
-		// Temporary values
 		const auto transparency = _fe3d.model_getTransparency(_currentModelID, partID);
 
-		// Check if color reached minimum
 		if(transparency == 0.0f)
 		{
 			_selectedPartHighlightDirection *= -1;
 		}
 
-		// Check if color reached maximum
 		if(transparency == 1.0f)
 		{
 			_selectedPartHighlightDirection *= -1;
 		}
 
-		// Set color
 		const float speed = (PART_HIGHLIGHT_SPEED * static_cast<float>(_selectedPartHighlightDirection));
 		_fe3d.model_setTransparency(_currentModelID, partID, (transparency + speed));
 	}
@@ -131,47 +119,38 @@ void ModelEditor::_updateModelCreating()
 {
 	if(_isCreatingModel)
 	{
-		// Temporary values
 		string newModelID;
 
-		// Check if user filled in a new ID
 		if(_gui.getOverlay()->checkValueForm("modelCreate", newModelID, {}))
 		{
-			// Spaces not allowed
 			if(newModelID.find(' ') != string::npos)
 			{
 				Logger::throwWarning("Model ID cannot contain any spaces!");
 				return;
 			}
 
-			// @ sign not allowed
 			if(newModelID.find('@') != string::npos)
 			{
 				Logger::throwWarning("Model ID cannot contain '@'!");
 				return;
 			}
 
-			// Add @ sign to new ID
 			newModelID = ("@" + newModelID);
 
-			// Check if model already exists
 			if(find(_loadedModelIDs.begin(), _loadedModelIDs.end(), newModelID) != _loadedModelIDs.end())
 			{
 				Logger::throwWarning("Model with ID \"" + newModelID.substr(1) + "\" already exists!");
 				return;
 			}
 
-			// Validate project ID
 			if(_currentProjectID.empty())
 			{
 				Logger::throwError("ModelEditor::_updateModelCreating");
 			}
 
-			// Get the chosen file name
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\mesh\\");
 
-			// Validate target directory
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
@@ -179,7 +158,6 @@ void ModelEditor::_updateModelCreating()
 				return;
 			}
 
-			// Validate chosen file
 			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "OBJ");
 			if(filePath.empty())
 			{
@@ -187,7 +165,6 @@ void ModelEditor::_updateModelCreating()
 				return;
 			}
 
-			// Validate directory of file
 			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
 			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
@@ -196,22 +173,17 @@ void ModelEditor::_updateModelCreating()
 				return;
 			}
 
-			// Create model
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clearMeshCache(finalFilePath);
 			_fe3d.model_create(newModelID, finalFilePath);
 
-			// Check if model creation went well
 			if(_fe3d.model_isExisting(newModelID))
 			{
-				// Go to next screen
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 
-				// Select model
 				_currentModelID = newModelID;
 				_loadedModelIDs.push_back(newModelID);
 
-				// Miscellaneous
 				_fe3d.text_setContent(_gui.getOverlay()->getTextField("modelID")->getEntityID(), "Model: " + newModelID.substr(1), 0.025f);
 				_fe3d.text_setVisible(_gui.getOverlay()->getTextField("modelID")->getEntityID(), true);
 				_isCreatingModel = false;
@@ -224,29 +196,22 @@ void ModelEditor::_updateModelChoosing()
 {
 	if(_isChoosingModel)
 	{
-		// Hide last model
 		if(!_hoveredModelID.empty())
 		{
 			_fe3d.model_setVisible(_hoveredModelID, false);
 		}
 
-		// Get selected button ID
 		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("modelList");
 
-		// Check if model ID is hovered
 		if(!selectedButtonID.empty())
 		{
-			// Set new hovered model
 			_hoveredModelID = ("@" + selectedButtonID);
 
-			// Check if LMB is pressed
 			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				// Select model
 				_currentModelID = ("@" + selectedButtonID);
 				_hoveredModelID = "";
 
-				// Go to next screen
 				if(!_isDeletingModel)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
@@ -254,7 +219,6 @@ void ModelEditor::_updateModelChoosing()
 					_fe3d.text_setVisible(_gui.getOverlay()->getTextField("modelID")->getEntityID(), true);
 				}
 
-				// Miscellaneous
 				_fe3d.model_setVisible(_currentModelID, true);
 				_gui.getOverlay()->deleteChoiceForm("modelList");
 				_isChoosingModel = false;
@@ -271,7 +235,6 @@ void ModelEditor::_updateModelChoosing()
 			_hoveredModelID = "";
 		}
 
-		// Show hovered model
 		if(!_hoveredModelID.empty())
 		{
 			_fe3d.model_setVisible(_hoveredModelID, true);
@@ -283,13 +246,11 @@ void ModelEditor::_updateModelDeleting()
 {
 	if(_isDeletingModel && !_currentModelID.empty())
 	{
-		// Add answer form
 		if(!_gui.getOverlay()->isAnswerFormExisting("delete"))
 		{
 			_gui.getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
-		// Update answer form
 		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
 			_fe3d.model_delete(_currentModelID);
@@ -310,16 +271,12 @@ void ModelEditor::_updatePartChoosing()
 {
 	if(_isChoosingPart)
 	{
-		// Get selected button ID
 		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("partList");
 
-		// Check if part ID is hovered
 		if(!selectedButtonID.empty())
 		{
-			// Set new hovered part
 			_hoveredPartID = selectedButtonID;
 
-			// Check if LMB is pressed
 			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				_currentPartID = selectedButtonID;

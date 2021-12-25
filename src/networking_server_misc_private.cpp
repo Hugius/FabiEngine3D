@@ -102,20 +102,15 @@ void NetworkingServer::_disconnectClient(SOCKET socket)
 {
 	for(size_t i = 0; i < _clientSockets.size(); i++)
 	{
-		// Find list index
 		if(socket == _clientSockets[i])
 		{
-			// Temporarily save username
 			auto clientUsername = _clientUsernames[i];
 
-			// Close socket
 			closesocket(socket);
 
-			// Save disonnected client data
 			_oldClientIPs.push_back(_clientIPs[i]);
 			_oldClientUsernames.push_back(_clientUsernames[i]);
 
-			// Remove client data
 			_clientSockets.erase(_clientSockets.begin() + i);
 			_clientIPs.erase(_clientIPs.begin() + i);
 			_tcpClientPorts.erase(_tcpClientPorts.begin() + i);
@@ -124,7 +119,6 @@ void NetworkingServer::_disconnectClient(SOCKET socket)
 			_tcpMessageBuilds.erase(_tcpMessageBuilds.begin() + i);
 			_tcpMessageThreads.erase(_tcpMessageThreads.begin() + i);
 
-			// Logging (if client was fully accepted)
 			if(!clientUsername.empty())
 			{
 				Logger::throwInfo("Networking client \"" + clientUsername + "\" lost connection with the server!");

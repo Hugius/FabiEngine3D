@@ -6,7 +6,6 @@ void WorldEditor::_updateWaterMenu()
 
 	if(screen->getID() == "worldEditorMenuWater")
 	{
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
@@ -14,7 +13,6 @@ void WorldEditor::_updateWaterMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
 		{
-			// Retrieve template water IDs
 			vector<string> waterIDs;
 			for(const auto& ID : _waterEditor.getLoadedIDs())
 			{
@@ -24,7 +22,6 @@ void WorldEditor::_updateWaterMenu()
 				}
 			}
 
-			// Add choice list
 			_gui.getOverlay()->createChoiceForm("waterList", "Select Water", fvec2(0.0f, 0.1f), waterIDs);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
@@ -41,19 +38,16 @@ void WorldEditor::_updateWaterMenu()
 			_fe3d.water_setHeight(_currentWaterID, (_fe3d.water_getHeight(_currentWaterID) - (_editorSpeed / 100.0f)));
 		}
 
-		// Update water choosing
 		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			string selectedButtonID = _gui.getOverlay()->checkChoiceForm("waterList");
 			if(!selectedButtonID.empty())
 			{
-				// Delete old
 				if(_fe3d.water_isExisting(selectedButtonID))
 				{
 					_fe3d.water_delete(selectedButtonID);
 				}
 
-				// Create new
 				_currentWaterID = selectedButtonID;
 				_copyTemplateWater(_currentWaterID, ("@" + selectedButtonID));
 				_gui.getOverlay()->deleteChoiceForm("waterList");
@@ -64,12 +58,10 @@ void WorldEditor::_updateWaterMenu()
 			}
 		}
 
-		// Update buttons hoverability
 		screen->getButton("up")->setHoverable(!_currentWaterID.empty());
 		screen->getButton("down")->setHoverable(!_currentWaterID.empty());
 		screen->getButton("delete")->setHoverable(!_currentWaterID.empty());
 
-		// Update water selection
 		_fe3d.water_select(_currentWaterID);
 	}
 }

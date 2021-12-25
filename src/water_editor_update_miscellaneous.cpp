@@ -6,13 +6,11 @@ void WaterEditor::_updateMiscellaneousMenu()
 
 	if(screen->getID() == "waterEditorMenuMiscellaneous")
 	{
-		// Temporary values
 		auto speed = _fe3d.water_getSpeed(_currentWaterID);
 		auto transparency = _fe3d.water_getTransparency(_currentWaterID);
 		auto waveHeight = _fe3d.water_getWaveHeight(_currentWaterID);
 		auto quality = _fe3d.water_getQuality(_currentWaterID);
 
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
@@ -33,7 +31,6 @@ void WaterEditor::_updateMiscellaneousMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("quality")->isHovered())
 		{
-			// Change water quality
 			if(quality == WaterQuality::SKY)
 			{
 				quality = WaterQuality::SKY_TERRAIN;
@@ -51,11 +48,9 @@ void WaterEditor::_updateMiscellaneousMenu()
 				quality = WaterQuality::SKY;
 			}
 
-			// Update water quality
 			_fe3d.water_setQuality(_currentWaterID, quality);
 		}
 
-		// Update value forms
 		if(_gui.getOverlay()->checkValueForm("speedX", speed.x))
 		{
 			speed.x /= 100000.0f;
@@ -77,11 +72,9 @@ void WaterEditor::_updateMiscellaneousMenu()
 			_fe3d.water_setWaveHeight(_currentWaterID, waveHeight);
 		}
 
-		// Update buttons hoverability
 		screen->getButton("waveHeight")->setHoverable(_fe3d.water_hasDisplacementMap(_currentWaterID));
 		screen->getButton("speed")->setHoverable(_fe3d.water_hasDudvMap(_currentWaterID) || _fe3d.water_hasDisplacementMap(_currentWaterID));
 
-		// Update button text contents
 		screen->getButton("quality")->changeTextContent("Quality: " + to_string(static_cast<int>(quality) + 1));
 	}
 }

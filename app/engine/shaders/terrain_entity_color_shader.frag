@@ -131,13 +131,10 @@ vec3 calculateDiffuseMapping()
 {
 	if (u_hasBlendMap) // Blendmapped mixed texture
 	{
-		// Convert UV coordinates between 0.0 and 1.0
 		vec2 blendUV = (f_uv / u_textureRepeat);
 
-		// Get color value of blendmap
 		vec4 blendMapColor = texture(u_blendMap, blendUV);
 
-		// Calculate diffuse map color
 		vec3 diffuseMapColor = vec3(0.0f);
 		if (u_hasDiffuseMap)
 		{
@@ -146,7 +143,6 @@ vec3 calculateDiffuseMapping()
 			diffuseMapColor = pow(diffuseMapColor, vec3(2.2f));
 		}
 
-		// Calculate blending color for every channel
 		vec3 rColor = (u_hasRedDiffuseMap ? (texture(u_redDiffuseMap, (blendUV * u_redTextureRepeat)).rgb * blendMapColor.r) : vec3(0.0f));
 		vec3 gColor = (u_hasGreenDiffuseMap ? (texture(u_greenDiffuseMap, (blendUV * u_greenTextureRepeat)).rgb * blendMapColor.g) : vec3(0.0f));
 		vec3 bColor = (u_hasBlueDiffuseMap ? (texture(u_blueDiffuseMap, (blendUV * u_blueTextureRepeat)).rgb * blendMapColor.b) : vec3(0.0f));
@@ -154,19 +150,15 @@ vec3 calculateDiffuseMapping()
 		gColor = pow(gColor, vec3(2.2f));
 		bColor = pow(bColor, vec3(2.2f));
 
-		// Compose final color
 		vec3 newColor = (diffuseMapColor + rColor + gColor + bColor);
         
-		// Return
 		return newColor;
 	}
 	else if (u_hasDiffuseMap) // Diffuse texture
 	{
-		// Calculate
 		vec3 newColor = texture(u_diffuseMap, vec2(-f_uv.x, f_uv.y)).rgb;
 		newColor = pow(newColor, vec3(2.2f));
 
-		// Return
 		return newColor;
 	}
 	else
@@ -181,7 +173,6 @@ vec3 calculateNormalMapping()
     {
 		if (u_hasBlendMap) // Blendmapped mixed normal
 		{
-			// Get color values of blendmap (R, G, B)
 			vec2 blendUV = (f_uv / u_textureRepeat);
 			vec4 blendMapColor = texture(u_blendMap, blendUV);
 			float diffuseStrength = (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
@@ -189,10 +180,8 @@ vec3 calculateNormalMapping()
 			float gStrength = blendMapColor.g;
 			float bStrength = blendMapColor.b;
 
-			// Calculate total normal vector
 			vec3 totalNormal;
 
-			// Diffuse normal map
 			if (u_hasNormalMap)
 			{
 				vec3 normal = texture(u_normalMap, f_uv).rgb;
@@ -205,7 +194,6 @@ vec3 calculateNormalMapping()
 				totalNormal += f_normal * diffuseStrength;
 			}
 			
-			// BlendR normal map
 			if (u_hasRedNormalMap)
 			{
 				vec3 normal = texture(u_redNormalMap, (blendUV * u_redTextureRepeat)).rgb;
@@ -218,7 +206,6 @@ vec3 calculateNormalMapping()
 				totalNormal += f_normal * rStrength;
 			}
 
-			// BlendG normal map
 			if (u_hasGreenNormalMap)
 			{
 				vec3 normal = texture(u_greenNormalMap, (blendUV * u_greenTextureRepeat)).rgb;
@@ -231,7 +218,6 @@ vec3 calculateNormalMapping()
 				totalNormal += f_normal * gStrength;
 			}
 
-			// BlendB normal map
 			if (u_hasBlueNormalMap)
 			{
 				vec3 normal = texture(u_blueNormalMap, (blendUV * u_blueTextureRepeat)).rgb;
@@ -244,20 +230,17 @@ vec3 calculateNormalMapping()
 				totalNormal += f_normal * bStrength;
 			}
 
-			// Return
 			return totalNormal;
 		}
 		else // Diffuse normal
 		{
 			if (u_hasNormalMap)
 			{
-				// Calculate new normal vector
 				vec3 normal = texture(u_normalMap, f_uv).rgb;
 				normal *= 2.0f;
 				normal -= 1.0f;
 				normal = normalize(f_tbnMatrix * normal);
 
-				// Return
 				return normal;
 			}
 			else
@@ -288,19 +271,16 @@ vec3 calculateDirectionalLighting(vec3 normal)
 {
 	if (u_isDirectionalLightingEnabled)
 	{
-        // Calculate lighting strength
         vec3 result = vec3(0.0f);
         vec3 direction = normalize(u_directionalLightPosition - f_position);
 		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
 		float specular = calculateSpecularLighting(u_directionalLightPosition, normal);
 
-        // Apply
         result += vec3(diffuse); // Diffuse
         result += vec3(specular); // Specular
         result *= u_directionalLightingColor; // Color
         result *= u_directionalLightingIntensity; // Intensity
 
-        // Return
         return result;
 	}
 	else
@@ -315,12 +295,10 @@ vec3 calculatePointlights(vec3 normal)
 		
 	for (int i = 0; i < u_pointlightCount; i++)
 	{
-		// Calculate light strength
 		vec3 direction = normalize(u_pointlightPositions[i] - f_position);
 		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
 		float specular = calculateSpecularLighting(u_pointlightPositions[i], normal);
 
-		// Calculate light attenuation
 		float attenuation;
 		if (u_pointlightShapes[i] == 0)
 		{
@@ -337,7 +315,6 @@ vec3 calculatePointlights(vec3 normal)
 			attenuation = min(xAttenuation, min(yAttenuation, zAttenuation));
 		}
 
-		// Apply
 		vec3 current = vec3(0.0f);
 		current += vec3(diffuse); // Diffuse
 		current += vec3(specular); // Specular
@@ -345,7 +322,6 @@ vec3 calculatePointlights(vec3 normal)
 		current *= (attenuation * attenuation); // Distance
 		current *= u_pointlightIntensities[i]; // Intensity
 
-		// Add to total lighting value
 		result += current;
 	}
 
@@ -356,10 +332,8 @@ vec3 calculateSpotlights(vec3 normal)
 {
 	vec3 result = vec3(0.0f);
 
-    // Iterate through lights
 	for (int i = 0; i < u_spotlightCount; i++)
 	{
-		// Calculate light strength
 		vec3 direction = normalize(u_spotlightPositions[i] - f_position);
 		float spot = dot(direction, normalize(-u_spotlightFrontVectors[i]));
 		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
@@ -367,13 +341,11 @@ vec3 calculateSpotlights(vec3 normal)
 		float smoothingAngle = (u_spotlightAngles[i] * (1.0f - SPOTLIGHT_SMOOTHING_MULTIPLIER));
 		float intensity = clamp(((spot - (u_spotlightAngles[i] * SPOTLIGHT_SMOOTHING_MULTIPLIER)) / smoothingAngle), 0.0f, 1.0f);  
 
-		// Calculate light distance
 		float fragmentDistance = distance(u_spotlightPositions[i], f_position);
 		float distanceMultiplier = (fragmentDistance / u_spotlightDistances[i]);
 		distanceMultiplier = clamp(distanceMultiplier, 0.0f, 1.0f);
 		distanceMultiplier = (1.0f - distanceMultiplier);
 
-		// Apply
 		vec3 current = vec3(0.0f);
 		current += vec3(diffuse * intensity); // Diffuse
 		current += vec3(specular * intensity); // Specular
@@ -381,7 +353,6 @@ vec3 calculateSpotlights(vec3 normal)
 		current *= u_spotlightIntensities[i]; // Intensity
 		current *= distanceMultiplier; // Distance
 
-		// Add to total lighting value
 		result += current;
 	}
 
@@ -392,16 +363,13 @@ vec3 calculateFog(vec3 color)
 {
 	if (u_isFogEnabled)
 	{
-		// Calculate distance to fragment in world space
 		float fragmentDistance = distance(f_position.xyz, u_cameraPosition);
 
-        // Calculate fog intensity
 		float distanceDifference = (u_fogMaxDistance - u_fogMinDistance);
 		float fragmentPart = clamp(((fragmentDistance - u_fogMinDistance) / distanceDifference), 0.0f, 1.0f);
 		float thickness = clamp(u_fogThickness, 0.0f, 1.0f);
 		float mixValue = (fragmentPart * thickness);
 
-		// Return
 		return mix(color, u_fogColor, mixValue);
 	}
 	else
@@ -414,13 +382,11 @@ float calculateSpecularLighting(vec3 lightPosition, vec3 normal)
 {
     if (u_isSpecular)
     {
-        // Calculate
         vec3 lightDirection   = normalize(lightPosition - f_position);
         vec3 viewDirection    = normalize(u_cameraPosition - f_position);
         vec3 halfWayDirection = normalize(lightDirection + viewDirection);
         float result          = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
 
-        // Return
         return (result * u_specularIntensity);
     }
     else
@@ -433,26 +399,21 @@ float calculateShadows()
 {
 	if (u_isShadowsEnabled)
 	{
-		// Temporary values
 		float halfSize = (u_shadowSize / 2.0f);
 		float fragmentDistance = distance(f_position.xz, u_shadowCenter.xz);
 
-		// Check if fragment must be shadowed
 		if (fragmentDistance <= halfSize)
 		{
-			// Temporary values
 			float shadow = 0.0f;
 			vec3 projCoords = (((f_shadowPosition.xyz / f_shadowPosition.w) * 0.5f) + 0.5f);
 			float currentDepth = projCoords.z;
 			vec2 texelSize = (vec2(1.0f) / textureSize(u_shadowMap, 0));
 
-			// Skip fragments outside of the depth map
 			if (projCoords.z > 1.0f)
 			{	
 				return 1.0f;
 			}
 			
-			// Calculate PCF shadows
 			for (int x = -1; x <= 1; x++)
 			{
 				for (int y = -1; y <= 1; y++)
@@ -462,21 +423,17 @@ float calculateShadows()
 				}    
 			}
             
-			// Calculate final shadow value
 			shadow /= 9.0f;
 
-			// Limit shadows
 			if (shadow > 1.0f)
 			{
 				shadow = 1.0f;
 			}
 
-			// Long-distance shadows fading
 			float transparency = (fragmentDistance - (halfSize * 0.9f)); // Only for the outer 10%
 			transparency = clamp(transparency, 0.0f, halfSize * 0.1f); // Cannot be negative
 			transparency /= (halfSize * 0.1f); // Convert value to 0.0 - 1.0 range
 
-			// Debug frame rendering
 			if (u_isShadowFrameRenderEnabled)
 			{
 				if ((fragmentDistance - (halfSize * 0.99f)) > 0.0f)
@@ -485,16 +442,13 @@ float calculateShadows()
 				}
 			}
 
-			// Return
 			return mix(shadow, 1.0f, transparency);
 		}
 
-		// No shadow
 		return 1.0f;
 	}
 	else
 	{
-		// No shadow
 		return 1.0f;
 	}
 }

@@ -10,37 +10,30 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Temporary values
 			string newID = args[0].getString();
 			string templateID = args[1].getString();
 
-			// Validate ID
 			if(!_validateFe3dID(newID))
 			{
 				return true;
 			}
 
-			// Validate existence
 			if(_fe3d.sound3d_isExisting(newID))
 			{
 				_throwScriptError("sound already exists!");
 				return true;
 			}
 
-			// Validate template sound ID
 			if(_validateFe3dSound3d(templateID, true))
 			{
-				// Temporary values
 				auto position = fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal());
 				auto maxVolume = args[5].getDecimal();
 				auto maxDistance = args[6].getDecimal();
 
-				// Add sound
 				_worldEditor.copyTemplateSound(newID, ("@" + templateID), position);
 				_fe3d.sound3d_setMaxVolume(newID, maxVolume);
 				_fe3d.sound3d_setMaxDistance(newID, maxDistance);
 
-				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -62,17 +55,14 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			// Iterate through sounds
 			for(const auto& ID : _fe3d.sound3d_getIDs())
 			{
-				// Cannot be template
 				if(ID[0] != '@')
 				{
 					_fe3d.sound3d_delete(ID);
 				}
 			}
 
-			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

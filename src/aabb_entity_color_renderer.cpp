@@ -22,18 +22,14 @@ void AabbEntityColorRenderer::render(const shared_ptr<AabbEntity> entity)
 {
 	if(entity->isVisible())
 	{
-		// Shader uniforms
 		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
 		_shader.uploadUniform("u_color", entity->getColor());
 
-		// Bind buffer
 		glBindVertexArray(entity->getRenderBuffer()->getVAO());
 
-		// Render
 		glDrawArrays(GL_LINE_STRIP, 0, entity->getRenderBuffer()->getVertexCount());
 		_renderBus.increaseTriangleCount(entity->getRenderBuffer()->getVertexCount() / 3);
 
-		// Unbind buffer
 		glBindVertexArray(0);
 	}
 }

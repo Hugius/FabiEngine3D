@@ -9,11 +9,9 @@ void SpotlightEntity::updateTransformation()
 {
 	if(_position != _positionTarget)
 	{
-		// Update position
 		auto speedMultiplier = Math::normalize(_positionTarget - _position);
 		_position += (speedMultiplier * _positionTargetSpeed);
 
-		// Correct position
 		if(fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)
 		{
 			_position.x = _positionTarget.x;

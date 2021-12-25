@@ -103,7 +103,6 @@ void MasterRenderer::renderWorld(EntityBus* entityBus)
 	}
 	else // Normal rendering
 	{
-		// Pre-captures
 		_timer.startDeltaPart("reflectionPreRender");
 		_captureCubeReflections();
 		_capturePlanarReflections();
@@ -119,10 +118,8 @@ void MasterRenderer::renderWorld(EntityBus* entityBus)
 		_captureShadows();
 		_timer.stopDeltaPart();
 
-		// Bind world capture buffer
 		_worldColorCaptureBuffer.bind();
 
-		// 3D rendering
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		_renderBus.setTriangleCountingEnabled(true);
 		_timer.startDeltaPart("skyEntityRender");
@@ -145,13 +142,11 @@ void MasterRenderer::renderWorld(EntityBus* entityBus)
 		_timer.stopDeltaPart();
 		_renderBus.setTriangleCountingEnabled(false);
 
-		// Unbind world capture buffer
 		_worldColorCaptureBuffer.unbind();
 		_renderBus.setFinalWorldMap(_worldColorCaptureBuffer.getTexture(0));
 		_renderBus.setPrimaryWorldMap(_worldColorCaptureBuffer.getTexture(0));
 		_renderBus.setSecondaryWorldMap(_worldColorCaptureBuffer.getTexture(1));
 
-		// Post-captures
 		_timer.startDeltaPart("postProcessing");
 		_captureAntiAliasing();
 		_captureBloom();
@@ -160,7 +155,6 @@ void MasterRenderer::renderWorld(EntityBus* entityBus)
 		_captureMotionBlur();
 		_timer.stopDeltaPart();
 
-		// 2D rendering
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		if(_renderBus.isDebugRenderingEnabled()) // Render debug screens
@@ -177,12 +171,10 @@ void MasterRenderer::renderWorld(EntityBus* entityBus)
 
 		}
 
-		// Render image entities & text entities
 		_timer.startDeltaPart("guiEntityRender");
 		_renderBus.setTriangleCountingEnabled(true);
 		_renderGUI();
 
-		// Render custom cursor entity
 		_renderCursor();
 		_renderBus.setTriangleCountingEnabled(false);
 		_timer.stopDeltaPart();
@@ -258,18 +250,15 @@ void MasterRenderer::_updateLensFlare()
 {
 	if(_renderBus.isLensFlareEnabled())
 	{
-		// Temporary values
 		auto flareSourcePosition = _renderBus.getDirectionalLightingPosition();
 		auto viewMatrix = _renderBus.getViewMatrix();
 		auto projectionMatrix = _renderBus.getProjectionMatrix();
 		float transparency = 0.0f;
 
-		// Calculate screen position
 		fvec4 flareSourceClip = (projectionMatrix * viewMatrix * fvec4(flareSourcePosition.x, flareSourcePosition.y, flareSourcePosition.z, 1.0f));
 		fvec2 flareSourceNDC = (fvec2(flareSourceClip.x, flareSourceClip.y) / flareSourceClip.w);
 		fvec2 flareSourceUV = fvec2(((flareSourceNDC.x + 1.0f) / 2.0f), ((flareSourceNDC.y + 1.0f) / 2.0f));
 
-		// Check if flare source is visible
 		if((flareSourceNDC.x > -1.0f) && (flareSourceNDC.x < 1.0f) && (flareSourceNDC.y > -1.0f) && (flareSourceNDC.y < 1.0f))
 		{
 
@@ -277,7 +266,6 @@ void MasterRenderer::_updateLensFlare()
 			transparency = clamp(transparency, 0.0f, 1.0f);
 		}
 
-		// Update shader properties
 		_renderBus.setLensFlareTransparency(transparency);
 		_renderBus.setFlareSourcePosition(flareSourcePosition);
 		_renderBus.setFlareSourceUV(flareSourceUV);

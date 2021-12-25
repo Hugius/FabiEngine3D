@@ -11,13 +11,11 @@ void TerrainEditor::_updateLightingMenu()
 
 	if(screen->getID() == "terrainEditorMenuLighting")
 	{
-		// Temporary values
 		bool isSpecular = _fe3d.terrain_isSpecular(_currentTerrainID);
 		float specularShininess = _fe3d.terrain_getSpecularShininess(_currentTerrainID);
 		float specularIntensity = _fe3d.terrain_getSpecularIntensity(_currentTerrainID);
 		float lightness = _fe3d.terrain_getLightness(_currentTerrainID);
 
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
@@ -41,7 +39,6 @@ void TerrainEditor::_updateLightingMenu()
 			_gui.getOverlay()->createValueForm("lightness", "Lightness", (lightness * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
-		// Update value forms
 		if(_gui.getOverlay()->checkValueForm("specularShininess", specularShininess))
 		{
 			_fe3d.terrain_setSpecularShininess(_currentTerrainID, specularShininess);
@@ -57,11 +54,9 @@ void TerrainEditor::_updateLightingMenu()
 			_fe3d.terrain_setLightness(_currentTerrainID, lightness);
 		}
 
-		// Update buttons hoverability
 		screen->getButton("specularShininess")->setHoverable(isSpecular);
 		screen->getButton("specularIntensity")->setHoverable(isSpecular);
 
-		// Update button text contents
 		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
 	}
 }

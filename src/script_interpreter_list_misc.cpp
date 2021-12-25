@@ -45,7 +45,6 @@ const bool ScriptInterpreter::_validateArgumentTypes(const vector<ScriptValue>& 
 {
 	for(size_t i = 0; i < values.size(); i++)
 	{
-		// Compare value types
 		if(values[i].getType() != types[i])
 		{
 			_throwScriptError("incorrect argument type!");
@@ -107,11 +106,9 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	}
 	else if(_isStringValue(valueString))
 	{
-		// Remove the []
 		valueString.erase(valueString.begin());
 		valueString.pop_back();
 
-		// Add value
 		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::STRING, valueString));
 	}
 	else if(_isDecimalValue(valueString))
@@ -128,24 +125,20 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	}
 	else
 	{
-		// Check if variable is not existing
 		if(!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))
 		{
 			_throwScriptError("invalid value!");
 			return;
 		}
 
-		// Retrieve right variable
 		const auto& rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
-		// Check if pushing list to list
 		if(rightVariable.getType() == ScriptVariableType::MULTIPLE)
 		{
 			_throwScriptError("cannot push LIST to LIST!");
 			return;
 		}
 
-		// Add value
 		listVariable.addValue(rightVariable.getValue());
 	}
 }
@@ -206,17 +199,14 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 	}
 	else // Variable index
 	{
-		// Retrieve index variable
 		auto indexVariable = (_isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString));
 
-		// Check if not integer
 		if(indexVariable.getValue().getType() != ScriptValueType::INTEGER)
 		{
 			_throwScriptError("LIST index not of type INT!");
 			return;
 		}
 
-		// Set index
 		index = indexVariable.getValue().getInteger();
 	}
 

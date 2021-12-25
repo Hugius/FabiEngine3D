@@ -13,10 +13,8 @@ void Sound3dPlayer::update(vector<Sound3d>& sounds, Camera& camera)
 {
 	for(auto& sound : sounds)
 	{
-		// Check if sound is started
 		if(isSoundStarted(sound))
 		{
-			// Distance
 			auto cameraPosition = camera.getPosition(); // Camera position
 			float xDifference = fabsf(sound.getPosition().x - cameraPosition.x); // Difference between camera X & point X
 			float yDifference = fabsf(sound.getPosition().y - cameraPosition.y); // Difference between camera Y & point Y
@@ -26,7 +24,6 @@ void Sound3dPlayer::update(vector<Sound3d>& sounds, Camera& camera)
 			volume = clamp(volume, 0.0f, sound.getMaxVolume()); // Clamp to maximum
 			sound.setVolume(volume); // Update sound volume
 
-			// Panning
 			auto cameraDirection = camera.getFrontVector();
 			mat44 rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(90.0f));
 			fvec3 soundDirection = (cameraPosition - sound.getPosition());
@@ -38,24 +35,19 @@ void Sound3dPlayer::update(vector<Sound3d>& sounds, Camera& camera)
 			Uint8 leftStrength = Uint8(255.0f * range);
 			Uint8 rightStrength = Uint8(255.0f - leftStrength);
 
-			// Iterate through channels
 			for(const auto& channel : _findChannels(sound))
 			{
-				// Apply stereo panning
 				Mix_SetPanning(channel, leftStrength, rightStrength);
 			}
 		}
 
-		// Update sound volume
 		_updateSoundVolume(sound);
 	}
 
 	for(size_t i = 0; i < _channels.size(); i++)
 	{
-		// Check if sound stopped playing
 		if(!Mix_Playing(static_cast<int>(i)) && !Mix_Paused(static_cast<int>(i)))
 		{
-			// De-allocate channel
 			_channels[i] = "";
 		}
 	}

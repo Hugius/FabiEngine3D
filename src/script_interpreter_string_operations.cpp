@@ -49,7 +49,6 @@ const bool ScriptInterpreter::_isDecimalValue(const string& valueString) const
 			return false;
 		}
 
-		// Count dots in value
 		if(valueString[i] == '.')
 		{
 			dots++;
@@ -113,24 +112,20 @@ const int ScriptInterpreter::_extractListIndexFromString(const string& valueStri
 	}
 	else
 	{
-		// Check if variable is not existing
 		if(!_isLocalVariableExisting(indexString) && !_isGlobalVariableExisting(indexString))
 		{
 			_throwScriptError("variable \"" + indexString + "\" not existing!");
 			return -1;
 		}
 
-		// Retrieve variable
 		auto& variable = (_isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString));
 
-		// Check if variable is not an integer
 		if((variable.getType() == ScriptVariableType::MULTIPLE) || variable.getValue().getType() != ScriptValueType::INTEGER)
 		{
 			_throwScriptError("LIST index must be of type INT!");
 			return -1;
 		}
 
-		// Return
 		isAccessingList = true;
 		return variable.getValue().getInteger();
 	}
@@ -162,7 +157,6 @@ const string ScriptInterpreter::_limitIntegerString(const string& valueString) c
 {
 	if(valueString[0] == '-')
 	{
-		// Cannot be less than -999999999
 		if(valueString.size() >= 11)
 		{
 			return "-1000000000";
@@ -170,7 +164,6 @@ const string ScriptInterpreter::_limitIntegerString(const string& valueString) c
 	}
 	else // Positive value
 	{
-		// Cannot be more than 999999999
 		if(valueString.size() >= 10)
 		{
 			return "1000000000";
@@ -187,7 +180,6 @@ const string ScriptInterpreter::_limitDecimalString(const string& valueString) c
 
 	if(valueString[0] == '-')
 	{
-		// Cannot be less than -999999999
 		if(intString.size() >= 11)
 		{
 			return "-1000000000.0";
@@ -195,7 +187,6 @@ const string ScriptInterpreter::_limitDecimalString(const string& valueString) c
 	}
 	else // Positive value
 	{
-		// Cannot be more than 999999999
 		if(intString.size() >= 10)
 		{
 			return "1000000000.0";

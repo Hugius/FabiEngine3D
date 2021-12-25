@@ -10,20 +10,17 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Validate ID
 			if(!_validateFe3dID(args[0].getString()))
 			{
 				return true;
 			}
 
-			// Validate existence
 			if(_fe3d.billboard_isExisting(args[0].getString()))
 			{
 				_throwScriptError("billboard already exists!");
 				return true;
 			}
 
-			// Validate template
 			if(_validateFe3dBillboard(args[1].getString(), true))
 			{
 				_worldEditor.copyTemplateBillboard(args[0].getString(), ("@" + args[1].getString()),
@@ -49,17 +46,14 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			// Iterate through billboards
 			for(const auto& ID : _fe3d.billboard_getIDs())
 			{
-				// Cannot be template
 				if(ID[0] != '@')
 				{
 					_fe3d.billboard_delete(ID);
 				}
 			}
 
-			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -314,23 +308,19 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 		{
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				// Retrieve all bound AABB IDs
 				auto aabbIDs = _fe3d.aabb_getChildIDs(args[0].getString(), AabbParentEntityType::BILLBOARD);
 
-				// Check if billboardEntity has no AABBs
 				if(aabbIDs.empty())
 				{
 					_throwScriptError("billboard with ID \"" + args[0].getString() + "\" has no bound AABBs!");
 					return true;
 				}
 
-				// Set responsiveness
 				for(const auto& ID : aabbIDs)
 				{
 					_fe3d.aabb_setRaycastResponsive(ID, args[1].getBoolean());
 				}
 
-				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -343,23 +333,19 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 		{
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				// Retrieve all bound AABB IDs
 				auto aabbIDs = _fe3d.aabb_getChildIDs(args[0].getString(), AabbParentEntityType::BILLBOARD);
 
-				// Check if billboardEntity has no AABBs
 				if(aabbIDs.empty())
 				{
 					_throwScriptError("billboard with ID \"" + args[0].getString() + "\" has no bound AABBs!");
 					return true;
 				}
 
-				// Set responsiveness
 				for(const auto& ID : aabbIDs)
 				{
 					_fe3d.aabb_setCollisionResponsive(ID, args[1].getBoolean());
 				}
 
-				// Return
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -502,7 +488,6 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 		{
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				// Check if billboard is not of type text
 				if(!_fe3d.billboard_isTextual(args[0].getString()))
 				{
 					_throwScriptError("billboard with ID \"" + args[0].getString() + "\" is not of type text!");

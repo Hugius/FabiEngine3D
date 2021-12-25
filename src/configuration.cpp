@@ -12,29 +12,24 @@ Config::Config()
 
 	if(Tools::isFileExisting(filePath))
 	{
-		// Open config file
 		ifstream file(filePath);
 
-		// Store config file content
 		float windowSizeMultiplier = 0.0f;
 		_processOption(file, windowSizeMultiplier, "window_size");
 		_processOption(file, _isWindowFullscreen, "window_fullscreen");
 		_processOption(file, _isWindowBorderless, "window_borderless");
 		_processOption(file, _windowTitle, "window_title");
 
-		// Check if multiplier is between 0.0 and 1.0
 		if((windowSizeMultiplier < 0.0f) || (windowSizeMultiplier > 1.0f))
 		{
 			Logger::throwFatalWarning("Configuration file @ option `window_size`: must be between 0.0 and 1.0!");
 		}
 
-		// Save monitor dimensions
 		SDL_DisplayMode DM;
 		SDL_GetDesktopDisplayMode(0, &DM);
 		_monitorSize.x = DM.w;
 		_monitorSize.y = DM.h;
 
-		// Set window & viewport dimensions
 		_windowSize.x = static_cast<int>(static_cast<float>(DM.w) * windowSizeMultiplier);
 		_windowSize.y = static_cast<int>(static_cast<float>(DM.h) * windowSizeMultiplier);
 		_viewportSize.x = static_cast<int>(static_cast<float>(_windowSize.x));
@@ -42,18 +37,15 @@ Config::Config()
 		_viewportPosition.x = 0;
 		_viewportPosition.y = 0;
 
-		// Miscellaneous 
 		_isApplicationExported = true;
 	}
 	else
 	{
-		// Save monitor dimensions
 		SDL_DisplayMode DM;
 		SDL_GetDesktopDisplayMode(0, &DM);
 		_monitorSize.x = DM.w;
 		_monitorSize.y = DM.h;
 
-		// Set window & viewport dimensions
 		_isWindowFullscreen = false;
 		_isWindowBorderless = false;
 		_windowSize.x = static_cast<int>(static_cast<float>(DM.w) * 0.9f);
@@ -63,7 +55,6 @@ Config::Config()
 		_viewportPosition.x = static_cast<int>(0.125f * static_cast<float>(_windowSize.x));
 		_viewportPosition.y = static_cast<int>(0.2f * static_cast<float>(_windowSize.y));
 
-		// Miscellaneous 
 		_isApplicationExported = false;
 	}
 }
@@ -138,7 +129,6 @@ void Config::_processOption(ifstream& file, bool& option, string criteria)
 
 	if(field == criteria)
 	{
-		// Parsing to boolean value
 		if(value == "true")
 		{
 			option = true;

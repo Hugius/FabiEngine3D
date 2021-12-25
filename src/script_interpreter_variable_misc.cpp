@@ -77,39 +77,33 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 	}
 	else if((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == BOOLEAN_KEYWORD)) // From STR to BOOL
 	{
-		// Check if string invalid
 		if(!_isBooleanValue(variable.getValue().getString()))
 		{
 			_throwScriptError("invalid boolean string!");
 			return;
 		}
 
-		// Cast to boolean
 		bool newValue = (variable.getValue().getString() == "<true>") ? true : false;
 		variable.setValue(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, newValue));
 	}
 	else if((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == INTEGER_KEYWORD)) // From STR to INT
 	{
-		// Check if string invalid
 		if(!_isIntegerValue(variable.getValue().getString()))
 		{
 			_throwScriptError("invalid integer string!");
 			return;
 		}
 
-		// Cast to integer
 		variable.setValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(variable.getValue().getString()))));
 	}
 	else if((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == DECIMAL_KEYWORD)) // From STR to DEC
 	{
-		// Check if string invalid
 		if(!_isDecimalValue(variable.getValue().getString()))
 		{
 			_throwScriptError("invalid decimal string!");
 			return;
 		}
 
-		// Cast to decimal
 		variable.setValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitDecimalString(variable.getValue().getString()))));
 	}
 	else

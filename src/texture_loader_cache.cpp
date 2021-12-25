@@ -26,7 +26,6 @@ void TextureLoader::cache2dTextures(const vector<string>& filePaths, bool isMipm
 
 	for(const auto& filePath : uniqueFilePaths)
 	{
-		// Check if texture is not already cached
 		if(_2dTextureCache.find(filePath) == _2dTextureCache.end())
 		{
 			threads.push_back(async(launch::async, &TextureLoader::_loadSurface, this, filePath));
@@ -37,39 +36,29 @@ void TextureLoader::cache2dTextures(const vector<string>& filePaths, bool isMipm
 
 	while(finishedThreadCount != threadStatuses.size())
 	{
-		// For all threads
 		for(size_t i = 0; i < threadStatuses.size(); i++)
 		{
-			// Check if texture is not processed yet
 			if(!threadStatuses[i])
 			{
-				// Check if thread is finished
 				if(threads[i].wait_until(system_clock::time_point::min()) == future_status::ready)
 				{
-					// Retrieve return value
 					auto loadedImage = threads[i].get();
 
-					// Update thread status
 					threadStatuses[i] = true;
 					finishedThreadCount++;
 
-					// Check image status
 					if(loadedImage == nullptr)
 					{
 						Logger::throwWarning("Cannot load image: \"" + finalFilePaths[i] + "\"!");
 					}
 					else
 					{
-						// Load OpenGL texture
 						auto loadedTexture = _convertInto2dTexture(loadedImage, finalFilePaths[i], isMipmapped, isAnisotropic);
 
-						// Memory management
 						SDL_FreeSurface(loadedImage);
 
-						// Check texture status
 						if(loadedTexture != 0)
 						{
-							// Cache texture
 							_2dTextureCache[finalFilePaths[i]] = loadedTexture;
 						}
 					}
@@ -88,10 +77,8 @@ void TextureLoader::cache3dTextures(const vector<array<string, 6>>& filePathsLis
 
 	for(const auto& filePaths : filePathsList)
 	{
-		// Check if texture is not already cached
 		if(_3dTextureCache.find(filePaths) == _3dTextureCache.end())
 		{
-			// 6 threads for every 3D texture
 			threads.push_back({});
 			for(const auto& filePath : filePaths)
 			{
@@ -104,61 +91,47 @@ void TextureLoader::cache3dTextures(const vector<array<string, 6>>& filePathsLis
 
 	while(finishedThreadCount != threadStatuses.size())
 	{
-		// For all threads
 		for(size_t i = 0; i < threadStatuses.size(); i++)
 		{
-			// Check if texture is not processed yet
 			if(!threadStatuses[i])
 			{
-				// Check if all 6 threads are finished
 				bool threadsAreFinished = true;
 				for(size_t j = 0; j < threads[i].size(); j++)
 				{
-					// Check if thread is finished
 					if(threads[i][i].wait_until(system_clock::time_point::min()) != future_status::ready)
 					{
 						threadsAreFinished = false;
 					}
 				}
 
-				// Process threads if finished
 				array<SDL_Surface*, 6> loadedImages;
 				if(threadsAreFinished)
 				{
-					// Update thread status
 					threadStatuses[i] = true;
 					finishedThreadCount++;
 
-					// 6 images for every 3D texture
 					for(size_t j = 0; j < threads[i].size(); j++)
 					{
-						// Save loaded image
 						loadedImages[j] = threads[i][j].get();
 
-						// Error logging
 						if((loadedImages[j] == nullptr) && !finalFilePathsList[i][j].empty())
 						{
 							Logger::throwWarning("Cannot load image: \"" + finalFilePathsList[i][j] + "\"!");
 						}
 					}
 
-					// Load OpenGL texture
 					TextureID loadedTexture = _convertInto3dTexture(loadedImages, finalFilePathsList[i]);
 
-					// Memory management
 					for(const auto& image : loadedImages)
 					{
-						// Only if memory is present
 						if(image != nullptr)
 						{
 							SDL_FreeSurface(image);
 						}
 					}
 
-					// Check texture status
 					if(loadedTexture != 0)
 					{
-						// Cache texture
 						_3dTextureCache[finalFilePathsList[i]] = loadedTexture;
 					}
 				}
@@ -179,7 +152,6 @@ void TextureLoader::cacheBitmaps(const vector<string>& filePaths)
 
 	for(const auto& filePath : uniqueFilePaths)
 	{
-		// Check if bitmap is not already cached
 		if(_bitmapCache.find(filePath) == _bitmapCache.end())
 		{
 			threads.push_back(async(launch::async, &TextureLoader::_loadBitmap, this, filePath));
@@ -190,33 +162,25 @@ void TextureLoader::cacheBitmaps(const vector<string>& filePaths)
 
 	while(finishedThreadCount != threadStatuses.size())
 	{
-		// For all threads
 		for(size_t i = 0; i < threadStatuses.size(); i++)
 		{
-			// Check if bitmap is not processed yet
 			if(!threadStatuses[i])
 			{
-				// Check if thread is finished
 				if(threads[i].wait_until(system_clock::time_point::min()) == future_status::ready)
 				{
-					// Retrieve return value
 					auto loadedBitmap = threads[i].get();
 
-					// Update thread status
 					threadStatuses[i] = true;
 					finishedThreadCount++;
 
-					// Check bitmap status
 					if(loadedBitmap.empty())
 					{
 						Logger::throwWarning("Cannot load bitmap: \"" + finalFilePaths[i] + "\"!");
 					}
 					else
 					{
-						// Cache bitmap
 						_bitmapCache[finalFilePaths[i]] = loadedBitmap;
 
-						// Logging
 						Logger::throwInfo("Loaded bitmap: \"" + finalFilePaths[i] + "\"");
 					}
 				}
@@ -237,7 +201,6 @@ void TextureLoader::cacheFonts(const vector<string>& filePaths)
 
 	for(const auto& filePath : uniqueFilePaths)
 	{
-		// Check if font is not already cached
 		if(_fontCache.find(filePath) == _fontCache.end())
 		{
 			threads.push_back(async(launch::async, &TextureLoader::_loadFont, this, filePath));
@@ -248,33 +211,25 @@ void TextureLoader::cacheFonts(const vector<string>& filePaths)
 
 	while(finishedThreadCount != threadStatuses.size())
 	{
-		// For all threads
 		for(size_t i = 0; i < threadStatuses.size(); i++)
 		{
-			// Check if font is not processed yet
 			if(!threadStatuses[i])
 			{
-				// Check if thread is finished
 				if(threads[i].wait_until(system_clock::time_point::min()) == future_status::ready)
 				{
-					// Retrieve return value
 					auto loadedFont = threads[i].get();
 
-					// Update thread status
 					threadStatuses[i] = true;
 					finishedThreadCount++;
 
-					// Check font status
 					if(loadedFont == nullptr)
 					{
 						Logger::throwWarning("Cannot load font: \"" + finalFilePaths[i] + "\"!");
 					}
 					else
 					{
-						// Cache font
 						_fontCache[finalFilePaths[i]] = loadedFont;
 
-						// Logging
 						Logger::throwInfo("Loaded font: \"" + finalFilePaths[i] + "\"");
 					}
 				}
@@ -319,7 +274,6 @@ void TextureLoader::clearFontCache(const string& filePath)
 
 	for(const auto& [key, textureID] : _textCache)
 	{
-		// Check if font corresponds
 		if(key.second == filePath)
 		{
 			glDeleteTextures(1, &textureID);

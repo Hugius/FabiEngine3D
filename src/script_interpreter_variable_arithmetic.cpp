@@ -8,10 +8,8 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	{
 		if(c == ' ') // Current word ended
 		{
-			// Next word
 			wordIndex++;
 
-			// Check if words extracted
 			if(wordIndex == 2)
 			{
 				break;
@@ -67,13 +65,11 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	unsigned int leftValueIndex = 0;
 	if(isAccessingLeftList)
 	{
-		// Check if list index is invalid
 		if(!_validateListIndex(leftVariable, leftListIndex))
 		{
 			return;
 		}
 
-		// Copy list index
 		leftValueIndex = leftListIndex;
 	}
 
@@ -152,17 +148,14 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	}
 	else
 	{
-		// Prepare list access
 		bool isAccessingRightList = false;
 		auto rightListIndex = _extractListIndexFromString(valueString, isAccessingRightList);
 
-		// Check if any error was thrown
 		if(_hasThrownError)
 		{
 			return;
 		}
 
-		// Remove list accessing characters
 		if(isAccessingRightList)
 		{
 			auto isOpeningBracketFound = find(valueString.begin(), valueString.end(), '[');
@@ -170,31 +163,25 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 			valueString = valueString.substr(0, bracketIndex);
 		}
 
-		// Check if right variable is not existing
 		if(!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))
 		{
 			_throwScriptError("variable \"" + valueString + "\" not existing!");
 			return;
 		}
 
-		// Retrieve right variable
 		const auto& rightVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
-		// Validate list access
 		unsigned int rightValueIndex = 0;
 		if(isAccessingRightList)
 		{
-			// Check if list index is invalid
 			if(!_validateListIndex(rightVariable, rightListIndex))
 			{
 				return;
 			}
 
-			// Copy list index
 			rightValueIndex = rightListIndex;
 		}
 
-		// Validate right variable
 		if(!isAccessingRightList && (rightVariable.getType() == ScriptVariableType::MULTIPLE))
 		{
 			_throwScriptError("arithmetic not allowed on LIST values!");
@@ -211,7 +198,6 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 			return;
 		}
 
-		// Perform arithmetic operation
 		_performArithmeticOperation(leftVariable.getValue(leftValueIndex), operatorString, rightVariable.getValue(rightValueIndex));
 	}
 }
@@ -220,10 +206,8 @@ void ScriptInterpreter::_performArithmeticOperation(ScriptValue& leftValue, cons
 {
 	if((leftValue.getType() == ScriptValueType::INTEGER) && rightValue.getType() == ScriptValueType::INTEGER)
 	{
-		// Retrieve left value
 		int result = leftValue.getInteger();
 
-		// Determine arithmetic type
 		if(operatorString == ADDITION_KEYWORD)
 		{
 			result += rightValue.getInteger();
@@ -241,18 +225,14 @@ void ScriptInterpreter::_performArithmeticOperation(ScriptValue& leftValue, cons
 			result /= rightValue.getInteger();
 		}
 
-		// Limit integer
 		result = ((result < 0) ? max(result, -1000000000) : min(result, 1000000000));
 
-		// Set integer
 		leftValue.setInteger(result);
 	}
 	else if((leftValue.getType() == ScriptValueType::DECIMAL) && (rightValue.getType() == ScriptValueType::DECIMAL))
 	{
-		// Retrieve left value
 		float result = leftValue.getDecimal();
 
-		// Determine arithmetic type
 		if(operatorString == ADDITION_KEYWORD)
 		{
 			result += rightValue.getDecimal();
@@ -270,10 +250,8 @@ void ScriptInterpreter::_performArithmeticOperation(ScriptValue& leftValue, cons
 			result /= rightValue.getDecimal();
 		}
 
-		// Limit decimal
 		result = ((result < 0) ? max(result, -1000000000.0f) : min(result, 1000000000.0f));
 
-		// Set decimal
 		leftValue.setDecimal(result);
 	}
 	else

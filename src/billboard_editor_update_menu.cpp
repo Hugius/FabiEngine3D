@@ -6,7 +6,6 @@ void BillboardEditor::_updateMainMenu()
 
 	if(screen->getID() == "billboardEditorMenuMain")
 	{
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused())) // Back button
 		{
 			_gui.getOverlay()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
@@ -38,7 +37,6 @@ void BillboardEditor::_updateMainMenu()
 			_isDeletingBillboard = true;
 		}
 
-		// Update answer forms
 		if(_gui.getOverlay()->isAnswerFormConfirmed("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
@@ -61,10 +59,8 @@ void BillboardEditor::_updateChoiceMenu()
 
 	if(screen->getID() == "billboardEditorMenuChoice")
 	{
-		// Temporary values
 		auto size = _fe3d.billboard_getSize(_currentBillboardID);
 
-		// Button management
 		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_fe3d.billboard_setWireframed(_currentBillboardID, false);
@@ -92,7 +88,6 @@ void BillboardEditor::_updateChoiceMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuMiscellaneous");
 		}
 
-		// Update value forms
 		if(_gui.getOverlay()->checkValueForm("sizeX", size.x, {0.0f}))
 		{
 			size.x /= 100.0f;

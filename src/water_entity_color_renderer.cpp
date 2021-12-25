@@ -110,20 +110,17 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 {
 	if(entity->hasLowQualityRenderBuffer() && entity->hasHighQualityRenderBuffer() && entity->isVisible())
 	{
-		// Enable wireframe
 		if(entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
 
-		// Check if camera is underwater
 		bool isUnderWater = (_renderBus.getCameraPosition().y < (entity->getHeight() + entity->getWaveHeight()));
 		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().x > (entity->getSize() / 2.0f));
 		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().x < (entity->getSize() / 2.0f));
 		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().z > (entity->getSize() / 2.0f));
 		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().z < (entity->getSize() / 2.0f));
 
-		// Shader uniforms
 		_shader.uploadUniform("u_isUnderWater", isUnderWater);
 		_shader.uploadUniform("u_isWireframed", (entity->isWireframed() || _renderBus.isWireframeRenderingEnabled()));
 		_shader.uploadUniform("u_rippleOffset", entity->getRippleOffset());
@@ -143,7 +140,6 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 		_shader.uploadUniform("u_hasNormalMap", entity->hasNormalMap());
 		_shader.uploadUniform("u_wireframeColor", entity->getWireframeColor());
 
-		// Bind textures
 		if(entity->hasDudvMap())
 		{
 			glActiveTexture(GL_TEXTURE3);
@@ -160,7 +156,6 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 			glBindTexture(GL_TEXTURE_2D, entity->getDisplacementMap());
 		}
 
-		// Bind buffer
 		if(entity->hasDisplacementMap())
 		{
 			glBindVertexArray(entity->getHighQualityRenderBuffer()->getVAO());
@@ -170,7 +165,6 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 			glBindVertexArray(entity->getLowQualityRenderBuffer()->getVAO());
 		}
 
-		// Render
 		if(entity->hasDisplacementMap())
 		{
 			glDrawArrays(GL_TRIANGLES, 0, entity->getHighQualityRenderBuffer()->getVertexCount());
@@ -182,10 +176,8 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 			_renderBus.increaseTriangleCount(entity->getLowQualityRenderBuffer()->getVertexCount() / 3);
 		}
 
-		// Unbind buffer
 		glBindVertexArray(0);
 
-		// Unbind textures
 		if(entity->hasDudvMap())
 		{
 			glActiveTexture(GL_TEXTURE3);
@@ -202,7 +194,6 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 
-		// Disable wireframe
 		if(entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

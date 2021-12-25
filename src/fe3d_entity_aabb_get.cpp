@@ -61,10 +61,8 @@ const vector<string> FabiEngine3D::aabb_getChildIDs(const string& parentID, Aabb
 
 	for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
-		// Check if AABB has parent
 		if(entity->hasParent())
 		{
-			// Check if parent matches
 			if(parentID == entity->getParentEntityID() && (
 				(entity->getParentEntityType() == AabbParentEntityType::MODEL && (parentEntityType == AabbParentEntityType::MODEL)) ||
 				(entity->getParentEntityType() == AabbParentEntityType::BILLBOARD && (parentEntityType == AabbParentEntityType::BILLBOARD))))

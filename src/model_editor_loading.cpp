@@ -34,35 +34,26 @@ const vector<string> ModelEditor::getMeshPathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		// For file extraction
 		istringstream iss(line);
 
-		// Read type from file
 		string lineType;
 		iss >> lineType;
 
-		// Determine line type
 		if(lineType == "MODEL")
 		{
-			// Data placeholders
 			string modelID, meshPath;
 
-			// Read data from file
 			iss >> modelID >> meshPath;
 
-			// Convert empty string
 			meshPath = (meshPath == "?") ? "" : meshPath;
 
-			// Convert spaces
 			replace(meshPath.begin(), meshPath.end(), '?', ' ');
 
-			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				meshPath = string("projects\\" + _currentProjectID + "\\" + meshPath);
 			}
 
-			// Save mesh path
 			meshPaths.push_back(meshPath);
 		}
 	}
@@ -95,24 +86,19 @@ const vector<string> ModelEditor::getTexturePathsFromFile() const
 	string line;
 	while(getline(file, line))
 	{
-		// For file extraction
 		istringstream iss(line);
 
-		// Read type from file
 		string lineType;
 		iss >> lineType;
 
-		// Determine line type
 		if(lineType == "MODEL")
 		{
-			// Data placeholders
 			string modelID, meshPath, levelOfDetailEntityID;
 			float levelOfDetailDistance;
 			unsigned int rotationOrder;
 			bool isFaceCulled;
 			fvec3 size;
 
-			// Read data from file
 			iss >>
 				modelID >>
 				meshPath >>
@@ -124,10 +110,8 @@ const vector<string> ModelEditor::getTexturePathsFromFile() const
 				isFaceCulled >>
 				rotationOrder;
 
-			// Read part data
 			while(true)
 			{
-				// Check if file has any part data left
 				string partID;
 				iss >> partID;
 				if(partID.empty())
@@ -135,14 +119,12 @@ const vector<string> ModelEditor::getTexturePathsFromFile() const
 					break;
 				}
 
-				// Data placeholders
 				string diffuseMapPath, emissionMapPath, specularMapPath, reflectionMapPath, normalMapPath;
 				fvec3 color;
 				float textureRepeat, specularShininess, specularIntensity, reflectivity, lightness;
 				unsigned int reflectionType;
 				bool isSpecular, isReflective;
 
-				// Read data from file
 				iss >>
 					diffuseMapPath >>
 					emissionMapPath >>
@@ -161,82 +143,65 @@ const vector<string> ModelEditor::getTexturePathsFromFile() const
 					color.b >>
 					textureRepeat;
 
-				// Convert empty string
 				diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 				emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
 				specularMapPath = (specularMapPath == "?") ? "" : specularMapPath;
 				reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
 				normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
 
-				// Convert spaces
 				replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 				replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 				replace(specularMapPath.begin(), specularMapPath.end(), '?', ' ');
 				replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
 				replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 
-				// Diffuse map
 				if(!diffuseMapPath.empty())
 				{
-					// Convert to long path
 					if(!Config::getInst().isApplicationExported())
 					{
 						diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 					}
 
-					// Save path
 					texturePaths.push_back(diffuseMapPath);
 				}
 
-				// Emission map
 				if(!emissionMapPath.empty())
 				{
-					// Convert to long path
 					if(!Config::getInst().isApplicationExported())
 					{
 						emissionMapPath = string("projects\\" + _currentProjectID + "\\" + emissionMapPath);
 					}
 
-					// Save path
 					texturePaths.push_back(emissionMapPath);
 				}
 
-				// Specular map
 				if(!specularMapPath.empty())
 				{
-					// Convert to long path
 					if(!Config::getInst().isApplicationExported())
 					{
 						specularMapPath = string("projects\\" + _currentProjectID + "\\" + specularMapPath);
 					}
 
-					// Save path
 					texturePaths.push_back(specularMapPath);
 				}
 
-				// Reflection map
 				if(!reflectionMapPath.empty())
 				{
-					// Convert to long path
 					if(!Config::getInst().isApplicationExported())
 					{
 						reflectionMapPath = string("projects\\" + _currentProjectID + "\\" + reflectionMapPath);
 					}
 
-					// Save path
 					texturePaths.push_back(reflectionMapPath);
 				}
 
-				// Normal map
 				if(!normalMapPath.empty())
 				{
-					// Convert to long path
 					if(!Config::getInst().isApplicationExported())
 					{
 						normalMapPath = string("projects\\" + _currentProjectID + "\\" + normalMapPath);
 					}
 
-					// Save path
 					texturePaths.push_back(normalMapPath);
 				}
 			}
@@ -272,24 +237,19 @@ const bool ModelEditor::loadFromFile()
 	string line;
 	while(getline(file, line))
 	{
-		// For file extraction
 		istringstream iss(line);
 
-		// Read type from file
 		string lineType;
 		iss >> lineType;
 
-		// Determine line type
 		if(lineType == "MODEL")
 		{
-			// Data placeholders
 			string modelID, meshPath, levelOfDetailEntityID;
 			float levelOfDetailDistance;
 			unsigned int rotationOrder;
 			bool isFaceCulled;
 			fvec3 size;
 
-			// Read data from file
 			iss >>
 				modelID >>
 				meshPath >>
@@ -301,30 +261,23 @@ const bool ModelEditor::loadFromFile()
 				isFaceCulled >>
 				rotationOrder;
 
-			// Convert empty string
 			meshPath = (meshPath == "?") ? "" : meshPath;
 			levelOfDetailEntityID = (levelOfDetailEntityID == "?") ? "" : levelOfDetailEntityID;
 
-			// Convert spaces
 			replace(meshPath.begin(), meshPath.end(), '?', ' ');
 			replace(levelOfDetailEntityID.begin(), levelOfDetailEntityID.end(), '?', ' ');
 
-			// Convert to long path
 			if(!Config::getInst().isApplicationExported())
 			{
 				meshPath = string("projects\\" + _currentProjectID + "\\" + meshPath);
 			}
 
-			// Create model
 			_fe3d.model_create(modelID, meshPath);
 
-			// Check if model creation went well
 			if(_fe3d.model_isExisting(modelID))
 			{
-				// Add model ID
 				_loadedModelIDs.push_back(modelID);
 
-				// Set properties
 				_fe3d.model_setVisible(modelID, false);
 				_fe3d.model_setBaseSize(modelID, size);
 				_fe3d.model_setLevelOfDetailEntityID(modelID, levelOfDetailEntityID);
@@ -332,10 +285,8 @@ const bool ModelEditor::loadFromFile()
 				_fe3d.model_setFaceCulled(modelID, isFaceCulled);
 				_fe3d.model_setRotationOrder(modelID, DirectionOrder(rotationOrder));
 
-				// Read part data
 				while(true)
 				{
-					// Check if file has any part data left
 					string partID;
 					iss >> partID;
 					if(partID.empty())
@@ -343,14 +294,12 @@ const bool ModelEditor::loadFromFile()
 						break;
 					}
 
-					// Data placeholders
 					string diffuseMapPath, emissionMapPath, specularMapPath, reflectionMapPath, normalMapPath;
 					float textureRepeat, specularShininess, specularIntensity, reflectivity, lightness;
 					unsigned int reflectionType;
 					bool isSpecular, isReflective;
 					fvec3 color;
 
-					// Read data from file
 					iss >>
 						diffuseMapPath >>
 						emissionMapPath >>
@@ -369,7 +318,6 @@ const bool ModelEditor::loadFromFile()
 						color.b >>
 						textureRepeat;
 
-					// Convert empty string
 					partID = (partID == "?") ? "" : partID;
 					diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 					emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
@@ -377,79 +325,62 @@ const bool ModelEditor::loadFromFile()
 					reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
 					normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
 
-					// Convert spaces
 					replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 					replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 					replace(specularMapPath.begin(), specularMapPath.end(), '?', ' ');
 					replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
 					replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 
-					// Diffuse map
 					if(!diffuseMapPath.empty())
 					{
-						// Convert to long path
 						if(!Config::getInst().isApplicationExported())
 						{
 							diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 						}
 
-						// Set path
 						_fe3d.model_setDiffuseMap(modelID, partID, diffuseMapPath);
 					}
 
-					// Specular map
 					if(!specularMapPath.empty())
 					{
-						// Convert to long path
 						if(!Config::getInst().isApplicationExported())
 						{
 							specularMapPath = string("projects\\" + _currentProjectID + "\\" + specularMapPath);
 						}
 
-						// Set path
 						_fe3d.model_setSpecularMap(modelID, partID, specularMapPath);
 					}
 
-					// Emission map
 					if(!emissionMapPath.empty())
 					{
-						// Convert to long path
 						if(!Config::getInst().isApplicationExported())
 						{
 							emissionMapPath = string("projects\\" + _currentProjectID + "\\" + emissionMapPath);
 						}
 
-						// Set path
 						_fe3d.model_setEmissionMap(modelID, partID, emissionMapPath);
 					}
 
-					// Reflection map
 					if(!reflectionMapPath.empty())
 					{
-						// Convert to long path
 						if(!Config::getInst().isApplicationExported())
 						{
 							reflectionMapPath = string("projects\\" + _currentProjectID + "\\" + reflectionMapPath);
 						}
 
-						// Set path
 						_fe3d.model_setReflectionMap(modelID, partID, reflectionMapPath);
 					}
 
-					// Normal map
 					if(!normalMapPath.empty())
 					{
-						// Convert to long path
 						if(!Config::getInst().isApplicationExported())
 						{
 							normalMapPath = string("projects\\" + _currentProjectID + "\\" + normalMapPath);
 						}
 
-						// Set path
 						_fe3d.model_setNormalMap(modelID, partID, normalMapPath);
 					}
 
-					// Set properties
 					_fe3d.model_setColor(modelID, partID, color);
 					_fe3d.model_setSpecular(modelID, partID, isSpecular);
 					_fe3d.model_setSpecularShininess(modelID, partID, specularShininess);
@@ -464,11 +395,9 @@ const bool ModelEditor::loadFromFile()
 		}
 		else if(lineType == "AABB")
 		{
-			// Data placeholders
 			string aabbID, modelID;
 			fvec3 position, size;
 
-			// Read data from file
 			iss >>
 				aabbID >>
 				modelID >>
@@ -479,10 +408,8 @@ const bool ModelEditor::loadFromFile()
 				size.y >>
 				size.z;
 
-			// Create AABB
 			_fe3d.aabb_create(aabbID);
 
-			// Set properties
 			_fe3d.aabb_setParentEntityID(aabbID, modelID);
 			_fe3d.aabb_setParentEntityType(aabbID, AabbParentEntityType::MODEL);
 			_fe3d.aabb_setLocalPosition(aabbID, position);

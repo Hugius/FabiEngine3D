@@ -6,13 +6,11 @@ void ScriptEditor::_updateTextWriter()
 {
 	if(_isEditorLoaded && _isWritingScript && !_gui.getOverlay()->isFocused() && !_wasGuiFocused)
 	{
-		// Change cursor texture
 		if(_fe3d.misc_isCursorInsideViewport())
 		{
 			_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_text.png");
 		}
 
-		// Reload all AABB entities when LMB is pressed
 		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isCursorInsideViewport())
 		{
 			_reloadScriptTextDisplay(true);
@@ -20,27 +18,22 @@ void ScriptEditor::_updateTextWriter()
 			return;
 		}
 
-		// Temporary values
 		bool textHasChanged = false;
 		unsigned int cursorLineIndex = _script.getScriptFile(_currentScriptFileID)->getCursorLineIndex();
 		unsigned int cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getCursorCharIndex();
 		string newCharacters = "";
 
-		// Check if billboard is hovered
 		auto hoveredBillboardID = _fe3d.raycast_checkCursorInAny().first;
 		int hoveredLineIndex = -1;
 		int hoveredCharacterIndex = -1;
 		if(!hoveredBillboardID.empty())
 		{
-			// Temporary values
 			bool extractingLineNumber = true;
 			string lineIndexString = "";
 			string charIndexString = "";
 
-			// Extract position indices
 			for(const auto& c : hoveredBillboardID)
 			{
-				// Add to string
 				if(extractingLineNumber)
 				{
 					lineIndexString += c;
@@ -50,14 +43,12 @@ void ScriptEditor::_updateTextWriter()
 					charIndexString += c;
 				}
 
-				// Check if character billboard
 				if(c == '_')
 				{
 					extractingLineNumber = false;
 				}
 			}
 
-			// Assign indices
 			hoveredLineIndex = stoi(lineIndexString);
 			if(!charIndexString.empty())
 			{
@@ -65,14 +56,12 @@ void ScriptEditor::_updateTextWriter()
 			}
 		}
 
-		// Timer for continuous actions
 		if(_activeActionKey == InputType::NONE)
 		{
 			for(InputType actionKey : ACTION_KEYS) // Check all possible action keys
 			{
 				if(_fe3d.input_isKeyPressed(actionKey)) // Check if action key is pressed
 				{
-					// Remember currently pressed action key
 					_activeActionKey = actionKey;
 					break;
 				}
@@ -80,7 +69,6 @@ void ScriptEditor::_updateTextWriter()
 		}
 		else
 		{
-			// Check if waited long enough for continuous action
 			if(_passedFrames == CONTINUOUS_TEXT_ACTION_FRAME_MINIMUM)
 			{
 				_isContinuousActionAllowed = true;
@@ -92,7 +80,6 @@ void ScriptEditor::_updateTextWriter()
 			}
 		}
 
-		// Reset timing state if action key released
 		if(!_fe3d.input_isKeyDown(_activeActionKey))
 		{
 			_activeActionKey = InputType::NONE;
@@ -101,19 +88,14 @@ void ScriptEditor::_updateTextWriter()
 			_isContinuousActionAllowed = false;
 		}
 
-		// Determine text functionality type
 		if(_hasClickedLMB)
 		{
-			// Check if anything was hovered at all
 			if(!hoveredBillboardID.empty())
 			{
-				// Set line index based on click location
 				cursorLineIndex = hoveredLineIndex;
 
-				// Set character index based on click location
 				if(hoveredCharacterIndex == -1)
 				{
-					// Place cursor at end of the line
 					cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
 				}
 				else
@@ -124,32 +106,25 @@ void ScriptEditor::_updateTextWriter()
 		}
 		else if(_activeActionKey == InputType::KEY_ENTER) // Add new line
 		{
-			// Check if user is not selecting text
 			if(_firstSelectedLineIndex == -1)
 			{
-				// Check if not exceeding the line limit
 				if(_script.getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_COUNT)
 				{
-					// Check if single or fast new line action
 					if(_isSingleActionAllowed || _isContinuousActionAllowed)
 					{
 						if(_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 						{
 							_isSingleActionAllowed = false;
 
-							// Extract remaining text in current line from cursor position
 							string currentLineText = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex);
 							string textToExtract = currentLineText;
 							textToExtract = textToExtract.substr(cursorCharIndex, textToExtract.size() - cursorCharIndex);
 
-							// Remove extracted text from current line
 							_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, currentLineText.substr(0, cursorCharIndex));
 
-							// Set cursor to beginning of new line
 							cursorCharIndex = 0;
 							cursorLineIndex++;
 
-							// Add text on new line
 							_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex, textToExtract);
 							textHasChanged = true;
 						}
@@ -159,7 +134,6 @@ void ScriptEditor::_updateTextWriter()
 		}
 		else if(_activeActionKey == InputType::KEY_LEFT) // Left arrow key
 		{
-			// Check if single or fast cursor move
 			if(_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
 				if(_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
@@ -183,21 +157,18 @@ void ScriptEditor::_updateTextWriter()
 		}
 		else if(_activeActionKey == InputType::KEY_RIGHT) // Right arrow key
 		{
-			// Check if single or fast cursor move
 			if(_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
 				if(_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 				{
 					_isSingleActionAllowed = false;
 
-					// If cursor somewhere on the line
 					if(cursorCharIndex < _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size())
 					{
 						cursorCharIndex++;
 					}
 					else // If cursor is at the end of the line
 					{
-						// Check if trying to move cursor out of screen
 						if(cursorLineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
 						{
 							cursorLineIndex++;
@@ -209,7 +180,6 @@ void ScriptEditor::_updateTextWriter()
 		}
 		else if(_activeActionKey == InputType::KEY_UP) // Up arrow key
 		{
-			// Check if single or fast cursor move
 			if(_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
 				if(_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
@@ -220,7 +190,6 @@ void ScriptEditor::_updateTextWriter()
 					{
 						cursorLineIndex--;
 
-						// Change character index accordingly
 						if(cursorCharIndex > _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size())
 						{
 							cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
@@ -231,19 +200,16 @@ void ScriptEditor::_updateTextWriter()
 		}
 		else if(_activeActionKey == InputType::KEY_DOWN) // Down arrow key
 		{
-			// Check if single or fast cursor move
 			if(_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
 				if(_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 				{
 					_isSingleActionAllowed = false;
 
-					// Check if trying to move cursor out of screen
 					if(cursorLineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
 					{
 						cursorLineIndex++;
 
-						// Change character index accordingly
 						if(cursorCharIndex > _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size())
 						{
 							cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
@@ -254,26 +220,20 @@ void ScriptEditor::_updateTextWriter()
 		}
 		else // Other keypresses
 		{
-			// Temporary values
 			string currentLineText = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex);
 
-			// Control button is reserved for copy & paste
 			if(!_fe3d.input_isKeyDown(InputType::KEY_LCTRL) && !_fe3d.input_isKeyDown(InputType::KEY_RCTRL))
 			{
-				// Letter characters
 				for(const auto& c : ALPHABET_CHARACTERS)
 				{
-					// Check if character is pressed on keyboard
 					if(_fe3d.input_isKeyPressed(InputType(c)))
 					{
-						// Spacebar
 						if(c == ' ')
 						{
 							newCharacters += c;
 						}
 						else // Non-spacebar
 						{
-							// Uppercase or special character
 							if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 							{
 								newCharacters += (c - 32);
@@ -290,13 +250,10 @@ void ScriptEditor::_updateTextWriter()
 					}
 				}
 
-				// Number characters
 				for(const auto& element : NUMBER_CHARACTERS)
 				{
-					// Check if character is pressed on keyboard
 					if(_fe3d.input_isKeyPressed(InputType(element.first)))
 					{
-						// Check if shift was pressed
 						if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 						{
 							newCharacters += element.second;
@@ -308,13 +265,10 @@ void ScriptEditor::_updateTextWriter()
 					}
 				}
 
-				// Special characters
 				for(const auto& element : SPECIAL_CHARACTERS)
 				{
-					// Check if character is pressed on keyboard
 					if(_fe3d.input_isKeyPressed(InputType(element.first)))
 					{
-						// Check if shift was pressed
 						if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 						{
 							newCharacters += element.second;
@@ -326,38 +280,30 @@ void ScriptEditor::_updateTextWriter()
 					}
 				}
 
-				// Insert 4 spaces (TAB)
 				if(_fe3d.input_isKeyPressed(InputType::KEY_TAB))
 				{
 					newCharacters += "    ";
 				}
 			}
 
-			// Remove characters from line
 			if(_activeActionKey == InputType::KEY_BACKSPACE || _activeActionKey == InputType::KEY_DELETE)
 			{
-				// Check if user is not selecting text
 				if(_firstSelectedLineIndex == -1)
 				{
-					// Check if single or fast remove
 					if(_isSingleActionAllowed || _isContinuousActionAllowed)
 					{
 						if(_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 						{
 							_isSingleActionAllowed = false;
 
-							// Jump to line above if cursor at beginning of line
 							if(cursorCharIndex == 0 && _activeActionKey == InputType::KEY_BACKSPACE)
 							{
-								// Check if not trying to remove default line
 								if(cursorLineIndex > 0)
 								{
-									// Remove line
 									string textToMerge = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex);
 									_script.getScriptFile(_currentScriptFileID)->removeLine(cursorLineIndex);
 									cursorLineIndex--;
 
-									// Set cursor to last character of line above & merge text from current line
 									cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
 									_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex,
 																							 _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex) + textToMerge);
@@ -366,19 +312,14 @@ void ScriptEditor::_updateTextWriter()
 							}
 							else if(cursorCharIndex == currentLineText.size() && _activeActionKey == InputType::KEY_DELETE)
 							{
-								// Check if not trying to remove default line
 								if(cursorLineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
 								{
-									// Save text of next line
 									string textToMerge = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex + 1);
 
-									// Check if lines together is not exceeding the character limit
 									if((currentLineText.size() + textToMerge.size()) <= MAX_CHARACTERS_PER_LINE)
 									{
-										// Remove line
 										_script.getScriptFile(_currentScriptFileID)->removeLine(cursorLineIndex + 1);
 
-										// Merge text on current line & save merged line
 										currentLineText += textToMerge;
 										_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, currentLineText);
 										textHasChanged = true;
@@ -403,13 +344,10 @@ void ScriptEditor::_updateTextWriter()
 				}
 			}
 
-			// Check if not exceeding character limit of current line
 			if(static_cast<unsigned int>(currentLineText.size() + newCharacters.size()) <= MAX_CHARACTERS_PER_LINE)
 			{
-				// Check if user is not selecting text
 				if(_firstSelectedLineIndex == -1)
 				{
-					// Add newly typed character to line
 					if(!newCharacters.empty())
 					{
 						if(currentLineText.empty() || cursorCharIndex == currentLineText.size()) // First or last character in line
@@ -431,30 +369,25 @@ void ScriptEditor::_updateTextWriter()
 
 						textHasChanged = true;
 
-						// Save new line
 						_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, currentLineText);
 					}
 				}
 			}
 		}
 
-		// Update text selection
 		_updateTextSelector(newCharacters, cursorLineIndex, cursorCharIndex, hoveredLineIndex, textHasChanged);
 
-		// Reload text display when altered
 		if(textHasChanged || _hasClickedLMB)
 		{
 			_reloadScriptTextDisplay(false);
 		}
 
-		// Update blinking cursor
 		static unsigned int passedBarFrames = MAX_PASSED_BAR_FRAMES;
 		static bool barEnabled = true;
 		if(passedBarFrames >= MAX_PASSED_BAR_FRAMES)
 		{
 			passedBarFrames = 0;
 
-			// Toggle bar animation
 			barEnabled = !barEnabled;
 		}
 		else
@@ -462,7 +395,6 @@ void ScriptEditor::_updateTextWriter()
 			passedBarFrames++;
 		}
 
-		// If cursor billboard not existing, create new one
 		if(!_fe3d.billboard_isExisting("cursor"))
 		{
 			_fe3d.billboard_create("cursor");
@@ -470,7 +402,6 @@ void ScriptEditor::_updateTextWriter()
 			_fe3d.billboard_setSize("cursor", TEXT_CHARACTER_SIZE);
 		}
 
-		// Update cursor billboard text & position
 		fvec3 position;
 		if(cursorCharIndex == 0) // Default line position
 		{
@@ -486,7 +417,6 @@ void ScriptEditor::_updateTextWriter()
 		bool showBar = ((barEnabled && _firstSelectedLineIndex == -1) || _activeActionKey != InputType::NONE);
 		_fe3d.billboard_setTextContent("cursor", (showBar ? "|" : " "));
 
-		// Set new cursor indices
 		_script.getScriptFile(_currentScriptFileID)->setCursorLineIndex(cursorLineIndex);
 		_script.getScriptFile(_currentScriptFileID)->setCursorCharIndex(cursorCharIndex);
 	}

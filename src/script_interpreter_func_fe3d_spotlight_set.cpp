@@ -10,20 +10,17 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			// Validate ID
 			if(!_validateFe3dID(args[0].getString()))
 			{
 				return true;
 			}
 
-			// Validate existence
 			if(_fe3d.spotlight_isExisting(args[0].getString()))
 			{
 				_throwScriptError("spotlight already exists!");
 				return true;
 			}
 
-			// Create spotlight
 			_fe3d.spotlight_create(args[0].getString());
 			_fe3d.spotlight_setPosition(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 			_fe3d.spotlight_setColor(args[0].getString(), fvec3(args[4].getDecimal(), args[5].getDecimal(), args[6].getDecimal()));
@@ -33,7 +30,6 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 			_fe3d.spotlight_setAngle(args[0].getString(), args[10].getDecimal());
 			_fe3d.spotlight_setDistance(args[0].getString(), args[11].getDecimal());
 
-			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -54,17 +50,14 @@ const bool ScriptInterpreter::_executeFe3dSpotlightSetter(const string& function
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			// Iterate through spotlights
 			for(const auto& ID : _fe3d.spotlight_getIDs())
 			{
-				// Cannot be template
 				if(ID[0] != '@')
 				{
 					_fe3d.spotlight_delete(ID);
 				}
 			}
 
-			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

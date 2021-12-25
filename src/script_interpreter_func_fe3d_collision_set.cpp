@@ -42,7 +42,6 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string& function
 	}
 	else if(functionName == "fe3d:collision_set_camera_box")
 	{
-		// Bottom top left right front back
 		auto types = {SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))

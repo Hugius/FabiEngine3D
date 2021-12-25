@@ -43,7 +43,6 @@ void ScriptInterpreter::load()
 	{
 		auto scriptFile = _script.getScriptFile(scriptID);
 
-		// Determine script type
 		string scriptType = "";
 		if(scriptFile->getLineText(0) == (META_KEYWORD + " script_type_initialize"))
 		{
@@ -67,10 +66,8 @@ void ScriptInterpreter::load()
 			return;
 		}
 
-		// Determine execution type
 		if(scriptFile->getLineText(1) == (META_KEYWORD + " script_execution_entry"))
 		{
-			// Set entry point
 			if(scriptType == "script_type_initialize" && _initEntryID.empty())
 			{
 				_initEntryID = _initializeScriptIDs.back();
@@ -92,7 +89,6 @@ void ScriptInterpreter::load()
 		}
 		else if(scriptFile->getLineText(1) == (META_KEYWORD + " script_execution_waiting"))
 		{
-			// <--- Purposely left blank
 		}
 		else
 		{
@@ -123,32 +119,26 @@ void ScriptInterpreter::load()
 
 	for(const auto& scriptID : _script.getScriptFileIDs())
 	{
-		// Retrieve script file
 		auto scriptFile = _script.getScriptFile(scriptID);
 
-		// Iterate through every line
 		for(unsigned int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
 		{
-			// Remove trailing whitespace from comments
 			auto scriptLineText = scriptFile->getLineText(lineIndex);
 			auto scriptLineTextStream = istringstream(scriptLineText);
 			string noWhiteSpace;
 			scriptLineTextStream >> noWhiteSpace;
 
-			// Check if line is comment
 			if(noWhiteSpace.substr(0, 3) == "///")
 			{
 				unsigned int charIndex;
 				for(charIndex = 0; charIndex < scriptLineText.size(); charIndex++)
 				{
-					// Check if character found
 					if(scriptLineText[charIndex] != ' ')
 					{
 						break;
 					}
 				}
 
-				// Update line text (any whitespace before indented comments is removed)
 				scriptFile->setLineText(lineIndex, scriptLineText.substr(charIndex));
 			}
 		}
@@ -156,7 +146,6 @@ void ScriptInterpreter::load()
 
 	if(Config::getInst().isApplicationExported())
 	{
-		// Gather file paths
 		auto skyTexturePaths = _skyEditor.getTexturePathsFromFile();
 		auto terrainTexturePaths = _terrainEditor.getTexturePathsFromFile();
 		auto terrainBitmapPaths = _terrainEditor.getBitmapPathsFromFile();
@@ -168,10 +157,8 @@ void ScriptInterpreter::load()
 		auto imageTexturePaths = _imageEditor.getTexturePathsFromFile();
 		auto audioPaths = _soundEditor.getAudioPathsFromFile();
 
-		// Cache meshes
 		_fe3d.misc_cacheMeshes(modelMeshPaths);
 
-		// Cache 2D textures
 		vector<string> texturePaths2D;
 		texturePaths2D.insert(texturePaths2D.end(), terrainTexturePaths.begin(), terrainTexturePaths.end());
 		texturePaths2D.insert(texturePaths2D.end(), waterTexturePaths.begin(), waterTexturePaths.end());
@@ -180,16 +167,12 @@ void ScriptInterpreter::load()
 		texturePaths2D.insert(texturePaths2D.end(), imageTexturePaths.begin(), imageTexturePaths.end());
 		_fe3d.misc_cache2dTextures(texturePaths2D);
 
-		// Cache 3D textures
 		_fe3d.misc_cache3dTextures(skyTexturePaths);
 
-		// Cache bitmaps
 		_fe3d.misc_cacheBitmaps(terrainBitmapPaths);
 
-		// Cache fonts
 		_fe3d.misc_cacheFonts(billboardFontPaths);
 
-		// Cache audios
 		_fe3d.misc_cacheAudios(audioPaths);
 	}
 
@@ -258,7 +241,6 @@ void ScriptInterpreter::unload()
 
 	for(const auto& ID : _fe3d.image_getIDs())
 	{
-		// Cannot delete engine image entities
 		if(ID[0] != '@')
 		{
 			_fe3d.image_delete(ID);
@@ -267,7 +249,6 @@ void ScriptInterpreter::unload()
 
 	for(const auto& ID : _fe3d.text_getIDs())
 	{
-		// Cannot delete engine text entities
 		if(ID[0] != '@')
 		{
 			_fe3d.text_delete(ID);

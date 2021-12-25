@@ -51,7 +51,6 @@ void LeftViewportController::update()
 
 	if(screen->getID() == "main")
 	{
-		// Button management
 		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("skyEditor")->isHovered())
 		{
 			if(_skyEditor.loadFromFile())

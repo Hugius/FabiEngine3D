@@ -13,7 +13,6 @@ void WorldEditor::_selectModel(const string& ID)
 
 	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
-		// Removing the unique number from the modelID and updating the text content
 		string tempID = _selectedModelID;
 		reverse(tempID.begin(), tempID.end());
 		string rawID = tempID.substr(tempID.find('_') + 1);
@@ -33,7 +32,6 @@ void WorldEditor::_selectBillboard(const string& ID)
 
 	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
-		// Removing the unique number from the billboardID and updating the text content
 		string tempID = ID;
 		reverse(tempID.begin(), tempID.end());
 		string rawID = tempID.substr(tempID.find('_') + 1);
@@ -51,7 +49,6 @@ void WorldEditor::_selectSound(const string& ID)
 
 	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
-		// Removing the unique number from the soundID and updating the text content
 		string tempID = ID;
 		reverse(tempID.begin(), tempID.end());
 		string rawID = tempID.substr(tempID.find('_') + 1);

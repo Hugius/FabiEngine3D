@@ -77,22 +77,18 @@ const bool CameraCollisionHandler::_handleCollision(Direction direction, const u
 		{
 			case Direction::X:
 			{
-				// If responsive to camera collision
 				if(aabb->isCollisionResponsive() && aabb->isVisible())
 				{
-					// Check collision with AABB
 					const fvec3 middle = camera.getPosition();
 					const fvec3 middleChange = (middle - _lastCameraPosition);
 					auto hasCollided = _collisionDetector.checkX(aabb->getPosition(), aabb->getSize(), middle, middleChange, _cameraBox);
 
-					// Update AABB
 					if(hasCollided)
 					{
 						aabb->setCollisionDirection(Direction::X);
 						aabb->setCollided(true);
 					}
 
-					// Respond to X collision
 					if(_isCameraAabbResponseEnabledX && hasCollided)
 					{
 						camera.setPosition(fvec3(_lastCameraPosition.x, middle.y, middle.z));
@@ -104,25 +100,20 @@ const bool CameraCollisionHandler::_handleCollision(Direction direction, const u
 			}
 			case Direction::Y:
 			{
-				// If responsive to camera collision
 				if(aabb->isCollisionResponsive() && aabb->isVisible())
 				{
-					// Check collision with AABB
 					const fvec3 middle = camera.getPosition();
 					const fvec3 middleChange = (middle - _lastCameraPosition);
 					auto hasCollided = _collisionDetector.checkY(aabb->getPosition(), aabb->getSize(), middle, middleChange, _cameraBox);
 
-					// Update AABB
 					if(hasCollided)
 					{
 						aabb->setCollisionDirection(Direction::Y);
 						aabb->setCollided(true);
 					}
 
-					// Respond to Y collision
 					if(_isCameraAabbResponseEnabledY && hasCollided)
 					{
-						// Terrain collision response has priority
 						if(!_isCameraUnderTerrain)
 						{
 							camera.setPosition(fvec3(middle.x, _lastCameraPosition.y, middle.z));
@@ -135,22 +126,18 @@ const bool CameraCollisionHandler::_handleCollision(Direction direction, const u
 			}
 			case Direction::Z:
 			{
-				// If responsive to camera collision
 				if(aabb->isCollisionResponsive() && aabb->isVisible())
 				{
-					// Check collision with AABB
 					const fvec3 middle = camera.getPosition();
 					const fvec3 middleChange = (middle - _lastCameraPosition);
 					auto hasCollided = _collisionDetector.checkZ(aabb->getPosition(), aabb->getSize(), middle, middleChange, _cameraBox);
 
-					// Update AABB
 					if(hasCollided)
 					{
 						aabb->setCollisionDirection(Direction::Z);
 						aabb->setCollided(true);
 					}
 
-					// Respond to Z collision
 					if(_isCameraAabbResponseEnabledZ && hasCollided)
 					{
 						camera.setPosition(fvec3(middle.x, middle.y, _lastCameraPosition.z));

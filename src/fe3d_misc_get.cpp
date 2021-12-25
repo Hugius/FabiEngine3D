@@ -53,21 +53,16 @@ const ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport() const
 	}
 	else
 	{
-		// Temporary values
 		auto windowSize = Config::getInst().getWindowSize();
 		auto viewportPosition = Config::getInst().getViewportPosition();
 		auto viewportSize = Config::getInst().getViewportSize();
 
-		// Calculate viewport position Y offset, because GUI borders are not all of the same size
 		ivec2 offset = ivec2(viewportPosition.x, windowSize.y - (viewportPosition.y + viewportSize.y));
 
-		// Apply Y offset to cursor position
 		fvec2 relativeCursorPosition = fvec2(_core->_window.getCursorPosition()) - fvec2(offset);
 
-		// Convert fullscreen coords to viewport coords
 		relativeCursorPosition = (relativeCursorPosition / fvec2(viewportSize)) * fvec2(windowSize);
 
-		// Return
 		ivec2 result = ivec2(relativeCursorPosition);
 		return ivec2(result.x, (Config::getInst().getWindowSize().y - result.y));
 	}

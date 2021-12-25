@@ -1,37 +1,29 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-// In variables
 layout (location = 0) in vec3 v_pos;
 layout (location = 1) in vec2 v_uv;
 layout (location = 2) in vec3 v_normal;
 layout (location = 3) in vec3 v_tangent;
 
-// Matrix uniforms
 uniform mat4 u_viewMatrix;
 uniform mat4 u_projectionMatrix;
 uniform mat4 u_shadowMatrix;
 
-// Vector uniforms
 uniform vec4 u_clippingPlane;
 
-// Float uniforms
 uniform float u_textureRepeat;
 
-// Bool uniforms
 uniform bool u_hasNormalMap;
 
-// Out variables
 out vec3 f_position;
 out vec2 f_uv;
 out vec3 f_normal;
 out vec4 f_shadowPosition;
 out mat3 f_tbnMatrix;
 
-// Declarations
 mat3 calculateTbnMatrix();
 
-// Process vertex
 void main()
 {
 	// In variables

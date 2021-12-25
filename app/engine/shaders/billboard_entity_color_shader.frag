@@ -1,21 +1,17 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-// In variables
 in vec2 f_uv;
 in vec3 f_position;
 
-// Textures
 layout (location = 0) uniform sampler2D u_diffuseMap;
 layout (location = 1) uniform sampler2D u_emissionMap;
 
-// Vector uniforms
 uniform vec3 u_color;
 uniform vec3 u_wireframeColor;
 uniform vec3 u_cameraPosition;
 uniform vec3 u_fogColor;
 
-// Float uniforms
 uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
 uniform float u_fogThickness;
@@ -24,23 +20,19 @@ uniform float u_minTextureTransparency;
 uniform float u_transparency;
 uniform float u_emissionIntensity;
 
-// Boolean uniforms
 uniform bool u_isWireframed;
 uniform bool u_isFogEnabled;
 uniform bool u_hasDiffuseMap;
 uniform bool u_isBright;
 uniform bool u_hasEmissionMap;
 
-// Out variables
 layout (location = 0) out vec4 o_primaryColor;
 layout (location = 1) out vec4 o_secondaryColor;
 
-// Functions
 vec3 calculateDiffuseMapping();
 vec3 calculateEmissionMapping();
 vec3 calculateFog(vec3 color);
 
-// Process fragment
 void main()
 {
 	// Wireframe color

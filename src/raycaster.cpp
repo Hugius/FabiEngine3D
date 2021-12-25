@@ -80,7 +80,7 @@ const fvec3 Raycaster::getTerrainPoint() const
 	return _terrainPoint;
 }
 
-// https://gamedev.stackexchange.com/questions/18436/most-efficient-aabb-vs-ray-collision-algorithms
+/* https://gamedev.stackexchange.com/questions/18436/most-efficient-aabb-vs-ray-collision-algorithms */
 const float Raycaster::calculateRayBoxIntersectionDistance(Ray ray, Box box) const
 {
 	/*

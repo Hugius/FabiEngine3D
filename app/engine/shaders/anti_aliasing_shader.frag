@@ -1,22 +1,17 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-// Constant variables
 #define LUMINOSITY_VECTOR vec3(0.299f, 0.587f, 0.114f)
 #define MAX_DIRECTION_TEXELS 8.0f
 #define MIN_DIRECTION_ADDER 0.0078125f
 #define LUMINOSITY_MULTIPLIER 0.03125f
 
-// In variables
 in vec2 f_uv;
 
-// Textures
 layout (location = 0) uniform sampler2D u_worldMap;
 
-// Out variables
 layout (location = 0) out vec4 o_finalColor;
 
-// Process fragment
 void main()
 {
 	// Calculate texel size

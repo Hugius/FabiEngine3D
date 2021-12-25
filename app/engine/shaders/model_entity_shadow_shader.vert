@@ -1,22 +1,17 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-// In variables
 layout (location = 0) in vec3 v_pos;
 layout (location = 1) in vec2 v_uv;
 
-// Matrix uniforms
 uniform mat4 u_transformationMatrix;
 uniform mat4 u_lightSpaceMatrix;
 
-// Float uniforms
 uniform float u_minHeight;
 uniform float u_maxHeight;
 
-// Out variables
 out vec2 f_uv;
 
-// Process vertex
 void main()
 {
 	// In variables

@@ -1,26 +1,19 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-// Constants variables
 #define KERNEL_SIZE 5
 
-// In variables
 in vec2 f_position;
 in vec2 f_uv;
 
-// Textures
 layout (location = 0) uniform sampler2D u_diffuseMap;
 
-// Float uniforms
 uniform float u_intensity;
 
-// Boolean uniforms
 uniform bool u_isHorizontal;
 
-// Out variables
 layout (location = 0) out vec4 o_finalColor;
 
-// Process fragment
 void main()
 {
     // Compose blur kernel

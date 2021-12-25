@@ -1,19 +1,16 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-// Constant variables
 #define MAX_POINTLIGHT_COUNT 64
 #define MAX_SPOTLIGHT_COUNT 64
 #define SPOTLIGHT_SMOOTHING_MULTIPLIER 0.95f
 
-// In variables
 in vec3 f_position;
 in vec2 f_uv;
 in vec3 f_normal;
 in vec4 f_shadowPosition;
 in mat3 f_tbnMatrix;
 
-// Textures
 layout (location = 0) uniform sampler2D u_shadowMap;
 layout (location = 1) uniform sampler2D u_diffuseMap;
 layout (location = 2) uniform sampler2D u_normalMap;
@@ -25,7 +22,6 @@ layout (location = 7) uniform sampler2D u_redNormalMap;
 layout (location = 8) uniform sampler2D u_greenNormalMap;
 layout (location = 9) uniform sampler2D u_blueNormalMap;
 
-// Vector uniforms
 uniform vec3 u_pointlightPositions[MAX_POINTLIGHT_COUNT];
 uniform vec3 u_pointlightRadiuses[MAX_POINTLIGHT_COUNT];
 uniform vec3 u_pointlightColors[MAX_POINTLIGHT_COUNT];
@@ -40,7 +36,6 @@ uniform vec3 u_shadowCenter;
 uniform vec3 u_fogColor;
 uniform vec3 u_wireframeColor;
 
-// Float uniforms
 uniform float u_pointlightIntensities[MAX_POINTLIGHT_COUNT];
 uniform float u_spotlightIntensities[MAX_SPOTLIGHT_COUNT];
 uniform float u_spotlightAngles[MAX_SPOTLIGHT_COUNT];
@@ -60,12 +55,10 @@ uniform float u_specularShininess;
 uniform float u_specularIntensity;
 uniform float u_shadowLightness;
 
-// Integer uniforms
 uniform int u_pointlightShapes[MAX_POINTLIGHT_COUNT];
 uniform int u_pointlightCount;
 uniform int u_spotlightCount;
 
-// Boolean uniforms
 uniform bool u_isWireframed;
 uniform bool u_isSpecular;
 uniform bool u_isAmbientLightingEnabled;
@@ -83,11 +76,9 @@ uniform bool u_hasRedNormalMap;
 uniform bool u_hasGreenNormalMap;
 uniform bool u_hasBlueNormalMap;
 
-// Out variables
 layout (location = 0) out vec4 o_primaryColor;
 layout (location = 1) out vec4 o_secondaryColor;
 
-// Functions
 vec3 calculateDiffuseMapping();
 vec3 calculateNormalMapping();
 vec3 calculateAmbientLighting();
@@ -98,7 +89,6 @@ vec3 calculateFog(vec3 color);
 float calculateSpecularLighting(vec3 lightPosition, vec3 normal);
 float calculateShadows();
 
-// Process fragment
 void main()
 {
 	// Wireframe color

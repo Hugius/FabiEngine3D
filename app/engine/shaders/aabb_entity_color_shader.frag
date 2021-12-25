@@ -1,14 +1,11 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-// Vector uniforms
 uniform vec3 u_color;
 
-// Out variables
 layout (location = 0) out vec4 o_primaryColor;
 layout (location = 1) out vec4 o_secondaryColor;
 
-// Process fragments
 void main()
 {
 	// Apply gamma correction

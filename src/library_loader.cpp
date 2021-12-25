@@ -89,7 +89,7 @@ SDL_Window* LibraryLoader::getWindowPointer()
 	return temp;
 }
 
-// https://stackoverflow.com/questions/850774/how-to-determine-the-hardware-cpu-and-ram-on-a-machine
+/* https://stackoverflow.com/questions/850774/how-to-determine-the-hardware-cpu-and-ram-on-a-machine */
 const string LibraryLoader::getCpuModel() const
 {
 	// Temporary values

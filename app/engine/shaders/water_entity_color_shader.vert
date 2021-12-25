@@ -1,34 +1,26 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-// In variables
 layout (location = 0) in vec3 v_pos;
 layout (location = 1) in vec2 v_uv;
 
-// Textures
 layout (location = 5) uniform sampler2D u_displacementMap;
 
-// Matrix uniforms
 uniform mat4 u_viewMatrix;
 uniform mat4 u_projectionMatrix;
 
-// Vector uniforms
 uniform vec2 u_waveOffset;
 
-// Float uniforms
 uniform float u_height;
 uniform float u_textureRepeat;
 uniform float u_waveHeight;
 
-// Boolean uniforms
 uniform bool u_hasDisplacementMap;
 
-// Out variables
 out vec4 f_clip;
 out vec2 f_uv;
 out vec3 f_position;
 
-// Process vertex
 void main()
 {
 	// Variable for position altering

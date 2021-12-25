@@ -1,22 +1,18 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-// Constant variables
 #define MAX_LIGHT_COUNT 128
 
-// In variables
 in vec3 f_position;
 in vec2 f_uv;
 in vec4 f_clip;
 
-// Textures
 layout (location = 0) uniform sampler2D u_reflectionMap;
 layout (location = 1) uniform sampler2D u_refractionMap;
 layout (location = 2) uniform sampler2D u_depthMap;
 layout (location = 3) uniform sampler2D u_dudvMap;
 layout (location = 4) uniform sampler2D u_normalMap;
 
-// Vector3 uniforms
 uniform vec3 u_pointlightPositions[MAX_LIGHT_COUNT];
 uniform vec3 u_pointlightRadiuses[MAX_LIGHT_COUNT];
 uniform vec3 u_pointlightColors[MAX_LIGHT_COUNT];
@@ -27,10 +23,8 @@ uniform vec3 u_color;
 uniform vec3 u_fogColor;
 uniform vec3 u_wireframeColor;
 
-// Vector2 uniforms
 uniform vec2 u_rippleOffset;
 
-// Float uniforms
 uniform float u_pointlightIntensities[MAX_LIGHT_COUNT];
 uniform float u_directionalLightingIntensity;
 uniform float u_specularShininess;
@@ -42,11 +36,9 @@ uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
 uniform float u_fogThickness;
 
-// Integer uniforms
 uniform int u_pointlightShapes[MAX_LIGHT_COUNT];
 uniform int u_lightCount;
 
-// Boolean uniforms
 uniform bool u_isWireframed;
 uniform bool u_isDirectionalLightingEnabled;
 uniform bool u_isFogEnabled;
@@ -57,11 +49,9 @@ uniform bool u_isUnderWater;
 uniform bool u_hasDudvMap;
 uniform bool u_hasNormalMap;
 
-// Out variables
 layout (location = 0) out vec4 o_primaryColor;
 layout (location = 1) out vec4 o_secondaryColor;
 
-// Functions
 vec4 calculateWaterColor();
 vec3 calculateDirectionalLighting(vec3 normal);
 vec3 calculateLights(vec3 normal);
@@ -69,7 +59,6 @@ vec3 calculateFog(vec3 color);
 float calculateSpecularLighting(vec3 position, vec3 normal);
 float convertDepthToPerspective(float depth);
 
-// Process fragment
 void main()
 {
 	// Wireframe color

@@ -1,25 +1,19 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-// In variables
 in vec2 f_uv;
 in float f_flareVisibility;
 
-// Textures
 layout (location = 1) uniform sampler2D u_worldMap;
 layout (location = 2) uniform sampler2D u_flareMap;
 
-// Float uniforms
 uniform float u_lensFlareIntensity;
 uniform float u_lensFlareTransparency;
 
-// Boolean uniforms
 uniform bool u_isLensFlareEnabled;
 
-// Out variables
 layout (location = 0) out vec4 o_finalColor;
 
-// Process fragment
 void main()
 {
     // Validate

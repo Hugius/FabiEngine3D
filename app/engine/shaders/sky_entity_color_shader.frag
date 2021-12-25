@@ -1,31 +1,24 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-// In variables
 in vec3 f_uv;
 
-// Textures
 layout (location = 0) uniform samplerCube u_mainCubeMap;
 layout (location = 1) uniform samplerCube u_mixCubeMap;
 
-// Float uniforms
 uniform float u_mainLightness;
 uniform float u_mixLightness;
 uniform float u_mixValue;
 
-// Vector uniforms
 uniform vec3 u_wireframeColor;
 uniform vec3 u_mainColor;
 uniform vec3 u_mixColor;
 
-// Boolean uniforms
 uniform bool u_isWireframed;
 
-// Out variables
 layout (location = 0) out vec4 o_primaryColor;
 layout (location = 1) out vec4 o_secondaryColor;
 
-// Process fragment
 void main()
 {
 	// Wireframe color

@@ -1,23 +1,17 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-// In variables
 in vec2 f_uv;
 
-// Textures
 layout (location = 0) uniform sampler2D u_worldMap;
 layout (location = 1) uniform sampler2D u_motionBlurMap;
 
-// Float uniforms
 uniform float u_mixValue;
 
-// Boolean uniforms
 uniform bool u_isMotionBlurEnabled;
 
-// Out variables
 layout (location = 0) out vec4 o_finalColor;
 
-// Process fragment
 void main()
 {
     // Validate

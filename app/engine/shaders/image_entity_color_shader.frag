@@ -1,36 +1,28 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-// In variables
 in vec2 f_uv;
 
-// Textures
 layout (location = 0) uniform sampler2D u_diffuseMap;
 
-// Vector uniforms
 uniform vec3 u_color;
 uniform vec2 u_windowSize;
 uniform vec2 u_minPosition;
 uniform vec2 u_maxPosition;
 uniform vec3 u_wireframeColor;
 
-// Float uniforms
 uniform float u_transparency;
 uniform float u_nearDistance;
 uniform float u_farDistance;
 
-// Boolean uniforms
 uniform bool u_isPerspectiveDepthEntity;
 uniform bool u_hasDiffuseMap;
 uniform bool u_isWireframed;
 
-// Out variables
 layout (location = 0) out vec4 o_finalColor;
 
-// Functions
 float convertDepthToPerspective(float depth);
 
-// Process fragment
 void main()
 {
 	// Wireframe color

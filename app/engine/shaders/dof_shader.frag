@@ -1,35 +1,27 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-// Constants
 #define MIDDLE_SMOOTHING_MULTIPLIER 0.2f
 #define FRAGMENT_SMOOTHING_MULTIPLIER 0.5f
 
-// In variables
 in vec2 f_uv;
 
-// Textures
 layout (location = 0) uniform sampler2D u_depthMap;
 layout (location = 1) uniform sampler2D u_worldMap;
 layout (location = 2) uniform sampler2D u_dofMap;
 
-// Float uniforms
 uniform float u_nearDistance;
 uniform float u_farDistance;
 uniform float u_dofDynamicDistance;
 uniform float u_dofBlurDistance;
 
-// Boolean uniforms
 uniform bool u_isDofEnabled;
 uniform bool u_isDofDynamic;
 
-// Out variables
 layout (location = 0) out vec4 o_finalColor;
 
-// Functions
 float convertDepthToPerspective(float depth);
 
-// Process fragment
 void main()
 {
     // Validate

@@ -64,7 +64,6 @@ void Animation2dEditor::_updateChoiceMenu()
 			}
 
 			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
-			_fe3d.billboard_setWireframed(PREVIEW_BILLBOARD_ID, false);
 			_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
 
 			_currentAnimationID = "";

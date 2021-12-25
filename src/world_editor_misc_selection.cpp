@@ -6,11 +6,6 @@ void WorldEditor::_selectModel(const string& ID)
 
 	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_pointing.png");
 
-	for(const auto& partID : _fe3d.model_getPartIDs(_selectedModelID))
-	{
-		_fe3d.model_setWireframed(_selectedModelID, partID, true);
-	}
-
 	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		string tempID = _selectedModelID;
@@ -83,8 +78,7 @@ void WorldEditor::_unselectModel(const string& ID)
 {
 	for(const auto& partID : _fe3d.model_getPartIDs(ID))
 	{
-		_fe3d.model_setWireframeColor(ID, partID, 1.0f);
-		_fe3d.model_setWireframed(ID, partID, false);
+		_fe3d.model_setTransparency(ID, partID, 1.0f);
 	}
 }
 

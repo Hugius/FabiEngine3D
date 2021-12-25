@@ -12,19 +12,19 @@ void WorldEditor::_updateModelHighlighting(const string& ID, int& direction)
 		auto partIDs = _fe3d.model_getPartIDs(ID);
 		for(size_t i = 0; i < partIDs.size(); i++)
 		{
-			if((_fe3d.model_getWireframeColor(ID, partIDs[i]) == 0.0f) && (i == 0))
+			auto transparency = _fe3d.model_getTransparency(ID, partIDs[i]);
+
+			if((transparency == 0.0f) && (i == 0))
 			{
 				direction *= -1;
 			}
 
-			if((_fe3d.model_getWireframeColor(ID, partIDs[i]) == 1.0f) && (i == 0))
+			if((transparency == 1.0f) && (i == 0))
 			{
 				direction *= -1;
 			}
-
-			const auto color = _fe3d.model_getWireframeColor(ID, partIDs[i]);
 			const float speed = (MODEL_HIGHLIGHT_SPEED * static_cast<float>(direction));
-			_fe3d.model_setWireframeColor(ID, partIDs[i], (color + speed));
+			_fe3d.model_setTransparency(ID, partIDs[i], (transparency + speed));
 		}
 	}
 }

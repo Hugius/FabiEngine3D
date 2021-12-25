@@ -3,24 +3,6 @@
 
 void Animation2dEditor::_updateMiscellaneous()
 {
-	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
-	{
-		if(!_currentAnimationID.empty())
-		{
-			if(_fe3d.input_isKeyPressed(InputType::KEY_F))
-			{
-				if(_fe3d.billboard_isWireframed(PREVIEW_BILLBOARD_ID))
-				{
-					_fe3d.billboard_setWireframed(PREVIEW_BILLBOARD_ID, false);
-				}
-				else
-				{
-					_fe3d.billboard_setWireframed(PREVIEW_BILLBOARD_ID, true);
-				}
-			}
-		}
-	}
-
 	if(!_currentAnimationID.empty())
 	{
 		if(!isBillboardAnimationStarted(_currentAnimationID, PREVIEW_BILLBOARD_ID))
@@ -62,13 +44,9 @@ void Animation2dEditor::_updateAnimationCreating()
 			}
 
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
-
 			_animations.push_back(make_shared<Animation2d>(newAnimationID));
-
 			_currentAnimationID = newAnimationID;
-
 			_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
-
 			_fe3d.text_setContent(_gui.getOverlay()->getTextField("animationID")->getEntityID(), "Animation: " + newAnimationID, 0.025f);
 			_fe3d.text_setVisible(_gui.getOverlay()->getTextField("animationID")->getEntityID(), true);
 			_isCreatingAnimation = false;
@@ -91,10 +69,8 @@ void Animation2dEditor::_updateAnimationChoosing()
 				if(!_isDeletingAnimation)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
-
 					_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, _getAnimation(_currentAnimationID)->getPreviewTexturePath());
 					_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
-
 					_fe3d.text_setContent(_gui.getOverlay()->getTextField("animationID")->getEntityID(), "Animation: " + selectedButtonID, 0.025f);
 					_fe3d.text_setVisible(_gui.getOverlay()->getTextField("animationID")->getEntityID(), true);
 				}
@@ -124,13 +100,10 @@ void Animation2dEditor::_updateAnimationDeleting()
 		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation2dEditorMenuMain");
-
 			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
 			_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
-
 			_deleteAnimation(_currentAnimationID);
 			_currentAnimationID = "";
-
 			_isDeletingAnimation = false;
 		}
 		if(_gui.getOverlay()->isAnswerFormDenied("delete"))

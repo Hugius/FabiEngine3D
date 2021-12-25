@@ -26,8 +26,7 @@ void Animation3dEditor::_updateFrameMenu()
 		{
 			for(const auto& partID : _fe3d.model_getPartIDs(currentAnimation->getPreviewModelID()))
 			{
-				_fe3d.model_setWireframeColor(currentAnimation->getPreviewModelID(), partID, 0.0f);
-				_fe3d.model_setWireframed(currentAnimation->getPreviewModelID(), partID, false);
+				_fe3d.model_setTransparency(currentAnimation->getPreviewModelID(), partID, 1.0f);
 			}
 
 			_currentPartID = "";
@@ -185,16 +184,13 @@ void Animation3dEditor::_updateFrameMenu()
 
 		if(!selectedButtonID.empty())
 		{
+			_hoveredPartID = selectedButtonID;
+
 			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				_currentPartID = selectedButtonID;
 				_hoveredPartID = "";
 				_gui.getOverlay()->deleteChoiceForm("partList");
-			}
-			else
-			{
-				_hoveredPartID = selectedButtonID;
-				_fe3d.model_setWireframed(currentAnimation->getPreviewModelID(), _hoveredPartID, true);
 			}
 		}
 		else if(_gui.getOverlay()->isChoiceFormCancelled("partList"))
@@ -207,8 +203,7 @@ void Animation3dEditor::_updateFrameMenu()
 			{
 				for(const auto& partID : _fe3d.model_getPartIDs(currentAnimation->getPreviewModelID()))
 				{
-					_fe3d.model_setWireframeColor(currentAnimation->getPreviewModelID(), partID, 0.0f);
-					_fe3d.model_setWireframed(currentAnimation->getPreviewModelID(), partID, false);
+					_fe3d.model_setTransparency(currentAnimation->getPreviewModelID(), partID, 1.0f);
 				}
 			}
 

@@ -428,58 +428,6 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_start_animation")
-	{
-		auto types = {SVT::STRING, SVT::INTEGER};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
-			{
-
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-			}
-		}
-	}
-	else if(functionName == "fe3d:billboard_pause_animation")
-	{
-		auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
-			{
-
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-			}
-		}
-	}
-	else if(functionName == "fe3d:billboard_resume_animation")
-	{
-		auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
-			{
-
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-			}
-		}
-	}
-	else if(functionName == "fe3d:billboard_stop_animation")
-	{
-		auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
-			{
-
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-			}
-		}
-	}
 	else if(functionName == "fe3d:billboard_set_text")
 	{
 		auto types = {SVT::STRING, SVT::STRING};

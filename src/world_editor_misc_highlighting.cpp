@@ -10,6 +10,7 @@ void WorldEditor::_updateModelHighlighting(const string& ID, int& direction)
 	if(!ID.empty())
 	{
 		auto partIDs = _fe3d.model_getPartIDs(ID);
+
 		for(size_t i = 0; i < partIDs.size(); i++)
 		{
 			auto transparency = _fe3d.model_getTransparency(ID, partIDs[i]);
@@ -18,7 +19,6 @@ void WorldEditor::_updateModelHighlighting(const string& ID, int& direction)
 			{
 				direction *= -1;
 			}
-
 			if((transparency == 1.0f) && (i == 0))
 			{
 				direction *= -1;
@@ -38,19 +38,19 @@ void WorldEditor::_updateBillboardHighlighting(const string& ID, int& direction)
 
 	if(!ID.empty())
 	{
-		if(_fe3d.billboard_getWireframeColor(ID) == 0.0f)
+		auto transparency = _fe3d.billboard_getTransparency(ID);
+
+		if(transparency == 0.0f)
+		{
+			direction *= -1;
+		}
+		if(transparency == 1.0f)
 		{
 			direction *= -1;
 		}
 
-		if(_fe3d.billboard_getWireframeColor(ID) == 1.0f)
-		{
-			direction *= -1;
-		}
-
-		const auto color = _fe3d.billboard_getWireframeColor(ID);
 		const float speed = (BILLBOARD_HIGHLIGHT_SPEED * static_cast<float>(direction));
-		_fe3d.billboard_setWireframeColor(ID, (color + speed));
+		_fe3d.billboard_setTransparency(ID, (transparency + speed));
 	}
 }
 

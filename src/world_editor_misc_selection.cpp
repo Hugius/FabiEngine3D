@@ -23,8 +23,6 @@ void WorldEditor::_selectBillboard(const string& ID)
 
 	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_pointing.png");
 
-	_fe3d.billboard_setWireframed(_selectedBillboardID, true);
-
 	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		string tempID = ID;
@@ -84,8 +82,7 @@ void WorldEditor::_unselectModel(const string& ID)
 
 void WorldEditor::_unselectBillboard(const string& ID)
 {
-	_fe3d.billboard_setWireframeColor(ID, 1.0f);
-	_fe3d.billboard_setWireframed(ID, false);
+	_fe3d.billboard_setTransparency(ID, 1.0f);
 }
 
 void WorldEditor::_unselectSound(const string& ID)

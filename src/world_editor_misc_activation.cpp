@@ -138,7 +138,7 @@ void WorldEditor::_deactivateSound()
 {
 	if(!_activeSpeakerID.empty())
 	{
-		_unselectBillboard(_activeSpeakerID);
+		_unselectSound(_activeSpeakerID);
 	}
 
 	_activeSpeakerID = "";
@@ -149,7 +149,7 @@ void WorldEditor::_deactivatePointlight()
 {
 	if(!_activeLampID.empty())
 	{
-		_unselectBillboard(_activeLampID);
+		_unselectPointlight(_activeLampID);
 	}
 
 	_activeLampID = "";
@@ -159,7 +159,7 @@ void WorldEditor::_deactivateSpotlight()
 {
 	if(!_activeTorchID.empty())
 	{
-		_unselectBillboard(_activeTorchID);
+		_unselectSpotlight(_activeTorchID);
 	}
 
 	_activeTorchID = "";
@@ -169,7 +169,7 @@ void WorldEditor::_deactivateReflection()
 {
 	if(!_activeCameraID.empty())
 	{
-		_unselectBillboard(_activeCameraID);
+		_unselectReflection(_activeCameraID);
 	}
 
 	_activeCameraID = "";

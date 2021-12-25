@@ -71,6 +71,7 @@ void WorldEditor::load()
 	_fe3d.pointlight_setVisible(TEMPLATE_LAMP_ID, false);
 
 	_fe3d.model_create(TEMPLATE_TORCH_ID, TORCH_MODEL_PATH);
+	_fe3d.model_setBaseRotation(TEMPLATE_TORCH_ID, DEFAULT_TORCH_ROTATION);
 	_fe3d.model_setBaseSize(TEMPLATE_TORCH_ID, DEFAULT_TORCH_SIZE);
 	_fe3d.model_setShadowed(TEMPLATE_TORCH_ID, false);
 	_fe3d.model_setReflected(TEMPLATE_TORCH_ID, false);

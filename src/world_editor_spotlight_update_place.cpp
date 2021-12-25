@@ -31,6 +31,7 @@ void WorldEditor::_updateSpotlightPlacing()
 				{
 					const string newModelID = ("@@torch_" + newID);
 					_fe3d.model_create(newModelID, "engine\\assets\\mesh\\torch.obj");
+					_fe3d.model_setBaseRotation(newModelID, fvec3(0.0f, 0.0f, -90.0f));
 					_fe3d.model_setBaseSize(newModelID, DEFAULT_TORCH_SIZE);
 					_fe3d.model_setShadowed(newModelID, false);
 					_fe3d.model_setReflected(newModelID, false);
@@ -97,6 +98,7 @@ void WorldEditor::_updateSpotlightPlacing()
 						{
 							const string newModelID = ("@@torch_" + newID);
 							_fe3d.model_create(newModelID, "engine\\assets\\mesh\\torch.obj");
+							_fe3d.model_setBaseRotation(newModelID, fvec3(0.0f, 0.0f, -90.0f));
 							_fe3d.model_setBaseSize(newModelID, DEFAULT_TORCH_SIZE);
 							_fe3d.model_setShadowed(newModelID, false);
 							_fe3d.model_setReflected(newModelID, false);

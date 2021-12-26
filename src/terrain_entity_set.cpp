@@ -3,6 +3,14 @@
 using std::max;
 using std::clamp;
 
+TerrainEntity::TerrainEntity(const string& ID, const string& heightMapPath)
+	:
+	BaseEntity(ID),
+	_heightMapPath(heightMapPath)
+{
+
+}
+
 void TerrainEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 {
 	_renderBuffer = value;
@@ -26,11 +34,6 @@ void TerrainEntity::setUvCoords(const vector<fvec2> value)
 void TerrainEntity::setNormals(const vector<fvec3> value)
 {
 	_normals = value;
-}
-
-void TerrainEntity::setHeightMapPath(const string& value)
-{
-	_heightMapPath = value;
 }
 
 void TerrainEntity::setDiffuseMap(TextureID value)

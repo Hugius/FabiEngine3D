@@ -13,10 +13,9 @@ public:
 	TextEntityManager(TextureLoader& textureLoader, RenderBus& renderBus);
 
 	void update();
-	void createEntity(const string& ID, bool isCentered, bool isDynamic);
+	void createEntity(const string& ID, bool isCentered);
 	void deleteEntity(const string& ID);
 	void deleteEntities();
-	void loadCharacters(const string& ID);
 
 	const bool isEntityExisting(const string& ID);
 
@@ -27,7 +26,7 @@ private:
 	map<string, string> _contentMap;
 
 	const shared_ptr<RenderBuffer> _centeredRenderBuffer;
-	const shared_ptr<RenderBuffer> _nonCenteredRenderBuffer;
+	const shared_ptr<RenderBuffer> _corneredRenderBuffer;
 	unordered_map<string, shared_ptr<TextEntity>> _entities;
 	TextureLoader& _textureLoader;
 	RenderBus& _renderBus;

@@ -16,11 +16,6 @@ const bool FabiEngine3D::text_isCentered(const string& ID) const
 	return _core->_textEntityManager.getEntity(ID)->isCentered();
 }
 
-const bool FabiEngine3D::text_isDynamic(const string& ID) const
-{
-	return _core->_textEntityManager.getEntity(ID)->isDynamic();
-}
-
 const bool FabiEngine3D::text_isMirroredHorizontally(const string& ID) const
 {
 	return _core->_textEntityManager.getEntity(ID)->isMirroredHorizonally();

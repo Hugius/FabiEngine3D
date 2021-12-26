@@ -77,16 +77,7 @@ const unordered_map<string, shared_ptr<AabbEntity>>& AabbEntityManager::getEntit
 
 void AabbEntityManager::createEntity(const string& ID, bool isCentered)
 {
-	_entities.insert(make_pair(ID, make_shared<AabbEntity>(ID, isCentered)));
-
-	if(isCentered)
-	{
-		getEntity(ID)->setRenderBuffer(_centeredRenderBuffer);
-	}
-	else
-	{
-		getEntity(ID)->setRenderBuffer(_standingRenderBuffer);
-	}
+	_entities.insert(make_pair(ID, make_shared<AabbEntity>(ID, isCentered, (isCentered ? _centeredRenderBuffer : _standingRenderBuffer))));
 }
 
 void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntity>>& modelEntities, const unordered_map<string, shared_ptr<BillboardEntity>>& billboardEntities)

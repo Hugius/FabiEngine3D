@@ -13,7 +13,7 @@ using std::shared_ptr;
 class SkyEntity final : public BaseEntity
 {
 public:
-	using BaseEntity::BaseEntity;
+	SkyEntity(const string& ID);
 
 	void updateRotationMatrix();
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);

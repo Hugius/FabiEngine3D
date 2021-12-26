@@ -11,7 +11,7 @@ using std::numeric_limits;
 class BillboardEntity final : public BaseEntity
 {
 public:
-	using BaseEntity::BaseEntity;
+	BillboardEntity(const string& ID);
 
 	void updateTransformation();
 	void updateTransformationMatrix();

@@ -11,7 +11,7 @@ using std::shared_ptr;
 class WaterEntity final : public BaseEntity
 {
 public:
-	using BaseEntity::BaseEntity;
+	WaterEntity(const string& ID);
 
 	void setLowQualityRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setHighQualityRenderBuffer(shared_ptr<RenderBuffer> value);

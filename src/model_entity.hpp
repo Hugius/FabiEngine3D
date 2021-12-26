@@ -7,7 +7,7 @@ using std::numeric_limits;
 class ModelEntity final : public BaseEntity
 {
 public:
-	using BaseEntity::BaseEntity;
+	ModelEntity(const string& ID, const string& meshPath);
 
 	void createPart(const string& ID);
 	void updateTransformation();
@@ -19,7 +19,6 @@ public:
 	void setLevelOfDetailed(bool value);
 	void setLevelOfDetailSize(fvec3 value);
 	void setLevelOfDetailEntityID(const string& value);
-	void setMeshPath(const string& value);
 	void setPreviousReflectionEntityID(const string& value);
 	void setCurrentReflectionEntityID(const string& value);
 	void setCubeReflectionMixValue(float value);

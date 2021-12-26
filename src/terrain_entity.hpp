@@ -10,14 +10,13 @@ using std::shared_ptr;
 class TerrainEntity final : public BaseEntity
 {
 public:
-	using BaseEntity::BaseEntity;
+	TerrainEntity(const string& ID, const string& heightMapPath);
 
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setPixels(const vector<float>& value);
 	void setVertices(const vector<fvec3> value);
 	void setNormals(const vector<fvec3> value);
 	void setUvCoords(const vector<fvec2> value);
-	void setHeightMapPath(const string& value);
 	void setDiffuseMap(TextureID value);
 	void setDiffuseMapPath(const string& value);
 	void setNormalMap(TextureID value);
@@ -102,7 +101,7 @@ public:
 	const TextureID getBlueNormalMap() const;
 
 private:
-	string _heightMapPath = "";
+	const string _heightMapPath;
 	string _diffuseMapPath = "";
 	string _normalMapPath = "";
 	string _blendMapPath = "";

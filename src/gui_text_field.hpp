@@ -6,7 +6,7 @@ class GuiTextField final
 {
 public:
 	GuiTextField(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size,
-				 string textContent, fvec3 color, bool isCentered, bool isDynamic);
+				 string textContent, fvec3 color, bool isCentered);
 	~GuiTextField();
 
 	void setVisible(bool isVisible);

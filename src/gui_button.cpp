@@ -8,7 +8,7 @@ GuiButton::GuiButton(FabiEngine3D& fe3d, const string& parentID, const string& I
 	_parentID(parentID),
 	_rectangle(make_shared<GuiRectangle>(fe3d, parentID + "_button", ID, position, size, color, isCentered)),
 	_textField(make_shared<GuiTextField>(fe3d, parentID + "_button", ID, position,
-			   fvec2(size.x* TEXT_WIDTH_MULTIPLIER, size.y* TEXT_HEIGHT_MULTIPLIER), textContent, textColor, isCentered, false)),
+			   fvec2(size.x* TEXT_WIDTH_MULTIPLIER, size.y* TEXT_HEIGHT_MULTIPLIER), textContent, textColor, isCentered)),
 	_hoverColor(hoverColor),
 	_textHoverColor(textHoverColor),
 	_isSizeChangeEnabled(isSizeIncreaseEnabled),

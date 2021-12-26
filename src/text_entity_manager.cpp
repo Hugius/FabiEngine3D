@@ -8,7 +8,7 @@ TextEntityManager::TextEntityManager(TextureLoader& textureLoader, RenderBus& re
 	_textureLoader(textureLoader),
 	_renderBus(renderBus),
 	_centeredRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true)),
-	_nonCenteredRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
+	_corneredRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
 {
 
 }
@@ -32,12 +32,9 @@ const unordered_map<string, shared_ptr<TextEntity>>& TextEntityManager::getEntit
 	return _entities;
 }
 
-void TextEntityManager::createEntity(const string& ID, bool isCentered, bool isDynamic)
+void TextEntityManager::createEntity(const string& ID, bool isCentered)
 {
-	_entities.insert(make_pair(ID, make_shared<TextEntity>(ID)));
-	getEntity(ID)->setCentered(isCentered);
-	getEntity(ID)->setDynamic(isDynamic);
-	getEntity(ID)->setRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer);
+	_entities.insert(make_pair(ID, make_shared<TextEntity>(ID, isCentered, (isCentered ? _centeredRenderBuffer : _corneredRenderBuffer))));
 	getEntity(ID)->setDepth(_renderBus.getGuiDepth());
 	_renderBus.setGuiDepth(_renderBus.getGuiDepth() + 1);
 }
@@ -63,55 +60,15 @@ const bool TextEntityManager::isEntityExisting(const string& ID)
 	return (_entities.find(ID) != _entities.end());
 }
 
-void TextEntityManager::loadCharacters(const string& ID)
-{
-	auto entity = getEntity(ID);
-
-	if((_contentMap.find(ID) == _contentMap.end()) || (_contentMap[ID] != entity->getContent()))
-	{
-		_contentMap[ID] = entity->getContent();
-
-		entity->deleteCharacterEntities();
-
-		for(const auto& c : entity->getContent())
-		{
-			auto newCharacter = make_shared<ImageEntity>("dummy");
-			newCharacter->setRenderBuffer(_nonCenteredRenderBuffer);
-
-			string content = "";
-			content += c;
-			auto texture = _textureLoader.load2dTexture(content, entity->getFontPath());
-
-			if(texture == 0)
-			{
-				break;
-			}
-
-			newCharacter->setDiffuseMap(texture);
-
-			entity->addCharacterEntity(newCharacter);
-		}
-
-		entity->updateCharacterEntities();
-	}
-}
-
 void TextEntityManager::update()
 {
 	for(const auto& [keyID, entity] : _entities)
 	{
 		entity->updateTransformation();
 
-		if(entity->isDynamic())
+		if(entity->isVisible())
 		{
-			entity->updateCharacterEntities();
-		}
-		else
-		{
-			if(entity->isVisible())
-			{
-				entity->updateTransformationMatrix();
-			}
+			entity->updateTransformationMatrix();
 		}
 	}
 }

@@ -33,9 +33,9 @@ void GuiOverlay::createRectangle(const string& ID, fvec2 position, fvec2 size, c
 	_rectangles.push_back(make_shared<GuiRectangle>(_fe3d, "overlay", ID, position, size, texturePath, isCentered));
 }
 
-void GuiOverlay::createTextField(const string& ID, fvec2 position, fvec2 size, string textContent, fvec3 textColor, bool isCentered, bool isDynamic)
+void GuiOverlay::createTextField(const string& ID, fvec2 position, fvec2 size, string textContent, fvec3 textColor, bool isCentered)
 {
-	_textFields.push_back(make_shared<GuiTextField>(_fe3d, "overlay", ID, position, size, textContent, textColor, isCentered, isDynamic));
+	_textFields.push_back(make_shared<GuiTextField>(_fe3d, "overlay", ID, position, size, textContent, textColor, isCentered));
 }
 
 const bool GuiOverlay::isScrollingListExisting(const string& ID) const

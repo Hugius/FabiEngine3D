@@ -43,7 +43,7 @@ const unordered_map<string, shared_ptr<TerrainEntity>>& TerrainEntityManager::ge
 
 void TerrainEntityManager::createEntity(const string& ID, const string& heightMapPath)
 {
-	_entities.insert(make_pair(ID, make_shared<TerrainEntity>(ID)));
+	_entities.insert(make_pair(ID, make_shared<TerrainEntity>(ID, heightMapPath)));
 
 	auto pixelsPointer = _textureLoader.loadBitmap(heightMapPath);
 
@@ -64,7 +64,6 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 
 	auto entity = getEntity(ID);
 
-	entity->setHeightMapPath(heightMapPath);
 	entity->setPixels(pixels);
 	entity->setSize(static_cast<float>(heightMapSize));
 

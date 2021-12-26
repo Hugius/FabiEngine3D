@@ -252,19 +252,6 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			}
 		}
 	}
-	else if(functionName == "fe3d:text_is_dynamic")
-	{
-		auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dText(args[0].getString()))
-			{
-				auto result = _fe3d.text_isDynamic(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
-			}
-		}
-	}
 	else if(functionName == "fe3d:text_get_font_path")
 	{
 		auto types = {SVT::STRING};

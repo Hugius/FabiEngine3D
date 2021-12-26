@@ -37,10 +37,10 @@ void GuiScreen::createRectangle(const string& ID, fvec2 position, fvec2 size, co
 	_rectangles.push_back(make_shared<GuiRectangle>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), texturePath, isCentered));
 }
 
-void GuiScreen::createTextField(const string& ID, fvec2 position, fvec2 size, string textContent, fvec3 textColor, bool isCentered, bool isDynamic)
+void GuiScreen::createTextField(const string& ID, fvec2 position, fvec2 size, string textContent, fvec3 textColor, bool isCentered)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_textFields.push_back(make_shared<GuiTextField>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), textContent, textColor, isCentered, isDynamic));
+	_textFields.push_back(make_shared<GuiTextField>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), textContent, textColor, isCentered));
 }
 
 void GuiScreen::deleteScrollingList(const string& ID)

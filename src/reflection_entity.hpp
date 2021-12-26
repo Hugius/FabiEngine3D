@@ -11,7 +11,7 @@ using std::array;
 class ReflectionEntity final : public BaseEntity
 {
 public:
-	using BaseEntity::BaseEntity;
+	ReflectionEntity(const string& ID);
 
 	void updateTransformation();
 	void capture();

@@ -5,6 +5,13 @@
 using std::max;
 using std::clamp;
 
+SpotlightEntity::SpotlightEntity(const string& ID)
+	:
+	BaseEntity(ID)
+{
+
+}
+
 void SpotlightEntity::updateTransformation()
 {
 	if(_position != _positionTarget)

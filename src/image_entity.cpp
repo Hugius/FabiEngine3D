@@ -6,6 +6,15 @@
 using std::max;
 using std::clamp;
 
+ImageEntity::ImageEntity(const string& ID, bool isCentered, shared_ptr<RenderBuffer> renderBuffer)
+	:
+	BaseEntity(ID),
+	_isCentered(isCentered),
+	_renderBuffer(renderBuffer)
+{
+
+}
+
 void ImageEntity::updateTransformation()
 {
 	if(_position != _positionTarget)
@@ -61,11 +70,6 @@ void ImageEntity::updateTransformationMatrix()
 	mat44 scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, 1.0f);
 
 	_transformationMatrix = (translationMatrix * rotationMatrix * scalingMatrix);
-}
-
-void ImageEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
-{
-	_renderBuffer = value;
 }
 
 void ImageEntity::setDiffuseMap(TextureID value)
@@ -186,11 +190,6 @@ void ImageEntity::setAdderUV(fvec2 value)
 	_adderUV = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-const bool ImageEntity::hasRenderBuffer() const
-{
-	return (_renderBuffer != nullptr);
-}
-
 const shared_ptr<RenderBuffer> ImageEntity::getRenderBuffer() const
 {
 	return _renderBuffer;
@@ -294,11 +293,6 @@ const unsigned int ImageEntity::getDepth() const
 void ImageEntity::setPerspectiveDepthEntity(bool value)
 {
 	_isPerspectiveDepthEntity = value;
-}
-
-void ImageEntity::setCentered(bool value)
-{
-	_isCentered = value;
 }
 
 void ImageEntity::setWireframed(bool value)

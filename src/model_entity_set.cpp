@@ -6,6 +6,14 @@
 using std::max;
 using std::clamp;
 
+ModelEntity::ModelEntity(const string& ID, const string& meshPath)
+	:
+	BaseEntity(ID),
+	_meshPath(meshPath)
+{
+
+}
+
 void ModelEntity::createPart(const string& ID)
 {
 	_parts.push_back(ModelEntityPart(ID));
@@ -292,11 +300,6 @@ void ModelEntity::setWireframeColor(const string& partID, fvec3 value)
 void ModelEntity::setLevelOfDetailSize(fvec3 value)
 {
 	_levelOfDetailSize = value;
-}
-
-void ModelEntity::setMeshPath(const string& value)
-{
-	_meshPath = value;
 }
 
 void ModelEntity::setDiffuseMapPath(const string& partID, const string& value)

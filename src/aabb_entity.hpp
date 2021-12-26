@@ -12,11 +12,10 @@ using std::shared_ptr;
 class AabbEntity final : public BaseEntity
 {
 public:
-	AabbEntity(const string& ID, bool isCentered);
+	AabbEntity(const string& ID, bool isCentered, shared_ptr<RenderBuffer> renderBuffer);
 
 	void updateTransformation();
 	void updateTransformationMatrix();
-	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setLocalPosition(fvec3 value);
 	void setLocalSize(fvec3 value);
 	void setPosition(fvec3 value);
@@ -50,7 +49,6 @@ public:
 	const bool isCollisionResponsive() const;
 	const bool hasParent() const;
 	const bool hasCollided() const;
-	const bool hasRenderBuffer() const;
 	const bool mustFollowParentEntityTransformation() const;
 	const bool mustFollowParentEntityVisibility() const;
 
@@ -81,7 +79,7 @@ private:
 	bool _isCollisionResponsive = true;
 	bool _hasCollided = false;
 
-	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
+	shared_ptr<RenderBuffer> _renderBuffer;
 	AabbParentEntityType _parentEntityType = AabbParentEntityType::BILLBOARD;
 	Direction _collisionDirection = Direction::X;
 };

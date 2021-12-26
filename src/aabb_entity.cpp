@@ -4,9 +4,11 @@
 
 using std::max;
 
-AabbEntity::AabbEntity(const string& ID, bool isCentered) :
+AabbEntity::AabbEntity(const string& ID, bool isCentered, shared_ptr<RenderBuffer> renderBuffer)
+	:
 	BaseEntity(ID),
-	_isCentered(isCentered)
+	_isCentered(isCentered),
+	_renderBuffer(renderBuffer)
 {
 
 }
@@ -145,11 +147,6 @@ void AabbEntity::setParentEntityType(AabbParentEntityType value)
 	_parentEntityType = value;
 }
 
-void AabbEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
-{
-	_renderBuffer = value;
-}
-
 void AabbEntity::setLocalPosition(fvec3 value)
 {
 	_localPosition = value;
@@ -233,11 +230,6 @@ const bool AabbEntity::hasParent() const
 const bool AabbEntity::hasCollided() const
 {
 	return _hasCollided;
-}
-
-const bool AabbEntity::hasRenderBuffer() const
-{
-	return (_renderBuffer != nullptr);
 }
 
 const bool AabbEntity::mustFollowParentEntityTransformation() const

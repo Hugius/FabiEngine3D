@@ -529,7 +529,7 @@ public:
 	const bool image_hasDiffuseMap(const string& ID) const;
 	const bool image_isWireframed(const string& ID) const;
 
-	void text_create(const string& ID, bool isCentered, bool isDynamic);
+	void text_create(const string& ID, bool isCentered);
 	void text_delete(const string& ID);
 	void text_deleteAll();
 	void text_setVisible(const string& ID, bool value);
@@ -566,7 +566,6 @@ public:
 	const bool text_isExisting(const string& ID) const;
 	const bool text_isVisible(const string& ID) const;
 	const bool text_isCentered(const string& ID) const;
-	const bool text_isDynamic(const string& ID) const;
 	const bool text_isMirroredHorizontally(const string& ID) const;
 	const bool text_isMirroredVertically(const string& ID) const;
 	const bool text_isWireframed(const string& ID) const;

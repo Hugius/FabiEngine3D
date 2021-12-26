@@ -6,9 +6,9 @@ void FabiEngine3D::text_deleteAll()
 	_core->_textEntityManager.deleteEntities();
 }
 
-void FabiEngine3D::text_create(const string& ID, bool isCentered, bool isDynamic)
+void FabiEngine3D::text_create(const string& ID, bool isCentered)
 {
-	_core->_textEntityManager.createEntity(ID, isCentered, isDynamic);
+	_core->_textEntityManager.createEntity(ID, isCentered);
 }
 
 void FabiEngine3D::text_delete(const string& ID)
@@ -30,14 +30,7 @@ void FabiEngine3D::text_setFont(const string& ID, const string& value)
 	auto content = entity->getContent();
 	if(!content.empty())
 	{
-		if(entity->isDynamic())
-		{
-			_core->_textEntityManager.loadCharacters(ID);
-		}
-		else
-		{
-			entity->setDiffuseMap(_core->_textureLoader.load2dTexture(content, value));
-		}
+		entity->setDiffuseMap(_core->_textureLoader.load2dTexture(content, value));
 	}
 }
 
@@ -65,14 +58,7 @@ void FabiEngine3D::text_setContent(const string& ID, const string& value, float 
 	}
 	entity->setSize(newSize);
 
-	if(entity->isDynamic())
-	{
-		_core->_textEntityManager.loadCharacters(ID);
-	}
-	else
-	{
-		entity->setDiffuseMap(_core->_textureLoader.load2dTexture(value, entity->getFontPath()));
-	}
+	entity->setDiffuseMap(_core->_textureLoader.load2dTexture(value, entity->getFontPath()));
 }
 
 void FabiEngine3D::text_setColor(const string& ID, fvec3 value)

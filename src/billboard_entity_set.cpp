@@ -6,6 +6,13 @@
 using std::clamp;
 using std::max;
 
+BillboardEntity::BillboardEntity(const string& ID)
+	:
+	BaseEntity(ID)
+{
+
+}
+
 void BillboardEntity::updateTransformation()
 {
 	if(_position != _positionTarget)

@@ -10,6 +10,13 @@ void SkyEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 	_renderBuffer = value;
 }
 
+SkyEntity::SkyEntity(const string& ID)
+	:
+	BaseEntity(ID)
+{
+
+}
+
 void SkyEntity::updateRotationMatrix()
 {
 	_rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(_rotation));

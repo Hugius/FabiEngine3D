@@ -35,7 +35,7 @@ void SoundEditor::load()
 	_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\texture\\stop.png");
 	_fe3d.billboard_setBright("@@icon", true);
 
-	_gui.getOverlay()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true, false);
+	_gui.getOverlay()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
 
 	_isEditorLoaded = true;
 }

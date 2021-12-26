@@ -24,7 +24,7 @@ public:
 
 private:
 	const shared_ptr<RenderBuffer> _centeredRenderBuffer;
-	const shared_ptr<RenderBuffer> _nonCenteredRenderBuffer;
+	const shared_ptr<RenderBuffer> _corneredRenderBuffer;
 	unordered_map<string, shared_ptr<ImageEntity>> _entities;
 	RenderBus& _renderBus;
 };

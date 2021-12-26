@@ -1,6 +1,6 @@
 #include "gui_text_field.hpp"
 
-GuiTextField::GuiTextField(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, string textContent, fvec3 color, bool isCentered, bool isDynamic)
+GuiTextField::GuiTextField(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, string textContent, fvec3 color, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -10,7 +10,7 @@ GuiTextField::GuiTextField(FabiEngine3D& fe3d, const string& parentID, const str
 	_initialSize(size),
 	_initialColor(color)
 {
-	_fe3d.text_create(_entityID, isCentered, isDynamic);
+	_fe3d.text_create(_entityID, isCentered);
 	_fe3d.text_setPosition(_entityID, position);
 	_fe3d.text_setSize(_entityID, size);
 	_fe3d.text_setColor(_entityID, color);

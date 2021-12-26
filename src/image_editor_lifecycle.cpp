@@ -26,7 +26,7 @@ void ImageEditor::load()
 	_fe3d.billboard_setPosition(PREVIEW_BILLBOARD_ID, PREVIEW_BILLBOARD_POSITION);
 	_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
 
-	_gui.getOverlay()->createTextField("imageID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true, false);
+	_gui.getOverlay()->createTextField("imageID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
 
 	_isEditorLoaded = true;
 }

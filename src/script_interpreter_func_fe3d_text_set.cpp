@@ -8,7 +8,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 {
 	if(functionName == "fe3d:text_place")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::STRING, SVT::BOOLEAN, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		auto types = {SVT::STRING, SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -23,15 +23,15 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 				return true;
 			}
 
-			_fe3d.text_create(args[0].getString(), true, args[3].getBoolean());
+			_fe3d.text_create(args[0].getString(), true);
 
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\font\\" + args[1].getString());
 			_fe3d.text_setFont(args[0].getString(), filePath);
 
-			_fe3d.text_setPosition(args[0].getString(), _convertGuiPositionToViewport(fvec2(args[4].getDecimal(), args[5].getDecimal())));
-			_fe3d.text_setSize(args[0].getString(), _convertGuiSizeToViewport(fvec2(args[6].getDecimal(), args[7].getDecimal())));
+			_fe3d.text_setPosition(args[0].getString(), _convertGuiPositionToViewport(fvec2(args[3].getDecimal(), args[4].getDecimal())));
+			_fe3d.text_setSize(args[0].getString(), _convertGuiSizeToViewport(fvec2(args[5].getDecimal(), args[6].getDecimal())));
 			_fe3d.text_setContent(args[0].getString(), args[2].getString());
 
 			if(!Config::getInst().isApplicationExported())

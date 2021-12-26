@@ -7,7 +7,7 @@ ImageEntityManager::ImageEntityManager(RenderBus& renderBus)
 	:
 	_renderBus(renderBus),
 	_centeredRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true)),
-	_nonCenteredRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
+	_corneredRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
 {
 
 }
@@ -33,9 +33,8 @@ const unordered_map<string, shared_ptr<ImageEntity>>& ImageEntityManager::getEnt
 
 void ImageEntityManager::createEntity(const string& ID, bool isCentered)
 {
-	_entities.insert(make_pair(ID, make_shared<ImageEntity>(ID)));
-	getEntity(ID)->setRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer);
-	getEntity(ID)->setCentered(isCentered);
+	auto entity = make_shared<ImageEntity>(ID, isCentered, (isCentered ? _centeredRenderBuffer : _corneredRenderBuffer));
+	_entities.insert(make_pair(ID, entity));
 	getEntity(ID)->setDepth(_renderBus.getGuiDepth());
 	_renderBus.setGuiDepth(_renderBus.getGuiDepth() + 1);
 }

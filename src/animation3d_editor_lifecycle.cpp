@@ -60,8 +60,8 @@ void Animation3dEditor::load()
 	_fe3d.reflection_create("@@reflection");
 	_fe3d.reflection_capture("@@reflection");
 
-	_gui.getOverlay()->createTextField("animationID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true, false);
-	_gui.getOverlay()->createTextField("animationFrame", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true, false);
+	_gui.getOverlay()->createTextField("animationID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
+	_gui.getOverlay()->createTextField("animationFrame", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
 
 	_isEditorLoaded = true;
 }

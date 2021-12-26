@@ -34,7 +34,7 @@ const unordered_map<string, shared_ptr<ModelEntity>>& ModelEntityManager::getEnt
 
 void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 {
-	_entities.insert(make_pair(ID, make_shared<ModelEntity>(ID, meshPath)));
+	_entities.insert(make_pair(ID, make_shared<ModelEntity>(ID)));
 
 	auto partsPointer = _meshLoader.loadMesh(meshPath);
 
@@ -80,6 +80,8 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 
 		entity->setRenderBuffer(part->getID(), make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
 	}
+
+	entity->setMeshPath(meshPath);
 }
 
 void ModelEntityManager::deleteEntity(const string& ID)

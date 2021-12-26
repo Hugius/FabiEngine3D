@@ -4,7 +4,7 @@
 
 using std::make_shared;
 
-const float bufferData[] =
+constexpr float bufferData[] =
 {
 	-0.5f, 1.0f, 0.0f, 0.0f, 1.0f,
 	-0.5f, 0.0f, 0.0f, 0.0f, 0.0f,
@@ -13,7 +13,8 @@ const float bufferData[] =
 	0.5f, 1.0f, 0.0f, 1.0f, 1.0f,
 	-0.5f, 1.0f, 0.0f, 0.0f, 1.0f
 };
-const unsigned int bufferCount = static_cast<unsigned int>(sizeof(bufferData) / sizeof(float));
+
+constexpr unsigned int bufferCount = static_cast<unsigned int>(sizeof(bufferData) / sizeof(float));
 
 BillboardEntityManager::BillboardEntityManager(RenderBus& renderBus, Camera& camera)
 	:

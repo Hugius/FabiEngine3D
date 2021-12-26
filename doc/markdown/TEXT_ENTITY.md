@@ -54,9 +54,6 @@
 - **Transparency**: the transparency of the fragments
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
-- **Dynamic**: the mesh is divided in multiple text entities for every single character in the text content
-  - Type: `boolean`
-  - Constraints: none
 - **Mirrored Horizontally**: the diffuse map is mirrored horizontally
   - Type: `boolean`
   - Constraints: none

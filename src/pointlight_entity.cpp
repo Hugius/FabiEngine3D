@@ -5,13 +5,6 @@
 using std::max;
 using std::clamp;
 
-PointlightEntity::PointlightEntity(const string& ID)
-	:
-	BaseEntity(ID)
-{
-
-}
-
 void PointlightEntity::updateTransformation()
 {
 	if(_position != _positionTarget)

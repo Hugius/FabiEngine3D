@@ -10,13 +10,11 @@ using std::shared_ptr;
 class TerrainEntity final : public BaseEntity
 {
 public:
-	TerrainEntity(const string& ID, const string& heightMapPath);
+	using BaseEntity::BaseEntity;
 
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setPixels(const vector<float>& value);
-	void setVertices(const vector<fvec3> value);
-	void setNormals(const vector<fvec3> value);
-	void setUvCoords(const vector<fvec2> value);
+	void setHeightMapPath(const string& value);
 	void setDiffuseMap(TextureID value);
 	void setDiffuseMapPath(const string& value);
 	void setNormalMap(TextureID value);
@@ -59,11 +57,7 @@ public:
 	const string& getGreenNormalMapPath() const;
 	const string& getBlueNormalMapPath() const;
 
-	const vector<fvec3>& getVertices() const;
-	const vector<fvec3>& getNormals() const;
 	const fvec3 getWireframeColor() const;
-
-	const vector<fvec2>& getUvCoords() const;
 
 	const vector<float>& getPixels() const;
 	const float getTextureRepeat() const;
@@ -101,7 +95,7 @@ public:
 	const TextureID getBlueNormalMap() const;
 
 private:
-	const string _heightMapPath;
+	string _heightMapPath = "";
 	string _diffuseMapPath = "";
 	string _normalMapPath = "";
 	string _blendMapPath = "";
@@ -112,12 +106,8 @@ private:
 	string _greenNormalMapPath = "";
 	string _blueNormalMapPath = "";
 
-	vector<fvec3> _vertices;
-	vector<fvec3> _normals;
 	fvec3 _color = fvec3(1.0f);
 	fvec3 _wireframeColor = fvec3(1.0f);
-
-	vector<fvec2> _uvCoords;
 
 	vector<float> _pixels;
 	float _redTextureRepeat = 1.0f;

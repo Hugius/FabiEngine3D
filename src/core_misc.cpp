@@ -76,8 +76,10 @@ void Core::_prepare()
 		Logger::throwFatalWarning("Directory `engine\\` is missing or corrupted!");
 	}
 
-	shared_ptr<ImageEntity> logo = make_shared<ImageEntity>("logo", true, make_shared<RenderBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
+	shared_ptr<ImageEntity> logo = make_shared<ImageEntity>("logo");
+	logo->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
 	logo->setDiffuseMap(_textureLoader.load2dTexture("engine\\assets\\texture\\logo.png", false, false));
+	logo->setCentered(true);
 
 	SDL_DisplayMode DM;
 	SDL_GetDesktopDisplayMode(0, &DM);

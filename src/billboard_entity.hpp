@@ -11,11 +11,11 @@ using std::numeric_limits;
 class BillboardEntity final : public BaseEntity
 {
 public:
-	BillboardEntity(const string& ID);
+	using BaseEntity::BaseEntity;
 
+	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void updateTransformation();
 	void updateTransformationMatrix();
-	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setFacingCameraX(bool value);
 	void setFacingCameraY(bool value);
 	void setDepthMapIncluded(bool value);

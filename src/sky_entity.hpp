@@ -13,10 +13,10 @@ using std::shared_ptr;
 class SkyEntity final : public BaseEntity
 {
 public:
-	SkyEntity(const string& ID);
+	using BaseEntity::BaseEntity;
 
-	void updateRotationMatrix();
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
+	void updateRotationMatrix();
 	void setCubeMapPaths(const array<string, 6>& value);
 	void setColor(fvec3 value);
 	void setCubeMap(TextureID value);

@@ -6,13 +6,9 @@
 using std::max;
 using std::clamp;
 
-ImageEntity::ImageEntity(const string& ID, bool isCentered, shared_ptr<RenderBuffer> renderBuffer)
-	:
-	BaseEntity(ID),
-	_isCentered(isCentered),
-	_renderBuffer(renderBuffer)
+void ImageEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 {
-
+	_renderBuffer = value;
 }
 
 void ImageEntity::updateTransformation()
@@ -298,6 +294,11 @@ void ImageEntity::setPerspectiveDepthEntity(bool value)
 void ImageEntity::setWireframed(bool value)
 {
 	_isWireframed = value;
+}
+
+void ImageEntity::setCentered(bool value)
+{
+	_isCentered = value;
 }
 
 const bool ImageEntity::isPerspectiveDepthEntity() const

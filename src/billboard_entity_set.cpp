@@ -6,11 +6,9 @@
 using std::clamp;
 using std::max;
 
-BillboardEntity::BillboardEntity(const string& ID)
-	:
-	BaseEntity(ID)
+void BillboardEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 {
-
+	_renderBuffer = value;
 }
 
 void BillboardEntity::updateTransformation()
@@ -99,11 +97,6 @@ void BillboardEntity::updateTransformationMatrix()
 
 	mat44 scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, 1.0f);
 	_transformationMatrix = (_transformationMatrix * scalingMatrix);
-}
-
-void BillboardEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
-{
-	_renderBuffer = value;
 }
 
 void BillboardEntity::setFacingCameraX(bool value)

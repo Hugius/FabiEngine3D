@@ -43,7 +43,7 @@ const unordered_map<string, shared_ptr<TerrainEntity>>& TerrainEntityManager::ge
 
 void TerrainEntityManager::createEntity(const string& ID, const string& heightMapPath)
 {
-	_entities.insert(make_pair(ID, make_shared<TerrainEntity>(ID, heightMapPath)));
+	_entities.insert(make_pair(ID, make_shared<TerrainEntity>(ID)));
 
 	auto pixelsPointer = _textureLoader.loadBitmap(heightMapPath);
 
@@ -55,7 +55,8 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 
 	auto& pixels = *pixelsPointer;
 	auto heightMapSize = static_cast<unsigned int>(sqrt(static_cast<double>(pixels.size())));
-	if(heightMapSize > MAX_SIZE)
+	auto size = static_cast<float>(heightMapSize);
+	if(size > MAX_SIZE)
 	{
 		Logger::throwWarning("Tried to create terrain with ID \"" + ID + "\": height map resolution too high!");
 		deleteEntity(ID);
@@ -64,10 +65,11 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 
 	auto entity = getEntity(ID);
 
-	entity->setPixels(pixels);
-	entity->setSize(static_cast<float>(heightMapSize));
+	_loadMesh(entity, size, 0.0f, pixels);
 
-	loadMesh(ID);
+	entity->setHeightMapPath(heightMapPath);
+	entity->setPixels(pixels);
+	entity->setSize(size);
 }
 
 void TerrainEntityManager::selectTerrain(const string& ID)
@@ -104,16 +106,17 @@ const bool TerrainEntityManager::isEntityExisting(const string& ID)
 
 void TerrainEntityManager::loadMesh(const string& ID)
 {
-	auto entity = getEntity(ID);
-	const auto& pixels = entity->getPixels();
-	const float size = entity->getSize();
-	const unsigned int uSize = static_cast<unsigned int>(size);
-	const float halfSize = size / 2.0f;
-	const float maxHeight = entity->getMaxHeight();
+	_loadMesh(getEntity(ID), getEntity(ID)->getSize(), getEntity(ID)->getMaxHeight(), getEntity(ID)->getPixels());
+}
+
+void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float size, float maxHeight, const vector<float>& pixels)
+{
+	const auto halfSize = (size / 2.0f);
+	const auto uSize = static_cast<unsigned int>(size);
+
 	vector<fvec3> tempVertices;
 	vector<fvec2> tempUvCoords;
 	vector<fvec3> tempNormals;
-
 	for(float x = -halfSize; x < halfSize; x++)
 	{
 		for(float z = -halfSize; z < halfSize; z++)
@@ -220,11 +223,9 @@ void TerrainEntityManager::loadMesh(const string& ID)
 		bufferData.push_back(tangents[i].z);
 	}
 
-	entity->setRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
+	auto bufferDataCount = static_cast<unsigned int>(bufferData.size());
 
-	entity->setVertices(vertices);
-	entity->setUvCoords(uvCoords);
-	entity->setNormals(normals);
+	entity->setRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], bufferDataCount));
 }
 
 const float TerrainEntityManager::getPixelHeight(const string& ID, float x, float z)

@@ -6,7 +6,7 @@
 class SpotlightEntity final : public BaseEntity
 {
 public:
-	SpotlightEntity(const string& ID);
+	using BaseEntity::BaseEntity;
 
 	void updateTransformation();
 	void updateFrontVector();

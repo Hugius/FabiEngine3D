@@ -5,7 +5,7 @@
 using std::make_shared;
 using std::min;
 
-const float bufferData[] =
+constexpr float bufferData[] =
 {
 	-1.0f, 1.0f, -1.0f,
 	-1.0f, -1.0f, -1.0f,
@@ -49,6 +49,7 @@ const float bufferData[] =
 	-1.0f, -1.0f, 1.0f,
 	1.0f, -1.0f, 1.0f
 };
+
 constexpr unsigned int bufferCount = static_cast<unsigned int>(sizeof(bufferData) / sizeof(float));
 
 SkyEntityManager::SkyEntityManager(RenderBus& renderBus)

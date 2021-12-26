@@ -27,12 +27,14 @@ public:
 	shared_ptr<TerrainEntity> getEntity(const string& ID);
 	shared_ptr<TerrainEntity> getSelectedTerrain();
 
-	static inline const unsigned int MAX_SIZE = 1024;
-
 private:
+	void _loadMesh(shared_ptr<TerrainEntity> entity, float size, float maxHeight, const vector<float>& pixels);
+
 	float _getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixels);
 
 	string _selectedID = "";
+
+	static inline const float MAX_SIZE = 1024.0f;
 
 	unordered_map<string, shared_ptr<TerrainEntity>> _entities;
 	TextureLoader& _textureLoader;

@@ -4,13 +4,9 @@
 
 using std::max;
 
-AabbEntity::AabbEntity(const string& ID, bool isCentered, shared_ptr<RenderBuffer> renderBuffer)
-	:
-	BaseEntity(ID),
-	_isCentered(isCentered),
-	_renderBuffer(renderBuffer)
+void AabbEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 {
-
+	_renderBuffer = value;
 }
 
 void AabbEntity::updateTransformation()
@@ -97,6 +93,11 @@ void AabbEntity::setCollided(bool value)
 void AabbEntity::setColor(fvec3 value)
 {
 	_color = value;
+}
+
+void AabbEntity::setCentered(bool value)
+{
+	_isCentered = value;
 }
 
 void AabbEntity::setPosition(fvec3 value)

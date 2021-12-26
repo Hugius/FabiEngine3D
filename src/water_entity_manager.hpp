@@ -22,10 +22,12 @@ public:
 	shared_ptr<WaterEntity> getEntity(const string& ID);
 	shared_ptr<WaterEntity> getSelectedWater();
 
-	static inline const unsigned int MAX_SIZE = 1024;
-
 private:
+	void _loadMesh(shared_ptr<WaterEntity> entity, float size);
+
 	string _selectedID = "";
+
+	static inline const float MAX_SIZE = 1024.0f;
 
 	unordered_map<string, shared_ptr<WaterEntity>> _entities;
 };

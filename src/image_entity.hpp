@@ -10,8 +10,9 @@ using std::shared_ptr;
 class ImageEntity : public BaseEntity
 {
 public:
-	ImageEntity(const string& ID, bool isCentered, shared_ptr<RenderBuffer> renderBuffer);
+	using BaseEntity::BaseEntity;
 
+	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void updateTransformation();
 	void updateTransformationMatrix();
 	void setDiffuseMap(TextureID value);
@@ -37,6 +38,7 @@ public:
 	void setAdderUV(fvec2 value);
 	void setPerspectiveDepthEntity(bool value);
 	void setWireframed(bool value);
+	void setCentered(bool value);
 
 	const string& getDiffuseMapPath() const;
 
@@ -93,12 +95,12 @@ private:
 
 	unsigned int _depth = 0;
 
-	const bool _isCentered;
+	bool _isCentered = false;
 	bool _isMirroredHorizontally = false;
 	bool _isMirroredVertically = false;
 	bool _isPerspectiveDepthEntity = false;
 	bool _isWireframed = false;
 
-	shared_ptr<RenderBuffer> _renderBuffer;
+	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
 	TextureID _diffuseMap = 0;
 };

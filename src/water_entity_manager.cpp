@@ -50,7 +50,8 @@ void WaterEntityManager::selectWater(const string& ID)
 void WaterEntityManager::createEntity(const string& ID)
 {
 	_entities.insert(make_pair(ID, make_shared<WaterEntity>(ID)));
-	loadMesh(ID);
+
+	_loadMesh(getEntity(ID), 0.0f);
 }
 
 void WaterEntityManager::deleteEntity(const string& ID)
@@ -68,25 +69,36 @@ void WaterEntityManager::deleteEntities()
 	_entities.clear();
 }
 
+void WaterEntityManager::loadMesh(const string& ID)
+{
+	_loadMesh(getEntity(ID), getEntity(ID)->getSize());
+}
+
 const bool WaterEntityManager::isEntityExisting(const string& ID)
 {
 	return (_entities.find(ID) != _entities.end());
 }
 
-void WaterEntityManager::loadMesh(const string& ID)
+void WaterEntityManager::_loadMesh(shared_ptr<WaterEntity> entity, float size)
 {
-	auto entity = getEntity(ID);
-	float size = entity->getSize();
-	float halfSize = (size / 2.0f);
-	vector<float> highQualityBufferData;
+	const float halfSize = (size / 2.0f);
 
-	if(size > 1024)
+	if(size > MAX_SIZE)
 	{
 		Logger::throwError("WaterEntityManager::loadMesh");
 	}
 
-	highQualityBufferData.reserve(size_t(size) * size_t(size) * 30);
+	const float lowQualityBufferData[] =
+	{
+		-halfSize, 0.0f, halfSize, 0.0f, 1.0f,
+		-halfSize, 0.0f, -halfSize, 0.0f, 0.0f,
+		halfSize, 0.0f, -halfSize, 1.0f, 0.0f,
+		halfSize, 0.0f, -halfSize, 1.0f, 0.0f,
+		halfSize, 0.0f, halfSize, 1.0f, 1.0f,
+		-halfSize, 0.0f, halfSize, 0.0f, 1.0f
+	};
 
+	vector<float> highQualityBufferData;
 	for(float x = -halfSize; x < halfSize; x++)
 	{
 		for(float z = -halfSize; z < halfSize; z++)
@@ -153,23 +165,11 @@ void WaterEntityManager::loadMesh(const string& ID)
 		}
 	}
 
-	auto highQualityRenderBufferCount = static_cast<unsigned int>(highQualityBufferData.size());
-	auto highQualityRenderBuffer = make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, &highQualityBufferData[0], highQualityRenderBufferCount);
-	entity->setHighQualityRenderBuffer(highQualityRenderBuffer);
+	auto lowQualityBufferDataCount = static_cast<unsigned int>(sizeof(lowQualityBufferData) / sizeof(float));
+	auto highQualityBufferDataCount = static_cast<unsigned int>(highQualityBufferData.size());
 
-	const float lowQualityBufferData[] =
-	{
-		-halfSize, 0.0f, halfSize, 0.0f, 1.0f,
-		-halfSize, 0.0f, -halfSize, 0.0f, 0.0f,
-		halfSize, 0.0f, -halfSize, 1.0f, 0.0f,
-		halfSize, 0.0f, -halfSize, 1.0f, 0.0f,
-		halfSize, 0.0f, halfSize, 1.0f, 1.0f,
-		-halfSize, 0.0f, halfSize, 0.0f, 1.0f
-	};
-
-	auto lowQualityRenderBufferCount = static_cast<unsigned int>(sizeof(lowQualityBufferData) / sizeof(float));
-	auto lowQualityRenderBuffer = make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, &lowQualityBufferData[0], lowQualityRenderBufferCount);
-	entity->setLowQualityRenderBuffer(lowQualityRenderBuffer);
+	entity->setLowQualityRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, &lowQualityBufferData[0], lowQualityBufferDataCount));
+	entity->setHighQualityRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, &highQualityBufferData[0], highQualityBufferDataCount));
 }
 
 void WaterEntityManager::update()

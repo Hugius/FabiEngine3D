@@ -55,13 +55,6 @@ void WaterEntity::setTextureRepeat(float value)
 	_textureRepeat = max(0.0f, value);
 }
 
-WaterEntity::WaterEntity(const string& ID)
-	:
-	BaseEntity(ID)
-{
-
-}
-
 void WaterEntity::setLowQualityRenderBuffer(shared_ptr<RenderBuffer> value)
 {
 	_lowQualityRenderBuffer = value;

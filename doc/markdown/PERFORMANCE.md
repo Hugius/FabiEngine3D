@@ -28,7 +28,6 @@
 - Make use of LOD model entities to improve the performance on high-poly meshes.
 - Lower the graphics/lighting quality to improve performance if necessary.
 - Clear the messages in the engine logging console if a lot of messages are printed.
-- Make a text entity dynamic if its content changes a lot.
 - Make sure your GPU is giving the maximum computing power to the engine, so check your graphics card settings.
-- Capture reflection entities as little as possible.
+- Capturing a reflection entity can take some time (especially when loading a world).
 - Use the face culling optimization in model entities as much as possible.

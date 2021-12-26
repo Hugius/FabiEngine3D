@@ -7,7 +7,7 @@
 class PointlightEntity final : public BaseEntity
 {
 public:
-	PointlightEntity(const string& ID);
+	using BaseEntity::BaseEntity;
 
 	void updateTransformation();
 	void setPosition(fvec3 value);

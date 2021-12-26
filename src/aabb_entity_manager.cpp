@@ -25,7 +25,6 @@ constexpr float centeredBufferData[] =
 	-0.5f, -0.5f, 0.5f,
 	-0.5f, -0.5f, -0.5f
 };
-constexpr unsigned int centeredBufferCount = static_cast<unsigned int>(sizeof(centeredBufferData) / sizeof(float));
 
 constexpr float standingBufferData[] =
 {
@@ -46,6 +45,8 @@ constexpr float standingBufferData[] =
 	-0.5f, 0.0f, 0.5f,
 	-0.5f, 0.0f, -0.5f
 };
+
+constexpr unsigned int centeredBufferCount = static_cast<unsigned int>(sizeof(centeredBufferData) / sizeof(float));
 constexpr unsigned int standingBufferCount = static_cast<unsigned int>(sizeof(centeredBufferData) / sizeof(float));
 
 AabbEntityManager::AabbEntityManager()
@@ -77,7 +78,9 @@ const unordered_map<string, shared_ptr<AabbEntity>>& AabbEntityManager::getEntit
 
 void AabbEntityManager::createEntity(const string& ID, bool isCentered)
 {
-	_entities.insert(make_pair(ID, make_shared<AabbEntity>(ID, isCentered, (isCentered ? _centeredRenderBuffer : _standingRenderBuffer))));
+	_entities.insert(make_pair(ID, make_shared<AabbEntity>(ID)));
+	getEntity(ID)->setRenderBuffer(isCentered ? _centeredRenderBuffer : _standingRenderBuffer);
+	getEntity(ID)->setCentered(isCentered);
 }
 
 void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntity>>& modelEntities, const unordered_map<string, shared_ptr<BillboardEntity>>& billboardEntities)
@@ -152,7 +155,6 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 				{
 					entity->setSize(newAabbSize);
 				}
-
 
 				fvec3 localOffset = fvec3(0.0f, (entity->getLocalSize().y / 2.0f), 0.0f);
 				const float roundedRotation = (is90Degrees ? 90.0f : is180Degrees ? 180.0f : is270Degrees ? 270.0f : 0.0f);

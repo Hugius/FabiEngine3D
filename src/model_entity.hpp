@@ -7,7 +7,7 @@ using std::numeric_limits;
 class ModelEntity final : public BaseEntity
 {
 public:
-	ModelEntity(const string& ID, const string& meshPath);
+	using BaseEntity::BaseEntity;
 
 	void createPart(const string& ID);
 	void updateTransformation();
@@ -55,6 +55,7 @@ public:
 	void scalePartTo(const string& partID, fvec3 target, float speed);
 	void setColor(const string& partID, fvec3 value);
 	void setWireframeColor(const string& partID, fvec3 value);
+	void setMeshPath(const string& value);
 	void setDiffuseMapPath(const string& partID, const string& value);
 	void setEmissionMapPath(const string& partID, const string& value);
 	void setSpecularMapPath(const string& partID, const string& value);

@@ -55,7 +55,9 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_waterRefractionCaptureBuffer.createColorTexture(ivec2(0), ivec2(Config::MIN_REFRACTION_QUALITY), 1, false);
 	_shadowCaptureBuffer.createDepthTexture(ivec2(0), ivec2(Config::MIN_SHADOW_QUALITY));
 
-	_renderSurface = make_shared<ImageEntity>("renderSurface", true, make_shared<RenderBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
+	_renderSurface = make_shared<ImageEntity>("renderSurface");
+	_renderSurface->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
+	_renderSurface->setCentered(true);
 }
 
 void MasterRenderer::update()

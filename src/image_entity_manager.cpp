@@ -33,8 +33,9 @@ const unordered_map<string, shared_ptr<ImageEntity>>& ImageEntityManager::getEnt
 
 void ImageEntityManager::createEntity(const string& ID, bool isCentered)
 {
-	auto entity = make_shared<ImageEntity>(ID, isCentered, (isCentered ? _centeredRenderBuffer : _corneredRenderBuffer));
-	_entities.insert(make_pair(ID, entity));
+	_entities.insert(make_pair(ID, make_shared<ImageEntity>(ID)));
+	getEntity(ID)->setRenderBuffer(isCentered ? _centeredRenderBuffer : _corneredRenderBuffer);
+	getEntity(ID)->setCentered(isCentered);
 	getEntity(ID)->setDepth(_renderBus.getGuiDepth());
 	_renderBus.setGuiDepth(_renderBus.getGuiDepth() + 1);
 }

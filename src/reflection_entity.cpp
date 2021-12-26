@@ -1,13 +1,6 @@
 #include "reflection_entity.hpp"
 #include "logger.hpp"
 
-ReflectionEntity::ReflectionEntity(const string& ID)
-	:
-	BaseEntity(ID)
-{
-
-}
-
 void ReflectionEntity::updateTransformation()
 {
 	if(_position != _positionTarget)

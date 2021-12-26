@@ -358,7 +358,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				size.y >>
 				size.z;
 
-			_fe3d.aabb_create(aabbID);
+			_fe3d.aabb_create(aabbID, false);
 			_fe3d.aabb_setBasePosition(aabbID, position);
 			_fe3d.aabb_setBaseSize(aabbID, size);
 			_fe3d.aabb_setRaycastResponsive(aabbID, isRaycastResponsive);

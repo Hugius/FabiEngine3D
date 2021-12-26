@@ -13,13 +13,13 @@ const float bufferData[] =
 	0.5f, 1.0f, 0.0f, 1.0f, 1.0f,
 	-0.5f, 1.0f, 0.0f, 0.0f, 1.0f
 };
+const unsigned int bufferCount = static_cast<unsigned int>(sizeof(bufferData) / sizeof(float));
 
 BillboardEntityManager::BillboardEntityManager(RenderBus& renderBus, Camera& camera)
 	:
 	_renderBus(renderBus),
 	_camera(camera),
-	_renderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, bufferData,
-				  static_cast<unsigned int>(sizeof(bufferData) / sizeof(float))))
+	_renderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, bufferData, bufferCount))
 {
 
 }

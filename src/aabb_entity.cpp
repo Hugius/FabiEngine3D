@@ -4,6 +4,13 @@
 
 using std::max;
 
+AabbEntity::AabbEntity(const string& ID, bool isCentered) :
+	BaseEntity(ID),
+	_isCentered(isCentered)
+{
+
+}
+
 void AabbEntity::updateTransformation()
 {
 	if(_position != _positionTarget)
@@ -201,6 +208,11 @@ const AabbParentEntityType AabbEntity::getParentEntityType() const
 const Direction AabbEntity::getCollisionDirection() const
 {
 	return _collisionDirection;
+}
+
+const bool AabbEntity::isCentered() const
+{
+	return _isCentered;
 }
 
 const bool AabbEntity::isRaycastResponsive() const

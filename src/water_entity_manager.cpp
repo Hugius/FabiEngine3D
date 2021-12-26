@@ -153,9 +153,11 @@ void WaterEntityManager::loadMesh(const string& ID)
 		}
 	}
 
-	entity->setHighQualityRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, &highQualityBufferData[0], static_cast<unsigned int>(highQualityBufferData.size())));
+	auto highQualityRenderBufferCount = static_cast<unsigned int>(highQualityBufferData.size());
+	auto highQualityRenderBuffer = make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, &highQualityBufferData[0], highQualityRenderBufferCount);
+	entity->setHighQualityRenderBuffer(highQualityRenderBuffer);
 
-	float lowQualityBufferData[] =
+	const float lowQualityBufferData[] =
 	{
 		-halfSize, 0.0f, halfSize, 0.0f, 1.0f,
 		-halfSize, 0.0f, -halfSize, 0.0f, 0.0f,
@@ -165,7 +167,9 @@ void WaterEntityManager::loadMesh(const string& ID)
 		-halfSize, 0.0f, halfSize, 0.0f, 1.0f
 	};
 
-	entity->setLowQualityRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, lowQualityBufferData, static_cast<unsigned int>(sizeof(lowQualityBufferData) / sizeof(float))));
+	auto lowQualityRenderBufferCount = static_cast<unsigned int>(sizeof(lowQualityBufferData) / sizeof(float));
+	auto lowQualityRenderBuffer = make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, &lowQualityBufferData[0], lowQualityRenderBufferCount);
+	entity->setLowQualityRenderBuffer(lowQualityRenderBuffer);
 }
 
 void WaterEntityManager::update()

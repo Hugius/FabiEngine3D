@@ -241,7 +241,7 @@ const bool WorldEditor::_copyTemplateModel(const string& newID, const string& te
 	for(const auto& templateAabbID : _fe3d.aabb_getChildIDs(templateID, AabbParentEntityType::MODEL))
 	{
 		const string newAabbID = (newID + "@" + templateAabbID.substr(string(templateID + "_").size()));
-		_fe3d.aabb_create(newAabbID);
+		_fe3d.aabb_create(newAabbID, false);
 		_fe3d.aabb_setParentEntityID(newAabbID, newID);
 		_fe3d.aabb_setParentEntityType(newAabbID, AabbParentEntityType::MODEL);
 		_fe3d.aabb_setLocalPosition(newAabbID, _fe3d.aabb_getPosition(templateAabbID));
@@ -282,7 +282,7 @@ const bool WorldEditor::_copyTemplateBillboard(const string& newID, const string
 
 	_fe3d.billboard_create(newID);
 
-	_fe3d.aabb_create(newID);
+	_fe3d.aabb_create(newID, false);
 	_fe3d.aabb_setParentEntityID(newID, newID);
 	_fe3d.aabb_setParentEntityType(newID, AabbParentEntityType::BILLBOARD);
 

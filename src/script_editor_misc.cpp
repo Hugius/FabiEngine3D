@@ -42,7 +42,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 
 		const fvec3 lineAabbPosition = (lineNumberPosition - fvec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, AABB_DEPTH));
 		const fvec3 lineAabbSize = fvec3(TEXT_CHARACTER_SIZE.x * static_cast<float>(MAX_CHARACTERS_PER_LINE * 2) * 1.1f, TEXT_CHARACTER_SIZE.y, AABB_DEPTH);
-		_fe3d.aabb_create(lineNumberID);
+		_fe3d.aabb_create(lineNumberID, false);
 		_fe3d.aabb_setBasePosition(lineNumberID, lineAabbPosition);
 		_fe3d.aabb_setBaseSize(lineNumberID, lineAabbSize);
 
@@ -72,7 +72,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			{
 				const fvec3 characterAabbPosition = (characterPosition - fvec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, 0.0f));
 				const fvec3 characterAabbSize = fvec3(TEXT_CHARACTER_SIZE.x, TEXT_CHARACTER_SIZE.y, AABB_DEPTH);
-				_fe3d.aabb_create(characterID);
+				_fe3d.aabb_create(characterID, false);
 				_fe3d.aabb_setBasePosition(characterID, characterAabbPosition);
 				_fe3d.aabb_setBaseSize(characterID, characterAabbSize);
 			}

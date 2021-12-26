@@ -142,7 +142,7 @@ void ModelEditor::_updateAabbCreating()
 
 			_currentAabbID = newAabbID;
 
-			_fe3d.aabb_create(_currentModelID + "@" + _currentAabbID);
+			_fe3d.aabb_create(_currentModelID + "@" + _currentAabbID, false);
 			_fe3d.aabb_setParentEntityID((_currentModelID + "@" + _currentAabbID), _currentModelID);
 			_fe3d.aabb_setParentEntityType((_currentModelID + "@" + _currentAabbID), AabbParentEntityType::MODEL);
 

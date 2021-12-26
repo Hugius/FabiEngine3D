@@ -21,7 +21,7 @@ const bool ScriptInterpreter::_executeFe3dAabbSetter(const string& functionName,
 				return true;
 			}
 
-			_fe3d.aabb_create(args[0].getString());
+			_fe3d.aabb_create(args[0].getString(), false);
 			_fe3d.aabb_setBasePosition(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 			_fe3d.aabb_setBaseSize(args[0].getString(), fvec3(args[4].getDecimal(), args[5].getDecimal(), args[6].getDecimal()));
 

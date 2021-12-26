@@ -408,7 +408,7 @@ const bool ModelEditor::loadFromFile()
 				size.y >>
 				size.z;
 
-			_fe3d.aabb_create(aabbID);
+			_fe3d.aabb_create(aabbID, false);
 
 			_fe3d.aabb_setParentEntityID(aabbID, modelID);
 			_fe3d.aabb_setParentEntityType(aabbID, AabbParentEntityType::MODEL);

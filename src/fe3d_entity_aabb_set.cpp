@@ -1,9 +1,9 @@
 #include "fe3d.hpp"
 #include "core.hpp"
 
-void FabiEngine3D::aabb_create(const string& ID)
+void FabiEngine3D::aabb_create(const string& ID, bool isCentered)
 {
-	_core->_aabbEntityManager.createEntity(ID);
+	_core->_aabbEntityManager.createEntity(ID, isCentered);
 }
 
 void FabiEngine3D::aabb_setParentEntityID(const string& ID, const string& value)

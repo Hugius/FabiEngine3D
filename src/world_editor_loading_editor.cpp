@@ -237,7 +237,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				_fe3d.model_setReflected(newModelID, false);
 				_fe3d.model_setBright(newModelID, true);
 
-				_fe3d.aabb_create(newModelID);
+				_fe3d.aabb_create(newModelID, true);
 				_fe3d.aabb_setParentEntityID(newModelID, newModelID);
 				_fe3d.aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
 				_fe3d.aabb_setLocalSize(newModelID, DEFAULT_SPEAKER_AABB_SIZE);
@@ -283,7 +283,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				_fe3d.model_setReflected(newModelID, false);
 				_fe3d.model_setBright(newModelID, true);
 
-				_fe3d.aabb_create(newModelID);
+				_fe3d.aabb_create(newModelID, true);
 				_fe3d.aabb_setParentEntityID(newModelID, newModelID);
 				_fe3d.aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
 				_fe3d.aabb_setLocalSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
@@ -330,7 +330,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				_fe3d.model_setReflected(newModelID, false);
 				_fe3d.model_setBright(newModelID, true);
 
-				_fe3d.aabb_create(newModelID);
+				_fe3d.aabb_create(newModelID, true);
 				_fe3d.aabb_setParentEntityID(newModelID, newModelID);
 				_fe3d.aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
 				_fe3d.aabb_setLocalSize(newModelID, DEFAULT_TORCH_AABB_SIZE);
@@ -368,7 +368,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 				_fe3d.model_setReflected(newModelID, false);
 				_fe3d.model_setBright(newModelID, true);
 
-				_fe3d.aabb_create(newModelID);
+				_fe3d.aabb_create(newModelID, true);
 				_fe3d.aabb_setParentEntityID(newModelID, newModelID);
 				_fe3d.aabb_setParentEntityType(newModelID, AabbParentEntityType::MODEL);
 				_fe3d.aabb_setLocalSize(newModelID, DEFAULT_CAMERA_AABB_SIZE);

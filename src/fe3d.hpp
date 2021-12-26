@@ -390,7 +390,7 @@ public:
 	const bool billboard_isTextual(const string& ID) const;
 	const bool billboard_isFrozen(const string& ID) const;
 
-	void aabb_create(const string& ID);
+	void aabb_create(const string& ID, bool isCentered);
 	void aabb_delete(const string& ID);
 	void aabb_deleteAll();
 	void aabb_setParentEntityID(const string& ID, const string& value);

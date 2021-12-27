@@ -16,6 +16,7 @@ public:
 	void createEntity(const string& ID, bool isCentered);
 	void deleteEntity(const string& ID);
 	void deleteEntities();
+	void loadCharacters(const string& ID);
 
 	const bool isEntityExisting(const string& ID);
 

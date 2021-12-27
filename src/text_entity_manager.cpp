@@ -70,7 +70,40 @@ void TextEntityManager::update()
 
 		if(entity->isVisible())
 		{
-			entity->updateTransformationMatrix();
+			entity->updateCharacterEntities();
 		}
+	}
+}
+
+void TextEntityManager::loadCharacters(const string& ID)
+{
+	auto entity = getEntity(ID);
+
+	if((_contentMap.find(ID) == _contentMap.end()) || (_contentMap[ID] != entity->getContent()))
+	{
+		_contentMap[ID] = entity->getContent();
+
+		entity->deleteCharacterEntities();
+
+		for(const auto& c : entity->getContent())
+		{
+			auto newCharacter = make_shared<ImageEntity>("dummy");
+			newCharacter->setRenderBuffer(_corneredRenderBuffer);
+
+			string content = "";
+			content += c;
+			auto texture = _textureLoader.load2dTexture(content, entity->getFontPath());
+
+			if(texture == 0)
+			{
+				break;
+			}
+
+			newCharacter->setDiffuseMap(texture);
+
+			entity->addCharacterEntity(newCharacter);
+		}
+
+		entity->updateCharacterEntities();
 	}
 }

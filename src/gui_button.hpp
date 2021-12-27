@@ -8,9 +8,9 @@ class GuiButton
 {
 public:
 	GuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor,
-			  string textContent, fvec3 textColor, fvec3 textHoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered);
+			  string textContent, fvec3 textColor, fvec3 textHoverColor, bool isCentered);
 	GuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size,
-			  const string& texturePath, fvec3 hoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered);
+			  const string& texturePath, fvec3 hoverColor, bool isCentered);
 
 	virtual void update(bool isHoverable);
 	virtual void changeTextContent(const string& content);
@@ -48,7 +48,4 @@ private:
 	static inline const float DECREASE_MULTIPLIER = 0.995f;
 	static inline const float TEXT_WIDTH_MULTIPLIER = 0.9f;
 	static inline const float TEXT_HEIGHT_MULTIPLIER = 0.75f;
-
-	const bool _isSizeChangeEnabled;
-	const bool _isColorChangeEnabled;
 };

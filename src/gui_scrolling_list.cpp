@@ -33,7 +33,7 @@ void GuiScrollingList::createButton(const string& ID, string textContent)
 	fvec2 position = _convertPosition(fvec2(x, y));
 	fvec2 size = _convertSize(fvec2(w, h));
 	_buttons.push_back(make_shared<GuiButton>(_fe3d, _parentID, ID, fvec2(position.x, position.y), fvec2(size.x, size.y),
-					   _buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor, true, true, _fe3d.image_isCentered(_entityID)));
+					   _buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor, _fe3d.image_isCentered(_entityID)));
 
 	string rectangleID = _buttons.back()->getRectangle()->getEntityID();
 	string textID = _buttons.back()->getTextField()->getEntityID();

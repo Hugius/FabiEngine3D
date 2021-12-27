@@ -1,7 +1,7 @@
 #include "gui_button.hpp"
 #include "tools.hpp"
 
-GuiButton::GuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor, string textContent, fvec3 textColor, fvec3 textHoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered)
+GuiButton::GuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor, string textContent, fvec3 textColor, fvec3 textHoverColor, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -10,22 +10,18 @@ GuiButton::GuiButton(FabiEngine3D& fe3d, const string& parentID, const string& I
 	_textField(make_shared<GuiTextField>(fe3d, parentID + "_button", ID, position,
 			   fvec2(size.x* TEXT_WIDTH_MULTIPLIER, size.y* TEXT_HEIGHT_MULTIPLIER), textContent, textColor, isCentered)),
 	_hoverColor(hoverColor),
-	_textHoverColor(textHoverColor),
-	_isSizeChangeEnabled(isSizeIncreaseEnabled),
-	_isColorChangeEnabled(isColorChangeEnabled)
+	_textHoverColor(textHoverColor)
 {
 
 }
 
-GuiButton::GuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, const string& texturePath, fvec3 hoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered)
+GuiButton::GuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, const string& texturePath, fvec3 hoverColor, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
 	_parentID(parentID),
 	_rectangle(make_shared<GuiRectangle>(fe3d, parentID + "_button", ID, position, size, texturePath, isCentered)),
-	_hoverColor(hoverColor),
-	_isSizeChangeEnabled(isSizeIncreaseEnabled),
-	_isColorChangeEnabled(isColorChangeEnabled)
+	_hoverColor(hoverColor)
 {
 
 }
@@ -63,36 +59,11 @@ void GuiButton::_updateHovering(bool isHoverable)
 				{
 					_isHovered = true;
 
-					if(_isSizeChangeEnabled)
+					_fe3d.image_setColor(_rectangle->getEntityID(), _hoverColor);
+
+					if(_textField != nullptr)
 					{
-						string rectangleID = _rectangle->getEntityID();
-
-						if(_fe3d.image_getSize(rectangleID).x < (_rectangle->getInitialSize() * TOTAL_SIZE_INCREASE).x &&
-						   _fe3d.image_getSize(rectangleID).y < (_rectangle->getInitialSize() * TOTAL_SIZE_INCREASE).y)
-						{
-							_fe3d.image_setSize(rectangleID, _fe3d.image_getSize(rectangleID) * INCREASE_MULTIPLIER);
-						}
-
-						if(_textField != nullptr)
-						{
-							string TextFieldID = _textField->getEntityID();
-
-							if(_fe3d.text_getSize(rectangleID).x < (_textField->getInitialSize() * TOTAL_SIZE_INCREASE).x &&
-							   _fe3d.text_getSize(rectangleID).y < (_textField->getInitialSize() * TOTAL_SIZE_INCREASE).y)
-							{
-								_fe3d.text_setSize(TextFieldID, _fe3d.text_getSize(TextFieldID) * INCREASE_MULTIPLIER);
-							}
-						}
-					}
-
-					if(_isColorChangeEnabled)
-					{
-						_fe3d.image_setColor(_rectangle->getEntityID(), _hoverColor);
-
-						if(_textField != nullptr)
-						{
-							_fe3d.text_setColor(_textField->getEntityID(), _textHoverColor);
-						}
+						_fe3d.text_setColor(_textField->getEntityID(), _textHoverColor);
 					}
 				}
 			}
@@ -100,26 +71,10 @@ void GuiButton::_updateHovering(bool isHoverable)
 
 		if(!_isHovered)
 		{
-			string rectangleID = _rectangle->getEntityID();
-
-			if(_fe3d.image_getSize(rectangleID).x > _rectangle->getInitialSize().x &&
-			   _fe3d.image_getSize(rectangleID).y > _rectangle->getInitialSize().y)
-			{
-				_fe3d.image_setSize(rectangleID, _fe3d.image_getSize(rectangleID) * DECREASE_MULTIPLIER);
-			}
-
 			_fe3d.image_setColor(_rectangle->getEntityID(), _rectangle->getInitialColor());
 
 			if(_textField != nullptr)
 			{
-				string TextFieldID = _textField->getEntityID();
-
-				if(_fe3d.text_getSize(rectangleID).x > _textField->getInitialSize().x &&
-				   _fe3d.text_getSize(rectangleID).y > _textField->getInitialSize().y)
-				{
-					_fe3d.text_setSize(TextFieldID, _fe3d.text_getSize(TextFieldID) * DECREASE_MULTIPLIER);
-				}
-
 				_fe3d.text_setColor(_textField->getEntityID(), _textField->getInitialColor());
 			}
 		}

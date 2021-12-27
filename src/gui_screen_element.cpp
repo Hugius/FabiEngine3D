@@ -13,16 +13,16 @@ void GuiScreen::createWriteField(const string& ID, fvec2 position, fvec2 size, f
 	_writeFields.push_back(make_shared<GuiWriteField>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed, isCentered));
 }
 
-void GuiScreen::createButton(const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor, string textContent, fvec3 textColor, fvec3 textHoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered)
+void GuiScreen::createButton(const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor, string textContent, fvec3 textColor, fvec3 textHoverColor, bool isCentered)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_buttons.push_back(make_shared<GuiButton>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), color, hoverColor, textContent, textColor, textHoverColor, isSizeIncreaseEnabled, isColorChangeEnabled, isCentered));
+	_buttons.push_back(make_shared<GuiButton>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), color, hoverColor, textContent, textColor, textHoverColor, isCentered));
 }
 
-void GuiScreen::createButton(const string& ID, fvec2 position, fvec2 size, const string& texturePath, fvec3 hoverColor, bool isSizeIncreaseEnabled, bool isColorChangeEnabled, bool isCentered)
+void GuiScreen::createButton(const string& ID, fvec2 position, fvec2 size, const string& texturePath, fvec3 hoverColor, bool isCentered)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_buttons.push_back(make_shared<GuiButton>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), texturePath, hoverColor, isSizeIncreaseEnabled, isColorChangeEnabled, isCentered));
+	_buttons.push_back(make_shared<GuiButton>(_fe3d, _parentID + "_" + _ID, ID, fvec2(dimensions.x, dimensions.y), fvec2(dimensions.z, dimensions.w), texturePath, hoverColor, isCentered));
 }
 
 void GuiScreen::createRectangle(const string& ID, fvec2 position, fvec2 size, fvec3 color, bool isCentered)

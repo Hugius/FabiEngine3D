@@ -127,8 +127,8 @@ void GuiOverlay::_createValueForm(const string& ID, string title, string valueSt
 
 	if(!isButtonExisting("value_form_done"))
 	{
-		createButton("value_form_done", buttonsPosition + fvec2(-0.15f, -0.2f), fvec2(0.12f, 0.1f), fvec3(0.0f, 0.1f, 0.0f), fvec3(0.0f, 1.0f, 0.0f), "Done", fvec3(1.0f), fvec3(0.0f), true, true, true);
-		createButton("value_form_cancel", buttonsPosition + fvec2(0.15f, -0.2f), fvec2(0.18f, 0.1f), fvec3(0.1f, 0.0f, 0.0f), fvec3(1.0f, 0.0f, 0.0f), "Cancel", fvec3(1.0f), fvec3(0.0f), true, true, true);
+		createButton("value_form_done", buttonsPosition + fvec2(-0.15f, -0.2f), fvec2(0.12f, 0.1f), fvec3(0.0f, 0.1f, 0.0f), fvec3(0.0f, 1.0f, 0.0f), "Done", fvec3(1.0f), fvec3(0.0f), true);
+		createButton("value_form_cancel", buttonsPosition + fvec2(0.15f, -0.2f), fvec2(0.18f, 0.1f), fvec3(0.1f, 0.0f, 0.0f), fvec3(1.0f, 0.0f, 0.0f), "Cancel", fvec3(1.0f), fvec3(0.0f), true);
 	}
 }
 
@@ -192,7 +192,7 @@ void GuiOverlay::createChoiceForm(const string& ID, string title, fvec2 position
 	createRectangle(ID, position + fvec2(0.0f, 0.475f), fvec2(title.size() * 0.0275f, 0.125f), fvec3(0.0f), true);
 	createTextField(ID, position + fvec2(0.0f, 0.475f), fvec2(title.size() * 0.025f, 0.1f), title, fvec3(1.0f), true);
 	createScrollingList(ID, position, fvec2(0.5, 0.75f), fvec3(0.25f), fvec3(0.0f, 0.1f, 0.0f), fvec3(0.0f, 1.0f, 0.0f), fvec3(1.0f), fvec3(0.0f), fvec2(0.075f, 0.2f), true);
-	createButton("choice_form_cancel", position + fvec2(0.0f, -0.45f), fvec2(0.15f, 0.1f), fvec3(0.1f, 0.0f, 0.0f), fvec3(1.0f, 0.0f, 0.0f), "Cancel", fvec3(1.0f), fvec3(0.0f), true, true, true);
+	createButton("choice_form_cancel", position + fvec2(0.0f, -0.45f), fvec2(0.15f, 0.1f), fvec3(0.1f, 0.0f, 0.0f), fvec3(1.0f, 0.0f, 0.0f), "Cancel", fvec3(1.0f), fvec3(0.0f), true);
 
 	for(const auto& buttonTitle : buttonTitles)
 	{
@@ -266,8 +266,8 @@ void GuiOverlay::createAnswerForm(const string& ID, string title, fvec2 position
 
 	createRectangle("question", position, fvec2(title.size() * 0.0275f, 0.125f), fvec3(0.0f), true);
 	createTextField("question", position, fvec2(title.size() * 0.025f, 0.1f), title, fvec3(1.0f), true);
-	createButton("answer_form_yes", position + fvec2(-0.1f, -0.2f), fvec2(0.075f, 0.1f), fvec3(0.0f, 0.1f, 0.0f), fvec3(0.0f, 1.0f, 0.0f), "Yes", fvec3(1.0f), fvec3(0.0f), true, true, true);
-	createButton("answer_form_no", position + fvec2(0.1f, -0.2f), fvec2(0.075f, 0.1f), fvec3(0.1f, 0.0f, 0.0f), fvec3(1.0f, 0.0f, 0.0f), "No", fvec3(1.0f), fvec3(0.0f), true, true, true);
+	createButton("answer_form_yes", position + fvec2(-0.1f, -0.2f), fvec2(0.075f, 0.1f), fvec3(0.0f, 0.1f, 0.0f), fvec3(0.0f, 1.0f, 0.0f), "Yes", fvec3(1.0f), fvec3(0.0f), true);
+	createButton("answer_form_no", position + fvec2(0.1f, -0.2f), fvec2(0.075f, 0.1f), fvec3(0.1f, 0.0f, 0.0f), fvec3(1.0f, 0.0f, 0.0f), "No", fvec3(1.0f), fvec3(0.0f), true);
 
 	_isFocused = true;
 	_answerFormID = ID;

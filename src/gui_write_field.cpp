@@ -5,7 +5,7 @@
 
 GuiWriteField::GuiWriteField(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor, fvec3 textColor, fvec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered)
 	:
-	GuiButton(fe3d, parentID, ID, position, size, color, hoverColor, "", textColor, textHoverColor, false, true, isCentered),
+	GuiButton(fe3d, parentID, ID, position, size, color, hoverColor, "", textColor, textHoverColor, isCentered),
 	_noNumbers(noNumbers),
 	_noCaps(noCaps),
 	_noSpecials(noSpecials),

@@ -99,20 +99,20 @@ void WorldEditor::_updateSoundEditing()
 			auto maxDistance = _fe3d.sound3d_getMaxDistance(activeSoundID);
 			auto maxVolume = _fe3d.sound3d_getMaxVolume(activeSoundID);
 
-			_handleValueChanging("soundPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / 100.0f));
-			_handleValueChanging("soundPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / 100.0f));
-			_handleValueChanging("soundPropertiesMenu", "yPlus", "y", position.y, (_editorSpeed / 100.0f));
-			_handleValueChanging("soundPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / 100.0f));
-			_handleValueChanging("soundPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / 100.0f));
-			_handleValueChanging("soundPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / 100.0f));
+			_handleValueChanging("soundPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / SOUND_POSITION_DIVIDER));
+			_handleValueChanging("soundPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / SOUND_POSITION_DIVIDER));
+			_handleValueChanging("soundPropertiesMenu", "yPlus", "y", position.y, (_editorSpeed / SOUND_POSITION_DIVIDER));
+			_handleValueChanging("soundPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / SOUND_POSITION_DIVIDER));
+			_handleValueChanging("soundPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / SOUND_POSITION_DIVIDER));
+			_handleValueChanging("soundPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / SOUND_POSITION_DIVIDER));
 			_fe3d.sound3d_setPosition(activeSoundID, position);
 
-			_handleValueChanging("soundPropertiesMenu", "distancePlus", "distance", maxDistance, (_editorSpeed / 100.0f), 1.0f, 0.0f);
-			_handleValueChanging("soundPropertiesMenu", "distanceMinus", "distance", maxDistance, -(_editorSpeed / 100.0f), 1.0f, 0.0f);
+			_handleValueChanging("soundPropertiesMenu", "distancePlus", "distance", maxDistance, (_editorSpeed / SOUND_DISTANCE_DIVIDER), 1.0f, 0.0f);
+			_handleValueChanging("soundPropertiesMenu", "distanceMinus", "distance", maxDistance, -(_editorSpeed / SOUND_DISTANCE_DIVIDER), 1.0f, 0.0f);
 			_fe3d.sound3d_setMaxDistance(activeSoundID, maxDistance);
 
-			_handleValueChanging("soundPropertiesMenu", "volumePlus", "volume", maxVolume, SOUND_VOLUME_CHANGING_SPEED, 100.0f, 0.0f, 1.0f);
-			_handleValueChanging("soundPropertiesMenu", "volumeMinus", "volume", maxVolume, -SOUND_VOLUME_CHANGING_SPEED, 100.0f, 0.0f, 1.0f);
+			_handleValueChanging("soundPropertiesMenu", "volumePlus", "volume", maxVolume, SOUND_VOLUME_SPEED, SOUND_VOLUME_MULTIPLIER, 0.0f, 1.0f);
+			_handleValueChanging("soundPropertiesMenu", "volumeMinus", "volume", maxVolume, -SOUND_VOLUME_SPEED, SOUND_VOLUME_MULTIPLIER, 0.0f, 1.0f);
 			_fe3d.sound3d_setMaxVolume(activeSoundID, maxVolume);
 		}
 

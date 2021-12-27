@@ -134,12 +134,12 @@ void WorldEditor::_updatePointlightEditing()
 				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("y")->changeTextContent("Y");
 				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("z")->changeTextContent("Z");
 
-				_handleValueChanging("pointlightPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / 100.0f));
-				_handleValueChanging("pointlightPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / 100.0f));
-				_handleValueChanging("pointlightPropertiesMenu", "yPlus", "y", position.y, (_editorSpeed / 100.0f));
-				_handleValueChanging("pointlightPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / 100.0f));
-				_handleValueChanging("pointlightPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / 100.0f));
-				_handleValueChanging("pointlightPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / 100.0f));
+				_handleValueChanging("pointlightPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
+				_handleValueChanging("pointlightPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
+				_handleValueChanging("pointlightPropertiesMenu", "yPlus", "y", position.y, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
+				_handleValueChanging("pointlightPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
+				_handleValueChanging("pointlightPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
+				_handleValueChanging("pointlightPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
 
 				_fe3d.pointlight_setPosition(activePointlightID, position);
 			}
@@ -149,12 +149,12 @@ void WorldEditor::_updatePointlightEditing()
 				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("y")->changeTextContent("Y");
 				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("z")->changeTextContent("Z");
 
-				_handleValueChanging("pointlightPropertiesMenu", "xPlus", "x", radius.x, (_editorSpeed / 100.0f), 1.0f, 0.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "xMinus", "x", radius.x, -(_editorSpeed / 100.0f), 1.0f, 0.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "yPlus", "y", radius.y, (_editorSpeed / 100.0f), 1.0f, 0.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "yMinus", "y", radius.y, -(_editorSpeed / 100.0f), 1.0f, 0.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "zPlus", "z", radius.z, (_editorSpeed / 100.0f), 1.0f, 0.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "zMinus", "z", radius.z, -(_editorSpeed / 100.0f), 1.0f, 0.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "xPlus", "x", radius.x, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "xMinus", "x", radius.x, -(_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "yPlus", "y", radius.y, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "yMinus", "y", radius.y, -(_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "zPlus", "z", radius.z, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "zMinus", "z", radius.z, -(_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
 
 				_fe3d.pointlight_setRadius(activePointlightID, radius);
 			}
@@ -164,19 +164,19 @@ void WorldEditor::_updatePointlightEditing()
 				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("y")->changeTextContent("G");
 				rightWindow->getScreen("pointlightPropertiesMenu")->getTextField("z")->changeTextContent("B");
 
-				_handleValueChanging("pointlightPropertiesMenu", "xPlus", "x", color.r, POINTLIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "xMinus", "x", color.r, -POINTLIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "yPlus", "y", color.g, POINTLIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "yMinus", "y", color.g, -POINTLIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "zPlus", "z", color.b, POINTLIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "zMinus", "z", color.b, -POINTLIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "xPlus", "x", color.r, POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "xMinus", "x", color.r, -POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "yPlus", "y", color.g, POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "yMinus", "y", color.g, -POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "zPlus", "z", color.b, POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "zMinus", "z", color.b, -POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
 
 				_fe3d.model_setColor(_activeLampID, "", color);
 				_fe3d.pointlight_setColor(activePointlightID, color);
 			}
 
-			_handleValueChanging("pointlightPropertiesMenu", "intensityPlus", "intensity", intensity, POINTLIGHT_INTENSITY_CHANGING_SPEED, 10.0f, 0.0f);
-			_handleValueChanging("pointlightPropertiesMenu", "intensityMinus", "intensity", intensity, -POINTLIGHT_INTENSITY_CHANGING_SPEED, 10.0f, 0.0f);
+			_handleValueChanging("pointlightPropertiesMenu", "intensityPlus", "intensity", intensity, POINTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);
+			_handleValueChanging("pointlightPropertiesMenu", "intensityMinus", "intensity", intensity, -POINTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);
 			_fe3d.pointlight_setIntensity(activePointlightID, intensity);
 
 			const auto imageEntityID = screen->getButton("shape")->getRectangle()->getEntityID();

@@ -118,12 +118,12 @@ void WorldEditor::_updateSpotlightEditing()
 				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("y")->changeTextContent("Y");
 				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("z")->changeTextContent("Z");
 
-				_handleValueChanging("spotlightPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / 100.0f));
-				_handleValueChanging("spotlightPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / 100.0f));
-				_handleValueChanging("spotlightPropertiesMenu", "yPlus", "y", position.y, (_editorSpeed / 100.0f));
-				_handleValueChanging("spotlightPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / 100.0f));
-				_handleValueChanging("spotlightPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / 100.0f));
-				_handleValueChanging("spotlightPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / 100.0f));
+				_handleValueChanging("spotlightPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
+				_handleValueChanging("spotlightPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
+				_handleValueChanging("spotlightPropertiesMenu", "yPlus", "y", position.y, (_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
+				_handleValueChanging("spotlightPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
+				_handleValueChanging("spotlightPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
+				_handleValueChanging("spotlightPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / SPOTLIGHT_POSITION_DIVIDER));
 
 				_fe3d.spotlight_setPosition(activeSpotlightID, position);
 				_fe3d.model_setBasePosition(_activeTorchID, position);
@@ -134,37 +134,37 @@ void WorldEditor::_updateSpotlightEditing()
 				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("y")->changeTextContent("G");
 				rightWindow->getScreen("spotlightPropertiesMenu")->getTextField("z")->changeTextContent("B");
 
-				_handleValueChanging("spotlightPropertiesMenu", "xPlus", "x", color.r, SPOTLIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("spotlightPropertiesMenu", "xMinus", "x", color.r, -SPOTLIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("spotlightPropertiesMenu", "yPlus", "y", color.g, SPOTLIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("spotlightPropertiesMenu", "yMinus", "y", color.g, -SPOTLIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("spotlightPropertiesMenu", "zPlus", "z", color.b, SPOTLIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("spotlightPropertiesMenu", "zMinus", "z", color.b, -SPOTLIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("spotlightPropertiesMenu", "xPlus", "x", color.r, SPOTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("spotlightPropertiesMenu", "xMinus", "x", color.r, -SPOTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("spotlightPropertiesMenu", "yPlus", "y", color.g, SPOTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("spotlightPropertiesMenu", "yMinus", "y", color.g, -SPOTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("spotlightPropertiesMenu", "zPlus", "z", color.b, SPOTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("spotlightPropertiesMenu", "zMinus", "z", color.b, -SPOTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
 
 				_fe3d.spotlight_setColor(activeSpotlightID, color);
 				_fe3d.model_setColor(_activeTorchID, "", color);
 			}
 
-			_handleValueChanging("spotlightPropertiesMenu", "yawPlus", "yaw", yaw, SPOTLIGHT_YAW_CHANGING_SPEED);
-			_handleValueChanging("spotlightPropertiesMenu", "yawMinus", "yaw", yaw, -SPOTLIGHT_YAW_CHANGING_SPEED);
+			_handleValueChanging("spotlightPropertiesMenu", "yawPlus", "yaw", yaw, SPOTLIGHT_YAW_SPEED);
+			_handleValueChanging("spotlightPropertiesMenu", "yawMinus", "yaw", yaw, -SPOTLIGHT_YAW_SPEED);
 			_fe3d.spotlight_setYaw(activeSpotlightID, yaw);
 			_fe3d.model_setBaseRotation(_activeTorchID, fvec3(0.0f, -yaw, _fe3d.model_getBaseRotation(_activeTorchID).z));
 
-			_handleValueChanging("spotlightPropertiesMenu", "pitchPlus", "pitch", pitch, SPOTLIGHT_PITCH_CHANGING_SPEED);
-			_handleValueChanging("spotlightPropertiesMenu", "pitchMinus", "pitch", pitch, -SPOTLIGHT_PITCH_CHANGING_SPEED);
+			_handleValueChanging("spotlightPropertiesMenu", "pitchPlus", "pitch", pitch, SPOTLIGHT_PITCH_SPEED);
+			_handleValueChanging("spotlightPropertiesMenu", "pitchMinus", "pitch", pitch, -SPOTLIGHT_PITCH_SPEED);
 			_fe3d.spotlight_setPitch(activeSpotlightID, pitch);
 			_fe3d.model_setBaseRotation(_activeTorchID, fvec3(0.0f, _fe3d.model_getBaseRotation(_activeTorchID).y, pitch));
 
-			_handleValueChanging("spotlightPropertiesMenu", "intensityPlus", "intensity", intensity, SPOTLIGHT_INTENSITY_CHANGING_SPEED, 10.0f, 0.0f);
-			_handleValueChanging("spotlightPropertiesMenu", "intensityMinus", "intensity", intensity, -SPOTLIGHT_INTENSITY_CHANGING_SPEED, 10.0f, 0.0f);
+			_handleValueChanging("spotlightPropertiesMenu", "intensityPlus", "intensity", intensity, SPOTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);
+			_handleValueChanging("spotlightPropertiesMenu", "intensityMinus", "intensity", intensity, -SPOTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);
 			_fe3d.spotlight_setIntensity(activeSpotlightID, intensity);
 
-			_handleValueChanging("spotlightPropertiesMenu", "anglePlus", "angle", angle, SPOTLIGHT_ANGLE_CHANGING_SPEED, 1.0f, 0.0f, 45.0f);
-			_handleValueChanging("spotlightPropertiesMenu", "angleMinus", "angle", angle, -SPOTLIGHT_ANGLE_CHANGING_SPEED, 1.0f, 0.0f, 45.0f);
+			_handleValueChanging("spotlightPropertiesMenu", "anglePlus", "angle", angle, SPOTLIGHT_ANGLE_SPEED, 1.0f, 0.0f, 45.0f);
+			_handleValueChanging("spotlightPropertiesMenu", "angleMinus", "angle", angle, -SPOTLIGHT_ANGLE_SPEED, 1.0f, 0.0f, 45.0f);
 			_fe3d.spotlight_setAngle(activeSpotlightID, angle);
 
-			_handleValueChanging("spotlightPropertiesMenu", "distancePlus", "distance", distance, (_editorSpeed / 100.0f), 1.0f, 0.0f);
-			_handleValueChanging("spotlightPropertiesMenu", "distanceMinus", "distance", distance, -(_editorSpeed / 100.0f), 1.0f, 0.0f);
+			_handleValueChanging("spotlightPropertiesMenu", "distancePlus", "distance", distance, (_editorSpeed / SPOTLIGHT_DISTANCE_DIVIDER), 1.0f, 0.0f);
+			_handleValueChanging("spotlightPropertiesMenu", "distanceMinus", "distance", distance, -(_editorSpeed / SPOTLIGHT_DISTANCE_DIVIDER), 1.0f, 0.0f);
 			_fe3d.spotlight_setDistance(activeSpotlightID, distance);
 		}
 	}

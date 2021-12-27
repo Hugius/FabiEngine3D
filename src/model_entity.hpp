@@ -10,6 +10,7 @@ public:
 	using BaseEntity::BaseEntity;
 
 	void createPart(const string& ID);
+	void deleteParts();
 	void updateTransformation();
 	void updateTransformationMatrix();
 	void setShadowed(bool value);
@@ -26,7 +27,6 @@ public:
 	void setMaxHeight(float value);
 	void setLevelOfDetailDistance(float value);
 	void setBright(bool value);
-	void clearParts();
 	void setRenderBuffer(const string& partID, shared_ptr<RenderBuffer> value);
 	void setDiffuseMap(const string& partID, TextureID value);
 	void setEmissionMap(const string& partID, TextureID value);

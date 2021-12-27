@@ -10,8 +10,7 @@ public:
 	void addNewLine(const string& textContent);
 	void insertNewLine(unsigned int index, const string& textContent);
 	void setLineText(unsigned int index, const string& textContent);
-	void removeLine(unsigned int index);
-	void removeLastLine();
+	void deleteLine(unsigned int index);
 	void setCursorLineIndex(unsigned int index);
 	void setCursorCharIndex(unsigned int index);
 	void changeID(const string& newID);

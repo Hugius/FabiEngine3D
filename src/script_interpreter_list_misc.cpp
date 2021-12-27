@@ -215,5 +215,5 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 		return;
 	}
 
-	listVariable.removeValue(index);
+	listVariable.deleteValue(index);
 }

@@ -39,7 +39,7 @@ void ScriptEditor::_updateGUI()
 		{
 			_scriptFileNamesToDelete.push_back(_currentScriptFileID);
 			_fe3d.billboard_deleteAll();
-			_script.removeScriptFile(_currentScriptFileID);
+			_script.deleteScriptFile(_currentScriptFileID);
 			_isWritingScript = false;
 			_currentScriptFileID = "";
 		}

@@ -31,7 +31,7 @@ void ScriptFile::setLineText(unsigned int index, const string& textContent)
 	}
 }
 
-void ScriptFile::removeLine(unsigned int index)
+void ScriptFile::deleteLine(unsigned int index)
 {
 	if(index >= _lines.size())
 	{
@@ -41,11 +41,6 @@ void ScriptFile::removeLine(unsigned int index)
 	{
 		_lines.erase(_lines.begin() + index);
 	}
-}
-
-void ScriptFile::removeLastLine()
-{
-	_lines.pop_back();
 }
 
 void ScriptFile::setCursorLineIndex(unsigned int index)

@@ -127,7 +127,7 @@ void WorldEditor::unload()
 	_fe3d.gfx_disableAntiAliasing(true);
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
 
-	clearEditorWorld();
+	unloadEditorWorld();
 
 	for(const auto& ID : _skyEditor.getLoadedIDs())
 	{

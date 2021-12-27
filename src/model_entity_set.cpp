@@ -409,7 +409,7 @@ void ModelEntity::setBright(bool value)
 	_isBright = value;
 }
 
-void ModelEntity::clearParts()
+void ModelEntity::deleteParts()
 {
 	_parts.clear();
 }

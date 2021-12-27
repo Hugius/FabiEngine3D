@@ -2,7 +2,7 @@
 
 using std::max;
 
-void Animation3dFrame::clearParts()
+void Animation3dFrame::deleteParts()
 {
 	_targetTransformations.clear();
 	_rotationOrigins.clear();

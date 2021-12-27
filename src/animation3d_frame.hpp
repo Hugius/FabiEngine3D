@@ -13,8 +13,8 @@ using std::string;
 class Animation3dFrame final
 {
 public:
-	void clearParts();
 	void addPart(const string& partID, fvec3 targetTransformation, fvec3 rotationOrigin, fvec3 speed, Animation3dSpeedType animationSpeedType, TransformationType transformationType);
+	void deleteParts();
 	void setTargetTransformation(const string& partID, fvec3 value);
 	void setRotationOrigin(const string& partID, fvec3 value);
 	void setSpeed(const string& partID, fvec3 value);

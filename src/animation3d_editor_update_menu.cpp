@@ -154,7 +154,7 @@ void Animation3dEditor::_updateChoiceMenu()
 			{
 				if(currentAnimation->getFrames().size() == 1)
 				{
-					lastFrameCopy.clearParts();
+					lastFrameCopy.deleteParts();
 
 					for(const auto& partID : currentAnimation->getPartIDs())
 					{

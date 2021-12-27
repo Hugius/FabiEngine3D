@@ -301,7 +301,7 @@ void ScriptEditor::_updateTextWriter()
 								if(cursorLineIndex > 0)
 								{
 									string textToMerge = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex);
-									_script.getScriptFile(_currentScriptFileID)->removeLine(cursorLineIndex);
+									_script.getScriptFile(_currentScriptFileID)->deleteLine(cursorLineIndex);
 									cursorLineIndex--;
 
 									cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
@@ -318,7 +318,7 @@ void ScriptEditor::_updateTextWriter()
 
 									if((currentLineText.size() + textToMerge.size()) <= MAX_CHARACTERS_PER_LINE)
 									{
-										_script.getScriptFile(_currentScriptFileID)->removeLine(cursorLineIndex + 1);
+										_script.getScriptFile(_currentScriptFileID)->deleteLine(cursorLineIndex + 1);
 
 										currentLineText += textToMerge;
 										_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, currentLineText);

@@ -12,8 +12,8 @@ public:
 	void addValue(ScriptValue value);
 	void setValues(vector<ScriptValue> values);
 	void setValue(ScriptValue value, unsigned int index = 0);
-	void removeValue(unsigned int index);
-	void clearValues();
+	void deleteValue(unsigned int index);
+	void deleteValues();
 
 	const string& getID() const;
 

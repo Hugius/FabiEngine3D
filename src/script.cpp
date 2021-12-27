@@ -35,7 +35,7 @@ void Script::renameScriptFile(const string& ID, const string& newID)
 	Logger::throwError("Script::renameScriptFile");
 }
 
-void Script::removeScriptFile(const string& ID)
+void Script::deleteScriptFile(const string& ID)
 {
 	for(size_t i = 0; i < _scriptFiles.size(); i++)
 	{

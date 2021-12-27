@@ -163,7 +163,7 @@ void WorldEditor::_updateChoiceMenu()
 
 			saveEditorWorldToFile();
 
-			clearEditorWorld();
+			unloadEditorWorld();
 
 			_fe3d.sky_selectMainSky("@@background");
 
@@ -184,7 +184,7 @@ void WorldEditor::_updateChoiceMenu()
 			_isPlacingSpotlight = false;
 			_isPlacingReflection = false;
 
-			clearEditorWorld();
+			unloadEditorWorld();
 
 			_fe3d.sky_selectMainSky("@@background");
 

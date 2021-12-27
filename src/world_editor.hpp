@@ -51,8 +51,8 @@ public:
 	void copyTemplateModel(const string& newID, const string& templateID, fvec3 position);
 	void copyTemplateBillboard(const string& newID, const string& templateID, fvec3 position);
 	void copyTemplateSound(const string& newID, const string& templateID, fvec3 position);
-	void clearEditorWorld();
-	void clearCustomWorld();
+	void unloadEditorWorld();
+	void unloadCustomWorld();
 
 	const string& getLoadedWorldID() const;
 

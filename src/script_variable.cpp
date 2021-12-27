@@ -62,12 +62,12 @@ void ScriptVariable::addValue(ScriptValue value)
 	_values.push_back(make_shared<ScriptValue>(value));
 }
 
-void ScriptVariable::removeValue(unsigned int index)
+void ScriptVariable::deleteValue(unsigned int index)
 {
 	_values.erase(_values.begin() + index);
 }
 
-void ScriptVariable::clearValues()
+void ScriptVariable::deleteValues()
 {
 	_values.clear();
 }

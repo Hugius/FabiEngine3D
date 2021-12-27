@@ -9,7 +9,7 @@ public:
 
 	void createScriptFile(const string& ID);
 	void renameScriptFile(const string& ID, const string& newID);
-	void removeScriptFile(const string& ID);
+	void deleteScriptFile(const string& ID);
 	void reset();
 
 	const vector<string> getScriptFileIDs() const;

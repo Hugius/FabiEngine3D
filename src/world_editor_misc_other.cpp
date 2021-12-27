@@ -7,7 +7,7 @@
 
 using std::clamp;
 
-void WorldEditor::clearEditorWorld()
+void WorldEditor::unloadEditorWorld()
 {
 	if(_fe3d.gfx_isAmbientLightingEnabled())
 	{
@@ -136,7 +136,7 @@ void WorldEditor::clearEditorWorld()
 	_loadedReflectionIDs.clear();
 }
 
-void WorldEditor::clearCustomWorld()
+void WorldEditor::unloadCustomWorld()
 {
 
 }

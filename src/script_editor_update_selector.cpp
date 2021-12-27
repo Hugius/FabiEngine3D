@@ -39,14 +39,14 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 			{
 				if(_lastSelectedLineIndex == -1)
 				{
-					_script.getScriptFile(_currentScriptFileID)->removeLine(_firstSelectedLineIndex);
+					_script.getScriptFile(_currentScriptFileID)->deleteLine(_firstSelectedLineIndex);
 				}
 				else
 				{
 					int lineIndexToRemove = (_firstSelectedLineIndex > _lastSelectedLineIndex) ? _lastSelectedLineIndex : _firstSelectedLineIndex;
 					for(int i = 0; i <= abs(_firstSelectedLineIndex - _lastSelectedLineIndex); i++)
 					{
-						_script.getScriptFile(_currentScriptFileID)->removeLine(static_cast<unsigned int>(lineIndexToRemove));
+						_script.getScriptFile(_currentScriptFileID)->deleteLine(static_cast<unsigned int>(lineIndexToRemove));
 					}
 				}
 

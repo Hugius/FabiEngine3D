@@ -50,12 +50,12 @@ constexpr float bufferData[] =
 	1.0f, -1.0f, 1.0f
 };
 
-constexpr unsigned int bufferCount = static_cast<unsigned int>(sizeof(bufferData) / sizeof(float));
+constexpr unsigned int bufferDataCount = static_cast<unsigned int>(sizeof(bufferData) / sizeof(float));
 
 SkyEntityManager::SkyEntityManager(RenderBus& renderBus)
 	:
 	_renderBus(renderBus),
-	_renderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX, bufferData, bufferCount))
+	_renderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX, bufferData, bufferDataCount))
 {
 
 }

@@ -155,6 +155,11 @@ const bool BillboardEntity::hasEmissionMap() const
 	return (_emissionMap != 0);
 }
 
+const bool BillboardEntity::isCentered() const
+{
+	return _isCentered;
+}
+
 const bool BillboardEntity::isTextual() const
 {
 	return _isTextual;

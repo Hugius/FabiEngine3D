@@ -1,9 +1,9 @@
 #include "fe3d.hpp"
 #include "core.hpp"
 
-void FabiEngine3D::terrain_create(const string& ID, const string& value)
+void FabiEngine3D::terrain_create(const string& ID, const string& heightMapPath)
 {
-	_core->_terrainEntityManager.createEntity(ID, value);
+	_core->_terrainEntityManager.createEntity(ID, heightMapPath);
 }
 
 void FabiEngine3D::terrain_deleteAll()

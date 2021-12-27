@@ -75,8 +75,8 @@ const mat44 ShadowGenerator::_createShadowMatrix(fvec3 eyePosition, fvec3 center
 	float near = NEAR_DISTANCE;
 	float far = reach;
 
-	mat44 viewMatrix = Math::createViewMatrix(eyePosition, centerPosition, fvec3(0.0f, 1.0f, 0.0f));
-	mat44 projectionMatrix = Math::createOrthographicProjectionMatrix(left, right, bottom, top, near, far);
+	auto viewMatrix = Math::createViewMatrix(eyePosition, centerPosition, fvec3(0.0f, 1.0f, 0.0f));
+	auto projectionMatrix = Math::createOrthographicProjectionMatrix(left, right, bottom, top, near, far);
 
 	return (projectionMatrix * viewMatrix);
 }

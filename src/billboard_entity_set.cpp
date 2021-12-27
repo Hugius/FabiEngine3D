@@ -80,22 +80,28 @@ void BillboardEntity::updateTransformationMatrix()
 {
 	_transformationMatrix = mat44(1.0f);
 
-	mat44 translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, _position.z);
+	auto translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, _position.z);
 	_transformationMatrix = (_transformationMatrix * translationMatrix);
 
-	mat44 rotationOriginMatrix = Math::createTranslationMatrix(0.0f, (_size.y / 2.0f), 0.0f);
-	_transformationMatrix = (_transformationMatrix * rotationOriginMatrix);
+	if(!_isCentered)
+	{
+		auto rotationOriginMatrix = Math::createTranslationMatrix(0.0f, (_size.y / 2.0f), 0.0f);
+		_transformationMatrix = (_transformationMatrix * rotationOriginMatrix);
+	}
 
-	mat44 rotationMatrix = Math::createRotationMatrix(
+	auto rotationMatrix = Math::createRotationMatrix(
 		Math::convertToRadians(_rotation.x),
 		Math::convertToRadians(_rotation.y),
 		Math::convertToRadians(_rotation.z), DirectionOrder::YXZ);
 	_transformationMatrix = (_transformationMatrix * rotationMatrix);
 
-	rotationOriginMatrix = Math::createTranslationMatrix(0.0f, -(_size.y / 2.0f), 0.0f);
-	_transformationMatrix = (_transformationMatrix * rotationOriginMatrix);
+	if(!_isCentered)
+	{
+		auto rotationOriginMatrix = Math::createTranslationMatrix(0.0f, -(_size.y / 2.0f), 0.0f);
+		_transformationMatrix = (_transformationMatrix * rotationOriginMatrix);
+	}
 
-	mat44 scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, 1.0f);
+	auto scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, 1.0f);
 	_transformationMatrix = (_transformationMatrix * scalingMatrix);
 }
 
@@ -241,6 +247,11 @@ void BillboardEntity::setWireframed(bool value)
 void BillboardEntity::setShadowed(bool value)
 {
 	_isShadowed = value;
+}
+
+void BillboardEntity::setCentered(bool value)
+{
+	_isCentered = value;
 }
 
 void BillboardEntity::setLightness(float value)

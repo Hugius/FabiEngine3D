@@ -12,7 +12,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 	float lineCount = static_cast<float>(_script.getScriptFile(_currentScriptFileID)->getLineCount());
 	fvec2 separatorSize = fvec2((TEXT_CHARACTER_SIZE.x / 4.0f), (lineCount * VERTICAL_LINE_OFFSET));
 	fvec3 separatorPosition = SCRIPT_TEXT_STARTING_POSITION + fvec3(HORIZONTAL_LINE_OFFSET / 2.0f, -(((lineCount - 1) / 2.0f) * VERTICAL_LINE_OFFSET), 0.0f);
-	_fe3d.billboard_create("separator");
+	_fe3d.billboard_create("separator", false);
 	_fe3d.billboard_setPosition("separator", (separatorPosition - fvec3(0.0f, separatorSize.y / 2.0f, 0.0f)));
 	_fe3d.billboard_setSize("separator", separatorSize);
 	_fe3d.billboard_setColor("separator", SEPARATOR_COLOR);
@@ -32,7 +32,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			fvec3((lineTextString.size() - 1) * (TEXT_CHARACTER_SIZE.x / 2.0f), -VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex), 0.0f) +
 			fvec3(HORIZONTAL_LINE_OFFSET, 0.0f, 0.0f);
 
-		_fe3d.billboard_create(lineNumberID);
+		_fe3d.billboard_create(lineNumberID, false);
 		_fe3d.billboard_setFont(lineNumberID, FONT_PATH);
 		_fe3d.billboard_setTextContent(lineNumberID, lineNumberString);
 		_fe3d.billboard_setPosition(lineNumberID, (lineNumberPosition - fvec3(0.0f, lineNumberSize.y / 2.0f, 0.0f)));
@@ -50,7 +50,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 		string noWhiteSpace;
 		iss >> noWhiteSpace;
 		bool isComment = (noWhiteSpace.substr(0, 3) == "///");
-		_fe3d.billboard_create(lineTextID);
+		_fe3d.billboard_create(lineTextID, false);
 		_fe3d.billboard_setFont(lineTextID, FONT_PATH);
 		_fe3d.billboard_setTextContent(lineTextID, lineTextString);
 		_fe3d.billboard_setPosition(lineTextID, (lineTextPosition - fvec3(0.0f, lineTextSize.y / 2.0f, 0.0f)));
@@ -63,7 +63,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			const string characterID = (lineNumberID + "_" + to_string(charIndex));
 			const float characterX = (HORIZONTAL_LINE_OFFSET + (HORIZONTAL_CHARACTER_OFFSET * static_cast<float>(charIndex)));
 			const fvec3 characterPosition = (SCRIPT_TEXT_STARTING_POSITION + fvec3(characterX, -VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex), 0.0f));
-			_fe3d.billboard_create(characterID);
+			_fe3d.billboard_create(characterID, false);
 			_fe3d.billboard_setPosition(characterID, (characterPosition - fvec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, 0.0f)));
 			_fe3d.billboard_setSize(characterID, TEXT_CHARACTER_SIZE);
 			_fe3d.billboard_setVisible(characterID, false);

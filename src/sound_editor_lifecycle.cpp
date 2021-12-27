@@ -30,8 +30,8 @@ void SoundEditor::load()
 	_fe3d.camera_reset();
 	_fe3d.camera_setYaw(270.0f);
 
-	_fe3d.billboard_create("@@icon");
-	_fe3d.billboard_setPosition("@@icon", fvec3(0.0f, -0.5f, -1.5f));
+	_fe3d.billboard_create("@@icon", true);
+	_fe3d.billboard_setPosition("@@icon", ICON_BILLBOARD_POSITION);
 	_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\texture\\stop.png");
 	_fe3d.billboard_setBright("@@icon", true);
 

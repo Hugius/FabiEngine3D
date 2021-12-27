@@ -22,7 +22,7 @@ void ImageEditor::load()
 	_fe3d.camera_reset();
 	_fe3d.camera_setYaw(270.0f);
 
-	_fe3d.billboard_create(PREVIEW_BILLBOARD_ID);
+	_fe3d.billboard_create(PREVIEW_BILLBOARD_ID, true);
 	_fe3d.billboard_setPosition(PREVIEW_BILLBOARD_ID, PREVIEW_BILLBOARD_POSITION);
 	_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
 

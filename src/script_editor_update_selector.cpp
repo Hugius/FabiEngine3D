@@ -97,7 +97,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 					fvec3 lineTextPosition = (_fe3d.billboard_getPosition(textID));
 					lineTextPosition.x = (SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET);
 					lineTextPosition.z -= SELECTION_DEPTH;
-					_fe3d.billboard_create(selectionID);
+					_fe3d.billboard_create(selectionID, false);
 					_fe3d.billboard_setColor(selectionID, SELECTION_COLOR);
 					_fe3d.billboard_setPosition(selectionID, lineTextPosition);
 					_fe3d.billboard_setSize(selectionID, TEXT_CHARACTER_SIZE);
@@ -106,7 +106,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				{
 					const fvec3 lineTextPosition = (_fe3d.billboard_getPosition(textID) - fvec3(0.0f, 0.0f, SELECTION_DEPTH));
 					const auto lineTextSize = (_fe3d.billboard_getSize(textID));
-					_fe3d.billboard_create(selectionID);
+					_fe3d.billboard_create(selectionID, false);
 					_fe3d.billboard_setColor(selectionID, SELECTION_COLOR);
 					_fe3d.billboard_setPosition(selectionID, lineTextPosition);
 					_fe3d.billboard_setSize(selectionID, lineTextSize);

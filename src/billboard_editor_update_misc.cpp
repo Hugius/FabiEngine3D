@@ -118,7 +118,7 @@ void BillboardEditor::_updateBillboardCreating()
 				return;
 			}
 
-			_fe3d.billboard_create(newBillboardID);
+			_fe3d.billboard_create(newBillboardID, false);
 
 			if(_fe3d.billboard_isExisting(newBillboardID))
 			{

@@ -397,7 +397,7 @@ void ScriptEditor::_updateTextWriter()
 
 		if(!_fe3d.billboard_isExisting("cursor"))
 		{
-			_fe3d.billboard_create("cursor");
+			_fe3d.billboard_create("cursor", false);
 			_fe3d.billboard_setFont("cursor", FONT_PATH);
 			_fe3d.billboard_setSize("cursor", TEXT_CHARACTER_SIZE);
 		}

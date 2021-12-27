@@ -46,13 +46,13 @@ constexpr float standingBufferData[] =
 	-0.5f, 0.0f, -0.5f
 };
 
-constexpr unsigned int centeredBufferCount = static_cast<unsigned int>(sizeof(centeredBufferData) / sizeof(float));
-constexpr unsigned int standingBufferCount = static_cast<unsigned int>(sizeof(centeredBufferData) / sizeof(float));
+constexpr unsigned int centeredBufferDataCount = static_cast<unsigned int>(sizeof(centeredBufferData) / sizeof(float));
+constexpr unsigned int standingBufferDataCount = static_cast<unsigned int>(sizeof(centeredBufferData) / sizeof(float));
 
 AabbEntityManager::AabbEntityManager()
 	:
-	_centeredRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX, centeredBufferData, centeredBufferCount)),
-	_standingRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX, standingBufferData, standingBufferCount))
+	_centeredRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX, centeredBufferData, centeredBufferDataCount)),
+	_standingRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX, standingBufferData, standingBufferDataCount))
 {
 
 }
@@ -164,30 +164,37 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 				}
 				else
 				{
-					const fvec3 localOffset = fvec3(0.0f, (entity->getLocalSize().y / 2.0f), 0.0f);
-					const fvec3 localPosition = (rotationDirection == Direction::Y) ? localPosition :
-						(entity->getLocalPosition() + localOffset) * parentEntity->getBaseSize();
+					fvec3 localPosition;
+					if(rotationDirection == Direction::Y)
+					{
+						localPosition = (entity->getLocalPosition() * parentEntity->getBaseSize());
+					}
+					else
+					{
+						const fvec3 offset = fvec3(0.0f, (entity->getLocalSize().y / 2.0f), 0.0f);
+						localPosition = (entity->getLocalPosition() + offset) * parentEntity->getBaseSize();
+					}
 
 					mat44 rotationMatrix;
-					float yOffset;
+					fvec3 rotationOffset;
 					if(rotationDirection == Direction::X)
 					{
 						rotationMatrix = Math::createRotationMatrixX(Math::convertToRadians(roundedRotation));
-						yOffset = ((is180Degrees ? newAabbSize.y : newAabbSize.z) / 2.0f);
+						rotationOffset = fvec3(0.0f, -((is180Degrees ? newAabbSize.y : newAabbSize.z) / 2.0f), 0.0f);
 					}
 					else if(rotationDirection == Direction::Y)
 					{
 						rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(roundedRotation));
-						yOffset = 0.0f;
+						rotationOffset = fvec3(0.0f);
 					}
 					else if(rotationDirection == Direction::Z)
 					{
 						rotationMatrix = Math::createRotationMatrixZ(Math::convertToRadians(roundedRotation));
-						yOffset = ((is180Degrees ? newAabbSize.y : newAabbSize.x) / 2.0f);
+						rotationOffset = fvec3(0.0f, -((is180Degrees ? newAabbSize.y : newAabbSize.x) / 2.0f), 0.0f);
 					}
 
 					auto rotatedLocalPosition = (rotationMatrix * fvec4(localPosition.x, localPosition.y, localPosition.z, 1.0f));
-					rotatedLocalPosition.y -= yOffset;
+					rotatedLocalPosition += rotationOffset;
 					entity->setPosition(parentEntity->getBasePosition() + rotatedLocalPosition);
 				}
 			}
@@ -258,7 +265,10 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 				}
 
 				fvec3 newAabbPosition = (parentPosition + entity->getLocalPosition());
-				newAabbPosition.y -= ((newAabbSize.y - parentSize.y) / 2.0f);
+				if(!entity->isCentered())
+				{
+					newAabbPosition.y -= ((newAabbSize.y - parentSize.y) / 2.0f);
+				}
 
 				entity->setPosition(newAabbPosition);
 				entity->setSize(newAabbSize);

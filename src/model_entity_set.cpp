@@ -81,16 +81,16 @@ void ModelEntity::updateTransformationMatrix()
 	{
 		_parts[i].transformationMatrix = mat44(1.0f);
 
-		mat44 baseTranslationMatrix = Math::createTranslationMatrix(_basePosition.x, _basePosition.y, _basePosition.z);
+		auto baseTranslationMatrix = Math::createTranslationMatrix(_basePosition.x, _basePosition.y, _basePosition.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * baseTranslationMatrix);
 
-		mat44 translationMatrix = Math::createTranslationMatrix(_parts[i].position.x, _parts[i].position.y, _parts[i].position.z);
+		auto translationMatrix = Math::createTranslationMatrix(_parts[i].position.x, _parts[i].position.y, _parts[i].position.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * translationMatrix);
 
-		mat44 baseRotationOriginMatrix = Math::createTranslationMatrix(_baseRotationOrigin.x, _baseRotationOrigin.y, _baseRotationOrigin.z);
+		auto baseRotationOriginMatrix = Math::createTranslationMatrix(_baseRotationOrigin.x, _baseRotationOrigin.y, _baseRotationOrigin.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * baseRotationOriginMatrix);
 
-		mat44 baseRotationMatrix = Math::createRotationMatrix(
+		auto baseRotationMatrix = Math::createRotationMatrix(
 			Math::convertToRadians(_baseRotation.x),
 			Math::convertToRadians(_baseRotation.y),
 			Math::convertToRadians(_baseRotation.z), _rotationOrder);
@@ -99,10 +99,10 @@ void ModelEntity::updateTransformationMatrix()
 		baseRotationOriginMatrix = Math::createTranslationMatrix(-_baseRotationOrigin.x, -_baseRotationOrigin.y, -_baseRotationOrigin.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * baseRotationOriginMatrix);
 
-		mat44 rotationOriginMatrix = Math::createTranslationMatrix(_parts[i].rotationOrigin.x, _parts[i].rotationOrigin.y, _parts[i].rotationOrigin.z);
+		auto rotationOriginMatrix = Math::createTranslationMatrix(_parts[i].rotationOrigin.x, _parts[i].rotationOrigin.y, _parts[i].rotationOrigin.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * rotationOriginMatrix);
 
-		mat44 rotationMatrix = Math::createRotationMatrix(
+		auto rotationMatrix = Math::createRotationMatrix(
 			Math::convertToRadians(_parts[i].rotation.x),
 			Math::convertToRadians(_parts[i].rotation.y),
 			Math::convertToRadians(_parts[i].rotation.z), _rotationOrder);
@@ -111,10 +111,10 @@ void ModelEntity::updateTransformationMatrix()
 		rotationOriginMatrix = Math::createTranslationMatrix(-_parts[i].rotationOrigin.x, -_parts[i].rotationOrigin.y, -_parts[i].rotationOrigin.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * rotationOriginMatrix);
 
-		mat44 baseScalingMatrix = Math::createScalingMatrix(_baseSize.x, _baseSize.y, _baseSize.z);
+		auto baseScalingMatrix = Math::createScalingMatrix(_baseSize.x, _baseSize.y, _baseSize.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * baseScalingMatrix);
 
-		mat44 scalingMatrix = Math::createScalingMatrix(_parts[i].size.x, _parts[i].size.y, _parts[i].size.z);
+		auto scalingMatrix = Math::createScalingMatrix(_parts[i].size.x, _parts[i].size.y, _parts[i].size.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * scalingMatrix);
 	}
 }

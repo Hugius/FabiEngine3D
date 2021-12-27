@@ -85,7 +85,7 @@ private:
 	string _currentAnimationID = "";
 	string _currentProjectID = "";
 
-	static inline const fvec3 PREVIEW_BILLBOARD_POSITION = fvec3(0.0f, -0.5f, -0.75f);
+	static inline const fvec3 PREVIEW_BILLBOARD_POSITION = fvec3(0.0f, 0.0f, -0.75f);
 
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;

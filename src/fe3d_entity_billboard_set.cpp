@@ -1,9 +1,9 @@
 #include "fe3d.hpp"
 #include "core.hpp"
 
-void FabiEngine3D::billboard_create(const string& ID)
+void FabiEngine3D::billboard_create(const string& ID, bool isCentered)
 {
-	_core->_billboardEntityManager.createEntity(ID);
+	_core->_billboardEntityManager.createEntity(ID, isCentered);
 }
 
 void FabiEngine3D::billboard_deleteAll()

@@ -99,7 +99,7 @@ public:
 	const bool sky_hasBackCubeMap(const string& ID) const;
 	const bool sky_hasFrontCubeMap(const string& ID) const;
 
-	void terrain_create(const string& ID, const string& value);
+	void terrain_create(const string& ID, const string& heightMapPath);
 	void terrain_delete(const string& ID);
 	void terrain_deleteAll();
 	void terrain_setVisible(const string& ID, bool value);
@@ -321,7 +321,7 @@ public:
 	const ReflectionType model_getReflectionType(const string& ID, const string& partID) const;
 	const DirectionOrder model_getRotationOrder(const string& ID) const;
 
-	void billboard_create(const string& ID);
+	void billboard_create(const string& ID, bool isCentered);
 	void billboard_delete(const string& ID);
 	void billboard_deleteAll();
 	void billboard_deleteGroup(const string& ID);

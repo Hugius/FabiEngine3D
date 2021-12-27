@@ -20,6 +20,7 @@ public:
 	void setFacingCameraY(bool value);
 	void setDepthMapIncluded(bool value);
 	void setShadowed(bool value);
+	void setCentered(bool value);
 	void setReflected(bool value);
 	void setBright(bool value);
 	void setWireframed(bool value);
@@ -85,6 +86,7 @@ public:
 	const bool hasRenderBuffer() const;
 	const bool hasDiffuseMap() const;
 	const bool hasEmissionMap() const;
+	const bool isCentered() const;
 
 	const shared_ptr<RenderBuffer> getRenderBuffer() const;
 	const TextureID getDiffuseMap() const;
@@ -129,6 +131,7 @@ private:
 	bool _isWireframed = false;
 	bool _isTextual = false;
 	bool _isFrozen = false;
+	bool _isCentered = false;
 
 	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
 	TextureID _diffuseMap = 0;

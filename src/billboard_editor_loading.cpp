@@ -207,7 +207,7 @@ const bool BillboardEditor::loadFromFile()
 		replace(fontPath.begin(), fontPath.end(), '?', ' ');
 		replace(textContent.begin(), textContent.end(), '?', ' ');
 
-		_fe3d.billboard_create(billboardID);
+		_fe3d.billboard_create(billboardID, false);
 
 		if(_fe3d.billboard_isExisting(billboardID))
 		{

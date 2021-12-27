@@ -53,9 +53,9 @@ void AabbEntity::updateTransformation()
 
 void AabbEntity::updateTransformationMatrix()
 {
-	mat44 translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, _position.z);
+	auto translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, _position.z);
 
-	mat44 scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, _size.z);
+	auto scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, _size.z);
 
 	_transformationMatrix = (translationMatrix * scalingMatrix);
 }

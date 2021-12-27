@@ -280,7 +280,7 @@ const bool WorldEditor::_copyTemplateBillboard(const string& newID, const string
 		return false;
 	}
 
-	_fe3d.billboard_create(newID);
+	_fe3d.billboard_create(newID, false);
 
 	_fe3d.aabb_create(newID, false);
 	_fe3d.aabb_setParentEntityID(newID, newID);

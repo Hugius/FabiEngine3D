@@ -61,9 +61,9 @@ void ImageEntity::updateTransformation()
 
 void ImageEntity::updateTransformationMatrix()
 {
-	mat44 translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, 0.0f);
-	mat44 rotationMatrix = Math::createRotationMatrixX(Math::convertToRadians(_rotation));
-	mat44 scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, 1.0f);
+	auto translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, 0.0f);
+	auto rotationMatrix = Math::createRotationMatrixX(Math::convertToRadians(_rotation));
+	auto scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, 1.0f);
 
 	_transformationMatrix = (translationMatrix * rotationMatrix * scalingMatrix);
 }

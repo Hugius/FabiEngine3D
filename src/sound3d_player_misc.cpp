@@ -25,15 +25,15 @@ void Sound3dPlayer::update(vector<Sound3d>& sounds, Camera& camera)
 			sound.setVolume(volume);
 
 			auto cameraDirection = camera.getFrontVector();
-			mat44 rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(90.0f));
-			fvec3 soundDirection = (cameraPosition - sound.getPosition());
-			fvec4 result = (rotationMatrix * fvec4(soundDirection.x, soundDirection.y, soundDirection.z, 1.0f));
+			auto rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(90.0f));
+			auto soundDirection = (cameraPosition - sound.getPosition());
+			auto result = (rotationMatrix * fvec4(soundDirection.x, soundDirection.y, soundDirection.z, 1.0f));
 			soundDirection = fvec3(result.x, result.y, result.z);
 			soundDirection = Math::normalize(soundDirection);
-			float dot = Math::calculateDotProduct(soundDirection, cameraDirection);
-			float range = ((dot / 2.0f) + 0.5f);
-			Uint8 leftStrength = Uint8(255.0f * range);
-			Uint8 rightStrength = Uint8(255.0f - leftStrength);
+			auto dot = Math::calculateDotProduct(soundDirection, cameraDirection);
+			auto range = ((dot / 2.0f) + 0.5f);
+			auto leftStrength = Uint8(255.0f * range);
+			auto rightStrength = Uint8(255 - leftStrength);
 
 			for(const auto& channel : _findChannels(sound))
 			{

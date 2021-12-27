@@ -137,16 +137,16 @@ const Ray Raycaster::_calculateCursorRay(ivec2 cursorPosition) const
 
 const fvec4 Raycaster::_convertToViewSpace(fvec4 clipCoords) const
 {
-	mat44 invertedProjection = Math::invertMatrix(_renderBus.getProjectionMatrix());
-	fvec4 viewCoords = (invertedProjection * clipCoords);
+	auto invertedProjection = Math::invertMatrix(_renderBus.getProjectionMatrix());
+	auto viewCoords = (invertedProjection * clipCoords);
 
 	return fvec4(viewCoords.x, viewCoords.y, -1.0f, 0.0f);
 }
 
 const fvec3 Raycaster::_convertToWorldSpace(fvec4 viewCoords) const
 {
-	mat44 invertedView = Math::invertMatrix(_renderBus.getViewMatrix());
-	fvec4 worldCoords = (invertedView * viewCoords);
+	auto invertedView = Math::invertMatrix(_renderBus.getViewMatrix());
+	auto worldCoords = (invertedView * viewCoords);
 
 	return fvec3(worldCoords.x, worldCoords.y, worldCoords.z);
 }

@@ -4,7 +4,17 @@
 
 using std::make_shared;
 
-constexpr float bufferData[] =
+constexpr float centeredBufferData[] =
+{
+	-0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
+	-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+	0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+	0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+	0.5f, 0.5f, 0.0f, 1.0f, 1.0f,
+	-0.5f, 0.5f, 0.0f, 0.0f, 1.0f
+};
+
+constexpr float standingBufferData[] =
 {
 	-0.5f, 1.0f, 0.0f, 0.0f, 1.0f,
 	-0.5f, 0.0f, 0.0f, 0.0f, 0.0f,
@@ -14,13 +24,15 @@ constexpr float bufferData[] =
 	-0.5f, 1.0f, 0.0f, 0.0f, 1.0f
 };
 
-constexpr unsigned int bufferCount = static_cast<unsigned int>(sizeof(bufferData) / sizeof(float));
+constexpr unsigned int centeredBufferDataCount = static_cast<unsigned int>(sizeof(centeredBufferData) / sizeof(float));
+constexpr unsigned int standingBufferDataCount = static_cast<unsigned int>(sizeof(standingBufferData) / sizeof(float));
 
 BillboardEntityManager::BillboardEntityManager(RenderBus& renderBus, Camera& camera)
 	:
 	_renderBus(renderBus),
 	_camera(camera),
-	_renderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, bufferData, bufferCount))
+	_centeredRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, centeredBufferData, centeredBufferDataCount)),
+	_standingRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, standingBufferData, standingBufferDataCount))
 {
 
 }
@@ -44,10 +56,11 @@ const unordered_map<string, shared_ptr<BillboardEntity>>& BillboardEntityManager
 	return _entities;
 }
 
-void BillboardEntityManager::createEntity(const string& ID)
+void BillboardEntityManager::createEntity(const string& ID, bool isCentered)
 {
 	_entities.insert(make_pair(ID, make_shared<BillboardEntity>(ID)));
-	getEntity(ID)->setRenderBuffer(_renderBuffer);
+	getEntity(ID)->setRenderBuffer(isCentered ? _centeredRenderBuffer : _standingRenderBuffer);
+	getEntity(ID)->setCentered(isCentered);
 }
 
 void BillboardEntityManager::update()

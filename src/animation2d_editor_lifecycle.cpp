@@ -25,7 +25,7 @@ void Animation2dEditor::load()
 
 	_fe3d.gfx_enableAntiAliasing();
 
-	_fe3d.billboard_create(PREVIEW_BILLBOARD_ID);
+	_fe3d.billboard_create(PREVIEW_BILLBOARD_ID, true);
 	_fe3d.billboard_setPosition(PREVIEW_BILLBOARD_ID, PREVIEW_BILLBOARD_POSITION);
 	_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
 

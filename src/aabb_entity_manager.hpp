@@ -26,6 +26,8 @@ public:
 	shared_ptr<AabbEntity> getEntity(const string& ID);
 
 private:
+	static inline constexpr float MIN_SIZE = 0.1f;
+
 	const shared_ptr<RenderBuffer> _centeredRenderBuffer;
 	const shared_ptr<RenderBuffer> _standingRenderBuffer;
 	unordered_map<string, shared_ptr<AabbEntity>> _entities;

@@ -14,15 +14,33 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 		{
 			if(entity->isRaycastResponsive() && entity->isVisible())
 			{
-				auto position = entity->getPosition();
-				float left = (entity->getSize().x / 2.0f);
-				float right = (entity->getSize().x / 2.0f);
-				float bottom = 0.0f;
-				float top = entity->getSize().y;
-				float back = (entity->getSize().z / 2.0f);
-				float front = (entity->getSize().z / 2.0f);
+				float distance;
+				if(entity->isCentered())
+				{
+					const auto position = entity->getPosition();
+					const auto left = (entity->getSize().x / 2.0f);
+					const auto right = (entity->getSize().x / 2.0f);
+					const auto bottom = (entity->getSize().y / 2.0f);
+					const auto top = (entity->getSize().y / 2.0f);
+					const auto back = (entity->getSize().z / 2.0f);
+					const auto front = (entity->getSize().z / 2.0f);
+					const auto box = Box(position, left, right, bottom, top, back, front);
 
-				auto distance = _core->_raycaster.calculateRayBoxIntersectionDistance(_core->_raycaster.getCursorRay(), Box(position, left, right, bottom, top, back, front));
+					distance = _core->_raycaster.calculateRayBoxIntersectionDistance(_core->_raycaster.getCursorRay(), box);
+				}
+				else
+				{
+					const auto position = entity->getPosition();
+					const auto left = (entity->getSize().x / 2.0f);
+					const auto right = (entity->getSize().x / 2.0f);
+					const auto bottom = 0.0f;
+					const auto top = entity->getSize().y;
+					const auto back = (entity->getSize().z / 2.0f);
+					const auto front = (entity->getSize().z / 2.0f);
+					const auto box = Box(position, left, right, bottom, top, back, front);
+
+					distance = _core->_raycaster.calculateRayBoxIntersectionDistance(_core->_raycaster.getCursorRay(), box);
+				}
 
 				if((distance != -1.0f) && (distance < closestDistance))
 				{
@@ -55,8 +73,7 @@ const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& 
 
 		if(_core->_aabbEntityManager.isEntityExisting(_hoveredAabbID))
 		{
-			auto result = (ID == _hoveredAabbID);
-			return make_pair(result, _hoveredAabbDistance);
+			return make_pair((ID == _hoveredAabbID), _hoveredAabbDistance);
 		}
 		else
 		{
@@ -69,18 +86,35 @@ const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& 
 
 		if(entity->isRaycastResponsive() && entity->isVisible())
 		{
-			auto position = entity->getPosition();
-			float left = (entity->getSize().x / 2.0f);
-			float right = (entity->getSize().x / 2.0f);
-			float bottom = 0.0f;
-			float top = entity->getSize().y;
-			float back = (entity->getSize().z / 2.0f);
-			float front = (entity->getSize().z / 2.0f);
+			float distance;
+			if(entity->isCentered())
+			{
+				const auto position = entity->getPosition();
+				const auto left = (entity->getSize().x / 2.0f);
+				const auto right = (entity->getSize().x / 2.0f);
+				const auto bottom = (entity->getSize().y / 2.0f);
+				const auto top = (entity->getSize().y / 2.0f);
+				const auto back = (entity->getSize().z / 2.0f);
+				const auto front = (entity->getSize().z / 2.0f);
+				const auto box = Box(position, left, right, bottom, top, back, front);
 
-			auto distance = _core->_raycaster.calculateRayBoxIntersectionDistance(_core->_raycaster.getCursorRay(), Box(position, left, right, bottom, top, back, front));
-			bool result = (distance != -1.0f);
+				distance = _core->_raycaster.calculateRayBoxIntersectionDistance(_core->_raycaster.getCursorRay(), box);
+			}
+			else
+			{
+				const auto position = entity->getPosition();
+				const auto left = (entity->getSize().x / 2.0f);
+				const auto right = (entity->getSize().x / 2.0f);
+				const auto bottom = 0.0f;
+				const auto top = entity->getSize().y;
+				const auto back = (entity->getSize().z / 2.0f);
+				const auto front = (entity->getSize().z / 2.0f);
+				const auto box = Box(position, left, right, bottom, top, back, front);
 
-			return make_pair(result, distance);
+				distance = _core->_raycaster.calculateRayBoxIntersectionDistance(_core->_raycaster.getCursorRay(), box);
+			}
+
+			return make_pair((distance != -1.0f), distance);
 		}
 	}
 }
@@ -122,15 +156,33 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(cons
 				{
 					if(entity->getID().substr(0, ID.size()) == ID)
 					{
-						auto position = entity->getPosition();
-						float left = (entity->getSize().x / 2.0f);
-						float right = (entity->getSize().x / 2.0f);
-						float bottom = 0.0f;
-						float top = entity->getSize().y;
-						float back = (entity->getSize().z / 2.0f);
-						float front = (entity->getSize().z / 2.0f);
+						float distance;
+						if(entity->isCentered())
+						{
+							const auto position = entity->getPosition();
+							const auto left = (entity->getSize().x / 2.0f);
+							const auto right = (entity->getSize().x / 2.0f);
+							const auto bottom = (entity->getSize().y / 2.0f);
+							const auto top = (entity->getSize().y / 2.0f);
+							const auto back = (entity->getSize().z / 2.0f);
+							const auto front = (entity->getSize().z / 2.0f);
+							const auto box = Box(position, left, right, bottom, top, back, front);
 
-						auto distance = _core->_raycaster.calculateRayBoxIntersectionDistance(_core->_raycaster.getCursorRay(), Box(position, left, right, bottom, top, back, front));
+							distance = _core->_raycaster.calculateRayBoxIntersectionDistance(_core->_raycaster.getCursorRay(), box);
+						}
+						else
+						{
+							const auto position = entity->getPosition();
+							const auto left = (entity->getSize().x / 2.0f);
+							const auto right = (entity->getSize().x / 2.0f);
+							const auto bottom = 0.0f;
+							const auto top = entity->getSize().y;
+							const auto back = (entity->getSize().z / 2.0f);
+							const auto front = (entity->getSize().z / 2.0f);
+							const auto box = Box(position, left, right, bottom, top, back, front);
+
+							distance = _core->_raycaster.calculateRayBoxIntersectionDistance(_core->_raycaster.getCursorRay(), box);
+						}
 
 						if((distance != -1.0f) && (distance < closestDistance))
 						{

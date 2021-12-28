@@ -8,7 +8,7 @@ void CameraCollisionHandler::setCameraBox(const Box& box)
 
 void CameraCollisionHandler::enableCameraAabbResponse(bool x, bool y, bool z)
 {
-	if(_isCameraAabbResponseEnabled)
+	if (_isCameraAabbResponseEnabled)
 	{
 		Logger::throwError("CollisionResolver::enableCameraAabbResponse");
 	}
@@ -21,7 +21,7 @@ void CameraCollisionHandler::enableCameraAabbResponse(bool x, bool y, bool z)
 
 void CameraCollisionHandler::disableCameraAabbResponse()
 {
-	if(!_isCameraAabbResponseEnabled)
+	if (!_isCameraAabbResponseEnabled)
 	{
 		Logger::throwError("CollisionResolver::disableCameraAabbResponse");
 	}
@@ -34,7 +34,7 @@ void CameraCollisionHandler::disableCameraAabbResponse()
 
 void CameraCollisionHandler::enableCameraTerrainResponse(float cameraHeight, float cameraSpeed)
 {
-	if(_isCameraTerrainResponseEnabled)
+	if (_isCameraTerrainResponseEnabled)
 	{
 		Logger::throwError("CollisionResolver::enableCameraTerrainResponse");
 	}
@@ -46,7 +46,7 @@ void CameraCollisionHandler::enableCameraTerrainResponse(float cameraHeight, flo
 
 void CameraCollisionHandler::disableCameraTerrainResponse()
 {
-	if(!_isCameraTerrainResponseEnabled)
+	if (!_isCameraTerrainResponseEnabled)
 	{
 		Logger::throwError("CollisionResolver::disableCameraTerrainResponse");
 	}
@@ -71,82 +71,82 @@ const bool CameraCollisionHandler::isCameraTerrainResponseEnabled() const
 
 const bool CameraCollisionHandler::_handleCollision(Direction direction, const unordered_map<string, shared_ptr<AabbEntity>>& aabbs, Camera& camera) const
 {
-	for(const auto& [keyID, aabb] : aabbs)
+	for (const auto& [key, aabb] : aabbs)
 	{
-		switch(direction)
+		switch (direction)
 		{
-			case Direction::X:
+		case Direction::X:
+		{
+			if (aabb->isCollisionResponsive() && aabb->isVisible())
 			{
-				if(aabb->isCollisionResponsive() && aabb->isVisible())
+				const fvec3 middle = camera.getPosition();
+				const fvec3 middleChange = (middle - _lastCameraPosition);
+				auto hasCollided = _collisionDetector.checkX(aabb->getPosition(), aabb->getSize(), middle, middleChange, _cameraBox);
+
+				if (hasCollided)
 				{
-					const fvec3 middle = camera.getPosition();
-					const fvec3 middleChange = (middle - _lastCameraPosition);
-					auto hasCollided = _collisionDetector.checkX(aabb->getPosition(), aabb->getSize(), middle, middleChange, _cameraBox);
+					aabb->setCollisionDirection(Direction::X);
+					aabb->setCollided(true);
+				}
 
-					if(hasCollided)
-					{
-						aabb->setCollisionDirection(Direction::X);
-						aabb->setCollided(true);
-					}
+				if (_isCameraAabbResponseEnabledX && hasCollided)
+				{
+					camera.setPosition(fvec3(_lastCameraPosition.x, middle.y, middle.z));
+					return true;
+				}
+			}
 
-					if(_isCameraAabbResponseEnabledX && hasCollided)
+			break;
+		}
+		case Direction::Y:
+		{
+			if (aabb->isCollisionResponsive() && aabb->isVisible())
+			{
+				const fvec3 middle = camera.getPosition();
+				const fvec3 middleChange = (middle - _lastCameraPosition);
+				auto hasCollided = _collisionDetector.checkY(aabb->getPosition(), aabb->getSize(), middle, middleChange, _cameraBox);
+
+				if (hasCollided)
+				{
+					aabb->setCollisionDirection(Direction::Y);
+					aabb->setCollided(true);
+				}
+
+				if (_isCameraAabbResponseEnabledY && hasCollided)
+				{
+					if (!_isCameraUnderTerrain)
 					{
-						camera.setPosition(fvec3(_lastCameraPosition.x, middle.y, middle.z));
+						camera.setPosition(fvec3(middle.x, _lastCameraPosition.y, middle.z));
 						return true;
 					}
 				}
-
-				break;
 			}
-			case Direction::Y:
+
+			break;
+		}
+		case Direction::Z:
+		{
+			if (aabb->isCollisionResponsive() && aabb->isVisible())
 			{
-				if(aabb->isCollisionResponsive() && aabb->isVisible())
+				const fvec3 middle = camera.getPosition();
+				const fvec3 middleChange = (middle - _lastCameraPosition);
+				auto hasCollided = _collisionDetector.checkZ(aabb->getPosition(), aabb->getSize(), middle, middleChange, _cameraBox);
+
+				if (hasCollided)
 				{
-					const fvec3 middle = camera.getPosition();
-					const fvec3 middleChange = (middle - _lastCameraPosition);
-					auto hasCollided = _collisionDetector.checkY(aabb->getPosition(), aabb->getSize(), middle, middleChange, _cameraBox);
-
-					if(hasCollided)
-					{
-						aabb->setCollisionDirection(Direction::Y);
-						aabb->setCollided(true);
-					}
-
-					if(_isCameraAabbResponseEnabledY && hasCollided)
-					{
-						if(!_isCameraUnderTerrain)
-						{
-							camera.setPosition(fvec3(middle.x, _lastCameraPosition.y, middle.z));
-							return true;
-						}
-					}
+					aabb->setCollisionDirection(Direction::Z);
+					aabb->setCollided(true);
 				}
 
-				break;
-			}
-			case Direction::Z:
-			{
-				if(aabb->isCollisionResponsive() && aabb->isVisible())
+				if (_isCameraAabbResponseEnabledZ && hasCollided)
 				{
-					const fvec3 middle = camera.getPosition();
-					const fvec3 middleChange = (middle - _lastCameraPosition);
-					auto hasCollided = _collisionDetector.checkZ(aabb->getPosition(), aabb->getSize(), middle, middleChange, _cameraBox);
-
-					if(hasCollided)
-					{
-						aabb->setCollisionDirection(Direction::Z);
-						aabb->setCollided(true);
-					}
-
-					if(_isCameraAabbResponseEnabledZ && hasCollided)
-					{
-						camera.setPosition(fvec3(middle.x, middle.y, _lastCameraPosition.z));
-						return true;
-					}
+					camera.setPosition(fvec3(middle.x, middle.y, _lastCameraPosition.z));
+					return true;
 				}
-
-				break;
 			}
+
+			break;
+		}
 		}
 	}
 

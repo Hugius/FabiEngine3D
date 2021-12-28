@@ -25,7 +25,7 @@ const vector<string> FabiEngine3D::image_getIDs() const
 {
 	vector<string> result;
 
-	for(const auto& [keyID, entity] : _core->_imageEntityManager.getEntities())
+	for (const auto& [key, entity] : _core->_imageEntityManager.getEntities())
 	{
 		result.push_back(entity->getID());
 	}

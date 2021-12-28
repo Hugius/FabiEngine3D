@@ -5,7 +5,7 @@ const vector<string> FabiEngine3D::spotlight_getIDs() const
 {
 	vector<string> result;
 
-	for(const auto& [keyID, entity] : _core->_spotlightEntityManager.getEntities())
+	for (const auto& [key, entity] : _core->_spotlightEntityManager.getEntities())
 	{
 		result.push_back(entity->getID());
 	}

@@ -7,7 +7,7 @@ shared_ptr<ReflectionEntity> ReflectionEntityManager::getEntity(const string& ID
 {
 	auto iterator = _entities.find(ID);
 
-	if(iterator == _entities.end())
+	if (iterator == _entities.end())
 	{
 		Logger::throwError("ReflectionEntityManager::getEntity");
 	}
@@ -42,7 +42,7 @@ void ReflectionEntityManager::createEntity(const string& ID)
 
 void ReflectionEntityManager::update()
 {
-	for(const auto& [keyID, entity] : _entities)
+	for (const auto& [key, entity] : _entities)
 	{
 		entity->updateTransformation();
 	}
@@ -50,7 +50,7 @@ void ReflectionEntityManager::update()
 
 void ReflectionEntityManager::deleteEntity(const string& ID)
 {
-	if(!isEntityExisting(ID))
+	if (!isEntityExisting(ID))
 	{
 		Logger::throwError("ReflectionEntityManager::deleteEntity");
 	}

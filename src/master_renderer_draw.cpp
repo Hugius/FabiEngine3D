@@ -9,7 +9,7 @@ using std::function;
 
 void MasterRenderer::_renderSkyEntity()
 {
-	if(_entityBus->getMainSkyEntity() != nullptr)
+	if (_entityBus->getMainSkyEntity() != nullptr)
 	{
 		_skyEntityColorRenderer.bind();
 
@@ -21,7 +21,7 @@ void MasterRenderer::_renderSkyEntity()
 
 void MasterRenderer::_renderTerrainEntity()
 {
-	if(_entityBus->getTerrainEntity() != nullptr)
+	if (_entityBus->getTerrainEntity() != nullptr)
 	{
 		_terrainEntityColorRenderer.bind();
 
@@ -37,7 +37,7 @@ void MasterRenderer::_renderTerrainEntity()
 
 void MasterRenderer::_renderWaterEntity()
 {
-	if(_entityBus->getWaterEntity() != nullptr)
+	if (_entityBus->getWaterEntity() != nullptr)
 	{
 		_waterEntityColorRenderer.bind();
 
@@ -55,7 +55,7 @@ void MasterRenderer::_renderModelEntities()
 {
 	auto modelEntities = _entityBus->getModelEntities();
 
-	if(!modelEntities.empty())
+	if (!modelEntities.empty())
 	{
 		_modelEntityColorRenderer.bind();
 
@@ -63,17 +63,17 @@ void MasterRenderer::_renderModelEntities()
 
 		_modelEntityColorRenderer.processSpotlightEntities(_entityBus->getSpotlightEntities());
 
-		for(const auto& [keyID, modelEntity] : modelEntities)
+		for (const auto& [key, modelEntity] : modelEntities)
 		{
-			for(const auto& partID : modelEntity->getPartIDs())
+			for (const auto& partID : modelEntity->getPartIDs())
 			{
-				if(modelEntity->getTransparency(partID) != 1.0f)
+				if (modelEntity->getTransparency(partID) != 1.0f)
 				{
 					goto CONTINUE;
 				}
 			}
 
-			if(modelEntity->isLevelOfDetailed())
+			if (modelEntity->isLevelOfDetailed())
 			{
 				auto levelOfDetailEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityID())->second;
 
@@ -101,26 +101,26 @@ void MasterRenderer::_renderModelEntities()
 				_modelEntityColorRenderer.render(modelEntity, _entityBus->getReflectionEntities());
 			}
 
-			CONTINUE:;
+		CONTINUE:;
 		}
 
-		for(const auto& [keyID, modelEntity] : modelEntities)
+		for (const auto& [key, modelEntity] : modelEntities)
 		{
 			bool isSolid = true;
-			for(const auto& partID : modelEntity->getPartIDs())
+			for (const auto& partID : modelEntity->getPartIDs())
 			{
-				if(modelEntity->getTransparency(partID) != 1.0f)
+				if (modelEntity->getTransparency(partID) != 1.0f)
 				{
 					isSolid = false;
 					break;
 				}
 			}
-			if(isSolid)
+			if (isSolid)
 			{
 				continue;
 			}
 
-			if(modelEntity->isLevelOfDetailed())
+			if (modelEntity->isLevelOfDetailed())
 			{
 				auto levelOfDetailEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityID())->second;
 
@@ -157,11 +157,11 @@ void MasterRenderer::_renderBillboardEntities()
 {
 	auto billboardEntities = _entityBus->getBillboardEntities();
 
-	if(!billboardEntities.empty())
+	if (!billboardEntities.empty())
 	{
 		_billboardEntityColorRenderer.bind();
 
-		for(const auto& [keyID, entity] : billboardEntities)
+		for (const auto& [key, entity] : billboardEntities)
 		{
 			_billboardEntityColorRenderer.render(entity);
 		}
@@ -172,15 +172,15 @@ void MasterRenderer::_renderBillboardEntities()
 
 void MasterRenderer::_renderAabbEntities()
 {
-	if(_renderBus.isAabbFrameRenderingEnabled())
+	if (_renderBus.isAabbFrameRenderingEnabled())
 	{
 		auto aabbEntities = _entityBus->getAabbEntities();
 
-		if(!aabbEntities.empty())
+		if (!aabbEntities.empty())
 		{
 			_aabbEntityColorRenderer.bind();
 
-			for(const auto& [keyID, entity] : aabbEntities)
+			for (const auto& [key, entity] : aabbEntities)
 			{
 				_aabbEntityColorRenderer.render(entity);
 			}
@@ -205,34 +205,39 @@ void MasterRenderer::_renderFinalWorldImage()
 
 void MasterRenderer::_renderGUI()
 {
-	if(!_entityBus->getImageEntities().empty() || !_entityBus->getTextEntities().empty())
+	if (!_entityBus->getImageEntities().empty() || !_entityBus->getTextEntities().empty())
 	{
 		_imageEntityColorRenderer.bind();
 
-		map<unsigned int, shared_ptr<ImageEntity>> orderedEntityMap;
-		for(const auto& [keyID, entity] : _entityBus->getImageEntities())
+		map<unsigned int, shared_ptr<BaseEntity>> orderedEntityMap;
+		for (const auto& [key, imageEntity] : _entityBus->getImageEntities())
 		{
-			if(entity->getID() != _renderBus.getCursorEntityID())
+			if (imageEntity->getID() != _renderBus.getCursorEntityID())
 			{
-				orderedEntityMap.insert(make_pair(entity->getDepth(), entity));
+				orderedEntityMap.insert(make_pair(imageEntity->getDepth(), imageEntity));
 			}
 		}
-		for(const auto& [keyID, entity] : _entityBus->getTextEntities())
+		for (const auto& [key, textEntity] : _entityBus->getTextEntities())
 		{
-			orderedEntityMap.insert(make_pair(entity->getDepth(), entity));
+			orderedEntityMap.insert(make_pair(textEntity->getDepth(), textEntity));
 		}
 
-		for(const auto& [keyID, entity] : orderedEntityMap)
+		for (const auto& [key, entity] : orderedEntityMap)
 		{
+			auto castedImageEntity = dynamic_pointer_cast<ImageEntity>(entity);
 			auto castedTextEntity = dynamic_pointer_cast<TextEntity>(entity);
 
-			if(castedTextEntity == nullptr)
+			if (castedImageEntity != nullptr)
 			{
-				_imageEntityColorRenderer.render(entity);
+				_imageEntityColorRenderer.render(castedImageEntity);
 			}
-			else
+
+			if (castedTextEntity != nullptr)
 			{
-				_imageEntityColorRenderer.render(castedTextEntity);
+				for (const auto& characterEntity : castedTextEntity->getCharacterEntities())
+				{
+					_imageEntityColorRenderer.render(characterEntity);
+				}
 			}
 		}
 
@@ -242,9 +247,9 @@ void MasterRenderer::_renderGUI()
 
 void MasterRenderer::_renderCursor()
 {
-	for(const auto& [keyID, entity] : _entityBus->getImageEntities())
+	for (const auto& [key, entity] : _entityBus->getImageEntities())
 	{
-		if(entity->getID() == _renderBus.getCursorEntityID())
+		if (entity->getID() == _renderBus.getCursorEntityID())
 		{
 			_imageEntityColorRenderer.bind();
 			_imageEntityColorRenderer.render(entity);
@@ -318,7 +323,7 @@ void MasterRenderer::_renderDebugScreens()
 	motionBlurSurface->setColor(fvec3(static_cast<float>(_renderBus.getMotionBlurMap() != 0)));
 	motionBlurSurface->setMirroredVertically(true);
 
-	shared_ptr<TextEntity> worldText = make_shared<TextEntity>("worldText");
+	/*shared_ptr<TextEntity> worldText = make_shared<TextEntity>("worldText");
 	worldText->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, 0.4f, calcTextWidth("World Render"), charHeight, true));
 	worldText->setDiffuseMap(_textureLoader.load2dTexture("World Render", fontPath));
 	worldText->setColor(textColor);
@@ -361,7 +366,7 @@ void MasterRenderer::_renderDebugScreens()
 	shared_ptr<TextEntity> motionBlurText = make_shared<TextEntity>("motionBlurText");
 	motionBlurText->setRenderBuffer(make_shared<RenderBuffer>(0.666f, -0.92f, calcTextWidth("Motion Blur Render"), charHeight, true));
 	motionBlurText->setDiffuseMap(_textureLoader.load2dTexture("Motion Blur Render", fontPath));
-	motionBlurText->setColor(textColor);
+	motionBlurText->setColor(textColor);*/
 
 	_imageEntityColorRenderer.bind();
 	_imageEntityColorRenderer.render(worldSurface);
@@ -373,7 +378,7 @@ void MasterRenderer::_renderDebugScreens()
 	_imageEntityColorRenderer.render(depthSurface);
 	_imageEntityColorRenderer.render(dofSurface);
 	_imageEntityColorRenderer.render(motionBlurSurface);
-	_imageEntityColorRenderer.render(worldText);
+	/*_imageEntityColorRenderer.render(worldText);
 	_imageEntityColorRenderer.render(shadowText);
 	_imageEntityColorRenderer.render(bloomText);
 	_imageEntityColorRenderer.render(planarReflectionText);
@@ -381,6 +386,6 @@ void MasterRenderer::_renderDebugScreens()
 	_imageEntityColorRenderer.render(waterRefractionText);
 	_imageEntityColorRenderer.render(depthText);
 	_imageEntityColorRenderer.render(dofText);
-	_imageEntityColorRenderer.render(motionBlurText);
+	_imageEntityColorRenderer.render(motionBlurText);*/
 	_imageEntityColorRenderer.unbind();
 }

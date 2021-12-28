@@ -53,9 +53,9 @@ const bool FabiEngine3D::model_isDepthMapIncluded(const string& ID) const
 
 const bool FabiEngine3D::model_hasPart(const string& ID, const string& partID) const
 {
-	for(const auto& existingPartID : model_getPartIDs(ID))
+	for (const auto& existingPartID : model_getPartIDs(ID))
 	{
-		if(partID == existingPartID)
+		if (partID == existingPartID)
 		{
 			return true;
 		}
@@ -258,7 +258,7 @@ const vector<string> FabiEngine3D::model_getIDs() const
 {
 	vector<string> result;
 
-	for(const auto& [keyID, entity] : _core->_modelEntityManager.getEntities())
+	for (const auto& [key, entity] : _core->_modelEntityManager.getEntities())
 	{
 		result.push_back(entity->getID());
 	}
@@ -270,11 +270,11 @@ const vector<string> FabiEngine3D::model_getGroupIDs(const string& ID) const
 {
 	vector<string> result;
 
-	for(const auto& [keyID, entity] : _core->_modelEntityManager.getEntities())
+	for (const auto& [key, entity] : _core->_modelEntityManager.getEntities())
 	{
-		if(entity->getID().size() >= ID.size())
+		if (entity->getID().size() >= ID.size())
 		{
-			if(entity->getID().substr(0, ID.size()) == ID)
+			if (entity->getID().substr(0, ID.size()) == ID)
 			{
 				result.push_back(entity->getID());
 			}

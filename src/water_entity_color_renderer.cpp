@@ -61,16 +61,16 @@ void WaterEntityColorRenderer::unbind()
 void WaterEntityColorRenderer::processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>>& entities)
 {
 	vector<shared_ptr<PointlightEntity>> visibleEntities;
-	for(const auto& [keyID, entity] : entities)
+	for (const auto& [key, entity] : entities)
 	{
-		if(entity->isVisible())
+		if (entity->isVisible())
 		{
 			visibleEntities.push_back(entity);
 		}
 	}
 
 	unsigned int index = 0;
-	for(size_t i = 0; i < visibleEntities.size(); i++)
+	for (size_t i = 0; i < visibleEntities.size(); i++)
 	{
 		//_shader.uploadUniform("u_pointlightPositions[" + to_string(i) + "]", visibleEntities[i]->getPosition());
 		//_shader.uploadUniform("u_pointlightColors[" + to_string(i) + "]", visibleEntities[i]->getColor());
@@ -85,15 +85,15 @@ void WaterEntityColorRenderer::processPointlightEntities(const unordered_map<str
 void WaterEntityColorRenderer::processSpotlightEntities(const unordered_map<string, shared_ptr<SpotlightEntity>>& entities)
 {
 	vector<shared_ptr<SpotlightEntity>> visibleEntities;
-	for(const auto& [keyID, entity] : entities)
+	for (const auto& [key, entity] : entities)
 	{
-		if(entity->isVisible())
+		if (entity->isVisible())
 		{
 			visibleEntities.push_back(entity);
 		}
 	}
 
-	for(size_t i = 0; i < visibleEntities.size(); i++)
+	for (size_t i = 0; i < visibleEntities.size(); i++)
 	{
 		//_shader.uploadUniform("u_spotlightPositions[" + to_string(i) + "]", visibleEntities[i]->getPosition());
 		//_shader.uploadUniform("u_spotlightFrontVectors[" + to_string(i) + "]", visibleEntities[i]->getFrontVector());
@@ -108,9 +108,9 @@ void WaterEntityColorRenderer::processSpotlightEntities(const unordered_map<stri
 
 void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 {
-	if(entity->hasLowQualityRenderBuffer() && entity->hasHighQualityRenderBuffer() && entity->isVisible())
+	if (entity->hasLowQualityRenderBuffer() && entity->hasHighQualityRenderBuffer() && entity->isVisible())
 	{
-		if(entity->isWireframed())
+		if (entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
@@ -140,23 +140,23 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 		_shader.uploadUniform("u_hasNormalMap", entity->hasNormalMap());
 		_shader.uploadUniform("u_wireframeColor", entity->getWireframeColor());
 
-		if(entity->hasDudvMap())
+		if (entity->hasDudvMap())
 		{
 			glActiveTexture(GL_TEXTURE3);
 			glBindTexture(GL_TEXTURE_2D, entity->getDudvMap());
 		}
-		if(entity->hasNormalMap())
+		if (entity->hasNormalMap())
 		{
 			glActiveTexture(GL_TEXTURE4);
 			glBindTexture(GL_TEXTURE_2D, entity->getNormalMap());
 		}
-		if(entity->hasDisplacementMap())
+		if (entity->hasDisplacementMap())
 		{
 			glActiveTexture(GL_TEXTURE5);
 			glBindTexture(GL_TEXTURE_2D, entity->getDisplacementMap());
 		}
 
-		if(entity->hasDisplacementMap())
+		if (entity->hasDisplacementMap())
 		{
 			glBindVertexArray(entity->getHighQualityRenderBuffer()->getVAO());
 		}
@@ -165,7 +165,7 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 			glBindVertexArray(entity->getLowQualityRenderBuffer()->getVAO());
 		}
 
-		if(entity->hasDisplacementMap())
+		if (entity->hasDisplacementMap())
 		{
 			glDrawArrays(GL_TRIANGLES, 0, entity->getHighQualityRenderBuffer()->getVertexCount());
 			_renderBus.increaseTriangleCount(entity->getHighQualityRenderBuffer()->getVertexCount() / 3);
@@ -178,23 +178,23 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 
 		glBindVertexArray(0);
 
-		if(entity->hasDudvMap())
+		if (entity->hasDudvMap())
 		{
 			glActiveTexture(GL_TEXTURE3);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if(entity->hasNormalMap())
+		if (entity->hasNormalMap())
 		{
 			glActiveTexture(GL_TEXTURE4);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if(entity->hasDisplacementMap())
+		if (entity->hasDisplacementMap())
 		{
 			glActiveTexture(GL_TEXTURE5);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 
-		if(entity->isWireframed())
+		if (entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}

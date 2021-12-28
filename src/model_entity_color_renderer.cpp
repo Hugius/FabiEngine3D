@@ -75,15 +75,15 @@ void ModelEntityColorRenderer::unbind()
 void ModelEntityColorRenderer::processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>>& entities)
 {
 	vector<shared_ptr<PointlightEntity>> visibleEntities;
-	for(const auto& [keyID, entity] : entities)
+	for (const auto& [key, entity] : entities)
 	{
-		if(entity->isVisible())
+		if (entity->isVisible())
 		{
 			visibleEntities.push_back(entity);
 		}
 	}
 
-	for(size_t i = 0; i < visibleEntities.size(); i++)
+	for (size_t i = 0; i < visibleEntities.size(); i++)
 	{
 		_shader.uploadUniform("u_pointlightPositions[" + to_string(i) + "]", visibleEntities[i]->getPosition());
 		_shader.uploadUniform("u_pointlightColors[" + to_string(i) + "]", visibleEntities[i]->getColor());
@@ -98,15 +98,15 @@ void ModelEntityColorRenderer::processPointlightEntities(const unordered_map<str
 void ModelEntityColorRenderer::processSpotlightEntities(const unordered_map<string, shared_ptr<SpotlightEntity>>& entities)
 {
 	vector<shared_ptr<SpotlightEntity>> visibleEntities;
-	for(const auto& [keyID, entity] : entities)
+	for (const auto& [key, entity] : entities)
 	{
-		if(entity->isVisible())
+		if (entity->isVisible())
 		{
 			visibleEntities.push_back(entity);
 		}
 	}
 
-	for(size_t i = 0; i < visibleEntities.size(); i++)
+	for (size_t i = 0; i < visibleEntities.size(); i++)
 	{
 		_shader.uploadUniform("u_spotlightPositions[" + to_string(i) + "]", visibleEntities[i]->getPosition());
 		_shader.uploadUniform("u_spotlightFrontVectors[" + to_string(i) + "]", visibleEntities[i]->getFrontVector());
@@ -121,7 +121,7 @@ void ModelEntityColorRenderer::processSpotlightEntities(const unordered_map<stri
 
 void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities)
 {
-	if(entity->isVisible())
+	if (entity->isVisible())
 	{
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
@@ -130,23 +130,23 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		_shader.uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
 		_shader.uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
-		if(entity->isFaceCulled())
+		if (entity->isFaceCulled())
 		{
 			glEnable(GL_CULL_FACE);
 		}
 
-		if(!entity->getPreviousReflectionEntityID().empty())
+		if (!entity->getPreviousReflectionEntityID().empty())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntities.at(entity->getPreviousReflectionEntityID())->getCubeMap());
 		}
-		if(!entity->getCurrentReflectionEntityID().empty())
+		if (!entity->getCurrentReflectionEntityID().empty())
 		{
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntities.at(entity->getCurrentReflectionEntityID())->getCubeMap());
 		}
 
-		for(const auto& partID : entity->getPartIDs())
+		for (const auto& partID : entity->getPartIDs())
 		{
 			const auto buffer = entity->getRenderBuffer(partID);
 
@@ -174,32 +174,32 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			_shader.uploadUniform("u_reflectionType", static_cast<int>(entity->getReflectionType(partID)));
 			_shader.uploadUniform("u_isWireframed", (entity->isWireframed(partID) || _renderBus.isWireframeRenderingEnabled()));
 
-			if(entity->isWireframed(partID))
+			if (entity->isWireframed(partID))
 			{
 				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 			}
 
-			if(entity->hasDiffuseMap(partID))
+			if (entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE4);
 				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID));
 			}
-			if(entity->hasEmissionMap(partID))
+			if (entity->hasEmissionMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE5);
 				glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap(partID));
 			}
-			if(entity->hasSpecularMap(partID))
+			if (entity->hasSpecularMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE6);
 				glBindTexture(GL_TEXTURE_2D, entity->getSpecularMap(partID));
 			}
-			if(entity->hasReflectionMap(partID))
+			if (entity->hasReflectionMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE7);
 				glBindTexture(GL_TEXTURE_2D, entity->getReflectionMap(partID));
 			}
-			if(entity->hasNormalMap(partID))
+			if (entity->hasNormalMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE8);
 				glBindTexture(GL_TEXTURE_2D, entity->getNormalMap(partID));
@@ -212,50 +212,50 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 
 			glBindVertexArray(0);
 
-			if(entity->hasDiffuseMap(partID))
+			if (entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE4);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-			if(entity->hasEmissionMap(partID))
+			if (entity->hasEmissionMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE5);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-			if(entity->hasSpecularMap(partID))
+			if (entity->hasSpecularMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE5);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-			if(entity->hasReflectionMap(partID))
+			if (entity->hasReflectionMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE6);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-			if(entity->hasNormalMap(partID))
+			if (entity->hasNormalMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE7);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 
-			if(entity->isWireframed(partID))
+			if (entity->isWireframed(partID))
 			{
 				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 			}
 		}
 
-		if(entity->getPreviousReflectionEntityID().empty())
+		if (entity->getPreviousReflectionEntityID().empty())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 		}
-		if(entity->getCurrentReflectionEntityID().empty())
+		if (entity->getCurrentReflectionEntityID().empty())
 		{
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 		}
 
-		if(entity->isFaceCulled())
+		if (entity->isFaceCulled())
 		{
 			glDisable(GL_CULL_FACE);
 		}

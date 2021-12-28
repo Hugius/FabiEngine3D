@@ -1,8 +1,41 @@
 #include "text_entity.hpp"
+#include <iostream>
 
-void TextEntity::setContent(const string& value)
+#include <algorithm>
+
+using std::max;
+using std::clamp;
+using std::make_shared;
+
+void TextEntity::setContent(const string& value, TextureLoader& textureLoader)
 {
-	_content = value;
+	if (value != _content)
+	{
+		_content = value;
+
+		_characterEntities.clear();
+
+		for (const auto& c : _content)
+		{
+			string characterString = "";
+			characterString += c;
+
+			auto newCharacter = make_shared<ImageEntity>("dummy");
+			newCharacter->setRenderBuffer(_renderBuffer);
+
+			auto texture = textureLoader.load2dTexture(characterString, _fontPath);
+
+			if (texture == 0)
+			{
+				break;
+			}
+
+			newCharacter->setDiffuseMap(texture);
+			newCharacter->setDepth(_depth);
+
+			_characterEntities.push_back(newCharacter);
+		}
+	}
 }
 
 void TextEntity::setFontPath(const string& value)
@@ -20,41 +53,35 @@ const string& TextEntity::getFontPath() const
 	return _fontPath;
 }
 
-void TextEntity::deleteCharacterEntities()
-{
-	_characterEntities.clear();
-}
-
 void TextEntity::updateCharacterEntities()
 {
 	float xCharSize = (this->getSize().x / static_cast<float>(this->_content.size()));
 	float yCharSize = this->getSize().y;
 	unsigned int index = 0;
 
-	for(const auto& character : _characterEntities)
+	for (const auto& character : _characterEntities)
 	{
 		float xCharOffset = static_cast<float>(index) * xCharSize;
 		float yCharOffset = 0.0f;
 
-		if(_isCentered)
+		if (_isCentered)
 		{
 			xCharOffset -= (this->getSize().x / 2.0f);
 			yCharOffset -= (yCharSize / 2.0f);
 		}
 
-		character->setPosition(this->getPosition() + fvec2(xCharOffset, yCharOffset));
-		character->setRotation(this->getRotation());
+		character->setPosition(_position + fvec2(xCharOffset, yCharOffset));
+		character->setRotation(_rotation);
 		character->setSize(fvec2(xCharSize, yCharSize));
+		character->setColor(_color);
+		character->setMirroredHorizontally(_isMirroredHorizontally);
+		character->setMirroredVertically(_isMirroredVertically);
+		character->setTransparency(_transparency);
+		character->setMinPosition(_minPosition);
+		character->setMaxPosition(_maxPosition);
+		character->setVisible(_isVisible);
 
-		character->setColor(this->getColor());
-		character->setMirroredHorizontally(this->isMirroredHorizonally());
-		character->setMirroredVertically(this->isMirroredVertically());
-		character->setTransparency(this->getTransparency());
-		character->setMinPosition(this->getMinPosition());
-		character->setMaxPosition(this->getMaxPosition());
-		character->setVisible(this->isVisible());
-
-		if(this->isVisible())
+		if (_isVisible)
 		{
 			character->updateTransformationMatrix();
 		}
@@ -63,12 +90,258 @@ void TextEntity::updateCharacterEntities()
 	}
 }
 
-void TextEntity::addCharacterEntity(shared_ptr<ImageEntity> value)
-{
-	_characterEntities.push_back(value);
-}
-
 const vector<shared_ptr<ImageEntity>>& TextEntity::getCharacterEntities() const
 {
 	return _characterEntities;
+}
+
+void TextEntity::updateTransformation()
+{
+	if (_position != _positionTarget)
+	{
+		auto speedMultiplier = Math::normalize(_positionTarget - _position);
+		_position += (speedMultiplier * _positionTargetSpeed);
+
+		if (fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)
+		{
+			_position.x = _positionTarget.x;
+		}
+		if (fabsf(_positionTarget.y - _position.y) <= _positionTargetSpeed)
+		{
+			_position.y = _positionTarget.y;
+		}
+	}
+
+	if (_rotation != _rotationTarget)
+	{
+		auto difference = fabsf(_rotation - _rotationTarget);
+		float multiplier = ((difference < 180.0f) ? 1.0f : -1.0f);
+		float speed = (_rotationTargetSpeed * multiplier);
+		_rotation += ((_rotation < _rotationTarget) ? speed : (_rotation > _rotationTarget) ? -speed : 0.0f);
+
+		_rotation = Math::limitAngle(_rotation);
+		if (Math::calculateAngleDifference(_rotation, _rotationTarget) <= _rotationTargetSpeed)
+		{
+			_rotation = _rotationTarget;
+		}
+	}
+
+	if (_size != _sizeTarget)
+	{
+		auto speedMultiplier = Math::normalize(_sizeTarget - _size);
+		_size += (speedMultiplier * _sizeTargetSpeed);
+
+		_size = fvec2(max(0.0f, _size.x), max(0.0f, _size.y));
+		if (fabsf(_sizeTarget.x - _size.x) <= _sizeTargetSpeed)
+		{
+			_size.x = _positionTarget.x;
+		}
+		if (fabsf(_sizeTarget.y - _size.y) <= _sizeTargetSpeed)
+		{
+			_size.y = _positionTarget.y;
+		}
+	}
+}
+
+void TextEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
+{
+	_renderBuffer = value;
+}
+
+void TextEntity::setDiffuseMap(TextureID value)
+{
+	_diffuseMap = value;
+}
+
+void TextEntity::setDiffuseMapPath(const string& value)
+{
+	_diffuseMapPath = value;
+}
+
+void TextEntity::setColor(fvec3 value)
+{
+	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+}
+
+void TextEntity::setMirroredHorizontally(bool value)
+{
+	_isMirroredHorizontally = value;
+}
+
+void TextEntity::setMirroredVertically(bool value)
+{
+	_isMirroredVertically = value;
+}
+
+void TextEntity::setTransparency(float value)
+{
+	_transparency = clamp(value, 0.0f, 1.0f);
+}
+
+void TextEntity::setWireframeColor(fvec3 value)
+{
+	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
+}
+
+void TextEntity::setPosition(fvec2 value)
+{
+	_position = value;
+	_positionTarget = value;
+}
+
+void TextEntity::setRotation(float value)
+{
+	_rotation = Math::limitAngle(value);
+	_rotationTarget = Math::limitAngle(value);
+}
+
+void TextEntity::setSize(fvec2 value)
+{
+	_size = fvec2(max(0.0f, value.x), max(0.0f, value.y));
+	_sizeTarget = fvec2(max(0.0f, value.x), max(0.0f, value.y));
+}
+
+void TextEntity::move(fvec2 value)
+{
+	_position += value;
+	_positionTarget += value;
+}
+
+void TextEntity::rotate(float value)
+{
+	_rotation += value;
+	_rotationTarget += value;
+	_rotation = Math::limitAngle(_rotation);
+	_rotationTarget = Math::limitAngle(_rotationTarget);
+}
+
+void TextEntity::scale(fvec2 value)
+{
+	_size += value;
+	_sizeTarget += value;
+	_size = fvec2(max(0.0f, _size.x), max(0.0f, _size.y));
+	_sizeTarget = fvec2(max(0.0f, _sizeTarget.x), max(0.0f, _sizeTarget.y));
+}
+
+void TextEntity::moveTo(fvec2 target, float speed)
+{
+	_positionTarget = target;
+	_positionTargetSpeed = speed;
+}
+
+void TextEntity::rotateTo(float target, float speed)
+{
+	_rotationTarget = Math::limitAngle(target);
+	_rotationTargetSpeed = speed;
+}
+
+void TextEntity::scaleTo(fvec2 target, float speed)
+{
+	_sizeTarget = fvec2(max(0.0f, target.x), max(0.0f, target.y));
+	_sizeTargetSpeed = speed;
+}
+
+void TextEntity::setMinPosition(fvec2 value)
+{
+	_minPosition = value;
+}
+
+void TextEntity::setMaxPosition(fvec2 value)
+{
+	_maxPosition = value;
+}
+
+void TextEntity::setDepth(unsigned int value)
+{
+	_depth = value;
+}
+
+const TextureID TextEntity::getDiffuseMap() const
+{
+	return _diffuseMap;
+}
+
+const string& TextEntity::getDiffuseMapPath() const
+{
+	return _diffuseMapPath;
+}
+
+const fvec3 TextEntity::getWireframeColor() const
+{
+	return _wireframeColor;
+}
+
+const fvec3 TextEntity::getColor() const
+{
+	return _color;
+}
+
+const float TextEntity::getTransparency() const
+{
+	return _transparency;
+}
+
+const bool TextEntity::isWireframed() const
+{
+	return _isWireframed;
+}
+
+const bool TextEntity::isCentered() const
+{
+	return _isCentered;
+}
+
+const bool TextEntity::isMirroredHorizonally() const
+{
+	return _isMirroredHorizontally;
+}
+
+const bool TextEntity::isMirroredVertically() const
+{
+	return _isMirroredVertically;
+}
+
+const bool TextEntity::hasDiffuseMap() const
+{
+	return (_diffuseMap != 0);
+}
+
+const fvec2 TextEntity::getPosition() const
+{
+	return _position;
+}
+
+const float TextEntity::getRotation() const
+{
+	return _rotation;
+}
+
+const fvec2 TextEntity::getSize() const
+{
+	return _size;
+}
+
+const fvec2 TextEntity::getMinPosition() const
+{
+	return _minPosition;
+}
+
+const fvec2 TextEntity::getMaxPosition() const
+{
+	return _maxPosition;
+}
+
+const unsigned int TextEntity::getDepth() const
+{
+	return _depth;
+}
+
+void TextEntity::setWireframed(bool value)
+{
+	_isWireframed = value;
+}
+
+void TextEntity::setCentered(bool value)
+{
+	_isCentered = value;
 }

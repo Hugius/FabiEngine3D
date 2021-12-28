@@ -3,7 +3,7 @@
 
 const string FabiEngine3D::sky_getSelectedID() const
 {
-	if(_core->_skyEntityManager.getSelectedMainSky() != nullptr)
+	if (_core->_skyEntityManager.getSelectedMainSky() != nullptr)
 	{
 		return _core->_skyEntityManager.getSelectedMainSky()->getID();
 	}
@@ -15,7 +15,7 @@ const string FabiEngine3D::sky_getSelectedID() const
 
 const string FabiEngine3D::sky_getMixID() const
 {
-	if(_core->_skyEntityManager.getSelectedMixSky() != nullptr)
+	if (_core->_skyEntityManager.getSelectedMixSky() != nullptr)
 	{
 		return _core->_skyEntityManager.getSelectedMixSky()->getID();
 	}
@@ -34,7 +34,7 @@ const vector<string> FabiEngine3D::sky_getIDs() const
 {
 	vector<string> result;
 
-	for(const auto& [keyID, entity] : _core->_skyEntityManager.getEntities())
+	for (const auto& [key, entity] : _core->_skyEntityManager.getEntities())
 	{
 		result.push_back(entity->getID());
 	}

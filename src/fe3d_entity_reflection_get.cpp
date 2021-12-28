@@ -5,7 +5,7 @@ const vector<string> FabiEngine3D::reflection_getIDs() const
 {
 	vector<string> result;
 
-	for(const auto& [keyID, entity] : _core->_reflectionEntityManager.getEntities())
+	for (const auto& [key, entity] : _core->_reflectionEntityManager.getEntities())
 	{
 		result.push_back(entity->getID());
 	}

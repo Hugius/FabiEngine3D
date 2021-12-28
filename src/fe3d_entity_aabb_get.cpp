@@ -3,7 +3,7 @@
 
 const fvec3 FabiEngine3D::aabb_getPosition(const string& ID) const
 {
-	if(_core->_aabbEntityManager.getEntity(ID)->hasParent())
+	if (_core->_aabbEntityManager.getEntity(ID)->hasParent())
 	{
 		return _core->_aabbEntityManager.getEntity(ID)->getLocalPosition();
 	}
@@ -15,7 +15,7 @@ const fvec3 FabiEngine3D::aabb_getPosition(const string& ID) const
 
 const fvec3 FabiEngine3D::aabb_getSize(const string& ID) const
 {
-	if(_core->_aabbEntityManager.getEntity(ID)->hasParent())
+	if (_core->_aabbEntityManager.getEntity(ID)->hasParent())
 	{
 		return _core->_aabbEntityManager.getEntity(ID)->getLocalSize();
 	}
@@ -59,11 +59,11 @@ const vector<string> FabiEngine3D::aabb_getChildIDs(const string& parentID, Aabb
 {
 	vector<string> result;
 
-	for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
+	for (const auto& [key, entity] : _core->_aabbEntityManager.getEntities())
 	{
-		if(entity->hasParent())
+		if (entity->hasParent())
 		{
-			if(parentID == entity->getParentEntityID() && (
+			if (parentID == entity->getParentEntityID() && (
 				(entity->getParentEntityType() == AabbParentEntityType::MODEL && (parentEntityType == AabbParentEntityType::MODEL)) ||
 				(entity->getParentEntityType() == AabbParentEntityType::BILLBOARD && (parentEntityType == AabbParentEntityType::BILLBOARD))))
 			{
@@ -79,7 +79,7 @@ const vector<string> FabiEngine3D::aabb_getIDs() const
 {
 	vector<string> result;
 
-	for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
+	for (const auto& [key, entity] : _core->_aabbEntityManager.getEntities())
 	{
 		result.push_back(entity->getID());
 	}

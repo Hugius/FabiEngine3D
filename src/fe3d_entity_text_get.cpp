@@ -75,7 +75,7 @@ const vector<string> FabiEngine3D::text_getIDs() const
 {
 	vector<string> result;
 
-	for(const auto& [keyID, entity] : _core->_textEntityManager.getEntities())
+	for (const auto& [key, entity] : _core->_textEntityManager.getEntities())
 	{
 		result.push_back(entity->getID());
 	}

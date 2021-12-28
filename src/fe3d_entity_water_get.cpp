@@ -48,7 +48,7 @@ const bool FabiEngine3D::water_hasDisplacementMap(const string& ID) const
 
 const string FabiEngine3D::water_getSelectedID() const
 {
-	if(_core->_waterEntityManager.getSelectedWater() != nullptr)
+	if (_core->_waterEntityManager.getSelectedWater() != nullptr)
 	{
 		return _core->_waterEntityManager.getSelectedWater()->getID();
 	}
@@ -67,7 +67,7 @@ const vector<string> FabiEngine3D::water_getIDs() const
 {
 	vector<string> result;
 
-	for(const auto& [keyID, entity] : _core->_waterEntityManager.getEntities())
+	for (const auto& [key, entity] : _core->_waterEntityManager.getEntities())
 	{
 		result.push_back(entity->getID());
 	}

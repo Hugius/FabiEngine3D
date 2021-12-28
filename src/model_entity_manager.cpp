@@ -17,7 +17,7 @@ shared_ptr<ModelEntity> ModelEntityManager::getEntity(const string& ID)
 {
 	auto iterator = _entities.find(ID);
 
-	if(iterator == _entities.end())
+	if (iterator == _entities.end())
 	{
 		Logger::throwError("ModelEntityManager::getEntity");
 	}
@@ -38,14 +38,14 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 
 	auto partsPointer = _meshLoader.loadMesh(meshPath);
 
-	if(partsPointer == nullptr)
+	if (partsPointer == nullptr)
 	{
 		deleteEntity(ID);
 		return;
 	}
 
 	auto& parts = *partsPointer;
-	if((parts.size() == 1) && !parts[0]->getID().empty())
+	if ((parts.size() == 1) && !parts[0]->getID().empty())
 	{
 		Logger::throwWarning("Multiparted model with ID \"" + ID + "\" only has 1 part!");
 		deleteEntity(ID);
@@ -54,11 +54,11 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 
 	auto entity = getEntity(ID);
 
-	for(const auto& part : parts)
+	for (const auto& part : parts)
 	{
 		vector<float> bufferData;
 
-		for(size_t i = 0; i < part->getVertices().size(); i++)
+		for (size_t i = 0; i < part->getVertices().size(); i++)
 		{
 			bufferData.push_back(part->getVertices()[i].x);
 			bufferData.push_back(part->getVertices()[i].y);
@@ -86,7 +86,7 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 
 void ModelEntityManager::deleteEntity(const string& ID)
 {
-	if(!isEntityExisting(ID))
+	if (!isEntityExisting(ID))
 	{
 		Logger::throwError("ModelEntityManager::deleteEntity");
 	}
@@ -106,16 +106,16 @@ const bool ModelEntityManager::isEntityExisting(const string& ID)
 
 void ModelEntityManager::update(const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities)
 {
-	for(const auto& [keyID, entity] : _entities)
+	for (const auto& [key, entity] : _entities)
 	{
 		entity->updateTransformation();
 
-		if(entity->isVisible())
+		if (entity->isVisible())
 		{
-			if(!entity->getLevelOfDetailEntityID().empty())
+			if (!entity->getLevelOfDetailEntityID().empty())
 			{
 				auto levelOfDetailEntityPair = getEntities().find(entity->getID());
-				if(levelOfDetailEntityPair == getEntities().end())
+				if (levelOfDetailEntityPair == getEntities().end())
 				{
 					Logger::throwError("ModelEntityManager::update");
 				}
@@ -128,44 +128,44 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 				entity->setLevelOfDetailed(isFarEnough);
 			}
 
-			if((_timer.getPassedTickCount() % Config::UPDATES_PER_SECOND) == 0)
+			if ((_timer.getPassedTickCount() % Config::UPDATES_PER_SECOND) == 0)
 			{
 				map<float, shared_ptr<ReflectionEntity>> reflectionDistanceMap;
-				for(const auto& [keyID, reflectionEntity] : reflectionEntities)
+				for (const auto& [key, reflectionEntity] : reflectionEntities)
 				{
-					if(reflectionEntity->isVisible())
+					if (reflectionEntity->isVisible())
 					{
 						auto absoluteDistance = Math::calculateDistance(entity->getBasePosition(), reflectionEntity->getPosition());
 						reflectionDistanceMap.insert(make_pair(absoluteDistance, reflectionEntity));
 					}
 				}
 
-				if(reflectionEntities.find(entity->getPreviousReflectionEntityID()) == reflectionEntities.end())
+				if (reflectionEntities.find(entity->getPreviousReflectionEntityID()) == reflectionEntities.end())
 				{
 					entity->setPreviousReflectionEntityID("");
 					entity->setCubeReflectionMixValue(1.0f);
 				}
-				if(reflectionEntities.find(entity->getCurrentReflectionEntityID()) == reflectionEntities.end())
+				if (reflectionEntities.find(entity->getCurrentReflectionEntityID()) == reflectionEntities.end())
 				{
 					entity->setCurrentReflectionEntityID("");
 					entity->setCubeReflectionMixValue(1.0f);
 				}
-				if(entity->getPreviousReflectionEntityID() == entity->getCurrentReflectionEntityID())
+				if (entity->getPreviousReflectionEntityID() == entity->getCurrentReflectionEntityID())
 				{
 					entity->setPreviousReflectionEntityID("");
 					entity->setCubeReflectionMixValue(1.0f);
 				}
 
-				if(!reflectionDistanceMap.empty())
+				if (!reflectionDistanceMap.empty())
 				{
 					auto& closestReflectionEntityID = reflectionDistanceMap.begin()->second->getID();
 
-					if(entity->getCurrentReflectionEntityID() != closestReflectionEntityID)
+					if (entity->getCurrentReflectionEntityID() != closestReflectionEntityID)
 					{
 						entity->setPreviousReflectionEntityID(entity->getCurrentReflectionEntityID());
 						entity->setCurrentReflectionEntityID(closestReflectionEntityID);
 
-						if(!entity->getPreviousReflectionEntityID().empty())
+						if (!entity->getPreviousReflectionEntityID().empty())
 						{
 							entity->setCubeReflectionMixValue(0.0f);
 						}

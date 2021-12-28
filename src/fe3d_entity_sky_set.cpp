@@ -8,7 +8,7 @@ void FabiEngine3D::sky_create(const string& ID)
 
 void FabiEngine3D::sky_deleteAll()
 {
-	for(const auto& [keyID, entity] : _core->_skyEntityManager.getEntities())
+	for (const auto& [key, entity] : _core->_skyEntityManager.getEntities())
 	{
 		sky_delete(entity->getID());
 	}
@@ -70,7 +70,7 @@ void FabiEngine3D::sky_setFrontCubeMap(const string& ID, const string& value)
 
 void FabiEngine3D::sky_delete(const string& ID)
 {
-	if(ID == sky_getSelectedID())
+	if (ID == sky_getSelectedID())
 	{
 		_core->_skyEntityManager.selectMainSky("");
 	}

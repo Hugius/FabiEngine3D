@@ -2,7 +2,7 @@
 
 void MasterRenderer::_captureCubeReflections()
 {
-	if(_entityBus->getReflectionEntities().empty())
+	if (_entityBus->getReflectionEntities().empty())
 	{
 		return;
 	}
@@ -16,9 +16,9 @@ void MasterRenderer::_captureCubeReflections()
 	const auto initialCameraPosition = _camera.getPosition();
 
 	vector<string> savedModelEntityIDs;
-	for(const auto& [keyID, entity] : _entityBus->getModelEntities())
+	for (const auto& [key, entity] : _entityBus->getModelEntities())
 	{
-		if(!entity->isReflected() && entity->isVisible())
+		if (!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
 			savedModelEntityIDs.push_back(entity->getID());
@@ -26,9 +26,9 @@ void MasterRenderer::_captureCubeReflections()
 	}
 
 	vector<string> savedBillboardEntityIDs;
-	for(const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+	for (const auto& [key, entity] : _entityBus->getBillboardEntities())
 	{
-		if(!entity->isReflected() && entity->isVisible())
+		if (!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
 			savedBillboardEntityIDs.push_back(entity->getID());
@@ -39,7 +39,7 @@ void MasterRenderer::_captureCubeReflections()
 
 	float oldLightness = 0.0f;
 	auto skyEntity = _entityBus->getMainSkyEntity();
-	if(skyEntity != nullptr)
+	if (skyEntity != nullptr)
 	{
 		oldLightness = skyEntity->getLightness();
 		skyEntity->setLightness(skyEntity->getInitialLightness());
@@ -49,52 +49,52 @@ void MasterRenderer::_captureCubeReflections()
 	_camera.setAspectRatio(1.0f);
 	_camera.setFOV(90.0f);
 
-	for(const auto& [keyID, entity] : _entityBus->getReflectionEntities())
+	for (const auto& [key, entity] : _entityBus->getReflectionEntities())
 	{
-		if(entity->mustCapture())
+		if (entity->mustCapture())
 		{
-			for(unsigned int i = 0; i < 6; i++)
+			for (unsigned int i = 0; i < 6; i++)
 			{
 				_camera.setPosition(entity->getPosition());
 
-				switch(i)
+				switch (i)
 				{
-					case 0:
-					{
-						_camera.setYaw(0.0f);
-						_camera.setPitch(0.0f);
-						break;
-					}
-					case 1:
-					{
-						_camera.setYaw(180.0f);
-						_camera.setPitch(0.0f);
-						break;
-					}
-					case 2:
-					{
-						_camera.setYaw(90.0f);
-						_camera.setPitch(90.0f);
-						break;
-					}
-					case 3:
-					{
-						_camera.setYaw(90.0f);
-						_camera.setPitch(270.0f);
-						break;
-					}
-					case 4:
-					{
-						_camera.setYaw(90.0f);
-						_camera.setPitch(0.0f);
-						break;
-					}
-					case 5:
-					{
-						_camera.setYaw(270.0f);
-						_camera.setPitch(0.0f);
-						break;
-					}
+				case 0:
+				{
+					_camera.setYaw(0.0f);
+					_camera.setPitch(0.0f);
+					break;
+				}
+				case 1:
+				{
+					_camera.setYaw(180.0f);
+					_camera.setPitch(0.0f);
+					break;
+				}
+				case 2:
+				{
+					_camera.setYaw(90.0f);
+					_camera.setPitch(90.0f);
+					break;
+				}
+				case 3:
+				{
+					_camera.setYaw(90.0f);
+					_camera.setPitch(270.0f);
+					break;
+				}
+				case 4:
+				{
+					_camera.setYaw(90.0f);
+					_camera.setPitch(0.0f);
+					break;
+				}
+				case 5:
+				{
+					_camera.setYaw(270.0f);
+					_camera.setPitch(0.0f);
+					break;
+				}
 				}
 
 				_camera.updateMatrices();
@@ -126,22 +126,22 @@ void MasterRenderer::_captureCubeReflections()
 		}
 	}
 
-	for(const auto& [keyID, entity] : _entityBus->getModelEntities())
+	for (const auto& [key, entity] : _entityBus->getModelEntities())
 	{
-		for(const auto& savedID : savedModelEntityIDs)
+		for (const auto& savedID : savedModelEntityIDs)
 		{
-			if(entity->getID() == savedID)
+			if (entity->getID() == savedID)
 			{
 				entity->setVisible(true);
 			}
 		}
 	}
 
-	for(const auto& savedID : savedBillboardEntityIDs)
+	for (const auto& savedID : savedBillboardEntityIDs)
 	{
-		for(const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+		for (const auto& [key, entity] : _entityBus->getBillboardEntities())
 		{
-			if(entity->getID() == savedID)
+			if (entity->getID() == savedID)
 			{
 				entity->setVisible(true);
 			}
@@ -150,7 +150,7 @@ void MasterRenderer::_captureCubeReflections()
 
 	_renderBus.setReflectionsEnabled(true);
 
-	if(skyEntity != nullptr)
+	if (skyEntity != nullptr)
 	{
 		skyEntity->setLightness(oldLightness);
 	}

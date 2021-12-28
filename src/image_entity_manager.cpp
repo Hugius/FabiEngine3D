@@ -16,7 +16,7 @@ shared_ptr<ImageEntity> ImageEntityManager::getEntity(const string& ID)
 {
 	auto iterator = _entities.find(ID);
 
-	if(iterator == _entities.end())
+	if (iterator == _entities.end())
 	{
 		Logger::throwError("ImageEntityManager::getEntity");
 	}
@@ -42,7 +42,7 @@ void ImageEntityManager::createEntity(const string& ID, bool isCentered)
 
 void ImageEntityManager::deleteEntity(const string& ID)
 {
-	if(!isEntityExisting(ID))
+	if (!isEntityExisting(ID))
 	{
 		Logger::throwError("ImageEntityManager::deleteEntity");
 	}
@@ -62,11 +62,11 @@ const bool ImageEntityManager::isEntityExisting(const string& ID)
 
 void ImageEntityManager::update()
 {
-	for(const auto& [keyID, entity] : _entities)
+	for (const auto& [key, entity] : _entities)
 	{
 		entity->updateTransformation();
 
-		if(entity->isVisible())
+		if (entity->isVisible())
 		{
 			entity->updateTransformationMatrix();
 		}

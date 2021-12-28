@@ -4,11 +4,11 @@ void MasterRenderer::_capturePlanarReflections()
 {
 	bool anyReflectiveModelFound = false;
 
-	for(const auto& [keyID, entity] : _entityBus->getModelEntities())
+	for (const auto& [key, entity] : _entityBus->getModelEntities())
 	{
-		for(const auto& partID : entity->getPartIDs())
+		for (const auto& partID : entity->getPartIDs())
 		{
-			if(entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR) && entity->isVisible())
+			if (entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR) && entity->isVisible())
 			{
 				anyReflectiveModelFound = true;
 				break;
@@ -16,7 +16,7 @@ void MasterRenderer::_capturePlanarReflections()
 		}
 	}
 
-	if(!anyReflectiveModelFound)
+	if (!anyReflectiveModelFound)
 	{
 		_renderBus.setPlanarReflectionMap(0);
 		return;
@@ -28,18 +28,18 @@ void MasterRenderer::_capturePlanarReflections()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	vector<string> savedModelEntityIDs;
-	for(const auto& [keyID, entity] : _entityBus->getModelEntities())
+	for (const auto& [key, entity] : _entityBus->getModelEntities())
 	{
-		if(!entity->isReflected() && entity->isVisible())
+		if (!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
 			savedModelEntityIDs.push_back(entity->getID());
 			continue;
 		}
 
-		for(const auto& partID : entity->getPartIDs())
+		for (const auto& partID : entity->getPartIDs())
 		{
-			if(entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR) && entity->isVisible())
+			if (entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR) && entity->isVisible())
 			{
 				entity->setVisible(false);
 				savedModelEntityIDs.push_back(entity->getID());
@@ -49,9 +49,9 @@ void MasterRenderer::_capturePlanarReflections()
 	}
 
 	vector<string> savedBillboardEntityIDs;
-	for(const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+	for (const auto& [key, entity] : _entityBus->getBillboardEntities())
 	{
-		if(!entity->isReflected() && entity->isVisible())
+		if (!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
 			savedBillboardEntityIDs.push_back(entity->getID());
@@ -73,7 +73,7 @@ void MasterRenderer::_capturePlanarReflections()
 
 	float oldSkyLightness = 0.0f;
 	auto skyEntity = _entityBus->getMainSkyEntity();
-	if(skyEntity != nullptr)
+	if (skyEntity != nullptr)
 	{
 		oldSkyLightness = skyEntity->getLightness();
 		skyEntity->setLightness(skyEntity->getInitialLightness());
@@ -98,22 +98,22 @@ void MasterRenderer::_capturePlanarReflections()
 
 	_renderBus.setPlanarReflectionMap(_planarReflectionCaptureBuffer.getTexture(0));
 
-	for(const auto& [keyID, entity] : _entityBus->getModelEntities())
+	for (const auto& [key, entity] : _entityBus->getModelEntities())
 	{
-		for(const auto& savedID : savedModelEntityIDs)
+		for (const auto& savedID : savedModelEntityIDs)
 		{
-			if(entity->getID() == savedID)
+			if (entity->getID() == savedID)
 			{
 				entity->setVisible(true);
 			}
 		}
 	}
 
-	for(const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+	for (const auto& [key, entity] : _entityBus->getBillboardEntities())
 	{
-		for(const auto& savedID : savedBillboardEntityIDs)
+		for (const auto& savedID : savedBillboardEntityIDs)
 		{
-			if(entity->getID() == savedID)
+			if (entity->getID() == savedID)
 			{
 				entity->setVisible(true);
 			}
@@ -128,7 +128,7 @@ void MasterRenderer::_capturePlanarReflections()
 
 	_renderBus.setReflectionsEnabled(true);
 
-	if(skyEntity != nullptr)
+	if (skyEntity != nullptr)
 	{
 		skyEntity->setLightness(oldSkyLightness);
 	}

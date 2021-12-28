@@ -123,7 +123,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>AssetManagementSystem.lib;AudioSystem.lib;CoreSystem.lib;EditorSystem.lib;EntitySystem.lib;GuiSystem.lib;MathSystem.lib;MiscellaneousSystem.lib;NetworkingSystem.lib;PhysicsSystem.lib;RenderingSystem.lib;ScriptingSystem.lib;opengl32.lib;glew32.lib;SDL2main.lib;SDL2.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;shcore.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>AssetSystem.lib;CoreSystem.lib;EditorSystem.lib;EntitySystem.lib;GuiSystem.lib;MathSystem.lib;NetworkingSystem.lib;PhysicsSystem.lib;RenderingSystem.lib;ScriptingSystem.lib;SoundSystem.lib;SupportSystem.lib;opengl32.lib;glew32.lib;SDL2main.lib;SDL2.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;shcore.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

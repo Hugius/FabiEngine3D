@@ -8,7 +8,7 @@ shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string& ID)
 {
 	auto iterator = _entities.find(ID);
 
-	if(iterator == _entities.end())
+	if (iterator == _entities.end())
 	{
 		Logger::throwError("WaterEntityManager::getEntity");
 	}
@@ -20,7 +20,7 @@ shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string& ID)
 
 shared_ptr<WaterEntity> WaterEntityManager::getSelectedWater()
 {
-	if(_entities.empty() || _selectedID.empty())
+	if (_entities.empty() || _selectedID.empty())
 	{
 		return nullptr;
 	}
@@ -37,7 +37,7 @@ const unordered_map<string, shared_ptr<WaterEntity>>& WaterEntityManager::getEnt
 
 void WaterEntityManager::selectWater(const string& ID)
 {
-	if(isEntityExisting(ID) || ID.empty())
+	if (isEntityExisting(ID) || ID.empty())
 	{
 		_selectedID = ID;
 	}
@@ -56,7 +56,7 @@ void WaterEntityManager::createEntity(const string& ID)
 
 void WaterEntityManager::deleteEntity(const string& ID)
 {
-	if(!isEntityExisting(ID))
+	if (!isEntityExisting(ID))
 	{
 		Logger::throwError("WaterEntityManager::deleteEntity");
 	}
@@ -83,7 +83,7 @@ void WaterEntityManager::_loadMesh(shared_ptr<WaterEntity> entity, float size)
 {
 	const float halfSize = (size / 2.0f);
 
-	if(size > MAX_SIZE)
+	if (size > MAX_SIZE)
 	{
 		Logger::throwError("WaterEntityManager::loadMesh");
 	}
@@ -99,9 +99,9 @@ void WaterEntityManager::_loadMesh(shared_ptr<WaterEntity> entity, float size)
 	};
 
 	vector<float> highQualityBufferData;
-	for(float x = -halfSize; x < halfSize; x++)
+	for (float x = -halfSize; x < halfSize; x++)
 	{
-		for(float z = -halfSize; z < halfSize; z++)
+		for (float z = -halfSize; z < halfSize; z++)
 		{
 			float firstVertexX = x;
 			float firstVertexY = 0.0f;
@@ -174,9 +174,9 @@ void WaterEntityManager::_loadMesh(shared_ptr<WaterEntity> entity, float size)
 
 void WaterEntityManager::update()
 {
-	for(const auto& [keyID, entity] : _entities)
+	for (const auto& [key, entity] : _entities)
 	{
-		if(entity->isVisible())
+		if (entity->isVisible())
 		{
 			fvec2 newOffset = entity->getRippleOffset();
 			newOffset.x += entity->getSpeed().x;

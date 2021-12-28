@@ -8,7 +8,7 @@ void FabiEngine3D::model_create(const string& ID, const string& meshPath)
 
 void FabiEngine3D::model_deleteAll()
 {
-	for(const auto& [keyID, entity] : _core->_modelEntityManager.getEntities())
+	for (const auto& [key, entity] : _core->_modelEntityManager.getEntities())
 	{
 		model_delete(entity->getID());
 	}
@@ -16,7 +16,7 @@ void FabiEngine3D::model_deleteAll()
 
 void FabiEngine3D::model_delete(const string& ID)
 {
-	for(const auto& aabbID : aabb_getChildIDs(ID, AabbParentEntityType::MODEL))
+	for (const auto& aabbID : aabb_getChildIDs(ID, AabbParentEntityType::MODEL))
 	{
 		_core->_aabbEntityManager.deleteEntity(aabbID);
 	}
@@ -26,13 +26,13 @@ void FabiEngine3D::model_delete(const string& ID)
 
 void FabiEngine3D::model_deleteGroup(const string& ID)
 {
-	for(const auto& [keyID, entity] : _core->_modelEntityManager.getEntities())
+	for (const auto& [key, entity] : _core->_modelEntityManager.getEntities())
 	{
-		if(entity->getID().size() >= ID.size())
+		if (entity->getID().size() >= ID.size())
 		{
 			auto subString = entity->getID().substr(0, ID.size());
 
-			if(subString == ID)
+			if (subString == ID)
 			{
 				model_delete(entity->getID());
 			}
@@ -47,7 +47,7 @@ void FabiEngine3D::model_setVisible(const string& ID, bool value)
 
 void FabiEngine3D::model_setDiffuseMap(const string& ID, const string& partID, const string& value)
 {
-	if(value.empty())
+	if (value.empty())
 	{
 		_core->_modelEntityManager.getEntity(ID)->setDiffuseMap(partID, 0);
 		_core->_modelEntityManager.getEntity(ID)->setDiffuseMapPath(partID, "");
@@ -61,7 +61,7 @@ void FabiEngine3D::model_setDiffuseMap(const string& ID, const string& partID, c
 
 void FabiEngine3D::model_setEmissionMap(const string& ID, const string& partID, const string& value)
 {
-	if(value.empty())
+	if (value.empty())
 	{
 		_core->_modelEntityManager.getEntity(ID)->setEmissionMap(partID, 0);
 		_core->_modelEntityManager.getEntity(ID)->setEmissionMapPath(partID, "");
@@ -75,7 +75,7 @@ void FabiEngine3D::model_setEmissionMap(const string& ID, const string& partID, 
 
 void FabiEngine3D::model_setSpecularMap(const string& ID, const string& partID, const string& value)
 {
-	if(value.empty())
+	if (value.empty())
 	{
 		_core->_modelEntityManager.getEntity(ID)->setSpecularMap(partID, 0);
 		_core->_modelEntityManager.getEntity(ID)->setSpecularMapPath(partID, "");
@@ -89,7 +89,7 @@ void FabiEngine3D::model_setSpecularMap(const string& ID, const string& partID, 
 
 void FabiEngine3D::model_setNormalMap(const string& ID, const string& partID, const string& value)
 {
-	if(value.empty())
+	if (value.empty())
 	{
 		_core->_modelEntityManager.getEntity(ID)->setNormalMap(partID, 0);
 		_core->_modelEntityManager.getEntity(ID)->setNormalMapPath(partID, "");
@@ -103,7 +103,7 @@ void FabiEngine3D::model_setNormalMap(const string& ID, const string& partID, co
 
 void FabiEngine3D::model_setReflectionMap(const string& ID, const string& partID, const string& value)
 {
-	if(value.empty())
+	if (value.empty())
 	{
 		_core->_modelEntityManager.getEntity(ID)->setReflectionMap(partID, 0);
 		_core->_modelEntityManager.getEntity(ID)->setReflectionMapPath(partID, "");

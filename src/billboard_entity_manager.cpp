@@ -41,7 +41,7 @@ shared_ptr<BillboardEntity> BillboardEntityManager::getEntity(const string& ID)
 {
 	auto iterator = _entities.find(ID);
 
-	if(iterator == _entities.end())
+	if (iterator == _entities.end())
 	{
 		Logger::throwError("BillboardEntityManager::getEntity");
 	}
@@ -65,16 +65,16 @@ void BillboardEntityManager::createEntity(const string& ID, bool isCentered)
 
 void BillboardEntityManager::update()
 {
-	for(const auto& [keyID, entity] : _entities)
+	for (const auto& [key, entity] : _entities)
 	{
 		entity->updateTransformation();
 
-		if(entity->isVisible())
+		if (entity->isVisible())
 		{
 			auto facingX = entity->isFacingCameraX();
 			auto facingY = entity->isFacingCameraY();
 			fvec3 rotation = entity->getRotation();
-			if(facingX || facingY)
+			if (facingX || facingY)
 			{
 				fvec3 position = (entity->getPosition() + fvec3(0.0f, (entity->getSize().y / 2.0f), 0.0f));
 
@@ -99,7 +99,7 @@ void BillboardEntityManager::update()
 
 void BillboardEntityManager::deleteEntity(const string& ID)
 {
-	if(!isEntityExisting(ID))
+	if (!isEntityExisting(ID))
 	{
 		Logger::throwError("BillboardEntityManager::deleteEntity");
 	}

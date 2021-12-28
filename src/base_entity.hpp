@@ -15,12 +15,14 @@ public:
 
 	const bool isVisible() const;
 
-private:
-	virtual void _dummy()
-	{
-	}
-
+protected:
 	const string _ID;
 
 	bool _isVisible = true;
+
+private:
+	virtual void _dummy()
+	{
+
+	}
 };

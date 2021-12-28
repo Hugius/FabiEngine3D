@@ -17,7 +17,7 @@ shared_ptr<TextEntity> TextEntityManager::getEntity(const string& ID)
 {
 	auto iterator = _entities.find(ID);
 
-	if(iterator == _entities.end())
+	if (iterator == _entities.end())
 	{
 		Logger::throwError("TextEntityManager::getEntity");
 	}
@@ -43,13 +43,12 @@ void TextEntityManager::createEntity(const string& ID, bool isCentered)
 
 void TextEntityManager::deleteEntity(const string& ID)
 {
-	if(!isEntityExisting(ID))
+	if (!isEntityExisting(ID))
 	{
 		Logger::throwError("TextEntityManager::deleteEntity");
 	}
 
 	_entities.erase(ID);
-	_contentMap.erase(ID);
 }
 
 void TextEntityManager::deleteEntities()
@@ -64,46 +63,13 @@ const bool TextEntityManager::isEntityExisting(const string& ID)
 
 void TextEntityManager::update()
 {
-	for(const auto& [keyID, entity] : _entities)
+	for (const auto& [key, entity] : _entities)
 	{
 		entity->updateTransformation();
 
-		if(entity->isVisible())
+		if (entity->isVisible())
 		{
 			entity->updateCharacterEntities();
 		}
-	}
-}
-
-void TextEntityManager::loadCharacters(const string& ID)
-{
-	auto entity = getEntity(ID);
-
-	if((_contentMap.find(ID) == _contentMap.end()) || (_contentMap[ID] != entity->getContent()))
-	{
-		_contentMap[ID] = entity->getContent();
-
-		entity->deleteCharacterEntities();
-
-		for(const auto& c : entity->getContent())
-		{
-			auto newCharacter = make_shared<ImageEntity>("dummy");
-			newCharacter->setRenderBuffer(_corneredRenderBuffer);
-
-			string content = "";
-			content += c;
-			auto texture = _textureLoader.load2dTexture(content, entity->getFontPath());
-
-			if(texture == 0)
-			{
-				break;
-			}
-
-			newCharacter->setDiffuseMap(texture);
-
-			entity->addCharacterEntity(newCharacter);
-		}
-
-		entity->updateCharacterEntities();
 	}
 }

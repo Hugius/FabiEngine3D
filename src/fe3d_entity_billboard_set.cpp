@@ -8,7 +8,7 @@ void FabiEngine3D::billboard_create(const string& ID, bool isCentered)
 
 void FabiEngine3D::billboard_deleteAll()
 {
-	for(const auto& [keyID, entity] : _core->_billboardEntityManager.getEntities())
+	for (const auto& [key, entity] : _core->_billboardEntityManager.getEntities())
 	{
 		billboard_delete(entity->getID());
 	}
@@ -16,7 +16,7 @@ void FabiEngine3D::billboard_deleteAll()
 
 void FabiEngine3D::billboard_delete(const string& ID)
 {
-	for(const auto& aabbID : aabb_getChildIDs(ID, AabbParentEntityType::BILLBOARD))
+	for (const auto& aabbID : aabb_getChildIDs(ID, AabbParentEntityType::BILLBOARD))
 	{
 		_core->_aabbEntityManager.deleteEntity(aabbID);
 	}
@@ -26,13 +26,13 @@ void FabiEngine3D::billboard_delete(const string& ID)
 
 void FabiEngine3D::billboard_deleteGroup(const string& ID)
 {
-	for(const auto& [keyID, entity] : _core->_billboardEntityManager.getEntities())
+	for (const auto& [key, entity] : _core->_billboardEntityManager.getEntities())
 	{
-		if(entity->getID().size() >= ID.size())
+		if (entity->getID().size() >= ID.size())
 		{
 			auto subString = entity->getID().substr(0, ID.size());
 
-			if(subString == ID)
+			if (subString == ID)
 			{
 				billboard_delete(entity->getID());
 			}
@@ -112,7 +112,7 @@ void FabiEngine3D::billboard_setAdderUV(const string& ID, fvec2 value)
 
 void FabiEngine3D::billboard_setDiffuseMap(const string& ID, const string& value)
 {
-	if(value.empty())
+	if (value.empty())
 	{
 		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(0, false);
 		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMapPath("");
@@ -126,7 +126,7 @@ void FabiEngine3D::billboard_setDiffuseMap(const string& ID, const string& value
 
 void FabiEngine3D::billboard_setEmissionMap(const string& ID, const string& value)
 {
-	if(value.empty())
+	if (value.empty())
 	{
 		_core->_billboardEntityManager.getEntity(ID)->setEmissionMap(0);
 		_core->_billboardEntityManager.getEntity(ID)->setEmissionMapPath("");
@@ -215,7 +215,7 @@ void FabiEngine3D::billboard_setFont(const string& ID, const string& value)
 	entity->setFontPath(value);
 
 	auto textContent = entity->getTextContent();
-	if(!textContent.empty())
+	if (!textContent.empty())
 	{
 		entity->setDiffuseMap(_core->_textureLoader.load2dTexture(textContent, value), true);
 	}
@@ -226,13 +226,13 @@ void FabiEngine3D::billboard_setTextContent(const string& ID, const string& valu
 	auto entity = _core->_billboardEntityManager.getEntity(ID);
 
 	auto fontPath = entity->getFontPath();
-	if(fontPath.empty())
+	if (fontPath.empty())
 	{
 		Logger::throwWarning("Tried to set text content of billboard with ID \"" + ID + "\": no font loaded!");
 		return;
 	}
 
-	if(entity->getTextContent() != value)
+	if (entity->getTextContent() != value)
 	{
 		entity->setTextContent(value);
 

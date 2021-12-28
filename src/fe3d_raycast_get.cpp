@@ -7,15 +7,15 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 {
 	float closestDistance = numeric_limits<float>::max();
 
-	for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
+	for (const auto& [key, entity] : _core->_aabbEntityManager.getEntities())
 	{
-		if(!(entity->hasParent() && entity->getParentEntityType() == AabbParentEntityType::MODEL &&
-		   _core->_modelEntityManager.getEntity(entity->getParentEntityID())->isLevelOfDetailed()))
+		if (!(entity->hasParent() && entity->getParentEntityType() == AabbParentEntityType::MODEL &&
+			_core->_modelEntityManager.getEntity(entity->getParentEntityID())->isLevelOfDetailed()))
 		{
-			if(entity->isRaycastResponsive() && entity->isVisible())
+			if (entity->isRaycastResponsive() && entity->isVisible())
 			{
 				float distance;
-				if(entity->isCentered())
+				if (entity->isCentered())
 				{
 					const auto position = entity->getPosition();
 					const auto left = (entity->getSize().x / 2.0f);
@@ -42,7 +42,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 					distance = _core->_raycaster.calculateRayBoxIntersectionDistance(_core->_raycaster.getCursorRay(), box);
 				}
 
-				if((distance != -1.0f) && (distance < closestDistance))
+				if ((distance != -1.0f) && (distance < closestDistance))
 				{
 					closestDistance = distance;
 					_hoveredAabbID = entity->getID();
@@ -52,7 +52,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 		}
 	}
 
-	if(!_core->_aabbEntityManager.isEntityExisting(_hoveredAabbID) || _hoveredAabbID.empty())
+	if (!_core->_aabbEntityManager.isEntityExisting(_hoveredAabbID) || _hoveredAabbID.empty())
 	{
 		_hoveredAabbID = "";
 		_hoveredAabbDistance = -1.0f;
@@ -64,14 +64,14 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 
 const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& ID, bool canBeOccluded)
 {
-	if(canBeOccluded)
+	if (canBeOccluded)
 	{
-		if(!_isRaycastUpdated)
+		if (!_isRaycastUpdated)
 		{
 			raycast_checkCursorInAny();
 		}
 
-		if(_core->_aabbEntityManager.isEntityExisting(_hoveredAabbID))
+		if (_core->_aabbEntityManager.isEntityExisting(_hoveredAabbID))
 		{
 			return make_pair((ID == _hoveredAabbID), _hoveredAabbDistance);
 		}
@@ -84,10 +84,10 @@ const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& 
 	{
 		auto entity = _core->_aabbEntityManager.getEntity(ID);
 
-		if(entity->isRaycastResponsive() && entity->isVisible())
+		if (entity->isRaycastResponsive() && entity->isVisible())
 		{
 			float distance;
-			if(entity->isCentered())
+			if (entity->isCentered())
 			{
 				const auto position = entity->getPosition();
 				const auto left = (entity->getSize().x / 2.0f);
@@ -121,21 +121,21 @@ const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& 
 
 const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(const string& ID, bool canBeOccluded)
 {
-	if(canBeOccluded)
+	if (canBeOccluded)
 	{
-		if(!_isRaycastUpdated)
+		if (!_isRaycastUpdated)
 		{
 			raycast_checkCursorInAny();
 		}
 
-		if(_hoveredAabbID.empty() || !_core->_aabbEntityManager.isEntityExisting(_hoveredAabbID))
+		if (_hoveredAabbID.empty() || !_core->_aabbEntityManager.isEntityExisting(_hoveredAabbID))
 		{
 			return make_pair("", -1.0f);
 		}
 
-		if(_hoveredAabbID.size() >= ID.size())
+		if (_hoveredAabbID.size() >= ID.size())
 		{
-			if(_hoveredAabbID.substr(0, ID.size()) == ID)
+			if (_hoveredAabbID.substr(0, ID.size()) == ID)
 			{
 				return make_pair(_hoveredAabbID, _hoveredAabbDistance);
 			}
@@ -148,16 +148,16 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(cons
 		float closestDistance = numeric_limits<float>::max();
 		string closestBoxID = "";
 
-		for(const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
+		for (const auto& [key, entity] : _core->_aabbEntityManager.getEntities())
 		{
-			if(entity->isRaycastResponsive() && entity->isVisible())
+			if (entity->isRaycastResponsive() && entity->isVisible())
 			{
-				if(entity->getID().size() >= ID.size())
+				if (entity->getID().size() >= ID.size())
 				{
-					if(entity->getID().substr(0, ID.size()) == ID)
+					if (entity->getID().substr(0, ID.size()) == ID)
 					{
 						float distance;
-						if(entity->isCentered())
+						if (entity->isCentered())
 						{
 							const auto position = entity->getPosition();
 							const auto left = (entity->getSize().x / 2.0f);
@@ -184,7 +184,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(cons
 							distance = _core->_raycaster.calculateRayBoxIntersectionDistance(_core->_raycaster.getCursorRay(), box);
 						}
 
-						if((distance != -1.0f) && (distance < closestDistance))
+						if ((distance != -1.0f) && (distance < closestDistance))
 						{
 							closestDistance = distance;
 							closestBoxID = entity->getID();
@@ -194,7 +194,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(cons
 			}
 		}
 
-		if(closestBoxID.empty())
+		if (closestBoxID.empty())
 		{
 			return make_pair("", -1.0f);
 		}

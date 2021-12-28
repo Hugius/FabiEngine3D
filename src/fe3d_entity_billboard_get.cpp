@@ -80,7 +80,7 @@ const vector<string> FabiEngine3D::billboard_getIDs() const
 {
 	vector<string> result;
 
-	for(const auto& [keyID, entity] : _core->_billboardEntityManager.getEntities())
+	for (const auto& [key, entity] : _core->_billboardEntityManager.getEntities())
 	{
 		result.push_back(entity->getID());
 	}

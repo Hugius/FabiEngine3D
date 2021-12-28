@@ -66,7 +66,7 @@ void MasterRenderer::update()
 	_updateLensFlare();
 }
 
-void MasterRenderer::renderEngineLogo(shared_ptr<ImageEntity> logo, shared_ptr<TextEntity> text, ivec2 viewport)
+void MasterRenderer::renderEngineLogo(shared_ptr<ImageEntity> logo, ivec2 viewport)
 {
 	glViewport(0, 0, viewport.x, viewport.y);
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -75,11 +75,6 @@ void MasterRenderer::renderEngineLogo(shared_ptr<ImageEntity> logo, shared_ptr<T
 
 	_imageEntityColorRenderer.render(logo);
 
-	if(text != nullptr)
-	{
-		_imageEntityColorRenderer.render(text);
-	}
-
 	_imageEntityColorRenderer.unbind();
 }
 
@@ -87,7 +82,7 @@ void MasterRenderer::renderWorld(EntityBus* entityBus)
 {
 	_entityBus = entityBus;
 
-	if(_renderBus.isWireframeRenderingEnabled())
+	if (_renderBus.isWireframeRenderingEnabled())
 	{
 		glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -158,7 +153,7 @@ void MasterRenderer::renderWorld(EntityBus* entityBus)
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		if(_renderBus.isDebugRenderingEnabled())
+		if (_renderBus.isDebugRenderingEnabled())
 		{
 			glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y + 1);
 			_renderDebugScreens();
@@ -234,7 +229,7 @@ void MasterRenderer::reloadShadowCaptureBuffer()
 
 void MasterRenderer::_updateMotionBlur()
 {
-	if(_renderBus.isMotionBlurEnabled())
+	if (_renderBus.isMotionBlurEnabled())
 	{
 		static float lastYaw = _camera.getYaw();
 		static float lastPitch = _camera.getPitch();
@@ -249,7 +244,7 @@ void MasterRenderer::_updateMotionBlur()
 
 void MasterRenderer::_updateLensFlare()
 {
-	if(_renderBus.isLensFlareEnabled())
+	if (_renderBus.isLensFlareEnabled())
 	{
 		auto flareSourcePosition = _renderBus.getDirectionalLightingPosition();
 		auto viewMatrix = _renderBus.getViewMatrix();
@@ -260,7 +255,7 @@ void MasterRenderer::_updateLensFlare()
 		fvec2 flareSourceNDC = (fvec2(flareSourceClip.x, flareSourceClip.y) / flareSourceClip.w);
 		fvec2 flareSourceUV = fvec2(((flareSourceNDC.x + 1.0f) / 2.0f), ((flareSourceNDC.y + 1.0f) / 2.0f));
 
-		if((flareSourceNDC.x > -1.0f) && (flareSourceNDC.x < 1.0f) && (flareSourceNDC.y > -1.0f) && (flareSourceNDC.y < 1.0f))
+		if ((flareSourceNDC.x > -1.0f) && (flareSourceNDC.x < 1.0f) && (flareSourceNDC.y > -1.0f) && (flareSourceNDC.y < 1.0f))
 		{
 
 			transparency = (1.0f - (max(fabsf(flareSourceNDC.x), fabsf(flareSourceNDC.y)) / _renderBus.getLensFlareSensitivity()));

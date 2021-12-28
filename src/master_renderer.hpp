@@ -31,7 +31,7 @@ public:
 	MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader, Camera& camera, ShadowGenerator& shadowGenerator);
 
 	void update();
-	void renderEngineLogo(shared_ptr<ImageEntity> entity, shared_ptr<TextEntity> text, ivec2 viewport);
+	void renderEngineLogo(shared_ptr<ImageEntity> entity, ivec2 viewport);
 	void renderWorld(EntityBus* entityBus);
 	void reloadBloomBlurCaptureBuffer();
 	void reloadDofBlurCaptureBuffer();

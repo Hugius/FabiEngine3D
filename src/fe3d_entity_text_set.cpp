@@ -28,7 +28,7 @@ void FabiEngine3D::text_setFont(const string& ID, const string& value)
 	entity->setFontPath(value);
 
 	auto content = entity->getContent();
-	if(!content.empty())
+	if (!content.empty())
 	{
 		entity->setDiffuseMap(_core->_textureLoader.load2dTexture(content, value));
 	}
@@ -39,26 +39,24 @@ void FabiEngine3D::text_setContent(const string& ID, const string& value, float 
 	auto entity = _core->_textEntityManager.getEntity(ID);
 
 	auto fontPath = entity->getFontPath();
-	if(fontPath.empty())
+	if (fontPath.empty())
 	{
 		Logger::throwWarning("Tried to set text content of text with ID \"" + ID + "\": no font loaded!");
 		return;
 	}
 
-	entity->setContent(value);
+	entity->setContent(value, _core->_textureLoader);
 
 	fvec2 newSize = entity->getSize();
-	if(charWidth >= 0.0f)
+	if (charWidth >= 0.0f)
 	{
 		newSize.x = (charWidth * static_cast<float>(value.size()));
 	}
-	if(charHeight >= 0.0f)
+	if (charHeight >= 0.0f)
 	{
 		newSize.y = charHeight;
 	}
 	entity->setSize(newSize);
-
-	entity->setDiffuseMap(_core->_textureLoader.load2dTexture(value, entity->getFontPath()));
 }
 
 void FabiEngine3D::text_setColor(const string& ID, fvec3 value)

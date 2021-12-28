@@ -30,7 +30,7 @@ void FabiEngine3D::text_setFont(const string& ID, const string& value)
 	auto content = entity->getContent();
 	if (!content.empty())
 	{
-		entity->setDiffuseMap(_core->_textureLoader.load2dTexture(content, value));
+		entity->setDiffuseMap(_core->_textureLoader.load2dTexture(value, true, true));
 	}
 }
 

@@ -31,8 +31,9 @@ void Core::_render()
 void Core::_prepare()
 {
 	const string meshDirectoryPath = "engine\\assets\\mesh\\";
-	const string textureDirectoryPath = "engine\\assets\\texture\\";
-	const string fontDirectoryPath = "engine\\assets\\font\\";
+	const string cubeMapDirectoryPath = "engine\\assets\\texture\\cube_map\\";
+	const string fontMapDirectoryPath = "engine\\assets\\texture\\font_map\\";
+	const string diffuseMapDirectoryPath = "engine\\assets\\texture\\diffuse_map\\";
 
 	if
 		(
@@ -42,35 +43,35 @@ void Core::_prepare()
 			!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "plane.obj") ||
 			!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "speaker.obj") ||
 			!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "torch.obj") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "background_back.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "background_bottom.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "background_front.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "background_left.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "background_right.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "background_top.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "box.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "color.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "cursor_default.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "cursor_pointing.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "cursor_text.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "debug.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "grid.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "light_source.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "logo.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "minus.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "pause.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "plus.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "position.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "radius.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "restart.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "rotation.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "settings.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "shape_circle.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "shape_square.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "size.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "start.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + textureDirectoryPath + "stop.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + fontDirectoryPath + "font.ttf")
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_back.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_bottom.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_front.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_left.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_right.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_top.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "box.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "color.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "cursor_default.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "cursor_pointing.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "cursor_text.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "debug.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "grid.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "light_source.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "logo.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "minus.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "pause.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "plus.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "position.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "radius.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "restart.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "rotation.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "settings.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "shape_circle.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "shape_square.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "size.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "start.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "stop.png") ||
+			!Tools::isFileExisting(Tools::getRootDirectoryPath() + fontMapDirectoryPath + "font.png")
 			)
 	{
 		Logger::throwFatalWarning("Directory `engine\\` is missing or corrupted!");
@@ -78,7 +79,7 @@ void Core::_prepare()
 
 	shared_ptr<ImageEntity> logo = make_shared<ImageEntity>("logo");
 	logo->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
-	logo->setDiffuseMap(_textureLoader.load2dTexture("engine\\assets\\texture\\logo.png", false, false));
+	logo->setDiffuseMap(_textureLoader.load2dTexture("engine\\assets\\texture\\diffuse_map\\logo.png", false, false));
 	logo->setCentered(true);
 
 	SDL_DisplayMode DM;

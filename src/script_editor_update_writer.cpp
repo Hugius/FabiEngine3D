@@ -4,14 +4,14 @@
 
 void ScriptEditor::_updateTextWriter()
 {
-	if(_isEditorLoaded && _isWritingScript && !_gui.getOverlay()->isFocused() && !_wasGuiFocused)
+	if (_isEditorLoaded && _isWritingScript && !_gui.getOverlay()->isFocused() && !_wasGuiFocused)
 	{
-		if(_fe3d.misc_isCursorInsideViewport())
+		if (_fe3d.misc_isCursorInsideViewport())
 		{
-			_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_text.png");
+			_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\diffuse_map\\cursor_text.png");
 		}
 
-		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isCursorInsideViewport())
+		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isCursorInsideViewport())
 		{
 			_reloadScriptTextDisplay(true);
 			_hasClickedLMB = true;
@@ -26,15 +26,15 @@ void ScriptEditor::_updateTextWriter()
 		auto hoveredBillboardID = _fe3d.raycast_checkCursorInAny().first;
 		int hoveredLineIndex = -1;
 		int hoveredCharacterIndex = -1;
-		if(!hoveredBillboardID.empty())
+		if (!hoveredBillboardID.empty())
 		{
 			bool extractingLineNumber = true;
 			string lineIndexString = "";
 			string charIndexString = "";
 
-			for(const auto& c : hoveredBillboardID)
+			for (const auto& c : hoveredBillboardID)
 			{
-				if(extractingLineNumber)
+				if (extractingLineNumber)
 				{
 					lineIndexString += c;
 				}
@@ -43,24 +43,24 @@ void ScriptEditor::_updateTextWriter()
 					charIndexString += c;
 				}
 
-				if(c == '_')
+				if (c == '_')
 				{
 					extractingLineNumber = false;
 				}
 			}
 
 			hoveredLineIndex = stoi(lineIndexString);
-			if(!charIndexString.empty())
+			if (!charIndexString.empty())
 			{
 				hoveredCharacterIndex = stoi(charIndexString);
 			}
 		}
 
-		if(_activeActionKey == InputType::NONE)
+		if (_activeActionKey == InputType::NONE)
 		{
-			for(InputType actionKey : ACTION_KEYS)
+			for (InputType actionKey : ACTION_KEYS)
 			{
-				if(_fe3d.input_isKeyPressed(actionKey))
+				if (_fe3d.input_isKeyPressed(actionKey))
 				{
 					_activeActionKey = actionKey;
 					break;
@@ -69,7 +69,7 @@ void ScriptEditor::_updateTextWriter()
 		}
 		else
 		{
-			if(_passedFrames == CONTINUOUS_TEXT_ACTION_FRAME_MINIMUM)
+			if (_passedFrames == CONTINUOUS_TEXT_ACTION_FRAME_MINIMUM)
 			{
 				_isContinuousActionAllowed = true;
 				_passedFrames = 0;
@@ -80,7 +80,7 @@ void ScriptEditor::_updateTextWriter()
 			}
 		}
 
-		if(!_fe3d.input_isKeyDown(_activeActionKey))
+		if (!_fe3d.input_isKeyDown(_activeActionKey))
 		{
 			_activeActionKey = InputType::NONE;
 			_passedFrames = 0;
@@ -88,13 +88,13 @@ void ScriptEditor::_updateTextWriter()
 			_isContinuousActionAllowed = false;
 		}
 
-		if(_hasClickedLMB)
+		if (_hasClickedLMB)
 		{
-			if(!hoveredBillboardID.empty())
+			if (!hoveredBillboardID.empty())
 			{
 				cursorLineIndex = hoveredLineIndex;
 
-				if(hoveredCharacterIndex == -1)
+				if (hoveredCharacterIndex == -1)
 				{
 					cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
 				}
@@ -104,15 +104,15 @@ void ScriptEditor::_updateTextWriter()
 				}
 			}
 		}
-		else if(_activeActionKey == InputType::KEY_ENTER)
+		else if (_activeActionKey == InputType::KEY_ENTER)
 		{
-			if(_firstSelectedLineIndex == -1)
+			if (_firstSelectedLineIndex == -1)
 			{
-				if(_script.getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_COUNT)
+				if (_script.getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_COUNT)
 				{
-					if(_isSingleActionAllowed || _isContinuousActionAllowed)
+					if (_isSingleActionAllowed || _isContinuousActionAllowed)
 					{
-						if(_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
+						if (_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 						{
 							_isSingleActionAllowed = false;
 
@@ -132,21 +132,21 @@ void ScriptEditor::_updateTextWriter()
 				}
 			}
 		}
-		else if(_activeActionKey == InputType::KEY_LEFT)
+		else if (_activeActionKey == InputType::KEY_LEFT)
 		{
-			if(_isSingleActionAllowed || _isContinuousActionAllowed)
+			if (_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
-				if(_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
+				if (_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 				{
 					_isSingleActionAllowed = false;
 
-					if(cursorCharIndex > 0)
+					if (cursorCharIndex > 0)
 					{
 						cursorCharIndex--;
 					}
 					else
 					{
-						if(cursorLineIndex > 0)
+						if (cursorLineIndex > 0)
 						{
 							cursorLineIndex--;
 							cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
@@ -155,21 +155,21 @@ void ScriptEditor::_updateTextWriter()
 				}
 			}
 		}
-		else if(_activeActionKey == InputType::KEY_RIGHT)
+		else if (_activeActionKey == InputType::KEY_RIGHT)
 		{
-			if(_isSingleActionAllowed || _isContinuousActionAllowed)
+			if (_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
-				if(_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
+				if (_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 				{
 					_isSingleActionAllowed = false;
 
-					if(cursorCharIndex < _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size())
+					if (cursorCharIndex < _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size())
 					{
 						cursorCharIndex++;
 					}
 					else
 					{
-						if(cursorLineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
+						if (cursorLineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
 						{
 							cursorLineIndex++;
 							cursorCharIndex = 0;
@@ -178,19 +178,19 @@ void ScriptEditor::_updateTextWriter()
 				}
 			}
 		}
-		else if(_activeActionKey == InputType::KEY_UP)
+		else if (_activeActionKey == InputType::KEY_UP)
 		{
-			if(_isSingleActionAllowed || _isContinuousActionAllowed)
+			if (_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
-				if(_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
+				if (_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 				{
 					_isSingleActionAllowed = false;
 
-					if(cursorLineIndex > 0)
+					if (cursorLineIndex > 0)
 					{
 						cursorLineIndex--;
 
-						if(cursorCharIndex > _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size())
+						if (cursorCharIndex > _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size())
 						{
 							cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
 						}
@@ -198,19 +198,19 @@ void ScriptEditor::_updateTextWriter()
 				}
 			}
 		}
-		else if(_activeActionKey == InputType::KEY_DOWN)
+		else if (_activeActionKey == InputType::KEY_DOWN)
 		{
-			if(_isSingleActionAllowed || _isContinuousActionAllowed)
+			if (_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
-				if(_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
+				if (_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 				{
 					_isSingleActionAllowed = false;
 
-					if(cursorLineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
+					if (cursorLineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
 					{
 						cursorLineIndex++;
 
-						if(cursorCharIndex > _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size())
+						if (cursorCharIndex > _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size())
 						{
 							cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
 						}
@@ -222,23 +222,23 @@ void ScriptEditor::_updateTextWriter()
 		{
 			string currentLineText = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex);
 
-			if(!_fe3d.input_isKeyDown(InputType::KEY_LCTRL) && !_fe3d.input_isKeyDown(InputType::KEY_RCTRL))
+			if (!_fe3d.input_isKeyDown(InputType::KEY_LCTRL) && !_fe3d.input_isKeyDown(InputType::KEY_RCTRL))
 			{
-				for(const auto& c : ALPHABET_CHARACTERS)
+				for (const auto& c : ALPHABET_CHARACTERS)
 				{
-					if(_fe3d.input_isKeyPressed(InputType(c)))
+					if (_fe3d.input_isKeyPressed(InputType(c)))
 					{
-						if(c == ' ')
+						if (c == ' ')
 						{
 							newCharacters += c;
 						}
 						else
 						{
-							if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
+							if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 							{
 								newCharacters += (c - 32);
 							}
-							else if((GetKeyState(VK_CAPITAL) & 0x0001) != 0)
+							else if ((GetKeyState(VK_CAPITAL) & 0x0001) != 0)
 							{
 								newCharacters += (c - 32);
 							}
@@ -250,11 +250,11 @@ void ScriptEditor::_updateTextWriter()
 					}
 				}
 
-				for(const auto& element : NUMBER_CHARACTERS)
+				for (const auto& element : NUMBER_CHARACTERS)
 				{
-					if(_fe3d.input_isKeyPressed(InputType(element.first)))
+					if (_fe3d.input_isKeyPressed(InputType(element.first)))
 					{
-						if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
+						if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 						{
 							newCharacters += element.second;
 						}
@@ -265,11 +265,11 @@ void ScriptEditor::_updateTextWriter()
 					}
 				}
 
-				for(const auto& element : SPECIAL_CHARACTERS)
+				for (const auto& element : SPECIAL_CHARACTERS)
 				{
-					if(_fe3d.input_isKeyPressed(InputType(element.first)))
+					if (_fe3d.input_isKeyPressed(InputType(element.first)))
 					{
-						if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
+						if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 						{
 							newCharacters += element.second;
 						}
@@ -280,25 +280,25 @@ void ScriptEditor::_updateTextWriter()
 					}
 				}
 
-				if(_fe3d.input_isKeyPressed(InputType::KEY_TAB))
+				if (_fe3d.input_isKeyPressed(InputType::KEY_TAB))
 				{
 					newCharacters += "    ";
 				}
 			}
 
-			if(_activeActionKey == InputType::KEY_BACKSPACE || _activeActionKey == InputType::KEY_DELETE)
+			if (_activeActionKey == InputType::KEY_BACKSPACE || _activeActionKey == InputType::KEY_DELETE)
 			{
-				if(_firstSelectedLineIndex == -1)
+				if (_firstSelectedLineIndex == -1)
 				{
-					if(_isSingleActionAllowed || _isContinuousActionAllowed)
+					if (_isSingleActionAllowed || _isContinuousActionAllowed)
 					{
-						if(_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
+						if (_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 						{
 							_isSingleActionAllowed = false;
 
-							if(cursorCharIndex == 0 && _activeActionKey == InputType::KEY_BACKSPACE)
+							if (cursorCharIndex == 0 && _activeActionKey == InputType::KEY_BACKSPACE)
 							{
-								if(cursorLineIndex > 0)
+								if (cursorLineIndex > 0)
 								{
 									string textToMerge = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex);
 									_script.getScriptFile(_currentScriptFileID)->deleteLine(cursorLineIndex);
@@ -306,17 +306,17 @@ void ScriptEditor::_updateTextWriter()
 
 									cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
 									_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex,
-																							 _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex) + textToMerge);
+										_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex) + textToMerge);
 									textHasChanged = true;
 								}
 							}
-							else if(cursorCharIndex == currentLineText.size() && _activeActionKey == InputType::KEY_DELETE)
+							else if (cursorCharIndex == currentLineText.size() && _activeActionKey == InputType::KEY_DELETE)
 							{
-								if(cursorLineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
+								if (cursorLineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
 								{
 									string textToMerge = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex + 1);
 
-									if((currentLineText.size() + textToMerge.size()) <= MAX_CHARACTERS_PER_LINE)
+									if ((currentLineText.size() + textToMerge.size()) <= MAX_CHARACTERS_PER_LINE)
 									{
 										_script.getScriptFile(_currentScriptFileID)->deleteLine(cursorLineIndex + 1);
 
@@ -326,14 +326,14 @@ void ScriptEditor::_updateTextWriter()
 									}
 								}
 							}
-							else if(cursorCharIndex > 0 && _fe3d.input_isKeyDown(InputType::KEY_BACKSPACE))
+							else if (cursorCharIndex > 0 && _fe3d.input_isKeyDown(InputType::KEY_BACKSPACE))
 							{
 								cursorCharIndex--;
 								currentLineText.erase(currentLineText.begin() + cursorCharIndex);
 								textHasChanged = true;
 								_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, currentLineText);
 							}
-							else if(_fe3d.input_isKeyDown(InputType::KEY_DELETE))
+							else if (_fe3d.input_isKeyDown(InputType::KEY_DELETE))
 							{
 								currentLineText.erase(currentLineText.begin() + cursorCharIndex);
 								textHasChanged = true;
@@ -344,15 +344,15 @@ void ScriptEditor::_updateTextWriter()
 				}
 			}
 
-			if(static_cast<unsigned int>(currentLineText.size() + newCharacters.size()) <= MAX_CHARACTERS_PER_LINE)
+			if (static_cast<unsigned int>(currentLineText.size() + newCharacters.size()) <= MAX_CHARACTERS_PER_LINE)
 			{
-				if(_firstSelectedLineIndex == -1)
+				if (_firstSelectedLineIndex == -1)
 				{
-					if(!newCharacters.empty())
+					if (!newCharacters.empty())
 					{
-						if(currentLineText.empty() || cursorCharIndex == currentLineText.size())
+						if (currentLineText.empty() || cursorCharIndex == currentLineText.size())
 						{
-							for(const auto& character : newCharacters)
+							for (const auto& character : newCharacters)
 							{
 								currentLineText += character;
 								cursorCharIndex++;
@@ -360,7 +360,7 @@ void ScriptEditor::_updateTextWriter()
 						}
 						else
 						{
-							for(const auto& character : newCharacters)
+							for (const auto& character : newCharacters)
 							{
 								currentLineText.insert(currentLineText.begin() + cursorCharIndex, character);
 								cursorCharIndex++;
@@ -377,14 +377,14 @@ void ScriptEditor::_updateTextWriter()
 
 		_updateTextSelector(newCharacters, cursorLineIndex, cursorCharIndex, hoveredLineIndex, textHasChanged);
 
-		if(textHasChanged || _hasClickedLMB)
+		if (textHasChanged || _hasClickedLMB)
 		{
 			_reloadScriptTextDisplay(false);
 		}
 
 		static unsigned int passedBarFrames = MAX_PASSED_BAR_FRAMES;
 		static bool barEnabled = true;
-		if(passedBarFrames >= MAX_PASSED_BAR_FRAMES)
+		if (passedBarFrames >= MAX_PASSED_BAR_FRAMES)
 		{
 			passedBarFrames = 0;
 
@@ -395,7 +395,7 @@ void ScriptEditor::_updateTextWriter()
 			passedBarFrames++;
 		}
 
-		if(!_fe3d.billboard_isExisting("cursor"))
+		if (!_fe3d.billboard_isExisting("cursor"))
 		{
 			_fe3d.billboard_create("cursor", false);
 			_fe3d.billboard_setFont("cursor", FONT_PATH);
@@ -403,7 +403,7 @@ void ScriptEditor::_updateTextWriter()
 		}
 
 		fvec3 position;
-		if(cursorCharIndex == 0)
+		if (cursorCharIndex == 0)
 		{
 			fvec3 linePosition = _fe3d.billboard_getPosition(to_string(cursorLineIndex));
 			position = fvec3(SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET - HORIZONTAL_CHARACTER_OFFSET, linePosition.y, linePosition.z);

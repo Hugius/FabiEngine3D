@@ -27,7 +27,7 @@ void BillboardEditor::_updateTexturingMenu()
 			}
 
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\font\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\font_map\\");
 
 			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{

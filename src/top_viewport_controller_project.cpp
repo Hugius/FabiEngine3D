@@ -7,32 +7,32 @@ using std::ofstream;
 
 void TopViewportController::_updateProjectCreating()
 {
-	if(_isCreatingProject)
+	if (_isCreatingProject)
 	{
 		string newProjectID;
 
-		if(_gui.getOverlay()->checkValueForm("newProjectID", newProjectID))
+		if (_gui.getOverlay()->checkValueForm("newProjectID", newProjectID))
 		{
 			const string projectDirectoryPath = (Tools::getRootDirectoryPath() + "projects\\");
 			const string newProjectDirectoryPath = (projectDirectoryPath + newProjectID + "\\");
 
-			if(!Tools::isDirectoryExisting(projectDirectoryPath))
+			if (!Tools::isDirectoryExisting(projectDirectoryPath))
 			{
 				Logger::throwWarning("Directory `projects\\` is missing!");
 				return;
 			}
 
-			if(newProjectID.find(' ') != string::npos)
+			if (newProjectID.find(' ') != string::npos)
 			{
 				Logger::throwWarning("New project name cannot contain any spaces!");
 				return;
 			}
-			else if(Tools::isDirectoryExisting(newProjectDirectoryPath))
+			else if (Tools::isDirectoryExisting(newProjectDirectoryPath))
 			{
 				Logger::throwWarning("Project \"" + newProjectID + "\"" + " already exists!");
 				return;
 			}
-			else if(any_of(newProjectID.begin(), newProjectID.end(), isupper))
+			else if (any_of(newProjectID.begin(), newProjectID.end(), isupper))
 			{
 				Logger::throwWarning("New project name cannot contain any capitals!");
 				return;
@@ -43,7 +43,6 @@ void TopViewportController::_updateProjectCreating()
 
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\audio\\");
-				Tools::createDirectory(newProjectDirectoryPath + "assets\\font\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\mesh\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\blend_map\\");
@@ -53,6 +52,7 @@ void TopViewportController::_updateProjectCreating()
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\dudv_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\emission_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\flare_map\\");
+				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\font_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\height_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\normal_map\\");
 				Tools::createDirectory(newProjectDirectoryPath + "assets\\texture\\reflection_map\\");
@@ -98,14 +98,14 @@ void TopViewportController::_updateProjectCreating()
 
 void TopViewportController::_updateProjectLoading()
 {
-	if(_isLoadingProject)
+	if (_isLoadingProject)
 	{
 		const string clickedButtonID = _gui.getOverlay()->checkChoiceForm("projectList");
 		const string projectDirectoryPath = string(Tools::getRootDirectoryPath() + "projects\\" + clickedButtonID + "\\");
 
-		if(!clickedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if (!clickedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			if(isProjectCorrupted(projectDirectoryPath))
+			if (isProjectCorrupted(projectDirectoryPath))
 			{
 				Logger::throwWarning("Cannot load project: missing files/directories!");
 				return;
@@ -148,7 +148,7 @@ void TopViewportController::_updateProjectLoading()
 			_isLoadingProject = false;
 			_gui.getOverlay()->deleteChoiceForm("projectList");
 		}
-		else if(_gui.getOverlay()->isChoiceFormCancelled("projectList"))
+		else if (_gui.getOverlay()->isChoiceFormCancelled("projectList"))
 		{
 			_isLoadingProject = false;
 			_gui.getOverlay()->deleteChoiceForm("projectList");
@@ -158,33 +158,33 @@ void TopViewportController::_updateProjectLoading()
 
 void TopViewportController::_updateProjectDeleting()
 {
-	if(_isDeletingProject)
+	if (_isDeletingProject)
 	{
 		static string chosenButtonID = "";
 		string clickedButtonID = _gui.getOverlay()->checkChoiceForm("projectList");
 
-		if(!clickedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if (!clickedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			_gui.getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 			chosenButtonID = clickedButtonID;
 			_gui.getOverlay()->deleteChoiceForm("projectList");
 		}
-		else if(_gui.getOverlay()->isChoiceFormCancelled("projectList"))
+		else if (_gui.getOverlay()->isChoiceFormCancelled("projectList"))
 		{
 			_isDeletingProject = false;
 			_gui.getOverlay()->deleteChoiceForm("projectList");
 		}
 
-		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
+		if (_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			if(chosenButtonID == _currentProjectID)
+			if (chosenButtonID == _currentProjectID)
 			{
 				_currentProjectID = "";
 				_applyProjectChange();
 			}
 
 			const string directoryPath = (Tools::getRootDirectoryPath() + "projects\\" + chosenButtonID);
-			if(!Tools::isDirectoryExisting(directoryPath))
+			if (!Tools::isDirectoryExisting(directoryPath))
 			{
 				Logger::throwWarning("Cannot delete project: missing directory!");
 				return;
@@ -197,7 +197,7 @@ void TopViewportController::_updateProjectDeleting()
 			_isDeletingProject = false;
 			chosenButtonID = "";
 		}
-		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
+		if (_gui.getOverlay()->isAnswerFormDenied("delete"))
 		{
 			_isDeletingProject = false;
 			chosenButtonID = "";

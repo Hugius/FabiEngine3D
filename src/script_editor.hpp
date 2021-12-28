@@ -9,17 +9,17 @@ class ScriptEditor final
 {
 public:
 	ScriptEditor(FabiEngine3D& fe3d,
-				 GuiManager& gui,
-				 SkyEditor& skyEditor,
-				 TerrainEditor& terrainEditor,
-				 WaterEditor& waterEditor,
-				 ModelEditor& modelEditor,
-				 BillboardEditor& billboardEditor,
-				 ImageEditor& imageEditor,
-				 Animation2dEditor& animation2dEditor,
-				 Animation3dEditor& animation3dEditor,
-				 SoundEditor& soundEditor,
-				 WorldEditor& worldEditor);
+		GuiManager& gui,
+		SkyEditor& skyEditor,
+		TerrainEditor& terrainEditor,
+		WaterEditor& waterEditor,
+		ModelEditor& modelEditor,
+		BillboardEditor& billboardEditor,
+		ImageEditor& imageEditor,
+		Animation2dEditor& animation2dEditor,
+		Animation3dEditor& animation3dEditor,
+		SoundEditor& soundEditor,
+		WorldEditor& worldEditor);
 
 	void setCurrentProjectID(const string& projectID);
 	void load();
@@ -47,7 +47,7 @@ private:
 	void _reloadScriptTextDisplay(bool reloadAabbs);
 	void _copySelectedText();
 
-	static inline const string FONT_PATH = "engine\\assets\\font\\font.ttf";
+	static inline const string FONT_PATH = "engine\\assets\\texture\\font_map\\font.png";
 	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
 	vector<string> _scriptFileNamesToDelete;
 	vector<string> _copyClipboard;

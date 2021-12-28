@@ -38,12 +38,12 @@ void WaterEditor::load()
 
 	_fe3d.model_create("@@box", "engine\\assets\\mesh\\box.obj");
 	_fe3d.model_setBasePosition("@@box", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
-	_fe3d.model_setDiffuseMap("@@box", "", "engine\\assets\\texture\\box.png");
+	_fe3d.model_setDiffuseMap("@@box", "", "engine\\assets\\texture\\diffuse_map\\box.png");
 	_fe3d.model_setFaceCulled("@@box", true);
 	_fe3d.model_create("@@grid", "engine\\assets\\mesh\\plane.obj");
 	_fe3d.model_setBasePosition("@@grid", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d.model_setBaseSize("@@grid", fvec3(GRID_SIZE, 1.0f, GRID_SIZE));
-	_fe3d.model_setDiffuseMap("@@grid", "", "engine\\assets\\texture\\grid.png");
+	_fe3d.model_setDiffuseMap("@@grid", "", "engine\\assets\\texture\\diffuse_map\\grid.png");
 	_fe3d.model_setTextureRepeat("@@grid", "", GRID_UV);
 	_fe3d.model_setShadowed("@@grid", false);
 
@@ -54,7 +54,7 @@ void WaterEditor::load()
 
 void WaterEditor::unload()
 {
-	for(const auto& ID : _loadedWaterIDs)
+	for (const auto& ID : _loadedWaterIDs)
 	{
 		_fe3d.water_delete(ID);
 	}
@@ -78,7 +78,7 @@ void WaterEditor::unload()
 	_isChoosingWater = false;
 	_isDeletingWater = false;
 
-	if(_fe3d.camera_isThirdPersonViewEnabled())
+	if (_fe3d.camera_isThirdPersonViewEnabled())
 	{
 		_fe3d.camera_disableThirdPersonView();
 	}
@@ -142,43 +142,43 @@ void WaterEditor::_unloadGUI()
 
 void WaterEditor::update()
 {
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateMainMenu();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateChoiceMenu();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateTexturingMenu();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateLightingMenu();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateMiscellaneousMenu();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateWaterCreating();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateWaterChoosing();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateWaterDeleting();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateCamera();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateMiscellaneous();
 	}

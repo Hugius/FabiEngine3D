@@ -10,17 +10,17 @@ EngineController::EngineController()
 	_leftViewportController(*this, _gui),
 	_rightViewportController(*this, _gui),
 	_topViewportController(*this, _gui,
-						   _leftViewportController.getSkyEditor(),
-						   _leftViewportController.getTerrainEditor(),
-						   _leftViewportController.getWaterEditor(),
-						   _leftViewportController.getModelEditor(),
-						   _leftViewportController.getBillboardEditor(),
-						   _leftViewportController.getImageEditor(),
-						   _leftViewportController.getAnimation2dEditor(),
-						   _leftViewportController.getAnimation3dEditor(),
-						   _leftViewportController.getSoundEditor(),
-						   _leftViewportController.getWorldEditor(),
-						   _leftViewportController.getScriptEditor()),
+		_leftViewportController.getSkyEditor(),
+		_leftViewportController.getTerrainEditor(),
+		_leftViewportController.getWaterEditor(),
+		_leftViewportController.getModelEditor(),
+		_leftViewportController.getBillboardEditor(),
+		_leftViewportController.getImageEditor(),
+		_leftViewportController.getAnimation2dEditor(),
+		_leftViewportController.getAnimation3dEditor(),
+		_leftViewportController.getSoundEditor(),
+		_leftViewportController.getWorldEditor(),
+		_leftViewportController.getScriptEditor()),
 	_bottomViewportController(*this, _gui, _topViewportController, _leftViewportController.getScriptEditor())
 {
 
@@ -29,12 +29,13 @@ EngineController::EngineController()
 void EngineController::FE3D_CONTROLLER_INIT()
 {
 	const string meshDirectoryPath = "engine\\assets\\mesh\\";
-	const string textureDirectoryPath = "engine\\assets\\texture\\";
-	const string fontDirectoryPath = "engine\\assets\\font\\";
+	const string cubeMapDirectoryPath = "engine\\assets\\texture\\cube_map\\";
+	const string diffuseMapDirectoryPath = "engine\\assets\\texture\\diffuse_map\\";
+	const string fontMapDirectoryPath = "engine\\assets\\texture\\font_map\\";
 
-	if(Config::getInst().isApplicationExported())
+	if (Config::getInst().isApplicationExported())
 	{
-		if(_topViewportController.isProjectCorrupted(Tools::getRootDirectoryPath()))
+		if (_topViewportController.isProjectCorrupted(Tools::getRootDirectoryPath()))
 		{
 			Logger::throwFatalWarning("Cannot load application: missing files/directories!");
 		}
@@ -44,7 +45,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		_leftViewportController.getScriptEditor().loadScriptFiles(true);
 		_leftViewportController.getScriptEditor().getScriptExecutor().load();
 
-		if(!_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
+		if (!_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
 		{
 			application_stop();
 			_mustPromptOnExit = true;
@@ -62,42 +63,39 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		misc_cacheMeshes(meshPaths);
 
 		vector<string> texturePaths2D;
-		texturePaths2D.push_back(textureDirectoryPath + "box.png");
-		texturePaths2D.push_back(textureDirectoryPath + "color.png");
-		texturePaths2D.push_back(textureDirectoryPath + "cursor_default.png");
-		texturePaths2D.push_back(textureDirectoryPath + "cursor_pointing.png");
-		texturePaths2D.push_back(textureDirectoryPath + "cursor_text.png");
-		texturePaths2D.push_back(textureDirectoryPath + "debug.png");
-		texturePaths2D.push_back(textureDirectoryPath + "grid.png");
-		texturePaths2D.push_back(textureDirectoryPath + "light_source.png");
-		texturePaths2D.push_back(textureDirectoryPath + "logo.png");
-		texturePaths2D.push_back(textureDirectoryPath + "minus.png");
-		texturePaths2D.push_back(textureDirectoryPath + "pause.png");
-		texturePaths2D.push_back(textureDirectoryPath + "plus.png");
-		texturePaths2D.push_back(textureDirectoryPath + "position.png");
-		texturePaths2D.push_back(textureDirectoryPath + "radius.png");
-		texturePaths2D.push_back(textureDirectoryPath + "restart.png");
-		texturePaths2D.push_back(textureDirectoryPath + "rotation.png");
-		texturePaths2D.push_back(textureDirectoryPath + "settings.png");
-		texturePaths2D.push_back(textureDirectoryPath + "shape_circle.png");
-		texturePaths2D.push_back(textureDirectoryPath + "shape_square.png");
-		texturePaths2D.push_back(textureDirectoryPath + "size.png");
-		texturePaths2D.push_back(textureDirectoryPath + "start.png");
-		texturePaths2D.push_back(textureDirectoryPath + "stop.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "box.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "color.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "cursor_default.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "cursor_pointing.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "cursor_text.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "debug.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "grid.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "light_source.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "logo.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "minus.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "pause.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "plus.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "position.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "radius.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "restart.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "rotation.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "settings.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "shape_circle.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "shape_square.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "size.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "start.png");
+		texturePaths2D.push_back(diffuseMapDirectoryPath + "stop.png");
+		texturePaths2D.push_back(fontMapDirectoryPath + "font.png");
 		misc_cache2dTextures(texturePaths2D);
 
 		array<string, 6> texturePaths3D;
-		texturePaths3D[0] = string(textureDirectoryPath + "background_right.png");
-		texturePaths3D[1] = string(textureDirectoryPath + "background_left.png");
-		texturePaths3D[2] = string(textureDirectoryPath + "background_top.png");
-		texturePaths3D[3] = string(textureDirectoryPath + "background_bottom.png");
-		texturePaths3D[4] = string(textureDirectoryPath + "background_back.png");
-		texturePaths3D[5] = string(textureDirectoryPath + "background_front.png");
-		misc_cache3dTextures({texturePaths3D});
-
-		vector<string> fontPaths;
-		fontPaths.push_back(fontDirectoryPath + "font.ttf");
-		misc_cacheFonts(fontPaths);
+		texturePaths3D[0] = string(cubeMapDirectoryPath + "background_right.png");
+		texturePaths3D[1] = string(cubeMapDirectoryPath + "background_left.png");
+		texturePaths3D[2] = string(cubeMapDirectoryPath + "background_top.png");
+		texturePaths3D[3] = string(cubeMapDirectoryPath + "background_bottom.png");
+		texturePaths3D[4] = string(cubeMapDirectoryPath + "background_back.png");
+		texturePaths3D[5] = string(cubeMapDirectoryPath + "background_front.png");
+		misc_cache3dTextures({ texturePaths3D });
 
 		Tools::setRenderColor(RENDER_COLOR);
 
@@ -106,7 +104,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 		image_create("@@cursor", true);
 		image_setSize("@@cursor", fvec2(CURSOR_IMAGE_SIZE, (CURSOR_IMAGE_SIZE * Tools::getWindowAspectRatio())));
-		image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_default.png");
+		image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\diffuse_map\\cursor_default.png");
 		misc_setCursorEntityID("@@cursor");
 		misc_setCursorVisible(false);
 
@@ -121,9 +119,9 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 void EngineController::FE3D_CONTROLLER_UPDATE()
 {
-	if(Config::getInst().isApplicationExported())
+	if (Config::getInst().isApplicationExported())
 	{
-		if(_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
+		if (_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
 		{
 			_leftViewportController.getAnimation2dEditor().update();
 			_leftViewportController.getAnimation3dEditor().update();
@@ -140,7 +138,7 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 	{
 		static string lastScreen = "";
 		string activeScreen = _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID();
-		if(activeScreen == "main" && lastScreen != "main")
+		if (activeScreen == "main" && lastScreen != "main")
 		{
 			Tools::setRenderColor(RENDER_COLOR);
 
@@ -153,7 +151,7 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 		sky_setRotation("@@background", sky_getRotation("@@background") + 0.0025f);
 
 		image_setPosition("@@cursor", Math::convertToNDC(Tools::convertFromScreenCoords(misc_getCursorPosition())));
-		image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\cursor_default.png");
+		image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\diffuse_map\\cursor_default.png");
 		image_setVisible("@@cursor", misc_isCursorInsideWindow());
 
 		_gui.update();
@@ -167,9 +165,9 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 
 void EngineController::FE3D_CONTROLLER_TERMINATE()
 {
-	if(Config::getInst().isApplicationExported())
+	if (Config::getInst().isApplicationExported())
 	{
-		if(_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
+		if (_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
 		{
 			_leftViewportController.getScriptEditor().getScriptExecutor().unload();
 		}

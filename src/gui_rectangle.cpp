@@ -29,7 +29,7 @@ GuiRectangle::GuiRectangle(FabiEngine3D& fe3d, const string& parentID, const str
 	_fe3d.image_create(_entityID, isCentered);
 	_fe3d.image_setPosition(_entityID, position);
 	_fe3d.image_setSize(_entityID, size);
-	_fe3d.image_setDiffuseMap(_entityID, ("engine\\assets\\texture\\" + texturePath));
+	_fe3d.image_setDiffuseMap(_entityID, ("engine\\assets\\texture\\diffuse_map\\" + texturePath));
 }
 
 GuiRectangle::~GuiRectangle()

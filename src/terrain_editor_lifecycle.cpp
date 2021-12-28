@@ -38,12 +38,12 @@ void TerrainEditor::load()
 
 	_fe3d.model_create("@@box", "engine\\assets\\mesh\\box.obj");
 	_fe3d.model_setBasePosition("@@box", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
-	_fe3d.model_setDiffuseMap("@@box", "", "engine\\assets\\texture\\box.png");
+	_fe3d.model_setDiffuseMap("@@box", "", "engine\\assets\\texture\\diffuse_map\\box.png");
 	_fe3d.model_setFaceCulled("@@box", true);
 	_fe3d.model_create("@@grid", "engine\\assets\\mesh\\plane.obj");
 	_fe3d.model_setBasePosition("@@grid", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d.model_setBaseSize("@@grid", fvec3(GRID_SIZE, 1.0f, GRID_SIZE));
-	_fe3d.model_setDiffuseMap("@@grid", "", "engine\\assets\\texture\\grid.png");
+	_fe3d.model_setDiffuseMap("@@grid", "", "engine\\assets\\texture\\diffuse_map\\grid.png");
 	_fe3d.model_setTextureRepeat("@@grid", "", GRID_UV);
 	_fe3d.model_setShadowed("@@grid", false);
 
@@ -54,7 +54,7 @@ void TerrainEditor::load()
 
 void TerrainEditor::unload()
 {
-	for(const auto& ID : _loadedTerrainIDs)
+	for (const auto& ID : _loadedTerrainIDs)
 	{
 		_fe3d.terrain_delete(ID);
 	}
@@ -78,7 +78,7 @@ void TerrainEditor::unload()
 	_isChoosingTerrain = false;
 	_isDeletingTerrain = false;
 
-	if(_fe3d.camera_isThirdPersonViewEnabled())
+	if (_fe3d.camera_isThirdPersonViewEnabled())
 	{
 		_fe3d.camera_disableThirdPersonView();
 	}
@@ -159,51 +159,51 @@ void TerrainEditor::_unloadGUI()
 
 void TerrainEditor::update()
 {
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateMainMenu();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateChoiceMenu();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateDiffuseMapMenu();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateNormalMapMenu();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateBlendMapMenu();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateLightingMenu();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateMiscellaneousMenu();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateTerrainCreating();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateTerrainChoosing();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateTerrainDeleting();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateCamera();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateMiscellaneous();
 	}

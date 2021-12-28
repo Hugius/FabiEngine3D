@@ -52,12 +52,12 @@ void ModelEditor::load()
 
 	_fe3d.model_create("@@box", "engine\\assets\\mesh\\box.obj");
 	_fe3d.model_setBasePosition("@@box", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
-	_fe3d.model_setDiffuseMap("@@box", "", "engine\\assets\\texture\\box.png");
+	_fe3d.model_setDiffuseMap("@@box", "", "engine\\assets\\texture\\diffuse_map\\box.png");
 	_fe3d.model_setFaceCulled("@@box", true);
 	_fe3d.model_create("@@grid", "engine\\assets\\mesh\\plane.obj");
 	_fe3d.model_setBasePosition("@@grid", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d.model_setBaseSize("@@grid", fvec3(GRID_SIZE, 1.0f, GRID_SIZE));
-	_fe3d.model_setDiffuseMap("@@grid", "", "engine\\assets\\texture\\grid.png");
+	_fe3d.model_setDiffuseMap("@@grid", "", "engine\\assets\\texture\\diffuse_map\\grid.png");
 	_fe3d.model_setTextureRepeat("@@grid", "", GRID_UV);
 	_fe3d.model_setShadowed("@@grid", false);
 
@@ -73,14 +73,14 @@ void ModelEditor::load()
 
 void ModelEditor::unload()
 {
-	for(const auto& ID : _loadedModelIDs)
+	for (const auto& ID : _loadedModelIDs)
 	{
 		_fe3d.model_delete(ID);
 	}
 
 	_unloadGUI();
 
-	if(_fe3d.camera_isThirdPersonViewEnabled())
+	if (_fe3d.camera_isThirdPersonViewEnabled())
 	{
 		_fe3d.camera_disableThirdPersonView();
 	}
@@ -117,7 +117,7 @@ void ModelEditor::unload()
 	_isDeletingAabb = false;
 	_isEditorLoaded = false;
 
-	if(_fe3d.misc_isAabbFrameRenderingEnabled())
+	if (_fe3d.misc_isAabbFrameRenderingEnabled())
 	{
 		_fe3d.misc_disableAabbFrameRendering();
 	}
@@ -201,67 +201,67 @@ void ModelEditor::_unloadGUI()
 
 void ModelEditor::update()
 {
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateMainMenu();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateChoiceMenu();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateTexturingMenu();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateLightingMenu();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateMiscellaneousMenu();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateMainAabbMenu();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateChoiceAabbMenu();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateModelCreating();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateModelChoosing();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateModelDeleting();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updatePartChoosing();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateAabbCreating();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateAabbChoosing();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateAabbDeleting();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateCamera();
 	}
-	if(_isEditorLoaded)
+	if (_isEditorLoaded)
 	{
 		_updateMiscellaneous();
 	}

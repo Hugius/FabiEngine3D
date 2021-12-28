@@ -3,7 +3,7 @@
 #include "render_bus.hpp"
 #include "render_utils.hpp"
 
-#include <SDL\\SDL_ttf.h>
+#include <SDL/SDL.h>
 #include <array>
 #include <vector>
 #include <map>
@@ -52,9 +52,7 @@ private:
 	vector<float> _loadBitmap(const string& filePath);
 
 	SDL_Surface* _loadSurface(const string& filePath);
-	TTF_Font* _loadFont(const string& filePath);
 	TextureID _convertInto2dTexture(SDL_Surface* surface, const string& filePath, bool isMipmapped, bool isAnisotropic);
-	TextureID _convertInto2dTexture(TTF_Font* font, const string& textContent);
 	TextureID _convertInto3dTexture(const array<SDL_Surface*, 6>& surfaces, const array<string, 6>& filePaths);
 
 	map<string, vector<float>> _bitmapCache;

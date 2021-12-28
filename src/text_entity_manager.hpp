@@ -23,8 +23,7 @@ public:
 	shared_ptr<TextEntity> getEntity(const string& ID);
 
 private:
-	const shared_ptr<RenderBuffer> _centeredRenderBuffer;
-	const shared_ptr<RenderBuffer> _corneredRenderBuffer;
+	const shared_ptr<RenderBuffer> _renderBuffer;
 	unordered_map<string, shared_ptr<TextEntity>> _entities;
 	TextureLoader& _textureLoader;
 	RenderBus& _renderBus;

@@ -20,9 +20,6 @@ void TextEntity::setContent(const string& value, TextureLoader& textureLoader)
 			string characterString = "";
 			characterString += c;
 
-			auto newCharacter = make_shared<ImageEntity>("dummy");
-			newCharacter->setRenderBuffer(_renderBuffer);
-
 			auto texture = textureLoader.load2dTexture(characterString, _fontPath);
 
 			if (texture == 0)
@@ -30,8 +27,9 @@ void TextEntity::setContent(const string& value, TextureLoader& textureLoader)
 				break;
 			}
 
+			auto newCharacter = make_shared<ImageEntity>("dummy");
+			newCharacter->setRenderBuffer(_renderBuffer);
 			newCharacter->setDiffuseMap(texture);
-			newCharacter->setDepth(_depth);
 
 			_characterEntities.push_back(newCharacter);
 		}
@@ -55,24 +53,26 @@ const string& TextEntity::getFontPath() const
 
 void TextEntity::updateCharacterEntities()
 {
-	float xCharSize = (this->getSize().x / static_cast<float>(this->_content.size()));
-	float yCharSize = this->getSize().y;
+	auto characterSize = fvec2((this->getSize().x / static_cast<float>(this->_content.size())), this->getSize().y);
 	unsigned int index = 0;
 
 	for (const auto& character : _characterEntities)
 	{
-		float xCharOffset = static_cast<float>(index) * xCharSize;
-		float yCharOffset = 0.0f;
-
 		if (_isCentered)
 		{
-			xCharOffset -= (this->getSize().x / 2.0f);
-			yCharOffset -= (yCharSize / 2.0f);
+			auto offset = fvec2((static_cast<float>(index) * characterSize.x), 0.0f);
+			offset.x -= (this->getSize().x / 2.0f);
+			offset.y -= (characterSize.y / 2.0f);
+			character->setPosition(_position + offset);
+		}
+		else
+		{
+			auto offset = fvec2((static_cast<float>(index) * characterSize.x), 0.0f);
+			character->setPosition(_position + offset);
 		}
 
-		character->setPosition(_position + fvec2(xCharOffset, yCharOffset));
 		character->setRotation(_rotation);
-		character->setSize(fvec2(xCharSize, yCharSize));
+		character->setSize(characterSize);
 		character->setColor(_color);
 		character->setMirroredHorizontally(_isMirroredHorizontally);
 		character->setMirroredVertically(_isMirroredVertically);
@@ -80,6 +80,12 @@ void TextEntity::updateCharacterEntities()
 		character->setMinPosition(_minPosition);
 		character->setMaxPosition(_maxPosition);
 		character->setVisible(_isVisible);
+		character->setRenderBuffer(_renderBuffer);
+		character->setCentered(_isCentered);
+		character->setDepth(_depth);
+		character->setDiffuseMap(_diffuseMap);
+		character->setDiffuseMapPath(_diffuseMapPath);
+		character->setWireframed(_isWireframed);
 
 		if (_isVisible)
 		{

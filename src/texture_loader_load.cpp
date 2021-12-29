@@ -8,17 +8,17 @@ using std::launch;
 
 const TextureID TextureLoader::load2dTexture(const string& filePath, bool isMipmapped, bool isAnisotropic)
 {
-	BEGIN:;
+BEGIN:;
 	auto cacheIterator = _2dTextureCache.find(filePath);
 
-	if(cacheIterator != _2dTextureCache.end())
+	if (cacheIterator != _2dTextureCache.end())
 	{
 		return cacheIterator->second;
 	}
 
 	auto loadedSurface = _loadSurface(filePath);
 
-	if(loadedSurface == nullptr)
+	if (loadedSurface == nullptr)
 	{
 		Logger::throwWarning("Cannot load image: \"" + filePath + "\"!");
 		return 0;
@@ -29,7 +29,7 @@ const TextureID TextureLoader::load2dTexture(const string& filePath, bool isMipm
 
 		SDL_FreeSurface(loadedSurface);
 
-		if(loadedTexture == 0)
+		if (loadedTexture == 0)
 		{
 			return 0;
 		}
@@ -44,10 +44,10 @@ const TextureID TextureLoader::load2dTexture(const string& filePath, bool isMipm
 
 const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 {
-	BEGIN:;
+BEGIN:;
 	auto cacheIterator = _3dTextureCache.find(filePaths);
 
-	if(cacheIterator != _3dTextureCache.end())
+	if (cacheIterator != _3dTextureCache.end())
 	{
 		return cacheIterator->second;
 	}
@@ -55,16 +55,16 @@ const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 	vector<future<SDL_Surface*>> threads;
 	array<SDL_Surface*, 6> loadedSurfaces = {};
 
-	for(size_t i = 0; i < filePaths.size(); i++)
+	for (size_t i = 0; i < filePaths.size(); i++)
 	{
 		threads.push_back(async(launch::async, &TextureLoader::_loadSurface, this, filePaths[i]));
 	}
 
-	for(size_t i = 0; i < threads.size(); i++)
+	for (size_t i = 0; i < threads.size(); i++)
 	{
 		loadedSurfaces[i] = threads[i].get();
 
-		if((loadedSurfaces[i] == nullptr) && !filePaths[i].empty())
+		if ((loadedSurfaces[i] == nullptr) && !filePaths[i].empty())
 		{
 			Logger::throwWarning("Cannot load image: \"" + filePaths[i] + "\"!");
 		}
@@ -72,15 +72,15 @@ const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 
 	TextureID loadedTexture = _convertInto3dTexture(loadedSurfaces, filePaths);
 
-	for(const auto& surface : loadedSurfaces)
+	for (const auto& surface : loadedSurfaces)
 	{
-		if(surface != nullptr)
+		if (surface != nullptr)
 		{
 			SDL_FreeSurface(surface);
 		}
 	}
 
-	if(loadedTexture == 0)
+	if (loadedTexture == 0)
 	{
 		return 0;
 	}
@@ -94,17 +94,17 @@ const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 
 const vector<float>* TextureLoader::loadBitmap(const string& filePath)
 {
-	BEGIN:;
+BEGIN:;
 	auto cacheIterator = _bitmapCache.find(filePath);
 
-	if(cacheIterator != _bitmapCache.end())
+	if (cacheIterator != _bitmapCache.end())
 	{
 		return &cacheIterator->second;
 	}
 
 	auto loadedBitmap = _loadBitmap(filePath);
 
-	if(loadedBitmap.empty())
+	if (loadedBitmap.empty())
 	{
 		Logger::throwWarning("Cannot load bitmap: \"" + filePath + "\"!");
 		return nullptr;
@@ -114,55 +114,6 @@ const vector<float>* TextureLoader::loadBitmap(const string& filePath)
 		_bitmapCache.insert(make_pair(filePath, loadedBitmap));
 
 		Logger::throwInfo("Loaded bitmap: \"" + filePath + "\"");
-
-		goto BEGIN;
-	}
-}
-
-const TextureID TextureLoader::load2dTexture(const string& textContent, const string& fontPath)
-{
-	BEGIN:;
-	TTF_Font* font = nullptr;
-
-	auto textCacheIterator = _textCache.find(make_pair(textContent, fontPath));
-
-	if(textCacheIterator != _textCache.end())
-	{
-		return textCacheIterator->second;
-	}
-
-	auto fontCacheIterator = _fontCache.find(fontPath);
-
-	if(fontCacheIterator == _fontCache.end())
-	{
-		font = _loadFont(fontPath);
-
-		if(font == nullptr)
-		{
-			Logger::throwWarning("Cannot load font: \"" + fontPath + "\"!");
-			return 0;
-		}
-		else
-		{
-			_fontCache.insert(make_pair(fontPath, font));
-
-			Logger::throwInfo("Loaded font: \"" + fontPath + "\"");
-		}
-	}
-	else
-	{
-		font = fontCacheIterator->second;
-	}
-
-	TextureID loadedTexture = _convertInto2dTexture(font, textContent);
-
-	if(loadedTexture == 0)
-	{
-		return 0;
-	}
-	else
-	{
-		_textCache.insert(make_pair(make_pair(textContent, fontPath), loadedTexture));
 
 		goto BEGIN;
 	}

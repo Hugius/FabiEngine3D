@@ -217,7 +217,7 @@ void FabiEngine3D::billboard_setFont(const string& ID, const string& value)
 	auto textContent = entity->getTextContent();
 	if (!textContent.empty())
 	{
-		entity->setDiffuseMap(_core->_textureLoader.load2dTexture(textContent, value), true);
+		//entity->setDiffuseMap(_core->_textureLoader.load2dTexture(textContent, value), true);
 	}
 }
 
@@ -236,6 +236,6 @@ void FabiEngine3D::billboard_setTextContent(const string& ID, const string& valu
 	{
 		entity->setTextContent(value);
 
-		entity->setDiffuseMap(_core->_textureLoader.load2dTexture(value, fontPath), true);
+		//entity->setDiffuseMap(_core->_textureLoader.load2dTexture(value, fontPath), true);
 	}
 }

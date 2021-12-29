@@ -21,25 +21,20 @@ void FabiEngine3D::text_setVisible(const string& ID, bool value)
 	_core->_textEntityManager.getEntity(ID)->setVisible(value);
 }
 
-void FabiEngine3D::text_setFont(const string& ID, const string& value)
+void FabiEngine3D::text_setFontMap(const string& ID, const string& value)
 {
 	auto entity = _core->_textEntityManager.getEntity(ID);
 
-	entity->setFontPath(value);
-
-	auto content = entity->getContent();
-	if (!content.empty())
-	{
-		entity->setDiffuseMap(_core->_textureLoader.load2dTexture(value, true, true));
-	}
+	entity->setFontMapPath(value);
+	entity->setFontMap(_core->_textureLoader.load2dTexture(value, true, true));
 }
 
 void FabiEngine3D::text_setContent(const string& ID, const string& value, float charWidth, float charHeight)
 {
 	auto entity = _core->_textEntityManager.getEntity(ID);
 
-	auto fontPath = entity->getFontPath();
-	if (fontPath.empty())
+	auto fontMapPath = entity->getFontMapPath();
+	if (fontMapPath.empty())
 	{
 		Logger::throwWarning("Tried to set text content of text with ID \"" + ID + "\": no font loaded!");
 		return;

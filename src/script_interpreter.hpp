@@ -20,17 +20,17 @@ class ScriptInterpreter final
 {
 public:
 	ScriptInterpreter(FabiEngine3D& fe3d,
-					  Script& script,
-					  SkyEditor& skyEditor,
-					  TerrainEditor& terrainEditor,
-					  WaterEditor& waterEditor,
-					  ModelEditor& modelEditor,
-					  BillboardEditor& billboardEditor,
-					  ImageEditor& imageEditor,
-					  Animation2dEditor& animation2dEditor,
-					  Animation3dEditor& animation3dEditor,
-					  SoundEditor& soundEditor,
-					  WorldEditor& worldEditor);
+		Script& script,
+		SkyEditor& skyEditor,
+		TerrainEditor& terrainEditor,
+		WaterEditor& waterEditor,
+		ModelEditor& modelEditor,
+		BillboardEditor& billboardEditor,
+		ImageEditor& imageEditor,
+		Animation2dEditor& animation2dEditor,
+		Animation3dEditor& animation3dEditor,
+		SoundEditor& soundEditor,
+		WorldEditor& worldEditor);
 
 	void setCurrentProjectID(const string& projectID);
 	void load();
@@ -336,6 +336,6 @@ private:
 	{
 		{"BUTTON_LEFT", InputType::MOUSE_BUTTON_LEFT},
 		{"BUTTON_MIDDLE", InputType::MOUSE_BUTTON_MIDDLE},
-		{"BUTTON_RIGHT", InputType::MOUSE_BUTTON_RIGHT},
+		{"BUTTON_RIGHT", InputType::MOUSE_BUTTON_RIGHT}
 	};
 };

@@ -83,7 +83,7 @@ const vector<string> FabiEngine3D::text_getIDs() const
 	return result;
 }
 
-const string& FabiEngine3D::text_getFontPath(const string& ID) const
+const string& FabiEngine3D::text_getFontMapPath(const string& ID) const
 {
-	return _core->_textEntityManager.getEntity(ID)->getFontPath();
+	return _core->_textEntityManager.getEntity(ID)->getFontMapPath();
 }

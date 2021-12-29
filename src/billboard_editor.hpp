@@ -14,7 +14,6 @@ public:
 	void update();
 
 	const vector<string> getTexturePathsFromFile() const;
-	const vector<string> getFontPathsFromFile() const;
 	const vector<string>& getLoadedIDs();
 
 	const bool loadFromFile();

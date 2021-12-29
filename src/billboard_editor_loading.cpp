@@ -11,7 +11,7 @@ using std::istringstream;
 
 const vector<string> BillboardEditor::getTexturePathsFromFile() const
 {
-	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
+	if (!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("BillboardEditor::getTexturePathsFromFile");
 	}
@@ -20,7 +20,7 @@ const vector<string> BillboardEditor::getTexturePathsFromFile() const
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\billboard.fe3d");
 
-	if(!Tools::isFileExisting(filePath))
+	if (!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project corrupted: file `billboard.fe3d` missing!");
 		return {};
@@ -30,7 +30,7 @@ const vector<string> BillboardEditor::getTexturePathsFromFile() const
 
 	vector<string> texturePaths;
 	string line;
-	while(getline(file, line))
+	while (getline(file, line))
 	{
 		string billboardID, diffuseMapPath, emissionMapPath;
 		fvec2 size;
@@ -57,9 +57,9 @@ const vector<string> BillboardEditor::getTexturePathsFromFile() const
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 
-		if(!diffuseMapPath.empty())
+		if (!diffuseMapPath.empty())
 		{
-			if(!Config::getInst().isApplicationExported())
+			if (!Config::getInst().isApplicationExported())
 			{
 				diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 			}
@@ -67,9 +67,9 @@ const vector<string> BillboardEditor::getTexturePathsFromFile() const
 			texturePaths.push_back(diffuseMapPath);
 		}
 
-		if(!emissionMapPath.empty())
+		if (!emissionMapPath.empty())
 		{
-			if(!Config::getInst().isApplicationExported())
+			if (!Config::getInst().isApplicationExported())
 			{
 				emissionMapPath = string("projects\\" + _currentProjectID + "\\" + emissionMapPath);
 			}
@@ -83,73 +83,9 @@ const vector<string> BillboardEditor::getTexturePathsFromFile() const
 	return texturePaths;
 }
 
-const vector<string> BillboardEditor::getFontPathsFromFile() const
-{
-	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
-	{
-		Logger::throwError("BillboardEditor::getFontPathsFromFile");
-	}
-
-	const auto isExported = Config::getInst().isApplicationExported();
-	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\billboard.fe3d");
-
-	if(!Tools::isFileExisting(filePath))
-	{
-		Logger::throwWarning("Project corrupted: file `billboard.fe3d` missing!");
-		return {};
-	}
-
-	ifstream file(filePath);
-
-	vector<string> fontPaths;
-	string line;
-	while(getline(file, line))
-	{
-		string billboardID, diffuseMapPath, fontPath;
-		fvec2 size;
-		fvec3 color;
-		bool facingX, facingY, isReflected, isShadowed;
-
-		istringstream iss(line);
-
-		iss >>
-			billboardID >>
-			size.x >>
-			size.y >>
-			color.r >>
-			color.g >>
-			color.b >>
-			facingX >>
-			facingY >>
-			diffuseMapPath >>
-			isReflected >>
-			isShadowed >>
-			fontPath;
-
-		fontPath = (fontPath == "?") ? "" : fontPath;
-
-		replace(fontPath.begin(), fontPath.end(), '?', ' ');
-
-		if(!fontPath.empty())
-		{
-			if(!Config::getInst().isApplicationExported())
-			{
-				fontPath = string("projects\\" + _currentProjectID + "\\" + fontPath);
-			}
-
-			fontPaths.push_back(fontPath);
-		}
-	}
-
-	file.close();
-
-	return fontPaths;
-}
-
 const bool BillboardEditor::loadFromFile()
 {
-	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
+	if (!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
 		Logger::throwError("BillboardEditor::loadFromFile");
 	}
@@ -160,7 +96,7 @@ const bool BillboardEditor::loadFromFile()
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\billboard.fe3d");
 
-	if(!Tools::isFileExisting(filePath))
+	if (!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project corrupted: file `billboard.fe3d` missing!");
 		return false;
@@ -169,9 +105,9 @@ const bool BillboardEditor::loadFromFile()
 	ifstream file(filePath);
 
 	string line;
-	while(getline(file, line))
+	while (getline(file, line))
 	{
-		string billboardID, diffuseMapPath, emissionMapPath, fontPath, textContent;
+		string billboardID, diffuseMapPath, emissionMapPath, fontMapPath, textContent;
 		fvec2 size;
 		fvec3 color;
 		float lightness, textureRepeat;
@@ -192,30 +128,30 @@ const bool BillboardEditor::loadFromFile()
 			emissionMapPath >>
 			isReflected >>
 			isShadowed >>
-			fontPath >>
+			fontMapPath >>
 			textContent >>
 			lightness >>
 			textureRepeat;
 
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 		emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
-		fontPath = (fontPath == "?") ? "" : fontPath;
+		fontMapPath = (fontMapPath == "?") ? "" : fontMapPath;
 		textContent = (textContent == "?") ? "" : textContent;
 
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
-		replace(fontPath.begin(), fontPath.end(), '?', ' ');
+		replace(fontMapPath.begin(), fontMapPath.end(), '?', ' ');
 		replace(textContent.begin(), textContent.end(), '?', ' ');
 
 		_fe3d.billboard_create(billboardID, false);
 
-		if(_fe3d.billboard_isExisting(billboardID))
+		if (_fe3d.billboard_isExisting(billboardID))
 		{
 			_loadedBillboardIDs.push_back(billboardID);
 
-			if(!diffuseMapPath.empty())
+			if (!diffuseMapPath.empty())
 			{
-				if(!Config::getInst().isApplicationExported())
+				if (!Config::getInst().isApplicationExported())
 				{
 					diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 				}
@@ -223,9 +159,9 @@ const bool BillboardEditor::loadFromFile()
 				_fe3d.billboard_setDiffuseMap(billboardID, diffuseMapPath);
 			}
 
-			if(!emissionMapPath.empty())
+			if (!emissionMapPath.empty())
 			{
-				if(!Config::getInst().isApplicationExported())
+				if (!Config::getInst().isApplicationExported())
 				{
 					emissionMapPath = string("projects\\" + _currentProjectID + "\\" + emissionMapPath);
 				}
@@ -233,14 +169,14 @@ const bool BillboardEditor::loadFromFile()
 				_fe3d.billboard_setEmissionMap(billboardID, emissionMapPath);
 			}
 
-			if(!fontPath.empty())
+			if (!fontMapPath.empty())
 			{
-				if(!Config::getInst().isApplicationExported())
+				if (!Config::getInst().isApplicationExported())
 				{
-					fontPath = string("projects\\" + _currentProjectID + "\\" + fontPath);
+					fontMapPath = string("projects\\" + _currentProjectID + "\\" + fontMapPath);
 				}
 
-				_fe3d.billboard_setFont(billboardID, fontPath);
+				_fe3d.billboard_setFont(billboardID, fontMapPath);
 				_fe3d.billboard_setTextContent(billboardID, textContent);
 			}
 

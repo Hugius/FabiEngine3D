@@ -9,8 +9,8 @@ uniform mat4 u_viewMatrix;
 uniform mat4 u_projectionMatrix;
 
 uniform vec4 u_clippingPlane;
-uniform vec2 u_adderUV;
 uniform vec2 u_multiplierUV;
+uniform vec2 u_adderUV;
 
 uniform float u_minHeight;
 uniform float u_maxHeight;

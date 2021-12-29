@@ -121,7 +121,6 @@ void TopViewportController::_updateProjectLoading()
 			auto modelMeshPaths = _modelEditor.getMeshPathsFromFile();
 			auto modelTexturePaths = _modelEditor.getTexturePathsFromFile();
 			auto billboardTexturePaths = _billboardEditor.getTexturePathsFromFile();
-			auto billboardFontPaths = _billboardEditor.getFontPathsFromFile();
 			auto imageTexturePaths = _imageEditor.getTexturePathsFromFile();
 			auto audioPaths = _soundEditor.getAudioPathsFromFile();
 
@@ -138,8 +137,6 @@ void TopViewportController::_updateProjectLoading()
 			_fe3d.misc_cache3dTextures(skyTexturePaths);
 
 			_fe3d.misc_cacheBitmaps(terrainBitmapPaths);
-
-			_fe3d.misc_cacheFonts(billboardFontPaths);
 
 			_fe3d.misc_cacheAudios(audioPaths);
 

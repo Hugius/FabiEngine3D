@@ -7,17 +7,17 @@
 using std::istringstream;
 
 ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d,
-									 Script& script,
-									 SkyEditor& skyEditor,
-									 TerrainEditor& terrainEditor,
-									 WaterEditor& waterEditor,
-									 ModelEditor& modelEditor,
-									 BillboardEditor& billboardEditor,
-									 ImageEditor& imageEditor,
-									 Animation2dEditor& animation2dEditor,
-									 Animation3dEditor& animation3dEditor,
-									 SoundEditor& soundEditor,
-									 WorldEditor& worldEditor)
+	Script& script,
+	SkyEditor& skyEditor,
+	TerrainEditor& terrainEditor,
+	WaterEditor& waterEditor,
+	ModelEditor& modelEditor,
+	BillboardEditor& billboardEditor,
+	ImageEditor& imageEditor,
+	Animation2dEditor& animation2dEditor,
+	Animation3dEditor& animation3dEditor,
+	SoundEditor& soundEditor,
+	WorldEditor& worldEditor)
 	:
 	_fe3d(fe3d),
 	_script(script),
@@ -39,22 +39,22 @@ void ScriptInterpreter::load()
 {
 	auto lastLoggerMessageCount = Logger::getMessageCount();
 
-	for(const auto& scriptID : _script.getScriptFileIDs())
+	for (const auto& scriptID : _script.getScriptFileIDs())
 	{
 		auto scriptFile = _script.getScriptFile(scriptID);
 
 		string scriptType = "";
-		if(scriptFile->getLineText(0) == (META_KEYWORD + " script_type_initialize"))
+		if (scriptFile->getLineText(0) == (META_KEYWORD + " script_type_initialize"))
 		{
 			_initializeScriptIDs.push_back(scriptID);
 			scriptType = "script_type_initialize";
 		}
-		else if(scriptFile->getLineText(0) == (META_KEYWORD + " script_type_update"))
+		else if (scriptFile->getLineText(0) == (META_KEYWORD + " script_type_update"))
 		{
 			_updateScriptIDs.push_back(scriptID);
 			scriptType = "script_type_update";
 		}
-		else if(scriptFile->getLineText(0) == (META_KEYWORD + " script_type_terminate"))
+		else if (scriptFile->getLineText(0) == (META_KEYWORD + " script_type_terminate"))
 		{
 			_terminateScriptIDs.push_back(scriptID);
 			scriptType = "script_type_terminate";
@@ -66,17 +66,17 @@ void ScriptInterpreter::load()
 			return;
 		}
 
-		if(scriptFile->getLineText(1) == (META_KEYWORD + " script_execution_entry"))
+		if (scriptFile->getLineText(1) == (META_KEYWORD + " script_execution_entry"))
 		{
-			if(scriptType == "script_type_initialize" && _initEntryID.empty())
+			if (scriptType == "script_type_initialize" && _initEntryID.empty())
 			{
 				_initEntryID = _initializeScriptIDs.back();
 			}
-			else if(scriptType == "script_type_update" && _updateEntryID.empty())
+			else if (scriptType == "script_type_update" && _updateEntryID.empty())
 			{
 				_updateEntryID = _updateScriptIDs.back();
 			}
-			else if(scriptType == "script_type_terminate" && _terminateEntryID.empty())
+			else if (scriptType == "script_type_terminate" && _terminateEntryID.empty())
 			{
 				_terminateEntryID = _terminateScriptIDs.back();
 			}
@@ -87,7 +87,7 @@ void ScriptInterpreter::load()
 				return;
 			}
 		}
-		else if(scriptFile->getLineText(1) == (META_KEYWORD + " script_execution_waiting"))
+		else if (scriptFile->getLineText(1) == (META_KEYWORD + " script_execution_waiting"))
 		{
 		}
 		else
@@ -98,42 +98,42 @@ void ScriptInterpreter::load()
 		}
 	}
 
-	if(_initEntryID.empty() && !_initializeScriptIDs.empty())
+	if (_initEntryID.empty() && !_initializeScriptIDs.empty())
 	{
 		Logger::throwWarning("No script_execution_entry META defined for INITIALIZE script(s)!");
 		_hasThrownError = true;
 		return;
 	}
-	if(_updateEntryID.empty() && !_updateScriptIDs.empty())
+	if (_updateEntryID.empty() && !_updateScriptIDs.empty())
 	{
 		Logger::throwWarning("No script_execution_entry META defined for UPDATE script(s)!");
 		_hasThrownError = true;
 		return;
 	}
-	if(_terminateEntryID.empty() && !_terminateScriptIDs.empty())
+	if (_terminateEntryID.empty() && !_terminateScriptIDs.empty())
 	{
 		Logger::throwWarning("No script_execution_entry META defined for TERMINATE script(s)!");
 		_hasThrownError = true;
 		return;
 	}
 
-	for(const auto& scriptID : _script.getScriptFileIDs())
+	for (const auto& scriptID : _script.getScriptFileIDs())
 	{
 		auto scriptFile = _script.getScriptFile(scriptID);
 
-		for(unsigned int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
+		for (unsigned int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
 		{
 			auto scriptLineText = scriptFile->getLineText(lineIndex);
 			auto scriptLineTextStream = istringstream(scriptLineText);
 			string noWhiteSpace;
 			scriptLineTextStream >> noWhiteSpace;
 
-			if(noWhiteSpace.substr(0, 3) == "///")
+			if (noWhiteSpace.substr(0, 3) == "///")
 			{
 				unsigned int charIndex;
-				for(charIndex = 0; charIndex < scriptLineText.size(); charIndex++)
+				for (charIndex = 0; charIndex < scriptLineText.size(); charIndex++)
 				{
-					if(scriptLineText[charIndex] != ' ')
+					if (scriptLineText[charIndex] != ' ')
 					{
 						break;
 					}
@@ -144,7 +144,7 @@ void ScriptInterpreter::load()
 		}
 	}
 
-	if(Config::getInst().isApplicationExported())
+	if (Config::getInst().isApplicationExported())
 	{
 		auto skyTexturePaths = _skyEditor.getTexturePathsFromFile();
 		auto terrainTexturePaths = _terrainEditor.getTexturePathsFromFile();
@@ -153,7 +153,6 @@ void ScriptInterpreter::load()
 		auto modelMeshPaths = _modelEditor.getMeshPathsFromFile();
 		auto modelTexturePaths = _modelEditor.getTexturePathsFromFile();
 		auto billboardTexturePaths = _billboardEditor.getTexturePathsFromFile();
-		auto billboardFontPaths = _billboardEditor.getFontPathsFromFile();
 		auto imageTexturePaths = _imageEditor.getTexturePathsFromFile();
 		auto audioPaths = _soundEditor.getAudioPathsFromFile();
 
@@ -170,8 +169,6 @@ void ScriptInterpreter::load()
 		_fe3d.misc_cache3dTextures(skyTexturePaths);
 
 		_fe3d.misc_cacheBitmaps(terrainBitmapPaths);
-
-		_fe3d.misc_cacheFonts(billboardFontPaths);
 
 		_fe3d.misc_cacheAudios(audioPaths);
 	}
@@ -197,7 +194,7 @@ void ScriptInterpreter::load()
 
 	_fe3d.camera_reset();
 
-	if(_fe3d.misc_isVsyncEnabled())
+	if (_fe3d.misc_isVsyncEnabled())
 	{
 		_fe3d.misc_disableVsync();
 	}
@@ -211,14 +208,14 @@ void ScriptInterpreter::unload()
 	_fe3d.sky_selectMixSky("");
 	_fe3d.sky_setMixValue(0.0f);
 
-	if(!Config::getInst().isApplicationExported())
+	if (!Config::getInst().isApplicationExported())
 	{
 		_fe3d.sky_selectMainSky("@@background");
 	}
 
-	for(const auto& ID : _fe3d.sky_getIDs())
+	for (const auto& ID : _fe3d.sky_getIDs())
 	{
-		if(ID != "@@background")
+		if (ID != "@@background")
 		{
 			_fe3d.sky_delete(ID);
 		}
@@ -239,17 +236,17 @@ void ScriptInterpreter::unload()
 	_fe3d.spotlight_deleteAll();
 	_fe3d.reflection_deleteAll();
 
-	for(const auto& ID : _fe3d.image_getIDs())
+	for (const auto& ID : _fe3d.image_getIDs())
 	{
-		if(ID[0] != '@')
+		if (ID[0] != '@')
 		{
 			_fe3d.image_delete(ID);
 		}
 	}
 
-	for(const auto& ID : _fe3d.text_getIDs())
+	for (const auto& ID : _fe3d.text_getIDs())
 	{
-		if(ID[0] != '@')
+		if (ID[0] != '@')
 		{
 			_fe3d.text_delete(ID);
 		}
@@ -258,57 +255,57 @@ void ScriptInterpreter::unload()
 	_fe3d.camera_reset();
 
 	_fe3d.collision_setCameraBox(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-	if(_fe3d.collision_isCameraResponseEnabled())
+	if (_fe3d.collision_isCameraResponseEnabled())
 	{
 		_fe3d.collision_disableCameraResponse();
 	}
-	if(_fe3d.collision_isTerrainResponseEnabled())
+	if (_fe3d.collision_isTerrainResponseEnabled())
 	{
 		_fe3d.collision_disableTerrainResponse();
 	}
 
-	if(_fe3d.raycast_isTerrainPointingEnabled())
+	if (_fe3d.raycast_isTerrainPointingEnabled())
 	{
 		_fe3d.raycast_disableTerrainPointing();
 	}
 
-	if(_fe3d.gfx_isAntiAliasingEnabled())
+	if (_fe3d.gfx_isAntiAliasingEnabled())
 	{
 		_fe3d.gfx_disableAntiAliasing(true);
 	}
-	if(_fe3d.gfx_isAmbientLightingEnabled())
+	if (_fe3d.gfx_isAmbientLightingEnabled())
 	{
 		_fe3d.gfx_disableAmbientLighting(true);
 	}
-	if(_fe3d.gfx_isDirectionalLightingEnabled())
+	if (_fe3d.gfx_isDirectionalLightingEnabled())
 	{
 		_fe3d.gfx_disableDirectionalLighting(true);
 	}
-	if(_fe3d.gfx_isFogEnabled())
+	if (_fe3d.gfx_isFogEnabled())
 	{
 		_fe3d.gfx_disableFog(true);
 	}
-	if(_fe3d.gfx_isShadowsEnabled())
+	if (_fe3d.gfx_isShadowsEnabled())
 	{
 		_fe3d.gfx_disableShadows(true);
 	}
-	if(_fe3d.gfx_isSkyExposureEnabled())
+	if (_fe3d.gfx_isSkyExposureEnabled())
 	{
 		_fe3d.gfx_disableSkyExposure(true);
 	}
-	if(_fe3d.gfx_isDofEnabled())
+	if (_fe3d.gfx_isDofEnabled())
 	{
 		_fe3d.gfx_disableDOF(true);
 	}
-	if(_fe3d.gfx_isMotionBlurEnabled())
+	if (_fe3d.gfx_isMotionBlurEnabled())
 	{
 		_fe3d.gfx_disableMotionBlur(true);
 	}
-	if(_fe3d.gfx_isLensFlareEnabled())
+	if (_fe3d.gfx_isLensFlareEnabled())
 	{
 		_fe3d.gfx_disableLensFlare(true);
 	}
-	if(_fe3d.gfx_isBloomEnabled())
+	if (_fe3d.gfx_isBloomEnabled())
 	{
 		_fe3d.gfx_disableBloom(true);
 	}
@@ -318,29 +315,29 @@ void ScriptInterpreter::unload()
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_setPlanarReflectionHeight(0.0f);
 
-	if(_fe3d.server_isRunning())
+	if (_fe3d.server_isRunning())
 	{
 		_fe3d.server_stop();
 	}
 
-	if(_fe3d.client_isRunning())
+	if (_fe3d.client_isRunning())
 	{
 		_fe3d.client_stop();
 	}
 
-	if(_fe3d.misc_isAabbFrameRenderingEnabled())
+	if (_fe3d.misc_isAabbFrameRenderingEnabled())
 	{
 		_fe3d.misc_disableAabbFrameRendering();
 	}
-	if(_fe3d.misc_isWireframeRenderingEnabled())
+	if (_fe3d.misc_isWireframeRenderingEnabled())
 	{
 		_fe3d.misc_disableWireframeRendering();
 	}
-	if(!_fe3d.misc_isVsyncEnabled())
+	if (!_fe3d.misc_isVsyncEnabled())
 	{
 		_fe3d.misc_enableVsync();
 	}
-	if(_fe3d.misc_isMillisecondTimerStarted())
+	if (_fe3d.misc_isMillisecondTimerStarted())
 	{
 		_fe3d.misc_stopMillisecondTimer();
 	}

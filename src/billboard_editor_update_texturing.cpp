@@ -6,7 +6,7 @@ void BillboardEditor::_updateTexturingMenu()
 {
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "billboardEditorMenuTexturing")
+	if (screen->getID() == "billboardEditorMenuTexturing")
 	{
 		auto textContent = _fe3d.billboard_getTextContent(_currentBillboardID);
 		auto isTextual = _fe3d.billboard_isTextual(_currentBillboardID);
@@ -14,14 +14,14 @@ void BillboardEditor::_updateTexturingMenu()
 		auto hasEmissionMap = _fe3d.billboard_hasEmissionMap(_currentBillboardID);
 		auto textureRepeat = _fe3d.billboard_getTextureRepeat(_currentBillboardID);
 
-		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
+		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("font")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("font")->isHovered())
 		{
-			if(_currentProjectID.empty())
+			if (_currentProjectID.empty())
 			{
 				Logger::throwError("BillboardEditor::_updateTexturingMenu");
 			}
@@ -29,41 +29,40 @@ void BillboardEditor::_updateTexturingMenu()
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\font_map\\");
 
-			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
+			if (!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
-			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "TTF");
-			if(filePath.empty())
+			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
+			if (filePath.empty())
 			{
 				return;
 			}
 
-			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
-			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
+			if (filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
+				filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
 				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
 				return;
 			}
 
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clearFontCache(finalFilePath);
 			_fe3d.billboard_setFont(_currentBillboardID, finalFilePath);
 
-			if(textContent.empty())
+			if (textContent.empty())
 			{
 				_fe3d.billboard_setTextContent(_currentBillboardID, "text");
 			}
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textContent")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textContent")->isHovered())
 		{
 			_gui.getOverlay()->createValueForm("textContent", "Text content", textContent, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
-			if(_currentProjectID.empty())
+			if (_currentProjectID.empty())
 			{
 				Logger::throwError("BillboardEditor::_updateTexturingMenu");
 			}
@@ -71,20 +70,20 @@ void BillboardEditor::_updateTexturingMenu()
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\diffuse_map\\");
 
-			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
+			if (!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
 			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
-			if(filePath.empty())
+			if (filePath.empty())
 			{
 				return;
 			}
 
-			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
-			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
+			if (filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
+				filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
 				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
 				return;
@@ -94,9 +93,9 @@ void BillboardEditor::_updateTexturingMenu()
 			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.billboard_setDiffuseMap(_currentBillboardID, finalFilePath);
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
 		{
-			if(_currentProjectID.empty())
+			if (_currentProjectID.empty())
 			{
 				Logger::throwError("BillboardEditor::_updateTexturingMenu");
 			}
@@ -104,20 +103,20 @@ void BillboardEditor::_updateTexturingMenu()
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\emission_map\\");
 
-			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
+			if (!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
 			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
-			if(filePath.empty())
+			if (filePath.empty())
 			{
 				return;
 			}
 
-			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
-			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
+			if (filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
+				filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
 				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
 				return;
@@ -127,21 +126,21 @@ void BillboardEditor::_updateTexturingMenu()
 			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.billboard_setEmissionMap(_currentBillboardID, finalFilePath);
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
 			_fe3d.billboard_setDiffuseMap(_currentBillboardID, "");
 			_fe3d.billboard_setEmissionMap(_currentBillboardID, "");
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
 			_gui.getOverlay()->createValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
-		if(_gui.getOverlay()->checkValueForm("textContent", textContent, {}))
+		if (_gui.getOverlay()->checkValueForm("textContent", textContent, {}))
 		{
 			_fe3d.billboard_setTextContent(_currentBillboardID, textContent);
 		}
-		if(_gui.getOverlay()->checkValueForm("textureRepeat", textureRepeat, {}))
+		if (_gui.getOverlay()->checkValueForm("textureRepeat", textureRepeat, {}))
 		{
 			_fe3d.billboard_setTextureRepeat(_currentBillboardID, textureRepeat);
 		}

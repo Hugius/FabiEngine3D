@@ -18,7 +18,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 	_fe3d.billboard_setColor("separator", SEPARATOR_COLOR);
 	_fe3d.billboard_setBright("separator", true);
 
-	for(unsigned int lineIndex = 0; lineIndex < lineCount; lineIndex++)
+	for (unsigned int lineIndex = 0; lineIndex < lineCount; lineIndex++)
 	{
 		const string lineNumberID = to_string(lineIndex);
 		const string lineTextID = "text_" + lineNumberID;
@@ -33,7 +33,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			fvec3(HORIZONTAL_LINE_OFFSET, 0.0f, 0.0f);
 
 		_fe3d.billboard_create(lineNumberID, false);
-		_fe3d.billboard_setFont(lineNumberID, FONT_PATH);
+		_fe3d.billboard_setFont(lineNumberID, FONT_MAP_PATH);
 		_fe3d.billboard_setTextContent(lineNumberID, lineNumberString);
 		_fe3d.billboard_setPosition(lineNumberID, (lineNumberPosition - fvec3(0.0f, lineNumberSize.y / 2.0f, 0.0f)));
 		_fe3d.billboard_setSize(lineNumberID, lineNumberSize);
@@ -51,14 +51,14 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 		iss >> noWhiteSpace;
 		bool isComment = (noWhiteSpace.substr(0, 3) == "///");
 		_fe3d.billboard_create(lineTextID, false);
-		_fe3d.billboard_setFont(lineTextID, FONT_PATH);
+		_fe3d.billboard_setFont(lineTextID, FONT_MAP_PATH);
 		_fe3d.billboard_setTextContent(lineTextID, lineTextString);
 		_fe3d.billboard_setPosition(lineTextID, (lineTextPosition - fvec3(0.0f, lineTextSize.y / 2.0f, 0.0f)));
 		_fe3d.billboard_setSize(lineTextID, lineTextSize);
 		_fe3d.billboard_setColor(lineTextID, (isComment ? COMMENT_TEXT_COLOR : DEFAULT_TEXT_COLOR));
 		_fe3d.billboard_setBright(lineTextID, true);
 
-		for(unsigned int charIndex = 0; charIndex < lineTextString.size(); charIndex++)
+		for (unsigned int charIndex = 0; charIndex < lineTextString.size(); charIndex++)
 		{
 			const string characterID = (lineNumberID + "_" + to_string(charIndex));
 			const float characterX = (HORIZONTAL_LINE_OFFSET + (HORIZONTAL_CHARACTER_OFFSET * static_cast<float>(charIndex)));
@@ -68,7 +68,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			_fe3d.billboard_setSize(characterID, TEXT_CHARACTER_SIZE);
 			_fe3d.billboard_setVisible(characterID, false);
 
-			if(reloadAabbs)
+			if (reloadAabbs)
 			{
 				const fvec3 characterAabbPosition = (characterPosition - fvec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, 0.0f));
 				const fvec3 characterAabbSize = fvec3(TEXT_CHARACTER_SIZE.x, TEXT_CHARACTER_SIZE.y, AABB_DEPTH);
@@ -82,17 +82,17 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 
 void ScriptEditor::_copySelectedText()
 {
-	if(_firstSelectedLineIndex != -1)
+	if (_firstSelectedLineIndex != -1)
 	{
 		_copyClipboard.clear();
 
-		if(_lastSelectedLineIndex == -1)
+		if (_lastSelectedLineIndex == -1)
 		{
 			_copyClipboard.push_back(_script.getScriptFile(_currentScriptFileID)->getLineText(_firstSelectedLineIndex));
 		}
 		else
 		{
-			for(int i = ((_firstSelectedLineIndex > _lastSelectedLineIndex) ? _lastSelectedLineIndex : _firstSelectedLineIndex);
+			for (int i = ((_firstSelectedLineIndex > _lastSelectedLineIndex) ? _lastSelectedLineIndex : _firstSelectedLineIndex);
 				i <= ((_firstSelectedLineIndex > _lastSelectedLineIndex) ? _firstSelectedLineIndex : _lastSelectedLineIndex); i++)
 			{
 				_copyClipboard.push_back(_script.getScriptFile(_currentScriptFileID)->getLineText(i));

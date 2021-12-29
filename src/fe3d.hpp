@@ -533,7 +533,7 @@ public:
 	void text_delete(const string& ID);
 	void text_deleteAll();
 	void text_setVisible(const string& ID, bool value);
-	void text_setFont(const string& ID, const string& value);
+	void text_setFontMap(const string& ID, const string& value);
 	void text_setContent(const string& ID, const string& value, float charWidth = -1.0f, float charHeight = -1.0f);
 	void text_setColor(const string& ID, fvec3 value);
 	void text_setTransparency(const string& ID, float value);
@@ -554,7 +554,7 @@ public:
 	void text_setWireframeColor(const string& ID, fvec3 value);
 
 	const vector<string> text_getIDs() const;
-	const string& text_getFontPath(const string& ID) const;
+	const string& text_getFontMapPath(const string& ID) const;
 	const string& text_getContent(const string& ID) const;
 	const fvec3 text_getColor(const string& ID) const;
 	const fvec2 text_getPosition(const string& ID) const;
@@ -860,25 +860,21 @@ public:
 	void misc_cache2dTexture(const string& filePath);
 	void misc_cache3dTexture(const array<string, 6>& filePaths);
 	void misc_cacheBitmap(const string& filePath);
-	void misc_cacheFont(const string& filePath);
 	void misc_cacheAudio(const string& filePath);
 	void misc_cacheMeshes(const vector<string>& filePaths);
 	void misc_cache2dTextures(const vector<string>& filePaths);
 	void misc_cache3dTextures(const vector<array<string, 6>>& filePathsList);
 	void misc_cacheBitmaps(const vector<string>& filePaths);
-	void misc_cacheFonts(const vector<string>& filePaths);
 	void misc_cacheAudios(const vector<string>& filePaths);
 	void misc_clearMeshCache(const string& filePath);
 	void misc_clear2dTextureCache(const string& filePath);
 	void misc_clear3dTextureCache(const array<string, 6>& filePaths);
-	void misc_clearFontCache(const string& filePath);
 	void misc_clearBitmapCache(const string& filePath);
 	void misc_clearAudioCache(const string& filePath);
 	void misc_clearMeshesCache();
 	void misc_clear2dTexturesCache();
 	void misc_clear3dTexturesCache();
 	void misc_clearBitmapsCache();
-	void misc_clearFontsCache();
 	void misc_clearAudiosCache();
 	void misc_startMillisecondTimer();
 

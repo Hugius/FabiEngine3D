@@ -15,30 +15,34 @@ void TextEntity::setContent(const string& value, TextureLoader& textureLoader)
 
 		_characterEntities.clear();
 
-		for (const auto& c : _content)
+		for (const auto& character : _content)
 		{
-			string characterString = "";
-			characterString += c;
-
-			auto texture = textureLoader.load2dTexture(characterString, _fontPath);
+			auto texture = textureLoader.load2dTexture(_fontMapPath, false, false);
 
 			if (texture == 0)
 			{
 				break;
 			}
 
-			auto newCharacter = make_shared<ImageEntity>("dummy");
-			newCharacter->setRenderBuffer(_renderBuffer);
-			newCharacter->setDiffuseMap(texture);
+			auto xIndex = _fontMapIndices.at(character).x;
+			auto yIndex = _fontMapIndices.at(character).y;
+			auto multiplierUV = fvec2((1.0f / 16.0f), (1.0f / 6.0f));
+			auto adderUV = fvec2((static_cast<float>(xIndex) * multiplierUV.x), (static_cast<float>(yIndex) * multiplierUV.y));
+			//std::cout << character << " " << xIndex << " " << yIndex << " " << adderUV.x << " " << adderUV.y << std::endl;
+			auto characterEntity = make_shared<ImageEntity>("dummy");
+			characterEntity->setRenderBuffer(_renderBuffer);
+			characterEntity->setDiffuseMap(texture);
+			characterEntity->setMultiplierUV(multiplierUV);
+			characterEntity->setAdderUV(fvec2(multiplierUV.x * 3.0f, multiplierUV.y));
 
-			_characterEntities.push_back(newCharacter);
+			_characterEntities.push_back(characterEntity);
 		}
 	}
 }
 
-void TextEntity::setFontPath(const string& value)
+void TextEntity::setFontMapPath(const string& value)
 {
-	_fontPath = value;
+	_fontMapPath = value;
 }
 
 const string& TextEntity::getContent() const
@@ -46,9 +50,9 @@ const string& TextEntity::getContent() const
 	return _content;
 }
 
-const string& TextEntity::getFontPath() const
+const string& TextEntity::getFontMapPath() const
 {
-	return _fontPath;
+	return _fontMapPath;
 }
 
 void TextEntity::updateCharacterEntities()
@@ -154,7 +158,7 @@ void TextEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 	_renderBuffer = value;
 }
 
-void TextEntity::setDiffuseMap(TextureID value)
+void TextEntity::setFontMap(TextureID value)
 {
 	_diffuseMap = value;
 }

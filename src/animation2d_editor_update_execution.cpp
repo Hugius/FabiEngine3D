@@ -2,21 +2,21 @@
 
 void Animation2dEditor::_updateBillboardAnimationExecution()
 {
-	for (auto& [idPair, animation] : _startedBillboardAnimations)
+	for(auto& [idPair, animation] : _startedBillboardAnimations)
 	{
-		if (!animation.isPaused())
+		if(!animation.isPaused())
 		{
-			if (animation.getPassedFrames() == animation.getFramestep())
+			if(animation.getPassedFrames() == animation.getFramestep())
 			{
 				animation.setPassedFrames(0);
 
-				if (animation.getColumnIndex() == (animation.getColumnCount() - 1))
+				if(animation.getColumnIndex() == (animation.getColumnCount() - 1))
 				{
 					animation.setColumnIndex(0);
 
-					if (animation.getRowIndex() == (animation.getRowCount() - 1))
+					if(animation.getRowIndex() == (animation.getRowCount() - 1))
 					{
-						if (animation.getPlayCount() == -1)
+						if(animation.getPlayCount() == -1)
 						{
 							_billboardAnimationsToStop.insert(idPair);
 							_billboardAnimationsToStart.insert(idPair);
@@ -25,7 +25,7 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 						{
 							animation.setPlayCount(animation.getPlayCount() - 1);
 
-							if (animation.getPlayCount() == 0)
+							if(animation.getPlayCount() == 0)
 							{
 								_billboardAnimationsToStop.insert(idPair);
 							}
@@ -52,26 +52,26 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 		}
 
 		fvec2 multiplierUV = fvec2((1.0f / static_cast<float>(animation.getColumnCount())),
-			(1.0f / static_cast<float>(animation.getRowCount())));
+								   (1.0f / static_cast<float>(animation.getRowCount())));
 		fvec2 adderUV = fvec2((static_cast<float>(animation.getColumnIndex()) * multiplierUV.x),
-			(static_cast<float>(animation.getRowIndex()) * multiplierUV.y));
+							  (static_cast<float>(animation.getRowIndex()) * multiplierUV.y));
 
 		_fe3d.billboard_setMultiplierUV(idPair.second, multiplierUV);
 		_fe3d.billboard_setAdderUV(idPair.second, adderUV);
 	}
 
-	for (const auto& idPair : _billboardAnimationsToStop)
+	for(const auto& idPair : _billboardAnimationsToStop)
 	{
-		if (isBillboardAnimationStarted(idPair.first, idPair.second))
+		if(isBillboardAnimationStarted(idPair.first, idPair.second))
 		{
 			stopBillboardAnimation(idPair.first, idPair.second);
 		}
 	}
 	_billboardAnimationsToStop.clear();
 
-	for (const auto& idPair : _billboardAnimationsToStart)
+	for(const auto& idPair : _billboardAnimationsToStart)
 	{
-		if (!isBillboardAnimationStarted(idPair.first, idPair.second))
+		if(!isBillboardAnimationStarted(idPair.first, idPair.second))
 		{
 			startBillboardAnimation(idPair.first, idPair.second, -1);
 		}
@@ -81,21 +81,21 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 
 void Animation2dEditor::_updateImageAnimationExecution()
 {
-	for (auto& [idPair, animation] : _startedImageAnimations)
+	for(auto& [idPair, animation] : _startedImageAnimations)
 	{
-		if (!animation.isPaused())
+		if(!animation.isPaused())
 		{
-			if (animation.getPassedFrames() == animation.getFramestep())
+			if(animation.getPassedFrames() == animation.getFramestep())
 			{
 				animation.setPassedFrames(0);
 
-				if (animation.getColumnIndex() == (animation.getColumnCount() - 1))
+				if(animation.getColumnIndex() == (animation.getColumnCount() - 1))
 				{
 					animation.setColumnIndex(0);
 
-					if (animation.getRowIndex() == (animation.getRowCount() - 1))
+					if(animation.getRowIndex() == (animation.getRowCount() - 1))
 					{
-						if (animation.getPlayCount() == -1)
+						if(animation.getPlayCount() == -1)
 						{
 							_imageAnimationsToStop.insert(idPair);
 							_imageAnimationsToStart.insert(idPair);
@@ -104,7 +104,7 @@ void Animation2dEditor::_updateImageAnimationExecution()
 						{
 							animation.setPlayCount(animation.getPlayCount() - 1);
 
-							if (animation.getPlayCount() == 0)
+							if(animation.getPlayCount() == 0)
 							{
 								_imageAnimationsToStop.insert(idPair);
 							}
@@ -131,26 +131,26 @@ void Animation2dEditor::_updateImageAnimationExecution()
 		}
 
 		fvec2 multiplierUV = fvec2((1.0f / static_cast<float>(animation.getColumnCount())),
-			(1.0f / static_cast<float>(animation.getRowCount())));
+								   (1.0f / static_cast<float>(animation.getRowCount())));
 		fvec2 adderUV = fvec2((static_cast<float>(animation.getColumnIndex()) * multiplierUV.x),
-			(static_cast<float>(animation.getRowIndex()) * multiplierUV.y));
+							  (static_cast<float>(animation.getRowIndex()) * multiplierUV.y));
 
 		_fe3d.image_setMultiplierUV(idPair.second, multiplierUV);
 		_fe3d.image_setAdderUV(idPair.second, adderUV);
 	}
 
-	for (const auto& idPair : _imageAnimationsToStop)
+	for(const auto& idPair : _imageAnimationsToStop)
 	{
-		if (isImageAnimationStarted(idPair.first, idPair.second))
+		if(isImageAnimationStarted(idPair.first, idPair.second))
 		{
 			stopImageAnimation(idPair.first, idPair.second);
 		}
 	}
 	_imageAnimationsToStop.clear();
 
-	for (const auto& idPair : _imageAnimationsToStart)
+	for(const auto& idPair : _imageAnimationsToStart)
 	{
-		if (!isImageAnimationStarted(idPair.first, idPair.second))
+		if(!isImageAnimationStarted(idPair.first, idPair.second))
 		{
 			startImageAnimation(idPair.first, idPair.second, -1);
 		}

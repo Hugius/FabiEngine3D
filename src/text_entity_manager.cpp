@@ -65,10 +65,6 @@ void TextEntityManager::update()
 	for (const auto& [key, entity] : _entities)
 	{
 		entity->updateTransformation();
-
-		if (entity->isVisible())
-		{
-			entity->updateCharacterEntities();
-		}
+		entity->updateCharacterEntities();
 	}
 }

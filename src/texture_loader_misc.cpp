@@ -2,7 +2,6 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-#define STB_IMAGE_IMPLEMENTATION
 #include <STB/stb_image.h>
 
 using std::clamp;
@@ -30,7 +29,7 @@ void TextureLoader::cacheBitmap(const string& filePath)
 }
 
 /* http://stackoverflow.com/questions/1968561/getting-the-pixel-value-of-bmp-file */
-vector<float> TextureLoader::_loadBitmapData(const string& filePath)
+vector<float> TextureLoader::_loadBitmap(const string& filePath)
 {
 	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 
@@ -38,14 +37,14 @@ vector<float> TextureLoader::_loadBitmapData(const string& filePath)
 
 	FILE* streamIn;
 	fopen_s(&streamIn, (rootDirectoryPath + filePath).c_str(), "rb");
-	if (streamIn == (FILE*)0)
+	if(streamIn == (FILE*)0)
 	{
 		return {};
 	}
 
 	uint8_t header[54];
 	uint32_t width, height = 5;
-	for (int i = 0; i < 54; i++)
+	for(int i = 0; i < 54; i++)
 	{
 		header[i] = getc(streamIn);
 	}
@@ -54,7 +53,7 @@ vector<float> TextureLoader::_loadBitmapData(const string& filePath)
 	height = (header[25] << 24) | (header[24] << 16) | (header[23] << 8) | header[22];
 
 	auto size = static_cast<size_t>(width) * static_cast<size_t>(height);
-	for (size_t i = 0; i < size; i++)
+	for(size_t i = 0; i < size; i++)
 	{
 		auto r = getc(streamIn);
 		auto g = getc(streamIn);
@@ -68,34 +67,37 @@ vector<float> TextureLoader::_loadBitmapData(const string& filePath)
 	return pixelIntensities;
 }
 
-shared_ptr<TextureData> TextureLoader::_loadTextureData(const string& filePath)
+shared_ptr<Image> TextureLoader::_loadImage(const string& filePath)
 {
 	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-
-	stbi_set_flip_vertically_on_load(true);
 
 	int width, height, channelCount;
 	unsigned char* pixels = stbi_load(string(rootDirectoryPath + filePath).c_str(), &width, &height, &channelCount, 0);
 
-	return make_shared<TextureData>(pixels,
-		static_cast<unsigned int>(width),
-		static_cast<unsigned int>(height),
-		static_cast<unsigned int>(channelCount));
+	if(pixels == nullptr)
+	{
+		return nullptr;
+	}
+
+	return make_shared<Image>(pixels,
+							  static_cast<unsigned int>(width),
+							  static_cast<unsigned int>(height),
+							  static_cast<unsigned int>(channelCount));
 }
 
-TextureID TextureLoader::_create2dTexture(shared_ptr<TextureData> textureData, const string& filePath, bool isMipmapped, bool isAnisotropic)
+TextureID TextureLoader::_create2dTexture(shared_ptr<Image> image, const string& filePath, bool isMipmapped, bool isAnisotropic)
 {
 	TextureID texture;
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	if (textureData->getChannelCount() == 4)
+	if(image->getChannelCount() == 4)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureData->getWidth(), textureData->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, textureData->getPixels());
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->getWidth(), image->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image->getPixels());
 	}
-	else if (textureData->getChannelCount() == 3)
+	else if(image->getChannelCount() == 3)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureData->getWidth(), textureData->getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, textureData->getPixels());
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->getWidth(), image->getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, image->getPixels());
 	}
 	else
 	{
@@ -103,7 +105,7 @@ TextureID TextureLoader::_create2dTexture(shared_ptr<TextureData> textureData, c
 		return 0;
 	}
 
-	if (isMipmapped)
+	if(isMipmapped)
 	{
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -115,7 +117,7 @@ TextureID TextureLoader::_create2dTexture(shared_ptr<TextureData> textureData, c
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	}
 
-	if (isAnisotropic)
+	if(isAnisotropic)
 	{
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(_anisotropicFilteringQuality));
 	}
@@ -125,7 +127,7 @@ TextureID TextureLoader::_create2dTexture(shared_ptr<TextureData> textureData, c
 	return texture;
 }
 
-TextureID TextureLoader::_create3dTexture(const array<shared_ptr<TextureData>, 6>& textures, const array<string, 6>& filePaths)
+TextureID TextureLoader::_create3dTexture(const array<shared_ptr<Image>, 6>& images, const array<string, 6>& filePaths)
 {
 	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 
@@ -133,42 +135,41 @@ TextureID TextureLoader::_create3dTexture(const array<shared_ptr<TextureData>, 6
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
 
-	int surfaceSize = -1;
-	for (size_t i = 0; i < textures.size(); i++)
+	int imageSize = -1;
+	for(size_t i = 0; i < images.size(); i++)
 	{
-		if (textures[i] != nullptr)
+		if(images[i] != nullptr)
 		{
-			if (textures[i]->getWidth() != textures[i]->getHeight())
+			if(images[i]->getWidth() != images[i]->getHeight())
 			{
-				std::cout << textures[i]->getWidth() << " " << textures[i]->getHeight() << " " << textures[i]->getChannelCount();
-				Logger::throwWarning("3D texture width must be height: \"" + filePaths[i] + "\"");
+				Logger::throwError("3D texture width must be height: \"" + filePaths[i] + "\"");
 				return 0;
 			}
 
-			if (surfaceSize == -1)
+			if(imageSize == -1)
 			{
-				surfaceSize = textures[i]->getWidth();
+				imageSize = images[i]->getWidth();
 			}
 			else
 			{
-				if (surfaceSize != textures[i]->getWidth())
+				if(imageSize != images[i]->getWidth())
 				{
-					Logger::throwWarning("All 3D textures must have the same resolution: \"" + filePaths[i] + "\"");
+					Logger::throwError("All 3D textures must have the same resolution: \"" + filePaths[i] + "\"");
 					return 0;
 				}
 			}
 		}
 	}
 
-	for (size_t i = 0; i < textures.size(); i++)
+	for(size_t i = 0; i < images.size(); i++)
 	{
-		if (textures[i] == nullptr)
+		if(images[i] == nullptr)
 		{
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, surfaceSize, surfaceSize, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
 		}
 		else
 		{
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, surfaceSize, surfaceSize, 0, GL_RGB, GL_UNSIGNED_BYTE, textures[i]->getPixels());
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, images[i]->getPixels());
 
 			Logger::throwInfo("Loaded texture: \"" + filePaths[i] + "\"");
 		}
@@ -186,14 +187,14 @@ TextureID TextureLoader::_create3dTexture(const array<shared_ptr<TextureData>, 6
 
 void TextureLoader::_reloadAnisotropicFiltering()
 {
-	for (const auto& [path, texture] : _2dTextureCache)
+	for(const auto& [path, texture] : _2dTextureCache)
 	{
 		glBindTexture(GL_TEXTURE_2D, texture);
 
 		int currentQuality;
 		glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &currentQuality);
 
-		if ((currentQuality >= Config::MIN_ANISOTROPIC_FILTERING_QUALITY) && (currentQuality <= Config::MAX_ANISOTROPIC_FILTERING_QUALITY))
+		if((currentQuality >= Config::MIN_ANISOTROPIC_FILTERING_QUALITY) && (currentQuality <= Config::MAX_ANISOTROPIC_FILTERING_QUALITY))
 		{
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(_anisotropicFilteringQuality));
 		}

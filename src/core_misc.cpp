@@ -21,7 +21,7 @@ void Core::_render()
 	const auto texts = _textEntityManager.getEntities();
 	EntityBus entityBus(mainSky, mixSky, terrain, water, models, billboards, AABBs, pointlights, spotlights, reflections, images, texts);
 
-	_masterRenderer.renderWorld(&entityBus);
+	_masterRenderer.render(&entityBus);
 
 	_timer.startDeltaPart("bufferSwap");
 	_window.swapBackBuffer();
@@ -37,42 +37,42 @@ void Core::_prepare()
 
 	if
 		(
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "camera.obj") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "box.obj") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "lamp.obj") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "plane.obj") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "speaker.obj") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "torch.obj") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_back.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_bottom.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_front.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_left.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_right.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_top.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "box.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "color.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "cursor_default.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "cursor_pointing.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "cursor_text.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "debug.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "grid.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "light_source.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "logo.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "minus.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "pause.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "plus.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "position.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "radius.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "restart.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "rotation.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "settings.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "shape_circle.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "shape_square.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "size.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "start.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "stop.png") ||
-			!Tools::isFileExisting(Tools::getRootDirectoryPath() + fontMapDirectoryPath + "font.png")
-			)
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "camera.obj") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "box.obj") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "lamp.obj") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "plane.obj") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "speaker.obj") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "torch.obj") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_back.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_bottom.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_front.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_left.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_right.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_top.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "box.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "color.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "cursor_default.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "cursor_pointing.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "cursor_text.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "debug.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "grid.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "light_source.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "logo.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "minus.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "pause.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "plus.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "position.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "radius.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "restart.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "rotation.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "settings.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "shape_circle.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "shape_square.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "size.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "start.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "stop.png") ||
+		!Tools::isFileExisting(Tools::getRootDirectoryPath() + fontMapDirectoryPath + "font.png")
+		)
 	{
 		Logger::throwFatalWarning("Directory `engine\\` is missing or corrupted!");
 	}
@@ -89,7 +89,7 @@ void Core::_prepare()
 	ivec2 logoResolution = ivec2(static_cast<int>(width * 0.4f), static_cast<int>(height * 0.2f));
 
 	fvec3 keyingColor = fvec3(0.2f);
-	if (Config::getInst().isApplicationExported())
+	if(Config::getInst().isApplicationExported())
 	{
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	}
@@ -99,37 +99,37 @@ void Core::_prepare()
 		_window.enableColorKeying(keyingColor);
 		_window.setSize(logoResolution);
 		_window.showWindow();
-		_masterRenderer.renderEngineLogo(logo, logoResolution);
+		_masterRenderer.render(logo, logoResolution);
 		_window.swapBackBuffer();
 	}
 
 	_fe3d.FE3D_CONTROLLER_INIT();
 
-	if (_isRunning)
+	if(_isRunning)
 	{
-		if (!Config::getInst().isApplicationExported())
+		if(!Config::getInst().isApplicationExported())
 		{
 			_window.disableColorKeying(keyingColor);
 		}
 
-		if (!Config::getInst().isApplicationExported() || (Config::getInst().isApplicationExported() && !_fe3d.server_isRunning()))
+		if(!Config::getInst().isApplicationExported() || (Config::getInst().isApplicationExported() && !_fe3d.server_isRunning()))
 		{
 			_window.showWindow();
 			_window.setSize(Config::getInst().getWindowSize());
-			if (Config::getInst().isWindowFullscreen())
+			if(Config::getInst().isWindowFullscreen())
 			{
 				_window.enableFullscreen();
 			}
-			if (!Config::getInst().isWindowBorderless())
+			if(!Config::getInst().isWindowBorderless())
 			{
 				_window.showBorder();
 			}
-			if (Config::getInst().isApplicationExported())
+			if(Config::getInst().isApplicationExported())
 			{
 				_window.setTitle(Config::getInst().getWindowTitle());
 			}
 
-			if (Config::getInst().isApplicationExported())
+			if(Config::getInst().isApplicationExported())
 			{
 				_window.setOpacity(1.0f);
 			}

@@ -45,7 +45,7 @@
     <ClCompile Include="..\..\..\src\texture_loader_load.cpp">
       <Filter>Texture\Loader</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\texture_data.cpp">
+    <ClCompile Include="..\..\..\src\image.cpp">
       <Filter>Texture\Data</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,7 +62,7 @@
     <ClInclude Include="..\..\..\src\texture_loader.hpp">
       <Filter>Texture\Loader</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\texture_data.hpp">
+    <ClInclude Include="..\..\..\src\image.hpp">
       <Filter>Texture\Data</Filter>
     </ClInclude>
   </ItemGroup>

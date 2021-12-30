@@ -9,17 +9,17 @@ using std::make_shared;
 
 void TextEntity::setContent(const string& value, TextureLoader& textureLoader)
 {
-	if (value != _content)
+	if(value != _content)
 	{
 		_content = value;
 
 		_characterEntities.clear();
 
-		for (const auto& character : _content)
+		for(const auto& character : _content)
 		{
-			auto texture = textureLoader.load2dTexture(_fontMapPath, false, false);
+			auto texture = textureLoader.load2dTexture(_fontMapPath, true, false);
 
-			if (texture == 0)
+			if(texture == 0)
 			{
 				break;
 			}
@@ -60,9 +60,9 @@ void TextEntity::updateCharacterEntities()
 	auto characterSize = fvec2((this->getSize().x / static_cast<float>(this->_content.size())), this->getSize().y);
 	unsigned int index = 0;
 
-	for (const auto& character : _characterEntities)
+	for(const auto& character : _characterEntities)
 	{
-		if (_isCentered)
+		if(_isCentered)
 		{
 			auto offset = fvec2((static_cast<float>(index) * characterSize.x), 0.0f);
 			offset.x -= (this->getSize().x / 2.0f);
@@ -91,7 +91,7 @@ void TextEntity::updateCharacterEntities()
 		character->setDiffuseMapPath(_diffuseMapPath);
 		character->setWireframed(_isWireframed);
 
-		if (_isVisible)
+		if(_isVisible)
 		{
 			character->updateTransformationMatrix();
 		}
@@ -107,22 +107,22 @@ const vector<shared_ptr<ImageEntity>>& TextEntity::getCharacterEntities() const
 
 void TextEntity::updateTransformation()
 {
-	if (_position != _positionTarget)
+	if(_position != _positionTarget)
 	{
 		auto speedMultiplier = Math::normalize(_positionTarget - _position);
 		_position += (speedMultiplier * _positionTargetSpeed);
 
-		if (fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)
+		if(fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)
 		{
 			_position.x = _positionTarget.x;
 		}
-		if (fabsf(_positionTarget.y - _position.y) <= _positionTargetSpeed)
+		if(fabsf(_positionTarget.y - _position.y) <= _positionTargetSpeed)
 		{
 			_position.y = _positionTarget.y;
 		}
 	}
 
-	if (_rotation != _rotationTarget)
+	if(_rotation != _rotationTarget)
 	{
 		auto difference = fabsf(_rotation - _rotationTarget);
 		float multiplier = ((difference < 180.0f) ? 1.0f : -1.0f);
@@ -130,23 +130,23 @@ void TextEntity::updateTransformation()
 		_rotation += ((_rotation < _rotationTarget) ? speed : (_rotation > _rotationTarget) ? -speed : 0.0f);
 
 		_rotation = Math::limitAngle(_rotation);
-		if (Math::calculateAngleDifference(_rotation, _rotationTarget) <= _rotationTargetSpeed)
+		if(Math::calculateAngleDifference(_rotation, _rotationTarget) <= _rotationTargetSpeed)
 		{
 			_rotation = _rotationTarget;
 		}
 	}
 
-	if (_size != _sizeTarget)
+	if(_size != _sizeTarget)
 	{
 		auto speedMultiplier = Math::normalize(_sizeTarget - _size);
 		_size += (speedMultiplier * _sizeTargetSpeed);
 
 		_size = fvec2(max(0.0f, _size.x), max(0.0f, _size.y));
-		if (fabsf(_sizeTarget.x - _size.x) <= _sizeTargetSpeed)
+		if(fabsf(_sizeTarget.x - _size.x) <= _sizeTargetSpeed)
 		{
 			_size.x = _positionTarget.x;
 		}
-		if (fabsf(_sizeTarget.y - _size.y) <= _sizeTargetSpeed)
+		if(fabsf(_sizeTarget.y - _size.y) <= _sizeTargetSpeed)
 		{
 			_size.y = _positionTarget.y;
 		}

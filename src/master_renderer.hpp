@@ -31,8 +31,8 @@ public:
 	MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader, Camera& camera, ShadowGenerator& shadowGenerator);
 
 	void update();
-	void renderEngineLogo(shared_ptr<ImageEntity> entity, ivec2 viewport);
-	void renderWorld(EntityBus* entityBus);
+	void render(shared_ptr<ImageEntity> entity, ivec2 viewport);
+	void render(EntityBus* entityBus);
 	void reloadBloomBlurCaptureBuffer();
 	void reloadDofBlurCaptureBuffer();
 	void reloadMotionBlurBlurCaptureBuffer();
@@ -108,6 +108,6 @@ private:
 	CaptureBuffer _dofCaptureBuffer;
 	CaptureBuffer _lensFlareCaptureBuffer;
 	CaptureBuffer _motionBlurCaptureBuffer;
-	shared_ptr<ImageEntity> _renderSurface = nullptr;
+	shared_ptr<ImageEntity> _renderImage = nullptr;
 	EntityBus* _entityBus = nullptr;
 };

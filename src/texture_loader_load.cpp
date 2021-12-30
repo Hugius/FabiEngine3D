@@ -8,26 +8,27 @@ using std::launch;
 
 const TextureID TextureLoader::load2dTexture(const string& filePath, bool isMipmapped, bool isAnisotropic)
 {
-BEGIN:;
+	BEGIN:;
+
 	auto cacheIterator = _2dTextureCache.find(filePath);
 
-	if (cacheIterator != _2dTextureCache.end())
+	if(cacheIterator != _2dTextureCache.end())
 	{
 		return cacheIterator->second;
 	}
 
-	auto loadedSurface = _loadTextureData(filePath);
+	auto loadedImage = _loadImage(filePath);
 
-	if (loadedSurface == nullptr)
+	if(loadedImage == nullptr)
 	{
 		Logger::throwWarning("Cannot load image: \"" + filePath + "\"!");
 		return 0;
 	}
 	else
 	{
-		auto loadedTexture = _create2dTexture(loadedSurface, filePath, isMipmapped, isAnisotropic);
+		auto loadedTexture = _create2dTexture(loadedImage, filePath, isMipmapped, isAnisotropic);
 
-		if (loadedTexture == 0)
+		if(loadedTexture == 0)
 		{
 			return 0;
 		}
@@ -42,35 +43,30 @@ BEGIN:;
 
 const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 {
-BEGIN:;
+	BEGIN:;
+
 	auto cacheIterator = _3dTextureCache.find(filePaths);
 
-	if (cacheIterator != _3dTextureCache.end())
+	if(cacheIterator != _3dTextureCache.end())
 	{
 		return cacheIterator->second;
 	}
 
-	vector<future<shared_ptr<TextureData>>> threads;
-	array<shared_ptr<TextureData>, 6> loadedSurfaces = {};
+	array<shared_ptr<Image>, 6> loadedImages = {};
 
-	for (size_t i = 0; i < filePaths.size(); i++)
+	for(size_t i = 0; i < filePaths.size(); i++)
 	{
-		threads.push_back(async(launch::async, &TextureLoader::_loadTextureData, this, filePaths[i]));
-	}
+		loadedImages[i] = _loadImage(filePaths[i]);
 
-	for (size_t i = 0; i < threads.size(); i++)
-	{
-		loadedSurfaces[i] = threads[i].get();
-
-		if ((loadedSurfaces[i] == nullptr) && !filePaths[i].empty())
+		if((loadedImages[i] == nullptr) && !filePaths[i].empty())
 		{
 			Logger::throwWarning("Cannot load image: \"" + filePaths[i] + "\"!");
 		}
 	}
 
-	TextureID loadedTexture = _create3dTexture(loadedSurfaces, filePaths);
+	TextureID loadedTexture = _create3dTexture(loadedImages, filePaths);
 
-	if (loadedTexture == 0)
+	if(loadedTexture == 0)
 	{
 		return 0;
 	}
@@ -84,17 +80,18 @@ BEGIN:;
 
 const vector<float>* TextureLoader::loadBitmap(const string& filePath)
 {
-BEGIN:;
+	BEGIN:;
+
 	auto cacheIterator = _bitmapCache.find(filePath);
 
-	if (cacheIterator != _bitmapCache.end())
+	if(cacheIterator != _bitmapCache.end())
 	{
 		return &cacheIterator->second;
 	}
 
-	auto loadedBitmap = _loadBitmapData(filePath);
+	auto loadedBitmap = _loadBitmap(filePath);
 
-	if (loadedBitmap.empty())
+	if(loadedBitmap.empty())
 	{
 		Logger::throwWarning("Cannot load bitmap: \"" + filePath + "\"!");
 		return nullptr;

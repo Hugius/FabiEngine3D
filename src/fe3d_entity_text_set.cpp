@@ -34,7 +34,7 @@ void FabiEngine3D::text_setContent(const string& ID, const string& value, float 
 	auto entity = _core->_textEntityManager.getEntity(ID);
 
 	auto fontMapPath = entity->getFontMapPath();
-	if (fontMapPath.empty())
+	if(fontMapPath.empty())
 	{
 		Logger::throwWarning("Tried to set text content of text with ID \"" + ID + "\": no font loaded!");
 		return;
@@ -43,11 +43,11 @@ void FabiEngine3D::text_setContent(const string& ID, const string& value, float 
 	entity->setContent(value, _core->_textureLoader);
 
 	fvec2 newSize = entity->getSize();
-	if (charWidth >= 0.0f)
+	if(charWidth >= 0.0f)
 	{
 		newSize.x = (charWidth * static_cast<float>(value.size()));
 	}
-	if (charHeight >= 0.0f)
+	if(charHeight >= 0.0f)
 	{
 		newSize.y = charHeight;
 	}

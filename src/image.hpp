@@ -1,9 +1,9 @@
 #pragma once
 
-struct TextureData
+class Image final
 {
 public:
-	TextureData(unsigned char* pixels, unsigned int width, unsigned int height, unsigned int channelCount);
+	Image(unsigned char* pixels, unsigned int width, unsigned int height, unsigned int channelCount);
 
 	const unsigned char* getPixels();
 

@@ -27,7 +27,7 @@ void BillboardEditor::_updateTexturingMenu()
 			}
 
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\font_map\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\font_map\\");
 
 			if (!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{
@@ -68,7 +68,7 @@ void BillboardEditor::_updateTexturingMenu()
 			}
 
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\diffuse_map\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\diffuse_map\\");
 
 			if (!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{
@@ -101,7 +101,7 @@ void BillboardEditor::_updateTexturingMenu()
 			}
 
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\texture\\emission_map\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\emission_map\\");
 
 			if (!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{

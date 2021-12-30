@@ -47,7 +47,7 @@ private:
 	void _reloadScriptTextDisplay(bool reloadAabbs);
 	void _copySelectedText();
 
-	static inline const string FONT_MAP_PATH = "engine\\assets\\texture\\font_map\\font.png";
+	static inline const string FONT_MAP_PATH = "engine\\assets\\image\\font_map\\font.png";
 	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
 	vector<string> _scriptFileNamesToDelete;
 	vector<string> _copyClipboard;

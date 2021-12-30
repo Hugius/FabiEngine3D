@@ -14,7 +14,7 @@ GuiTextField::GuiTextField(FabiEngine3D& fe3d, const string& parentID, const str
 	_fe3d.text_setPosition(_entityID, position);
 	_fe3d.text_setSize(_entityID, size);
 	_fe3d.text_setColor(_entityID, color);
-	_fe3d.text_setFontMap(_entityID, "engine\\assets\\texture\\font_map\\font.png");
+	_fe3d.text_setFontMap(_entityID, "engine\\assets\\image\\font_map\\font.png");
 	_fe3d.text_setContent(_entityID, textContent);
 }
 

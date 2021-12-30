@@ -1,8 +1,4 @@
 #include "texture_loader.hpp"
-#include "texture_loader.hpp"
-#include "texture_loader.hpp"
-#include "texture_loader.hpp"
-#include "texture_loader.hpp"
 #include "logger.hpp"
 
 #include <future>
@@ -53,11 +49,11 @@ void TextureLoader::cache2dTextures(const vector<string>& filePaths, bool isMipm
 					}
 					else
 					{
-						auto loadedTexture = _create2dTexture(loadedImage, finalFilePaths[i], isMipmapped, isAnisotropic);
+						auto createdTexture = _create2dTexture(loadedImage, finalFilePaths[i], isMipmapped, isAnisotropic);
 
-						if (loadedTexture != 0)
+						if (createdTexture != 0)
 						{
-							_2dTextureCache[finalFilePaths[i]] = loadedTexture;
+							_2dTextureCache[finalFilePaths[i]] = createdTexture;
 						}
 					}
 				}
@@ -118,11 +114,11 @@ void TextureLoader::cache3dTextures(const vector<array<string, 6>>& filePathsLis
 						}
 					}
 
-					TextureID loadedTexture = _create3dTexture(loadedImages, finalFilePathsList[i]);
+					TextureID createdTexture = _create3dTexture(loadedImages, finalFilePathsList[i]);
 
-					if (loadedTexture != 0)
+					if (createdTexture != 0)
 					{
-						_3dTextureCache[finalFilePathsList[i]] = loadedTexture;
+						_3dTextureCache[finalFilePathsList[i]] = createdTexture;
 					}
 				}
 			}

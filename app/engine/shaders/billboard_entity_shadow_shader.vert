@@ -25,5 +25,6 @@ void main()
 	gl_ClipDistance[0] = dot(worldSpacePosition, vec4(0.0f,  1.0f, 0.0f, -u_minHeight));
 	gl_ClipDistance[1] = dot(worldSpacePosition, vec4(0.0f, -1.0f, 0.0f,  u_maxHeight));
 
-    f_uv = (vec2(u_adderUV.x + (v_uv.x * u_multiplierUV.x), u_adderUV.y + (-v_uv.y * u_multiplierUV.y)) * u_textureRepeat);
+	f_uv.x = ((u_adderUV.x + (v_uv.x * u_multiplierUV.x)) * u_textureRepeat);
+	f_uv.y = ((u_adderUV.y + (v_uv.y * u_multiplierUV.y)) * u_textureRepeat);
 }

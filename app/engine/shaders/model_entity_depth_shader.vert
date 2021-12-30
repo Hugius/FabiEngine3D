@@ -11,6 +11,7 @@ uniform mat4 u_projectionMatrix;
 uniform float u_minHeight;
 uniform float u_maxHeight;
 uniform float u_clippingY;
+uniform float u_textureRepeat;
 
 uniform bool u_isUnderWater;
 
@@ -27,5 +28,5 @@ void main()
 	gl_ClipDistance[1] = dot(worldSpacePosition, vec4(0.0f, -1.0f, 0.0f,  u_maxHeight));
 	gl_ClipDistance[2] = dot(worldSpacePosition, vec4(0.0f, u_isUnderWater ? -1.0f : 1.0f, 0.0f, u_isUnderWater ? u_clippingY : -u_clippingY));
 
-	f_uv = vec2(v_uv.x, -v_uv.y);
+	f_uv = (v_uv * u_textureRepeat);
 }

@@ -1,8 +1,4 @@
 #include "texture_loader.hpp"
-#include "texture_loader.hpp"
-#include "texture_loader.hpp"
-#include "texture_loader.hpp"
-#include "texture_loader.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 
@@ -144,7 +140,8 @@ TextureID TextureLoader::_create3dTexture(const array<shared_ptr<TextureData>, 6
 		{
 			if (textures[i]->getWidth() != textures[i]->getHeight())
 			{
-				Logger::throwWarning("3D texture width must be same as height: \"" + filePaths[i] + "\"");
+				std::cout << textures[i]->getWidth() << " " << textures[i]->getHeight() << " " << textures[i]->getChannelCount();
+				Logger::throwWarning("3D texture width must be height: \"" + filePaths[i] + "\"");
 				return 0;
 			}
 

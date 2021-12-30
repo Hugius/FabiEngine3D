@@ -41,7 +41,7 @@ void main()
 	gl_ClipDistance[2] = dot(worldSpacePosition, u_clippingPlane);
 	
 	f_position = worldSpacePosition.xyz;
-	f_uv = (vec2(v_uv.x, -v_uv.y) * u_textureRepeat);
+	f_uv = (v_uv * u_textureRepeat);
 	f_normal = normalize(u_normalTransformationMatrix * v_normal);
 	f_shadowPosition = u_shadowMatrix * worldSpacePosition;
 	f_clip = clipSpacePosition;

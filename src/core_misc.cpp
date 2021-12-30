@@ -31,9 +31,9 @@ void Core::_render()
 void Core::_prepare()
 {
 	const string meshDirectoryPath = "engine\\assets\\mesh\\";
-	const string cubeMapDirectoryPath = "engine\\assets\\texture\\cube_map\\";
-	const string fontMapDirectoryPath = "engine\\assets\\texture\\font_map\\";
-	const string diffuseMapDirectoryPath = "engine\\assets\\texture\\diffuse_map\\";
+	const string cubeMapDirectoryPath = "engine\\assets\\image\\cube_map\\";
+	const string fontMapDirectoryPath = "engine\\assets\\image\\font_map\\";
+	const string diffuseMapDirectoryPath = "engine\\assets\\image\\diffuse_map\\";
 
 	if
 		(
@@ -79,7 +79,7 @@ void Core::_prepare()
 
 	shared_ptr<ImageEntity> logo = make_shared<ImageEntity>("logo");
 	logo->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
-	logo->setDiffuseMap(_textureLoader.load2dTexture("engine\\assets\\texture\\diffuse_map\\logo.png", false, false));
+	logo->setDiffuseMap(_textureLoader.load2dTexture("engine\\assets\\image\\diffuse_map\\logo.png", false, false));
 	logo->setCentered(true);
 
 	SDL_DisplayMode DM;

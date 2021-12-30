@@ -26,7 +26,7 @@ void WorldEditor::_updateSoundEditing()
 				{
 					_selectSound(ID.substr(string("@@speaker_").size()));
 
-					_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\diffuse_map\\cursor_pointing.png");
+					_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.png");
 
 					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{

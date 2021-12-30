@@ -28,7 +28,7 @@ void TextEntity::setContent(const string& value, TextureLoader& textureLoader)
 			auto yIndex = _fontMapIndices.at(character).y;
 			auto multiplierUV = fvec2((1.0f / 16.0f), (1.0f / 6.0f));
 			auto adderUV = fvec2((static_cast<float>(xIndex) * multiplierUV.x), (static_cast<float>(yIndex) * multiplierUV.y));
-			//std::cout << character << " " << xIndex << " " << yIndex << " " << adderUV.x << " " << adderUV.y << std::endl;
+
 			auto characterEntity = make_shared<ImageEntity>("dummy");
 			characterEntity->setRenderBuffer(_renderBuffer);
 			characterEntity->setDiffuseMap(texture);

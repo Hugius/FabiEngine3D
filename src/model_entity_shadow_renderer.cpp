@@ -27,9 +27,9 @@ void ModelEntityShadowRenderer::unbind()
 
 void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 {
-	if(entity->isVisible() && entity->isShadowed())
+	if (entity->isVisible() && entity->isShadowed())
 	{
-		if(entity->isFaceCulled())
+		if (entity->isFaceCulled())
 		{
 			glEnable(GL_CULL_FACE);
 		}
@@ -38,13 +38,14 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
-		for(const auto& partID : entity->getPartIDs())
+		for (const auto& partID : entity->getPartIDs())
 		{
 			const auto buffer = entity->getRenderBuffer(partID);
 
 			_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partID));
+			_shader.uploadUniform("u_textureRepeat", entity->getTextureRepeat(partID));
 
-			if(entity->hasDiffuseMap(partID))
+			if (entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID));
@@ -56,14 +57,14 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 
 			glBindVertexArray(0);
 
-			if(entity->hasDiffuseMap(partID))
+			if (entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 		}
 
-		if(entity->isFaceCulled())
+		if (entity->isFaceCulled())
 		{
 			glDisable(GL_CULL_FACE);
 		}

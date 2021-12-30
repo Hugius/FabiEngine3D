@@ -38,12 +38,12 @@ void TerrainEditor::load()
 
 	_fe3d.model_create("@@box", "engine\\assets\\mesh\\box.obj");
 	_fe3d.model_setBasePosition("@@box", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
-	_fe3d.model_setDiffuseMap("@@box", "", "engine\\assets\\texture\\diffuse_map\\box.png");
+	_fe3d.model_setDiffuseMap("@@box", "", "engine\\assets\\image\\diffuse_map\\box.png");
 	_fe3d.model_setFaceCulled("@@box", true);
 	_fe3d.model_create("@@grid", "engine\\assets\\mesh\\plane.obj");
 	_fe3d.model_setBasePosition("@@grid", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d.model_setBaseSize("@@grid", fvec3(GRID_SIZE, 1.0f, GRID_SIZE));
-	_fe3d.model_setDiffuseMap("@@grid", "", "engine\\assets\\texture\\diffuse_map\\grid.png");
+	_fe3d.model_setDiffuseMap("@@grid", "", "engine\\assets\\image\\diffuse_map\\grid.png");
 	_fe3d.model_setTextureRepeat("@@grid", "", GRID_UV);
 	_fe3d.model_setShadowed("@@grid", false);
 

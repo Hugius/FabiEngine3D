@@ -8,7 +8,7 @@ void ScriptEditor::_updateTextWriter()
 	{
 		if (_fe3d.misc_isCursorInsideViewport())
 		{
-			_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\diffuse_map\\cursor_text.png");
+			_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_text.png");
 		}
 
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isCursorInsideViewport())

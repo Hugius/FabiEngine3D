@@ -29,9 +29,9 @@ EngineController::EngineController()
 void EngineController::FE3D_CONTROLLER_INIT()
 {
 	const string meshDirectoryPath = "engine\\assets\\mesh\\";
-	const string cubeMapDirectoryPath = "engine\\assets\\texture\\cube_map\\";
-	const string diffuseMapDirectoryPath = "engine\\assets\\texture\\diffuse_map\\";
-	const string fontMapDirectoryPath = "engine\\assets\\texture\\font_map\\";
+	const string cubeMapDirectoryPath = "engine\\assets\\image\\cube_map\\";
+	const string diffuseMapDirectoryPath = "engine\\assets\\image\\diffuse_map\\";
+	const string fontMapDirectoryPath = "engine\\assets\\image\\font_map\\";
 
 	if (Config::getInst().isApplicationExported())
 	{
@@ -104,7 +104,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 		image_create("@@cursor", true);
 		image_setSize("@@cursor", fvec2(CURSOR_IMAGE_SIZE, (CURSOR_IMAGE_SIZE * Tools::getWindowAspectRatio())));
-		image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\diffuse_map\\cursor_default.png");
+		image_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_default.png");
 		misc_setCursorEntityID("@@cursor");
 		misc_setCursorVisible(false);
 
@@ -151,7 +151,7 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 		sky_setRotation("@@background", sky_getRotation("@@background") + 0.0025f);
 
 		image_setPosition("@@cursor", Math::convertToNDC(Tools::convertFromScreenCoords(misc_getCursorPosition())));
-		image_setDiffuseMap("@@cursor", "engine\\assets\\texture\\diffuse_map\\cursor_default.png");
+		image_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_default.png");
 		image_setVisible("@@cursor", misc_isCursorInsideWindow());
 
 		_gui.update();

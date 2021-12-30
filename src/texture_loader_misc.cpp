@@ -67,12 +67,14 @@ vector<float> TextureLoader::_loadBitmap(const string& filePath)
 	return pixelIntensities;
 }
 
-shared_ptr<Image> TextureLoader::_loadImage(const string& filePath)
+shared_ptr<Image> TextureLoader::_loadImage(const string& filePath, bool mustFlip)
 {
 	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 
+	stbi_set_flip_vertically_on_load(mustFlip);
+
 	int width, height, channelCount;
-	unsigned char* pixels = stbi_load(string(rootDirectoryPath + filePath).c_str(), &width, &height, &channelCount, 0);
+	const auto pixels = stbi_load(string(rootDirectoryPath + filePath).c_str(), &width, &height, &channelCount, 0);
 
 	if(pixels == nullptr)
 	{

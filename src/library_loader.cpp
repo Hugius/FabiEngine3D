@@ -41,8 +41,6 @@ LibraryLoader::LibraryLoader()
 		Logger::throwFatalWarning("SDL_MIX could not be initialized: ", Mix_GetError());
 	}
 
-	stbi_set_flip_vertically_on_load(true);
-
 	WSADATA wsaData;
 	auto winsockResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
 	if(winsockResult != 0)

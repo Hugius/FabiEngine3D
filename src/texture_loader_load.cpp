@@ -17,7 +17,7 @@ const TextureID TextureLoader::load2dTexture(const string& filePath, bool isMipm
 		return cacheIterator->second;
 	}
 
-	auto loadedImage = _loadImage(filePath);
+	auto loadedImage = _loadImage(filePath, true);
 
 	if(loadedImage == nullptr)
 	{
@@ -58,7 +58,7 @@ const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 
 	for(size_t i = 0; i < filePaths.size(); i++)
 	{
-		loadedImages[i] = _loadImage(filePaths[i]);
+		loadedImages[i] = _loadImage(filePaths[i], false);
 
 		if((loadedImages[i] == nullptr) && !filePaths[i].empty())
 		{

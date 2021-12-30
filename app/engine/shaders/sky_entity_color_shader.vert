@@ -12,5 +12,5 @@ out vec3 f_uv;
 void main()
 {
 	gl_Position = (u_projectionMatrix * u_viewMatrix * u_rotationMatrix * vec4(v_position, 1.0f));
-    f_uv = vec3(v_position.x, -v_position.y, v_position.z);
+    f_uv = v_position;
 }

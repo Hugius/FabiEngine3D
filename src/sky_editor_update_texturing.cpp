@@ -145,39 +145,6 @@ void SkyEditor::_updateTexturingMenu()
 			_fe3d.misc_clear3dTextureCache(_fe3d.sky_getCubeMapPaths(_currentSkyID));
 			_fe3d.sky_setBottomCubeMap(_currentSkyID, finalFilePath);
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("frontMap")->isHovered())
-		{
-			if(_currentProjectID.empty())
-			{
-				Logger::throwError("SkyEditor::_updateTexturingMenu");
-			}
-
-			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\cube_map\\");
-
-			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
-			{
-				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
-				return;
-			}
-
-			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
-			if(filePath.empty())
-			{
-				return;
-			}
-
-			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
-			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
-			{
-				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
-				return;
-			}
-
-			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
-			_fe3d.misc_clear3dTextureCache(_fe3d.sky_getCubeMapPaths(_currentSkyID));
-			_fe3d.sky_setFrontCubeMap(_currentSkyID, finalFilePath);
-		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("backMap")->isHovered())
 		{
 			if(_currentProjectID.empty())
@@ -210,6 +177,39 @@ void SkyEditor::_updateTexturingMenu()
 			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
 			_fe3d.misc_clear3dTextureCache(_fe3d.sky_getCubeMapPaths(_currentSkyID));
 			_fe3d.sky_setBackCubeMap(_currentSkyID, finalFilePath);
+		}
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("frontMap")->isHovered())
+		{
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("SkyEditor::_updateTexturingMenu");
+			}
+
+			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\cube_map\\");
+
+			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
+			{
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
+				return;
+			}
+
+			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
+			if(filePath.empty())
+			{
+				return;
+			}
+
+			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
+			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
+			{
+				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
+				return;
+			}
+
+			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
+			_fe3d.misc_clear3dTextureCache(_fe3d.sky_getCubeMapPaths(_currentSkyID));
+			_fe3d.sky_setFrontCubeMap(_currentSkyID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{

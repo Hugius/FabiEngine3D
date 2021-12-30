@@ -49,8 +49,8 @@ private:
 	void _unloadImage(shared_ptr<Image> image);
 
 	vector<float> _loadBitmap(const string& filePath);
+	shared_ptr<Image> _loadImage(const string& filePath, bool mustFlip);
 
-	shared_ptr<Image> _loadImage(const string& filePath);
 	TextureID _create2dTexture(shared_ptr<Image> image, const string& filePath, bool isMipmapped, bool isAnisotropic);
 	TextureID _create3dTexture(const array<shared_ptr<Image>, 6 >& images, const array<string, 6>& filePaths);
 

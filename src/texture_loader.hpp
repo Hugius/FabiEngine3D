@@ -2,6 +2,7 @@
 
 #include "render_bus.hpp"
 #include "render_utils.hpp"
+#include "texture_data.hpp"
 
 #include <SDL/SDL.h>
 #include <array>
@@ -14,6 +15,8 @@ using std::array;
 using std::vector;
 using std::string;
 using std::map;
+using std::shared_ptr;
+using std::make_shared;
 
 class TextureLoader final
 {
@@ -44,11 +47,11 @@ public:
 private:
 	void _reloadAnisotropicFiltering();
 
-	vector<float> _loadBitmap(const string& filePath);
+	vector<float> _loadBitmapData(const string& filePath);
 
-	SDL_Surface* _loadSurface(const string& filePath);
-	TextureID _convertInto2dTexture(SDL_Surface* surface, const string& filePath, bool isMipmapped, bool isAnisotropic);
-	TextureID _convertInto3dTexture(const array<SDL_Surface*, 6>& surfaces, const array<string, 6>& filePaths);
+	shared_ptr<TextureData> _loadTextureData(const string& filePath);
+	TextureID _create2dTexture(shared_ptr<TextureData > textureData, const string& filePath, bool isMipmapped, bool isAnisotropic);
+	TextureID _create3dTexture(const array<shared_ptr<TextureData>, 6 >& textureData, const array<string, 6>& filePaths);
 
 	map<string, vector<float>> _bitmapCache;
 

@@ -148,6 +148,7 @@
     <ClCompile Include="..\..\..\src\mesh_loader_public.cpp" />
     <ClCompile Include="..\..\..\src\mesh_loader_private.cpp" />
     <ClCompile Include="..\..\..\src\mesh_part.cpp" />
+    <ClCompile Include="..\..\..\src\texture_data.cpp" />
     <ClCompile Include="..\..\..\src\texture_loader_load.cpp" />
     <ClCompile Include="..\..\..\src\texture_loader_cache.cpp" />
     <ClCompile Include="..\..\..\src\texture_loader_misc.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="..\..\..\src\audio_loader.hpp" />
     <ClInclude Include="..\..\..\src\mesh_loader.hpp" />
     <ClInclude Include="..\..\..\src\mesh_part.hpp" />
+    <ClInclude Include="..\..\..\src\texture_data.hpp" />
     <ClInclude Include="..\..\..\src\texture_loader.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

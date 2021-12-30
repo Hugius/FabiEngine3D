@@ -16,7 +16,7 @@ BEGIN:;
 		return cacheIterator->second;
 	}
 
-	auto loadedSurface = _loadSurface(filePath);
+	auto loadedSurface = _loadTextureData(filePath);
 
 	if (loadedSurface == nullptr)
 	{
@@ -25,9 +25,7 @@ BEGIN:;
 	}
 	else
 	{
-		auto loadedTexture = _convertInto2dTexture(loadedSurface, filePath, isMipmapped, isAnisotropic);
-
-		SDL_FreeSurface(loadedSurface);
+		auto loadedTexture = _create2dTexture(loadedSurface, filePath, isMipmapped, isAnisotropic);
 
 		if (loadedTexture == 0)
 		{
@@ -52,12 +50,12 @@ BEGIN:;
 		return cacheIterator->second;
 	}
 
-	vector<future<SDL_Surface*>> threads;
-	array<SDL_Surface*, 6> loadedSurfaces = {};
+	vector<future<shared_ptr<TextureData>>> threads;
+	array<shared_ptr<TextureData>, 6> loadedSurfaces = {};
 
 	for (size_t i = 0; i < filePaths.size(); i++)
 	{
-		threads.push_back(async(launch::async, &TextureLoader::_loadSurface, this, filePaths[i]));
+		threads.push_back(async(launch::async, &TextureLoader::_loadTextureData, this, filePaths[i]));
 	}
 
 	for (size_t i = 0; i < threads.size(); i++)
@@ -70,15 +68,7 @@ BEGIN:;
 		}
 	}
 
-	TextureID loadedTexture = _convertInto3dTexture(loadedSurfaces, filePaths);
-
-	for (const auto& surface : loadedSurfaces)
-	{
-		if (surface != nullptr)
-		{
-			SDL_FreeSurface(surface);
-		}
-	}
+	TextureID loadedTexture = _create3dTexture(loadedSurfaces, filePaths);
 
 	if (loadedTexture == 0)
 	{
@@ -102,7 +92,7 @@ BEGIN:;
 		return &cacheIterator->second;
 	}
 
-	auto loadedBitmap = _loadBitmap(filePath);
+	auto loadedBitmap = _loadBitmapData(filePath);
 
 	if (loadedBitmap.empty())
 	{

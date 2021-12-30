@@ -4,9 +4,7 @@
 #include "logger.hpp"
 
 #include <GLEW\\glew.h>
-#include <SDL\\SDL_image.h>
 #include <SDL\\SDL_mixer.h>
-#include <SDL\\SDL_syswm.h>
 
 #include <winsock2.h>
 #include <ShellScalingAPI.h>
@@ -36,12 +34,6 @@ LibraryLoader::LibraryLoader()
 		Logger::throwFatalWarning("GLEW could not be initialized: ", reinterpret_cast<char const*>(glewGetErrorString(initGlew)));
 	}
 
-	Logger::throwInfo("Initializing SDL_Image...");
-	if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
-	{
-		Logger::throwFatalWarning("SDL_IMG could not be initialized: ", IMG_GetError());
-	}
-
 	Logger::throwInfo("Initializing SDL_Mixer...");
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
 	{
@@ -59,7 +51,6 @@ LibraryLoader::LibraryLoader()
 LibraryLoader::~LibraryLoader()
 {
 	WSACleanup();
-	IMG_Quit();
 	Mix_Quit();
 	SDL_Quit();
 }

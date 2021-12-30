@@ -33,7 +33,7 @@ void TextEntity::setContent(const string& value, TextureLoader& textureLoader)
 			characterEntity->setRenderBuffer(_renderBuffer);
 			characterEntity->setDiffuseMap(texture);
 			characterEntity->setMultiplierUV(multiplierUV);
-			characterEntity->setAdderUV(fvec2(multiplierUV.x * 3.0f, multiplierUV.y));
+			characterEntity->setAdderUV(adderUV);
 
 			_characterEntities.push_back(characterEntity);
 		}

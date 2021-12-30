@@ -16,7 +16,7 @@ using std::chrono::system_clock;
 
 void TextureLoader::cache2dTextures(const vector<string>& filePaths, bool isMipmapped, bool isAnisotropic)
 {
-	vector<future<SDL_Surface*>> threads;
+	vector<future<shared_ptr<TextureData>>> threads;
 	vector<string> finalFilePaths;
 	vector<bool> threadStatuses;
 	unsigned int finishedThreadCount = 0;
@@ -28,7 +28,7 @@ void TextureLoader::cache2dTextures(const vector<string>& filePaths, bool isMipm
 	{
 		if (_2dTextureCache.find(filePath) == _2dTextureCache.end())
 		{
-			threads.push_back(async(launch::async, &TextureLoader::_loadSurface, this, filePath));
+			threads.push_back(async(launch::async, &TextureLoader::_loadTextureData, this, filePath));
 			finalFilePaths.push_back(filePath);
 			threadStatuses.push_back(false);
 		}
@@ -53,9 +53,7 @@ void TextureLoader::cache2dTextures(const vector<string>& filePaths, bool isMipm
 					}
 					else
 					{
-						auto loadedTexture = _convertInto2dTexture(loadedImage, finalFilePaths[i], isMipmapped, isAnisotropic);
-
-						SDL_FreeSurface(loadedImage);
+						auto loadedTexture = _create2dTexture(loadedImage, finalFilePaths[i], isMipmapped, isAnisotropic);
 
 						if (loadedTexture != 0)
 						{
@@ -70,7 +68,7 @@ void TextureLoader::cache2dTextures(const vector<string>& filePaths, bool isMipm
 
 void TextureLoader::cache3dTextures(const vector<array<string, 6>>& filePathsList)
 {
-	vector<vector<future<SDL_Surface*>>> threads;
+	vector<vector<future<shared_ptr<TextureData>>>> threads;
 	vector<array<string, 6>> finalFilePathsList;
 	vector<bool> threadStatuses;
 	unsigned int finishedThreadCount = 0;
@@ -82,7 +80,7 @@ void TextureLoader::cache3dTextures(const vector<array<string, 6>>& filePathsLis
 			threads.push_back({});
 			for (const auto& filePath : filePaths)
 			{
-				threads.back().push_back(async(launch::async, &TextureLoader::_loadSurface, this, filePath));
+				threads.back().push_back(async(launch::async, &TextureLoader::_loadTextureData, this, filePath));
 			}
 			finalFilePathsList.push_back(filePaths);
 			threadStatuses.push_back(false);
@@ -104,7 +102,7 @@ void TextureLoader::cache3dTextures(const vector<array<string, 6>>& filePathsLis
 					}
 				}
 
-				array<SDL_Surface*, 6> loadedImages;
+				array<shared_ptr<TextureData>, 6> loadedImages;
 				if (threadsAreFinished)
 				{
 					threadStatuses[i] = true;
@@ -120,15 +118,7 @@ void TextureLoader::cache3dTextures(const vector<array<string, 6>>& filePathsLis
 						}
 					}
 
-					TextureID loadedTexture = _convertInto3dTexture(loadedImages, finalFilePathsList[i]);
-
-					for (const auto& image : loadedImages)
-					{
-						if (image != nullptr)
-						{
-							SDL_FreeSurface(image);
-						}
-					}
+					TextureID loadedTexture = _create3dTexture(loadedImages, finalFilePathsList[i]);
 
 					if (loadedTexture != 0)
 					{
@@ -154,7 +144,7 @@ void TextureLoader::cacheBitmaps(const vector<string>& filePaths)
 	{
 		if (_bitmapCache.find(filePath) == _bitmapCache.end())
 		{
-			threads.push_back(async(launch::async, &TextureLoader::_loadBitmap, this, filePath));
+			threads.push_back(async(launch::async, &TextureLoader::_loadBitmapData, this, filePath));
 			finalFilePaths.push_back(filePath);
 			threadStatuses.push_back(false);
 		}

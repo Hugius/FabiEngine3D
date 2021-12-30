@@ -10,42 +10,60 @@
     <Filter Include="Texture">
       <UniqueIdentifier>{760944bd-52d8-46f2-aefc-76f4aec62d89}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mesh\Data">
+      <UniqueIdentifier>{670e6dd3-26c9-4552-8298-3b97153e715b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mesh\Loader">
+      <UniqueIdentifier>{d894e6c9-7082-4486-9b63-9b4b1d1abd8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Texture\Data">
+      <UniqueIdentifier>{a4e2ed8e-5b9a-4f8e-8ddc-9506e5f0d855}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Texture\Loader">
+      <UniqueIdentifier>{f93f75be-f68b-4c7e-8f52-7bc78fd7c7d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\audio_loader.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\mesh_loader_private.cpp">
-      <Filter>Mesh</Filter>
+      <Filter>Mesh\Loader</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\mesh_loader_public.cpp">
-      <Filter>Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\texture_loader_cache.cpp">
-      <Filter>Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\texture_loader_misc.cpp">
-      <Filter>Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\texture_loader_load.cpp">
-      <Filter>Texture</Filter>
+      <Filter>Mesh\Loader</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\mesh_part.cpp">
-      <Filter>Mesh</Filter>
+      <Filter>Mesh\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\texture_loader_misc.cpp">
+      <Filter>Texture\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\texture_loader_cache.cpp">
+      <Filter>Texture\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\texture_loader_load.cpp">
+      <Filter>Texture\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\texture_data.cpp">
+      <Filter>Texture\Data</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\audio_loader.hpp">
       <Filter>Audio</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\mesh_part.hpp">
-      <Filter>Mesh</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\mesh_loader.hpp">
-      <Filter>Mesh</Filter>
+      <Filter>Mesh\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\mesh_part.hpp">
+      <Filter>Mesh\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\texture_loader.hpp">
-      <Filter>Texture</Filter>
+      <Filter>Texture\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\texture_data.hpp">
+      <Filter>Texture\Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

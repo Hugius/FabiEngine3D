@@ -6,7 +6,8 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-#include <SDL\\SDL_image.h>
+#define STB_IMAGE_IMPLEMENTATION
+#include <STB/stb_image.h>
 
 using std::clamp;
 
@@ -33,7 +34,7 @@ void TextureLoader::cacheBitmap(const string& filePath)
 }
 
 /* http://stackoverflow.com/questions/1968561/getting-the-pixel-value-of-bmp-file */
-vector<float> TextureLoader::_loadBitmap(const string& filePath)
+vector<float> TextureLoader::_loadBitmapData(const string& filePath)
 {
 	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 
@@ -71,30 +72,34 @@ vector<float> TextureLoader::_loadBitmap(const string& filePath)
 	return pixelIntensities;
 }
 
-SDL_Surface* TextureLoader::_loadSurface(const string& filePath)
+shared_ptr<TextureData> TextureLoader::_loadTextureData(const string& filePath)
 {
-	auto temp = freopen("NUL:", "w", stderr);
-
 	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 
-	SDL_Surface* surface = IMG_Load(string(rootDirectoryPath + filePath).c_str());
+	stbi_set_flip_vertically_on_load(true);
 
-	return surface;
+	int width, height, channelCount;
+	unsigned char* pixels = stbi_load(string(rootDirectoryPath + filePath).c_str(), &width, &height, &channelCount, 0);
+
+	return make_shared<TextureData>(pixels,
+		static_cast<unsigned int>(width),
+		static_cast<unsigned int>(height),
+		static_cast<unsigned int>(channelCount));
 }
 
-TextureID TextureLoader::_convertInto2dTexture(SDL_Surface* surface, const string& filePath, bool isMipmapped, bool isAnisotropic)
+TextureID TextureLoader::_create2dTexture(shared_ptr<TextureData> textureData, const string& filePath, bool isMipmapped, bool isAnisotropic)
 {
 	TextureID texture;
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	if (surface->format->BytesPerPixel == 4)
+	if (textureData->getChannelCount() == 4)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surface->w, surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, surface->pixels);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureData->getWidth(), textureData->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, textureData->getPixels());
 	}
-	else if (surface->format->BytesPerPixel == 3)
+	else if (textureData->getChannelCount() == 3)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, surface->w, surface->h, 0, GL_RGB, GL_UNSIGNED_BYTE, surface->pixels);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureData->getWidth(), textureData->getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, textureData->getPixels());
 	}
 	else
 	{
@@ -124,7 +129,7 @@ TextureID TextureLoader::_convertInto2dTexture(SDL_Surface* surface, const strin
 	return texture;
 }
 
-TextureID TextureLoader::_convertInto3dTexture(const array<SDL_Surface*, 6>& surfaces, const array<string, 6>& filePaths)
+TextureID TextureLoader::_create3dTexture(const array<shared_ptr<TextureData>, 6>& textures, const array<string, 6>& filePaths)
 {
 	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 
@@ -133,11 +138,11 @@ TextureID TextureLoader::_convertInto3dTexture(const array<SDL_Surface*, 6>& sur
 	glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
 
 	int surfaceSize = -1;
-	for (size_t i = 0; i < surfaces.size(); i++)
+	for (size_t i = 0; i < textures.size(); i++)
 	{
-		if (surfaces[i] != nullptr)
+		if (textures[i] != nullptr)
 		{
-			if (surfaces[i]->w != surfaces[i]->h)
+			if (textures[i]->getWidth() != textures[i]->getHeight())
 			{
 				Logger::throwWarning("3D texture width must be same as height: \"" + filePaths[i] + "\"");
 				return 0;
@@ -145,11 +150,11 @@ TextureID TextureLoader::_convertInto3dTexture(const array<SDL_Surface*, 6>& sur
 
 			if (surfaceSize == -1)
 			{
-				surfaceSize = surfaces[i]->w;
+				surfaceSize = textures[i]->getWidth();
 			}
 			else
 			{
-				if (surfaceSize != surfaces[i]->w)
+				if (surfaceSize != textures[i]->getWidth())
 				{
 					Logger::throwWarning("All 3D textures must have the same resolution: \"" + filePaths[i] + "\"");
 					return 0;
@@ -158,15 +163,15 @@ TextureID TextureLoader::_convertInto3dTexture(const array<SDL_Surface*, 6>& sur
 		}
 	}
 
-	for (size_t i = 0; i < surfaces.size(); i++)
+	for (size_t i = 0; i < textures.size(); i++)
 	{
-		if (surfaces[i] == nullptr)
+		if (textures[i] == nullptr)
 		{
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, surfaceSize, surfaceSize, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
 		}
 		else
 		{
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, surfaceSize, surfaceSize, 0, GL_RGB, GL_UNSIGNED_BYTE, surfaces[i]->pixels);
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, surfaceSize, surfaceSize, 0, GL_RGB, GL_UNSIGNED_BYTE, textures[i]->getPixels());
 
 			Logger::throwInfo("Loaded texture: \"" + filePaths[i] + "\"");
 		}

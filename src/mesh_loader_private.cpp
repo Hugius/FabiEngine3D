@@ -50,9 +50,9 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 		}
 		else if(strcmp(lineHeader, "v") == 0)
 		{
-			fvec3 vertex;
-			auto temp = fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
-			temp_positions.push_back(vertex);
+			fvec3 position;
+			auto temp = fscanf(file, "%f %f %f\n", &position.x, &position.y, &position.z);
+			temp_positions.push_back(position);
 
 			continue;
 		}
@@ -74,14 +74,14 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 		}
 		else if(strcmp(lineHeader, "f") == 0)
 		{
-			unsigned int posIndex[3];
+			unsigned int positionIndex[3];
 			unsigned int uvIndex[3];
 			unsigned int normalIndex[3];
 
 			int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n",
-								 &posIndex[0], &uvIndex[0], &normalIndex[0],
-								 &posIndex[1], &uvIndex[1], &normalIndex[1],
-								 &posIndex[2], &uvIndex[2], &normalIndex[2]);
+								 &positionIndex[0], &uvIndex[0], &normalIndex[0],
+								 &positionIndex[1], &uvIndex[1], &normalIndex[1],
+								 &positionIndex[2], &uvIndex[2], &normalIndex[2]);
 
 			if(matches != 9)
 			{
@@ -98,7 +98,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 
 					for(int i = 0; i < 3; i++)
 					{
-						meshPart->addVertex(temp_positions[posIndex[i] - 1]);
+						meshPart->addPosition(temp_positions[positionIndex[i] - 1]);
 						meshPart->addUV(temp_uvs[uvIndex[i] - 1]);
 						meshPart->addNormal(temp_normals[normalIndex[i] - 1]);
 					}
@@ -113,7 +113,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 
 				for(int i = 0; i < 3; i++)
 				{
-					newPart.addVertex(temp_positions[posIndex[i] - 1]);
+					newPart.addPosition(temp_positions[positionIndex[i] - 1]);
 					newPart.addUV(temp_uvs[uvIndex[i] - 1]);
 					newPart.addNormal(temp_normals[normalIndex[i] - 1]);
 				}
@@ -125,24 +125,24 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 
 	for(const auto& meshPart : meshParts)
 	{
-		for(size_t i = 0; i < meshPart->getVertices().size(); i += 3)
+		for(size_t i = 0; i < meshPart->getPositions().size(); i += 3)
 		{
-			fvec3 v0 = meshPart->getVertices()[i + 0];
-			fvec3 v1 = meshPart->getVertices()[i + 1];
-			fvec3 v2 = meshPart->getVertices()[i + 2];
+			fvec3 v0 = meshPart->getPositions()[i + 0];
+			fvec3 v1 = meshPart->getPositions()[i + 1];
+			fvec3 v2 = meshPart->getPositions()[i + 2];
 
 			fvec2 uv0 = meshPart->getUVs()[i + 0];
 			fvec2 uv1 = meshPart->getUVs()[i + 1];
 			fvec2 uv2 = meshPart->getUVs()[i + 2];
 
-			fvec3 deltaPos1 = (v1 - v0);
-			fvec3 deltaPos2 = (v2 - v0);
+			fvec3 deltaPosition1 = (v1 - v0);
+			fvec3 deltaPosition2 = (v2 - v0);
 
 			fvec2 deltaUV1 = (uv1 - uv0);
 			fvec2 deltaUV2 = (uv2 - uv0);
 
 			float r = (1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x));
-			fvec3 tangent = ((deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r);
+			fvec3 tangent = ((deltaPosition1 * deltaUV2.y - deltaPosition2 * deltaUV1.y) * r);
 
 			meshPart->addTangent(tangent);
 			meshPart->addTangent(tangent);

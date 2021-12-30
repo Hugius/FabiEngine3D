@@ -129,24 +129,18 @@ TextureID TextureLoader::_create2dTexture(shared_ptr<Image> image, const string&
 
 TextureID TextureLoader::_create3dTexture(const array<shared_ptr<Image>, 6>& images, const array<string, 6>& filePaths)
 {
-	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-
-	TextureID texture;
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
-
-	int imageSize = -1;
+	unsigned int imageSize = 0;
 	for(size_t i = 0; i < images.size(); i++)
 	{
 		if(images[i] != nullptr)
 		{
 			if(images[i]->getWidth() != images[i]->getHeight())
 			{
-				Logger::throwError("3D texture width must be height: \"" + filePaths[i] + "\"");
+				Logger::throwWarning("3D texture width must be height: \"" + filePaths[i] + "\"");
 				return 0;
 			}
 
-			if(imageSize == -1)
+			if(imageSize == 0)
 			{
 				imageSize = images[i]->getWidth();
 			}
@@ -154,12 +148,16 @@ TextureID TextureLoader::_create3dTexture(const array<shared_ptr<Image>, 6>& ima
 			{
 				if(imageSize != images[i]->getWidth())
 				{
-					Logger::throwError("All 3D textures must have the same resolution: \"" + filePaths[i] + "\"");
+					Logger::throwWarning("All 3D image must have the same resolution: \"" + filePaths[i] + "\"");
 					return 0;
 				}
 			}
 		}
 	}
+
+	TextureID texture;
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
 
 	for(size_t i = 0; i < images.size(); i++)
 	{

@@ -7,9 +7,9 @@ MeshPart::MeshPart(const string& ID)
 
 }
 
-void MeshPart::addVertex(fvec3 value)
+void MeshPart::addPosition(fvec3 value)
 {
-	_vertices.push_back(value);
+	_positions.push_back(value);
 }
 
 void MeshPart::addNormal(fvec3 value)
@@ -32,9 +32,9 @@ const string& MeshPart::getID() const
 	return _ID;
 }
 
-const vector<fvec3>& MeshPart::getVertices() const
+const vector<fvec3>& MeshPart::getPositions() const
 {
-	return _vertices;
+	return _positions;
 }
 
 const vector<fvec3>& MeshPart::getNormals() const

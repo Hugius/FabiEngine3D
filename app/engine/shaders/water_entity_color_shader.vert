@@ -1,7 +1,7 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-layout (location = 0) in vec3 v_pos;
+layout (location = 0) in vec3 v_position;
 layout (location = 1) in vec2 v_uv;
 
 layout (location = 5) uniform sampler2D u_displacementMap;
@@ -23,7 +23,7 @@ out vec3 f_position;
 
 void main()
 {
-	vec3 newPosition = v_pos;
+	vec3 newPosition = v_position;
 
 	newPosition.y = u_height;
 

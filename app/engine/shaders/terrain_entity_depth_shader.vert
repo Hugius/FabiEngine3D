@@ -1,14 +1,14 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-layout (location = 0) in vec3 v_pos;
+layout (location = 0) in vec3 v_position;
 
 uniform mat4 u_viewMatrix;
 uniform mat4 u_projectionMatrix;
 
 void main()
 {
-	vec4 worldSpacePosition = vec4(v_pos, 1.0f);
+	vec4 worldSpacePosition = vec4(v_position, 1.0f);
 	vec4 viewSpacePosition  = (u_viewMatrix * worldSpacePosition);
 	vec4 clipSpacePosition  = (u_projectionMatrix * viewSpacePosition);
 

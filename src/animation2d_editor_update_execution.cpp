@@ -54,7 +54,7 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 		fvec2 multiplierUV = fvec2((1.0f / static_cast<float>(animation.getColumnCount())),
 								   (1.0f / static_cast<float>(animation.getRowCount())));
 		fvec2 adderUV = fvec2((static_cast<float>(animation.getColumnIndex()) * multiplierUV.x),
-							  (static_cast<float>(animation.getRowIndex()) * multiplierUV.y));
+							  (static_cast<float>(animation.getRowCount() - animation.getRowIndex() - 1) * multiplierUV.y));
 
 		_fe3d.billboard_setMultiplierUV(idPair.second, multiplierUV);
 		_fe3d.billboard_setAdderUV(idPair.second, adderUV);

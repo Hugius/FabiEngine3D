@@ -12,8 +12,8 @@ using std::string;
 class RenderBus final
 {
 public:
-	void setPrimaryWorldMap(TextureID value);
-	void setSecondaryWorldMap(TextureID value);
+	void setPrimarySceneMap(TextureID value);
+	void setSecondarySceneMap(TextureID value);
 	void setPlanarReflectionMap(TextureID value);
 	void setWaterReflectionMap(TextureID value);
 	void setWaterRefractionMap(TextureID value);
@@ -23,7 +23,7 @@ public:
 	void setDofMap(TextureID value);
 	void setLensFlareMap(TextureID value);
 	void setMotionBlurMap(TextureID value);
-	void setFinalWorldMap(TextureID value);
+	void setFinalSceneMap(TextureID value);
 	void setCursorEntityID(const string& value);
 	void setLensFlareMapPath(const string& value);
 	void setViewMatrix(const mat44 value);
@@ -163,8 +163,8 @@ public:
 	const bool isTriangleCountingEnabled() const;
 	const bool isDofDynamic() const;
 
-	const TextureID getPrimaryWorldMap() const;
-	const TextureID getSecondaryWorldMap() const;
+	const TextureID getPrimarySceneMap() const;
+	const TextureID getSecondarySceneMap() const;
 	const TextureID getPlanarReflectionMap() const;
 	const TextureID getWaterReflectionMap() const;
 	const TextureID getWaterRefractionMap() const;
@@ -173,13 +173,13 @@ public:
 	const TextureID getDepthMap() const;
 	const TextureID getDofMap() const;
 	const TextureID getLensFlareMap() const;
-	const TextureID getFinalWorldMap() const;
+	const TextureID getFinalSceneMap() const;
 	const TextureID getMotionBlurMap() const;
 	const BloomType getBloomType() const;
 
 private:
-	TextureID _primaryWorldMap = 0;
-	TextureID _secondaryWorldMap = 0;
+	TextureID _primarySceneMap = 0;
+	TextureID _secondarySceneMap = 0;
 	TextureID _planarReflectionMap = 0;
 	TextureID _waterReflectionMap = 0;
 	TextureID _waterRefractionMap = 0;
@@ -188,7 +188,7 @@ private:
 	TextureID _depthMap = 0;
 	TextureID _dofMap = 0;
 	TextureID _lensFlareMap = 0;
-	TextureID _finalWorldMap = 0;
+	TextureID _finalSceneMap = 0;
 	TextureID _motionBlurMap = 0;
 
 	string _cursorEntityID = "";

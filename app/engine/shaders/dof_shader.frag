@@ -7,7 +7,7 @@
 in vec2 f_uv;
 
 layout (location = 0) uniform sampler2D u_depthMap;
-layout (location = 1) uniform sampler2D u_worldMap;
+layout (location = 1) uniform sampler2D u_sceneMap;
 layout (location = 2) uniform sampler2D u_dofMap;
 
 uniform float u_nearDistance;
@@ -26,7 +26,7 @@ void main()
 {
 	if (!u_isDofEnabled)
 	{
-        o_finalColor.rgb = texture(u_worldMap, f_uv).rgb;
+        o_finalColor.rgb = texture(u_sceneMap, f_uv).rgb;
 		o_finalColor.a = 1.0f;
 		return;
     }
@@ -54,13 +54,13 @@ void main()
 
         float finalMixValue = mix(0.0f, blurMixValue, (u_isDofDynamic ? distanceMixValue : 1.0f));
 
-        vec3 worldColor = texture(u_worldMap, f_uv).rgb;
+        vec3 worldColor = texture(u_sceneMap, f_uv).rgb;
         o_finalColor.rgb = mix(worldColor, blurColor, finalMixValue);
         o_finalColor.a = 1.0f;
     }
     else
     {
-        o_finalColor.rgb = texture(u_worldMap, f_uv).rgb;
+        o_finalColor.rgb = texture(u_sceneMap, f_uv).rgb;
 		o_finalColor.a = 1.0f;
     }
 }

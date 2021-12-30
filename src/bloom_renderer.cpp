@@ -5,12 +5,12 @@ void BloomRenderer::bind()
 {
 	_shader.bind();
 
-	_shader.uploadUniform("u_worldMap", 0);
+	_shader.uploadUniform("u_sceneMap", 0);
 	_shader.uploadUniform("u_bloomMap", 1);
 	_shader.uploadUniform("u_isBloomEnabled", _renderBus.isBloomEnabled());
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalWorldMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap());
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, _renderBus.getBloomMap());
 }

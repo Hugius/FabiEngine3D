@@ -62,10 +62,10 @@ private:
 	void _renderModelEntities();
 	void _renderBillboardEntities();
 	void _renderAabbEntities();
-	void _renderFinalQuad();
+	void _renderFinalSceneMap();
+	void _renderDebugScreens();
 	void _renderGUI();
 	void _renderCursor();
-	void _renderDebugScreens();
 
 	float _cameraYawDifference = 0.0f;
 	float _cameraPitchDifference = 0.0f;

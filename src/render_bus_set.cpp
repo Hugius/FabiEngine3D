@@ -25,14 +25,14 @@ void RenderBus::setBloomMap(TextureID value)
 	_bloomMap = value;
 }
 
-void RenderBus::setPrimaryWorldMap(TextureID value)
+void RenderBus::setPrimarySceneMap(TextureID value)
 {
-	_primaryWorldMap = value;
+	_primarySceneMap = value;
 }
 
-void RenderBus::setSecondaryWorldMap(TextureID value)
+void RenderBus::setSecondarySceneMap(TextureID value)
 {
-	_secondaryWorldMap = value;
+	_secondarySceneMap = value;
 }
 
 void RenderBus::setShadowMap(TextureID value)
@@ -60,9 +60,9 @@ void RenderBus::setDofMap(TextureID value)
 	_dofMap = value;
 }
 
-void RenderBus::setFinalWorldMap(TextureID value)
+void RenderBus::setFinalSceneMap(TextureID value)
 {
-	_finalWorldMap = value;
+	_finalSceneMap = value;
 }
 
 void RenderBus::setViewMatrix(const mat44 value)

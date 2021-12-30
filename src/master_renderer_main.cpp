@@ -139,9 +139,9 @@ void MasterRenderer::render(EntityBus* entityBus)
 		_renderBus.setTriangleCountingEnabled(false);
 
 		_worldColorCaptureBuffer.unbind();
-		_renderBus.setFinalWorldMap(_worldColorCaptureBuffer.getTexture(0));
-		_renderBus.setPrimaryWorldMap(_worldColorCaptureBuffer.getTexture(0));
-		_renderBus.setSecondaryWorldMap(_worldColorCaptureBuffer.getTexture(1));
+		_renderBus.setFinalSceneMap(_worldColorCaptureBuffer.getTexture(0));
+		_renderBus.setPrimarySceneMap(_worldColorCaptureBuffer.getTexture(0));
+		_renderBus.setSecondarySceneMap(_worldColorCaptureBuffer.getTexture(1));
 
 		_timer.startDeltaPart("postProcessing");
 		_captureAntiAliasing();
@@ -162,7 +162,7 @@ void MasterRenderer::render(EntityBus* entityBus)
 		else
 		{
 			glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y + 0);
-			_renderFinalQuad();
+			_renderFinalSceneMap();
 			glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 
 		}

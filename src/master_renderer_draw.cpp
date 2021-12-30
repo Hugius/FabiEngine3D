@@ -190,9 +190,9 @@ void MasterRenderer::_renderAabbEntities()
 	}
 }
 
-void MasterRenderer::_renderFinalQuad()
+void MasterRenderer::_renderFinalSceneMap()
 {
-	_renderQuad->setDiffuseMap(_renderBus.getFinalWorldMap());
+	_renderQuad->setDiffuseMap(_renderBus.getFinalSceneMap());
 
 	_quadEntityColorRenderer.bind();
 	_quadEntityColorRenderer.render(_renderQuad);
@@ -265,10 +265,10 @@ void MasterRenderer::_renderDebugScreens()
 		return (static_cast<float>(text.size()) * charWidth);
 	};
 
-	shared_ptr<QuadEntity> worldQuad = make_shared<QuadEntity>("worldQuad");
-	worldQuad->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, 0.666f, 0.666f, 0.666f, true));
-	worldQuad->setDiffuseMap(_renderBus.getPrimaryWorldMap());
-	worldQuad->setMirroredVertically(true);
+	shared_ptr<QuadEntity> sceneQuad = make_shared<QuadEntity>("sceneQuad");
+	sceneQuad->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, 0.666f, 0.666f, 0.666f, true));
+	sceneQuad->setDiffuseMap(_renderBus.getFinalSceneMap());
+	sceneQuad->setMirroredVertically(true);
 
 	shared_ptr<QuadEntity> shadowQuad = make_shared<QuadEntity>("shadowQuad");
 	shadowQuad->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.666f, 0.666f, 0.666f, true));
@@ -365,7 +365,7 @@ void MasterRenderer::_renderDebugScreens()
 	motionBlurText->setColor(textColor);*/
 
 	_quadEntityColorRenderer.bind();
-	_quadEntityColorRenderer.render(worldQuad);
+	_quadEntityColorRenderer.render(sceneQuad);
 	_quadEntityColorRenderer.render(shadowQuad);
 	_quadEntityColorRenderer.render(bloomQuad);
 	_quadEntityColorRenderer.render(planarReflectionQuad);

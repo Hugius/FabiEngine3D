@@ -13,7 +13,7 @@ EntityBus::EntityBus
 	const unordered_map<string, shared_ptr<PointlightEntity>>& pointlightEntities,
 	const unordered_map<string, shared_ptr<SpotlightEntity>>& spotlightEntities,
 	const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities,
-	const unordered_map<string, shared_ptr<ImageEntity>>& imageEntities,
+	const unordered_map<string, shared_ptr<QuadEntity>>& quadEntities,
 	const unordered_map<string, shared_ptr<TextEntity>>& textEntities
 )
 	:
@@ -27,7 +27,7 @@ EntityBus::EntityBus
 	_pointlightEntities(pointlightEntities),
 	_spotlightEntities(spotlightEntities),
 	_reflectionEntities(reflectionEntities),
-	_imageEntities(imageEntities),
+	_quadEntities(quadEntities),
 	_textEntities(textEntities)
 {
 
@@ -83,9 +83,9 @@ const unordered_map<string, shared_ptr<ReflectionEntity>>& EntityBus::getReflect
 	return _reflectionEntities;
 }
 
-const unordered_map<string, shared_ptr<ImageEntity>>& EntityBus::getImageEntities()
+const unordered_map<string, shared_ptr<QuadEntity>>& EntityBus::getQuadEntities()
 {
-	return _imageEntities;
+	return _quadEntities;
 }
 
 const unordered_map<string, shared_ptr<TextEntity>>& EntityBus::getTextEntities()

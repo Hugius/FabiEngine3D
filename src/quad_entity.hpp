@@ -7,7 +7,7 @@
 
 using std::shared_ptr;
 
-class ImageEntity : public BaseEntity
+class QuadEntity : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;

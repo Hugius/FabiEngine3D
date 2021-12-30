@@ -1,6 +1,6 @@
 #pragma once
 
-#include "image_entity.hpp"
+#include "quad_entity.hpp"
 #include "render_buffer.hpp"
 #include "texture_loader.hpp"
 
@@ -60,7 +60,7 @@ public:
 	const bool isMirroredHorizonally() const;
 	const bool isMirroredVertically() const;
 
-	const vector<shared_ptr<ImageEntity>>& getCharacterEntities() const;
+	const vector<shared_ptr<QuadEntity>>& getCharacterEntities() const;
 
 private:
 	static inline const map<char, ivec2> _fontMapIndices =
@@ -188,7 +188,7 @@ private:
 	bool _isMirroredVertically = false;
 	bool _isWireframed = false;
 
-	vector<shared_ptr<ImageEntity>> _characterEntities;
+	vector<shared_ptr<QuadEntity>> _characterEntities;
 	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
 	TextureID _fontMap = 0;
 };

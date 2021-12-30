@@ -33,7 +33,7 @@
     <ClCompile Include="..\..\..\src\billboard_entity_set.cpp">
       <Filter>Data\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\image_entity.cpp">
+    <ClCompile Include="..\..\..\src\quad_entity.cpp">
       <Filter>Data\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\pointlight_entity.cpp">
@@ -72,7 +72,7 @@
     <ClCompile Include="..\..\..\src\billboard_entity_manager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\image_entity_manager.cpp">
+    <ClCompile Include="..\..\..\src\quad_entity_manager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\model_entity_manager.cpp">
@@ -113,7 +113,7 @@
     <ClInclude Include="..\..\..\src\billboard_entity.hpp">
       <Filter>Data\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\image_entity.hpp">
+    <ClInclude Include="..\..\..\src\quad_entity.hpp">
       <Filter>Data\Entity</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\pointlight_entity.hpp">
@@ -149,7 +149,7 @@
     <ClInclude Include="..\..\..\src\billboard_entity_manager.hpp">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\image_entity_manager.hpp">
+    <ClInclude Include="..\..\..\src\quad_entity_manager.hpp">
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\model_entity_manager.hpp">

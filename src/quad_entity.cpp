@@ -1,4 +1,4 @@
-#include "image_entity.hpp"
+#include "quad_entity.hpp"
 #include "logger.hpp"
 
 #include <algorithm>
@@ -6,12 +6,12 @@
 using std::max;
 using std::clamp;
 
-void ImageEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
+void QuadEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 {
 	_renderBuffer = value;
 }
 
-void ImageEntity::updateTransformation()
+void QuadEntity::updateTransformation()
 {
 	if(_position != _positionTarget)
 	{
@@ -59,7 +59,7 @@ void ImageEntity::updateTransformation()
 	}
 }
 
-void ImageEntity::updateTransformationMatrix()
+void QuadEntity::updateTransformationMatrix()
 {
 	auto translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, 0.0f);
 	auto rotationMatrix = Math::createRotationMatrixX(Math::convertToRadians(_rotation));
@@ -68,66 +68,66 @@ void ImageEntity::updateTransformationMatrix()
 	_transformationMatrix = (translationMatrix * rotationMatrix * scalingMatrix);
 }
 
-void ImageEntity::setDiffuseMap(TextureID value)
+void QuadEntity::setDiffuseMap(TextureID value)
 {
 	_diffuseMap = value;
 }
 
-void ImageEntity::setDiffuseMapPath(const string& value)
+void QuadEntity::setDiffuseMapPath(const string& value)
 {
 	_diffuseMapPath = value;
 }
 
-void ImageEntity::setColor(fvec3 value)
+void QuadEntity::setColor(fvec3 value)
 {
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void ImageEntity::setMirroredHorizontally(bool value)
+void QuadEntity::setMirroredHorizontally(bool value)
 {
 	_isMirroredHorizontally = value;
 }
 
-void ImageEntity::setMirroredVertically(bool value)
+void QuadEntity::setMirroredVertically(bool value)
 {
 	_isMirroredVertically = value;
 }
 
-void ImageEntity::setTransparency(float value)
+void QuadEntity::setTransparency(float value)
 {
 	_transparency = clamp(value, 0.0f, 1.0f);
 }
 
-void ImageEntity::setWireframeColor(fvec3 value)
+void QuadEntity::setWireframeColor(fvec3 value)
 {
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void ImageEntity::setPosition(fvec2 value)
+void QuadEntity::setPosition(fvec2 value)
 {
 	_position = value;
 	_positionTarget = value;
 }
 
-void ImageEntity::setRotation(float value)
+void QuadEntity::setRotation(float value)
 {
 	_rotation = Math::limitAngle(value);
 	_rotationTarget = Math::limitAngle(value);
 }
 
-void ImageEntity::setSize(fvec2 value)
+void QuadEntity::setSize(fvec2 value)
 {
 	_size = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 	_sizeTarget = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void ImageEntity::move(fvec2 value)
+void QuadEntity::move(fvec2 value)
 {
 	_position += value;
 	_positionTarget += value;
 }
 
-void ImageEntity::rotate(float value)
+void QuadEntity::rotate(float value)
 {
 	_rotation += value;
 	_rotationTarget += value;
@@ -135,7 +135,7 @@ void ImageEntity::rotate(float value)
 	_rotationTarget = Math::limitAngle(_rotationTarget);
 }
 
-void ImageEntity::scale(fvec2 value)
+void QuadEntity::scale(fvec2 value)
 {
 	_size += value;
 	_sizeTarget += value;
@@ -143,165 +143,165 @@ void ImageEntity::scale(fvec2 value)
 	_sizeTarget = fvec2(max(0.0f, _sizeTarget.x), max(0.0f, _sizeTarget.y));
 }
 
-void ImageEntity::moveTo(fvec2 target, float speed)
+void QuadEntity::moveTo(fvec2 target, float speed)
 {
 	_positionTarget = target;
 	_positionTargetSpeed = speed;
 }
 
-void ImageEntity::rotateTo(float target, float speed)
+void QuadEntity::rotateTo(float target, float speed)
 {
 	_rotationTarget = Math::limitAngle(target);
 	_rotationTargetSpeed = speed;
 }
 
-void ImageEntity::scaleTo(fvec2 target, float speed)
+void QuadEntity::scaleTo(fvec2 target, float speed)
 {
 	_sizeTarget = fvec2(max(0.0f, target.x), max(0.0f, target.y));
 	_sizeTargetSpeed = speed;
 }
 
-void ImageEntity::setMinPosition(fvec2 value)
+void QuadEntity::setMinPosition(fvec2 value)
 {
 	_minPosition = value;
 }
 
-void ImageEntity::setMaxPosition(fvec2 value)
+void QuadEntity::setMaxPosition(fvec2 value)
 {
 	_maxPosition = value;
 }
 
-void ImageEntity::setDepth(unsigned int value)
+void QuadEntity::setDepth(unsigned int value)
 {
 	_depth = value;
 }
 
-void ImageEntity::setMultiplierUV(fvec2 value)
+void QuadEntity::setMultiplierUV(fvec2 value)
 {
 	_multiplierUV = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void ImageEntity::setAdderUV(fvec2 value)
+void QuadEntity::setAdderUV(fvec2 value)
 {
 	_adderUV = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-const shared_ptr<RenderBuffer> ImageEntity::getRenderBuffer() const
+const shared_ptr<RenderBuffer> QuadEntity::getRenderBuffer() const
 {
 	return _renderBuffer;
 }
 
-const TextureID ImageEntity::getDiffuseMap() const
+const TextureID QuadEntity::getDiffuseMap() const
 {
 	return _diffuseMap;
 }
 
-const string& ImageEntity::getDiffuseMapPath() const
+const string& QuadEntity::getDiffuseMapPath() const
 {
 	return _diffuseMapPath;
 }
 
-const fvec3 ImageEntity::getWireframeColor() const
+const fvec3 QuadEntity::getWireframeColor() const
 {
 	return _wireframeColor;
 }
 
-const fvec3 ImageEntity::getColor() const
+const fvec3 QuadEntity::getColor() const
 {
 	return _color;
 }
 
-const float ImageEntity::getTransparency() const
+const float QuadEntity::getTransparency() const
 {
 	return _transparency;
 }
 
-const bool ImageEntity::isWireframed() const
+const bool QuadEntity::isWireframed() const
 {
 	return _isWireframed;
 }
 
-const bool ImageEntity::isCentered() const
+const bool QuadEntity::isCentered() const
 {
 	return _isCentered;
 }
 
-const bool ImageEntity::isMirroredHorizonally() const
+const bool QuadEntity::isMirroredHorizonally() const
 {
 	return _isMirroredHorizontally;
 }
 
-const bool ImageEntity::isMirroredVertically() const
+const bool QuadEntity::isMirroredVertically() const
 {
 	return _isMirroredVertically;
 }
 
-const bool ImageEntity::hasDiffuseMap() const
+const bool QuadEntity::hasDiffuseMap() const
 {
 	return (_diffuseMap != 0);
 }
 
-const mat44 ImageEntity::getTransformationMatrix() const
+const mat44 QuadEntity::getTransformationMatrix() const
 {
 	return _transformationMatrix;
 }
 
-const fvec2 ImageEntity::getPosition() const
+const fvec2 QuadEntity::getPosition() const
 {
 	return _position;
 }
 
-const float ImageEntity::getRotation() const
+const float QuadEntity::getRotation() const
 {
 	return _rotation;
 }
 
-const fvec2 ImageEntity::getSize() const
+const fvec2 QuadEntity::getSize() const
 {
 	return _size;
 }
 
-const fvec2 ImageEntity::getMinPosition() const
+const fvec2 QuadEntity::getMinPosition() const
 {
 	return _minPosition;
 }
 
-const fvec2 ImageEntity::getMaxPosition() const
+const fvec2 QuadEntity::getMaxPosition() const
 {
 	return _maxPosition;
 }
 
-const fvec2 ImageEntity::getMultiplierUV() const
+const fvec2 QuadEntity::getMultiplierUV() const
 {
 	return _multiplierUV;
 }
 
-const fvec2 ImageEntity::getAdderUV() const
+const fvec2 QuadEntity::getAdderUV() const
 {
 	return _adderUV;
 }
 
-const unsigned int ImageEntity::getDepth() const
+const unsigned int QuadEntity::getDepth() const
 {
 	return _depth;
 }
 
-void ImageEntity::setPerspectiveDepthEntity(bool value)
+void QuadEntity::setPerspectiveDepthEntity(bool value)
 {
 	_isPerspectiveDepthEntity = value;
 }
 
-void ImageEntity::setWireframed(bool value)
+void QuadEntity::setWireframed(bool value)
 {
 	_isWireframed = value;
 }
 
-void ImageEntity::setCentered(bool value)
+void QuadEntity::setCentered(bool value)
 {
 	_isCentered = value;
 }
 
-const bool ImageEntity::isPerspectiveDepthEntity() const
+const bool QuadEntity::isPerspectiveDepthEntity() const
 {
 	return _isPerspectiveDepthEntity;
 }

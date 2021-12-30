@@ -23,7 +23,7 @@ private:
 
 	static inline const fvec3 RENDER_COLOR = fvec3(0.25f);
 
-	static inline const float CURSOR_IMAGE_SIZE = 0.075f;
+	static inline const float CURSOR_QUAD_SIZE = 0.075f;
 
 	GuiManager _gui;
 	LeftViewportController _leftViewportController;

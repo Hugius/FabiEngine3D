@@ -122,12 +122,12 @@ void MasterRenderer::_captureDOF()
 	if(_renderBus.isDofEnabled())
 	{
 		_dofBlurRenderer.bind();
-		_renderBus.setDofMap(_dofBlurRenderer.blurTexture(_renderImage, _renderBus.getFinalWorldMap(), 2, 1.0f, BlurDirection::BOTH));
+		_renderBus.setDofMap(_dofBlurRenderer.blurTexture(_renderQuad, _renderBus.getFinalWorldMap(), 2, 1.0f, BlurDirection::BOTH));
 		_dofBlurRenderer.unbind();
 
 		_dofCaptureBuffer.bind();
 		_dofRenderer.bind();
-		_dofRenderer.render(_renderImage);
+		_dofRenderer.render(_renderQuad);
 		_dofRenderer.unbind();
 		_dofCaptureBuffer.unbind();
 		_renderBus.setFinalWorldMap(_dofCaptureBuffer.getTexture(0));
@@ -144,7 +144,7 @@ void MasterRenderer::_captureLensFlare()
 	{
 		_lensFlareCaptureBuffer.bind();
 		_lensFlareRenderer.bind();
-		_lensFlareRenderer.render(_renderImage);
+		_lensFlareRenderer.render(_renderQuad);
 		_lensFlareRenderer.unbind();
 		_lensFlareCaptureBuffer.unbind();
 		_renderBus.setFinalWorldMap(_lensFlareCaptureBuffer.getTexture(0));
@@ -180,7 +180,7 @@ void MasterRenderer::_captureMotionBlur()
 		if(hasMoved)
 		{
 			_motionBlurBlurRenderer.bind();
-			_renderBus.setMotionBlurMap(_motionBlurBlurRenderer.blurTexture(_renderImage, _renderBus.getFinalWorldMap(), 5, 1.0f, direction));
+			_renderBus.setMotionBlurMap(_motionBlurBlurRenderer.blurTexture(_renderQuad, _renderBus.getFinalWorldMap(), 5, 1.0f, direction));
 			_motionBlurBlurRenderer.unbind();
 		}
 		else
@@ -191,7 +191,7 @@ void MasterRenderer::_captureMotionBlur()
 
 		_motionBlurCaptureBuffer.bind();
 		_motionBlurRenderer.bind();
-		_motionBlurRenderer.render(_renderImage);
+		_motionBlurRenderer.render(_renderQuad);
 		_motionBlurRenderer.unbind();
 		_motionBlurCaptureBuffer.unbind();
 		_renderBus.setFinalWorldMap(_motionBlurCaptureBuffer.getTexture(0));
@@ -208,7 +208,7 @@ void MasterRenderer::_captureAntiAliasing()
 	{
 		_antiAliasingCaptureBuffer.bind();
 		_antiAliasingRenderer.bind();
-		_antiAliasingRenderer.render(_renderImage);
+		_antiAliasingRenderer.render(_renderQuad);
 		_antiAliasingRenderer.unbind();
 		_antiAliasingCaptureBuffer.unbind();
 		_renderBus.setFinalWorldMap(_antiAliasingCaptureBuffer.getTexture(0));
@@ -230,18 +230,18 @@ void MasterRenderer::_captureBloom()
 		}
 
 		_bloomBlurRendererHighQuality.bind();
-		_renderBus.setBloomMap(_bloomBlurRendererHighQuality.blurTexture(_renderImage, textureToBlur,
+		_renderBus.setBloomMap(_bloomBlurRendererHighQuality.blurTexture(_renderQuad, textureToBlur,
 							   _renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
 		_bloomBlurRendererHighQuality.unbind();
 
 		_bloomBlurRendererLowQuality.bind();
-		_renderBus.setBloomMap(_bloomBlurRendererLowQuality.blurTexture(_renderImage, _renderBus.getBloomMap(),
+		_renderBus.setBloomMap(_bloomBlurRendererLowQuality.blurTexture(_renderQuad, _renderBus.getBloomMap(),
 							   _renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
 		_bloomBlurRendererLowQuality.unbind();
 
 		_bloomCaptureBuffer.bind();
 		_bloomRenderer.bind();
-		_bloomRenderer.render(_renderImage);
+		_bloomRenderer.render(_renderQuad);
 		_bloomRenderer.unbind();
 		_bloomCaptureBuffer.unbind();
 		_renderBus.setFinalWorldMap(_bloomCaptureBuffer.getTexture(0));

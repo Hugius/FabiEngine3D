@@ -9,17 +9,17 @@ class ScriptEditor final
 {
 public:
 	ScriptEditor(FabiEngine3D& fe3d,
-		GuiManager& gui,
-		SkyEditor& skyEditor,
-		TerrainEditor& terrainEditor,
-		WaterEditor& waterEditor,
-		ModelEditor& modelEditor,
-		BillboardEditor& billboardEditor,
-		ImageEditor& imageEditor,
-		Animation2dEditor& animation2dEditor,
-		Animation3dEditor& animation3dEditor,
-		SoundEditor& soundEditor,
-		WorldEditor& worldEditor);
+				 GuiManager& gui,
+				 SkyEditor& skyEditor,
+				 TerrainEditor& terrainEditor,
+				 WaterEditor& waterEditor,
+				 ModelEditor& modelEditor,
+				 BillboardEditor& billboardEditor,
+				 QuadEditor& quadEditor,
+				 Animation2dEditor& animation2dEditor,
+				 Animation3dEditor& animation3dEditor,
+				 SoundEditor& soundEditor,
+				 WorldEditor& worldEditor);
 
 	void setCurrentProjectID(const string& projectID);
 	void load();

@@ -18,7 +18,7 @@
 #include "pointlight_entity_manager.hpp"
 #include "spotlight_entity_manager.hpp"
 #include "reflection_entity_manager.hpp"
-#include "image_entity_manager.hpp"
+#include "quad_entity_manager.hpp"
 #include "text_entity_manager.hpp"
 #include "shadow_generator.hpp"
 #include "raycaster.hpp"
@@ -79,7 +79,7 @@ private:
 	TerrainEntityManager _terrainEntityManager;
 	ModelEntityManager _modelEntityManager;
 	BillboardEntityManager _billboardEntityManager;
-	ImageEntityManager _imageEntityManager;
+	QuadEntityManager _quadEntityManager;
 	TextEntityManager _textEntityManager;
 	Raycaster _raycaster;
 	MasterRenderer _masterRenderer;

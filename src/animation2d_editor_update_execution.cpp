@@ -79,9 +79,9 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 	_billboardAnimationsToStart.clear();
 }
 
-void Animation2dEditor::_updateImageAnimationExecution()
+void Animation2dEditor::_updateQuadAnimationExecution()
 {
-	for(auto& [idPair, animation] : _startedImageAnimations)
+	for(auto& [idPair, animation] : _startedQuadAnimations)
 	{
 		if(!animation.isPaused())
 		{
@@ -97,8 +97,8 @@ void Animation2dEditor::_updateImageAnimationExecution()
 					{
 						if(animation.getPlayCount() == -1)
 						{
-							_imageAnimationsToStop.insert(idPair);
-							_imageAnimationsToStart.insert(idPair);
+							_quadAnimationsToStop.insert(idPair);
+							_quadAnimationsToStart.insert(idPair);
 						}
 						else
 						{
@@ -106,7 +106,7 @@ void Animation2dEditor::_updateImageAnimationExecution()
 
 							if(animation.getPlayCount() == 0)
 							{
-								_imageAnimationsToStop.insert(idPair);
+								_quadAnimationsToStop.insert(idPair);
 							}
 							else
 							{
@@ -135,25 +135,25 @@ void Animation2dEditor::_updateImageAnimationExecution()
 		fvec2 adderUV = fvec2((static_cast<float>(animation.getColumnIndex()) * multiplierUV.x),
 							  (static_cast<float>(animation.getRowIndex()) * multiplierUV.y));
 
-		_fe3d.image_setMultiplierUV(idPair.second, multiplierUV);
-		_fe3d.image_setAdderUV(idPair.second, adderUV);
+		_fe3d.quad_setMultiplierUV(idPair.second, multiplierUV);
+		_fe3d.quad_setAdderUV(idPair.second, adderUV);
 	}
 
-	for(const auto& idPair : _imageAnimationsToStop)
+	for(const auto& idPair : _quadAnimationsToStop)
 	{
-		if(isImageAnimationStarted(idPair.first, idPair.second))
+		if(isQuadAnimationStarted(idPair.first, idPair.second))
 		{
-			stopImageAnimation(idPair.first, idPair.second);
+			stopQuadAnimation(idPair.first, idPair.second);
 		}
 	}
-	_imageAnimationsToStop.clear();
+	_quadAnimationsToStop.clear();
 
-	for(const auto& idPair : _imageAnimationsToStart)
+	for(const auto& idPair : _quadAnimationsToStart)
 	{
-		if(!isImageAnimationStarted(idPair.first, idPair.second))
+		if(!isQuadAnimationStarted(idPair.first, idPair.second))
 		{
-			startImageAnimation(idPair.first, idPair.second, -1);
+			startQuadAnimation(idPair.first, idPair.second, -1);
 		}
 	}
-	_imageAnimationsToStart.clear();
+	_quadAnimationsToStart.clear();
 }

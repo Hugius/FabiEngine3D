@@ -10,17 +10,17 @@ EngineController::EngineController()
 	_leftViewportController(*this, _gui),
 	_rightViewportController(*this, _gui),
 	_topViewportController(*this, _gui,
-		_leftViewportController.getSkyEditor(),
-		_leftViewportController.getTerrainEditor(),
-		_leftViewportController.getWaterEditor(),
-		_leftViewportController.getModelEditor(),
-		_leftViewportController.getBillboardEditor(),
-		_leftViewportController.getImageEditor(),
-		_leftViewportController.getAnimation2dEditor(),
-		_leftViewportController.getAnimation3dEditor(),
-		_leftViewportController.getSoundEditor(),
-		_leftViewportController.getWorldEditor(),
-		_leftViewportController.getScriptEditor()),
+						   _leftViewportController.getSkyEditor(),
+						   _leftViewportController.getTerrainEditor(),
+						   _leftViewportController.getWaterEditor(),
+						   _leftViewportController.getModelEditor(),
+						   _leftViewportController.getBillboardEditor(),
+						   _leftViewportController.getQuadEditor(),
+						   _leftViewportController.getAnimation2dEditor(),
+						   _leftViewportController.getAnimation3dEditor(),
+						   _leftViewportController.getSoundEditor(),
+						   _leftViewportController.getWorldEditor(),
+						   _leftViewportController.getScriptEditor()),
 	_bottomViewportController(*this, _gui, _topViewportController, _leftViewportController.getScriptEditor())
 {
 
@@ -33,9 +33,9 @@ void EngineController::FE3D_CONTROLLER_INIT()
 	const string diffuseMapDirectoryPath = "engine\\assets\\image\\diffuse_map\\";
 	const string fontMapDirectoryPath = "engine\\assets\\image\\font_map\\";
 
-	if (Config::getInst().isApplicationExported())
+	if(Config::getInst().isApplicationExported())
 	{
-		if (_topViewportController.isProjectCorrupted(Tools::getRootDirectoryPath()))
+		if(_topViewportController.isProjectCorrupted(Tools::getRootDirectoryPath()))
 		{
 			Logger::throwFatalWarning("Cannot load application: missing files/directories!");
 		}
@@ -45,7 +45,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		_leftViewportController.getScriptEditor().loadScriptFiles(true);
 		_leftViewportController.getScriptEditor().getScriptExecutor().load();
 
-		if (!_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
+		if(!_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
 		{
 			application_stop();
 			_mustPromptOnExit = true;
@@ -95,16 +95,16 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		texturePaths3D[3] = string(cubeMapDirectoryPath + "background_bottom.png");
 		texturePaths3D[4] = string(cubeMapDirectoryPath + "background_back.png");
 		texturePaths3D[5] = string(cubeMapDirectoryPath + "background_front.png");
-		misc_cache3dTextures({ texturePaths3D });
+		misc_cache3dTextures({texturePaths3D});
 
 		Tools::setRenderColor(RENDER_COLOR);
 
 		sky_create("@@background");
 		sky_setCubeMaps("@@background", texturePaths3D);
 
-		image_create("@@cursor", true);
-		image_setSize("@@cursor", fvec2(CURSOR_IMAGE_SIZE, (CURSOR_IMAGE_SIZE * Tools::getWindowAspectRatio())));
-		image_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_default.png");
+		quad_create("@@cursor", true);
+		quad_setSize("@@cursor", fvec2(CURSOR_QUAD_SIZE, (CURSOR_QUAD_SIZE * Tools::getWindowAspectRatio())));
+		quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_default.png");
 		misc_setCursorEntityID("@@cursor");
 		misc_setCursorVisible(false);
 
@@ -119,9 +119,9 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 void EngineController::FE3D_CONTROLLER_UPDATE()
 {
-	if (Config::getInst().isApplicationExported())
+	if(Config::getInst().isApplicationExported())
 	{
-		if (_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
+		if(_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
 		{
 			_leftViewportController.getAnimation2dEditor().update();
 			_leftViewportController.getAnimation3dEditor().update();
@@ -138,7 +138,7 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 	{
 		static string lastScreen = "";
 		string activeScreen = _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID();
-		if (activeScreen == "main" && lastScreen != "main")
+		if(activeScreen == "main" && lastScreen != "main")
 		{
 			Tools::setRenderColor(RENDER_COLOR);
 
@@ -150,9 +150,9 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 
 		sky_setRotation("@@background", sky_getRotation("@@background") + 0.0025f);
 
-		image_setPosition("@@cursor", Math::convertToNDC(Tools::convertFromScreenCoords(misc_getCursorPosition())));
-		image_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_default.png");
-		image_setVisible("@@cursor", misc_isCursorInsideWindow());
+		quad_setPosition("@@cursor", Math::convertToNDC(Tools::convertFromScreenCoords(misc_getCursorPosition())));
+		quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_default.png");
+		quad_setVisible("@@cursor", misc_isCursorInsideWindow());
 
 		_gui.update();
 
@@ -165,9 +165,9 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 
 void EngineController::FE3D_CONTROLLER_TERMINATE()
 {
-	if (Config::getInst().isApplicationExported())
+	if(Config::getInst().isApplicationExported())
 	{
-		if (_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
+		if(_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
 		{
 			_leftViewportController.getScriptEditor().getScriptExecutor().unload();
 		}

@@ -8,15 +8,15 @@ GuiViewport::GuiViewport(FabiEngine3D& fe3d, const string& ID, fvec2 position, f
 	_ID(ID),
 	_entityID("@" + ID)
 {
-	_fe3d.image_create(_entityID, true);
-	_fe3d.image_setPosition(_entityID, position);
-	_fe3d.image_setSize(_entityID, size);
-	_fe3d.image_setColor(_entityID, color);
+	_fe3d.quad_create(_entityID, true);
+	_fe3d.quad_setPosition(_entityID, position);
+	_fe3d.quad_setSize(_entityID, size);
+	_fe3d.quad_setColor(_entityID, color);
 }
 
 GuiViewport::~GuiViewport()
 {
-	_fe3d.image_delete(_entityID);
+	_fe3d.quad_delete(_entityID);
 }
 
 void GuiViewport::update(bool hoverable)
@@ -29,11 +29,11 @@ void GuiViewport::update(bool hoverable)
 
 const bool GuiViewport::isHovered() const
 {
-	if(_fe3d.image_isVisible(_entityID))
+	if(_fe3d.quad_isVisible(_entityID))
 	{
 		fvec2 cursorPosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
-		fvec2 buttonPosition = _fe3d.image_getPosition(_entityID);
-		fvec2 buttonSize = _fe3d.image_getSize(_entityID);
+		fvec2 buttonPosition = _fe3d.quad_getPosition(_entityID);
+		fvec2 buttonSize = _fe3d.quad_getSize(_entityID);
 
 		if(cursorPosition.x > buttonPosition.x - (buttonSize.x / 2.0f) && cursorPosition.x < buttonPosition.x + (buttonSize.x / 2.0f))
 		{
@@ -59,8 +59,8 @@ const string& GuiViewport::getEntityID()
 
 void GuiViewport::createWindow(const string& ID, fvec2 position, fvec2 size, fvec3 color)
 {
-	fvec2 viewportPosition = _fe3d.image_getPosition(_entityID);
-	fvec2 viewportSize = _fe3d.image_getSize(_entityID);
+	fvec2 viewportPosition = _fe3d.quad_getPosition(_entityID);
+	fvec2 viewportSize = _fe3d.quad_getSize(_entityID);
 	fvec2 windowPosition = viewportPosition + (position * viewportSize);
 	fvec2 windowSize = (size / 2.0f) * viewportSize;
 

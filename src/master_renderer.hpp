@@ -14,7 +14,7 @@
 #include "billboard_entity_depth_renderer.hpp"
 #include "billboard_entity_shadow_renderer.hpp"
 #include "aabb_entity_color_renderer.hpp"
-#include "image_entity_color_renderer.hpp"
+#include "quad_entity_color_renderer.hpp"
 #include "anti_aliasing_renderer.hpp"
 #include "bloom_renderer.hpp"
 #include "dof_renderer.hpp"
@@ -31,7 +31,7 @@ public:
 	MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader, Camera& camera, ShadowGenerator& shadowGenerator);
 
 	void update();
-	void render(shared_ptr<ImageEntity> entity, ivec2 viewport);
+	void render(shared_ptr<QuadEntity> entity, ivec2 viewport);
 	void render(EntityBus* entityBus);
 	void reloadBloomBlurCaptureBuffer();
 	void reloadDofBlurCaptureBuffer();
@@ -62,7 +62,7 @@ private:
 	void _renderModelEntities();
 	void _renderBillboardEntities();
 	void _renderAabbEntities();
-	void _renderFinalWorldImage();
+	void _renderFinalQuad();
 	void _renderGUI();
 	void _renderCursor();
 	void _renderDebugScreens();
@@ -86,7 +86,7 @@ private:
 	BillboardEntityDepthRenderer _billboardEntityDepthRenderer;
 	BillboardEntityShadowRenderer _billboardEntityShadowRenderer;
 	AabbEntityColorRenderer _aabbEntityColorRenderer;
-	ImageEntityColorRenderer _imageEntityColorRenderer;
+	QuadEntityColorRenderer _quadEntityColorRenderer;
 	AntiAliasingRenderer _antiAliasingRenderer;
 	BloomRenderer _bloomRenderer;
 	DofRenderer _dofRenderer;
@@ -108,6 +108,6 @@ private:
 	CaptureBuffer _dofCaptureBuffer;
 	CaptureBuffer _lensFlareCaptureBuffer;
 	CaptureBuffer _motionBlurCaptureBuffer;
-	shared_ptr<ImageEntity> _renderImage = nullptr;
+	shared_ptr<QuadEntity> _renderQuad = nullptr;
 	EntityBus* _entityBus = nullptr;
 };

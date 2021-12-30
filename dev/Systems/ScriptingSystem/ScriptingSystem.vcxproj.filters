@@ -132,7 +132,7 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_billboard_set.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_image_set.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_quad_set.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_pointlight_set.cpp">
@@ -165,7 +165,7 @@
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_reflection_get.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_image_get.cpp">
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_quad_get.cpp">
       <Filter>Execution\Interpreter\Function\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_pointlight_get.cpp">

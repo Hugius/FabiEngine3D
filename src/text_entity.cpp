@@ -21,7 +21,7 @@ void TextEntity::setContent(const string& value)
 			auto multiplierUV = fvec2((1.0f / 16.0f), (1.0f / 6.0f));
 			auto adderUV = fvec2((static_cast<float>(xIndex) * multiplierUV.x), (static_cast<float>(yIndex) * multiplierUV.y));
 
-			auto characterEntity = make_shared<ImageEntity>("dummy");
+			auto characterEntity = make_shared<QuadEntity>("dummy");
 			characterEntity->setRenderBuffer(_renderBuffer);
 			characterEntity->setMultiplierUV(multiplierUV);
 			characterEntity->setAdderUV(adderUV);
@@ -91,7 +91,7 @@ void TextEntity::updateCharacterEntities()
 	}
 }
 
-const vector<shared_ptr<ImageEntity>>& TextEntity::getCharacterEntities() const
+const vector<shared_ptr<QuadEntity>>& TextEntity::getCharacterEntities() const
 {
 	return _characterEntities;
 }

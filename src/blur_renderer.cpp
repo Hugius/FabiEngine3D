@@ -24,7 +24,7 @@ void BlurRenderer::unbind()
 	_shader.unbind();
 }
 
-const TextureID BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, TextureID texture, unsigned int blurCount, float intensity, BlurDirection direction)
+const TextureID BlurRenderer::blurTexture(const shared_ptr<QuadEntity> entity, TextureID texture, unsigned int blurCount, float intensity, BlurDirection direction)
 {
 	_shader.uploadUniform("u_intensity", intensity);
 
@@ -57,7 +57,7 @@ const TextureID BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, 
 	return texture;
 }
 
-void BlurRenderer::_render(const shared_ptr<ImageEntity> entity, TextureID texture)
+void BlurRenderer::_render(const shared_ptr<QuadEntity> entity, TextureID texture)
 {
 	const auto buffer = entity->getRenderBuffer();
 

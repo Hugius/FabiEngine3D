@@ -33,13 +33,13 @@ void GuiScrollingList::createButton(const string& ID, string textContent)
 	fvec2 position = _convertPosition(fvec2(x, y));
 	fvec2 size = _convertSize(fvec2(w, h));
 	_buttons.push_back(make_shared<GuiButton>(_fe3d, _parentID, ID, fvec2(position.x, position.y), fvec2(size.x, size.y),
-					   _buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor, _fe3d.image_isCentered(_entityID)));
+					   _buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor, _fe3d.quad_isCentered(_entityID)));
 
 	string rectangleID = _buttons.back()->getRectangle()->getEntityID();
 	string textID = _buttons.back()->getTextField()->getEntityID();
-	_fe3d.image_setMinPosition(rectangleID, fvec2(-1.0f, _initialPosition.y - (_initialSize.y / 2.0f)));
+	_fe3d.quad_setMinPosition(rectangleID, fvec2(-1.0f, _initialPosition.y - (_initialSize.y / 2.0f)));
 	_fe3d.text_setMinPosition(textID, fvec2(-1.0f, _initialPosition.y - (_initialSize.y / 2.0f)));
-	_fe3d.image_setMaxPosition(rectangleID, fvec2(1.0f, _initialPosition.y + (_initialSize.y / 2.0f)));
+	_fe3d.quad_setMaxPosition(rectangleID, fvec2(1.0f, _initialPosition.y + (_initialSize.y / 2.0f)));
 	_fe3d.text_setMaxPosition(textID, fvec2(1.0f, _initialPosition.y + (_initialSize.y / 2.0f)));
 }
 
@@ -95,8 +95,8 @@ void GuiScrollingList::_updateHovering()
 	_isHovered = false;
 
 	fvec2 cursorPosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
-	fvec2 listPosition = _fe3d.image_getPosition(_entityID);
-	fvec2 listSize = _fe3d.image_getSize(_entityID);
+	fvec2 listPosition = _fe3d.quad_getPosition(_entityID);
+	fvec2 listSize = _fe3d.quad_getSize(_entityID);
 
 	if(cursorPosition.x > listPosition.x - (listSize.x / 2.0f) && cursorPosition.x < listPosition.x + (listSize.x / 2.0f))
 	{
@@ -134,10 +134,10 @@ void GuiScrollingList::_updateScrolling()
 			mustReset = true;
 		}
 
-		float firstButtonHeight = _fe3d.image_getPosition(_buttons[0]->getRectangle()->getEntityID()).y;
-		float lastButtonHeight = _fe3d.image_getPosition(_buttons[_buttons.size() - 1]->getRectangle()->getEntityID()).y;
-		float listHeight = _fe3d.image_getPosition(_entityID).y;
-		float edgeOffset = (_fe3d.image_getSize(_entityID).y / 2.0f);
+		float firstButtonHeight = _fe3d.quad_getPosition(_buttons[0]->getRectangle()->getEntityID()).y;
+		float lastButtonHeight = _fe3d.quad_getPosition(_buttons[_buttons.size() - 1]->getRectangle()->getEntityID()).y;
+		float listHeight = _fe3d.quad_getPosition(_entityID).y;
+		float edgeOffset = (_fe3d.quad_getSize(_entityID).y / 2.0f);
 		if(lastButtonHeight >= listHeight - edgeOffset + (_charSize.y / 3.0f))
 		{
 			if(_scrollingSpeed > 0.0f)
@@ -161,12 +161,12 @@ void GuiScrollingList::_updateScrolling()
 
 			if(mustReset)
 			{
-				_fe3d.image_setPosition(rectangleID, button->getRectangle()->getInitialPosition());
+				_fe3d.quad_setPosition(rectangleID, button->getRectangle()->getInitialPosition());
 				_fe3d.text_setPosition(textID, button->getTextField()->getInitialPosition());
 			}
 			else
 			{
-				_fe3d.image_move(rectangleID, fvec2(0.0f, _scrollingSpeed));
+				_fe3d.quad_move(rectangleID, fvec2(0.0f, _scrollingSpeed));
 				_fe3d.text_move(textID, fvec2(0.0f, _scrollingSpeed));
 			}
 		}
@@ -183,8 +183,8 @@ void GuiScrollingList::_updateButtons(bool hoverable)
 
 const fvec2 GuiScrollingList::_convertPosition(fvec2 position) const
 {
-	fvec2 listPosition = _fe3d.image_getPosition(_entityID);
-	fvec2 listSize = _fe3d.image_getSize(_entityID);
+	fvec2 listPosition = _fe3d.quad_getPosition(_entityID);
+	fvec2 listSize = _fe3d.quad_getSize(_entityID);
 	fvec2 buttonPosition = (listPosition + (position * (listSize / 2.0f)));
 
 	return buttonPosition;
@@ -192,8 +192,8 @@ const fvec2 GuiScrollingList::_convertPosition(fvec2 position) const
 
 const fvec2 GuiScrollingList::_convertSize(fvec2 size) const
 {
-	fvec2 listPosition = _fe3d.image_getPosition(_entityID);
-	fvec2 listSize = _fe3d.image_getSize(_entityID);
+	fvec2 listPosition = _fe3d.quad_getPosition(_entityID);
+	fvec2 listSize = _fe3d.quad_getSize(_entityID);
 	fvec2 buttonSize = (size / 2.0f) * listSize;
 
 	return buttonSize;

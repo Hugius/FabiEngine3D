@@ -8,7 +8,7 @@ ScriptExecutor::ScriptExecutor(FabiEngine3D& fe3d,
 							   WaterEditor& waterEditor,
 							   ModelEditor& modelEditor,
 							   BillboardEditor& billboardEditor,
-							   ImageEditor& imageEditor,
+							   QuadEditor& quadEditor,
 							   Animation2dEditor& animation2dEditor,
 							   Animation3dEditor& animation3dEditor,
 							   SoundEditor& soundEditor,
@@ -23,7 +23,7 @@ ScriptExecutor::ScriptExecutor(FabiEngine3D& fe3d,
 					   waterEditor,
 					   modelEditor,
 					   billboardEditor,
-					   imageEditor,
+					   quadEditor,
 					   animation2dEditor,
 					   animation3dEditor,
 					   soundEditor,
@@ -60,7 +60,7 @@ void ScriptExecutor::update(bool debug)
 		{
 			if(_fe3d.misc_isCursorInsideViewport() || _fe3d.misc_isCursorVisible())
 			{
-				_fe3d.image_setVisible("@@cursor", false);
+				_fe3d.quad_setVisible("@@cursor", false);
 			}
 		}
 

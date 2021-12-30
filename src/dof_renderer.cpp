@@ -35,7 +35,7 @@ void DofRenderer::unbind()
 	_shader.unbind();
 }
 
-void DofRenderer::render(const shared_ptr<ImageEntity> entity)
+void DofRenderer::render(const shared_ptr<QuadEntity> entity)
 {
 	const auto buffer = entity->getRenderBuffer();
 

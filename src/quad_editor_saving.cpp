@@ -1,4 +1,4 @@
-#include "image_editor.hpp"
+#include "quad_editor.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 
@@ -6,7 +6,7 @@
 
 using std::ofstream;
 
-const bool ImageEditor::saveToFile() const
+const bool QuadEditor::saveToFile() const
 {
 	if(!_isEditorLoaded)
 	{
@@ -15,14 +15,14 @@ const bool ImageEditor::saveToFile() const
 
 	if(_currentProjectID.empty())
 	{
-		Logger::throwError("ImageEditor::saveToFile");
+		Logger::throwError("QuadEditor::saveToFile");
 	}
 
-	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\image.fe3d");
+	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\quad.fe3d");
 
-	for(const auto& imageID : _loadedImageIDs)
+	for(const auto& quadID : _loadedQuadIDs)
 	{
-		auto diffuseMapPath = _fe3d.image_getDiffuseMapPath(imageID);
+		auto diffuseMapPath = _fe3d.quad_getDiffuseMapPath(quadID);
 
 		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 
@@ -30,12 +30,12 @@ const bool ImageEditor::saveToFile() const
 
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 
-		file << imageID << " " << diffuseMapPath << endl;
+		file << quadID << " " << diffuseMapPath << endl;
 	}
 
 	file.close();
 
-	Logger::throwInfo("Image data saved!");
+	Logger::throwInfo("Quad data saved!");
 
 	return true;
 }

@@ -26,7 +26,7 @@ void MotionBlurRenderer::unbind()
 	_shader.unbind();
 }
 
-void MotionBlurRenderer::render(const shared_ptr<ImageEntity> entity)
+void MotionBlurRenderer::render(const shared_ptr<QuadEntity> entity)
 {
 	const auto buffer = entity->getRenderBuffer();
 

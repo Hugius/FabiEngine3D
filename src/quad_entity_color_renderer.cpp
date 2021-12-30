@@ -1,8 +1,8 @@
-#include "image_entity_color_renderer.hpp"
+#include "quad_entity_color_renderer.hpp"
 #include "configuration.hpp"
 #include "text_entity.hpp"
 
-void ImageEntityColorRenderer::bind()
+void QuadEntityColorRenderer::bind()
 {
 	_shader.bind();
 
@@ -14,14 +14,14 @@ void ImageEntityColorRenderer::bind()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-void ImageEntityColorRenderer::unbind()
+void QuadEntityColorRenderer::unbind()
 {
 	glDisable(GL_BLEND);
 
 	_shader.unbind();
 }
 
-void ImageEntityColorRenderer::render(const shared_ptr<ImageEntity> entity)
+void QuadEntityColorRenderer::render(const shared_ptr<QuadEntity> entity)
 {
 	if(entity->isVisible() &&
 	   ((entity->getPosition().y - entity->getSize().y) < entity->getMaxPosition().y) &&

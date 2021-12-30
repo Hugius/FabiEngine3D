@@ -10,7 +10,7 @@
 #include "water_editor.hpp"
 #include "model_editor.hpp"
 #include "billboard_editor.hpp"
-#include "image_editor.hpp"
+#include "quad_editor.hpp"
 #include "animation3d_editor.hpp"
 #include "animation2d_editor.hpp"
 #include "sound_editor.hpp"
@@ -20,17 +20,17 @@ class ScriptInterpreter final
 {
 public:
 	ScriptInterpreter(FabiEngine3D& fe3d,
-		Script& script,
-		SkyEditor& skyEditor,
-		TerrainEditor& terrainEditor,
-		WaterEditor& waterEditor,
-		ModelEditor& modelEditor,
-		BillboardEditor& billboardEditor,
-		ImageEditor& imageEditor,
-		Animation2dEditor& animation2dEditor,
-		Animation3dEditor& animation3dEditor,
-		SoundEditor& soundEditor,
-		WorldEditor& worldEditor);
+					  Script& script,
+					  SkyEditor& skyEditor,
+					  TerrainEditor& terrainEditor,
+					  WaterEditor& waterEditor,
+					  ModelEditor& modelEditor,
+					  BillboardEditor& billboardEditor,
+					  QuadEditor& quadEditor,
+					  Animation2dEditor& animation2dEditor,
+					  Animation3dEditor& animation3dEditor,
+					  SoundEditor& soundEditor,
+					  WorldEditor& worldEditor);
 
 	void setCurrentProjectID(const string& projectID);
 	void load();
@@ -91,8 +91,8 @@ private:
 	const bool _executeFe3dBillboardGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dAabbSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dAabbGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
-	const bool _executeFe3dImageSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
-	const bool _executeFe3dImageGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dQuadSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
+	const bool _executeFe3dQuadGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dTextSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dTextGetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
 	const bool _executeFe3dPointlightSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues);
@@ -142,7 +142,7 @@ private:
 	const bool _validateFe3dPointlight(const string& ID);
 	const bool _validateFe3dSpotlight(const string& ID);
 	const bool _validateFe3dReflection(const string& ID);
-	const bool _validateFe3dImage(const string& ID);
+	const bool _validateFe3dQuad(const string& ID);
 	const bool _validateFe3dText(const string& ID);
 	const bool _validateFe3dAnimation2d(const string& ID);
 	const bool _validateFe3dAnimation3d(const string& ID);
@@ -231,7 +231,7 @@ private:
 	WaterEditor& _waterEditor;
 	ModelEditor& _modelEditor;
 	BillboardEditor& _billboardEditor;
-	ImageEditor& _imageEditor;
+	QuadEditor& _quadEditor;
 	Animation2dEditor& _animation2dEditor;
 	Animation3dEditor& _animation3dEditor;
 	SoundEditor& _soundEditor;

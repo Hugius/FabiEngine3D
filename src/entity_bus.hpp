@@ -9,7 +9,7 @@
 #include "pointlight_entity.hpp"
 #include "spotlight_entity.hpp"
 #include "reflection_entity.hpp"
-#include "image_entity.hpp"
+#include "quad_entity.hpp"
 #include "text_entity.hpp"
 
 #include <unordered_map>
@@ -31,7 +31,7 @@ public:
 		const unordered_map<string, shared_ptr<PointlightEntity>>& pointlightEntities,
 		const unordered_map<string, shared_ptr<SpotlightEntity>>& spotlightEntities,
 		const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities,
-		const unordered_map<string, shared_ptr<ImageEntity>>& imageEntities,
+		const unordered_map<string, shared_ptr<QuadEntity>>& quadEntities,
 		const unordered_map<string, shared_ptr<TextEntity>>& textEntities
 	);
 
@@ -45,7 +45,7 @@ public:
 	const unordered_map<string, shared_ptr<PointlightEntity>>& getPointLightEntities();
 	const unordered_map<string, shared_ptr<SpotlightEntity>>& getSpotlightEntities();
 	const unordered_map<string, shared_ptr<ReflectionEntity>>& getReflectionEntities();
-	const unordered_map<string, shared_ptr<ImageEntity>>& getImageEntities();
+	const unordered_map<string, shared_ptr<QuadEntity>>& getQuadEntities();
 	const unordered_map<string, shared_ptr<TextEntity>>& getTextEntities();
 
 private:
@@ -59,6 +59,6 @@ private:
 	const unordered_map<string, shared_ptr<PointlightEntity>> _pointlightEntities;
 	const unordered_map<string, shared_ptr<SpotlightEntity>> _spotlightEntities;
 	const unordered_map<string, shared_ptr<ReflectionEntity>> _reflectionEntities;
-	const unordered_map<string, shared_ptr<ImageEntity>> _imageEntities;
+	const unordered_map<string, shared_ptr<QuadEntity>> _quadEntities;
 	const unordered_map<string, shared_ptr<TextEntity>> _textEntities;
 };

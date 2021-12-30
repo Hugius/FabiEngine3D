@@ -7,32 +7,32 @@ using std::ofstream;
 
 void TopViewportController::_updateProjectCreating()
 {
-	if (_isCreatingProject)
+	if(_isCreatingProject)
 	{
 		string newProjectID;
 
-		if (_gui.getOverlay()->checkValueForm("newProjectID", newProjectID))
+		if(_gui.getOverlay()->checkValueForm("newProjectID", newProjectID))
 		{
 			const string projectDirectoryPath = (Tools::getRootDirectoryPath() + "projects\\");
 			const string newProjectDirectoryPath = (projectDirectoryPath + newProjectID + "\\");
 
-			if (!Tools::isDirectoryExisting(projectDirectoryPath))
+			if(!Tools::isDirectoryExisting(projectDirectoryPath))
 			{
 				Logger::throwWarning("Directory `projects\\` is missing!");
 				return;
 			}
 
-			if (newProjectID.find(' ') != string::npos)
+			if(newProjectID.find(' ') != string::npos)
 			{
 				Logger::throwWarning("New project name cannot contain any spaces!");
 				return;
 			}
-			else if (Tools::isDirectoryExisting(newProjectDirectoryPath))
+			else if(Tools::isDirectoryExisting(newProjectDirectoryPath))
 			{
 				Logger::throwWarning("Project \"" + newProjectID + "\"" + " already exists!");
 				return;
 			}
-			else if (any_of(newProjectID.begin(), newProjectID.end(), isupper))
+			else if(any_of(newProjectID.begin(), newProjectID.end(), isupper))
 			{
 				Logger::throwWarning("New project name cannot contain any capitals!");
 				return;
@@ -67,8 +67,8 @@ void TopViewportController::_updateProjectCreating()
 				auto animation2dFile = ofstream(newProjectDirectoryPath + "data\\animation2d.fe3d");
 				auto animation3dFile = ofstream(newProjectDirectoryPath + "data\\animation3d.fe3d");
 				auto billboardFile = ofstream(newProjectDirectoryPath + "data\\billboard.fe3d");
-				auto imageFile = ofstream(newProjectDirectoryPath + "data\\image.fe3d");
 				auto modelFile = ofstream(newProjectDirectoryPath + "data\\model.fe3d");
+				auto quadFile = ofstream(newProjectDirectoryPath + "data\\quad.fe3d");
 				auto settingsFile = ofstream(newProjectDirectoryPath + "data\\settings.fe3d");
 				auto skyFile = ofstream(newProjectDirectoryPath + "data\\sky.fe3d");
 				auto soundFile = ofstream(newProjectDirectoryPath + "data\\sound.fe3d");
@@ -77,7 +77,7 @@ void TopViewportController::_updateProjectCreating()
 				animation2dFile.close();
 				animation3dFile.close();
 				billboardFile.close();
-				imageFile.close();
+				quadFile.close();
 				modelFile.close();
 				settingsFile.close();
 				skyFile.close();
@@ -98,14 +98,14 @@ void TopViewportController::_updateProjectCreating()
 
 void TopViewportController::_updateProjectLoading()
 {
-	if (_isLoadingProject)
+	if(_isLoadingProject)
 	{
 		const string clickedButtonID = _gui.getOverlay()->checkChoiceForm("projectList");
 		const string projectDirectoryPath = string(Tools::getRootDirectoryPath() + "projects\\" + clickedButtonID + "\\");
 
-		if (!clickedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(!clickedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			if (isProjectCorrupted(projectDirectoryPath))
+			if(isProjectCorrupted(projectDirectoryPath))
 			{
 				Logger::throwWarning("Cannot load project: missing files/directories!");
 				return;
@@ -121,7 +121,7 @@ void TopViewportController::_updateProjectLoading()
 			auto modelMeshPaths = _modelEditor.getMeshPathsFromFile();
 			auto modelTexturePaths = _modelEditor.getTexturePathsFromFile();
 			auto billboardTexturePaths = _billboardEditor.getTexturePathsFromFile();
-			auto imageTexturePaths = _imageEditor.getTexturePathsFromFile();
+			auto quadTexturePaths = _quadEditor.getTexturePathsFromFile();
 			auto audioPaths = _soundEditor.getAudioPathsFromFile();
 
 			_fe3d.misc_cacheMeshes(modelMeshPaths);
@@ -131,7 +131,7 @@ void TopViewportController::_updateProjectLoading()
 			texturePaths2D.insert(texturePaths2D.end(), waterTexturePaths.begin(), waterTexturePaths.end());
 			texturePaths2D.insert(texturePaths2D.end(), modelTexturePaths.begin(), modelTexturePaths.end());
 			texturePaths2D.insert(texturePaths2D.end(), billboardTexturePaths.begin(), billboardTexturePaths.end());
-			texturePaths2D.insert(texturePaths2D.end(), imageTexturePaths.begin(), imageTexturePaths.end());
+			texturePaths2D.insert(texturePaths2D.end(), quadTexturePaths.begin(), quadTexturePaths.end());
 			_fe3d.misc_cache2dTextures(texturePaths2D);
 
 			_fe3d.misc_cache3dTextures(skyTexturePaths);
@@ -145,7 +145,7 @@ void TopViewportController::_updateProjectLoading()
 			_isLoadingProject = false;
 			_gui.getOverlay()->deleteChoiceForm("projectList");
 		}
-		else if (_gui.getOverlay()->isChoiceFormCancelled("projectList"))
+		else if(_gui.getOverlay()->isChoiceFormCancelled("projectList"))
 		{
 			_isLoadingProject = false;
 			_gui.getOverlay()->deleteChoiceForm("projectList");
@@ -155,33 +155,33 @@ void TopViewportController::_updateProjectLoading()
 
 void TopViewportController::_updateProjectDeleting()
 {
-	if (_isDeletingProject)
+	if(_isDeletingProject)
 	{
 		static string chosenButtonID = "";
 		string clickedButtonID = _gui.getOverlay()->checkChoiceForm("projectList");
 
-		if (!clickedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(!clickedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			_gui.getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 			chosenButtonID = clickedButtonID;
 			_gui.getOverlay()->deleteChoiceForm("projectList");
 		}
-		else if (_gui.getOverlay()->isChoiceFormCancelled("projectList"))
+		else if(_gui.getOverlay()->isChoiceFormCancelled("projectList"))
 		{
 			_isDeletingProject = false;
 			_gui.getOverlay()->deleteChoiceForm("projectList");
 		}
 
-		if (_gui.getOverlay()->isAnswerFormConfirmed("delete"))
+		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			if (chosenButtonID == _currentProjectID)
+			if(chosenButtonID == _currentProjectID)
 			{
 				_currentProjectID = "";
 				_applyProjectChange();
 			}
 
 			const string directoryPath = (Tools::getRootDirectoryPath() + "projects\\" + chosenButtonID);
-			if (!Tools::isDirectoryExisting(directoryPath))
+			if(!Tools::isDirectoryExisting(directoryPath))
 			{
 				Logger::throwWarning("Cannot delete project: missing directory!");
 				return;
@@ -194,7 +194,7 @@ void TopViewportController::_updateProjectDeleting()
 			_isDeletingProject = false;
 			chosenButtonID = "";
 		}
-		if (_gui.getOverlay()->isAnswerFormDenied("delete"))
+		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
 		{
 			_isDeletingProject = false;
 			chosenButtonID = "";

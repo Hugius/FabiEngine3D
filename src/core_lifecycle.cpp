@@ -19,7 +19,7 @@ Core::Core(FabiEngine3D& fe3d)
 	_terrainEntityManager(_textureLoader),
 	_modelEntityManager(_meshLoader, _renderBus, _timer),
 	_billboardEntityManager(_renderBus, _camera),
-	_imageEntityManager(_renderBus),
+	_quadEntityManager(_renderBus),
 	_textEntityManager(_textureLoader, _renderBus),
 	_raycaster(_renderBus, _terrainEntityManager),
 	_masterRenderer(_renderBus, _timer, _textureLoader, _camera, _shadowGenerator)
@@ -183,7 +183,7 @@ void Core::_update()
 		}
 
 		_timer.startDeltaPart("guiEntityUpdate");
-		_imageEntityManager.update();
+		_quadEntityManager.update();
 		_textEntityManager.update();
 		_timer.stopDeltaPart();
 	}

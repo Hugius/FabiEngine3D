@@ -37,7 +37,7 @@ void LensFlareRenderer::unbind()
 	_shader.unbind();
 }
 
-void LensFlareRenderer::render(const shared_ptr<ImageEntity> entity)
+void LensFlareRenderer::render(const shared_ptr<QuadEntity> entity)
 {
 	const auto buffer = entity->getRenderBuffer();
 

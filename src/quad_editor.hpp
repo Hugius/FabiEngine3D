@@ -3,10 +3,10 @@
 #include "fe3d.hpp"
 #include "gui_manager.hpp"
 
-class ImageEditor final
+class QuadEditor final
 {
 public:
-	ImageEditor(FabiEngine3D& fe3d, GuiManager& gui);
+	QuadEditor(FabiEngine3D& fe3d, GuiManager& gui);
 
 	void setCurrentProjectID(const string& projectID);
 	void load();
@@ -25,15 +25,15 @@ private:
 	void _unloadGUI();
 	void _updateMainMenu();
 	void _updateChoiceMenu();
-	void _updateImageCreating();
-	void _updateImageChoosing();
-	void _updateImageDeleting();
+	void _updateQuadCreating();
+	void _updateQuadChoosing();
+	void _updateQuadDeleting();
 	void _updateMiscellaneous();
 
 	static inline const string PREVIEW_BILLBOARD_ID = "@@preview_billboard";
-	vector<string> _loadedImageIDs;
-	string _currentImageID = "";
-	string _hoveredImageID = "";
+	vector<string> _loadedQuadIDs;
+	string _currentQuadID = "";
+	string _hoveredQuadID = "";
 	string _currentProjectID = "";
 
 	static inline const fvec3 PREVIEW_BILLBOARD_POSITION = fvec3(0.0f, 0.0f, -0.75f);
@@ -41,9 +41,9 @@ private:
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 
-	bool _isCreatingImage = false;
-	bool _isChoosingImage = false;
-	bool _isDeletingImage = false;
+	bool _isCreatingQuad = false;
+	bool _isChoosingQuad = false;
+	bool _isDeletingQuad = false;
 	bool _isEditorLoaded = false;
 
 	FabiEngine3D& _fe3d;

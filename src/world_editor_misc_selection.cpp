@@ -4,9 +4,9 @@ void WorldEditor::_selectModel(const string& ID)
 {
 	_selectedModelID = ID;
 
-	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.png");
+	_fe3d.quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.png");
 
-	if (_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
+	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		string tempID = _selectedModelID;
 		reverse(tempID.begin(), tempID.end());
@@ -21,9 +21,9 @@ void WorldEditor::_selectBillboard(const string& ID)
 {
 	_selectedBillboardID = ID;
 
-	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.png");
+	_fe3d.quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.png");
 
-	if (_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
+	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		string tempID = ID;
 		reverse(tempID.begin(), tempID.end());
@@ -38,9 +38,9 @@ void WorldEditor::_selectSound(const string& ID)
 {
 	_selectedSpeakerID = ("@@speaker_" + ID);
 
-	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.png");
+	_fe3d.quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.png");
 
-	if (_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
+	if(_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		string tempID = ID;
 		reverse(tempID.begin(), tempID.end());
@@ -55,26 +55,26 @@ void WorldEditor::_selectPointlight(const string& ID)
 {
 	_selectedLampID = ("@@lamp_" + ID);
 
-	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.png");
+	_fe3d.quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.png");
 }
 
 void WorldEditor::_selectSpotlight(const string& ID)
 {
 	_selectedTorchID = ("@@torch_" + ID);
 
-	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.png");
+	_fe3d.quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.png");
 }
 
 void WorldEditor::_selectReflection(const string& ID)
 {
 	_selectedCameraID = ("@@camera_" + ID);
 
-	_fe3d.image_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.png");
+	_fe3d.quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.png");
 }
 
 void WorldEditor::_unselectModel(const string& ID)
 {
-	for (const auto& partID : _fe3d.model_getPartIDs(ID))
+	for(const auto& partID : _fe3d.model_getPartIDs(ID))
 	{
 		_fe3d.model_setTransparency(ID, partID, 1.0f);
 	}

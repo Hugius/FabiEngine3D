@@ -15,7 +15,7 @@ TopViewportController::TopViewportController(FabiEngine3D& fe3d,
 											 WaterEditor& waterEditor,
 											 ModelEditor& modelEditor,
 											 BillboardEditor& billboardEditor,
-											 ImageEditor& imageEditor,
+											 QuadEditor& quadEditor,
 											 Animation2dEditor& animation2dEditor,
 											 Animation3dEditor& animation3dEditor,
 											 SoundEditor& soundEditor,
@@ -28,7 +28,7 @@ TopViewportController::TopViewportController(FabiEngine3D& fe3d,
 	_waterEditor(waterEditor),
 	_modelEditor(modelEditor),
 	_billboardEditor(billboardEditor),
-	_imageEditor(imageEditor),
+	_quadEditor(quadEditor),
 	_animation2dEditor(animation2dEditor),
 	_animation3dEditor(animation3dEditor),
 	_soundEditor(soundEditor),
@@ -114,7 +114,7 @@ void TopViewportController::_updateMiscellaneous()
 	screen->getButton("waterEditor")->setHoverable(isHoverable);
 	screen->getButton("modelEditor")->setHoverable(isHoverable);
 	screen->getButton("billboardEditor")->setHoverable(isHoverable);
-	screen->getButton("imageEditor")->setHoverable(isHoverable);
+	screen->getButton("quadEditor")->setHoverable(isHoverable);
 	screen->getButton("animation2dEditor")->setHoverable(isHoverable);
 	screen->getButton("animation3dEditor")->setHoverable(isHoverable);
 	screen->getButton("soundEditor")->setHoverable(isHoverable);
@@ -177,9 +177,9 @@ void TopViewportController::_applyProjectChange()
 		_billboardEditor.unload();
 	}
 
-	if(_imageEditor.isLoaded())
+	if(_quadEditor.isLoaded())
 	{
-		_imageEditor.unload();
+		_quadEditor.unload();
 	}
 
 	if(_animation2dEditor.isLoaded())
@@ -212,7 +212,7 @@ void TopViewportController::_applyProjectChange()
 	_waterEditor.setCurrentProjectID(_currentProjectID);
 	_modelEditor.setCurrentProjectID(_currentProjectID);
 	_billboardEditor.setCurrentProjectID(_currentProjectID);
-	_imageEditor.setCurrentProjectID(_currentProjectID);
+	_quadEditor.setCurrentProjectID(_currentProjectID);
 	_animation2dEditor.setCurrentProjectID(_currentProjectID);
 	_animation3dEditor.setCurrentProjectID(_currentProjectID);
 	_soundEditor.setCurrentProjectID(_currentProjectID);
@@ -236,8 +236,8 @@ const bool TopViewportController::isProjectCorrupted(const string& projectDirect
 	if(!Tools::isFileExisting(projectDirectoryPath + "data\\animation3d.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\animation2d.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\billboard.fe3d") ||
-	   !Tools::isFileExisting(projectDirectoryPath + "data\\image.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\model.fe3d") ||
+	   !Tools::isFileExisting(projectDirectoryPath + "data\\quad.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\settings.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\sky.fe3d") ||
 	   !Tools::isFileExisting(projectDirectoryPath + "data\\sound.fe3d") ||
@@ -262,7 +262,7 @@ void TopViewportController::_saveCurrentProject()
 	_waterEditor.saveToFile();
 	_modelEditor.saveToFile();
 	_billboardEditor.saveToFile();
-	_imageEditor.saveToFile();
+	_quadEditor.saveToFile();
 	_animation2dEditor.saveToFile();
 	_animation3dEditor.saveToFile();
 	_soundEditor.saveToFile();

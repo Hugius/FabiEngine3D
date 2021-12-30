@@ -38,8 +38,8 @@ const vector<ScriptValue> ScriptInterpreter::_processFe3dFunctionCall(const stri
 		isExecuted = (isExecuted || _executeFe3dBillboardGetter(functionName, args, returnValues));
 		isExecuted = (isExecuted || _executeFe3dAabbSetter(functionName, args, returnValues));
 		isExecuted = (isExecuted || _executeFe3dAabbGetter(functionName, args, returnValues));
-		isExecuted = (isExecuted || _executeFe3dImageSetter(functionName, args, returnValues));
-		isExecuted = (isExecuted || _executeFe3dImageGetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dQuadSetter(functionName, args, returnValues));
+		isExecuted = (isExecuted || _executeFe3dQuadGetter(functionName, args, returnValues));
 		isExecuted = (isExecuted || _executeFe3dTextSetter(functionName, args, returnValues));
 		isExecuted = (isExecuted || _executeFe3dTextGetter(functionName, args, returnValues));
 		isExecuted = (isExecuted || _executeFe3dPointlightSetter(functionName, args, returnValues));

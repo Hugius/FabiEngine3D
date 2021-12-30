@@ -13,7 +13,7 @@ void WorldEditor::_updateCamera()
 
 			if(_fe3d.camera_isFirstPersonViewEnabled())
 			{
-				_fe3d.image_setVisible("@@cursor", false);
+				_fe3d.quad_setVisible("@@cursor", false);
 			}
 		}
 		else
@@ -25,7 +25,7 @@ void WorldEditor::_updateCamera()
 
 			if(_fe3d.misc_isCursorInsideWindow())
 			{
-				_fe3d.image_setVisible("@@cursor", true);
+				_fe3d.quad_setVisible("@@cursor", true);
 			}
 		}
 

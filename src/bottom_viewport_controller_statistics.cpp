@@ -164,9 +164,9 @@ void BottomViewportController::_updateStatistics()
 	if(_fe3d.misc_checkInterval(10))
 	{
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d.image_getIDs())
+		for(const auto& entityID : _fe3d.quad_getIDs())
 		{
-			if(_fe3d.image_isVisible(entityID))
+			if(_fe3d.quad_isVisible(entityID))
 			{
 				entityCount++;
 			}
@@ -179,7 +179,7 @@ void BottomViewportController::_updateStatistics()
 			}
 		}
 
-		string textID = statisticsScreen->getTextField("imageEntityCount")->getEntityID();
+		string textID = statisticsScreen->getTextField("quadEntityCount")->getEntityID();
 		string text = "GUI Entities: " + to_string(entityCount);
 		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}

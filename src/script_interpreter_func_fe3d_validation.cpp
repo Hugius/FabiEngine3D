@@ -43,16 +43,16 @@ const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isTe
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dImage(const string& ID)
+const bool ScriptInterpreter::_validateFe3dQuad(const string& ID)
 {
 	if(!_validateFe3dID(ID))
 	{
 		return false;
 	}
 
-	if(!_fe3d.image_isExisting(ID))
+	if(!_fe3d.quad_isExisting(ID))
 	{
-		_throwScriptError("image entity does not exist!");
+		_throwScriptError("quad entity does not exist!");
 		return false;
 	}
 

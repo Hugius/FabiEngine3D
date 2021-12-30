@@ -26,7 +26,7 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_billboardEntityDepthRenderer("billboard_entity_depth_shader.vert", "billboard_entity_depth_shader.frag", renderBus),
 	_billboardEntityShadowRenderer("billboard_entity_shadow_shader.vert", "billboard_entity_shadow_shader.frag", renderBus),
 	_aabbEntityColorRenderer("aabb_entity_color_shader.vert", "aabb_entity_color_shader.frag", renderBus),
-	_imageEntityColorRenderer("image_entity_color_shader.vert", "image_entity_color_shader.frag", renderBus),
+	_quadEntityColorRenderer("quad_entity_color_shader.vert", "quad_entity_color_shader.frag", renderBus),
 	_antiAliasingRenderer("anti_aliasing_shader.vert", "anti_aliasing_shader.frag", renderBus),
 	_bloomRenderer("bloom_shader.vert", "bloom_shader.frag", renderBus),
 	_dofRenderer("dof_shader.vert", "dof_shader.frag", renderBus),
@@ -55,9 +55,9 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_waterRefractionCaptureBuffer.createColorTexture(ivec2(0), ivec2(Config::MIN_REFRACTION_QUALITY), 1, false);
 	_shadowCaptureBuffer.createDepthTexture(ivec2(0), ivec2(Config::MIN_SHADOW_QUALITY));
 
-	_renderImage = make_shared<ImageEntity>("renderImage");
-	_renderImage->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
-	_renderImage->setCentered(true);
+	_renderQuad = make_shared<QuadEntity>("renderQuad");
+	_renderQuad->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
+	_renderQuad->setCentered(true);
 }
 
 void MasterRenderer::update()
@@ -66,16 +66,16 @@ void MasterRenderer::update()
 	_updateLensFlare();
 }
 
-void MasterRenderer::render(shared_ptr<ImageEntity> logo, ivec2 viewport)
+void MasterRenderer::render(shared_ptr<QuadEntity> logo, ivec2 viewport)
 {
 	glViewport(0, 0, viewport.x, viewport.y);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	_imageEntityColorRenderer.bind();
+	_quadEntityColorRenderer.bind();
 
-	_imageEntityColorRenderer.render(logo);
+	_quadEntityColorRenderer.render(logo);
 
-	_imageEntityColorRenderer.unbind();
+	_quadEntityColorRenderer.unbind();
 }
 
 void MasterRenderer::render(EntityBus* entityBus)
@@ -162,7 +162,7 @@ void MasterRenderer::render(EntityBus* entityBus)
 		else
 		{
 			glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y + 0);
-			_renderFinalWorldImage();
+			_renderFinalQuad();
 			glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 
 		}

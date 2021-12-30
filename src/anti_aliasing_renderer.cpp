@@ -20,7 +20,7 @@ void AntiAliasingRenderer::unbind()
 	_shader.unbind();
 }
 
-void AntiAliasingRenderer::render(const shared_ptr<ImageEntity> entity)
+void AntiAliasingRenderer::render(const shared_ptr<QuadEntity> entity)
 {
 	const auto buffer = entity->getRenderBuffer();
 

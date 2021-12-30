@@ -121,119 +121,119 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_is_image_started")
+	else if(functionName == "fe3d:animation2d_is_quad_started")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dImage(args[1].getString()))
+			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString()))
 			{
-				auto result = _animation2dEditor.isImageAnimationStarted(args[0].getString(), args[1].getString());
+				auto result = _animation2dEditor.isQuadAnimationStarted(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_is_image_playing")
+	else if(functionName == "fe3d:animation2d_is_quad_playing")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dImage(args[1].getString()))
+			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString()))
 			{
-				auto result = _animation2dEditor.isImageAnimationPlaying(args[0].getString(), args[1].getString());
+				auto result = _animation2dEditor.isQuadAnimationPlaying(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_is_image_paused")
+	else if(functionName == "fe3d:animation2d_is_quad_paused")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dImage(args[1].getString()))
+			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString()))
 			{
-				auto result = _animation2dEditor.isImageAnimationPaused(args[0].getString(), args[1].getString());
+				auto result = _animation2dEditor.isQuadAnimationPaused(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_get_image_row_count")
+	else if(functionName == "fe3d:animation2d_get_quad_row_count")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dImage(args[1].getString()))
+			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString()))
 			{
-				auto result = _animation2dEditor.getImageAnimationRowCount(args[0].getString(), args[1].getString());
+				auto result = _animation2dEditor.getQuadAnimationRowCount(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_get_image_column_count")
+	else if(functionName == "fe3d:animation2d_get_quad_column_count")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dImage(args[1].getString()))
+			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString()))
 			{
-				auto result = _animation2dEditor.getImageAnimationColumnCount(args[0].getString(), args[1].getString());
+				auto result = _animation2dEditor.getQuadAnimationColumnCount(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_get_image_row_index")
+	else if(functionName == "fe3d:animation2d_get_quad_row_index")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dImage(args[1].getString()))
+			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString()))
 			{
-				auto result = _animation2dEditor.getImageAnimationRowIndex(args[0].getString(), args[1].getString());
+				auto result = _animation2dEditor.getQuadAnimationRowIndex(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_get_image_column_index")
+	else if(functionName == "fe3d:animation2d_get_quad_column_index")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dImage(args[1].getString()))
+			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString()))
 			{
-				auto result = _animation2dEditor.getImageAnimationColumnIndex(args[0].getString(), args[1].getString());
+				auto result = _animation2dEditor.getQuadAnimationColumnIndex(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_get_image_play_count")
+	else if(functionName == "fe3d:animation2d_get_quad_play_count")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dImage(args[1].getString()))
+			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString()))
 			{
-				auto result = _animation2dEditor.getImageAnimationPlayCount(args[0].getString(), args[1].getString());
+				auto result = _animation2dEditor.getQuadAnimationPlayCount(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_get_image_framestep")
+	else if(functionName == "fe3d:animation2d_get_quad_framestep")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dImage(args[1].getString()))
+			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString()))
 			{
-				auto result = _animation2dEditor.getImageAnimationFramestep(args[0].getString(), args[1].getString());
+				auto result = _animation2dEditor.getQuadAnimationFramestep(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 			}
 		}

@@ -17,9 +17,9 @@ void Core::_render()
 	const auto pointlights = _pointlightEntityManager.getEntities();
 	const auto spotlights = _spotlightEntityManager.getEntities();
 	const auto reflections = _reflectionEntityManager.getEntities();
-	const auto images = _imageEntityManager.getEntities();
+	const auto quads = _quadEntityManager.getEntities();
 	const auto texts = _textEntityManager.getEntities();
-	EntityBus entityBus(mainSky, mixSky, terrain, water, models, billboards, AABBs, pointlights, spotlights, reflections, images, texts);
+	EntityBus entityBus(mainSky, mixSky, terrain, water, models, billboards, AABBs, pointlights, spotlights, reflections, quads, texts);
 
 	_masterRenderer.render(&entityBus);
 
@@ -77,7 +77,7 @@ void Core::_prepare()
 		Logger::throwFatalWarning("Directory `engine\\` is missing or corrupted!");
 	}
 
-	shared_ptr<ImageEntity> logo = make_shared<ImageEntity>("logo");
+	shared_ptr<QuadEntity> logo = make_shared<QuadEntity>("logo");
 	logo->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
 	logo->setDiffuseMap(_textureLoader.load2dTexture("engine\\assets\\image\\diffuse_map\\logo.png", false, false));
 	logo->setCentered(true);

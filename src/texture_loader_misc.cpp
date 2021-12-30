@@ -136,7 +136,7 @@ TextureID TextureLoader::_create3dTexture(const array<shared_ptr<Image>, 6>& ima
 		{
 			if(images[i]->getWidth() != images[i]->getHeight())
 			{
-				Logger::throwWarning("3D texture width must be height: \"" + filePaths[i] + "\"");
+				Logger::throwWarning("3D texture resolution must be squared: \"" + filePaths[i] + "\"");
 				return 0;
 			}
 
@@ -148,7 +148,7 @@ TextureID TextureLoader::_create3dTexture(const array<shared_ptr<Image>, 6>& ima
 			{
 				if(imageSize != images[i]->getWidth())
 				{
-					Logger::throwWarning("All 3D image must have the same resolution: \"" + filePaths[i] + "\"");
+					Logger::throwWarning("3D texture resolution must be the same: \"" + filePaths[i] + "\"");
 					return 0;
 				}
 			}
@@ -199,6 +199,11 @@ void TextureLoader::_reloadAnisotropicFiltering()
 
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
+}
+
+void TextureLoader::_unloadImage(shared_ptr<Image> image)
+{
+	stbi_image_free(const_cast<unsigned char*>(image->getPixels()));
 }
 
 void TextureLoader::setAnisotropicFilteringQuality(unsigned int value)

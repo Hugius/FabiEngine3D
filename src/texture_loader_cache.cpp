@@ -51,6 +51,8 @@ void TextureLoader::cache2dTextures(const vector<string>& filePaths, bool isMipm
 					{
 						auto createdTexture = _create2dTexture(loadedImage, finalFilePaths[i], isMipmapped, isAnisotropic);
 
+						_unloadImage(loadedImage);
+
 						if(createdTexture != 0)
 						{
 							_2dTextureCache[finalFilePaths[i]] = createdTexture;
@@ -115,6 +117,14 @@ void TextureLoader::cache3dTextures(const vector<array<string, 6>>& filePathsLis
 					}
 
 					TextureID createdTexture = _create3dTexture(loadedImages, finalFilePathsList[i]);
+
+					for(const auto& image : loadedImages)
+					{
+						if(image != nullptr)
+						{
+							_unloadImage(image);
+						}
+					}
 
 					if(createdTexture != 0)
 					{

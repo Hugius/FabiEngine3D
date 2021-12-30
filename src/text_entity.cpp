@@ -7,23 +7,15 @@ using std::max;
 using std::clamp;
 using std::make_shared;
 
-void TextEntity::setContent(const string& value, TextureLoader& textureLoader)
+void TextEntity::setContent(const string& value)
 {
 	if(value != _content)
 	{
 		_content = value;
-
 		_characterEntities.clear();
 
 		for(const auto& character : _content)
 		{
-			auto texture = textureLoader.load2dTexture(_fontMapPath, true, false);
-
-			if(texture == 0)
-			{
-				break;
-			}
-
 			auto xIndex = _fontMapIndices.at(character).x;
 			auto yIndex = _fontMapIndices.at(character).y;
 			auto multiplierUV = fvec2((1.0f / 16.0f), (1.0f / 6.0f));
@@ -31,7 +23,6 @@ void TextEntity::setContent(const string& value, TextureLoader& textureLoader)
 
 			auto characterEntity = make_shared<ImageEntity>("dummy");
 			characterEntity->setRenderBuffer(_renderBuffer);
-			characterEntity->setDiffuseMap(texture);
 			characterEntity->setMultiplierUV(multiplierUV);
 			characterEntity->setAdderUV(adderUV);
 
@@ -57,7 +48,7 @@ const string& TextEntity::getFontMapPath() const
 
 void TextEntity::updateCharacterEntities()
 {
-	auto characterSize = fvec2((this->getSize().x / static_cast<float>(this->_content.size())), this->getSize().y);
+	const auto characterSize = fvec2((this->getSize().x / static_cast<float>(this->_content.size())), this->getSize().y);
 	unsigned int index = 0;
 
 	for(const auto& character : _characterEntities)
@@ -87,8 +78,8 @@ void TextEntity::updateCharacterEntities()
 		character->setRenderBuffer(_renderBuffer);
 		character->setCentered(_isCentered);
 		character->setDepth(_depth);
-		character->setDiffuseMap(_diffuseMap);
-		character->setDiffuseMapPath(_diffuseMapPath);
+		character->setDiffuseMap(_fontMap);
+		character->setDiffuseMapPath(_fontMapPath);
 		character->setWireframed(_isWireframed);
 
 		if(_isVisible)
@@ -160,12 +151,7 @@ void TextEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 
 void TextEntity::setFontMap(TextureID value)
 {
-	_diffuseMap = value;
-}
-
-void TextEntity::setDiffuseMapPath(const string& value)
-{
-	_diffuseMapPath = value;
+	_fontMap = value;
 }
 
 void TextEntity::setColor(fvec3 value)
@@ -266,16 +252,6 @@ void TextEntity::setDepth(unsigned int value)
 	_depth = value;
 }
 
-const TextureID TextEntity::getDiffuseMap() const
-{
-	return _diffuseMap;
-}
-
-const string& TextEntity::getDiffuseMapPath() const
-{
-	return _diffuseMapPath;
-}
-
 const fvec3 TextEntity::getWireframeColor() const
 {
 	return _wireframeColor;
@@ -309,11 +285,6 @@ const bool TextEntity::isMirroredHorizonally() const
 const bool TextEntity::isMirroredVertically() const
 {
 	return _isMirroredVertically;
-}
-
-const bool TextEntity::hasDiffuseMap() const
-{
-	return (_diffuseMap != 0);
 }
 
 const fvec2 TextEntity::getPosition() const

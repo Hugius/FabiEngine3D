@@ -28,6 +28,8 @@ const TextureID TextureLoader::load2dTexture(const string& filePath, bool isMipm
 	{
 		auto loadedTexture = _create2dTexture(loadedImage, filePath, isMipmapped, isAnisotropic);
 
+		_unloadImage(loadedImage);
+
 		if(loadedTexture == 0)
 		{
 			return 0;
@@ -65,6 +67,14 @@ const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 	}
 
 	TextureID loadedTexture = _create3dTexture(loadedImages, filePaths);
+
+	for(const auto& image : loadedImages)
+	{
+		if(image != nullptr)
+		{
+			_unloadImage(image);
+		}
+	}
 
 	if(loadedTexture == 0)
 	{

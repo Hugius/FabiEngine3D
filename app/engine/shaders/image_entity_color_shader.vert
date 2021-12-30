@@ -17,8 +17,8 @@ out vec2 f_uv;
 void main()
 {
 	gl_Position = (u_transformationMatrix * vec4(v_position, 0.0f, 1.0f));
-	f_uv.x = (u_isMirroredHorizontally ? -v_uv.x : v_uv.x);
-	f_uv.y = (u_isMirroredVertically ? -v_uv.y : v_uv.y);
+	f_uv.x = (u_isMirroredHorizontally ? (1.0f - v_uv.x) : v_uv.x);
+	f_uv.y = (u_isMirroredVertically ? (1.0f - v_uv.y) : v_uv.y);
 	f_uv.x = (u_adderUV.x + (f_uv.x * u_multiplierUV.x));
 	f_uv.y = (u_adderUV.y + (f_uv.y * u_multiplierUV.y));
 }

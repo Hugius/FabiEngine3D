@@ -16,10 +16,9 @@ public:
 	void updateTransformation();
 	void updateCharacterEntities();
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
-	void setContent(const string& value, TextureLoader& textureLoader);
+	void setContent(const string& value);
 	void setFontMapPath(const string& value);
 	void setFontMap(TextureID value);
-	void setDiffuseMapPath(const string& value);
 	void setMirroredHorizontally(bool value);
 	void setMirroredVertically(bool value);
 	void setTransparency(float value);
@@ -42,7 +41,6 @@ public:
 
 	const string& getContent() const;
 	const string& getFontMapPath() const;
-	const string& getDiffuseMapPath() const;
 
 	const fvec3 getWireframeColor() const;
 	const fvec3 getColor() const;
@@ -61,9 +59,6 @@ public:
 	const bool isCentered() const;
 	const bool isMirroredHorizonally() const;
 	const bool isMirroredVertically() const;
-	const bool hasDiffuseMap() const;
-
-	const TextureID getDiffuseMap() const;
 
 	const vector<shared_ptr<ImageEntity>>& getCharacterEntities() const;
 
@@ -168,7 +163,6 @@ private:
 	};
 	string _content = "";
 	string _fontMapPath = "";
-	string _diffuseMapPath = "";
 
 	fvec3 _color = fvec3(1.0f);
 	fvec3 _wireframeColor = fvec3(1.0f);
@@ -196,5 +190,5 @@ private:
 
 	vector<shared_ptr<ImageEntity>> _characterEntities;
 	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
-	TextureID _diffuseMap = 0;
+	TextureID _fontMap = 0;
 };

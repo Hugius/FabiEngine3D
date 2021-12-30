@@ -25,8 +25,8 @@ void FabiEngine3D::text_setFontMap(const string& ID, const string& value)
 {
 	auto entity = _core->_textEntityManager.getEntity(ID);
 
+	entity->setFontMap(_core->_textureLoader.load2dTexture(value, true, false));
 	entity->setFontMapPath(value);
-	entity->setFontMap(_core->_textureLoader.load2dTexture(value, true, true));
 }
 
 void FabiEngine3D::text_setContent(const string& ID, const string& value, float charWidth, float charHeight)
@@ -40,7 +40,7 @@ void FabiEngine3D::text_setContent(const string& ID, const string& value, float 
 		return;
 	}
 
-	entity->setContent(value, _core->_textureLoader);
+	entity->setContent(value);
 
 	fvec2 newSize = entity->getSize();
 	if(charWidth >= 0.0f)

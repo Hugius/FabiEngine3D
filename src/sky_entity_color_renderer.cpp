@@ -9,15 +9,10 @@ void SkyEntityColorRenderer::bind()
 	_shader.uploadUniform("u_mixValue", _renderBus.getSkyMixValue());
 	_shader.uploadUniform("u_mainCubeMap", 0);
 	_shader.uploadUniform("u_mixCubeMap", 1);
-
-	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LEQUAL);
 }
 
 void SkyEntityColorRenderer::unbind()
 {
-	glDisable(GL_DEPTH_TEST);
-
 	_shader.unbind();
 }
 

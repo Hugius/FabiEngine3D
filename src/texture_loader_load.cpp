@@ -28,7 +28,7 @@ const TextureID TextureLoader::load2dTexture(const string& filePath, bool isMipm
 	{
 		auto loadedTexture = _create2dTexture(loadedImage, filePath, isMipmapped, isAnisotropic);
 
-		//_unloadImage(loadedImage);
+		delete[] loadedImage->getPixels();
 
 		if(loadedTexture == 0)
 		{
@@ -72,7 +72,7 @@ const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 	{
 		if(image != nullptr)
 		{
-			//_unloadImage(image);
+			delete[] image->getPixels();
 		}
 	}
 

@@ -51,7 +51,7 @@ void TextureLoader::cache2dTextures(const vector<string>& filePaths, bool isMipm
 					{
 						auto createdTexture = _create2dTexture(loadedImage, finalFilePaths[i], isMipmapped, isAnisotropic);
 
-						//_unloadImage(loadedImage);
+						delete[] loadedImage->getPixels();
 
 						if(createdTexture != 0)
 						{
@@ -122,7 +122,7 @@ void TextureLoader::cache3dTextures(const vector<array<string, 6>>& filePathsLis
 					{
 						if(image != nullptr)
 						{
-							//_unloadImage(image);
+							delete[] image->getPixels();
 						}
 					}
 

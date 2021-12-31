@@ -1,11 +1,11 @@
 #include "image.hpp"
 
-Image::Image(unsigned char* pixels, unsigned int width, unsigned int height, unsigned int channelCount)
+Image::Image(unsigned char* pixels, unsigned int width, unsigned int height, unsigned int format)
 	:
 	_pixels(pixels),
 	_width(width),
 	_height(height),
-	_channelCount(channelCount)
+	_format(format)
 {
 
 }
@@ -27,5 +27,5 @@ const unsigned int Image::getHeight()
 
 const unsigned int Image::getFormat()
 {
-	return _channelCount;
+	return _format;
 }

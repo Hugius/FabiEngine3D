@@ -3,7 +3,7 @@
 class Image final
 {
 public:
-	Image(unsigned char* pixels, unsigned int width, unsigned int height, unsigned int channelCount);
+	Image(unsigned char* pixels, unsigned int width, unsigned int height, unsigned int format);
 
 	const unsigned char* getPixels();
 
@@ -16,5 +16,5 @@ private:
 
 	unsigned int _width;
 	unsigned int _height;
-	unsigned int _channelCount;
+	unsigned int _format;
 };

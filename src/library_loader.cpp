@@ -1,4 +1,3 @@
-#define STB_IMAGE_IMPLEMENTATION
 #define WIN32_LEAN_AND_MEAN
 
 #include "library_loader.hpp"
@@ -6,7 +5,6 @@
 
 #include <SDL\\SDL_mixer.h>
 #include <GLEW\\glew.h>
-#include <STB\\stb_image.h>
 #include <winsock2.h>
 #include <ShellScalingAPI.h>
 

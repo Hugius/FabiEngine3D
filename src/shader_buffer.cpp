@@ -18,22 +18,22 @@ ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentF
 	ifstream vertexFile;
 	ifstream fragmentFile;
 
-	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
+	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto vertexPath = ("engine\\shaders\\" + _vertexFileName);
 	const auto fragmentPath = ("engine\\shaders\\" + _fragmentFileName);
 
-	if(!Tools::isFileExisting(rootDirectoryPath + vertexPath))
+	if(!Tools::isFileExisting(rootPath + vertexPath))
 	{
 		Logger::throwFatalWarning("Directory `engine\\` is missing or corrupted!");
 	}
 
-	if(!Tools::isFileExisting(rootDirectoryPath + fragmentPath))
+	if(!Tools::isFileExisting(rootPath + fragmentPath))
 	{
 		Logger::throwFatalWarning("Directory `engine\\` is missing or corrupted!");
 	}
 
-	vertexFile.open(rootDirectoryPath + vertexPath);
-	fragmentFile.open(rootDirectoryPath + fragmentPath);
+	vertexFile.open(rootPath + vertexPath);
+	fragmentFile.open(rootPath + fragmentPath);
 
 	ostringstream vShaderStream, fShaderStream;
 	vShaderStream << vertexFile.rdbuf();

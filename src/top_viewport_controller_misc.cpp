@@ -124,7 +124,8 @@ void TopViewportController::_updateMiscellaneous()
 
 const bool TopViewportController::_prepareProjectChoosing(const string& title) const
 {
-	const string projectDirectoryPath = (Tools::getRootDirectoryPath() + "projects\\");
+	const auto rootPath = Tools::getRootDirectoryPath();
+	const string projectDirectoryPath = (rootPath + "projects\\");
 
 	if(!Tools::isDirectoryExisting(projectDirectoryPath))
 	{

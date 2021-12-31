@@ -19,7 +19,8 @@ const bool SkyEditor::saveToFile() const
 		Logger::throwError("SkyEditor::saveToFile");
 	}
 
-	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\sky.fe3d");
+	const auto rootPath = Tools::getRootDirectoryPath();
+	ofstream file(rootPath + "projects\\" + _currentProjectID + "\\data\\sky.fe3d");
 
 	for(const auto& skyID : _loadedSkyIDs)
 	{

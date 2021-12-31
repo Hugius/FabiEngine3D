@@ -384,29 +384,29 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 				Logger::throwError("WorldEditor::_updateLensFlareGraphicsSettingsMenu");
 			}
 
-			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
+			const auto rootPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\flare_map\\");
 
-			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
+			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
-			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "BMP");
+			const string filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "BMP");
 			if(filePath.empty())
 			{
 				return;
 			}
 
-			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
-			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
+			if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) &&
+			   filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
 				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
 				return;
 			}
 
-			flareMapPath = filePath.substr(rootDirectoryPath.size());
+			flareMapPath = filePath.substr(rootPath.size());
 			_fe3d.misc_clear2dTextureCache(flareMapPath);
 			_fe3d.gfx_setLensFlareMap(flareMapPath);
 		}

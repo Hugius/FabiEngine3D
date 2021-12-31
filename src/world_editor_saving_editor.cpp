@@ -20,7 +20,8 @@ const bool WorldEditor::saveEditorWorldToFile()
 		Logger::throwError("WorldEditor::saveEditorWorldToFile");
 	}
 
-	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\worlds\\editor\\" + _currentWorldID + ".fe3d");
+	const auto rootPath = Tools::getRootDirectoryPath();
+	ofstream file(rootPath + "projects\\" + _currentProjectID + "\\worlds\\editor\\" + _currentWorldID + ".fe3d");
 
 	vector<string> levelOfDetailEntityIDs;
 	for(const auto& modelID : _fe3d.model_getIDs())

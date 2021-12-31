@@ -28,6 +28,7 @@ EngineController::EngineController()
 
 void EngineController::FE3D_CONTROLLER_INIT()
 {
+	const auto rootPath = Tools::getRootDirectoryPath();
 	const string meshDirectoryPath = "engine\\assets\\mesh\\";
 	const string cubeMapDirectoryPath = "engine\\assets\\image\\cube_map\\";
 	const string diffuseMapDirectoryPath = "engine\\assets\\image\\diffuse_map\\";
@@ -35,7 +36,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 	if(Config::getInst().isApplicationExported())
 	{
-		if(_topViewportController.isProjectCorrupted(Tools::getRootDirectoryPath()))
+		if(_topViewportController.isProjectCorrupted(rootPath))
 		{
 			Logger::throwFatalWarning("Cannot load application: missing files/directories!");
 		}

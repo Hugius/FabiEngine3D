@@ -19,7 +19,8 @@ const bool WaterEditor::saveToFile() const
 		Logger::throwError("WaterEditor::saveToFile");
 	}
 
-	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\water.fe3d");
+	const auto rootPath = Tools::getRootDirectoryPath();
+	ofstream file(rootPath + "projects\\" + _currentProjectID + "\\data\\water.fe3d");
 
 	for(const auto& waterID : _loadedWaterIDs)
 	{

@@ -21,7 +21,8 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 		Logger::throwError("WorldEditor::loadCustomWorldFromFile::2");
 	}
 
-	const string filePath = (Tools::getRootDirectoryPath() + (Config::getInst().isApplicationExported() ? "" :
+	const auto rootPath = Tools::getRootDirectoryPath();
+	const string filePath = (rootPath + (Config::getInst().isApplicationExported() ? "" :
 							 ("projects\\" + _currentProjectID + "\\")) + "worlds\\custom\\" + fileName + ".fe3d");
 
 	if(!Tools::isFileExisting(filePath))

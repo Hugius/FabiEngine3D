@@ -9,7 +9,7 @@ public:
 
 	const unsigned int getWidth();
 	const unsigned int getHeight();
-	const unsigned int getChannelCount();
+	const unsigned int getFormat();
 
 private:
 	const unsigned char* _pixels;

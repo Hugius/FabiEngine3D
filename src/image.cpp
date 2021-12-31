@@ -25,7 +25,7 @@ const unsigned int Image::getHeight()
 	return _height;
 }
 
-const unsigned int Image::getChannelCount()
+const unsigned int Image::getFormat()
 {
 	return _channelCount;
 }

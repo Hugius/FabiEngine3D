@@ -30,29 +30,29 @@ void ModelEditor::_updateTexturingMenu()
 				Logger::throwError("ModelEditor::_updateTexturingMenu");
 			}
 
-			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
+			const auto rootPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\diffuse_map\\");
 
-			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
+			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
-			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "BMP");
+			const string filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "BMP");
 			if(filePath.empty())
 			{
 				return;
 			}
 
-			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
-			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
+			if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) &&
+			   filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
 				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
+			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.model_setDiffuseMap(_currentModelID, _currentPartID, finalFilePath);
 		}
@@ -63,29 +63,29 @@ void ModelEditor::_updateTexturingMenu()
 				Logger::throwError("ModelEditor::_updateTexturingMenu");
 			}
 
-			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
+			const auto rootPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\emission_map\\");
 
-			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
+			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
-			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "BMP");
+			const string filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "BMP");
 			if(filePath.empty())
 			{
 				return;
 			}
 
-			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
-			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
+			if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) &&
+			   filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
 				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
+			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.model_setEmissionMap(_currentModelID, _currentPartID, finalFilePath);
 		}
@@ -96,29 +96,29 @@ void ModelEditor::_updateTexturingMenu()
 				Logger::throwError("ModelEditor::_updateTexturingMenu");
 			}
 
-			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
+			const auto rootPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\specular_map\\");
 
-			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
+			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
-			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "BMP");
+			const string filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "BMP");
 			if(filePath.empty())
 			{
 				return;
 			}
 
-			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
-			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
+			if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) &&
+			   filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
 				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
+			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.model_setSpecularMap(_currentModelID, _currentPartID, finalFilePath);
 		}
@@ -129,29 +129,29 @@ void ModelEditor::_updateTexturingMenu()
 				Logger::throwError("ModelEditor::_updateTexturingMenu");
 			}
 
-			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
+			const auto rootPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\reflection_map\\");
 
-			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
+			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
-			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "BMP");
+			const string filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "BMP");
 			if(filePath.empty())
 			{
 				return;
 			}
 
-			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
-			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
+			if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) &&
+			   filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
 				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
+			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.model_setReflectionMap(_currentModelID, _currentPartID, finalFilePath);
 		}
@@ -162,29 +162,29 @@ void ModelEditor::_updateTexturingMenu()
 				Logger::throwError("ModelEditor::_updateTexturingMenu");
 			}
 
-			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
+			const auto rootPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\normal_map\\");
 
-			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
+			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				return;
 			}
 
-			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "BMP");
+			const string filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "BMP");
 			if(filePath.empty())
 			{
 				return;
 			}
 
-			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
-			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
+			if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) &&
+			   filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
 				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
+			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d.misc_clear2dTextureCache(finalFilePath);
 			_fe3d.model_setNormalMap(_currentModelID, _currentPartID, finalFilePath);
 		}

@@ -2,8 +2,6 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-#include <STB/stb_image.h>
-
 using std::clamp;
 
 TextureLoader::TextureLoader(RenderBus& renderBus)
@@ -45,22 +43,46 @@ vector<float> TextureLoader::_loadBitmap(const string& filePath)
 
 shared_ptr<Image> TextureLoader::_loadImage(const string& filePath, bool mustFlip)
 {
-	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
+	const auto rootPath = Tools::getRootDirectoryPath();
 
-	stbi_set_flip_vertically_on_load(mustFlip);
+	vector<float> pixels;
 
-	int width, height, channelCount;
-	const auto pixels = stbi_load(string(rootDirectoryPath + filePath).c_str(), &width, &height, &channelCount, 0);
-	if(pixels == nullptr)
+	auto file = fopen(string(rootPath + filePath).c_str(), "rb");
+	if(file == nullptr)
 	{
 		return nullptr;
 	}
-	std::cout << width << " " << channelCount << std::endl;
 
-	return make_shared<Image>(pixels,
+	uint8_t header[54];
+	for(int i = 0; i < 54; i++)
+	{
+		header[i] = getc(file);
+	}
+
+	uint32_t width, height;
+	uint16_t format;
+	width = ((header[21] << 24) | (header[20] << 16) | (header[19] << 8) | header[18]);
+	height = ((header[25] << 24) | (header[24] << 16) | (header[23] << 8) | header[22]);
+	format = ((header[29] << 8) | header[28]);
+
+	std::cout << format << std::endl;
+
+	auto size = static_cast<size_t>(width) * static_cast<size_t>(height);
+	for(size_t i = 0; i < size; i++)
+	{
+		auto r = getc(file);
+		auto g = getc(file);
+		auto b = getc(file);
+		float value = (static_cast<float>(r + g + b) / 3.0f);
+		pixels.push_back((value));
+	}
+
+	fclose(file);
+
+	return make_shared<Image>(nullptr,
 							  static_cast<unsigned int>(width),
 							  static_cast<unsigned int>(height),
-							  static_cast<unsigned int>(channelCount));
+							  static_cast<unsigned int>(format));
 }
 
 TextureID TextureLoader::_create2dTexture(shared_ptr<Image> image, const string& filePath, bool isMipmapped, bool isAnisotropic)
@@ -69,11 +91,11 @@ TextureID TextureLoader::_create2dTexture(shared_ptr<Image> image, const string&
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	if(image->getChannelCount() == 4)
+	if(image->getFormat() == 4)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->getWidth(), image->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image->getPixels());
 	}
-	else if(image->getChannelCount() == 3)
+	else if(image->getFormat() == 3)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->getWidth(), image->getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, image->getPixels());
 	}
@@ -177,11 +199,6 @@ void TextureLoader::_reloadAnisotropicFiltering()
 
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
-}
-
-void TextureLoader::_unloadImage(shared_ptr<Image> image)
-{
-	stbi_image_free(const_cast<unsigned char*>(image->getPixels()));
 }
 
 void TextureLoader::setAnisotropicFilteringQuality(unsigned int value)

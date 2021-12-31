@@ -56,32 +56,32 @@ void SoundEditor::_updateSoundCreating()
 				Logger::throwError("SoundEditor::_updateSoundCreating");
 			}
 
-			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
+			const auto rootPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\audio\\");
 
-			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
+			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				_isCreatingSound = false;
 				return;
 			}
 
-			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "WAV");
+			const string filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "WAV");
 			if(filePath.empty())
 			{
 				_isCreatingSound = false;
 				return;
 			}
 
-			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
-			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
+			if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) &&
+			   filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
 				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
 				_isCreatingSound = false;
 				return;
 			}
 
-			const string finalFilePath = filePath.substr(rootDirectoryPath.size());
+			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d.misc_clearAudioCache(finalFilePath);
 			_fe3d.sound2d_create(newSoundID, finalFilePath);
 

@@ -18,7 +18,8 @@ const bool Animation2dEditor::saveToFile() const
 		Logger::throwError("Animation2dEditor::saveToFile");
 	}
 
-	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\animation2d.fe3d");
+	const auto rootPath = Tools::getRootDirectoryPath();
+	ofstream file(rootPath + "projects\\" + _currentProjectID + "\\data\\animation2d.fe3d");
 
 	for(const auto& animation : _animations)
 	{

@@ -19,7 +19,8 @@ const bool BillboardEditor::saveToFile() const
 		Logger::throwError("BillboardEditor::saveToFile");
 	}
 
-	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\billboard.fe3d");
+	const auto rootPath = Tools::getRootDirectoryPath();
+	ofstream file(rootPath + "projects\\" + _currentProjectID + "\\data\\billboard.fe3d");
 
 	for(const auto& billboardID : _loadedBillboardIDs)
 	{

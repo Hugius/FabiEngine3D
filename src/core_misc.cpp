@@ -30,6 +30,7 @@ void Core::_render()
 
 void Core::_prepare()
 {
+	const auto rootPath = Tools::getRootDirectoryPath();
 	const string meshDirectoryPath = "engine\\assets\\mesh\\";
 	const string cubeMapDirectoryPath = "engine\\assets\\image\\cube_map\\";
 	const string fontMapDirectoryPath = "engine\\assets\\image\\font_map\\";
@@ -37,41 +38,41 @@ void Core::_prepare()
 
 	if
 		(
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "camera.obj") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "box.obj") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "lamp.obj") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "plane.obj") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "speaker.obj") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + meshDirectoryPath + "torch.obj") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_back.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_bottom.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_front.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_left.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_right.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + cubeMapDirectoryPath + "background_top.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "box.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "color.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "cursor_default.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "cursor_pointing.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "cursor_text.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "debug.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "grid.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "light_source.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "logo.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "minus.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "pause.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "plus.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "position.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "radius.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "restart.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "rotation.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "settings.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "shape_circle.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "shape_square.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "size.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "start.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + diffuseMapDirectoryPath + "stop.bmp") ||
-		!Tools::isFileExisting(Tools::getRootDirectoryPath() + fontMapDirectoryPath + "font.bmp")
+		!Tools::isFileExisting(rootPath + meshDirectoryPath + "camera.obj") ||
+		!Tools::isFileExisting(rootPath + meshDirectoryPath + "box.obj") ||
+		!Tools::isFileExisting(rootPath + meshDirectoryPath + "lamp.obj") ||
+		!Tools::isFileExisting(rootPath + meshDirectoryPath + "plane.obj") ||
+		!Tools::isFileExisting(rootPath + meshDirectoryPath + "speaker.obj") ||
+		!Tools::isFileExisting(rootPath + meshDirectoryPath + "torch.obj") ||
+		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_back.bmp") ||
+		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_bottom.bmp") ||
+		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_front.bmp") ||
+		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_left.bmp") ||
+		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_right.bmp") ||
+		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_top.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "box.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "color.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "cursor_default.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "cursor_pointing.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "cursor_text.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "debug.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "grid.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "light_source.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "logo.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "minus.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "pause.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "plus.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "position.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "radius.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "restart.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "rotation.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "settings.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "shape_circle.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "shape_square.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "size.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "start.bmp") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "stop.bmp") ||
+		!Tools::isFileExisting(rootPath + fontMapDirectoryPath + "font.bmp")
 		)
 	{
 		Logger::throwFatalWarning("Directory `engine\\` is missing or corrupted!");

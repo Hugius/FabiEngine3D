@@ -13,7 +13,8 @@ void TopViewportController::_updateProjectCreating()
 
 		if(_gui.getOverlay()->checkValueForm("newProjectID", newProjectID))
 		{
-			const string projectDirectoryPath = (Tools::getRootDirectoryPath() + "projects\\");
+			const auto rootPath = Tools::getRootDirectoryPath();
+			const string projectDirectoryPath = (rootPath + "projects\\");
 			const string newProjectDirectoryPath = (projectDirectoryPath + newProjectID + "\\");
 
 			if(!Tools::isDirectoryExisting(projectDirectoryPath))
@@ -100,8 +101,9 @@ void TopViewportController::_updateProjectLoading()
 {
 	if(_isLoadingProject)
 	{
+		const auto rootPath = Tools::getRootDirectoryPath();
 		const string clickedButtonID = _gui.getOverlay()->checkChoiceForm("projectList");
-		const string projectDirectoryPath = string(Tools::getRootDirectoryPath() + "projects\\" + clickedButtonID + "\\");
+		const string projectDirectoryPath = string(rootPath + "projects\\" + clickedButtonID + "\\");
 
 		if(!clickedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
@@ -180,7 +182,8 @@ void TopViewportController::_updateProjectDeleting()
 				_applyProjectChange();
 			}
 
-			const string directoryPath = (Tools::getRootDirectoryPath() + "projects\\" + chosenButtonID);
+			const auto rootPath = Tools::getRootDirectoryPath();
+			const string directoryPath = (rootPath + "projects\\" + chosenButtonID);
 			if(!Tools::isDirectoryExisting(directoryPath))
 			{
 				Logger::throwWarning("Cannot delete project: missing directory!");

@@ -21,7 +21,8 @@ const bool ScriptEditor::saveScriptFiles()
 
 	for(const auto& fileName : _scriptFileNamesToDelete)
 	{
-		const string filePath = string(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\scripts\\" + fileName + ".fe3d");
+		const auto rootPath = Tools::getRootDirectoryPath();
+		const string filePath = string(rootPath + "projects\\" + _currentProjectID + "\\scripts\\" + fileName + ".fe3d");
 
 		if(Tools::isFileExisting(filePath))
 		{
@@ -32,7 +33,8 @@ const bool ScriptEditor::saveScriptFiles()
 
 	for(const auto& scriptID : _script.getScriptFileIDs())
 	{
-		ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\scripts\\" + scriptID + ".fe3d");
+		const auto rootPath = Tools::getRootDirectoryPath();
+		ofstream file(rootPath + "projects\\" + _currentProjectID + "\\scripts\\" + scriptID + ".fe3d");
 
 		file << _script.getScriptFile(scriptID)->getCursorLineIndex() << " " << _script.getScriptFile(scriptID)->getCursorCharIndex() << endl;
 

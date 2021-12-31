@@ -19,7 +19,8 @@ const bool Animation3dEditor::saveToFile() const
 		Logger::throwError("Animation3dEditor::saveToFile");
 	}
 
-	ofstream file(Tools::getRootDirectoryPath() + "projects\\" + _currentProjectID + "\\data\\animation3d.fe3d");
+	const auto rootPath = Tools::getRootDirectoryPath();
+	ofstream file(rootPath + "projects\\" + _currentProjectID + "\\data\\animation3d.fe3d");
 
 	for(const auto& animation : _animations)
 	{

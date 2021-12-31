@@ -89,13 +89,13 @@ const string Tools::getRootDirectoryPath()
 
 	GetModuleFileName(nullptr, buffer, static_cast<DWORD>(len));
 
-	string rootDirectoryPath = buffer;
+	string rootPath = buffer;
 
-	rootDirectoryPath = absolute(rootDirectoryPath).string();
+	rootPath = absolute(rootPath).string();
 
-	rootDirectoryPath = rootDirectoryPath.substr(0, (rootDirectoryPath.size() - string("binaries\\fe3d.exe").size()));
+	rootPath = rootPath.substr(0, (rootPath.size() - string("binaries\\fe3d.exe").size()));
 
-	return rootDirectoryPath;
+	return rootPath;
 }
 
 const float Tools::getWindowAspectRatio()

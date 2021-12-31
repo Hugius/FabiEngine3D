@@ -27,6 +27,7 @@
     <ClInclude Include="..\..\..\src\configuration.hpp" />
     <ClInclude Include="..\..\..\src\direction.hpp" />
     <ClInclude Include="..\..\..\src\direction_order.hpp" />
+    <ClInclude Include="..\..\..\src\image_format.hpp" />
     <ClInclude Include="..\..\..\src\input_handler.hpp" />
     <ClInclude Include="..\..\..\src\input_type.hpp" />
     <ClInclude Include="..\..\..\src\library_loader.hpp" />

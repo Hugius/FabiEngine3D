@@ -14,27 +14,25 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 	vector<fvec3> temp_normals;
 	string selectedPartID = "";
 
-	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
-
-	string path = rootDirectoryPath + filePath;
-	FILE* file = fopen(path.c_str(), "r");
-	if(!Tools::isFileExisting(path) || filePath.empty())
+	const auto rootPath = Tools::getRootDirectoryPath();
+	auto file = fopen(string(rootPath + filePath).c_str(), "r");
+	if(file == nullptr)
 	{
-		string warningMessage = string("Cannot load mesh: \"" + filePath + "\"!");
+		auto warningMessage = string("Cannot load mesh: \"" + filePath + "\"!");
 		return make_pair(warningMessage, meshParts);
 	}
 
 	while(true)
 	{
-		char* lineHeader = new char[128];
-		int res = fscanf(file, "%s", lineHeader);
+		auto lineType = new char[128];
+		int scanResult = fscanf(file, "%s", lineType);
 
-		if(res == EOF)
+		if(scanResult == EOF)
 		{
 			break;
 		}
 
-		if(strcmp(lineHeader, "FE3D_PART") == 0)
+		if(strcmp(lineType, "FE3D_PART") == 0)
 		{
 			char* ID = new char[128];
 			auto temp = fscanf(file, "%s\n", ID);
@@ -48,7 +46,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 
 			continue;
 		}
-		else if(strcmp(lineHeader, "v") == 0)
+		else if(strcmp(lineType, "v") == 0)
 		{
 			fvec3 position;
 			auto temp = fscanf(file, "%f %f %f\n", &position.x, &position.y, &position.z);
@@ -56,7 +54,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 
 			continue;
 		}
-		else if(strcmp(lineHeader, "vt") == 0)
+		else if(strcmp(lineType, "vt") == 0)
 		{
 			fvec2 uv;
 			auto temp = fscanf(file, "%f %f\n", &uv.x, &uv.y);
@@ -64,7 +62,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 
 			continue;
 		}
-		else if(strcmp(lineHeader, "vn") == 0)
+		else if(strcmp(lineType, "vn") == 0)
 		{
 			fvec3 normal;
 			auto temp = fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
@@ -72,7 +70,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 
 			continue;
 		}
-		else if(strcmp(lineHeader, "f") == 0)
+		else if(strcmp(lineType, "f") == 0)
 		{
 			unsigned int positionIndex[3];
 			unsigned int uvIndex[3];

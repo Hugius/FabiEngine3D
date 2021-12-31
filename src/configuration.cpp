@@ -8,7 +8,8 @@ using std::istringstream;
 
 Config::Config()
 {
-	const string filePath = string(Tools::getRootDirectoryPath() + "config.fe3d");
+	const auto rootPath = Tools::getRootDirectoryPath();
+	const string filePath = string(rootPath + "config.fe3d");
 
 	if(Tools::isFileExisting(filePath))
 	{

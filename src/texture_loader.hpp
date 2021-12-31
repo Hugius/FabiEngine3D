@@ -46,7 +46,6 @@ public:
 
 private:
 	void _reloadAnisotropicFiltering();
-	void _unloadImage(shared_ptr<Image> image);
 
 	vector<float> _loadBitmap(const string& filePath);
 	shared_ptr<Image> _loadImage(const string& filePath, bool mustFlip);

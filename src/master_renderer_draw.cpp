@@ -256,7 +256,7 @@ void MasterRenderer::_renderCursor()
 
 void MasterRenderer::_renderDebugScreens()
 {
-	const string fontPath = "engine\\assets\\image\\font_map\\font.png";
+	const string fontPath = "engine\\assets\\image\\font_map\\font.bmp";
 	const fvec3 textColor = fvec3(0.75f);
 	const float charWidth = 0.025f;
 	const float charHeight = 0.1f;

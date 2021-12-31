@@ -28,43 +28,19 @@ void TextureLoader::cacheBitmap(const string& filePath)
 	loadBitmap(filePath);
 }
 
-/* http://stackoverflow.com/questions/1968561/getting-the-pixel-value-of-bmp-file */
 vector<float> TextureLoader::_loadBitmap(const string& filePath)
 {
-	const auto rootDirectoryPath = Tools::getRootDirectoryPath();
+	vector<float> result;
 
-	vector<float> pixelIntensities;
+	auto image = _loadImage(filePath, false);
 
-	FILE* streamIn;
-	fopen_s(&streamIn, (rootDirectoryPath + filePath).c_str(), "rb");
-	if(streamIn == (FILE*)0)
+	for(unsigned int i = 0; i < (image->getWidth() * image->getHeight()); i++)
 	{
-		return {};
+		auto pixels = image->getPixels();
+		result.push_back(static_cast<float>(pixels[i]) / 255.0f);
 	}
 
-	uint8_t header[54];
-	uint32_t width, height = 5;
-	for(int i = 0; i < 54; i++)
-	{
-		header[i] = getc(streamIn);
-	}
-
-	width = (header[21] << 24) | (header[20] << 16) | (header[19] << 8) | header[18];
-	height = (header[25] << 24) | (header[24] << 16) | (header[23] << 8) | header[22];
-
-	auto size = static_cast<size_t>(width) * static_cast<size_t>(height);
-	for(size_t i = 0; i < size; i++)
-	{
-		auto r = getc(streamIn);
-		auto g = getc(streamIn);
-		auto b = getc(streamIn);
-		float value = (static_cast<float>(r + g + b) / 3.0f);
-		pixelIntensities.push_back((value));
-	}
-
-	fclose(streamIn);
-
-	return pixelIntensities;
+	return result;
 }
 
 shared_ptr<Image> TextureLoader::_loadImage(const string& filePath, bool mustFlip)
@@ -75,11 +51,11 @@ shared_ptr<Image> TextureLoader::_loadImage(const string& filePath, bool mustFli
 
 	int width, height, channelCount;
 	const auto pixels = stbi_load(string(rootDirectoryPath + filePath).c_str(), &width, &height, &channelCount, 0);
-
 	if(pixels == nullptr)
 	{
 		return nullptr;
 	}
+	std::cout << width << " " << channelCount << std::endl;
 
 	return make_shared<Image>(pixels,
 							  static_cast<unsigned int>(width),

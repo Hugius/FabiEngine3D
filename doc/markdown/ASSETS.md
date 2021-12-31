@@ -34,7 +34,7 @@
 ## 4. Image
 
 - Image assets must be placed in `~\projects\<your_project>\assets\image\`.
-- The file format is `.png` because the absence of compression delivers high image quality.
+- The file format is `.bmp` because the absence of compression delivers high image quality.
 - Due to the uncompressed format, note that the files can be very big.
 - Images are used for a variety of reasons for rendering.
 
@@ -111,9 +111,9 @@
 
 ### 4.8 Font Map
 
-<img src="../image/font_map.png" width="25%"/>
+<img src="../image/font_map.png" width="50%"/>
 
-- Diffuse map assets must be placed in `~\projects\<your_project>\assets\image\font_map\`
+- Font map assets must be placed in `~\projects\<your_project>\assets\image\font_map\`
 - Bit depth: `32`
 - Font maps are used to render text.
 

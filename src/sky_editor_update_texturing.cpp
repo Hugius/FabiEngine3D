@@ -29,7 +29,7 @@ void SkyEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
+			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "BMP");
 			if(filePath.empty())
 			{
 				return;
@@ -62,7 +62,7 @@ void SkyEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
+			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "BMP");
 			if(filePath.empty())
 			{
 				return;
@@ -95,7 +95,7 @@ void SkyEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
+			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "BMP");
 			if(filePath.empty())
 			{
 				return;
@@ -128,7 +128,7 @@ void SkyEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
+			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "BMP");
 			if(filePath.empty())
 			{
 				return;
@@ -161,7 +161,7 @@ void SkyEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
+			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "BMP");
 			if(filePath.empty())
 			{
 				return;
@@ -194,7 +194,7 @@ void SkyEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "PNG");
+			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "BMP");
 			if(filePath.empty())
 			{
 				return;

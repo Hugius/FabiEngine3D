@@ -8,36 +8,36 @@ void SoundEditor::_updateMiscellaneous()
 	bool isPlaying = isExisting && _fe3d.sound2d_isPlaying(_currentSoundID);
 	bool isPaused = isExisting && _fe3d.sound2d_isPaused(_currentSoundID);
 
-	if (isPlaying)
+	if(isPlaying)
 	{
-		_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\start.png");
+		_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\start.bmp");
 	}
-	else if (isPaused)
+	else if(isPaused)
 	{
-		_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\pause.png");
+		_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\pause.bmp");
 	}
 	else
 	{
-		_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\stop.png");
+		_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\stop.bmp");
 	}
 	_fe3d.billboard_rotate("@@icon", fvec3(0.0f, 0.5f, 0.0f));
 }
 
 void SoundEditor::_updateSoundCreating()
 {
-	if (_isCreatingSound)
+	if(_isCreatingSound)
 	{
 		string newSoundID;
 
-		if (_gui.getOverlay()->checkValueForm("soundCreate", newSoundID, { _currentSoundID }))
+		if(_gui.getOverlay()->checkValueForm("soundCreate", newSoundID, {_currentSoundID}))
 		{
-			if (newSoundID.find(' ') != string::npos)
+			if(newSoundID.find(' ') != string::npos)
 			{
 				Logger::throwWarning("Sound ID cannot contain any spaces!");
 				return;
 			}
 
-			if (newSoundID.find('@') != string::npos)
+			if(newSoundID.find('@') != string::npos)
 			{
 				Logger::throwWarning("Sound ID cannot contain '@'!");
 				return;
@@ -45,13 +45,13 @@ void SoundEditor::_updateSoundCreating()
 
 			newSoundID = ("@" + newSoundID);
 
-			if (find(_loadedSoundIDs.begin(), _loadedSoundIDs.end(), newSoundID) != _loadedSoundIDs.end())
+			if(find(_loadedSoundIDs.begin(), _loadedSoundIDs.end(), newSoundID) != _loadedSoundIDs.end())
 			{
 				Logger::throwWarning("Sound with ID \"" + newSoundID.substr(1) + "\" already exists!");
 				return;
 			}
 
-			if (_currentProjectID.empty())
+			if(_currentProjectID.empty())
 			{
 				Logger::throwError("SoundEditor::_updateSoundCreating");
 			}
@@ -59,7 +59,7 @@ void SoundEditor::_updateSoundCreating()
 			const auto rootDirectoryPath = Tools::getRootDirectoryPath();
 			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\audio\\");
 
-			if (!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
+			if(!Tools::isDirectoryExisting(rootDirectoryPath + targetDirectoryPath))
 			{
 				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
 				_isCreatingSound = false;
@@ -67,14 +67,14 @@ void SoundEditor::_updateSoundCreating()
 			}
 
 			const string filePath = Tools::chooseExplorerFile(string(rootDirectoryPath + targetDirectoryPath), "WAV");
-			if (filePath.empty())
+			if(filePath.empty())
 			{
 				_isCreatingSound = false;
 				return;
 			}
 
-			if (filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
-				filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
+			if(filePath.size() > (rootDirectoryPath.size() + targetDirectoryPath.size()) &&
+			   filePath.substr(rootDirectoryPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
 			{
 				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
 				_isCreatingSound = false;
@@ -85,7 +85,7 @@ void SoundEditor::_updateSoundCreating()
 			_fe3d.misc_clearAudioCache(finalFilePath);
 			_fe3d.sound2d_create(newSoundID, finalFilePath);
 
-			if (_fe3d.sound2d_isExisting(newSoundID))
+			if(_fe3d.sound2d_isExisting(newSoundID))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
 
@@ -102,17 +102,17 @@ void SoundEditor::_updateSoundCreating()
 
 void SoundEditor::_updateSoundChoosing()
 {
-	if (_isChoosingSound)
+	if(_isChoosingSound)
 	{
 		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("soundList");
 
-		if (!selectedButtonID.empty())
+		if(!selectedButtonID.empty())
 		{
-			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				_currentSoundID = ("@" + selectedButtonID);
 
-				if (!_isDeletingSound)
+				if(!_isDeletingSound)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
 
@@ -124,7 +124,7 @@ void SoundEditor::_updateSoundChoosing()
 				_isChoosingSound = false;
 			}
 		}
-		else if (_gui.getOverlay()->isChoiceFormCancelled("soundList"))
+		else if(_gui.getOverlay()->isChoiceFormCancelled("soundList"))
 		{
 			_isChoosingSound = false;
 			_isDeletingSound = false;
@@ -135,14 +135,14 @@ void SoundEditor::_updateSoundChoosing()
 
 void SoundEditor::_updateSoundDeleting()
 {
-	if (_isDeletingSound && !_currentSoundID.empty())
+	if(_isDeletingSound && !_currentSoundID.empty())
 	{
-		if (!_gui.getOverlay()->isAnswerFormExisting("delete"))
+		if(!_gui.getOverlay()->isAnswerFormExisting("delete"))
 		{
 			_gui.getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
-		if (_gui.getOverlay()->isAnswerFormConfirmed("delete"))
+		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuMain");
 
@@ -152,7 +152,7 @@ void SoundEditor::_updateSoundDeleting()
 			_loadedSoundIDs.erase(remove(_loadedSoundIDs.begin(), _loadedSoundIDs.end(), _currentSoundID), _loadedSoundIDs.end());
 			_isDeletingSound = false;
 		}
-		if (_gui.getOverlay()->isAnswerFormDenied("delete"))
+		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
 		{
 			_isChoosingSound = true;
 			_currentSoundID = "";

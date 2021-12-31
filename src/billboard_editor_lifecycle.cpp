@@ -46,12 +46,12 @@ void BillboardEditor::load()
 
 	_fe3d.model_create("@@box", "engine\\assets\\mesh\\box.obj");
 	_fe3d.model_setBasePosition("@@box", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
-	_fe3d.model_setDiffuseMap("@@box", "", "engine\\assets\\image\\diffuse_map\\box.png");
+	_fe3d.model_setDiffuseMap("@@box", "", "engine\\assets\\image\\diffuse_map\\box.bmp");
 	_fe3d.model_setFaceCulled("@@box", true);
 	_fe3d.model_create("@@grid", "engine\\assets\\mesh\\plane.obj");
 	_fe3d.model_setBasePosition("@@grid", fvec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d.model_setBaseSize("@@grid", fvec3(GRID_SIZE, 1.0f, GRID_SIZE));
-	_fe3d.model_setDiffuseMap("@@grid", "", "engine\\assets\\image\\diffuse_map\\grid.png");
+	_fe3d.model_setDiffuseMap("@@grid", "", "engine\\assets\\image\\diffuse_map\\grid.bmp");
 	_fe3d.model_setTextureRepeat("@@grid", "", GRID_UV);
 	_fe3d.model_setShadowed("@@grid", false);
 
@@ -62,14 +62,14 @@ void BillboardEditor::load()
 
 void BillboardEditor::unload()
 {
-	for (const auto& ID : _loadedBillboardIDs)
+	for(const auto& ID : _loadedBillboardIDs)
 	{
 		_fe3d.billboard_delete(ID);
 	}
 
 	_unloadGUI();
 
-	if (_fe3d.camera_isThirdPersonViewEnabled())
+	if(_fe3d.camera_isThirdPersonViewEnabled())
 	{
 		_fe3d.camera_disableThirdPersonView();
 	}
@@ -150,43 +150,43 @@ void BillboardEditor::_unloadGUI()
 
 void BillboardEditor::update()
 {
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateMainMenu();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateChoiceMenu();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateTexturingMenu();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateLightingMenu();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateMiscellaneousMenu();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateBillboardCreating();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateBillboardChoosing();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateBillboardDeleting();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateCamera();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateMiscellaneous();
 	}

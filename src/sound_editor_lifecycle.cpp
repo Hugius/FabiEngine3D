@@ -32,7 +32,7 @@ void SoundEditor::load()
 
 	_fe3d.billboard_create("@@icon", true);
 	_fe3d.billboard_setPosition("@@icon", ICON_BILLBOARD_POSITION);
-	_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\stop.png");
+	_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\stop.bmp");
 	_fe3d.billboard_setBright("@@icon", true);
 
 	_gui.getOverlay()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
@@ -42,7 +42,7 @@ void SoundEditor::load()
 
 void SoundEditor::unload()
 {
-	for (const auto& ID : _loadedSoundIDs)
+	for(const auto& ID : _loadedSoundIDs)
 	{
 		_fe3d.sound2d_delete(ID);
 	}
@@ -94,27 +94,27 @@ void SoundEditor::_unloadGUI()
 
 void SoundEditor::update()
 {
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateMainMenu();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateChoiceMenu();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateSoundCreating();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateSoundChoosing();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateSoundDeleting();
 	}
-	if (_isEditorLoaded)
+	if(_isEditorLoaded)
 	{
 		_updateMiscellaneous();
 	}

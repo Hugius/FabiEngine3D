@@ -14,7 +14,7 @@ GuiTextField::GuiTextField(FabiEngine3D& fe3d, const string& parentID, const str
 	_fe3d.text_setPosition(_entityID, position);
 	_fe3d.text_setSize(_entityID, size);
 	_fe3d.text_setColor(_entityID, color);
-	_fe3d.text_setFontMap(_entityID, "engine\\assets\\image\\font_map\\font.png");
+	_fe3d.text_setFontMap(_entityID, "engine\\assets\\image\\font_map\\font.bmp");
 	_fe3d.text_setContent(_entityID, textContent);
 }
 
@@ -30,7 +30,7 @@ void GuiTextField::setVisible(bool isVisible)
 
 void GuiTextField::changeTextContent(const string& content)
 {
-	if (content != _fe3d.text_getContent(_entityID))
+	if(content != _fe3d.text_getContent(_entityID))
 	{
 		auto charWidth = (_initialSize.x / static_cast<float>(_fe3d.text_getContent(_entityID).size()));
 		auto charHeight = _initialSize.y;

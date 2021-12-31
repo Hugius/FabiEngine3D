@@ -82,7 +82,7 @@ void GuiButton::_updateHovering(bool isHoverable)
 
 	if(_isHovered)
 	{
-		_fe3d.quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.png");
+		_fe3d.quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.bmp");
 	}
 }
 

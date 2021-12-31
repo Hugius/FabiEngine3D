@@ -15,7 +15,7 @@
 
 ## 3. Miscellaneous
 
-- Image entities and text entities are rendered on top of each other (stacking).
+- Quad entities and text entities are rendered on top of each other (stacking).
 - Centering the cursor might take 1 frame (or more) in time, because it might not be centered instantly by Microsoft Windows.
 - The engine updates all logic at a fixed speed (144 updates per second), even if the FPS is higher/lower.
 - The maximum amount of messages in the engine logging console is 1000.

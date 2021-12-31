@@ -6,7 +6,7 @@
 - [Model](SCRIPT_FE3D_MODEL.md)
 - [Billboard](SCRIPT_FE3D_BILLBOARD.md)
 - [AABB](SCRIPT_FE3D_AABB.md)
-- [Image](SCRIPT_FE3D_IMAGE.md)
+- [Quad](SCRIPT_FE3D_QUAD.md)
 - [Text](SCRIPT_FE3D_TEXT.md)
 - [Light](SCRIPT_FE3D_LIGHT.md)
 - [Audio](SCRIPT_FE3D_AUDIO.md)

@@ -3,7 +3,7 @@
 ## 1. General
 
 - Animation2D is used for creating 2D texture animations.
-- These animations can be applied to billboard/image entities.
+- These animations can be applied to billboard/quad entities.
 - Animated textures consist of multiple small animation frames, divided in rows and columns.
 
 ## 2. Properties

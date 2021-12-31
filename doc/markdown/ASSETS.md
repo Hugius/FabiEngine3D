@@ -4,18 +4,12 @@
 
 - Audio assets must be placed in `~\projects\<your_project>\assets\audio\`.
 - The file format is `.wav` because the absence of compression delivers high audio quality.
-- Due to the uncompressed format, note that the files can be very big.
-
-## 2. Font
-
-- Font assets must be placed in `~\projects\<your_project>\assets\font\`.
-- The file format is `.ttf` because it is the most used and common format for text fonts.
-- Fonts are used to process text content into a texture.
+- Due to the uncompressed format, note that the file size can be very large.
 
 ## 3. Mesh
 
 - Mesh assets must be placed in `~\projects\<your_project>\assets\mesh\`.
-- The file format is `.obj` because it is easy, lightweight and commonly used.
+- The file format is `.obj` because it is simple and commonly used.
 - Meshes are used to render complex 3D objects on the screen.
 - Make sure that the mesh file contains: `v`, `vt`, `vn`, `f`.
 - Make sure that the center of your mesh is XYZ(0,0,0).
@@ -37,22 +31,22 @@
   f ...
   ```
 
-## 4. Texture
+## 4. Image
 
-- Texture assets must be placed in `~\projects\<your_project>\assets\texture\`.
+- Image assets must be placed in `~\projects\<your_project>\assets\image\`.
 - The file format is `.png` because the absence of compression delivers high image quality.
 - Due to the uncompressed format, note that the files can be very big.
-- Textures are used for a variety of reasons for rendering.
+- Images are used for a variety of reasons for rendering.
 
 ### 4.1 Blend Map
 
 <img src="../image/blend_map.png" width="25%"/>
 
-- Blend map assets must be placed in `~\projects\<your_project>\assets\texture\blend_map\`.
+- Blend map assets must be placed in `~\projects\<your_project>\assets\image\blend_map\`.
 - Bit depth: `24`
 - Blend maps are used to render and mix multiple textures onto a terrain mesh.
 - Each pixel (R,G,B) of the blend map corresponds to a different diffuse/normal map.
-- In total you can use up to 10 different textures:
+- In total you can use up to 10 different images:
   - 1x height map
   - 1x blend map
   - 1x base diffuse map
@@ -69,8 +63,8 @@
 <img src="../image/skybox_back.png" width="25%"/>
 <img src="../image/skybox_front.png" width="25%"/>
 
-- Cube map assets must be placed in `~\projects\<your_project>\assets\texture\cube_map\`
-- Bit depth: `8`
+- Cube map assets must be placed in `~\projects\<your_project>\assets\image\cube_map\`
+- Bit depth: `24`
 - Cube maps are used to render a skybox around the camera.
 - A cube map consists of 6 images: left, right, bottom, top, back, front.
 
@@ -78,7 +72,7 @@
 
 <img src="../image/diffuse_map.png" width="25%"/>
 
-- Diffuse map assets must be placed in `~\projects\<your_project>\assets\texture\diffuse_map\`
+- Diffuse map assets must be placed in `~\projects\<your_project>\assets\image\diffuse_map\`
 - Bit depth: `24/32`
 - Diffuse maps are used to render a variety of colors to a mesh.
 
@@ -86,15 +80,15 @@
 
 <img src="../image/displacement_map.png" width="25%"/>
 
-- Displacement map assets must be placed in `~\projects\<your_project>\assets\texture\displacement_map\`
-- Bit depth: `24`
+- Displacement map assets must be placed in `~\projects\<your_project>\assets\image\displacement_map\`
+- Bit depth: `8`
 - DUDV maps are used to create waves in a water mesh.
 
 ### 4.5 DUDV Map
 
 <img src="../image/dudv_map.png" width="25%"/>
 
-- DUDV map assets must be placed in `~\projects\<your_project>\assets\texture\dudv_map\`
+- DUDV map assets must be placed in `~\projects\<your_project>\assets\image\dudv_map\`
 - Bit depth: `24`
 - Displacement maps are used to create ripples in a water texture.
 
@@ -102,24 +96,32 @@
 
 <img src="../image/emission_map.png" width="25%"/>
 
-- Emission map assets must be placed in `~\projects\<your_project>\assets\texture\emission_map\`
+- Emission map assets must be placed in `~\projects\<your_project>\assets\image\emission_map\`
 - Bit depth: `24`
-- Emission maps are used to make certain parts of a mesh emit more light.
+- Emission maps are used to make certain parts of a mesh appear brighter.
 
 ### 4.7 Flare Map
 
 <img src="../image/flare_map.png" width="25%"/>
 
-- Flare map assets must be placed in `~\projects\<your_project>\assets\texture\flare_map\`
+- Flare map assets must be placed in `~\projects\<your_project>\assets\image\flare_map\`
 - Bit depth: `24`
 - Flare maps are used in the [lens flare effect](GRAPHICS.md).
 - The pixel colors in the flare map are added to the 3D rendering pixels in the post-processing pipeline
 
-### 4.8 Height Map
+### 4.8 Font Map
+
+<img src="../image/font_map.png" width="25%"/>
+
+- Diffuse map assets must be placed in `~\projects\<your_project>\assets\image\font_map\`
+- Bit depth: `32`
+- Font maps are used to render text.
+
+### 4.9 Height Map
 
 <img src="../image/height_map.png" width="25%"/>
 
-- Height map assets must be placed in `~\projects\<your_project>\assets\texture\height_map\`.
+- Height map assets must be placed in `~\projects\<your_project>\assets\image\height_map\`.
 - Bit depth: `8`
 - Height maps are used to generate a terrain mesh.
 - Each pixel of the height map corresponds to a vertex height.
@@ -128,7 +130,7 @@
 
 <img src="../image/normal_map.png" width="25%"/>
 
-- Normal map assets must be placed in `~\projects\<your_project>\assets\texture\normal_map\`
+- Normal map assets must be placed in `~\projects\<your_project>\assets\image\normal_map\`
 - Bit depth: `24`
 - Normal maps are used for more detailed lighting effects on a mesh.
 
@@ -136,7 +138,7 @@
 
 <img src="../image/reflection_map.png" width="25%"/>
 
-- Reflection map assets must be placed in `~\projects\<your_project>\assets\texture\reflection_map\`
+- Reflection map assets must be placed in `~\projects\<your_project>\assets\image\reflection_map\`
 - Bit depth: `24`
 - Reflection maps are used to specify which parts of a mesh are reflective.
 
@@ -144,6 +146,6 @@
 
 <img src="../image/specular_map.png" width="25%"/>
 
-- Specular map assets must be placed in `~\projects\<your_project>\assets\texture\specular_map\`
+- Specular map assets must be placed in `~\projects\<your_project>\assets\image\specular_map\`
 - Bit depth: `24`
 - Specular maps are used to specify which parts of a mesh are specular lighted.

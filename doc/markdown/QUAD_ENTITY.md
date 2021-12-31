@@ -1,8 +1,8 @@
-# Image Entity
+# Quad Entity
 
 ## 1. General
 
-- The image entity is a 2D quad in 2D space.
+- The quad entity is a 2D rectangle in 2D space.
 - The mesh renders on top of all 3D rendering.
 - Sprite animations can be applied to the diffuse map.
 

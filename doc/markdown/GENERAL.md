@@ -13,8 +13,8 @@
 ### 1.2 Rendering
 
 - **3D Rendering**: sky, terrain, water, model, billboard
-- **2D Rendering**: image, text
-- **Textures**: blend, cube, diffuse, displacement, DUDV, emission, flare, height, image, normal, reflection, specular
+- **2D Rendering**: quad, text
+- **Textures**: blend, cube, diffuse, displacement, DUDV, emission, flare, font, height, normal, reflection, specular
 - **Lighting**: ambient lighting, directional lighting, specular lighting, point lighting, spot lighting
 - **Post Processing**: bloom, DOF, motion blur, anti aliasing, lens flare, gamma correction
 - **Miscellaneous**: shadows, cube reflections, planar reflections, fog, sky exposure, anisotropic filtering

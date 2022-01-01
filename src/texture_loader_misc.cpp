@@ -78,20 +78,48 @@ shared_ptr<Image> TextureLoader::_loadImage(const string& filePath, bool mustFli
 		return nullptr;
 	}
 
-	auto width = static_cast<unsigned int>(rawWidth);
-	auto height = static_cast<unsigned int>(rawHeight);
-	auto format = static_cast<unsigned int>(rawFormat);
-	auto size = (width * height * (format / 8));
-	auto pixels = new unsigned char[size];
+	const auto width = static_cast<unsigned int>(rawWidth);
+	const auto height = static_cast<unsigned int>(rawHeight);
+	const auto format = (static_cast<unsigned int>(rawFormat) / 8);
+	const auto size = (width * height * format);
+	const auto pixels = new unsigned char[size];
 
 	for(unsigned i = 0; i < size; i++)
 	{
-		pixels[i] = static_cast<char>(getc(file));
+		pixels[i] = static_cast<unsigned char>(getc(file));
+	}
+
+	auto correctedPixels = new unsigned char[size];
+	for(unsigned y = 0; y < height; y++)
+	{
+		for(unsigned x = 0; x < width; x++)
+		{
+			const unsigned int index1 = ((x * format) + (y * width * format));
+			const unsigned int index2 = (mustFlip ? ((x * format) + ((height - y - 1) * width * format)) : index1);
+
+			if(format == 1)
+			{
+				correctedPixels[index1 + 0] = pixels[index2 + 0];
+			}
+			if(format == 3)
+			{
+				correctedPixels[index1 + 0] = pixels[index2 + 2];
+				correctedPixels[index1 + 1] = pixels[index2 + 1];
+				correctedPixels[index1 + 2] = pixels[index2 + 0];
+			}
+			if(format == 4)
+			{
+				correctedPixels[index1 + 0] = pixels[index2 + 2];
+				correctedPixels[index1 + 1] = pixels[index2 + 1];
+				correctedPixels[index1 + 2] = pixels[index2 + 0];
+				correctedPixels[index1 + 3] = pixels[index2 + 3];
+			}
+		}
 	}
 
 	fclose(file);
 
-	return make_shared<Image>(pixels,
+	return make_shared<Image>(correctedPixels,
 							  static_cast<unsigned int>(width),
 							  static_cast<unsigned int>(height),
 							  static_cast<unsigned int>(format));
@@ -103,13 +131,13 @@ TextureID TextureLoader::_create2dTexture(shared_ptr<Image> image, const string&
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	if(image->getFormat() == 24)
+	if(image->getFormat() == 3)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->getWidth(), image->getHeight(), 0, GL_BGR, GL_UNSIGNED_BYTE, image->getPixels());
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->getWidth(), image->getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, image->getPixels());
 	}
-	if(image->getFormat() == 32)
+	if(image->getFormat() == 4)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->getWidth(), image->getHeight(), 0, GL_BGRA, GL_UNSIGNED_BYTE, image->getPixels());
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->getWidth(), image->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image->getPixels());
 	}
 
 	if(isMipmapped)
@@ -170,11 +198,11 @@ TextureID TextureLoader::_create3dTexture(const array<shared_ptr<Image>, 6>& ima
 	{
 		if(images[i] == nullptr)
 		{
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, imageSize, imageSize, 0, GL_BGR, GL_UNSIGNED_BYTE, nullptr);
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
 		}
 		else
 		{
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, imageSize, imageSize, 0, GL_BGR, GL_UNSIGNED_BYTE, images[i]->getPixels());
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, images[i]->getPixels());
 
 			Logger::throwInfo("Loaded texture: \"" + filePaths[i] + "\"");
 		}

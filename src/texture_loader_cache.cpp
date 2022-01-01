@@ -24,7 +24,7 @@ void TextureLoader::cache2dTextures(const vector<string>& filePaths, bool isMipm
 	{
 		if(_2dTextureCache.find(filePath) == _2dTextureCache.end())
 		{
-			threads.push_back(async(launch::async, &TextureLoader::_loadImage, this, filePath, true));
+			threads.push_back(async(launch::async, &TextureLoader::_loadImage, this, filePath, false));
 			finalFilePaths.push_back(filePath);
 			threadStatuses.push_back(false);
 		}
@@ -78,7 +78,7 @@ void TextureLoader::cache3dTextures(const vector<array<string, 6>>& filePathsLis
 			threads.push_back({});
 			for(const auto& filePath : filePaths)
 			{
-				threads.back().push_back(async(launch::async, &TextureLoader::_loadImage, this, filePath, false));
+				threads.back().push_back(async(launch::async, &TextureLoader::_loadImage, this, filePath, true));
 			}
 			finalFilePathsList.push_back(filePaths);
 			threadStatuses.push_back(false);

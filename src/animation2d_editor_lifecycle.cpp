@@ -1,3 +1,5 @@
+#define TW(text) VPC::calculateTextWidth(text, CW)
+
 #include "animation2d_editor.hpp"
 #include "left_viewport_controller.hpp"
 #include "configuration.hpp"
@@ -5,8 +7,6 @@
 
 using VPC = BaseViewportController;
 using LVPC = LeftViewportController;
-
-#define TW(text) VPC::calculateTextWidth(text, CW)
 
 Animation2dEditor::Animation2dEditor(FabiEngine3D& fe3d, GuiManager& gui)
 	:

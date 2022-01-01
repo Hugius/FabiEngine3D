@@ -1,3 +1,5 @@
+#define TW(text) VPC::calculateTextWidth(text, CW)
+
 #include "model_editor.hpp"
 #include "left_viewport_controller.hpp"
 #include "configuration.hpp"
@@ -10,8 +12,6 @@ using std::numeric_limits;
 
 using VPC = BaseViewportController;
 using LVPC = LeftViewportController;
-
-#define TW(text) VPC::calculateTextWidth(text, CW)
 
 ModelEditor::ModelEditor(FabiEngine3D& fe3d, GuiManager& gui)
 	:

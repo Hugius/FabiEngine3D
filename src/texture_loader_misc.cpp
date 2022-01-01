@@ -2,6 +2,9 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
+#pragma warning(disable:6385)
+#pragma warning(disable:6386)
+
 using std::clamp;
 
 TextureLoader::TextureLoader(RenderBus& renderBus)
@@ -21,29 +24,9 @@ void TextureLoader::cache3dTexture(const array<string, 6>& filePaths)
 	load3dTexture(filePaths);
 }
 
-void TextureLoader::cacheBitmap(const string& filePath)
+void TextureLoader::cacheImage(const string& filePath)
 {
-	loadBitmap(filePath);
-}
-
-vector<float> TextureLoader::_loadBitmap(const string& filePath)
-{
-	vector<float> result;
-
-	auto image = _loadImage(filePath, false);
-	auto pixels = image->getPixels();
-
-	if(image->getFormat() != 8)
-	{
-
-	}
-
-	for(unsigned int i = 0; i < (image->getWidth() * image->getHeight()); i++)
-	{
-		result.push_back(static_cast<float>(pixels[i]) / 255.0f);
-	}
-
-	return result;
+	loadImage(filePath);
 }
 
 shared_ptr<Image> TextureLoader::_loadImage(const string& filePath, bool mustFlip)
@@ -56,17 +39,15 @@ shared_ptr<Image> TextureLoader::_loadImage(const string& filePath, bool mustFli
 		return nullptr;
 	}
 
-	uint8_t header[54];
+	auto header = new uint8_t[54];
 	for(int i = 0; i < 54; i++)
 	{
 		header[i] = getc(file);
 	}
 
-	uint32_t rawWidth, rawHeight;
-	uint16_t rawFormat;
-	rawWidth = ((header[21] << 24) | (header[20] << 16) | (header[19] << 8) | header[18]);
-	rawHeight = ((header[25] << 24) | (header[24] << 16) | (header[23] << 8) | header[22]);
-	rawFormat = ((header[29] << 8) | header[28]);
+	uint32_t rawWidth = ((header[21] << 24) | (header[20] << 16) | (header[19] << 8) | header[18]);
+	uint32_t rawHeight = ((header[25] << 24) | (header[24] << 16) | (header[23] << 8) | header[22]);
+	uint16_t rawFormat = ((header[29] << 8) | header[28]);
 
 	if((rawWidth == 0) || (rawHeight == 0))
 	{
@@ -117,6 +98,8 @@ shared_ptr<Image> TextureLoader::_loadImage(const string& filePath, bool mustFli
 		}
 	}
 
+	delete[] header;
+	delete[] pixels;
 	fclose(file);
 
 	return make_shared<Image>(correctedPixels,
@@ -157,39 +140,11 @@ TextureID TextureLoader::_create2dTexture(shared_ptr<Image> image, const string&
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(_anisotropicFilteringQuality));
 	}
 
-	Logger::throwInfo("Loaded texture: \"" + filePath + "\"");
-
 	return texture;
 }
 
 TextureID TextureLoader::_create3dTexture(const array<shared_ptr<Image>, 6>& images, const array<string, 6>& filePaths)
 {
-	unsigned int imageSize = 0;
-	for(size_t i = 0; i < images.size(); i++)
-	{
-		if(images[i] != nullptr)
-		{
-			if(images[i]->getWidth() != images[i]->getHeight())
-			{
-				Logger::throwWarning("3D texture resolution must be squared: \"" + filePaths[i] + "\"");
-				return 0;
-			}
-
-			if(imageSize == 0)
-			{
-				imageSize = images[i]->getWidth();
-			}
-			else
-			{
-				if(imageSize != images[i]->getWidth())
-				{
-					Logger::throwWarning("3D texture resolution must be the same: \"" + filePaths[i] + "\"");
-					return 0;
-				}
-			}
-		}
-	}
-
 	TextureID texture;
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
@@ -198,13 +153,11 @@ TextureID TextureLoader::_create3dTexture(const array<shared_ptr<Image>, 6>& ima
 	{
 		if(images[i] == nullptr)
 		{
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, images[i]->getWidth(), images[i]->getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
 		}
 		else
 		{
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, images[i]->getPixels());
-
-			Logger::throwInfo("Loaded texture: \"" + filePaths[i] + "\"");
 		}
 	}
 

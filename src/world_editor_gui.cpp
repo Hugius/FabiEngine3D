@@ -1,10 +1,10 @@
+#define TW(text) VPC::calculateTextWidth(text, CW)
+
 #include "world_editor.hpp"
 #include "left_viewport_controller.hpp"
 
 using VPC = BaseViewportController;
 using LVPC = LeftViewportController;
-
-#define TW(text) VPC::calculateTextWidth(text, CW)
 
 void WorldEditor::_loadGUI()
 {

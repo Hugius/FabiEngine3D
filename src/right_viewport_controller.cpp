@@ -1,6 +1,6 @@
-#include "right_viewport_controller.hpp"
-
 #define TW(text) calculateTextWidth(text, CW)
+
+#include "right_viewport_controller.hpp"
 
 using RVPC = RightViewportController;
 

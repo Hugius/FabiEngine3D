@@ -1,11 +1,11 @@
+#define TW(text) VPC::calculateTextWidth(text, CW)
+
 #include "water_editor.hpp"
 #include "left_viewport_controller.hpp"
 #include "configuration.hpp"
 
 using VPC = BaseViewportController;
 using LVPC = LeftViewportController;
-
-#define TW(text) VPC::calculateTextWidth(text, CW)
 
 WaterEditor::WaterEditor(FabiEngine3D& fe3d, GuiManager& gui)
 	:

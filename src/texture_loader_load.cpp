@@ -6,6 +6,32 @@
 using std::future;
 using std::launch;
 
+const shared_ptr<Image> TextureLoader::loadImage(const string& filePath)
+{
+	BEGIN:;
+
+	auto cacheIterator = _imageCache.find(filePath);
+
+	if(cacheIterator != _imageCache.end())
+	{
+		return cacheIterator->second;
+	}
+
+	auto loadedImage = _loadImage(filePath, false);
+
+	if(loadedImage == nullptr)
+	{
+		Logger::throwWarning("Cannot load image: \"" + filePath + "\"!");
+		return {};
+	}
+	else
+	{
+		_imageCache.insert(make_pair(filePath, loadedImage));
+		Logger::throwInfo("Loaded image: \"" + filePath + "\"");
+		goto BEGIN;
+	}
+}
+
 const TextureID TextureLoader::load2dTexture(const string& filePath, bool isMipmapped, bool isAnisotropic)
 {
 	BEGIN:;
@@ -28,16 +54,15 @@ const TextureID TextureLoader::load2dTexture(const string& filePath, bool isMipm
 	{
 		auto loadedTexture = _create2dTexture(loadedImage, filePath, isMipmapped, isAnisotropic);
 
-		delete[] loadedImage->getPixels();
-
 		if(loadedTexture == 0)
 		{
 			return 0;
 		}
 		else
 		{
+			_imageCache.insert(make_pair(filePath, loadedImage));
 			_2dTextureCache.insert(make_pair(filePath, loadedTexture));
-
+			Logger::throwInfo("Loaded image: \"" + filePath + "\"");
 			goto BEGIN;
 		}
 	}
@@ -64,17 +89,38 @@ const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 		{
 			Logger::throwWarning("Cannot load image: \"" + filePaths[i] + "\"!");
 		}
+		else
+		{
+			//unsigned int imageSize = 0;
+			//for(size_t i = 0; i < images.size(); i++)
+			//{
+			//	if(images[i] != nullptr)
+			//	{
+			//		if(images[i]->getWidth() != images[i]->getHeight())
+			//		{
+			//			return 0;
+			//		}
+
+			//		if(imageSize == 0)
+			//		{
+			//			imageSize = images[i]->getWidth();
+			//		}
+			//		else
+			//		{
+			//			if(imageSize != images[i]->getWidth())
+			//			{
+			//				return 0;
+			//			}
+			//		}
+			//	}
+			//}
+
+			_imageCache.insert(make_pair(filePaths[i], loadedImages[i]));
+			Logger::throwInfo("Loaded image: \"" + filePaths[i] + "\"");
+		}
 	}
 
 	TextureID loadedTexture = _create3dTexture(loadedImages, filePaths);
-
-	for(const auto& image : loadedImages)
-	{
-		if(image != nullptr)
-		{
-			delete[] image->getPixels();
-		}
-	}
 
 	if(loadedTexture == 0)
 	{
@@ -83,35 +129,6 @@ const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 	else
 	{
 		_3dTextureCache.insert(make_pair(filePaths, loadedTexture));
-
-		goto BEGIN;
-	}
-}
-
-const vector<float>* TextureLoader::loadBitmap(const string& filePath)
-{
-	BEGIN:;
-
-	auto cacheIterator = _bitmapCache.find(filePath);
-
-	if(cacheIterator != _bitmapCache.end())
-	{
-		return &cacheIterator->second;
-	}
-
-	auto loadedBitmap = _loadBitmap(filePath);
-
-	if(loadedBitmap.empty())
-	{
-		Logger::throwWarning("Cannot load bitmap: \"" + filePath + "\"!");
-		return nullptr;
-	}
-	else
-	{
-		_bitmapCache.insert(make_pair(filePath, loadedBitmap));
-
-		Logger::throwInfo("Loaded bitmap: \"" + filePath + "\"");
-
 		goto BEGIN;
 	}
 }

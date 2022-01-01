@@ -10,6 +10,11 @@ Image::Image(unsigned char* pixels, unsigned int width, unsigned int height, uns
 
 }
 
+Image::~Image()
+{
+	delete[] _pixels;
+}
+
 const unsigned char* Image::getPixels()
 {
 	return _pixels;

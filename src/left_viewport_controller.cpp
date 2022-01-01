@@ -1,6 +1,6 @@
-#include "left_viewport_controller.hpp"
-
 #define TW(text) calculateTextWidth(text, CW)
+
+#include "left_viewport_controller.hpp"
 
 using LVPC = LeftViewportController;
 

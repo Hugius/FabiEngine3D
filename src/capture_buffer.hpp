@@ -21,7 +21,7 @@ public:
 	const ivec2 getSize() const;
 
 	const BufferID getFBO() const;
-	const TextureID getTexture(unsigned int index) const;
+	const BufferID getTexture(unsigned int index) const;
 
 private:
 	ivec2 _position = ivec2(0);
@@ -29,7 +29,7 @@ private:
 
 	bool _isInitialized = false;
 
-	vector<TextureID> _textures;
+	vector<BufferID> _textures;
 	BufferID _fbo = 0;
 	BufferID _rbo = 0;
 };

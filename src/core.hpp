@@ -2,7 +2,7 @@
 
 #include "fe3d.hpp"
 #include "mesh_loader.hpp"
-#include "texture_loader.hpp"
+#include "image_loader.hpp"
 #include "audio_loader.hpp"
 #include "input_handler.hpp"
 #include "render_bus.hpp"
@@ -73,7 +73,7 @@ private:
 	Sound2dManager _sound2dManager;
 	Sound3dManager _sound3dManager;
 	ShadowGenerator _shadowGenerator;
-	TextureLoader _textureLoader;
+	ImageLoader _textureLoader;
 	Camera _camera;
 	SkyEntityManager  _skyEntityManager;
 	TerrainEntityManager _terrainEntityManager;

@@ -3,7 +3,7 @@
 
 using std::make_shared;
 
-TextEntityManager::TextEntityManager(TextureLoader& textureLoader, RenderBus& renderBus)
+TextEntityManager::TextEntityManager(ImageLoader& textureLoader, RenderBus& renderBus)
 	:
 	_textureLoader(textureLoader),
 	_renderBus(renderBus),
@@ -16,7 +16,7 @@ shared_ptr<TextEntity> TextEntityManager::getEntity(const string& ID)
 {
 	auto iterator = _entities.find(ID);
 
-	if (iterator == _entities.end())
+	if(iterator == _entities.end())
 	{
 		Logger::throwError("TextEntityManager::getEntity");
 	}
@@ -42,7 +42,7 @@ void TextEntityManager::createEntity(const string& ID, bool isCentered)
 
 void TextEntityManager::deleteEntity(const string& ID)
 {
-	if (!isEntityExisting(ID))
+	if(!isEntityExisting(ID))
 	{
 		Logger::throwError("TextEntityManager::deleteEntity");
 	}
@@ -62,7 +62,7 @@ const bool TextEntityManager::isEntityExisting(const string& ID)
 
 void TextEntityManager::update()
 {
-	for (const auto& [key, entity] : _entities)
+	for(const auto& [key, entity] : _entities)
 	{
 		entity->updateTransformation();
 		entity->updateCharacterEntities();

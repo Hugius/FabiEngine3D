@@ -1,6 +1,6 @@
 #pragma once
 
-#include "buffer_type.hpp"
+#include "render_buffer_type.hpp"
 #include "mathematics.hpp"
 #include "render_utils.hpp"
 
@@ -27,4 +27,3 @@ private:
 	BufferID _vao = 0;
 	BufferID _vbo = 0;
 };
-

@@ -51,6 +51,7 @@
     <ClCompile Include="..\..\..\src\model_entity_shadow_renderer.cpp" />
     <ClCompile Include="..\..\..\src\sky_entity_color_renderer.cpp" />
     <ClCompile Include="..\..\..\src\terrain_entity_color_renderer.cpp" />
+    <ClCompile Include="..\..\..\src\texture_buffer.cpp" />
     <ClCompile Include="..\..\..\src\water_entity_color_renderer.cpp" />
     <ClCompile Include="..\..\..\src\render_window.cpp" />
   </ItemGroup>
@@ -80,6 +81,7 @@
     <ClInclude Include="..\..\..\src\model_entity_shadow_renderer.hpp" />
     <ClInclude Include="..\..\..\src\sky_entity_color_renderer.hpp" />
     <ClInclude Include="..\..\..\src\terrain_entity_color_renderer.hpp" />
+    <ClInclude Include="..\..\..\src\texture_buffer.hpp" />
     <ClInclude Include="..\..\..\src\water_entity_color_renderer.hpp" />
     <ClInclude Include="..\..\..\src\render_window.hpp" />
   </ItemGroup>

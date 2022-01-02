@@ -8,11 +8,10 @@ using std::make_shared;
 using std::max;
 using std::clamp;
 
-MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader, Camera& camera, ShadowGenerator& shadowGenerator)
+MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, Camera& camera, ShadowGenerator& shadowGenerator)
 	:
 	_renderBus(renderBus),
 	_timer(timer),
-	_textureLoader(textureLoader),
 	_camera(camera),
 	_shadowGenerator(shadowGenerator),
 	_skyEntityColorRenderer("sky_entity_color_shader.vert", "sky_entity_color_shader.frag", renderBus),

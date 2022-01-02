@@ -3,7 +3,7 @@
 
 using std::make_shared;
 
-TerrainEntityManager::TerrainEntityManager(TextureLoader& textureLoader)
+TerrainEntityManager::TerrainEntityManager(ImageLoader& textureLoader)
 	:
 	_textureLoader(textureLoader)
 {

@@ -22,13 +22,13 @@
 #include "motion_blur_renderer.hpp"
 #include "blur_renderer.hpp"
 #include "timer.hpp"
-#include "texture_loader.hpp"
+#include "image_loader.hpp"
 #include "shadow_generator.hpp"
 
 class MasterRenderer final
 {
 public:
-	MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader, Camera& camera, ShadowGenerator& shadowGenerator);
+	MasterRenderer(RenderBus& renderBus, Timer& timer, Camera& camera, ShadowGenerator& shadowGenerator);
 
 	void update();
 	void render(shared_ptr<QuadEntity> entity, ivec2 viewport);
@@ -73,7 +73,6 @@ private:
 	Camera& _camera;
 	Timer& _timer;
 	RenderBus& _renderBus;
-	TextureLoader& _textureLoader;
 	ShadowGenerator& _shadowGenerator;
 	SkyEntityColorRenderer _skyEntityColorRenderer;
 	TerrainEntityColorRenderer _terrainEntityColorRenderer;

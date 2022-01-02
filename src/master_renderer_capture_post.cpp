@@ -219,7 +219,7 @@ void MasterRenderer::_captureBloom()
 {
 	if(_renderBus.isBloomEnabled() && _renderBus.getBloomBlurCount() > 0 && _renderBus.getBloomIntensity() > 0.0f)
 	{
-		TextureID textureToBlur;
+		Texture textureToBlur;
 		if(_renderBus.getBloomType() == BloomType::EVERYTHING)
 		{
 			textureToBlur = _renderBus.getPrimarySceneMap();

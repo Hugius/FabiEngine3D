@@ -7,20 +7,20 @@
     <Filter Include="Mesh">
       <UniqueIdentifier>{f6342387-f9e9-47ed-8c29-abaa37f87394}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Texture">
-      <UniqueIdentifier>{760944bd-52d8-46f2-aefc-76f4aec62d89}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Mesh\Data">
       <UniqueIdentifier>{670e6dd3-26c9-4552-8298-3b97153e715b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Mesh\Loader">
       <UniqueIdentifier>{d894e6c9-7082-4486-9b63-9b4b1d1abd8e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Texture\Data">
+    <Filter Include="Image">
+      <UniqueIdentifier>{513f7e01-08fc-4d72-8725-c81c8862bfd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image\Data">
       <UniqueIdentifier>{a4e2ed8e-5b9a-4f8e-8ddc-9506e5f0d855}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Texture\Loader">
-      <UniqueIdentifier>{f93f75be-f68b-4c7e-8f52-7bc78fd7c7d5}</UniqueIdentifier>
+    <Filter Include="Image\Loader">
+      <UniqueIdentifier>{7aebe5dc-2f42-497a-88d6-f60a67a2fff0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -36,17 +36,17 @@
     <ClCompile Include="..\..\..\src\mesh_part.cpp">
       <Filter>Mesh\Data</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\texture_loader_misc.cpp">
-      <Filter>Texture\Loader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\texture_loader_cache.cpp">
-      <Filter>Texture\Loader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\texture_loader_load.cpp">
-      <Filter>Texture\Loader</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\image.cpp">
-      <Filter>Texture\Data</Filter>
+      <Filter>Image\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\image_loader_public.cpp">
+      <Filter>Image\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\image_loader_load.cpp">
+      <Filter>Image\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\image_loader_private.cpp">
+      <Filter>Image\Loader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -59,11 +59,11 @@
     <ClInclude Include="..\..\..\src\mesh_part.hpp">
       <Filter>Mesh\Data</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\texture_loader.hpp">
-      <Filter>Texture\Loader</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\image.hpp">
-      <Filter>Texture\Data</Filter>
+      <Filter>Image\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\image_loader.hpp">
+      <Filter>Image\Loader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

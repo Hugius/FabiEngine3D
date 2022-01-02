@@ -22,7 +22,7 @@ Core::Core(FabiEngine3D& fe3d)
 	_quadEntityManager(_renderBus),
 	_textEntityManager(_textureLoader, _renderBus),
 	_raycaster(_renderBus, _terrainEntityManager),
-	_masterRenderer(_renderBus, _timer, _textureLoader, _camera, _shadowGenerator)
+	_masterRenderer(_renderBus, _timer, _camera, _shadowGenerator)
 {
 
 }

@@ -2,11 +2,12 @@
 
 #include "quad_entity.hpp"
 #include "render_buffer.hpp"
-#include "texture_loader.hpp"
 
 #include <memory>
+#include <map>
 
 using std::shared_ptr;
+using std::map;
 
 class TextEntity final : public BaseEntity
 {

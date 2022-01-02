@@ -1,6 +1,6 @@
 #pragma once
 
-#include "texture_loader.hpp"
+#include "image_loader.hpp"
 #include "terrain_entity.hpp"
 
 #include <unordered_map>
@@ -10,7 +10,7 @@ using std::unordered_map;
 class TerrainEntityManager final
 {
 public:
-	TerrainEntityManager(TextureLoader& textureLoader);
+	TerrainEntityManager(ImageLoader& textureLoader);
 
 	void createEntity(const string& ID, const string& heightMapPath);
 	void deleteEntity(const string& ID);
@@ -37,5 +37,5 @@ private:
 	static inline const float MAX_SIZE = 1024.0f;
 
 	unordered_map<string, shared_ptr<TerrainEntity>> _entities;
-	TextureLoader& _textureLoader;
+	ImageLoader& _textureLoader;
 };

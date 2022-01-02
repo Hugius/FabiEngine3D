@@ -50,7 +50,7 @@ void CaptureBuffer::createColorTexture(ivec2 position, ivec2 size, unsigned int 
 		glBindRenderbuffer(GL_RENDERBUFFER, 0);
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _rbo);
 
-		vector<TextureID> attachments;
+		vector<BufferID> attachments;
 		for(unsigned int i = 0; i < count; i++)
 		{
 			attachments.push_back(GL_COLOR_ATTACHMENT0 + i);

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "texture_loader.hpp"
+#include "image_loader.hpp"
 #include "text_entity.hpp"
 
 #include <unordered_map>
@@ -10,7 +10,7 @@ using std::unordered_map;
 class TextEntityManager final
 {
 public:
-	TextEntityManager(TextureLoader& textureLoader, RenderBus& renderBus);
+	TextEntityManager(ImageLoader& textureLoader, RenderBus& renderBus);
 
 	void update();
 	void createEntity(const string& ID, bool isCentered);
@@ -25,6 +25,6 @@ public:
 private:
 	const shared_ptr<RenderBuffer> _renderBuffer;
 	unordered_map<string, shared_ptr<TextEntity>> _entities;
-	TextureLoader& _textureLoader;
+	ImageLoader& _textureLoader;
 	RenderBus& _renderBus;
 };

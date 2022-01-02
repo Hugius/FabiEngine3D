@@ -171,7 +171,7 @@ const bool Math::isNormalized(fvec4 vector)
 	return (calculateMagnitude(vector) == 1.0f);
 }
 
-const fvec2 Math::convertToNDC(fvec2 position)
+const fvec2 Math::convertToNdc(fvec2 position)
 {
 	position.x = ((position.x * 2.0f) - 1.0f);
 	position.y = ((position.y * 2.0f) - 1.0f);
@@ -179,7 +179,7 @@ const fvec2 Math::convertToNDC(fvec2 position)
 	return fvec2(position.x, position.y);
 }
 
-const fvec2 Math::convertFromNDC(fvec2 position)
+const fvec2 Math::convertFromNdc(fvec2 position)
 {
 	position.x += 1.0f;
 	position.y += 1.0f;

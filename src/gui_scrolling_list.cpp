@@ -94,7 +94,7 @@ void GuiScrollingList::_updateHovering()
 {
 	_isHovered = false;
 
-	fvec2 cursorPosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
+	fvec2 cursorPosition = Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
 	fvec2 listPosition = _fe3d.quad_getPosition(_entityID);
 	fvec2 listSize = _fe3d.quad_getSize(_entityID);
 
@@ -113,7 +113,7 @@ void GuiScrollingList::_updateScrolling()
 	{
 		bool mustReset = false;
 
-		fvec2 cursorPosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
+		fvec2 cursorPosition = Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
 		if(cursorPosition.x > _initialPosition.x - (_initialSize.x / 2.0f) && cursorPosition.x < _initialPosition.x + (_initialSize.x / 2.0f))
 		{
 			if(cursorPosition.y > _initialPosition.y - (_initialSize.y / 2.0f) && cursorPosition.y < _initialPosition.y + (_initialSize.y / 2.0f))

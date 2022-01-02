@@ -47,7 +47,7 @@ void GuiButton::_updateHovering(bool isHoverable)
 
 	if(_fe3d.quad_isVisible(_rectangle->getEntityID()))
 	{
-		fvec2 cursorPosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
+		fvec2 cursorPosition = Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
 		fvec2 buttonPosition = _fe3d.quad_getPosition(_rectangle->getEntityID());
 		fvec2 buttonSize = _fe3d.quad_getSize(_rectangle->getEntityID());
 

@@ -127,7 +127,7 @@ const float Raycaster::calculateRayBoxIntersectionDistance(Ray ray, Box box) con
 const Ray Raycaster::_calculateCursorRay(ivec2 cursorPosition) const
 {
 	fvec2 screenCoords = Tools::convertFromScreenCoords(cursorPosition);
-	fvec2 ndcCoords = Math::convertToNDC(screenCoords);
+	fvec2 ndcCoords = Math::convertToNdc(screenCoords);
 	fvec4 clipCoords = fvec4(ndcCoords.x, ndcCoords.y, -1.0f, 1.0f);
 	fvec4 viewCoords = _convertToViewSpace(clipCoords);
 	fvec3 worldCoords = _convertToWorldSpace(viewCoords);

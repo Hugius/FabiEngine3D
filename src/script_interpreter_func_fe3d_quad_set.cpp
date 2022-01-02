@@ -43,8 +43,8 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 
 			if(!Config::getInst().isApplicationExported())
 			{
-				auto minPosition = Math::convertToNDC(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition()));
-				auto maxPosition = Math::convertToNDC(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition() + Config::getInst().getViewportSize()));
+				auto minPosition = Math::convertToNdc(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition()));
+				auto maxPosition = Math::convertToNdc(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition() + Config::getInst().getViewportSize()));
 				_fe3d.quad_setMinPosition(args[0].getString(), minPosition);
 				_fe3d.quad_setMaxPosition(args[0].getString(), maxPosition);
 			}

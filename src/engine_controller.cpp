@@ -151,7 +151,7 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 
 		sky_setRotation("@@background", sky_getRotation("@@background") + 0.0025f);
 
-		quad_setPosition("@@cursor", Math::convertToNDC(Tools::convertFromScreenCoords(misc_getCursorPosition())));
+		quad_setPosition("@@cursor", Math::convertToNdc(Tools::convertFromScreenCoords(misc_getCursorPosition())));
 		quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_default.bmp");
 		quad_setVisible("@@cursor", misc_isCursorInsideWindow());
 

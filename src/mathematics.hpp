@@ -56,8 +56,8 @@ public:
 	static const fvec2 calculateAverage(const vector<fvec2>& values);
 	static const fvec2 calculateDifference(fvec2 firstPosition, fvec2 secondPosition);
 	static const fvec2 normalize(fvec2 vector);
-	static const fvec2 convertFromNDC(fvec2 position);
-	static const fvec2 convertToNDC(fvec2 position);
+	static const fvec2 convertFromNdc(fvec2 position);
+	static const fvec2 convertToNdc(fvec2 position);
 
 	static const float calculateDeterminant(mat22 matrix);
 	static const float calculateDeterminant(mat33 matrix);

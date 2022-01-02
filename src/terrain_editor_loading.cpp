@@ -174,11 +174,11 @@ const vector<string> TerrainEditor::getTexturePathsFromFile() const
 	return texturePaths;
 }
 
-const vector<string> TerrainEditor::getBitmapPathsFromFile() const
+const vector<string> TerrainEditor::getImagePathsFromFile() const
 {
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("TerrainEditor::getBitmapPathsFromFile");
+		Logger::throwError("TerrainEditor::getImagePathsFromFile");
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
@@ -193,7 +193,7 @@ const vector<string> TerrainEditor::getBitmapPathsFromFile() const
 
 	ifstream file(filePath);
 
-	vector<string> bitmapPaths;
+	vector<string> imagePaths;
 	string line;
 	while(getline(file, line))
 	{
@@ -216,13 +216,13 @@ const vector<string> TerrainEditor::getBitmapPathsFromFile() const
 				heightMapPath = string("projects\\" + _currentProjectID + "\\" + heightMapPath);
 			}
 
-			bitmapPaths.push_back(heightMapPath);
+			imagePaths.push_back(heightMapPath);
 		}
 	}
 
 	file.close();
 
-	return bitmapPaths;
+	return imagePaths;
 }
 
 const bool TerrainEditor::loadFromFile()

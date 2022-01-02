@@ -10,6 +10,68 @@ using std::launch;
 using std::future_status;
 using std::chrono::system_clock;
 
+void TextureLoader::cacheImage(const string& filePath)
+{
+	loadImage(filePath);
+}
+
+void TextureLoader::cache2dTexture(const string& filePath, bool isMipmapped, bool isAnisotropic)
+{
+	load2dTexture(filePath, isMipmapped, isAnisotropic);
+}
+
+void TextureLoader::cache3dTexture(const array<string, 6>& filePaths)
+{
+	load3dTexture(filePaths);
+}
+
+void TextureLoader::cacheImages(const vector<string>& filePaths)
+{
+	vector<future<shared_ptr<Image>>> threads;
+	vector<string> finalFilePaths;
+	vector<bool> threadStatuses;
+	unsigned int finishedThreadCount = 0;
+
+	auto tempFilePaths = set<string>(filePaths.begin(), filePaths.end());
+	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
+
+	for(const auto& filePath : uniqueFilePaths)
+	{
+		if(_imageCache.find(filePath) == _imageCache.end())
+		{
+			threads.push_back(async(launch::async, &TextureLoader::_loadImage, this, filePath, false));
+			finalFilePaths.push_back(filePath);
+			threadStatuses.push_back(false);
+		}
+	}
+
+	while(finishedThreadCount != threadStatuses.size())
+	{
+		for(size_t i = 0; i < threadStatuses.size(); i++)
+		{
+			if(!threadStatuses[i])
+			{
+				if(threads[i].wait_until(system_clock::time_point::min()) == future_status::ready)
+				{
+					auto loadedImage = threads[i].get();
+
+					threadStatuses[i] = true;
+					finishedThreadCount++;
+
+					if(loadedImage == nullptr)
+					{
+						Logger::throwWarning("Cannot load image: \"" + finalFilePaths[i] + "\"!");
+						continue;
+					}
+
+					_imageCache[finalFilePaths[i]] = loadedImage;
+					Logger::throwInfo("Loaded image: \"" + finalFilePaths[i] + "\"");
+				}
+			}
+		}
+	}
+}
+
 void TextureLoader::cache2dTextures(const vector<string>& filePaths, bool isMipmapped, bool isAnisotropic)
 {
 	vector<future<shared_ptr<Image>>> threads;
@@ -124,54 +186,6 @@ void TextureLoader::cache3dTextures(const vector<array<string, 6>>& filePathsLis
 					if(createdTexture != 0)
 					{
 						_3dTextureCache[finalFilePathsList[i]] = createdTexture;
-					}
-				}
-			}
-		}
-	}
-}
-
-void TextureLoader::cacheImages(const vector<string>& filePaths)
-{
-	vector<future<shared_ptr<Image>>> threads;
-	vector<string> finalFilePaths;
-	vector<bool> threadStatuses;
-	unsigned int finishedThreadCount = 0;
-
-	auto tempFilePaths = set<string>(filePaths.begin(), filePaths.end());
-	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
-
-	for(const auto& filePath : uniqueFilePaths)
-	{
-		if(_imageCache.find(filePath) == _imageCache.end())
-		{
-			threads.push_back(async(launch::async, &TextureLoader::_loadImage, this, filePath, false));
-			finalFilePaths.push_back(filePath);
-			threadStatuses.push_back(false);
-		}
-	}
-
-	while(finishedThreadCount != threadStatuses.size())
-	{
-		for(size_t i = 0; i < threadStatuses.size(); i++)
-		{
-			if(!threadStatuses[i])
-			{
-				if(threads[i].wait_until(system_clock::time_point::min()) == future_status::ready)
-				{
-					auto loadedImage = threads[i].get();
-
-					threadStatuses[i] = true;
-					finishedThreadCount++;
-
-					if(loadedImage == nullptr)
-					{
-						Logger::throwWarning("Cannot load image: \"" + finalFilePaths[i] + "\"!");
-					}
-					else
-					{
-						_imageCache[finalFilePaths[i]] = loadedImage;
-						Logger::throwInfo("Loaded image: \"" + finalFilePaths[i] + "\"");
 					}
 				}
 			}

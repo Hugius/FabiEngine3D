@@ -147,8 +147,8 @@ void ScriptInterpreter::load()
 	if(Config::getInst().isApplicationExported())
 	{
 		auto skyTexturePaths = _skyEditor.getTexturePathsFromFile();
+		auto terrainImagePaths = _terrainEditor.getImagePathsFromFile();
 		auto terrainTexturePaths = _terrainEditor.getTexturePathsFromFile();
-		auto terrainBitmapPaths = _terrainEditor.getBitmapPathsFromFile();
 		auto waterTexturePaths = _waterEditor.getTexturePathsFromFile();
 		auto modelMeshPaths = _modelEditor.getMeshPathsFromFile();
 		auto modelTexturePaths = _modelEditor.getTexturePathsFromFile();
@@ -157,6 +157,8 @@ void ScriptInterpreter::load()
 		auto audioPaths = _soundEditor.getAudioPathsFromFile();
 
 		_fe3d.misc_cacheMeshes(modelMeshPaths);
+
+		_fe3d.misc_cacheImages(terrainImagePaths);
 
 		vector<string> texturePaths2D;
 		texturePaths2D.insert(texturePaths2D.end(), terrainTexturePaths.begin(), terrainTexturePaths.end());
@@ -167,8 +169,6 @@ void ScriptInterpreter::load()
 		_fe3d.misc_cache2dTextures(texturePaths2D);
 
 		_fe3d.misc_cache3dTextures(skyTexturePaths);
-
-		_fe3d.misc_cacheBitmaps(terrainBitmapPaths);
 
 		_fe3d.misc_cacheAudios(audioPaths);
 	}

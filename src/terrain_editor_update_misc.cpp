@@ -132,7 +132,7 @@ void TerrainEditor::_updateTerrainCreating()
 			}
 
 			const string newFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearBitmapCache(newFilePath);
+			_fe3d.misc_clearImageCache(newFilePath);
 			_fe3d.terrain_create(newTerrainID, newFilePath);
 
 			if(_fe3d.terrain_isExisting(newTerrainID))

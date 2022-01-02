@@ -36,6 +36,8 @@
 - Image assets must be placed in `~\projects\<your_project>\assets\image\`.
 - The file format is `.bmp` because the absence of compression delivers high image quality.
 - Due to the uncompressed format, note that the files can be very big.
+- Every image must have a resolution of at least `1`x`1`.
+- Every image must have a bit depth of `8`/`24`/`32`.
 - Images are used for a variety of reasons for rendering.
 
 ### 4.1 Blend Map
@@ -67,6 +69,8 @@
 - Bit depth: `24`
 - Cube maps are used to render a skybox around the camera.
 - A cube map consists of 6 images: left, right, bottom, top, back, front.
+- The resolution of every image must be squared.
+- All images must have the same resolution.
 
 ### 4.3 Diffuse Map
 
@@ -97,7 +101,7 @@
 <img src="../image/emission_map.png" width="25%"/>
 
 - Emission map assets must be placed in `~\projects\<your_project>\assets\image\emission_map\`
-- Bit depth: `24`
+- Bit depth: `24`/`32`
 - Emission maps are used to make certain parts of a mesh appear brighter.
 
 ### 4.7 Flare Map
@@ -139,7 +143,7 @@
 <img src="../image/reflection_map.png" width="25%"/>
 
 - Reflection map assets must be placed in `~\projects\<your_project>\assets\image\reflection_map\`
-- Bit depth: `24`
+- Bit depth: `8`
 - Reflection maps are used to specify which parts of a mesh are reflective.
 
 ### 4.12 Specular Map
@@ -147,5 +151,5 @@
 <img src="../image/specular_map.png" width="25%"/>
 
 - Specular map assets must be placed in `~\projects\<your_project>\assets\image\specular_map\`
-- Bit depth: `24`
+- Bit depth: `8`
 - Specular maps are used to specify which parts of a mesh are specular lighted.

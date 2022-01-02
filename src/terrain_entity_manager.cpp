@@ -43,19 +43,34 @@ const unordered_map<string, shared_ptr<TerrainEntity>>& TerrainEntityManager::ge
 
 void TerrainEntityManager::createEntity(const string& ID, const string& heightMapPath)
 {
-	_entities.insert(make_pair(ID, make_shared<TerrainEntity>(ID)));
+	auto entity = make_shared<TerrainEntity>(ID);
 
-	auto pixelsPointer = _textureLoader.loadBitmap(heightMapPath);
+	_entities.insert(make_pair(ID, entity));
 
-	if(pixelsPointer == nullptr)
+	auto image = _textureLoader.loadImage(heightMapPath);
+
+	if(image == nullptr)
 	{
 		deleteEntity(ID);
 		return;
 	}
 
-	auto& pixels = *pixelsPointer;
-	auto heightMapSize = static_cast<unsigned int>(sqrt(static_cast<double>(pixels.size())));
-	auto size = static_cast<float>(heightMapSize);
+	if(image->getPixelFormat() != PixelFormat::GRAY)
+	{
+		Logger::throwWarning("Tried to create terrain with ID \"" + ID + "\": height map wrong pixel format!");
+		deleteEntity(ID);
+		return;
+	}
+
+	if(image->getWidth() != image->getHeight())
+	{
+		Logger::throwWarning("Tried to create terrain with ID \"" + ID + "\": height map resolution not the same!");
+		deleteEntity(ID);
+		return;
+	}
+
+	auto size = static_cast<float>(image->getWidth());
+
 	if(size > MAX_SIZE)
 	{
 		Logger::throwWarning("Tried to create terrain with ID \"" + ID + "\": height map resolution too high!");
@@ -63,7 +78,11 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 		return;
 	}
 
-	auto entity = getEntity(ID);
+	vector<float> pixels;
+	for(unsigned int i = 0; i < (image->getWidth() * image->getHeight()); i++)
+	{
+		pixels.push_back(static_cast<float>(image->getPixels()[i]) / 255.0f);
+	}
 
 	_loadMesh(entity, size, 0.0f, pixels);
 

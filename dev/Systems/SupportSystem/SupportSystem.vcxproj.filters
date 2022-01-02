@@ -84,6 +84,9 @@
     <ClInclude Include="..\..\..\src\direction_order.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\pixel_format.hpp">
+      <Filter>Enumeration</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\configuration.cpp">

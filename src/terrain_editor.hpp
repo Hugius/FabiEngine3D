@@ -13,7 +13,7 @@ public:
 	void update();
 	void unload();
 
-	const vector<string> getBitmapPathsFromFile() const;
+	const vector<string> getImagePathsFromFile() const;
 	const vector<string> getTexturePathsFromFile() const;
 	const vector<string>& getLoadedIDs();
 

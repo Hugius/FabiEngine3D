@@ -24,12 +24,10 @@ const shared_ptr<Image> TextureLoader::loadImage(const string& filePath)
 		Logger::throwWarning("Cannot load image: \"" + filePath + "\"!");
 		return {};
 	}
-	else
-	{
-		_imageCache.insert(make_pair(filePath, loadedImage));
-		Logger::throwInfo("Loaded image: \"" + filePath + "\"");
-		goto BEGIN;
-	}
+
+	_imageCache.insert(make_pair(filePath, loadedImage));
+	Logger::throwInfo("Loaded image: \"" + filePath + "\"");
+	goto BEGIN;
 }
 
 const TextureID TextureLoader::load2dTexture(const string& filePath, bool isMipmapped, bool isAnisotropic)
@@ -50,22 +48,18 @@ const TextureID TextureLoader::load2dTexture(const string& filePath, bool isMipm
 		Logger::throwWarning("Cannot load image: \"" + filePath + "\"!");
 		return 0;
 	}
-	else
-	{
-		auto loadedTexture = _create2dTexture(loadedImage, filePath, isMipmapped, isAnisotropic);
 
-		if(loadedTexture == 0)
-		{
-			return 0;
-		}
-		else
-		{
-			_imageCache.insert(make_pair(filePath, loadedImage));
-			_2dTextureCache.insert(make_pair(filePath, loadedTexture));
-			Logger::throwInfo("Loaded image: \"" + filePath + "\"");
-			goto BEGIN;
-		}
+	auto loadedTexture = _create2dTexture(loadedImage, filePath, isMipmapped, isAnisotropic);
+
+	if(loadedTexture == 0)
+	{
+		return 0;
 	}
+
+	_imageCache.insert(make_pair(filePath, loadedImage));
+	_2dTextureCache.insert(make_pair(filePath, loadedTexture));
+	Logger::throwInfo("Loaded image: \"" + filePath + "\"");
+	goto BEGIN;
 }
 
 const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
@@ -83,37 +77,15 @@ const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 
 	for(size_t i = 0; i < filePaths.size(); i++)
 	{
-		loadedImages[i] = _loadImage(filePaths[i], true);
-
-		if((loadedImages[i] == nullptr) && !filePaths[i].empty())
+		if(!filePaths[i].empty())
 		{
-			Logger::throwWarning("Cannot load image: \"" + filePaths[i] + "\"!");
-		}
-		else
-		{
-			//unsigned int imageSize = 0;
-			//for(size_t i = 0; i < images.size(); i++)
-			//{
-			//	if(images[i] != nullptr)
-			//	{
-			//		if(images[i]->getWidth() != images[i]->getHeight())
-			//		{
-			//			return 0;
-			//		}
+			loadedImages[i] = _loadImage(filePaths[i], true);
 
-			//		if(imageSize == 0)
-			//		{
-			//			imageSize = images[i]->getWidth();
-			//		}
-			//		else
-			//		{
-			//			if(imageSize != images[i]->getWidth())
-			//			{
-			//				return 0;
-			//			}
-			//		}
-			//	}
-			//}
+			if(loadedImages[i] == nullptr)
+			{
+				Logger::throwWarning("Cannot load image: \"" + filePaths[i] + "\"!");
+				continue;
+			}
 
 			_imageCache.insert(make_pair(filePaths[i], loadedImages[i]));
 			Logger::throwInfo("Loaded image: \"" + filePaths[i] + "\"");
@@ -126,9 +98,7 @@ const TextureID TextureLoader::load3dTexture(const array<string, 6>& filePaths)
 	{
 		return 0;
 	}
-	else
-	{
-		_3dTextureCache.insert(make_pair(filePaths, loadedTexture));
-		goto BEGIN;
-	}
+
+	_3dTextureCache.insert(make_pair(filePaths, loadedTexture));
+	goto BEGIN;
 }

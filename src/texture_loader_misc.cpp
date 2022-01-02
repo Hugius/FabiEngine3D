@@ -14,21 +14,6 @@ TextureLoader::TextureLoader(RenderBus& renderBus)
 
 }
 
-void TextureLoader::cache2dTexture(const string& filePath, bool isMipmapped, bool isAnisotropic)
-{
-	load2dTexture(filePath, isMipmapped, isAnisotropic);
-}
-
-void TextureLoader::cache3dTexture(const array<string, 6>& filePaths)
-{
-	load3dTexture(filePaths);
-}
-
-void TextureLoader::cacheImage(const string& filePath)
-{
-	loadImage(filePath);
-}
-
 shared_ptr<Image> TextureLoader::_loadImage(const string& filePath, bool mustFlip)
 {
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -61,8 +46,9 @@ shared_ptr<Image> TextureLoader::_loadImage(const string& filePath, bool mustFli
 
 	const auto width = static_cast<unsigned int>(rawWidth);
 	const auto height = static_cast<unsigned int>(rawHeight);
-	const auto format = (static_cast<unsigned int>(rawFormat) / 8);
-	const auto size = (width * height * format);
+	const auto bitFormat = static_cast<unsigned int>(rawFormat);
+	const auto byteFormat = (bitFormat / 8);
+	const auto size = (width * height * byteFormat);
 	const auto pixels = new unsigned char[size];
 
 	for(unsigned i = 0; i < size; i++)
@@ -75,20 +61,20 @@ shared_ptr<Image> TextureLoader::_loadImage(const string& filePath, bool mustFli
 	{
 		for(unsigned x = 0; x < width; x++)
 		{
-			const unsigned int index1 = ((x * format) + (y * width * format));
-			const unsigned int index2 = (mustFlip ? ((x * format) + ((height - y - 1) * width * format)) : index1);
+			const unsigned int index1 = ((x * byteFormat) + (y * width * byteFormat));
+			const unsigned int index2 = (mustFlip ? ((x * byteFormat) + ((height - y - 1) * width * byteFormat)) : index1);
 
-			if(format == 1)
+			if(byteFormat == 1)
 			{
 				correctedPixels[index1 + 0] = pixels[index2 + 0];
 			}
-			if(format == 3)
+			if(byteFormat == 3)
 			{
 				correctedPixels[index1 + 0] = pixels[index2 + 2];
 				correctedPixels[index1 + 1] = pixels[index2 + 1];
 				correctedPixels[index1 + 2] = pixels[index2 + 0];
 			}
-			if(format == 4)
+			if(byteFormat == 4)
 			{
 				correctedPixels[index1 + 0] = pixels[index2 + 2];
 				correctedPixels[index1 + 1] = pixels[index2 + 1];
@@ -105,7 +91,7 @@ shared_ptr<Image> TextureLoader::_loadImage(const string& filePath, bool mustFli
 	return make_shared<Image>(correctedPixels,
 							  static_cast<unsigned int>(width),
 							  static_cast<unsigned int>(height),
-							  static_cast<unsigned int>(format));
+							  PixelFormat(bitFormat == 8 ? PixelFormat::GRAY : bitFormat == 24 ? PixelFormat::RGB : PixelFormat::RGBA));
 }
 
 TextureID TextureLoader::_create2dTexture(shared_ptr<Image> image, const string& filePath, bool isMipmapped, bool isAnisotropic)
@@ -114,11 +100,15 @@ TextureID TextureLoader::_create2dTexture(shared_ptr<Image> image, const string&
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	if(image->getFormat() == 3)
+	if(image->getPixelFormat() == PixelFormat::GRAY)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, image->getWidth(), image->getHeight(), 0, GL_RED, GL_UNSIGNED_BYTE, image->getPixels());
+	}
+	if(image->getPixelFormat() == PixelFormat::RGB)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->getWidth(), image->getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, image->getPixels());
 	}
-	if(image->getFormat() == 4)
+	if(image->getPixelFormat() == PixelFormat::RGBA)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->getWidth(), image->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image->getPixels());
 	}
@@ -151,13 +141,26 @@ TextureID TextureLoader::_create3dTexture(const array<shared_ptr<Image>, 6>& ima
 
 	for(size_t i = 0; i < images.size(); i++)
 	{
-		if(images[i] == nullptr)
+		const auto image = images[i];
+		const auto index = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<unsigned int>(i));
+
+		if(image == nullptr)
 		{
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, images[i]->getWidth(), images[i]->getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+			glTexImage2D(index, 0, GL_RGB, images[i]->getWidth(), images[i]->getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+			continue;
 		}
-		else
+
+		if(image->getPixelFormat() == PixelFormat::GRAY)
 		{
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, images[i]->getPixels());
+			glTexImage2D(index, 0, GL_RED, image->getWidth(), image->getHeight(), 0, GL_RED, GL_UNSIGNED_BYTE, image->getPixels());
+		}
+		if(image->getPixelFormat() == PixelFormat::RGB)
+		{
+			glTexImage2D(index, 0, GL_RGB, image->getWidth(), image->getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, image->getPixels());
+		}
+		if(image->getPixelFormat() == PixelFormat::RGBA)
+		{
+			glTexImage2D(index, 0, GL_RGBA, image->getWidth(), image->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image->getPixels());
 		}
 	}
 

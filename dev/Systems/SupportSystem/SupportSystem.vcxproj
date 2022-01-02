@@ -23,7 +23,7 @@
     <ClInclude Include="..\..\..\src\animation3d_speed_type.hpp" />
     <ClInclude Include="..\..\..\src\bloom_type.hpp" />
     <ClInclude Include="..\..\..\src\blur_direction.hpp" />
-    <ClInclude Include="..\..\..\src\render_buffer_type.hpp" />
+    <ClInclude Include="..\..\..\src\vertex_buffer_type.hpp" />
     <ClInclude Include="..\..\..\src\configuration.hpp" />
     <ClInclude Include="..\..\..\src\direction.hpp" />
     <ClInclude Include="..\..\..\src\direction_order.hpp" />

@@ -37,7 +37,7 @@
     <ClCompile Include="..\..\..\src\terrain_entity_depth_renderer.cpp" />
     <ClCompile Include="..\..\..\src\quad_entity_color_renderer.cpp" />
     <ClCompile Include="..\..\..\src\model_entity_color_renderer.cpp" />
-    <ClCompile Include="..\..\..\src\render_buffer.cpp" />
+    <ClCompile Include="..\..\..\src\vertex_buffer.cpp" />
     <ClCompile Include="..\..\..\src\render_bus_get.cpp" />
     <ClCompile Include="..\..\..\src\render_bus_set.cpp" />
     <ClCompile Include="..\..\..\src\capture_buffer_texture.cpp" />
@@ -72,7 +72,7 @@
     <ClInclude Include="..\..\..\src\terrain_entity_depth_renderer.hpp" />
     <ClInclude Include="..\..\..\src\quad_entity_color_renderer.hpp" />
     <ClInclude Include="..\..\..\src\model_entity_color_renderer.hpp" />
-    <ClInclude Include="..\..\..\src\render_buffer.hpp" />
+    <ClInclude Include="..\..\..\src\vertex_buffer.hpp" />
     <ClInclude Include="..\..\..\src\render_bus.hpp" />
     <ClInclude Include="..\..\..\src\capture_buffer.hpp" />
     <ClInclude Include="..\..\..\src\master_renderer.hpp" />

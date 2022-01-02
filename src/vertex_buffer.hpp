@@ -1,0 +1,31 @@
+#pragma once
+
+#include "vertex_buffer_type.hpp"
+#include "mathematics.hpp"
+#include "render_utils.hpp"
+
+#include <vector>
+
+using std::vector;
+
+class VertexBuffer final
+{
+public:
+	VertexBuffer(VertexBufferType type, const float data[], unsigned int dataCount);
+	VertexBuffer(float x, float y, float w, float h, bool isCentered);
+	~VertexBuffer();
+
+	const unsigned int getVertexCount() const;
+
+	const BufferID getVAO() const;
+
+	const VertexBufferType getBufferType() const;
+
+private:
+	unsigned int _vertexCount = 0;
+
+	VertexBufferType _bufferType;
+
+	BufferID _vao = 0;
+	BufferID _vbo = 0;
+};

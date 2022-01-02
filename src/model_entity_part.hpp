@@ -1,5 +1,5 @@
 #include "base_entity.hpp"
-#include "render_buffer.hpp"
+#include "vertex_buffer.hpp"
 #include "reflection_type.hpp"
 
 #include <memory>
@@ -49,7 +49,7 @@ struct ModelEntityPart final
 	bool isReflective = false;
 	bool isWireframed = false;
 
-	shared_ptr<RenderBuffer> renderBuffer = nullptr;
+	shared_ptr<VertexBuffer> vertexBuffer = nullptr;
 	TextureID diffuseMap = 0;
 	TextureID emissionMap = 0;
 	TextureID specularMap = 0;

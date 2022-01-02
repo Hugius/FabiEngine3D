@@ -14,7 +14,7 @@ void LensFlareRenderer::bind()
 	_shader.uploadUniform("u_lensFlareIntensity", _renderBus.getLensFlareIntensity());
 	_shader.uploadUniform("u_cameraPosition", _renderBus.getCameraPosition());
 	_shader.uploadUniform("u_flareSourcePosition", _renderBus.getFlareSourcePosition());
-	_shader.uploadUniform("u_flareSourceUV", _renderBus.getFlareSourceUV());
+	_shader.uploadUniform("u_flareSourceUv", _renderBus.getFlareSourceUv());
 	_shader.uploadUniform("u_isLensFlareEnabled", _renderBus.isLensFlareEnabled());
 
 	glActiveTexture(GL_TEXTURE0);
@@ -39,7 +39,7 @@ void LensFlareRenderer::unbind()
 
 void LensFlareRenderer::render(const shared_ptr<QuadEntity> entity)
 {
-	const auto buffer = entity->getRenderBuffer();
+	const auto buffer = entity->getVertexBuffer();
 
 	glBindVertexArray(buffer->getVAO());
 

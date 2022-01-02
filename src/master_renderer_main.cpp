@@ -55,7 +55,7 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, Camera& camer
 	_shadowCaptureBuffer.createDepthTexture(ivec2(0), ivec2(Config::MIN_SHADOW_QUALITY));
 
 	_renderQuad = make_shared<QuadEntity>("renderQuad");
-	_renderQuad->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
+	_renderQuad->setVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
 	_renderQuad->setCentered(true);
 }
 
@@ -251,17 +251,16 @@ void MasterRenderer::_updateLensFlare()
 
 		fvec4 flareSourceClip = (projectionMatrix * viewMatrix * fvec4(flareSourcePosition.x, flareSourcePosition.y, flareSourcePosition.z, 1.0f));
 		fvec2 flareSourceNDC = (fvec2(flareSourceClip.x, flareSourceClip.y) / flareSourceClip.w);
-		fvec2 flareSourceUV = fvec2(((flareSourceNDC.x + 1.0f) / 2.0f), ((flareSourceNDC.y + 1.0f) / 2.0f));
+		fvec2 flareSourceUv = fvec2(((flareSourceNDC.x + 1.0f) / 2.0f), ((flareSourceNDC.y + 1.0f) / 2.0f));
 
 		if((flareSourceNDC.x > -1.0f) && (flareSourceNDC.x < 1.0f) && (flareSourceNDC.y > -1.0f) && (flareSourceNDC.y < 1.0f))
 		{
-
 			transparency = (1.0f - (max(fabsf(flareSourceNDC.x), fabsf(flareSourceNDC.y)) / _renderBus.getLensFlareSensitivity()));
 			transparency = clamp(transparency, 0.0f, 1.0f);
 		}
 
 		_renderBus.setLensFlareTransparency(transparency);
 		_renderBus.setFlareSourcePosition(flareSourcePosition);
-		_renderBus.setFlareSourceUV(flareSourceUV);
+		_renderBus.setFlareSourceUv(flareSourceUv);
 	}
 }

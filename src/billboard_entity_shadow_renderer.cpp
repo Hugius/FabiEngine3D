@@ -28,14 +28,14 @@ void BillboardEntityShadowRenderer::render(const shared_ptr<BillboardEntity> ent
 {
 	if(entity->isVisible() && entity->isShadowed())
 	{
-		const auto buffer = entity->getRenderBuffer();
+		const auto buffer = entity->getVertexBuffer();
 
 		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_textureRepeat", entity->getTextureRepeat());
-		_shader.uploadUniform("u_multiplierUV", entity->getMultiplierUV());
-		_shader.uploadUniform("u_adderUV", entity->getAdderUV());
+		_shader.uploadUniform("u_uvMultiplier", entity->getUvMultiplier());
+		_shader.uploadUniform("u_uvOffset", entity->getUvOffset());
 		_shader.uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
 		if(entity->hasDiffuseMap())

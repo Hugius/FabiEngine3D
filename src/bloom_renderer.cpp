@@ -27,7 +27,7 @@ void BloomRenderer::unbind()
 
 void BloomRenderer::render(const shared_ptr<QuadEntity> entity)
 {
-	const auto buffer = entity->getRenderBuffer();
+	const auto buffer = entity->getVertexBuffer();
 
 	glBindVertexArray(buffer->getVAO());
 

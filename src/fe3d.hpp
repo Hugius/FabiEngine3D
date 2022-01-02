@@ -340,8 +340,8 @@ public:
 	void billboard_scaleTo(const string& ID, fvec2 target, float speed);
 	void billboard_setColor(const string& ID, fvec3 value);
 	void billboard_setWireframeColor(const string& ID, fvec3 value);
-	void billboard_setMultiplierUV(const string& ID, fvec2 value);
-	void billboard_setAdderUV(const string& ID, fvec2 value);
+	void billboard_setUvMultiplier(const string& ID, fvec2 value);
+	void billboard_setUvOffset(const string& ID, fvec2 value);
 	void billboard_setMinHeight(const string& ID, float value);
 	void billboard_setMaxHeight(const string& ID, float value);
 	void billboard_setLightness(const string& ID, float value);
@@ -368,8 +368,8 @@ public:
 	const fvec3 billboard_getColor(const string& ID) const;
 	const fvec3 billboard_getWireframeColor(const string& ID) const;
 	const fvec2 billboard_getSize(const string& ID) const;
-	const fvec2 billboard_getMultiplierUV(const string& ID) const;
-	const fvec2 billboard_getAdderUV(const string& ID) const;
+	const fvec2 billboard_getUvMultiplier(const string& ID) const;
+	const fvec2 billboard_getUvOffset(const string& ID) const;
 	const float billboard_getLightness(const string& ID) const;
 	const float billboard_getMinHeight(const string& ID) const;
 	const float billboard_getMaxHeight(const string& ID) const;
@@ -506,8 +506,8 @@ public:
 	void quad_setMirroredVertically(const string& ID, bool value);
 	void quad_setWireframed(const string& ID, bool value);
 	void quad_setWireframeColor(const string& ID, fvec3 value);
-	void quad_setMultiplierUV(const string& ID, fvec2 value);
-	void quad_setAdderUV(const string& ID, fvec2 value);
+	void quad_setUvMultiplier(const string& ID, fvec2 value);
+	void quad_setUvOffset(const string& ID, fvec2 value);
 
 	const vector<string> quad_getIDs() const;
 	const string& quad_getDiffuseMapPath(const string& ID) const;
@@ -517,8 +517,8 @@ public:
 	const fvec2 quad_getSize(const string& ID) const;
 	const fvec2 quad_getMinPosition(const string& ID) const;
 	const fvec2 quad_getMaxPosition(const string& ID) const;
-	const fvec2 quad_getMultiplierUV(const string& ID) const;
-	const fvec2 quad_getAdderUV(const string& ID) const;
+	const fvec2 quad_getUvMultiplier(const string& ID) const;
+	const fvec2 quad_getUvOffset(const string& ID) const;
 	const float quad_getRotation(const string& ID) const;
 	const float quad_getTransparency(const string& ID) const;
 	const bool quad_isExisting(const string& ID) const;
@@ -857,23 +857,15 @@ public:
 	void misc_setCursorPosition(ivec2 value);
 	void misc_setWindowTitle(const string& value);
 	void misc_cacheMesh(const string& filePath);
-	void misc_cache2dTexture(const string& filePath);
-	void misc_cache3dTexture(const array<string, 6>& filePaths);
 	void misc_cacheImage(const string& filePath);
 	void misc_cacheAudio(const string& filePath);
 	void misc_cacheMeshes(const vector<string>& filePaths);
-	void misc_cache2dTextures(const vector<string>& filePaths);
-	void misc_cache3dTextures(const vector<array<string, 6>>& filePathsList);
 	void misc_cacheImages(const vector<string>& filePaths);
 	void misc_cacheAudios(const vector<string>& filePaths);
 	void misc_clearMeshCache(const string& filePath);
-	void misc_clear2dTextureCache(const string& filePath);
-	void misc_clear3dTextureCache(const array<string, 6>& filePaths);
 	void misc_clearImageCache(const string& filePath);
 	void misc_clearAudioCache(const string& filePath);
 	void misc_clearMeshesCache();
-	void misc_clear2dTexturesCache();
-	void misc_clear3dTexturesCache();
 	void misc_clearImagesCache();
 	void misc_clearAudiosCache();
 	void misc_startMillisecondTimer();

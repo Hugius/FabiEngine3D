@@ -1,7 +1,7 @@
 #pragma once
 
 #include "base_entity.hpp"
-#include "render_buffer.hpp"
+#include "vertex_buffer.hpp"
 #include "water_quality.hpp"
 
 #include <memory>
@@ -13,8 +13,8 @@ class WaterEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void setLowQualityRenderBuffer(shared_ptr<RenderBuffer> value);
-	void setHighQualityRenderBuffer(shared_ptr<RenderBuffer> value);
+	void setLowQualityVertexBuffer(shared_ptr<VertexBuffer> value);
+	void setHighQualityVertexBuffer(shared_ptr<VertexBuffer> value);
 	void setQuality(WaterQuality value);
 	void setSpeed(fvec2 value);
 	void setRippleOffset(fvec2 value);
@@ -62,14 +62,14 @@ public:
 	const bool isReflective() const;
 	const bool isRefractive() const;
 	const bool isWireframed() const;
-	const bool hasLowQualityRenderBuffer() const;
-	const bool hasHighQualityRenderBuffer() const;
+	const bool hasLowQualityVertexBuffer() const;
+	const bool hasHighQualityVertexBuffer() const;
 	const bool hasDudvMap() const;
 	const bool hasNormalMap() const;
 	const bool hasDisplacementMap() const;
 
-	const shared_ptr<RenderBuffer> getLowQualityRenderBuffer() const;
-	const shared_ptr<RenderBuffer> getHighQualityRenderBuffer() const;
+	const shared_ptr<VertexBuffer> getLowQualityVertexBuffer() const;
+	const shared_ptr<VertexBuffer> getHighQualityVertexBuffer() const;
 	const WaterQuality getQuality() const;
 	const TextureID getDudvMap() const;
 	const TextureID getNormalMap() const;
@@ -100,8 +100,8 @@ private:
 	bool _isRefractive = false;
 	bool _isWireframed = false;
 
-	shared_ptr<RenderBuffer> _lowQualityRenderBuffer = nullptr;
-	shared_ptr<RenderBuffer> _highQualityRenderBuffer = nullptr;
+	shared_ptr<VertexBuffer> _lowQualityVertexBuffer = nullptr;
+	shared_ptr<VertexBuffer> _highQualityVertexBuffer = nullptr;
 	WaterQuality _quality = WaterQuality::SKY;
 	TextureID _dudvMap = 0;
 	TextureID _normalMap = 0;

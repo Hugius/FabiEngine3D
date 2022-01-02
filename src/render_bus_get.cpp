@@ -75,9 +75,9 @@ const mat44 RenderBus::getShadowMatrix() const
 	return _shadowMatrix;
 }
 
-const fvec2 RenderBus::getFlareSourceUV() const
+const fvec2 RenderBus::getFlareSourceUv() const
 {
-	return _flareSourceUV;
+	return _flareSourceUv;
 }
 
 const fvec4 RenderBus::getClippingPlane() const

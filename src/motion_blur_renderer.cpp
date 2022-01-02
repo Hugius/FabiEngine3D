@@ -28,7 +28,7 @@ void MotionBlurRenderer::unbind()
 
 void MotionBlurRenderer::render(const shared_ptr<QuadEntity> entity)
 {
-	const auto buffer = entity->getRenderBuffer();
+	const auto buffer = entity->getVertexBuffer();
 
 	glBindVertexArray(buffer->getVAO());
 

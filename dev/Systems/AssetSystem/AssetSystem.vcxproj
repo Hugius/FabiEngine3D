@@ -149,7 +149,6 @@
     <ClCompile Include="..\..\..\src\mesh_loader_private.cpp" />
     <ClCompile Include="..\..\..\src\mesh_part.cpp" />
     <ClCompile Include="..\..\..\src\image.cpp" />
-    <ClCompile Include="..\..\..\src\image_loader_load.cpp" />
     <ClCompile Include="..\..\..\src\image_loader_public.cpp" />
     <ClCompile Include="..\..\..\src\image_loader_private.cpp" />
   </ItemGroup>

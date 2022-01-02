@@ -6,9 +6,9 @@
 using std::max;
 using std::clamp;
 
-void QuadEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
+void QuadEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
 {
-	_renderBuffer = value;
+	_vertexBuffer = value;
 }
 
 void QuadEntity::updateTransformation()
@@ -176,19 +176,19 @@ void QuadEntity::setDepth(unsigned int value)
 	_depth = value;
 }
 
-void QuadEntity::setMultiplierUV(fvec2 value)
+void QuadEntity::setUvMultiplier(fvec2 value)
 {
-	_multiplierUV = fvec2(max(0.0f, value.x), max(0.0f, value.y));
+	_uvMultiplier = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void QuadEntity::setAdderUV(fvec2 value)
+void QuadEntity::setUvOffset(fvec2 value)
 {
-	_adderUV = fvec2(max(0.0f, value.x), max(0.0f, value.y));
+	_uvOffset = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-const shared_ptr<RenderBuffer> QuadEntity::getRenderBuffer() const
+const shared_ptr<VertexBuffer> QuadEntity::getVertexBuffer() const
 {
-	return _renderBuffer;
+	return _vertexBuffer;
 }
 
 const TextureID QuadEntity::getDiffuseMap() const
@@ -271,14 +271,14 @@ const fvec2 QuadEntity::getMaxPosition() const
 	return _maxPosition;
 }
 
-const fvec2 QuadEntity::getMultiplierUV() const
+const fvec2 QuadEntity::getUvMultiplier() const
 {
-	return _multiplierUV;
+	return _uvMultiplier;
 }
 
-const fvec2 QuadEntity::getAdderUV() const
+const fvec2 QuadEntity::getUvOffset() const
 {
-	return _adderUV;
+	return _uvOffset;
 }
 
 const unsigned int QuadEntity::getDepth() const

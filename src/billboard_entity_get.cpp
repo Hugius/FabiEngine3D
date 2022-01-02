@@ -1,8 +1,8 @@
 #include "billboard_entity.hpp"
 
-const shared_ptr<RenderBuffer> BillboardEntity::getRenderBuffer() const
+const shared_ptr<VertexBuffer> BillboardEntity::getVertexBuffer() const
 {
-	return _renderBuffer;
+	return _vertexBuffer;
 }
 
 const mat44& BillboardEntity::getTransformationMatrix() const
@@ -35,14 +35,14 @@ const fvec2 BillboardEntity::getSize() const
 	return _size;
 }
 
-const fvec2 BillboardEntity::getMultiplierUV() const
+const fvec2 BillboardEntity::getUvMultiplier() const
 {
-	return _multiplierUV;
+	return _uvMultiplier;
 }
 
-const fvec2 BillboardEntity::getAdderUV() const
+const fvec2 BillboardEntity::getUvOffset() const
 {
-	return _adderUV;
+	return _uvOffset;
 }
 
 const fvec3 BillboardEntity::getColor() const
@@ -140,9 +140,9 @@ const bool BillboardEntity::isWireframed() const
 	return _isWireframed;
 }
 
-const bool BillboardEntity::hasRenderBuffer() const
+const bool BillboardEntity::hasVertexBuffer() const
 {
-	return (_renderBuffer != nullptr);
+	return (_vertexBuffer != nullptr);
 }
 
 const bool BillboardEntity::hasDiffuseMap() const

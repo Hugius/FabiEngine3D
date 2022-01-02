@@ -97,7 +97,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 					for(int i = 0; i < 3; i++)
 					{
 						meshPart->addPosition(temp_positions[positionIndex[i] - 1]);
-						meshPart->addUV(temp_uvs[uvIndex[i] - 1]);
+						meshPart->addUv(temp_uvs[uvIndex[i] - 1]);
 						meshPart->addNormal(temp_normals[normalIndex[i] - 1]);
 					}
 
@@ -112,7 +112,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 				for(int i = 0; i < 3; i++)
 				{
 					newPart.addPosition(temp_positions[positionIndex[i] - 1]);
-					newPart.addUV(temp_uvs[uvIndex[i] - 1]);
+					newPart.addUv(temp_uvs[uvIndex[i] - 1]);
 					newPart.addNormal(temp_normals[normalIndex[i] - 1]);
 				}
 
@@ -129,18 +129,18 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 			fvec3 v1 = meshPart->getPositions()[i + 1];
 			fvec3 v2 = meshPart->getPositions()[i + 2];
 
-			fvec2 uv0 = meshPart->getUVs()[i + 0];
-			fvec2 uv1 = meshPart->getUVs()[i + 1];
-			fvec2 uv2 = meshPart->getUVs()[i + 2];
+			fvec2 uv0 = meshPart->getUvs()[i + 0];
+			fvec2 uv1 = meshPart->getUvs()[i + 1];
+			fvec2 uv2 = meshPart->getUvs()[i + 2];
 
 			fvec3 deltaPosition1 = (v1 - v0);
 			fvec3 deltaPosition2 = (v2 - v0);
 
-			fvec2 deltaUV1 = (uv1 - uv0);
-			fvec2 deltaUV2 = (uv2 - uv0);
+			fvec2 deltaUv1 = (uv1 - uv0);
+			fvec2 deltaUv2 = (uv2 - uv0);
 
-			float r = (1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x));
-			fvec3 tangent = ((deltaPosition1 * deltaUV2.y - deltaPosition2 * deltaUV1.y) * r);
+			float r = (1.0f / (deltaUv1.x * deltaUv2.y - deltaUv1.y * deltaUv2.x));
+			fvec3 tangent = ((deltaPosition1 * deltaUv2.y - deltaPosition2 * deltaUv1.y) * r);
 
 			meshPart->addTangent(tangent);
 			meshPart->addTangent(tangent);

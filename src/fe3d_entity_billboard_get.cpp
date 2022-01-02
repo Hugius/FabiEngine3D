@@ -56,14 +56,14 @@ const fvec2 FabiEngine3D::billboard_getSize(const string& ID) const
 	return _core->_billboardEntityManager.getEntity(ID)->getSize().x;
 }
 
-const fvec2 FabiEngine3D::billboard_getMultiplierUV(const string& ID) const
+const fvec2 FabiEngine3D::billboard_getUvMultiplier(const string& ID) const
 {
-	return _core->_billboardEntityManager.getEntity(ID)->getMultiplierUV();
+	return _core->_billboardEntityManager.getEntity(ID)->getUvMultiplier();
 }
 
-const fvec2 FabiEngine3D::billboard_getAdderUV(const string& ID) const
+const fvec2 FabiEngine3D::billboard_getUvOffset(const string& ID) const
 {
-	return _core->_billboardEntityManager.getEntity(ID)->getAdderUV();
+	return _core->_billboardEntityManager.getEntity(ID)->getUvOffset();
 }
 
 const fvec3 FabiEngine3D::billboard_getColor(const string& ID) const
@@ -80,7 +80,7 @@ const vector<string> FabiEngine3D::billboard_getIDs() const
 {
 	vector<string> result;
 
-	for (const auto& [key, entity] : _core->_billboardEntityManager.getEntities())
+	for(const auto& [key, entity] : _core->_billboardEntityManager.getEntities())
 	{
 		result.push_back(entity->getID());
 	}

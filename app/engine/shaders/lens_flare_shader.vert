@@ -8,7 +8,7 @@ layout (location = 0) uniform sampler2D u_depthMap;
 
 uniform vec3 u_cameraPosition;
 uniform vec3 u_flareSourcePosition;
-uniform vec2 u_flareSourceUV;
+uniform vec2 u_flareSourceUv;
 
 uniform float u_farDistance;
 uniform float u_nearDistance;
@@ -34,7 +34,7 @@ float calculateFlareVisibility()
 {
     if (u_isLensFlareEnabled && (u_lensFlareIntensity > 0.0f) && (u_lensFlareTransparency > 0.0f))
     {
-        float flareDepth = texture(u_depthMap, u_flareSourceUV).r;
+        float flareDepth = texture(u_depthMap, u_flareSourceUv).r;
         float flareFragmentDepth = (convertDepthToPerspective(flareDepth) / u_farDistance);
 
         float flareDistance = distance(u_cameraPosition, u_flareSourcePosition);

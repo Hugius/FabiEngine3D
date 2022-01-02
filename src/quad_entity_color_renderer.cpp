@@ -27,10 +27,10 @@ void QuadEntityColorRenderer::render(const shared_ptr<QuadEntity> entity)
 	   ((entity->getPosition().y - entity->getSize().y) < entity->getMaxPosition().y) &&
 	   ((entity->getPosition().y + entity->getSize().y) > entity->getMinPosition().y))
 	{
-		const auto buffer = entity->getRenderBuffer();
+		const auto buffer = entity->getVertexBuffer();
 
-		_shader.uploadUniform("u_multiplierUV", entity->getMultiplierUV());
-		_shader.uploadUniform("u_adderUV", entity->getAdderUV());
+		_shader.uploadUniform("u_uvMultiplier", entity->getUvMultiplier());
+		_shader.uploadUniform("u_uvOffset", entity->getUvOffset());
 		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
 		_shader.uploadUniform("u_isMirroredHorizontally", entity->isMirroredHorizonally());
 		_shader.uploadUniform("u_isMirroredVertically", entity->isMirroredVertically());

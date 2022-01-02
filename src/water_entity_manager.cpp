@@ -8,7 +8,7 @@ shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string& ID)
 {
 	auto iterator = _entities.find(ID);
 
-	if (iterator == _entities.end())
+	if(iterator == _entities.end())
 	{
 		Logger::throwError("WaterEntityManager::getEntity");
 	}
@@ -20,7 +20,7 @@ shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string& ID)
 
 shared_ptr<WaterEntity> WaterEntityManager::getSelectedWater()
 {
-	if (_entities.empty() || _selectedID.empty())
+	if(_entities.empty() || _selectedID.empty())
 	{
 		return nullptr;
 	}
@@ -37,7 +37,7 @@ const unordered_map<string, shared_ptr<WaterEntity>>& WaterEntityManager::getEnt
 
 void WaterEntityManager::selectWater(const string& ID)
 {
-	if (isEntityExisting(ID) || ID.empty())
+	if(isEntityExisting(ID) || ID.empty())
 	{
 		_selectedID = ID;
 	}
@@ -56,7 +56,7 @@ void WaterEntityManager::createEntity(const string& ID)
 
 void WaterEntityManager::deleteEntity(const string& ID)
 {
-	if (!isEntityExisting(ID))
+	if(!isEntityExisting(ID))
 	{
 		Logger::throwError("WaterEntityManager::deleteEntity");
 	}
@@ -83,7 +83,7 @@ void WaterEntityManager::_loadMesh(shared_ptr<WaterEntity> entity, float size)
 {
 	const float halfSize = (size / 2.0f);
 
-	if (size > MAX_SIZE)
+	if(size > MAX_SIZE)
 	{
 		Logger::throwError("WaterEntityManager::loadMesh");
 	}
@@ -99,67 +99,67 @@ void WaterEntityManager::_loadMesh(shared_ptr<WaterEntity> entity, float size)
 	};
 
 	vector<float> highQualityBufferData;
-	for (float x = -halfSize; x < halfSize; x++)
+	for(float x = -halfSize; x < halfSize; x++)
 	{
-		for (float z = -halfSize; z < halfSize; z++)
+		for(float z = -halfSize; z < halfSize; z++)
 		{
-			float firstVertexX = x;
-			float firstVertexY = 0.0f;
-			float firstVertexZ = z + 1;
+			float firstPositionX = x;
+			float firstPositionY = 0.0f;
+			float firstPositionZ = z + 1;
 			float firstUvX = ((x + halfSize) / size);
 			float firstUvY = (((z + halfSize) / size) + (1.0f / size));
 
-			float secondVertexX = x + 1;
-			float secondVertexY = 0.0f;
-			float secondVertexZ = z + 1;
+			float secondPositionX = x + 1;
+			float secondPositionY = 0.0f;
+			float secondPositionZ = z + 1;
 			float secondUvX = (((x + halfSize) / size) + (1.0f / size));
 			float secondUvY = (((z + halfSize) / size) + (1.0f / size));
 
-			float thirdVertexX = x + 1;
-			float thirdVertexY = 0.0f;
-			float thirdVertexZ = z;
+			float thirdPositionX = x + 1;
+			float thirdPositionY = 0.0f;
+			float thirdPositionZ = z;
 			float thirdUvX = (((x + halfSize) / size) + (1.0f / size));
 			float thirdUvY = ((z + halfSize) / size);
 
-			float fourthVertexX = x;
-			float fourthVertexY = 0.0f;
-			float fourthVertexZ = z;
+			float fourthPositionX = x;
+			float fourthPositionY = 0.0f;
+			float fourthPositionZ = z;
 			float fourthUvX = ((x + halfSize) / size);
 			float fourthUvY = ((z + halfSize) / size);
 
-			highQualityBufferData.push_back(firstVertexX);
-			highQualityBufferData.push_back(firstVertexY);
-			highQualityBufferData.push_back(firstVertexZ);
+			highQualityBufferData.push_back(firstPositionX);
+			highQualityBufferData.push_back(firstPositionY);
+			highQualityBufferData.push_back(firstPositionZ);
 			highQualityBufferData.push_back(firstUvX);
 			highQualityBufferData.push_back(firstUvY);
 
-			highQualityBufferData.push_back(secondVertexX);
-			highQualityBufferData.push_back(secondVertexY);
-			highQualityBufferData.push_back(secondVertexZ);
+			highQualityBufferData.push_back(secondPositionX);
+			highQualityBufferData.push_back(secondPositionY);
+			highQualityBufferData.push_back(secondPositionZ);
 			highQualityBufferData.push_back(secondUvX);
 			highQualityBufferData.push_back(secondUvY);
 
-			highQualityBufferData.push_back(thirdVertexX);
-			highQualityBufferData.push_back(thirdVertexY);
-			highQualityBufferData.push_back(thirdVertexZ);
+			highQualityBufferData.push_back(thirdPositionX);
+			highQualityBufferData.push_back(thirdPositionY);
+			highQualityBufferData.push_back(thirdPositionZ);
 			highQualityBufferData.push_back(thirdUvX);
 			highQualityBufferData.push_back(thirdUvY);
 
-			highQualityBufferData.push_back(thirdVertexX);
-			highQualityBufferData.push_back(thirdVertexY);
-			highQualityBufferData.push_back(thirdVertexZ);
+			highQualityBufferData.push_back(thirdPositionX);
+			highQualityBufferData.push_back(thirdPositionY);
+			highQualityBufferData.push_back(thirdPositionZ);
 			highQualityBufferData.push_back(thirdUvX);
 			highQualityBufferData.push_back(thirdUvY);
 
-			highQualityBufferData.push_back(fourthVertexX);
-			highQualityBufferData.push_back(fourthVertexY);
-			highQualityBufferData.push_back(fourthVertexZ);
+			highQualityBufferData.push_back(fourthPositionX);
+			highQualityBufferData.push_back(fourthPositionY);
+			highQualityBufferData.push_back(fourthPositionZ);
 			highQualityBufferData.push_back(fourthUvX);
 			highQualityBufferData.push_back(fourthUvY);
 
-			highQualityBufferData.push_back(firstVertexX);
-			highQualityBufferData.push_back(firstVertexY);
-			highQualityBufferData.push_back(firstVertexZ);
+			highQualityBufferData.push_back(firstPositionX);
+			highQualityBufferData.push_back(firstPositionY);
+			highQualityBufferData.push_back(firstPositionZ);
 			highQualityBufferData.push_back(firstUvX);
 			highQualityBufferData.push_back(firstUvY);
 		}
@@ -168,15 +168,15 @@ void WaterEntityManager::_loadMesh(shared_ptr<WaterEntity> entity, float size)
 	auto lowQualityBufferDataCount = static_cast<unsigned int>(sizeof(lowQualityBufferData) / sizeof(float));
 	auto highQualityBufferDataCount = static_cast<unsigned int>(highQualityBufferData.size());
 
-	entity->setLowQualityRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, &lowQualityBufferData[0], lowQualityBufferDataCount));
-	entity->setHighQualityRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, &highQualityBufferData[0], highQualityBufferDataCount));
+	entity->setLowQualityVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, &lowQualityBufferData[0], lowQualityBufferDataCount));
+	entity->setHighQualityVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, &highQualityBufferData[0], highQualityBufferDataCount));
 }
 
 void WaterEntityManager::update()
 {
-	for (const auto& [key, entity] : _entities)
+	for(const auto& [key, entity] : _entities)
 	{
-		if (entity->isVisible())
+		if(entity->isVisible())
 		{
 			fvec2 newOffset = entity->getRippleOffset();
 			newOffset.x += entity->getSpeed().x;

@@ -42,7 +42,7 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 {
 	if(entity->isVisible())
 	{
-		const auto buffer = entity->getRenderBuffer();
+		const auto buffer = entity->getVertexBuffer();
 
 		if(entity->isWireframed())
 		{
@@ -63,8 +63,8 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 		_shader.uploadUniform("u_isBright", entity->isBright());
 		_shader.uploadUniform("u_emissionIntensity", entity->getEmissionIntensity());
 		_shader.uploadUniform("u_textureRepeat", entity->getTextureRepeat());
-		_shader.uploadUniform("u_multiplierUV", entity->getMultiplierUV());
-		_shader.uploadUniform("u_adderUV", entity->getAdderUV());
+		_shader.uploadUniform("u_uvMultiplier", entity->getUvMultiplier());
+		_shader.uploadUniform("u_uvOffset", entity->getUvOffset());
 		_shader.uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
 		if(entity->hasDiffuseMap())

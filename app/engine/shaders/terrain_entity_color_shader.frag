@@ -131,9 +131,9 @@ vec3 calculateDiffuseMapping()
 {
 	if (u_hasBlendMap)
 	{
-		vec2 blendUV = (f_uv / u_textureRepeat);
+		vec2 blendUv = (f_uv / u_textureRepeat);
 
-		vec4 blendMapColor = texture(u_blendMap, blendUV);
+		vec4 blendMapColor = texture(u_blendMap, blendUv);
 
 		vec3 diffuseMapColor = vec3(0.0f);
 		if (u_hasDiffuseMap)
@@ -143,9 +143,9 @@ vec3 calculateDiffuseMapping()
 			diffuseMapColor = pow(diffuseMapColor, vec3(2.2f));
 		}
 
-		vec3 rColor = (u_hasRedDiffuseMap ? (texture(u_redDiffuseMap, (blendUV * u_redTextureRepeat)).rgb * blendMapColor.r) : vec3(0.0f));
-		vec3 gColor = (u_hasGreenDiffuseMap ? (texture(u_greenDiffuseMap, (blendUV * u_greenTextureRepeat)).rgb * blendMapColor.g) : vec3(0.0f));
-		vec3 bColor = (u_hasBlueDiffuseMap ? (texture(u_blueDiffuseMap, (blendUV * u_blueTextureRepeat)).rgb * blendMapColor.b) : vec3(0.0f));
+		vec3 rColor = (u_hasRedDiffuseMap ? (texture(u_redDiffuseMap, (blendUv * u_redTextureRepeat)).rgb * blendMapColor.r) : vec3(0.0f));
+		vec3 gColor = (u_hasGreenDiffuseMap ? (texture(u_greenDiffuseMap, (blendUv * u_greenTextureRepeat)).rgb * blendMapColor.g) : vec3(0.0f));
+		vec3 bColor = (u_hasBlueDiffuseMap ? (texture(u_blueDiffuseMap, (blendUv * u_blueTextureRepeat)).rgb * blendMapColor.b) : vec3(0.0f));
 		rColor = pow(rColor, vec3(2.2f));
 		gColor = pow(gColor, vec3(2.2f));
 		bColor = pow(bColor, vec3(2.2f));
@@ -173,8 +173,8 @@ vec3 calculateNormalMapping()
     {
 		if (u_hasBlendMap)
 		{
-			vec2 blendUV = (f_uv / u_textureRepeat);
-			vec4 blendMapColor = texture(u_blendMap, blendUV);
+			vec2 blendUv = (f_uv / u_textureRepeat);
+			vec4 blendMapColor = texture(u_blendMap, blendUv);
 			float diffuseStrength = (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
 			float rStrength = blendMapColor.r;
 			float gStrength = blendMapColor.g;
@@ -196,7 +196,7 @@ vec3 calculateNormalMapping()
 			
 			if (u_hasRedNormalMap)
 			{
-				vec3 normal = texture(u_redNormalMap, (blendUV * u_redTextureRepeat)).rgb;
+				vec3 normal = texture(u_redNormalMap, (blendUv * u_redTextureRepeat)).rgb;
 				normal *= 2.0f;
 				normal -= 1.0f;
 				totalNormal += (normalize(f_tbnMatrix * normal) * rStrength);
@@ -208,7 +208,7 @@ vec3 calculateNormalMapping()
 
 			if (u_hasGreenNormalMap)
 			{
-				vec3 normal = texture(u_greenNormalMap, (blendUV * u_greenTextureRepeat)).rgb;
+				vec3 normal = texture(u_greenNormalMap, (blendUv * u_greenTextureRepeat)).rgb;
 				normal *= 2.0f;
 				normal -= 1.0f;
 				totalNormal += (normalize(f_tbnMatrix * normal) * gStrength);
@@ -220,7 +220,7 @@ vec3 calculateNormalMapping()
 
 			if (u_hasBlueNormalMap)
 			{
-				vec3 normal = texture(u_blueNormalMap, (blendUV * u_blueTextureRepeat)).rgb;
+				vec3 normal = texture(u_blueNormalMap, (blendUv * u_blueTextureRepeat)).rgb;
 				normal *= 2.0f;
 				normal -= 1.0f;
 				totalNormal += (normalize(f_tbnMatrix * normal) * bStrength);

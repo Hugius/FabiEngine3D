@@ -6,9 +6,9 @@
 using std::clamp;
 using std::max;
 
-void BillboardEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
+void BillboardEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
 {
-	_renderBuffer = value;
+	_vertexBuffer = value;
 }
 
 void BillboardEntity::updateTransformation()
@@ -189,14 +189,14 @@ void BillboardEntity::setColor(fvec3 value)
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void BillboardEntity::setMultiplierUV(fvec2 value)
+void BillboardEntity::setUvMultiplier(fvec2 value)
 {
-	_multiplierUV = fvec2(max(0.0f, value.x), max(0.0f, value.y));
+	_uvMultiplier = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-void BillboardEntity::setAdderUV(fvec2 value)
+void BillboardEntity::setUvOffset(fvec2 value)
 {
-	_adderUV = fvec2(max(0.0f, value.x), max(0.0f, value.y));
+	_uvOffset = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
 void BillboardEntity::setWireframeColor(fvec3 value)

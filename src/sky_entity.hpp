@@ -1,7 +1,7 @@
 #pragma once
 
 #include "base_entity.hpp"
-#include "render_buffer.hpp"
+#include "vertex_buffer.hpp"
 #include "direction.hpp"
 
 #include <array>
@@ -15,7 +15,7 @@ class SkyEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void setRenderBuffer(shared_ptr<RenderBuffer> value);
+	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void updateRotationMatrix();
 	void setCubeMapPaths(const array<string, 6>& value);
 	void setColor(fvec3 value);
@@ -37,11 +37,11 @@ public:
 	const float getLightness() const;
 	const float getRotation() const;
 
-	const bool hasRenderBuffer() const;
+	const bool hasVertexBuffer() const;
 	const bool hasCubeMap() const;
 	const bool isWireframed() const;
 
-	const shared_ptr<RenderBuffer> getRenderBuffer() const;
+	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const TextureID getCubeMap() const;
 
 private:
@@ -58,6 +58,6 @@ private:
 
 	bool _isWireframed = false;
 
-	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
+	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	TextureID _cubeMap = 0;
 };

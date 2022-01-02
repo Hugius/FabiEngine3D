@@ -79,7 +79,7 @@ void Core::_prepare()
 	}
 
 	shared_ptr<QuadEntity> logo = make_shared<QuadEntity>("logo");
-	logo->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
+	logo->setVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
 	logo->setDiffuseMap(_textureLoader.load2dTexture("engine\\assets\\image\\diffuse_map\\logo.bmp", false, false));
 	logo->setCentered(true);
 

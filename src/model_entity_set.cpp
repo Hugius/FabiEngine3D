@@ -119,9 +119,9 @@ void ModelEntity::updateTransformationMatrix()
 	}
 }
 
-void ModelEntity::setRenderBuffer(const string& partID, shared_ptr<RenderBuffer> value)
+void ModelEntity::setVertexBuffer(const string& partID, shared_ptr<VertexBuffer> value)
 {
-	_parts[_getPartIndex(partID)].renderBuffer = value;
+	_parts[_getPartIndex(partID)].vertexBuffer = value;
 }
 
 void ModelEntity::setDiffuseMap(const string& partID, TextureID value)

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "quad_entity.hpp"
-#include "render_buffer.hpp"
+#include "vertex_buffer.hpp"
 
 #include <memory>
 #include <map>
@@ -16,7 +16,7 @@ public:
 
 	void updateTransformation();
 	void updateCharacterEntities();
-	void setRenderBuffer(shared_ptr<RenderBuffer> value);
+	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void setContent(const string& value);
 	void setFontMapPath(const string& value);
 	void setFontMap(TextureID value);
@@ -190,6 +190,6 @@ private:
 	bool _isWireframed = false;
 
 	vector<shared_ptr<QuadEntity>> _characterEntities;
-	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
+	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	TextureID _fontMap = 0;
 };

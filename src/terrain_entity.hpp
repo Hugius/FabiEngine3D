@@ -1,7 +1,7 @@
 #pragma once
 
 #include "base_entity.hpp"
-#include "render_buffer.hpp"
+#include "vertex_buffer.hpp"
 
 #include <memory>
 
@@ -12,7 +12,7 @@ class TerrainEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void setRenderBuffer(shared_ptr<RenderBuffer> value);
+	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void setPixels(const vector<float>& value);
 	void setHeightMapPath(const string& value);
 	void setDiffuseMap(TextureID value);
@@ -72,7 +72,7 @@ public:
 
 	const bool isSpecular() const;
 	const bool isWireframed() const;
-	const bool hasRenderBuffer() const;
+	const bool hasVertexBuffer() const;
 	const bool hasDiffuseMap() const;
 	const bool hasNormalMap() const;
 	const bool hasBlendMap() const;
@@ -83,7 +83,7 @@ public:
 	const bool hasGreenNormalMap() const;
 	const bool hasBlueNormalMap() const;
 
-	const shared_ptr<RenderBuffer> getRenderBuffer() const;
+	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const TextureID getDiffuseMap() const;
 	const TextureID getNormalMap() const;
 	const TextureID getBlendMap() const;
@@ -123,7 +123,7 @@ private:
 	bool _isSpecular = false;
 	bool _isWireframed = false;
 
-	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
+	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	TextureID _diffuseMap = 0;
 	TextureID _normalMap = 0;
 	TextureID _blendMap = 0;

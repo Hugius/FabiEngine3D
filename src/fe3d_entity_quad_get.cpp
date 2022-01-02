@@ -58,14 +58,14 @@ const fvec2 FabiEngine3D::quad_getMaxPosition(const string& ID) const
 	return _core->_quadEntityManager.getEntity(ID)->getMaxPosition();
 }
 
-const fvec2 FabiEngine3D::quad_getMultiplierUV(const string& ID) const
+const fvec2 FabiEngine3D::quad_getUvMultiplier(const string& ID) const
 {
-	return _core->_quadEntityManager.getEntity(ID)->getMultiplierUV();
+	return _core->_quadEntityManager.getEntity(ID)->getUvMultiplier();
 }
 
-const fvec2 FabiEngine3D::quad_getAdderUV(const string& ID) const
+const fvec2 FabiEngine3D::quad_getUvOffset(const string& ID) const
 {
-	return _core->_quadEntityManager.getEntity(ID)->getAdderUV();
+	return _core->_quadEntityManager.getEntity(ID)->getUvOffset();
 }
 
 const fvec3 FabiEngine3D::quad_getColor(const string& ID) const

@@ -22,7 +22,7 @@ void MeshPart::addTangent(fvec3 value)
 	_tangents.push_back(value);
 }
 
-void MeshPart::addUV(fvec2 value)
+void MeshPart::addUv(fvec2 value)
 {
 	_uvs.push_back(value);
 }
@@ -47,7 +47,7 @@ const vector<fvec3>& MeshPart::getTangents() const
 	return _tangents;
 }
 
-const vector<fvec2>& MeshPart::getUVs() const
+const vector<fvec2>& MeshPart::getUvs() const
 {
 	return _uvs;
 }

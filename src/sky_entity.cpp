@@ -5,9 +5,9 @@
 using std::max;
 using std::clamp;
 
-void SkyEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
+void SkyEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
 {
-	_renderBuffer = value;
+	_vertexBuffer = value;
 }
 
 void SkyEntity::updateRotationMatrix()
@@ -55,9 +55,9 @@ void SkyEntity::setWireframeColor(fvec3 value)
 	_wireframeColor = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-const shared_ptr<RenderBuffer> SkyEntity::getRenderBuffer() const
+const shared_ptr<VertexBuffer> SkyEntity::getVertexBuffer() const
 {
-	return _renderBuffer;
+	return _vertexBuffer;
 }
 
 const array<string, 6>& SkyEntity::getCubeMapPaths() const
@@ -110,7 +110,7 @@ const bool SkyEntity::isWireframed() const
 	return _isWireframed;
 }
 
-const bool SkyEntity::hasRenderBuffer() const
+const bool SkyEntity::hasVertexBuffer() const
 {
-	return (_renderBuffer != nullptr);
+	return (_vertexBuffer != nullptr);
 }

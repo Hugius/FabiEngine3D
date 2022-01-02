@@ -27,7 +27,7 @@ public:
 	void setMaxHeight(float value);
 	void setLevelOfDetailDistance(float value);
 	void setBright(bool value);
-	void setRenderBuffer(const string& partID, shared_ptr<RenderBuffer> value);
+	void setVertexBuffer(const string& partID, shared_ptr<VertexBuffer> value);
 	void setDiffuseMap(const string& partID, TextureID value);
 	void setEmissionMap(const string& partID, TextureID value);
 	void setSpecularMap(const string& partID, TextureID value);
@@ -122,14 +122,14 @@ public:
 	const bool isWireframed(const string& partID) const;
 	const bool isSpecular(const string& partID) const;
 	const bool isReflective(const string& partID) const;
-	const bool hasRenderBuffer(const string& partID) const;
+	const bool hasVertexBuffer(const string& partID) const;
 	const bool hasDiffuseMap(const string& partID) const;
 	const bool hasEmissionMap(const string& partID) const;
 	const bool hasSpecularMap(const string& partID) const;
 	const bool hasReflectionMap(const string& partID) const;
 	const bool hasNormalMap(const string& partID) const;
 
-	const shared_ptr<RenderBuffer> getRenderBuffer(const string& partID) const;
+	const shared_ptr<VertexBuffer> getVertexBuffer(const string& partID) const;
 	const TextureID getDiffuseMap(const string& partID) const;
 	const TextureID getEmissionMap(const string& partID) const;
 	const TextureID getSpecularMap(const string& partID) const;

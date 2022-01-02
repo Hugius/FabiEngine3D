@@ -8,8 +8,8 @@ uniform mat4 u_transformationMatrix;
 uniform mat4 u_viewMatrix;
 uniform mat4 u_projectionMatrix;
 
-uniform vec2 u_adderUV;
-uniform vec2 u_multiplierUV;
+uniform vec2 u_uvOffset;
+uniform vec2 u_uvMultiplier;
 
 uniform float u_minHeight;
 uniform float u_maxHeight;
@@ -31,6 +31,6 @@ void main()
 	gl_ClipDistance[1] = dot(worldSpacePosition, vec4(0.0f, -1.0f, 0.0f,  u_maxHeight));
 	gl_ClipDistance[2] = dot(worldSpacePosition, vec4(0.0f, u_isUnderWater ? -1.0f : 1.0f, 0.0f, u_isUnderWater ? u_clippingY : -u_clippingY));
 
-    f_uv.x = ((u_adderUV.x + (v_uv.x * u_multiplierUV.x)) * u_textureRepeat);
-	f_uv.y = ((u_adderUV.y + (v_uv.y * u_multiplierUV.y)) * u_textureRepeat);
+    f_uv.x = ((u_uvOffset.x + (v_uv.x * u_uvMultiplier.x)) * u_textureRepeat);
+	f_uv.y = ((u_uvOffset.y + (v_uv.y * u_uvMultiplier.y)) * u_textureRepeat);
 }

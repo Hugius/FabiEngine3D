@@ -1,7 +1,7 @@
 #pragma once
 
 #include "base_entity.hpp"
-#include "render_buffer.hpp"
+#include "vertex_buffer.hpp"
 
 #include <memory>
 
@@ -12,7 +12,7 @@ class QuadEntity : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void setRenderBuffer(shared_ptr<RenderBuffer> value);
+	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void updateTransformation();
 	void updateTransformationMatrix();
 	void setDiffuseMap(TextureID value);
@@ -34,8 +34,8 @@ public:
 	void rotateTo(float target, float speed);
 	void scaleTo(fvec2 target, float speed);
 	void setDepth(unsigned int value);
-	void setMultiplierUV(fvec2 value);
-	void setAdderUV(fvec2 value);
+	void setUvMultiplier(fvec2 value);
+	void setUvOffset(fvec2 value);
 	void setPerspectiveDepthEntity(bool value);
 	void setWireframed(bool value);
 	void setCentered(bool value);
@@ -51,8 +51,8 @@ public:
 	const fvec2 getSize() const;
 	const fvec2 getMinPosition() const;
 	const fvec2 getMaxPosition() const;
-	const fvec2 getMultiplierUV() const;
-	const fvec2 getAdderUV() const;
+	const fvec2 getUvMultiplier() const;
+	const fvec2 getUvOffset() const;
 
 	const float getTransparency() const;
 	const float getRotation() const;
@@ -66,7 +66,7 @@ public:
 	const bool isPerspectiveDepthEntity() const;
 	const bool hasDiffuseMap() const;
 
-	const shared_ptr<RenderBuffer> getRenderBuffer() const;
+	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const TextureID getDiffuseMap() const;
 
 private:
@@ -83,8 +83,8 @@ private:
 	fvec2 _size = fvec2(1.0f);
 	fvec2 _positionTarget = fvec2(0.0f);
 	fvec2 _sizeTarget = fvec2(1.0f);
-	fvec2 _multiplierUV = fvec2(1.0f);
-	fvec2 _adderUV = fvec2(0.0f);
+	fvec2 _uvMultiplier = fvec2(1.0f);
+	fvec2 _uvOffset = fvec2(0.0f);
 
 	float _rotation = 0.0f;
 	float _rotationTarget = 0.0f;
@@ -101,6 +101,6 @@ private:
 	bool _isPerspectiveDepthEntity = false;
 	bool _isWireframed = false;
 
-	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
+	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	TextureID _diffuseMap = 0;
 };

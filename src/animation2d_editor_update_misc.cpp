@@ -9,8 +9,8 @@ void Animation2dEditor::_updateMiscellaneous()
 		{
 			if(_isEditorLoaded)
 			{
-				_fe3d.billboard_setMultiplierUV(PREVIEW_BILLBOARD_ID, fvec2(1.0f));
-				_fe3d.billboard_setAdderUV(PREVIEW_BILLBOARD_ID, fvec2(0.0f));
+				_fe3d.billboard_setUvMultiplier(PREVIEW_BILLBOARD_ID, fvec2(1.0f));
+				_fe3d.billboard_setUvOffset(PREVIEW_BILLBOARD_ID, fvec2(0.0f));
 			}
 		}
 	}

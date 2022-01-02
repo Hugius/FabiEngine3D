@@ -39,7 +39,7 @@ public:
 	void setShadowCenterPosition(fvec3 value);
 	void setFogColor(fvec3 value);
 	void setFlareSourcePosition(fvec3 value);
-	void setFlareSourceUV(fvec2 value);
+	void setFlareSourceUv(fvec2 value);
 	void setAmbientLightingIntensity(float value);
 	void setDirectionalLightingIntensity(float value);
 	void setFogMinDistance(float value);
@@ -110,7 +110,7 @@ public:
 	const fvec3 getFogColor() const;
 	const fvec3 getFlareSourcePosition() const;
 
-	const fvec2 getFlareSourceUV() const;
+	const fvec2 getFlareSourceUv() const;
 
 	const float getAmbientLightingIntensity() const;
 	const float getDirectionalLightingIntensity() const;
@@ -210,7 +210,7 @@ private:
 	fvec3 _directionalLightColor = fvec3(1.0f);
 	fvec3 _fogColor = fvec3(1.0f);
 
-	fvec2 _flareSourceUV = fvec2(0.0f);
+	fvec2 _flareSourceUv = fvec2(0.0f);
 
 	float _ambientLightIntensity = 1.0f;
 	float _directionalLightIntensity = 1.0f;

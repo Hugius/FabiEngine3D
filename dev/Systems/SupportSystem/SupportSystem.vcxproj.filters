@@ -18,7 +18,7 @@
     <ClInclude Include="..\..\..\src\blur_direction.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\render_buffer_type.hpp">
+    <ClInclude Include="..\..\..\src\vertex_buffer_type.hpp">
       <Filter>Enumeration</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\direction.hpp">

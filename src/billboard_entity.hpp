@@ -1,7 +1,7 @@
 #pragma once
 
 #include "base_entity.hpp"
-#include "render_buffer.hpp"
+#include "vertex_buffer.hpp"
 
 #include <memory>
 
@@ -13,7 +13,7 @@ class BillboardEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void setRenderBuffer(shared_ptr<RenderBuffer> value);
+	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void updateTransformation();
 	void updateTransformationMatrix();
 	void setFacingCameraX(bool value);
@@ -36,8 +36,8 @@ public:
 	void rotateTo(fvec3 target, float speed);
 	void scaleTo(fvec2 target, float speed);
 	void setColor(fvec3 value);
-	void setMultiplierUV(fvec2 value);
-	void setAdderUV(fvec2 value);
+	void setUvMultiplier(fvec2 value);
+	void setUvOffset(fvec2 value);
 	void setWireframeColor(fvec3 value);
 	void setTextContent(const string& value);
 	void setFontPath(const string& value);
@@ -64,8 +64,8 @@ public:
 	const fvec3 getWireframeColor() const;
 
 	const fvec2 getSize() const;
-	const fvec2 getMultiplierUV() const;
-	const fvec2 getAdderUV() const;
+	const fvec2 getUvMultiplier() const;
+	const fvec2 getUvOffset() const;
 
 	const float getLightness() const;
 	const float getTransparency() const;
@@ -83,12 +83,12 @@ public:
 	const bool isTextual() const;
 	const bool isFrozen() const;
 	const bool isWireframed() const;
-	const bool hasRenderBuffer() const;
+	const bool hasVertexBuffer() const;
 	const bool hasDiffuseMap() const;
 	const bool hasEmissionMap() const;
 	const bool isCentered() const;
 
-	const shared_ptr<RenderBuffer> getRenderBuffer() const;
+	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const TextureID getDiffuseMap() const;
 	const TextureID getEmissionMap() const;
 
@@ -109,8 +109,8 @@ private:
 
 	fvec2 _size = fvec2(1.0f);
 	fvec2 _sizeTarget = fvec2(1.0f);
-	fvec2 _multiplierUV = fvec2(1.0f);
-	fvec2 _adderUV = fvec2(0.0f);
+	fvec2 _uvMultiplier = fvec2(1.0f);
+	fvec2 _uvOffset = fvec2(0.0f);
 
 	float _emissionIntensity = 1.0f;
 	float _textureRepeat = 1.0f;
@@ -133,7 +133,7 @@ private:
 	bool _isFrozen = false;
 	bool _isCentered = false;
 
-	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
+	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	TextureID _diffuseMap = 0;
 	TextureID _emissionMap = 0;
 };

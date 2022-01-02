@@ -133,16 +133,16 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 	const auto halfSize = (size / 2.0f);
 	const auto uSize = static_cast<unsigned int>(size);
 
-	vector<fvec3> tempVertices;
-	vector<fvec2> tempUvCoords;
+	vector<fvec3> tempPositions;
+	vector<fvec2> tempUvs;
 	vector<fvec3> tempNormals;
 	for(float x = -halfSize; x < halfSize; x++)
 	{
 		for(float z = -halfSize; z < halfSize; z++)
 		{
-			float vertexX = x;
-			float vertexY = _getPixelHeight(x + halfSize, z + halfSize, size, maxHeight, pixels);
-			float vertexZ = z;
+			float positionX = x;
+			float positionY = _getPixelHeight(x + halfSize, z + halfSize, size, maxHeight, pixels);
+			float positionZ = z;
 
 			float uvX = ((x + halfSize) / size);
 			float uvY = ((z + halfSize) / size);
@@ -154,14 +154,14 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 			fvec3 normal = fvec3(LH - RH, 3.0f, DH - UH);
 			normal = Math::normalize(normal);
 
-			tempVertices.push_back(fvec3(vertexX, vertexY, vertexZ));
-			tempUvCoords.push_back(fvec2(uvX, uvY));
+			tempPositions.push_back(fvec3(positionX, positionY, positionZ));
+			tempUvs.push_back(fvec2(uvX, uvY));
 			tempNormals.push_back(normal);
 		}
 	}
 
-	vector<fvec3> vertices;
-	vector<fvec2> uvCoords;
+	vector<fvec3> positions;
+	vector<fvec2> uvs;
 	vector<fvec3> normals;
 	for(unsigned int x = 0; x < uSize - 1; x++)
 	{
@@ -172,51 +172,51 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 			unsigned int bottomLeftIndex = ((z + 1) * uSize) + x;
 			unsigned int bottomRightIndex = bottomLeftIndex + 1;
 
-			vertices.push_back(tempVertices[topLeftIndex]);
-			uvCoords.push_back(tempUvCoords[topLeftIndex]);
+			positions.push_back(tempPositions[topLeftIndex]);
+			uvs.push_back(tempUvs[topLeftIndex]);
 			normals.push_back(tempNormals[topLeftIndex]);
 
-			vertices.push_back(tempVertices[topRightIndex]);
-			uvCoords.push_back(tempUvCoords[topRightIndex]);
+			positions.push_back(tempPositions[topRightIndex]);
+			uvs.push_back(tempUvs[topRightIndex]);
 			normals.push_back(tempNormals[topRightIndex]);
 
-			vertices.push_back(tempVertices[bottomRightIndex]);
-			uvCoords.push_back(tempUvCoords[bottomRightIndex]);
+			positions.push_back(tempPositions[bottomRightIndex]);
+			uvs.push_back(tempUvs[bottomRightIndex]);
 			normals.push_back(tempNormals[bottomRightIndex]);
 
-			vertices.push_back(tempVertices[bottomRightIndex]);
-			uvCoords.push_back(tempUvCoords[bottomRightIndex]);
+			positions.push_back(tempPositions[bottomRightIndex]);
+			uvs.push_back(tempUvs[bottomRightIndex]);
 			normals.push_back(tempNormals[bottomRightIndex]);
 
-			vertices.push_back(tempVertices[bottomLeftIndex]);
-			uvCoords.push_back(tempUvCoords[bottomLeftIndex]);
+			positions.push_back(tempPositions[bottomLeftIndex]);
+			uvs.push_back(tempUvs[bottomLeftIndex]);
 			normals.push_back(tempNormals[bottomLeftIndex]);
 
-			vertices.push_back(tempVertices[topLeftIndex]);
-			uvCoords.push_back(tempUvCoords[topLeftIndex]);
+			positions.push_back(tempPositions[topLeftIndex]);
+			uvs.push_back(tempUvs[topLeftIndex]);
 			normals.push_back(tempNormals[topLeftIndex]);
 		}
 	}
 
 	vector<fvec3> tangents;
-	for(size_t i = 0; i < vertices.size(); i += 3)
+	for(size_t i = 0; i < positions.size(); i += 3)
 	{
-		fvec3 v0 = vertices[i + 0];
-		fvec3 v1 = vertices[i + 1];
-		fvec3 v2 = vertices[i + 2];
+		fvec3 v0 = positions[i + 0];
+		fvec3 v1 = positions[i + 1];
+		fvec3 v2 = positions[i + 2];
 
-		fvec2 uv0 = uvCoords[i + 0];
-		fvec2 uv1 = uvCoords[i + 1];
-		fvec2 uv2 = uvCoords[i + 2];
+		fvec2 uv0 = uvs[i + 0];
+		fvec2 uv1 = uvs[i + 1];
+		fvec2 uv2 = uvs[i + 2];
 
 		fvec3 deltaPos1 = v1 - v0;
 		fvec3 deltaPos2 = v2 - v0;
 
-		fvec2 deltaUV1 = uv1 - uv0;
-		fvec2 deltaUV2 = uv2 - uv0;
+		fvec2 deltaUv1 = uv1 - uv0;
+		fvec2 deltaUv2 = uv2 - uv0;
 
-		float r = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);
-		fvec3 tangent = (deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r;
+		float r = 1.0f / (deltaUv1.x * deltaUv2.y - deltaUv1.y * deltaUv2.x);
+		fvec3 tangent = (deltaPos1 * deltaUv2.y - deltaPos2 * deltaUv1.y) * r;
 
 		tangents.push_back(tangent);
 		tangents.push_back(tangent);
@@ -224,14 +224,14 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 	}
 
 	vector<float> bufferData;
-	for(size_t i = 0; i < vertices.size(); i++)
+	for(size_t i = 0; i < positions.size(); i++)
 	{
-		bufferData.push_back(vertices[i].x);
-		bufferData.push_back(vertices[i].y);
-		bufferData.push_back(vertices[i].z);
+		bufferData.push_back(positions[i].x);
+		bufferData.push_back(positions[i].y);
+		bufferData.push_back(positions[i].z);
 
-		bufferData.push_back(uvCoords[i].x);
-		bufferData.push_back(uvCoords[i].y);
+		bufferData.push_back(uvs[i].x);
+		bufferData.push_back(uvs[i].y);
 
 		bufferData.push_back(normals[i].x);
 		bufferData.push_back(normals[i].y);
@@ -244,7 +244,7 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 
 	auto bufferDataCount = static_cast<unsigned int>(bufferData.size());
 
-	entity->setRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], bufferDataCount));
+	entity->setVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV_NOR_TAN, &bufferData[0], bufferDataCount));
 }
 
 const float TerrainEntityManager::getPixelHeight(const string& ID, float x, float z)

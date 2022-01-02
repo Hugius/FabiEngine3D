@@ -1,9 +1,9 @@
 #include "model_entity.hpp"
 #include "logger.hpp"
 
-const shared_ptr<RenderBuffer> ModelEntity::getRenderBuffer(const string& partID) const
+const shared_ptr<VertexBuffer> ModelEntity::getVertexBuffer(const string& partID) const
 {
-	return _parts[_getPartIndex(partID)].renderBuffer;
+	return _parts[_getPartIndex(partID)].vertexBuffer;
 }
 
 const mat44& ModelEntity::getTransformationMatrix(const string& partID) const
@@ -228,9 +228,9 @@ const bool ModelEntity::isBright() const
 	return _isBright;
 }
 
-const bool ModelEntity::hasRenderBuffer(const string& partID) const
+const bool ModelEntity::hasVertexBuffer(const string& partID) const
 {
-	return (_parts[_getPartIndex(partID)].renderBuffer != nullptr);
+	return (_parts[_getPartIndex(partID)].vertexBuffer != nullptr);
 }
 
 const bool ModelEntity::isFrozen() const

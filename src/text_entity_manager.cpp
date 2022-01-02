@@ -7,7 +7,7 @@ TextEntityManager::TextEntityManager(ImageLoader& textureLoader, RenderBus& rend
 	:
 	_textureLoader(textureLoader),
 	_renderBus(renderBus),
-	_renderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
+	_vertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
 {
 
 }
@@ -34,7 +34,7 @@ const unordered_map<string, shared_ptr<TextEntity>>& TextEntityManager::getEntit
 void TextEntityManager::createEntity(const string& ID, bool isCentered)
 {
 	_entities.insert(make_pair(ID, make_shared<TextEntity>(ID)));
-	getEntity(ID)->setRenderBuffer(_renderBuffer);
+	getEntity(ID)->setVertexBuffer(_vertexBuffer);
 	getEntity(ID)->setCentered(isCentered);
 	getEntity(ID)->setDepth(_renderBus.getGuiDepth());
 	_renderBus.setGuiDepth(_renderBus.getGuiDepth() + 1);

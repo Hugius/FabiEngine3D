@@ -61,15 +61,15 @@ void TerrainEntityColorRenderer::unbind()
 void TerrainEntityColorRenderer::processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>>& entities)
 {
 	vector<shared_ptr<PointlightEntity>> visibleEntities;
-	for (const auto& [key, entity] : entities)
+	for(const auto& [key, entity] : entities)
 	{
-		if (entity->isVisible())
+		if(entity->isVisible())
 		{
 			visibleEntities.push_back(entity);
 		}
 	}
 
-	for (size_t i = 0; i < visibleEntities.size(); i++)
+	for(size_t i = 0; i < visibleEntities.size(); i++)
 	{
 		_shader.uploadUniform("u_pointlightPositions[" + to_string(i) + "]", visibleEntities[i]->getPosition());
 		_shader.uploadUniform("u_pointlightColors[" + to_string(i) + "]", visibleEntities[i]->getColor());
@@ -84,15 +84,15 @@ void TerrainEntityColorRenderer::processPointlightEntities(const unordered_map<s
 void TerrainEntityColorRenderer::processSpotlightEntities(const unordered_map<string, shared_ptr<SpotlightEntity>>& entities)
 {
 	vector<shared_ptr<SpotlightEntity>> visibleEntities;
-	for (const auto& [key, entity] : entities)
+	for(const auto& [key, entity] : entities)
 	{
-		if (entity->isVisible())
+		if(entity->isVisible())
 		{
 			visibleEntities.push_back(entity);
 		}
 	}
 
-	for (size_t i = 0; i < visibleEntities.size(); i++)
+	for(size_t i = 0; i < visibleEntities.size(); i++)
 	{
 		_shader.uploadUniform("u_spotlightPositions[" + to_string(i) + "]", visibleEntities[i]->getPosition());
 		_shader.uploadUniform("u_spotlightFrontVectors[" + to_string(i) + "]", visibleEntities[i]->getFrontVector());
@@ -107,9 +107,9 @@ void TerrainEntityColorRenderer::processSpotlightEntities(const unordered_map<st
 
 void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 {
-	if (entity->isVisible())
+	if(entity->isVisible())
 	{
-		if (entity->isWireframed())
+		if(entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
@@ -136,100 +136,100 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 		_shader.uploadUniform("u_hasBlueNormalMap", entity->hasBlueNormalMap());
 		_shader.uploadUniform("u_wireframeColor", entity->getWireframeColor());
 
-		if (entity->hasDiffuseMap())
+		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
 		}
-		if (entity->hasNormalMap())
+		if(entity->hasNormalMap())
 		{
 			glActiveTexture(GL_TEXTURE2);
 			glBindTexture(GL_TEXTURE_2D, entity->getNormalMap());
 		}
-		if (entity->hasBlendMap())
+		if(entity->hasBlendMap())
 		{
 			glActiveTexture(GL_TEXTURE3);
 			glBindTexture(GL_TEXTURE_2D, entity->getBlendMap());
 		}
-		if (entity->hasRedDiffuseMap())
+		if(entity->hasRedDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE4);
 			glBindTexture(GL_TEXTURE_2D, entity->getRedDiffuseMap());
 		}
-		if (entity->hasGreenDiffuseMap())
+		if(entity->hasGreenDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE5);
 			glBindTexture(GL_TEXTURE_2D, entity->getGreenDiffuseMap());
 		}
-		if (entity->hasBlueDiffuseMap())
+		if(entity->hasBlueDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE6);
 			glBindTexture(GL_TEXTURE_2D, entity->getBlueDiffuseMap());
 		}
-		if (entity->hasRedNormalMap())
+		if(entity->hasRedNormalMap())
 		{
 			glActiveTexture(GL_TEXTURE7);
 			glBindTexture(GL_TEXTURE_2D, entity->getRedNormalMap());
 		}
-		if (entity->hasGreenNormalMap())
+		if(entity->hasGreenNormalMap())
 		{
 			glActiveTexture(GL_TEXTURE8);
 			glBindTexture(GL_TEXTURE_2D, entity->getGreenNormalMap());
 		}
-		if (entity->hasBlueNormalMap())
+		if(entity->hasBlueNormalMap())
 		{
 			glActiveTexture(GL_TEXTURE9);
 			glBindTexture(GL_TEXTURE_2D, entity->getBlueNormalMap());
 		}
 
-		glBindVertexArray(entity->getRenderBuffer()->getVAO());
+		glBindVertexArray(entity->getVertexBuffer()->getVAO());
 
-		glDrawArrays(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount());
-		_renderBus.increaseTriangleCount(entity->getRenderBuffer()->getVertexCount() / 3);
+		glDrawArrays(GL_TRIANGLES, 0, entity->getVertexBuffer()->getVertexCount());
+		_renderBus.increaseTriangleCount(entity->getVertexBuffer()->getVertexCount() / 3);
 
 		glBindVertexArray(0);
 
-		if (entity->hasDiffuseMap())
+		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if (entity->hasNormalMap())
+		if(entity->hasNormalMap())
 		{
 			glActiveTexture(GL_TEXTURE2);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if (entity->hasBlendMap())
+		if(entity->hasBlendMap())
 		{
 			glActiveTexture(GL_TEXTURE3);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if (entity->hasRedDiffuseMap())
+		if(entity->hasRedDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE4);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if (entity->hasGreenDiffuseMap())
+		if(entity->hasGreenDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE5);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if (entity->hasBlueDiffuseMap())
+		if(entity->hasBlueDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE6);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if (entity->hasRedNormalMap())
+		if(entity->hasRedNormalMap())
 		{
 			glActiveTexture(GL_TEXTURE7);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if (entity->hasGreenNormalMap())
+		if(entity->hasGreenNormalMap())
 		{
 			glActiveTexture(GL_TEXTURE8);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		if (entity->hasBlueNormalMap())
+		if(entity->hasBlueNormalMap())
 		{
 			glActiveTexture(GL_TEXTURE9);
 			glBindTexture(GL_TEXTURE_2D, 0);
@@ -237,7 +237,7 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 
 		glDisable(GL_CULL_FACE);
 
-		if (entity->isWireframed())
+		if(entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}

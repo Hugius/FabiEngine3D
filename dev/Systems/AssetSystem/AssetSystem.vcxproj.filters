@@ -22,11 +22,14 @@
     <Filter Include="Image\Loader">
       <UniqueIdentifier>{7aebe5dc-2f42-497a-88d6-f60a67a2fff0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Audio\Data">
+      <UniqueIdentifier>{5313e935-8b12-4ea5-bb31-ec035daec94f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio\Loader">
+      <UniqueIdentifier>{cb5cfa26-a861-4d20-90a5-d6b298eeec58}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\audio_loader.cpp">
-      <Filter>Audio</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\mesh_loader_private.cpp">
       <Filter>Mesh\Loader</Filter>
     </ClCompile>
@@ -42,17 +45,14 @@
     <ClCompile Include="..\..\..\src\image_loader_public.cpp">
       <Filter>Image\Loader</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\image_loader_load.cpp">
-      <Filter>Image\Loader</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\image_loader_private.cpp">
       <Filter>Image\Loader</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\audio_loader.cpp">
+      <Filter>Audio\Loader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\audio_loader.hpp">
-      <Filter>Audio</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\mesh_loader.hpp">
       <Filter>Mesh\Loader</Filter>
     </ClInclude>
@@ -64,6 +64,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\image_loader.hpp">
       <Filter>Image\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\audio_loader.hpp">
+      <Filter>Audio\Loader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

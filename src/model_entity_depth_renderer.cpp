@@ -29,9 +29,9 @@ void ModelEntityDepthRenderer::unbind()
 
 void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, float clippingY, bool isUnderWater)
 {
-	if (entity->isVisible())
+	if(entity->isVisible())
 	{
-		if (entity->isFaceCulled())
+		if(entity->isFaceCulled())
 		{
 			glEnable(GL_CULL_FACE);
 		}
@@ -43,14 +43,14 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, floa
 		_shader.uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
 		_shader.uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
-		for (const auto& partID : entity->getPartIDs())
+		for(const auto& partID : entity->getPartIDs())
 		{
-			const auto buffer = entity->getRenderBuffer(partID);
+			const auto buffer = entity->getVertexBuffer(partID);
 
 			_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partID));
 			_shader.uploadUniform("u_textureRepeat", entity->getTextureRepeat(partID));
 
-			if (entity->hasDiffuseMap(partID))
+			if(entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID));
@@ -62,14 +62,14 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, floa
 
 			glBindVertexArray(0);
 
-			if (entity->hasDiffuseMap(partID))
+			if(entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 		}
 
-		if (entity->isFaceCulled())
+		if(entity->isFaceCulled())
 		{
 			glDisable(GL_CULL_FACE);
 		}

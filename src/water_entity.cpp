@@ -55,14 +55,14 @@ void WaterEntity::setTextureRepeat(float value)
 	_textureRepeat = max(0.0f, value);
 }
 
-void WaterEntity::setLowQualityRenderBuffer(shared_ptr<RenderBuffer> value)
+void WaterEntity::setLowQualityVertexBuffer(shared_ptr<VertexBuffer> value)
 {
-	_lowQualityRenderBuffer = value;
+	_lowQualityVertexBuffer = value;
 }
 
-void WaterEntity::setHighQualityRenderBuffer(shared_ptr<RenderBuffer> value)
+void WaterEntity::setHighQualityVertexBuffer(shared_ptr<VertexBuffer> value)
 {
-	_highQualityRenderBuffer = value;
+	_highQualityVertexBuffer = value;
 }
 
 void WaterEntity::setQuality(WaterQuality quality)
@@ -180,14 +180,14 @@ const float WaterEntity::getTextureRepeat() const
 	return _textureRepeat;
 }
 
-const shared_ptr<RenderBuffer> WaterEntity::getLowQualityRenderBuffer() const
+const shared_ptr<VertexBuffer> WaterEntity::getLowQualityVertexBuffer() const
 {
-	return _lowQualityRenderBuffer;
+	return _lowQualityVertexBuffer;
 }
 
-const shared_ptr<RenderBuffer> WaterEntity::getHighQualityRenderBuffer() const
+const shared_ptr<VertexBuffer> WaterEntity::getHighQualityVertexBuffer() const
 {
-	return _highQualityRenderBuffer;
+	return _highQualityVertexBuffer;
 }
 
 const WaterQuality WaterEntity::getQuality() const
@@ -255,14 +255,14 @@ const bool WaterEntity::isWireframed() const
 	return _isWireframed;
 }
 
-const bool WaterEntity::hasLowQualityRenderBuffer() const
+const bool WaterEntity::hasLowQualityVertexBuffer() const
 {
-	return (_lowQualityRenderBuffer != nullptr);
+	return (_lowQualityVertexBuffer != nullptr);
 }
 
-const bool WaterEntity::hasHighQualityRenderBuffer() const
+const bool WaterEntity::hasHighQualityVertexBuffer() const
 {
-	return (_highQualityRenderBuffer != nullptr);
+	return (_highQualityVertexBuffer != nullptr);
 }
 
 const bool WaterEntity::hasDudvMap() const

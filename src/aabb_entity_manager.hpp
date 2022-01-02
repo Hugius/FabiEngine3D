@@ -1,6 +1,6 @@
 #pragma once
 
-#include "render_buffer.hpp"
+#include "vertex_buffer.hpp"
 #include "aabb_entity.hpp"
 #include "model_entity.hpp"
 #include "billboard_entity.hpp"
@@ -28,7 +28,7 @@ public:
 private:
 	static inline constexpr float MIN_SIZE = 0.1f;
 
-	const shared_ptr<RenderBuffer> _centeredRenderBuffer;
-	const shared_ptr<RenderBuffer> _standingRenderBuffer;
+	const shared_ptr<VertexBuffer> _centeredVertexBuffer;
+	const shared_ptr<VertexBuffer> _standingVertexBuffer;
 	unordered_map<string, shared_ptr<AabbEntity>> _entities;
 };

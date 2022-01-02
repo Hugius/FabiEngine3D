@@ -59,7 +59,7 @@ const TextureID BlurRenderer::blurTexture(const shared_ptr<QuadEntity> entity, T
 
 void BlurRenderer::_render(const shared_ptr<QuadEntity> entity, TextureID texture)
 {
-	const auto buffer = entity->getRenderBuffer();
+	const auto buffer = entity->getVertexBuffer();
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture);

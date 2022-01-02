@@ -51,13 +51,13 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 			}
 		}
 
-		fvec2 multiplierUV = fvec2((1.0f / static_cast<float>(animation.getColumnCount())),
+		fvec2 uvMultiplier = fvec2((1.0f / static_cast<float>(animation.getColumnCount())),
 								   (1.0f / static_cast<float>(animation.getRowCount())));
-		fvec2 adderUV = fvec2((static_cast<float>(animation.getColumnIndex()) * multiplierUV.x),
-							  (static_cast<float>(animation.getRowCount() - animation.getRowIndex() - 1) * multiplierUV.y));
+		fvec2 uvOffset = fvec2((static_cast<float>(animation.getColumnIndex()) * uvMultiplier.x),
+							   (static_cast<float>(animation.getRowCount() - animation.getRowIndex() - 1) * uvMultiplier.y));
 
-		_fe3d.billboard_setMultiplierUV(idPair.second, multiplierUV);
-		_fe3d.billboard_setAdderUV(idPair.second, adderUV);
+		_fe3d.billboard_setUvMultiplier(idPair.second, uvMultiplier);
+		_fe3d.billboard_setUvOffset(idPair.second, uvOffset);
 	}
 
 	for(const auto& idPair : _billboardAnimationsToStop)
@@ -130,13 +130,13 @@ void Animation2dEditor::_updateQuadAnimationExecution()
 			}
 		}
 
-		fvec2 multiplierUV = fvec2((1.0f / static_cast<float>(animation.getColumnCount())),
+		fvec2 uvMultiplier = fvec2((1.0f / static_cast<float>(animation.getColumnCount())),
 								   (1.0f / static_cast<float>(animation.getRowCount())));
-		fvec2 adderUV = fvec2((static_cast<float>(animation.getColumnIndex()) * multiplierUV.x),
-							  (static_cast<float>(animation.getRowIndex()) * multiplierUV.y));
+		fvec2 uvOffset = fvec2((static_cast<float>(animation.getColumnIndex()) * uvMultiplier.x),
+							   (static_cast<float>(animation.getRowIndex()) * uvMultiplier.y));
 
-		_fe3d.quad_setMultiplierUV(idPair.second, multiplierUV);
-		_fe3d.quad_setAdderUV(idPair.second, adderUV);
+		_fe3d.quad_setUvMultiplier(idPair.second, uvMultiplier);
+		_fe3d.quad_setUvOffset(idPair.second, uvOffset);
 	}
 
 	for(const auto& idPair : _quadAnimationsToStop)

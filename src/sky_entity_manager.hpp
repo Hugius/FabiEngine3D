@@ -42,7 +42,7 @@ private:
 
 	bool _isExposureEnabled = false;
 
-	const shared_ptr<RenderBuffer> _renderBuffer;
+	const shared_ptr<VertexBuffer> _vertexBuffer;
 	unordered_map<string, shared_ptr<SkyEntity>> _entities;
 	RenderBus& _renderBus;
 };

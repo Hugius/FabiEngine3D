@@ -31,8 +31,8 @@ BillboardEntityManager::BillboardEntityManager(RenderBus& renderBus, Camera& cam
 	:
 	_renderBus(renderBus),
 	_camera(camera),
-	_centeredRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, centeredBufferData, centeredBufferDataCount)),
-	_standingRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, standingBufferData, standingBufferDataCount))
+	_centeredVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, centeredBufferData, centeredBufferDataCount)),
+	_standingVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, standingBufferData, standingBufferDataCount))
 {
 
 }
@@ -41,7 +41,7 @@ shared_ptr<BillboardEntity> BillboardEntityManager::getEntity(const string& ID)
 {
 	auto iterator = _entities.find(ID);
 
-	if (iterator == _entities.end())
+	if(iterator == _entities.end())
 	{
 		Logger::throwError("BillboardEntityManager::getEntity");
 	}
@@ -59,22 +59,22 @@ const unordered_map<string, shared_ptr<BillboardEntity>>& BillboardEntityManager
 void BillboardEntityManager::createEntity(const string& ID, bool isCentered)
 {
 	_entities.insert(make_pair(ID, make_shared<BillboardEntity>(ID)));
-	getEntity(ID)->setRenderBuffer(isCentered ? _centeredRenderBuffer : _standingRenderBuffer);
+	getEntity(ID)->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
 	getEntity(ID)->setCentered(isCentered);
 }
 
 void BillboardEntityManager::update()
 {
-	for (const auto& [key, entity] : _entities)
+	for(const auto& [key, entity] : _entities)
 	{
 		entity->updateTransformation();
 
-		if (entity->isVisible())
+		if(entity->isVisible())
 		{
 			auto facingX = entity->isFacingCameraX();
 			auto facingY = entity->isFacingCameraY();
 			fvec3 rotation = entity->getRotation();
-			if (facingX || facingY)
+			if(facingX || facingY)
 			{
 				fvec3 position = (entity->getPosition() + fvec3(0.0f, (entity->getSize().y / 2.0f), 0.0f));
 
@@ -99,7 +99,7 @@ void BillboardEntityManager::update()
 
 void BillboardEntityManager::deleteEntity(const string& ID)
 {
-	if (!isEntityExisting(ID))
+	if(!isEntityExisting(ID))
 	{
 		Logger::throwError("BillboardEntityManager::deleteEntity");
 	}

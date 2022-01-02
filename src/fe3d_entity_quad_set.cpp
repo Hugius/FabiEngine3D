@@ -110,14 +110,14 @@ void FabiEngine3D::quad_setWireframeColor(const string& ID, fvec3 value)
 	_core->_quadEntityManager.getEntity(ID)->setWireframeColor(value);
 }
 
-void FabiEngine3D::quad_setMultiplierUV(const string& ID, fvec2 value)
+void FabiEngine3D::quad_setUvMultiplier(const string& ID, fvec2 value)
 {
-	_core->_quadEntityManager.getEntity(ID)->setMultiplierUV(value);
+	_core->_quadEntityManager.getEntity(ID)->setUvMultiplier(value);
 }
 
-void FabiEngine3D::quad_setAdderUV(const string& ID, fvec2 value)
+void FabiEngine3D::quad_setUvOffset(const string& ID, fvec2 value)
 {
-	_core->_quadEntityManager.getEntity(ID)->setAdderUV(value);
+	_core->_quadEntityManager.getEntity(ID)->setUvOffset(value);
 }
 
 void FabiEngine3D::quad_setMirroredHorizontally(const string& ID, bool value)

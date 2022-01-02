@@ -31,7 +31,7 @@ void BillboardEntityDepthRenderer::render(const shared_ptr<BillboardEntity> enti
 {
 	if(entity->isVisible())
 	{
-		const auto buffer = entity->getRenderBuffer();
+		const auto buffer = entity->getVertexBuffer();
 
 		_shader.uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
 		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
@@ -40,8 +40,8 @@ void BillboardEntityDepthRenderer::render(const shared_ptr<BillboardEntity> enti
 		_shader.uploadUniform("u_clippingY", clippingY);
 		_shader.uploadUniform("u_isUnderWater", isUnderWater);
 		_shader.uploadUniform("u_textureRepeat", entity->getTextureRepeat());
-		_shader.uploadUniform("u_multiplierUV", entity->getMultiplierUV());
-		_shader.uploadUniform("u_adderUV", entity->getAdderUV());
+		_shader.uploadUniform("u_uvMultiplier", entity->getUvMultiplier());
+		_shader.uploadUniform("u_uvOffset", entity->getUvOffset());
 		_shader.uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
 		if(entity->hasDiffuseMap())

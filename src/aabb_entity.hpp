@@ -1,7 +1,7 @@
 #pragma once
 
 #include "base_entity.hpp"
-#include "render_buffer.hpp"
+#include "vertex_buffer.hpp"
 #include "direction.hpp"
 #include "aabb_parent_entity_type.hpp"
 
@@ -14,7 +14,7 @@ class AabbEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void setRenderBuffer(shared_ptr<RenderBuffer> value);
+	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void updateTransformation();
 	void updateTransformationMatrix();
 	void setLocalPosition(fvec3 value);
@@ -54,7 +54,7 @@ public:
 	const bool mustFollowParentEntityTransformation() const;
 	const bool mustFollowParentEntityVisibility() const;
 
-	const shared_ptr<RenderBuffer> getRenderBuffer() const;
+	const shared_ptr<VertexBuffer> getVertexBuffer() const;
 	const AabbParentEntityType getParentEntityType() const;
 	const Direction getCollisionDirection() const;
 
@@ -81,7 +81,7 @@ private:
 	bool _isCollisionResponsive = true;
 	bool _hasCollided = false;
 
-	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
+	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
 	AabbParentEntityType _parentEntityType = AabbParentEntityType::BILLBOARD;
 	Direction _collisionDirection = Direction::X;
 };

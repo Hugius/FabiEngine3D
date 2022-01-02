@@ -64,8 +64,8 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 			bufferData.push_back(part->getPositions()[i].y);
 			bufferData.push_back(part->getPositions()[i].z);
 
-			bufferData.push_back(part->getUVs()[i].x);
-			bufferData.push_back(part->getUVs()[i].y);
+			bufferData.push_back(part->getUvs()[i].x);
+			bufferData.push_back(part->getUvs()[i].y);
 
 			bufferData.push_back(part->getNormals()[i].x);
 			bufferData.push_back(part->getNormals()[i].y);
@@ -78,7 +78,7 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 
 		entity->createPart(part->getID());
 
-		entity->setRenderBuffer(part->getID(), make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
+		entity->setVertexBuffer(part->getID(), make_shared<VertexBuffer>(VertexBufferType::POS_UV_NOR_TAN, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
 	}
 
 	entity->setMeshPath(meshPath);

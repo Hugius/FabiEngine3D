@@ -33,10 +33,14 @@ const unordered_map<string, shared_ptr<QuadEntity>>& QuadEntityManager::getEntit
 
 void QuadEntityManager::createEntity(const string& ID, bool isCentered)
 {
-	_entities.insert(make_pair(ID, make_shared<QuadEntity>(ID)));
-	getEntity(ID)->setVertexBuffer(isCentered ? _centeredVertexBuffer : _corneredVertexBuffer);
-	getEntity(ID)->setCentered(isCentered);
-	getEntity(ID)->setDepth(_renderBus.getGuiDepth());
+	auto entity = make_shared<QuadEntity>(ID);
+
+	_entities.insert(make_pair(ID, entity));
+
+	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _corneredVertexBuffer);
+	entity->setCentered(isCentered);
+	entity->setDepth(_renderBus.getGuiDepth());
+
 	_renderBus.setGuiDepth(_renderBus.getGuiDepth() + 1);
 }
 

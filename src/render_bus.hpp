@@ -12,18 +12,18 @@ using std::string;
 class RenderBus final
 {
 public:
-	void setPrimarySceneMap(TextureID value);
-	void setSecondarySceneMap(TextureID value);
-	void setPlanarReflectionMap(TextureID value);
-	void setWaterReflectionMap(TextureID value);
-	void setWaterRefractionMap(TextureID value);
-	void setShadowMap(TextureID value);
-	void setBloomMap(TextureID value);
-	void setDepthMap(TextureID value);
-	void setDofMap(TextureID value);
-	void setLensFlareMap(TextureID value);
-	void setMotionBlurMap(TextureID value);
-	void setFinalSceneMap(TextureID value);
+	void setPrimarySceneMap(shared_ptr<TextureBuffer> value);
+	void setSecondarySceneMap(shared_ptr<TextureBuffer> value);
+	void setPlanarReflectionMap(shared_ptr<TextureBuffer> value);
+	void setWaterReflectionMap(shared_ptr<TextureBuffer> value);
+	void setWaterRefractionMap(shared_ptr<TextureBuffer> value);
+	void setShadowMap(shared_ptr<TextureBuffer> value);
+	void setBloomMap(shared_ptr<TextureBuffer> value);
+	void setDepthMap(shared_ptr<TextureBuffer> value);
+	void setDofMap(shared_ptr<TextureBuffer> value);
+	void setLensFlareMap(shared_ptr<TextureBuffer> value);
+	void setMotionBlurMap(shared_ptr<TextureBuffer> value);
+	void setFinalSceneMap(shared_ptr<TextureBuffer> value);
 	void setCursorEntityID(const string& value);
 	void setLensFlareMapPath(const string& value);
 	void setViewMatrix(const mat44 value);
@@ -163,33 +163,33 @@ public:
 	const bool isTriangleCountingEnabled() const;
 	const bool isDofDynamic() const;
 
-	const TextureID getPrimarySceneMap() const;
-	const TextureID getSecondarySceneMap() const;
-	const TextureID getPlanarReflectionMap() const;
-	const TextureID getWaterReflectionMap() const;
-	const TextureID getWaterRefractionMap() const;
-	const TextureID getShadowMap() const;
-	const TextureID getBloomMap() const;
-	const TextureID getDepthMap() const;
-	const TextureID getDofMap() const;
-	const TextureID getLensFlareMap() const;
-	const TextureID getFinalSceneMap() const;
-	const TextureID getMotionBlurMap() const;
+	const shared_ptr<TextureBuffer> getPrimarySceneMap() const;
+	const shared_ptr<TextureBuffer> getSecondarySceneMap() const;
+	const shared_ptr<TextureBuffer> getPlanarReflectionMap() const;
+	const shared_ptr<TextureBuffer> getWaterReflectionMap() const;
+	const shared_ptr<TextureBuffer> getWaterRefractionMap() const;
+	const shared_ptr<TextureBuffer> getShadowMap() const;
+	const shared_ptr<TextureBuffer> getBloomMap() const;
+	const shared_ptr<TextureBuffer> getDepthMap() const;
+	const shared_ptr<TextureBuffer> getDofMap() const;
+	const shared_ptr<TextureBuffer> getLensFlareMap() const;
+	const shared_ptr<TextureBuffer> getFinalSceneMap() const;
+	const shared_ptr<TextureBuffer> getMotionBlurMap() const;
 	const BloomType getBloomType() const;
 
 private:
-	TextureID _primarySceneMap = 0;
-	TextureID _secondarySceneMap = 0;
-	TextureID _planarReflectionMap = 0;
-	TextureID _waterReflectionMap = 0;
-	TextureID _waterRefractionMap = 0;
-	TextureID _shadowMap = 0;
-	TextureID _bloomMap = 0;
-	TextureID _depthMap = 0;
-	TextureID _dofMap = 0;
-	TextureID _lensFlareMap = 0;
-	TextureID _finalSceneMap = 0;
-	TextureID _motionBlurMap = 0;
+	shared_ptr<TextureBuffer> _primarySceneMap = 0;
+	shared_ptr<TextureBuffer> _secondarySceneMap = 0;
+	shared_ptr<TextureBuffer> _planarReflectionMap = 0;
+	shared_ptr<TextureBuffer> _waterReflectionMap = 0;
+	shared_ptr<TextureBuffer> _waterRefractionMap = 0;
+	shared_ptr<TextureBuffer> _shadowMap = 0;
+	shared_ptr<TextureBuffer> _bloomMap = 0;
+	shared_ptr<TextureBuffer> _depthMap = 0;
+	shared_ptr<TextureBuffer> _dofMap = 0;
+	shared_ptr<TextureBuffer> _lensFlareMap = 0;
+	shared_ptr<TextureBuffer> _finalSceneMap = 0;
+	shared_ptr<TextureBuffer> _motionBlurMap = 0;
 
 	string _cursorEntityID = "";
 	string _lensFlareMapPath = "";

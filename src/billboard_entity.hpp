@@ -2,6 +2,7 @@
 
 #include "base_entity.hpp"
 #include "vertex_buffer.hpp"
+#include "texture_buffer.hpp"
 
 #include <memory>
 
@@ -24,8 +25,8 @@ public:
 	void setReflected(bool value);
 	void setBright(bool value);
 	void setWireframed(bool value);
-	void setDiffuseMap(TextureID value, bool isTextual);
-	void setEmissionMap(TextureID value);
+	void setDiffuseMap(shared_ptr<TextureBuffer> value, bool isTextual);
+	void setEmissionMap(shared_ptr<TextureBuffer> value);
 	void setPosition(fvec3 value);
 	void setRotation(fvec3 value);
 	void setSize(fvec2 value);
@@ -89,8 +90,8 @@ public:
 	const bool isCentered() const;
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
-	const TextureID getDiffuseMap() const;
-	const TextureID getEmissionMap() const;
+	const shared_ptr<TextureBuffer> getDiffuseMap() const;
+	const shared_ptr<TextureBuffer> getEmissionMap() const;
 
 private:
 	string _textContent = "";
@@ -134,6 +135,6 @@ private:
 	bool _isCentered = false;
 
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
-	TextureID _diffuseMap = 0;
-	TextureID _emissionMap = 0;
+	shared_ptr<TextureBuffer> _diffuseMap = nullptr;
+	shared_ptr<TextureBuffer> _emissionMap = nullptr;
 };

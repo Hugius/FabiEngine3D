@@ -7,7 +7,7 @@ shared_ptr<PointlightEntity> PointlightEntityManager::getEntity(const string& ID
 {
 	auto iterator = _entities.find(ID);
 
-	if (iterator == _entities.end())
+	if(iterator == _entities.end())
 	{
 		Logger::throwError("PointlightEntityManager::getEntity");
 	}
@@ -24,17 +24,19 @@ const unordered_map<string, shared_ptr<PointlightEntity>>& PointlightEntityManag
 
 void PointlightEntityManager::createEntity(const string& ID)
 {
-	if (getEntities().size() == MAX_LIGHT_COUNT)
+	if(getEntities().size() == MAX_LIGHT_COUNT)
 	{
 		Logger::throwError("PointlightEntityManager::createEntity");
 	}
 
-	_entities.insert(make_pair(ID, make_shared<PointlightEntity>(ID)));
+	auto entity = make_shared<PointlightEntity>(ID);
+
+	_entities.insert(make_pair(ID, entity));
 }
 
 void PointlightEntityManager::deleteEntity(const string& ID)
 {
-	if (!isEntityExisting(ID))
+	if(!isEntityExisting(ID))
 	{
 		Logger::throwError("PointlightEntityManager::deleteEntity");
 	}
@@ -54,7 +56,7 @@ const bool PointlightEntityManager::isEntityExisting(const string& ID)
 
 void PointlightEntityManager::update()
 {
-	for (const auto& [key, entity] : _entities)
+	for(const auto& [key, entity] : _entities)
 	{
 		entity->updateTransformation();
 	}

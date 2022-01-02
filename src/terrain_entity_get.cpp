@@ -1,46 +1,46 @@
 #include "terrain_entity.hpp"
 
-const TextureID TerrainEntity::getDiffuseMap() const
+const shared_ptr<TextureBuffer> TerrainEntity::getDiffuseMap() const
 {
 	return _diffuseMap;
 }
 
-const TextureID TerrainEntity::getNormalMap() const
+const shared_ptr<TextureBuffer> TerrainEntity::getNormalMap() const
 {
 	return _normalMap;
 }
 
-const TextureID TerrainEntity::getBlendMap() const
+const shared_ptr<TextureBuffer> TerrainEntity::getBlendMap() const
 {
 	return _blendMap;
 }
 
-const TextureID TerrainEntity::getRedDiffuseMap() const
+const shared_ptr<TextureBuffer> TerrainEntity::getRedDiffuseMap() const
 {
 	return _redDiffuseMap;
 }
 
-const TextureID TerrainEntity::getGreenDiffuseMap() const
+const shared_ptr<TextureBuffer> TerrainEntity::getGreenDiffuseMap() const
 {
 	return _greenDiffuseMap;
 }
 
-const TextureID TerrainEntity::getBlueDiffuseMap() const
+const shared_ptr<TextureBuffer> TerrainEntity::getBlueDiffuseMap() const
 {
 	return _blueDiffuseMap;
 }
 
-const TextureID TerrainEntity::getRedNormalMap() const
+const shared_ptr<TextureBuffer> TerrainEntity::getRedNormalMap() const
 {
 	return _redNormalMap;
 }
 
-const TextureID TerrainEntity::getGreenNormalMap() const
+const shared_ptr<TextureBuffer> TerrainEntity::getGreenNormalMap() const
 {
 	return _greenNormalMap;
 }
 
-const TextureID TerrainEntity::getBlueNormalMap() const
+const shared_ptr<TextureBuffer> TerrainEntity::getBlueNormalMap() const
 {
 	return _blueNormalMap;
 }

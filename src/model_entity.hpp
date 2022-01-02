@@ -28,11 +28,11 @@ public:
 	void setLevelOfDetailDistance(float value);
 	void setBright(bool value);
 	void setVertexBuffer(const string& partID, shared_ptr<VertexBuffer> value);
-	void setDiffuseMap(const string& partID, TextureID value);
-	void setEmissionMap(const string& partID, TextureID value);
-	void setSpecularMap(const string& partID, TextureID value);
-	void setReflectionMap(const string& partID, TextureID value);
-	void setNormalMap(const string& partID, TextureID value);
+	void setDiffuseMap(const string& partID, shared_ptr<TextureBuffer> value);
+	void setEmissionMap(const string& partID, shared_ptr<TextureBuffer> value);
+	void setSpecularMap(const string& partID, shared_ptr<TextureBuffer> value);
+	void setReflectionMap(const string& partID, shared_ptr<TextureBuffer> value);
+	void setNormalMap(const string& partID, shared_ptr<TextureBuffer> value);
 	void setBasePosition(fvec3 value);
 	void setBaseRotation(fvec3 value);
 	void setBaseRotationOrigin(fvec3 value);
@@ -130,11 +130,11 @@ public:
 	const bool hasNormalMap(const string& partID) const;
 
 	const shared_ptr<VertexBuffer> getVertexBuffer(const string& partID) const;
-	const TextureID getDiffuseMap(const string& partID) const;
-	const TextureID getEmissionMap(const string& partID) const;
-	const TextureID getSpecularMap(const string& partID) const;
-	const TextureID getReflectionMap(const string& partID) const;
-	const TextureID getNormalMap(const string& partID) const;
+	const shared_ptr<TextureBuffer> getDiffuseMap(const string& partID) const;
+	const shared_ptr<TextureBuffer> getEmissionMap(const string& partID) const;
+	const shared_ptr<TextureBuffer> getSpecularMap(const string& partID) const;
+	const shared_ptr<TextureBuffer> getReflectionMap(const string& partID) const;
+	const shared_ptr<TextureBuffer> getNormalMap(const string& partID) const;
 	const ReflectionType getReflectionType(const string& partID) const;
 	const DirectionOrder getRotationOrder() const;
 

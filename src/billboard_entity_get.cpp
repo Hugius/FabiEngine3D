@@ -10,12 +10,12 @@ const mat44& BillboardEntity::getTransformationMatrix() const
 	return _transformationMatrix;
 }
 
-const TextureID BillboardEntity::getDiffuseMap() const
+const shared_ptr<TextureBuffer> BillboardEntity::getDiffuseMap() const
 {
 	return _diffuseMap;
 }
 
-const TextureID BillboardEntity::getEmissionMap() const
+const shared_ptr<TextureBuffer> BillboardEntity::getEmissionMap() const
 {
 	return _emissionMap;
 }
@@ -147,12 +147,12 @@ const bool BillboardEntity::hasVertexBuffer() const
 
 const bool BillboardEntity::hasDiffuseMap() const
 {
-	return (_diffuseMap != 0);
+	return (_diffuseMap != nullptr);
 }
 
 const bool BillboardEntity::hasEmissionMap() const
 {
-	return (_emissionMap != 0);
+	return (_emissionMap != nullptr);
 }
 
 const bool BillboardEntity::isCentered() const

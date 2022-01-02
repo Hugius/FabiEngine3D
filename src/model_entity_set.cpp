@@ -124,27 +124,27 @@ void ModelEntity::setVertexBuffer(const string& partID, shared_ptr<VertexBuffer>
 	_parts[_getPartIndex(partID)].vertexBuffer = value;
 }
 
-void ModelEntity::setDiffuseMap(const string& partID, TextureID value)
+void ModelEntity::setDiffuseMap(const string& partID, shared_ptr<TextureBuffer> value)
 {
 	_parts[_getPartIndex(partID)].diffuseMap = value;
 }
 
-void ModelEntity::setEmissionMap(const string& partID, TextureID value)
+void ModelEntity::setEmissionMap(const string& partID, shared_ptr<TextureBuffer> value)
 {
 	_parts[_getPartIndex(partID)].emissionMap = value;
 }
 
-void ModelEntity::setSpecularMap(const string& partID, TextureID value)
+void ModelEntity::setSpecularMap(const string& partID, shared_ptr<TextureBuffer> value)
 {
 	_parts[_getPartIndex(partID)].specularMap = value;
 }
 
-void ModelEntity::setReflectionMap(const string& partID, TextureID value)
+void ModelEntity::setReflectionMap(const string& partID, shared_ptr<TextureBuffer> value)
 {
 	_parts[_getPartIndex(partID)].reflectionMap = value;
 }
 
-void ModelEntity::setNormalMap(const string& partID, TextureID value)
+void ModelEntity::setNormalMap(const string& partID, shared_ptr<TextureBuffer> value)
 {
 	_parts[_getPartIndex(partID)].normalMap = value;
 }

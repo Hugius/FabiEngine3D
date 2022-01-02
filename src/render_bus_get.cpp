@@ -1,61 +1,61 @@
 #include "render_bus.hpp"
 
-const TextureID RenderBus::getPlanarReflectionMap() const
+const shared_ptr<TextureBuffer> RenderBus::getPlanarReflectionMap() const
 {
 	return _planarReflectionMap;
 }
 
-const TextureID RenderBus::getWaterReflectionMap() const
+const shared_ptr<TextureBuffer> RenderBus::getWaterReflectionMap() const
 {
 	return _waterReflectionMap;
 }
 
-const TextureID RenderBus::getWaterRefractionMap() const
+const shared_ptr<TextureBuffer> RenderBus::getWaterRefractionMap() const
 {
 	return _waterRefractionMap;
 }
 
-const TextureID RenderBus::getBloomMap() const
+const shared_ptr<TextureBuffer> RenderBus::getBloomMap() const
 {
 	return _bloomMap;
 }
 
-const TextureID RenderBus::getPrimarySceneMap() const
+const shared_ptr<TextureBuffer> RenderBus::getPrimarySceneMap() const
 {
 	return _primarySceneMap;
 }
 
-const TextureID RenderBus::getSecondarySceneMap() const
+const shared_ptr<TextureBuffer> RenderBus::getSecondarySceneMap() const
 {
 	return _secondarySceneMap;
 }
 
-const TextureID RenderBus::getShadowMap() const
+const shared_ptr<TextureBuffer> RenderBus::getShadowMap() const
 {
 	return _shadowMap;
 }
 
-const TextureID RenderBus::getMotionBlurMap() const
+const shared_ptr<TextureBuffer> RenderBus::getMotionBlurMap() const
 {
 	return _motionBlurMap;
 }
 
-const TextureID RenderBus::getLensFlareMap() const
+const shared_ptr<TextureBuffer> RenderBus::getLensFlareMap() const
 {
 	return _lensFlareMap;
 }
 
-const TextureID RenderBus::getDepthMap() const
+const shared_ptr<TextureBuffer> RenderBus::getDepthMap() const
 {
 	return _depthMap;
 }
 
-const TextureID RenderBus::getDofMap() const
+const shared_ptr<TextureBuffer> RenderBus::getDofMap() const
 {
 	return _dofMap;
 }
 
-const TextureID RenderBus::getFinalSceneMap() const
+const shared_ptr<TextureBuffer> RenderBus::getFinalSceneMap() const
 {
 	return _finalSceneMap;
 }

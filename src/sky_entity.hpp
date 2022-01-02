@@ -19,7 +19,7 @@ public:
 	void updateRotationMatrix();
 	void setCubeMapPaths(const array<string, 6>& value);
 	void setColor(fvec3 value);
-	void setCubeMap(TextureID value);
+	void setCubeMap(shared_ptr<TextureBuffer> value);
 	void setInitialLightness(float value);
 	void setLightness(float value);
 	void setRotation(float value);
@@ -42,7 +42,7 @@ public:
 	const bool isWireframed() const;
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
-	const TextureID getCubeMap() const;
+	const shared_ptr<TextureBuffer> getCubeMap() const;
 
 private:
 	array<string, 6> _cubeMapPaths = {"", "", "", "", "", ""};
@@ -59,5 +59,5 @@ private:
 	bool _isWireframed = false;
 
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
-	TextureID _cubeMap = 0;
+	shared_ptr<TextureBuffer> _cubeMap = 0;
 };

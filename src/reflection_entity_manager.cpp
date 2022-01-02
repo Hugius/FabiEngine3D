@@ -7,7 +7,7 @@ shared_ptr<ReflectionEntity> ReflectionEntityManager::getEntity(const string& ID
 {
 	auto iterator = _entities.find(ID);
 
-	if (iterator == _entities.end())
+	if(iterator == _entities.end())
 	{
 		Logger::throwError("ReflectionEntityManager::getEntity");
 	}
@@ -24,11 +24,11 @@ const unordered_map<string, shared_ptr<ReflectionEntity>>& ReflectionEntityManag
 
 void ReflectionEntityManager::createEntity(const string& ID)
 {
-	_entities.insert(make_pair(ID, make_shared<ReflectionEntity>(ID)));
+	auto entity = make_shared<ReflectionEntity>(ID);
 
-	auto entity = getEntity(ID);
+	_entities.insert(make_pair(ID, entity));
 
-	TextureID cubeMap;
+	shared_ptr<TextureBuffer> cubeMap;
 	glGenTextures(1, &cubeMap);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMap);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -42,7 +42,7 @@ void ReflectionEntityManager::createEntity(const string& ID)
 
 void ReflectionEntityManager::update()
 {
-	for (const auto& [key, entity] : _entities)
+	for(const auto& [key, entity] : _entities)
 	{
 		entity->updateTransformation();
 	}
@@ -50,7 +50,7 @@ void ReflectionEntityManager::update()
 
 void ReflectionEntityManager::deleteEntity(const string& ID)
 {
-	if (!isEntityExisting(ID))
+	if(!isEntityExisting(ID))
 	{
 		Logger::throwError("ReflectionEntityManager::deleteEntity");
 	}

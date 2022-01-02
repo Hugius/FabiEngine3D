@@ -19,7 +19,7 @@ public:
 	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void setContent(const string& value);
 	void setFontMapPath(const string& value);
-	void setFontMap(TextureID value);
+	void setFontMap(shared_ptr<TextureBuffer> value);
 	void setMirroredHorizontally(bool value);
 	void setMirroredVertically(bool value);
 	void setTransparency(float value);
@@ -191,5 +191,5 @@ private:
 
 	vector<shared_ptr<QuadEntity>> _characterEntities;
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
-	TextureID _fontMap = 0;
+	shared_ptr<TextureBuffer> _fontMap = 0;
 };

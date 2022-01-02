@@ -5,62 +5,62 @@
 using std::max;
 using std::clamp;
 
-void RenderBus::setPlanarReflectionMap(TextureID value)
+void RenderBus::setPlanarReflectionMap(shared_ptr<TextureBuffer> value)
 {
 	_planarReflectionMap = value;
 }
 
-void RenderBus::setWaterReflectionMap(TextureID value)
+void RenderBus::setWaterReflectionMap(shared_ptr<TextureBuffer> value)
 {
 	_waterReflectionMap = value;
 }
 
-void RenderBus::setWaterRefractionMap(TextureID value)
+void RenderBus::setWaterRefractionMap(shared_ptr<TextureBuffer> value)
 {
 	_waterRefractionMap = value;
 }
 
-void RenderBus::setBloomMap(TextureID value)
+void RenderBus::setBloomMap(shared_ptr<TextureBuffer> value)
 {
 	_bloomMap = value;
 }
 
-void RenderBus::setPrimarySceneMap(TextureID value)
+void RenderBus::setPrimarySceneMap(shared_ptr<TextureBuffer> value)
 {
 	_primarySceneMap = value;
 }
 
-void RenderBus::setSecondarySceneMap(TextureID value)
+void RenderBus::setSecondarySceneMap(shared_ptr<TextureBuffer> value)
 {
 	_secondarySceneMap = value;
 }
 
-void RenderBus::setShadowMap(TextureID value)
+void RenderBus::setShadowMap(shared_ptr<TextureBuffer> value)
 {
 	_shadowMap = value;
 }
 
-void RenderBus::setMotionBlurMap(TextureID value)
+void RenderBus::setMotionBlurMap(shared_ptr<TextureBuffer> value)
 {
 	_motionBlurMap = value;
 }
 
-void RenderBus::setLensFlareMap(TextureID value)
+void RenderBus::setLensFlareMap(shared_ptr<TextureBuffer> value)
 {
 	_lensFlareMap = value;
 }
 
-void RenderBus::setDepthMap(TextureID value)
+void RenderBus::setDepthMap(shared_ptr<TextureBuffer> value)
 {
 	_depthMap = value;
 }
 
-void RenderBus::setDofMap(TextureID value)
+void RenderBus::setDofMap(shared_ptr<TextureBuffer> value)
 {
 	_dofMap = value;
 }
 
-void RenderBus::setFinalSceneMap(TextureID value)
+void RenderBus::setFinalSceneMap(shared_ptr<TextureBuffer> value)
 {
 	_finalSceneMap = value;
 }

@@ -115,13 +115,13 @@ void BillboardEntity::setFacingCameraY(bool value)
 	_isFacingCameraY = value;
 }
 
-void BillboardEntity::setDiffuseMap(TextureID value, bool isTextual)
+void BillboardEntity::setDiffuseMap(shared_ptr<TextureBuffer> value, bool isTextual)
 {
 	_diffuseMap = value;
 	_isTextual = isTextual;
 }
 
-void BillboardEntity::setEmissionMap(TextureID value)
+void BillboardEntity::setEmissionMap(shared_ptr<TextureBuffer> value)
 {
 	_emissionMap = value;
 }

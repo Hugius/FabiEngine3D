@@ -20,9 +20,9 @@ public:
 	void setRippleOffset(fvec2 value);
 	void setWaveOffset(fvec2 value);
 	void setColor(fvec3 value);
-	void setDudvMap(TextureID value);
-	void setNormalMap(TextureID value);
-	void setDisplacementMap(TextureID value);
+	void setDudvMap(shared_ptr<TextureBuffer> value);
+	void setNormalMap(shared_ptr<TextureBuffer> value);
+	void setDisplacementMap(shared_ptr<TextureBuffer> value);
 	void setDudvMapPath(const string& value);
 	void setNormalMapPath(const string& value);
 	void setDisplacementMapPath(const string& value);
@@ -71,9 +71,9 @@ public:
 	const shared_ptr<VertexBuffer> getLowQualityVertexBuffer() const;
 	const shared_ptr<VertexBuffer> getHighQualityVertexBuffer() const;
 	const WaterQuality getQuality() const;
-	const TextureID getDudvMap() const;
-	const TextureID getNormalMap() const;
-	const TextureID getDisplacementMap() const;
+	const shared_ptr<TextureBuffer> getDudvMap() const;
+	const shared_ptr<TextureBuffer> getNormalMap() const;
+	const shared_ptr<TextureBuffer> getDisplacementMap() const;
 
 private:
 	string _dudvMapPath = "";
@@ -103,7 +103,7 @@ private:
 	shared_ptr<VertexBuffer> _lowQualityVertexBuffer = nullptr;
 	shared_ptr<VertexBuffer> _highQualityVertexBuffer = nullptr;
 	WaterQuality _quality = WaterQuality::SKY;
-	TextureID _dudvMap = 0;
-	TextureID _normalMap = 0;
-	TextureID _displacementMap = 0;
+	shared_ptr<TextureBuffer> _dudvMap = 0;
+	shared_ptr<TextureBuffer> _normalMap = 0;
+	shared_ptr<TextureBuffer> _displacementMap = 0;
 };

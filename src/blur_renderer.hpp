@@ -15,10 +15,10 @@ public:
 	void loadCaptureBuffer(ivec2 bufferSize);
 	void resetCaptureBuffer();
 
-	const TextureID blurTexture(const shared_ptr<QuadEntity> entity, TextureID texture, unsigned int blurCount, float intensity, BlurDirection direction);
+	const shared_ptr<TextureBuffer> blurTexture(const shared_ptr<QuadEntity> entity, shared_ptr<TextureBuffer> texture, unsigned int blurCount, float intensity, BlurDirection direction);
 
 private:
-	void _render(const shared_ptr<QuadEntity> entity, TextureID texture);
+	void _render(const shared_ptr<QuadEntity> entity, shared_ptr<TextureBuffer> texture);
 
 	CaptureBuffer _captureBuffer;
 };

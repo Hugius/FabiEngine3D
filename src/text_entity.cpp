@@ -149,7 +149,7 @@ void TextEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
 	_vertexBuffer = value;
 }
 
-void TextEntity::setFontMap(TextureID value)
+void TextEntity::setFontMap(shared_ptr<TextureBuffer> value)
 {
 	_fontMap = value;
 }

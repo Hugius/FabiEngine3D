@@ -51,7 +51,7 @@ void ReflectionEntity::moveTo(fvec3 target, float speed)
 	_positionTargetSpeed = speed;
 }
 
-void ReflectionEntity::setCubeMap(TextureID value)
+void ReflectionEntity::setCubeMap(shared_ptr<TextureBuffer> value)
 {
 	_cubeMap = value;
 }
@@ -66,7 +66,7 @@ const bool ReflectionEntity::mustCapture() const
 	return _mustCapture;
 }
 
-const TextureID ReflectionEntity::getCubeMap() const
+const shared_ptr<TextureBuffer> ReflectionEntity::getCubeMap() const
 {
 	return _cubeMap;
 }

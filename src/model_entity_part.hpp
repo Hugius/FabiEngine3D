@@ -50,10 +50,10 @@ struct ModelEntityPart final
 	bool isWireframed = false;
 
 	shared_ptr<VertexBuffer> vertexBuffer = nullptr;
-	TextureID diffuseMap = 0;
-	TextureID emissionMap = 0;
-	TextureID specularMap = 0;
-	TextureID reflectionMap = 0;
-	TextureID normalMap = 0;
+	shared_ptr<TextureBuffer> diffuseMap = 0;
+	shared_ptr<TextureBuffer> emissionMap = 0;
+	shared_ptr<TextureBuffer> specularMap = 0;
+	shared_ptr<TextureBuffer> reflectionMap = 0;
+	shared_ptr<TextureBuffer> normalMap = 0;
 	ReflectionType reflectionType = ReflectionType::CUBE;
 };

@@ -19,13 +19,13 @@ public:
 	void setPosition(fvec3 value);
 	void move(fvec3 value);
 	void moveTo(fvec3 target, float speed);
-	void setCubeMap(TextureID value);
+	void setCubeMap(shared_ptr<TextureBuffer> value);
 
 	const fvec3 getPosition() const;
 
 	const bool mustCapture() const;
 
-	const TextureID getCubeMap() const;
+	const shared_ptr<TextureBuffer> getCubeMap() const;
 
 private:
 	fvec3 _position = fvec3(0.0f);
@@ -36,5 +36,5 @@ private:
 	bool _mustCapture = false;
 	bool _isCaptured = false;
 
-	TextureID _cubeMap;
+	shared_ptr<TextureBuffer> _cubeMap;
 };

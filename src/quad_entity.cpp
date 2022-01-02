@@ -68,7 +68,7 @@ void QuadEntity::updateTransformationMatrix()
 	_transformationMatrix = (translationMatrix * rotationMatrix * scalingMatrix);
 }
 
-void QuadEntity::setDiffuseMap(TextureID value)
+void QuadEntity::setDiffuseMap(shared_ptr<TextureBuffer> value)
 {
 	_diffuseMap = value;
 }
@@ -191,7 +191,7 @@ const shared_ptr<VertexBuffer> QuadEntity::getVertexBuffer() const
 	return _vertexBuffer;
 }
 
-const TextureID QuadEntity::getDiffuseMap() const
+const shared_ptr<TextureBuffer> QuadEntity::getDiffuseMap() const
 {
 	return _diffuseMap;
 }

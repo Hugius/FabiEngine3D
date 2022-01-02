@@ -25,7 +25,7 @@ void SkyEntity::setColor(fvec3 value)
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void SkyEntity::setCubeMap(TextureID value)
+void SkyEntity::setCubeMap(shared_ptr<TextureBuffer> value)
 {
 	_cubeMap = value;
 }
@@ -80,7 +80,7 @@ const fvec3 SkyEntity::getColor() const
 	return _color;
 }
 
-const TextureID SkyEntity::getCubeMap() const
+const shared_ptr<TextureBuffer> SkyEntity::getCubeMap() const
 {
 	return _cubeMap;
 }

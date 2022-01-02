@@ -58,9 +58,12 @@ const unordered_map<string, shared_ptr<BillboardEntity>>& BillboardEntityManager
 
 void BillboardEntityManager::createEntity(const string& ID, bool isCentered)
 {
-	_entities.insert(make_pair(ID, make_shared<BillboardEntity>(ID)));
-	getEntity(ID)->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
-	getEntity(ID)->setCentered(isCentered);
+	auto entity = make_shared<BillboardEntity>(ID);
+
+	_entities.insert(make_pair(ID, entity));
+
+	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
+	entity->setCentered(isCentered);
 }
 
 void BillboardEntityManager::update()

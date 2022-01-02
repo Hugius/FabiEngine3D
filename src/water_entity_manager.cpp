@@ -49,9 +49,11 @@ void WaterEntityManager::selectWater(const string& ID)
 
 void WaterEntityManager::createEntity(const string& ID)
 {
-	_entities.insert(make_pair(ID, make_shared<WaterEntity>(ID)));
+	auto entity = make_shared<WaterEntity>(ID);
 
-	_loadMesh(getEntity(ID), 0.0f);
+	_entities.insert(make_pair(ID, entity));
+
+	_loadMesh(entity, 0.0f);
 }
 
 void WaterEntityManager::deleteEntity(const string& ID)

@@ -33,10 +33,14 @@ const unordered_map<string, shared_ptr<TextEntity>>& TextEntityManager::getEntit
 
 void TextEntityManager::createEntity(const string& ID, bool isCentered)
 {
-	_entities.insert(make_pair(ID, make_shared<TextEntity>(ID)));
-	getEntity(ID)->setVertexBuffer(_vertexBuffer);
-	getEntity(ID)->setCentered(isCentered);
-	getEntity(ID)->setDepth(_renderBus.getGuiDepth());
+	auto entity = make_shared<TextEntity>(ID);
+
+	_entities.insert(make_pair(ID, entity));
+
+	entity->setVertexBuffer(_vertexBuffer);
+	entity->setCentered(isCentered);
+	entity->setDepth(_renderBus.getGuiDepth());
+
 	_renderBus.setGuiDepth(_renderBus.getGuiDepth() + 1);
 }
 

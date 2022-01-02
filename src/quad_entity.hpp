@@ -15,7 +15,7 @@ public:
 	void setVertexBuffer(shared_ptr<VertexBuffer> value);
 	void updateTransformation();
 	void updateTransformationMatrix();
-	void setDiffuseMap(TextureID value);
+	void setDiffuseMap(shared_ptr<TextureBuffer> value);
 	void setDiffuseMapPath(const string& value);
 	void setMirroredHorizontally(bool value);
 	void setMirroredVertically(bool value);
@@ -67,7 +67,7 @@ public:
 	const bool hasDiffuseMap() const;
 
 	const shared_ptr<VertexBuffer> getVertexBuffer() const;
-	const TextureID getDiffuseMap() const;
+	const shared_ptr<TextureBuffer> getDiffuseMap() const;
 
 private:
 	mat44 _transformationMatrix = mat44(1.0f);
@@ -102,5 +102,5 @@ private:
 	bool _isWireframed = false;
 
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
-	TextureID _diffuseMap = 0;
+	shared_ptr<TextureBuffer> _diffuseMap = 0;
 };

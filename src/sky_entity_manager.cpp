@@ -129,8 +129,11 @@ void SkyEntityManager::selectMixSky(const string& ID)
 
 void SkyEntityManager::createEntity(const string& ID)
 {
-	_entities.insert(make_pair(ID, make_shared<SkyEntity>(ID)));
-	getEntity(ID)->setVertexBuffer(_vertexBuffer);
+	auto entity = make_shared<SkyEntity>(ID);
+
+	_entities.insert(make_pair(ID, entity));
+
+	entity->setVertexBuffer(_vertexBuffer);
 }
 
 void SkyEntityManager::update()

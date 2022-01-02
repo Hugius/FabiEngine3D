@@ -34,7 +34,9 @@ const unordered_map<string, shared_ptr<ModelEntity>>& ModelEntityManager::getEnt
 
 void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 {
-	_entities.insert(make_pair(ID, make_shared<ModelEntity>(ID)));
+	auto entity = make_shared<ModelEntity>(ID);
+
+	_entities.insert(make_pair(ID, entity));
 
 	auto partsPointer = _meshLoader.loadMesh(meshPath);
 
@@ -51,8 +53,6 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 		deleteEntity(ID);
 		return;
 	}
-
-	auto entity = getEntity(ID);
 
 	for(const auto& part : parts)
 	{

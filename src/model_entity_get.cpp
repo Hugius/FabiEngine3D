@@ -11,27 +11,27 @@ const mat44& ModelEntity::getTransformationMatrix(const string& partID) const
 	return _parts[_getPartIndex(partID)].transformationMatrix;
 }
 
-const TextureID ModelEntity::getDiffuseMap(const string& partID) const
+const shared_ptr<TextureBuffer> ModelEntity::getDiffuseMap(const string& partID) const
 {
 	return _parts[_getPartIndex(partID)].diffuseMap;
 }
 
-const TextureID ModelEntity::getEmissionMap(const string& partID) const
+const shared_ptr<TextureBuffer> ModelEntity::getEmissionMap(const string& partID) const
 {
 	return _parts[_getPartIndex(partID)].emissionMap;
 }
 
-const TextureID ModelEntity::getSpecularMap(const string& partID) const
+const shared_ptr<TextureBuffer> ModelEntity::getSpecularMap(const string& partID) const
 {
 	return _parts[_getPartIndex(partID)].specularMap;
 }
 
-const TextureID ModelEntity::getReflectionMap(const string& partID) const
+const shared_ptr<TextureBuffer> ModelEntity::getReflectionMap(const string& partID) const
 {
 	return _parts[_getPartIndex(partID)].reflectionMap;
 }
 
-const TextureID ModelEntity::getNormalMap(const string& partID) const
+const shared_ptr<TextureBuffer> ModelEntity::getNormalMap(const string& partID) const
 {
 	return _parts[_getPartIndex(partID)].normalMap;
 }

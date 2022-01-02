@@ -15,17 +15,17 @@ void WaterEntity::setColor(fvec3 value)
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void WaterEntity::setDudvMap(TextureID value)
+void WaterEntity::setDudvMap(shared_ptr<TextureBuffer> value)
 {
 	_dudvMap = value;
 }
 
-void WaterEntity::setNormalMap(TextureID value)
+void WaterEntity::setNormalMap(shared_ptr<TextureBuffer> value)
 {
 	_normalMap = value;
 }
 
-void WaterEntity::setDisplacementMap(TextureID value)
+void WaterEntity::setDisplacementMap(shared_ptr<TextureBuffer> value)
 {
 	_displacementMap = value;
 }
@@ -140,17 +140,17 @@ const fvec3 WaterEntity::getColor() const
 	return _color;
 }
 
-const TextureID WaterEntity::getDudvMap() const
+const shared_ptr<TextureBuffer> WaterEntity::getDudvMap() const
 {
 	return _dudvMap;
 }
 
-const TextureID WaterEntity::getNormalMap() const
+const shared_ptr<TextureBuffer> WaterEntity::getNormalMap() const
 {
 	return _normalMap;
 }
 
-const TextureID WaterEntity::getDisplacementMap() const
+const shared_ptr<TextureBuffer> WaterEntity::getDisplacementMap() const
 {
 	return _displacementMap;
 }

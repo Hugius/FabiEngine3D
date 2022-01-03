@@ -10,9 +10,9 @@ void BloomRenderer::bind()
 	_shader.uploadUniform("u_isBloomEnabled", _renderBus.isBloomEnabled());
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap()->getTexture());
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getBloomMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getBloomMap()->getTexture());
 }
 
 void BloomRenderer::unbind()

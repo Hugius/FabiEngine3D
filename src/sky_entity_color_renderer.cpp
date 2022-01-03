@@ -40,7 +40,7 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, cons
 		if(mainEntity->hasCubeMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, mainEntity->getCubeMap());
+			glBindTexture(GL_TEXTURE_CUBE_MAP, mainEntity->getCubeMap()->getTexture());
 		}
 
 		if(mixEntity != nullptr)
@@ -48,7 +48,7 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, cons
 			if(mixEntity->hasCubeMap())
 			{
 				glActiveTexture(GL_TEXTURE1);
-				glBindTexture(GL_TEXTURE_CUBE_MAP, mixEntity->getCubeMap());
+				glBindTexture(GL_TEXTURE_CUBE_MAP, mixEntity->getCubeMap()->getTexture());
 			}
 		}
 

@@ -50,9 +50,9 @@ void ModelEntityColorRenderer::bind()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getPlanarReflectionMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getPlanarReflectionMap()->getTexture());
 	glActiveTexture(GL_TEXTURE3);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getShadowMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getShadowMap()->getTexture());
 }
 
 void ModelEntityColorRenderer::unbind()
@@ -138,12 +138,12 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		if(!entity->getPreviousReflectionEntityID().empty())
 		{
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntities.at(entity->getPreviousReflectionEntityID())->getCubeMap());
+			glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntities.at(entity->getPreviousReflectionEntityID())->getCubeMap()->getTexture());
 		}
 		if(!entity->getCurrentReflectionEntityID().empty())
 		{
 			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntities.at(entity->getCurrentReflectionEntityID())->getCubeMap());
+			glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntities.at(entity->getCurrentReflectionEntityID())->getCubeMap()->getTexture());
 		}
 
 		for(const auto& partID : entity->getPartIDs())
@@ -182,27 +182,27 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			if(entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE4);
-				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID));
+				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID)->getTexture());
 			}
 			if(entity->hasEmissionMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE5);
-				glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap(partID));
+				glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap(partID)->getTexture());
 			}
 			if(entity->hasSpecularMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE6);
-				glBindTexture(GL_TEXTURE_2D, entity->getSpecularMap(partID));
+				glBindTexture(GL_TEXTURE_2D, entity->getSpecularMap(partID)->getTexture());
 			}
 			if(entity->hasReflectionMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE7);
-				glBindTexture(GL_TEXTURE_2D, entity->getReflectionMap(partID));
+				glBindTexture(GL_TEXTURE_2D, entity->getReflectionMap(partID)->getTexture());
 			}
 			if(entity->hasNormalMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE8);
-				glBindTexture(GL_TEXTURE_2D, entity->getNormalMap(partID));
+				glBindTexture(GL_TEXTURE_2D, entity->getNormalMap(partID)->getTexture());
 			}
 
 			glBindVertexArray(buffer->getVAO());

@@ -114,12 +114,13 @@ void FabiEngine3D::billboard_setDiffuseMap(const string& ID, const string& value
 {
 	if(value.empty())
 	{
-		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(0, false);
+		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(nullptr, false);
 		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMapPath("");
 	}
 	else
 	{
-		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.load2dTexture(value, true, true), false);
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader.loadImage(value), true, true);
+		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(texture, false);
 		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMapPath(value);
 	}
 }
@@ -133,7 +134,8 @@ void FabiEngine3D::billboard_setEmissionMap(const string& ID, const string& valu
 	}
 	else
 	{
-		_core->_billboardEntityManager.getEntity(ID)->setEmissionMap(_core->_textureLoader.load2dTexture(value, true, true));
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader.loadImage(value), true, true);
+		_core->_billboardEntityManager.getEntity(ID)->setEmissionMap(texture);
 		_core->_billboardEntityManager.getEntity(ID)->setEmissionMapPath(value);
 	}
 }

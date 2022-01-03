@@ -1,10 +1,7 @@
 #include "base_entity.hpp"
 #include "vertex_buffer.hpp"
 #include "reflection_type.hpp"
-
-#include <memory>
-
-using std::shared_ptr;
+#include "texture_buffer.hpp"
 
 struct ModelEntityPart final
 {
@@ -50,10 +47,10 @@ struct ModelEntityPart final
 	bool isWireframed = false;
 
 	shared_ptr<VertexBuffer> vertexBuffer = nullptr;
-	shared_ptr<TextureBuffer> diffuseMap = 0;
-	shared_ptr<TextureBuffer> emissionMap = 0;
-	shared_ptr<TextureBuffer> specularMap = 0;
-	shared_ptr<TextureBuffer> reflectionMap = 0;
-	shared_ptr<TextureBuffer> normalMap = 0;
+	shared_ptr<TextureBuffer> diffuseMap = nullptr;
+	shared_ptr<TextureBuffer> emissionMap = nullptr;
+	shared_ptr<TextureBuffer> specularMap = nullptr;
+	shared_ptr<TextureBuffer> reflectionMap = nullptr;
+	shared_ptr<TextureBuffer> normalMap = nullptr;
 	ReflectionType reflectionType = ReflectionType::CUBE;
 };

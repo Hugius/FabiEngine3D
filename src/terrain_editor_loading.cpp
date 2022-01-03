@@ -9,11 +9,11 @@
 using std::ifstream;
 using std::istringstream;
 
-const vector<string> TerrainEditor::getTexturePathsFromFile() const
+const vector<string> TerrainEditor::getImagePathsFromFile() const
 {
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("TerrainEditor::getTexturePathsFromFile");
+		Logger::throwError("TerrainEditor::getImagePathsFromFile");
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
@@ -58,6 +58,7 @@ const vector<string> TerrainEditor::getTexturePathsFromFile() const
 			greenNormalMapPath >>
 			blueNormalMapPath;
 
+		heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 		normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
 		redNormalMapPath = (redNormalMapPath == "?") ? "" : redNormalMapPath;
@@ -68,6 +69,7 @@ const vector<string> TerrainEditor::getTexturePathsFromFile() const
 		greenDiffuseMapPath = (greenDiffuseMapPath == "?") ? "" : greenDiffuseMapPath;
 		blueDiffuseMapPath = (blueDiffuseMapPath == "?") ? "" : blueDiffuseMapPath;
 
+		replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 		replace(redNormalMapPath.begin(), redNormalMapPath.end(), '?', ' ');
@@ -77,6 +79,16 @@ const vector<string> TerrainEditor::getTexturePathsFromFile() const
 		replace(redDiffuseMapPath.begin(), redDiffuseMapPath.end(), '?', ' ');
 		replace(greenDiffuseMapPath.begin(), greenDiffuseMapPath.end(), '?', ' ');
 		replace(blueDiffuseMapPath.begin(), blueDiffuseMapPath.end(), '?', ' ');
+
+		if(!heightMapPath.empty())
+		{
+			if(!Config::getInst().isApplicationExported())
+			{
+				heightMapPath = string("projects\\" + _currentProjectID + "\\" + heightMapPath);
+			}
+
+			texturePaths.push_back(heightMapPath);
+		}
 
 		if(!diffuseMapPath.empty())
 		{
@@ -172,57 +184,6 @@ const vector<string> TerrainEditor::getTexturePathsFromFile() const
 	file.close();
 
 	return texturePaths;
-}
-
-const vector<string> TerrainEditor::getImagePathsFromFile() const
-{
-	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
-	{
-		Logger::throwError("TerrainEditor::getImagePathsFromFile");
-	}
-
-	const auto isExported = Config::getInst().isApplicationExported();
-	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\terrain.fe3d");
-
-	if(!Tools::isFileExisting(filePath))
-	{
-		Logger::throwWarning("Project corrupted: file `terrain.fe3d` missing!");
-		return {};
-	}
-
-	ifstream file(filePath);
-
-	vector<string> imagePaths;
-	string line;
-	while(getline(file, line))
-	{
-		string terrainID, heightMapPath;
-
-		istringstream iss(line);
-
-		iss >>
-			terrainID >>
-			heightMapPath;
-
-		heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
-
-		replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
-
-		if(!heightMapPath.empty())
-		{
-			if(!Config::getInst().isApplicationExported())
-			{
-				heightMapPath = string("projects\\" + _currentProjectID + "\\" + heightMapPath);
-			}
-
-			imagePaths.push_back(heightMapPath);
-		}
-	}
-
-	file.close();
-
-	return imagePaths;
 }
 
 const bool TerrainEditor::loadFromFile()

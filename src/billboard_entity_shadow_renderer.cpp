@@ -41,7 +41,7 @@ void BillboardEntityShadowRenderer::render(const shared_ptr<BillboardEntity> ent
 		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
+			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap()->getTexture());
 		}
 
 		glBindVertexArray(buffer->getVAO());

@@ -14,7 +14,6 @@ public:
 	void unload();
 
 	const vector<string> getImagePathsFromFile() const;
-	const vector<string> getTexturePathsFromFile() const;
 	const vector<string>& getLoadedIDs();
 
 	const bool loadFromFile();

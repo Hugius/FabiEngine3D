@@ -16,11 +16,11 @@ void DofRenderer::bind()
 	_shader.uploadUniform("u_isDofDynamic", _renderBus.isDofDynamic());
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getDepthMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getDepthMap()->getTexture());
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap()->getTexture());
 	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getDofMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getDofMap()->getTexture());
 }
 
 void DofRenderer::unbind()

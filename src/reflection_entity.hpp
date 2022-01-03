@@ -3,6 +3,7 @@
 #include "base_entity.hpp"
 #include "mathematics.hpp"
 #include "render_utils.hpp"
+#include "texture_buffer.hpp"
 
 #include <array>
 

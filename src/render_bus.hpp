@@ -4,6 +4,7 @@
 #include "bloom_type.hpp"
 #include "render_utils.hpp"
 #include "configuration.hpp"
+#include "texture_buffer.hpp"
 
 #include <string>
 
@@ -178,18 +179,18 @@ public:
 	const BloomType getBloomType() const;
 
 private:
-	shared_ptr<TextureBuffer> _primarySceneMap = 0;
-	shared_ptr<TextureBuffer> _secondarySceneMap = 0;
-	shared_ptr<TextureBuffer> _planarReflectionMap = 0;
-	shared_ptr<TextureBuffer> _waterReflectionMap = 0;
-	shared_ptr<TextureBuffer> _waterRefractionMap = 0;
-	shared_ptr<TextureBuffer> _shadowMap = 0;
-	shared_ptr<TextureBuffer> _bloomMap = 0;
-	shared_ptr<TextureBuffer> _depthMap = 0;
-	shared_ptr<TextureBuffer> _dofMap = 0;
-	shared_ptr<TextureBuffer> _lensFlareMap = 0;
-	shared_ptr<TextureBuffer> _finalSceneMap = 0;
-	shared_ptr<TextureBuffer> _motionBlurMap = 0;
+	shared_ptr<TextureBuffer> _primarySceneMap = nullptr;
+	shared_ptr<TextureBuffer> _secondarySceneMap = nullptr;
+	shared_ptr<TextureBuffer> _planarReflectionMap = nullptr;
+	shared_ptr<TextureBuffer> _waterReflectionMap = nullptr;
+	shared_ptr<TextureBuffer> _waterRefractionMap = nullptr;
+	shared_ptr<TextureBuffer> _shadowMap = nullptr;
+	shared_ptr<TextureBuffer> _bloomMap = nullptr;
+	shared_ptr<TextureBuffer> _depthMap = nullptr;
+	shared_ptr<TextureBuffer> _dofMap = nullptr;
+	shared_ptr<TextureBuffer> _lensFlareMap = nullptr;
+	shared_ptr<TextureBuffer> _finalSceneMap = nullptr;
+	shared_ptr<TextureBuffer> _motionBlurMap = nullptr;
 
 	string _cursorEntityID = "";
 	string _lensFlareMapPath = "";

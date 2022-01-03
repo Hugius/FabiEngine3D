@@ -13,14 +13,13 @@ Core::Core(FabiEngine3D& fe3d)
 	_sound2dManager(_audioLoader),
 	_sound3dManager(_audioLoader),
 	_shadowGenerator(_renderBus),
-	_textureLoader(_renderBus),
 	_camera(_renderBus, _window),
 	_skyEntityManager(_renderBus),
-	_terrainEntityManager(_textureLoader),
+	_terrainEntityManager(_imageLoader),
 	_modelEntityManager(_meshLoader, _renderBus, _timer),
 	_billboardEntityManager(_renderBus, _camera),
 	_quadEntityManager(_renderBus),
-	_textEntityManager(_textureLoader, _renderBus),
+	_textEntityManager(_imageLoader, _renderBus),
 	_raycaster(_renderBus, _terrainEntityManager),
 	_masterRenderer(_renderBus, _timer, _camera, _shadowGenerator)
 {

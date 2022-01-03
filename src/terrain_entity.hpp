@@ -2,6 +2,7 @@
 
 #include "base_entity.hpp"
 #include "vertex_buffer.hpp"
+#include "texture_buffer.hpp"
 
 #include <memory>
 
@@ -124,13 +125,13 @@ private:
 	bool _isWireframed = false;
 
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
-	shared_ptr<TextureBuffer> _diffuseMap = 0;
-	shared_ptr<TextureBuffer> _normalMap = 0;
-	shared_ptr<TextureBuffer> _blendMap = 0;
-	shared_ptr<TextureBuffer> _redDiffuseMap = 0;
-	shared_ptr<TextureBuffer> _greenDiffuseMap = 0;
-	shared_ptr<TextureBuffer> _blueDiffuseMap = 0;
-	shared_ptr<TextureBuffer> _redNormalMap = 0;
-	shared_ptr<TextureBuffer> _greenNormalMap = 0;
-	shared_ptr<TextureBuffer> _blueNormalMap = 0;
+	shared_ptr<TextureBuffer> _diffuseMap = nullptr;
+	shared_ptr<TextureBuffer> _normalMap = nullptr;
+	shared_ptr<TextureBuffer> _blendMap = nullptr;
+	shared_ptr<TextureBuffer> _redDiffuseMap = nullptr;
+	shared_ptr<TextureBuffer> _greenDiffuseMap = nullptr;
+	shared_ptr<TextureBuffer> _blueDiffuseMap = nullptr;
+	shared_ptr<TextureBuffer> _redNormalMap = nullptr;
+	shared_ptr<TextureBuffer> _greenNormalMap = nullptr;
+	shared_ptr<TextureBuffer> _blueNormalMap = nullptr;
 };

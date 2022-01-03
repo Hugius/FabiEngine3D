@@ -90,7 +90,7 @@ void BillboardEditor::_updateTexturingMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clear2dTextureCache(finalFilePath);
+			_fe3d.misc_clearImageCache(finalFilePath);
 			_fe3d.billboard_setDiffuseMap(_currentBillboardID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
@@ -123,7 +123,7 @@ void BillboardEditor::_updateTexturingMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clear2dTextureCache(finalFilePath);
+			_fe3d.misc_clearImageCache(finalFilePath);
 			_fe3d.billboard_setEmissionMap(_currentBillboardID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())

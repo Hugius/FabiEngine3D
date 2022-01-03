@@ -3,6 +3,7 @@
 #include "base_entity.hpp"
 #include "vertex_buffer.hpp"
 #include "water_quality.hpp"
+#include "texture_buffer.hpp"
 
 #include <memory>
 
@@ -103,7 +104,7 @@ private:
 	shared_ptr<VertexBuffer> _lowQualityVertexBuffer = nullptr;
 	shared_ptr<VertexBuffer> _highQualityVertexBuffer = nullptr;
 	WaterQuality _quality = WaterQuality::SKY;
-	shared_ptr<TextureBuffer> _dudvMap = 0;
-	shared_ptr<TextureBuffer> _normalMap = 0;
-	shared_ptr<TextureBuffer> _displacementMap = 0;
+	shared_ptr<TextureBuffer> _dudvMap = nullptr;
+	shared_ptr<TextureBuffer> _normalMap = nullptr;
+	shared_ptr<TextureBuffer> _displacementMap = nullptr;
 };

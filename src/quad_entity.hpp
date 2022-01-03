@@ -2,6 +2,7 @@
 
 #include "base_entity.hpp"
 #include "vertex_buffer.hpp"
+#include "texture_buffer.hpp"
 
 #include <memory>
 
@@ -102,5 +103,5 @@ private:
 	bool _isWireframed = false;
 
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
-	shared_ptr<TextureBuffer> _diffuseMap = 0;
+	shared_ptr<TextureBuffer> _diffuseMap = nullptr;
 };

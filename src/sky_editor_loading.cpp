@@ -9,11 +9,11 @@
 using std::ifstream;
 using std::istringstream;
 
-const vector<array<string, 6>> SkyEditor::getTexturePathsFromFile() const
+const vector<string> SkyEditor::getImagePathsFromFile() const
 {
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("SkyEditor::getTexturePathsFromFile");
+		Logger::throwError("SkyEditor::getImagePathsFromFile");
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();
@@ -28,7 +28,7 @@ const vector<array<string, 6>> SkyEditor::getTexturePathsFromFile() const
 
 	ifstream file(filePath);
 
-	vector<array<string, 6>> texturePaths;
+	vector<string> imagePaths;
 	string line;
 	while(getline(file, line))
 	{
@@ -46,24 +46,24 @@ const vector<array<string, 6>> SkyEditor::getTexturePathsFromFile() const
 			cubeMapPaths[4] >>
 			cubeMapPaths[5];
 
-		for(auto& diffuseMapPath : cubeMapPaths)
+		for(auto& cubeMapPath : cubeMapPaths)
 		{
-			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+			cubeMapPath = (cubeMapPath == "?") ? "" : cubeMapPath;
 
-			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+			replace(cubeMapPath.begin(), cubeMapPath.end(), '?', ' ');
 
 			if(!Config::getInst().isApplicationExported())
 			{
-				diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
+				cubeMapPath = string("projects\\" + _currentProjectID + "\\" + cubeMapPath);
 			}
-		}
 
-		texturePaths.push_back(cubeMapPaths);
+			imagePaths.push_back(cubeMapPath);
+		}
 	}
 
 	file.close();
 
-	return texturePaths;
+	return imagePaths;
 }
 
 const bool SkyEditor::loadFromFile()

@@ -7,7 +7,7 @@
 
 using std::clamp;
 
-const shared_ptr<Image> ImageLoader::_loadImage(const string& filePath, bool mustFlip)
+shared_ptr<Image> ImageLoader::_loadImage(const string& filePath, bool mustFlip)
 {
 	const auto rootPath = Tools::getRootDirectoryPath();
 

@@ -24,8 +24,9 @@ void FabiEngine3D::text_setVisible(const string& ID, bool value)
 void FabiEngine3D::text_setFontMap(const string& ID, const string& value)
 {
 	auto entity = _core->_textEntityManager.getEntity(ID);
+	auto texture = make_shared<TextureBuffer>(_core->_imageLoader.loadImage(value), true, false);
 
-	entity->setFontMap(_core->_textureLoader.load2dTexture(value, true, false));
+	entity->setFontMap(texture);
 	entity->setFontMapPath(value);
 }
 

@@ -9,11 +9,11 @@
 using std::ifstream;
 using std::istringstream;
 
-const vector<string> WaterEditor::getTexturePathsFromFile() const
+const vector<string> WaterEditor::getImagePathsFromFile() const
 {
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("WaterEditor::getTexturePathsFromFile");
+		Logger::throwError("WaterEditor::getImagePathsFromFile");
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();

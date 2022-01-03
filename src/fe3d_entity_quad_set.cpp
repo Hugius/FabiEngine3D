@@ -30,7 +30,8 @@ void FabiEngine3D::quad_setDiffuseMap(const string& ID, const string& value)
 	}
 	else
 	{
-		_core->_quadEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.load2dTexture(value, false, false));
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader.loadImage(value), false, false);
+		_core->_quadEntityManager.getEntity(ID)->setDiffuseMap(texture);
 		_core->_quadEntityManager.getEntity(ID)->setDiffuseMapPath(value);
 	}
 }

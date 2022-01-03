@@ -42,7 +42,7 @@ void TerrainEntityColorRenderer::bind()
 	_shader.uploadUniform("u_blueNormalMap", 9);
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getShadowMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getShadowMap()->getTexture());
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
@@ -139,47 +139,47 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
+			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap()->getTexture());
 		}
 		if(entity->hasNormalMap())
 		{
 			glActiveTexture(GL_TEXTURE2);
-			glBindTexture(GL_TEXTURE_2D, entity->getNormalMap());
+			glBindTexture(GL_TEXTURE_2D, entity->getNormalMap()->getTexture());
 		}
 		if(entity->hasBlendMap())
 		{
 			glActiveTexture(GL_TEXTURE3);
-			glBindTexture(GL_TEXTURE_2D, entity->getBlendMap());
+			glBindTexture(GL_TEXTURE_2D, entity->getBlendMap()->getTexture());
 		}
 		if(entity->hasRedDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE4);
-			glBindTexture(GL_TEXTURE_2D, entity->getRedDiffuseMap());
+			glBindTexture(GL_TEXTURE_2D, entity->getRedDiffuseMap()->getTexture());
 		}
 		if(entity->hasGreenDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE5);
-			glBindTexture(GL_TEXTURE_2D, entity->getGreenDiffuseMap());
+			glBindTexture(GL_TEXTURE_2D, entity->getGreenDiffuseMap()->getTexture());
 		}
 		if(entity->hasBlueDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE6);
-			glBindTexture(GL_TEXTURE_2D, entity->getBlueDiffuseMap());
+			glBindTexture(GL_TEXTURE_2D, entity->getBlueDiffuseMap()->getTexture());
 		}
 		if(entity->hasRedNormalMap())
 		{
 			glActiveTexture(GL_TEXTURE7);
-			glBindTexture(GL_TEXTURE_2D, entity->getRedNormalMap());
+			glBindTexture(GL_TEXTURE_2D, entity->getRedNormalMap()->getTexture());
 		}
 		if(entity->hasGreenNormalMap())
 		{
 			glActiveTexture(GL_TEXTURE8);
-			glBindTexture(GL_TEXTURE_2D, entity->getGreenNormalMap());
+			glBindTexture(GL_TEXTURE_2D, entity->getGreenNormalMap()->getTexture());
 		}
 		if(entity->hasBlueNormalMap())
 		{
 			glActiveTexture(GL_TEXTURE9);
-			glBindTexture(GL_TEXTURE_2D, entity->getBlueNormalMap());
+			glBindTexture(GL_TEXTURE_2D, entity->getBlueNormalMap()->getTexture());
 		}
 
 		glBindVertexArray(entity->getVertexBuffer()->getVAO());

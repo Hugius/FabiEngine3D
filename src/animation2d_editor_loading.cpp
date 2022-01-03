@@ -63,7 +63,7 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 		{
 			if(Tools::isFileExisting(rootPath + previewTexturePath))
 			{
-				_fe3d.misc_cache2dTexture(previewTexturePath);
+				_fe3d.misc_cacheImage(previewTexturePath);
 			}
 			else
 			{

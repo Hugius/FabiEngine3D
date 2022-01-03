@@ -11,9 +11,9 @@ void MotionBlurRenderer::bind()
 	_shader.uploadUniform("u_isMotionBlurEnabled", _renderBus.isMotionBlurEnabled());
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap()->getTexture());
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getMotionBlurMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getMotionBlurMap()->getTexture());
 }
 
 void MotionBlurRenderer::unbind()

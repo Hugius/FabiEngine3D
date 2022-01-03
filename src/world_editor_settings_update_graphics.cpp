@@ -407,7 +407,7 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 			}
 
 			flareMapPath = filePath.substr(rootPath.size());
-			_fe3d.misc_clear2dTextureCache(flareMapPath);
+			_fe3d.misc_clearImageCache(flareMapPath);
 			_fe3d.gfx_setLensFlareMap(flareMapPath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("intensity")->isHovered())

@@ -3,12 +3,11 @@
 #include "base_entity.hpp"
 #include "vertex_buffer.hpp"
 #include "direction.hpp"
+#include "texture_buffer.hpp"
 
 #include <array>
-#include <memory>
 
 using std::array;
-using std::shared_ptr;
 
 class SkyEntity final : public BaseEntity
 {
@@ -59,5 +58,5 @@ private:
 	bool _isWireframed = false;
 
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
-	shared_ptr<TextureBuffer> _cubeMap = 0;
+	shared_ptr<TextureBuffer> _cubeMap = nullptr;
 };

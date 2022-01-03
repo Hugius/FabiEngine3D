@@ -70,12 +70,12 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
+			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap()->getTexture());
 		}
 		if(entity->hasEmissionMap())
 		{
 			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap());
+			glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap()->getTexture());
 		}
 
 		glBindVertexArray(buffer->getVAO());

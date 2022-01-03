@@ -29,11 +29,11 @@ void WaterEntityColorRenderer::bind()
 	_shader.uploadUniform("u_displacementMap", 5);
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getWaterReflectionMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getWaterReflectionMap()->getTexture());
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getWaterRefractionMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getWaterRefractionMap()->getTexture());
 	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getDepthMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getDepthMap()->getTexture());
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
@@ -143,17 +143,17 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 		if(entity->hasDudvMap())
 		{
 			glActiveTexture(GL_TEXTURE3);
-			glBindTexture(GL_TEXTURE_2D, entity->getDudvMap());
+			glBindTexture(GL_TEXTURE_2D, entity->getDudvMap()->getTexture());
 		}
 		if(entity->hasNormalMap())
 		{
 			glActiveTexture(GL_TEXTURE4);
-			glBindTexture(GL_TEXTURE_2D, entity->getNormalMap());
+			glBindTexture(GL_TEXTURE_2D, entity->getNormalMap()->getTexture());
 		}
 		if(entity->hasDisplacementMap())
 		{
 			glActiveTexture(GL_TEXTURE5);
-			glBindTexture(GL_TEXTURE_2D, entity->getDisplacementMap());
+			glBindTexture(GL_TEXTURE_2D, entity->getDisplacementMap()->getTexture());
 		}
 
 		if(entity->hasDisplacementMap())

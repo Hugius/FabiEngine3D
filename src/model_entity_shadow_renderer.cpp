@@ -48,7 +48,7 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 			if(entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE0);
-				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID));
+				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID)->getTexture());
 			}
 
 			glBindVertexArray(buffer->getVAO());

@@ -8,11 +8,11 @@
 using std::ifstream;
 using std::istringstream;
 
-const vector<string> QuadEditor::getTexturePathsFromFile() const
+const vector<string> QuadEditor::getImagePathsFromFile() const
 {
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("QuadEditor::getTexturePathsFromFile");
+		Logger::throwError("QuadEditor::getImagePathsFromFile");
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();

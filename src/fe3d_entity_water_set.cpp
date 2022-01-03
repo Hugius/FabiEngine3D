@@ -8,7 +8,7 @@ void FabiEngine3D::water_create(const string& ID)
 
 void FabiEngine3D::water_deleteAll()
 {
-	for (const auto& [key, entity] : _core->_waterEntityManager.getEntities())
+	for(const auto& [key, entity] : _core->_waterEntityManager.getEntities())
 	{
 		water_delete(entity->getID());
 	}
@@ -18,7 +18,7 @@ void FabiEngine3D::water_deleteAll()
 
 void FabiEngine3D::water_delete(const string& ID)
 {
-	if (ID == water_getSelectedID())
+	if(ID == water_getSelectedID())
 	{
 		_core->_waterEntityManager.selectWater("");
 	}
@@ -84,42 +84,45 @@ void FabiEngine3D::water_setWireframeColor(const string& ID, fvec3 value)
 
 void FabiEngine3D::water_setDudvMap(const string& ID, const string& value)
 {
-	if (value.empty())
+	if(value.empty())
 	{
 		_core->_waterEntityManager.getEntity(ID)->setDudvMap(0);
 		_core->_waterEntityManager.getEntity(ID)->setDudvMapPath("");
 	}
 	else
 	{
-		_core->_waterEntityManager.getEntity(ID)->setDudvMap(_core->_textureLoader.load2dTexture(value, true, true));
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader.loadImage(value), true, false);
+		_core->_waterEntityManager.getEntity(ID)->setDudvMap(texture);
 		_core->_waterEntityManager.getEntity(ID)->setDudvMapPath(value);
 	}
 }
 
 void FabiEngine3D::water_setNormalMap(const string& ID, const string& value)
 {
-	if (value.empty())
+	if(value.empty())
 	{
 		_core->_waterEntityManager.getEntity(ID)->setNormalMap(0);
 		_core->_waterEntityManager.getEntity(ID)->setNormalMapPath("");
 	}
 	else
 	{
-		_core->_waterEntityManager.getEntity(ID)->setNormalMap(_core->_textureLoader.load2dTexture(value, true, true));
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader.loadImage(value), true, false);
+		_core->_waterEntityManager.getEntity(ID)->setNormalMap(texture);
 		_core->_waterEntityManager.getEntity(ID)->setNormalMapPath(value);
 	}
 }
 
 void FabiEngine3D::water_setDisplacementMap(const string& ID, const string& value)
 {
-	if (value.empty())
+	if(value.empty())
 	{
 		_core->_waterEntityManager.getEntity(ID)->setDisplacementMap(0);
 		_core->_waterEntityManager.getEntity(ID)->setDisplacementMapPath("");
 	}
 	else
 	{
-		_core->_waterEntityManager.getEntity(ID)->setDisplacementMap(_core->_textureLoader.load2dTexture(value, true, true));
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader.loadImage(value), true, false);
+		_core->_waterEntityManager.getEntity(ID)->setDisplacementMap(texture);
 		_core->_waterEntityManager.getEntity(ID)->setDisplacementMapPath(value);
 	}
 }

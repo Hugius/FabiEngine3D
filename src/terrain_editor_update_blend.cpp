@@ -43,7 +43,7 @@ void TerrainEditor::_updateBlendMapMenu()
 			}
 
 			const string newFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clear2dTextureCache(newFilePath);
+			_fe3d.misc_clearImageCache(newFilePath);
 			_fe3d.terrain_setBlendMap(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())

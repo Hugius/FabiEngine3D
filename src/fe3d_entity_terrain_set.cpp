@@ -8,7 +8,7 @@ void FabiEngine3D::terrain_create(const string& ID, const string& heightMapPath)
 
 void FabiEngine3D::terrain_deleteAll()
 {
-	for (const auto& [key, entity] : _core->_terrainEntityManager.getEntities())
+	for(const auto& [key, entity] : _core->_terrainEntityManager.getEntities())
 	{
 		terrain_delete(entity->getID());
 	}
@@ -18,7 +18,7 @@ void FabiEngine3D::terrain_deleteAll()
 
 void FabiEngine3D::terrain_delete(const string& ID)
 {
-	if (ID == terrain_getSelectedID())
+	if(ID == terrain_getSelectedID())
 	{
 		_core->_terrainEntityManager.selectTerrain("");
 	}
@@ -49,126 +49,135 @@ void FabiEngine3D::terrain_setTextureRepeat(const string& ID, float value)
 
 void FabiEngine3D::terrain_setDiffuseMap(const string& ID, const string& value)
 {
-	if (value.empty())
+	if(value.empty())
 	{
 		_core->_terrainEntityManager.getEntity(ID)->setDiffuseMap(0);
 		_core->_terrainEntityManager.getEntity(ID)->setDiffuseMapPath("");
 	}
 	else
 	{
-		_core->_terrainEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.load2dTexture(value, true, true));
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader.loadImage(value), true, true);
+		_core->_terrainEntityManager.getEntity(ID)->setDiffuseMap(texture);
 		_core->_terrainEntityManager.getEntity(ID)->setDiffuseMapPath(value);
 	}
 }
 
 void FabiEngine3D::terrain_setNormalMap(const string& ID, const string& value)
 {
-	if (value.empty())
+	if(value.empty())
 	{
 		_core->_terrainEntityManager.getEntity(ID)->setNormalMap(0);
 		_core->_terrainEntityManager.getEntity(ID)->setNormalMapPath("");
 	}
 	else
 	{
-		_core->_terrainEntityManager.getEntity(ID)->setNormalMap(_core->_textureLoader.load2dTexture(value, true, true));
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader.loadImage(value), true, true);
+		_core->_terrainEntityManager.getEntity(ID)->setNormalMap(texture);
 		_core->_terrainEntityManager.getEntity(ID)->setNormalMapPath(value);
 	}
 }
 
 void FabiEngine3D::terrain_setBlendMap(const string& ID, const string& value)
 {
-	if (value.empty())
+	if(value.empty())
 	{
 		_core->_terrainEntityManager.getEntity(ID)->setBlendMap(0);
 		_core->_terrainEntityManager.getEntity(ID)->setBlendMapPath("");
 	}
 	else
 	{
-		_core->_terrainEntityManager.getEntity(ID)->setBlendMap(_core->_textureLoader.load2dTexture(value, true, true));
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader.loadImage(value), true, true);
+		_core->_terrainEntityManager.getEntity(ID)->setBlendMap(texture);
 		_core->_terrainEntityManager.getEntity(ID)->setBlendMapPath(value);
 	}
 }
 
 void FabiEngine3D::terrain_setRedDiffuseMap(const string& ID, const string& value)
 {
-	if (value.empty())
+	if(value.empty())
 	{
 		_core->_terrainEntityManager.getEntity(ID)->setRedDiffuseMap(0);
 		_core->_terrainEntityManager.getEntity(ID)->setRedDiffuseMapPath("");
 	}
 	else
 	{
-		_core->_terrainEntityManager.getEntity(ID)->setRedDiffuseMap(_core->_textureLoader.load2dTexture(value, true, true));
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader.loadImage(value), true, true);
+		_core->_terrainEntityManager.getEntity(ID)->setRedDiffuseMap(texture);
 		_core->_terrainEntityManager.getEntity(ID)->setRedDiffuseMapPath(value);
 	}
 }
 
 void FabiEngine3D::terrain_setGreenDiffuseMap(const string& ID, const string& value)
 {
-	if (value.empty())
+	if(value.empty())
 	{
 		_core->_terrainEntityManager.getEntity(ID)->setGreenDiffuseMap(0);
 		_core->_terrainEntityManager.getEntity(ID)->setGreenDiffuseMapPath("");
 	}
 	else
 	{
-		_core->_terrainEntityManager.getEntity(ID)->setGreenDiffuseMap(_core->_textureLoader.load2dTexture(value, true, true));
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader.loadImage(value), true, true);
+		_core->_terrainEntityManager.getEntity(ID)->setGreenDiffuseMap(texture);
 		_core->_terrainEntityManager.getEntity(ID)->setGreenDiffuseMapPath(value);
 	}
 }
 
 void FabiEngine3D::terrain_setBlueDiffuseMap(const string& ID, const string& value)
 {
-	if (value.empty())
+	if(value.empty())
 	{
 		_core->_terrainEntityManager.getEntity(ID)->setBlueDiffuseMap(0);
 		_core->_terrainEntityManager.getEntity(ID)->setBlueDiffuseMapPath("");
 	}
 	else
 	{
-		_core->_terrainEntityManager.getEntity(ID)->setBlueDiffuseMap(_core->_textureLoader.load2dTexture(value, true, true));
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader.loadImage(value), true, true);
+		_core->_terrainEntityManager.getEntity(ID)->setBlueDiffuseMap(texture);
 		_core->_terrainEntityManager.getEntity(ID)->setBlueDiffuseMapPath(value);
 	}
 }
 
 void FabiEngine3D::terrain_setRedNormalMap(const string& ID, const string& value)
 {
-	if (value.empty())
+	if(value.empty())
 	{
 		_core->_terrainEntityManager.getEntity(ID)->setRedNormalMap(0);
 		_core->_terrainEntityManager.getEntity(ID)->setRedNormalMapPath("");
 	}
 	else
 	{
-		_core->_terrainEntityManager.getEntity(ID)->setRedNormalMap(_core->_textureLoader.load2dTexture(value, true, true));
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader.loadImage(value), true, true);
+		_core->_terrainEntityManager.getEntity(ID)->setRedNormalMap(texture);
 		_core->_terrainEntityManager.getEntity(ID)->setRedNormalMapPath(value);
 	}
 }
 
 void FabiEngine3D::terrain_setGreenNormalMap(const string& ID, const string& value)
 {
-	if (value.empty())
+	if(value.empty())
 	{
 		_core->_terrainEntityManager.getEntity(ID)->setGreenNormalMap(0);
 		_core->_terrainEntityManager.getEntity(ID)->setGreenNormalMapPath("");
 	}
 	else
 	{
-		_core->_terrainEntityManager.getEntity(ID)->setGreenNormalMap(_core->_textureLoader.load2dTexture(value, true, true));
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader.loadImage(value), true, true);
+		_core->_terrainEntityManager.getEntity(ID)->setGreenNormalMap(texture);
 		_core->_terrainEntityManager.getEntity(ID)->setGreenNormalMapPath(value);
 	}
 }
 
 void FabiEngine3D::terrain_setBlueNormalMap(const string& ID, const string& value)
 {
-	if (value.empty())
+	if(value.empty())
 	{
 		_core->_terrainEntityManager.getEntity(ID)->setBlueNormalMap(0);
 		_core->_terrainEntityManager.getEntity(ID)->setBlueNormalMapPath("");
 	}
 	else
 	{
-		_core->_terrainEntityManager.getEntity(ID)->setBlueNormalMap(_core->_textureLoader.load2dTexture(value, true, true));
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader.loadImage(value), true, true);
+		_core->_terrainEntityManager.getEntity(ID)->setBlueNormalMap(texture);
 		_core->_terrainEntityManager.getEntity(ID)->setBlueNormalMapPath(value);
 	}
 }

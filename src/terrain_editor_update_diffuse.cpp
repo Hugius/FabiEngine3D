@@ -43,7 +43,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 			}
 
 			const string newFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clear2dTextureCache(newFilePath);
+			_fe3d.misc_clearImageCache(newFilePath);
 			_fe3d.terrain_setDiffuseMap(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("redDiffuseMap")->isHovered())
@@ -76,7 +76,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 			}
 
 			const string newFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clear2dTextureCache(newFilePath);
+			_fe3d.misc_clearImageCache(newFilePath);
 			_fe3d.terrain_setRedDiffuseMap(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenDiffuseMap")->isHovered())
@@ -109,7 +109,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 			}
 
 			const string newFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clear2dTextureCache(newFilePath);
+			_fe3d.misc_clearImageCache(newFilePath);
 			_fe3d.terrain_setGreenDiffuseMap(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueDiffuseMap")->isHovered())
@@ -142,7 +142,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 			}
 
 			const string newFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clear2dTextureCache(newFilePath);
+			_fe3d.misc_clearImageCache(newFilePath);
 			_fe3d.terrain_setBlueDiffuseMap(_currentTerrainID, newFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())

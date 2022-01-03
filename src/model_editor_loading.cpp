@@ -63,11 +63,11 @@ const vector<string> ModelEditor::getMeshPathsFromFile() const
 	return meshPaths;
 }
 
-const vector<string> ModelEditor::getTexturePathsFromFile() const
+const vector<string> ModelEditor::getImagePathsFromFile() const
 {
 	if(!Config::getInst().isApplicationExported() && _currentProjectID.empty())
 	{
-		Logger::throwError("ModelEditor::getTexturePathsFromFile");
+		Logger::throwError("ModelEditor::getImagePathsFromFile");
 	}
 
 	const auto isExported = Config::getInst().isApplicationExported();

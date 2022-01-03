@@ -191,5 +191,5 @@ private:
 
 	vector<shared_ptr<QuadEntity>> _characterEntities;
 	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
-	shared_ptr<TextureBuffer> _fontMap = 0;
+	shared_ptr<TextureBuffer> _fontMap = nullptr;
 };

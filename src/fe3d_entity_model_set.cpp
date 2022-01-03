@@ -8,7 +8,7 @@ void FabiEngine3D::model_create(const string& ID, const string& meshPath)
 
 void FabiEngine3D::model_deleteAll()
 {
-	for (const auto& [key, entity] : _core->_modelEntityManager.getEntities())
+	for(const auto& [key, entity] : _core->_modelEntityManager.getEntities())
 	{
 		model_delete(entity->getID());
 	}
@@ -16,7 +16,7 @@ void FabiEngine3D::model_deleteAll()
 
 void FabiEngine3D::model_delete(const string& ID)
 {
-	for (const auto& aabbID : aabb_getChildIDs(ID, AabbParentEntityType::MODEL))
+	for(const auto& aabbID : aabb_getChildIDs(ID, AabbParentEntityType::MODEL))
 	{
 		_core->_aabbEntityManager.deleteEntity(aabbID);
 	}
@@ -26,13 +26,13 @@ void FabiEngine3D::model_delete(const string& ID)
 
 void FabiEngine3D::model_deleteGroup(const string& ID)
 {
-	for (const auto& [key, entity] : _core->_modelEntityManager.getEntities())
+	for(const auto& [key, entity] : _core->_modelEntityManager.getEntities())
 	{
-		if (entity->getID().size() >= ID.size())
+		if(entity->getID().size() >= ID.size())
 		{
 			auto subString = entity->getID().substr(0, ID.size());
 
-			if (subString == ID)
+			if(subString == ID)
 			{
 				model_delete(entity->getID());
 			}
@@ -47,70 +47,75 @@ void FabiEngine3D::model_setVisible(const string& ID, bool value)
 
 void FabiEngine3D::model_setDiffuseMap(const string& ID, const string& partID, const string& value)
 {
-	if (value.empty())
+	if(value.empty())
 	{
 		_core->_modelEntityManager.getEntity(ID)->setDiffuseMap(partID, 0);
 		_core->_modelEntityManager.getEntity(ID)->setDiffuseMapPath(partID, "");
 	}
 	else
 	{
-		_core->_modelEntityManager.getEntity(ID)->setDiffuseMap(partID, _core->_textureLoader.load2dTexture(value, true, true));
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader.loadImage(value), true, true);
+		_core->_modelEntityManager.getEntity(ID)->setDiffuseMap(partID, texture);
 		_core->_modelEntityManager.getEntity(ID)->setDiffuseMapPath(partID, value);
 	}
 }
 
 void FabiEngine3D::model_setEmissionMap(const string& ID, const string& partID, const string& value)
 {
-	if (value.empty())
+	if(value.empty())
 	{
 		_core->_modelEntityManager.getEntity(ID)->setEmissionMap(partID, 0);
 		_core->_modelEntityManager.getEntity(ID)->setEmissionMapPath(partID, "");
 	}
 	else
 	{
-		_core->_modelEntityManager.getEntity(ID)->setEmissionMap(partID, _core->_textureLoader.load2dTexture(value, true, true));
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader.loadImage(value), true, true);
+		_core->_modelEntityManager.getEntity(ID)->setEmissionMap(partID, texture);
 		_core->_modelEntityManager.getEntity(ID)->setEmissionMapPath(partID, value);
 	}
 }
 
 void FabiEngine3D::model_setSpecularMap(const string& ID, const string& partID, const string& value)
 {
-	if (value.empty())
+	if(value.empty())
 	{
 		_core->_modelEntityManager.getEntity(ID)->setSpecularMap(partID, 0);
 		_core->_modelEntityManager.getEntity(ID)->setSpecularMapPath(partID, "");
 	}
 	else
 	{
-		_core->_modelEntityManager.getEntity(ID)->setSpecularMap(partID, _core->_textureLoader.load2dTexture(value, true, true));
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader.loadImage(value), true, true);
+		_core->_modelEntityManager.getEntity(ID)->setSpecularMap(partID, texture);
 		_core->_modelEntityManager.getEntity(ID)->setSpecularMapPath(partID, value);
 	}
 }
 
 void FabiEngine3D::model_setNormalMap(const string& ID, const string& partID, const string& value)
 {
-	if (value.empty())
+	if(value.empty())
 	{
 		_core->_modelEntityManager.getEntity(ID)->setNormalMap(partID, 0);
 		_core->_modelEntityManager.getEntity(ID)->setNormalMapPath(partID, "");
 	}
 	else
 	{
-		_core->_modelEntityManager.getEntity(ID)->setNormalMap(partID, _core->_textureLoader.load2dTexture(value, true, true));
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader.loadImage(value), true, true);
+		_core->_modelEntityManager.getEntity(ID)->setNormalMap(partID, texture);
 		_core->_modelEntityManager.getEntity(ID)->setNormalMapPath(partID, value);
 	}
 }
 
 void FabiEngine3D::model_setReflectionMap(const string& ID, const string& partID, const string& value)
 {
-	if (value.empty())
+	if(value.empty())
 	{
 		_core->_modelEntityManager.getEntity(ID)->setReflectionMap(partID, 0);
 		_core->_modelEntityManager.getEntity(ID)->setReflectionMapPath(partID, "");
 	}
 	else
 	{
-		_core->_modelEntityManager.getEntity(ID)->setReflectionMap(partID, _core->_textureLoader.load2dTexture(value, true, true));
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader.loadImage(value), true, true);
+		_core->_modelEntityManager.getEntity(ID)->setReflectionMap(partID, texture);
 		_core->_modelEntityManager.getEntity(ID)->setReflectionMapPath(partID, value);
 	}
 }

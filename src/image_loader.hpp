@@ -30,7 +30,7 @@ public:
 	const shared_ptr<Image> loadImage(const string& filePath);
 
 private:
-	const shared_ptr<Image> _loadImage(const string& filePath, bool mustFlip);
+	shared_ptr<Image> _loadImage(const string& filePath, bool mustFlip);
 
 	map<string, shared_ptr<Image>> _imageCache;
 };

@@ -18,11 +18,11 @@ void LensFlareRenderer::bind()
 	_shader.uploadUniform("u_isLensFlareEnabled", _renderBus.isLensFlareEnabled());
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getDepthMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getDepthMap()->getTexture());
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap()->getTexture());
 	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getLensFlareMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getLensFlareMap()->getTexture());
 }
 
 void LensFlareRenderer::unbind()

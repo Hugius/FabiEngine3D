@@ -27,7 +27,7 @@ void TerrainEntityDepthRenderer::render(const shared_ptr<TerrainEntity> entity)
 
 		glEnable(GL_CULL_FACE);
 
-		glBindVertexArray(buffer->getVAO());
+		glBindVertexArray(buffer->getVaoId());
 
 		glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 

@@ -2,6 +2,7 @@
 
 #include "mathematics.hpp"
 #include "render_utils.hpp"
+#include "texture_buffer.hpp"
 
 #include <vector>
 
@@ -20,8 +21,9 @@ public:
 
 	const ivec2 getSize() const;
 
-	const BufferID getFBO() const;
-	const BufferID getTexture(unsigned int index) const;
+	const BufferID getFbo() const;
+
+	const shared_ptr<TextureBuffer> getTexture(unsigned int index) const;
 
 private:
 	ivec2 _position = ivec2(0);
@@ -29,7 +31,8 @@ private:
 
 	bool _isInitialized = false;
 
-	vector<BufferID> _textures;
+	vector<shared_ptr<TextureBuffer>> _textures;
+
 	BufferID _fbo = 0;
 	BufferID _rbo = 0;
 };

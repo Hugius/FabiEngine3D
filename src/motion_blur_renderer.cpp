@@ -11,9 +11,9 @@ void MotionBlurRenderer::bind()
 	_shader.uploadUniform("u_isMotionBlurEnabled", _renderBus.isMotionBlurEnabled());
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap()->getTexture());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap()->getId());
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getMotionBlurMap()->getTexture());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getMotionBlurMap()->getId());
 }
 
 void MotionBlurRenderer::unbind()
@@ -30,7 +30,7 @@ void MotionBlurRenderer::render(const shared_ptr<QuadEntity> entity)
 {
 	const auto buffer = entity->getVertexBuffer();
 
-	glBindVertexArray(buffer->getVAO());
+	glBindVertexArray(buffer->getVaoId());
 
 	glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 

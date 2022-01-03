@@ -18,12 +18,12 @@ const ivec2 CaptureBuffer::getSize() const
 	return _size;
 }
 
-const BufferID CaptureBuffer::getFBO() const
+const BufferID CaptureBuffer::getFbo() const
 {
 	return _fbo;
 }
 
-const BufferID CaptureBuffer::getTexture(unsigned int index) const
+const shared_ptr<TextureBuffer> CaptureBuffer::getTexture(unsigned int index) const
 {
 	return _textures[index];
 }
@@ -35,10 +35,7 @@ void CaptureBuffer::reset()
 		glDeleteFramebuffers(1, &_fbo);
 		glDeleteBuffers(1, &_rbo);
 
-		for(size_t i = 0; i < _textures.size(); i++)
-		{
-			glDeleteTextures(1, &_textures[i]);
-		}
+		_textures.clear();
 
 		_isInitialized = false;
 	}

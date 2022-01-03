@@ -24,7 +24,8 @@ void BlurRenderer::unbind()
 	_shader.unbind();
 }
 
-const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<QuadEntity> entity, shared_ptr<TextureBuffer> texture, unsigned int blurCount, float intensity, BlurDirection direction)
+const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<QuadEntity> entity, shared_ptr<TextureBuffer> texture,
+														  unsigned int blurCount, float intensity, BlurDirection direction)
 {
 	_shader.uploadUniform("u_intensity", intensity);
 
@@ -62,9 +63,9 @@ void BlurRenderer::_render(const shared_ptr<QuadEntity> entity, shared_ptr<Textu
 	const auto buffer = entity->getVertexBuffer();
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture->getTexture());
+	glBindTexture(GL_TEXTURE_2D, texture->getId());
 
-	glBindVertexArray(buffer->getVAO());
+	glBindVertexArray(buffer->getVaoId());
 
 	glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 

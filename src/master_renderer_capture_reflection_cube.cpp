@@ -2,7 +2,7 @@
 
 void MasterRenderer::_captureCubeReflections()
 {
-	if (_entityBus->getReflectionEntities().empty())
+	if(_entityBus->getReflectionEntities().empty())
 	{
 		return;
 	}
@@ -16,9 +16,9 @@ void MasterRenderer::_captureCubeReflections()
 	const auto initialCameraPosition = _camera.getPosition();
 
 	vector<string> savedModelEntityIDs;
-	for (const auto& [key, entity] : _entityBus->getModelEntities())
+	for(const auto& [key, entity] : _entityBus->getModelEntities())
 	{
-		if (!entity->isReflected() && entity->isVisible())
+		if(!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
 			savedModelEntityIDs.push_back(entity->getID());
@@ -26,9 +26,9 @@ void MasterRenderer::_captureCubeReflections()
 	}
 
 	vector<string> savedBillboardEntityIDs;
-	for (const auto& [key, entity] : _entityBus->getBillboardEntities())
+	for(const auto& [key, entity] : _entityBus->getBillboardEntities())
 	{
-		if (!entity->isReflected() && entity->isVisible())
+		if(!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
 			savedBillboardEntityIDs.push_back(entity->getID());
@@ -39,7 +39,7 @@ void MasterRenderer::_captureCubeReflections()
 
 	float oldLightness = 0.0f;
 	auto skyEntity = _entityBus->getMainSkyEntity();
-	if (skyEntity != nullptr)
+	if(skyEntity != nullptr)
 	{
 		oldLightness = skyEntity->getLightness();
 		skyEntity->setLightness(skyEntity->getInitialLightness());
@@ -49,52 +49,52 @@ void MasterRenderer::_captureCubeReflections()
 	_camera.setAspectRatio(1.0f);
 	_camera.setFOV(90.0f);
 
-	for (const auto& [key, entity] : _entityBus->getReflectionEntities())
+	for(const auto& [key, entity] : _entityBus->getReflectionEntities())
 	{
-		if (entity->mustCapture())
+		if(entity->mustCapture())
 		{
-			for (unsigned int i = 0; i < 6; i++)
+			for(unsigned int i = 0; i < 6; i++)
 			{
 				_camera.setPosition(entity->getPosition());
 
-				switch (i)
+				switch(i)
 				{
-				case 0:
-				{
-					_camera.setYaw(0.0f);
-					_camera.setPitch(0.0f);
-					break;
-				}
-				case 1:
-				{
-					_camera.setYaw(180.0f);
-					_camera.setPitch(0.0f);
-					break;
-				}
-				case 2:
-				{
-					_camera.setYaw(90.0f);
-					_camera.setPitch(90.0f);
-					break;
-				}
-				case 3:
-				{
-					_camera.setYaw(90.0f);
-					_camera.setPitch(270.0f);
-					break;
-				}
-				case 4:
-				{
-					_camera.setYaw(90.0f);
-					_camera.setPitch(0.0f);
-					break;
-				}
-				case 5:
-				{
-					_camera.setYaw(270.0f);
-					_camera.setPitch(0.0f);
-					break;
-				}
+					case 0:
+					{
+						_camera.setYaw(0.0f);
+						_camera.setPitch(0.0f);
+						break;
+					}
+					case 1:
+					{
+						_camera.setYaw(180.0f);
+						_camera.setPitch(0.0f);
+						break;
+					}
+					case 2:
+					{
+						_camera.setYaw(90.0f);
+						_camera.setPitch(90.0f);
+						break;
+					}
+					case 3:
+					{
+						_camera.setYaw(90.0f);
+						_camera.setPitch(270.0f);
+						break;
+					}
+					case 4:
+					{
+						_camera.setYaw(90.0f);
+						_camera.setPitch(0.0f);
+						break;
+					}
+					case 5:
+					{
+						_camera.setYaw(270.0f);
+						_camera.setPitch(0.0f);
+						break;
+					}
 				}
 
 				_camera.updateMatrices();
@@ -111,14 +111,15 @@ void MasterRenderer::_captureCubeReflections()
 
 				_cubeReflectionCaptureBuffer.unbind();
 
-				glBindTexture(GL_TEXTURE_2D, _cubeReflectionCaptureBuffer.getTexture(0));
-				int dataSize = (static_cast<int>(reflectionQuality) * static_cast<int>(reflectionQuality) * 3);
-				unsigned char* data = new unsigned char[dataSize];
+				const auto dataSize = (reflectionQuality * reflectionQuality * 3);
+				auto data = new unsigned char[dataSize];
+				glBindTexture(GL_TEXTURE_2D, _cubeReflectionCaptureBuffer.getTexture(0)->getId());
 				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
-				glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getCubeMap());
-				glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, reflectionQuality, reflectionQuality, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+				const auto index = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + i);
+				glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getCubeMap()->getId());
+				glTexImage2D(index, 0, GL_RGB, reflectionQuality, reflectionQuality, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 			}
 
@@ -126,22 +127,22 @@ void MasterRenderer::_captureCubeReflections()
 		}
 	}
 
-	for (const auto& [key, entity] : _entityBus->getModelEntities())
+	for(const auto& [key, entity] : _entityBus->getModelEntities())
 	{
-		for (const auto& savedID : savedModelEntityIDs)
+		for(const auto& savedID : savedModelEntityIDs)
 		{
-			if (entity->getID() == savedID)
+			if(entity->getID() == savedID)
 			{
 				entity->setVisible(true);
 			}
 		}
 	}
 
-	for (const auto& savedID : savedBillboardEntityIDs)
+	for(const auto& savedID : savedBillboardEntityIDs)
 	{
-		for (const auto& [key, entity] : _entityBus->getBillboardEntities())
+		for(const auto& [key, entity] : _entityBus->getBillboardEntities())
 		{
-			if (entity->getID() == savedID)
+			if(entity->getID() == savedID)
 			{
 				entity->setVisible(true);
 			}
@@ -150,7 +151,7 @@ void MasterRenderer::_captureCubeReflections()
 
 	_renderBus.setReflectionsEnabled(true);
 
-	if (skyEntity != nullptr)
+	if(skyEntity != nullptr)
 	{
 		skyEntity->setLightness(oldLightness);
 	}

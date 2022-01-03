@@ -40,7 +40,7 @@
     <ClCompile Include="..\..\..\src\vertex_buffer.cpp" />
     <ClCompile Include="..\..\..\src\render_bus_get.cpp" />
     <ClCompile Include="..\..\..\src\render_bus_set.cpp" />
-    <ClCompile Include="..\..\..\src\capture_buffer_texture.cpp" />
+    <ClCompile Include="..\..\..\src\capture_buffer_lifecycle.cpp" />
     <ClCompile Include="..\..\..\src\capture_buffer_misc.cpp" />
     <ClCompile Include="..\..\..\src\master_renderer_capture_reflection_cube.cpp" />
     <ClCompile Include="..\..\..\src\master_renderer_capture_post.cpp" />

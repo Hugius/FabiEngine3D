@@ -16,11 +16,11 @@ void DofRenderer::bind()
 	_shader.uploadUniform("u_isDofDynamic", _renderBus.isDofDynamic());
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getDepthMap()->getTexture());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getDepthMap()->getId());
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap()->getTexture());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap()->getId());
 	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getDofMap()->getTexture());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getDofMap()->getId());
 }
 
 void DofRenderer::unbind()
@@ -39,7 +39,7 @@ void DofRenderer::render(const shared_ptr<QuadEntity> entity)
 {
 	const auto buffer = entity->getVertexBuffer();
 
-	glBindVertexArray(buffer->getVAO());
+	glBindVertexArray(buffer->getVaoId());
 
 	glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 

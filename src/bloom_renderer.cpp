@@ -10,9 +10,9 @@ void BloomRenderer::bind()
 	_shader.uploadUniform("u_isBloomEnabled", _renderBus.isBloomEnabled());
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap()->getTexture());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap()->getId());
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getBloomMap()->getTexture());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getBloomMap()->getId());
 }
 
 void BloomRenderer::unbind()
@@ -29,7 +29,7 @@ void BloomRenderer::render(const shared_ptr<QuadEntity> entity)
 {
 	const auto buffer = entity->getVertexBuffer();
 
-	glBindVertexArray(buffer->getVAO());
+	glBindVertexArray(buffer->getVaoId());
 
 	glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 

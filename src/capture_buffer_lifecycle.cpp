@@ -3,6 +3,8 @@
 #include "configuration.hpp"
 #include "render_bus.hpp"
 
+using std::make_shared;
+
 CaptureBuffer::~CaptureBuffer()
 {
 	reset();
@@ -22,26 +24,19 @@ void CaptureBuffer::createColorTexture(ivec2 position, ivec2 size, unsigned int 
 
 		for(unsigned int i = 0; i < count; i++)
 		{
-			_textures.push_back(0);
-
-			glGenTextures(1, &_textures[i]);
-
-			glBindTexture(GL_TEXTURE_2D, _textures[i]);
-
+			BufferID textureId;
+			glGenTextures(1, &textureId);
+			glBindTexture(GL_TEXTURE_2D, textureId);
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _size.x, _size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
-
-			if(isTextureClamped)
-			{
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-			}
-
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, (isTextureClamped ? GL_CLAMP_TO_EDGE : GL_REPEAT));
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, (isTextureClamped ? GL_CLAMP_TO_EDGE : GL_REPEAT));
 			glBindTexture(GL_TEXTURE_2D, 0);
 
-			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, _textures[i], 0);
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, textureId, 0);
+
+			_textures.push_back(make_shared<TextureBuffer>(textureId));
 		}
 
 		glGenRenderbuffers(1, &_rbo);
@@ -82,26 +77,25 @@ void CaptureBuffer::createDepthTexture(ivec2 position, ivec2 size)
 
 		bind();
 
-		_textures.push_back(0);
+		BufferID textureID;
+		glGenTextures(1, &textureID);
+		_textures.push_back(make_shared<TextureBuffer>(textureID));
 
-		glGenTextures(1, &_textures[0]);
-
-		glBindTexture(GL_TEXTURE_2D, _textures[0]);
+		glBindTexture(GL_TEXTURE_2D, _textures[0]->getId());
 
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, _size.x, _size.y, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 
 		const float borderColor[] = {1.0f, 1.0f, 1.0f, 1.0f};
 		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
 
 		glBindTexture(GL_TEXTURE_2D, 0);
 
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, _textures[0], 0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, _textures[0]->getId(), 0);
 
 		unbind();
 

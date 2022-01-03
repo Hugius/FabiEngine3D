@@ -45,7 +45,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\capture_buffer_texture.cpp">
+    <ClCompile Include="..\..\..\src\capture_buffer_lifecycle.cpp">
       <Filter>Buffer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\capture_buffer_misc.cpp">

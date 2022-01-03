@@ -40,7 +40,7 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, cons
 		if(mainEntity->hasCubeMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, mainEntity->getCubeMap()->getId());
+			glBindTexture(GL_TEXTURE_CUBE_MAP, mainEntity->getCubeMap()->getID());
 		}
 
 		if(mixEntity != nullptr)
@@ -48,11 +48,11 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, cons
 			if(mixEntity->hasCubeMap())
 			{
 				glActiveTexture(GL_TEXTURE1);
-				glBindTexture(GL_TEXTURE_CUBE_MAP, mixEntity->getCubeMap()->getId());
+				glBindTexture(GL_TEXTURE_CUBE_MAP, mixEntity->getCubeMap()->getID());
 			}
 		}
 
-		glBindVertexArray(mainEntity->getVertexBuffer()->getVaoId());
+		glBindVertexArray(mainEntity->getVertexBuffer()->getVaoID());
 
 		glDrawArrays(GL_TRIANGLES, 0, mainEntity->getVertexBuffer()->getVertexCount());
 		_renderBus.increaseTriangleCount(mainEntity->getVertexBuffer()->getVertexCount() / 3);

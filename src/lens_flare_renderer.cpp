@@ -18,11 +18,11 @@ void LensFlareRenderer::bind()
 	_shader.uploadUniform("u_isLensFlareEnabled", _renderBus.isLensFlareEnabled());
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getDepthMap()->getId());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getDepthMap()->getID());
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap()->getId());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap()->getID());
 	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getLensFlareMap()->getId());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getLensFlareMap()->getID());
 }
 
 void LensFlareRenderer::unbind()
@@ -41,7 +41,7 @@ void LensFlareRenderer::render(const shared_ptr<QuadEntity> entity)
 {
 	const auto buffer = entity->getVertexBuffer();
 
-	glBindVertexArray(buffer->getVaoId());
+	glBindVertexArray(buffer->getVaoID());
 
 	glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 

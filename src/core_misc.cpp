@@ -80,7 +80,7 @@ void Core::_prepare()
 
 	shared_ptr<QuadEntity> logo = make_shared<QuadEntity>("logo");
 	logo->setVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
-	logo->setDiffuseMap(_imageLoader.load2dTexture("engine\\assets\\image\\diffuse_map\\logo.bmp", false, false));
+	logo->setDiffuseMap(make_shared<TextureBuffer>(_imageLoader.loadImage("engine\\assets\\image\\diffuse_map\\logo.bmp"), false, false));
 	logo->setCentered(true);
 
 	SDL_DisplayMode DM;

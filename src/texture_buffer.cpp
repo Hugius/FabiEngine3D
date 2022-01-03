@@ -1,16 +1,16 @@
 #include "texture_buffer.hpp"
 
-TextureBuffer::TextureBuffer(BufferID id)
+TextureBuffer::TextureBuffer(BufferID ID)
 	:
-	_id(id)
+	_ID(ID)
 {
 
 }
 
 TextureBuffer::TextureBuffer(shared_ptr<Image> image, bool isMipmapped, bool isAnisotropic)
 {
-	glGenTextures(1, &_id);
-	glBindTexture(GL_TEXTURE_2D, _id);
+	glGenTextures(1, &_ID);
+	glBindTexture(GL_TEXTURE_2D, _ID);
 
 	if(image->getPixelFormat() == PixelFormat::GRAY)
 	{
@@ -44,9 +44,9 @@ TextureBuffer::TextureBuffer(shared_ptr<Image> image, bool isMipmapped, bool isA
 
 TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6>& images)
 {
-	glGenTextures(1, &_id);
+	glGenTextures(1, &_ID);
 
-	glBindTexture(GL_TEXTURE_CUBE_MAP, _id);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, _ID);
 
 	for(size_t i = 0; i < images.size(); i++)
 	{
@@ -84,12 +84,12 @@ TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6>& images)
 
 TextureBuffer::~TextureBuffer()
 {
-	glDeleteTextures(1, &_id);
+	glDeleteTextures(1, &_ID);
 }
 
-const BufferID TextureBuffer::getId()
+const BufferID TextureBuffer::getID()
 {
-	return _id;
+	return _ID;
 }
 
 //void ImageLoader::_reloadAnisotropicFiltering()

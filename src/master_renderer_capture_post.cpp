@@ -31,7 +31,7 @@ void MasterRenderer::_captureWorldDepth()
 
 	if(_renderBus.isDofEnabled() || _renderBus.isLensFlareEnabled() || waterDepthNeeded)
 	{
-		_worldDepthCaptureBuffer.bind();
+		_worldDepthCaptureBuffer->bind();
 		glClear(GL_DEPTH_BUFFER_BIT);
 
 		if(_entityBus->getTerrainEntity() != nullptr)
@@ -107,9 +107,9 @@ void MasterRenderer::_captureWorldDepth()
 			_billboardEntityDepthRenderer.unbind();
 		}
 
-		_worldDepthCaptureBuffer.unbind();
+		_worldDepthCaptureBuffer->unbind();
 
-		_renderBus.setDepthMap(_worldDepthCaptureBuffer.getTexture(0));
+		_renderBus.setDepthMap(_worldDepthCaptureBuffer->getTexture(0));
 	}
 	else
 	{
@@ -125,12 +125,12 @@ void MasterRenderer::_captureDOF()
 		_renderBus.setDofMap(_dofBlurRenderer.blurTexture(_renderQuad, _renderBus.getFinalSceneMap(), 2, 1.0f, BlurDirection::BOTH));
 		_dofBlurRenderer.unbind();
 
-		_dofCaptureBuffer.bind();
+		_dofCaptureBuffer->bind();
 		_dofRenderer.bind();
 		_dofRenderer.render(_renderQuad);
 		_dofRenderer.unbind();
-		_dofCaptureBuffer.unbind();
-		_renderBus.setFinalSceneMap(_dofCaptureBuffer.getTexture(0));
+		_dofCaptureBuffer->unbind();
+		_renderBus.setFinalSceneMap(_dofCaptureBuffer->getTexture(0));
 	}
 	else
 	{
@@ -142,12 +142,12 @@ void MasterRenderer::_captureLensFlare()
 {
 	if(_renderBus.isLensFlareEnabled())
 	{
-		_lensFlareCaptureBuffer.bind();
+		_lensFlareCaptureBuffer->bind();
 		_lensFlareRenderer.bind();
 		_lensFlareRenderer.render(_renderQuad);
 		_lensFlareRenderer.unbind();
-		_lensFlareCaptureBuffer.unbind();
-		_renderBus.setFinalSceneMap(_lensFlareCaptureBuffer.getTexture(0));
+		_lensFlareCaptureBuffer->unbind();
+		_renderBus.setFinalSceneMap(_lensFlareCaptureBuffer->getTexture(0));
 	}
 }
 
@@ -189,12 +189,12 @@ void MasterRenderer::_captureMotionBlur()
 			_renderBus.setMotionBlurMap(0);
 		}
 
-		_motionBlurCaptureBuffer.bind();
+		_motionBlurCaptureBuffer->bind();
 		_motionBlurRenderer.bind();
 		_motionBlurRenderer.render(_renderQuad);
 		_motionBlurRenderer.unbind();
-		_motionBlurCaptureBuffer.unbind();
-		_renderBus.setFinalSceneMap(_motionBlurCaptureBuffer.getTexture(0));
+		_motionBlurCaptureBuffer->unbind();
+		_renderBus.setFinalSceneMap(_motionBlurCaptureBuffer->getTexture(0));
 	}
 	else
 	{
@@ -206,12 +206,12 @@ void MasterRenderer::_captureAntiAliasing()
 {
 	if(_renderBus.isAntiAliasingEnabled())
 	{
-		_antiAliasingCaptureBuffer.bind();
+		_antiAliasingCaptureBuffer->bind();
 		_antiAliasingRenderer.bind();
 		_antiAliasingRenderer.render(_renderQuad);
 		_antiAliasingRenderer.unbind();
-		_antiAliasingCaptureBuffer.unbind();
-		_renderBus.setFinalSceneMap(_antiAliasingCaptureBuffer.getTexture(0));
+		_antiAliasingCaptureBuffer->unbind();
+		_renderBus.setFinalSceneMap(_antiAliasingCaptureBuffer->getTexture(0));
 	}
 }
 
@@ -219,7 +219,7 @@ void MasterRenderer::_captureBloom()
 {
 	if(_renderBus.isBloomEnabled() && _renderBus.getBloomBlurCount() > 0 && _renderBus.getBloomIntensity() > 0.0f)
 	{
-		Texture textureToBlur;
+		shared_ptr<TextureBuffer> textureToBlur = nullptr;
 		if(_renderBus.getBloomType() == BloomType::EVERYTHING)
 		{
 			textureToBlur = _renderBus.getPrimarySceneMap();
@@ -239,12 +239,12 @@ void MasterRenderer::_captureBloom()
 							   _renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
 		_bloomBlurRendererLowQuality.unbind();
 
-		_bloomCaptureBuffer.bind();
+		_bloomCaptureBuffer->bind();
 		_bloomRenderer.bind();
 		_bloomRenderer.render(_renderQuad);
 		_bloomRenderer.unbind();
-		_bloomCaptureBuffer.unbind();
-		_renderBus.setFinalSceneMap(_bloomCaptureBuffer.getTexture(0));
+		_bloomCaptureBuffer->unbind();
+		_renderBus.setFinalSceneMap(_bloomCaptureBuffer->getTexture(0));
 	}
 	else
 	{

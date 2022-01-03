@@ -4,7 +4,6 @@
 #include "render_utils.hpp"
 #include "image.hpp"
 
-#include <SDL/SDL.h>
 #include <array>
 #include <vector>
 #include <map>
@@ -25,7 +24,6 @@ public:
 	void cacheImages(const vector<string>& filePaths);
 	void clearImageCache(const string& filePath);
 	void clearImagesCache();
-	void setAnisotropicFilteringQuality(unsigned int value);
 
 	const shared_ptr<Image> loadImage(const string& filePath);
 

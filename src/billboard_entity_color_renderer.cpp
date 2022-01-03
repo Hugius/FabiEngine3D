@@ -70,15 +70,15 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 		if(entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap()->getId());
+			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap()->getID());
 		}
 		if(entity->hasEmissionMap())
 		{
 			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap()->getId());
+			glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap()->getID());
 		}
 
-		glBindVertexArray(buffer->getVaoId());
+		glBindVertexArray(buffer->getVaoID());
 
 		glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 		_renderBus.increaseTriangleCount(buffer->getVertexCount() / 3);

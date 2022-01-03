@@ -160,7 +160,7 @@ void FabiEngine3D::misc_cacheMesh(const string& filePath)
 
 void FabiEngine3D::misc_cacheImage(const string& filePath)
 {
-	_core->_textureLoader.cacheImage(filePath);
+	_core->_imageLoader.cacheImage(filePath);
 }
 
 void FabiEngine3D::misc_cacheAudio(const string& filePath)
@@ -175,7 +175,7 @@ void FabiEngine3D::misc_clearMeshCache(const string& filePath)
 
 void FabiEngine3D::misc_clearImageCache(const string& filePath)
 {
-	_core->_textureLoader.clearImageCache(filePath);
+	_core->_imageLoader.clearImageCache(filePath);
 }
 
 void FabiEngine3D::misc_clearAudioCache(const string& filePath)
@@ -190,7 +190,7 @@ void FabiEngine3D::misc_clearMeshesCache()
 
 void FabiEngine3D::misc_clearImagesCache()
 {
-	_core->_textureLoader.clearImagesCache();
+	_core->_imageLoader.clearImagesCache();
 }
 
 void FabiEngine3D::misc_clearAudiosCache()
@@ -205,7 +205,7 @@ void FabiEngine3D::misc_cacheMeshes(const vector<string>& filePaths)
 
 void FabiEngine3D::misc_cacheImages(const vector<string>& filePaths)
 {
-	_core->_textureLoader.cacheImages(filePaths);
+	_core->_imageLoader.cacheImages(filePaths);
 }
 
 void FabiEngine3D::misc_cacheAudios(const vector<string>& filePaths)

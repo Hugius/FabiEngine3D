@@ -4,29 +4,29 @@ void MasterRenderer::_captureWaterReflections()
 {
 	const auto waterEntity = _entityBus->getWaterEntity();
 
-	if ((waterEntity != nullptr) && waterEntity->isReflective())
+	if((waterEntity != nullptr) && waterEntity->isReflective())
 	{
 		float cameraDistance = (_camera.getPosition().y - waterEntity->getHeight());
 
-		_waterReflectionCaptureBuffer.bind();
+		_waterReflectionCaptureBuffer->bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		vector<string> savedModelEntityIDs;
-		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS ||
-			waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS ||
+		   waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
 		{
-			for (const auto& [key, entity] : _entityBus->getModelEntities())
+			for(const auto& [key, entity] : _entityBus->getModelEntities())
 			{
-				if (!entity->isReflected() && entity->isVisible())
+				if(!entity->isReflected() && entity->isVisible())
 				{
 					entity->setVisible(false);
 					savedModelEntityIDs.push_back(entity->getID());
 					continue;
 				}
 
-				for (const auto& partID : entity->getPartIDs())
+				for(const auto& partID : entity->getPartIDs())
 				{
-					if (entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR) && entity->isVisible())
+					if(entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR) && entity->isVisible())
 					{
 						entity->setVisible(false);
 						savedModelEntityIDs.push_back(entity->getID());
@@ -37,11 +37,11 @@ void MasterRenderer::_captureWaterReflections()
 		}
 
 		vector<string> savedBillboardEntityIDs;
-		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
 		{
-			for (const auto& [key, entity] : _entityBus->getBillboardEntities())
+			for(const auto& [key, entity] : _entityBus->getBillboardEntities())
 			{
-				if (!entity->isReflected() && entity->isVisible())
+				if(!entity->isReflected() && entity->isVisible())
 				{
 					entity->setVisible(false);
 					savedBillboardEntityIDs.push_back(entity->getID());
@@ -67,7 +67,7 @@ void MasterRenderer::_captureWaterReflections()
 
 		float oldLightness = 0.0f;
 		auto skyEntity = _entityBus->getMainSkyEntity();
-		if (skyEntity != nullptr)
+		if(skyEntity != nullptr)
 		{
 			oldLightness = skyEntity->getLightness();
 			skyEntity->setLightness(skyEntity->getInitialLightness());
@@ -79,48 +79,48 @@ void MasterRenderer::_captureWaterReflections()
 
 		_renderSkyEntity();
 
-		if (waterEntity->getQuality() != WaterQuality::SKY)
+		if(waterEntity->getQuality() != WaterQuality::SKY)
 		{
 			glEnable(GL_CLIP_DISTANCE0);
 			_renderTerrainEntity();
 			glDisable(GL_CLIP_DISTANCE0);
 		}
 
-		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS ||
-			waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS ||
+		   waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
 		{
 			glEnable(GL_CLIP_DISTANCE2);
 			_renderModelEntities();
 			glDisable(GL_CLIP_DISTANCE2);
 		}
 
-		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
 		{
 			glEnable(GL_CLIP_DISTANCE2);
 			_renderBillboardEntities();
 			glDisable(GL_CLIP_DISTANCE2);
 		}
 
-		_waterReflectionCaptureBuffer.unbind();
+		_waterReflectionCaptureBuffer->unbind();
 
-		_renderBus.setWaterReflectionMap(_waterReflectionCaptureBuffer.getTexture(0));
+		_renderBus.setWaterReflectionMap(_waterReflectionCaptureBuffer->getTexture(0));
 
-		for (const auto& savedID : savedModelEntityIDs)
+		for(const auto& savedID : savedModelEntityIDs)
 		{
-			for (const auto& [key, entity] : _entityBus->getModelEntities())
+			for(const auto& [key, entity] : _entityBus->getModelEntities())
 			{
-				if (entity->getID() == savedID)
+				if(entity->getID() == savedID)
 				{
 					entity->setVisible(true);
 				}
 			}
 		}
 
-		for (const auto& savedID : savedBillboardEntityIDs)
+		for(const auto& savedID : savedBillboardEntityIDs)
 		{
-			for (const auto& [key, entity] : _entityBus->getBillboardEntities())
+			for(const auto& [key, entity] : _entityBus->getBillboardEntities())
 			{
-				if (entity->getID() == savedID)
+				if(entity->getID() == savedID)
 				{
 					entity->setVisible(true);
 				}
@@ -137,7 +137,7 @@ void MasterRenderer::_captureWaterReflections()
 
 		_renderBus.setShadowsEnabled(wasShadowsEnabled);
 
-		if (skyEntity != nullptr)
+		if(skyEntity != nullptr)
 		{
 			skyEntity->setLightness(oldLightness);
 		}

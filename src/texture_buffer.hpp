@@ -14,13 +14,13 @@ using std::shared_ptr;
 class TextureBuffer final
 {
 public:
-	TextureBuffer(BufferID id);
+	TextureBuffer(BufferID ID);
 	TextureBuffer(shared_ptr<Image> image, bool isMipmapped, bool isAnisotropic);
 	TextureBuffer(const array<shared_ptr<Image>, 6>& images);
 	~TextureBuffer();
 
-	const BufferID getId();
+	const BufferID getID();
 
 private:
-	BufferID _id;
+	BufferID _ID;
 };

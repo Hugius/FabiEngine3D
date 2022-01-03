@@ -1,9 +1,9 @@
+#pragma warning(disable:6385)
+#pragma warning(disable:6386)
+
 #include "image_loader.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
-
-#pragma warning(disable:6385)
-#pragma warning(disable:6386)
 
 using std::clamp;
 

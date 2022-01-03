@@ -2,14 +2,11 @@
 #include "render_bus.hpp"
 #include "configuration.hpp"
 
+using std::make_shared;
+
 void BlurRenderer::loadCaptureBuffer(ivec2 bufferSize)
 {
-	_captureBuffer.createColorTexture(ivec2(0), bufferSize, 1, true);
-}
-
-void BlurRenderer::resetCaptureBuffer()
-{
-	_captureBuffer.reset();
+	_captureBuffer = make_shared<CaptureBuffer>(ivec2(0), bufferSize, 1, true);
 }
 
 void BlurRenderer::bind()
@@ -35,10 +32,10 @@ const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<QuadE
 
 		for(unsigned int i = 0; i < blurCount; i++)
 		{
-			_captureBuffer.bind();
+			_captureBuffer->bind();
 			_render(entity, texture);
-			_captureBuffer.unbind();
-			texture = _captureBuffer.getTexture(0);
+			_captureBuffer->unbind();
+			texture = _captureBuffer->getTexture(0);
 		}
 	}
 
@@ -48,10 +45,10 @@ const shared_ptr<TextureBuffer> BlurRenderer::blurTexture(const shared_ptr<QuadE
 
 		for(unsigned int i = 0; i < blurCount; i++)
 		{
-			_captureBuffer.bind();
+			_captureBuffer->bind();
 			_render(entity, texture);
-			_captureBuffer.unbind();
-			texture = _captureBuffer.getTexture(0);
+			_captureBuffer->unbind();
+			texture = _captureBuffer->getTexture(0);
 		}
 	}
 
@@ -63,9 +60,9 @@ void BlurRenderer::_render(const shared_ptr<QuadEntity> entity, shared_ptr<Textu
 	const auto buffer = entity->getVertexBuffer();
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture->getId());
+	glBindTexture(GL_TEXTURE_2D, texture->getID());
 
-	glBindVertexArray(buffer->getVaoId());
+	glBindVertexArray(buffer->getVaoID());
 
 	glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 

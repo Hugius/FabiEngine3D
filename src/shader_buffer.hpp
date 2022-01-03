@@ -16,11 +16,14 @@ public:
 
 	void bind();
 	void unbind();
-	template<typename T> void uploadUniform(const string& ID, const T& data)
+	template<typename T> void uploadUniform(const string& name, const T& data)
 	{
-		auto uniform = _getUniformID(ID);
-		_uploadUniform(uniform, data);
+		auto uniformID = getUniformID(name);
+		_uploadUniform(uniformID, data);
 	}
+
+	const BufferID getProgramID() const;
+	const BufferID getUniformID(const string& name);
 
 private:
 	void _uploadUniform(const BufferID& uniformID, const bool& data);
@@ -33,12 +36,7 @@ private:
 	void _uploadUniform(const BufferID& uniformID, const mat33& data);
 	void _uploadUniform(const BufferID& uniformID, const mat44& data);
 
-	const BufferID _getUniformID(const string& uniformID);
-
-	string _vertexFileName = "";
-	string _fragmentFileName = "";
-	string _name = "";
-
 	map<string, BufferID> _uniformCache;
-	BufferID _program = 0;
+
+	BufferID _programID = 0;
 };

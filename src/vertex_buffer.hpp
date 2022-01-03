@@ -17,8 +17,8 @@ public:
 
 	const unsigned int getVertexCount() const;
 
-	const BufferID getVaoId() const;
-	const BufferID getVboId() const;
+	const BufferID getVaoID() const;
+	const BufferID getVboID() const;
 
 	const VertexBufferType getBufferType() const;
 
@@ -27,6 +27,6 @@ private:
 
 	VertexBufferType _bufferType;
 
-	BufferID _vaoId = 0;
-	BufferID _vboId = 0;
+	BufferID _vaoID = 0;
+	BufferID _vboID = 0;
 };

@@ -10,13 +10,10 @@ using std::ofstream;
 
 ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentFileName)
 {
-	_name = vertexFileName.substr(0, vertexFileName.size() - 5);
-	_vertexFileName = vertexFileName;
-	_fragmentFileName = fragmentFileName;
-
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto vertexPath = ("engine\\shaders\\" + _vertexFileName);
-	const auto fragmentPath = ("engine\\shaders\\" + _fragmentFileName);
+	const auto vertexPath = string("engine\\shaders\\" + vertexFileName);
+	const auto fragmentPath = string("engine\\shaders\\" + fragmentFileName);
+	const auto shaderNname = vertexFileName.substr(0, vertexFileName.size() - 5);
 
 	if(!Tools::isFileExisting(rootPath + vertexPath))
 	{
@@ -52,7 +49,7 @@ ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentF
 	{
 		char log[512];
 		glGetShaderInfoLog(vertexID, 512, nullptr, log);
-		Logger::throwError("ShaderBuffer::_createProgram::1 ---> ", _name, " ", log);
+		Logger::throwError("ShaderBuffer::_createProgram::1 ---> ", shaderNname, " ", log);
 	}
 
 	auto fragmentID = glCreateShader(GL_FRAGMENT_SHADER);
@@ -65,64 +62,69 @@ ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentF
 	{
 		char log[512];
 		glGetShaderInfoLog(fragmentID, 512, nullptr, log);
-		Logger::throwError("ShaderBuffer::_createProgram::2 ---> ", _name, " ", log);
+		Logger::throwError("ShaderBuffer::_createProgram::2 ---> ", shaderNname, " ", log);
 	}
 
-	_program = glCreateProgram();
-	glAttachShader(_program, vertexID);
-	glAttachShader(_program, fragmentID);
-	glLinkProgram(_program);
+	_programID = glCreateProgram();
+	glAttachShader(_programID, vertexID);
+	glAttachShader(_programID, fragmentID);
+	glLinkProgram(_programID);
 
 	int programStatus;
-	glGetProgramiv(_program, GL_LINK_STATUS, &programStatus);
+	glGetProgramiv(_programID, GL_LINK_STATUS, &programStatus);
 	if(!programStatus)
 	{
 		char log[512];
-		glGetProgramInfoLog(_program, 512, nullptr, log);
-		Logger::throwError("ShaderBuffer::_createProgram::3 ---> ", _name, " ", log);
+		glGetProgramInfoLog(_programID, 512, nullptr, log);
+		Logger::throwError("ShaderBuffer::_createProgram::3 ---> ", shaderNname, " ", log);
 	}
 
 	glDeleteShader(vertexID);
 	glDeleteShader(fragmentID);
 
-	Logger::throwInfo("Loaded vertex shader: \"engine\\shaders\\" + _vertexFileName + "\"");
-	Logger::throwInfo("Loaded fragment shader: \"engine\\shaders\\" + _fragmentFileName + "\"");
+	Logger::throwInfo("Loaded vertex shader: \"engine\\shaders\\" + vertexFileName + "\"");
+	Logger::throwInfo("Loaded fragment shader: \"engine\\shaders\\" + fragmentFileName + "\"");
 }
 
 ShaderBuffer::~ShaderBuffer()
 {
-	glDeleteProgram(_program);
+	glDeleteProgram(_programID);
 }
 
-const BufferID ShaderBuffer::_getUniformID(const string& uniformID)
+const BufferID ShaderBuffer::getUniformID(const string& name)
 {
-	auto iterator = _uniformCache.find(uniformID);
-	if(iterator == _uniformCache.end())
-	{
-		auto uniform = glGetUniformLocation(_program, uniformID.c_str());
-		if(uniform == -1)
-		{
-			Logger::throwError("ShaderBuffer::_getUniformID ---> ", uniformID);
-		}
+	auto cacheIterator = _uniformCache.find(name);
 
-		_uniformCache.insert(make_pair(uniformID, uniform));
-
-		return uniform;
-	}
-	else
+	if(cacheIterator != _uniformCache.end())
 	{
-		return iterator->second;
+		return cacheIterator->second;
 	}
+
+	auto ID = glGetUniformLocation(_programID, name.c_str());
+
+	if(ID == -1)
+	{
+		Logger::throwError("ShaderBuffer::_getUniformID ---> ", name);
+	}
+
+	_uniformCache.insert(make_pair(name, ID));
+
+	return ID;
 }
 
 void ShaderBuffer::bind()
 {
-	glUseProgram(_program);
+	glUseProgram(_programID);
 }
 
 void ShaderBuffer::unbind()
 {
 	glUseProgram(0);
+}
+
+const BufferID ShaderBuffer::getProgramID() const
+{
+	return _programID;
 }
 
 void ShaderBuffer::_uploadUniform(const BufferID& uniformID, const bool& data)

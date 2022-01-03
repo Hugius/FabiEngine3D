@@ -5,11 +5,11 @@ VertexBuffer::VertexBuffer(VertexBufferType type, const float data[], unsigned i
 {
 	_bufferType = type;
 
-	glGenVertexArrays(1, &_vaoId);
-	glGenBuffers(1, &_vboId);
+	glGenVertexArrays(1, &_vaoID);
+	glGenBuffers(1, &_vboID);
 
-	glBindVertexArray(_vaoId);
-	glBindBuffer(GL_ARRAY_BUFFER, _vboId);
+	glBindVertexArray(_vaoID);
+	glBindBuffer(GL_ARRAY_BUFFER, _vboID);
 
 	glBufferData(GL_ARRAY_BUFFER, (dataCount * sizeof(float)), &data[0], GL_STATIC_DRAW);
 
@@ -94,11 +94,11 @@ VertexBuffer::VertexBuffer(float x, float y, float w, float h, bool isCentered)
 		};
 	}
 
-	glGenVertexArrays(1, &_vaoId);
-	glGenBuffers(1, &_vboId);
+	glGenVertexArrays(1, &_vaoID);
+	glGenBuffers(1, &_vboID);
 
-	glBindVertexArray(_vaoId);
-	glBindBuffer(GL_ARRAY_BUFFER, _vboId);
+	glBindVertexArray(_vaoID);
+	glBindBuffer(GL_ARRAY_BUFFER, _vboID);
 
 	glBufferData(GL_ARRAY_BUFFER, 24 * sizeof(float), &data[0], GL_STATIC_DRAW);
 
@@ -115,18 +115,18 @@ VertexBuffer::VertexBuffer(float x, float y, float w, float h, bool isCentered)
 
 VertexBuffer::~VertexBuffer()
 {
-	glDeleteVertexArrays(1, &_vaoId);
-	glDeleteBuffers(1, &_vboId);
+	glDeleteVertexArrays(1, &_vaoID);
+	glDeleteBuffers(1, &_vboID);
 }
 
-const BufferID VertexBuffer::getVaoId() const
+const BufferID VertexBuffer::getVaoID() const
 {
-	return _vaoId;
+	return _vaoID;
 }
 
-const BufferID VertexBuffer::getVboId() const
+const BufferID VertexBuffer::getVboID() const
 {
-	return _vboId;
+	return _vboID;
 }
 
 const unsigned int VertexBuffer::getVertexCount() const

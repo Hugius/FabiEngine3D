@@ -53,10 +53,10 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, floa
 			if(entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE0);
-				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID)->getId());
+				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID)->getID());
 			}
 
-			glBindVertexArray(buffer->getVaoId());
+			glBindVertexArray(buffer->getVaoID());
 
 			glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 

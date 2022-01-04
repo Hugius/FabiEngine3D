@@ -108,7 +108,7 @@ void WaterEntityColorRenderer::processSpotlightEntities(const unordered_map<stri
 
 void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 {
-	if(entity->hasLowQualityVertexBuffer() && entity->hasHighQualityVertexBuffer() && entity->isVisible())
+	if(entity->isVisible())
 	{
 		if(entity->isWireframed())
 		{

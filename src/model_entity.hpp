@@ -122,7 +122,6 @@ public:
 	const bool isWireframed(const string& partID) const;
 	const bool isSpecular(const string& partID) const;
 	const bool isReflective(const string& partID) const;
-	const bool hasVertexBuffer(const string& partID) const;
 	const bool hasDiffuseMap(const string& partID) const;
 	const bool hasEmissionMap(const string& partID) const;
 	const bool hasSpecularMap(const string& partID) const;

@@ -73,7 +73,6 @@ public:
 
 	const bool isSpecular() const;
 	const bool isWireframed() const;
-	const bool hasVertexBuffer() const;
 	const bool hasDiffuseMap() const;
 	const bool hasNormalMap() const;
 	const bool hasBlendMap() const;

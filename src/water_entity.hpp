@@ -63,8 +63,6 @@ public:
 	const bool isReflective() const;
 	const bool isRefractive() const;
 	const bool isWireframed() const;
-	const bool hasLowQualityVertexBuffer() const;
-	const bool hasHighQualityVertexBuffer() const;
 	const bool hasDudvMap() const;
 	const bool hasNormalMap() const;
 	const bool hasDisplacementMap() const;

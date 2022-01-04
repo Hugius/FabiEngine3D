@@ -140,11 +140,6 @@ const bool BillboardEntity::isWireframed() const
 	return _isWireframed;
 }
 
-const bool BillboardEntity::hasVertexBuffer() const
-{
-	return (_mesh != nullptr);
-}
-
 const bool BillboardEntity::hasDiffuseMap() const
 {
 	return (_diffuseMap != nullptr);

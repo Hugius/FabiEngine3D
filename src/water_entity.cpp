@@ -255,27 +255,17 @@ const bool WaterEntity::isWireframed() const
 	return _isWireframed;
 }
 
-const bool WaterEntity::hasLowQualityVertexBuffer() const
-{
-	return (_lowQualityVertexBuffer != nullptr);
-}
-
-const bool WaterEntity::hasHighQualityVertexBuffer() const
-{
-	return (_highQualityVertexBuffer != nullptr);
-}
-
 const bool WaterEntity::hasDudvMap() const
 {
-	return (_dudvMap != 0);
+	return (_dudvMap != nullptr);
 }
 
 const bool WaterEntity::hasNormalMap() const
 {
-	return (_normalMap != 0);
+	return (_normalMap != nullptr);
 }
 
 const bool WaterEntity::hasDisplacementMap() const
 {
-	return (_displacementMap != 0);
+	return (_displacementMap != nullptr);
 }

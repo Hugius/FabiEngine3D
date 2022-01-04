@@ -190,27 +190,27 @@ const bool ModelEntity::isReflected() const
 
 const bool ModelEntity::hasDiffuseMap(const string& partID) const
 {
-	return (_parts[_getPartIndex(partID)].diffuseMap != 0);
+	return (_parts[_getPartIndex(partID)].diffuseMap != nullptr);
 }
 
 const bool ModelEntity::hasEmissionMap(const string& partID) const
 {
-	return (_parts[_getPartIndex(partID)].emissionMap != 0);
+	return (_parts[_getPartIndex(partID)].emissionMap != nullptr);
 }
 
 const bool ModelEntity::hasSpecularMap(const string& partID) const
 {
-	return (_parts[_getPartIndex(partID)].specularMap != 0);
+	return (_parts[_getPartIndex(partID)].specularMap != nullptr);
 }
 
 const bool ModelEntity::hasReflectionMap(const string& partID) const
 {
-	return (_parts[_getPartIndex(partID)].reflectionMap != 0);
+	return (_parts[_getPartIndex(partID)].reflectionMap != nullptr);
 }
 
 const bool ModelEntity::hasNormalMap(const string& partID) const
 {
-	return (_parts[_getPartIndex(partID)].normalMap != 0);
+	return (_parts[_getPartIndex(partID)].normalMap != nullptr);
 }
 
 const ReflectionType ModelEntity::getReflectionType(const string& partID) const
@@ -226,11 +226,6 @@ const DirectionOrder ModelEntity::getRotationOrder() const
 const bool ModelEntity::isBright() const
 {
 	return _isBright;
-}
-
-const bool ModelEntity::hasVertexBuffer(const string& partID) const
-{
-	return (_parts[_getPartIndex(partID)].vertexBuffer != nullptr);
 }
 
 const bool ModelEntity::isFrozen() const

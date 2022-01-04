@@ -84,7 +84,6 @@ public:
 	const bool isTextual() const;
 	const bool isFrozen() const;
 	const bool isWireframed() const;
-	const bool hasVertexBuffer() const;
 	const bool hasDiffuseMap() const;
 	const bool hasEmissionMap() const;
 	const bool isCentered() const;

@@ -238,7 +238,7 @@ const bool QuadEntity::isMirroredVertically() const
 
 const bool QuadEntity::hasDiffuseMap() const
 {
-	return (_diffuseMap != 0);
+	return (_diffuseMap != nullptr);
 }
 
 const mat44 QuadEntity::getTransformationMatrix() const

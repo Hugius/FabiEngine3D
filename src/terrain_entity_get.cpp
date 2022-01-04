@@ -165,52 +165,47 @@ const bool TerrainEntity::isWireframed() const
 	return _isWireframed;
 }
 
-const bool TerrainEntity::hasVertexBuffer() const
-{
-	return (_mesh != nullptr);
-}
-
 const bool TerrainEntity::hasDiffuseMap() const
 {
-	return (_diffuseMap != 0);
+	return (_diffuseMap != nullptr);
 }
 
 const bool TerrainEntity::hasNormalMap() const
 {
-	return (_normalMap != 0);
+	return (_normalMap != nullptr);
 }
 
 const bool TerrainEntity::hasBlendMap() const
 {
-	return (_blendMap != 0);
+	return (_blendMap != nullptr);
 }
 
 const bool TerrainEntity::hasRedDiffuseMap() const
 {
-	return (_redDiffuseMap != 0);
+	return (_redDiffuseMap != nullptr);
 }
 
 const bool TerrainEntity::hasGreenDiffuseMap() const
 {
-	return (_greenDiffuseMap != 0);
+	return (_greenDiffuseMap != nullptr);
 }
 
 const bool TerrainEntity::hasBlueDiffuseMap() const
 {
-	return (_blueDiffuseMap != 0);
+	return (_blueDiffuseMap != nullptr);
 }
 
 const bool TerrainEntity::hasRedNormalMap() const
 {
-	return (_redNormalMap != 0);
+	return (_redNormalMap != nullptr);
 }
 
 const bool TerrainEntity::hasGreenNormalMap() const
 {
-	return (_greenNormalMap != 0);
+	return (_greenNormalMap != nullptr);
 }
 
 const bool TerrainEntity::hasBlueNormalMap() const
 {
-	return (_blueNormalMap != 0);
+	return (_blueNormalMap != nullptr);
 }

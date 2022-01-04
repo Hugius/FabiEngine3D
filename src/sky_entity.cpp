@@ -102,15 +102,10 @@ const float SkyEntity::getRotation() const
 
 const bool SkyEntity::hasCubeMap() const
 {
-	return (_cubeMap != 0);
+	return (_cubeMap != nullptr);
 }
 
 const bool SkyEntity::isWireframed() const
 {
 	return _isWireframed;
-}
-
-const bool SkyEntity::hasVertexBuffer() const
-{
-	return (_mesh != nullptr);
 }

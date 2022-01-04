@@ -273,50 +273,50 @@ void MasterRenderer::_renderDebugScreens()
 	shared_ptr<QuadEntity> shadowQuad = make_shared<QuadEntity>("shadowQuad");
 	shadowQuad->setMesh(make_shared<VertexBuffer>(0.0f, 0.666f, 0.666f, 0.666f, true));
 	shadowQuad->setDiffuseMap(_renderBus.getShadowMap());
-	shadowQuad->setColor(fvec3(static_cast<float>(_renderBus.getShadowMap() != 0)));
+	shadowQuad->setColor(fvec3(static_cast<float>(_renderBus.getShadowMap() != nullptr)));
 	shadowQuad->setMirroredVertically(true);
 
 	shared_ptr<QuadEntity> bloomQuad = make_shared<QuadEntity>("bloomQuad");
 	bloomQuad->setMesh(make_shared<VertexBuffer>(0.666f, 0.666f, 0.666f, 0.666f, true));
 	bloomQuad->setDiffuseMap(_renderBus.getBloomMap());
-	bloomQuad->setColor(fvec3(static_cast<float>(_renderBus.getBloomMap() != 0)));
+	bloomQuad->setColor(fvec3(static_cast<float>(_renderBus.getBloomMap() != nullptr)));
 	bloomQuad->setMirroredVertically(true);
 
 	shared_ptr<QuadEntity> planarReflectionQuad = make_shared<QuadEntity>("planarReflectionQuad");
 	planarReflectionQuad->setMesh(make_shared<VertexBuffer>(-0.666f, 0.0f, 0.666f, 0.666f, true));
 	planarReflectionQuad->setDiffuseMap(_renderBus.getPlanarReflectionMap());
-	planarReflectionQuad->setColor(fvec3(static_cast<float>(_renderBus.getPlanarReflectionMap() != 0)));
+	planarReflectionQuad->setColor(fvec3(static_cast<float>(_renderBus.getPlanarReflectionMap() != nullptr)));
 	planarReflectionQuad->setMirroredVertically(true);
 
 	shared_ptr<QuadEntity> waterReflectionQuad = make_shared<QuadEntity>("waterReflectionQuad");
 	waterReflectionQuad->setMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 0.666f, 0.666f, true));
 	waterReflectionQuad->setDiffuseMap(_renderBus.getWaterReflectionMap());
-	waterReflectionQuad->setColor(fvec3(static_cast<float>(_renderBus.getWaterReflectionMap() != 0)));
+	waterReflectionQuad->setColor(fvec3(static_cast<float>(_renderBus.getWaterReflectionMap() != nullptr)));
 	waterReflectionQuad->setMirroredVertically(true);
 
 	shared_ptr<QuadEntity> waterRefractionQuad = make_shared<QuadEntity>("waterRefractionQuad");
 	waterRefractionQuad->setMesh(make_shared<VertexBuffer>(0.666f, 0.0f, 0.666f, 0.666f, true));
 	waterRefractionQuad->setDiffuseMap(_renderBus.getWaterRefractionMap());
-	waterRefractionQuad->setColor(fvec3(static_cast<float>(_renderBus.getWaterRefractionMap() != 0)));
+	waterRefractionQuad->setColor(fvec3(static_cast<float>(_renderBus.getWaterRefractionMap() != nullptr)));
 	waterRefractionQuad->setMirroredVertically(true);
 
 	shared_ptr<QuadEntity> depthQuad = make_shared<QuadEntity>("depthQuad");
 	depthQuad->setMesh(make_shared<VertexBuffer>(-0.666f, -0.666f, 0.666f, 0.666f, true));
 	depthQuad->setDiffuseMap(_renderBus.getDepthMap());
-	depthQuad->setColor(fvec3(static_cast<float>(_renderBus.getDepthMap() != 0)));
+	depthQuad->setColor(fvec3(static_cast<float>(_renderBus.getDepthMap() != nullptr)));
 	depthQuad->setMirroredVertically(true);
 	depthQuad->setPerspectiveDepthEntity(true);
 
 	shared_ptr<QuadEntity> dofQuad = make_shared<QuadEntity>("dofQuad");
 	dofQuad->setMesh(make_shared<VertexBuffer>(0.0f, -0.666f, 0.666f, 0.666f, true));
 	dofQuad->setDiffuseMap(_renderBus.getDofMap());
-	dofQuad->setColor(fvec3(static_cast<float>(_renderBus.getDofMap() != 0)));
+	dofQuad->setColor(fvec3(static_cast<float>(_renderBus.getDofMap() != nullptr)));
 	dofQuad->setMirroredVertically(true);
 
 	shared_ptr<QuadEntity> motionBlurQuad = make_shared<QuadEntity>("motionBlurQuad");
 	motionBlurQuad->setMesh(make_shared<VertexBuffer>(0.666f, -0.666f, 0.666f, 0.666f, true));
 	motionBlurQuad->setDiffuseMap(_renderBus.getMotionBlurMap());
-	motionBlurQuad->setColor(fvec3(static_cast<float>(_renderBus.getMotionBlurMap() != 0)));
+	motionBlurQuad->setColor(fvec3(static_cast<float>(_renderBus.getMotionBlurMap() != nullptr)));
 	motionBlurQuad->setMirroredVertically(true);
 
 	/*shared_ptr<TextEntity> worldText = make_shared<TextEntity>("worldText");

@@ -1,12 +1,12 @@
 #include "model_entity_depth_renderer.hpp"
 
-void ModelEntityDepthRenderer::bind()
+void ModelEntityDepthRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus)
 {
-	_shader.bind();
+	shader->bind();
 
-	_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
-	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
-	_shader.uploadUniform("u_diffuseMap", 0);
+	shader->uploadUniform("u_viewMatrix", renderBus.getViewMatrix());
+	shader->uploadUniform("u_projectionMatrix", renderBus.getProjectionMatrix());
+	shader->uploadUniform("u_diffuseMap", 0);
 
 	glEnable(GL_CLIP_DISTANCE0);
 	glEnable(GL_CLIP_DISTANCE1);
@@ -16,7 +16,7 @@ void ModelEntityDepthRenderer::bind()
 	glDepthFunc(GL_LEQUAL);
 }
 
-void ModelEntityDepthRenderer::unbind()
+void ModelEntityDepthRenderer::unbind(shared_ptr<ShaderBuffer> shader)
 {
 	glDisable(GL_DEPTH_TEST);
 
@@ -24,10 +24,10 @@ void ModelEntityDepthRenderer::unbind()
 	glDisable(GL_CLIP_DISTANCE1);
 	glDisable(GL_CLIP_DISTANCE2);
 
-	_shader.unbind();
+	shader->unbind();
 }
 
-void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, float clippingY, bool isUnderWater)
+void ModelEntityDepthRenderer::render(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus, const shared_ptr<ModelEntity> entity, float clippingY, bool isUnderWater)
 {
 	if(entity->isVisible())
 	{
@@ -36,19 +36,19 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, floa
 			glEnable(GL_CULL_FACE);
 		}
 
-		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
-		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
-		_shader.uploadUniform("u_clippingY", clippingY);
-		_shader.uploadUniform("u_isUnderWater", isUnderWater);
-		_shader.uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
-		_shader.uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
+		shader->uploadUniform("u_minHeight", entity->getMinHeight());
+		shader->uploadUniform("u_maxHeight", entity->getMaxHeight());
+		shader->uploadUniform("u_clippingY", clippingY);
+		shader->uploadUniform("u_isUnderWater", isUnderWater);
+		shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(renderBus.getViewMatrix())) : renderBus.getViewMatrix()));
+		shader->uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
 		for(const auto& partID : entity->getPartIDs())
 		{
 			const auto buffer = entity->getMesh(partID);
 
-			_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partID));
-			_shader.uploadUniform("u_textureRepeat", entity->getTextureRepeat(partID));
+			shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partID));
+			shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat(partID));
 
 			if(entity->hasDiffuseMap(partID))
 			{

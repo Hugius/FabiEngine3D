@@ -13,9 +13,6 @@
     <Filter Include="Renderer">
       <UniqueIdentifier>{87058a7c-3a74-44c3-a64f-cf4399802d7f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Renderer\Base">
-      <UniqueIdentifier>{db74bef5-67e7-47ba-9bf8-024bd20dc2dc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Buffer">
       <UniqueIdentifier>{b34fa46f-cff4-4862-a24b-caed3757d4ed}</UniqueIdentifier>
     </Filter>
@@ -74,9 +71,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\render_window.cpp">
       <Filter>Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\base_renderer.cpp">
-      <Filter>Renderer\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\blur_renderer.cpp">
       <Filter>Renderer\Post</Filter>
@@ -169,9 +163,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\render_window.hpp">
       <Filter>Miscellaneous</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\base_renderer.hpp">
-      <Filter>Renderer\Base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\blur_renderer.hpp">
       <Filter>Renderer\Post</Filter>

@@ -1,28 +1,28 @@
 #include "bloom_renderer.hpp"
 #include "render_bus.hpp"
 
-void BloomRenderer::bind()
+void BloomRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus)
 {
-	_shader.bind();
+	shader->bind();
 
-	_shader.uploadUniform("u_sceneMap", 0);
-	_shader.uploadUniform("u_bloomMap", 1);
-	_shader.uploadUniform("u_isBloomEnabled", _renderBus.isBloomEnabled());
+	shader->uploadUniform("u_sceneMap", 0);
+	shader->uploadUniform("u_bloomMap", 1);
+	shader->uploadUniform("u_isBloomEnabled", renderBus.isBloomEnabled());
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap()->getID());
+	glBindTexture(GL_TEXTURE_2D, renderBus.getFinalSceneMap()->getID());
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getBloomMap()->getID());
+	glBindTexture(GL_TEXTURE_2D, renderBus.getBloomMap()->getID());
 }
 
-void BloomRenderer::unbind()
+void BloomRenderer::unbind(shared_ptr<ShaderBuffer> shader)
 {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	_shader.unbind();
+	shader->unbind();
 }
 
 void BloomRenderer::render(const shared_ptr<QuadEntity> entity)

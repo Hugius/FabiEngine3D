@@ -1,14 +1,13 @@
 #pragma once
 
-#include "base_renderer.hpp"
 #include "terrain_entity.hpp"
+#include "shader_buffer.hpp"
+#include "render_bus.hpp"
 
-class TerrainEntityDepthRenderer final : public BaseRenderer
+class TerrainEntityDepthRenderer final
 {
 public:
-	using BaseRenderer::BaseRenderer;
-
-	void bind() override;
-	void unbind() override;
-	void render(const shared_ptr<TerrainEntity> entity);
+	void bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus);
+	void unbind(shared_ptr<ShaderBuffer> shader);
+	void render(shared_ptr<ShaderBuffer> shader, const shared_ptr<TerrainEntity> entity);
 };

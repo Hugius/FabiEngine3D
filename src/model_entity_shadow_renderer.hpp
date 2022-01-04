@@ -1,16 +1,15 @@
 #pragma once
 
-#include "base_renderer.hpp"
 #include "model_entity.hpp"
+#include "shader_buffer.hpp"
+#include "render_bus.hpp"
 
-class ModelEntityShadowRenderer final : public BaseRenderer
+class ModelEntityShadowRenderer final
 {
 public:
-	using BaseRenderer::BaseRenderer;
-
-	void bind() override;
-	void unbind() override;
-	void render(const shared_ptr<ModelEntity> entity);
+	void bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus);
+	void unbind(shared_ptr<ShaderBuffer> shader);
+	void render(shared_ptr<ShaderBuffer> shader, const shared_ptr<ModelEntity> entity);
 
 private:
 	static inline const float MIN_TEXTURE_TRANSPARENCY = 0.25f;

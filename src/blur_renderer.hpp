@@ -1,21 +1,21 @@
 #pragma once
 
-#include "base_renderer.hpp"
 #include "quad_entity.hpp"
 #include "capture_buffer.hpp"
 #include "blur_direction.hpp"
+#include "shader_buffer.hpp"
+#include "render_bus.hpp"
 
-class BlurRenderer final : public BaseRenderer
+class BlurRenderer final
 {
 public:
-	using BaseRenderer::BaseRenderer;
-
-	void bind() override;
-	void unbind() override;
+	void bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus);
+	void unbind(shared_ptr<ShaderBuffer> shader);
 	void loadCaptureBuffer(ivec2 bufferSize);
 
-	const shared_ptr<TextureBuffer> blurTexture(const shared_ptr<QuadEntity> entity, shared_ptr<TextureBuffer> texture,
-												unsigned int blurCount, float intensity, BlurDirection direction);
+	const shared_ptr<TextureBuffer> blurTexture(shared_ptr<ShaderBuffer> shader, const shared_ptr<QuadEntity> entity,
+												shared_ptr<TextureBuffer> texture, unsigned int blurCount,
+												float intensity, BlurDirection direction);
 
 private:
 	void _render(const shared_ptr<QuadEntity> entity, shared_ptr<TextureBuffer> texture);

@@ -9,8 +9,7 @@ using std::chrono::duration_cast;
 Core::Core(FabiEngine3D& fe3d)
 	:
 	_fe3d(fe3d),
-	_renderWindow(_libraryLoader),
-	_masterRenderer(_renderBus)
+	_renderWindow(_libraryLoader)
 {
 
 }
@@ -181,7 +180,7 @@ void Core::_update()
 	_networkingClient.update();
 	_timer.stopDeltaPart();
 
-	_masterRenderer.update(_camera);
+	_masterRenderer.update(_renderBus, _camera);
 
 	if(!Config::getInst().isApplicationExported())
 	{

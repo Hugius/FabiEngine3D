@@ -2,22 +2,22 @@
 #include "configuration.hpp"
 #include "text_entity.hpp"
 
-void AntiAliasingRenderer::bind()
+void AntiAliasingRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus)
 {
-	_shader.bind();
+	shader->bind();
 
-	_shader.uploadUniform("u_sceneMap", 0);
+	shader->uploadUniform("u_sceneMap", 0);
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap()->getID());
+	glBindTexture(GL_TEXTURE_2D, renderBus.getFinalSceneMap()->getID());
 }
 
-void AntiAliasingRenderer::unbind()
+void AntiAliasingRenderer::unbind(shared_ptr<ShaderBuffer> shader)
 {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	_shader.unbind();
+	shader->unbind();
 }
 
 void AntiAliasingRenderer::render(const shared_ptr<QuadEntity> entity)

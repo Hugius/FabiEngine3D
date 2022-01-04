@@ -1,22 +1,21 @@
 #pragma once
 
-#include "base_renderer.hpp"
 #include "pointlight_entity.hpp"
 #include "spotlight_entity.hpp"
 #include "water_entity.hpp"
+#include "shader_buffer.hpp"
+#include "render_bus.hpp"
 
 #include <unordered_map>
 
 using std::unordered_map;
 
-class WaterEntityColorRenderer final : public BaseRenderer
+class WaterEntityColorRenderer final
 {
 public:
-	using BaseRenderer::BaseRenderer;
-
-	void bind() override;
-	void unbind() override;
-	void processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>>& entities);
-	void processSpotlightEntities(const unordered_map<string, shared_ptr<SpotlightEntity>>& entities);
-	void render(const shared_ptr<WaterEntity> entity);
+	void bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus);
+	void unbind(shared_ptr<ShaderBuffer> shader);
+	void processPointlightEntities(shared_ptr<ShaderBuffer> shader, const unordered_map<string, shared_ptr<PointlightEntity>>& entities);
+	void processSpotlightEntities(shared_ptr<ShaderBuffer> shader, const unordered_map<string, shared_ptr<SpotlightEntity>>& entities);
+	void render(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus, const shared_ptr<WaterEntity> entity);
 };

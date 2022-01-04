@@ -1,25 +1,25 @@
 #include "terrain_entity_depth_renderer.hpp"
 #include "render_bus.hpp"
 
-void TerrainEntityDepthRenderer::bind()
+void TerrainEntityDepthRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus)
 {
-	_shader.bind();
+	shader->bind();
 
-	_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
-	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
+	shader->uploadUniform("u_viewMatrix", renderBus.getViewMatrix());
+	shader->uploadUniform("u_projectionMatrix", renderBus.getProjectionMatrix());
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 }
 
-void TerrainEntityDepthRenderer::unbind()
+void TerrainEntityDepthRenderer::unbind(shared_ptr<ShaderBuffer> shader)
 {
 	glDisable(GL_DEPTH_TEST);
 
-	_shader.unbind();
+	shader->unbind();
 }
 
-void TerrainEntityDepthRenderer::render(const shared_ptr<TerrainEntity> entity)
+void TerrainEntityDepthRenderer::render(shared_ptr<ShaderBuffer> shader, const shared_ptr<TerrainEntity> entity)
 {
 	if(entity->isVisible())
 	{

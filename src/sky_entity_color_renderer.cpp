@@ -1,22 +1,22 @@
 #include "sky_entity_color_renderer.hpp"
 
-void SkyEntityColorRenderer::bind()
+void SkyEntityColorRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus)
 {
-	_shader.bind();
+	shader->bind();
 
-	_shader.uploadUniform("u_viewMatrix", mat44(mat33(_renderBus.getViewMatrix())));
-	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
-	_shader.uploadUniform("u_mixValue", _renderBus.getSkyMixValue());
-	_shader.uploadUniform("u_mainCubeMap", 0);
-	_shader.uploadUniform("u_mixCubeMap", 1);
+	shader->uploadUniform("u_viewMatrix", mat44(mat33(renderBus.getViewMatrix())));
+	shader->uploadUniform("u_projectionMatrix", renderBus.getProjectionMatrix());
+	shader->uploadUniform("u_mixValue", renderBus.getSkyMixValue());
+	shader->uploadUniform("u_mainCubeMap", 0);
+	shader->uploadUniform("u_mixCubeMap", 1);
 }
 
-void SkyEntityColorRenderer::unbind()
+void SkyEntityColorRenderer::unbind(shared_ptr<ShaderBuffer> shader)
 {
-	_shader.unbind();
+	shader->unbind();
 }
 
-void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, const shared_ptr<SkyEntity> mixEntity)
+void SkyEntityColorRenderer::render(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus, const shared_ptr<SkyEntity> mainEntity, const shared_ptr<SkyEntity> mixEntity)
 {
 	if(mainEntity->isVisible())
 	{
@@ -25,16 +25,16 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, cons
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
 
-		_shader.uploadUniform("u_isWireframed", (mainEntity->isWireframed() || _renderBus.isWireframeRenderingEnabled()));
-		_shader.uploadUniform("u_rotationMatrix", mainEntity->getRotationMatrix());
-		_shader.uploadUniform("u_mainLightness", mainEntity->getLightness());
-		_shader.uploadUniform("u_mainColor", mainEntity->getColor());
-		_shader.uploadUniform("u_wireframeColor", mainEntity->getWireframeColor());
+		shader->uploadUniform("u_isWireframed", (mainEntity->isWireframed() || renderBus.isWireframeRenderingEnabled()));
+		shader->uploadUniform("u_rotationMatrix", mainEntity->getRotationMatrix());
+		shader->uploadUniform("u_mainLightness", mainEntity->getLightness());
+		shader->uploadUniform("u_mainColor", mainEntity->getColor());
+		shader->uploadUniform("u_wireframeColor", mainEntity->getWireframeColor());
 
 		if(mixEntity != nullptr)
 		{
-			_shader.uploadUniform("u_mixLightness", mixEntity->getLightness());
-			_shader.uploadUniform("u_mixColor", mixEntity->getColor());
+			shader->uploadUniform("u_mixLightness", mixEntity->getLightness());
+			shader->uploadUniform("u_mixColor", mixEntity->getColor());
 		}
 
 		if(mainEntity->hasCubeMap())
@@ -55,7 +55,7 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, cons
 		glBindVertexArray(mainEntity->getMesh()->getVaoID());
 
 		glDrawArrays(GL_TRIANGLES, 0, mainEntity->getMesh()->getVertexCount());
-		_renderBus.increaseTriangleCount(mainEntity->getMesh()->getVertexCount() / 3);
+		renderBus.increaseTriangleCount(mainEntity->getMesh()->getVertexCount() / 3);
 
 		glBindVertexArray(0);
 

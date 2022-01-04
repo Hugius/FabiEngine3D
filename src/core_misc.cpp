@@ -21,7 +21,7 @@ void Core::_render()
 	const auto texts = _textEntityManager.getEntities();
 	EntityBus entityBus(mainSky, mixSky, terrain, water, models, billboards, AABBs, pointlights, spotlights, reflections, quads, texts);
 
-	_masterRenderer.render(_camera, _shadowGenerator, _timer, entityBus);
+	_masterRenderer.render(_renderBus, _camera, _shadowGenerator, _timer, entityBus);
 
 	_timer.startDeltaPart("bufferSwap");
 	_renderWindow.swapBackBuffer();
@@ -100,7 +100,7 @@ void Core::_prepare()
 		_renderWindow.enableColorKeying(keyingColor);
 		_renderWindow.setSize(logoResolution);
 		_renderWindow.showWindow();
-		_masterRenderer.render(logo, logoResolution);
+		_masterRenderer.render(_renderBus, logo, logoResolution);
 		_renderWindow.swapBackBuffer();
 	}
 

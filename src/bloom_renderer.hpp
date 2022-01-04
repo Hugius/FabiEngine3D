@@ -1,14 +1,13 @@
 #pragma once
 
-#include "base_renderer.hpp"
 #include "quad_entity.hpp"
+#include "shader_buffer.hpp"
+#include "render_bus.hpp"
 
-class BloomRenderer final : public BaseRenderer
+class BloomRenderer final
 {
 public:
-	using BaseRenderer::BaseRenderer;
-
-	void bind() override;
-	void unbind() override;
+	void bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus);
+	void unbind(shared_ptr<ShaderBuffer> shader);
 	void render(const shared_ptr<QuadEntity> entity);
 };

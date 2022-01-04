@@ -1,34 +1,34 @@
 #include "aabb_entity_color_renderer.hpp"
 
-void AabbEntityColorRenderer::bind()
+void AabbEntityColorRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus)
 {
-	_shader.bind();
+	shader->bind();
 
-	_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
-	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
+	shader->uploadUniform("u_viewMatrix", renderBus.getViewMatrix());
+	shader->uploadUniform("u_projectionMatrix", renderBus.getProjectionMatrix());
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 }
 
-void AabbEntityColorRenderer::unbind()
+void AabbEntityColorRenderer::unbind(shared_ptr<ShaderBuffer> shader)
 {
 	glDisable(GL_DEPTH_TEST);
 
-	_shader.unbind();
+	shader->unbind();
 }
 
-void AabbEntityColorRenderer::render(const shared_ptr<AabbEntity> entity)
+void AabbEntityColorRenderer::render(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus, const shared_ptr<AabbEntity> entity)
 {
 	if(entity->isVisible())
 	{
-		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
-		_shader.uploadUniform("u_color", entity->getColor());
+		shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
+		shader->uploadUniform("u_color", entity->getColor());
 
 		glBindVertexArray(entity->getMesh()->getVaoID());
 
 		glDrawArrays(GL_LINE_STRIP, 0, entity->getMesh()->getVertexCount());
-		_renderBus.increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);
+		renderBus.increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);
 
 		glBindVertexArray(0);
 	}

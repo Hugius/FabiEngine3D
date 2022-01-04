@@ -1,14 +1,13 @@
 #pragma once
 
-#include "base_renderer.hpp"
 #include "sky_entity.hpp"
+#include "shader_buffer.hpp"
+#include "render_bus.hpp"
 
-class SkyEntityColorRenderer final : public BaseRenderer
+class SkyEntityColorRenderer final
 {
 public:
-	using BaseRenderer::BaseRenderer;
-
-	void bind() override;
-	void unbind() override;
-	void render(const shared_ptr<SkyEntity> first, const shared_ptr<SkyEntity> second);
+	void bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus);
+	void unbind(shared_ptr<ShaderBuffer> shader);
+	void render(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus, const shared_ptr<SkyEntity> first, const shared_ptr<SkyEntity> second);
 };

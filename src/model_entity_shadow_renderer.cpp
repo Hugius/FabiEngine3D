@@ -1,12 +1,12 @@
 #include "model_entity_shadow_renderer.hpp"
 #include "render_bus.hpp"
 
-void ModelEntityShadowRenderer::bind()
+void ModelEntityShadowRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus)
 {
-	_shader.bind();
+	shader->bind();
 
-	_shader.uploadUniform("u_lightSpaceMatrix", _renderBus.getShadowMatrix());
-	_shader.uploadUniform("u_diffuseMap", 0);
+	shader->uploadUniform("u_lightSpaceMatrix", renderBus.getShadowMatrix());
+	shader->uploadUniform("u_diffuseMap", 0);
 
 	glEnable(GL_CLIP_DISTANCE0);
 	glEnable(GL_CLIP_DISTANCE1);
@@ -15,17 +15,17 @@ void ModelEntityShadowRenderer::bind()
 	glDepthFunc(GL_LEQUAL);
 }
 
-void ModelEntityShadowRenderer::unbind()
+void ModelEntityShadowRenderer::unbind(shared_ptr<ShaderBuffer> shader)
 {
 	glDisable(GL_DEPTH_TEST);
 
 	glDisable(GL_CLIP_DISTANCE0);
 	glDisable(GL_CLIP_DISTANCE1);
 
-	_shader.unbind();
+	shader->unbind();
 }
 
-void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
+void ModelEntityShadowRenderer::render(shared_ptr<ShaderBuffer> shader, const shared_ptr<ModelEntity> entity)
 {
 	if(entity->isVisible() && entity->isShadowed())
 	{
@@ -34,16 +34,16 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 			glEnable(GL_CULL_FACE);
 		}
 
-		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
-		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
-		_shader.uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
+		shader->uploadUniform("u_minHeight", entity->getMinHeight());
+		shader->uploadUniform("u_maxHeight", entity->getMaxHeight());
+		shader->uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
 		for(const auto& partID : entity->getPartIDs())
 		{
 			const auto buffer = entity->getMesh(partID);
 
-			_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partID));
-			_shader.uploadUniform("u_textureRepeat", entity->getTextureRepeat(partID));
+			shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partID));
+			shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat(partID));
 
 			if(entity->hasDiffuseMap(partID))
 			{

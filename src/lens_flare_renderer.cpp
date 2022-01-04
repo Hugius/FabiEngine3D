@@ -1,31 +1,31 @@
 #include "lens_flare_renderer.hpp"
 #include "render_bus.hpp"
 
-void LensFlareRenderer::bind()
+void LensFlareRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus)
 {
-	_shader.bind();
+	shader->bind();
 
-	_shader.uploadUniform("u_depthMap", 0);
-	_shader.uploadUniform("u_sceneMap", 1);
-	_shader.uploadUniform("u_flareMap", 2);
-	_shader.uploadUniform("u_nearDistance", _renderBus.getNearDistance());
-	_shader.uploadUniform("u_farDistance", _renderBus.getFarDistance());
-	_shader.uploadUniform("u_lensFlareTransparency", _renderBus.getLensFlareTransparency());
-	_shader.uploadUniform("u_lensFlareIntensity", _renderBus.getLensFlareIntensity());
-	_shader.uploadUniform("u_cameraPosition", _renderBus.getCameraPosition());
-	_shader.uploadUniform("u_flareSourcePosition", _renderBus.getFlareSourcePosition());
-	_shader.uploadUniform("u_flareSourceUv", _renderBus.getFlareSourceUv());
-	_shader.uploadUniform("u_isLensFlareEnabled", _renderBus.isLensFlareEnabled());
+	shader->uploadUniform("u_depthMap", 0);
+	shader->uploadUniform("u_sceneMap", 1);
+	shader->uploadUniform("u_flareMap", 2);
+	shader->uploadUniform("u_nearDistance", renderBus.getNearDistance());
+	shader->uploadUniform("u_farDistance", renderBus.getFarDistance());
+	shader->uploadUniform("u_lensFlareTransparency", renderBus.getLensFlareTransparency());
+	shader->uploadUniform("u_lensFlareIntensity", renderBus.getLensFlareIntensity());
+	shader->uploadUniform("u_cameraPosition", renderBus.getCameraPosition());
+	shader->uploadUniform("u_flareSourcePosition", renderBus.getFlareSourcePosition());
+	shader->uploadUniform("u_flareSourceUv", renderBus.getFlareSourceUv());
+	shader->uploadUniform("u_isLensFlareEnabled", renderBus.isLensFlareEnabled());
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getDepthMap()->getID());
+	glBindTexture(GL_TEXTURE_2D, renderBus.getDepthMap()->getID());
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap()->getID());
+	glBindTexture(GL_TEXTURE_2D, renderBus.getFinalSceneMap()->getID());
 	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getLensFlareMap()->getID());
+	glBindTexture(GL_TEXTURE_2D, renderBus.getLensFlareMap()->getID());
 }
 
-void LensFlareRenderer::unbind()
+void LensFlareRenderer::unbind(shared_ptr<ShaderBuffer> shader)
 {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -34,7 +34,7 @@ void LensFlareRenderer::unbind()
 	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	_shader.unbind();
+	shader->unbind();
 }
 
 void LensFlareRenderer::render(const shared_ptr<QuadEntity> entity)

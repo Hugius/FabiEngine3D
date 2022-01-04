@@ -1,13 +1,13 @@
 #include "master_renderer.hpp"
 
-void MasterRenderer::_captureCubeReflections(ShadowGenerator& shadowGenerator, Camera& camera, EntityBus& entityBus)
+void MasterRenderer::_captureCubeReflections(RenderBus& renderBus, ShadowGenerator& shadowGenerator, Camera& camera, EntityBus& entityBus)
 {
 	if(entityBus.getReflectionEntities().empty())
 	{
 		return;
 	}
 
-	const auto reflectionQuality = _renderBus.getCubeReflectionQuality();
+	const auto reflectionQuality = renderBus.getCubeReflectionQuality();
 
 	const auto initialCameraAspectRatio = camera.getAspectRatio();
 	const auto initialCameraFOV = camera.getFOV();
@@ -35,7 +35,7 @@ void MasterRenderer::_captureCubeReflections(ShadowGenerator& shadowGenerator, C
 		}
 	}
 
-	_renderBus.setReflectionsEnabled(false);
+	renderBus.setReflectionsEnabled(false);
 
 	float oldLightness = 0.0f;
 	auto skyEntity = entityBus.getMainSkyEntity();
@@ -107,16 +107,16 @@ void MasterRenderer::_captureCubeReflections(ShadowGenerator& shadowGenerator, C
 					}
 				}
 
-				camera.updateMatrices(_renderBus);
+				camera.updateMatrices(renderBus);
 
-				shadowGenerator.generate(_renderBus);
-				_captureShadows(entityBus);
+				shadowGenerator.generate(renderBus);
+				_captureShadows(renderBus, entityBus);
 
 				_cubeReflectionCaptor->bind();
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-				_renderSkyEntity(entityBus);
-				_renderTerrainEntity(entityBus);
-				_renderModelEntities(entityBus);
+				_renderSkyEntity(renderBus, entityBus);
+				_renderTerrainEntity(renderBus, entityBus);
+				_renderModelEntities(renderBus, entityBus);
 				_cubeReflectionCaptor->unbind();
 
 				const auto dataSize = (reflectionQuality * reflectionQuality * 3);
@@ -158,7 +158,7 @@ void MasterRenderer::_captureCubeReflections(ShadowGenerator& shadowGenerator, C
 		}
 	}
 
-	_renderBus.setReflectionsEnabled(true);
+	renderBus.setReflectionsEnabled(true);
 
 	if(skyEntity != nullptr)
 	{
@@ -171,7 +171,7 @@ void MasterRenderer::_captureCubeReflections(ShadowGenerator& shadowGenerator, C
 	camera.setYaw(initialCameraYaw);
 	camera.setPitch(initialCameraPitch);
 	camera.setPosition(initialCameraPosition);
-	camera.updateMatrices(_renderBus);
+	camera.updateMatrices(renderBus);
 
-	shadowGenerator.generate(_renderBus);
+	shadowGenerator.generate(renderBus);
 }

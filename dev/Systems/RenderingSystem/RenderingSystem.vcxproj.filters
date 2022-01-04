@@ -51,10 +51,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\master_renderer_capture_reflection_cube.cpp">
+    <ClCompile Include="..\..\..\src\master_renderer_capture_cube.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\master_renderer_capture_post.cpp">
+    <ClCompile Include="..\..\..\src\master_renderer_capture_misc.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\master_renderer_draw.cpp">
@@ -132,13 +132,10 @@
     <ClCompile Include="..\..\..\src\motion_blur_renderer.cpp">
       <Filter>Renderer\Post</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\master_renderer_capture_misc.cpp">
+    <ClCompile Include="..\..\..\src\master_renderer_capture_water.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\master_renderer_capture_reflection_water.cpp">
-      <Filter>Master Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\master_renderer_capture_capture_planar.cpp">
+    <ClCompile Include="..\..\..\src\master_renderer_capture_planar.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\capture_buffer.cpp">

@@ -54,6 +54,7 @@ private:
 
 	FabiEngine3D& _fe3d;
 	LibraryLoader _libraryLoader;
+	RenderWindow _renderWindow;
 	MeshLoader _meshLoader;
 	ImageLoader _imageLoader;
 	AudioLoader _audioLoader;
@@ -70,7 +71,6 @@ private:
 	InputHandler _inputHandler;
 	CameraCollisionHandler _cameraCollisionHandler;
 	Timer _timer;
-	RenderWindow _renderWindow;
 	Sound2dManager _sound2dManager;
 	Sound3dManager _sound3dManager;
 	ShadowGenerator _shadowGenerator;

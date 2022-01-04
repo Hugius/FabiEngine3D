@@ -21,7 +21,7 @@ void Core::_render()
 	const auto texts = _textEntityManager.getEntities();
 	EntityBus entityBus(mainSky, mixSky, terrain, water, models, billboards, AABBs, pointlights, spotlights, reflections, quads, texts);
 
-	_masterRenderer.render(&entityBus);
+	_masterRenderer.render(_camera, _shadowGenerator, _timer, entityBus);
 
 	_timer.startDeltaPart("bufferSwap");
 	_renderWindow.swapBackBuffer();

@@ -1,22 +1,22 @@
 #include "master_renderer.hpp"
 
-void MasterRenderer::_captureCubeReflections()
+void MasterRenderer::_captureCubeReflections(ShadowGenerator& shadowGenerator, Camera& camera, EntityBus& entityBus)
 {
-	if(_entityBus->getReflectionEntities().empty())
+	if(entityBus.getReflectionEntities().empty())
 	{
 		return;
 	}
 
 	const auto reflectionQuality = _renderBus.getCubeReflectionQuality();
 
-	const auto initialCameraAspectRatio = _camera.getAspectRatio();
-	const auto initialCameraFOV = _camera.getFOV();
-	const auto initialCameraYaw = _camera.getYaw();
-	const auto initialCameraPitch = _camera.getPitch();
-	const auto initialCameraPosition = _camera.getPosition();
+	const auto initialCameraAspectRatio = camera.getAspectRatio();
+	const auto initialCameraFOV = camera.getFOV();
+	const auto initialCameraYaw = camera.getYaw();
+	const auto initialCameraPitch = camera.getPitch();
+	const auto initialCameraPosition = camera.getPosition();
 
 	vector<string> savedModelEntityIDs;
-	for(const auto& [key, entity] : _entityBus->getModelEntities())
+	for(const auto& [key, entity] : entityBus.getModelEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
@@ -26,7 +26,7 @@ void MasterRenderer::_captureCubeReflections()
 	}
 
 	vector<string> savedBillboardEntityIDs;
-	for(const auto& [key, entity] : _entityBus->getBillboardEntities())
+	for(const auto& [key, entity] : entityBus.getBillboardEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
@@ -38,76 +38,76 @@ void MasterRenderer::_captureCubeReflections()
 	_renderBus.setReflectionsEnabled(false);
 
 	float oldLightness = 0.0f;
-	auto skyEntity = _entityBus->getMainSkyEntity();
+	auto skyEntity = entityBus.getMainSkyEntity();
 	if(skyEntity != nullptr)
 	{
 		oldLightness = skyEntity->getLightness();
 		skyEntity->setLightness(skyEntity->getInitialLightness());
 	}
 
-	_camera.invertUpVector();
-	_camera.setAspectRatio(1.0f);
-	_camera.setFOV(90.0f);
+	camera.invertUpVector();
+	camera.setAspectRatio(1.0f);
+	camera.setFOV(90.0f);
 
-	for(const auto& [key, entity] : _entityBus->getReflectionEntities())
+	for(const auto& [key, entity] : entityBus.getReflectionEntities())
 	{
 		if(entity->mustCapture())
 		{
 			for(unsigned int i = 0; i < 6; i++)
 			{
-				_camera.setPosition(entity->getPosition());
+				camera.setPosition(entity->getPosition());
 
 				switch(i)
 				{
 					case 0:
 					{
-						_camera.setYaw(0.0f);
-						_camera.setPitch(0.0f);
+						camera.setYaw(0.0f);
+						camera.setPitch(0.0f);
 						break;
 					}
 					case 1:
 					{
-						_camera.setYaw(180.0f);
-						_camera.setPitch(0.0f);
+						camera.setYaw(180.0f);
+						camera.setPitch(0.0f);
 						break;
 					}
 					case 2:
 					{
-						_camera.setYaw(90.0f);
-						_camera.setPitch(90.0f);
+						camera.setYaw(90.0f);
+						camera.setPitch(90.0f);
 						break;
 					}
 					case 3:
 					{
-						_camera.setYaw(90.0f);
-						_camera.setPitch(270.0f);
+						camera.setYaw(90.0f);
+						camera.setPitch(270.0f);
 						break;
 					}
 					case 4:
 					{
-						_camera.setYaw(90.0f);
-						_camera.setPitch(0.0f);
+						camera.setYaw(90.0f);
+						camera.setPitch(0.0f);
 						break;
 					}
 					case 5:
 					{
-						_camera.setYaw(270.0f);
-						_camera.setPitch(0.0f);
+						camera.setYaw(270.0f);
+						camera.setPitch(0.0f);
 						break;
 					}
 				}
 
-				_camera.updateMatrices(_renderBus);
+				camera.updateMatrices(_renderBus);
 
-				_shadowGenerator.generate(_renderBus);
-				_captureShadows();
+				shadowGenerator.generate(_renderBus);
+				_captureShadows(entityBus);
 
 				_cubeReflectionCaptor->bind();
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-				_renderSkyEntity();
-				_renderTerrainEntity();
-				_renderModelEntities();
+				_renderSkyEntity(entityBus);
+				_renderTerrainEntity(entityBus);
+				_renderModelEntities(entityBus);
 
 				_cubeReflectionCaptor->unbind();
 
@@ -127,7 +127,7 @@ void MasterRenderer::_captureCubeReflections()
 		}
 	}
 
-	for(const auto& [key, entity] : _entityBus->getModelEntities())
+	for(const auto& [key, entity] : entityBus.getModelEntities())
 	{
 		for(const auto& savedID : savedModelEntityIDs)
 		{
@@ -140,7 +140,7 @@ void MasterRenderer::_captureCubeReflections()
 
 	for(const auto& savedID : savedBillboardEntityIDs)
 	{
-		for(const auto& [key, entity] : _entityBus->getBillboardEntities())
+		for(const auto& [key, entity] : entityBus.getBillboardEntities())
 		{
 			if(entity->getID() == savedID)
 			{
@@ -156,13 +156,13 @@ void MasterRenderer::_captureCubeReflections()
 		skyEntity->setLightness(oldLightness);
 	}
 
-	_camera.invertUpVector();
-	_camera.setAspectRatio(initialCameraAspectRatio);
-	_camera.setFOV(initialCameraFOV);
-	_camera.setYaw(initialCameraYaw);
-	_camera.setPitch(initialCameraPitch);
-	_camera.setPosition(initialCameraPosition);
-	_camera.updateMatrices(_renderBus);
+	camera.invertUpVector();
+	camera.setAspectRatio(initialCameraAspectRatio);
+	camera.setFOV(initialCameraFOV);
+	camera.setYaw(initialCameraYaw);
+	camera.setPitch(initialCameraPitch);
+	camera.setPosition(initialCameraPosition);
+	camera.updateMatrices(_renderBus);
 
-	_shadowGenerator.generate(_renderBus);
+	shadowGenerator.generate(_renderBus);
 }

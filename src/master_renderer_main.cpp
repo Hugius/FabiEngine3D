@@ -8,12 +8,9 @@ using std::make_shared;
 using std::max;
 using std::clamp;
 
-MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, Camera& camera, ShadowGenerator& shadowGenerator)
+MasterRenderer::MasterRenderer(RenderBus& renderBus)
 	:
 	_renderBus(renderBus),
-	_timer(timer),
-	_camera(camera),
-	_shadowGenerator(shadowGenerator),
 	_skyEntityColorRenderer("sky_entity_color_shader.vert", "sky_entity_color_shader.frag", renderBus),
 	_terrainEntityColorRenderer("terrain_entity_color_shader.vert", "terrain_entity_color_shader.frag", renderBus),
 	_terrainEntityDepthRenderer("terrain_entity_depth_shader.vert", "terrain_entity_depth_shader.frag", renderBus),
@@ -58,9 +55,9 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, Camera& camer
 	_renderQuad->setCentered(true);
 }
 
-void MasterRenderer::update()
+void MasterRenderer::update(Camera& camera)
 {
-	_updateMotionBlur();
+	_updateMotionBlur(camera);
 	_updateLensFlare();
 }
 
@@ -76,64 +73,62 @@ void MasterRenderer::render(shared_ptr<QuadEntity> logo, ivec2 viewport)
 	_quadEntityColorRenderer.unbind();
 }
 
-void MasterRenderer::render(EntityBus* entityBus)
+void MasterRenderer::render(Camera& camera, ShadowGenerator& shadowGenerator, Timer& timer, EntityBus& entityBus)
 {
-	_entityBus = entityBus;
-
 	if(_renderBus.isWireframeRenderingEnabled())
 	{
 		glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		_renderSkyEntity();
-		_renderTerrainEntity();
-		_renderWaterEntity();
-		_renderModelEntities();
-		_renderBillboardEntities();
+		_renderSkyEntity(entityBus);
+		_renderTerrainEntity(entityBus);
+		_renderWaterEntity(entityBus);
+		_renderModelEntities(entityBus);
+		_renderBillboardEntities(entityBus);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
-		_renderGUI();
-		_renderCursor();
+		_renderGUI(entityBus);
+		_renderCursor(entityBus);
 	}
 	else
 	{
-		_timer.startDeltaPart("reflectionPreRender");
-		_captureCubeReflections();
-		_capturePlanarReflections();
-		_captureWaterReflections();
-		_timer.stopDeltaPart();
-		_timer.startDeltaPart("refractionPreRender");
-		_captureWaterRefractions();
-		_timer.stopDeltaPart();
-		_timer.startDeltaPart("depthPreRender");
-		_captureWorldDepth();
-		_timer.stopDeltaPart();
-		_timer.startDeltaPart("shadowPreRender");
-		_captureShadows();
-		_timer.stopDeltaPart();
+		timer.startDeltaPart("reflectionPreRender");
+		_captureCubeReflections(shadowGenerator, camera, entityBus);
+		_capturePlanarReflections(camera, entityBus);
+		_captureWaterReflections(camera, entityBus);
+		timer.stopDeltaPart();
+		timer.startDeltaPart("refractionPreRender");
+		_captureWaterRefractions(camera, entityBus);
+		timer.stopDeltaPart();
+		timer.startDeltaPart("depthPreRender");
+		_captureWorldDepth(entityBus);
+		timer.stopDeltaPart();
+		timer.startDeltaPart("shadowPreRender");
+		_captureShadows(entityBus);
+		timer.stopDeltaPart();
 
 		_worldColorCaptor->bind();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		_renderBus.setTriangleCountingEnabled(true);
-		_timer.startDeltaPart("skyEntityRender");
-		_renderSkyEntity();
-		_timer.stopDeltaPart();
-		_timer.startDeltaPart("terrainEntityRender");
-		_renderTerrainEntity();
-		_timer.stopDeltaPart();
-		_timer.startDeltaPart("waterEntityRender");
-		_renderWaterEntity();
-		_timer.stopDeltaPart();
-		_timer.startDeltaPart("billboardEntityRender");
-		_renderBillboardEntities();
-		_timer.stopDeltaPart();
-		_timer.startDeltaPart("aabbEntityRender");
-		_renderAabbEntities();
-		_timer.stopDeltaPart();
-		_timer.startDeltaPart("modelEntityRender");
-		_renderModelEntities();
-		_timer.stopDeltaPart();
+		timer.startDeltaPart("skyEntityRender");
+		_renderSkyEntity(entityBus);
+		timer.stopDeltaPart();
+		timer.startDeltaPart("terrainEntityRender");
+		_renderTerrainEntity(entityBus);
+		timer.stopDeltaPart();
+		timer.startDeltaPart("waterEntityRender");
+		_renderWaterEntity(entityBus);
+		timer.stopDeltaPart();
+		timer.startDeltaPart("billboardEntityRender");
+		_renderBillboardEntities(entityBus);
+		timer.stopDeltaPart();
+		timer.startDeltaPart("aabbEntityRender");
+		_renderAabbEntities(entityBus);
+		timer.stopDeltaPart();
+		timer.startDeltaPart("modelEntityRender");
+		_renderModelEntities(entityBus);
+		timer.stopDeltaPart();
 		_renderBus.setTriangleCountingEnabled(false);
 
 		_worldColorCaptor->unbind();
@@ -141,13 +136,13 @@ void MasterRenderer::render(EntityBus* entityBus)
 		_renderBus.setPrimarySceneMap(_worldColorCaptor->getTexture(0));
 		_renderBus.setSecondarySceneMap(_worldColorCaptor->getTexture(1));
 
-		_timer.startDeltaPart("postProcessing");
+		timer.startDeltaPart("postProcessing");
 		_captureAntiAliasing();
 		_captureBloom();
 		_captureDOF();
 		_captureLensFlare();
 		_captureMotionBlur();
-		_timer.stopDeltaPart();
+		timer.stopDeltaPart();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -165,12 +160,12 @@ void MasterRenderer::render(EntityBus* entityBus)
 
 		}
 
-		_timer.startDeltaPart("guiEntityRender");
+		timer.startDeltaPart("guiEntityRender");
 		_renderBus.setTriangleCountingEnabled(true);
-		_renderGUI();
-		_renderCursor();
+		_renderGUI(entityBus);
+		_renderCursor(entityBus);
 		_renderBus.setTriangleCountingEnabled(false);
-		_timer.stopDeltaPart();
+		timer.stopDeltaPart();
 	}
 }
 
@@ -215,18 +210,20 @@ void MasterRenderer::reloadShadowCaptureBuffer()
 	_shadowCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus.getShadowQuality()));
 }
 
-void MasterRenderer::_updateMotionBlur()
+void MasterRenderer::_updateMotionBlur(Camera& camera)
 {
 	if(_renderBus.isMotionBlurEnabled())
 	{
-		static float lastYaw = _camera.getYaw();
-		static float lastPitch = _camera.getPitch();
-		float currentYaw = _camera.getYaw();
-		float currentPitch = _camera.getPitch();
+		static auto lastYaw = camera.getYaw();
+		static auto lastPitch = camera.getPitch();
+		const auto currentYaw = camera.getYaw();
+		const auto currentPitch = camera.getPitch();
+
 		_cameraYawDifference = fabsf(Math::calculateReferenceAngle(currentYaw) - Math::calculateReferenceAngle(lastYaw));
 		_cameraPitchDifference = fabsf(Math::calculateReferenceAngle(currentPitch) - Math::calculateReferenceAngle(lastPitch));
-		lastYaw = _camera.getYaw();
-		lastPitch = _camera.getPitch();
+
+		lastYaw = camera.getYaw();
+		lastPitch = camera.getPitch();
 	}
 }
 

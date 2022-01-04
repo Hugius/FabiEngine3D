@@ -7,61 +7,61 @@ using std::make_shared;
 using std::dynamic_pointer_cast;
 using std::function;
 
-void MasterRenderer::_renderSkyEntity()
+void MasterRenderer::_renderSkyEntity(EntityBus& entityBus)
 {
-	if(_entityBus->getMainSkyEntity() != nullptr)
+	if(entityBus.getMainSkyEntity() != nullptr)
 	{
 		_skyEntityColorRenderer.bind();
 
-		_skyEntityColorRenderer.render(_entityBus->getMainSkyEntity(), _entityBus->getMixSkyEntity());
+		_skyEntityColorRenderer.render(entityBus.getMainSkyEntity(), entityBus.getMixSkyEntity());
 
 		_skyEntityColorRenderer.unbind();
 	}
 }
 
-void MasterRenderer::_renderTerrainEntity()
+void MasterRenderer::_renderTerrainEntity(EntityBus& entityBus)
 {
-	if(_entityBus->getTerrainEntity() != nullptr)
+	if(entityBus.getTerrainEntity() != nullptr)
 	{
 		_terrainEntityColorRenderer.bind();
 
-		_terrainEntityColorRenderer.processPointlightEntities(_entityBus->getPointLightEntities());
+		_terrainEntityColorRenderer.processPointlightEntities(entityBus.getPointLightEntities());
 
-		_terrainEntityColorRenderer.processSpotlightEntities(_entityBus->getSpotlightEntities());
+		_terrainEntityColorRenderer.processSpotlightEntities(entityBus.getSpotlightEntities());
 
-		_terrainEntityColorRenderer.render(_entityBus->getTerrainEntity());
+		_terrainEntityColorRenderer.render(entityBus.getTerrainEntity());
 
 		_terrainEntityColorRenderer.unbind();
 	}
 }
 
-void MasterRenderer::_renderWaterEntity()
+void MasterRenderer::_renderWaterEntity(EntityBus& entityBus)
 {
-	if(_entityBus->getWaterEntity() != nullptr)
+	if(entityBus.getWaterEntity() != nullptr)
 	{
 		_waterEntityColorRenderer.bind();
 
-		_waterEntityColorRenderer.processPointlightEntities(_entityBus->getPointLightEntities());
+		_waterEntityColorRenderer.processPointlightEntities(entityBus.getPointLightEntities());
 
-		_waterEntityColorRenderer.processSpotlightEntities(_entityBus->getSpotlightEntities());
+		_waterEntityColorRenderer.processSpotlightEntities(entityBus.getSpotlightEntities());
 
-		_waterEntityColorRenderer.render(_entityBus->getWaterEntity());
+		_waterEntityColorRenderer.render(entityBus.getWaterEntity());
 
 		_waterEntityColorRenderer.unbind();
 	}
 }
 
-void MasterRenderer::_renderModelEntities()
+void MasterRenderer::_renderModelEntities(EntityBus& entityBus)
 {
-	auto modelEntities = _entityBus->getModelEntities();
+	auto modelEntities = entityBus.getModelEntities();
 
 	if(!modelEntities.empty())
 	{
 		_modelEntityColorRenderer.bind();
 
-		_modelEntityColorRenderer.processPointlightEntities(_entityBus->getPointLightEntities());
+		_modelEntityColorRenderer.processPointlightEntities(entityBus.getPointLightEntities());
 
-		_modelEntityColorRenderer.processSpotlightEntities(_entityBus->getSpotlightEntities());
+		_modelEntityColorRenderer.processSpotlightEntities(entityBus.getSpotlightEntities());
 
 		for(const auto& [key, modelEntity] : modelEntities)
 		{
@@ -88,7 +88,7 @@ void MasterRenderer::_renderModelEntities()
 				levelOfDetailEntity->setVisible(modelEntity->isVisible());
 				levelOfDetailEntity->updateTransformationMatrix();
 
-				_modelEntityColorRenderer.render(levelOfDetailEntity, _entityBus->getReflectionEntities());
+				_modelEntityColorRenderer.render(levelOfDetailEntity, entityBus.getReflectionEntities());
 
 				levelOfDetailEntity->setBasePosition(initialPosition);
 				levelOfDetailEntity->setBaseRotation(initialRotation);
@@ -98,7 +98,7 @@ void MasterRenderer::_renderModelEntities()
 			}
 			else
 			{
-				_modelEntityColorRenderer.render(modelEntity, _entityBus->getReflectionEntities());
+				_modelEntityColorRenderer.render(modelEntity, entityBus.getReflectionEntities());
 			}
 
 			CONTINUE:;
@@ -135,7 +135,7 @@ void MasterRenderer::_renderModelEntities()
 				levelOfDetailEntity->setVisible(modelEntity->isVisible());
 				levelOfDetailEntity->updateTransformationMatrix();
 
-				_modelEntityColorRenderer.render(levelOfDetailEntity, _entityBus->getReflectionEntities());
+				_modelEntityColorRenderer.render(levelOfDetailEntity, entityBus.getReflectionEntities());
 
 				levelOfDetailEntity->setBasePosition(initialPosition);
 				levelOfDetailEntity->setBaseRotation(initialRotation);
@@ -145,7 +145,7 @@ void MasterRenderer::_renderModelEntities()
 			}
 			else
 			{
-				_modelEntityColorRenderer.render(modelEntity, _entityBus->getReflectionEntities());
+				_modelEntityColorRenderer.render(modelEntity, entityBus.getReflectionEntities());
 			}
 		}
 
@@ -153,9 +153,9 @@ void MasterRenderer::_renderModelEntities()
 	}
 }
 
-void MasterRenderer::_renderBillboardEntities()
+void MasterRenderer::_renderBillboardEntities(EntityBus& entityBus)
 {
-	auto billboardEntities = _entityBus->getBillboardEntities();
+	auto billboardEntities = entityBus.getBillboardEntities();
 
 	if(!billboardEntities.empty())
 	{
@@ -170,11 +170,11 @@ void MasterRenderer::_renderBillboardEntities()
 	}
 }
 
-void MasterRenderer::_renderAabbEntities()
+void MasterRenderer::_renderAabbEntities(EntityBus& entityBus)
 {
 	if(_renderBus.isAabbFrameRenderingEnabled())
 	{
-		auto aabbEntities = _entityBus->getAabbEntities();
+		auto aabbEntities = entityBus.getAabbEntities();
 
 		if(!aabbEntities.empty())
 		{
@@ -199,21 +199,21 @@ void MasterRenderer::_renderFinalSceneMap()
 	_quadEntityColorRenderer.unbind();
 }
 
-void MasterRenderer::_renderGUI()
+void MasterRenderer::_renderGUI(EntityBus& entityBus)
 {
-	if(!_entityBus->getQuadEntities().empty() || !_entityBus->getTextEntities().empty())
+	if(!entityBus.getQuadEntities().empty() || !entityBus.getTextEntities().empty())
 	{
 		_quadEntityColorRenderer.bind();
 
 		map<unsigned int, shared_ptr<BaseEntity>> orderedEntityMap;
-		for(const auto& [key, quadEntity] : _entityBus->getQuadEntities())
+		for(const auto& [key, quadEntity] : entityBus.getQuadEntities())
 		{
 			if(quadEntity->getID() != _renderBus.getCursorEntityID())
 			{
 				orderedEntityMap.insert(make_pair(quadEntity->getDepth(), quadEntity));
 			}
 		}
-		for(const auto& [key, textEntity] : _entityBus->getTextEntities())
+		for(const auto& [key, textEntity] : entityBus.getTextEntities())
 		{
 			orderedEntityMap.insert(make_pair(textEntity->getDepth(), textEntity));
 		}
@@ -241,9 +241,9 @@ void MasterRenderer::_renderGUI()
 	}
 }
 
-void MasterRenderer::_renderCursor()
+void MasterRenderer::_renderCursor(EntityBus& entityBus)
 {
-	for(const auto& [key, entity] : _entityBus->getQuadEntities())
+	for(const auto& [key, entity] : entityBus.getQuadEntities())
 	{
 		if(entity->getID() == _renderBus.getCursorEntityID())
 		{

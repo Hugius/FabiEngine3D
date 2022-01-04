@@ -10,7 +10,7 @@ Core::Core(FabiEngine3D& fe3d)
 	:
 	_fe3d(fe3d),
 	_renderWindow(_libraryLoader),
-	_masterRenderer(_renderBus, _timer, _camera, _shadowGenerator)
+	_masterRenderer(_renderBus)
 {
 
 }
@@ -181,7 +181,7 @@ void Core::_update()
 	_networkingClient.update();
 	_timer.stopDeltaPart();
 
-	_masterRenderer.update();
+	_masterRenderer.update(_camera);
 
 	if(!Config::getInst().isApplicationExported())
 	{

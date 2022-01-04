@@ -1,10 +1,10 @@
 #include "master_renderer.hpp"
 
-void MasterRenderer::_capturePlanarReflections()
+void MasterRenderer::_capturePlanarReflections(Camera& camera, EntityBus& entityBus)
 {
 	bool anyReflectiveModelFound = false;
 
-	for(const auto& [key, entity] : _entityBus->getModelEntities())
+	for(const auto& [key, entity] : entityBus.getModelEntities())
 	{
 		for(const auto& partID : entity->getPartIDs())
 		{
@@ -22,13 +22,13 @@ void MasterRenderer::_capturePlanarReflections()
 		return;
 	}
 
-	float cameraDistance = (_camera.getPosition().y - _renderBus.getPlanarReflectionHeight());
+	float cameraDistance = (camera.getPosition().y - _renderBus.getPlanarReflectionHeight());
 
 	_planarReflectionCaptor->bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	vector<string> savedModelEntityIDs;
-	for(const auto& [key, entity] : _entityBus->getModelEntities())
+	for(const auto& [key, entity] : entityBus.getModelEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
@@ -49,7 +49,7 @@ void MasterRenderer::_capturePlanarReflections()
 	}
 
 	vector<string> savedBillboardEntityIDs;
-	for(const auto& [key, entity] : _entityBus->getBillboardEntities())
+	for(const auto& [key, entity] : entityBus.getBillboardEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
@@ -58,13 +58,13 @@ void MasterRenderer::_capturePlanarReflections()
 		}
 	}
 
-	const fvec3 initialCameraPosition = _camera.getPosition();
-	_camera.setPosition(fvec3(initialCameraPosition.x, initialCameraPosition.y - (cameraDistance * 2.0f), initialCameraPosition.z));
+	const fvec3 initialCameraPosition = camera.getPosition();
+	camera.setPosition(fvec3(initialCameraPosition.x, initialCameraPosition.y - (cameraDistance * 2.0f), initialCameraPosition.z));
 
-	const float initialCameraPitch = _camera.getPitch();
-	_camera.setPitch(-initialCameraPitch);
+	const float initialCameraPitch = camera.getPitch();
+	camera.setPitch(-initialCameraPitch);
 
-	_camera.updateMatrices(_renderBus);
+	camera.updateMatrices(_renderBus);
 
 	_renderBus.setCameraPosition(initialCameraPosition);
 	_renderBus.setCameraPitch(initialCameraPitch);
@@ -72,7 +72,7 @@ void MasterRenderer::_capturePlanarReflections()
 	_renderBus.setReflectionsEnabled(false);
 
 	float oldSkyLightness = 0.0f;
-	auto skyEntity = _entityBus->getMainSkyEntity();
+	auto skyEntity = entityBus.getMainSkyEntity();
 	if(skyEntity != nullptr)
 	{
 		oldSkyLightness = skyEntity->getLightness();
@@ -83,22 +83,22 @@ void MasterRenderer::_capturePlanarReflections()
 	const fvec4 clippingPlane = fvec4(0.0f, 1.0f, 0.0f, clippingHeight);
 	_renderBus.setClippingPlane(clippingPlane);
 
-	_renderSkyEntity();
+	_renderSkyEntity(entityBus);
 
 	glEnable(GL_CLIP_DISTANCE0);
-	_renderTerrainEntity();
+	_renderTerrainEntity(entityBus);
 	glDisable(GL_CLIP_DISTANCE0);
 
 	glEnable(GL_CLIP_DISTANCE2);
-	_renderModelEntities();
-	_renderBillboardEntities();
+	_renderModelEntities(entityBus);
+	_renderBillboardEntities(entityBus);
 	glDisable(GL_CLIP_DISTANCE2);
 
 	_planarReflectionCaptor->unbind();
 
 	_renderBus.setPlanarReflectionMap(_planarReflectionCaptor->getTexture(0));
 
-	for(const auto& [key, entity] : _entityBus->getModelEntities())
+	for(const auto& [key, entity] : entityBus.getModelEntities())
 	{
 		for(const auto& savedID : savedModelEntityIDs)
 		{
@@ -109,7 +109,7 @@ void MasterRenderer::_capturePlanarReflections()
 		}
 	}
 
-	for(const auto& [key, entity] : _entityBus->getBillboardEntities())
+	for(const auto& [key, entity] : entityBus.getBillboardEntities())
 	{
 		for(const auto& savedID : savedBillboardEntityIDs)
 		{
@@ -120,11 +120,11 @@ void MasterRenderer::_capturePlanarReflections()
 		}
 	}
 
-	_camera.setPitch(initialCameraPitch);
+	camera.setPitch(initialCameraPitch);
 
-	_camera.setPosition(initialCameraPosition);
+	camera.setPosition(initialCameraPosition);
 
-	_camera.updateMatrices(_renderBus);
+	camera.updateMatrices(_renderBus);
 
 	_renderBus.setReflectionsEnabled(true);
 

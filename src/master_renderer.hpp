@@ -28,11 +28,11 @@
 class MasterRenderer final
 {
 public:
-	MasterRenderer(RenderBus& renderBus, Timer& timer, Camera& camera, ShadowGenerator& shadowGenerator);
+	MasterRenderer(RenderBus& renderBus);
 
-	void update();
+	void update(Camera& camera);
 	void render(shared_ptr<QuadEntity> entity, ivec2 viewport);
-	void render(EntityBus* entityBus);
+	void render(Camera& camera, ShadowGenerator& shadowGenerator, Timer& timer, EntityBus& entityBus);
 	void reloadBloomBlurCaptureBuffer();
 	void reloadDofBlurCaptureBuffer();
 	void reloadMotionBlurBlurCaptureBuffer();
@@ -43,37 +43,33 @@ public:
 	void reloadShadowCaptureBuffer();
 
 private:
-	void _updateMotionBlur();
+	void _updateMotionBlur(Camera& camera);
 	void _updateLensFlare();
-	void _captureCubeReflections();
-	void _capturePlanarReflections();
-	void _captureWaterReflections();
-	void _captureWaterRefractions();
-	void _captureWorldDepth();
-	void _captureShadows();
+	void _captureCubeReflections(ShadowGenerator& shadowGenerator, Camera& camera, EntityBus& entityBus);
+	void _capturePlanarReflections(Camera& camera, EntityBus& entityBus);
+	void _captureWaterReflections(Camera& camera, EntityBus& entityBus);
+	void _captureWaterRefractions(Camera& camera, EntityBus& entityBus);
+	void _captureWorldDepth(EntityBus& entityBus);
+	void _captureShadows(EntityBus& entityBus);
 	void _captureAntiAliasing();
 	void _captureBloom();
 	void _captureDOF();
 	void _captureLensFlare();
 	void _captureMotionBlur();
-	void _renderSkyEntity();
-	void _renderTerrainEntity();
-	void _renderWaterEntity();
-	void _renderModelEntities();
-	void _renderBillboardEntities();
-	void _renderAabbEntities();
+	void _renderSkyEntity(EntityBus& entityBus);
+	void _renderTerrainEntity(EntityBus& entityBus);
+	void _renderWaterEntity(EntityBus& entityBus);
+	void _renderModelEntities(EntityBus& entityBus);
+	void _renderBillboardEntities(EntityBus& entityBus);
+	void _renderAabbEntities(EntityBus& entityBus);
 	void _renderFinalSceneMap();
 	void _renderDebugScreens();
-	void _renderGUI();
-	void _renderCursor();
+	void _renderGUI(EntityBus& entityBus);
+	void _renderCursor(EntityBus& entityBus);
 
 	float _cameraYawDifference = 0.0f;
 	float _cameraPitchDifference = 0.0f;
 
-	Camera& _camera;
-	Timer& _timer;
-	RenderBus& _renderBus;
-	ShadowGenerator& _shadowGenerator;
 	SkyEntityColorRenderer _skyEntityColorRenderer;
 	TerrainEntityColorRenderer _terrainEntityColorRenderer;
 	TerrainEntityDepthRenderer _terrainEntityDepthRenderer;
@@ -95,6 +91,7 @@ private:
 	BlurRenderer _bloomBlurRendererLowQuality;
 	BlurRenderer _dofBlurRenderer;
 	BlurRenderer _motionBlurBlurRenderer;
+
 	shared_ptr<CaptureBuffer> _cubeReflectionCaptor = nullptr;
 	shared_ptr<CaptureBuffer> _planarReflectionCaptor = nullptr;
 	shared_ptr<CaptureBuffer> _waterReflectionCaptor = nullptr;
@@ -108,5 +105,6 @@ private:
 	shared_ptr<CaptureBuffer> _lensFlareCaptor = nullptr;
 	shared_ptr<CaptureBuffer> _motionBlurCaptor = nullptr;
 	shared_ptr<QuadEntity> _renderQuad = nullptr;
-	EntityBus* _entityBus = nullptr;
+
+	RenderBus& _renderBus;
 };

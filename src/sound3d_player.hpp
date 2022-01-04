@@ -16,7 +16,7 @@ class Sound3dPlayer final
 public:
 	Sound3dPlayer();
 
-	void update(vector<Sound3d>& sounds, Camera& camera);
+	void update(Camera& camera, vector<Sound3d>& sounds);
 	void startSound(Sound3d& sound, int playCount, unsigned int fadeMS, bool mustForce);
 	void pauseSound(Sound3d& sound);
 	void resumeSound(Sound3d& sound);

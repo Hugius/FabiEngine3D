@@ -3,9 +3,8 @@
 
 using std::make_shared;
 
-QuadEntityManager::QuadEntityManager(RenderBus& renderBus)
+QuadEntityManager::QuadEntityManager()
 	:
-	_renderBus(renderBus),
 	_centeredMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true)),
 	_corneredMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
 {
@@ -31,7 +30,7 @@ const unordered_map<string, shared_ptr<QuadEntity>>& QuadEntityManager::getEntit
 	return _entities;
 }
 
-void QuadEntityManager::createEntity(const string& ID, bool isCentered)
+void QuadEntityManager::createEntity(RenderBus& renderBus, const string& ID, bool isCentered)
 {
 	auto entity = make_shared<QuadEntity>(ID);
 
@@ -39,9 +38,9 @@ void QuadEntityManager::createEntity(const string& ID, bool isCentered)
 
 	entity->setMesh(isCentered ? _centeredMesh : _corneredMesh);
 	entity->setCentered(isCentered);
-	entity->setDepth(_renderBus.getGuiDepth());
+	entity->setDepth(renderBus.getGuiDepth());
 
-	_renderBus.setGuiDepth(_renderBus.getGuiDepth() + 1);
+	renderBus.setGuiDepth(renderBus.getGuiDepth() + 1);
 }
 
 void QuadEntityManager::deleteEntity(const string& ID)

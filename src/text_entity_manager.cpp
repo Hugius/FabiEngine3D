@@ -3,9 +3,8 @@
 
 using std::make_shared;
 
-TextEntityManager::TextEntityManager(RenderBus& renderBus)
+TextEntityManager::TextEntityManager()
 	:
-	_renderBus(renderBus),
 	_mesh(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
 {
 
@@ -30,7 +29,7 @@ const unordered_map<string, shared_ptr<TextEntity>>& TextEntityManager::getEntit
 	return _entities;
 }
 
-void TextEntityManager::createEntity(const string& ID, bool isCentered)
+void TextEntityManager::createEntity(RenderBus& renderBus, const string& ID, bool isCentered)
 {
 	auto entity = make_shared<TextEntity>(ID);
 
@@ -38,9 +37,9 @@ void TextEntityManager::createEntity(const string& ID, bool isCentered)
 
 	entity->setMesh(_mesh);
 	entity->setCentered(isCentered);
-	entity->setDepth(_renderBus.getGuiDepth());
+	entity->setDepth(renderBus.getGuiDepth());
 
-	_renderBus.setGuiDepth(_renderBus.getGuiDepth() + 1);
+	renderBus.setGuiDepth(renderBus.getGuiDepth() + 1);
 }
 
 void TextEntityManager::deleteEntity(const string& ID)

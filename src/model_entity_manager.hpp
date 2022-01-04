@@ -13,10 +13,8 @@ using std::unordered_map;
 class ModelEntityManager final
 {
 public:
-	ModelEntityManager(MeshLoader& meshLoader, RenderBus& renderBus, Timer& timer);
-
-	void update(const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities);
-	void createEntity(const string& ID, const string& meshPath);
+	void update(RenderBus& renderBus, Timer& timer, const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities);
+	void createEntity(MeshLoader& meshLoader, const string& ID, const string& meshPath);
 	void deleteEntity(const string& ID);
 	void deleteEntities();
 
@@ -29,7 +27,4 @@ private:
 	static inline const float CUBE_REFLECTION_OVERLAP_SPEED = 0.01f;
 
 	unordered_map<string, shared_ptr<ModelEntity>> _entities;
-	MeshLoader& _meshLoader;
-	RenderBus& _renderBus;
-	Timer& _timer;
 };

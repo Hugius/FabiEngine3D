@@ -10,13 +10,6 @@ Core::Core(FabiEngine3D& fe3d)
 	:
 	_fe3d(fe3d),
 	_renderWindow(_libraryLoader),
-	_skyEntityManager(_renderBus),
-	_terrainEntityManager(_imageLoader),
-	_modelEntityManager(_meshLoader, _renderBus, _timer),
-	_billboardEntityManager(_renderBus, _camera),
-	_quadEntityManager(_renderBus),
-	_textEntityManager(_renderBus),
-	_raycaster(_renderBus, _terrainEntityManager),
 	_masterRenderer(_renderBus, _timer, _camera, _shadowGenerator)
 {
 
@@ -137,22 +130,22 @@ void Core::_update()
 		{
 			_timer.startDeltaPart("physicsUpdate");
 			_camera.update(_renderBus, _renderWindow, lastCursorPosition);
-			_raycaster.update(_fe3d.misc_getCursorPositionRelativeToViewport());
-			_cameraCollisionHandler.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _camera);
+			_raycaster.update(_terrainEntityManager, _renderBus, _fe3d.misc_getCursorPositionRelativeToViewport());
+			_cameraCollisionHandler.update(_terrainEntityManager, _camera, _aabbEntityManager.getEntities());
 			_camera.updateMatrices(_renderBus);
 			_timer.stopDeltaPart();
 
 			_timer.startDeltaPart("skyEntityUpdate");
-			_skyEntityManager.update();
+			_skyEntityManager.update(_renderBus);
 			_timer.stopDeltaPart();
 			_timer.startDeltaPart("waterEntityUpdate");
 			_waterEntityManager.update();
 			_timer.stopDeltaPart();
 			_timer.startDeltaPart("modelEntityUpdate");
-			_modelEntityManager.update(_reflectionEntityManager.getEntities());
+			_modelEntityManager.update(_renderBus, _timer, _reflectionEntityManager.getEntities());
 			_timer.stopDeltaPart();
 			_timer.startDeltaPart("billboardEntityUpdate");
-			_billboardEntityManager.update();
+			_billboardEntityManager.update(_renderBus, _camera);
 			_timer.stopDeltaPart();
 			_timer.startDeltaPart("aabbEntityUpdate");
 			_aabbEntityManager.update(_modelEntityManager.getEntities(), _billboardEntityManager.getEntities());
@@ -173,7 +166,7 @@ void Core::_update()
 			_sound2dManager.update();
 			_sound3dManager.update();
 			_sound2dPlayer.update(_sound2dManager.getSounds());
-			_sound3dPlayer.update(_sound3dManager.getSounds(), _camera);
+			_sound3dPlayer.update(_camera, _sound3dManager.getSounds());
 			_timer.stopDeltaPart();
 		}
 

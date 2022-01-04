@@ -4,15 +4,6 @@
 using std::make_shared;
 using std::max;
 
-ModelEntityManager::ModelEntityManager(MeshLoader& meshLoader, RenderBus& renderBus, Timer& timer)
-	:
-	_meshLoader(meshLoader),
-	_renderBus(renderBus),
-	_timer(timer)
-{
-
-}
-
 shared_ptr<ModelEntity> ModelEntityManager::getEntity(const string& ID)
 {
 	auto iterator = _entities.find(ID);
@@ -32,13 +23,13 @@ const unordered_map<string, shared_ptr<ModelEntity>>& ModelEntityManager::getEnt
 	return _entities;
 }
 
-void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
+void ModelEntityManager::createEntity(MeshLoader& meshLoader, const string& ID, const string& meshPath)
 {
 	auto entity = make_shared<ModelEntity>(ID);
 
 	_entities.insert(make_pair(ID, entity));
 
-	auto partsPointer = _meshLoader.loadMesh(meshPath);
+	auto partsPointer = meshLoader.loadMesh(meshPath);
 
 	if(partsPointer == nullptr)
 	{
@@ -104,7 +95,8 @@ const bool ModelEntityManager::isEntityExisting(const string& ID)
 	return (_entities.find(ID) != _entities.end());
 }
 
-void ModelEntityManager::update(const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities)
+void ModelEntityManager::update(RenderBus& renderBus, Timer& timer,
+								const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities)
 {
 	for(const auto& [key, entity] : _entities)
 	{
@@ -120,7 +112,7 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 					Logger::throwError("ModelEntityManager::update");
 				}
 
-				auto cameraPosition = _renderBus.getCameraPosition();
+				auto cameraPosition = renderBus.getCameraPosition();
 				auto entityPosition = entity->getBasePosition();
 				auto absolsuteDistance = Math::calculateDistance(cameraPosition, entityPosition);
 
@@ -128,7 +120,7 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 				entity->setLevelOfDetailed(isFarEnough);
 			}
 
-			if((_timer.getPassedTickCount() % Config::UPDATES_PER_SECOND) == 0)
+			if((timer.getPassedTickCount() % Config::UPDATES_PER_SECOND) == 0)
 			{
 				map<float, shared_ptr<ReflectionEntity>> reflectionDistanceMap;
 				for(const auto& [key, reflectionEntity] : reflectionEntities)

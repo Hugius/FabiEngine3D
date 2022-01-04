@@ -3,13 +3,6 @@
 
 using std::make_shared;
 
-TerrainEntityManager::TerrainEntityManager(ImageLoader& imageLoader)
-	:
-	_imageLoader(imageLoader)
-{
-
-}
-
 shared_ptr<TerrainEntity> TerrainEntityManager::getEntity(const string& ID)
 {
 	auto iterator = _entities.find(ID);
@@ -41,13 +34,13 @@ const unordered_map<string, shared_ptr<TerrainEntity>>& TerrainEntityManager::ge
 	return _entities;
 }
 
-void TerrainEntityManager::createEntity(const string& ID, const string& heightMapPath)
+void TerrainEntityManager::createEntity(ImageLoader& imageLoader, const string& ID, const string& heightMapPath)
 {
 	auto entity = make_shared<TerrainEntity>(ID);
 
 	_entities.insert(make_pair(ID, entity));
 
-	auto image = _imageLoader.loadImage(heightMapPath);
+	auto image = imageLoader.loadImage(heightMapPath);
 
 	if(image == nullptr)
 	{

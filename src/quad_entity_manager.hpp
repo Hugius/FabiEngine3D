@@ -10,10 +10,10 @@ using std::unordered_map;
 class QuadEntityManager final
 {
 public:
-	QuadEntityManager(RenderBus& renderBus);
+	QuadEntityManager();
 
 	void update();
-	void createEntity(const string& ID, bool isCentered);
+	void createEntity(RenderBus& renderBus, const string& ID, bool isCentered);
 	void deleteEntity(const string& ID);
 	void deleteEntities();
 
@@ -26,5 +26,4 @@ private:
 	const shared_ptr<VertexBuffer> _centeredMesh;
 	const shared_ptr<VertexBuffer> _corneredMesh;
 	unordered_map<string, shared_ptr<QuadEntity>> _entities;
-	RenderBus& _renderBus;
 };

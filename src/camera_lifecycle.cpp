@@ -51,11 +51,11 @@ void Camera::reset()
 
 void Camera::update(RenderBus& renderBus, RenderWindow& renderWindow, ivec2 lastCursorPosition)
 {
-	ivec2 currenCursorPosition = renderWindow.getCursorPosition();
-	const int left = Config::getInst().getViewportPosition().x;
-	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getViewportPosition().y + Config::getInst().getViewportSize().y);
-	const int xMiddle = left + (Config::getInst().getViewportSize().x / 2);
-	const int yMiddle = bottom + (Config::getInst().getViewportSize().y / 2);
+	const auto currentCursorPosition = renderWindow.getCursorPosition();
+	const auto left = Config::getInst().getViewportPosition().x;
+	const auto bottom = Config::getInst().getWindowSize().y - (Config::getInst().getViewportPosition().y + Config::getInst().getViewportSize().y);
+	const auto xMiddle = left + (Config::getInst().getViewportSize().x / 2);
+	const auto yMiddle = bottom + (Config::getInst().getViewportSize().y / 2);
 
 	if(_mustCenterCursor)
 	{
@@ -66,7 +66,7 @@ void Camera::update(RenderBus& renderBus, RenderWindow& renderWindow, ivec2 last
 
 	if(_cursorIsBeingCentered)
 	{
-		if(currenCursorPosition == ivec2(xMiddle, yMiddle) || currenCursorPosition != lastCursorPosition)
+		if(currentCursorPosition == ivec2(xMiddle, yMiddle) || currentCursorPosition != lastCursorPosition)
 		{
 			_cursorIsBeingCentered = false;
 		}
@@ -74,8 +74,8 @@ void Camera::update(RenderBus& renderBus, RenderWindow& renderWindow, ivec2 last
 
 	if(_isFirstPersonViewEnabled && !_cursorIsBeingCentered)
 	{
-		float xOffset = static_cast<float>(currenCursorPosition.x - xMiddle);
-		float yOffset = static_cast<float>(yMiddle - currenCursorPosition.y);
+		float xOffset = static_cast<float>(currentCursorPosition.x - xMiddle);
+		float yOffset = static_cast<float>(yMiddle - currentCursorPosition.y);
 
 		xOffset *= _cursorSensitivity;
 		yOffset *= _cursorSensitivity;
@@ -107,8 +107,8 @@ void Camera::update(RenderBus& renderBus, RenderWindow& renderWindow, ivec2 last
 
 	if(_isThirdPersonViewEnabled && !_cursorIsBeingCentered)
 	{
-		float xOffset = static_cast<float>(currenCursorPosition.x - xMiddle);
-		float yOffset = static_cast<float>(yMiddle - currenCursorPosition.y);
+		float xOffset = static_cast<float>(currentCursorPosition.x - xMiddle);
+		float yOffset = static_cast<float>(yMiddle - currentCursorPosition.y);
 
 		xOffset *= _cursorSensitivity;
 		yOffset *= _cursorSensitivity;

@@ -9,23 +9,15 @@
 using std::min;
 using std::max;
 
-Raycaster::Raycaster(RenderBus& renderBus, TerrainEntityManager& terrainManager)
-	:
-	_renderBus(renderBus),
-	_terrainManager(terrainManager)
+void Raycaster::update(TerrainEntityManager& terrainManager, RenderBus& renderBus, ivec2 cursorPosition)
 {
-
-}
-
-void Raycaster::update(ivec2 cursorPosition)
-{
-	_cursorRay = _calculateCursorRay(cursorPosition);
+	_cursorRay = _calculateCursorRay(renderBus, cursorPosition);
 
 	if(_isTerrainPointingEnabled)
 	{
-		if(_terrainManager.getSelectedTerrain() != nullptr)
+		if(terrainManager.getSelectedTerrain() != nullptr)
 		{
-			_terrainPoint = _calculateTerrainPoint();
+			_terrainPoint = _calculateTerrainPoint(terrainManager);
 		}
 		else
 		{
@@ -124,28 +116,28 @@ const float Raycaster::calculateRayBoxIntersectionDistance(Ray ray, Box box) con
 	return minIntersectionDistance;
 }
 
-const Ray Raycaster::_calculateCursorRay(ivec2 cursorPosition) const
+const Ray Raycaster::_calculateCursorRay(RenderBus& renderBus, ivec2 cursorPosition) const
 {
 	fvec2 screenCoords = Tools::convertFromScreenCoords(cursorPosition);
 	fvec2 ndcCoords = Math::convertToNdc(screenCoords);
 	fvec4 clipCoords = fvec4(ndcCoords.x, ndcCoords.y, -1.0f, 1.0f);
-	fvec4 viewCoords = _convertToViewSpace(clipCoords);
-	fvec3 worldCoords = _convertToWorldSpace(viewCoords);
+	fvec4 viewCoords = _convertToViewSpace(renderBus, clipCoords);
+	fvec3 worldCoords = _convertToWorldSpace(renderBus, viewCoords);
 
-	return Ray(_renderBus.getCameraPosition(), Math::normalize(worldCoords));
+	return Ray(renderBus.getCameraPosition(), Math::normalize(worldCoords));
 }
 
-const fvec4 Raycaster::_convertToViewSpace(fvec4 clipCoords) const
+const fvec4 Raycaster::_convertToViewSpace(RenderBus& renderBus, fvec4 clipCoords) const
 {
-	auto invertedProjection = Math::invertMatrix(_renderBus.getProjectionMatrix());
+	auto invertedProjection = Math::invertMatrix(renderBus.getProjectionMatrix());
 	auto viewCoords = (invertedProjection * clipCoords);
 
 	return fvec4(viewCoords.x, viewCoords.y, -1.0f, 0.0f);
 }
 
-const fvec3 Raycaster::_convertToWorldSpace(fvec4 viewCoords) const
+const fvec3 Raycaster::_convertToWorldSpace(RenderBus& renderBus, fvec4 viewCoords) const
 {
-	auto invertedView = Math::invertMatrix(_renderBus.getViewMatrix());
+	auto invertedView = Math::invertMatrix(renderBus.getViewMatrix());
 	auto worldCoords = (invertedView * viewCoords);
 
 	return fvec3(worldCoords.x, worldCoords.y, worldCoords.z);
@@ -156,12 +148,12 @@ const fvec3 Raycaster::getPointOnRay(Ray ray, float distance) const
 	return (ray.getPosition() + (ray.getDirection() * distance));
 }
 
-const bool Raycaster::_isUnderTerrain(float distance) const
+const bool Raycaster::_isUnderTerrain(TerrainEntityManager& terrainManager, float distance) const
 {
 	fvec3 scaledRay = getPointOnRay(_cursorRay, distance);
 
-	auto selectedTerrain = _terrainManager.getSelectedTerrain();
-	float terrainHeight = _terrainManager.getPixelHeight(
+	auto selectedTerrain = terrainManager.getSelectedTerrain();
+	float terrainHeight = terrainManager.getPixelHeight(
 		selectedTerrain->getID(),
 		scaledRay.x + (selectedTerrain->getSize() / 2.0f),
 		scaledRay.z + (selectedTerrain->getSize() / 2.0f));
@@ -169,19 +161,19 @@ const bool Raycaster::_isUnderTerrain(float distance) const
 	return (scaledRay.y < terrainHeight);
 }
 
-const fvec3 Raycaster::_calculateTerrainPoint() const
+const fvec3 Raycaster::_calculateTerrainPoint(TerrainEntityManager& terrainManager) const
 {
 	float distance = 0.0f;
 
 	while(distance < _terrainPointingDistance)
 	{
-		if(_isUnderTerrain(distance))
+		if(_isUnderTerrain(terrainManager, distance))
 		{
 			distance -= (_terrainPointingPrecision / 2.0f);
 			fvec3 endPoint = getPointOnRay(_cursorRay, distance);
 
-			auto selectedTerrain = _terrainManager.getSelectedTerrain();
-			if(_terrainManager.isInside(
+			auto selectedTerrain = terrainManager.getSelectedTerrain();
+			if(terrainManager.isInside(
 				selectedTerrain->getID(),
 				endPoint.x + (selectedTerrain->getSize() / 2.0f),
 				endPoint.z + (selectedTerrain->getSize() / 2.0f)))

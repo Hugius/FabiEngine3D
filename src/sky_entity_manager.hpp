@@ -10,9 +10,9 @@ using std::unordered_map;
 class SkyEntityManager final
 {
 public:
-	SkyEntityManager(RenderBus& renderBus);
+	SkyEntityManager();
 
-	void update();
+	void update(RenderBus& renderBus);
 	void createEntity(const string& ID);
 	void deleteEntity(const string& ID);
 	void deleteEntities();
@@ -44,5 +44,4 @@ private:
 
 	const shared_ptr<VertexBuffer> _mesh;
 	unordered_map<string, shared_ptr<SkyEntity>> _entities;
-	RenderBus& _renderBus;
 };

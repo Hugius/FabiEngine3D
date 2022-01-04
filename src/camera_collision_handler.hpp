@@ -11,7 +11,7 @@
 class CameraCollisionHandler final
 {
 public:
-	void update(const unordered_map<string, shared_ptr<AabbEntity>>& aabbs, TerrainEntityManager& terrainManager, Camera& camera);
+	void update(TerrainEntityManager& terrainManager, Camera& camera, const unordered_map<string, shared_ptr<AabbEntity>>& aabbs);
 	void setCameraBox(const Box& box);
 	void enableCameraAabbResponse(bool x, bool y, bool z);
 	void disableCameraAabbResponse();

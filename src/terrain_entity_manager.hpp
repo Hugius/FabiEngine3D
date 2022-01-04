@@ -10,9 +10,7 @@ using std::unordered_map;
 class TerrainEntityManager final
 {
 public:
-	TerrainEntityManager(ImageLoader& imageLoader);
-
-	void createEntity(const string& ID, const string& heightMapPath);
+	void createEntity(ImageLoader& imageLoader, const string& ID, const string& heightMapPath);
 	void deleteEntity(const string& ID);
 	void deleteEntities();
 	void loadMesh(const string& ID);
@@ -37,5 +35,4 @@ private:
 	static inline const float MAX_SIZE = 1024.0f;
 
 	unordered_map<string, shared_ptr<TerrainEntity>> _entities;
-	ImageLoader& _imageLoader;
 };

@@ -10,10 +10,10 @@ using std::unordered_map;
 class TextEntityManager final
 {
 public:
-	TextEntityManager(RenderBus& renderBus);
+	TextEntityManager();
 
 	void update();
-	void createEntity(const string& ID, bool isCentered);
+	void createEntity(RenderBus& renderBus, const string& ID, bool isCentered);
 	void deleteEntity(const string& ID);
 	void deleteEntities();
 
@@ -25,5 +25,4 @@ public:
 private:
 	const shared_ptr<VertexBuffer> _mesh;
 	unordered_map<string, shared_ptr<TextEntity>> _entities;
-	RenderBus& _renderBus;
 };

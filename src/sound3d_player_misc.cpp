@@ -9,7 +9,7 @@ Sound3dPlayer::Sound3dPlayer()
 	Mix_AllocateChannels(MAX_CHANNEL_COUNT);
 }
 
-void Sound3dPlayer::update(vector<Sound3d>& sounds, Camera& camera)
+void Sound3dPlayer::update(Camera& camera, vector<Sound3d>& sounds)
 {
 	for(auto& sound : sounds)
 	{

@@ -52,9 +52,8 @@ constexpr float bufferData[] =
 
 constexpr unsigned int bufferDataCount = static_cast<unsigned int>(sizeof(bufferData) / sizeof(float));
 
-SkyEntityManager::SkyEntityManager(RenderBus& renderBus)
+SkyEntityManager::SkyEntityManager()
 	:
-	_renderBus(renderBus),
 	_mesh(make_shared<VertexBuffer>(VertexBufferType::POS, bufferData, bufferDataCount))
 {
 
@@ -136,7 +135,7 @@ void SkyEntityManager::createEntity(const string& ID)
 	entity->setMesh(_mesh);
 }
 
-void SkyEntityManager::update()
+void SkyEntityManager::update(RenderBus& renderBus)
 {
 	auto mainSky = getSelectedMainSky();
 	auto mixSky = getSelectedMixSky();
@@ -146,7 +145,7 @@ void SkyEntityManager::update()
 		if(_isExposureEnabled)
 		{
 			float lightness = mainSky->getLightness();
-			float pitch = min(_renderBus.getCameraPitch() + 30.0f, 90.0f);
+			float pitch = min(renderBus.getCameraPitch() + 30.0f, 90.0f);
 			float targetLightness = mainSky->getInitialLightness() + (((90.0f - pitch) / 90.0f) * _exposureIntensity);
 
 			if(lightness > targetLightness)

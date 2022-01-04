@@ -27,10 +27,8 @@ constexpr float standingBufferData[] =
 constexpr unsigned int centeredBufferDataCount = static_cast<unsigned int>(sizeof(centeredBufferData) / sizeof(float));
 constexpr unsigned int standingBufferDataCount = static_cast<unsigned int>(sizeof(standingBufferData) / sizeof(float));
 
-BillboardEntityManager::BillboardEntityManager(RenderBus& renderBus, Camera& camera)
+BillboardEntityManager::BillboardEntityManager()
 	:
-	_renderBus(renderBus),
-	_camera(camera),
 	_centeredMesh(make_shared<VertexBuffer>(VertexBufferType::POS_UV, centeredBufferData, centeredBufferDataCount)),
 	_standingMesh(make_shared<VertexBuffer>(VertexBufferType::POS_UV, standingBufferData, standingBufferDataCount))
 {
@@ -66,7 +64,7 @@ void BillboardEntityManager::createEntity(const string& ID, bool isCentered)
 	entity->setCentered(isCentered);
 }
 
-void BillboardEntityManager::update()
+void BillboardEntityManager::update(RenderBus& renderBus, Camera& camera)
 {
 	for(const auto& [key, entity] : _entities)
 	{
@@ -81,7 +79,7 @@ void BillboardEntityManager::update()
 			{
 				fvec3 position = (entity->getPosition() + fvec3(0.0f, (entity->getSize().y / 2.0f), 0.0f));
 
-				fvec3 direction = (position - _renderBus.getCameraPosition());
+				fvec3 direction = (position - renderBus.getCameraPosition());
 
 				float degreesZ = atan2f(direction.y, fabsf(direction.x) + fabsf(direction.z));
 				float degreesY = atan2f(direction.z, direction.x);

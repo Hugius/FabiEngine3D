@@ -8,7 +8,7 @@ void FabiEngine3D::text_deleteAll()
 
 void FabiEngine3D::text_create(const string& ID, bool isCentered)
 {
-	_core->_textEntityManager.createEntity(ID, isCentered);
+	_core->_textEntityManager.createEntity(_core->_renderBus, ID, isCentered);
 }
 
 void FabiEngine3D::text_delete(const string& ID)

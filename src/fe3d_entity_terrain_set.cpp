@@ -3,7 +3,7 @@
 
 void FabiEngine3D::terrain_create(const string& ID, const string& heightMapPath)
 {
-	_core->_terrainEntityManager.createEntity(ID, heightMapPath);
+	_core->_terrainEntityManager.createEntity(_core->_imageLoader, ID, heightMapPath);
 }
 
 void FabiEngine3D::terrain_deleteAll()

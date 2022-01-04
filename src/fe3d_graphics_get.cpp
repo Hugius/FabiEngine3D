@@ -233,6 +233,6 @@ const BloomType FabiEngine3D::gfx_getBloomType() const
 
 const unsigned int FabiEngine3D::gfx_getAnisotropicFilteringQuality() const
 {
-	//return _core->_textureLoader.getAnisotropicFilteringQuality();
+	//return _core->_imageLoader.getAnisotropicFilteringQuality();
 	return 0;
 }

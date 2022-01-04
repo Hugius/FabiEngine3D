@@ -3,9 +3,9 @@
 
 using std::make_shared;
 
-TerrainEntityManager::TerrainEntityManager(ImageLoader& textureLoader)
+TerrainEntityManager::TerrainEntityManager(ImageLoader& imageLoader)
 	:
-	_textureLoader(textureLoader)
+	_imageLoader(imageLoader)
 {
 
 }
@@ -47,7 +47,7 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 
 	_entities.insert(make_pair(ID, entity));
 
-	auto image = _textureLoader.loadImage(heightMapPath);
+	auto image = _imageLoader.loadImage(heightMapPath);
 
 	if(image == nullptr)
 	{

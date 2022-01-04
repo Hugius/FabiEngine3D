@@ -3,9 +3,8 @@
 
 using std::make_shared;
 
-TextEntityManager::TextEntityManager(ImageLoader& textureLoader, RenderBus& renderBus)
+TextEntityManager::TextEntityManager(RenderBus& renderBus)
 	:
-	_textureLoader(textureLoader),
 	_renderBus(renderBus),
 	_mesh(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
 {

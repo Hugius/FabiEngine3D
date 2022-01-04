@@ -321,47 +321,47 @@ void MasterRenderer::_renderDebugScreens()
 
 	/*shared_ptr<TextEntity> worldText = make_shared<TextEntity>("worldText");
 	worldText->setMesh(make_shared<VertexBuffer>(-0.666f, 0.4f, calcTextWidth("World Render"), charHeight, true));
-	worldText->setDiffuseMap(_textureLoader.load2dTexture("World Render", fontPath));
+	worldText->setDiffuseMap(_imageLoader.load2dTexture("World Render", fontPath));
 	worldText->setColor(textColor);
 
 	shared_ptr<TextEntity> shadowText = make_shared<TextEntity>("shadowText");
 	shadowText->setMesh(make_shared<VertexBuffer>(0.0f, 0.4f, calcTextWidth("Shadow Render"), charHeight, true));
-	shadowText->setDiffuseMap(_textureLoader.load2dTexture("Shadow Render", fontPath));
+	shadowText->setDiffuseMap(_imageLoader.load2dTexture("Shadow Render", fontPath));
 	shadowText->setColor(textColor);
 
 	shared_ptr<TextEntity> bloomText = make_shared<TextEntity>("bloomText");
 	bloomText->setMesh(make_shared<VertexBuffer>(0.666f, 0.4f, calcTextWidth("Bloom Render"), charHeight, true));
-	bloomText->setDiffuseMap(_textureLoader.load2dTexture("Bloom Render", fontPath));
+	bloomText->setDiffuseMap(_imageLoader.load2dTexture("Bloom Render", fontPath));
 	bloomText->setColor(textColor);
 
 	shared_ptr<TextEntity> planarReflectionText = make_shared<TextEntity>("planarReflectionText");
 	planarReflectionText->setMesh(make_shared<VertexBuffer>(-0.666f, -0.26f, calcTextWidth("Planar Reflection Render"), charHeight, true));
-	planarReflectionText->setDiffuseMap(_textureLoader.load2dTexture("Planar Reflection Render", fontPath));
+	planarReflectionText->setDiffuseMap(_imageLoader.load2dTexture("Planar Reflection Render", fontPath));
 	planarReflectionText->setColor(textColor);
 
 	shared_ptr<TextEntity> waterReflectionText = make_shared<TextEntity>("waterReflectionText");
 	waterReflectionText->setMesh(make_shared<VertexBuffer>(0.0f, -0.26f, calcTextWidth("Water Reflection Render"), charHeight, true));
-	waterReflectionText->setDiffuseMap(_textureLoader.load2dTexture("Water Reflection Render", fontPath));
+	waterReflectionText->setDiffuseMap(_imageLoader.load2dTexture("Water Reflection Render", fontPath));
 	waterReflectionText->setColor(textColor);
 
 	shared_ptr<TextEntity> waterRefractionText = make_shared<TextEntity>("waterRefractionText");
 	waterRefractionText->setMesh(make_shared<VertexBuffer>(0.666f, -0.26f, calcTextWidth("Water Refraction Render"), charHeight, true));
-	waterRefractionText->setDiffuseMap(_textureLoader.load2dTexture("Water Refraction Render", fontPath));
+	waterRefractionText->setDiffuseMap(_imageLoader.load2dTexture("Water Refraction Render", fontPath));
 	waterRefractionText->setColor(textColor);
 
 	shared_ptr<TextEntity> depthText = make_shared<TextEntity>("depthText");
 	depthText->setMesh(make_shared<VertexBuffer>(-0.666f, -0.92f, calcTextWidth("Depth Render"), charHeight, true));
-	depthText->setDiffuseMap(_textureLoader.load2dTexture("Depth Render", fontPath));
+	depthText->setDiffuseMap(_imageLoader.load2dTexture("Depth Render", fontPath));
 	depthText->setColor(textColor);
 
 	shared_ptr<TextEntity> dofText = make_shared<TextEntity>("dofText");
 	dofText->setMesh(make_shared<VertexBuffer>(0.0f, -0.92f, calcTextWidth("DOF Render"), charHeight, true));
-	dofText->setDiffuseMap(_textureLoader.load2dTexture("DOF Render", fontPath));
+	dofText->setDiffuseMap(_imageLoader.load2dTexture("DOF Render", fontPath));
 	dofText->setColor(textColor);
 
 	shared_ptr<TextEntity> motionBlurText = make_shared<TextEntity>("motionBlurText");
 	motionBlurText->setMesh(make_shared<VertexBuffer>(0.666f, -0.92f, calcTextWidth("Motion Blur Render"), charHeight, true));
-	motionBlurText->setDiffuseMap(_textureLoader.load2dTexture("Motion Blur Render", fontPath));
+	motionBlurText->setDiffuseMap(_imageLoader.load2dTexture("Motion Blur Render", fontPath));
 	motionBlurText->setColor(textColor);*/
 
 	_quadEntityColorRenderer.bind();

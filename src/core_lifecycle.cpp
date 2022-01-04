@@ -19,7 +19,7 @@ Core::Core(FabiEngine3D& fe3d)
 	_modelEntityManager(_meshLoader, _renderBus, _timer),
 	_billboardEntityManager(_renderBus, _camera),
 	_quadEntityManager(_renderBus),
-	_textEntityManager(_imageLoader, _renderBus),
+	_textEntityManager(_renderBus),
 	_raycaster(_renderBus, _terrainEntityManager),
 	_masterRenderer(_renderBus, _timer, _camera, _shadowGenerator)
 {

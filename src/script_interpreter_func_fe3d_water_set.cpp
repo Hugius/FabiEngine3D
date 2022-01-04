@@ -197,12 +197,12 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 				}
 				else if(args[0].getString() == "SKY_TERRAIN_MODELS")
 				{
-					_fe3d.water_setQuality(_fe3d.water_getSelectedID(), WaterQuality::SKY_TERRAIN_MODELS);
+					_fe3d.water_setQuality(_fe3d.water_getSelectedID(), WaterQuality::SKY_TERRAIN_MODEL);
 					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
 				else if(args[0].getString() == "SKY_TERRAIN_MODELS_BILLBOARDS")
 				{
-					_fe3d.water_setQuality(_fe3d.water_getSelectedID(), WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS);
+					_fe3d.water_setQuality(_fe3d.water_getSelectedID(), WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD);
 					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
 				else

@@ -261,11 +261,11 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 				{
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "SKY_TERRAIN"));
 				}
-				if(result == WaterQuality::SKY_TERRAIN_MODELS)
+				if(result == WaterQuality::SKY_TERRAIN_MODEL)
 				{
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "SKY_TERRAIN_MODELS"));
 				}
-				if(result == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+				if(result == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
 				{
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "SKY_TERRAIN_MODELS_BILLBOARDS"));
 				}

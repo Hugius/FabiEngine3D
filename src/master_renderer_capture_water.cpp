@@ -12,8 +12,8 @@ void MasterRenderer::_captureWaterReflections(RenderBus& renderBus, Camera& came
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		vector<string> savedModelEntityIDs;
-		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS ||
-		   waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL ||
+		   waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
 		{
 			for(const auto& [key, entity] : entityBus.getModelEntities())
 			{
@@ -37,7 +37,7 @@ void MasterRenderer::_captureWaterReflections(RenderBus& renderBus, Camera& came
 		}
 
 		vector<string> savedBillboardEntityIDs;
-		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
 		{
 			for(const auto& [key, entity] : entityBus.getBillboardEntities())
 			{
@@ -86,15 +86,15 @@ void MasterRenderer::_captureWaterReflections(RenderBus& renderBus, Camera& came
 			glDisable(GL_CLIP_DISTANCE0);
 		}
 
-		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS ||
-		   waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL ||
+		   waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
 		{
 			glEnable(GL_CLIP_DISTANCE2);
 			_renderModelEntities(renderBus, entityBus);
 			glDisable(GL_CLIP_DISTANCE2);
 		}
 
-		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
 		{
 			glEnable(GL_CLIP_DISTANCE2);
 			_renderBillboardEntities(renderBus, entityBus);
@@ -200,15 +200,15 @@ void MasterRenderer::_captureWaterRefractions(RenderBus& renderBus, Camera& came
 			glDisable(GL_CLIP_DISTANCE0);
 		}
 
-		if((waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS) ||
-		   (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS))
+		if((waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL) ||
+		   (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD))
 		{
 			glEnable(GL_CLIP_DISTANCE2);
 			_renderModelEntities(renderBus, entityBus);
 			glDisable(GL_CLIP_DISTANCE2);
 		}
 
-		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
 		{
 			glEnable(GL_CLIP_DISTANCE2);
 			_renderBillboardEntities(renderBus, entityBus);

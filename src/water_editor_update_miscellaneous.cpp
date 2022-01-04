@@ -37,11 +37,11 @@ void WaterEditor::_updateMiscellaneousMenu()
 			}
 			else if(quality == WaterQuality::SKY_TERRAIN)
 			{
-				quality = WaterQuality::SKY_TERRAIN_MODELS;
+				quality = WaterQuality::SKY_TERRAIN_MODEL;
 			}
-			else if(quality == WaterQuality::SKY_TERRAIN_MODELS)
+			else if(quality == WaterQuality::SKY_TERRAIN_MODEL)
 			{
-				quality = WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS;
+				quality = WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD;
 			}
 			else
 			{

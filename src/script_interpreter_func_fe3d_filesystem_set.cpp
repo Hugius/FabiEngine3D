@@ -68,7 +68,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
-			const string filePath = string(directoryPath + args[0].getString());
+			const auto filePath = string(directoryPath + args[0].getString());
 
 			if(Tools::isFileExisting(filePath))
 			{
@@ -92,7 +92,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
-			const string filePath = string(directoryPath + args[0].getString());
+			const auto filePath = string(directoryPath + args[0].getString());
 
 			if(Tools::isFileExisting(filePath))
 			{
@@ -114,7 +114,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
-			const string filePath = string(directoryPath + args[0].getString());
+			const auto filePath = string(directoryPath + args[0].getString());
 
 			if(Tools::isFileExisting(filePath))
 			{
@@ -156,7 +156,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
-			const string filePath = string(directoryPath + args[0].getString());
+			const auto filePath = string(directoryPath + args[0].getString());
 
 			if(Tools::isFileExisting(filePath))
 			{
@@ -180,7 +180,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
-			const string filePath = string(directoryPath + args[0].getString());
+			const auto filePath = string(directoryPath + args[0].getString());
 
 			if(Tools::isFileExisting(filePath))
 			{

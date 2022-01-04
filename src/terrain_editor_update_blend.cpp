@@ -29,7 +29,7 @@ void TerrainEditor::_updateBlendMapMenu()
 				return;
 			}
 
-			const string filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "BMP");
+			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "BMP");
 			if(filePath.empty())
 			{
 				return;

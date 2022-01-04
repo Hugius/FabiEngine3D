@@ -27,8 +27,8 @@ const bool WorldEditor::saveCustomWorldToFile()
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = (rootPath + (Config::getInst().isApplicationExported() ? "" :
-							 ("projects\\" + _currentProjectID + "\\")) + "worlds\\custom\\" + _customWorldID + ".fe3d");
+	const auto filePath = (rootPath + (Config::getInst().isApplicationExported() ? "" :
+						   ("projects\\" + _currentProjectID + "\\")) + "worlds\\custom\\" + _customWorldID + ".fe3d");
 
 	ofstream file(filePath);
 

@@ -22,16 +22,15 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 	}
 
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = (rootPath + (Config::getInst().isApplicationExported() ? "" :
-							 ("projects\\" + _currentProjectID + "\\")) + "worlds\\custom\\" + fileName + ".fe3d");
+	const auto filePath = (rootPath + (Config::getInst().isApplicationExported() ? "" :
+						   ("projects\\" + _currentProjectID + "\\")) + "worlds\\custom\\" + fileName + ".fe3d");
 
-	if(!Tools::isFileExisting(filePath))
+	auto file = ifstream(filePath);
+	if(!file)
 	{
 		Logger::throwWarning("Cannot load world with ID \"" + fileName + "\"!");
 		return false;
 	}
-
-	ifstream file(filePath);
 
 	string line;
 	while(getline(file, line))

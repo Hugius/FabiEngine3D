@@ -54,10 +54,10 @@ public:
 private:
 	Config();
 
-	void _processOption(ifstream& file, string& option, string criteria);
-	void _processOption(ifstream& file, float& option, string criteria);
-	void _processOption(ifstream& file, int& option, string criteria);
-	void _processOption(ifstream& file, bool& option, string criteria);
+	void _processOption(ifstream& file, string& option, string name);
+	void _processOption(ifstream& file, float& option, string name);
+	void _processOption(ifstream& file, int& option, string name);
+	void _processOption(ifstream& file, bool& option, string name);
 
 	string _windowTitle = "";
 

@@ -158,7 +158,7 @@ void ModelEditor::_updateModelCreating()
 				return;
 			}
 
-			const string filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "OBJ");
+			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "OBJ");
 			if(filePath.empty())
 			{
 				_isCreatingModel = false;

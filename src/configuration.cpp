@@ -9,11 +9,15 @@ using std::istringstream;
 Config::Config()
 {
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + "config.fe3d");
+	const auto filePath = string(rootPath + "config.fe3d");
 
 	if(Tools::isFileExisting(filePath))
 	{
-		ifstream file(filePath);
+		auto file = ifstream(filePath);
+		if(!file)
+		{
+			Logger::throwFatalWarning("Cannot load `config.fe3d`!");
+		}
 
 		float windowSizeMultiplier = 0.0f;
 		_processOption(file, windowSizeMultiplier, "window_size");
@@ -60,7 +64,7 @@ Config::Config()
 	}
 }
 
-void Config::_processOption(ifstream& file, string& option, string criteria)
+void Config::_processOption(ifstream& file, string& option, string name)
 {
 	string line;
 	string field;
@@ -69,17 +73,17 @@ void Config::_processOption(ifstream& file, string& option, string criteria)
 	istringstream iss(line);
 	iss >> field >> equals;
 
-	if(field == criteria)
+	if(field == name)
 	{
 		iss >> option;
 	}
 	else
 	{
-		Logger::throwFatalWarning("Configuration file @ option `" + criteria + "`: invalid option field!");
+		Logger::throwFatalWarning("Configuration file @ option `" + name + "`: invalid option field!");
 	}
 }
 
-void Config::_processOption(ifstream& file, float& option, string criteria)
+void Config::_processOption(ifstream& file, float& option, string name)
 {
 	string line;
 	string field;
@@ -88,17 +92,17 @@ void Config::_processOption(ifstream& file, float& option, string criteria)
 	istringstream iss(line);
 	iss >> field >> equals;
 
-	if(field == criteria)
+	if(field == name)
 	{
 		iss >> option;
 	}
 	else
 	{
-		Logger::throwFatalWarning("Configuration file @ option `" + criteria + "`: invalid option field!");
+		Logger::throwFatalWarning("Configuration file @ option `" + name + "`: invalid option field!");
 	}
 }
 
-void Config::_processOption(ifstream& file, int& option, string criteria)
+void Config::_processOption(ifstream& file, int& option, string name)
 {
 	string line;
 	string field;
@@ -107,17 +111,17 @@ void Config::_processOption(ifstream& file, int& option, string criteria)
 	istringstream iss(line);
 	iss >> field >> equals;
 
-	if(field == criteria)
+	if(field == name)
 	{
 		iss >> option;
 	}
 	else
 	{
-		Logger::throwFatalWarning("Configuration file @ option `" + criteria + "`: invalid option field!");
+		Logger::throwFatalWarning("Configuration file @ option `" + name + "`: invalid option field!");
 	}
 }
 
-void Config::_processOption(ifstream& file, bool& option, string criteria)
+void Config::_processOption(ifstream& file, bool& option, string name)
 {
 	string line;
 	string field;
@@ -128,7 +132,7 @@ void Config::_processOption(ifstream& file, bool& option, string criteria)
 	istringstream iss(line);
 	iss >> field >> equals >> value;
 
-	if(field == criteria)
+	if(field == name)
 	{
 		if(value == "true")
 		{
@@ -140,12 +144,12 @@ void Config::_processOption(ifstream& file, bool& option, string criteria)
 		}
 		else
 		{
-			Logger::throwFatalWarning("Configuration file @ option `" + criteria + "`: invalid boolean value!");
+			Logger::throwFatalWarning("Configuration file @ option `" + name + "`: invalid boolean value!");
 		}
 	}
 	else
 	{
-		Logger::throwFatalWarning("Configuration file @ option `" + criteria + "`: invalid option field!");
+		Logger::throwFatalWarning("Configuration file @ option `" + name + "`: invalid option field!");
 	}
 }
 

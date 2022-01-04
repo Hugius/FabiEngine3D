@@ -3,6 +3,7 @@
 #include "tools.hpp"
 
 using std::make_shared;
+using std::ifstream;
 
 pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& filePath)
 {
@@ -14,7 +15,9 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 
 	FILE* file = nullptr;
 	const auto rootPath = Tools::getRootDirectoryPath();
-	if(fopen_s(&file, string(rootPath + filePath).c_str(), "r") != 0)
+	const auto filePath = string(rootPath + filePath);
+	auto file = ifstream(filePath);
+	if(file)
 	{
 		auto warningMessage = string("Cannot load mesh: \"" + filePath + "\"!");
 		return make_pair(warningMessage, meshParts);

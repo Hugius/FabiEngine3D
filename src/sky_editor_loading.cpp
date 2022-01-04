@@ -18,15 +18,14 @@ const vector<string> SkyEditor::getImagePathsFromFile() const
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\sky.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\sky.fe3d");
 
-	if(!Tools::isFileExisting(filePath))
+	auto file = ifstream(filePath);
+	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `sky.fe3d` missing!");
 		return {};
 	}
-
-	ifstream file(filePath);
 
 	vector<string> imagePaths;
 	string line;
@@ -77,15 +76,14 @@ const bool SkyEditor::loadFromFile()
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\sky.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\sky.fe3d");
 
-	if(!Tools::isFileExisting(filePath))
+	auto file = ifstream(filePath);
+	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `sky.fe3d` missing!");
 		return false;
 	}
-
-	ifstream file(filePath);
 
 	string line;
 	while(getline(file, line))

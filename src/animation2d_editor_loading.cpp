@@ -18,15 +18,14 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\animation2d.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\animation2d.fe3d");
 
-	if(!Tools::isFileExisting(filePath))
+	auto file = ifstream(filePath);
+	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `animation2d.fe3d` missing!");
 		return false;
 	}
-
-	ifstream file(filePath);
 
 	string line;
 	while(getline(file, line))

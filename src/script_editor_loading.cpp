@@ -34,32 +34,38 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 
 	for(const auto& fileName : Tools::getFilesFromDirectory(directoryPath))
 	{
-		const string extension = fileName.substr(fileName.size() - 5, 5);
-
-		if(Tools::isFileExisting(directoryPath + fileName) && (extension == ".fe3d"))
+		const auto extension = fileName.substr(fileName.size() - 5, 5);
+		if(extension != ".fe3d")
 		{
-			ifstream file(directoryPath + fileName);
-			string line;
-
-			string scriptFileID = fileName.substr(0, fileName.size() - 5);
-			_script.createScriptFile(scriptFileID);
-
-			unsigned int cursorLineIndex, cursorCharIndex;
-			getline(file, line);
-			istringstream iss(line);
-			iss >> cursorLineIndex >> cursorCharIndex;
-			_script.getScriptFile(scriptFileID)->setCursorLineIndex(cursorLineIndex);
-			_script.getScriptFile(scriptFileID)->setCursorCharIndex(cursorCharIndex);
-
-			unsigned int lineIndex = 0;
-			while(getline(file, line))
-			{
-				_script.getScriptFile(scriptFileID)->insertNewLine(lineIndex, line);
-				lineIndex++;
-			}
-
-			file.close();
+			continue;
 		}
+
+		const auto filePath = string(directoryPath + fileName);
+		auto file = ifstream(filePath);
+		if(!file)
+		{
+			continue;
+		}
+
+		const auto scriptFileID = fileName.substr(0, fileName.size() - 5);
+		_script.createScriptFile(scriptFileID);
+
+		unsigned int cursorLineIndex, cursorCharIndex;
+		string line;
+		getline(file, line);
+		istringstream iss(line);
+		iss >> cursorLineIndex >> cursorCharIndex;
+		_script.getScriptFile(scriptFileID)->setCursorLineIndex(cursorLineIndex);
+		_script.getScriptFile(scriptFileID)->setCursorCharIndex(cursorCharIndex);
+
+		unsigned int lineIndex = 0;
+		while(getline(file, line))
+		{
+			_script.getScriptFile(scriptFileID)->insertNewLine(lineIndex, line);
+			lineIndex++;
+		}
+
+		file.close();
 	}
 
 	if(isLoggingEnabled)

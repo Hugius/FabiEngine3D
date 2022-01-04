@@ -66,7 +66,7 @@ void SoundEditor::_updateSoundCreating()
 				return;
 			}
 
-			const string filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "WAV");
+			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "WAV");
 			if(filePath.empty())
 			{
 				_isCreatingSound = false;

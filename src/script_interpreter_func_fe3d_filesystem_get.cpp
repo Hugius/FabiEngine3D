@@ -18,8 +18,8 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functio
 		{
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
-			const string newDirectoryPath = string(directoryPath + args[0].getString());
+			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
+			const auto newDirectoryPath = string(directoryPath + args[0].getString());
 
 			auto result = Tools::isDirectoryExisting(newDirectoryPath);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -33,8 +33,8 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functio
 		{
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
-			const string filePath = (directoryPath + args[0].getString());
+			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
+			const auto filePath = (directoryPath + args[0].getString());
 
 			auto result = Tools::isFileExisting(filePath);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -48,26 +48,24 @@ const bool ScriptInterpreter::_executeFe3dFilesystemGetter(const string& functio
 		{
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
-			const string filePath = (directoryPath + args[0].getString());
+			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
+			const auto filePath = (directoryPath + args[0].getString());
 
-			if(Tools::isFileExisting(filePath))
-			{
-				ifstream file(filePath);
-				string line;
-
-				while(!file.eof())
-				{
-					getline(file, line);
-					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, line));
-				}
-
-				file.close();
-			}
-			else
+			auto file = ifstream(filePath);
+			if(!file)
 			{
 				_throwScriptError("cannot read from file \"" + args[0].getString() + "\"!");
+				return true;
 			}
+
+			string line;
+			while(!file.eof())
+			{
+				getline(file, line);
+				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, line));
+			}
+
+			file.close();
 		}
 	}
 	else

@@ -20,15 +20,14 @@ const vector<string> ModelEditor::getMeshPathsFromFile() const
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\model.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\model.fe3d");
 
-	if(!Tools::isFileExisting(filePath))
+	auto file = ifstream(filePath);
+	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `model.fe3d` missing!");
 		return {};
 	}
-
-	ifstream file(filePath);
 
 	vector<string> meshPaths;
 	string line;
@@ -72,15 +71,14 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\model.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\model.fe3d");
 
-	if(!Tools::isFileExisting(filePath))
+	auto file = ifstream(filePath);
+	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `model.fe3d` missing!");
 		return {};
 	}
-
-	ifstream file(filePath);
 
 	vector<string> texturePaths;
 	string line;
@@ -224,15 +222,14 @@ const bool ModelEditor::loadFromFile()
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\model.fe3d");
+	const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "data\\model.fe3d");
 
-	if(!Tools::isFileExisting(filePath))
+	auto file = ifstream(filePath);
+	if(!file)
 	{
 		Logger::throwWarning("Project corrupted: file `model.fe3d` missing!");
 		return false;
 	}
-
-	ifstream file(filePath);
 
 	string line;
 	while(getline(file, line))

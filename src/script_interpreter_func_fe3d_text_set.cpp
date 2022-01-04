@@ -27,7 +27,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\image\\font_map\\" + args[1].getString());
+			const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\image\\font_map\\" + args[1].getString());
 			_fe3d.text_setFontMap(args[0].getString(), filePath);
 
 			_fe3d.text_setPosition(args[0].getString(), _convertGuiPositionToViewport(fvec2(args[3].getDecimal(), args[4].getDecimal())));

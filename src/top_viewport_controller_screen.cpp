@@ -182,7 +182,7 @@ void TopViewportController::_updateMiscScreenManagement()
 			return;
 		}
 
-		const string filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "");
+		const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "");
 		if(filePath.empty())
 		{
 			return;
@@ -227,7 +227,8 @@ void TopViewportController::_updateMiscScreenManagement()
 			auto newPath = string(exportDirectoryPath + "binaries\\" + _currentProjectID + ".exe");
 			Tools::renameFile(oldPath, newPath);
 
-			auto file = ofstream(exportDirectoryPath + "config.fe3d");
+			const auto filePath = string(exportDirectoryPath + "config.fe3d");
+			auto file = ofstream(filePath);
 			file << "window_size			= 0.75" << endl;
 			file << "window_fullscreen      = false" << endl;
 			file << "window_borderless      = false" << endl;

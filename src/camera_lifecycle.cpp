@@ -6,10 +6,7 @@
 using std::max;
 using std::clamp;
 
-Camera::Camera(RenderBus& renderBus, RenderWindow& window)
-	:
-	_renderBus(renderBus),
-	_window(window)
+Camera::Camera()
 {
 	reset();
 }
@@ -52,9 +49,9 @@ void Camera::reset()
 	_cursorIsBeingCentered = false;
 }
 
-void Camera::update(ivec2 lastCursorPosition)
+void Camera::update(RenderBus& renderBus, RenderWindow& renderWindow, ivec2 lastCursorPosition)
 {
-	ivec2 currenCursorPosition = _window.getCursorPosition();
+	ivec2 currenCursorPosition = renderWindow.getCursorPosition();
 	const int left = Config::getInst().getViewportPosition().x;
 	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getViewportPosition().y + Config::getInst().getViewportSize().y);
 	const int xMiddle = left + (Config::getInst().getViewportSize().x / 2);
@@ -62,7 +59,7 @@ void Camera::update(ivec2 lastCursorPosition)
 
 	if(_mustCenterCursor)
 	{
-		_window.setCursorPosition({xMiddle, yMiddle});
+		renderWindow.setCursorPosition({xMiddle, yMiddle});
 		_mustCenterCursor = false;
 		_cursorIsBeingCentered = true;
 	}
@@ -100,7 +97,7 @@ void Camera::update(ivec2 lastCursorPosition)
 		_yaw = _firstPersonYaw;
 		_pitch = _firstPersonPitch;
 
-		_window.setCursorPosition({xMiddle, yMiddle});
+		renderWindow.setCursorPosition({xMiddle, yMiddle});
 	}
 	else
 	{
@@ -144,7 +141,7 @@ void Camera::update(ivec2 lastCursorPosition)
 		_yaw = Math::convertToDegrees(atan2f(_position.z - _thirdPersonLookat.z, _position.x - _thirdPersonLookat.x)) + 180.0f;
 		_pitch = -(_thirdPersonPitch);
 
-		_window.setCursorPosition({xMiddle, yMiddle});
+		renderWindow.setCursorPosition({xMiddle, yMiddle});
 	}
 	else
 	{
@@ -155,5 +152,5 @@ void Camera::update(ivec2 lastCursorPosition)
 	_yaw = Math::limitAngle(_yaw);
 	_pitch = clamp(_pitch, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
 
-	updateMatrices();
+	updateMatrices(renderBus);
 }

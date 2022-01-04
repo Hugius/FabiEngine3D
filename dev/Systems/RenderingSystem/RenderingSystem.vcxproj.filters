@@ -43,17 +43,14 @@
     <Filter Include="Shaders\Post">
       <UniqueIdentifier>{16f78e2a-5f05-4057-a0e0-4b959ade0823}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Buffer\Cache">
+      <UniqueIdentifier>{3958658e-9f3c-4b81-866f-14d78b557594}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Buffer\Data">
+      <UniqueIdentifier>{6e54bb7f-a500-491c-9047-56648eb1bc73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\capture_buffer.cpp">
-      <Filter>Buffer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\vertex_buffer.cpp">
-      <Filter>Buffer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\shader_buffer.cpp">
-      <Filter>Buffer</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\master_renderer_capture_reflection_cube.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
@@ -144,20 +141,23 @@
     <ClCompile Include="..\..\..\src\master_renderer_capture_capture_planar.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\capture_buffer.cpp">
+      <Filter>Buffer\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\shader_buffer.cpp">
+      <Filter>Buffer\Data</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\src\texture_buffer.cpp">
-      <Filter>Buffer</Filter>
+      <Filter>Buffer\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\vertex_buffer.cpp">
+      <Filter>Buffer\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\buffer_cache.cpp">
+      <Filter>Buffer\Cache</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\capture_buffer.hpp">
-      <Filter>Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\vertex_buffer.hpp">
-      <Filter>Buffer</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\shader_buffer.hpp">
-      <Filter>Buffer</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\master_renderer.hpp">
       <Filter>Master Renderer</Filter>
     </ClInclude>
@@ -230,8 +230,20 @@
     <ClInclude Include="..\..\..\src\render_utils.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\capture_buffer.hpp">
+      <Filter>Buffer\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\shader_buffer.hpp">
+      <Filter>Buffer\Data</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\src\texture_buffer.hpp">
-      <Filter>Buffer</Filter>
+      <Filter>Buffer\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\vertex_buffer.hpp">
+      <Filter>Buffer\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\buffer_cache.hpp">
+      <Filter>Buffer\Cache</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

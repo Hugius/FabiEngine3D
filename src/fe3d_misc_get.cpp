@@ -40,7 +40,7 @@ const string FabiEngine3D::misc_getOpenglVersion() const
 
 const ivec2 FabiEngine3D::misc_getCursorPosition() const
 {
-	ivec2 cursorPosition = _core->_window.getCursorPosition();
+	ivec2 cursorPosition = _core->_renderWindow.getCursorPosition();
 
 	return ivec2(cursorPosition.x, (Config::getInst().getWindowSize().y - cursorPosition.y));
 }
@@ -59,7 +59,7 @@ const ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport() const
 
 		ivec2 offset = ivec2(viewportPosition.x, windowSize.y - (viewportPosition.y + viewportSize.y));
 
-		fvec2 relativeCursorPosition = fvec2(_core->_window.getCursorPosition()) - fvec2(offset);
+		fvec2 relativeCursorPosition = fvec2(_core->_renderWindow.getCursorPosition()) - fvec2(offset);
 
 		relativeCursorPosition = (relativeCursorPosition / fvec2(viewportSize)) * fvec2(windowSize);
 
@@ -75,7 +75,7 @@ const bool FabiEngine3D::misc_isMillisecondTimerStarted() const
 
 const bool FabiEngine3D::misc_isCursorVisible() const
 {
-	return _core->_window.isCursorVisible();
+	return _core->_renderWindow.isCursorVisible();
 }
 
 const bool FabiEngine3D::misc_isCursorInsideViewport() const
@@ -179,7 +179,7 @@ const string FabiEngine3D::misc_getCursorEntityID() const
 
 const bool FabiEngine3D::misc_isVsyncEnabled() const
 {
-	return _core->_window.isVsyncEnabled();
+	return _core->_renderWindow.isVsyncEnabled();
 }
 
 const bool FabiEngine3D::misc_isWireframeRenderingEnabled() const

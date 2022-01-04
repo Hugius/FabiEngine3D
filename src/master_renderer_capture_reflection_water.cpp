@@ -55,7 +55,7 @@ void MasterRenderer::_captureWaterReflections()
 		const float initialCameraPitch = _camera.getPitch();
 		_camera.setPitch(-initialCameraPitch);
 
-		_camera.updateMatrices();
+		_camera.updateMatrices(_renderBus);
 
 		_renderBus.setCameraPosition(initialCameraPosition);
 		_renderBus.setCameraPitch(initialCameraPitch);
@@ -131,7 +131,7 @@ void MasterRenderer::_captureWaterReflections()
 
 		_camera.setPosition(initialCameraPosition);
 
-		_camera.updateMatrices();
+		_camera.updateMatrices(_renderBus);
 
 		_renderBus.setReflectionsEnabled(true);
 

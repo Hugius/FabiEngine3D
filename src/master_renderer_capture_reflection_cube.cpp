@@ -97,9 +97,9 @@ void MasterRenderer::_captureCubeReflections()
 					}
 				}
 
-				_camera.updateMatrices();
+				_camera.updateMatrices(_renderBus);
 
-				_shadowGenerator.generate();
+				_shadowGenerator.generate(_renderBus);
 				_captureShadows();
 
 				_cubeReflectionCaptor->bind();
@@ -162,7 +162,7 @@ void MasterRenderer::_captureCubeReflections()
 	_camera.setYaw(initialCameraYaw);
 	_camera.setPitch(initialCameraPitch);
 	_camera.setPosition(initialCameraPosition);
-	_camera.updateMatrices();
+	_camera.updateMatrices(_renderBus);
 
-	_shadowGenerator.generate();
+	_shadowGenerator.generate(_renderBus);
 }

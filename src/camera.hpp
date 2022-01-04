@@ -8,11 +8,11 @@ using std::numeric_limits;
 class Camera final
 {
 public:
-	Camera(RenderBus& renderBus, RenderWindow& window);
+	Camera();
 
 	void reset();
-	void update(ivec2 lastCursorPosition);
-	void updateMatrices();
+	void update(RenderBus& renderBus, RenderWindow& renderWindow, ivec2 lastCursorPosition);
+	void updateMatrices(RenderBus& renderBus);
 	void move(fvec3 value);
 	void setPosition(fvec3 value);
 	void setThirdPersonLookat(fvec3 value);
@@ -110,7 +110,4 @@ private:
 	bool _isFirstPersonViewEnabled = false;
 	bool _mustCenterCursor = false;
 	bool _cursorIsBeingCentered = false;
-
-	RenderBus& _renderBus;
-	RenderWindow& _window;
 };

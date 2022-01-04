@@ -4,21 +4,7 @@
 
 using std::max;
 
-ShadowGenerator::ShadowGenerator(RenderBus& renderBus)
-	:
-	_renderBus(renderBus),
-	_eyePosition(renderBus.getShadowEyePosition()),
-	_centerPosition(renderBus.getShadowCenterPosition()),
-	_size(renderBus.getShadowSize()),
-	_reach(renderBus.getShadowReach()),
-	_lightness(renderBus.getShadowLightness()),
-	_quality(renderBus.getShadowQuality()),
-	_isEnabled(renderBus.isShadowsEnabled())
-{
-
-}
-
-void ShadowGenerator::update()
+void ShadowGenerator::update(RenderBus& renderBus)
 {
 	if(_isEnabled)
 	{
@@ -26,7 +12,7 @@ void ShadowGenerator::update()
 		{
 			_passedFrames = 0;
 
-			generate();
+			generate(renderBus);
 		}
 		else
 		{
@@ -35,7 +21,7 @@ void ShadowGenerator::update()
 	}
 }
 
-void ShadowGenerator::generate()
+void ShadowGenerator::generate(RenderBus& renderBus)
 {
 	auto newEyePosition = _eyePosition;
 	auto newCenterPosition = _centerPosition;
@@ -47,7 +33,7 @@ void ShadowGenerator::generate()
 
 	if(_isFollowingCamera)
 	{
-		auto cameraPosition = _renderBus.getCameraPosition();
+		auto cameraPosition = renderBus.getCameraPosition();
 
 		newEyePosition.x += cameraPosition.x;
 		newEyePosition.z += cameraPosition.z;
@@ -55,15 +41,15 @@ void ShadowGenerator::generate()
 		newCenterPosition.z += cameraPosition.z;
 	}
 
-	_renderBus.setShadowEyePosition(newEyePosition);
-	_renderBus.setShadowCenterPosition(newCenterPosition);
-	_renderBus.setShadowSize(newSize);
-	_renderBus.setShadowReach(newReach);
-	_renderBus.setShadowLightness(newLightness);
-	_renderBus.setShadowQuality(newQuality);
-	_renderBus.setShadowsEnabled(newEnabled);
+	renderBus.setShadowEyePosition(newEyePosition);
+	renderBus.setShadowCenterPosition(newCenterPosition);
+	renderBus.setShadowSize(newSize);
+	renderBus.setShadowReach(newReach);
+	renderBus.setShadowLightness(newLightness);
+	renderBus.setShadowQuality(newQuality);
+	renderBus.setShadowsEnabled(newEnabled);
 
-	_renderBus.setShadowMatrix(_createShadowMatrix(newEyePosition, newCenterPosition, newSize, newReach));
+	renderBus.setShadowMatrix(_createShadowMatrix(newEyePosition, newCenterPosition, newSize, newReach));
 }
 
 const mat44 ShadowGenerator::_createShadowMatrix(fvec3 eyePosition, fvec3 centerPosition, float size, float reach) const

@@ -9,11 +9,7 @@ using std::chrono::duration_cast;
 Core::Core(FabiEngine3D& fe3d)
 	:
 	_fe3d(fe3d),
-	_window(_libraryLoader),
-	_sound2dManager(_audioLoader),
-	_sound3dManager(_audioLoader),
-	_shadowGenerator(_renderBus),
-	_camera(_renderBus, _window),
+	_renderWindow(_libraryLoader),
 	_skyEntityManager(_renderBus),
 	_terrainEntityManager(_imageLoader),
 	_modelEntityManager(_meshLoader, _renderBus, _timer),
@@ -121,7 +117,7 @@ void Core::_stop()
 
 void Core::_update()
 {
-	static ivec2 lastCursorPosition = _window.getCursorPosition();
+	static ivec2 lastCursorPosition = _renderWindow.getCursorPosition();
 
 	if(_inputHandler.isKeyDown(InputType::WINDOW_X_BUTTON))
 	{
@@ -140,10 +136,10 @@ void Core::_update()
 		if(!_isPaused)
 		{
 			_timer.startDeltaPart("physicsUpdate");
-			_camera.update(lastCursorPosition);
+			_camera.update(_renderBus, _renderWindow, lastCursorPosition);
 			_raycaster.update(_fe3d.misc_getCursorPositionRelativeToViewport());
 			_cameraCollisionHandler.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _camera);
-			_camera.updateMatrices();
+			_camera.updateMatrices(_renderBus);
 			_timer.stopDeltaPart();
 
 			_timer.startDeltaPart("skyEntityUpdate");
@@ -170,7 +166,7 @@ void Core::_update()
 			_timer.stopDeltaPart();
 
 			_timer.startDeltaPart("shadowUpdate");
-			_shadowGenerator.update();
+			_shadowGenerator.update(_renderBus);
 			_timer.stopDeltaPart();
 
 			_timer.startDeltaPart("soundUpdate");
@@ -199,15 +195,15 @@ void Core::_update()
 		static float opacity = 0.0f;
 		if(opacity < 1.0f)
 		{
-			_window.setOpacity(opacity);
+			_renderWindow.setOpacity(opacity);
 			opacity += 0.01f;
 		}
 		if(opacity > 1.0f)
 		{
 			opacity = 1.0f;
-			_window.setOpacity(opacity);
+			_renderWindow.setOpacity(opacity);
 		}
 	}
 
-	lastCursorPosition = _window.getCursorPosition();
+	lastCursorPosition = _renderWindow.getCursorPosition();
 }

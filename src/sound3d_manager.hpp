@@ -6,10 +6,8 @@
 class Sound3dManager final
 {
 public:
-	Sound3dManager(AudioLoader& audioLoader);
-
 	void update();
-	void createSound(const string& ID, const string& audioPath);
+	void createSound(const string& ID, const string& audioPath, AudioLoader& audioLoader);
 	void deleteSound(const string& ID);
 	void deleteSounds();
 
@@ -22,5 +20,4 @@ private:
 	const int _findSoundIndex(const string& ID) const;
 
 	vector<Sound3d> _sounds;
-	AudioLoader& _audioLoader;
 };

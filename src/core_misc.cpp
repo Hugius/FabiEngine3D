@@ -24,7 +24,7 @@ void Core::_render()
 	_masterRenderer.render(&entityBus);
 
 	_timer.startDeltaPart("bufferSwap");
-	_window.swapBackBuffer();
+	_renderWindow.swapBackBuffer();
 	_timer.stopDeltaPart();
 }
 
@@ -97,11 +97,11 @@ void Core::_prepare()
 	else
 	{
 		glClearColor(keyingColor.r, keyingColor.g, keyingColor.b, 0.0f);
-		_window.enableColorKeying(keyingColor);
-		_window.setSize(logoResolution);
-		_window.showWindow();
+		_renderWindow.enableColorKeying(keyingColor);
+		_renderWindow.setSize(logoResolution);
+		_renderWindow.showWindow();
 		_masterRenderer.render(logo, logoResolution);
-		_window.swapBackBuffer();
+		_renderWindow.swapBackBuffer();
 	}
 
 	_fe3d.FE3D_CONTROLLER_INIT();
@@ -110,33 +110,33 @@ void Core::_prepare()
 	{
 		if(!Config::getInst().isApplicationExported())
 		{
-			_window.disableColorKeying(keyingColor);
+			_renderWindow.disableColorKeying(keyingColor);
 		}
 
 		if(!Config::getInst().isApplicationExported() || (Config::getInst().isApplicationExported() && !_fe3d.server_isRunning()))
 		{
-			_window.showWindow();
-			_window.setSize(Config::getInst().getWindowSize());
+			_renderWindow.showWindow();
+			_renderWindow.setSize(Config::getInst().getWindowSize());
 			if(Config::getInst().isWindowFullscreen())
 			{
-				_window.enableFullscreen();
+				_renderWindow.enableFullscreen();
 			}
 			if(!Config::getInst().isWindowBorderless())
 			{
-				_window.showBorder();
+				_renderWindow.showBorder();
 			}
 			if(Config::getInst().isApplicationExported())
 			{
-				_window.setTitle(Config::getInst().getWindowTitle());
+				_renderWindow.setTitle(Config::getInst().getWindowTitle());
 			}
 
 			if(Config::getInst().isApplicationExported())
 			{
-				_window.setOpacity(1.0f);
+				_renderWindow.setOpacity(1.0f);
 			}
 			else
 			{
-				_window.setOpacity(0.0f);
+				_renderWindow.setOpacity(0.0f);
 			}
 		}
 	}

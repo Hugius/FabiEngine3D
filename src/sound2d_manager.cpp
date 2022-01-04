@@ -3,13 +3,6 @@
 
 #include <algorithm>
 
-Sound2dManager::Sound2dManager(AudioLoader& audioLoader)
-	:
-	_audioLoader(audioLoader)
-{
-
-}
-
 void Sound2dManager::deleteSounds()
 {
 	_sounds.clear();
@@ -34,7 +27,7 @@ void Sound2dManager::update()
 
 }
 
-void Sound2dManager::createSound(const string& ID, const string& audioPath)
+void Sound2dManager::createSound(const string& ID, const string& audioPath, AudioLoader& audioLoader)
 {
 	if(_findSoundIndex(ID) != -1)
 	{
@@ -45,7 +38,7 @@ void Sound2dManager::createSound(const string& ID, const string& audioPath)
 		Logger::throwError("Sound2dManager::createSound::2");
 	}
 
-	auto dataPointer = _audioLoader.loadChunk(audioPath);
+	auto dataPointer = audioLoader.loadChunk(audioPath);
 
 	if(dataPointer != nullptr)
 	{

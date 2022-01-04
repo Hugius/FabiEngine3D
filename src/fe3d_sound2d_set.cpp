@@ -3,7 +3,7 @@
 
 void FabiEngine3D::sound2d_create(const string& ID, const string& audioPath)
 {
-	_core->_sound2dManager.createSound(ID, audioPath);
+	_core->_sound2dManager.createSound(ID, audioPath, _core->_audioLoader);
 }
 
 void FabiEngine3D::sound2d_delete(const string& ID)

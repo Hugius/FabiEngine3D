@@ -282,7 +282,7 @@ const fvec3 Camera::getUpVector() const
 	return _upVector;
 }
 
-void Camera::updateMatrices()
+void Camera::updateMatrices(RenderBus& renderBus)
 {
 	_frontVector.x = (cos(Math::convertToRadians(_yaw)) * cos(Math::convertToRadians(_pitch)));
 	_frontVector.y = sin(Math::convertToRadians(_pitch));
@@ -296,12 +296,12 @@ void Camera::updateMatrices()
 
 	_projectionMatrix = Math::createPerspectiveProjectionMatrix(Math::convertToRadians(_fov), _aspectRatio, _nearDistance, _farDistance);
 
-	_renderBus.setCameraYaw(_yaw);
-	_renderBus.setCameraPitch(_pitch);
-	_renderBus.setCameraFront(_frontVector);
-	_renderBus.setCameraPosition(_position);
-	_renderBus.setViewMatrix(_viewMatrix);
-	_renderBus.setProjectionMatrix(_projectionMatrix);
-	_renderBus.setNearDistance(_nearDistance);
-	_renderBus.setFarDistance(_farDistance);
+	renderBus.setCameraYaw(_yaw);
+	renderBus.setCameraPitch(_pitch);
+	renderBus.setCameraFront(_frontVector);
+	renderBus.setCameraPosition(_position);
+	renderBus.setViewMatrix(_viewMatrix);
+	renderBus.setProjectionMatrix(_projectionMatrix);
+	renderBus.setNearDistance(_nearDistance);
+	renderBus.setFarDistance(_farDistance);
 }

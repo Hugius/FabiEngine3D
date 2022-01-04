@@ -70,7 +70,7 @@ private:
 	InputHandler _inputHandler;
 	CameraCollisionHandler _cameraCollisionHandler;
 	Timer _timer;
-	RenderWindow _window;
+	RenderWindow _renderWindow;
 	Sound2dManager _sound2dManager;
 	Sound3dManager _sound3dManager;
 	ShadowGenerator _shadowGenerator;

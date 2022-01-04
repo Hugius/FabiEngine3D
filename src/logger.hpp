@@ -85,11 +85,13 @@ private:
 		HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 		ostringstream oss;
 
-		auto timestamp = new char[64];
+		auto rawTimestamp = new char[9];
 		auto current = time(nullptr);
 		auto format = tm();
 		localtime_s(&format, &current);
-		strftime(timestamp, 64, "%H:%M:%S", &format);
+		strftime(rawTimestamp, 9, "%H:%M:%S", &format);
+		auto timestamp = string(rawTimestamp);
+		delete[] rawTimestamp;
 
 		SetConsoleTextAttribute(console, 6);
 		cout << "[" + _level_string[static_cast<unsigned int>(type)] + "]";

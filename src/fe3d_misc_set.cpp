@@ -56,13 +56,13 @@ void FabiEngine3D::misc_enableDebugRendering()
 
 void FabiEngine3D::misc_enableVsync()
 {
-	if(_core->_window.isVsyncEnabled())
+	if(_core->_renderWindow.isVsyncEnabled())
 	{
 		Logger::throwWarning("Tried to enable Vsync: already enabled!");
 		return;
 	}
 
-	_core->_window.enableVsync();
+	_core->_renderWindow.enableVsync();
 }
 
 void FabiEngine3D::misc_disableWireframeRendering()
@@ -111,24 +111,24 @@ void FabiEngine3D::misc_disableDebugRendering()
 
 void FabiEngine3D::misc_disableVsync()
 {
-	if(!_core->_window.isVsyncEnabled())
+	if(!_core->_renderWindow.isVsyncEnabled())
 	{
 		Logger::throwWarning("Tried to disable Vsync: not enabled!");
 		return;
 	}
 
-	_core->_window.disableVsync();
+	_core->_renderWindow.disableVsync();
 }
 
 void FabiEngine3D::misc_setCursorVisible(bool value)
 {
 	if(value)
 	{
-		_core->_window.showCursor();
+		_core->_renderWindow.showCursor();
 	}
 	else
 	{
-		_core->_window.hideCursor();
+		_core->_renderWindow.hideCursor();
 	}
 }
 
@@ -138,19 +138,19 @@ void FabiEngine3D::misc_centerCursor()
 	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getViewportPosition().y + Config::getInst().getViewportSize().y);
 	const int xMiddle = left + (Config::getInst().getViewportSize().x / 2);
 	const int yMiddle = bottom + (Config::getInst().getViewportSize().y / 2);
-	_core->_window.setCursorPosition({xMiddle, yMiddle});
+	_core->_renderWindow.setCursorPosition({xMiddle, yMiddle});
 
 	_core->_camera.notifyCursorCenter();
 }
 
 void FabiEngine3D::misc_setCursorPosition(ivec2 value)
 {
-	_core->_window.setCursorPosition(value);
+	_core->_renderWindow.setCursorPosition(value);
 }
 
 void FabiEngine3D::misc_setWindowTitle(const string& value)
 {
-	_core->_window.setTitle(value);
+	_core->_renderWindow.setTitle(value);
 }
 
 void FabiEngine3D::misc_cacheMesh(const string& filePath)

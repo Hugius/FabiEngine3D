@@ -2,8 +2,6 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-#pragma warning(disable:4996)
-
 using std::make_shared;
 
 pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& filePath)
@@ -14,9 +12,9 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 	vector<fvec3> temp_normals;
 	string selectedPartID = "";
 
+	FILE* file = nullptr;
 	const auto rootPath = Tools::getRootDirectoryPath();
-	auto file = fopen(string(rootPath + filePath).c_str(), "r");
-	if(file == nullptr)
+	if(fopen_s(&file, string(rootPath + filePath).c_str(), "r") != 0)
 	{
 		auto warningMessage = string("Cannot load mesh: \"" + filePath + "\"!");
 		return make_pair(warningMessage, meshParts);

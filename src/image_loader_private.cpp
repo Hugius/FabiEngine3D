@@ -9,10 +9,9 @@ using std::clamp;
 
 shared_ptr<Image> ImageLoader::_loadImage(const string& filePath, bool mustFlip)
 {
+	FILE* file = nullptr;
 	const auto rootPath = Tools::getRootDirectoryPath();
-
-	auto file = fopen(string(rootPath + filePath).c_str(), "rb");
-	if(file == nullptr)
+	if(fopen_s(&file, string(rootPath + filePath).c_str(), "rb") != 0)
 	{
 		return nullptr;
 	}

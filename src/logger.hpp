@@ -1,7 +1,5 @@
 #pragma once
 
-#pragma warning (disable : 4996)
-
 #define NOMINMAX
 
 #include "message_type.hpp"
@@ -16,9 +14,6 @@
 #include <type_traits>
 
 using std::endl;
-using std::strftime;
-using std::time;
-using std::localtime;
 using std::vector;
 using std::string;
 using std::cout;
@@ -90,17 +85,18 @@ private:
 		HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
 		ostringstream oss;
 
-		char timeBuffer[64];
-		auto t = time(nullptr);
-		auto foo = *localtime(&t);
-		strftime(timeBuffer, 64, "%H:%M:%S", &foo);
+		auto timestamp = new char[64];
+		auto current = time(nullptr);
+		tm format = {};
+		localtime_s(&format, &current);
+		strftime(timestamp, sizeof(timestamp), "%H:%M:%S", &format);
 
 		SetConsoleTextAttribute(console, 6);
-		cout << "[" + _level_string[static_cast<int>(type)] + "]";
-		oss << "[" + _level_string[static_cast<int>(type)] + "]";
+		cout << "[" + _level_string[static_cast<unsigned int>(type)] + "]";
+		oss << "[" + _level_string[static_cast<unsigned int>(type)] + "]";
 		SetConsoleTextAttribute(console, 12);
-		cout << "[" << timeBuffer << "]";
-		oss << "[" << timeBuffer << "]";
+		cout << "[" << timestamp << "]";
+		oss << "[" << timestamp << "]";
 		SetConsoleTextAttribute(console, 7);
 
 		if(type == MessageType::DEBUG || type == MessageType::ERR)

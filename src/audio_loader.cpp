@@ -157,8 +157,7 @@ const char* AudioLoader::_loadWaveFile(const string& filePath) const
 
 	file.seekg(0, ios::end);
 
-	auto dataSize = (DWORD)file.tellg();
-
+	auto dataSize = static_cast<unsigned int>(file.tellg());
 	auto data = new char[dataSize];
 
 	file.seekg(0, ios::beg);

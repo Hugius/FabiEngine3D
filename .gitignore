@@ -1,9 +1,0 @@
-*
-
-!app/
-!doc/
-!src/
-
-!dev/Libraries
-!dev/Systems
-!dev/FabiEngine3D.sln

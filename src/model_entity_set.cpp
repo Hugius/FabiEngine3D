@@ -119,7 +119,7 @@ void ModelEntity::updateTransformationMatrix()
 	}
 }
 
-void ModelEntity::setVertexBuffer(const string& partID, shared_ptr<VertexBuffer> value)
+void ModelEntity::setMesh(const string& partID, shared_ptr<VertexBuffer> value)
 {
 	_parts[_getPartIndex(partID)].vertexBuffer = value;
 }

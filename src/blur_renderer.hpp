@@ -20,5 +20,5 @@ public:
 private:
 	void _render(const shared_ptr<QuadEntity> entity, shared_ptr<TextureBuffer> texture);
 
-	shared_ptr<CaptureBuffer> _captureBuffer = nullptr;
+	shared_ptr<CaptureBuffer> _captor = nullptr;
 };

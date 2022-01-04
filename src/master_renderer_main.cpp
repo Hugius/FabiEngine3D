@@ -35,18 +35,18 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, Camera& camer
 	_bloomBlurRendererLowQuality("blur_shader.vert", "blur_shader.frag", renderBus),
 	_dofBlurRenderer("blur_shader.vert", "blur_shader.frag", renderBus),
 	_motionBlurBlurRenderer("blur_shader.vert", "blur_shader.frag", renderBus),
-	_worldDepthCaptureBuffer(make_shared<CaptureBuffer>(ivec2(0), Config::getInst().getViewportSize())),
-	_worldColorCaptureBuffer(make_shared<CaptureBuffer>(ivec2(0), Config::getInst().getViewportSize(), 2, false)),
-	_antiAliasingCaptureBuffer(make_shared<CaptureBuffer>(ivec2(0), Config::getInst().getViewportSize(), 1, false)),
-	_bloomCaptureBuffer(make_shared<CaptureBuffer>(ivec2(0), Config::getInst().getViewportSize(), 1, false)),
-	_dofCaptureBuffer(make_shared<CaptureBuffer>(ivec2(0), Config::getInst().getViewportSize(), 1, false)),
-	_lensFlareCaptureBuffer(make_shared<CaptureBuffer>(ivec2(0), Config::getInst().getViewportSize(), 1, false)),
-	_motionBlurCaptureBuffer(make_shared<CaptureBuffer>(ivec2(0), Config::getInst().getViewportSize(), 1, false)),
-	_cubeReflectionCaptureBuffer(make_shared<CaptureBuffer>(ivec2(0), ivec2(Config::MIN_REFLECTION_QUALITY), 1, false)),
-	_planarReflectionCaptureBuffer(make_shared<CaptureBuffer>(ivec2(0), ivec2(Config::MIN_REFLECTION_QUALITY), 1, false)),
-	_waterReflectionCaptureBuffer(make_shared<CaptureBuffer>(ivec2(0), ivec2(Config::MIN_REFLECTION_QUALITY), 1, false)),
-	_waterRefractionCaptureBuffer(make_shared<CaptureBuffer>(ivec2(0), ivec2(Config::MIN_REFRACTION_QUALITY), 1, false)),
-	_shadowCaptureBuffer(make_shared<CaptureBuffer>(ivec2(0), ivec2(Config::MIN_SHADOW_QUALITY)))
+	_worldDepthCaptor(make_shared<CaptureBuffer>(ivec2(0), Config::getInst().getViewportSize())),
+	_worldColorCaptor(make_shared<CaptureBuffer>(ivec2(0), Config::getInst().getViewportSize(), 2, false)),
+	_antiAliasingCaptor(make_shared<CaptureBuffer>(ivec2(0), Config::getInst().getViewportSize(), 1, false)),
+	_bloomCaptor(make_shared<CaptureBuffer>(ivec2(0), Config::getInst().getViewportSize(), 1, false)),
+	_dofCaptor(make_shared<CaptureBuffer>(ivec2(0), Config::getInst().getViewportSize(), 1, false)),
+	_lensFlareCaptor(make_shared<CaptureBuffer>(ivec2(0), Config::getInst().getViewportSize(), 1, false)),
+	_motionBlurCaptor(make_shared<CaptureBuffer>(ivec2(0), Config::getInst().getViewportSize(), 1, false)),
+	_cubeReflectionCaptor(make_shared<CaptureBuffer>(ivec2(0), ivec2(Config::MIN_REFLECTION_QUALITY), 1, false)),
+	_planarReflectionCaptor(make_shared<CaptureBuffer>(ivec2(0), ivec2(Config::MIN_REFLECTION_QUALITY), 1, false)),
+	_waterReflectionCaptor(make_shared<CaptureBuffer>(ivec2(0), ivec2(Config::MIN_REFLECTION_QUALITY), 1, false)),
+	_waterRefractionCaptor(make_shared<CaptureBuffer>(ivec2(0), ivec2(Config::MIN_REFRACTION_QUALITY), 1, false)),
+	_shadowCaptor(make_shared<CaptureBuffer>(ivec2(0), ivec2(Config::MIN_SHADOW_QUALITY)))
 {
 	_bloomBlurRendererHighQuality.loadCaptureBuffer(Config::getInst().getViewportSize() / Config::MIN_BLOOM_QUALITY);
 	_bloomBlurRendererLowQuality.loadCaptureBuffer(Config::getInst().getViewportSize() / (Config::MIN_BLOOM_QUALITY * 2));
@@ -54,7 +54,7 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, Camera& camer
 	_motionBlurBlurRenderer.loadCaptureBuffer(Config::getInst().getViewportSize() / Config::MIN_MOTION_BLUR_QUALITY);
 
 	_renderQuad = make_shared<QuadEntity>("renderQuad");
-	_renderQuad->setVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
+	_renderQuad->setMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
 	_renderQuad->setCentered(true);
 }
 
@@ -112,7 +112,7 @@ void MasterRenderer::render(EntityBus* entityBus)
 		_captureShadows();
 		_timer.stopDeltaPart();
 
-		_worldColorCaptureBuffer->bind();
+		_worldColorCaptor->bind();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		_renderBus.setTriangleCountingEnabled(true);
@@ -136,10 +136,10 @@ void MasterRenderer::render(EntityBus* entityBus)
 		_timer.stopDeltaPart();
 		_renderBus.setTriangleCountingEnabled(false);
 
-		_worldColorCaptureBuffer->unbind();
-		_renderBus.setFinalSceneMap(_worldColorCaptureBuffer->getTexture(0));
-		_renderBus.setPrimarySceneMap(_worldColorCaptureBuffer->getTexture(0));
-		_renderBus.setSecondarySceneMap(_worldColorCaptureBuffer->getTexture(1));
+		_worldColorCaptor->unbind();
+		_renderBus.setFinalSceneMap(_worldColorCaptor->getTexture(0));
+		_renderBus.setPrimarySceneMap(_worldColorCaptor->getTexture(0));
+		_renderBus.setSecondarySceneMap(_worldColorCaptor->getTexture(1));
 
 		_timer.startDeltaPart("postProcessing");
 		_captureAntiAliasing();
@@ -192,27 +192,27 @@ void MasterRenderer::reloadMotionBlurBlurCaptureBuffer()
 
 void MasterRenderer::reloadCubeReflectionCaptureBuffer()
 {
-	_cubeReflectionCaptureBuffer = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus.getCubeReflectionQuality()), 1, false);
+	_cubeReflectionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus.getCubeReflectionQuality()), 1, false);
 }
 
 void MasterRenderer::reloadPlanarReflectionCaptureBuffer()
 {
-	_planarReflectionCaptureBuffer = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus.getPlanarReflectionQuality()), 1, false);
+	_planarReflectionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus.getPlanarReflectionQuality()), 1, false);
 }
 
 void MasterRenderer::reloadWaterReflectionCaptureBuffer()
 {
-	_waterReflectionCaptureBuffer = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus.getPlanarReflectionQuality()), 1, false);
+	_waterReflectionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus.getPlanarReflectionQuality()), 1, false);
 }
 
 void MasterRenderer::reloadWaterRefractionCaptureBuffer()
 {
-	_waterRefractionCaptureBuffer = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus.getPlanarRefractionQuality()), 1, false);
+	_waterRefractionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus.getPlanarRefractionQuality()), 1, false);
 }
 
 void MasterRenderer::reloadShadowCaptureBuffer()
 {
-	_shadowCaptureBuffer = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus.getShadowQuality()));
+	_shadowCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus.getShadowQuality()));
 }
 
 void MasterRenderer::_updateMotionBlur()

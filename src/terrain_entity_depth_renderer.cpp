@@ -23,7 +23,7 @@ void TerrainEntityDepthRenderer::render(const shared_ptr<TerrainEntity> entity)
 {
 	if(entity->isVisible())
 	{
-		const auto buffer = entity->getVertexBuffer();
+		const auto buffer = entity->getMesh();
 
 		glEnable(GL_CULL_FACE);
 

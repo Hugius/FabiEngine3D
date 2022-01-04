@@ -78,7 +78,7 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 
 		entity->createPart(part->getID());
 
-		entity->setVertexBuffer(part->getID(), make_shared<VertexBuffer>(VertexBufferType::POS_UV_NOR_TAN, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
+		entity->setMesh(part->getID(), make_shared<VertexBuffer>(VertexBufferType::POS_UV_NOR_TAN, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
 	}
 
 	entity->setMeshPath(meshPath);

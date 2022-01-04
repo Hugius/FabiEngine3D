@@ -24,8 +24,8 @@ public:
 	shared_ptr<BillboardEntity> getEntity(const string& ID);
 
 private:
-	const shared_ptr<VertexBuffer> _centeredVertexBuffer;
-	const shared_ptr<VertexBuffer> _standingVertexBuffer;
+	const shared_ptr<VertexBuffer> _centeredMesh;
+	const shared_ptr<VertexBuffer> _standingMesh;
 	unordered_map<string, shared_ptr<BillboardEntity>> _entities;
 	RenderBus& _renderBus;
 	Camera& _camera;

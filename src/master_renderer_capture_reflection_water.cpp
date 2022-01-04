@@ -8,7 +8,7 @@ void MasterRenderer::_captureWaterReflections()
 	{
 		float cameraDistance = (_camera.getPosition().y - waterEntity->getHeight());
 
-		_waterReflectionCaptureBuffer->bind();
+		_waterReflectionCaptor->bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		vector<string> savedModelEntityIDs;
@@ -101,9 +101,9 @@ void MasterRenderer::_captureWaterReflections()
 			glDisable(GL_CLIP_DISTANCE2);
 		}
 
-		_waterReflectionCaptureBuffer->unbind();
+		_waterReflectionCaptor->unbind();
 
-		_renderBus.setWaterReflectionMap(_waterReflectionCaptureBuffer->getTexture(0));
+		_renderBus.setWaterReflectionMap(_waterReflectionCaptor->getTexture(0));
 
 		for(const auto& savedID : savedModelEntityIDs)
 		{

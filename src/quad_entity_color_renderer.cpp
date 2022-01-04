@@ -27,7 +27,7 @@ void QuadEntityColorRenderer::render(const shared_ptr<QuadEntity> entity)
 	   ((entity->getPosition().y - entity->getSize().y) < entity->getMaxPosition().y) &&
 	   ((entity->getPosition().y + entity->getSize().y) > entity->getMinPosition().y))
 	{
-		const auto buffer = entity->getVertexBuffer();
+		const auto buffer = entity->getMesh();
 
 		_shader.uploadUniform("u_uvMultiplier", entity->getUvMultiplier());
 		_shader.uploadUniform("u_uvOffset", entity->getUvOffset());

@@ -87,9 +87,9 @@ private:
 
 		auto timestamp = new char[64];
 		auto current = time(nullptr);
-		tm format = {};
+		auto format = tm();
 		localtime_s(&format, &current);
-		strftime(timestamp, sizeof(timestamp), "%H:%M:%S", &format);
+		strftime(timestamp, 64, "%H:%M:%S", &format);
 
 		SetConsoleTextAttribute(console, 6);
 		cout << "[" + _level_string[static_cast<unsigned int>(type)] + "]";

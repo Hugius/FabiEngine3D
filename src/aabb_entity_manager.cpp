@@ -51,8 +51,8 @@ constexpr unsigned int standingBufferDataCount = static_cast<unsigned int>(sizeo
 
 AabbEntityManager::AabbEntityManager()
 	:
-	_centeredVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS, centeredBufferData, centeredBufferDataCount)),
-	_standingVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS, standingBufferData, standingBufferDataCount))
+	_centeredMesh(make_shared<VertexBuffer>(VertexBufferType::POS, centeredBufferData, centeredBufferDataCount)),
+	_standingMesh(make_shared<VertexBuffer>(VertexBufferType::POS, standingBufferData, standingBufferDataCount))
 {
 
 }
@@ -82,7 +82,7 @@ void AabbEntityManager::createEntity(const string& ID, bool isCentered)
 
 	_entities.insert(make_pair(ID, entity));
 
-	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
+	entity->setMesh(isCentered ? _centeredMesh : _standingMesh);
 	entity->setCentered(isCentered);
 }
 

@@ -37,7 +37,7 @@ void DofRenderer::unbind()
 
 void DofRenderer::render(const shared_ptr<QuadEntity> entity)
 {
-	const auto buffer = entity->getVertexBuffer();
+	const auto buffer = entity->getMesh();
 
 	glBindVertexArray(buffer->getVaoID());
 

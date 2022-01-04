@@ -1,7 +1,7 @@
 #include "model_entity.hpp"
 #include "logger.hpp"
 
-const shared_ptr<VertexBuffer> ModelEntity::getVertexBuffer(const string& partID) const
+const shared_ptr<VertexBuffer> ModelEntity::getMesh(const string& partID) const
 {
 	return _parts[_getPartIndex(partID)].vertexBuffer;
 }

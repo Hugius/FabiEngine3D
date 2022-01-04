@@ -14,7 +14,7 @@ class SkyEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void setVertexBuffer(shared_ptr<VertexBuffer> value);
+	void setMesh(shared_ptr<VertexBuffer> value);
 	void updateRotationMatrix();
 	void setCubeMapPaths(const array<string, 6>& value);
 	void setColor(fvec3 value);
@@ -40,7 +40,7 @@ public:
 	const bool hasCubeMap() const;
 	const bool isWireframed() const;
 
-	const shared_ptr<VertexBuffer> getVertexBuffer() const;
+	const shared_ptr<VertexBuffer> getMesh() const;
 	const shared_ptr<TextureBuffer> getCubeMap() const;
 
 private:
@@ -57,6 +57,6 @@ private:
 
 	bool _isWireframed = false;
 
-	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
+	shared_ptr<VertexBuffer> _mesh = nullptr;
 	shared_ptr<TextureBuffer> _cubeMap = nullptr;
 };

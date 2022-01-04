@@ -28,7 +28,7 @@ void BillboardEntityShadowRenderer::render(const shared_ptr<BillboardEntity> ent
 {
 	if(entity->isVisible() && entity->isShadowed())
 	{
-		const auto buffer = entity->getVertexBuffer();
+		const auto buffer = entity->getMesh();
 
 		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());

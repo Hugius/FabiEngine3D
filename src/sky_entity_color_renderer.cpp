@@ -52,10 +52,10 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, cons
 			}
 		}
 
-		glBindVertexArray(mainEntity->getVertexBuffer()->getVaoID());
+		glBindVertexArray(mainEntity->getMesh()->getVaoID());
 
-		glDrawArrays(GL_TRIANGLES, 0, mainEntity->getVertexBuffer()->getVertexCount());
-		_renderBus.increaseTriangleCount(mainEntity->getVertexBuffer()->getVertexCount() / 3);
+		glDrawArrays(GL_TRIANGLES, 0, mainEntity->getMesh()->getVertexCount());
+		_renderBus.increaseTriangleCount(mainEntity->getMesh()->getVertexCount() / 3);
 
 		glBindVertexArray(0);
 

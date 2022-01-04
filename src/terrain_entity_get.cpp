@@ -145,9 +145,9 @@ const float TerrainEntity::getSpecularIntensity() const
 	return _specularIntensity;
 }
 
-const shared_ptr<VertexBuffer> TerrainEntity::getVertexBuffer() const
+const shared_ptr<VertexBuffer> TerrainEntity::getMesh() const
 {
-	return _vertexBuffer;
+	return _mesh;
 }
 
 const vector<float>& TerrainEntity::getPixels() const
@@ -167,7 +167,7 @@ const bool TerrainEntity::isWireframed() const
 
 const bool TerrainEntity::hasVertexBuffer() const
 {
-	return (_vertexBuffer != nullptr);
+	return (_mesh != nullptr);
 }
 
 const bool TerrainEntity::hasDiffuseMap() const

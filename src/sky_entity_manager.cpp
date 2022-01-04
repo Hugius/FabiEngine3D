@@ -55,7 +55,7 @@ constexpr unsigned int bufferDataCount = static_cast<unsigned int>(sizeof(buffer
 SkyEntityManager::SkyEntityManager(RenderBus& renderBus)
 	:
 	_renderBus(renderBus),
-	_vertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS, bufferData, bufferDataCount))
+	_mesh(make_shared<VertexBuffer>(VertexBufferType::POS, bufferData, bufferDataCount))
 {
 
 }
@@ -133,7 +133,7 @@ void SkyEntityManager::createEntity(const string& ID)
 
 	_entities.insert(make_pair(ID, entity));
 
-	entity->setVertexBuffer(_vertexBuffer);
+	entity->setMesh(_mesh);
 }
 
 void SkyEntityManager::update()

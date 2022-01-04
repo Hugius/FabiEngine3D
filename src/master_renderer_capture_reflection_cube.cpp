@@ -102,18 +102,18 @@ void MasterRenderer::_captureCubeReflections()
 				_shadowGenerator.generate();
 				_captureShadows();
 
-				_cubeReflectionCaptureBuffer->bind();
+				_cubeReflectionCaptor->bind();
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 				_renderSkyEntity();
 				_renderTerrainEntity();
 				_renderModelEntities();
 
-				_cubeReflectionCaptureBuffer->unbind();
+				_cubeReflectionCaptor->unbind();
 
 				const auto dataSize = (reflectionQuality * reflectionQuality * 3);
 				auto data = new unsigned char[dataSize];
-				glBindTexture(GL_TEXTURE_2D, _cubeReflectionCaptureBuffer->getTexture(0)->getID());
+				glBindTexture(GL_TEXTURE_2D, _cubeReflectionCaptor->getTexture(0)->getID());
 				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 

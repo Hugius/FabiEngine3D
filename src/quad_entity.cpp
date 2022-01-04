@@ -6,9 +6,9 @@
 using std::max;
 using std::clamp;
 
-void QuadEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
+void QuadEntity::setMesh(shared_ptr<VertexBuffer> value)
 {
-	_vertexBuffer = value;
+	_mesh = value;
 }
 
 void QuadEntity::updateTransformation()
@@ -186,9 +186,9 @@ void QuadEntity::setUvOffset(fvec2 value)
 	_uvOffset = fvec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
-const shared_ptr<VertexBuffer> QuadEntity::getVertexBuffer() const
+const shared_ptr<VertexBuffer> QuadEntity::getMesh() const
 {
-	return _vertexBuffer;
+	return _mesh;
 }
 
 const shared_ptr<TextureBuffer> QuadEntity::getDiffuseMap() const

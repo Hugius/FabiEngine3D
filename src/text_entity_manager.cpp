@@ -7,7 +7,7 @@ TextEntityManager::TextEntityManager(ImageLoader& textureLoader, RenderBus& rend
 	:
 	_textureLoader(textureLoader),
 	_renderBus(renderBus),
-	_vertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
+	_mesh(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
 {
 
 }
@@ -37,7 +37,7 @@ void TextEntityManager::createEntity(const string& ID, bool isCentered)
 
 	_entities.insert(make_pair(ID, entity));
 
-	entity->setVertexBuffer(_vertexBuffer);
+	entity->setMesh(_mesh);
 	entity->setCentered(isCentered);
 	entity->setDepth(_renderBus.getGuiDepth());
 

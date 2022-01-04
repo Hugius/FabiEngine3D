@@ -31,7 +31,7 @@ void BillboardEntityDepthRenderer::render(const shared_ptr<BillboardEntity> enti
 {
 	if(entity->isVisible())
 	{
-		const auto buffer = entity->getVertexBuffer();
+		const auto buffer = entity->getMesh();
 
 		_shader.uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
 		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());

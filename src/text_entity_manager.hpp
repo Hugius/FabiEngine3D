@@ -23,7 +23,7 @@ public:
 	shared_ptr<TextEntity> getEntity(const string& ID);
 
 private:
-	const shared_ptr<VertexBuffer> _vertexBuffer;
+	const shared_ptr<VertexBuffer> _mesh;
 	unordered_map<string, shared_ptr<TextEntity>> _entities;
 	ImageLoader& _textureLoader;
 	RenderBus& _renderBus;

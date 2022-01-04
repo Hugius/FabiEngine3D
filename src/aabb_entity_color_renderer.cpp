@@ -25,10 +25,10 @@ void AabbEntityColorRenderer::render(const shared_ptr<AabbEntity> entity)
 		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
 		_shader.uploadUniform("u_color", entity->getColor());
 
-		glBindVertexArray(entity->getVertexBuffer()->getVaoID());
+		glBindVertexArray(entity->getMesh()->getVaoID());
 
-		glDrawArrays(GL_LINE_STRIP, 0, entity->getVertexBuffer()->getVertexCount());
-		_renderBus.increaseTriangleCount(entity->getVertexBuffer()->getVertexCount() / 3);
+		glDrawArrays(GL_LINE_STRIP, 0, entity->getMesh()->getVertexCount());
+		_renderBus.increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);
 
 		glBindVertexArray(0);
 	}

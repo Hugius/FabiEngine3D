@@ -22,7 +22,7 @@ void TextEntity::setContent(const string& value)
 			auto uvOffset = fvec2((static_cast<float>(xIndex) * uvMultiplier.x), (static_cast<float>(yIndex) * uvMultiplier.y));
 
 			auto characterEntity = make_shared<QuadEntity>("dummy");
-			characterEntity->setVertexBuffer(_vertexBuffer);
+			characterEntity->setMesh(_mesh);
 			characterEntity->setUvMultiplier(uvMultiplier);
 			characterEntity->setUvOffset(uvOffset);
 
@@ -75,7 +75,7 @@ void TextEntity::updateCharacterEntities()
 		character->setMinPosition(_minPosition);
 		character->setMaxPosition(_maxPosition);
 		character->setVisible(_isVisible);
-		character->setVertexBuffer(_vertexBuffer);
+		character->setMesh(_mesh);
 		character->setCentered(_isCentered);
 		character->setDepth(_depth);
 		character->setDiffuseMap(_fontMap);
@@ -144,9 +144,9 @@ void TextEntity::updateTransformation()
 	}
 }
 
-void TextEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
+void TextEntity::setMesh(shared_ptr<VertexBuffer> value)
 {
-	_vertexBuffer = value;
+	_mesh = value;
 }
 
 void TextEntity::setFontMap(shared_ptr<TextureBuffer> value)

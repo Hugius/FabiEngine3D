@@ -28,7 +28,7 @@ public:
 private:
 	static inline constexpr float MIN_SIZE = 0.1f;
 
-	const shared_ptr<VertexBuffer> _centeredVertexBuffer;
-	const shared_ptr<VertexBuffer> _standingVertexBuffer;
+	const shared_ptr<VertexBuffer> _centeredMesh;
+	const shared_ptr<VertexBuffer> _standingMesh;
 	unordered_map<string, shared_ptr<AabbEntity>> _entities;
 };

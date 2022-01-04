@@ -42,7 +42,7 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 {
 	if(entity->isVisible())
 	{
-		const auto buffer = entity->getVertexBuffer();
+		const auto buffer = entity->getMesh();
 
 		if(entity->isWireframed())
 		{

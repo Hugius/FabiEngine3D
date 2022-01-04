@@ -1,8 +1,8 @@
 #include "billboard_entity.hpp"
 
-const shared_ptr<VertexBuffer> BillboardEntity::getVertexBuffer() const
+const shared_ptr<VertexBuffer> BillboardEntity::getMesh() const
 {
-	return _vertexBuffer;
+	return _mesh;
 }
 
 const mat44& BillboardEntity::getTransformationMatrix() const
@@ -142,7 +142,7 @@ const bool BillboardEntity::isWireframed() const
 
 const bool BillboardEntity::hasVertexBuffer() const
 {
-	return (_vertexBuffer != nullptr);
+	return (_mesh != nullptr);
 }
 
 const bool BillboardEntity::hasDiffuseMap() const

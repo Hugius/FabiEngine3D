@@ -14,7 +14,7 @@ class AabbEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void setVertexBuffer(shared_ptr<VertexBuffer> value);
+	void setMesh(shared_ptr<VertexBuffer> value);
 	void updateTransformation();
 	void updateTransformationMatrix();
 	void setLocalPosition(fvec3 value);
@@ -54,7 +54,7 @@ public:
 	const bool mustFollowParentEntityTransformation() const;
 	const bool mustFollowParentEntityVisibility() const;
 
-	const shared_ptr<VertexBuffer> getVertexBuffer() const;
+	const shared_ptr<VertexBuffer> getMesh() const;
 	const AabbParentEntityType getParentEntityType() const;
 	const Direction getCollisionDirection() const;
 
@@ -81,7 +81,7 @@ private:
 	bool _isCollisionResponsive = true;
 	bool _hasCollided = false;
 
-	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
+	shared_ptr<VertexBuffer> _mesh = nullptr;
 	AabbParentEntityType _parentEntityType = AabbParentEntityType::BILLBOARD;
 	Direction _collisionDirection = Direction::X;
 };

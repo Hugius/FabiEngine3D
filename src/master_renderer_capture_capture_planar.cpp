@@ -24,7 +24,7 @@ void MasterRenderer::_capturePlanarReflections()
 
 	float cameraDistance = (_camera.getPosition().y - _renderBus.getPlanarReflectionHeight());
 
-	_planarReflectionCaptureBuffer->bind();
+	_planarReflectionCaptor->bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	vector<string> savedModelEntityIDs;
@@ -94,9 +94,9 @@ void MasterRenderer::_capturePlanarReflections()
 	_renderBillboardEntities();
 	glDisable(GL_CLIP_DISTANCE2);
 
-	_planarReflectionCaptureBuffer->unbind();
+	_planarReflectionCaptor->unbind();
 
-	_renderBus.setPlanarReflectionMap(_planarReflectionCaptureBuffer->getTexture(0));
+	_renderBus.setPlanarReflectionMap(_planarReflectionCaptor->getTexture(0));
 
 	for(const auto& [key, entity] : _entityBus->getModelEntities())
 	{

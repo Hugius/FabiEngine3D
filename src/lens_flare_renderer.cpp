@@ -39,7 +39,7 @@ void LensFlareRenderer::unbind()
 
 void LensFlareRenderer::render(const shared_ptr<QuadEntity> entity)
 {
-	const auto buffer = entity->getVertexBuffer();
+	const auto buffer = entity->getMesh();
 
 	glBindVertexArray(buffer->getVaoID());
 

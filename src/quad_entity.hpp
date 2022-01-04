@@ -13,7 +13,7 @@ class QuadEntity : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void setVertexBuffer(shared_ptr<VertexBuffer> value);
+	void setMesh(shared_ptr<VertexBuffer> value);
 	void updateTransformation();
 	void updateTransformationMatrix();
 	void setDiffuseMap(shared_ptr<TextureBuffer> value);
@@ -67,7 +67,7 @@ public:
 	const bool isPerspectiveDepthEntity() const;
 	const bool hasDiffuseMap() const;
 
-	const shared_ptr<VertexBuffer> getVertexBuffer() const;
+	const shared_ptr<VertexBuffer> getMesh() const;
 	const shared_ptr<TextureBuffer> getDiffuseMap() const;
 
 private:
@@ -102,6 +102,6 @@ private:
 	bool _isPerspectiveDepthEntity = false;
 	bool _isWireframed = false;
 
-	shared_ptr<VertexBuffer> _vertexBuffer = nullptr;
+	shared_ptr<VertexBuffer> _mesh = nullptr;
 	shared_ptr<TextureBuffer> _diffuseMap = nullptr;
 };

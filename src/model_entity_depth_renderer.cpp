@@ -45,7 +45,7 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, floa
 
 		for(const auto& partID : entity->getPartIDs())
 		{
-			const auto buffer = entity->getVertexBuffer(partID);
+			const auto buffer = entity->getMesh(partID);
 
 			_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partID));
 			_shader.uploadUniform("u_textureRepeat", entity->getTextureRepeat(partID));

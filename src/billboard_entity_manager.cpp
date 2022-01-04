@@ -31,8 +31,8 @@ BillboardEntityManager::BillboardEntityManager(RenderBus& renderBus, Camera& cam
 	:
 	_renderBus(renderBus),
 	_camera(camera),
-	_centeredVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, centeredBufferData, centeredBufferDataCount)),
-	_standingVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, standingBufferData, standingBufferDataCount))
+	_centeredMesh(make_shared<VertexBuffer>(VertexBufferType::POS_UV, centeredBufferData, centeredBufferDataCount)),
+	_standingMesh(make_shared<VertexBuffer>(VertexBufferType::POS_UV, standingBufferData, standingBufferDataCount))
 {
 
 }
@@ -62,7 +62,7 @@ void BillboardEntityManager::createEntity(const string& ID, bool isCentered)
 
 	_entities.insert(make_pair(ID, entity));
 
-	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _standingVertexBuffer);
+	entity->setMesh(isCentered ? _centeredMesh : _standingMesh);
 	entity->setCentered(isCentered);
 }
 

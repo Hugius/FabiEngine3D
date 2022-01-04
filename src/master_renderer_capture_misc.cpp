@@ -7,7 +7,7 @@ void MasterRenderer::_captureWaterRefractions()
 
 	if((waterEntity != nullptr) && waterEntity->isRefractive())
 	{
-		_waterRefractionCaptureBuffer->bind();
+		_waterRefractionCaptor->bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		bool wasShadowsEnabled = _renderBus.isShadowsEnabled();
@@ -75,9 +75,9 @@ void MasterRenderer::_captureWaterRefractions()
 			skyEntity->setLightness(oldSkyLightness);
 		}
 
-		_waterRefractionCaptureBuffer->unbind();
+		_waterRefractionCaptor->unbind();
 
-		_renderBus.setWaterRefractionMap(_waterRefractionCaptureBuffer->getTexture(0));
+		_renderBus.setWaterRefractionMap(_waterRefractionCaptor->getTexture(0));
 	}
 	else
 	{
@@ -92,7 +92,7 @@ void MasterRenderer::_captureShadows()
 		auto modelEntities = _entityBus->getModelEntities();
 		auto billboardEntities = _entityBus->getBillboardEntities();
 
-		_shadowCaptureBuffer->bind();
+		_shadowCaptor->bind();
 		glClear(GL_DEPTH_BUFFER_BIT);
 
 		if(!modelEntities.empty())
@@ -153,8 +153,8 @@ void MasterRenderer::_captureShadows()
 			_billboardEntityShadowRenderer.unbind();
 		}
 
-		_shadowCaptureBuffer->unbind();
-		_renderBus.setShadowMap(_shadowCaptureBuffer->getTexture(0));
+		_shadowCaptor->unbind();
+		_renderBus.setShadowMap(_shadowCaptor->getTexture(0));
 	}
 	else
 	{

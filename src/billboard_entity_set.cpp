@@ -6,9 +6,9 @@
 using std::clamp;
 using std::max;
 
-void BillboardEntity::setVertexBuffer(shared_ptr<VertexBuffer> value)
+void BillboardEntity::setMesh(shared_ptr<VertexBuffer> value)
 {
-	_vertexBuffer = value;
+	_mesh = value;
 }
 
 void BillboardEntity::updateTransformation()

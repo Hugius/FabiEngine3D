@@ -148,7 +148,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 
 		for(const auto& partID : entity->getPartIDs())
 		{
-			const auto buffer = entity->getVertexBuffer(partID);
+			const auto buffer = entity->getMesh(partID);
 
 			const auto& transformationMatrix = entity->getTransformationMatrix(partID);
 			mat33 normalTransformationMatrix = Math::transposeMatrix(Math::invertMatrix(mat33(transformationMatrix)));

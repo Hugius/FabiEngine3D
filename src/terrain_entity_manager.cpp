@@ -244,7 +244,7 @@ void TerrainEntityManager::_loadMesh(shared_ptr<TerrainEntity> entity, float siz
 
 	auto bufferDataCount = static_cast<unsigned int>(bufferData.size());
 
-	entity->setVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV_NOR_TAN, &bufferData[0], bufferDataCount));
+	entity->setMesh(make_shared<VertexBuffer>(VertexBufferType::POS_UV_NOR_TAN, &bufferData[0], bufferDataCount));
 }
 
 const float TerrainEntityManager::getPixelHeight(const string& ID, float x, float z)

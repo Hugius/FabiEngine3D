@@ -6,8 +6,8 @@ using std::make_shared;
 QuadEntityManager::QuadEntityManager(RenderBus& renderBus)
 	:
 	_renderBus(renderBus),
-	_centeredVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true)),
-	_corneredVertexBuffer(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
+	_centeredMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true)),
+	_corneredMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
 {
 
 }
@@ -37,7 +37,7 @@ void QuadEntityManager::createEntity(const string& ID, bool isCentered)
 
 	_entities.insert(make_pair(ID, entity));
 
-	entity->setVertexBuffer(isCentered ? _centeredVertexBuffer : _corneredVertexBuffer);
+	entity->setMesh(isCentered ? _centeredMesh : _corneredMesh);
 	entity->setCentered(isCentered);
 	entity->setDepth(_renderBus.getGuiDepth());
 

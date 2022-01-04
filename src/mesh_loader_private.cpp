@@ -2,8 +2,15 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
+#include <fstream>
+#include <sstream>
+#include <array>
+
+using std::replace;
 using std::make_shared;
 using std::ifstream;
+using std::istringstream;
+using std::array;
 
 pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& filePath)
 {
@@ -13,30 +20,29 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 	vector<fvec3> temp_normals;
 	string selectedPartID = "";
 
-	FILE* file = nullptr;
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const auto filePath = string(rootPath + filePath);
-	auto file = ifstream(filePath);
-	if(file)
+	const auto fullFilePath = string(rootPath + filePath);
+	auto file = ifstream(fullFilePath);
+	if(!file)
 	{
 		auto warningMessage = string("Cannot load mesh: \"" + filePath + "\"!");
 		return make_pair(warningMessage, meshParts);
 	}
 
-	while(true)
+	string line;
+	while(getline(file, line))
 	{
-		auto lineType = new char[128];
-		int scanResult = fscanf(file, "%s", lineType);
+		replace(line.begin(), line.end(), '/', ' ');
+		istringstream iss(line);
 
-		if(scanResult == EOF)
-		{
-			break;
-		}
+		string lineType;
+		iss >> lineType;
 
-		if(strcmp(lineType, "FE3D_PART") == 0)
+		if(lineType == "FE3D_PART")
 		{
-			char* ID = new char[128];
-			auto temp = fscanf(file, "%s\n", ID);
+			string ID;
+			iss >> ID;
+
 			selectedPartID = string(ID);
 
 			if(selectedPartID == "?")
@@ -47,42 +53,44 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 
 			continue;
 		}
-		else if(strcmp(lineType, "v") == 0)
+		else if(lineType == "v")
 		{
-			fvec3 position;
-			auto temp = fscanf(file, "%f %f %f\n", &position.x, &position.y, &position.z);
-			temp_positions.push_back(position);
+			float x, y, z;
+			iss >> x >> y >> z;
+
+			temp_positions.push_back(fvec3(x, y, z));
 
 			continue;
 		}
-		else if(strcmp(lineType, "vt") == 0)
+		else if(lineType == "vt")
 		{
-			fvec2 uv;
-			auto temp = fscanf(file, "%f %f\n", &uv.x, &uv.y);
-			temp_uvs.push_back(uv);
+			float x, y;
+			iss >> x >> y;
+
+			temp_uvs.push_back(fvec2(x, y));
 
 			continue;
 		}
-		else if(strcmp(lineType, "vn") == 0)
+		else if(lineType == "vn")
 		{
-			fvec3 normal;
-			auto temp = fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
-			temp_normals.push_back(normal);
+			float x, y, z;
+			iss >> x >> y >> z;
+
+			temp_normals.push_back(fvec3(x, y, z));
 
 			continue;
 		}
-		else if(strcmp(lineType, "f") == 0)
+		else if(lineType == "f")
 		{
-			unsigned int positionIndex[3];
-			unsigned int uvIndex[3];
-			unsigned int normalIndex[3];
+			array<unsigned int, 9> indices = {};
+			iss >> indices[0] >> indices[1] >> indices[2] >> indices[3] >> indices[4] >> indices[5] >> indices[6] >> indices[7] >> indices[8];
 
-			int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n",
-								 &positionIndex[0], &uvIndex[0], &normalIndex[0],
-								 &positionIndex[1], &uvIndex[1], &normalIndex[1],
-								 &positionIndex[2], &uvIndex[2], &normalIndex[2]);
+			for(auto& index : indices)
+			{
+				index--;
+			}
 
-			if(matches != 9)
+			if(temp_positions.empty() || temp_uvs.empty() || temp_normals.empty())
 			{
 				string warningMessage = string("Too many or not enough faces in mesh file: \"" + filePath + "\"");
 				return make_pair(warningMessage, meshParts);
@@ -95,12 +103,15 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 				{
 					isAlreadyExisting = true;
 
-					for(int i = 0; i < 3; i++)
-					{
-						meshPart->addPosition(temp_positions[positionIndex[i] - 1]);
-						meshPart->addUv(temp_uvs[uvIndex[i] - 1]);
-						meshPart->addNormal(temp_normals[normalIndex[i] - 1]);
-					}
+					meshPart->addPosition(temp_positions[indices[0]]);
+					meshPart->addPosition(temp_positions[indices[1]]);
+					meshPart->addPosition(temp_positions[indices[2]]);
+					meshPart->addUv(temp_uvs[indices[3]]);
+					meshPart->addUv(temp_uvs[indices[4]]);
+					meshPart->addUv(temp_uvs[indices[5]]);
+					meshPart->addNormal(temp_normals[indices[6]]);
+					meshPart->addNormal(temp_normals[indices[7]]);
+					meshPart->addNormal(temp_normals[indices[8]]);
 
 					break;
 				}
@@ -108,16 +119,19 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 
 			if(!isAlreadyExisting)
 			{
-				MeshPart newPart(selectedPartID);
+				auto newPart = make_shared<MeshPart>(selectedPartID);
 
-				for(int i = 0; i < 3; i++)
-				{
-					newPart.addPosition(temp_positions[positionIndex[i] - 1]);
-					newPart.addUv(temp_uvs[uvIndex[i] - 1]);
-					newPart.addNormal(temp_normals[normalIndex[i] - 1]);
-				}
+				newPart->addPosition(temp_positions[indices[0]]);
+				newPart->addPosition(temp_positions[indices[1]]);
+				newPart->addPosition(temp_positions[indices[2]]);
+				newPart->addUv(temp_uvs[indices[3]]);
+				newPart->addUv(temp_uvs[indices[4]]);
+				newPart->addUv(temp_uvs[indices[5]]);
+				newPart->addNormal(temp_normals[indices[6]]);
+				newPart->addNormal(temp_normals[indices[7]]);
+				newPart->addNormal(temp_normals[indices[8]]);
 
-				meshParts.push_back(make_shared<MeshPart>(newPart));
+				meshParts.push_back(newPart);
 			}
 		}
 	}

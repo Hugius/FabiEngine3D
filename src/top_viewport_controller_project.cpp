@@ -182,7 +182,7 @@ void TopViewportController::_updateProjectDeleting()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string directoryPath = (rootPath + "projects\\" + chosenButtonID);
+			const auto directoryPath = (rootPath + "projects\\" + chosenButtonID);
 			if(!Tools::isDirectoryExisting(directoryPath))
 			{
 				Logger::throwWarning("Cannot delete project: missing directory!");

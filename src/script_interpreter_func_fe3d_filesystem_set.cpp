@@ -22,7 +22,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 		{
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
+			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const string newDirectoryPath = string(directoryPath + args[0].getString());
 
 			if(Tools::isDirectoryExisting(newDirectoryPath))
@@ -45,7 +45,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 		{
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
+			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const string newDirectoryPath = string(directoryPath + args[0].getString());
 
 			if(Tools::isDirectoryExisting(newDirectoryPath))
@@ -67,7 +67,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 		{
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
+			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const auto filePath = string(directoryPath + args[0].getString());
 
 			if(Tools::isFileExisting(filePath))
@@ -91,7 +91,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 		{
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
+			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const auto filePath = string(directoryPath + args[0].getString());
 
 			if(Tools::isFileExisting(filePath))
@@ -113,7 +113,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 		{
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
+			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const auto filePath = string(directoryPath + args[0].getString());
 
 			if(Tools::isFileExisting(filePath))
@@ -155,7 +155,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 		{
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
+			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const auto filePath = string(directoryPath + args[0].getString());
 
 			if(Tools::isFileExisting(filePath))
@@ -179,7 +179,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 		{
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
+			const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "saves\\");
 			const auto filePath = string(directoryPath + args[0].getString());
 
 			if(Tools::isFileExisting(filePath))

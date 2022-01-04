@@ -11,7 +11,8 @@ shared_ptr<Image> ImageLoader::_loadImage(const string& filePath, bool mustFlip)
 {
 	FILE* file = nullptr;
 	const auto rootPath = Tools::getRootDirectoryPath();
-	if(fopen_s(&file, string(rootPath + filePath).c_str(), "rb") != 0)
+	const auto fullFilePath = string(rootPath + filePath);
+	if(fopen_s(&file, fullFilePath.c_str(), "rb") != 0)
 	{
 		return nullptr;
 	}

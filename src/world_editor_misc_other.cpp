@@ -162,7 +162,7 @@ const vector<string> WorldEditor::_getWorldIDs() const
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
-	const string directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "worlds\\editor\\");
+	const auto directoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "worlds\\editor\\");
 
 	if(Tools::isDirectoryExisting(directoryPath))
 	{

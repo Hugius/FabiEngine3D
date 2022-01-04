@@ -51,25 +51,25 @@ TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6>& images)
 	for(size_t i = 0; i < images.size(); i++)
 	{
 		const auto image = images[i];
-		const auto index = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<unsigned int>(i));
+		const auto cubeIndex = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<unsigned int>(i));
 
 		if(image == nullptr)
 		{
-			glTexImage2D(index, 0, GL_RGB, images[i]->getWidth(), images[i]->getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+			glTexImage2D(cubeIndex, 0, GL_RGB, images[i]->getWidth(), images[i]->getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
 			continue;
 		}
 
 		if(image->getPixelFormat() == PixelFormat::GRAY)
 		{
-			glTexImage2D(index, 0, GL_RED, image->getWidth(), image->getHeight(), 0, GL_RED, GL_UNSIGNED_BYTE, image->getPixels());
+			glTexImage2D(cubeIndex, 0, GL_RED, image->getWidth(), image->getHeight(), 0, GL_RED, GL_UNSIGNED_BYTE, image->getPixels());
 		}
 		if(image->getPixelFormat() == PixelFormat::RGB)
 		{
-			glTexImage2D(index, 0, GL_RGB, image->getWidth(), image->getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, image->getPixels());
+			glTexImage2D(cubeIndex, 0, GL_RGB, image->getWidth(), image->getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, image->getPixels());
 		}
 		if(image->getPixelFormat() == PixelFormat::RGBA)
 		{
-			glTexImage2D(index, 0, GL_RGBA, image->getWidth(), image->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image->getPixels());
+			glTexImage2D(cubeIndex, 0, GL_RGBA, image->getWidth(), image->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, image->getPixels());
 		}
 	}
 

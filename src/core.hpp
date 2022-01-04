@@ -31,6 +31,7 @@
 #include "library_loader.hpp"
 #include "networking_server.hpp"
 #include "networking_client.hpp"
+#include "buffer_manager.hpp"
 
 class Core final
 {
@@ -83,4 +84,5 @@ private:
 	TextEntityManager _textEntityManager;
 	Raycaster _raycaster;
 	MasterRenderer _masterRenderer;
+	BufferManager _bufferManager;
 };

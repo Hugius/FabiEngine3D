@@ -56,7 +56,7 @@ void ScriptEditor::load()
 	_fe3d.gfx_setBloomQuality(BLOOM_QUALITY);
 
 	_fe3d.sky_selectMainSky("");
-	Tools::setRenderColor(BACKGROUND_COLOR);
+	_fe3d.misc_setBackgroundColor(BACKGROUND_COLOR);
 
 	_isEditorLoaded = true;
 }

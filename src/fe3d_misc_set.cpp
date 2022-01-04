@@ -223,3 +223,8 @@ void FabiEngine3D::misc_startMillisecondTimer()
 
 	_core->_timer.start();
 }
+
+void FabiEngine3D::misc_setBackgroundColor(fvec4 color)
+{
+	_core->_masterRenderer.setBackgroundColor(color);
+}

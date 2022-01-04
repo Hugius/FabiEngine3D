@@ -21,7 +21,7 @@ public:
 private:
 	bool _mustPromptOnExit = false;
 
-	static inline const fvec3 RENDER_COLOR = fvec3(0.25f);
+	static inline const fvec4 RENDER_COLOR = fvec4(0.25f, 0.25f, 0.25f, 1.0f);
 
 	static inline const float CURSOR_QUAD_SIZE = 0.075f;
 

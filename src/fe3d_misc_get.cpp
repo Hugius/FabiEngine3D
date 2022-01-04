@@ -23,19 +23,19 @@ const float FabiEngine3D::misc_stopMillisecondTimer() const
 	return _core->_timer.stop();
 }
 
-const string FabiEngine3D::misc_getCpuModel() const
+const string FabiEngine3D::misc_getCpuName() const
 {
-	return _core->_libraryLoader.getCpuModel();
+	return _core->_masterRenderer.getCpuName();
 }
 
-const string FabiEngine3D::misc_getGpuModel() const
+const string FabiEngine3D::misc_getGpuName() const
 {
-	return _core->_libraryLoader.getGpuModel();
+	return _core->_masterRenderer.getGpuName();
 }
 
 const string FabiEngine3D::misc_getOpenglVersion() const
 {
-	return _core->_libraryLoader.getOpenglVersion();
+	return _core->_masterRenderer.getOpenglVersion();
 }
 
 const ivec2 FabiEngine3D::misc_getCursorPosition() const

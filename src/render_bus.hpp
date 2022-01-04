@@ -2,7 +2,6 @@
 
 #include "mathematics.hpp"
 #include "bloom_type.hpp"
-#include "render_utils.hpp"
 #include "configuration.hpp"
 #include "texture_buffer.hpp"
 

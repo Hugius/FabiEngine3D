@@ -1,7 +1,6 @@
 #pragma once
 
 #include "mathematics.hpp"
-#include "render_utils.hpp"
 #include "texture_buffer.hpp"
 
 #include <vector>

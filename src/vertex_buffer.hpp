@@ -2,11 +2,13 @@
 
 #include "vertex_buffer_type.hpp"
 #include "mathematics.hpp"
-#include "render_utils.hpp"
 
 #include <vector>
+#include <glew.h>
 
 using std::vector;
+
+using BufferID = GLuint;
 
 class VertexBuffer final
 {

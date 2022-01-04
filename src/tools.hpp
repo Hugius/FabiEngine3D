@@ -11,7 +11,6 @@ class Tools final
 public:
 	Tools() = delete;
 
-	static void setRenderColor(fvec3 color);
 	static void createDirectory(const string& path);
 	static void copyDirectory(const string& fromPath, const string& toPath);
 	static void copyFile(const string& fromPath, const string& toPath);

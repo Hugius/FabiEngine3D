@@ -869,12 +869,13 @@ public:
 	void misc_clearImagesCache();
 	void misc_clearAudiosCache();
 	void misc_startMillisecondTimer();
+	void misc_setBackgroundColor(fvec4 color);
 
 	const vector<pair<string, int>> misc_getUpdateProfilingStatistics() const;
 	const vector<pair<string, int>> misc_getRenderProfilingStatistics() const;
 	const string misc_getCursorEntityID() const;
-	const string misc_getCpuModel() const;
-	const string misc_getGpuModel() const;
+	const string misc_getCpuName() const;
+	const string misc_getGpuName() const;
 	const string misc_getOpenglVersion() const;
 	const ivec2 misc_getCursorPosition() const;
 	const ivec2 misc_getCursorPositionRelativeToViewport() const;

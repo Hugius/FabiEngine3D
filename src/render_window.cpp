@@ -2,7 +2,7 @@
 #include "logger.hpp"
 #include "configuration.hpp"
 
-#include <SDL\\SDL_syswm.h>
+#include <SDL_syswm.h>
 
 RenderWindow::RenderWindow(LibraryLoader& libraryLoader)
 	:

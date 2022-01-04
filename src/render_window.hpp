@@ -3,7 +3,7 @@
 #include "mathematics.hpp"
 #include "library_loader.hpp"
 
-#include <SDL\\SDL.h>
+#include <SDL.h>
 #include <string>
 
 using std::string;

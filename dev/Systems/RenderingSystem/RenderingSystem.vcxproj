@@ -27,11 +27,12 @@
     <ClCompile Include="..\..\..\src\billboard_entity_shadow_renderer.cpp" />
     <ClCompile Include="..\..\..\src\bloom_renderer.cpp" />
     <ClCompile Include="..\..\..\src\blur_renderer.cpp" />
-    <ClCompile Include="..\..\..\src\buffer_cache.cpp" />
+    <ClCompile Include="..\..\..\src\buffer_manager.cpp" />
     <ClCompile Include="..\..\..\src\dof_renderer.cpp" />
     <ClCompile Include="..\..\..\src\lens_flare_renderer.cpp" />
     <ClCompile Include="..\..\..\src\master_renderer_capture_planar.cpp" />
     <ClCompile Include="..\..\..\src\master_renderer_capture_water.cpp" />
+    <ClCompile Include="..\..\..\src\master_renderer_misc.cpp" />
     <ClCompile Include="..\..\..\src\model_entity_depth_renderer.cpp" />
     <ClCompile Include="..\..\..\src\motion_blur_renderer.cpp" />
     <ClCompile Include="..\..\..\src\terrain_entity_depth_renderer.cpp" />
@@ -63,12 +64,11 @@
     <ClInclude Include="..\..\..\src\billboard_entity_shadow_renderer.hpp" />
     <ClInclude Include="..\..\..\src\bloom_renderer.hpp" />
     <ClInclude Include="..\..\..\src\blur_renderer.hpp" />
-    <ClInclude Include="..\..\..\src\buffer_cache.hpp" />
+    <ClInclude Include="..\..\..\src\buffer_manager.hpp" />
     <ClInclude Include="..\..\..\src\dof_renderer.hpp" />
     <ClInclude Include="..\..\..\src\lens_flare_renderer.hpp" />
     <ClInclude Include="..\..\..\src\model_entity_depth_renderer.hpp" />
     <ClInclude Include="..\..\..\src\motion_blur_renderer.hpp" />
-    <ClInclude Include="..\..\..\src\render_utils.hpp" />
     <ClInclude Include="..\..\..\src\terrain_entity_depth_renderer.hpp" />
     <ClInclude Include="..\..\..\src\quad_entity_color_renderer.hpp" />
     <ClInclude Include="..\..\..\src\model_entity_color_renderer.hpp" />

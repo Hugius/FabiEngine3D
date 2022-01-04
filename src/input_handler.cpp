@@ -1,6 +1,6 @@
 #include "input_handler.hpp"
 
-#include <SDL\\SDL.h>
+#include <SDL.h>
 
 void InputHandler::update()
 {

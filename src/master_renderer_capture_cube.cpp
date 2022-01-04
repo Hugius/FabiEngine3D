@@ -53,6 +53,16 @@ void MasterRenderer::_captureCubeReflections(ShadowGenerator& shadowGenerator, C
 	{
 		if(entity->mustCapture())
 		{
+			BufferID textureID;
+			glGenTextures(1, &textureID);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+
 			for(unsigned int i = 0; i < 6; i++)
 			{
 				camera.setPosition(entity->getPosition());
@@ -104,11 +114,9 @@ void MasterRenderer::_captureCubeReflections(ShadowGenerator& shadowGenerator, C
 
 				_cubeReflectionCaptor->bind();
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 				_renderSkyEntity(entityBus);
 				_renderTerrainEntity(entityBus);
 				_renderModelEntities(entityBus);
-
 				_cubeReflectionCaptor->unbind();
 
 				const auto dataSize = (reflectionQuality * reflectionQuality * 3);
@@ -117,12 +125,13 @@ void MasterRenderer::_captureCubeReflections(ShadowGenerator& shadowGenerator, C
 				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
-				const auto index = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + i);
-				glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getCubeMap()->getID());
-				glTexImage2D(index, 0, GL_RGB, reflectionQuality, reflectionQuality, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+				const auto cubeIndex = (GL_TEXTURE_CUBE_MAP_POSITIVE_X + i);
+				glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+				glTexImage2D(cubeIndex, 0, GL_RGB, reflectionQuality, reflectionQuality, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 			}
 
+			entity->setCubeMap(make_shared<TextureBuffer>(textureID));
 			entity->setCaptured();
 		}
 	}

@@ -54,9 +54,10 @@ private:
 	string _currentProjectID = "";
 	string _currentScriptFileID = "";
 
+	static inline const fvec4 BACKGROUND_COLOR = fvec4(0.05f, 0.05f, 0.05f, 1.0f);
+
 	static inline const fvec3 CAMERA_POSITION = fvec3(0.0f, 0.0f, 10.0f);
 	static inline const fvec3 SCRIPT_TEXT_STARTING_POSITION = fvec3(-11.0f, 6.0f, 0.5f);
-	static inline const fvec3 BACKGROUND_COLOR = fvec3(0.05f);
 	static inline const fvec3 SELECTION_COLOR = fvec3(0.075f);
 	static inline const fvec3 LINE_NUMBER_COLOR = fvec3(0.25f, 0.25f, 1.0f);
 	static inline const fvec3 SEPARATOR_COLOR = fvec3(1.0f, 0.85f, 0.0f);

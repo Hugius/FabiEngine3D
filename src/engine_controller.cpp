@@ -41,7 +41,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 			Logger::throwFatalWarning("Cannot load application: missing files/directories!");
 		}
 
-		Tools::setRenderColor(RENDER_COLOR);
+		misc_setBackgroundColor(RENDER_COLOR);
 
 		_leftViewportController.getScriptEditor().loadScriptFiles(true);
 		_leftViewportController.getScriptEditor().getScriptExecutor().load();
@@ -95,7 +95,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		imagePaths.push_back(fontMapDirectoryPath + "font.bmp");
 		misc_cacheImages(imagePaths);
 
-		Tools::setRenderColor(RENDER_COLOR);
+		misc_setBackgroundColor(RENDER_COLOR);
 
 		sky_create("@@background");
 		sky_setCubeMaps("@@background",
@@ -146,7 +146,7 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 		string activeScreen = _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID();
 		if(activeScreen == "main" && lastScreen != "main")
 		{
-			Tools::setRenderColor(RENDER_COLOR);
+			misc_setBackgroundColor(RENDER_COLOR);
 
 			sky_selectMainSky("@@background");
 

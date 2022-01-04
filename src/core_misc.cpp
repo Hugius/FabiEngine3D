@@ -92,11 +92,11 @@ void Core::_prepare()
 	fvec3 keyingColor = fvec3(0.2f);
 	if(Config::getInst().isApplicationExported())
 	{
-		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		_masterRenderer.setBackgroundColor(fvec4(0.0f));
 	}
 	else
 	{
-		glClearColor(keyingColor.r, keyingColor.g, keyingColor.b, 0.0f);
+		_masterRenderer.setBackgroundColor(fvec4(keyingColor.r, keyingColor.g, keyingColor.b, 0.0f));
 		_renderWindow.enableColorKeying(keyingColor);
 		_renderWindow.setSize(logoResolution);
 		_renderWindow.showWindow();

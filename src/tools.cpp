@@ -6,7 +6,6 @@
 #include <windows.h>
 #include <direct.h>
 #include <shlobj_core.h>
-#include <GLEW/glew.h>
 
 using std::to_string;
 using std::filesystem::exists;
@@ -243,11 +242,6 @@ void Tools::deleteFile(const string& path)
 	}
 
 	remove(path);
-}
-
-void Tools::setRenderColor(fvec3 color)
-{
-	glClearColor(color.r, color.g, color.b, 1.0f);
 }
 
 const ivec2 Tools::convertToScreenCoords(fvec2 position)

@@ -3,8 +3,8 @@
 #include "library_loader.hpp"
 #include "logger.hpp"
 
-#include <SDL\\SDL_mixer.h>
-#include <GLEW\\glew.h>
+#include <SDL_mixer.h>
+#include <glew.h>
 #include <winsock2.h>
 #include <ShellScalingAPI.h>
 
@@ -59,48 +59,4 @@ SDL_Window* LibraryLoader::getWindowPointer()
 	auto temp = _windowPointer;
 	_windowPointer = nullptr;
 	return temp;
-}
-
-/* https://stackoverflow.com/questions/850774/how-to-determine-the-hardware-cpu-and-ram-on-a-machine */
-const string LibraryLoader::getCpuModel() const
-{
-	int CPUInfo[4];
-	char model[48];
-
-	__cpuid(CPUInfo, 0x80000002);
-	memcpy(model, CPUInfo, sizeof(CPUInfo));
-	__cpuid(CPUInfo, 0x80000003);
-	memcpy(model + 16, CPUInfo, sizeof(CPUInfo));
-	__cpuid(CPUInfo, 0x80000004);
-	memcpy(model + 32, CPUInfo, sizeof(CPUInfo));
-
-	string nameString;
-	for(unsigned int i = 0; i < 48; i++)
-	{
-		nameString.push_back(model[i]);
-	}
-
-	string result;
-	reverse(nameString.begin(), nameString.end());
-	for(size_t i = 0; i < nameString.size(); i++)
-	{
-		if(nameString[i] != 0)
-		{
-			result = nameString.substr(i);
-			break;
-		}
-	}
-
-	reverse(result.begin(), result.end());
-	return result;
-}
-
-const string LibraryLoader::getGpuModel() const
-{
-	return string(reinterpret_cast<char*>(const_cast<GLubyte*>(glGetString(GL_RENDERER))));
-}
-
-const string LibraryLoader::getOpenglVersion() const
-{
-	return string(reinterpret_cast<char*>(const_cast<GLubyte*>(glGetString(GL_VERSION)))).substr(0, 3);
 }

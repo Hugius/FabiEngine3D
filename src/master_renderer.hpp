@@ -41,6 +41,11 @@ public:
 	void reloadWaterReflectionCaptureBuffer();
 	void reloadWaterRefractionCaptureBuffer();
 	void reloadShadowCaptureBuffer();
+	void setBackgroundColor(fvec4 color);
+
+	const string getCpuName() const;
+	const string getGpuName() const;
+	const string getOpenglVersion() const;
 
 private:
 	void _updateMotionBlur(Camera& camera);

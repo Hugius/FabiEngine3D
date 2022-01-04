@@ -1,7 +1,6 @@
 #pragma once
 
 #include "render_bus.hpp"
-#include "render_utils.hpp"
 #include "image.hpp"
 
 #include <array>

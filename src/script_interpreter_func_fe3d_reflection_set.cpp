@@ -4,7 +4,6 @@ using SVT = ScriptValueType;
 
 const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functionName, vector<ScriptValue>& args, vector<ScriptValue>& returnValues)
 {
-
 	if(functionName == "fe3d:reflection_place")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};

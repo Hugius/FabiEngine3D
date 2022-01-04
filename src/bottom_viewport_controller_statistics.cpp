@@ -27,14 +27,14 @@ void BottomViewportController::_updateStatistics()
 	if(_fe3d.misc_checkInterval(100))
 	{
 		string textID = statisticsScreen->getTextField("cpuModel")->getEntityID();
-		string text = ("CPU: " + _fe3d.misc_getCpuModel());
+		string text = ("CPU: " + _fe3d.misc_getCpuName());
 		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	if(_fe3d.misc_checkInterval(100))
 	{
 		string textID = statisticsScreen->getTextField("gpuModel")->getEntityID();
-		string text = ("GPU: " + _fe3d.misc_getGpuModel());
+		string text = ("GPU: " + _fe3d.misc_getGpuName());
 		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 

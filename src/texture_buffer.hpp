@@ -1,15 +1,17 @@
 #pragma once
 
 #include "image.hpp"
-#include "render_utils.hpp"
 
 #include <string>
 #include <array>
 #include <memory>
+#include <glew.h>
 
 using std::array;
 using std::string;
 using std::shared_ptr;
+
+using BufferID = GLuint;
 
 class TextureBuffer final
 {

@@ -2,11 +2,12 @@
 
 #include "logger.hpp"
 #include "mathematics.hpp" 
-#include "render_utils.hpp"
 
 #include <map>
+#include <glew.h>
 
 using std::map;
+using BufferID = GLuint;
 
 class ShaderBuffer final
 {

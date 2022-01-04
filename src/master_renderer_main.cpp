@@ -75,9 +75,11 @@ void MasterRenderer::render(shared_ptr<QuadEntity> logo, ivec2 viewport)
 
 void MasterRenderer::render(Camera& camera, ShadowGenerator& shadowGenerator, Timer& timer, EntityBus& entityBus)
 {
+	const auto& config = Config::getInst();
+
 	if(_renderBus.isWireframeRenderingEnabled())
 	{
-		glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y);
+		glViewport(config.getViewportPosition().x, config.getViewportPosition().y, config.getViewportSize().x, config.getViewportSize().y);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		_renderSkyEntity(entityBus);
@@ -86,87 +88,86 @@ void MasterRenderer::render(Camera& camera, ShadowGenerator& shadowGenerator, Ti
 		_renderModelEntities(entityBus);
 		_renderBillboardEntities(entityBus);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
+		glViewport(0, 0, config.getWindowSize().x, config.getWindowSize().y);
 		_renderGUI(entityBus);
 		_renderCursor(entityBus);
+		return;
+	}
+
+	timer.startDeltaPart("reflectionPreRender");
+	_captureCubeReflections(shadowGenerator, camera, entityBus);
+	_capturePlanarReflections(camera, entityBus);
+	_captureWaterReflections(camera, entityBus);
+	timer.stopDeltaPart();
+	timer.startDeltaPart("refractionPreRender");
+	_captureWaterRefractions(camera, entityBus);
+	timer.stopDeltaPart();
+	timer.startDeltaPart("depthPreRender");
+	_captureWorldDepth(entityBus);
+	timer.stopDeltaPart();
+	timer.startDeltaPart("shadowPreRender");
+	_captureShadows(entityBus);
+	timer.stopDeltaPart();
+
+	_worldColorCaptor->bind();
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	_renderBus.setTriangleCountingEnabled(true);
+	timer.startDeltaPart("skyEntityRender");
+	_renderSkyEntity(entityBus);
+	timer.stopDeltaPart();
+	timer.startDeltaPart("terrainEntityRender");
+	_renderTerrainEntity(entityBus);
+	timer.stopDeltaPart();
+	timer.startDeltaPart("waterEntityRender");
+	_renderWaterEntity(entityBus);
+	timer.stopDeltaPart();
+	timer.startDeltaPart("billboardEntityRender");
+	_renderBillboardEntities(entityBus);
+	timer.stopDeltaPart();
+	timer.startDeltaPart("aabbEntityRender");
+	_renderAabbEntities(entityBus);
+	timer.stopDeltaPart();
+	timer.startDeltaPart("modelEntityRender");
+	_renderModelEntities(entityBus);
+	timer.stopDeltaPart();
+	_renderBus.setTriangleCountingEnabled(false);
+
+	_worldColorCaptor->unbind();
+	_renderBus.setFinalSceneMap(_worldColorCaptor->getTexture(0));
+	_renderBus.setPrimarySceneMap(_worldColorCaptor->getTexture(0));
+	_renderBus.setSecondarySceneMap(_worldColorCaptor->getTexture(1));
+
+	timer.startDeltaPart("postProcessing");
+	_captureAntiAliasing();
+	_captureBloom();
+	_captureDOF();
+	_captureLensFlare();
+	_captureMotionBlur();
+	timer.stopDeltaPart();
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	if(_renderBus.isDebugRenderingEnabled())
+	{
+		glViewport(config.getViewportPosition().x, config.getViewportPosition().y, config.getViewportSize().x, config.getViewportSize().y);
+		_renderDebugScreens();
+		glViewport(0, 0, config.getWindowSize().x, config.getWindowSize().y);
 	}
 	else
 	{
-		timer.startDeltaPart("reflectionPreRender");
-		_captureCubeReflections(shadowGenerator, camera, entityBus);
-		_capturePlanarReflections(camera, entityBus);
-		_captureWaterReflections(camera, entityBus);
-		timer.stopDeltaPart();
-		timer.startDeltaPart("refractionPreRender");
-		_captureWaterRefractions(camera, entityBus);
-		timer.stopDeltaPart();
-		timer.startDeltaPart("depthPreRender");
-		_captureWorldDepth(entityBus);
-		timer.stopDeltaPart();
-		timer.startDeltaPart("shadowPreRender");
-		_captureShadows(entityBus);
-		timer.stopDeltaPart();
+		glViewport(config.getViewportPosition().x, config.getViewportPosition().y, config.getViewportSize().x, config.getViewportSize().y);
+		_renderFinalSceneMap();
+		glViewport(0, 0, config.getWindowSize().x, config.getWindowSize().y);
 
-		_worldColorCaptor->bind();
-
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		_renderBus.setTriangleCountingEnabled(true);
-		timer.startDeltaPart("skyEntityRender");
-		_renderSkyEntity(entityBus);
-		timer.stopDeltaPart();
-		timer.startDeltaPart("terrainEntityRender");
-		_renderTerrainEntity(entityBus);
-		timer.stopDeltaPart();
-		timer.startDeltaPart("waterEntityRender");
-		_renderWaterEntity(entityBus);
-		timer.stopDeltaPart();
-		timer.startDeltaPart("billboardEntityRender");
-		_renderBillboardEntities(entityBus);
-		timer.stopDeltaPart();
-		timer.startDeltaPart("aabbEntityRender");
-		_renderAabbEntities(entityBus);
-		timer.stopDeltaPart();
-		timer.startDeltaPart("modelEntityRender");
-		_renderModelEntities(entityBus);
-		timer.stopDeltaPart();
-		_renderBus.setTriangleCountingEnabled(false);
-
-		_worldColorCaptor->unbind();
-		_renderBus.setFinalSceneMap(_worldColorCaptor->getTexture(0));
-		_renderBus.setPrimarySceneMap(_worldColorCaptor->getTexture(0));
-		_renderBus.setSecondarySceneMap(_worldColorCaptor->getTexture(1));
-
-		timer.startDeltaPart("postProcessing");
-		_captureAntiAliasing();
-		_captureBloom();
-		_captureDOF();
-		_captureLensFlare();
-		_captureMotionBlur();
-		timer.stopDeltaPart();
-
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		if(_renderBus.isDebugRenderingEnabled())
-		{
-			glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y + 1);
-			_renderDebugScreens();
-			glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
-		}
-		else
-		{
-			glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y + 0);
-			_renderFinalSceneMap();
-			glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
-
-		}
-
-		timer.startDeltaPart("guiEntityRender");
-		_renderBus.setTriangleCountingEnabled(true);
-		_renderGUI(entityBus);
-		_renderCursor(entityBus);
-		_renderBus.setTriangleCountingEnabled(false);
-		timer.stopDeltaPart();
 	}
+
+	timer.startDeltaPart("guiEntityRender");
+	_renderBus.setTriangleCountingEnabled(true);
+	_renderGUI(entityBus);
+	_renderCursor(entityBus);
+	_renderBus.setTriangleCountingEnabled(false);
+	timer.stopDeltaPart();
 }
 
 void MasterRenderer::reloadBloomBlurCaptureBuffer()

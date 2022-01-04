@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{d0c52f57-a55e-42b4-bad3-2f4d6f7e5a97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{1bbcdce4-f0a7-40ad-bcdc-292ccd343cd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{cde7f474-004e-4d0a-8561-93f1d15f3abe}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\sound3d_manager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound3d_player_misc.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound3d_player_control.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound2d.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound3d.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound2d_player_control.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound2d_player_misc.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\sound2d_manager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\sound3d_manager.hpp">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sound2d_player.hpp">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sound2d.hpp">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sound3d.hpp">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sound2d_manager.hpp">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\sound3d_player.hpp">
+      <Filter>Player</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

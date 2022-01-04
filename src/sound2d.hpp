@@ -1,0 +1,29 @@
+#pragma once
+
+#include <string>
+#include <SDL\\SDL_mixer.h>
+
+using std::string;
+
+class Sound2d
+{
+public:
+	Sound2d(const string& ID, const string& audioPath, Mix_Chunk* dataPointer);
+
+	void setVolume(float value);
+
+	const string& getID() const;
+	const string& getAudioPath() const;
+
+	const float getVolume() const;
+
+	Mix_Chunk* getDataPointer() const;
+
+private:
+	string _ID = "";
+	string _audioPath = "";
+
+	float _volume = 1.0f;
+
+	Mix_Chunk* _dataPointer = nullptr;
+};

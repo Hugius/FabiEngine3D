@@ -1,0 +1,140 @@
+# Model Entity
+
+## 1. General
+
+- The model entity is a (complex) 3D object in 3D space.
+- A model entity cannot exist without having a mesh.
+- A model entity uses a variety of textures for a more detailed mesh.
+- Each model can be the parent of multipe AABB entities.
+
+## 2. Assets
+
+- Mesh
+- Diffuse map
+- Emission map
+- Specular map
+- Reflection map
+- Normal map
+
+## 3. Properties
+
+- **Mesh Path**: the path of the mesh file
+  - Type: `string`
+  - Constraints: cannot be changed
+- **Diffuse Map Path**: the path of the diffuse map file
+  - Type: `string`
+  - Constraints: none
+- **Emission Map Path**: the path of the emission map file
+  - Type: `string`
+  - Constraints: none
+- **Specular Map Path**: the path of the specular map file
+  - Type: `string`
+  - Constraints: none
+- **Reflection Map Path**: the path of the reflection map file
+  - Type: `string`
+  - Constraints: none
+- **Normal Map Path**: the path of the normal map file
+  - Type: `string`
+  - Constraints: none
+- **LOD Entity ID**: the ID of another model entity representing the LOD version of the current model entity
+  - Type: `string`
+  - Constraints: entity must exist
+- **Position**: the XYZ position of the mesh
+  - Type: `decimal3`
+  - Constraints: none
+- **Position Target**: the target XYZ position of the mesh
+  - Type: `decimal3`
+  - Constraints: none
+- **Rotation**: the XYZ rotation of the mesh
+  - Type: `decimal3`
+  - Constraints: between `0.0` and `360.0`
+- **Rotation Target**: the target XYZ rotation of the mesh
+  - Type: `decimal3`
+  - Constraints: between `0.0` and `360.0`
+- **Rotation Origin**: the XYZ position that the mesh rotates around
+  - Type: `decimal3`
+  - Constraints: none
+- **Size**: the XYZ size multiplier of the mesh
+  - Type: `decimal3`
+  - Constraints: at least `0.0`
+- **Size Target**: the target XYZ size multiplier of the mesh
+  - Type: `decimal3`
+  - Constraints: at least `0.0`
+- **LOD Size**: the XYZ size multiplier of the LOD entity mesh
+  - Type: `decimal3`
+  - Constraints: at least `0.0`
+- **Color**: the RGB color multiplier of the fragments
+  - Type: `decimal3`
+  - Constraints: between `0.0` and `1.0`
+- **Wireframe Color**: the RGB color multiplier of the wireframe
+  - Type: `decimal3`
+  - Constraints: between `0.0` and `1.0`
+- **Position Target Speed**: the speed with which the mesh moves to the target position
+  - Type: `decimal`
+  - Constraints: at least `0.0`
+- **Rotation Target Speed**: the speed with which the mesh rotates to the target rotation
+  - Type: `decimal`
+  - Constraints: at least `0.0`
+- **Size Target Speed**: the speed with which the mesh scales to the target size
+  - Type: `decimal`
+  - Constraints: at least `0.0`
+- **Texture Repeat**: the amount of times the textures are repeated
+  - Type: `decimal`
+  - Constraints: at least `0.0`
+- **Lightness**: the lightness multiplier of the mesh
+  - Type: `decimal`
+  - Constraints: at least `0.0`
+- **Specular Shininess**: the shininess of the specular lighting
+  - Type: `decimal`
+  - Constraints: at least `0.0`
+- **Specular Intensity**: the intensity of the specular lighting
+  - Type: `decimal`
+  - Constraints: at least `0.0`
+- **Reflectivity**: the percentage of how reflective the mesh is
+  - Type: `decimal`
+  - Constraints: between `0.0` and `1.0`
+- **Min Height**: the minimum Y position from which fragments are visible
+  - Type: `decimal`
+  - Constraints: none
+- **Max Height**: the maximum Y position to which fragments are visible
+  - Type: `decimal`
+  - Constraints: none
+- **Transparency**: the transparency of the fragments
+  - Type: `decimal`
+  - Constraints: between `0.0` and `1.0`
+- **Emission Intensity**: the intensity of the emission map
+  - Type: `decimal`
+  - Constraints: between `0.0` and `1.0`
+- **LOD Distance**: the minimum distance by which the LOD entity will appear/disappear
+  - Type: `decimal`
+  - Constraints: at least `0`
+- **Specular**: specular lighting is rendered on the mesh
+  - Type: `boolean`
+  - Constraints: none
+- **Reflective**: cube/planar reflections are rendered on the mesh
+  - Type: `boolean`
+  - Constraints: none
+- **Face Culled**: the mesh uses the face culling optimization
+  - Type: `boolean`
+  - Constraints: none
+- **Bright**: the mesh is captured for bloom and not affected by shadows or lighting
+  - Type: `boolean`
+  - Constraints: none
+- **Wireframed**: the mesh is rendered as a wireframe
+  - Type: `boolean`
+  - Constraints: none
+- **Shadowed**: the mesh is captured for shadows
+  - Type: `boolean`
+  - Constraints: none
+- **Frozen**: the XYZ position of the mesh is not affected by the camera position
+  - Type: `boolean`
+  - Constraints: none
+- **Reflected**: the mesh is captured for reflections
+  - Type: `boolean`
+  - Constraints: none
+- **Reflection Type**: the type of reflection
+  - Type: `enumeration`
+  - Constraints: `CUBE` or `PLANAR`
+- **Rotation Order**: the order of directions in which the mesh is rotated
+  - Type: `enumeration`
+  - Constraints: `XYZ` or `XZY` or `YXZ` or `YZX` or `ZXY` or `ZYX`

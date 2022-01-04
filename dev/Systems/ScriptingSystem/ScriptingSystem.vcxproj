@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\script.cpp" />
+    <ClCompile Include="..\..\..\src\script_condition_statement.cpp" />
+    <ClCompile Include="..\..\..\src\script_executor.cpp" />
+    <ClCompile Include="..\..\..\src\script_file.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_condition.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_execution.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_aabb_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_aabb_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_animation2d_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_animation2d_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_animation3d_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_animation3d_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_billboard_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_billboard_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_camera_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_camera_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_client_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_client_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_collision_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_collision_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_filesystem_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_filesystem_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_graphics_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_graphics_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_quad_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_quad_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_input_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_lighting_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_pointlight_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_lighting_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_pointlight_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_misc_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_misc_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_model_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_model_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_raycast_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_reflection_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_reflection_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sound3d_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sound3d_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_world_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_server_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_server_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_raycast_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_world_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sky_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sky_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sound2d_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_sound2d_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_spotlight_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_spotlight_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_terrain_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_terrain_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_text_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_validation.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_water_set.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_fe3d_water_get.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_math.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_func_misc.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_list_extraction.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_list_misc.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_lifecycle.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_misc.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_string_operations.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_variable_arithmetic.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_variable_create.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_variable_edit.cpp" />
+    <ClCompile Include="..\..\..\src\script_interpreter_variable_misc.cpp" />
+    <ClCompile Include="..\..\..\src\script_value.cpp" />
+    <ClCompile Include="..\..\..\src\script_variable.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\script.hpp" />
+    <ClInclude Include="..\..\..\src\script_condition_statement.hpp" />
+    <ClInclude Include="..\..\..\src\script_executor.hpp" />
+    <ClInclude Include="..\..\..\src\script_file.hpp" />
+    <ClInclude Include="..\..\..\src\script_interpreter.hpp" />
+    <ClInclude Include="..\..\..\src\script_value.hpp" />
+    <ClInclude Include="..\..\..\src\script_variable.hpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{98450A1F-8480-48F1-A5DD-00743FFECCDA}</ProjectGuid>
+    <RootNamespace>ScriptingSystem</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)Systems\</OutDir>
+    <IncludePath>$(SolutionDir)Libraries\;$(IncludePath)</IncludePath>
+    <LibraryPath>
+    </LibraryPath>
+    <IntDir>$(ProjectDir)Temp\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <OmitFramePointers>false</OmitFramePointers>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

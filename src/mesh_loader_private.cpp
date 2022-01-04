@@ -1,0 +1,173 @@
+#include "mesh_loader.hpp"
+#include "logger.hpp"
+#include "tools.hpp"
+
+#include <fstream>
+#include <sstream>
+#include <array>
+
+using std::replace;
+using std::make_shared;
+using std::ifstream;
+using std::istringstream;
+using std::array;
+
+pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& filePath)
+{
+	vector<shared_ptr<MeshPart>> meshParts;
+	vector<fvec3> temp_positions;
+	vector<fvec2> temp_uvs;
+	vector<fvec3> temp_normals;
+	string selectedPartID = "";
+
+	const auto rootPath = Tools::getRootDirectoryPath();
+	const auto fullFilePath = string(rootPath + filePath);
+	auto file = ifstream(fullFilePath);
+	if(!file)
+	{
+		auto warningMessage = string("Cannot load mesh: \"" + filePath + "\"!");
+		return make_pair(warningMessage, meshParts);
+	}
+
+	string line;
+	while(getline(file, line))
+	{
+		replace(line.begin(), line.end(), '/', ' ');
+		istringstream iss(line);
+
+		string lineType;
+		iss >> lineType;
+
+		if(lineType == "FE3D_PART")
+		{
+			string ID;
+			iss >> ID;
+
+			selectedPartID = string(ID);
+
+			if(selectedPartID == "?")
+			{
+				string warningMessage = string("Mesh part ID cannot be '?' in mesh file: \"" + filePath + "\"!");
+				return make_pair(warningMessage, meshParts);
+			}
+
+			continue;
+		}
+		else if(lineType == "v")
+		{
+			float x, y, z;
+			iss >> x >> y >> z;
+
+			temp_positions.push_back(fvec3(x, y, z));
+
+			continue;
+		}
+		else if(lineType == "vt")
+		{
+			float x, y;
+			iss >> x >> y;
+
+			temp_uvs.push_back(fvec2(x, y));
+
+			continue;
+		}
+		else if(lineType == "vn")
+		{
+			float x, y, z;
+			iss >> x >> y >> z;
+
+			temp_normals.push_back(fvec3(x, y, z));
+
+			continue;
+		}
+		else if(lineType == "f")
+		{
+			array<unsigned int, 9> indices = {};
+			iss >> indices[0] >> indices[1] >> indices[2] >> indices[3] >> indices[4] >> indices[5] >> indices[6] >> indices[7] >> indices[8];
+
+			for(auto& index : indices)
+			{
+				index--;
+			}
+
+			if(temp_positions.empty() || temp_uvs.empty() || temp_normals.empty())
+			{
+				string warningMessage = string("Too many or not enough faces in mesh file: \"" + filePath + "\"");
+				return make_pair(warningMessage, meshParts);
+			}
+
+			bool isAlreadyExisting = false;
+			for(const auto& meshPart : meshParts)
+			{
+				if(meshPart->getID() == selectedPartID)
+				{
+					isAlreadyExisting = true;
+
+					meshPart->addPosition(temp_positions[indices[0]]);
+					meshPart->addPosition(temp_positions[indices[1]]);
+					meshPart->addPosition(temp_positions[indices[2]]);
+					meshPart->addUv(temp_uvs[indices[3]]);
+					meshPart->addUv(temp_uvs[indices[4]]);
+					meshPart->addUv(temp_uvs[indices[5]]);
+					meshPart->addNormal(temp_normals[indices[6]]);
+					meshPart->addNormal(temp_normals[indices[7]]);
+					meshPart->addNormal(temp_normals[indices[8]]);
+
+					break;
+				}
+			}
+
+			if(!isAlreadyExisting)
+			{
+				auto newPart = make_shared<MeshPart>(selectedPartID);
+
+				newPart->addPosition(temp_positions[indices[0]]);
+				newPart->addPosition(temp_positions[indices[1]]);
+				newPart->addPosition(temp_positions[indices[2]]);
+				newPart->addUv(temp_uvs[indices[3]]);
+				newPart->addUv(temp_uvs[indices[4]]);
+				newPart->addUv(temp_uvs[indices[5]]);
+				newPart->addNormal(temp_normals[indices[6]]);
+				newPart->addNormal(temp_normals[indices[7]]);
+				newPart->addNormal(temp_normals[indices[8]]);
+
+				meshParts.push_back(newPart);
+			}
+		}
+	}
+
+	for(const auto& meshPart : meshParts)
+	{
+		for(size_t i = 0; i < meshPart->getPositions().size(); i += 3)
+		{
+			fvec3 v0 = meshPart->getPositions()[i + 0];
+			fvec3 v1 = meshPart->getPositions()[i + 1];
+			fvec3 v2 = meshPart->getPositions()[i + 2];
+
+			fvec2 uv0 = meshPart->getUvs()[i + 0];
+			fvec2 uv1 = meshPart->getUvs()[i + 1];
+			fvec2 uv2 = meshPart->getUvs()[i + 2];
+
+			fvec3 deltaPosition1 = (v1 - v0);
+			fvec3 deltaPosition2 = (v2 - v0);
+
+			fvec2 deltaUv1 = (uv1 - uv0);
+			fvec2 deltaUv2 = (uv2 - uv0);
+
+			float r = (1.0f / (deltaUv1.x * deltaUv2.y - deltaUv1.y * deltaUv2.x));
+			fvec3 tangent = ((deltaPosition1 * deltaUv2.y - deltaPosition2 * deltaUv1.y) * r);
+
+			meshPart->addTangent(tangent);
+			meshPart->addTangent(tangent);
+			meshPart->addTangent(tangent);
+		}
+	}
+
+	if(meshParts.empty())
+	{
+		string warningMessage = string("Incorrect or too little content in mesh file: \"" + filePath + "\"");
+		return make_pair(warningMessage, meshParts);
+	}
+
+	return make_pair("", meshParts);
+}

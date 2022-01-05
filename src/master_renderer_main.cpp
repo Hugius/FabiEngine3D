@@ -73,7 +73,6 @@ MasterRenderer::MasterRenderer()
 	_bloomBlurRendererLowQuality.inject(_blurShader);
 	_dofBlurRenderer.inject(_blurShader);
 	_motionBlurBlurRenderer.inject(_blurShader);
-
 }
 
 void MasterRenderer::inject(shared_ptr<RenderBus> renderBus)

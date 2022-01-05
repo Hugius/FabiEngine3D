@@ -50,6 +50,7 @@
     <ClInclude Include="..\..\..\src\aabb_entity.hpp" />
     <ClInclude Include="..\..\..\src\aabb_entity_manager.hpp" />
     <ClInclude Include="..\..\..\src\base_entity.hpp" />
+    <ClInclude Include="..\..\..\src\base_entity_manager.hpp" />
     <ClInclude Include="..\..\..\src\billboard_entity.hpp" />
     <ClInclude Include="..\..\..\src\billboard_entity_manager.hpp" />
     <ClInclude Include="..\..\..\src\quad_entity.hpp" />

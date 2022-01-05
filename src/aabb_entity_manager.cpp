@@ -326,7 +326,7 @@ void AabbEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool AabbEntityManager::isEntityExisting(const string& ID)
+const bool AabbEntityManager::isEntityExisting(const string& ID) const
 {
 	return (_entities.find(ID) != _entities.end());
 }

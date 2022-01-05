@@ -1,22 +1,23 @@
 #pragma once
 
+#include "base_entity_manager.hpp"
 #include "water_entity.hpp"
 
 #include <unordered_map>
 
 using std::unordered_map;
 
-class WaterEntityManager final
+class WaterEntityManager final : public BaseEntityManager
 {
 public:
 	void update();
 	void createEntity(const string& ID);
-	void deleteEntity(const string& ID);
-	void deleteEntities();
+	void deleteEntity(const string& ID) override;
+	void deleteEntities() override;
 	void loadMesh(const string& ID);
 	void selectWater(const string& ID);
 
-	const bool isEntityExisting(const string& ID);
+	const bool isEntityExisting(const string& ID) const override;
 
 	const unordered_map<string, shared_ptr<WaterEntity>>& getEntities();
 

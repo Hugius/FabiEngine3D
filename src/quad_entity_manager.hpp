@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base_entity_manager.hpp"
 #include "render_bus.hpp"
 #include "quad_entity.hpp"
 
@@ -7,7 +8,7 @@
 
 using std::unordered_map;
 
-class QuadEntityManager final
+class QuadEntityManager final : public BaseEntityManager
 {
 public:
 	QuadEntityManager();
@@ -15,10 +16,10 @@ public:
 	void inject(shared_ptr<RenderBus> renderBus);
 	void update();
 	void createEntity(const string& ID, bool isCentered);
-	void deleteEntity(const string& ID);
-	void deleteEntities();
+	void deleteEntity(const string& ID) override;
+	void deleteEntities() override;
 
-	const bool isEntityExisting(const string& ID);
+	const bool isEntityExisting(const string& ID) const override;
 
 	const unordered_map<string, shared_ptr<QuadEntity>>& getEntities();
 	shared_ptr<QuadEntity> getEntity(const string& ID);

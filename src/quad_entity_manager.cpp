@@ -59,7 +59,7 @@ void QuadEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool QuadEntityManager::isEntityExisting(const string& ID)
+const bool QuadEntityManager::isEntityExisting(const string& ID) const
 {
 	return (_entities.find(ID) != _entities.end());
 }

@@ -119,7 +119,7 @@ void BillboardEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool BillboardEntityManager::isEntityExisting(const string& ID)
+const bool BillboardEntityManager::isEntityExisting(const string& ID) const
 {
 	return (_entities.find(ID) != _entities.end());
 }

@@ -111,7 +111,7 @@ void ModelEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool ModelEntityManager::isEntityExisting(const string& ID)
+const bool ModelEntityManager::isEntityExisting(const string& ID) const
 {
 	return (_entities.find(ID) != _entities.end());
 }

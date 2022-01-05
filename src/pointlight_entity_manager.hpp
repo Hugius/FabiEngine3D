@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base_entity_manager.hpp"
 #include "pointlight_entity.hpp"
 
 #include <unordered_map>
@@ -8,15 +9,15 @@
 using std::unordered_map;
 using std::shared_ptr;
 
-class PointlightEntityManager final
+class PointlightEntityManager final : public BaseEntityManager
 {
 public:
 	void update();
 	void createEntity(const string& ID);
-	void deleteEntity(const string& ID);
-	void deleteEntities();
+	void deleteEntity(const string& ID) override;
+	void deleteEntities() override;
 
-	const bool isEntityExisting(const string& ID);
+	const bool isEntityExisting(const string& ID) const override;
 
 	const unordered_map<string, shared_ptr<PointlightEntity>>& getEntities();
 

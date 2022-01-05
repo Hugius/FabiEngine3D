@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base_entity_manager.hpp"
 #include "render_bus.hpp"
 #include "mesh_loader.hpp"
 #include "timer.hpp"
@@ -10,7 +11,7 @@
 
 using std::unordered_map;
 
-class ModelEntityManager final
+class ModelEntityManager final : public BaseEntityManager
 {
 public:
 	void inject(shared_ptr<RenderBus> renderBus);
@@ -19,10 +20,10 @@ public:
 	void inject(shared_ptr<MeshLoader> meshLoader);
 	void update();
 	void createEntity(const string& ID, const string& meshPath);
-	void deleteEntity(const string& ID);
-	void deleteEntities();
+	void deleteEntity(const string& ID) override;
+	void deleteEntities() override;
 
-	const bool isEntityExisting(const string& ID);
+	const bool isEntityExisting(const string& ID) const override;
 
 	const unordered_map<string, shared_ptr<ModelEntity>>& getEntities();
 	shared_ptr<ModelEntity> getEntity(const string& ID);

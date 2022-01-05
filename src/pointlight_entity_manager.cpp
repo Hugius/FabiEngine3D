@@ -49,7 +49,7 @@ void PointlightEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool PointlightEntityManager::isEntityExisting(const string& ID)
+const bool PointlightEntityManager::isEntityExisting(const string& ID) const
 {
 	return (_entities.find(ID) != _entities.end());
 }

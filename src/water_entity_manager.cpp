@@ -76,7 +76,7 @@ void WaterEntityManager::loadMesh(const string& ID)
 	_loadMesh(getEntity(ID), getEntity(ID)->getSize());
 }
 
-const bool WaterEntityManager::isEntityExisting(const string& ID)
+const bool WaterEntityManager::isEntityExisting(const string& ID) const
 {
 	return (_entities.find(ID) != _entities.end());
 }

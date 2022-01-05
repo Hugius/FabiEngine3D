@@ -117,7 +117,7 @@ void TerrainEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool TerrainEntityManager::isEntityExisting(const string& ID)
+const bool TerrainEntityManager::isEntityExisting(const string& ID) const
 {
 	return (_entities.find(ID) != _entities.end());
 }

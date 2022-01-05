@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base_entity_manager.hpp"
 #include "vertex_buffer.hpp"
 #include "camera.hpp"
 #include "billboard_entity.hpp"
@@ -8,7 +9,7 @@
 
 using std::unordered_map;
 
-class BillboardEntityManager final
+class BillboardEntityManager final : public BaseEntityManager
 {
 public:
 	BillboardEntityManager();
@@ -16,10 +17,10 @@ public:
 	void inject(shared_ptr<RenderBus> renderBus);
 	void update();
 	void createEntity(const string& ID, bool isCentered);
-	void deleteEntity(const string& ID);
-	void deleteEntities();
+	void deleteEntity(const string& ID) override;
+	void deleteEntities() override;
 
-	const bool isEntityExisting(const string& ID);
+	const bool isEntityExisting(const string& ID) const override;
 
 	const unordered_map<string, shared_ptr<BillboardEntity>>& getEntities();
 	shared_ptr<BillboardEntity> getEntity(const string& ID);

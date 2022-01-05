@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base_entity_manager.hpp"
 #include "vertex_buffer.hpp"
 #include "aabb_entity.hpp"
 #include "model_entity_manager.hpp"
@@ -9,7 +10,7 @@
 
 using std::unordered_map;
 
-class AabbEntityManager final
+class AabbEntityManager final : public BaseEntityManager
 {
 public:
 	AabbEntityManager();
@@ -18,10 +19,10 @@ public:
 	void inject(shared_ptr<BillboardEntityManager> billboardEntityManager);
 	void createEntity(const string& ID, bool isCentered);
 	void update();
-	void deleteEntity(const string& ID);
-	void deleteEntities();
+	void deleteEntity(const string& ID) override;
+	void deleteEntities() override;
 
-	const bool isEntityExisting(const string& ID);
+	const bool isEntityExisting(const string& ID) const override;
 
 	const unordered_map<string, shared_ptr<AabbEntity>>& getEntities();
 

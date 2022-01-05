@@ -62,7 +62,7 @@ void SpotlightEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool SpotlightEntityManager::isEntityExisting(const string& ID)
+const bool SpotlightEntityManager::isEntityExisting(const string& ID) const
 {
 	return (_entities.find(ID) != _entities.end());
 }

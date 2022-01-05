@@ -52,7 +52,7 @@ void ReflectionEntityManager::deleteEntities()
 	_entities.clear();
 }
 
-const bool ReflectionEntityManager::isEntityExisting(const string& ID)
+const bool ReflectionEntityManager::isEntityExisting(const string& ID) const
 {
 	return (_entities.find(ID) != _entities.end());
 }

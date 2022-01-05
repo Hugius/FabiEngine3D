@@ -1,5 +1,6 @@
 #pragma once
 
+#include "base_entity_manager.hpp"
 #include "render_bus.hpp"
 #include "sky_entity.hpp"
 
@@ -7,7 +8,7 @@
 
 using std::unordered_map;
 
-class SkyEntityManager final
+class SkyEntityManager final : public BaseEntityManager
 {
 public:
 	SkyEntityManager();
@@ -15,8 +16,8 @@ public:
 	void inject(shared_ptr<RenderBus> renderBus);
 	void update();
 	void createEntity(const string& ID);
-	void deleteEntity(const string& ID);
-	void deleteEntities();
+	void deleteEntity(const string& ID) override;
+	void deleteEntities() override;
 	void selectMainSky(const string& ID);
 	void selectMixSky(const string& ID);
 	void setExposureIntensity(float value);
@@ -26,7 +27,7 @@ public:
 	const float getExposureIntensity() const;
 	const float getExposureSpeed() const;
 
-	const bool isEntityExisting(const string& ID);
+	const bool isEntityExisting(const string& ID) const override;
 	const bool isExposureEnabled() const;
 
 	const unordered_map<string, shared_ptr<SkyEntity>>& getEntities();

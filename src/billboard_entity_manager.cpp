@@ -1,4 +1,5 @@
 #include "billboard_entity_manager.hpp"
+#include "billboard_entity_manager.hpp"
 #include "render_bus.hpp"
 #include "logger.hpp"
 
@@ -35,6 +36,11 @@ BillboardEntityManager::BillboardEntityManager()
 
 }
 
+void BillboardEntityManager::inject(shared_ptr<RenderBus> renderBus)
+{
+	_renderBus = renderBus;
+}
+
 shared_ptr<BillboardEntity> BillboardEntityManager::getEntity(const string& ID)
 {
 	auto iterator = _entities.find(ID);
@@ -64,7 +70,7 @@ void BillboardEntityManager::createEntity(const string& ID, bool isCentered)
 	entity->setCentered(isCentered);
 }
 
-void BillboardEntityManager::update(RenderBus& renderBus, Camera& camera)
+void BillboardEntityManager::update()
 {
 	for(const auto& [key, entity] : _entities)
 	{
@@ -79,7 +85,7 @@ void BillboardEntityManager::update(RenderBus& renderBus, Camera& camera)
 			{
 				fvec3 position = (entity->getPosition() + fvec3(0.0f, (entity->getSize().y / 2.0f), 0.0f));
 
-				fvec3 direction = (position - renderBus.getCameraPosition());
+				fvec3 direction = (position - _renderBus->getCameraPosition());
 
 				float degreesZ = atan2f(direction.y, fabsf(direction.x) + fabsf(direction.z));
 				float degreesY = atan2f(direction.z, direction.x);

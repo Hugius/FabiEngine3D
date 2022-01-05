@@ -12,8 +12,9 @@ class QuadEntityManager final
 public:
 	QuadEntityManager();
 
+	void inject(shared_ptr<RenderBus> renderBus);
 	void update();
-	void createEntity(RenderBus& renderBus, const string& ID, bool isCentered);
+	void createEntity(const string& ID, bool isCentered);
 	void deleteEntity(const string& ID);
 	void deleteEntities();
 
@@ -25,5 +26,8 @@ public:
 private:
 	const shared_ptr<VertexBuffer> _centeredMesh;
 	const shared_ptr<VertexBuffer> _corneredMesh;
+
 	unordered_map<string, shared_ptr<QuadEntity>> _entities;
+
+	shared_ptr<RenderBus> _renderBus = nullptr;
 };

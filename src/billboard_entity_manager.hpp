@@ -13,7 +13,8 @@ class BillboardEntityManager final
 public:
 	BillboardEntityManager();
 
-	void update(RenderBus& renderBus, Camera& camera);
+	void inject(shared_ptr<RenderBus> renderBus);
+	void update();
 	void createEntity(const string& ID, bool isCentered);
 	void deleteEntity(const string& ID);
 	void deleteEntities();
@@ -26,5 +27,8 @@ public:
 private:
 	const shared_ptr<VertexBuffer> _centeredMesh;
 	const shared_ptr<VertexBuffer> _standingMesh;
+
 	unordered_map<string, shared_ptr<BillboardEntity>> _entities;
+
+	shared_ptr<RenderBus> _renderBus = nullptr;
 };

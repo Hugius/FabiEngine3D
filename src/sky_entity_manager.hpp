@@ -12,7 +12,8 @@ class SkyEntityManager final
 public:
 	SkyEntityManager();
 
-	void update(RenderBus& renderBus);
+	void inject(shared_ptr<RenderBus> renderBus);
+	void update();
 	void createEntity(const string& ID);
 	void deleteEntity(const string& ID);
 	void deleteEntities();
@@ -43,5 +44,8 @@ private:
 	bool _isExposureEnabled = false;
 
 	const shared_ptr<VertexBuffer> _mesh;
+
 	unordered_map<string, shared_ptr<SkyEntity>> _entities;
+
+	shared_ptr<RenderBus> _renderBus = nullptr;
 };

@@ -1,4 +1,5 @@
 #include "camera.hpp"
+#include "camera.hpp"
 #include "configuration.hpp"
 
 #include <algorithm>
@@ -9,6 +10,16 @@ using std::clamp;
 Camera::Camera()
 {
 	reset();
+}
+
+void Camera::inject(shared_ptr<RenderBus> renderBus)
+{
+	_renderBus = renderBus;
+}
+
+void Camera::inject(shared_ptr<RenderWindow> renderWindow)
+{
+	_renderWindow = renderWindow;
 }
 
 void Camera::reset()
@@ -49,9 +60,9 @@ void Camera::reset()
 	_cursorIsBeingCentered = false;
 }
 
-void Camera::update(RenderBus& renderBus, RenderWindow& renderWindow, ivec2 lastCursorPosition)
+void Camera::update(ivec2 lastCursorPosition)
 {
-	const auto currentCursorPosition = renderWindow.getCursorPosition();
+	const auto currentCursorPosition = _renderWindow->getCursorPosition();
 	const auto left = Config::getInst().getViewportPosition().x;
 	const auto bottom = Config::getInst().getWindowSize().y - (Config::getInst().getViewportPosition().y + Config::getInst().getViewportSize().y);
 	const auto xMiddle = left + (Config::getInst().getViewportSize().x / 2);
@@ -59,7 +70,7 @@ void Camera::update(RenderBus& renderBus, RenderWindow& renderWindow, ivec2 last
 
 	if(_mustCenterCursor)
 	{
-		renderWindow.setCursorPosition({xMiddle, yMiddle});
+		_renderWindow->setCursorPosition({xMiddle, yMiddle});
 		_mustCenterCursor = false;
 		_cursorIsBeingCentered = true;
 	}
@@ -97,7 +108,7 @@ void Camera::update(RenderBus& renderBus, RenderWindow& renderWindow, ivec2 last
 		_yaw = _firstPersonYaw;
 		_pitch = _firstPersonPitch;
 
-		renderWindow.setCursorPosition({xMiddle, yMiddle});
+		_renderWindow->setCursorPosition({xMiddle, yMiddle});
 	}
 	else
 	{
@@ -141,7 +152,7 @@ void Camera::update(RenderBus& renderBus, RenderWindow& renderWindow, ivec2 last
 		_yaw = Math::convertToDegrees(atan2f(_position.z - _thirdPersonLookat.z, _position.x - _thirdPersonLookat.x)) + 180.0f;
 		_pitch = -(_thirdPersonPitch);
 
-		renderWindow.setCursorPosition({xMiddle, yMiddle});
+		_renderWindow->setCursorPosition({xMiddle, yMiddle});
 	}
 	else
 	{
@@ -152,5 +163,5 @@ void Camera::update(RenderBus& renderBus, RenderWindow& renderWindow, ivec2 last
 	_yaw = Math::limitAngle(_yaw);
 	_pitch = clamp(_pitch, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
 
-	updateMatrices(renderBus);
+	updateMatrices();
 }

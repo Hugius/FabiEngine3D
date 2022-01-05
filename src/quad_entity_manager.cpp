@@ -1,4 +1,5 @@
 #include "quad_entity_manager.hpp"
+#include "quad_entity_manager.hpp"
 #include "logger.hpp"
 
 using std::make_shared;
@@ -30,7 +31,7 @@ const unordered_map<string, shared_ptr<QuadEntity>>& QuadEntityManager::getEntit
 	return _entities;
 }
 
-void QuadEntityManager::createEntity(RenderBus& renderBus, const string& ID, bool isCentered)
+void QuadEntityManager::createEntity(const string& ID, bool isCentered)
 {
 	auto entity = make_shared<QuadEntity>(ID);
 
@@ -38,9 +39,9 @@ void QuadEntityManager::createEntity(RenderBus& renderBus, const string& ID, boo
 
 	entity->setMesh(isCentered ? _centeredMesh : _corneredMesh);
 	entity->setCentered(isCentered);
-	entity->setDepth(renderBus.getGuiDepth());
+	entity->setDepth(_renderBus->getGuiDepth());
 
-	renderBus.setGuiDepth(renderBus.getGuiDepth() + 1);
+	_renderBus->setGuiDepth(_renderBus->getGuiDepth() + 1);
 }
 
 void QuadEntityManager::deleteEntity(const string& ID)
@@ -61,6 +62,11 @@ void QuadEntityManager::deleteEntities()
 const bool QuadEntityManager::isEntityExisting(const string& ID)
 {
 	return (_entities.find(ID) != _entities.end());
+}
+
+void QuadEntityManager::inject(shared_ptr<RenderBus> renderBus)
+{
+	_renderBus = renderBus;
 }
 
 void QuadEntityManager::update()

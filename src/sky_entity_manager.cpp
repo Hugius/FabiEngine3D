@@ -59,6 +59,11 @@ SkyEntityManager::SkyEntityManager()
 
 }
 
+void SkyEntityManager::inject(shared_ptr<RenderBus> renderBus)
+{
+	_renderBus = renderBus;
+}
+
 shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string& ID)
 {
 	auto iterator = _entities.find(ID);
@@ -135,7 +140,7 @@ void SkyEntityManager::createEntity(const string& ID)
 	entity->setMesh(_mesh);
 }
 
-void SkyEntityManager::update(RenderBus& renderBus)
+void SkyEntityManager::update()
 {
 	auto mainSky = getSelectedMainSky();
 	auto mixSky = getSelectedMixSky();
@@ -145,7 +150,7 @@ void SkyEntityManager::update(RenderBus& renderBus)
 		if(_isExposureEnabled)
 		{
 			float lightness = mainSky->getLightness();
-			float pitch = min(renderBus.getCameraPitch() + 30.0f, 90.0f);
+			float pitch = min(_renderBus->getCameraPitch() + 30.0f, 90.0f);
 			float targetLightness = mainSky->getInitialLightness() + (((90.0f - pitch) / 90.0f) * _exposureIntensity);
 
 			if(lightness > targetLightness)

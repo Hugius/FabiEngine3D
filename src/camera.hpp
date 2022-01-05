@@ -10,9 +10,11 @@ class Camera final
 public:
 	Camera();
 
+	void inject(shared_ptr<RenderBus> renderBus);
+	void inject(shared_ptr<RenderWindow> renderWindow);
 	void reset();
-	void update(RenderBus& renderBus, RenderWindow& renderWindow, ivec2 lastCursorPosition);
-	void updateMatrices(RenderBus& renderBus);
+	void update(ivec2 lastCursorPosition);
+	void updateMatrices();
 	void move(fvec3 value);
 	void setPosition(fvec3 value);
 	void setThirdPersonLookat(fvec3 value);
@@ -110,4 +112,7 @@ private:
 	bool _isFirstPersonViewEnabled = false;
 	bool _mustCenterCursor = false;
 	bool _cursorIsBeingCentered = false;
+
+	shared_ptr<RenderBus> _renderBus = nullptr;
+	shared_ptr<RenderWindow> _renderWindow = nullptr;
 };

@@ -12,8 +12,9 @@ class TextEntityManager final
 public:
 	TextEntityManager();
 
+	void inject(shared_ptr<RenderBus> renderBus);
 	void update();
-	void createEntity(RenderBus& renderBus, const string& ID, bool isCentered);
+	void createEntity(const string& ID, bool isCentered);
 	void deleteEntity(const string& ID);
 	void deleteEntities();
 
@@ -24,5 +25,8 @@ public:
 
 private:
 	const shared_ptr<VertexBuffer> _mesh;
+
 	unordered_map<string, shared_ptr<TextEntity>> _entities;
+
+	shared_ptr<RenderBus> _renderBus = nullptr;
 };

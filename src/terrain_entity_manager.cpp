@@ -1,4 +1,5 @@
 #include "terrain_entity_manager.hpp"
+#include "terrain_entity_manager.hpp"
 #include "logger.hpp"
 
 using std::make_shared;
@@ -34,13 +35,13 @@ const unordered_map<string, shared_ptr<TerrainEntity>>& TerrainEntityManager::ge
 	return _entities;
 }
 
-void TerrainEntityManager::createEntity(ImageLoader& imageLoader, const string& ID, const string& heightMapPath)
+void TerrainEntityManager::createEntity(const string& ID, const string& heightMapPath)
 {
 	auto entity = make_shared<TerrainEntity>(ID);
 
 	_entities.insert(make_pair(ID, entity));
 
-	auto image = imageLoader.loadImage(heightMapPath);
+	auto image = _imageLoader->loadImage(heightMapPath);
 
 	if(image == nullptr)
 	{
@@ -94,6 +95,11 @@ void TerrainEntityManager::selectTerrain(const string& ID)
 	{
 		Logger::throwError("TerrainEntityManager::selectTerrain");
 	}
+}
+
+void TerrainEntityManager::inject(shared_ptr<ImageLoader> imageLoader)
+{
+	_imageLoader = imageLoader;
 }
 
 void TerrainEntityManager::deleteEntity(const string& ID)

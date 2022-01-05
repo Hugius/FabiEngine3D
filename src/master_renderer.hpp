@@ -30,17 +30,22 @@ class MasterRenderer final
 public:
 	MasterRenderer();
 
-	void update(RenderBus& renderBus, Camera& camera);
-	void render(RenderBus& renderBus, shared_ptr<QuadEntity> entity, ivec2 viewport);
-	void render(RenderBus& renderBus, Camera& camera, ShadowGenerator& shadowGenerator, Timer& timer, EntityBus& entityBus);
-	void reloadBloomBlurCaptureBuffer(RenderBus& renderBus);
-	void reloadDofBlurCaptureBuffer(RenderBus& renderBus);
-	void reloadMotionBlurBlurCaptureBuffer(RenderBus& renderBus);
-	void reloadCubeReflectionCaptureBuffer(RenderBus& renderBus);
-	void reloadPlanarReflectionCaptureBuffer(RenderBus& renderBus);
-	void reloadWaterReflectionCaptureBuffer(RenderBus& renderBus);
-	void reloadWaterRefractionCaptureBuffer(RenderBus& renderBus);
-	void reloadShadowCaptureBuffer(RenderBus& renderBus);
+	void inject(shared_ptr<RenderBus> renderBus);
+	void inject(shared_ptr<Camera> camera);
+	void inject(shared_ptr<ShadowGenerator> shadowGenerator);
+	void inject(shared_ptr<Timer> timer);
+	void inject(shared_ptr<EntityBus> entityBus);
+	void update();
+	void render(shared_ptr<QuadEntity> entity, ivec2 viewport);
+	void render();
+	void reloadBloomBlurCaptureBuffer();
+	void reloadDofBlurCaptureBuffer();
+	void reloadMotionBlurBlurCaptureBuffer();
+	void reloadCubeReflectionCaptureBuffer();
+	void reloadPlanarReflectionCaptureBuffer();
+	void reloadWaterReflectionCaptureBuffer();
+	void reloadWaterRefractionCaptureBuffer();
+	void reloadShadowCaptureBuffer();
 	void setBackgroundColor(fvec4 color);
 
 	const string getCpuName() const;
@@ -48,29 +53,29 @@ public:
 	const string getOpenglVersion() const;
 
 private:
-	void _updateMotionBlur(RenderBus& renderBus, Camera& camera);
-	void _updateLensFlare(RenderBus& renderBus);
-	void _captureCubeReflections(RenderBus& renderBus, ShadowGenerator& shadowGenerator, Camera& camera, EntityBus& entityBus);
-	void _capturePlanarReflections(RenderBus& renderBus, Camera& camera, EntityBus& entityBus);
-	void _captureWaterReflections(RenderBus& renderBus, Camera& camera, EntityBus& entityBus);
-	void _captureWaterRefractions(RenderBus& renderBus, Camera& camera, EntityBus& entityBus);
-	void _captureWorldDepth(RenderBus& renderBus, EntityBus& entityBus);
-	void _captureShadows(RenderBus& renderBus, EntityBus& entityBus);
-	void _captureAntiAliasing(RenderBus& renderBus);
-	void _captureBloom(RenderBus& renderBus);
-	void _captureDOF(RenderBus& renderBus);
-	void _captureLensFlare(RenderBus& renderBus);
-	void _captureMotionBlur(RenderBus& renderBus);
-	void _renderSkyEntity(RenderBus& renderBus, EntityBus& entityBus);
-	void _renderTerrainEntity(RenderBus& renderBus, EntityBus& entityBus);
-	void _renderWaterEntity(RenderBus& renderBus, EntityBus& entityBus);
-	void _renderModelEntities(RenderBus& renderBus, EntityBus& entityBus);
-	void _renderBillboardEntities(RenderBus& renderBus, EntityBus& entityBus);
-	void _renderAabbEntities(RenderBus& renderBus, EntityBus& entityBus);
-	void _renderFinalSceneMap(RenderBus& renderBus);
-	void _renderDebugScreens(RenderBus& renderBus);
-	void _renderGUI(RenderBus& renderBus, EntityBus& entityBus);
-	void _renderCursor(RenderBus& renderBus, EntityBus& entityBus);
+	void _updateMotionBlur();
+	void _updateLensFlare();
+	void _captureCubeReflections();
+	void _capturePlanarReflections();
+	void _captureWaterReflections();
+	void _captureWaterRefractions();
+	void _captureWorldDepth();
+	void _captureShadows();
+	void _captureAntiAliasing();
+	void _captureBloom();
+	void _captureDOF();
+	void _captureLensFlare();
+	void _captureMotionBlur();
+	void _renderSkyEntity();
+	void _renderTerrainEntity();
+	void _renderWaterEntity();
+	void _renderModelEntities();
+	void _renderBillboardEntities();
+	void _renderAabbEntities();
+	void _renderFinalSceneMap();
+	void _renderDebugScreens();
+	void _renderGUI();
+	void _renderCursor();
 
 	float _cameraYawDifference = 0.0f;
 	float _cameraPitchDifference = 0.0f;
@@ -130,4 +135,10 @@ private:
 	shared_ptr<CaptureBuffer> _dofCaptor = nullptr;
 	shared_ptr<CaptureBuffer> _lensFlareCaptor = nullptr;
 	shared_ptr<CaptureBuffer> _motionBlurCaptor = nullptr;
+
+	shared_ptr<RenderBus> _renderBus = nullptr;
+	shared_ptr<Camera> _camera = nullptr;
+	shared_ptr<ShadowGenerator> _shadowGenerator = nullptr;
+	shared_ptr<Timer> _timer = nullptr;
+	shared_ptr<EntityBus> _entityBus = nullptr;
 };

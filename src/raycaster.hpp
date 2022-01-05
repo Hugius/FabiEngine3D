@@ -7,7 +7,9 @@
 class Raycaster final
 {
 public:
-	void update(TerrainEntityManager& terrainManager, RenderBus& renderBus, ivec2 cursorPosition);
+	void inject(shared_ptr<TerrainEntityManager> terrainManager);
+	void inject(shared_ptr<RenderBus> renderBus);
+	void update(ivec2 cursorPosition);
 	void setTerrainPointingEnabled(bool value);
 	void setTerrainPointingDistance(float distance);
 	void setTerrainPointingPrecision(float precision);
@@ -24,14 +26,14 @@ public:
 	const Ray getCursorRay() const;
 
 private:
-	const fvec4 _convertToViewSpace(RenderBus& renderBus, fvec4 clipCoords) const;
+	const fvec4 _convertToViewSpace(fvec4 clipCoords) const;
 
-	const fvec3 _convertToWorldSpace(RenderBus& renderBus, fvec4 viewCoords) const;
-	const fvec3 _calculateTerrainPoint(TerrainEntityManager& terrainManager) const;
+	const fvec3 _convertToWorldSpace(fvec4 viewCoords) const;
+	const fvec3 _calculateTerrainPoint() const;
 
-	const bool _isUnderTerrain(TerrainEntityManager& terrainManager, float distance) const;
+	const bool _isUnderTerrain(float distance) const;
 
-	const Ray _calculateCursorRay(RenderBus& renderBus, ivec2 cursorPosition) const;
+	const Ray _calculateCursorRay(ivec2 cursorPosition) const;
 
 	fvec3 _terrainPoint = fvec3(0.0f);
 
@@ -41,4 +43,7 @@ private:
 	bool _isTerrainPointingEnabled = false;
 
 	Ray _cursorRay = Ray(fvec3(0.0f), fvec3(0.0f));
+
+	shared_ptr<RenderBus> _renderBus = nullptr;
+	shared_ptr<TerrainEntityManager> _terrainManager = nullptr;
 };

@@ -1,4 +1,5 @@
 #include "model_entity_manager.hpp"
+#include "model_entity_manager.hpp"
 #include "logger.hpp"
 
 using std::make_shared;
@@ -23,13 +24,33 @@ const unordered_map<string, shared_ptr<ModelEntity>>& ModelEntityManager::getEnt
 	return _entities;
 }
 
-void ModelEntityManager::createEntity(MeshLoader& meshLoader, const string& ID, const string& meshPath)
+void ModelEntityManager::inject(shared_ptr<RenderBus> renderBus)
+{
+	_renderBus = renderBus;
+}
+
+void ModelEntityManager::inject(shared_ptr<Timer> timer)
+{
+	_timer = timer;
+}
+
+void ModelEntityManager::inject(shared_ptr<ReflectionEntityManager> reflectionManager)
+{
+	_reflectionManager = reflectionManager;
+}
+
+void ModelEntityManager::inject(shared_ptr<MeshLoader> meshLoader)
+{
+	_meshLoader = meshLoader;
+}
+
+void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 {
 	auto entity = make_shared<ModelEntity>(ID);
 
 	_entities.insert(make_pair(ID, entity));
 
-	auto partsPointer = meshLoader.loadMesh(meshPath);
+	auto partsPointer = _meshLoader->loadMesh(meshPath);
 
 	if(partsPointer == nullptr)
 	{
@@ -95,9 +116,10 @@ const bool ModelEntityManager::isEntityExisting(const string& ID)
 	return (_entities.find(ID) != _entities.end());
 }
 
-void ModelEntityManager::update(RenderBus& renderBus, Timer& timer,
-								const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities)
+void ModelEntityManager::update()
 {
+	const auto& reflectionEntities = _reflectionManager->getEntities();
+
 	for(const auto& [key, entity] : _entities)
 	{
 		entity->updateTransformation();
@@ -112,7 +134,7 @@ void ModelEntityManager::update(RenderBus& renderBus, Timer& timer,
 					Logger::throwError("ModelEntityManager::update");
 				}
 
-				auto cameraPosition = renderBus.getCameraPosition();
+				auto cameraPosition = _renderBus->getCameraPosition();
 				auto entityPosition = entity->getBasePosition();
 				auto absolsuteDistance = Math::calculateDistance(cameraPosition, entityPosition);
 
@@ -120,7 +142,7 @@ void ModelEntityManager::update(RenderBus& renderBus, Timer& timer,
 				entity->setLevelOfDetailed(isFarEnough);
 			}
 
-			if((timer.getPassedTickCount() % Config::UPDATES_PER_SECOND) == 0)
+			if((_timer->getPassedTickCount() % Config::UPDATES_PER_SECOND) == 0)
 			{
 				map<float, shared_ptr<ReflectionEntity>> reflectionDistanceMap;
 				for(const auto& [key, reflectionEntity] : reflectionEntities)

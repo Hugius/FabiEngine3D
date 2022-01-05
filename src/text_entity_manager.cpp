@@ -1,4 +1,5 @@
 #include "text_entity_manager.hpp"
+#include "text_entity_manager.hpp"
 #include "logger.hpp"
 
 using std::make_shared;
@@ -29,7 +30,7 @@ const unordered_map<string, shared_ptr<TextEntity>>& TextEntityManager::getEntit
 	return _entities;
 }
 
-void TextEntityManager::createEntity(RenderBus& renderBus, const string& ID, bool isCentered)
+void TextEntityManager::createEntity(const string& ID, bool isCentered)
 {
 	auto entity = make_shared<TextEntity>(ID);
 
@@ -37,9 +38,9 @@ void TextEntityManager::createEntity(RenderBus& renderBus, const string& ID, boo
 
 	entity->setMesh(_mesh);
 	entity->setCentered(isCentered);
-	entity->setDepth(renderBus.getGuiDepth());
+	entity->setDepth(_renderBus->getGuiDepth());
 
-	renderBus.setGuiDepth(renderBus.getGuiDepth() + 1);
+	_renderBus->setGuiDepth(_renderBus->getGuiDepth() + 1);
 }
 
 void TextEntityManager::deleteEntity(const string& ID)
@@ -60,6 +61,11 @@ void TextEntityManager::deleteEntities()
 const bool TextEntityManager::isEntityExisting(const string& ID)
 {
 	return (_entities.find(ID) != _entities.end());
+}
+
+void TextEntityManager::inject(shared_ptr<RenderBus> renderBus)
+{
+	_renderBus = renderBus;
 }
 
 void TextEntityManager::update()

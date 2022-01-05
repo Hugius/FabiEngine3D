@@ -103,8 +103,8 @@ void EngineController::FE3D_CONTROLLER_INIT()
 							string(cubeMapDirectoryPath + "background_right.bmp"),
 							string(cubeMapDirectoryPath + "background_left.bmp"),
 							string(cubeMapDirectoryPath + "background_top.bmp"),
-							string(cubeMapDirectoryPath + "background_right.bmp"),
 							string(cubeMapDirectoryPath + "background_bottom.bmp"),
+							string(cubeMapDirectoryPath + "background_back.bmp"),
 							string(cubeMapDirectoryPath + "background_front.bmp")
 						});
 

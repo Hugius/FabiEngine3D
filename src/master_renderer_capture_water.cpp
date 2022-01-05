@@ -1,12 +1,12 @@
 #include "master_renderer.hpp"
 
-void MasterRenderer::_captureWaterReflections(RenderBus& renderBus, Camera& camera, EntityBus& entityBus)
+void MasterRenderer::_captureWaterReflections()
 {
-	const auto waterEntity = entityBus.getWaterEntity();
+	const auto waterEntity = _entityBus->getWaterEntity();
 
 	if((waterEntity != nullptr) && waterEntity->isReflective())
 	{
-		float cameraDistance = (camera.getPosition().y - waterEntity->getHeight());
+		float cameraDistance = (_camera->getPosition().y - waterEntity->getHeight());
 
 		_waterReflectionCaptor->bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -15,7 +15,7 @@ void MasterRenderer::_captureWaterReflections(RenderBus& renderBus, Camera& came
 		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL ||
 		   waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
 		{
-			for(const auto& [key, entity] : entityBus.getModelEntities())
+			for(const auto& [key, entity] : _entityBus->getModelEntities())
 			{
 				if(!entity->isReflected() && entity->isVisible())
 				{
@@ -39,7 +39,7 @@ void MasterRenderer::_captureWaterReflections(RenderBus& renderBus, Camera& came
 		vector<string> savedBillboardEntityIDs;
 		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
 		{
-			for(const auto& [key, entity] : entityBus.getBillboardEntities())
+			for(const auto& [key, entity] : _entityBus->getBillboardEntities())
 			{
 				if(!entity->isReflected() && entity->isVisible())
 				{
@@ -49,24 +49,24 @@ void MasterRenderer::_captureWaterReflections(RenderBus& renderBus, Camera& came
 			}
 		}
 
-		const fvec3 initialCameraPosition = camera.getPosition();
-		camera.setPosition(fvec3(initialCameraPosition.x, initialCameraPosition.y - (cameraDistance * 2.0f), initialCameraPosition.z));
+		const fvec3 initialCameraPosition = _camera->getPosition();
+		_camera->setPosition(fvec3(initialCameraPosition.x, initialCameraPosition.y - (cameraDistance * 2.0f), initialCameraPosition.z));
 
-		const float initialCameraPitch = camera.getPitch();
-		camera.setPitch(-initialCameraPitch);
+		const float initialCameraPitch = _camera->getPitch();
+		_camera->setPitch(-initialCameraPitch);
 
-		camera.updateMatrices(renderBus);
+		_camera->updateMatrices();
 
-		renderBus.setCameraPosition(initialCameraPosition);
-		renderBus.setCameraPitch(initialCameraPitch);
+		_renderBus->setCameraPosition(initialCameraPosition);
+		_renderBus->setCameraPitch(initialCameraPitch);
 
-		renderBus.setReflectionsEnabled(false);
+		_renderBus->setReflectionsEnabled(false);
 
-		bool wasShadowsEnabled = renderBus.isShadowsEnabled();
-		renderBus.setShadowsEnabled(false);
+		bool wasShadowsEnabled = _renderBus->isShadowsEnabled();
+		_renderBus->setShadowsEnabled(false);
 
 		float oldLightness = 0.0f;
-		auto skyEntity = entityBus.getMainSkyEntity();
+		auto skyEntity = _entityBus->getMainSkyEntity();
 		if(skyEntity != nullptr)
 		{
 			oldLightness = skyEntity->getLightness();
@@ -75,14 +75,14 @@ void MasterRenderer::_captureWaterReflections(RenderBus& renderBus, Camera& came
 
 		const float clippingHeight = -(waterEntity->getHeight());
 		const fvec4 clippingPlane = fvec4(0.0f, 1.0f, 0.0f, clippingHeight);
-		renderBus.setClippingPlane(clippingPlane);
+		_renderBus->setClippingPlane(clippingPlane);
 
-		_renderSkyEntity(renderBus, entityBus);
+		_renderSkyEntity();
 
 		if(waterEntity->getQuality() != WaterQuality::SKY)
 		{
 			glEnable(GL_CLIP_DISTANCE0);
-			_renderTerrainEntity(renderBus, entityBus);
+			_renderTerrainEntity();
 			glDisable(GL_CLIP_DISTANCE0);
 		}
 
@@ -90,24 +90,24 @@ void MasterRenderer::_captureWaterReflections(RenderBus& renderBus, Camera& came
 		   waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
 		{
 			glEnable(GL_CLIP_DISTANCE2);
-			_renderModelEntities(renderBus, entityBus);
+			_renderModelEntities();
 			glDisable(GL_CLIP_DISTANCE2);
 		}
 
 		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
 		{
 			glEnable(GL_CLIP_DISTANCE2);
-			_renderBillboardEntities(renderBus, entityBus);
+			_renderBillboardEntities();
 			glDisable(GL_CLIP_DISTANCE2);
 		}
 
 		_waterReflectionCaptor->unbind();
 
-		renderBus.setWaterReflectionMap(_waterReflectionCaptor->getTexture(0));
+		_renderBus->setWaterReflectionMap(_waterReflectionCaptor->getTexture(0));
 
 		for(const auto& savedID : savedModelEntityIDs)
 		{
-			for(const auto& [key, entity] : entityBus.getModelEntities())
+			for(const auto& [key, entity] : _entityBus->getModelEntities())
 			{
 				if(entity->getID() == savedID)
 				{
@@ -118,7 +118,7 @@ void MasterRenderer::_captureWaterReflections(RenderBus& renderBus, Camera& came
 
 		for(const auto& savedID : savedBillboardEntityIDs)
 		{
-			for(const auto& [key, entity] : entityBus.getBillboardEntities())
+			for(const auto& [key, entity] : _entityBus->getBillboardEntities())
 			{
 				if(entity->getID() == savedID)
 				{
@@ -127,15 +127,15 @@ void MasterRenderer::_captureWaterReflections(RenderBus& renderBus, Camera& came
 			}
 		}
 
-		camera.setPitch(initialCameraPitch);
+		_camera->setPitch(initialCameraPitch);
 
-		camera.setPosition(initialCameraPosition);
+		_camera->setPosition(initialCameraPosition);
 
-		camera.updateMatrices(renderBus);
+		_camera->updateMatrices();
 
-		renderBus.setReflectionsEnabled(true);
+		_renderBus->setReflectionsEnabled(true);
 
-		renderBus.setShadowsEnabled(wasShadowsEnabled);
+		_renderBus->setShadowsEnabled(wasShadowsEnabled);
 
 		if(skyEntity != nullptr)
 		{
@@ -144,27 +144,27 @@ void MasterRenderer::_captureWaterReflections(RenderBus& renderBus, Camera& came
 	}
 	else
 	{
-		renderBus.setWaterReflectionMap(0);
+		_renderBus->setWaterReflectionMap(0);
 	}
 }
 
-void MasterRenderer::_captureWaterRefractions(RenderBus& renderBus, Camera& camera, EntityBus& entityBus)
+void MasterRenderer::_captureWaterRefractions()
 {
-	const auto waterEntity = entityBus.getWaterEntity();
+	const auto waterEntity = _entityBus->getWaterEntity();
 
 	if((waterEntity != nullptr) && waterEntity->isRefractive())
 	{
 		_waterRefractionCaptor->bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		bool wasShadowsEnabled = renderBus.isShadowsEnabled();
+		bool wasShadowsEnabled = _renderBus->isShadowsEnabled();
 		if((waterEntity->getQuality() == WaterQuality::SKY) || (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN))
 		{
-			renderBus.setShadowsEnabled(false);
+			_renderBus->setShadowsEnabled(false);
 		}
 
 		float oldSkyLightness = 0.0f;
-		auto skyEntity = entityBus.getMainSkyEntity();
+		auto skyEntity = _entityBus->getMainSkyEntity();
 		if(skyEntity != nullptr)
 		{
 			oldSkyLightness = skyEntity->getLightness();
@@ -172,31 +172,31 @@ void MasterRenderer::_captureWaterRefractions(RenderBus& renderBus, Camera& came
 		}
 
 		const float waveHeight = (waterEntity->hasDisplacementMap() ? waterEntity->getWaveHeight() : 0.0f);
-		bool isUnderWater = (camera.getPosition().y < (waterEntity->getHeight() + waveHeight));
-		isUnderWater = (isUnderWater && (camera.getPosition().x > (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (camera.getPosition().x < (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (camera.getPosition().z > (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (camera.getPosition().z < (waterEntity->getSize() / 2.0f)));
+		bool isUnderWater = (_camera->getPosition().y < (waterEntity->getHeight() + waveHeight));
+		isUnderWater = (isUnderWater && (_camera->getPosition().x > (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_camera->getPosition().x < (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_camera->getPosition().z > (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_camera->getPosition().z < (waterEntity->getSize() / 2.0f)));
 
 		if(isUnderWater)
 		{
 			const float clippingHeight = -(waterEntity->getHeight());
 			const fvec4 clippingPlane = fvec4(0.0f, 1.0f, 0.0f, clippingHeight);
-			renderBus.setClippingPlane(clippingPlane);
+			_renderBus->setClippingPlane(clippingPlane);
 		}
 		else
 		{
 			const float clippingHeight = (waterEntity->getHeight() + waveHeight);
 			const fvec4 clippingPlane = fvec4(0.0f, -1.0f, 0.0f, clippingHeight);
-			renderBus.setClippingPlane(clippingPlane);
+			_renderBus->setClippingPlane(clippingPlane);
 		}
 
-		_renderSkyEntity(renderBus, entityBus);
+		_renderSkyEntity();
 
 		if(waterEntity->getQuality() != WaterQuality::SKY)
 		{
 			glEnable(GL_CLIP_DISTANCE0);
-			_renderTerrainEntity(renderBus, entityBus);
+			_renderTerrainEntity();
 			glDisable(GL_CLIP_DISTANCE0);
 		}
 
@@ -204,18 +204,18 @@ void MasterRenderer::_captureWaterRefractions(RenderBus& renderBus, Camera& came
 		   (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD))
 		{
 			glEnable(GL_CLIP_DISTANCE2);
-			_renderModelEntities(renderBus, entityBus);
+			_renderModelEntities();
 			glDisable(GL_CLIP_DISTANCE2);
 		}
 
 		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
 		{
 			glEnable(GL_CLIP_DISTANCE2);
-			_renderBillboardEntities(renderBus, entityBus);
+			_renderBillboardEntities();
 			glDisable(GL_CLIP_DISTANCE2);
 		}
 
-		renderBus.setShadowsEnabled(wasShadowsEnabled);
+		_renderBus->setShadowsEnabled(wasShadowsEnabled);
 
 		if(skyEntity != nullptr)
 		{
@@ -224,10 +224,10 @@ void MasterRenderer::_captureWaterRefractions(RenderBus& renderBus, Camera& came
 
 		_waterRefractionCaptor->unbind();
 
-		renderBus.setWaterRefractionMap(_waterRefractionCaptor->getTexture(0));
+		_renderBus->setWaterRefractionMap(_waterRefractionCaptor->getTexture(0));
 	}
 	else
 	{
-		renderBus.setWaterRefractionMap(0);
+		_renderBus->setWaterRefractionMap(0);
 	}
 }

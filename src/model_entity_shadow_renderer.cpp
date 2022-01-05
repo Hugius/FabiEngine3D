@@ -5,7 +5,7 @@ void ModelEntityShadowRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus&
 {
 	shader->bind();
 
-	shader->uploadUniform("u_lightSpaceMatrix", renderBus.getShadowMatrix());
+	shader->uploadUniform("u_lightSpaceMatrix", renderBus->getShadowMatrix());
 	shader->uploadUniform("u_diffuseMap", 0);
 
 	glEnable(GL_CLIP_DISTANCE0);

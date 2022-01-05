@@ -4,10 +4,10 @@
 #include "shader_buffer.hpp"
 #include "render_bus.hpp"
 
-class QuadEntityColorRenderer final
+class QuadEntityColorRenderer final : BaseRenderer
 {
 public:
-	void bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus);
-	void unbind(shared_ptr<ShaderBuffer> shader);
-	void render(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus, const shared_ptr<QuadEntity> entity);
+	void bind() override;
+	void unbind() override;
+	void render(const shared_ptr<QuadEntity> entity);
 };

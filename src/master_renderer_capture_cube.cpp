@@ -1,13 +1,13 @@
 #include "master_renderer.hpp"
 
-void MasterRenderer::_captureCubeReflections(RenderBus& renderBus, ShadowGenerator& shadowGenerator, Camera& camera, EntityBus& entityBus)
+void MasterRenderer::_captureCubeReflections()
 {
 	if(entityBus.getReflectionEntities().empty())
 	{
 		return;
 	}
 
-	const auto reflectionQuality = renderBus.getCubeReflectionQuality();
+	const auto reflectionQuality = renderBus->getCubeReflectionQuality();
 
 	const auto initialCameraAspectRatio = camera.getAspectRatio();
 	const auto initialCameraFOV = camera.getFOV();
@@ -35,7 +35,7 @@ void MasterRenderer::_captureCubeReflections(RenderBus& renderBus, ShadowGenerat
 		}
 	}
 
-	renderBus.setReflectionsEnabled(false);
+	renderBus->setReflectionsEnabled(false);
 
 	float oldLightness = 0.0f;
 	auto skyEntity = entityBus.getMainSkyEntity();
@@ -158,7 +158,7 @@ void MasterRenderer::_captureCubeReflections(RenderBus& renderBus, ShadowGenerat
 		}
 	}
 
-	renderBus.setReflectionsEnabled(true);
+	renderBus->setReflectionsEnabled(true);
 
 	if(skyEntity != nullptr)
 	{

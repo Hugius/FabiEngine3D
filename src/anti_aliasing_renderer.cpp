@@ -9,7 +9,7 @@ void AntiAliasingRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus& rend
 	shader->uploadUniform("u_sceneMap", 0);
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, renderBus.getFinalSceneMap()->getID());
+	glBindTexture(GL_TEXTURE_2D, renderBus->getFinalSceneMap()->getID());
 }
 
 void AntiAliasingRenderer::unbind(shared_ptr<ShaderBuffer> shader)

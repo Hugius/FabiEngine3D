@@ -1,6 +1,6 @@
 #include "master_renderer.hpp"
 
-void MasterRenderer::_capturePlanarReflections(RenderBus& renderBus, Camera& camera, EntityBus& entityBus)
+void MasterRenderer::_capturePlanarReflections()
 {
 	bool anyReflectiveModelFound = false;
 
@@ -18,11 +18,11 @@ void MasterRenderer::_capturePlanarReflections(RenderBus& renderBus, Camera& cam
 
 	if(!anyReflectiveModelFound)
 	{
-		renderBus.setPlanarReflectionMap(0);
+		renderBus->setPlanarReflectionMap(0);
 		return;
 	}
 
-	float cameraDistance = (camera.getPosition().y - renderBus.getPlanarReflectionHeight());
+	float cameraDistance = (camera.getPosition().y - renderBus->getPlanarReflectionHeight());
 
 	_planarReflectionCaptor->bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -66,10 +66,10 @@ void MasterRenderer::_capturePlanarReflections(RenderBus& renderBus, Camera& cam
 
 	camera.updateMatrices(renderBus);
 
-	renderBus.setCameraPosition(initialCameraPosition);
-	renderBus.setCameraPitch(initialCameraPitch);
+	renderBus->setCameraPosition(initialCameraPosition);
+	renderBus->setCameraPitch(initialCameraPitch);
 
-	renderBus.setReflectionsEnabled(false);
+	renderBus->setReflectionsEnabled(false);
 
 	float oldSkyLightness = 0.0f;
 	auto skyEntity = entityBus.getMainSkyEntity();
@@ -79,9 +79,9 @@ void MasterRenderer::_capturePlanarReflections(RenderBus& renderBus, Camera& cam
 		skyEntity->setLightness(skyEntity->getInitialLightness());
 	}
 
-	const float clippingHeight = -(renderBus.getPlanarReflectionHeight() + 0.0000001f);
+	const float clippingHeight = -(renderBus->getPlanarReflectionHeight() + 0.0000001f);
 	const fvec4 clippingPlane = fvec4(0.0f, 1.0f, 0.0f, clippingHeight);
-	renderBus.setClippingPlane(clippingPlane);
+	renderBus->setClippingPlane(clippingPlane);
 
 	_renderSkyEntity(renderBus, entityBus);
 
@@ -96,7 +96,7 @@ void MasterRenderer::_capturePlanarReflections(RenderBus& renderBus, Camera& cam
 
 	_planarReflectionCaptor->unbind();
 
-	renderBus.setPlanarReflectionMap(_planarReflectionCaptor->getTexture(0));
+	renderBus->setPlanarReflectionMap(_planarReflectionCaptor->getTexture(0));
 
 	for(const auto& [key, entity] : entityBus.getModelEntities())
 	{
@@ -126,7 +126,7 @@ void MasterRenderer::_capturePlanarReflections(RenderBus& renderBus, Camera& cam
 
 	camera.updateMatrices(renderBus);
 
-	renderBus.setReflectionsEnabled(true);
+	renderBus->setReflectionsEnabled(true);
 
 	if(skyEntity != nullptr)
 	{

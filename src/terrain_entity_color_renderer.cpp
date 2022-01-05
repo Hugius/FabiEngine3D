@@ -8,28 +8,28 @@ void TerrainEntityColorRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus
 {
 	shader->bind();
 
-	shader->uploadUniform("u_viewMatrix", renderBus.getViewMatrix());
-	shader->uploadUniform("u_projectionMatrix", renderBus.getProjectionMatrix());
-	shader->uploadUniform("u_shadowMatrix", renderBus.getShadowMatrix());
-	shader->uploadUniform("u_clippingPlane", renderBus.getClippingPlane());
-	shader->uploadUniform("u_cameraPosition", renderBus.getCameraPosition());
-	shader->uploadUniform("u_ambientLightingColor", renderBus.getAmbientLightingColor());
-	shader->uploadUniform("u_ambientLightingIntensity", renderBus.getAmbientLightingIntensity());
-	shader->uploadUniform("u_directionalLightingColor", renderBus.getDirectionalLightingColor());
-	shader->uploadUniform("u_directionalLightPosition", renderBus.getDirectionalLightingPosition());
-	shader->uploadUniform("u_directionalLightingIntensity", renderBus.getDirectionalLightingIntensity());
-	shader->uploadUniform("u_fogMinDistance", renderBus.getFogMinDistance());
-	shader->uploadUniform("u_fogMaxDistance", renderBus.getFogMaxDistance());
-	shader->uploadUniform("u_fogThickness", renderBus.getFogThickness());
-	shader->uploadUniform("u_fogColor", renderBus.getFogColor());
-	shader->uploadUniform("u_isFogEnabled", renderBus.isFogEnabled());
-	shader->uploadUniform("u_isAmbientLightingEnabled", renderBus.isAmbientLightingEnabled());
-	shader->uploadUniform("u_isDirectionalLightingEnabled", renderBus.isDirectionalLightingEnabled());
-	shader->uploadUniform("u_shadowSize", renderBus.getShadowSize());
-	shader->uploadUniform("u_shadowCenter", renderBus.getShadowCenterPosition());
-	shader->uploadUniform("u_shadowLightness", renderBus.getShadowLightness());
-	shader->uploadUniform("u_isShadowsEnabled", renderBus.isShadowsEnabled());
-	shader->uploadUniform("u_isShadowFrameRenderEnabled", renderBus.isShadowFrameRenderingEnabled());
+	shader->uploadUniform("u_viewMatrix", renderBus->getViewMatrix());
+	shader->uploadUniform("u_projectionMatrix", renderBus->getProjectionMatrix());
+	shader->uploadUniform("u_shadowMatrix", renderBus->getShadowMatrix());
+	shader->uploadUniform("u_clippingPlane", renderBus->getClippingPlane());
+	shader->uploadUniform("u_cameraPosition", renderBus->getCameraPosition());
+	shader->uploadUniform("u_ambientLightingColor", renderBus->getAmbientLightingColor());
+	shader->uploadUniform("u_ambientLightingIntensity", renderBus->getAmbientLightingIntensity());
+	shader->uploadUniform("u_directionalLightingColor", renderBus->getDirectionalLightingColor());
+	shader->uploadUniform("u_directionalLightPosition", renderBus->getDirectionalLightingPosition());
+	shader->uploadUniform("u_directionalLightingIntensity", renderBus->getDirectionalLightingIntensity());
+	shader->uploadUniform("u_fogMinDistance", renderBus->getFogMinDistance());
+	shader->uploadUniform("u_fogMaxDistance", renderBus->getFogMaxDistance());
+	shader->uploadUniform("u_fogThickness", renderBus->getFogThickness());
+	shader->uploadUniform("u_fogColor", renderBus->getFogColor());
+	shader->uploadUniform("u_isFogEnabled", renderBus->isFogEnabled());
+	shader->uploadUniform("u_isAmbientLightingEnabled", renderBus->isAmbientLightingEnabled());
+	shader->uploadUniform("u_isDirectionalLightingEnabled", renderBus->isDirectionalLightingEnabled());
+	shader->uploadUniform("u_shadowSize", renderBus->getShadowSize());
+	shader->uploadUniform("u_shadowCenter", renderBus->getShadowCenterPosition());
+	shader->uploadUniform("u_shadowLightness", renderBus->getShadowLightness());
+	shader->uploadUniform("u_isShadowsEnabled", renderBus->isShadowsEnabled());
+	shader->uploadUniform("u_isShadowFrameRenderEnabled", renderBus->isShadowFrameRenderingEnabled());
 	shader->uploadUniform("u_shadowMap", 0);
 	shader->uploadUniform("u_diffuseMap", 1);
 	shader->uploadUniform("u_normalMap", 2);
@@ -42,7 +42,7 @@ void TerrainEntityColorRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus
 	shader->uploadUniform("u_blueNormalMap", 9);
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, renderBus.getShadowMap()->getID());
+	glBindTexture(GL_TEXTURE_2D, renderBus->getShadowMap()->getID());
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
@@ -116,7 +116,7 @@ void TerrainEntityColorRenderer::render(shared_ptr<ShaderBuffer> shader, RenderB
 
 		glEnable(GL_CULL_FACE);
 
-		shader->uploadUniform("u_isWireframed", (entity->isWireframed() || renderBus.isWireframeRenderingEnabled()));
+		shader->uploadUniform("u_isWireframed", (entity->isWireframed() || renderBus->isWireframeRenderingEnabled()));
 		shader->uploadUniform("u_isSpecular", entity->isSpecular());
 		shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat());
 		shader->uploadUniform("u_redTextureRepeat", entity->getRedTextureRepeat());
@@ -185,7 +185,7 @@ void TerrainEntityColorRenderer::render(shared_ptr<ShaderBuffer> shader, RenderB
 		glBindVertexArray(entity->getMesh()->getVaoID());
 
 		glDrawArrays(GL_TRIANGLES, 0, entity->getMesh()->getVertexCount());
-		renderBus.increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);
+		renderBus->increaseTriangleCount(entity->getMesh()->getVertexCount() / 3);
 
 		glBindVertexArray(0);
 

@@ -100,7 +100,7 @@ void MasterRenderer::render()
 {
 	const auto& config = Config::getInst();
 
-	if(_renderBus.isWireframeRenderingEnabled())
+	if(_renderBus->isWireframeRenderingEnabled())
 	{
 		glViewport(config.getViewportPosition().x, config.getViewportPosition().y, config.getViewportSize().x, config.getViewportSize().y);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -193,71 +193,71 @@ void MasterRenderer::render()
 	_timer->stopDeltaPart();
 }
 
-void MasterRenderer::reloadBloomBlurCaptureBuffer(RenderBus& renderBus)
+void MasterRenderer::reloadBloomBlurCaptureBuffer()
 {
-	_bloomBlurRendererHighQuality.loadCaptureBuffer(Config::getInst().getViewportSize() / renderBus.getBloomQuality());
-	_bloomBlurRendererLowQuality.loadCaptureBuffer(Config::getInst().getViewportSize() / (renderBus.getBloomQuality() * 2));
+	_bloomBlurRendererHighQuality.loadCaptureBuffer(Config::getInst().getViewportSize() / _renderBus->getBloomQuality());
+	_bloomBlurRendererLowQuality.loadCaptureBuffer(Config::getInst().getViewportSize() / (_renderBus->getBloomQuality() * 2));
 }
 
-void MasterRenderer::reloadDofBlurCaptureBuffer(RenderBus& renderBus)
+void MasterRenderer::reloadDofBlurCaptureBuffer()
 {
-	_dofBlurRenderer.loadCaptureBuffer(Config::getInst().getViewportSize() / renderBus.getDofQuality());
+	_dofBlurRenderer.loadCaptureBuffer(Config::getInst().getViewportSize() / _renderBus->getDofQuality());
 }
 
-void MasterRenderer::reloadMotionBlurBlurCaptureBuffer(RenderBus& renderBus)
+void MasterRenderer::reloadMotionBlurBlurCaptureBuffer()
 {
-	_motionBlurBlurRenderer.loadCaptureBuffer(Config::getInst().getViewportSize() / renderBus.getMotionBlurQuality());
+	_motionBlurBlurRenderer.loadCaptureBuffer(Config::getInst().getViewportSize() / _renderBus->getMotionBlurQuality());
 }
 
-void MasterRenderer::reloadCubeReflectionCaptureBuffer(RenderBus& renderBus)
+void MasterRenderer::reloadCubeReflectionCaptureBuffer()
 {
-	_cubeReflectionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(renderBus.getCubeReflectionQuality()), 1, false);
+	_cubeReflectionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus->getCubeReflectionQuality()), 1, false);
 }
 
-void MasterRenderer::reloadPlanarReflectionCaptureBuffer(RenderBus& renderBus)
+void MasterRenderer::reloadPlanarReflectionCaptureBuffer()
 {
-	_planarReflectionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(renderBus.getPlanarReflectionQuality()), 1, false);
+	_planarReflectionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus->getPlanarReflectionQuality()), 1, false);
 }
 
-void MasterRenderer::reloadWaterReflectionCaptureBuffer(RenderBus& renderBus)
+void MasterRenderer::reloadWaterReflectionCaptureBuffer()
 {
-	_waterReflectionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(renderBus.getPlanarReflectionQuality()), 1, false);
+	_waterReflectionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus->getPlanarReflectionQuality()), 1, false);
 }
 
-void MasterRenderer::reloadWaterRefractionCaptureBuffer(RenderBus& renderBus)
+void MasterRenderer::reloadWaterRefractionCaptureBuffer()
 {
-	_waterRefractionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(renderBus.getPlanarRefractionQuality()), 1, false);
+	_waterRefractionCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus->getPlanarRefractionQuality()), 1, false);
 }
 
-void MasterRenderer::reloadShadowCaptureBuffer(RenderBus& renderBus)
+void MasterRenderer::reloadShadowCaptureBuffer()
 {
-	_shadowCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(renderBus.getShadowQuality()));
+	_shadowCaptor = make_shared<CaptureBuffer>(ivec2(0), ivec2(_renderBus->getShadowQuality()));
 }
 
-void MasterRenderer::_updateMotionBlur(RenderBus& renderBus, Camera& camera)
+void MasterRenderer::_updateMotionBlur()
 {
-	if(renderBus.isMotionBlurEnabled())
+	if(_renderBus->isMotionBlurEnabled())
 	{
-		static auto lastYaw = camera.getYaw();
-		static auto lastPitch = camera.getPitch();
-		const auto currentYaw = camera.getYaw();
-		const auto currentPitch = camera.getPitch();
+		static auto lastYaw = _camera->getYaw();
+		static auto lastPitch = _camera->getPitch();
+		const auto currentYaw = _camera->getYaw();
+		const auto currentPitch = _camera->getPitch();
 
 		_cameraYawDifference = fabsf(Math::calculateReferenceAngle(currentYaw) - Math::calculateReferenceAngle(lastYaw));
 		_cameraPitchDifference = fabsf(Math::calculateReferenceAngle(currentPitch) - Math::calculateReferenceAngle(lastPitch));
 
-		lastYaw = camera.getYaw();
-		lastPitch = camera.getPitch();
+		lastYaw = _camera->getYaw();
+		lastPitch = _camera->getPitch();
 	}
 }
 
-void MasterRenderer::_updateLensFlare(RenderBus& renderBus)
+void MasterRenderer::_updateLensFlare()
 {
-	if(renderBus.isLensFlareEnabled())
+	if(_renderBus->isLensFlareEnabled())
 	{
-		auto flareSourcePosition = renderBus.getDirectionalLightingPosition();
-		auto viewMatrix = renderBus.getViewMatrix();
-		auto projectionMatrix = renderBus.getProjectionMatrix();
+		auto flareSourcePosition = _renderBus->getDirectionalLightingPosition();
+		auto viewMatrix = _renderBus->getViewMatrix();
+		auto projectionMatrix = _renderBus->getProjectionMatrix();
 		float transparency = 0.0f;
 
 		fvec4 flareSourceClip = (projectionMatrix * viewMatrix * fvec4(flareSourcePosition.x, flareSourcePosition.y, flareSourcePosition.z, 1.0f));
@@ -266,12 +266,12 @@ void MasterRenderer::_updateLensFlare(RenderBus& renderBus)
 
 		if((flareSourceNdc.x > -1.0f) && (flareSourceNdc.x < 1.0f) && (flareSourceNdc.y > -1.0f) && (flareSourceNdc.y < 1.0f))
 		{
-			transparency = (1.0f - (max(fabsf(flareSourceNdc.x), fabsf(flareSourceNdc.y)) / renderBus.getLensFlareSensitivity()));
+			transparency = (1.0f - (max(fabsf(flareSourceNdc.x), fabsf(flareSourceNdc.y)) / _renderBus->getLensFlareSensitivity()));
 			transparency = clamp(transparency, 0.0f, 1.0f);
 		}
 
-		renderBus.setLensFlareTransparency(transparency);
-		renderBus.setFlareSourcePosition(flareSourcePosition);
-		renderBus.setFlareSourceUv(flareSourceUv);
+		_renderBus->setLensFlareTransparency(transparency);
+		_renderBus->setFlareSourcePosition(flareSourcePosition);
+		_renderBus->setFlareSourceUv(flareSourceUv);
 	}
 }

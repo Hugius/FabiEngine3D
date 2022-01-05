@@ -4,8 +4,8 @@ void ModelEntityDepthRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus& 
 {
 	shader->bind();
 
-	shader->uploadUniform("u_viewMatrix", renderBus.getViewMatrix());
-	shader->uploadUniform("u_projectionMatrix", renderBus.getProjectionMatrix());
+	shader->uploadUniform("u_viewMatrix", renderBus->getViewMatrix());
+	shader->uploadUniform("u_projectionMatrix", renderBus->getProjectionMatrix());
 	shader->uploadUniform("u_diffuseMap", 0);
 
 	glEnable(GL_CLIP_DISTANCE0);
@@ -40,7 +40,7 @@ void ModelEntityDepthRenderer::render(shared_ptr<ShaderBuffer> shader, RenderBus
 		shader->uploadUniform("u_maxHeight", entity->getMaxHeight());
 		shader->uploadUniform("u_clippingY", clippingY);
 		shader->uploadUniform("u_isUnderWater", isUnderWater);
-		shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(renderBus.getViewMatrix())) : renderBus.getViewMatrix()));
+		shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(renderBus->getViewMatrix())) : renderBus->getViewMatrix()));
 		shader->uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
 		for(const auto& partID : entity->getPartIDs())

@@ -7,20 +7,20 @@ void WaterEntityColorRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus& 
 {
 	shader->bind();
 
-	shader->uploadUniform("u_viewMatrix", renderBus.getViewMatrix());
-	shader->uploadUniform("u_projectionMatrix", renderBus.getProjectionMatrix());
-	shader->uploadUniform("u_directionalLightingColor", renderBus.getDirectionalLightingColor());
-	shader->uploadUniform("u_directionalLightPosition", renderBus.getDirectionalLightingPosition());
-	shader->uploadUniform("u_cameraPosition", renderBus.getCameraPosition());
-	shader->uploadUniform("u_fogMinDistance", renderBus.getFogMinDistance());
-	shader->uploadUniform("u_fogMaxDistance", renderBus.getFogMaxDistance());
-	shader->uploadUniform("u_fogThickness", renderBus.getFogThickness());
-	shader->uploadUniform("u_fogColor", renderBus.getFogColor());
-	shader->uploadUniform("u_isFogEnabled", renderBus.isFogEnabled());
-	shader->uploadUniform("u_nearDistance", renderBus.getNearDistance());
-	shader->uploadUniform("u_farDistance", renderBus.getFarDistance());
-	shader->uploadUniform("u_isDirectionalLightingEnabled", renderBus.isDirectionalLightingEnabled());
-	shader->uploadUniform("u_directionalLightingIntensity", renderBus.getDirectionalLightingIntensity());
+	shader->uploadUniform("u_viewMatrix", renderBus->getViewMatrix());
+	shader->uploadUniform("u_projectionMatrix", renderBus->getProjectionMatrix());
+	shader->uploadUniform("u_directionalLightingColor", renderBus->getDirectionalLightingColor());
+	shader->uploadUniform("u_directionalLightPosition", renderBus->getDirectionalLightingPosition());
+	shader->uploadUniform("u_cameraPosition", renderBus->getCameraPosition());
+	shader->uploadUniform("u_fogMinDistance", renderBus->getFogMinDistance());
+	shader->uploadUniform("u_fogMaxDistance", renderBus->getFogMaxDistance());
+	shader->uploadUniform("u_fogThickness", renderBus->getFogThickness());
+	shader->uploadUniform("u_fogColor", renderBus->getFogColor());
+	shader->uploadUniform("u_isFogEnabled", renderBus->isFogEnabled());
+	shader->uploadUniform("u_nearDistance", renderBus->getNearDistance());
+	shader->uploadUniform("u_farDistance", renderBus->getFarDistance());
+	shader->uploadUniform("u_isDirectionalLightingEnabled", renderBus->isDirectionalLightingEnabled());
+	shader->uploadUniform("u_directionalLightingIntensity", renderBus->getDirectionalLightingIntensity());
 	shader->uploadUniform("u_reflectionMap", 0);
 	shader->uploadUniform("u_refractionMap", 1);
 	shader->uploadUniform("u_depthMap", 2);
@@ -29,11 +29,11 @@ void WaterEntityColorRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus& 
 	shader->uploadUniform("u_displacementMap", 5);
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, renderBus.getWaterReflectionMap()->getID());
+	glBindTexture(GL_TEXTURE_2D, renderBus->getWaterReflectionMap()->getID());
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, renderBus.getWaterRefractionMap()->getID());
+	glBindTexture(GL_TEXTURE_2D, renderBus->getWaterRefractionMap()->getID());
 	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, renderBus.getDepthMap()->getID());
+	glBindTexture(GL_TEXTURE_2D, renderBus->getDepthMap()->getID());
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
@@ -115,14 +115,14 @@ void WaterEntityColorRenderer::render(shared_ptr<ShaderBuffer> shader, RenderBus
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
 
-		bool isUnderWater = (renderBus.getCameraPosition().y < (entity->getHeight() + entity->getWaveHeight()));
-		isUnderWater = isUnderWater && (renderBus.getCameraPosition().x > (entity->getSize() / 2.0f));
-		isUnderWater = isUnderWater && (renderBus.getCameraPosition().x < (entity->getSize() / 2.0f));
-		isUnderWater = isUnderWater && (renderBus.getCameraPosition().z > (entity->getSize() / 2.0f));
-		isUnderWater = isUnderWater && (renderBus.getCameraPosition().z < (entity->getSize() / 2.0f));
+		bool isUnderWater = (renderBus->getCameraPosition().y < (entity->getHeight() + entity->getWaveHeight()));
+		isUnderWater = isUnderWater && (renderBus->getCameraPosition().x > (entity->getSize() / 2.0f));
+		isUnderWater = isUnderWater && (renderBus->getCameraPosition().x < (entity->getSize() / 2.0f));
+		isUnderWater = isUnderWater && (renderBus->getCameraPosition().z > (entity->getSize() / 2.0f));
+		isUnderWater = isUnderWater && (renderBus->getCameraPosition().z < (entity->getSize() / 2.0f));
 
 		shader->uploadUniform("u_isUnderWater", isUnderWater);
-		shader->uploadUniform("u_isWireframed", (entity->isWireframed() || renderBus.isWireframeRenderingEnabled()));
+		shader->uploadUniform("u_isWireframed", (entity->isWireframed() || renderBus->isWireframeRenderingEnabled()));
 		shader->uploadUniform("u_rippleOffset", entity->getRippleOffset());
 		shader->uploadUniform("u_waveOffset", entity->getWaveOffset());
 		shader->uploadUniform("u_waveHeight", entity->getWaveHeight());
@@ -168,12 +168,12 @@ void WaterEntityColorRenderer::render(shared_ptr<ShaderBuffer> shader, RenderBus
 		if(entity->hasDisplacementMap())
 		{
 			glDrawArrays(GL_TRIANGLES, 0, entity->getHighQualityVertexBuffer()->getVertexCount());
-			renderBus.increaseTriangleCount(entity->getHighQualityVertexBuffer()->getVertexCount() / 3);
+			renderBus->increaseTriangleCount(entity->getHighQualityVertexBuffer()->getVertexCount() / 3);
 		}
 		else
 		{
 			glDrawArrays(GL_TRIANGLES, 0, entity->getLowQualityVertexBuffer()->getVertexCount());
-			renderBus.increaseTriangleCount(entity->getLowQualityVertexBuffer()->getVertexCount() / 3);
+			renderBus->increaseTriangleCount(entity->getLowQualityVertexBuffer()->getVertexCount() / 3);
 		}
 
 		glBindVertexArray(0);

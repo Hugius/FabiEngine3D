@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\src\aabb_entity_color_renderer.cpp" />
     <ClCompile Include="..\..\..\src\anti_aliasing_renderer.cpp" />
+    <ClCompile Include="..\..\..\src\base_renderer.cpp" />
     <ClCompile Include="..\..\..\src\billboard_entity_depth_renderer.cpp" />
     <ClCompile Include="..\..\..\src\billboard_entity_color_renderer.cpp" />
     <ClCompile Include="..\..\..\src\billboard_entity_shadow_renderer.cpp" />
@@ -57,6 +58,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\src\aabb_entity_color_renderer.hpp" />
     <ClInclude Include="..\..\..\src\anti_aliasing_renderer.hpp" />
+    <ClInclude Include="..\..\..\src\base_renderer.hpp" />
     <ClInclude Include="..\..\..\src\billboard_entity_depth_renderer.hpp" />
     <ClInclude Include="..\..\..\src\billboard_entity_color_renderer.hpp" />
     <ClInclude Include="..\..\..\src\billboard_entity_shadow_renderer.hpp" />

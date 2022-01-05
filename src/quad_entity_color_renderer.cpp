@@ -6,8 +6,8 @@ void QuadEntityColorRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus& r
 {
 	shader->bind();
 
-	shader->uploadUniform("u_nearDistance", renderBus.getNearDistance());
-	shader->uploadUniform("u_farDistance", renderBus.getFarDistance());
+	shader->uploadUniform("u_nearDistance", renderBus->getNearDistance());
+	shader->uploadUniform("u_farDistance", renderBus->getFarDistance());
 	shader->uploadUniform("u_diffuseMap", 0);
 
 	glEnable(GL_BLEND);
@@ -53,7 +53,7 @@ void QuadEntityColorRenderer::render(shared_ptr<ShaderBuffer> shader, RenderBus&
 		glBindVertexArray(buffer->getVaoID());
 
 		glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
-		renderBus.increaseTriangleCount(buffer->getVertexCount() / 3);
+		renderBus->increaseTriangleCount(buffer->getVertexCount() / 3);
 
 		glBindVertexArray(0);
 

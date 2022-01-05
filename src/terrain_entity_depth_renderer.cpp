@@ -5,8 +5,8 @@ void TerrainEntityDepthRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus
 {
 	shader->bind();
 
-	shader->uploadUniform("u_viewMatrix", renderBus.getViewMatrix());
-	shader->uploadUniform("u_projectionMatrix", renderBus.getProjectionMatrix());
+	shader->uploadUniform("u_viewMatrix", renderBus->getViewMatrix());
+	shader->uploadUniform("u_projectionMatrix", renderBus->getProjectionMatrix());
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);

@@ -46,6 +46,9 @@
     <Filter Include="Buffer\Cache">
       <UniqueIdentifier>{3958658e-9f3c-4b81-866f-14d78b557594}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer\Base">
+      <UniqueIdentifier>{83813c54-94d4-4c5a-b4f7-1161832d4096}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\master_renderer_capture_cube.cpp">
@@ -150,6 +153,9 @@
     <ClCompile Include="..\..\..\src\master_renderer_misc.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\base_renderer.cpp">
+      <Filter>Renderer\Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\master_renderer.hpp">
@@ -232,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\buffer_cache.hpp">
       <Filter>Buffer\Cache</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\base_renderer.hpp">
+      <Filter>Renderer\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -4,8 +4,8 @@ void BillboardEntityDepthRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderB
 {
 	shader->bind();
 
-	shader->uploadUniform("u_viewMatrix", renderBus.getViewMatrix());
-	shader->uploadUniform("u_projectionMatrix", renderBus.getProjectionMatrix());
+	shader->uploadUniform("u_viewMatrix", renderBus->getViewMatrix());
+	shader->uploadUniform("u_projectionMatrix", renderBus->getProjectionMatrix());
 	shader->uploadUniform("u_diffuseMap", 0);
 
 	glEnable(GL_CLIP_DISTANCE0);
@@ -33,7 +33,7 @@ void BillboardEntityDepthRenderer::render(shared_ptr<ShaderBuffer> shader, Rende
 	{
 		const auto buffer = entity->getMesh();
 
-		shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(renderBus.getViewMatrix())) : renderBus.getViewMatrix()));
+		shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(renderBus->getViewMatrix())) : renderBus->getViewMatrix()));
 		shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
 		shader->uploadUniform("u_minHeight", entity->getMinHeight());
 		shader->uploadUniform("u_maxHeight", entity->getMaxHeight());

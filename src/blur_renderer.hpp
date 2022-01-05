@@ -6,14 +6,14 @@
 #include "shader_buffer.hpp"
 #include "render_bus.hpp"
 
-class BlurRenderer final
+class BlurRenderer final : BaseRenderer
 {
 public:
-	void bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus);
-	void unbind(shared_ptr<ShaderBuffer> shader);
+	void bind() override;
+	void unbind() override;
 	void loadCaptureBuffer(ivec2 bufferSize);
 
-	const shared_ptr<TextureBuffer> blurTexture(shared_ptr<ShaderBuffer> shader, const shared_ptr<QuadEntity> entity,
+	const shared_ptr<TextureBuffer> blurTexture(const shared_ptr<QuadEntity> entity,
 												shared_ptr<TextureBuffer> texture, unsigned int blurCount,
 												float intensity, BlurDirection direction);
 

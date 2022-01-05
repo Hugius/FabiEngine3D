@@ -10,12 +10,12 @@
 
 using std::unordered_map;
 
-class WaterEntityColorRenderer final
+class WaterEntityColorRenderer final : BaseRenderer
 {
 public:
-	void bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus);
-	void unbind(shared_ptr<ShaderBuffer> shader);
-	void processPointlightEntities(shared_ptr<ShaderBuffer> shader, const unordered_map<string, shared_ptr<PointlightEntity>>& entities);
-	void processSpotlightEntities(shared_ptr<ShaderBuffer> shader, const unordered_map<string, shared_ptr<SpotlightEntity>>& entities);
-	void render(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus, const shared_ptr<WaterEntity> entity);
+	void bind() override;
+	void unbind() override;
+	void processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>>& entities);
+	void processSpotlightEntities(const unordered_map<string, shared_ptr<SpotlightEntity>>& entities);
+	void render(const shared_ptr<WaterEntity> entity);
 };

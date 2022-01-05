@@ -4,12 +4,12 @@
 #include "shader_buffer.hpp"
 #include "render_bus.hpp"
 
-class ModelEntityDepthRenderer final
+class ModelEntityDepthRenderer final : BaseRenderer
 {
 public:
-	void bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus);
-	void unbind(shared_ptr<ShaderBuffer> shader);
-	void render(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus, const shared_ptr<ModelEntity> entity, float clippingY, bool isUnderWater);
+	void bind() override;
+	void unbind() override;
+	void render(const shared_ptr<ModelEntity> entity, float clippingY, bool isUnderWater);
 
 private:
 	static inline const float MIN_TEXTURE_TRANSPARENCY = 0.25f;

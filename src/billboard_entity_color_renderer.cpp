@@ -5,14 +5,14 @@ void BillboardEntityColorRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderB
 {
 	shader->bind();
 
-	shader->uploadUniform("u_projectionMatrix", renderBus.getProjectionMatrix());
-	shader->uploadUniform("u_clippingPlane", renderBus.getClippingPlane());
-	shader->uploadUniform("u_cameraPosition", renderBus.getCameraPosition());
-	shader->uploadUniform("u_fogMinDistance", renderBus.getFogMinDistance());
-	shader->uploadUniform("u_fogMaxDistance", renderBus.getFogMaxDistance());
-	shader->uploadUniform("u_fogThickness", renderBus.getFogThickness());
-	shader->uploadUniform("u_fogColor", renderBus.getFogColor());
-	shader->uploadUniform("u_isFogEnabled", renderBus.isFogEnabled());
+	shader->uploadUniform("u_projectionMatrix", renderBus->getProjectionMatrix());
+	shader->uploadUniform("u_clippingPlane", renderBus->getClippingPlane());
+	shader->uploadUniform("u_cameraPosition", renderBus->getCameraPosition());
+	shader->uploadUniform("u_fogMinDistance", renderBus->getFogMinDistance());
+	shader->uploadUniform("u_fogMaxDistance", renderBus->getFogMaxDistance());
+	shader->uploadUniform("u_fogThickness", renderBus->getFogThickness());
+	shader->uploadUniform("u_fogColor", renderBus->getFogColor());
+	shader->uploadUniform("u_isFogEnabled", renderBus->isFogEnabled());
 	shader->uploadUniform("u_diffuseMap", 0);
 	shader->uploadUniform("u_emissionMap", 1);
 
@@ -49,8 +49,8 @@ void BillboardEntityColorRenderer::render(shared_ptr<ShaderBuffer> shader, Rende
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
 
-		shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(renderBus.getViewMatrix())) : renderBus.getViewMatrix()));
-		shader->uploadUniform("u_isWireframed", (entity->isWireframed() || renderBus.isWireframeRenderingEnabled()));
+		shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(renderBus->getViewMatrix())) : renderBus->getViewMatrix()));
+		shader->uploadUniform("u_isWireframed", (entity->isWireframed() || renderBus->isWireframeRenderingEnabled()));
 		shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
 		shader->uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap());
 		shader->uploadUniform("u_hasEmissionMap", entity->hasEmissionMap());
@@ -81,7 +81,7 @@ void BillboardEntityColorRenderer::render(shared_ptr<ShaderBuffer> shader, Rende
 		glBindVertexArray(buffer->getVaoID());
 
 		glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
-		renderBus.increaseTriangleCount(buffer->getVertexCount() / 3);
+		renderBus->increaseTriangleCount(buffer->getVertexCount() / 3);
 
 		glBindVertexArray(0);
 

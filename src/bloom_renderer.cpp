@@ -7,12 +7,12 @@ void BloomRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus)
 
 	shader->uploadUniform("u_sceneMap", 0);
 	shader->uploadUniform("u_bloomMap", 1);
-	shader->uploadUniform("u_isBloomEnabled", renderBus.isBloomEnabled());
+	shader->uploadUniform("u_isBloomEnabled", renderBus->isBloomEnabled());
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, renderBus.getFinalSceneMap()->getID());
+	glBindTexture(GL_TEXTURE_2D, renderBus->getFinalSceneMap()->getID());
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, renderBus.getBloomMap()->getID());
+	glBindTexture(GL_TEXTURE_2D, renderBus->getBloomMap()->getID());
 }
 
 void BloomRenderer::unbind(shared_ptr<ShaderBuffer> shader)

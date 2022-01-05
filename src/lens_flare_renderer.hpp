@@ -4,10 +4,10 @@
 #include "shader_buffer.hpp"
 #include "render_bus.hpp"
 
-class LensFlareRenderer final
+class LensFlareRenderer final : BaseRenderer
 {
 public:
-	void bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus);
-	void unbind(shared_ptr<ShaderBuffer> shader);
+	void bind() override;
+	void unbind() override;
 	void render(const shared_ptr<QuadEntity> entity);
 };

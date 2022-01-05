@@ -4,10 +4,10 @@
 #include "shader_buffer.hpp"
 #include "render_bus.hpp"
 
-class TerrainEntityDepthRenderer final
+class TerrainEntityDepthRenderer final : BaseRenderer
 {
 public:
-	void bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus);
-	void unbind(shared_ptr<ShaderBuffer> shader);
-	void render(shared_ptr<ShaderBuffer> shader, const shared_ptr<TerrainEntity> entity);
+	void bind() override;
+	void unbind() override;
+	void render(const shared_ptr<TerrainEntity> entity);
 };

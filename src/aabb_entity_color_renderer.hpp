@@ -1,13 +1,12 @@
 #pragma once
 
+#include "base_renderer.hpp"
 #include "aabb_entity.hpp"
-#include "render_bus.hpp"
-#include "shader_buffer.hpp"
 
-class AabbEntityColorRenderer final
+class AabbEntityColorRenderer final : BaseRenderer
 {
 public:
-	void bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus);
-	void unbind(shared_ptr<ShaderBuffer> shader);
-	void render(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus, const shared_ptr<AabbEntity> entity);
+	void bind() override;
+	void unbind() override;
+	void render(const shared_ptr<AabbEntity> entity);
 };

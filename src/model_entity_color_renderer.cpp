@@ -8,28 +8,28 @@ void ModelEntityColorRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus& 
 {
 	shader->bind();
 
-	shader->uploadUniform("u_projectionMatrix", renderBus.getProjectionMatrix());
-	shader->uploadUniform("u_shadowMatrix", renderBus.getShadowMatrix());
-	shader->uploadUniform("u_clippingPlane", renderBus.getClippingPlane());
-	shader->uploadUniform("u_cameraPosition", renderBus.getCameraPosition());
-	shader->uploadUniform("u_ambientLightingColor", renderBus.getAmbientLightingColor());
-	shader->uploadUniform("u_ambientLightingIntensity", renderBus.getAmbientLightingIntensity());
-	shader->uploadUniform("u_directionalLightingColor", renderBus.getDirectionalLightingColor());
-	shader->uploadUniform("u_directionalLightPosition", renderBus.getDirectionalLightingPosition());
-	shader->uploadUniform("u_directionalLightingIntensity", renderBus.getDirectionalLightingIntensity());
-	shader->uploadUniform("u_fogMinDistance", renderBus.getFogMinDistance());
-	shader->uploadUniform("u_fogMaxDistance", renderBus.getFogMaxDistance());
-	shader->uploadUniform("u_fogThickness", renderBus.getFogThickness());
-	shader->uploadUniform("u_fogColor", renderBus.getFogColor());
-	shader->uploadUniform("u_isFogEnabled", renderBus.isFogEnabled());
-	shader->uploadUniform("u_isAmbientLightingEnabled", renderBus.isAmbientLightingEnabled());
-	shader->uploadUniform("u_isDirectionalLightingEnabled", renderBus.isDirectionalLightingEnabled());
-	shader->uploadUniform("u_isReflectionsEnabled", renderBus.isReflectionsEnabled());
-	shader->uploadUniform("u_shadowSize", renderBus.getShadowSize());
-	shader->uploadUniform("u_shadowCenter", renderBus.getShadowCenterPosition());
-	shader->uploadUniform("u_shadowLightness", renderBus.getShadowLightness());
-	shader->uploadUniform("u_isShadowsEnabled", renderBus.isShadowsEnabled());
-	shader->uploadUniform("u_isShadowFrameRenderEnabled", renderBus.isShadowFrameRenderingEnabled());
+	shader->uploadUniform("u_projectionMatrix", renderBus->getProjectionMatrix());
+	shader->uploadUniform("u_shadowMatrix", renderBus->getShadowMatrix());
+	shader->uploadUniform("u_clippingPlane", renderBus->getClippingPlane());
+	shader->uploadUniform("u_cameraPosition", renderBus->getCameraPosition());
+	shader->uploadUniform("u_ambientLightingColor", renderBus->getAmbientLightingColor());
+	shader->uploadUniform("u_ambientLightingIntensity", renderBus->getAmbientLightingIntensity());
+	shader->uploadUniform("u_directionalLightingColor", renderBus->getDirectionalLightingColor());
+	shader->uploadUniform("u_directionalLightPosition", renderBus->getDirectionalLightingPosition());
+	shader->uploadUniform("u_directionalLightingIntensity", renderBus->getDirectionalLightingIntensity());
+	shader->uploadUniform("u_fogMinDistance", renderBus->getFogMinDistance());
+	shader->uploadUniform("u_fogMaxDistance", renderBus->getFogMaxDistance());
+	shader->uploadUniform("u_fogThickness", renderBus->getFogThickness());
+	shader->uploadUniform("u_fogColor", renderBus->getFogColor());
+	shader->uploadUniform("u_isFogEnabled", renderBus->isFogEnabled());
+	shader->uploadUniform("u_isAmbientLightingEnabled", renderBus->isAmbientLightingEnabled());
+	shader->uploadUniform("u_isDirectionalLightingEnabled", renderBus->isDirectionalLightingEnabled());
+	shader->uploadUniform("u_isReflectionsEnabled", renderBus->isReflectionsEnabled());
+	shader->uploadUniform("u_shadowSize", renderBus->getShadowSize());
+	shader->uploadUniform("u_shadowCenter", renderBus->getShadowCenterPosition());
+	shader->uploadUniform("u_shadowLightness", renderBus->getShadowLightness());
+	shader->uploadUniform("u_isShadowsEnabled", renderBus->isShadowsEnabled());
+	shader->uploadUniform("u_isShadowFrameRenderEnabled", renderBus->isShadowFrameRenderingEnabled());
 	shader->uploadUniform("u_previousCubeReflectionMap", 0);
 	shader->uploadUniform("u_currentCubeReflectionMap", 1);
 	shader->uploadUniform("u_planarReflectionMap", 2);
@@ -50,9 +50,9 @@ void ModelEntityColorRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus& 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, renderBus.getPlanarReflectionMap()->getID());
+	glBindTexture(GL_TEXTURE_2D, renderBus->getPlanarReflectionMap()->getID());
 	glActiveTexture(GL_TEXTURE3);
-	glBindTexture(GL_TEXTURE_2D, renderBus.getShadowMap()->getID());
+	glBindTexture(GL_TEXTURE_2D, renderBus->getShadowMap()->getID());
 }
 
 void ModelEntityColorRenderer::unbind(shared_ptr<ShaderBuffer> shader)
@@ -128,7 +128,7 @@ void ModelEntityColorRenderer::render(shared_ptr<ShaderBuffer> shader, RenderBus
 		shader->uploadUniform("u_maxHeight", entity->getMaxHeight());
 		shader->uploadUniform("u_isBright", entity->isBright());
 		shader->uploadUniform("u_cubeReflectionMixValue", entity->getCubeReflectionMixValue());
-		shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(renderBus.getViewMatrix())) : renderBus.getViewMatrix()));
+		shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(renderBus->getViewMatrix())) : renderBus->getViewMatrix()));
 		shader->uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
 		if(entity->isFaceCulled())
@@ -173,7 +173,7 @@ void ModelEntityColorRenderer::render(shared_ptr<ShaderBuffer> shader, RenderBus
 			shader->uploadUniform("u_transformationMatrix", transformationMatrix);
 			shader->uploadUniform("u_normalTransformationMatrix", normalTransformationMatrix);
 			shader->uploadUniform("u_reflectionType", static_cast<int>(entity->getReflectionType(partID)));
-			shader->uploadUniform("u_isWireframed", (entity->isWireframed(partID) || renderBus.isWireframeRenderingEnabled()));
+			shader->uploadUniform("u_isWireframed", (entity->isWireframed(partID) || renderBus->isWireframeRenderingEnabled()));
 
 			if(entity->isWireframed(partID))
 			{
@@ -209,7 +209,7 @@ void ModelEntityColorRenderer::render(shared_ptr<ShaderBuffer> shader, RenderBus
 			glBindVertexArray(buffer->getVaoID());
 
 			glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
-			renderBus.increaseTriangleCount(buffer->getVertexCount() / 3);
+			renderBus->increaseTriangleCount(buffer->getVertexCount() / 3);
 
 			glBindVertexArray(0);
 

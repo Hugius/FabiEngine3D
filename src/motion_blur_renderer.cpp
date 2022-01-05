@@ -7,13 +7,13 @@ void MotionBlurRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus& render
 
 	shader->uploadUniform("u_sceneMap", 0);
 	shader->uploadUniform("u_motionBlurMap", 1);
-	shader->uploadUniform("u_mixValue", renderBus.getMotionBlurMixValue());
-	shader->uploadUniform("u_isMotionBlurEnabled", renderBus.isMotionBlurEnabled());
+	shader->uploadUniform("u_mixValue", renderBus->getMotionBlurMixValue());
+	shader->uploadUniform("u_isMotionBlurEnabled", renderBus->isMotionBlurEnabled());
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, renderBus.getFinalSceneMap()->getID());
+	glBindTexture(GL_TEXTURE_2D, renderBus->getFinalSceneMap()->getID());
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, renderBus.getMotionBlurMap()->getID());
+	glBindTexture(GL_TEXTURE_2D, renderBus->getMotionBlurMap()->getID());
 }
 
 void MotionBlurRenderer::unbind(shared_ptr<ShaderBuffer> shader)

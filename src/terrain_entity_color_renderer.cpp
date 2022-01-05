@@ -41,8 +41,11 @@ void TerrainEntityColorRenderer::bind()
 	_shader->uploadUniform("u_greenNormalMap", 8);
 	_shader->uploadUniform("u_blueNormalMap", 9);
 
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _renderBus->getShadowMap()->getID());
+	if(_renderBus->getShadowMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, _renderBus->getShadowMap()->getID());
+	}
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);

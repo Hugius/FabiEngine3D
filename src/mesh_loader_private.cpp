@@ -104,13 +104,13 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 					isAlreadyExisting = true;
 
 					meshPart->addPosition(temp_positions[indices[0]]);
-					meshPart->addPosition(temp_positions[indices[1]]);
-					meshPart->addPosition(temp_positions[indices[2]]);
-					meshPart->addUv(temp_uvs[indices[3]]);
+					meshPart->addPosition(temp_positions[indices[3]]);
+					meshPart->addPosition(temp_positions[indices[6]]);
+					meshPart->addUv(temp_uvs[indices[1]]);
 					meshPart->addUv(temp_uvs[indices[4]]);
-					meshPart->addUv(temp_uvs[indices[5]]);
-					meshPart->addNormal(temp_normals[indices[6]]);
-					meshPart->addNormal(temp_normals[indices[7]]);
+					meshPart->addUv(temp_uvs[indices[7]]);
+					meshPart->addNormal(temp_normals[indices[2]]);
+					meshPart->addNormal(temp_normals[indices[5]]);
 					meshPart->addNormal(temp_normals[indices[8]]);
 
 					break;
@@ -122,13 +122,13 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 				auto newPart = make_shared<MeshPart>(selectedPartID);
 
 				newPart->addPosition(temp_positions[indices[0]]);
-				newPart->addPosition(temp_positions[indices[1]]);
-				newPart->addPosition(temp_positions[indices[2]]);
-				newPart->addUv(temp_uvs[indices[3]]);
+				newPart->addPosition(temp_positions[indices[3]]);
+				newPart->addPosition(temp_positions[indices[6]]);
+				newPart->addUv(temp_uvs[indices[1]]);
 				newPart->addUv(temp_uvs[indices[4]]);
-				newPart->addUv(temp_uvs[indices[5]]);
-				newPart->addNormal(temp_normals[indices[6]]);
-				newPart->addNormal(temp_normals[indices[7]]);
+				newPart->addUv(temp_uvs[indices[7]]);
+				newPart->addNormal(temp_normals[indices[2]]);
+				newPart->addNormal(temp_normals[indices[5]]);
 				newPart->addNormal(temp_normals[indices[8]]);
 
 				meshParts.push_back(newPart);

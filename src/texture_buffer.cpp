@@ -32,7 +32,6 @@ TextureBuffer::TextureBuffer(shared_ptr<Image> image, bool isMipmapped, bool isA
 
 	if(isMipmapped)
 	{
-
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 

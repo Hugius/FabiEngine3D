@@ -8,14 +8,20 @@ void AntiAliasingRenderer::bind()
 
 	_shader->uploadUniform("u_sceneMap", 0);
 
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _renderBus->getFinalSceneMap()->getID());
+	if(_renderBus->getFinalSceneMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, _renderBus->getFinalSceneMap()->getID());
+	}
 }
 
 void AntiAliasingRenderer::unbind()
 {
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	if(_renderBus->getFinalSceneMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
 
 	_shader->unbind();
 }

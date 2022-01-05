@@ -15,22 +15,40 @@ void DofRenderer::bind()
 	_shader->uploadUniform("u_isDofEnabled", _renderBus->isDofEnabled());
 	_shader->uploadUniform("u_isDofDynamic", _renderBus->isDofDynamic());
 
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _renderBus->getDepthMap()->getID());
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, _renderBus->getFinalSceneMap()->getID());
-	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, _renderBus->getDofMap()->getID());
+	if(_renderBus->getDepthMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, _renderBus->getDepthMap()->getID());
+	}
+	if(_renderBus->getFinalSceneMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, _renderBus->getFinalSceneMap()->getID());
+	}
+	if(_renderBus->getDofMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, _renderBus->getDofMap()->getID());
+	}
 }
 
 void DofRenderer::unbind()
 {
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	if(_renderBus->getDepthMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	if(_renderBus->getFinalSceneMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	if(_renderBus->getDofMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
 
 	_shader->unbind();
 }

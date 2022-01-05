@@ -17,12 +17,21 @@ void LensFlareRenderer::bind()
 	_shader->uploadUniform("u_flareSourceUv", _renderBus->getFlareSourceUv());
 	_shader->uploadUniform("u_isLensFlareEnabled", _renderBus->isLensFlareEnabled());
 
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _renderBus->getDepthMap()->getID());
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, _renderBus->getFinalSceneMap()->getID());
-	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, _renderBus->getLensFlareMap()->getID());
+	if(_renderBus->getDepthMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, _renderBus->getDepthMap()->getID());
+	}
+	if(_renderBus->getFinalSceneMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, _renderBus->getFinalSceneMap()->getID());
+	}
+	if(_renderBus->getLensFlareMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, _renderBus->getLensFlareMap()->getID());
+	}
 }
 
 void LensFlareRenderer::unbind()

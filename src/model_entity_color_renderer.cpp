@@ -49,18 +49,30 @@ void ModelEntityColorRenderer::bind()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, _renderBus->getPlanarReflectionMap()->getID());
-	glActiveTexture(GL_TEXTURE3);
-	glBindTexture(GL_TEXTURE_2D, _renderBus->getShadowMap()->getID());
+	if(_renderBus->getPlanarReflectionMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, _renderBus->getPlanarReflectionMap()->getID());
+	}
+	if(_renderBus->getShadowMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE3);
+		glBindTexture(GL_TEXTURE_2D, _renderBus->getShadowMap()->getID());
+	}
 }
 
 void ModelEntityColorRenderer::unbind()
 {
-	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glActiveTexture(GL_TEXTURE3);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	if(_renderBus->getPlanarReflectionMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	if(_renderBus->getShadowMap() != nullptr)
+	{
+		glActiveTexture(GL_TEXTURE3);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
 
 	glDisable(GL_BLEND);
 

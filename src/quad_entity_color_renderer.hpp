@@ -3,7 +3,7 @@
 #include "base_renderer.hpp"
 #include "quad_entity.hpp"
 
-class QuadEntityColorRenderer final : BaseRenderer
+class QuadEntityColorRenderer final : public BaseRenderer
 {
 public:
 	void bind() override;

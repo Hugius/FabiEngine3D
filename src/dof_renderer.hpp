@@ -3,7 +3,7 @@
 #include "base_renderer.hpp"
 #include "quad_entity.hpp"
 
-class DofRenderer final : BaseRenderer
+class DofRenderer final : public BaseRenderer
 {
 public:
 	void bind() override;

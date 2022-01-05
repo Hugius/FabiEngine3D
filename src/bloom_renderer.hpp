@@ -3,7 +3,7 @@
 #include "base_renderer.hpp"
 #include "quad_entity.hpp"
 
-class BloomRenderer final : BaseRenderer
+class BloomRenderer final : public BaseRenderer
 {
 public:
 	void bind() override;

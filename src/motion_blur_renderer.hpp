@@ -3,7 +3,7 @@
 #include "base_renderer.hpp"
 #include "quad_entity.hpp"
 
-class MotionBlurRenderer final : BaseRenderer
+class MotionBlurRenderer final : public BaseRenderer
 {
 public:
 	void bind() override;

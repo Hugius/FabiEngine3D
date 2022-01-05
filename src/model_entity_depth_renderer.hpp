@@ -3,7 +3,7 @@
 #include "base_renderer.hpp"
 #include "model_entity.hpp"
 
-class ModelEntityDepthRenderer final : BaseRenderer
+class ModelEntityDepthRenderer final : public BaseRenderer
 {
 public:
 	void bind() override;

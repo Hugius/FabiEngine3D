@@ -35,10 +35,8 @@
 
 class Core final
 {
-	friend class FabiEngine3D;
-
-private:
-	Core(FabiEngine3D* fe3d);
+public:
+	Core(FabiEngine3D& fe3d);
 
 	void _start();
 	void _prepare();
@@ -53,7 +51,7 @@ private:
 	bool _isPaused = false;
 	bool _isRunning = false;
 
-	FabiEngine3D* _fe3d = nullptr;
+	FabiEngine3D& _fe3d;
 
 	shared_ptr<LibraryLoader> _libraryLoader = nullptr;
 	shared_ptr<RenderWindow> _renderWindow = nullptr;

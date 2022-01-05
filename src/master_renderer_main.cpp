@@ -51,11 +51,56 @@ MasterRenderer::MasterRenderer()
 	_bloomBlurRendererLowQuality.loadCaptureBuffer(Config::getInst().getViewportSize() / (Config::MIN_BLOOM_QUALITY * 2));
 	_dofBlurRenderer.loadCaptureBuffer(Config::getInst().getViewportSize() / Config::MIN_DOF_QUALITY);
 	_motionBlurBlurRenderer.loadCaptureBuffer(Config::getInst().getViewportSize() / Config::MIN_MOTION_BLUR_QUALITY);
+
+	_skyEntityColorRenderer.inject(_skyEntityColorShader);
+	_terrainEntityColorRenderer.inject(_terrainEntityColorShader);
+	_terrainEntityDepthRenderer.inject(_terrainEntityDepthShader);
+	_waterEntityColorRenderer.inject(_waterEntityColorShader);
+	_modelEntityColorRenderer.inject(_modelEntityColorShader);
+	_modelEntityDepthRenderer.inject(_modelEntityDepthShader);
+	_modelEntityShadowRenderer.inject(_modelEntityShadowShader);
+	_billboardEntityColorRenderer.inject(_billboardEntityColorShader);
+	_billboardEntityDepthRenderer.inject(_billboardEntityDepthShader);
+	_billboardEntityShadowRenderer.inject(_billboardEntityShadowShader);
+	_aabbEntityColorRenderer.inject(_aabbEntityColorShader);
+	_quadEntityColorRenderer.inject(_quadEntityColorShader);
+	_antiAliasingRenderer.inject(_antiAliasingShader);
+	_bloomRenderer.inject(_bloomShader);
+	_dofRenderer.inject(_dofShader);
+	_lensFlareRenderer.inject(_lensFlareShader);
+	_motionBlurRenderer.inject(_motionBlurShader);
+	_bloomBlurRendererHighQuality.inject(_blurShader);
+	_bloomBlurRendererLowQuality.inject(_blurShader);
+	_dofBlurRenderer.inject(_blurShader);
+	_motionBlurBlurRenderer.inject(_blurShader);
+
 }
 
 void MasterRenderer::inject(shared_ptr<RenderBus> renderBus)
 {
 	_renderBus = renderBus;
+
+	_skyEntityColorRenderer.inject(_renderBus);
+	_terrainEntityColorRenderer.inject(_renderBus);
+	_terrainEntityDepthRenderer.inject(_renderBus);
+	_waterEntityColorRenderer.inject(_renderBus);
+	_modelEntityColorRenderer.inject(_renderBus);
+	_modelEntityDepthRenderer.inject(_renderBus);
+	_modelEntityShadowRenderer.inject(_renderBus);
+	_billboardEntityColorRenderer.inject(_renderBus);
+	_billboardEntityDepthRenderer.inject(_renderBus);
+	_billboardEntityShadowRenderer.inject(_renderBus);
+	_aabbEntityColorRenderer.inject(_renderBus);
+	_quadEntityColorRenderer.inject(_renderBus);
+	_antiAliasingRenderer.inject(_renderBus);
+	_bloomRenderer.inject(_renderBus);
+	_dofRenderer.inject(_renderBus);
+	_lensFlareRenderer.inject(_renderBus);
+	_motionBlurRenderer.inject(_renderBus);
+	_bloomBlurRendererHighQuality.inject(_renderBus);
+	_bloomBlurRendererLowQuality.inject(_renderBus);
+	_dofBlurRenderer.inject(_renderBus);
+	_motionBlurBlurRenderer.inject(_renderBus);
 }
 
 void MasterRenderer::inject(shared_ptr<Camera> camera)

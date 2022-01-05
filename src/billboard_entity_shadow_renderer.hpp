@@ -3,7 +3,7 @@
 #include "base_renderer.hpp"
 #include "billboard_entity.hpp"
 
-class BillboardEntityShadowRenderer final : BaseRenderer
+class BillboardEntityShadowRenderer final : public BaseRenderer
 {
 public:
 	void bind() override;

@@ -3,7 +3,7 @@
 #include "base_renderer.hpp"
 #include "quad_entity.hpp"
 
-class AntiAliasingRenderer final : BaseRenderer
+class AntiAliasingRenderer final : public BaseRenderer
 {
 public:
 	void bind() override;

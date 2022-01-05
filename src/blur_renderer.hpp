@@ -5,7 +5,7 @@
 #include "capture_buffer.hpp"
 #include "blur_direction.hpp"
 
-class BlurRenderer final : BaseRenderer
+class BlurRenderer final : public BaseRenderer
 {
 public:
 	void bind() override;

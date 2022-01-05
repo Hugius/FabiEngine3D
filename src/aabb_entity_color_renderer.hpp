@@ -3,7 +3,7 @@
 #include "base_renderer.hpp"
 #include "aabb_entity.hpp"
 
-class AabbEntityColorRenderer final : BaseRenderer
+class AabbEntityColorRenderer final : public BaseRenderer
 {
 public:
 	void bind() override;

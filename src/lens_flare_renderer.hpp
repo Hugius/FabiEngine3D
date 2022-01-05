@@ -3,7 +3,7 @@
 #include "base_renderer.hpp"
 #include "quad_entity.hpp"
 
-class LensFlareRenderer final : BaseRenderer
+class LensFlareRenderer final : public BaseRenderer
 {
 public:
 	void bind() override;

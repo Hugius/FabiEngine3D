@@ -7,21 +7,7 @@ void Core::_render()
 {
 	_renderBus->resetTriangleCount();
 
-	const auto mainSky = _skyEntityManager->getSelectedMainSky();
-	const auto mixSky = _skyEntityManager->getSelectedMixSky();
-	const auto terrain = _terrainEntityManager->getSelectedTerrain();
-	const auto water = _waterEntityManager->getSelectedWater();
-	const auto models = _modelEntityManager->getEntities();
-	const auto billboards = _billboardEntityManager->getEntities();
-	const auto AABBs = _aabbEntityManager->getEntities();
-	const auto pointlights = _pointlightEntityManager->getEntities();
-	const auto spotlights = _spotlightEntityManager.getEntities();
-	const auto reflections = _reflectionEntityManager->getEntities();
-	const auto quads = _quadEntityManager->getEntities();
-	const auto texts = _textEntityManager->getEntities();
-	EntityBus entityBus(mainSky, mixSky, terrain, water, models, billboards, AABBs, pointlights, spotlights, reflections, quads, texts);
-
-	_masterRenderer->render();
+	_masterRenderer->renderApplication();
 
 	_timer->startDeltaPart("bufferSwap");
 	_renderWindow->swapBackBuffer();
@@ -100,7 +86,7 @@ void Core::_prepare()
 		_renderWindow->enableColorKeying(keyingColor);
 		_renderWindow->setSize(logoResolution);
 		_renderWindow->showWindow();
-		_masterRenderer->render(_renderBus, logo, logoResolution);
+		_masterRenderer->renderLogo(logo, logoResolution);
 		_renderWindow->swapBackBuffer();
 	}
 

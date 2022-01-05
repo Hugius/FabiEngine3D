@@ -73,30 +73,26 @@ void MasterRenderer::inject(shared_ptr<Timer> timer)
 	_timer = timer;
 }
 
-void MasterRenderer::inject(shared_ptr<EntityBus> entityBus)
-{
-	_entityBus = entityBus;
-}
-
 void MasterRenderer::update()
 {
 	_updateMotionBlur();
 	_updateLensFlare();
 }
 
-void MasterRenderer::render(shared_ptr<QuadEntity> logo, ivec2 viewport)
+void MasterRenderer::renderLogo(shared_ptr<QuadEntity> logo, ivec2 viewport)
 {
 	glViewport(0, 0, viewport.x, viewport.y);
+
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	_quadEntityColorRenderer.bind(_quadEntityColorShader);
+	_quadEntityColorRenderer.bind();
 
-	_quadEntityColorRenderer.render(_quadEntityColorShader, logo);
+	_quadEntityColorRenderer.render(logo);
 
-	_quadEntityColorRenderer.unbind(_quadEntityColorShader);
+	_quadEntityColorRenderer.unbind();
 }
 
-void MasterRenderer::render()
+void MasterRenderer::renderApplication()
 {
 	const auto& config = Config::getInst();
 

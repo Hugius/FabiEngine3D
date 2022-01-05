@@ -18,11 +18,11 @@ void MasterRenderer::_capturePlanarReflections()
 
 	if(!anyReflectiveModelFound)
 	{
-		renderBus->setPlanarReflectionMap(0);
+		_renderBus->setPlanarReflectionMap(0);
 		return;
 	}
 
-	float cameraDistance = (camera.getPosition().y - renderBus->getPlanarReflectionHeight());
+	float cameraDistance = (_camera->getPosition().y - _renderBus->getPlanarReflectionHeight());
 
 	_planarReflectionCaptor->bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -58,18 +58,18 @@ void MasterRenderer::_capturePlanarReflections()
 		}
 	}
 
-	const fvec3 initialCameraPosition = camera.getPosition();
-	camera.setPosition(fvec3(initialCameraPosition.x, initialCameraPosition.y - (cameraDistance * 2.0f), initialCameraPosition.z));
+	const fvec3 initialCameraPosition = _camera->getPosition();
+	_camera->setPosition(fvec3(initialCameraPosition.x, initialCameraPosition.y - (cameraDistance * 2.0f), initialCameraPosition.z));
 
-	const float initialCameraPitch = camera.getPitch();
-	camera.setPitch(-initialCameraPitch);
+	const float initialCameraPitch = _camera->getPitch();
+	_camera->setPitch(-initialCameraPitch);
 
-	camera.updateMatrices(renderBus);
+	_camera->updateMatrices();
 
-	renderBus->setCameraPosition(initialCameraPosition);
-	renderBus->setCameraPitch(initialCameraPitch);
+	_renderBus->setCameraPosition(initialCameraPosition);
+	_renderBus->setCameraPitch(initialCameraPitch);
 
-	renderBus->setReflectionsEnabled(false);
+	_renderBus->setReflectionsEnabled(false);
 
 	float oldSkyLightness = 0.0f;
 	auto skyEntity = entityBus.getMainSkyEntity();
@@ -79,24 +79,24 @@ void MasterRenderer::_capturePlanarReflections()
 		skyEntity->setLightness(skyEntity->getInitialLightness());
 	}
 
-	const float clippingHeight = -(renderBus->getPlanarReflectionHeight() + 0.0000001f);
+	const float clippingHeight = -(_renderBus->getPlanarReflectionHeight() + 0.0000001f);
 	const fvec4 clippingPlane = fvec4(0.0f, 1.0f, 0.0f, clippingHeight);
-	renderBus->setClippingPlane(clippingPlane);
+	_renderBus->setClippingPlane(clippingPlane);
 
-	_renderSkyEntity(renderBus, entityBus);
+	_renderSkyEntity();
 
 	glEnable(GL_CLIP_DISTANCE0);
-	_renderTerrainEntity(renderBus, entityBus);
+	_renderTerrainEntity();
 	glDisable(GL_CLIP_DISTANCE0);
 
 	glEnable(GL_CLIP_DISTANCE2);
-	_renderModelEntities(renderBus, entityBus);
-	_renderBillboardEntities(renderBus, entityBus);
+	_renderModelEntities();
+	_renderBillboardEntities();
 	glDisable(GL_CLIP_DISTANCE2);
 
 	_planarReflectionCaptor->unbind();
 
-	renderBus->setPlanarReflectionMap(_planarReflectionCaptor->getTexture(0));
+	_renderBus->setPlanarReflectionMap(_planarReflectionCaptor->getTexture(0));
 
 	for(const auto& [key, entity] : entityBus.getModelEntities())
 	{
@@ -120,13 +120,13 @@ void MasterRenderer::_capturePlanarReflections()
 		}
 	}
 
-	camera.setPitch(initialCameraPitch);
+	_camera->setPitch(initialCameraPitch);
 
-	camera.setPosition(initialCameraPosition);
+	_camera->setPosition(initialCameraPosition);
 
-	camera.updateMatrices(renderBus);
+	_camera->updateMatrices();
 
-	renderBus->setReflectionsEnabled(true);
+	_renderBus->setReflectionsEnabled(true);
 
 	if(skyEntity != nullptr)
 	{

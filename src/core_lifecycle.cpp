@@ -41,8 +41,6 @@ Core::Core(FabiEngine3D& fe3d)
 	_raycaster = make_shared<Raycaster>();
 	_masterRenderer = make_shared<MasterRenderer>();
 	_bufferCache = make_shared<BufferCache>();
-
-
 }
 
 void Core::_start()

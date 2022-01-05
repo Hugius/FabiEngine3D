@@ -1,8 +1,5 @@
 #pragma once
 
-#include "capture_buffer.hpp"
-#include "camera.hpp"
-#include "entity_bus.hpp"
 #include "sky_entity_color_renderer.hpp"
 #include "terrain_entity_color_renderer.hpp"
 #include "terrain_entity_depth_renderer.hpp"
@@ -22,8 +19,19 @@
 #include "motion_blur_renderer.hpp"
 #include "blur_renderer.hpp"
 #include "timer.hpp"
-#include "image_loader.hpp"
+#include "camera.hpp"
 #include "shadow_generator.hpp"
+#include "sky_entity_manager.hpp"
+#include "terrain_entity_manager.hpp"
+#include "water_entity_manager.hpp"
+#include "model_entity_manager.hpp"
+#include "billboard_entity_manager.hpp"
+#include "aabb_entity_manager.hpp"
+#include "pointlight_entity_manager.hpp"
+#include "spotlight_entity_manager.hpp"
+#include "reflection_entity_manager.hpp"
+#include "quad_entity_manager.hpp"
+#include "text_entity_manager.hpp"
 
 class MasterRenderer final
 {
@@ -34,10 +42,9 @@ public:
 	void inject(shared_ptr<Camera> camera);
 	void inject(shared_ptr<ShadowGenerator> shadowGenerator);
 	void inject(shared_ptr<Timer> timer);
-	void inject(shared_ptr<EntityBus> entityBus);
 	void update();
-	void render(shared_ptr<QuadEntity> entity, ivec2 viewport);
-	void render();
+	void renderLogo(shared_ptr<QuadEntity> logo, ivec2 viewport);
+	void renderApplication();
 	void reloadBloomBlurCaptureBuffer();
 	void reloadDofBlurCaptureBuffer();
 	void reloadMotionBlurBlurCaptureBuffer();
@@ -140,5 +147,15 @@ private:
 	shared_ptr<Camera> _camera = nullptr;
 	shared_ptr<ShadowGenerator> _shadowGenerator = nullptr;
 	shared_ptr<Timer> _timer = nullptr;
-	shared_ptr<EntityBus> _entityBus = nullptr;
+	shared_ptr<SkyEntityManager> _skyEntityManager = nullptr;
+	shared_ptr<TerrainEntityManager> _terrainEntityManager = nullptr;
+	shared_ptr<WaterEntityManager> _waterEntityManager = nullptr;
+	shared_ptr<ModelEntityManager> _modelEntityManager = nullptr;
+	shared_ptr<BillboardEntityManager> _billboardEntityManager = nullptr;
+	shared_ptr<AabbEntityManager> _aabbEntityManager = nullptr;
+	shared_ptr<QuadEntityManager> _quadEntityManager = nullptr;
+	shared_ptr<TextEntityManager> _textEntityManager = nullptr;
+	shared_ptr<PointlightEntityManager> _pointlightEntityManager = nullptr;
+	shared_ptr<SpotlightEntityManager> _spotlightEntityManager = nullptr;
+	shared_ptr<ReflectionEntityManager> _reflectionEntityManager = nullptr;
 };

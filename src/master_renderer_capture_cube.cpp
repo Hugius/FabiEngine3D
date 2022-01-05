@@ -7,13 +7,13 @@ void MasterRenderer::_captureCubeReflections()
 		return;
 	}
 
-	const auto reflectionQuality = renderBus->getCubeReflectionQuality();
+	const auto reflectionQuality = _renderBus->getCubeReflectionQuality();
 
-	const auto initialCameraAspectRatio = camera.getAspectRatio();
-	const auto initialCameraFOV = camera.getFOV();
-	const auto initialCameraYaw = camera.getYaw();
-	const auto initialCameraPitch = camera.getPitch();
-	const auto initialCameraPosition = camera.getPosition();
+	const auto initialCameraAspectRatio = _camera->getAspectRatio();
+	const auto initialCameraFOV = _camera->getFOV();
+	const auto initialCameraYaw = _camera->getYaw();
+	const auto initialCameraPitch = _camera->getPitch();
+	const auto initialCameraPosition = _camera->getPosition();
 
 	vector<string> savedModelEntityIDs;
 	for(const auto& [key, entity] : entityBus.getModelEntities())
@@ -35,7 +35,7 @@ void MasterRenderer::_captureCubeReflections()
 		}
 	}
 
-	renderBus->setReflectionsEnabled(false);
+	_renderBus->setReflectionsEnabled(false);
 
 	float oldLightness = 0.0f;
 	auto skyEntity = entityBus.getMainSkyEntity();
@@ -45,9 +45,9 @@ void MasterRenderer::_captureCubeReflections()
 		skyEntity->setLightness(skyEntity->getInitialLightness());
 	}
 
-	camera.invertUpVector();
-	camera.setAspectRatio(1.0f);
-	camera.setFOV(90.0f);
+	_camera->invertUpVector();
+	_camera->setAspectRatio(1.0f);
+	_camera->setFOV(90.0f);
 
 	for(const auto& [key, entity] : entityBus.getReflectionEntities())
 	{
@@ -65,58 +65,58 @@ void MasterRenderer::_captureCubeReflections()
 
 			for(unsigned int i = 0; i < 6; i++)
 			{
-				camera.setPosition(entity->getPosition());
+				_camera->setPosition(entity->getPosition());
 
 				switch(i)
 				{
 					case 0:
 					{
-						camera.setYaw(0.0f);
-						camera.setPitch(0.0f);
+						_camera->setYaw(0.0f);
+						_camera->setPitch(0.0f);
 						break;
 					}
 					case 1:
 					{
-						camera.setYaw(180.0f);
-						camera.setPitch(0.0f);
+						_camera->setYaw(180.0f);
+						_camera->setPitch(0.0f);
 						break;
 					}
 					case 2:
 					{
-						camera.setYaw(90.0f);
-						camera.setPitch(90.0f);
+						_camera->setYaw(90.0f);
+						_camera->setPitch(90.0f);
 						break;
 					}
 					case 3:
 					{
-						camera.setYaw(90.0f);
-						camera.setPitch(270.0f);
+						_camera->setYaw(90.0f);
+						_camera->setPitch(270.0f);
 						break;
 					}
 					case 4:
 					{
-						camera.setYaw(90.0f);
-						camera.setPitch(0.0f);
+						_camera->setYaw(90.0f);
+						_camera->setPitch(0.0f);
 						break;
 					}
 					case 5:
 					{
-						camera.setYaw(270.0f);
-						camera.setPitch(0.0f);
+						_camera->setYaw(270.0f);
+						_camera->setPitch(0.0f);
 						break;
 					}
 				}
 
-				camera.updateMatrices(renderBus);
+				_camera->updateMatrices();
 
-				shadowGenerator.generate(renderBus);
-				_captureShadows(renderBus, entityBus);
+				_shadowGenerator->generate();
+				_captureShadows();
 
 				_cubeReflectionCaptor->bind();
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-				_renderSkyEntity(renderBus, entityBus);
-				_renderTerrainEntity(renderBus, entityBus);
-				_renderModelEntities(renderBus, entityBus);
+				_renderSkyEntity();
+				_renderTerrainEntity();
+				_renderModelEntities();
 				_cubeReflectionCaptor->unbind();
 
 				const auto dataSize = (reflectionQuality * reflectionQuality * 3);
@@ -158,20 +158,20 @@ void MasterRenderer::_captureCubeReflections()
 		}
 	}
 
-	renderBus->setReflectionsEnabled(true);
+	_renderBus->setReflectionsEnabled(true);
 
 	if(skyEntity != nullptr)
 	{
 		skyEntity->setLightness(oldLightness);
 	}
 
-	camera.invertUpVector();
-	camera.setAspectRatio(initialCameraAspectRatio);
-	camera.setFOV(initialCameraFOV);
-	camera.setYaw(initialCameraYaw);
-	camera.setPitch(initialCameraPitch);
-	camera.setPosition(initialCameraPosition);
-	camera.updateMatrices(renderBus);
+	_camera->invertUpVector();
+	_camera->setAspectRatio(initialCameraAspectRatio);
+	_camera->setFOV(initialCameraFOV);
+	_camera->setYaw(initialCameraYaw);
+	_camera->setPitch(initialCameraPitch);
+	_camera->setPosition(initialCameraPosition);
+	_camera->updateMatrices();
 
-	shadowGenerator.generate(renderBus);
+	_shadowGenerator->generate();
 }

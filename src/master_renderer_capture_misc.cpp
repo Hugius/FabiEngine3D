@@ -3,21 +3,21 @@
 
 void MasterRenderer::_captureWorldDepth()
 {
-	auto modelEntities = entityBus.getModelEntities();
-	auto billboardEntities = entityBus.getBillboardEntities();
+	auto modelEntities = _entityBus->getModelEntities();
+	auto billboardEntities = _entityBus->getBillboardEntities();
 	float clippingY = numeric_limits<float>::lowest();
-	const bool waterDepthNeeded = (entityBus.getWaterEntity() != nullptr) && (entityBus.getWaterEntity()->getTransparency() > 0.0f);
+	const bool waterDepthNeeded = (_entityBus->getWaterEntity() != nullptr) && (_entityBus->getWaterEntity()->getTransparency() > 0.0f);
 	bool isUnderWater = false;
 
 	if(waterDepthNeeded)
 	{
-		auto waterEntity = entityBus.getWaterEntity();
+		auto waterEntity = _entityBus->getWaterEntity();
 		float waveHeight = (waterEntity->hasDisplacementMap() ? waterEntity->getWaveHeight() : 0.0f);
-		isUnderWater = (renderBus->getCameraPosition().y < (waterEntity->getHeight() + waveHeight));
-		isUnderWater = (isUnderWater && (renderBus->getCameraPosition().x > (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (renderBus->getCameraPosition().x < (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (renderBus->getCameraPosition().z > (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (renderBus->getCameraPosition().z < (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (_renderBus->getCameraPosition().y < (waterEntity->getHeight() + waveHeight));
+		isUnderWater = (isUnderWater && (_renderBus->getCameraPosition().x > (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_renderBus->getCameraPosition().x < (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_renderBus->getCameraPosition().z > (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_renderBus->getCameraPosition().z < (waterEntity->getSize() / 2.0f)));
 
 		if(isUnderWater)
 		{
@@ -29,23 +29,23 @@ void MasterRenderer::_captureWorldDepth()
 		}
 	}
 
-	if(renderBus->isDofEnabled() || renderBus->isLensFlareEnabled() || waterDepthNeeded)
+	if(_renderBus->isDofEnabled() || _renderBus->isLensFlareEnabled() || waterDepthNeeded)
 	{
 		_worldDepthCaptor->bind();
 		glClear(GL_DEPTH_BUFFER_BIT);
 
-		if(entityBus.getTerrainEntity() != nullptr)
+		if(_entityBus->getTerrainEntity() != nullptr)
 		{
-			_terrainEntityDepthRenderer.bind(_terrainEntityDepthShader, renderBus);
+			_terrainEntityDepthRenderer.bind();
 
-			_terrainEntityDepthRenderer.render(_terrainEntityDepthShader, entityBus.getTerrainEntity());
+			_terrainEntityDepthRenderer.render(_entityBus->getTerrainEntity());
 
-			_terrainEntityDepthRenderer.unbind(_terrainEntityDepthShader);
+			_terrainEntityDepthRenderer.unbind();
 		}
 
 		if(!modelEntities.empty())
 		{
-			_modelEntityDepthRenderer.bind(_modelEntityDepthShader, renderBus);
+			_modelEntityDepthRenderer.bind();
 
 			for(const auto& [key, modelEntity] : modelEntities)
 			{
@@ -69,7 +69,7 @@ void MasterRenderer::_captureWorldDepth()
 							levelOfDetailEntity->setVisible(modelEntity->isVisible());
 							levelOfDetailEntity->updateTransformationMatrix();
 
-							_modelEntityDepthRenderer.render(_modelEntityDepthShader, renderBus, levelOfDetailEntity, clippingY, isUnderWater);
+							_modelEntityDepthRenderer.render(levelOfDetailEntity, clippingY, isUnderWater);
 
 							levelOfDetailEntity->setBasePosition(initialPosition);
 							levelOfDetailEntity->setBaseRotation(initialRotation);
@@ -84,79 +84,79 @@ void MasterRenderer::_captureWorldDepth()
 					}
 					else
 					{
-						_modelEntityDepthRenderer.render(_modelEntityDepthShader, renderBus, modelEntity, clippingY, isUnderWater);
+						_modelEntityDepthRenderer.render(modelEntity, clippingY, isUnderWater);
 					}
 				}
 			}
 
-			_modelEntityDepthRenderer.unbind(_modelEntityDepthShader);
+			_modelEntityDepthRenderer.unbind();
 		}
 
 		if(!billboardEntities.empty())
 		{
-			_billboardEntityDepthRenderer.bind(_billboardEntityDepthShader, renderBus);
+			_billboardEntityDepthRenderer.bind();
 
 			for(const auto& [key, entity] : billboardEntities)
 			{
 				if(entity->isDepthMapIncluded())
 				{
-					_billboardEntityDepthRenderer.render(_billboardEntityDepthShader, renderBus, entity, clippingY, isUnderWater);
+					_billboardEntityDepthRenderer.render(entity, clippingY, isUnderWater);
 				}
 			}
 
-			_billboardEntityDepthRenderer.unbind(_billboardEntityDepthShader);
+			_billboardEntityDepthRenderer.unbind();
 		}
 
 		_worldDepthCaptor->unbind();
 
-		renderBus->setDepthMap(_worldDepthCaptor->getTexture(0));
+		_renderBus->setDepthMap(_worldDepthCaptor->getTexture(0));
 	}
 	else
 	{
-		renderBus->setDepthMap(0);
+		_renderBus->setDepthMap(0);
 	}
 }
 
-void MasterRenderer::_captureDOF(RenderBus& renderBus)
+void MasterRenderer::_captureDOF()
 {
-	if(renderBus->isDofEnabled())
+	if(_renderBus->isDofEnabled())
 	{
-		_dofBlurRenderer.bind(_blurShader, renderBus);
-		renderBus->setDofMap(_dofBlurRenderer.blurTexture(_blurShader, _renderQuad, renderBus->getFinalSceneMap(), 2, 1.0f, BlurDirection::BOTH));
-		_dofBlurRenderer.unbind(_blurShader);
+		_dofBlurRenderer.bind();
+		_renderBus->setDofMap(_dofBlurRenderer.blurTexture(_renderQuad, _renderBus->getFinalSceneMap(), 2, 1.0f, BlurDirection::BOTH));
+		_dofBlurRenderer.unbind();
 
 		_dofCaptor->bind();
-		_dofRenderer.bind(_dofShader, renderBus);
+		_dofRenderer.bind();
 		_dofRenderer.render(_renderQuad);
-		_dofRenderer.unbind(_dofShader);
+		_dofRenderer.unbind();
 		_dofCaptor->unbind();
-		renderBus->setFinalSceneMap(_dofCaptor->getTexture(0));
+		_renderBus->setFinalSceneMap(_dofCaptor->getTexture(0));
 	}
 	else
 	{
-		renderBus->setDofMap(0);
+		_renderBus->setDofMap(0);
 	}
 }
 
-void MasterRenderer::_captureLensFlare(RenderBus& renderBus)
+void MasterRenderer::_captureLensFlare()
 {
-	if(renderBus->isLensFlareEnabled())
+	if(_renderBus->isLensFlareEnabled())
 	{
 		_lensFlareCaptor->bind();
-		_lensFlareRenderer.bind(_lensFlareShader, renderBus);
+		_lensFlareRenderer.bind();
 		_lensFlareRenderer.render(_renderQuad);
-		_lensFlareRenderer.unbind(_lensFlareShader);
+		_lensFlareRenderer.unbind();
 		_lensFlareCaptor->unbind();
-		renderBus->setFinalSceneMap(_lensFlareCaptor->getTexture(0));
+		_renderBus->setFinalSceneMap(_lensFlareCaptor->getTexture(0));
 	}
 }
 
-void MasterRenderer::_captureMotionBlur(RenderBus& renderBus)
+void MasterRenderer::_captureMotionBlur()
 {
-	if(renderBus->isMotionBlurEnabled())
+	if(_renderBus->isMotionBlurEnabled())
 	{
-		float xDifference = (_cameraYawDifference * renderBus->getMotionBlurStrength());
-		float yDifference = (_cameraPitchDifference * renderBus->getMotionBlurStrength());
+		float xDifference = (_cameraYawDifference * _renderBus->getMotionBlurStrength());
+		float yDifference = (_cameraPitchDifference * _renderBus->getMotionBlurStrength());
 
 		bool hasMoved = false;
 		BlurDirection direction;
@@ -167,104 +167,104 @@ void MasterRenderer::_captureMotionBlur(RenderBus& renderBus)
 			{
 				hasMoved = true;
 				direction = BlurDirection::HORIZONTAL;
-				renderBus->setMotionBlurMixValue(xDifference);
+				_renderBus->setMotionBlurMixValue(xDifference);
 			}
 			else
 			{
 				hasMoved = true;
 				direction = BlurDirection::VERTICAL;
-				renderBus->setMotionBlurMixValue(yDifference);
+				_renderBus->setMotionBlurMixValue(yDifference);
 			}
 		}
 
 		if(hasMoved)
 		{
-			_motionBlurBlurRenderer.bind(_blurShader, renderBus);
-			renderBus->setMotionBlurMap(_motionBlurBlurRenderer.blurTexture(_blurShader, _renderQuad, renderBus->getFinalSceneMap(), 5, 1.0f, direction));
-			_motionBlurBlurRenderer.unbind(_blurShader);
+			_motionBlurBlurRenderer.bind();
+			_renderBus->setMotionBlurMap(_motionBlurBlurRenderer.blurTexture(_renderQuad, _renderBus->getFinalSceneMap(), 5, 1.0f, direction));
+			_motionBlurBlurRenderer.unbind();
 		}
 		else
 		{
-			renderBus->setMotionBlurMixValue(0.0f);
-			renderBus->setMotionBlurMap(0);
+			_renderBus->setMotionBlurMixValue(0.0f);
+			_renderBus->setMotionBlurMap(0);
 		}
 
 		_motionBlurCaptor->bind();
-		_motionBlurRenderer.bind(_motionBlurShader, renderBus);
+		_motionBlurRenderer.bind();
 		_motionBlurRenderer.render(_renderQuad);
-		_motionBlurRenderer.unbind(_motionBlurShader);
+		_motionBlurRenderer.unbind();
 		_motionBlurCaptor->unbind();
-		renderBus->setFinalSceneMap(_motionBlurCaptor->getTexture(0));
+		_renderBus->setFinalSceneMap(_motionBlurCaptor->getTexture(0));
 	}
 	else
 	{
-		renderBus->setMotionBlurMap(0);
+		_renderBus->setMotionBlurMap(0);
 	}
 }
 
-void MasterRenderer::_captureAntiAliasing(RenderBus& renderBus)
+void MasterRenderer::_captureAntiAliasing()
 {
-	if(renderBus->isAntiAliasingEnabled())
+	if(_renderBus->isAntiAliasingEnabled())
 	{
 		_antiAliasingCaptor->bind();
-		_antiAliasingRenderer.bind(_antiAliasingShader, renderBus);
+		_antiAliasingRenderer.bind();
 		_antiAliasingRenderer.render(_renderQuad);
-		_antiAliasingRenderer.unbind(_antiAliasingShader);
+		_antiAliasingRenderer.unbind();
 		_antiAliasingCaptor->unbind();
-		renderBus->setFinalSceneMap(_antiAliasingCaptor->getTexture(0));
+		_renderBus->setFinalSceneMap(_antiAliasingCaptor->getTexture(0));
 	}
 }
 
-void MasterRenderer::_captureBloom(RenderBus& renderBus)
+void MasterRenderer::_captureBloom()
 {
-	if(renderBus->isBloomEnabled() && renderBus->getBloomBlurCount() > 0 && renderBus->getBloomIntensity() > 0.0f)
+	if(_renderBus->isBloomEnabled() && _renderBus->getBloomBlurCount() > 0 && _renderBus->getBloomIntensity() > 0.0f)
 	{
 		shared_ptr<TextureBuffer> textureToBlur = nullptr;
-		if(renderBus->getBloomType() == BloomType::EVERYTHING)
+		if(_renderBus->getBloomType() == BloomType::EVERYTHING)
 		{
-			textureToBlur = renderBus->getPrimarySceneMap();
+			textureToBlur = _renderBus->getPrimarySceneMap();
 		}
 		else
 		{
-			textureToBlur = renderBus->getSecondarySceneMap();
+			textureToBlur = _renderBus->getSecondarySceneMap();
 		}
 
-		_bloomBlurRendererHighQuality.bind(_blurShader, renderBus);
-		renderBus->setBloomMap(_bloomBlurRendererHighQuality.blurTexture(_blurShader, _renderQuad, textureToBlur,
-							   renderBus->getBloomBlurCount(), renderBus->getBloomIntensity(), BlurDirection::BOTH));
-		_bloomBlurRendererHighQuality.unbind(_blurShader);
+		_bloomBlurRendererHighQuality.bind();
+		_renderBus->setBloomMap(_bloomBlurRendererHighQuality.blurTexture(_renderQuad, textureToBlur,
+								_renderBus->getBloomBlurCount(), _renderBus->getBloomIntensity(), BlurDirection::BOTH));
+		_bloomBlurRendererHighQuality.unbind();
 
-		_bloomBlurRendererLowQuality.bind(_blurShader, renderBus);
-		renderBus->setBloomMap(_bloomBlurRendererLowQuality.blurTexture(_blurShader, _renderQuad, renderBus->getBloomMap(),
-							   renderBus->getBloomBlurCount(), renderBus->getBloomIntensity(), BlurDirection::BOTH));
-		_bloomBlurRendererLowQuality.unbind(_blurShader);
+		_bloomBlurRendererLowQuality.bind();
+		_renderBus->setBloomMap(_bloomBlurRendererLowQuality.blurTexture(_renderQuad, _renderBus->getBloomMap(),
+								_renderBus->getBloomBlurCount(), _renderBus->getBloomIntensity(), BlurDirection::BOTH));
+		_bloomBlurRendererLowQuality.unbind();
 
 		_bloomCaptor->bind();
-		_bloomRenderer.bind(_bloomShader, renderBus);
+		_bloomRenderer.bind();
 		_bloomRenderer.render(_renderQuad);
-		_bloomRenderer.unbind(_bloomShader);
+		_bloomRenderer.unbind();
 		_bloomCaptor->unbind();
-		renderBus->setFinalSceneMap(_bloomCaptor->getTexture(0));
+		_renderBus->setFinalSceneMap(_bloomCaptor->getTexture(0));
 	}
 	else
 	{
-		renderBus->setBloomMap(0);
+		_renderBus->setBloomMap(0);
 	}
 }
 
-void MasterRenderer::_captureShadows(RenderBus& renderBus, EntityBus& entityBus)
+void MasterRenderer::_captureShadows()
 {
-	if(renderBus->isShadowsEnabled())
+	if(_renderBus->isShadowsEnabled())
 	{
-		auto modelEntities = entityBus.getModelEntities();
-		auto billboardEntities = entityBus.getBillboardEntities();
+		auto modelEntities = _entityBus->getModelEntities();
+		auto billboardEntities = _entityBus->getBillboardEntities();
 
 		_shadowCaptor->bind();
 		glClear(GL_DEPTH_BUFFER_BIT);
 
 		if(!modelEntities.empty())
 		{
-			_modelEntityShadowRenderer.bind(_modelEntityShadowShader, renderBus);
+			_modelEntityShadowRenderer.bind();
 
 			for(const auto& [key, modelEntity] : modelEntities)
 			{
@@ -286,7 +286,7 @@ void MasterRenderer::_captureShadows(RenderBus& renderBus, EntityBus& entityBus)
 						levelOfDetailEntity->setVisible(modelEntity->isVisible());
 						levelOfDetailEntity->updateTransformationMatrix();
 
-						_modelEntityShadowRenderer.render(_modelEntityShadowShader, levelOfDetailEntity);
+						_modelEntityShadowRenderer.render(levelOfDetailEntity);
 
 						levelOfDetailEntity->setBasePosition(initialPosition);
 						levelOfDetailEntity->setBaseRotation(initialRotation);
@@ -301,30 +301,30 @@ void MasterRenderer::_captureShadows(RenderBus& renderBus, EntityBus& entityBus)
 				}
 				else
 				{
-					_modelEntityShadowRenderer.render(_modelEntityShadowShader, modelEntity);
+					_modelEntityShadowRenderer.render(modelEntity);
 				}
 			}
 
-			_modelEntityShadowRenderer.unbind(_modelEntityShadowShader);
+			_modelEntityShadowRenderer.unbind();
 		}
 
 		if(!billboardEntities.empty())
 		{
-			_billboardEntityShadowRenderer.bind(_billboardEntityShadowShader, renderBus);
+			_billboardEntityShadowRenderer.bind();
 
-			for(const auto& [key, entity] : entityBus.getBillboardEntities())
+			for(const auto& [key, entity] : _entityBus->getBillboardEntities())
 			{
-				_billboardEntityShadowRenderer.render(_billboardEntityShadowShader, entity);
+				_billboardEntityShadowRenderer.render(entity);
 			}
 
-			_billboardEntityShadowRenderer.unbind(_billboardEntityShadowShader);
+			_billboardEntityShadowRenderer.unbind();
 		}
 
 		_shadowCaptor->unbind();
-		renderBus->setShadowMap(_shadowCaptor->getTexture(0));
+		_renderBus->setShadowMap(_shadowCaptor->getTexture(0));
 	}
 	else
 	{
-		renderBus->setShadowMap(0);
+		_renderBus->setShadowMap(0);
 	}
 }

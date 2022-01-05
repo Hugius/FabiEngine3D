@@ -44,7 +44,6 @@ class FabiEngine3D
 
 public:
 	FabiEngine3D();
-	virtual ~FabiEngine3D();
 
 	void application_start();
 	void application_pause();
@@ -905,5 +904,5 @@ private:
 
 	bool _isRaycastUpdated = false;
 
-	Core* _core = nullptr;
+	shared_ptr<Core> _core = nullptr;
 };

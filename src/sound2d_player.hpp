@@ -1,21 +1,23 @@
 #pragma once
 
-#include "sound2d.hpp"
+#include "sound2d_manager.hpp"
 
 #include <string>
 #include <array>
 #include <vector>
+#include <memory>
 
 using std::string;
 using std::array;
 using std::vector;
+using std::shared_ptr;
 
 class Sound2dPlayer final
 {
 public:
 	Sound2dPlayer();
 
-	void update(vector<Sound2d>& sounds);
+	void update(shared_ptr<Sound2dManager> sound2dManager);
 	void startSound(Sound2d& sound, int playCount, unsigned int fadeMS, bool mustForce);
 	void pauseSound(Sound2d& sound);
 	void resumeSound(Sound2d& sound);
@@ -40,5 +42,5 @@ private:
 	const vector<unsigned int> _findChannels(Sound2d& sound) const;
 	const int _getFreeChannel() const;
 
-	array<string, 1024> _channels;
+	array<string, MAX_CHANNEL_COUNT> _channels;
 };

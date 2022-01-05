@@ -19,6 +19,7 @@ public:
 	const bool isEntityExisting(const string& ID);
 
 	const unordered_map<string, shared_ptr<PointlightEntity>>& getEntities();
+
 	shared_ptr<PointlightEntity> getEntity(const string& ID);
 
 	static inline const unsigned int MAX_LIGHT_COUNT = 64;

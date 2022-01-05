@@ -4,12 +4,7 @@
 
 FabiEngine3D::FabiEngine3D()
 {
-	_core = new Core(*this);
-}
-
-FabiEngine3D::~FabiEngine3D()
-{
-	delete _core;
+	_core = make_shared<Core>(*this);
 }
 
 void FabiEngine3D::application_start()

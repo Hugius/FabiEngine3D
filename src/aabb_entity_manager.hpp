@@ -2,8 +2,8 @@
 
 #include "vertex_buffer.hpp"
 #include "aabb_entity.hpp"
-#include "model_entity.hpp"
-#include "billboard_entity.hpp"
+#include "model_entity_manager.hpp"
+#include "billboard_entity_manager.hpp"
 
 #include <unordered_map>
 
@@ -15,8 +15,7 @@ public:
 	AabbEntityManager();
 
 	void createEntity(const string& ID, bool isCentered);
-	void update(const unordered_map<string, shared_ptr<ModelEntity>>& modelEntities,
-				const unordered_map<string, shared_ptr<BillboardEntity>>& billboardEntities);
+	void update(shared_ptr<ModelEntityManager> modelEntityManager, shared_ptr<BillboardEntityManager> billboardEntityManager);
 	void deleteEntity(const string& ID);
 	void deleteEntities();
 
@@ -30,5 +29,6 @@ private:
 
 	const shared_ptr<VertexBuffer> _centeredMesh;
 	const shared_ptr<VertexBuffer> _standingMesh;
+
 	unordered_map<string, shared_ptr<AabbEntity>> _entities;
 };

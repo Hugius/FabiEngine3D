@@ -3,7 +3,7 @@
 
 void FabiEngine3D::server_start(unsigned int maxClientCount)
 {
-	if(_core->_networkingServer.isRunning())
+	if(_core->_networkingServer->isRunning())
 	{
 		Logger::throwWarning("Networking server tried to start: already running!");
 		return;
@@ -14,28 +14,28 @@ void FabiEngine3D::server_start(unsigned int maxClientCount)
 		return;
 	}
 
-	_core->_networkingServer.start(maxClientCount);
+	_core->_networkingServer->start(maxClientCount);
 }
 
 void FabiEngine3D::server_stop()
 {
-	if(!_core->_networkingServer.isRunning())
+	if(!_core->_networkingServer->isRunning())
 	{
 		Logger::throwWarning("Networking server tried to stop: not running!");
 		return;
 	}
 
-	_core->_networkingServer.stop();
+	_core->_networkingServer->stop();
 }
 
 void FabiEngine3D::server_sendTcpMessage(const string& username, const string& content)
 {
-	if(!_core->_networkingServer.isRunning())
+	if(!_core->_networkingServer->isRunning())
 	{
 		Logger::throwWarning("Networking server tried to send TCP message to client \"" + username + "\": not running!");
 		return;
 	}
-	if(!_core->_networkingServer.isClientConnected(username))
+	if(!_core->_networkingServer->isClientConnected(username))
 	{
 		Logger::throwWarning("Networking server tried to send TCP message to client \"" + username + "\": not connected!");
 		return;
@@ -56,17 +56,17 @@ void FabiEngine3D::server_sendTcpMessage(const string& username, const string& c
 		return;
 	}
 
-	_core->_networkingServer.sendTcpMessage(username, content);
+	_core->_networkingServer->sendTcpMessage(username, content);
 }
 
 void FabiEngine3D::server_sendUdpMessage(const string& username, const string& content)
 {
-	if(!_core->_networkingServer.isRunning())
+	if(!_core->_networkingServer->isRunning())
 	{
 		Logger::throwWarning("Networking server tried to send UDP message to client \"" + username + "\": not running!");
 		return;
 	}
-	if(!_core->_networkingServer.isClientConnected(username))
+	if(!_core->_networkingServer->isClientConnected(username))
 	{
 		Logger::throwWarning("Networking server tried to send UDP message to client \"" + username + "\": not connected!");
 		return;
@@ -87,54 +87,54 @@ void FabiEngine3D::server_sendUdpMessage(const string& username, const string& c
 		return;
 	}
 
-	_core->_networkingServer.sendUdpMessage(username, content);
+	_core->_networkingServer->sendUdpMessage(username, content);
 }
 
 void FabiEngine3D::server_broadcastTcpMessage(const string& content, const string& exceptionUsername)
 {
-	if(!_core->_networkingServer.isRunning())
+	if(!_core->_networkingServer->isRunning())
 	{
 		Logger::throwWarning("Networking server tried to broadcast TCP message: not running!");
 		return;
 	}
 
-	_core->_networkingServer.broadcastTcpMessage(content, exceptionUsername);
+	_core->_networkingServer->broadcastTcpMessage(content, exceptionUsername);
 }
 
 void FabiEngine3D::server_broadcastUdpMessage(const string& content, const string& exceptionUsername)
 {
-	if(!_core->_networkingServer.isRunning())
+	if(!_core->_networkingServer->isRunning())
 	{
 		Logger::throwWarning("Networking server tried to broadcast UDP message: not running!");
 		return;
 	}
 
-	_core->_networkingServer.broadcastUdpMessage(content, exceptionUsername);
+	_core->_networkingServer->broadcastUdpMessage(content, exceptionUsername);
 }
 
 void FabiEngine3D::server_disconnectClient(const string& username)
 {
-	if(!_core->_networkingServer.isRunning())
+	if(!_core->_networkingServer->isRunning())
 	{
 		Logger::throwWarning("Networking server tried to disconnect client \"" + username + "\": not running!");
 		return;
 	}
-	if(!_core->_networkingServer.isClientConnected(username))
+	if(!_core->_networkingServer->isClientConnected(username))
 	{
 		Logger::throwWarning("Networking server tried to disconnect client \"" + username + "\": not connected!");
 		return;
 	}
 
-	_core->_networkingServer.disconnectClient(username);
+	_core->_networkingServer->disconnectClient(username);
 }
 
 void FabiEngine3D::server_disconnectClients()
 {
-	if(!_core->_networkingServer.isRunning())
+	if(!_core->_networkingServer->isRunning())
 	{
 		Logger::throwWarning("Networking server tried to disconnect clients: not running!");
 		return;
 	}
 
-	_core->_networkingServer.disconnectClients();
+	_core->_networkingServer->disconnectClients();
 }

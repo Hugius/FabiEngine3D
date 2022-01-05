@@ -86,8 +86,11 @@ void AabbEntityManager::createEntity(const string& ID, bool isCentered)
 	entity->setCentered(isCentered);
 }
 
-void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntity>>& modelEntities, const unordered_map<string, shared_ptr<BillboardEntity>>& billboardEntities)
+void AabbEntityManager::update(shared_ptr<ModelEntityManager> modelEntityManager, shared_ptr<BillboardEntityManager> billboardEntityManager)
 {
+	const auto& modelEntities = modelEntityManager->getEntities();
+	const auto& billboardEntities = billboardEntityManager->getEntities();
+
 	for(const auto& [key, entity] : _entities)
 	{
 		if(!entity->hasParent())

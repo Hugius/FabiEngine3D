@@ -1,6 +1,6 @@
 #pragma once
 
-#include "sound3d.hpp"
+#include "sound3d_manager.hpp"
 #include "camera.hpp"
 
 #include <string>
@@ -16,7 +16,7 @@ class Sound3dPlayer final
 public:
 	Sound3dPlayer();
 
-	void update(Camera& camera, vector<Sound3d>& sounds);
+	void update();
 	void startSound(Sound3d& sound, int playCount, unsigned int fadeMS, bool mustForce);
 	void pauseSound(Sound3d& sound);
 	void resumeSound(Sound3d& sound);
@@ -41,5 +41,5 @@ private:
 	const vector<unsigned int> _findChannels(Sound3d& sound) const;
 	const int _getFreeChannel() const;
 
-	array<string, 1024> _channels;
+	array<string, MAX_CHANNEL_COUNT> _channels;
 };

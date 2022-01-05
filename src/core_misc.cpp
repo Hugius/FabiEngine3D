@@ -5,27 +5,27 @@
 
 void Core::_render()
 {
-	_renderBus.resetTriangleCount();
+	_renderBus->resetTriangleCount();
 
-	const auto mainSky = _skyEntityManager.getSelectedMainSky();
-	const auto mixSky = _skyEntityManager.getSelectedMixSky();
-	const auto terrain = _terrainEntityManager.getSelectedTerrain();
-	const auto water = _waterEntityManager.getSelectedWater();
-	const auto models = _modelEntityManager.getEntities();
-	const auto billboards = _billboardEntityManager.getEntities();
-	const auto AABBs = _aabbEntityManager.getEntities();
-	const auto pointlights = _pointlightEntityManager.getEntities();
+	const auto mainSky = _skyEntityManager->getSelectedMainSky();
+	const auto mixSky = _skyEntityManager->getSelectedMixSky();
+	const auto terrain = _terrainEntityManager->getSelectedTerrain();
+	const auto water = _waterEntityManager->getSelectedWater();
+	const auto models = _modelEntityManager->getEntities();
+	const auto billboards = _billboardEntityManager->getEntities();
+	const auto AABBs = _aabbEntityManager->getEntities();
+	const auto pointlights = _pointlightEntityManager->getEntities();
 	const auto spotlights = _spotlightEntityManager.getEntities();
-	const auto reflections = _reflectionEntityManager.getEntities();
-	const auto quads = _quadEntityManager.getEntities();
-	const auto texts = _textEntityManager.getEntities();
+	const auto reflections = _reflectionEntityManager->getEntities();
+	const auto quads = _quadEntityManager->getEntities();
+	const auto texts = _textEntityManager->getEntities();
 	EntityBus entityBus(mainSky, mixSky, terrain, water, models, billboards, AABBs, pointlights, spotlights, reflections, quads, texts);
 
-	_masterRenderer.render(_renderBus, _camera, _shadowGenerator, _timer, entityBus);
+	_masterRenderer->render();
 
-	_timer.startDeltaPart("bufferSwap");
-	_renderWindow.swapBackBuffer();
-	_timer.stopDeltaPart();
+	_timer->startDeltaPart("bufferSwap");
+	_renderWindow->swapBackBuffer();
+	_timer->stopDeltaPart();
 }
 
 void Core::_prepare()
@@ -80,7 +80,7 @@ void Core::_prepare()
 
 	shared_ptr<QuadEntity> logo = make_shared<QuadEntity>("logo");
 	logo->setMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
-	logo->setDiffuseMap(make_shared<TextureBuffer>(_imageLoader.loadImage("engine\\assets\\image\\diffuse_map\\logo.bmp"), false, false));
+	logo->setDiffuseMap(make_shared<TextureBuffer>(_imageLoader->loadImage("engine\\assets\\image\\diffuse_map\\logo.bmp"), false, false));
 	logo->setCentered(true);
 
 	SDL_DisplayMode DM;
@@ -92,16 +92,16 @@ void Core::_prepare()
 	fvec3 keyingColor = fvec3(0.2f);
 	if(Config::getInst().isApplicationExported())
 	{
-		_masterRenderer.setBackgroundColor(fvec4(0.0f));
+		_masterRenderer->setBackgroundColor(fvec4(0.0f));
 	}
 	else
 	{
-		_masterRenderer.setBackgroundColor(fvec4(keyingColor.r, keyingColor.g, keyingColor.b, 0.0f));
-		_renderWindow.enableColorKeying(keyingColor);
-		_renderWindow.setSize(logoResolution);
-		_renderWindow.showWindow();
-		_masterRenderer.render(_renderBus, logo, logoResolution);
-		_renderWindow.swapBackBuffer();
+		_masterRenderer->setBackgroundColor(fvec4(keyingColor.r, keyingColor.g, keyingColor.b, 0.0f));
+		_renderWindow->enableColorKeying(keyingColor);
+		_renderWindow->setSize(logoResolution);
+		_renderWindow->showWindow();
+		_masterRenderer->render(_renderBus, logo, logoResolution);
+		_renderWindow->swapBackBuffer();
 	}
 
 	_fe3d.FE3D_CONTROLLER_INIT();
@@ -110,33 +110,33 @@ void Core::_prepare()
 	{
 		if(!Config::getInst().isApplicationExported())
 		{
-			_renderWindow.disableColorKeying(keyingColor);
+			_renderWindow->disableColorKeying(keyingColor);
 		}
 
 		if(!Config::getInst().isApplicationExported() || (Config::getInst().isApplicationExported() && !_fe3d.server_isRunning()))
 		{
-			_renderWindow.showWindow();
-			_renderWindow.setSize(Config::getInst().getWindowSize());
+			_renderWindow->showWindow();
+			_renderWindow->setSize(Config::getInst().getWindowSize());
 			if(Config::getInst().isWindowFullscreen())
 			{
-				_renderWindow.enableFullscreen();
+				_renderWindow->enableFullscreen();
 			}
 			if(!Config::getInst().isWindowBorderless())
 			{
-				_renderWindow.showBorder();
+				_renderWindow->showBorder();
 			}
 			if(Config::getInst().isApplicationExported())
 			{
-				_renderWindow.setTitle(Config::getInst().getWindowTitle());
+				_renderWindow->setTitle(Config::getInst().getWindowTitle());
 			}
 
 			if(Config::getInst().isApplicationExported())
 			{
-				_renderWindow.setOpacity(1.0f);
+				_renderWindow->setOpacity(1.0f);
 			}
 			else
 			{
-				_renderWindow.setOpacity(0.0f);
+				_renderWindow->setOpacity(0.0f);
 			}
 		}
 	}

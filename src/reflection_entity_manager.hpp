@@ -19,6 +19,7 @@ public:
 	const bool isEntityExisting(const string& ID);
 
 	const unordered_map<string, shared_ptr<ReflectionEntity>>& getEntities();
+
 	shared_ptr<ReflectionEntity> getEntity(const string& ID);
 
 private:

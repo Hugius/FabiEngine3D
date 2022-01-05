@@ -22,8 +22,18 @@ void FabiEngine3D::sky_setCubeMaps(const string& ID, const array<string, 6>& val
 		images[i] = _core->_imageLoader.loadImage(value[i]);
 	}
 
+	for(const auto& image : images)
+	{
+		image->flipY();
+	}
+
 	_core->_skyEntityManager.getEntity(ID)->setCubeMap(make_shared<TextureBuffer>(images));
 	_core->_skyEntityManager.getEntity(ID)->setCubeMapPaths(value);
+
+	for(const auto& image : images)
+	{
+		image->flipY();
+	}
 }
 
 void FabiEngine3D::sky_setRightCubeMap(const string& ID, const string& value)

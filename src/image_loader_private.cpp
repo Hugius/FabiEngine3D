@@ -7,7 +7,7 @@
 
 using std::clamp;
 
-shared_ptr<Image> ImageLoader::_loadImage(const string& filePath, bool mustFlip)
+shared_ptr<Image> ImageLoader::_loadImage(const string& filePath)
 {
 	FILE* file = nullptr;
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -54,25 +54,24 @@ shared_ptr<Image> ImageLoader::_loadImage(const string& filePath, bool mustFlip)
 	{
 		for(unsigned x = 0; x < width; x++)
 		{
-			const unsigned int index1 = ((x * byteFormat) + (y * width * byteFormat));
-			const unsigned int index2 = (mustFlip ? ((x * byteFormat) + ((height - y - 1) * width * byteFormat)) : index1);
+			const auto index = ((x * byteFormat) + (y * width * byteFormat));
 
 			if(byteFormat == 1)
 			{
-				correctedPixels[index1 + 0] = pixels[index2 + 0];
+				correctedPixels[index + 0] = pixels[index + 0];
 			}
 			if(byteFormat == 3)
 			{
-				correctedPixels[index1 + 0] = pixels[index2 + 2];
-				correctedPixels[index1 + 1] = pixels[index2 + 1];
-				correctedPixels[index1 + 2] = pixels[index2 + 0];
+				correctedPixels[index + 0] = pixels[index + 2];
+				correctedPixels[index + 1] = pixels[index + 1];
+				correctedPixels[index + 2] = pixels[index + 0];
 			}
 			if(byteFormat == 4)
 			{
-				correctedPixels[index1 + 0] = pixels[index2 + 2];
-				correctedPixels[index1 + 1] = pixels[index2 + 1];
-				correctedPixels[index1 + 2] = pixels[index2 + 0];
-				correctedPixels[index1 + 3] = pixels[index2 + 3];
+				correctedPixels[index + 0] = pixels[index + 2];
+				correctedPixels[index + 1] = pixels[index + 1];
+				correctedPixels[index + 2] = pixels[index + 0];
+				correctedPixels[index + 3] = pixels[index + 3];
 			}
 		}
 	}

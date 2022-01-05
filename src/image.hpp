@@ -8,12 +8,15 @@ public:
 	Image(unsigned char* pixels, unsigned int width, unsigned int height, PixelFormat pixelFormat);
 	~Image();
 
-	const unsigned char* getPixels();
+	void flipX();
+	void flipY();
 
-	const unsigned int getWidth();
-	const unsigned int getHeight();
+	const unsigned char* getPixels() const;
 
-	const PixelFormat getPixelFormat();
+	const unsigned int getWidth() const;
+	const unsigned int getHeight() const;
+
+	const PixelFormat getPixelFormat() const;
 
 private:
 	const unsigned char* _pixels;

@@ -21,7 +21,7 @@ const shared_ptr<Image> ImageLoader::loadImage(const string& filePath)
 		return cacheIterator->second;
 	}
 
-	auto loadedImage = _loadImage(filePath, false);
+	auto loadedImage = _loadImage(filePath);
 
 	if(loadedImage == nullptr)
 	{
@@ -53,7 +53,7 @@ void ImageLoader::cacheImages(const vector<string>& filePaths)
 	{
 		if(_imageCache.find(filePath) == _imageCache.end())
 		{
-			threads.push_back(async(launch::async, &ImageLoader::_loadImage, this, filePath, false));
+			threads.push_back(async(launch::async, &ImageLoader::_loadImage, this, filePath));
 			finalFilePaths.push_back(filePath);
 			threadStatuses.push_back(false);
 		}

@@ -1,8 +1,7 @@
 #pragma once
 
+#include "base_renderer.hpp"
 #include "model_entity.hpp"
-#include "shader_buffer.hpp"
-#include "render_bus.hpp"
 
 class ModelEntityDepthRenderer final : BaseRenderer
 {

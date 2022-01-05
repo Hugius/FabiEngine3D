@@ -2,7 +2,7 @@
 
 void MasterRenderer::_captureCubeReflections()
 {
-	if(entityBus.getReflectionEntities().empty())
+	if(_reflectionEntityManager->getEntities().empty())
 	{
 		return;
 	}
@@ -16,7 +16,7 @@ void MasterRenderer::_captureCubeReflections()
 	const auto initialCameraPosition = _camera->getPosition();
 
 	vector<string> savedModelEntityIDs;
-	for(const auto& [key, entity] : entityBus.getModelEntities())
+	for(const auto& [key, entity] : _modelEntityManager->getEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
@@ -26,7 +26,7 @@ void MasterRenderer::_captureCubeReflections()
 	}
 
 	vector<string> savedBillboardEntityIDs;
-	for(const auto& [key, entity] : entityBus.getBillboardEntities())
+	for(const auto& [key, entity] : _billboardEntityManager->getEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
@@ -38,7 +38,7 @@ void MasterRenderer::_captureCubeReflections()
 	_renderBus->setReflectionsEnabled(false);
 
 	float oldLightness = 0.0f;
-	auto skyEntity = entityBus.getMainSkyEntity();
+	auto skyEntity = _skyEntityManager->getSelectedMainSky();
 	if(skyEntity != nullptr)
 	{
 		oldLightness = skyEntity->getLightness();
@@ -49,7 +49,7 @@ void MasterRenderer::_captureCubeReflections()
 	_camera->setAspectRatio(1.0f);
 	_camera->setFOV(90.0f);
 
-	for(const auto& [key, entity] : entityBus.getReflectionEntities())
+	for(const auto& [key, entity] : _reflectionEntityManager->getEntities())
 	{
 		if(entity->mustCapture())
 		{
@@ -136,7 +136,7 @@ void MasterRenderer::_captureCubeReflections()
 		}
 	}
 
-	for(const auto& [key, entity] : entityBus.getModelEntities())
+	for(const auto& [key, entity] : _modelEntityManager->getEntities())
 	{
 		for(const auto& savedID : savedModelEntityIDs)
 		{
@@ -149,7 +149,7 @@ void MasterRenderer::_captureCubeReflections()
 
 	for(const auto& savedID : savedBillboardEntityIDs)
 	{
-		for(const auto& [key, entity] : entityBus.getBillboardEntities())
+		for(const auto& [key, entity] : _billboardEntityManager->getEntities())
 		{
 			if(entity->getID() == savedID)
 			{

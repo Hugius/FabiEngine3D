@@ -3,15 +3,15 @@
 
 void MasterRenderer::_captureWorldDepth()
 {
-	auto modelEntities = _entityBus->getModelEntities();
-	auto billboardEntities = _entityBus->getBillboardEntities();
+	auto modelEntities = _modelEntityManager->getEntities();
+	auto billboardEntities = _billboardEntityManager->getEntities();
 	float clippingY = numeric_limits<float>::lowest();
-	const bool waterDepthNeeded = (_entityBus->getWaterEntity() != nullptr) && (_entityBus->getWaterEntity()->getTransparency() > 0.0f);
+	const bool waterDepthNeeded = (_waterEntityManager->getSelectedWater() != nullptr) && (_waterEntityManager->getSelectedWater()->getTransparency() > 0.0f);
 	bool isUnderWater = false;
 
 	if(waterDepthNeeded)
 	{
-		auto waterEntity = _entityBus->getWaterEntity();
+		auto waterEntity = _waterEntityManager->getSelectedWater();
 		float waveHeight = (waterEntity->hasDisplacementMap() ? waterEntity->getWaveHeight() : 0.0f);
 		isUnderWater = (_renderBus->getCameraPosition().y < (waterEntity->getHeight() + waveHeight));
 		isUnderWater = (isUnderWater && (_renderBus->getCameraPosition().x > (waterEntity->getSize() / 2.0f)));
@@ -34,11 +34,11 @@ void MasterRenderer::_captureWorldDepth()
 		_worldDepthCaptor->bind();
 		glClear(GL_DEPTH_BUFFER_BIT);
 
-		if(_entityBus->getTerrainEntity() != nullptr)
+		if(_terrainEntityManager->getSelectedTerrain() != nullptr)
 		{
 			_terrainEntityDepthRenderer.bind();
 
-			_terrainEntityDepthRenderer.render(_entityBus->getTerrainEntity());
+			_terrainEntityDepthRenderer.render(_terrainEntityManager->getSelectedTerrain());
 
 			_terrainEntityDepthRenderer.unbind();
 		}
@@ -256,8 +256,8 @@ void MasterRenderer::_captureShadows()
 {
 	if(_renderBus->isShadowsEnabled())
 	{
-		auto modelEntities = _entityBus->getModelEntities();
-		auto billboardEntities = _entityBus->getBillboardEntities();
+		auto modelEntities = _modelEntityManager->getEntities();
+		auto billboardEntities = _billboardEntityManager->getEntities();
 
 		_shadowCaptor->bind();
 		glClear(GL_DEPTH_BUFFER_BIT);
@@ -312,7 +312,7 @@ void MasterRenderer::_captureShadows()
 		{
 			_billboardEntityShadowRenderer.bind();
 
-			for(const auto& [key, entity] : _entityBus->getBillboardEntities())
+			for(const auto& [key, entity] : _billboardEntityManager->getEntities())
 			{
 				_billboardEntityShadowRenderer.render(entity);
 			}

@@ -9,11 +9,11 @@ using std::function;
 
 void MasterRenderer::_renderSkyEntity()
 {
-	if(_entityBus->getMainSkyEntity() != nullptr)
+	if(_skyEntityManager->getSelectedMainSky() != nullptr)
 	{
 		_skyEntityColorRenderer.bind();
 
-		_skyEntityColorRenderer.render(_entityBus->getMainSkyEntity(), _entityBus->getMixSkyEntity());
+		_skyEntityColorRenderer.render(_skyEntityManager->getSelectedMainSky(), _skyEntityManager->getSelectedMixSky());
 
 		_skyEntityColorRenderer.unbind();
 	}
@@ -21,15 +21,15 @@ void MasterRenderer::_renderSkyEntity()
 
 void MasterRenderer::_renderTerrainEntity()
 {
-	if(_entityBus->getTerrainEntity() != nullptr)
+	if(_terrainEntityManager->getSelectedTerrain() != nullptr)
 	{
 		_terrainEntityColorRenderer.bind();
 
-		_terrainEntityColorRenderer.processPointlightEntities(_entityBus->getPointLightEntities());
+		_terrainEntityColorRenderer.processPointlightEntities(_pointlightEntityManager->getEntities());
 
-		_terrainEntityColorRenderer.processSpotlightEntities(_entityBus->getSpotlightEntities());
+		_terrainEntityColorRenderer.processSpotlightEntities(_spotlightEntityManager->getEntities());
 
-		_terrainEntityColorRenderer.render(_entityBus->getTerrainEntity());
+		_terrainEntityColorRenderer.render(_terrainEntityManager->getSelectedTerrain());
 
 		_terrainEntityColorRenderer.unbind();
 	}
@@ -37,15 +37,15 @@ void MasterRenderer::_renderTerrainEntity()
 
 void MasterRenderer::_renderWaterEntity()
 {
-	if(_entityBus->getWaterEntity() != nullptr)
+	if(_waterEntityManager->getSelectedWater() != nullptr)
 	{
 		_waterEntityColorRenderer.bind();
 
-		_waterEntityColorRenderer.processPointlightEntities(_entityBus->getPointLightEntities());
+		_waterEntityColorRenderer.processPointlightEntities(_pointlightEntityManager->getEntities());
 
-		_waterEntityColorRenderer.processSpotlightEntities(_entityBus->getSpotlightEntities());
+		_waterEntityColorRenderer.processSpotlightEntities(_spotlightEntityManager->getEntities());
 
-		_waterEntityColorRenderer.render(_entityBus->getWaterEntity());
+		_waterEntityColorRenderer.render(_waterEntityManager->getSelectedWater());
 
 		_waterEntityColorRenderer.unbind();
 	}
@@ -53,15 +53,15 @@ void MasterRenderer::_renderWaterEntity()
 
 void MasterRenderer::_renderModelEntities()
 {
-	auto modelEntities = _entityBus->getModelEntities();
+	auto modelEntities = _modelEntityManager->getEntities();
 
 	if(!modelEntities.empty())
 	{
 		_modelEntityColorRenderer.bind();
 
-		_modelEntityColorRenderer.processPointlightEntities(_entityBus->getPointLightEntities());
+		_modelEntityColorRenderer.processPointlightEntities(_pointlightEntityManager->getEntities());
 
-		_modelEntityColorRenderer.processSpotlightEntities(_entityBus->getSpotlightEntities());
+		_modelEntityColorRenderer.processSpotlightEntities(_spotlightEntityManager->getEntities());
 
 		for(const auto& [key, modelEntity] : modelEntities)
 		{
@@ -88,7 +88,7 @@ void MasterRenderer::_renderModelEntities()
 				levelOfDetailEntity->setVisible(modelEntity->isVisible());
 				levelOfDetailEntity->updateTransformationMatrix();
 
-				_modelEntityColorRenderer.render(levelOfDetailEntity, _entityBus->getReflectionEntities());
+				_modelEntityColorRenderer.render(levelOfDetailEntity, _reflectionEntityManager->getEntities());
 
 				levelOfDetailEntity->setBasePosition(initialPosition);
 				levelOfDetailEntity->setBaseRotation(initialRotation);
@@ -98,7 +98,7 @@ void MasterRenderer::_renderModelEntities()
 			}
 			else
 			{
-				_modelEntityColorRenderer.render(modelEntity, _entityBus->getReflectionEntities());
+				_modelEntityColorRenderer.render(modelEntity, _reflectionEntityManager->getEntities());
 			}
 
 			CONTINUE:;
@@ -135,7 +135,7 @@ void MasterRenderer::_renderModelEntities()
 				levelOfDetailEntity->setVisible(modelEntity->isVisible());
 				levelOfDetailEntity->updateTransformationMatrix();
 
-				_modelEntityColorRenderer.render(levelOfDetailEntity, _entityBus->getReflectionEntities());
+				_modelEntityColorRenderer.render(levelOfDetailEntity, _reflectionEntityManager->getEntities());
 
 				levelOfDetailEntity->setBasePosition(initialPosition);
 				levelOfDetailEntity->setBaseRotation(initialRotation);
@@ -145,7 +145,7 @@ void MasterRenderer::_renderModelEntities()
 			}
 			else
 			{
-				_modelEntityColorRenderer.render(modelEntity, _entityBus->getReflectionEntities());
+				_modelEntityColorRenderer.render(modelEntity, _reflectionEntityManager->getEntities());
 			}
 		}
 
@@ -155,7 +155,7 @@ void MasterRenderer::_renderModelEntities()
 
 void MasterRenderer::_renderBillboardEntities()
 {
-	auto billboardEntities = _entityBus->getBillboardEntities();
+	auto billboardEntities = _billboardEntityManager->getEntities();
 
 	if(!billboardEntities.empty())
 	{
@@ -174,7 +174,7 @@ void MasterRenderer::_renderAabbEntities()
 {
 	if(_renderBus->isAabbFrameRenderingEnabled())
 	{
-		auto aabbEntities = _entityBus->getAabbEntities();
+		auto aabbEntities = _aabbEntityManager->getEntities();
 
 		if(!aabbEntities.empty())
 		{
@@ -201,19 +201,19 @@ void MasterRenderer::_renderFinalSceneMap()
 
 void MasterRenderer::_renderGUI()
 {
-	if(!_entityBus->getQuadEntities().empty() || !_entityBus->getTextEntities().empty())
+	if(!_quadEntityManager->getEntities().empty() || !_textEntityManager->getEntities().empty())
 	{
 		_quadEntityColorRenderer.bind();
 
 		map<unsigned int, shared_ptr<BaseEntity>> orderedEntityMap;
-		for(const auto& [key, quadEntity] : _entityBus->getQuadEntities())
+		for(const auto& [key, quadEntity] : _quadEntityManager->getEntities())
 		{
 			if(quadEntity->getID() != _renderBus->getCursorEntityID())
 			{
 				orderedEntityMap.insert(make_pair(quadEntity->getDepth(), quadEntity));
 			}
 		}
-		for(const auto& [key, textEntity] : _entityBus->getTextEntities())
+		for(const auto& [key, textEntity] : _textEntityManager->getEntities())
 		{
 			orderedEntityMap.insert(make_pair(textEntity->getDepth(), textEntity));
 		}
@@ -243,7 +243,7 @@ void MasterRenderer::_renderGUI()
 
 void MasterRenderer::_renderCursor()
 {
-	for(const auto& [key, entity] : _entityBus->getQuadEntities())
+	for(const auto& [key, entity] : _quadEntityManager->getEntities())
 	{
 		if(entity->getID() == _renderBus->getCursorEntityID())
 		{

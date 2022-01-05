@@ -1,11 +1,10 @@
 #pragma once
 
+#include "base_renderer.hpp"
+#include "model_entity.hpp"
 #include "pointlight_entity.hpp"
 #include "spotlight_entity.hpp"
-#include "model_entity.hpp"
 #include "reflection_entity.hpp"
-#include "shader_buffer.hpp"
-#include "render_bus.hpp"
 
 #include <unordered_map>
 

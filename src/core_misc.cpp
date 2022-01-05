@@ -90,7 +90,7 @@ void Core::_prepare()
 		_renderWindow->swapBackBuffer();
 	}
 
-	_fe3d.FE3D_CONTROLLER_INIT();
+	_fe3d->FE3D_CONTROLLER_INIT();
 
 	if(_isRunning)
 	{
@@ -99,7 +99,7 @@ void Core::_prepare()
 			_renderWindow->disableColorKeying(keyingColor);
 		}
 
-		if(!Config::getInst().isApplicationExported() || (Config::getInst().isApplicationExported() && !_fe3d.server_isRunning()))
+		if(!Config::getInst().isApplicationExported() || (Config::getInst().isApplicationExported() && !_fe3d->server_isRunning()))
 		{
 			_renderWindow->showWindow();
 			_renderWindow->setSize(Config::getInst().getWindowSize());

@@ -6,12 +6,12 @@ using std::chrono::high_resolution_clock;
 using std::chrono::nanoseconds;
 using std::chrono::duration_cast;
 
-Core::Core(FabiEngine3D& fe3d)
+Core::Core(FabiEngine3D* fe3d)
 	:
 	_fe3d(fe3d)
 {
 	_libraryLoader = make_shared<LibraryLoader>();
-	_renderWindow = make_shared<RenderWindow>(_libraryLoader);
+	_renderWindow = make_shared<RenderWindow>(_libraryLoader->getWindowPointer());
 	_meshLoader = make_shared<MeshLoader>();
 	_imageLoader = make_shared<ImageLoader>();
 	_audioLoader = make_shared<AudioLoader>();
@@ -60,7 +60,7 @@ void Core::_start()
 	{
 		auto previousTime = high_resolution_clock::now();
 
-		if(_fe3d.server_isRunning())
+		if(_fe3d->server_isRunning())
 		{
 			if(!Config::getInst().isApplicationExported())
 			{
@@ -103,7 +103,7 @@ void Core::_start()
 		_deltaTimeMS = static_cast<float>(timeDifference.count()) / 1000000.0f;
 	}
 
-	_fe3d.FE3D_CONTROLLER_TERMINATE();
+	_fe3d->FE3D_CONTROLLER_TERMINATE();
 }
 
 void Core::_pause()
@@ -147,18 +147,18 @@ void Core::_update()
 	}
 
 	_timer->startDeltaPart("coreUpdate");
-	_fe3d._isRaycastUpdated = false;
-	_fe3d._hoveredAabbID = "";
-	_fe3d.FE3D_CONTROLLER_UPDATE();
+	_fe3d->_isRaycastUpdated = false;
+	_fe3d->_hoveredAabbID = "";
+	_fe3d->FE3D_CONTROLLER_UPDATE();
 	_timer->stopDeltaPart();
 
-	if(!(Config::getInst().isApplicationExported() && _fe3d.server_isRunning()))
+	if(!(Config::getInst().isApplicationExported() && _fe3d->server_isRunning()))
 	{
 		if(!_isPaused)
 		{
 			_timer->startDeltaPart("physicsUpdate");
 			_camera->update(lastCursorPosition);
-			_raycaster->update(_fe3d.misc_getCursorPositionRelativeToViewport());
+			_raycaster->update(_fe3d->misc_getCursorPositionRelativeToViewport());
 			_cameraCollisionHandler->update();
 			_camera->updateMatrices();
 			_timer->stopDeltaPart();
@@ -180,7 +180,7 @@ void Core::_update()
 			_timer->stopDeltaPart();
 			_timer->startDeltaPart("lightEntityUpdate");
 			_pointlightEntityManager->update();
-			_spotlightEntityManager.update();
+			_spotlightEntityManager->update();
 			_timer->stopDeltaPart();
 			_timer->startDeltaPart("reflectionEntityUpdate");
 			_reflectionEntityManager->update();

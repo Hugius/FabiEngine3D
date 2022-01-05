@@ -2,7 +2,7 @@
 
 void MasterRenderer::_captureWaterReflections()
 {
-	const auto waterEntity = _entityBus->getWaterEntity();
+	const auto waterEntity = _waterEntityManager->getSelectedWater();
 
 	if((waterEntity != nullptr) && waterEntity->isReflective())
 	{
@@ -15,7 +15,7 @@ void MasterRenderer::_captureWaterReflections()
 		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL ||
 		   waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
 		{
-			for(const auto& [key, entity] : _entityBus->getModelEntities())
+			for(const auto& [key, entity] : _modelEntityManager->getEntities())
 			{
 				if(!entity->isReflected() && entity->isVisible())
 				{
@@ -39,7 +39,7 @@ void MasterRenderer::_captureWaterReflections()
 		vector<string> savedBillboardEntityIDs;
 		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD)
 		{
-			for(const auto& [key, entity] : _entityBus->getBillboardEntities())
+			for(const auto& [key, entity] : _billboardEntityManager->getEntities())
 			{
 				if(!entity->isReflected() && entity->isVisible())
 				{
@@ -66,7 +66,7 @@ void MasterRenderer::_captureWaterReflections()
 		_renderBus->setShadowsEnabled(false);
 
 		float oldLightness = 0.0f;
-		auto skyEntity = _entityBus->getMainSkyEntity();
+		auto skyEntity = _skyEntityManager->getSelectedMainSky();
 		if(skyEntity != nullptr)
 		{
 			oldLightness = skyEntity->getLightness();
@@ -107,7 +107,7 @@ void MasterRenderer::_captureWaterReflections()
 
 		for(const auto& savedID : savedModelEntityIDs)
 		{
-			for(const auto& [key, entity] : _entityBus->getModelEntities())
+			for(const auto& [key, entity] : _modelEntityManager->getEntities())
 			{
 				if(entity->getID() == savedID)
 				{
@@ -118,7 +118,7 @@ void MasterRenderer::_captureWaterReflections()
 
 		for(const auto& savedID : savedBillboardEntityIDs)
 		{
-			for(const auto& [key, entity] : _entityBus->getBillboardEntities())
+			for(const auto& [key, entity] : _billboardEntityManager->getEntities())
 			{
 				if(entity->getID() == savedID)
 				{
@@ -150,7 +150,7 @@ void MasterRenderer::_captureWaterReflections()
 
 void MasterRenderer::_captureWaterRefractions()
 {
-	const auto waterEntity = _entityBus->getWaterEntity();
+	const auto waterEntity = _waterEntityManager->getSelectedWater();
 
 	if((waterEntity != nullptr) && waterEntity->isRefractive())
 	{
@@ -164,7 +164,7 @@ void MasterRenderer::_captureWaterRefractions()
 		}
 
 		float oldSkyLightness = 0.0f;
-		auto skyEntity = _entityBus->getMainSkyEntity();
+		auto skyEntity = _skyEntityManager->getSelectedMainSky();
 		if(skyEntity != nullptr)
 		{
 			oldSkyLightness = skyEntity->getLightness();

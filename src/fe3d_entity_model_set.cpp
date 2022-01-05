@@ -3,7 +3,7 @@
 
 void FabiEngine3D::model_create(const string& ID, const string& meshPath)
 {
-	_core->_modelEntityManager->createEntity(_core->_meshLoader, ID, meshPath);
+	_core->_modelEntityManager->createEntity(ID, meshPath);
 }
 
 void FabiEngine3D::model_deleteAll()

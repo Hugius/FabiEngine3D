@@ -2,26 +2,26 @@
 #include "configuration.hpp"
 #include "text_entity.hpp"
 
-void QuadEntityColorRenderer::bind(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus)
+void QuadEntityColorRenderer::bind()
 {
-	shader->bind();
+	_shader->bind();
 
-	shader->uploadUniform("u_nearDistance", renderBus->getNearDistance());
-	shader->uploadUniform("u_farDistance", renderBus->getFarDistance());
-	shader->uploadUniform("u_diffuseMap", 0);
+	_shader->uploadUniform("u_nearDistance", _renderBus->getNearDistance());
+	_shader->uploadUniform("u_farDistance", _renderBus->getFarDistance());
+	_shader->uploadUniform("u_diffuseMap", 0);
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-void QuadEntityColorRenderer::unbind(shared_ptr<ShaderBuffer> shader)
+void QuadEntityColorRenderer::unbind()
 {
 	glDisable(GL_BLEND);
 
-	shader->unbind();
+	_shader->unbind();
 }
 
-void QuadEntityColorRenderer::render(shared_ptr<ShaderBuffer> shader, RenderBus& renderBus, const shared_ptr<QuadEntity> entity)
+void QuadEntityColorRenderer::render(const shared_ptr<QuadEntity> entity)
 {
 	if(entity->isVisible() &&
 	   ((entity->getPosition().y - entity->getSize().y) < entity->getMaxPosition().y) &&
@@ -29,20 +29,20 @@ void QuadEntityColorRenderer::render(shared_ptr<ShaderBuffer> shader, RenderBus&
 	{
 		const auto buffer = entity->getMesh();
 
-		shader->uploadUniform("u_uvMultiplier", entity->getUvMultiplier());
-		shader->uploadUniform("u_uvOffset", entity->getUvOffset());
-		shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
-		shader->uploadUniform("u_isMirroredHorizontally", entity->isMirroredHorizonally());
-		shader->uploadUniform("u_isMirroredVertically", entity->isMirroredVertically());
-		shader->uploadUniform("u_color", entity->getColor());
-		shader->uploadUniform("u_windowSize", fvec2(Config::getInst().getWindowSize()));
-		shader->uploadUniform("u_minPosition", entity->getMinPosition());
-		shader->uploadUniform("u_maxPosition", entity->getMaxPosition());
-		shader->uploadUniform("u_transparency", entity->getTransparency());
-		shader->uploadUniform("u_isPerspectiveDepthEntity", entity->isPerspectiveDepthEntity());
-		shader->uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap());
-		shader->uploadUniform("u_wireframeColor", entity->getWireframeColor());
-		shader->uploadUniform("u_isWireframed", entity->isWireframed());
+		_shader->uploadUniform("u_uvMultiplier", entity->getUvMultiplier());
+		_shader->uploadUniform("u_uvOffset", entity->getUvOffset());
+		_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
+		_shader->uploadUniform("u_isMirroredHorizontally", entity->isMirroredHorizonally());
+		_shader->uploadUniform("u_isMirroredVertically", entity->isMirroredVertically());
+		_shader->uploadUniform("u_color", entity->getColor());
+		_shader->uploadUniform("u_windowSize", fvec2(Config::getInst().getWindowSize()));
+		_shader->uploadUniform("u_minPosition", entity->getMinPosition());
+		_shader->uploadUniform("u_maxPosition", entity->getMaxPosition());
+		_shader->uploadUniform("u_transparency", entity->getTransparency());
+		_shader->uploadUniform("u_isPerspectiveDepthEntity", entity->isPerspectiveDepthEntity());
+		_shader->uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap());
+		_shader->uploadUniform("u_wireframeColor", entity->getWireframeColor());
+		_shader->uploadUniform("u_isWireframed", entity->isWireframed());
 
 		if(entity->hasDiffuseMap())
 		{
@@ -53,7 +53,7 @@ void QuadEntityColorRenderer::render(shared_ptr<ShaderBuffer> shader, RenderBus&
 		glBindVertexArray(buffer->getVaoID());
 
 		glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
-		renderBus->increaseTriangleCount(buffer->getVertexCount() / 3);
+		_renderBus->increaseTriangleCount(buffer->getVertexCount() / 3);
 
 		glBindVertexArray(0);
 

@@ -1,8 +1,7 @@
 #pragma once
 
+#include "base_renderer.hpp"
 #include "billboard_entity.hpp"
-#include "render_bus.hpp"
-#include "shader_buffer.hpp"
 
 class BillboardEntityColorRenderer final : BaseRenderer
 {

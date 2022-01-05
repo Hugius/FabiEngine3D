@@ -73,6 +73,61 @@ void MasterRenderer::inject(shared_ptr<Timer> timer)
 	_timer = timer;
 }
 
+void MasterRenderer::inject(shared_ptr<SkyEntityManager> skyEntityManager)
+{
+	_skyEntityManager = skyEntityManager;
+}
+
+void MasterRenderer::inject(shared_ptr<TerrainEntityManager> terrainEntityManager)
+{
+	_terrainEntityManager = terrainEntityManager;
+}
+
+void MasterRenderer::inject(shared_ptr<WaterEntityManager> waterEntityManager)
+{
+	_waterEntityManager = waterEntityManager;
+}
+
+void MasterRenderer::inject(shared_ptr<ModelEntityManager> modelEntityManager)
+{
+	_modelEntityManager = modelEntityManager;
+}
+
+void MasterRenderer::inject(shared_ptr<BillboardEntityManager> billboardEntityManager)
+{
+	_billboardEntityManager = billboardEntityManager;
+}
+
+void MasterRenderer::inject(shared_ptr<AabbEntityManager> aabbEntityManager)
+{
+	_aabbEntityManager = aabbEntityManager;
+}
+
+void MasterRenderer::inject(shared_ptr<QuadEntityManager> quadEntityManager)
+{
+	_quadEntityManager = quadEntityManager;
+}
+
+void MasterRenderer::inject(shared_ptr<TextEntityManager> textEntityManager)
+{
+	_textEntityManager = textEntityManager;
+}
+
+void MasterRenderer::inject(shared_ptr<PointlightEntityManager> pointlightEntityManager)
+{
+	_pointlightEntityManager = pointlightEntityManager;
+}
+
+void MasterRenderer::inject(shared_ptr<SpotlightEntityManager> spotlightEntityManager)
+{
+	_spotlightEntityManager = spotlightEntityManager;
+}
+
+void MasterRenderer::inject(shared_ptr<ReflectionEntityManager> reflectionEntityManager)
+{
+	_reflectionEntityManager = reflectionEntityManager;
+}
+
 void MasterRenderer::update()
 {
 	_updateMotionBlur();

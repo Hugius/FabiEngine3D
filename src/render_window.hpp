@@ -11,7 +11,7 @@ using std::string;
 class RenderWindow final
 {
 public:
-	RenderWindow(LibraryLoader& libraryLoader);
+	RenderWindow(SDL_Window* windowPointer);
 	~RenderWindow();
 
 	void setTitle(const string& title);

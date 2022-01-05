@@ -4,7 +4,7 @@ void MasterRenderer::_capturePlanarReflections()
 {
 	bool anyReflectiveModelFound = false;
 
-	for(const auto& [key, entity] : entityBus.getModelEntities())
+	for(const auto& [key, entity] : _modelEntityManager->getEntities())
 	{
 		for(const auto& partID : entity->getPartIDs())
 		{
@@ -28,7 +28,7 @@ void MasterRenderer::_capturePlanarReflections()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	vector<string> savedModelEntityIDs;
-	for(const auto& [key, entity] : entityBus.getModelEntities())
+	for(const auto& [key, entity] : _modelEntityManager->getEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
@@ -49,7 +49,7 @@ void MasterRenderer::_capturePlanarReflections()
 	}
 
 	vector<string> savedBillboardEntityIDs;
-	for(const auto& [key, entity] : entityBus.getBillboardEntities())
+	for(const auto& [key, entity] : _billboardEntityManager->getEntities())
 	{
 		if(!entity->isReflected() && entity->isVisible())
 		{
@@ -72,7 +72,7 @@ void MasterRenderer::_capturePlanarReflections()
 	_renderBus->setReflectionsEnabled(false);
 
 	float oldSkyLightness = 0.0f;
-	auto skyEntity = entityBus.getMainSkyEntity();
+	auto skyEntity = _skyEntityManager->getSelectedMainSky();
 	if(skyEntity != nullptr)
 	{
 		oldSkyLightness = skyEntity->getLightness();
@@ -98,7 +98,7 @@ void MasterRenderer::_capturePlanarReflections()
 
 	_renderBus->setPlanarReflectionMap(_planarReflectionCaptor->getTexture(0));
 
-	for(const auto& [key, entity] : entityBus.getModelEntities())
+	for(const auto& [key, entity] : _modelEntityManager->getEntities())
 	{
 		for(const auto& savedID : savedModelEntityIDs)
 		{
@@ -109,7 +109,7 @@ void MasterRenderer::_capturePlanarReflections()
 		}
 	}
 
-	for(const auto& [key, entity] : entityBus.getBillboardEntities())
+	for(const auto& [key, entity] : _billboardEntityManager->getEntities())
 	{
 		for(const auto& savedID : savedBillboardEntityIDs)
 		{

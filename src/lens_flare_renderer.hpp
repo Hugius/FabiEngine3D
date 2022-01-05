@@ -1,8 +1,7 @@
 #pragma once
 
+#include "base_renderer.hpp"
 #include "quad_entity.hpp"
-#include "shader_buffer.hpp"
-#include "render_bus.hpp"
 
 class LensFlareRenderer final : BaseRenderer
 {

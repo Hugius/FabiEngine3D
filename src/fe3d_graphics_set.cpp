@@ -298,19 +298,19 @@ void FabiEngine3D::gfx_setPlanarReflectionHeight(float value)
 void FabiEngine3D::gfx_setBloomQuality(unsigned int value)
 {
 	_core->_renderBus->setBloomQuality(value);
-	_core->_masterRenderer->reloadBloomBlurCaptureBuffer(_core->_renderBus);
+	_core->_masterRenderer->reloadBloomBlurCaptureBuffer();
 }
 
 void FabiEngine3D::gfx_setDofQuality(unsigned int value)
 {
 	_core->_renderBus->setDofQuality(value);
-	_core->_masterRenderer->reloadDofBlurCaptureBuffer(_core->_renderBus);
+	_core->_masterRenderer->reloadDofBlurCaptureBuffer();
 }
 
 void FabiEngine3D::gfx_setMotionBlurQuality(unsigned int value)
 {
 	_core->_renderBus->setMotionBlurQuality(value);
-	_core->_masterRenderer->reloadMotionBlurBlurCaptureBuffer(_core->_renderBus);
+	_core->_masterRenderer->reloadMotionBlurBlurCaptureBuffer();
 }
 
 void FabiEngine3D::gfx_setAnisotropicFilteringQuality(unsigned int value)
@@ -321,26 +321,26 @@ void FabiEngine3D::gfx_setAnisotropicFilteringQuality(unsigned int value)
 void FabiEngine3D::gfx_setCubeReflectionQuality(unsigned int value)
 {
 	_core->_renderBus->setCubeReflectionQuality(value);
-	_core->_masterRenderer->reloadCubeReflectionCaptureBuffer(_core->_renderBus);
+	_core->_masterRenderer->reloadCubeReflectionCaptureBuffer();
 }
 
 void FabiEngine3D::gfx_setPlanarReflectionQuality(unsigned int value)
 {
 	_core->_renderBus->setPlanarReflectionQuality(value);
-	_core->_masterRenderer->reloadPlanarReflectionCaptureBuffer(_core->_renderBus);
-	_core->_masterRenderer->reloadWaterReflectionCaptureBuffer(_core->_renderBus);
+	_core->_masterRenderer->reloadPlanarReflectionCaptureBuffer();
+	_core->_masterRenderer->reloadWaterReflectionCaptureBuffer();
 }
 
 void FabiEngine3D::gfx_setPlanarRefractionQuality(unsigned int value)
 {
 	_core->_renderBus->setPlanarRefractionQuality(value);
-	_core->_masterRenderer->reloadWaterRefractionCaptureBuffer(_core->_renderBus);
+	_core->_masterRenderer->reloadWaterRefractionCaptureBuffer();
 }
 
 void FabiEngine3D::gfx_setShadowQuality(unsigned int value)
 {
 	_core->_shadowGenerator->setQuality(value);
-	_core->_masterRenderer->reloadShadowCaptureBuffer(_core->_renderBus);
+	_core->_masterRenderer->reloadShadowCaptureBuffer();
 }
 
 void FabiEngine3D::gfx_setAmbientLightingColor(fvec3 value)

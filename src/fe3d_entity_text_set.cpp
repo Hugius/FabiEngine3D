@@ -8,7 +8,7 @@ void FabiEngine3D::text_deleteAll()
 
 void FabiEngine3D::text_create(const string& ID, bool isCentered)
 {
-	_core->_textEntityManager->createEntity(_core->_renderBus, ID, isCentered);
+	_core->_textEntityManager->createEntity(ID, isCentered);
 }
 
 void FabiEngine3D::text_delete(const string& ID)
@@ -24,12 +24,12 @@ void FabiEngine3D::text_setVisible(const string& ID, bool value)
 void FabiEngine3D::text_setFontMap(const string& ID, const string& value)
 {
 	auto entity = _core->_textEntityManager->getEntity(ID);
-	if(_core->_bufferCache.getTextureBuffer(value) == nullptr)
+	if(_core->_bufferCache->getTextureBuffer(value) == nullptr)
 	{
-		_core->_bufferCache.storeTextureBuffer(value, make_shared<TextureBuffer>(_core->_imageLoader->loadImage(value), false, false));
+		_core->_bufferCache->storeTextureBuffer(value, make_shared<TextureBuffer>(_core->_imageLoader->loadImage(value), false, false));
 	}
 
-	entity->setFontMap(_core->_bufferCache.getTextureBuffer(value));
+	entity->setFontMap(_core->_bufferCache->getTextureBuffer(value));
 	entity->setFontMapPath(value);
 }
 

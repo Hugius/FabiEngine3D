@@ -8,7 +8,7 @@ void FabiEngine3D::quad_deleteAll()
 
 void FabiEngine3D::quad_create(const string& ID, bool isCentered)
 {
-	_core->_quadEntityManager->createEntity(_core->_renderBus, ID, isCentered);
+	_core->_quadEntityManager->createEntity(ID, isCentered);
 }
 
 void FabiEngine3D::quad_delete(const string& ID)

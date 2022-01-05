@@ -1,8 +1,7 @@
 #pragma once
 
+#include "base_renderer.hpp"
 #include "terrain_entity.hpp"
-#include "shader_buffer.hpp"
-#include "render_bus.hpp"
 
 class TerrainEntityDepthRenderer final : BaseRenderer
 {

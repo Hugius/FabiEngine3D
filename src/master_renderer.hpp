@@ -42,6 +42,17 @@ public:
 	void inject(shared_ptr<Camera> camera);
 	void inject(shared_ptr<ShadowGenerator> shadowGenerator);
 	void inject(shared_ptr<Timer> timer);
+	void inject(shared_ptr<SkyEntityManager> skyEntityManager);
+	void inject(shared_ptr<TerrainEntityManager> terrainEntityManager);
+	void inject(shared_ptr<WaterEntityManager> waterEntityManager);
+	void inject(shared_ptr<ModelEntityManager> modelEntityManager);
+	void inject(shared_ptr<BillboardEntityManager> billboardEntityManager);
+	void inject(shared_ptr<AabbEntityManager> aabbEntityManager);
+	void inject(shared_ptr<QuadEntityManager> quadEntityManager);
+	void inject(shared_ptr<TextEntityManager> textEntityManager);
+	void inject(shared_ptr<PointlightEntityManager> pointlightEntityManager);
+	void inject(shared_ptr<SpotlightEntityManager> spotlightEntityManager);
+	void inject(shared_ptr<ReflectionEntityManager> reflectionEntityManager);
 	void update();
 	void renderLogo(shared_ptr<QuadEntity> logo, ivec2 viewport);
 	void renderApplication();

@@ -1,12 +1,13 @@
 #include "render_window.hpp"
+#include "render_window.hpp"
 #include "logger.hpp"
 #include "configuration.hpp"
 
 #include <SDL_syswm.h>
 
-RenderWindow::RenderWindow(LibraryLoader& libraryLoader)
+RenderWindow::RenderWindow(SDL_Window* windowPointer)
 	:
-	_windowPointer(libraryLoader.getWindowPointer())
+	_windowPointer(windowPointer)
 {
 	hideBorder();
 	disableVsync();

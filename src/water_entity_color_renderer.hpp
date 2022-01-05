@@ -1,10 +1,9 @@
 #pragma once
 
+#include "base_renderer.hpp"
+#include "water_entity.hpp"
 #include "pointlight_entity.hpp"
 #include "spotlight_entity.hpp"
-#include "water_entity.hpp"
-#include "shader_buffer.hpp"
-#include "render_bus.hpp"
 
 #include <unordered_map>
 

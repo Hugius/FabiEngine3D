@@ -1,8 +1,7 @@
 #pragma once
 
+#include "base_renderer.hpp"
 #include "sky_entity.hpp"
-#include "shader_buffer.hpp"
-#include "render_bus.hpp"
 
 class SkyEntityColorRenderer final : BaseRenderer
 {

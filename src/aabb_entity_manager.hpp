@@ -14,14 +14,17 @@ class AabbEntityManager final
 public:
 	AabbEntityManager();
 
+	void inject(shared_ptr<ModelEntityManager> modelEntityManager);
+	void inject(shared_ptr<BillboardEntityManager> billboardEntityManager);
 	void createEntity(const string& ID, bool isCentered);
-	void update(shared_ptr<ModelEntityManager> modelEntityManager, shared_ptr<BillboardEntityManager> billboardEntityManager);
+	void update();
 	void deleteEntity(const string& ID);
 	void deleteEntities();
 
 	const bool isEntityExisting(const string& ID);
 
 	const unordered_map<string, shared_ptr<AabbEntity>>& getEntities();
+
 	shared_ptr<AabbEntity> getEntity(const string& ID);
 
 private:
@@ -31,4 +34,7 @@ private:
 	const shared_ptr<VertexBuffer> _standingMesh;
 
 	unordered_map<string, shared_ptr<AabbEntity>> _entities;
+
+	shared_ptr<ModelEntityManager> _modelEntityManager = nullptr;
+	shared_ptr<BillboardEntityManager> _billboardEntityManager = nullptr;
 };

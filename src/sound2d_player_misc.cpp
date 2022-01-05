@@ -9,9 +9,14 @@ Sound2dPlayer::Sound2dPlayer()
 	Mix_AllocateChannels(MAX_CHANNEL_COUNT);
 }
 
-void Sound2dPlayer::update(shared_ptr<Sound2dManager> sound2dManager)
+void Sound2dPlayer::inject(shared_ptr<Sound2dManager> sound2dManager)
 {
-	for(auto& sound : sound2dManager->getSounds())
+	_sound2dManager = sound2dManager;
+}
+
+void Sound2dPlayer::update()
+{
+	for(auto& sound : _sound2dManager->getSounds())
 	{
 		_updateSoundVolume(sound);
 	}

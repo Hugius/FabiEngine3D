@@ -17,6 +17,7 @@ void Sound2dPlayer::startSound(Sound2d& sound, int playCount, unsigned int fadeM
 	if(channel == -1)
 	{
 		Logger::throwError("Sound2dPlayer::startSound::3");
+		return;
 	}
 	_channels[channel] = sound.getID();
 

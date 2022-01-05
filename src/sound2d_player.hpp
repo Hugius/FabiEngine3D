@@ -17,7 +17,8 @@ class Sound2dPlayer final
 public:
 	Sound2dPlayer();
 
-	void update(shared_ptr<Sound2dManager> sound2dManager);
+	void inject(shared_ptr<Sound2dManager> sound2dManager);
+	void update();
 	void startSound(Sound2d& sound, int playCount, unsigned int fadeMS, bool mustForce);
 	void pauseSound(Sound2d& sound);
 	void resumeSound(Sound2d& sound);
@@ -43,4 +44,6 @@ private:
 	const int _getFreeChannel() const;
 
 	array<string, MAX_CHANNEL_COUNT> _channels;
+
+	shared_ptr<Sound2dManager> _sound2dManager = nullptr;
 };

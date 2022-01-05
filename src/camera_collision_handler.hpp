@@ -1,17 +1,20 @@
 #pragma once
 
-#include "aabb_entity.hpp"
 #include "camera.hpp"
 #include "raycaster.hpp"
 #include "camera_collision_detector.hpp"
 #include "terrain_entity_manager.hpp"
+#include "aabb_entity_manager.hpp"
 #include "box.hpp"
 #include "direction_order.hpp"
 
 class CameraCollisionHandler final
 {
 public:
-	void update(TerrainEntityManager& terrainManager, Camera& camera, const unordered_map<string, shared_ptr<AabbEntity>>& aabbs);
+	void inject(shared_ptr<TerrainEntityManager> terrainManager);
+	void inject(shared_ptr<AabbEntityManager> aabbManager);
+	void inject(shared_ptr<Camera> camera);
+	void update();
 	void setCameraBox(const Box& box);
 	void enableCameraAabbResponse(bool x, bool y, bool z);
 	void disableCameraAabbResponse();
@@ -23,7 +26,7 @@ public:
 	const bool isCameraTerrainResponseEnabled() const;
 
 private:
-	const bool _handleCollision(Direction direction, const unordered_map<string, shared_ptr<AabbEntity>>& aabbs, Camera& camera) const;
+	const bool _handleCollision(Direction direction) const;
 
 	fvec3 _lastCameraPosition = fvec3(0.0f);
 
@@ -40,4 +43,8 @@ private:
 	CameraCollisionDetector _collisionDetector;
 	DirectionOrder _responseDirectionOrder = DirectionOrder::XYZ;
 	Box _cameraBox = Box(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+
+	shared_ptr<TerrainEntityManager> _terrainManager = nullptr;
+	shared_ptr<AabbEntityManager> _aabbManager = nullptr;
+	shared_ptr<Camera> _camera = nullptr;
 };

@@ -1,28 +1,27 @@
 #include "camera_collision_handler.hpp"
 
-void CameraCollisionHandler::update(TerrainEntityManager& terrainManager, Camera& camera,
-									const unordered_map<string, shared_ptr<AabbEntity>>& aabbs)
+void CameraCollisionHandler::update()
 {
 	_isCameraUnderTerrain = false;
 	if(_isCameraTerrainResponseEnabled)
 	{
-		if(terrainManager.getSelectedTerrain() != nullptr)
+		if(_terrainManager->getSelectedTerrain() != nullptr)
 		{
-			fvec3 cameraPosition = camera.getPosition();
-			const float terrainX = (cameraPosition.x + (terrainManager.getSelectedTerrain()->getSize() / 2.0f));
-			const float terrainZ = (cameraPosition.z + (terrainManager.getSelectedTerrain()->getSize() / 2.0f));
-			const float terrainY = (terrainManager.getPixelHeight(terrainManager.getSelectedTerrain()->getID(), terrainX, terrainZ) + _cameraTerrainHeight);
+			fvec3 cameraPosition = _camera->getPosition();
+			const float terrainX = (cameraPosition.x + (_terrainManager->getSelectedTerrain()->getSize() / 2.0f));
+			const float terrainZ = (cameraPosition.z + (_terrainManager->getSelectedTerrain()->getSize() / 2.0f));
+			const float terrainY = (_terrainManager->getPixelHeight(_terrainManager->getSelectedTerrain()->getID(), terrainX, terrainZ) + _cameraTerrainHeight);
 
 			if(cameraPosition.y < terrainY)
 			{
 				_isCameraUnderTerrain = true;
 
-				camera.move(fvec3(0.0f, fabsf(cameraPosition.y - terrainY) * _cameraTerrainSpeed, 0.0f));
-				cameraPosition.y = camera.getPosition().y;
+				_camera->move(fvec3(0.0f, fabsf(cameraPosition.y - terrainY) * _cameraTerrainSpeed, 0.0f));
+				cameraPosition.y = _camera->getPosition().y;
 
 				if(cameraPosition.y > terrainY)
 				{
-					camera.setPosition(fvec3(cameraPosition.x, terrainY, cameraPosition.z));
+					_camera->setPosition(fvec3(cameraPosition.x, terrainY, cameraPosition.z));
 				}
 			}
 		}
@@ -34,7 +33,7 @@ void CameraCollisionHandler::update(TerrainEntityManager& terrainManager, Camera
 		unsigned int yPriority = 0;
 		unsigned int zPriority = 0;
 
-		for(const auto& [key, aabb] : aabbs)
+		for(const auto& [key, aabb] : _aabbManager->getEntities())
 		{
 			aabb->setCollided(false);
 		}
@@ -44,49 +43,49 @@ void CameraCollisionHandler::update(TerrainEntityManager& terrainManager, Camera
 			case DirectionOrder::XYZ:
 			{
 				xPriority = 3; yPriority = 2; zPriority = 1;
-				xPriority *= static_cast<unsigned int>(_handleCollision(Direction::X, aabbs, camera));
-				yPriority *= static_cast<unsigned int>(_handleCollision(Direction::Y, aabbs, camera));
-				zPriority *= static_cast<unsigned int>(_handleCollision(Direction::Z, aabbs, camera));
+				xPriority *= static_cast<unsigned int>(_handleCollision(Direction::X));
+				yPriority *= static_cast<unsigned int>(_handleCollision(Direction::Y));
+				zPriority *= static_cast<unsigned int>(_handleCollision(Direction::Z));
 				break;
 			}
 			case DirectionOrder::XZY:
 			{
 				xPriority = 3; zPriority = 2; yPriority = 1;
-				xPriority *= static_cast<unsigned int>(_handleCollision(Direction::X, aabbs, camera));
-				zPriority *= static_cast<unsigned int>(_handleCollision(Direction::Z, aabbs, camera));
-				yPriority *= static_cast<unsigned int>(_handleCollision(Direction::Y, aabbs, camera));
+				xPriority *= static_cast<unsigned int>(_handleCollision(Direction::X));
+				zPriority *= static_cast<unsigned int>(_handleCollision(Direction::Z));
+				yPriority *= static_cast<unsigned int>(_handleCollision(Direction::Y));
 				break;
 			}
 			case DirectionOrder::YXZ:
 			{
 				yPriority = 3; xPriority = 1; zPriority = 2;
-				yPriority *= static_cast<unsigned int>(_handleCollision(Direction::Y, aabbs, camera));
-				xPriority *= static_cast<unsigned int>(_handleCollision(Direction::X, aabbs, camera));
-				zPriority *= static_cast<unsigned int>(_handleCollision(Direction::Z, aabbs, camera));
+				yPriority *= static_cast<unsigned int>(_handleCollision(Direction::Y));
+				xPriority *= static_cast<unsigned int>(_handleCollision(Direction::X));
+				zPriority *= static_cast<unsigned int>(_handleCollision(Direction::Z));
 				break;
 			}
 			case DirectionOrder::YZX:
 			{
 				yPriority = 3; zPriority = 2; xPriority = 1;
-				yPriority *= static_cast<unsigned int>(_handleCollision(Direction::Y, aabbs, camera));
-				zPriority *= static_cast<unsigned int>(_handleCollision(Direction::Z, aabbs, camera));
-				zPriority *= static_cast<unsigned int>(_handleCollision(Direction::X, aabbs, camera));
+				yPriority *= static_cast<unsigned int>(_handleCollision(Direction::Y));
+				zPriority *= static_cast<unsigned int>(_handleCollision(Direction::Z));
+				zPriority *= static_cast<unsigned int>(_handleCollision(Direction::X));
 				break;
 			}
 			case DirectionOrder::ZXY:
 			{
 				zPriority = 3; xPriority = 2; yPriority = 1;
-				zPriority *= static_cast<unsigned int>(_handleCollision(Direction::Z, aabbs, camera));
-				xPriority *= static_cast<unsigned int>(_handleCollision(Direction::X, aabbs, camera));
-				yPriority *= static_cast<unsigned int>(_handleCollision(Direction::Y, aabbs, camera));
+				zPriority *= static_cast<unsigned int>(_handleCollision(Direction::Z));
+				xPriority *= static_cast<unsigned int>(_handleCollision(Direction::X));
+				yPriority *= static_cast<unsigned int>(_handleCollision(Direction::Y));
 				break;
 			}
 			case DirectionOrder::ZYX:
 			{
 				zPriority = 3; yPriority = 2; xPriority = 1;
-				zPriority *= static_cast<unsigned int>(_handleCollision(Direction::Z, aabbs, camera));
-				yPriority *= static_cast<unsigned int>(_handleCollision(Direction::Y, aabbs, camera));
-				xPriority *= static_cast<unsigned int>(_handleCollision(Direction::X, aabbs, camera));
+				zPriority *= static_cast<unsigned int>(_handleCollision(Direction::Z));
+				yPriority *= static_cast<unsigned int>(_handleCollision(Direction::Y));
+				xPriority *= static_cast<unsigned int>(_handleCollision(Direction::X));
 				break;
 			}
 		}
@@ -116,6 +115,6 @@ void CameraCollisionHandler::update(TerrainEntityManager& terrainManager, Camera
 			_responseDirectionOrder = DirectionOrder::ZXY;
 		}
 
-		_lastCameraPosition = camera.getPosition();
+		_lastCameraPosition = _camera->getPosition();
 	}
 }

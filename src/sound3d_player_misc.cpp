@@ -9,13 +9,23 @@ Sound3dPlayer::Sound3dPlayer()
 	Mix_AllocateChannels(MAX_CHANNEL_COUNT);
 }
 
+void Sound3dPlayer::inject(shared_ptr<Sound3dManager> sound3dManager)
+{
+	_sound3dManager = sound3dManager;
+}
+
+void Sound3dPlayer::inject(shared_ptr<Camera> camera)
+{
+	_camera = camera;
+}
+
 void Sound3dPlayer::update()
 {
-	for(auto& sound : sound3dManager->getSounds())
+	for(auto& sound : _sound3dManager->getSounds())
 	{
 		if(isSoundStarted(sound))
 		{
-			auto cameraPosition = camera.getPosition();
+			auto cameraPosition = _camera->getPosition();
 			float xDifference = fabsf(sound.getPosition().x - cameraPosition.x);
 			float yDifference = fabsf(sound.getPosition().y - cameraPosition.y);
 			float zDifference = fabsf(sound.getPosition().z - cameraPosition.z);
@@ -24,7 +34,7 @@ void Sound3dPlayer::update()
 			volume = clamp(volume, 0.0f, sound.getMaxVolume());
 			sound.setVolume(volume);
 
-			auto cameraDirection = camera.getFrontVector();
+			auto cameraDirection = _camera->getFrontVector();
 			auto rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(90.0f));
 			auto soundDirection = (cameraPosition - sound.getPosition());
 			auto result = (rotationMatrix * fvec4(soundDirection.x, soundDirection.y, soundDirection.z, 1.0f));

@@ -5,8 +5,9 @@
 class ShadowGenerator final
 {
 public:
-	void update(RenderBus& renderBus);
-	void generate(RenderBus& renderBus);
+	void inject(shared_ptr<RenderBus> renderBus);
+	void update();
+	void generate();
 	void setEyePosition(fvec3 value);
 	void setCenterPosition(fvec3 value);
 	void setSize(float value);
@@ -47,4 +48,6 @@ private:
 
 	bool _isEnabled = false;
 	bool _isFollowingCamera = false;
+
+	shared_ptr<RenderBus> _renderBus = nullptr;
 };

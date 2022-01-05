@@ -1,4 +1,5 @@
 #include "sound2d_manager.hpp"
+#include "sound2d_manager.hpp"
 #include "logger.hpp"
 
 #include <algorithm>
@@ -22,12 +23,17 @@ void Sound2dManager::deleteSound(const string& ID)
 	}
 }
 
+void Sound2dManager::inject(shared_ptr<AudioLoader> audioLoader)
+{
+	_audioLoader = audioLoader;
+}
+
 void Sound2dManager::update()
 {
 
 }
 
-void Sound2dManager::createSound(const string& ID, const string& audioPath, AudioLoader& audioLoader)
+void Sound2dManager::createSound(const string& ID, const string& audioPath)
 {
 	if(_findSoundIndex(ID) != -1)
 	{
@@ -38,7 +44,7 @@ void Sound2dManager::createSound(const string& ID, const string& audioPath, Audi
 		Logger::throwError("Sound2dManager::createSound::2");
 	}
 
-	auto dataPointer = audioLoader.loadChunk(audioPath);
+	auto dataPointer = _audioLoader->loadChunk(audioPath);
 
 	if(dataPointer != nullptr)
 	{

@@ -1,4 +1,5 @@
 #include "aabb_entity_manager.hpp"
+#include "aabb_entity_manager.hpp"
 #include "render_bus.hpp"
 #include "logger.hpp" 
 #include "tools.hpp"
@@ -57,6 +58,16 @@ AabbEntityManager::AabbEntityManager()
 
 }
 
+void AabbEntityManager::inject(shared_ptr<ModelEntityManager> modelEntityManager)
+{
+	_modelEntityManager = modelEntityManager;
+}
+
+void AabbEntityManager::inject(shared_ptr<BillboardEntityManager> billboardEntityManager)
+{
+	_billboardEntityManager = billboardEntityManager;
+}
+
 shared_ptr<AabbEntity> AabbEntityManager::getEntity(const string& ID)
 {
 	auto iterator = _entities.find(ID);
@@ -86,10 +97,10 @@ void AabbEntityManager::createEntity(const string& ID, bool isCentered)
 	entity->setCentered(isCentered);
 }
 
-void AabbEntityManager::update(shared_ptr<ModelEntityManager> modelEntityManager, shared_ptr<BillboardEntityManager> billboardEntityManager)
+void AabbEntityManager::update()
 {
-	const auto& modelEntities = modelEntityManager->getEntities();
-	const auto& billboardEntities = billboardEntityManager->getEntities();
+	const auto& modelEntities = _modelEntityManager->getEntities();
+	const auto& billboardEntities = _billboardEntityManager->getEntities();
 
 	for(const auto& [key, entity] : _entities)
 	{

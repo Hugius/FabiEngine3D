@@ -16,6 +16,8 @@ class Sound3dPlayer final
 public:
 	Sound3dPlayer();
 
+	void inject(shared_ptr<Sound3dManager> sound3dManager);
+	void inject(shared_ptr<Camera> camera);
 	void update();
 	void startSound(Sound3d& sound, int playCount, unsigned int fadeMS, bool mustForce);
 	void pauseSound(Sound3d& sound);
@@ -42,4 +44,7 @@ private:
 	const int _getFreeChannel() const;
 
 	array<string, MAX_CHANNEL_COUNT> _channels;
+
+	shared_ptr<Sound3dManager> _sound3dManager = nullptr;
+	shared_ptr<Camera> _camera = nullptr;
 };

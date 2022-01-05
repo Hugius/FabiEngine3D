@@ -1,10 +1,11 @@
 #include "shadow_generator.hpp"
+#include "shadow_generator.hpp"
 #include "render_bus.hpp"
 #include "configuration.hpp"
 
 using std::max;
 
-void ShadowGenerator::update(RenderBus& renderBus)
+void ShadowGenerator::update()
 {
 	if(_isEnabled)
 	{
@@ -12,7 +13,7 @@ void ShadowGenerator::update(RenderBus& renderBus)
 		{
 			_passedFrames = 0;
 
-			generate(renderBus);
+			generate();
 		}
 		else
 		{
@@ -21,7 +22,7 @@ void ShadowGenerator::update(RenderBus& renderBus)
 	}
 }
 
-void ShadowGenerator::generate(RenderBus& renderBus)
+void ShadowGenerator::generate()
 {
 	auto newEyePosition = _eyePosition;
 	auto newCenterPosition = _centerPosition;
@@ -33,7 +34,7 @@ void ShadowGenerator::generate(RenderBus& renderBus)
 
 	if(_isFollowingCamera)
 	{
-		auto cameraPosition = renderBus.getCameraPosition();
+		auto cameraPosition = _renderBus->getCameraPosition();
 
 		newEyePosition.x += cameraPosition.x;
 		newEyePosition.z += cameraPosition.z;
@@ -41,15 +42,15 @@ void ShadowGenerator::generate(RenderBus& renderBus)
 		newCenterPosition.z += cameraPosition.z;
 	}
 
-	renderBus.setShadowEyePosition(newEyePosition);
-	renderBus.setShadowCenterPosition(newCenterPosition);
-	renderBus.setShadowSize(newSize);
-	renderBus.setShadowReach(newReach);
-	renderBus.setShadowLightness(newLightness);
-	renderBus.setShadowQuality(newQuality);
-	renderBus.setShadowsEnabled(newEnabled);
+	_renderBus->setShadowEyePosition(newEyePosition);
+	_renderBus->setShadowCenterPosition(newCenterPosition);
+	_renderBus->setShadowSize(newSize);
+	_renderBus->setShadowReach(newReach);
+	_renderBus->setShadowLightness(newLightness);
+	_renderBus->setShadowQuality(newQuality);
+	_renderBus->setShadowsEnabled(newEnabled);
 
-	renderBus.setShadowMatrix(_createShadowMatrix(newEyePosition, newCenterPosition, newSize, newReach));
+	_renderBus->setShadowMatrix(_createShadowMatrix(newEyePosition, newCenterPosition, newSize, newReach));
 }
 
 const mat44 ShadowGenerator::_createShadowMatrix(fvec3 eyePosition, fvec3 centerPosition, float size, float reach) const
@@ -81,6 +82,11 @@ void ShadowGenerator::setEnabled(bool value)
 void ShadowGenerator::setFollowingCamera(bool value)
 {
 	_isFollowingCamera = value;
+}
+
+void ShadowGenerator::inject(shared_ptr<RenderBus> renderBus)
+{
+	_renderBus = renderBus;
 }
 
 void ShadowGenerator::setEyePosition(fvec3 value)

@@ -44,43 +44,45 @@ shared_ptr<Image> ImageLoader::_loadImage(const string& filePath)
 	const auto size = (width * height * byteFormat);
 	const auto pixels = new unsigned char[size];
 
-	for(unsigned i = 0; i < size; i++)
-	{
-		pixels[i] = static_cast<unsigned char>(getc(file));
-	}
-
-	auto correctedPixels = new unsigned char[size];
 	for(unsigned y = 0; y < height; y++)
 	{
 		for(unsigned x = 0; x < width; x++)
 		{
-			const auto index = ((x * byteFormat) + (y * width * byteFormat));
+			const auto index = ((y * width * byteFormat) + (x * byteFormat));
 
 			if(byteFormat == 1)
 			{
-				correctedPixels[index + 0] = pixels[index + 0];
+				pixels[index] = static_cast<unsigned char>(getc(file));
 			}
 			if(byteFormat == 3)
 			{
-				correctedPixels[index + 0] = pixels[index + 2];
-				correctedPixels[index + 1] = pixels[index + 1];
-				correctedPixels[index + 2] = pixels[index + 0];
+				auto b = static_cast<unsigned char>(getc(file));
+				auto g = static_cast<unsigned char>(getc(file));
+				auto r = static_cast<unsigned char>(getc(file));
+
+				pixels[index + 0] = r;
+				pixels[index + 1] = g;
+				pixels[index + 2] = b;
 			}
 			if(byteFormat == 4)
 			{
-				correctedPixels[index + 0] = pixels[index + 2];
-				correctedPixels[index + 1] = pixels[index + 1];
-				correctedPixels[index + 2] = pixels[index + 0];
-				correctedPixels[index + 3] = pixels[index + 3];
+				auto b = static_cast<unsigned char>(getc(file));
+				auto g = static_cast<unsigned char>(getc(file));
+				auto r = static_cast<unsigned char>(getc(file));
+				auto a = static_cast<unsigned char>(getc(file));
+
+				pixels[index + 0] = r;
+				pixels[index + 1] = g;
+				pixels[index + 2] = b;
+				pixels[index + 3] = a;
 			}
 		}
 	}
 
 	delete[] header;
-	delete[] pixels;
 	fclose(file);
 
-	return make_shared<Image>(correctedPixels,
+	return make_shared<Image>(pixels,
 							  static_cast<unsigned int>(width),
 							  static_cast<unsigned int>(height),
 							  PixelFormat(bitFormat == 8 ? PixelFormat::GRAY : bitFormat == 24 ? PixelFormat::RGB : PixelFormat::RGBA));

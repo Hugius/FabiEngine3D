@@ -11,6 +11,7 @@
 class CameraCollisionHandler final
 {
 public:
+	void inject(shared_ptr<CameraCollisionDetector> cameraCollisionDetector);
 	void inject(shared_ptr<TerrainEntityManager> terrainManager);
 	void inject(shared_ptr<AabbEntityManager> aabbManager);
 	void inject(shared_ptr<Camera> camera);
@@ -40,10 +41,10 @@ private:
 	bool _isCameraTerrainResponseEnabled = false;
 	bool _isCameraUnderTerrain = false;
 
-	CameraCollisionDetector _collisionDetector;
 	DirectionOrder _responseDirectionOrder = DirectionOrder::XYZ;
 	Box _cameraBox = Box(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 
+	shared_ptr<CameraCollisionDetector> _cameraCollisionDetector = nullptr;
 	shared_ptr<TerrainEntityManager> _terrainManager = nullptr;
 	shared_ptr<AabbEntityManager> _aabbManager = nullptr;
 	shared_ptr<Camera> _camera = nullptr;

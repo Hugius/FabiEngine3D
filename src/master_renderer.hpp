@@ -38,10 +38,6 @@ class MasterRenderer final
 public:
 	MasterRenderer();
 
-	void inject(shared_ptr<RenderBus> renderBus);
-	void inject(shared_ptr<Camera> camera);
-	void inject(shared_ptr<ShadowGenerator> shadowGenerator);
-	void inject(shared_ptr<Timer> timer);
 	void inject(shared_ptr<SkyEntityManager> skyEntityManager);
 	void inject(shared_ptr<TerrainEntityManager> terrainEntityManager);
 	void inject(shared_ptr<WaterEntityManager> waterEntityManager);
@@ -53,6 +49,10 @@ public:
 	void inject(shared_ptr<PointlightEntityManager> pointlightEntityManager);
 	void inject(shared_ptr<SpotlightEntityManager> spotlightEntityManager);
 	void inject(shared_ptr<ReflectionEntityManager> reflectionEntityManager);
+	void inject(shared_ptr<RenderBus> renderBus);
+	void inject(shared_ptr<Camera> camera);
+	void inject(shared_ptr<ShadowGenerator> shadowGenerator);
+	void inject(shared_ptr<Timer> timer);
 	void update();
 	void renderLogo(shared_ptr<QuadEntity> logo, ivec2 viewport);
 	void renderApplication();
@@ -153,11 +153,11 @@ private:
 	shared_ptr<CaptureBuffer> _dofCaptor = nullptr;
 	shared_ptr<CaptureBuffer> _lensFlareCaptor = nullptr;
 	shared_ptr<CaptureBuffer> _motionBlurCaptor = nullptr;
+	shared_ptr<CaptureBuffer> _bloomBlurCaptorHighQuality = nullptr;
+	shared_ptr<CaptureBuffer> _bloomBlurCaptorLowQuality = nullptr;
+	shared_ptr<CaptureBuffer> _dofBlurCaptor = nullptr;
+	shared_ptr<CaptureBuffer> _motionBlurBlurCaptor = nullptr;
 
-	shared_ptr<RenderBus> _renderBus = nullptr;
-	shared_ptr<Camera> _camera = nullptr;
-	shared_ptr<ShadowGenerator> _shadowGenerator = nullptr;
-	shared_ptr<Timer> _timer = nullptr;
 	shared_ptr<SkyEntityManager> _skyEntityManager = nullptr;
 	shared_ptr<TerrainEntityManager> _terrainEntityManager = nullptr;
 	shared_ptr<WaterEntityManager> _waterEntityManager = nullptr;
@@ -169,4 +169,8 @@ private:
 	shared_ptr<PointlightEntityManager> _pointlightEntityManager = nullptr;
 	shared_ptr<SpotlightEntityManager> _spotlightEntityManager = nullptr;
 	shared_ptr<ReflectionEntityManager> _reflectionEntityManager = nullptr;
+	shared_ptr<RenderBus> _renderBus = nullptr;
+	shared_ptr<Camera> _camera = nullptr;
+	shared_ptr<ShadowGenerator> _shadowGenerator = nullptr;
+	shared_ptr<Timer> _timer = nullptr;
 };

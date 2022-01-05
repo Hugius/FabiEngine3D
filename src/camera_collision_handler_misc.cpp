@@ -17,6 +17,11 @@ void CameraCollisionHandler::inject(shared_ptr<Camera> camera)
 	_camera = camera;
 }
 
+void CameraCollisionHandler::inject(shared_ptr<CameraCollisionDetector> cameraCollisionDetector)
+{
+	_cameraCollisionDetector = cameraCollisionDetector;
+}
+
 void CameraCollisionHandler::setCameraBox(const Box& box)
 {
 	_cameraBox = box;
@@ -97,7 +102,7 @@ const bool CameraCollisionHandler::_handleCollision(Direction direction) const
 				{
 					const fvec3 middle = _camera->getPosition();
 					const fvec3 middleChange = (middle - _lastCameraPosition);
-					auto hasCollided = _collisionDetector.checkX(aabb->getPosition(), aabb->getSize(), middle, middleChange, _cameraBox);
+					auto hasCollided = _cameraCollisionDetector->checkX(aabb->getPosition(), aabb->getSize(), middle, middleChange, _cameraBox);
 
 					if(hasCollided)
 					{
@@ -120,7 +125,7 @@ const bool CameraCollisionHandler::_handleCollision(Direction direction) const
 				{
 					const fvec3 middle = _camera->getPosition();
 					const fvec3 middleChange = (middle - _lastCameraPosition);
-					auto hasCollided = _collisionDetector.checkY(aabb->getPosition(), aabb->getSize(), middle, middleChange, _cameraBox);
+					auto hasCollided = _cameraCollisionDetector->checkY(aabb->getPosition(), aabb->getSize(), middle, middleChange, _cameraBox);
 
 					if(hasCollided)
 					{
@@ -146,7 +151,7 @@ const bool CameraCollisionHandler::_handleCollision(Direction direction) const
 				{
 					const fvec3 middle = _camera->getPosition();
 					const fvec3 middleChange = (middle - _lastCameraPosition);
-					auto hasCollided = _collisionDetector.checkZ(aabb->getPosition(), aabb->getSize(), middle, middleChange, _cameraBox);
+					auto hasCollided = _cameraCollisionDetector->checkZ(aabb->getPosition(), aabb->getSize(), middle, middleChange, _cameraBox);
 
 					if(hasCollided)
 					{

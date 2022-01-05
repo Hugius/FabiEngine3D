@@ -4,9 +4,9 @@
 
 using std::make_shared;
 
-void BlurRenderer::loadCaptureBuffer(ivec2 bufferSize)
+void BlurRenderer::inject(shared_ptr<CaptureBuffer> captor)
 {
-	_captor = make_shared<CaptureBuffer>(ivec2(0), bufferSize, 1, true);
+	_captor = captor;
 }
 
 void BlurRenderer::bind()

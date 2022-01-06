@@ -69,6 +69,7 @@ Core::Core(FabiEngine3D& fe3d)
 	_masterRenderer->inject(_pointlightEntityManager);
 	_masterRenderer->inject(_spotlightEntityManager);
 	_masterRenderer->inject(_reflectionEntityManager);
+	_masterRenderer->inject(_bufferCache);
 	_shadowGenerator->inject(_renderBus);
 	_camera->inject(_renderBus);
 	_camera->inject(_renderWindow);

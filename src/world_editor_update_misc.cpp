@@ -94,18 +94,6 @@ void WorldEditor::_updateMiscellaneous()
 				_fe3d.misc_enableWireframeRendering();
 			}
 		}
-
-		if(_fe3d.input_isKeyPressed(InputType::KEY_R))
-		{
-			if(_fe3d.misc_isDebugRenderingEnabled())
-			{
-				_fe3d.misc_disableDebugRendering();
-			}
-			else
-			{
-				_fe3d.misc_enableDebugRendering();
-			}
-		}
 	}
 
 	if(_fe3d.raycast_isTerrainPointingEnabled())

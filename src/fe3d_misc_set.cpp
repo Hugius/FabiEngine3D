@@ -43,17 +43,6 @@ void FabiEngine3D::misc_enableAabbFrameRendering()
 	_core->_renderBus->setAabbFrameRenderingEnabled(true);
 }
 
-void FabiEngine3D::misc_enableDebugRendering()
-{
-	if(_core->_renderBus->isDebugRenderingEnabled())
-	{
-		Logger::throwWarning("Tried to enable debug rendering: already enabled!");
-		return;
-	}
-
-	_core->_renderBus->setDebugRenderingEnabled(true);
-}
-
 void FabiEngine3D::misc_enableVsync()
 {
 	if(_core->_renderWindow->isVsyncEnabled())
@@ -96,17 +85,6 @@ void FabiEngine3D::misc_disableAabbFrameRendering()
 	}
 
 	_core->_renderBus->setAabbFrameRenderingEnabled(false);
-}
-
-void FabiEngine3D::misc_disableDebugRendering()
-{
-	if(!_core->_renderBus->isDebugRenderingEnabled())
-	{
-		Logger::throwWarning("Tried to disable debug rendering: not enabled!");
-		return;
-	}
-
-	_core->_renderBus->setDebugRenderingEnabled(false);
 }
 
 void FabiEngine3D::misc_disableVsync()

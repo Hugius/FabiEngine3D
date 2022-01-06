@@ -355,11 +355,6 @@ const bool RenderBus::isShadowFrameRenderingEnabled() const
 	return _isShadowFrameRenderingEnabled;
 }
 
-const bool RenderBus::isDebugRenderingEnabled() const
-{
-	return _isDebugRenderingEnabled;
-}
-
 const bool RenderBus::isTriangleCountingEnabled() const
 {
 	return _isTriangleCountingEnabled;

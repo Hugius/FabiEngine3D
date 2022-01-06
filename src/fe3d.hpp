@@ -890,7 +890,6 @@ public:
 	const bool misc_isWireframeRenderingEnabled() const;
 	const bool misc_isShadowFrameRenderingEnabled() const;
 	const bool misc_isAabbFrameRenderingEnabled() const;
-	const bool misc_isDebugRenderingEnabled() const;
 
 protected:
 	virtual void FE3D_CONTROLLER_INIT() = 0;

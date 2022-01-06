@@ -171,23 +171,11 @@ void MasterRenderer::renderApplication()
 	_captureDOF();
 	_captureLensFlare();
 	_captureMotionBlur();
-	_timer->stopDeltaPart();
-
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	if(_renderBus->isDebugRenderingEnabled())
-	{
-		glViewport(config.getViewportPosition().x, config.getViewportPosition().y, config.getViewportSize().x, config.getViewportSize().y);
-		_renderDebugScreens();
-		glViewport(0, 0, config.getWindowSize().x, config.getWindowSize().y);
-	}
-	else
-	{
-		glViewport(config.getViewportPosition().x, config.getViewportPosition().y, config.getViewportSize().x, config.getViewportSize().y);
-		_renderFinalSceneMap();
-		glViewport(0, 0, config.getWindowSize().x, config.getWindowSize().y);
-
-	}
+	glViewport(config.getViewportPosition().x, config.getViewportPosition().y, config.getViewportSize().x, config.getViewportSize().y);
+	_renderFinalSceneMap();
+	glViewport(0, 0, config.getWindowSize().x, config.getWindowSize().y);
+	_timer->stopDeltaPart();
 
 	_timer->startDeltaPart("guiEntityRender");
 	_renderBus->setTriangleCountingEnabled(true);

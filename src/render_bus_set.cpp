@@ -358,11 +358,6 @@ void RenderBus::setAabbFrameRenderingEnabled(bool value)
 	_isAabbFrameRenderingEnabled = value;
 }
 
-void RenderBus::setDebugRenderingEnabled(bool value)
-{
-	_isDebugRenderingEnabled = value;
-}
-
 void RenderBus::setShadowFrameRenderingEnabled(bool value)
 {
 	_isShadowFrameRenderingEnabled = value;

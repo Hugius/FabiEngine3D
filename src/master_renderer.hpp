@@ -32,6 +32,7 @@
 #include "reflection_entity_manager.hpp"
 #include "quad_entity_manager.hpp"
 #include "text_entity_manager.hpp"
+#include "buffer_cache.hpp"
 
 class MasterRenderer final
 {
@@ -53,6 +54,7 @@ public:
 	void inject(shared_ptr<Camera> camera);
 	void inject(shared_ptr<ShadowGenerator> shadowGenerator);
 	void inject(shared_ptr<Timer> timer);
+	void inject(shared_ptr<BufferCache> bufferCache);
 	void update();
 	void renderLogo(shared_ptr<QuadEntity> logo, ivec2 viewport);
 	void renderApplication();
@@ -91,7 +93,6 @@ private:
 	void _renderBillboardEntities();
 	void _renderAabbEntities();
 	void _renderFinalSceneMap();
-	void _renderDebugScreens();
 	void _renderGUI();
 	void _renderCursor();
 
@@ -173,4 +174,5 @@ private:
 	shared_ptr<Camera> _camera = nullptr;
 	shared_ptr<ShadowGenerator> _shadowGenerator = nullptr;
 	shared_ptr<Timer> _timer = nullptr;
+	shared_ptr<BufferCache> _bufferCache = nullptr;
 };

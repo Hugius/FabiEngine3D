@@ -196,8 +196,3 @@ const bool FabiEngine3D::misc_isAabbFrameRenderingEnabled() const
 {
 	return _core->_renderBus->isAabbFrameRenderingEnabled();
 }
-
-const bool FabiEngine3D::misc_isDebugRenderingEnabled() const
-{
-	return _core->_renderBus->isDebugRenderingEnabled();
-}

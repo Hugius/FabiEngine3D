@@ -258,10 +258,6 @@ void WorldEditor::unload()
 	{
 		_fe3d.misc_disableWireframeRendering();
 	}
-	if(_fe3d.misc_isDebugRenderingEnabled())
-	{
-		_fe3d.misc_disableDebugRendering();
-	}
 	if(_fe3d.raycast_isTerrainPointingEnabled())
 	{
 		_fe3d.raycast_disableTerrainPointing();

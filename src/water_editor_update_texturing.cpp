@@ -34,7 +34,7 @@ void WaterEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "BMP");
+			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "TGA");
 			if(filePath.empty())
 			{
 				return;
@@ -67,7 +67,7 @@ void WaterEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "BMP");
+			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "TGA");
 			if(filePath.empty())
 			{
 				return;
@@ -100,7 +100,7 @@ void WaterEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "BMP");
+			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "TGA");
 			if(filePath.empty())
 			{
 				return;

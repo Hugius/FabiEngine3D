@@ -29,7 +29,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 				return;
 			}
 
-			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "BMP");
+			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "TGA");
 			if(filePath.empty())
 			{
 				return;
@@ -62,7 +62,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 				return;
 			}
 
-			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "BMP");
+			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "TGA");
 			if(filePath.empty())
 			{
 				return;
@@ -95,7 +95,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 				return;
 			}
 
-			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "BMP");
+			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "TGA");
 			if(filePath.empty())
 			{
 				return;
@@ -128,7 +128,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 				return;
 			}
 
-			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "BMP");
+			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "TGA");
 			if(filePath.empty())
 			{
 				return;

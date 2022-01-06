@@ -30,35 +30,35 @@ void Core::_prepare()
 		!Tools::isFileExisting(rootPath + meshDirectoryPath + "plane.obj") ||
 		!Tools::isFileExisting(rootPath + meshDirectoryPath + "speaker.obj") ||
 		!Tools::isFileExisting(rootPath + meshDirectoryPath + "torch.obj") ||
-		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_back.bmp") ||
-		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_bottom.bmp") ||
-		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_front.bmp") ||
-		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_left.bmp") ||
-		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_right.bmp") ||
-		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_top.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "box.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "color.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "cursor_default.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "cursor_pointing.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "cursor_text.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "debug.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "grid.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "light_source.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "logo.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "minus.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "pause.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "plus.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "position.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "radius.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "restart.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "rotation.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "settings.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "shape_circle.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "shape_square.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "size.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "start.bmp") ||
-		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "stop.bmp") ||
-		!Tools::isFileExisting(rootPath + fontMapDirectoryPath + "font.bmp")
+		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_back.tga") ||
+		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_bottom.tga") ||
+		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_front.tga") ||
+		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_left.tga") ||
+		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_right.tga") ||
+		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_top.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "box.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "color.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "cursor_default.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "cursor_pointing.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "cursor_text.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "debug.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "grid.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "light_source.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "logo.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "minus.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "pause.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "plus.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "position.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "radius.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "restart.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "rotation.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "settings.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "shape_circle.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "shape_square.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "size.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "start.tga") ||
+		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "stop.tga") ||
+		!Tools::isFileExisting(rootPath + fontMapDirectoryPath + "font.tga")
 		)
 	{
 		Logger::throwFatalWarning("Directory `engine\\` is missing or corrupted!");
@@ -66,7 +66,7 @@ void Core::_prepare()
 
 	shared_ptr<QuadEntity> logo = make_shared<QuadEntity>("logo");
 	logo->setMesh(make_shared<VertexBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
-	logo->setDiffuseMap(make_shared<TextureBuffer>(_imageLoader->loadImage("engine\\assets\\image\\diffuse_map\\logo.bmp"), false, false));
+	logo->setDiffuseMap(make_shared<TextureBuffer>(_imageLoader->loadImage("engine\\assets\\image\\diffuse_map\\logo.tga"), false, false));
 	logo->setCentered(true);
 
 	SDL_DisplayMode DM;

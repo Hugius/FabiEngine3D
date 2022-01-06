@@ -88,7 +88,7 @@ void QuadEditor::_updateChoiceMenu()
 				return;
 			}
 
-			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "BMP");
+			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "TGA");
 			if(filePath.empty())
 			{
 				return;

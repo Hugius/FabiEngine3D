@@ -14,18 +14,24 @@ shared_ptr<Image> ImageLoader::_loadImage(const string& filePath)
 	const auto fullFilePath = string(rootPath + filePath);
 	if(fopen_s(&file, fullFilePath.c_str(), "rb") != 0)
 	{
+		std::cout << fopen_s(&file, fullFilePath.c_str(), "rb");
 		return nullptr;
 	}
 
-	auto header = new uint8_t[54];
-	for(int i = 0; i < 54; i++)
+	auto header = new uint8_t[18];
+	for(int i = 0; i < 18; i++)
 	{
 		header[i] = getc(file);
 	}
+	std::cout << int(header[0]) << std::endl;
+	std::cout << int(header[1]) << std::endl;
+	std::cout << int(header[2]) << std::endl;
 
-	uint32_t rawWidth = ((header[21] << 24) | (header[20] << 16) | (header[19] << 8) | header[18]);
-	uint32_t rawHeight = ((header[25] << 24) | (header[24] << 16) | (header[23] << 8) | header[22]);
-	uint16_t rawFormat = ((header[29] << 8) | header[28]);
+	unsigned short rawWidth = ((header[13] << 8) | header[12]);
+	unsigned short rawHeight = ((header[15] << 8) | header[14]);
+	unsigned char rawFormat = (header[16]);
+
+	delete[] header;
 
 	if((rawWidth == 0) || (rawHeight == 0))
 	{
@@ -79,7 +85,6 @@ shared_ptr<Image> ImageLoader::_loadImage(const string& filePath)
 		}
 	}
 
-	delete[] header;
 	fclose(file);
 
 	return make_shared<Image>(pixels,

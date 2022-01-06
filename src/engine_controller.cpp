@@ -64,35 +64,35 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		misc_cacheMeshes(meshPaths);
 
 		vector<string> imagePaths;
-		imagePaths.push_back(cubeMapDirectoryPath + "background_right.bmp");
-		imagePaths.push_back(cubeMapDirectoryPath + "background_left.bmp");
-		imagePaths.push_back(cubeMapDirectoryPath + "background_top.bmp");
-		imagePaths.push_back(cubeMapDirectoryPath + "background_bottom.bmp");
-		imagePaths.push_back(cubeMapDirectoryPath + "background_back.bmp");
-		imagePaths.push_back(cubeMapDirectoryPath + "background_front.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "box.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "color.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "cursor_default.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "cursor_pointing.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "cursor_text.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "debug.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "grid.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "light_source.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "logo.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "minus.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "pause.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "plus.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "position.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "radius.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "restart.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "rotation.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "settings.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "shape_circle.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "shape_square.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "size.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "start.bmp");
-		imagePaths.push_back(diffuseMapDirectoryPath + "stop.bmp");
-		imagePaths.push_back(fontMapDirectoryPath + "font.bmp");
+		imagePaths.push_back(cubeMapDirectoryPath + "background_right.tga");
+		imagePaths.push_back(cubeMapDirectoryPath + "background_left.tga");
+		imagePaths.push_back(cubeMapDirectoryPath + "background_top.tga");
+		imagePaths.push_back(cubeMapDirectoryPath + "background_bottom.tga");
+		imagePaths.push_back(cubeMapDirectoryPath + "background_back.tga");
+		imagePaths.push_back(cubeMapDirectoryPath + "background_front.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "box.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "color.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "cursor_default.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "cursor_pointing.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "cursor_text.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "debug.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "grid.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "light_source.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "logo.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "minus.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "pause.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "plus.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "position.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "radius.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "restart.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "rotation.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "settings.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "shape_circle.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "shape_square.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "size.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "start.tga");
+		imagePaths.push_back(diffuseMapDirectoryPath + "stop.tga");
+		imagePaths.push_back(fontMapDirectoryPath + "font.tga");
 		misc_cacheImages(imagePaths);
 
 		misc_setBackgroundColor(RENDER_COLOR);
@@ -100,17 +100,17 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		sky_create("@@background");
 		sky_setCubeMaps("@@background",
 						{
-							string(cubeMapDirectoryPath + "background_right.bmp"),
-							string(cubeMapDirectoryPath + "background_left.bmp"),
-							string(cubeMapDirectoryPath + "background_top.bmp"),
-							string(cubeMapDirectoryPath + "background_bottom.bmp"),
-							string(cubeMapDirectoryPath + "background_back.bmp"),
-							string(cubeMapDirectoryPath + "background_front.bmp")
+							string(cubeMapDirectoryPath + "background_right.tga"),
+							string(cubeMapDirectoryPath + "background_left.tga"),
+							string(cubeMapDirectoryPath + "background_top.tga"),
+							string(cubeMapDirectoryPath + "background_bottom.tga"),
+							string(cubeMapDirectoryPath + "background_back.tga"),
+							string(cubeMapDirectoryPath + "background_front.tga")
 						});
 
 		quad_create("@@cursor", true);
 		quad_setSize("@@cursor", fvec2(CURSOR_QUAD_SIZE, (CURSOR_QUAD_SIZE * Tools::getWindowAspectRatio())));
-		quad_setDiffuseMap("@@cursor", diffuseMapDirectoryPath + "cursor_default.bmp");
+		quad_setDiffuseMap("@@cursor", diffuseMapDirectoryPath + "cursor_default.tga");
 		misc_setCursorEntityID("@@cursor");
 		misc_setCursorVisible(false);
 
@@ -157,7 +157,7 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 		sky_setRotation("@@background", sky_getRotation("@@background") + 0.0025f);
 
 		quad_setPosition("@@cursor", Math::convertToNdc(Tools::convertFromScreenCoords(misc_getCursorPosition())));
-		quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_default.bmp");
+		quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_default.tga");
 		quad_setVisible("@@cursor", misc_isCursorInsideWindow());
 
 		_gui.update();

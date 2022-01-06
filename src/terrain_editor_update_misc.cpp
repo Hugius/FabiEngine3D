@@ -116,7 +116,7 @@ void TerrainEditor::_updateTerrainCreating()
 				return;
 			}
 
-			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "BMP");
+			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "TGA");
 			if(filePath.empty())
 			{
 				_isCreatingTerrain = false;

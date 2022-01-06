@@ -59,11 +59,11 @@ void TopViewportController::initialize()
 
 	executionWindow->createScreen("main");
 	executionWindow->setActiveScreen("main");
-	executionWindow->getScreen("main")->createButton("start", fvec2(-0.73f, 0.0f), fvec2(0.2f, 1.75f), "start.bmp", fvec3(2.0f), true);
-	executionWindow->getScreen("main")->createButton("pause", fvec2(-0.36f, 0.0f), fvec2(0.2f, 1.75f), "pause.bmp", fvec3(2.0f), true);
-	executionWindow->getScreen("main")->createButton("restart", fvec2(0.0f, 0.0f), fvec2(0.2f, 1.75f), "restart.bmp", fvec3(2.0f), true);
-	executionWindow->getScreen("main")->createButton("stop", fvec2(0.36f, 0.0f), fvec2(0.2f, 1.75f), "stop.bmp", fvec3(2.0f), true);
-	executionWindow->getScreen("main")->createButton("debug", fvec2(0.73f, 0.0f), fvec2(0.2f, 1.75f), "debug.bmp", fvec3(2.0f), true);
+	executionWindow->getScreen("main")->createButton("start", fvec2(-0.73f, 0.0f), fvec2(0.2f, 1.75f), "start.tga", fvec3(2.0f), true);
+	executionWindow->getScreen("main")->createButton("pause", fvec2(-0.36f, 0.0f), fvec2(0.2f, 1.75f), "pause.tga", fvec3(2.0f), true);
+	executionWindow->getScreen("main")->createButton("restart", fvec2(0.0f, 0.0f), fvec2(0.2f, 1.75f), "restart.tga", fvec3(2.0f), true);
+	executionWindow->getScreen("main")->createButton("stop", fvec2(0.36f, 0.0f), fvec2(0.2f, 1.75f), "stop.tga", fvec3(2.0f), true);
+	executionWindow->getScreen("main")->createButton("debug", fvec2(0.73f, 0.0f), fvec2(0.2f, 1.75f), "debug.tga", fvec3(2.0f), true);
 
 	miscellaneousWindow->createScreen("main");
 	miscellaneousWindow->setActiveScreen("main");

@@ -10,15 +10,15 @@ void SoundEditor::_updateMiscellaneous()
 
 	if(isPlaying)
 	{
-		_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\start.bmp");
+		_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\start.tga");
 	}
 	else if(isPaused)
 	{
-		_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\pause.bmp");
+		_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\pause.tga");
 	}
 	else
 	{
-		_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\stop.bmp");
+		_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\stop.tga");
 	}
 	_fe3d.billboard_rotate("@@icon", fvec3(0.0f, 0.5f, 0.0f));
 }

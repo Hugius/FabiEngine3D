@@ -30,7 +30,6 @@ void EngineController::FE3D_CONTROLLER_INIT()
 {
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string meshDirectoryPath = "engine\\assets\\mesh\\";
-	const string cubeMapDirectoryPath = "engine\\assets\\image\\cube_map\\";
 	const string diffuseMapDirectoryPath = "engine\\assets\\image\\diffuse_map\\";
 	const string fontMapDirectoryPath = "engine\\assets\\image\\font_map\\";
 
@@ -64,12 +63,6 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		misc_cacheMeshes(meshPaths);
 
 		vector<string> imagePaths;
-		imagePaths.push_back(cubeMapDirectoryPath + "background_right.tga");
-		imagePaths.push_back(cubeMapDirectoryPath + "background_left.tga");
-		imagePaths.push_back(cubeMapDirectoryPath + "background_top.tga");
-		imagePaths.push_back(cubeMapDirectoryPath + "background_bottom.tga");
-		imagePaths.push_back(cubeMapDirectoryPath + "background_back.tga");
-		imagePaths.push_back(cubeMapDirectoryPath + "background_front.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "box.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "color.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "cursor_default.tga");
@@ -96,17 +89,6 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		misc_cacheImages(imagePaths);
 
 		misc_setBackgroundColor(RENDER_COLOR);
-
-		sky_create("@@background");
-		sky_setCubeMaps("@@background",
-						{
-							string(cubeMapDirectoryPath + "background_right.tga"),
-							string(cubeMapDirectoryPath + "background_left.tga"),
-							string(cubeMapDirectoryPath + "background_top.tga"),
-							string(cubeMapDirectoryPath + "background_bottom.tga"),
-							string(cubeMapDirectoryPath + "background_back.tga"),
-							string(cubeMapDirectoryPath + "background_front.tga")
-						});
 
 		quad_create("@@cursor", true);
 		quad_setSize("@@cursor", fvec2(CURSOR_QUAD_SIZE, (CURSOR_QUAD_SIZE * Tools::getWindowAspectRatio())));
@@ -148,13 +130,9 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 		{
 			misc_setBackgroundColor(RENDER_COLOR);
 
-			sky_selectMainSky("@@background");
-
 			camera_reset();
 		}
 		lastScreen = activeScreen;
-
-		sky_setRotation("@@background", sky_getRotation("@@background") + 0.0025f);
 
 		quad_setPosition("@@cursor", Math::convertToNdc(Tools::convertFromScreenCoords(misc_getCursorPosition())));
 		quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_default.tga");

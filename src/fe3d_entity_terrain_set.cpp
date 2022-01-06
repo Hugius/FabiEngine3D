@@ -18,11 +18,6 @@ void FabiEngine3D::terrain_deleteAll()
 
 void FabiEngine3D::terrain_delete(const string& ID)
 {
-	if(ID == terrain_getSelectedID())
-	{
-		_core->_terrainEntityManager->selectTerrain("");
-	}
-
 	_core->_terrainEntityManager->deleteEntity(ID);
 }
 

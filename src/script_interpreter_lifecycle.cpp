@@ -204,26 +204,15 @@ void ScriptInterpreter::load()
 
 void ScriptInterpreter::unload()
 {
-	_fe3d.sky_selectMixSky("");
-	_fe3d.sky_setMixValue(0.0f);
-
-	if(!Config::getInst().isApplicationExported())
-	{
-		_fe3d.sky_selectMainSky("@@background");
-	}
-
-	for(const auto& ID : _fe3d.sky_getIDs())
-	{
-		if(ID != "@@background")
-		{
-			_fe3d.sky_delete(ID);
-		}
-	}
-
 	_animation2dEditor.stopBillboardAnimations();
 	_animation2dEditor.stopQuadAnimations();
 	_animation3dEditor.stopModelAnimations();
 
+	_fe3d.sky_selectMainSky("");
+	_fe3d.sky_selectMixSky("");
+	_fe3d.sky_setMixValue(0.0f);
+
+	_fe3d.sky_deleteAll();
 	_fe3d.terrain_deleteAll();
 	_fe3d.water_deleteAll();
 	_fe3d.model_deleteAll();

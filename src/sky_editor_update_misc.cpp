@@ -103,7 +103,7 @@ void SkyEditor::_updateSkyChoosing()
 {
 	if(_isChoosingSky)
 	{
-		_fe3d.sky_selectMainSky("@@background");
+		_fe3d.sky_selectMainSky("");
 
 		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("skyList");
 
@@ -152,11 +152,11 @@ void SkyEditor::_updateSkyDeleting()
 			_isDeletingSky = false;
 			_currentSkyID = "";
 
-			_fe3d.sky_selectMainSky("@@background");
+			_fe3d.sky_selectMainSky("");
 		}
 		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
 		{
-			_fe3d.sky_selectMainSky("@@background");
+			_fe3d.sky_selectMainSky("");
 
 			_isDeletingSky = false;
 			_currentSkyID = "";

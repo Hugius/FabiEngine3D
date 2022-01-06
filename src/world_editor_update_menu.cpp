@@ -69,7 +69,7 @@ void WorldEditor::_updateMainMenu()
 					}
 					else
 					{
-						_fe3d.sky_selectMainSky("@@background");
+						_fe3d.sky_selectMainSky("");
 					}
 				}
 				else if(_isDeletingWorld)
@@ -165,7 +165,7 @@ void WorldEditor::_updateChoiceMenu()
 
 			unloadEditorWorld();
 
-			_fe3d.sky_selectMainSky("@@background");
+			_fe3d.sky_selectMainSky("");
 
 			_currentWorldID = "";
 			_currentSkyID = "";
@@ -186,7 +186,7 @@ void WorldEditor::_updateChoiceMenu()
 
 			unloadEditorWorld();
 
-			_fe3d.sky_selectMainSky("@@background");
+			_fe3d.sky_selectMainSky("");
 
 			_currentWorldID = "";
 			_currentSkyID = "";

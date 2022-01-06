@@ -18,7 +18,6 @@ void Core::_prepare()
 {
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string meshDirectoryPath = "engine\\assets\\mesh\\";
-	const string cubeMapDirectoryPath = "engine\\assets\\image\\cube_map\\";
 	const string fontMapDirectoryPath = "engine\\assets\\image\\font_map\\";
 	const string diffuseMapDirectoryPath = "engine\\assets\\image\\diffuse_map\\";
 
@@ -30,12 +29,6 @@ void Core::_prepare()
 		!Tools::isFileExisting(rootPath + meshDirectoryPath + "plane.obj") ||
 		!Tools::isFileExisting(rootPath + meshDirectoryPath + "speaker.obj") ||
 		!Tools::isFileExisting(rootPath + meshDirectoryPath + "torch.obj") ||
-		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_back.tga") ||
-		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_bottom.tga") ||
-		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_front.tga") ||
-		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_left.tga") ||
-		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_right.tga") ||
-		!Tools::isFileExisting(rootPath + cubeMapDirectoryPath + "background_top.tga") ||
 		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "box.tga") ||
 		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "color.tga") ||
 		!Tools::isFileExisting(rootPath + diffuseMapDirectoryPath + "cursor_default.tga") ||

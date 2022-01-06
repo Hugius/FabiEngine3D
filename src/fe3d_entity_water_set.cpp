@@ -18,11 +18,6 @@ void FabiEngine3D::water_deleteAll()
 
 void FabiEngine3D::water_delete(const string& ID)
 {
-	if(ID == water_getSelectedID())
-	{
-		_core->_waterEntityManager->selectWater("");
-	}
-
 	_core->_waterEntityManager->deleteEntity(ID);
 }
 

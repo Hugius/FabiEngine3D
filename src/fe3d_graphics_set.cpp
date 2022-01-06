@@ -315,7 +315,7 @@ void FabiEngine3D::gfx_setMotionBlurQuality(unsigned int value)
 
 void FabiEngine3D::gfx_setAnisotropicFilteringQuality(unsigned int value)
 {
-	//_core->_imageLoader->setAnisotropicFilteringQuality(value);
+	_core->_renderBus->setAnisotropicFilteringQuality(value);
 }
 
 void FabiEngine3D::gfx_setCubeReflectionQuality(unsigned int value)
@@ -470,7 +470,7 @@ void FabiEngine3D::gfx_setMotionBlurStrength(float value)
 
 void FabiEngine3D::gfx_setLensFlareMap(const string& value)
 {
-	_core->_renderBus->setLensFlareMap(make_shared<TextureBuffer>(_core->_imageLoader->loadImage(value), false, false));
+	_core->_renderBus->setLensFlareMap(make_shared<TextureBuffer>(_core->_imageLoader->loadImage(value), false));
 	_core->_renderBus->setLensFlareMapPath(value);
 }
 

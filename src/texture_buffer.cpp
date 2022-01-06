@@ -1,4 +1,7 @@
 #include "texture_buffer.hpp"
+#include "configuration.hpp"
+
+using std::clamp;
 
 TextureBuffer::TextureBuffer(BufferID ID)
 	:
@@ -7,7 +10,7 @@ TextureBuffer::TextureBuffer(BufferID ID)
 
 }
 
-TextureBuffer::TextureBuffer(shared_ptr<Image> image, bool isMipmapped, bool isAnisotropic)
+TextureBuffer::TextureBuffer(shared_ptr<Image> image, bool isMipmapped)
 {
 	glGenTextures(1, &_ID);
 	glBindTexture(GL_TEXTURE_2D, _ID);
@@ -31,10 +34,7 @@ TextureBuffer::TextureBuffer(shared_ptr<Image> image, bool isMipmapped, bool isA
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 
-	if(isAnisotropic)
-	{
-		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(_anisotropicFilteringQuality));
-	}
+	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 }
 
 TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6>& images)
@@ -87,36 +87,27 @@ TextureBuffer::~TextureBuffer()
 	glDeleteTextures(1, &_ID);
 }
 
-const BufferID TextureBuffer::getID()
+const BufferID TextureBuffer::getID() const
 {
 	return _ID;
 }
 
-//void ImageLoader::_reloadAnisotropicFiltering()
-//{
-//	for(const auto& [path, texture] : _2dTextureCache)
-//	{
-//		glBindTexture(GL_TEXTURE_2D, texture);
-//
-//		int currentQuality;
-//		glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &currentQuality);
-//
-//		if((currentQuality >= Config::MIN_ANISOTROPIC_FILTERING_QUALITY) && (currentQuality <= Config::MAX_ANISOTROPIC_FILTERING_QUALITY))
-//		{
-//			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(_anisotropicFilteringQuality));
-//		}
-//
-//		glBindTexture(GL_TEXTURE_2D, 0);
-//	}
-//}
-//
-//void ImageLoader::setAnisotropicFilteringQuality(unsigned int value)
-//{
-//	_anisotropicFilteringQuality = clamp(value, Config::MIN_ANISOTROPIC_FILTERING_QUALITY, Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
-//	_reloadAnisotropicFiltering();
-//}
-//
-//const unsigned int ImageLoader::getAnisotropicFilteringQuality()const
-//{
-//	return _anisotropicFilteringQuality;
-//}
+void TextureBuffer::loadAnisotropicFiltering(unsigned int quality)
+{
+	quality = clamp(quality, Config::MIN_ANISOTROPIC_FILTERING_QUALITY, Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
+
+	glBindTexture(GL_TEXTURE_2D, _ID);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(quality));
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+const bool TextureBuffer::hasAnisotropicFiltering() const
+{
+	int currentQuality;
+
+	glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &currentQuality);
+
+	return ((currentQuality >= Config::MIN_ANISOTROPIC_FILTERING_QUALITY) && (currentQuality <= Config::MAX_ANISOTROPIC_FILTERING_QUALITY));
+}

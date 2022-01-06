@@ -1,4 +1,5 @@
 #include "render_bus.hpp"
+#include "render_bus.hpp"
 
 const shared_ptr<TextureBuffer> RenderBus::getPlanarReflectionMap() const
 {
@@ -268,6 +269,11 @@ const unsigned int RenderBus::getTriangleCount() const
 const unsigned int RenderBus::getGuiDepth() const
 {
 	return _guiDepth;
+}
+
+const unsigned int RenderBus::getAnisotropicFilteringQuality() const
+{
+	return _anisotropicFilteringQuality;
 }
 
 const unsigned int RenderBus::getShadowQuality() const

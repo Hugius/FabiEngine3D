@@ -843,12 +843,10 @@ public:
 	void misc_enableWireframeRendering();
 	void misc_enableShadowFrameRendering();
 	void misc_enableAabbFrameRendering();
-	void misc_enableDebugRendering();
 	void misc_enableVsync();
 	void misc_disableWireframeRendering();
 	void misc_disableShadowFrameRendering();
 	void misc_disableAabbFrameRendering();
-	void misc_disableDebugRendering();
 	void misc_disableVsync();
 	void misc_setCursorVisible(bool value);
 	void misc_setCursorEntityID(const string& value);

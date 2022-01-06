@@ -84,12 +84,12 @@ public:
 	void setLensFlareEnabled(bool value);
 	void setWireframeRenderingEnabled(bool value);
 	void setAabbFrameRenderingEnabled(bool value);
-	void setDebugRenderingEnabled(bool value);
 	void setShadowFrameRenderingEnabled(bool value);
 	void setTriangleCountingEnabled(bool value);
 	void setDofDynamic(bool value);
 	void setBloomType(BloomType value);
 	void setGuiDepth(unsigned int value);
+	void setAnisotropicFilteringQuality(unsigned int value);
 
 	const string& getCursorEntityID() const;
 	const string& getLensFlareMapPath() const;
@@ -145,6 +145,7 @@ public:
 	const unsigned int getBloomBlurCount() const;
 	const unsigned int getTriangleCount() const;
 	const unsigned int getGuiDepth() const;
+	const unsigned int getAnisotropicFilteringQuality() const;
 
 	const bool isReflectionsEnabled() const;
 	const bool isAntiAliasingEnabled() const;
@@ -241,6 +242,7 @@ private:
 	unsigned int _cubeReflectionQuality = Config::MIN_REFLECTION_QUALITY;
 	unsigned int _planarReflectionQuality = Config::MIN_REFLECTION_QUALITY;
 	unsigned int _planarRefractionQuality = Config::MIN_REFRACTION_QUALITY;
+	unsigned int _anisotropicFilteringQuality = Config::MIN_ANISOTROPIC_FILTERING_QUALITY;
 	unsigned int _bloomBlurCount = 0;
 	unsigned int _triangleCount = 0;
 	unsigned int _guiDepth = 0;

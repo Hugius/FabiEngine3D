@@ -1,4 +1,5 @@
 #include "render_bus.hpp"
+#include "render_bus.hpp"
 
 #include <algorithm>
 
@@ -381,6 +382,11 @@ void RenderBus::setBloomType(BloomType value)
 void RenderBus::setGuiDepth(unsigned int value)
 {
 	_guiDepth = value;
+}
+
+void RenderBus::setAnisotropicFilteringQuality(unsigned int value)
+{
+	_anisotropicFilteringQuality = value;
 }
 
 void RenderBus::setCursorEntityID(const string& value)

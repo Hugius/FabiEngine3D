@@ -386,7 +386,7 @@ void RenderBus::setGuiDepth(unsigned int value)
 
 void RenderBus::setAnisotropicFilteringQuality(unsigned int value)
 {
-	_anisotropicFilteringQuality = value;
+	_anisotropicFilteringQuality = clamp(value, Config::MIN_ANISOTROPIC_FILTERING_QUALITY, Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
 }
 
 void RenderBus::setCursorEntityID(const string& value)

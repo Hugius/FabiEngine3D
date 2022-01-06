@@ -23,3 +23,8 @@ shared_ptr<TextureBuffer> BufferCache::getTextureBuffer(const string& filePath)
 
 	return nullptr;
 }
+
+map<string, shared_ptr<TextureBuffer>>& BufferCache::getTextureBuffers()
+{
+	return _textureBufferCache;
+}

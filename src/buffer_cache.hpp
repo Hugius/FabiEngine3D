@@ -15,6 +15,8 @@ public:
 	shared_ptr<TextureBuffer> getTextureBuffer(const string& filePath);
 	//shared_ptr<CaptureBuffer> getCaptureBuffer();
 
+	map<string, shared_ptr<TextureBuffer>>& getTextureBuffers();
+
 private:
 	map<string, shared_ptr<ShaderBuffer>> _shaderBufferCache;
 	map<string, shared_ptr<VertexBuffer>> _vertexBufferCache;

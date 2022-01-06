@@ -316,6 +316,11 @@ void FabiEngine3D::gfx_setMotionBlurQuality(unsigned int value)
 void FabiEngine3D::gfx_setAnisotropicFilteringQuality(unsigned int value)
 {
 	_core->_renderBus->setAnisotropicFilteringQuality(value);
+
+	for(const auto& [filePath, texture] : _core->_bufferCache->getTextureBuffers())
+	{
+		texture->loadAnisotropicFiltering(value);
+	}
 }
 
 void FabiEngine3D::gfx_setCubeReflectionQuality(unsigned int value)

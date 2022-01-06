@@ -24,7 +24,10 @@ void FabiEngine3D::sky_setCubeMaps(const string& ID, const array<string, 6>& val
 
 	for(const auto& image : images)
 	{
-		image->flipY();
+		if(image != nullptr)
+		{
+			image->flipY();
+		}
 	}
 
 	_core->_skyEntityManager->getEntity(ID)->setCubeMap(make_shared<TextureBuffer>(images));
@@ -32,7 +35,10 @@ void FabiEngine3D::sky_setCubeMaps(const string& ID, const array<string, 6>& val
 
 	for(const auto& image : images)
 	{
-		image->flipY();
+		if(image != nullptr)
+		{
+			image->flipY();
+		}
 	}
 }
 

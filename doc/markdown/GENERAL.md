@@ -5,7 +5,7 @@
 ### 1.1 Assets
 
 - Multithreaded OBJ file loading
-- Multithreaded BMP file loading
+- Multithreaded TGA file loading
 - Multithreaded WAV file loading
 - Efficient cache management
 

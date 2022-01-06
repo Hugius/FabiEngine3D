@@ -2,7 +2,6 @@
 
 enum class PixelFormat
 {
-	GRAY,
 	RGB,
 	RGBA
 };

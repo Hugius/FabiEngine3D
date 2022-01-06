@@ -49,13 +49,6 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 		return;
 	}
 
-	if(image->getPixelFormat() != PixelFormat::GRAY)
-	{
-		Logger::throwWarning("Tried to create terrain with ID \"" + ID + "\": height map wrong pixel format!");
-		deleteEntity(ID);
-		return;
-	}
-
 	if(image->getWidth() != image->getHeight())
 	{
 		Logger::throwWarning("Tried to create terrain with ID \"" + ID + "\": height map resolution not the same!");

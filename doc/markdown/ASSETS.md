@@ -2,18 +2,18 @@
 
 ## 1. Audio
 
+- Audio files are used to play 2D/3D sounds.
 - Audio assets must be placed in `~\projects\<your_project>\assets\audio\`.
-- The file format is `.wav` because the absence of compression delivers high audio quality.
-- Due to the uncompressed format, note that the file size can be very large.
+- The file format is `.wav` because it delivers high audio quality.
 
 ## 3. Mesh
 
+- Mesh files are used to render complex 3D objects.
 - Mesh assets must be placed in `~\projects\<your_project>\assets\mesh\`.
 - The file format is `.obj` because it is simple and commonly used.
-- Meshes are used to render complex 3D objects on the screen.
-- Make sure that the mesh file contains: `v`, `vt`, `vn`, `f`.
-- Make sure that the center of your mesh is XYZ(0,0,0).
-- The mesh should be modeled so that the lowest vertex (Y coordinate) is positioned at the center.
+- Every mesh must contain: `v`/`vt`/`vn`/`f`.
+- Every mesh must have XYZ(0,0,0) as center.
+- Every mesh should be modeled so that the lowest vertex (Y coordinate) is positioned at the center.
 - A mesh can consist of multiple parts.
 - To make a mesh multiparted, you must specify at least 2 parts by writing `FE3D_PART <name>`.
 - Example multiparted `.obj` file:
@@ -33,12 +33,13 @@
 
 ## 4. Image
 
-- Image assets must be placed in `~\projects\<your_project>\assets\image\`.
-- The file format is `.bmp` because the absence of compression delivers high image quality.
-- Due to the uncompressed format, note that the files can be very big.
-- Every image must have a resolution of at least `1`x`1`.
-- Every image must have a bit depth of `8`/`24`/`32`.
 - Images are used for a variety of reasons for rendering.
+- Image assets must be placed in `~\projects\<your_project>\assets\image\`.
+- The file format is `.tga` because it delivers high image quality.
+- Every image must be exported without RLE compression.
+- Every image must be exported with the lower-left corner as the origin.
+- Every image must have a resolution of at least `1`x`1`.
+- Every image must have a bit depth of `24` or `32`.
 
 ### 4.1 Blend Map
 
@@ -85,7 +86,7 @@
 <img src="../image/displacement_map.png" width="25%"/>
 
 - Displacement map assets must be placed in `~\projects\<your_project>\assets\image\displacement_map\`
-- Bit depth: `8`
+- Bit depth: `24`
 - DUDV maps are used to create waves in a water mesh.
 
 ### 4.5 DUDV Map
@@ -126,7 +127,7 @@
 <img src="../image/height_map.png" width="25%"/>
 
 - Height map assets must be placed in `~\projects\<your_project>\assets\image\height_map\`.
-- Bit depth: `8`
+- Bit depth: `24`
 - Height maps are used to generate a terrain mesh.
 - Each pixel of the height map corresponds to a vertex height.
 
@@ -143,7 +144,7 @@
 <img src="../image/reflection_map.png" width="25%"/>
 
 - Reflection map assets must be placed in `~\projects\<your_project>\assets\image\reflection_map\`
-- Bit depth: `8`
+- Bit depth: `24`
 - Reflection maps are used to specify which parts of a mesh are reflective.
 
 ### 4.12 Specular Map
@@ -151,5 +152,5 @@
 <img src="../image/specular_map.png" width="25%"/>
 
 - Specular map assets must be placed in `~\projects\<your_project>\assets\image\specular_map\`
-- Bit depth: `8`
+- Bit depth: `24`
 - Specular maps are used to specify which parts of a mesh are specular lighted.

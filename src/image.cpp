@@ -20,7 +20,7 @@ Image::~Image()
 
 void Image::flipX()
 {
-	const auto byteFormat = (_pixelFormat == PixelFormat::GRAY ? 1 : _pixelFormat == PixelFormat::RGB ? 3 : 4);
+	const auto byteFormat = (_pixelFormat == PixelFormat::RGB ? 3 : 4);
 	const auto size = (_width * _height * byteFormat);
 	auto newPixels = new unsigned char[size];
 
@@ -57,7 +57,7 @@ void Image::flipX()
 
 void Image::flipY()
 {
-	const auto byteFormat = (_pixelFormat == PixelFormat::GRAY ? 1 : _pixelFormat == PixelFormat::RGB ? 3 : 4);
+	const auto byteFormat = (_pixelFormat == PixelFormat::RGB ? 3 : 4);
 	const auto size = (_width * _height * byteFormat);
 	auto newPixels = new unsigned char[size];
 

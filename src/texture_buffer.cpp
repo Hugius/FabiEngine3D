@@ -12,10 +12,6 @@ TextureBuffer::TextureBuffer(shared_ptr<Image> image, bool isMipmapped, bool isA
 	glGenTextures(1, &_ID);
 	glBindTexture(GL_TEXTURE_2D, _ID);
 
-	if(image->getPixelFormat() == PixelFormat::GRAY)
-	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, image->getWidth(), image->getHeight(), 0, GL_RED, GL_UNSIGNED_BYTE, image->getPixels());
-	}
 	if(image->getPixelFormat() == PixelFormat::RGB)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->getWidth(), image->getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, image->getPixels());
@@ -54,14 +50,10 @@ TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6>& images)
 
 		if(image == nullptr)
 		{
-			glTexImage2D(cubeIndex, 0, GL_RGB, images[i]->getWidth(), images[i]->getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+			glTexImage2D(cubeIndex, 0, GL_RGB, 768, 768, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
 			continue;
 		}
 
-		if(image->getPixelFormat() == PixelFormat::GRAY)
-		{
-			glTexImage2D(cubeIndex, 0, GL_RED, image->getWidth(), image->getHeight(), 0, GL_RED, GL_UNSIGNED_BYTE, image->getPixels());
-		}
 		if(image->getPixelFormat() == PixelFormat::RGB)
 		{
 			glTexImage2D(cubeIndex, 0, GL_RGB, image->getWidth(), image->getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, image->getPixels());

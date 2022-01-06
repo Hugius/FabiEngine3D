@@ -19,7 +19,14 @@ void FabiEngine3D::sky_setCubeMaps(const string& ID, const array<string, 6>& val
 	array<shared_ptr<Image>, 6> images;
 	for(unsigned int i = 0; i < 6; i++)
 	{
-		images[i] = _core->_imageLoader->loadImage(value[i]);
+		if(value[i].empty())
+		{
+			images[i] = nullptr;
+		}
+		else
+		{
+			images[i] = _core->_imageLoader->loadImage(value[i]);
+		}
 	}
 
 	for(const auto& image : images)

@@ -65,11 +65,11 @@ TextureBuffer::TextureBuffer(const array<shared_ptr<Image>, 6>& images)
 
 		if(images[i]->getPixelFormat() == PixelFormat::RGB)
 		{
-			glTexImage2D(cubeIndex, 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, images[i]->getPixels());
+			glTexImage2D(cubeIndex, 0, GL_RGB, images[i]->getWidth(), images[i]->getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, images[i]->getPixels());
 		}
 		if(images[i]->getPixelFormat() == PixelFormat::RGBA)
 		{
-			glTexImage2D(cubeIndex, 0, GL_RGBA, imageSize, imageSize, 0, GL_RGBA, GL_UNSIGNED_BYTE, images[i]->getPixels());
+			glTexImage2D(cubeIndex, 0, GL_RGBA, images[i]->getWidth(), images[i]->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, images[i]->getPixels());
 		}
 	}
 

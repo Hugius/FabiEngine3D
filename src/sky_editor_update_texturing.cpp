@@ -213,11 +213,6 @@ void SkyEditor::_updateTexturingMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
-			for(const auto& path : _fe3d.sky_getCubeMapPaths(_currentSkyID))
-			{
-				_fe3d.misc_clearImageCache(path);
-			}
-
 			_fe3d.sky_setCubeMaps(_currentSkyID, {"", "", "", "", "", ""});
 		}
 

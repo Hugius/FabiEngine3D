@@ -51,12 +51,15 @@ const vector<string> SkyEditor::getImagePathsFromFile() const
 
 			replace(cubeMapPath.begin(), cubeMapPath.end(), '?', ' ');
 
-			if(!Config::getInst().isApplicationExported())
+			if(!cubeMapPath.empty())
 			{
-				cubeMapPath = string("projects\\" + _currentProjectID + "\\" + cubeMapPath);
-			}
+				if(!Config::getInst().isApplicationExported())
+				{
+					cubeMapPath = string("projects\\" + _currentProjectID + "\\" + cubeMapPath);
+				}
 
-			imagePaths.push_back(cubeMapPath);
+				imagePaths.push_back(cubeMapPath);
+			}
 		}
 	}
 
@@ -115,9 +118,12 @@ const bool SkyEditor::loadFromFile()
 
 			replace(cubeMapPath.begin(), cubeMapPath.end(), '?', ' ');
 
-			if(!Config::getInst().isApplicationExported())
+			if(!cubeMapPath.empty())
 			{
-				cubeMapPath = string("projects\\" + _currentProjectID + "\\" + cubeMapPath);
+				if(!Config::getInst().isApplicationExported())
+				{
+					cubeMapPath = string("projects\\" + _currentProjectID + "\\" + cubeMapPath);
+				}
 			}
 		}
 

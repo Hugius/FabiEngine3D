@@ -10,7 +10,15 @@ Image::Image(unsigned char* pixels, unsigned int width, unsigned int height, Pix
 	_height(height),
 	_pixelFormat(pixelFormat)
 {
+	if(pixels == nullptr)
+	{
+		Logger::throwError("");
+	}
 
+	if((width == 0) || (height == 0))
+	{
+		Logger::throwError("");
+	}
 }
 
 Image::~Image()
@@ -31,10 +39,6 @@ void Image::flipX()
 			const auto index1 = ((x * byteFormat) + (y * _width * byteFormat));
 			const auto index2 = (((_width - x - 1) * byteFormat) + (y * _width * byteFormat));
 
-			if(byteFormat == 1)
-			{
-				newPixels[index1 + 0] = _pixels[index2 + 0];
-			}
 			if(byteFormat == 3)
 			{
 				newPixels[index1 + 0] = _pixels[index2 + 0];
@@ -68,10 +72,6 @@ void Image::flipY()
 			const auto index1 = ((x * byteFormat) + (y * _width * byteFormat));
 			const auto index2 = ((x * byteFormat) + ((_height - y - 1) * _width * byteFormat));
 
-			if(byteFormat == 1)
-			{
-				newPixels[index1 + 0] = _pixels[index2 + 0];
-			}
 			if(byteFormat == 3)
 			{
 				newPixels[index1 + 0] = _pixels[index2 + 0];

@@ -18,7 +18,7 @@ public:
 
 	const shared_ptr<VertexBuffer> getBuffer(const string& filePath, const string& partID) const;
 
-	const map<pair<string, string>, shared_ptr<VertexBuffer>>& getBuffers() const;
+	const vector<shared_ptr<VertexBuffer>> getBuffers() const;
 
 private:
 	map<pair<string, string>, shared_ptr<VertexBuffer>> _buffers;

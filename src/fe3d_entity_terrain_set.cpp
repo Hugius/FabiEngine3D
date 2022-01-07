@@ -51,7 +51,7 @@ void FabiEngine3D::terrain_setDiffuseMap(const string& ID, const string& value)
 	}
 	else
 	{
-		auto texture = _core->_textureBufferCache->getTextureBuffer(value);
+		auto texture = _core->_textureBufferCache->getBuffer(value);
 
 		if(texture == nullptr)
 		{
@@ -59,7 +59,7 @@ void FabiEngine3D::terrain_setDiffuseMap(const string& ID, const string& value)
 			texture->loadMipMapping();
 			texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
 
-			_core->_textureBufferCache->storeTextureBuffer(value, texture);
+			_core->_textureBufferCache->storeBuffer(value, texture);
 		}
 
 		_core->_terrainEntityManager->getEntity(ID)->setDiffuseMap(texture);
@@ -76,7 +76,7 @@ void FabiEngine3D::terrain_setNormalMap(const string& ID, const string& value)
 	}
 	else
 	{
-		auto texture = _core->_textureBufferCache->getTextureBuffer(value);
+		auto texture = _core->_textureBufferCache->getBuffer(value);
 
 		if(texture == nullptr)
 		{
@@ -84,7 +84,7 @@ void FabiEngine3D::terrain_setNormalMap(const string& ID, const string& value)
 			texture->loadMipMapping();
 			texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
 
-			_core->_textureBufferCache->storeTextureBuffer(value, texture);
+			_core->_textureBufferCache->storeBuffer(value, texture);
 		}
 
 		_core->_terrainEntityManager->getEntity(ID)->setNormalMap(texture);
@@ -101,7 +101,7 @@ void FabiEngine3D::terrain_setBlendMap(const string& ID, const string& value)
 	}
 	else
 	{
-		auto texture = _core->_textureBufferCache->getTextureBuffer(value);
+		auto texture = _core->_textureBufferCache->getBuffer(value);
 
 		if(texture == nullptr)
 		{
@@ -109,7 +109,7 @@ void FabiEngine3D::terrain_setBlendMap(const string& ID, const string& value)
 			texture->loadMipMapping();
 			texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
 
-			_core->_textureBufferCache->storeTextureBuffer(value, texture);
+			_core->_textureBufferCache->storeBuffer(value, texture);
 		}
 
 		_core->_terrainEntityManager->getEntity(ID)->setBlendMap(texture);
@@ -126,7 +126,7 @@ void FabiEngine3D::terrain_setRedDiffuseMap(const string& ID, const string& valu
 	}
 	else
 	{
-		auto texture = _core->_textureBufferCache->getTextureBuffer(value);
+		auto texture = _core->_textureBufferCache->getBuffer(value);
 
 		if(texture == nullptr)
 		{
@@ -134,7 +134,7 @@ void FabiEngine3D::terrain_setRedDiffuseMap(const string& ID, const string& valu
 			texture->loadMipMapping();
 			texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
 
-			_core->_textureBufferCache->storeTextureBuffer(value, texture);
+			_core->_textureBufferCache->storeBuffer(value, texture);
 		}
 
 		_core->_terrainEntityManager->getEntity(ID)->setRedDiffuseMap(texture);
@@ -151,7 +151,7 @@ void FabiEngine3D::terrain_setGreenDiffuseMap(const string& ID, const string& va
 	}
 	else
 	{
-		auto texture = _core->_textureBufferCache->getTextureBuffer(value);
+		auto texture = _core->_textureBufferCache->getBuffer(value);
 
 		if(texture == nullptr)
 		{
@@ -159,7 +159,7 @@ void FabiEngine3D::terrain_setGreenDiffuseMap(const string& ID, const string& va
 			texture->loadMipMapping();
 			texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
 
-			_core->_textureBufferCache->storeTextureBuffer(value, texture);
+			_core->_textureBufferCache->storeBuffer(value, texture);
 		}
 
 		_core->_terrainEntityManager->getEntity(ID)->setGreenDiffuseMap(texture);
@@ -176,7 +176,7 @@ void FabiEngine3D::terrain_setBlueDiffuseMap(const string& ID, const string& val
 	}
 	else
 	{
-		auto texture = _core->_textureBufferCache->getTextureBuffer(value);
+		auto texture = _core->_textureBufferCache->getBuffer(value);
 
 		if(texture == nullptr)
 		{
@@ -184,7 +184,7 @@ void FabiEngine3D::terrain_setBlueDiffuseMap(const string& ID, const string& val
 			texture->loadMipMapping();
 			texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
 
-			_core->_textureBufferCache->storeTextureBuffer(value, texture);
+			_core->_textureBufferCache->storeBuffer(value, texture);
 		}
 
 		_core->_terrainEntityManager->getEntity(ID)->setBlueDiffuseMap(texture);
@@ -201,7 +201,7 @@ void FabiEngine3D::terrain_setRedNormalMap(const string& ID, const string& value
 	}
 	else
 	{
-		auto texture = _core->_textureBufferCache->getTextureBuffer(value);
+		auto texture = _core->_textureBufferCache->getBuffer(value);
 
 		if(texture == nullptr)
 		{
@@ -209,7 +209,7 @@ void FabiEngine3D::terrain_setRedNormalMap(const string& ID, const string& value
 			texture->loadMipMapping();
 			texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
 
-			_core->_textureBufferCache->storeTextureBuffer(value, texture);
+			_core->_textureBufferCache->storeBuffer(value, texture);
 		}
 
 		_core->_terrainEntityManager->getEntity(ID)->setRedNormalMap(texture);
@@ -226,7 +226,7 @@ void FabiEngine3D::terrain_setGreenNormalMap(const string& ID, const string& val
 	}
 	else
 	{
-		auto texture = _core->_textureBufferCache->getTextureBuffer(value);
+		auto texture = _core->_textureBufferCache->getBuffer(value);
 
 		if(texture == nullptr)
 		{
@@ -234,7 +234,7 @@ void FabiEngine3D::terrain_setGreenNormalMap(const string& ID, const string& val
 			texture->loadMipMapping();
 			texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
 
-			_core->_textureBufferCache->storeTextureBuffer(value, texture);
+			_core->_textureBufferCache->storeBuffer(value, texture);
 		}
 
 		_core->_terrainEntityManager->getEntity(ID)->setGreenNormalMap(texture);
@@ -251,7 +251,7 @@ void FabiEngine3D::terrain_setBlueNormalMap(const string& ID, const string& valu
 	}
 	else
 	{
-		auto texture = _core->_textureBufferCache->getTextureBuffer(value);
+		auto texture = _core->_textureBufferCache->getBuffer(value);
 
 		if(texture == nullptr)
 		{
@@ -259,7 +259,7 @@ void FabiEngine3D::terrain_setBlueNormalMap(const string& ID, const string& valu
 			texture->loadMipMapping();
 			texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
 
-			_core->_textureBufferCache->storeTextureBuffer(value, texture);
+			_core->_textureBufferCache->storeBuffer(value, texture);
 		}
 
 		_core->_terrainEntityManager->getEntity(ID)->setBlueNormalMap(texture);

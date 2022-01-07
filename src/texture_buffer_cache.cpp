@@ -2,23 +2,35 @@
 
 #include "logger.hpp"
 
-void TextureBufferCache::storeTextureBuffer(const string& filePath, shared_ptr<TextureBuffer> textureBuffer)
+void TextureBufferCache::storeBuffer(const string& filePath, shared_ptr<TextureBuffer> buffer)
 {
-	auto cacheIterator = _cache.find(filePath);
+	auto cacheIterator = _2dBuffers.find(filePath);
 
-	if(cacheIterator != _cache.end())
+	if(cacheIterator != _2dBuffers.end())
 	{
 		Logger::throwError("");
 	}
 
-	_cache.insert(make_pair(filePath, textureBuffer));
+	_2dBuffers.insert(make_pair(filePath, buffer));
 }
 
-const shared_ptr<TextureBuffer> TextureBufferCache::getTextureBuffer(const string& filePath) const
+void TextureBufferCache::storeBuffer(const array<string, 6>& filePaths, shared_ptr<TextureBuffer> buffer)
 {
-	auto cacheIterator = _cache.find(filePath);
+	auto cacheIterator = _3dBuffers.find(filePaths);
 
-	if(cacheIterator != _cache.end())
+	if(cacheIterator != _3dBuffers.end())
+	{
+		Logger::throwError("");
+	}
+
+	_3dBuffers.insert(make_pair(filePaths, buffer));
+}
+
+const shared_ptr<TextureBuffer> TextureBufferCache::getBuffer(const string& filePath) const
+{
+	auto cacheIterator = _2dBuffers.find(filePath);
+
+	if(cacheIterator != _2dBuffers.end())
 	{
 		return cacheIterator->second;
 	}
@@ -26,7 +38,31 @@ const shared_ptr<TextureBuffer> TextureBufferCache::getTextureBuffer(const strin
 	return nullptr;
 }
 
-const map<string, shared_ptr<TextureBuffer>>& TextureBufferCache::getTextureBuffers() const
+const shared_ptr<TextureBuffer> TextureBufferCache::getBuffer(const array<string, 6>& filePaths) const
 {
-	return _cache;
+	auto cacheIterator = _3dBuffers.find(filePaths);
+
+	if(cacheIterator != _3dBuffers.end())
+	{
+		return cacheIterator->second;
+	}
+
+	return nullptr;
+}
+
+const vector<shared_ptr<TextureBuffer>> TextureBufferCache::getBuffers() const
+{
+	vector<shared_ptr<TextureBuffer>> result;
+
+	for(const auto& [filePath, buffer] : _2dBuffers)
+	{
+		result.push_back(buffer);
+	}
+
+	for(const auto& [filePaths, buffer] : _3dBuffers)
+	{
+		result.push_back(buffer);
+	}
+
+	return result;
 }

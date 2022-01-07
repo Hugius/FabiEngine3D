@@ -86,7 +86,7 @@ void FabiEngine3D::water_setDudvMap(const string& ID, const string& value)
 	}
 	else
 	{
-		auto texture = _core->_textureBufferCache->getTextureBuffer(value);
+		auto texture = _core->_textureBufferCache->getBuffer(value);
 
 		if(texture == nullptr)
 		{
@@ -94,7 +94,7 @@ void FabiEngine3D::water_setDudvMap(const string& ID, const string& value)
 			texture->loadMipMapping();
 			texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
 
-			_core->_textureBufferCache->storeTextureBuffer(value, texture);
+			_core->_textureBufferCache->storeBuffer(value, texture);
 		}
 
 		_core->_waterEntityManager->getEntity(ID)->setDudvMap(texture);
@@ -111,7 +111,7 @@ void FabiEngine3D::water_setNormalMap(const string& ID, const string& value)
 	}
 	else
 	{
-		auto texture = _core->_textureBufferCache->getTextureBuffer(value);
+		auto texture = _core->_textureBufferCache->getBuffer(value);
 
 		if(texture == nullptr)
 		{
@@ -119,7 +119,7 @@ void FabiEngine3D::water_setNormalMap(const string& ID, const string& value)
 			texture->loadMipMapping();
 			texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
 
-			_core->_textureBufferCache->storeTextureBuffer(value, texture);
+			_core->_textureBufferCache->storeBuffer(value, texture);
 		}
 
 		_core->_waterEntityManager->getEntity(ID)->setNormalMap(texture);
@@ -136,7 +136,7 @@ void FabiEngine3D::water_setDisplacementMap(const string& ID, const string& valu
 	}
 	else
 	{
-		auto texture = _core->_textureBufferCache->getTextureBuffer(value);
+		auto texture = _core->_textureBufferCache->getBuffer(value);
 
 		if(texture == nullptr)
 		{
@@ -144,7 +144,7 @@ void FabiEngine3D::water_setDisplacementMap(const string& ID, const string& valu
 			texture->loadMipMapping();
 			texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
 
-			_core->_textureBufferCache->storeTextureBuffer(value, texture);
+			_core->_textureBufferCache->storeBuffer(value, texture);
 		}
 
 		_core->_waterEntityManager->getEntity(ID)->setDisplacementMap(texture);

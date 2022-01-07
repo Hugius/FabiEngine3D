@@ -23,17 +23,17 @@ void FabiEngine3D::text_setVisible(const string& ID, bool value)
 
 void FabiEngine3D::text_setFontMap(const string& ID, const string& value)
 {
-	auto texture = _core->_textureBufferCache->getTextureBuffer(value);
+	auto texture = _core->_textureBufferCache->getBuffer(value);
 
 	if(texture == nullptr)
 	{
 		texture = make_shared<TextureBuffer>(_core->_imageLoader->loadImage(value));
 
-		_core->_textureBufferCache->storeTextureBuffer(value, texture);
+		_core->_textureBufferCache->storeBuffer(value, texture);
 	}
 
 	auto entity = _core->_textEntityManager->getEntity(ID);
-	entity->setFontMap(_core->_textureBufferCache->getTextureBuffer(value));
+	entity->setFontMap(_core->_textureBufferCache->getBuffer(value));
 	entity->setFontMapPath(value);
 }
 

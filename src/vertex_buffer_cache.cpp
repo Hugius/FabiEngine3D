@@ -26,7 +26,14 @@ const shared_ptr<VertexBuffer> VertexBufferCache::getBuffer(const string& filePa
 	return nullptr;
 }
 
-const map<pair<string, string>, shared_ptr<VertexBuffer>>& VertexBufferCache::getBuffers() const
+const vector<shared_ptr<VertexBuffer>> VertexBufferCache::getBuffers() const
 {
-	return _buffers;
+	vector<shared_ptr<VertexBuffer>> result;
+
+	for(const auto& [ID, buffer] : _buffers)
+	{
+		result.push_back(buffer);
+	}
+
+	return result;
 }

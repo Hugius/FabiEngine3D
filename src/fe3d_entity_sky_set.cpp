@@ -16,48 +16,46 @@ void FabiEngine3D::sky_deleteAll()
 
 void FabiEngine3D::sky_setCubeMaps(const string& ID, const array<string, 6>& value)
 {
-	array<shared_ptr<Image>, 6> images;
-	for(unsigned int i = 0; i < 6; i++)
+	auto texture = _core->_textureBufferCache->getBuffer(value);
+
+	if(texture == nullptr)
 	{
-		if(value[i].empty())
+		array<shared_ptr<Image>, 6> images;
+		for(unsigned int i = 0; i < 6; i++)
 		{
-			images[i] = nullptr;
+			if(value[i].empty())
+			{
+				images[i] = nullptr;
+			}
+			else
+			{
+				images[i] = _core->_imageLoader->loadImage(value[i]);
+			}
 		}
-		else
+
+		for(const auto& image : images)
 		{
-			images[i] = _core->_imageLoader->loadImage(value[i]);
+			if(image != nullptr)
+			{
+				image->flipY();
+			}
 		}
+
+		texture = make_shared<TextureBuffer>(images);
+
+		for(const auto& image : images)
+		{
+			if(image != nullptr)
+			{
+				image->flipY();
+			}
+		}
+
+		_core->_textureBufferCache->storeBuffer(value, texture);
 	}
 
-	for(const auto& image : images)
-	{
-		if(image != nullptr)
-		{
-			image->flipY();
-		}
-	}
-
-	//auto texture = _core->_textureBufferCache->getTextureBuffer(value);
-
-	//if(texture == nullptr)
-	//{
-	//	texture = make_shared<TextureBuffer>(_core->_imageLoader->loadImage(value));
-	//	texture->loadMipMapping();
-	//	texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
-
-	//	_core->_textureBufferCache->storeTextureBuffer(value, texture);
-	//}
-
-	_core->_skyEntityManager->getEntity(ID)->setCubeMap(make_shared<TextureBuffer>(images));
+	_core->_skyEntityManager->getEntity(ID)->setCubeMap(texture);
 	_core->_skyEntityManager->getEntity(ID)->setCubeMapPaths(value);
-
-	for(const auto& image : images)
-	{
-		if(image != nullptr)
-		{
-			image->flipY();
-		}
-	}
 }
 
 void FabiEngine3D::sky_setRightCubeMap(const string& ID, const string& value)

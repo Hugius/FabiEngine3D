@@ -151,12 +151,12 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity,
 		if(!entity->getPreviousReflectionEntityID().empty())
 		{
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntities.at(entity->getPreviousReflectionEntityID())->getCubeMap()->getID());
+			//glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntities.at(entity->getPreviousReflectionEntityID())->getCubeMap()->getID());
 		}
 		if(!entity->getCurrentReflectionEntityID().empty())
 		{
 			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntities.at(entity->getCurrentReflectionEntityID())->getCubeMap()->getID());
+			//glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntities.at(entity->getCurrentReflectionEntityID())->getCubeMap()->getID());
 		}
 
 		for(const auto& partID : entity->getPartIDs())

@@ -86,8 +86,10 @@ void FabiEngine3D::water_setDudvMap(const string& ID, const string& value)
 	}
 	else
 	{
-		auto texture = make_shared<TextureBuffer>(_core->_imageLoader->loadImage(value), true);
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader->loadImage(value));
+		texture->loadMipMapping();
 		texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
+
 		_core->_waterEntityManager->getEntity(ID)->setDudvMap(texture);
 		_core->_waterEntityManager->getEntity(ID)->setDudvMapPath(value);
 	}
@@ -102,8 +104,10 @@ void FabiEngine3D::water_setNormalMap(const string& ID, const string& value)
 	}
 	else
 	{
-		auto texture = make_shared<TextureBuffer>(_core->_imageLoader->loadImage(value), true);
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader->loadImage(value));
+		texture->loadMipMapping();
 		texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
+
 		_core->_waterEntityManager->getEntity(ID)->setNormalMap(texture);
 		_core->_waterEntityManager->getEntity(ID)->setNormalMapPath(value);
 	}
@@ -118,8 +122,10 @@ void FabiEngine3D::water_setDisplacementMap(const string& ID, const string& valu
 	}
 	else
 	{
-		auto texture = make_shared<TextureBuffer>(_core->_imageLoader->loadImage(value), true);
+		auto texture = make_shared<TextureBuffer>(_core->_imageLoader->loadImage(value));
+		texture->loadMipMapping();
 		texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
+
 		_core->_waterEntityManager->getEntity(ID)->setDisplacementMap(texture);
 		_core->_waterEntityManager->getEntity(ID)->setDisplacementMapPath(value);
 	}

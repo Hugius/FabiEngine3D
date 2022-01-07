@@ -170,8 +170,8 @@ void WaterEntityManager::_loadMesh(shared_ptr<WaterEntity> entity, float size)
 	auto lowQualityBufferDataCount = static_cast<unsigned int>(sizeof(lowQualityBufferData) / sizeof(float));
 	auto highQualityBufferDataCount = static_cast<unsigned int>(highQualityBufferData.size());
 
-	entity->setLowQualityVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, &lowQualityBufferData[0], lowQualityBufferDataCount));
-	entity->setHighQualityVertexBuffer(make_shared<VertexBuffer>(VertexBufferType::POS_UV, &highQualityBufferData[0], highQualityBufferDataCount));
+	entity->setLowQualityMesh(make_shared<VertexBuffer>(VertexBufferType::POS_UV, &lowQualityBufferData[0], lowQualityBufferDataCount));
+	entity->setHighQualityMesh(make_shared<VertexBuffer>(VertexBufferType::POS_UV, &highQualityBufferData[0], highQualityBufferDataCount));
 }
 
 void WaterEntityManager::update()

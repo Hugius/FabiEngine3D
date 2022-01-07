@@ -8,15 +8,15 @@ using std::set;
 using std::future;
 using std::launch;
 using std::future_status;
-using std::chrono::system_clock;
+using std::chrono::seconds;
 
 const shared_ptr<Image> ImageLoader::loadImage(const string& filePath)
 {
 	BEGIN:;
 
-	auto cacheIterator = _imageCache.find(filePath);
+	auto cacheIterator = _cache.find(filePath);
 
-	if(cacheIterator != _imageCache.end())
+	if(cacheIterator != _cache.end())
 	{
 		return cacheIterator->second;
 	}
@@ -26,10 +26,11 @@ const shared_ptr<Image> ImageLoader::loadImage(const string& filePath)
 	if(loadedImage == nullptr)
 	{
 		Logger::throwWarning("Cannot load image: \"" + filePath + "\"!");
-		return {};
+		return nullptr;
 	}
 
-	_imageCache.insert(make_pair(filePath, loadedImage));
+	_cache.insert(make_pair(filePath, loadedImage));
+
 	Logger::throwInfo("Loaded image: \"" + filePath + "\"");
 	goto BEGIN;
 }
@@ -42,7 +43,7 @@ void ImageLoader::cacheImage(const string& filePath)
 void ImageLoader::cacheImages(const vector<string>& filePaths)
 {
 	vector<future<shared_ptr<Image>>> threads;
-	vector<string> finalFilePaths;
+	vector<string> threadFilePaths;
 	vector<bool> threadStatuses;
 	unsigned int finishedThreadCount = 0;
 
@@ -51,10 +52,10 @@ void ImageLoader::cacheImages(const vector<string>& filePaths)
 
 	for(const auto& filePath : uniqueFilePaths)
 	{
-		if(_imageCache.find(filePath) == _imageCache.end())
+		if(_cache.find(filePath) == _cache.end())
 		{
 			threads.push_back(async(launch::async, &ImageLoader::_loadImage, this, filePath));
-			finalFilePaths.push_back(filePath);
+			threadFilePaths.push_back(filePath);
 			threadStatuses.push_back(false);
 		}
 	}
@@ -65,21 +66,22 @@ void ImageLoader::cacheImages(const vector<string>& filePaths)
 		{
 			if(!threadStatuses[i])
 			{
-				if(threads[i].wait_until(system_clock::time_point::min()) == future_status::ready)
+				if(threads[i].wait_for(seconds(0)) == future_status::ready)
 				{
-					auto loadedImage = threads[i].get();
-
 					threadStatuses[i] = true;
 					finishedThreadCount++;
 
+					auto loadedImage = threads[i].get();
+
 					if(loadedImage == nullptr)
 					{
-						Logger::throwWarning("Cannot load image: \"" + finalFilePaths[i] + "\"!");
+						Logger::throwWarning("Cannot load image: \"" + threadFilePaths[i] + "\"!");
 						continue;
 					}
 
-					_imageCache[finalFilePaths[i]] = loadedImage;
-					Logger::throwInfo("Loaded image: \"" + finalFilePaths[i] + "\"");
+					_cache.insert(make_pair(threadFilePaths[i], loadedImage));
+
+					Logger::throwInfo("Loaded image: \"" + threadFilePaths[i] + "\"");
 				}
 			}
 		}
@@ -88,13 +90,13 @@ void ImageLoader::cacheImages(const vector<string>& filePaths)
 
 void ImageLoader::clearImageCache(const string& filePath)
 {
-	if(_imageCache.find(filePath) != _imageCache.end())
+	if(_cache.find(filePath) != _cache.end())
 	{
-		_imageCache.erase(filePath);
+		_cache.erase(filePath);
 	}
 }
 
 void ImageLoader::clearImagesCache()
 {
-	_imageCache.clear();
+	_cache.clear();
 }

@@ -28,5 +28,5 @@ private:
 
 	Mix_Chunk* _loadChunk(const string& filePath, unsigned char* data) const;
 
-	map<string, Mix_Chunk*> _chunkCache;
+	map<string, Mix_Chunk*> _cache;
 };

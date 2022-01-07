@@ -176,22 +176,22 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 
 		if(entity->hasDisplacementMap())
 		{
-			glBindVertexArray(entity->getHighQualityVertexBuffer()->getVaoID());
+			glBindVertexArray(entity->getHighQualityMesh()->getVaoID());
 		}
 		else
 		{
-			glBindVertexArray(entity->getLowQualityVertexBuffer()->getVaoID());
+			glBindVertexArray(entity->getLowQualityMesh()->getVaoID());
 		}
 
 		if(entity->hasDisplacementMap())
 		{
-			glDrawArrays(GL_TRIANGLES, 0, entity->getHighQualityVertexBuffer()->getVertexCount());
-			_renderBus->increaseTriangleCount(entity->getHighQualityVertexBuffer()->getVertexCount() / 3);
+			glDrawArrays(GL_TRIANGLES, 0, entity->getHighQualityMesh()->getVertexCount());
+			_renderBus->increaseTriangleCount(entity->getHighQualityMesh()->getVertexCount() / 3);
 		}
 		else
 		{
-			glDrawArrays(GL_TRIANGLES, 0, entity->getLowQualityVertexBuffer()->getVertexCount());
-			_renderBus->increaseTriangleCount(entity->getLowQualityVertexBuffer()->getVertexCount() / 3);
+			glDrawArrays(GL_TRIANGLES, 0, entity->getLowQualityMesh()->getVertexCount());
+			_renderBus->increaseTriangleCount(entity->getLowQualityMesh()->getVertexCount() / 3);
 		}
 
 		glBindVertexArray(0);

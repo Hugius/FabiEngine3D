@@ -55,15 +55,16 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 
 	_entities.insert(make_pair(ID, entity));
 
-	auto partsPointer = _meshLoader->loadMesh(meshPath);
+	auto mesh = _meshLoader->loadMesh(meshPath);
 
-	if(partsPointer == nullptr)
+	if(mesh == nullptr)
 	{
 		deleteEntity(ID);
 		return;
 	}
 
-	auto& parts = *partsPointer;
+	const auto& parts = mesh->getParts();
+
 	if((parts.size() == 1) && !parts[0]->getID().empty())
 	{
 		Logger::throwWarning("Multiparted model with ID \"" + ID + "\" only has 1 part!");
@@ -100,6 +101,7 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 		if(vertexBuffer == nullptr)
 		{
 			vertexBuffer = make_shared<VertexBuffer>(VertexBufferType::POS_UV_NOR_TAN, &bufferData[0], static_cast<unsigned int>(bufferData.size()));
+
 			_vertexBufferCache->storeBuffer(meshPath, part->getID(), vertexBuffer);
 		}
 

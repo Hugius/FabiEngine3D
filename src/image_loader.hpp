@@ -29,5 +29,5 @@ public:
 private:
 	shared_ptr<Image> _loadImage(const string& filePath);
 
-	map<string, shared_ptr<Image>> _imageCache;
+	map<string, shared_ptr<Image>> _cache;
 };

@@ -51,6 +51,9 @@
     <ClCompile Include="..\..\..\src\audio_loader.cpp">
       <Filter>Audio\Loader</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\mesh.cpp">
+      <Filter>Mesh\Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\mesh_loader.hpp">
@@ -67,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\audio_loader.hpp">
       <Filter>Audio\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\mesh.hpp">
+      <Filter>Mesh\Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

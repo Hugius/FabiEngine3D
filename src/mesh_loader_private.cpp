@@ -12,7 +12,7 @@ using std::ifstream;
 using std::istringstream;
 using std::array;
 
-pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& filePath)
+shared_ptr<Mesh> MeshLoader::_loadMesh(const string& filePath)
 {
 	vector<shared_ptr<MeshPart>> meshParts;
 	vector<fvec3> temp_positions;
@@ -25,8 +25,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 	auto file = ifstream(fullFilePath);
 	if(!file)
 	{
-		auto warningMessage = string("Cannot load mesh: \"" + filePath + "\"!");
-		return make_pair(warningMessage, meshParts);
+		return nullptr;
 	}
 
 	string line;
@@ -47,8 +46,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 
 			if(selectedPartID == "?")
 			{
-				string warningMessage = string("Mesh part ID cannot be '?' in mesh file: \"" + filePath + "\"!");
-				return make_pair(warningMessage, meshParts);
+				return nullptr;
 			}
 
 			continue;
@@ -92,8 +90,7 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 
 			if(temp_positions.empty() || temp_uvs.empty() || temp_normals.empty())
 			{
-				string warningMessage = string("Too many or not enough faces in mesh file: \"" + filePath + "\"");
-				return make_pair(warningMessage, meshParts);
+				return nullptr;
 			}
 
 			bool isAlreadyExisting = false;
@@ -165,9 +162,15 @@ pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& f
 
 	if(meshParts.empty())
 	{
-		string warningMessage = string("Incorrect or too little content in mesh file: \"" + filePath + "\"");
-		return make_pair(warningMessage, meshParts);
+		return nullptr;
 	}
 
-	return make_pair("", meshParts);
+	auto mesh = make_shared<Mesh>();
+
+	for(const auto& meshPart : meshParts)
+	{
+		mesh->addPart(meshPart);
+	}
+
+	return mesh;
 }

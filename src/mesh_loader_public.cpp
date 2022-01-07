@@ -9,32 +9,32 @@
 using std::set;
 using std::future;
 using std::launch;
+using std::future_status;
+using std::chrono::seconds;
 
-const vector<shared_ptr<MeshPart>>* MeshLoader::loadMesh(const string& filePath)
+const shared_ptr<Mesh> MeshLoader::loadMesh(const string& filePath)
 {
 	BEGIN:;
-	auto cacheIterator = _meshCache.find(filePath);
 
-	if(cacheIterator != _meshCache.end())
+	auto cacheIterator = _cache.find(filePath);
+
+	if(cacheIterator != _cache.end())
 	{
-		return &cacheIterator->second;
+		return cacheIterator->second;
 	}
 
-	auto returnValue = _loadMesh(filePath);
+	auto loadedMesh = _loadMesh(filePath);
 
-	if(returnValue.second.empty())
+	if(loadedMesh == nullptr)
 	{
-		Logger::throwWarning(returnValue.first);
+		Logger::throwWarning("Cannot load mesh: \"" + filePath + "\"!");
 		return nullptr;
 	}
-	else
-	{
-		_meshCache.insert(make_pair(filePath, returnValue.second));
 
-		Logger::throwInfo("Loaded mesh: \"" + filePath + "\"");
+	_cache.insert(make_pair(filePath, loadedMesh));
 
-		goto BEGIN;
-	}
+	Logger::throwInfo("Loaded mesh: \"" + filePath + "\"");
+	goto BEGIN;
 }
 
 void MeshLoader::cacheMesh(const string& filePath)
@@ -44,40 +44,47 @@ void MeshLoader::cacheMesh(const string& filePath)
 
 void MeshLoader::cacheMeshes(const vector<string>& meshPaths)
 {
-	vector<future<pair<string, vector<shared_ptr<MeshPart>>>>> threads;
+	vector<future<shared_ptr<Mesh>>> threads;
+	vector<string> threadFilePaths;
 	vector<bool> threadStatuses;
+	unsigned int finishedThreadCount = 0;
 
 	auto tempFilePaths = set<string>(meshPaths.begin(), meshPaths.end());
 	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
 
 	for(const auto& filePath : uniqueFilePaths)
 	{
-		if(_meshCache.find(filePath) == _meshCache.end())
+		if(_cache.find(filePath) == _cache.end())
 		{
 			threads.push_back(async(launch::async, &MeshLoader::_loadMesh, this, filePath));
+			threadFilePaths.push_back(filePath);
 			threadStatuses.push_back(false);
-		}
-		else
-		{
-			threadStatuses.push_back(true);
 		}
 	}
 
-	for(size_t i = 0; i < threadStatuses.size(); i++)
+	while(finishedThreadCount != threadStatuses.size())
 	{
-		if(!threadStatuses[i])
+		for(size_t i = 0; i < threadStatuses.size(); i++)
 		{
-			auto returnValue = threads[i].get();
-
-			if(returnValue.second.empty())
+			if(!threadStatuses[i])
 			{
-				Logger::throwWarning(returnValue.first);
-			}
-			else
-			{
-				_meshCache[uniqueFilePaths[i]] = returnValue.second;
+				if(threads[i].wait_for(seconds(0)) == future_status::ready)
+				{
+					threadStatuses[i] = true;
+					finishedThreadCount++;
 
-				Logger::throwInfo("Loaded mesh: \"" + uniqueFilePaths[i] + "\"");
+					auto loadedMesh = threads[i].get();
+
+					if(loadedMesh == nullptr)
+					{
+						Logger::throwWarning("Cannot load mesh: \"" + threadFilePaths[i] + "\"!");
+						continue;
+					}
+
+					_cache.insert(make_pair(threadFilePaths[i], loadedMesh));
+
+					Logger::throwInfo("Loaded mesh: \"" + threadFilePaths[i] + "\"");
+				}
 			}
 		}
 	}
@@ -85,13 +92,13 @@ void MeshLoader::cacheMeshes(const vector<string>& meshPaths)
 
 void MeshLoader::clearMeshCache(const string& filePath)
 {
-	if(_meshCache.find(filePath) != _meshCache.end())
+	if(_cache.find(filePath) != _cache.end())
 	{
-		_meshCache.erase(filePath);
+		_cache.erase(filePath);
 	}
 }
 
 void MeshLoader::clearMeshesCache()
 {
-	_meshCache.clear();
+	_cache.clear();
 }

@@ -1,14 +1,11 @@
 #pragma once
 
-#include "mathematics.hpp"
-#include "mesh_part.hpp"
+#include "mesh.hpp"
 
-#include <memory>
 #include <map>
 
 using std::map;
 using std::pair;
-using std::shared_ptr;
 
 class MeshLoader final
 {
@@ -18,10 +15,10 @@ public:
 	void clearMeshCache(const string& filePath);
 	void clearMeshesCache();
 
-	const vector<shared_ptr<MeshPart>>* loadMesh(const string& filePath);
+	const shared_ptr<Mesh> loadMesh(const string& filePath);
 
 private:
-	pair<string, vector<shared_ptr<MeshPart>>> _loadMesh(const string& filePath);
+	shared_ptr<Mesh> _loadMesh(const string& filePath);
 
-	map<string, vector<shared_ptr<MeshPart>>> _meshCache;
+	map<string, shared_ptr<Mesh>> _cache;
 };

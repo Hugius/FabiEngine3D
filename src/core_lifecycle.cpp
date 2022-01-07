@@ -50,6 +50,7 @@ Core::Core(FabiEngine3D& fe3d)
 	_modelEntityManager->inject(_timer);
 	_modelEntityManager->inject(_reflectionEntityManager);
 	_modelEntityManager->inject(_meshLoader);
+	_modelEntityManager->inject(_vertexBufferCache);
 	_billboardEntityManager->inject(_renderBus);
 	_aabbEntityManager->inject(_modelEntityManager);
 	_aabbEntityManager->inject(_billboardEntityManager);

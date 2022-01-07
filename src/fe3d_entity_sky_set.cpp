@@ -37,6 +37,17 @@ void FabiEngine3D::sky_setCubeMaps(const string& ID, const array<string, 6>& val
 		}
 	}
 
+	//auto texture = _core->_textureBufferCache->getTextureBuffer(value);
+
+	//if(texture == nullptr)
+	//{
+	//	texture = make_shared<TextureBuffer>(_core->_imageLoader->loadImage(value));
+	//	texture->loadMipMapping();
+	//	texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
+
+	//	_core->_textureBufferCache->storeTextureBuffer(value, texture);
+	//}
+
 	_core->_skyEntityManager->getEntity(ID)->setCubeMap(make_shared<TextureBuffer>(images));
 	_core->_skyEntityManager->getEntity(ID)->setCubeMapPaths(value);
 

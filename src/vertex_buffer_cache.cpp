@@ -2,23 +2,23 @@
 
 #include "logger.hpp"
 
-void VertexBufferCache::storeBuffer(const string& ID, shared_ptr<VertexBuffer> buffer)
+void VertexBufferCache::storeBuffer(const string& filePath, const string& partID, shared_ptr<VertexBuffer> buffer)
 {
-	auto cacheIterator = _cache.find(ID);
+	auto cacheIterator = _buffers.find(make_pair(filePath, partID));
 
-	if(cacheIterator != _cache.end())
+	if(cacheIterator != _buffers.end())
 	{
 		Logger::throwError("");
 	}
 
-	_cache.insert(make_pair(ID, buffer));
+	_buffers.insert(make_pair(make_pair(filePath, partID), buffer));
 }
 
-const shared_ptr<VertexBuffer> VertexBufferCache::getBuffer(const string& ID) const
+const shared_ptr<VertexBuffer> VertexBufferCache::getBuffer(const string& filePath, const string& partID) const
 {
-	auto cacheIterator = _cache.find(ID);
+	auto cacheIterator = _buffers.find(make_pair(filePath, partID));
 
-	if(cacheIterator != _cache.end())
+	if(cacheIterator != _buffers.end())
 	{
 		return cacheIterator->second;
 	}
@@ -26,7 +26,7 @@ const shared_ptr<VertexBuffer> VertexBufferCache::getBuffer(const string& ID) co
 	return nullptr;
 }
 
-const map<string, shared_ptr<VertexBuffer>>& VertexBufferCache::getBuffers() const
+const map<pair<string, string>, shared_ptr<VertexBuffer>>& VertexBufferCache::getBuffers() const
 {
-	return _cache;
+	return _buffers;
 }

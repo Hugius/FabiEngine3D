@@ -2,21 +2,21 @@
 
 #include "logger.hpp"
 
-void TextureBufferCache::storeTextureBuffer(const string& ID, shared_ptr<TextureBuffer> textureBuffer)
+void TextureBufferCache::storeTextureBuffer(const string& filePath, shared_ptr<TextureBuffer> textureBuffer)
 {
-	auto cacheIterator = _cache.find(ID);
+	auto cacheIterator = _cache.find(filePath);
 
 	if(cacheIterator != _cache.end())
 	{
 		Logger::throwError("");
 	}
 
-	_cache.insert(make_pair(ID, textureBuffer));
+	_cache.insert(make_pair(filePath, textureBuffer));
 }
 
-const shared_ptr<TextureBuffer> TextureBufferCache::getTextureBuffer(const string& ID) const
+const shared_ptr<TextureBuffer> TextureBufferCache::getTextureBuffer(const string& filePath) const
 {
-	auto cacheIterator = _cache.find(ID);
+	auto cacheIterator = _cache.find(filePath);
 
 	if(cacheIterator != _cache.end())
 	{

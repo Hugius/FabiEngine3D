@@ -6,6 +6,7 @@
 #include "timer.hpp"
 #include "model_entity.hpp"
 #include "reflection_entity_manager.hpp"
+#include "vertex_buffer_cache.hpp"
 
 #include <unordered_map>
 
@@ -18,6 +19,7 @@ public:
 	void inject(shared_ptr<Timer> timer);
 	void inject(shared_ptr<ReflectionEntityManager> reflectionManager);
 	void inject(shared_ptr<MeshLoader> meshLoader);
+	void inject(shared_ptr<VertexBufferCache> vertexBufferCache);
 	void update();
 	void createEntity(const string& ID, const string& meshPath);
 	void deleteEntity(const string& ID) override;
@@ -37,4 +39,5 @@ private:
 	shared_ptr<Timer> _timer = nullptr;
 	shared_ptr<ReflectionEntityManager> _reflectionManager = nullptr;
 	shared_ptr<MeshLoader> _meshLoader = nullptr;
+	shared_ptr<VertexBufferCache> _vertexBufferCache = nullptr;
 };

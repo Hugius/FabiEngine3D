@@ -44,6 +44,11 @@ void ModelEntityManager::inject(shared_ptr<MeshLoader> meshLoader)
 	_meshLoader = meshLoader;
 }
 
+void ModelEntityManager::inject(shared_ptr<VertexBufferCache> vertexBufferCache)
+{
+	_vertexBufferCache = vertexBufferCache;
+}
+
 void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 {
 	auto entity = make_shared<ModelEntity>(ID);
@@ -90,7 +95,15 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 
 		entity->createPart(part->getID());
 
-		entity->setMesh(part->getID(), make_shared<VertexBuffer>(VertexBufferType::POS_UV_NOR_TAN, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
+		auto vertexBuffer = _vertexBufferCache->getBuffer(meshPath, part->getID());
+
+		if(vertexBuffer == nullptr)
+		{
+			vertexBuffer = make_shared<VertexBuffer>(VertexBufferType::POS_UV_NOR_TAN, &bufferData[0], static_cast<unsigned int>(bufferData.size()));
+			_vertexBufferCache->storeBuffer(meshPath, part->getID(), vertexBuffer);
+		}
+
+		entity->setMesh(part->getID(), vertexBuffer);
 	}
 
 	entity->setMeshPath(meshPath);

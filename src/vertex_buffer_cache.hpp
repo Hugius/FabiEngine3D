@@ -7,18 +7,19 @@
 #include <memory>
 
 using std::map;
+using std::pair;
 using std::string;
 using std::shared_ptr;
 
 class VertexBufferCache final
 {
 public:
-	void storeBuffer(const string& ID, shared_ptr<VertexBuffer> buffer);
+	void storeBuffer(const string& filePath, const string& partID, shared_ptr<VertexBuffer> buffer);
 
-	const shared_ptr<VertexBuffer> getBuffer(const string& ID) const;
+	const shared_ptr<VertexBuffer> getBuffer(const string& filePath, const string& partID) const;
 
-	const map<string, shared_ptr<VertexBuffer>>& getBuffers() const;
+	const map<pair<string, string>, shared_ptr<VertexBuffer>>& getBuffers() const;
 
 private:
-	map<string, shared_ptr<VertexBuffer>> _cache;
+	map<pair<string, string>, shared_ptr<VertexBuffer>> _buffers;
 };

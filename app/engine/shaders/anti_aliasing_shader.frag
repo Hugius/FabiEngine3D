@@ -1,5 +1,4 @@
-#version 330 core
-#extension GL_ARB_explicit_uniform_location : require
+#version 460 core
 
 #define LUMINOSITY_VECTOR vec3(0.299f, 0.587f, 0.114f)
 #define MAX_DIRECTION_TEXELS 8.0f

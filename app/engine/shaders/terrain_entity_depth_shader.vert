@@ -1,5 +1,4 @@
-#version 330 core
-#extension GL_ARB_explicit_uniform_location : require
+#version 460 core
 
 layout (location = 0) in vec3 v_position;
 

@@ -147,7 +147,7 @@
     <ClCompile Include="..\..\..\src\vertex_buffer.cpp">
       <Filter>Buffer\Data</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\buffer_cache.cpp">
+    <ClCompile Include="..\..\..\src\texture_buffer_cache.cpp">
       <Filter>Buffer\Cache</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\master_renderer_misc.cpp">
@@ -155,6 +155,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\base_renderer.cpp">
       <Filter>Renderer\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\vertex_buffer_cache.cpp">
+      <Filter>Buffer\Cache</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -236,11 +239,14 @@
     <ClInclude Include="..\..\..\src\vertex_buffer.hpp">
       <Filter>Buffer\Data</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\buffer_cache.hpp">
+    <ClInclude Include="..\..\..\src\texture_buffer_cache.hpp">
       <Filter>Buffer\Cache</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\base_renderer.hpp">
       <Filter>Renderer\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\vertex_buffer_cache.hpp">
+      <Filter>Buffer\Cache</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

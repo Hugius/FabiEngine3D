@@ -64,11 +64,6 @@ void MasterRenderer::inject(shared_ptr<Timer> timer)
 	_timer = timer;
 }
 
-void MasterRenderer::inject(shared_ptr<BufferCache> bufferCache)
-{
-	_bufferCache = bufferCache;
-}
-
 void MasterRenderer::inject(shared_ptr<SkyEntityManager> skyEntityManager)
 {
 	_skyEntityManager = skyEntityManager;

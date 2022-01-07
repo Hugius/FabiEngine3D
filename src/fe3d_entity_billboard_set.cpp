@@ -119,9 +119,16 @@ void FabiEngine3D::billboard_setDiffuseMap(const string& ID, const string& value
 	}
 	else
 	{
-		auto texture = make_shared<TextureBuffer>(_core->_imageLoader->loadImage(value));
-		texture->loadMipMapping();
-		texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
+		auto texture = _core->_textureBufferCache->getTextureBuffer(value);
+
+		if(texture == nullptr)
+		{
+			texture = make_shared<TextureBuffer>(_core->_imageLoader->loadImage(value));
+			texture->loadMipMapping();
+			texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
+
+			_core->_textureBufferCache->storeTextureBuffer(value, texture);
+		}
 
 		_core->_billboardEntityManager->getEntity(ID)->setDiffuseMap(texture, false);
 		_core->_billboardEntityManager->getEntity(ID)->setDiffuseMapPath(value);
@@ -137,9 +144,16 @@ void FabiEngine3D::billboard_setEmissionMap(const string& ID, const string& valu
 	}
 	else
 	{
-		auto texture = make_shared<TextureBuffer>(_core->_imageLoader->loadImage(value));
-		texture->loadMipMapping();
-		texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
+		auto texture = _core->_textureBufferCache->getTextureBuffer(value);
+
+		if(texture == nullptr)
+		{
+			texture = make_shared<TextureBuffer>(_core->_imageLoader->loadImage(value));
+			texture->loadMipMapping();
+			texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
+
+			_core->_textureBufferCache->storeTextureBuffer(value, texture);
+		}
 
 		_core->_billboardEntityManager->getEntity(ID)->setEmissionMap(texture);
 		_core->_billboardEntityManager->getEntity(ID)->setEmissionMapPath(value);

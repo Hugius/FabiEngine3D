@@ -28,7 +28,8 @@ Core::Core(FabiEngine3D& fe3d)
 	_reflectionEntityManager = make_shared<ReflectionEntityManager>();
 	_renderWindow = make_shared<RenderWindow>(_libraryLoader->getWindowPointer());
 	_masterRenderer = make_shared<MasterRenderer>();
-	_bufferCache = make_shared<BufferCache>();
+	_vertexBufferCache = make_shared<VertexBufferCache>();
+	_textureBufferCache = make_shared<TextureBufferCache>();
 	_renderBus = make_shared<RenderBus>();
 	_shadowGenerator = make_shared<ShadowGenerator>();
 	_camera = make_shared<Camera>();
@@ -69,7 +70,6 @@ Core::Core(FabiEngine3D& fe3d)
 	_masterRenderer->inject(_pointlightEntityManager);
 	_masterRenderer->inject(_spotlightEntityManager);
 	_masterRenderer->inject(_reflectionEntityManager);
-	_masterRenderer->inject(_bufferCache);
 	_shadowGenerator->inject(_renderBus);
 	_camera->inject(_renderBus);
 	_camera->inject(_renderWindow);

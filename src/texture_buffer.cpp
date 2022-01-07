@@ -100,8 +100,6 @@ void TextureBuffer::loadMipMapping()
 
 void TextureBuffer::loadAnisotropicFiltering(unsigned int quality)
 {
-	quality = clamp(quality, Config::MIN_ANISOTROPIC_FILTERING_QUALITY, Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
-
 	glBindTexture(GL_TEXTURE_2D, _ID);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY, static_cast<int>(quality));

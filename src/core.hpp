@@ -31,7 +31,8 @@
 #include "library_loader.hpp"
 #include "networking_server.hpp"
 #include "networking_client.hpp"
-#include "buffer_cache.hpp"
+#include "vertex_buffer_cache.hpp"
+#include "texture_buffer_cache.hpp"
 
 class Core final
 {
@@ -71,7 +72,8 @@ public:
 	shared_ptr<ReflectionEntityManager> _reflectionEntityManager = nullptr;
 	shared_ptr<RenderWindow> _renderWindow = nullptr;
 	shared_ptr<MasterRenderer> _masterRenderer = nullptr;
-	shared_ptr<BufferCache> _bufferCache = nullptr;
+	shared_ptr<VertexBufferCache> _vertexBufferCache = nullptr;
+	shared_ptr<TextureBufferCache> _textureBufferCache = nullptr;
 	shared_ptr<RenderBus> _renderBus = nullptr;
 	shared_ptr<ShadowGenerator> _shadowGenerator = nullptr;
 	shared_ptr<Camera> _camera = nullptr;

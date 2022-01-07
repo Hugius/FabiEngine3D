@@ -15,6 +15,8 @@ class VertexBufferCache final
 {
 public:
 	void storeBuffer(const string& filePath, const string& partID, shared_ptr<VertexBuffer> buffer);
+	void deleteBuffer(const string& filePath);
+	void clear();
 
 	const shared_ptr<VertexBuffer> getBuffer(const string& filePath, const string& partID) const;
 

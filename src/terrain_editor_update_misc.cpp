@@ -131,9 +131,9 @@ void TerrainEditor::_updateTerrainCreating()
 				return;
 			}
 
-			const string newFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearImageCache(newFilePath);
-			_fe3d.terrain_create(newTerrainID, newFilePath);
+			const string finalFilePath = filePath.substr(rootPath.size());
+			_fe3d.misc_clearImageCache(finalFilePath);
+			_fe3d.terrain_create(newTerrainID, finalFilePath);
 
 			if(_fe3d.terrain_isExisting(newTerrainID))
 			{

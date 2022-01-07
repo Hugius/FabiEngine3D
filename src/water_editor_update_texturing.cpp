@@ -47,9 +47,9 @@ void WaterEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string newFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearImageCache(newFilePath);
-			_fe3d.water_setDudvMap(_currentWaterID, newFilePath);
+			const string finalFilePath = filePath.substr(rootPath.size());
+			_fe3d.misc_clearImageCache(finalFilePath);
+			_fe3d.water_setDudvMap(_currentWaterID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
 		{
@@ -80,9 +80,9 @@ void WaterEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string newFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearImageCache(newFilePath);
-			_fe3d.water_setNormalMap(_currentWaterID, newFilePath);
+			const string finalFilePath = filePath.substr(rootPath.size());
+			_fe3d.misc_clearImageCache(finalFilePath);
+			_fe3d.water_setNormalMap(_currentWaterID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("displaceMap")->isHovered())
 		{
@@ -113,9 +113,9 @@ void WaterEditor::_updateTexturingMenu()
 				return;
 			}
 
-			const string newFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearImageCache(newFilePath);
-			_fe3d.water_setDisplacementMap(_currentWaterID, newFilePath);
+			const string finalFilePath = filePath.substr(rootPath.size());
+			_fe3d.misc_clearImageCache(finalFilePath);
+			_fe3d.water_setDisplacementMap(_currentWaterID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{

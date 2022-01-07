@@ -43,10 +43,10 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				}
 				else
 				{
-					int lineIndexToRemove = (_firstSelectedLineIndex > _lastSelectedLineIndex) ? _lastSelectedLineIndex : _firstSelectedLineIndex;
+					int lineIndexToDelete = (_firstSelectedLineIndex > _lastSelectedLineIndex) ? _lastSelectedLineIndex : _firstSelectedLineIndex;
 					for(int i = 0; i <= abs(_firstSelectedLineIndex - _lastSelectedLineIndex); i++)
 					{
-						_script.getScriptFile(_currentScriptFileID)->deleteLine(static_cast<unsigned int>(lineIndexToRemove));
+						_script.getScriptFile(_currentScriptFileID)->deleteLine(static_cast<unsigned int>(lineIndexToDelete));
 					}
 				}
 

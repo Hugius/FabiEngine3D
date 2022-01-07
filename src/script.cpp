@@ -46,7 +46,7 @@ void Script::deleteScriptFile(const string& ID)
 		}
 	}
 
-	Logger::throwError("Script::removeScriptFile");
+	Logger::throwError("Script::deleteScriptFile");
 }
 
 void Script::reset()

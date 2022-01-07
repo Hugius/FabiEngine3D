@@ -42,9 +42,9 @@ void TerrainEditor::_updateDiffuseMapMenu()
 				return;
 			}
 
-			const string newFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearImageCache(newFilePath);
-			_fe3d.terrain_setDiffuseMap(_currentTerrainID, newFilePath);
+			const string finalFilePath = filePath.substr(rootPath.size());
+			_fe3d.misc_clearImageCache(finalFilePath);
+			_fe3d.terrain_setDiffuseMap(_currentTerrainID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("redDiffuseMap")->isHovered())
 		{
@@ -75,9 +75,9 @@ void TerrainEditor::_updateDiffuseMapMenu()
 				return;
 			}
 
-			const string newFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearImageCache(newFilePath);
-			_fe3d.terrain_setRedDiffuseMap(_currentTerrainID, newFilePath);
+			const string finalFilePath = filePath.substr(rootPath.size());
+			_fe3d.misc_clearImageCache(finalFilePath);
+			_fe3d.terrain_setRedDiffuseMap(_currentTerrainID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenDiffuseMap")->isHovered())
 		{
@@ -108,9 +108,9 @@ void TerrainEditor::_updateDiffuseMapMenu()
 				return;
 			}
 
-			const string newFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearImageCache(newFilePath);
-			_fe3d.terrain_setGreenDiffuseMap(_currentTerrainID, newFilePath);
+			const string finalFilePath = filePath.substr(rootPath.size());
+			_fe3d.misc_clearImageCache(finalFilePath);
+			_fe3d.terrain_setGreenDiffuseMap(_currentTerrainID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueDiffuseMap")->isHovered())
 		{
@@ -141,9 +141,9 @@ void TerrainEditor::_updateDiffuseMapMenu()
 				return;
 			}
 
-			const string newFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearImageCache(newFilePath);
-			_fe3d.terrain_setBlueDiffuseMap(_currentTerrainID, newFilePath);
+			const string finalFilePath = filePath.substr(rootPath.size());
+			_fe3d.misc_clearImageCache(finalFilePath);
+			_fe3d.terrain_setBlueDiffuseMap(_currentTerrainID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{

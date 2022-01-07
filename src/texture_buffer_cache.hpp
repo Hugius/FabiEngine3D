@@ -13,6 +13,9 @@ class TextureBufferCache final
 public:
 	void storeBuffer(const string& filePath, shared_ptr<TextureBuffer> buffer);
 	void storeBuffer(const array<string, 6>& filePaths, shared_ptr<TextureBuffer> buffer);
+	void deleteBuffer(const string& filePath);
+	void deleteBuffer(const array<string, 6>& filePaths);
+	void clear();
 
 	const shared_ptr<TextureBuffer> getBuffer(const string& filePath) const;
 	const shared_ptr<TextureBuffer> getBuffer(const array<string, 6>& filePath) const;

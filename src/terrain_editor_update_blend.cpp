@@ -42,9 +42,9 @@ void TerrainEditor::_updateBlendMapMenu()
 				return;
 			}
 
-			const string newFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearImageCache(newFilePath);
-			_fe3d.terrain_setBlendMap(_currentTerrainID, newFilePath);
+			const string finalFilePath = filePath.substr(rootPath.size());
+			_fe3d.misc_clearImageCache(finalFilePath);
+			_fe3d.terrain_setBlendMap(_currentTerrainID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{

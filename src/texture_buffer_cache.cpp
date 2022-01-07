@@ -26,6 +26,28 @@ void TextureBufferCache::storeBuffer(const array<string, 6>& filePaths, shared_p
 	_3dBuffers.insert(make_pair(filePaths, buffer));
 }
 
+void TextureBufferCache::deleteBuffer(const string& filePath)
+{
+	if(_2dBuffers.find(filePath) != _2dBuffers.end())
+	{
+		_2dBuffers.erase(filePath);
+	}
+}
+
+void TextureBufferCache::deleteBuffer(const array<string, 6>& filePaths)
+{
+	if(_3dBuffers.find(filePaths) != _3dBuffers.end())
+	{
+		_3dBuffers.erase(filePaths);
+	}
+}
+
+void TextureBufferCache::clear()
+{
+	_2dBuffers.clear();
+	_3dBuffers.clear();
+}
+
 const shared_ptr<TextureBuffer> TextureBufferCache::getBuffer(const string& filePath) const
 {
 	auto cacheIterator = _2dBuffers.find(filePath);

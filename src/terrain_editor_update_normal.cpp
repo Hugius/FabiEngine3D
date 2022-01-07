@@ -42,9 +42,9 @@ void TerrainEditor::_updateNormalMapMenu()
 				return;
 			}
 
-			const string newFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearImageCache(newFilePath);
-			_fe3d.terrain_setNormalMap(_currentTerrainID, newFilePath);
+			const string finalFilePath = filePath.substr(rootPath.size());
+			_fe3d.misc_clearImageCache(finalFilePath);
+			_fe3d.terrain_setNormalMap(_currentTerrainID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("redNormalMap")->isHovered())
 		{
@@ -75,9 +75,9 @@ void TerrainEditor::_updateNormalMapMenu()
 				return;
 			}
 
-			const string newFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearImageCache(newFilePath);
-			_fe3d.terrain_setRedNormalMap(_currentTerrainID, newFilePath);
+			const string finalFilePath = filePath.substr(rootPath.size());
+			_fe3d.misc_clearImageCache(finalFilePath);
+			_fe3d.terrain_setRedNormalMap(_currentTerrainID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenNormalMap")->isHovered())
 		{
@@ -108,9 +108,9 @@ void TerrainEditor::_updateNormalMapMenu()
 				return;
 			}
 
-			const string newFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearImageCache(newFilePath);
-			_fe3d.terrain_setGreenNormalMap(_currentTerrainID, newFilePath);
+			const string finalFilePath = filePath.substr(rootPath.size());
+			_fe3d.misc_clearImageCache(finalFilePath);
+			_fe3d.terrain_setGreenNormalMap(_currentTerrainID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueNormalMap")->isHovered())
 		{
@@ -141,9 +141,9 @@ void TerrainEditor::_updateNormalMapMenu()
 				return;
 			}
 
-			const string newFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearImageCache(newFilePath);
-			_fe3d.terrain_setBlueNormalMap(_currentTerrainID, newFilePath);
+			const string finalFilePath = filePath.substr(rootPath.size());
+			_fe3d.misc_clearImageCache(finalFilePath);
+			_fe3d.terrain_setBlueNormalMap(_currentTerrainID, finalFilePath);
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{

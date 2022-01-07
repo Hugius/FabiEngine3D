@@ -195,10 +195,10 @@ void TopViewportController::_updateMiscScreenManagement()
 			return;
 		}
 
-		const string newFilePath = filePath.substr(rootPath.size());
-		_fe3d.misc_clearMeshCache(newFilePath);
-		_fe3d.misc_clearImageCache(newFilePath);
-		_fe3d.misc_clearAudioCache(newFilePath);
+		const string finalFilePath = filePath.substr(rootPath.size());
+		_fe3d.misc_clearMeshCache(finalFilePath);
+		_fe3d.misc_clearImageCache(finalFilePath);
+		_fe3d.misc_clearAudioCache(finalFilePath);
 	}
 	else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("export")->isHovered())
 	{
@@ -242,5 +242,5 @@ void TopViewportController::_updateMiscScreenManagement()
 	}
 
 	screen->getButton("uncache")->setHoverable(!_currentProjectID.empty() && !_scriptEditor.getScriptExecutor().isStarted());
-	screen->getButton("export")->setHoverable(!_currentProjectID.empty());
+	screen->getButton("export")->setHoverable(!_currentProjectID.empty() && !_scriptEditor.getScriptExecutor().isStarted());
 }

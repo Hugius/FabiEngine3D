@@ -14,6 +14,26 @@ void VertexBufferCache::storeBuffer(const string& filePath, const string& partID
 	_buffers.insert(make_pair(make_pair(filePath, partID), buffer));
 }
 
+void VertexBufferCache::deleteBuffer(const string& filePath)
+{
+	BEGIN:;
+
+	for(const auto& [ID, buffer] : _buffers)
+	{
+		if(ID.first == filePath)
+		{
+			_buffers.erase(ID);
+
+			goto BEGIN;
+		}
+	}
+}
+
+void VertexBufferCache::clear()
+{
+	_buffers.clear();
+}
+
 const shared_ptr<VertexBuffer> VertexBufferCache::getBuffer(const string& filePath, const string& partID) const
 {
 	auto cacheIterator = _buffers.find(make_pair(filePath, partID));

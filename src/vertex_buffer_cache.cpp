@@ -14,18 +14,11 @@ void VertexBufferCache::storeBuffer(const string& filePath, const string& partID
 	_buffers.insert(make_pair(make_pair(filePath, partID), buffer));
 }
 
-void VertexBufferCache::deleteBuffer(const string& filePath)
+void VertexBufferCache::deleteBuffer(const string& filePath, const string& partID)
 {
-	BEGIN:;
-
-	for(const auto& [ID, buffer] : _buffers)
+	if(_buffers.find(make_pair(filePath, partID)) != _buffers.end())
 	{
-		if(ID.first == filePath)
-		{
-			_buffers.erase(ID);
-
-			goto BEGIN;
-		}
+		_buffers.erase(make_pair(filePath, partID));
 	}
 }
 
@@ -46,14 +39,7 @@ const shared_ptr<VertexBuffer> VertexBufferCache::getBuffer(const string& filePa
 	return nullptr;
 }
 
-const vector<shared_ptr<VertexBuffer>> VertexBufferCache::getBuffers() const
+const map<pair<string, string>, shared_ptr<VertexBuffer>> VertexBufferCache::getBuffers() const
 {
-	vector<shared_ptr<VertexBuffer>> result;
-
-	for(const auto& [ID, buffer] : _buffers)
-	{
-		result.push_back(buffer);
-	}
-
-	return result;
+	return _buffers;
 }

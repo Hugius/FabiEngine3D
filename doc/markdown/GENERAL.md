@@ -73,9 +73,8 @@
     └── <your_project>
       └── assets
         └── audio
-        └── font
         └── mesh
-        └── texture
+        └── image
           └── blend_map
           └── cube_map
           └── diffuse_map
@@ -83,6 +82,7 @@
           └── dudv_map
           └── emission_map
           └── flare_map
+          └── font_map
           └── height_map
           └── normal_map
           └── reflection_map

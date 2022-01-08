@@ -11,16 +11,18 @@ using std::vector;
 class TextureBufferCache final
 {
 public:
-	void storeBuffer(const string& filePath, shared_ptr<TextureBuffer> buffer);
-	void storeBuffer(const array<string, 6>& filePaths, shared_ptr<TextureBuffer> buffer);
-	void deleteBuffer(const string& filePath);
-	void deleteBuffer(const array<string, 6>& filePaths);
-	void clear();
+	void store2dBuffer(const string& filePath, shared_ptr<TextureBuffer> buffer);
+	void store3dBuffer(const array<string, 6>& filePaths, shared_ptr<TextureBuffer> buffer);
+	void delete2dBuffer(const string& filePath);
+	void delete3dBuffer(const array<string, 6>& filePaths);
+	void clear2dBuffers();
+	void clear3dBuffers();
 
-	const shared_ptr<TextureBuffer> getBuffer(const string& filePath) const;
-	const shared_ptr<TextureBuffer> getBuffer(const array<string, 6>& filePath) const;
+	const shared_ptr<TextureBuffer> get2dBuffer(const string& filePath) const;
+	const shared_ptr<TextureBuffer> get3dBuffer(const array<string, 6>& filePath) const;
 
-	const vector<shared_ptr<TextureBuffer>> getBuffers() const;
+	const map<string, shared_ptr<TextureBuffer>>& get2dBuffers() const;
+	const map<array<string, 6>, shared_ptr<TextureBuffer>>& get3dBuffers() const;
 
 private:
 	map<string, shared_ptr<TextureBuffer>> _2dBuffers;

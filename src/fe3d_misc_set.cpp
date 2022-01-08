@@ -149,13 +149,35 @@ void FabiEngine3D::misc_cacheAudio(const string& filePath)
 void FabiEngine3D::misc_clearMeshCache(const string& filePath)
 {
 	_core->_meshLoader->clearMeshCache(filePath);
-	_core->_vertexBufferCache->deleteBuffer(filePath);
+
+	for(const auto& [key, texture] : _core->_vertexBufferCache->getBuffers())
+	{
+		if(key.first == filePath)
+		{
+			_core->_vertexBufferCache->deleteBuffer(key.first, key.second);
+		}
+	}
 }
 
 void FabiEngine3D::misc_clearImageCache(const string& filePath)
 {
 	_core->_imageLoader->clearImageCache(filePath);
-	_core->_textureBufferCache->deleteBuffer(filePath);
+
+	for(const auto& [key, texture] : _core->_textureBufferCache->get2dBuffers())
+	{
+		if(key == filePath)
+		{
+			_core->_textureBufferCache->delete2dBuffer(key);
+		}
+	}
+
+	for(const auto& [key, texture] : _core->_textureBufferCache->get3dBuffers())
+	{
+		if(find(key.begin(), key.end(), filePath) != key.end())
+		{
+			_core->_textureBufferCache->delete3dBuffer(key);
+		}
+	}
 }
 
 void FabiEngine3D::misc_clearAudioCache(const string& filePath)
@@ -166,13 +188,16 @@ void FabiEngine3D::misc_clearAudioCache(const string& filePath)
 void FabiEngine3D::misc_clearMeshesCache()
 {
 	_core->_meshLoader->clearMeshesCache();
+
 	_core->_vertexBufferCache->clear();
 }
 
 void FabiEngine3D::misc_clearImagesCache()
 {
 	_core->_imageLoader->clearImagesCache();
-	_core->_textureBufferCache->clear();
+
+	_core->_textureBufferCache->clear2dBuffers();
+	_core->_textureBufferCache->clear3dBuffers();
 }
 
 void FabiEngine3D::misc_clearAudiosCache()

@@ -15,12 +15,12 @@ class VertexBufferCache final
 {
 public:
 	void storeBuffer(const string& filePath, const string& partID, shared_ptr<VertexBuffer> buffer);
-	void deleteBuffer(const string& filePath);
+	void deleteBuffer(const string& filePath, const string& partID);
 	void clear();
 
 	const shared_ptr<VertexBuffer> getBuffer(const string& filePath, const string& partID) const;
 
-	const vector<shared_ptr<VertexBuffer>> getBuffers() const;
+	const map<pair<string, string>, shared_ptr<VertexBuffer>> getBuffers() const;
 
 private:
 	map<pair<string, string>, shared_ptr<VertexBuffer>> _buffers;

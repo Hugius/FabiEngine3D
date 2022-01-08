@@ -54,7 +54,7 @@ void FabiEngine3D::model_setDiffuseMap(const string& ID, const string& partID, c
 	}
 	else
 	{
-		auto texture = _core->_textureBufferCache->getBuffer(value);
+		auto texture = _core->_textureBufferCache->get2dBuffer(value);
 
 		if(texture == nullptr)
 		{
@@ -62,7 +62,7 @@ void FabiEngine3D::model_setDiffuseMap(const string& ID, const string& partID, c
 			texture->loadMipMapping();
 			texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
 
-			_core->_textureBufferCache->storeBuffer(value, texture);
+			_core->_textureBufferCache->store2dBuffer(value, texture);
 		}
 
 		_core->_modelEntityManager->getEntity(ID)->setDiffuseMap(partID, texture);
@@ -79,7 +79,7 @@ void FabiEngine3D::model_setEmissionMap(const string& ID, const string& partID, 
 	}
 	else
 	{
-		auto texture = _core->_textureBufferCache->getBuffer(value);
+		auto texture = _core->_textureBufferCache->get2dBuffer(value);
 
 		if(texture == nullptr)
 		{
@@ -87,7 +87,7 @@ void FabiEngine3D::model_setEmissionMap(const string& ID, const string& partID, 
 			texture->loadMipMapping();
 			texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
 
-			_core->_textureBufferCache->storeBuffer(value, texture);
+			_core->_textureBufferCache->store2dBuffer(value, texture);
 		}
 
 		_core->_modelEntityManager->getEntity(ID)->setEmissionMap(partID, texture);
@@ -104,7 +104,7 @@ void FabiEngine3D::model_setSpecularMap(const string& ID, const string& partID, 
 	}
 	else
 	{
-		auto texture = _core->_textureBufferCache->getBuffer(value);
+		auto texture = _core->_textureBufferCache->get2dBuffer(value);
 
 		if(texture == nullptr)
 		{
@@ -112,7 +112,7 @@ void FabiEngine3D::model_setSpecularMap(const string& ID, const string& partID, 
 			texture->loadMipMapping();
 			texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
 
-			_core->_textureBufferCache->storeBuffer(value, texture);
+			_core->_textureBufferCache->store2dBuffer(value, texture);
 		}
 
 		_core->_modelEntityManager->getEntity(ID)->setSpecularMap(partID, texture);
@@ -129,7 +129,7 @@ void FabiEngine3D::model_setNormalMap(const string& ID, const string& partID, co
 	}
 	else
 	{
-		auto texture = _core->_textureBufferCache->getBuffer(value);
+		auto texture = _core->_textureBufferCache->get2dBuffer(value);
 
 		if(texture == nullptr)
 		{
@@ -137,7 +137,7 @@ void FabiEngine3D::model_setNormalMap(const string& ID, const string& partID, co
 			texture->loadMipMapping();
 			texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
 
-			_core->_textureBufferCache->storeBuffer(value, texture);
+			_core->_textureBufferCache->store2dBuffer(value, texture);
 		}
 
 		_core->_modelEntityManager->getEntity(ID)->setNormalMap(partID, texture);
@@ -154,7 +154,7 @@ void FabiEngine3D::model_setReflectionMap(const string& ID, const string& partID
 	}
 	else
 	{
-		auto texture = _core->_textureBufferCache->getBuffer(value);
+		auto texture = _core->_textureBufferCache->get2dBuffer(value);
 
 		if(texture == nullptr)
 		{
@@ -162,7 +162,7 @@ void FabiEngine3D::model_setReflectionMap(const string& ID, const string& partID
 			texture->loadMipMapping();
 			texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
 
-			_core->_textureBufferCache->storeBuffer(value, texture);
+			_core->_textureBufferCache->store2dBuffer(value, texture);
 		}
 
 		_core->_modelEntityManager->getEntity(ID)->setReflectionMap(partID, texture);

@@ -317,7 +317,15 @@ void FabiEngine3D::gfx_setAnisotropicFilteringQuality(unsigned int value)
 {
 	_core->_renderBus->setAnisotropicFilteringQuality(value);
 
-	for(const auto& texture : _core->_textureBufferCache->getBuffers())
+	for(const auto& [filePath, texture] : _core->_textureBufferCache->get2dBuffers())
+	{
+		if(texture->hasAnisotropicFiltering())
+		{
+			texture->loadAnisotropicFiltering(value);
+		}
+	}
+
+	for(const auto& [filePaths, texture] : _core->_textureBufferCache->get3dBuffers())
 	{
 		if(texture->hasAnisotropicFiltering())
 		{
@@ -478,13 +486,13 @@ void FabiEngine3D::gfx_setMotionBlurStrength(float value)
 
 void FabiEngine3D::gfx_setLensFlareMap(const string& value)
 {
-	auto texture = _core->_textureBufferCache->getBuffer(value);
+	auto texture = _core->_textureBufferCache->get2dBuffer(value);
 
 	if(texture == nullptr)
 	{
 		texture = make_shared<TextureBuffer>(_core->_imageLoader->loadImage(value));
 
-		_core->_textureBufferCache->storeBuffer(value, texture);
+		_core->_textureBufferCache->store2dBuffer(value, texture);
 	}
 
 	_core->_renderBus->setLensFlareMap(texture);

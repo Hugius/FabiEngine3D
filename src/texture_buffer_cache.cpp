@@ -1,8 +1,10 @@
 #include "texture_buffer_cache.hpp"
+#include "texture_buffer_cache.hpp"
+#include "texture_buffer_cache.hpp"
 
 #include "logger.hpp"
 
-void TextureBufferCache::storeBuffer(const string& filePath, shared_ptr<TextureBuffer> buffer)
+void TextureBufferCache::store2dBuffer(const string& filePath, shared_ptr<TextureBuffer> buffer)
 {
 	auto cacheIterator = _2dBuffers.find(filePath);
 
@@ -14,7 +16,7 @@ void TextureBufferCache::storeBuffer(const string& filePath, shared_ptr<TextureB
 	_2dBuffers.insert(make_pair(filePath, buffer));
 }
 
-void TextureBufferCache::storeBuffer(const array<string, 6>& filePaths, shared_ptr<TextureBuffer> buffer)
+void TextureBufferCache::store3dBuffer(const array<string, 6>& filePaths, shared_ptr<TextureBuffer> buffer)
 {
 	auto cacheIterator = _3dBuffers.find(filePaths);
 
@@ -26,7 +28,7 @@ void TextureBufferCache::storeBuffer(const array<string, 6>& filePaths, shared_p
 	_3dBuffers.insert(make_pair(filePaths, buffer));
 }
 
-void TextureBufferCache::deleteBuffer(const string& filePath)
+void TextureBufferCache::delete2dBuffer(const string& filePath)
 {
 	if(_2dBuffers.find(filePath) != _2dBuffers.end())
 	{
@@ -34,7 +36,7 @@ void TextureBufferCache::deleteBuffer(const string& filePath)
 	}
 }
 
-void TextureBufferCache::deleteBuffer(const array<string, 6>& filePaths)
+void TextureBufferCache::delete3dBuffer(const array<string, 6>& filePaths)
 {
 	if(_3dBuffers.find(filePaths) != _3dBuffers.end())
 	{
@@ -42,13 +44,17 @@ void TextureBufferCache::deleteBuffer(const array<string, 6>& filePaths)
 	}
 }
 
-void TextureBufferCache::clear()
+void TextureBufferCache::clear2dBuffers()
 {
 	_2dBuffers.clear();
+}
+
+void TextureBufferCache::clear3dBuffers()
+{
 	_3dBuffers.clear();
 }
 
-const shared_ptr<TextureBuffer> TextureBufferCache::getBuffer(const string& filePath) const
+const shared_ptr<TextureBuffer> TextureBufferCache::get2dBuffer(const string& filePath) const
 {
 	auto cacheIterator = _2dBuffers.find(filePath);
 
@@ -60,7 +66,7 @@ const shared_ptr<TextureBuffer> TextureBufferCache::getBuffer(const string& file
 	return nullptr;
 }
 
-const shared_ptr<TextureBuffer> TextureBufferCache::getBuffer(const array<string, 6>& filePaths) const
+const shared_ptr<TextureBuffer> TextureBufferCache::get3dBuffer(const array<string, 6>& filePaths) const
 {
 	auto cacheIterator = _3dBuffers.find(filePaths);
 
@@ -72,19 +78,12 @@ const shared_ptr<TextureBuffer> TextureBufferCache::getBuffer(const array<string
 	return nullptr;
 }
 
-const vector<shared_ptr<TextureBuffer>> TextureBufferCache::getBuffers() const
+const map<string, shared_ptr<TextureBuffer>>& TextureBufferCache::get2dBuffers() const
 {
-	vector<shared_ptr<TextureBuffer>> result;
+	return _2dBuffers;
+}
 
-	for(const auto& [filePath, buffer] : _2dBuffers)
-	{
-		result.push_back(buffer);
-	}
-
-	for(const auto& [filePaths, buffer] : _3dBuffers)
-	{
-		result.push_back(buffer);
-	}
-
-	return result;
+const map<array<string, 6>, shared_ptr<TextureBuffer>>& TextureBufferCache::get3dBuffers() const
+{
+	return _3dBuffers;
 }

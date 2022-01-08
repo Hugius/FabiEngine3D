@@ -119,7 +119,7 @@ void FabiEngine3D::billboard_setDiffuseMap(const string& ID, const string& value
 	}
 	else
 	{
-		auto texture = _core->_textureBufferCache->getBuffer(value);
+		auto texture = _core->_textureBufferCache->get2dBuffer(value);
 
 		if(texture == nullptr)
 		{
@@ -127,7 +127,7 @@ void FabiEngine3D::billboard_setDiffuseMap(const string& ID, const string& value
 			texture->loadMipMapping();
 			texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
 
-			_core->_textureBufferCache->storeBuffer(value, texture);
+			_core->_textureBufferCache->store2dBuffer(value, texture);
 		}
 
 		_core->_billboardEntityManager->getEntity(ID)->setDiffuseMap(texture, false);
@@ -144,7 +144,7 @@ void FabiEngine3D::billboard_setEmissionMap(const string& ID, const string& valu
 	}
 	else
 	{
-		auto texture = _core->_textureBufferCache->getBuffer(value);
+		auto texture = _core->_textureBufferCache->get2dBuffer(value);
 
 		if(texture == nullptr)
 		{
@@ -152,7 +152,7 @@ void FabiEngine3D::billboard_setEmissionMap(const string& ID, const string& valu
 			texture->loadMipMapping();
 			texture->loadAnisotropicFiltering(_core->_renderBus->getAnisotropicFilteringQuality());
 
-			_core->_textureBufferCache->storeBuffer(value, texture);
+			_core->_textureBufferCache->store2dBuffer(value, texture);
 		}
 
 		_core->_billboardEntityManager->getEntity(ID)->setEmissionMap(texture);

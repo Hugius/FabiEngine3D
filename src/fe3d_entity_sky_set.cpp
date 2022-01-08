@@ -16,7 +16,7 @@ void FabiEngine3D::sky_deleteAll()
 
 void FabiEngine3D::sky_setCubeMaps(const string& ID, const array<string, 6>& value)
 {
-	auto texture = _core->_textureBufferCache->getBuffer(value);
+	auto texture = _core->_textureBufferCache->get3dBuffer(value);
 
 	if(texture == nullptr)
 	{
@@ -51,7 +51,7 @@ void FabiEngine3D::sky_setCubeMaps(const string& ID, const array<string, 6>& val
 			}
 		}
 
-		_core->_textureBufferCache->storeBuffer(value, texture);
+		_core->_textureBufferCache->store3dBuffer(value, texture);
 	}
 
 	_core->_skyEntityManager->getEntity(ID)->setCubeMap(texture);

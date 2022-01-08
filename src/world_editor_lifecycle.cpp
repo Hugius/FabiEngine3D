@@ -242,6 +242,7 @@ void WorldEditor::unload()
 	_isPlacingSpotlight = false;
 	_isPlacingReflection = false;
 	_isEditorLoaded = false;
+	_isCreatingWorld = false;
 	_isChoosingWorld = false;
 	_isDeletingWorld = false;
 
@@ -445,6 +446,18 @@ void WorldEditor::update()
 	if(_isEditorLoaded)
 	{
 		_updateBloomGraphicsSettingsMenu();
+	}
+	if(_isEditorLoaded)
+	{
+		_updateWorldCreating();
+	}
+	if(_isEditorLoaded)
+	{
+		_updateWorldChoosing();
+	}
+	if(_isEditorLoaded)
+	{
+		_updateWorldDeleting();
 	}
 	if(_isEditorLoaded)
 	{

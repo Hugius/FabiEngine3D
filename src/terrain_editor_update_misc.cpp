@@ -155,7 +155,7 @@ void TerrainEditor::_updateTerrainChoosing()
 {
 	if(_isChoosingTerrain)
 	{
-		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("terrainList");
+		auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("terrainList");
 
 		_fe3d.terrain_select("");
 
@@ -201,14 +201,15 @@ void TerrainEditor::_updateTerrainDeleting()
 			_fe3d.terrain_delete(_currentTerrainID);
 
 			_loadedTerrainIDs.erase(remove(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), _currentTerrainID), _loadedTerrainIDs.end());
-			_isDeletingTerrain = false;
 			_currentTerrainID = "";
+			_isDeletingTerrain = false;
 		}
 		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
 		{
 			_fe3d.terrain_select("");
-			_isDeletingTerrain = false;
+
 			_currentTerrainID = "";
+			_isDeletingTerrain = false;
 		}
 	}
 }

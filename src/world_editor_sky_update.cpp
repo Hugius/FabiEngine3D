@@ -32,7 +32,7 @@ void WorldEditor::_updateSkyMenu()
 
 		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			string selectedButtonID = _gui.getOverlay()->checkChoiceForm("skyList");
+			auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("skyList");
 			if(!selectedButtonID.empty())
 			{
 				if(_fe3d.sky_isExisting(selectedButtonID))

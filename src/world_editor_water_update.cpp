@@ -40,7 +40,7 @@ void WorldEditor::_updateWaterMenu()
 
 		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			string selectedButtonID = _gui.getOverlay()->checkChoiceForm("waterList");
+			auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("waterList");
 			if(!selectedButtonID.empty())
 			{
 				if(_fe3d.water_isExisting(selectedButtonID))

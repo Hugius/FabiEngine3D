@@ -223,7 +223,7 @@ void Animation3dEditor::_updateChoiceMenu()
 			_fe3d.model_setVisible(_hoveredModelID, false);
 		}
 
-		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("modelList");
+		auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("modelList");
 
 		if(!selectedButtonID.empty())
 		{

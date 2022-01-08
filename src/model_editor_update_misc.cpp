@@ -201,7 +201,7 @@ void ModelEditor::_updateModelChoosing()
 			_fe3d.model_setVisible(_hoveredModelID, false);
 		}
 
-		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("modelList");
+		auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("modelList");
 
 		if(!selectedButtonID.empty())
 		{
@@ -262,8 +262,9 @@ void ModelEditor::_updateModelDeleting()
 		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
 		{
 			_fe3d.model_setVisible(_currentModelID, false);
-			_isDeletingModel = false;
+
 			_currentModelID = "";
+			_isDeletingModel = false;
 		}
 	}
 }
@@ -272,7 +273,7 @@ void ModelEditor::_updatePartChoosing()
 {
 	if(_isChoosingPart)
 	{
-		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("partList");
+		auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("partList");
 
 		if(!selectedButtonID.empty())
 		{

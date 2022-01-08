@@ -105,7 +105,7 @@ void SkyEditor::_updateSkyChoosing()
 	{
 		_fe3d.sky_selectMainSky("");
 
-		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("skyList");
+		auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("skyList");
 
 		if(!selectedButtonID.empty())
 		{
@@ -151,16 +151,16 @@ void SkyEditor::_updateSkyDeleting()
 			_fe3d.sky_delete(_currentSkyID);
 
 			_loadedSkyIDs.erase(remove(_loadedSkyIDs.begin(), _loadedSkyIDs.end(), _currentSkyID), _loadedSkyIDs.end());
-			_isDeletingSky = false;
 			_currentSkyID = "";
+			_isDeletingSky = false;
 
 		}
 		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
 		{
 			_fe3d.sky_selectMainSky("");
 
-			_isDeletingSky = false;
 			_currentSkyID = "";
+			_isDeletingSky = false;
 		}
 	}
 }

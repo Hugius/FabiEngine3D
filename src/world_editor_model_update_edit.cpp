@@ -111,7 +111,7 @@ void WorldEditor::_updateModelEditing()
 			}
 
 			auto lastAnimationID = _animation3dEditor.getStartedModelAnimationIDs(_activeModelID);
-			string selectedButtonID = _gui.getOverlay()->checkChoiceForm("animationList");
+			auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("animationList");
 			if(!selectedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				if(!lastAnimationID.empty())

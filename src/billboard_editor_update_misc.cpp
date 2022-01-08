@@ -144,7 +144,7 @@ void BillboardEditor::_updateBillboardChoosing()
 			_fe3d.billboard_setVisible(_hoveredBillboardID, false);
 		}
 
-		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("billboardList");
+		auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("billboardList");
 
 		if(!selectedButtonID.empty())
 		{
@@ -209,8 +209,9 @@ void BillboardEditor::_updateBillboardDeleting()
 		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
 		{
 			_fe3d.billboard_setVisible(_currentBillboardID, false);
-			_isDeletingBillboard = false;
+
 			_currentBillboardID = "";
+			_isDeletingBillboard = false;
 		}
 	}
 }

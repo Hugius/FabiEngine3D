@@ -120,7 +120,7 @@ void WaterEditor::_updateWaterChoosing()
 {
 	if(_isChoosingWater)
 	{
-		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("waterList");
+		auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("waterList");
 
 		_fe3d.water_select("");
 
@@ -166,14 +166,15 @@ void WaterEditor::_updateWaterDeleting()
 			_fe3d.water_delete(_currentWaterID);
 
 			_loadedWaterIDs.erase(remove(_loadedWaterIDs.begin(), _loadedWaterIDs.end(), _currentWaterID), _loadedWaterIDs.end());
-			_isDeletingWater = false;
 			_currentWaterID = "";
+			_isDeletingWater = false;
 		}
 		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
 		{
 			_fe3d.water_select("");
-			_isDeletingWater = false;
+
 			_currentWaterID = "";
+			_isDeletingWater = false;
 		}
 	}
 }

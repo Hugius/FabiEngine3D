@@ -32,7 +32,7 @@ void WorldEditor::_updateTerrainMenu()
 
 		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			string selectedButtonID = _gui.getOverlay()->checkChoiceForm("terrainList");
+			auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("terrainList");
 			if(!selectedButtonID.empty())
 			{
 				if(_fe3d.terrain_isExisting(selectedButtonID))

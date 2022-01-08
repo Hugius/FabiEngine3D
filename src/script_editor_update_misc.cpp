@@ -117,7 +117,7 @@ void ScriptEditor::_updateScriptFileChoosing()
 {
 	if(_isChoosingScriptFile)
 	{
-		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("scriptFileList");
+		auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("scriptFileList");
 
 		if(!selectedButtonID.empty())
 		{

@@ -58,7 +58,7 @@ void Animation2dEditor::_updateAnimationChoosing()
 {
 	if(_isChoosingAnimation)
 	{
-		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("animationList");
+		auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("animationList");
 
 		if(!selectedButtonID.empty())
 		{
@@ -109,8 +109,8 @@ void Animation2dEditor::_updateAnimationDeleting()
 		}
 		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
 		{
-			_isDeletingAnimation = false;
 			_currentAnimationID = "";
+			_isDeletingAnimation = false;
 		}
 	}
 }

@@ -104,7 +104,7 @@ void SoundEditor::_updateSoundChoosing()
 {
 	if(_isChoosingSound)
 	{
-		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("soundList");
+		auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("soundList");
 
 		if(!selectedButtonID.empty())
 		{
@@ -152,8 +152,8 @@ void SoundEditor::_updateSoundDeleting()
 		}
 		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
 		{
-			_isChoosingSound = true;
 			_currentSoundID = "";
+			_isDeletingSound = false;
 		}
 	}
 }

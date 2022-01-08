@@ -65,6 +65,8 @@ public:
 private:
 	void _loadGUI();
 	void _unloadGUI();
+	void _updateMainMenu();
+	void _updateChoiceMenu();
 	void _updateSkyMenu();
 	void _updateTerrainMenu();
 	void _updateWaterMenu();
@@ -108,17 +110,18 @@ private:
 	void _updateLensFlareGraphicsSettingsMenu();
 	void _updateSkyExposureGraphicsSettingsMenu();
 	void _updateBloomGraphicsSettingsMenu();
-	void _updateMainMenu();
-	void _updateChoiceMenu();
+	void _updateWorldCreating();
+	void _updateWorldChoosing();
+	void _updateWorldDeleting();
 	void _updateCamera();
 	void _updateMiscellaneous();
-	void _deleteWorldFile(const string& ID);
 	void _updateModelHighlighting(const string& ID, int& direction);
 	void _updateBillboardHighlighting(const string& ID, int& direction);
 	void _updateLampHighlighting(const string& ID, int& direction);
 	void _updateTorchHighlighting(const string& ID, int& direction);
 	void _updateCameraHighlighting(const string& ID, int& direction);
 	void _updateSpeakerHighlighting(const string& ID, int& direction);
+	void _deleteWorldFile(const string& ID);
 	void _selectModel(const string& ID);
 	void _selectBillboard(const string& ID);
 	void _selectPointlight(const string& ID);
@@ -300,6 +303,7 @@ private:
 	bool _isPlacingPointlight = false;
 	bool _isPlacingSpotlight = false;
 	bool _isPlacingReflection = false;
+	bool _isCreatingWorld = false;
 	bool _isChoosingWorld = false;
 	bool _isDeletingWorld = false;
 	bool _isEditorLoaded = false;

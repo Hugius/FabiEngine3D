@@ -180,7 +180,7 @@ void Animation3dEditor::_updateFrameMenu()
 
 		currentAnimation->setFrame(_currentFrameIndex, frame);
 
-		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("partList");
+		auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("partList");
 
 		if(!selectedButtonID.empty())
 		{

@@ -80,7 +80,7 @@ void QuadEditor::_updateQuadChoosing()
 {
 	if(_isChoosingQuad)
 	{
-		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("quadList");
+		auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("quadList");
 
 		if(!selectedButtonID.empty())
 		{
@@ -134,8 +134,8 @@ void QuadEditor::_updateQuadDeleting()
 		}
 		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
 		{
-			_isChoosingQuad = true;
 			_currentQuadID = "";
+			_isDeletingQuad = false;
 		}
 	}
 }

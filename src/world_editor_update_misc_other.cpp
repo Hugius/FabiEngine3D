@@ -1,4 +1,5 @@
 #include "world_editor.hpp"
+#include "logger.hpp"
 
 void WorldEditor::_updateCamera()
 {
@@ -104,5 +105,97 @@ void WorldEditor::_updateMiscellaneous()
 	if(!_fe3d.terrain_getSelectedID().empty())
 	{
 		_fe3d.raycast_enableTerrainPointing(_fe3d.terrain_getSize(_fe3d.terrain_getSelectedID()), 0.1f);
+	}
+}
+
+void WorldEditor::_updateWorldCreating()
+{
+	if(_isCreatingWorld)
+	{
+		string newWorldID;
+
+		if(_gui.getOverlay()->checkValueForm("worldCreate", newWorldID, {}))
+		{
+			if(newWorldID.find(' ') != string::npos)
+			{
+				Logger::throwWarning("World ID cannot contain any spaces!");
+				return;
+			}
+
+			if(newWorldID.find('@') != string::npos)
+			{
+				Logger::throwWarning("World ID cannot contain '@'!");
+				return;
+			}
+
+			newWorldID = ("@" + newWorldID);
+
+			const auto worldNames = _getWorldIDs();
+
+			if(find(worldNames.begin(), worldNames.end(), newWorldID) != worldNames.end())
+			{
+				Logger::throwWarning("World with ID \"" + newWorldID.substr(1) + "\" already exists!");
+				return;
+			}
+
+			_currentWorldID = newWorldID;
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
+		}
+	}
+}
+
+void WorldEditor::_updateWorldChoosing()
+{
+	if(_isChoosingWorld)
+	{
+		auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("worldList");
+
+		if(!selectedButtonID.empty())
+		{
+			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			{
+				_currentWorldID = selectedButtonID;
+
+				if(!_isDeletingWorld)
+				{
+					if(loadEditorWorldFromFile(_currentWorldID))
+					{
+						_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
+					}
+				}
+
+				_gui.getOverlay()->deleteChoiceForm("worldList");
+				_isChoosingWorld = false;
+			}
+		}
+		else if(_gui.getOverlay()->isChoiceFormCancelled("worldList"))
+		{
+			_isChoosingWorld = false;
+			_isDeletingWorld = false;
+			_gui.getOverlay()->deleteChoiceForm("worldList");
+		}
+	}
+}
+
+void WorldEditor::_updateWorldDeleting()
+{
+	if(_isDeletingWorld && !_currentWorldID.empty())
+	{
+		if(!_gui.getOverlay()->isAnswerFormExisting("delete"))
+		{
+			_gui.getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+		}
+
+		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
+		{
+			_deleteWorldFile(_currentWorldID);
+			_currentWorldID = "";
+			_isDeletingWorld = false;
+		}
+		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
+		{
+			_currentWorldID = "";
+			_isDeletingWorld = false;
+		}
 	}
 }

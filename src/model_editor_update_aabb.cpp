@@ -159,7 +159,7 @@ void ModelEditor::_updateAabbChoosing()
 {
 	if(_isChoosingAabb)
 	{
-		string selectedButtonID = _gui.getOverlay()->checkChoiceForm("aabbList");
+		auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("aabbList");
 
 		for(const auto& aabbID : _fe3d.aabb_getChildIDs(_currentModelID, AabbParentEntityType::MODEL))
 		{

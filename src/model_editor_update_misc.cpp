@@ -149,7 +149,7 @@ void ModelEditor::_updateModelCreating()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\mesh\\");
+			const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\mesh\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{

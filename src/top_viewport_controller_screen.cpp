@@ -174,7 +174,7 @@ void TopViewportController::_updateMiscScreenManagement()
 		}
 
 		const auto rootPath = Tools::getRootDirectoryPath();
-		const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\");
+		const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\");
 
 		if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 		{

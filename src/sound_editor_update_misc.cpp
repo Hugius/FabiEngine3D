@@ -57,7 +57,7 @@ void SoundEditor::_updateSoundCreating()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\audio\\");
+			const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\audio\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{

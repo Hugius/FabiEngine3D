@@ -73,13 +73,42 @@ void Animation2dEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("preview")->isHovered())
 		{
+			_gui.getOverlay()->createAnswerForm("preview", "Billboard Entity?", fvec2(0.0f, 0.25f));
+		}
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rows")->isHovered())
+		{
+			_gui.getOverlay()->createValueForm("rows", "Rows", rowCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+		}
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("columns")->isHovered())
+		{
+			_gui.getOverlay()->createValueForm("columns", "Columns", columnCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+		}
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("framestep")->isHovered())
+		{
+			_gui.getOverlay()->createValueForm("framestep", "Framestep", framestep, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+		}
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("start")->isHovered())
+		{
+			startBillboardAnimation(_currentAnimationID, PREVIEW_BILLBOARD_ID, 1);
+		}
+		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("stop")->isHovered())
+		{
+			stopBillboardAnimation(_currentAnimationID, PREVIEW_BILLBOARD_ID);
+		}
+
+		const auto isConfirmed = _gui.getOverlay()->isAnswerFormConfirmed("preview");
+		const auto isDenied = _gui.getOverlay()->isAnswerFormDenied("preview");
+		if(isConfirmed || isDenied)
+		{
 			if(_currentProjectID.empty())
 			{
 				Logger::throwError("Animation2dEditor::_updateChoiceMenu");
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\diffuse_map\\");
+			const auto entityType = (isConfirmed ? "billboard" : "quad");
+			const auto targetDirectoryPath = string("projects\\" + _currentProjectID +
+													"\\assets\\image\\entity\\" + entityType + "\\diffuse_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -104,26 +133,6 @@ void Animation2dEditor::_updateChoiceMenu()
 			_fe3d.misc_clearImageCache(finalFilePath);
 			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, finalFilePath);
 			currentAnimation->setPreviewTexturePath(finalFilePath);
-		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rows")->isHovered())
-		{
-			_gui.getOverlay()->createValueForm("rows", "Rows", rowCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("columns")->isHovered())
-		{
-			_gui.getOverlay()->createValueForm("columns", "Columns", columnCount, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("framestep")->isHovered())
-		{
-			_gui.getOverlay()->createValueForm("framestep", "Framestep", framestep, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("start")->isHovered())
-		{
-			startBillboardAnimation(_currentAnimationID, PREVIEW_BILLBOARD_ID, 1);
-		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("stop")->isHovered())
-		{
-			stopBillboardAnimation(_currentAnimationID, PREVIEW_BILLBOARD_ID);
 		}
 
 		if(_gui.getOverlay()->checkValueForm("rows", rowCount, {0}))

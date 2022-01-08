@@ -62,7 +62,7 @@ void QuadEntity::updateTransformation()
 void QuadEntity::updateTransformationMatrix()
 {
 	auto translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, 0.0f);
-	auto rotationMatrix = Math::createRotationMatrixX(Math::convertToRadians(_rotation));
+	auto rotationMatrix = Math::createRotationMatrixZ(Math::convertToRadians(_rotation));
 	auto scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, 1.0f);
 
 	_transformationMatrix = (translationMatrix * rotationMatrix * scalingMatrix);

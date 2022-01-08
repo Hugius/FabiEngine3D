@@ -48,24 +48,21 @@ const string& TextEntity::getFontMapPath() const
 
 void TextEntity::updateCharacterEntities()
 {
+	const auto rotationMatrix = Math::createRotationMatrixZ(Math::convertToRadians(_rotation));
 	const auto characterSize = fvec2((this->getSize().x / static_cast<float>(this->_content.size())), this->getSize().y);
 	unsigned int index = 0;
 
 	for(const auto& character : _characterEntities)
 	{
+		auto offset = fvec2((static_cast<float>(index) * characterSize.x), 0.0f);
+
 		if(_isCentered)
 		{
-			auto offset = fvec2((static_cast<float>(index) * characterSize.x), 0.0f);
 			offset.x -= (this->getSize().x / 2.0f);
 			offset.y -= (characterSize.y / 2.0f);
-			character->setPosition(_position + offset);
-		}
-		else
-		{
-			auto offset = fvec2((static_cast<float>(index) * characterSize.x), 0.0f);
-			character->setPosition(_position + offset);
 		}
 
+		character->setPosition(_position + (rotationMatrix * offset));
 		character->setRotation(_rotation);
 		character->setSize(characterSize);
 		character->setColor(_color);

@@ -62,25 +62,25 @@ void WorldEditor::unloadEditorWorld()
 		_fe3d.water_delete(_loadedWaterID);
 	}
 
-	for(const auto& [ID, templateID] : _loadedModelIDs)
+	for(const auto& [key, templateID] : _loadedModelIDs)
 	{
-		_fe3d.model_delete(ID);
+		_fe3d.model_delete(key);
 
-		auto animationID = _animation3dEditor.getStartedModelAnimationIDs(ID);
+		auto animationID = _animation3dEditor.getStartedModelAnimationIDs(key);
 		if(!animationID.empty())
 		{
-			_animation3dEditor.stopModelAnimation(animationID.back(), ID);
+			_animation3dEditor.stopModelAnimation(animationID.back(), key);
 		}
 	}
 
-	for(const auto& [ID, templateID] : _loadedBillboardIDs)
+	for(const auto& [key, templateID] : _loadedBillboardIDs)
 	{
-		_fe3d.billboard_delete(ID);
+		_fe3d.billboard_delete(key);
 
-		auto animationID = _animation2dEditor.getStartedBillboardAnimationIDs(ID);
+		auto animationID = _animation2dEditor.getStartedBillboardAnimationIDs(key);
 		if(!animationID.empty())
 		{
-			_animation2dEditor.stopBillboardAnimation(animationID.back(), ID);
+			_animation2dEditor.stopBillboardAnimation(animationID.back(), key);
 		}
 	}
 
@@ -114,13 +114,13 @@ void WorldEditor::unloadEditorWorld()
 		}
 	}
 
-	for(const auto& [ID, templateID] : _loadedSoundIDs)
+	for(const auto& [key, templateID] : _loadedSoundIDs)
 	{
-		_fe3d.sound3d_delete(ID);
+		_fe3d.sound3d_delete(key);
 
 		if(!_currentWorldID.empty())
 		{
-			_fe3d.model_delete("@@speaker_" + ID);
+			_fe3d.model_delete("@@speaker_" + key);
 		}
 	}
 

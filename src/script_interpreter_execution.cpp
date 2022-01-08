@@ -27,16 +27,16 @@ void ScriptInterpreter::executeUpdateScripts(bool isDebugging)
 		if(_isDebugging)
 		{
 			float totalTime = 0.0f;
-			for(const auto& [scriptID, time] : _debuggingTimes)
+			for(const auto& [key, time] : _debuggingTimes)
 			{
 				totalTime += time;
 			}
 
 			Logger::throwDebug("Debugging results:");
-			for(const auto& [scriptID, time] : _debuggingTimes)
+			for(const auto& [key, time] : _debuggingTimes)
 			{
 				float percentage = (time / totalTime) * 100.0f;
-				Logger::throwDebug("Script \"" + scriptID + "\" ---> " + to_string(percentage) + "%");
+				Logger::throwDebug("Script \"" + key + "\" ---> " + to_string(percentage) + "%");
 			}
 			Logger::throwDebug("");
 		}

@@ -237,7 +237,7 @@ const bool WorldEditor::saveCustomWorldToFile()
 			//	// Write speeds
 			//	unsigned int index = 0;
 			//	auto frame = animationData->getFrames().at(animationData->getFrameIndex());
-			//	for(const auto& [partID, speed] : frame.getSpeeds())
+			//	for(const auto& [key, speed] : frame.getSpeeds())
 			//	{
 			//		// Write speed
 			//		file << (partID.empty() ? "?" : partID) << " " << speed.x << " " << speed.y << " " << speed.z;

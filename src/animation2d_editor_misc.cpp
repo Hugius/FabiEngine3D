@@ -29,9 +29,9 @@ const vector<string> Animation2dEditor::getStartedBillboardAnimationIDs() const
 {
 	set<string> IDs;
 
-	for(const auto& [idPair, animation] : _startedBillboardAnimations)
+	for(const auto& [key, animation] : _startedBillboardAnimations)
 	{
-		IDs.insert(idPair.first);
+		IDs.insert(key.first);
 	}
 
 	return vector<string>(IDs.begin(), IDs.end());
@@ -41,9 +41,9 @@ const vector<string> Animation2dEditor::getStartedQuadAnimationIDs() const
 {
 	set<string> IDs;
 
-	for(const auto& [idPair, animation] : _startedQuadAnimations)
+	for(const auto& [key, animation] : _startedQuadAnimations)
 	{
-		IDs.insert(idPair.first);
+		IDs.insert(key.first);
 	}
 
 	return vector<string>(IDs.begin(), IDs.end());
@@ -53,11 +53,11 @@ const vector<string> Animation2dEditor::getStartedBillboardAnimationIDs(const st
 {
 	set<string> IDs;
 
-	for(const auto& [idPair, animation] : _startedBillboardAnimations)
+	for(const auto& [key, animation] : _startedBillboardAnimations)
 	{
-		if(billboardID == idPair.second)
+		if(billboardID == key.second)
 		{
-			IDs.insert(idPair.first);
+			IDs.insert(key.first);
 		}
 	}
 
@@ -68,11 +68,11 @@ const vector<string> Animation2dEditor::getStartedQuadAnimationIDs(const string&
 {
 	set<string> IDs;
 
-	for(const auto& [idPair, animation] : _startedQuadAnimations)
+	for(const auto& [key, animation] : _startedQuadAnimations)
 	{
-		if(quadID == idPair.second)
+		if(quadID == key.second)
 		{
-			IDs.insert(idPair.first);
+			IDs.insert(key.first);
 		}
 	}
 

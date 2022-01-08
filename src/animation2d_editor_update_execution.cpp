@@ -2,7 +2,7 @@
 
 void Animation2dEditor::_updateBillboardAnimationExecution()
 {
-	for(auto& [idPair, animation] : _startedBillboardAnimations)
+	for(auto& [key, animation] : _startedBillboardAnimations)
 	{
 		if(!animation.isPaused())
 		{
@@ -18,8 +18,8 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 					{
 						if(animation.getPlayCount() == -1)
 						{
-							_billboardAnimationsToStop.insert(idPair);
-							_billboardAnimationsToStart.insert(idPair);
+							_billboardAnimationsToStop.insert(key);
+							_billboardAnimationsToStart.insert(key);
 						}
 						else
 						{
@@ -27,7 +27,7 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 
 							if(animation.getPlayCount() == 0)
 							{
-								_billboardAnimationsToStop.insert(idPair);
+								_billboardAnimationsToStop.insert(key);
 							}
 							else
 							{
@@ -56,24 +56,24 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 		fvec2 uvOffset = fvec2((static_cast<float>(animation.getColumnIndex()) * uvMultiplier.x),
 							   (static_cast<float>(animation.getRowCount() - animation.getRowIndex() - 1) * uvMultiplier.y));
 
-		_fe3d.billboard_setUvMultiplier(idPair.second, uvMultiplier);
-		_fe3d.billboard_setUvOffset(idPair.second, uvOffset);
+		_fe3d.billboard_setUvMultiplier(key.second, uvMultiplier);
+		_fe3d.billboard_setUvOffset(key.second, uvOffset);
 	}
 
-	for(const auto& idPair : _billboardAnimationsToStop)
+	for(const auto& key : _billboardAnimationsToStop)
 	{
-		if(isBillboardAnimationStarted(idPair.first, idPair.second))
+		if(isBillboardAnimationStarted(key.first, key.second))
 		{
-			stopBillboardAnimation(idPair.first, idPair.second);
+			stopBillboardAnimation(key.first, key.second);
 		}
 	}
 	_billboardAnimationsToStop.clear();
 
-	for(const auto& idPair : _billboardAnimationsToStart)
+	for(const auto& key : _billboardAnimationsToStart)
 	{
-		if(!isBillboardAnimationStarted(idPair.first, idPair.second))
+		if(!isBillboardAnimationStarted(key.first, key.second))
 		{
-			startBillboardAnimation(idPair.first, idPair.second, -1);
+			startBillboardAnimation(key.first, key.second, -1);
 		}
 	}
 	_billboardAnimationsToStart.clear();
@@ -81,7 +81,7 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 
 void Animation2dEditor::_updateQuadAnimationExecution()
 {
-	for(auto& [idPair, animation] : _startedQuadAnimations)
+	for(auto& [key, animation] : _startedQuadAnimations)
 	{
 		if(!animation.isPaused())
 		{
@@ -97,8 +97,8 @@ void Animation2dEditor::_updateQuadAnimationExecution()
 					{
 						if(animation.getPlayCount() == -1)
 						{
-							_quadAnimationsToStop.insert(idPair);
-							_quadAnimationsToStart.insert(idPair);
+							_quadAnimationsToStop.insert(key);
+							_quadAnimationsToStart.insert(key);
 						}
 						else
 						{
@@ -106,7 +106,7 @@ void Animation2dEditor::_updateQuadAnimationExecution()
 
 							if(animation.getPlayCount() == 0)
 							{
-								_quadAnimationsToStop.insert(idPair);
+								_quadAnimationsToStop.insert(key);
 							}
 							else
 							{
@@ -135,24 +135,24 @@ void Animation2dEditor::_updateQuadAnimationExecution()
 		fvec2 uvOffset = fvec2((static_cast<float>(animation.getColumnIndex()) * uvMultiplier.x),
 							   (static_cast<float>(animation.getRowIndex()) * uvMultiplier.y));
 
-		_fe3d.quad_setUvMultiplier(idPair.second, uvMultiplier);
-		_fe3d.quad_setUvOffset(idPair.second, uvOffset);
+		_fe3d.quad_setUvMultiplier(key.second, uvMultiplier);
+		_fe3d.quad_setUvOffset(key.second, uvOffset);
 	}
 
-	for(const auto& idPair : _quadAnimationsToStop)
+	for(const auto& key : _quadAnimationsToStop)
 	{
-		if(isQuadAnimationStarted(idPair.first, idPair.second))
+		if(isQuadAnimationStarted(key.first, key.second))
 		{
-			stopQuadAnimation(idPair.first, idPair.second);
+			stopQuadAnimation(key.first, key.second);
 		}
 	}
 	_quadAnimationsToStop.clear();
 
-	for(const auto& idPair : _quadAnimationsToStart)
+	for(const auto& key : _quadAnimationsToStart)
 	{
-		if(!isQuadAnimationStarted(idPair.first, idPair.second))
+		if(!isQuadAnimationStarted(key.first, key.second))
 		{
-			startQuadAnimation(idPair.first, idPair.second, -1);
+			startQuadAnimation(key.first, key.second, -1);
 		}
 	}
 	_quadAnimationsToStart.clear();

@@ -317,7 +317,7 @@ void FabiEngine3D::gfx_setAnisotropicFilteringQuality(unsigned int value)
 {
 	_core->_renderBus->setAnisotropicFilteringQuality(value);
 
-	for(const auto& [filePath, texture] : _core->_textureBufferCache->get2dBuffers())
+	for(const auto& [key, texture] : _core->_textureBufferCache->get2dBuffers())
 	{
 		if(texture->hasAnisotropicFiltering())
 		{
@@ -325,7 +325,7 @@ void FabiEngine3D::gfx_setAnisotropicFilteringQuality(unsigned int value)
 		}
 	}
 
-	for(const auto& [filePaths, texture] : _core->_textureBufferCache->get3dBuffers())
+	for(const auto& [key, texture] : _core->_textureBufferCache->get3dBuffers())
 	{
 		if(texture->hasAnisotropicFiltering())
 		{

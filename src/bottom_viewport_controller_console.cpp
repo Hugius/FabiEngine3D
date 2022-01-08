@@ -22,10 +22,10 @@ void BottomViewportController::_updateConsole()
 		float latestMessageY = _fe3d.text_getPosition(entityID).y - CHAR_SIZE.y;
 
 		unsigned int messageLineCount = static_cast<unsigned int>(_consoleMessageQueue.size());
-		for(const auto& [ID, message] : _consoleMessageQueue)
+		for(const auto& [key, message] : _consoleMessageQueue)
 		{
 			int count = 0;
-			while(screen->isTextFieldExisting(ID + "_msg_" + to_string(count)))
+			while(screen->isTextFieldExisting(key + "_msg_" + to_string(count)))
 			{
 				count++;
 			}
@@ -47,16 +47,16 @@ void BottomViewportController::_updateConsole()
 				scrollingSpeed = 0.0f;
 			}
 
-			for(const auto& [ID, message] : _consoleMessageQueue)
+			for(const auto& [key, message] : _consoleMessageQueue)
 			{
-				_fe3d.text_move(screen->getTextField(ID + "_time")->getEntityID(), fvec2(0.0f, -scrollingSpeed));
+				_fe3d.text_move(screen->getTextField(key + "_time")->getEntityID(), fvec2(0.0f, -scrollingSpeed));
 
-				_fe3d.text_move(screen->getTextField(ID + "_separator")->getEntityID(), fvec2(0.0f, -scrollingSpeed));
+				_fe3d.text_move(screen->getTextField(key + "_separator")->getEntityID(), fvec2(0.0f, -scrollingSpeed));
 
 				unsigned int index = 0;
-				while(screen->isTextFieldExisting(ID + "_msg_" + to_string(index)))
+				while(screen->isTextFieldExisting(key + "_msg_" + to_string(index)))
 				{
-					_fe3d.text_move(screen->getTextField(ID + "_msg_" + to_string(index))->getEntityID(), fvec2(0.0f, -scrollingSpeed));
+					_fe3d.text_move(screen->getTextField(key + "_msg_" + to_string(index))->getEntityID(), fvec2(0.0f, -scrollingSpeed));
 					index++;
 				}
 			}
@@ -78,9 +78,9 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 
 	reverse(_consoleMessageQueue.begin(), _consoleMessageQueue.end());
 	unsigned int index = 0;
-	for(const auto& [ID, message] : _consoleMessageQueue)
+	for(const auto& [key, message] : _consoleMessageQueue)
 	{
-		bool alreadyExisting = screen->isTextFieldExisting(ID + "_time");
+		bool alreadyExisting = screen->isTextFieldExisting(key + "_time");
 		float floatIndex = static_cast<float>(index);
 		fvec3 timePartColor = fvec3(1.0f, 0.0f, 1.0f);
 		fvec3 separatorPartColor = fvec3(1.0f, 0.85f, 0.0f);
@@ -124,21 +124,21 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 		{
 			if(alreadyExisting)
 			{
-				_fe3d.text_setPosition(screen->getTextField(ID + "_time")->getEntityID(),
+				_fe3d.text_setPosition(screen->getTextField(key + "_time")->getEntityID(),
 									   screen->convertPosition(fvec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
-				_fe3d.text_setPosition(screen->getTextField(ID + "_separator")->getEntityID(),
+				_fe3d.text_setPosition(screen->getTextField(key + "_separator")->getEntityID(),
 									   screen->convertPosition(fvec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
 			}
 			else
 			{
-				screen->createTextField(ID + "_time", fvec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)), fvec2(0.0f), "", timePartColor, false);
-				string timeID = screen->getTextField(ID + "_time")->getEntityID();
+				screen->createTextField(key + "_time", fvec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)), fvec2(0.0f), "", timePartColor, false);
+				string timeID = screen->getTextField(key + "_time")->getEntityID();
 				_fe3d.text_setContent(timeID, timePartText, CHAR_SIZE.x, CHAR_SIZE.y);
 				_fe3d.text_setMinPosition(timeID, minPosition);
 				_fe3d.text_setMaxPosition(timeID, maxPosition);
 
-				screen->createTextField(ID + "_separator", fvec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)), fvec2(0.0f), "", separatorPartColor, false);
-				string separatorID = screen->getTextField(ID + "_separator")->getEntityID();
+				screen->createTextField(key + "_separator", fvec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)), fvec2(0.0f), "", separatorPartColor, false);
+				string separatorID = screen->getTextField(key + "_separator")->getEntityID();
 				_fe3d.text_setContent(separatorID, separatorPartText, CHAR_SIZE.x, CHAR_SIZE.y);
 				_fe3d.text_setMinPosition(separatorID, minPosition);
 				_fe3d.text_setMaxPosition(separatorID, maxPosition);
@@ -153,7 +153,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 		{
 			floatIndex = static_cast<float>(index);
 
-			string TextFieldID = ID + "_msg_" + to_string(i);
+			string TextFieldID = key + "_msg_" + to_string(i);
 
 			if(alreadyExisting)
 			{
@@ -174,21 +174,21 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 			{
 				if(alreadyExisting)
 				{
-					_fe3d.text_setPosition(screen->getTextField(ID + "_time")->getEntityID(),
+					_fe3d.text_setPosition(screen->getTextField(key + "_time")->getEntityID(),
 										   screen->convertPosition(fvec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
-					_fe3d.text_setPosition(screen->getTextField(ID + "_separator")->getEntityID(),
+					_fe3d.text_setPosition(screen->getTextField(key + "_separator")->getEntityID(),
 										   screen->convertPosition(fvec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));
 				}
 				else
 				{
-					screen->createTextField(ID + "_time", fvec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)), fvec2(0.0f), "", timePartColor, false);
-					string timeID = screen->getTextField(ID + "_time")->getEntityID();
+					screen->createTextField(key + "_time", fvec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)), fvec2(0.0f), "", timePartColor, false);
+					string timeID = screen->getTextField(key + "_time")->getEntityID();
 					_fe3d.text_setContent(timeID, timePartText, CHAR_SIZE.x, CHAR_SIZE.y);
 					_fe3d.text_setMinPosition(timeID, minPosition);
 					_fe3d.text_setMaxPosition(timeID, maxPosition);
 
-					screen->createTextField(ID + "_separator", fvec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)), fvec2(0.0f), "", separatorPartColor, false);
-					string separatorID = screen->getTextField(ID + "_separator")->getEntityID();
+					screen->createTextField(key + "_separator", fvec2(-1.0f + timePartOffset, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET)), fvec2(0.0f), "", separatorPartColor, false);
+					string separatorID = screen->getTextField(key + "_separator")->getEntityID();
 					_fe3d.text_setContent(separatorID, separatorPartText, CHAR_SIZE.x, CHAR_SIZE.y);
 					_fe3d.text_setMinPosition(separatorID, minPosition);
 					_fe3d.text_setMaxPosition(separatorID, maxPosition);

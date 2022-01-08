@@ -79,9 +79,9 @@ const vector<string> Animation3dEditor::getStartedModelAnimationIDs() const
 {
 	set<string> IDs;
 
-	for(const auto& [idPair, animation] : _startedModelAnimations)
+	for(const auto& [key, animation] : _startedModelAnimations)
 	{
-		IDs.insert(idPair.first);
+		IDs.insert(key.first);
 	}
 
 	return vector<string>(IDs.begin(), IDs.end());
@@ -91,11 +91,11 @@ const vector<string> Animation3dEditor::getStartedModelAnimationIDs(const string
 {
 	set<string> IDs;
 
-	for(const auto& [idPair, animation] : _startedModelAnimations)
+	for(const auto& [key, animation] : _startedModelAnimations)
 	{
-		if(modelID == idPair.second)
+		if(modelID == key.second)
 		{
-			IDs.insert(idPair.first);
+			IDs.insert(key.first);
 		}
 	}
 

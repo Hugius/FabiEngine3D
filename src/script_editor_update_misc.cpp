@@ -193,9 +193,9 @@ void ScriptEditor::_updateScriptSearching()
 				return;
 			}
 
-			for(const auto& [fileID, lineNumber] : result)
+			for(const auto& [key, lineNumber] : result)
 			{
-				Logger::throwInfo("Keyword \"" + keyword + "\" found in script \"" + fileID + "\" @ line " + to_string(lineNumber));
+				Logger::throwInfo("Keyword \"" + keyword + "\" found in script \"" + key + "\" @ line " + to_string(lineNumber));
 			}
 			Logger::throwInfo("");
 

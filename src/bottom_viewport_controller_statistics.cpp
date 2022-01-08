@@ -209,9 +209,9 @@ void BottomViewportController::_updateStatistics()
 		if(!_topViewportController.isScriptRunning() && !_gui.getOverlay()->isFocused() && !_scriptEditor.isWritingScript())
 		{
 			Logger::clearMessageQueue();
-			for(const auto& [ID, message] : _consoleMessageQueue)
+			for(const auto& [key, message] : _consoleMessageQueue)
 			{
-				_deleteConsoleMessage(ID);
+				_deleteConsoleMessage(key);
 			}
 			_consoleMessageQueue.clear();
 		}
@@ -228,9 +228,9 @@ void BottomViewportController::_updateStatistics()
 		}
 
 		Logger::clearMessageQueue();
-		for(const auto& [ID, message] : _consoleMessageQueue)
+		for(const auto& [key, message] : _consoleMessageQueue)
 		{
-			_deleteConsoleMessage(ID);
+			_deleteConsoleMessage(key);
 		}
 		_consoleMessageQueue.clear();
 

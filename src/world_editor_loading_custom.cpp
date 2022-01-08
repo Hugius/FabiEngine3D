@@ -257,7 +257,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 			//	animationData->setSpeedMultiplier(speedMultiplier);
 			//	animationData->setFadeFramestep(fadeFramestep);
 			//	animationData->setFrameIndex(frameIndex);
-			//	for(const auto& [partID, speed] : speeds)
+			//	for(const auto& [key, speed] : speeds)
 			//	{
 			//		frameData.setSpeed(partID, speed);
 			//	}

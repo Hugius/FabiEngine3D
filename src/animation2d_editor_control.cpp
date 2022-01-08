@@ -87,7 +87,7 @@ void Animation2dEditor::stopBillboardAnimation(const string& animationID, const 
 
 void Animation2dEditor::pauseBillboardAnimations()
 {
-	for(auto& [idPair, animation] : _startedBillboardAnimations)
+	for(auto& [key, animation] : _startedBillboardAnimations)
 	{
 		animation.setPaused(true);
 	}
@@ -95,7 +95,7 @@ void Animation2dEditor::pauseBillboardAnimations()
 
 void Animation2dEditor::resumeBillboardAnimations()
 {
-	for(auto& [idPair, animation] : _startedBillboardAnimations)
+	for(auto& [key, animation] : _startedBillboardAnimations)
 	{
 		animation.setPaused(false);
 	}
@@ -192,7 +192,7 @@ void Animation2dEditor::stopQuadAnimation(const string& animationID, const strin
 
 void Animation2dEditor::pauseQuadAnimations()
 {
-	for(auto& [idPair, animation] : _startedQuadAnimations)
+	for(auto& [key, animation] : _startedQuadAnimations)
 	{
 		animation.setPaused(true);
 	}
@@ -200,7 +200,7 @@ void Animation2dEditor::pauseQuadAnimations()
 
 void Animation2dEditor::resumeQuadAnimations()
 {
-	for(auto& [idPair, animation] : _startedQuadAnimations)
+	for(auto& [key, animation] : _startedQuadAnimations)
 	{
 		animation.setPaused(false);
 	}

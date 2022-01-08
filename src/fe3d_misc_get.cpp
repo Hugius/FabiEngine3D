@@ -135,9 +135,9 @@ const vector<pair<string, int>> FabiEngine3D::misc_getUpdateProfilingStatistics(
 		pair<string, int>("networkUpdate", 0)
 	};
 
-	for(auto& [ID, percentage] : result)
+	for(auto& [key, percentage] : result)
 	{
-		int newPercentage = static_cast<int>((_core->_timer->getDeltaPart(ID) / _core->_timer->getDeltaPartSum()) * 100.0f);
+		int newPercentage = static_cast<int>((_core->_timer->getDeltaPart(key) / _core->_timer->getDeltaPartSum()) * 100.0f);
 		percentage = newPercentage;
 	}
 
@@ -163,9 +163,9 @@ const vector<pair<string, int>> FabiEngine3D::misc_getRenderProfilingStatistics(
 		pair<string, int>("bufferSwap", 0)
 	};
 
-	for(auto& [ID, percentage] : result)
+	for(auto& [key, percentage] : result)
 	{
-		int newPercentage = static_cast<int>((_core->_timer->getDeltaPart(ID) / _core->_timer->getDeltaPartSum()) * 100.0f);
+		int newPercentage = static_cast<int>((_core->_timer->getDeltaPart(key) / _core->_timer->getDeltaPartSum()) * 100.0f);
 		percentage = newPercentage;
 	}
 

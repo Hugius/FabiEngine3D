@@ -281,15 +281,14 @@ void Animation3dEditor::_updateAnimationDeleting()
 
 		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation3dEditorMenuMain");
-
 			if(!_getAnimation(_currentAnimationID)->getPreviewModelID().empty())
 			{
 				_fe3d.model_setVisible(_getAnimation(_currentAnimationID)->getPreviewModelID(), false);
 			}
-			_deleteAnimation(_currentAnimationID);
-			_currentAnimationID = "";
 
+			_deleteAnimation(_currentAnimationID);
+
+			_currentAnimationID = "";
 			_isDeletingAnimation = false;
 		}
 		if(_gui.getOverlay()->isAnswerFormDenied("delete"))

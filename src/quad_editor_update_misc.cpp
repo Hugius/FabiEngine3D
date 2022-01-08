@@ -123,15 +123,13 @@ void QuadEditor::_updateQuadDeleting()
 
 		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("quadEditorMenuMain");
-
 			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
 			_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
 
 			_fe3d.quad_delete(_currentQuadID);
-			_currentQuadID = "";
 
 			_loadedQuadIDs.erase(remove(_loadedQuadIDs.begin(), _loadedQuadIDs.end(), _currentQuadID), _loadedQuadIDs.end());
+			_currentQuadID = "";
 			_isDeletingQuad = false;
 		}
 		if(_gui.getOverlay()->isAnswerFormDenied("delete"))

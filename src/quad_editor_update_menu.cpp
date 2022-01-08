@@ -104,6 +104,7 @@ void QuadEditor::_updateChoiceMenu()
 			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d.misc_clearImageCache(finalFilePath);
 			_fe3d.quad_setDiffuseMap(_currentQuadID, finalFilePath);
+			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, finalFilePath);
 		}
 	}
 }

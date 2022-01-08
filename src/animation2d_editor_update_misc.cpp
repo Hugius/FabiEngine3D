@@ -99,10 +99,11 @@ void Animation2dEditor::_updateAnimationDeleting()
 
 		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation2dEditorMenuMain");
 			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
 			_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
+
 			_deleteAnimation(_currentAnimationID);
+
 			_currentAnimationID = "";
 			_isDeletingAnimation = false;
 		}

@@ -254,9 +254,10 @@ void ModelEditor::_updateModelDeleting()
 		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
 			_fe3d.model_delete(_currentModelID);
+
 			_loadedModelIDs.erase(remove(_loadedModelIDs.begin(), _loadedModelIDs.end(), _currentModelID), _loadedModelIDs.end());
-			_isDeletingModel = false;
 			_currentModelID = "";
+			_isDeletingModel = false;
 		}
 		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
 		{

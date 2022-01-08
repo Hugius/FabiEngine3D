@@ -144,12 +144,10 @@ void SoundEditor::_updateSoundDeleting()
 
 		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuMain");
-
 			_fe3d.sound2d_delete(_currentSoundID);
-			_currentSoundID = "";
 
 			_loadedSoundIDs.erase(remove(_loadedSoundIDs.begin(), _loadedSoundIDs.end(), _currentSoundID), _loadedSoundIDs.end());
+			_currentSoundID = "";
 			_isDeletingSound = false;
 		}
 		if(_gui.getOverlay()->isAnswerFormDenied("delete"))

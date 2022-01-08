@@ -200,12 +200,10 @@ void BillboardEditor::_updateBillboardDeleting()
 
 		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuMain");
-
 			_fe3d.billboard_delete(_currentBillboardID);
+
 			_loadedBillboardIDs.erase(remove(_loadedBillboardIDs.begin(), _loadedBillboardIDs.end(), _currentBillboardID), _loadedBillboardIDs.end());
 			_currentBillboardID = "";
-
 			_isDeletingBillboard = false;
 		}
 		if(_gui.getOverlay()->isAnswerFormDenied("delete"))

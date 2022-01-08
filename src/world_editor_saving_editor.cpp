@@ -413,7 +413,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 
 	file.close();
 
-	Logger::throwInfo("World data saved!");
+	Logger::throwInfo("World editor data saved!");
 
 	return true;
 }

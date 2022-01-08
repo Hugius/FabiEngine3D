@@ -46,7 +46,7 @@ const bool ScriptEditor::saveScriptFiles()
 		file.close();
 	}
 
-	Logger::throwInfo("Script data saved!");
+	Logger::throwInfo("Script editor data saved!");
 
 	return true;
 }

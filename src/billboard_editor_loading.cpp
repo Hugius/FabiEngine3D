@@ -192,7 +192,7 @@ const bool BillboardEditor::loadFromFile()
 
 	file.close();
 
-	Logger::throwInfo("Billboard data loaded!");
+	Logger::throwInfo("Billboard editor data loaded!");
 
 	return true;
 }

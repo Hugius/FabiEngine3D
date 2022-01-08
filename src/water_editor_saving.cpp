@@ -78,7 +78,7 @@ const bool WaterEditor::saveToFile() const
 
 	file.close();
 
-	Logger::throwInfo("Water data saved!");
+	Logger::throwInfo("Water editor data saved!");
 
 	return true;
 }

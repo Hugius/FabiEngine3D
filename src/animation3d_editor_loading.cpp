@@ -151,7 +151,7 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 
 	file.close();
 
-	Logger::throwInfo("Animation3D data loaded!");
+	Logger::throwInfo("Animation3D editor data loaded!");
 
 	return true;
 }

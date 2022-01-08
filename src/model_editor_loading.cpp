@@ -420,7 +420,7 @@ const bool ModelEditor::loadFromFile()
 
 	file.close();
 
-	Logger::throwInfo("Model data loaded!");
+	Logger::throwInfo("Model editor data loaded!");
 
 	return true;
 }

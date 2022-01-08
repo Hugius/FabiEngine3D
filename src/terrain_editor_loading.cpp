@@ -375,7 +375,7 @@ const bool TerrainEditor::loadFromFile()
 
 	file.close();
 
-	Logger::throwInfo("Terrain data loaded!");
+	Logger::throwInfo("Terrain editor data loaded!");
 
 	return true;
 }

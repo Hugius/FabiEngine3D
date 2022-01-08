@@ -139,7 +139,7 @@ const bool ModelEditor::saveToFile() const
 
 	file.close();
 
-	Logger::throwInfo("Model data saved!");
+	Logger::throwInfo("Model editor data saved!");
 
 	return true;
 }

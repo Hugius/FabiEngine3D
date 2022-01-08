@@ -88,7 +88,7 @@ const bool Animation3dEditor::saveToFile() const
 
 	file.close();
 
-	Logger::throwInfo("Animation3D data saved!");
+	Logger::throwInfo("Animation3D editor data saved!");
 
 	return true;
 }

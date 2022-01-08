@@ -76,7 +76,7 @@ const bool Animation2dEditor::loadFromFile(bool mustCheckPreviewTexture)
 
 	file.close();
 
-	Logger::throwInfo("Animation2D data loaded!");
+	Logger::throwInfo("Animation2D editor data loaded!");
 
 	return true;
 }

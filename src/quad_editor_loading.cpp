@@ -111,7 +111,7 @@ const bool QuadEditor::loadFromFile()
 
 	file.close();
 
-	Logger::throwInfo("Quad data loaded!");
+	Logger::throwInfo("Quad editor data loaded!");
 
 	return true;
 }

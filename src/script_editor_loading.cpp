@@ -70,7 +70,7 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 
 	if(isLoggingEnabled)
 	{
-		Logger::throwInfo("Script data loaded!");
+		Logger::throwInfo("Script editor data loaded!");
 	}
 
 	_isScriptLoadedFromFile = true;

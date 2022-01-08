@@ -201,7 +201,7 @@ const bool WaterEditor::loadFromFile()
 
 	file.close();
 
-	Logger::throwInfo("Water data loaded!");
+	Logger::throwInfo("Water editor data loaded!");
 
 	return true;
 }

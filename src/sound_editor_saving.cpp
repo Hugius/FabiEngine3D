@@ -36,7 +36,7 @@ const bool SoundEditor::saveToFile() const
 
 	file.close();
 
-	Logger::throwInfo("Sound data saved!");
+	Logger::throwInfo("Sound editor data saved!");
 
 	return true;
 }

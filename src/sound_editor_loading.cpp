@@ -101,7 +101,7 @@ const bool SoundEditor::loadFromFile()
 
 	file.close();
 
-	Logger::throwInfo("Sound data loaded!");
+	Logger::throwInfo("Sound editor data loaded!");
 
 	return true;
 }

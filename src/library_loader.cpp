@@ -39,6 +39,7 @@ LibraryLoader::LibraryLoader()
 		Logger::throwFatalWarning("SDL_MIX could not be initialized: ", Mix_GetError());
 	}
 
+	Logger::throwInfo("Initializing Sockets API...");
 	WSADATA wsaData;
 	auto winsockResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
 	if(winsockResult != 0)

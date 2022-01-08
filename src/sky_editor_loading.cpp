@@ -142,7 +142,7 @@ const bool SkyEditor::loadFromFile()
 
 	file.close();
 
-	Logger::throwInfo("Sky data loaded!");
+	Logger::throwInfo("Sky editor data loaded!");
 
 	return true;
 }

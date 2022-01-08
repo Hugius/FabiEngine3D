@@ -36,7 +36,7 @@ const bool QuadEditor::saveToFile() const
 
 	file.close();
 
-	Logger::throwInfo("Quad data saved!");
+	Logger::throwInfo("Quad editor data saved!");
 
 	return true;
 }

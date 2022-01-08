@@ -563,7 +563,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 	_loadedWorldID = fileName;
 
-	Logger::throwInfo("World data loaded!");
+	Logger::throwInfo("World editor data loaded!");
 
 	return true;
 }

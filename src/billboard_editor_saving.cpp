@@ -72,7 +72,7 @@ const bool BillboardEditor::saveToFile() const
 
 	file.close();
 
-	Logger::throwInfo("Billboard data saved!");
+	Logger::throwInfo("Billboard editor data saved!");
 
 	return true;
 }

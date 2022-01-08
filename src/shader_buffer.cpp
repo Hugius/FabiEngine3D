@@ -13,7 +13,7 @@ ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentF
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const auto vertexPath = string("engine\\shaders\\" + vertexFileName);
 	const auto fragmentPath = string("engine\\shaders\\" + fragmentFileName);
-	const auto shaderNname = vertexFileName.substr(0, vertexFileName.size() - 5);
+	const auto shaderName = vertexFileName.substr(0, vertexFileName.size() - 5);
 
 	if(!Tools::isFileExisting(rootPath + vertexPath))
 	{
@@ -49,7 +49,7 @@ ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentF
 	{
 		char log[512];
 		glGetShaderInfoLog(vertexID, 512, nullptr, log);
-		Logger::throwError("ShaderBuffer::_createProgram::1 ---> ", shaderNname, " ", log);
+		Logger::throwError("ShaderBuffer::_createProgram::1 ---> ", shaderName, " ", log);
 	}
 
 	auto fragmentID = glCreateShader(GL_FRAGMENT_SHADER);
@@ -62,7 +62,7 @@ ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentF
 	{
 		char log[512];
 		glGetShaderInfoLog(fragmentID, 512, nullptr, log);
-		Logger::throwError("ShaderBuffer::_createProgram::2 ---> ", shaderNname, " ", log);
+		Logger::throwError("ShaderBuffer::_createProgram::2 ---> ", shaderName, " ", log);
 	}
 
 	_programID = glCreateProgram();
@@ -76,14 +76,14 @@ ShaderBuffer::ShaderBuffer(const string& vertexFileName, const string& fragmentF
 	{
 		char log[512];
 		glGetProgramInfoLog(_programID, 512, nullptr, log);
-		Logger::throwError("ShaderBuffer::_createProgram::3 ---> ", shaderNname, " ", log);
+		Logger::throwError("ShaderBuffer::_createProgram::3 ---> ", shaderName, " ", log);
 	}
 
 	glDeleteShader(vertexID);
 	glDeleteShader(fragmentID);
 
-	Logger::throwInfo("Loaded vertex shader: \"engine\\shaders\\" + vertexFileName + "\"");
-	Logger::throwInfo("Loaded fragment shader: \"engine\\shaders\\" + fragmentFileName + "\"");
+	Logger::throwInfo("Loaded shader: \"engine\\shaders\\" + vertexFileName + "\"");
+	Logger::throwInfo("Loaded shader: \"engine\\shaders\\" + fragmentFileName + "\"");
 }
 
 ShaderBuffer::~ShaderBuffer()

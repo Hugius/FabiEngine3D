@@ -31,7 +31,7 @@ void ModelEditor::_updateTexturingMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\diffuse_map\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\model\\diffuse_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -64,7 +64,7 @@ void ModelEditor::_updateTexturingMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\emission_map\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\model\\emission_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -97,7 +97,7 @@ void ModelEditor::_updateTexturingMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\specular_map\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\model\\specular_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -130,7 +130,7 @@ void ModelEditor::_updateTexturingMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\reflection_map\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\model\\reflection_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -163,7 +163,7 @@ void ModelEditor::_updateTexturingMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\normal_map\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\model\\normal_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{

@@ -33,7 +33,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\image\\diffuse_map\\");
+			const string targetDirectoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\image\\entity\\quad\\diffuse_map\\");
 			const auto filePath = (targetDirectoryPath + args[1].getString());
 			_fe3d.quad_setDiffuseMap(args[0].getString(), filePath);
 

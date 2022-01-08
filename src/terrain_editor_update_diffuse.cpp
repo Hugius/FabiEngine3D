@@ -21,7 +21,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\diffuse_map\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\terrain\\diffuse_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -54,7 +54,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\diffuse_map\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\terrain\\diffuse_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -87,7 +87,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\diffuse_map\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\terrain\\diffuse_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{
@@ -120,7 +120,7 @@ void TerrainEditor::_updateDiffuseMapMenu()
 			}
 
 			const auto rootPath = Tools::getRootDirectoryPath();
-			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\diffuse_map\\");
+			const string targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\terrain\\diffuse_map\\");
 
 			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
 			{

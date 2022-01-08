@@ -13,7 +13,7 @@
 
 - **3D Rendering**: sky, terrain, water, model, billboard
 - **2D Rendering**: quad, text
-- **Textures**: blend, cube, diffuse, displacement, DUDV, emission, flare, font, height, normal, reflection, specular
+- **Textures**: blend, cube, diffuse, displacement, dudv, emission, flare, font, height, normal, reflection, specular
 - **Lighting**: ambient lighting, directional lighting, specular lighting, point lighting, spot lighting
 - **Post Processing**: bloom, DOF, motion blur, anti aliasing, lens flare, gamma correction
 - **Miscellaneous**: shadows, cube reflections, planar reflections, fog, sky exposure, anisotropic filtering
@@ -73,20 +73,18 @@
     └── <your_project>
       └── assets
         └── audio
-        └── mesh
         └── image
-          └── blend_map
-          └── cube_map
-          └── diffuse_map
-          └── displacement_map
-          └── dudv_map
-          └── emission_map
-          └── flare_map
-          └── font_map
-          └── height_map
-          └── normal_map
-          └── reflection_map
-          └── specular_map
+          └── entity
+            └── billboard
+            └── model
+            └── quad
+            └── sky
+            └── terrain
+            └── text
+            └── water
+          └── misc
+            └── flare_map
+        └── mesh
       └── data (do NOT touch)
       └── saves (do NOT touch)
       └── scripts (do NOT touch)
@@ -104,9 +102,8 @@
   - `projects\`: contains all your projects
     - `assets\`: contains all project assets
       - `audio\`: contains all project audio files
-      - `font\`: contains all project font files
+      - `image\`: contains all project texture files
       - `mesh\`: contains all project mesh files
-      - `texture\`: contains all project texture files
     - `data\`: contains all project editor data
     - `saves\`: contains all project save files
     - `worlds\`: contains all project world files

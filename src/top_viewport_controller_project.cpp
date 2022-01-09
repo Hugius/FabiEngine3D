@@ -157,13 +157,13 @@ void TopViewportController::_updateProjectLoading()
 
 			Logger::throwInfo("Existing project \"" + _currentProjectID + "\" loaded!");
 
-			_isLoadingProject = false;
 			_gui.getOverlay()->deleteChoiceForm("projectList");
+			_isLoadingProject = false;
 		}
 		else if(_gui.getOverlay()->isChoiceFormCancelled("projectList"))
 		{
-			_isLoadingProject = false;
 			_gui.getOverlay()->deleteChoiceForm("projectList");
+			_isLoadingProject = false;
 		}
 	}
 }
@@ -183,8 +183,8 @@ void TopViewportController::_updateProjectDeleting()
 		}
 		else if(_gui.getOverlay()->isChoiceFormCancelled("projectList"))
 		{
-			_isDeletingProject = false;
 			_gui.getOverlay()->deleteChoiceForm("projectList");
+			_isDeletingProject = false;
 		}
 
 		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))

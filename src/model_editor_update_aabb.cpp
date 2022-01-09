@@ -195,9 +195,9 @@ void ModelEditor::_updateAabbChoosing()
 				_fe3d.aabb_setFollowParentVisibility(aabbID, true);
 			}
 
+			_gui.getOverlay()->deleteChoiceForm("aabbList");
 			_isChoosingAabb = false;
 			_isDeletingAabb = false;
-			_gui.getOverlay()->deleteChoiceForm("aabbList");
 		}
 	}
 }

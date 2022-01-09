@@ -32,6 +32,7 @@ void WorldEditor::_updateMainMenu()
 			auto IDs = _getWorldIDs();
 			sort(IDs.begin(), IDs.end());
 			_gui.getOverlay()->createChoiceForm("worldList", "Delete World", fvec2(0.0f, 0.1f), IDs);
+			_isChoosingWorld = true;
 			_isDeletingWorld = true;
 		}
 	}

@@ -145,9 +145,9 @@ void WaterEditor::_updateWaterChoosing()
 		}
 		else if(_gui.getOverlay()->isChoiceFormCancelled("waterList"))
 		{
+			_gui.getOverlay()->deleteChoiceForm("waterList");
 			_isChoosingWater = false;
 			_isDeletingWater = false;
-			_gui.getOverlay()->deleteChoiceForm("waterList");
 		}
 	}
 }

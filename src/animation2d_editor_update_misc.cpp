@@ -81,9 +81,9 @@ void Animation2dEditor::_updateAnimationChoosing()
 		}
 		else if(_gui.getOverlay()->isChoiceFormCancelled("animationList"))
 		{
+			_gui.getOverlay()->deleteChoiceForm("animationList");
 			_isChoosingAnimation = false;
 			_isDeletingAnimation = false;
-			_gui.getOverlay()->deleteChoiceForm("animationList");
 		}
 	}
 }

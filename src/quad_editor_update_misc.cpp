@@ -105,9 +105,9 @@ void QuadEditor::_updateQuadChoosing()
 		}
 		else if(_gui.getOverlay()->isChoiceFormCancelled("quadList"))
 		{
+			_gui.getOverlay()->deleteChoiceForm("quadList");
 			_isChoosingQuad = false;
 			_isDeletingQuad = false;
-			_gui.getOverlay()->deleteChoiceForm("quadList");
 		}
 	}
 }

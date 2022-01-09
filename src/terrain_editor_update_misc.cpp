@@ -180,9 +180,9 @@ void TerrainEditor::_updateTerrainChoosing()
 		}
 		else if(_gui.getOverlay()->isChoiceFormCancelled("terrainList"))
 		{
+			_gui.getOverlay()->deleteChoiceForm("terrainList");
 			_isChoosingTerrain = false;
 			_isDeletingTerrain = false;
-			_gui.getOverlay()->deleteChoiceForm("terrainList");
 		}
 	}
 }

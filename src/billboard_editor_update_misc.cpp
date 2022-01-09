@@ -173,9 +173,9 @@ void BillboardEditor::_updateBillboardChoosing()
 		}
 		else if(_gui.getOverlay()->isChoiceFormCancelled("billboardList"))
 		{
+			_gui.getOverlay()->deleteChoiceForm("billboardList");
 			_isChoosingBillboard = false;
 			_isDeletingBillboard = false;
-			_gui.getOverlay()->deleteChoiceForm("billboardList");
 		}
 		else
 		{

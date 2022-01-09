@@ -128,8 +128,6 @@ void WorldEditor::_updateWorldCreating()
 				return;
 			}
 
-			newWorldID = ("@" + newWorldID);
-
 			const auto worldNames = _getWorldIDs();
 
 			if(find(worldNames.begin(), worldNames.end(), newWorldID) != worldNames.end())
@@ -148,6 +146,7 @@ void WorldEditor::_updateWorldChoosing()
 {
 	if(_isChoosingWorld)
 	{
+		std::cout << "hoi";
 		auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("worldList");
 
 		if(!selectedButtonID.empty())
@@ -170,9 +169,9 @@ void WorldEditor::_updateWorldChoosing()
 		}
 		else if(_gui.getOverlay()->isChoiceFormCancelled("worldList"))
 		{
+			_gui.getOverlay()->deleteChoiceForm("worldList");
 			_isChoosingWorld = false;
 			_isDeletingWorld = false;
-			_gui.getOverlay()->deleteChoiceForm("worldList");
 		}
 	}
 }

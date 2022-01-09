@@ -128,9 +128,9 @@ void SkyEditor::_updateSkyChoosing()
 		}
 		else if(_gui.getOverlay()->isChoiceFormCancelled("skyList"))
 		{
+			_gui.getOverlay()->deleteChoiceForm("skyList");
 			_isChoosingSky = false;
 			_isDeletingSky = false;
-			_gui.getOverlay()->deleteChoiceForm("skyList");
 		}
 	}
 }

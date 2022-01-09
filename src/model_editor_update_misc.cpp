@@ -226,9 +226,9 @@ void ModelEditor::_updateModelChoosing()
 		}
 		else if(_gui.getOverlay()->isChoiceFormCancelled("modelList"))
 		{
+			_gui.getOverlay()->deleteChoiceForm("modelList");
 			_isChoosingModel = false;
 			_isDeletingModel = false;
-			_gui.getOverlay()->deleteChoiceForm("modelList");
 		}
 		else
 		{
@@ -293,8 +293,8 @@ void ModelEditor::_updatePartChoosing()
 		}
 		else if(_gui.getOverlay()->isChoiceFormCancelled("partList"))
 		{
-			_isChoosingPart = false;
 			_gui.getOverlay()->deleteChoiceForm("partList");
+			_isChoosingPart = false;
 		}
 		else
 		{

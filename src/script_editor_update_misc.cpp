@@ -135,8 +135,8 @@ void ScriptEditor::_updateScriptFileChoosing()
 		}
 		else if(_gui.getOverlay()->isChoiceFormCancelled("scriptFileList"))
 		{
-			_isChoosingScriptFile = false;
 			_gui.getOverlay()->deleteChoiceForm("scriptFileList");
+			_isChoosingScriptFile = false;
 		}
 	}
 }

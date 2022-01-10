@@ -211,6 +211,9 @@
     <Filter Include="Quad Editor\Persistence">
       <UniqueIdentifier>{1a8f2de0-976d-4e2e-961a-fa167895339c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{b047c6b1-8ea5-4051-aec8-8206cf6e491b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\animation3d_editor_lifecycle.cpp">
@@ -585,6 +588,10 @@
     <ClCompile Include="..\..\..\src\world_editor_update_misc_highlight.cpp">
       <Filter>World Editor\Update\Miscellaneous</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\base_editor.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\world_editor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\animation3d_editor.hpp">
@@ -628,6 +635,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\quad_editor.hpp">
       <Filter>Quad Editor\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\base_editor.hpp">
+      <Filter>Base</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

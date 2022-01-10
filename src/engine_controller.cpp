@@ -10,6 +10,8 @@ EngineController::EngineController()
 	_rightViewportController = make_shared<RightViewportController>();
 	_topViewportController = make_shared<TopViewportController>();
 	_bottomViewportController = make_shared<BottomViewportController>();
+	_scriptExecutor = make_shared<ScriptExecutor>();
+	_scriptInterpreter = make_shared<ScriptInterpreter>();
 }
 
 void EngineController::inject(shared_ptr<EngineInterface> fe3d)

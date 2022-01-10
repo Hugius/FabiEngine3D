@@ -9,15 +9,6 @@ using std::numeric_limits;
 using VPC = BaseViewportController;
 using LVPC = LeftViewportController;
 
-Animation3dEditor::Animation3dEditor(EngineInterface& fe3d, GuiManager& gui, ModelEditor& modelEditor)
-	:
-	_fe3d(fe3d),
-	_gui(gui),
-	_modelEditor(modelEditor)
-{
-
-}
-
 void Animation3dEditor::load()
 {
 	_loadGUI();

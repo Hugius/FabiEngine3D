@@ -8,14 +8,6 @@
 using VPC = BaseViewportController;
 using LVPC = LeftViewportController;
 
-Animation2dEditor::Animation2dEditor(EngineInterface& fe3d, GuiManager& gui)
-	:
-	_fe3d(fe3d),
-	_gui(gui)
-{
-
-}
-
 void Animation2dEditor::load()
 {
 	_loadGUI();

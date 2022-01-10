@@ -6,35 +6,6 @@
 
 using std::istringstream;
 
-ScriptInterpreter::ScriptInterpreter(EngineInterface& fe3d,
-									 Script& script,
-									 SkyEditor& skyEditor,
-									 TerrainEditor& terrainEditor,
-									 WaterEditor& waterEditor,
-									 ModelEditor& modelEditor,
-									 BillboardEditor& billboardEditor,
-									 QuadEditor& quadEditor,
-									 Animation2dEditor& animation2dEditor,
-									 Animation3dEditor& animation3dEditor,
-									 SoundEditor& soundEditor,
-									 WorldEditor& worldEditor)
-	:
-	_fe3d(fe3d),
-	_script(script),
-	_skyEditor(skyEditor),
-	_terrainEditor(terrainEditor),
-	_waterEditor(waterEditor),
-	_modelEditor(modelEditor),
-	_billboardEditor(billboardEditor),
-	_quadEditor(quadEditor),
-	_soundEditor(soundEditor),
-	_animation2dEditor(animation2dEditor),
-	_animation3dEditor(animation3dEditor),
-	_worldEditor(worldEditor)
-{
-
-}
-
 void ScriptInterpreter::load()
 {
 	auto lastLoggerMessageCount = Logger::getMessageCount();

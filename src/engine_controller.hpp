@@ -32,4 +32,6 @@ private:
 	shared_ptr<RightViewportController> _rightViewportController;
 	shared_ptr<TopViewportController> _topViewportController;
 	shared_ptr<BottomViewportController> _bottomViewportController;
+	shared_ptr<ScriptExecutor> _scriptExecutor;
+	shared_ptr<ScriptInterpreter> _scriptInterpreter;
 };

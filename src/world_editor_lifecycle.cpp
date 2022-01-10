@@ -2,31 +2,6 @@
 #include "left_viewport_controller.hpp"
 #include "configuration.hpp"
 
-WorldEditor::WorldEditor(EngineInterface& fe3d,
-						 GuiManager& gui,
-						 SkyEditor& skyEditor,
-						 TerrainEditor& terrainEditor,
-						 WaterEditor& waterEditor,
-						 ModelEditor& modelEditor,
-						 BillboardEditor& billboardEditor,
-						 Animation2dEditor& animation2dEditor,
-						 Animation3dEditor& animation3dEditor,
-						 SoundEditor& soundEditor)
-	:
-	_fe3d(fe3d),
-	_gui(gui),
-	_skyEditor(skyEditor),
-	_terrainEditor(terrainEditor),
-	_waterEditor(waterEditor),
-	_modelEditor(modelEditor),
-	_billboardEditor(billboardEditor),
-	_animation2dEditor(animation2dEditor),
-	_animation3dEditor(animation3dEditor),
-	_soundEditor(soundEditor)
-{
-
-}
-
 void WorldEditor::load()
 {
 	_loadGUI();

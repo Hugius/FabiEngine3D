@@ -1,14 +1,11 @@
 #pragma once
 
-#include "engine_interface.hpp"
-#include "gui_manager.hpp"
+#include "base_editor.hpp"
 #include "reflection_type.hpp"
 
-class ModelEditor final
+class ModelEditor final : public BaseEditor
 {
 public:
-	ModelEditor(EngineInterface& fe3d, GuiManager& gui);
-
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
@@ -77,7 +74,4 @@ private:
 	bool _isChoosingAabb = false;
 	bool _isDeletingAabb = false;
 	bool _isEditorLoaded = false;
-
-	EngineInterface& _fe3d;
-	GuiManager& _gui;
 };

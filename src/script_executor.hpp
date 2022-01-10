@@ -5,18 +5,9 @@
 class ScriptExecutor final
 {
 public:
-	ScriptExecutor(EngineInterface& fe3d,
-				   Script& script,
-				   SkyEditor& skyEditor,
-				   TerrainEditor& terrainEditor,
-				   WaterEditor& waterEditor,
-				   ModelEditor& modelEditor,
-				   BillboardEditor& billboardEditor,
-				   QuadEditor& quadEditor,
-				   Animation2dEditor& animation2dEditor,
-				   Animation3dEditor& animation3dEditor,
-				   SoundEditor& soundEditor,
-				   WorldEditor& worldEditor);
+	void inject(shared_ptr<EngineInterface> fe3d);
+	void inject(shared_ptr<Script> script);
+	void inject(shared_ptr<ScriptInterpreter> scriptInterpreter);
 
 	void setCurrentProjectID(const string& projectID);
 	void load();
@@ -41,7 +32,7 @@ private:
 	bool _wasTimerStarted = false;
 	bool _mustSkipUpdate = false;
 
-	EngineInterface& _fe3d;
-	Script& _script;
-	ScriptInterpreter _scriptInterpreter;
+	shared_ptr<EngineInterface> _fe3d;
+	shared_ptr<Script> _script;
+	shared_ptr<ScriptInterpreter> _scriptInterpreter;
 };

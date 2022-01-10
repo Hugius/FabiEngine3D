@@ -19,18 +19,18 @@
 class ScriptInterpreter final
 {
 public:
-	ScriptInterpreter(EngineInterface& fe3d,
-					  Script& script,
-					  SkyEditor& skyEditor,
-					  TerrainEditor& terrainEditor,
-					  WaterEditor& waterEditor,
-					  ModelEditor& modelEditor,
-					  BillboardEditor& billboardEditor,
-					  QuadEditor& quadEditor,
-					  Animation2dEditor& animation2dEditor,
-					  Animation3dEditor& animation3dEditor,
-					  SoundEditor& soundEditor,
-					  WorldEditor& worldEditor);
+	void inject(shared_ptr<EngineInterface> fe3d);
+	void inject(shared_ptr<Script> script);
+	void inject(shared_ptr<SkyEditor> skyEditor);
+	void inject(shared_ptr<TerrainEditor> terrainEditor);
+	void inject(shared_ptr<WaterEditor> waterEditor);
+	void inject(shared_ptr<ModelEditor> modelEditor);
+	void inject(shared_ptr<BillboardEditor> billboardEditor);
+	void inject(shared_ptr<QuadEditor> quadEditor);
+	void inject(shared_ptr<Animation2dEditor> animation2dEditor);
+	void inject(shared_ptr<Animation3dEditor> animation3dEditor);
+	void inject(shared_ptr<SoundEditor> soundEditor);
+	void inject(shared_ptr<WorldEditor> worldEditor);
 
 	void setCurrentProjectID(const string& projectID);
 	void load();
@@ -224,18 +224,18 @@ private:
 
 	unordered_map<unsigned int, unordered_map<string, ScriptVariable>> _localVariables;
 	unordered_map<string, ScriptVariable> _globalVariables;
-	EngineInterface& _fe3d;
-	Script& _script;
-	SkyEditor& _skyEditor;
-	TerrainEditor& _terrainEditor;
-	WaterEditor& _waterEditor;
-	ModelEditor& _modelEditor;
-	BillboardEditor& _billboardEditor;
-	QuadEditor& _quadEditor;
-	Animation2dEditor& _animation2dEditor;
-	Animation3dEditor& _animation3dEditor;
-	SoundEditor& _soundEditor;
-	WorldEditor& _worldEditor;
+	shared_ptr<EngineInterface> _fe3d;
+	shared_ptr<Script> _script;
+	shared_ptr<SkyEditor> _skyEditor;
+	shared_ptr<TerrainEditor> _terrainEditor;
+	shared_ptr<WaterEditor> _waterEditor;
+	shared_ptr<ModelEditor> _modelEditor;
+	shared_ptr<BillboardEditor> _billboardEditor;
+	shared_ptr<QuadEditor> _quadEditor;
+	shared_ptr<Animation2dEditor> _animation2dEditor;
+	shared_ptr<Animation3dEditor> _animation3dEditor;
+	shared_ptr<SoundEditor> _soundEditor;
+	shared_ptr<WorldEditor> _worldEditor;
 	static inline const map<string, InputType> KEY_INPUT_STRING_MAP =
 	{
 		{"KEY_A", InputType::KEY_A},

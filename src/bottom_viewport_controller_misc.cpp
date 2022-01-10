@@ -2,16 +2,6 @@
 
 using BVPC = BottomViewportController;
 
-BottomViewportController::BottomViewportController(EngineInterface& fe3d, GuiManager& gui,
-												   TopViewportController& topViewportController, ScriptEditor& scriptEditor)
-	:
-	BaseViewportController(fe3d, gui),
-	_topViewportController(topViewportController),
-	_scriptEditor(scriptEditor)
-{
-
-}
-
 void BottomViewportController::initialize()
 {
 	_gui->getViewport("bottom")->createWindow("statistics", fvec2(-0.25f, 0.0f), fvec2(0.9875f, 1.875f), BVPC::FRAME_COLOR);

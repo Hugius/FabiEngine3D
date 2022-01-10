@@ -1,41 +1,10 @@
 #include "script_executor.hpp"
 #include "configuration.hpp"
 
-ScriptExecutor::ScriptExecutor(EngineInterface& fe3d,
-							   Script& script,
-							   SkyEditor& skyEditor,
-							   TerrainEditor& terrainEditor,
-							   WaterEditor& waterEditor,
-							   ModelEditor& modelEditor,
-							   BillboardEditor& billboardEditor,
-							   QuadEditor& quadEditor,
-							   Animation2dEditor& animation2dEditor,
-							   Animation3dEditor& animation3dEditor,
-							   SoundEditor& soundEditor,
-							   WorldEditor& worldEditor)
-	:
-	_fe3d(fe3d),
-	_script(script),
-	_scriptInterpreter(fe3d,
-					   script,
-					   skyEditor,
-					   terrainEditor,
-					   waterEditor,
-					   modelEditor,
-					   billboardEditor,
-					   quadEditor,
-					   animation2dEditor,
-					   animation3dEditor,
-					   soundEditor,
-					   worldEditor)
-{
-
-}
-
 void ScriptExecutor::load()
 {
-	_scriptInterpreter.load();
-	_scriptInterpreter.executeInitializeScripts();
+	_scriptInterpreter->load();
+	_scriptInterpreter->executeInitializeScripts();
 	_isStarted = true;
 	_isRunning = true;
 	_mustSkipUpdate = true;
@@ -49,7 +18,7 @@ void ScriptExecutor::update(bool debug)
 	{
 		if(!_mustSkipUpdate || debug)
 		{
-			_scriptInterpreter.executeUpdateScripts(debug);
+			_scriptInterpreter->executeUpdateScripts(debug);
 		}
 		else
 		{
@@ -151,9 +120,9 @@ void ScriptExecutor::unload()
 {
 	if(_isStarted)
 	{
-		_scriptInterpreter.executeTerminateScripts();
+		_scriptInterpreter->executeTerminateScripts();
 
-		_scriptInterpreter.unload();
+		_scriptInterpreter->unload();
 
 		if(_fe3d->application_isPaused())
 		{
@@ -170,14 +139,29 @@ void ScriptExecutor::unload()
 	}
 }
 
+void ScriptExecutor::inject(shared_ptr<EngineInterface> fe3d)
+{
+	_fe3d = fe3d;
+}
+
+void ScriptExecutor::inject(shared_ptr<Script> script)
+{
+	_script = script;
+}
+
+void ScriptExecutor::inject(shared_ptr<ScriptInterpreter> scriptInterpreter)
+{
+	_scriptInterpreter = scriptInterpreter;
+}
+
 void ScriptExecutor::setCurrentProjectID(const string& projectID)
 {
-	_scriptInterpreter.setCurrentProjectID(projectID);
+	_scriptInterpreter->setCurrentProjectID(projectID);
 }
 
 const bool ScriptExecutor::isScriptEmpty() const
 {
-	return (_script.getScriptFileCount() == 0);
+	return (_script->getScriptFileCount() == 0);
 }
 
 const bool ScriptExecutor::isStarted() const
@@ -192,9 +176,9 @@ const bool ScriptExecutor::isRunning() const
 
 void ScriptExecutor::_validateExecution()
 {
-	if(_scriptInterpreter.hasThrownError())
+	if(_scriptInterpreter->hasThrownError())
 	{
-		_scriptInterpreter.unload();
+		_scriptInterpreter->unload();
 		_isStarted = false;
 		_isRunning = false;
 		_wasCursorVisible = false;
@@ -203,7 +187,7 @@ void ScriptExecutor::_validateExecution()
 		_mustSkipUpdate = false;
 		_pausedSoundIDs.clear();
 	}
-	else if(_scriptInterpreter.gameMustStop())
+	else if(_scriptInterpreter->gameMustStop())
 	{
 		this->unload();
 	}

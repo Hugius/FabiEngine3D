@@ -1,26 +1,12 @@
 #pragma once
 
-#include "engine_interface.hpp"
-#include "gui_manager.hpp"
+#include "base_editor.hpp"
 #include "script.hpp"
 #include "script_executor.hpp"
 
-class ScriptEditor final
+class ScriptEditor final : public BaseEditor
 {
 public:
-	ScriptEditor(EngineInterface& fe3d,
-				 GuiManager& gui,
-				 SkyEditor& skyEditor,
-				 TerrainEditor& terrainEditor,
-				 WaterEditor& waterEditor,
-				 ModelEditor& modelEditor,
-				 BillboardEditor& billboardEditor,
-				 QuadEditor& quadEditor,
-				 Animation2dEditor& animation2dEditor,
-				 Animation3dEditor& animation3dEditor,
-				 SoundEditor& soundEditor,
-				 WorldEditor& worldEditor);
-
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
@@ -130,8 +116,6 @@ private:
 	bool _isRenamingScriptFile = false;
 	bool _isSearchingScriptFile = false;
 
-	EngineInterface& _fe3d;
-	GuiManager& _gui;
 	Script _script;
 	ScriptExecutor _scriptExecutor;
 	InputType _activeActionKey = InputType::NONE;

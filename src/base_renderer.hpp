@@ -6,8 +6,8 @@
 class BaseRenderer
 {
 public:
-	void inject(shared_ptr<ShaderBuffer> shader);
-	void inject(shared_ptr<RenderBus> renderBus);
+	virtual void inject(shared_ptr<ShaderBuffer> shader);
+	virtual void inject(shared_ptr<RenderBus> renderBus);
 
 	virtual void bind() = 0;
 	virtual void unbind() = 0;

@@ -1,13 +1,10 @@
 #pragma once
 
-#include "engine_interface.hpp"
-#include "gui_manager.hpp"
+#include "base_editor.hpp"
 
-class SoundEditor final
+class SoundEditor final : public BaseEditor
 {
 public:
-	SoundEditor(EngineInterface& fe3d, GuiManager& gui);
-
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void update();
@@ -44,7 +41,4 @@ private:
 	bool _isChoosingSound = false;
 	bool _isDeletingSound = false;
 	bool _isEditorLoaded = false;
-
-	EngineInterface& _fe3d;
-	GuiManager& _gui;
 };

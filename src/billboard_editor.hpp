@@ -1,13 +1,10 @@
 #pragma once
 
-#include "engine_interface.hpp"
-#include "gui_manager.hpp"
+#include "base_editor.hpp"
 
-class BillboardEditor final
+class BillboardEditor final : public BaseEditor
 {
 public:
-	BillboardEditor(EngineInterface& fe3d, GuiManager& gui);
-
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
@@ -57,7 +54,4 @@ private:
 	bool _isChoosingBillboard = false;
 	bool _isDeletingBillboard = false;
 	bool _isEditorLoaded = false;
-
-	EngineInterface& _fe3d;
-	GuiManager& _gui;
 };

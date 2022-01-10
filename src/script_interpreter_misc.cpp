@@ -199,3 +199,53 @@ const fvec2 ScriptInterpreter::_convertGuiSizeFromViewport(fvec2 size) const
 
 	return size;
 }
+
+void ScriptInterpreter::inject(shared_ptr<EngineInterface> fe3d)
+{
+	_fe3d = fe3d;
+}
+
+void ScriptInterpreter::inject(shared_ptr<Script> script)
+{
+	_script = script;
+}
+
+void ScriptInterpreter::inject(shared_ptr<SkyEditor> skyEditor)
+{
+	_skyEditor = skyEditor;
+}
+
+void ScriptInterpreter::inject(shared_ptr<TerrainEditor> terrainEditor)
+{
+	_terrainEditor = terrainEditor;
+}
+
+void ScriptInterpreter::inject(shared_ptr<WaterEditor> waterEditor)
+{
+	_waterEditor = waterEditor;
+}
+
+void ScriptInterpreter::inject(shared_ptr<ModelEditor> modelEditor)
+{
+	_modelEditor = modelEditor;
+}
+
+void ScriptInterpreter::inject(shared_ptr<BillboardEditor> billboardEditor)
+{
+	_billboardEditor = billboardEditor;
+}
+
+void ScriptInterpreter::inject(shared_ptr<Animation2dEditor> animation2dEditor)
+{
+	_animation2dEditor = animation2dEditor;
+}
+
+void ScriptInterpreter::inject(shared_ptr<Animation3dEditor> animation3dEditor)
+{
+	_animation3dEditor = animation3dEditor;
+}
+
+void ScriptInterpreter::inject(shared_ptr<SoundEditor> soundEditor)
+{
+	_soundEditor = soundEditor;
+}

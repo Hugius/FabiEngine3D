@@ -8,36 +8,6 @@ using std::ofstream;
 
 using TVPC = TopViewportController;
 
-TopViewportController::TopViewportController(EngineInterface& fe3d,
-											 GuiManager& gui,
-											 SkyEditor& skyEditor,
-											 TerrainEditor& terrainEditor,
-											 WaterEditor& waterEditor,
-											 ModelEditor& modelEditor,
-											 BillboardEditor& billboardEditor,
-											 QuadEditor& quadEditor,
-											 Animation2dEditor& animation2dEditor,
-											 Animation3dEditor& animation3dEditor,
-											 SoundEditor& soundEditor,
-											 WorldEditor& worldEditor,
-											 ScriptEditor& scriptEditor)
-	:
-	BaseViewportController(fe3d, gui),
-	_skyEditor(skyEditor),
-	_terrainEditor(terrainEditor),
-	_waterEditor(waterEditor),
-	_modelEditor(modelEditor),
-	_billboardEditor(billboardEditor),
-	_quadEditor(quadEditor),
-	_animation2dEditor(animation2dEditor),
-	_animation3dEditor(animation3dEditor),
-	_soundEditor(soundEditor),
-	_worldEditor(worldEditor),
-	_scriptEditor(scriptEditor)
-{
-
-}
-
 void TopViewportController::initialize()
 {
 	_gui->getViewport("top")->createWindow("projectWindow", fvec2(-0.25f, 0.0f), fvec2(0.9875f, 1.5f), TVPC::FRAME_COLOR);
@@ -271,4 +241,59 @@ void TopViewportController::_saveCurrentProject()
 	_scriptEditor->saveScriptFiles();
 
 	Logger::throwInfo("Project \"" + _currentProjectID + "\" saved!");
+}
+
+void TopViewportController::inject(shared_ptr<SkyEditor> skyEditor)
+{
+	_skyEditor = skyEditor;
+}
+
+void TopViewportController::inject(shared_ptr<TerrainEditor> terrainEditor)
+{
+	_terrainEditor = terrainEditor;
+}
+
+void TopViewportController::inject(shared_ptr<WaterEditor> waterEditor)
+{
+	_waterEditor = waterEditor;
+}
+
+void TopViewportController::inject(shared_ptr<ModelEditor> modelEditor)
+{
+	_modelEditor = modelEditor;
+}
+
+void TopViewportController::inject(shared_ptr<BillboardEditor> billboardEditor)
+{
+	_billboardEditor = billboardEditor;
+}
+
+void TopViewportController::inject(shared_ptr<QuadEditor> quadEditor)
+{
+	_quadEditor = quadEditor;
+}
+
+void TopViewportController::inject(shared_ptr<Animation2dEditor> animation2dEditor)
+{
+	_animation2dEditor = animation2dEditor;
+}
+
+void TopViewportController::inject(shared_ptr<Animation3dEditor> animation3dEditor)
+{
+	_animation3dEditor = animation3dEditor;
+}
+
+void TopViewportController::inject(shared_ptr<SoundEditor> soundEditor)
+{
+	_soundEditor = soundEditor;
+}
+
+void TopViewportController::inject(shared_ptr<WorldEditor> worldEditor)
+{
+	_worldEditor = worldEditor;
+}
+
+void TopViewportController::inject(shared_ptr<ScriptEditor> scriptEditor)
+{
+	_scriptEditor = scriptEditor;
 }

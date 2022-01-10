@@ -7,7 +7,8 @@
 class BottomViewportController final : public BaseViewportController
 {
 public:
-	BottomViewportController(EngineInterface& fe3d, GuiManager& gui, TopViewportController& topViewportController, ScriptEditor& scriptEditor);
+	void inject(shared_ptr<ScriptExecutor> scriptExecutor);
+	void inject(shared_ptr<ScriptEditor> scriptEditor);
 
 	void initialize() override;
 	void update() override;
@@ -31,6 +32,6 @@ private:
 	static inline const unsigned int TIME_PART_LENGTH = 10;
 	static inline const unsigned int SEPARATOR_PART_LENGTH = 3;
 
-	TopViewportController& _topViewportController;
-	ScriptEditor& _scriptEditor;
+	shared_ptr<ScriptExecutor> _scriptExecutor;
+	shared_ptr<ScriptEditor> _scriptEditor;
 };

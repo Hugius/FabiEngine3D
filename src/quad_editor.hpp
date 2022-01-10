@@ -1,13 +1,10 @@
 #pragma once
 
-#include "engine_interface.hpp"
-#include "gui_manager.hpp"
+#include "base_editor.hpp"
 
-class QuadEditor final
+class QuadEditor final : public BaseEditor
 {
 public:
-	QuadEditor(EngineInterface& fe3d, GuiManager& gui);
-
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void update();
@@ -45,7 +42,4 @@ private:
 	bool _isChoosingQuad = false;
 	bool _isDeletingQuad = false;
 	bool _isEditorLoaded = false;
-
-	EngineInterface& _fe3d;
-	GuiManager& _gui;
 };

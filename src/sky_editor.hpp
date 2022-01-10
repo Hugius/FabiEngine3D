@@ -1,24 +1,21 @@
 #pragma once
 
-#include "engine_interface.hpp"
-#include "gui_manager.hpp"
+#include "base_editor.hpp"
 
-class SkyEditor final
+class SkyEditor final : public BaseEditor
 {
 public:
-	SkyEditor(EngineInterface& fe3d, GuiManager& gui);
-
-	void setCurrentProjectID(const string& projectID);
-	void load();
-	void update();
-	void unload();
+	void setCurrentProjectID(const string& projectID) override;
+	void load() override;
+	void update() override;
+	void unload() override;
 
 	const vector<string> getImagePathsFromFile() const;
 	const vector<string>& getLoadedIDs();
 
 	const bool loadFromFile();
 	const bool saveToFile() const;
-	const bool isLoaded() const;
+	const bool isLoaded() const override;
 
 private:
 	void _loadGUI();
@@ -45,7 +42,4 @@ private:
 	bool _isChoosingSky = false;
 	bool _isDeletingSky = false;
 	bool _isEditorLoaded = false;
-
-	EngineInterface& _fe3d;
-	GuiManager& _gui;
 };

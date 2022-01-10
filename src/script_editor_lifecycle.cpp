@@ -7,38 +7,6 @@
 using VPC = BaseViewportController;
 using LVPC = LeftViewportController;
 
-ScriptEditor::ScriptEditor(EngineInterface& fe3d,
-						   GuiManager& gui,
-						   SkyEditor& skyEditor,
-						   TerrainEditor& terrainEditor,
-						   WaterEditor& waterEditor,
-						   ModelEditor& modelEditor,
-						   BillboardEditor& billboardEditor,
-						   QuadEditor& quadEditor,
-						   Animation2dEditor& animation2dEditor,
-						   Animation3dEditor& animation3dEditor,
-						   SoundEditor& soundEditor,
-						   WorldEditor& worldEditor)
-	:
-	_fe3d(fe3d),
-	_gui(gui),
-	_script(fe3d),
-	_scriptExecutor(fe3d,
-					_script,
-					skyEditor,
-					terrainEditor,
-					waterEditor,
-					modelEditor,
-					billboardEditor,
-					quadEditor,
-					animation2dEditor,
-					animation3dEditor,
-					soundEditor,
-					worldEditor)
-{
-
-}
-
 void ScriptEditor::load()
 {
 	_loadGUI();

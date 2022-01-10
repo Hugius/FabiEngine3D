@@ -1,7 +1,6 @@
 #pragma once
 
-#include "engine_interface.hpp"
-#include "gui_manager.hpp"
+#include "base_editor.hpp"
 #include "sky_editor.hpp"
 #include "terrain_editor.hpp"
 #include "water_editor.hpp"
@@ -17,19 +16,17 @@
 
 using std::numeric_limits;
 
-class WorldEditor final
+class WorldEditor final : public BaseEditor
 {
 public:
-	WorldEditor(EngineInterface& fe3d,
-				GuiManager& gui,
-				SkyEditor& skyEditor,
-				TerrainEditor& terrainEditor,
-				WaterEditor& waterEditor,
-				ModelEditor& modelEditor,
-				BillboardEditor& billboardEditor,
-				Animation2dEditor& animation2dEditor,
-				Animation3dEditor& animation3dEditor,
-				SoundEditor& soundEditor);
+	void inject(shared_ptr<SkyEditor> skyEditor);
+	void inject(shared_ptr<TerrainEditor> terrainEditor);
+	void inject(shared_ptr<WaterEditor> waterEditor);
+	void inject(shared_ptr<ModelEditor> modelEditor);
+	void inject(shared_ptr<BillboardEditor> billboardEditor);
+	void inject(shared_ptr<Animation2dEditor> animation2dEditor);
+	void inject(shared_ptr<Animation3dEditor> animation3dEditor);
+	void inject(shared_ptr<SoundEditor> soundEditor);
 
 	void setCurrentProjectID(const string& ID);
 	void load();
@@ -308,14 +305,12 @@ private:
 	bool _isDeletingWorld = false;
 	bool _isEditorLoaded = false;
 
-	EngineInterface& _fe3d;
-	GuiManager& _gui;
-	SkyEditor& _skyEditor;
-	TerrainEditor& _terrainEditor;
-	WaterEditor& _waterEditor;
-	ModelEditor& _modelEditor;
-	BillboardEditor& _billboardEditor;
-	Animation2dEditor& _animation2dEditor;
-	Animation3dEditor& _animation3dEditor;
-	SoundEditor& _soundEditor;
+	shared_ptr<SkyEditor> _skyEditor;
+	shared_ptr<TerrainEditor> _terrainEditor;
+	shared_ptr<WaterEditor> _waterEditor;
+	shared_ptr<ModelEditor> _modelEditor;
+	shared_ptr<BillboardEditor> _billboardEditor;
+	shared_ptr<Animation2dEditor> _animation2dEditor;
+	shared_ptr<Animation3dEditor> _animation3dEditor;
+	shared_ptr<SoundEditor> _soundEditor;
 };

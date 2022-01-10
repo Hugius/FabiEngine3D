@@ -1,13 +1,10 @@
 #pragma once
 
-#include "engine_interface.hpp"
-#include "gui_manager.hpp"
+#include "base_editor.hpp"
 
-class TerrainEditor final
+class TerrainEditor final : public BaseEditor
 {
 public:
-	TerrainEditor(EngineInterface& fe3d, GuiManager& gui);
-
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void update();
@@ -57,7 +54,4 @@ private:
 	bool _isChoosingTerrain = false;
 	bool _isDeletingTerrain = false;
 	bool _isEditorLoaded = false;
-
-	EngineInterface& _fe3d;
-	GuiManager& _gui;
 };

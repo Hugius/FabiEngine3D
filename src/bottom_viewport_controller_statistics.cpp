@@ -206,7 +206,7 @@ void BottomViewportController::_updateStatistics()
 
 	if(_fe3d->input_isKeyPressed(InputType::KEY_C) && _gui->getViewport("bottom")->getWindow("console")->isHovered())
 	{
-		if(!_topViewportController.isScriptRunning() && !_gui->getOverlay()->isFocused() && !_scriptEditor->isWritingScript())
+		if(!_scriptExecutor->isRunning() && !_gui->getOverlay()->isFocused() && !_scriptEditor->isWritingScript())
 		{
 			Logger::clearMessageQueue();
 			for(const auto& [key, message] : _consoleMessageQueue)

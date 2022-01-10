@@ -1,14 +1,11 @@
 #pragma once
 
-#include "engine_interface.hpp"
-#include "gui_manager.hpp"
+#include "base_editor.hpp"
 #include "animation2d.hpp"
 
-class Animation2dEditor final
+class Animation2dEditor final : public BaseEditor
 {
 public:
-	Animation2dEditor(EngineInterface& fe3d, GuiManager& gui);
-
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
@@ -98,6 +95,4 @@ private:
 	map<pair<string, string>, Animation2d> _startedBillboardAnimations;
 	map<pair<string, string>, Animation2d> _startedQuadAnimations;
 	vector<shared_ptr<Animation2d>> _animations;
-	EngineInterface& _fe3d;
-	GuiManager& _gui;
 };

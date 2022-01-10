@@ -233,3 +233,43 @@ void WorldEditor::_handleValueChanging(const string& screenID, string buttonID, 
 		writeField->changeTextContent(to_string(static_cast<int>(value * multiplier)));
 	}
 }
+
+void WorldEditor::inject(shared_ptr<SkyEditor> skyEditor)
+{
+	_skyEditor = skyEditor;
+}
+
+void WorldEditor::inject(shared_ptr<TerrainEditor> terrainEditor)
+{
+	_terrainEditor = terrainEditor;
+}
+
+void WorldEditor::inject(shared_ptr<WaterEditor> waterEditor)
+{
+	_waterEditor = waterEditor;
+}
+
+void WorldEditor::inject(shared_ptr<ModelEditor> modelEditor)
+{
+	_modelEditor = modelEditor;
+}
+
+void WorldEditor::inject(shared_ptr<BillboardEditor> billboardEditor)
+{
+	_billboardEditor = billboardEditor;
+}
+
+void WorldEditor::inject(shared_ptr<Animation2dEditor> animation2dEditor)
+{
+	_animation2dEditor = animation2dEditor;
+}
+
+void WorldEditor::inject(shared_ptr<Animation3dEditor> animation3dEditor)
+{
+	_animation3dEditor = animation3dEditor;
+}
+
+void WorldEditor::inject(shared_ptr<SoundEditor> soundEditor)
+{
+	_soundEditor = soundEditor;
+}

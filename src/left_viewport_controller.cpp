@@ -4,22 +4,53 @@
 
 using LVPC = LeftViewportController;
 
-LeftViewportController::LeftViewportController(EngineInterface& fe3d, GuiManager& gui)
-	:
-	BaseViewportController(fe3d, gui),
-	_skyEditor(fe3d, gui),
-	_terrainEditor(fe3d, gui),
-	_waterEditor(fe3d, gui),
-	_modelEditor(fe3d, gui),
-	_billboardEditor(fe3d, gui),
-	_quadEditor(fe3d, gui),
-	_animation2dEditor(fe3d, gui),
-	_animation3dEditor(fe3d, gui, _modelEditor),
-	_soundEditor(fe3d, gui),
-	_worldEditor(fe3d, gui, _skyEditor, _terrainEditor, _waterEditor, _modelEditor, _billboardEditor, _animation2dEditor, _animation3dEditor, _soundEditor),
-	_scriptEditor(fe3d, gui, _skyEditor, _terrainEditor, _waterEditor, _modelEditor, _billboardEditor, _quadEditor, _animation2dEditor, _animation3dEditor, _soundEditor, _worldEditor)
+LeftViewportController::LeftViewportController()
 {
+	_skyEditor = make_shared<SkyEditor>();
+	_terrainEditor = make_shared<TerrainEditor>();
+	_waterEditor = make_shared<WaterEditor>();
+	_modelEditor = make_shared<ModelEditor>();
+	_billboardEditor = make_shared<BillboardEditor>();
+	_quadEditor = make_shared<QuadEditor>();
+	_animation2dEditor = make_shared<Animation2dEditor>();
+	_animation3dEditor = make_shared<Animation3dEditor>();
+	_soundEditor = make_shared<SoundEditor>();
+	_worldEditor = make_shared<WorldEditor>();
+	_scriptEditor = make_shared<ScriptEditor>();
+}
 
+void LeftViewportController::inject(shared_ptr<EngineInterface> fe3d)
+{
+	_skyEditor->inject(fe3d);
+	_terrainEditor->inject(fe3d);
+	_waterEditor->inject(fe3d);
+	_modelEditor->inject(fe3d);
+	_billboardEditor->inject(fe3d);
+	_quadEditor->inject(fe3d);
+	_animation2dEditor->inject(fe3d);
+	_animation3dEditor->inject(fe3d);
+	_soundEditor->inject(fe3d);
+	_worldEditor->inject(fe3d);
+	_scriptEditor->inject(fe3d);
+
+	_fe3d = fe3d;
+}
+
+void LeftViewportController::inject(shared_ptr<GuiManager> gui)
+{
+	_skyEditor->inject(gui);
+	_terrainEditor->inject(gui);
+	_waterEditor->inject(gui);
+	_modelEditor->inject(gui);
+	_billboardEditor->inject(gui);
+	_quadEditor->inject(gui);
+	_animation2dEditor->inject(gui);
+	_animation3dEditor->inject(gui);
+	_soundEditor->inject(gui);
+	_worldEditor->inject(gui);
+	_scriptEditor->inject(gui);
+
+	_gui = gui;
 }
 
 void LeftViewportController::initialize()

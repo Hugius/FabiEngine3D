@@ -3,18 +3,18 @@
 #include "engine_interface.hpp"
 #include "gui_manager.hpp"
 
-class BaseViewportController
+class BaseEditor
 {
 public:
 	virtual void inject(shared_ptr<EngineInterface> fe3d);
 	virtual void inject(shared_ptr<GuiManager> gui);
 
-	virtual void initialize() = 0;
+	virtual void setCurrentProjectID(const string& projectID) = 0;
+	virtual void load() = 0;
 	virtual void update() = 0;
+	virtual void unload() = 0;
 
-	static const vector<float> calculateButtonPositions(unsigned int buttonCount, float buttonHeight);
-
-	static const float calculateTextWidth(const string& text, float charWidth);
+	virtual const bool isLoaded() const = 0;
 
 protected:
 	shared_ptr<EngineInterface> _fe3d = nullptr;

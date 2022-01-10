@@ -1,13 +1,10 @@
 #pragma once
 
-#include "engine_interface.hpp"
-#include "gui_manager.hpp"
+#include "base_editor.hpp"
 
-class WaterEditor final
+class WaterEditor final : public BaseEditor
 {
 public:
-	WaterEditor(EngineInterface& fe3d, GuiManager& gui);
-
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void update();
@@ -55,7 +52,4 @@ private:
 	bool _isChoosingWater = false;
 	bool _isDeletingWater = false;
 	bool _isEditorLoaded = false;
-
-	EngineInterface& _fe3d;
-	GuiManager& _gui;
 };

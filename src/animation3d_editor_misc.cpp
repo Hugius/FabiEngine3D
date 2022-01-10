@@ -1,6 +1,11 @@
 #include "animation3d_editor.hpp"
 #include "logger.hpp"
 
+void Animation3dEditor::inject(shared_ptr<ModelEditor> modelEditor)
+{
+	_modelEditor = modelEditor;
+}
+
 void Animation3dEditor::setCurrentProjectID(const string& projectID)
 {
 	_currentProjectID = projectID;

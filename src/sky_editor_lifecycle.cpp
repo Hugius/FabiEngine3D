@@ -7,14 +7,6 @@
 using VPC = BaseViewportController;
 using LVPC = LeftViewportController;
 
-SkyEditor::SkyEditor(EngineInterface& fe3d, GuiManager& gui)
-	:
-	_fe3d(fe3d),
-	_gui(gui)
-{
-
-}
-
 void SkyEditor::load()
 {
 	_loadGUI();

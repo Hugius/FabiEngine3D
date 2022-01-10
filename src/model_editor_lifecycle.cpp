@@ -13,14 +13,6 @@ using std::numeric_limits;
 using VPC = BaseViewportController;
 using LVPC = LeftViewportController;
 
-ModelEditor::ModelEditor(EngineInterface& fe3d, GuiManager& gui)
-	:
-	_fe3d(fe3d),
-	_gui(gui)
-{
-
-}
-
 void ModelEditor::load()
 {
 	_loadGUI();

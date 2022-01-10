@@ -9,13 +9,13 @@ void WorldEditor::_updateBillboardPlacing()
 		{
 			auto newPosition = _fe3d->billboard_getPosition(_currentTemplateBillboardID);
 
-			_gui.getOverlay()->checkValueForm("positionX", newPosition.x, {});
-			_gui.getOverlay()->checkValueForm("positionY", newPosition.y, {});
-			_gui.getOverlay()->checkValueForm("positionZ", newPosition.z, {});
+			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
+			_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
+			_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
 
 			_fe3d->billboard_setPosition(_currentTemplateBillboardID, newPosition);
 
-			if(_gui.getOverlay()->isValueFormConfirmed())
+			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
 				BEGIN1:;
 				int randomSerial = Math::getRandomNumber(0, INT_MAX);
@@ -29,16 +29,16 @@ void WorldEditor::_updateBillboardPlacing()
 				_copyTemplateBillboard(newID, _currentTemplateBillboardID, newPosition, false);
 			}
 
-			if(_gui.getOverlay()->isValueFormConfirmed() || _gui.getOverlay()->isValueFormCancelled())
+			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
 			{
 				_fe3d->billboard_setVisible(_currentTemplateBillboardID, false);
-				_fe3d->text_setVisible(_gui.getOverlay()->getTextField("billboardID")->getEntityID(), false);
+				_fe3d->text_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), false);
 				_currentTemplateBillboardID = "";
 			}
 		}
 		else
 		{
-			if(_fe3d->misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
+			if(_fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused())
 			{
 				if(!_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
@@ -70,7 +70,7 @@ void WorldEditor::_updateBillboardPlacing()
 					else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE))
 					{
 						_fe3d->billboard_setVisible(_currentTemplateBillboardID, false);
-						_fe3d->text_setVisible(_gui.getOverlay()->getTextField("billboardID")->getEntityID(), false);
+						_fe3d->text_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), false);
 						_currentTemplateBillboardID = "";
 					}
 				}

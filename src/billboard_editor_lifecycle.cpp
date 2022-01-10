@@ -55,7 +55,7 @@ void BillboardEditor::load()
 	_fe3d->model_setTextureRepeat("@@grid", "", GRID_UV);
 	_fe3d->model_setShadowed("@@grid", false);
 
-	_gui.getOverlay()->createTextField("billboardID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
+	_gui->getOverlay()->createTextField("billboardID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
 
 	_isEditorLoaded = true;
 }
@@ -84,7 +84,7 @@ void BillboardEditor::unload()
 	_fe3d->model_delete("@@box");
 	_fe3d->model_delete("@@grid");
 
-	_gui.getOverlay()->deleteTextField("billboardID");
+	_gui->getOverlay()->deleteTextField("billboardID");
 
 	_loadedBillboardIDs.clear();
 	_hoveredBillboardID = "";
@@ -97,7 +97,7 @@ void BillboardEditor::unload()
 
 void BillboardEditor::_loadGUI()
 {
-	auto leftWindow = _gui.getViewport("left")->getWindow("main");
+	auto leftWindow = _gui->getViewport("left")->getWindow("main");
 
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("billboardEditorMenuMain");
@@ -141,11 +141,11 @@ void BillboardEditor::_loadGUI()
 
 void BillboardEditor::_unloadGUI()
 {
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuMain");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuChoice");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuTexturing");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuLighting");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuMiscellaneous");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuMain");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuChoice");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuTexturing");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuLighting");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuMiscellaneous");
 }
 
 void BillboardEditor::update()

@@ -10,13 +10,13 @@ void WorldEditor::_updateModelPlacing()
 		{
 			auto newPosition = _fe3d->model_getBasePosition(_currentTemplateModelID);
 
-			_gui.getOverlay()->checkValueForm("positionX", newPosition.x, {});
-			_gui.getOverlay()->checkValueForm("positionY", newPosition.y, {});
-			_gui.getOverlay()->checkValueForm("positionZ", newPosition.z, {});
+			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
+			_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
+			_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
 
 			_fe3d->model_setBasePosition(_currentTemplateModelID, newPosition);
 
-			if(_gui.getOverlay()->isValueFormConfirmed())
+			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
 				const string rawID = _currentTemplateModelID.substr(1);
 
@@ -31,16 +31,16 @@ void WorldEditor::_updateModelPlacing()
 				_copyTemplateModel(newID, _currentTemplateModelID, newPosition, false);
 			}
 
-			if(_gui.getOverlay()->isValueFormConfirmed() || _gui.getOverlay()->isValueFormCancelled())
+			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
 			{
 				_fe3d->model_setVisible(_currentTemplateModelID, false);
-				_fe3d->text_setVisible(_gui.getOverlay()->getTextField("modelID")->getEntityID(), false);
+				_fe3d->text_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), false);
 				_currentTemplateModelID = "";
 			}
 		}
 		else
 		{
-			if(_fe3d->misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
+			if(_fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused())
 			{
 				if(!_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
@@ -73,7 +73,7 @@ void WorldEditor::_updateModelPlacing()
 					else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE))
 					{
 						_fe3d->model_setVisible(_currentTemplateModelID, false);
-						_fe3d->text_setVisible(_gui.getOverlay()->getTextField("modelID")->getEntityID(), false);
+						_fe3d->text_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), false);
 						_currentTemplateModelID = "";
 					}
 				}

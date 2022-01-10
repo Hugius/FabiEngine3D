@@ -146,15 +146,15 @@ void ScriptInterpreter::load()
 
 	if(Config::getInst().isApplicationExported())
 	{
-		auto skyTexturePaths = _skyEditor.getImagePathsFromFile();
-		auto terrainImagePaths = _terrainEditor.getImagePathsFromFile();
-		auto terrainTexturePaths = _terrainEditor.getImagePathsFromFile();
-		auto waterTexturePaths = _waterEditor.getImagePathsFromFile();
-		auto modelMeshPaths = _modelEditor.getMeshPathsFromFile();
-		auto modelTexturePaths = _modelEditor.getImagePathsFromFile();
-		auto billboardTexturePaths = _billboardEditor.getImagePathsFromFile();
-		auto quadTexturePaths = _quadEditor.getImagePathsFromFile();
-		auto audioPaths = _soundEditor.getAudioPathsFromFile();
+		auto skyTexturePaths = _skyEditor->getImagePathsFromFile();
+		auto terrainImagePaths = _terrainEditor->getImagePathsFromFile();
+		auto terrainTexturePaths = _terrainEditor->getImagePathsFromFile();
+		auto waterTexturePaths = _waterEditor->getImagePathsFromFile();
+		auto modelMeshPaths = _modelEditor->getMeshPathsFromFile();
+		auto modelTexturePaths = _modelEditor->getImagePathsFromFile();
+		auto billboardTexturePaths = _billboardEditor->getImagePathsFromFile();
+		auto quadTexturePaths = _quadEditor->getImagePathsFromFile();
+		auto audioPaths = _soundEditor->getAudioPathsFromFile();
 
 		_fe3d->misc_cacheMeshes(modelMeshPaths);
 
@@ -174,22 +174,22 @@ void ScriptInterpreter::load()
 
 	_fe3d->sky_selectMainSky("");
 
-	_skyEditor.loadFromFile();
+	_skyEditor->loadFromFile();
 
-	_terrainEditor.loadFromFile();
+	_terrainEditor->loadFromFile();
 
-	_waterEditor.loadFromFile();
+	_waterEditor->loadFromFile();
 
-	_modelEditor.loadFromFile();
+	_modelEditor->loadFromFile();
 
-	_billboardEditor.loadFromFile();
+	_billboardEditor->loadFromFile();
 
-	_quadEditor.loadFromFile();
+	_quadEditor->loadFromFile();
 
-	_animation2dEditor.loadFromFile(false);
-	_animation3dEditor.loadFromFile(false);
+	_animation2dEditor->loadFromFile(false);
+	_animation3dEditor->loadFromFile(false);
 
-	_soundEditor.loadFromFile();
+	_soundEditor->loadFromFile();
 
 	_fe3d->camera_reset();
 
@@ -204,9 +204,9 @@ void ScriptInterpreter::load()
 
 void ScriptInterpreter::unload()
 {
-	_animation2dEditor.stopBillboardAnimations();
-	_animation2dEditor.stopQuadAnimations();
-	_animation3dEditor.stopModelAnimations();
+	_animation2dEditor->stopBillboardAnimations();
+	_animation2dEditor->stopQuadAnimations();
+	_animation3dEditor->stopModelAnimations();
 
 	_fe3d->sky_selectMainSky("");
 	_fe3d->sky_selectMixSky("");

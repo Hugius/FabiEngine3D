@@ -23,8 +23,8 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 
 			if(_validateFe3dBillboard(args[1].getString(), true))
 			{
-				_worldEditor.copyTemplateBillboard(args[0].getString(), ("@" + args[1].getString()),
-												   fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
+				_worldEditor->copyTemplateBillboard(args[0].getString(), ("@" + args[1].getString()),
+													fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

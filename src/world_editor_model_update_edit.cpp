@@ -2,7 +2,7 @@
 
 void WorldEditor::_updateModelEditing()
 {
-	auto rightWindow = _gui.getViewport("right")->getWindow("main");
+	auto rightWindow = _gui->getViewport("right")->getWindow("main");
 
 	if(_currentTemplateModelID.empty() && _currentTemplateBillboardID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
@@ -24,7 +24,7 @@ void WorldEditor::_updateModelEditing()
 				bool hovered = (hoveredID.size() >= ID.size()) && (hoveredID.substr(0, ID.size()) == ID);
 
 				if(hovered && _fe3d->misc_isCursorInsideViewport() &&
-				   !_gui.getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				   !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_selectModel(ID);
 
@@ -48,7 +48,7 @@ void WorldEditor::_updateModelEditing()
 
 		if(!_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			if(_fe3d->misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
+			if(_fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused())
 			{
 				if(!_activeModelID.empty())
 				{
@@ -99,7 +99,7 @@ void WorldEditor::_updateModelEditing()
 				}
 				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
 				{
-					_gui.getOverlay()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), _animation3dEditor.getAnimationIDs());
+					_gui->getOverlay()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), _animation3dEditor->getAnimationIDs());
 				}
 				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
@@ -110,13 +110,13 @@ void WorldEditor::_updateModelEditing()
 				}
 			}
 
-			auto lastAnimationID = _animation3dEditor.getStartedModelAnimationIDs(_activeModelID);
-			auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("animationList");
+			auto lastAnimationID = _animation3dEditor->getStartedModelAnimationIDs(_activeModelID);
+			auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("animationList");
 			if(!selectedButtonID.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				if(!lastAnimationID.empty())
 				{
-					_animation3dEditor.stopModelAnimation(lastAnimationID.back(), _activeModelID);
+					_animation3dEditor->stopModelAnimation(lastAnimationID.back(), _activeModelID);
 
 					_fe3d->model_setBasePosition(_activeModelID, _initialModelPosition[_activeModelID]);
 					_fe3d->model_setBaseRotationOrigin(_activeModelID, fvec3(0.0f));
@@ -135,13 +135,13 @@ void WorldEditor::_updateModelEditing()
 					}
 				}
 
-				_animation3dEditor.startModelAnimation(selectedButtonID, _activeModelID, -1);
+				_animation3dEditor->startModelAnimation(selectedButtonID, _activeModelID, -1);
 
-				_gui.getOverlay()->deleteChoiceForm("animationList");
+				_gui->getOverlay()->deleteChoiceForm("animationList");
 			}
-			else if(_gui.getOverlay()->isChoiceFormCancelled("animationList"))
+			else if(_gui->getOverlay()->isChoiceFormCancelled("animationList"))
 			{
-				_gui.getOverlay()->deleteChoiceForm("animationList");
+				_gui->getOverlay()->deleteChoiceForm("animationList");
 			}
 
 			if(_fe3d->input_isKeyPressed(InputType::KEY_DELETE))
@@ -189,10 +189,10 @@ void WorldEditor::_updateModelEditing()
 
 			if((position != oldPosition) || (rotation != oldRotation) || (size != oldSize))
 			{
-				auto animationIDs = _animation3dEditor.getStartedModelAnimationIDs(_activeModelID);
+				auto animationIDs = _animation3dEditor->getStartedModelAnimationIDs(_activeModelID);
 				if(!animationIDs.empty())
 				{
-					_animation3dEditor.stopModelAnimation(animationIDs[0], _activeModelID);
+					_animation3dEditor->stopModelAnimation(animationIDs[0], _activeModelID);
 
 					if(position != oldPosition)
 					{
@@ -225,7 +225,7 @@ void WorldEditor::_updateModelEditing()
 						}
 					}
 
-					_animation3dEditor.startModelAnimation(animationIDs[0], _activeModelID, -1);
+					_animation3dEditor->startModelAnimation(animationIDs[0], _activeModelID, -1);
 				}
 				else
 				{
@@ -245,7 +245,7 @@ void WorldEditor::_updateModelEditing()
 
 		if(_selectedModelID.empty() && _activeModelID.empty())
 		{
-			_fe3d->text_setVisible(_gui.getOverlay()->getTextField("modelID")->getEntityID(), false);
+			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), false);
 		}
 	}
 }

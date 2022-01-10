@@ -8,13 +8,13 @@ void WorldEditor::_updateSpotlightPlacing()
 		if(_fe3d->terrain_getSelectedID().empty())
 		{
 			auto newPosition = _fe3d->spotlight_getPosition(TEMPLATE_TORCH_ID);
-			_gui.getOverlay()->checkValueForm("positionX", newPosition.x, {});
-			_gui.getOverlay()->checkValueForm("positionY", newPosition.y, {});
-			_gui.getOverlay()->checkValueForm("positionZ", newPosition.z, {});
+			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
+			_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
+			_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
 			_fe3d->spotlight_setPosition(TEMPLATE_TORCH_ID, newPosition);
 			_fe3d->model_setBasePosition(TEMPLATE_TORCH_ID, newPosition);
 
-			if(_gui.getOverlay()->isValueFormConfirmed())
+			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
 				BEGIN1:;
 				const string newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
@@ -51,7 +51,7 @@ void WorldEditor::_updateSpotlightPlacing()
 				}
 			}
 
-			if(_gui.getOverlay()->isValueFormConfirmed() || _gui.getOverlay()->isValueFormCancelled())
+			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
 			{
 				_fe3d->spotlight_setVisible(TEMPLATE_TORCH_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_TORCH_ID, false);
@@ -60,7 +60,7 @@ void WorldEditor::_updateSpotlightPlacing()
 		}
 		else
 		{
-			if(!_fe3d->misc_isCursorInsideViewport() || _gui.getOverlay()->isFocused())
+			if(!_fe3d->misc_isCursorInsideViewport() || _gui->getOverlay()->isFocused())
 			{
 				_fe3d->spotlight_setVisible(TEMPLATE_TORCH_ID, false);
 				_fe3d->model_setVisible(TEMPLATE_TORCH_ID, false);

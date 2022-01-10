@@ -66,10 +66,10 @@ void WorldEditor::unloadEditorWorld()
 	{
 		_fe3d->model_delete(key);
 
-		auto animationID = _animation3dEditor.getStartedModelAnimationIDs(key);
+		auto animationID = _animation3dEditor->getStartedModelAnimationIDs(key);
 		if(!animationID.empty())
 		{
-			_animation3dEditor.stopModelAnimation(animationID.back(), key);
+			_animation3dEditor->stopModelAnimation(animationID.back(), key);
 		}
 	}
 
@@ -77,10 +77,10 @@ void WorldEditor::unloadEditorWorld()
 	{
 		_fe3d->billboard_delete(key);
 
-		auto animationID = _animation2dEditor.getStartedBillboardAnimationIDs(key);
+		auto animationID = _animation2dEditor->getStartedBillboardAnimationIDs(key);
 		if(!animationID.empty())
 		{
-			_animation2dEditor.stopBillboardAnimation(animationID.back(), key);
+			_animation2dEditor->stopBillboardAnimation(animationID.back(), key);
 		}
 	}
 
@@ -199,11 +199,11 @@ void WorldEditor::_deleteWorldFile(const string& ID)
 void WorldEditor::_handleValueChanging(const string& screenID, string buttonID, string writeFieldID, float& value, float adder,
 									   float multiplier, float minimum, float maximum)
 {
-	auto writeField = _gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWriteField(writeFieldID);
+	auto writeField = _gui->getViewport("right")->getWindow("main")->getScreen(screenID)->getWriteField(writeFieldID);
 
 	if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
 	{
-		if(_gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getButton(buttonID)->isHovered())
+		if(_gui->getViewport("right")->getWindow("main")->getScreen(screenID)->getButton(buttonID)->isHovered())
 		{
 			value += adder;
 		}

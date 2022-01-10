@@ -5,7 +5,7 @@ void WorldEditor::_updateCamera()
 {
 	if(!_currentWorldID.empty())
 	{
-		if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getOverlay()->isFocused())
+		if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui->getOverlay()->isFocused())
 		{
 			if(_fe3d->misc_isCursorInsideViewport() && !_fe3d->camera_isFirstPersonViewEnabled())
 			{
@@ -30,7 +30,7 @@ void WorldEditor::_updateCamera()
 			}
 		}
 
-		if(!_gui.getOverlay()->isFocused())
+		if(!_gui->getOverlay()->isFocused())
 		{
 			if(_fe3d->input_isKeyDown(InputType::KEY_A))
 			{
@@ -69,7 +69,7 @@ void WorldEditor::_updateCamera()
 
 void WorldEditor::_updateMiscellaneous()
 {
-	if(!_gui.getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
+	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
 	{
 		if(_fe3d->input_isKeyPressed(InputType::KEY_B))
 		{
@@ -114,7 +114,7 @@ void WorldEditor::_updateWorldCreating()
 	{
 		string newWorldID;
 
-		if(_gui.getOverlay()->checkValueForm("worldCreate", newWorldID, {}))
+		if(_gui->getOverlay()->checkValueForm("worldCreate", newWorldID, {}))
 		{
 			if(newWorldID.find(' ') != string::npos)
 			{
@@ -137,7 +137,7 @@ void WorldEditor::_updateWorldCreating()
 			}
 
 			_currentWorldID = newWorldID;
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 		}
 	}
 }
@@ -147,7 +147,7 @@ void WorldEditor::_updateWorldChoosing()
 	if(_isChoosingWorld)
 	{
 		std::cout << "hoi";
-		auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("worldList");
+		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("worldList");
 
 		if(!selectedButtonID.empty())
 		{
@@ -159,17 +159,17 @@ void WorldEditor::_updateWorldChoosing()
 				{
 					if(loadEditorWorldFromFile(_currentWorldID))
 					{
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
+						_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 					}
 				}
 
-				_gui.getOverlay()->deleteChoiceForm("worldList");
+				_gui->getOverlay()->deleteChoiceForm("worldList");
 				_isChoosingWorld = false;
 			}
 		}
-		else if(_gui.getOverlay()->isChoiceFormCancelled("worldList"))
+		else if(_gui->getOverlay()->isChoiceFormCancelled("worldList"))
 		{
-			_gui.getOverlay()->deleteChoiceForm("worldList");
+			_gui->getOverlay()->deleteChoiceForm("worldList");
 			_isChoosingWorld = false;
 			_isDeletingWorld = false;
 		}
@@ -180,18 +180,18 @@ void WorldEditor::_updateWorldDeleting()
 {
 	if(_isDeletingWorld && !_currentWorldID.empty())
 	{
-		if(!_gui.getOverlay()->isAnswerFormExisting("delete"))
+		if(!_gui->getOverlay()->isAnswerFormExisting("delete"))
 		{
-			_gui.getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
-		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
+		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
 			_deleteWorldFile(_currentWorldID);
 			_currentWorldID = "";
 			_isDeletingWorld = false;
 		}
-		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
+		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
 		{
 			_currentWorldID = "";
 			_isDeletingWorld = false;

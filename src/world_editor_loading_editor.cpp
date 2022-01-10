@@ -168,7 +168,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 				if(!animationID.empty())
 				{
-					_animation3dEditor.startModelAnimation(animationID, modelID, -1);
+					_animation3dEditor->startModelAnimation(animationID, modelID, -1);
 				}
 
 				if(makeInvisible)
@@ -207,7 +207,7 @@ const bool WorldEditor::loadEditorWorldFromFile(const string& fileName)
 
 				if(!animationID.empty())
 				{
-					_animation2dEditor.startBillboardAnimation(animationID, billboardID, -1);
+					_animation2dEditor->startBillboardAnimation(animationID, billboardID, -1);
 				}
 			}
 		}

@@ -26,7 +26,7 @@ void SkyEditor::load()
 	_fe3d->gfx_setMotionBlurStrength(0.1f);
 	_fe3d->gfx_setMotionBlurQuality(Config::MAX_MOTION_BLUR_QUALITY);
 
-	_gui.getOverlay()->createTextField("skyID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
+	_gui->getOverlay()->createTextField("skyID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
 
 	_isEditorLoaded = true;
 }
@@ -42,7 +42,7 @@ void SkyEditor::unload()
 
 	_fe3d->gfx_disableMotionBlur(true);
 
-	_gui.getOverlay()->deleteTextField("skyID");
+	_gui->getOverlay()->deleteTextField("skyID");
 
 	_loadedSkyIDs.clear();
 	_currentSkyID = "";
@@ -59,7 +59,7 @@ void SkyEditor::unload()
 
 void SkyEditor::_loadGUI()
 {
-	auto leftWindow = _gui.getViewport("left")->getWindow("main");
+	auto leftWindow = _gui->getViewport("left")->getWindow("main");
 
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("skyEditorMenuMain");
@@ -95,10 +95,10 @@ void SkyEditor::_loadGUI()
 
 void SkyEditor::_unloadGUI()
 {
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("skyEditorMenuMain");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("skyEditorMenuChoice");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("skyEditorMenuTexturing");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("skyEditorMenuMiscellaneous");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("skyEditorMenuMain");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("skyEditorMenuChoice");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("skyEditorMenuTexturing");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("skyEditorMenuMiscellaneous");
 }
 
 void SkyEditor::update()

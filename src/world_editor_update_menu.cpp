@@ -5,33 +5,33 @@
 
 void WorldEditor::_updateMainMenu()
 {
-	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "worldEditorMenuMain")
 	{
-		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			unload();
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui.getOverlay()->createValueForm("worldCreate", "Create World", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("worldCreate", "Create World", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isCreatingWorld = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto IDs = _getWorldIDs();
 			sort(IDs.begin(), IDs.end());
-			_gui.getOverlay()->createChoiceForm("worldList", "Edit World", fvec2(0.0f, 0.1f), IDs);
+			_gui->getOverlay()->createChoiceForm("worldList", "Edit World", fvec2(0.0f, 0.1f), IDs);
 			_isChoosingWorld = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto IDs = _getWorldIDs();
 			sort(IDs.begin(), IDs.end());
-			_gui.getOverlay()->createChoiceForm("worldList", "Delete World", fvec2(0.0f, 0.1f), IDs);
+			_gui->getOverlay()->createChoiceForm("worldList", "Delete World", fvec2(0.0f, 0.1f), IDs);
 			_isChoosingWorld = true;
 			_isDeletingWorld = true;
 		}
@@ -40,57 +40,57 @@ void WorldEditor::_updateMainMenu()
 
 void WorldEditor::_updateChoiceMenu()
 {
-	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "worldEditorMenuChoice")
 	{
-		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui.getOverlay()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("sky")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSky");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSky");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("terrain")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuTerrain");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuTerrain");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("water")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuWater");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuWater");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("models")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuModel");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuModel");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("billboards")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuBillboard");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuBillboard");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("sounds")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSound");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSound");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("pointlights")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuPointlight");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuPointlight");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("spotlights")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSpotlight");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSpotlight");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflections")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuReflection");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuReflection");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("settings")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettings");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettings");
 		}
 
-		if(_gui.getOverlay()->isAnswerFormConfirmed("back"))
+		if(_gui->getOverlay()->isAnswerFormConfirmed("back"))
 		{
 			_currentTemplateModelID = "";
 			_currentTemplateBillboardID = "";
@@ -110,10 +110,10 @@ void WorldEditor::_updateChoiceMenu()
 			_currentTerrainID = "";
 			_currentWaterID = "";
 
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuMain");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuMain");
 			return;
 		}
-		if(_gui.getOverlay()->isAnswerFormDenied("back"))
+		if(_gui->getOverlay()->isAnswerFormDenied("back"))
 		{
 			_currentTemplateModelID = "";
 			_currentTemplateBillboardID = "";
@@ -131,7 +131,7 @@ void WorldEditor::_updateChoiceMenu()
 			_currentTerrainID = "";
 			_currentWaterID = "";
 
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuMain");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuMain");
 			return;
 		}
 	}

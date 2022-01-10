@@ -29,7 +29,7 @@ void SoundEditor::_updateSoundCreating()
 	{
 		string newSoundID;
 
-		if(_gui.getOverlay()->checkValueForm("soundCreate", newSoundID, {_currentSoundID}))
+		if(_gui->getOverlay()->checkValueForm("soundCreate", newSoundID, {_currentSoundID}))
 		{
 			if(newSoundID.find(' ') != string::npos)
 			{
@@ -87,13 +87,13 @@ void SoundEditor::_updateSoundCreating()
 
 			if(_fe3d->sound2d_isExisting(newSoundID))
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
+				_gui->getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
 
 				_currentSoundID = newSoundID;
 				_loadedSoundIDs.push_back(newSoundID);
 
-				_fe3d->text_setContent(_gui.getOverlay()->getTextField("soundID")->getEntityID(), "Sound: " + newSoundID.substr(1), 0.025f);
-				_fe3d->text_setVisible(_gui.getOverlay()->getTextField("soundID")->getEntityID(), true);
+				_fe3d->text_setContent(_gui->getOverlay()->getTextField("soundID")->getEntityID(), "Sound: " + newSoundID.substr(1), 0.025f);
+				_fe3d->text_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityID(), true);
 				_isCreatingSound = false;
 			}
 		}
@@ -104,7 +104,7 @@ void SoundEditor::_updateSoundChoosing()
 {
 	if(_isChoosingSound)
 	{
-		auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("soundList");
+		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("soundList");
 
 		if(!selectedButtonID.empty())
 		{
@@ -114,19 +114,19 @@ void SoundEditor::_updateSoundChoosing()
 
 				if(!_isDeletingSound)
 				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
+					_gui->getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
 
-					_fe3d->text_setContent(_gui.getOverlay()->getTextField("soundID")->getEntityID(), "Sound: " + selectedButtonID.substr(1), 0.025f);
-					_fe3d->text_setVisible(_gui.getOverlay()->getTextField("soundID")->getEntityID(), true);
+					_fe3d->text_setContent(_gui->getOverlay()->getTextField("soundID")->getEntityID(), "Sound: " + selectedButtonID.substr(1), 0.025f);
+					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityID(), true);
 				}
 
-				_gui.getOverlay()->deleteChoiceForm("soundList");
+				_gui->getOverlay()->deleteChoiceForm("soundList");
 				_isChoosingSound = false;
 			}
 		}
-		else if(_gui.getOverlay()->isChoiceFormCancelled("soundList"))
+		else if(_gui->getOverlay()->isChoiceFormCancelled("soundList"))
 		{
-			_gui.getOverlay()->deleteChoiceForm("soundList");
+			_gui->getOverlay()->deleteChoiceForm("soundList");
 			_isChoosingSound = false;
 			_isDeletingSound = false;
 		}
@@ -137,12 +137,12 @@ void SoundEditor::_updateSoundDeleting()
 {
 	if(_isDeletingSound && !_currentSoundID.empty())
 	{
-		if(!_gui.getOverlay()->isAnswerFormExisting("delete"))
+		if(!_gui->getOverlay()->isAnswerFormExisting("delete"))
 		{
-			_gui.getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
-		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
+		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
 			_fe3d->sound2d_delete(_currentSoundID);
 
@@ -150,7 +150,7 @@ void SoundEditor::_updateSoundDeleting()
 			_currentSoundID = "";
 			_isDeletingSound = false;
 		}
-		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
+		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
 		{
 			_currentSoundID = "";
 			_isDeletingSound = false;

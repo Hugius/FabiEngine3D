@@ -4,7 +4,7 @@
 
 void BillboardEditor::_updateTexturingMenu()
 {
-	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "billboardEditorMenuTexturing")
 	{
@@ -14,9 +14,9 @@ void BillboardEditor::_updateTexturingMenu()
 		auto hasEmissionMap = _fe3d->billboard_hasEmissionMap(_currentBillboardID);
 		auto textureRepeat = _fe3d->billboard_getTextureRepeat(_currentBillboardID);
 
-		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("font")->isHovered())
@@ -58,7 +58,7 @@ void BillboardEditor::_updateTexturingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textContent")->isHovered())
 		{
-			_gui.getOverlay()->createValueForm("textContent", "Text content", textContent, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("textContent", "Text content", textContent, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
@@ -133,14 +133,14 @@ void BillboardEditor::_updateTexturingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
-			_gui.getOverlay()->createValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
-		if(_gui.getOverlay()->checkValueForm("textContent", textContent, {}))
+		if(_gui->getOverlay()->checkValueForm("textContent", textContent, {}))
 		{
 			_fe3d->billboard_setTextContent(_currentBillboardID, textContent);
 		}
-		if(_gui.getOverlay()->checkValueForm("textureRepeat", textureRepeat, {}))
+		if(_gui->getOverlay()->checkValueForm("textureRepeat", textureRepeat, {}))
 		{
 			_fe3d->billboard_setTextureRepeat(_currentBillboardID, textureRepeat);
 		}

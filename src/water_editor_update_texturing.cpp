@@ -4,7 +4,7 @@
 
 void WaterEditor::_updateTexturingMenu()
 {
-	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "waterEditorMenuTexturing")
 	{
@@ -13,9 +13,9 @@ void WaterEditor::_updateTexturingMenu()
 		auto hasDisplacementMap = _fe3d->water_hasDisplacementMap(_currentWaterID);
 		auto textureRepeat = _fe3d->water_getTextureRepeat(_currentWaterID);
 
-		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("dudvMap")->isHovered())
@@ -125,10 +125,10 @@ void WaterEditor::_updateTexturingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
-			_gui.getOverlay()->createValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
-		if(_gui.getOverlay()->checkValueForm("textureRepeat", textureRepeat))
+		if(_gui->getOverlay()->checkValueForm("textureRepeat", textureRepeat))
 		{
 			_fe3d->water_setTextureRepeat(_currentWaterID, textureRepeat);
 		}

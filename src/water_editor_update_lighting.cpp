@@ -3,7 +3,7 @@
 
 void WaterEditor::_updateLightingMenu()
 {
-	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "waterEditorMenuLighting")
 	{
@@ -14,16 +14,16 @@ void WaterEditor::_updateLightingMenu()
 		auto specularShininess = _fe3d->water_getSpecularShininess(_currentWaterID);
 		auto specularIntensity = _fe3d->water_getSpecularIntensity(_currentWaterID);
 
-		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
-			_gui.getOverlay()->createValueForm("colorR", "R", (color.r * 255.0f), fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui.getOverlay()->createValueForm("colorG", "G", (color.g * 255.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui.getOverlay()->createValueForm("colorB", "B", (color.b * 255.0f), fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("colorR", "R", (color.r * 255.0f), fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("colorG", "G", (color.g * 255.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("colorB", "B", (color.b * 255.0f), fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isReflective")->isHovered())
 		{
@@ -42,33 +42,33 @@ void WaterEditor::_updateLightingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularShininess")->isHovered())
 		{
-			_gui.getOverlay()->createValueForm("specularShininess", "Specular Shininess", specularShininess, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("specularShininess", "Specular Shininess", specularShininess, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularIntensity")->isHovered())
 		{
-			_gui.getOverlay()->createValueForm("specularIntensity", "Specular Intensity", (specularIntensity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("specularIntensity", "Specular Intensity", (specularIntensity * 100.0f), fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
-		if(_gui.getOverlay()->checkValueForm("colorR", color.r))
+		if(_gui->getOverlay()->checkValueForm("colorR", color.r))
 		{
 			color.r /= 255.0f;
 			_fe3d->water_setColor(_currentWaterID, color);
 		}
-		if(_gui.getOverlay()->checkValueForm("colorG", color.g))
+		if(_gui->getOverlay()->checkValueForm("colorG", color.g))
 		{
 			color.g /= 255.0f;
 			_fe3d->water_setColor(_currentWaterID, color);
 		}
-		if(_gui.getOverlay()->checkValueForm("colorB", color.b))
+		if(_gui->getOverlay()->checkValueForm("colorB", color.b))
 		{
 			color.b /= 255.0f;
 			_fe3d->water_setColor(_currentWaterID, color);
 		}
-		if(_gui.getOverlay()->checkValueForm("specularShininess", specularShininess))
+		if(_gui->getOverlay()->checkValueForm("specularShininess", specularShininess))
 		{
 			_fe3d->water_setSpecularShininess(_currentWaterID, specularShininess);
 		}
-		if(_gui.getOverlay()->checkValueForm("specularIntensity", specularIntensity))
+		if(_gui->getOverlay()->checkValueForm("specularIntensity", specularIntensity))
 		{
 			specularIntensity /= 100.0f;
 			_fe3d->water_setSpecularIntensity(_currentWaterID, specularIntensity);

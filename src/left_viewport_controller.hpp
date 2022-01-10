@@ -19,17 +19,17 @@ public:
 	void initialize() override;
 	void update() override;
 
-	shared_ptr<SkyEditor> getSkyEditor();
-	shared_ptr<TerrainEditor> getTerrainEditor();
-	shared_ptr<WaterEditor> getWaterEditor();
-	shared_ptr<ModelEditor> getModelEditor();
-	shared_ptr<BillboardEditor> getBillboardEditor();
-	shared_ptr<QuadEditor> getQuadEditor();
-	shared_ptr<Animation2dEditor> getAnimation2dEditor();
-	shared_ptr<Animation3dEditor> getAnimation3dEditor();
-	shared_ptr<SoundEditor> getSoundEditor();
-	shared_ptr<WorldEditor> getWorldEditor();
-	shared_ptr<ScriptEditor> getScriptEditor();
+	const shared_ptr<SkyEditor> getSkyEditor() const;
+	const shared_ptr<TerrainEditor> getTerrainEditor() const;
+	const shared_ptr<WaterEditor> getWaterEditor() const;
+	const shared_ptr<ModelEditor> getModelEditor() const;
+	const shared_ptr<BillboardEditor> getBillboardEditor() const;
+	const shared_ptr<QuadEditor> getQuadEditor() const;
+	const shared_ptr<Animation2dEditor> getAnimation2dEditor() const;
+	const shared_ptr<Animation3dEditor> getAnimation3dEditor() const;
+	const shared_ptr<SoundEditor> getSoundEditor() const;
+	const shared_ptr<WorldEditor> getWorldEditor() const;
+	const shared_ptr<ScriptEditor> getScriptEditor() const;
 
 	static inline const fvec3 SCROLLING_LIST_COLOR = fvec3(0.25f);
 	static inline const fvec3 BUTTON_COLOR = fvec3(0.1f, 0.1f, 1.0f);

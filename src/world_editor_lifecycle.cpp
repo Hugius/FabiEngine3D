@@ -36,28 +36,28 @@ void WorldEditor::load()
 	_fe3d->gfx_enableAntiAliasing();
 	_fe3d->gfx_setAnisotropicFilteringQuality(Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
 
-	_skyEditor.loadFromFile();
+	_skyEditor->loadFromFile();
 
-	_terrainEditor.loadFromFile();
+	_terrainEditor->loadFromFile();
 
-	_waterEditor.loadFromFile();
+	_waterEditor->loadFromFile();
 
-	_modelEditor.loadFromFile();
-	for(const auto& ID : _modelEditor.getLoadedIDs())
+	_modelEditor->loadFromFile();
+	for(const auto& ID : _modelEditor->getLoadedIDs())
 	{
-		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuModelPlace");
+		auto screen = _gui->getViewport("left")->getWindow("main")->getScreen("worldEditorMenuModelPlace");
 		screen->getScrollingList("modelList")->createButton(ID, ID.substr(1));
 	}
 
-	_billboardEditor.loadFromFile();
-	for(const auto& ID : _billboardEditor.getLoadedIDs())
+	_billboardEditor->loadFromFile();
+	for(const auto& ID : _billboardEditor->getLoadedIDs())
 	{
-		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuBillboardPlace");
+		auto screen = _gui->getViewport("left")->getWindow("main")->getScreen("worldEditorMenuBillboardPlace");
 		screen->getScrollingList("billboardList")->createButton(ID, ID.substr(1));
 	}
 
-	_animation2dEditor.loadFromFile(false);
-	_animation3dEditor.loadFromFile(false);
+	_animation2dEditor->loadFromFile(false);
+	_animation3dEditor->loadFromFile(false);
 
 	_fe3d->model_create(TEMPLATE_LAMP_ID, LAMP_MODEL_PATH);
 	_fe3d->model_setBaseSize(TEMPLATE_LAMP_ID, DEFAULT_LAMP_SIZE);
@@ -93,30 +93,30 @@ void WorldEditor::load()
 	_fe3d->reflection_create(TEMPLATE_CAMERA_ID);
 	_fe3d->reflection_setVisible(TEMPLATE_CAMERA_ID, false);
 
-	_soundEditor.loadFromFile();
+	_soundEditor->loadFromFile();
 	_fe3d->model_create(TEMPLATE_SPEAKER_ID, SPEAKER_MODEL_PATH);
 	_fe3d->model_setBaseSize(TEMPLATE_SPEAKER_ID, DEFAULT_SPEAKER_SIZE);
 	_fe3d->model_setShadowed(TEMPLATE_SPEAKER_ID, false);
 	_fe3d->model_setReflected(TEMPLATE_SPEAKER_ID, false);
 	_fe3d->model_setBright(TEMPLATE_SPEAKER_ID, true);
 	_fe3d->model_setVisible(TEMPLATE_SPEAKER_ID, false);
-	for(const auto& ID : _soundEditor.getLoadedIDs())
+	for(const auto& ID : _soundEditor->getLoadedIDs())
 	{
 		_fe3d->sound3d_create(ID, _fe3d->sound2d_getAudioPath(ID));
 		_fe3d->sound3d_setMaxVolume(ID, DEFAULT_SOUND_MAX_VOLUME);
 		_fe3d->sound3d_setMaxDistance(ID, DEFAULT_SOUND_MAX_DISTANCE);
 
-		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuSoundPlace");
+		auto screen = _gui->getViewport("left")->getWindow("main")->getScreen("worldEditorMenuSoundPlace");
 		screen->getScrollingList("sounds")->createButton(ID, ID.substr(1));
 	}
 
-	_gui.getOverlay()->createTextField("modelID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
-	_gui.getOverlay()->createTextField("billboardID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
-	_gui.getOverlay()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("modelID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("billboardID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
+	_gui->getOverlay()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(1.0f), true);
 
 	_fe3d->collision_enableCameraResponse(true, true, true);
 	_fe3d->collision_setCameraBox(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-	_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
+	_gui->getViewport("right")->getWindow("main")->setActiveScreen("main");
 	_isEditorLoaded = true;
 }
 
@@ -129,27 +129,27 @@ void WorldEditor::unload()
 
 	unloadEditorWorld();
 
-	for(const auto& ID : _skyEditor.getLoadedIDs())
+	for(const auto& ID : _skyEditor->getLoadedIDs())
 	{
 		_fe3d->sky_delete(ID);
 	}
 
-	for(const auto& ID : _terrainEditor.getLoadedIDs())
+	for(const auto& ID : _terrainEditor->getLoadedIDs())
 	{
 		_fe3d->terrain_delete(ID);
 	}
 
-	for(const auto& ID : _waterEditor.getLoadedIDs())
+	for(const auto& ID : _waterEditor->getLoadedIDs())
 	{
 		_fe3d->water_delete(ID);
 	}
 
-	for(const auto& ID : _modelEditor.getLoadedIDs())
+	for(const auto& ID : _modelEditor->getLoadedIDs())
 	{
 		_fe3d->model_delete(ID);
 	}
 
-	for(const auto& ID : _billboardEditor.getLoadedIDs())
+	for(const auto& ID : _billboardEditor->getLoadedIDs())
 	{
 		_fe3d->billboard_delete(ID);
 	}
@@ -164,7 +164,7 @@ void WorldEditor::unload()
 	_fe3d->reflection_delete(TEMPLATE_CAMERA_ID);
 
 	_fe3d->model_delete(TEMPLATE_SPEAKER_ID);
-	for(const auto& ID : _soundEditor.getLoadedIDs())
+	for(const auto& ID : _soundEditor->getLoadedIDs())
 	{
 		_fe3d->sound2d_delete(ID);
 		_fe3d->sound3d_delete(ID);
@@ -246,9 +246,9 @@ void WorldEditor::unload()
 	_isChoosingWorld = false;
 	_isDeletingWorld = false;
 
-	_gui.getOverlay()->deleteTextField("modelID");
-	_gui.getOverlay()->deleteTextField("billboardID");
-	_gui.getOverlay()->deleteTextField("soundID");
+	_gui->getOverlay()->deleteTextField("modelID");
+	_gui->getOverlay()->deleteTextField("billboardID");
+	_gui->getOverlay()->deleteTextField("soundID");
 
 	_fe3d->collision_disableCameraResponse();
 	if(_fe3d->misc_isAabbFrameRenderingEnabled())

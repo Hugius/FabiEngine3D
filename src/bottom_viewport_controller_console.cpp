@@ -7,7 +7,7 @@ void BottomViewportController::_updateConsole()
 		return;
 	}
 
-	const auto window = _gui.getViewport("bottom")->getWindow("console");
+	const auto window = _gui->getViewport("bottom")->getWindow("console");
 	float scrollingSpeed = static_cast<float>(_fe3d->input_getMouseWheelY()) * static_cast<float>(window->isHovered()) * 0.1f;
 
 	if(!_consoleMessageQueue.empty() && scrollingSpeed != 0.0f)
@@ -66,7 +66,7 @@ void BottomViewportController::_updateConsole()
 
 void BottomViewportController::_addConsoleMessage(const string& newMessage)
 {
-	auto window = _gui.getViewport("bottom")->getWindow("console");
+	auto window = _gui->getViewport("bottom")->getWindow("console");
 	auto screen = window->getScreen("main");
 	const float timePartOffset = CHAR_SIZE.x * static_cast<float>(TIME_PART_LENGTH) * 2.0f;
 	const float separatorPartOffset = CHAR_SIZE.x * static_cast<float>(SEPARATOR_PART_LENGTH) * 2.0f;
@@ -203,7 +203,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 
 void BottomViewportController::_deleteConsoleMessage(const string& ID)
 {
-	auto window = _gui.getViewport("bottom")->getWindow("console");
+	auto window = _gui->getViewport("bottom")->getWindow("console");
 	auto screen = window->getScreen("main");
 
 	screen->deleteTextField(ID + "_time");

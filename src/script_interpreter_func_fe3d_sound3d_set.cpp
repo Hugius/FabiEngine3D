@@ -30,7 +30,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dSetter(const string& functionNa
 				auto maxVolume = args[5].getDecimal();
 				auto maxDistance = args[6].getDecimal();
 
-				_worldEditor.copyTemplateSound(newID, ("@" + templateID), position);
+				_worldEditor->copyTemplateSound(newID, ("@" + templateID), position);
 				_fe3d->sound3d_setMaxVolume(newID, maxVolume);
 				_fe3d->sound3d_setMaxDistance(newID, maxDistance);
 

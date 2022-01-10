@@ -14,15 +14,15 @@ BottomViewportController::BottomViewportController(EngineInterface& fe3d, GuiMan
 
 void BottomViewportController::initialize()
 {
-	_gui.getViewport("bottom")->createWindow("statistics", fvec2(-0.25f, 0.0f), fvec2(0.9875f, 1.875f), BVPC::FRAME_COLOR);
-	auto statisticsWindow = _gui.getViewport("bottom")->getWindow("statistics");
+	_gui->getViewport("bottom")->createWindow("statistics", fvec2(-0.25f, 0.0f), fvec2(0.9875f, 1.875f), BVPC::FRAME_COLOR);
+	auto statisticsWindow = _gui->getViewport("bottom")->getWindow("statistics");
 
 	statisticsWindow->createScreen("main");
 	statisticsWindow->setActiveScreen("main");
 	auto statisticsScreen = statisticsWindow->getScreen("main");
 
-	_gui.getViewport("bottom")->createWindow("console", fvec2(0.25f, 0.0f), fvec2(0.9875f, 1.875f), BVPC::FRAME_COLOR);
-	auto consoleWindow = _gui.getViewport("bottom")->getWindow("console");
+	_gui->getViewport("bottom")->createWindow("console", fvec2(0.25f, 0.0f), fvec2(0.9875f, 1.875f), BVPC::FRAME_COLOR);
+	auto consoleWindow = _gui->getViewport("bottom")->getWindow("console");
 
 	consoleWindow->createScreen("main");
 	consoleWindow->setActiveScreen("main");

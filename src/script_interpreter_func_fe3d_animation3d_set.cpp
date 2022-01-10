@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
 			{
-				_animation3dEditor.startModelAnimation(args[0].getString(), args[1].getString(), args[2].getInteger());
+				_animation3dEditor->startModelAnimation(args[0].getString(), args[1].getString(), args[2].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -25,7 +25,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
 			{
-				_animation3dEditor.autopauseModelAnimation(args[0].getString(), args[1].getString());
+				_animation3dEditor->autopauseModelAnimation(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -38,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
 			{
-				_animation3dEditor.pauseModelAnimation(args[0].getString(), args[1].getString());
+				_animation3dEditor->pauseModelAnimation(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -51,7 +51,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
 			{
-				_animation3dEditor.resumeModelAnimation(args[0].getString(), args[1].getString());
+				_animation3dEditor->resumeModelAnimation(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -64,7 +64,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
 			{
-				_animation3dEditor.stopModelAnimation(args[0].getString(), args[1].getString());
+				_animation3dEditor->stopModelAnimation(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -77,7 +77,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 		{
 			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
 			{
-				_animation3dEditor.setModelAnimationSpeed(args[0].getString(), args[1].getString(), args[2].getDecimal());
+				_animation3dEditor->setModelAnimationSpeed(args[0].getString(), args[1].getString(), args[2].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

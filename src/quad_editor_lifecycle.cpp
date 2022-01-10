@@ -26,7 +26,7 @@ void QuadEditor::load()
 	_fe3d->billboard_setPosition(PREVIEW_BILLBOARD_ID, PREVIEW_BILLBOARD_POSITION);
 	_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
 
-	_gui.getOverlay()->createTextField("quadID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
+	_gui->getOverlay()->createTextField("quadID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
 
 	_isEditorLoaded = true;
 }
@@ -42,7 +42,7 @@ void QuadEditor::unload()
 
 	_fe3d->billboard_delete(PREVIEW_BILLBOARD_ID);
 
-	_gui.getOverlay()->deleteTextField("quadID");
+	_gui->getOverlay()->deleteTextField("quadID");
 
 	_loadedQuadIDs.clear();
 	_currentQuadID = "";
@@ -55,7 +55,7 @@ void QuadEditor::unload()
 
 void QuadEditor::_loadGUI()
 {
-	auto leftWindow = _gui.getViewport("left")->getWindow("main");
+	auto leftWindow = _gui->getViewport("left")->getWindow("main");
 
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("quadEditorMenuMain");
@@ -72,8 +72,8 @@ void QuadEditor::_loadGUI()
 
 void QuadEditor::_unloadGUI()
 {
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("quadEditorMenuMain");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("quadEditorMenuChoice");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("quadEditorMenuMain");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("quadEditorMenuChoice");
 }
 
 void QuadEditor::update()

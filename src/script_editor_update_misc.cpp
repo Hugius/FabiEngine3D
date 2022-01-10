@@ -7,32 +7,32 @@ using std::clamp;
 
 void ScriptEditor::_updateGUI()
 {
-	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "scriptEditorMenuMain")
 	{
-		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui.getOverlay()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("search")->isHovered())
 		{
-			_gui.getOverlay()->createValueForm("search", "Search Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("search", "Search Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isSearchingScriptFile = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui.getOverlay()->createValueForm("scriptCreate", "Create Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("scriptCreate", "Create Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isCreatingScriptFile = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			_gui.getOverlay()->createChoiceForm("scriptFileList", "Edit Script", fvec2(0.0f, 0.1f), _script.getScriptFileIDs());
+			_gui->getOverlay()->createChoiceForm("scriptFileList", "Edit Script", fvec2(0.0f, 0.1f), _script.getScriptFileIDs());
 			_isChoosingScriptFile = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rename")->isHovered())
 		{
-			_gui.getOverlay()->createValueForm("scriptRename", "Rename Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("scriptRename", "Rename Script", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isRenamingScriptFile = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
@@ -46,22 +46,22 @@ void ScriptEditor::_updateGUI()
 
 		if(_fe3d->input_isKeyDown(InputType::KEY_LCTRL) || _fe3d->input_isKeyDown(InputType::KEY_RCTRL))
 		{
-			if(_fe3d->input_isKeyPressed(InputType::KEY_F) && !_gui.getOverlay()->isFocused())
+			if(_fe3d->input_isKeyPressed(InputType::KEY_F) && !_gui->getOverlay()->isFocused())
 			{
-				_gui.getOverlay()->createValueForm("search", "Search Keyword", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+				_gui->getOverlay()->createValueForm("search", "Search Keyword", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			}
 		}
 
-		if(_gui.getOverlay()->isAnswerFormConfirmed("back"))
+		if(_gui->getOverlay()->isAnswerFormConfirmed("back"))
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
 			saveScriptFiles();
 			unload();
 			return;
 		}
-		if(_gui.getOverlay()->isAnswerFormDenied("back"))
+		if(_gui->getOverlay()->isAnswerFormDenied("back"))
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
 			unload();
 			return;
 		}
@@ -79,7 +79,7 @@ void ScriptEditor::_updateScriptFileCreating()
 	{
 		string newScriptFileID;
 
-		if(_gui.getOverlay()->checkValueForm("scriptCreate", newScriptFileID))
+		if(_gui->getOverlay()->checkValueForm("scriptCreate", newScriptFileID))
 		{
 			if(newScriptFileID.find(' ') != string::npos)
 			{
@@ -117,7 +117,7 @@ void ScriptEditor::_updateScriptFileChoosing()
 {
 	if(_isChoosingScriptFile)
 	{
-		auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("scriptFileList");
+		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("scriptFileList");
 
 		if(!selectedButtonID.empty())
 		{
@@ -129,13 +129,13 @@ void ScriptEditor::_updateScriptFileChoosing()
 				_lastSelectedLineIndex = -1;
 				_reloadScriptTextDisplay(true);
 
-				_gui.getOverlay()->deleteChoiceForm("scriptFileList");
+				_gui->getOverlay()->deleteChoiceForm("scriptFileList");
 				_isChoosingScriptFile = false;
 			}
 		}
-		else if(_gui.getOverlay()->isChoiceFormCancelled("scriptFileList"))
+		else if(_gui->getOverlay()->isChoiceFormCancelled("scriptFileList"))
 		{
-			_gui.getOverlay()->deleteChoiceForm("scriptFileList");
+			_gui->getOverlay()->deleteChoiceForm("scriptFileList");
 			_isChoosingScriptFile = false;
 		}
 	}
@@ -147,7 +147,7 @@ void ScriptEditor::_updateScriptFileRenaming()
 	{
 		string newScriptFileID;
 
-		if(_gui.getOverlay()->checkValueForm("scriptRename", newScriptFileID))
+		if(_gui->getOverlay()->checkValueForm("scriptRename", newScriptFileID))
 		{
 			if(newScriptFileID.find(' ') != string::npos)
 			{
@@ -182,7 +182,7 @@ void ScriptEditor::_updateScriptSearching()
 	{
 		string keyword;
 
-		if(_gui.getOverlay()->checkValueForm("search", keyword))
+		if(_gui->getOverlay()->checkValueForm("search", keyword))
 		{
 			auto result = _script.findKeyword(keyword);
 
@@ -212,7 +212,7 @@ void ScriptEditor::_updateMiscellaneous()
 		const unsigned int lineCount = _script.getScriptFile(_currentScriptFileID)->getLineCount();
 		const float lastLineHeight = _fe3d->billboard_getPosition(to_string(lineCount - 1)).y;
 
-		if(!_gui.getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
+		if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
 		{
 			if(_fe3d->input_getMouseWheelY() == -1 && lineCount > (MAX_VISIBLE_LINES - 1))
 			{

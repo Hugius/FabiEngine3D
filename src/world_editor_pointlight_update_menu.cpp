@@ -4,11 +4,11 @@
 
 void WorldEditor::_updatePointlightMenu()
 {
-	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "worldEditorMenuPointlight")
 	{
-		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			if(_isPlacingPointlight)
 			{
@@ -17,12 +17,12 @@ void WorldEditor::_updatePointlightMenu()
 				_isPlacingPointlight = false;
 			}
 
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("place")->isHovered())
 		{
-			_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
+			_gui->getViewport("right")->getWindow("main")->setActiveScreen("main");
 
 			_deactivateModel();
 			_deactivateBillboard();
@@ -39,16 +39,16 @@ void WorldEditor::_updatePointlightMenu()
 
 			if(_fe3d->terrain_getSelectedID().empty())
 			{
-				_gui.getOverlay()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-				_gui.getOverlay()->createValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-				_gui.getOverlay()->createValueForm("positionZ", "Z", 0.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+				_gui->getOverlay()->createValueForm("positionX", "X", 0.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+				_gui->getOverlay()->createValueForm("positionY", "Y", 0.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+				_gui->getOverlay()->createValueForm("positionZ", "Z", 0.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 			}
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuPointlightChoice");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuPointlightChoice");
 
-			_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlights")->deleteButtons();
+			_gui->getViewport("left")->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlights")->deleteButtons();
 
 			auto IDs = _fe3d->pointlight_getIDs();
 			sort(IDs.begin(), IDs.end());
@@ -61,7 +61,7 @@ void WorldEditor::_updatePointlightMenu()
 					reverse(rawID.begin(), rawID.end());
 					reverse(pointlightID.begin(), pointlightID.end());
 
-					_gui.getViewport("left")->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlights")->createButton(pointlightID, rawID);
+					_gui->getViewport("left")->getWindow("main")->getScreen("worldEditorMenuPointlightChoice")->getScrollingList("pointlights")->createButton(pointlightID, rawID);
 				}
 			}
 		}
@@ -70,7 +70,7 @@ void WorldEditor::_updatePointlightMenu()
 
 void WorldEditor::_updatePointlightChoosingMenu()
 {
-	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "worldEditorMenuPointlightChoice")
 	{
@@ -106,9 +106,9 @@ void WorldEditor::_updatePointlightChoosingMenu()
 
 		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d->input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
+			if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuPointlight");
+				_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuPointlight");
 				return;
 			}
 		}

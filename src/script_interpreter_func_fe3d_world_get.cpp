@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dWorldGetter(const string& functionName
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _worldEditor.getLoadedWorldID();
+			auto result = _worldEditor->getLoadedWorldID();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}

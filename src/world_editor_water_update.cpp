@@ -2,19 +2,19 @@
 
 void WorldEditor::_updateWaterMenu()
 {
-	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "worldEditorMenuWater")
 	{
-		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
 		{
 			vector<string> waterIDs;
-			for(const auto& ID : _waterEditor.getLoadedIDs())
+			for(const auto& ID : _waterEditor->getLoadedIDs())
 			{
 				if(ID[0] == '@')
 				{
@@ -22,7 +22,7 @@ void WorldEditor::_updateWaterMenu()
 				}
 			}
 
-			_gui.getOverlay()->createChoiceForm("waterList", "Select Water", fvec2(0.0f, 0.1f), waterIDs);
+			_gui->getOverlay()->createChoiceForm("waterList", "Select Water", fvec2(0.0f, 0.1f), waterIDs);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -40,7 +40,7 @@ void WorldEditor::_updateWaterMenu()
 
 		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("waterList");
+			auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("waterList");
 			if(!selectedButtonID.empty())
 			{
 				if(_fe3d->water_isExisting(selectedButtonID))
@@ -50,11 +50,11 @@ void WorldEditor::_updateWaterMenu()
 
 				_currentWaterID = selectedButtonID;
 				_copyTemplateWater(_currentWaterID, ("@" + selectedButtonID));
-				_gui.getOverlay()->deleteChoiceForm("waterList");
+				_gui->getOverlay()->deleteChoiceForm("waterList");
 			}
-			else if(_gui.getOverlay()->isChoiceFormCancelled("waterList"))
+			else if(_gui->getOverlay()->isChoiceFormCancelled("waterList"))
 			{
-				_gui.getOverlay()->deleteChoiceForm("waterList");
+				_gui->getOverlay()->deleteChoiceForm("waterList");
 			}
 		}
 

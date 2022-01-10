@@ -3,17 +3,17 @@
 
 void SoundEditor::_updateMainMenu()
 {
-	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "soundEditorMenuMain")
 	{
-		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui.getOverlay()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_gui.getOverlay()->createValueForm("soundCreate", "Create Sound", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("soundCreate", "Create Sound", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isCreatingSound = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
@@ -23,7 +23,7 @@ void SoundEditor::_updateMainMenu()
 			{
 				ID = ID.substr(1);
 			}
-			_gui.getOverlay()->createChoiceForm("soundList", "Edit Sound", fvec2(0.0f, 0.1f), IDs);
+			_gui->getOverlay()->createChoiceForm("soundList", "Edit Sound", fvec2(0.0f, 0.1f), IDs);
 			_isChoosingSound = true;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
@@ -33,21 +33,21 @@ void SoundEditor::_updateMainMenu()
 			{
 				ID = ID.substr(1);
 			}
-			_gui.getOverlay()->createChoiceForm("soundList", "Delete Sound", fvec2(0.0f, 0.1f), IDs);
+			_gui->getOverlay()->createChoiceForm("soundList", "Delete Sound", fvec2(0.0f, 0.1f), IDs);
 			_isChoosingSound = true;
 			_isDeletingSound = true;
 		}
 
-		if(_gui.getOverlay()->isAnswerFormConfirmed("back"))
+		if(_gui->getOverlay()->isAnswerFormConfirmed("back"))
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
 			saveToFile();
 			unload();
 			return;
 		}
-		if(_gui.getOverlay()->isAnswerFormDenied("back"))
+		if(_gui->getOverlay()->isAnswerFormDenied("back"))
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
 			unload();
 			return;
 		}
@@ -56,7 +56,7 @@ void SoundEditor::_updateMainMenu()
 
 void SoundEditor::_updateChoiceMenu()
 {
-	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "soundEditorMenuChoice")
 	{
@@ -64,7 +64,7 @@ void SoundEditor::_updateChoiceMenu()
 		bool isPlaying = isExisting && _fe3d->sound2d_isPlaying(_currentSoundID);
 		bool isPaused = isExisting && _fe3d->sound2d_isPaused(_currentSoundID);
 
-		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			if(isPlaying)
 			{
@@ -72,8 +72,8 @@ void SoundEditor::_updateChoiceMenu()
 			}
 
 			_currentSoundID = "";
-			_fe3d->text_setVisible(_gui.getOverlay()->getTextField("soundID")->getEntityID(), false);
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuMain");
+			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityID(), false);
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuMain");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("play")->isHovered())

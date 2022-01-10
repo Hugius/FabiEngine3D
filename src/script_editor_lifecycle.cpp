@@ -96,7 +96,7 @@ void ScriptEditor::unload()
 
 void ScriptEditor::_loadGUI()
 {
-	auto leftWindow = _gui.getViewport("left")->getWindow("main");
+	auto leftWindow = _gui->getViewport("left")->getWindow("main");
 
 	auto positions = VPC::calculateButtonPositions(7, CH);
 	leftWindow->createScreen("scriptEditorMenuMain");
@@ -111,7 +111,7 @@ void ScriptEditor::_loadGUI()
 
 void ScriptEditor::_unloadGUI()
 {
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("scriptEditorMenuMain");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("scriptEditorMenuMain");
 }
 
 void ScriptEditor::update()

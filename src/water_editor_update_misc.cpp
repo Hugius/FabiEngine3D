@@ -13,7 +13,7 @@ void WaterEditor::_updateCamera()
 		_fe3d->quad_setVisible("@@cursor", false);
 	}
 
-	if(!_gui.getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
+	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
 	{
 		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
 		{
@@ -30,7 +30,7 @@ void WaterEditor::_updateCamera()
 
 	if(_fe3d->camera_isThirdPersonViewEnabled())
 	{
-		if(_gui.getOverlay()->isFocused())
+		if(_gui->getOverlay()->isFocused())
 		{
 			_fe3d->camera_disableThirdPersonView();
 		}
@@ -39,7 +39,7 @@ void WaterEditor::_updateCamera()
 
 void WaterEditor::_updateMiscellaneous()
 {
-	if(!_gui.getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
+	if(!_gui->getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
 	{
 		if(_fe3d->input_isKeyPressed(InputType::KEY_R))
 		{
@@ -76,7 +76,7 @@ void WaterEditor::_updateWaterCreating()
 	{
 		string newWaterID;
 
-		if(_gui.getOverlay()->checkValueForm("waterCreate", newWaterID, {}))
+		if(_gui->getOverlay()->checkValueForm("waterCreate", newWaterID, {}))
 		{
 			if(newWaterID.find(' ') != string::npos)
 			{
@@ -102,14 +102,14 @@ void WaterEditor::_updateWaterCreating()
 
 			if(_fe3d->water_isExisting(newWaterID))
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
+				_gui->getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 
 				_currentWaterID = newWaterID;
 				_loadedWaterIDs.push_back(newWaterID);
 				_fe3d->water_select(newWaterID);
 
-				_fe3d->text_setContent(_gui.getOverlay()->getTextField("waterID")->getEntityID(), "Water: " + newWaterID.substr(1), 0.025f);
-				_fe3d->text_setVisible(_gui.getOverlay()->getTextField("waterID")->getEntityID(), true);
+				_fe3d->text_setContent(_gui->getOverlay()->getTextField("waterID")->getEntityID(), "Water: " + newWaterID.substr(1), 0.025f);
+				_fe3d->text_setVisible(_gui->getOverlay()->getTextField("waterID")->getEntityID(), true);
 				_isCreatingWater = false;
 			}
 		}
@@ -120,7 +120,7 @@ void WaterEditor::_updateWaterChoosing()
 {
 	if(_isChoosingWater)
 	{
-		auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("waterList");
+		auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("waterList");
 
 		_fe3d->water_select("");
 
@@ -134,18 +134,18 @@ void WaterEditor::_updateWaterChoosing()
 
 				if(!_isDeletingWater)
 				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
-					_fe3d->text_setContent(_gui.getOverlay()->getTextField("waterID")->getEntityID(), "Water: " + _currentWaterID.substr(1), 0.025f);
-					_fe3d->text_setVisible(_gui.getOverlay()->getTextField("waterID")->getEntityID(), true);
+					_gui->getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
+					_fe3d->text_setContent(_gui->getOverlay()->getTextField("waterID")->getEntityID(), "Water: " + _currentWaterID.substr(1), 0.025f);
+					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("waterID")->getEntityID(), true);
 				}
 
-				_gui.getOverlay()->deleteChoiceForm("waterList");
+				_gui->getOverlay()->deleteChoiceForm("waterList");
 				_isChoosingWater = false;
 			}
 		}
-		else if(_gui.getOverlay()->isChoiceFormCancelled("waterList"))
+		else if(_gui->getOverlay()->isChoiceFormCancelled("waterList"))
 		{
-			_gui.getOverlay()->deleteChoiceForm("waterList");
+			_gui->getOverlay()->deleteChoiceForm("waterList");
 			_isChoosingWater = false;
 			_isDeletingWater = false;
 		}
@@ -156,12 +156,12 @@ void WaterEditor::_updateWaterDeleting()
 {
 	if(_isDeletingWater && !_currentWaterID.empty())
 	{
-		if(!_gui.getOverlay()->isAnswerFormExisting("delete"))
+		if(!_gui->getOverlay()->isAnswerFormExisting("delete"))
 		{
-			_gui.getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
+			_gui->getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 		}
 
-		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
+		if(_gui->getOverlay()->isAnswerFormConfirmed("delete"))
 		{
 			_fe3d->water_delete(_currentWaterID);
 
@@ -169,7 +169,7 @@ void WaterEditor::_updateWaterDeleting()
 			_currentWaterID = "";
 			_isDeletingWater = false;
 		}
-		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
+		if(_gui->getOverlay()->isAnswerFormDenied("delete"))
 		{
 			_fe3d->water_select("");
 

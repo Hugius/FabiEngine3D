@@ -243,17 +243,17 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				}
 			}
 
-			_animation3dEditor.startModelAnimation(animationID, modelID, remainingLoops);
+			_animation3dEditor->startModelAnimation(animationID, modelID, remainingLoops);
 
-			//if(_animation3dEditor.isAnimationExisting(animationID))
+			//if(_animation3dEditor->isAnimationExisting(animationID))
 			//{
 			//	// Retrieve raw animation data for editing
 			//	string errorMessage = "Tried to retrieve animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
-			//	auto animationData = _animation3dEditor.getAnimationData(animationID, modelID, errorMessage);
+			//	auto animationData = _animation3dEditor->getAnimationData(animationID, modelID, errorMessage);
 			//	auto frameData = animationData->getFrames()[frameIndex];
 
 			//	// Set properties
-			//	isPaused ? _animation3dEditor.pauseModelAnimation(animationID, modelID) : void();
+			//	isPaused ? _animation3dEditor->pauseModelAnimation(animationID, modelID) : void();
 			//	animationData->setSpeedMultiplier(speedMultiplier);
 			//	animationData->setFadeFramestep(fadeFramestep);
 			//	animationData->setFrameIndex(frameIndex);

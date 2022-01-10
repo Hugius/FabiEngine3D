@@ -35,7 +35,7 @@ void SoundEditor::load()
 	_fe3d->billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\stop.tga");
 	_fe3d->billboard_setBright("@@icon", true);
 
-	_gui.getOverlay()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
+	_gui->getOverlay()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
 
 	_isEditorLoaded = true;
 }
@@ -55,7 +55,7 @@ void SoundEditor::unload()
 
 	_fe3d->billboard_delete("@@icon");
 
-	_gui.getOverlay()->deleteTextField("soundID");
+	_gui->getOverlay()->deleteTextField("soundID");
 
 	_loadedSoundIDs.clear();
 	_currentSoundID = "";
@@ -68,7 +68,7 @@ void SoundEditor::unload()
 
 void SoundEditor::_loadGUI()
 {
-	auto leftWindow = _gui.getViewport("left")->getWindow("main");
+	auto leftWindow = _gui->getViewport("left")->getWindow("main");
 
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("soundEditorMenuMain");
@@ -88,8 +88,8 @@ void SoundEditor::_loadGUI()
 
 void SoundEditor::_unloadGUI()
 {
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("soundEditorMenuMain");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("soundEditorMenuChoice");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("soundEditorMenuMain");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("soundEditorMenuChoice");
 }
 
 void SoundEditor::update()

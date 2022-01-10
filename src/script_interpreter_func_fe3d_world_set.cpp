@@ -12,8 +12,8 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_worldEditor.unloadEditorWorld();
-			_worldEditor.loadEditorWorldFromFile(args[0].getString());
+			_worldEditor->unloadEditorWorld();
+			_worldEditor->loadEditorWorldFromFile(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -21,7 +21,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_worldEditor.unloadEditorWorld();
+			_worldEditor->unloadEditorWorld();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -31,7 +31,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_worldEditor.createCustomWorld(args[0].getString());
+			_worldEditor->createCustomWorld(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -39,7 +39,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_worldEditor.addSkyToCustomWorld();
+			_worldEditor->addSkyToCustomWorld();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -47,7 +47,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_worldEditor.addTerrainToCustomWorld();
+			_worldEditor->addTerrainToCustomWorld();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -55,7 +55,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_worldEditor.addWaterToCustomWorld();
+			_worldEditor->addWaterToCustomWorld();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -65,7 +65,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_worldEditor.addModelToCustomWorld(args[0].getString());
+			_worldEditor->addModelToCustomWorld(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -75,7 +75,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_worldEditor.addBillboardToCustomWorld(args[0].getString());
+			_worldEditor->addBillboardToCustomWorld(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -85,7 +85,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_worldEditor.addAabbToCustomWorld(args[0].getString());
+			_worldEditor->addAabbToCustomWorld(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -95,7 +95,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_worldEditor.addSoundToCustomWorld(args[0].getString());
+			_worldEditor->addSoundToCustomWorld(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -105,7 +105,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_worldEditor.addPointlightToCustomWorld(args[0].getString());
+			_worldEditor->addPointlightToCustomWorld(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -115,7 +115,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_worldEditor.addReflectionToCustomWorld(args[0].getString());
+			_worldEditor->addReflectionToCustomWorld(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -123,7 +123,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_worldEditor.addLightingToCustomWorld();
+			_worldEditor->addLightingToCustomWorld();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -131,7 +131,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_worldEditor.addGraphicsToCustomWorld();
+			_worldEditor->addGraphicsToCustomWorld();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -139,7 +139,7 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_worldEditor.saveCustomWorldToFile();
+			_worldEditor->saveCustomWorldToFile();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -149,8 +149,8 @@ const bool ScriptInterpreter::_executeFe3dWorldSetter(const string& functionName
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_worldEditor.unloadEditorWorld();
-			_worldEditor.loadCustomWorldFromFile(args[0].getString());
+			_worldEditor->unloadEditorWorld();
+			_worldEditor->loadCustomWorldFromFile(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

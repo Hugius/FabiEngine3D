@@ -4,7 +4,7 @@
 
 void ScriptEditor::_updateTextWriter()
 {
-	if(_isEditorLoaded && _isWritingScript && !_gui.getOverlay()->isFocused() && !_wasGuiFocused)
+	if(_isEditorLoaded && _isWritingScript && !_gui->getOverlay()->isFocused() && !_wasGuiFocused)
 	{
 		if(_fe3d->misc_isCursorInsideViewport())
 		{
@@ -421,6 +421,6 @@ void ScriptEditor::_updateTextWriter()
 		_script.getScriptFile(_currentScriptFileID)->setCursorCharIndex(cursorCharIndex);
 	}
 
-	_wasGuiFocused = _gui.getOverlay()->isFocused();
+	_wasGuiFocused = _gui->getOverlay()->isFocused();
 	_hasClickedLMB = false;
 }

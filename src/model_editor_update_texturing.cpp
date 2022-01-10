@@ -6,21 +6,21 @@
 
 void ModelEditor::_updateTexturingMenu()
 {
-	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "modelEditorMenuTexturing")
 	{
 		auto textureRepeat = _fe3d->model_getTextureRepeat(_currentModelID, _currentPartID);
 
-		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			for(const auto& partID : _fe3d->model_getPartIDs(_currentModelID))
 			{
 				_fe3d->model_setTransparency(_currentModelID, partID, 1.0f);
 			}
 			_currentPartID = "";
-			_fe3d->text_setVisible(_gui.getOverlay()->getTextField("partID")->getEntityID(), false);
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("partID")->getEntityID(), false);
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
@@ -198,10 +198,10 @@ void ModelEditor::_updateTexturingMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
-			_gui.getOverlay()->createValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getOverlay()->createValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
-		if(_gui.getOverlay()->checkValueForm("textureRepeat", textureRepeat, {}))
+		if(_gui->getOverlay()->checkValueForm("textureRepeat", textureRepeat, {}))
 		{
 			_fe3d->model_setTextureRepeat(_currentModelID, _currentPartID, textureRepeat);
 		}

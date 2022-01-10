@@ -9,13 +9,13 @@ void WorldEditor::_updateReflectionPlacing()
 		{
 			auto newPosition = _fe3d->reflection_getPosition(TEMPLATE_CAMERA_ID);
 
-			_gui.getOverlay()->checkValueForm("positionX", newPosition.x, {});
-			_gui.getOverlay()->checkValueForm("positionY", newPosition.y, {});
-			_gui.getOverlay()->checkValueForm("positionZ", newPosition.z, {});
+			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
+			_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
+			_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
 
 			_fe3d->reflection_setPosition(TEMPLATE_CAMERA_ID, newPosition);
 
-			if(_gui.getOverlay()->isValueFormConfirmed())
+			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
 				BEGIN1:;
 				const string newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
@@ -43,7 +43,7 @@ void WorldEditor::_updateReflectionPlacing()
 				_loadedReflectionIDs.push_back(newID);
 			}
 
-			if(_gui.getOverlay()->isValueFormConfirmed() || _gui.getOverlay()->isValueFormCancelled())
+			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
 			{
 				_fe3d->model_setVisible(TEMPLATE_CAMERA_ID, false);
 				_isPlacingReflection = false;
@@ -51,7 +51,7 @@ void WorldEditor::_updateReflectionPlacing()
 		}
 		else
 		{
-			if(_fe3d->misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
+			if(_fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused())
 			{
 				if(!_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{

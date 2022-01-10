@@ -210,11 +210,11 @@ const bool WorldEditor::saveCustomWorldToFile()
 			find(_customWorldModelIDs.begin(), _customWorldModelIDs.end(), modelID) != _customWorldModelIDs.end();
 		if(((modelID[0] != '@') || isLodModel) && isCustomWorldModel)
 		{
-			//for(const auto& animationID : _animation3dEditor.getStartedModelAnimationIDs(modelID))
+			//for(const auto& animationID : _animation3dEditor->getStartedModelAnimationIDs(modelID))
 			//{
 			//	// Retrieve raw animation data for retrieving
 			//	string errorMessage = "Tried to retrieve animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
-			//	auto animationData = _animation3dEditor.getAnimationData(animationID, modelID, errorMessage);
+			//	auto animationData = _animation3dEditor->getAnimationData(animationID, modelID, errorMessage);
 
 			//	// Data to save
 			//	auto isPaused = animationData->isPaused();

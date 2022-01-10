@@ -29,7 +29,7 @@ void Animation2dEditor::load()
 	_fe3d->billboard_setPosition(PREVIEW_BILLBOARD_ID, PREVIEW_BILLBOARD_POSITION);
 	_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
 
-	_gui.getOverlay()->createTextField("animationID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
+	_gui->getOverlay()->createTextField("animationID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
 
 	_isEditorLoaded = true;
 }
@@ -42,7 +42,7 @@ void Animation2dEditor::unload()
 
 	_fe3d->billboard_delete(PREVIEW_BILLBOARD_ID);
 
-	_gui.getOverlay()->deleteTextField("animationID");
+	_gui->getOverlay()->deleteTextField("animationID");
 
 	_animations.clear();
 	_startedBillboardAnimations.clear();
@@ -61,7 +61,7 @@ void Animation2dEditor::unload()
 
 void Animation2dEditor::_loadGUI()
 {
-	auto leftWindow = _gui.getViewport("left")->getWindow("main");
+	auto leftWindow = _gui->getViewport("left")->getWindow("main");
 
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("animation2dEditorMenuMain");
@@ -83,8 +83,8 @@ void Animation2dEditor::_loadGUI()
 
 void Animation2dEditor::_unloadGUI()
 {
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("animation2dEditorMenuMain");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("animation2dEditorMenuChoice");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("animation2dEditorMenuMain");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("animation2dEditorMenuChoice");
 }
 
 void Animation2dEditor::update()

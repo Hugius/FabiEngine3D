@@ -2,19 +2,19 @@
 
 void WorldEditor::_updateTerrainMenu()
 {
-	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "worldEditorMenuTerrain")
 	{
-		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
 		{
 			vector<string> terrainIDs;
-			for(const auto& ID : _terrainEditor.getLoadedIDs())
+			for(const auto& ID : _terrainEditor->getLoadedIDs())
 			{
 				if(ID[0] == '@')
 				{
@@ -22,7 +22,7 @@ void WorldEditor::_updateTerrainMenu()
 				}
 			}
 
-			_gui.getOverlay()->createChoiceForm("terrainList", "Select Terrain", fvec2(0.0f, 0.1f), terrainIDs);
+			_gui->getOverlay()->createChoiceForm("terrainList", "Select Terrain", fvec2(0.0f, 0.1f), terrainIDs);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
@@ -32,7 +32,7 @@ void WorldEditor::_updateTerrainMenu()
 
 		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("terrainList");
+			auto selectedButtonID = _gui->getOverlay()->checkChoiceForm("terrainList");
 			if(!selectedButtonID.empty())
 			{
 				if(_fe3d->terrain_isExisting(selectedButtonID))
@@ -42,11 +42,11 @@ void WorldEditor::_updateTerrainMenu()
 
 				_currentTerrainID = selectedButtonID;
 				_copyTemplateTerrain(_currentTerrainID, ("@" + selectedButtonID));
-				_gui.getOverlay()->deleteChoiceForm("terrainList");
+				_gui->getOverlay()->deleteChoiceForm("terrainList");
 			}
-			else if(_gui.getOverlay()->isChoiceFormCancelled("terrainList"))
+			else if(_gui->getOverlay()->isChoiceFormCancelled("terrainList"))
 			{
-				_gui.getOverlay()->deleteChoiceForm("terrainList");
+				_gui->getOverlay()->deleteChoiceForm("terrainList");
 			}
 		}
 

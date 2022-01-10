@@ -2,7 +2,7 @@
 
 void WorldEditor::_updateSoundEditing()
 {
-	auto rightWindow = _gui.getViewport("right")->getWindow("main");
+	auto rightWindow = _gui->getViewport("right")->getWindow("main");
 
 	if(_currentTemplateModelID.empty() && _currentTemplateBillboardID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
@@ -22,7 +22,7 @@ void WorldEditor::_updateSoundEditing()
 			if(ID.substr(0, string("@@speaker").size()) == "@@speaker")
 			{
 				if(hoveredAabbID == ID && _fe3d->misc_isCursorInsideViewport() &&
-				   !_gui.getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				   !_gui->getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_selectSound(ID.substr(string("@@speaker_").size()));
 
@@ -48,7 +48,7 @@ void WorldEditor::_updateSoundEditing()
 
 		if(!_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			if(_fe3d->misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
+			if(_fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused())
 			{
 				if(!_activeSpeakerID.empty())
 				{
@@ -118,7 +118,7 @@ void WorldEditor::_updateSoundEditing()
 
 		if(_selectedSpeakerID.empty() && _activeSpeakerID.empty())
 		{
-			_fe3d->text_setVisible(_gui.getOverlay()->getTextField("soundID")->getEntityID(), false);
+			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityID(), false);
 		}
 	}
 }

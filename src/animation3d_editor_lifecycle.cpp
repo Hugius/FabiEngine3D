@@ -60,8 +60,8 @@ void Animation3dEditor::load()
 	_fe3d->reflection_create("@@reflection");
 	_fe3d->reflection_capture("@@reflection");
 
-	_gui.getOverlay()->createTextField("animationID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
-	_gui.getOverlay()->createTextField("animationFrame", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
+	_gui->getOverlay()->createTextField("animationID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
+	_gui->getOverlay()->createTextField("animationFrame", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
 
 	_isEditorLoaded = true;
 }
@@ -92,8 +92,8 @@ void Animation3dEditor::unload()
 
 	_fe3d->reflection_delete("@@reflection");
 
-	_gui.getOverlay()->deleteTextField("animationID");
-	_gui.getOverlay()->deleteTextField("animationFrame");
+	_gui->getOverlay()->deleteTextField("animationID");
+	_gui->getOverlay()->deleteTextField("animationFrame");
 
 	_animations.clear();
 	_modelAnimationsToStop.clear();
@@ -115,7 +115,7 @@ void Animation3dEditor::unload()
 
 void Animation3dEditor::_loadGUI()
 {
-	auto leftWindow = _gui.getViewport("left")->getWindow("main");
+	auto leftWindow = _gui->getViewport("left")->getWindow("main");
 
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("animation3dEditorMenuMain");
@@ -149,9 +149,9 @@ void Animation3dEditor::_loadGUI()
 
 void Animation3dEditor::_unloadGUI()
 {
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("animation3dEditorMenuMain");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("animation3dEditorMenuChoice");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("animation3dEditorMenuFrame");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("animation3dEditorMenuMain");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("animation3dEditorMenuChoice");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("animation3dEditorMenuFrame");
 }
 
 void Animation3dEditor::update()

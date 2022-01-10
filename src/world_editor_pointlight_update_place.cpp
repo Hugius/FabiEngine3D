@@ -9,13 +9,13 @@ void WorldEditor::_updatePointlightPlacing()
 		{
 			auto newPosition = _fe3d->pointlight_getPosition(TEMPLATE_LAMP_ID);
 
-			_gui.getOverlay()->checkValueForm("positionX", newPosition.x, {});
-			_gui.getOverlay()->checkValueForm("positionY", newPosition.y, {});
-			_gui.getOverlay()->checkValueForm("positionZ", newPosition.z, {});
+			_gui->getOverlay()->checkValueForm("positionX", newPosition.x, {});
+			_gui->getOverlay()->checkValueForm("positionY", newPosition.y, {});
+			_gui->getOverlay()->checkValueForm("positionZ", newPosition.z, {});
 
 			_fe3d->pointlight_setPosition(TEMPLATE_LAMP_ID, newPosition);
 
-			if(_gui.getOverlay()->isValueFormConfirmed())
+			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
 				BEGIN1:;
 				const string newID = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
@@ -51,7 +51,7 @@ void WorldEditor::_updatePointlightPlacing()
 				}
 			}
 
-			if(_gui.getOverlay()->isValueFormConfirmed() || _gui.getOverlay()->isValueFormCancelled())
+			if(_gui->getOverlay()->isValueFormConfirmed() || _gui->getOverlay()->isValueFormCancelled())
 			{
 				_fe3d->model_setVisible(TEMPLATE_LAMP_ID, false);
 				_fe3d->pointlight_setVisible(TEMPLATE_LAMP_ID, false);
@@ -60,7 +60,7 @@ void WorldEditor::_updatePointlightPlacing()
 		}
 		else
 		{
-			if(_fe3d->misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
+			if(_fe3d->misc_isCursorInsideViewport() && !_gui->getOverlay()->isFocused())
 			{
 				if(!_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{

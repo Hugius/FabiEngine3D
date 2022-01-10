@@ -85,7 +85,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 		bool isLevelOfDetailEntity = find(levelOfDetailEntityIDs.begin(), levelOfDetailEntityIDs.end(), modelID) != levelOfDetailEntityIDs.end();
 		if((modelID[0] != '@') || isLevelOfDetailEntity)
 		{
-			auto startedAnimations = _animation3dEditor.getStartedModelAnimationIDs(modelID);
+			auto startedAnimations = _animation3dEditor->getStartedModelAnimationIDs(modelID);
 
 			if(!startedAnimations.empty())
 			{
@@ -142,7 +142,7 @@ const bool WorldEditor::saveEditorWorldToFile()
 	{
 		if(billboardID[0] != '@')
 		{
-			auto startedAnimations = _animation2dEditor.getStartedBillboardAnimationIDs(billboardID);
+			auto startedAnimations = _animation2dEditor->getStartedBillboardAnimationIDs(billboardID);
 
 			auto position = _fe3d->billboard_getPosition(billboardID);
 			auto rotation = _fe3d->billboard_getRotation(billboardID);

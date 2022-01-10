@@ -40,14 +40,14 @@ TopViewportController::TopViewportController(EngineInterface& fe3d,
 
 void TopViewportController::initialize()
 {
-	_gui.getViewport("top")->createWindow("projectWindow", fvec2(-0.25f, 0.0f), fvec2(0.9875f, 1.5f), TVPC::FRAME_COLOR);
-	auto projectWindow = _gui.getViewport("top")->getWindow("projectWindow");
+	_gui->getViewport("top")->createWindow("projectWindow", fvec2(-0.25f, 0.0f), fvec2(0.9875f, 1.5f), TVPC::FRAME_COLOR);
+	auto projectWindow = _gui->getViewport("top")->getWindow("projectWindow");
 
-	_gui.getViewport("top")->createWindow("executionWindow", fvec2(0.125f, 0.0f), fvec2(0.4875f, 1.5f), TVPC::FRAME_COLOR);
-	auto executionWindow = _gui.getViewport("top")->getWindow("executionWindow");
+	_gui->getViewport("top")->createWindow("executionWindow", fvec2(0.125f, 0.0f), fvec2(0.4875f, 1.5f), TVPC::FRAME_COLOR);
+	auto executionWindow = _gui->getViewport("top")->getWindow("executionWindow");
 
-	_gui.getViewport("top")->createWindow("miscellaneousWindow", fvec2(0.375f, 0.0f), fvec2(0.4875f, 1.5f), TVPC::FRAME_COLOR);
-	auto miscellaneousWindow = _gui.getViewport("top")->getWindow("miscellaneousWindow");
+	_gui->getViewport("top")->createWindow("miscellaneousWindow", fvec2(0.375f, 0.0f), fvec2(0.4875f, 1.5f), TVPC::FRAME_COLOR);
+	auto miscellaneousWindow = _gui->getViewport("top")->getWindow("miscellaneousWindow");
 
 	projectWindow->createScreen("main");
 	projectWindow->setActiveScreen("main");
@@ -88,7 +88,7 @@ const bool TopViewportController::isScriptStarted() const
 	}
 	else
 	{
-		return _scriptEditor.getScriptExecutor().isStarted();
+		return _scriptEditor->getScriptExecutor().isStarted();
 	}
 }
 
@@ -100,14 +100,14 @@ const bool TopViewportController::isScriptRunning() const
 	}
 	else
 	{
-		return _scriptEditor.getScriptExecutor().isRunning();
+		return _scriptEditor->getScriptExecutor().isRunning();
 	}
 }
 
 void TopViewportController::_updateMiscellaneous()
 {
-	auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("main");
-	bool isHoverable = (_currentProjectID.empty()) ? false : !_scriptEditor.getScriptExecutor().isStarted();
+	auto screen = _gui->getViewport("left")->getWindow("main")->getScreen("main");
+	bool isHoverable = (_currentProjectID.empty()) ? false : !_scriptEditor->getScriptExecutor().isStarted();
 
 	screen->getButton("skyEditor")->setHoverable(isHoverable);
 	screen->getButton("terrainEditor")->setHoverable(isHoverable);
@@ -135,7 +135,7 @@ const bool TopViewportController::_prepareProjectChoosing(const string& title) c
 
 	auto projectIDs = Tools::getDirectoriesFromDirectory(projectDirectoryPath);
 
-	_gui.getOverlay()->createChoiceForm("projectList", title, fvec2(0.0f, 0.1f), projectIDs);
+	_gui->getOverlay()->createChoiceForm("projectList", title, fvec2(0.0f, 0.1f), projectIDs);
 
 	return true;
 }
@@ -151,74 +151,74 @@ void TopViewportController::_applyProjectChange()
 		_fe3d->misc_setWindowTitle("FabiEngine3D - " + _currentProjectID);
 	}
 
-	_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+	_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
 
-	if(_skyEditor.isLoaded())
+	if(_skyEditor->isLoaded())
 	{
-		_skyEditor.unload();
+		_skyEditor->unload();
 	}
 
-	if(_terrainEditor.isLoaded())
+	if(_terrainEditor->isLoaded())
 	{
-		_terrainEditor.unload();
+		_terrainEditor->unload();
 	}
 
-	if(_waterEditor.isLoaded())
+	if(_waterEditor->isLoaded())
 	{
-		_waterEditor.unload();
+		_waterEditor->unload();
 	}
 
-	if(_modelEditor.isLoaded())
+	if(_modelEditor->isLoaded())
 	{
-		_modelEditor.unload();
+		_modelEditor->unload();
 	}
 
-	if(_billboardEditor.isLoaded())
+	if(_billboardEditor->isLoaded())
 	{
-		_billboardEditor.unload();
+		_billboardEditor->unload();
 	}
 
-	if(_quadEditor.isLoaded())
+	if(_quadEditor->isLoaded())
 	{
-		_quadEditor.unload();
+		_quadEditor->unload();
 	}
 
-	if(_animation2dEditor.isLoaded())
+	if(_animation2dEditor->isLoaded())
 	{
-		_animation2dEditor.unload();
+		_animation2dEditor->unload();
 	}
 
-	if(_animation3dEditor.isLoaded())
+	if(_animation3dEditor->isLoaded())
 	{
-		_animation3dEditor.unload();
+		_animation3dEditor->unload();
 	}
 
-	if(_soundEditor.isLoaded())
+	if(_soundEditor->isLoaded())
 	{
-		_soundEditor.unload();
+		_soundEditor->unload();
 	}
 
-	if(_worldEditor.isLoaded())
+	if(_worldEditor->isLoaded())
 	{
-		_worldEditor.unload();
+		_worldEditor->unload();
 	}
 
-	if(_scriptEditor.isLoaded())
+	if(_scriptEditor->isLoaded())
 	{
-		_scriptEditor.unload();
+		_scriptEditor->unload();
 	}
 
-	_skyEditor.setCurrentProjectID(_currentProjectID);
-	_terrainEditor.setCurrentProjectID(_currentProjectID);
-	_waterEditor.setCurrentProjectID(_currentProjectID);
-	_modelEditor.setCurrentProjectID(_currentProjectID);
-	_billboardEditor.setCurrentProjectID(_currentProjectID);
-	_quadEditor.setCurrentProjectID(_currentProjectID);
-	_animation2dEditor.setCurrentProjectID(_currentProjectID);
-	_animation3dEditor.setCurrentProjectID(_currentProjectID);
-	_soundEditor.setCurrentProjectID(_currentProjectID);
-	_worldEditor.setCurrentProjectID(_currentProjectID);
-	_scriptEditor.setCurrentProjectID(_currentProjectID);
+	_skyEditor->setCurrentProjectID(_currentProjectID);
+	_terrainEditor->setCurrentProjectID(_currentProjectID);
+	_waterEditor->setCurrentProjectID(_currentProjectID);
+	_modelEditor->setCurrentProjectID(_currentProjectID);
+	_billboardEditor->setCurrentProjectID(_currentProjectID);
+	_quadEditor->setCurrentProjectID(_currentProjectID);
+	_animation2dEditor->setCurrentProjectID(_currentProjectID);
+	_animation3dEditor->setCurrentProjectID(_currentProjectID);
+	_soundEditor->setCurrentProjectID(_currentProjectID);
+	_worldEditor->setCurrentProjectID(_currentProjectID);
+	_scriptEditor->setCurrentProjectID(_currentProjectID);
 }
 
 const bool TopViewportController::isProjectCorrupted(const string& projectDirectoryPath) const
@@ -258,17 +258,17 @@ void TopViewportController::_saveCurrentProject()
 		Logger::throwError("TopViewportController::_saveCurrentProject");
 	}
 
-	_skyEditor.saveToFile();
-	_terrainEditor.saveToFile();
-	_waterEditor.saveToFile();
-	_modelEditor.saveToFile();
-	_billboardEditor.saveToFile();
-	_quadEditor.saveToFile();
-	_animation2dEditor.saveToFile();
-	_animation3dEditor.saveToFile();
-	_soundEditor.saveToFile();
-	_worldEditor.saveEditorWorldToFile();
-	_scriptEditor.saveScriptFiles();
+	_skyEditor->saveToFile();
+	_terrainEditor->saveToFile();
+	_waterEditor->saveToFile();
+	_modelEditor->saveToFile();
+	_billboardEditor->saveToFile();
+	_quadEditor->saveToFile();
+	_animation2dEditor->saveToFile();
+	_animation3dEditor->saveToFile();
+	_soundEditor->saveToFile();
+	_worldEditor->saveEditorWorldToFile();
+	_scriptEditor->saveScriptFiles();
 
 	Logger::throwInfo("Project \"" + _currentProjectID + "\" saved!");
 }

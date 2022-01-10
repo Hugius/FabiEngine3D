@@ -64,9 +64,9 @@ void ModelEditor::load()
 	_fe3d->reflection_create("@@reflection");
 	_fe3d->reflection_capture("@@reflection");
 
-	_gui.getOverlay()->createTextField("modelID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
-	_gui.getOverlay()->createTextField("partID", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
-	_gui.getOverlay()->createTextField("aabbID", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
+	_gui->getOverlay()->createTextField("modelID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
+	_gui->getOverlay()->createTextField("partID", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
+	_gui->getOverlay()->createTextField("aabbID", fvec2(0.0f, 0.75f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
 
 	_isEditorLoaded = true;
 }
@@ -97,9 +97,9 @@ void ModelEditor::unload()
 
 	_fe3d->reflection_delete("@@reflection");
 
-	_gui.getOverlay()->deleteTextField("modelID");
-	_gui.getOverlay()->deleteTextField("partID");
-	_gui.getOverlay()->deleteTextField("aabbID");
+	_gui->getOverlay()->deleteTextField("modelID");
+	_gui->getOverlay()->deleteTextField("partID");
+	_gui->getOverlay()->deleteTextField("aabbID");
 
 	_loadedModelIDs.clear();
 	_currentModelID = "";
@@ -125,7 +125,7 @@ void ModelEditor::unload()
 
 void ModelEditor::_loadGUI()
 {
-	auto leftWindow = _gui.getViewport("left")->getWindow("main");
+	auto leftWindow = _gui->getViewport("left")->getWindow("main");
 
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("modelEditorMenuMain");
@@ -190,13 +190,13 @@ void ModelEditor::_loadGUI()
 
 void ModelEditor::_unloadGUI()
 {
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("modelEditorMenuMain");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("modelEditorMenuChoice");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("modelEditorMenuTexturing");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("modelEditorMenuLighting");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("modelEditorMenuMiscellaneous");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("modelEditorMenuAabbMain");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("modelEditorMenuAabbChoice");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("modelEditorMenuMain");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("modelEditorMenuChoice");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("modelEditorMenuTexturing");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("modelEditorMenuLighting");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("modelEditorMenuMiscellaneous");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("modelEditorMenuAabbMain");
+	_gui->getViewport("left")->getWindow("main")->deleteScreen("modelEditorMenuAabbChoice");
 }
 
 void ModelEditor::update()

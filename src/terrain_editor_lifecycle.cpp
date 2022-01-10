@@ -7,7 +7,7 @@
 using VPC = BaseViewportController;
 using LVPC = LeftViewportController;
 
-TerrainEditor::TerrainEditor(FabiEngine3D& fe3d, GuiManager& gui)
+TerrainEditor::TerrainEditor(EngineInterface& fe3d, GuiManager& gui)
 	:
 	_fe3d(fe3d),
 	_gui(gui)

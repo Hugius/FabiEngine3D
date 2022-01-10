@@ -7,7 +7,7 @@
 using VPC = BaseViewportController;
 using LVPC = LeftViewportController;
 
-QuadEditor::QuadEditor(FabiEngine3D& fe3d, GuiManager& gui)
+QuadEditor::QuadEditor(EngineInterface& fe3d, GuiManager& gui)
 	:
 	_fe3d(fe3d),
 	_gui(gui)

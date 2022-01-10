@@ -1,6 +1,6 @@
 #pragma once
 
-#include "fe3d.hpp"
+#include "engine_interface.hpp"
 #include "gui_manager.hpp"
 #include "script.hpp"
 #include "script_executor.hpp"
@@ -8,7 +8,7 @@
 class ScriptEditor final
 {
 public:
-	ScriptEditor(FabiEngine3D& fe3d,
+	ScriptEditor(EngineInterface& fe3d,
 				 GuiManager& gui,
 				 SkyEditor& skyEditor,
 				 TerrainEditor& terrainEditor,
@@ -130,7 +130,7 @@ private:
 	bool _isRenamingScriptFile = false;
 	bool _isSearchingScriptFile = false;
 
-	FabiEngine3D& _fe3d;
+	EngineInterface& _fe3d;
 	GuiManager& _gui;
 	Script _script;
 	ScriptExecutor _scriptExecutor;

@@ -7,7 +7,7 @@
 using VPC = BaseViewportController;
 using LVPC = LeftViewportController;
 
-WaterEditor::WaterEditor(FabiEngine3D& fe3d, GuiManager& gui)
+WaterEditor::WaterEditor(EngineInterface& fe3d, GuiManager& gui)
 	:
 	_fe3d(fe3d),
 	_gui(gui)

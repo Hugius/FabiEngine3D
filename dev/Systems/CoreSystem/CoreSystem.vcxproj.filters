@@ -30,10 +30,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\core_lifecycle.cpp">
+    <ClCompile Include="..\..\..\src\engine_core.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface.cpp">
       <Filter>Interface\Base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_graphics_set.cpp">
@@ -57,46 +57,46 @@
     <ClCompile Include="..\..\..\src\fe3d_client_get.cpp">
       <Filter>Interface\Networking</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_sky_set.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_sky_set.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_terrain_set.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_terrain_set.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_water_get.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_water_get.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_aabb_set.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_aabb_set.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_billboard_get.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_billboard_get.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_quad_get.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_quad_get.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_pointlight_get.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_pointlight_get.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_model_get.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_model_get.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_text_get.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_text_get.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_reflection_get.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_reflection_get.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_spotlight_set.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_spotlight_set.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_billboard_set.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_billboard_set.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_model_set.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_model_set.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_terrain_get.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_terrain_get.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_client_set.cpp">
@@ -105,28 +105,28 @@
     <ClCompile Include="..\..\..\src\fe3d_server_set.cpp">
       <Filter>Interface\Networking</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_aabb_get.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_aabb_get.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_quad_set.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_quad_set.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_pointlight_set.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_pointlight_set.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_reflection_set.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_reflection_set.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_sky_get.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_sky_get.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_spotlight_get.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_spotlight_get.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_text_set.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_text_set.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\fe3d_entity_water_set.cpp">
+    <ClCompile Include="..\..\..\src\engine_interface_entity_water_set.cpp">
       <Filter>Interface\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_raycast_set.cpp">
@@ -147,9 +147,6 @@
     <ClCompile Include="..\..\..\src\fe3d_camera_get.cpp">
       <Filter>Interface\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\core_misc.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\fe3d_sound2d_get.cpp">
       <Filter>Interface\Sound</Filter>
     </ClCompile>
@@ -164,10 +161,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\core.hpp">
+    <ClInclude Include="..\..\..\src\engine_core.hpp">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\fe3d.hpp">
+    <ClInclude Include="..\..\..\src\engine_interface.hpp">
       <Filter>Interface\Base</Filter>
     </ClInclude>
   </ItemGroup>

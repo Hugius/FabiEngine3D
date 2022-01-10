@@ -5,7 +5,7 @@
 class ScriptExecutor final
 {
 public:
-	ScriptExecutor(FabiEngine3D& fe3d,
+	ScriptExecutor(EngineInterface& fe3d,
 				   Script& script,
 				   SkyEditor& skyEditor,
 				   TerrainEditor& terrainEditor,
@@ -41,7 +41,7 @@ private:
 	bool _wasTimerStarted = false;
 	bool _mustSkipUpdate = false;
 
-	FabiEngine3D& _fe3d;
+	EngineInterface& _fe3d;
 	Script& _script;
 	ScriptInterpreter _scriptInterpreter;
 };

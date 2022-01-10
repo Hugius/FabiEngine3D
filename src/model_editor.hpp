@@ -1,13 +1,13 @@
 #pragma once
 
-#include "fe3d.hpp"
+#include "engine_interface.hpp"
 #include "gui_manager.hpp"
 #include "reflection_type.hpp"
 
 class ModelEditor final
 {
 public:
-	ModelEditor(FabiEngine3D& fe3d, GuiManager& gui);
+	ModelEditor(EngineInterface& fe3d, GuiManager& gui);
 
 	void setCurrentProjectID(const string& projectID);
 	void load();
@@ -78,6 +78,6 @@ private:
 	bool _isDeletingAabb = false;
 	bool _isEditorLoaded = false;
 
-	FabiEngine3D& _fe3d;
+	EngineInterface& _fe3d;
 	GuiManager& _gui;
 };

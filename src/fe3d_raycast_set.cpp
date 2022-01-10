@@ -1,28 +1,28 @@
-#include "fe3d.hpp"
-#include "core.hpp"
+#include "engine_interface.hpp"
+#include "engine_core.hpp"
 
 using std::numeric_limits;
 
-void FabiEngine3D::raycast_enableTerrainPointing(float distance, float precision)
+void EngineInterface::raycast_enableTerrainPointing(float distance, float precision)
 {
-	if(_core->_raycaster->isTerrainPointingEnabled())
+	if(_core->getRaycaster()->isTerrainPointingEnabled())
 	{
 		Logger::throwWarning("Tried to enable terrain raycast pointing: already enabled!");
 		return;
 	}
 
-	_core->_raycaster->setTerrainPointingEnabled(true);
-	_core->_raycaster->setTerrainPointingDistance(distance);
-	_core->_raycaster->setTerrainPointingPrecision(precision);
+	_core->getRaycaster()->setTerrainPointingEnabled(true);
+	_core->getRaycaster()->setTerrainPointingDistance(distance);
+	_core->getRaycaster()->setTerrainPointingPrecision(precision);
 }
 
-void FabiEngine3D::raycast_disableTerrainPointing()
+void EngineInterface::raycast_disableTerrainPointing()
 {
-	if(!_core->_raycaster->isTerrainPointingEnabled())
+	if(!_core->getRaycaster()->isTerrainPointingEnabled())
 	{
 		Logger::throwWarning("Tried to disable terrain raycast pointing: not enabled!");
 		return;
 	}
 
-	_core->_raycaster->setTerrainPointingEnabled(false);
+	_core->getRaycaster()->setTerrainPointingEnabled(false);
 }

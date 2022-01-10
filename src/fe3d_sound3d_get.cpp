@@ -1,11 +1,11 @@
-#include "fe3d.hpp"
-#include "core.hpp"
+#include "engine_interface.hpp"
+#include "engine_core.hpp"
 
-const vector<string> FabiEngine3D::sound3d_getIDs() const
+const vector<string> EngineInterface::sound3d_getIDs() const
 {
 	vector<string> result;
 
-	for(const auto& chunk : _core->_sound3dManager->getSounds())
+	for(const auto& chunk : _core->getSound3dManager()->getSounds())
 	{
 		result.push_back(chunk.getID());
 	}
@@ -13,47 +13,47 @@ const vector<string> FabiEngine3D::sound3d_getIDs() const
 	return result;
 }
 
-const string& FabiEngine3D::sound3d_getAudioPath(const string& ID) const
+const string& EngineInterface::sound3d_getAudioPath(const string& ID) const
 {
-	return _core->_sound3dManager->getSound(ID).getAudioPath();
+	return _core->getSound3dManager()->getSound(ID).getAudioPath();
 }
 
-const bool FabiEngine3D::sound3d_isExisting(const string& ID) const
+const bool EngineInterface::sound3d_isExisting(const string& ID) const
 {
-	return _core->_sound3dManager->isSoundExisting(ID);
+	return _core->getSound3dManager()->isSoundExisting(ID);
 }
 
-const bool FabiEngine3D::sound3d_isStarted(const string& ID) const
+const bool EngineInterface::sound3d_isStarted(const string& ID) const
 {
-	return _core->_sound3dPlayer->isSoundStarted(_core->_sound3dManager->getSound(ID));
+	return _core->getSound3dPlayer()->isSoundStarted(_core->getSound3dManager()->getSound(ID));
 }
 
-const bool FabiEngine3D::sound3d_isPlaying(const string& ID) const
+const bool EngineInterface::sound3d_isPlaying(const string& ID) const
 {
-	return _core->_sound3dPlayer->isSoundPlaying(_core->_sound3dManager->getSound(ID));
+	return _core->getSound3dPlayer()->isSoundPlaying(_core->getSound3dManager()->getSound(ID));
 }
 
-const bool FabiEngine3D::sound3d_isPaused(const string& ID) const
+const bool EngineInterface::sound3d_isPaused(const string& ID) const
 {
-	return _core->_sound3dPlayer->isSoundPaused(_core->_sound3dManager->getSound(ID));
+	return _core->getSound3dPlayer()->isSoundPaused(_core->getSound3dManager()->getSound(ID));
 }
 
-const float FabiEngine3D::sound3d_getVolume(const string& ID) const
+const float EngineInterface::sound3d_getVolume(const string& ID) const
 {
-	return _core->_sound3dManager->getSound(ID).getVolume();
+	return _core->getSound3dManager()->getSound(ID).getVolume();
 }
 
-const float FabiEngine3D::sound3d_getMaxVolume(const string& ID) const
+const float EngineInterface::sound3d_getMaxVolume(const string& ID) const
 {
-	return _core->_sound3dManager->getSound(ID).getMaxVolume();
+	return _core->getSound3dManager()->getSound(ID).getMaxVolume();
 }
 
-const fvec3 FabiEngine3D::sound3d_getPosition(const string& ID) const
+const fvec3 EngineInterface::sound3d_getPosition(const string& ID) const
 {
-	return _core->_sound3dManager->getSound(ID).getPosition();
+	return _core->getSound3dManager()->getSound(ID).getPosition();
 }
 
-const float FabiEngine3D::sound3d_getMaxDistance(const string& ID) const
+const float EngineInterface::sound3d_getMaxDistance(const string& ID) const
 {
-	return _core->_sound3dManager->getSound(ID).getMaxDistance();
+	return _core->getSound3dManager()->getSound(ID).getMaxDistance();
 }

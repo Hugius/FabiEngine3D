@@ -1,6 +1,5 @@
 #pragma once
 
-#include "fe3d.hpp"
 #include "mesh_loader.hpp"
 #include "image_loader.hpp"
 #include "audio_loader.hpp"
@@ -34,25 +33,66 @@
 #include "vertex_buffer_cache.hpp"
 #include "texture_buffer_cache.hpp"
 
-class Core final
+class EngineController;
+
+class EngineCore final
 {
 public:
-	Core(FabiEngine3D& fe3d);
+	EngineCore();
 
-	void _start();
-	void _prepare();
-	void _update();
-	void _render();
-	void _pause();
-	void _resume();
-	void _stop();
+	void inject(shared_ptr<EngineController> engineController);
 
+	void start();
+	void update();
+	void render();
+	void pause();
+	void resume();
+	void stop();
+
+	const float getDeltaTimeMS() const;
+
+	const bool isPaused() const;
+	const bool isRunning() const;
+
+	const shared_ptr<LibraryLoader> getLibraryLoader() const;
+	const shared_ptr<InputHandler> getInputHandler() const;
+	const shared_ptr<MeshLoader> getMeshLoader() const;
+	const shared_ptr<ImageLoader> getImageLoader() const;
+	const shared_ptr<AudioLoader> getAudioLoader() const;
+	const shared_ptr<SkyEntityManager> getSkyEntityManager() const;
+	const shared_ptr<TerrainEntityManager> getTerrainEntityManager() const;
+	const shared_ptr<WaterEntityManager> getWaterEntityManager() const;
+	const shared_ptr<ModelEntityManager> getModelEntityManager() const;
+	const shared_ptr<BillboardEntityManager> getBillboardEntityManager() const;
+	const shared_ptr<AabbEntityManager> getAabbEntityManager() const;
+	const shared_ptr<QuadEntityManager> getQuadEntityManager() const;
+	const shared_ptr<TextEntityManager> getTextEntityManager() const;
+	const shared_ptr<PointlightEntityManager> getPointlightEntityManager() const;
+	const shared_ptr<SpotlightEntityManager> getSpotlightEntityManager() const;
+	const shared_ptr<ReflectionEntityManager> getReflectionEntityManager() const;
+	const shared_ptr<RenderWindow> getRenderWindow() const;
+	const shared_ptr<MasterRenderer> getMasterRenderer() const;
+	const shared_ptr<VertexBufferCache> getVertexBufferCache() const;
+	const shared_ptr<TextureBufferCache> getTextureBufferCache() const;
+	const shared_ptr<RenderBus> getRenderBus() const;
+	const shared_ptr<ShadowGenerator> getShadowGenerator() const;
+	const shared_ptr<Camera> getCamera() const;
+	const shared_ptr<Raycaster> getRaycaster() const;
+	const shared_ptr<CameraCollisionDetector> getCameraCollisionDetector() const;
+	const shared_ptr<CameraCollisionHandler> getCameraCollisionHandler() const;
+	const shared_ptr<Sound2dManager> getSound2dManager() const;
+	const shared_ptr<Sound3dManager> getSound3dManager() const;
+	const shared_ptr<Sound2dPlayer> getSound2dPlayer() const;
+	const shared_ptr<Sound3dPlayer> getSound3dPlayer() const;
+	const shared_ptr<NetworkingServer> getNetworkingServer() const;
+	const shared_ptr<NetworkingClient> getNetworkingClient() const;
+	const shared_ptr<Timer> getTimer() const;
+
+private:
 	float _deltaTimeMS = 0.0f;
 
 	bool _isPaused = false;
 	bool _isRunning = false;
-
-	FabiEngine3D& _fe3d;
 
 	shared_ptr<LibraryLoader> _libraryLoader = nullptr;
 	shared_ptr<InputHandler> _inputHandler = nullptr;
@@ -87,4 +127,6 @@ public:
 	shared_ptr<NetworkingServer> _networkingServer = nullptr;
 	shared_ptr<NetworkingClient> _networkingClient = nullptr;
 	shared_ptr<Timer> _timer = nullptr;
+
+	shared_ptr<EngineController> _engineController = nullptr;
 };

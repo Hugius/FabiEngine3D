@@ -1,7 +1,7 @@
 #include "script_variable.hpp"
 #include "logger.hpp"
 
-ScriptVariable::ScriptVariable(FabiEngine3D& fe3d, ScriptVariableScope scope, ScriptVariableType type,
+ScriptVariable::ScriptVariable(EngineInterface& fe3d, ScriptVariableScope scope, ScriptVariableType type,
 							   const string& ID, bool constant, vector<ScriptValue> values)
 	:
 	_fe3d(fe3d),

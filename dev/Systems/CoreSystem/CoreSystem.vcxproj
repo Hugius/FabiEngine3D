@@ -146,9 +146,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\core_lifecycle.cpp" />
-    <ClCompile Include="..\..\..\src\core_misc.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d.cpp" />
+    <ClCompile Include="..\..\..\src\engine_core.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface.cpp" />
     <ClCompile Include="..\..\..\src\fe3d_sound3d_get.cpp" />
     <ClCompile Include="..\..\..\src\fe3d_sound2d_get.cpp" />
     <ClCompile Include="..\..\..\src\fe3d_sound3d_set.cpp" />
@@ -159,27 +158,27 @@
     <ClCompile Include="..\..\..\src\fe3d_client_set.cpp" />
     <ClCompile Include="..\..\..\src\fe3d_collision_set.cpp" />
     <ClCompile Include="..\..\..\src\fe3d_collision_get.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_aabb_set.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_aabb_get.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_billboard_get.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_billboard_set.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_quad_get.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_quad_set.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_model_set.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_pointlight_get.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_model_get.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_pointlight_set.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_reflection_get.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_reflection_set.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_sky_set.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_sky_get.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_spotlight_get.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_terrain_get.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_terrain_set.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_text_get.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_text_set.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_water_get.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_water_set.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_aabb_set.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_aabb_get.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_billboard_get.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_billboard_set.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_quad_get.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_quad_set.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_model_set.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_pointlight_get.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_model_get.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_pointlight_set.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_reflection_get.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_reflection_set.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_sky_set.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_sky_get.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_spotlight_get.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_terrain_get.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_terrain_set.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_text_get.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_text_set.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_water_get.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_water_set.cpp" />
     <ClCompile Include="..\..\..\src\fe3d_graphics_get.cpp" />
     <ClCompile Include="..\..\..\src\fe3d_graphics_set.cpp" />
     <ClCompile Include="..\..\..\src\fe3d_input.cpp" />
@@ -188,12 +187,12 @@
     <ClCompile Include="..\..\..\src\fe3d_raycast_get.cpp" />
     <ClCompile Include="..\..\..\src\fe3d_raycast_set.cpp" />
     <ClCompile Include="..\..\..\src\fe3d_server_get.cpp" />
-    <ClCompile Include="..\..\..\src\fe3d_entity_spotlight_set.cpp" />
+    <ClCompile Include="..\..\..\src\engine_interface_entity_spotlight_set.cpp" />
     <ClCompile Include="..\..\..\src\fe3d_server_set.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\core.hpp" />
-    <ClInclude Include="..\..\..\src\fe3d.hpp" />
+    <ClInclude Include="..\..\..\src\engine_core.hpp" />
+    <ClInclude Include="..\..\..\src\engine_interface.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

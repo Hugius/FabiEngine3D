@@ -1,9 +1,9 @@
-#include "fe3d.hpp"
-#include "core.hpp"
+#include "engine_interface.hpp"
+#include "engine_core.hpp"
 
-void FabiEngine3D::client_start(const string& username)
+void EngineInterface::client_start(const string& username)
 {
-	if(_core->_networkingClient->isRunning())
+	if(_core->getNetworkingClient()->isRunning())
 	{
 		Logger::throwWarning("Networking client tried to start: already running!");
 		return;
@@ -29,48 +29,48 @@ void FabiEngine3D::client_start(const string& username)
 		return;
 	}
 
-	_core->_networkingClient->start(username);
+	_core->getNetworkingClient()->start(username);
 }
 
-void FabiEngine3D::client_connect(const string& serverIP)
+void EngineInterface::client_connect(const string& serverIP)
 {
-	if(!_core->_networkingClient->isRunning())
+	if(!_core->getNetworkingClient()->isRunning())
 	{
 		Logger::throwWarning("Networking client tried to connect: not running!");
 		return;
 	}
-	if(_core->_networkingClient->isConnectedToServer())
+	if(_core->getNetworkingClient()->isConnectedToServer())
 	{
 		Logger::throwWarning("Networking client tried to connect: already connected!");
 		return;
 	}
-	if(_core->_networkingClient->isConnectingToServer())
+	if(_core->getNetworkingClient()->isConnectingToServer())
 	{
 		Logger::throwWarning("Networking client tried to connect: already connecting!");
 		return;
 	}
-	if(!_core->_networkingClient->isValidServerIP(serverIP))
+	if(!_core->getNetworkingClient()->isValidServerIP(serverIP))
 	{
 		Logger::throwWarning("Networking client tried to connect: invalid server IP!");
 		return;
 	}
 
-	_core->_networkingClient->connectToServer(serverIP, NetworkingUtils::SERVER_PORT);
+	_core->getNetworkingClient()->connectToServer(serverIP, NetworkingUtils::SERVER_PORT);
 }
 
-void FabiEngine3D::client_sendTcpMessage(const string& content)
+void EngineInterface::client_sendTcpMessage(const string& content)
 {
-	if(!_core->_networkingClient->isRunning())
+	if(!_core->getNetworkingClient()->isRunning())
 	{
 		Logger::throwWarning("Networking client tried to send TCP message: not running!");
 		return;
 	}
-	if(!_core->_networkingClient->isConnectedToServer())
+	if(!_core->getNetworkingClient()->isConnectedToServer())
 	{
 		Logger::throwWarning("Networking client tried to send TCP message: not connected!");
 		return;
 	}
-	if(!_core->_networkingClient->isAcceptedByServer())
+	if(!_core->getNetworkingClient()->isAcceptedByServer())
 	{
 		Logger::throwWarning("Networking client tried to send TCP message: not accepted!");
 		return;
@@ -91,22 +91,22 @@ void FabiEngine3D::client_sendTcpMessage(const string& content)
 		return;
 	}
 
-	_core->_networkingClient->sendTcpMessage(content);
+	_core->getNetworkingClient()->sendTcpMessage(content);
 }
 
-void FabiEngine3D::client_sendUdpMessage(const string& content)
+void EngineInterface::client_sendUdpMessage(const string& content)
 {
-	if(!_core->_networkingClient->isRunning())
+	if(!_core->getNetworkingClient()->isRunning())
 	{
 		Logger::throwWarning("Networking client tried to send UDP message: not running!");
 		return;
 	}
-	if(!_core->_networkingClient->isConnectedToServer())
+	if(!_core->getNetworkingClient()->isConnectedToServer())
 	{
 		Logger::throwWarning("Networking client tried to send UDP message: not connected!");
 		return;
 	}
-	if(!_core->_networkingClient->isAcceptedByServer())
+	if(!_core->getNetworkingClient()->isAcceptedByServer())
 	{
 		Logger::throwWarning("Networking client tried to send UDP message: not accepted!");
 		return;
@@ -127,37 +127,37 @@ void FabiEngine3D::client_sendUdpMessage(const string& content)
 		return;
 	}
 
-	_core->_networkingClient->sendUdpMessage(content);
+	_core->getNetworkingClient()->sendUdpMessage(content);
 }
 
-void FabiEngine3D::client_disconnect()
+void EngineInterface::client_disconnect()
 {
-	if(!_core->_networkingClient->isRunning())
+	if(!_core->getNetworkingClient()->isRunning())
 	{
 		Logger::throwWarning("Networking client tried to disconnect: not running!");
 		return;
 	}
-	if(!_core->_networkingClient->isConnectedToServer())
+	if(!_core->getNetworkingClient()->isConnectedToServer())
 	{
 		Logger::throwWarning("Networking client tried to disconnect: not connected!");
 		return;
 	}
-	if(!_core->_networkingClient->isAcceptedByServer())
+	if(!_core->getNetworkingClient()->isAcceptedByServer())
 	{
 		Logger::throwWarning("Networking client tried to disconnect: not accepted!");
 		return;
 	}
 
-	_core->_networkingClient->disconnectFromServer(true);
+	_core->getNetworkingClient()->disconnectFromServer(true);
 }
 
-void FabiEngine3D::client_stop()
+void EngineInterface::client_stop()
 {
-	if(!_core->_networkingClient->isRunning())
+	if(!_core->getNetworkingClient()->isRunning())
 	{
 		Logger::throwWarning("Networking client tried to stop: not running!");
 		return;
 	}
 
-	_core->_networkingClient->stop();
+	_core->getNetworkingClient()->stop();
 }

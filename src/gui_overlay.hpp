@@ -1,6 +1,6 @@
 #pragma once
 
-#include "fe3d.hpp"
+#include "engine_interface.hpp"
 #include "gui_scrolling_list.hpp"
 #include "gui_write_field.hpp"
 #include "gui_button.hpp"
@@ -10,7 +10,7 @@
 class GuiOverlay final
 {
 public:
-	GuiOverlay(FabiEngine3D& fe3d);
+	GuiOverlay(EngineInterface& fe3d);
 
 	void update();
 	void setFocused(bool value);
@@ -88,5 +88,5 @@ private:
 	bool _isFocused = false;
 	bool _mustDeleteValueForms = false;
 
-	FabiEngine3D& _fe3d;
+	EngineInterface& _fe3d;
 };

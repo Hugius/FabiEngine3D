@@ -1,237 +1,237 @@
-#include "fe3d.hpp"
-#include "core.hpp"
+#include "engine_interface.hpp"
+#include "engine_core.hpp"
 
-const bool FabiEngine3D::gfx_isAntiAliasingEnabled() const
+const bool EngineInterface::gfx_isAntiAliasingEnabled() const
 {
-	return _core->_renderBus->isAntiAliasingEnabled();
+	return _core->getRenderBus()->isAntiAliasingEnabled();
 }
 
-const bool FabiEngine3D::gfx_isAmbientLightingEnabled() const
+const bool EngineInterface::gfx_isAmbientLightingEnabled() const
 {
-	return _core->_renderBus->isAmbientLightingEnabled();
+	return _core->getRenderBus()->isAmbientLightingEnabled();
 }
 
-const bool FabiEngine3D::gfx_isDirectionalLightingEnabled() const
+const bool EngineInterface::gfx_isDirectionalLightingEnabled() const
 {
-	return _core->_renderBus->isDirectionalLightingEnabled();
+	return _core->getRenderBus()->isDirectionalLightingEnabled();
 }
 
-const bool FabiEngine3D::gfx_isFogEnabled() const
+const bool EngineInterface::gfx_isFogEnabled() const
 {
-	return _core->_renderBus->isFogEnabled();
+	return _core->getRenderBus()->isFogEnabled();
 }
 
-const bool FabiEngine3D::gfx_isBloomEnabled() const
+const bool EngineInterface::gfx_isBloomEnabled() const
 {
-	return _core->_renderBus->isBloomEnabled();
+	return _core->getRenderBus()->isBloomEnabled();
 }
 
-const bool FabiEngine3D::gfx_isSkyExposureEnabled() const
+const bool EngineInterface::gfx_isSkyExposureEnabled() const
 {
-	return _core->_skyEntityManager->isExposureEnabled();
+	return _core->getSkyEntityManager()->isExposureEnabled();
 }
 
-const bool FabiEngine3D::gfx_isShadowsEnabled() const
+const bool EngineInterface::gfx_isShadowsEnabled() const
 {
-	return _core->_shadowGenerator->isEnabled();
+	return _core->getShadowGenerator()->isEnabled();
 }
 
-const bool FabiEngine3D::gfx_isDofEnabled() const
+const bool EngineInterface::gfx_isDofEnabled() const
 {
-	return _core->_renderBus->isDofEnabled();
+	return _core->getRenderBus()->isDofEnabled();
 }
 
-const bool FabiEngine3D::gfx_isDofDynamic() const
+const bool EngineInterface::gfx_isDofDynamic() const
 {
-	return _core->_renderBus->isDofDynamic();
+	return _core->getRenderBus()->isDofDynamic();
 }
 
-const bool FabiEngine3D::gfx_isMotionBlurEnabled() const
+const bool EngineInterface::gfx_isMotionBlurEnabled() const
 {
-	return _core->_renderBus->isMotionBlurEnabled();
+	return _core->getRenderBus()->isMotionBlurEnabled();
 }
 
-const bool FabiEngine3D::gfx_isLensFlareEnabled() const
+const bool EngineInterface::gfx_isLensFlareEnabled() const
 {
-	return _core->_renderBus->isLensFlareEnabled();
+	return _core->getRenderBus()->isLensFlareEnabled();
 }
 
-const unsigned int FabiEngine3D::gfx_getShadowQuality() const
+const unsigned int EngineInterface::gfx_getShadowQuality() const
 {
-	return _core->_shadowGenerator->getQuality();
+	return _core->getShadowGenerator()->getQuality();
 }
 
-const unsigned int FabiEngine3D::gfx_getCubeReflectionQuality() const
+const unsigned int EngineInterface::gfx_getCubeReflectionQuality() const
 {
-	return _core->_renderBus->getCubeReflectionQuality();
+	return _core->getRenderBus()->getCubeReflectionQuality();
 }
 
-const unsigned int FabiEngine3D::gfx_getPlanarReflectionQuality() const
+const unsigned int EngineInterface::gfx_getPlanarReflectionQuality() const
 {
-	return _core->_renderBus->getPlanarReflectionQuality();
+	return _core->getRenderBus()->getPlanarReflectionQuality();
 }
 
-const unsigned int FabiEngine3D::gfx_getPlanarRefractionQuality() const
+const unsigned int EngineInterface::gfx_getPlanarRefractionQuality() const
 {
-	return _core->_renderBus->getPlanarRefractionQuality();
+	return _core->getRenderBus()->getPlanarRefractionQuality();
 }
 
-const fvec3 FabiEngine3D::gfx_getAmbientLightingColor() const
+const fvec3 EngineInterface::gfx_getAmbientLightingColor() const
 {
-	return _core->_renderBus->getAmbientLightingColor();
+	return _core->getRenderBus()->getAmbientLightingColor();
 }
 
-const float FabiEngine3D::gfx_getAmbientLightingIntensity() const
+const float EngineInterface::gfx_getAmbientLightingIntensity() const
 {
-	return _core->_renderBus->getAmbientLightingIntensity();
+	return _core->getRenderBus()->getAmbientLightingIntensity();
 }
 
-const float FabiEngine3D::gfx_getDirectionalLightingIntensity() const
+const float EngineInterface::gfx_getDirectionalLightingIntensity() const
 {
-	return _core->_renderBus->getDirectionalLightingIntensity();
+	return _core->getRenderBus()->getDirectionalLightingIntensity();
 }
 
-const fvec3 FabiEngine3D::gfx_getDirectionalLightingPosition() const
+const fvec3 EngineInterface::gfx_getDirectionalLightingPosition() const
 {
-	return _core->_renderBus->getDirectionalLightingPosition();
+	return _core->getRenderBus()->getDirectionalLightingPosition();
 }
 
-const fvec3 FabiEngine3D::gfx_getDirectionalLightingColor() const
+const fvec3 EngineInterface::gfx_getDirectionalLightingColor() const
 {
-	return _core->_renderBus->getDirectionalLightingColor();
+	return _core->getRenderBus()->getDirectionalLightingColor();
 }
 
-const float FabiEngine3D::gfx_getFogMinDistance() const
+const float EngineInterface::gfx_getFogMinDistance() const
 {
-	return _core->_renderBus->getFogMinDistance();
+	return _core->getRenderBus()->getFogMinDistance();
 }
 
-const float FabiEngine3D::gfx_getFogMaxDistance() const
+const float EngineInterface::gfx_getFogMaxDistance() const
 {
-	return _core->_renderBus->getFogMaxDistance();
+	return _core->getRenderBus()->getFogMaxDistance();
 }
 
-const float FabiEngine3D::gfx_getFogThickness() const
+const float EngineInterface::gfx_getFogThickness() const
 {
-	return _core->_renderBus->getFogThickness();
+	return _core->getRenderBus()->getFogThickness();
 }
 
-const fvec3 FabiEngine3D::gfx_getFogColor() const
+const fvec3 EngineInterface::gfx_getFogColor() const
 {
-	return _core->_renderBus->getFogColor();
+	return _core->getRenderBus()->getFogColor();
 }
 
-const float FabiEngine3D::gfx_getPlanarReflectionHeight() const
+const float EngineInterface::gfx_getPlanarReflectionHeight() const
 {
-	return _core->_renderBus->getPlanarReflectionHeight();
+	return _core->getRenderBus()->getPlanarReflectionHeight();
 }
 
-const fvec3 FabiEngine3D::gfx_getShadowEyePosition() const
+const fvec3 EngineInterface::gfx_getShadowEyePosition() const
 {
-	return _core->_shadowGenerator->getEyePosition();
+	return _core->getShadowGenerator()->getEyePosition();
 }
 
-const fvec3 FabiEngine3D::gfx_getShadowCenterPosition() const
+const fvec3 EngineInterface::gfx_getShadowCenterPosition() const
 {
-	return _core->_shadowGenerator->getCenterPosition();
+	return _core->getShadowGenerator()->getCenterPosition();
 }
 
-const string& FabiEngine3D::gfx_getLensFlareMapPath() const
+const string& EngineInterface::gfx_getLensFlareMapPath() const
 {
-	return _core->_renderBus->getLensFlareMapPath();
+	return _core->getRenderBus()->getLensFlareMapPath();
 }
 
-const float FabiEngine3D::gfx_getShadowSize() const
+const float EngineInterface::gfx_getShadowSize() const
 {
-	return _core->_shadowGenerator->getSize();
+	return _core->getShadowGenerator()->getSize();
 }
 
-const float FabiEngine3D::gfx_getShadowReach() const
+const float EngineInterface::gfx_getShadowReach() const
 {
-	return _core->_shadowGenerator->getReach();
+	return _core->getShadowGenerator()->getReach();
 }
 
-const float FabiEngine3D::gfx_getShadowLightness() const
+const float EngineInterface::gfx_getShadowLightness() const
 {
-	return _core->_shadowGenerator->getLightness();
+	return _core->getShadowGenerator()->getLightness();
 }
 
-const bool FabiEngine3D::gfx_isShadowFollowingCamera() const
+const bool EngineInterface::gfx_isShadowFollowingCamera() const
 {
-	return _core->_shadowGenerator->isFollowingCamera();
+	return _core->getShadowGenerator()->isFollowingCamera();
 }
 
-const float FabiEngine3D::gfx_getBloomIntensity() const
+const float EngineInterface::gfx_getBloomIntensity() const
 {
-	return _core->_renderBus->getBloomIntensity();
+	return _core->getRenderBus()->getBloomIntensity();
 }
 
-const unsigned int FabiEngine3D::gfx_getBloomBlurCount() const
+const unsigned int EngineInterface::gfx_getBloomBlurCount() const
 {
-	return _core->_renderBus->getBloomBlurCount();
+	return _core->getRenderBus()->getBloomBlurCount();
 }
 
-const unsigned int FabiEngine3D::gfx_getShadowInterval() const
+const unsigned int EngineInterface::gfx_getShadowInterval() const
 {
-	return _core->_shadowGenerator->getInterval();
+	return _core->getShadowGenerator()->getInterval();
 }
 
-const float FabiEngine3D::gfx_getSkyExposureIntensity() const
+const float EngineInterface::gfx_getSkyExposureIntensity() const
 {
-	return _core->_skyEntityManager->getExposureIntensity();
+	return _core->getSkyEntityManager()->getExposureIntensity();
 }
 
-const float FabiEngine3D::gfx_getSkyExposureSpeed() const
+const float EngineInterface::gfx_getSkyExposureSpeed() const
 {
-	return _core->_skyEntityManager->getExposureSpeed();
+	return _core->getSkyEntityManager()->getExposureSpeed();
 }
 
-const float FabiEngine3D::gfx_getDofDynamicDistance() const
+const float EngineInterface::gfx_getDofDynamicDistance() const
 {
-	return _core->_renderBus->getDofDynamicDistance();
+	return _core->getRenderBus()->getDofDynamicDistance();
 }
 
-const float FabiEngine3D::gfx_getDofBlurDistance() const
+const float EngineInterface::gfx_getDofBlurDistance() const
 {
-	return _core->_renderBus->getDofBlurDistance();
+	return _core->getRenderBus()->getDofBlurDistance();
 }
 
-const float FabiEngine3D::gfx_getLensFlareIntensity() const
+const float EngineInterface::gfx_getLensFlareIntensity() const
 {
-	return _core->_renderBus->getLensFlareIntensity();
+	return _core->getRenderBus()->getLensFlareIntensity();
 }
 
-const float FabiEngine3D::gfx_getLensFlareSensitivity() const
+const float EngineInterface::gfx_getLensFlareSensitivity() const
 {
-	return _core->_renderBus->getLensFlareSensitivity();
+	return _core->getRenderBus()->getLensFlareSensitivity();
 }
 
-const float FabiEngine3D::gfx_getMotionBlurStrength() const
+const float EngineInterface::gfx_getMotionBlurStrength() const
 {
-	return _core->_renderBus->getMotionBlurStrength();
+	return _core->getRenderBus()->getMotionBlurStrength();
 }
 
-const unsigned int FabiEngine3D::gfx_getBloomQuality() const
+const unsigned int EngineInterface::gfx_getBloomQuality() const
 {
-	return _core->_renderBus->getBloomQuality();
+	return _core->getRenderBus()->getBloomQuality();
 }
 
-const unsigned int FabiEngine3D::gfx_getDofQuality() const
+const unsigned int EngineInterface::gfx_getDofQuality() const
 {
-	return _core->_renderBus->getDofQuality();
+	return _core->getRenderBus()->getDofQuality();
 }
 
-const unsigned int FabiEngine3D::gfx_getMotionBlurQuality() const
+const unsigned int EngineInterface::gfx_getMotionBlurQuality() const
 {
-	return _core->_renderBus->getMotionBlurQuality();
+	return _core->getRenderBus()->getMotionBlurQuality();
 }
 
-const BloomType FabiEngine3D::gfx_getBloomType() const
+const BloomType EngineInterface::gfx_getBloomType() const
 {
-	return _core->_renderBus->getBloomType();
+	return _core->getRenderBus()->getBloomType();
 }
 
-const unsigned int FabiEngine3D::gfx_getAnisotropicFilteringQuality() const
+const unsigned int EngineInterface::gfx_getAnisotropicFilteringQuality() const
 {
-	return _core->_renderBus->getAnisotropicFilteringQuality();
+	return _core->getRenderBus()->getAnisotropicFilteringQuality();
 }

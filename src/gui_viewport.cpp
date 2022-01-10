@@ -2,7 +2,7 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-GuiViewport::GuiViewport(FabiEngine3D& fe3d, const string& ID, fvec2 position, fvec2 size, fvec3 color)
+GuiViewport::GuiViewport(EngineInterface& fe3d, const string& ID, fvec2 position, fvec2 size, fvec3 color)
 	:
 	_fe3d(fe3d),
 	_ID(ID),

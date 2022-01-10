@@ -5,7 +5,7 @@
 class Script final
 {
 public:
-	Script(FabiEngine3D& fe3d);
+	Script(EngineInterface& fe3d);
 
 	void createScriptFile(const string& ID);
 	void renameScriptFile(const string& ID, const string& newID);
@@ -24,5 +24,5 @@ public:
 
 private:
 	vector<shared_ptr<ScriptFile>> _scriptFiles;
-	FabiEngine3D& _fe3d;
+	EngineInterface& _fe3d;
 };

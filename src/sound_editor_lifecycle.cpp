@@ -7,7 +7,7 @@
 using VPC = BaseViewportController;
 using LVPC = LeftViewportController;
 
-SoundEditor::SoundEditor(FabiEngine3D& fe3d, GuiManager& gui)
+SoundEditor::SoundEditor(EngineInterface& fe3d, GuiManager& gui)
 	:
 	_fe3d(fe3d),
 	_gui(gui)

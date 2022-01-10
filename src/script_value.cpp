@@ -1,7 +1,7 @@
 #include "script_value.hpp"
 #include "logger.hpp"
 
-ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type)
+ScriptValue::ScriptValue(EngineInterface& fe3d, ScriptValueType type)
 	:
 	_fe3d(fe3d),
 	_type(type)
@@ -9,7 +9,7 @@ ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type)
 
 }
 
-ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, const string& value)
+ScriptValue::ScriptValue(EngineInterface& fe3d, ScriptValueType type, const string& value)
 	:
 	ScriptValue(fe3d, type)
 {
@@ -21,7 +21,7 @@ ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, const string&
 	setString(value);
 }
 
-ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, float value)
+ScriptValue::ScriptValue(EngineInterface& fe3d, ScriptValueType type, float value)
 	:
 	ScriptValue(fe3d, type)
 {
@@ -33,7 +33,7 @@ ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, float value)
 	setDecimal(value);
 }
 
-ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, int value)
+ScriptValue::ScriptValue(EngineInterface& fe3d, ScriptValueType type, int value)
 	:
 	ScriptValue(fe3d, type)
 {
@@ -45,7 +45,7 @@ ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, int value)
 	setInteger(value);
 }
 
-ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, bool value)
+ScriptValue::ScriptValue(EngineInterface& fe3d, ScriptValueType type, bool value)
 	:
 	ScriptValue(fe3d, type)
 {

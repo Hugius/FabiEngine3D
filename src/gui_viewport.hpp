@@ -1,12 +1,12 @@
 #pragma once
 
-#include "fe3d.hpp"
+#include "engine_interface.hpp"
 #include "gui_window.hpp"
 
 class GuiViewport final
 {
 public:
-	GuiViewport(FabiEngine3D& fe3d, const string& ID, fvec2 position, fvec2 size, fvec3 color);
+	GuiViewport(EngineInterface& fe3d, const string& ID, fvec2 position, fvec2 size, fvec3 color);
 	~GuiViewport();
 
 	void update(bool hoverable);
@@ -26,5 +26,5 @@ private:
 	const string _entityID;
 
 	vector<shared_ptr<GuiWindow>> _windows;
-	FabiEngine3D& _fe3d;
+	EngineInterface& _fe3d;
 };

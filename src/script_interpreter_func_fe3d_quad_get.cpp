@@ -63,7 +63,7 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				auto result = _fe3d.quad_isVisible(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -76,7 +76,7 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				auto result = _convertGuiPositionFromViewport(_fe3d.quad_getPosition(args[0].getString())).x;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -89,7 +89,7 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				auto result = _convertGuiPositionFromViewport(_fe3d.quad_getPosition(args[0].getString())).y;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -102,7 +102,7 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				auto result = _fe3d.quad_getRotation(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -115,7 +115,7 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				auto result = _convertGuiSizeFromViewport(_fe3d.quad_getSize(args[0].getString())).x;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -128,7 +128,7 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				auto result = _convertGuiSizeFromViewport(_fe3d.quad_getSize(args[0].getString())).y;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -141,7 +141,7 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				auto result = _fe3d.quad_getColor(args[0].getString()).r;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -154,7 +154,7 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				auto result = _fe3d.quad_getColor(args[0].getString()).g;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -167,7 +167,7 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				auto result = _fe3d.quad_getColor(args[0].getString()).b;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -180,7 +180,7 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				auto result = _fe3d.quad_getTransparency(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -193,7 +193,7 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				auto result = _fe3d.quad_getDiffuseMapPath(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -206,7 +206,7 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				auto result = _fe3d.quad_isMirroredHorizontally(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -219,7 +219,7 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				auto result = _fe3d.quad_isMirroredVertically(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -232,7 +232,7 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				auto result = _fe3d.quad_getWireframeColor(args[0].getString()).r;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -245,7 +245,7 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				auto result = _fe3d.quad_getWireframeColor(args[0].getString()).g;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -258,7 +258,7 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				auto result = _fe3d.quad_getWireframeColor(args[0].getString()).b;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -271,7 +271,7 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				auto result = _fe3d.quad_isWireframed(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));

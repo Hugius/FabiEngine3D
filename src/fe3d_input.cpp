@@ -1,42 +1,42 @@
-#include "fe3d.hpp"
-#include "core.hpp"
+#include "engine_interface.hpp"
+#include "engine_core.hpp"
 
-void FabiEngine3D::input_setLocked(bool value)
+void EngineInterface::input_setLocked(bool value)
 {
-	return _core->_inputHandler->setLocked(value);
+	return _core->getInputHandler()->setLocked(value);
 }
 
-const bool FabiEngine3D::input_isKeyDown(InputType key) const
+const bool EngineInterface::input_isKeyDown(InputType key) const
 {
-	return _core->_inputHandler->isKeyDown(key);
+	return _core->getInputHandler()->isKeyDown(key);
 }
 
-const bool FabiEngine3D::input_isKeyPressed(InputType key) const
+const bool EngineInterface::input_isKeyPressed(InputType key) const
 {
-	return _core->_inputHandler->isKeyPressed(key);
+	return _core->getInputHandler()->isKeyPressed(key);
 }
 
-const bool FabiEngine3D::input_isMouseDown(InputType button) const
+const bool EngineInterface::input_isMouseDown(InputType button) const
 {
-	return _core->_inputHandler->isMouseDown(button);
+	return _core->getInputHandler()->isMouseDown(button);
 }
 
-const bool FabiEngine3D::input_isMousePressed(InputType button) const
+const bool EngineInterface::input_isMousePressed(InputType button) const
 {
-	return _core->_inputHandler->isMousePressed(button);
+	return _core->getInputHandler()->isMousePressed(button);
 }
 
-const int FabiEngine3D::input_getMouseWheelX() const
+const int EngineInterface::input_getMouseWheelX() const
 {
-	return _core->_inputHandler->getMouseWheelX();
+	return _core->getInputHandler()->getMouseWheelX();
 }
 
-const int FabiEngine3D::input_getMouseWheelY() const
+const int EngineInterface::input_getMouseWheelY() const
 {
-	return _core->_inputHandler->getMouseWheelY();
+	return _core->getInputHandler()->getMouseWheelY();
 }
 
-const bool FabiEngine3D::input_isLocked() const
+const bool EngineInterface::input_isLocked() const
 {
-	return _core->_inputHandler->isLocked();
+	return _core->getInputHandler()->isLocked();
 }

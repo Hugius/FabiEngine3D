@@ -1,23 +1,18 @@
+#include "engine_core.hpp"
+#include "engine_interface.hpp"
 #include "engine_controller.hpp"
-
-#include <iostream>
-#include <conio.h>
-
-using std::endl;
-using std::cout;
 
 int main(int argc, char* argv[])
 {
-	EngineController controller;
+	auto engineCore = make_shared<EngineCore>();
+	auto engineInterface = make_shared<EngineInterface>();
+	auto engineController = make_shared<EngineController>();
 
-	controller.application_start();
+	engineCore->inject(engineController);
+	engineInterface->inject(engineCore);
+	engineController->inject(engineInterface);
 
-	if(controller.mustPromptOnExit())
-	{
-		cout << endl;
-		cout << "Press a key to continue...";
-		auto temp = _getch();
-	}
+	engineInterface->application_start();
 
 	return 0;
 }

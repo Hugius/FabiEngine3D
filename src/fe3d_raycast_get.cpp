@@ -1,16 +1,16 @@
-#include "fe3d.hpp"
-#include "core.hpp"
+#include "engine_interface.hpp"
+#include "engine_core.hpp"
 
 using std::numeric_limits;
 
-const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
+const pair<const string, float> EngineInterface::raycast_checkCursorInAny()
 {
 	float closestDistance = numeric_limits<float>::max();
 
-	for(const auto& [key, entity] : _core->_aabbEntityManager->getEntities())
+	for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
 	{
 		if(!(entity->hasParent() && entity->getParentEntityType() == AabbParentEntityType::MODEL &&
-		   _core->_modelEntityManager->getEntity(entity->getParentEntityID())->isLevelOfDetailed()))
+		   _core->getModelEntityManager()->getEntity(entity->getParentEntityID())->isLevelOfDetailed()))
 		{
 			if(entity->isRaycastResponsive() && entity->isVisible())
 			{
@@ -26,7 +26,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 					const auto front = (entity->getSize().z / 2.0f);
 					const auto box = Box(position, left, right, bottom, top, back, front);
 
-					distance = _core->_raycaster->calculateRayBoxIntersectionDistance(_core->_raycaster->getCursorRay(), box);
+					distance = _core->getRaycaster()->calculateRayBoxIntersectionDistance(_core->getRaycaster()->getCursorRay(), box);
 				}
 				else
 				{
@@ -39,7 +39,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 					const auto front = (entity->getSize().z / 2.0f);
 					const auto box = Box(position, left, right, bottom, top, back, front);
 
-					distance = _core->_raycaster->calculateRayBoxIntersectionDistance(_core->_raycaster->getCursorRay(), box);
+					distance = _core->getRaycaster()->calculateRayBoxIntersectionDistance(_core->getRaycaster()->getCursorRay(), box);
 				}
 
 				if((distance != -1.0f) && (distance < closestDistance))
@@ -52,7 +52,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 		}
 	}
 
-	if(!_core->_aabbEntityManager->isEntityExisting(_hoveredAabbID) || _hoveredAabbID.empty())
+	if(!_core->getAabbEntityManager()->isEntityExisting(_hoveredAabbID) || _hoveredAabbID.empty())
 	{
 		_hoveredAabbID = "";
 		_hoveredAabbDistance = -1.0f;
@@ -62,7 +62,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 	return make_pair(_hoveredAabbID, _hoveredAabbDistance);
 }
 
-const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& ID, bool canBeOccluded)
+const pair<bool, float> EngineInterface::raycast_checkCursorInEntity(const string& ID, bool canBeOccluded)
 {
 	if(canBeOccluded)
 	{
@@ -71,7 +71,7 @@ const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& 
 			raycast_checkCursorInAny();
 		}
 
-		if(_core->_aabbEntityManager->isEntityExisting(_hoveredAabbID))
+		if(_core->getAabbEntityManager()->isEntityExisting(_hoveredAabbID))
 		{
 			return make_pair((ID == _hoveredAabbID), _hoveredAabbDistance);
 		}
@@ -82,7 +82,7 @@ const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& 
 	}
 	else
 	{
-		auto entity = _core->_aabbEntityManager->getEntity(ID);
+		auto entity = _core->getAabbEntityManager()->getEntity(ID);
 
 		if(entity->isRaycastResponsive() && entity->isVisible())
 		{
@@ -98,7 +98,7 @@ const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& 
 				const auto front = (entity->getSize().z / 2.0f);
 				const auto box = Box(position, left, right, bottom, top, back, front);
 
-				distance = _core->_raycaster->calculateRayBoxIntersectionDistance(_core->_raycaster->getCursorRay(), box);
+				distance = _core->getRaycaster()->calculateRayBoxIntersectionDistance(_core->getRaycaster()->getCursorRay(), box);
 			}
 			else
 			{
@@ -111,7 +111,7 @@ const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& 
 				const auto front = (entity->getSize().z / 2.0f);
 				const auto box = Box(position, left, right, bottom, top, back, front);
 
-				distance = _core->_raycaster->calculateRayBoxIntersectionDistance(_core->_raycaster->getCursorRay(), box);
+				distance = _core->getRaycaster()->calculateRayBoxIntersectionDistance(_core->getRaycaster()->getCursorRay(), box);
 			}
 
 			return make_pair((distance != -1.0f), distance);
@@ -119,7 +119,7 @@ const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& 
 	}
 }
 
-const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(const string& ID, bool canBeOccluded)
+const pair<const string, float> EngineInterface::raycast_checkCursorInEntities(const string& ID, bool canBeOccluded)
 {
 	if(canBeOccluded)
 	{
@@ -128,7 +128,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(cons
 			raycast_checkCursorInAny();
 		}
 
-		if(_hoveredAabbID.empty() || !_core->_aabbEntityManager->isEntityExisting(_hoveredAabbID))
+		if(_hoveredAabbID.empty() || !_core->getAabbEntityManager()->isEntityExisting(_hoveredAabbID))
 		{
 			return make_pair("", -1.0f);
 		}
@@ -148,7 +148,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(cons
 		float closestDistance = numeric_limits<float>::max();
 		string closestBoxID = "";
 
-		for(const auto& [key, entity] : _core->_aabbEntityManager->getEntities())
+		for(const auto& [key, entity] : _core->getAabbEntityManager()->getEntities())
 		{
 			if(entity->isRaycastResponsive() && entity->isVisible())
 			{
@@ -168,7 +168,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(cons
 							const auto front = (entity->getSize().z / 2.0f);
 							const auto box = Box(position, left, right, bottom, top, back, front);
 
-							distance = _core->_raycaster->calculateRayBoxIntersectionDistance(_core->_raycaster->getCursorRay(), box);
+							distance = _core->getRaycaster()->calculateRayBoxIntersectionDistance(_core->getRaycaster()->getCursorRay(), box);
 						}
 						else
 						{
@@ -181,7 +181,7 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(cons
 							const auto front = (entity->getSize().z / 2.0f);
 							const auto box = Box(position, left, right, bottom, top, back, front);
 
-							distance = _core->_raycaster->calculateRayBoxIntersectionDistance(_core->_raycaster->getCursorRay(), box);
+							distance = _core->getRaycaster()->calculateRayBoxIntersectionDistance(_core->getRaycaster()->getCursorRay(), box);
 						}
 
 						if((distance != -1.0f) && (distance < closestDistance))
@@ -205,22 +205,22 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(cons
 	}
 }
 
-const Ray FabiEngine3D::raycast_getCursorRay() const
+const Ray EngineInterface::raycast_getCursorRay() const
 {
-	return _core->_raycaster->getCursorRay();
+	return _core->getRaycaster()->getCursorRay();
 }
 
-const fvec3 FabiEngine3D::raycast_getPointOnTerrain() const
+const fvec3 EngineInterface::raycast_getPointOnTerrain() const
 {
-	return _core->_raycaster->getTerrainPoint();
+	return _core->getRaycaster()->getTerrainPoint();
 }
 
-const bool FabiEngine3D::raycast_isPointOnTerrainValid() const
+const bool EngineInterface::raycast_isPointOnTerrainValid() const
 {
-	return (_core->_raycaster->getTerrainPoint() != fvec3(-1.0f));
+	return (_core->getRaycaster()->getTerrainPoint() != fvec3(-1.0f));
 }
 
-const bool FabiEngine3D::raycast_isTerrainPointingEnabled() const
+const bool EngineInterface::raycast_isTerrainPointingEnabled() const
 {
-	return _core->_raycaster->isTerrainPointingEnabled();
+	return _core->getRaycaster()->isTerrainPointingEnabled();
 }

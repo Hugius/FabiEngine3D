@@ -12,6 +12,7 @@
 #include "reflection_type.hpp"
 #include "pointlight_shape.hpp"
 #include "ray.hpp"
+#include "engine_controller.hpp"
 
 #include <array>
 #include <vector>
@@ -36,14 +37,12 @@ using std::pair;
 using std::string;
 using std::shared_ptr;
 
-class Core;
+class EngineCore;
 
-class FabiEngine3D
+class EngineInterface final
 {
-	friend class Core;
-
 public:
-	FabiEngine3D();
+	void inject(shared_ptr<EngineCore> core);
 
 	void application_start();
 	void application_pause();
@@ -889,17 +888,12 @@ public:
 	const bool misc_isShadowFrameRenderingEnabled() const;
 	const bool misc_isAabbFrameRenderingEnabled() const;
 
-protected:
-	virtual void FE3D_CONTROLLER_INIT() = 0;
-	virtual void FE3D_CONTROLLER_UPDATE() = 0;
-	virtual void FE3D_CONTROLLER_TERMINATE() = 0;
-
 private:
+	shared_ptr<EngineCore> _core = nullptr;
+
 	string _hoveredAabbID = "";
 
 	float _hoveredAabbDistance = -1.0f;
 
 	bool _isRaycastUpdated = false;
-
-	shared_ptr<Core> _core = nullptr;
 };

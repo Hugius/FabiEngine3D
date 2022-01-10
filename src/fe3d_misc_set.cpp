@@ -1,237 +1,237 @@
-#include "fe3d.hpp"
-#include "core.hpp"
+#include "engine_interface.hpp"
+#include "engine_core.hpp"
 #include "configuration.hpp"
 
 #include <chrono>
 #include <filesystem>
 
-void FabiEngine3D::misc_setCursorEntityID(const string& value)
+void EngineInterface::misc_setCursorEntityID(const string& value)
 {
-	_core->_renderBus->setCursorEntityID(value);
+	_core->getRenderBus()->setCursorEntityID(value);
 }
 
-void FabiEngine3D::misc_enableWireframeRendering()
+void EngineInterface::misc_enableWireframeRendering()
 {
-	if(_core->_renderBus->isWireframeRenderingEnabled())
+	if(_core->getRenderBus()->isWireframeRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to enable wireframe rendering: already enabled!");
 		return;
 	}
 
-	_core->_renderBus->setWireframeRenderingEnabled(true);
+	_core->getRenderBus()->setWireframeRenderingEnabled(true);
 }
 
-void FabiEngine3D::misc_enableShadowFrameRendering()
+void EngineInterface::misc_enableShadowFrameRendering()
 {
-	if(_core->_renderBus->isShadowFrameRenderingEnabled())
+	if(_core->getRenderBus()->isShadowFrameRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to enable shadow frame rendering: already enabled!");
 		return;
 	}
 
-	_core->_renderBus->setShadowFrameRenderingEnabled(true);
+	_core->getRenderBus()->setShadowFrameRenderingEnabled(true);
 }
 
-void FabiEngine3D::misc_enableAabbFrameRendering()
+void EngineInterface::misc_enableAabbFrameRendering()
 {
-	if(_core->_renderBus->isAabbFrameRenderingEnabled())
+	if(_core->getRenderBus()->isAabbFrameRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to enable AABB frame rendering: already enabled!");
 		return;
 	}
 
-	_core->_renderBus->setAabbFrameRenderingEnabled(true);
+	_core->getRenderBus()->setAabbFrameRenderingEnabled(true);
 }
 
-void FabiEngine3D::misc_enableVsync()
+void EngineInterface::misc_enableVsync()
 {
-	if(_core->_renderWindow->isVsyncEnabled())
+	if(_core->getRenderWindow()->isVsyncEnabled())
 	{
 		Logger::throwWarning("Tried to enable Vsync: already enabled!");
 		return;
 	}
 
-	_core->_renderWindow->enableVsync();
+	_core->getRenderWindow()->enableVsync();
 }
 
-void FabiEngine3D::misc_disableWireframeRendering()
+void EngineInterface::misc_disableWireframeRendering()
 {
-	if(!_core->_renderBus->isWireframeRenderingEnabled())
+	if(!_core->getRenderBus()->isWireframeRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to disable wireframe rendering: not enabled!");
 		return;
 	}
 
-	_core->_renderBus->setWireframeRenderingEnabled(false);
+	_core->getRenderBus()->setWireframeRenderingEnabled(false);
 }
 
-void FabiEngine3D::misc_disableShadowFrameRendering()
+void EngineInterface::misc_disableShadowFrameRendering()
 {
-	if(!_core->_renderBus->isShadowFrameRenderingEnabled())
+	if(!_core->getRenderBus()->isShadowFrameRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to disable shadow frame rendering: not enabled!");
 		return;
 	}
 
-	_core->_renderBus->setShadowFrameRenderingEnabled(false);
+	_core->getRenderBus()->setShadowFrameRenderingEnabled(false);
 }
 
-void FabiEngine3D::misc_disableAabbFrameRendering()
+void EngineInterface::misc_disableAabbFrameRendering()
 {
-	if(!_core->_renderBus->isAabbFrameRenderingEnabled())
+	if(!_core->getRenderBus()->isAabbFrameRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to disable AABB frame rendering: not enabled!");
 		return;
 	}
 
-	_core->_renderBus->setAabbFrameRenderingEnabled(false);
+	_core->getRenderBus()->setAabbFrameRenderingEnabled(false);
 }
 
-void FabiEngine3D::misc_disableVsync()
+void EngineInterface::misc_disableVsync()
 {
-	if(!_core->_renderWindow->isVsyncEnabled())
+	if(!_core->getRenderWindow()->isVsyncEnabled())
 	{
 		Logger::throwWarning("Tried to disable Vsync: not enabled!");
 		return;
 	}
 
-	_core->_renderWindow->disableVsync();
+	_core->getRenderWindow()->disableVsync();
 }
 
-void FabiEngine3D::misc_setCursorVisible(bool value)
+void EngineInterface::misc_setCursorVisible(bool value)
 {
 	if(value)
 	{
-		_core->_renderWindow->showCursor();
+		_core->getRenderWindow()->showCursor();
 	}
 	else
 	{
-		_core->_renderWindow->hideCursor();
+		_core->getRenderWindow()->hideCursor();
 	}
 }
 
-void FabiEngine3D::misc_centerCursor()
+void EngineInterface::misc_centerCursor()
 {
 	const int left = Config::getInst().getViewportPosition().x;
 	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getViewportPosition().y + Config::getInst().getViewportSize().y);
 	const int xMiddle = left + (Config::getInst().getViewportSize().x / 2);
 	const int yMiddle = bottom + (Config::getInst().getViewportSize().y / 2);
-	_core->_renderWindow->setCursorPosition({xMiddle, yMiddle});
+	_core->getRenderWindow()->setCursorPosition({xMiddle, yMiddle});
 
-	_core->_camera->notifyCursorCenter();
+	_core->getCamera()->notifyCursorCenter();
 }
 
-void FabiEngine3D::misc_setCursorPosition(ivec2 value)
+void EngineInterface::misc_setCursorPosition(ivec2 value)
 {
-	_core->_renderWindow->setCursorPosition(value);
+	_core->getRenderWindow()->setCursorPosition(value);
 }
 
-void FabiEngine3D::misc_setWindowTitle(const string& value)
+void EngineInterface::misc_setWindowTitle(const string& value)
 {
-	_core->_renderWindow->setTitle(value);
+	_core->getRenderWindow()->setTitle(value);
 }
 
-void FabiEngine3D::misc_cacheMesh(const string& filePath)
+void EngineInterface::misc_cacheMesh(const string& filePath)
 {
-	_core->_meshLoader->cacheMesh(filePath);
+	_core->getMeshLoader()->cacheMesh(filePath);
 }
 
-void FabiEngine3D::misc_cacheImage(const string& filePath)
+void EngineInterface::misc_cacheImage(const string& filePath)
 {
-	_core->_imageLoader->cacheImage(filePath);
+	_core->getImageLoader()->cacheImage(filePath);
 }
 
-void FabiEngine3D::misc_cacheAudio(const string& filePath)
+void EngineInterface::misc_cacheAudio(const string& filePath)
 {
-	_core->_audioLoader->cacheChunk(filePath);
+	_core->getAudioLoader()->cacheChunk(filePath);
 }
 
-void FabiEngine3D::misc_clearMeshCache(const string& filePath)
+void EngineInterface::misc_clearMeshCache(const string& filePath)
 {
-	_core->_meshLoader->clearMeshCache(filePath);
+	_core->getMeshLoader()->clearMeshCache(filePath);
 
-	for(const auto& [key, texture] : _core->_vertexBufferCache->getBuffers())
+	for(const auto& [key, texture] : _core->getVertexBufferCache()->getBuffers())
 	{
 		if(key.first == filePath)
 		{
-			_core->_vertexBufferCache->deleteBuffer(key.first, key.second);
+			_core->getVertexBufferCache()->deleteBuffer(key.first, key.second);
 		}
 	}
 }
 
-void FabiEngine3D::misc_clearImageCache(const string& filePath)
+void EngineInterface::misc_clearImageCache(const string& filePath)
 {
-	_core->_imageLoader->clearImageCache(filePath);
+	_core->getImageLoader()->clearImageCache(filePath);
 
-	for(const auto& [key, texture] : _core->_textureBufferCache->get2dBuffers())
+	for(const auto& [key, texture] : _core->getTextureBufferCache()->get2dBuffers())
 	{
 		if(key == filePath)
 		{
-			_core->_textureBufferCache->delete2dBuffer(key);
+			_core->getTextureBufferCache()->delete2dBuffer(key);
 		}
 	}
 
-	for(const auto& [key, texture] : _core->_textureBufferCache->get3dBuffers())
+	for(const auto& [key, texture] : _core->getTextureBufferCache()->get3dBuffers())
 	{
 		if(find(key.begin(), key.end(), filePath) != key.end())
 		{
-			_core->_textureBufferCache->delete3dBuffer(key);
+			_core->getTextureBufferCache()->delete3dBuffer(key);
 		}
 	}
 }
 
-void FabiEngine3D::misc_clearAudioCache(const string& filePath)
+void EngineInterface::misc_clearAudioCache(const string& filePath)
 {
-	_core->_audioLoader->clearChunkCache(filePath);
+	_core->getAudioLoader()->clearChunkCache(filePath);
 }
 
-void FabiEngine3D::misc_clearMeshesCache()
+void EngineInterface::misc_clearMeshesCache()
 {
-	_core->_meshLoader->clearMeshesCache();
+	_core->getMeshLoader()->clearMeshesCache();
 
-	_core->_vertexBufferCache->clear();
+	_core->getVertexBufferCache()->clear();
 }
 
-void FabiEngine3D::misc_clearImagesCache()
+void EngineInterface::misc_clearImagesCache()
 {
-	_core->_imageLoader->clearImagesCache();
+	_core->getImageLoader()->clearImagesCache();
 
-	_core->_textureBufferCache->clear2dBuffers();
-	_core->_textureBufferCache->clear3dBuffers();
+	_core->getTextureBufferCache()->clear2dBuffers();
+	_core->getTextureBufferCache()->clear3dBuffers();
 }
 
-void FabiEngine3D::misc_clearAudiosCache()
+void EngineInterface::misc_clearAudiosCache()
 {
-	_core->_audioLoader->clearChunksCache();
+	_core->getAudioLoader()->clearChunksCache();
 }
 
-void FabiEngine3D::misc_cacheMeshes(const vector<string>& filePaths)
+void EngineInterface::misc_cacheMeshes(const vector<string>& filePaths)
 {
-	_core->_meshLoader->cacheMeshes(filePaths);
+	_core->getMeshLoader()->cacheMeshes(filePaths);
 }
 
-void FabiEngine3D::misc_cacheImages(const vector<string>& filePaths)
+void EngineInterface::misc_cacheImages(const vector<string>& filePaths)
 {
-	_core->_imageLoader->cacheImages(filePaths);
+	_core->getImageLoader()->cacheImages(filePaths);
 }
 
-void FabiEngine3D::misc_cacheAudios(const vector<string>& filePaths)
+void EngineInterface::misc_cacheAudios(const vector<string>& filePaths)
 {
-	_core->_audioLoader->cacheChunks(filePaths);
+	_core->getAudioLoader()->cacheChunks(filePaths);
 }
 
-void FabiEngine3D::misc_startMillisecondTimer()
+void EngineInterface::misc_startMillisecondTimer()
 {
-	if(_core->_timer->isStarted())
+	if(_core->getTimer()->isStarted())
 	{
 		Logger::throwWarning("Tried to start milliseconds timer: already started!");
 		return;
 	}
 
-	_core->_timer->start();
+	_core->getTimer()->start();
 }
 
-void FabiEngine3D::misc_setBackgroundColor(fvec4 color)
+void EngineInterface::misc_setBackgroundColor(fvec4 color)
 {
-	_core->_masterRenderer->setBackgroundColor(color);
+	_core->getMasterRenderer()->setBackgroundColor(color);
 }

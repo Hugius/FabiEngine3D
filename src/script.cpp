@@ -1,7 +1,7 @@
 #include "script.hpp"
 #include "logger.hpp"
 
-Script::Script(FabiEngine3D& fe3d)
+Script::Script(EngineInterface& fe3d)
 	:
 	_fe3d(fe3d)
 {

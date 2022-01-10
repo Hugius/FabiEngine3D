@@ -4,7 +4,7 @@
 
 using LVPC = LeftViewportController;
 
-LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, GuiManager& gui)
+LeftViewportController::LeftViewportController(EngineInterface& fe3d, GuiManager& gui)
 	:
 	BaseViewportController(fe3d, gui),
 	_skyEditor(fe3d, gui),

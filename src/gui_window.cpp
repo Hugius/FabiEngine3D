@@ -2,7 +2,7 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-GuiWindow::GuiWindow(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color)
+GuiWindow::GuiWindow(EngineInterface& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color)
 	:
 	_fe3d(fe3d),
 	_ID(ID),

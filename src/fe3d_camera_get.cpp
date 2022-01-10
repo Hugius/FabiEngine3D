@@ -1,112 +1,112 @@
-#include "fe3d.hpp"
-#include "core.hpp"
+#include "engine_interface.hpp"
+#include "engine_core.hpp"
 
-const float FabiEngine3D::camera_getYaw() const
+const float EngineInterface::camera_getYaw() const
 {
-	return _core->_camera->getYaw();
+	return _core->getCamera()->getYaw();
 }
 
-const float FabiEngine3D::camera_getPitch() const
+const float EngineInterface::camera_getPitch() const
 {
-	return _core->_camera->getPitch();
+	return _core->getCamera()->getPitch();
 }
 
-const float FabiEngine3D::camera_getFirstPersonYaw() const
+const float EngineInterface::camera_getFirstPersonYaw() const
 {
-	return _core->_camera->getFirstPersonYaw();
+	return _core->getCamera()->getFirstPersonYaw();
 }
 
-const float FabiEngine3D::camera_getFirstPersonPitch() const
+const float EngineInterface::camera_getFirstPersonPitch() const
 {
-	return _core->_camera->getFirstPersonPitch();
+	return _core->getCamera()->getFirstPersonPitch();
 }
 
-const float FabiEngine3D::camera_getMinFirstPersonPitch() const
+const float EngineInterface::camera_getMinFirstPersonPitch() const
 {
-	return _core->_camera->getMinFirstPersonPitch();
+	return _core->getCamera()->getMinFirstPersonPitch();
 }
 
-const float FabiEngine3D::camera_getMaxFirstPersonPitch() const
+const float EngineInterface::camera_getMaxFirstPersonPitch() const
 {
-	return _core->_camera->getMaxFirstPersonPitch();
+	return _core->getCamera()->getMaxFirstPersonPitch();
 }
 
-const float FabiEngine3D::camera_getThirdPersonYaw() const
+const float EngineInterface::camera_getThirdPersonYaw() const
 {
-	return _core->_camera->getThirdPersonYaw();
+	return _core->getCamera()->getThirdPersonYaw();
 }
 
-const float FabiEngine3D::camera_getThirdPersonPitch() const
+const float EngineInterface::camera_getThirdPersonPitch() const
 {
-	return _core->_camera->getThirdPersonPitch();
+	return _core->getCamera()->getThirdPersonPitch();
 }
 
-const float FabiEngine3D::camera_getMinThirdPersonPitch() const
+const float EngineInterface::camera_getMinThirdPersonPitch() const
 {
-	return _core->_camera->getMinThirdPersonPitch();
+	return _core->getCamera()->getMinThirdPersonPitch();
 }
 
-const float FabiEngine3D::camera_getMaxThirdPersonPitch() const
+const float EngineInterface::camera_getMaxThirdPersonPitch() const
 {
-	return _core->_camera->getMaxFirstPersonPitch();
+	return _core->getCamera()->getMaxFirstPersonPitch();
 }
 
-const float FabiEngine3D::camera_getThirdPersonDistance() const
+const float EngineInterface::camera_getThirdPersonDistance() const
 {
-	return _core->_camera->getThirdPersonDistance();
+	return _core->getCamera()->getThirdPersonDistance();
 }
 
-const float FabiEngine3D::camera_getNearDistance() const
+const float EngineInterface::camera_getNearDistance() const
 {
-	return _core->_camera->getNearDistance();
+	return _core->getCamera()->getNearDistance();
 }
 
-const float FabiEngine3D::camera_getFarDistance() const
+const float EngineInterface::camera_getFarDistance() const
 {
-	return _core->_camera->getFarDistance();
+	return _core->getCamera()->getFarDistance();
 }
 
-const float FabiEngine3D::camera_getFOV() const
+const float EngineInterface::camera_getFOV() const
 {
-	return _core->_camera->getFOV();
+	return _core->getCamera()->getFOV();
 }
 
-const float FabiEngine3D::camera_getCursorSensitivity() const
+const float EngineInterface::camera_getCursorSensitivity() const
 {
-	return _core->_camera->getCursorSensitivity();
+	return _core->getCamera()->getCursorSensitivity();
 }
 
-const fvec3 FabiEngine3D::camera_getPosition() const
+const fvec3 EngineInterface::camera_getPosition() const
 {
-	return _core->_camera->getPosition();
+	return _core->getCamera()->getPosition();
 }
 
-const fvec3 FabiEngine3D::camera_getUpVector() const
+const fvec3 EngineInterface::camera_getUpVector() const
 {
-	return _core->_camera->getUpVector();
+	return _core->getCamera()->getUpVector();
 }
 
-const fvec3 FabiEngine3D::camera_getFrontVector() const
+const fvec3 EngineInterface::camera_getFrontVector() const
 {
-	return _core->_camera->getFrontVector();
+	return _core->getCamera()->getFrontVector();
 }
 
-const fvec3 FabiEngine3D::camera_getRightVector() const
+const fvec3 EngineInterface::camera_getRightVector() const
 {
-	return _core->_camera->getRightVector();
+	return _core->getCamera()->getRightVector();
 }
 
-const fvec3 FabiEngine3D::camera_getThirdPersonLookat() const
+const fvec3 EngineInterface::camera_getThirdPersonLookat() const
 {
-	return _core->_camera->getThirdPersonLookat();
+	return _core->getCamera()->getThirdPersonLookat();
 }
 
-const bool FabiEngine3D::camera_isThirdPersonViewEnabled() const
+const bool EngineInterface::camera_isThirdPersonViewEnabled() const
 {
-	return _core->_camera->isThirdPersonViewEnabled();
+	return _core->getCamera()->isThirdPersonViewEnabled();
 }
 
-const bool FabiEngine3D::camera_isFirstPersonViewEnabled() const
+const bool EngineInterface::camera_isFirstPersonViewEnabled() const
 {
-	return _core->_camera->isFirstPersonViewEnabled();
+	return _core->getCamera()->isFirstPersonViewEnabled();
 }

@@ -1,13 +1,13 @@
 #pragma once
 
-#include "fe3d.hpp"
+#include "engine_interface.hpp"
 #include "gui_viewport.hpp"
 #include "gui_overlay.hpp"
 
 class GuiManager final
 {
 public:
-	GuiManager(FabiEngine3D& fe3d);
+	GuiManager(EngineInterface& fe3d);
 
 	void update();
 
@@ -19,5 +19,5 @@ public:
 private:
 	vector<shared_ptr<GuiViewport>> _viewports;
 	shared_ptr<GuiOverlay> _overlay;
-	FabiEngine3D& _fe3d;
+	EngineInterface& _fe3d;
 };

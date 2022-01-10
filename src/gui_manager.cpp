@@ -1,7 +1,7 @@
 #include "gui_manager.hpp"
 #include "configuration.hpp"
 
-GuiManager::GuiManager(FabiEngine3D& fe3d)
+GuiManager::GuiManager(EngineInterface& fe3d)
 	:
 	_fe3d(fe3d)
 {

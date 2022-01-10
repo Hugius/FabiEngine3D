@@ -2,7 +2,7 @@
 #include "left_viewport_controller.hpp"
 #include "configuration.hpp"
 
-WorldEditor::WorldEditor(FabiEngine3D& fe3d,
+WorldEditor::WorldEditor(EngineInterface& fe3d,
 						 GuiManager& gui,
 						 SkyEditor& skyEditor,
 						 TerrainEditor& terrainEditor,

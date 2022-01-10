@@ -1,6 +1,6 @@
 #pragma once
 
-#include "fe3d.hpp"
+#include "engine_interface.hpp"
 #include "gui_manager.hpp"
 #include "sky_editor.hpp"
 #include "terrain_editor.hpp"
@@ -20,7 +20,7 @@ using std::numeric_limits;
 class WorldEditor final
 {
 public:
-	WorldEditor(FabiEngine3D& fe3d,
+	WorldEditor(EngineInterface& fe3d,
 				GuiManager& gui,
 				SkyEditor& skyEditor,
 				TerrainEditor& terrainEditor,
@@ -308,7 +308,7 @@ private:
 	bool _isDeletingWorld = false;
 	bool _isEditorLoaded = false;
 
-	FabiEngine3D& _fe3d;
+	EngineInterface& _fe3d;
 	GuiManager& _gui;
 	SkyEditor& _skyEditor;
 	TerrainEditor& _terrainEditor;

@@ -1,6 +1,6 @@
 #include "gui_overlay.hpp"
 
-GuiOverlay::GuiOverlay(FabiEngine3D& fe3d)
+GuiOverlay::GuiOverlay(EngineInterface& fe3d)
 	:
 	_fe3d(fe3d)
 {

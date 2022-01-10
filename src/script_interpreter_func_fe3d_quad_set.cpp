@@ -24,32 +24,35 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 				return true;
 			}
 
-			_fe3d.quad_create(args[0].getString(), true);
-
-			if(_currentProjectID.empty())
+			if(_validateFe3dQuad(args[1].getString(), true))
 			{
-				Logger::throwError("ScriptInterpreter::_executeFe3dQuadSetter");
+				_fe3d.quad_create(args[0].getString(), true);
+
+				if(_currentProjectID.empty())
+				{
+					Logger::throwError("ScriptInterpreter::_executeFe3dQuadSetter");
+				}
+
+				const auto isExported = Config::getInst().isApplicationExported();
+				const auto rootPath = Tools::getRootDirectoryPath();
+				const auto targetDirectoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\image\\entity\\quad\\diffuse_map\\");
+				const auto filePath = (targetDirectoryPath + args[1].getString());
+				_fe3d.quad_setDiffuseMap(args[0].getString(), filePath);
+
+				_fe3d.quad_setPosition(args[0].getString(), _convertGuiPositionToViewport(fvec2(args[2].getDecimal(), args[3].getDecimal())));
+				_fe3d.quad_setRotation(args[0].getString(), args[4].getDecimal());
+				_fe3d.quad_setSize(args[0].getString(), _convertGuiSizeToViewport(fvec2(args[5].getDecimal(), args[6].getDecimal())));
+
+				if(!Config::getInst().isApplicationExported())
+				{
+					auto minPosition = Math::convertToNdc(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition()));
+					auto maxPosition = Math::convertToNdc(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition() + Config::getInst().getViewportSize()));
+					_fe3d.quad_setMinPosition(args[0].getString(), minPosition);
+					_fe3d.quad_setMaxPosition(args[0].getString(), maxPosition);
+				}
+
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
-
-			const auto isExported = Config::getInst().isApplicationExported();
-			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\image\\entity\\quad\\diffuse_map\\");
-			const auto filePath = (targetDirectoryPath + args[1].getString());
-			_fe3d.quad_setDiffuseMap(args[0].getString(), filePath);
-
-			_fe3d.quad_setPosition(args[0].getString(), _convertGuiPositionToViewport(fvec2(args[2].getDecimal(), args[3].getDecimal())));
-			_fe3d.quad_setRotation(args[0].getString(), args[4].getDecimal());
-			_fe3d.quad_setSize(args[0].getString(), _convertGuiSizeToViewport(fvec2(args[5].getDecimal(), args[6].getDecimal())));
-
-			if(!Config::getInst().isApplicationExported())
-			{
-				auto minPosition = Math::convertToNdc(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition()));
-				auto maxPosition = Math::convertToNdc(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition() + Config::getInst().getViewportSize()));
-				_fe3d.quad_setMinPosition(args[0].getString(), minPosition);
-				_fe3d.quad_setMaxPosition(args[0].getString(), maxPosition);
-			}
-
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:quad_delete")
@@ -58,7 +61,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				_fe3d.quad_delete(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -86,7 +89,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				_fe3d.quad_setVisible(args[0].getString(), args[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -99,7 +102,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				auto position = _convertGuiPositionToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				_fe3d.quad_setPosition(args[0].getString(), position);
@@ -113,7 +116,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				fvec2 change = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				_fe3d.quad_move(args[0].getString(), change);
@@ -127,7 +130,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				fvec2 target = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				fvec2 speed = _convertGuiSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
@@ -142,7 +145,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				_fe3d.quad_setRotation(args[0].getString(), args[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -155,7 +158,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				_fe3d.quad_rotate(args[0].getString(), args[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -168,7 +171,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				_fe3d.quad_rotateTo(args[0].getString(), args[1].getDecimal(), args[2].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -181,7 +184,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				fvec2 size = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				_fe3d.quad_setSize(args[0].getString(), size);
@@ -195,7 +198,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				fvec2 change = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				_fe3d.quad_scale(args[0].getString(), change);
@@ -209,7 +212,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				fvec2 target = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				fvec2 speed = _convertGuiSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
@@ -224,7 +227,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				_fe3d.quad_setColor(args[0].getString(),
 									fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
@@ -238,7 +241,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				_fe3d.quad_setWireframeColor(args[0].getString(),
 											 fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
@@ -252,7 +255,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				_fe3d.quad_setTransparency(args[0].getString(), args[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -265,7 +268,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				_fe3d.quad_setWireframed(args[0].getString(), args[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -278,7 +281,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				_fe3d.quad_setMirroredHorizontally(args[0].getString(), args[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -291,7 +294,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dQuad(args[0].getString()))
+			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				_fe3d.quad_setMirroredVertically(args[0].getString(), args[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));

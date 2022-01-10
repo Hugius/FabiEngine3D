@@ -1,51 +1,51 @@
-#include "fe3d.hpp"
-#include "core.hpp"
+#include "engine_interface.hpp"
+#include "engine_core.hpp"
 #include "configuration.hpp"
 
-const unsigned int FabiEngine3D::misc_getTriangleCount() const
+const unsigned int EngineInterface::misc_getTriangleCount() const
 {
-	return _core->_renderBus->getTriangleCount();
+	return _core->getRenderBus()->getTriangleCount();
 }
 
-const float FabiEngine3D::misc_getFPS() const
+const float EngineInterface::misc_getFPS() const
 {
 	return (1000.0f / _core->_deltaTimeMS);
 }
 
-const float FabiEngine3D::misc_stopMillisecondTimer() const
+const float EngineInterface::misc_stopMillisecondTimer() const
 {
-	if(!_core->_timer->isStarted())
+	if(!_core->getTimer()->isStarted())
 	{
 		Logger::throwWarning("Tried to stop milliseconds timer: not started!");
 		return 0.0f;
 	}
 
-	return _core->_timer->stop();
+	return _core->getTimer()->stop();
 }
 
-const string FabiEngine3D::misc_getCpuName() const
+const string EngineInterface::misc_getCpuName() const
 {
-	return _core->_masterRenderer->getCpuName();
+	return _core->getMasterRenderer()->getCpuName();
 }
 
-const string FabiEngine3D::misc_getGpuName() const
+const string EngineInterface::misc_getGpuName() const
 {
-	return _core->_masterRenderer->getGpuName();
+	return _core->getMasterRenderer()->getGpuName();
 }
 
-const string FabiEngine3D::misc_getOpenglVersion() const
+const string EngineInterface::misc_getOpenglVersion() const
 {
-	return _core->_masterRenderer->getOpenglVersion();
+	return _core->getMasterRenderer()->getOpenglVersion();
 }
 
-const ivec2 FabiEngine3D::misc_getCursorPosition() const
+const ivec2 EngineInterface::misc_getCursorPosition() const
 {
-	ivec2 cursorPosition = _core->_renderWindow->getCursorPosition();
+	ivec2 cursorPosition = _core->getRenderWindow()->getCursorPosition();
 
 	return ivec2(cursorPosition.x, (Config::getInst().getWindowSize().y - cursorPosition.y));
 }
 
-const ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport() const
+const ivec2 EngineInterface::misc_getCursorPositionRelativeToViewport() const
 {
 	if(Config::getInst().isApplicationExported())
 	{
@@ -59,7 +59,7 @@ const ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport() const
 
 		ivec2 offset = ivec2(viewportPosition.x, windowSize.y - (viewportPosition.y + viewportSize.y));
 
-		fvec2 relativeCursorPosition = fvec2(_core->_renderWindow->getCursorPosition()) - fvec2(offset);
+		fvec2 relativeCursorPosition = fvec2(_core->getRenderWindow()->getCursorPosition()) - fvec2(offset);
 
 		relativeCursorPosition = (relativeCursorPosition / fvec2(viewportSize)) * fvec2(windowSize);
 
@@ -68,17 +68,17 @@ const ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport() const
 	}
 }
 
-const bool FabiEngine3D::misc_isMillisecondTimerStarted() const
+const bool EngineInterface::misc_isMillisecondTimerStarted() const
 {
-	return _core->_timer->isStarted();
+	return _core->getTimer()->isStarted();
 }
 
-const bool FabiEngine3D::misc_isCursorVisible() const
+const bool EngineInterface::misc_isCursorVisible() const
 {
-	return _core->_renderWindow->isCursorVisible();
+	return _core->getRenderWindow()->isCursorVisible();
 }
 
-const bool FabiEngine3D::misc_isCursorInsideViewport() const
+const bool EngineInterface::misc_isCursorInsideViewport() const
 {
 	auto cursorPosition = misc_getCursorPosition();
 	auto viewportPosition = Config::getInst().getViewportPosition();
@@ -95,7 +95,7 @@ const bool FabiEngine3D::misc_isCursorInsideViewport() const
 	return false;
 }
 
-const bool FabiEngine3D::misc_isCursorInsideWindow() const
+const bool EngineInterface::misc_isCursorInsideWindow() const
 {
 	auto cursorPosition = misc_getCursorPosition();
 	auto windowSize = Config::getInst().getWindowSize();
@@ -111,12 +111,12 @@ const bool FabiEngine3D::misc_isCursorInsideWindow() const
 	return false;
 }
 
-const bool FabiEngine3D::misc_checkInterval(unsigned int ticks) const
+const bool EngineInterface::misc_checkInterval(unsigned int ticks) const
 {
-	return ((_core->_timer->getPassedTickCount() % ticks) == 0);
+	return ((_core->getTimer()->getPassedTickCount() % ticks) == 0);
 }
 
-const vector<pair<string, int>> FabiEngine3D::misc_getUpdateProfilingStatistics() const
+const vector<pair<string, int>> EngineInterface::misc_getUpdateProfilingStatistics() const
 {
 	vector<pair<string, int>> result =
 	{
@@ -137,14 +137,14 @@ const vector<pair<string, int>> FabiEngine3D::misc_getUpdateProfilingStatistics(
 
 	for(auto& [key, percentage] : result)
 	{
-		int newPercentage = static_cast<int>((_core->_timer->getDeltaPart(key) / _core->_timer->getDeltaPartSum()) * 100.0f);
+		int newPercentage = static_cast<int>((_core->getTimer()->getDeltaPart(key) / _core->getTimer()->getDeltaPartSum()) * 100.0f);
 		percentage = newPercentage;
 	}
 
 	return result;
 }
 
-const vector<pair<string, int>> FabiEngine3D::misc_getRenderProfilingStatistics() const
+const vector<pair<string, int>> EngineInterface::misc_getRenderProfilingStatistics() const
 {
 	vector<pair<string, int>> result =
 	{
@@ -165,34 +165,34 @@ const vector<pair<string, int>> FabiEngine3D::misc_getRenderProfilingStatistics(
 
 	for(auto& [key, percentage] : result)
 	{
-		int newPercentage = static_cast<int>((_core->_timer->getDeltaPart(key) / _core->_timer->getDeltaPartSum()) * 100.0f);
+		int newPercentage = static_cast<int>((_core->getTimer()->getDeltaPart(key) / _core->getTimer()->getDeltaPartSum()) * 100.0f);
 		percentage = newPercentage;
 	}
 
 	return result;
 }
 
-const string FabiEngine3D::misc_getCursorEntityID() const
+const string EngineInterface::misc_getCursorEntityID() const
 {
-	return _core->_renderBus->getCursorEntityID();
+	return _core->getRenderBus()->getCursorEntityID();
 }
 
-const bool FabiEngine3D::misc_isVsyncEnabled() const
+const bool EngineInterface::misc_isVsyncEnabled() const
 {
-	return _core->_renderWindow->isVsyncEnabled();
+	return _core->getRenderWindow()->isVsyncEnabled();
 }
 
-const bool FabiEngine3D::misc_isWireframeRenderingEnabled() const
+const bool EngineInterface::misc_isWireframeRenderingEnabled() const
 {
-	return _core->_renderBus->isWireframeRenderingEnabled();
+	return _core->getRenderBus()->isWireframeRenderingEnabled();
 }
 
-const bool FabiEngine3D::misc_isShadowFrameRenderingEnabled() const
+const bool EngineInterface::misc_isShadowFrameRenderingEnabled() const
 {
-	return _core->_renderBus->isShadowFrameRenderingEnabled();
+	return _core->getRenderBus()->isShadowFrameRenderingEnabled();
 }
 
-const bool FabiEngine3D::misc_isAabbFrameRenderingEnabled() const
+const bool EngineInterface::misc_isAabbFrameRenderingEnabled() const
 {
-	return _core->_renderBus->isAabbFrameRenderingEnabled();
+	return _core->getRenderBus()->isAabbFrameRenderingEnabled();
 }

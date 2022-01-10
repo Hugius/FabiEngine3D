@@ -1,12 +1,12 @@
 #pragma once
 
-#include "fe3d.hpp"
+#include "engine_interface.hpp"
 #include "gui_manager.hpp"
 
 class TerrainEditor final
 {
 public:
-	TerrainEditor(FabiEngine3D& fe3d, GuiManager& gui);
+	TerrainEditor(EngineInterface& fe3d, GuiManager& gui);
 
 	void setCurrentProjectID(const string& projectID);
 	void load();
@@ -58,6 +58,6 @@ private:
 	bool _isDeletingTerrain = false;
 	bool _isEditorLoaded = false;
 
-	FabiEngine3D& _fe3d;
+	EngineInterface& _fe3d;
 	GuiManager& _gui;
 };

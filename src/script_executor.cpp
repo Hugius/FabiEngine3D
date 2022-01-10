@@ -1,7 +1,7 @@
 #include "script_executor.hpp"
 #include "configuration.hpp"
 
-ScriptExecutor::ScriptExecutor(FabiEngine3D& fe3d,
+ScriptExecutor::ScriptExecutor(EngineInterface& fe3d,
 							   Script& script,
 							   SkyEditor& skyEditor,
 							   TerrainEditor& terrainEditor,

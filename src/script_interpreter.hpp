@@ -19,7 +19,7 @@
 class ScriptInterpreter final
 {
 public:
-	ScriptInterpreter(FabiEngine3D& fe3d,
+	ScriptInterpreter(EngineInterface& fe3d,
 					  Script& script,
 					  SkyEditor& skyEditor,
 					  TerrainEditor& terrainEditor,
@@ -139,11 +139,11 @@ private:
 	const bool _validateFe3dSound3d(const string& ID, bool isTemplate);
 	const bool _validateFe3dSound2d(const string& ID, bool isTemplate);
 	const bool _validateFe3dAabb(const string& ID);
+	const bool _validateFe3dQuad(const string& ID, bool isTemplate);
+	const bool _validateFe3dText(const string& ID, bool isTemplate);
 	const bool _validateFe3dPointlight(const string& ID);
 	const bool _validateFe3dSpotlight(const string& ID);
 	const bool _validateFe3dReflection(const string& ID);
-	const bool _validateFe3dQuad(const string& ID);
-	const bool _validateFe3dText(const string& ID);
 	const bool _validateFe3dAnimation2d(const string& ID);
 	const bool _validateFe3dAnimation3d(const string& ID);
 	const bool _validateFe3dID(const string& ID);
@@ -224,7 +224,7 @@ private:
 
 	unordered_map<unsigned int, unordered_map<string, ScriptVariable>> _localVariables;
 	unordered_map<string, ScriptVariable> _globalVariables;
-	FabiEngine3D& _fe3d;
+	EngineInterface& _fe3d;
 	Script& _script;
 	SkyEditor& _skyEditor;
 	TerrainEditor& _terrainEditor;

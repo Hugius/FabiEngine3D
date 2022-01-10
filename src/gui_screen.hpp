@@ -1,6 +1,6 @@
 #pragma once
 
-#include "fe3d.hpp"
+#include "engine_interface.hpp"
 #include "gui_scrolling_list.hpp"
 #include "gui_write_field.hpp"
 #include "gui_button.hpp"
@@ -10,7 +10,7 @@
 class GuiScreen final
 {
 public:
-	GuiScreen(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size);
+	GuiScreen(EngineInterface& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size);
 
 	void update(bool hoverable);
 	void show();
@@ -67,5 +67,5 @@ private:
 	vector<shared_ptr<GuiButton>> _buttons;
 	vector<shared_ptr<GuiRectangle>> _rectangles;
 	vector<shared_ptr<GuiTextField>> _textFields;
-	FabiEngine3D& _fe3d;
+	EngineInterface& _fe3d;
 };

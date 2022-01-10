@@ -1,12 +1,12 @@
 #pragma once
 
-#include "fe3d.hpp"
+#include "engine_interface.hpp"
 #include "gui_manager.hpp"
 
 class BillboardEditor final
 {
 public:
-	BillboardEditor(FabiEngine3D& fe3d, GuiManager& gui);
+	BillboardEditor(EngineInterface& fe3d, GuiManager& gui);
 
 	void setCurrentProjectID(const string& projectID);
 	void load();
@@ -58,6 +58,6 @@ private:
 	bool _isDeletingBillboard = false;
 	bool _isEditorLoaded = false;
 
-	FabiEngine3D& _fe3d;
+	EngineInterface& _fe3d;
 	GuiManager& _gui;
 };

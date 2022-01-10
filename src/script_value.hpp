@@ -1,16 +1,16 @@
 #pragma once
 
-#include "fe3d.hpp"
+#include "engine_interface.hpp"
 #include "script_value_type.hpp"
 
 class ScriptValue final
 {
 public:
-	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type);
-	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, const string& value);
-	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, float value);
-	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, int value);
-	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, bool value);
+	ScriptValue(EngineInterface& fe3d, ScriptValueType type);
+	ScriptValue(EngineInterface& fe3d, ScriptValueType type, const string& value);
+	ScriptValue(EngineInterface& fe3d, ScriptValueType type, float value);
+	ScriptValue(EngineInterface& fe3d, ScriptValueType type, int value);
+	ScriptValue(EngineInterface& fe3d, ScriptValueType type, bool value);
 
 	void setString(const string& value);
 	void setDecimal(float value);
@@ -37,5 +37,5 @@ private:
 	bool _boolean = false;
 
 	ScriptValueType _type;
-	FabiEngine3D& _fe3d;
+	EngineInterface& _fe3d;
 };

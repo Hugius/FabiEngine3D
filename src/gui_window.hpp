@@ -1,12 +1,12 @@
 #pragma once
 
-#include "fe3d.hpp"
+#include "engine_interface.hpp"
 #include "gui_screen.hpp"
 
 class GuiWindow final
 {
 public:
-	GuiWindow(FabiEngine3D& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color);
+	GuiWindow(EngineInterface& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color);
 	~GuiWindow();
 
 	void createScreen(const string& ID);
@@ -37,5 +37,5 @@ private:
 	const fvec2 _initialSize;
 
 	vector<shared_ptr<GuiScreen>> _screens;
-	FabiEngine3D& _fe3d;
+	EngineInterface& _fe3d;
 };

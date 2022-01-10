@@ -43,17 +43,55 @@ const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isTe
 	return true;
 }
 
-const bool ScriptInterpreter::_validateFe3dQuad(const string& ID)
+const bool ScriptInterpreter::_validateFe3dQuad(const string& ID, bool isTemplate)
 {
 	if(!_validateFe3dID(ID))
 	{
 		return false;
 	}
 
-	if(!_fe3d.quad_isExisting(ID))
+	if(isTemplate)
 	{
-		_throwScriptError("quad entity does not exist!");
+		if(!_fe3d.quad_isExisting("@" + ID))
+		{
+			_throwScriptError("template quad entity does not exist!");
+			return false;
+		}
+	}
+	else
+	{
+		if(!_fe3d.quad_isExisting(ID))
+		{
+			_throwScriptError("quad entity does not exist!");
+			return false;
+		}
+	}
+
+	return true;
+}
+
+const bool ScriptInterpreter::_validateFe3dText(const string& ID, bool isTemplate)
+{
+	if(!_validateFe3dID(ID))
+	{
 		return false;
+	}
+
+	if(isTemplate)
+	{
+		if(!_fe3d.text_isExisting("@" + ID))
+		{
+			_throwScriptError("template text entity does not exist!");
+			return false;
+		}
+	}
+	else
+	{
+		if(!_fe3d.text_isExisting(ID))
+		{
+			_throwScriptError("text entity does not exist!");
+			return false;
+		}
 	}
 
 	return true;
@@ -162,22 +200,6 @@ const bool ScriptInterpreter::_validateFe3dTerrain()
 	if(_fe3d.terrain_getSelectedID().empty())
 	{
 		_throwScriptError("terrain entity not selected!");
-		return false;
-	}
-
-	return true;
-}
-
-const bool ScriptInterpreter::_validateFe3dText(const string& ID)
-{
-	if(!_validateFe3dID(ID))
-	{
-		return false;
-	}
-
-	if(!_fe3d.text_isExisting(ID))
-	{
-		_throwScriptError("text entity does not exist!");
 		return false;
 	}
 

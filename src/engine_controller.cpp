@@ -3,31 +3,30 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-EngineController::EngineController()
-	:
-	FabiEngine3D(),
-	_gui(*this),
-	_leftViewportController(*this, _gui),
-	_rightViewportController(*this, _gui),
-	_topViewportController(*this, _gui,
-						   _leftViewportController.getSkyEditor(),
-						   _leftViewportController.getTerrainEditor(),
-						   _leftViewportController.getWaterEditor(),
-						   _leftViewportController.getModelEditor(),
-						   _leftViewportController.getBillboardEditor(),
-						   _leftViewportController.getQuadEditor(),
-						   _leftViewportController.getAnimation2dEditor(),
-						   _leftViewportController.getAnimation3dEditor(),
-						   _leftViewportController.getSoundEditor(),
-						   _leftViewportController.getWorldEditor(),
-						   _leftViewportController.getScriptEditor()),
-	_bottomViewportController(*this, _gui, _topViewportController, _leftViewportController.getScriptEditor())
+void EngineController::inject(shared_ptr<EngineInterface> fe3d)
 {
-
+	_fe3d = fe3d;
 }
 
-void EngineController::FE3D_CONTROLLER_INIT()
+void EngineController::initialize()
 {
+	//_gui(*this),
+	//	_leftViewportController(*this, _gui),
+	//	_rightViewportController(*this, _gui),
+	//	_topViewportController(*this, _gui,
+	//						   _leftViewportController.getSkyEditor(),
+	//						   _leftViewportController.getTerrainEditor(),
+	//						   _leftViewportController.getWaterEditor(),
+	//						   _leftViewportController.getModelEditor(),
+	//						   _leftViewportController.getBillboardEditor(),
+	//						   _leftViewportController.getQuadEditor(),
+	//						   _leftViewportController.getAnimation2dEditor(),
+	//						   _leftViewportController.getAnimation3dEditor(),
+	//						   _leftViewportController.getSoundEditor(),
+	//						   _leftViewportController.getWorldEditor(),
+	//						   _leftViewportController.getScriptEditor()),
+	//	_bottomViewportController(*this, _gui, _topViewportController, _leftViewportController.getScriptEditor())
+
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string meshDirectoryPath = "engine\\assets\\mesh\\";
 	const string diffuseMapDirectoryPath = "engine\\assets\\image\\diffuse_map\\";
@@ -40,14 +39,14 @@ void EngineController::FE3D_CONTROLLER_INIT()
 			Logger::throwFatalWarning("Cannot load application: missing files/directories!");
 		}
 
-		misc_setBackgroundColor(RENDER_COLOR);
+		_fe3d->misc_setBackgroundColor(RENDER_COLOR);
 
 		_leftViewportController.getScriptEditor().loadScriptFiles(true);
 		_leftViewportController.getScriptEditor().getScriptExecutor().load();
 
 		if(!_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
 		{
-			application_stop();
+			_fe3d->application_stop();
 			_mustPromptOnExit = true;
 		}
 	}
@@ -60,7 +59,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		meshPaths.push_back(meshDirectoryPath + "plane.obj");
 		meshPaths.push_back(meshDirectoryPath + "speaker.obj");
 		meshPaths.push_back(meshDirectoryPath + "torch.obj");
-		misc_cacheMeshes(meshPaths);
+		_fe3d->misc_cacheMeshes(meshPaths);
 
 		vector<string> imagePaths;
 		imagePaths.push_back(diffuseMapDirectoryPath + "box.tga");
@@ -86,26 +85,26 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		imagePaths.push_back(diffuseMapDirectoryPath + "start.tga");
 		imagePaths.push_back(diffuseMapDirectoryPath + "stop.tga");
 		imagePaths.push_back(fontMapDirectoryPath + "font.tga");
-		misc_cacheImages(imagePaths);
+		_fe3d->misc_cacheImages(imagePaths);
 
-		misc_setBackgroundColor(RENDER_COLOR);
+		_fe3d->misc_setBackgroundColor(RENDER_COLOR);
 
-		quad_create("@@cursor", true);
-		quad_setSize("@@cursor", fvec2(CURSOR_QUAD_SIZE, (CURSOR_QUAD_SIZE * Tools::getWindowAspectRatio())));
-		quad_setDiffuseMap("@@cursor", diffuseMapDirectoryPath + "cursor_default.tga");
-		misc_setCursorEntityID("@@cursor");
-		misc_setCursorVisible(false);
+		_fe3d->quad_create("@@cursor", true);
+		_fe3d->quad_setSize("@@cursor", fvec2(CURSOR_QUAD_SIZE, (CURSOR_QUAD_SIZE * Tools::getWindowAspectRatio())));
+		_fe3d->quad_setDiffuseMap("@@cursor", diffuseMapDirectoryPath + "cursor_default.tga");
+		_fe3d->misc_setCursorEntityID("@@cursor");
+		_fe3d->misc_setCursorVisible(false);
 
 		_rightViewportController.initialize();
 		_bottomViewportController.initialize();
 		_topViewportController.initialize();
 		_leftViewportController.initialize();
 
-		misc_enableVsync();
+		_fe3d->misc_enableVsync();
 	}
 }
 
-void EngineController::FE3D_CONTROLLER_UPDATE()
+void EngineController::update()
 {
 	if(Config::getInst().isApplicationExported())
 	{
@@ -118,7 +117,7 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 		}
 		else
 		{
-			application_stop();
+			_fe3d->application_stop();
 			_mustPromptOnExit = true;
 		}
 	}
@@ -128,15 +127,15 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 		string activeScreen = _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID();
 		if(activeScreen == "main" && lastScreen != "main")
 		{
-			misc_setBackgroundColor(RENDER_COLOR);
+			_fe3d->misc_setBackgroundColor(RENDER_COLOR);
 
-			camera_reset();
+			_fe3d->camera_reset();
 		}
 		lastScreen = activeScreen;
 
-		quad_setPosition("@@cursor", Math::convertToNdc(Tools::convertFromScreenCoords(misc_getCursorPosition())));
-		quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_default.tga");
-		quad_setVisible("@@cursor", misc_isCursorInsideWindow());
+		_fe3d->quad_setPosition("@@cursor", Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d->misc_getCursorPosition())));
+		_fe3d->quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_default.tga");
+		_fe3d->quad_setVisible("@@cursor", _fe3d->misc_isCursorInsideWindow());
 
 		_gui.update();
 
@@ -147,7 +146,7 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 	}
 }
 
-void EngineController::FE3D_CONTROLLER_TERMINATE()
+void EngineController::terminate()
 {
 	if(Config::getInst().isApplicationExported())
 	{
@@ -160,9 +159,11 @@ void EngineController::FE3D_CONTROLLER_TERMINATE()
 	{
 
 	}
-}
 
-const bool EngineController::mustPromptOnExit() const
-{
-	return _mustPromptOnExit;
+	if(_mustPromptOnExit)
+	{
+		cout << endl;
+		cout << "Press a key to continue...";
+		auto temp = _getch();
+	}
 }

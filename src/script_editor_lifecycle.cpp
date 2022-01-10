@@ -7,7 +7,7 @@
 using VPC = BaseViewportController;
 using LVPC = LeftViewportController;
 
-ScriptEditor::ScriptEditor(FabiEngine3D& fe3d,
+ScriptEditor::ScriptEditor(EngineInterface& fe3d,
 						   GuiManager& gui,
 						   SkyEditor& skyEditor,
 						   TerrainEditor& terrainEditor,

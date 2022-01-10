@@ -1,11 +1,11 @@
 #pragma once
 
-#include "fe3d.hpp"
+#include "engine_interface.hpp"
 
 class ScriptFile final
 {
 public:
-	ScriptFile(FabiEngine3D& fe3d, const string& ID);
+	ScriptFile(EngineInterface& fe3d, const string& ID);
 
 	void addNewLine(const string& textContent);
 	void insertNewLine(unsigned int index, const string& textContent);
@@ -30,5 +30,5 @@ private:
 	unsigned int _cursorLineIndex = 0;
 	unsigned int _cursorCharIndex = 0;
 
-	FabiEngine3D& _fe3d;
+	EngineInterface& _fe3d;
 };

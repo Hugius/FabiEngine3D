@@ -7,7 +7,7 @@
 class BottomViewportController final : public BaseViewportController
 {
 public:
-	BottomViewportController(FabiEngine3D& fe3d, GuiManager& gui, TopViewportController& topViewportController, ScriptEditor& scriptEditor);
+	BottomViewportController(EngineInterface& fe3d, GuiManager& gui, TopViewportController& topViewportController, ScriptEditor& scriptEditor);
 
 	void initialize() override;
 	void update() override;

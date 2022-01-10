@@ -1,95 +1,95 @@
-#include "fe3d.hpp"
-#include "core.hpp"
+#include "engine_interface.hpp"
+#include "engine_core.hpp"
 
-const bool FabiEngine3D::server_isRunning() const
+const bool EngineInterface::server_isRunning() const
 {
-	return _core->_networkingServer->isRunning();
+	return _core->getNetworkingServer()->isRunning();
 }
 
-const bool FabiEngine3D::server_isClientConnected(const string& username) const
+const bool EngineInterface::server_isClientConnected(const string& username) const
 {
-	if(!_core->_networkingServer->isRunning())
+	if(!_core->getNetworkingServer()->isRunning())
 	{
 		Logger::throwWarning("Networking server tried to get client connection status: not running!");
 		return false;
 	}
 
-	return _core->_networkingServer->isClientConnected(username);
+	return _core->getNetworkingServer()->isClientConnected(username);
 }
 
-const string FabiEngine3D::server_getNewClientIP() const
+const string EngineInterface::server_getNewClientIP() const
 {
-	if(!_core->_networkingServer->isRunning())
+	if(!_core->getNetworkingServer()->isRunning())
 	{
 		Logger::throwWarning("Networking server tried to get new client IP: not running!");
 		return "";
 	}
 
-	return _core->_networkingServer->getNewClientIP();
+	return _core->getNetworkingServer()->getNewClientIP();
 }
 
-const string FabiEngine3D::server_getNewClientUsername() const
+const string EngineInterface::server_getNewClientUsername() const
 {
-	if(!_core->_networkingServer->isRunning())
+	if(!_core->getNetworkingServer()->isRunning())
 	{
 		Logger::throwWarning("Networking server tried to get new client username: not running!");
 		return "";
 	}
 
-	return _core->_networkingServer->getNewClientUsername();
+	return _core->getNetworkingServer()->getNewClientUsername();
 }
 
-const string FabiEngine3D::server_getOldClientIP() const
+const string EngineInterface::server_getOldClientIP() const
 {
-	if(!_core->_networkingServer->isRunning())
+	if(!_core->getNetworkingServer()->isRunning())
 	{
 		Logger::throwWarning("Networking server tried to get old client IP: not running!");
 		return "";
 	}
 
-	return _core->_networkingServer->getOldClientIP();
+	return _core->getNetworkingServer()->getOldClientIP();
 }
 
-const string FabiEngine3D::server_getOldClientUsername() const
+const string EngineInterface::server_getOldClientUsername() const
 {
-	if(!_core->_networkingServer->isRunning())
+	if(!_core->getNetworkingServer()->isRunning())
 	{
 		Logger::throwWarning("Networking server tried to get old client username: not running!");
 		return "";
 	}
 
-	return _core->_networkingServer->getOldClientUsername();
+	return _core->getNetworkingServer()->getOldClientUsername();
 }
 
-const vector<NetworkingClientMessage> FabiEngine3D::server_getPendingMessages() const
+const vector<NetworkingClientMessage> EngineInterface::server_getPendingMessages() const
 {
-	if(!_core->_networkingServer->isRunning())
+	if(!_core->getNetworkingServer()->isRunning())
 	{
 		Logger::throwWarning("Networking server tried to get pending messages: not running!");
 		return {};
 	}
 
-	return _core->_networkingServer->getPendingMessages();
+	return _core->getNetworkingServer()->getPendingMessages();
 }
 
-const vector<string> FabiEngine3D::server_getClientIPs() const
+const vector<string> EngineInterface::server_getClientIPs() const
 {
-	if(!_core->_networkingServer->isRunning())
+	if(!_core->getNetworkingServer()->isRunning())
 	{
 		Logger::throwWarning("Networking server tried to get client IPs: not running!");
 		return {};
 	}
 
-	return _core->_networkingServer->getClientIPs();
+	return _core->getNetworkingServer()->getClientIPs();
 }
 
-const vector<string> FabiEngine3D::server_getClientUsernames() const
+const vector<string> EngineInterface::server_getClientUsernames() const
 {
-	if(!_core->_networkingServer->isRunning())
+	if(!_core->getNetworkingServer()->isRunning())
 	{
 		Logger::throwWarning("Networking server tried to get client usernames: not running!");
 		return {};
 	}
 
-	return _core->_networkingServer->getClientUsernames();
+	return _core->getNetworkingServer()->getClientUsernames();
 }

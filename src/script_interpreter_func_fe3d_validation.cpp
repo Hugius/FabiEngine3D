@@ -7,7 +7,7 @@ const bool ScriptInterpreter::_validateFe3dAabb(const string& ID)
 		return false;
 	}
 
-	if(!_fe3d.aabb_isExisting(ID))
+	if(!_fe3d->aabb_isExisting(ID))
 	{
 		_throwScriptError("AABB entity does not exist!");
 		return false;
@@ -25,7 +25,7 @@ const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isTe
 
 	if(isTemplate)
 	{
-		if(!_fe3d.billboard_isExisting("@" + ID))
+		if(!_fe3d->billboard_isExisting("@" + ID))
 		{
 			_throwScriptError("template billboard entity does not exist!");
 			return false;
@@ -33,7 +33,7 @@ const bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isTe
 	}
 	else
 	{
-		if(!_fe3d.billboard_isExisting(ID))
+		if(!_fe3d->billboard_isExisting(ID))
 		{
 			_throwScriptError("billboard entity does not exist!");
 			return false;
@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_validateFe3dQuad(const string& ID, bool isTemplat
 
 	if(isTemplate)
 	{
-		if(!_fe3d.quad_isExisting("@" + ID))
+		if(!_fe3d->quad_isExisting("@" + ID))
 		{
 			_throwScriptError("template quad entity does not exist!");
 			return false;
@@ -60,7 +60,7 @@ const bool ScriptInterpreter::_validateFe3dQuad(const string& ID, bool isTemplat
 	}
 	else
 	{
-		if(!_fe3d.quad_isExisting(ID))
+		if(!_fe3d->quad_isExisting(ID))
 		{
 			_throwScriptError("quad entity does not exist!");
 			return false;
@@ -79,7 +79,7 @@ const bool ScriptInterpreter::_validateFe3dText(const string& ID, bool isTemplat
 
 	if(isTemplate)
 	{
-		if(!_fe3d.text_isExisting("@" + ID))
+		if(!_fe3d->text_isExisting("@" + ID))
 		{
 			_throwScriptError("template text entity does not exist!");
 			return false;
@@ -87,7 +87,7 @@ const bool ScriptInterpreter::_validateFe3dText(const string& ID, bool isTemplat
 	}
 	else
 	{
-		if(!_fe3d.text_isExisting(ID))
+		if(!_fe3d->text_isExisting(ID))
 		{
 			_throwScriptError("text entity does not exist!");
 			return false;
@@ -104,7 +104,7 @@ const bool ScriptInterpreter::_validateFe3dPointlight(const string& ID)
 		return false;
 	}
 
-	if(!_fe3d.pointlight_isExisting(ID))
+	if(!_fe3d->pointlight_isExisting(ID))
 	{
 		_throwScriptError("pointlight entity does not exist!");
 		return false;
@@ -120,7 +120,7 @@ const bool ScriptInterpreter::_validateFe3dSpotlight(const string& ID)
 		return false;
 	}
 
-	if(!_fe3d.spotlight_isExisting(ID))
+	if(!_fe3d->spotlight_isExisting(ID))
 	{
 		_throwScriptError("spotlight entity does not exist!");
 		return false;
@@ -138,7 +138,7 @@ const bool ScriptInterpreter::_validateFe3dModel(const string& ID, bool isTempla
 
 	if(isTemplate)
 	{
-		if(!_fe3d.model_isExisting("@" + ID))
+		if(!_fe3d->model_isExisting("@" + ID))
 		{
 			_throwScriptError("template model entity does not exist!");
 			return false;
@@ -146,7 +146,7 @@ const bool ScriptInterpreter::_validateFe3dModel(const string& ID, bool isTempla
 	}
 	else
 	{
-		if(!_fe3d.model_isExisting(ID))
+		if(!_fe3d->model_isExisting(ID))
 		{
 			_throwScriptError("model entity does not exist!");
 			return false;
@@ -159,7 +159,7 @@ const bool ScriptInterpreter::_validateFe3dModel(const string& ID, bool isTempla
 
 const bool ScriptInterpreter::_validateFe3dModelPart(const string& modelID, const string& partID)
 {
-	if(_fe3d.model_hasPart(modelID, partID))
+	if(_fe3d->model_hasPart(modelID, partID))
 	{
 		_throwScriptError("model entity part does not exist!");
 		return false;
@@ -175,7 +175,7 @@ const bool ScriptInterpreter::_validateFe3dReflection(const string& ID)
 		return false;
 	}
 
-	if(!_fe3d.reflection_isExisting(ID))
+	if(!_fe3d->reflection_isExisting(ID))
 	{
 		_throwScriptError("reflection entity does not exist!");
 		return false;
@@ -186,7 +186,7 @@ const bool ScriptInterpreter::_validateFe3dReflection(const string& ID)
 
 const bool ScriptInterpreter::_validateFe3dSky()
 {
-	if(_fe3d.sky_getSelectedID().empty())
+	if(_fe3d->sky_getSelectedID().empty())
 	{
 		_throwScriptError("sky entity not selected!");
 		return false;
@@ -197,7 +197,7 @@ const bool ScriptInterpreter::_validateFe3dSky()
 
 const bool ScriptInterpreter::_validateFe3dTerrain()
 {
-	if(_fe3d.terrain_getSelectedID().empty())
+	if(_fe3d->terrain_getSelectedID().empty())
 	{
 		_throwScriptError("terrain entity not selected!");
 		return false;
@@ -240,7 +240,7 @@ const bool ScriptInterpreter::_validateFe3dAnimation3d(const string& ID)
 
 const bool ScriptInterpreter::_validateFe3dWater()
 {
-	if(_fe3d.water_getSelectedID().empty())
+	if(_fe3d->water_getSelectedID().empty())
 	{
 		_throwScriptError("water entity not selected!");
 		return false;
@@ -258,7 +258,7 @@ const bool ScriptInterpreter::_validateFe3dSound2d(const string& ID, bool isTemp
 
 	if(isTemplate)
 	{
-		if(!_fe3d.sound2d_isExisting("@" + ID))
+		if(!_fe3d->sound2d_isExisting("@" + ID))
 		{
 			_throwScriptError("template sound does not exist!");
 			return false;
@@ -266,7 +266,7 @@ const bool ScriptInterpreter::_validateFe3dSound2d(const string& ID, bool isTemp
 	}
 	else
 	{
-		if(!_fe3d.sound2d_isExisting(ID))
+		if(!_fe3d->sound2d_isExisting(ID))
 		{
 			_throwScriptError("sound2D does not exist!");
 			return false;
@@ -285,7 +285,7 @@ const bool ScriptInterpreter::_validateFe3dSound3d(const string& ID, bool isTemp
 
 	if(isTemplate)
 	{
-		if(!_fe3d.sound3d_isExisting("@" + ID))
+		if(!_fe3d->sound3d_isExisting("@" + ID))
 		{
 			_throwScriptError("template sound does not exist!");
 			return false;
@@ -293,7 +293,7 @@ const bool ScriptInterpreter::_validateFe3dSound3d(const string& ID, bool isTemp
 	}
 	else
 	{
-		if(!_fe3d.sound3d_isExisting(ID))
+		if(!_fe3d->sound3d_isExisting(ID))
 		{
 			_throwScriptError("sound3D does not exist!");
 			return false;

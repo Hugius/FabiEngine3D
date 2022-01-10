@@ -17,29 +17,29 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 				return true;
 			}
 
-			if(_fe3d.text_isExisting(args[0].getString()))
+			if(_fe3d->text_isExisting(args[0].getString()))
 			{
 				_throwScriptError("text already exists!");
 				return true;
 			}
 
-			_fe3d.text_create(args[0].getString(), true);
+			_fe3d->text_create(args[0].getString(), true);
 
 			const auto isExported = Config::getInst().isApplicationExported();
 			const auto rootPath = Tools::getRootDirectoryPath();
 			const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\image\\entity\\text\\font_map\\" + args[1].getString());
-			_fe3d.text_setFontMap(args[0].getString(), filePath);
+			_fe3d->text_setFontMap(args[0].getString(), filePath);
 
-			_fe3d.text_setPosition(args[0].getString(), _convertGuiPositionToViewport(fvec2(args[3].getDecimal(), args[4].getDecimal())));
-			_fe3d.text_setSize(args[0].getString(), _convertGuiSizeToViewport(fvec2(args[5].getDecimal(), args[6].getDecimal())));
-			_fe3d.text_setContent(args[0].getString(), args[2].getString());
+			_fe3d->text_setPosition(args[0].getString(), _convertGuiPositionToViewport(fvec2(args[3].getDecimal(), args[4].getDecimal())));
+			_fe3d->text_setSize(args[0].getString(), _convertGuiSizeToViewport(fvec2(args[5].getDecimal(), args[6].getDecimal())));
+			_fe3d->text_setContent(args[0].getString(), args[2].getString());
 
 			if(!Config::getInst().isApplicationExported())
 			{
 				auto minPosition = Math::convertToNdc(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition()));
 				auto maxPosition = Math::convertToNdc(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition() + Config::getInst().getViewportSize()));
-				_fe3d.text_setMinPosition(args[0].getString(), minPosition);
-				_fe3d.text_setMaxPosition(args[0].getString(), maxPosition);
+				_fe3d->text_setMinPosition(args[0].getString(), minPosition);
+				_fe3d->text_setMaxPosition(args[0].getString(), maxPosition);
 			}
 
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -53,7 +53,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString()))
 			{
-				_fe3d.text_delete(args[0].getString());
+				_fe3d->text_delete(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -62,11 +62,11 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto& ID : _fe3d.text_getIDs())
+			for(const auto& ID : _fe3d->text_getIDs())
 			{
 				if(ID[0] != '@')
 				{
-					_fe3d.text_delete(ID);
+					_fe3d->text_delete(ID);
 				}
 			}
 
@@ -81,7 +81,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString()))
 			{
-				_fe3d.text_setVisible(args[0].getString(), args[1].getBoolean());
+				_fe3d->text_setVisible(args[0].getString(), args[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -95,7 +95,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString()))
 			{
 				fvec2 position = _convertGuiPositionToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
-				_fe3d.text_setPosition(args[0].getString(), position);
+				_fe3d->text_setPosition(args[0].getString(), position);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -109,7 +109,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString()))
 			{
 				fvec2 change = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
-				_fe3d.text_move(args[0].getString(), change);
+				_fe3d->text_move(args[0].getString(), change);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -124,7 +124,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			{
 				fvec2 target = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				fvec2 speed = _convertGuiSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
-				_fe3d.text_moveTo(args[0].getString(), target, speed.x);
+				_fe3d->text_moveTo(args[0].getString(), target, speed.x);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -137,7 +137,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString()))
 			{
-				_fe3d.text_rotateTo(args[0].getString(), args[1].getDecimal(), args[2].getDecimal());
+				_fe3d->text_rotateTo(args[0].getString(), args[1].getDecimal(), args[2].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -152,7 +152,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			{
 				fvec2 target = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				fvec2 speed = _convertGuiSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
-				_fe3d.text_scaleTo(args[0].getString(), target, speed.x);
+				_fe3d->text_scaleTo(args[0].getString(), target, speed.x);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -165,7 +165,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString()))
 			{
-				_fe3d.text_setRotation(args[0].getString(), args[1].getDecimal());
+				_fe3d->text_setRotation(args[0].getString(), args[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -178,7 +178,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString()))
 			{
-				_fe3d.text_rotate(args[0].getString(), args[1].getDecimal());
+				_fe3d->text_rotate(args[0].getString(), args[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -192,7 +192,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString()))
 			{
 				fvec2 size = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
-				_fe3d.text_setSize(args[0].getString(), size);
+				_fe3d->text_setSize(args[0].getString(), size);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -206,7 +206,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			if(_validateFe3dText(args[0].getString()))
 			{
 				fvec2 change = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
-				_fe3d.text_scale(args[0].getString(), change);
+				_fe3d->text_scale(args[0].getString(), change);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -219,8 +219,8 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString()))
 			{
-				_fe3d.text_setColor(args[0].getString(),
-									fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->text_setColor(args[0].getString(),
+									 fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -233,7 +233,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString()))
 			{
-				_fe3d.text_setContent(args[0].getString(), args[1].getString());
+				_fe3d->text_setContent(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -246,7 +246,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString()))
 			{
-				_fe3d.text_setTransparency(args[0].getString(), args[1].getDecimal());
+				_fe3d->text_setTransparency(args[0].getString(), args[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -256,7 +256,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 		return false;
 	}
 
-	if(_fe3d.server_isRunning())
+	if(_fe3d->server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:text` functionality as networking server!");
 	}

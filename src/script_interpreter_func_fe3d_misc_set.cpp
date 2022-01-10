@@ -15,13 +15,13 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_fe3d.server_isRunning())
+			if(_fe3d->server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:application_pause` functionality as a networking server!");
 				return true;
 			}
 
-			_fe3d.application_pause();
+			_fe3d->application_pause();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -29,13 +29,13 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_fe3d.server_isRunning())
+			if(_fe3d->server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:application_resume` functionality as a networking server!");
 				return true;
 			}
 
-			_fe3d.application_resume();
+			_fe3d->application_resume();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -45,7 +45,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 		{
 			if(Config::getInst().isApplicationExported())
 			{
-				_fe3d.application_stop();
+				_fe3d->application_stop();
 			}
 			else
 			{
@@ -90,13 +90,13 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_fe3d.server_isRunning())
+			if(_fe3d->server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:cursor` functionality as networking server!");
 				return true;
 			}
 
-			_fe3d.misc_setCursorVisible(args[0].getBoolean());
+			_fe3d->misc_setCursorVisible(args[0].getBoolean());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -104,13 +104,13 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_fe3d.server_isRunning())
+			if(_fe3d->server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:cursor` functionality as networking server!");
 				return true;
 			}
 
-			_fe3d.misc_centerCursor();
+			_fe3d->misc_centerCursor();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -118,7 +118,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_fe3d.misc_startMillisecondTimer();
+			_fe3d->misc_startMillisecondTimer();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -126,7 +126,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _fe3d.misc_stopMillisecondTimer();
+			auto result = _fe3d->misc_stopMillisecondTimer();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
@@ -134,13 +134,13 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_fe3d.server_isRunning())
+			if(_fe3d->server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:wireframe` functionality as networking server!");
 				return true;
 			}
 
-			_fe3d.misc_enableWireframeRendering();
+			_fe3d->misc_enableWireframeRendering();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -148,13 +148,13 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_fe3d.server_isRunning())
+			if(_fe3d->server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:wireframe` functionality as networking server!");
 				return true;
 			}
 
-			_fe3d.misc_disableWireframeRendering();
+			_fe3d->misc_disableWireframeRendering();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -162,13 +162,13 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_fe3d.server_isRunning())
+			if(_fe3d->server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:aabbs` functionality as networking server!");
 				return true;
 			}
 
-			_fe3d.misc_enableAabbFrameRendering();
+			_fe3d->misc_enableAabbFrameRendering();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -176,13 +176,13 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_fe3d.server_isRunning())
+			if(_fe3d->server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:aabbs` functionality as networking server!");
 				return true;
 			}
 
-			_fe3d.misc_disableAabbFrameRendering();
+			_fe3d->misc_disableAabbFrameRendering();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -192,7 +192,7 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			auto result = _fe3d.misc_checkInterval(args[0].getInteger());
+			auto result = _fe3d->misc_checkInterval(args[0].getInteger());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
@@ -200,13 +200,13 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_fe3d.server_isRunning())
+			if(_fe3d->server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:vsync` functionality as networking server!");
 				return true;
 			}
 
-			_fe3d.misc_enableVsync();
+			_fe3d->misc_enableVsync();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -214,13 +214,13 @@ const bool ScriptInterpreter::_executeFe3dMiscSetter(const string& functionName,
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			if(_fe3d.server_isRunning())
+			if(_fe3d->server_isRunning())
 			{
 				_throwScriptError("cannot access `fe3d:vsync` functionality as networking server!");
 				return true;
 			}
 
-			_fe3d.misc_disableVsync();
+			_fe3d->misc_disableVsync();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

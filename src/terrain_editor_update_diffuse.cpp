@@ -8,12 +8,12 @@ void TerrainEditor::_updateDiffuseMapMenu()
 
 	if(screen->getID() == "terrainEditorMenuDiffuseMap")
 	{
-		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
 			if(_currentProjectID.empty())
 			{
@@ -43,10 +43,10 @@ void TerrainEditor::_updateDiffuseMapMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearImageCache(finalFilePath);
-			_fe3d.terrain_setDiffuseMap(_currentTerrainID, finalFilePath);
+			_fe3d->misc_clearImageCache(finalFilePath);
+			_fe3d->terrain_setDiffuseMap(_currentTerrainID, finalFilePath);
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("redDiffuseMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("redDiffuseMap")->isHovered())
 		{
 			if(_currentProjectID.empty())
 			{
@@ -76,10 +76,10 @@ void TerrainEditor::_updateDiffuseMapMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearImageCache(finalFilePath);
-			_fe3d.terrain_setRedDiffuseMap(_currentTerrainID, finalFilePath);
+			_fe3d->misc_clearImageCache(finalFilePath);
+			_fe3d->terrain_setRedDiffuseMap(_currentTerrainID, finalFilePath);
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenDiffuseMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenDiffuseMap")->isHovered())
 		{
 			if(_currentProjectID.empty())
 			{
@@ -109,10 +109,10 @@ void TerrainEditor::_updateDiffuseMapMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearImageCache(finalFilePath);
-			_fe3d.terrain_setGreenDiffuseMap(_currentTerrainID, finalFilePath);
+			_fe3d->misc_clearImageCache(finalFilePath);
+			_fe3d->terrain_setGreenDiffuseMap(_currentTerrainID, finalFilePath);
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueDiffuseMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueDiffuseMap")->isHovered())
 		{
 			if(_currentProjectID.empty())
 			{
@@ -142,24 +142,24 @@ void TerrainEditor::_updateDiffuseMapMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearImageCache(finalFilePath);
-			_fe3d.terrain_setBlueDiffuseMap(_currentTerrainID, finalFilePath);
+			_fe3d->misc_clearImageCache(finalFilePath);
+			_fe3d->terrain_setBlueDiffuseMap(_currentTerrainID, finalFilePath);
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
-			_fe3d.terrain_setDiffuseMap(_currentTerrainID, "");
-			_fe3d.terrain_setRedDiffuseMap(_currentTerrainID, "");
-			_fe3d.terrain_setGreenDiffuseMap(_currentTerrainID, "");
-			_fe3d.terrain_setBlueDiffuseMap(_currentTerrainID, "");
+			_fe3d->terrain_setDiffuseMap(_currentTerrainID, "");
+			_fe3d->terrain_setRedDiffuseMap(_currentTerrainID, "");
+			_fe3d->terrain_setGreenDiffuseMap(_currentTerrainID, "");
+			_fe3d->terrain_setBlueDiffuseMap(_currentTerrainID, "");
 		}
 
-		screen->getButton("redDiffuseMap")->setHoverable(_fe3d.terrain_hasBlendMap(_currentTerrainID));
-		screen->getButton("greenDiffuseMap")->setHoverable(_fe3d.terrain_hasBlendMap(_currentTerrainID));
-		screen->getButton("blueDiffuseMap")->setHoverable(_fe3d.terrain_hasBlendMap(_currentTerrainID));
+		screen->getButton("redDiffuseMap")->setHoverable(_fe3d->terrain_hasBlendMap(_currentTerrainID));
+		screen->getButton("greenDiffuseMap")->setHoverable(_fe3d->terrain_hasBlendMap(_currentTerrainID));
+		screen->getButton("blueDiffuseMap")->setHoverable(_fe3d->terrain_hasBlendMap(_currentTerrainID));
 		screen->getButton("clearMaps")->setHoverable(
-			_fe3d.terrain_hasDiffuseMap(_currentTerrainID) ||
-			_fe3d.terrain_hasRedDiffuseMap(_currentTerrainID) ||
-			_fe3d.terrain_hasGreenDiffuseMap(_currentTerrainID) ||
-			_fe3d.terrain_hasBlueDiffuseMap(_currentTerrainID));
+			_fe3d->terrain_hasDiffuseMap(_currentTerrainID) ||
+			_fe3d->terrain_hasRedDiffuseMap(_currentTerrainID) ||
+			_fe3d->terrain_hasGreenDiffuseMap(_currentTerrainID) ||
+			_fe3d->terrain_hasBlueDiffuseMap(_currentTerrainID));
 	}
 }

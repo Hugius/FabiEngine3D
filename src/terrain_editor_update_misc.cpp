@@ -6,67 +6,67 @@ using std::max;
 
 void TerrainEditor::_updateCamera()
 {
-	if(_fe3d.camera_isThirdPersonViewEnabled())
+	if(_fe3d->camera_isThirdPersonViewEnabled())
 	{
-		auto scrollOffset = _fe3d.input_getMouseWheelY();
-		auto cameraDistance = _fe3d.camera_getThirdPersonDistance();
+		auto scrollOffset = _fe3d->input_getMouseWheelY();
+		auto cameraDistance = _fe3d->camera_getThirdPersonDistance();
 		cameraDistance = max(MIN_CAMERA_DISTANCE, cameraDistance - (static_cast<float>(scrollOffset) * CAMERA_DISTANCE_SPEED));
-		_fe3d.camera_setThirdPersonDistance(cameraDistance);
+		_fe3d->camera_setThirdPersonDistance(cameraDistance);
 
-		_fe3d.quad_setVisible("@@cursor", false);
+		_fe3d->quad_setVisible("@@cursor", false);
 	}
 
-	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+	if(!_gui.getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
 	{
-		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
+		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			if(_fe3d.camera_isThirdPersonViewEnabled())
+			if(_fe3d->camera_isThirdPersonViewEnabled())
 			{
-				_fe3d.camera_disableThirdPersonView();
+				_fe3d->camera_disableThirdPersonView();
 			}
 			else
 			{
-				_fe3d.camera_enableThirdPersonView(_fe3d.camera_getThirdPersonYaw(), _fe3d.camera_getThirdPersonPitch());
+				_fe3d->camera_enableThirdPersonView(_fe3d->camera_getThirdPersonYaw(), _fe3d->camera_getThirdPersonPitch());
 			}
 		}
 	}
 
-	if(_fe3d.camera_isThirdPersonViewEnabled())
+	if(_fe3d->camera_isThirdPersonViewEnabled())
 	{
 		if(_gui.getOverlay()->isFocused())
 		{
-			_fe3d.camera_disableThirdPersonView();
+			_fe3d->camera_disableThirdPersonView();
 		}
 	}
 }
 
 void TerrainEditor::_updateMiscellaneous()
 {
-	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+	if(!_gui.getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
 	{
-		if(_fe3d.input_isKeyPressed(InputType::KEY_R))
+		if(_fe3d->input_isKeyPressed(InputType::KEY_R))
 		{
-			if(_fe3d.model_isVisible("@@box"))
+			if(_fe3d->model_isVisible("@@box"))
 			{
-				_fe3d.model_setVisible("@@box", false);
+				_fe3d->model_setVisible("@@box", false);
 			}
 			else
 			{
-				_fe3d.model_setVisible("@@box", true);
+				_fe3d->model_setVisible("@@box", true);
 			}
 		}
 
 		if(!_currentTerrainID.empty())
 		{
-			if(_fe3d.input_isKeyPressed(InputType::KEY_F))
+			if(_fe3d->input_isKeyPressed(InputType::KEY_F))
 			{
-				if(_fe3d.terrain_isWireframed(_currentTerrainID))
+				if(_fe3d->terrain_isWireframed(_currentTerrainID))
 				{
-					_fe3d.terrain_setWireframed(_currentTerrainID, false);
+					_fe3d->terrain_setWireframed(_currentTerrainID, false);
 				}
 				else
 				{
-					_fe3d.terrain_setWireframed(_currentTerrainID, true);
+					_fe3d->terrain_setWireframed(_currentTerrainID, true);
 				}
 			}
 		}
@@ -132,19 +132,19 @@ void TerrainEditor::_updateTerrainCreating()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearImageCache(finalFilePath);
-			_fe3d.terrain_create(newTerrainID, finalFilePath);
+			_fe3d->misc_clearImageCache(finalFilePath);
+			_fe3d->terrain_create(newTerrainID, finalFilePath);
 
-			if(_fe3d.terrain_isExisting(newTerrainID))
+			if(_fe3d->terrain_isExisting(newTerrainID))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 
 				_currentTerrainID = newTerrainID;
 				_loadedTerrainIDs.push_back(newTerrainID);
-				_fe3d.terrain_select(newTerrainID);
+				_fe3d->terrain_select(newTerrainID);
 
-				_fe3d.text_setContent(_gui.getOverlay()->getTextField("terrainID")->getEntityID(), "Terrain: " + newTerrainID.substr(1), 0.025f);
-				_fe3d.text_setVisible(_gui.getOverlay()->getTextField("terrainID")->getEntityID(), true);
+				_fe3d->text_setContent(_gui.getOverlay()->getTextField("terrainID")->getEntityID(), "Terrain: " + newTerrainID.substr(1), 0.025f);
+				_fe3d->text_setVisible(_gui.getOverlay()->getTextField("terrainID")->getEntityID(), true);
 				_isCreatingTerrain = false;
 			}
 		}
@@ -157,21 +157,21 @@ void TerrainEditor::_updateTerrainChoosing()
 	{
 		auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("terrainList");
 
-		_fe3d.terrain_select("");
+		_fe3d->terrain_select("");
 
 		if(!selectedButtonID.empty())
 		{
-			_fe3d.terrain_select("@" + selectedButtonID);
+			_fe3d->terrain_select("@" + selectedButtonID);
 
-			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				_currentTerrainID = ("@" + selectedButtonID);
 
 				if(!_isDeletingTerrain)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
-					_fe3d.text_setContent(_gui.getOverlay()->getTextField("terrainID")->getEntityID(), "Terrain: " + _currentTerrainID.substr(1), 0.025f);
-					_fe3d.text_setVisible(_gui.getOverlay()->getTextField("terrainID")->getEntityID(), true);
+					_fe3d->text_setContent(_gui.getOverlay()->getTextField("terrainID")->getEntityID(), "Terrain: " + _currentTerrainID.substr(1), 0.025f);
+					_fe3d->text_setVisible(_gui.getOverlay()->getTextField("terrainID")->getEntityID(), true);
 				}
 
 				_gui.getOverlay()->deleteChoiceForm("terrainList");
@@ -198,7 +198,7 @@ void TerrainEditor::_updateTerrainDeleting()
 
 		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_fe3d.terrain_delete(_currentTerrainID);
+			_fe3d->terrain_delete(_currentTerrainID);
 
 			_loadedTerrainIDs.erase(remove(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), _currentTerrainID), _loadedTerrainIDs.end());
 			_currentTerrainID = "";
@@ -206,7 +206,7 @@ void TerrainEditor::_updateTerrainDeleting()
 		}
 		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
 		{
-			_fe3d.terrain_select("");
+			_fe3d->terrain_select("");
 
 			_currentTerrainID = "";
 			_isDeletingTerrain = false;

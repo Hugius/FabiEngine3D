@@ -10,6 +10,8 @@
 class EngineController final
 {
 public:
+	EngineController();
+
 	void inject(shared_ptr<EngineInterface> fe3d);
 
 	void initialize();
@@ -25,9 +27,9 @@ private:
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;
 
-	GuiManager _gui;
-	LeftViewportController _leftViewportController;
-	RightViewportController _rightViewportController;
-	TopViewportController _topViewportController;
-	BottomViewportController _bottomViewportController;
+	shared_ptr<GuiManager> _guiManager;
+	shared_ptr<LeftViewportController> _leftViewportController;
+	shared_ptr<RightViewportController> _rightViewportController;
+	shared_ptr<TopViewportController> _topViewportController;
+	shared_ptr<BottomViewportController> _bottomViewportController;
 };

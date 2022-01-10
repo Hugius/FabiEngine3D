@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			auto result = _fe3d.client_isValidServerIP(args[0].getString());
+			auto result = _fe3d->client_isValidServerIP(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
@@ -18,7 +18,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _fe3d.client_isRunning();
+			auto result = _fe3d->client_isRunning();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
@@ -26,7 +26,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _fe3d.client_isConnecting();
+			auto result = _fe3d->client_isConnecting();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
@@ -34,7 +34,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _fe3d.client_isConnected();
+			auto result = _fe3d->client_isConnected();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
@@ -42,7 +42,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _fe3d.client_isAccepted();
+			auto result = _fe3d->client_isAccepted();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
@@ -50,7 +50,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto messages = _fe3d.client_getPendingMessages();
+			auto messages = _fe3d->client_getPendingMessages();
 			for(const auto& message : messages)
 			{
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, string((message.getProtocol() == NetworkProtocol::TCP) ? "TCP" : "UDP")));
@@ -61,7 +61,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto messages = _fe3d.client_getPendingMessages();
+			auto messages = _fe3d->client_getPendingMessages();
 			for(const auto& message : messages)
 			{
 				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, message.getContent()));
@@ -72,7 +72,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _fe3d.client_getPingLatency();
+			auto result = _fe3d->client_getPingLatency();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
@@ -80,7 +80,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _fe3d.client_getServerIP();
+			auto result = _fe3d->client_getServerIP();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}
@@ -88,7 +88,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _fe3d.client_getUsername();
+			auto result = _fe3d->client_getUsername();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}
@@ -97,7 +97,7 @@ const bool ScriptInterpreter::_executeFe3dClientGetter(const string& functionNam
 		return false;
 	}
 
-	if(_fe3d.server_isRunning())
+	if(_fe3d->server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:client` functionality as networking server!");
 	}

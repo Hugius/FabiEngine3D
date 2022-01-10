@@ -22,6 +22,16 @@ LeftViewportController::LeftViewportController(EngineInterface& fe3d, GuiManager
 
 }
 
+void LeftViewportController::inject(shared_ptr<EngineInterface> fe3d)
+{
+
+}
+
+void LeftViewportController::inject(shared_ptr<EngineInterface> fe3d)
+{
+
+}
+
 void LeftViewportController::initialize()
 {
 	_gui.getViewport("left")->createWindow("main", fvec2(0.0f), fvec2(1.9f, 2.0f), LVPC::FRAME_COLOR);
@@ -51,7 +61,7 @@ void LeftViewportController::update()
 
 	if(screen->getID() == "main")
 	{
-		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("skyEditor")->isHovered())
+		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("skyEditor")->isHovered())
 		{
 			if(_skyEditor.loadFromFile())
 			{
@@ -59,7 +69,7 @@ void LeftViewportController::update()
 				window->setActiveScreen("skyEditorMenuMain");
 			}
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("terrainEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("terrainEditor")->isHovered())
 		{
 			if(_terrainEditor.loadFromFile())
 			{
@@ -67,7 +77,7 @@ void LeftViewportController::update()
 				window->setActiveScreen("terrainEditorMenuMain");
 			}
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("waterEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("waterEditor")->isHovered())
 		{
 			if(_waterEditor.loadFromFile())
 			{
@@ -75,7 +85,7 @@ void LeftViewportController::update()
 				window->setActiveScreen("waterEditorMenuMain");
 			}
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("modelEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("modelEditor")->isHovered())
 		{
 			if(_modelEditor.loadFromFile())
 			{
@@ -83,7 +93,7 @@ void LeftViewportController::update()
 				window->setActiveScreen("modelEditorMenuMain");
 			}
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("billboardEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("billboardEditor")->isHovered())
 		{
 			if(_billboardEditor.loadFromFile())
 			{
@@ -91,7 +101,7 @@ void LeftViewportController::update()
 				window->setActiveScreen("billboardEditorMenuMain");
 			}
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("quadEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("quadEditor")->isHovered())
 		{
 			if(_quadEditor.loadFromFile())
 			{
@@ -99,7 +109,7 @@ void LeftViewportController::update()
 				window->setActiveScreen("quadEditorMenuMain");
 			}
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation2dEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation2dEditor")->isHovered())
 		{
 			if(_animation2dEditor.loadFromFile(true))
 			{
@@ -107,7 +117,7 @@ void LeftViewportController::update()
 				window->setActiveScreen("animation2dEditorMenuMain");
 			}
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation3dEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation3dEditor")->isHovered())
 		{
 			if(_modelEditor.loadFromFile() && _animation3dEditor.loadFromFile(true))
 			{
@@ -115,7 +125,7 @@ void LeftViewportController::update()
 				window->setActiveScreen("animation3dEditorMenuMain");
 			}
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("soundEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("soundEditor")->isHovered())
 		{
 			if(_soundEditor.loadFromFile())
 			{
@@ -123,12 +133,12 @@ void LeftViewportController::update()
 				window->setActiveScreen("soundEditorMenuMain");
 			}
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("worldEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("worldEditor")->isHovered())
 		{
 			_worldEditor.load();
 			window->setActiveScreen("worldEditorMenuMain");
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("scriptEditor")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("scriptEditor")->isHovered())
 		{
 			if(_scriptEditor.loadScriptFiles(true))
 			{
@@ -151,57 +161,57 @@ void LeftViewportController::update()
 	_scriptEditor.update();
 }
 
-SkyEditor& LeftViewportController::getSkyEditor()
+shared_ptr<SkyEditor> LeftViewportController::getSkyEditor()
 {
 	return _skyEditor;
 }
 
-TerrainEditor& LeftViewportController::getTerrainEditor()
+shared_ptr<TerrainEditor> LeftViewportController::getTerrainEditor()
 {
 	return _terrainEditor;
 }
 
-WaterEditor& LeftViewportController::getWaterEditor()
+shared_ptr<WaterEditor> LeftViewportController::getWaterEditor()
 {
 	return _waterEditor;
 }
 
-ModelEditor& LeftViewportController::getModelEditor()
+shared_ptr<ModelEditor> LeftViewportController::getModelEditor()
 {
 	return _modelEditor;
 }
 
-BillboardEditor& LeftViewportController::getBillboardEditor()
+shared_ptr<BillboardEditor> LeftViewportController::getBillboardEditor()
 {
 	return _billboardEditor;
 }
 
-QuadEditor& LeftViewportController::getQuadEditor()
+shared_ptr<QuadEditor> LeftViewportController::getQuadEditor()
 {
 	return _quadEditor;
 }
 
-Animation2dEditor& LeftViewportController::getAnimation2dEditor()
+shared_ptr<Animation2dEditor> LeftViewportController::getAnimation2dEditor()
 {
 	return _animation2dEditor;
 }
 
-Animation3dEditor& LeftViewportController::getAnimation3dEditor()
+shared_ptr<Animation3dEditor> LeftViewportController::getAnimation3dEditor()
 {
 	return _animation3dEditor;
 }
 
-SoundEditor& LeftViewportController::getSoundEditor()
+shared_ptr<SoundEditor> LeftViewportController::getSoundEditor()
 {
 	return _soundEditor;
 }
 
-WorldEditor& LeftViewportController::getWorldEditor()
+shared_ptr<WorldEditor> LeftViewportController::getWorldEditor()
 {
 	return _worldEditor;
 }
 
-ScriptEditor& LeftViewportController::getScriptEditor()
+shared_ptr<ScriptEditor> LeftViewportController::getScriptEditor()
 {
 	return _scriptEditor;
 }

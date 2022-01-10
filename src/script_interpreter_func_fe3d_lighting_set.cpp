@@ -8,7 +8,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_fe3d.gfx_enableAmbientLighting();
+			_fe3d->gfx_enableAmbientLighting();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -16,7 +16,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_fe3d.gfx_disableAmbientLighting(false);
+			_fe3d->gfx_disableAmbientLighting(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -26,7 +26,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setAmbientLightingColor(fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
+			_fe3d->gfx_setAmbientLightingColor(fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -36,7 +36,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setAmbientLightingIntensity(args[0].getDecimal());
+			_fe3d->gfx_setAmbientLightingIntensity(args[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -44,7 +44,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_fe3d.gfx_enableDirectionalLighting();
+			_fe3d->gfx_enableDirectionalLighting();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_fe3d.gfx_disableDirectionalLighting(false);
+			_fe3d->gfx_disableDirectionalLighting(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -62,7 +62,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setDirectionalLightingColor(fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
+			_fe3d->gfx_setDirectionalLightingColor(fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -72,7 +72,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setDirectionalLightingIntensity(args[0].getDecimal());
+			_fe3d->gfx_setDirectionalLightingIntensity(args[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -82,7 +82,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setCubeReflectionQuality(args[0].getInteger());
+			_fe3d->gfx_setCubeReflectionQuality(args[0].getInteger());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -92,7 +92,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setPlanarReflectionQuality(args[0].getInteger());
+			_fe3d->gfx_setPlanarReflectionQuality(args[0].getInteger());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -102,7 +102,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setPlanarRefractionQuality(args[0].getInteger());
+			_fe3d->gfx_setPlanarRefractionQuality(args[0].getInteger());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -112,7 +112,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setPlanarReflectionHeight(args[0].getDecimal());
+			_fe3d->gfx_setPlanarReflectionHeight(args[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -120,7 +120,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_fe3d.gfx_enableShadows();
+			_fe3d->gfx_enableShadows();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -128,7 +128,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_fe3d.gfx_disableShadows(false);
+			_fe3d->gfx_disableShadows(false);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -138,7 +138,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setShadowEyePosition(fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
+			_fe3d->gfx_setShadowEyePosition(fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -148,7 +148,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setShadowCenterPosition(fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
+			_fe3d->gfx_setShadowCenterPosition(fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -158,7 +158,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setShadowSize(args[0].getDecimal());
+			_fe3d->gfx_setShadowSize(args[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -168,7 +168,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setShadowLightness(args[0].getDecimal());
+			_fe3d->gfx_setShadowLightness(args[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -178,7 +178,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setShadowQuality(args[0].getInteger());
+			_fe3d->gfx_setShadowQuality(args[0].getInteger());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -188,7 +188,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setShadowInterval(args[0].getInteger());
+			_fe3d->gfx_setShadowInterval(args[0].getInteger());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -198,7 +198,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.gfx_setShadowFollowingCamera(args[0].getBoolean());
+			_fe3d->gfx_setShadowFollowingCamera(args[0].getBoolean());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -207,7 +207,7 @@ const bool ScriptInterpreter::_executeFe3dLightingSetter(const string& functionN
 		return false;
 	}
 
-	if(_fe3d.server_isRunning())
+	if(_fe3d->server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:lighting` functionality as networking server!");
 	}

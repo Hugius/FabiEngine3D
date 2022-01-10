@@ -9,62 +9,62 @@ using std::clamp;
 
 void WorldEditor::unloadEditorWorld()
 {
-	if(_fe3d.gfx_isAmbientLightingEnabled())
+	if(_fe3d->gfx_isAmbientLightingEnabled())
 	{
-		_fe3d.gfx_disableAmbientLighting(true);
+		_fe3d->gfx_disableAmbientLighting(true);
 	}
-	if(_fe3d.gfx_isDirectionalLightingEnabled())
+	if(_fe3d->gfx_isDirectionalLightingEnabled())
 	{
-		_fe3d.gfx_disableDirectionalLighting(true);
+		_fe3d->gfx_disableDirectionalLighting(true);
 	}
-	if(_fe3d.gfx_isFogEnabled())
+	if(_fe3d->gfx_isFogEnabled())
 	{
-		_fe3d.gfx_disableFog(true);
+		_fe3d->gfx_disableFog(true);
 	}
-	if(_fe3d.gfx_isShadowsEnabled())
+	if(_fe3d->gfx_isShadowsEnabled())
 	{
-		_fe3d.gfx_disableShadows(true);
+		_fe3d->gfx_disableShadows(true);
 	}
-	if(_fe3d.gfx_isSkyExposureEnabled())
+	if(_fe3d->gfx_isSkyExposureEnabled())
 	{
-		_fe3d.gfx_disableSkyExposure(true);
+		_fe3d->gfx_disableSkyExposure(true);
 	}
-	if(_fe3d.gfx_isDofEnabled())
+	if(_fe3d->gfx_isDofEnabled())
 	{
-		_fe3d.gfx_disableDOF(true);
+		_fe3d->gfx_disableDOF(true);
 	}
-	if(_fe3d.gfx_isLensFlareEnabled())
+	if(_fe3d->gfx_isLensFlareEnabled())
 	{
-		_fe3d.gfx_disableLensFlare(true);
+		_fe3d->gfx_disableLensFlare(true);
 	}
-	if(_fe3d.gfx_isBloomEnabled())
+	if(_fe3d->gfx_isBloomEnabled())
 	{
-		_fe3d.gfx_disableBloom(true);
+		_fe3d->gfx_disableBloom(true);
 	}
-	_fe3d.gfx_setPlanarReflectionHeight(0.0f);
-	_fe3d.gfx_setCubeReflectionQuality(Config::MIN_REFLECTION_QUALITY);
-	_fe3d.gfx_setPlanarReflectionQuality(Config::MIN_REFLECTION_QUALITY);
-	_fe3d.gfx_setPlanarRefractionQuality(Config::MIN_REFRACTION_QUALITY);
-	_fe3d.gfx_setPlanarReflectionHeight(0.0);
+	_fe3d->gfx_setPlanarReflectionHeight(0.0f);
+	_fe3d->gfx_setCubeReflectionQuality(Config::MIN_REFLECTION_QUALITY);
+	_fe3d->gfx_setPlanarReflectionQuality(Config::MIN_REFLECTION_QUALITY);
+	_fe3d->gfx_setPlanarRefractionQuality(Config::MIN_REFRACTION_QUALITY);
+	_fe3d->gfx_setPlanarReflectionHeight(0.0);
 
 	if(!_loadedSkyID.empty())
 	{
-		_fe3d.sky_delete(_loadedSkyID);
+		_fe3d->sky_delete(_loadedSkyID);
 	}
 
 	if(!_loadedTerrainID.empty())
 	{
-		_fe3d.terrain_delete(_loadedTerrainID);
+		_fe3d->terrain_delete(_loadedTerrainID);
 	}
 
 	if(!_loadedWaterID.empty())
 	{
-		_fe3d.water_delete(_loadedWaterID);
+		_fe3d->water_delete(_loadedWaterID);
 	}
 
 	for(const auto& [key, templateID] : _loadedModelIDs)
 	{
-		_fe3d.model_delete(key);
+		_fe3d->model_delete(key);
 
 		auto animationID = _animation3dEditor.getStartedModelAnimationIDs(key);
 		if(!animationID.empty())
@@ -75,7 +75,7 @@ void WorldEditor::unloadEditorWorld()
 
 	for(const auto& [key, templateID] : _loadedBillboardIDs)
 	{
-		_fe3d.billboard_delete(key);
+		_fe3d->billboard_delete(key);
 
 		auto animationID = _animation2dEditor.getStartedBillboardAnimationIDs(key);
 		if(!animationID.empty())
@@ -86,41 +86,41 @@ void WorldEditor::unloadEditorWorld()
 
 	for(const auto& ID : _loadedPointlightIDs)
 	{
-		_fe3d.pointlight_delete(ID);
+		_fe3d->pointlight_delete(ID);
 
 		if(!_currentWorldID.empty())
 		{
-			_fe3d.model_delete("@@lamp_" + ID);
+			_fe3d->model_delete("@@lamp_" + ID);
 		}
 	}
 
 	for(const auto& ID : _loadedSpotlightIDs)
 	{
-		_fe3d.spotlight_delete(ID);
+		_fe3d->spotlight_delete(ID);
 
 		if(!_currentWorldID.empty())
 		{
-			_fe3d.model_delete("@@torch_" + ID);
+			_fe3d->model_delete("@@torch_" + ID);
 		}
 	}
 
 	for(const auto& ID : _loadedReflectionIDs)
 	{
-		_fe3d.reflection_delete(ID);
+		_fe3d->reflection_delete(ID);
 
 		if(!_currentWorldID.empty())
 		{
-			_fe3d.model_delete("@@camera_" + ID);
+			_fe3d->model_delete("@@camera_" + ID);
 		}
 	}
 
 	for(const auto& [key, templateID] : _loadedSoundIDs)
 	{
-		_fe3d.sound3d_delete(key);
+		_fe3d->sound3d_delete(key);
 
 		if(!_currentWorldID.empty())
 		{
-			_fe3d.model_delete("@@speaker_" + key);
+			_fe3d->model_delete("@@speaker_" + key);
 		}
 	}
 
@@ -201,7 +201,7 @@ void WorldEditor::_handleValueChanging(const string& screenID, string buttonID, 
 {
 	auto writeField = _gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWriteField(writeFieldID);
 
-	if(_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
+	if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
 	{
 		if(_gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getButton(buttonID)->isHovered())
 		{

@@ -12,7 +12,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string& functionName
 		{
 			if(_validateKeyInputString(args[0].getString()))
 			{
-				auto result = _fe3d.input_isKeyDown(KEY_INPUT_STRING_MAP.at(args[0].getString()));
+				auto result = _fe3d->input_isKeyDown(KEY_INPUT_STRING_MAP.at(args[0].getString()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -25,7 +25,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string& functionName
 		{
 			if(_validateKeyInputString(args[0].getString()))
 			{
-				auto result = _fe3d.input_isKeyPressed(KEY_INPUT_STRING_MAP.at(args[0].getString()));
+				auto result = _fe3d->input_isKeyPressed(KEY_INPUT_STRING_MAP.at(args[0].getString()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -38,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string& functionName
 		{
 			if(_validateMouseInputString(args[0].getString()))
 			{
-				auto result = _fe3d.input_isMouseDown(MOUSE_INPUT_STRING_MAP.at(args[0].getString()));
+				auto result = _fe3d->input_isMouseDown(MOUSE_INPUT_STRING_MAP.at(args[0].getString()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -51,7 +51,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string& functionName
 		{
 			if(_validateMouseInputString(args[0].getString()))
 			{
-				auto result = _fe3d.input_isMousePressed(MOUSE_INPUT_STRING_MAP.at(args[0].getString()));
+				auto result = _fe3d->input_isMousePressed(MOUSE_INPUT_STRING_MAP.at(args[0].getString()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -60,7 +60,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string& functionName
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _fe3d.input_getMouseWheelY();
+			auto result = _fe3d->input_getMouseWheelY();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
 		}
 	}
@@ -69,7 +69,7 @@ const bool ScriptInterpreter::_executeFe3dInputGetter(const string& functionName
 		return false;
 	}
 
-	if(_fe3d.server_isRunning())
+	if(_fe3d->server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:input` functionality as networking server!");
 	}

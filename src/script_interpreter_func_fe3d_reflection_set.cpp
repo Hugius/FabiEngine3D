@@ -15,14 +15,14 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 				return true;
 			}
 
-			if(_fe3d.reflection_isExisting(args[0].getString()))
+			if(_fe3d->reflection_isExisting(args[0].getString()))
 			{
 				_throwScriptError("reflection already exists!");
 				return true;
 			}
 
-			_fe3d.reflection_create(args[0].getString());
-			_fe3d.reflection_setPosition(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+			_fe3d->reflection_create(args[0].getString());
+			_fe3d->reflection_setPosition(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
@@ -35,7 +35,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 		{
 			if(_validateFe3dReflection(args[0].getString()))
 			{
-				_fe3d.reflection_delete(args[0].getString());
+				_fe3d->reflection_delete(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -44,11 +44,11 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto& ID : _fe3d.reflection_getIDs())
+			for(const auto& ID : _fe3d->reflection_getIDs())
 			{
 				if(ID[0] != '@')
 				{
-					_fe3d.reflection_delete(ID);
+					_fe3d->reflection_delete(ID);
 				}
 			}
 
@@ -63,7 +63,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 		{
 			if(_validateFe3dReflection(args[0].getString()))
 			{
-				_fe3d.reflection_setVisible(args[0].getString(), args[1].getBoolean());
+				_fe3d->reflection_setVisible(args[0].getString(), args[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -76,8 +76,8 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 		{
 			if(_validateFe3dReflection(args[0].getString()))
 			{
-				_fe3d.reflection_setPosition(args[0].getString(),
-											 fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->reflection_setPosition(args[0].getString(),
+											  fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -90,8 +90,8 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 		{
 			if(_validateFe3dReflection(args[0].getString()))
 			{
-				_fe3d.reflection_move(args[0].getString(),
-									  fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->reflection_move(args[0].getString(),
+									   fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -104,8 +104,8 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 		{
 			if(_validateFe3dReflection(args[0].getString()))
 			{
-				_fe3d.reflection_moveTo(args[0].getString(),
-										fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()), args[4].getDecimal());
+				_fe3d->reflection_moveTo(args[0].getString(),
+										 fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()), args[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -118,7 +118,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 		{
 			if(_validateFe3dReflection(args[0].getString()))
 			{
-				_fe3d.reflection_capture(args[0].getString());
+				_fe3d->reflection_capture(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -128,7 +128,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionSetter(const string& functio
 		return false;
 	}
 
-	if(_fe3d.server_isRunning())
+	if(_fe3d->server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:reflection` functionality as networking server!");
 	}

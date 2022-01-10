@@ -265,9 +265,9 @@ const bool TerrainEditor::loadFromFile()
 			heightMapPath = string("projects\\" + _currentProjectID + "\\" + heightMapPath);
 		}
 
-		_fe3d.terrain_create(terrainID, heightMapPath);
+		_fe3d->terrain_create(terrainID, heightMapPath);
 
-		if(_fe3d.terrain_isExisting(terrainID))
+		if(_fe3d->terrain_isExisting(terrainID))
 		{
 			_loadedTerrainIDs.push_back(terrainID);
 
@@ -278,7 +278,7 @@ const bool TerrainEditor::loadFromFile()
 					diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 				}
 
-				_fe3d.terrain_setDiffuseMap(terrainID, diffuseMapPath);
+				_fe3d->terrain_setDiffuseMap(terrainID, diffuseMapPath);
 			}
 
 			if(!normalMapPath.empty())
@@ -288,7 +288,7 @@ const bool TerrainEditor::loadFromFile()
 					normalMapPath = string("projects\\" + _currentProjectID + "\\" + normalMapPath);
 				}
 
-				_fe3d.terrain_setNormalMap(terrainID, normalMapPath);
+				_fe3d->terrain_setNormalMap(terrainID, normalMapPath);
 			}
 
 			if(!redNormalMapPath.empty())
@@ -298,7 +298,7 @@ const bool TerrainEditor::loadFromFile()
 					redNormalMapPath = string("projects\\" + _currentProjectID + "\\" + redNormalMapPath);
 				}
 
-				_fe3d.terrain_setRedNormalMap(terrainID, redNormalMapPath);
+				_fe3d->terrain_setRedNormalMap(terrainID, redNormalMapPath);
 			}
 
 			if(!greenNormalMapPath.empty())
@@ -308,7 +308,7 @@ const bool TerrainEditor::loadFromFile()
 					greenNormalMapPath = string("projects\\" + _currentProjectID + "\\" + greenNormalMapPath);
 				}
 
-				_fe3d.terrain_setGreenNormalMap(terrainID, greenNormalMapPath);
+				_fe3d->terrain_setGreenNormalMap(terrainID, greenNormalMapPath);
 			}
 
 			if(!blueNormalMapPath.empty())
@@ -318,7 +318,7 @@ const bool TerrainEditor::loadFromFile()
 					blueNormalMapPath = string("projects\\" + _currentProjectID + "\\" + blueNormalMapPath);
 				}
 
-				_fe3d.terrain_setBlueNormalMap(terrainID, blueNormalMapPath);
+				_fe3d->terrain_setBlueNormalMap(terrainID, blueNormalMapPath);
 			}
 
 			if(!blendMapPath.empty())
@@ -328,7 +328,7 @@ const bool TerrainEditor::loadFromFile()
 					blendMapPath = string("projects\\" + _currentProjectID + "\\" + blendMapPath);
 				}
 
-				_fe3d.terrain_setBlendMap(terrainID, blendMapPath);
+				_fe3d->terrain_setBlendMap(terrainID, blendMapPath);
 			}
 
 			if(!redDiffuseMapPath.empty())
@@ -338,7 +338,7 @@ const bool TerrainEditor::loadFromFile()
 					redDiffuseMapPath = string("projects\\" + _currentProjectID + "\\" + redDiffuseMapPath);
 				}
 
-				_fe3d.terrain_setRedDiffuseMap(terrainID, redDiffuseMapPath);
+				_fe3d->terrain_setRedDiffuseMap(terrainID, redDiffuseMapPath);
 			}
 
 			if(!greenDiffuseMapPath.empty())
@@ -348,7 +348,7 @@ const bool TerrainEditor::loadFromFile()
 					greenDiffuseMapPath = string("projects\\" + _currentProjectID + "\\" + greenDiffuseMapPath);
 				}
 
-				_fe3d.terrain_setGreenDiffuseMap(terrainID, greenDiffuseMapPath);
+				_fe3d->terrain_setGreenDiffuseMap(terrainID, greenDiffuseMapPath);
 			}
 
 			if(!blueDiffuseMapPath.empty())
@@ -358,18 +358,18 @@ const bool TerrainEditor::loadFromFile()
 					blueDiffuseMapPath = string("projects\\" + _currentProjectID + "\\" + blueDiffuseMapPath);
 				}
 
-				_fe3d.terrain_setBlueDiffuseMap(terrainID, blueDiffuseMapPath);
+				_fe3d->terrain_setBlueDiffuseMap(terrainID, blueDiffuseMapPath);
 			}
 
-			_fe3d.terrain_setMaxHeight(terrainID, maxHeight);
-			_fe3d.terrain_setTextureRepeat(terrainID, textureRepeat);
-			_fe3d.terrain_setLightness(terrainID, lightness);
-			_fe3d.terrain_setRedTextureRepeat(terrainID, redTextureRepeat);
-			_fe3d.terrain_setGreenTextureRepeat(terrainID, greenTextureRepeat);
-			_fe3d.terrain_setBlueTextureRepeat(terrainID, blueTextureRepeat);
-			_fe3d.terrain_setSpecular(terrainID, isSpecular);
-			_fe3d.terrain_setSpecularShininess(terrainID, specularShininess);
-			_fe3d.terrain_setSpecularIntensity(terrainID, specularIntensity);
+			_fe3d->terrain_setMaxHeight(terrainID, maxHeight);
+			_fe3d->terrain_setTextureRepeat(terrainID, textureRepeat);
+			_fe3d->terrain_setLightness(terrainID, lightness);
+			_fe3d->terrain_setRedTextureRepeat(terrainID, redTextureRepeat);
+			_fe3d->terrain_setGreenTextureRepeat(terrainID, greenTextureRepeat);
+			_fe3d->terrain_setBlueTextureRepeat(terrainID, blueTextureRepeat);
+			_fe3d->terrain_setSpecular(terrainID, isSpecular);
+			_fe3d->terrain_setSpecularShininess(terrainID, specularShininess);
+			_fe3d->terrain_setSpecularIntensity(terrainID, specularIntensity);
 		}
 	}
 

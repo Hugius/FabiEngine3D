@@ -16,18 +16,18 @@ void WorldEditor::_updateReflectionEditing()
 			_dontResetSelectedCamera = false;
 		}
 
-		auto hoveredAabbID = _fe3d.raycast_checkCursorInAny().first;
+		auto hoveredAabbID = _fe3d->raycast_checkCursorInAny().first;
 
-		for(const auto& ID : _fe3d.model_getIDs())
+		for(const auto& ID : _fe3d->model_getIDs())
 		{
 			if(ID.substr(0, string("@@camera").size()) == "@@camera")
 			{
-				if(hoveredAabbID == ID && _fe3d.misc_isCursorInsideViewport() &&
-				   !_gui.getOverlay()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(hoveredAabbID == ID && _fe3d->misc_isCursorInsideViewport() &&
+				   !_gui.getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_selectReflection(ID.substr(string("@@camera_").size()));
 
-					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
 						if(_selectedCameraID != _activeCameraID)
 						{
@@ -45,13 +45,13 @@ void WorldEditor::_updateReflectionEditing()
 			}
 		}
 
-		if(!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+		if(!_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
+			if(_fe3d->misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
 			{
 				if(!_activeCameraID.empty())
 				{
-					if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedCameraID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+					if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedCameraID.empty()) || _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 					{
 						_activeCameraID = "";
 						rightWindow->setActiveScreen("main");
@@ -73,32 +73,32 @@ void WorldEditor::_updateReflectionEditing()
 
 			rightWindow->setActiveScreen("reflectionPropertiesMenu");
 
-			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("capture")->isHovered())
+				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("capture")->isHovered())
 				{
-					_fe3d.reflection_capture(activeReflectionID);
+					_fe3d->reflection_capture(activeReflectionID);
 				}
-				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
-					_fe3d.model_delete(_activeCameraID);
-					_fe3d.reflection_delete(activeReflectionID);
+					_fe3d->model_delete(_activeCameraID);
+					_fe3d->reflection_delete(activeReflectionID);
 					rightWindow->setActiveScreen("main");
 					_activeCameraID = "";
 					return;
 				}
 			}
 
-			if(_fe3d.input_isKeyPressed(InputType::KEY_DELETE))
+			if(_fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
-				_fe3d.model_delete(_activeCameraID);
-				_fe3d.reflection_delete(activeReflectionID);
+				_fe3d->model_delete(_activeCameraID);
+				_fe3d->reflection_delete(activeReflectionID);
 				rightWindow->setActiveScreen("main");
 				_activeCameraID = "";
 				return;
 			}
 
-			auto position = _fe3d.reflection_getPosition(activeReflectionID);
+			auto position = _fe3d->reflection_getPosition(activeReflectionID);
 
 			_handleValueChanging("reflectionPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / REFLECTION_POSITION_DIVIDER));
 			_handleValueChanging("reflectionPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / REFLECTION_POSITION_DIVIDER));
@@ -107,7 +107,7 @@ void WorldEditor::_updateReflectionEditing()
 			_handleValueChanging("reflectionPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / REFLECTION_POSITION_DIVIDER));
 			_handleValueChanging("reflectionPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / REFLECTION_POSITION_DIVIDER));
 
-			_fe3d.reflection_setPosition(activeReflectionID, position);
+			_fe3d->reflection_setPosition(activeReflectionID, position);
 		}
 	}
 }

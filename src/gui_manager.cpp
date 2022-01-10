@@ -1,9 +1,8 @@
 #include "gui_manager.hpp"
+#include "gui_manager.hpp"
 #include "configuration.hpp"
 
-GuiManager::GuiManager(EngineInterface& fe3d)
-	:
-	_fe3d(fe3d)
+GuiManager::GuiManager()
 {
 	if(!Config::getInst().isApplicationExported())
 	{
@@ -14,6 +13,11 @@ GuiManager::GuiManager(EngineInterface& fe3d)
 
 		_overlay = make_shared<GuiOverlay>(_fe3d);
 	}
+}
+
+void GuiManager::inject(shared_ptr<EngineInterface> fe3d)
+{
+	_fe3d = fe3d;
 }
 
 void GuiManager::update()

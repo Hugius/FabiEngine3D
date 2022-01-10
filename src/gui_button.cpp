@@ -45,11 +45,11 @@ void GuiButton::_updateHovering(bool isHoverable)
 {
 	_isHovered = false;
 
-	if(_fe3d.quad_isVisible(_rectangle->getEntityID()))
+	if(_fe3d->quad_isVisible(_rectangle->getEntityID()))
 	{
-		fvec2 cursorPosition = Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
-		fvec2 buttonPosition = _fe3d.quad_getPosition(_rectangle->getEntityID());
-		fvec2 buttonSize = _fe3d.quad_getSize(_rectangle->getEntityID());
+		fvec2 cursorPosition = Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d->misc_getCursorPosition()));
+		fvec2 buttonPosition = _fe3d->quad_getPosition(_rectangle->getEntityID());
+		fvec2 buttonSize = _fe3d->quad_getSize(_rectangle->getEntityID());
 
 		if(cursorPosition.x > buttonPosition.x - (buttonSize.x / 2.0f) && cursorPosition.x < buttonPosition.x + (buttonSize.x / 2.0f))
 		{
@@ -59,11 +59,11 @@ void GuiButton::_updateHovering(bool isHoverable)
 				{
 					_isHovered = true;
 
-					_fe3d.quad_setColor(_rectangle->getEntityID(), _hoverColor);
+					_fe3d->quad_setColor(_rectangle->getEntityID(), _hoverColor);
 
 					if(_textField != nullptr)
 					{
-						_fe3d.text_setColor(_textField->getEntityID(), _textHoverColor);
+						_fe3d->text_setColor(_textField->getEntityID(), _textHoverColor);
 					}
 				}
 			}
@@ -71,18 +71,18 @@ void GuiButton::_updateHovering(bool isHoverable)
 
 		if(!_isHovered)
 		{
-			_fe3d.quad_setColor(_rectangle->getEntityID(), _rectangle->getInitialColor());
+			_fe3d->quad_setColor(_rectangle->getEntityID(), _rectangle->getInitialColor());
 
 			if(_textField != nullptr)
 			{
-				_fe3d.text_setColor(_textField->getEntityID(), _textField->getInitialColor());
+				_fe3d->text_setColor(_textField->getEntityID(), _textField->getInitialColor());
 			}
 		}
 	}
 
 	if(_isHovered)
 	{
-		_fe3d.quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
+		_fe3d->quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_pointing.tga");
 	}
 }
 
@@ -92,20 +92,20 @@ void GuiButton::setHoverable(bool isHoverable)
 
 	if(isHoverable)
 	{
-		_fe3d.quad_setTransparency(_rectangle->getEntityID(), 1.0f);
+		_fe3d->quad_setTransparency(_rectangle->getEntityID(), 1.0f);
 
 		if(_textField != nullptr)
 		{
-			_fe3d.text_setTransparency(_textField->getEntityID(), 1.0f);
+			_fe3d->text_setTransparency(_textField->getEntityID(), 1.0f);
 		}
 	}
 	else
 	{
-		_fe3d.quad_setTransparency(_rectangle->getEntityID(), 0.25f);
+		_fe3d->quad_setTransparency(_rectangle->getEntityID(), 0.25f);
 
 		if(_textField != nullptr)
 		{
-			_fe3d.text_setTransparency(_textField->getEntityID(), 0.25f);
+			_fe3d->text_setTransparency(_textField->getEntityID(), 0.25f);
 		}
 	}
 }
@@ -114,15 +114,15 @@ void GuiButton::changeTextContent(const string& content)
 {
 	auto textEntityID = getTextField()->getEntityID();
 
-	if(content != _fe3d.text_getContent(textEntityID))
+	if(content != _fe3d->text_getContent(textEntityID))
 	{
-		auto charWidth = (getTextField()->getInitialSize().x / static_cast<float>(_fe3d.text_getContent(textEntityID).size()));
+		auto charWidth = (getTextField()->getInitialSize().x / static_cast<float>(_fe3d->text_getContent(textEntityID).size()));
 		auto charHeight = getTextField()->getInitialSize().y;
-		_fe3d.text_setContent(textEntityID, content, charWidth, charHeight);
+		_fe3d->text_setContent(textEntityID, content, charWidth, charHeight);
 		getTextField()->updateInitialSize();
 
 		auto newRectangleSize = fvec2(getTextField()->getInitialSize() / fvec2(TEXT_WIDTH_MULTIPLIER, TEXT_HEIGHT_MULTIPLIER));
-		_fe3d.quad_setSize(getRectangle()->getEntityID(), newRectangleSize);
+		_fe3d->quad_setSize(getRectangle()->getEntityID(), newRectangleSize);
 		getRectangle()->updateInitialSize();
 	}
 }

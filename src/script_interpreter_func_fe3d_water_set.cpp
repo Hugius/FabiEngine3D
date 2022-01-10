@@ -13,8 +13,8 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d.water_setSpeed(_fe3d.water_getSelectedID(),
-									 fvec2(args[0].getDecimal() / 100000.0f, args[1].getDecimal() / 100000.0f));
+				_fe3d->water_setSpeed(_fe3d->water_getSelectedID(),
+									  fvec2(args[0].getDecimal() / 100000.0f, args[1].getDecimal() / 100000.0f));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -27,8 +27,8 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d.water_setColor(_fe3d.water_getSelectedID(),
-									 fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
+				_fe3d->water_setColor(_fe3d->water_getSelectedID(),
+									  fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -41,8 +41,8 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d.water_setWireframeColor(_fe3d.water_getSelectedID(),
-											  fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
+				_fe3d->water_setWireframeColor(_fe3d->water_getSelectedID(),
+											   fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -55,7 +55,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d.water_setTransparency(_fe3d.water_getSelectedID(), args[0].getDecimal());
+				_fe3d->water_setTransparency(_fe3d->water_getSelectedID(), args[0].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -68,7 +68,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d.water_setHeight(_fe3d.water_getSelectedID(), args[0].getDecimal());
+				_fe3d->water_setHeight(_fe3d->water_getSelectedID(), args[0].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -81,7 +81,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d.water_setWaveHeight(_fe3d.water_getSelectedID(), args[0].getDecimal());
+				_fe3d->water_setWaveHeight(_fe3d->water_getSelectedID(), args[0].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -94,7 +94,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d.water_setTextureRepeat(_fe3d.water_getSelectedID(), args[0].getDecimal());
+				_fe3d->water_setTextureRepeat(_fe3d->water_getSelectedID(), args[0].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -107,7 +107,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d.water_setSpecularShininess(_fe3d.water_getSelectedID(), args[0].getDecimal());
+				_fe3d->water_setSpecularShininess(_fe3d->water_getSelectedID(), args[0].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -120,7 +120,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d.water_setSpecularIntensity(_fe3d.water_getSelectedID(), args[0].getDecimal());
+				_fe3d->water_setSpecularIntensity(_fe3d->water_getSelectedID(), args[0].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -133,7 +133,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d.water_setReflective(_fe3d.water_getSelectedID(), args[0].getBoolean());
+				_fe3d->water_setReflective(_fe3d->water_getSelectedID(), args[0].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -146,7 +146,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d.water_setRefractive(_fe3d.water_getSelectedID(), args[0].getBoolean());
+				_fe3d->water_setRefractive(_fe3d->water_getSelectedID(), args[0].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -159,7 +159,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d.water_setSpecular(_fe3d.water_getSelectedID(), args[0].getBoolean());
+				_fe3d->water_setSpecular(_fe3d->water_getSelectedID(), args[0].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -172,7 +172,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d.water_setWireframed(_fe3d.water_getSelectedID(), args[0].getBoolean());
+				_fe3d->water_setWireframed(_fe3d->water_getSelectedID(), args[0].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -187,22 +187,22 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 			{
 				if(args[0].getString() == "SKY")
 				{
-					_fe3d.water_setQuality(_fe3d.water_getSelectedID(), WaterQuality::SKY);
+					_fe3d->water_setQuality(_fe3d->water_getSelectedID(), WaterQuality::SKY);
 					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
 				else if(args[0].getString() == "SKY_TERRAIN")
 				{
-					_fe3d.water_setQuality(_fe3d.water_getSelectedID(), WaterQuality::SKY_TERRAIN);
+					_fe3d->water_setQuality(_fe3d->water_getSelectedID(), WaterQuality::SKY_TERRAIN);
 					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
 				else if(args[0].getString() == "SKY_TERRAIN_MODELS")
 				{
-					_fe3d.water_setQuality(_fe3d.water_getSelectedID(), WaterQuality::SKY_TERRAIN_MODEL);
+					_fe3d->water_setQuality(_fe3d->water_getSelectedID(), WaterQuality::SKY_TERRAIN_MODEL);
 					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
 				else if(args[0].getString() == "SKY_TERRAIN_MODELS_BILLBOARDS")
 				{
-					_fe3d.water_setQuality(_fe3d.water_getSelectedID(), WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD);
+					_fe3d->water_setQuality(_fe3d->water_getSelectedID(), WaterQuality::SKY_TERRAIN_MODEL_BILLBOARD);
 					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
 				else
@@ -218,7 +218,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		return false;
 	}
 
-	if(_fe3d.server_isRunning())
+	if(_fe3d->server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:water` functionality as networking server!");
 	}

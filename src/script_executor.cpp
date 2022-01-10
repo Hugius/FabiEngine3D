@@ -58,9 +58,9 @@ void ScriptExecutor::update(bool debug)
 
 		if(!Config::getInst().isApplicationExported())
 		{
-			if(_fe3d.misc_isCursorInsideViewport() || _fe3d.misc_isCursorVisible())
+			if(_fe3d->misc_isCursorInsideViewport() || _fe3d->misc_isCursorVisible())
 			{
-				_fe3d.quad_setVisible("@@cursor", false);
+				_fe3d->quad_setVisible("@@cursor", false);
 			}
 		}
 
@@ -72,42 +72,42 @@ void ScriptExecutor::pause()
 {
 	if(_isStarted && _isRunning)
 	{
-		_wasCursorVisible = _fe3d.misc_isCursorVisible();
-		_fe3d.misc_setCursorVisible(false);
+		_wasCursorVisible = _fe3d->misc_isCursorVisible();
+		_fe3d->misc_setCursorVisible(false);
 
-		_wasTimerStarted = _fe3d.misc_isMillisecondTimerStarted();
+		_wasTimerStarted = _fe3d->misc_isMillisecondTimerStarted();
 		if(_wasTimerStarted)
 		{
-			_fe3d.misc_stopMillisecondTimer();
+			_fe3d->misc_stopMillisecondTimer();
 		}
 
-		_wasVsyncEnabled = _fe3d.misc_isVsyncEnabled();
+		_wasVsyncEnabled = _fe3d->misc_isVsyncEnabled();
 		if(_wasVsyncEnabled)
 		{
-			_fe3d.misc_disableVsync();
+			_fe3d->misc_disableVsync();
 		}
 
-		for(const auto& soundID : _fe3d.sound2d_getIDs())
+		for(const auto& soundID : _fe3d->sound2d_getIDs())
 		{
-			if(_fe3d.sound2d_isPaused(soundID))
+			if(_fe3d->sound2d_isPaused(soundID))
 			{
 				_pausedSoundIDs.push_back(soundID);
 			}
 		}
 
-		for(const auto& soundID : _fe3d.sound3d_getIDs())
+		for(const auto& soundID : _fe3d->sound3d_getIDs())
 		{
-			if(_fe3d.sound3d_isPaused(soundID))
+			if(_fe3d->sound3d_isPaused(soundID))
 			{
 				_pausedSoundIDs.push_back(soundID);
 			}
 		}
 
-		_fe3d.sound2d_pauseAll();
+		_fe3d->sound2d_pauseAll();
 
-		_fe3d.sound3d_pauseAll();
+		_fe3d->sound3d_pauseAll();
 
-		_fe3d.application_pause();
+		_fe3d->application_pause();
 		_isRunning = false;
 	}
 }
@@ -116,32 +116,32 @@ void ScriptExecutor::resume()
 {
 	if(_isStarted && !_isRunning)
 	{
-		_fe3d.misc_centerCursor();
-		_fe3d.misc_setCursorVisible(_wasCursorVisible);
+		_fe3d->misc_centerCursor();
+		_fe3d->misc_setCursorVisible(_wasCursorVisible);
 
 		if(_wasVsyncEnabled)
 		{
-			_fe3d.misc_enableVsync();
+			_fe3d->misc_enableVsync();
 		}
 
 		if(_wasTimerStarted)
 		{
-			_fe3d.misc_startMillisecondTimer();
+			_fe3d->misc_startMillisecondTimer();
 		}
 
-		_fe3d.sound2d_resumeAll();
+		_fe3d->sound2d_resumeAll();
 		for(const auto& soundID : _pausedSoundIDs)
 		{
-			_fe3d.sound2d_pause(soundID);
+			_fe3d->sound2d_pause(soundID);
 		}
 
-		_fe3d.sound3d_resumeAll();
+		_fe3d->sound3d_resumeAll();
 		for(const auto& soundID : _pausedSoundIDs)
 		{
-			_fe3d.sound3d_pause(soundID);
+			_fe3d->sound3d_pause(soundID);
 		}
 
-		_fe3d.application_resume();
+		_fe3d->application_resume();
 		_isRunning = true;
 		_mustSkipUpdate = true;
 	}
@@ -155,9 +155,9 @@ void ScriptExecutor::unload()
 
 		_scriptInterpreter.unload();
 
-		if(_fe3d.application_isPaused())
+		if(_fe3d->application_isPaused())
 		{
-			_fe3d.application_resume();
+			_fe3d->application_resume();
 		}
 
 		_isStarted = false;

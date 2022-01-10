@@ -10,7 +10,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string& function
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.collision_enableTerrainResponse(args[0].getDecimal(), args[1].getDecimal());
+			_fe3d->collision_enableTerrainResponse(args[0].getDecimal(), args[1].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -18,7 +18,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string& function
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_fe3d.collision_disableTerrainResponse();
+			_fe3d->collision_disableTerrainResponse();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -28,7 +28,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string& function
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.collision_enableCameraResponse(args[0].getBoolean(), args[1].getBoolean(), args[2].getBoolean());
+			_fe3d->collision_enableCameraResponse(args[0].getBoolean(), args[1].getBoolean(), args[2].getBoolean());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -36,7 +36,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string& function
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_fe3d.collision_disableCameraResponse();
+			_fe3d->collision_disableCameraResponse();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -46,7 +46,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string& function
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			_fe3d.collision_setCameraBox(
+			_fe3d->collision_setCameraBox(
 				args[0].getDecimal(), args[1].getDecimal(),
 				args[2].getDecimal(), args[3].getDecimal(),
 				args[4].getDecimal(), args[5].getDecimal());
@@ -58,7 +58,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionSetter(const string& function
 		return false;
 	}
 
-	if(_fe3d.server_isRunning())
+	if(_fe3d->server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:collision` functionality as networking server!");
 	}

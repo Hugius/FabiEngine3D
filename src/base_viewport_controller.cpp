@@ -1,11 +1,13 @@
 #include "base_viewport_controller.hpp"
 
-BaseViewportController::BaseViewportController(EngineInterface& fe3d, GuiManager& gui)
-	:
-	_fe3d(fe3d),
-	_gui(gui)
+void BaseViewportController::inject(shared_ptr<EngineInterface> fe3d)
 {
+	_fe3d = fe3d;
+}
 
+void BaseViewportController::inject(shared_ptr<GuiManager> gui)
+{
+	_gui = gui;
 }
 
 const vector<float> BaseViewportController::calculateButtonPositions(unsigned int buttonCount, float buttonHeight)
@@ -13,7 +15,7 @@ const vector<float> BaseViewportController::calculateButtonPositions(unsigned in
 	vector<float> result;
 
 	float freeSpace = (2.0f - (static_cast<float>(buttonCount) * buttonHeight));
-	float gapSpace = freeSpace / static_cast<float>(buttonCount + 1);
+	float gapSpace = (freeSpace / static_cast<float>(buttonCount + 1));
 	float height = 1.0f;
 
 	height -= (gapSpace + (buttonHeight / 2.0f));

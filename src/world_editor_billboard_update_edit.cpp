@@ -15,19 +15,19 @@ void WorldEditor::_updateBillboardEditing()
 
 	if(_currentTemplateModelID.empty() && _currentTemplateBillboardID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingReflection)
 	{
-		for(const auto& ID : _fe3d.billboard_getIDs())
+		for(const auto& ID : _fe3d->billboard_getIDs())
 		{
 			if(ID[0] != '@')
 			{
-				auto hoveredAabbID = _fe3d.raycast_checkCursorInAny().first;
+				auto hoveredAabbID = _fe3d->raycast_checkCursorInAny().first;
 				bool hovered = (hoveredAabbID.size() >= ID.size()) && (hoveredAabbID.substr(0, ID.size()) == ID);
 
-				if(hovered && _fe3d.misc_isCursorInsideViewport() &&
-				   !_gui.getOverlay()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(hovered && _fe3d->misc_isCursorInsideViewport() &&
+				   !_gui.getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_selectBillboard(ID);
 
-					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
 						if(_selectedBillboardID != _activeBillboardID)
 						{
@@ -45,13 +45,13 @@ void WorldEditor::_updateBillboardEditing()
 			}
 		}
 
-		if(!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+		if(!_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
+			if(_fe3d->misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
 			{
 				if(!_activeBillboardID.empty())
 				{
-					if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedBillboardID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+					if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedBillboardID.empty()) || _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 					{
 						_activeBillboardID = "";
 						rightWindow->setActiveScreen("main");
@@ -72,37 +72,37 @@ void WorldEditor::_updateBillboardEditing()
 
 			rightWindow->setActiveScreen("billboardPropertiesMenu");
 
-			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
+				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
 				{
 					screen->getButton("position")->setHoverable(false);
 					screen->getButton("rotation")->setHoverable(true);
 					screen->getButton("size")->setHoverable(true);
 				}
-				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotation")->isHovered())
+				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotation")->isHovered())
 				{
 					screen->getButton("position")->setHoverable(true);
 					screen->getButton("rotation")->setHoverable(false);
 					screen->getButton("size")->setHoverable(true);
 				}
-				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
+				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
 				{
 					screen->getButton("position")->setHoverable(true);
 					screen->getButton("rotation")->setHoverable(true);
 					screen->getButton("size")->setHoverable(false);
 				}
-				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
+				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
 				{
-					_fe3d.billboard_setFrozen(_activeBillboardID, !_fe3d.billboard_isFrozen(_activeBillboardID));
+					_fe3d->billboard_setFrozen(_activeBillboardID, !_fe3d->billboard_isFrozen(_activeBillboardID));
 				}
-				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
+				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
 				{
 					_gui.getOverlay()->createChoiceForm("animationList", "Select Animation", fvec2(0.0f, 0.1f), _animation2dEditor.getAnimationIDs());
 				}
-				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
-					_fe3d.billboard_delete(_activeBillboardID);
+					_fe3d->billboard_delete(_activeBillboardID);
 					rightWindow->setActiveScreen("main");
 					_activeBillboardID = "";
 					return;
@@ -111,7 +111,7 @@ void WorldEditor::_updateBillboardEditing()
 
 			auto lastAnimationID = _animation2dEditor.getStartedBillboardAnimationIDs(_activeBillboardID);
 			auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("animationList");
-			if(!selectedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(!selectedButtonID.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				if(!lastAnimationID.empty())
 				{
@@ -127,17 +127,17 @@ void WorldEditor::_updateBillboardEditing()
 				_gui.getOverlay()->deleteChoiceForm("animationList");
 			}
 
-			if(_fe3d.input_isKeyPressed(InputType::KEY_DELETE))
+			if(_fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
-				_fe3d.billboard_delete(_activeBillboardID);
+				_fe3d->billboard_delete(_activeBillboardID);
 				rightWindow->setActiveScreen("main");
 				_activeBillboardID = "";
 				return;
 			}
 
-			auto position = _fe3d.billboard_getPosition(_activeBillboardID);
-			auto rotation = _fe3d.billboard_getRotation(_activeBillboardID);
-			auto size = _fe3d.billboard_getSize(_activeBillboardID);
+			auto position = _fe3d->billboard_getPosition(_activeBillboardID);
+			auto rotation = _fe3d->billboard_getRotation(_activeBillboardID);
+			auto size = _fe3d->billboard_getSize(_activeBillboardID);
 
 			screen->getButton("xMinus")->setHoverable(true);
 			screen->getButton("xPlus")->setHoverable(true);
@@ -164,7 +164,7 @@ void WorldEditor::_updateBillboardEditing()
 				_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / BILLBOARD_POSITION_DIVIDER));
 				_handleValueChanging("billboardPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / BILLBOARD_POSITION_DIVIDER));
 				_handleValueChanging("billboardPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / BILLBOARD_POSITION_DIVIDER));
-				_fe3d.billboard_setPosition(_activeBillboardID, position);
+				_fe3d->billboard_setPosition(_activeBillboardID, position);
 			}
 			else if(!screen->getButton("rotation")->isHoverable())
 			{
@@ -174,7 +174,7 @@ void WorldEditor::_updateBillboardEditing()
 				_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", rotation.y, -BILLBOARD_ROTATION_SPEED);
 				_handleValueChanging("billboardPropertiesMenu", "zPlus", "z", rotation.z, BILLBOARD_ROTATION_SPEED);
 				_handleValueChanging("billboardPropertiesMenu", "zMinus", "z", rotation.z, -BILLBOARD_ROTATION_SPEED);
-				_fe3d.billboard_setRotation(_activeBillboardID, rotation);
+				_fe3d->billboard_setRotation(_activeBillboardID, rotation);
 			}
 			else if(!screen->getButton("size")->isHoverable())
 			{
@@ -182,15 +182,15 @@ void WorldEditor::_updateBillboardEditing()
 				_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", size.x, -(_editorSpeed / BILLBOARD_SIZE_DIVIDER), BILLBOARD_SIZE_MULTIPLIER, 0.0f);
 				_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", size.y, (_editorSpeed / BILLBOARD_SIZE_DIVIDER), BILLBOARD_SIZE_MULTIPLIER, 0.0f);
 				_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", size.y, -(_editorSpeed / BILLBOARD_SIZE_DIVIDER), BILLBOARD_SIZE_MULTIPLIER, 0.0f);
-				_fe3d.billboard_setSize(_activeBillboardID, size);
+				_fe3d->billboard_setSize(_activeBillboardID, size);
 			}
 
-			screen->getButton("freeze")->changeTextContent(_fe3d.billboard_isFrozen(_activeBillboardID) ? "Unfreeze" : "Freeze");
+			screen->getButton("freeze")->changeTextContent(_fe3d->billboard_isFrozen(_activeBillboardID) ? "Unfreeze" : "Freeze");
 		}
 
 		if(_selectedBillboardID.empty() && _activeBillboardID.empty())
 		{
-			_fe3d.text_setVisible(_gui.getOverlay()->getTextField("billboardID")->getEntityID(), false);
+			_fe3d->text_setVisible(_gui.getOverlay()->getTextField("billboardID")->getEntityID(), false);
 		}
 	}
 }

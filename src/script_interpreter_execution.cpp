@@ -66,7 +66,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			_debuggingTimes.insert(make_pair(scriptID, 0.0f));
 		}
 
-		_fe3d.misc_startMillisecondTimer();
+		_fe3d->misc_startMillisecondTimer();
 	}
 
 	vector<unsigned int> loopScopeDepths;
@@ -243,14 +243,14 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			{
 				if(_isDebugging)
 				{
-					_debuggingTimes[scriptID] += _fe3d.misc_stopMillisecondTimer();
+					_debuggingTimes[scriptID] += _fe3d->misc_stopMillisecondTimer();
 				}
 
 				_executeScript(scriptToExecute, scriptType);
 
 				if(_isDebugging)
 				{
-					_fe3d.misc_startMillisecondTimer();
+					_fe3d->misc_startMillisecondTimer();
 				}
 			}
 			else
@@ -476,6 +476,6 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 
 	if(_isDebugging)
 	{
-		_debuggingTimes[scriptID] += _fe3d.misc_stopMillisecondTimer();
+		_debuggingTimes[scriptID] += _fe3d->misc_stopMillisecondTimer();
 	}
 }

@@ -3,8 +3,23 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
+EngineController::EngineController()
+{
+	_guiManager = make_shared<GuiManager>();
+	_leftViewportController = make_shared<LeftViewportController>();
+	_rightViewportController = make_shared<RightViewportController>();
+	_topViewportController = make_shared<TopViewportController>();
+	_bottomViewportController = make_shared<BottomViewportController>();
+}
+
 void EngineController::inject(shared_ptr<EngineInterface> fe3d)
 {
+	_guiManager->inject(fe3d);
+	_leftViewportController->inject(fe3d);
+	_rightViewportController->inject(fe3d);
+	_topViewportController->inject(fe3d);
+	_bottomViewportController->inject(fe3d);
+
 	_fe3d = fe3d;
 }
 
@@ -124,7 +139,7 @@ void EngineController::update()
 	else
 	{
 		static string lastScreen = "";
-		string activeScreen = _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID();
+		string activeScreen = _guiManager.getViewport("left")->getWindow("main")->getActiveScreen()->getID();
 		if(activeScreen == "main" && lastScreen != "main")
 		{
 			_fe3d->misc_setBackgroundColor(RENDER_COLOR);
@@ -137,7 +152,7 @@ void EngineController::update()
 		_fe3d->quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_default.tga");
 		_fe3d->quad_setVisible("@@cursor", _fe3d->misc_isCursorInsideWindow());
 
-		_gui.update();
+		_guiManager.update();
 
 		_topViewportController.update();
 		_leftViewportController.update();

@@ -6,12 +6,12 @@ void WorldEditor::_updateWaterMenu()
 
 	if(screen->getID() == "worldEditorMenuWater")
 	{
-		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
 		{
 			vector<string> waterIDs;
 			for(const auto& ID : _waterEditor.getLoadedIDs())
@@ -24,28 +24,28 @@ void WorldEditor::_updateWaterMenu()
 
 			_gui.getOverlay()->createChoiceForm("waterList", "Select Water", fvec2(0.0f, 0.1f), waterIDs);
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			_fe3d.water_delete(_currentWaterID);
+			_fe3d->water_delete(_currentWaterID);
 			_currentWaterID = "";
 		}
-		else if(_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("up")->isHovered())
+		else if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("up")->isHovered())
 		{
-			_fe3d.water_setHeight(_currentWaterID, (_fe3d.water_getHeight(_currentWaterID) + (_editorSpeed / 100.0f)));
+			_fe3d->water_setHeight(_currentWaterID, (_fe3d->water_getHeight(_currentWaterID) + (_editorSpeed / 100.0f)));
 		}
-		else if(_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("down")->isHovered())
+		else if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("down")->isHovered())
 		{
-			_fe3d.water_setHeight(_currentWaterID, (_fe3d.water_getHeight(_currentWaterID) - (_editorSpeed / 100.0f)));
+			_fe3d->water_setHeight(_currentWaterID, (_fe3d->water_getHeight(_currentWaterID) - (_editorSpeed / 100.0f)));
 		}
 
-		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("waterList");
 			if(!selectedButtonID.empty())
 			{
-				if(_fe3d.water_isExisting(selectedButtonID))
+				if(_fe3d->water_isExisting(selectedButtonID))
 				{
-					_fe3d.water_delete(selectedButtonID);
+					_fe3d->water_delete(selectedButtonID);
 				}
 
 				_currentWaterID = selectedButtonID;
@@ -62,6 +62,6 @@ void WorldEditor::_updateWaterMenu()
 		screen->getButton("down")->setHoverable(!_currentWaterID.empty());
 		screen->getButton("delete")->setHoverable(!_currentWaterID.empty());
 
-		_fe3d.water_select(_currentWaterID);
+		_fe3d->water_select(_currentWaterID);
 	}
 }

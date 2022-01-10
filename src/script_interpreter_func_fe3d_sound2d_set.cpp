@@ -18,7 +18,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 				return true;
 			}
 
-			if(_fe3d.sound2d_isExisting(newID))
+			if(_fe3d->sound2d_isExisting(newID))
 			{
 				_throwScriptError("sound already exists!");
 				return true;
@@ -26,9 +26,9 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 
 			if(_validateFe3dSound2d(templateID, true))
 			{
-				auto filePath = _fe3d.sound2d_getAudioPath("@" + args[1].getString());
-				_fe3d.sound2d_create(args[0].getString(), filePath);
-				_fe3d.sound2d_setVolume(args[0].getString(), args[2].getDecimal());
+				auto filePath = _fe3d->sound2d_getAudioPath("@" + args[1].getString());
+				_fe3d->sound2d_create(args[0].getString(), filePath);
+				_fe3d->sound2d_setVolume(args[0].getString(), args[2].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -41,7 +41,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 		{
 			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
-				_fe3d.sound2d_delete(args[0].getString());
+				_fe3d->sound2d_delete(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -50,11 +50,11 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			for(const auto& ID : _fe3d.sound2d_getIDs())
+			for(const auto& ID : _fe3d->sound2d_getIDs())
 			{
 				if(ID[0] != '@')
 				{
-					_fe3d.sound2d_delete(ID);
+					_fe3d->sound2d_delete(ID);
 				}
 			}
 
@@ -69,7 +69,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 		{
 			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
-				_fe3d.sound2d_start(args[0].getString(), args[1].getInteger(), args[2].getInteger(), args[3].getBoolean());
+				_fe3d->sound2d_start(args[0].getString(), args[1].getInteger(), args[2].getInteger(), args[3].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -82,7 +82,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 		{
 			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
-				_fe3d.sound2d_pause(args[0].getString());
+				_fe3d->sound2d_pause(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -91,7 +91,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_fe3d.sound2d_pauseAll();
+			_fe3d->sound2d_pauseAll();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -103,7 +103,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 		{
 			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
-				_fe3d.sound2d_resume(args[0].getString());
+				_fe3d->sound2d_resume(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -112,7 +112,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_fe3d.sound2d_resumeAll();
+			_fe3d->sound2d_resumeAll();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -124,7 +124,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 		{
 			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
-				_fe3d.sound2d_stop(args[0].getString(), args[1].getInteger());
+				_fe3d->sound2d_stop(args[0].getString(), args[1].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -133,7 +133,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			_fe3d.sound2d_stopAll();
+			_fe3d->sound2d_stopAll();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -145,7 +145,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 		{
 			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
-				_fe3d.sound2d_setVolume(args[0].getString(), args[1].getDecimal());
+				_fe3d->sound2d_setVolume(args[0].getString(), args[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
@@ -156,7 +156,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dSetter(const string& functionNa
 		return false;
 	}
 
-	if(_fe3d.server_isRunning())
+	if(_fe3d->server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:sound2d` functionality as networking server!");
 	}

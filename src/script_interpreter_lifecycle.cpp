@@ -156,9 +156,9 @@ void ScriptInterpreter::load()
 		auto quadTexturePaths = _quadEditor.getImagePathsFromFile();
 		auto audioPaths = _soundEditor.getAudioPathsFromFile();
 
-		_fe3d.misc_cacheMeshes(modelMeshPaths);
+		_fe3d->misc_cacheMeshes(modelMeshPaths);
 
-		_fe3d.misc_cacheImages(terrainImagePaths);
+		_fe3d->misc_cacheImages(terrainImagePaths);
 
 		vector<string> imagePaths;
 		imagePaths.insert(imagePaths.end(), skyTexturePaths.begin(), skyTexturePaths.end());
@@ -167,12 +167,12 @@ void ScriptInterpreter::load()
 		imagePaths.insert(imagePaths.end(), modelTexturePaths.begin(), modelTexturePaths.end());
 		imagePaths.insert(imagePaths.end(), billboardTexturePaths.begin(), billboardTexturePaths.end());
 		imagePaths.insert(imagePaths.end(), quadTexturePaths.begin(), quadTexturePaths.end());
-		_fe3d.misc_cacheImages(imagePaths);
+		_fe3d->misc_cacheImages(imagePaths);
 
-		_fe3d.misc_cacheAudios(audioPaths);
+		_fe3d->misc_cacheAudios(audioPaths);
 	}
 
-	_fe3d.sky_selectMainSky("");
+	_fe3d->sky_selectMainSky("");
 
 	_skyEditor.loadFromFile();
 
@@ -191,13 +191,13 @@ void ScriptInterpreter::load()
 
 	_soundEditor.loadFromFile();
 
-	_fe3d.camera_reset();
+	_fe3d->camera_reset();
 
-	if(_fe3d.misc_isVsyncEnabled())
+	if(_fe3d->misc_isVsyncEnabled())
 	{
-		_fe3d.misc_disableVsync();
+		_fe3d->misc_disableVsync();
 	}
-	_fe3d.misc_setCursorVisible(true);
+	_fe3d->misc_setCursorVisible(true);
 
 	_checkEngineWarnings(lastLoggerMessageCount);
 }
@@ -208,128 +208,128 @@ void ScriptInterpreter::unload()
 	_animation2dEditor.stopQuadAnimations();
 	_animation3dEditor.stopModelAnimations();
 
-	_fe3d.sky_selectMainSky("");
-	_fe3d.sky_selectMixSky("");
-	_fe3d.sky_setMixValue(0.0f);
+	_fe3d->sky_selectMainSky("");
+	_fe3d->sky_selectMixSky("");
+	_fe3d->sky_setMixValue(0.0f);
 
-	_fe3d.sky_deleteAll();
-	_fe3d.terrain_deleteAll();
-	_fe3d.water_deleteAll();
-	_fe3d.model_deleteAll();
-	_fe3d.billboard_deleteAll();
-	_fe3d.aabb_deleteAll();
-	_fe3d.sound2d_deleteAll();
-	_fe3d.sound3d_deleteAll();
-	_fe3d.pointlight_deleteAll();
-	_fe3d.spotlight_deleteAll();
-	_fe3d.reflection_deleteAll();
+	_fe3d->sky_deleteAll();
+	_fe3d->terrain_deleteAll();
+	_fe3d->water_deleteAll();
+	_fe3d->model_deleteAll();
+	_fe3d->billboard_deleteAll();
+	_fe3d->aabb_deleteAll();
+	_fe3d->sound2d_deleteAll();
+	_fe3d->sound3d_deleteAll();
+	_fe3d->pointlight_deleteAll();
+	_fe3d->spotlight_deleteAll();
+	_fe3d->reflection_deleteAll();
 
-	for(const auto& ID : _fe3d.quad_getIDs())
+	for(const auto& ID : _fe3d->quad_getIDs())
 	{
 		if(ID[0] != '@')
 		{
-			_fe3d.quad_delete(ID);
+			_fe3d->quad_delete(ID);
 		}
 	}
 
-	for(const auto& ID : _fe3d.text_getIDs())
+	for(const auto& ID : _fe3d->text_getIDs())
 	{
 		if(ID[0] != '@')
 		{
-			_fe3d.text_delete(ID);
+			_fe3d->text_delete(ID);
 		}
 	}
 
-	_fe3d.camera_reset();
+	_fe3d->camera_reset();
 
-	_fe3d.collision_setCameraBox(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-	if(_fe3d.collision_isCameraResponseEnabled())
+	_fe3d->collision_setCameraBox(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+	if(_fe3d->collision_isCameraResponseEnabled())
 	{
-		_fe3d.collision_disableCameraResponse();
+		_fe3d->collision_disableCameraResponse();
 	}
-	if(_fe3d.collision_isTerrainResponseEnabled())
+	if(_fe3d->collision_isTerrainResponseEnabled())
 	{
-		_fe3d.collision_disableTerrainResponse();
-	}
-
-	if(_fe3d.raycast_isTerrainPointingEnabled())
-	{
-		_fe3d.raycast_disableTerrainPointing();
+		_fe3d->collision_disableTerrainResponse();
 	}
 
-	if(_fe3d.gfx_isAntiAliasingEnabled())
+	if(_fe3d->raycast_isTerrainPointingEnabled())
 	{
-		_fe3d.gfx_disableAntiAliasing(true);
-	}
-	if(_fe3d.gfx_isAmbientLightingEnabled())
-	{
-		_fe3d.gfx_disableAmbientLighting(true);
-	}
-	if(_fe3d.gfx_isDirectionalLightingEnabled())
-	{
-		_fe3d.gfx_disableDirectionalLighting(true);
-	}
-	if(_fe3d.gfx_isFogEnabled())
-	{
-		_fe3d.gfx_disableFog(true);
-	}
-	if(_fe3d.gfx_isShadowsEnabled())
-	{
-		_fe3d.gfx_disableShadows(true);
-	}
-	if(_fe3d.gfx_isSkyExposureEnabled())
-	{
-		_fe3d.gfx_disableSkyExposure(true);
-	}
-	if(_fe3d.gfx_isDofEnabled())
-	{
-		_fe3d.gfx_disableDOF(true);
-	}
-	if(_fe3d.gfx_isMotionBlurEnabled())
-	{
-		_fe3d.gfx_disableMotionBlur(true);
-	}
-	if(_fe3d.gfx_isLensFlareEnabled())
-	{
-		_fe3d.gfx_disableLensFlare(true);
-	}
-	if(_fe3d.gfx_isBloomEnabled())
-	{
-		_fe3d.gfx_disableBloom(true);
-	}
-	_fe3d.gfx_setCubeReflectionQuality(Config::MIN_REFLECTION_QUALITY);
-	_fe3d.gfx_setPlanarReflectionQuality(Config::MIN_REFLECTION_QUALITY);
-	_fe3d.gfx_setPlanarRefractionQuality(Config::MIN_REFRACTION_QUALITY);
-	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
-	_fe3d.gfx_setPlanarReflectionHeight(0.0f);
-
-	if(_fe3d.server_isRunning())
-	{
-		_fe3d.server_stop();
+		_fe3d->raycast_disableTerrainPointing();
 	}
 
-	if(_fe3d.client_isRunning())
+	if(_fe3d->gfx_isAntiAliasingEnabled())
 	{
-		_fe3d.client_stop();
+		_fe3d->gfx_disableAntiAliasing(true);
+	}
+	if(_fe3d->gfx_isAmbientLightingEnabled())
+	{
+		_fe3d->gfx_disableAmbientLighting(true);
+	}
+	if(_fe3d->gfx_isDirectionalLightingEnabled())
+	{
+		_fe3d->gfx_disableDirectionalLighting(true);
+	}
+	if(_fe3d->gfx_isFogEnabled())
+	{
+		_fe3d->gfx_disableFog(true);
+	}
+	if(_fe3d->gfx_isShadowsEnabled())
+	{
+		_fe3d->gfx_disableShadows(true);
+	}
+	if(_fe3d->gfx_isSkyExposureEnabled())
+	{
+		_fe3d->gfx_disableSkyExposure(true);
+	}
+	if(_fe3d->gfx_isDofEnabled())
+	{
+		_fe3d->gfx_disableDOF(true);
+	}
+	if(_fe3d->gfx_isMotionBlurEnabled())
+	{
+		_fe3d->gfx_disableMotionBlur(true);
+	}
+	if(_fe3d->gfx_isLensFlareEnabled())
+	{
+		_fe3d->gfx_disableLensFlare(true);
+	}
+	if(_fe3d->gfx_isBloomEnabled())
+	{
+		_fe3d->gfx_disableBloom(true);
+	}
+	_fe3d->gfx_setCubeReflectionQuality(Config::MIN_REFLECTION_QUALITY);
+	_fe3d->gfx_setPlanarReflectionQuality(Config::MIN_REFLECTION_QUALITY);
+	_fe3d->gfx_setPlanarRefractionQuality(Config::MIN_REFRACTION_QUALITY);
+	_fe3d->gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
+	_fe3d->gfx_setPlanarReflectionHeight(0.0f);
+
+	if(_fe3d->server_isRunning())
+	{
+		_fe3d->server_stop();
 	}
 
-	if(_fe3d.misc_isAabbFrameRenderingEnabled())
+	if(_fe3d->client_isRunning())
 	{
-		_fe3d.misc_disableAabbFrameRendering();
+		_fe3d->client_stop();
 	}
-	if(_fe3d.misc_isWireframeRenderingEnabled())
+
+	if(_fe3d->misc_isAabbFrameRenderingEnabled())
 	{
-		_fe3d.misc_disableWireframeRendering();
+		_fe3d->misc_disableAabbFrameRendering();
 	}
-	if(!_fe3d.misc_isVsyncEnabled())
+	if(_fe3d->misc_isWireframeRenderingEnabled())
 	{
-		_fe3d.misc_enableVsync();
+		_fe3d->misc_disableWireframeRendering();
 	}
-	if(_fe3d.misc_isMillisecondTimerStarted())
+	if(!_fe3d->misc_isVsyncEnabled())
 	{
-		_fe3d.misc_stopMillisecondTimer();
+		_fe3d->misc_enableVsync();
 	}
-	_fe3d.misc_setCursorVisible(false);
+	if(_fe3d->misc_isMillisecondTimerStarted())
+	{
+		_fe3d->misc_stopMillisecondTimer();
+	}
+	_fe3d->misc_setCursorVisible(false);
 
 	_debuggingTimes.clear();
 	_localVariables.clear();

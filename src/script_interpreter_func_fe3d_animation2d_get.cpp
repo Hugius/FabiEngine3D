@@ -243,7 +243,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dGetter(const string& functi
 		return false;
 	}
 
-	if(_fe3d.server_isRunning())
+	if(_fe3d->server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:animation2d` functionality as networking server!");
 	}

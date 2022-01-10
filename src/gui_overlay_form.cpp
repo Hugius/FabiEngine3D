@@ -93,12 +93,12 @@ const bool GuiOverlay::checkValueForm(const string& ID, string& value, const vec
 
 const bool GuiOverlay::isValueFormConfirmed() const
 {
-	return (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_done")->isHovered());
+	return (_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_done")->isHovered());
 }
 
 const bool GuiOverlay::isValueFormCancelled() const
 {
-	return (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_cancel")->isHovered());
+	return (_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_cancel")->isHovered());
 }
 
 const bool GuiOverlay::isValueFormExisting(const string& ID) const
@@ -138,8 +138,8 @@ const bool GuiOverlay::_checkValueForm(const string& ID, string& valueString, co
 
 	if(find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) != _valueFormIDs.end())
 	{
-		bool done = _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_done")->isHovered();
-		bool cancelled = _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_cancel")->isHovered();
+		bool done = _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_done")->isHovered();
+		bool cancelled = _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_cancel")->isHovered();
 		bool entered = getWriteField(ID)->confirmedInput();
 
 		if(done || entered || cancelled)
@@ -228,7 +228,7 @@ const bool GuiOverlay::isChoiceFormCancelled(const string& ID) const
 {
 	if(ID == _choiceFormID)
 	{
-		return (getButton("choice_form_cancel")->isHovered() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT));
+		return (getButton("choice_form_cancel")->isHovered() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT));
 	}
 	else
 	{
@@ -277,7 +277,7 @@ const bool GuiOverlay::isAnswerFormConfirmed(const string& ID)
 {
 	if(ID == _answerFormID)
 	{
-		if(getButton("answer_form_yes")->isHovered() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(getButton("answer_form_yes")->isHovered() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			_deleteAnswerForm(ID);
 			return true;
@@ -293,7 +293,7 @@ const bool GuiOverlay::isAnswerFormDenied(const string& ID)
 {
 	if(isButtonExisting("answer_form_no") && (ID == _answerFormID))
 	{
-		if(getButton("answer_form_no")->isHovered() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(getButton("answer_form_no")->isHovered() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			_deleteAnswerForm(ID);
 			return true;

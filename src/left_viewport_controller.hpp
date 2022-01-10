@@ -16,22 +16,20 @@
 class LeftViewportController final : public BaseViewportController
 {
 public:
-	LeftViewportController(EngineInterface& fe3d, GuiManager& gui);
-
 	void initialize() override;
 	void update() override;
 
-	SkyEditor& getSkyEditor();
-	TerrainEditor& getTerrainEditor();
-	WaterEditor& getWaterEditor();
-	ModelEditor& getModelEditor();
-	BillboardEditor& getBillboardEditor();
-	QuadEditor& getQuadEditor();
-	Animation2dEditor& getAnimation2dEditor();
-	Animation3dEditor& getAnimation3dEditor();
-	SoundEditor& getSoundEditor();
-	WorldEditor& getWorldEditor();
-	ScriptEditor& getScriptEditor();
+	shared_ptr<SkyEditor> getSkyEditor();
+	shared_ptr<TerrainEditor> getTerrainEditor();
+	shared_ptr<WaterEditor> getWaterEditor();
+	shared_ptr<ModelEditor> getModelEditor();
+	shared_ptr<BillboardEditor> getBillboardEditor();
+	shared_ptr<QuadEditor> getQuadEditor();
+	shared_ptr<Animation2dEditor> getAnimation2dEditor();
+	shared_ptr<Animation3dEditor> getAnimation3dEditor();
+	shared_ptr<SoundEditor> getSoundEditor();
+	shared_ptr<WorldEditor> getWorldEditor();
+	shared_ptr<ScriptEditor> getScriptEditor();
 
 	static inline const fvec3 SCROLLING_LIST_COLOR = fvec3(0.25f);
 	static inline const fvec3 BUTTON_COLOR = fvec3(0.1f, 0.1f, 1.0f);
@@ -47,15 +45,15 @@ private:
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 
-	SkyEditor _skyEditor;
-	TerrainEditor _terrainEditor;
-	WaterEditor _waterEditor;
-	ModelEditor _modelEditor;
-	BillboardEditor _billboardEditor;
-	QuadEditor _quadEditor;
-	Animation2dEditor _animation2dEditor;
-	Animation3dEditor _animation3dEditor;
-	SoundEditor _soundEditor;
-	WorldEditor _worldEditor;
-	ScriptEditor _scriptEditor;
+	shared_ptr<SkyEditor> _skyEditor;
+	shared_ptr<TerrainEditor> _terrainEditor;
+	shared_ptr<WaterEditor> _waterEditor;
+	shared_ptr<ModelEditor> _modelEditor;
+	shared_ptr<BillboardEditor> _billboardEditor;
+	shared_ptr<QuadEditor> _quadEditor;
+	shared_ptr<Animation2dEditor> _animation2dEditor;
+	shared_ptr<Animation3dEditor> _animation3dEditor;
+	shared_ptr<SoundEditor> _soundEditor;
+	shared_ptr<WorldEditor> _worldEditor;
+	shared_ptr<ScriptEditor> _scriptEditor;
 };

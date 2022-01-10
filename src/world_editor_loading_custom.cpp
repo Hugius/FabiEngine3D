@@ -57,9 +57,9 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 			if(_copyTemplateSky(skyID, templateID))
 			{
-				_fe3d.sky_setRotation(skyID, rotation);
-				_fe3d.sky_setLightness(skyID, lightness);
-				_fe3d.sky_setColor(skyID, color);
+				_fe3d->sky_setRotation(skyID, rotation);
+				_fe3d->sky_setLightness(skyID, lightness);
+				_fe3d->sky_setColor(skyID, color);
 			}
 		}
 		else if(lineType == "TERRAIN")
@@ -89,9 +89,9 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 			if(_copyTemplateWater(waterID, templateID))
 			{
-				_fe3d.water_setColor(waterID, color);
-				_fe3d.water_setSpeed(waterID, speed);
-				_fe3d.water_setTransparency(waterID, transparency);
+				_fe3d->water_setColor(waterID, color);
+				_fe3d->water_setSpeed(waterID, speed);
+				_fe3d->water_setTransparency(waterID, transparency);
 			}
 		}
 		else if(lineType == "MODEL")
@@ -143,7 +143,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 					partIDs.push_back(partID);
 				}
 
-				if(partIDs.size() != _fe3d.model_getPartIDs(templateID).size())
+				if(partIDs.size() != _fe3d->model_getPartIDs(templateID).size())
 				{
 					Logger::throwWarning("World model parts with ID \"" + modelID + "\" differ from base model!");
 					continue;
@@ -151,7 +151,7 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 				for(size_t i = 0; i < partIDs.size(); i++)
 				{
-					if(partIDs[i] != _fe3d.model_getPartIDs(templateID)[i])
+					if(partIDs[i] != _fe3d->model_getPartIDs(templateID)[i])
 					{
 						Logger::throwWarning("World model parts with ID \"" + modelID + "\" differ from base model!");
 						continue;
@@ -161,20 +161,20 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 			if(_copyTemplateModel(modelID, templateID, position, false))
 			{
-				_fe3d.model_setBaseRotation(modelID, rotation);
-				_fe3d.model_setBaseRotationOrigin(modelID, rotationOrigin);
-				_fe3d.model_setBaseSize(modelID, size);
-				_fe3d.model_setFrozen(modelID, isFrozen);
-				_fe3d.model_setColor(modelID, "", color);
-				_fe3d.model_setMinHeight(modelID, minHeight);
-				_fe3d.model_setMaxHeight(modelID, maxHeight);
-				//_fe3d.model_setTransparency(modelID, transparency);
-				//_fe3d.model_setLightness(modelID, lightness);
-				_fe3d.model_setVisible(modelID, isVisible);
-				for(const auto& ID : _fe3d.aabb_getChildIDs(modelID, AabbParentEntityType::MODEL))
+				_fe3d->model_setBaseRotation(modelID, rotation);
+				_fe3d->model_setBaseRotationOrigin(modelID, rotationOrigin);
+				_fe3d->model_setBaseSize(modelID, size);
+				_fe3d->model_setFrozen(modelID, isFrozen);
+				_fe3d->model_setColor(modelID, "", color);
+				_fe3d->model_setMinHeight(modelID, minHeight);
+				_fe3d->model_setMaxHeight(modelID, maxHeight);
+				//_fe3d->model_setTransparency(modelID, transparency);
+				//_fe3d->model_setLightness(modelID, lightness);
+				_fe3d->model_setVisible(modelID, isVisible);
+				for(const auto& ID : _fe3d->aabb_getChildIDs(modelID, AabbParentEntityType::MODEL))
 				{
-					_fe3d.aabb_setRaycastResponsive(ID, isAabbRaycastResponsive);
-					_fe3d.aabb_setCollisionResponsive(ID, isAabbCollisionResponsive);
+					_fe3d->aabb_setRaycastResponsive(ID, isAabbRaycastResponsive);
+					_fe3d->aabb_setCollisionResponsive(ID, isAabbCollisionResponsive);
 				}
 
 				for(unsigned int i = 0; i < partCount; i++)
@@ -195,15 +195,15 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 						size.y >>
 						size.z;
 
-					_fe3d.model_setPartPosition(modelID, partID, position);
-					_fe3d.model_setPartRotation(modelID, partID, rotation);
-					_fe3d.model_setPartRotationOrigin(modelID, partID, rotationOrigin);
-					_fe3d.model_setPartSize(modelID, partID, size);
+					_fe3d->model_setPartPosition(modelID, partID, position);
+					_fe3d->model_setPartRotation(modelID, partID, rotation);
+					_fe3d->model_setPartRotationOrigin(modelID, partID, rotationOrigin);
+					_fe3d->model_setPartSize(modelID, partID, size);
 				}
 
 				if(makeInvisible)
 				{
-					_fe3d.model_setVisible(modelID, false);
+					_fe3d->model_setVisible(modelID, false);
 				}
 			}
 		}
@@ -263,13 +263,13 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 			//	}
 
 			//	// Retrieve parts
-			//	auto partIDs = _fe3d.model_getPartIDs(modelID);
+			//	auto partIDs = _fe3d->model_getPartIDs(modelID);
 			//	for(const auto& partID : partIDs)
 			//	{
 			//		// Retrieve part transformation
-			//		auto position = _fe3d.model_getPartPosition(modelID, partID);
-			//		auto rotation = _fe3d.model_getPartRotation(modelID, partID);
-			//		auto size = _fe3d.model_getPartSize(modelID, partID);
+			//		auto position = _fe3d->model_getPartPosition(modelID, partID);
+			//		auto rotation = _fe3d->model_getPartRotation(modelID, partID);
+			//		auto size = _fe3d->model_getPartSize(modelID, partID);
 
 			//		// Set properties
 			//		animationData->setTotalMovement(partID, position);
@@ -323,20 +323,20 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 			if(_copyTemplateBillboard(billboardID, templateID, position, false))
 			{
-				_fe3d.billboard_setRotation(billboardID, rotation);
-				_fe3d.billboard_setSize(billboardID, size);
-				_fe3d.billboard_setFacingCameraX(billboardID, isFacingX);
-				_fe3d.billboard_setFacingCameraY(billboardID, isFacingY);
-				_fe3d.billboard_setColor(billboardID, color);
-				_fe3d.billboard_setTextContent(billboardID, textContent);
-				_fe3d.billboard_setLightness(billboardID, lightness);
-				_fe3d.billboard_setMinHeight(billboardID, minHeight);
-				_fe3d.billboard_setMaxHeight(billboardID, maxHeight);
-				_fe3d.billboard_setVisible(billboardID, isVisible);
-				for(const auto& ID : _fe3d.aabb_getChildIDs(billboardID, AabbParentEntityType::BILLBOARD))
+				_fe3d->billboard_setRotation(billboardID, rotation);
+				_fe3d->billboard_setSize(billboardID, size);
+				_fe3d->billboard_setFacingCameraX(billboardID, isFacingX);
+				_fe3d->billboard_setFacingCameraY(billboardID, isFacingY);
+				_fe3d->billboard_setColor(billboardID, color);
+				_fe3d->billboard_setTextContent(billboardID, textContent);
+				_fe3d->billboard_setLightness(billboardID, lightness);
+				_fe3d->billboard_setMinHeight(billboardID, minHeight);
+				_fe3d->billboard_setMaxHeight(billboardID, maxHeight);
+				_fe3d->billboard_setVisible(billboardID, isVisible);
+				for(const auto& ID : _fe3d->aabb_getChildIDs(billboardID, AabbParentEntityType::BILLBOARD))
 				{
-					_fe3d.aabb_setRaycastResponsive(ID, isAabbRaycastResponsive);
-					_fe3d.aabb_setCollisionResponsive(ID, isAabbCollisionResponsive);
+					_fe3d->aabb_setRaycastResponsive(ID, isAabbRaycastResponsive);
+					_fe3d->aabb_setCollisionResponsive(ID, isAabbCollisionResponsive);
 				}
 			}
 		}
@@ -358,12 +358,12 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				size.y >>
 				size.z;
 
-			_fe3d.aabb_create(aabbID, false);
-			_fe3d.aabb_setBasePosition(aabbID, position);
-			_fe3d.aabb_setBaseSize(aabbID, size);
-			_fe3d.aabb_setRaycastResponsive(aabbID, isRaycastResponsive);
-			_fe3d.aabb_setCollisionResponsive(aabbID, isCollisionResponsive);
-			_fe3d.aabb_setVisible(aabbID, isVisible);
+			_fe3d->aabb_create(aabbID, false);
+			_fe3d->aabb_setBasePosition(aabbID, position);
+			_fe3d->aabb_setBaseSize(aabbID, size);
+			_fe3d->aabb_setRaycastResponsive(aabbID, isRaycastResponsive);
+			_fe3d->aabb_setCollisionResponsive(aabbID, isCollisionResponsive);
+			_fe3d->aabb_setVisible(aabbID, isVisible);
 			_loadedAabbIDs.push_back(aabbID);
 		}
 		else if(lineType == "SOUND")
@@ -383,9 +383,9 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 			if(_copyTemplateSound(soundID, templateID, position, false))
 			{
-				_fe3d.sound3d_setMaxVolume(soundID, maxVolume);
-				_fe3d.sound3d_setMaxDistance(soundID, maxDistance);
-				_fe3d.sound3d_start(soundID, -1, 0, false);
+				_fe3d->sound3d_setMaxVolume(soundID, maxVolume);
+				_fe3d->sound3d_setMaxDistance(soundID, maxDistance);
+				_fe3d->sound3d_start(soundID, -1, 0, false);
 			}
 		}
 		else if(lineType == "POINTLIGHT")
@@ -407,10 +407,10 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				color.b >>
 				intensity;
 
-			_fe3d.pointlight_setPosition(pointlightID, position);
-			_fe3d.pointlight_setRadius(pointlightID, radius);
-			_fe3d.pointlight_setColor(pointlightID, color);
-			_fe3d.pointlight_setIntensity(pointlightID, intensity);
+			_fe3d->pointlight_setPosition(pointlightID, position);
+			_fe3d->pointlight_setRadius(pointlightID, radius);
+			_fe3d->pointlight_setColor(pointlightID, color);
+			_fe3d->pointlight_setIntensity(pointlightID, intensity);
 			_loadedPointlightIDs.push_back(pointlightID);
 		}
 		else if(lineType == "SPOTLIGHT")
@@ -433,13 +433,13 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				angle >>
 				distance;
 
-			_fe3d.spotlight_setPosition(spotlightID, position);
-			_fe3d.spotlight_setColor(spotlightID, color);
-			_fe3d.spotlight_setYaw(spotlightID, yaw);
-			_fe3d.spotlight_setPitch(spotlightID, pitch);
-			_fe3d.spotlight_setIntensity(spotlightID, intensity);
-			_fe3d.spotlight_setAngle(spotlightID, angle);
-			_fe3d.spotlight_setDistance(spotlightID, distance);
+			_fe3d->spotlight_setPosition(spotlightID, position);
+			_fe3d->spotlight_setColor(spotlightID, color);
+			_fe3d->spotlight_setYaw(spotlightID, yaw);
+			_fe3d->spotlight_setPitch(spotlightID, pitch);
+			_fe3d->spotlight_setIntensity(spotlightID, intensity);
+			_fe3d->spotlight_setAngle(spotlightID, angle);
+			_fe3d->spotlight_setDistance(spotlightID, distance);
 			_loadedSpotlightIDs.push_back(spotlightID);
 		}
 		else if(lineType == "REFLECTION")
@@ -453,9 +453,9 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				position.y >>
 				position.z;
 
-			_fe3d.reflection_create(reflectionID);
-			_fe3d.reflection_setPosition(reflectionID, position);
-			_fe3d.reflection_capture(reflectionID);
+			_fe3d->reflection_create(reflectionID);
+			_fe3d->reflection_setPosition(reflectionID, position);
+			_fe3d->reflection_capture(reflectionID);
 			_loadedReflectionIDs.push_back(reflectionID);
 		}
 		else if(lineType == "LIGHTING_AMBIENT")
@@ -469,9 +469,9 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				color.b >>
 				intensity;
 
-			_fe3d.gfx_enableAmbientLighting();
-			_fe3d.gfx_setAmbientLightingColor(color);
-			_fe3d.gfx_setAmbientLightingIntensity(intensity);
+			_fe3d->gfx_enableAmbientLighting();
+			_fe3d->gfx_setAmbientLightingColor(color);
+			_fe3d->gfx_setAmbientLightingIntensity(intensity);
 		}
 		else if(lineType == "LIGHTING_DIRECTIONAL")
 		{
@@ -488,10 +488,10 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				intensity >>
 				billboardSize;
 
-			_fe3d.gfx_enableDirectionalLighting();
-			_fe3d.gfx_setDirectionalLightingPosition(position);
-			_fe3d.gfx_setDirectionalLightingIntensity(intensity);
-			_fe3d.gfx_setDirectionalLightingColor(color);
+			_fe3d->gfx_enableDirectionalLighting();
+			_fe3d->gfx_setDirectionalLightingPosition(position);
+			_fe3d->gfx_setDirectionalLightingIntensity(intensity);
+			_fe3d->gfx_setDirectionalLightingColor(color);
 		}
 		else if(lineType == "GRAPHICS_SHADOWS")
 		{
@@ -512,14 +512,14 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 				isFollowingCamera >>
 				interval;
 
-			_fe3d.gfx_enableShadows();
-			_fe3d.gfx_setShadowEyePosition(position);
-			_fe3d.gfx_setShadowCenterPosition(center);
-			_fe3d.gfx_setShadowSize(size);
-			_fe3d.gfx_setShadowReach(size * 2.0f);
-			_fe3d.gfx_setShadowLightness(lightness);
-			_fe3d.gfx_setShadowFollowingCamera(isFollowingCamera);
-			_fe3d.gfx_setShadowInterval(interval);
+			_fe3d->gfx_enableShadows();
+			_fe3d->gfx_setShadowEyePosition(position);
+			_fe3d->gfx_setShadowCenterPosition(center);
+			_fe3d->gfx_setShadowSize(size);
+			_fe3d->gfx_setShadowReach(size * 2.0f);
+			_fe3d->gfx_setShadowLightness(lightness);
+			_fe3d->gfx_setShadowFollowingCamera(isFollowingCamera);
+			_fe3d->gfx_setShadowInterval(interval);
 		}
 		else if(lineType == "GRAPHICS_MOTION_BLUR")
 		{
@@ -527,8 +527,8 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 			iss >> strength;
 
-			_fe3d.gfx_enableMotionBlur();
-			_fe3d.gfx_setMotionBlurStrength(strength);
+			_fe3d->gfx_enableMotionBlur();
+			_fe3d->gfx_setMotionBlurStrength(strength);
 		}
 		else if(lineType == "GRAPHICS_DOF")
 		{
@@ -537,10 +537,10 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 			iss >> isDynamic >> blurDistance >> maxDistance;
 
-			_fe3d.gfx_enableDOF();
-			_fe3d.gfx_setDofDynamic(isDynamic);
-			_fe3d.gfx_setDofDynamicDistance(maxDistance);
-			_fe3d.gfx_setDofBlurDistance(blurDistance);
+			_fe3d->gfx_enableDOF();
+			_fe3d->gfx_setDofDynamic(isDynamic);
+			_fe3d->gfx_setDofDynamicDistance(maxDistance);
+			_fe3d->gfx_setDofBlurDistance(blurDistance);
 		}
 		else if(lineType == "GRAPHICS_FOG")
 		{
@@ -549,11 +549,11 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 			iss >> minDistance >> maxDistance >> thickness >> color.r >> color.g >> color.b;
 
-			_fe3d.gfx_enableFog();
-			_fe3d.gfx_setFogMinDistance(minDistance);
-			_fe3d.gfx_setFogMaxDistance(maxDistance);
-			_fe3d.gfx_setFogThickness(thickness);
-			_fe3d.gfx_setFogColor(color);
+			_fe3d->gfx_enableFog();
+			_fe3d->gfx_setFogMinDistance(minDistance);
+			_fe3d->gfx_setFogMaxDistance(maxDistance);
+			_fe3d->gfx_setFogThickness(thickness);
+			_fe3d->gfx_setFogColor(color);
 		}
 		else if(lineType == "GRAPHICS_LENS_FLARE")
 		{
@@ -566,10 +566,10 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 			replace(flareMapPath.begin(), flareMapPath.end(), '?', ' ');
 
-			_fe3d.gfx_enableLensFlare();
-			_fe3d.gfx_setLensFlareMap(flareMapPath);
-			_fe3d.gfx_setLensFlareIntensity(intensity);
-			_fe3d.gfx_setLensFlareSensitivity(sensitivity);
+			_fe3d->gfx_enableLensFlare();
+			_fe3d->gfx_setLensFlareMap(flareMapPath);
+			_fe3d->gfx_setLensFlareIntensity(intensity);
+			_fe3d->gfx_setLensFlareSensitivity(sensitivity);
 		}
 		else if(lineType == "GRAPHICS_SKY_EXPOSURE")
 		{
@@ -577,9 +577,9 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 			iss >> intensity >> speed;
 
-			_fe3d.gfx_enableSkyExposure();
-			_fe3d.gfx_setSkyExposureIntensity(intensity);
-			_fe3d.gfx_setSkyExposureSpeed(speed);
+			_fe3d->gfx_enableSkyExposure();
+			_fe3d->gfx_setSkyExposureIntensity(intensity);
+			_fe3d->gfx_setSkyExposureSpeed(speed);
 		}
 		else if(lineType == "GRAPHICS_BLOOM")
 		{
@@ -588,10 +588,10 @@ const bool WorldEditor::loadCustomWorldFromFile(const string& fileName)
 
 			iss >> type >> intensity >> blurCount;
 
-			_fe3d.gfx_enableBloom();
-			_fe3d.gfx_setBloomType(BloomType(type));
-			_fe3d.gfx_setBloomIntensity(intensity);
-			_fe3d.gfx_setBloomBlurCount(blurCount);
+			_fe3d->gfx_enableBloom();
+			_fe3d->gfx_setBloomType(BloomType(type));
+			_fe3d->gfx_setBloomIntensity(intensity);
+			_fe3d->gfx_setBloomBlurCount(blurCount);
 		}
 		else
 		{

@@ -12,7 +12,7 @@ GuiWriteField::GuiWriteField(EngineInterface& fe3d, const string& parentID, cons
 	_noLetters(noLetters),
 	_minusAllowed(minusAllowed)
 {
-	_fe3d.text_setContent(_textField->getEntityID(), "|", CHAR_WIDTH);
+	_fe3d->text_setContent(_textField->getEntityID(), "|", CHAR_WIDTH);
 }
 
 void GuiWriteField::update(bool hoverable)
@@ -24,7 +24,7 @@ void GuiWriteField::update(bool hoverable)
 
 void GuiWriteField::_updateActivation()
 {
-	if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 	{
 		if(_isHovered)
 		{
@@ -91,7 +91,7 @@ void GuiWriteField::_updateTyping()
 			{
 				for(const auto& c : letterCharacters)
 				{
-					if(_fe3d.input_isKeyPressed(InputType(c)))
+					if(_fe3d->input_isKeyPressed(InputType(c)))
 					{
 						if(c == ' ')
 						{
@@ -99,7 +99,7 @@ void GuiWriteField::_updateTyping()
 						}
 						else
 						{
-							if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
+							if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
 							{
 								{
 									_currentTextContent += (c - 32);
@@ -125,9 +125,9 @@ void GuiWriteField::_updateTyping()
 			{
 				for(const auto& element : numberCharacterMap)
 				{
-					if(_fe3d.input_isKeyPressed(InputType(element.first)))
+					if(_fe3d->input_isKeyPressed(InputType(element.first)))
 					{
-						if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
+						if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
 						{
 							_currentTextContent += element.second;
 						}
@@ -143,9 +143,9 @@ void GuiWriteField::_updateTyping()
 			{
 				for(const auto& element : specialCharacterMap)
 				{
-					if(_fe3d.input_isKeyPressed(InputType(element.first)))
+					if(_fe3d->input_isKeyPressed(InputType(element.first)))
 					{
-						if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
+						if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
 						{
 							_currentTextContent += element.second;
 						}
@@ -158,9 +158,9 @@ void GuiWriteField::_updateTyping()
 			}
 			else if(_minusAllowed && !_noNumbers)
 			{
-				if(_fe3d.input_isKeyPressed(InputType('-')))
+				if(_fe3d->input_isKeyPressed(InputType('-')))
 				{
-					if(!_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) && !_fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
+					if(!_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) && !_fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
 					{
 						if(_currentTextContent.empty())
 						{
@@ -171,7 +171,7 @@ void GuiWriteField::_updateTyping()
 			}
 		}
 
-		if(_fe3d.input_isKeyDown(InputType::KEY_BACKSPACE))
+		if(_fe3d->input_isKeyDown(InputType::KEY_BACKSPACE))
 		{
 			if(passedBackspaceFrames >= MAX_PASSED_BACKSPACE_FRAMES)
 			{
@@ -196,9 +196,9 @@ void GuiWriteField::_updateTyping()
 			passedBackspaceFrames = MAX_PASSED_BACKSPACE_FRAMES;
 		}
 
-		_fe3d.text_setContent(_textField->getEntityID(), _currentTextContent + (barEnabled ? "|" : " "), CHAR_WIDTH);
+		_fe3d->text_setContent(_textField->getEntityID(), _currentTextContent + (barEnabled ? "|" : " "), CHAR_WIDTH);
 
-		if(_fe3d.input_isKeyPressed(InputType::KEY_ENTER))
+		if(_fe3d->input_isKeyPressed(InputType::KEY_ENTER))
 		{
 			if(!_currentTextContent.empty())
 			{
@@ -209,7 +209,7 @@ void GuiWriteField::_updateTyping()
 	}
 	else
 	{
-		_fe3d.text_setContent(_textField->getEntityID(), _currentTextContent, CHAR_WIDTH);
+		_fe3d->text_setContent(_textField->getEntityID(), _currentTextContent, CHAR_WIDTH);
 		_confirmedInput = false;
 	}
 }

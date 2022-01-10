@@ -16,7 +16,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 				return true;
 			}
 
-			auto result = _fe3d.sound3d_isExisting(args[0].getString());
+			auto result = _fe3d->sound3d_isExisting(args[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
@@ -32,7 +32,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 				return true;
 			}
 
-			for(const auto& ID : _fe3d.sound3d_getIDs())
+			for(const auto& ID : _fe3d->sound3d_getIDs())
 			{
 				if(args[0].getString() == ID.substr(0, args[0].getString().size()))
 				{
@@ -48,7 +48,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
-			auto result = _fe3d.sound3d_getIDs();
+			auto result = _fe3d->sound3d_getIDs();
 
 			for(const auto& ID : result)
 			{
@@ -67,7 +67,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 		{
 			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				auto result = _fe3d.sound3d_isStarted(args[0].getString());
+				auto result = _fe3d->sound3d_isStarted(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -80,7 +80,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 		{
 			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				auto result = _fe3d.sound3d_isPlaying(args[0].getString());
+				auto result = _fe3d->sound3d_isPlaying(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -93,7 +93,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 		{
 			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				auto result = _fe3d.sound3d_isPaused(args[0].getString());
+				auto result = _fe3d->sound3d_isPaused(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -106,7 +106,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 		{
 			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				auto result = _fe3d.sound3d_getVolume(args[0].getString());
+				auto result = _fe3d->sound3d_getVolume(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -119,7 +119,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 		{
 			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				auto result = _fe3d.sound3d_getPosition(args[0].getString()).x;
+				auto result = _fe3d->sound3d_getPosition(args[0].getString()).x;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -132,7 +132,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 		{
 			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				auto result = _fe3d.sound3d_getPosition(args[0].getString()).y;
+				auto result = _fe3d->sound3d_getPosition(args[0].getString()).y;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -145,7 +145,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 		{
 			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				auto result = _fe3d.sound3d_getPosition(args[0].getString()).z;
+				auto result = _fe3d->sound3d_getPosition(args[0].getString()).z;
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -158,7 +158,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 		{
 			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				auto result = _fe3d.sound3d_getMaxVolume(args[0].getString());
+				auto result = _fe3d->sound3d_getMaxVolume(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -171,7 +171,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 		{
 			if(_validateFe3dSound3d(args[0].getString(), false))
 			{
-				auto result = _fe3d.sound3d_getMaxDistance(args[0].getString());
+				auto result = _fe3d->sound3d_getMaxDistance(args[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
@@ -181,7 +181,7 @@ const bool ScriptInterpreter::_executeFe3dSound3dGetter(const string& functionNa
 		return false;
 	}
 
-	if(_fe3d.server_isRunning())
+	if(_fe3d->server_isRunning())
 	{
 		_throwScriptError("cannot access `fe3d:sound3d` functionality as networking server!");
 	}

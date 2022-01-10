@@ -19,25 +19,25 @@ const bool TerrainEditor::saveToFile() const
 
 	for(const auto& terrainID : _loadedTerrainIDs)
 	{
-		auto heightMapPath = _fe3d.terrain_getHeightMapPath(terrainID);
-		auto diffuseMapPath = _fe3d.terrain_getDiffuseMapPath(terrainID);
-		auto normalMapPath = _fe3d.terrain_getNormalMapPath(terrainID);
-		auto blendMapPath = _fe3d.terrain_getBlendMapPath(terrainID);
-		auto redDiffuseMapPath = _fe3d.terrain_getRedDiffuseMapPath(terrainID);
-		auto greenDiffuseMapPath = _fe3d.terrain_getGreenDiffuseMapPath(terrainID);
-		auto blueDiffuseMapPath = _fe3d.terrain_getBlueDiffuseMapPath(terrainID);
-		auto redNormalMapPath = _fe3d.terrain_getRedNormalMapPath(terrainID);
-		auto greenNormalMapPath = _fe3d.terrain_getGreenNormalMapPath(terrainID);
-		auto blueNormalMapPath = _fe3d.terrain_getBlueNormalMapPath(terrainID);
-		auto maxHeight = _fe3d.terrain_getMaxHeight(terrainID);
-		auto textureRepeat = _fe3d.terrain_getTextureRepeat(terrainID);
-		auto lightness = _fe3d.terrain_getLightness(terrainID);
-		auto specularShininess = _fe3d.terrain_getSpecularShininess(terrainID);
-		auto specularIntensity = _fe3d.terrain_getSpecularIntensity(terrainID);
-		auto redTextureRepeat = _fe3d.terrain_getRedTextureRepeat(terrainID);
-		auto greenTextureRepeat = _fe3d.terrain_getGreenTextureRepeat(terrainID);
-		auto blueTextureRepeat = _fe3d.terrain_getBlueTextureRepeat(terrainID);
-		auto isSpecular = _fe3d.terrain_isSpecular(terrainID);
+		auto heightMapPath = _fe3d->terrain_getHeightMapPath(terrainID);
+		auto diffuseMapPath = _fe3d->terrain_getDiffuseMapPath(terrainID);
+		auto normalMapPath = _fe3d->terrain_getNormalMapPath(terrainID);
+		auto blendMapPath = _fe3d->terrain_getBlendMapPath(terrainID);
+		auto redDiffuseMapPath = _fe3d->terrain_getRedDiffuseMapPath(terrainID);
+		auto greenDiffuseMapPath = _fe3d->terrain_getGreenDiffuseMapPath(terrainID);
+		auto blueDiffuseMapPath = _fe3d->terrain_getBlueDiffuseMapPath(terrainID);
+		auto redNormalMapPath = _fe3d->terrain_getRedNormalMapPath(terrainID);
+		auto greenNormalMapPath = _fe3d->terrain_getGreenNormalMapPath(terrainID);
+		auto blueNormalMapPath = _fe3d->terrain_getBlueNormalMapPath(terrainID);
+		auto maxHeight = _fe3d->terrain_getMaxHeight(terrainID);
+		auto textureRepeat = _fe3d->terrain_getTextureRepeat(terrainID);
+		auto lightness = _fe3d->terrain_getLightness(terrainID);
+		auto specularShininess = _fe3d->terrain_getSpecularShininess(terrainID);
+		auto specularIntensity = _fe3d->terrain_getSpecularIntensity(terrainID);
+		auto redTextureRepeat = _fe3d->terrain_getRedTextureRepeat(terrainID);
+		auto greenTextureRepeat = _fe3d->terrain_getGreenTextureRepeat(terrainID);
+		auto blueTextureRepeat = _fe3d->terrain_getBlueTextureRepeat(terrainID);
+		auto isSpecular = _fe3d->terrain_isSpecular(terrainID);
 
 		heightMapPath = string(heightMapPath.empty() ? "" : heightMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));

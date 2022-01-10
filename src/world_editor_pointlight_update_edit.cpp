@@ -16,18 +16,18 @@ void WorldEditor::_updatePointlightEditing()
 			_dontResetSelectedLamp = false;
 		}
 
-		auto hoveredAabbID = _fe3d.raycast_checkCursorInAny().first;
+		auto hoveredAabbID = _fe3d->raycast_checkCursorInAny().first;
 
-		for(const auto& ID : _fe3d.model_getIDs())
+		for(const auto& ID : _fe3d->model_getIDs())
 		{
 			if(ID.substr(0, string("@@lamp").size()) == "@@lamp")
 			{
-				if(hoveredAabbID == ID && _fe3d.misc_isCursorInsideViewport() &&
-				   !_gui.getOverlay()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if(hoveredAabbID == ID && _fe3d->misc_isCursorInsideViewport() &&
+				   !_gui.getOverlay()->isFocused() && !_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_selectPointlight(ID.substr(string("@@lamp_").size()));
 
-					if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+					if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
 						if(_selectedLampID != _activeLampID)
 						{
@@ -45,13 +45,13 @@ void WorldEditor::_updatePointlightEditing()
 			}
 		}
 
-		if(!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+		if(!_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			if(_fe3d.misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
+			if(_fe3d->misc_isCursorInsideViewport() && !_gui.getOverlay()->isFocused())
 			{
 				if(!_activeLampID.empty())
 				{
-					if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedLampID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+					if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedLampID.empty()) || _fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 					{
 						_activeLampID = "";
 						rightWindow->setActiveScreen("main");
@@ -73,60 +73,60 @@ void WorldEditor::_updatePointlightEditing()
 
 			rightWindow->setActiveScreen("pointlightPropertiesMenu");
 
-			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
+				if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
 				{
 					screen->getButton("position")->setHoverable(false);
 					screen->getButton("radius")->setHoverable(true);
 					screen->getButton("color")->setHoverable(true);
 				}
-				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("radius")->isHovered())
+				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("radius")->isHovered())
 				{
 					screen->getButton("position")->setHoverable(true);
 					screen->getButton("radius")->setHoverable(false);
 					screen->getButton("color")->setHoverable(true);
 				}
-				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
+				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
 				{
 					screen->getButton("position")->setHoverable(true);
 					screen->getButton("radius")->setHoverable(true);
 					screen->getButton("color")->setHoverable(false);
 				}
-				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("shape")->isHovered())
+				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("shape")->isHovered())
 				{
-					if(_fe3d.pointlight_getShape(activePointlightID) == PointlightShape::CIRCLE)
+					if(_fe3d->pointlight_getShape(activePointlightID) == PointlightShape::CIRCLE)
 					{
-						_fe3d.pointlight_setShape(activePointlightID, PointlightShape::SQUARE);
+						_fe3d->pointlight_setShape(activePointlightID, PointlightShape::SQUARE);
 					}
 					else
 					{
-						_fe3d.pointlight_setShape(activePointlightID, PointlightShape::CIRCLE);
+						_fe3d->pointlight_setShape(activePointlightID, PointlightShape::CIRCLE);
 					}
 				}
-				else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+				else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
-					_fe3d.model_delete(_activeLampID);
-					_fe3d.pointlight_delete(activePointlightID);
+					_fe3d->model_delete(_activeLampID);
+					_fe3d->pointlight_delete(activePointlightID);
 					rightWindow->setActiveScreen("main");
 					_activeLampID = "";
 					return;
 				}
 			}
 
-			if(_fe3d.input_isKeyPressed(InputType::KEY_DELETE))
+			if(_fe3d->input_isKeyPressed(InputType::KEY_DELETE))
 			{
-				_fe3d.model_delete(_activeLampID);
-				_fe3d.pointlight_delete(activePointlightID);
+				_fe3d->model_delete(_activeLampID);
+				_fe3d->pointlight_delete(activePointlightID);
 				rightWindow->setActiveScreen("main");
 				_activeLampID = "";
 				return;
 			}
 
-			auto position = _fe3d.pointlight_getPosition(activePointlightID);
-			auto radius = _fe3d.pointlight_getRadius(activePointlightID);
-			auto color = _fe3d.pointlight_getColor(activePointlightID);
-			auto intensity = _fe3d.pointlight_getIntensity(activePointlightID);
+			auto position = _fe3d->pointlight_getPosition(activePointlightID);
+			auto radius = _fe3d->pointlight_getRadius(activePointlightID);
+			auto color = _fe3d->pointlight_getColor(activePointlightID);
+			auto intensity = _fe3d->pointlight_getIntensity(activePointlightID);
 
 			if(!screen->getButton("position")->isHoverable())
 			{
@@ -141,7 +141,7 @@ void WorldEditor::_updatePointlightEditing()
 				_handleValueChanging("pointlightPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
 				_handleValueChanging("pointlightPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / POINTLIGHT_POSITION_DIVIDER));
 
-				_fe3d.pointlight_setPosition(activePointlightID, position);
+				_fe3d->pointlight_setPosition(activePointlightID, position);
 			}
 			else if(!screen->getButton("radius")->isHoverable())
 			{
@@ -156,7 +156,7 @@ void WorldEditor::_updatePointlightEditing()
 				_handleValueChanging("pointlightPropertiesMenu", "zPlus", "z", radius.z, (_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
 				_handleValueChanging("pointlightPropertiesMenu", "zMinus", "z", radius.z, -(_editorSpeed / POINTLIGHT_RADIUS_DIVIDER), 1.0f, 0.0f);
 
-				_fe3d.pointlight_setRadius(activePointlightID, radius);
+				_fe3d->pointlight_setRadius(activePointlightID, radius);
 			}
 			else if(!screen->getButton("color")->isHoverable())
 			{
@@ -171,22 +171,22 @@ void WorldEditor::_updatePointlightEditing()
 				_handleValueChanging("pointlightPropertiesMenu", "zPlus", "z", color.b, POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
 				_handleValueChanging("pointlightPropertiesMenu", "zMinus", "z", color.b, -POINTLIGHT_COLOR_SPEED, 255.0f, 0.0f, 1.0f);
 
-				_fe3d.model_setColor(_activeLampID, "", color);
-				_fe3d.pointlight_setColor(activePointlightID, color);
+				_fe3d->model_setColor(_activeLampID, "", color);
+				_fe3d->pointlight_setColor(activePointlightID, color);
 			}
 
 			_handleValueChanging("pointlightPropertiesMenu", "intensityPlus", "intensity", intensity, POINTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);
 			_handleValueChanging("pointlightPropertiesMenu", "intensityMinus", "intensity", intensity, -POINTLIGHT_INTENSITY_SPEED, 10.0f, 0.0f);
-			_fe3d.pointlight_setIntensity(activePointlightID, intensity);
+			_fe3d->pointlight_setIntensity(activePointlightID, intensity);
 
 			const auto quadEntityID = screen->getButton("shape")->getRectangle()->getEntityID();
-			if(_fe3d.pointlight_getShape(activePointlightID) == PointlightShape::CIRCLE)
+			if(_fe3d->pointlight_getShape(activePointlightID) == PointlightShape::CIRCLE)
 			{
-				_fe3d.quad_setDiffuseMap(quadEntityID, "engine\\assets\\image\\diffuse_map\\shape_circle.tga");
+				_fe3d->quad_setDiffuseMap(quadEntityID, "engine\\assets\\image\\diffuse_map\\shape_circle.tga");
 			}
 			else
 			{
-				_fe3d.quad_setDiffuseMap(quadEntityID, "engine\\assets\\image\\diffuse_map\\shape_square.tga");
+				_fe3d->quad_setDiffuseMap(quadEntityID, "engine\\assets\\image\\diffuse_map\\shape_square.tga");
 			}
 		}
 	}

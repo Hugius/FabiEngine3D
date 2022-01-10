@@ -4,87 +4,87 @@
 
 void ModelEditor::_updateCamera()
 {
-	if(_fe3d.camera_isThirdPersonViewEnabled())
+	if(_fe3d->camera_isThirdPersonViewEnabled())
 	{
-		auto scrollOffset = _fe3d.input_getMouseWheelY();
-		auto cameraDistance = _fe3d.camera_getThirdPersonDistance();
+		auto scrollOffset = _fe3d->input_getMouseWheelY();
+		auto cameraDistance = _fe3d->camera_getThirdPersonDistance();
 		cameraDistance = max(MIN_CAMERA_DISTANCE, cameraDistance - (static_cast<float>(scrollOffset) * CAMERA_DISTANCE_SPEED));
-		_fe3d.camera_setThirdPersonDistance(cameraDistance);
+		_fe3d->camera_setThirdPersonDistance(cameraDistance);
 
-		auto cameraLookat = _fe3d.camera_getThirdPersonLookat();
-		if(_fe3d.input_isKeyDown(InputType::KEY_SPACE))
+		auto cameraLookat = _fe3d->camera_getThirdPersonLookat();
+		if(_fe3d->input_isKeyDown(InputType::KEY_SPACE))
 		{
 			cameraLookat.y += CAMERA_LOOKAT_SPEED;
 		}
-		if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
+		if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
 		{
 			cameraLookat.y -= CAMERA_LOOKAT_SPEED;
 		}
 		cameraLookat.y = max(-GRID_Y_OFFSET, cameraLookat.y);
-		_fe3d.camera_setThirdPersonLookat(cameraLookat);
+		_fe3d->camera_setThirdPersonLookat(cameraLookat);
 
-		_fe3d.quad_setVisible("@@cursor", false);
+		_fe3d->quad_setVisible("@@cursor", false);
 
-		const auto distance = _fe3d.camera_getThirdPersonDistance();
-		_fe3d.gfx_setShadowEyePosition(fvec3(cameraLookat + fvec3(distance * 2.0f)));
-		_fe3d.gfx_setShadowCenterPosition(cameraLookat);
-		_fe3d.gfx_setShadowSize(distance * 4.0f);
-		_fe3d.gfx_setShadowReach(distance * 8.0f);
+		const auto distance = _fe3d->camera_getThirdPersonDistance();
+		_fe3d->gfx_setShadowEyePosition(fvec3(cameraLookat + fvec3(distance * 2.0f)));
+		_fe3d->gfx_setShadowCenterPosition(cameraLookat);
+		_fe3d->gfx_setShadowSize(distance * 4.0f);
+		_fe3d->gfx_setShadowReach(distance * 8.0f);
 	}
 
-	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+	if(!_gui.getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
 	{
-		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
+		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			if(_fe3d.camera_isThirdPersonViewEnabled())
+			if(_fe3d->camera_isThirdPersonViewEnabled())
 			{
-				_fe3d.camera_disableThirdPersonView();
+				_fe3d->camera_disableThirdPersonView();
 			}
 			else
 			{
-				_fe3d.camera_enableThirdPersonView(_fe3d.camera_getThirdPersonYaw(), _fe3d.camera_getThirdPersonPitch());
+				_fe3d->camera_enableThirdPersonView(_fe3d->camera_getThirdPersonYaw(), _fe3d->camera_getThirdPersonPitch());
 			}
 		}
 	}
 
-	if(_fe3d.camera_isThirdPersonViewEnabled())
+	if(_fe3d->camera_isThirdPersonViewEnabled())
 	{
 		if(_gui.getOverlay()->isFocused())
 		{
-			_fe3d.camera_disableThirdPersonView();
+			_fe3d->camera_disableThirdPersonView();
 		}
 	}
 }
 
 void ModelEditor::_updateMiscellaneous()
 {
-	if(!_gui.getOverlay()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+	if(!_gui.getOverlay()->isFocused() && _fe3d->misc_isCursorInsideViewport())
 	{
-		if(_fe3d.input_isKeyPressed(InputType::KEY_R))
+		if(_fe3d->input_isKeyPressed(InputType::KEY_R))
 		{
-			if(_fe3d.model_isVisible("@@box"))
+			if(_fe3d->model_isVisible("@@box"))
 			{
-				_fe3d.model_setVisible("@@box", false);
+				_fe3d->model_setVisible("@@box", false);
 			}
 			else
 			{
-				_fe3d.model_setVisible("@@box", true);
+				_fe3d->model_setVisible("@@box", true);
 			}
 		}
 
 		if(!_currentModelID.empty())
 		{
-			if(_fe3d.input_isKeyPressed(InputType::KEY_F))
+			if(_fe3d->input_isKeyPressed(InputType::KEY_F))
 			{
-				for(const auto& partID : _fe3d.model_getPartIDs(_currentModelID))
+				for(const auto& partID : _fe3d->model_getPartIDs(_currentModelID))
 				{
-					if(_fe3d.model_isWireframed(_currentModelID, partID))
+					if(_fe3d->model_isWireframed(_currentModelID, partID))
 					{
-						_fe3d.model_setWireframed(_currentModelID, partID, false);
+						_fe3d->model_setWireframed(_currentModelID, partID, false);
 					}
 					else
 					{
-						_fe3d.model_setWireframed(_currentModelID, partID, true);
+						_fe3d->model_setWireframed(_currentModelID, partID, true);
 					}
 				}
 			}
@@ -98,7 +98,7 @@ void ModelEditor::_updateMiscellaneous()
 	}
 	else
 	{
-		const auto transparency = _fe3d.model_getTransparency(_currentModelID, partID);
+		const auto transparency = _fe3d->model_getTransparency(_currentModelID, partID);
 
 		if(transparency == 0.0f)
 		{
@@ -111,7 +111,7 @@ void ModelEditor::_updateMiscellaneous()
 		}
 
 		const float speed = (PART_HIGHLIGHT_SPEED * static_cast<float>(_selectedPartHighlightDirection));
-		_fe3d.model_setTransparency(_currentModelID, partID, (transparency + speed));
+		_fe3d->model_setTransparency(_currentModelID, partID, (transparency + speed));
 	}
 }
 
@@ -174,18 +174,18 @@ void ModelEditor::_updateModelCreating()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearMeshCache(finalFilePath);
-			_fe3d.model_create(newModelID, finalFilePath);
+			_fe3d->misc_clearMeshCache(finalFilePath);
+			_fe3d->model_create(newModelID, finalFilePath);
 
-			if(_fe3d.model_isExisting(newModelID))
+			if(_fe3d->model_isExisting(newModelID))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 
 				_currentModelID = newModelID;
 				_loadedModelIDs.push_back(newModelID);
 
-				_fe3d.text_setContent(_gui.getOverlay()->getTextField("modelID")->getEntityID(), "Model: " + newModelID.substr(1), 0.025f);
-				_fe3d.text_setVisible(_gui.getOverlay()->getTextField("modelID")->getEntityID(), true);
+				_fe3d->text_setContent(_gui.getOverlay()->getTextField("modelID")->getEntityID(), "Model: " + newModelID.substr(1), 0.025f);
+				_fe3d->text_setVisible(_gui.getOverlay()->getTextField("modelID")->getEntityID(), true);
 				_isCreatingModel = false;
 			}
 		}
@@ -198,7 +198,7 @@ void ModelEditor::_updateModelChoosing()
 	{
 		if(!_hoveredModelID.empty())
 		{
-			_fe3d.model_setVisible(_hoveredModelID, false);
+			_fe3d->model_setVisible(_hoveredModelID, false);
 		}
 
 		auto selectedButtonID = _gui.getOverlay()->checkChoiceForm("modelList");
@@ -207,7 +207,7 @@ void ModelEditor::_updateModelChoosing()
 		{
 			_hoveredModelID = ("@" + selectedButtonID);
 
-			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				_currentModelID = ("@" + selectedButtonID);
 				_hoveredModelID = "";
@@ -215,11 +215,11 @@ void ModelEditor::_updateModelChoosing()
 				if(!_isDeletingModel)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-					_fe3d.text_setContent(_gui.getOverlay()->getTextField("modelID")->getEntityID(), "Model: " + _currentModelID.substr(1), 0.025f);
-					_fe3d.text_setVisible(_gui.getOverlay()->getTextField("modelID")->getEntityID(), true);
+					_fe3d->text_setContent(_gui.getOverlay()->getTextField("modelID")->getEntityID(), "Model: " + _currentModelID.substr(1), 0.025f);
+					_fe3d->text_setVisible(_gui.getOverlay()->getTextField("modelID")->getEntityID(), true);
 				}
 
-				_fe3d.model_setVisible(_currentModelID, true);
+				_fe3d->model_setVisible(_currentModelID, true);
 				_gui.getOverlay()->deleteChoiceForm("modelList");
 				_isChoosingModel = false;
 			}
@@ -237,7 +237,7 @@ void ModelEditor::_updateModelChoosing()
 
 		if(!_hoveredModelID.empty())
 		{
-			_fe3d.model_setVisible(_hoveredModelID, true);
+			_fe3d->model_setVisible(_hoveredModelID, true);
 		}
 	}
 }
@@ -253,7 +253,7 @@ void ModelEditor::_updateModelDeleting()
 
 		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_fe3d.model_delete(_currentModelID);
+			_fe3d->model_delete(_currentModelID);
 
 			_loadedModelIDs.erase(remove(_loadedModelIDs.begin(), _loadedModelIDs.end(), _currentModelID), _loadedModelIDs.end());
 			_currentModelID = "";
@@ -261,7 +261,7 @@ void ModelEditor::_updateModelDeleting()
 		}
 		if(_gui.getOverlay()->isAnswerFormDenied("delete"))
 		{
-			_fe3d.model_setVisible(_currentModelID, false);
+			_fe3d->model_setVisible(_currentModelID, false);
 
 			_currentModelID = "";
 			_isDeletingModel = false;
@@ -279,12 +279,12 @@ void ModelEditor::_updatePartChoosing()
 		{
 			_hoveredPartID = selectedButtonID;
 
-			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				_currentPartID = selectedButtonID;
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen(_nextActiveScreenID);
-				_fe3d.text_setContent(_gui.getOverlay()->getTextField("partID")->getEntityID(), ("Part: " + _currentPartID), 0.025f);
-				_fe3d.text_setVisible(_gui.getOverlay()->getTextField("partID")->getEntityID(), true);
+				_fe3d->text_setContent(_gui.getOverlay()->getTextField("partID")->getEntityID(), ("Part: " + _currentPartID), 0.025f);
+				_fe3d->text_setVisible(_gui.getOverlay()->getTextField("partID")->getEntityID(), true);
 				_gui.getOverlay()->deleteChoiceForm("partList");
 				_hoveredPartID = "";
 				_nextActiveScreenID = "";
@@ -299,9 +299,9 @@ void ModelEditor::_updatePartChoosing()
 		else
 		{
 			_hoveredPartID = "";
-			for(const auto& partID : _fe3d.model_getPartIDs(_currentModelID))
+			for(const auto& partID : _fe3d->model_getPartIDs(_currentModelID))
 			{
-				_fe3d.model_setTransparency(_currentModelID, partID, 1.0f);
+				_fe3d->model_setTransparency(_currentModelID, partID, 1.0f);
 			}
 		}
 	}

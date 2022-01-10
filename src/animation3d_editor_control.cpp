@@ -8,7 +8,7 @@ void Animation3dEditor::startModelAnimation(const string& animationID, const str
 		Logger::throwWarning("animation not existing!");
 	}
 
-	if(!_fe3d.model_isExisting(modelID))
+	if(!_fe3d->model_isExisting(modelID))
 	{
 		Logger::throwWarning("model not existing!");
 	}
@@ -25,14 +25,14 @@ void Animation3dEditor::startModelAnimation(const string& animationID, const str
 
 	auto animation = *_getAnimation(animationID);
 	animation.setPlayCount(playCount);
-	animation.setInitialSize(_fe3d.model_getBaseSize(modelID));
+	animation.setInitialSize(_fe3d->model_getBaseSize(modelID));
 
 	bool hasAllParts = true;
 	for(const auto& partID : animation.getPartIDs())
 	{
 		if(!partID.empty())
 		{
-			if(!_fe3d.model_hasPart(modelID, partID))
+			if(!_fe3d->model_hasPart(modelID, partID))
 			{
 				Logger::throwWarning("model does not have required animation parts!");
 			}

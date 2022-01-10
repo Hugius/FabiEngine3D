@@ -7,31 +7,31 @@ void ModelEditor::_updateMiscellaneousMenu()
 
 	if(screen->getID() == "modelEditorMenuMiscellaneous")
 	{
-		auto levelOfDetailEntityID = _fe3d.model_getLevelOfDetailEntityID(_currentModelID);
-		auto levelOfDetailDistance = _fe3d.model_getLevelOfDetailDistance(_currentModelID);
-		auto isFaceCulled = _fe3d.model_isFaceCulled(_currentModelID);
-		auto rotationOrder = _fe3d.model_getRotationOrder(_currentModelID);
+		auto levelOfDetailEntityID = _fe3d->model_getLevelOfDetailEntityID(_currentModelID);
+		auto levelOfDetailDistance = _fe3d->model_getLevelOfDetailDistance(_currentModelID);
+		auto isFaceCulled = _fe3d->model_isFaceCulled(_currentModelID);
+		auto rotationOrder = _fe3d->model_getRotationOrder(_currentModelID);
 
-		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("levelOfDetailEntityID")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("levelOfDetailEntityID")->isHovered())
 		{
 			levelOfDetailEntityID = (levelOfDetailEntityID.empty()) ? levelOfDetailEntityID : levelOfDetailEntityID.substr(1, levelOfDetailEntityID.size() - 1);
 			_gui.getOverlay()->createValueForm("levelOfDetailEntityID", "LOD Entity ID", levelOfDetailEntityID, fvec2(0.0f, 0.1f), fvec2(0.4f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("levelOfDetailDistance")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("levelOfDetailDistance")->isHovered())
 		{
 			_gui.getOverlay()->createValueForm("levelOfDetailDistance", "Specular LOD Distance", levelOfDetailDistance, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFaceCulled")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFaceCulled")->isHovered())
 		{
 			isFaceCulled = !isFaceCulled;
-			_fe3d.model_setFaceCulled(_currentModelID, isFaceCulled);
+			_fe3d->model_setFaceCulled(_currentModelID, isFaceCulled);
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotationOrder")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotationOrder")->isHovered())
 		{
 			if(rotationOrder == DirectionOrder::XYZ)
 			{
@@ -57,14 +57,14 @@ void ModelEditor::_updateMiscellaneousMenu()
 			{
 				rotationOrder = DirectionOrder::XYZ;
 			}
-			_fe3d.model_setRotationOrder(_currentModelID, rotationOrder);
+			_fe3d->model_setRotationOrder(_currentModelID, rotationOrder);
 		}
 
 		if(_gui.getOverlay()->checkValueForm("levelOfDetailEntityID", levelOfDetailEntityID, {}))
 		{
 			if(levelOfDetailEntityID == "@")
 			{
-				_fe3d.model_setLevelOfDetailEntityID(_currentModelID, "");
+				_fe3d->model_setLevelOfDetailEntityID(_currentModelID, "");
 			}
 			else if(find(_loadedModelIDs.begin(), _loadedModelIDs.end(), ("@" + levelOfDetailEntityID)) == _loadedModelIDs.end())
 			{
@@ -72,12 +72,12 @@ void ModelEditor::_updateMiscellaneousMenu()
 			}
 			else
 			{
-				_fe3d.model_setLevelOfDetailEntityID(_currentModelID, ("@" + levelOfDetailEntityID));
+				_fe3d->model_setLevelOfDetailEntityID(_currentModelID, ("@" + levelOfDetailEntityID));
 			}
 		}
 		if(_gui.getOverlay()->checkValueForm("levelOfDetailDistance", levelOfDetailDistance, {}))
 		{
-			_fe3d.model_setLevelOfDetailDistance(_currentModelID, levelOfDetailDistance);
+			_fe3d->model_setLevelOfDetailDistance(_currentModelID, levelOfDetailDistance);
 		}
 
 		screen->getButton("isFaceCulled")->changeTextContent(isFaceCulled ? "Culling: ON" : "Culling: OFF");

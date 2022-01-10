@@ -19,12 +19,12 @@ void QuadEditor::load()
 {
 	_loadGUI();
 
-	_fe3d.camera_reset();
-	_fe3d.camera_setYaw(270.0f);
+	_fe3d->camera_reset();
+	_fe3d->camera_setYaw(270.0f);
 
-	_fe3d.billboard_create(PREVIEW_BILLBOARD_ID, true);
-	_fe3d.billboard_setPosition(PREVIEW_BILLBOARD_ID, PREVIEW_BILLBOARD_POSITION);
-	_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
+	_fe3d->billboard_create(PREVIEW_BILLBOARD_ID, true);
+	_fe3d->billboard_setPosition(PREVIEW_BILLBOARD_ID, PREVIEW_BILLBOARD_POSITION);
+	_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
 
 	_gui.getOverlay()->createTextField("quadID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
 
@@ -35,12 +35,12 @@ void QuadEditor::unload()
 {
 	for(const auto& ID : _loadedQuadIDs)
 	{
-		_fe3d.quad_delete(ID);
+		_fe3d->quad_delete(ID);
 	}
 
 	_unloadGUI();
 
-	_fe3d.billboard_delete(PREVIEW_BILLBOARD_ID);
+	_fe3d->billboard_delete(PREVIEW_BILLBOARD_ID);
 
 	_gui.getOverlay()->deleteTextField("quadID");
 

@@ -141,9 +141,9 @@ const bool BillboardEditor::loadFromFile()
 		replace(fontMapPath.begin(), fontMapPath.end(), '?', ' ');
 		replace(textContent.begin(), textContent.end(), '?', ' ');
 
-		_fe3d.billboard_create(billboardID, false);
+		_fe3d->billboard_create(billboardID, false);
 
-		if(_fe3d.billboard_isExisting(billboardID))
+		if(_fe3d->billboard_isExisting(billboardID))
 		{
 			_loadedBillboardIDs.push_back(billboardID);
 
@@ -154,7 +154,7 @@ const bool BillboardEditor::loadFromFile()
 					diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 				}
 
-				_fe3d.billboard_setDiffuseMap(billboardID, diffuseMapPath);
+				_fe3d->billboard_setDiffuseMap(billboardID, diffuseMapPath);
 			}
 
 			if(!emissionMapPath.empty())
@@ -164,7 +164,7 @@ const bool BillboardEditor::loadFromFile()
 					emissionMapPath = string("projects\\" + _currentProjectID + "\\" + emissionMapPath);
 				}
 
-				_fe3d.billboard_setEmissionMap(billboardID, emissionMapPath);
+				_fe3d->billboard_setEmissionMap(billboardID, emissionMapPath);
 			}
 
 			if(!fontMapPath.empty())
@@ -174,19 +174,19 @@ const bool BillboardEditor::loadFromFile()
 					fontMapPath = string("projects\\" + _currentProjectID + "\\" + fontMapPath);
 				}
 
-				_fe3d.billboard_setFont(billboardID, fontMapPath);
-				_fe3d.billboard_setTextContent(billboardID, textContent);
+				_fe3d->billboard_setFont(billboardID, fontMapPath);
+				_fe3d->billboard_setTextContent(billboardID, textContent);
 			}
 
-			_fe3d.billboard_setVisible(billboardID, false);
-			_fe3d.billboard_setSize(billboardID, size);
-			_fe3d.billboard_setColor(billboardID, color);
-			_fe3d.billboard_setLightness(billboardID, lightness);
-			_fe3d.billboard_setFacingCameraX(billboardID, isFacingX);
-			_fe3d.billboard_setFacingCameraY(billboardID, isFacingY);
-			_fe3d.billboard_setShadowed(billboardID, isShadowed);
-			_fe3d.billboard_setReflected(billboardID, isReflected);
-			_fe3d.billboard_setTextureRepeat(billboardID, textureRepeat);
+			_fe3d->billboard_setVisible(billboardID, false);
+			_fe3d->billboard_setSize(billboardID, size);
+			_fe3d->billboard_setColor(billboardID, color);
+			_fe3d->billboard_setLightness(billboardID, lightness);
+			_fe3d->billboard_setFacingCameraX(billboardID, isFacingX);
+			_fe3d->billboard_setFacingCameraY(billboardID, isFacingY);
+			_fe3d->billboard_setShadowed(billboardID, isShadowed);
+			_fe3d->billboard_setReflected(billboardID, isReflected);
+			_fe3d->billboard_setTextureRepeat(billboardID, textureRepeat);
 		}
 	}
 

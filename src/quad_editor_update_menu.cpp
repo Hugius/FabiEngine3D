@@ -8,16 +8,16 @@ void QuadEditor::_updateMainMenu()
 
 	if(screen->getID() == "quadEditorMenuMain")
 	{
-		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getOverlay()->createAnswerForm("back", "Save Changes?", fvec2(0.0f, 0.25f));
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
 			_gui.getOverlay()->createValueForm("quadCreate", "Create Quad", "", fvec2(0.0f, 0.1f), fvec2(0.5f, 0.1f), fvec2(0.0f, 0.1f));
 			_isCreatingQuad = true;
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			auto IDs = getLoadedIDs();
 			for(auto& ID : IDs)
@@ -27,7 +27,7 @@ void QuadEditor::_updateMainMenu()
 			_gui.getOverlay()->createChoiceForm("quadList", "Edit Quad", fvec2(-0.5f, 0.1f), IDs);
 			_isChoosingQuad = true;
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			auto IDs = getLoadedIDs();
 			for(auto& ID : IDs)
@@ -61,18 +61,18 @@ void QuadEditor::_updateChoiceMenu()
 
 	if(screen->getID() == "quadEditorMenuChoice")
 	{
-		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
-			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
-			_fe3d.billboard_setWireframed(PREVIEW_BILLBOARD_ID, false);
-			_fe3d.billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
+			_fe3d->billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, "");
+			_fe3d->billboard_setWireframed(PREVIEW_BILLBOARD_ID, false);
+			_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, false);
 
 			_currentQuadID = "";
-			_fe3d.text_setVisible(_gui.getOverlay()->getTextField("quadID")->getEntityID(), false);
+			_fe3d->text_setVisible(_gui.getOverlay()->getTextField("quadID")->getEntityID(), false);
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("quadEditorMenuMain");
 			return;
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
 			if(_currentProjectID.empty())
 			{
@@ -102,9 +102,9 @@ void QuadEditor::_updateChoiceMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearImageCache(finalFilePath);
-			_fe3d.quad_setDiffuseMap(_currentQuadID, finalFilePath);
-			_fe3d.billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, finalFilePath);
+			_fe3d->misc_clearImageCache(finalFilePath);
+			_fe3d->quad_setDiffuseMap(_currentQuadID, finalFilePath);
+			_fe3d->billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, finalFilePath);
 		}
 	}
 }

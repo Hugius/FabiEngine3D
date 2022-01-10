@@ -119,7 +119,7 @@ void TopViewportController::_updateProjectLoading()
 		const string clickedButtonID = _gui.getOverlay()->checkChoiceForm("projectList");
 		const string projectDirectoryPath = string(rootPath + "projects\\" + clickedButtonID + "\\");
 
-		if(!clickedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(!clickedButtonID.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if(isProjectCorrupted(projectDirectoryPath))
 			{
@@ -140,9 +140,9 @@ void TopViewportController::_updateProjectLoading()
 			auto quadTexturePaths = _quadEditor.getImagePathsFromFile();
 			auto audioPaths = _soundEditor.getAudioPathsFromFile();
 
-			_fe3d.misc_cacheMeshes(modelMeshPaths);
+			_fe3d->misc_cacheMeshes(modelMeshPaths);
 
-			_fe3d.misc_cacheImages(terrainImagePaths);
+			_fe3d->misc_cacheImages(terrainImagePaths);
 
 			vector<string> imagePaths;
 			imagePaths.insert(imagePaths.end(), skyTexturePaths.begin(), skyTexturePaths.end());
@@ -151,9 +151,9 @@ void TopViewportController::_updateProjectLoading()
 			imagePaths.insert(imagePaths.end(), modelTexturePaths.begin(), modelTexturePaths.end());
 			imagePaths.insert(imagePaths.end(), billboardTexturePaths.begin(), billboardTexturePaths.end());
 			imagePaths.insert(imagePaths.end(), quadTexturePaths.begin(), quadTexturePaths.end());
-			_fe3d.misc_cacheImages(imagePaths);
+			_fe3d->misc_cacheImages(imagePaths);
 
-			_fe3d.misc_cacheAudios(audioPaths);
+			_fe3d->misc_cacheAudios(audioPaths);
 
 			Logger::throwInfo("Existing project \"" + _currentProjectID + "\" loaded!");
 
@@ -175,7 +175,7 @@ void TopViewportController::_updateProjectDeleting()
 		static string chosenButtonID = "";
 		string clickedButtonID = _gui.getOverlay()->checkChoiceForm("projectList");
 
-		if(!clickedButtonID.empty() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if(!clickedButtonID.empty() && _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			_gui.getOverlay()->createAnswerForm("delete", "Are You Sure?", fvec2(0.0f, 0.25f));
 			chosenButtonID = clickedButtonID;

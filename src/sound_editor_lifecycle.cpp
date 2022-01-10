@@ -19,21 +19,21 @@ void SoundEditor::load()
 {
 	_loadGUI();
 
-	_fe3d.gfx_enableAntiAliasing();
-	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
-	_fe3d.gfx_enableBloom();
-	_fe3d.gfx_setBloomType(BloomType::PARTS);
-	_fe3d.gfx_setBloomIntensity(1.0f);
-	_fe3d.gfx_setBloomBlurCount(5);
-	_fe3d.gfx_setBloomQuality(Config::MAX_BLOOM_QUALITY);
+	_fe3d->gfx_enableAntiAliasing();
+	_fe3d->gfx_setAnisotropicFilteringQuality(Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
+	_fe3d->gfx_enableBloom();
+	_fe3d->gfx_setBloomType(BloomType::PARTS);
+	_fe3d->gfx_setBloomIntensity(1.0f);
+	_fe3d->gfx_setBloomBlurCount(5);
+	_fe3d->gfx_setBloomQuality(Config::MAX_BLOOM_QUALITY);
 
-	_fe3d.camera_reset();
-	_fe3d.camera_setYaw(270.0f);
+	_fe3d->camera_reset();
+	_fe3d->camera_setYaw(270.0f);
 
-	_fe3d.billboard_create("@@icon", true);
-	_fe3d.billboard_setPosition("@@icon", ICON_BILLBOARD_POSITION);
-	_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\stop.tga");
-	_fe3d.billboard_setBright("@@icon", true);
+	_fe3d->billboard_create("@@icon", true);
+	_fe3d->billboard_setPosition("@@icon", ICON_BILLBOARD_POSITION);
+	_fe3d->billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\stop.tga");
+	_fe3d->billboard_setBright("@@icon", true);
 
 	_gui.getOverlay()->createTextField("soundID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
 
@@ -44,16 +44,16 @@ void SoundEditor::unload()
 {
 	for(const auto& ID : _loadedSoundIDs)
 	{
-		_fe3d.sound2d_delete(ID);
+		_fe3d->sound2d_delete(ID);
 	}
 
 	_unloadGUI();
 
-	_fe3d.gfx_disableAntiAliasing(true);
-	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
-	_fe3d.gfx_disableBloom(true);
+	_fe3d->gfx_disableAntiAliasing(true);
+	_fe3d->gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
+	_fe3d->gfx_disableBloom(true);
 
-	_fe3d.billboard_delete("@@icon");
+	_fe3d->billboard_delete("@@icon");
 
 	_gui.getOverlay()->deleteTextField("soundID");
 

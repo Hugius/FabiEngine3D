@@ -22,30 +22,30 @@ void Animation3dEditor::_updateFrameMenu()
 
 		screen->getButton("speed")->setHoverable(speedType != Animation3dSpeedType::INSTANTLY);
 
-		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
-			for(const auto& partID : _fe3d.model_getPartIDs(currentAnimation->getPreviewModelID()))
+			for(const auto& partID : _fe3d->model_getPartIDs(currentAnimation->getPreviewModelID()))
 			{
-				_fe3d.model_setTransparency(currentAnimation->getPreviewModelID(), partID, 1.0f);
+				_fe3d->model_setTransparency(currentAnimation->getPreviewModelID(), partID, 1.0f);
 			}
 
 			_currentPartID = "";
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("part")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("part")->isHovered())
 		{
 			auto modelParts = currentAnimation->getPartIDs();
 			modelParts.erase(modelParts.begin());
 			_gui.getOverlay()->createChoiceForm("partList", "Select Part", fvec2(-0.5f, 0.1f), modelParts);
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("transformation")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("transformation")->isHovered())
 		{
 			_gui.getOverlay()->createValueForm("transformationX", "X", transformation.x * multiplier, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 			_gui.getOverlay()->createValueForm("transformationY", "Y", transformation.y * multiplier, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 			_gui.getOverlay()->createValueForm("transformationZ", "Z", transformation.z * multiplier, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("transformationType")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("transformationType")->isHovered())
 		{
 			if(transformationType == TransformationType::MOVEMENT)
 			{
@@ -60,13 +60,13 @@ void Animation3dEditor::_updateFrameMenu()
 				transformationType = TransformationType::MOVEMENT;
 			}
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speed")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speed")->isHovered())
 		{
 			_gui.getOverlay()->createValueForm("transformationSpeedX", "X", speed.x * 1000.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 			_gui.getOverlay()->createValueForm("transformationSpeedY", "Y", speed.y * 1000.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 			_gui.getOverlay()->createValueForm("transformationSpeedZ", "Z", speed.z * 1000.0f, fvec2(0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speedType")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speedType")->isHovered())
 		{
 			if(speedType == Animation3dSpeedType::LINEAR)
 			{
@@ -81,7 +81,7 @@ void Animation3dEditor::_updateFrameMenu()
 				speedType = Animation3dSpeedType::LINEAR;
 			}
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotationOrigin")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotationOrigin")->isHovered())
 		{
 			_gui.getOverlay()->createValueForm("rotationOriginX", "X", rotationOrigin.x * 1000.0f, fvec2(-0.25f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 			_gui.getOverlay()->createValueForm("rotationOriginY", "Y", rotationOrigin.y * 1000.0f, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
@@ -94,11 +94,11 @@ void Animation3dEditor::_updateFrameMenu()
 		{
 			if(_currentPartID.empty())
 			{
-				_fe3d.model_rotateBase(currentAnimation->getPreviewModelID(), frame.getSpeeds().at(_currentPartID));
+				_fe3d->model_rotateBase(currentAnimation->getPreviewModelID(), frame.getSpeeds().at(_currentPartID));
 			}
 			else
 			{
-				_fe3d.model_rotatePart(currentAnimation->getPreviewModelID(), _currentPartID, frame.getSpeeds().at(_currentPartID));
+				_fe3d->model_rotatePart(currentAnimation->getPreviewModelID(), _currentPartID, frame.getSpeeds().at(_currentPartID));
 			}
 			_mustUpdateCurrentFramePreview = false;
 		}
@@ -186,7 +186,7 @@ void Animation3dEditor::_updateFrameMenu()
 		{
 			_hoveredPartID = selectedButtonID;
 
-			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				_currentPartID = selectedButtonID;
 				_hoveredPartID = "";
@@ -201,9 +201,9 @@ void Animation3dEditor::_updateFrameMenu()
 		{
 			if(!_hoveredPartID.empty())
 			{
-				for(const auto& partID : _fe3d.model_getPartIDs(currentAnimation->getPreviewModelID()))
+				for(const auto& partID : _fe3d->model_getPartIDs(currentAnimation->getPreviewModelID()))
 				{
-					_fe3d.model_setTransparency(currentAnimation->getPreviewModelID(), partID, 1.0f);
+					_fe3d->model_setTransparency(currentAnimation->getPreviewModelID(), partID, 1.0f);
 				}
 			}
 

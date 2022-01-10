@@ -42,7 +42,7 @@ void BottomViewportController::initialize()
 	statisticsScreen->createTextField("reflectionEntityCount", fvec2(-1.0f, -0.8f), fvec2(0.0f), "", fvec3(1.0f), false);
 	statisticsScreen->createTextField("quadEntityCount", fvec2(-1.0f, -0.95f), fvec2(0.0f), "", fvec3(1.0f), false);
 
-	auto updateStatistics = _fe3d.misc_getUpdateProfilingStatistics();
+	auto updateStatistics = _fe3d->misc_getUpdateProfilingStatistics();
 	int uCounter = 1;
 	for(const auto& [key, value] : updateStatistics)
 	{
@@ -50,7 +50,7 @@ void BottomViewportController::initialize()
 		uCounter++;
 	}
 
-	auto renderStatistics = _fe3d.misc_getRenderProfilingStatistics();
+	auto renderStatistics = _fe3d->misc_getRenderProfilingStatistics();
 	int rCounter = 1;
 	for(const auto& [key, value] : renderStatistics)
 	{

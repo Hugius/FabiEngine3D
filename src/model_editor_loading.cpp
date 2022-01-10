@@ -269,18 +269,18 @@ const bool ModelEditor::loadFromFile()
 				meshPath = string("projects\\" + _currentProjectID + "\\" + meshPath);
 			}
 
-			_fe3d.model_create(modelID, meshPath);
+			_fe3d->model_create(modelID, meshPath);
 
-			if(_fe3d.model_isExisting(modelID))
+			if(_fe3d->model_isExisting(modelID))
 			{
 				_loadedModelIDs.push_back(modelID);
 
-				_fe3d.model_setVisible(modelID, false);
-				_fe3d.model_setBaseSize(modelID, size);
-				_fe3d.model_setLevelOfDetailEntityID(modelID, levelOfDetailEntityID);
-				_fe3d.model_setLevelOfDetailDistance(modelID, levelOfDetailDistance);
-				_fe3d.model_setFaceCulled(modelID, isFaceCulled);
-				_fe3d.model_setRotationOrder(modelID, DirectionOrder(rotationOrder));
+				_fe3d->model_setVisible(modelID, false);
+				_fe3d->model_setBaseSize(modelID, size);
+				_fe3d->model_setLevelOfDetailEntityID(modelID, levelOfDetailEntityID);
+				_fe3d->model_setLevelOfDetailDistance(modelID, levelOfDetailDistance);
+				_fe3d->model_setFaceCulled(modelID, isFaceCulled);
+				_fe3d->model_setRotationOrder(modelID, DirectionOrder(rotationOrder));
 
 				while(true)
 				{
@@ -335,7 +335,7 @@ const bool ModelEditor::loadFromFile()
 							diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 						}
 
-						_fe3d.model_setDiffuseMap(modelID, partID, diffuseMapPath);
+						_fe3d->model_setDiffuseMap(modelID, partID, diffuseMapPath);
 					}
 
 					if(!specularMapPath.empty())
@@ -345,7 +345,7 @@ const bool ModelEditor::loadFromFile()
 							specularMapPath = string("projects\\" + _currentProjectID + "\\" + specularMapPath);
 						}
 
-						_fe3d.model_setSpecularMap(modelID, partID, specularMapPath);
+						_fe3d->model_setSpecularMap(modelID, partID, specularMapPath);
 					}
 
 					if(!emissionMapPath.empty())
@@ -355,7 +355,7 @@ const bool ModelEditor::loadFromFile()
 							emissionMapPath = string("projects\\" + _currentProjectID + "\\" + emissionMapPath);
 						}
 
-						_fe3d.model_setEmissionMap(modelID, partID, emissionMapPath);
+						_fe3d->model_setEmissionMap(modelID, partID, emissionMapPath);
 					}
 
 					if(!reflectionMapPath.empty())
@@ -365,7 +365,7 @@ const bool ModelEditor::loadFromFile()
 							reflectionMapPath = string("projects\\" + _currentProjectID + "\\" + reflectionMapPath);
 						}
 
-						_fe3d.model_setReflectionMap(modelID, partID, reflectionMapPath);
+						_fe3d->model_setReflectionMap(modelID, partID, reflectionMapPath);
 					}
 
 					if(!normalMapPath.empty())
@@ -375,18 +375,18 @@ const bool ModelEditor::loadFromFile()
 							normalMapPath = string("projects\\" + _currentProjectID + "\\" + normalMapPath);
 						}
 
-						_fe3d.model_setNormalMap(modelID, partID, normalMapPath);
+						_fe3d->model_setNormalMap(modelID, partID, normalMapPath);
 					}
 
-					_fe3d.model_setColor(modelID, partID, color);
-					_fe3d.model_setSpecular(modelID, partID, isSpecular);
-					_fe3d.model_setSpecularShininess(modelID, partID, specularShininess);
-					_fe3d.model_setSpecularIntensity(modelID, partID, specularIntensity);
-					_fe3d.model_setReflectivity(modelID, partID, reflectivity);
-					_fe3d.model_setLightness(modelID, partID, lightness);
-					_fe3d.model_setTextureRepeat(modelID, partID, textureRepeat);
-					_fe3d.model_setReflective(modelID, partID, isReflective);
-					_fe3d.model_setReflectionType(modelID, partID, ReflectionType(reflectionType));
+					_fe3d->model_setColor(modelID, partID, color);
+					_fe3d->model_setSpecular(modelID, partID, isSpecular);
+					_fe3d->model_setSpecularShininess(modelID, partID, specularShininess);
+					_fe3d->model_setSpecularIntensity(modelID, partID, specularIntensity);
+					_fe3d->model_setReflectivity(modelID, partID, reflectivity);
+					_fe3d->model_setLightness(modelID, partID, lightness);
+					_fe3d->model_setTextureRepeat(modelID, partID, textureRepeat);
+					_fe3d->model_setReflective(modelID, partID, isReflective);
+					_fe3d->model_setReflectionType(modelID, partID, ReflectionType(reflectionType));
 				}
 			}
 		}
@@ -405,12 +405,12 @@ const bool ModelEditor::loadFromFile()
 				size.y >>
 				size.z;
 
-			_fe3d.aabb_create(aabbID, false);
+			_fe3d->aabb_create(aabbID, false);
 
-			_fe3d.aabb_setParentEntityID(aabbID, modelID);
-			_fe3d.aabb_setParentEntityType(aabbID, AabbParentEntityType::MODEL);
-			_fe3d.aabb_setLocalPosition(aabbID, position);
-			_fe3d.aabb_setLocalSize(aabbID, size);
+			_fe3d->aabb_setParentEntityID(aabbID, modelID);
+			_fe3d->aabb_setParentEntityType(aabbID, AabbParentEntityType::MODEL);
+			_fe3d->aabb_setLocalPosition(aabbID, position);
+			_fe3d->aabb_setLocalSize(aabbID, size);
 		}
 		else
 		{

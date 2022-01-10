@@ -89,9 +89,9 @@ const bool QuadEditor::loadFromFile()
 
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 
-		_fe3d.quad_create(quadID, true);
+		_fe3d->quad_create(quadID, true);
 
-		if(_fe3d.quad_isExisting(quadID))
+		if(_fe3d->quad_isExisting(quadID))
 		{
 			_loadedQuadIDs.push_back(quadID);
 
@@ -102,10 +102,10 @@ const bool QuadEditor::loadFromFile()
 					diffuseMapPath = string("projects\\" + _currentProjectID + "\\" + diffuseMapPath);
 				}
 
-				_fe3d.quad_setDiffuseMap(quadID, diffuseMapPath);
+				_fe3d->quad_setDiffuseMap(quadID, diffuseMapPath);
 			}
 
-			_fe3d.quad_setVisible(quadID, false);
+			_fe3d->quad_setVisible(quadID, false);
 		}
 	}
 

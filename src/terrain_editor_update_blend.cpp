@@ -8,12 +8,12 @@ void TerrainEditor::_updateBlendMapMenu()
 
 	if(screen->getID() == "terrainEditorMenuBlendMap")
 	{
-		if((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
+		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getOverlay()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blendMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blendMap")->isHovered())
 		{
 			if(_currentProjectID.empty())
 			{
@@ -43,14 +43,14 @@ void TerrainEditor::_updateBlendMapMenu()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearImageCache(finalFilePath);
-			_fe3d.terrain_setBlendMap(_currentTerrainID, finalFilePath);
+			_fe3d->misc_clearImageCache(finalFilePath);
+			_fe3d->terrain_setBlendMap(_currentTerrainID, finalFilePath);
 		}
-		else if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
-			_fe3d.terrain_setBlendMap(_currentTerrainID, "");
+			_fe3d->terrain_setBlendMap(_currentTerrainID, "");
 		}
 
-		screen->getButton("clearMaps")->setHoverable(_fe3d.terrain_hasBlendMap(_currentTerrainID));
+		screen->getButton("clearMaps")->setHoverable(_fe3d->terrain_hasBlendMap(_currentTerrainID));
 	}
 }

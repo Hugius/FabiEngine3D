@@ -91,9 +91,9 @@ const bool SoundEditor::loadFromFile()
 			audioPath = string("projects\\" + _currentProjectID + "\\" + audioPath);
 		}
 
-		_fe3d.sound2d_create(soundID, audioPath);
+		_fe3d->sound2d_create(soundID, audioPath);
 
-		if(_fe3d.sound2d_isExisting(soundID))
+		if(_fe3d->sound2d_isExisting(soundID))
 		{
 			_loadedSoundIDs.push_back(soundID);
 		}

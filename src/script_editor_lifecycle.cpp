@@ -43,20 +43,20 @@ void ScriptEditor::load()
 {
 	_loadGUI();
 
-	_fe3d.camera_reset();
-	_fe3d.camera_setPosition(CAMERA_POSITION);
-	_fe3d.camera_setFOV(CAMERA_FOV);
-	_fe3d.camera_setYaw(270.0f);
-	_fe3d.camera_setPitch(0.0f);
+	_fe3d->camera_reset();
+	_fe3d->camera_setPosition(CAMERA_POSITION);
+	_fe3d->camera_setFOV(CAMERA_FOV);
+	_fe3d->camera_setYaw(270.0f);
+	_fe3d->camera_setPitch(0.0f);
 
-	_fe3d.gfx_enableBloom();
-	_fe3d.gfx_setBloomType(BloomType::PARTS);
-	_fe3d.gfx_setBloomIntensity(0.95f);
-	_fe3d.gfx_setBloomBlurCount(2);
-	_fe3d.gfx_setBloomQuality(BLOOM_QUALITY);
+	_fe3d->gfx_enableBloom();
+	_fe3d->gfx_setBloomType(BloomType::PARTS);
+	_fe3d->gfx_setBloomIntensity(0.95f);
+	_fe3d->gfx_setBloomBlurCount(2);
+	_fe3d->gfx_setBloomQuality(BLOOM_QUALITY);
 
-	_fe3d.sky_selectMainSky("");
-	_fe3d.misc_setBackgroundColor(BACKGROUND_COLOR);
+	_fe3d->sky_selectMainSky("");
+	_fe3d->misc_setBackgroundColor(BACKGROUND_COLOR);
 
 	_isEditorLoaded = true;
 }
@@ -65,11 +65,11 @@ void ScriptEditor::unload()
 {
 	_unloadGUI();
 
-	_fe3d.gfx_disableBloom(true);
+	_fe3d->gfx_disableBloom(true);
 
-	_fe3d.billboard_deleteAll();
+	_fe3d->billboard_deleteAll();
 
-	_fe3d.aabb_deleteAll();
+	_fe3d->aabb_deleteAll();
 
 	_script.reset();
 

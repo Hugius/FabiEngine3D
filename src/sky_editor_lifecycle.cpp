@@ -19,12 +19,12 @@ void SkyEditor::load()
 {
 	_loadGUI();
 
-	_fe3d.camera_reset();
-	_fe3d.camera_setCursorSensitivity(CURSOR_SENSITIVITY);
+	_fe3d->camera_reset();
+	_fe3d->camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 
-	_fe3d.gfx_enableMotionBlur();
-	_fe3d.gfx_setMotionBlurStrength(0.1f);
-	_fe3d.gfx_setMotionBlurQuality(Config::MAX_MOTION_BLUR_QUALITY);
+	_fe3d->gfx_enableMotionBlur();
+	_fe3d->gfx_setMotionBlurStrength(0.1f);
+	_fe3d->gfx_setMotionBlurQuality(Config::MAX_MOTION_BLUR_QUALITY);
 
 	_gui.getOverlay()->createTextField("skyID", fvec2(0.0f, 0.85f), fvec2(0.5f, 0.1f), "", fvec3(0.0f), true);
 
@@ -35,12 +35,12 @@ void SkyEditor::unload()
 {
 	for(const auto& ID : _loadedSkyIDs)
 	{
-		_fe3d.sky_delete(ID);
+		_fe3d->sky_delete(ID);
 	}
 
 	_unloadGUI();
 
-	_fe3d.gfx_disableMotionBlur(true);
+	_fe3d->gfx_disableMotionBlur(true);
 
 	_gui.getOverlay()->deleteTextField("skyID");
 
@@ -51,9 +51,9 @@ void SkyEditor::unload()
 	_isChoosingSky = false;
 	_isDeletingSky = false;
 
-	if(_fe3d.camera_isThirdPersonViewEnabled())
+	if(_fe3d->camera_isThirdPersonViewEnabled())
 	{
-		_fe3d.camera_disableThirdPersonView();
+		_fe3d->camera_disableThirdPersonView();
 	}
 }
 

@@ -45,7 +45,7 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 		newAnimation->addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f));
 		defaultFrame.addPart("", fvec3(0.0f), fvec3(0.0f), fvec3(0.0f), Animation3dSpeedType::LINEAR, TransformationType::MOVEMENT);
 
-		auto partIDs = _fe3d.model_getPartIDs(previewModelID);
+		auto partIDs = _fe3d->model_getPartIDs(previewModelID);
 		if(partIDs.size() > 1)
 		{
 			for(const auto& partID : partIDs)
@@ -118,20 +118,20 @@ const bool Animation3dEditor::loadFromFile(bool mustCheckPreviewModel)
 
 		if(mustCheckPreviewModel)
 		{
-			if(_fe3d.model_isExisting(newAnimation->getPreviewModelID()))
+			if(_fe3d->model_isExisting(newAnimation->getPreviewModelID()))
 			{
 				bool hasAllParts = true;
 				for(const auto& partID : newAnimation->getPartIDs())
 				{
 					if(!partID.empty())
 					{
-						hasAllParts = hasAllParts && _fe3d.model_hasPart(newAnimation->getPreviewModelID(), partID);
+						hasAllParts = hasAllParts && _fe3d->model_hasPart(newAnimation->getPreviewModelID(), partID);
 					}
 				}
 
 				if(hasAllParts)
 				{
-					newAnimation->setInitialSize(_fe3d.model_getBaseSize(newAnimation->getPreviewModelID()));
+					newAnimation->setInitialSize(_fe3d->model_getBaseSize(newAnimation->getPreviewModelID()));
 				}
 				else
 				{

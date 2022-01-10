@@ -23,7 +23,7 @@ const bool QuadEditor::saveToFile() const
 
 	for(const auto& quadID : _loadedQuadIDs)
 	{
-		auto diffuseMapPath = _fe3d.quad_getDiffuseMapPath(quadID);
+		auto diffuseMapPath = _fe3d->quad_getDiffuseMapPath(quadID);
 
 		diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 

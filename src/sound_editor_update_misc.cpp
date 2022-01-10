@@ -4,23 +4,23 @@
 
 void SoundEditor::_updateMiscellaneous()
 {
-	bool isExisting = _fe3d.sound2d_isExisting(_currentSoundID);
-	bool isPlaying = isExisting && _fe3d.sound2d_isPlaying(_currentSoundID);
-	bool isPaused = isExisting && _fe3d.sound2d_isPaused(_currentSoundID);
+	bool isExisting = _fe3d->sound2d_isExisting(_currentSoundID);
+	bool isPlaying = isExisting && _fe3d->sound2d_isPlaying(_currentSoundID);
+	bool isPaused = isExisting && _fe3d->sound2d_isPaused(_currentSoundID);
 
 	if(isPlaying)
 	{
-		_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\start.tga");
+		_fe3d->billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\start.tga");
 	}
 	else if(isPaused)
 	{
-		_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\pause.tga");
+		_fe3d->billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\pause.tga");
 	}
 	else
 	{
-		_fe3d.billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\stop.tga");
+		_fe3d->billboard_setDiffuseMap("@@icon", "engine\\assets\\image\\diffuse_map\\stop.tga");
 	}
-	_fe3d.billboard_rotate("@@icon", fvec3(0.0f, 0.5f, 0.0f));
+	_fe3d->billboard_rotate("@@icon", fvec3(0.0f, 0.5f, 0.0f));
 }
 
 void SoundEditor::_updateSoundCreating()
@@ -82,18 +82,18 @@ void SoundEditor::_updateSoundCreating()
 			}
 
 			const string finalFilePath = filePath.substr(rootPath.size());
-			_fe3d.misc_clearAudioCache(finalFilePath);
-			_fe3d.sound2d_create(newSoundID, finalFilePath);
+			_fe3d->misc_clearAudioCache(finalFilePath);
+			_fe3d->sound2d_create(newSoundID, finalFilePath);
 
-			if(_fe3d.sound2d_isExisting(newSoundID))
+			if(_fe3d->sound2d_isExisting(newSoundID))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
 
 				_currentSoundID = newSoundID;
 				_loadedSoundIDs.push_back(newSoundID);
 
-				_fe3d.text_setContent(_gui.getOverlay()->getTextField("soundID")->getEntityID(), "Sound: " + newSoundID.substr(1), 0.025f);
-				_fe3d.text_setVisible(_gui.getOverlay()->getTextField("soundID")->getEntityID(), true);
+				_fe3d->text_setContent(_gui.getOverlay()->getTextField("soundID")->getEntityID(), "Sound: " + newSoundID.substr(1), 0.025f);
+				_fe3d->text_setVisible(_gui.getOverlay()->getTextField("soundID")->getEntityID(), true);
 				_isCreatingSound = false;
 			}
 		}
@@ -108,7 +108,7 @@ void SoundEditor::_updateSoundChoosing()
 
 		if(!selectedButtonID.empty())
 		{
-			if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				_currentSoundID = ("@" + selectedButtonID);
 
@@ -116,8 +116,8 @@ void SoundEditor::_updateSoundChoosing()
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
 
-					_fe3d.text_setContent(_gui.getOverlay()->getTextField("soundID")->getEntityID(), "Sound: " + selectedButtonID.substr(1), 0.025f);
-					_fe3d.text_setVisible(_gui.getOverlay()->getTextField("soundID")->getEntityID(), true);
+					_fe3d->text_setContent(_gui.getOverlay()->getTextField("soundID")->getEntityID(), "Sound: " + selectedButtonID.substr(1), 0.025f);
+					_fe3d->text_setVisible(_gui.getOverlay()->getTextField("soundID")->getEntityID(), true);
 				}
 
 				_gui.getOverlay()->deleteChoiceForm("soundList");
@@ -144,7 +144,7 @@ void SoundEditor::_updateSoundDeleting()
 
 		if(_gui.getOverlay()->isAnswerFormConfirmed("delete"))
 		{
-			_fe3d.sound2d_delete(_currentSoundID);
+			_fe3d->sound2d_delete(_currentSoundID);
 
 			_loadedSoundIDs.erase(remove(_loadedSoundIDs.begin(), _loadedSoundIDs.end(), _currentSoundID), _loadedSoundIDs.end());
 			_currentSoundID = "";

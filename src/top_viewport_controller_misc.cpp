@@ -144,11 +144,11 @@ void TopViewportController::_applyProjectChange()
 {
 	if(_currentProjectID.empty())
 	{
-		_fe3d.misc_setWindowTitle("FabiEngine3D");
+		_fe3d->misc_setWindowTitle("FabiEngine3D");
 	}
 	else
 	{
-		_fe3d.misc_setWindowTitle("FabiEngine3D - " + _currentProjectID);
+		_fe3d->misc_setWindowTitle("FabiEngine3D - " + _currentProjectID);
 	}
 
 	_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");

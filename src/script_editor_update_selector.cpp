@@ -7,35 +7,35 @@ using std::min;
 void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& cursorLineIndex,
 									   unsigned int& cursorCharIndex, int& hoveredLineIndex, bool& textHasChanged)
 {
-	bool isControlKeyDown = (_fe3d.input_isKeyDown(InputType::KEY_LCTRL) || _fe3d.input_isKeyDown(InputType::KEY_RCTRL));
+	bool isControlKeyDown = (_fe3d->input_isKeyDown(InputType::KEY_LCTRL) || _fe3d->input_isKeyDown(InputType::KEY_RCTRL));
 
 	if(_firstSelectedLineIndex != -1)
 	{
-		if(_hasClickedLMB || _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT) ||
+		if(_hasClickedLMB || _fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT) ||
 		   _activeActionKey != InputType::NONE ||
 		   !newCharacters.empty() ||
-		   (isControlKeyDown && _fe3d.input_isKeyPressed(InputType::KEY_V)) ||
-		   (isControlKeyDown && _fe3d.input_isKeyPressed(InputType::KEY_X)))
+		   (isControlKeyDown && _fe3d->input_isKeyPressed(InputType::KEY_V)) ||
+		   (isControlKeyDown && _fe3d->input_isKeyPressed(InputType::KEY_X)))
 		{
-			for(const auto& ID : _fe3d.billboard_getIDs())
+			for(const auto& ID : _fe3d->billboard_getIDs())
 			{
 				if(ID.substr(0, string("selection_").size()) == "selection_")
 				{
-					_fe3d.billboard_delete(ID);
+					_fe3d->billboard_delete(ID);
 				}
 			}
 
-			if(isControlKeyDown && _fe3d.input_isKeyPressed(InputType::KEY_X))
+			if(isControlKeyDown && _fe3d->input_isKeyPressed(InputType::KEY_X))
 			{
 				_copySelectedText();
 			}
 
 			if(!newCharacters.empty() ||
-			   _fe3d.input_isKeyPressed(InputType::KEY_BACKSPACE) ||
-			   _fe3d.input_isKeyPressed(InputType::KEY_DELETE) ||
-			   _fe3d.input_isKeyPressed(InputType::KEY_ENTER) ||
-			   (isControlKeyDown && _fe3d.input_isKeyPressed(InputType::KEY_V) && !_copyClipboard.empty()) ||
-			   (isControlKeyDown && _fe3d.input_isKeyPressed(InputType::KEY_X)))
+			   _fe3d->input_isKeyPressed(InputType::KEY_BACKSPACE) ||
+			   _fe3d->input_isKeyPressed(InputType::KEY_DELETE) ||
+			   _fe3d->input_isKeyPressed(InputType::KEY_ENTER) ||
+			   (isControlKeyDown && _fe3d->input_isKeyPressed(InputType::KEY_V) && !_copyClipboard.empty()) ||
+			   (isControlKeyDown && _fe3d->input_isKeyPressed(InputType::KEY_X)))
 			{
 				if(_lastSelectedLineIndex == -1)
 				{
@@ -64,7 +64,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 
 				_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex, newCharacters);
 
-				if(_fe3d.input_isKeyPressed(InputType::KEY_ENTER))
+				if(_fe3d->input_isKeyPressed(InputType::KEY_ENTER))
 				{
 					if(_script.getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_COUNT)
 					{
@@ -83,33 +83,33 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 		}
 	}
 
-	if(_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && _fe3d.misc_isCursorInsideViewport())
+	if(_fe3d->input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && _fe3d->misc_isCursorInsideViewport())
 	{
 		if(hoveredLineIndex != -1)
 		{
 			string selectionID = ("selection_" + to_string(hoveredLineIndex));
 			string textID = ("text_" + to_string(hoveredLineIndex));
 
-			if(!_fe3d.billboard_isExisting(selectionID) && _fe3d.billboard_isExisting(textID))
+			if(!_fe3d->billboard_isExisting(selectionID) && _fe3d->billboard_isExisting(textID))
 			{
-				if(_fe3d.billboard_getTextContent(textID).empty())
+				if(_fe3d->billboard_getTextContent(textID).empty())
 				{
-					fvec3 lineTextPosition = (_fe3d.billboard_getPosition(textID));
+					fvec3 lineTextPosition = (_fe3d->billboard_getPosition(textID));
 					lineTextPosition.x = (SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET);
 					lineTextPosition.z -= SELECTION_DEPTH;
-					_fe3d.billboard_create(selectionID, false);
-					_fe3d.billboard_setColor(selectionID, SELECTION_COLOR);
-					_fe3d.billboard_setPosition(selectionID, lineTextPosition);
-					_fe3d.billboard_setSize(selectionID, TEXT_CHARACTER_SIZE);
+					_fe3d->billboard_create(selectionID, false);
+					_fe3d->billboard_setColor(selectionID, SELECTION_COLOR);
+					_fe3d->billboard_setPosition(selectionID, lineTextPosition);
+					_fe3d->billboard_setSize(selectionID, TEXT_CHARACTER_SIZE);
 				}
 				else
 				{
-					const fvec3 lineTextPosition = (_fe3d.billboard_getPosition(textID) - fvec3(0.0f, 0.0f, SELECTION_DEPTH));
-					const auto lineTextSize = (_fe3d.billboard_getSize(textID));
-					_fe3d.billboard_create(selectionID, false);
-					_fe3d.billboard_setColor(selectionID, SELECTION_COLOR);
-					_fe3d.billboard_setPosition(selectionID, lineTextPosition);
-					_fe3d.billboard_setSize(selectionID, lineTextSize);
+					const fvec3 lineTextPosition = (_fe3d->billboard_getPosition(textID) - fvec3(0.0f, 0.0f, SELECTION_DEPTH));
+					const auto lineTextSize = (_fe3d->billboard_getSize(textID));
+					_fe3d->billboard_create(selectionID, false);
+					_fe3d->billboard_setColor(selectionID, SELECTION_COLOR);
+					_fe3d->billboard_setPosition(selectionID, lineTextPosition);
+					_fe3d->billboard_setSize(selectionID, lineTextSize);
 				}
 			}
 
@@ -127,7 +127,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 					if((lastDirection < 0 && currentDirection > 0) ||
 					   (currentDirection < 0 && lastDirection > 0))
 					{
-						_fe3d.billboard_delete("selection_" + to_string(_lastSelectedLineIndex));
+						_fe3d->billboard_delete("selection_" + to_string(_lastSelectedLineIndex));
 					}
 				}
 
@@ -153,11 +153,11 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 
 		if(isControlKeyDown)
 		{
-			if(_fe3d.input_isKeyPressed(InputType::KEY_C))
+			if(_fe3d->input_isKeyPressed(InputType::KEY_C))
 			{
 				_copySelectedText();
 			}
-			else if(_fe3d.input_isKeyPressed(InputType::KEY_V))
+			else if(_fe3d->input_isKeyPressed(InputType::KEY_V))
 			{
 				if(!_copyClipboard.empty())
 				{

@@ -9,77 +9,77 @@ void BottomViewportController::_updateStatistics()
 	auto consoleScreen = _gui.getViewport("bottom")->getWindow("statistics")->getScreen("main");
 
 	static vector<float> fpsList;
-	if(_fe3d.misc_checkInterval(100))
+	if(_fe3d->misc_checkInterval(100))
 	{
 		sort(fpsList.begin(), fpsList.end());
 		float fps = fpsList.empty() ? -1.0f : fpsList[49];
 
 		string fpsTextID = statisticsScreen->getTextField("fps")->getEntityID();
 		string text = "FPS: " + to_string(static_cast<int>(fps));
-		_fe3d.text_setContent(fpsTextID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d->text_setContent(fpsTextID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 		fpsList.clear();
 	}
 	else
 	{
-		fpsList.push_back(_fe3d.misc_getFPS());
+		fpsList.push_back(_fe3d->misc_getFPS());
 	}
 
-	if(_fe3d.misc_checkInterval(100))
+	if(_fe3d->misc_checkInterval(100))
 	{
 		string textID = statisticsScreen->getTextField("cpuModel")->getEntityID();
-		string text = ("CPU: " + _fe3d.misc_getCpuName());
-		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		string text = ("CPU: " + _fe3d->misc_getCpuName());
+		_fe3d->text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if(_fe3d.misc_checkInterval(100))
+	if(_fe3d->misc_checkInterval(100))
 	{
 		string textID = statisticsScreen->getTextField("gpuModel")->getEntityID();
-		string text = ("GPU: " + _fe3d.misc_getGpuName());
-		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		string text = ("GPU: " + _fe3d->misc_getGpuName());
+		_fe3d->text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if(_fe3d.misc_checkInterval(100))
+	if(_fe3d->misc_checkInterval(100))
 	{
 		string textID = statisticsScreen->getTextField("openglVersion")->getEntityID();
-		string text = "OpenGL Version: " + _fe3d.misc_getOpenglVersion();
-		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		string text = "OpenGL Version: " + _fe3d->misc_getOpenglVersion();
+		_fe3d->text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if(_fe3d.misc_checkInterval(1))
+	if(_fe3d->misc_checkInterval(1))
 	{
 		string textID = statisticsScreen->getTextField("cameraPositionYawPitch")->getEntityID();
 		string text = ("Camera Position/Yaw/Pitch: " +
-					   to_string(static_cast<int>(_fe3d.camera_getPosition().x)) + " " +
-					   to_string(static_cast<int>(_fe3d.camera_getPosition().y)) + " " +
-					   to_string(static_cast<int>(_fe3d.camera_getPosition().z)) + " " +
-					   to_string(static_cast<int>(_fe3d.camera_getYaw())) + " " +
-					   to_string(static_cast<int>(_fe3d.camera_getPitch())));
-		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+					   to_string(static_cast<int>(_fe3d->camera_getPosition().x)) + " " +
+					   to_string(static_cast<int>(_fe3d->camera_getPosition().y)) + " " +
+					   to_string(static_cast<int>(_fe3d->camera_getPosition().z)) + " " +
+					   to_string(static_cast<int>(_fe3d->camera_getYaw())) + " " +
+					   to_string(static_cast<int>(_fe3d->camera_getPitch())));
+		_fe3d->text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if(_fe3d.misc_checkInterval(1))
+	if(_fe3d->misc_checkInterval(1))
 	{
 		string textID = statisticsScreen->getTextField("cursorPosition")->getEntityID();
 		string text = "Raycast Direction: " +
-			to_string(static_cast<int>(_fe3d.raycast_getCursorRay().getDirection().x * 100.0f)) + "% " +
-			to_string(static_cast<int>(_fe3d.raycast_getCursorRay().getDirection().y * 100.0f)) + "% " +
-			to_string(static_cast<int>(_fe3d.raycast_getCursorRay().getDirection().z * 100.0f)) + "%";
-		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+			to_string(static_cast<int>(_fe3d->raycast_getCursorRay().getDirection().x * 100.0f)) + "% " +
+			to_string(static_cast<int>(_fe3d->raycast_getCursorRay().getDirection().y * 100.0f)) + "% " +
+			to_string(static_cast<int>(_fe3d->raycast_getCursorRay().getDirection().z * 100.0f)) + "%";
+		_fe3d->text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if(_fe3d.misc_checkInterval(10))
+	if(_fe3d->misc_checkInterval(10))
 	{
 		string textID = statisticsScreen->getTextField("triangleCount")->getEntityID();
-		string text = "Triangles: " + to_string(static_cast<int>(_fe3d.misc_getTriangleCount()));
-		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		string text = "Triangles: " + to_string(static_cast<int>(_fe3d->misc_getTriangleCount()));
+		_fe3d->text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if(_fe3d.misc_checkInterval(10))
+	if(_fe3d->misc_checkInterval(10))
 	{
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d.model_getIDs())
+		for(const auto& entityID : _fe3d->model_getIDs())
 		{
-			if(_fe3d.model_isVisible(entityID))
+			if(_fe3d->model_isVisible(entityID))
 			{
 				entityCount++;
 			}
@@ -87,15 +87,15 @@ void BottomViewportController::_updateStatistics()
 
 		string textID = statisticsScreen->getTextField("modelEntityCount")->getEntityID();
 		string text = "Model Entities: " + to_string(entityCount);
-		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d->text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if(_fe3d.misc_checkInterval(10))
+	if(_fe3d->misc_checkInterval(10))
 	{
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d.billboard_getIDs())
+		for(const auto& entityID : _fe3d->billboard_getIDs())
 		{
-			if(_fe3d.billboard_isVisible(entityID))
+			if(_fe3d->billboard_isVisible(entityID))
 			{
 				entityCount++;
 			}
@@ -103,15 +103,15 @@ void BottomViewportController::_updateStatistics()
 
 		string textID = statisticsScreen->getTextField("billboardEntityCount")->getEntityID();
 		string text = "Billboard Entities: " + to_string(entityCount);
-		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d->text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if(_fe3d.misc_checkInterval(10))
+	if(_fe3d->misc_checkInterval(10))
 	{
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d.aabb_getIDs())
+		for(const auto& entityID : _fe3d->aabb_getIDs())
 		{
-			if(_fe3d.aabb_isVisible(entityID))
+			if(_fe3d->aabb_isVisible(entityID))
 			{
 				entityCount++;
 			}
@@ -119,22 +119,22 @@ void BottomViewportController::_updateStatistics()
 
 		string textID = statisticsScreen->getTextField("aabbEntityCount")->getEntityID();
 		string text = "AABB Entities: " + to_string(entityCount);
-		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d->text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if(_fe3d.misc_checkInterval(10))
+	if(_fe3d->misc_checkInterval(10))
 	{
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d.pointlight_getIDs())
+		for(const auto& entityID : _fe3d->pointlight_getIDs())
 		{
-			if(_fe3d.pointlight_isVisible(entityID))
+			if(_fe3d->pointlight_isVisible(entityID))
 			{
 				entityCount++;
 			}
 		}
-		for(const auto& entityID : _fe3d.spotlight_getIDs())
+		for(const auto& entityID : _fe3d->spotlight_getIDs())
 		{
-			if(_fe3d.spotlight_isVisible(entityID))
+			if(_fe3d->spotlight_isVisible(entityID))
 			{
 				entityCount++;
 			}
@@ -142,15 +142,15 @@ void BottomViewportController::_updateStatistics()
 
 		string textID = statisticsScreen->getTextField("lightEntityCount")->getEntityID();
 		string text = "Light Entities: " + to_string(entityCount);
-		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d->text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if(_fe3d.misc_checkInterval(10))
+	if(_fe3d->misc_checkInterval(10))
 	{
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d.reflection_getIDs())
+		for(const auto& entityID : _fe3d->reflection_getIDs())
 		{
-			if(_fe3d.reflection_isVisible(entityID))
+			if(_fe3d->reflection_isVisible(entityID))
 			{
 				entityCount++;
 			}
@@ -158,22 +158,22 @@ void BottomViewportController::_updateStatistics()
 
 		string textID = statisticsScreen->getTextField("reflectionEntityCount")->getEntityID();
 		string text = "Reflection Entities: " + to_string(entityCount);
-		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d->text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if(_fe3d.misc_checkInterval(10))
+	if(_fe3d->misc_checkInterval(10))
 	{
 		unsigned int entityCount = 0;
-		for(const auto& entityID : _fe3d.quad_getIDs())
+		for(const auto& entityID : _fe3d->quad_getIDs())
 		{
-			if(_fe3d.quad_isVisible(entityID))
+			if(_fe3d->quad_isVisible(entityID))
 			{
 				entityCount++;
 			}
 		}
-		for(const auto& entityID : _fe3d.text_getIDs())
+		for(const auto& entityID : _fe3d->text_getIDs())
 		{
-			if(_fe3d.text_isVisible(entityID))
+			if(_fe3d->text_isVisible(entityID))
 			{
 				entityCount++;
 			}
@@ -181,30 +181,30 @@ void BottomViewportController::_updateStatistics()
 
 		string textID = statisticsScreen->getTextField("quadEntityCount")->getEntityID();
 		string text = "GUI Entities: " + to_string(entityCount);
-		_fe3d.text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+		_fe3d->text_setContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	if(_fe3d.misc_checkInterval(50))
+	if(_fe3d->misc_checkInterval(50))
 	{
-		auto updateStatistics = _fe3d.misc_getUpdateProfilingStatistics();
+		auto updateStatistics = _fe3d->misc_getUpdateProfilingStatistics();
 		for(const auto& [key, value] : updateStatistics)
 		{
 			string textID = statisticsScreen->getTextField(key)->getEntityID();
-			_fe3d.text_setContent(textID, key + ": " + to_string(value) + "%", CHAR_SIZE.x, CHAR_SIZE.y);
+			_fe3d->text_setContent(textID, key + ": " + to_string(value) + "%", CHAR_SIZE.x, CHAR_SIZE.y);
 		}
 	}
 
-	if(_fe3d.misc_checkInterval(50))
+	if(_fe3d->misc_checkInterval(50))
 	{
-		auto renderStatistics = _fe3d.misc_getRenderProfilingStatistics();
+		auto renderStatistics = _fe3d->misc_getRenderProfilingStatistics();
 		for(const auto& [key, value] : renderStatistics)
 		{
 			string textID = statisticsScreen->getTextField(key)->getEntityID();
-			_fe3d.text_setContent(textID, key + ": " + to_string(value) + "%", CHAR_SIZE.x, CHAR_SIZE.y);
+			_fe3d->text_setContent(textID, key + ": " + to_string(value) + "%", CHAR_SIZE.x, CHAR_SIZE.y);
 		}
 	}
 
-	if(_fe3d.input_isKeyPressed(InputType::KEY_C) && _gui.getViewport("bottom")->getWindow("console")->isHovered())
+	if(_fe3d->input_isKeyPressed(InputType::KEY_C) && _gui.getViewport("bottom")->getWindow("console")->isHovered())
 	{
 		if(!_topViewportController.isScriptRunning() && !_gui.getOverlay()->isFocused() && !_scriptEditor.isWritingScript())
 		{

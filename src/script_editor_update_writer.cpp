@@ -6,12 +6,12 @@ void ScriptEditor::_updateTextWriter()
 {
 	if(_isEditorLoaded && _isWritingScript && !_gui.getOverlay()->isFocused() && !_wasGuiFocused)
 	{
-		if(_fe3d.misc_isCursorInsideViewport())
+		if(_fe3d->misc_isCursorInsideViewport())
 		{
-			_fe3d.quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_text.tga");
+			_fe3d->quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_text.tga");
 		}
 
-		if(_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isCursorInsideViewport())
+		if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d->misc_isCursorInsideViewport())
 		{
 			_reloadScriptTextDisplay(true);
 			_hasClickedLMB = true;
@@ -23,7 +23,7 @@ void ScriptEditor::_updateTextWriter()
 		unsigned int cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getCursorCharIndex();
 		string newCharacters = "";
 
-		auto hoveredBillboardID = _fe3d.raycast_checkCursorInAny().first;
+		auto hoveredBillboardID = _fe3d->raycast_checkCursorInAny().first;
 		int hoveredLineIndex = -1;
 		int hoveredCharacterIndex = -1;
 		if(!hoveredBillboardID.empty())
@@ -60,7 +60,7 @@ void ScriptEditor::_updateTextWriter()
 		{
 			for(InputType actionKey : ACTION_KEYS)
 			{
-				if(_fe3d.input_isKeyPressed(actionKey))
+				if(_fe3d->input_isKeyPressed(actionKey))
 				{
 					_activeActionKey = actionKey;
 					break;
@@ -80,7 +80,7 @@ void ScriptEditor::_updateTextWriter()
 			}
 		}
 
-		if(!_fe3d.input_isKeyDown(_activeActionKey))
+		if(!_fe3d->input_isKeyDown(_activeActionKey))
 		{
 			_activeActionKey = InputType::NONE;
 			_passedFrames = 0;
@@ -112,7 +112,7 @@ void ScriptEditor::_updateTextWriter()
 				{
 					if(_isSingleActionAllowed || _isContinuousActionAllowed)
 					{
-						if(_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
+						if(_fe3d->misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 						{
 							_isSingleActionAllowed = false;
 
@@ -136,7 +136,7 @@ void ScriptEditor::_updateTextWriter()
 		{
 			if(_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
-				if(_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
+				if(_fe3d->misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 				{
 					_isSingleActionAllowed = false;
 
@@ -159,7 +159,7 @@ void ScriptEditor::_updateTextWriter()
 		{
 			if(_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
-				if(_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
+				if(_fe3d->misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 				{
 					_isSingleActionAllowed = false;
 
@@ -182,7 +182,7 @@ void ScriptEditor::_updateTextWriter()
 		{
 			if(_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
-				if(_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
+				if(_fe3d->misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 				{
 					_isSingleActionAllowed = false;
 
@@ -202,7 +202,7 @@ void ScriptEditor::_updateTextWriter()
 		{
 			if(_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
-				if(_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
+				if(_fe3d->misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 				{
 					_isSingleActionAllowed = false;
 
@@ -222,11 +222,11 @@ void ScriptEditor::_updateTextWriter()
 		{
 			string currentLineText = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex);
 
-			if(!_fe3d.input_isKeyDown(InputType::KEY_LCTRL) && !_fe3d.input_isKeyDown(InputType::KEY_RCTRL))
+			if(!_fe3d->input_isKeyDown(InputType::KEY_LCTRL) && !_fe3d->input_isKeyDown(InputType::KEY_RCTRL))
 			{
 				for(const auto& c : ALPHABET_CHARACTERS)
 				{
-					if(_fe3d.input_isKeyPressed(InputType(c)))
+					if(_fe3d->input_isKeyPressed(InputType(c)))
 					{
 						if(c == ' ')
 						{
@@ -234,7 +234,7 @@ void ScriptEditor::_updateTextWriter()
 						}
 						else
 						{
-							if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
+							if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
 							{
 								newCharacters += (c - 32);
 							}
@@ -252,9 +252,9 @@ void ScriptEditor::_updateTextWriter()
 
 				for(const auto& element : NUMBER_CHARACTERS)
 				{
-					if(_fe3d.input_isKeyPressed(InputType(element.first)))
+					if(_fe3d->input_isKeyPressed(InputType(element.first)))
 					{
-						if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
+						if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
 						{
 							newCharacters += element.second;
 						}
@@ -267,9 +267,9 @@ void ScriptEditor::_updateTextWriter()
 
 				for(const auto& element : SPECIAL_CHARACTERS)
 				{
-					if(_fe3d.input_isKeyPressed(InputType(element.first)))
+					if(_fe3d->input_isKeyPressed(InputType(element.first)))
 					{
-						if(_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
+						if(_fe3d->input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d->input_isKeyDown(InputType::KEY_RSHIFT))
 						{
 							newCharacters += element.second;
 						}
@@ -280,7 +280,7 @@ void ScriptEditor::_updateTextWriter()
 					}
 				}
 
-				if(_fe3d.input_isKeyPressed(InputType::KEY_TAB))
+				if(_fe3d->input_isKeyPressed(InputType::KEY_TAB))
 				{
 					newCharacters += "    ";
 				}
@@ -292,7 +292,7 @@ void ScriptEditor::_updateTextWriter()
 				{
 					if(_isSingleActionAllowed || _isContinuousActionAllowed)
 					{
-						if(_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
+						if(_fe3d->misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 						{
 							_isSingleActionAllowed = false;
 
@@ -326,14 +326,14 @@ void ScriptEditor::_updateTextWriter()
 									}
 								}
 							}
-							else if(cursorCharIndex > 0 && _fe3d.input_isKeyDown(InputType::KEY_BACKSPACE))
+							else if(cursorCharIndex > 0 && _fe3d->input_isKeyDown(InputType::KEY_BACKSPACE))
 							{
 								cursorCharIndex--;
 								currentLineText.erase(currentLineText.begin() + cursorCharIndex);
 								textHasChanged = true;
 								_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, currentLineText);
 							}
-							else if(_fe3d.input_isKeyDown(InputType::KEY_DELETE))
+							else if(_fe3d->input_isKeyDown(InputType::KEY_DELETE))
 							{
 								currentLineText.erase(currentLineText.begin() + cursorCharIndex);
 								textHasChanged = true;
@@ -395,27 +395,27 @@ void ScriptEditor::_updateTextWriter()
 			passedBarFrames++;
 		}
 
-		if(!_fe3d.billboard_isExisting("cursor"))
+		if(!_fe3d->billboard_isExisting("cursor"))
 		{
-			_fe3d.billboard_create("cursor", false);
-			_fe3d.billboard_setFont("cursor", FONT_MAP_PATH);
-			_fe3d.billboard_setSize("cursor", TEXT_CHARACTER_SIZE);
+			_fe3d->billboard_create("cursor", false);
+			_fe3d->billboard_setFont("cursor", FONT_MAP_PATH);
+			_fe3d->billboard_setSize("cursor", TEXT_CHARACTER_SIZE);
 		}
 
 		fvec3 position;
 		if(cursorCharIndex == 0)
 		{
-			fvec3 linePosition = _fe3d.billboard_getPosition(to_string(cursorLineIndex));
+			fvec3 linePosition = _fe3d->billboard_getPosition(to_string(cursorLineIndex));
 			position = fvec3(SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET - HORIZONTAL_CHARACTER_OFFSET, linePosition.y, linePosition.z);
 		}
 		else
 		{
-			position = _fe3d.billboard_getPosition(to_string(cursorLineIndex) + "_" + to_string(cursorCharIndex - 1));
+			position = _fe3d->billboard_getPosition(to_string(cursorLineIndex) + "_" + to_string(cursorCharIndex - 1));
 		}
 		position += fvec3(TEXT_CHARACTER_SIZE.x / 2.0f, 0.0f, 0.0f);
-		_fe3d.billboard_setPosition("cursor", position);
+		_fe3d->billboard_setPosition("cursor", position);
 		bool showBar = ((barEnabled && _firstSelectedLineIndex == -1) || _activeActionKey != InputType::NONE);
-		_fe3d.billboard_setTextContent("cursor", (showBar ? "|" : " "));
+		_fe3d->billboard_setTextContent("cursor", (showBar ? "|" : " "));
 
 		_script.getScriptFile(_currentScriptFileID)->setCursorLineIndex(cursorLineIndex);
 		_script.getScriptFile(_currentScriptFileID)->setCursorCharIndex(cursorCharIndex);

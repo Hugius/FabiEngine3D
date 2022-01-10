@@ -51,7 +51,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 					_fe3d->quad_setMaxPosition(args[0].getString(), maxPosition);
 				}
 
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -64,7 +64,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				_fe3d->quad_delete(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -80,7 +80,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 				}
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:quad_set_visible")
@@ -92,7 +92,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				_fe3d->quad_setVisible(args[0].getString(), args[1].getBoolean());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -106,7 +106,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 			{
 				auto position = _convertGuiPositionToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				_fe3d->quad_setPosition(args[0].getString(), position);
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -120,7 +120,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 			{
 				fvec2 change = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				_fe3d->quad_move(args[0].getString(), change);
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -135,7 +135,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 				fvec2 target = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				fvec2 speed = _convertGuiSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
 				_fe3d->quad_moveTo(args[0].getString(), target, speed.x);
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -148,7 +148,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				_fe3d->quad_setRotation(args[0].getString(), args[1].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -161,7 +161,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				_fe3d->quad_rotate(args[0].getString(), args[1].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -174,7 +174,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				_fe3d->quad_rotateTo(args[0].getString(), args[1].getDecimal(), args[2].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -188,7 +188,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 			{
 				fvec2 size = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				_fe3d->quad_setSize(args[0].getString(), size);
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -202,7 +202,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 			{
 				fvec2 change = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				_fe3d->quad_scale(args[0].getString(), change);
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -217,7 +217,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 				fvec2 target = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				fvec2 speed = _convertGuiSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
 				_fe3d->quad_scaleTo(args[0].getString(), target, speed.x);
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -231,7 +231,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 			{
 				_fe3d->quad_setColor(args[0].getString(),
 									 fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -245,7 +245,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 			{
 				_fe3d->quad_setWireframeColor(args[0].getString(),
 											  fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -258,7 +258,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				_fe3d->quad_setTransparency(args[0].getString(), args[1].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -271,7 +271,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				_fe3d->quad_setWireframed(args[0].getString(), args[1].getBoolean());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -284,7 +284,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				_fe3d->quad_setMirroredHorizontally(args[0].getString(), args[1].getBoolean());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -297,7 +297,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
 				_fe3d->quad_setMirroredVertically(args[0].getString(), args[1].getBoolean());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}

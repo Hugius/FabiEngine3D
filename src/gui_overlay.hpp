@@ -10,7 +10,7 @@
 class GuiOverlay final
 {
 public:
-	GuiOverlay(EngineInterface& fe3d);
+	void inject(shared_ptr<EngineInterface> fe3d);
 
 	void update();
 	void setFocused(bool value);
@@ -88,5 +88,5 @@ private:
 	bool _isFocused = false;
 	bool _mustDeleteValueForms = false;
 
-	EngineInterface& _fe3d;
+	shared_ptr<EngineInterface> _fe3d;
 };

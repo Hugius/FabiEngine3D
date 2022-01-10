@@ -31,16 +31,16 @@ const bool ScriptEditor::saveScriptFiles()
 	}
 	_scriptFileNamesToDelete.clear();
 
-	for(const auto& scriptID : _script.getScriptFileIDs())
+	for(const auto& scriptID : _script->getScriptFileIDs())
 	{
 		const auto rootPath = Tools::getRootDirectoryPath();
 		ofstream file(rootPath + "projects\\" + _currentProjectID + "\\scripts\\" + scriptID + ".fe3d");
 
-		file << _script.getScriptFile(scriptID)->getCursorLineIndex() << " " << _script.getScriptFile(scriptID)->getCursorCharIndex() << endl;
+		file << _script->getScriptFile(scriptID)->getCursorLineIndex() << " " << _script->getScriptFile(scriptID)->getCursorCharIndex() << endl;
 
-		for(unsigned int lineIndex = 0; lineIndex < _script.getScriptFile(scriptID)->getLineCount(); lineIndex++)
+		for(unsigned int lineIndex = 0; lineIndex < _script->getScriptFile(scriptID)->getLineCount(); lineIndex++)
 		{
-			file << _script.getScriptFile(scriptID)->getLineText(lineIndex) << endl;
+			file << _script->getScriptFile(scriptID)->getLineText(lineIndex) << endl;
 		}
 
 		file.close();

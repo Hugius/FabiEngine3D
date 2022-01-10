@@ -1,9 +1,8 @@
 #include "script_file.hpp"
 #include "logger.hpp"
 
-ScriptFile::ScriptFile(EngineInterface& fe3d, const string& ID)
+ScriptFile::ScriptFile(const string& ID)
 	:
-	_fe3d(fe3d),
 	_ID(ID)
 {
 

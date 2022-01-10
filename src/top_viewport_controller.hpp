@@ -16,6 +16,8 @@
 class TopViewportController final : public BaseViewportController
 {
 public:
+	using BaseViewportController::inject;
+
 	void inject(shared_ptr<SkyEditor> skyEditor);
 	void inject(shared_ptr<TerrainEditor> terrainEditor);
 	void inject(shared_ptr<WaterEditor> waterEditor);
@@ -27,6 +29,7 @@ public:
 	void inject(shared_ptr<SoundEditor> soundEditor);
 	void inject(shared_ptr<WorldEditor> worldEditor);
 	void inject(shared_ptr<ScriptEditor> scriptEditor);
+	void inject(shared_ptr<ScriptExecutor> scriptExecutor);
 
 	void initialize() override;
 	void update() override;
@@ -72,4 +75,5 @@ private:
 	shared_ptr<SoundEditor> _soundEditor;
 	shared_ptr<WorldEditor> _worldEditor;
 	shared_ptr<ScriptEditor> _scriptEditor;
+	shared_ptr<ScriptExecutor> _scriptExecutor;
 };

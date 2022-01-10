@@ -1,13 +1,6 @@
 #include "script.hpp"
 #include "logger.hpp"
 
-Script::Script(EngineInterface& fe3d)
-	:
-	_fe3d(fe3d)
-{
-
-}
-
 void Script::createScriptFile(const string& ID)
 {
 	for(const auto& file : _scriptFiles)
@@ -18,7 +11,7 @@ void Script::createScriptFile(const string& ID)
 		}
 	}
 
-	_scriptFiles.push_back(make_shared<ScriptFile>(_fe3d, ID));
+	_scriptFiles.push_back(make_shared<ScriptFile>(ID));
 }
 
 void Script::renameScriptFile(const string& ID, const string& newID)

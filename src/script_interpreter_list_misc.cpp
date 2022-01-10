@@ -109,19 +109,19 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 		valueString.erase(valueString.begin());
 		valueString.pop_back();
 
-		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::STRING, valueString));
+		listVariable.addValue(ScriptValue(ScriptValueType::STRING, valueString));
 	}
 	else if(_isDecimalValue(valueString))
 	{
-		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitDecimalString(valueString))));
+		listVariable.addValue(ScriptValue(ScriptValueType::DECIMAL, stof(_limitDecimalString(valueString))));
 	}
 	else if(_isIntegerValue(valueString))
 	{
-		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString))));
+		listVariable.addValue(ScriptValue(ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString))));
 	}
 	else if(_isBooleanValue(valueString))
 	{
-		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, (valueString == "<true>")));
+		listVariable.addValue(ScriptValue(ScriptValueType::BOOLEAN, (valueString == "<true>")));
 	}
 	else
 	{

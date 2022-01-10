@@ -12,6 +12,23 @@ EngineController::EngineController()
 	_bottomViewportController = make_shared<BottomViewportController>();
 	_scriptExecutor = make_shared<ScriptExecutor>();
 	_scriptInterpreter = make_shared<ScriptInterpreter>();
+
+	_leftViewportController->inject(_guiManager);
+	_rightViewportController->inject(_guiManager);
+	_topViewportController->inject(_guiManager);
+	_bottomViewportController->inject(_guiManager);
+
+	_topViewportController->inject(_leftViewportController->getSkyEditor());
+	_topViewportController->inject(_leftViewportController->getTerrainEditor());
+	_topViewportController->inject(_leftViewportController->getWaterEditor());
+	_topViewportController->inject(_leftViewportController->getModelEditor());
+	_topViewportController->inject(_leftViewportController->getBillboardEditor());
+	_topViewportController->inject(_leftViewportController->getQuadEditor());
+	_topViewportController->inject(_leftViewportController->getAnimation2dEditor());
+	_topViewportController->inject(_leftViewportController->getAnimation3dEditor());
+	_topViewportController->inject(_leftViewportController->getSoundEditor());
+	_topViewportController->inject(_leftViewportController->getWorldEditor());
+	_topViewportController->inject(_leftViewportController->getScriptEditor());
 }
 
 void EngineController::inject(shared_ptr<EngineInterface> fe3d)
@@ -21,29 +38,14 @@ void EngineController::inject(shared_ptr<EngineInterface> fe3d)
 	_rightViewportController->inject(fe3d);
 	_topViewportController->inject(fe3d);
 	_bottomViewportController->inject(fe3d);
+	_scriptExecutor->inject(fe3d);
+	_scriptInterpreter->inject(fe3d);
 
 	_fe3d = fe3d;
 }
 
 void EngineController::initialize()
 {
-	//_gui(*this),
-	//	_leftViewportController(*this, _gui),
-	//	_rightViewportController(*this, _gui),
-	//	_topViewportController(*this, _gui,
-	//						   _leftViewportController.getSkyEditor(),
-	//						   _leftViewportController.getTerrainEditor(),
-	//						   _leftViewportController.getWaterEditor(),
-	//						   _leftViewportController.getModelEditor(),
-	//						   _leftViewportController.getBillboardEditor(),
-	//						   _leftViewportController.getQuadEditor(),
-	//						   _leftViewportController.getAnimation2dEditor(),
-	//						   _leftViewportController.getAnimation3dEditor(),
-	//						   _leftViewportController.getSoundEditor(),
-	//						   _leftViewportController.getWorldEditor(),
-	//						   _leftViewportController.getScriptEditor()),
-	//	_bottomViewportController(*this, _gui, _topViewportController, _leftViewportController.getScriptEditor())
-
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string meshDirectoryPath = "engine\\assets\\mesh\\";
 	const string diffuseMapDirectoryPath = "engine\\assets\\image\\diffuse_map\\";
@@ -51,17 +53,17 @@ void EngineController::initialize()
 
 	if(Config::getInst().isApplicationExported())
 	{
-		if(_topViewportController.isProjectCorrupted(rootPath))
+		if(_topViewportController->isProjectCorrupted(rootPath))
 		{
 			Logger::throwFatalWarning("Cannot load application: missing files/directories!");
 		}
 
 		_fe3d->misc_setBackgroundColor(RENDER_COLOR);
 
-		_leftViewportController.getScriptEditor().loadScriptFiles(true);
-		_leftViewportController.getScriptEditor().getScriptExecutor().load();
+		_leftViewportController->getScriptEditor()->loadScriptFiles(true);
+		_scriptExecutor->load();
 
-		if(!_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
+		if(!_scriptExecutor->isRunning())
 		{
 			_fe3d->application_stop();
 			_mustPromptOnExit = true;
@@ -112,10 +114,10 @@ void EngineController::initialize()
 		_fe3d->misc_setCursorEntityID("@@cursor");
 		_fe3d->misc_setCursorVisible(false);
 
-		_rightViewportController.initialize();
-		_bottomViewportController.initialize();
-		_topViewportController.initialize();
-		_leftViewportController.initialize();
+		_rightViewportController->initialize();
+		_bottomViewportController->initialize();
+		_topViewportController->initialize();
+		_leftViewportController->initialize();
 
 		_fe3d->misc_enableVsync();
 	}
@@ -125,12 +127,12 @@ void EngineController::update()
 {
 	if(Config::getInst().isApplicationExported())
 	{
-		if(_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
+		if(_scriptExecutor->isRunning())
 		{
-			_leftViewportController.getAnimation2dEditor().update();
-			_leftViewportController.getAnimation3dEditor().update();
+			_leftViewportController->getAnimation2dEditor()->update();
+			_leftViewportController->getAnimation3dEditor()->update();
 
-			_leftViewportController.getScriptEditor().getScriptExecutor().update(false);
+			_scriptExecutor->update(false);
 		}
 		else
 		{
@@ -141,7 +143,7 @@ void EngineController::update()
 	else
 	{
 		static string lastScreen = "";
-		string activeScreen = _guiManager.getViewport("left")->getWindow("main")->getActiveScreen()->getID();
+		string activeScreen = _guiManager->getViewport("left")->getWindow("main")->getActiveScreen()->getID();
 		if(activeScreen == "main" && lastScreen != "main")
 		{
 			_fe3d->misc_setBackgroundColor(RENDER_COLOR);
@@ -154,12 +156,12 @@ void EngineController::update()
 		_fe3d->quad_setDiffuseMap("@@cursor", "engine\\assets\\image\\diffuse_map\\cursor_default.tga");
 		_fe3d->quad_setVisible("@@cursor", _fe3d->misc_isCursorInsideWindow());
 
-		_guiManager.update();
+		_guiManager->update();
 
-		_topViewportController.update();
-		_leftViewportController.update();
-		_rightViewportController.update();
-		_bottomViewportController.update();
+		_topViewportController->update();
+		_leftViewportController->update();
+		_rightViewportController->update();
+		_bottomViewportController->update();
 	}
 }
 
@@ -167,9 +169,9 @@ void EngineController::terminate()
 {
 	if(Config::getInst().isApplicationExported())
 	{
-		if(_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
+		if(_scriptExecutor->isRunning())
 		{
-			_leftViewportController.getScriptEditor().getScriptExecutor().unload();
+			_scriptExecutor->unload();
 		}
 	}
 	else

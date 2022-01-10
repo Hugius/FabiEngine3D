@@ -2,7 +2,7 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-GuiWindow::GuiWindow(EngineInterface& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color)
+GuiWindow::GuiWindow(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color)
 	:
 	_fe3d(fe3d),
 	_ID(ID),

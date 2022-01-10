@@ -98,7 +98,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 			}
 
 			auto result = listVariable.getValueCount();
-			returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
+			returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
 	else if(functionName == "misc:list_contains")
@@ -163,7 +163,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				}
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, hasFoundValue));
+			returnValues.push_back(ScriptValue(SVT::BOOLEAN, hasFoundValue));
 		}
 	}
 	else if(functionName == "misc:list_index")
@@ -228,7 +228,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				}
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, foundIndex));
+			returnValues.push_back(ScriptValue(SVT::INTEGER, foundIndex));
 		}
 	}
 	else if(functionName == "misc:list_min")
@@ -277,7 +277,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				}
 
 				auto result = *min_element(begin(rawValues), end(rawValues));
-				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
+				returnValues.push_back(ScriptValue(SVT::INTEGER, result));
 			}
 			else if(type == ScriptValueType::DECIMAL)
 			{
@@ -288,7 +288,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				}
 
 				auto result = *min_element(begin(rawValues), end(rawValues));
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 			else
 			{
@@ -343,7 +343,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				}
 
 				auto result = *max_element(begin(rawValues), end(rawValues));
-				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
+				returnValues.push_back(ScriptValue(SVT::INTEGER, result));
 			}
 			else if(type == ScriptValueType::DECIMAL)
 			{
@@ -354,7 +354,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				}
 
 				auto result = *max_element(begin(rawValues), end(rawValues));
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 			else
 			{
@@ -397,7 +397,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, args[0].getString() + args[1].getString()));
+			returnValues.push_back(ScriptValue(SVT::STRING, args[0].getString() + args[1].getString()));
 		}
 	}
 	else if(functionName == "misc:string_get_size")
@@ -407,7 +407,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			auto result = args[0].getString().size();
-			returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
+			returnValues.push_back(ScriptValue(SVT::INTEGER, static_cast<int>(result)));
 		}
 	}
 	else if(functionName == "misc:string_contains")
@@ -417,7 +417,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			auto result = (args[0].getString().find(args[1].getString()) != string::npos);
-			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "misc:string_get_part")
@@ -435,7 +435,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 			}
 
 			auto result = args[0].getString().substr(args[1].getInteger(), args[2].getInteger());
-			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
 	else if(functionName == "misc:string_split")
@@ -457,13 +457,13 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 			{
 				if(fullString[i] == splitter.back())
 				{
-					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, stringPart));
+					returnValues.push_back(ScriptValue(SVT::STRING, stringPart));
 					stringPart = "";
 				}
 				else if(i == (fullString.size() - 1))
 				{
 					stringPart += fullString[i];
-					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, stringPart));
+					returnValues.push_back(ScriptValue(SVT::STRING, stringPart));
 				}
 				else
 				{
@@ -486,7 +486,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 				result += character;
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
 	else if(functionName == "misc:get_random_integer")
@@ -496,7 +496,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			auto result = Math::getRandomNumber(args[0].getInteger(), args[1].getInteger());
-			returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
+			returnValues.push_back(ScriptValue(SVT::INTEGER, result));
 		}
 	}
 	else if(functionName == "misc:get_random_decimal")
@@ -506,7 +506,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMiscFunctionCall(const stri
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			auto result = Math::getRandomNumber(args[0].getDecimal(), args[1].getDecimal());
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
 	else

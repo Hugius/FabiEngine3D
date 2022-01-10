@@ -56,7 +56,7 @@ void TopViewportController::_updateProjectScreenManagement()
 
 	if(_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && (leftScreen->getID() == "main") && !_gui->getOverlay()->isFocused())
 	{
-		if(!_scriptEditor->getScriptExecutor().isStarted())
+		if(!_scriptExecutor->isStarted())
 		{
 			_fe3d->application_stop();
 		}
@@ -72,10 +72,10 @@ void TopViewportController::_updateProjectScreenManagement()
 		_fe3d->application_stop();
 	}
 
-	topScreen->getButton("newProject")->setHoverable(!_scriptEditor->getScriptExecutor().isStarted());
-	topScreen->getButton("loadProject")->setHoverable(!_scriptEditor->getScriptExecutor().isStarted());
-	topScreen->getButton("saveProject")->setHoverable(!_currentProjectID.empty() && !_scriptEditor->getScriptExecutor().isStarted());
-	topScreen->getButton("deleteProject")->setHoverable(!_scriptEditor->getScriptExecutor().isStarted());
+	topScreen->getButton("newProject")->setHoverable(!_scriptExecutor->isStarted());
+	topScreen->getButton("loadProject")->setHoverable(!_scriptExecutor->isStarted());
+	topScreen->getButton("saveProject")->setHoverable(!_currentProjectID.empty() && !_scriptExecutor->isStarted());
+	topScreen->getButton("deleteProject")->setHoverable(!_scriptExecutor->isStarted());
 }
 
 void TopViewportController::_updateGameScreenManagement()
@@ -96,45 +96,45 @@ void TopViewportController::_updateGameScreenManagement()
 		{
 			if(screen->getButton("start")->isHovered())
 			{
-				if(_scriptEditor->getScriptExecutor().isStarted())
+				if(_scriptExecutor->isStarted())
 				{
-					_scriptEditor->getScriptExecutor().resume();
+					_scriptExecutor->resume();
 				}
 				else
 				{
 					_scriptEditor->loadScriptFiles(true);
-					_scriptEditor->getScriptExecutor().load();
+					_scriptExecutor->load();
 				}
 			}
 			else if(screen->getButton("pause")->isHovered())
 			{
-				_scriptEditor->getScriptExecutor().pause();
+				_scriptExecutor->pause();
 			}
 			else if(screen->getButton("restart")->isHovered())
 			{
-				_scriptEditor->getScriptExecutor().unload();
+				_scriptExecutor->unload();
 				_scriptEditor->loadScriptFiles(true);
-				_scriptEditor->getScriptExecutor().load();
+				_scriptExecutor->load();
 			}
 			else if(screen->getButton("stop")->isHovered())
 			{
-				_scriptEditor->getScriptExecutor().unload();
+				_scriptExecutor->unload();
 			}
 			else if(screen->getButton("debug")->isHovered())
 			{
-				_scriptEditor->getScriptExecutor().resume();
-				_scriptEditor->getScriptExecutor().update(true);
-				_scriptEditor->getScriptExecutor().pause();
+				_scriptExecutor->resume();
+				_scriptExecutor->update(true);
+				_scriptExecutor->pause();
 			}
 		}
 
 		static bool wasInMainMenu = false;
 		bool isInMainMenu = (_gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "main");
-		screen->getButton("start")->setHoverable(isInMainMenu && !_scriptEditor->getScriptExecutor().isScriptEmpty() && !isScriptRunning());
+		screen->getButton("start")->setHoverable(isInMainMenu && !_scriptExecutor->isScriptEmpty() && !isScriptRunning());
 		screen->getButton("pause")->setHoverable(isInMainMenu && isScriptRunning() && !_fe3d->server_isRunning());
-		screen->getButton("restart")->setHoverable(isInMainMenu && _scriptEditor->getScriptExecutor().isStarted());
-		screen->getButton("stop")->setHoverable(isInMainMenu && _scriptEditor->getScriptExecutor().isStarted());
-		screen->getButton("debug")->setHoverable(isInMainMenu && _scriptEditor->getScriptExecutor().isStarted());
+		screen->getButton("restart")->setHoverable(isInMainMenu && _scriptExecutor->isStarted());
+		screen->getButton("stop")->setHoverable(isInMainMenu && _scriptExecutor->isStarted());
+		screen->getButton("debug")->setHoverable(isInMainMenu && _scriptExecutor->isStarted());
 
 		bool cameIntoMenu = (!wasInMainMenu && isInMainMenu);
 		if(cameIntoMenu || (isInMainMenu && !isScriptStarted() && _fe3d->misc_checkInterval(Config::UPDATES_PER_SECOND)))
@@ -143,22 +143,22 @@ void TopViewportController::_updateGameScreenManagement()
 		}
 		wasInMainMenu = isInMainMenu;
 
-		if(_scriptEditor->getScriptExecutor().isRunning())
+		if(_scriptExecutor->isRunning())
 		{
 			if(_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if(_fe3d->server_isRunning())
 				{
-					_scriptEditor->getScriptExecutor().unload();
+					_scriptExecutor->unload();
 				}
 				else
 				{
-					_scriptEditor->getScriptExecutor().pause();
+					_scriptExecutor->pause();
 				}
 			}
 		}
 
-		_scriptEditor->getScriptExecutor().update(false);
+		_scriptExecutor->update(false);
 	}
 }
 
@@ -241,6 +241,6 @@ void TopViewportController::_updateMiscScreenManagement()
 		ShellExecute(0, 0, "https://github.com/ConsolePeasant92/FabiEngine3D/blob/master/README.md", 0, 0, SW_SHOW);
 	}
 
-	screen->getButton("uncache")->setHoverable(!_currentProjectID.empty() && !_scriptEditor->getScriptExecutor().isStarted());
-	screen->getButton("export")->setHoverable(!_currentProjectID.empty() && !_scriptEditor->getScriptExecutor().isStarted());
+	screen->getButton("uncache")->setHoverable(!_currentProjectID.empty() && !_scriptExecutor->isStarted());
+	screen->getButton("export")->setHoverable(!_currentProjectID.empty() && !_scriptExecutor->isStarted());
 }

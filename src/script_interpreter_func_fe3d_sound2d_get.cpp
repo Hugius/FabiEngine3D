@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 			}
 
 			auto result = _fe3d->sound2d_isExisting(args[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:sound2d_find_ids")
@@ -38,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 				{
 					if(ID[0] != '@')
 					{
-						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
+						returnValues.push_back(ScriptValue(SVT::STRING, ID));
 					}
 				}
 			}
@@ -54,7 +54,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 			{
 				if(ID[0] != '@')
 				{
-					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
+					returnValues.push_back(ScriptValue(SVT::STRING, ID));
 				}
 			}
 		}
@@ -68,7 +68,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
 				auto result = _fe3d->sound2d_isStarted(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -81,7 +81,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
 				auto result = _fe3d->sound2d_isPlaying(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -94,7 +94,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
 				auto result = _fe3d->sound2d_isPaused(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -107,7 +107,7 @@ const bool ScriptInterpreter::_executeFe3dSound2dGetter(const string& functionNa
 			if(_validateFe3dSound2d(args[0].getString(), false))
 			{
 				auto result = _fe3d->sound2d_getVolume(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}

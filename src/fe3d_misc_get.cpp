@@ -9,7 +9,7 @@ const unsigned int EngineInterface::misc_getTriangleCount() const
 
 const float EngineInterface::misc_getFPS() const
 {
-	return (1000.0f / _core->_deltaTimeMS);
+	return (1000.0f / _core->getDeltaTimeMS());
 }
 
 const float EngineInterface::misc_stopMillisecondTimer() const

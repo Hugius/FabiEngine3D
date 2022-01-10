@@ -10,7 +10,7 @@
 class GuiScreen final
 {
 public:
-	GuiScreen(EngineInterface& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size);
+	GuiScreen(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size);
 
 	void update(bool hoverable);
 	void show();
@@ -67,5 +67,5 @@ private:
 	vector<shared_ptr<GuiButton>> _buttons;
 	vector<shared_ptr<GuiRectangle>> _rectangles;
 	vector<shared_ptr<GuiTextField>> _textFields;
-	EngineInterface& _fe3d;
+	shared_ptr<EngineInterface> _fe3d;
 };

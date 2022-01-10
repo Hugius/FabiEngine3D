@@ -1,6 +1,6 @@
 #include "gui_rectangle.hpp"
 
-GuiRectangle::GuiRectangle(EngineInterface& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, bool isCentered)
+GuiRectangle::GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -16,7 +16,7 @@ GuiRectangle::GuiRectangle(EngineInterface& fe3d, const string& parentID, const 
 	_fe3d->quad_setColor(_entityID, color);
 }
 
-GuiRectangle::GuiRectangle(EngineInterface& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, const string& texturePath, bool isCentered)
+GuiRectangle::GuiRectangle(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, const string& texturePath, bool isCentered)
 	:
 	_fe3d(fe3d),
 	_ID(ID),

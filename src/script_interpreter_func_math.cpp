@@ -41,7 +41,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			float angle = Math::convertToRadians(args[0].getDecimal());
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, tan(angle)));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, tan(angle)));
 		}
 	}
 	else if(functionName == "math:sin")
@@ -51,7 +51,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			float angle = Math::convertToRadians(args[0].getDecimal());
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, sin(angle)));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, sin(angle)));
 		}
 	}
 	else if(functionName == "math:cos")
@@ -61,7 +61,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			float angle = Math::convertToRadians(args[0].getDecimal());
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, cos(angle)));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, cos(angle)));
 		}
 	}
 	else if(functionName == "math:atan")
@@ -72,7 +72,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 		{
 			auto angle = atan(args[0].getDecimal());
 			auto result = Math::convertToDegrees(angle);
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "math:asin")
@@ -83,7 +83,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 		{
 			auto angle = asin(args[0].getDecimal());
 			auto result = Math::convertToDegrees(angle);
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "math:acos")
@@ -94,7 +94,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 		{
 			auto angle = acos(args[0].getDecimal());
 			auto result = Math::convertToDegrees(angle);
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "math:atan2")
@@ -105,7 +105,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 		{
 			auto angle = atan2(args[0].getDecimal(), args[1].getDecimal());
 			auto result = Math::convertToDegrees(angle);
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "math:pow")
@@ -115,12 +115,12 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 			if(args[0].getType() == SVT::INTEGER && args[1].getType() == SVT::INTEGER)
 			{
 				auto result = static_cast<int>(pow(args[0].getInteger(), args[1].getInteger()));
-				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
+				returnValues.push_back(ScriptValue(SVT::INTEGER, result));
 			}
 			else if(args[0].getType() == SVT::DECIMAL && args[1].getType() == SVT::INTEGER)
 			{
 				auto result = static_cast<float>(pow(args[0].getDecimal(), args[1].getInteger()));
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 			else
 			{
@@ -135,12 +135,12 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 			if(args[0].getType() == SVT::INTEGER && args[1].getType() == SVT::INTEGER)
 			{
 				auto result = min(args[0].getInteger(), args[1].getInteger());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
+				returnValues.push_back(ScriptValue(SVT::INTEGER, result));
 			}
 			else if(args[0].getType() == SVT::DECIMAL && args[1].getType() == SVT::DECIMAL)
 			{
 				auto result = min(args[0].getDecimal(), args[1].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 			else
 			{
@@ -155,12 +155,12 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 			if(args[0].getType() == SVT::INTEGER && args[1].getType() == SVT::INTEGER)
 			{
 				auto result = max(args[0].getInteger(), args[1].getInteger());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
+				returnValues.push_back(ScriptValue(SVT::INTEGER, result));
 			}
 			else if(args[0].getType() == SVT::DECIMAL && args[1].getType() == SVT::DECIMAL)
 			{
 				auto result = max(args[0].getDecimal(), args[1].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 			else
 			{
@@ -174,7 +174,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, round(args[0].getDecimal())));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, round(args[0].getDecimal())));
 		}
 	}
 	else if(functionName == "math:floor")
@@ -183,7 +183,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, floor(args[0].getDecimal())));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, floor(args[0].getDecimal())));
 		}
 	}
 	else if(functionName == "math:ceil")
@@ -192,7 +192,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, ceil(args[0].getDecimal())));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, ceil(args[0].getDecimal())));
 		}
 	}
 	else if(functionName == "math:clamp")
@@ -202,12 +202,12 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 			if(args[0].getType() == SVT::INTEGER && args[2].getType() == SVT::INTEGER && args[3].getType() == SVT::INTEGER)
 			{
 				auto result = clamp(args[0].getInteger(), args[1].getInteger(), args[2].getInteger());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
+				returnValues.push_back(ScriptValue(SVT::INTEGER, result));
 			}
 			else if(args[0].getType() == SVT::DECIMAL && args[1].getType() == SVT::DECIMAL && args[2].getType() == SVT::DECIMAL)
 			{
 				auto result = clamp(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 			else
 			{
@@ -221,7 +221,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, sqrtf(args[0].getDecimal())));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, sqrtf(args[0].getDecimal())));
 		}
 	}
 	else if(functionName == "math:abs")
@@ -230,11 +230,11 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 		{
 			if(args[0].getType() == SVT::INTEGER)
 			{
-				returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, abs(args[0].getInteger())));
+				returnValues.push_back(ScriptValue(SVT::INTEGER, abs(args[0].getInteger())));
 			}
 			else if(args[0].getType() == SVT::DECIMAL)
 			{
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, fabsf(args[0].getDecimal())));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, fabsf(args[0].getDecimal())));
 			}
 			else
 			{
@@ -247,7 +247,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto result = Math::getPI();
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "math:is_even")
@@ -257,7 +257,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			auto result = (args[0].getInteger() % 2) == 0;
-			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "math:angle_difference")
@@ -267,7 +267,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			auto result = Math::calculateAngleDifference(args[0].getDecimal(), args[1].getDecimal());
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "math:reference_angle")
@@ -277,7 +277,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			auto result = Math::calculateReferenceAngle(args[0].getDecimal());
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "math:vector_distance")
@@ -289,7 +289,7 @@ const vector<ScriptValue> ScriptInterpreter::_processMathFunctionCall(const stri
 			auto first = fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal());
 			auto second = fvec3(args[3].getDecimal(), args[4].getDecimal(), args[5].getDecimal());
 			auto result = Math::calculateDistance(first, second);
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
 	else

@@ -16,7 +16,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 			}
 
 			auto result = _fe3d->reflection_isExisting(args[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:reflection_find_ids")
@@ -36,7 +36,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 				{
 					if(ID[0] != '@')
 					{
-						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
+						returnValues.push_back(ScriptValue(SVT::STRING, ID));
 					}
 				}
 			}
@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 			{
 				if(ID[0] != '@')
 				{
-					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
+					returnValues.push_back(ScriptValue(SVT::STRING, ID));
 				}
 			}
 		}
@@ -66,7 +66,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 			if(_validateFe3dReflection(args[0].getString()))
 			{
 				auto result = _fe3d->reflection_isVisible(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -79,7 +79,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 			if(_validateFe3dReflection(args[0].getString()))
 			{
 				auto result = _fe3d->reflection_getPosition(args[0].getString()).x;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -92,7 +92,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 			if(_validateFe3dReflection(args[0].getString()))
 			{
 				auto result = _fe3d->reflection_getPosition(args[0].getString()).y;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -105,7 +105,7 @@ const bool ScriptInterpreter::_executeFe3dReflectionGetter(const string& functio
 			if(_validateFe3dReflection(args[0].getString()))
 			{
 				auto result = _fe3d->reflection_getPosition(args[0].getString()).z;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}

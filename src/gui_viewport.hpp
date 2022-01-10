@@ -6,7 +6,7 @@
 class GuiViewport final
 {
 public:
-	GuiViewport(EngineInterface& fe3d, const string& ID, fvec2 position, fvec2 size, fvec3 color);
+	GuiViewport(shared_ptr<EngineInterface> fe3d, const string& ID, fvec2 position, fvec2 size, fvec3 color);
 	~GuiViewport();
 
 	void update(bool hoverable);
@@ -26,5 +26,5 @@ private:
 	const string _entityID;
 
 	vector<shared_ptr<GuiWindow>> _windows;
-	EngineInterface& _fe3d;
+	shared_ptr<EngineInterface> _fe3d;
 };

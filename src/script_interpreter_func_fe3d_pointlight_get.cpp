@@ -16,7 +16,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 			}
 
 			auto result = _fe3d->pointlight_isExisting(args[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:pointlight_find_ids")
@@ -36,7 +36,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 				{
 					if(ID[0] != '@')
 					{
-						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
+						returnValues.push_back(ScriptValue(SVT::STRING, ID));
 					}
 				}
 			}
@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 			{
 				if(ID[0] != '@')
 				{
-					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
+					returnValues.push_back(ScriptValue(SVT::STRING, ID));
 				}
 			}
 		}
@@ -66,7 +66,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 			if(_validateFe3dPointlight(args[0].getString()))
 			{
 				auto result = _fe3d->pointlight_isVisible(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -79,7 +79,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 			if(_validateFe3dPointlight(args[0].getString()))
 			{
 				auto result = _fe3d->pointlight_getPosition(args[0].getString()).x;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -92,7 +92,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 			if(_validateFe3dPointlight(args[0].getString()))
 			{
 				auto result = _fe3d->pointlight_getPosition(args[0].getString()).y;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -105,7 +105,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 			if(_validateFe3dPointlight(args[0].getString()))
 			{
 				auto result = _fe3d->pointlight_getPosition(args[0].getString()).z;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -118,7 +118,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 			if(_validateFe3dPointlight(args[0].getString()))
 			{
 				auto result = _fe3d->pointlight_getRadius(args[0].getString()).x;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -131,7 +131,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 			if(_validateFe3dPointlight(args[0].getString()))
 			{
 				auto result = _fe3d->pointlight_getRadius(args[0].getString()).y;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -144,7 +144,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 			if(_validateFe3dPointlight(args[0].getString()))
 			{
 				auto result = _fe3d->pointlight_getRadius(args[0].getString()).z;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -157,7 +157,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 			if(_validateFe3dPointlight(args[0].getString()))
 			{
 				auto result = _fe3d->pointlight_getColor(args[0].getString()).r;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -170,7 +170,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 			if(_validateFe3dPointlight(args[0].getString()))
 			{
 				auto result = _fe3d->pointlight_getColor(args[0].getString()).g;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -183,7 +183,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 			if(_validateFe3dPointlight(args[0].getString()))
 			{
 				auto result = _fe3d->pointlight_getColor(args[0].getString()).b;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -196,7 +196,7 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 			if(_validateFe3dPointlight(args[0].getString()))
 			{
 				auto result = _fe3d->pointlight_getIntensity(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -213,12 +213,12 @@ const bool ScriptInterpreter::_executeFe3dPointlightGetter(const string& functio
 				{
 					case PointlightShape::CIRCLE:
 					{
-						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "CIRCLE"));
+						returnValues.push_back(ScriptValue(SVT::STRING, "CIRCLE"));
 						break;
 					}
 					case PointlightShape::SQUARE:
 					{
-						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, "SQUARE"));
+						returnValues.push_back(ScriptValue(SVT::STRING, "SQUARE"));
 						break;
 					}
 				}

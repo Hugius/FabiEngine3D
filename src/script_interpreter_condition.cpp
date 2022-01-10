@@ -74,19 +74,19 @@ const bool ScriptInterpreter::_checkConditionString(const string& conditionStrin
 			{
 				elementString.erase(elementString.begin());
 				elementString.pop_back();
-				comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, elementString));
+				comparisonValues.push_back(ScriptValue(ScriptValueType::STRING, elementString));
 			}
 			else if(_isDecimalValue(elementString))
 			{
-				comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitDecimalString(elementString))));
+				comparisonValues.push_back(ScriptValue(ScriptValueType::DECIMAL, stof(_limitDecimalString(elementString))));
 			}
 			else if(_isIntegerValue(elementString))
 			{
-				comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(elementString))));
+				comparisonValues.push_back(ScriptValue(ScriptValueType::INTEGER, stoi(_limitIntegerString(elementString))));
 			}
 			else if(_isBooleanValue(elementString))
 			{
-				comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, (elementString == "<true>")));
+				comparisonValues.push_back(ScriptValue(ScriptValueType::BOOLEAN, (elementString == "<true>")));
 			}
 			else
 			{

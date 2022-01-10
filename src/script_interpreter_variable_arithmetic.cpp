@@ -133,12 +133,12 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	}
 	else if(_isDecimalValue(valueString))
 	{
-		auto value = ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitIntegerString(valueString)));
+		auto value = ScriptValue(ScriptValueType::DECIMAL, stof(_limitIntegerString(valueString)));
 		_performArithmeticOperation(leftVariable.getValue(leftValueIndex), operatorString, value);
 	}
 	else if(_isIntegerValue(valueString))
 	{
-		auto value = ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString)));
+		auto value = ScriptValue(ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString)));
 		_performArithmeticOperation(leftVariable.getValue(leftValueIndex), operatorString, value);
 	}
 	else if(_isBooleanValue(valueString))

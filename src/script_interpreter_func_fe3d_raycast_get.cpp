@@ -9,7 +9,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto result = _fe3d->raycast_getCursorRay().getPosition().x;
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_get_cursor_ray_position_y")
@@ -17,7 +17,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto result = _fe3d->raycast_getCursorRay().getPosition().y;
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_get_cursor_ray_position_z")
@@ -25,7 +25,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto result = _fe3d->raycast_getCursorRay().getPosition().z;
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_get_cursor_ray_direction_x")
@@ -33,7 +33,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto result = _fe3d->raycast_getCursorRay().getDirection().x;
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_get_cursor_ray_direction_y")
@@ -41,7 +41,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto result = _fe3d->raycast_getCursorRay().getDirection().y;
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_get_cursor_ray_direction_z")
@@ -49,7 +49,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto result = _fe3d->raycast_getCursorRay().getDirection().z;
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_get_point_on_terrain_x")
@@ -59,7 +59,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->raycast_getPointOnTerrain().x;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -70,7 +70,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->raycast_getPointOnTerrain().y;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -81,7 +81,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->raycast_getPointOnTerrain().z;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -92,7 +92,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->raycast_isPointOnTerrainValid();
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -129,7 +129,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 				}
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_into_model_distance")
@@ -167,7 +167,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 				}
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_into_models")
@@ -186,7 +186,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 				}
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_into_models_distance")
@@ -205,7 +205,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 				}
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_into_billboard")
@@ -226,7 +226,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 				}
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_into_billboards")
@@ -245,7 +245,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 				}
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_into_billboard_distance")
@@ -266,7 +266,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 				}
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
 	else if(functionName == "fe3d:raycast_into_billboards_distance")
@@ -285,7 +285,7 @@ const bool ScriptInterpreter::_executeFe3dRaycastGetter(const string& functionNa
 				}
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 		}
 	}
 	else

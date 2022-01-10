@@ -61,7 +61,6 @@
     <ClCompile Include="..\..\..\src\animation2d_editor_update_execution.cpp" />
     <ClCompile Include="..\..\..\src\animation2d_editor_update_menu.cpp" />
     <ClCompile Include="..\..\..\src\animation2d_editor_update_misc.cpp" />
-    <ClCompile Include="..\..\..\src\world_editor.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_misc_activate.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_update_misc_highlight.cpp" />
     <ClCompile Include="..\..\..\src\world_editor_misc_custom.cpp" />

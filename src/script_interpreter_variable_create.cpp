@@ -166,48 +166,48 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		auto values = _extractValuesFromListString(listString);
 
 		variableList.insert(make_pair(nameString,
-							ScriptVariable(_fe3d, scope, ScriptVariableType::MULTIPLE, nameString, isConstant, values)));
+							ScriptVariable(scope, ScriptVariableType::MULTIPLE, nameString, isConstant, values)));
 	}
 	else if((typeString == STRING_KEYWORD) && _isStringValue(valueString))
 	{
 		valueString.erase(valueString.begin());
 		valueString.pop_back();
 
-		auto values = {ScriptValue(_fe3d, ScriptValueType::STRING, valueString)};
+		auto values = {ScriptValue(ScriptValueType::STRING, valueString)};
 
 		variableList.insert(make_pair(nameString,
-							ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, values)));
+							ScriptVariable(scope, ScriptVariableType::SINGLE, nameString, isConstant, values)));
 	}
 	else if((typeString == DECIMAL_KEYWORD) && _isDecimalValue(valueString))
 	{
-		auto values = {ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitDecimalString(valueString)))};
+		auto values = {ScriptValue(ScriptValueType::DECIMAL, stof(_limitDecimalString(valueString)))};
 
 		variableList.insert(make_pair(nameString,
-							ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, values)));
+							ScriptVariable(scope, ScriptVariableType::SINGLE, nameString, isConstant, values)));
 	}
 	else if((typeString == INTEGER_KEYWORD) && _isIntegerValue(valueString))
 	{
-		auto values = {ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString)))};
+		auto values = {ScriptValue(ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString)))};
 
 		variableList.insert(make_pair(nameString,
-							ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, values)));
+							ScriptVariable(scope, ScriptVariableType::SINGLE, nameString, isConstant, values)));
 	}
 	else if((typeString == BOOLEAN_KEYWORD) && _isBooleanValue(valueString))
 	{
-		auto values = {ScriptValue(_fe3d, ScriptValueType::BOOLEAN, (valueString == "<true>"))};
+		auto values = {ScriptValue(ScriptValueType::BOOLEAN, (valueString == "<true>"))};
 
 		variableList.insert(make_pair(nameString,
-							ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, values)));
+							ScriptVariable(scope, ScriptVariableType::SINGLE, nameString, isConstant, values)));
 	}
 	else if((typeString == BOOLEAN_KEYWORD) && (valueString[0] == '(' && valueString.back() == ')'))
 	{
 		valueString.erase(valueString.begin());
 		valueString.pop_back();
 
-		auto value = ScriptValue(_fe3d, ScriptValueType::BOOLEAN, _checkConditionString(valueString));
+		auto value = ScriptValue(ScriptValueType::BOOLEAN, _checkConditionString(valueString));
 
 		variableList.insert(make_pair(nameString,
-							ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, {value})));
+							ScriptVariable(scope, ScriptVariableType::SINGLE, nameString, isConstant, {value})));
 	}
 	else if((valueString.substr(0, 5) == "fe3d:") || (valueString.substr(0, 5) == "math:") || (valueString.substr(0, 5) == "misc:"))
 	{
@@ -235,7 +235,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 
 		if(typeString == LIST_KEYWORD)
 		{
-			variableList.insert(make_pair(nameString, ScriptVariable(_fe3d, scope, ScriptVariableType::MULTIPLE, nameString, isConstant, returnValues)));
+			variableList.insert(make_pair(nameString, ScriptVariable(scope, ScriptVariableType::MULTIPLE, nameString, isConstant, returnValues)));
 		}
 		else if(returnValues.empty())
 		{
@@ -254,19 +254,19 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		}
 		else if((typeString == STRING_KEYWORD) && (returnValues[0].getType() == ScriptValueType::STRING))
 		{
-			variableList.insert(make_pair(nameString, ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, returnValues)));
+			variableList.insert(make_pair(nameString, ScriptVariable(scope, ScriptVariableType::SINGLE, nameString, isConstant, returnValues)));
 		}
 		else if((typeString == DECIMAL_KEYWORD) && (returnValues[0].getType() == ScriptValueType::DECIMAL))
 		{
-			variableList.insert(make_pair(nameString, ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, returnValues)));
+			variableList.insert(make_pair(nameString, ScriptVariable(scope, ScriptVariableType::SINGLE, nameString, isConstant, returnValues)));
 		}
 		else if((typeString == INTEGER_KEYWORD) && (returnValues[0].getType() == ScriptValueType::INTEGER))
 		{
-			variableList.insert(make_pair(nameString, ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, returnValues)));
+			variableList.insert(make_pair(nameString, ScriptVariable(scope, ScriptVariableType::SINGLE, nameString, isConstant, returnValues)));
 		}
 		else if((typeString == BOOLEAN_KEYWORD) && (returnValues[0].getType() == ScriptValueType::BOOLEAN))
 		{
-			variableList.insert(make_pair(nameString, ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, returnValues)));
+			variableList.insert(make_pair(nameString, ScriptVariable(scope, ScriptVariableType::SINGLE, nameString, isConstant, returnValues)));
 		}
 		else
 		{
@@ -318,31 +318,31 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 				values.push_back(rightVariable.getValue(i));
 			}
 
-			variableList.insert(make_pair(nameString, ScriptVariable(_fe3d, scope, ScriptVariableType::MULTIPLE, nameString, isConstant, values)));
+			variableList.insert(make_pair(nameString, ScriptVariable(scope, ScriptVariableType::MULTIPLE, nameString, isConstant, values)));
 		}
 		else if((typeString == STRING_KEYWORD) && (rightVariable.getValue(valueIndex).getType() == ScriptValueType::STRING))
 		{
 			auto values = {rightVariable.getValue(valueIndex)};
 
-			variableList.insert(make_pair(nameString, ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, values)));
+			variableList.insert(make_pair(nameString, ScriptVariable(scope, ScriptVariableType::SINGLE, nameString, isConstant, values)));
 		}
 		else if((typeString == DECIMAL_KEYWORD) && (rightVariable.getValue(valueIndex).getType() == ScriptValueType::DECIMAL))
 		{
 			auto values = {rightVariable.getValue(valueIndex)};
 
-			variableList.insert(make_pair(nameString, ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, values)));
+			variableList.insert(make_pair(nameString, ScriptVariable(scope, ScriptVariableType::SINGLE, nameString, isConstant, values)));
 		}
 		else if((typeString == INTEGER_KEYWORD) && (rightVariable.getValue(valueIndex).getType() == ScriptValueType::INTEGER))
 		{
 			auto values = {rightVariable.getValue(valueIndex)};
 
-			variableList.insert(make_pair(nameString, ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, values)));
+			variableList.insert(make_pair(nameString, ScriptVariable(scope, ScriptVariableType::SINGLE, nameString, isConstant, values)));
 		}
 		else if((typeString == BOOLEAN_KEYWORD) && (rightVariable.getValue(valueIndex).getType() == ScriptValueType::BOOLEAN))
 		{
 			auto values = {rightVariable.getValue(valueIndex)};
 
-			variableList.insert(make_pair(nameString, ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, values)));
+			variableList.insert(make_pair(nameString, ScriptVariable(scope, ScriptVariableType::SINGLE, nameString, isConstant, values)));
 		}
 		else
 		{

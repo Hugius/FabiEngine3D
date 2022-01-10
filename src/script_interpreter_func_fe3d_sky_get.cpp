@@ -11,7 +11,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			if(_validateFe3dSky())
 			{
 				auto result = _fe3d->sky_getMixID();
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
 	}
@@ -22,7 +22,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			if(_validateFe3dSky())
 			{
 				auto result = _fe3d->sky_getMixValue();
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -33,7 +33,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			if(_validateFe3dSky())
 			{
 				auto result = _fe3d->sky_getLightness(_fe3d->sky_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -44,7 +44,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			if(_validateFe3dSky())
 			{
 				auto result = _fe3d->sky_getColor(_fe3d->sky_getSelectedID()).r;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -55,7 +55,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			if(_validateFe3dSky())
 			{
 				auto result = _fe3d->sky_getColor(_fe3d->sky_getSelectedID()).g;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -66,7 +66,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			if(_validateFe3dSky())
 			{
 				auto result = _fe3d->sky_getColor(_fe3d->sky_getSelectedID()).b;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -77,7 +77,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			if(_validateFe3dSky())
 			{
 				auto result = _fe3d->sky_getWireframeColor(_fe3d->sky_getSelectedID()).r;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -88,7 +88,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			if(_validateFe3dSky())
 			{
 				auto result = _fe3d->sky_getWireframeColor(_fe3d->sky_getSelectedID()).g;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -99,7 +99,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			if(_validateFe3dSky())
 			{
 				auto result = _fe3d->sky_getWireframeColor(_fe3d->sky_getSelectedID()).b;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -110,7 +110,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			if(_validateFe3dSky())
 			{
 				auto result = _fe3d->sky_getRotation(_fe3d->sky_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -121,7 +121,7 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			if(_validateFe3dSky())
 			{
 				auto result = _fe3d->sky_isWireframed(_fe3d->sky_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}

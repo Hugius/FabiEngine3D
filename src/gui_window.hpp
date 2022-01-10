@@ -6,7 +6,7 @@
 class GuiWindow final
 {
 public:
-	GuiWindow(EngineInterface& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color);
+	GuiWindow(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color);
 	~GuiWindow();
 
 	void createScreen(const string& ID);
@@ -37,5 +37,5 @@ private:
 	const fvec2 _initialSize;
 
 	vector<shared_ptr<GuiScreen>> _screens;
-	EngineInterface& _fe3d;
+	shared_ptr<EngineInterface> _fe3d;
 };

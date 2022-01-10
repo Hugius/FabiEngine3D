@@ -9,7 +9,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto result = _fe3d->server_isRunning();
-			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:server_is_client_connected")
@@ -19,7 +19,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			auto result = _fe3d->server_isClientConnected(args[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:server_get_new_ip")
@@ -27,7 +27,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto IP = _fe3d->server_getNewClientIP();
-			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, IP));
+			returnValues.push_back(ScriptValue(SVT::STRING, IP));
 		}
 	}
 	else if(functionName == "fe3d:server_get_new_username")
@@ -35,7 +35,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto username = _fe3d->server_getNewClientUsername();
-			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, username));
+			returnValues.push_back(ScriptValue(SVT::STRING, username));
 		}
 	}
 	else if(functionName == "fe3d:server_get_old_ip")
@@ -43,7 +43,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto IP = _fe3d->server_getOldClientIP();
-			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, IP));
+			returnValues.push_back(ScriptValue(SVT::STRING, IP));
 		}
 	}
 	else if(functionName == "fe3d:server_get_old_username")
@@ -51,7 +51,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			auto username = _fe3d->server_getOldClientUsername();
-			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, username));
+			returnValues.push_back(ScriptValue(SVT::STRING, username));
 		}
 	}
 	else if(functionName == "fe3d:server_get_connected_ips")
@@ -61,7 +61,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 			auto IPs = _fe3d->server_getClientIPs();
 			for(const auto& IP : IPs)
 			{
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, IP));
+				returnValues.push_back(ScriptValue(SVT::STRING, IP));
 			}
 		}
 	}
@@ -72,7 +72,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 			auto usernames = _fe3d->server_getClientUsernames();
 			for(const auto& username : usernames)
 			{
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, username));
+				returnValues.push_back(ScriptValue(SVT::STRING, username));
 			}
 		}
 	}
@@ -83,7 +83,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 			const auto& messages = _fe3d->server_getPendingMessages();
 			for(const auto& message : messages)
 			{
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, string((message.getProtocol() == NetworkProtocol::TCP) ? "TCP" : "UDP")));
+				returnValues.push_back(ScriptValue(SVT::STRING, string((message.getProtocol() == NetworkProtocol::TCP) ? "TCP" : "UDP")));
 			}
 		}
 	}
@@ -94,7 +94,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 			const auto& messages = _fe3d->server_getPendingMessages();
 			for(const auto& message : messages)
 			{
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, message.getUsername()));
+				returnValues.push_back(ScriptValue(SVT::STRING, message.getUsername()));
 			}
 		}
 	}
@@ -105,7 +105,7 @@ const bool ScriptInterpreter::_executeFe3dServerGetter(const string& functionNam
 			const auto& messages = _fe3d->server_getPendingMessages();
 			for(const auto& message : messages)
 			{
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, message.getContent()));
+				returnValues.push_back(ScriptValue(SVT::STRING, message.getContent()));
 			}
 		}
 	}

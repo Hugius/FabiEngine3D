@@ -19,6 +19,8 @@ using std::numeric_limits;
 class WorldEditor final : public BaseEditor
 {
 public:
+	using BaseEditor::inject;
+
 	void inject(shared_ptr<SkyEditor> skyEditor);
 	void inject(shared_ptr<TerrainEditor> terrainEditor);
 	void inject(shared_ptr<WaterEditor> waterEditor);

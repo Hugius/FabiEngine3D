@@ -16,7 +16,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 				auto result = _fe3d->terrain_getPixelHeight(_fe3d->terrain_getSelectedID(),
 															(args[0].getDecimal() + halfTerrainSize),
 															(args[1].getDecimal() + halfTerrainSize));
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -27,7 +27,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getHeightMapPath(_fe3d->terrain_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
 	}
@@ -38,7 +38,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getDiffuseMapPath(_fe3d->terrain_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
 	}
@@ -49,7 +49,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getNormalMapPath(_fe3d->terrain_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
 	}
@@ -60,7 +60,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getBlendMapPath(_fe3d->terrain_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getDiffuseMapPath(_fe3d->terrain_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
 	}
@@ -82,7 +82,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getDiffuseMapPath(_fe3d->terrain_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
 	}
@@ -93,7 +93,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getDiffuseMapPath(_fe3d->terrain_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
 	}
@@ -104,7 +104,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getNormalMapPath(_fe3d->terrain_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
 	}
@@ -115,7 +115,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getNormalMapPath(_fe3d->terrain_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
 	}
@@ -126,7 +126,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getNormalMapPath(_fe3d->terrain_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
 	}
@@ -137,7 +137,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getMaxHeight(_fe3d->terrain_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -148,7 +148,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getSize(_fe3d->terrain_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -159,7 +159,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getLightness(_fe3d->terrain_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -170,7 +170,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getSpecularShininess(_fe3d->terrain_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -181,7 +181,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getSpecularIntensity(_fe3d->terrain_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -192,7 +192,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getWireframeColor(_fe3d->terrain_getSelectedID()).r;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -203,7 +203,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getWireframeColor(_fe3d->terrain_getSelectedID()).g;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -214,7 +214,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getWireframeColor(_fe3d->terrain_getSelectedID()).b;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -225,7 +225,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getTextureRepeat(_fe3d->terrain_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -236,7 +236,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getRedTextureRepeat(_fe3d->terrain_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -247,7 +247,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getGreenTextureRepeat(_fe3d->terrain_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -258,7 +258,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_getBlueTextureRepeat(_fe3d->terrain_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -269,7 +269,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_isSpecular(_fe3d->terrain_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -280,7 +280,7 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			if(_validateFe3dTerrain())
 			{
 				auto result = _fe3d->terrain_isWireframed(_fe3d->terrain_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}

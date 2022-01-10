@@ -5,7 +5,7 @@
 class ScriptFile final
 {
 public:
-	ScriptFile(EngineInterface& fe3d, const string& ID);
+	ScriptFile(const string& ID);
 
 	void addNewLine(const string& textContent);
 	void insertNewLine(unsigned int index, const string& textContent);
@@ -29,6 +29,4 @@ private:
 
 	unsigned int _cursorLineIndex = 0;
 	unsigned int _cursorCharIndex = 0;
-
-	EngineInterface& _fe3d;
 };

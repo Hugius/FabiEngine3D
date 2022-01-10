@@ -2,7 +2,7 @@
 
 void BottomViewportController::_updateConsole()
 {
-	if(_topViewportController.isScriptRunning())
+	if(_scriptExecutor->isRunning())
 	{
 		return;
 	}

@@ -7,6 +7,8 @@
 class BottomViewportController final : public BaseViewportController
 {
 public:
+	using BaseViewportController::inject;
+
 	void inject(shared_ptr<ScriptExecutor> scriptExecutor);
 	void inject(shared_ptr<ScriptEditor> scriptEditor);
 

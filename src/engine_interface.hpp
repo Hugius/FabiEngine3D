@@ -12,7 +12,6 @@
 #include "reflection_type.hpp"
 #include "pointlight_shape.hpp"
 #include "ray.hpp"
-#include "engine_controller.hpp"
 
 #include <array>
 #include <vector>

@@ -16,7 +16,7 @@ const string EngineInterface::collision_checkCameraWithAny() const
 
 const bool EngineInterface::collision_checkCameraWithTerrain() const
 {
-	return _core->getCamera()CollisionHandler->isCameraUnderTerrain();
+	return _core->getCameraCollisionHandler()->isCameraUnderTerrain();
 }
 
 const bool EngineInterface::collision_checkCameraWithEntity(const string& ID) const
@@ -163,10 +163,10 @@ const bool EngineInterface::collision_checkCameraWithEntitiesDirection(const str
 
 const bool EngineInterface::collision_isCameraResponseEnabled() const
 {
-	return _core->getCamera()CollisionHandler->isCameraAabbResponseEnabled();
+	return _core->getCameraCollisionHandler()->isCameraAabbResponseEnabled();
 }
 
 const bool EngineInterface::collision_isTerrainResponseEnabled() const
 {
-	return _core->getCamera()CollisionHandler->isCameraTerrainResponseEnabled();
+	return _core->getCameraCollisionHandler()->isCameraTerrainResponseEnabled();
 }

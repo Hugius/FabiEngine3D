@@ -17,7 +17,7 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 		Logger::throwError("ScriptEditor::loadScriptsFromFile");
 	}
 
-	_script.reset();
+	_script->reset();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();
@@ -48,20 +48,20 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 		}
 
 		const auto scriptFileID = fileName.substr(0, fileName.size() - 5);
-		_script.createScriptFile(scriptFileID);
+		_script->createScriptFile(scriptFileID);
 
 		unsigned int cursorLineIndex, cursorCharIndex;
 		string line;
 		getline(file, line);
 		istringstream iss(line);
 		iss >> cursorLineIndex >> cursorCharIndex;
-		_script.getScriptFile(scriptFileID)->setCursorLineIndex(cursorLineIndex);
-		_script.getScriptFile(scriptFileID)->setCursorCharIndex(cursorCharIndex);
+		_script->getScriptFile(scriptFileID)->setCursorLineIndex(cursorLineIndex);
+		_script->getScriptFile(scriptFileID)->setCursorCharIndex(cursorCharIndex);
 
 		unsigned int lineIndex = 0;
 		while(getline(file, line))
 		{
-			_script.getScriptFile(scriptFileID)->insertNewLine(lineIndex, line);
+			_script->getScriptFile(scriptFileID)->insertNewLine(lineIndex, line);
 			lineIndex++;
 		}
 

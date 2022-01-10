@@ -58,7 +58,7 @@ const bool TopViewportController::isScriptStarted() const
 	}
 	else
 	{
-		return _scriptEditor->getScriptExecutor().isStarted();
+		return _scriptExecutor->isStarted();
 	}
 }
 
@@ -70,14 +70,14 @@ const bool TopViewportController::isScriptRunning() const
 	}
 	else
 	{
-		return _scriptEditor->getScriptExecutor().isRunning();
+		return _scriptExecutor->isRunning();
 	}
 }
 
 void TopViewportController::_updateMiscellaneous()
 {
 	auto screen = _gui->getViewport("left")->getWindow("main")->getScreen("main");
-	bool isHoverable = (_currentProjectID.empty()) ? false : !_scriptEditor->getScriptExecutor().isStarted();
+	bool isHoverable = (_currentProjectID.empty()) ? false : !_scriptExecutor->isStarted();
 
 	screen->getButton("skyEditor")->setHoverable(isHoverable);
 	screen->getButton("terrainEditor")->setHoverable(isHoverable);
@@ -296,4 +296,9 @@ void TopViewportController::inject(shared_ptr<WorldEditor> worldEditor)
 void TopViewportController::inject(shared_ptr<ScriptEditor> scriptEditor)
 {
 	_scriptEditor = scriptEditor;
+}
+
+void TopViewportController::inject(shared_ptr<ScriptExecutor> scriptExecutor)
+{
+	_scriptExecutor = scriptExecutor;
 }

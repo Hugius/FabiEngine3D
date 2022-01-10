@@ -7,7 +7,7 @@
 class ScriptVariable final
 {
 public:
-	ScriptVariable(EngineInterface& fe3d, ScriptVariableScope scope, ScriptVariableType type, const string& ID, bool constant, vector<ScriptValue> values);
+	ScriptVariable(ScriptVariableScope scope, ScriptVariableType type, const string& ID, bool constant, vector<ScriptValue> values);
 
 	void addValue(ScriptValue value);
 	void setValues(vector<ScriptValue> values);
@@ -33,5 +33,4 @@ private:
 	vector<shared_ptr<ScriptValue>> _values;
 	ScriptVariableScope _scope;
 	ScriptVariableType _type;
-	EngineInterface& _fe3d;
 };

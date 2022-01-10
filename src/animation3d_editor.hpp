@@ -7,6 +7,8 @@
 class Animation3dEditor final : public BaseEditor
 {
 public:
+	using BaseEditor::inject;
+
 	void inject(shared_ptr<ModelEditor> modelEditor);
 
 	void setCurrentProjectID(const string& projectID);

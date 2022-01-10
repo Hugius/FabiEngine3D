@@ -5,7 +5,7 @@
 class RightViewportController final : public BaseViewportController
 {
 public:
-	using BaseViewportController::BaseViewportController;
+	using BaseViewportController::inject;
 
 	void initialize() override;
 	void update() override;

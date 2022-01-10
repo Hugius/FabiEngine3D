@@ -6,11 +6,11 @@
 class ScriptValue final
 {
 public:
-	ScriptValue(EngineInterface& fe3d, ScriptValueType type);
-	ScriptValue(EngineInterface& fe3d, ScriptValueType type, const string& value);
-	ScriptValue(EngineInterface& fe3d, ScriptValueType type, float value);
-	ScriptValue(EngineInterface& fe3d, ScriptValueType type, int value);
-	ScriptValue(EngineInterface& fe3d, ScriptValueType type, bool value);
+	ScriptValue(ScriptValueType type);
+	ScriptValue(ScriptValueType type, const string& value);
+	ScriptValue(ScriptValueType type, float value);
+	ScriptValue(ScriptValueType type, int value);
+	ScriptValue(ScriptValueType type, bool value);
 
 	void setString(const string& value);
 	void setDecimal(float value);
@@ -37,5 +37,4 @@ private:
 	bool _boolean = false;
 
 	ScriptValueType _type;
-	EngineInterface& _fe3d;
 };

@@ -6,6 +6,8 @@
 class ModelEditor final : public BaseEditor
 {
 public:
+	using BaseEditor::inject;
+
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();

@@ -7,6 +7,9 @@
 class ScriptEditor final : public BaseEditor
 {
 public:
+	using BaseEditor::inject;
+	void inject(shared_ptr<Script> script);
+
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
@@ -16,8 +19,6 @@ public:
 	const bool saveScriptFiles();
 	const bool isLoaded() const;
 	const bool isWritingScript() const;
-
-	ScriptExecutor& getScriptExecutor();
 
 private:
 	void _loadGUI();
@@ -116,8 +117,6 @@ private:
 	bool _isRenamingScriptFile = false;
 	bool _isSearchingScriptFile = false;
 
-	Script _script;
-	ScriptExecutor _scriptExecutor;
 	InputType _activeActionKey = InputType::NONE;
 	static inline const vector<InputType> ACTION_KEYS =
 	{
@@ -129,4 +128,6 @@ private:
 		InputType::KEY_UP,
 		InputType::KEY_DOWN
 	};
+
+	shared_ptr<Script> _script;
 };

@@ -42,7 +42,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 				_fe3d->text_setMaxPosition(args[0].getString(), maxPosition);
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:text_delete")
@@ -51,10 +51,10 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString()))
+			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_delete(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -70,7 +70,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 				}
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:text_set_visible")
@@ -79,10 +79,10 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString()))
+			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_setVisible(args[0].getString(), args[1].getBoolean());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -92,11 +92,11 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString()))
+			if(_validateFe3dText(args[0].getString(), false))
 			{
 				fvec2 position = _convertGuiPositionToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				_fe3d->text_setPosition(args[0].getString(), position);
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -106,11 +106,11 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString()))
+			if(_validateFe3dText(args[0].getString(), false))
 			{
 				fvec2 change = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				_fe3d->text_move(args[0].getString(), change);
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -120,12 +120,12 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString()))
+			if(_validateFe3dText(args[0].getString(), false))
 			{
 				fvec2 target = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				fvec2 speed = _convertGuiSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
 				_fe3d->text_moveTo(args[0].getString(), target, speed.x);
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -135,10 +135,10 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString()))
+			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_rotateTo(args[0].getString(), args[1].getDecimal(), args[2].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -148,12 +148,12 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString()))
+			if(_validateFe3dText(args[0].getString(), false))
 			{
 				fvec2 target = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				fvec2 speed = _convertGuiSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
 				_fe3d->text_scaleTo(args[0].getString(), target, speed.x);
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -163,10 +163,10 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString()))
+			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_setRotation(args[0].getString(), args[1].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -176,10 +176,10 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString()))
+			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_rotate(args[0].getString(), args[1].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -189,11 +189,11 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString()))
+			if(_validateFe3dText(args[0].getString(), false))
 			{
 				fvec2 size = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				_fe3d->text_setSize(args[0].getString(), size);
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -203,11 +203,11 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString()))
+			if(_validateFe3dText(args[0].getString(), false))
 			{
 				fvec2 change = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				_fe3d->text_scale(args[0].getString(), change);
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -217,11 +217,11 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString()))
+			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_setColor(args[0].getString(),
 									 fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -231,10 +231,10 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString()))
+			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_setContent(args[0].getString(), args[1].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
@@ -244,10 +244,10 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
-			if(_validateFe3dText(args[0].getString()))
+			if(_validateFe3dText(args[0].getString(), false))
 			{
 				_fe3d->text_setTransparency(args[0].getString(), args[1].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}

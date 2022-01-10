@@ -5,6 +5,8 @@
 class SkyEditor final : public BaseEditor
 {
 public:
+	using BaseEditor::inject;
+
 	void setCurrentProjectID(const string& projectID) override;
 	void load() override;
 	void update() override;

@@ -34,7 +34,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 				Tools::createDirectory(newDirectoryPath);
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:directory_delete")
@@ -51,7 +51,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			if(Tools::isDirectoryExisting(newDirectoryPath))
 			{
 				Tools::deleteDirectory(newDirectoryPath);
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 			else
 			{
@@ -80,7 +80,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 				file.close();
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:file_delete")
@@ -97,7 +97,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			if(Tools::isFileExisting(filePath))
 			{
 				auto status = remove(filePath.c_str());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 			else
 			{
@@ -144,7 +144,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 				_throwScriptError("cannot write to file \"" + args[0].getString() + "\"!");
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			returnValues.push_back(ScriptValue(SVT::EMPTY));
 		}
 	}
 	else if(functionName == "fe3d:file_add_new_line")
@@ -163,7 +163,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 				ofstream file(filePath, ios::app);
 				file << endl;
 				file.close();
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 			else
 			{
@@ -186,7 +186,7 @@ const bool ScriptInterpreter::_executeFe3dFilesystemSetter(const string& functio
 			{
 				ofstream file(filePath, ios::trunc);
 				file.close();
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 			else
 			{

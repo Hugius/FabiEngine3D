@@ -10,9 +10,9 @@ void ScriptInterpreter::load()
 {
 	auto lastLoggerMessageCount = Logger::getMessageCount();
 
-	for(const auto& scriptID : _script.getScriptFileIDs())
+	for(const auto& scriptID : _script->getScriptFileIDs())
 	{
-		auto scriptFile = _script.getScriptFile(scriptID);
+		auto scriptFile = _script->getScriptFile(scriptID);
 
 		string scriptType = "";
 		if(scriptFile->getLineText(0) == (META_KEYWORD + " script_type_initialize"))
@@ -88,9 +88,9 @@ void ScriptInterpreter::load()
 		return;
 	}
 
-	for(const auto& scriptID : _script.getScriptFileIDs())
+	for(const auto& scriptID : _script->getScriptFileIDs())
 	{
-		auto scriptFile = _script.getScriptFile(scriptID);
+		auto scriptFile = _script->getScriptFile(scriptID);
 
 		for(unsigned int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
 		{

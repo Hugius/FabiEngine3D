@@ -18,6 +18,8 @@ class LeftViewportController final : public BaseViewportController
 public:
 	LeftViewportController();
 
+	using BaseViewportController::inject;
+
 	void inject(shared_ptr<EngineInterface> fe3d) override;
 	void inject(shared_ptr<GuiManager> gui) override;
 

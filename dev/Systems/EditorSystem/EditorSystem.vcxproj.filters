@@ -591,7 +591,6 @@
     <ClCompile Include="..\..\..\src\base_editor.cpp">
       <Filter>Base</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\world_editor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\animation3d_editor.hpp">

@@ -9,7 +9,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 	_fe3d->billboard_deleteAll();
 	_fe3d->aabb_deleteAll();
 
-	float lineCount = static_cast<float>(_script.getScriptFile(_currentScriptFileID)->getLineCount());
+	float lineCount = static_cast<float>(_script->getScriptFile(_currentScriptFileID)->getLineCount());
 	fvec2 separatorSize = fvec2((TEXT_CHARACTER_SIZE.x / 4.0f), (lineCount * VERTICAL_LINE_OFFSET));
 	fvec3 separatorPosition = SCRIPT_TEXT_STARTING_POSITION + fvec3(HORIZONTAL_LINE_OFFSET / 2.0f, -(((lineCount - 1) / 2.0f) * VERTICAL_LINE_OFFSET), 0.0f);
 	_fe3d->billboard_create("separator", false);
@@ -23,7 +23,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 		const string lineNumberID = to_string(lineIndex);
 		const string lineTextID = "text_" + lineNumberID;
 		const string lineNumberString = to_string(lineIndex + 1);
-		const string lineTextString = _script.getScriptFile(_currentScriptFileID)->getLineText(lineIndex);
+		const string lineTextString = _script->getScriptFile(_currentScriptFileID)->getLineText(lineIndex);
 		const fvec2 lineNumberSize = fvec2(lineNumberString.size() * TEXT_CHARACTER_SIZE.x, TEXT_CHARACTER_SIZE.y);
 		const fvec2 lineTextSize = fvec2(lineTextString.size() * TEXT_CHARACTER_SIZE.x, TEXT_CHARACTER_SIZE.y);
 		const fvec3 lineNumberPosition = SCRIPT_TEXT_STARTING_POSITION -
@@ -88,28 +88,27 @@ void ScriptEditor::_copySelectedText()
 
 		if(_lastSelectedLineIndex == -1)
 		{
-			_copyClipboard.push_back(_script.getScriptFile(_currentScriptFileID)->getLineText(_firstSelectedLineIndex));
+			_copyClipboard.push_back(_script->getScriptFile(_currentScriptFileID)->getLineText(_firstSelectedLineIndex));
 		}
 		else
 		{
 			for(int i = ((_firstSelectedLineIndex > _lastSelectedLineIndex) ? _lastSelectedLineIndex : _firstSelectedLineIndex);
 				i <= ((_firstSelectedLineIndex > _lastSelectedLineIndex) ? _firstSelectedLineIndex : _lastSelectedLineIndex); i++)
 			{
-				_copyClipboard.push_back(_script.getScriptFile(_currentScriptFileID)->getLineText(i));
+				_copyClipboard.push_back(_script->getScriptFile(_currentScriptFileID)->getLineText(i));
 			}
 		}
 	}
 }
 
-ScriptExecutor& ScriptEditor::getScriptExecutor()
+void ScriptEditor::inject(shared_ptr<Script> script)
 {
-	return _scriptExecutor;
+	_script = script;
 }
 
 void ScriptEditor::setCurrentProjectID(const string& projectID)
 {
 	_currentProjectID = projectID;
-	_scriptExecutor.setCurrentProjectID(projectID);
 }
 
 const bool ScriptEditor::isLoaded() const

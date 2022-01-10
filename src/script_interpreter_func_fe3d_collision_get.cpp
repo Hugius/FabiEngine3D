@@ -9,7 +9,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			bool result = _fe3d->collision_checkCameraWithTerrain();
-			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:collision_check_camera_model")
@@ -61,7 +61,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				}
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
 	else if(functionName == "fe3d:collision_check_camera_models")
@@ -98,7 +98,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				}
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
 	else if(functionName == "fe3d:collision_check_camera_billboard")
@@ -135,7 +135,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				}
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
 	else if(functionName == "fe3d:collision_check_camera_billboards")
@@ -172,7 +172,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				}
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
 	else if(functionName == "fe3d:collision_check_camera_aabb")
@@ -209,7 +209,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 					}
 				}
 
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -243,7 +243,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				}
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:collision_check_model_models")
@@ -325,7 +325,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				}
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
 	else if(functionName == "fe3d:collision_check_model_billboards")
@@ -374,7 +374,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				}
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
 	else if(functionName == "fe3d:collision_check_model_aabbs")
@@ -421,7 +421,7 @@ const bool ScriptInterpreter::_executeFe3dCollisionGetter(const string& function
 				}
 			}
 
-			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
 	else

@@ -1,7 +1,7 @@
 #include "gui_screen.hpp"
 #include "logger.hpp"
 
-GuiScreen::GuiScreen(EngineInterface& fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size)
+GuiScreen::GuiScreen(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size)
 	:
 	_fe3d(fe3d),
 	_ID(ID),

@@ -5,8 +5,6 @@
 class Script final
 {
 public:
-	Script(EngineInterface& fe3d);
-
 	void createScriptFile(const string& ID);
 	void renameScriptFile(const string& ID, const string& newID);
 	void deleteScriptFile(const string& ID);
@@ -24,5 +22,4 @@ public:
 
 private:
 	vector<shared_ptr<ScriptFile>> _scriptFiles;
-	EngineInterface& _fe3d;
 };

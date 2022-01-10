@@ -84,7 +84,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 			{
 				if(c == '"')
 				{
-					valueList.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, currentValueString));
+					valueList.push_back(ScriptValue(ScriptValueType::STRING, currentValueString));
 					isBuildingString = false;
 					hasFinishedValue = true;
 				}
@@ -130,7 +130,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 							return {};
 						}
 
-						valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitDecimalString(currentValueString))));
+						valueList.push_back(ScriptValue(ScriptValueType::DECIMAL, stof(_limitDecimalString(currentValueString))));
 						isBuildingNumber = false;
 						isBuildingDecimal = false;
 
@@ -141,7 +141,7 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 					}
 					else
 					{
-						valueList.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(currentValueString))));
+						valueList.push_back(ScriptValue(ScriptValueType::INTEGER, stoi(_limitIntegerString(currentValueString))));
 						isBuildingNumber = false;
 
 						if(c != ',')
@@ -157,13 +157,13 @@ const vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const 
 
 				if(currentValueString == "<true>")
 				{
-					valueList.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, true));
+					valueList.push_back(ScriptValue(ScriptValueType::BOOLEAN, true));
 					isBuildingBoolean = false;
 					hasFinishedValue = true;
 				}
 				else if(currentValueString == "<false>")
 				{
-					valueList.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, false));
+					valueList.push_back(ScriptValue(ScriptValueType::BOOLEAN, false));
 					isBuildingBoolean = false;
 					hasFinishedValue = true;
 				}

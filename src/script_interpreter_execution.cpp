@@ -91,7 +91,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		return;
 	}
 
-	auto scriptFile = _script.getScriptFile(scriptID);
+	auto scriptFile = _script->getScriptFile(scriptID);
 
 	for(unsigned int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
 	{

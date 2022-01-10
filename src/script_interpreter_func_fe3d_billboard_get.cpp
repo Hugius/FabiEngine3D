@@ -13,7 +13,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_isVisible(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -26,7 +26,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getPosition(args[0].getString()).x;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -39,7 +39,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getPosition(args[0].getString()).y;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -52,7 +52,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getPosition(args[0].getString()).z;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -65,7 +65,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getRotation(args[0].getString()).x;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -78,7 +78,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getRotation(args[0].getString()).y;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -91,7 +91,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getRotation(args[0].getString()).z;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -104,7 +104,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getSize(args[0].getString()).x;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -117,7 +117,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getSize(args[0].getString()).y;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -130,7 +130,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getColor(args[0].getString()).r;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -143,7 +143,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getColor(args[0].getString()).g;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -156,7 +156,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getColor(args[0].getString()).b;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -169,7 +169,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getWireframeColor(args[0].getString()).r;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -182,7 +182,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getWireframeColor(args[0].getString()).g;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -195,7 +195,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getWireframeColor(args[0].getString()).b;
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -208,7 +208,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getMinHeight(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -221,7 +221,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getMaxHeight(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -234,7 +234,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getTransparency(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -247,7 +247,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getEmissionIntensity(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -260,7 +260,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getTextureRepeat(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -273,7 +273,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getLightness(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -286,7 +286,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_isFacingCameraX(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -299,7 +299,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_isFacingCameraY(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -312,7 +312,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_isShadowed(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -325,7 +325,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_isReflected(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -338,7 +338,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_isBright(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -351,7 +351,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_isWireframed(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -364,7 +364,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_isFrozen(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -377,7 +377,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_isTextual(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -393,7 +393,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 
 			auto result = _fe3d->billboard_isExisting(args[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 		}
 	}
 	else if(functionName == "fe3d:billboard_find_ids")
@@ -413,7 +413,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 				{
 					if(ID[0] != '@')
 					{
-						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
+						returnValues.push_back(ScriptValue(SVT::STRING, ID));
 					}
 				}
 			}
@@ -429,7 +429,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			{
 				if(ID[0] != '@')
 				{
-					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
+					returnValues.push_back(ScriptValue(SVT::STRING, ID));
 				}
 			}
 		}
@@ -449,7 +449,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 				}
 
 				auto result = _fe3d->billboard_getTextContent(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
 	}
@@ -462,7 +462,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getDiffuseMapPath(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
 	}
@@ -475,7 +475,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getEmissionMapPath(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
 	}
@@ -488,7 +488,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
 				auto result = _fe3d->billboard_getFontPath(args[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
 			}
 		}
 	}

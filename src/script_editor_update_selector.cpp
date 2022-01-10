@@ -39,36 +39,36 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 			{
 				if(_lastSelectedLineIndex == -1)
 				{
-					_script.getScriptFile(_currentScriptFileID)->deleteLine(_firstSelectedLineIndex);
+					_script->getScriptFile(_currentScriptFileID)->deleteLine(_firstSelectedLineIndex);
 				}
 				else
 				{
 					int lineIndexToDelete = (_firstSelectedLineIndex > _lastSelectedLineIndex) ? _lastSelectedLineIndex : _firstSelectedLineIndex;
 					for(int i = 0; i <= abs(_firstSelectedLineIndex - _lastSelectedLineIndex); i++)
 					{
-						_script.getScriptFile(_currentScriptFileID)->deleteLine(static_cast<unsigned int>(lineIndexToDelete));
+						_script->getScriptFile(_currentScriptFileID)->deleteLine(static_cast<unsigned int>(lineIndexToDelete));
 					}
 				}
 
-				if(hoveredLineIndex > static_cast<int>(_script.getScriptFile(_currentScriptFileID)->getLineCount() - 1))
+				if(hoveredLineIndex > static_cast<int>(_script->getScriptFile(_currentScriptFileID)->getLineCount() - 1))
 				{
-					hoveredLineIndex = static_cast<int>(_script.getScriptFile(_currentScriptFileID)->getLineCount());
+					hoveredLineIndex = static_cast<int>(_script->getScriptFile(_currentScriptFileID)->getLineCount());
 				}
 
-				if(cursorLineIndex > _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
+				if(cursorLineIndex > _script->getScriptFile(_currentScriptFileID)->getLineCount() - 1)
 				{
-					cursorLineIndex = _script.getScriptFile(_currentScriptFileID)->getLineCount();
+					cursorLineIndex = _script->getScriptFile(_currentScriptFileID)->getLineCount();
 				}
 
 				cursorCharIndex = newCharacters.empty() ? 0 : static_cast<unsigned int>(newCharacters.size());
 
-				_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex, newCharacters);
+				_script->getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex, newCharacters);
 
 				if(_fe3d->input_isKeyPressed(InputType::KEY_ENTER))
 				{
-					if(_script.getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_COUNT)
+					if(_script->getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_COUNT)
 					{
-						_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex, "");
+						_script->getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex, "");
 						cursorLineIndex++;
 					}
 				}
@@ -148,7 +148,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				cursorLineIndex = min(_firstSelectedLineIndex, _lastSelectedLineIndex);
 			}
 
-			cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
+			cursorCharIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
 		}
 
 		if(isControlKeyDown)
@@ -162,22 +162,22 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				if(!_copyClipboard.empty())
 				{
 					unsigned int pastedCount = 0;
-					bool firstLineEmpty = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).empty();
+					bool firstLineEmpty = _script->getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).empty();
 					for(size_t i = 0; i < _copyClipboard.size(); i++)
 					{
-						if((cursorLineIndex + i) < _script.getScriptFile(_currentScriptFileID)->getLineCount())
+						if((cursorLineIndex + i) < _script->getScriptFile(_currentScriptFileID)->getLineCount())
 						{
-							if(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex + static_cast<unsigned int>(i)).empty())
+							if(_script->getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex + static_cast<unsigned int>(i)).empty())
 							{
-								_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex + static_cast<unsigned int>(i), _copyClipboard[i]);
+								_script->getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex + static_cast<unsigned int>(i), _copyClipboard[i]);
 								pastedCount++;
 								continue;
 							}
 						}
 
-						if(_script.getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_COUNT)
+						if(_script->getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_COUNT)
 						{
-							_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex + static_cast<unsigned int>(i), _copyClipboard[i]);
+							_script->getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex + static_cast<unsigned int>(i), _copyClipboard[i]);
 							pastedCount++;
 						}
 						else
@@ -190,7 +190,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 					{
 						cursorLineIndex += (pastedCount - static_cast<int>(firstLineEmpty));
 						cursorLineIndex = min(cursorLineIndex, (MAX_LINE_COUNT - 1));
-						cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
+						cursorCharIndex = static_cast<unsigned int>(_script->getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
 
 						textHasChanged = true;
 					}

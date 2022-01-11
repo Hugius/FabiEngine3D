@@ -3,28 +3,20 @@
 ## 1. General
 
 - The billboard entity is a 2D quad in 3D space.
-- Instead of a solid quad, the texture of the billboard entity can be transparent text (based on a font).
 - Billboard entities are not affected by shadows or lighting.
 - Each billboard entity is the parent of 1 AABB entity.
 
 ## 2. Assets
 
-- Font
 - Diffuse map
 - Emission map
 
 ## 3. Properties
 
-- **Text Content**: the text content of the billboard entity
-  - Type: `string`
-  - Constraints: none
 - **Diffuse Map Path**: the path of the diffuse map file
   - Type: `string`
   - Constraints: none
 - **Emission Map Path**: the path of the emission map file
-  - Type: `string`
-  - Constraints: none
-- **Font Path**: the path of the font file
   - Type: `string`
   - Constraints: none
 - **Position**: the XYZ position of the mesh
@@ -97,8 +89,5 @@
   - Type: `boolean`
   - Constraints: none
 - **Frozen**: the XYZ position of the mesh is not affected by the camera position
-  - Type: `boolean`
-  - Constraints: none
-- **Textual**: the diffuse map is textual
   - Type: `boolean`
   - Constraints: none

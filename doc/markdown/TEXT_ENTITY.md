@@ -2,17 +2,17 @@
 
 ## 1. General
 
-- The text entity is a 2D quad in 2D space.
-- The mesh renders on top of all 3D rendering.
-- A font is used to generate a diffuse map based on the text content.
+- The text entity is a composition of quad entities.
+- Every quad entity represents a text character.
+- A font map is used to form a line of text.
 
 ## 2. Assets
 
-- Font
+- Font Map
 
 ## 3. Properties
 
-- **Font Path**: the path of the font file
+- **Font Map Path**: the path of the font map file
   - Type: `string`
   - Constraints: none
 - **Text Content**: the text content of the diffuse map

@@ -33,6 +33,7 @@
 #include "vertex_buffer_cache.hpp"
 #include "texture_buffer_cache.hpp"
 
+class EngineInterface;
 class EngineController;
 
 class EngineCore final
@@ -40,6 +41,7 @@ class EngineCore final
 public:
 	EngineCore();
 
+	void inject(shared_ptr<EngineInterface> fe3d);
 	void inject(shared_ptr<EngineController> engineController);
 
 	void start();
@@ -129,4 +131,5 @@ private:
 	shared_ptr<Timer> _timer = nullptr;
 
 	shared_ptr<EngineController> _engineController = nullptr;
+	shared_ptr<EngineInterface> _fe3d = nullptr;
 };

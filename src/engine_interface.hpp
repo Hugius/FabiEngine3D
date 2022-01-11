@@ -40,6 +40,7 @@ class EngineCore;
 
 class EngineInterface final
 {
+	friend EngineCore;
 public:
 	void inject(shared_ptr<EngineCore> core);
 

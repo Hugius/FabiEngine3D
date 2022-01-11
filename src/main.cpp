@@ -8,6 +8,7 @@ int main(int argc, char* argv[])
 	auto engineInterface = make_shared<EngineInterface>();
 	auto engineController = make_shared<EngineController>();
 
+	engineCore->inject(engineInterface);
 	engineCore->inject(engineController);
 	engineInterface->inject(engineCore);
 	engineController->inject(engineInterface);

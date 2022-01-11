@@ -1,4 +1,5 @@
 #include "engine_core.hpp"
+#include "engine_interface.hpp"
 #include "engine_controller.hpp"
 #include "tools.hpp"
 
@@ -85,6 +86,11 @@ EngineCore::EngineCore()
 	_sound2dPlayer->inject(_sound2dManager);
 	_sound3dPlayer->inject(_sound3dManager);
 	_sound3dPlayer->inject(_camera);
+}
+
+void EngineCore::inject(shared_ptr<EngineInterface> fe3d)
+{
+	_fe3d = fe3d;
 }
 
 void EngineCore::inject(shared_ptr<EngineController> engineController)
@@ -268,8 +274,8 @@ void EngineCore::update()
 	}
 
 	_timer->startDeltaPart("coreUpdate");
-	//_fe3d->_isRaycastUpdated = false;
-	//_fe3d->_hoveredAabbID = "";
+	_fe3d->_isRaycastUpdated = false;
+	_fe3d->_hoveredAabbID = "";
 	_engineController->update();
 	_timer->stopDeltaPart();
 
@@ -279,8 +285,7 @@ void EngineCore::update()
 		{
 			_timer->startDeltaPart("physicsUpdate");
 			_camera->update(lastCursorPosition);
-			//_raycaster->update(_fe3d->misc_getCursorPositionRelativeToViewport());
-			_raycaster->update({});
+			_raycaster->update(_fe3d->misc_getCursorPositionRelativeToViewport());
 			_cameraCollisionHandler->update();
 			_camera->updateMatrices();
 			_timer->stopDeltaPart();

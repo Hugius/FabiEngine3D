@@ -23,7 +23,7 @@ public:
 
 private:
 	void _updateHovering();
-	void _updateButtons(bool hoverable);
+	void _updateButtons(bool isHoverable);
 	void _updateScrolling();
 
 	const fvec3 _buttonColor;

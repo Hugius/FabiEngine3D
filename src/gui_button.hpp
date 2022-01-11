@@ -27,7 +27,7 @@ public:
 	shared_ptr<GuiTextField> getTextField() const;
 
 protected:
-	void _updateHovering(bool hoverable);
+	void _updateHovering(bool isHoverable);
 
 	const string _ID;
 	const string _parentID;

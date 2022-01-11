@@ -15,9 +15,9 @@ GuiWriteField::GuiWriteField(shared_ptr<EngineInterface> fe3d, const string& par
 	_fe3d->text_setContent(_textField->getEntityID(), "|", CHAR_WIDTH);
 }
 
-void GuiWriteField::update(bool hoverable)
+void GuiWriteField::update(bool isHoverable)
 {
-	_updateHovering(hoverable && !_isActive);
+	_updateHovering(isHoverable && !_isActive);
 	_updateActivation();
 	_updateTyping();
 }

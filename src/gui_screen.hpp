@@ -12,7 +12,7 @@ class GuiScreen final
 public:
 	GuiScreen(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size);
 
-	void update(bool hoverable);
+	void update(bool isHoverable);
 	void show();
 	void hide();
 	void createScrollingList(const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 buttonColor, fvec3 buttonHoverColor, fvec3 textColor, fvec3 textHoverColor, fvec2 charSize, bool isCentered);
@@ -67,5 +67,6 @@ private:
 	vector<shared_ptr<GuiButton>> _buttons;
 	vector<shared_ptr<GuiRectangle>> _rectangles;
 	vector<shared_ptr<GuiTextField>> _textFields;
+
 	shared_ptr<EngineInterface> _fe3d = nullptr;
 };

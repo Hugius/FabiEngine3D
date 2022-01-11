@@ -12,23 +12,23 @@ GuiScreen::GuiScreen(shared_ptr<EngineInterface> fe3d, const string& parentID, c
 
 }
 
-void GuiScreen::update(bool hoverable)
+void GuiScreen::update(bool isHoverable)
 {
 	for(const auto& scrollingList : _scrollingLists)
 	{
-		scrollingList->update(hoverable);
+		scrollingList->update(isHoverable);
 		scrollingList->setVisible(_isActive);
 	}
 
 	for(const auto& writeField : _writeFields)
 	{
-		writeField->update(hoverable);
+		writeField->update(isHoverable);
 		writeField->setVisible(_isActive);
 	}
 
 	for(const auto& button : _buttons)
 	{
-		button->update(hoverable);
+		button->update(isHoverable);
 		button->setVisible(_isActive);
 	}
 

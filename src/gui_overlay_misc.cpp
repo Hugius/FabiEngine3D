@@ -1,8 +1,10 @@
 #include "gui_overlay.hpp"
 
-void GuiOverlay::inject(shared_ptr<EngineInterface> fe3d)
+GuiOverlay::GuiOverlay(shared_ptr<EngineInterface> fe3d)
+	:
+	_fe3d(fe3d)
 {
-	_fe3d = fe3d;
+
 }
 
 void GuiOverlay::update()

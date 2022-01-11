@@ -12,11 +12,13 @@ public:
 	void createScreen(const string& ID);
 	void deleteScreen(const string& ID);
 	void setActiveScreen(const string& ID);
-	void update(bool hoverable);
+	void update(bool isHoverable);
 
 	const string& getID() const;
 	const string& getEntityID() const;
 	const string& getParentID() const;
+
+	const fvec3 getInitialColor() const;
 
 	const fvec2 getInitialPosition() const;
 	const fvec2 getInitialSize() const;
@@ -33,9 +35,12 @@ private:
 	const string _parentID;
 	string _activeScreenID = "";
 
+	const fvec3 _initialColor;
+
 	const fvec2 _initialPosition;
 	const fvec2 _initialSize;
 
 	vector<shared_ptr<GuiScreen>> _screens;
+
 	shared_ptr<EngineInterface> _fe3d = nullptr;
 };

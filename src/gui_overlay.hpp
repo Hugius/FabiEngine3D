@@ -10,7 +10,7 @@
 class GuiOverlay final
 {
 public:
-	void inject(shared_ptr<EngineInterface> fe3d);
+	GuiOverlay(shared_ptr<EngineInterface> fe3d);
 
 	void update();
 	void setFocused(bool value);

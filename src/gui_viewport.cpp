@@ -2,25 +2,14 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-GuiViewport::GuiViewport(const string& ID)
+GuiViewport::GuiViewport(shared_ptr<EngineInterface> fe3d, const string& ID, fvec2 position, fvec2 size, fvec3 color)
 	:
+	_fe3d(fe3d),
 	_ID(ID),
-	_entityID("@" + ID)
-{
-
-}
-
-GuiViewport::~GuiViewport()
-{
-	_fe3d->quad_delete(_entityID);
-}
-
-void GuiViewport::inject(shared_ptr<EngineInterface> fe3d)
-{
-	_fe3d = fe3d;
-}
-
-void GuiViewport::load(fvec2 position, fvec2 size, fvec3 color)
+	_entityID("@" + ID),
+	_initialPosition(position),
+	_initialSize(size),
+	_initialColor(color)
 {
 	_fe3d->quad_create(_entityID, true);
 	_fe3d->quad_setPosition(_entityID, position);
@@ -28,11 +17,16 @@ void GuiViewport::load(fvec2 position, fvec2 size, fvec3 color)
 	_fe3d->quad_setColor(_entityID, color);
 }
 
-void GuiViewport::update(bool hoverable)
+GuiViewport::~GuiViewport()
+{
+	_fe3d->quad_delete(_entityID);
+}
+
+void GuiViewport::update(bool isHoverable)
 {
 	for(const auto& window : _windows)
 	{
-		window->update(hoverable);
+		window->update(isHoverable);
 	}
 }
 
@@ -40,9 +34,9 @@ const bool GuiViewport::isHovered() const
 {
 	if(_fe3d->quad_isVisible(_entityID))
 	{
-		fvec2 cursorPosition = Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d->misc_getCursorPosition()));
-		fvec2 buttonPosition = _fe3d->quad_getPosition(_entityID);
-		fvec2 buttonSize = _fe3d->quad_getSize(_entityID);
+		auto cursorPosition = Math::convertToNdc(Tools::convertFromScreenCoords(_fe3d->misc_getCursorPosition()));
+		auto buttonPosition = _fe3d->quad_getPosition(_entityID);
+		auto buttonSize = _fe3d->quad_getSize(_entityID);
 
 		if(cursorPosition.x > (buttonPosition.x - (buttonSize.x / 2.0f)))
 		{
@@ -72,12 +66,27 @@ const string& GuiViewport::getEntityID()
 	return _entityID;
 }
 
+const fvec3 GuiViewport::getInitialColor() const
+{
+	return _initialColor;
+}
+
+const fvec2 GuiViewport::getInitialPosition() const
+{
+	return _initialPosition;
+}
+
+const fvec2 GuiViewport::getInitialSize() const
+{
+	return _initialSize;
+}
+
 void GuiViewport::createWindow(const string& ID, fvec2 position, fvec2 size, fvec3 color)
 {
 	auto viewportPosition = _fe3d->quad_getPosition(_entityID);
 	auto viewportSize = _fe3d->quad_getSize(_entityID);
-	auto windowPosition = viewportPosition + (position * viewportSize);
-	auto windowSize = (size / 2.0f) * viewportSize;
+	auto windowPosition = (viewportPosition + (position * viewportSize));
+	auto windowSize = ((size / 2.0f) * viewportSize);
 
 	_windows.push_back(make_shared<GuiWindow>(_fe3d, _ID, ID, windowPosition, windowSize, color));
 }

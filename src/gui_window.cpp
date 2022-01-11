@@ -9,7 +9,8 @@ GuiWindow::GuiWindow(shared_ptr<EngineInterface> fe3d, const string& parentID, c
 	_entityID("@" + parentID + "_" + ID),
 	_parentID(parentID),
 	_initialPosition(position),
-	_initialSize(size)
+	_initialSize(size),
+	_initialColor(color)
 {
 	_fe3d->quad_create(_entityID, true);
 	_fe3d->quad_setPosition(_entityID, position);
@@ -22,11 +23,11 @@ GuiWindow::~GuiWindow()
 	_fe3d->quad_delete(_entityID);
 }
 
-void GuiWindow::update(bool hoverable)
+void GuiWindow::update(bool isHoverable)
 {
 	for(const auto& screen : _screens)
 	{
-		screen->update(hoverable);
+		screen->update(isHoverable);
 	}
 }
 
@@ -65,6 +66,11 @@ const string& GuiWindow::getParentID() const
 	return _parentID;
 }
 
+const fvec3 GuiWindow::getInitialColor() const
+{
+	return _initialColor;
+}
+
 const fvec2 GuiWindow::getInitialPosition() const
 {
 	return _initialPosition;
@@ -85,10 +91,10 @@ void GuiWindow::createScreen(const string& ID)
 		}
 	}
 
-	fvec2 windowPosition = _fe3d->quad_getPosition(_entityID);
-	fvec2 windowSize = _fe3d->quad_getSize(_entityID);
+	auto windowPosition = _fe3d->quad_getPosition(_entityID);
+	auto windowSize = _fe3d->quad_getSize(_entityID);
+
 	_screens.push_back(make_shared<GuiScreen>(_fe3d, _parentID + "_" + _ID, ID, windowPosition, windowSize));
-	getScreen(ID)->hide();
 }
 
 void GuiWindow::deleteScreen(const string& ID)

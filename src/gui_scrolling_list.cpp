@@ -173,11 +173,11 @@ void GuiScrollingList::_updateScrolling()
 	}
 }
 
-void GuiScrollingList::_updateButtons(bool hoverable)
+void GuiScrollingList::_updateButtons(bool isHoverable)
 {
 	for(const auto& button : _buttons)
 	{
-		button->update(hoverable && _isHovered);
+		button->update(isHoverable && _isHovered);
 	}
 }
 

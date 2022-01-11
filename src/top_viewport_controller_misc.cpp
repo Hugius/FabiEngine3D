@@ -298,6 +298,11 @@ void TopViewportController::inject(shared_ptr<ScriptEditor> scriptEditor)
 	_scriptEditor = scriptEditor;
 }
 
+void TopViewportController::inject(shared_ptr<Script> script)
+{
+	_script = script;
+}
+
 void TopViewportController::inject(shared_ptr<ScriptExecutor> scriptExecutor)
 {
 	_scriptExecutor = scriptExecutor;

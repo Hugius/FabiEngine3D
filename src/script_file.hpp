@@ -16,6 +16,7 @@ public:
 	void changeID(const string& newID);
 
 	const vector<string>& getLines() const;
+
 	const string& getID() const;
 	const string& getLineText(unsigned int index) const;
 
@@ -25,6 +26,7 @@ public:
 
 private:
 	vector<string> _lines;
+
 	string _ID;
 
 	unsigned int _cursorLineIndex = 0;

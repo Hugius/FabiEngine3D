@@ -50,6 +50,7 @@ EngineController::EngineController()
 	_topViewportController->inject(_soundEditor);
 	_topViewportController->inject(_worldEditor);
 	_topViewportController->inject(_scriptEditor);
+	_topViewportController->inject(_script);
 	_topViewportController->inject(_scriptExecutor);
 	_bottomViewportController->inject(_guiManager);
 	_bottomViewportController->inject(_scriptEditor);
@@ -75,7 +76,6 @@ EngineController::EngineController()
 	_worldEditor->inject(_soundEditor);
 	_scriptEditor->inject(_guiManager);
 	_scriptEditor->inject(_script);
-	_scriptExecutor->inject(_script);
 	_scriptExecutor->inject(_scriptInterpreter);
 	_scriptInterpreter->inject(_script);
 	_scriptInterpreter->inject(_skyEditor);

@@ -130,7 +130,7 @@ void TopViewportController::_updateGameScreenManagement()
 
 		static bool wasInMainMenu = false;
 		bool isInMainMenu = (_gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "main");
-		screen->getButton("start")->setHoverable(isInMainMenu && !_scriptExecutor->isScriptEmpty() && !isScriptRunning());
+		screen->getButton("start")->setHoverable(isInMainMenu && !_script->isEmpty() && !isScriptRunning());
 		screen->getButton("pause")->setHoverable(isInMainMenu && isScriptRunning() && !_fe3d->server_isRunning());
 		screen->getButton("restart")->setHoverable(isInMainMenu && _scriptExecutor->isStarted());
 		screen->getButton("stop")->setHoverable(isInMainMenu && _scriptExecutor->isStarted());

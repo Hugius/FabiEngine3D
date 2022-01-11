@@ -12,13 +12,13 @@ void ScriptExecutor::load()
 	_validateExecution();
 }
 
-void ScriptExecutor::update(bool debug)
+void ScriptExecutor::update(bool isDebugging)
 {
 	if(_isStarted && _isRunning)
 	{
-		if(!_mustSkipUpdate || debug)
+		if(!_mustSkipUpdate || isDebugging)
 		{
-			_scriptInterpreter->executeUpdateScripts(debug);
+			_scriptInterpreter->executeUpdateScripts(isDebugging);
 		}
 		else
 		{
@@ -144,11 +144,6 @@ void ScriptExecutor::inject(shared_ptr<EngineInterface> fe3d)
 	_fe3d = fe3d;
 }
 
-void ScriptExecutor::inject(shared_ptr<Script> script)
-{
-	_script = script;
-}
-
 void ScriptExecutor::inject(shared_ptr<ScriptInterpreter> scriptInterpreter)
 {
 	_scriptInterpreter = scriptInterpreter;
@@ -157,11 +152,6 @@ void ScriptExecutor::inject(shared_ptr<ScriptInterpreter> scriptInterpreter)
 void ScriptExecutor::setCurrentProjectID(const string& projectID)
 {
 	_scriptInterpreter->setCurrentProjectID(projectID);
-}
-
-const bool ScriptExecutor::isScriptEmpty() const
-{
-	return (_script->getScriptFileCount() == 0);
 }
 
 const bool ScriptExecutor::isStarted() const

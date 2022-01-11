@@ -13,10 +13,12 @@ public:
 	const vector<string> getScriptFileIDs() const;
 
 	const vector<pair<string, unsigned int>> findKeyword(const string& keyword) const;
+
 	const unsigned int getScriptFileCount() const;
 	const unsigned int getTotalLineCount() const;
 
 	const bool isScriptFileExisting(const string& ID) const;
+	const bool isEmpty();
 
 	shared_ptr<ScriptFile> getScriptFile(const string& ID) const;
 

@@ -1,13 +1,12 @@
 #include "script_variable.hpp"
 #include "logger.hpp"
 
-ScriptVariable::ScriptVariable(ScriptVariableScope scope, ScriptVariableType type,
-							   const string& ID, bool constant, vector<ScriptValue> values)
+ScriptVariable::ScriptVariable(const string& ID, ScriptVariableScope scope, ScriptVariableType type, bool isConstant, vector<ScriptValue> values)
 	:
 	_scope(scope),
 	_type(type),
 	_ID(ID),
-	_isConstant(constant)
+	_isConstant(isConstant)
 {
 	for(const auto& value : values)
 	{
@@ -53,6 +52,7 @@ void ScriptVariable::setValue(ScriptValue value, unsigned int index)
 	}
 
 	_values.erase(_values.begin() + index);
+
 	_values.insert(_values.begin() + index, make_shared<ScriptValue>(value));
 }
 

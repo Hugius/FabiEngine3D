@@ -12,8 +12,8 @@ using std::unordered_map;
 class TerrainEntityColorRenderer final : public BaseRenderer
 {
 public:
-	void bind() override;
-	void unbind() override;
+	void bind();
+	void unbind();
 	void processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>>& entities);
 	void processSpotlightEntities(const unordered_map<string, shared_ptr<SpotlightEntity>>& entities);
 	void render(const shared_ptr<TerrainEntity> entity);

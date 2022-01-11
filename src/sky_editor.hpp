@@ -7,17 +7,17 @@ class SkyEditor final : public BaseEditor
 public:
 	using BaseEditor::inject;
 
-	void setCurrentProjectID(const string& projectID) override;
-	void load() override;
-	void update() override;
-	void unload() override;
+	void setCurrentProjectID(const string& projectID);
+	void load();
+	void update();
+	void unload();
 
 	const vector<string> getImagePathsFromFile() const;
 	const vector<string>& getLoadedIDs();
 
 	const bool loadFromFile();
 	const bool saveToFile() const;
-	const bool isLoaded() const override;
+	const bool isLoaded() const;
 
 private:
 	void _loadGUI();

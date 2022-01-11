@@ -12,8 +12,8 @@ public:
 	void inject(shared_ptr<ScriptExecutor> scriptExecutor);
 	void inject(shared_ptr<ScriptEditor> scriptEditor);
 
-	void initialize() override;
-	void update() override;
+	void initialize();
+	void update();
 
 private:
 	void _updateStatistics();

@@ -22,10 +22,10 @@ public:
 	void inject(shared_ptr<VertexBufferCache> vertexBufferCache);
 	void update();
 	void createEntity(const string& ID, const string& meshPath);
-	void deleteEntity(const string& ID) override;
-	void deleteEntities() override;
+	void deleteEntity(const string& ID);
+	void deleteEntities();
 
-	const bool isEntityExisting(const string& ID) const override;
+	const bool isEntityExisting(const string& ID) const;
 
 	const unordered_map<string, shared_ptr<ModelEntity>>& getEntities();
 	shared_ptr<ModelEntity> getEntity(const string& ID);

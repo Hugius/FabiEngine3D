@@ -13,14 +13,14 @@ class TerrainEntityManager final : public BaseEntityManager
 public:
 	void inject(shared_ptr<ImageLoader> imageLoader);
 	void createEntity(const string& ID, const string& heightMapPath);
-	void deleteEntity(const string& ID) override;
-	void deleteEntities() override;
+	void deleteEntity(const string& ID);
+	void deleteEntities();
 	void loadMesh(const string& ID);
 	void selectTerrain(const string& ID);
 
 	const float getPixelHeight(const string& ID, float x, float z);
 
-	const bool isEntityExisting(const string& ID) const override;
+	const bool isEntityExisting(const string& ID) const;
 	const bool isInside(const string& ID, float x, float z);
 
 	const unordered_map<string, shared_ptr<TerrainEntity>>& getEntities();

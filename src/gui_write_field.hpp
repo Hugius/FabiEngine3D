@@ -9,10 +9,10 @@ public:
 	GuiWriteField(shared_ptr<EngineInterface> fe3d, const string& parentID, const string& ID, fvec2 position, fvec2 size, fvec3 color, fvec3 hoverColor,
 				  fvec3 textColor, fvec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed, bool isCentered);
 
-	void update(bool hoverable) override;
+	void update(bool hoverable);
 	void setActive(bool active);
 	void setPermActive(bool active);
-	void changeTextContent(const string& content) override;
+	void changeTextContent(const string& content);
 
 	const string getTextContent() const;
 

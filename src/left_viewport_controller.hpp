@@ -30,8 +30,8 @@ public:
 	void inject(shared_ptr<WorldEditor> worldEditor);
 	void inject(shared_ptr<ScriptEditor> scriptEditor);
 
-	void initialize() override;
-	void update() override;
+	void initialize();
+	void update();
 
 	static inline const fvec3 SCROLLING_LIST_COLOR = fvec3(0.25f);
 	static inline const fvec3 BUTTON_COLOR = fvec3(0.1f, 0.1f, 1.0f);

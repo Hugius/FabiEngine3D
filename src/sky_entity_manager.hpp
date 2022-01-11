@@ -16,8 +16,8 @@ public:
 	void inject(shared_ptr<RenderBus> renderBus);
 	void update();
 	void createEntity(const string& ID);
-	void deleteEntity(const string& ID) override;
-	void deleteEntities() override;
+	void deleteEntity(const string& ID);
+	void deleteEntities();
 	void selectMainSky(const string& ID);
 	void selectMixSky(const string& ID);
 	void setExposureIntensity(float value);
@@ -27,7 +27,7 @@ public:
 	const float getExposureIntensity() const;
 	const float getExposureSpeed() const;
 
-	const bool isEntityExisting(const string& ID) const override;
+	const bool isEntityExisting(const string& ID) const;
 	const bool isExposureEnabled() const;
 
 	const unordered_map<string, shared_ptr<SkyEntity>>& getEntities();

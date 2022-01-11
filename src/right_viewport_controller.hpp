@@ -7,8 +7,8 @@ class RightViewportController final : public BaseViewportController
 public:
 	using BaseViewportController::inject;
 
-	void initialize() override;
-	void update() override;
+	void initialize();
+	void update();
 
 private:
 	static inline const fvec3 FRAME_COLOR = fvec3(0.175f);

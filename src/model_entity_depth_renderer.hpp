@@ -6,8 +6,8 @@
 class ModelEntityDepthRenderer final : public BaseRenderer
 {
 public:
-	void bind() override;
-	void unbind() override;
+	void bind();
+	void unbind();
 	void render(const shared_ptr<ModelEntity> entity, float clippingY, bool isUnderWater);
 
 private:

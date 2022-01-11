@@ -11,8 +11,8 @@ public:
 	using BaseRenderer::inject;
 
 	void inject(shared_ptr<CaptureBuffer> captor);
-	void bind() override;
-	void unbind() override;
+	void bind();
+	void unbind();
 
 	const shared_ptr<TextureBuffer> blurTexture(const shared_ptr<QuadEntity> entity,
 												shared_ptr<TextureBuffer> texture, unsigned int blurCount,

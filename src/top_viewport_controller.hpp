@@ -31,8 +31,8 @@ public:
 	void inject(shared_ptr<ScriptEditor> scriptEditor);
 	void inject(shared_ptr<ScriptExecutor> scriptExecutor);
 
-	void initialize() override;
-	void update() override;
+	void initialize();
+	void update();
 
 	const bool isScriptStarted() const;
 	const bool isScriptRunning() const;

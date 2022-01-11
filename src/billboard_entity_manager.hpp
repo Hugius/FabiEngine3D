@@ -17,10 +17,10 @@ public:
 	void inject(shared_ptr<RenderBus> renderBus);
 	void update();
 	void createEntity(const string& ID, bool isCentered);
-	void deleteEntity(const string& ID) override;
-	void deleteEntities() override;
+	void deleteEntity(const string& ID);
+	void deleteEntities();
 
-	const bool isEntityExisting(const string& ID) const override;
+	const bool isEntityExisting(const string& ID) const;
 
 	const unordered_map<string, shared_ptr<BillboardEntity>>& getEntities();
 	shared_ptr<BillboardEntity> getEntity(const string& ID);

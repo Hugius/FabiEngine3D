@@ -12,12 +12,12 @@ class WaterEntityManager final : public BaseEntityManager
 public:
 	void update();
 	void createEntity(const string& ID);
-	void deleteEntity(const string& ID) override;
-	void deleteEntities() override;
+	void deleteEntity(const string& ID);
+	void deleteEntities();
 	void loadMesh(const string& ID);
 	void selectWater(const string& ID);
 
-	const bool isEntityExisting(const string& ID) const override;
+	const bool isEntityExisting(const string& ID) const;
 
 	const unordered_map<string, shared_ptr<WaterEntity>>& getEntities();
 

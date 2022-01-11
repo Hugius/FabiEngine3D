@@ -43,5 +43,4 @@ private:
 	bool _isCreatingQuad = false;
 	bool _isChoosingQuad = false;
 	bool _isDeletingQuad = false;
-	bool _isEditorLoaded = false;
 };

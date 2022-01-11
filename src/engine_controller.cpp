@@ -38,6 +38,9 @@ EngineController::EngineController()
 	_leftViewportController->inject(_worldEditor);
 	_leftViewportController->inject(_scriptEditor);
 	_rightViewportController->inject(_guiManager);
+	_bottomViewportController->inject(_guiManager);
+	_bottomViewportController->inject(_scriptEditor);
+	_bottomViewportController->inject(_scriptExecutor);
 	_topViewportController->inject(_guiManager);
 	_topViewportController->inject(_skyEditor);
 	_topViewportController->inject(_terrainEditor);
@@ -52,9 +55,6 @@ EngineController::EngineController()
 	_topViewportController->inject(_scriptEditor);
 	_topViewportController->inject(_script);
 	_topViewportController->inject(_scriptExecutor);
-	_bottomViewportController->inject(_guiManager);
-	_bottomViewportController->inject(_scriptEditor);
-	_bottomViewportController->inject(_scriptExecutor);
 	_skyEditor->inject(_guiManager);
 	_terrainEditor->inject(_guiManager);
 	_waterEditor->inject(_guiManager);
@@ -92,30 +92,30 @@ EngineController::EngineController()
 
 void EngineController::inject(shared_ptr<EngineInterface> fe3d)
 {
-	_guiManager->inject(fe3d);
-	_leftViewportController->inject(fe3d);
-	_rightViewportController->inject(fe3d);
-	_topViewportController->inject(fe3d);
-	_bottomViewportController->inject(fe3d);
-	_skyEditor->inject(fe3d);
-	_terrainEditor->inject(fe3d);
-	_waterEditor->inject(fe3d);
-	_modelEditor->inject(fe3d);
-	_billboardEditor->inject(fe3d);
-	_quadEditor->inject(fe3d);
-	_animation2dEditor->inject(fe3d);
-	_animation3dEditor->inject(fe3d);
-	_soundEditor->inject(fe3d);
-	_worldEditor->inject(fe3d);
-	_scriptEditor->inject(fe3d);
-	_scriptExecutor->inject(fe3d);
-	_scriptInterpreter->inject(fe3d);
-
 	_fe3d = fe3d;
 }
 
 void EngineController::initialize()
 {
+	_guiManager->inject(_fe3d);
+	_leftViewportController->inject(_fe3d);
+	_rightViewportController->inject(_fe3d);
+	_bottomViewportController->inject(_fe3d);
+	_topViewportController->inject(_fe3d);
+	_skyEditor->inject(_fe3d);
+	_terrainEditor->inject(_fe3d);
+	_waterEditor->inject(_fe3d);
+	_modelEditor->inject(_fe3d);
+	_billboardEditor->inject(_fe3d);
+	_quadEditor->inject(_fe3d);
+	_animation2dEditor->inject(_fe3d);
+	_animation3dEditor->inject(_fe3d);
+	_soundEditor->inject(_fe3d);
+	_worldEditor->inject(_fe3d);
+	_scriptEditor->inject(_fe3d);
+	_scriptExecutor->inject(_fe3d);
+	_scriptInterpreter->inject(_fe3d);
+
 	const auto rootPath = Tools::getRootDirectoryPath();
 	const string meshDirectoryPath = "engine\\assets\\mesh\\";
 	const string diffuseMapDirectoryPath = "engine\\assets\\image\\diffuse_map\\";
@@ -185,10 +185,10 @@ void EngineController::initialize()
 		_fe3d->misc_setCursorVisible(false);
 
 		_guiManager->initialize();
+		_leftViewportController->initialize();
 		_rightViewportController->initialize();
 		_bottomViewportController->initialize();
 		_topViewportController->initialize();
-		_leftViewportController->initialize();
 
 		_fe3d->misc_enableVsync();
 	}
@@ -214,7 +214,7 @@ void EngineController::update()
 	else
 	{
 		static string lastScreen = "";
-		string activeScreen = _guiManager->getViewport("left")->getWindow("main")->getActiveScreen()->getID();
+		string activeScreen = _guiManager->getLeftViewport()->getWindow("main")->getActiveScreen()->getID();
 		if(activeScreen == "main" && lastScreen != "main")
 		{
 			_fe3d->misc_setBackgroundColor(RENDER_COLOR);
@@ -229,10 +229,10 @@ void EngineController::update()
 
 		_guiManager->update();
 
-		_topViewportController->update();
 		_leftViewportController->update();
 		_rightViewportController->update();
 		_bottomViewportController->update();
+		_topViewportController->update();
 	}
 }
 

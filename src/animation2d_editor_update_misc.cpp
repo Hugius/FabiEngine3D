@@ -43,7 +43,7 @@ void Animation2dEditor::_updateAnimationCreating()
 				return;
 			}
 
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
 			_animations.push_back(make_shared<Animation2d>(newAnimationID));
 			_currentAnimationID = newAnimationID;
 			_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
@@ -68,7 +68,7 @@ void Animation2dEditor::_updateAnimationChoosing()
 
 				if(!_isDeletingAnimation)
 				{
-					_gui->getViewport("left")->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
+					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuChoice");
 					_fe3d->billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, _getAnimation(_currentAnimationID)->getPreviewTexturePath());
 					_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, true);
 					_fe3d->text_setContent(_gui->getOverlay()->getTextField("animationID")->getEntityID(), "Animation: " + selectedButtonID, 0.025f);

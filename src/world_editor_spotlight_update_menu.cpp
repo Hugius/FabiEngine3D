@@ -4,7 +4,7 @@
 
 void WorldEditor::_updateSpotlightMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "worldEditorMenuSpotlight")
 	{
@@ -17,12 +17,12 @@ void WorldEditor::_updateSpotlightMenu()
 				_isPlacingSpotlight = false;
 			}
 
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("place")->isHovered())
 		{
-			_gui->getViewport("right")->getWindow("main")->setActiveScreen("main");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 
 			_deactivateModel();
 			_deactivateBillboard();
@@ -46,8 +46,8 @@ void WorldEditor::_updateSpotlightMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSpotlightChoice");
-			_gui->getViewport("left")->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlights")->deleteButtons();
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSpotlightChoice");
+			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlights")->deleteButtons();
 
 			auto IDs = _fe3d->spotlight_getIDs();
 			sort(IDs.begin(), IDs.end());
@@ -60,7 +60,7 @@ void WorldEditor::_updateSpotlightMenu()
 					reverse(rawID.begin(), rawID.end());
 					reverse(spotlightID.begin(), spotlightID.end());
 
-					_gui->getViewport("left")->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlights")->createButton(spotlightID, rawID);
+					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSpotlightChoice")->getScrollingList("spotlights")->createButton(spotlightID, rawID);
 				}
 			}
 		}
@@ -69,7 +69,7 @@ void WorldEditor::_updateSpotlightMenu()
 
 void WorldEditor::_updateSpotlightChoosingMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "worldEditorMenuSpotlightChoice")
 	{
@@ -107,7 +107,7 @@ void WorldEditor::_updateSpotlightChoosingMenu()
 		{
 			if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 			{
-				_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSpotlight");
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSpotlight");
 				return;
 			}
 		}

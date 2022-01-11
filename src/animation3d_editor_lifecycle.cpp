@@ -106,7 +106,7 @@ void Animation3dEditor::unload()
 
 void Animation3dEditor::_loadGUI()
 {
-	auto leftWindow = _gui->getViewport("left")->getWindow("main");
+	auto leftWindow = _gui->getLeftViewport()->getWindow("main");
 
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("animation3dEditorMenuMain");
@@ -140,9 +140,9 @@ void Animation3dEditor::_loadGUI()
 
 void Animation3dEditor::_unloadGUI()
 {
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("animation3dEditorMenuMain");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("animation3dEditorMenuChoice");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("animation3dEditorMenuFrame");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("animation3dEditorMenuMain");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("animation3dEditorMenuChoice");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("animation3dEditorMenuFrame");
 }
 
 void Animation3dEditor::update()

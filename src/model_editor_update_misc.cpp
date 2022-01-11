@@ -179,7 +179,7 @@ void ModelEditor::_updateModelCreating()
 
 			if(_fe3d->model_isExisting(newModelID))
 			{
-				_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 
 				_currentModelID = newModelID;
 				_loadedModelIDs.push_back(newModelID);
@@ -214,7 +214,7 @@ void ModelEditor::_updateModelChoosing()
 
 				if(!_isDeletingModel)
 				{
-					_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 					_fe3d->text_setContent(_gui->getOverlay()->getTextField("modelID")->getEntityID(), "Model: " + _currentModelID.substr(1), 0.025f);
 					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), true);
 				}
@@ -282,7 +282,7 @@ void ModelEditor::_updatePartChoosing()
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				_currentPartID = selectedButtonID;
-				_gui->getViewport("left")->getWindow("main")->setActiveScreen(_nextActiveScreenID);
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen(_nextActiveScreenID);
 				_fe3d->text_setContent(_gui->getOverlay()->getTextField("partID")->getEntityID(), ("Part: " + _currentPartID), 0.025f);
 				_fe3d->text_setVisible(_gui->getOverlay()->getTextField("partID")->getEntityID(), true);
 				_gui->getOverlay()->deleteChoiceForm("partList");

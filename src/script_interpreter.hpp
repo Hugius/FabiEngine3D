@@ -160,6 +160,18 @@ private:
 	ScriptVariable& _getGlobalVariable(const string& variableID);
 	ScriptConditionStatement* _getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth) const;
 
+	map<string, float> _debuggingTimes;
+
+	unordered_map<unsigned int, unordered_map<string, ScriptVariable>> _localVariables;
+	unordered_map<string, ScriptVariable> _globalVariables;
+
+	vector<string> _currentScriptIDsStack;
+	vector<string> _lineStringStreams;
+	vector<string> _initializeScriptIDs;
+	vector<string> _updateScriptIDs;
+	vector<string> _terminateScriptIDs;
+	vector<unsigned int> _currentLineIndexStack;
+
 	static inline const string META_KEYWORD = "META";
 	static inline const string EXECUTE_KEYWORD = "EXECUTE";
 	static inline const string LOOP_KEYWORD = "LOOP";
@@ -191,22 +203,14 @@ private:
 	static inline const string PUSHING_KEYWORD = "PUSH";
 	static inline const string PULLING_KEYWORD = "PULL";
 	static inline const string PASS_KEYWORD = "PASS";
-	vector<string> _currentScriptIDsStack;
-	vector<string> _lineStringStreams;
-	vector<string> _initializeScriptIDs;
-	vector<string> _updateScriptIDs;
-	vector<string> _terminateScriptIDs;
 	string _currentProjectID = "";
 	string _initEntryID = "";
 	string _updateEntryID = "";
 	string _terminateEntryID = "";
 
-	map<string, float> _debuggingTimes;
-
 	static inline const unsigned int SPACES_PER_INDENT = 4;
 	static inline const unsigned int MAX_ITERATIONS_PER_LOOP = 1000;
 	static inline const unsigned int MAX_EXECUTION_DEPTH = 10;
-	vector<unsigned int> _currentLineIndexStack;
 	unsigned int _engineFunctionCallCount = 0;
 	unsigned int _executionDepth = 0;
 
@@ -222,20 +226,19 @@ private:
 	bool _isExecutingUpdate = false;
 	bool _isExecutingTerminate = false;
 
-	unordered_map<unsigned int, unordered_map<string, ScriptVariable>> _localVariables;
-	unordered_map<string, ScriptVariable> _globalVariables;
-	shared_ptr<EngineInterface> _fe3d;
-	shared_ptr<Script> _script;
-	shared_ptr<SkyEditor> _skyEditor;
-	shared_ptr<TerrainEditor> _terrainEditor;
-	shared_ptr<WaterEditor> _waterEditor;
-	shared_ptr<ModelEditor> _modelEditor;
-	shared_ptr<BillboardEditor> _billboardEditor;
-	shared_ptr<QuadEditor> _quadEditor;
-	shared_ptr<Animation2dEditor> _animation2dEditor;
-	shared_ptr<Animation3dEditor> _animation3dEditor;
-	shared_ptr<SoundEditor> _soundEditor;
-	shared_ptr<WorldEditor> _worldEditor;
+	shared_ptr<EngineInterface> _fe3d = nullptr;
+	shared_ptr<Script> _script = nullptr;
+	shared_ptr<SkyEditor> _skyEditor = nullptr;
+	shared_ptr<TerrainEditor> _terrainEditor = nullptr;
+	shared_ptr<WaterEditor> _waterEditor = nullptr;
+	shared_ptr<ModelEditor> _modelEditor = nullptr;
+	shared_ptr<BillboardEditor> _billboardEditor = nullptr;
+	shared_ptr<QuadEditor> _quadEditor = nullptr;
+	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
+	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
+	shared_ptr<SoundEditor> _soundEditor = nullptr;
+	shared_ptr<WorldEditor> _worldEditor = nullptr;
+
 	static inline const map<string, InputType> KEY_INPUT_STRING_MAP =
 	{
 		{"KEY_A", InputType::KEY_A},
@@ -332,6 +335,7 @@ private:
 		{"KEY_PERIOD", InputType::KEY_PERIOD},
 		{"KEY_SLASH", InputType::KEY_SLASH}
 	};
+
 	static inline const map<string, InputType> MOUSE_INPUT_STRING_MAP =
 	{
 		{"BUTTON_LEFT", InputType::MOUSE_BUTTON_LEFT},

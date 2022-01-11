@@ -137,7 +137,7 @@ void WorldEditor::_updateWorldCreating()
 			}
 
 			_currentWorldID = newWorldID;
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 		}
 	}
 }
@@ -159,7 +159,7 @@ void WorldEditor::_updateWorldChoosing()
 				{
 					if(loadEditorWorldFromFile(_currentWorldID))
 					{
-						_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
+						_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 					}
 				}
 

@@ -51,7 +51,7 @@ void SkyEditor::unload()
 
 void SkyEditor::_loadGUI()
 {
-	auto leftWindow = _gui->getViewport("left")->getWindow("main");
+	auto leftWindow = _gui->getLeftViewport()->getWindow("main");
 
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("skyEditorMenuMain");
@@ -87,10 +87,10 @@ void SkyEditor::_loadGUI()
 
 void SkyEditor::_unloadGUI()
 {
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("skyEditorMenuMain");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("skyEditorMenuChoice");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("skyEditorMenuTexturing");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("skyEditorMenuMiscellaneous");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("skyEditorMenuMain");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("skyEditorMenuChoice");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("skyEditorMenuTexturing");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("skyEditorMenuMiscellaneous");
 }
 
 void SkyEditor::update()

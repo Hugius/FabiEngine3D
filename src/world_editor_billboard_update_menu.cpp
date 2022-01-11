@@ -4,24 +4,24 @@
 
 void WorldEditor::_updateBillboardMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "worldEditorMenuBillboard")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("place")->isHovered())
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuBillboardPlace");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuBillboardPlace");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuBillboardChoice");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuBillboardChoice");
 
-			_gui->getViewport("left")->getWindow("main")->getScreen("worldEditorMenuBillboardChoice")->getScrollingList("billboardList")->deleteButtons();
+			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuBillboardChoice")->getScrollingList("billboardList")->deleteButtons();
 
 			auto IDs = _fe3d->billboard_getIDs();
 			sort(IDs.begin(), IDs.end());
@@ -34,7 +34,7 @@ void WorldEditor::_updateBillboardMenu()
 					reverse(rawID.begin(), rawID.end());
 					reverse(billboardID.begin(), billboardID.end());
 
-					_gui->getViewport("left")->getWindow("main")->getScreen("worldEditorMenuBillboardChoice")->getScrollingList("billboardList")->createButton(billboardID, rawID);
+					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuBillboardChoice")->getScrollingList("billboardList")->createButton(billboardID, rawID);
 				}
 			}
 		}
@@ -43,7 +43,7 @@ void WorldEditor::_updateBillboardMenu()
 
 void WorldEditor::_updateBillboardPlacingMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "worldEditorMenuBillboardPlace")
 	{
@@ -56,7 +56,7 @@ void WorldEditor::_updateBillboardPlacingMenu()
 				_currentTemplateBillboardID = "";
 			}
 
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuBillboard");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuBillboard");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -67,7 +67,7 @@ void WorldEditor::_updateBillboardPlacingMenu()
 				{
 					if(screen->getScrollingList("billboardList")->getButton(billboardID)->isHovered())
 					{
-						_gui->getViewport("right")->getWindow("main")->setActiveScreen("main");
+						_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 
 						_deactivateModel();
 						_deactivateBillboard();
@@ -99,15 +99,15 @@ void WorldEditor::_updateBillboardPlacingMenu()
 
 void WorldEditor::_updateBillboardChoosingMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "worldEditorMenuBillboardChoice")
 	{
-		for(const auto& button : _gui->getViewport("left")->getWindow("main")->getScreen("worldEditorMenuBillboardChoice")->getScrollingList("billboardList")->getButtons())
+		for(const auto& button : _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuBillboardChoice")->getScrollingList("billboardList")->getButtons())
 		{
 			if(!_fe3d->billboard_isExisting(button->getID()))
 			{
-				_gui->getViewport("left")->getWindow("main")->getScreen("worldEditorMenuBillboardChoice")->getScrollingList("billboardList")->deleteButton(button->getID());
+				_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuBillboardChoice")->getScrollingList("billboardList")->deleteButton(button->getID());
 				break;
 			}
 		}
@@ -135,7 +135,7 @@ void WorldEditor::_updateBillboardChoosingMenu()
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuBillboard");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuBillboard");
 			return;
 		}
 	}

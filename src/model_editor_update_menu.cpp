@@ -2,7 +2,7 @@
 
 void ModelEditor::_updateMainMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "modelEditorMenuMain")
 	{
@@ -39,14 +39,14 @@ void ModelEditor::_updateMainMenu()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("back"))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			saveToFile();
 			unload();
 			return;
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("back"))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			unload();
 			return;
 		}
@@ -55,7 +55,7 @@ void ModelEditor::_updateMainMenu()
 
 void ModelEditor::_updateChoiceMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "modelEditorMenuChoice")
 	{
@@ -71,7 +71,7 @@ void ModelEditor::_updateChoiceMenu()
 			_fe3d->model_setVisible(_currentModelID, false);
 
 			_currentModelID = "";
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuMain");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuMain");
 			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("modelID")->getEntityID(), false);
 			return;
 		}
@@ -91,11 +91,11 @@ void ModelEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("miscellaneous")->isHovered())
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuMiscellaneous");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuMiscellaneous");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("aabb")->isHovered())
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabbMain");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbMain");
 			_fe3d->misc_enableAabbFrameRendering();
 		}
 

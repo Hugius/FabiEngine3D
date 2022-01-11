@@ -60,7 +60,7 @@ void SoundEditor::unload()
 
 void SoundEditor::_loadGUI()
 {
-	auto leftWindow = _gui->getViewport("left")->getWindow("main");
+	auto leftWindow = _gui->getLeftViewport()->getWindow("main");
 
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("soundEditorMenuMain");
@@ -80,8 +80,8 @@ void SoundEditor::_loadGUI()
 
 void SoundEditor::_unloadGUI()
 {
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("soundEditorMenuMain");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("soundEditorMenuChoice");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("soundEditorMenuMain");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("soundEditorMenuChoice");
 }
 
 void SoundEditor::update()

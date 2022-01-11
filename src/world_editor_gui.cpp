@@ -8,8 +8,8 @@ using LVPC = LeftViewportController;
 
 void WorldEditor::_loadGUI()
 {
-	auto leftWindow = _gui->getViewport("left")->getWindow("main");
-	auto rightWindow = _gui->getViewport("right")->getWindow("main");
+	auto leftWindow = _gui->getLeftViewport()->getWindow("main");
+	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("worldEditorMenuMain");
@@ -378,43 +378,43 @@ void WorldEditor::_loadGUI()
 
 void WorldEditor::_unloadGUI()
 {
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuMain");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuChoice");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSky");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuTerrain");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuWater");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuModel");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuModelPlace");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuModelChoice");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuBillboard");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuBillboardPlace");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuBillboardChoice");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSound");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSoundPlace");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSoundChoice");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuPointlight");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuPointlightChoice");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSpotlight");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSpotlightChoice");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuReflection");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuReflectionChoice");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSettings");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSettingsLighting");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSettingsLightingAmbient");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSettingsLightingDirectional");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphics");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsShadows");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsReflections");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsRefractions");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsDof");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsFog");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsLensFlare");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsSkyExposure");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsBloom");
-	_gui->getViewport("right")->getWindow("main")->deleteScreen("modelPropertiesMenu");
-	_gui->getViewport("right")->getWindow("main")->deleteScreen("billboardPropertiesMenu");
-	_gui->getViewport("right")->getWindow("main")->deleteScreen("soundPropertiesMenu");
-	_gui->getViewport("right")->getWindow("main")->deleteScreen("pointlightPropertiesMenu");
-	_gui->getViewport("right")->getWindow("main")->deleteScreen("spotlightPropertiesMenu");
-	_gui->getViewport("right")->getWindow("main")->deleteScreen("reflectionPropertiesMenu");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuMain");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuChoice");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSky");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuTerrain");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuWater");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuModel");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuModelPlace");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuModelChoice");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuBillboard");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuBillboardPlace");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuBillboardChoice");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSound");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSoundPlace");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSoundChoice");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuPointlight");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuPointlightChoice");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSpotlight");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSpotlightChoice");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuReflection");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuReflectionChoice");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSettings");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSettingsLighting");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSettingsLightingAmbient");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSettingsLightingDirectional");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphics");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsShadows");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsReflections");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsRefractions");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsDof");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsFog");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsLensFlare");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsSkyExposure");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("worldEditorMenuSettingsGraphicsBloom");
+	_gui->getRightViewport()->getWindow("main")->deleteScreen("modelPropertiesMenu");
+	_gui->getRightViewport()->getWindow("main")->deleteScreen("billboardPropertiesMenu");
+	_gui->getRightViewport()->getWindow("main")->deleteScreen("soundPropertiesMenu");
+	_gui->getRightViewport()->getWindow("main")->deleteScreen("pointlightPropertiesMenu");
+	_gui->getRightViewport()->getWindow("main")->deleteScreen("spotlightPropertiesMenu");
+	_gui->getRightViewport()->getWindow("main")->deleteScreen("reflectionPropertiesMenu");
 }

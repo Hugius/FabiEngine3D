@@ -6,8 +6,8 @@ using LVPC = LeftViewportController;
 
 void LeftViewportController::initialize()
 {
-	_gui->getViewport("left")->createWindow("main", fvec2(0.0f), fvec2(1.9f, 2.0f), LVPC::FRAME_COLOR);
-	auto window = _gui->getViewport("left")->getWindow("main");
+	_gui->getLeftViewport()->createWindow("main", fvec2(0.0f), fvec2(1.9f, 2.0f), LVPC::FRAME_COLOR);
+	auto window = _gui->getLeftViewport()->getWindow("main");
 
 	auto positions = calculateButtonPositions(11, CH);
 	window->createScreen("main");
@@ -28,7 +28,7 @@ void LeftViewportController::initialize()
 
 void LeftViewportController::update()
 {
-	auto window = _gui->getViewport("left")->getWindow("main");
+	auto window = _gui->getLeftViewport()->getWindow("main");
 	auto screen = window->getActiveScreen();
 
 	if(screen->getID() == "main")

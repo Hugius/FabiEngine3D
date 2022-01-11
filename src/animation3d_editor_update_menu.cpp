@@ -5,7 +5,7 @@
 
 void Animation3dEditor::_updateMainMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "animation3dEditorMenuMain")
 	{
@@ -32,14 +32,14 @@ void Animation3dEditor::_updateMainMenu()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("back"))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			saveToFile();
 			unload();
 			return;
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("back"))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			unload();
 			return;
 		}
@@ -48,7 +48,7 @@ void Animation3dEditor::_updateMainMenu()
 
 void Animation3dEditor::_updateChoiceMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "animation3dEditorMenuChoice")
 	{
@@ -88,7 +88,7 @@ void Animation3dEditor::_updateChoiceMenu()
 			_currentFrameIndex = 0;
 			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("animationID")->getEntityID(), false);
 			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("animationFrame")->getEntityID(), false);
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("animation3dEditorMenuMain");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuMain");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("preview")->isHovered())
@@ -175,7 +175,7 @@ void Animation3dEditor::_updateChoiceMenu()
 				stopModelAnimation(_currentAnimationID, currentAnimation->getPreviewModelID());
 			}
 
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("animation3dEditorMenuFrame");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuFrame");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{

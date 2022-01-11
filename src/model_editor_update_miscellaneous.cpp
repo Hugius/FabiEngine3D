@@ -3,7 +3,7 @@
 
 void ModelEditor::_updateMiscellaneousMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "modelEditorMenuMiscellaneous")
 	{
@@ -14,7 +14,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("levelOfDetailEntityID")->isHovered())

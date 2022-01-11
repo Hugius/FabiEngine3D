@@ -137,7 +137,7 @@ void TerrainEditor::_updateTerrainCreating()
 
 			if(_fe3d->terrain_isExisting(newTerrainID))
 			{
-				_gui->getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 
 				_currentTerrainID = newTerrainID;
 				_loadedTerrainIDs.push_back(newTerrainID);
@@ -169,7 +169,7 @@ void TerrainEditor::_updateTerrainChoosing()
 
 				if(!_isDeletingTerrain)
 				{
-					_gui->getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
+					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 					_fe3d->text_setContent(_gui->getOverlay()->getTextField("terrainID")->getEntityID(), "Terrain: " + _currentTerrainID.substr(1), 0.025f);
 					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("terrainID")->getEntityID(), true);
 				}

@@ -5,8 +5,8 @@ using BVPC = BottomViewportController;
 
 void BottomViewportController::_updateStatistics()
 {
-	auto statisticsScreen = _gui->getViewport("bottom")->getWindow("statistics")->getScreen("main");
-	auto consoleScreen = _gui->getViewport("bottom")->getWindow("statistics")->getScreen("main");
+	auto statisticsScreen = _gui->getBottomViewport()->getWindow("statistics")->getScreen("main");
+	auto consoleScreen = _gui->getBottomViewport()->getWindow("statistics")->getScreen("main");
 
 	static vector<float> fpsList;
 	if(_fe3d->misc_checkInterval(100))
@@ -204,7 +204,7 @@ void BottomViewportController::_updateStatistics()
 		}
 	}
 
-	if(_fe3d->input_isKeyPressed(InputType::KEY_C) && _gui->getViewport("bottom")->getWindow("console")->isHovered())
+	if(_fe3d->input_isKeyPressed(InputType::KEY_C) && _gui->getBottomViewport()->getWindow("console")->isHovered())
 	{
 		if(!_scriptExecutor->isRunning() && !_gui->getOverlay()->isFocused() && !_scriptEditor->isWritingScript())
 		{

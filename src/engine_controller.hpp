@@ -30,8 +30,8 @@ private:
 	shared_ptr<GuiManager> _guiManager = nullptr;
 	shared_ptr<LeftViewportController> _leftViewportController = nullptr;
 	shared_ptr<RightViewportController> _rightViewportController = nullptr;
-	shared_ptr<TopViewportController> _topViewportController = nullptr;
 	shared_ptr<BottomViewportController> _bottomViewportController = nullptr;
+	shared_ptr<TopViewportController> _topViewportController = nullptr;
 	shared_ptr<SkyEditor> _skyEditor = nullptr;
 	shared_ptr<TerrainEditor> _terrainEditor = nullptr;
 	shared_ptr<WaterEditor> _waterEditor = nullptr;

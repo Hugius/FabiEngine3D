@@ -20,14 +20,14 @@ void WorldEditor::load()
 	_modelEditor->loadFromFile();
 	for(const auto& ID : _modelEditor->getLoadedIDs())
 	{
-		auto screen = _gui->getViewport("left")->getWindow("main")->getScreen("worldEditorMenuModelPlace");
+		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuModelPlace");
 		screen->getScrollingList("modelList")->createButton(ID, ID.substr(1));
 	}
 
 	_billboardEditor->loadFromFile();
 	for(const auto& ID : _billboardEditor->getLoadedIDs())
 	{
-		auto screen = _gui->getViewport("left")->getWindow("main")->getScreen("worldEditorMenuBillboardPlace");
+		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuBillboardPlace");
 		screen->getScrollingList("billboardList")->createButton(ID, ID.substr(1));
 	}
 
@@ -81,7 +81,7 @@ void WorldEditor::load()
 		_fe3d->sound3d_setMaxVolume(ID, DEFAULT_SOUND_MAX_VOLUME);
 		_fe3d->sound3d_setMaxDistance(ID, DEFAULT_SOUND_MAX_DISTANCE);
 
-		auto screen = _gui->getViewport("left")->getWindow("main")->getScreen("worldEditorMenuSoundPlace");
+		auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuSoundPlace");
 		screen->getScrollingList("sounds")->createButton(ID, ID.substr(1));
 	}
 
@@ -91,7 +91,7 @@ void WorldEditor::load()
 
 	_fe3d->collision_enableCameraResponse(true, true, true);
 	_fe3d->collision_setCameraBox(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-	_gui->getViewport("right")->getWindow("main")->setActiveScreen("main");
+	_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 	_isEditorLoaded = true;
 }
 

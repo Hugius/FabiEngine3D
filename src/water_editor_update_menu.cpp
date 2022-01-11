@@ -5,7 +5,7 @@
 
 void WaterEditor::_updateMainMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "waterEditorMenuMain")
 	{
@@ -42,14 +42,14 @@ void WaterEditor::_updateMainMenu()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("back"))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			saveToFile();
 			unload();
 			return;
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("back"))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			unload();
 			return;
 		}
@@ -58,7 +58,7 @@ void WaterEditor::_updateMainMenu()
 
 void WaterEditor::_updateChoiceMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "waterEditorMenuChoice")
 	{
@@ -66,7 +66,7 @@ void WaterEditor::_updateChoiceMenu()
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMain");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuMain");
 			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("waterID")->getEntityID(), false);
 			_fe3d->water_setWireframed(_currentWaterID, false);
 			_fe3d->water_select("");
@@ -79,15 +79,15 @@ void WaterEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("texturing")->isHovered())
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuTexturing");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuTexturing");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lighting")->isHovered())
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuLighting");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuLighting");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("miscellaneous")->isHovered())
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMiscellaneous");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuMiscellaneous");
 		}
 
 		if(_gui->getOverlay()->checkValueForm("size", size, {0.0f}))

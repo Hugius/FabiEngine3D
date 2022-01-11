@@ -38,7 +38,7 @@ protected:
 	bool _isHovered = false;
 	bool _isHoverable = true;
 
-	shared_ptr<EngineInterface> _fe3d;
+	shared_ptr<EngineInterface> _fe3d = nullptr;
 	shared_ptr<GuiRectangle> _rectangle = nullptr;
 	shared_ptr<GuiTextField> _textField = nullptr;
 

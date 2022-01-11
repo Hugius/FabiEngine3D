@@ -4,7 +4,7 @@
 
 void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "worldEditorMenuSettingsGraphicsShadows")
 	{
@@ -19,7 +19,7 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphics");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphics");
 			_fe3d->misc_disableShadowFrameRendering();
 			return;
 		}
@@ -127,7 +127,7 @@ void WorldEditor::_updateShadowsGraphicsSettingsMenu()
 
 void WorldEditor::_updateReflectionsGraphicsSettingsMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "worldEditorMenuSettingsGraphicsReflections")
 	{
@@ -137,7 +137,7 @@ void WorldEditor::_updateReflectionsGraphicsSettingsMenu()
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphics");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphics");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("planarHeight")->isHovered())
@@ -170,7 +170,7 @@ void WorldEditor::_updateReflectionsGraphicsSettingsMenu()
 
 void WorldEditor::_updateRefractionsGraphicsSettingsMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "worldEditorMenuSettingsGraphicsRefractions")
 	{
@@ -178,7 +178,7 @@ void WorldEditor::_updateRefractionsGraphicsSettingsMenu()
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphics");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphics");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("planarQuality")->isHovered())
@@ -195,7 +195,7 @@ void WorldEditor::_updateRefractionsGraphicsSettingsMenu()
 
 void WorldEditor::_updateDofGraphicsSettingsMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "worldEditorMenuSettingsGraphicsDof")
 	{
@@ -207,7 +207,7 @@ void WorldEditor::_updateDofGraphicsSettingsMenu()
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphics");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphics");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
@@ -265,7 +265,7 @@ void WorldEditor::_updateDofGraphicsSettingsMenu()
 
 void WorldEditor::_updateFogGraphicsSettingsMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "worldEditorMenuSettingsGraphicsFog")
 	{
@@ -277,7 +277,7 @@ void WorldEditor::_updateFogGraphicsSettingsMenu()
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphics");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphics");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
@@ -351,7 +351,7 @@ void WorldEditor::_updateFogGraphicsSettingsMenu()
 
 void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "worldEditorMenuSettingsGraphicsLensFlare")
 	{
@@ -362,7 +362,7 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphics");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphics");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
@@ -439,7 +439,7 @@ void WorldEditor::_updateLensFlareGraphicsSettingsMenu()
 
 void WorldEditor::_updateSkyExposureGraphicsSettingsMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "worldEditorMenuSettingsGraphicsSkyExposure")
 	{
@@ -449,7 +449,7 @@ void WorldEditor::_updateSkyExposureGraphicsSettingsMenu()
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphics");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphics");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
@@ -493,7 +493,7 @@ void WorldEditor::_updateSkyExposureGraphicsSettingsMenu()
 
 void WorldEditor::_updateBloomGraphicsSettingsMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "worldEditorMenuSettingsGraphicsBloom")
 	{
@@ -505,7 +505,7 @@ void WorldEditor::_updateBloomGraphicsSettingsMenu()
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphics");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuSettingsGraphics");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())

@@ -87,7 +87,7 @@ void SoundEditor::_updateSoundCreating()
 
 			if(_fe3d->sound2d_isExisting(newSoundID))
 			{
-				_gui->getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
 
 				_currentSoundID = newSoundID;
 				_loadedSoundIDs.push_back(newSoundID);
@@ -114,7 +114,7 @@ void SoundEditor::_updateSoundChoosing()
 
 				if(!_isDeletingSound)
 				{
-					_gui->getViewport("left")->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
+					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("soundEditorMenuChoice");
 
 					_fe3d->text_setContent(_gui->getOverlay()->getTextField("soundID")->getEntityID(), "Sound: " + selectedButtonID.substr(1), 0.025f);
 					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("soundID")->getEntityID(), true);

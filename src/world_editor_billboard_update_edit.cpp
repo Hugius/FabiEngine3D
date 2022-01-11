@@ -2,7 +2,7 @@
 
 void WorldEditor::_updateBillboardEditing()
 {
-	auto rightWindow = _gui->getViewport("right")->getWindow("main");
+	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
 	if(!_dontResetSelectedBillboard)
 	{

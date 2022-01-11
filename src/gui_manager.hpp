@@ -8,17 +8,22 @@ class GuiManager final
 {
 public:
 	void inject(shared_ptr<EngineInterface> fe3d);
-
 	void initialize();
 	void update();
 
-	shared_ptr<GuiViewport> getViewport(const string& ID);
-	shared_ptr<GuiOverlay> getOverlay();
+	const shared_ptr<GuiViewport> getLeftViewport();
+	const shared_ptr<GuiViewport> getRightViewport();
+	const shared_ptr<GuiViewport> getBottomViewport();
+	const shared_ptr<GuiViewport> getTopViewport();
+	const shared_ptr<GuiOverlay> getOverlay();
 
 	static inline const fvec3 FRAME_COLOR = fvec3(0.025f);
 
 private:
-	vector<shared_ptr<GuiViewport>> _viewports;
-	shared_ptr<GuiOverlay> _overlay;
 	shared_ptr<EngineInterface> _fe3d = nullptr;
+	shared_ptr<GuiViewport> _leftViewport = nullptr;
+	shared_ptr<GuiViewport> _rightViewport = nullptr;
+	shared_ptr<GuiViewport> _bottomViewport = nullptr;
+	shared_ptr<GuiViewport> _topViewport = nullptr;
+	shared_ptr<GuiOverlay> _overlay = nullptr;
 };

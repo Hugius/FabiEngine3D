@@ -7,7 +7,7 @@ using std::clamp;
 
 void ScriptEditor::_updateGUI()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "scriptEditorMenuMain")
 	{
@@ -54,14 +54,14 @@ void ScriptEditor::_updateGUI()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("back"))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			saveScriptFiles();
 			unload();
 			return;
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("back"))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			unload();
 			return;
 		}

@@ -3,7 +3,7 @@
 
 void WorldEditor::_updatePointlightEditing()
 {
-	auto rightWindow = _gui->getViewport("right")->getWindow("main");
+	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 
 	if(_currentTemplateModelID.empty() && _currentTemplateBillboardID.empty() && _currentTemplateSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{

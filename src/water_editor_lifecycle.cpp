@@ -78,7 +78,7 @@ void WaterEditor::unload()
 
 void WaterEditor::_loadGUI()
 {
-	auto leftWindow = _gui->getViewport("left")->getWindow("main");
+	auto leftWindow = _gui->getLeftViewport()->getWindow("main");
 
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("waterEditorMenuMain");
@@ -125,11 +125,11 @@ void WaterEditor::_loadGUI()
 
 void WaterEditor::_unloadGUI()
 {
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("waterEditorMenuMain");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("waterEditorMenuChoice");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("waterEditorMenuTexturing");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("waterEditorMenuLighting");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("waterEditorMenuMiscellaneous");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("waterEditorMenuMain");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("waterEditorMenuChoice");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("waterEditorMenuTexturing");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("waterEditorMenuLighting");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("waterEditorMenuMiscellaneous");
 }
 
 void WaterEditor::update()

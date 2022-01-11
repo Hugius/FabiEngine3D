@@ -4,7 +4,7 @@
 
 void WorldEditor::_updateReflectionMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "worldEditorMenuReflection")
 	{
@@ -16,12 +16,12 @@ void WorldEditor::_updateReflectionMenu()
 				_isPlacingReflection = false;
 			}
 
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuChoice");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("place")->isHovered())
 		{
-			_gui->getViewport("right")->getWindow("main")->setActiveScreen("main");
+			_gui->getRightViewport()->getWindow("main")->setActiveScreen("main");
 
 			_deactivateModel();
 			_deactivateBillboard();
@@ -44,9 +44,9 @@ void WorldEditor::_updateReflectionMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuReflectionChoice");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuReflectionChoice");
 
-			_gui->getViewport("left")->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflections")->deleteButtons();
+			_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflections")->deleteButtons();
 
 			auto IDs = _fe3d->reflection_getIDs();
 			sort(IDs.begin(), IDs.end());
@@ -59,7 +59,7 @@ void WorldEditor::_updateReflectionMenu()
 					reverse(rawID.begin(), rawID.end());
 					reverse(reflectionID.begin(), reflectionID.end());
 
-					_gui->getViewport("left")->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflections")->createButton(reflectionID, rawID);
+					_gui->getLeftViewport()->getWindow("main")->getScreen("worldEditorMenuReflectionChoice")->getScrollingList("reflections")->createButton(reflectionID, rawID);
 				}
 			}
 		}
@@ -68,7 +68,7 @@ void WorldEditor::_updateReflectionMenu()
 
 void WorldEditor::_updateReflectionChoosingMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "worldEditorMenuReflectionChoice")
 	{
@@ -104,7 +104,7 @@ void WorldEditor::_updateReflectionChoosingMenu()
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("worldEditorMenuReflection");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("worldEditorMenuReflection");
 			return;
 		}
 	}

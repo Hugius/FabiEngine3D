@@ -4,7 +4,7 @@
 
 void QuadEditor::_updateMainMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "quadEditorMenuMain")
 	{
@@ -41,14 +41,14 @@ void QuadEditor::_updateMainMenu()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("back"))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			saveToFile();
 			unload();
 			return;
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("back"))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			unload();
 			return;
 		}
@@ -57,7 +57,7 @@ void QuadEditor::_updateMainMenu()
 
 void QuadEditor::_updateChoiceMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "quadEditorMenuChoice")
 	{
@@ -69,7 +69,7 @@ void QuadEditor::_updateChoiceMenu()
 
 			_currentQuadID = "";
 			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("quadID")->getEntityID(), false);
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("quadEditorMenuMain");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quadEditorMenuMain");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())

@@ -53,7 +53,7 @@ void Animation2dEditor::unload()
 
 void Animation2dEditor::_loadGUI()
 {
-	auto leftWindow = _gui->getViewport("left")->getWindow("main");
+	auto leftWindow = _gui->getLeftViewport()->getWindow("main");
 
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("animation2dEditorMenuMain");
@@ -75,8 +75,8 @@ void Animation2dEditor::_loadGUI()
 
 void Animation2dEditor::_unloadGUI()
 {
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("animation2dEditorMenuMain");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("animation2dEditorMenuChoice");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("animation2dEditorMenuMain");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("animation2dEditorMenuChoice");
 }
 
 void Animation2dEditor::update()

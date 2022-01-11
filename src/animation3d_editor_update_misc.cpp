@@ -217,7 +217,7 @@ void Animation3dEditor::_updateAnimationCreating()
 				return;
 			}
 
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
 
 			_animations.push_back(make_shared<Animation3d>(newAnimationID));
 
@@ -245,7 +245,7 @@ void Animation3dEditor::_updateAnimationChoosing()
 
 				if(!_isDeletingAnimation)
 				{
-					_gui->getViewport("left")->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
+					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
 
 					if(_fe3d->model_isExisting(_getAnimation(selectedButtonID)->getPreviewModelID()))
 					{

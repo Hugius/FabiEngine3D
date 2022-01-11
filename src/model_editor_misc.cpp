@@ -14,7 +14,7 @@ void ModelEditor::_tryPartChoosing(const string& nextActiveScreenID)
 	}
 	else
 	{
-		_gui->getViewport("left")->getWindow("main")->setActiveScreen(nextActiveScreenID);
+		_gui->getLeftViewport()->getWindow("main")->setActiveScreen(nextActiveScreenID);
 	}
 }
 

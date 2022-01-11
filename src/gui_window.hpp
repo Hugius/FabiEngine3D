@@ -37,5 +37,5 @@ private:
 	const fvec2 _initialSize;
 
 	vector<shared_ptr<GuiScreen>> _screens;
-	shared_ptr<EngineInterface> _fe3d;
+	shared_ptr<EngineInterface> _fe3d = nullptr;
 };

@@ -89,7 +89,7 @@ void BillboardEditor::unload()
 
 void BillboardEditor::_loadGUI()
 {
-	auto leftWindow = _gui->getViewport("left")->getWindow("main");
+	auto leftWindow = _gui->getLeftViewport()->getWindow("main");
 
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("billboardEditorMenuMain");
@@ -133,11 +133,11 @@ void BillboardEditor::_loadGUI()
 
 void BillboardEditor::_unloadGUI()
 {
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuMain");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuChoice");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuTexturing");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuLighting");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuMiscellaneous");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("billboardEditorMenuMain");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("billboardEditorMenuChoice");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("billboardEditorMenuTexturing");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("billboardEditorMenuLighting");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("billboardEditorMenuMiscellaneous");
 }
 
 void BillboardEditor::update()

@@ -4,7 +4,7 @@ void WorldEditor::_activateModel(const string& ID)
 {
 	_activeModelID = ID;
 
-	auto rightWindow = _gui->getViewport("right")->getWindow("main");
+	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 	auto position = _fe3d->model_getBasePosition(_activeModelID);
 
 	rightWindow->getScreen("modelPropertiesMenu")->getButton("position")->setHoverable(false);
@@ -27,16 +27,16 @@ void WorldEditor::_activateBillboard(const string& ID)
 {
 	_activeBillboardID = ID;
 
-	auto rightWindow = _gui->getViewport("right")->getWindow("main");
+	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 	auto position = _fe3d->billboard_getPosition(_activeBillboardID);
 
-	_gui->getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("position")->setHoverable(false);
-	_gui->getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(true);
-	_gui->getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("size")->setHoverable(true);
+	_gui->getRightViewport()->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("position")->setHoverable(false);
+	_gui->getRightViewport()->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(true);
+	_gui->getRightViewport()->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("size")->setHoverable(true);
 
-	_gui->getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-	_gui->getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-	_gui->getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
 	string tempID = ID;
 	reverse(tempID.begin(), tempID.end());
@@ -50,16 +50,16 @@ void WorldEditor::_activateSound(const string& ID)
 {
 	_activeSpeakerID = ("@@speaker_" + ID);
 
-	auto rightWindow = _gui->getViewport("right")->getWindow("main");
+	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 	auto position = _fe3d->sound3d_getPosition(_activeSpeakerID.substr(string("@@speaker_").size()));
 	auto maxVolume = _fe3d->sound3d_getMaxVolume(_activeSpeakerID.substr(string("@@speaker_").size()));
 	auto maxDistance = _fe3d->sound3d_getMaxDistance(_activeSpeakerID.substr(string("@@speaker_").size()));
 
-	_gui->getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-	_gui->getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-	_gui->getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
-	_gui->getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("volume")->changeTextContent(to_string(static_cast<int>(maxVolume * 100.0f)));
-	_gui->getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("distance")->changeTextContent(to_string(static_cast<int>(maxDistance)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("volume")->changeTextContent(to_string(static_cast<int>(maxVolume * 100.0f)));
+	_gui->getRightViewport()->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("distance")->changeTextContent(to_string(static_cast<int>(maxDistance)));
 
 	string tempID = ID;
 	reverse(tempID.begin(), tempID.end());
@@ -73,7 +73,7 @@ void WorldEditor::_activatePointlight(const string& ID)
 {
 	_activeLampID = ("@@lamp_" + ID);
 
-	auto rightWindow = _gui->getViewport("right")->getWindow("main");
+	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 	auto position = _fe3d->model_getBasePosition(_activeLampID);
 
 	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("position")->setHoverable(false);
@@ -89,7 +89,7 @@ void WorldEditor::_activateSpotlight(const string& ID)
 {
 	_activeTorchID = ("@@torch_" + ID);
 
-	auto rightWindow = _gui->getViewport("right")->getWindow("main");
+	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 	auto position = _fe3d->model_getBasePosition(_activeTorchID);
 
 	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("position")->setHoverable(false);
@@ -104,7 +104,7 @@ void WorldEditor::_activateReflection(const string& ID)
 {
 	_activeCameraID = ("@@camera_" + ID);
 
-	auto rightWindow = _gui->getViewport("right")->getWindow("main");
+	auto rightWindow = _gui->getRightViewport()->getWindow("main");
 	auto position = _fe3d->model_getBasePosition(_activeCameraID);
 
 	rightWindow->getScreen("reflectionPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));

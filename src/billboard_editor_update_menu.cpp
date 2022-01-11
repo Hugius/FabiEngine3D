@@ -2,7 +2,7 @@
 
 void BillboardEditor::_updateMainMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "billboardEditorMenuMain")
 	{
@@ -39,14 +39,14 @@ void BillboardEditor::_updateMainMenu()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("back"))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			saveToFile();
 			unload();
 			return;
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("back"))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			unload();
 			return;
 		}
@@ -55,7 +55,7 @@ void BillboardEditor::_updateMainMenu()
 
 void BillboardEditor::_updateChoiceMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "billboardEditorMenuChoice")
 	{
@@ -67,7 +67,7 @@ void BillboardEditor::_updateChoiceMenu()
 			_fe3d->billboard_setVisible(_currentBillboardID, false);
 			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("billboardID")->getEntityID(), false);
 			_currentBillboardID = "";
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuMain");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("billboardEditorMenuMain");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
@@ -77,15 +77,15 @@ void BillboardEditor::_updateChoiceMenu()
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("texturing")->isHovered())
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuTexturing");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("billboardEditorMenuTexturing");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lighting")->isHovered())
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuLighting");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("billboardEditorMenuLighting");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("miscellaneous")->isHovered())
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuMiscellaneous");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("billboardEditorMenuMiscellaneous");
 		}
 
 		if(_gui->getOverlay()->checkValueForm("sizeX", size.x, {0.0f}))

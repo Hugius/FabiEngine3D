@@ -2,7 +2,7 @@
 
 void ModelEditor::_updateLightingMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "modelEditorMenuLighting")
 	{
@@ -23,7 +23,7 @@ void ModelEditor::_updateLightingMenu()
 			}
 			_currentPartID = "";
 			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("partID")->getEntityID(), false);
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())

@@ -88,5 +88,5 @@ private:
 	bool _isFocused = false;
 	bool _mustDeleteValueForms = false;
 
-	shared_ptr<EngineInterface> _fe3d;
+	shared_ptr<EngineInterface> _fe3d = nullptr;
 };

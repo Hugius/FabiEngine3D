@@ -60,7 +60,7 @@ void QuadEditor::_updateQuadCreating()
 
 			if(_fe3d->quad_isExisting(newQuadID))
 			{
-				_gui->getViewport("left")->getWindow("main")->setActiveScreen("quadEditorMenuChoice");
+				_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quadEditorMenuChoice");
 
 				_currentQuadID = newQuadID;
 				_loadedQuadIDs.push_back(newQuadID);
@@ -90,7 +90,7 @@ void QuadEditor::_updateQuadChoosing()
 
 				if(!_isDeletingQuad)
 				{
-					_gui->getViewport("left")->getWindow("main")->setActiveScreen("quadEditorMenuChoice");
+					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("quadEditorMenuChoice");
 
 					_fe3d->billboard_setDiffuseMap(PREVIEW_BILLBOARD_ID, _fe3d->quad_getDiffuseMapPath(_currentQuadID));
 					_fe3d->billboard_setVisible(PREVIEW_BILLBOARD_ID, true);

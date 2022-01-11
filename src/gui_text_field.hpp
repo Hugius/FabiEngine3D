@@ -34,5 +34,5 @@ private:
 	fvec2 _initialPosition;
 	fvec2 _initialSize;
 
-	shared_ptr<EngineInterface> _fe3d;
+	shared_ptr<EngineInterface> _fe3d = nullptr;
 };

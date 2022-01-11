@@ -3,7 +3,7 @@
 
 void Animation3dEditor::_updateFrameMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "animation3dEditorMenuFrame")
 	{
@@ -30,7 +30,7 @@ void Animation3dEditor::_updateFrameMenu()
 			}
 
 			_currentPartID = "";
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation3dEditorMenuChoice");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("part")->isHovered())

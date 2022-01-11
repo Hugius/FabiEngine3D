@@ -67,5 +67,5 @@ private:
 	vector<shared_ptr<GuiButton>> _buttons;
 	vector<shared_ptr<GuiRectangle>> _rectangles;
 	vector<shared_ptr<GuiTextField>> _textFields;
-	shared_ptr<EngineInterface> _fe3d;
+	shared_ptr<EngineInterface> _fe3d = nullptr;
 };

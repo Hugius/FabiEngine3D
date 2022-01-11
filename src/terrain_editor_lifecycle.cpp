@@ -78,7 +78,7 @@ void TerrainEditor::unload()
 
 void TerrainEditor::_loadGUI()
 {
-	auto leftWindow = _gui->getViewport("left")->getWindow("main");
+	auto leftWindow = _gui->getLeftViewport()->getWindow("main");
 
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("terrainEditorMenuMain");
@@ -140,13 +140,13 @@ void TerrainEditor::_loadGUI()
 
 void TerrainEditor::_unloadGUI()
 {
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("terrainEditorMenuMain");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("terrainEditorMenuChoice");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("terrainEditorMenuDiffuseMap");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("terrainEditorMenuBlendMap");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("terrainEditorMenuNormalMap");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("terrainEditorMenuLighting");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("terrainEditorMenuMiscellaneous");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("terrainEditorMenuMain");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("terrainEditorMenuChoice");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("terrainEditorMenuDiffuseMap");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("terrainEditorMenuBlendMap");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("terrainEditorMenuNormalMap");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("terrainEditorMenuLighting");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("terrainEditorMenuMiscellaneous");
 }
 
 void TerrainEditor::update()

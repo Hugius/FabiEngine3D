@@ -117,7 +117,7 @@ void ModelEditor::unload()
 
 void ModelEditor::_loadGUI()
 {
-	auto leftWindow = _gui->getViewport("left")->getWindow("main");
+	auto leftWindow = _gui->getLeftViewport()->getWindow("main");
 
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("modelEditorMenuMain");
@@ -182,13 +182,13 @@ void ModelEditor::_loadGUI()
 
 void ModelEditor::_unloadGUI()
 {
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("modelEditorMenuMain");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("modelEditorMenuChoice");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("modelEditorMenuTexturing");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("modelEditorMenuLighting");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("modelEditorMenuMiscellaneous");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("modelEditorMenuAabbMain");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("modelEditorMenuAabbChoice");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("modelEditorMenuMain");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("modelEditorMenuChoice");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("modelEditorMenuTexturing");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("modelEditorMenuLighting");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("modelEditorMenuMiscellaneous");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("modelEditorMenuAabbMain");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("modelEditorMenuAabbChoice");
 }
 
 void ModelEditor::update()

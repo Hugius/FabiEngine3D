@@ -5,13 +5,13 @@
 
 void ModelEditor::_updateMainAabbMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "modelEditorMenuAabbMain")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			_fe3d->misc_disableAabbFrameRendering();
 			return;
 		}
@@ -48,7 +48,7 @@ void ModelEditor::_updateMainAabbMenu()
 
 void ModelEditor::_updateChoiceAabbMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "modelEditorMenuAabbChoice")
 	{
@@ -64,7 +64,7 @@ void ModelEditor::_updateChoiceAabbMenu()
 			}
 
 			_currentAabbID = "";
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabbMain");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbMain");
 			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("aabbID")->getEntityID(), false);
 			return;
 		}
@@ -146,7 +146,7 @@ void ModelEditor::_updateAabbCreating()
 			_fe3d->aabb_setParentEntityID((_currentModelID + "@" + _currentAabbID), _currentModelID);
 			_fe3d->aabb_setParentEntityType((_currentModelID + "@" + _currentAabbID), AabbParentEntityType::MODEL);
 
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
 			_fe3d->text_setContent(_gui->getOverlay()->getTextField("aabbID")->getEntityID(), ("AABB: " + _currentAabbID), 0.025f);
 			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("aabbID")->getEntityID(), true);
 
@@ -178,7 +178,7 @@ void ModelEditor::_updateAabbChoosing()
 
 				if(!_isDeletingAabb)
 				{
-					_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
+					_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
 					_fe3d->text_setContent(_gui->getOverlay()->getTextField("aabbID")->getEntityID(), ("AABB: " + _currentAabbID), 0.025f);
 					_fe3d->text_setVisible(_gui->getOverlay()->getTextField("aabbID")->getEntityID(), true);
 				}

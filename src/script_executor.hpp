@@ -30,6 +30,6 @@ private:
 	bool _wasTimerStarted = false;
 	bool _mustSkipUpdate = false;
 
-	shared_ptr<EngineInterface> _fe3d;
-	shared_ptr<ScriptInterpreter> _scriptInterpreter;
+	shared_ptr<EngineInterface> _fe3d = nullptr;
+	shared_ptr<ScriptInterpreter> _scriptInterpreter = nullptr;
 };

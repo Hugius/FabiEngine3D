@@ -4,7 +4,7 @@
 
 void Animation2dEditor::_updateMainMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "animation2dEditorMenuMain")
 	{
@@ -31,14 +31,14 @@ void Animation2dEditor::_updateMainMenu()
 
 		if(_gui->getOverlay()->isAnswerFormConfirmed("back"))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			saveToFile();
 			unload();
 			return;
 		}
 		if(_gui->getOverlay()->isAnswerFormDenied("back"))
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 			unload();
 			return;
 		}
@@ -47,7 +47,7 @@ void Animation2dEditor::_updateMainMenu()
 
 void Animation2dEditor::_updateChoiceMenu()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(screen->getID() == "animation2dEditorMenuChoice")
 	{
@@ -68,7 +68,7 @@ void Animation2dEditor::_updateChoiceMenu()
 
 			_currentAnimationID = "";
 			_fe3d->text_setVisible(_gui->getOverlay()->getTextField("animationID")->getEntityID(), false);
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("animation2dEditorMenuMain");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("animation2dEditorMenuMain");
 			return;
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("preview")->isHovered())

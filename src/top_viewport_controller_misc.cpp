@@ -10,14 +10,14 @@ using TVPC = TopViewportController;
 
 void TopViewportController::initialize()
 {
-	_gui->getViewport("top")->createWindow("projectWindow", fvec2(-0.25f, 0.0f), fvec2(0.9875f, 1.5f), TVPC::FRAME_COLOR);
-	auto projectWindow = _gui->getViewport("top")->getWindow("projectWindow");
+	_gui->getTopViewport()->createWindow("projectWindow", fvec2(-0.25f, 0.0f), fvec2(0.9875f, 1.5f), TVPC::FRAME_COLOR);
+	auto projectWindow = _gui->getTopViewport()->getWindow("projectWindow");
 
-	_gui->getViewport("top")->createWindow("executionWindow", fvec2(0.125f, 0.0f), fvec2(0.4875f, 1.5f), TVPC::FRAME_COLOR);
-	auto executionWindow = _gui->getViewport("top")->getWindow("executionWindow");
+	_gui->getTopViewport()->createWindow("executionWindow", fvec2(0.125f, 0.0f), fvec2(0.4875f, 1.5f), TVPC::FRAME_COLOR);
+	auto executionWindow = _gui->getTopViewport()->getWindow("executionWindow");
 
-	_gui->getViewport("top")->createWindow("miscellaneousWindow", fvec2(0.375f, 0.0f), fvec2(0.4875f, 1.5f), TVPC::FRAME_COLOR);
-	auto miscellaneousWindow = _gui->getViewport("top")->getWindow("miscellaneousWindow");
+	_gui->getTopViewport()->createWindow("miscellaneousWindow", fvec2(0.375f, 0.0f), fvec2(0.4875f, 1.5f), TVPC::FRAME_COLOR);
+	auto miscellaneousWindow = _gui->getTopViewport()->getWindow("miscellaneousWindow");
 
 	projectWindow->createScreen("main");
 	projectWindow->setActiveScreen("main");
@@ -76,7 +76,7 @@ const bool TopViewportController::isScriptRunning() const
 
 void TopViewportController::_updateMiscellaneous()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getScreen("main");
+	auto screen = _gui->getLeftViewport()->getWindow("main")->getScreen("main");
 	bool isHoverable = (_currentProjectID.empty()) ? false : !_scriptExecutor->isStarted();
 
 	screen->getButton("skyEditor")->setHoverable(isHoverable);
@@ -121,7 +121,7 @@ void TopViewportController::_applyProjectChange()
 		_fe3d->misc_setWindowTitle("FabiEngine3D - " + _currentProjectID);
 	}
 
-	_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+	_gui->getLeftViewport()->getWindow("main")->setActiveScreen("main");
 
 	if(_skyEditor->isLoaded())
 	{

@@ -47,7 +47,7 @@ void QuadEditor::unload()
 
 void QuadEditor::_loadGUI()
 {
-	auto leftWindow = _gui->getViewport("left")->getWindow("main");
+	auto leftWindow = _gui->getLeftViewport()->getWindow("main");
 
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("quadEditorMenuMain");
@@ -64,8 +64,8 @@ void QuadEditor::_loadGUI()
 
 void QuadEditor::_unloadGUI()
 {
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("quadEditorMenuMain");
-	_gui->getViewport("left")->getWindow("main")->deleteScreen("quadEditorMenuChoice");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("quadEditorMenuMain");
+	_gui->getLeftViewport()->getWindow("main")->deleteScreen("quadEditorMenuChoice");
 }
 
 void QuadEditor::update()

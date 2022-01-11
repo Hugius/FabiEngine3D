@@ -9,8 +9,8 @@ using std::ofstream;
 
 void TopViewportController::_updateProjectScreenManagement()
 {
-	auto topScreen = _gui->getViewport("top")->getWindow("projectWindow")->getActiveScreen();
-	auto leftScreen = _gui->getViewport("left")->getWindow("main")->getActiveScreen();
+	auto topScreen = _gui->getTopViewport()->getWindow("projectWindow")->getActiveScreen();
+	auto leftScreen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
 	if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 	{
@@ -80,7 +80,7 @@ void TopViewportController::_updateProjectScreenManagement()
 
 void TopViewportController::_updateGameScreenManagement()
 {
-	auto screen = _gui->getViewport("top")->getWindow("executionWindow")->getActiveScreen();
+	auto screen = _gui->getTopViewport()->getWindow("executionWindow")->getActiveScreen();
 
 	if(_currentProjectID.empty())
 	{
@@ -129,7 +129,7 @@ void TopViewportController::_updateGameScreenManagement()
 		}
 
 		static bool wasInMainMenu = false;
-		bool isInMainMenu = (_gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "main");
+		bool isInMainMenu = (_gui->getLeftViewport()->getWindow("main")->getActiveScreen()->getID() == "main");
 		screen->getButton("start")->setHoverable(isInMainMenu && !_script->isEmpty() && !isScriptRunning());
 		screen->getButton("pause")->setHoverable(isInMainMenu && isScriptRunning() && !_fe3d->server_isRunning());
 		screen->getButton("restart")->setHoverable(isInMainMenu && _scriptExecutor->isStarted());
@@ -164,7 +164,7 @@ void TopViewportController::_updateGameScreenManagement()
 
 void TopViewportController::_updateMiscScreenManagement()
 {
-	auto screen = _gui->getViewport("top")->getWindow("miscellaneousWindow")->getActiveScreen();
+	auto screen = _gui->getTopViewport()->getWindow("miscellaneousWindow")->getActiveScreen();
 
 	if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("uncache")->isHovered())
 	{

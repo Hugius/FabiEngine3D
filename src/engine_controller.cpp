@@ -10,25 +10,84 @@ EngineController::EngineController()
 	_rightViewportController = make_shared<RightViewportController>();
 	_topViewportController = make_shared<TopViewportController>();
 	_bottomViewportController = make_shared<BottomViewportController>();
+	_skyEditor = make_shared<SkyEditor>();
+	_terrainEditor = make_shared<TerrainEditor>();
+	_waterEditor = make_shared<WaterEditor>();
+	_modelEditor = make_shared<ModelEditor>();
+	_billboardEditor = make_shared<BillboardEditor>();
+	_quadEditor = make_shared<QuadEditor>();
+	_animation2dEditor = make_shared<Animation2dEditor>();
+	_animation3dEditor = make_shared<Animation3dEditor>();
+	_soundEditor = make_shared<SoundEditor>();
+	_worldEditor = make_shared<WorldEditor>();
+	_scriptEditor = make_shared<ScriptEditor>();
+	_script = make_shared<Script>();
 	_scriptExecutor = make_shared<ScriptExecutor>();
 	_scriptInterpreter = make_shared<ScriptInterpreter>();
 
 	_leftViewportController->inject(_guiManager);
+	_leftViewportController->inject(_skyEditor);
+	_leftViewportController->inject(_terrainEditor);
+	_leftViewportController->inject(_waterEditor);
+	_leftViewportController->inject(_modelEditor);
+	_leftViewportController->inject(_billboardEditor);
+	_leftViewportController->inject(_quadEditor);
+	_leftViewportController->inject(_animation2dEditor);
+	_leftViewportController->inject(_animation3dEditor);
+	_leftViewportController->inject(_soundEditor);
+	_leftViewportController->inject(_worldEditor);
+	_leftViewportController->inject(_scriptEditor);
 	_rightViewportController->inject(_guiManager);
 	_topViewportController->inject(_guiManager);
+	_topViewportController->inject(_skyEditor);
+	_topViewportController->inject(_terrainEditor);
+	_topViewportController->inject(_waterEditor);
+	_topViewportController->inject(_modelEditor);
+	_topViewportController->inject(_billboardEditor);
+	_topViewportController->inject(_quadEditor);
+	_topViewportController->inject(_animation2dEditor);
+	_topViewportController->inject(_animation3dEditor);
+	_topViewportController->inject(_soundEditor);
+	_topViewportController->inject(_worldEditor);
+	_topViewportController->inject(_scriptEditor);
+	_topViewportController->inject(_scriptExecutor);
 	_bottomViewportController->inject(_guiManager);
-
-	_topViewportController->inject(_leftViewportController->getSkyEditor());
-	_topViewportController->inject(_leftViewportController->getTerrainEditor());
-	_topViewportController->inject(_leftViewportController->getWaterEditor());
-	_topViewportController->inject(_leftViewportController->getModelEditor());
-	_topViewportController->inject(_leftViewportController->getBillboardEditor());
-	_topViewportController->inject(_leftViewportController->getQuadEditor());
-	_topViewportController->inject(_leftViewportController->getAnimation2dEditor());
-	_topViewportController->inject(_leftViewportController->getAnimation3dEditor());
-	_topViewportController->inject(_leftViewportController->getSoundEditor());
-	_topViewportController->inject(_leftViewportController->getWorldEditor());
-	_topViewportController->inject(_leftViewportController->getScriptEditor());
+	_bottomViewportController->inject(_scriptEditor);
+	_bottomViewportController->inject(_scriptExecutor);
+	_skyEditor->inject(_guiManager);
+	_terrainEditor->inject(_guiManager);
+	_waterEditor->inject(_guiManager);
+	_modelEditor->inject(_guiManager);
+	_billboardEditor->inject(_guiManager);
+	_quadEditor->inject(_guiManager);
+	_animation2dEditor->inject(_guiManager);
+	_animation3dEditor->inject(_guiManager);
+	_animation3dEditor->inject(_modelEditor);
+	_soundEditor->inject(_guiManager);
+	_worldEditor->inject(_guiManager);
+	_worldEditor->inject(_skyEditor);
+	_worldEditor->inject(_terrainEditor);
+	_worldEditor->inject(_waterEditor);
+	_worldEditor->inject(_modelEditor);
+	_worldEditor->inject(_billboardEditor);
+	_worldEditor->inject(_animation2dEditor);
+	_worldEditor->inject(_animation3dEditor);
+	_worldEditor->inject(_soundEditor);
+	_scriptEditor->inject(_guiManager);
+	_scriptEditor->inject(_script);
+	_scriptExecutor->inject(_script);
+	_scriptExecutor->inject(_scriptInterpreter);
+	_scriptInterpreter->inject(_script);
+	_scriptInterpreter->inject(_skyEditor);
+	_scriptInterpreter->inject(_terrainEditor);
+	_scriptInterpreter->inject(_waterEditor);
+	_scriptInterpreter->inject(_modelEditor);
+	_scriptInterpreter->inject(_billboardEditor);
+	_scriptInterpreter->inject(_quadEditor);
+	_scriptInterpreter->inject(_animation2dEditor);
+	_scriptInterpreter->inject(_animation3dEditor);
+	_scriptInterpreter->inject(_soundEditor);
+	_scriptInterpreter->inject(_worldEditor);
 }
 
 void EngineController::inject(shared_ptr<EngineInterface> fe3d)
@@ -38,6 +97,17 @@ void EngineController::inject(shared_ptr<EngineInterface> fe3d)
 	_rightViewportController->inject(fe3d);
 	_topViewportController->inject(fe3d);
 	_bottomViewportController->inject(fe3d);
+	_skyEditor->inject(fe3d);
+	_terrainEditor->inject(fe3d);
+	_waterEditor->inject(fe3d);
+	_modelEditor->inject(fe3d);
+	_billboardEditor->inject(fe3d);
+	_quadEditor->inject(fe3d);
+	_animation2dEditor->inject(fe3d);
+	_animation3dEditor->inject(fe3d);
+	_soundEditor->inject(fe3d);
+	_worldEditor->inject(fe3d);
+	_scriptEditor->inject(fe3d);
 	_scriptExecutor->inject(fe3d);
 	_scriptInterpreter->inject(fe3d);
 
@@ -60,7 +130,7 @@ void EngineController::initialize()
 
 		_fe3d->misc_setBackgroundColor(RENDER_COLOR);
 
-		_leftViewportController->getScriptEditor()->loadScriptFiles(true);
+		_scriptEditor->loadScriptFiles(true);
 		_scriptExecutor->load();
 
 		if(!_scriptExecutor->isRunning())
@@ -114,6 +184,7 @@ void EngineController::initialize()
 		_fe3d->misc_setCursorEntityID("@@cursor");
 		_fe3d->misc_setCursorVisible(false);
 
+		_guiManager->initialize();
 		_rightViewportController->initialize();
 		_bottomViewportController->initialize();
 		_topViewportController->initialize();
@@ -129,8 +200,8 @@ void EngineController::update()
 	{
 		if(_scriptExecutor->isRunning())
 		{
-			_leftViewportController->getAnimation2dEditor()->update();
-			_leftViewportController->getAnimation3dEditor()->update();
+			_animation2dEditor->update();
+			_animation3dEditor->update();
 
 			_scriptExecutor->update(false);
 		}

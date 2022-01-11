@@ -34,6 +34,6 @@ private:
 	static inline const unsigned int TIME_PART_LENGTH = 10;
 	static inline const unsigned int SEPARATOR_PART_LENGTH = 3;
 
-	shared_ptr<ScriptExecutor> _scriptExecutor;
-	shared_ptr<ScriptEditor> _scriptEditor;
+	shared_ptr<ScriptExecutor> _scriptExecutor = nullptr;
+	shared_ptr<ScriptEditor> _scriptEditor = nullptr;
 };

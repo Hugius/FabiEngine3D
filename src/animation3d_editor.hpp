@@ -99,5 +99,5 @@ private:
 
 	map<pair<string, string>, Animation3d> _startedModelAnimations;
 	vector<shared_ptr<Animation3d>> _animations;
-	shared_ptr<ModelEditor> _modelEditor;
+	shared_ptr<ModelEditor> _modelEditor = nullptr;
 };

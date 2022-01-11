@@ -2,6 +2,16 @@
 
 using BVPC = BottomViewportController;
 
+void BottomViewportController::inject(shared_ptr<ScriptExecutor> scriptExecutor)
+{
+	_scriptExecutor = scriptExecutor;
+}
+
+void BottomViewportController::inject(shared_ptr<ScriptEditor> scriptEditor)
+{
+	_scriptEditor = scriptEditor;
+}
+
 void BottomViewportController::initialize()
 {
 	_gui->getViewport("bottom")->createWindow("statistics", fvec2(-0.25f, 0.0f), fvec2(0.9875f, 1.875f), BVPC::FRAME_COLOR);

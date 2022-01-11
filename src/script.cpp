@@ -42,7 +42,7 @@ void Script::deleteScriptFile(const string& ID)
 	Logger::throwError("Script::deleteScriptFile");
 }
 
-void Script::reset()
+void Script::clear()
 {
 	_scriptFiles.clear();
 }

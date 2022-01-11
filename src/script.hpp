@@ -8,7 +8,7 @@ public:
 	void createScriptFile(const string& ID);
 	void renameScriptFile(const string& ID, const string& newID);
 	void deleteScriptFile(const string& ID);
-	void reset();
+	void clear();
 
 	const vector<string> getScriptFileIDs() const;
 

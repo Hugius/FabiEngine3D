@@ -16,27 +16,22 @@
 class LeftViewportController final : public BaseViewportController
 {
 public:
-	LeftViewportController();
-
 	using BaseViewportController::inject;
 
-	void inject(shared_ptr<EngineInterface> fe3d) override;
-	void inject(shared_ptr<GuiManager> gui) override;
+	void inject(shared_ptr<SkyEditor> skyEditor);
+	void inject(shared_ptr<TerrainEditor> terrainEditor);
+	void inject(shared_ptr<WaterEditor> waterEditor);
+	void inject(shared_ptr<ModelEditor> modelEditor);
+	void inject(shared_ptr<BillboardEditor> billboardEditor);
+	void inject(shared_ptr<QuadEditor> quadEditor);
+	void inject(shared_ptr<Animation2dEditor> animation2dEditor);
+	void inject(shared_ptr<Animation3dEditor> animation3dEditor);
+	void inject(shared_ptr<SoundEditor> soundEditor);
+	void inject(shared_ptr<WorldEditor> worldEditor);
+	void inject(shared_ptr<ScriptEditor> scriptEditor);
 
 	void initialize() override;
 	void update() override;
-
-	const shared_ptr<SkyEditor> getSkyEditor() const;
-	const shared_ptr<TerrainEditor> getTerrainEditor() const;
-	const shared_ptr<WaterEditor> getWaterEditor() const;
-	const shared_ptr<ModelEditor> getModelEditor() const;
-	const shared_ptr<BillboardEditor> getBillboardEditor() const;
-	const shared_ptr<QuadEditor> getQuadEditor() const;
-	const shared_ptr<Animation2dEditor> getAnimation2dEditor() const;
-	const shared_ptr<Animation3dEditor> getAnimation3dEditor() const;
-	const shared_ptr<SoundEditor> getSoundEditor() const;
-	const shared_ptr<WorldEditor> getWorldEditor() const;
-	const shared_ptr<ScriptEditor> getScriptEditor() const;
 
 	static inline const fvec3 SCROLLING_LIST_COLOR = fvec3(0.25f);
 	static inline const fvec3 BUTTON_COLOR = fvec3(0.1f, 0.1f, 1.0f);

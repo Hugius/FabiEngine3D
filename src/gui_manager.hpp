@@ -7,10 +7,9 @@
 class GuiManager final
 {
 public:
-	GuiManager();
-
 	void inject(shared_ptr<EngineInterface> fe3d);
 
+	void initialize();
 	void update();
 
 	shared_ptr<GuiViewport> getViewport(const string& ID);
@@ -21,5 +20,5 @@ public:
 private:
 	vector<shared_ptr<GuiViewport>> _viewports;
 	shared_ptr<GuiOverlay> _overlay;
-	shared_ptr<EngineInterface> _fe3d;
+	shared_ptr<EngineInterface> _fe3d = nullptr;
 };

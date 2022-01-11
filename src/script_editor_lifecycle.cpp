@@ -39,7 +39,7 @@ void ScriptEditor::unload()
 
 	_fe3d->aabb_deleteAll();
 
-	_script->reset();
+	_script->clear();
 
 	_scriptFileNamesToDelete.clear();
 	_copyClipboard.clear();

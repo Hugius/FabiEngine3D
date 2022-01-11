@@ -27,11 +27,23 @@ private:
 
 	shared_ptr<EngineInterface> _fe3d = nullptr;
 
-	shared_ptr<GuiManager> _guiManager;
-	shared_ptr<LeftViewportController> _leftViewportController;
-	shared_ptr<RightViewportController> _rightViewportController;
-	shared_ptr<TopViewportController> _topViewportController;
-	shared_ptr<BottomViewportController> _bottomViewportController;
-	shared_ptr<ScriptExecutor> _scriptExecutor;
-	shared_ptr<ScriptInterpreter> _scriptInterpreter;
+	shared_ptr<GuiManager> _guiManager = nullptr;
+	shared_ptr<LeftViewportController> _leftViewportController = nullptr;
+	shared_ptr<RightViewportController> _rightViewportController = nullptr;
+	shared_ptr<TopViewportController> _topViewportController = nullptr;
+	shared_ptr<BottomViewportController> _bottomViewportController = nullptr;
+	shared_ptr<SkyEditor> _skyEditor = nullptr;
+	shared_ptr<TerrainEditor> _terrainEditor = nullptr;
+	shared_ptr<WaterEditor> _waterEditor = nullptr;
+	shared_ptr<ModelEditor> _modelEditor = nullptr;
+	shared_ptr<BillboardEditor> _billboardEditor = nullptr;
+	shared_ptr<QuadEditor> _quadEditor = nullptr;
+	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
+	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
+	shared_ptr<SoundEditor> _soundEditor = nullptr;
+	shared_ptr<WorldEditor> _worldEditor = nullptr;
+	shared_ptr<ScriptEditor> _scriptEditor = nullptr;
+	shared_ptr<Script> _script = nullptr;
+	shared_ptr<ScriptExecutor> _scriptExecutor = nullptr;
+	shared_ptr<ScriptInterpreter> _scriptInterpreter = nullptr;
 };

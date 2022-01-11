@@ -6,8 +6,8 @@
 class BaseViewportController
 {
 public:
-	virtual void inject(shared_ptr<EngineInterface> fe3d);
-	virtual void inject(shared_ptr<GuiManager> gui);
+	void inject(shared_ptr<EngineInterface> fe3d);
+	void inject(shared_ptr<GuiManager> gui);
 
 	virtual void initialize() = 0;
 	virtual void update() = 0;

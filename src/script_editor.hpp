@@ -8,6 +8,7 @@ class ScriptEditor final : public BaseEditor
 {
 public:
 	using BaseEditor::inject;
+
 	void inject(shared_ptr<Script> script);
 
 	void setCurrentProjectID(const string& projectID);
@@ -129,5 +130,5 @@ private:
 		InputType::KEY_DOWN
 	};
 
-	shared_ptr<Script> _script;
+	shared_ptr<Script> _script = nullptr;
 };

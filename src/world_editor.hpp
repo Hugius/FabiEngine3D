@@ -307,12 +307,12 @@ private:
 	bool _isDeletingWorld = false;
 	bool _isEditorLoaded = false;
 
-	shared_ptr<SkyEditor> _skyEditor;
-	shared_ptr<TerrainEditor> _terrainEditor;
-	shared_ptr<WaterEditor> _waterEditor;
-	shared_ptr<ModelEditor> _modelEditor;
-	shared_ptr<BillboardEditor> _billboardEditor;
-	shared_ptr<Animation2dEditor> _animation2dEditor;
-	shared_ptr<Animation3dEditor> _animation3dEditor;
-	shared_ptr<SoundEditor> _soundEditor;
+	shared_ptr<SkyEditor> _skyEditor = nullptr;
+	shared_ptr<TerrainEditor> _terrainEditor = nullptr;
+	shared_ptr<WaterEditor> _waterEditor = nullptr;
+	shared_ptr<ModelEditor> _modelEditor = nullptr;
+	shared_ptr<BillboardEditor> _billboardEditor = nullptr;
+	shared_ptr<Animation2dEditor> _animation2dEditor = nullptr;
+	shared_ptr<Animation3dEditor> _animation3dEditor = nullptr;
+	shared_ptr<SoundEditor> _soundEditor = nullptr;
 };

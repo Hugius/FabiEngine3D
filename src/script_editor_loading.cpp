@@ -17,7 +17,7 @@ const bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 		Logger::throwError("ScriptEditor::loadScriptsFromFile");
 	}
 
-	_script->reset();
+	_script->clear();
 
 	const auto isExported = Config::getInst().isApplicationExported();
 	const auto rootPath = Tools::getRootDirectoryPath();

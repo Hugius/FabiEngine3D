@@ -249,3 +249,13 @@ void ScriptInterpreter::inject(shared_ptr<SoundEditor> soundEditor)
 {
 	_soundEditor = soundEditor;
 }
+
+void ScriptInterpreter::inject(shared_ptr<QuadEditor> quadEditor)
+{
+	_quadEditor = quadEditor;
+}
+
+void ScriptInterpreter::inject(shared_ptr<WorldEditor> worldEditor)
+{
+	_worldEditor = worldEditor;
+}

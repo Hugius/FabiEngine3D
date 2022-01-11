@@ -6,8 +6,8 @@
 class BaseEditor
 {
 public:
-	virtual void inject(shared_ptr<EngineInterface> fe3d);
-	virtual void inject(shared_ptr<GuiManager> gui);
+	void inject(shared_ptr<EngineInterface> fe3d);
+	void inject(shared_ptr<GuiManager> gui);
 
 	virtual void setCurrentProjectID(const string& projectID) = 0;
 	virtual void load() = 0;

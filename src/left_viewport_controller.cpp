@@ -4,55 +4,6 @@
 
 using LVPC = LeftViewportController;
 
-LeftViewportController::LeftViewportController()
-{
-	_skyEditor = make_shared<SkyEditor>();
-	_terrainEditor = make_shared<TerrainEditor>();
-	_waterEditor = make_shared<WaterEditor>();
-	_modelEditor = make_shared<ModelEditor>();
-	_billboardEditor = make_shared<BillboardEditor>();
-	_quadEditor = make_shared<QuadEditor>();
-	_animation2dEditor = make_shared<Animation2dEditor>();
-	_animation3dEditor = make_shared<Animation3dEditor>();
-	_soundEditor = make_shared<SoundEditor>();
-	_worldEditor = make_shared<WorldEditor>();
-	_scriptEditor = make_shared<ScriptEditor>();
-}
-
-void LeftViewportController::inject(shared_ptr<EngineInterface> fe3d)
-{
-	_skyEditor->inject(fe3d);
-	_terrainEditor->inject(fe3d);
-	_waterEditor->inject(fe3d);
-	_modelEditor->inject(fe3d);
-	_billboardEditor->inject(fe3d);
-	_quadEditor->inject(fe3d);
-	_animation2dEditor->inject(fe3d);
-	_animation3dEditor->inject(fe3d);
-	_soundEditor->inject(fe3d);
-	_worldEditor->inject(fe3d);
-	_scriptEditor->inject(fe3d);
-
-	_fe3d = fe3d;
-}
-
-void LeftViewportController::inject(shared_ptr<GuiManager> gui)
-{
-	_skyEditor->inject(gui);
-	_terrainEditor->inject(gui);
-	_waterEditor->inject(gui);
-	_modelEditor->inject(gui);
-	_billboardEditor->inject(gui);
-	_quadEditor->inject(gui);
-	_animation2dEditor->inject(gui);
-	_animation3dEditor->inject(gui);
-	_soundEditor->inject(gui);
-	_worldEditor->inject(gui);
-	_scriptEditor->inject(gui);
-
-	_gui = gui;
-}
-
 void LeftViewportController::initialize()
 {
 	_gui->getViewport("left")->createWindow("main", fvec2(0.0f), fvec2(1.9f, 2.0f), LVPC::FRAME_COLOR);
@@ -182,57 +133,57 @@ void LeftViewportController::update()
 	_scriptEditor->update();
 }
 
-const shared_ptr<SkyEditor> LeftViewportController::getSkyEditor() const
+void LeftViewportController::inject(shared_ptr<SkyEditor> skyEditor)
 {
-	return _skyEditor;
+	_skyEditor = skyEditor;
 }
 
-const shared_ptr<TerrainEditor> LeftViewportController::getTerrainEditor() const
+void LeftViewportController::inject(shared_ptr<TerrainEditor> terrainEditor)
 {
-	return _terrainEditor;
+	_terrainEditor = terrainEditor;
 }
 
-const shared_ptr<WaterEditor> LeftViewportController::getWaterEditor() const
+void LeftViewportController::inject(shared_ptr<WaterEditor> waterEditor)
 {
-	return _waterEditor;
+	_waterEditor = waterEditor;
 }
 
-const shared_ptr<ModelEditor> LeftViewportController::getModelEditor() const
+void LeftViewportController::inject(shared_ptr<ModelEditor> modelEditor)
 {
-	return _modelEditor;
+	_modelEditor = modelEditor;
 }
 
-const shared_ptr<BillboardEditor> LeftViewportController::getBillboardEditor() const
+void LeftViewportController::inject(shared_ptr<BillboardEditor> billboardEditor)
 {
-	return _billboardEditor;
+	_billboardEditor = billboardEditor;
 }
 
-const shared_ptr<QuadEditor> LeftViewportController::getQuadEditor() const
+void LeftViewportController::inject(shared_ptr<QuadEditor> quadEditor)
 {
-	return _quadEditor;
+	_quadEditor = quadEditor;
 }
 
-const shared_ptr<Animation2dEditor> LeftViewportController::getAnimation2dEditor() const
+void LeftViewportController::inject(shared_ptr<Animation2dEditor> animation2dEditor)
 {
-	return _animation2dEditor;
+	_animation2dEditor = animation2dEditor;
 }
 
-const shared_ptr<Animation3dEditor> LeftViewportController::getAnimation3dEditor() const
+void LeftViewportController::inject(shared_ptr<Animation3dEditor> animation3dEditor)
 {
-	return _animation3dEditor;
+	_animation3dEditor = animation3dEditor;
 }
 
-const shared_ptr<SoundEditor> LeftViewportController::getSoundEditor() const
+void LeftViewportController::inject(shared_ptr<SoundEditor> soundEditor)
 {
-	return _soundEditor;
+	_soundEditor = soundEditor;
 }
 
-const shared_ptr<WorldEditor> LeftViewportController::getWorldEditor() const
+void LeftViewportController::inject(shared_ptr<WorldEditor> worldEditor)
 {
-	return _worldEditor;
+	_worldEditor = worldEditor;
 }
 
-const shared_ptr<ScriptEditor> LeftViewportController::getScriptEditor() const
+void LeftViewportController::inject(shared_ptr<ScriptEditor> scriptEditor)
 {
-	return _scriptEditor;
+	_scriptEditor = scriptEditor;
 }

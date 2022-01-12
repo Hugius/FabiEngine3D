@@ -18,7 +18,7 @@ void WorldEditor::_updatePointlightPlacing()
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
 				BEGIN1:;
-				const string newID = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				const auto newID = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 				if(_fe3d->pointlight_isExisting(newID))
 				{
@@ -82,7 +82,7 @@ void WorldEditor::_updatePointlightPlacing()
 						auto newPosition = _fe3d->pointlight_getPosition(TEMPLATE_LAMP_ID);
 
 						BEGIN2:;
-						const string newID = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+						const auto newID = ("pointlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 						if(_fe3d->pointlight_isExisting(newID))
 						{

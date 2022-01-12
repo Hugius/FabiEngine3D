@@ -30,8 +30,8 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			const auto filePath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\image\\entity\\text\\font_map\\" + args[1].getString());
 			_fe3d->text_setFontMap(args[0].getString(), filePath);
 
-			_fe3d->text_setPosition(args[0].getString(), _convertGuiPositionToViewport(fvec2(args[3].getDecimal(), args[4].getDecimal())));
-			_fe3d->text_setSize(args[0].getString(), _convertGuiSizeToViewport(fvec2(args[5].getDecimal(), args[6].getDecimal())));
+			_fe3d->text_setPosition(args[0].getString(), _convertPositionToViewport(fvec2(args[3].getDecimal(), args[4].getDecimal())));
+			_fe3d->text_setSize(args[0].getString(), _convertSizeToViewport(fvec2(args[5].getDecimal(), args[6].getDecimal())));
 			_fe3d->text_setContent(args[0].getString(), args[2].getString());
 
 			if(!Config::getInst().isApplicationExported())
@@ -94,7 +94,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				fvec2 position = _convertGuiPositionToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				fvec2 position = _convertPositionToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				_fe3d->text_setPosition(args[0].getString(), position);
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -108,7 +108,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				fvec2 change = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				fvec2 change = _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				_fe3d->text_move(args[0].getString(), change);
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -122,8 +122,8 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				fvec2 target = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
-				fvec2 speed = _convertGuiSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
+				fvec2 target = _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				fvec2 speed = _convertSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
 				_fe3d->text_moveTo(args[0].getString(), target, speed.x);
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -150,8 +150,8 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				fvec2 target = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
-				fvec2 speed = _convertGuiSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
+				fvec2 target = _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				fvec2 speed = _convertSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
 				_fe3d->text_scaleTo(args[0].getString(), target, speed.x);
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -191,7 +191,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				fvec2 size = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				fvec2 size = _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				_fe3d->text_setSize(args[0].getString(), size);
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -205,7 +205,7 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				fvec2 change = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				fvec2 change = _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				_fe3d->text_scale(args[0].getString(), change);
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}

@@ -19,7 +19,7 @@ void WorldEditor::_updateBillboardPlacing()
 			{
 				BEGIN1:;
 				int randomSerial = Math::getRandomNumber(0, INT_MAX);
-				const string newID = (_currentTemplateBillboardID.substr(1) + "_" + to_string(randomSerial));
+				const auto newID = (_currentTemplateBillboardID.substr(1) + "_" + to_string(randomSerial));
 
 				if(_fe3d->billboard_isExisting(newID))
 				{
@@ -58,7 +58,7 @@ void WorldEditor::_updateBillboardPlacing()
 						const auto newPosition = _fe3d->billboard_getPosition(_currentTemplateBillboardID);
 
 						BEGIN2:;
-						const string newID = (_currentTemplateBillboardID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+						const auto newID = (_currentTemplateBillboardID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 						if(_fe3d->billboard_isExisting(newID))
 						{

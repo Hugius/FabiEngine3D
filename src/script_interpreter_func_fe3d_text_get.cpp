@@ -78,7 +78,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				auto result = _convertGuiPositionFromViewport(_fe3d->text_getPosition(args[0].getString())).x;
+				auto result = _convertPositionFromViewport(_fe3d->text_getPosition(args[0].getString())).x;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -91,7 +91,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				auto result = _convertGuiPositionFromViewport(_fe3d->text_getPosition(args[0].getString())).y;
+				auto result = _convertPositionFromViewport(_fe3d->text_getPosition(args[0].getString())).y;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -117,7 +117,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				auto result = _convertGuiSizeFromViewport(_fe3d->text_getSize(args[0].getString())).x;
+				auto result = _convertSizeFromViewport(_fe3d->text_getSize(args[0].getString())).x;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}
@@ -130,7 +130,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				auto result = _convertGuiSizeFromViewport(_fe3d->text_getSize(args[0].getString())).y;
+				auto result = _convertSizeFromViewport(_fe3d->text_getSize(args[0].getString())).y;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}

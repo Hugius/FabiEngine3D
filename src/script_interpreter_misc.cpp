@@ -140,62 +140,92 @@ void ScriptInterpreter::_checkEngineWarnings(unsigned int lastLoggerMessageCount
 	}
 }
 
-const fvec2 ScriptInterpreter::_convertGuiPositionToViewport(fvec2 position) const
+const fvec2 ScriptInterpreter::_calculateMinViewportPosition() const
 {
-	if(!Config::getInst().isApplicationExported())
+	if(Config::getInst().isApplicationExported())
 	{
-		auto sizeMultiplier = fvec2(Config::getInst().getViewportSize()) /
-			fvec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y));
-		auto positionMultiplier = fvec2(Config::getInst().getViewportPosition()) /
-			fvec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y));
-		position *= sizeMultiplier;
-		auto offset = fvec2(1.0f) - fvec2((positionMultiplier.x * 2.0f) + sizeMultiplier.x, (positionMultiplier.y * 2.0f) + sizeMultiplier.y);
-		position += fvec2(fabsf(offset.x), fabsf(offset.y));
+		return fvec2(0.0f);
 	}
+
+	const auto rawPosition = Config::getInst().getViewportPosition();
+	const auto convertedPosition = Math::convertToNdc(Tools::convertFromScreenCoords(rawPosition));
+
+	return convertedPosition;
+}
+
+const fvec2 ScriptInterpreter::_calculateMaxViewportPosition() const
+{
+	if(Config::getInst().isApplicationExported())
+	{
+		return fvec2(1.0f);
+	}
+
+	const auto rawPosition = (Config::getInst().getViewportPosition() + Config::getInst().getViewportSize());
+	const auto convertedPosition = Math::convertToNdc(Tools::convertFromScreenCoords(rawPosition));
+
+	return convertedPosition;
+}
+
+const fvec2 ScriptInterpreter::_convertPositionToViewport(fvec2 position) const
+{
+	if(Config::getInst().isApplicationExported())
+	{
+		return position;
+	}
+
+	const auto sizeMultiplier = (fvec2(Config::getInst().getViewportSize()) / fvec2(Config::getInst().getWindowSize()));
+	const auto positionMultiplier = (fvec2(Config::getInst().getViewportPosition()) / fvec2(Config::getInst().getWindowSize()));
+	const auto offset = (fvec2(1.0f) - fvec2((positionMultiplier.x * 2.0f) + sizeMultiplier.x, (positionMultiplier.y * 2.0f) + sizeMultiplier.y));
+
+	position *= sizeMultiplier;
+	position += fvec2(fabsf(offset.x), fabsf(offset.y));
 
 	return position;
 }
 
-const fvec2 ScriptInterpreter::_convertGuiPositionFromViewport(fvec2 position) const
+const fvec2 ScriptInterpreter::_convertPositionFromViewport(fvec2 position) const
 {
-	if(!Config::getInst().isApplicationExported())
+	if(Config::getInst().isApplicationExported())
 	{
-		auto sizeMultiplier = fvec2(Config::getInst().getViewportSize()) /
-			fvec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y));
-		auto positionMultiplier = fvec2(Config::getInst().getViewportPosition()) /
-			fvec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y));
-		auto offset = fvec2(1.0f) - fvec2((positionMultiplier.x * 2.0f) + sizeMultiplier.x, (positionMultiplier.y * 2.0f) + sizeMultiplier.y);
-		position -= fvec2(fabsf(offset.x), fabsf(offset.y));
-		sizeMultiplier = fvec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y)) /
-			fvec2(Config::getInst().getViewportSize());
-		positionMultiplier = fvec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y)) /
-			fvec2(Config::getInst().getViewportPosition());
-		position *= sizeMultiplier;
+		return position;
 	}
+
+	const auto sizeMultiplier = (fvec2(Config::getInst().getViewportSize()) / fvec2(Config::getInst().getWindowSize()));
+	const auto positionMultiplier = (fvec2(Config::getInst().getViewportPosition()) / fvec2(Config::getInst().getWindowSize()));
+	const auto inverseSizeMultiplier = fvec2(Config::getInst().getWindowSize()) / fvec2(Config::getInst().getViewportSize());
+	const auto inversePositionMultiplier = (fvec2(Config::getInst().getWindowSize()) / fvec2(Config::getInst().getViewportPosition()));
+	const auto offset = (fvec2(1.0f) - fvec2((positionMultiplier.x * 2.0f) + sizeMultiplier.x, (positionMultiplier.y * 2.0f) + sizeMultiplier.y));
+
+	position -= fvec2(fabsf(offset.x), fabsf(offset.y));
+	position *= inverseSizeMultiplier;
 
 	return position;
 }
 
-const fvec2 ScriptInterpreter::_convertGuiSizeToViewport(fvec2 size) const
+const fvec2 ScriptInterpreter::_convertSizeToViewport(fvec2 size) const
 {
-	if(!Config::getInst().isApplicationExported())
+	if(Config::getInst().isApplicationExported())
 	{
-		auto sizeMultiplier = fvec2(Config::getInst().getViewportSize()) /
-			fvec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y));
-		size *= sizeMultiplier;
+		return size;
 	}
+
+	const auto sizeMultiplier = (fvec2(Config::getInst().getViewportSize()) / fvec2(Config::getInst().getWindowSize()));
+
+	size *= sizeMultiplier;
 
 	return size;
 }
 
-const fvec2 ScriptInterpreter::_convertGuiSizeFromViewport(fvec2 size) const
+const fvec2 ScriptInterpreter::_convertSizeFromViewport(fvec2 size) const
 {
 	if(!Config::getInst().isApplicationExported())
 	{
-		auto sizeMultiplier = fvec2(Config::getInst().getViewportSize()) /
-			fvec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y));
-		size /= sizeMultiplier;
+		return size;
 	}
+
+	const auto sizeMultiplier = (fvec2(Config::getInst().getViewportSize()) / fvec2(Config::getInst().getWindowSize()));
+
+	size /= sizeMultiplier;
 
 	return size;
 }

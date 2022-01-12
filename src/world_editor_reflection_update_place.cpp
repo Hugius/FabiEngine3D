@@ -18,7 +18,7 @@ void WorldEditor::_updateReflectionPlacing()
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
 				BEGIN1:;
-				const string newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				const auto newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 				if(_fe3d->reflection_isExisting(newID))
 				{
@@ -71,7 +71,7 @@ void WorldEditor::_updateReflectionPlacing()
 						auto newPosition = _fe3d->reflection_getPosition(TEMPLATE_CAMERA_ID);
 
 						BEGIN2:;
-						const string newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+						const auto newID = ("reflection_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 						if(_fe3d->reflection_isExisting(newID))
 						{

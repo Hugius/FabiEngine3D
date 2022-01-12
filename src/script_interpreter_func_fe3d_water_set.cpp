@@ -13,8 +13,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setSpeed(_fe3d->water_getSelectedID(),
-									  fvec2(args[0].getDecimal() / 100000.0f, args[1].getDecimal() / 100000.0f));
+				_fe3d->water_setSpeed(_fe3d->water_getSelectedID(), fvec2(args[0].getDecimal() / 100000.0f, args[1].getDecimal() / 100000.0f));
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -27,8 +26,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setColor(_fe3d->water_getSelectedID(),
-									  fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
+				_fe3d->water_setColor(_fe3d->water_getSelectedID(), fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -41,8 +39,7 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setWireframeColor(_fe3d->water_getSelectedID(),
-											   fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
+				_fe3d->water_setWireframeColor(_fe3d->water_getSelectedID(), fvec3(args[0].getDecimal(), args[1].getDecimal(), args[2].getDecimal()));
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}

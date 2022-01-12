@@ -21,7 +21,7 @@ void WorldEditor::_updateModelPlacing()
 				const string rawID = _currentTemplateModelID.substr(1);
 
 				BEGIN1:;
-				const string newID = (rawID + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				const auto newID = (rawID + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 				if(_fe3d->model_isExisting(newID))
 				{
@@ -61,7 +61,7 @@ void WorldEditor::_updateModelPlacing()
 						const auto newPosition = _fe3d->model_getBasePosition(_currentTemplateModelID);
 
 						BEGIN2:;
-						const string newID = (rawID + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+						const auto newID = (rawID + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 						if(_fe3d->model_isExisting(newID))
 						{

@@ -73,7 +73,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 	const fvec2 minPosition = fvec2(-1.0f, window->getInitialPosition().y - (window->getInitialSize().y / 2.0f));
 	const fvec2 maxPosition = fvec2(0.995f, window->getInitialPosition().y + (window->getInitialSize().y / 2.0f));
 
-	string newID = to_string(_consoleMessageQueue.size());
+	const auto newID = to_string(_consoleMessageQueue.size());
 	_consoleMessageQueue.push_back(make_pair(newID, newMessage));
 
 	reverse(_consoleMessageQueue.begin(), _consoleMessageQueue.end());

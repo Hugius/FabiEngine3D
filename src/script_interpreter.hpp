@@ -57,10 +57,12 @@ private:
 	const string _limitIntegerString(const string& valueString) const;
 	const string _limitDecimalString(const string& valueString) const;
 
-	const fvec2 _convertGuiPositionToViewport(fvec2 position) const;
-	const fvec2 _convertGuiPositionFromViewport(fvec2 position) const;
-	const fvec2 _convertGuiSizeToViewport(fvec2 size) const;
-	const fvec2 _convertGuiSizeFromViewport(fvec2 size) const;
+	const fvec2 _calculateMinViewportPosition() const;
+	const fvec2 _calculateMaxViewportPosition() const;
+	const fvec2 _convertPositionToViewport(fvec2 position) const;
+	const fvec2 _convertPositionFromViewport(fvec2 position) const;
+	const fvec2 _convertSizeToViewport(fvec2 size) const;
+	const fvec2 _convertSizeFromViewport(fvec2 size) const;
 
 	const int _extractListIndexFromString(const string& valueString, bool& isAccessingList);
 

@@ -9,7 +9,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 {
 	if(functionName == "fe3d:quad_place")
 	{
-		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -27,29 +27,11 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 			if(_validateFe3dQuad(args[1].getString(), true))
 			{
 				_fe3d->quad_create(args[0].getString(), true);
-
-				if(_currentProjectID.empty())
-				{
-					Logger::throwError("ScriptInterpreter::_executeFe3dQuadSetter");
-				}
-
-				const auto isExported = Config::getInst().isApplicationExported();
-				const auto rootPath = Tools::getRootDirectoryPath();
-				const auto targetDirectoryPath = string(rootPath + (isExported ? "" : ("projects\\" + _currentProjectID + "\\")) + "assets\\image\\entity\\quad\\diffuse_map\\");
-				const auto filePath = (targetDirectoryPath + args[1].getString());
-				_fe3d->quad_setDiffuseMap(args[0].getString(), filePath);
-
-				_fe3d->quad_setPosition(args[0].getString(), _convertGuiPositionToViewport(fvec2(args[2].getDecimal(), args[3].getDecimal())));
-				_fe3d->quad_setRotation(args[0].getString(), args[4].getDecimal());
-				_fe3d->quad_setSize(args[0].getString(), _convertGuiSizeToViewport(fvec2(args[5].getDecimal(), args[6].getDecimal())));
-
-				if(!Config::getInst().isApplicationExported())
-				{
-					auto minPosition = Math::convertToNdc(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition()));
-					auto maxPosition = Math::convertToNdc(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition() + Config::getInst().getViewportSize()));
-					_fe3d->quad_setMinPosition(args[0].getString(), minPosition);
-					_fe3d->quad_setMaxPosition(args[0].getString(), maxPosition);
-				}
+				_fe3d->quad_setDiffuseMap(args[0].getString(), _fe3d->quad_getDiffuseMapPath("@" + args[1].getString()));
+				_fe3d->quad_setPosition(args[0].getString(), _convertPositionToViewport(fvec2(args[2].getDecimal(), args[3].getDecimal())));
+				_fe3d->quad_setSize(args[0].getString(), _convertSizeToViewport(fvec2(args[4].getDecimal(), args[5].getDecimal())));
+				_fe3d->quad_setMinPosition(args[0].getString(), _calculateMinViewportPosition());
+				_fe3d->quad_setMaxPosition(args[0].getString(), _calculateMaxViewportPosition());
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -104,7 +86,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				auto position = _convertGuiPositionToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				auto position = _convertPositionToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				_fe3d->quad_setPosition(args[0].getString(), position);
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -118,7 +100,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				fvec2 change = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				fvec2 change = _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				_fe3d->quad_move(args[0].getString(), change);
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -132,8 +114,8 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				fvec2 target = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
-				fvec2 speed = _convertGuiSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
+				fvec2 target = _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				fvec2 speed = _convertSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
 				_fe3d->quad_moveTo(args[0].getString(), target, speed.x);
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -186,7 +168,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				fvec2 size = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				fvec2 size = _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				_fe3d->quad_setSize(args[0].getString(), size);
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -200,7 +182,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				fvec2 change = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				fvec2 change = _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
 				_fe3d->quad_scale(args[0].getString(), change);
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
@@ -214,8 +196,8 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				fvec2 target = _convertGuiSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
-				fvec2 speed = _convertGuiSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
+				fvec2 target = _convertSizeToViewport(fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				fvec2 speed = _convertSizeToViewport(fvec2(args[3].getDecimal(), args[3].getDecimal()));
 				_fe3d->quad_scaleTo(args[0].getString(), target, speed.x);
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}

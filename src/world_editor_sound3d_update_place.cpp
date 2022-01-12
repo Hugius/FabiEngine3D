@@ -18,7 +18,7 @@ void WorldEditor::_updateSoundPlacing()
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
 				BEGIN1:;
-				const string newID = (_currentTemplateSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				const auto newID = (_currentTemplateSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 				if(_fe3d->sound3d_isExisting(newID))
 				{
@@ -88,7 +88,7 @@ void WorldEditor::_updateSoundPlacing()
 						const auto newPosition = _fe3d->sound3d_getPosition(_currentTemplateSoundID);
 
 						BEGIN2:;
-						const string newID = (_currentTemplateSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+						const auto newID = (_currentTemplateSoundID.substr(1) + "_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 
 						if(_fe3d->sound3d_isExisting(newID))
 						{

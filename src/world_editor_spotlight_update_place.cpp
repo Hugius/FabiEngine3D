@@ -17,7 +17,7 @@ void WorldEditor::_updateSpotlightPlacing()
 			if(_gui->getOverlay()->isValueFormConfirmed())
 			{
 				BEGIN1:;
-				const string newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				const auto newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 				const string newModelID = ("@@torch_" + newID);
 				if(_fe3d->spotlight_isExisting(newID))
 				{
@@ -98,7 +98,7 @@ void WorldEditor::_updateSpotlightPlacing()
 			if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				BEGIN2:;
-				const string newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
+				const auto newID = ("spotlight_" + to_string(Math::getRandomNumber(0, INT_MAX)));
 				const string newModelID = ("@@torch_" + newID);
 				if(_fe3d->spotlight_isExisting(newID))
 				{

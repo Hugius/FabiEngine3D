@@ -71,6 +71,32 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
+	else if(functionName == "fe3d:model_set_face_culled")
+	{
+		auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				_fe3d->model_setFaceCulled(args[0].getString(), args[1].getBoolean());
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_lod_size")
+	{
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				_fe3d->model_setLevelOfDetailSize(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:model_set_position")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
@@ -284,6 +310,102 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 				}
 
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_texture_repeat")
+	{
+		auto types = {SVT::STRING, SVT::STRING, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					_fe3d->model_setTextureRepeat(args[0].getString(), args[1].getString(), args[2].getDecimal());
+					returnValues.push_back(ScriptValue(SVT::EMPTY));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_diffuse_map")
+	{
+		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					_fe3d->model_setDiffuseMap(args[0].getString(), args[1].getString(), args[2].getString());
+					returnValues.push_back(ScriptValue(SVT::EMPTY));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_emission_map")
+	{
+		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					_fe3d->model_setEmissionMap(args[0].getString(), args[1].getString(), args[2].getString());
+					returnValues.push_back(ScriptValue(SVT::EMPTY));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_specular_map")
+	{
+		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					_fe3d->model_setSpecularMap(args[0].getString(), args[1].getString(), args[2].getString());
+					returnValues.push_back(ScriptValue(SVT::EMPTY));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_reflection_map")
+	{
+		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					_fe3d->model_setReflectionMap(args[0].getString(), args[1].getString(), args[2].getString());
+					returnValues.push_back(ScriptValue(SVT::EMPTY));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_set_normal_map")
+	{
+		auto types = {SVT::STRING, SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					_fe3d->model_setNormalMap(args[0].getString(), args[1].getString(), args[2].getString());
+					returnValues.push_back(ScriptValue(SVT::EMPTY));
+				}
 			}
 		}
 	}

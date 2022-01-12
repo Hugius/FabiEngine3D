@@ -11,9 +11,3 @@
 - **Position**: the XYZ position of the captor
   - Type: `decimal3`
   - Constraints: none
-- **Position Target**: the target XYZ position of the captor
-  - Type: `decimal3`
-  - Constraints: none
-- **Position Target Speed**: the speed with which the captor moves to the target position
-  - Type: `decimal`
-  - Constraints: at least `0.0`

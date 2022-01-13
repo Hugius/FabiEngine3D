@@ -129,12 +129,12 @@ void EngineInterface::quad_setUvOffset(const string& ID, fvec2 value)
 	_core->getQuadEntityManager()->getEntity(ID)->setUvOffset(value);
 }
 
-void EngineInterface::quad_setMirroredHorizontally(const string& ID, bool value)
+void EngineInterface::quad_setHorizontallyMirrored(const string& ID, bool value)
 {
-	_core->getQuadEntityManager()->getEntity(ID)->setMirroredHorizontally(value);
+	_core->getQuadEntityManager()->getEntity(ID)->setHorizontallyMirrored(value);
 }
 
-void EngineInterface::quad_setMirroredVertically(const string& ID, bool value)
+void EngineInterface::quad_setVerticallyMirrored(const string& ID, bool value)
 {
-	_core->getQuadEntityManager()->getEntity(ID)->setMirroredVertically(value);
+	_core->getQuadEntityManager()->getEntity(ID)->setVerticallyMirrored(value);
 }

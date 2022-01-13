@@ -252,6 +252,45 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 			}
 		}
 	}
+	else if(functionName == "fe3d:text_is_horizontally_mirrored")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dText(args[0].getString(), false))
+			{
+				auto result = _fe3d->text_isHorizontallyMirrored(args[0].getString());
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:text_is_vertically_mirrored")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dText(args[0].getString(), false))
+			{
+				auto result = _fe3d->text_isVerticallyMirrored(args[0].getString());
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:text_is_wireframed")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dText(args[0].getString(), false))
+			{
+				auto result = _fe3d->text_isWireframed(args[0].getString());
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:text_get_font_path")
 	{
 		auto types = {SVT::STRING};

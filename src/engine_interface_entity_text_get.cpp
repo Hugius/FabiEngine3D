@@ -16,14 +16,14 @@ const bool EngineInterface::text_isCentered(const string& ID) const
 	return _core->getTextEntityManager()->getEntity(ID)->isCentered();
 }
 
-const bool EngineInterface::text_isMirroredHorizontally(const string& ID) const
+const bool EngineInterface::text_isHorizontallyMirrored(const string& ID) const
 {
 	return _core->getTextEntityManager()->getEntity(ID)->isMirroredHorizonally();
 }
 
-const bool EngineInterface::text_isMirroredVertically(const string& ID) const
+const bool EngineInterface::text_isVerticallyMirrored(const string& ID) const
 {
-	return _core->getTextEntityManager()->getEntity(ID)->isMirroredVertically();
+	return _core->getTextEntityManager()->getEntity(ID)->isVerticallyMirrored();
 }
 
 const bool EngineInterface::text_isWireframed(const string& ID) const

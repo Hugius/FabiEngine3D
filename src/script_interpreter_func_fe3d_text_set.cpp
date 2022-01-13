@@ -86,6 +86,58 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 			}
 		}
 	}
+	else if(functionName == "fe3d:text_set_horizontally_mirrored")
+	{
+		auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dText(args[0].getString(), false))
+			{
+				_fe3d->text_setHorizontallyMirrored(args[0].getString(), args[1].getBoolean());
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:text_set_vertically_mirrored")
+	{
+		auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dText(args[0].getString(), false))
+			{
+				_fe3d->text_setVerticallyMirrored(args[0].getString(), args[1].getBoolean());
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:text_set_wireframed")
+	{
+		auto types = {SVT::STRING, SVT::BOOLEAN};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dText(args[0].getString(), false))
+			{
+				_fe3d->text_setWireframed(args[0].getString(), args[1].getBoolean());
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:text_set_font_map")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dText(args[0].getString(), false))
+			{
+				_fe3d->text_setFontMap(args[0].getString(), args[1].getString());
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:text_set_position")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};

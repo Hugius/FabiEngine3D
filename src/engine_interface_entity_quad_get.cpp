@@ -93,12 +93,12 @@ const bool EngineInterface::quad_isWireframed(const string& ID) const
 	return _core->getQuadEntityManager()->getEntity(ID)->isWireframed();
 }
 
-const bool EngineInterface::quad_isMirroredHorizontally(const string& ID) const
+const bool EngineInterface::quad_isHorizontallyMirrored(const string& ID) const
 {
 	return _core->getQuadEntityManager()->getEntity(ID)->isMirroredHorizonally();
 }
 
-const bool EngineInterface::quad_isMirroredVertically(const string& ID) const
+const bool EngineInterface::quad_isVerticallyMirrored(const string& ID) const
 {
-	return _core->getQuadEntityManager()->getEntity(ID)->isMirroredVertically();
+	return _core->getQuadEntityManager()->getEntity(ID)->isVerticallyMirrored();
 }

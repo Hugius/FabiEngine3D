@@ -20,8 +20,8 @@ public:
 	void setContent(const string& value);
 	void setFontMapPath(const string& value);
 	void setFontMap(shared_ptr<TextureBuffer> value);
-	void setMirroredHorizontally(bool value);
-	void setMirroredVertically(bool value);
+	void setHorizontallyMirrored(bool value);
+	void setVerticallyMirrored(bool value);
 	void setTransparency(float value);
 	void setWireframeColor(fvec3 value);
 	void setColor(fvec3 value);
@@ -59,7 +59,7 @@ public:
 	const bool isWireframed() const;
 	const bool isCentered() const;
 	const bool isMirroredHorizonally() const;
-	const bool isMirroredVertically() const;
+	const bool isVerticallyMirrored() const;
 
 	const vector<shared_ptr<QuadEntity>>& getCharacterEntities() const;
 
@@ -185,8 +185,8 @@ private:
 	unsigned int _depth = 0;
 
 	bool _isCentered = false;
-	bool _isMirroredHorizontally = false;
-	bool _isMirroredVertically = false;
+	bool _isHorizontallyMirrored = false;
+	bool _isVerticallyMirrored = false;
 	bool _isWireframed = false;
 
 	vector<shared_ptr<QuadEntity>> _characterEntities;

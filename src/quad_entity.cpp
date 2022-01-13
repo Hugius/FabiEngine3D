@@ -83,14 +83,14 @@ void QuadEntity::setColor(fvec3 value)
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void QuadEntity::setMirroredHorizontally(bool value)
+void QuadEntity::setHorizontallyMirrored(bool value)
 {
-	_isMirroredHorizontally = value;
+	_isHorizontallyMirrored = value;
 }
 
-void QuadEntity::setMirroredVertically(bool value)
+void QuadEntity::setVerticallyMirrored(bool value)
 {
-	_isMirroredVertically = value;
+	_isVerticallyMirrored = value;
 }
 
 void QuadEntity::setTransparency(float value)
@@ -228,12 +228,12 @@ const bool QuadEntity::isCentered() const
 
 const bool QuadEntity::isMirroredHorizonally() const
 {
-	return _isMirroredHorizontally;
+	return _isHorizontallyMirrored;
 }
 
-const bool QuadEntity::isMirroredVertically() const
+const bool QuadEntity::isVerticallyMirrored() const
 {
-	return _isMirroredVertically;
+	return _isVerticallyMirrored;
 }
 
 const bool QuadEntity::hasDiffuseMap() const

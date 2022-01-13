@@ -124,14 +124,14 @@ void EngineInterface::text_scaleTo(const string& ID, fvec2 target, float speed)
 	_core->getTextEntityManager()->getEntity(ID)->scaleTo(target, speed);
 }
 
-void EngineInterface::text_setMirroredHorizontally(const string& ID, bool value)
+void EngineInterface::text_setHorizontallyMirrored(const string& ID, bool value)
 {
-	_core->getTextEntityManager()->getEntity(ID)->setMirroredHorizontally(value);
+	_core->getTextEntityManager()->getEntity(ID)->setHorizontallyMirrored(value);
 }
 
-void EngineInterface::text_setMirroredVertically(const string& ID, bool value)
+void EngineInterface::text_setVerticallyMirrored(const string& ID, bool value)
 {
-	_core->getTextEntityManager()->getEntity(ID)->setMirroredVertically(value);
+	_core->getTextEntityManager()->getEntity(ID)->setVerticallyMirrored(value);
 }
 
 void EngineInterface::text_setWireframed(const string& ID, bool value)

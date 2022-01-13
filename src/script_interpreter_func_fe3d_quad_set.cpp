@@ -270,7 +270,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_set_mirrored_horizontally")
+	else if(functionName == "fe3d:quad_set_horizontally_mirrored")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
@@ -278,12 +278,12 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_setMirroredHorizontally(args[0].getString(), args[1].getBoolean());
+				_fe3d->quad_setHorizontallyMirrored(args[0].getString(), args[1].getBoolean());
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
 	}
-	else if(functionName == "fe3d:quad_set_mirrored_vertically")
+	else if(functionName == "fe3d:quad_set_vertically_mirrored")
 	{
 		auto types = {SVT::STRING, SVT::BOOLEAN};
 
@@ -291,7 +291,7 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 		{
 			if(_validateFe3dQuad(args[0].getString(), false))
 			{
-				_fe3d->quad_setMirroredVertically(args[0].getString(), args[1].getBoolean());
+				_fe3d->quad_setVerticallyMirrored(args[0].getString(), args[1].getBoolean());
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}

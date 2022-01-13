@@ -500,8 +500,8 @@ public:
 	void quad_moveTo(const string& ID, fvec2 target, float speed);
 	void quad_rotateTo(const string& ID, float target, float speed);
 	void quad_scaleTo(const string& ID, fvec2 target, float speed);
-	void quad_setMirroredHorizontally(const string& ID, bool value);
-	void quad_setMirroredVertically(const string& ID, bool value);
+	void quad_setHorizontallyMirrored(const string& ID, bool value);
+	void quad_setVerticallyMirrored(const string& ID, bool value);
 	void quad_setWireframed(const string& ID, bool value);
 	void quad_setWireframeColor(const string& ID, fvec3 value);
 	void quad_setUvMultiplier(const string& ID, fvec2 value);
@@ -522,8 +522,8 @@ public:
 	const bool quad_isExisting(const string& ID) const;
 	const bool quad_isVisible(const string& ID) const;
 	const bool quad_isCentered(const string& ID) const;
-	const bool quad_isMirroredHorizontally(const string& ID) const;
-	const bool quad_isMirroredVertically(const string& ID) const;
+	const bool quad_isHorizontallyMirrored(const string& ID) const;
+	const bool quad_isVerticallyMirrored(const string& ID) const;
 	const bool quad_hasDiffuseMap(const string& ID) const;
 	const bool quad_isWireframed(const string& ID) const;
 
@@ -546,8 +546,8 @@ public:
 	void text_moveTo(const string& ID, fvec2 target, float speed);
 	void text_rotateTo(const string& ID, float target, float speed);
 	void text_scaleTo(const string& ID, fvec2 target, float speed);
-	void text_setMirroredHorizontally(const string& ID, bool value);
-	void text_setMirroredVertically(const string& ID, bool value);
+	void text_setHorizontallyMirrored(const string& ID, bool value);
+	void text_setVerticallyMirrored(const string& ID, bool value);
 	void text_setWireframed(const string& ID, bool value);
 	void text_setWireframeColor(const string& ID, fvec3 value);
 
@@ -564,8 +564,8 @@ public:
 	const bool text_isExisting(const string& ID) const;
 	const bool text_isVisible(const string& ID) const;
 	const bool text_isCentered(const string& ID) const;
-	const bool text_isMirroredHorizontally(const string& ID) const;
-	const bool text_isMirroredVertically(const string& ID) const;
+	const bool text_isHorizontallyMirrored(const string& ID) const;
+	const bool text_isVerticallyMirrored(const string& ID) const;
 	const bool text_isWireframed(const string& ID) const;
 
 	void sound2d_create(const string& ID, const string& audioPath);

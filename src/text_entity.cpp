@@ -66,8 +66,8 @@ void TextEntity::updateCharacterEntities()
 		character->setRotation(_rotation);
 		character->setSize(characterSize);
 		character->setColor(_color);
-		character->setMirroredHorizontally(_isMirroredHorizontally);
-		character->setMirroredVertically(_isMirroredVertically);
+		character->setHorizontallyMirrored(_isHorizontallyMirrored);
+		character->setVerticallyMirrored(_isVerticallyMirrored);
 		character->setTransparency(_transparency);
 		character->setMinPosition(_minPosition);
 		character->setMaxPosition(_maxPosition);
@@ -156,14 +156,14 @@ void TextEntity::setColor(fvec3 value)
 	_color = fvec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void TextEntity::setMirroredHorizontally(bool value)
+void TextEntity::setHorizontallyMirrored(bool value)
 {
-	_isMirroredHorizontally = value;
+	_isHorizontallyMirrored = value;
 }
 
-void TextEntity::setMirroredVertically(bool value)
+void TextEntity::setVerticallyMirrored(bool value)
 {
-	_isMirroredVertically = value;
+	_isVerticallyMirrored = value;
 }
 
 void TextEntity::setTransparency(float value)
@@ -276,12 +276,12 @@ const bool TextEntity::isCentered() const
 
 const bool TextEntity::isMirroredHorizonally() const
 {
-	return _isMirroredHorizontally;
+	return _isHorizontallyMirrored;
 }
 
-const bool TextEntity::isMirroredVertically() const
+const bool TextEntity::isVerticallyMirrored() const
 {
-	return _isMirroredVertically;
+	return _isVerticallyMirrored;
 }
 
 const fvec2 TextEntity::getPosition() const

@@ -37,6 +37,39 @@ const bool ScriptInterpreter::_executeFe3dWaterGetter(const string& functionName
 			}
 		}
 	}
+	else if(functionName == "fe3d:water_has_dudv_map")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dWater())
+			{
+				auto result = _fe3d->water_hasDudvMap(_fe3d->water_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_has_displacement_map")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dWater())
+			{
+				auto result = _fe3d->water_hasDisplacementMap(_fe3d->water_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_has_normal_map")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dWater())
+			{
+				auto result = _fe3d->water_hasNormalMap(_fe3d->water_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:water_get_speed_x")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))

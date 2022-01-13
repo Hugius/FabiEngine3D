@@ -191,6 +191,72 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			}
 		}
 	}
+	else if(functionName == "fe3d:sky_has_left_cube_map")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dSky())
+			{
+				auto result = _fe3d->sky_hasLeftCubeMap(_fe3d->sky_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_has_right_cube_map")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dSky())
+			{
+				auto result = _fe3d->sky_hasRightCubeMap(_fe3d->sky_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_has_bottom_cube_map")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dSky())
+			{
+				auto result = _fe3d->sky_hasBottomCubeMap(_fe3d->sky_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_has_top_cube_map")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dSky())
+			{
+				auto result = _fe3d->sky_hasTopCubeMap(_fe3d->sky_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_has_back_cube_map")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dSky())
+			{
+				auto result = _fe3d->sky_hasBackCubeMap(_fe3d->sky_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_has_front_cube_map")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dSky())
+			{
+				auto result = _fe3d->sky_hasFrontCubeMap(_fe3d->sky_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			}
+		}
+	}
 	else
 	{
 		return false;

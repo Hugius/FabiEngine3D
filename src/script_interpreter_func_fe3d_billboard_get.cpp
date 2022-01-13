@@ -479,7 +479,7 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_font_path")
+	else if(functionName == "fe3d:billboard_has_diffuse_map")
 	{
 		auto types = {SVT::STRING};
 
@@ -487,12 +487,12 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 		{
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d->billboard_getFontPath(args[0].getString());
-				returnValues.push_back(ScriptValue(SVT::STRING, result));
+				auto result = _fe3d->billboard_hasDiffuseMap(args[0].getString());
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if(functionName == "fe3d:billboard_get_diffuse_map_path")
+	else if(functionName == "fe3d:billboard_has_emission_map")
 	{
 		auto types = {SVT::STRING};
 
@@ -500,34 +500,8 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 		{
 			if(_validateFe3dBillboard(args[0].getString(), false))
 			{
-				auto result = _fe3d->billboard_getDiffuseMapPath(args[0].getString());
-				returnValues.push_back(ScriptValue(SVT::STRING, result));
-			}
-		}
-	}
-	else if(functionName == "fe3d:billboard_get_emission_map_path")
-	{
-		auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
-			{
-				auto result = _fe3d->billboard_getEmissionMapPath(args[0].getString());
-				returnValues.push_back(ScriptValue(SVT::STRING, result));
-			}
-		}
-	}
-	else if(functionName == "fe3d:billboard_get_font_path")
-	{
-		auto types = {SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dBillboard(args[0].getString(), false))
-			{
-				auto result = _fe3d->billboard_getFontPath(args[0].getString());
-				returnValues.push_back(ScriptValue(SVT::STRING, result));
+				auto result = _fe3d->billboard_hasEmissionMap(args[0].getString());
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}

@@ -9,7 +9,7 @@
 
 ## 2. Assets
 
-- Cube Map
+- Cube map
 
 ## 3. Properties
 

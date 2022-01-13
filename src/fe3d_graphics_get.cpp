@@ -161,6 +161,11 @@ const bool EngineInterface::gfx_isShadowFollowingCamera() const
 	return _core->getShadowGenerator()->isFollowingCamera();
 }
 
+const bool EngineInterface::gfx_hasLensFlareMap() const
+{
+	return (_core->getRenderBus()->getLensFlareMap() != nullptr);
+}
+
 const float EngineInterface::gfx_getBloomIntensity() const
 {
 	return _core->getRenderBus()->getBloomIntensity();

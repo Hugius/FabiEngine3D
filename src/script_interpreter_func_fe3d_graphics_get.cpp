@@ -140,6 +140,14 @@ const bool ScriptInterpreter::_executeFe3dGraphicsGetter(const string& functionN
 			returnValues.push_back(ScriptValue(SVT::STRING, result));
 		}
 	}
+	else if(functionName == "fe3d:graphics_has_lens_flare_map")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			auto result = _fe3d->gfx_hasLensFlareMap();
+			returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+		}
+	}
 	else if(functionName == "fe3d:graphics_get_lens_flare_intensity")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))

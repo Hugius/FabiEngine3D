@@ -9,7 +9,7 @@
 
 ## 2. Assets
 
-- Diffuse Map
+- Diffuse map
 
 ## 3. Properties
 

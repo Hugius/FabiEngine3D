@@ -8,7 +8,7 @@
 
 ## 2. Assets
 
-- Font Map
+- Font map
 
 ## 3. Properties
 

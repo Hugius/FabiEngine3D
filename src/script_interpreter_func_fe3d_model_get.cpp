@@ -811,6 +811,86 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			}
 		}
 	}
+	else if(functionName == "fe3d:model_has_diffuse_map")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					auto result = _fe3d->model_hasDiffuseMap(args[0].getString(), args[1].getString());
+					returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_has_emission_map")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					auto result = _fe3d->model_hasEmissionMap(args[0].getString(), args[1].getString());
+					returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_has_specular_map")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					auto result = _fe3d->model_hasSpecularMap(args[0].getString(), args[1].getString());
+					returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_has_reflection_map")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					auto result = _fe3d->model_hasReflectionMap(args[0].getString(), args[1].getString());
+					returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_has_normal_map")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					auto result = _fe3d->model_hasNormalMap(args[0].getString(), args[1].getString());
+					returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				}
+			}
+		}
+	}
 	else if(functionName == "fe3d:model_is_shadowed")
 	{
 		auto types = {SVT::STRING};

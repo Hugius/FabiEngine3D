@@ -803,6 +803,7 @@ public:
 	const bool gfx_isMotionBlurEnabled() const;
 	const bool gfx_isLensFlareEnabled() const;
 	const bool gfx_isShadowFollowingCamera() const;
+	const bool gfx_hasLensFlareMap() const;
 	const BloomType gfx_getBloomType() const;
 
 	void server_start(unsigned int maxClientCount);

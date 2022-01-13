@@ -130,6 +130,106 @@ const bool ScriptInterpreter::_executeFe3dTerrainGetter(const string& functionNa
 			}
 		}
 	}
+	else if(functionName == "fe3d:terrain_has_diffuse_map")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dTerrain())
+			{
+				auto result = _fe3d->terrain_hasDiffuseMap(_fe3d->terrain_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:terrain_has_normal_map")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dTerrain())
+			{
+				auto result = _fe3d->terrain_hasNormalMap(_fe3d->terrain_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:terrain_has_blend_map")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dTerrain())
+			{
+				auto result = _fe3d->terrain_hasBlendMap(_fe3d->terrain_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:terrain_has_red_diffuse_map")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dTerrain())
+			{
+				auto result = _fe3d->terrain_hasDiffuseMap(_fe3d->terrain_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:terrain_has_green_diffuse_map")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dTerrain())
+			{
+				auto result = _fe3d->terrain_hasDiffuseMap(_fe3d->terrain_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:terrain_has_blue_diffuse_map")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dTerrain())
+			{
+				auto result = _fe3d->terrain_hasDiffuseMap(_fe3d->terrain_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:terrain_has_red_normal_map")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dTerrain())
+			{
+				auto result = _fe3d->terrain_hasNormalMap(_fe3d->terrain_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:terrain_has_green_normal_map")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dTerrain())
+			{
+				auto result = _fe3d->terrain_hasNormalMap(_fe3d->terrain_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:terrain_has_blue_normal_map")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dTerrain())
+			{
+				auto result = _fe3d->terrain_hasNormalMap(_fe3d->terrain_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
+			}
+		}
+	}
+
 	else if(functionName == "fe3d:terrain_get_max_height")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))

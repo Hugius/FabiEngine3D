@@ -200,6 +200,19 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 			}
 		}
 	}
+	else if(functionName == "fe3d:quad_has_diffuse_map")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dQuad(args[0].getString(), false))
+			{
+				auto result = _fe3d->quad_hasDiffuseMap(args[0].getString());
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+			}
+		}
+	}
 	else if(functionName == "fe3d:quad_is_horizontally_mirrored")
 	{
 		auto types = {SVT::STRING};

@@ -555,6 +555,7 @@ public:
 	const string& text_getFontMapPath(const string& ID) const;
 	const string& text_getContent(const string& ID) const;
 	const fvec3 text_getColor(const string& ID) const;
+	const fvec3 text_getWireframeColor(const string& ID) const;
 	const fvec2 text_getPosition(const string& ID) const;
 	const fvec2 text_getSize(const string& ID) const;
 	const fvec2 text_getMinPosition(const string& ID) const;
@@ -567,6 +568,7 @@ public:
 	const bool text_isHorizontallyMirrored(const string& ID) const;
 	const bool text_isVerticallyMirrored(const string& ID) const;
 	const bool text_isWireframed(const string& ID) const;
+	const bool text_hasFontMap(const string& ID) const;
 
 	void sound2d_create(const string& ID, const string& audioPath);
 	void sound2d_delete(const string& ID);

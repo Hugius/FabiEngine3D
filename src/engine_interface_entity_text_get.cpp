@@ -31,6 +31,11 @@ const bool EngineInterface::text_isWireframed(const string& ID) const
 	return _core->getTextEntityManager()->getEntity(ID)->isWireframed();
 }
 
+const bool EngineInterface::text_hasFontMap(const string& ID) const
+{
+	return (_core->getTextEntityManager()->getEntity(ID)->getFontMap() != nullptr);
+}
+
 const fvec2 EngineInterface::text_getPosition(const string& ID) const
 {
 	return _core->getTextEntityManager()->getEntity(ID)->getPosition();
@@ -64,6 +69,11 @@ const fvec2 EngineInterface::text_getMaxPosition(const string& ID) const
 const fvec3 EngineInterface::text_getColor(const string& ID) const
 {
 	return _core->getTextEntityManager()->getEntity(ID)->getColor();
+}
+
+const fvec3 EngineInterface::text_getWireframeColor(const string& ID) const
+{
+	return _core->getTextEntityManager()->getEntity(ID)->getWireframeColor();
 }
 
 const string& EngineInterface::text_getContent(const string& ID) const

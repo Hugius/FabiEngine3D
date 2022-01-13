@@ -62,6 +62,8 @@ public:
 	const bool isVerticallyMirrored() const;
 
 	const vector<shared_ptr<QuadEntity>>& getCharacterEntities() const;
+	const shared_ptr<VertexBuffer> getMesh() const;
+	const shared_ptr<TextureBuffer> getFontMap() const;
 
 private:
 	static inline const map<char, ivec2> _fontMapIndices =

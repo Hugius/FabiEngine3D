@@ -182,7 +182,7 @@ const bool ScriptInterpreter::_executeFe3dTextGetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				auto result = _fe3d->text_getColor(args[0].getString()).r;
+				auto result = _fe3d->text_getWireframeColor(args[0].getString()).r;
 				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
 			}
 		}

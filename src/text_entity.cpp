@@ -52,6 +52,11 @@ void TextEntity::updateCharacterEntities()
 	const auto characterSize = fvec2((this->getSize().x / static_cast<float>(this->_content.size())), this->getSize().y);
 	unsigned int index = 0;
 
+	if(_isHorizontallyMirrored)
+	{
+		reverse(_characterEntities.begin(), _characterEntities.end());
+	}
+
 	for(const auto& character : _characterEntities)
 	{
 		auto offset = fvec2((static_cast<float>(index) * characterSize.x), 0.0f);
@@ -66,6 +71,7 @@ void TextEntity::updateCharacterEntities()
 		character->setRotation(_rotation);
 		character->setSize(characterSize);
 		character->setColor(_color);
+		character->setWireframeColor(_wireframeColor);
 		character->setHorizontallyMirrored(_isHorizontallyMirrored);
 		character->setVerticallyMirrored(_isVerticallyMirrored);
 		character->setTransparency(_transparency);
@@ -86,11 +92,26 @@ void TextEntity::updateCharacterEntities()
 
 		index++;
 	}
+
+	if(_isHorizontallyMirrored)
+	{
+		reverse(_characterEntities.begin(), _characterEntities.end());
+	}
 }
 
 const vector<shared_ptr<QuadEntity>>& TextEntity::getCharacterEntities() const
 {
 	return _characterEntities;
+}
+
+const shared_ptr<VertexBuffer> TextEntity::getMesh() const
+{
+	return _mesh;
+}
+
+const shared_ptr<TextureBuffer> TextEntity::getFontMap() const
+{
+	return _fontMap;
 }
 
 void TextEntity::updateTransformation()

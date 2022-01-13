@@ -271,8 +271,20 @@ const bool ScriptInterpreter::_executeFe3dTextSetter(const string& functionName,
 		{
 			if(_validateFe3dText(args[0].getString(), false))
 			{
-				_fe3d->text_setColor(args[0].getString(),
-									 fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				_fe3d->text_setColor(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:text_set_wireframe_color")
+	{
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dText(args[0].getString(), false))
+			{
+				_fe3d->text_setWireframeColor(args[0].getString(), fvec3(args[1].getDecimal(), args[2].getDecimal(), args[3].getDecimal()));
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}

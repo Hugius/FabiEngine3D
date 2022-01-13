@@ -78,6 +78,19 @@ const bool ScriptInterpreter::_executeFe3dQuadSetter(const string& functionName,
 			}
 		}
 	}
+	else if(functionName == "fe3d:quad_set_diffuse_map")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dQuad(args[0].getString(), false))
+			{
+				_fe3d->quad_setDiffuseMap(args[0].getString(), args[1].getString());
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:quad_set_position")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};

@@ -25,7 +25,7 @@ void EngineInterface::quad_setDiffuseMap(const string& ID, const string& value)
 {
 	if(value.empty())
 	{
-		_core->getQuadEntityManager()->getEntity(ID)->setDiffuseMap(0);
+		_core->getQuadEntityManager()->getEntity(ID)->setDiffuseMap(nullptr);
 		_core->getQuadEntityManager()->getEntity(ID)->setDiffuseMapPath("");
 	}
 	else

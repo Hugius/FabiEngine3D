@@ -46,7 +46,7 @@ void EngineInterface::terrain_setDiffuseMap(const string& ID, const string& valu
 {
 	if(value.empty())
 	{
-		_core->getTerrainEntityManager()->getEntity(ID)->setDiffuseMap(0);
+		_core->getTerrainEntityManager()->getEntity(ID)->setDiffuseMap(nullptr);
 		_core->getTerrainEntityManager()->getEntity(ID)->setDiffuseMapPath("");
 	}
 	else
@@ -71,7 +71,7 @@ void EngineInterface::terrain_setNormalMap(const string& ID, const string& value
 {
 	if(value.empty())
 	{
-		_core->getTerrainEntityManager()->getEntity(ID)->setNormalMap(0);
+		_core->getTerrainEntityManager()->getEntity(ID)->setNormalMap(nullptr);
 		_core->getTerrainEntityManager()->getEntity(ID)->setNormalMapPath("");
 	}
 	else
@@ -96,7 +96,7 @@ void EngineInterface::terrain_setBlendMap(const string& ID, const string& value)
 {
 	if(value.empty())
 	{
-		_core->getTerrainEntityManager()->getEntity(ID)->setBlendMap(0);
+		_core->getTerrainEntityManager()->getEntity(ID)->setBlendMap(nullptr);
 		_core->getTerrainEntityManager()->getEntity(ID)->setBlendMapPath("");
 	}
 	else
@@ -121,7 +121,7 @@ void EngineInterface::terrain_setRedDiffuseMap(const string& ID, const string& v
 {
 	if(value.empty())
 	{
-		_core->getTerrainEntityManager()->getEntity(ID)->setRedDiffuseMap(0);
+		_core->getTerrainEntityManager()->getEntity(ID)->setRedDiffuseMap(nullptr);
 		_core->getTerrainEntityManager()->getEntity(ID)->setRedDiffuseMapPath("");
 	}
 	else
@@ -146,7 +146,7 @@ void EngineInterface::terrain_setGreenDiffuseMap(const string& ID, const string&
 {
 	if(value.empty())
 	{
-		_core->getTerrainEntityManager()->getEntity(ID)->setGreenDiffuseMap(0);
+		_core->getTerrainEntityManager()->getEntity(ID)->setGreenDiffuseMap(nullptr);
 		_core->getTerrainEntityManager()->getEntity(ID)->setGreenDiffuseMapPath("");
 	}
 	else
@@ -171,7 +171,7 @@ void EngineInterface::terrain_setBlueDiffuseMap(const string& ID, const string& 
 {
 	if(value.empty())
 	{
-		_core->getTerrainEntityManager()->getEntity(ID)->setBlueDiffuseMap(0);
+		_core->getTerrainEntityManager()->getEntity(ID)->setBlueDiffuseMap(nullptr);
 		_core->getTerrainEntityManager()->getEntity(ID)->setBlueDiffuseMapPath("");
 	}
 	else
@@ -196,7 +196,7 @@ void EngineInterface::terrain_setRedNormalMap(const string& ID, const string& va
 {
 	if(value.empty())
 	{
-		_core->getTerrainEntityManager()->getEntity(ID)->setRedNormalMap(0);
+		_core->getTerrainEntityManager()->getEntity(ID)->setRedNormalMap(nullptr);
 		_core->getTerrainEntityManager()->getEntity(ID)->setRedNormalMapPath("");
 	}
 	else
@@ -221,7 +221,7 @@ void EngineInterface::terrain_setGreenNormalMap(const string& ID, const string& 
 {
 	if(value.empty())
 	{
-		_core->getTerrainEntityManager()->getEntity(ID)->setGreenNormalMap(0);
+		_core->getTerrainEntityManager()->getEntity(ID)->setGreenNormalMap(nullptr);
 		_core->getTerrainEntityManager()->getEntity(ID)->setGreenNormalMapPath("");
 	}
 	else
@@ -246,7 +246,7 @@ void EngineInterface::terrain_setBlueNormalMap(const string& ID, const string& v
 {
 	if(value.empty())
 	{
-		_core->getTerrainEntityManager()->getEntity(ID)->setBlueNormalMap(0);
+		_core->getTerrainEntityManager()->getEntity(ID)->setBlueNormalMap(nullptr);
 		_core->getTerrainEntityManager()->getEntity(ID)->setBlueNormalMapPath("");
 	}
 	else

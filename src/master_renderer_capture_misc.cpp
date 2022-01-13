@@ -113,7 +113,7 @@ void MasterRenderer::_captureWorldDepth()
 	}
 	else
 	{
-		_renderBus->setDepthMap(0);
+		_renderBus->setDepthMap(nullptr);
 	}
 }
 
@@ -134,7 +134,7 @@ void MasterRenderer::_captureDOF()
 	}
 	else
 	{
-		_renderBus->setDofMap(0);
+		_renderBus->setDofMap(nullptr);
 	}
 }
 
@@ -186,7 +186,7 @@ void MasterRenderer::_captureMotionBlur()
 		else
 		{
 			_renderBus->setMotionBlurMixValue(0.0f);
-			_renderBus->setMotionBlurMap(0);
+			_renderBus->setMotionBlurMap(nullptr);
 		}
 
 		_motionBlurCaptor->bind();
@@ -198,7 +198,7 @@ void MasterRenderer::_captureMotionBlur()
 	}
 	else
 	{
-		_renderBus->setMotionBlurMap(0);
+		_renderBus->setMotionBlurMap(nullptr);
 	}
 }
 
@@ -248,7 +248,7 @@ void MasterRenderer::_captureBloom()
 	}
 	else
 	{
-		_renderBus->setBloomMap(0);
+		_renderBus->setBloomMap(nullptr);
 	}
 }
 
@@ -325,6 +325,6 @@ void MasterRenderer::_captureShadows()
 	}
 	else
 	{
-		_renderBus->setShadowMap(0);
+		_renderBus->setShadowMap(nullptr);
 	}
 }

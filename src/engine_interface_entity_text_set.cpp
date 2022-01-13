@@ -23,18 +23,25 @@ void EngineInterface::text_setVisible(const string& ID, bool value)
 
 void EngineInterface::text_setFontMap(const string& ID, const string& value)
 {
-	auto texture = _core->getTextureBufferCache()->get2dBuffer(value);
-
-	if(texture == nullptr)
+	if(value.empty())
 	{
-		texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-
-		_core->getTextureBufferCache()->store2dBuffer(value, texture);
+		_core->getTextEntityManager()->getEntity(ID)->setFontMap(nullptr);
+		_core->getTextEntityManager()->getEntity(ID)->setFontMapPath("");
 	}
+	else
+	{
+		auto texture = _core->getTextureBufferCache()->get2dBuffer(value);
 
-	auto entity = _core->getTextEntityManager()->getEntity(ID);
-	entity->setFontMap(_core->getTextureBufferCache()->get2dBuffer(value));
-	entity->setFontMapPath(value);
+		if(texture == nullptr)
+		{
+			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
+
+			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+		}
+
+		_core->getTextEntityManager()->getEntity(ID)->setFontMap(_core->getTextureBufferCache()->get2dBuffer(value));
+		_core->getTextEntityManager()->getEntity(ID)->setFontMapPath(value);
+	}
 }
 
 void EngineInterface::text_setContent(const string& ID, const string& value, float charWidth, float charHeight)

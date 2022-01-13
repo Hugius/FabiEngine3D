@@ -81,7 +81,7 @@ void EngineInterface::water_setDudvMap(const string& ID, const string& value)
 {
 	if(value.empty())
 	{
-		_core->getWaterEntityManager()->getEntity(ID)->setDudvMap(0);
+		_core->getWaterEntityManager()->getEntity(ID)->setDudvMap(nullptr);
 		_core->getWaterEntityManager()->getEntity(ID)->setDudvMapPath("");
 	}
 	else
@@ -106,7 +106,7 @@ void EngineInterface::water_setNormalMap(const string& ID, const string& value)
 {
 	if(value.empty())
 	{
-		_core->getWaterEntityManager()->getEntity(ID)->setNormalMap(0);
+		_core->getWaterEntityManager()->getEntity(ID)->setNormalMap(nullptr);
 		_core->getWaterEntityManager()->getEntity(ID)->setNormalMapPath("");
 	}
 	else
@@ -131,7 +131,7 @@ void EngineInterface::water_setDisplacementMap(const string& ID, const string& v
 {
 	if(value.empty())
 	{
-		_core->getWaterEntityManager()->getEntity(ID)->setDisplacementMap(0);
+		_core->getWaterEntityManager()->getEntity(ID)->setDisplacementMap(nullptr);
 		_core->getWaterEntityManager()->getEntity(ID)->setDisplacementMapPath("");
 	}
 	else

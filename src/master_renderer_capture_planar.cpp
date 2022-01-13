@@ -18,7 +18,7 @@ void MasterRenderer::_capturePlanarReflections()
 
 	if(!anyReflectiveModelFound)
 	{
-		_renderBus->setPlanarReflectionMap(0);
+		_renderBus->setPlanarReflectionMap(nullptr);
 		return;
 	}
 

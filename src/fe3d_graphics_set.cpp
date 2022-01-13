@@ -283,7 +283,7 @@ void EngineInterface::gfx_disableLensFlare(bool mustResetProperties)
 
 	if(mustResetProperties)
 	{
-		_core->getRenderBus()->setLensFlareMap(0);
+		_core->getRenderBus()->setLensFlareMap(nullptr);
 		_core->getRenderBus()->setLensFlareMapPath("");
 		_core->getRenderBus()->setLensFlareIntensity(0.0f);
 		_core->getRenderBus()->setLensFlareSensitivity(0.0f);
@@ -486,17 +486,25 @@ void EngineInterface::gfx_setMotionBlurStrength(float value)
 
 void EngineInterface::gfx_setLensFlareMap(const string& value)
 {
-	auto texture = _core->getTextureBufferCache()->get2dBuffer(value);
-
-	if(texture == nullptr)
+	if(value.empty())
 	{
-		texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
-
-		_core->getTextureBufferCache()->store2dBuffer(value, texture);
+		_core->getRenderBus()->setLensFlareMap(nullptr);
+		_core->getRenderBus()->setLensFlareMapPath("");
 	}
+	else
+	{
+		auto texture = _core->getTextureBufferCache()->get2dBuffer(value);
 
-	_core->getRenderBus()->setLensFlareMap(texture);
-	_core->getRenderBus()->setLensFlareMapPath(value);
+		if(texture == nullptr)
+		{
+			texture = make_shared<TextureBuffer>(_core->getImageLoader()->loadImage(value));
+
+			_core->getTextureBufferCache()->store2dBuffer(value, texture);
+		}
+
+		_core->getRenderBus()->setLensFlareMap(texture);
+		_core->getRenderBus()->setLensFlareMapPath(value);
+	}
 }
 
 void EngineInterface::gfx_setLensFlareIntensity(float value)

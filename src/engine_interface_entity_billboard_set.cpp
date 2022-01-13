@@ -139,7 +139,7 @@ void EngineInterface::billboard_setEmissionMap(const string& ID, const string& v
 {
 	if(value.empty())
 	{
-		_core->getBillboardEntityManager()->getEntity(ID)->setEmissionMap(0);
+		_core->getBillboardEntityManager()->getEntity(ID)->setEmissionMap(nullptr);
 		_core->getBillboardEntityManager()->getEntity(ID)->setEmissionMapPath("");
 	}
 	else

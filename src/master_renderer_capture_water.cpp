@@ -144,7 +144,7 @@ void MasterRenderer::_captureWaterReflections()
 	}
 	else
 	{
-		_renderBus->setWaterReflectionMap(0);
+		_renderBus->setWaterReflectionMap(nullptr);
 	}
 }
 
@@ -228,6 +228,6 @@ void MasterRenderer::_captureWaterRefractions()
 	}
 	else
 	{
-		_renderBus->setWaterRefractionMap(0);
+		_renderBus->setWaterRefractionMap(nullptr);
 	}
 }

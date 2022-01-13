@@ -13,7 +13,59 @@ const bool ScriptInterpreter::_executeFe3dWaterSetter(const string& functionName
 		{
 			if(_validateFe3dWater())
 			{
-				_fe3d->water_setSpeed(_fe3d->water_getSelectedID(), fvec2(args[0].getDecimal() / 100000.0f, args[1].getDecimal() / 100000.0f));
+				_fe3d->water_setSpeed(_fe3d->water_getSelectedID(), fvec2((args[0].getDecimal() / 100000.0f), (args[1].getDecimal() / 100000.0f)));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_set_size")
+	{
+		auto types = {SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dWater())
+			{
+				_fe3d->water_setSize(_fe3d->water_getSelectedID(), args[0].getDecimal());
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_set_dudv_map")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dWater())
+			{
+				_fe3d->water_setDudvMap(_fe3d->water_getSelectedID(), args[0].getString());
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_set_normal_map")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dWater())
+			{
+				_fe3d->water_setNormalMap(_fe3d->water_getSelectedID(), args[0].getString());
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:water_set_displacement_map")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dWater())
+			{
+				_fe3d->water_setDisplacementMap(_fe3d->water_getSelectedID(), args[0].getString());
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}

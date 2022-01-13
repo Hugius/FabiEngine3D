@@ -14,7 +14,7 @@
   - Constraints: must be unique, cannot be changed
 - **Audio Path**: the path of the audio file
   - Type: `string`
-  - Constraints: none
+  - Constraints: cannot be changed
 - **Position**: the XYZ position of the sound
   - Type: `decimal3`
   - Constraints: none

@@ -14,7 +14,7 @@
   - Constraints: must be unique, cannot be changed
 - **Audio Path**: the path of the audio file
   - Type: `string`
-  - Constraints: none
+  - Constraints: cannot be changed
 - **Volume**: the volume of the audio
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`

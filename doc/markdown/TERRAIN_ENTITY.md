@@ -3,7 +3,7 @@
 ## 1. General
 
 - The terrain entity is a 3D object in 3D space.
-- The mesh of a terrain entity is generated with a height map.
+- The mesh of a terrain entity is generated using a height map.
 
 ## 2. Assets
 
@@ -16,7 +16,7 @@
 
 - **Height Map Path**: the path of the height map file
   - Type: `string`
-  - Constraints: none
+  - Constraints: cannot be changed
 - **Diffuse Map Path**: the path of the diffuse map file
   - Type: `string`
   - Constraints: none

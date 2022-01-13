@@ -226,6 +226,199 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			}
 		}
 	}
+	else if(functionName == "fe3d:model_get_part_position_x")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					auto result = _fe3d->model_getPartPosition(args[0].getString(), args[1].getString()).x;
+					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_part_position_y")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					auto result = _fe3d->model_getPartPosition(args[0].getString(), args[1].getString()).y;
+					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_part_position_z")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					auto result = _fe3d->model_getPartPosition(args[0].getString(), args[1].getString()).z;
+					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_part_rotation_x")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					auto result = _fe3d->model_getPartRotation(args[0].getString(), args[1].getString()).x;
+					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_part_rotation_y")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					auto result = _fe3d->model_getPartRotation(args[0].getString(), args[1].getString()).y;
+					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_part_rotation_z")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					auto result = _fe3d->model_getPartRotation(args[0].getString(), args[1].getString()).z;
+					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_part_rotation_origin_x")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					auto result = _fe3d->model_getPartRotationOrigin(args[0].getString(), args[1].getString()).x;
+					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_part_rotation_origin_y")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					auto result = _fe3d->model_getPartRotationOrigin(args[0].getString(), args[1].getString()).y;
+					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_part_rotation_origin_z")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					auto result = _fe3d->model_getPartRotationOrigin(args[0].getString(), args[1].getString()).z;
+					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_part_size_x")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					auto result = _fe3d->model_getPartSize(args[0].getString(), args[1].getString()).x;
+					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_part_size_y")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					auto result = _fe3d->model_getPartSize(args[0].getString(), args[1].getString()).y;
+					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if(functionName == "fe3d:model_get_part_size_z")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dModel(args[0].getString(), false))
+			{
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					auto result = _fe3d->model_getPartSize(args[0].getString(), args[1].getString()).z;
+					returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+				}
+			}
+		}
+	}
+
 	else if(functionName == "fe3d:model_get_min_height")
 	{
 		auto types = {SVT::STRING};

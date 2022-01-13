@@ -492,6 +492,45 @@ const bool ScriptInterpreter::_executeFe3dBillboardGetter(const string& function
 			}
 		}
 	}
+	else if(functionName == "fe3d:billboard_get_diffuse_map_path")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dBillboard(args[0].getString(), false))
+			{
+				auto result = _fe3d->billboard_getDiffuseMapPath(args[0].getString());
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:billboard_get_emission_map_path")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dBillboard(args[0].getString(), false))
+			{
+				auto result = _fe3d->billboard_getEmissionMapPath(args[0].getString());
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:billboard_get_font_path")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dBillboard(args[0].getString(), false))
+			{
+				auto result = _fe3d->billboard_getFontPath(args[0].getString());
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
+			}
+		}
+	}
 	else
 	{
 		return false;

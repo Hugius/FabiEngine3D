@@ -2,9 +2,8 @@
 
 ## 1. General
 
-- The model entity is a (complex) 3D object in 3D space.
-- A model entity cannot exist without having a mesh.
-- A model entity uses a variety of textures for a more detailed mesh.
+- The model entity is a 3D object in 3D space.
+- A variety of textures can be used for a more detailed mesh.
 - Each model can be the parent of multipe AABB entities.
 
 ## 2. Assets

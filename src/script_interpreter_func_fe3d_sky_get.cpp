@@ -125,6 +125,72 @@ const bool ScriptInterpreter::_executeFe3dSkyGetter(const string& functionName, 
 			}
 		}
 	}
+	else if(functionName == "fe3d:sky_get_left_cube_map_path")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dSky())
+			{
+				auto result = _fe3d->sky_getLeftCubeMapPath(_fe3d->sky_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_get_right_cube_map_path")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dSky())
+			{
+				auto result = _fe3d->sky_getRightCubeMapPath(_fe3d->sky_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_get_bottom_cube_map_path")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dSky())
+			{
+				auto result = _fe3d->sky_getBottomCubeMapPath(_fe3d->sky_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_get_top_cube_map_path")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dSky())
+			{
+				auto result = _fe3d->sky_getTopCubeMapPath(_fe3d->sky_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_get_back_cube_map_path")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dSky())
+			{
+				auto result = _fe3d->sky_getBackCubeMapPath(_fe3d->sky_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_get_front_cube_map_path")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dSky())
+			{
+				auto result = _fe3d->sky_getFrontCubeMapPath(_fe3d->sky_getSelectedID());
+				returnValues.push_back(ScriptValue(SVT::STRING, result));
+			}
+		}
+	}
 	else
 	{
 		return false;

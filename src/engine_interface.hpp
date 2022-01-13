@@ -73,12 +73,12 @@ public:
 
 	const vector<string> sky_getIDs() const;
 	const array<string, 6>& sky_getCubeMapPaths(const string& ID) const;
-	const string& sky_getRightCubeMap(const string& ID) const;
-	const string& sky_getLeftCubeMap(const string& ID) const;
-	const string& sky_getTopCubeMap(const string& ID) const;
-	const string& sky_getBottomCubeMap(const string& ID) const;
-	const string& sky_getBackCubeMap(const string& ID) const;
-	const string& sky_getFrontCubeMap(const string& ID) const;
+	const string& sky_getRightCubeMapPath(const string& ID) const;
+	const string& sky_getLeftCubeMapPath(const string& ID) const;
+	const string& sky_getTopCubeMapPath(const string& ID) const;
+	const string& sky_getBottomCubeMapPath(const string& ID) const;
+	const string& sky_getBackCubeMapPath(const string& ID) const;
+	const string& sky_getFrontCubeMapPath(const string& ID) const;
 	const string sky_getSelectedID() const;
 	const string sky_getMixID() const;
 	const fvec3 sky_getWireframeColor(const string& ID) const;

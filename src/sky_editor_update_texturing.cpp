@@ -13,39 +13,6 @@ void SkyEditor::_updateTexturingMenu()
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rightMap")->isHovered())
-		{
-			if(_currentProjectID.empty())
-			{
-				Logger::throwError("SkyEditor::_updateTexturingMenu");
-			}
-
-			const auto rootPath = Tools::getRootDirectoryPath();
-			const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\sky\\cube_map\\");
-
-			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
-			{
-				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
-				return;
-			}
-
-			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "TGA");
-			if(filePath.empty())
-			{
-				return;
-			}
-
-			if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) &&
-			   filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
-			{
-				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
-				return;
-			}
-
-			const string finalFilePath = filePath.substr(rootPath.size());
-			_fe3d->misc_clearImageCache(finalFilePath);
-			_fe3d->sky_setRightCubeMap(_currentSkyID, finalFilePath);
-		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("leftMap")->isHovered())
 		{
 			if(_currentProjectID.empty())
@@ -79,7 +46,7 @@ void SkyEditor::_updateTexturingMenu()
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->sky_setLeftCubeMap(_currentSkyID, finalFilePath);
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("topMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rightMap")->isHovered())
 		{
 			if(_currentProjectID.empty())
 			{
@@ -110,7 +77,7 @@ void SkyEditor::_updateTexturingMenu()
 
 			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d->misc_clearImageCache(finalFilePath);
-			_fe3d->sky_setTopCubeMap(_currentSkyID, finalFilePath);
+			_fe3d->sky_setRightCubeMap(_currentSkyID, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("bottomMap")->isHovered())
 		{
@@ -144,6 +111,39 @@ void SkyEditor::_updateTexturingMenu()
 			const string finalFilePath = filePath.substr(rootPath.size());
 			_fe3d->misc_clearImageCache(finalFilePath);
 			_fe3d->sky_setBottomCubeMap(_currentSkyID, finalFilePath);
+		}
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("topMap")->isHovered())
+		{
+			if(_currentProjectID.empty())
+			{
+				Logger::throwError("SkyEditor::_updateTexturingMenu");
+			}
+
+			const auto rootPath = Tools::getRootDirectoryPath();
+			const auto targetDirectoryPath = string("projects\\" + _currentProjectID + "\\assets\\image\\entity\\sky\\cube_map\\");
+
+			if(!Tools::isDirectoryExisting(rootPath + targetDirectoryPath))
+			{
+				Logger::throwWarning("Directory `" + targetDirectoryPath + "` is missing!");
+				return;
+			}
+
+			const auto filePath = Tools::chooseExplorerFile(string(rootPath + targetDirectoryPath), "TGA");
+			if(filePath.empty())
+			{
+				return;
+			}
+
+			if(filePath.size() > (rootPath.size() + targetDirectoryPath.size()) &&
+			   filePath.substr(rootPath.size(), targetDirectoryPath.size()) != targetDirectoryPath)
+			{
+				Logger::throwWarning("File cannot be outside of `" + targetDirectoryPath + "`!");
+				return;
+			}
+
+			const string finalFilePath = filePath.substr(rootPath.size());
+			_fe3d->misc_clearImageCache(finalFilePath);
+			_fe3d->sky_setTopCubeMap(_currentSkyID, finalFilePath);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("backMap")->isHovered())
 		{

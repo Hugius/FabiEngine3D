@@ -101,6 +101,84 @@ const bool ScriptInterpreter::_executeFe3dSkySetter(const string& functionName, 
 			}
 		}
 	}
+	else if(functionName == "fe3d:sky_set_left_cube_map")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSky())
+			{
+				_fe3d->sky_setLeftCubeMap(_fe3d->sky_getSelectedID(), args[0].getString());
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_set_right_cube_map")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSky())
+			{
+				_fe3d->sky_setRightCubeMap(_fe3d->sky_getSelectedID(), args[0].getString());
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_set_bottom_cube_map")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSky())
+			{
+				_fe3d->sky_setBottomCubeMap(_fe3d->sky_getSelectedID(), args[0].getString());
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_set_top_cube_map")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSky())
+			{
+				_fe3d->sky_setTopCubeMap(_fe3d->sky_getSelectedID(), args[0].getString());
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_set_back_cube_map")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSky())
+			{
+				_fe3d->sky_setBackCubeMap(_fe3d->sky_getSelectedID(), args[0].getString());
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:sky_set_front_cube_map")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dSky())
+			{
+				_fe3d->sky_setFrontCubeMap(_fe3d->sky_getSelectedID(), args[0].getString());
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
 	else
 	{
 		return false;

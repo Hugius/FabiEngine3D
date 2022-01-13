@@ -47,32 +47,32 @@ const array<string, 6>& EngineInterface::sky_getCubeMapPaths(const string& ID) c
 	return _core->getSkyEntityManager()->getEntity(ID)->getCubeMapPaths();
 }
 
-const string& EngineInterface::sky_getRightCubeMap(const string& ID) const
+const string& EngineInterface::sky_getRightCubeMapPath(const string& ID) const
 {
 	return _core->getSkyEntityManager()->getEntity(ID)->getCubeMapPaths()[0];
 }
 
-const string& EngineInterface::sky_getLeftCubeMap(const string& ID) const
+const string& EngineInterface::sky_getLeftCubeMapPath(const string& ID) const
 {
 	return _core->getSkyEntityManager()->getEntity(ID)->getCubeMapPaths()[1];
 }
 
-const string& EngineInterface::sky_getTopCubeMap(const string& ID) const
+const string& EngineInterface::sky_getTopCubeMapPath(const string& ID) const
 {
 	return _core->getSkyEntityManager()->getEntity(ID)->getCubeMapPaths()[2];
 }
 
-const string& EngineInterface::sky_getBottomCubeMap(const string& ID) const
+const string& EngineInterface::sky_getBottomCubeMapPath(const string& ID) const
 {
 	return _core->getSkyEntityManager()->getEntity(ID)->getCubeMapPaths()[3];
 }
 
-const string& EngineInterface::sky_getBackCubeMap(const string& ID) const
+const string& EngineInterface::sky_getBackCubeMapPath(const string& ID) const
 {
 	return _core->getSkyEntityManager()->getEntity(ID)->getCubeMapPaths()[4];
 }
 
-const string& EngineInterface::sky_getFrontCubeMap(const string& ID) const
+const string& EngineInterface::sky_getFrontCubeMapPath(const string& ID) const
 {
 	return _core->getSkyEntityManager()->getEntity(ID)->getCubeMapPaths()[5];
 }

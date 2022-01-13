@@ -30,7 +30,7 @@
 - **Size**: the XY size of the mesh
   - Type: `decimal2`
   - Constraints: at least `0.0`
-- **Rotation**: the XYZ rotation of the mesh around the Y axis
+- **Rotation**: the rotation of the mesh around the Z axis
   - Type: `decimal`
   - Constraints: between `0.0` and `360.0`
 - **Transparency**: the transparency of the fragments

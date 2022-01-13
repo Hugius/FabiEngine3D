@@ -291,6 +291,58 @@ const bool ScriptInterpreter::_executeFe3dQuadGetter(const string& functionName,
 			}
 		}
 	}
+	else if(functionName == "fe3d:quad_get_uv_multiplier_x")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dQuad(args[0].getString(), false))
+			{
+				auto result = _fe3d->quad_getUvMultiplier(args[0].getString()).x;
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:quad_get_uv_multiplier_y")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dQuad(args[0].getString(), false))
+			{
+				auto result = _fe3d->quad_getUvMultiplier(args[0].getString()).y;
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:quad_get_uv_offset_x")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dQuad(args[0].getString(), false))
+			{
+				auto result = _fe3d->quad_getUvOffset(args[0].getString()).x;
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if(functionName == "fe3d:quad_get_uv_offset_y")
+	{
+		auto types = {SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dQuad(args[0].getString(), false))
+			{
+				auto result = _fe3d->quad_getUvOffset(args[0].getString()).y;
+				returnValues.push_back(ScriptValue(SVT::DECIMAL, result));
+			}
+		}
+	}
 	else
 	{
 		return false;

@@ -478,6 +478,32 @@ const bool ScriptInterpreter::_executeFe3dBillboardSetter(const string& function
 			}
 		}
 	}
+	else if(functionName == "fe3d:billboard_set_uv_multiplier")
+	{
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dBillboard(args[0].getString(), false))
+			{
+				_fe3d->billboard_setUvMultiplier(args[0].getString(), fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:billboard_set_uv_offset")
+	{
+		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dBillboard(args[0].getString(), false))
+			{
+				_fe3d->billboard_setUvOffset(args[0].getString(), fvec2(args[1].getDecimal(), args[2].getDecimal()));
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
 	else
 	{
 		return false;

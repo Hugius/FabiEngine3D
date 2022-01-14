@@ -29,21 +29,19 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 {
 	if(entity->isVisible() && entity->isShadowed())
 	{
-		if(entity->isFaceCulled())
-		{
-			glEnable(GL_CULL_FACE);
-		}
-
 		_shader->uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader->uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader->uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
 
 		for(const auto& partID : entity->getPartIDs())
 		{
-			const auto buffer = entity->getMesh(partID);
-
 			_shader->uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partID));
 			_shader->uploadUniform("u_textureRepeat", entity->getTextureRepeat(partID));
+
+			if(entity->isFaceCulled(partID))
+			{
+				glEnable(GL_CULL_FACE);
+			}
 
 			if(entity->hasDiffuseMap(partID))
 			{
@@ -51,9 +49,9 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID)->getID());
 			}
 
-			glBindVertexArray(buffer->getVaoID());
+			glBindVertexArray(entity->getMesh(partID)->getVaoID());
 
-			glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
+			glDrawArrays(GL_TRIANGLES, 0, entity->getMesh(partID)->getVertexCount());
 
 			glBindVertexArray(0);
 
@@ -62,11 +60,11 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-		}
 
-		if(entity->isFaceCulled())
-		{
-			glDisable(GL_CULL_FACE);
+			if(entity->isFaceCulled(partID))
+			{
+				glDisable(GL_CULL_FACE);
+			}
 		}
 	}
 }

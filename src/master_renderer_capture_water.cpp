@@ -17,11 +17,18 @@ void MasterRenderer::_captureWaterReflections()
 		{
 			for(const auto& [key, entity] : _modelEntityManager->getEntities())
 			{
-				for(const auto& partID : entity->getPartIDs())
+				if(entity->isVisible())
 				{
-					if(entity->isVisible())
+					if(!entity->isReflected())
 					{
-						if(!entity->isReflected(partID) || (entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR)))
+						entity->setVisible(false);
+						savedModelEntityIDs.push_back(entity->getID());
+						continue;
+					}
+
+					for(const auto& partID : entity->getPartIDs())
+					{
+						if(entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR))
 						{
 							entity->setVisible(false);
 							savedModelEntityIDs.push_back(entity->getID());

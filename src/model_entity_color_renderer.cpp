@@ -131,22 +131,15 @@ void ModelEntityColorRenderer::processSpotlightEntities(const unordered_map<stri
 	_shader->uploadUniform("u_spotlightCount", static_cast<int>(visibleEntities.size()));
 }
 
-void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity,
-									  const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities)
+void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities)
 {
 	if(entity->isVisible())
 	{
 		_shader->uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader->uploadUniform("u_maxHeight", entity->getMaxHeight());
-		_shader->uploadUniform("u_isBright", entity->isBright());
 		_shader->uploadUniform("u_cubeReflectionMixValue", entity->getCubeReflectionMixValue());
 		_shader->uploadUniform("u_viewMatrix", (entity->isFrozen() ? mat44(mat33(_renderBus->getViewMatrix())) : _renderBus->getViewMatrix()));
 		_shader->uploadUniform("u_minTextureTransparency", MIN_TEXTURE_TRANSPARENCY);
-
-		if(entity->isFaceCulled())
-		{
-			glEnable(GL_CULL_FACE);
-		}
 
 		if(!entity->getPreviousReflectionEntityID().empty())
 		{
@@ -171,10 +164,8 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity,
 
 		for(const auto& partID : entity->getPartIDs())
 		{
-			const auto buffer = entity->getMesh(partID);
-
 			const auto& transformationMatrix = entity->getTransformationMatrix(partID);
-			mat33 normalTransformationMatrix = Math::transposeMatrix(Math::invertMatrix(mat33(transformationMatrix)));
+			const auto normalTransformationMatrix = Math::transposeMatrix(Math::invertMatrix(mat33(transformationMatrix)));
 
 			_shader->uploadUniform("u_isReflective", entity->isReflective(partID));
 			_shader->uploadUniform("u_emissionIntensity", entity->getEmissionIntensity(partID));
@@ -196,6 +187,12 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity,
 			_shader->uploadUniform("u_normalTransformationMatrix", normalTransformationMatrix);
 			_shader->uploadUniform("u_reflectionType", static_cast<int>(entity->getReflectionType(partID)));
 			_shader->uploadUniform("u_isWireframed", (entity->isWireframed(partID) || _renderBus->isWireframeRenderingEnabled()));
+			_shader->uploadUniform("u_isBright", entity->isBright(partID));
+
+			if(entity->isFaceCulled(partID))
+			{
+				glEnable(GL_CULL_FACE);
+			}
 
 			if(entity->isWireframed(partID))
 			{
@@ -228,10 +225,10 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity,
 				glBindTexture(GL_TEXTURE_2D, entity->getNormalMap(partID)->getID());
 			}
 
-			glBindVertexArray(buffer->getVaoID());
+			glBindVertexArray(entity->getMesh(partID)->getVaoID());
 
-			glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
-			_renderBus->increaseTriangleCount(buffer->getVertexCount() / 3);
+			glDrawArrays(GL_TRIANGLES, 0, entity->getMesh(partID)->getVertexCount());
+			_renderBus->increaseTriangleCount(entity->getMesh(partID)->getVertexCount() / 3);
 
 			glBindVertexArray(0);
 
@@ -265,6 +262,11 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity,
 			{
 				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 			}
+
+			if(entity->isFaceCulled(partID))
+			{
+				glDisable(GL_CULL_FACE);
+			}
 		}
 
 		if(entity->getPreviousReflectionEntityID().empty())
@@ -276,11 +278,6 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity,
 		{
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
-		}
-
-		if(entity->isFaceCulled())
-		{
-			glDisable(GL_CULL_FACE);
 		}
 	}
 }

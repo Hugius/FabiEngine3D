@@ -26,14 +26,14 @@ const bool EngineInterface::model_isSpecular(const string& ID, const string& par
 	return _core->getModelEntityManager()->getEntity(ID)->isSpecular(partID);
 }
 
-const bool EngineInterface::model_isShadowed(const string& ID, const string& partID) const
+const bool EngineInterface::model_isShadowed(const string& ID) const
 {
-	return _core->getModelEntityManager()->getEntity(ID)->isShadowed(partID);
+	return _core->getModelEntityManager()->getEntity(ID)->isShadowed();
 }
 
-const bool EngineInterface::model_isReflected(const string& ID, const string& partID) const
+const bool EngineInterface::model_isReflected(const string& ID) const
 {
-	return _core->getModelEntityManager()->getEntity(ID)->isReflected(partID);
+	return _core->getModelEntityManager()->getEntity(ID)->isReflected();
 }
 
 const bool EngineInterface::model_isFrozen(const string& ID) const

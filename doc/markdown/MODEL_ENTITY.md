@@ -54,6 +54,12 @@
 - **Max Height**: the maximum Y position to which fragments are visible
   - Type: `decimal`
   - Constraints: none
+- **Shadowed**: the mesh is captured for shadows
+  - Type: `boolean`
+  - Constraints: none
+- **Reflected**: the mesh is captured for reflections
+  - Type: `boolean`
+  - Constraints: none
 
 ## 4. Part Properties
 
@@ -124,12 +130,6 @@
   - Type: `boolean`
   - Constraints: none
 - **Wireframed**: the mesh is rendered as a wireframe
-  - Type: `boolean`
-  - Constraints: none
-- **Shadowed**: the mesh is captured for shadows
-  - Type: `boolean`
-  - Constraints: none
-- **Reflected**: the mesh is captured for reflections
   - Type: `boolean`
   - Constraints: none
 - **Reflection Type**: the type of reflection

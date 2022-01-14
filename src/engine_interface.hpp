@@ -222,7 +222,7 @@ public:
 	void model_setReflectionMap(const string& ID, const string& partID, const string& value);
 	void model_setNormalMap(const string& ID, const string& partID, const string& value);
 	void model_setLevelOfDetailEntityID(const string& ID, const string& value);
-	void model_setFaceCulled(const string& ID, bool value);
+	void model_setFaceCulled(const string& ID, const string& partID, bool value);
 	void model_setReflectionType(const string& ID, const string& partID, ReflectionType value);
 	void model_setSpecular(const string& ID, const string& partID, bool value);
 	void model_setReflective(const string& ID, const string& partID, bool value);
@@ -264,7 +264,7 @@ public:
 	void model_setMaxHeight(const string& ID, float value);
 	void model_setLevelOfDetailDistance(const string& ID, float value);
 	void model_setTextureRepeat(const string& ID, const string& partID, float value);
-	void model_setBright(const string& ID, bool value);
+	void model_setBright(const string& ID, const string& partID, bool value);
 	void model_setRotationOrder(const string& ID, DirectionOrder value);
 
 	const vector<string> model_getPartIDs(const string& ID) const;
@@ -303,8 +303,8 @@ public:
 	const bool model_isMultiParted(const string& ID) const;
 	const bool model_isFaceCulled(const string& ID, const string& partID) const;
 	const bool model_isSpecular(const string& ID, const string& partID) const;
-	const bool model_isShadowed(const string& ID, const string& partID) const;
-	const bool model_isReflected(const string& ID, const string& partID) const;
+	const bool model_isShadowed(const string& ID) const;
+	const bool model_isReflected(const string& ID) const;
 	const bool model_isFrozen(const string& ID) const;
 	const bool model_isWireframed(const string& ID, const string& partID) const;
 	const bool model_isDepthMapIncluded(const string& ID) const;

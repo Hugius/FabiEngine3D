@@ -178,14 +178,14 @@ const bool ModelEntity::isReflective(const string& partID) const
 	return _parts[_getPartIndex(partID)].isReflective;
 }
 
-const bool ModelEntity::isShadowed(const string& partID) const
+const bool ModelEntity::isShadowed() const
 {
-	return _parts[_getPartIndex(partID)].isShadowed;
+	return _isShadowed;
 }
 
-const bool ModelEntity::isReflected(const string& partID) const
+const bool ModelEntity::isReflected() const
 {
-	return _parts[_getPartIndex(partID)].isReflected;
+	return _isReflected;
 }
 
 const bool ModelEntity::hasDiffuseMap(const string& partID) const

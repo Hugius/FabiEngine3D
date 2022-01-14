@@ -13,9 +13,9 @@ public:
 	void deleteParts();
 	void updateTransformation();
 	void updateTransformationMatrix();
-	void setShadowed(const string& partID, bool value);
-	void setReflected(const string& partID, bool value);
-	void setFrozen(const string& partID, bool value);
+	void setShadowed(bool value);
+	void setReflected(bool value);
+	void setFrozen(bool value);
 	void setDepthMapIncluded(bool value);
 	void setLevelOfDetailed(bool value);
 	void setLevelOfDetailSize(fvec3 value);
@@ -115,8 +115,8 @@ public:
 	const bool isFrozen() const;
 	const bool isDepthMapIncluded() const;
 	const bool isLevelOfDetailed() const;
-	const bool isShadowed(const string& partID) const;
-	const bool isReflected(const string& partID) const;
+	const bool isShadowed() const;
+	const bool isReflected() const;
 	const bool isBright(const string& partID) const;
 	const bool isFaceCulled(const string& partID) const;
 	const bool isWireframed(const string& partID) const;
@@ -169,6 +169,8 @@ private:
 	bool _isFrozen = false;
 	bool _isDepthMapIncluded = true;
 	bool _isLevelOfDetailed = false;
+	bool _isShadowed = true;
+	bool _isReflected = true;
 
 	vector<ModelEntityPart> _parts;
 	DirectionOrder _rotationOrder = DirectionOrder::YXZ;

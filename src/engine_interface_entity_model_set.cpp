@@ -175,9 +175,9 @@ void EngineInterface::model_setLevelOfDetailEntityID(const string& ID, const str
 	_core->getModelEntityManager()->getEntity(ID)->setLevelOfDetailEntityID(value);
 }
 
-void EngineInterface::model_setFaceCulled(const string& ID, bool value)
+void EngineInterface::model_setFaceCulled(const string& ID, const string& partID, bool value)
 {
-	_core->getModelEntityManager()->getEntity(ID)->setFaceCulled(value);
+	_core->getModelEntityManager()->getEntity(ID)->setFaceCulled(partID, value);
 }
 
 void EngineInterface::model_setReflectionType(const string& ID, const string& partID, ReflectionType value)
@@ -345,9 +345,9 @@ void EngineInterface::model_setTextureRepeat(const string& ID, const string& par
 	_core->getModelEntityManager()->getEntity(ID)->setTextureRepeat(partID, value);
 }
 
-void EngineInterface::model_setBright(const string& ID, bool value)
+void EngineInterface::model_setBright(const string& ID, const string& partID, bool value)
 {
-	_core->getModelEntityManager()->getEntity(ID)->setBright(value);
+	_core->getModelEntityManager()->getEntity(ID)->setBright(partID, value);
 }
 
 void EngineInterface::model_setRotationOrder(const string& ID, DirectionOrder value)

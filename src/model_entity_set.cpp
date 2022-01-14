@@ -374,17 +374,17 @@ void ModelEntity::setReflective(const string& partID, bool value)
 	_parts[_getPartIndex(partID)].isReflective = value;
 }
 
-void ModelEntity::setShadowed(const string& partID, bool value)
+void ModelEntity::setShadowed(bool value)
 {
-	_parts[_getPartIndex(partID)].isShadowed = value;
+	_isShadowed = value;
 }
 
-void ModelEntity::setReflected(const string& partID, bool value)
+void ModelEntity::setReflected(bool value)
 {
-	_parts[_getPartIndex(partID)].isReflected = value;
+	_isReflected = value;
 }
 
-void ModelEntity::setFrozen(const string& partID, bool value)
+void ModelEntity::setFrozen(bool value)
 {
 	_isFrozen = value;
 }

@@ -340,6 +340,22 @@ const bool Animation2dEditor::isBillboardAnimationPaused(const string& animation
 	return _startedBillboardAnimations.at(make_pair(animationID, billboardID)).isPaused();
 }
 
+const bool Animation2dEditor::isBillboardAnimationAutopaused(const string& animationID, const string& billboardID) const
+{
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning("animation not existing!");
+		return false;
+	}
+
+	if(!isBillboardAnimationStarted(animationID, billboardID))
+	{
+		return false;
+	}
+
+	return _startedBillboardAnimations.at(make_pair(animationID, billboardID)).isAutopaused();
+}
+
 const bool Animation2dEditor::isQuadAnimationStarted(const string& animationID, const string& quadID) const
 {
 	if(!isAnimationExisting(animationID))
@@ -379,4 +395,20 @@ const bool Animation2dEditor::isQuadAnimationPaused(const string& animationID, c
 	}
 
 	return _startedQuadAnimations.at(make_pair(animationID, quadID)).isPaused();
+}
+
+const bool Animation2dEditor::isQuadAnimationAutopaused(const string& animationID, const string& quadID) const
+{
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning("animation not existing!");
+		return false;
+	}
+
+	if(!isQuadAnimationStarted(animationID, quadID))
+	{
+		return false;
+	}
+
+	return _startedQuadAnimations.at(make_pair(animationID, quadID)).isAutopaused();
 }

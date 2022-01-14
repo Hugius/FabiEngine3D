@@ -70,7 +70,6 @@ void Animation2dEditor::autopauseBillboardAnimation(const string& animationID, c
 
 	_startedBillboardAnimations.at(make_pair(animationID, billboardID)).setAutopaused(true);
 }
-}
 
 void Animation2dEditor::resumeBillboardAnimation(const string& animationID, const string& billboardID)
 {

@@ -117,6 +117,22 @@ void Animation3dEditor::stopModelAnimation(const string& animationID, const stri
 	_startedModelAnimations.erase(make_pair(animationID, modelID));
 }
 
+void Animation3dEditor::pauseModelAnimations()
+{
+	for(auto& [key, animation] : _startedModelAnimations)
+	{
+		animation.setPaused(true);
+	}
+}
+
+void Animation3dEditor::resumeModelAnimations()
+{
+	for(auto& [key, animation] : _startedModelAnimations)
+	{
+		animation.setPaused(false);
+	}
+}
+
 void Animation3dEditor::stopModelAnimations()
 {
 	_startedModelAnimations.clear();

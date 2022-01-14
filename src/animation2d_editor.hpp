@@ -56,9 +56,11 @@ public:
 	const bool isBillboardAnimationStarted(const string& animationID, const string& billboardID) const;
 	const bool isBillboardAnimationPlaying(const string& animationID, const string& billboardID) const;
 	const bool isBillboardAnimationPaused(const string& animationID, const string& billboardID) const;
+	const bool isBillboardAnimationAutopaused(const string& animationID, const string& billboardID) const;
 	const bool isQuadAnimationStarted(const string& animationID, const string& quadID) const;
 	const bool isQuadAnimationPlaying(const string& animationID, const string& quadID) const;
 	const bool isQuadAnimationPaused(const string& animationID, const string& quadID) const;
+	const bool isQuadAnimationAutopaused(const string& animationID, const string& quadID) const;
 	const bool loadFromFile(bool mustCheckPreviewTexture);
 	const bool saveToFile() const;
 

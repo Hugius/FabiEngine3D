@@ -16,10 +16,12 @@ public:
 	void unload();
 	void update();
 	void startModelAnimation(const string& animationID, const string& modelID, int playCount);
-	void autopauseModelAnimation(const string& animationID, const string& modelID);
 	void pauseModelAnimation(const string& animationID, const string& modelID);
+	void autopauseModelAnimation(const string& animationID, const string& modelID);
 	void resumeModelAnimation(const string& animationID, const string& modelID);
 	void stopModelAnimation(const string& animationID, const string& modelID);
+	void pauseModelAnimations();
+	void resumeModelAnimations();
 	void stopModelAnimations();
 	void setModelAnimationSpeed(const string& animationID, const string& modelID, float value);
 
@@ -37,8 +39,8 @@ public:
 	const bool isAnimationExisting(const string& ID) const;
 	const bool isModelAnimationStarted(const string& animationID, const string& modelID) const;
 	const bool isModelAnimationPlaying(const string& animationID, const string& modelID) const;
-	const bool isModelAnimationAutopaused(const string& animationID, const string& modelID) const;
 	const bool isModelAnimationPaused(const string& animationID, const string& modelID) const;
+	const bool isModelAnimationAutopaused(const string& animationID, const string& modelID) const;
 	const bool loadFromFile(bool mustCheckPreviewModel);
 	const bool saveToFile() const;
 

@@ -94,7 +94,6 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 			string modelID, meshPath, levelOfDetailEntityID;
 			float levelOfDetailDistance;
 			unsigned int rotationOrder;
-			bool isFaceCulled;
 			fvec3 size;
 
 			iss >>
@@ -105,7 +104,6 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 				size.z >>
 				levelOfDetailEntityID >>
 				levelOfDetailDistance >>
-				isFaceCulled >>
 				rotationOrder;
 
 			while(true)
@@ -121,7 +119,7 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 				fvec3 color;
 				float textureRepeat, specularShininess, specularIntensity, reflectivity, lightness;
 				unsigned int reflectionType;
-				bool isSpecular, isReflective;
+				bool isSpecular, isReflective, isFaceCulled;
 
 				iss >>
 					diffuseMapPath >>
@@ -139,7 +137,8 @@ const vector<string> ModelEditor::getImagePathsFromFile() const
 					color.r >>
 					color.g >>
 					color.b >>
-					textureRepeat;
+					textureRepeat >>
+					isFaceCulled;
 
 				diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 				emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
@@ -244,7 +243,6 @@ const bool ModelEditor::loadFromFile()
 			string modelID, meshPath, levelOfDetailEntityID;
 			float levelOfDetailDistance;
 			unsigned int rotationOrder;
-			bool isFaceCulled;
 			fvec3 size;
 
 			iss >>
@@ -255,7 +253,6 @@ const bool ModelEditor::loadFromFile()
 				size.z >>
 				levelOfDetailEntityID >>
 				levelOfDetailDistance >>
-				isFaceCulled >>
 				rotationOrder;
 
 			meshPath = (meshPath == "?") ? "" : meshPath;
@@ -279,7 +276,6 @@ const bool ModelEditor::loadFromFile()
 				_fe3d->model_setBaseSize(modelID, size);
 				_fe3d->model_setLevelOfDetailEntityID(modelID, levelOfDetailEntityID);
 				_fe3d->model_setLevelOfDetailDistance(modelID, levelOfDetailDistance);
-				_fe3d->model_setFaceCulled(modelID, isFaceCulled);
 				_fe3d->model_setRotationOrder(modelID, DirectionOrder(rotationOrder));
 
 				while(true)
@@ -292,10 +288,10 @@ const bool ModelEditor::loadFromFile()
 					}
 
 					string diffuseMapPath, emissionMapPath, specularMapPath, reflectionMapPath, normalMapPath;
+					fvec3 color;
 					float textureRepeat, specularShininess, specularIntensity, reflectivity, lightness;
 					unsigned int reflectionType;
-					bool isSpecular, isReflective;
-					fvec3 color;
+					bool isSpecular, isReflective, isFaceCulled;
 
 					iss >>
 						diffuseMapPath >>
@@ -313,7 +309,8 @@ const bool ModelEditor::loadFromFile()
 						color.r >>
 						color.g >>
 						color.b >>
-						textureRepeat;
+						textureRepeat >>
+						isFaceCulled;
 
 					partID = (partID == "?") ? "" : partID;
 					diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
@@ -387,6 +384,7 @@ const bool ModelEditor::loadFromFile()
 					_fe3d->model_setTextureRepeat(modelID, partID, textureRepeat);
 					_fe3d->model_setReflective(modelID, partID, isReflective);
 					_fe3d->model_setReflectionType(modelID, partID, ReflectionType(reflectionType));
+					_fe3d->model_setFaceCulled(modelID, partID, isFaceCulled);
 				}
 			}
 		}

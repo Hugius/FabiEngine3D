@@ -197,7 +197,6 @@ const bool WorldEditor::_copyTemplateModel(const string& newID, const string& te
 	_fe3d->model_setLevelOfDetailSize(newID, _fe3d->model_getBaseSize(templateID));
 	_fe3d->model_setFrozen(newID, _fe3d->model_isFrozen(templateID));
 	_fe3d->model_setLevelOfDetailEntityID(newID, _fe3d->model_getLevelOfDetailEntityID(templateID));
-	_fe3d->model_setFaceCulled(newID, _fe3d->model_isFaceCulled(templateID));
 	_fe3d->model_setRotationOrder(newID, _fe3d->model_getRotationOrder(templateID));
 
 	for(const auto& partID : _fe3d->model_getPartIDs(templateID))
@@ -236,6 +235,7 @@ const bool WorldEditor::_copyTemplateModel(const string& newID, const string& te
 		_fe3d->model_setReflectivity(newID, partID, _fe3d->model_getReflectivity(templateID, partID));
 		_fe3d->model_setColor(newID, partID, _fe3d->model_getColor(templateID, partID));
 		_fe3d->model_setTextureRepeat(newID, partID, _fe3d->model_getTextureRepeat(templateID, partID));
+		_fe3d->model_setFaceCulled(newID, partID, _fe3d->model_isFaceCulled(templateID, partID));
 	}
 
 	for(const auto& templateAabbID : _fe3d->aabb_getChildIDs(templateID, AabbParentEntityType::MODEL))

@@ -73,14 +73,17 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	}
 	else if(functionName == "fe3d:model_set_face_culled")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
+		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				_fe3d->model_setFaceCulled(args[0].getString(), args[1].getBoolean());
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					_fe3d->model_setFaceCulled(args[0].getString(), args[1].getString(), args[2].getBoolean());
+					returnValues.push_back(ScriptValue(SVT::EMPTY));
+				}
 			}
 		}
 	}
@@ -786,14 +789,17 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 	}
 	else if(functionName == "fe3d:model_set_bright")
 	{
-		auto types = {SVT::STRING, SVT::BOOLEAN};
+		auto types = {SVT::STRING, SVT::STRING, SVT::BOOLEAN};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				_fe3d->model_setBright(args[0].getString(), args[1].getBoolean());
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					_fe3d->model_setBright(args[0].getString(), args[1].getString(), args[2].getBoolean());
+					returnValues.push_back(ScriptValue(SVT::EMPTY));
+				}
 			}
 		}
 	}

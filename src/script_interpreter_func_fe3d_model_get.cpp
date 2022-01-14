@@ -893,17 +893,14 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:model_is_shadowed")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
-				{
-					auto result = _fe3d->model_isShadowed(args[0].getString(), args[1].getString());
-					returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
-				}
+				auto result = _fe3d->model_isShadowed(args[0].getString());
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}
@@ -922,17 +919,14 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:model_is_reflected")
 	{
-		auto types = {SVT::STRING, SVT::STRING};
+		auto types = {SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
-				{
-					auto result = _fe3d->model_isReflected(args[0].getString(), args[1].getString());
-					returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
-				}
+				auto result = _fe3d->model_isReflected(args[0].getString());
+				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
 			}
 		}
 	}

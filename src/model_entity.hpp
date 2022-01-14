@@ -167,10 +167,10 @@ private:
 	float _maxHeight = numeric_limits<float>::max();
 
 	bool _isFrozen = false;
-	bool _isDepthMapIncluded = true;
-	bool _isLevelOfDetailed = false;
 	bool _isShadowed = true;
 	bool _isReflected = true;
+	bool _isDepthMapIncluded = true;
+	bool _isLevelOfDetailed = false;
 
 	vector<ModelEntityPart> _parts;
 	DirectionOrder _rotationOrder = DirectionOrder::YXZ;

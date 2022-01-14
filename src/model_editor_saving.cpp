@@ -31,7 +31,6 @@ const bool ModelEditor::saveToFile() const
 		auto modelSize = _fe3d->model_getBaseSize(modelID);
 		auto levelOfDetailEntityID = _fe3d->model_getLevelOfDetailEntityID(modelID);
 		auto levelOfDetailDistance = _fe3d->model_getLevelOfDetailDistance(modelID);
-		auto isFaceCulled = _fe3d->model_isFaceCulled(modelID);
 		auto rotationOrder = static_cast<unsigned int>(_fe3d->model_getRotationOrder(modelID));
 
 		meshPath = string(meshPath.empty() ? "" : meshPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
@@ -50,7 +49,6 @@ const bool ModelEditor::saveToFile() const
 			modelSize.z << " " <<
 			levelOfDetailEntityID << " " <<
 			levelOfDetailDistance << " " <<
-			isFaceCulled << " " <<
 			rotationOrder;
 
 		file << " ";
@@ -73,6 +71,7 @@ const bool ModelEditor::saveToFile() const
 			auto textureRepeat = _fe3d->model_getTextureRepeat(modelID, partID);
 			auto isReflective = _fe3d->model_isReflective(modelID, partID);
 			auto reflectionType = static_cast<unsigned int>(_fe3d->model_getReflectionType(modelID, partID));
+			auto isFaceCulled = _fe3d->model_isFaceCulled(modelID, partID);
 
 			diffuseMapPath = string(diffuseMapPath.empty() ? "" : diffuseMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
 			emissionMapPath = string(emissionMapPath.empty() ? "" : emissionMapPath.substr(string("projects\\" + _currentProjectID + "\\").size()));
@@ -110,7 +109,8 @@ const bool ModelEditor::saveToFile() const
 				color.r << " " <<
 				color.g << " " <<
 				color.b << " " <<
-				textureRepeat;
+				textureRepeat << " " <<
+				isFaceCulled;
 
 			if(i < (partIDs.size() - 1))
 			{

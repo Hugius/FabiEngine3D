@@ -18,6 +18,7 @@ public:
 	void resumeBillboardAnimation(const string& animationID, const string& billboardID);
 	void stopBillboardAnimation(const string& animationID, const string& billboardID);
 	void pauseBillboardAnimations();
+	void autopauseBillboardAnimations();
 	void resumeBillboardAnimations();
 	void stopBillboardAnimations();
 	void setBillboardAnimationFramestep(const string& animationID, const string& billboardID, unsigned int value);
@@ -27,6 +28,7 @@ public:
 	void resumeQuadAnimation(const string& animationID, const string& quadID);
 	void stopQuadAnimation(const string& animationID, const string& quadID);
 	void pauseQuadAnimations();
+	void autopauseQuadAnimations();
 	void resumeQuadAnimations();
 	void stopQuadAnimations();
 	void setQuadAnimationFramestep(const string& animationID, const string& quadID, unsigned int value);

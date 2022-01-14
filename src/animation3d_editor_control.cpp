@@ -125,6 +125,14 @@ void Animation3dEditor::pauseModelAnimations()
 	}
 }
 
+void Animation3dEditor::autopauseModelAnimations()
+{
+	for(auto& [key, animation] : _startedModelAnimations)
+	{
+		animation.setAutopaused(true);
+	}
+}
+
 void Animation3dEditor::resumeModelAnimations()
 {
 	for(auto& [key, animation] : _startedModelAnimations)

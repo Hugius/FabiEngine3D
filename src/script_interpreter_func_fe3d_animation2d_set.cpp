@@ -30,6 +30,17 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
+	else if(functionName == "fe3d:animation2d_pause_all_billboards")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
+			{
+				_animation2dEditor->pauseBillboardAnimations();
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:animation2d_autopause_billboard")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
@@ -43,13 +54,13 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_pause_billboards")
+	else if(functionName == "fe3d:animation2d_autopause_all_billboards")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
 			{
-				_animation2dEditor->pauseBillboardAnimations();
+				_animation2dEditor->autopauseBillboardAnimations();
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -67,7 +78,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_resume_billboards")
+	else if(functionName == "fe3d:animation2d_resume_all_billboards")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
@@ -91,7 +102,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_stop_billboards")
+	else if(functionName == "fe3d:animation2d_stop_all_billboards")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
@@ -141,6 +152,17 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
+	else if(functionName == "fe3d:animation2d_pause_all_quads")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString(), false))
+			{
+				_animation2dEditor->pauseQuadAnimations();
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:animation2d_autopause_quad")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
@@ -154,13 +176,13 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_pause_quads")
+	else if(functionName == "fe3d:animation2d_autopause_all_quads")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString(), false))
 			{
-				_animation2dEditor->pauseQuadAnimations();
+				_animation2dEditor->autopauseQuadAnimations();
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -178,7 +200,7 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_resume_quads")
+	else if(functionName == "fe3d:animation2d_resume_all_quads")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
@@ -202,13 +224,13 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation2d_resume_quads")
+	else if(functionName == "fe3d:animation2d_stop_all_quads")
 	{
 		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
 		{
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString(), false))
 			{
-				_animation2dEditor->resumeQuadAnimations();
+				_animation2dEditor->stopQuadAnimations();
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}

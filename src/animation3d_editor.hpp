@@ -21,6 +21,7 @@ public:
 	void resumeModelAnimation(const string& animationID, const string& modelID);
 	void stopModelAnimation(const string& animationID, const string& modelID);
 	void pauseModelAnimations();
+	void autopauseModelAnimations();
 	void resumeModelAnimations();
 	void stopModelAnimations();
 	void setModelAnimationSpeed(const string& animationID, const string& modelID, float value);

@@ -30,6 +30,17 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 			}
 		}
 	}
+	else if(functionName == "fe3d:animation3d_pause_all_models")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
+			{
+				_animation3dEditor->pauseModelAnimations();
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:animation3d_autopause_model")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
@@ -39,6 +50,17 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
 			{
 				_animation3dEditor->autopauseModelAnimation(args[0].getString(), args[1].getString());
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:animation3d_autopause_all_models")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
+			{
+				_animation3dEditor->autopauseModelAnimations();
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}
@@ -56,6 +78,17 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 			}
 		}
 	}
+	else if(functionName == "fe3d:animation3d_resume_all_models")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
+			{
+				_animation3dEditor->resumeModelAnimations();
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:animation3d_stop_model")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
@@ -65,6 +98,17 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
 			{
 				_animation3dEditor->stopModelAnimation(args[0].getString(), args[1].getString());
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:animation3d_stop_all_models")
+	{
+		if(_validateArgumentCount(args, 0) && _validateArgumentTypes(args, {}))
+		{
+			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
+			{
+				_animation3dEditor->stopModelAnimations();
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}

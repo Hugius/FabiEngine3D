@@ -114,6 +114,14 @@ void Animation2dEditor::pauseBillboardAnimations()
 	}
 }
 
+void Animation2dEditor::autopauseBillboardAnimations()
+{
+	for(auto& [key, animation] : _startedBillboardAnimations)
+	{
+		animation.setAutopaused(true);
+	}
+}
+
 void Animation2dEditor::resumeBillboardAnimations()
 {
 	for(auto& [key, animation] : _startedBillboardAnimations)
@@ -237,6 +245,14 @@ void Animation2dEditor::pauseQuadAnimations()
 	for(auto& [key, animation] : _startedQuadAnimations)
 	{
 		animation.setPaused(true);
+	}
+}
+
+void Animation2dEditor::autopauseQuadAnimations()
+{
+	for(auto& [key, animation] : _startedQuadAnimations)
+	{
+		animation.setAutopaused(true);
 	}
 }
 

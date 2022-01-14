@@ -32,3 +32,6 @@
 - **Paused**: the animation is paused
   - Type: `boolean`
   - Constraints: none
+- **Autopaused**: the animation is automatically paused after the current frame
+  - Type: `boolean`
+  - Constraints: none

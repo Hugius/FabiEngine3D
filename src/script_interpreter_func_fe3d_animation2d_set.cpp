@@ -30,6 +30,19 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			}
 		}
 	}
+	else if(functionName == "fe3d:animation2d_autopause_billboard")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dBillboard(args[1].getString(), false))
+			{
+				_animation2dEditor->autopauseBillboardAnimation(args[0].getString(), args[1].getString());
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
 	else if(functionName == "fe3d:animation2d_resume_billboard")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
@@ -91,6 +104,19 @@ const bool ScriptInterpreter::_executeFe3dAnimation2dSetter(const string& functi
 			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString(), false))
 			{
 				_animation2dEditor->pauseQuadAnimation(args[0].getString(), args[1].getString());
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:animation2d_autopause_quad")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAnimation2d(args[0].getString()) && _validateFe3dQuad(args[1].getString(), false))
+			{
+				_animation2dEditor->autopauseQuadAnimation(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}

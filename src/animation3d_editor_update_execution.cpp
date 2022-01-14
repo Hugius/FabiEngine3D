@@ -372,6 +372,11 @@ void Animation3dEditor::_updateModelAnimationExecution()
 
 			if(finishedPartCount == animation.getPartIDs().size())
 			{
+				if(animation.isAutopaused())
+				{
+					animation.setPaused(true);
+				}
+
 				if(animation.getFrameIndex() == (static_cast<unsigned int>(animation.getFrames().size()) - 1))
 				{
 					if(animation.getPlayCount() == -1)
@@ -395,11 +400,6 @@ void Animation3dEditor::_updateModelAnimationExecution()
 				}
 				else
 				{
-					if(animation.isAutopaused() && animation.getFrameIndex() != 0)
-					{
-						animation.setPaused(true);
-					}
-
 					animation.setFrameIndex(animation.getFrameIndex() + 1);
 				}
 			}

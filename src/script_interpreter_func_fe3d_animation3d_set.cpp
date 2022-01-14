@@ -17,19 +17,6 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 			}
 		}
 	}
-	else if(functionName == "fe3d:animation3d_autopause_model")
-	{
-		auto types = {SVT::STRING, SVT::STRING};
-
-		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
-		{
-			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
-			{
-				_animation3dEditor->autopauseModelAnimation(args[0].getString(), args[1].getString());
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
-			}
-		}
-	}
 	else if(functionName == "fe3d:animation3d_pause_model")
 	{
 		auto types = {SVT::STRING, SVT::STRING};
@@ -39,6 +26,19 @@ const bool ScriptInterpreter::_executeFe3dAnimation3dSetter(const string& functi
 			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
 			{
 				_animation3dEditor->pauseModelAnimation(args[0].getString(), args[1].getString());
+				returnValues.push_back(ScriptValue(SVT::EMPTY));
+			}
+		}
+	}
+	else if(functionName == "fe3d:animation3d_autopause_model")
+	{
+		auto types = {SVT::STRING, SVT::STRING};
+
+		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
+		{
+			if(_validateFe3dAnimation3d(args[0].getString()) && _validateFe3dModel(args[1].getString(), false))
+			{
+				_animation3dEditor->autopauseModelAnimation(args[0].getString(), args[1].getString());
 				returnValues.push_back(ScriptValue(SVT::EMPTY));
 			}
 		}

@@ -58,6 +58,11 @@ const bool Animation2d::isPaused() const
 	return _isPaused;
 }
 
+const bool Animation2d::isAutopaused() const
+{
+	return _isAutopaused;
+}
+
 void Animation2d::setPlayCount(int value)
 {
 	_playCount = value;
@@ -66,6 +71,11 @@ void Animation2d::setPlayCount(int value)
 void Animation2d::setPaused(bool value)
 {
 	_isPaused = value;
+}
+
+void Animation2d::setAutopaused(bool value)
+{
+	_isAutopaused = value;
 }
 
 void Animation2d::setRowIndex(unsigned int value)

@@ -50,6 +50,28 @@ void Animation2dEditor::pauseBillboardAnimation(const string& animationID, const
 	_startedBillboardAnimations.at(make_pair(animationID, billboardID)).setPaused(true);
 }
 
+void Animation2dEditor::autopauseBillboardAnimation(const string& animationID, const string& billboardID)
+{
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning("animation not existing!");
+	}
+
+	if(!isBillboardAnimationStarted(animationID, billboardID))
+	{
+		Logger::throwWarning("animation not started!");
+
+	}
+
+	if(isBillboardAnimationPaused(animationID, billboardID))
+	{
+		Logger::throwWarning("animation not playing!");
+	}
+
+	_startedBillboardAnimations.at(make_pair(animationID, billboardID)).setAutopaused(true);
+}
+}
+
 void Animation2dEditor::resumeBillboardAnimation(const string& animationID, const string& billboardID)
 {
 	if(!isAnimationExisting(animationID))
@@ -153,6 +175,27 @@ void Animation2dEditor::pauseQuadAnimation(const string& animationID, const stri
 	}
 
 	_startedQuadAnimations.at(make_pair(animationID, quadID)).setPaused(true);
+}
+
+void Animation2dEditor::autopauseQuadAnimation(const string& animationID, const string& quadID)
+{
+	if(!isAnimationExisting(animationID))
+	{
+		Logger::throwWarning("animation not existing!");
+	}
+
+	if(!isQuadAnimationStarted(animationID, quadID))
+	{
+		Logger::throwWarning("animation not started!");
+
+	}
+
+	if(isQuadAnimationPaused(animationID, quadID))
+	{
+		Logger::throwWarning("animation not playing!");
+	}
+
+	_startedQuadAnimations.at(make_pair(animationID, quadID)).setAutopaused(true);
 }
 
 void Animation2dEditor::resumeQuadAnimation(const string& animationID, const string& quadID)

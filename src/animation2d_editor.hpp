@@ -14,6 +14,7 @@ public:
 	void update();
 	void startBillboardAnimation(const string& animationID, const string& billboardID, int playCount);
 	void pauseBillboardAnimation(const string& animationID, const string& billboardID);
+	void autopauseBillboardAnimation(const string& animationID, const string& billboardID);
 	void resumeBillboardAnimation(const string& animationID, const string& billboardID);
 	void stopBillboardAnimation(const string& animationID, const string& billboardID);
 	void pauseBillboardAnimations();
@@ -22,6 +23,7 @@ public:
 	void setBillboardAnimationFramestep(const string& animationID, const string& billboardID, unsigned int value);
 	void startQuadAnimation(const string& animationID, const string& quadID, int playCount);
 	void pauseQuadAnimation(const string& animationID, const string& quadID);
+	void autopauseQuadAnimation(const string& animationID, const string& quadID);
 	void resumeQuadAnimation(const string& animationID, const string& quadID);
 	void stopQuadAnimation(const string& animationID, const string& quadID);
 	void pauseQuadAnimations();

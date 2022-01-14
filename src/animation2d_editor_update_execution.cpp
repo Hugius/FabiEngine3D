@@ -49,12 +49,15 @@ void Animation2dEditor::_updateBillboardAnimationExecution()
 			{
 				animation.setPassedFrames(animation.getPassedFrames() + 1);
 			}
+
+			if(animation.isAutopaused())
+			{
+				animation.setPaused(true);
+			}
 		}
 
-		fvec2 uvMultiplier = fvec2((1.0f / static_cast<float>(animation.getColumnCount())),
-								   (1.0f / static_cast<float>(animation.getRowCount())));
-		fvec2 uvOffset = fvec2((static_cast<float>(animation.getColumnIndex()) * uvMultiplier.x),
-							   (static_cast<float>(animation.getRowCount() - animation.getRowIndex() - 1) * uvMultiplier.y));
+		auto uvMultiplier = fvec2((1.0f / static_cast<float>(animation.getColumnCount())), (1.0f / static_cast<float>(animation.getRowCount())));
+		auto uvOffset = fvec2((static_cast<float>(animation.getColumnIndex()) * uvMultiplier.x), (static_cast<float>(animation.getRowCount() - animation.getRowIndex() - 1) * uvMultiplier.y));
 
 		_fe3d->billboard_setUvMultiplier(key.second, uvMultiplier);
 		_fe3d->billboard_setUvOffset(key.second, uvOffset);
@@ -130,10 +133,8 @@ void Animation2dEditor::_updateQuadAnimationExecution()
 			}
 		}
 
-		fvec2 uvMultiplier = fvec2((1.0f / static_cast<float>(animation.getColumnCount())),
-								   (1.0f / static_cast<float>(animation.getRowCount())));
-		fvec2 uvOffset = fvec2((static_cast<float>(animation.getColumnIndex()) * uvMultiplier.x),
-							   (static_cast<float>(animation.getRowIndex()) * uvMultiplier.y));
+		auto uvMultiplier = fvec2((1.0f / static_cast<float>(animation.getColumnCount())), (1.0f / static_cast<float>(animation.getRowCount())));
+		auto uvOffset = fvec2((static_cast<float>(animation.getColumnIndex()) * uvMultiplier.x), (static_cast<float>(animation.getRowIndex()) * uvMultiplier.y));
 
 		_fe3d->quad_setUvMultiplier(key.second, uvMultiplier);
 		_fe3d->quad_setUvOffset(key.second, uvOffset);

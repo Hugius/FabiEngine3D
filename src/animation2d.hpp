@@ -11,6 +11,7 @@ public:
 
 	void setPlayCount(int value);
 	void setPaused(bool value);
+	void setAutopaused(bool value);
 	void setRowIndex(unsigned int value);
 	void setColumnIndex(unsigned int value);
 	void setRowCount(unsigned int value);
@@ -32,6 +33,7 @@ public:
 	const unsigned int getColumnIndex() const;
 
 	const bool isPaused() const;
+	const bool isAutopaused() const;
 
 private:
 	const string _ID;
@@ -47,4 +49,5 @@ private:
 	unsigned int _passedFrames = 0;
 
 	bool _isPaused = false;
+	bool _isAutopaused = false;
 };

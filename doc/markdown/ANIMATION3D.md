@@ -23,10 +23,10 @@
 - **Frame Index**: the index of the current animation frame
   - Type: `integer`
   - Constraints: at least `0`
-- **Autopaused**: the animation is automatically paused after the current frame
+- **Paused**: the animation is paused immediately
   - Type: `boolean`
   - Constraints: none
-- **Paused**: the animation is paused immediately
+- **Autopaused**: the animation is automatically paused after the current frame
   - Type: `boolean`
   - Constraints: none
 

@@ -6,7 +6,7 @@ void TerrainEditor::_updateNormalMapMenu()
 {
 	auto screen = _gui->getLeftViewport()->getWindow("main")->getActiveScreen();
 
-	if(screen->getID() == "terrainEditorMenuNormalMap")
+	if(screen->getID() == "terrainEditorMenuNormalTexturing")
 	{
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{

@@ -62,8 +62,6 @@ void WaterEditor::_updateChoiceMenu()
 
 	if(screen->getID() == "waterEditorMenuChoice")
 	{
-		float size = _fe3d->water_getSize(_currentWaterID);
-
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuMain");
@@ -72,10 +70,6 @@ void WaterEditor::_updateChoiceMenu()
 			_fe3d->water_select("");
 			_currentWaterID = "";
 			return;
-		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
-		{
-			_gui->getOverlay()->createValueForm("size", "Size", size, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("texturing")->isHovered())
 		{
@@ -88,11 +82,6 @@ void WaterEditor::_updateChoiceMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("miscellaneous")->isHovered())
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuMiscellaneous");
-		}
-
-		if(_gui->getOverlay()->checkValueForm("size", size, {0.0f}))
-		{
-			_fe3d->water_setSize(_currentWaterID, size);
 		}
 
 		screen->getButton("lighting")->setHoverable(_fe3d->water_isExisting(_currentWaterID));

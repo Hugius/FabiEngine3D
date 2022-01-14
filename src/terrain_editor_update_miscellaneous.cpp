@@ -6,6 +6,7 @@ void TerrainEditor::_updateMiscellaneousMenu()
 
 	if(screen->getID() == "terrainEditorMenuMiscellaneous")
 	{
+		auto maxHeight = _fe3d->terrain_getMaxHeight(_currentTerrainID);
 		auto textureRepeat = _fe3d->terrain_getTextureRepeat(_currentTerrainID);
 		auto redTextureRepeat = _fe3d->terrain_getRedTextureRepeat(_currentTerrainID);
 		auto greenTextureRepeat = _fe3d->terrain_getGreenTextureRepeat(_currentTerrainID);
@@ -25,6 +26,10 @@ void TerrainEditor::_updateMiscellaneousMenu()
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 			return;
 		}
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("maxHeight")->isHovered())
+		{
+			_gui->getOverlay()->createValueForm("maxHeight", "Max Height", maxHeight, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
 			_gui->getOverlay()->createValueForm("textureRepeat", "Texture Repeat", textureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
@@ -42,6 +47,10 @@ void TerrainEditor::_updateMiscellaneousMenu()
 			_gui->getOverlay()->createValueForm("blueTextureRepeat", "Blue Repeat", blueTextureRepeat, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 
+		if(_gui->getOverlay()->checkValueForm("maxHeight", maxHeight))
+		{
+			_fe3d->terrain_setMaxHeight(_currentTerrainID, maxHeight);
+		}
 		if(_gui->getOverlay()->checkValueForm("textureRepeat", textureRepeat))
 		{
 			_fe3d->terrain_setTextureRepeat(_currentTerrainID, textureRepeat);

@@ -6,6 +6,7 @@ void WaterEditor::_updateMiscellaneousMenu()
 
 	if(screen->getID() == "waterEditorMenuMiscellaneous")
 	{
+		auto size = _fe3d->water_getSize(_currentWaterID);
 		auto speed = _fe3d->water_getSpeed(_currentWaterID);
 		auto transparency = _fe3d->water_getTransparency(_currentWaterID);
 		auto waveHeight = _fe3d->water_getWaveHeight(_currentWaterID);
@@ -15,6 +16,10 @@ void WaterEditor::_updateMiscellaneousMenu()
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 			return;
+		}
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
+		{
+			_gui->getOverlay()->createValueForm("size", "Size", size, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("waveHeight")->isHovered())
 		{
@@ -51,6 +56,10 @@ void WaterEditor::_updateMiscellaneousMenu()
 			_fe3d->water_setQuality(_currentWaterID, quality);
 		}
 
+		if(_gui->getOverlay()->checkValueForm("size", size, {0.0f}))
+		{
+			_fe3d->water_setSize(_currentWaterID, size);
+		}
 		if(_gui->getOverlay()->checkValueForm("speedX", speed.x))
 		{
 			speed.x /= 100000.0f;

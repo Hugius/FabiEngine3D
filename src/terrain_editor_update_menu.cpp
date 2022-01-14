@@ -61,8 +61,6 @@ void TerrainEditor::_updateChoiceMenu()
 
 	if(screen->getID() == "terrainEditorMenuChoice")
 	{
-		float maxHeight = _fe3d->terrain_getMaxHeight(_currentTerrainID);
-
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuMain");
@@ -72,21 +70,17 @@ void TerrainEditor::_updateChoiceMenu()
 			_currentTerrainID = "";
 			return;
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("maxHeight")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseTexturing")->isHovered())
 		{
-			_gui->getOverlay()->createValueForm("maxHeight", "Max Height", maxHeight, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuDiffuseTexturing");
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalTexturing")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuDiffuseMap");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuNormalTexturing");
 		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blendTexturing")->isHovered())
 		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuNormalMap");
-		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blendMap")->isHovered())
-		{
-			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuBlendMap");
+			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuBlendTexturing");
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lighting")->isHovered())
 		{
@@ -95,11 +89,6 @@ void TerrainEditor::_updateChoiceMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("miscellaneous")->isHovered())
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("terrainEditorMenuMiscellaneous");
-		}
-
-		if(_gui->getOverlay()->checkValueForm("maxHeight", maxHeight))
-		{
-			_fe3d->terrain_setMaxHeight(_currentTerrainID, maxHeight);
 		}
 	}
 }

@@ -59,8 +59,6 @@ void BillboardEditor::_updateChoiceMenu()
 
 	if(screen->getID() == "billboardEditorMenuChoice")
 	{
-		auto size = _fe3d->billboard_getSize(_currentBillboardID);
-
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_fe3d->billboard_setWireframed(_currentBillboardID, false);
@@ -69,11 +67,6 @@ void BillboardEditor::_updateChoiceMenu()
 			_currentBillboardID = "";
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("billboardEditorMenuMain");
 			return;
-		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
-		{
-			_gui->getOverlay()->createValueForm("sizeX", "X", (size.x * 100.0f), fvec2(-0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-			_gui->getOverlay()->createValueForm("sizeY", "Y", (size.y * 100.0f), fvec2(0.15f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("texturing")->isHovered())
 		{
@@ -86,17 +79,6 @@ void BillboardEditor::_updateChoiceMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("miscellaneous")->isHovered())
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("billboardEditorMenuMiscellaneous");
-		}
-
-		if(_gui->getOverlay()->checkValueForm("sizeX", size.x, {0.0f}))
-		{
-			size.x /= 100.0f;
-			_fe3d->billboard_setSize(_currentBillboardID, size);
-		}
-		if(_gui->getOverlay()->checkValueForm("sizeY", size.y, {0.0f}))
-		{
-			size.y /= 100.0f;
-			_fe3d->billboard_setSize(_currentBillboardID, size);
 		}
 	}
 }

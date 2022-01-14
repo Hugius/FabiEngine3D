@@ -7,15 +7,20 @@ void ModelEditor::_updateMiscellaneousMenu()
 
 	if(screen->getID() == "modelEditorMenuMiscellaneous")
 	{
+		auto isFaceCulled = _fe3d->model_isFaceCulled(_currentModelID);
 		auto levelOfDetailEntityID = _fe3d->model_getLevelOfDetailEntityID(_currentModelID);
 		auto levelOfDetailDistance = _fe3d->model_getLevelOfDetailDistance(_currentModelID);
-		auto isFaceCulled = _fe3d->model_isFaceCulled(_currentModelID);
 		auto rotationOrder = _fe3d->model_getRotationOrder(_currentModelID);
 
 		if((_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d->input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui->getOverlay()->isFocused()))
 		{
 			_gui->getLeftViewport()->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			return;
+		}
+		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFaceCulled")->isHovered())
+		{
+			isFaceCulled = !isFaceCulled;
+			_fe3d->model_setFaceCulled(_currentModelID, isFaceCulled);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("levelOfDetailEntityID")->isHovered())
 		{
@@ -25,11 +30,6 @@ void ModelEditor::_updateMiscellaneousMenu()
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("levelOfDetailDistance")->isHovered())
 		{
 			_gui->getOverlay()->createValueForm("levelOfDetailDistance", "Specular LOD Distance", levelOfDetailDistance, fvec2(0.0f, 0.1f), fvec2(0.15f, 0.1f), fvec2(0.0f, 0.1f));
-		}
-		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFaceCulled")->isHovered())
-		{
-			isFaceCulled = !isFaceCulled;
-			_fe3d->model_setFaceCulled(_currentModelID, isFaceCulled);
 		}
 		else if(_fe3d->input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotationOrder")->isHovered())
 		{

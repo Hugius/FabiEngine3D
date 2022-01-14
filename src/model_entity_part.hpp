@@ -45,6 +45,10 @@ struct ModelEntityPart final
 	bool isSpecular = false;
 	bool isReflective = false;
 	bool isWireframed = false;
+	bool isShadowed = true;
+	bool isReflected = true;
+	bool isBright = false;
+	bool isFaceCulled = false;
 
 	shared_ptr<VertexBuffer> vertexBuffer = nullptr;
 	shared_ptr<TextureBuffer> diffuseMap = nullptr;

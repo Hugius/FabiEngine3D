@@ -16,9 +16,9 @@ const bool EngineInterface::model_isMultiParted(const string& ID) const
 	return (_core->getModelEntityManager()->getEntity(ID)->getPartIDs().size() > 1);
 }
 
-const bool EngineInterface::model_isFaceCulled(const string& ID) const
+const bool EngineInterface::model_isFaceCulled(const string& ID, const string& partID) const
 {
-	return _core->getModelEntityManager()->getEntity(ID)->isFaceCulled();
+	return _core->getModelEntityManager()->getEntity(ID)->isFaceCulled(partID);
 }
 
 const bool EngineInterface::model_isSpecular(const string& ID, const string& partID) const
@@ -26,14 +26,14 @@ const bool EngineInterface::model_isSpecular(const string& ID, const string& par
 	return _core->getModelEntityManager()->getEntity(ID)->isSpecular(partID);
 }
 
-const bool EngineInterface::model_isShadowed(const string& ID) const
+const bool EngineInterface::model_isShadowed(const string& ID, const string& partID) const
 {
-	return _core->getModelEntityManager()->getEntity(ID)->isShadowed();
+	return _core->getModelEntityManager()->getEntity(ID)->isShadowed(partID);
 }
 
-const bool EngineInterface::model_isReflected(const string& ID) const
+const bool EngineInterface::model_isReflected(const string& ID, const string& partID) const
 {
-	return _core->getModelEntityManager()->getEntity(ID)->isReflected();
+	return _core->getModelEntityManager()->getEntity(ID)->isReflected(partID);
 }
 
 const bool EngineInterface::model_isFrozen(const string& ID) const
@@ -64,9 +64,9 @@ const bool EngineInterface::model_hasPart(const string& ID, const string& partID
 	return false;
 }
 
-const bool EngineInterface::model_isBright(const string& ID) const
+const bool EngineInterface::model_isBright(const string& ID, const string& partID) const
 {
-	return _core->getModelEntityManager()->getEntity(ID)->isBright();
+	return _core->getModelEntityManager()->getEntity(ID)->isBright(partID);
 }
 
 const bool EngineInterface::model_isReflective(const string& ID, const string& partID) const

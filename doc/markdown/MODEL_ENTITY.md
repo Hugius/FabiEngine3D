@@ -5,6 +5,7 @@
 - The model entity is a 3D object in 3D space.
 - A variety of textures can be used for a more detailed mesh.
 - Each model can be the parent of multipe AABB entities.
+- If the mesh is multiparted, each part has its own properties.
 
 ## 2. Assets
 
@@ -15,26 +16,11 @@
 - Reflection map
 - Normal map
 
-## 3. Properties
+## 3. Base Properties
 
 - **Mesh Path**: the path of the mesh file
   - Type: `string`
   - Constraints: cannot be changed
-- **Diffuse Map Path**: the path of the diffuse map file
-  - Type: `string`
-  - Constraints: none
-- **Emission Map Path**: the path of the emission map file
-  - Type: `string`
-  - Constraints: none
-- **Specular Map Path**: the path of the specular map file
-  - Type: `string`
-  - Constraints: none
-- **Reflection Map Path**: the path of the reflection map file
-  - Type: `string`
-  - Constraints: none
-- **Normal Map Path**: the path of the normal map file
-  - Type: `string`
-  - Constraints: none
 - **LOD Entity ID**: the ID of another model entity representing the LOD version of the current model entity
   - Type: `string`
   - Constraints: entity must exist
@@ -51,6 +37,51 @@
   - Type: `decimal3`
   - Constraints: at least `0.0`
 - **LOD Size**: the XYZ size multiplier of the LOD entity mesh
+  - Type: `decimal3`
+  - Constraints: at least `0.0`
+- **LOD Distance**: the minimum distance by which the LOD entity will appear/disappear
+  - Type: `decimal`
+  - Constraints: at least `0`
+- **Frozen**: the XYZ position of the mesh is not affected by the camera position
+  - Type: `boolean`
+  - Constraints: none
+- **Rotation Order**: the order of directions in which the mesh is rotated
+  - Type: `enumeration`
+  - Constraints: `XYZ` or `XZY` or `YXZ` or `YZX` or `ZXY` or `ZYX`
+- **Min Height**: the minimum Y position from which fragments are visible
+  - Type: `decimal`
+  - Constraints: none
+- **Max Height**: the maximum Y position to which fragments are visible
+  - Type: `decimal`
+  - Constraints: none
+
+## 4. Part Properties
+
+- **Diffuse Map Path**: the path of the diffuse map file
+  - Type: `string`
+  - Constraints: none
+- **Emission Map Path**: the path of the emission map file
+  - Type: `string`
+  - Constraints: none
+- **Specular Map Path**: the path of the specular map file
+  - Type: `string`
+  - Constraints: none
+- **Reflection Map Path**: the path of the reflection map file
+  - Type: `string`
+  - Constraints: none
+- **Normal Map Path**: the path of the normal map file
+  - Type: `string`
+  - Constraints: none
+- **Position**: the XYZ position of the mesh
+  - Type: `decimal3`
+  - Constraints: none
+- **Rotation**: the XYZ rotation of the mesh
+  - Type: `decimal3`
+  - Constraints: between `0.0` and `360.0`
+- **Rotation Origin**: the XYZ position that the mesh rotates around
+  - Type: `decimal3`
+  - Constraints: none
+- **Size**: the XYZ size multiplier of the mesh
   - Type: `decimal3`
   - Constraints: at least `0.0`
 - **Color**: the RGB color multiplier of the fragments
@@ -74,21 +105,12 @@
 - **Reflectivity**: the percentage of how reflective the mesh is
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
-- **Min Height**: the minimum Y position from which fragments are visible
-  - Type: `decimal`
-  - Constraints: none
-- **Max Height**: the maximum Y position to which fragments are visible
-  - Type: `decimal`
-  - Constraints: none
 - **Transparency**: the transparency of the fragments
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
 - **Emission Intensity**: the intensity of the emission map
   - Type: `decimal`
   - Constraints: between `0.0` and `1.0`
-- **LOD Distance**: the minimum distance by which the LOD entity will appear/disappear
-  - Type: `decimal`
-  - Constraints: at least `0`
 - **Specular**: specular lighting is rendered on the mesh
   - Type: `boolean`
   - Constraints: none
@@ -107,15 +129,9 @@
 - **Shadowed**: the mesh is captured for shadows
   - Type: `boolean`
   - Constraints: none
-- **Frozen**: the XYZ position of the mesh is not affected by the camera position
-  - Type: `boolean`
-  - Constraints: none
 - **Reflected**: the mesh is captured for reflections
   - Type: `boolean`
   - Constraints: none
 - **Reflection Type**: the type of reflection
   - Type: `enumeration`
   - Constraints: `CUBE` or `PLANAR`
-- **Rotation Order**: the order of directions in which the mesh is rotated
-  - Type: `enumeration`
-  - Constraints: `XYZ` or `XZY` or `YXZ` or `YZX` or `ZXY` or `ZYX`

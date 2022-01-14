@@ -97,7 +97,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_set_position")
+	else if(functionName == "fe3d:model_set_base_position")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -110,7 +110,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_set_rotation")
+	else if(functionName == "fe3d:model_set_base_rotation")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -123,7 +123,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_set_rotation_origin")
+	else if(functionName == "fe3d:model_set_base_rotation_origin")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -136,7 +136,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_set_size")
+	else if(functionName == "fe3d:model_set_base_size")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -157,8 +157,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				_fe3d->model_setPartPosition(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					_fe3d->model_setPartPosition(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
+					returnValues.push_back(ScriptValue(SVT::EMPTY));
+				}
 			}
 		}
 	}
@@ -170,8 +173,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				_fe3d->model_setPartRotation(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					_fe3d->model_setPartRotation(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
+					returnValues.push_back(ScriptValue(SVT::EMPTY));
+				}
 			}
 		}
 	}
@@ -183,8 +189,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				_fe3d->model_setPartRotationOrigin(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					_fe3d->model_setPartRotationOrigin(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
+					returnValues.push_back(ScriptValue(SVT::EMPTY));
+				}
 			}
 		}
 	}
@@ -196,12 +205,15 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				_fe3d->model_setPartSize(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					_fe3d->model_setPartSize(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
+					returnValues.push_back(ScriptValue(SVT::EMPTY));
+				}
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_move")
+	else if(functionName == "fe3d:model_move_base")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -214,7 +226,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_rotate")
+	else if(functionName == "fe3d:model_rotate_base")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -227,7 +239,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_scale")
+	else if(functionName == "fe3d:model_scale_base")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -248,8 +260,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				_fe3d->model_movePart(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					_fe3d->model_movePart(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
+					returnValues.push_back(ScriptValue(SVT::EMPTY));
+				}
 			}
 		}
 	}
@@ -261,8 +276,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				_fe3d->model_rotatePart(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					_fe3d->model_rotatePart(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
+					returnValues.push_back(ScriptValue(SVT::EMPTY));
+				}
 			}
 		}
 	}
@@ -274,12 +292,15 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				_fe3d->model_scalePart(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					_fe3d->model_scalePart(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()));
+					returnValues.push_back(ScriptValue(SVT::EMPTY));
+				}
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_move_to")
+	else if(functionName == "fe3d:model_move_base_to")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -292,7 +313,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_rotate_to")
+	else if(functionName == "fe3d:model_rotate_base_to")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -305,7 +326,7 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_scale_to")
+	else if(functionName == "fe3d:model_scale_base_to")
 	{
 		auto types = {SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL};
 
@@ -326,8 +347,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				_fe3d->model_movePartTo(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()), args[5].getDecimal());
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					_fe3d->model_movePartTo(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()), args[5].getDecimal());
+					returnValues.push_back(ScriptValue(SVT::EMPTY));
+				}
 			}
 		}
 	}
@@ -339,8 +363,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				_fe3d->model_rotatePartTo(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()), args[5].getDecimal());
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					_fe3d->model_rotatePartTo(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()), args[5].getDecimal());
+					returnValues.push_back(ScriptValue(SVT::EMPTY));
+				}
 			}
 		}
 	}
@@ -352,8 +379,11 @@ const bool ScriptInterpreter::_executeFe3dModelSetter(const string& functionName
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				_fe3d->model_scalePartTo(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()), args[5].getDecimal());
-				returnValues.push_back(ScriptValue(SVT::EMPTY));
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					_fe3d->model_scalePartTo(args[0].getString(), args[1].getString(), fvec3(args[2].getDecimal(), args[3].getDecimal(), args[4].getDecimal()), args[5].getDecimal());
+					returnValues.push_back(ScriptValue(SVT::EMPTY));
+				}
 			}
 		}
 	}

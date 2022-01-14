@@ -158,9 +158,9 @@ const vector<string> ModelEntity::getPartIDs() const
 	return result;
 }
 
-const bool ModelEntity::isFaceCulled() const
+const bool ModelEntity::isFaceCulled(const string& partID) const
 {
-	return _isFaceCulled;
+	return _parts[_getPartIndex(partID)].isFaceCulled;
 }
 
 const bool ModelEntity::isWireframed(const string& partID) const
@@ -178,14 +178,14 @@ const bool ModelEntity::isReflective(const string& partID) const
 	return _parts[_getPartIndex(partID)].isReflective;
 }
 
-const bool ModelEntity::isShadowed() const
+const bool ModelEntity::isShadowed(const string& partID) const
 {
-	return _isShadowed;
+	return _parts[_getPartIndex(partID)].isShadowed;
 }
 
-const bool ModelEntity::isReflected() const
+const bool ModelEntity::isReflected(const string& partID) const
 {
-	return _isReflected;
+	return _parts[_getPartIndex(partID)].isReflected;
 }
 
 const bool ModelEntity::hasDiffuseMap(const string& partID) const
@@ -223,9 +223,9 @@ const DirectionOrder ModelEntity::getRotationOrder() const
 	return _rotationOrder;
 }
 
-const bool ModelEntity::isBright() const
+const bool ModelEntity::isBright(const string& partID) const
 {
-	return _isBright;
+	return _parts[_getPartIndex(partID)].isBright;
 }
 
 const bool ModelEntity::isFrozen() const

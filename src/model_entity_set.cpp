@@ -349,9 +349,9 @@ void ModelEntity::setReflectivity(const string& partID, float value)
 	_parts[_getPartIndex(partID)].reflectivity = clamp(value, 0.0f, 1.0f);
 }
 
-void ModelEntity::setFaceCulled(bool value)
+void ModelEntity::setFaceCulled(const string& partID, bool value)
 {
-	_isFaceCulled = value;
+	_parts[_getPartIndex(partID)].isFaceCulled = value;
 }
 
 void ModelEntity::setRotationOrder(DirectionOrder value)
@@ -374,17 +374,17 @@ void ModelEntity::setReflective(const string& partID, bool value)
 	_parts[_getPartIndex(partID)].isReflective = value;
 }
 
-void ModelEntity::setShadowed(bool value)
+void ModelEntity::setShadowed(const string& partID, bool value)
 {
-	_isShadowed = value;
+	_parts[_getPartIndex(partID)].isShadowed = value;
 }
 
-void ModelEntity::setReflected(bool value)
+void ModelEntity::setReflected(const string& partID, bool value)
 {
-	_isReflected = value;
+	_parts[_getPartIndex(partID)].isReflected = value;
 }
 
-void ModelEntity::setFrozen(bool value)
+void ModelEntity::setFrozen(const string& partID, bool value)
 {
 	_isFrozen = value;
 }
@@ -404,9 +404,9 @@ void ModelEntity::setWireframed(const string& partID, bool value)
 	_parts[_getPartIndex(partID)].isWireframed = value;
 }
 
-void ModelEntity::setBright(bool value)
+void ModelEntity::setBright(const string& partID, bool value)
 {
-	_isBright = value;
+	_parts[_getPartIndex(partID)].isBright = value;
 }
 
 void ModelEntity::deleteParts()

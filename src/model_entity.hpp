@@ -13,9 +13,9 @@ public:
 	void deleteParts();
 	void updateTransformation();
 	void updateTransformationMatrix();
-	void setShadowed(bool value);
-	void setReflected(bool value);
-	void setFrozen(bool value);
+	void setShadowed(const string& partID, bool value);
+	void setReflected(const string& partID, bool value);
+	void setFrozen(const string& partID, bool value);
 	void setDepthMapIncluded(bool value);
 	void setLevelOfDetailed(bool value);
 	void setLevelOfDetailSize(fvec3 value);
@@ -26,7 +26,7 @@ public:
 	void setMinHeight(float value);
 	void setMaxHeight(float value);
 	void setLevelOfDetailDistance(float value);
-	void setBright(bool value);
+	void setBright(const string& partID, bool value);
 	void setMesh(const string& partID, shared_ptr<VertexBuffer> value);
 	void setDiffuseMap(const string& partID, shared_ptr<TextureBuffer> value);
 	void setEmissionMap(const string& partID, shared_ptr<TextureBuffer> value);
@@ -72,7 +72,7 @@ public:
 	void setReflective(const string& partID, bool value);
 	void setReflectionType(const string& partID, ReflectionType value);
 	void setWireframed(const string& partID, bool value);
-	void setFaceCulled(bool value);
+	void setFaceCulled(const string& partID, bool value);
 	void setRotationOrder(DirectionOrder value);
 
 	const vector<string> getPartIDs() const;
@@ -112,13 +112,13 @@ public:
 	const float getTextureRepeat(const string& partID) const;
 	const float getEmissionIntensity(const string& partID) const;
 
-	const bool isShadowed() const;
-	const bool isReflected() const;
 	const bool isFrozen() const;
 	const bool isDepthMapIncluded() const;
 	const bool isLevelOfDetailed() const;
-	const bool isBright() const;
-	const bool isFaceCulled() const;
+	const bool isShadowed(const string& partID) const;
+	const bool isReflected(const string& partID) const;
+	const bool isBright(const string& partID) const;
+	const bool isFaceCulled(const string& partID) const;
 	const bool isWireframed(const string& partID) const;
 	const bool isSpecular(const string& partID) const;
 	const bool isReflective(const string& partID) const;
@@ -167,12 +167,8 @@ private:
 	float _maxHeight = numeric_limits<float>::max();
 
 	bool _isFrozen = false;
-	bool _isShadowed = true;
-	bool _isReflected = true;
 	bool _isDepthMapIncluded = true;
 	bool _isLevelOfDetailed = false;
-	bool _isBright = false;
-	bool _isFaceCulled = false;
 
 	vector<ModelEntityPart> _parts;
 	DirectionOrder _rotationOrder = DirectionOrder::YXZ;

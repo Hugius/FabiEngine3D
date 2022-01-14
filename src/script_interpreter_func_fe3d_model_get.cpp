@@ -70,7 +70,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_position_x")
+	else if(functionName == "fe3d:model_get_base_position_x")
 	{
 		auto types = {SVT::STRING};
 
@@ -83,7 +83,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_position_y")
+	else if(functionName == "fe3d:model_get_base_position_y")
 	{
 		auto types = {SVT::STRING};
 
@@ -96,7 +96,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_position_z")
+	else if(functionName == "fe3d:model_get_base_position_z")
 	{
 		auto types = {SVT::STRING};
 
@@ -109,7 +109,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_rotation_x")
+	else if(functionName == "fe3d:model_get_base_rotation_x")
 	{
 		auto types = {SVT::STRING};
 
@@ -122,7 +122,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_rotation_y")
+	else if(functionName == "fe3d:model_get_base_rotation_y")
 	{
 		auto types = {SVT::STRING};
 
@@ -135,7 +135,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_rotation_z")
+	else if(functionName == "fe3d:model_get_base_rotation_z")
 	{
 		auto types = {SVT::STRING};
 
@@ -148,7 +148,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_rotation_origin_x")
+	else if(functionName == "fe3d:model_get_base_rotation_origin_x")
 	{
 		auto types = {SVT::STRING};
 
@@ -161,7 +161,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_rotation_origin_y")
+	else if(functionName == "fe3d:model_get_base_rotation_origin_y")
 	{
 		auto types = {SVT::STRING};
 
@@ -174,7 +174,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_rotation_origin_z")
+	else if(functionName == "fe3d:model_get_base_rotation_origin_z")
 	{
 		auto types = {SVT::STRING};
 
@@ -187,7 +187,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_size_x")
+	else if(functionName == "fe3d:model_get_base_size_x")
 	{
 		auto types = {SVT::STRING};
 
@@ -200,7 +200,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_size_y")
+	else if(functionName == "fe3d:model_get_base_size_y")
 	{
 		auto types = {SVT::STRING};
 
@@ -213,7 +213,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 			}
 		}
 	}
-	else if(functionName == "fe3d:model_get_size_z")
+	else if(functionName == "fe3d:model_get_base_size_z")
 	{
 		auto types = {SVT::STRING};
 
@@ -893,14 +893,17 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:model_is_shadowed")
 	{
-		auto types = {SVT::STRING};
+		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d->model_isShadowed(args[0].getString());
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					auto result = _fe3d->model_isShadowed(args[0].getString(), args[1].getString());
+					returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				}
 			}
 		}
 	}
@@ -919,46 +922,55 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:model_is_reflected")
 	{
-		auto types = {SVT::STRING};
+		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d->model_isReflected(args[0].getString());
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					auto result = _fe3d->model_isReflected(args[0].getString(), args[1].getString());
+					returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				}
 			}
 		}
 	}
 	else if(functionName == "fe3d:model_is_bright")
 	{
-		auto types = {SVT::STRING};
+		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d->model_isBright(args[0].getString());
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					auto result = _fe3d->model_isBright(args[0].getString(), args[1].getString());
+					returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				}
 			}
 		}
 	}
 	else if(functionName == "fe3d:model_is_face_culled")
 	{
-		auto types = {SVT::STRING};
+		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
 			if(_validateFe3dModel(args[0].getString(), false))
 			{
-				auto result = _fe3d->model_isFaceCulled(args[0].getString());
-				returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				if(_validateFe3dModelPart(args[0].getString(), args[1].getString()))
+				{
+					auto result = _fe3d->model_isFaceCulled(args[0].getString(), args[1].getString());
+					returnValues.push_back(ScriptValue(SVT::BOOLEAN, result));
+				}
 			}
 		}
 	}
 	else if(functionName == "fe3d:model_is_reflective")
 	{
-		auto types = {SVT::STRING};
+		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -974,7 +986,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:model_get_reflection_type")
 	{
-		auto types = {SVT::STRING};
+		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -997,7 +1009,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:model_is_specular")
 	{
-		auto types = {SVT::STRING};
+		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{
@@ -1013,7 +1025,7 @@ const bool ScriptInterpreter::_executeFe3dModelGetter(const string& functionName
 	}
 	else if(functionName == "fe3d:model_is_wireframed")
 	{
-		auto types = {SVT::STRING};
+		auto types = {SVT::STRING, SVT::STRING};
 
 		if(_validateArgumentCount(args, static_cast<unsigned int>(types.size())) && _validateArgumentTypes(args, types))
 		{

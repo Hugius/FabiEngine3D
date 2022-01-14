@@ -30,20 +30,16 @@ void MasterRenderer::_capturePlanarReflections()
 	vector<string> savedModelEntityIDs;
 	for(const auto& [key, entity] : _modelEntityManager->getEntities())
 	{
-		if(!entity->isReflected() && entity->isVisible())
-		{
-			entity->setVisible(false);
-			savedModelEntityIDs.push_back(entity->getID());
-			continue;
-		}
-
 		for(const auto& partID : entity->getPartIDs())
 		{
-			if(entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR) && entity->isVisible())
+			if(entity->isVisible())
 			{
-				entity->setVisible(false);
-				savedModelEntityIDs.push_back(entity->getID());
-				break;
+				if(!entity->isReflected(partID) || (entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR)))
+				{
+					entity->setVisible(false);
+					savedModelEntityIDs.push_back(entity->getID());
+					break;
+				}
 			}
 		}
 	}
